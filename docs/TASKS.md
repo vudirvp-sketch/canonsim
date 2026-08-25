@@ -160,7 +160,46 @@
     canon law). All three proprietary §10 sources — design-notes only
     per `REFERENCES.md` §0.5; patterns not content per §0.7 (D-015).
   - `ref-5` (batch) Wesnoth WML + Endless Sky mission DSL + ink + tracery —
-    event / narrative grammar family.
+    event / narrative grammar family. → done (iter-0n):
+    `docs/ref/wesnoth_wml.md` (244 — `[event]`/`[filter]`/action triad
+    as reactive atom, `first_time_only`/`id`/
+    `delayed_variable_substitution` orthogonal save-compat fields,
+    per-noun `[filter]` family with real field names, ~30 action
+    verbs, macro preprocessor, Lua escape hatch since 1.7 as
+    precedent for our `cli/`/`brief/` split, closed `name` enum
+    lifted into `actions.json` `action_type`, `sighted` event as
+    perception-as-first-class-event-source), `docs/ref/endless_sky_dsl.md`
+    (228 — mission lifecycle `to: offer`/`accept`/`complete`/`fail`/
+    `defer` as state-machine shape for our `Intent`, smallest condition
+    language in the family — no MTTH/scopes/weights/on_action IDs,
+    flat `effect` mini-language, `phrase` one-symbol grammar
+    [simpler-than-tracery precedent], `event` block separate from
+    `mission` as cleanest public precedent for player-independent
+    background events = our `seeded_hooks`, `npc` `personality`
+    flags lifted into `entities.json` `traits`), `docs/ref/ink.md`
+    (212 — knot/stitch/divert/gather graph shape lifted into our
+    `Brief` sketch phase 1+, `LIST` multivalued flags lifted into
+    entity `state`, `+` vs `*` choice persistence lifted into
+    `Intent` `accept_policy`, `#` tags lifted into `Brief`
+    `metadata`, three sequence flavours `cycle`/`sequence`/
+    `shuffle` as determinism hazard [INV-2 fix], `KnotName?`
+    visited-check as precedent for `seen` knowledge channel,
+    snapshot-save amnesia anti-pattern as INV-1 fix), `docs/ref/tracery.md`
+    (217 — JSON grammar shape lifted verbatim into `templates.json`,
+    save/restore stack `[symbol:value#]`/`[symbol:#]` lifted
+    into `render/` `stack[pop]` for cross-clause agreement,
+    modifier pattern `#symbol.modifier#` with built-ins
+    `a`/`capitalize`/`s`/`ed`/`er` + registration hook lifted
+    into `templates.json` modifiers, "pure function from
+    (grammar, RNG state) → string" pattern = our `render/` shape,
+    ~200-line runtime scale as precedent that useful procedural
+    text generation is a small algorithm not a framework). All
+    four open-licensed per `REFERENCES.md` §0.4 — pattern lifting
+    permitted, port the shape not the syntax per §0.7 (D-015).
+    KI#6 opened and closed in this iter: §2 of `REFERENCES_DEEP.md`
+    had license drift for ref-5-b ("CC-BY-SA" vs catalog
+    "GPL-3.0 code; mixed assets") and ref-5-d ("CC0" vs catalog
+    "Apache-2.0"); both fixed in the same §2 edit.
   - `ref-6` (batch) Brogue + DCSS + KeeperRL — roguelike emergence +
     micro-sim.
   - `ref-7` (batch) Stanford Generative Agents + ai-town + letta — LLM-agent
@@ -235,3 +274,17 @@
   field-shape-from-talks only). §2 of `REFERENCES_DEEP.md` flips
   ref-4-a/b/c todo → done. AGENT_NAVIGATION §1 adds three new files
   to `docs/ref/` list. Doc-loop exception (twelfth docs iter, D-022).
+- iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive:
+  `docs/ref/wesnoth_wml.md` (244), `docs/ref/endless_sky_dsl.md` (228),
+  `docs/ref/ink.md` (212), `docs/ref/tracery.md` (217) — four
+  open-licensed event/narrative grammar family references (Wesnoth
+  WML event/filter/action triad + Lua escape valve, Endless Sky
+  mission lifecycle + flat effect mini-language, ink knot/stitch/
+  divert/gather graph + LIST multivalued flags, tracery JSON grammar
+  + save/restore stack + 200-line runtime precedent). All four under
+  cap by construction (pattern-not-content rule §0.7 keeps each
+  file to mechanics layer only). §2 of `REFERENCES_DEEP.md` flips
+  ref-5-a/b/c/d todo → done + fixes license drift for ref-5-b
+  and ref-5-d (KI#6 closed in-iter). AGENT_NAVIGATION §1 adds
+  four new files to `docs/ref/` list. Doc-loop exception (thirteenth
+  docs iter, D-022).

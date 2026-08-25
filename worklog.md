@@ -5,6 +5,81 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
+iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive (D-022 exception)
+- Four open-licensed event/narrative grammar family files:
+  `docs/ref/wesnoth_wml.md` (244 — the `[event]`/`[filter]`/action
+  triad as reactive atom, `first_time_only`/`id`/
+  `delayed_variable_substitution` orthogonal save-compat fields,
+  the per-noun `[filter]` family with real field names, the
+  ~30 action verbs, the macro preprocessor, the Lua escape
+  hatch since 1.7 as precedent for our `cli/`/`brief/` split,
+  the closed `name` enum lifted into `actions.json`
+  `action_type`, the `sighted` event as perception-as-first-
+  class-event-source); `docs/ref/endless_sky_dsl.md` (228 — the
+  mission lifecycle `to: offer`/`accept`/`complete`/`fail`/
+  `defer` as state-machine shape for our `Intent`, the
+  smallest condition language in the family (no MTTH, no
+  scopes, no weights, no on_action IDs), the flat `effect`
+  mini-language (`set`/`clear`/`pay`/`outfit`/`ship`/
+  `event`/`conversation`/`fail`/`log`), the `phrase` block as
+  one-symbol grammar (simpler-than-tracery precedent), the
+  `event` block separate from `mission` as cleanest public
+  precedent for player-independent background events = our
+  `seeded_hooks`, the `npc` `personality` flags lifted into
+  `entities.json` `traits`); `docs/ref/ink.md` (212 — the
+  knot/stitch/divert/gather graph shape lifted into our
+  `Brief` sketch phase 1+, the `LIST` multivalued flag set
+  lifted into entity `state`, the `+` vs `*` choice
+  persistence lifted into `Intent` `accept_policy`, the
+  `#` tag pattern lifted into `Brief` `metadata`, the three
+  sequence flavours `cycle`/`sequence`/`shuffle` as the
+  determinism hazard (INV-2 fix), the `KnotName?` visited-
+  check as precedent for `seen` knowledge channel, the
+  snapshot-save amnesia anti-pattern as INV-1 fix);
+  `docs/ref/tracery.md` (217 — the JSON grammar shape lifted
+  verbatim into `templates.json`, the save/restore stack
+  `[symbol:value#]` / `[symbol:#]` lifted into `render/`
+  `stack[pop]` for cross-clause agreement, the modifier
+  pattern `#symbol.modifier#` with built-ins `a`/
+  `capitalize`/`s`/`ed`/`er` and a registration hook lifted
+  into `templates.json` modifiers, the "pure function from
+  (grammar, RNG state) → string" pattern = our `render/`
+  shape, the ~200-line runtime scale as the precedent that
+  useful procedural text generation is a small algorithm
+  not a framework). All four paraphrased from public docs
+  + the open-source corpus per §0.4 / §0.7 (D-015).
+- **KI#6 opened and closed in this iter**: §2 of
+  `docs/REFERENCES_DEEP.md` had license drift for ref-5-b
+  (listed "CC-BY-SA", catalog §1 says "GPL-3.0 code; mixed
+  assets") and ref-5-d (listed "CC0", catalog §4 says
+  "Apache-2.0"); both fixed in the same §2 edit that
+  flipped ref-5-a/b/c/d todo → done + richer one-line
+  verdicts. AGENT_NAVIGATION §1 adds the four new files
+  to `docs/ref/` list. STATUS.md header → iter-0n, FAQ
+  updates doc-loop counter to "thirteenth docs iteration
+  in a row" + adds the "License drift between catalog and
+  index" pitfall + adds KI#6 closed-in-iter entry to
+  Active KIs. `docs/TASKS.md` marks ref-5 done in-place
+  + collapses iter-0n to one line in Done. No structural
+  change → §3 of AGENT_NAVIGATION untouched. No new stable
+  decision → DECISIONS untouched.
+- Files: `docs/ref/wesnoth_wml.md`, `docs/ref/endless_sky_dsl.md`,
+  `docs/ref/ink.md`, `docs/ref/tracery.md` (new);
+  `docs/REFERENCES_DEEP.md`, `docs/AGENT_NAVIGATION.md`,
+  `STATUS.md`, `docs/TASKS.md`, this file (updated). 9 files —
+  over the 3–5 soft limit (AGENTS §2.3); batched per-ref
+  iterations inherently touch N new per-ref files + 5
+  tracking files. No code touched; pytest -q green (13
+  tests, none depend on doc structure), ruff check . clean.
+- Doc-loop alarm: 13th docs iteration in a row (D-022
+  exception applies again — owner-requested reference
+  continuation). iter-1 MUST be functional code; no
+  further docs iterations without a fresh owner request.
+- Next: iter-1 core plumbing per `docs/TASKS.md`. If the
+  owner wants more refs — ref-6 (3-batch) Brogue + DCSS +
+  KeeperRL (roguelike emergence + micro-sim, phase 5).
+
+---
 iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
 - Three proprietary §10 source files: `docs/ref/rimworld.md` (253 —
   Defs taxonomy, IncidentDef field triad `baseChance`/`earlyChance-
@@ -24,7 +99,7 @@ iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
   offscreen presence in vents, objective-broadcast pattern matching
   Intent/Event, the "Director learns the player" as named
   anti-pattern against `VISION.md` §6 player-blind canon law). All
-  paraphrased — patterns not content per §0.7 of `REFERENCES.md`
+  three paraphrased — patterns not content per §0.7 of `REFERENCES.md`
   (D-015).
 - §2 of `docs/REFERENCES_DEEP.md` flips ref-4-a/b/c todo → done.
   `docs/AGENT_NAVIGATION.md` §1 adds three new files to `docs/ref/`
@@ -225,42 +300,4 @@ iter-0k · 2026-08-26 · owner-requested REFERENCES_DEEP split (D-022 exception)
 - Doc-loop alarm: 10th docs iteration in a row (D-022 exception applies
   again — owner-requested restructure). iter-1 MUST be functional code;
   no further docs iterations without a fresh owner request.
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
-iter-0l · 2026-08-26 · owner-requested ref-3 solo deep dive (D-022 exception)
-- New `docs/ref/paradox_scripting.md` (605 lines, 5 over the 600 cap per
-  §6.1 substance — three games × trigger/MTTH/weight/effect/scope/
-  on_action subsystems with real field names, ~150+ on_action IDs,
-  the `every/random/any` iterator trinity, the `weight_multiplier`
-  shape, the `immediate + option + after` three-phase effect lifecycle,
-  the `add_hook` family as P3a precedent, the MTTH anti-pattern named
-  against INV-2). Research: 15 wiki pages fetched (CK3 Events /
-  Event_modding / Triggers / Effects / Scopes, EU4 Event_modding /
-  Conditions / Effects / Scope, Stellaris Event_modding / Conditions
-  / Effects / Scopes / On_actions), paraphrased — patterns not content
-  per §0.7 of `REFERENCES.md` (D-015). Cruft pass: file was 614 → 605
-  (trimmed picture/portrait section that we drop entirely; tightened
-  restatements between "What we adapt" and "Weaknesses"; condensed
-  Strengths intro lines).
-- §2 of `docs/REFERENCES_DEEP.md` flips ref-3 from todo → done.
-  `docs/AGENT_NAVIGATION.md` §1 adds `paradox_scripting.md` to the
-  `docs/ref/` list. `STATUS.md` header → iter-0l, FAQ updates doc-loop
-  counter to "eleventh docs iteration in a row" + adds the substance-
-  vs-cap breach note to the "Substance over line count" pitfall.
-  `docs/TASKS.md` marks ref-3 done in-place + collapses iter-0l to one
-  line in the Done section. No structural change → §3 of
-  AGENT_NAVIGATION untouched. No new stable decision → DECISIONS
-  untouched.
-- Files: `docs/ref/paradox_scripting.md` (new);
-  `docs/REFERENCES_DEEP.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md`,
-  `docs/TASKS.md`, this file (updated). 6 files — over the 3–5 soft
-  limit (AGENTS §2.3); per-ref iterations inherently touch the new
-  per-ref file + 4 tracking files (index, nav, status, tasks, worklog).
-  No code touched; pytest -q green (13 tests, none depend on doc
-  structure), ruff check . clean.
-- Doc-loop alarm: 11th docs iteration in a row (D-022 exception applies
-  again — owner-requested reference continuation). iter-1 MUST be
-  functional code; no further docs iterations without a fresh owner
-  request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
