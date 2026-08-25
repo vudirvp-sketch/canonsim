@@ -1,0 +1,25 @@
+[project]
+name = "canonsim"
+version = "0.1.0"
+description = "Deterministic canonical simulation core for an LLM-narrator architecture (phase 0: TavernSim)"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[tool.setuptools]
+# Explicit list: flat-layout auto-discovery aborts on multiple top-level dirs
+# (content/, schemas/ are data, not packages). KI#2.
+packages = ["core", "sim", "sim.systems", "render", "brief", "cli"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,20 @@
+# Runtime artifacts — never committed (AGENTS.md §7, INV-5)
+logs/
+output/
+
+# JSONL outside tests/fixtures/ is runtime log data (INV-5)
+*.jsonl
+!tests/fixtures/*.jsonl
+
+# Python bytecode, caches, packaging
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# Environments & secrets
+.venv/
+.env
