@@ -1,17 +1,21 @@
 # STATUS — canonsim
 
-Iteration: 0h (owner-requested: deepen the references catalog) · Phase: 0 — simulator without LLM · Date: 2026-08-26
+Iteration: 0i (owner-requested: ref-1 deep dive) · Phase: 0 — simulator without LLM · Date: 2026-08-26
 
-iter-0h is the owner's explicit request to turn the faceless reference
-list (`docs/REFERENCES.md`) into concrete per-source deep dives:
-what to take, adapt, be inspired by, with named mechanics, strengths,
-weaknesses. Output: new `docs/REFERENCES_DEEP.md` (format template +
-iteration plan for `ref-N` + first batch — Neighborly, Mesa, DF Legends
-XML export schema). Per AGENTS §2.5 this is the **seventh** docs
-iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h) — the doc-loop alarm
-has fired; this iteration is owner-requested, so the D-022 exception
-applies. iter-1 is still the next functional step; no further docs
-iterations without a fresh owner request. KI#3, KI#4, KI#5 unchanged.
+iter-0i is the owner's explicit follow-up to iter-0h: ship the first
+solo ref-N deep dive (`ref-1` per `docs/TASKS.md` infra backlog).
+`ref-1` covers the **other half of Dwarf Fortress** — worldgen +
+history layer — vs the export-schema half in iter-0h. New §3 in
+`docs/REFERENCES_DEEP.md`: history ticks, populations vs notables
+LOD, age/civ dynamics, artifact anchors, reputation as event. §2 of
+the same file aggressively trimmed (cap 400, AGENTS §6) — cross-refs
+preserved, multi-line sub-content collapsed to single clauses. Per
+AGENTS §2.5 this is the **eighth** docs iteration in a row (0, 0b,
+0c, 0e, 0f, 0g, 0h, 0i; iter-0d was infra, not docs) — the doc-loop
+alarm has fired again; this iteration is owner-requested, so the D-022
+exception applies. iter-1 is still the next functional step; no
+further docs iterations without a fresh owner request. KI#3, KI#4,
+KI#5 unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,7 +51,8 @@ iterations without a fresh owner request. KI#3, KI#4, KI#5 unchanged.
   a row would normally force a stop (AGENTS §2.5). Owner-requested research
   passes are the explicit exception (D-022). The rule still bites: this is
   the last allowed research-only iteration before iter-1, no further
-  exceptions without a fresh owner request.
+  exceptions without a fresh owner request. iter-0i is the eighth docs
+  iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i; iter-0d was infra).
 - **Catalog vs deep dives vs synthesis — three places, three jobs.**
   `docs/REFERENCES.md` is the **catalog** (license, URL, phase gating,
   intake rules). `docs/CORE_DESIGN_RESEARCH.md` §2 is the **synthesis**

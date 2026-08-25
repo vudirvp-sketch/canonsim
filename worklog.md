@@ -120,3 +120,25 @@ iter-0h · 2026-08-26 · owner-requested references deep dive (D-022 exception)
   iter-1 MUST be functional code; no further docs iterations without an
   owner request. 6 files touched — over the 3–5 soft limit, owner-requested.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0i · 2026-08-26 · owner-requested ref-1 deep dive (D-022 exception)
+- `docs/REFERENCES_DEEP.md` §3 new: solo `ref-1` — DF worldgen + history
+  layer (the half not covered in iter-0h export schema). Covers history
+  ticks (yearly abstract advance), populations vs notables LOD, age/civ
+  dynamics, artifact anchors (event chain per item), reputation as event
+  (cleanest precedent for our knowledge records). §2 of the same file
+  aggressively trimmed (~85 lines cut) to make room — cap 400, AGENTS §6.
+  Cross-refs preserved; multi-line sub-content collapsed to single
+  clauses.
+- STATUS header → iter-0i; STATUS FAQ updates the doc-loop counter to
+  "eighth docs iteration in a row"; worklog adds this entry (9th, under
+  cap of 10); TASKS flips `ref-1` from todo to Done (one-line collapse).
+  No structural change → AGENT_NAVIGATION untouched. No new stable
+  decision → DECISIONS untouched (D-024 from iter-0h still owns the
+  three-place policy).
+- Doc-loop alarm: 8th docs iteration in a row (D-022 exception applies
+  again — owner-requested). iter-1 MUST be functional code; no further
+  docs iterations without a fresh owner request. 4 files touched — under
+  the 3–5 soft limit.
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
