@@ -132,10 +132,11 @@
 - `doc-1` VISION freeze review after the phase-0 verdict.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
-- `ref-N` Reference deep dives — one batch per iteration, owned by
-  `docs/REFERENCES_DEEP.md` §1 (the plan table). Solo iterations for sources
-  with ≥3 subsystems worth deep coverage; 2–3 per iter for the rest. Pick in
-  order; skip if a phase hasn't shipped yet. Sequence:
+- `ref-N` Reference deep dives — one file per source under `docs/ref/`, per
+  the plan in `docs/REFERENCES_DEEP.md` §1 (the plan table) and the index
+  in §2 (which filenames to create). Solo iterations for sources with ≥3
+  subsystems worth deep coverage; 2–3 sources per iter for the rest. Pick
+  in order; skip if a phase hasn't shipped yet. Sequence:
   - `ref-3` (solo) Paradox event scripting (CK3 + EU4 + Stellaris) — full
     grammar: trigger, weight, mtth, effect, option, scope.
   - `ref-4` (batch) RimWorld + L4D Director + Alien: Isolation — pacing /
@@ -191,3 +192,12 @@
   cruft criteria (D-025) — 400-line hard wall replaced by 600 ceiling +
   substance filter; file now 737 lines (substance-justified). Doc-loop
   exception (ninth docs iter).
+- iter-0k · 2026-08-26 · owner-requested REFERENCES_DEEP split (D-026):
+  deep-dive content moved from single-file `docs/REFERENCES_DEEP.md`
+  into `docs/ref/<source>.md` per-ref files (5 created: `neighborly.md`,
+  `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`,
+  101–244 lines each). `REFERENCES_DEEP.md` rewritten as index (133
+  lines): header + §0 format template + §1 iteration plan + §2 NEW index
+  table (one row per ref). D-026 supersedes D-024 single-file wording;
+  three-place anti-drift policy unchanged. AGENT_NAVIGATION §1 + §3
+  updated. Doc-loop exception (tenth docs iter).

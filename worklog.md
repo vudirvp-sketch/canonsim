@@ -5,16 +5,6 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
-iter-0 · 2026-08-25 · bootstrap
-- Created the docs & tooling pack: README, AGENTS, STATUS, worklog,
-  AGENT_NAVIGATION, VISION, MVP_SCOPE, EVENT_SCHEMA, ROADMAP, TASKS,
-  TECH_NOTES, DECISIONS, SPECS_BACKLOG.
-- Added `schemas/event.schema.json`, `pyproject.toml`, `.gitignore`, and the
-  directory skeleton (`core/`, `sim/systems/`, `content/tavern_pack/`,
-  `render/`, `brief/`, `cli/`, `tests/playscripts/`).
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
 iter-0b · 2026-08-25 · owner-requested docs revision
 - Review pass over all docs (cross-refs, invariants, schema sync): fixed the
   dangling `npc_market_crowd_01` entity (MVP_SCOPE §4.2 ambient-entity note);
@@ -186,4 +176,41 @@ iter-0j · 2026-08-26 · owner-requested ref-2 + cap policy rewrite (D-022 excep
   docs iterations without a fresh owner request. 5 files touched
   (AGENTS, DECISIONS, REFERENCES_DEEP, STATUS, this file, TASKS = 6 —
   slightly over the 3–5 soft limit, owner-requested scope).
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0k · 2026-08-26 · owner-requested REFERENCES_DEEP split (D-022 exception)
+- **Split deep-dive content out of `docs/REFERENCES_DEEP.md` into per-ref
+  files** under new `docs/ref/` subdirectory. Five files created
+  (`neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`,
+  `cdda_data_json.md`) carrying iter-0h + ref-1 + ref-2 content verbatim,
+  with cross-refs updated (`§2 above` → `df_legends_xml.md`,
+  `(see below)` → `mesa.md`). Sizes 101–244 lines — under the 600 cap by
+  construction. `docs/REFERENCES_DEEP.md` rewritten as index (133 lines):
+  header + §0 format template + §1 iteration plan + §2 NEW index table
+  (one row per ref: id, source, file, license, phase, one-line verdict,
+  status). D-026 supersedes D-024's single-file wording; three-place
+  anti-drift policy (catalog ↔ synthesis ↔ deep dives) unchanged —
+  deep-dive place is now a directory. AGENT_NAVIGATION §1 + §3 updated.
+- **Why split**: at iter-0j `REFERENCES_DEEP.md` was 737 lines (over the
+  600 cap, justified per D-025). The §1 iteration plan has 9 more ref-N
+  iterations queued (ref-3..ref-11), projecting ~2500–3500 lines at
+  single-file scale (4–6× the cap). The §6.1 substance-vs-cruft filter
+  is a defence against cutting real depth to fit a line count, not a
+  licence for unbounded growth. Same logic that D-024 applied
+  recursively to catalog/synthesis/deep-dive split applies again:
+  when one place bloats, split the place. Future ref-N iterations touch
+  2 files (one new `docs/ref/<source>.md` + the index to flip status) —
+  well within the 3–5 soft limit.
+- Files: `docs/ref/neighborly.md`, `docs/ref/mesa.md`,
+  `docs/ref/df_legends_xml.md`, `docs/ref/df_worldgen.md`,
+  `docs/ref/cdda_data_json.md` (new); `docs/REFERENCES_DEEP.md`,
+  `docs/DECISIONS.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md`,
+  `docs/TASKS.md`, this file (updated). 11 files — over the 3–5 soft
+  limit (AGENTS §2.3); restructure inherently touches all restructured
+  items + indexes tracking them. No code touched; pytest -q green
+  (13 tests, none depend on doc structure), ruff check . clean.
+- Doc-loop alarm: 10th docs iteration in a row (D-022 exception applies
+  again — owner-requested restructure). iter-1 MUST be functional code;
+  no further docs iterations without a fresh owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
