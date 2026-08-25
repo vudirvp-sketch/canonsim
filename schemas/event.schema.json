@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonsim/event/0.1",
+  "title": "canonsim event record v0.1",
+  "description": "One line of the append-only JSONL event log (line 2+; line 1 is the run header, validated as a separate shape). Paired with docs/EVENT_SCHEMA.md - 2-place sync, test-enforced.",
+  "type": "object",
+  "required": [
+    "id",
+    "t",
+    "type",
+    "actor",
+    "cause",
+    "outcome",
+    "knowledge",
+    "state_changes",
+    "hooks",
+    "importance",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ev_[0-9]{4,}$",
+      "description": "Monotonic, gap-free per run."
+    },
+    "t": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Tick when the event fires. Integer only - no wall-clock."
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Pack-defined verb, snake_case."
+    },
+    "actor": {
+      "type": "string",
+      "description": "Entity id of the doer; 'world' for world-events."
+    },
+    "target": {
+      "type": "string",
+      "description": "Entity id of the direct object, if any."
+    },
+    "cause": {
+      "type": ["string", "null"],
+      "description": "Causal predecessor event id, or null for run-start events."
+    },
+    "outcome": {
+      "type": "object",
+      "description": "Type-specific payload defined by the content pack."
+    },
+    "knowledge": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/knowledge_record" },
+      "description": "Knowledge records born at this event. May be empty."
+    },
+    "state_changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/state_change" },
+      "description": "State deltas. May be empty."
+    },
+    "hooks": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Deferred-consequence tags; triggers defined in pack rules."
+    },
+    "importance": {
+      "enum": ["low", "medium", "high"],
+      "description": "Computed by the pack rule (entities touched + irreversibility + far hooks)."
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    }
+  },
+  "$defs": {
+    "knowledge_record": {
+      "type": "object",
+      "required": ["who", "channel", "fidelity", "knows", "at", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "who": {
+          "type": "string",
+          "description": "Entity id of the knower."
+        },
+        "channel": {
+          "enum": ["saw", "heard", "told", "inferred"]
+        },
+        "fidelity": {
+          "enum": ["exact", "partial", "vague"],
+          "description": "Information quality. Transfer decays one step; lies are crafted records (distorted 'knows' or misrepresented fidelity)."
+        },
+        "knows": {
+          "type": "string",
+          "description": "What they know - structured token from the pack vocabulary."
+        },
+        "at": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Tick of learning."
+        },
+        "source": {
+          "type": "string",
+          "description": "Event id the record came from."
+        }
+      }
+    },
+    "state_change": {
+      "type": "object",
+      "required": ["entity", "prop", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "entity": { "type": "string" },
+        "prop": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.]*$",
+          "description": "Dotted property path."
+        },
+        "from": { "description": "Previous value (any type)." },
+        "to": { "description": "New value (any type)." },
+        "irreversible": {
+          "type": "boolean",
+          "default": false,
+          "description": "True = never reverts without an explicit counter-event."
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["seed"],
+      "additionalProperties": true,
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "description": "Run seed."
+        },
+        "cause_intent": {
+          "type": "string",
+          "description": "Intent id, when this event resolves a player intent."
+        }
+      }
+    }
+  }
+}

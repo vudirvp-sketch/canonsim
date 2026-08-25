@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "pack": "tavern_pack",
+    "version": "0.1",
+    "display": "The Three Barrels — TavernSim v0 slice",
+    "notes": "Phase-0 setting as data, per docs/MVP_SCOPE.md §4 (that table is the source of truth for ids, counts and roles). Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law — retuning is a pack change, never a code change (INV-3). Display names in English (D-009)."
+  },
+
+  "locations": [
+    {
+      "id": "loc_tavern",
+      "name": "Three Barrels tavern",
+      "role": "main scene: bar, tables, back door",
+      "exits": ["loc_street", "loc_backyard"],
+      "flammability": "high",
+      "fire_spots": ["bar", "tables", "back_wall"],
+      "notes": "wooden building, dry beams — the arson target (MVP_SCOPE §3)"
+    },
+    {
+      "id": "loc_street",
+      "name": "street in front of the tavern",
+      "role": "escape route, patrol path",
+      "exits": ["loc_tavern", "loc_backyard", "loc_guardroom", "loc_market"],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "open ground: no direct sight lines into interiors"
+    },
+    {
+      "id": "loc_backyard",
+      "name": "backyard",
+      "role": "fire source spot; origin of the 'figure at the back door' rumor",
+      "exits": ["loc_tavern", "loc_street"],
+      "flammability": "medium",
+      "fire_spots": ["back_wall", "woodpile"],
+      "notes": "behind the tavern; the lamp is dropped here in the walkthrough"
+    },
+    {
+      "id": "loc_guardroom",
+      "name": "guard room",
+      "role": "watch change → knowledge transfer between guards",
+      "exits": ["loc_street"],
+      "flammability": "low",
+      "fire_spots": ["hearth"],
+      "notes": "off-duty position; knowledge transfer fires here at rotation ticks (rules.json)"
+    },
+    {
+      "id": "loc_market",
+      "name": "market square",
+      "role": "the rumor scene (mandatory: this is where hearsay lives)",
+      "exits": ["loc_street"],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "day-phase activity hub; the crowd listener lives here"
+    }
+  ],
+
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the player",
+      "role": "thief down on his luck",
+      "position": "loc_street",
+      "status": {"fatigue": 0, "intoxication": 0, "fear": 0, "injury": 0},
+      "relations": {},
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "get money, stay free",
+      "is_player": true,
+      "notes": "enters the tavern at the start of the §3 walkthrough"
+    },
+    {
+      "id": "npc_guard_01",
+      "name": "Doren",
+      "role": "on-duty guard",
+      "position": "loc_tavern",
+      "status": {"fatigue": 10, "intoxication": 0, "fear": 0, "injury": 0},
+      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "knowledge": [],
+      "mood": "alert",
+      "goal": "keep order",
+      "carries": ["purse_01"],
+      "notes": "stands at the bar (walkthrough §3); pickpocket target; ev_0007 actor-side witness"
+    },
+    {
+      "id": "npc_guard_02",
+      "name": "the relief guard",
+      "role": "Doren's relief",
+      "position": "loc_guardroom",
+      "status": {"fatigue": 0, "intoxication": 0, "fear": 0, "injury": 0},
+      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "knowledge": [],
+      "mood": "resting",
+      "goal": "keep order",
+      "notes": "receives Doren's knowledge at watch change (transfer event)"
+    },
+    {
+      "id": "npc_barkeep_01",
+      "name": "the barkeep",
+      "role": "tavern owner",
+      "position": "loc_tavern",
+      "status": {"fatigue": 10, "intoxication": 0, "fear": 0, "injury": 0},
+      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "knowledge": [],
+      "mood": "busy",
+      "goal": "protect the property",
+      "carries": ["club_01"],
+      "notes": "heard-vague witness in ev_0007; club is under the bar"
+    },
+    {
+      "id": "npc_drunk_01",
+      "name": "the drunkard",
+      "role": "witness by accident",
+      "position": "loc_tavern",
+      "status": {"fatigue": 0, "intoxication": 50, "fear": 0, "injury": 0},
+      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "knowledge": [],
+      "mood": "merry",
+      "goal": "get ale",
+      "notes": "intoxication 50 (v0.1 default): testimony vague by construction (§6 intersection matrix); tomorrow's rumor teller (ev_0031)"
+    },
+    {
+      "id": "npc_maid_01",
+      "name": "the serving maid",
+      "role": "moves around, sees much",
+      "position": "loc_tavern",
+      "status": {"fatigue": 20, "intoxication": 0, "fear": 0, "injury": 0},
+      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "knowledge": [],
+      "mood": "tired",
+      "goal": "finish the shift",
+      "notes": "moves between bar, tables and back door (v0.1: same-location roaming)"
+    }
+  ],
+
+  "ambient_entities": [
+    {
+      "id": "npc_market_crowd_01",
+      "name": "the market crowd",
+      "kind": "ambient_group",
+      "position": "loc_market",
+      "knowledge": [],
+      "notes": "passive knowledge-holder and rumor listener (MVP_SCOPE §4.2): no goals, no relations, no movement — receives knowledge records only"
+    }
+  ],
+
+  "items": [
+    {
+      "id": "oil_lamp_01",
+      "name": "oil lamp",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": true,
+      "breakable": true,
+      "flammability": "none",
+      "notes": "fire source; breakable — the drop_break target that starts the arson chain"
+    },
+    {
+      "id": "purse_01",
+      "name": "purse",
+      "position": "loc_tavern",
+      "carrier": "npc_guard_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "owned by Doren; the steal target (ev_0007)"
+    },
+    {
+      "id": "ale_mug_01",
+      "name": "mug of ale",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "none",
+      "use_effect": {"status": "intoxication", "delta": 20},
+      "notes": "intoxication vector — feeds the drunkard's witness quality"
+    },
+    {
+      "id": "club_01",
+      "name": "club",
+      "position": "loc_tavern",
+      "carrier": "npc_barkeep_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "notes": "barkeep's, under the bar"
+    },
+    {
+      "id": "rope_01",
+      "name": "rope",
+      "position": "loc_backyard",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "medium",
+      "notes": "utility, in the backyard"
+    }
+  ]
+}

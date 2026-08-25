@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "pack": "tavern_pack",
+    "version": "0.1",
+    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
+  },
+
+  "time": {
+    "ticks_per_day": 1440,
+    "phases": [
+      {"id": "morning", "from": 0, "to": 360},
+      {"id": "afternoon", "from": 360, "to": 720},
+      {"id": "evening", "from": 720, "to": 1080},
+      {"id": "night", "from": 1080, "to": 1440}
+    ],
+    "notes": "MVP_SCOPE §8: full day ≈ 1440 ticks; 1 hour ≈ 60 ticks; typical action 2–8 ticks (see actions.json)"
+  },
+
+  "position_visibility": {
+    "perception_base": 50,
+    "status_modifiers": {
+      "intoxication": {"per_10_points": -2},
+      "fatigue": {"per_10_points": -1},
+      "injury": {"flat": -10},
+      "fear": {"flat_at_50_plus": -10}
+    },
+    "sight": {"same_location": true, "through_exits": false},
+    "hearing": {"same_location": "normal", "adjacent_location": "vague_only"},
+    "smoke_penalty": -20,
+    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9)"
+  },
+
+  "relations": {
+    "scale": [0, 100],
+    "neutral": 50,
+    "axes": ["reputation", "suspicion", "trust", "fear"],
+    "suspicion_thresholds": {
+      "status_suspect_at": 25,
+      "document_check_at": 50,
+      "arrest_attempt_at": 75
+    },
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; 50/75 are v0.1 defaults for hooks the spec names but does not number"
+  },
+
+  "knowledge": {
+    "channels": ["saw", "heard", "told", "inferred"],
+    "fidelity_chain": ["exact", "partial", "vague"],
+    "transfer_decay_steps": 1,
+    "rumor_acceptance": {"base": 50, "trust_weight": 0.2, "teller_intoxication_penalty_per_10": -1},
+    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix)"
+  },
+
+  "states": {
+    "fatigue": {"gain_per_360_ticks_awake": 10, "reset_on_rotation": true},
+    "intoxication": {"decay_per_360_ticks": 10},
+    "fear": {"decay_per_360_ticks": 5, "spike_on_alarm": 40},
+    "injury": {"auto_decay": 0},
+    "notes": "modifiers feed perception (position_visibility) and behavior; no group reputation in v0 (D-006)"
+  },
+
+  "fire": {
+    "ignition": {"requires": ["fire_source", "flammable_spot"], "chance_on_drop_break": 0.9},
+    "spread": {"chance_per_tick_to_adjacent_spot": 0.15, "through_locations": false},
+    "smoke": {"starts_after_ticks": 10, "visibility_penalty": -20},
+    "alarm": {"raised_when": "occupant_present_and_fire_visible", "fear_spike": 40},
+    "burnout": {"location_destroyed_after_ticks_unchecked": 120, "irreversible": true},
+    "notes": "fire has no counter-event: a burned tavern stays burned (T4, EVENT_SCHEMA §4). All rates are v0.1 defaults"
+  },
+
+  "crime_watch": {
+    "watch_rotation_ticks": [360, 1080],
+    "transfer_on_rotation": true,
+    "document_check": {"hook": "possible_document_check", "delay_ticks": 120},
+    "arrest": {"requires_suspicion": 75, "requires_same_location": true},
+    "suspicion_sources": {
+      "witnessed_steal_failure": 25,
+      "heard_noise": 10,
+      "rumor_about_figure": 5
+    },
+    "notes": "watch change = knowledge-transfer event between guards (D-006); 'document check in two hours' = 120 ticks seeded at event time (MVP_SCOPE §11)"
+  },
+
+  "director": {
+    "mode": "consequence_planner",
+    "buffer": "hooks seeded at event time, never invented later",
+    "triggers": ["time", "place", "threshold"],
+    "stagnation_detector": {"release_after_ticks_without_visible_event": 90, "releases": "lowest-threshold seeded hook only"},
+    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. Director-off A/B is mandatory (T8)"
+  },
+
+  "importance": {
+    "score": {
+      "entities_touched_at_least_2": 1,
+      "irreversible_state_change": 2,
+      "per_far_hook": 1
+    },
+    "thresholds": {"medium": 2, "high": 4},
+    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks → low/medium/high; never by feel. Mapping thresholds are v0.1 defaults"
+  }
+}

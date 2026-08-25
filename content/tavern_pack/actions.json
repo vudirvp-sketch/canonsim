@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "pack": "tavern_pack",
+    "version": "0.1",
+    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced). Check/roll parameters are v0.1 tunable defaults resolved against rules.json. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+  },
+
+  "actions": [
+    {
+      "intent": "look_around",
+      "label": "look around",
+      "ticks": 1,
+      "check": null,
+      "on_failure": null,
+      "knowledge_produced": {"who": "self", "kind": "scene_snapshot"},
+      "notes": "cheap perception of the current location: who/what is present"
+    },
+    {
+      "intent": "examine",
+      "label": "examine",
+      "ticks": 2,
+      "check": {"kind": "perception", "difficulty": 30},
+      "on_failure": "vague info",
+      "knowledge_produced": {"who": "self", "kind": "details"},
+      "notes": "targeted inspection of one entity or spot"
+    },
+    {
+      "intent": "move",
+      "label": "approach",
+      "ticks": {"min": 2, "max": 4},
+      "check": null,
+      "on_failure": null,
+      "knowledge_produced": {"who": "observers_in_location", "kind": "saw_movement"},
+      "requires": {"path": "adjacent_location"},
+      "notes": "movement along the location graph (entities.json exits)"
+    },
+    {
+      "intent": "talk",
+      "label": "talk",
+      "ticks": {"min": 4, "max": 8},
+      "check": {"kind": "relations", "difficulty": 20},
+      "on_failure": "cold shoulder",
+      "knowledge_produced": {"who": "both", "kind": "conversation_topic"},
+      "notes": "social exchange; the seed of rumor transfer (accepted faster from trusted tellers)"
+    },
+    {
+      "intent": "wait",
+      "label": "wait",
+      "ticks": "N",
+      "check": null,
+      "on_failure": null,
+      "knowledge_produced": null,
+      "notes": "advance N ticks; the world moves while the player stands still"
+    },
+    {
+      "intent": "take",
+      "label": "take",
+      "ticks": 2,
+      "check": {"kind": "stealth_if_owner_near", "difficulty": 40},
+      "on_failure": "noticed",
+      "knowledge_produced": {"who": "owner_or_observers", "kind": "saw_or_heard"},
+      "requires": {"item_present": true},
+      "notes": "picking up an item present in the location"
+    },
+    {
+      "intent": "drop_break",
+      "label": "drop / break",
+      "ticks": {"min": 1, "max": 2},
+      "check": null,
+      "on_failure": null,
+      "knowledge_produced": {"who": "listeners", "kind": "noise_heard"},
+      "notes": "noise on break; a broken fire source near a flammable spot starts fire (rules.json fire)"
+    },
+    {
+      "intent": "use",
+      "label": "use",
+      "ticks": {"min": 2, "max": 6},
+      "check": {"kind": "context", "difficulty": 20},
+      "on_failure": "no effect",
+      "knowledge_produced": {"who": "observers_in_location", "kind": "saw_use"},
+      "notes": "context-dependent: ale mug → intoxication, rope → utility, etc."
+    },
+    {
+      "intent": "steal",
+      "label": "steal",
+      "ticks": 3,
+      "check": {"kind": "stealth_vs_perception", "difficulty": 50},
+      "on_failure": "partial or total failure",
+      "knowledge_produced": {"who": "target_and_observers", "kind": "rich_records",
+        "examples": ["saw(partial): figure_reaching_for_purse", "heard(vague): noise_by_the_bar"]},
+      "requires": {"target_carries_stealable": true, "same_location": true},
+      "notes": "the ev_0007 scenario: failure produces the richest knowledge records in the slice"
+    },
+    {
+      "intent": "distract",
+      "label": "distract",
+      "ticks": 3,
+      "check": {"kind": "social", "difficulty": 40},
+      "on_failure": "ignored",
+      "knowledge_produced": {"who": "target", "kind": "attention_state"},
+      "notes": "shifts target attention; a method modifier for steal (playscript day1 uses it)"
+    },
+    {
+      "intent": "arson",
+      "label": "set fire",
+      "ticks": 4,
+      "check": null,
+      "on_failure": "abort",
+      "knowledge_produced": {"who": "location_occupants", "kind": "alarm_smoke_visibility_drop"},
+      "requires": {"fire_source_available": true, "flammable_target_present": true},
+      "notes": "impossible without both requirements (T5); irreversible chain follows (T4)"
+    },
+    {
+      "intent": "flee",
+      "label": "flee",
+      "ticks": {"min": 2, "max": 4},
+      "check": {"kind": "pursuit", "difficulty": 45},
+      "on_failure": "caught",
+      "knowledge_produced": {"who": "pursuers", "kind": "chase_knowledge"},
+      "notes": "exit under pursuit; guards enqueue chase knowledge records"
+    }
+  ]
+}
