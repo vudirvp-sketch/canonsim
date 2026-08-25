@@ -1,14 +1,21 @@
 # STATUS — canonsim
 
-Iteration: 0e (owner-requested: core-design research) · Phase: 0 — simulator without LLM · Date: 2026-08-25
+Iteration: 0f (owner-requested: manifesto absorption) · Phase: 0 — simulator without LLM · Date: 2026-08-26
 
-iter-0d restored the zip-lost infra (KI#1, KI#2 closed: `.gitignore`, package
-skeleton, smoke tests, pyproject discovery fix). iter-0e adds owner-requested
-core-design research (`docs/CORE_DESIGN_RESEARCH.md`) — owner authorized
-this docs iteration explicitly (chat, 2026-08-25). Doc-loop alarm: fired
-through iter-0c, reset by iter-0d executable tests. **iter-1 must be
-functional simulator code** (`docs/TASKS.md`); no further docs iterations
-without an owner request.
+iter-0e delivered the core-design research (`docs/CORE_DESIGN_RESEARCH.md`)
+with open questions Q1–Q4 for the owner. iter-0f absorbs the architecture
+manifesto that came out of the iter-0e dialogue into the four places it
+belongs, **without inventing a new doc**: (a) BRIEF_SPEC sketch in
+`docs/SPECS_BACKLOG.md` gets the sensory-emitter + beat-boundary delta
+clause; (b) VALIDATION_SPEC sketch gets prompt-injection neutralized
+**structurally** at the prose→proposal boundary (no post-hoc text
+sanitization — that path is a crutch); (c) `CORE_DESIGN_RESEARCH.md` §6
+gets P3e `psychological_echo` as a phase-3+ behavior modifier derived
+from existing knowledge records (not new data); (d) this file gets a
+`git ls-files` FAQ entry (workspace ≠ tracked). Doc-loop alarm: this
+is the **fifth** docs iteration in a row (0, 0b, 0c, 0e, 0f) — iter-1
+**must** be functional simulator code (`docs/TASKS.md`); no further
+docs iterations without an owner request.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -30,13 +37,20 @@ without an owner request.
 ## FAQ / Pitfalls
 
 - **Zip upload loses dotfiles and empty dirs.** "Add files via upload" on GitHub
-dropped `.gitignore` (and every dir without tracked files). After any future
-upload: verify `.gitignore` exists and `git status --short` shows no runtime
-artifacts (KI#1).
+  dropped `.gitignore` (and every dir without tracked files). After any future
+  upload: verify `.gitignore` exists and `git status --short` shows no runtime
+  artifacts (KI#1).
+- **Workspace files ≠ tracked files.** `git status --short` shows changes
+  *vs HEAD*, not what is *in* HEAD — a file present in your working directory
+  may not be committed at all. After any structural change, run
+  `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
+  actually tracked. This is the diagnostic for KI#1-class losses and for
+  "the file exists but tests can't find it" surprises.
 
 ## Next step
 
-Owner: answer `docs/CORE_DESIGN_RESEARCH.md` §8 (Q1–Q4). Then iter-1 · core
-plumbing: seed, RNG instance, clock, event queue, JSONL log with header,
-playscript runner, pack loader for the drafted `content/tavern_pack/` v0.1.
-Acceptance criteria in `docs/TASKS.md`.
+Owner: answer `docs/CORE_DESIGN_RESEARCH.md` §8 (Q1–Q4) when ready — they
+are not blocking. iter-1 · core plumbing is the next functional step:
+seed, RNG instance, clock, event queue, JSONL log with header, playscript
+runner, pack loader for the drafted `content/tavern_pack/` v0.1. Acceptance
+criteria in `docs/TASKS.md`.

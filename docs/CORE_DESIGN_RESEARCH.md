@@ -169,6 +169,16 @@ gaps (§6 P2).**
   the seeded buffer, never replacing it).
 - **P3d** Entity LOD ladder: ambient → statistical → full simulation (the
   crowd entity is the seed of this ladder).
+- **P3e** psychological_echo. NPC behavior carries the emotional residue of
+  past events: a guard who saw a fire is jittery next morning; a maid who
+  witnessed a theft watches the suspect's hands. Implemented as a per-NPC
+  `echo_state` derived from `knowledge.records` + `state_changes` + ticks
+  since learned, fed as an input to behavior selection — not new data, a
+  behavior modifier computed from the existing log. Phase 3+; depends on
+  the goal/urge ticker (P2b) to act on the echo, and on per-entity history
+  views (§4 free win) for the source signal. Prevents "events that
+  happened but no longer matter" — the depth-equation Memory factor made
+  observable in NPC behavior, not just in the chronicle.
 
 ## 7. Reference intake candidates (owner queue for `doc-2`)
 

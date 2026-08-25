@@ -69,3 +69,20 @@ iter-0e · 2026-08-25 · owner-requested core-design research
   pending on Q1–Q4.
 - AGENT_NAVIGATION §1/§3 updated (new doc + ownership row).
 - Next: owner answers §8 questions; iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0f · 2026-08-26 · owner-requested manifesto absorption (4 surgical edits)
+- No new doc — the manifesto lands where it belongs: (a) BRIEF_SPEC sketch
+  in SPECS_BACKLOG gets sensory-emitter + beat-boundary delta clause; (b)
+  VALIDATION_SPEC sketch gets prompt-injection neutralized structurally
+  (prose→proposal boundary, grammar-constrained Intent, no post-hoc text
+  sanitization — that path is a crutch); (c) CORE_DESIGN_RESEARCH §6 gets
+  P3e `psychological_echo` as a phase-3+ behavior modifier derived from
+  existing knowledge records (not new data); (d) STATUS FAQ gets a
+  `git ls-files` pitfall (workspace ≠ tracked).
+- Files: docs/SPECS_BACKLOG.md, docs/CORE_DESIGN_RESEARCH.md, STATUS.md,
+  this file, docs/DECISIONS.md (D-018). AGENT_NAVIGATION unchanged — no
+  structural change.
+- Doc-loop alarm: 5th docs iteration in a row. iter-1 MUST be functional
+  code; no further docs iterations without an owner request.
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
