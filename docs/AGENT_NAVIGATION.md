@@ -21,6 +21,7 @@
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
 | `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | research (iter-0e); absorbed into DECISIONS/TASKS on owner decision |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
+| `docs/REFERENCES_DEEP.md` | per-reference deep dives: mechanics, take/adapt/inspire/strengths/weaknesses; iteration plan for `ref-N` | active (rots — quarterly review alongside `doc-2`) |
 | `schemas/event.schema.json` | machine-readable event contract | synced with `docs/EVENT_SCHEMA.md` |
 | `core/` | engine: clock, rng, queue, log writer, fold/replay | skeleton restored iter-0d; code lands iter-1 |
 | `sim/systems/` | the 8 systems (`MVP_SCOPE.md` §5) | skeleton restored iter-0d; code lands iter-2 |
@@ -53,7 +54,7 @@
 | Stable design decisions | `docs/DECISIONS.md` | link |
 | Core-design research & depth proposals | `docs/CORE_DESIGN_RESEARCH.md` | link; accepted items move to DECISIONS/TASKS, line flips to `absorbed` |
 | Volatile: model stack, hardware, DF pitfalls | `docs/TECH_NOTES.md` | link, expect rot |
-| External sources: donors, licenses, phase gating | `docs/REFERENCES.md` (catalog) ↔ `docs/ROADMAP.md` §4 (active shortlist) | link, never restate |
+| External sources: donors, licenses, phase gating | `docs/REFERENCES.md` (catalog) ↔ `docs/ROADMAP.md` §4 (active shortlist) ↔ `docs/REFERENCES_DEEP.md` (per-source deep dives) | link, never restate |
 | Agent law, invariants | `AGENTS.md` | `STATUS.md` carries one-liners only |
 | Where things are | this file | `README.md` carries a short map |
 

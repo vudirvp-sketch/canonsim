@@ -132,6 +132,32 @@
 - `doc-1` VISION freeze review after the phase-0 verdict.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
+- `ref-N` Reference deep dives — one batch per iteration, owned by
+  `docs/REFERENCES_DEEP.md` §1 (the plan table). Solo iterations for sources
+  with ≥3 subsystems worth deep coverage; 2–3 per iter for the rest. Pick in
+  order; skip if a phase hasn't shipped yet. Sequence:
+  - `ref-1` (solo) DF worldgen + history layer (populations vs notables LOD,
+    age/civ dynamics, artifact anchors, reputation as event).
+  - `ref-2` (solo) C:DDA `data/json/` schema — content-as-JSON at scale
+    (items, monsters, recipes, missions, factions). CC-BY-SA lets us lift.
+  - `ref-3` (solo) Paradox event scripting (CK3 + EU4 + Stellaris) — full
+    grammar: trigger, weight, mtth, effect, option, scope.
+  - `ref-4` (batch) RimWorld + L4D Director + Alien: Isolation — pacing /
+    storyteller trio; phase-3 director ref.
+  - `ref-5` (batch) Wesnoth WML + Endless Sky mission DSL + ink + tracery —
+    event / narrative grammar family.
+  - `ref-6` (batch) Brogue + DCSS + KeeperRL — roguelike emergence +
+    micro-sim.
+  - `ref-7` (batch) Stanford Generative Agents + ai-town + letta — LLM-agent
+    precedents (mostly negative; overlaps bg-4).
+  - `ref-8` (batch) Azgaar FMG + Natural Earth + GeoNames — worldgen data
+    donors; phase 5.
+  - `ref-9` (batch) libtcod + rot.js + Red Blob Games — FOV / pathfinding /
+    grid math; pattern only (D-012).
+  - `ref-10` (batch) entt + Bevy + EventStore — ECS scheduling + event-
+    sourcing stream/projection patterns.
+  - `ref-11` (batch) SQLite FTS5 + DuckDB + sqlite-vec — storage layer
+    candidates; depends on phase-4 retrieval decision.
 
 ## Done
 
@@ -153,3 +179,10 @@
   (Mesa, Neighborly, Red Blob, Game Programming Patterns); P1e/P2d/P2e/P3f
   new proposals; SPECS_BACKLOG sketches extended (DIRECTOR/LEGEND/BRIEF);
   MVP_SCOPE §4.2/§10/§15 updated. Doc-loop alarm exception (sixth docs iter).
+- iter-0h · 2026-08-26 · owner-requested references deep dive: new
+  `docs/REFERENCES_DEEP.md` (400 lines) — format template + iteration plan
+  + first batch (Neighborly, Mesa, DF Legends XML export schema); D-024
+  three-place anti-drift policy (catalog ↔ synthesis ↔ deep dives); TASKS
+  gets `ref-N` backlog items (ref-1..ref-11); AGENT_NAVIGATION §1 + §3
+  updated; STATUS FAQ gets three-places-three-jobs pitfall. Doc-loop alarm
+  exception (seventh docs iter, D-022).
