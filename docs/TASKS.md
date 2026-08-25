@@ -329,9 +329,345 @@
     fixed in the same §2 edit. No KI#6-class drift this
     iteration.
   - `ref-8` (batch) Azgaar FMG + Natural Earth + GeoNames — worldgen data
-    donors; phase 5.
-  - `ref-9` (batch) libtcod + rot.js + Red Blob Games — FOV / pathfinding /
-    grid math; pattern only (D-012).
+    donors; phase 5. → done (iter-0q): `docs/ref/azgaar_fmg.md`
+    (280 — four-layer architecture [world data/generators/editors/
+    renderers — INV-1 inherits: canon log = world data;
+    `sim/systems/` = generators; `cli/` = editors; `render/` =
+    renderer] + ordered generator pipeline [30+ side-effecting
+    imports in `src/generators/index.ts` documenting dependency
+    order: voronoi → heightmap → features → names → lakes →
+    river → burgs → biomes → cultures → routes → states →
+    zones → religions → labels → added-labels → provinces →
+    emblems → ice → ocean → relief → military → markers →
+    measurers → goods → production → markets → resample] +
+    `State` interface shape [`i`/`name`/`capital`/`culture`/
+    `coa`/`neighbors`/`campaigns`/`diplomacy`/`formName`/
+    `fullName` — per-entity record with foreign keys + cached
+    adjacency + embedded chronology; lifted into `content/packs/
+    <pack>/entities.json`] + `Campaign` interface shape [`name`/
+    `start`/`end`/`attacker`/`defender` — typed chronology
+    event with temporal bounds + actor refs; lifted into
+    `EVENT_SCHEMA.md` §2 `tick` + `actor_id` + `cause` chain]
+    + diplomacy chronicle [per-state `diplomacy` array on
+    designated neutral state[0] — INV-1 fix: global JSONL
+    log, not per-state field] + re-entrant pipeline [editors
+    as 'interactive generators'; lifted into `Intent` →
+    `Event` validation front-door in iter-3+ `cli/`] + `.map`
+    save file [seed + state snapshot — INV-1 split: JSONL
+    log = replay; SQLite index = snapshot]; explicitly
+    negative on side-effecting imports [INV-1 fix: emit
+    events, not in-place mutation] + per-state chronicle
+    [INV-1 fix: global log] + floating-point Voronoi
+    determinism [INV-2 fix: integer ticks + `random.Random
+    (seed)`] + catalog row says 'chronology generator' but
+    chronology embedded in `states-generator.ts` as
+    `generateCampaigns` + `generateDiplomacy` — minor
+    catalog↔repo drift, fixed in this per-ref file),
+    `docs/ref/natural_earth.md` (250 — three-scale LOD
+    ladder [1:10m/1:50m/1:110m; lifted into phase-5 LOD:
+    canon log = ground truth; per-NPC projection = mid LOD;
+    brief cache = top LOD] + `featurecla` closed-enum-on-
+    each-record [every feature carries its type; lifted
+    into `entities.json` `entity_type` enum + `EVENT_SCHEMA.md`
+    §2 `event_type` enum] + 155-property `ne_110m_admin_0_
+    countries` schema [multiple foreign-key systems ISO/
+    FIPS/UN/WB/WOE/WIKIDATA + 50 localized-name fields
+    `NAME_<lang>` + precomputed display hints `MAPCOLOR7`/
+    `8`/`9`/`13` + `POP_EST`/`GDP_MD`/`ECONOMY`/`INCOME_GRP`;
+    lifted into `entities.json` closed enum + per-type fields
+    (scale trimmed) + `templates.json` localized name sets +
+    `render/` display hints on data records] + semantic
+    versioning [X.Y.Z with documented major/minor/patch
+    boundaries — 'data layout is the API'; lifted into
+    `schemas/event.schema.json` `schema_version` + §3
+    migration rule] + per-theme file split [one file per
+    domain: physical/cultural/populated_places/urban_areas;
+    lifted into `content/packs/<pack>/` per-category file
+    split]; explicitly negative on 155-property heaviness
+    [trim to what simulation uses] + floating-point geometry
+    [INV-2 fix: lift metadata only in phase 0, defer
+    geometry to phase-5+] + dataset scale [several GB; lift
+    shape, not data] + real-world dataset [right shape,
+    wrong content — Azgaar FMG + a future fantasy toponym
+    source are better fitted]; 'multiple LODs of same data
+    should be coherent' lesson [README 'Neatness Counts']
+    shapes phase-5 LOD ladder),
+    `docs/ref/geonames.md` (345 — 9-class / 684-code
+    feature-class enum [verified 2026-08-26 against live
+    `featureCodes_en.txt` dump — `readme.txt` says 645,
+    stale by 39 codes; classes A/H/L/P/R/S/T/U/V; lifted
+    into `entities.json` `entity_type` enum as closed enum
+    at top + per-type refinements; 4 types in phase 0 vs
+    684 codes in GeoNames] + `geoname` table per-feature
+    record shape [`geonameid`/`name`/`asciiname`/
+    `alternatenames`/`latitude`/`longitude`/`feature class`/
+    `feature code`/`country code`/`cc2`/`admin1-4`/`population`/
+    `elevation`/`dem`/`timezone`/`modification date` — flat
+    per-feature record with PK + display name + ASCII
+    fallback + multilingual alternates + lat/long + typed
+    feature + admin hierarchy + population + elevation +
+    timezone; lifted into `entities.json` per-entity record
+    shape] + admin-hierarchy code chain [admin1 → admin2 →
+    admin3 → admin4 + explicit `hierarchy.zip` typed parent/
+    child file with type 'ADM'/'related'; implicit hierarchy
+    via codes + explicit hierarchy via separate file;
+    lifted into `relations.json` P2a pair-keyed relation
+    map] + `alternatenames` table [`alternateNameId`/
+    `geonameid` FK/`isolanguage` ISO 639 + variants `zh-CN`/
+    `post`/`iata`/`icao`/`fr_1793`/`abbr`/`link`/`wkdt`/
+    `alternate name`/`isPreferredName`/`isShortName`/
+    `isColloquial`/`isHistoric`/`from`/`to` period bounds;
+    per-feature multilingual name records with type flags +
+    period-of-use bounds; lifted into `templates.json`
+    localized name sets + chronicle rename events — a new
+    name is a new record with `from` tick] + daily delta
+    files [`modifications-<date>.txt` + `deletes-<date>.txt`
+    + `alternateNamesModifications-<date>.txt` +
+    `alternateNamesDeletes-<date>.txt` — append-only log
+    discipline; lifted into INV-1 + INV-5 — the log is
+    append-only, every change is a new event, no edits ever]
+    + per-country dump + all-countries dump + city-only
+    subsets [`cities500/1000/5000/15000.zip` by population
+    threshold]; explicitly negative on tab-delimited format
+    [INV-3 fix: schema in sidecar, not in code] +
+    floating-point lat/long [INV-2 fix: lift metadata only
+    in phase 0] + 684-code enum scale [trim to 4 types in
+    phase 0; many codes like `S.AIRB` don't apply to
+    pre-industrial fantasy] + `readme.txt` stale '645 codes'
+    claim [live dump has 684 — documentation lag, dump is
+    source of truth; logged here as doc↔repo drift catch]
+    + CC-BY 4.0 attribution sidecar mandatory at intake +
+    real-world dataset [right shape, wrong content — Azgaar
+    FMG is the right content]; 'dataset as append-only log'
+    lesson [daily modifications/deletes deltas] shapes INV-1
+    + INV-5). All three open-licensed per `REFERENCES.md`
+    §1+§2 — pattern lifting permitted, port the shape not
+    the syntax per §0.7 (D-015). Licenses verified against
+    catalog §1+§2 (MIT for Azgaar FMG, public domain for
+    Natural Earth, CC-BY 4.0 for GeoNames) — no KI#6-class
+    drift this iteration. Minor catalog↔repo drift: catalog
+    §2 row for Azgaar FMG says 'chronology generator' but
+    the actual repo at master has chronology embedded in
+    `states-generator.ts` (no separate
+    `chronology-generator.ts` file); fixed in this per-ref
+    file (the catalog row is the short version, the per-ref
+    file is the long one). Minor doc↔repo drift: GeoNames
+    `readme.txt` says '645 codes' but the live dump has 684
+    codes (stale by 39); documented in the per-ref file,
+    dump is source of truth.
+  - `ref-9` (batch) libtcod + rot.js + Red Blob Games — FOV /
+    pathfinding / grid math; pattern only (D-012). → done
+    (iter-0q): `docs/ref/libtcod.md` (279 — FOV algorithm
+    closed enum [14 algorithms: `FOV_BASIC`/`FOV_DIAMOND`/
+    `FOV_SHADOW`/`FOV_PERMISSIVE_0..8`/`FOV_RESTRICTIVE`/
+    `FOV_SYMMETRIC_SHADOWCAST` + `NB_FOV_ALGORITHMS` sentinel;
+    lifted into `sim/systems/perception.py` iter-3 —
+    algorithm choice is config-time, recorded in determinism
+    contract] + `TCOD_MapCell` per-tile state [`transparent`
+    bool input + `walkable` bool input + `fov` bool output;
+    lifted into per-tile visibility projection — canon log
+    records 'what is there', perception system projects
+    'what can be seen' given viewer position + sight
+    radius] + A* + Dijkstra pathfinder interface [graph-
+    search with per-tile cost function + priority queue
+    using libtcod's `heapq.h` binary heap primitive —
+    Python's `heapq` stdlib is the direct equivalent;
+    lifted into `sim/systems/movement.py` iter-2 — no
+    external dep, D-012] + BSP dungeon generator
+    [`TCOD_bsp_t` tree node with `x`/`y`/`w`/`h`/`level`/
+    `position`/`[left, right]` children + `TCOD_bsp_split`
+    recursive split; deferred to phase-5+ spatial layer,
+    phase-0 tavern uses fixed grid] + heightmap pipeline
+    [`TCOD_heightmap_t` 2D float array + `add`/`normalize`/
+    `add_fbm` Fractal Brownian Motion Perlin/Simplex at
+    multiple octaves/`scale_fbm`/`dig`/`kernel_transform`;
+    deferred to phase-5+ worldgen, cf. Azgaar FMG
+    `heightmap-generator.ts` for same pattern in JS/TS] +
+    single-instance seeded Mersenne Twister RNG
+    [`TCODRandom`; lifted into `core/rng.py` iter-1 —
+    Python's `random.Random(seed)` is Mersenne Twister,
+    INV-2 requires one instance, no wall-clock] + per-
+    feature file split [one .h/.hpp pair per feature:
+    `fov.h`/`path.h`/`bsp.h`/`noise.h`/`heightmap.h`/
+    `mersenne.h`/...; lifted into `sim/systems/` per-system
+    file layout]; explicitly negative on C/C++ implementation
+    [D-012 fix: port shapes to Python stdlib] + breadth-
+    irrelevant-to-CLI [`console.h`/`mouse.h`/`image.h`/
+    `tileset_*.h`/`renderer_xterm.h` not relevant to a CLI
+    simulation; lift only `sim/systems/` + `core/` + `render/`
+    parts] + no event sourcing [INV-1 fix: every movement
+    is a canon event] + no determinism contract [INV-2 fix:
+    one RNG instance, no wall-clock, sorted iteration, queue
+    key] + no content/code split [INV-3 fix: algorithm choice
+    is config-time, recorded in determinism contract];
+    BSD-3-Clause [verified 2026-08-26 against `LICENSE.txt`
+    in `libtcod/libtcod` repo] — permissive license, no
+    friction at intake; 'permissive license on a reference
+    implementation is a gift to the ecosystem' lesson — we
+    lift shapes not syntax, no obligation to ship our code
+    under same license),
+    `docs/ref/rot_js.md` (347 — `EventQueue` min-heap core
+    [`_time` + `_events` MinHeap<T> + `getTime()`/`clear()`;
+    canonical event-scheduling primitive; lifted into
+    `core/queue.py` iter-1 — Python's `heapq` for the heap,
+    integer tick for time, queue key `(tick, sub_order,
+    actor_id)` is INV-2 fix for tiebreaking simultaneous
+    events that rot.js's bare `_time` would collide on] +
+    scheduler family [abstract `Scheduler<T>` with `_queue:
+    EventQueue<T>` + `_repeat: T[]` + `_current: any` +
+    abstract `next()` + 3 concrete subclasses: `Simple`
+    round-robin insertion-order + `Speed` speed-based with
+    next event at `_time + 1/speed` (classic roguelike turn
+    scheduler) + `Action` action-point-based; family of
+    schedulers extending one abstract base, each defining a
+    turn discipline; lifted into `core/queue.py` discipline
+    — queue key IS the discipline, iter-3+ may add speed-
+    based variant if P2b minimal goal/urge ticker D-021
+    needs it] + FOV family [abstract `FOV` with `compute(x,
+    y, R, VisibilityCallback)` + `LightPassesCallback`
+    boolean per tile + 3 concrete subclasses: `Discrete
+    Shadowcasting` per-octant line-tracing 0/1 visibility +
+    `PreciseShadowcasting` fractional visibility 0..1 for
+    partial cover + `RecursiveShadowcasting` the 'classic'
+    recursive shadowcasting (same family as libtcod's
+    `FOV_SHADOW`); closed family extending one abstract
+    base, same interface; lifted into `sim/systems/
+    perception.py` iter-3 — closed enum at config time,
+    interface `compute(viewer_x, viewer_y, radius, callback)`]
+    + path family [abstract `Path` with `compute(x1, y1,
+    x2, y2, callback)` + 2 concrete subclasses: `AStar` with
+    Manhattan heuristic by default + `Dijkstra` for all-
+    pairs shortest paths; lifted into `sim/systems/
+    movement.py` iter-2] + map family [11 generators
+    extending abstract `Map` with `create(callback)`:
+    `Arena`/`Cellular`/`Digger`/`DividedMaze`/`Dungeon`/
+    `EllerMaze`/`Features`/`IceyMaze`/`Rogue`/`Uniform`;
+    deferred to phase-5+ spatial layer] + Alea RNG
+    [Baagøe algorithm with `_s0`/`_s1`/`_s2` state + carry
+    `_c`, seed expansion via `seed*69069 + 1` LCG; lifted
+    into `core/rng.py` iter-1 — Python's `random.Random
+    (seed)` Mersenne Twister is the equivalent, INV-2
+    requires one instance] + engine game loop wrapper
+    [single-threaded loop pulling actors from scheduler,
+    calling `actor.act()`, supports async `result.then` for
+    browser-side promise-based actions; lifted into
+    `core/runner.py` iter-1 — sync loop, no async path in
+    phase 0] + per-feature directory + abstract base +
+    concrete subclasses shape [`src/scheduler/` + `src/fov/`
+    + `src/path/` + `src/map/` with `index.ts` aggregating;
+    lifted into `sim/systems/` per-system file layout];
+    explicitly negative on TypeScript/JS implementation
+    [D-012 fix: port shapes to Python stdlib] + bare
+    `_time` queue key [INV-2 fix: 3-tuple `(tick, sub_order,
+    actor_id)` queue key for tiebreaking] + browser focus
+    [README has `<script>` tag + ES2015 modules + babel+
+    rollup bundlers + Node.js with `term` layout backend;
+    CLI not relevant, lift only algorithm shapes] + no
+    event sourcing [INV-1 fix: every action is a canon
+    event, `act()` returns Intent that simulator validates]
+    + no determinism contract [INV-2 fix: one RNG instance,
+    no wall-clock, sorted iteration, queue key] + no
+    content/code split [INV-3 fix] + `setSeed` hack `seed =
+    (seed < 1 ? 1/seed : seed)` for fractional seeds [our
+    `random.Random(seed)` accepts any hashable, integer
+    seed]; 'feature-complete focused toolkit' lesson
+    [library 'largely considered feature-complete' per
+    README] shapes our `sim/systems/` scope [8 systems in
+    phase 0, stops growing after iter-6 phase gate];
+    BSD-3-Clause [verified 2026-08-26 from `package.json`
+    `license` field in `ondras/rot.js` repo] — no friction
+    at intake),
+    `docs/ref/red_blob_games.md` (312 — hex grid coordinate
+    algebra [offset odd-r/even-r/odd-q/even-q + axial (q, r)
+    + cube (x, y, z with x+y+z=0) + doubled; conversions
+    offset↔axial↔cube with exact formulas + distance in
+    cube coords `max(|Δx|, |Δy|, |Δz|)` + line drawing via
+    cube-coord sampling + rounding + range walking the
+    cube coordinate ring + rotation by 60° in cube coords +
+    FOV/line-of-sight via hex-grid line drawing + pixel-to-
+    hex conversion for pointy-top + flat-top orientations
+    with fractional hex intermediate; the canonical write-
+    up that every hex-grid library (libtcod + rot.js +
+    hexlib + reffy) implements; deferred to phase-5+ spatial
+    layer if hex-based, phase-0 tavern uses square grid] +
+    A* pseudo-code [open set + closed set + g cost-from-
+    start + h heuristic estimate-to-goal + f = g + h + pick
+    lowest f + expand neighbors + update g and parent;
+    BFS/Dijkstra/A* family framing with different h choices
+    [0 for BFS, exact for Dijkstra, estimated for A*];
+    heuristic functions Manhattan/Euclidean/Chebyshev/
+    Octile by movement rules; priority queue binary heap +
+    tiebreaking prefer higher g toward goal; the most-cited
+    A* tutorial in game dev; lifted into `sim/systems/
+    movement.py` iter-2 — libtcod + rot.js implementations
+    are concrete instances of this algorithm] + polygon
+    map generation pipeline [Voronoi diagram from N
+    random points via d3-delaunay/delaunator + Lloyd's
+    relaxation 1-2 iterations for uniform distribution +
+    Perlin noise elevation with radial gradient for island
+    shape + watershed downhill tracing for rivers +
+    Whittaker biome diagram elevation × moisture → biome
+    type + noisy edges for hand-drawn look; the canonical
+    Voronoi+noise worldgen — Azgaar FMG implements the same
+    algorithm with additional passes states/cultures/
+    religions; deferred to phase-5+ worldgen] + relational
+    grid abstraction [faces/edges/corners with typed
+    relations — a face has edges, each edge has 2 corners,
+    each corner has 3 edges; same relational shape for
+    square/hex/triangle grids, different geometries; grid
+    as graph of parts with relations; deferred to phase-5+
+    spatial layer's per-part query interface] + circle
+    drawing algorithms [midpoint circle + Andreev for AoE
+    effects + circular rooms; lifted into `sim/systems/`
+    iter-2 fire_spread AoE queries] + distance-to-any
+    single-source Dijkstra + all-pairs Floyd-Warshall
+    pre-compute [choice: Dijkstra for one-off paths,
+    Floyd-Warshall for pre-computed small maps; lifted into
+    `sim/systems/movement.py`]; explicitly negative on no
+    explicit license statement [site has no license on
+    article pages — verified 2026-08-26 by inspecting
+    `/grids/hexagons/` + `/pathfinding/a-star/introduction.html`
+    + `/about`; CSS comment 'CSS Copyright 2007-2026 by Amit
+    J. Patel' is for stylesheet not content; Amit Patel
+    explicitly requests attribution in academic contexts
+    per `/blog/`; convention adopted here = treat as CC-BY
+    4.0, re-evaluate if stance changes] + HTML5 canvas
+    demos [lift formulas + pseudo-code only, not
+    interactivity] + d3-delaunay/delaunator dependency for
+    Voronoi [port to Python stdlib — Python's `geometry` +
+    `math` modules suffice for small N] + not a code
+    repository [formulas in prose + diagrams, no `git clone`
+    to inspect] + hex grid not directly relevant to
+    phase-0 [defer to phase-5+ if we go hex] + polygon map
+    generation not directly relevant to phase-0 [defer to
+    phase-5+ worldgen]; the site is the canonical write-up
+    layer above the libtcod + rot.js implementations —
+    algorithm shapes here are the source of truth that
+    implementations are concrete instances of; 'BFS/
+    Dijkstra/A* are a family with different heuristics'
+    lesson shapes `sim/systems/movement.py` config-time
+    choice of algorithm; 'worldgen is composition of
+    focused passes' lesson [Voronoi → relax → elevation →
+    watershed → biomes → noisy edges] is the same lesson as
+    Azgaar FMG and 'small alphabet deep composition' lesson
+    from `brogue.md`; interactive HTML5 canvas demos lesson
+    [algorithm write-ups benefit from interactivity] shapes
+    phase-5+ frontend explorability goal). All three
+    open-licensed per `REFERENCES.md` §3+§8 (BSD-3-Clause
+    for libtcod + rot.js, treat-as-CC-BY for Red Blob
+    Games — catalog §8 has no license column for knowledge-
+    base sources; convention adopted here per Amit Patel's
+    explicit attribution-request in academic contexts) —
+    pattern lifting permitted, port the shape not the
+    syntax per §0.7 (D-015). License drift pre-flip caught:
+    ref-9-a and ref-9-b were listed as 'BSD' shorthand in
+    §2 index, but catalog §3 says 'BSD-3-Clause' explicitly;
+    fixed in the same §2 edit that flipped ref-9-a/b/c
+    todo→done. ref-9-c Red Blob Games license marked as
+    'CC-BY (treat as)' in §2 index — catalog §8 has no
+    license column for knowledge-base sources, so this is
+    not catalog↔index drift; the convention is documented
+    honestly in the per-ref file.
   - `ref-10` (batch) entt + Bevy + EventStore — ECS scheduling + event-
     sourcing stream/projection patterns.
   - `ref-11` (batch) SQLite FTS5 + DuckDB + sqlite-vec — storage layer
@@ -451,3 +787,45 @@
   `docs/ref/` list. Licenses verified against catalog §5 —
   no KI#6-style drift this iteration. Doc-loop exception
   (fifteenth docs iter, D-022).
+- iter-0q · 2026-08-26 · owner-requested ref-8 + ref-9
+  6-batch deep dive: `docs/ref/azgaar_fmg.md` (280),
+  `docs/ref/natural_earth.md` (250), `docs/ref/geonames.md`
+  (345), `docs/ref/libtcod.md` (279), `docs/ref/rot_js.md`
+  (347), `docs/ref/red_blob_games.md` (312) — six open-
+  licensed worldgen data donor + grid math pattern-only
+  references (Azgaar FMG four-layer architecture + ordered
+  generator pipeline + `State`/`Campaign` interface shapes,
+  Natural Earth three-scale LOD ladder + `featurecla` closed
+  enum + 155-property admin-0 schema + semantic versioning,
+  GeoNames 9-class/684-code feature enum + `geoname` table
+  per-feature record + admin-hierarchy code chain +
+  `alternatenames` table + daily delta files, libtcod FOV
+  algorithm closed enum + `TCOD_MapCell` per-tile state +
+  A*/Dijkstra pathfinder + BSP + heightmap + Mersenne
+  Twister RNG + per-feature file split, rot.js `EventQueue`
+  min-heap + scheduler family [simple/speed/action] + FOV
+  family + path family + 11 map generators + Alea RNG +
+  engine game loop, Red Blob Games hex grid coordinate
+  algebra + A* pseudo-code + polygon map generation pipeline
+  [Voronoi + Lloyd + Perlin + watershed + Whittaker biomes +
+  noisy edges] + relational grid abstraction + circle
+  drawing + Floyd-Warshall pre-compute). All six under cap
+  by construction. §2 of `docs/REFERENCES_DEEP.md` flips
+  ref-8-a/b/c + ref-9-a/b/c todo → done + rich one-line
+  verdicts + fixes license drift on ref-9-a/b ["BSD" →
+  "BSD-3-Clause" — pre-flip caught, KI#6-class pitfall
+  avoided] + adds "CC-BY (treat as)" annotation on ref-9-c
+  (catalog §8 has no license column for knowledge-base
+  sources, convention adopted per Amit Patel's explicit
+  attribution-request in academic contexts). AGENT_NAVIGATION
+  §1 adds six new files to `docs/ref/` list. Licenses
+  verified against catalog §1+§2+§3+§8 — no KI#6-class
+  drift this iteration. Minor catalog↔repo drift: catalog
+  §2 row for Azgaar FMG says 'chronology generator' but the
+  actual repo has chronology embedded in `states-generator.ts`
+  (no separate `chronology-generator.ts` file); documented
+  honestly in the per-ref file. Minor doc↔repo drift:
+  GeoNames `readme.txt` says '645 codes' but the live dump
+  has 684 codes (stale by 39); documented honestly in the
+  per-ref file. Doc-loop exception (sixteenth docs iter,
+  D-022).
