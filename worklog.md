@@ -5,93 +5,219 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
-iter-0o · 2026-08-26 · owner-requested ref-6 3-batch deep dive (D-022 exception)
-- Three open-licensed roguelike emergence + micro-sim family files:
-  `docs/ref/brogue.md` (326 — Brogue CE two-stream RNG
-  `RNG_SUBSTANTIVE`/`RNG_COSMETIC` with `brogueAssert`
-  scope guards + `assureCosmeticRNG` macro for stream
-  switching, 36-byte no-wall-clock recording header in
-  `Recordings.c` writeHeaderInfo [bytes 0-14 version,
-  byte 15 mode, 16-23 seed uint64, 24-27 player turn
-  uint32, 28-31 deepest level uint32, 32-35 length
-  uint32], `promoteTile` per-layer state-transition
-  primitive with flag-gated trigger sources
-  [`TM_IS_FLAMMABLE`/`TM_PROMOTES_ON_ELECTRICITY`/
-  `TM_IS_WIRED`/`promoteChance`], multi-pass
-  environment tick with read→write→cleanup pass
-  separation, layered `pmap[x][y].layers[layer]`
-  cell-stack, `updateVolumetricMedia` stochastic gas
-  diffusion with stochastic rounding, `paintLight`
-  additive RGB over `getFOVMask`, `randomNumbers
-  Generated` audit counter + `AUDIT_RNG` debug build,
-  the "small alphabet deep composition" lesson,
-  explicitly negative on in-memory `pmap` state
-  model [INV-1 amnesia] + `time(NULL)` seed fallback
-  [we never loosen INV-2]); `docs/ref/dcss.md`
-  (360 — DCSS multi-stream RNG [`rng_type` enum:
-  `GAMEPLAY`/`UI`/`SYSTEM_SPECIFIC`/`LEVELGEN`+
-  per-branch with `NUM_RNGS = LEVELGEN +
-  NUM_BRANCHES`, RAII `rng::generator` for stream
-  switching, persistent `FixedVector<PcgRNG,
-  NUM_RNGS>` saved to save file, `ASSERT_stable`
-  scope guard, `peek_uint32/64` non-advancing reads,
-  `defer_rand` infinite lazy tree, energy-based
-  turn scheduler [`speed_increment`/
-  `BASELINE_DELAY=10`/`div_rand_round` stochastic
-  rounding], `dgn_event_dispatcher` positional event
-  system [`DET_*` bitflags + per-position listeners +
-  vetoable], `.des` vault grammar [`NAME`/`TAGS`/
-  `DEPTH`/`CHANCE`/`SUBST`/`FTILE` + Lua escape
-  hatch], 15-year-codebase-scales discipline
-  precedent, explicitly negative on in-memory
-  monster struct state [INV-1 amnesia] + Lua-in-
-  vaults escape [INV-4 stricter] + no knowledge
-  records + no director); `docs/ref/keeperrl.md`
-  (444 — continuous-time queue
-  [`map<ExtendedTime, Queue>` with
-  `players`/`nonPlayers` deques, `orderMap` per-
-  queue-position tiebreaker, `extraTurn` flag for
-  haste], `Model::tick` per-tick update order
-  [creatures → levels → collectives → territory →
-  external], `Collective::tick` 11-step subsystem
-  update, `getRebellionProbability` small-formula
-  social dynamics [12-line prisoner/fighter ratio
-  formula], `ExternalEnemies` 500-wave pre-computed
-  planner [`firstAttackDelay=1800`/
-  `attackInterval=1200`/`attackVariation=450`,
-  dispatched by `popNextWave(localTime)`],
-  `GameEvent` X-macro 24-event closed variant,
-  `cereal` binary serialisation, data-driven content
-  DSL with `inherit`, `Fire` minimal optional-state
-  machine, single-instance `extern RandomGen Random`,
-  explicitly negative on single-stream RNG + binary
-  save [INV-1 JSONL is inverse] + no knowledge
-  records + custom DSL with no schema [D-023 fix]).
-  All three paraphrased from the open-source corpus
+iter-0p · 2026-08-26 · owner-requested ref-7 3-batch deep dive (D-022 exception)
+- Three open-licensed LLM-agent precedent files:
+  `docs/ref/generative_agents.md` (371 — Park et al. 2023
+  memory stream shape [list of `Memory` objects with
+  `description`/`creation_time`/`last_access_time`,
+  one-to-one with our per-NPC knowledge records in
+  `MVP_SCOPE.md` §10] + retrieval function
+  `recency * w_r + importance * w_i + relevance * w_rel`
+  top-k [lifted into `brief/recall.py` — stdlib embedder
+  instead of LLM embedding, tick delta instead of wall-clock
+  recency, event `weight` field instead of LLM-scored
+  importance] + reflection pattern [periodic compaction
+  LLM call every N=150 new memories, emits higher-level
+  entries that are themselves log entries — INV-1-
+  compatible compaction by recurrence, not by truncation;
+  lifted into `brief/synthesise.py`] + planning pattern
+  [hierarchical decomposition with re-plan-on-violation;
+  lifted into iter-4 director `seeded_hooks` re-plan-on-
+  violation] + `Persona`/`Scratchpad` JSON split [static
+  profile + runtime projection, both passed to the LLM;
+  lifted into `entities.json` + `state = fold(log)` +
+  phase-1+ `brief/assembler.py`] + `agentStep` LLM hot
+  loop [canonical LLM-agent architecture] + 25-agent
+  Smallville cost benchmark [~$70 OpenAI credit for 2-day
+  simulation at 2023 prices, per paper Table 2 §6.4 — the
+  bg-4 benchmark; the "1,000 People" 2024 follow-up
+  extends to N=1000]; explicitly negative on LLM in hot
+  loop [INV-4 forbids in track A; the LLM moves to
+  phase-1+ `brief/` layer behind the phase-0 gate] +
+  OpenAI network dependency [INV-4 stricter — local
+  llama.cpp/Outlines in phase 1+] + non-determinism
+  [INV-2 byte-identical replay impossible with the
+  repo's design; `temperature=0.9` + partial `seed`
+  control only] + per-agent scratchpad files [INV-1
+  amnesia — our JSONL log + per-actor projection is the
+  inverse] + flat memory stream without per-channel
+  routing [no `seen`/`told`/`inferred` distinction —
+  KI#3 expectation_violation fix has no analogue]);
+  `docs/ref/ai_town.md` (345 — Convex reactive database
+  [table-based world state: `world`/`players`/`agents`/
+  `messages`/`conversations`/`archives`; the only "log"
+  is Convex internal history, not byte-identical
+  replayable] + `engine.ts` simulation loop [single
+  Convex transaction per tick; per-agent LLM call in
+  sorted insertion order — determinism hazard we would
+  fix with `sorted()` by ID] + `agentStep` per-tick LLM
+  call [prompt template + retrieved top-k Memories +
+  action grammar + LLM call + zod-parse to
+  `MoveAction`/`SayAction`/`WaitAction` discriminated-
+  union — lifted into `templates.json` `action_type`
+  enum shape; the per-tick LLM call is the INV-4
+  violation we explicitly reject] + conversation
+  handshake [`startConversation` creates a
+  `conversations` row with both agent IDs + unique
+  conversation ID; each turn per agent includes the
+  recent `messages` from the other; ends on
+  `LeaveAction` — lifted into phase-1+ `talk` action
+  brief shape; the LLM-as-participant model does not]
+  + `archives` table compaction [periodic summary LLM
+  call writes a single row with `description`/
+  `agentId`/`createdAt`; recent-messages context then
+  pulls from `archives` (compacted) + most recent
+  `messages` (raw) — same reflection shape as
+  `generative_agents.md` but on a database table,
+  not a memory stream] + `world.ts` tile grid [2D
+  integer grid stored as a string in the `world`
+  table's `currentView` field, one char per tile,
+  `tileset.json` charset — the simplest possible
+  spatial model; phase-0 tavern inherits the grid-
+  as-data shape] + `prompts/` directory [LLM prompt
+  templates as plain `.txt` files with `{placeholder}`
+  tokens, runtime = string replace — same shape as our
+  `templates.json` (tracery grammar lifted in
+  `tracery.md`)] + pixi.js reactive frontend
+  [subscribes to Convex tables, re-renders on each
+  mutation — the inverse of our phase-0 architecture
+  (no UI/server per `MVP_SCOPE.md` §2 non-goals)] +
+  GitHub OAuth Convex Auth multi-tenant [irrelevant
+  for phase-0 single-user CLI] + `memories` table
+  schema [`agentId`/`description`/`createdAt`/
+  `importance` 1-10 — same field shape as our per-NPC
+  knowledge records; the per-agent table is the
+  inverse of our global JSONL log + per-actor
+  projection]; explicitly negative on Convex reactive
+  database substrate [INV-1 + INV-2 inverse — mutable
+  tables + non-deterministic mutation order; our JSONL
+  log + SQLite index is the right substrate] + LLM
+  in hot loop [INV-4] + OpenAI/Anthropic/OpenRouter
+  network [INV-4 stricter] + reactive frontend
+  [`MVP_SCOPE.md` §2 non-goal — no UI in phase 0] +
+  insertion-order iteration [INV-2 fix = `sorted()`
+  by ID, queue key `(tick, sub_order, actor_id)`];
+  cost benchmark ~$50/day for 25 agents at 1 Hz [bg-4
+  — overlaps `generative_agents.md` Table 2]);
+  `docs/ref/letta.md` (353 — the block manager context
+  window partition [`system`/`persona`/`human`/`tools`/
+  `scratchpad`/`fifo_queue` blocks with per-block token
+  budget; the context window is a multi-block memory
+  space, not one prompt string; lifted into
+  `brief/assembler.py` block layout — brief as typed
+  blocks with per-block token budgets] + three-tier
+  memory hierarchy [`core_memory` (in-context block-
+  level state, the "RAM") + `recall_memory` (vector
+  store of all prior messages, the "swap") +
+  `archival_memory` (separate vector store for long-
+  term notes, the "disk") with explicit paging tools
+  between tiers — lifted into canon log (immutable
+  stream analogue of recall but append-only) + per-NPC
+  projection (working set, analogue of core but
+  derived via `fold`, not mutated via tools) + brief
+  output cache (analogue of archival for compaction
+  entries)] + internal tools [`core_memory_append`/
+  `core_memory_replace`/`archival_memory_insert`/
+  `archival_memory_search`/`conversation_search`/
+  `conversation_search_date` — the LLM self-manages
+  its memory via tool calls; the negative reference
+  for canonsim: the LLM never mutates the canon, only
+  the simulator writes canon events, the LLM produces
+  Intent that the simulator validates] +
+  `conversation_search` retrieval [embed query +
+  cosine top-k — same shape as `generative_agents.md`
+  but without the three-signal weighting; letta's is
+  relevance-only, canonsim inherits the richer three-
+  signal shape] + `conversation_search_date` [time-
+  range filter on the log — the precedent for our
+  tick-range retrieval on the integer tick field] +
+  `core_memory_replace` string-replace on named blocks
+  [the anti-pattern; INV-5 forbids log edits,
+  corrections are new events] +
+  `summarize_messages_in_place` compaction-on-overflow
+  [oldest N messages summarised into one row via LLM
+  call, originals dropped from queue but retained in
+  recall — INV-1 forbids truncation; the canonsim
+  shape is reflection-on-recurrence (from
+  `generative_agents.md`): compaction = new events on
+  the log, originals never dropped] + `AgentState`
+  Pydantic serialisation [state mutated in place by
+  LLM tool calls; INV-1 (state = fold(log)) is the
+  inverse; our `state` is a pure projection of the
+  canon log, never a separate mutable row] +
+  pluggable `LLMClient` abstract base with per-
+  provider concrete classes [`OpenAILLMClient`/
+  `AnthropicLLMClient`/`GoogleLLMClient`/
+  `OllamaLLMClient`/`vLLMClient` — lifted into
+  `brief/llm_client.py`; one local implementation
+  (llama.cpp/Outlines per `TECH_NOTES.md` §1), same
+  abstract shape; the OpenAI/Anthropic/Google/vLLM
+  network dependencies are not lifted] +
+  `Agent.step()` per-step LLM call with tool-use loop
+  [the canonical LLM-agent hot loop, same shape as
+  `ai-town.md` `agentStep` and `generative_agents.md`
+  `agent_step`; phase 0 forbids the LLM call entirely]
+  + REST + WebSocket agent-as-a-service [canonical
+  LLM-agent-as-a-service pattern (same as ai-town);
+  `MVP_SCOPE.md` §2 non-goals exclude the server /
+  multi-tenant layer for phase 0] + OS-memory-
+  hierarchy analogy from paper arXiv:2310.08560
+  [the design lesson that shapes the phase-4 brief
+  layer — the brief is a managed context, not a
+  stuffed prompt]; explicitly positive on block-
+  manager shape + three-tier hierarchy + pluggable-
+  LLM-client interface + `conversation_search_date`
+  tick-range retrieval [phase-4 `brief/assembler.py`
+  + `brief/recall.py` + `brief/llm_client.py`
+  inherit the shapes]; explicitly negative on LLM
+  in hot loop [INV-4] + OpenAI/Anthropic/Google/
+  vLLM network dependencies [INV-4 stricter — local
+  llama.cpp/Outlines in phase 1+] +
+  `core_memory_replace` LLM-mutates-own-memory
+  [INV-5 inverse — corrections are new events] +
+  `summarize_messages_in_place` drops-originals
+  [INV-1 inverse — reflection-on-recurrence from
+  `generative_agents.md` is the canonsim shape] +
+  pgvector dependency for `recall_memory` [D-012
+  stdlib-only — stdlib SQLite + FTS5 per REFERENCES
+  §6 instead] + agent-state mutated by LLM [INV-1
+  inverse — state = fold(log), the LLM never mutates
+  state, the LLM produces Intent that the simulator
+  validates] + agent-as-a-service REST/WebSocket
+  [`MVP_SCOPE.md` §2 non-goal — no server in phase 0]
+  + flat `recall_memory` without per-channel routing
+  [no `seen`/`told`/`inferred` distinction — KI#3 has
+  no analogue here either]; cost benchmark ~$720/day
+  at 1 Hz for gpt-4-class models [bg-4 — overlaps
+  `generative_agents.md` Table 2 and `ai-town.md`]).
+  All three paraphrased from open-source corpus + paper
   per §0.4 / §0.7 (D-015).
-- **Licenses verified against `REFERENCES.md` §2** on
-  2026-08-26 (Brogue CE = AGPL-3.0; DCSS = GPL-2.0+;
-  KeeperRL = GPL-2.0) — no license drift between
-  catalog and index this iteration. KI#6-class
-  pitfall avoided; the catalog-row + index-row
-  license-match check is now a standing pre-flip step
-  recorded in STATUS FAQ.
-- §2 of `docs/REFERENCES_DEEP.md` flips ref-6-a/b/c
+- **License drift pre-flip caught**: §2 of
+  `docs/REFERENCES_DEEP.md` had ref-7-a listed as
+  "(paper)" — misleading; the catalog (`REFERENCES.md`
+  §5) says Apache-2.0 (the `joonspk-research/
+  generative_agents` repo). The paper is the academic
+  companion, not the license-bearing artefact. Fixed
+  in the same §2 edit that flipped ref-7-a/b/c todo →
+  done with the corrected "Apache-2.0 (repo) + paper"
+  annotation. KI#6-class pitfall avoided (the standing
+  pre-flip check from iter-0o FAQ holds, exercised
+  again in iter-0p).
+- §2 of `docs/REFERENCES_DEEP.md` flips ref-7-a/b/c
   todo → done with rich one-line verdicts (same shape
-  as ref-5 verdicts).
-  `docs/AGENT_NAVIGATION.md` §1 adds three new files
-  to `docs/ref/` list. `STATUS.md` header → iter-0o,
-  FAQ updates doc-loop counter to "fourteenth docs
-  iteration in a row" + adds the iter-0o row to the
-  "Substance over line count" pitfall table + KI#6
-  deleted per AGENTS §5 mandatory cleanup (closed
-  iter-0n, >2 iterations ago). `docs/TASKS.md` marks
-  ref-6 done in-place + collapses iter-0o to one
-  line in Done. No structural change → §3 of
-  AGENT_NAVIGATION untouched. No new stable
-  decision → DECISIONS untouched.
-- Files: `docs/ref/brogue.md`, `docs/ref/dcss.md`,
-  `docs/ref/keeperrl.md` (new);
+  as ref-5/ref-6 verdicts). `docs/AGENT_NAVIGATION.md`
+  §1 adds three new files to `docs/ref/` list.
+  `STATUS.md` header → iter-0p, FAQ updates doc-loop
+  counter to "fifteenth docs iteration in a row" +
+  adds the iter-0p row to the "Substance over line
+  count" pitfall table + license-drift FAQ row notes
+  the (paper) → Apache-2.0 (repo) + paper catch.
+  `docs/TASKS.md` marks ref-7 done in-place +
+  collapses iter-0p to one line in Done. No structural
+  change → §3 of AGENT_NAVIGATION untouched. No new
+  stable decision → DECISIONS untouched.
+- Files: `docs/ref/generative_agents.md`,
+  `docs/ref/ai_town.md`, `docs/ref/letta.md` (new);
   `docs/REFERENCES_DEEP.md`, `docs/AGENT_NAVIGATION.md`,
   `STATUS.md`, `docs/TASKS.md`, this file (updated).
   8 files — over the 3–5 soft limit (AGENTS §2.3);
@@ -99,19 +225,20 @@ iter-0o · 2026-08-26 · owner-requested ref-6 3-batch deep dive (D-022 exceptio
   per-ref files + 5 tracking files. No code touched;
   pytest -q green (13 tests, none depend on doc
   structure), ruff check . clean.
-- Doc-loop alarm: 14th docs iteration in a row
+- Doc-loop alarm: 15th docs iteration in a row
   (D-022 exception applies again — owner-requested
   reference continuation). iter-1 MUST be functional
   code; no further docs iterations without a fresh
   owner request.
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-  If the owner wants more refs — ref-7 (3-batch)
-  Stanford Generative Agents + ai-town + letta
-  (LLM-agent precedents — mostly negative; overlaps
-  bg-4 cost notes). Otherwise iter-1 inherits the
+- Next: iter-1 core plumbing per `docs/TASKS.md`. If
+  the owner wants more refs — ref-8 (3-batch) Azgaar
+  FMG + Natural Earth + GeoNames (worldgen data
+  donors; phase 5). Otherwise iter-1 inherits the
   two-stream RNG + multi-stream RNG + energy-based
   scheduler + continuous-time queue shapes directly
-  from these three ref-6 files.
+  from the three ref-6 files; the phase-1+ brief layer
+  inherits the memory stream + retrieval function +
+  block manager shapes from the three ref-7 files.
 
 ---
 iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive (D-022 exception)
@@ -231,18 +358,6 @@ iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
   MUST be functional code; no further docs iterations without a
   fresh owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
-iter-0d · 2026-08-25 · owner-requested infra restore (KI#1, KI#2)
-- Recreated `.gitignore` (logs/, output/, `*.jsonl` with tests/fixtures/
-  exception, caches) and the package skeleton (core/, sim/systems/, render/,
-  brief/, cli/, tests/, tests/playscripts/) — both lost in the initial zip
-  upload (KI#1). 12 files touched — over the 3–5 soft limit, owner-requested.
-- First executable tests: tests/test_smoke.py — pack data integrity + event
-  contract shape (13 tests). Fixed pyproject.toml package discovery so
-  `pip install -e ".[dev]"` works (KI#2 — the DoD gate was unreachable).
-- pytest -q green, ruff check . clean, editable install OK.
-- Next: iter-0e core-design research, then iter-1 core plumbing.
 
 ---
 iter-0e · 2026-08-25 · owner-requested core-design research

@@ -260,7 +260,74 @@
     Brogue CE, GPL-2.0+ for DCSS, GPL-2.0 for KeeperRL) —
     no KI#6-style drift this iteration.
   - `ref-7` (batch) Stanford Generative Agents + ai-town + letta — LLM-agent
-    precedents (mostly negative; overlaps bg-4).
+    precedents (mostly negative; overlaps bg-4). → done (iter-0p):
+    `docs/ref/generative_agents.md` (371 — Park et al. 2023 memory
+    stream shape one-to-one with our per-NPC knowledge records +
+    retrieval function `recency + importance + relevance` top-k
+    [lifted into `brief/recall.py` with stdlib embedder + tick
+    delta + event `weight` field] + reflection pattern [INV-1-
+    compatible compaction by recurrence — higher-level entries
+    are new log entries, not edits] + planning hierarchical
+    decomposition with re-plan-on-violation + `Persona`/
+    `Scratchpad` JSON split [lifted into `entities.json` +
+    `state = fold(log)`] + `agentStep` LLM hot loop [canonical
+    LLM-agent architecture] + 25-agent Smallville cost benchmark
+    ~$70/2-day for 25 agents [bg-4]; explicitly negative on LLM
+    in hot loop [INV-4] + OpenAI network [INV-4 stricter —
+    local llama.cpp/Outlines in phase 1+] + non-determinism
+    [INV-2 byte-identical impossible] + per-agent scratchpad
+    files [INV-1 amnesia — JSONL log + per-actor projection
+    is the inverse] + flat memory stream without per-channel
+    routing [no `seen`/`told`/`inferred`, KI#3 has no analogue]),
+    `docs/ref/ai_town.md` (345 — Convex reactive database +
+    `engine.ts` per-tick LLM call + `agentStep` action-grammar
+    discriminated-union [`MoveAction`/`SayAction`/`WaitAction`,
+    lifted into `templates.json` `action_type` enum] + `archives`
+    table compaction-on-overflow + `prompts/` text-file template
+    pattern [lifted into `templates.json` shape] + pixi.js
+    reactive frontend + GitHub OAuth multi-tenant + `memories`
+    table schema [same field shape as our per-NPC knowledge
+    records]; explicitly negative on Convex reactive substrate
+    [INV-1 + INV-2 inverse — JSONL log + SQLite index is the
+    right substrate] + LLM in hot loop [INV-4] + OpenAI/Anthropic/
+    OpenRouter network [INV-4 stricter] + reactive frontend
+    [`MVP_SCOPE` §2 non-goal — no UI in phase 0] + insertion-order
+    agent iteration [INV-2 fix = `sorted()` by ID, queue key
+    `(tick, sub_order, actor_id)`]; cost benchmark ~$50/day
+    for 25 agents at 1 Hz [bg-4]),
+    `docs/ref/letta.md` (353 — block manager context-window
+    partition [`system`/`persona`/`human`/`tools`/`scratchpad`/
+    `fifo_queue` blocks with per-block token budget, lifted into
+    `brief/assembler.py` block layout] + three-tier memory
+    hierarchy [core/recall/archival, lifted into canon log +
+    per-NPC projection + brief cache — same hierarchy shape,
+    different storage substrate] + internal tools
+    [`core_memory_append`/`core_memory_replace`/
+    `archival_memory_insert`/`conversation_search`/
+    `conversation_search_date`] + `summarize_messages_in_place`
+    compaction-on-overflow + `LLMClient` abstract base with
+    per-provider concrete classes [lifted into
+    `brief/llm_client.py` — local llama.cpp/Outlines only]
+    + REST + WebSocket agent-as-a-service + OS-memory-hierarchy
+    analogy [paper arXiv:2310.08560]; explicitly positive on
+    block-manager shape + three-tier hierarchy + pluggable-LLM-
+    client interface + `conversation_search_date` tick-range
+    retrieval; explicitly negative on LLM in hot loop [INV-4]
+    + OpenAI/Anthropic/Google/vLLM network [INV-4 stricter] +
+    `core_memory_replace` LLM-mutates-own-memory [INV-5 inverse
+    — corrections are new events] + `summarize_messages_in_place`
+    drops-originals [INV-1 inverse — reflection-on-recurrence
+    from `generative_agents.md` is the canonsim shape] +
+    pgvector dependency [D-012 stdlib-only — SQLite + FTS5
+    instead] + agent-as-a-service REST/WebSocket [`MVP_SCOPE`
+    §2 non-goal] + flat `recall_memory` without per-channel
+    routing [KI#3 no analogue]). All three open-licensed per
+    `REFERENCES.md` §5 — pattern lifting permitted, port the
+    shape not the syntax per §0.7 (D-015). License drift
+    pre-flip caught: ref-7-a was listed as "(paper)" in §2
+    index, misleading; catalog says Apache-2.0 (the repo);
+    fixed in the same §2 edit. No KI#6-class drift this
+    iteration.
   - `ref-8` (batch) Azgaar FMG + Natural Earth + GeoNames — worldgen data
     donors; phase 5.
   - `ref-9` (batch) libtcod + rot.js + Red Blob Games — FOV / pathfinding /
@@ -364,3 +431,23 @@
   new files to `docs/ref/` list. Licenses verified against
   catalog §2 — no KI#6-style drift this iteration. Doc-loop
   exception (fourteenth docs iter, D-022).
+- iter-0p · 2026-08-26 · owner-requested ref-7 3-batch deep
+  dive: `docs/ref/generative_agents.md` (371),
+  `docs/ref/ai_town.md` (345), `docs/ref/letta.md` (353) —
+  three open-licensed LLM-agent precedent references (Stanford
+  Generative Agents memory stream shape + retrieval function
+  + reflection pattern + `Persona`/`Scratchpad` split + cost
+  benchmark ~$70/2-day/25 agents, ai-town Convex reactive DB
+  + per-tick LLM call + discriminated-union action grammar +
+  `prompts/` text-file template + cost ~$50/day/25 agents,
+  letta block-manager context-window partition + three-tier
+  memory hierarchy [core/recall/archival] + internal memory
+  tools + OS-memory-hierarchy analogy). All three under cap
+  by construction. §2 of `docs/REFERENCES_DEEP.md` flips
+  ref-7-a/b/c todo → done + rich one-line verdicts +
+  fixes license drift on ref-7-a ["(paper)" → "Apache-2.0
+  (repo) + paper" — pre-flip caught, KI#6-class pitfall
+  avoided]. AGENT_NAVIGATION §1 adds three new files to
+  `docs/ref/` list. Licenses verified against catalog §5 —
+  no KI#6-style drift this iteration. Doc-loop exception
+  (fifteenth docs iter, D-022).
