@@ -65,13 +65,13 @@ Found a bug → first record it in `STATUS.md` as `KI#<N>`, then fix it.
   next iteration that touches `STATUS.md`. This is mandatory cleanup, same
   priority as writing new entries — not "later housekeeping".
 
-## 6. Output caps (anti-bloat — enforced every iteration)
+## 6. Output caps (substance over line count — enforced every iteration)
 
 | File | Cap |
 |---|---|
 | `STATUS.md` | ≤15 active KIs, ≤2 lines each; FAQ ≤20 entries; no stack traces or snippets — link the worklog entry |
 | `worklog.md` | ≤10 entries, 3–5 lines each; adding #11 requires deleting the oldest in the same edit (one in, one out) |
-| `docs/*.md` | ≤400 lines each (`MVP_SCOPE.md` ≤450). Over cap → trim before adding, in the same turn |
+| `docs/*.md` | ≤600 lines each. The cap is **substance-filtered**, not a hard wall — see §6.1. Over cap after a real cruft pass: keep, document the rationale in `worklog.md` |
 | `docs/AGENT_NAVIGATION.md` | structure changes only; never history or narrative |
 | `docs/DECISIONS.md` | append-only; ≤30 entries; supersede, don't delete |
 | `docs/TASKS.md` | done tasks collapse to one line at the end of each iteration |
@@ -79,6 +79,47 @@ Found a bug → first record it in `STATUS.md` as `KI#<N>`, then fix it.
 General rule: check the current size before writing to any of these. The trim
 is part of the task, not future work. Long-term design rationale goes to
 `docs/DECISIONS.md`, never to the worklog.
+
+### 6.1 Substance vs cruft (the cap is a signal, not a wall)
+
+A cap breach triggers a **cruft pass first**, never a substance cut. The
+owner's directive (iter-0j): "quality > crutches; determine what is garbage
+and what carries semantic/functional load." Cutting real depth to fit a line
+count is a crutch — forbidden. The hard cap is a generous ceiling (600) for
+scale; the substance-vs-cruft filter is the real anti-bloat law.
+
+**Cruft (cut always, before any substance):**
+
+- Filler words: "really", "actually", "essentially", "in fact", "indeed",
+  "as such", "basically". Tighter prose is more readable.
+- Restatements: if a clause already says X, the second "in other words, X"
+  paragraph is cruft — link the single owner of X instead (D-024).
+- Linker chains: "and so therefore we can see that, as a result, …" —
+  collapse to one connective or none.
+- Multi-clause run-ons that should be split: a sentence with three
+  semicolons is two sentences plus a list.
+- "As mentioned above" / "as noted earlier" without adding new value.
+- Decorative prose that does not carry a fact, a name, or a decision.
+
+**Substance (never cut to fit the cap):**
+
+- Named systems, classes, functions, files.
+- Concrete data structures with real field names.
+- Type enumerations and enum value lists (e.g. every event type with its
+  real fields — the iter-0i trim of the DF Legends XML event-type list
+  was a substance cut; this entry exists so it does not happen again).
+- Pseudo-code where it earns its keep (tick loops, queue keys, fold
+  examples).
+- Real numerical values, durations, thresholds, enum string values.
+- Per-source verdicts: "what we take / adapt / inspire / strengths /
+  weaknesses" — the entire point of a deep dive.
+- Cross-references and links to the single owner of a fact.
+
+**Test**: would removing this sentence or list cost the reader a concrete
+fact, a named reference, or a real data structure? If yes — substance, do
+not cut. If no — cruft, cut. The cap is reached only after the cruft is
+gone; if substance remains and the cap is exceeded, the file stays over and
+the worklog records why.
 
 ## 7. Git safety
 

@@ -136,8 +136,6 @@
   `docs/REFERENCES_DEEP.md` §1 (the plan table). Solo iterations for sources
   with ≥3 subsystems worth deep coverage; 2–3 per iter for the rest. Pick in
   order; skip if a phase hasn't shipped yet. Sequence:
-  - `ref-2` (solo) C:DDA `data/json/` schema — content-as-JSON at scale
-    (items, monsters, recipes, missions, factions). CC-BY-SA lets us lift.
   - `ref-3` (solo) Paradox event scripting (CK3 + EU4 + Stellaris) — full
     grammar: trigger, weight, mtth, effect, option, scope.
   - `ref-4` (batch) RimWorld + L4D Director + Alien: Isolation — pacing /
@@ -184,10 +182,12 @@
   gets `ref-N` backlog items (ref-1..ref-11); AGENT_NAVIGATION §1 + §3
   updated; STATUS FAQ gets three-places-three-jobs pitfall. Doc-loop alarm
   exception (seventh docs iter, D-022).
-- iter-0i · 2026-08-26 · owner-requested ref-1 solo deep dive: new §3 in
-  `docs/REFERENCES_DEEP.md` — DF worldgen + history layer (history ticks,
-  populations vs notables LOD, age/civ dynamics, artifact anchors,
-  reputation as event); §2 of same file aggressively trimmed to fit cap 400
-  (cross-refs preserved); STATUS FAQ updates doc-loop counter to eighth;
-  `ref-1` flipped from todo to Done. Doc-loop alarm exception (eighth
-  docs iter, D-022 applies again).
+- iter-0i · 2026-08-26 · owner-requested ref-1 solo deep dive: §3 in
+  `docs/REFERENCES_DEEP.md` (DF worldgen + history layer); §2 trimmed to
+  fit 400 cap (substance lost — restored in iter-0j). Doc-loop exception.
+- iter-0j · 2026-08-26 · owner-requested ref-2 + cap policy rewrite: §4
+  in `docs/REFERENCES_DEEP.md` (C:DDA `data/json/` schema); §2 restored
+  from iter-0i over-trim; AGENTS §6 rewritten with §6.1 substance-vs-
+  cruft criteria (D-025) — 400-line hard wall replaced by 600 ceiling +
+  substance filter; file now 737 lines (substance-justified). Doc-loop
+  exception (ninth docs iter).

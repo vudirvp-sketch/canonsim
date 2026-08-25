@@ -142,3 +142,48 @@ iter-0i · 2026-08-26 · owner-requested ref-1 deep dive (D-022 exception)
   docs iterations without a fresh owner request. 4 files touched — under
   the 3–5 soft limit.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0j · 2026-08-26 · owner-requested ref-2 + cap policy rewrite (D-022 exception)
+- **Cap policy rewrite** (AGENTS §6 + new §6.1, D-025 in DECISIONS):
+  rigid 400-line wall replaced by 600-line ceiling + substance-vs-cruft
+  filter. Filler / restatements / linker chains / decorative prose = cut
+  always; named systems, real field lists, type enumerations, pseudo-code,
+  per-source verdicts = never cut to fit cap. Over cap after a real cruft
+  pass: keep, document rationale here.
+- **§2 of `docs/REFERENCES_DEEP.md` restored** from iter-0h pre-trim:
+  full XML top-level elements list (16 entries), event-type enumeration
+  with real field names (`hf_died`/`hf_attacked_site`/`artifact_created`/
+  `created_site`/`destroyed_site`/`hf_reputation_change`/
+  `entity_reputation_change`), Mesa pseudo-code tick-loop block,
+  DataCollector detailed description, dropped "no determinism by
+  construction" Mesa weakness bullet. Substances that iter-0i had cut to
+  fit the 400 cap — owner flagged: "hard cap = crutches, not quality."
+- **§4 of `docs/REFERENCES_DEEP.md` new**: solo `ref-2` — Cataclysm:
+  DDA `data/json/` schema (CC-BY-SA). Covers 111 top-level entries,
+  item/monster/recipe/itemgroup/mission/NPC-faction/monster-faction
+  schemas with real field names from the actual repo
+  (`CleverRaven/Cataclysm-DDA` shallow-sparse-cloned to
+  `/home/z/my-project/external/cdda-ref` — outside the project, not
+  vendored). Per-source take / adapt / inspire / strengths / weaknesses /
+  verdict per the format template in §0. Lift patterns (pair-keyed
+  `relations` map shape, `abstract`+`copy-from` inheritance,
+  per-category file split, string-with-units, state-gated `epilogues`),
+  never text — CC-BY-SA viral forces the rule.
+- **`docs/REFERENCES_DEEP.md` now 737 lines** — over the new 600 cap.
+  Justified per AGENTS §6.1: 4 deep dives (Neighborly + Mesa + DF Legends
+  XML export schema + DF worldgen + C:DDA) each with concrete field
+  names, type enumerations, and per-source verdicts are exactly the
+  substance §6.1 protects. No cruft found in a real pass. This entry is
+  the rationale.
+- STATUS header → iter-0j; STATUS FAQ updates doc-loop counter to "ninth
+  docs iteration in a row" + adds a new "Substance over line count
+  (D-025)" pitfall; TASKS flips `ref-2` from todo to Done (one-line
+  collapse); DECISIONS appends D-025 (cap policy rewrite). No structural
+  change → AGENT_NAVIGATION untouched.
+- Doc-loop alarm: 9th docs iteration in a row (D-022 exception applies
+  again — owner-requested). iter-1 MUST be functional code; no further
+  docs iterations without a fresh owner request. 5 files touched
+  (AGENTS, DECISIONS, REFERENCES_DEEP, STATUS, this file, TASKS = 6 —
+  slightly over the 3–5 soft limit, owner-requested scope).
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
