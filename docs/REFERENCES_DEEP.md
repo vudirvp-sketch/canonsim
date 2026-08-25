@@ -99,9 +99,9 @@ to flip status), well within the 3–5 soft limit (AGENTS §2.3).
 | ref-1 | DF worldgen + history layer | `docs/ref/df_worldgen.md` | proprietary (read exported data only) | bg-1..bg-4 (track B); phase 5 LOD | history ticks abstractly; populations vs notables LOD ladder | done |
 | ref-2 | C:DDA `data/json/` schema | `docs/ref/cdda_data_json.md` | CC-BY-SA 3.0 | phase 3 (content-pack reference) | content-as-JSON at scale; per-category file split; pair-keyed `relations` | done |
 | ref-3 | Paradox event scripting | `docs/ref/paradox_scripting.md` | (closed wikis) | phase 3 (event grammar) | trigger / weight / mtth / effect / option / scope backbone | done |
-| ref-4-a | RimWorld | `docs/ref/rimworld.md` | closed | phase 3 (director ref) | storyteller = named anti-pattern (D-005) | todo |
-| ref-4-b | L4D Director | `docs/ref/l4d_director.md` | closed | phase 3 (director ref) | pacing algorithm — intensity ratchets | todo |
-| ref-4-c | Alien: Isolation | `docs/ref/alien_isolation.md` | closed | phase 3 (director ref) | Xenomorph director — anxiety-over-encounter design | todo |
+| ref-4-a | RimWorld | `docs/ref/rimworld.md` | closed | phase 3 (director ref) | Defs taxonomy + IncidentDef field shape + storyteller trio (D-005 anti-pattern named) | done |
+| ref-4-b | L4D Director | `docs/ref/l4d_director.md` | closed | phase 3 (director ref) | intensity ratchet + peak/rest clock + multi-channel family | done |
+| ref-4-c | Alien: Isolation | `docs/ref/alien_isolation.md` | closed | phase 3 (director ref) | two-AI split (actor vs director) + pressure-scalar cap-and-floor + encounter-window floor + three-axis anxiety (perceived/actual/unknown) | done |
 | ref-5-a | Wesnoth WML | `docs/ref/wesnoth_wml.md` | GPL | phase 3 (event grammar family) | data-driven event DSL with conditional blocks | todo |
 | ref-5-b | Endless Sky mission DSL | `docs/ref/endless_sky_dsl.md` | CC-BY-SA | phase 3 (event grammar family) | mission scripting shape; lightweight vs Paradox | todo |
 | ref-5-c | ink | `docs/ref/ink.md` | MIT | phase 3 (event grammar family) | narrative scripting language — choice + flow | todo |

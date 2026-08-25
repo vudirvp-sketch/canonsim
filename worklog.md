@@ -5,21 +5,47 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
-iter-0c · 2026-08-25 · owner-requested rev v2 merge + tavern pack data
-- REFERENCES.md: added §14 (layer/priority map, Must/Should/Could); rev-v2
-  sources admitted with "verify" licenses (sqlite-vec, nomic-embed-text,
-  bge-m3, cross-encoder rerankers); qdrant demoted to server-infra-only; FTS5
-  noted on SQLite; §13 phase-4 row updated; owner policy in §0.7 (inspiration,
-  never 1:1). D-017 records the merge policy + v2→ROADMAP phase mapping.
-- TECH_NOTES §6: static-lore retrieval stack + phase-1 QA metric ideas.
-- content/tavern_pack/ v0.1 drafted as data: entities (5 locations, 6 NPCs +
-  crowd, 5 items), 12 actions, rules (time/visibility/relations/knowledge/
-  states/fire/watch/director/importance), starter chronicle templates.
-  AGENT_NAVIGATION §1, README map, TASKS iter-1 wording synced (loader
-  consumes the drafted pack). 13 files touched — over the 3–5 soft limit,
-  owner-requested scope.
-- Doc-loop alarm (AGENTS §2.5): three docs/data iterations in a row — iter-1
-  must be functional code.
+iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
+- Three proprietary §10 source files: `docs/ref/rimworld.md` (253 —
+  Defs taxonomy, IncidentDef field triad `baseChance`/`earlyChance-
+  lateChance`/`minRefireDays` + `category` enum, storyteller trio
+  Cassandra/Phoebe/Randy, threat-points scalar, TaleDef chronicle
+  layer, QuestDef signals+parts arc shape, the Randy from-nothing
+  anti-pattern naming D-005); `docs/ref/l4d_director.md` (245 —
+  multi-channel Horde/S.I./Music family from Booth GDC 2009,
+  intensity ratchet `PeakThreshold`/`PeakDuration`/`RestMinDuration`/
+  `MaxPopulation`, peak/rest two-state clock with floors, spawn
+  budget = 1 per beat, player-cardinal survival bias as named
+  negative reference against `VISION.md` §6); `docs/ref/alien_
+  isolation.md` (296 — two-AI split actor vs director from GDC
+  2015 "The Perfect Panic", Pressure scalar with cap-and-floor
+  transitions, encounter windows with `MinGapBetweenEncounters`
+  floor, three-axis anxiety perceived/actual/unknown, threat map,
+  offscreen presence in vents, objective-broadcast pattern matching
+  Intent/Event, the "Director learns the player" as named
+  anti-pattern against `VISION.md` §6 player-blind canon law). All
+  paraphrased — patterns not content per §0.7 of `REFERENCES.md`
+  (D-015).
+- §2 of `docs/REFERENCES_DEEP.md` flips ref-4-a/b/c todo → done.
+  `docs/AGENT_NAVIGATION.md` §1 adds three new files to `docs/ref/`
+  list. `STATUS.md` header → iter-0m, FAQ updates doc-loop counter
+  to "twelfth docs iteration in a row" + adds the under-cap-by-
+  construction note for the three new files to the "Substance over
+  line count" pitfall. `docs/TASKS.md` marks ref-4 done in-place
+  + collapses iter-0m to one line in Done. No structural change →
+  §3 of AGENT_NAVIGATION untouched. No new stable decision →
+  DECISIONS untouched.
+- Files: `docs/ref/rimworld.md`, `docs/ref/l4d_director.md`,
+  `docs/ref/alien_isolation.md` (new); `docs/REFERENCES_DEEP.md`,
+  `docs/AGENT_NAVIGATION.md`, `STATUS.md`, `docs/TASKS.md`, this
+  file (updated). 8 files — over the 3–5 soft limit (AGENTS §2.3);
+  batched per-ref iterations inherently touch N new per-ref files
+  + 5 tracking files. No code touched; pytest -q green (13 tests,
+  none depend on doc structure), ruff check . clean.
+- Doc-loop alarm: 12th docs iteration in a row (D-022 exception
+  applies again — owner-requested reference continuation). iter-1
+  MUST be functional code; no further docs iterations without a
+  fresh owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
 
 ---

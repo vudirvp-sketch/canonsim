@@ -22,7 +22,7 @@
 | `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | research (iter-0e); absorbed into DECISIONS/TASKS on owner decision |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
 | `docs/REFERENCES_DEEP.md` | index + format template + iteration plan for per-ref deep dives; the deep-dive content lives in `docs/ref/` (D-026) | active (rots — quarterly review alongside `doc-2`) |
-| `docs/ref/` | per-reference deep dives (one file per source: `neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`, `paradox_scripting.md`, …); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review alongside `doc-2`) |
+| `docs/ref/` | per-reference deep dives (one file per source: `neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`, `paradox_scripting.md`, `rimworld.md`, `l4d_director.md`, `alien_isolation.md`, …); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review alongside `doc-2`) |
 | `schemas/event.schema.json` | machine-readable event contract | synced with `docs/EVENT_SCHEMA.md` |
 | `core/` | engine: clock, rng, queue, log writer, fold/replay | skeleton restored iter-0d; code lands iter-1 |
 | `sim/systems/` | the 8 systems (`MVP_SCOPE.md` §5) | skeleton restored iter-0d; code lands iter-2 |

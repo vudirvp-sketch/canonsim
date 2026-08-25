@@ -143,7 +143,22 @@
     per AGENTS §6.1 (three games × trigger/MTTH/weight/effect/scope/
     on_action subsystems with real field names + ~150+ on_action IDs).
   - `ref-4` (batch) RimWorld + L4D Director + Alien: Isolation — pacing /
-    storyteller trio; phase-3 director ref.
+    storyteller trio; phase-3 director ref. → done (iter-0m):
+    `docs/ref/rimworld.md` (253 — Defs taxonomy, IncidentDef field
+    triad, storyteller trio, threat-points scalar, TaleDef chronicle
+    layer, QuestDef signals+parts arc, Randy from-nothing anti-pattern
+    naming D-005), `docs/ref/l4d_director.md` (245 — multi-channel
+    Horde/S.I./Music family, intensity ratchet, peak/rest two-state
+    clock with floors, spawn budget = 1 per beat, player-cardinal
+    survival bias as named negative reference against `VISION.md` §6),
+    `docs/ref/alien_isolation.md` (296 — two-AI actor vs director split,
+    Pressure scalar with cap-and-floor transitions, encounter windows
+    with `MinGapBetweenEncounters` floor, three-axis anxiety
+    perceived/actual/unknown, offscreen presence in vents,
+    objective-broadcast matching Intent/Event, "Director learns the
+    player" as named anti-pattern against `VISION.md` §6 player-blind
+    canon law). All three proprietary §10 sources — design-notes only
+    per `REFERENCES.md` §0.5; patterns not content per §0.7 (D-015).
   - `ref-5` (batch) Wesnoth WML + Endless Sky mission DSL + ink + tracery —
     event / narrative grammar family.
   - `ref-6` (batch) Brogue + DCSS + KeeperRL — roguelike emergence +
@@ -211,3 +226,12 @@
   `REFERENCES_DEEP.md` flips ref-3 todo → done. AGENT_NAVIGATION §1
   adds `paradox_scripting.md` to the `docs/ref/` list. Doc-loop
   exception (eleventh docs iter, D-022).
+- iter-0m · 2026-08-26 · owner-requested ref-4 3-batch deep dive:
+  `docs/ref/rimworld.md` (253), `docs/ref/l4d_director.md` (245),
+  `docs/ref/alien_isolation.md` (296) — three proprietary §10
+  pacing/director references (RimWorld Defs+Storyteller, L4D
+  intensity ratchet + multi-channel, Alien two-AI split + three-axis
+  anxiety). All three under cap by construction (closed-source forces
+  field-shape-from-talks only). §2 of `REFERENCES_DEEP.md` flips
+  ref-4-a/b/c todo → done. AGENT_NAVIGATION §1 adds three new files
+  to `docs/ref/` list. Doc-loop exception (twelfth docs iter, D-022).
