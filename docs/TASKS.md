@@ -28,20 +28,39 @@
 - AC: steal / arson / talk = facts in the log with knowledge records;
   impossible stays impossible (T5 partial).
 
-### iter-3 · knowledge (days 7–8) — todo
+### iter-3 · knowledge + relations + expectations (days 7–8) — todo
 
 - Knowledge records; transfer with fidelity decay; suspicion / relations
   updates; watch-change transfer; NPC memory driving behavior (guards act on
   suspicion thresholds).
-- AC: characters know different things and react differently; T3 blind-NPC
-  passes.
+- **P2a NPC↔NPC relations** (D-020): sparse pair-keyed relation map — rumor
+  acceptance already weighs trust, trust now has a data home; enables guard
+  coordination and non-PC story lines.
+- **P2d expectation_violation** (KI#3): behaviour rules in `rules.json`
+  generate per-NPC expectations from schedule + position; perception
+  compares expected vs observed; mismatch emits an `inferred`-channel
+  knowledge record (e.g., `purse_missing_from_bar`). No schema change —
+  uses the existing `inferred` channel. Suspicion-from-absence now has a
+  legitimate trigger.
+- AC: characters know different things and react differently; NPCs notice
+  absences they had reason to expect; T3 blind-NPC passes.
 
-### iter-4 · director (days 9–10) — todo
+### iter-4 · director + goal ticker (days 9–10) — todo
 
 - Consequence buffer seeded at event time; triggers (time / place /
   threshold); stagnation detector releases; director on/off switch.
-- AC: seeded hooks fire causally; no "from nothing" complications; T4
-  irreversibility passes.
+- **P2b minimal goal/urge ticker** (D-021): goal → occasional autonomous
+  action (drunkard seeks ale, maid roams, guard patrols) through the same
+  queue, same tick discipline. Full LLM planning — never (`VISION.md` §6).
+- **P2e narrative entropy** for the stagnation detector (proposal, not yet
+  owner-decided): release the lowest-threshold seeded hook when entropy
+  (sum of seeded-hook weights + global suspicion + visible physical
+  threats) drops below threshold — not on a flat timer. Entropy computed
+  only from seeded hooks + visible state, never invents new threats
+  (D-005 preserved). See DIRECTOR_SPEC sketch in `docs/SPECS_BACKLOG.md`.
+- AC: seeded hooks fire causally; no "from nothing" complications; world
+  acts without the PC; T4 irreversibility passes; T8 director-off shows
+  ≥3 emergent chains.
 
 ### iter-5 · chronicle & CLI (days 11–12) — todo
 
@@ -51,9 +70,17 @@
 
 ### iter-6 · gate (days 13–14) — todo
 
-- Full T1–T8; director-off A/B on identical seed + playscript; M1/M2 metrics
-  report (thresholds set from baseline); manual playtest; phase-0 verdict in
-  `worklog.md`.
+- Full T1–T8; director-off A/B on identical seed + playscript; M1–M5
+  metric report (thresholds set from baseline); manual playtest; phase-0
+  verdict in `worklog.md`.
+- **M3 causal chain length** (D-019, P1b): mean/median depth of the `cause`
+  chain per event, from the log alone.
+- **M4 novelty/repetition** (D-019, P1c): rate of repeated (type, actor)
+  bigrams; share of distinct `knows` tokens. RimWorld's repetitive-tale
+  problem, measured.
+- **M5 non-PC event share** (D-019, P1d): events with actor ≠ player /
+  all events. "World not player-centered" (Kenshi/RimWorld lesson) made
+  measurable at the director-off gate.
 - AC: exit criteria `MVP_SCOPE.md` §16 all hold — or kill-criteria documented
   honestly.
 
@@ -97,6 +124,11 @@
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
   Python).
 - `perf-1` 10k-tick timing profile (target: seconds, not minutes).
+- `balance-1` 1000-headless-sim distribution harness: playscript runner with
+  sampled intents (seed-varied) → distribution plots of `suspicion` and
+  `fire_spread` over ticks. Validates that `rules.json` thresholds are tuned,
+  not guessed. Uses T1-determinism, no new infra. Prerequisite for iter-6
+  M-baseline (KI#4).
 - `doc-1` VISION freeze review after the phase-0 verdict.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
@@ -115,3 +147,9 @@
 - iter-0e · 2026-08-25 · owner-requested core-design research:
   `docs/CORE_DESIGN_RESEARCH.md` (reference synthesis, depth equation, gaps
   P1–P3, open questions Q1–Q4 for the owner).
+- iter-0g · 2026-08-26 · owner-requested research pass (Q1–Q3 yes, Q4 no):
+  Q1–Q3 absorbed as D-019..D-021; KI#3 expectation_violation, KI#4 balance
+  harness, KI#5 runtime-vs-fold logged; §2 of CORE_DESIGN_RESEARCH deepened
+  (Mesa, Neighborly, Red Blob, Game Programming Patterns); P1e/P2d/P2e/P3f
+  new proposals; SPECS_BACKLOG sketches extended (DIRECTOR/LEGEND/BRIEF);
+  MVP_SCOPE §4.2/§10/§15 updated. Doc-loop alarm exception (sixth docs iter).

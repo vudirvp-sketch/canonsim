@@ -78,7 +78,9 @@ beams...") — but the fact of the fire belongs to the simulator, not the model.
 
 NPC record: `id`, `name`, `role`, `position`, status flags (fatigue /
 intoxication / fear / injury), relations map to the PC (reputation, suspicion,
-trust, fear), knowledge set, mood trend, simple goal.
+trust, fear), **plus a sparse pair-keyed NPC↔NPC relations map (iter-3, P2a,
+D-020 — rumor trust weights have a data home)**, knowledge set, mood trend,
+simple goal.
 
 Ambient group entity: `npc_market_crowd_01` (the market crowd) — a passive
 knowledge-holder used by the §3 walkthrough and the rumor example in
@@ -212,6 +214,16 @@ Schema rules (short form; full form in EVENT_SCHEMA.md):
 - Blind-NPC rule: no record → the NPC cannot know it and cannot say it (T3).
 - A lie is a crafted record (distorted `knows`, or fidelity misrepresenting
   the source) — legal data, not a special mechanism.
+- **Expectation violation (iter-3, P2d, KI#3):** a behaviour rule in
+  `rules.json` generates per-NPC expectations from schedule + position
+  (e.g., "guard expects `purse_01` on the bar at watch start"); perception
+  compares expected vs observed; on mismatch, an `inferred`-channel
+  knowledge record is emitted (e.g., `knows: "purse_missing_from_bar"`,
+  cause-chained to the theft event). No new schema field — expectations
+  are behaviour functions, not state; the record uses the existing
+  `inferred` channel. This is the only legitimate trigger for
+  suspicion-from-absence: a guard cannot arrest on "purse not seen", but
+  can on `inferred: purse_missing_from_bar` cause-chained to `ev_0007`.
 
 ## 11. Director = consequence planner, not improviser
 
@@ -277,6 +289,15 @@ Plus T0 (from iter-1): every log line validates against
 
 - **M1 cross-system share:** events touching ≥2 systems / all events.
 - **M2 deferred hooks fired:** hooks released by trigger / hooks seeded.
+- **M3 causal chain length** (D-019, iter-6): mean/median depth of the
+  `cause` chain per event, from the log alone. Depth-equation Causality
+  factor, measured.
+- **M4 novelty/repetition** (D-019, iter-6): rate of repeated (type, actor)
+  bigrams; share of distinct `knows` tokens. RimWorld's repetitive-tale
+  problem, measured instead of felt.
+- **M5 non-PC event share** (D-019, iter-6): events with actor ≠ player /
+  all events. "World not player-centered" (Kenshi/RimWorld lesson) made
+  measurable at the director-off gate (T8).
 - **Causal-density checklist** — every event answers: what changed in the
   world · who learned what, at what fidelity · who can be wrong · who can lie
   · what became irreversible · what future conflict did it seed · can it be
@@ -289,7 +310,8 @@ Plus T0 (from iter-1): every log line validates against
 
 Thresholds are set at the iter-6 gate review from the measured baseline — not
 invented now. Direction: M1 non-trivial and rising across the slice; M2
-non-zero.
+non-zero; M3 mean ≥ 2 (one event, then another = failure); M4 novelty share
+rising; M5 non-zero at director-off.
 
 Signs of a living prototype: the player says "I'm in trouble *because* I did
 that"; the world remembers; old things resurface; characters know different

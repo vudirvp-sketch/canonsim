@@ -58,6 +58,10 @@ Adding depth means adding intersections, not adding content.
 | GearHead (§2) | story-fragment random generation | — | arc-fragment precedent (phase 3) |
 | ink / tracery (§4) | generative text skins | surface variety without depth | `render/` (iter-5); phase 6 skins |
 | Gaffer on Games (§8) | determinism discipline | — | INV-2; `TECH_NOTES.md` §4 |
+| Mesa (§2) | Python ABM pattern: Model + Scheduler + Agent — our tick queue is the scheduler, agents are stateful folds | pure ABM is episodic amnesia without an event log (The Sims problem); Mesa's `step()` is state-mutating, not event-emitting | iter-1 tick loop is Mesa-style; the JSONL log + `state_changes` is the amnesia fix |
+| Neighborly (§2) | agent-based settlement: emergent narrative from agent goals + interactions; closest existing cousin | weak epistemology — agents act but don't accumulate structured knowledge; no `known_by`, no fidelity | phase 5 settlement cousin; our `knowledge` records are the missing layer |
+| Red Blob Games (§8) | deterministic algorithmic foundations: A*, FOV, hex/grid math, polygon maps | pure geometry, no narrative; algorithms without an ontology produce puddles | phase 5 worldgen foundations; phase 0 = none (zero-external-code law) |
+| Game Programming Patterns (§8) | pattern vocabulary: Event Queue, Component, Command, State, Observer | patterns without invariants rot; vocabulary alone ships nothing | iter-1 core plumbing uses Event Queue + State; INV-1..INV-5 are the binding constraints that keep patterns honest |
 
 `†` Not in `REFERENCES.md` yet — §7 intake queue, D-016 procedure at the
 quarterly `doc-2` review.
@@ -79,6 +83,8 @@ with another source's fix:
 | The Sims: amnesia | event-sourced memory: state = fold(log) |
 | Brogue: no social layer | 8 systems × intersection matrix |
 | Lorebooks: no time, no causality | ticks + `cause` + knowledge records |
+| Mesa: pure ABM = episodic amnesia | event log + `state_changes` = the amnesia fix (The Sims lesson, ported to Python) |
+| Neighborly: weak epistemology | our `knowledge` layer (records + `known_by` + fidelity) is the missing epistemic substrate |
 
 The pattern: **depth comes from pairing each generative axis with an
 epistemic or causal ledger.** That is exactly what event sourcing gives us —
@@ -130,15 +136,24 @@ gaps (§6 P2).**
   before the first event. The log is the depth-measurement instrument; dirty
   chains poison every later metric and every "why did this happen" query.
 - **P1b M3 — causal chain length.** Mean/median depth of the `cause` chain
-  per event, computable from the log alone. Propose adding to
-  `MVP_SCOPE.md` §15 at the iter-6 gate: baseline first, thresholds from
-  measurement (same protocol as M1/M2).
+  per event, computable from the log alone. (absorbed → D-019, iter-0g;
+  added to `MVP_SCOPE.md` §15 at the iter-6 gate: baseline first,
+  thresholds from measurement, same protocol as M1/M2.)
 - **P1c M4 — novelty/repetition.** Rate of repeated (type, actor) bigrams;
   share of distinct `knows` tokens. RimWorld's repetitive-tale problem,
-  measured instead of felt.
+  measured instead of felt. (absorbed → D-019, iter-0g.)
 - **P1d M5 — non-PC event share.** Events with actor ≠ player / all events.
   Makes "world not player-centered" (Kenshi/RimWorld lesson) measurable at
-  the director-off gate (T8).
+  the director-off gate (T8). (absorbed → D-019, iter-0g.)
+- **P1e Runtime state vs test fold.** The `fold(log) = state` rule (INV-1,
+  `EVENT_SCHEMA.md` §1) is the **truth-test** (T2) and the SQLite rebuild
+  path. Runtime must use an **incremental projection** —
+  `state_new = state_old.apply(event)` per event as it is emitted, with the
+  SQLite index kept in lockstep. Using `fold(log)` on the runtime hot path
+  is O(N) per query and O(N²) on a running system; the ambiguity is silent
+  and bites only at scale. Recorded as D-023, KI#5; clarify in
+  `EVENT_SCHEMA.md` §1 next time it is touched. No new proposal — a
+  clarification of an existing invariant, not a feature.
 
 ### P2 — phase-0/1 candidates (small, real additions — owner decision)
 
@@ -147,17 +162,42 @@ gaps (§6 P2).**
   (`content/tavern_pack/rules.json`) — teller↔listener trust has no data
   home. Sparse pair-keyed relation map; no event-schema break (relations are
   state, not event fields). Payoff: guard coordination, non-PC story lines,
-  richer rumor dynamics. Recommend: fold into iter-3.
+  richer rumor dynamics. (absorbed → D-020, iter-0g; folded into iter-3.)
 - **P2b Minimal goal/urge ticker.** `goal` is inert data today; the world
   only reacts to the PC. Minimal version: goal → occasional autonomous
   action (drunkard seeks ale, maid roams, guard patrols) through the same
-  queue, same tick discipline. Recommend: minimal in phase 0 (iter-3/4) so
-  the gate can measure aliveness; full LLM planning — never (not a
-  Generative Agents clone; `VISION.md` §6).
+  queue, same tick discipline. (absorbed → D-021, iter-0g; minimal in
+  iter-3/4 so the gate can measure aliveness; full LLM planning — never,
+  not a Generative Agents clone, `VISION.md` §6 held.)
 - **P2c Detail callbacks in talk.** "Old events surface later" is a victory
   condition (`MVP_SCOPE.md` §1): talk topic selection = most salient known
   fact of the teller. Cheap; makes knowledge *used*, not just stored.
   Candidate for iter-3.
+- **P2d expectation_violation.** NPC reacts only to records *present* in
+  `knowledge` today — they cannot notice that the purse is gone, or that
+  the expected guard is missing. Yet investigation mechanics
+  (suspicion-from-absence) require exactly that. The elegant fix uses
+  **no new schema field**: a behaviour rule in `rules.json` generates
+  per-NPC expectations from schedule + position (e.g., "guard expects
+  `purse_01` on the bar at watch start"); the perception system compares
+  expected vs observed; on mismatch, it emits an ordinary knowledge
+  record with `channel: "inferred"` and a `knows` token like
+  `purse_missing_from_bar`, cause-chained to the theft event. Expectations
+  are behaviour functions, not state; the record uses the existing
+  `inferred` channel. This is the only legitimate trigger for
+  suspicion-from-absence — a guard cannot arrest on "purse not seen", but
+  can on `inferred: purse_missing_from_bar` cause-chained to `ev_0007`.
+  Slated for iter-3 (KI#3); no schema bump.
+- **P2e Narrative entropy for the stagnation detector.** The current
+  `release_after_ticks_without_visible_event: 90` (`rules.json` director)
+  is a flat timer. A more honest trigger: release the lowest-threshold
+  seeded hook when **narrative entropy** drops below a threshold, where
+  entropy = sum(weights of seeded hooks) + global suspicion + visible
+  physical threats. Crucially, entropy is computed only from **seeded
+  hooks + visible state** — never invents new threats (D-005 preserved).
+  This refines the stagnation_detector from "boredom timer" to "tension
+  floor sensor". Lands in `DIRECTOR_SPEC` (iter-4); replaces the flat
+  timer, does not add a new system.
 
 ### P3 — later-phase records (no action now)
 
@@ -179,6 +219,18 @@ gaps (§6 P2).**
   views (§4 free win) for the source signal. Prevents "events that
   happened but no longer matter" — the depth-equation Memory factor made
   observable in NPC behavior, not just in the chronicle.
+- **P3f** Trait crystallization. Three or more related `knowledge.records`
+  collapse into a discrete belief token (e.g., `paranoid_about_thieves`
+  after a guard witnesses 3+ theft-related events). Traits are **derived
+  state** — a fold over a subset of the log — never stored as primary
+  data (INV-1 preserved); on demand they expand back to their source
+  records for the brief. Lands in `LEGEND_SPEC` (phase 4); prevents
+  long-running NPCs from accumulating unbounded records in working memory
+  while keeping the log the only truth. Differs from P3e: P3e is a
+  per-NPC valence (continuous, behavior-modifying), P3f is a discrete
+  semantic belief (token-level, brief-substituting). Together they close
+  the Memory factor of the depth equation at phase 3+ — P3e makes
+  memory *felt*, P3f makes memory *compressible*.
 
 ## 7. Reference intake candidates (owner queue for `doc-2`)
 
@@ -189,9 +241,23 @@ academic lineage: TALE-SPIN (Meehan 1977), UNIVERSE (Lebowitz 1984), Façade
 D-016 (exact-name verification; proprietary sources stay pattern-only).
 None enters the catalog before verification.
 
-## 8. Open questions for the owner
+## 8. Owner decisions (iter-0g, 2026-08-26)
 
-- **Q1** Adopt M3/M4/M5 (P1b–P1d) into the iter-6 metric set? (recommend: yes)
-- **Q2** NPC↔NPC relations in iter-3 (P2a)? (recommend: yes)
-- **Q3** Minimal goal/urge ticker in phase 0 (P2b)? (recommend: minimal yes)
-- **Q4** Proceed to iter-1 now, or one more research pass first?
+- **Q1 → yes (D-019).** M3/M4/M5 flip from proposals to accepted iter-6
+  metric baseline. P1b–P1d enacted.
+- **Q2 → yes (D-020).** NPC↔NPC relations flip from proposal to accepted
+  iter-3 scope. P2a enacted.
+- **Q3 → yes (D-021).** Minimal goal/urge ticker flips from proposal to
+  accepted iter-3/4 scope. P2b enacted (minimal in phase 0; full LLM
+  planning — never, `VISION.md` §6 held).
+- **Q4 → no, one more research pass (D-022).** This iteration is that
+  pass. iter-1 is the next functional step. Doc-loop alarm fires (sixth
+  docs iteration in a row); owner-requested exception applies.
+
+New proposals from the iter-0g audit (no owner decision yet): P1e (KI#5
+runtime-vs-fold clarification), P2d (KI#3 expectation_violation, slated
+for iter-3), P2e (entropy refinement for iter-4 director), P3f (trait
+crystallization for phase 4 LEGEND_SPEC). P2c remains a candidate for
+iter-3 (owner not yet decided).
+
+Open questions blocking iter-1: none.

@@ -86,3 +86,19 @@ iter-0f · 2026-08-26 · owner-requested manifesto absorption (4 surgical edits)
 - Doc-loop alarm: 5th docs iteration in a row. iter-1 MUST be functional
   code; no further docs iterations without an owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0g · 2026-08-26 · owner-requested research pass (Q1–Q3 yes, Q4 no)
+- Owner answered CORE_DESIGN_RESEARCH §8 Q1–Q4: M3/M4/M5 → iter-6 (D-019);
+  NPC↔NPC relations → iter-3 (D-020); goal/urge ticker → iter-3/4 (D-021);
+  one more research pass before iter-1 (D-022, doc-loop exception). KI#1,
+  KI#2 deleted per AGENTS §5 (closed ≥3 iterations).
+- Audit of owner's critique vs repo: 3 real gaps logged as KI#3
+  (expectation_violation), KI#4 (balance harness), KI#5 (runtime-vs-fold).
+  ~55% of critique already in docs; ~20% mistimed. §2 deepened (Mesa,
+  Neighborly, Red Blob, Game Programming Patterns); P1e/P2d/P2e/P3f new.
+  7 files touched — over the 3–5 soft limit, owner-requested scope.
+- Files: STATUS, worklog, CORE_DESIGN_RESEARCH, DECISIONS, TASKS,
+  SPECS_BACKLOG, MVP_SCOPE. AGENT_NAVIGATION unchanged. No code touched.
+- Next: iter-1 core plumbing per `docs/TASKS.md`; no further docs iterations
+  without an owner request.
