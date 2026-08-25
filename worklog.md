@@ -5,6 +5,115 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
+iter-0o · 2026-08-26 · owner-requested ref-6 3-batch deep dive (D-022 exception)
+- Three open-licensed roguelike emergence + micro-sim family files:
+  `docs/ref/brogue.md` (326 — Brogue CE two-stream RNG
+  `RNG_SUBSTANTIVE`/`RNG_COSMETIC` with `brogueAssert`
+  scope guards + `assureCosmeticRNG` macro for stream
+  switching, 36-byte no-wall-clock recording header in
+  `Recordings.c` writeHeaderInfo [bytes 0-14 version,
+  byte 15 mode, 16-23 seed uint64, 24-27 player turn
+  uint32, 28-31 deepest level uint32, 32-35 length
+  uint32], `promoteTile` per-layer state-transition
+  primitive with flag-gated trigger sources
+  [`TM_IS_FLAMMABLE`/`TM_PROMOTES_ON_ELECTRICITY`/
+  `TM_IS_WIRED`/`promoteChance`], multi-pass
+  environment tick with read→write→cleanup pass
+  separation, layered `pmap[x][y].layers[layer]`
+  cell-stack, `updateVolumetricMedia` stochastic gas
+  diffusion with stochastic rounding, `paintLight`
+  additive RGB over `getFOVMask`, `randomNumbers
+  Generated` audit counter + `AUDIT_RNG` debug build,
+  the "small alphabet deep composition" lesson,
+  explicitly negative on in-memory `pmap` state
+  model [INV-1 amnesia] + `time(NULL)` seed fallback
+  [we never loosen INV-2]); `docs/ref/dcss.md`
+  (360 — DCSS multi-stream RNG [`rng_type` enum:
+  `GAMEPLAY`/`UI`/`SYSTEM_SPECIFIC`/`LEVELGEN`+
+  per-branch with `NUM_RNGS = LEVELGEN +
+  NUM_BRANCHES`, RAII `rng::generator` for stream
+  switching, persistent `FixedVector<PcgRNG,
+  NUM_RNGS>` saved to save file, `ASSERT_stable`
+  scope guard, `peek_uint32/64` non-advancing reads,
+  `defer_rand` infinite lazy tree, energy-based
+  turn scheduler [`speed_increment`/
+  `BASELINE_DELAY=10`/`div_rand_round` stochastic
+  rounding], `dgn_event_dispatcher` positional event
+  system [`DET_*` bitflags + per-position listeners +
+  vetoable], `.des` vault grammar [`NAME`/`TAGS`/
+  `DEPTH`/`CHANCE`/`SUBST`/`FTILE` + Lua escape
+  hatch], 15-year-codebase-scales discipline
+  precedent, explicitly negative on in-memory
+  monster struct state [INV-1 amnesia] + Lua-in-
+  vaults escape [INV-4 stricter] + no knowledge
+  records + no director); `docs/ref/keeperrl.md`
+  (444 — continuous-time queue
+  [`map<ExtendedTime, Queue>` with
+  `players`/`nonPlayers` deques, `orderMap` per-
+  queue-position tiebreaker, `extraTurn` flag for
+  haste], `Model::tick` per-tick update order
+  [creatures → levels → collectives → territory →
+  external], `Collective::tick` 11-step subsystem
+  update, `getRebellionProbability` small-formula
+  social dynamics [12-line prisoner/fighter ratio
+  formula], `ExternalEnemies` 500-wave pre-computed
+  planner [`firstAttackDelay=1800`/
+  `attackInterval=1200`/`attackVariation=450`,
+  dispatched by `popNextWave(localTime)`],
+  `GameEvent` X-macro 24-event closed variant,
+  `cereal` binary serialisation, data-driven content
+  DSL with `inherit`, `Fire` minimal optional-state
+  machine, single-instance `extern RandomGen Random`,
+  explicitly negative on single-stream RNG + binary
+  save [INV-1 JSONL is inverse] + no knowledge
+  records + custom DSL with no schema [D-023 fix]).
+  All three paraphrased from the open-source corpus
+  per §0.4 / §0.7 (D-015).
+- **Licenses verified against `REFERENCES.md` §2** on
+  2026-08-26 (Brogue CE = AGPL-3.0; DCSS = GPL-2.0+;
+  KeeperRL = GPL-2.0) — no license drift between
+  catalog and index this iteration. KI#6-class
+  pitfall avoided; the catalog-row + index-row
+  license-match check is now a standing pre-flip step
+  recorded in STATUS FAQ.
+- §2 of `docs/REFERENCES_DEEP.md` flips ref-6-a/b/c
+  todo → done with rich one-line verdicts (same shape
+  as ref-5 verdicts).
+  `docs/AGENT_NAVIGATION.md` §1 adds three new files
+  to `docs/ref/` list. `STATUS.md` header → iter-0o,
+  FAQ updates doc-loop counter to "fourteenth docs
+  iteration in a row" + adds the iter-0o row to the
+  "Substance over line count" pitfall table + KI#6
+  deleted per AGENTS §5 mandatory cleanup (closed
+  iter-0n, >2 iterations ago). `docs/TASKS.md` marks
+  ref-6 done in-place + collapses iter-0o to one
+  line in Done. No structural change → §3 of
+  AGENT_NAVIGATION untouched. No new stable
+  decision → DECISIONS untouched.
+- Files: `docs/ref/brogue.md`, `docs/ref/dcss.md`,
+  `docs/ref/keeperrl.md` (new);
+  `docs/REFERENCES_DEEP.md`, `docs/AGENT_NAVIGATION.md`,
+  `STATUS.md`, `docs/TASKS.md`, this file (updated).
+  8 files — over the 3–5 soft limit (AGENTS §2.3);
+  batched per-ref iterations inherently touch N new
+  per-ref files + 5 tracking files. No code touched;
+  pytest -q green (13 tests, none depend on doc
+  structure), ruff check . clean.
+- Doc-loop alarm: 14th docs iteration in a row
+  (D-022 exception applies again — owner-requested
+  reference continuation). iter-1 MUST be functional
+  code; no further docs iterations without a fresh
+  owner request.
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
+  If the owner wants more refs — ref-7 (3-batch)
+  Stanford Generative Agents + ai-town + letta
+  (LLM-agent precedents — mostly negative; overlaps
+  bg-4 cost notes). Otherwise iter-1 inherits the
+  two-stream RNG + multi-stream RNG + energy-based
+  scheduler + continuous-time queue shapes directly
+  from these three ref-6 files.
+
+---
 iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive (D-022 exception)
 - Four open-licensed event/narrative grammar family files:
   `docs/ref/wesnoth_wml.md` (244 — the `[event]`/`[filter]`/action
@@ -55,7 +164,7 @@ iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive (D-022 exceptio
   "Apache-2.0"); both fixed in the same §2 edit that
   flipped ref-5-a/b/c/d todo → done + richer one-line
   verdicts. AGENT_NAVIGATION §1 adds the four new files
-  to `docs/ref/` list. STATUS.md header → iter-0n, FAQ
+  to `docs/ref/` list. STATUS header → iter-0n, FAQ
   updates doc-loop counter to "thirteenth docs iteration
   in a row" + adds the "License drift between catalog and
   index" pitfall + adds KI#6 closed-in-iter entry to
@@ -263,41 +372,4 @@ iter-0j · 2026-08-26 · owner-requested ref-2 + cap policy rewrite (D-022 excep
   docs iterations without a fresh owner request. 5 files touched
   (AGENTS, DECISIONS, REFERENCES_DEEP, STATUS, this file, TASKS = 6 —
   slightly over the 3–5 soft limit, owner-requested scope).
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
-iter-0k · 2026-08-26 · owner-requested REFERENCES_DEEP split (D-022 exception)
-- **Split deep-dive content out of `docs/REFERENCES_DEEP.md` into per-ref
-  files** under new `docs/ref/` subdirectory. Five files created
-  (`neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`,
-  `cdda_data_json.md`) carrying iter-0h + ref-1 + ref-2 content verbatim,
-  with cross-refs updated (`§2 above` → `df_legends_xml.md`,
-  `(see below)` → `mesa.md`). Sizes 101–244 lines — under the 600 cap by
-  construction. `docs/REFERENCES_DEEP.md` rewritten as index (133 lines):
-  header + §0 format template + §1 iteration plan + §2 NEW index table
-  (one row per ref: id, source, file, license, phase, one-line verdict,
-  status). D-026 supersedes D-024's single-file wording; three-place
-  anti-drift policy (catalog ↔ synthesis ↔ deep dives) unchanged —
-  deep-dive place is now a directory. AGENT_NAVIGATION §1 + §3 updated.
-- **Why split**: at iter-0j `REFERENCES_DEEP.md` was 737 lines (over the
-  600 cap, justified per D-025). The §1 iteration plan has 9 more ref-N
-  iterations queued (ref-3..ref-11), projecting ~2500–3500 lines at
-  single-file scale (4–6× the cap). The §6.1 substance-vs-cruft filter
-  is a defence against cutting real depth to fit a line count, not a
-  licence for unbounded growth. Same logic that D-024 applied
-  recursively to catalog/synthesis/deep-dive split applies again:
-  when one place bloats, split the place. Future ref-N iterations touch
-  2 files (one new `docs/ref/<source>.md` + the index to flip status) —
-  well within the 3–5 soft limit.
-- Files: `docs/ref/neighborly.md`, `docs/ref/mesa.md`,
-  `docs/ref/df_legends_xml.md`, `docs/ref/df_worldgen.md`,
-  `docs/ref/cdda_data_json.md` (new); `docs/REFERENCES_DEEP.md`,
-  `docs/DECISIONS.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md`,
-  `docs/TASKS.md`, this file (updated). 11 files — over the 3–5 soft
-  limit (AGENTS §2.3); restructure inherently touches all restructured
-  items + indexes tracking them. No code touched; pytest -q green
-  (13 tests, none depend on doc structure), ruff check . clean.
-- Doc-loop alarm: 10th docs iteration in a row (D-022 exception applies
-  again — owner-requested restructure). iter-1 MUST be functional code;
-  no further docs iterations without a fresh owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.

@@ -201,7 +201,64 @@
     "GPL-3.0 code; mixed assets") and ref-5-d ("CC0" vs catalog
     "Apache-2.0"); both fixed in the same §2 edit.
   - `ref-6` (batch) Brogue + DCSS + KeeperRL — roguelike emergence +
-    micro-sim.
+    micro-sim. → done (iter-0o): `docs/ref/brogue.md` (326 — two-stream
+    RNG `RNG_SUBSTANTIVE`/`RNG_COSMETIC` with `brogueAssert`
+    scope guards, 36-byte no-wall-clock recording header
+    [version/seed/turn/level/length], `promoteTile` per-layer
+    state-transition primitive with flag-gated trigger sources
+    [`TM_IS_FLAMMABLE`/`TM_PROMOTES_ON_ELECTRICITY`/
+    `TM_IS_WIRED`/`promoteChance`], multi-pass environment
+    tick with read→write→cleanup pass separation, layered
+    `pmap[x][y].layers[layer]` cell-stack, `updateVolumetricMedia`
+    stochastic gas diffusion with `rand_range(0, numSpaces - 1) <
+    (sum % numSpaces)` stochastic rounding, `paintLight` additive
+    RGB over `getFOVMask`, `randomNumbersGenerated` audit counter,
+    the "small alphabet deep composition" lesson [fire/gas/water/
+    light ~5 rules → emergent chains], explicitly negative on
+    in-memory `pmap` state model [INV-1 amnesia] + `time(NULL)`
+    seed fallback [we never loosen INV-2]),
+    `docs/ref/dcss.md` (360 — multi-stream RNG `rng_type` enum
+    [`GAMEPLAY`/`UI`/`SYSTEM_SPECIFIC`/`LEVELGEN`+per-branch,
+    NUM_RNGS = LEVELGEN + NUM_BRANCHES], RAII `rng::generator`
+    for stream switching, PCG generator, `ASSERT_stable` scope
+    guard [snapshot+assert no consumption on exit], `peek_uint32/
+    64` non-advancing reads, `defer_rand` infinite lazy tree
+    [functional randomness — same path always same value],
+    energy-based turn scheduler [`speed_increment`/
+    `BASELINE_DELAY=10`/`div_rand_round` stochastic rounding],
+    `dgn_event_dispatcher` positional event system [`DET_*`
+    bitflags + per-position listeners + vetoable], `.des` vault
+    grammar [`NAME`/`TAGS`/`DEPTH`/`CHANCE`/`SUBST`/`FTILE` +
+    Lua `: ... :` escape hatch], 15-year-codebase-scales
+    discipline precedent, explicitly negative on in-memory
+    monster struct state [INV-1 amnesia] + Lua-in-vaults escape
+    [INV-4 stricter] + no knowledge records + no director),
+    `docs/ref/keeperrl.md` (444 — continuous-time queue
+    [`map<ExtendedTime, Queue>` with `players`/`nonPlayers`
+    deques, `orderMap` per-queue-position tiebreaker,
+    `extraTurn` flag for haste], `Model::tick` per-tick update
+    order [creatures → levels → collectives → territory →
+    external], `Collective::tick` 11-step subsystem update
+    [border/rebellion/guard/minion-promotions/danger-cache/
+    control/zones/task-map/constructions/dancing/warnings],
+    `getRebellionProbability` small-formula social dynamics
+    [12-line prisoner/fighter ratio formula],
+    `ExternalEnemies` 500-wave pre-computed planner
+    [`firstAttackDelay=1800`/`attackInterval=1200`/
+    `attackVariation=450`, dispatched by `popNextWave(local
+    Time)` small-if], `GameEvent` X-macro 24-event closed
+    variant, `cereal` binary serialisation, data-driven
+    content DSL [`data_free/game_config/*.txt` with `inherit`],
+    `Fire` minimal optional-state machine, single-instance
+    `extern RandomGen Random`, explicitly negative on
+    single-stream RNG [no two-stream discipline] + binary
+    save [INV-1 JSONL is inverse] + no knowledge records +
+    custom DSL with no schema [D-023 fix]). All three open-
+    licensed per `REFERENCES.md` §2 — pattern lifting
+    permitted, port the shape not the syntax per §0.7
+    (D-015). Licenses verified against catalog §2 (AGPL for
+    Brogue CE, GPL-2.0+ for DCSS, GPL-2.0 for KeeperRL) —
+    no KI#6-style drift this iteration.
   - `ref-7` (batch) Stanford Generative Agents + ai-town + letta — LLM-agent
     precedents (mostly negative; overlaps bg-4).
   - `ref-8` (batch) Azgaar FMG + Natural Earth + GeoNames — worldgen data
@@ -288,3 +345,22 @@
   and ref-5-d (KI#6 closed in-iter). AGENT_NAVIGATION §1 adds
   four new files to `docs/ref/` list. Doc-loop exception (thirteenth
   docs iter, D-022).
+- iter-0o · 2026-08-26 · owner-requested ref-6 3-batch deep dive:
+  `docs/ref/brogue.md` (326), `docs/ref/dcss.md` (360),
+  `docs/ref/keeperrl.md` (444) — three open-licensed roguelike
+  emergence + micro-sim references (Brogue CE two-stream RNG
+  + 36-byte no-wall-clock recording header + `promoteTile` +
+  multi-pass environment tick, DCSS multi-stream RNG +
+  `ASSERT_stable` + energy-based turn scheduler + `dgn_event_
+  dispatcher` + `.des` vault grammar, KeeperRL continuous-time
+  queue + `Model::tick` per-tick update order +
+  `getRebellionProbability` small-formula social dynamics +
+  `ExternalEnemies` 500-wave pre-computed planner +
+  `GameEvent` X-macro variant). All three under cap by
+  construction (pattern-not-content rule §0.7 + the shape-lift
+  keeps each file to mechanics layer only). §2 of
+  `REFERENCES_DEEP.md` flips ref-6-a/b/c todo → done +
+  richer one-line verdicts. AGENT_NAVIGATION §1 adds three
+  new files to `docs/ref/` list. Licenses verified against
+  catalog §2 — no KI#6-style drift this iteration. Doc-loop
+  exception (fourteenth docs iter, D-022).
