@@ -5,20 +5,6 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
-iter-0b · 2026-08-25 · owner-requested docs revision
-- Review pass over all docs (cross-refs, invariants, schema sync): fixed the
-  dangling `npc_market_crowd_01` entity (MVP_SCOPE §4.2 ambient-entity note);
-  clarified the header-shape test target (TASKS iter-1).
-- Added `docs/REFERENCES.md`: curated external-source catalog from the owner's
-  survey, licenses verified 2026-08-25 (two passes: web search, then GitHub
-  search-by-exact-name + raw LICENSE probes); wired into ROADMAP §4,
-  AGENT_NAVIGATION, README, DECISIONS D-016.
-- Owner-caught miss fixed: Labyrinthia-AI, ReputeX-Engine and Echo DO exist —
-  restored into §9. Pass-1 SEO search misses small repos (lesson in §11, D-016).
-  Still unverified: StrobeServer, Story-Engine, Astray-as-Lua (misattributed).
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
 iter-0c · 2026-08-25 · owner-requested rev v2 merge + tavern pack data
 - REFERENCES.md: added §14 (layer/priority map, Must/Should/Could); rev-v2
   sources admitted with "verify" licenses (sqlite-vec, nomic-embed-text,
@@ -213,4 +199,42 @@ iter-0k · 2026-08-26 · owner-requested REFERENCES_DEEP split (D-022 exception)
 - Doc-loop alarm: 10th docs iteration in a row (D-022 exception applies
   again — owner-requested restructure). iter-1 MUST be functional code;
   no further docs iterations without a fresh owner request.
+- Next: iter-1 core plumbing per `docs/TASKS.md`.
+
+---
+iter-0l · 2026-08-26 · owner-requested ref-3 solo deep dive (D-022 exception)
+- New `docs/ref/paradox_scripting.md` (605 lines, 5 over the 600 cap per
+  §6.1 substance — three games × trigger/MTTH/weight/effect/scope/
+  on_action subsystems with real field names, ~150+ on_action IDs,
+  the `every/random/any` iterator trinity, the `weight_multiplier`
+  shape, the `immediate + option + after` three-phase effect lifecycle,
+  the `add_hook` family as P3a precedent, the MTTH anti-pattern named
+  against INV-2). Research: 15 wiki pages fetched (CK3 Events /
+  Event_modding / Triggers / Effects / Scopes, EU4 Event_modding /
+  Conditions / Effects / Scope, Stellaris Event_modding / Conditions
+  / Effects / Scopes / On_actions), paraphrased — patterns not content
+  per §0.7 of `REFERENCES.md` (D-015). Cruft pass: file was 614 → 605
+  (trimmed picture/portrait section that we drop entirely; tightened
+  restatements between "What we adapt" and "Weaknesses"; condensed
+  Strengths intro lines).
+- §2 of `docs/REFERENCES_DEEP.md` flips ref-3 from todo → done.
+  `docs/AGENT_NAVIGATION.md` §1 adds `paradox_scripting.md` to the
+  `docs/ref/` list. `STATUS.md` header → iter-0l, FAQ updates doc-loop
+  counter to "eleventh docs iteration in a row" + adds the substance-
+  vs-cap breach note to the "Substance over line count" pitfall.
+  `docs/TASKS.md` marks ref-3 done in-place + collapses iter-0l to one
+  line in the Done section. No structural change → §3 of
+  AGENT_NAVIGATION untouched. No new stable decision → DECISIONS
+  untouched.
+- Files: `docs/ref/paradox_scripting.md` (new);
+  `docs/REFERENCES_DEEP.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md`,
+  `docs/TASKS.md`, this file (updated). 6 files — over the 3–5 soft
+  limit (AGENTS §2.3); per-ref iterations inherently touch the new
+  per-ref file + 4 tracking files (index, nav, status, tasks, worklog).
+  No code touched; pytest -q green (13 tests, none depend on doc
+  structure), ruff check . clean.
+- Doc-loop alarm: 11th docs iteration in a row (D-022 exception applies
+  again — owner-requested reference continuation). iter-1 MUST be
+  functional code; no further docs iterations without a fresh owner
+  request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.

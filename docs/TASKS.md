@@ -138,7 +138,10 @@
   subsystems worth deep coverage; 2–3 sources per iter for the rest. Pick
   in order; skip if a phase hasn't shipped yet. Sequence:
   - `ref-3` (solo) Paradox event scripting (CK3 + EU4 + Stellaris) — full
-    grammar: trigger, weight, mtth, effect, option, scope.
+    grammar: trigger, weight, mtth, effect, option, scope. → done
+    (iter-0l): `docs/ref/paradox_scripting.md`; 605 lines, 5 over cap
+    per AGENTS §6.1 (three games × trigger/MTTH/weight/effect/scope/
+    on_action subsystems with real field names + ~150+ on_action IDs).
   - `ref-4` (batch) RimWorld + L4D Director + Alien: Isolation — pacing /
     storyteller trio; phase-3 director ref.
   - `ref-5` (batch) Wesnoth WML + Endless Sky mission DSL + ink + tracery —
@@ -201,3 +204,10 @@
   table (one row per ref). D-026 supersedes D-024 single-file wording;
   three-place anti-drift policy unchanged. AGENT_NAVIGATION §1 + §3
   updated. Doc-loop exception (tenth docs iter).
+- iter-0l · 2026-08-26 · owner-requested ref-3 solo deep dive:
+  `docs/ref/paradox_scripting.md` (605 lines, 5 over cap per §6.1
+  substance — three games × trigger/MTTH/weight/effect/scope/on_action
+  subsystems with real field names + ~150+ on_action IDs). §2 of
+  `REFERENCES_DEEP.md` flips ref-3 todo → done. AGENT_NAVIGATION §1
+  adds `paradox_scripting.md` to the `docs/ref/` list. Doc-loop
+  exception (eleventh docs iter, D-022).

@@ -98,7 +98,7 @@ to flip status), well within the 3–5 soft limit (AGENTS §2.3).
 | iter-0h-c | DF Legends XML | `docs/ref/df_legends_xml.md` | proprietary (export only) | bg-1..bg-4 (track B) | event-id + tick schema; `event_collections`; reputation-as-event | done |
 | ref-1 | DF worldgen + history layer | `docs/ref/df_worldgen.md` | proprietary (read exported data only) | bg-1..bg-4 (track B); phase 5 LOD | history ticks abstractly; populations vs notables LOD ladder | done |
 | ref-2 | C:DDA `data/json/` schema | `docs/ref/cdda_data_json.md` | CC-BY-SA 3.0 | phase 3 (content-pack reference) | content-as-JSON at scale; per-category file split; pair-keyed `relations` | done |
-| ref-3 | Paradox event scripting | `docs/ref/paradox_scripting.md` | (closed wikis) | phase 3 (event grammar) | trigger / weight / mtth / effect / option / scope backbone | todo |
+| ref-3 | Paradox event scripting | `docs/ref/paradox_scripting.md` | (closed wikis) | phase 3 (event grammar) | trigger / weight / mtth / effect / option / scope backbone | done |
 | ref-4-a | RimWorld | `docs/ref/rimworld.md` | closed | phase 3 (director ref) | storyteller = named anti-pattern (D-005) | todo |
 | ref-4-b | L4D Director | `docs/ref/l4d_director.md` | closed | phase 3 (director ref) | pacing algorithm — intensity ratchets | todo |
 | ref-4-c | Alien: Isolation | `docs/ref/alien_isolation.md` | closed | phase 3 (director ref) | Xenomorph director — anxiety-over-encounter design | todo |
