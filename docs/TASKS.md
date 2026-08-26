@@ -669,9 +669,218 @@
     not catalog↔index drift; the convention is documented
     honestly in the per-ref file.
   - `ref-10` (batch) entt + Bevy + EventStore — ECS scheduling + event-
-    sourcing stream/projection patterns.
+    sourcing stream/projection patterns. → done (iter-0r): `docs/ref/
+    entt.md` (359 — MIT; C++ ECS sparse-set blueprint: `basic_sparse_
+    set` dual-array + `deletion_policy` swap_and_pop/in_place/swap_only
+    + `basic_storage<Type>` paged payload + `basic_view` smallest-pool-
+    leads + `basic_group` eagerly maintained intersection [negative:
+    invalidates on structural change] + `basic_organizer` task DAG +
+    `sigh`/`sink`/`connection` RAII hooks + `basic_sigh_mixin` auto-
+    publish + `entt_traits::entity_mask`/`version_mask` id+version
+    packing + `meta_type`/`meta_factory` reflection; lifted into
+    `core/store.py` + `sim/systems/*.py` View helper + `sim/systems/
+    __init__.py` organizer DAG + `core/ids.py` + `content/packs/*.py`
+    meta-registration shape; explicitly negative on C++ template-heavy
+    API [D-012 fix] + mutable in-place storage [INV-1 fix: events-only
+    derived state] + `organizer` signature-inferred ro/rw [INV-3 fix]
+    + `group` invalidates [queue discipline sidesteps] + `meta` verbose
+    [dataclasses more ergonomic]), `docs/ref/bevy.md` (469 — dual
+    `MIT OR Apache-2.0`; Rust ECS + scheduler: `World` struct owning
+    `entities` + `storages` [Table columnar + SparseSet triple] +
+    `Component` trait with `STORAGE_TYPE` Table/SparseSet + `Resource`
+    singleton accessed via `Res`/`ResMut` + `Query<D, F>` with
+    `With`/`Without`/`Added`/`Changed` filters + `Schedule` + `SystemSet`
+    + `before`/`after`/`chain`/`in_set` + `ambiguous_with` UnGraph
+    build-time conflict detection + `Messages<M>` double-buffered ring
+    [`messages_a`/`messages_b`/`message_count`/`update()` swap-clear/
+    per-reader `MessageCursor.last_message_count`; renamed from
+    `Events<T>` in v0.20-dev — pattern unchanged] + `Command`/
+    `CommandQueue`/`Commands` deferred mutation + `App` + `Plugin`
+    builder + `States` FSM [`State<S>` + `NextState<S>` Unchanged/
+    Pending/PendingIfDifferent + `StateTransition` schedule + `OnEnter`/
+    `OnExit`] + `Entity` id+generation packs to u64; lifted into
+    `core/queue.py` Messages<M> double-buffer [JSONL log = producer
+    buffer B; per-tick `update()` swap = tick boundary; per-system
+    Local<MessageCursor> = per-system integer-tick cursor] +
+    `sim/systems/__init__.py` Schedule+SystemSet+ambiguous_with graph
+    + `core/` per-system scratch + `sim/systems/` phase control;
+    explicitly negative on Rust-only runtime [D-012 fix: patterns
+    only, never vendored] + in-place mutable ResMut<T> [INV-1 fix:
+    lift deferred-queue shape not `&mut World` target — `Command::
+    apply` becomes "serialize to event JSON, append to log, advance
+    tick"] + trait/derive macro type-safety [lifted → Python
+    dataclasses + JSON Schema, type-safety degrades to runtime
+    checks] + SparseSet/Table cache-line layout [pointless in Python —
+    `dict` overhead dominates] + async_executor/multi_threaded [dead
+    weight for serial fold]), `docs/ref/eventstore.md` (534 —
+    BSD-3-Clause [≤23.x] / ESLv2/Kurrent-License-v1 [24.10+] —
+    pattern only; canonical event-sourcing mechanics: `EventRecord`
+    [EventId Guid + EventType string + Data + Metadata byte[] +
+    EventStreamId + EventNumber + LogPosition + TimeStamp] +
+    `ExpectedVersion` OCC constants [`Any = -2`/`NoStream = -1`/
+    `Invalid = -3`/`StreamExists = -4`; SDK rebrands to `StreamState`]
+    + `SystemNames.SystemStreams` [`$all` global ordered stream +
+    `$$<stream>` metastream] + `SystemMetadata` retention knobs
+    [`$maxAge`/`$maxCount`/`$tb`/`TruncateBefore`] + `StreamMetadata`
+    class + `EventNumber.DeletedStream = long.MaxValue` tombstone
+    sentinel + `JintProjectionStateHandler` JS projection engine
+    [`emit`/`linkTo`/`linkStreamTo`/`copyTo` globals + `init`/`state`
+    fold + `CheckpointTag` restartable] + `PersistentSubscription` +
+    `PersistentSubscriptionCheckpointWriter` [checkpoint to
+    `$persistentsubscription-<id>-checkpoint` stream with `maxCount=2`]
+    + `VNodeState` 16-enum cluster gossip + `Scavenger<TStreamId>`
+    Accumulate→Calculate→Chunks→Merge→Index→Clean pipeline restartable
+    from `ScavengeCheckpoint` + `ResolvedEvent` [Link $> + Event] +
+    `OperationResult.WrongExpectedVersion` rejection +
+    `WriteEventsCompleted` post-write `LastEventNumber` +
+    `CurrentVersion`; lifted into `core/queue.py` + global JSONL log
+    [`$all` — explicit `(tick, sub_order, actor_id)` queue key replaces
+    opaque `TFPos`] + `cli/` Intent → Event validation front-door
+    [ExpectedVersion OCC — an Intent converts to an Event only after
+    the invariant check passes] + `schemas/event.schema.json` [EventRecord
+    shape] + runtime log retention policy [StreamMetadata MaxAge/
+    MaxCount/TruncateBefore] + INV-5 corrections-as-new-events +
+    offline scavenge [tombstone logical deletion + Scavenger physical
+    compaction]; explicitly negative on JS projection engine Jint
+    [D-012 fix: Python fold functions, "emit" is `yield`] + cluster
+    gossip + leader election [irrelevant overhead for single-process
+    phase-0 sim] + ESLv2 license friction at 24.10+ [pattern-only
+    intake is the only path, but none of the C# code is useful to us
+    anyway] + persistent subscriptions [SQLite IS the checkpoint —
+    separate stream would be double-bookkeeping] + `$all` TFPos opaque
+    ordering [INV-2 fix: explicit domain-meaningful queue key]). All
+    three under cap by construction. §2 of `docs/REFERENCES_DEEP.md`
+    flips ref-10-a/b/c todo → done + rich one-line verdicts + fixes
+    license drift on ref-10-c [index "MIT" → "BSD-3-Clause (≤23.x);
+    ESLv2/Kurrent-License-v1 from 24.10 — pattern only" — pre-flip
+    caught, KI#6-class pitfall avoided]. AGENT_NAVIGATION §1 adds
+    three new files to `docs/ref/` list. Licenses verified against
+    catalog §6+§7 — the EventStore license history (BSD-3-Clause at
+    ≤23.x, ESLv2 from 24.10, renamed Kurrent-License-v1 in Feb 2025)
+    was verified by reading the LICENSE.md commit log on master.
+    Doc-loop exception (seventeenth docs iter, D-022).
   - `ref-11` (batch) SQLite FTS5 + DuckDB + sqlite-vec — storage layer
-    candidates; depends on phase-4 retrieval decision.
+    candidates; depends on phase-4 retrieval decision. → done
+    (iter-0r): `docs/ref/sqlite_fts5.md` (368 — public domain;
+    zero-dependency keyword search in stdlib SQLite: `CREATE VIRTUAL
+    TABLE <name> USING fts5(<col1>, <col2>, ...)` schema + 4 tokenizers
+    [`unicode61` default w/ `remove_diacritics` + `categories` +
+    `tokenchars`/`separators`; `ascii`; `porter` wrapper applying
+    Porter stemmer; `trigram` for substring matching] + `bm25(<table>
+    [, w0, w1, ...])` [lower = better, `k1=1.2`, `b=0.75`, per-column
+    positional weights] + `highlight()`/`snippet()` + query operators
+    [`AND`/`OR`/`NOT` precedence; `NEAR(p1 p2 [, N=10])` proximity;
+    `*` prefix token; `^` initial-token anchor; `+` phrase concat;
+    `col:` column filters] + `INSERT INTO ft(ft, ...) VALUES(...)`
+    lifecycle [`rebuild`/`optimize`/`merge`/`automerge`/`crisismerge`/
+    `usermerge`/`deletemerge`/`delete`/`delete-all`/`integrity-check`/
+    `rank`/`pgsz`/`secure-delete`/`insttoken`] + `fts5vocab` virtual
+    table + 5 shadow tables [`%_data`/`%_idx`/`%_config`/`%_docsize`/
+    `%_content` — never accessed directly] + segment b-trees
+    [immutable, leveled, newer-wins] + content-table variants
+    [plain/contentless/contentless-delete/external-content]; lifted
+    into `core/storage.py` [the chronicle `facts` FTS5 virtual table —
+    D-003 canon index] + `brief/assembler.py` [bm25 positional
+    column weights] + `render/` [highlight + snippet] + unicode61
+    default for multilingual content packs + NEAR for proximity
+    queries + `rebuild` as the INV-1 mechanism; explicitly negative
+    on keyword-only [need sqlite-vec for semantic] + ranking
+    customization bm25 + custom C function only [recency×authority×
+    BM25 blend needs Python reranker] + tokenizer fixed at CREATE
+    TABLE [switch forces full rebuild — INV-1-expected path but
+    plan at design time] + segment b-trees accumulate under write-
+    heavy loads [batch inserts + optimize once at end] + `delete`
+    on contentless tables brittle [prefer plain tables + full
+    rebuild]), `docs/ref/duckdb.md` (458 — MIT; in-process columnar
+    OLAP engine, OFFLINE not runtime [D-012]: `DuckDB` class +
+    `Connection` [Query → MaterializedQueryResult, Prepare →
+    PreparedStatement, PendingQuery async] + `STANDARD_VECTOR_SIZE
+    = 2048` DataChunk [vector of column-vectors — morsel-driven
+    parallelism, chunk IS the morsel] + `PhysicalOperator` family
+    keyed by `PhysicalOperatorType` enum [FILTER/PROJECTION/HASH_
+    GROUP_BY/PERFECT_HASH_GROUP_BY/PARTITIONED_AGGREGATE/WINDOW/
+    HASH_JOIN/ASOF_JOIN/TOP_N/ORDER_BY/TABLE_SCAN/INSERT/BATCH_
+    INSERT/COPY_TO_FILE/ATTACH/DETACH/CREATE_SEQUENCE/EXPLAIN_
+    ANALYZE] + `read_json_auto()`/`read_ndjson_auto()` TVF [no-ETL
+    ingestion — point at the JSONL log and start querying] +
+    `CopyFunction("parquet")` [COPY TO + COPY FROM] + `Appender`
+    API [`BeginRow`/`EndRow`/`Append<T>`, flush every 204,800 rows]
+    + composite types [`STRUCT`/`LIST`/`MAP`/`UNION`/`ARRAY`/`TUPLE`]
+    + window functions [`WINDOW_LAG=133`/`WINDOW_LEAD=132`/
+    `WINDOW_RANK=120`/`WINDOW_ROW_NUMBER=125` — `LAG(suspicion)
+    OVER (PARTITION BY actor_id ORDER BY tick)` is the canonical
+    per-actor state-delta pattern] + extension mechanism [`INSTALL`/
+    `LOAD`/`AutoLoadExtension`; core `parquet`+`json`+`icu`+`core_
+    functions`+`autocomplete` baked in] + `ATTACH` + `CREATE
+    SEQUENCE` + `PRAGMA`/`EXPLAIN` + per-column compression
+    [`Bitpacking`/`Dictionary`/`FSST`/`ALP`/`ALPRD`/`Chimp128`/
+    `Patas`/`Roaring`/`Zstd` — compress-once-scan-many]; lifted
+    into the `chronicler` offline pipeline [read JSONL → columnar
+    table → aggregate SQL → summary SQLite; the *pattern*, not the
+    code] + `read_ndjson_auto` no-ETL ingestion + `COPY TO ...
+    (FORMAT PARQUET)` parquet archive output + `Appender` bulk-load
+    fallback + `LAG`/`LEAD` per-actor state deltas + `ATTACH` to
+    write summary back into runtime SQLite; explicitly negative on
+    C++ runtime dependency [D-012 fix: NOT in the runtime path —
+    chronicler is `scripts/chronicle.py` outside the runtime module
+    graph] + phase-0 log too small [SQLite wins on simplicity below
+    ~100k events] + single-writer OLAP model [cannot live-ingest
+    during simulation — chronicler runs after tick-batch seal] +
+    another tool in the chain [only justified at phase-3+ scale per
+    D-022] + extensions fetch from network by default [must bundle
+    binaries or rely on auto-loaded core extensions]), `docs/ref/
+    sqlite_vec.md` (383 — dual `MIT OR Apache-2.0`; local-first
+    vector index in SQLite, conditionally-loaded C extension NOT
+    phase-0 runtime dep: `vec0` virtual-table module [`CREATE
+    VIRTUAL TABLE <name> USING vec0(<col> <type>[N] [pk] [partition
+    key] [distance_metric=L2|cosine], <other_col>, +<aux_col>)` —
+    same shape as FTS5] + implicit `rowid` + MATCH kNN [`WHERE
+    <col> MATCH :query_vec ORDER BY distance LIMIT k`] +
+    `vec_distance_cosine` [canonical name, not `vec_distance_cos`;
+    `1 - cos`] + `vec_distance_L2`/`vec_distance_L1`/
+    `vec_distance_hamming` [L2 default, cosine opt-in per-column
+    via `distance_metric=cosine`] + `vec_f32`/`vec_int8`/`vec_bit`
+    constructors [subtype byte tagging 223/225/224] + `vec_to_
+    json` + `vec_quantize_binary` [32× storage reduction, 8
+    dims/byte] + `vec_quantize_int8(v, 'unit')` + `vec_slice` +
+    `vec_normalize` [matryoshka embeddings — train at 1024-d,
+    store/query at 256-d → ~4× index shrink] + `vec0` shadow
+    tables [`_rowids`/`_chunks`/`_vector_chunks00`/`_rescore_
+    chunks00`/`_rescore_vectors00`/`_metadatachunks00`] +
+    partition-key columns + auxiliary columns [`+`-prefixed, no
+    JOIN for SELECT, max 16 metadata + 16 auxiliary + 4 partition
+    keys] + `vec_each(v)` TVF + `vec_version()`/`vec_debug()` +
+    loadable-extension entrypoint via `sqlite3_load_extension`
+    [Python: `db.enable_load_extension(True); sqlite_vec.load(db);
+    db.enable_load_extension(False)`; macOS system Python lacks
+    `enable_load_extension` entirely] + pure-Python `struct.pack
+    ("%sf" % len(v), *v)` serializer helper; lifted into the
+    canonical "vector index over facts" pattern for `core/storage.
+    py` + `vec_distance_cosine` as the canonical similarity
+    metric + matryoshka compression strategy + binary-quant two-
+    pass pattern [coarse bit[D] kNN filter then L2 rescore];
+    explicitly negative on C extension not in Python stdlib
+    [D-012 fix: conditional loadable extension at phase 4 — phase
+    0 stays stdlib-only with pure-Python `cosine_sim()` brute-force
+    fallback over the same BLOB format] + pure-Python fallback
+    O(N·D) [viable for phase-0 small N < 10⁴ facts, painful past
+    10⁴ at 768-d] + pre-v1 with breaking changes expected [pin a
+    version, treat SQL contract as the stable interface not C
+    ABI] + no approximate search in stable path [HNSW/IVF/DiskANN
+    in separate experimental C files, not default]). All three
+    under cap by construction. §2 of `docs/REFERENCES_DEEP.md`
+    flips ref-11-a/b/c todo → done + rich one-line verdicts +
+    fixes license drift on ref-11-c [index "MIT" → "MIT OR
+    Apache-2.0 (dual)" — pre-flip caught, KI#6-class pitfall
+    avoided; catalog "verify" license status RESOLVED to dual
+    `MIT OR Apache-2.0`]. AGENT_NAVIGATION §1 adds three new
+    files to `docs/ref/` list. Licenses verified against catalog
+    §6+§14 — sqlite-vec's "verify" status in the catalog is now
+    resolved to dual `MIT OR Apache-2.0` per `LICENSE-MIT` +
+    `LICENSE-APACHE` + `sqlite-dist.toml` manifest. Doc-loop
+    exception (seventeenth docs iter, D-022 — same exception as
+    ref-10 since both ref-10 and ref-11 are in the same iter-0r
+    6-batch).
 
 ## Done
 
@@ -829,3 +1038,72 @@
   has 684 codes (stale by 39); documented honestly in the
   per-ref file. Doc-loop exception (sixteenth docs iter,
   D-022).
+- iter-0r · 2026-08-26 · owner-requested ref-10 + ref-11
+  6-batch deep dive: `docs/ref/entt.md` (359), `docs/ref/
+  bevy.md` (469), `docs/ref/eventstore.md` (534), `docs/ref/
+  sqlite_fts5.md` (368), `docs/ref/duckdb.md` (458), `docs/ref/
+  sqlite_vec.md` (383) — six open-licensed ECS + event-
+  sourcing + storage-layer pattern-only references (entt
+  C++ ECS sparse-set blueprint [basic_sparse_set dual-array +
+  deletion_policy swap_and_pop/in_place/swap_only + basic_
+  storage<Type> paged payload + basic_view smallest-pool-
+  leads + basic_group eagerly maintained intersection +
+  basic_organizer task DAG + sigh/sink/connection RAII hooks +
+  basic_sigh_mixin auto-publish + entt_traits id+version
+  packing + meta_type/meta_factory reflection], Bevy Rust
+  ECS + scheduler [World + Component trait with STORAGE_TYPE
+  Table/SparseSet + Resource singleton + Query<D, F> with
+  With/Without/Added/Changed filters + Schedule + SystemSet
+  + before/after/chain/in_set + ambiguous_with build-time
+  conflict detection + Messages<M> double-buffered ring
+  [renamed from Events<T> in v0.20-dev] + Command/CommandQueue/
+  Commands deferred mutation + App + Plugin builder + States
+  FSM + Entity id+generation], EventStoreDB event-sourcing
+  mechanics [EventRecord + ExpectedVersion OCC constants
+  Any/NoStream/Invalid/StreamExists + SystemNames.SystemStreams
+  $all + SystemMetadata $maxAge/$maxCount/$tb retention knobs +
+  StreamMetadata class + EventNumber.DeletedStream tombstone +
+  JintProjectionStateHandler JS projection engine +
+  PersistentSubscription + PersistentSubscriptionCheck-
+  pointWriter + VNodeState 16-enum cluster gossip +
+  Scavenger Accumulate→Calculate→Chunks→Merge→Index→Clean +
+  ResolvedEvent + OperationResult.WrongExpectedVersion +
+  WriteEventsCompleted post-write LastEventNumber], SQLite
+  FTS5 [CREATE VIRTUAL TABLE USING fts5 + 4 tokenizers
+  unicode61/ascii/porter/trigram + bm25 ranking + highlight
+  + snippet + NEAR/* /^ /+ /col: query operators +
+  INSERT lifecycle commands rebuild/optimize/merge/automerge
+  + fts5vocab virtual table + 5 shadow tables + segment
+  b-trees + content-table variants], DuckDB [DuckDB class +
+  Connection + STANDARD_VECTOR_SIZE=2048 DataChunk +
+  PhysicalOperator family + read_json_auto/read_ndjson_auto
+  TVF + CopyFunction("parquet") + Appender API + composite
+  types STRUCT/LIST/MAP/UNION/ARRAY/TUPLE + window functions
+  WINDOW_LAG/WINDOW_LEAD/WINDOW_RANK/WINDOW_ROW_NUMBER +
+  extension mechanism + ATTACH + CREATE SEQUENCE + PRAGMA/
+  EXPLAIN + per-column compression Bitpacking/Dictionary/
+  FSST/ALP/Chimp128/Patas/Roaring/Zstd], sqlite-vec [vec0
+  virtual-table module + MATCH kNN + vec_distance_cosine/
+  vec_distance_L2/L1/hamming + vec_f32/vec_int8/vec_bit
+  constructors with subtype byte tagging + vec_to_json +
+  vec_quantize_binary 32× storage reduction + vec_slice +
+  vec_normalize matryoshka embeddings + vec0 shadow tables +
+  partition-key + auxiliary columns + vec_each TVF +
+  vec_version/vec_debug + loadable-extension entrypoint +
+  pure-Python struct.pack serializer helper]). All six under
+  cap by construction. §2 of `docs/REFERENCES_DEEP.md` flips
+  ref-10-a/b/c + ref-11-a/b/c todo → done + rich one-line
+  verdicts + fixes license drift on ref-10-c [index "MIT" →
+  "BSD-3-Clause (≤23.x); ESLv2/Kurrent-License-v1 from 24.10
+  — pattern only" — pre-flip caught, KI#6-class pitfall
+  avoided] + resolves ref-11-c "verify" catalog license
+  status to dual "MIT OR Apache-2.0" + fixes the matching
+  index drift [index "MIT" → "MIT OR Apache-2.0 (dual)"].
+  AGENT_NAVIGATION §1 adds six new files to `docs/ref/`
+  list. Licenses verified against catalog §6+§7+§14 —
+  EventStore license history (BSD-3-Clause at ≤23.x, ESLv2
+  from 24.10, renamed Kurrent-License-v1 in Feb 2025)
+  verified by reading the LICENSE.md commit log on master;
+  sqlite-vec "verify" status resolved by reading LICENSE-MIT
+  + LICENSE-APACHE + sqlite-dist.toml manifest. Doc-loop
+  exception (seventeenth docs iter, D-022).
