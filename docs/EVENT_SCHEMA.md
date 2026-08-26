@@ -139,5 +139,14 @@ provenance joins the same field family when the LLM circuit arrives (phase 1+).
 
 ## 11. Extension policy
 
-Adding an event `type` or an `outcome` payload: pack data, no bump. Touching
-any field in §2–§4 or the enums: §8 applies.
+Adding an event `type` or an `outcome` payload: pack data, no bump. The
+event `type` vocabulary and per-type `outcome` payload shapes are declared
+by the pack and validated at load (closed per pack — the phase-0 minimum
+lint in `docs/blueprint/phase0.md` §1); a type unknown to the pack fails
+load loudly. Schema-level enums (`channel`, `fidelity`, `importance`) and
+any field in §2–§4 are closed per `schema_version`: touching them = §8
+applies. Type-specific payload fields (the DF Legends `hf_died` →
+`victim_hfid`/`slayer_hfid` shape) live inside the validated `outcome`
+object, never as ad-hoc top-level fields. Multi-parent event groupings (DF
+`event_collections` many-to-many) are deferred to phase 3+ (P3c) — phase 0
+keeps the single-parent `cause` chain.

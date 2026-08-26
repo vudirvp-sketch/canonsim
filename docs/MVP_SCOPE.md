@@ -21,7 +21,7 @@ not of architecture — a boring four-room scenario is not a verdict on the core
 **In scope:**
 
 - 5 locations, 6 NPCs, 5 items, 8 systems, 12 actions (§4–§7).
-- Deterministic core: seed, RNG instance, integer tick clock, single event
+- Deterministic core: seed, RngBank (INV-2, RNG-1), integer tick clock, single event
   queue, JSONL append-only log with header (§8, `docs/EVENT_SCHEMA.md` §1).
 - Event schema v0 with knowledge records, `state_changes`, `hooks`.
 - Content as data: one hand-assembled pack in `content/tavern_pack/` — no
@@ -161,7 +161,7 @@ intents (phase 2). Buttons/commands are shortcuts to identical intents.
 ```text
 while queue not empty:
     (t, sub_order, actor_id) = heappop(queue)
-    execute entry: system updates, checks, RNG draws (seeded instance)
+    execute entry: system updates, checks, RngBank draws (INV-2)
     emit events (append-only; every state change is an event)
     enqueue completions/hooks with their trigger ticks
 ```

@@ -1,73 +1,44 @@
 # STATUS — canonsim
 
-Iteration: 0u (owner-requested: references distillation — the synthesis pass over the whole reference corpus; no new external source: the owner's request is the trigger, satisfying D-022's "no further docs iterations without a fresh owner request") · Phase: 0 — simulator without LLM · Date: 2026-08-27
+Iteration: 0v (owner-requested: audit patches — the 21-point audit of the
+iter-0u distillation, applied; the standing owner directive "act, don't
+ask" covers the §8 INV-2 change, recorded as D-028) · Phase: 0 — simulator
+without LLM · Date: 2026-08-27
 
-iter-0u is the **reference distillation** the owner requested: process
-every reference deep dive and assemble it into one contradiction-free
-construction plan. Deliverable: `docs/BLUEPRINT.md` (method + resolution
-ledger + cross-cutting laws + build index) + `docs/blueprint/phase0.md`
-(iter-1..6 combined donor designs) + `docs/blueprint/phases.md` (phases
-1–6 architecture + cross-cutting) — decision D-027; 9 files touched (the
-3 new files + the mandated sync set: AGENT_NAVIGATION §1/§2/§3,
-DECISIONS, REFERENCES_DEEP pointer, TASKS, STATUS, worklog).
+iter-0v applies the audit of the iter-0u distillation. **Blocking fix:**
+INV-2 rewritten in AGENTS.md (single point of randomness control — one
+master seed, named derived streams; D-028) and the stale one-instance
+wording purged from the three places a builder reads (TASKS iter-1,
+TECH_NOTES §4, MVP_SCOPE §3/§13). **The 18 remaining resolutions** land as
+sub-clauses exactly where the audited mechanics first appear: scheduler
+DAG annotation language + intent OCC (`based_on_event_seq`) + intent
+lifecycle + price precursor (phase0 §2); director rejection policy +
+per-run scope (phase0 §4); ShufflePool + prune_window departure (phase0
+§5); T1 fixture-regeneration guard (phase0 §6); phase-0 minimum pack lint
+(phase0 §1); BRIEF-1 eviction contract (phases §1); STORE-1 precedence
+chain + reflection provenance (phases §4); copy-from cycle contract
+(phases §6); event vocabulary closed per pack (EVENT_SCHEMA §11);
+INTENT/BRIEF spec sketches extended. Sims/Prom Week marked synthesis-only
+in donor stacks; ref-14/ref-15 recorded as owner-request-only candidates.
+KI#8 opened/closed; KI#7 resolved (worklog trimmed to the 10×3–5 cap,
+TASKS done-entries collapsed to one line; pre-trim history in git).
 
-**What the distillation is.** The fourth place of the anti-drift system:
-catalog (`REFERENCES.md`) ↔ one-line synthesis (`CORE_DESIGN_RESEARCH.md`
-§2) ↔ deep dives (`docs/ref/`) ↔ **blueprint** (cross-reference
-resolutions + donor combinations, organized by build component, not by
-source). The blueprint owns the *resolutions* — new facts created by
-synthesis; every mechanic cited stays owned by its per-ref file, linked.
-Maintenance protocol: a future deep dive updates only the ledger rows and
-part-file sections it changes, at deep-dive time (BLUEPRINT §0).
-
-**The twelve resolutions** (full table: `docs/BLUEPRINT.md` §1):
-RNG-1 single RngBank authority with deterministically seed-derived named
-streams (Brogue/DCSS discipline inside INV-2's intent; replay
-fingerprint for T1) · TIME-1 all timing reduces to SCHEDULED / SEEDED /
-SAMPLED — MTTH is the named anti-pattern · STATE-1 the projection IS the
-storage (entt layout + views; Bevy double-buffer = tick boundary; writes
-only via log append) · SCHED-1 one heapq, `(tick, sub_order, actor_id)`
-with sub_order bands + build-time ambiguity check · EPIST-1 Influence
-Boundary + embodiment mapping + expectation-mismatch `inferred` records
-+ Price markers · DIR-1 director reads observables only; entropy floor
-sensor; objective broadcast; three named negatives (from-nothing,
-player-learning, canon-softening) · BRIEF-1 block pipeline with the
-retrieval split (dynamic facts never vector-searched) · PACK-1 the pack
-ladder with lint as the top rung · CHRON-1 event-vs-tale split +
-deterministic tracery · STORE-1 the storage ladder, each rung
-rebuildable · TEST-1 the verification stack (fingerprints, seed
-catalogs, single-factor A/B, 7-hole crosswalk) · LOD-1 the LOD ladder
-(crowd entity is the seed already in the pack).
-
-**Two standing clarifications enacted** (D-027, both recorded as ledger
-rows with rationale): RNG-1 clarifies INV-2's "one `random.Random(seed)`
-instance" as *single point of randomness control* — named streams
-derived from the master seed keep byte-identical replay and add the
-cosmetic-stream isolation Brogue/DCSS prove; EPIST-1 adopts the
-Influence Boundary (live-char-guide) as the default iter-2/3 design —
-flagged owner-call in iter-0t, adopted by this distillation, vetoable
-at the iter-3 design gate.
-
-**Doc-loop accounting:** 20th consecutive docs iteration. No fresh
-external source this time — the exception rests on the owner's explicit
-request alone (D-022 wording satisfied). The alarm condition stands:
-**iter-1 is unconditionally the next iteration** — no further ref-N, no
-spec writing, no doc polish without a fresh owner request.
-
-**iter-0t closing summary** (full detail: git history + worklog entry):
-ref-13 live-char-guide deep dive delivered (`docs/ref/live_char_guide.md`:
-SPINE/Price/observability, brief-layer injection grammar, AP→pack-lint
-vocabulary; license clean MIT). All ref-N backlog items complete
-(ref-1..ref-13 + the iter-0h cousins).
+**Doc-loop accounting:** 21st consecutive docs iteration — owner-requested
+exception (D-022 wording: a fresh owner request; the standing "act, don't
+ask" directive). The alarm condition stands, now with teeth:
+**iter-1 (functional code) is unconditionally the next iteration** — no
+ref-N, no spec writing, no doc polish without a fresh owner request.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
   append-only truth; SQLite is a rebuildable index.
-- INV-2 Determinism: single seeded RNG, no wall-clock, `sorted()` iteration,
-  fixed `PYTHONHASHSEED`, queue key `(tick, sub_order, actor_id)`
-  (clarified by D-027/RNG-1: single RngBank authority, named derived
-  streams).
+- INV-2 Determinism: single point of randomness control — one master seed;
+  named streams derived via the RngBank (`stable_hash` = sha256-based);
+  no wall-clock; `sorted()` iteration; fixed `PYTHONHASHSEED`; queue key
+  `(tick, sub_order, actor_id)`; cosmetic draws never desync canon replay
+  (D-028 — the law text itself now carries this; AGENTS.md is the single
+  reading owner).
 - INV-3 Content/code split: no domain words in code; all setting data in
   `content/tavern_pack/`.
 - INV-4 LLM boundary: no LLM/network calls in track A before the phase-0 gate.
@@ -79,7 +50,8 @@ vocabulary; license clean MIT). All ref-N backlog items complete
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6).
 - KI#5 · runtime state vs test fold not explicitly separated — risk of O(N²) at startup if `fold(log)` is misused as runtime path. D-023 records the rule: runtime = incremental projection; fold = T2 replay only; resolution recorded as ledger row STATE-1.
-- KI#7 · Capped-memory drift (2026-08-27): `worklog.md` entries up to ~880 lines vs the 3–5-line law; `TASKS.md` at 1136 with done entries not one-line-collapsed — trim vs migrate needs an owner call (D-025 covers `docs/*.md` caps only, not these rows).
+- KI#7 · CLOSED iter-0v · capped-memory drift — worklog entries at ~880 lines vs the 3–5-line law; TASKS done entries uncollapsed. Resolved: worklog trimmed to the 10×3–5 cap; TASKS done-entries collapsed to one line; pre-trim history lives in git (commits pre-iter-0v).
+- KI#8 · CLOSED iter-0v · RNG-1 vs INV-2 wording contradiction — the iter-0u audit's blocking finding: the old "one `random.Random(seed)` instance" law text contradicted the RngBank design in AGENTS.md + TASKS iter-1 + TECH_NOTES §4; `stable_hash` was undefined (a built-in `hash()` would have depended on `PYTHONHASHSEED` silently). Resolved by D-028: INV-2 rewritten, sha256-based `stable_hash` pinned, all three sync points fixed in the same iteration.
 
 ## FAQ / Pitfalls
 
@@ -93,16 +65,17 @@ vocabulary; license clean MIT). All ref-N backlog items complete
   `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
   actually tracked. This is the diagnostic for KI#1-class losses and for
   "the file exists but tests can't find it" surprises.
-- **Doc-loop alarm vs owner-requested research.** Twenty docs iterations in
-  a row would normally force a stop (AGENTS §2.5). Owner-requested passes
+- **Doc-loop alarm vs owner-requested research.** Twenty-one docs iterations
+  in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
   owner request (iter-0s/0t additionally had fresh external sources;
-  iter-0u, the distillation, rests on the request alone). iter-0u is the
-  twentieth docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
-  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u; iter-0d was infra). All
-  ref-N backlog items are complete — ref-1 through ref-13 plus the
-  iter-0h cousins; no further ref-N iterations remain without a fresh
-  external source, and no doc pass at all without a fresh owner request.
+  iter-0u, the distillation, and iter-0v, the audit patches, rest on the
+  request alone). iter-0v is the twenty-first docs iteration in a row (0,
+  0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j, 0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s,
+  0t, 0u, 0v; iter-0d was infra). All ref-N backlog items are complete —
+  ref-1 through ref-13 plus the iter-0h cousins; ref-14/ref-15 (Sims,
+  Prom Week) are owner-request-only candidates; no doc pass at all
+  without a fresh owner request. **iter-1 code is next, unconditionally.**
 - **Four places, four jobs (D-027).** `docs/REFERENCES.md` catalogs sources
   (license, URL, phase gating); `docs/CORE_DESIGN_RESEARCH.md` §2 carries
   the one-line synthesis per source; `docs/ref/<source>.md` carries the
@@ -113,6 +86,13 @@ vocabulary; license clean MIT). All ref-N backlog items complete
   mapping of refs → iterations was exactly this drift and has been folded
   into the blueprint build index (`docs/BLUEPRINT.md` §3), its single
   owner.
+- **Pre-D-028 RNG wording in `docs/ref/*` and `REFERENCES_DEEP.md` is
+  historical evidence, not prescription.** Several ref files quote
+  "INV-2: one `random.Random(seed)` instance" as it read at deep-dive
+  time. Do not "fix" those — they document what the donor comparison was
+  made against. The single reading owner of INV-2 is `AGENTS.md` §4
+  (D-028); anything prescriptive points there (same pattern as the KI#6
+  license-drift rule: catalog is the owner, index rows can lag).
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap is
   600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, real field lists, type enumerations, per-source

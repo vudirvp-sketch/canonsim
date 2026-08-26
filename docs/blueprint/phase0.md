@@ -12,15 +12,24 @@
 
 - `core/rng.py` — the RngBank (RNG-1). One constructor argument (the master
   seed); named streams derived deterministically:
-  `stream(name) = random.Random(stable_hash(f"{seed}:{name}"))` —
+  `stream(name) = random.Random(stable_hash(f"{seed}:{name}"))` with
+  `stable_hash(s) = int.from_bytes(hashlib.sha256(s.encode()).digest()[:8],
+  "big")` — sha256-based, environment-independent (stream derivation never
+  relies on `PYTHONHASHSEED`; INV-2 per D-028) —
   `substantive` (canon) and `cosmetic` (render-only) are the two phase-0
   streams. Guards lifted from the donors: an `assure(name)` context manager
-  (Brogue `assureCosmeticRNG`) that swaps and restores the active stream; an
-  `audit()` context manager (DCSS `ASSERT_stable`) asserting zero draws on a
-  chosen stream inside the scope; `peek()` non-advancing reads for tests;
-  per-stream draw counters — the substantive counter is the replay
-  fingerprint T1 compares. A draw from the wrong stream is a bug of INV-2
-  severity; the guards make it loud instead of silent.
+  (Brogue `assureCosmeticRNG`) that swaps and restores the active stream —
+  canon-emitting code paths run under `assure('substantive')`, render paths
+  under `assure('cosmetic')`; an `audit()` context manager (DCSS
+  `ASSERT_stable`) asserting zero draws on a chosen stream inside the scope
+  (the test guard — T5 wraps perception checks in it); `peek()` non-advancing
+  reads for tests; per-stream draw counters — the substantive counter is the
+  replay fingerprint T1 compares. A draw from the wrong stream is a bug of
+  INV-2 severity; the guards make it loud instead of silent. **Lint rule
+  (substantive by definition):** any draw whose value lands in an event's
+  `outcome`/`state_changes`/`knowledge` is substantive — a cosmetic draw on a
+  canon path fires the `assure` guard with Brogue's
+  `brogueAssert(rogue.RNG == RNG_SUBSTANTIVE)` loudness.
 - `core/clock.py` — integer tick from 0; day-phase boundaries and
   ticks-per-action are pack rule data (`rules.json`), never constants in
   code (INV-3). One tick ≈ 12 in-world minutes; a full day ≈ 1440 ticks
@@ -55,6 +64,11 @@
   phase 6), per-category files, JSON-Schema validation at load, closed
   enums checked, `"_"` commentary fields ignored, name-based references
   resolved after all files load (load-then-resolve; no forward declarations).
+  **Phase-0 minimum lint (~50 lines stdlib, fails loudly at load, before any
+  simulation):** orphan-reference check — a behavior rule referencing a
+  trigger, an effect referencing an item, a template referencing an event
+  type: the target must exist (closed per pack); closed-enum check on every
+  enumerated field. Full UAP/live-char AP lint is phase 6, never earlier.
 - `core/loop.py` + playscript runner — the tick driver (KeeperRL
   `Model::update` shape): pop the next entry; while the entry's tick passes
   integer boundaries, run the per-tick system passes first (fixed order,
@@ -97,6 +111,31 @@ float-drift across engines is the named cause).
   resolver emit the event. Rejected intents are recorded as no-op events
   with a cause chain (the world noticed the attempt — or did not, per
   perception), never silently dropped.
+  **Intent OCC (`based_on_event_seq`):** every Intent carries the
+  projection's `event_seq` it was proposed against; on apply, if
+  `MAX(event_seq) > based_on_event_seq` **and** the precondition is broken
+  in the new projection — reject with a cause chain to the event that broke
+  it; a no-op event is recorded either way. The same OCC semantics the
+  phase-1 validator uses — one mechanism, two scales.
+  **Intent lifecycle (Endless Sky 7-state reduced):**
+  `PROPOSED → ACCEPTED (SCHEDULED completion entry enqueued) | REJECTED
+  (no-op event with cause)`; "accepted but pending" = the SCHEDULED
+  completion entry in the queue; a precondition broken before the
+  completion tick → a SEEDED fail-trigger emits `mission_failed` with a
+  cause chain to the original accept event. The full offer/accept/decline/
+  complete/fail/defer/visit state machine is a phase-3 refinement (P3c).
+- **Scheduler DAG (SCHED-1, lands iter-2):** the annotation language —
+  every system dataclass declares `reads: tuple[str, ...]` and
+  `writes: tuple[str, ...]` as data loaded from JSON packs (entt
+  discipline — Python has no const, so the access spec is content, not
+  signature); optional `before: tuple[str, ...]` / `after: tuple[str, ...]`
+  hints (the Bevy `.before()`/`.after()` analogue) for explicit ordering.
+  `core/scheduler.py::build()` topologically sorts on read/write
+  intersection; two systems both writing the same component without an
+  explicit `before`/`after` between them → `ScheduleAmbiguityError` naming
+  the offending pair — a unit test with a deliberately conflicting pair
+  fails at build time, before any test run. "Fails loudly" = an exception
+  at DAG build, never a runtime race.
 - **Preconditions as data** (Wesnoth `[filter]` family → JSON): a
   per-noun structured filter map (`Dict[str, list]`), never a string
   expression language (L10 — the Wesnoth `filter_condition`
@@ -111,7 +150,13 @@ float-drift across engines is the named cause).
   records and perceivable state tokens witnesses can perceive — alongside
   `state_changes` and `hooks` (L8 pairing). "Tried to steal — failed, the
   world did not change" is dead by L1; the fix is the partial-sighting
-  records the walkthrough already specifies.
+  records the walkthrough already specifies. **Precursor contract:** at
+  iter-2 a Price marker is the tuple `(perceivee_id, marker_type,
+  fidelity_hint, cause_event_id)` — a partial-sighting precursor; iter-3
+  generalizes it into the full `KnowledgeRecord` schema (channels ×
+  fidelity). The migration is an additive schema_version bump plus a
+  `_correction` event family rewriting partial-sighting records as full
+  knowledge records (INV-5: append, never edit).
 - **Effect family = one transition primitive + flag-gated triggers**
   (Brogue `promoteTile`): fire exposure, flammability flags, stochastic
   promotion ticks — all one mechanism with per-layer trigger sources, in
@@ -123,15 +168,17 @@ float-drift across engines is the named cause).
 - **INV-3 stoplist test** lands here: grep for domain words in `core/` +
   `sim/` fails CI.
 
-**Donor stack.** Prom Week (social physics, via `CORE_DESIGN_RESEARCH.md`
-§2) · live-char (Trigger→Action→Price; observability law L1) · Brogue
-(`promoteTile`, extinguishing priority, stochastic promotion) · C:DDA (flat
-effect vocabulary; itemgroup `collection`/`distribution` for placement) ·
-Paradox (`weight_multiplier = base + modifier{add|factor|trigger}` for
-context-sensitive option weighting — as JSON, not script) · Endless Sky
-(mission lifecycle `to: offer/accept/complete/fail/defer` → intent
-`accept_if/complete_if/fail_if`) · ink (`+` persistent vs `*` single-shot
-→ `accept_policy`) · ai-town (Intent discriminated union).
+**Donor stack.** Prom Week (social physics — synthesis-only: academic
+  paper + GDC talk, no code repo; no deep dive planned, per
+  `CORE_DESIGN_RESEARCH.md` §2) · live-char (Trigger→Action→Price;
+  observability law L1) · Brogue
+  (`promoteTile`, extinguishing priority, stochastic promotion) · C:DDA (flat
+  effect vocabulary; itemgroup `collection`/`distribution` for placement) ·
+  Paradox (`weight_multiplier = base + modifier{add|factor|trigger}` for
+  context-sensitive option weighting — as JSON, not script) · Endless Sky
+  (mission lifecycle `to: offer/accept/complete/fail/defer` → intent
+  `accept_if/complete_if/fail_if`) · ink (`+` persistent vs `*` single-shot
+  → `accept_policy`) · ai-town (Intent discriminated union).
 
 **Watch-outs.** No mid-action cancellation in v0 — a cancelled action is a
 new event (`MVP_SCOPE.md` §8). No free-text parsing (phase-2 gate). Every
@@ -177,14 +224,16 @@ dice roll keyed through the RngBank (L5) — a bare `random.` import in
 - **Detail callbacks** (P2c, owner-pending): talk topic selection = most
   salient known fact of the teller — knowledge *used*, not just stored.
 
-**Donor stack.** The Sims (gossip propagation, via synthesis §2) · Prom
-Week (relations gate actions) · Neighborly (pair-keyed map shape) · C:DDA
-(pair-keyed faction booleans) · CK3/Paradox (relation axes; secrets arrive
-phase 3+) · DF Legends (`hf_reputation_change` → reputation-as-event;
-epistemology schema) · Generative Agents (memory stream; retrieval shape
-reserved for phase 4) · live-char (Influence Boundary; embodiment) ·
-Wesnoth (`sighted` — perception as first-class event source) · Mesa
-(amnesia anti-pattern the log fixes).
+**Donor stack.** The Sims (gossip propagation — synthesis-only:
+proprietary, patterns-from-papers per D-015; no deep dive possible, per
+`CORE_DESIGN_RESEARCH.md` §2) · Prom
+Week (relations gate actions — synthesis-only, as above) · Neighborly
+(pair-keyed map shape) · C:DDA (pair-keyed faction booleans) · CK3/Paradox
+(relation axes; secrets arrive phase 3+) · DF Legends (`hf_reputation_change`
+→ reputation-as-event; epistemology schema) · Generative Agents (memory
+stream; retrieval shape reserved for phase 4) · live-char (Influence
+Boundary; embodiment) · Wesnoth (`sighted` — perception as first-class
+event source) · Mesa (amnesia anti-pattern the log fixes).
 
 **Watch-outs.** `known_by` is derived, never stored (L3). No group
 reputation (D-006) — spread between guards is transfer events at watch
@@ -226,6 +275,19 @@ from source incompleteness, not a rumor system.
   changes state, or bypasses the Intent→Event front-door. Director-off =
   the buffer still exists (hooks seed), nothing releases; A/B measures the
   delta (T8).
+  **Rejection policy:** a rejected director Intent consumes the release
+  budget (1 per beat — the director never spams); after a rejection the
+  target NPC gets a per-NPC cooldown of N beats (pack data — the
+  `MinGapBetweenEncounters` analogue applied to targeting); the entropy
+  sensor stops targeting dead actors (observable projection). STAGNATION
+  stays a purely entropy-driven state — targeting failures never fake it.
+  **Per-run scope:** director adaptation state is per-run — INV-1
+  (`state = fold(log)`, the log is per-run) forbids cross-run persistence
+  of director observations; the seeded-hook buffer reseeds from the master
+  seed every run. Director *policies* (RAMP/PEAK/REST/STAGNATION parameters,
+  weight tables, cooldowns) are pack data — constant across runs with the
+  same pack. "Director learns the player" (Alien) stays the named
+  anti-pattern (L6).
 - **Goal/urge ticker** (P2b, D-021): NPC goals → occasional autonomous
   actions (the drunkard seeks ale, the maid roams, the guard patrols)
   through the same queue and tick discipline — M5 non-PC share becomes
@@ -257,8 +319,11 @@ core is dead — that is the test working, not a bug to paper over.
 - **Event vs tale split** (RimWorld `TaleDef`): the chronicle line is a
   derived prose-ready record — created when the event fires, attached to
   the participating entities, pruned per cause-chain window (the
-  `maxThreads` analogue applied to causal chains, not type buckets). Canon
-  stays in the JSONL; the tale is a fold (L3).
+  `maxThreads` analogue applied to causal chains, not type buckets — a
+  deliberate departure from RimWorld's per-taleType buckets, recorded as
+  such; a pack rule `prune_window: Dict[event_type, int]` may return for
+  multi-scenario chronicles in phase 5+, an option recorded here, not
+  built). Canon stays in the JSONL; the tale is a fold (L3).
 - **`render/` = deterministic tracery** (CHRON-1): `templates.json` as the
   JSON symbol table (symbol → alternatives, nested `#symbol#` expansion,
   dot-notation hierarchies, modifiers `.a`/`.capitalize`/…, save/restore
@@ -267,9 +332,15 @@ core is dead — that is the test working, not a bug to paper over.
   tracery's, the engine is ~200 lines of stdlib, and T1 covers the
   chronicle too (byte-identical). ink's conditional text
   (`{condition: text|else}`) rides the same engine; ink's `shuffle`
-  becomes a seeded draw — the named determinism hazard, fixed by
-  construction. Endless Sky `phrase` (one symbol → list) is the minimal
-  rung for name variety.
+  semantics (random pick **without immediate repeat**) is preserved via a
+  per-symbol `ShufflePool` state machine — candidates =
+  `sorted(alternatives)` minus `last_pick`; if more than one candidate
+  remains, tie-break by a seeded draw from the cosmetic stream; a single
+  remaining candidate is taken as-is; `last_pick` advances after every
+  expansion. ~20 lines of stdlib: ink's no-immediate-repeat semantics and
+  tracery's determinism both hold; the pool state lives in the render pass
+  and never touches canon. Endless Sky `phrase` (one symbol → list) is the
+  minimal rung for name variety.
 - **Importance gates surfacing** (`MVP_SCOPE.md` §9 owns the rule): the
   pack rule (entities touched + irreversibility + far hooks → low/medium/
   high) decides which events get tale lines at all; day headers group
@@ -304,7 +375,7 @@ everything the day a render cache is added.
 | Test | Donor technique folded in |
 |---|---|
 | T0 schema | every log line validates; the doc example is the fixture (D-010) |
-| T1 determinism | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ known-good seed catalogs** diffed against committed outputs (Brogue `test/seed_catalogs/`) |
+| T1 determinism | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ known-good seed catalogs** diffed against committed outputs (Brogue `test/seed_catalogs/`). **Fixture-regeneration guard (runs inside pytest, no CI change):** T1 executes twice — (1) byte-identity against committed fixtures; (2) a fresh regeneration into a tmp dir diffed against the committed fixtures; a divergence with unchanged `schema_version` = fail. A schema change makes "regenerate fixtures" a mandatory iteration step + a migration note in `EVENT_SCHEMA.md` |
 | T2 replay | `fold(log) == state`; SQLite dropped and rebuilt, equality again (EventStore projection equivalence; `rebuild` as the INV-1 mechanism) |
 | T3 blind-NPC | zero knowledge leaks on the suite; UAP motivation-hole crosswalk designs the cases |
 | T4 irreversibility | `irreversible` state changes never revert without counter-events (fire has none) |

@@ -50,7 +50,11 @@ grammar-constrained JSON only.
 
 ## 4. Python determinism recipe
 
-- `PYTHONHASHSEED=0` (env, CI, docs); a single `random.Random(seed)` instance;
+- `PYTHONHASHSEED=0` (env, CI, docs); randomness flows only through the
+  `RngBank` — one master seed, named streams derived via
+  `stable_hash(f"{seed}:{stream}")` = sha256-based, environment-independent
+  (INV-2, D-028; RNG-1 in `docs/BLUEPRINT.md`); cosmetic draws never touch
+  the canon path;
   no wall-clock anywhere **including the log header**; iterate only via
   `sorted()` or construction order; queue key `(tick, sub_order, actor_id)`.
 - The byte-identical guarantee is same-environment only: the header records

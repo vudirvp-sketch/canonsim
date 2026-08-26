@@ -50,7 +50,7 @@ them.
 | ID | Invariant | Enforced by |
 |---|---|---|
 | INV-1 | **Event sourcing.** No state change outside an event. State = fold(log). The raw JSONL log is the only truth; SQLite is a rebuildable index. | T2 replay test; review |
-| INV-2 | **Determinism.** One `random.Random(seed)` instance; no wall-clock (including the log header); iteration only via `sorted()` or construction order; queue key `(tick, sub_order, actor_id)`; `PYTHONHASHSEED=0`. | T1 byte-identical test |
+| INV-2 | **Determinism.** Single point of randomness control — one master seed; named streams deterministically derived from it via the `RngBank` authority (stable hash of `f"{seed}:{stream}"`); no wall-clock anywhere (including the log header); iteration only via `sorted()` or construction order; queue key `(tick, sub_order, actor_id)`; `PYTHONHASHSEED=0`. Cosmetic-stream draws can never desync canon replay. (D-028; supersedes the "one `random.Random(seed)` instance" wording — the donor sources themselves are multi-stream.) | T1 byte-identical test + RngBank fingerprint |
 | INV-3 | **Content/code split.** Core code contains no domain words ("guard", "purse", "tavern"). All setting data lives in `content/tavern_pack/*.json`. | grep stoplist test (from iter-2) |
 | INV-4 | **LLM boundary.** No LLM or network calls in track A before the phase-0 gate passes. | review; import check |
 | INV-5 | **Log immutability.** Committed logs are never edited; corrections are new events. Runtime logs are never committed. | review; `.gitignore` |

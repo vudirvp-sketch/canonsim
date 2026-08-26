@@ -37,6 +37,17 @@ token budgets, assembled fresh every beat (letta block-manager layout;
 6. **Active options** — the available intents as a grammar-constrained
    choice list.
 
+**Eviction contract (BRIEF-1; letta's overflow lesson, deterministic):**
+every block carries a soft and a hard token budget (pack data — doubles as
+the AP-1 pack-budget lint input). When assembly exceeds a block's hard
+budget, blocks are evicted in ascending priority order:
+`scheduled-lore → recalled-facts → scene-delta → voice-exemplars →
+active-options → directives` — **directives are never dropped**; a freed
+slot is replaced by the marker `[truncated:N items dropped]` — silent drops
+are forbidden. Reflection-on-recurrence is *periodic compaction between
+beats*; eviction is *inside-beat assembly policy* — both exist, they are
+different mechanisms and neither substitutes for the other.
+
 **The validator** (VALIDATION_SPEC sketch owns the clauses): fact
 transaction proposal → check → commit → narrative, with `ExpectedVersion`
 OCC semantics (EventStore) — an Intent references the event version it
@@ -110,7 +121,16 @@ gated epilogue blocks (C:DDA) as director trigger data.
 **Memory** (L3 all the way down): reflection-on-recurrence (Generative
 Agents) — compaction emits higher-level entries that are themselves log
 entries; originals never dropped (INV-1; letta's
-`summarize_messages_in_place` is the named anti-pattern). **Trait
+`summarize_messages_in_place` is the named anti-pattern).
+**Reflection provenance:** every reflection entry carries
+`provenance: list[event_id]` linking to the source records it summarizes;
+on retrieval, when a query hits a contradiction between a reflection and
+one of its sources, the source record outranks the reflection's recency —
+the source is always queryable, the reflection is a derived view, never a
+replacement. A reflection whose provenance no longer resolves (possible
+only in derived stores after offline scavenge — the log itself never drops
+originals, INV-1) is flagged `stale` and excluded from retrieval.
+**Trait
 crystallization** (P3f, LEGEND_SPEC sketch): 3+ related knowledge records
 collapse into a discrete belief token; traits are derived state (fold of
 subset), expandable back to source records for the brief — memory made
@@ -122,8 +142,16 @@ default — `bm25()` ranking with column weights, `NEAR` proximity,
 mechanism (drop, replay, re-index). sqlite-vec for **static lore only**:
 conditionally loaded (probe + fallback), matryoshka slicing if the corpus
 grows, pure-Python `cosine_sim()` fallback so the ladder never breaks
-(L12). Hard boundary unchanged: dynamic world state = SQL + `known_by`,
-never vectors.
+(L12). **Deterministic precedence chain for a static-lore query:**
+(1) FTS5 BM25 always runs first — zero-dep, always available, never fails;
+(2) if the sqlite-vec probe succeeded at startup, vec kNN runs in parallel
+— the two candidate sets union and a Python re-ranker scores
+`α·recency + β·authority + γ·bm25 + δ·cosine` (coefficients are pack
+data, so ranking stays deterministic); (3) if vec is not loaded, FTS5
+candidates alone are returned — **never an empty result**; (4) probe
+fallback order: `vec → pure-Python cosine scan → FTS5-only`. Hard
+boundary unchanged: dynamic world state = SQL + `known_by`, never
+vectors.
 
 **Scene manager & mode B** (one NPC per call): the chorus is a queue, not
 a convention. **Choricler mode F offline**: DuckDB `read_ndjson_auto()`
@@ -167,11 +195,15 @@ intake; fantasy content from packs, not from real-world toponyms.
 **The pack system** (PACK-1 top rung): manifest + module contracts + pack
 CI. Growth rungs, all pre-placed at phase 0: per-category file split
 (C:DDA, ~111 categories proven); `abstract` + `copy-from` inheritance
-(C:DDA / RimWorld `ParentName` / KeeperRL `inherit`); closed enums on
-every record (GeoNames/NE); `"_"` inline commentary; localized name sets
-(one symbol per language, renderer picks — NE `NAME_<lang>` shape);
-append-not-overwrite composition (Paradox on_action); CREDITS sidecar
-for CC-BY sources.
+(C:DDA / RimWorld `ParentName` / KeeperRL `inherit`) with the cycle
+contract: `copy-from` is a **single-parent chain** (no multi-inheritance —
+diamonds rejected by design), **cycle detection at load = CI fail naming
+the offending id pair**, and `abstract: true` records are template-only —
+never instantiated at runtime; cycle detection is a phase-6 design gate on
+PACK-1, not an afterthought. Closed enums on every record (GeoNames/NE);
+`"_"` inline commentary; localized name sets (one symbol per language,
+renderer picks — NE `NAME_<lang>` shape); append-not-overwrite composition
+(Paradox on_action); CREDITS sidecar for CC-BY sources.
 
 **Pack lint = CI, not taste** (L1): the UAP teleology gate as deterministic
 checks — dead event types (no state delta, no hook), orphan entities,
