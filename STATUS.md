@@ -102,6 +102,7 @@ KI#5 unchanged; no docs outside `docs/ref/` + index touched.
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3.
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog.
 - KI#5 · runtime state vs test fold not explicitly separated — risk of O(N²) at startup if `fold(log)` is misused as runtime path. D-023 records the rule: runtime = incremental projection; fold = T2 replay only.
+- KI#7 · Capped-memory drift (2026-08-27): `worklog.md` entries up to ~880 lines vs the 3–5-line law; `TASKS.md` at 1136 with done entries not one-line-collapsed — trim vs migrate needs an owner call (D-025 covers `docs/*.md` caps only, not these rows).
 
 ## FAQ / Pitfalls
 
