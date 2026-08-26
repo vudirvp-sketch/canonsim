@@ -5,6 +5,22 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
+iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (fresh external source: live-char-guide)
+- New `docs/ref/live_char_guide.md` (304 lines): character-card methodology
+  donor — SPINE observable units + Trigger→Action→Price immediate
+  observables; Influence Boundary candidate rule (own state + own
+  knowledge only); BRIEF_SPEC injection grammar; AP→PACK_SPEC lint
+  crosswalk; negative on prompt-compensation machinery + false-memory /
+  fatigue-emulation canon breaks.
+- Catalog §9 + REFERENCES_DEEP §1/§2 + CORE_DESIGN_RESEARCH §2 +
+  SPECS_BACKLOG BRIEF/PACK clauses + TASKS ref-13/iter-0t + STATUS header;
+  8 files — same mandated set as iter-0s. License MIT verified (LICENSE
+  file read). No KI opened; KI#3/4/5/7 unchanged.
+- iter-0f entry deleted (one in, one out, AGENTS §6); KI#7 length drift
+  unchanged (owner call pending).
+- Next: iter-1 core plumbing, unconditionally (19th consecutive docs
+  iteration — owner-requested exception, D-022 logic).
+---
 iter-0s-followup · 2026-08-27 · post-push verification pass (re-delivered owner request)
 - All 8 iter-0s parts confirmed on disk and pushed (0847c14); pytest
   green, ruff clean; UAP still has no LICENSE file (catch re-verified).
@@ -1635,23 +1651,6 @@ iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
   applies again — owner-requested reference continuation). iter-1
   MUST be functional code; no further docs iterations without a
   fresh owner request.
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
-iter-0f · 2026-08-26 · owner-requested manifesto absorption (4 surgical edits)
-- No new doc — the manifesto lands where it belongs: (a) BRIEF_SPEC sketch
-  in SPECS_BACKLOG gets sensory-emitter + beat-boundary delta clause; (b)
-  VALIDATION_SPEC sketch gets prompt-injection neutralized structurally
-  (prose→proposal boundary, grammar-constrained Intent, no post-hoc text
-  sanitization — that path is a crutch); (c) CORE_DESIGN_RESEARCH §6 gets
-  P3e `psychological_echo` as a phase-3+ behavior modifier derived from
-  existing knowledge records (not new data); (d) STATUS FAQ gets a
-  `git ls-files` pitfall (workspace ≠ tracked).
-- Files: docs/SPECS_BACKLOG.md, docs/CORE_DESIGN_RESEARCH.md, STATUS.md,
-  this file, docs/DECISIONS.md (D-018). AGENT_NAVIGATION unchanged — no
-  structural change.
-- Doc-loop alarm: 5th docs iteration in a row. iter-1 MUST be functional
-  code; no further docs iterations without an owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
 
 ---

@@ -902,6 +902,42 @@
     documented condition ("no further ref-N iterations unless a fresh
     external source enters the catalog"); **iter-1 is now unconditionally
     the next iteration**.
+  - `ref-13` (solo, owner-requested, fresh external source) Live Character
+    Guide (the owner's own repo). → done (iter-0t):
+    `docs/ref/live_char_guide.md` — character-card methodology donor (SPINE
+    GHOST→LIE→FLAW→NEED→WANT causal chain of observable units; anchors
+    Trigger→Action→Price where Price = immediate, physical, same-scene
+    observable cost; embodiment State→Body→Sensor→Speech; voice isolation +
+    pattern-matcher principle + recency-dominant influence hierarchy; 7 CORE
+    DIRECTIVES; OCEAN 1–2 extreme-pole budget; 15 anti-patterns
+    symptom→cause→fix; countable diagnostics: 6 scenarios, 6 success
+    metrics, one-change rule). Load-bearing transfers: (1) "every element
+    must produce an observable action" = external validation of the
+    causal-density/dead-event law (second convergence after UAP §0.6, now
+    at character granularity); (2) Price as the immediate-observable half
+    of consequence (D-005 owns the deferred half) — causal-density
+    checklist wording + iter-2 pack-rule pattern, no schema change;
+    (3) Influence Boundary as candidate iter-2/3 architecture rule (NPC
+    behavior reads own state + own knowledge only; other entities' states
+    enter via perceived observable markers — closes system 5 into the
+    perception→knowledge chain); (4) brief-layer law for BRIEF_SPEC (facts
+    as structured tokens, style in template exemplars, AN/lorebook
+    injection-scheduling grammar: depth/probability/cooldown/sticky/range);
+    (5) AP catalog → PACK_SPEC lint vocabulary; (6) 6-scenario battery →
+    playscript suite design. Adapted, not taken raw: SPINE/OCEAN as pack
+    metadata + modifier tables (INV-3 — the spine-hooks-in-core-code
+    variant is a violation, rejected); relation drift as a fold over
+    price-bearing events; GHOST-Layers degradation counter → counted-event
+    capability loss. Rejected: prompt-compensation machinery (token
+    budgets, PP/format locks — track-B shape only), self-disclaimed
+    percentages as thresholds (iter-6 baseline law), psychometrics as
+    runtime systems, false memory + fatigue emulation (canon breaks —
+    INV-1/INV-5 inversions), human-judged gates (our law: log-computed).
+    License: MIT, LICENSE file present (verified 2026-08-27) — content and
+    patterns both liftable, unlike UAP. Doc-loop alarm: 19th consecutive
+    docs iteration — owner-requested exception per the documented
+    condition (fresh external source + explicit request); **iter-1 remains
+    unconditionally the next iteration**.
 
 ## Done
 
@@ -1134,3 +1170,9 @@
   row + SPECS_BACKLOG TEST_PLAN/PACK_SPEC sketch clauses. License catch:
   README claims MIT, no LICENSE file — reference only. Doc-loop exception
   (eighteenth docs iter); iter-1 unconditional next.
+- iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (fresh
+  external source: live-char-guide): `docs/ref/live_char_guide.md`
+  + catalog §9 row + REFERENCES_DEEP §1/§2 rows + CORE_DESIGN_RESEARCH §2
+  row + SPECS_BACKLOG BRIEF_SPEC/PACK_SPEC sketch clauses. License clean:
+  MIT, LICENSE file verified. Doc-loop exception (nineteenth docs iter);
+  iter-1 unconditional next.

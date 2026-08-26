@@ -190,6 +190,7 @@
 | MillennialJesus/ReputeX-Engine | none — reference only | modular AI-driven reputation + language engine for dynamic storytelling scenarios |
 | CorruptTigga/Echo | custom — reference only | text-driven Viking-era open-world life simulation (JS) — LLM-narrated life-sim kin |
 | vudirvp-sketch/universe-audit-protocol-webapp (owner's own) | README says MIT; **no LICENSE file** (checked 2026-08-27 — reference only until fixed) | LLM world-concept audit (5-block pipeline, countable-criteria rubric): take = criteria-as-thresholds discipline, 7-hole taxonomy, prompt shapes + free-tier resilience for phase-1 harness; negative = LLM-as-judge scoring, regex-over-markdown bridge. Deep dive: `docs/ref/uap_audit.md` (ref-12) |
+| vudirvp-sketch/live-char-guide (owner's own) | MIT (LICENSE file verified 2026-08-27) | Character-card methodology for RP with 12B–32B+ models (SPINE causal chain → Trigger→Action→Price anchors → voice isolation → SP assembly → 15 anti-patterns → countable diagnostics): take = Price/observability discipline as pack-lint vocabulary + phase-1 brief injection grammar; negative = prompt-compensation machinery, false-memory/fatigue-emulation canon breaks. Deep dive: `docs/ref/live_char_guide.md` (ref-13) |
 
 ## 10. Proprietary design references [P] — never copy
 

@@ -1,89 +1,115 @@
 # STATUS — canonsim
 
-Iteration: 0s (owner-requested: ref-12 — Universe Audit Protocol webapp deep dive, fresh external source; rubric donor for metrics/harness/pack lint; license catch: README claims MIT, no LICENSE file) · Phase: 0 — simulator without LLM · Date: 2026-08-27
+Iteration: 0t (owner-requested: ref-13 — Live Character Guide deep dive, fresh external source; character-card methodology donor: SPINE/Price/observability → pack lint + brief-layer injection grammar; license clean: MIT, LICENSE file verified) · Phase: 0 — simulator without LLM · Date: 2026-08-27
 
-iter-0s is the **ref-12 solo deep dive** — the owner's own
-`universe-audit-protocol-webapp` (UAP), a fresh external source admitted by
-the documented condition ("no further ref-N iterations unless a fresh
-external source enters the catalog"). Deliverable: `docs/ref/uap_audit.md`
-(+ catalog §9 row, `REFERENCES_DEEP.md` §1/§2 rows,
-`CORE_DESIGN_RESEARCH.md` §2 row, SPECS_BACKLOG TEST_PLAN/PACK_SPEC sketch
-clauses, TASKS ref-12 + iter-0s lines, this header, worklog entry).
+iter-0t is the **ref-13 solo deep dive** — the owner's own
+`live-char-guide`, a fresh external source admitted by the documented
+condition (fresh source + explicit owner request — same D-022 logic as
+iter-0s). Deliverable: `docs/ref/live_char_guide.md` (+ catalog §9 row,
+`REFERENCES_DEEP.md` §1/§2 rows, `CORE_DESIGN_RESEARCH.md` §2 row,
+SPECS_BACKLOG BRIEF_SPEC/PACK_SPEC sketch clauses, TASKS ref-13 + iter-0t
+lines, this header, worklog entry — 8 files, the same mandated set as
+iter-0s).
 
-**What UAP is** (read in full: prompts-v3.ts 1346, pipeline-v3.ts 429,
-scoring.ts 204, types-v3.ts 222, context-bridge.ts 254, protocol-data.ts,
-patch-tree.ts, error-handler.ts 271, llm-client.ts 1140, vitest ~150 cases):
-a no-backend web tool (Next.js 16 static SPA + CORS-proxy Worker → 14 LLM
-providers, Zustand/localStorage) auditing fictional-world concepts through a
-5-block sequential LLM pipeline (protocol v10.0, Russian prompts, English
-JSON keys): 1 Orientation (audit mode conflict/kishō/hybrid; author profile
-7-question test gardener/hybrid/architect; 8-element skeleton; 7-question
-screening, 4+ NO = stop) · 2 Mechanism L1 (MDA+OT 5-level vitality; 17
-vitality criteria, 13/17 alive; N×N connectedness matrix with a verb per
-cell, ≥2 bidirectional links; 5×5 faction matrix, 6 liveness criteria, <3 =
-decoration; Tarkovsky space-memory; ripple ≥2; three handshakes; economic
-arrow 6 questions; "A chtoby chto?" 7-iteration why-chain, break ≤4 =
-critical) · 3 Body+Psyche L2+L3 (5-layer character model; price of greatness
-on identity not HP; Mary Sue 8-item test; Sanderson magic test; **7 logical
-hole types** with quick fixes; Grief Architecture 5 stages × 4
-materialization levels — one level = structural hole) · 4 Meta L4 (three
-reality layers by removal; Cornelian dilemma 4 criteria; misdirection 4
-parameters; narrative debt 4 types; diegetic integrity) · 5 Synthesis
-(prioritized fixes; patch decision tree; verdict; X/52). Engineering:
-chunked sub-requests (4/2/2/2), RPM-aware delay, single retry + 5 s backoff,
-partial-text recovery, per-block temperatures 0.2/0.45/0.45/0.45/0.6,
-regex context bridge with three fallback layers, non-blocking JSON-mode
-checklist scoring with PASS/FAIL/INSUFFICIENT_DATA + evidence quotes.
+**What the guide is** (read in full: `docs/canon/` parts 00–10 + 4
+appendices, ~4700 lines — the repo's declared single source of truth for
+content; `data/character_schema.json` 684): a methodology for building RP
+character cards for 12B–32B+ models (SillyTavern-compatible) that treats
+the card as a **behavioral engine** — every element must produce an
+observable action, never decorate a description. Pipeline: SPINE
+(GHOST→LIE→FLAW→NEED→WANT — a causal chain of observable units: concrete
+past event → quoted false belief → concrete flawed behavior → blocked true
+need → conscious goal compatible with the lie, in tension with the need;
+§4.9 consistency checklist = a causality audit) → Behavioral Anchors
+(Trigger→Action→Price, where **Price = immediate, physical, same-scene
+observable cost**; "will regret it later" is banned as a Price; FLAW-linked
+anchors mandatory; one anchor = one atomic T→A→P link) → Embodiment
+(State→Body→Sensor→Speech — every state must surface physically before
+speech) → Voice Isolation (linguistic voice only in Examples; the model is
+a pattern matcher, not a rule executor; influence hierarchy on 12B: recent
+chat ~85%, examples ~10%, description 0%) → System Prompt assembly (7 CORE
+DIRECTIVES: Show Never Tell / Embodiment First / Spatial & Anatomical Lock
+/ Environmental Reactivity / Influence Boundary / Consequence Driven /
+Pre-Generation Filter) → 15 anti-patterns (symptom→cause→fix) → countable
+diagnostics (6 test scenarios, 6 success metrics, one-change rule, 5+14
+pre-deploy checks). OCEAN as validator with a 1–2 extreme-poles budget;
+Lorebook as injection scheduling (depth/probability/cooldown/sticky/
+range-cascade), not lore storage. Machine-readable mirror:
+`character_schema.json` (spine.want/need/flaw required; anchors 3–12 with
+trigger/action/price required).
 
-**Why it matters to us** — the three load-bearing transfers:
-1. **External validation of the metric law.** UAP §0.6 "count-based
-   screening — code decides, not the LLM" is the narratology-side twin of
-   "metrics computed from the log, not by feel" (`MVP_SCOPE.md` §15); their
-   "A chtoby chto?" chain is our `cause` chain (M3), audited in prose
-   because authored worlds have no log. Independent convergence on
-   "quality gates must be countable over evidence".
-2. **7-hole taxonomy → test crosswalk** (TEST_PLAN sketch): motivation → T3
-   blind-NPC; memory → T2 replay (INV-1 makes the hole structurally
-   impossible); competence → rules-driven behavior; scale → D-005 buffer;
-   resources/ideology/time → tick queue + phase-5 factions.
-3. **Phase-1 harness patterns** (track B): role-in-system persona, full
-   criteria+thresholds embedded in prompts (not labels), staged
-   weaknesses handoff (= our brief-as-delta from the other direction),
-   per-stage temperature policy, free-tier resilience (chunking/RPM/
-   retry/partial recovery), honest-default INSUFFICIENT_DATA verdicts for
-   VALIDATION_SPEC fact reports; pack-admission lint vocabulary for phase 6
-   (PACK_SPEC sketch: dead event types, orphan entities, empty matrix
-   cells, prohibitions as pack metadata + log asserts).
+**Why it matters to us** — the load-bearing transfers:
+1. **External validation of the observability law, round two.** "Every
+   element must produce an observable action" = the causal-density
+   checklist / dead-event law (`MVP_SCOPE.md` §15) arriving from the
+   prompt side; their AP-2 (anchor without Price) is our "tried to steal —
+   failed, the world did not change". After UAP §0.6 this is the second
+   independent convergence on "quality must be countable over
+   observables" — now at character granularity.
+2. **Price = the immediate half of consequence.** D-005 owns the deferred
+   half (hooks seeded at event time); the guide adds: a socially
+   meaningful behavior must carry a same-scene observable marker — a
+   knowledge record or a perceivable state token. Iter-2 pack-rule
+   pattern + causal-density checklist wording; no schema change.
+3. **Influence Boundary as a candidate iter-2/3 architecture rule.** NPC
+   behavior functions read **own state + own knowledge only**; other
+   entities' internal states enter exclusively via perception of their
+   observable markers (embodiment as the states→observables mapping). The
+   guard cannot react to the drunkard's intoxication field — only to
+   slurred speech arriving as a `heard` record. Closes system 5 (states)
+   into the perception→knowledge chain; sharpens T3/blind-NPC. Adopting it
+   as law = owner call at iter-2/3 design time.
+4. **Brief-layer law for BRIEF_SPEC (track B, phase 1).** Facts travel as
+   structured tokens, never style descriptions; voice lives in template
+   exemplars; recency-dominant hierarchy + AN geometry (position 3–5
+   messages from the end, 100–200 tokens, every 5–10 messages) +
+   lorebook scheduling params (depth/probability/cooldown/sticky/range)
+   = the injection-scheduling grammar phase 1 needs.
+5. **AP catalog → PACK_SPEC lint vocabulary (phase 6):** want/need tension
+   + flaw rootedness (AP-9), flaw→rule connectivity (AP-8), clone-NPC
+   check (AP-11), rule atomicity (AP-15), pack budgets (AP-1), rule
+   contradiction (AP-13) — converging with the UAP teleology gate.
+6. **Test discipline:** 6-scenario battery → playscript design; 6 success
+   metrics → log-computable analogs (M4 novelty, state_changes+hooks
+   presence, actor discipline); one-change rule = single-factor A/B on
+   identical seed (T1/T8) stated as experimental method.
 
-**What we reject** (inversions of our invariants): LLM-as-judge scoring
-(X/52 = unseeded opinion of the model that wrote the audit — INV-2
-violation; their own §0.6 applied to screening but not scoring);
-regex-over-markdown inter-block contract (three fallback layers = the
-post-hoc sanitization crutch D-018 rejects); free-form markdown as output
-(no machine contract); invented thresholds 0.6/0.9/0.2 from the integration
-draft (our law: thresholds from the iter-6 measured baseline); literary
-criteria (tragedy-without-villain, cult potential) as anything but pack
-metadata / chronicler material — never core law (INV-3).
+**What we adapt (INV-3-safe routes):** SPINE/OCEAN/stress types as pack
+metadata + modifier tables in `rules.json` (spine-shaped entity records
+referenced by generic rules — the spine-hooks-in-core-code variant is an
+INV-3 violation, rejected); relation drift as a fold over price-bearing
+events (Consequence Driven → iter-3/4 candidate pattern); GHOST-Layers
+degradation counter → counted-event capability loss (phase 4); their
+percentages stay shape, not thresholds (iter-6 baseline law — the guide
+itself disclaims them as qualitative markers).
 
-**License catch (KI#6-class, no KI opened — external repo):** README claims
-MIT, **no LICENSE file exists** (checked 2026-08-27). Catalog convention:
-"none" = reference only. Patterns are free; code lifting stays blocked
-until the owner drops a LICENSE into the UAP repo (one file, unlocks a code
-donor in our exact domain). Recorded in catalog §9 + index §2 + the ref
-file.
+**What we reject** (inversions of our invariants): prompt-compensation
+machinery (token budgets, PP=0, format locks, 4K fallbacks, Script Tax —
+patch LLM limits phase 0 does not have; track-B shape only); psychometrics
+as runtime systems (OCEAN/Enneagram/MBTI stay authoring-side pack data —
+INV-3); false memory (unfalsifiable memory injection) and fatigue
+emulation (hidden context degradation narrated as trait) — the INV-1/INV-5
+inversions; human-judged gates (our law: log-computed M1–M5, humans only
+at T7); their single-character focus offers nothing for systems 2/4/6
+(epistemology remains DF Legends / Paradox territory).
 
-**Doc-loop accounting:** 18th consecutive docs iteration. Exception is the
-documented one (fresh external source, owner request — same D-022 logic).
-The alarm condition now stands harder than before: **iter-1 is
+**License: clean.** MIT LICENSE file present and read in full
+(2026-08-27) — unlike UAP, content and patterns are both liftable with
+attribution. Recorded in catalog §9 + index §2 + the ref file.
+
+**Doc-loop accounting:** 19th consecutive docs iteration. Exception is the
+documented one (fresh external source + explicit owner request — D-022
+logic, same as iter-0s). The alarm condition stands: **iter-1 is
 unconditionally the next iteration** — no further ref-N, no spec writing,
 no doc polish without a fresh owner request.
 
-**iter-0r closing summary** (full detail: git history + worklog entry):
-ref-10 + ref-11 6-batch (entt 359, bevy 469, eventstore, sqlite_fts 368,
-duckdb, sqlite_vec) — ECS scheduling + event-sourcing + storage-layer
-pattern-only references; KI#6-class license drift caught pre-flip twice
-(EventStore BSD→ESLv2 history, sqlite-vec dual MIT/Apache); KI#3, KI#4,
-KI#5 unchanged; no docs outside `docs/ref/` + index touched.
+**iter-0s closing summary** (full detail: git history + worklog entry):
+ref-12 UAP solo deep dive delivered (`docs/ref/uap_audit.md`:
+countable-criteria rubric donor — external validation of the §15 metric
+law; 7-hole → T2/T3/D-005 crosswalk; phase-1 harness prompt + resilience
+patterns; pack-lint vocabulary; negative on LLM-as-judge, regex bridges,
+free-form canon); license catch stands — no LICENSE file in the UAP repo
+(reference only until fixed).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -116,15 +142,16 @@ KI#5 unchanged; no docs outside `docs/ref/` + index touched.
   `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
   actually tracked. This is the diagnostic for KI#1-class losses and for
   "the file exists but tests can't find it" surprises.
-- **Doc-loop alarm vs owner-requested research.** Seventeen docs iterations in
+- **Doc-loop alarm vs owner-requested research.** Nineteen docs iterations in
   a row would normally force a stop (AGENTS §2.5). Owner-requested research
-  passes are the explicit exception (D-022). The rule still bites: this is
-  the last allowed research-only iteration before iter-1, no further
-  exceptions without a fresh owner request. iter-0r is the seventeenth docs
-  iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j, 0k, 0l, 0m, 0n,
-  0o, 0p, 0q, 0r; iter-0d was infra). All ref-N backlog items are now
-  complete (ref-1 through ref-11, plus the iter-0h cousins: Neighborly +
-  Mesa + DF Legends XML); no further ref-N iterations remain.
+  passes are the explicit exception (D-022) — but only under the documented
+  condition: a fresh external source + an explicit request. iter-0t is the
+  nineteenth docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
+  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t; iter-0d was infra); iter-0s
+  (UAP) and iter-0t (live-char-guide) were each admitted under that
+  condition. All ref-N backlog items are complete — ref-1 through ref-13
+  plus the iter-0h cousins (Neighborly + Mesa + DF Legends XML); no
+  further ref-N iterations remain without a fresh external source.
 - **Substance over line count (D-025) + per-ref split (D-026).** The
   400-line cap was a crutch — iter-0i trimmed real depth (XML element
   lists, event-type enumerations, Mesa pseudo-code, DataCollector
@@ -183,7 +210,12 @@ KI#5 unchanged; no docs outside `docs/ref/` + index touched.
   opening block at iter-0r is 803 lines (over the 600 cap) —
   substance-justified per §6.1 (named systems + real field names +
   type enumerations + per-source verdicts are all substance, never
-  cut); documented in worklog.
+  cut); documented in worklog. At iter-0s the STATUS opening block
+  was cut to ~307 lines by a cruft pass (iter-0r detail moved to git
+  history) and `uap_audit.md` is 212 lines; at iter-0t
+  `live_char_guide.md` is 304 lines — both under cap by construction
+  (the pattern-not-content rule §0.7 keeps each file to the
+  methodology layer only).
 - **License drift between catalog and index (KI#6, closed iter-0n; pitfall
   persists).** The `REFERENCES_DEEP.md` §2 index table is **not** the source
   of truth for licenses — `REFERENCES.md` (the catalog) is. The index
@@ -227,6 +259,9 @@ KI#5 unchanged; no docs outside `docs/ref/` + index touched.
   "MIT" vs verified dual) was fixed in the same §2 edit. Both drifts
   are KI#6-class pre-flip catches; the standing pre-flip check is now
   exercised across iter-0o/0p/0q/0r — every ref-N batch iteration.
+  iter-0t verified ref-13 (MIT, LICENSE file read in full) against the
+  new catalog §9 row — no drift; the check now covers the two
+  owner-repo sources (UAP, live-char-guide) as well.
 - **Catalog vs deep dives vs synthesis — three places, three jobs.**
   `docs/REFERENCES.md` is the **catalog** (license, URL, phase gating,
   intake rules). `docs/CORE_DESIGN_RESEARCH.md` §2 is the **synthesis**
@@ -298,11 +333,22 @@ virtual-table module + `vec_distance_cosine` + matryoshka
 the precedents for `core/storage.py` SQLite index + `brief/
 assembler.py` bm25 ranking + `render/` highlight/snippet + the
 offline `chronicler` pipeline (phase-3+ scale) + phase-4 retrieval
-layer (FTS5 + sqlite-vec hybrid). **All ref-N backlog items are now
-complete** — ref-1 through ref-12 (ref-12 = UAP, iter-0s), plus the
+layer (FTS5 + sqlite-vec hybrid). The ref-13 deep dive (SPINE observable
+units + Trigger→Action→Price immediate observables; voice isolation /
+pattern-matcher law + recency-dominant influence hierarchy + lorebook
+depth/probability/cooldown/sticky/range scheduling; 15-AP lint vocabulary;
+Influence Boundary — NPC behavior reads own state + own knowledge only)
+is the precedent for iter-2 outcome observables (price markers), the
+iter-3/4 relation-drift-as-price-fold candidate pattern, the phase-1
+brief layer (BRIEF_SPEC — facts as structured tokens, style in template
+exemplars) and phase-6 pack authoring lint (PACK_SPEC AP crosswalk).
+**All ref-N backlog items are now
+complete** — ref-1 through ref-13 (ref-12 = UAP, iter-0s; ref-13 = Live
+Character Guide, iter-0t), plus the
 iter-0h cousins (Neighborly + Mesa + DF Legends XML). The doc-loop alarm
-now counts 18 consecutive docs iterations; iter-0s was admitted under the
-documented exception (fresh external source + owner request). **iter-1 is
+now counts 19 consecutive docs iterations; iter-0s and iter-0t were each
+admitted under the documented exception (fresh external source + owner
+request). **iter-1 is
 unconditionally the next iteration** (functional code, not docs); no
 further ref-N iterations, spec writing or doc polish without a fresh owner
 request.
