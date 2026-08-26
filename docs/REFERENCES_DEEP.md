@@ -26,6 +26,10 @@
 > is *consulted*. Reading design notes early is allowed; vendoring early
 > is scope creep. Nothing here lifts the phase-0 zero-external-code gate
 > (D-012, D-015, D-022).
+>
+> The applied synthesis over these deep dives — cross-reference resolutions
+> and donor combinations per build component — lives in `docs/BLUEPRINT.md`
+> (D-027). This index stays the owner of the iteration plan + format.
 
 ## 0. Format (every per-ref file follows this template)
 

@@ -1176,3 +1176,12 @@
   row + SPECS_BACKLOG BRIEF_SPEC/PACK_SPEC sketch clauses. License clean:
   MIT, LICENSE file verified. Doc-loop exception (nineteenth docs iter);
   iter-1 unconditional next.
+- iter-0u · 2026-08-27 · owner-requested references distillation (no new
+  external source — the request itself is the trigger, D-022 wording
+  satisfied): `docs/BLUEPRINT.md` + `docs/blueprint/phase0.md` +
+  `docs/blueprint/phases.md` (D-027 — the resolution ledger: 12
+  cross-reference tensions resolved into mechanisms; 12 cross-cutting
+  laws; per-iteration donor stacks; phases 1–6 architecture) +
+  AGENT_NAVIGATION §1/§2/§3 + REFERENCES_DEEP pointer + STATUS/worklog
+  synced; STATUS "Next step" drift folded into the blueprint build index.
+  Doc-loop exception (twentieth docs iter); iter-1 unconditional next.

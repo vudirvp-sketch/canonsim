@@ -20,6 +20,8 @@
 | `docs/DECISIONS.md` | ADR-lite, stable decisions | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
 | `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | research (iter-0e); absorbed into DECISIONS/TASKS on owner decision |
+| `docs/BLUEPRINT.md` | reference distillation: resolution ledger (12 mechanisms) + cross-cutting laws + build index; entry to `docs/blueprint/` | active (iter-0u); maintained at deep-dive time |
+| `docs/blueprint/` | per-part applied synthesis: `phase0.md` (iter-1..6 combined donor designs), `phases.md` (phases 1–6 architecture + cross-cutting) | active; read before the matching iteration/phase |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
 | `docs/REFERENCES_DEEP.md` | index + format template + iteration plan for per-ref deep dives; the deep-dive content lives in `docs/ref/` (D-026) | active (rots — quarterly review alongside `doc-2`) |
 | `docs/ref/` | per-reference deep dives (one file per source: `neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`, `paradox_scripting.md`, `rimworld.md`, `l4d_director.md`, `alien_isolation.md`, `wesnoth_wml.md`, `endless_sky_dsl.md`, `ink.md`, `tracery.md`, `brogue.md`, `dcss.md`, `keeperrl.md`, `generative_agents.md`, `ai_town.md`, `letta.md`, `azgaar_fmg.md`, `natural_earth.md`, `geonames.md`, `libtcod.md`, `rot_js.md`, `red_blob_games.md`, `entt.md`, `bevy.md`, `eventstore.md`, `sqlite_fts5.md`, `duckdb.md`, `sqlite_vec.md`, …); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review alongside `doc-2`) |
@@ -39,7 +41,7 @@
 |---|---|
 | Trivial — typo, single value, doc fix | `STATUS.md` |
 | Normal — bugfix, small feature, one system | this file → `STATUS.md` → `worklog.md` |
-| Deep — new system, schema/queue/director touch | + `AGENTS.md` → `docs/MVP_SCOPE.md` → `docs/EVENT_SCHEMA.md` |
+| Deep — new system, schema/queue/director touch | + `AGENTS.md` → `docs/BLUEPRINT.md` (ledger rows for the component) → `docs/MVP_SCOPE.md` → `docs/EVENT_SCHEMA.md` |
 | Huge — phase gate, architecture, restructure | + `docs/ROADMAP.md` → `docs/VISION.md` → `docs/DECISIONS.md` |
 | LLM-track (`bg-*`) | + `docs/TECH_NOTES.md` → `docs/SPECS_BACKLOG.md` |
 
@@ -54,6 +56,7 @@
 | Why it all exists, honest limits | `docs/VISION.md` | link |
 | Stable design decisions | `docs/DECISIONS.md` | link |
 | Core-design research & depth proposals | `docs/CORE_DESIGN_RESEARCH.md` | link; accepted items move to DECISIONS/TASKS, line flips to `absorbed` |
+| Cross-reference resolutions & donor combinations per build component | `docs/BLUEPRINT.md` (ledger + laws) + `docs/blueprint/<part>.md` (application) | link, never restate; cite ledger row IDs (e.g. "per RNG-1") |
 | Volatile: model stack, hardware, DF pitfalls | `docs/TECH_NOTES.md` | link, expect rot |
 | External sources: donors, licenses, phase gating | `docs/REFERENCES.md` (catalog) ↔ `docs/ROADMAP.md` §4 (active shortlist) ↔ per-source deep dives (`docs/REFERENCES_DEEP.md` index + `docs/ref/<source>.md` files, D-026) | link, never restate |
 | Agent law, invariants | `AGENTS.md` | `STATUS.md` carries one-liners only |

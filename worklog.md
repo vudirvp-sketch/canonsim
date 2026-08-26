@@ -5,6 +5,23 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
+iter-0u · 2026-08-27 · owner-requested references distillation (synthesis pass)
+- New `docs/BLUEPRINT.md` (149 — resolution ledger: 12 cross-ref tensions →
+  mechanisms; 12 cross-cutting laws; build index) + `docs/blueprint/phase0.md`
+  (340 — iter-1..6 combined donor designs) + `docs/blueprint/phases.md` (224 —
+  phases 1–6 + cross-cutting). D-027: fourth anti-drift place; STATUS
+  "Next step" drift folded into the blueprint build index.
+- Two clarifications enacted as ledger rows: RNG-1 (RngBank — INV-2 intent
+  clarified, replay fingerprint added) and EPIST-1 (Influence Boundary
+  adopted as default iter-2/3 design, owner-vetoable at the iter-3 gate).
+- 9 files touched (3 new + mandated sync set: AGENT_NAVIGATION §1/§2/§3,
+  DECISIONS D-027, REFERENCES_DEEP pointer, TASKS, STATUS, worklog) — over
+  the 3–5 soft limit, same mandated set pattern as iter-0s/0t. iter-0h
+  dropped (one in, one out). No code touched; pytest green, ruff clean.
+- Next: iter-1 core plumbing, unconditionally — read `docs/blueprint/
+  phase0.md` §1 + ledger rows RNG-1/SCHED-1/STATE-1/STORE-1/TEST-1 first
+  (20th docs iteration — owner-requested exception, D-022 wording).
+---
 iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (fresh external source: live-char-guide)
 - New `docs/ref/live_char_guide.md` (304 lines): character-card methodology
   donor — SPINE observable units + Trigger→Action→Price immediate
@@ -1668,22 +1685,4 @@ iter-0g · 2026-08-26 · owner-requested research pass (Q1–Q3 yes, Q4 no)
   SPECS_BACKLOG, MVP_SCOPE. AGENT_NAVIGATION unchanged. No code touched.
 - Next: iter-1 core plumbing per `docs/TASKS.md`; no further docs iterations
   without an owner request.
-
----
-iter-0h · 2026-08-26 · owner-requested references deep dive (D-022 exception)
-- New `docs/REFERENCES_DEEP.md` (400 lines): format template + iteration
-  plan (which references get a solo iter, which batch 2–3) + first batch
-  — Neighborly (P2a pair-keyed relations precedent), Mesa (Python ABM
-  pattern + amnesia anti-pattern), DF Legends XML export schema (event
-  id/tick, `event_collections`, reputation-as-event). D-024 records the
-  three-place anti-drift policy: catalog (REFERENCES) ↔ synthesis
-  (CORE_DESIGN_RESEARCH §2) ↔ deep dives (REFERENCES_DEEP).
-- AGENT_NAVIGATION §1 + §3 updated (new doc + ownership row triple-link);
-  STATUS FAQ gets a three-places-three-jobs pitfall; TASKS gets `ref-N`
-  backlog items (ref-1 DF worldgen solo, ref-2 C:DDA solo, ref-3 Paradox
-  solo, ref-4..ref-11 batched trios); iter-0h collapsed to Done.
-- Doc-loop alarm: 7th docs iteration in a row (D-022 exception applies).
-  iter-1 MUST be functional code; no further docs iterations without an
-  owner request. 6 files touched — over the 3–5 soft limit, owner-requested.
-- Next: iter-1 core plumbing per `docs/TASKS.md`.
 
