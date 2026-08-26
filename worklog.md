@@ -5,6 +5,23 @@
 > rationale belongs in `docs/DECISIONS.md`.
 
 ---
+iter-0s · 2026-08-27 · owner-requested ref-12 solo deep dive (fresh external source: universe-audit-protocol-webapp)
+- New `docs/ref/uap_audit.md` (countable-criteria rubric donor: external
+  validation of the §15 metric law + gate reviews; 7-hole → T2/T3/D-005
+  crosswalk; phase-1 harness prompt + resilience patterns; pack-lint
+  vocabulary; negative on LLM-as-judge, regex bridge, free-form canon).
+- Catalog §9 + REFERENCES_DEEP §1/§2 + CORE_DESIGN_RESEARCH §2 rows;
+  SPECS_BACKLOG TEST_PLAN/PACK_SPEC clauses; TASKS ref-12 + iter-0s;
+  STATUS header rewritten (cruft pass: 1026 → 307 lines, iter-0r detail
+  lives in git history).
+- License catch: UAP README claims MIT, no LICENSE file — reference only
+  until the owner adds one.
+- Scope note: 8 files touched (3-place anti-drift policy + TASKS/STATUS/
+  worklog each own a mandated edit — beyond the 3–5 soft limit by law, not
+  by creep).
+- Next: iter-1 core plumbing, unconditionally (doc-loop: 18 consecutive
+  docs iterations).
+---
 iter-0r · 2026-08-26 · owner-requested ref-10 + ref-11 6-batch deep dive (D-022 exception)
 - Six open-licensed ECS + event-sourcing + storage-layer pattern-only
   reference files in `docs/ref/`:
@@ -1612,18 +1629,6 @@ iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive (D-022 exception)
   MUST be functional code; no further docs iterations without a
   fresh owner request.
 - Next: iter-1 core plumbing per `docs/TASKS.md`.
-
----
-iter-0e · 2026-08-25 · owner-requested core-design research
-- Added `docs/CORE_DESIGN_RESEARCH.md`: reference synthesis (18 sources →
-  depth primitives + failure modes), composition principle, depth equation,
-  phase-0 audit, proposals P1–P3 (M3/M4/M5 metrics, npc↔npc relations, goal
-  ticker, detail callbacks), open questions Q1–Q4.
-- Conclusion: the phase-0 ontology is already depth-first; real gaps are
-  execution details (P1) plus three small P2 additions — owner decision
-  pending on Q1–Q4.
-- AGENT_NAVIGATION §1/§3 updated (new doc + ownership row).
-- Next: owner answers §8 questions; iter-1 core plumbing per `docs/TASKS.md`.
 
 ---
 iter-0f · 2026-08-26 · owner-requested manifesto absorption (4 surgical edits)

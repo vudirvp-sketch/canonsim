@@ -881,6 +881,27 @@
     exception (seventeenth docs iter, D-022 — same exception as
     ref-10 since both ref-10 and ref-11 are in the same iter-0r
     6-batch).
+  - `ref-12` (solo, owner-requested, fresh external source) Universe Audit
+    Protocol webapp (the owner's own repo). → done (iter-0s):
+    `docs/ref/uap_audit.md` — countable-criteria rubric donor (their §0.6
+    "code decides, not the LLM" = external validation of our `MVP_SCOPE.md`
+    §15 metric law and the gate-review instrument) + 7-logical-hole taxonomy
+    crosswalked onto T2/T3/D-005 (TEST_PLAN sketch) + phase-1 harness prompt
+    shapes (role-in-system, criteria-not-labels, staged weaknesses handoff,
+    per-stage temperature 0.2/0.45/0.6, free-tier resilience: chunking /
+    RPM delay / single retry / partial-text recovery) + three-state
+    PASS/FAIL/INSUFFICIENT_DATA honest-default shape for VALIDATION_SPEC
+    + pack-admission lint vocabulary for phase 6 (PACK_SPEC sketch);
+    negative on LLM-as-judge scoring (X/52 = unseeded opinion, INV-2
+    violation), regex-over-markdown bridge (D-018 crutch), free-form canon
+    (INV-4 boundary inversion), invented thresholds (our law: thresholds
+    from the iter-6 baseline). License catch: README claims MIT, no LICENSE
+    file in the repo (checked 2026-08-27) — catalog reads "reference only"
+    until the owner adds one; patterns are free regardless. Doc-loop alarm:
+    18th consecutive docs iteration — owner-requested exception per the
+    documented condition ("no further ref-N iterations unless a fresh
+    external source enters the catalog"); **iter-1 is now unconditionally
+    the next iteration**.
 
 ## Done
 
@@ -1107,3 +1128,9 @@
   sqlite-vec "verify" status resolved by reading LICENSE-MIT
   + LICENSE-APACHE + sqlite-dist.toml manifest. Doc-loop
   exception (seventeenth docs iter, D-022).
+- iter-0s · 2026-08-27 · owner-requested ref-12 solo deep dive (fresh
+  external source: universe-audit-protocol-webapp): `docs/ref/uap_audit.md`
+  + catalog §9 row + REFERENCES_DEEP §1/§2 rows + CORE_DESIGN_RESEARCH §2
+  row + SPECS_BACKLOG TEST_PLAN/PACK_SPEC sketch clauses. License catch:
+  README claims MIT, no LICENSE file — reference only. Doc-loop exception
+  (eighteenth docs iter); iter-1 unconditional next.

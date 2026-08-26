@@ -62,6 +62,7 @@ Adding depth means adding intersections, not adding content.
 | Neighborly (§2) | agent-based settlement: emergent narrative from agent goals + interactions; closest existing cousin | weak epistemology — agents act but don't accumulate structured knowledge; no `known_by`, no fidelity | phase 5 settlement cousin; our `knowledge` records are the missing layer |
 | Red Blob Games (§8) | deterministic algorithmic foundations: A*, FOV, hex/grid math, polygon maps | pure geometry, no narrative; algorithms without an ontology produce puddles | phase 5 worldgen foundations; phase 0 = none (zero-external-code law) |
 | Game Programming Patterns (§8) | pattern vocabulary: Event Queue, Component, Command, State, Observer | patterns without invariants rot; vocabulary alone ships nothing | iter-1 core plumbing uses Event Queue + State; INV-1..INV-5 are the binding constraints that keep patterns honest |
+| UAP webapp (§9) | countable-criteria world audit: rubrics with thresholds over evidence; code decides, not the LLM (their §0.6) | LLM-as-judge scoring (X/52 = unseeded opinion); regex-over-markdown handoff; free-form output | external validation of M1-M5 + gate reviews; 7-hole test crosswalk; phase-1 harness prompt shapes; phase-6 pack lint (`docs/ref/uap_audit.md`) |
 
 `†` Not in `REFERENCES.md` yet — §7 intake queue, D-016 procedure at the
 quarterly `doc-2` review.

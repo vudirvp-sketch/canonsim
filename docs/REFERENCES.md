@@ -189,6 +189,7 @@
 | RusianHu/Labyrinthia-AI | MIT | roguelike fully driven by an LLM (D&D-flavored, Chinese README) — the "LLM does everything" pole |
 | MillennialJesus/ReputeX-Engine | none — reference only | modular AI-driven reputation + language engine for dynamic storytelling scenarios |
 | CorruptTigga/Echo | custom — reference only | text-driven Viking-era open-world life simulation (JS) — LLM-narrated life-sim kin |
+| vudirvp-sketch/universe-audit-protocol-webapp (owner's own) | README says MIT; **no LICENSE file** (checked 2026-08-27 — reference only until fixed) | LLM world-concept audit (5-block pipeline, countable-criteria rubric): take = criteria-as-thresholds discipline, 7-hole taxonomy, prompt shapes + free-tier resilience for phase-1 harness; negative = LLM-as-judge scoring, regex-over-markdown bridge. Deep dive: `docs/ref/uap_audit.md` (ref-12) |
 
 ## 10. Proprietary design references [P] — never copy
 
