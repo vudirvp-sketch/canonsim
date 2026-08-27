@@ -141,6 +141,15 @@
 - `doc-1` VISION freeze review after the phase-0 verdict.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
+- `pack-1` Grim tavern pack candidate (post-gate; `PACK_SPEC.md` trigger —
+  phase 6 or a 2nd setting): the romance/intimacy/coercion line as **pure
+  pack data** — relation axes (`attraction`/`intimacy`/`loyalty`), status
+  axes (`shame`/`anger`), a flirt→proposition action ladder,
+  `consented`/`coerced` crafted knowledge records (D-008 pattern), seeded
+  consequence hooks (jealousy, exposure, regret), dark templates, item
+  extensions. Darkness levers per D-030; zero core change (axis-blind core;
+  event vocabulary per pack, EVENT_SCHEMA §11). Distillation source:
+  D-030 + the PACK_SPEC sketch row. Blocked until: phase-0 gate passed.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13 items
   are done — status one-liners:
@@ -189,3 +198,4 @@
 - iter-0v · 2026-08-27 · owner-requested audit patches: INV-2 rewritten per D-028 (RngBank law wording; TASKS/TECH_NOTES/MVP_SCOPE synced); 18 audit resolutions landed as blueprint sub-clauses (DAG language, intent OCC + lifecycle, price precursor, eviction contract, retrieval precedence, reflection provenance, copy-from cycle contract, ShufflePool, prune_window, director rejection + per-run scope, T1 fixture guard, phase-0 pack lint, event-vocabulary-per-pack); KI#8 opened/closed; KI#7 resolved (worklog trimmed to cap, TASKS done-collapsed).
 - iter-0w · 2026-08-27 · owner-requested post-reference concept realignment: D-029 — digestion complete, skeleton (phases 0–6, 3 layers, INV-1..5) confirmed, blueprint = the mechanics owner; KI#9 calendar/lifecycle drift fixed (sprint calendar dropped → iteration-counted, CORE_DESIGN_RESEARCH absorbed, ROADMAP §2 blueprint pointer, README Status refreshed).
 - iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit: verdict "load-bearing" recorded in STATUS (4-place chain verified — docs/ref/ → synthesis → blueprint → TASKS/SPECS clauses; ledger-term spot-greps all land); FAQ gains the ref-graveyard grep diagnostic; no code.
+- iter-0y · 2026-08-27 · owner-requested content-principles pass: D-030 (darkness = architecture, not content scripts; phase-0 pack unchanged; grim line = post-gate `pack-1`); PACK_SPEC sketch + TASKS synced; KI#7/KI#8 deleted (closed >2 iterations); no code.

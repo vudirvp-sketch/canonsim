@@ -6,6 +6,21 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-0y · 2026-08-27 · owner-requested content-principles pass (D-030)
+- D-030: darkness = architecture, not content scripts — `tavern_pack` v0.1
+  unchanged; tone = data asymmetry (price markers, irreversibility,
+  per-NPC rumor damage, D-006 held); grim/romance line = post-gate
+  `pack-1` candidate (TASKS infra backlog) + PACK_SPEC sketch clauses;
+  consent/coercion = crafted records (D-008 pattern). Core corollary for
+  iter-1..3: axis-blind (pack-declared axes/statuses/event vocabulary).
+- 6 files touched — over the 3–5 soft limit: 2 targets (DECISIONS,
+  SPECS_BACKLOG) + the mandated sync set (STATUS, worklog, TASKS, README
+  status drift — same pattern as 0w/0x). KI#7/KI#8 deleted (closed >2
+  iterations); external LLM romance-pack proposal evaluated in chat, verdict
+  distilled into D-030 (insight kept, scope creep fenced off). No code;
+  pytest green, ruff clean. 24th docs iteration (owner-requested, D-022);
+  **iter-1 code is next, unconditionally**.
+---
 iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit
 - Verdict: load-bearing — 4-place chain verified (docs/ref/ → synthesis →
   blueprint → TASKS/SPECS clauses); ledger-term spot-greps all land in
@@ -83,8 +98,3 @@ iter-0q · 2026-08-26 · owner-requested ref-8 + ref-9 6-batch deep dive
 - New `docs/ref/{azgaar_fmg,natural_earth,geonames,libtcod,rot_js,
   red_blob_games}.md`; ref-8/ref-9 flipped todo→done; AGENT_NAVIGATION §1 +
   STATUS + TASKS synced.
----
-iter-0p · 2026-08-26 · owner-requested ref-7 3-batch deep dive
-- New `docs/ref/{generative_agents,ai_town,letta}.md` (LLM-agent precedents,
-  mostly negative; bg-4 cost anchors); ref-7-a/b/c flipped todo→done with
-  corrected Apache-2.0 license annotation on ref-7-a.

@@ -1,30 +1,28 @@
 # STATUS — canonsim
 
-Iteration: 0x (owner-requested: reference-influence traceability audit —
-"are the ref/blueprint juices extracted and load-bearing?") · Phase: 0 —
+Iteration: 0y (owner-requested: content-principles pass — what any content
+pack must be, decided *before* any content is written) · Phase: 0 —
 simulator without LLM · Date: 2026-08-27
 
-iter-0x records the owner-requested verification round. **Verdict: the
-references are load-bearing, not a graveyard.** The four owned places
-(D-024/D-026/D-027) chain intact: `docs/ref/` (33 files, per-source
-verdicts) → `CORE_DESIGN_RESEARCH.md` §2 (absorbed) → `BLUEPRINT.md` ledger
-+ laws → `blueprint/` parts → TASKS iter-1..6 + SPECS_BACKLOG clauses.
-Evidence: INV-2 itself was rewritten from donor evidence (D-028 — refs
-reached the constitution); ledger terms grep-trace from refs into planning
-docs (ShufflePool, ASSERT_stable, Influence Boundary, promoteTile, bm25,
-copy-from, GeoNames 684); the drafted `rules.json` already carries donor
-decisions (D-005 director mode). The same round's plan review found no new
-plan-level blockers beyond the tracked KIs (KI#3/4/5) — consistent with
-D-029. Caveats on record: no code yet — iter-1..6 is where the blueprint
-becomes load-bearing in code; ref-14/15 (Sims, Prom Week) are
-synthesis-only by design; P2c remains the single owner-pending item; the
-drafted flat stagnation timer in `rules.json` is superseded by narrative
-entropy at iter-4 (`docs/blueprint/phase0.md` §4) — tracked, not lost.
-No code, no spec writing, no ref-N.
+iter-0y answers the owner's question "which content pack for the start, given
+the world must not skew positive?" with a law, not a pack: **D-030 —
+darkness is an architectural property, not content scripts.** Phase-0
+`tavern_pack` v0.1 stays exactly as scoped; tone comes from data asymmetry
+inside the existing 8 systems (trust builds slow and breaks fast; price
+markers; irreversibility; per-NPC rumor damage — D-006 held). The evaluated
+external romance-pack proposal is preserved as a distilled post-gate
+candidate: its correct core insight (darkness via consequence chains,
+consent/coercion as data, world-without-player) is already repo law (D-005,
+T4, M5, D-021) and is kept; its scope creep (4 new actions + 6 axes + hooks
++ combat items into a frozen slice), group-reputation leak, and pre-trigger
+spec writing are fenced off (D-030 "why" column). Core corollary for
+iter-1..3 builders: stay **axis-blind** — axes/statuses/event vocabulary
+resolve from pack data (`rules.json` + EVENT_SCHEMA §11 precedent), so a
+future pack adds `attraction`/`shame` with zero code change.
 
-**Doc-loop accounting:** 23rd consecutive docs iteration — owner-requested
-exception (D-022 wording: a fresh owner request). The alarm condition stands,
-now with teeth: **iter-1 (functional code) is unconditionally the next
+**Doc-loop accounting:** 24th consecutive docs iteration — owner-requested
+exception (D-022 wording: a fresh owner request — this pass). The alarm
+condition stands, now with teeth: **iter-1 (functional code) is unconditionally the next
 iteration** — no ref-N, no spec writing, no doc polish without a fresh owner
 request.
 
@@ -49,9 +47,7 @@ request.
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6).
 - KI#5 · runtime state vs test fold not explicitly separated — risk of O(N²) at startup if `fold(log)` is misused as runtime path. D-023 records the rule: runtime = incremental projection; fold = T2 replay only; resolution recorded as ledger row STATE-1.
-- KI#7 · CLOSED iter-0v · capped-memory drift — worklog entries at ~880 lines vs the 3–5-line law; TASKS done entries uncollapsed. Resolved: worklog trimmed to the 10×3–5 cap; TASKS done-entries collapsed to one line; pre-trim history lives in git (commits pre-iter-0v).
-- KI#8 · CLOSED iter-0v · RNG-1 vs INV-2 wording contradiction — the iter-0u audit's blocking finding: the old "one `random.Random(seed)` instance" law text contradicted the RngBank design in AGENTS.md + TASKS iter-1 + TECH_NOTES §4; `stable_hash` was undefined (a built-in `hash()` would have depended on `PYTHONHASHSEED` silently). Resolved by D-028: INV-2 rewritten, sha256-based `stable_hash` pinned, all three sync points fixed in the same iteration.
-- KI#9 · CLOSED iter-0w · plan-calendar & lifecycle drift — `MVP_SCOPE.md` §17 + TASKS iter-1..6 headers still carried the pre-research two-week sprint day-tags; `CORE_DESIGN_RESEARCH.md` fully absorbed but not flipped per its own lifecycle rule; README Status stuck at "iteration 0"; `ROADMAP.md` §2 not linked to the blueprint. Resolved by D-029: calendar dropped (iteration-counted sequencing), lifecycle flipped, README refreshed, blueprint pointer added.
+- KI#9 · CLOSED iter-0w · plan-calendar & lifecycle drift — `MVP_SCOPE.md` §17 + TASKS iter-1..6 headers still carried the pre-research two-week sprint day-tags; `CORE_DESIGN_RESEARCH.md` fully absorbed but not flipped per its own lifecycle rule; README Status stuck at "iteration 0"; `ROADMAP.md` §2 not linked to the blueprint. Resolved by D-029: calendar dropped (iteration-counted sequencing), lifecycle flipped, README refreshed, blueprint pointer added. (KI#7/KI#8 deleted this iteration per the "closed more than 2 iterations" cleanup law, AGENTS §5.)
 
 ## FAQ / Pitfalls
 
@@ -65,14 +61,21 @@ request.
   `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
   actually tracked. This is the diagnostic for KI#1-class losses and for
   "the file exists but tests can't find it" surprises.
-- **Doc-loop alarm vs owner-requested research.** Twenty-three docs iterations
+- **Content/tone questions → D-030 + the `PACK_SPEC.md` sketch row.** The
+  start pack for phase 0 is `tavern_pack` v0.1 as scoped (`MVP_SCOPE.md`
+  §4–§7 own the counts); tone is data asymmetry inside the existing systems,
+  not new systems. Growing the pack or writing a pack spec before its
+  trigger = scope creep (AGENTS §2.4; SPECS_BACKLOG header rule). Grim/romance
+  material accumulates in the sketch row + `pack-1` (TASKS infra backlog)
+  until the PACK_SPEC trigger fires (phase 6 / a 2nd setting).
+- **Doc-loop alarm vs owner-requested research.** Twenty-four docs iterations
   in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
   owner request (iter-0s/0t additionally had fresh external sources;
   iter-0u/0v — distillation and audit; iter-0w — concept realignment; iter-0x
-  — reference-influence audit — rest on the request alone). iter-0x is the
-  twenty-third docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
-  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x; iter-0d was
+  — reference-influence audit — rest on the request alone). iter-0y is the
+  twenty-fourth docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
+  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x, 0y; iter-0d was
   infra). All ref-N backlog items are complete — ref-1 through ref-13 plus
   the iter-0h cousins; ref-14/ref-15 (Sims, Prom Week) are owner-request-only
   candidates; no doc pass at all without a fresh owner request. **iter-1 code

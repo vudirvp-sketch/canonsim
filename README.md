@@ -15,9 +15,10 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0x — reference-influence traceability audit (owner round):
-the ref/blueprint corpus is confirmed load-bearing in the plans (4-place
-chain verified; see `STATUS.md`); no new plan-level blockers. No code yet;
+Phase 0, iteration 0y — content-principles pass (owner round): darkness
+declared an architectural property (D-030) — the phase-0 pack stays as
+scoped, tone comes from data asymmetry inside the existing systems;
+grim-pack material parked as the post-gate `pack-1` candidate. No code yet;
 first code lands in iter-1 (`docs/TASKS.md`) — unconditionally next.
 
 ## For AI agents (primary audience)
