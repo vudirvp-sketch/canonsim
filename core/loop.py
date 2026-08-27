@@ -579,13 +579,11 @@ class Simulator:
         # 2) NPC urgencies — small-formula goal rolls through the intent door
         self._director.next_beat()
         for intent in urgency_intents(
-            self._pack, self._projection, self._bank, beat_tick
+            self._pack, self._projection, self._bank
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1
-        for intent in self._director.releases(
-            self._projection, self._knowledge, beat_tick
-        ):
+        for intent in self._director.releases(self._projection, beat_tick):
             self._enqueue_autonomous(intent, entry_tick)
 
     def _enqueue_autonomous(self, intent: IntentData, tick: int) -> None:
@@ -593,9 +591,13 @@ class Simulator:
         playscript step — band NPC_REACTION (after the player's intents
         in the same tick) and stamped with the current event_count so
         OCC re-checks against the live projection. The intent fires at
-        the beat tick itself: the queue's (tick, sub_order) ordering
-        puts it AFTER same-tick system passes (0..99) and player
-        intents (100..199), BEFORE scheduled completions (300+)."""
+        the tick passed by the caller — for beat-born intents that is
+        the popped entry's tick, never the beat tick itself (the queue
+        discipline forbids enqueuing at a tick the clock has already
+        passed; the `_run_beat` docstring owns the rationale). The
+        queue's (tick, sub_order) ordering puts it AFTER same-tick
+        system passes (0..99) and player intents (100..199), BEFORE
+        scheduled completions (300+)."""
         stamped = IntentData(
             id=intent.id, kind=intent.kind, actor=intent.actor,
             target=intent.target, fields=dict(intent.fields),
@@ -642,7 +644,7 @@ class Simulator:
         ):
             self._commit(replace(draft, provenance={"seed": self._seed}))
         briefing = briefing_draft(
-            self._pack, self._projection, self._knowledge, tick,
+            self._pack, self._knowledge, tick,
             watch_record.id, outgoing, incoming,
         )
         if briefing is not None:

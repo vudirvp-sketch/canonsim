@@ -59,7 +59,6 @@ class _AxisDelta:
 
 
 def _axis_deltas(
-    pack: "Pack",
     axis: str,
     config: Mapping[str, Any],
     last_decay_tick: int | None,
@@ -132,7 +131,7 @@ def decay_drafts(
             if not isinstance(current, int) or isinstance(current, bool):
                 continue  # NPC has no value on this axis (e.g. attention)
             last_change = _last_change_tick(events, npc_id, axis)
-            delta = _axis_deltas(pack, axis, config, last_change, beat_tick)
+            delta = _axis_deltas(axis, config, last_change, beat_tick)
             if delta is None or delta.delta == 0:
                 continue
             scale = pack.rules["relations"]["scale"]

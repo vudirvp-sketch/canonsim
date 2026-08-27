@@ -121,12 +121,12 @@ def test_threshold_trigger_fires_when_suspicion_crosses() -> None:
     director.seed(_record(hooks=("possible_document_check",)))
     projection = initial_projection(PACK.entities)
     # suspicion below the threshold (50): trigger does not fire
-    assert director.releases(projection, _empty_view(), beat_tick=0) == []
+    assert director.releases(projection, beat_tick=0) == []
     # suspicion crosses 50: trigger fires — entropy_floor=0 means
     # stagnation never releases (entropy can't be negative), only the
     # explicit threshold trigger can release here
     projection["npc_guard_01"]["relations.suspicion"] = 50
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     assert released[0].kind == "wait"
     assert released[0].actor == "npc_guard_01"
@@ -141,8 +141,8 @@ def test_time_trigger_fires_after_the_packed_tick() -> None:
     )
     director._hooks.append(hook)  # type: ignore[attr-defined]
     projection = initial_projection(PACK.entities)
-    assert director.releases(projection, _empty_view(), beat_tick=50) == []
-    released = director.releases(projection, _empty_view(), beat_tick=100)
+    assert director.releases(projection, beat_tick=50) == []
+    released = director.releases(projection, beat_tick=100)
     assert len(released) == 1
 
 
@@ -156,13 +156,13 @@ def test_place_trigger_fires_when_target_at_location() -> None:
     projection = initial_projection(PACK.entities)
     # guard at the tavern: trigger fires
     assert projection["npc_guard_01"]["position"] == "loc_tavern"
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     # move the guard away: trigger stops
     projection["npc_guard_01"]["position"] = "loc_guardroom"
     director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
     director2._hooks.append(hook)
-    assert director2.releases(projection, _empty_view(), beat_tick=0) == []
+    assert director2.releases(projection, beat_tick=0) == []
 
 
 # -- stagnation release (entropy < floor → lowest-threshold hook wins) --------
@@ -179,7 +179,7 @@ def test_stagnation_releases_when_entropy_below_floor() -> None:
     ))
     projection = initial_projection(PACK.entities)
     # entropy = 2 + 3 = 5 < floor 10 → release the lowest-threshold hook
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     # the lowest release_threshold wins (5 < 10)
     assert director.hooks[1].tag == "possible_document_check"
@@ -190,7 +190,7 @@ def test_stagnation_silent_when_entropy_above_floor() -> None:
     director._hooks.append(_seeded_hook(weight=20, release_threshold=5))  # type: ignore[attr-defined]
     projection = initial_projection(PACK.entities)
     # entropy = 20 ≥ floor 10 → no stagnation release
-    assert director.releases(projection, _empty_view(), beat_tick=0) == []
+    assert director.releases(projection, beat_tick=0) == []
 
 
 def test_stagnation_skips_released_hooks() -> None:
@@ -206,13 +206,13 @@ def test_stagnation_skips_released_hooks() -> None:
     director._hooks.extend([h1, h2])  # type: ignore[attr-defined]
     projection = initial_projection(PACK.entities)
     # first release: lowest-threshold wins (h1, threshold=5)
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     # mark h1 as released (simulate the actual release path)
     director._released.add(0)  # type: ignore[attr-defined]
     # entropy now = 3 (h2 only) < floor 10 → release h2 (different NPC —
     # no cooldown blocks the barkeep)
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
 
 
@@ -225,7 +225,7 @@ def test_director_off_seeds_but_never_releases() -> None:
     assert len(director.hooks) == 1  # the buffer seeds
     projection = initial_projection(PACK.entities)
     # no triggers fire either — the disabled policy suppresses all releases
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert released == []
 
 
@@ -252,14 +252,14 @@ def test_per_npc_cooldown_blocks_back_to_back_releases() -> None:
     projection = initial_projection(PACK.entities)
     # beat 1: release h1 (lowest threshold)
     director.next_beat()
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     # beat 2: same NPC is on cooldown (per_npc_cooldown_beats=2) → no release
     director.next_beat()
-    assert director.releases(projection, _empty_view(), beat_tick=0) == []
+    assert director.releases(projection, beat_tick=0) == []
     # beat 3: cooldown expired → release h2
     director.next_beat()
-    released = director.releases(projection, _empty_view(), beat_tick=0)
+    released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
 
 
@@ -276,18 +276,13 @@ def test_caught_target_is_never_targeted() -> None:
     director._hooks.append(hook)  # type: ignore[attr-defined]
     projection = initial_projection(PACK.entities)
     # the trigger condition (suspicion >= 0) is always met — fires normally
-    assert len(director.releases(projection, _empty_view(), beat_tick=0)) == 1
+    assert len(director.releases(projection, beat_tick=0)) == 1
     # mark the target as caught: the trigger still matches, but the actor
     # is dead to the director — no release
     director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=999))
     director2._hooks.append(hook)
     projection["npc_guard_01"]["crime_status"] = "caught"
-    assert director2.releases(projection, _empty_view(), beat_tick=0) == []
+    assert director2.releases(projection, beat_tick=0) == []
 
 
 # -- helpers -----------------------------------------------------------------
-
-
-def _empty_view():
-    from core.knowledge import KnowledgeView
-    return KnowledgeView()

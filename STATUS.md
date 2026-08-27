@@ -1,21 +1,19 @@
 # STATUS — canonsim
 
-Iteration: 6a (`iter-6a-code-audit`) · Phase: 0 — closed (gate: **PASS**,
-iter-6) · Date: 2026-08-28 · owner-requested audit of iter-5/6 (the
-iter-2a/iter-4a precedent).
+Iteration: 7 (`iter-7-phase1-intake`) · Phase: 1 — intake · Date:
+2026-08-28 · owner-requested retrospective + plan reorganization at
+the phase boundary (the iter-2a/4a/6a audit precedent, extended:
+what was audited is the phase-0 result as a whole, not just the last
+two iterations).
 
-Audit scope: re-verify the iter-5/6 deliverables end-to-end. Reproduced:
-298 tests green + ruff clean; the 1000-sim balance baseline **exactly**
-(M5 p50=0.77, emergent_chains p50=20, M3_mean p50=13.81, M1 p50=0.24,
-M4_repetition p50=0.18, suspicion peaks, destroyed-locations); T8 OFF =
-26 emergent chains (ON fires `director_0000`, logs byte-differ, M2=0.5);
-the chronicle is PYTHONHASHSEED-independent (0/1/42/random); the session
-doors + the KI#17 feed gate are correct in code; `tale_gate=low` and the
-medium-gate count (4 events) match the T7 claims. Three drift bugs found
-+ fixed as KI#22/23/24 — all in citing documents, not in the numbers.
-Mandatory §5/§6 cleanup: KI#17–20 deleted (closed >2 iterations); KI
-entries trimmed to the 2-line cap; FAQ 24→20 (merged families + the new
-chain-counting law).
+Intake executed: the D-034-mandated DECISIONS collapse (46→30,
+ID-preserving family merges, 55KB→20KB); TASKS.md regained the
+"what next" ownership (the phase-1 plan lived only here, in the
+STATUS "Next step" — an ownership drift, AGENT_NAVIGATION §3);
+intake audit fixes KI#25/26/27. Baseline re-verified before any
+edit: 299 tests green + ruff clean; the golden fixture stayed
+byte-identical through the code fixes (the removed parameters were
+dead — no canon-path change).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -38,6 +36,24 @@ chain-counting law).
 
 ## Active KIs
 
+- KI#25 · stale `_enqueue_autonomous` docstring — "fires at the beat
+  tick itself" contradicted the entry-tick law (D-039, the `_run_beat`
+  docstring, the FAQ) — CLOSED iter-7: rewritten in place.
+- KI#26 · dead-parameter family (L14, the KI#24 precedent):
+  `Director.releases(knowledge)` — the signature falsely implied the
+  director reads knowledge records (L6 forbids it); `briefing_draft(projection)`;
+  `urgency_intents(beat_tick)`; `_axis_deltas(pack)` — CLOSED iter-7:
+  params removed, call sites + tests updated; fixture byte-identical.
+- KI#27 · README drift: "298 tests" (iter-6a made 299) + "systems land
+  iter-2" (the systems live in `core/` per D-037; `sim/systems/` stays
+  reserved) — CLOSED iter-7.
+- KI#28 · residual instance of the KI#23 false citation: AGENT_NAVIGATION
+  §1 `scripts/` row still cited "AGENTS.md §9 — Script Persistence Rule"
+  (superseded by D-046; iter-6a fixed README/TEST_PLAN/D-044 but missed
+  this one) — CLOSED iter-7: row rewritten to the true owner (TEST_PLAN §6).
+- KI#4 · balance harness — CLOSED iter-6: `scripts/balance_harness.py`
+  (1000-sim distribution; reproduced exactly by the iter-6a audit);
+  baselines M5 p50=0.77, chains p50=20, M3_mean p50=13.81, M1 p50=0.24.
 - KI#22 · TEST_PLAN + test_t8_ab docstrings drifted from the shipped gate
   facts (seed "32"→125 ×4; chains "24"→26 ×2; the M2 formula contradicted
   MVP_SCOPE §15 + the impl; §6 filename) — CLOSED iter-6a (worklog; §1.2
@@ -48,12 +64,6 @@ chain-counting law).
   closure test; the CLI-class print exemption (MVP_SCOPE §18).
 - KI#24 · dead `fold_events` export with a false docstring in
   `core/metrics.py` — CLOSED iter-6a: removed (L13/L14).
-- KI#4 · balance harness — CLOSED iter-6: `scripts/balance_harness.py`
-  (1000-sim distribution; reproduced exactly by the iter-6a audit);
-  baselines M5 p50=0.77, chains p50=20, M3_mean p50=13.81, M1 p50=0.24.
-- KI#21 · draft templates drifted from the shipped event contract —
-  CLOSED iter-5 (inverted suspicion line, `[` collision, steal object);
-  fixed as pack data before any renderer existed.
 
 ## FAQ / Pitfalls
 
@@ -128,19 +138,24 @@ chain-counting law).
 - **Doc-loop alarm vs owner-requested research.** Consecutive doc-only
   iterations force a stop (AGENTS §2.5); a fresh owner request is the
   documented exception (D-022). Code iterations never fire the alarm.
-- **Four places, four jobs (D-027).** `REFERENCES.md` catalogs;
-  `CORE_DESIGN_RESEARCH.md` §2 synthesizes (one line per source);
-  `docs/ref/<source>.md` carries mechanics; `BLUEPRINT.md` +
-  `docs/blueprint/` carry resolutions. Link, never restate; cite ledger
-  row IDs (e.g. "per RNG-1").
+- **Four places, four jobs (D-027) + the ref-graveyard diagnostic.**
+  `REFERENCES.md` catalogs; `CORE_DESIGN_RESEARCH.md` §2 synthesizes
+  (one line per source); `docs/ref/<source>.md` carries mechanics;
+  `BLUEPRINT.md` + `docs/blueprint/` carry resolutions. Link, never
+  restate; cite ledger row IDs (e.g. "per RNG-1"). The audit method:
+  grep a sample of ledger terms across the planning docs — every term
+  must land in at least one; verified iter-0x.
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap
   is 600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, field lists, enum values, per-source verdicts
   are never cut to fit.
-- **"Ref graveyard" check (iter-0x audit method).** Grep a sample of
-  ledger terms across the planning docs — every term must land in at
-  least one; mechanics stay owned by `docs/ref/` (D-027). Verified
-  iter-0x.
+- **The DECISIONS gate-collapse is ID-preserving (D-034, iter-7 law).**
+  Family merges write compound IDs with the FULL prefix on every member
+  (`D-018/D-022/D-029` — `D-018/022/029` does NOT resolve); compressed
+  rows keep decision→why→consequence and link the single owner of the
+  detail (D-024 anti-drift: spec-restatement in a decision row is
+  duplication, not substance). Pre-collapse history lives in git.
+  Due again at the phase-1→2 gate.
 - **The read-side layers are pure functions of the log (iter-5/6 laws).**
   Every render entry point builds a fresh `RngBank` from the log HEADER
   seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -167,16 +182,14 @@ chain-counting law).
 
 ## Next step
 
-**Phase-0 gate: PASS** (iter-6; audit-clean iter-6a). Track A is
-feature-frozen at phase-0 scope. **Phase 1 (narrator over the log)** is
-the next track-A work (`ROADMAP.md` §2); the pre-trigger
-`BRIEF_SPEC.md`/`VALIDATION_SPEC.md` sketches in `SPECS_BACKLOG.md` fire
-AT phase-1 start. **Track B (`bg-1..bg-4`) is unblocked** for parallel
-LLM-circuit spikes on DF Legends XML.
-
-Phase-1 intake backlog (none block phase 0): `doc-1` VISION freeze
-review; the DECISIONS ≤30 collapse per D-034 (46 entries now — over cap,
-rationale recorded D-045(a), due at the intake); the rest-action
-candidate (`pack-2`-style pack data); `qa-1` mypy (owner-gated);
-`ci-1` GitHub Actions; `perf-1` 10k-tick profile; the iter-7+ tuning
-knob (importance rule hooks for story-critical events, D-045(b)).
+**Phase 1 is open** — the plan's single owner is `docs/TASKS.md`
+(Track A: iter-8 = BRIEF_SPEC + the deterministic brief assembler;
+iter-9+ = VALIDATION_SPEC + the validator's LLM-free half; the
+narrator LLM boundary is an AGENTS §8 owner checkpoint). Track B
+(`bg-1..bg-4`) stays unblocked in parallel — note bg-1 needs the
+owner's local DF Classic + DFHack setup (world export cannot run in
+this sandbox). Phase-1 intake backlog that did NOT land in iter-7
+(each stays in its TASKS home, none blocks iter-8): `doc-1` VISION
+freeze review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated,
+AGENTS §8); `perf-1` 10k-tick profile; `tune-1` rest action + the
+D-045(b) importance-rule knob.

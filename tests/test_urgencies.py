@@ -56,7 +56,7 @@ def test_urgency_roll_hits_and_misses_deterministically() -> None:
         bank = RngBank(seed)
         hits = sum(
             1 for _ in range(10)
-            for intent in urgency_intents(PACK, projection, bank, beat_tick=360)
+            for intent in urgency_intents(PACK, projection, bank)
             if intent.actor == "npc_drunk_01"
         )
         hits_per_seed.append(hits)
@@ -72,7 +72,7 @@ def test_urgency_skips_actors_absent_from_projection() -> None:
     projection = initial_projection(PACK.entities)
     del projection["npc_drunk_01"]
     bank = RngBank(42)
-    intents = urgency_intents(PACK, projection, bank, beat_tick=360)
+    intents = urgency_intents(PACK, projection, bank)
     assert all(i.actor != "npc_drunk_01" for i in intents)
 
 
@@ -82,7 +82,7 @@ def test_urgency_skips_caught_actors() -> None:
     # urgencies target NPCs not the PC; but the same check applies to NPCs
     projection["npc_drunk_01"]["crime_status"] = "caught"
     bank = RngBank(42)
-    intents = urgency_intents(PACK, projection, bank, beat_tick=360)
+    intents = urgency_intents(PACK, projection, bank)
     assert all(i.actor != "npc_drunk_01" for i in intents)
 
 
@@ -94,7 +94,7 @@ def test_urgency_intent_carries_pack_template_target_and_fields() -> None:
     # find a seed where the drunkard (probability 40) hits
     for seed in range(50):
         bank = RngBank(seed)
-        intents = urgency_intents(PACK, projection, bank, beat_tick=360)
+        intents = urgency_intents(PACK, projection, bank)
         drunk_intents = [i for i in intents if i.actor == "npc_drunk_01"]
         if drunk_intents:
             intent = drunk_intents[0]
@@ -114,7 +114,7 @@ def test_urgency_precondition_failure_silently_skips() -> None:
     # the relief guard's urgency requires a flagged_accessible fire source
     # in the actor's location. The guardroom has no fire source initially.
     bank = RngBank(42)
-    intents = urgency_intents(PACK, projection, bank, beat_tick=360)
+    intents = urgency_intents(PACK, projection, bank)
     # the relief guard (npc_guard_02) at the guardroom has no fire source
     # accessible — the precondition fails, no intent emitted for him
     guard02_intents = [i for i in intents if i.actor == "npc_guard_02"]

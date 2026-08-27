@@ -322,7 +322,6 @@ def rotation_plan(
 
 def briefing_draft(
     pack: Pack,
-    projection: Mapping[str, Mapping[str, Any]],
     view: KnowledgeView,
     tick: int,
     cause_id: str,

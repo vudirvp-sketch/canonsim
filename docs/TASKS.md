@@ -9,12 +9,55 @@
 
 ## Track A — main (simulator, no LLM)
 
+> Phase 0 closed (gate PASS, iter-6; audit-clean iter-6a). Phase 1
+> (narrator over the log) is open — architecture owner:
+> `docs/blueprint/phases.md` §1; spec triggers fire at phase-1 start
+> (`docs/SPECS_BACKLOG.md`). INV-4 holds until the narrator-boundary
+> iteration explicitly opens it (AGENTS §8 owner checkpoint).
+
+### iter-7 · phase-1 intake — done
+
+DECISIONS collapsed 46→30 per D-034 (ID-preserving family merges);
+TASKS.md regained the "what next" ownership (the phase-1 plan lived
+only in STATUS "Next step" — drift); intake audit fixes KI#25/26/27.
+Detail: `worklog.md` iter-7 + `STATUS.md`.
+
+### iter-8 · BRIEF_SPEC + brief assembler skeleton — todo
+
+- Phase-1 start fires the `BRIEF_SPEC.md` trigger (`SPECS_BACKLOG.md`):
+  write the spec from the block-pipeline design (`docs/blueprint/phases.md`
+  §1 — six block types, hard/soft budgets, eviction contract,
+  voice-isolation law), field-level clauses born just-in-time, ≤300 lines.
+- `brief/` (skeleton since iter-0d) gains the deterministic assembler:
+  block pipeline + token budgets + eviction as pure functions of the log
+  (the D-042/D-043/D-044 read-side-purity family — same log → same brief
+  bytes). No LLM, no network: INV-4 holds.
+- AC: spec committed; the assembler renders a brief for a committed log
+  (the golden fixture) byte-identically across calls; budgets + eviction
+  unit-tested incl. the `[truncated:N]` marker and the
+  never-drop-directives law; pytest + ruff green.
+
+### iter-9+ · phase-1 continuation — todo (sequenced after iter-8)
+
+- `VALIDATION_SPEC.md` trigger fires (fact transaction, ExpectedVersion
+  OCC, ≤2 regens, INSUFFICIENT_DATA default) + the validator's LLM-free
+  half (proposal shaping, stale-version rejection, golden-set plumbing).
+- The narrator LLM boundary itself is a separate owner-gated iteration
+  (AGENTS §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
+  ladder L12 from day one).
+
+### Phase-1 tuning backlog (post-assembler, owner-gated)
+
+- `tune-1` rest action as pack data (player fatigue is monotonic over
+  long waits — KI#4/balance observation) + the D-045(b) importance-rule
+  knob (hooks on story-critical events, NOT `tale_gate`); both refresh
+  the 1000-sim baseline when tuned.
+
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 
 Phase-0 gate closed; full evidence in `worklog.md` iter-6 + the
-`docs/TEST_PLAN.md` spec. Track A is feature-frozen at phase-0 scope;
-the next track-A work is phase 1 (narrator over the log) per
-`docs/ROADMAP.md` §2.
+`docs/TEST_PLAN.md` spec. Track A was feature-frozen at phase-0 scope;
+phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
 
@@ -112,6 +155,18 @@ the next track-A work is phase 1 (narrator over the log) per
 
 ## Done
 
+- iter-7 · 2026-08-28 · phase-1 intake (owner-requested retrospective +
+  plan reorganization): DECISIONS collapsed 46→30 per D-034
+  (ID-preserving family merges, 55KB→20KB); TASKS.md regained the
+  what-next ownership (phase-1 sequence: iter-8 BRIEF_SPEC + brief
+  assembler, iter-9+ validator, tune-1 rest/importance knobs); intake
+  audit fixes: KI#25 stale `_enqueue_autonomous` docstring (beat-tick
+  vs entry-tick), KI#26 dead-parameter family (`Director.releases`
+  knowledge, `briefing_draft` projection, `urgency_intents` beat_tick,
+  `_axis_deltas` pack — L14, the KI#24 family), KI#27 README drift
+  (298→299, "systems land iter-2"), KI#28 residual false §9 citation in
+  AGENT_NAVIGATION (the KI#23 family). KI#21 deleted (closed >2 iters).
+  299 tests green, fixture byte-identical, ruff clean.
 - iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6: every
   gate claim reproduced (298 green, the 1000-sim baseline EXACTLY, T8
   OFF = 26 chains, PYTHONHASHSEED-independent chronicle); 3 KIs fixed —

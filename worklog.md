@@ -100,20 +100,7 @@ iter-1 · 2026-08-28 · core plumbing — first functional code (iter-1-core-plu
   AGENTS §6 sync set); DECISIONS at 34 entries, over cap per D-034 until
   the phase-0 gate collapse.
 ---
-iter-0aa · 2026-08-27 · owner-requested pre-code doc audit (drift + readiness)
-- 11 drift findings fixed as KI#11 (closed same iteration): fabricated
-  "1 tick ≈ 12 in-world minutes" citation (phase0 §1 + df_worldgen.md —
-  MVP_SCOPE §8 owns 1 tick = 1 minute, 1440/day); calendar remnants
-  (ROADMAP §4 "week 1" → bg-1; MVP_SCOPE §13 "day 3"; TASKS "post-sprint");
-  TASKS Done gap (iter-0f line restored per git e16c9ab); P3c mislabels
-  (phase0 §2, EVENT_SCHEMA §11); MVP_SCOPE §5 system-3 npc↔npc pair map
-  (D-020); AGENT_NAVIGATION tests/fixtures + playscripts rows; README
-  "empty" → "skeletons".
-- KI#10 opened (stdlib JSON-Schema validation engine for T0 + pack loader;
-  owner decision). Readiness verdict: rigging complete, iter-1
-  unconditionally next. 10 files touched (targets + mandated sync set,
-  same pattern as 0v/0z). No code; pytest green, ruff clean. 26th docs
-  iteration (owner-requested, D-022).
+(iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
 ---
 iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
 - render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
@@ -167,3 +154,25 @@ iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-au
 - Tests 298→299 green (+1 closure test); ruff clean; golden fixture
   byte-identical. No canon-path change: the drift was in citing
   documents, not in the numbers.
+
+---
+iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
+- Owner-requested retrospective at the phase boundary: baseline
+  re-verified (299 green + ruff clean), then the D-034-mandated
+  DECISIONS collapse 46→30 (ID-preserving family merges; compound IDs
+  use the FULL prefix per member — `D-018/022/029` does not resolve,
+  the FAQ law); 55KB→20KB. TASKS.md regained the what-next ownership
+  (phase-1 sequence: iter-8 BRIEF_SPEC + brief assembler; iter-9+
+  VALIDATION_SPEC; tune-1 knobs); STATUS Next step → pointer.
+- Intake audit fixes: KI#25 stale `_enqueue_autonomous` docstring
+  (beat-tick claim vs the entry-tick law); KI#26 dead-parameter family
+  (Director.releases knowledge — L6-dangerous false interface;
+  briefing_draft projection; urgency_intents beat_tick; _axis_deltas
+  pack) removed with call sites + tests; KI#27 README drift (298→299,
+  "systems land iter-2"); KI#28 residual false "AGENTS §9" citation in
+  AGENT_NAVIGATION §1 (the KI#23 family — iter-6a missed this instance).
+  KI#21 deleted (closed >2 iters); FAQ: ref
+  places + graveyard merged (20 held), the collapse law added.
+- 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
+  299 tests green, ruff clean, golden fixture byte-identical (dead
+  params — no canon-path change).

@@ -35,7 +35,6 @@ from core.intent import IntentData
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
-    from core.knowledge import KnowledgeView
     from core.log import EventRecord
     from core.pack import Pack
 
@@ -265,7 +264,6 @@ class Director:
     def releases(
         self,
         projection: "Projection",
-        knowledge: "KnowledgeView",
         beat_tick: int,
     ) -> list[IntentData]:
         """One beat's worth of releases (phase0 §4): explicit triggers
@@ -276,7 +274,11 @@ class Director:
         director Intent consumes the budget (per-NPC cooldown follows —
         recorded, the front door does the rejecting). Dead actors (no
         projection entry / `crime_status == caught`) are never
-        targeted."""
+        targeted.
+
+        Reads observable state only (L6): the projection and the
+        seeded-hook buffer — never knowledge records, never PC
+        internals (the entropy law, phases.md/DIRECTOR_SPEC §5)."""
         unreleased = list(self._unreleased())
         if not unreleased:
             return []

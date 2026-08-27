@@ -98,14 +98,14 @@ def urgency_intents(
     pack: "Pack",
     projection: "Projection",
     bank: "RngBank",
-    beat_tick: int,
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
     a hit, run the preconditions against the projection; if all pass,
     yield the IntentData. The loop enqueues them through the intent
-    door (band NPC_REACTION) so they execute after the player's
-    intents in the same tick."""
+    door (band NPC_REACTION) at the popped entry's tick, so they
+    execute after the player's intents in the same tick (the
+    entry-tick enqueue law, D-039)."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
