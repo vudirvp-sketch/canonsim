@@ -17,6 +17,13 @@
 No tool use at 12–27B (argument confusion, invented functions) —
 grammar-constrained JSON only.
 
+Stack note (2026-03 agent-codegen benchmark, 600 runs — rot by design,
+re-verify before any phase-5 decision): Python is the most stable and
+cheapest target for LLM-agent code generation (100% task success, lowest
+variance and cost); Go/Rust cost more tokens and vary more — supports the
+D-031 stack freeze (stdlib-only Python through phase 2; any revisit is
+gated by `perf-1` data).
+
 ## 2. Hardware reality (the ~25 GB RAM scenario)
 
 - 27B Q4_K_M + Q8 KV-cache @ 8K context ≈ 22–24 GB → one model only; the
@@ -82,3 +89,17 @@ gate. One track can be dropped without losing the other.
 - Phase-1 QA metrics from the survey: p50/p95 turn latency, repeat and
   stagnation counters, degradation/refusal rates — wire into the mode-A
   harness when it exists.
+
+## 7. Log as a stream (jq discipline)
+
+The JSONL log is a stream, not a document: filter → map → group compose
+like Unix pipes. `AGENTS.md` §3 is the law (never open a runtime log
+whole); these are the stdlib idioms:
+
+- filter by type:
+  `python -c "import sys,json; [print(json.dumps(e)) for e in map(json.loads, sys.stdin) if e.get('type')=='rumor']" < logs/run.jsonl`
+- count by type:
+  `python -c "import sys,json,collections; print(collections.Counter(json.loads(l)['type'] for l in sys.stdin))" < logs/run.jsonl`
+- slice one actor: add `if e.get('actor')=='guard_01'` to the filter
+  idiom; `tail -n`, `wc -l`, and `grep '"cause": "ev_'` for quick
+  cause-chain walks — M3's real home is the metric harness, never grep.

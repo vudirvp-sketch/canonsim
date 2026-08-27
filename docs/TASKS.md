@@ -21,7 +21,10 @@
   is the source of truth; pack data landed in iter-0c).
 - Tests: T0 schema validation (the EVENT_SCHEMA example is a fixture; the log
   header shape per EVENT_SCHEMA §1 is validated as a separate fixture), minimal
-  T1 (two runs byte-identical), smoke boot.
+  T1 (two runs byte-identical), smoke boot, and the architecture fitness test
+  (`tests/test_architecture.py`, stdlib `ast`, zero new dev deps — D-031:
+  import boundary, RNG monopoly, network ban; design in
+  `docs/blueprint/phase0.md` §1).
 - AC: world creates from seed; an event writes; a playscript plays end-to-end;
   `pytest -q` green.
 
@@ -132,6 +135,10 @@
 
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
   Python).
+- `qa-1` mypy --strict on `core/` (owner-approval-gated: dev tooling is
+  capped at pytest + ruff — AGENTS §8/§10; D-031 parks the candidate here.
+  The type-discipline values are law from iter-1 via
+  `docs/blueprint/phase0.md` §1; the tool is optional).
 - `perf-1` 10k-tick timing profile (target: seconds, not minutes).
 - `balance-1` 1000-headless-sim distribution harness: playscript runner with
   sampled intents (seed-varied) → distribution plots of `suspicion` and
@@ -199,3 +206,4 @@
 - iter-0w · 2026-08-27 · owner-requested post-reference concept realignment: D-029 — digestion complete, skeleton (phases 0–6, 3 layers, INV-1..5) confirmed, blueprint = the mechanics owner; KI#9 calendar/lifecycle drift fixed (sprint calendar dropped → iteration-counted, CORE_DESIGN_RESEARCH absorbed, ROADMAP §2 blueprint pointer, README Status refreshed).
 - iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit: verdict "load-bearing" recorded in STATUS (4-place chain verified — docs/ref/ → synthesis → blueprint → TASKS/SPECS clauses; ledger-term spot-greps all land); FAQ gains the ref-graveyard grep diagnostic; no code.
 - iter-0y · 2026-08-27 · owner-requested content-principles pass: D-030 (darkness = architecture, not content scripts; phase-0 pack unchanged; grim line = post-gate `pack-1`); PACK_SPEC sketch + TASKS synced; KI#7/KI#8 deleted (closed >2 iterations); no code.
+- iter-0z · 2026-08-27 · owner-requested quality round: D-031 — INVARIANT-CORE v3 + Elegant Solutions absorbed surgically (D-018 pattern): L13/L14 laws (BLUEPRINT §2), phase0 §1 type discipline + fitness test + fail-fast, §2 ActionResolver registry, §6 negative tests, AGENTS §4 INV-1 privilege line + §9 quality bullet, stack freeze through phase 2, mypy parked as owner-gated `qa-1`, TECH_NOTES §7 log-as-stream, REFERENCES §15 principle donors; KI#9 deleted; no code.

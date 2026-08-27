@@ -119,6 +119,19 @@ operationalize the invariants.
   dry log line; vec → pure-Python cosine; DuckDB → sqlite aggregates. The
   canon path has zero optional dependencies; optionality lives at the
   edges (render, retrieval, analytics).
+- **L13 Abstraction cost gate.** An abstraction must name the future change
+  it makes cheaper before it enters the diff — no answer means speculative
+  complexity (D-031). Rule-of-Three tiers: adapters abstract on demand;
+  kernel↔periphery seams are ports from day one (`RngBank`, the log
+  writer); helpers extract on the third duplicate, not the first; one
+  discriminator with 4+ branches becomes a name→handler registry
+  (`docs/blueprint/phase0.md` §2 ActionResolver).
+- **L14 Elegance standard.** A solution is accepted when it makes the
+  problem look obvious in retrospect; a complex one carries its
+  justification in the diff (D-031). Review checklist: fewer moving parts
+  than before · one rule instead of N exceptions · parts compose freely ·
+  stdlib-only · reads as pseudo-code · the next change is local · same seed
+  → same log.
 
 ## 3. Build index (what to read before each iteration)
 

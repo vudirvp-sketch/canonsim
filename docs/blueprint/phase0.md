@@ -76,6 +76,24 @@
   popped entry: checks, RngBank draws, event emission, completions/hooks
   enqueued at their trigger ticks. Playscript = seed + ordered intents
   (`MVP_SCOPE.md` §13 owns the format).
+- **Type discipline (build rule, D-031):** event/intent DTOs are
+  `@dataclass(frozen=True, slots=True)` — immutable by construction, and
+  the frozen-ness documents INV-5 at the type level; closed **core** sets
+  (channels, fidelity, intent lifecycle) are `Literal[...]`; pack-level
+  vocabularies (event types, axes) stay data-driven strings validated
+  against the pack's closed enums at load — `Literal` on them would
+  hardcode domain words, an INV-3 violation (EVENT_SCHEMA §11);
+  kernel↔periphery seams are minimal `typing.Protocol`s — one method where
+  one method suffices (Go stdlib discipline); invariant constants are
+  `Final`; public functions carry type hints (`MVP_SCOPE.md` §18).
+- `tests/test_architecture.py` — the architecture fitness test (D-031;
+  lands with the first core code, stdlib `ast`, zero new dev deps):
+  (a) import boundary — `core/` imports nothing from `sim/`/`render/`/
+  `cli/`/`brief/` (kernel independence, executable); (b) RNG monopoly — a
+  bare `import random` exists only in `core/rng.py` (L5); (c) network ban
+  — no `socket`/`urllib`/`http` imports in `core/`+`sim/` (INV-4
+  executable, not just review). A tripwire: trivially green on the
+  skeleton, loud on the first violation the day code lands.
 
 **Donor stack.**
 
@@ -98,7 +116,10 @@ we do not port — seed 0 means seed 0). No unsorted iteration over dicts or
 files (`PYTHONHASHSEED=0` + `sorted()`; ai-town's insertion-order iteration
 is the named hazard). No `fold(log)` on the runtime path (KI#5). No floats
 in the canon path — ticks, counters, seeds are integers (Azgaar's
-float-drift across engines is the named cause).
+float-drift across engines is the named cause). No masked failures: an
+invariant violation raises immediately and is never caught-and-continued —
+a deterministic replay has nothing to recover into; fail fast is the
+phase-0 answer to "let it crash" (D-031).
 
 ## 2. iter-2 · actions (the 12, checks, outcomes, price)
 
@@ -145,6 +166,13 @@ float-drift across engines is the named cause).
 - **The 12 actions** (`MVP_SCOPE.md` §7 owns the table): each is pack data
   — checks with modifier tables, duration → SCHEDULED completion entry,
   outcome payloads. Checks draw from the substantive stream only.
+- **Resolution dispatch = name→resolver registry (D-031):** action types
+  map to resolver callables through a registry; pack data references
+  resolvers by name (INV-3 preserved — a string in data, a generic class
+  in code). The registry is justified at 12 actions; the threshold rule it
+  instantiates is L13's — one discriminator with 4+ branches becomes a
+  registry, below it a plain `if` is the elegant form (L14 — no pattern
+  for pattern's sake).
 - **Price markers** (EPIST-1, live-char): every socially meaningful
   outcome payload carries same-scene observable markers — the knowledge
   records and perceivable state tokens witnesses can perceive — alongside
@@ -384,6 +412,13 @@ everything the day a render cache is added.
 | T7 readability | human retells the chronicle (manual gate — the only human judgment in the stack) |
 | T8 director-off | A/B on identical seed + playscript, **single-factor** (live-char one-change rule); ≥3 emergent chains without the director |
 
+- **The T-suite is the invariants made executable (D-031):** every INV has
+  at least one test that fails loudly on its violation — T1/T2 (INV-1,
+  INV-2), the stoplist and import-boundary tests (INV-3, kernel
+  independence), the network ban (INV-4), the fixture-regeneration guard
+  (INV-5 discipline). Tests document the law; negative tests prove it (the
+  SQLite discipline — test code is expected to outweigh core code where
+  the invariants demand it).
 - **Metrics M1–M5** (`MVP_SCOPE.md` §15 owns definitions): computed by
   folding the log, never collected by feel (Mesa `DataCollector` is the
   shape, inverted). Thresholds set from the measured baseline at the gate

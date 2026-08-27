@@ -6,6 +6,23 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-0z · 2026-08-27 · owner-requested quality round (D-031)
+- INVARIANT-CORE v3 + Elegant Solutions absorbed per the D-018 pattern:
+  L13/L14 (BLUEPRINT §2); phase0 §1 type discipline + fail-fast + the
+  `tests/test_architecture.py` fitness test, §2 ActionResolver registry,
+  §6 negative tests; AGENTS §4 INV-1 canon-write privilege + §9 quality
+  DoD; stack frozen through phase 2; mypy parked as owner-gated `qa-1`;
+  TECH_NOTES §7 log-as-stream; REFERENCES §15 principle donors.
+  Contradictions between the two provided analyses resolved in D-031
+  (no new canonical files; no mypy in CI; Upcaster covered; INV-1 stands).
+- 10 files touched — over the 3–5 soft limit: 5 targets + the mandated
+  sync set (STATUS, worklog, TASKS, README, REFERENCES §15) — same
+  pattern as 0v/0w/0y. DECISIONS at 31 entries (>30 cap): every row a
+  distinct stable decision, append-only forbids the cut — kept over per
+  AGENTS §6.1, rationale here. KI#9 deleted (closed >2 iterations).
+  No code; pytest green, ruff clean. 25th docs iteration (owner-requested,
+  D-022); **iter-1 code is next, unconditionally**.
+---
 iter-0y · 2026-08-27 · owner-requested content-principles pass (D-030)
 - D-030: darkness = architecture, not content scripts — `tavern_pack` v0.1
   unchanged; tone = data asymmetry (price markers, irreversibility,
@@ -93,8 +110,3 @@ iter-0r · 2026-08-26 · owner-requested ref-10 + ref-11 6-batch deep dive
   ref-10/ref-11 flipped todo→done; EventStore license drift fixed (index
   "MIT" → BSD-3-Clause/ESLv2 pattern-only); sqlite-vec catalog "verify" →
   dual MIT OR Apache-2.0.
----
-iter-0q · 2026-08-26 · owner-requested ref-8 + ref-9 6-batch deep dive
-- New `docs/ref/{azgaar_fmg,natural_earth,geonames,libtcod,rot_js,
-  red_blob_games}.md`; ref-8/ref-9 flipped todo→done; AGENT_NAVIGATION §1 +
-  STATUS + TASKS synced.

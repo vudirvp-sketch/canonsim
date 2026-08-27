@@ -15,11 +15,12 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0y — content-principles pass (owner round): darkness
-declared an architectural property (D-030) — the phase-0 pack stays as
-scoped, tone comes from data asymmetry inside the existing systems;
-grim-pack material parked as the post-gate `pack-1` candidate. No code yet;
-first code lands in iter-1 (`docs/TASKS.md`) — unconditionally next.
+Phase 0, iteration 0z — quality round (owner round): the architecture
+"bible" (INVARIANT-CORE v3 + Elegant Solutions) absorbed into law —
+abstraction/elegance laws L13/L14, type-discipline build clauses, an
+executable architecture fitness test from iter-1, stack frozen through
+phase 2 (D-031). No code yet; first code lands in iter-1
+(`docs/TASKS.md`) — unconditionally next.
 
 ## For AI agents (primary audience)
 

@@ -1,35 +1,40 @@
 # STATUS — canonsim
 
-Iteration: 0y (owner-requested: content-principles pass — what any content
-pack must be, decided *before* any content is written) · Phase: 0 —
-simulator without LLM · Date: 2026-08-27
+Iteration: 0z (owner-requested: quality round — the two owner architecture
+texts, INVARIANT-CORE v3 + Elegant Solutions, resolved into repo law, D-031)
+· Phase: 0 — simulator without LLM · Date: 2026-08-27
 
-iter-0y answers the owner's question "which content pack for the start, given
-the world must not skew positive?" with a law, not a pack: **D-030 —
-darkness is an architectural property, not content scripts.** Phase-0
-`tavern_pack` v0.1 stays exactly as scoped; tone comes from data asymmetry
-inside the existing 8 systems (trust builds slow and breaks fast; price
-markers; irreversibility; per-NPC rumor damage — D-006 held). The evaluated
-external romance-pack proposal is preserved as a distilled post-gate
-candidate: its correct core insight (darkness via consequence chains,
-consent/coercion as data, world-without-player) is already repo law (D-005,
-T4, M5, D-021) and is kept; its scope creep (4 new actions + 6 axes + hooks
-+ combat items into a frozen slice), group-reputation leak, and pre-trigger
-spec writing are fenced off (D-030 "why" column). Core corollary for
-iter-1..3 builders: stay **axis-blind** — axes/statuses/event vocabulary
-resolve from pack data (`rules.json` + EVENT_SCHEMA §11 precedent), so a
-future pack adds `attraction`/`shame` with zero code change.
+iter-0z answers the owner's question "how do we keep the coming code
+iterations (core build, content packs, LLM/frontend adaptation) from rotting
+into piled-up 'works somehow' complexity?" with law, not files: the texts
+are absorbed surgically (the D-018 pattern) — **L13** abstraction cost
+gate (Rule-of-Three tiers; 4-branch registry threshold) + **L14** elegance
+standard with review checklist (`docs/BLUEPRINT.md` §2); type discipline
+(frozen/slots DTOs, `Literal` for core closed sets only, minimal `Protocol`
+ports, `Final`), fail-fast, and the executable architecture fitness test
+(`tests/test_architecture.py`: import boundary · RNG monopoly · network
+ban — stdlib `ast`, zero new dev deps) in `docs/blueprint/phase0.md` §1;
+ActionResolver name→resolver dispatch (§2); tests-document-invariants +
+negative tests (§6); INV-1 canon-write-privilege line (AGENTS §4) and the
+code-quality DoD bullet (§9). Stack frozen: Python stdlib-only through
+phase 2, Go/Rust gated by `perf-1` data; mypy parked as owner-gated `qa-1`.
+Rejected with reasons (D-031): new canonical doc files (rot, D-018), mypy
+in CI now (dev-tooling cap, AGENTS §8), Upcaster Registry (covered:
+schema_version + migration note + `_correction` family), "ES as
+specialized tool" (the canon is audit-critical by definition — INV-1
+stands).
 
-**Doc-loop accounting:** 24th consecutive docs iteration — owner-requested
-exception (D-022 wording: a fresh owner request — this pass). The alarm
-condition stands, now with teeth: **iter-1 (functional code) is unconditionally the next
-iteration** — no ref-N, no spec writing, no doc polish without a fresh owner
-request.
+**Doc-loop accounting:** 25th consecutive docs iteration — owner-requested
+exception (D-022 wording: a fresh owner request — this pass, with two
+provided analyses). The alarm condition stands, now with teeth: **iter-1
+(functional code) is unconditionally the next iteration** — no ref-N, no
+spec writing, no doc polish without a fresh owner request.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
-  append-only truth; SQLite is a rebuildable index.
+  append-only truth; SQLite is a rebuildable index; the log writer is the
+  only canon-write path (D-031).
 - INV-2 Determinism: single point of randomness control — one master seed;
   named streams derived via the RngBank (`stable_hash` = sha256-based);
   no wall-clock; `sorted()` iteration; fixed `PYTHONHASHSEED`; queue key
@@ -47,10 +52,23 @@ request.
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6).
 - KI#5 · runtime state vs test fold not explicitly separated — risk of O(N²) at startup if `fold(log)` is misused as runtime path. D-023 records the rule: runtime = incremental projection; fold = T2 replay only; resolution recorded as ledger row STATE-1.
-- KI#9 · CLOSED iter-0w · plan-calendar & lifecycle drift — `MVP_SCOPE.md` §17 + TASKS iter-1..6 headers still carried the pre-research two-week sprint day-tags; `CORE_DESIGN_RESEARCH.md` fully absorbed but not flipped per its own lifecycle rule; README Status stuck at "iteration 0"; `ROADMAP.md` §2 not linked to the blueprint. Resolved by D-029: calendar dropped (iteration-counted sequencing), lifecycle flipped, README refreshed, blueprint pointer added. (KI#7/KI#8 deleted this iteration per the "closed more than 2 iterations" cleanup law, AGENTS §5.)
 
 ## FAQ / Pitfalls
 
+- **Where the code-quality bar lives (D-031).** Law: `AGENTS.md` §4
+  (invariants + the canon-write privilege line) + §9 (DoD: conventions per
+  `MVP_SCOPE.md` §18 — type hints, no `print()` outside `cli/` — and the
+  L13/L14 elegance laws). Constitution: `docs/BLUEPRINT.md` §2 — L13
+  (abstraction cost gate, Rule-of-Three tiers, 4-branch registry threshold)
+  and L14 (elegance standard + review checklist). Build clauses:
+  `docs/blueprint/phase0.md` §1 (type discipline, fail-fast, the
+  architecture fitness test), §2 (ActionResolver registry), §6 (tests
+  document the invariants; negative tests prove them). Executable:
+  `tests/test_architecture.py` (iter-1) + the stoplist test (iter-2).
+  Rationale: D-031; sources: `docs/REFERENCES.md` §15. The two owner texts
+  are absorbed, not filed — no `docs/ARCHITECTURE.md` /
+  `TYPE_DISCIPLINE.md` / `TESTING_PHILOSOPHY.md` will be created (the
+  D-018 pattern); a new canonical layer is the named anti-pattern.
 - **Zip upload loses dotfiles and empty dirs.** "Add files via upload" on GitHub
   dropped `.gitignore` (and every dir without tracked files). After any future
   upload: verify `.gitignore` exists and `git status --short` shows no runtime
@@ -68,18 +86,19 @@ request.
   trigger = scope creep (AGENTS §2.4; SPECS_BACKLOG header rule). Grim/romance
   material accumulates in the sketch row + `pack-1` (TASKS infra backlog)
   until the PACK_SPEC trigger fires (phase 6 / a 2nd setting).
-- **Doc-loop alarm vs owner-requested research.** Twenty-four docs iterations
+- **Doc-loop alarm vs owner-requested research.** Twenty-five docs iterations
   in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
   owner request (iter-0s/0t additionally had fresh external sources;
   iter-0u/0v — distillation and audit; iter-0w — concept realignment; iter-0x
-  — reference-influence audit — rest on the request alone). iter-0y is the
-  twenty-fourth docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
-  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x, 0y; iter-0d was
-  infra). All ref-N backlog items are complete — ref-1 through ref-13 plus
-  the iter-0h cousins; ref-14/ref-15 (Sims, Prom Week) are owner-request-only
-  candidates; no doc pass at all without a fresh owner request. **iter-1 code
-  is next, unconditionally.**
+  — reference-influence audit; iter-0y — content principles; iter-0z — the
+  quality round with two provided analyses — rest on the request alone).
+  iter-0z is the twenty-fifth docs iteration in a row (0, 0b, 0c, 0e, 0f,
+  0g, 0h, 0i, 0j, 0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x,
+  0y, 0z; iter-0d was infra). All ref-N backlog items are complete — ref-1
+  through ref-13 plus the iter-0h cousins; ref-14/ref-15 (Sims, Prom Week)
+  are owner-request-only candidates; no doc pass at all without a fresh
+  owner request. **iter-1 code is next, unconditionally.**
 - **Four places, four jobs (D-027).** `docs/REFERENCES.md` catalogs sources
   (license, URL, phase gating); `docs/CORE_DESIGN_RESEARCH.md` §2 carries
   the one-line synthesis per source; `docs/ref/<source>.md` carries the
@@ -124,11 +143,14 @@ request.
 ## Next step
 
 **iter-1 · core plumbing** — unconditionally the next iteration (functional
-code, not docs). The research epoch is closed (D-029); no plan-level
-blockers remain. Read before building: `docs/blueprint/phase0.md` §1 (the
-combined donor design: RngBank, heapq queue with sub_order bands, JSONL
-writer with cause-chain integrity, fold vs incremental projection, pack
-loader) + `docs/BLUEPRINT.md` §1 ledger rows RNG-1/SCHED-1/STATE-1/STORE-1/
-TEST-1 + `MVP_SCOPE.md` §8 + `docs/TASKS.md` iter-1 acceptance criteria.
-The full ref→iteration donor mapping now lives in the blueprint build
-index (`docs/BLUEPRINT.md` §3) — it is no longer restated here (D-027).
+code, not docs). The research epoch is closed (D-029); the quality bar for
+the code that follows is now law (D-031: L13/L14, type discipline,
+fail-fast, the architecture fitness test). Read before building:
+`docs/blueprint/phase0.md` §1 (the combined donor design: RngBank, heapq
+queue with sub_order bands, JSONL writer with cause-chain integrity, fold
+vs incremental projection, pack loader, type discipline,
+`tests/test_architecture.py`) + `docs/BLUEPRINT.md` §1 ledger rows
+RNG-1/SCHED-1/STATE-1/STORE-1/TEST-1 + `MVP_SCOPE.md` §8 + `docs/TASKS.md`
+iter-1 acceptance criteria. The full ref→iteration donor mapping now lives
+in the blueprint build index (`docs/BLUEPRINT.md` §3) — it is no longer
+restated here (D-027).

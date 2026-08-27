@@ -279,3 +279,15 @@ Notes:
   and [P] gating. Rationale: no unique function, or duplicates a
   better-fitted source (the D-015 filter). Nothing is deleted from the
   catalog; demotions are recorded, not removed.
+
+## 15. Principle donors (absorbed, not intake)
+
+Owner-provided architecture texts consulted as principle references — no
+code, no data, no license question (the owner's own materials), so the §0
+intake rules do not apply. The influence is recorded where the law lives;
+these rows are the catalog anchor:
+
+| Text | Absorbed into | Status |
+|---|---|---|
+| INVARIANT-CORE v3 (manifesto) | D-031; L13 (`docs/BLUEPRINT.md` §2); type-discipline + fitness-test clauses (`docs/blueprint/phase0.md` §1) | absorbed 2026-08-27 |
+| Elegant Solutions (curated exemplars) | D-031; L14 (`docs/BLUEPRINT.md` §2); log-as-stream idioms (`docs/TECH_NOTES.md` §7) | absorbed 2026-08-27 |
