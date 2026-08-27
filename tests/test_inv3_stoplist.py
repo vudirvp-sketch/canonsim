@@ -11,6 +11,13 @@ the generic action names of MVP_SCOPE §7) stay legal. Pack data
 (`content/`) is where the setting lives — the stoplist never greps it, and
 the second test keeps the list tied to the pack's actual vocabulary so it
 cannot rot.
+
+Periphery scope note (iter-6a audit, D-046): `render/`, `cli/` and
+`scripts/` are OUTSIDE the stoplist by design — they legitimately carry
+pack path strings (`content/tavern_pack`), CLI help-text examples and
+docstring prose; INV-3's substance is the ENGINE (`core/` + `sim/`)
+hardcoding setting data (a second pack must require zero engine changes —
+the renderer is template-driven, the CLI takes the pack dir as config).
 """
 
 from __future__ import annotations

@@ -9,11 +9,11 @@ director-injected event (`director_<N>` cause_intent). The director
 buffer seeds in both runs (D-005 hygiene — the OFF run is not "no
 director", it is "no releases").
 
-The gate playscript (`tests/playscripts/day1_full.json`, seed 32) is the
+The gate playscript (`tests/playscripts/day1_full.json`, seed 125) is the
 phase-0 walkthrough scenario: enter the tavern, fail two steals (Doren's
 suspicion crosses the document-check threshold), wait through the
 afternoon beat + watch rotation, drop the lamp at the backyard, wait
-through the evening beat + the second rotation. The OFF run produces 24
+through the evening beat + the second rotation. The OFF run produces 26
 emergent chains — far above the gate minimum (≥3); the ON run fires
 `director_0000` (the document check).
 """
@@ -106,11 +106,12 @@ def test_off_run_meets_gate_threshold_three_emergent_chains(
     tmp_path: Path,
 ) -> None:
     """The T8 gate kill-criterion: ≥3 emergent chains WITHOUT the
-    director. The gate playscript produces 24 by the iter-6 baseline;
+    director. The gate playscript produces 26 by the iter-6 baseline;
     this test pins the gate minimum so a regression that drops emergence
     below the threshold fails loudly. An emergent chain is a maximal
     causal path rooted in a player event with a non-PC, non-director
-    tail of length ≥ 2 (`TEST_PLAN.md` §1.2)."""
+    tail of length ≥ 2 (`TEST_PLAN.md` §1.2 — counting is per qualifying
+    endpoint; see the §1.2 note on decay self-chaining)."""
     events, _ = _run(tmp_path, False)
     chains = emergent_chains(events, PLAYER)
     assert len(chains) >= 3, (

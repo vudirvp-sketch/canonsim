@@ -21,7 +21,7 @@ run, M1/M3/M4 on both.
 
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from statistics import mean, median
 from typing import Any
@@ -334,10 +334,3 @@ def render_report(report: MetricReport, *, director_on: bool) -> str:
         f"M5={report.m5_non_pc_share:.3f} | "
         f"emergent_chains={report.emergent_chains}"
     )
-
-
-def fold_events(events: Iterable[EventRecord]) -> tuple[tuple[EventRecord, ...], int]:
-    """Convenience: an iterable → (tuple, count). The harness calls this
-    once per seed to materialize the event stream for the metric folds."""
-    materialized = tuple(events)
-    return materialized, len(materialized)

@@ -367,6 +367,7 @@ Background: `bg-1..bg-4` run in parallel on foreign canon (`docs/TASKS.md`).
   actions, rules, templates) · `render/` (chronicle) · `brief/`
   (reserved, phase 1) · `cli/` · `tests/` + `tests/playscripts/`.
 - stdlib-only runtime deps; pytest + ruff as dev deps. Type hints on public
-  functions. No `print` in committed code (CLI excepted) — log instead.
+  functions. No `print` in committed code (CLI-class tools excepted — `cli/`
+  and the operator scripts in `scripts/`, D-046) — log instead.
 - Core code never mentions domain words (INV-3); a grep stoplist test
   enforces it from iter-2.

@@ -54,7 +54,7 @@ padding.
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2; render + cli landed iter-5; `core/metrics.py` landed iter-6) |
-| `scripts/` | persisted generation/analysis scripts (`AGENTS.md` §9 — Script Persistence Rule): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) |
+| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running

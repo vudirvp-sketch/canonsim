@@ -112,6 +112,15 @@ the next track-A work is phase 1 (narrator over the log) per
 
 ## Done
 
+- iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6: every
+  gate claim reproduced (298 green, the 1000-sim baseline EXACTLY, T8
+  OFF = 26 chains, PYTHONHASHSEED-independent chronicle); 3 KIs fixed —
+  KI#22 TEST_PLAN/test-docstring drift (seed 32→125, 24→26 chains, M2
+  formula, §6 filename), KI#23 scripts/ outside the executable
+  invariants + the false "AGENTS §9" citation (D-046; PACKAGE_DIRS +=
+  scripts + closure test + CLI-class print exemption), KI#24 dead
+  fold_events removed; KI#17–20 deleted (closed >2 iters); FAQ 24→20.
+  299 tests green, ruff clean, fixture byte-identical.
 - iter-6 · 2026-08-28 · phase-0 gate: `docs/TEST_PLAN.md` spec (T0–T8 +
   M1–M5 + gate protocol + UAP crosswalk); `core/metrics.py` (M1–M5 +
   emergent-chain count as pure functions of the log); T1 fixture-

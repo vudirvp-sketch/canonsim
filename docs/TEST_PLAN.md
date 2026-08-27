@@ -46,8 +46,16 @@ in the OFF-run log such that:
   (a transition-engine ignition seeded by a player action);
 - the chain length is ≥ 2 (one event, then another = not emergence).
 
+Counting is **per qualifying endpoint**: each non-PC, non-director event
+whose backward walk (maximal — it extends to the player root, never
+stops early) traverses ≥ 2 non-PC links counts once. Consecutive
+`status_decayed` events cause-chain to each other (the beat chaining
+rule, D-038/D-041), so one decay cascade contributes several endpoints
+and M3's magnitude is decay-dominated — the ≥3 gate and the M3 ≥ 2
+kill-criterion read directionality, not deduplicated path counts.
+
 The OFF run of the gate playscript (`tests/playscripts/day1_full.json`,
-seed 32) produces ≥ 3 such chains. The full count is reported in
+seed 125) produces ≥ 3 such chains. The full count is reported in
 `worklog.md`; the test asserts the gate minimum (3).
 
 ## 2. Metrics M1–M5 (`MVP_SCOPE.md` §15 owns the definitions)
@@ -62,7 +70,7 @@ in `content/tavern_pack/rules.json` under `metrics.system_of_type`
 | ID | Metric | Computation | Directionality (MVP_SCOPE §15) |
 |---|---|---|---|
 | M1 | cross-system share | for each event, the set of systems touched = the union of systems of the event's `type` + systems of each `state_change.prop` (e.g. `position`, `relations.suspicion`, `status.fatigue`, `fire.<spot>`); share = `len(events_with ≥2 systems) / len(events)` | non-trivial and rising across the slice |
-| M2 | deferred hooks fired | `len(events whose type matches a director release) / len(events whose hooks field is non-empty)` — the director's `seed` → `release` ratio. Computed on the ON-run log (the OFF-run is 0 by construction). | non-zero (≥1 release per the cli AB test) |
+| M2 | deferred hooks fired | released / seeded, computed on the ON-run log (the OFF run is 0 by construction). **Released** = events whose `provenance.cause_intent` starts with `director_` — a release is the director's dispatch; a world-rejected release still counts as released. **Seeded** = total hook instances (`len(hooks)` summed over events — a multi-hook event counts as multi-seeded). On the gate ON log: 1 released / 2 seeded = 0.5. | non-zero (≥1 release per the cli AB test) |
 | M3 | causal chain length | for each event, walk `cause` links until `null`; depth = chain length. M3 = mean and median depth over all events. | mean ≥ 2 (one event, then another = failure) |
 | M4 | novelty / repetition | (a) rate of repeated `(type, actor)` bigrams: `repeated_bigrams / total_bigrams`; (b) share of distinct `knows` tokens: `len(distinct knows) / len(knowledge records)`. RimWorld's repetitive-tale problem, measured instead of felt. | novelty share rising (repetition rate low) |
 | M5 | non-PC event share | `len(events where actor != pc_01) / len(events)` — computed on the OFF-run log. "World not player-centered" (Kenshi/RimWorld lesson) made measurable at the director-off gate. | non-zero (≥3 emergent chains by T8 construction) |
@@ -70,7 +78,7 @@ in `content/tavern_pack/rules.json` under `metrics.system_of_type`
 ### 2.1 Thresholds (set from the measured baseline — D-019)
 
 Direction first, numbers from data. The iter-6 baseline runs the gate
-playscript (`tests/playscripts/day1_full.json`, seed 32) ON and OFF, folds
+playscript (`tests/playscripts/day1_full.json`, seed 125) ON and OFF, folds
 each log through `core/metrics.py`, and records the numbers in
 `worklog.md`. The phase-0 exit verdict reads those numbers against the
 directionality targets; honest reporting if a target is missed — the
@@ -103,7 +111,7 @@ A gate is passed only on evidence. The phase-0 gate runs:
 
 1. **The committed playscripts** — `tests/playscripts/plumbing_smoke.json`
    (T1/T2 anchor) and `tests/playscripts/day1_full.json` (T8 gate) —
-   with identical seeds (42 and 32 respectively). Director on and off.
+   with identical seeds (42 and 125 respectively). Director on and off.
 2. **M1/M2** computed on the ON-run; **M3/M4** on both; **M5** on the
    OFF-run. Numbers in `worklog.md`.
 3. **Director-off A/B run** (T8): single-factor switch, ≥3 emergent
@@ -138,13 +146,15 @@ a design lens, not a runtime component.
 ## 6. balance-1 harness (KI#4 close)
 
 The 1000-sim distribution harness (`scripts/balance_harness.py`,
-persisted per AGENTS §9): runs the gate playscript (or a variant) 1000
+committed as a script — D-044; operator tooling per D-046): runs the
+gate playscript (or a variant) 1000
 times across sampled seeds, folds each log through `core/metrics.py`,
 and emits a distribution table for `suspicion` peak per NPC, `fire_spread`
 spot count at burnout, M5 share, and emergent-chain count. Validates
 that `rules.json` thresholds are tuned, not guessed. Uses T1
-determinism (no new infra). Output: `output/balance_<N>.txt` (gitignored
-runtime artifact — never committed).
+determinism (no new infra). Output:
+`output/balance_<N>_seed<S>_<on|off>.txt` (gitignored runtime
+artifact — never committed).
 
 The harness is the iter-6 close of KI#4: it exists, it runs, the
 observations accumulated across iter-2..5 are recorded as concrete

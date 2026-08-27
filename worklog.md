@@ -115,23 +115,6 @@ iter-0aa · 2026-08-27 · owner-requested pre-code doc audit (drift + readiness)
   same pattern as 0v/0z). No code; pytest green, ruff clean. 26th docs
   iteration (owner-requested, D-022).
 ---
-iter-0z · 2026-08-27 · owner-requested quality round (D-031)
-- INVARIANT-CORE v3 + Elegant Solutions absorbed per the D-018 pattern:
-  L13/L14 (BLUEPRINT §2); phase0 §1 type discipline + fail-fast + the
-  `tests/test_architecture.py` fitness test, §2 ActionResolver registry,
-  §6 negative tests; AGENTS §4 INV-1 canon-write privilege + §9 quality
-  DoD; stack frozen through phase 2; mypy parked as owner-gated `qa-1`;
-  TECH_NOTES §7 log-as-stream; REFERENCES §15 principle donors.
-  Contradictions between the two provided analyses resolved in D-031
-  (no new canonical files; no mypy in CI; Upcaster covered; INV-1 stands).
-- 10 files touched — over the 3–5 soft limit: 5 targets + the mandated
-  sync set (STATUS, worklog, TASKS, README, REFERENCES §15) — same
-  pattern as 0v/0w/0y. DECISIONS at 31 entries (>30 cap): every row a
-  distinct stable decision, append-only forbids the cut — kept over per
-  AGENTS §6.1, rationale here. KI#9 deleted (closed >2 iterations).
-  No code; pytest green, ruff clean. 25th docs iteration (owner-requested,
-  D-022); **iter-1 code is next, unconditionally**.
----
 iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
 - render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
   ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
@@ -155,33 +138,32 @@ iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
 
 ---
 iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
-- docs/TEST_PLAN.md (NEW: trigger-fired spec — T0-T8 formalization,
-  M1-M5 definitions, gate protocol, UAP 7-hole crosswalk, §3 schema-
-  bump migration procedure). core/metrics.py (NEW: M1-M5 + emergent-
-  chain count as pure functions of (events, projection) — Mesa
-  DataCollector inverted; system classification is pack data at
-  rules.json::metrics.system_of_type). tests/test_metrics.py (NEW, 24
-  tests). tests/test_t1_determinism.py EXTENDED with the iter-6
-  fixture-regeneration guard (schema_version pin + fresh regen byte
-  diff). tests/playscripts/day1_full.json (NEW gate playscript, seed
-  125). tests/test_t8_ab.py (NEW: single-factor A/B, ≥3 emergent
-  chains OFF, director_0000 ON, M5 non-zero OFF, M3 mean ≥2 both).
-  scripts/balance_harness.py (NEW: KI#4 close — 1000-sim distribution
-  harness; outputs to output/balance_<N>_seed<S>_<on|off>.txt). Pack
-  data: rules.json gained metrics.system_of_type. 11 files — over the
-  3-5 soft limit; the task mandated it (T1+T8+metrics+harness+spec
-  +sync). D-042/D-043/D-044 recorded.
+- TEST_PLAN.md (trigger-fired spec: T0-T8 + M1-M5 + gate protocol + UAP
+  crosswalk + §3 schema-bump migration) + core/metrics.py (M1-M5 +
+  emergent chains as pure functions of the log) + test_metrics.py (24)
+  + the T1 fixture-regeneration guard + tests/playscripts/day1_full.json
+  (seed 125) + test_t8_ab.py (single-factor A/B) +
+  scripts/balance_harness.py (KI#4 close) + rules.json::metrics.
+  11 files — task-mandated. D-042/D-043/D-044/D-045 recorded.
 - Tests 264→298 green (+34); ruff clean; golden fixture byte-identical.
-  T7 manual playtest (this entry): the day1_full chronicle reads as a
-  story — enter tavern → take lamp → fail 2 steals → succeed → watch
-  rotation → knowledge transfer to relief guard → wait → arson → fire
-  chain → second rotation back to Doren → drift → Day 2. The noise floor
-  is high (15 status_decayed + 4 urgencies 'wait' on a 48-event log);
-  tale_gate.min_importance="medium" is too sparse (only 4 events —
-  fire_chain + pickpocket_failed — survive). Verdict: the gate stays
-  at "low"; the first iter-7+ tuning knob is the IMPORTANCE RULE
-  itself (give story-critical events hooks, not the gate threshold).
-  Balance baseline (1000 seeds): M5 p50=0.77, emergent_chains p50=20,
-  M3_mean p50=13.81, M1 p50=0.24 — see output/balance_1000_seed100_off.
-  Phase-0 verdict: PASS (all §16 exit criteria met; no kill-criteria
-  hit). KI#4 closed (balance harness delivered). Track A frozen.
+  T7 playtest + the full verdict evidence live in D-045; the 1000-seed
+  baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
+  p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
+---
+iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-audit)
+- Re-verified end-to-end: 298 green + ruff clean reproduced; the 1000-sim
+  baseline reproduces EXACTLY; T8 OFF = 26 chains / ON = director_0000;
+  chronicle PYTHONHASHSEED-independent; session doors + KI#17 gate
+  correct; tale_gate claims accurate (medium → 4 events).
+- 3 KIs fixed: KI#22 TEST_PLAN/test-docstring drift (seed 32→125 ×4,
+  24→26 ×2, M2 formula vs MVP_SCOPE §15 + impl, §6 filename, §1.2
+  per-endpoint note); KI#23 scripts/ outside the executable invariants
+  + the false "AGENTS §9" citation + the 5–15%/73–83% qualifier loss
+  (D-046; PACKAGE_DIRS += scripts + closure test + CLI-class print
+  exemption, MVP_SCOPE §18 pinned); KI#24 dead fold_events removed.
+- KI#17–20 deleted (closed >2 iters); KI entries to the 2-line cap; FAQ
+  24→20 (purity/drift/fixture/gate families merged + the chain-counting
+  law added). 11 files — audit fix set + mandated sync set.
+- Tests 298→299 green (+1 closure test); ruff clean; golden fixture
+  byte-identical. No canon-path change: the drift was in citing
+  documents, not in the numbers.
