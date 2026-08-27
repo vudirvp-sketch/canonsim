@@ -1,27 +1,27 @@
 # STATUS — canonsim
 
-Iteration: 2 (`iter-2-actions`) · Phase: 0 — simulator without LLM ·
+Iteration: 2a (`iter-2a-code-audit`) · Phase: 0 — simulator without LLM ·
 Date: 2026-08-28
 
-iter-2 lands the action layer per `docs/blueprint/phase0.md` §2: the
-intent front door with OCC + lifecycle (`docs/INTENT_SCHEMA.md` — the
-SPECS_BACKLOG trigger fired and the spec is written from the build); the
-12 resolvers as a name→registry (pack data maps intents to generic
-mechanics — INV-3 held in code, enforced by the new grep stoplist test);
-pack-driven preconditions (a closed 13-test structured filter set),
-opposed checks (skills/die/tie/margins — every number in `rules.json`),
-knowledge templates (audiences × slot-filling, hearing radii); the
-system-pass scheduler DAG (build-time ambiguity check, pack `systems`
-data); and the generic transition engine — fire is a pack-declared
-layer (ignite → alarm+spike → spread pass → smoke → irreversible
-burnout), core code carries no layer names. Impossible-but-well-formed
-intents are logged `intent_rejected` no-ops with cause chains — the
-iter-1 loud-raise contract for preconditions is retired (shape errors
-stay loud). AC met: steal/arson/talk are facts in the log with knowledge
-records (ev_0007's record family byte-for-byte its template); T5 partial
-holds (teleport/arson-unsourced/carried-take/absent-item rejected, world
-unchanged). 148 tests green, ruff clean; the iter-1 golden fixture
-survived byte-identical (move/wait event bytes are the anchor).
+Owner-requested audit of the first two code iterations ("re-check iter-1/2
+before the complexity grows"): full read of `core/` + tests + pack +
+contracts against the blueprint, claims verified (148 green, ruff clean,
+golden fixture intact), then probe-driven bug hunting. Four KIs found and
+fixed in place: KI#13 `_drop` hardcoded `from_=None` desynced the
+projection on a legal retake-and-redrop of a broken item — and exposed
+that events were written before their state deltas were validated (the
+new `_commit` gate validates first, D-035; both baseline logs stayed
+byte-identical); KI#14 `next_log_path` could name a live log after a
+middle delete and the writer would truncate it; KI#15 pack-lint gaps
+(`use_effect` axis, knowledge/events branch consistency, bare
+`StopIteration` in the steal resolver); KI#16 two staggered fires forked
+parallel spread passes — double `chance_per_tick` and a `cause=None`
+crash mid-run (seed 19 reproducer); the pass is now a per-layer
+singleton with a shared cause map (D-036). Repeat smoke/burnout
+follow-ups now stay silent instead of duplicating chronicle lines.
+155 tests green (+7 regression), ruff clean; `intent OCC` (KI#12)
+confirmed structurally unreachable in single-actor runs — KI stays open
+until an e2e trigger exists.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -44,13 +44,31 @@ survived byte-identical (move/wait event bytes are the anchor).
 
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6). First balance observation from iter-2: with v0.1 numbers, environment checks at difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20) — talk/examine/use/distract never fail as shipped; the failure branches are mechanism-tested via a crafted high-difficulty pack copy. Retuning is pack data, validated by `balance-1`.
-- KI#12 · intent OCC has no natural e2e trigger in iter-2 runs — single-actor sequential playscripts never move the projection between proposal and completion (only the fire chain interleaves, and it moves no positions/carriers). The mechanism + cause attribution are unit-tested (`tests/test_intent.py::test_occ_finds_the_breaking_event`); a natural trigger arrives with NPC reactions (iter-3) or the director (iter-4). Do not delete until an e2e test exists.
+- KI#12 · intent OCC has no natural e2e trigger in iter-2 runs — single-actor sequential playscripts never move the projection between proposal and completion (only the fire chain interleaves, and it moves no positions/carriers). Mechanism + cause attribution are unit-tested (`tests/test_intent.py::test_occ_finds_the_breaking_event`); a natural trigger arrives with NPC reactions (iter-3) or the director (iter-4). iter-2a audit confirmed the unreachability is structural: no current precondition reads a prop any fire event writes. Do not delete until an e2e test exists.
+- KI#13 · resolver desync wrote-then-crashed (iter-2a found+fixed) — CLOSED iter-2a: `_drop` hardcoded `from_=None` on the `condition` change; a legal take→drop→retake→redrop of a breakable item (seed 34) crashed after the bad event was already appended. Fix: idempotent condition change + the `Simulator._commit` gate (state deltas validated against the projection BEFORE the write, D-035) + regression tests; both baseline logs stayed byte-identical.
+- KI#14 · `next_log_path` could truncate a live log — CLOSED iter-2a: after a middle-file delete, `len(existing)` named an existing path and the writer's "w" mode silently truncated it (INV-5 hygiene). Fix: first-free-slot scan + test.
+- KI#15 · pack-lint gaps let data bugs reach mid-run — CLOSED iter-2a: `use_effect.status` not checked against `rules.states` (a typo would silently seed a garbage status axis); `knowledge.failure_total` without `events.failure_total` (a generic resolver would KeyError at completion); the steal resolver raised a bare `StopIteration` when its `carries_flagged` precondition was missing. All three now fail at load or raise a named `RunnerError`; steal's pack data gained the `failure_total` event branch.
+- KI#16 · parallel spread passes broke runs with two fires — CLOSED iter-2a: a second ignition while a pass ran forked a second pass — doubling `chance_per_tick` and rolling the new location without a cause (`cause=None` → `LogError` mid-run; seed 19 reproducer, 3/59 seeds). Fix: the spread pass is a per-layer singleton with a shared cause map ignitions merge into (D-036); repeat smoke/burnout follow-ups now emit nothing instead of duplicate no-op events.
 - KI#5 · runtime state vs test fold not explicitly separated — CLOSED iter-1: the Simulator keeps the incremental projection (`apply_event` per emission), `fold` exists only on the T2 test path — D-023/STATE-1 implemented and test-enforced (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
 - KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1: owner approved the stdlib mini-validator; landed as `core/schema.py` (D-032) — write-time validation in the log writer, T0 on doc examples + committed logs.
-- KI#11 · doc drift batch, 11 findings — CLOSED iter-0aa: tick arithmetic + fabricated "MVP_SCOPE §4.1" citation (phase0 §1, df_worldgen.md); ROADMAP §4 "week 1"; MVP_SCOPE §13 "day 3" + §5 system-3 npc↔npc gap; TASKS "post-sprint" + missing iter-0f Done line; P3c mislabels (phase0 §2, EVENT_SCHEMA §11); AGENT_NAVIGATION tests rows; README "empty". Details: worklog iter-0aa.
 
 ## FAQ / Pitfalls
 
+- **System passes scan the whole projection, not the events that seeded
+  them (KI#16 lesson).** `spread_tick` rolls every burning location with
+  unburning spots — including fires ignited after the pass started. Any
+  per-layer bookkeeping (cause maps, "already told" flags) must therefore
+  be global to the layer and mergeable by new ignitions, never a frozen
+  snapshot carried in the queue payload. Same rule for every per-tick
+  system iter-3+ adds (knowledge, relations, states passes).
+- **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).** A
+  resolver that hardcodes a `from_` value instead of reading the
+  projection breaks the moment a legal sequence moves that prop before
+  the resolver runs. Two disciplines: read current values from the
+  projection (the `_divert`/`_use_item` pattern) and make repeat effects
+  idempotent (the `follow_up_draft` None pattern). The `_commit` gate
+  (D-035) makes the failure loud BEFORE the write — the log never holds
+  a desynced event — but the resolver should not rely on the net.
 - **INV-3's stoplist scope (iter-2 interpretation, test-owned).** The
   stoplist (`tests/test_inv3_stoplist.py`) bans **setting** nouns — the
   invariant's named examples plus entity names and location/item
@@ -181,4 +199,9 @@ knowledge transfer with fidelity decay (rumor = transfer event,
 from `rules.json` `crime_watch`), watch-change transfer, P2a npc↔npc
 relations (D-020), P2d expectation_violation (KI#3), P2c detail callbacks
 (D-033). Read before building: `docs/blueprint/phase0.md` §3 +
-`MVP_SCOPE.md` §10; ledger rows EPIST-1, LOD-1, STATE-1.
+`MVP_SCOPE.md` §10; ledger rows EPIST-1, LOD-1, STATE-1. iter-2a audit
+notes for the builder: `rules.json` carries the arrest threshold (75) in
+two homes (`relations.suspicion_thresholds.arrest_attempt_at` and
+`crime_watch.arrest.requires_suspicion`) — pick one owner when the crime
+system lands; and arson on a fully-burning/destroyed location currently
+logs a no-ignition success (backlog `pack-2` in TASKS).

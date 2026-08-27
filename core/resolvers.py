@@ -221,7 +221,10 @@ def _drop(
         )
     ]
     broken = bool(item.get("breakable"))
-    if broken:
+    # Idempotent (KI#13): an already-broken item re-dropped after a retake
+    # carries no second condition change — from_ is never hardcoded against
+    # a moved projection. The noise still happens; the break happens once.
+    if broken and projection[intent.target].get("condition") != "broken":
         changes.append(
             StateChange(entity=intent.target, prop="condition", from_=None, to_="broken")
         )
@@ -289,9 +292,18 @@ def _stealth_take(
     everyone's sighting) with the document-check hooks seeded."""
     if intent.target is None:
         raise RunnerError("steal requires a target npc")
-    flag = next(
-        cond["flag"] for cond in action["requires"] if cond["test"] == "carries_flagged"
-    )
+    try:
+        flag = next(
+            cond["flag"] for cond in action["requires"]
+            if cond["test"] == "carries_flagged"
+        )
+    except StopIteration:
+        # KI#15: pack data dropped the precondition the resolver keys on —
+        # a loud contract error, never a bare StopIteration.
+        raise RunnerError(
+            f"{intent.kind}: the stealth_take resolver requires a "
+            f"carries_flagged precondition to find the item"
+        ) from None
     branch = _branch(check, action)
     if branch == "success":
         item = find_flagged_carried(pack, projection, intent.target, flag)
@@ -312,7 +324,7 @@ def _stealth_take(
             ),
         )
     return Resolution(
-        event_type=action["events"]["failure"],
+        event_type=action["events"][branch],
         outcome={"check": _check_outcome(check)},
         knowledge=_knowledge(action, branch, pack, projection, intent, tick),
         hooks=_hooks(action, branch),

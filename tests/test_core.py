@@ -21,6 +21,7 @@ from core.log import (
     KnowledgeRecord,
     LogError,
     StateChange,
+    next_log_path,
     read_log,
     validate_header,
 )
@@ -475,4 +476,46 @@ def test_pack_lint_catches_layer_system_not_per_tick(tmp_path: Path) -> None:
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="per-tick system"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- iter-2a audit regressions (KI#14/KI#15) ------------------------------------
+
+
+def test_next_log_path_never_names_an_existing_log(tmp_path: Path) -> None:
+    # KI#14: after a middle delete, counting files would return a live log
+    # path — and the writer's "w" mode would truncate it. The first free
+    # slot wins instead.
+    for n in range(3):
+        writer = EventLogWriter(tmp_path / f"run_42_{n}.jsonl", SCHEMA)
+        writer.write_header(seed=42, commit="c", pack="p@1")
+        writer.close()
+    (tmp_path / "run_42_1.jsonl").unlink()
+    nxt = next_log_path(tmp_path, 42)
+    assert nxt.name == "run_42_1.jsonl"  # the freed slot, not run_42_2
+    assert not nxt.exists()
+    # dense sequence: no gap -> the next index
+    (tmp_path / "run_42_1.jsonl").touch()
+    assert next_log_path(tmp_path, 42).name == "run_42_3.jsonl"
+
+
+def test_pack_lint_catches_unknown_use_effect_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        mug = next(i for i in entities["items"] if i["id"] == "ale_mug_01")
+        mug["use_effect"]["status"] = "hiccupiness"  # not a rules.states axis
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="use_effect"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_knowledge_branch_without_event(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        examine = next(a for a in actions["actions"] if a["intent"] == "examine")
+        examine["knowledge"]["failure_total"] = []  # no events.failure_total
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="failure_total"):
         load_pack(_broken_pack(tmp_path, mutate))

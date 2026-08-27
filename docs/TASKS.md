@@ -135,6 +135,12 @@
   extensions. Darkness levers per D-030; zero core change (axis-blind core;
   event vocabulary per pack, EVENT_SCHEMA §11). Distillation source:
   D-030 + the PACK_SPEC sketch row. Blocked until: phase-0 gate passed.
+- `pack-2` Arson-on-ashes guard (iter-2a audit note): arson on a
+  fully-burning or destroyed location currently logs a no-ignition
+  success (spot=None, world unchanged). Candidate fix = a pack
+  precondition (e.g. an `unburning_spot`/`not_destroyed` test in the
+  closed set) when a precondition slot is next needed — most naturally
+  iter-3+, once crime reactions make arson attempts meaningful facts.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13 items
   are done — status one-liners:
@@ -160,6 +166,11 @@
 
 ## Done
 
+- iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2: 4 KIs
+  found+fixed (drop desync + `_commit` pre-write gate D-035;
+  next_log_path truncation; pack-lint gaps; parallel spread passes →
+  per-layer singleton + shared causes D-036), repeat smoke/burnout
+  silent, KI#11 deleted; 155 tests green, baselines byte-identical.
 - iter-2 · 2026-08-28 · actions: the 12 resolvers + registry, pack-driven
   preconditions/checks/knowledge templates, intent OCC + lifecycle
   (INTENT_SCHEMA.md), scheduler DAG, generic transition engine (fire

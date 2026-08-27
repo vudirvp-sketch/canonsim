@@ -129,7 +129,7 @@
       },
       "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED smoke/burnout follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); position_visibility.smoke_penalty stays with the perception input it belongs to"
     },
-    "notes": "generic transition engine (core/transition.py) iterates pack-declared layers by name — core code carries no layer names (INV-3)"
+    "notes": "generic transition engine (core/transitions.py) iterates pack-declared layers by name — core code carries no layer names (INV-3)"
   },
 
   "crime_watch": {

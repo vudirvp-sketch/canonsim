@@ -17,6 +17,8 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from core.fold import fold, initial_projection
 from core.log import read_log
 from core.loop import Simulator, load_playscript
@@ -416,3 +418,111 @@ def test_all_emitted_types_stay_in_pack_vocabulary(tmp_path: Path) -> None:
     sim.run_playscript(playscript)
     _, events = read_log(tmp_path / "vocab.jsonl", SCHEMA)
     assert all(event.type in PACK.event_types() for event in events)
+
+
+# -- iter-2a audit regressions (KI#13/KI#15/KI#16) -----------------------------
+
+
+def test_double_drop_break_of_a_broken_item_is_idempotent(tmp_path: Path) -> None:
+    # seed 34: both stealth takes succeed. The retake-and-redrop of the
+    # broken mug must not desync the projection (KI#13): the second drop
+    # releases the carrier and keeps the noise, but carries no second
+    # condition change.
+    events, sim = run(tmp_path, 34, [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "take", "target": "ale_mug_01"},
+        {"intent": "drop_break", "target": "ale_mug_01"},
+        {"intent": "take", "target": "ale_mug_01"},
+        {"intent": "drop_break", "target": "ale_mug_01"},
+    ], name="twice.jsonl")
+    drops = [e for e in events if e.type == "drop_break"]
+    assert len(drops) == 2
+    assert drops[0].state_changes[1].prop == "condition"
+    assert all(c.prop != "condition" for c in drops[1].state_changes)
+    assert drops[1].outcome["broken"] is True  # still breakable — still noisy
+    assert sim.projection["ale_mug_01"]["condition"] == "broken"
+    assert sim.projection["ale_mug_01"]["carrier"] is None
+
+
+def test_two_staggered_fires_share_one_pass_and_keep_the_cause_chain(
+    tmp_path: Path,
+) -> None:
+    # seed 19 (the KI#16 reproducer): the tavern fire's spread pass is live
+    # when the backyard lamp drops. One pass must roll both locations with a
+    # cause for every spread — no parallel pass, no cause=None crash.
+    events, sim = run(tmp_path, 19, [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "arson", "target": "loc_tavern"},
+        {"intent": "take", "target": "oil_lamp_01"},
+        {"intent": "move", "target": "loc_backyard"},
+        {"intent": "drop_break", "target": "oil_lamp_01", "near": "woodpile"},
+        {"intent": "wait", "ticks": 60},
+    ], name="twofires.jsonl")
+    ids = {e.id for e in events}
+    spreads = [e for e in events if e.type == "fire_spread"]
+    assert spreads  # the run reaches the spread phase without dying
+    assert all(e.cause in ids for e in spreads)  # every spread chains
+    # one fire_started per location, one burnout line per location
+    started = [e for e in events if e.type == "fire_started"]
+    assert {e.target for e in started} == {"loc_tavern", "loc_backyard"}
+    burnouts = [e for e in events if e.type == "location_burned_out"]
+    assert {e.target for e in burnouts} == {"loc_tavern", "loc_backyard"}
+    smokes = [e for e in events if e.type == "smoke_rising"]
+    assert {e.target for e in smokes} == {"loc_tavern", "loc_backyard"}
+    assert sim.projection["loc_tavern"]["destroyed"] is True
+    assert sim.projection["loc_backyard"]["destroyed"] is True
+    # T2 still holds with two interleaved fires
+    rebuilt = fold(events, initial_projection(PACK.entities))
+    assert rebuilt == sim.projection
+
+
+def test_resolver_desync_fails_before_the_log_write(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # A resolver bug (a from_ value the projection contradicts) must fail
+    # at the _commit gate, BEFORE the write — the append-only log never
+    # receives a desynced event (KI#13, D-035).
+    from core import resolvers
+
+    def buggy(
+        pack: Pack, projection: Any, bank: Any, intent: Any, action: Any,
+        check: Any, tick: int,
+    ) -> Any:
+        return resolvers.Resolution(
+            event_type=action["events"]["success"],
+            outcome={},
+            state_changes=(
+                resolvers.StateChange(
+                    entity="pc_01", prop="position",
+                    from_="loc_moon", to_="loc_mars",
+                ),
+            ),
+        )
+
+    monkeypatch.setitem(resolvers.REGISTRY, "wait", buggy)
+    sim = make_sim(tmp_path, 42, "desync.jsonl")
+    with pytest.raises(ValueError, match="projection holds"):
+        sim.run_playscript(script([{"intent": "wait", "ticks": 1}], 42))
+    lines = (tmp_path / "desync.jsonl").read_text().splitlines()
+    assert len(lines) == 1  # header only — the bad draft never landed
+
+
+def test_steal_without_carries_flagged_precondition_is_loud(
+    tmp_path: Path,
+) -> None:
+    # A pack that drops the precondition the resolver keys on fails with a
+    # named contract error, never a bare StopIteration (KI#15).
+    target = tmp_path / "noflag_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    actions = json.loads((target / "actions.json").read_text())
+    steal = next(a for a in actions["actions"] if a["intent"] == "steal")
+    steal["requires"] = [c for c in steal["requires"]
+                         if c["test"] != "carries_flagged"]
+    (target / "actions.json").write_text(json.dumps(actions))
+    pack = load_pack(target)
+    sim = make_sim(tmp_path, 1, "noflag.jsonl", pack=pack)
+    with pytest.raises(RuntimeError, match="carries_flagged precondition"):
+        sim.run_playscript(script([
+            {"intent": "move", "target": "loc_tavern"},
+            {"intent": "steal", "target": "npc_guard_01"},
+        ], 1), )

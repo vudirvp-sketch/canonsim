@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -184,7 +184,7 @@
       "ticks": 3,
       "check": {"kind": "stealth_vs_perception", "difficulty": 50},
       "on_failure": "partial or total failure",
-      "events": {"success": "steal", "failure": "pickpocket_failed"},
+      "events": {"success": "steal", "failure": "pickpocket_failed", "failure_total": "pickpocket_failed"},
       "requires": [
         {"noun": "target", "test": "kind", "is": "npc"},
         {"noun": "target", "test": "same_location", "with": "actor"},

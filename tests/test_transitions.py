@@ -105,13 +105,17 @@ def test_follow_up_drafts_are_idempotent_on_state() -> None:
                             "ev_0000")
     assert smoke is not None and smoke.type == "smoke_rising"
     assert smoke.state_changes[0].prop == "smoke"
-    # a second smoke follow-up (e.g. a second ignition) drops the change
+    # a second smoke follow-up (e.g. a second ignition of the same location)
+    # says nothing: no duplicate event, no duplicate chronicle line (KI#13)
     state["loc_tavern"]["smoke"] = True
     smoke_again = follow_up_draft(PACK, state, 30, "fire", "loc_tavern", "smoke",
                                   "ev_0000")
-    assert smoke_again is not None and smoke_again.state_changes == ()
-    # burnout after destruction: nothing left to say
+    assert smoke_again is None
+    # a second burnout likewise stays silent — the first told the story
     state["loc_tavern"]["destroyed"] = True
+    assert follow_up_draft(PACK, state, 140, "fire", "loc_tavern", "burnout",
+                           "ev_0000") is None
+    # smoke after destruction: nothing left to say
     assert follow_up_draft(PACK, state, 130, "fire", "loc_tavern", "smoke",
                            "ev_0000") is None
 

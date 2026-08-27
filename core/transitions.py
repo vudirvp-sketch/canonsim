@@ -276,9 +276,12 @@ def follow_up_draft(
     cause_id: str,
 ) -> EventDraft | None:
     """The smoke / burnout event for a burning location (SEEDED at
-    ignition time). Idempotent on state: a flag already set drops its
-    state change instead of failing. None when there is nothing left to
-    say (destroyed before a pending smoke)."""
+    ignition time). Idempotent on state: a flag already set means this
+    story was already told — None, no duplicate event, no duplicate
+    chronicle line. None likewise when the burnout pre-empted a pending
+    smoke. A second ignition of the same location seeds a second
+    follow-up pair; the first to fire says the line, the rest stay
+    silent (KI#13 discipline: no no-op duplicates in the canon)."""
     layer_cfg = _layer(pack, layer)
     knowledge_cfg = layer_cfg["knowledge"]
     ctx = {"location": location, "cause_actor": None}
@@ -286,19 +289,21 @@ def follow_up_draft(
     if kind == "smoke":
         if projection[location].get("destroyed"):
             return None  # the burnout already told this story
+        if projection[location].get("smoke") is True:
+            return None  # the smoke already told this story
         knowledge = resolve_knowledge(
             [knowledge_cfg["smoke"]], pack, projection, ctx, tick
         )
-        already = projection[location].get("smoke") is True
-        changes = () if already else (
+        changes = (
             StateChange(entity=location, prop="smoke", from_=None, to_=True),
         )
     elif kind == "burnout":
+        if projection[location].get("destroyed") is True:
+            return None  # the burnout already told this story
         knowledge = resolve_knowledge(
             [knowledge_cfg["burnout"]], pack, projection, ctx, tick
         )
-        already = projection[location].get("destroyed") is True
-        changes = () if already else (
+        changes = (
             StateChange(
                 entity=location, prop="destroyed",
                 from_=None, to_=True, irreversible=True,

@@ -17,6 +17,15 @@ burnout follow-ups run as SEEDED SCHEDULED entries (TIME-1).
 The whole run executes under `assure('substantive')` — a cosmetic draw on
 this path is an INV-2 violation made loud (RNG-1). Resolver dispatch is a
 name→callable registry keyed by the pack's `resolver` field (INV-3).
+
+Every event passes the `_commit` gate (D-035): state deltas are validated
+against the projection BEFORE the write, so a resolver bug fails loudly
+while the log stays clean — the append-only truth never receives a draft
+that disagrees with the world it describes (KI#13). The spread pass is a
+per-layer singleton: one pass entry per layer at a time, its cause map
+shared with the ignitions (a second fire while a pass runs merges into it
+instead of forking a parallel pass — parallel passes double the pack's
+chance_per_tick and lose the cause chain, KI#16).
 """
 
 from __future__ import annotations
@@ -73,12 +82,13 @@ class CompletionPayload:
 
 @dataclass(frozen=True, slots=True)
 class PassPayload:
-    """A transition layer's spread pass; `causes` maps location → the
-    location's last transition event id (the cause chain within a fire)."""
+    """A transition layer's spread pass. The per-layer cause map (location
+    → the location's last transition event id) lives on the Simulator
+    (`_pass_causes`) — shared with ignitions so a running pass can chain
+    spreads of a fire it did not seed (KI#16)."""
 
     system: str
     layer: str
-    causes: Mapping[str, str]
 
 
 @dataclass(frozen=True, slots=True)
@@ -124,7 +134,7 @@ class Simulator:
         self._clock = Clock.from_rules(dict(pack.rules["time"]))
         self._queue = EventQueue()
         self._writer = EventLogWriter(log_path, event_schema)
-        self._commit = commit
+        self._commit_id = commit
         self._projection = initial_projection(pack.entities)
         self._initial = initial_projection(pack.entities)
         self._events: list[EventRecord] = []
@@ -133,6 +143,9 @@ class Simulator:
         self._system_order = {
             decl.name: index for index, decl in enumerate(self._schedule)
         }
+        # spread-pass state (KI#16): one live pass per layer, causes shared
+        self._pass_causes: dict[str, dict[str, str]] = {}
+        self._pass_live: set[str] = set()
 
     @property
     def projection(self) -> Projection:
@@ -155,7 +168,7 @@ class Simulator:
             )
         steps = list(script["steps"])
         self._writer.write_header(
-            seed=self._seed, commit=self._commit, pack=self._pack.name_version
+            seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
         )
         try:
             if steps:
@@ -302,29 +315,33 @@ class Simulator:
             ),
             provenance={"seed": self._seed, "cause_intent": intent.id},
         )
-        record = self._writer.append(draft)
-        self._apply(record)
+        self._commit(draft)
 
         for ignition in resolution.ignitions:
             self._execute_ignition(ignition, entry.tick, intent.actor)
 
     def _execute_ignition(self, ignition: Ignition, tick: int, actor: str) -> None:
         """Run a transition ignition: emit the layer's events (cause
-        chained), seed the smoke/burnout follow-ups, start the spread pass."""
+        chained), seed the smoke/burnout follow-ups, start the spread pass.
+        A pass already running for the layer absorbs the new fire (the
+        shared cause map gains the location) — one pass, one chance per
+        tick per spot, one intact cause chain (KI#16)."""
         layer_cfg = self._pack.rules["transitions"][ignition.layer]
         plan = ignite(self._pack, self._projection, tick, ignition, actor)
         last_id = self._writer.last_id
         started_id: str | None = None
         for draft in plan.drafts:
-            record = self._writer.append(
+            record = self._commit(
                 replace(draft, cause=last_id, provenance={"seed": self._seed})
             )
-            self._apply(record)
             last_id = record.id
             if started_id is None:
                 started_id = record.id
         if started_id is None:
             return
+        self._pass_causes.setdefault(ignition.layer, {})[
+            ignition.location
+        ] = started_id
         for spec in plan.follow_ups:
             self._queue.push(
                 tick=spec.at_tick, sub_order=SCHEDULED,
@@ -335,46 +352,43 @@ class Simulator:
                     kind=spec.kind, cause_id=started_id,
                 ),
             )
-        if plan.seed_pass:
+        if plan.seed_pass and ignition.layer not in self._pass_live:
+            self._pass_live.add(ignition.layer)
             system = layer_cfg["system"]
             self._queue.push(
                 tick=tick + 1,
                 sub_order=SYSTEM_PASS + self._system_order[system],
                 actor_id=f"pass:{system}", kind="pass",
-                payload=PassPayload(
-                    system=system, layer=ignition.layer,
-                    causes={ignition.location: started_id},
-                ),
+                payload=PassPayload(system=system, layer=ignition.layer),
             )
 
     def _run_pass(self, entry: Any) -> None:
         """One spread pass tick over burning locations; re-enqueues itself
         while unburning spots remain (the self-rescheduling system pass)."""
         payload: PassPayload = entry.payload
+        causes = self._pass_causes[payload.layer]
         result = spread_tick(
             self._pack, self._projection, self._bank, entry.tick,
-            payload.layer, payload.causes,
+            payload.layer, causes,
         )
-        causes = dict(payload.causes)
         for draft in result.drafts:
             location = draft.target
-            record = self._writer.append(
+            record = self._commit(
                 replace(
                     draft, cause=causes.get(location),
                     provenance={"seed": self._seed},
                 )
             )
-            self._apply(record)
             causes[location] = record.id
         if result.continue_pass:
             self._queue.push(
                 tick=entry.tick + 1,
                 sub_order=SYSTEM_PASS + self._system_order[payload.system],
                 actor_id=f"pass:{payload.system}", kind="pass",
-                payload=PassPayload(
-                    system=payload.system, layer=payload.layer, causes=causes
-                ),
+                payload=PassPayload(system=payload.system, layer=payload.layer),
             )
+        else:
+            self._pass_live.discard(payload.layer)
 
     def _run_follow_up(self, entry: Any) -> None:
         """A SEEDED smoke / burnout at its trigger tick (TIME-1)."""
@@ -384,10 +398,7 @@ class Simulator:
             payload.location, payload.kind, payload.cause_id,
         )
         if draft is not None:
-            record = self._writer.append(
-                replace(draft, provenance={"seed": self._seed})
-            )
-            self._apply(record)
+            self._commit(replace(draft, provenance={"seed": self._seed}))
 
     def _emit_rejection(
         self,
@@ -411,9 +422,29 @@ class Simulator:
             importance="low",
             provenance={"seed": self._seed, "cause_intent": intent.id},
         )
-        record = self._writer.append(draft)
-        self._apply(record)
+        self._commit(draft)
 
-    def _apply(self, record: EventRecord) -> None:
+    def _commit(self, draft: EventDraft) -> EventRecord:
+        """The one door from a draft to the canon (D-035): validate the
+        state deltas against the projection, THEN append, THEN apply.
+        A draft that disagrees with the world fails here — before the
+        write — so the log never holds a desynced event (KI#13);
+        `apply_event`'s own from_-check stays as the post-write net.
+        Progressive semantics: change N is checked against the state as
+        changed by changes 0..N-1 of the same event."""
+        pending: dict[tuple[str, str], Any] = {}
+        for change in draft.state_changes:
+            props = self._projection.get(change.entity)
+            key = (change.entity, change.prop)
+            current = pending.get(key, props.get(change.prop) if props else None)
+            if props is None or current != change.from_:
+                held = props.get(change.prop) if props else None
+                raise ValueError(
+                    f"{draft.type}: state_change {change.entity}.{change.prop} "
+                    f"expected from {change.from_!r} but projection holds {held!r}"
+                )
+            pending[key] = change.to_
+        record = self._writer.append(draft)
         apply_event(self._projection, record)
         self._events.append(record)  # in-memory cache: OCC attribution only
+        return record

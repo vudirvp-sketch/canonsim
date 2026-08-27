@@ -126,6 +126,16 @@ class _Lint:
 
         for item in items:
             _require(item["position"] in location_ids, f"item {item['id']}: unknown position")
+            effect = item.get("use_effect")
+            if effect is not None:
+                _require(
+                    isinstance(effect, Mapping)
+                    and effect.get("status") in status_axes
+                    and isinstance(effect.get("delta"), int)
+                    and not isinstance(effect.get("delta"), bool),
+                    f"item {item['id']}: use_effect must name a rules.states "
+                    f"axis and an integer delta, got {effect!r}",
+                )
             carrier = item.get("carrier")
             if carrier is not None:
                 _require(carrier in npc_ids, f"item {item['id']}: unknown carrier {carrier}")
@@ -232,6 +242,25 @@ class _Lint:
                 _require(
                     isinstance(fields_value, str),
                     f"action {intent}: fields must be strings",
+                )
+            # events/knowledge branch consistency (KI#15): a resolver can
+            # index events[success] always, events[failure] when the action
+            # carries a check, events[failure_total] when knowledge
+            # declares that branch — a missing key would crash at
+            # completion instead of failing at load.
+            events = action.get("events", {})
+            _require("success" in events, f"action {intent}: events.success is required")
+            if action.get("check") is not None:
+                _require(
+                    "failure" in events,
+                    f"action {intent}: has a check but no events.failure",
+                )
+            if "failure_total" in action.get("knowledge", {}):
+                _require(
+                    "failure_total" in events,
+                    f"action {intent}: knowledge declares failure_total but "
+                    f"events does not — events['failure_total'] would crash "
+                    f"at completion",
                 )
             for branch, records in action.get("knowledge", {}).items():
                 _require(

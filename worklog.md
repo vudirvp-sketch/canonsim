@@ -6,6 +6,22 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2 (iter-2a-code-audit)
+- Full read core/ + tests + pack + contracts vs blueprint; claims
+  verified; probe-driven hunting (brute-forced seeds). 4 KIs found+fixed:
+  KI#13 drop desync + write-before-validate → `Simulator._commit` gate
+  (D-035, validate deltas pre-write); KI#14 next_log_path truncation;
+  KI#15 pack-lint gaps (use_effect axis, failure_total branches,
+  StopIteration guard); KI#16 parallel spread passes (double chance,
+  cause=None crash, seed 19) → per-layer singleton pass + shared cause
+  map (D-036); repeat smoke/burnout now silent. 15 files — audit fix set
+  + mandated sync set.
+- Tests 148→155 green, ruff clean; plumbing_smoke + day1 logs
+  byte-identical to pre-fix baselines; KI#11 deleted (closed >2 iters).
+  Observations parked: arrest-75 duplicated in rules.json (iter-3 picks
+  the owner), arson-on-ashes = backlog pack-2, statuses clamp by the
+  relations scale (documented INTENT_SCHEMA §6 — owner may veto).
+---
 iter-2 · 2026-08-28 · actions — the 12, checks, price (iter-2-actions)
 - core/{intent,resolvers,transitions,scheduler}.py + loop rewire: front
   door (shape loud / preconditions soft → `intent_rejected` no-ops with
@@ -136,10 +152,3 @@ iter-0u · 2026-08-27 · owner-requested references distillation (synthesis pass
   pytest green, ruff clean.
 - Next: iter-1 core plumbing, unconditionally — read `docs/blueprint/
   phase0.md` §1 + ledger rows RNG-1/SCHED-1/STATE-1/STORE-1/TEST-1 first.
----
-iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (live-char-guide)
-- New `docs/ref/live_char_guide.md` (304): SPINE/Price/observability,
-  Influence Boundary candidate rule, BRIEF_SPEC injection grammar, AP →
-  PACK_SPEC lint vocabulary. License clean MIT. All ref-N backlog complete
-  (ref-1..ref-13 + iter-0h cousins).
----

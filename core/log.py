@@ -228,9 +228,20 @@ def python_version() -> str:
 
 
 def next_log_path(logs_dir: Path, seed: int) -> Path:
-    """Next free `run_<seed>_<n>.jsonl` path inside `logs_dir` (§1 pattern)."""
-    existing = list(logs_dir.glob(f"run_{seed}_*.jsonl")) if logs_dir.is_dir() else []
-    return logs_dir / f"run_{seed}_{len(existing)}.jsonl"
+    """First free `run_<seed>_<n>.jsonl` path inside `logs_dir` (§1 pattern).
+
+    Never returns an existing path (KI#14): counting files breaks after a
+    middle delete — `len(existing)` would name a live log, and the writer's
+    `"w"` mode would silently truncate it. The first free slot wins, so a
+    deleted middle file is refilled instead.
+    """
+    taken: set[str] = set()
+    if logs_dir.is_dir():
+        taken = {path.name for path in logs_dir.glob(f"run_{seed}_*.jsonl")}
+    n = 0
+    while f"run_{seed}_{n}.jsonl" in taken:
+        n += 1
+    return logs_dir / f"run_{seed}_{n}.jsonl"
 
 
 # -- the writer (the only canon-write path) -------------------------------

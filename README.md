@@ -15,16 +15,16 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 2 — the action layer landed: the intent front door
-with OCC + lifecycle (`docs/INTENT_SCHEMA.md`), the 12 actions as a
-pack-driven resolver registry (preconditions, opposed checks, knowledge
-templates — all numbers and vocabulary in `content/tavern_pack/`), the
-system-pass scheduler DAG, and the generic transition engine (the fire
-chain: ignite → alarm → spread → smoke → irreversible burnout).
-Impossible intents are logged no-op rejections, never silent drops; steal
-/ arson / talk are facts in the log with knowledge records. 148 tests
-green, ruff clean; the iter-1 golden log fixture survived byte-identical.
-Next: iter-3 · knowledge, relations, expectations (`docs/TASKS.md`).
+Phase 0, iteration 2a — the owner-requested audit of the first two code
+iterations: four defects found and fixed in place (a resolver/projection
+desync that could write a bad event before crashing — events now pass a
+pre-write `_commit` gate; a log-path collision that could truncate a
+prior run's log; three pack-lint gaps; parallel fire-spread passes that
+crashed runs with two staggered fires). 155 tests green, ruff clean;
+both baseline logs byte-identical through the fixes. The action layer
+(iter-2) stands: intent front door with OCC, the 12 pack-driven
+resolvers, scheduler DAG, and the generic fire chain. Next: iter-3 ·
+knowledge, relations, expectations (`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 
