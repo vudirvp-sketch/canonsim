@@ -31,8 +31,10 @@ from core.log import EventDraft, EventRecord, KnowledgeRecord, StateChange
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
     from core.pack import Pack
+    from core.rng import RngBank
 
 __all__ = [
+    "arrest_resolution_draft",
     "briefing_draft",
     "iter_suspicion_reactions",
     "next_rotation_tick",
@@ -147,6 +149,101 @@ def iter_suspicion_reactions(
                 )
             )
         yield tuple(drafts)
+
+
+# -- arrest resolution (iter-4 leftover: capture/escape on threshold crossing) ---
+
+
+def arrest_resolution_draft(
+    pack: "Pack",
+    projection: Mapping[str, Mapping[str, Any]],
+    bank: "RngBank",
+    arrest_record: EventRecord,
+) -> EventDraft | None:
+    """The arrest resolution (iter-4 leftover): the watcher moved to
+    arrest; now the suspect evades vs the watcher's pursuit. Success =
+    the suspect escapes (no state change — the attempt is a fact, the
+    escape is a fact); failure = the suspect is caught (`crime_status:
+    suspect -> caught`, irreversible per the pack's `crime_watch.arrest`).
+
+    The check draws from the substantive stream (canon rolls); the
+    resolution is a single event cause-chained to the attempt — the
+    arrest is never a maybe, only its outcome is. Returns None when
+    the suspect is already caught (a re-arrest is silent — idempotent
+    per the KI#13 discipline)."""
+    config = pack.rules["crime_watch"]["arrest"]
+    suspect = arrest_record.target
+    watcher = arrest_record.actor
+    if suspect is None or watcher is None:
+        return None
+    if projection.get(suspect, {}).get(CRIME_STATUS_PROP) == "caught":
+        return None  # already resolved — no duplicate
+    checks = pack.rules["checks"]
+    kind = checks["kinds"][config["resolution_check"]]
+    die = checks["die"]
+    evasion = _skill_total(pack, projection, suspect, kind["attack"])
+    evasion_total = evasion + bank.randint(1, die)
+    pursuit = _skill_total(pack, projection, watcher, kind["defend"])
+    pursuit_total = pursuit + bank.randint(1, die)
+    caught = pursuit_total >= evasion_total  # tie -> pursuer (pack rule)
+    margin = pursuit_total - evasion_total
+    if caught:
+        changes = (
+            StateChange(
+                entity=suspect,
+                prop=CRIME_STATUS_PROP,
+                from_=projection[suspect].get(CRIME_STATUS_PROP),
+                to_=config["caught_value"],
+                irreversible=bool(config.get("caught_irreversible", False)),
+            ),
+        )
+    else:
+        changes = ()
+    return EventDraft(
+        t=arrest_record.t,
+        type=config["resolution_event"],
+        actor=watcher,
+        target=suspect,
+        cause=arrest_record.id,
+        outcome={
+            "caught": caught, "evasion_total": evasion_total,
+            "pursuit_total": pursuit_total, "margin": margin,
+        },
+        state_changes=changes,
+        importance=pack_importance(
+            pack.rules, {watcher, suspect},
+            irreversible=1 if caught and config.get("caught_irreversible") else 0,
+            hooks=0,
+        ),
+    )
+
+
+def _skill_total(
+    pack: "Pack",
+    projection: Mapping[str, Mapping[str, Any]],
+    entity_id: str,
+    skill: str,
+) -> int:
+    """A local copy of `core.intent.skill_total` to avoid a runtime cycle
+    (knowledge <-> intent already chain; this isolates the crime-system
+    face of the skill table). Same pack-data semantics: base + status
+    modifiers, every number in `rules.checks`."""
+    checks = pack.rules["checks"]
+    config = checks["skills"][skill]
+    total: int = config["base"]
+    for axis, mod in sorted(config.get("status_modifiers", {}).items()):
+        value = projection.get(entity_id, {}).get(f"status.{axis}")
+        if value is None:
+            continue
+        if "per_10_points" in mod and isinstance(value, (int, float)):
+            total += (int(value) // 10) * mod["per_10_points"]
+        elif "flat_when" in mod:
+            total += mod["flat"] if value == mod["flat_when"] else 0
+        elif "flat_at_least" in mod and isinstance(value, (int, float)):
+            total += mod["flat"] if value >= mod["flat_at_least"] else 0
+        elif "flat" in mod and isinstance(value, (int, float)) and value != 0:
+            total += mod["flat"]
+    return total
 
 
 # -- watch rotation (D-006: spread between watchers is transfer events) -------

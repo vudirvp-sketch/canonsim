@@ -157,7 +157,7 @@
     },
     "suspicion_axis": "suspicion",
     "reaction_event": "suspicion_changed",
-    "status_values": ["unknown", "suspect"],
+    "status_values": ["unknown", "suspect", "caught"],
     "status_suspect_value": "suspect",
     "suspicion_sources": {
       "witnessed_steal_failure": 25,
@@ -172,8 +172,16 @@
       "purse_missing": "inferred_purse_missing"
     },
     "document_check": {"hook": "possible_document_check", "delay_ticks": 120},
-    "arrest": {"requires_suspicion": 75, "requires_same_location": true, "event": "arrest_attempt"},
-    "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; resolution is later work). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3"
+    "arrest": {
+      "requires_suspicion": 75,
+      "requires_same_location": true,
+      "event": "arrest_attempt",
+      "resolution_check": "evasion_vs_pursuit",
+      "resolution_event": "arrest_resolved",
+      "caught_value": "caught",
+      "caught_irreversible": true
+    },
+    "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; iter-4 resolves it via arrest.resolution_check evasion vs pursuit — caught_value flips the suspect's crime_status irreversibly, T4). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3; arrest resolution added iter-4"
   },
 
   "expectations": {
@@ -185,12 +193,42 @@
     "notes": "P2d (KI#3): behaviour rules generate per-NPC expectations; a mismatch at check time emits an inferred-channel record cause-chained to the event that moved the item on the violated axis — the only legal route to suspicion-from-absence (an absence is knowable only as a violated expectation, never as 'not seen'). carried_by expectations check anywhere (their own pocket); at_location expectations additionally require the NPC on site. Checked at watch rotations (v0.1); rules must hold on the initial pack state (load-time lint). Landed iter-3"
   },
 
+  "urgencies": {
+    "beat_ticks": [360, 720, 1080],
+    "entries": [
+      {"npc": "npc_drunk_01", "probability_per_beat": 40, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [], "notes": "the drunkard lingers — a small-formula nudge toward ale-seeking; the §3 walkthrough's rumor teller needs to be in-scene to overhear"},
+      {"npc": "npc_maid_01", "probability_per_beat": 25, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [], "notes": "the maid finishes her shift — a low-key rest; her presence at the tavern keeps the sighting pool rich"},
+      {"npc": "npc_guard_02", "probability_per_beat": 15, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [{"noun": "actor", "test": "flagged_accessible", "flag": "is_fire_source"}], "notes": "the relief guard's patrol impulse — fires when something is happening in the actor's location (the precondition is a placeholder for ambient alertness; v0.1)"}
+    ],
+    "notes": "P2b (D-021): NPC goals → occasional autonomous action through the same queue, same tick discipline. Small-formula dynamics: a probability roll per beat, an intent template, optional preconditions. World acts without the PC by construction — M5 (non-PC event share) becomes non-trivially non-zero at director-off (T8). Full LLM planning — never (VISION §6). Beat cycle at phase boundaries (every 360 ticks = 6 in-world hours); the same beats carry the states decay pass and the director's entropy release (one beat, three pieces — D-037). Landed iter-4"
+  },
+
   "director": {
     "mode": "consequence_planner",
-    "buffer": "hooks seeded at event time, never invented later",
     "triggers": ["time", "place", "threshold"],
-    "stagnation_detector": {"release_after_ticks_without_visible_event": 90, "releases": "lowest-threshold seeded hook only"},
-    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. Director-off A/B is mandatory (T8). Lands iter-4"
+    "stagnation": {
+      "entropy_floor": 5,
+      "per_npc_cooldown_beats": 2,
+      "beat_ticks": [360, 720, 1080]
+    },
+    "hooks": {
+      "guard_suspicious_of_pc": {
+        "weight": 2,
+        "release_threshold": 10,
+        "target_npc": "npc_guard_01",
+        "intent": {"kind": "wait", "fields": {"ticks": 1}},
+        "notes": "the watcher grows wary — a low-key vigil; seeded on a steal failure (hooks.failure in actions.json steal)"
+      },
+      "possible_document_check": {
+        "weight": 3,
+        "release_threshold": 5,
+        "target_npc": "npc_guard_01",
+        "intent": {"kind": "wait", "fields": {"ticks": 1}},
+        "trigger": {"kind": "threshold", "target_npc": "npc_guard_01", "axis": "suspicion", "value": 50, "comparator": "at_least"},
+        "notes": "the document-check deferred consequence (MVP_SCOPE §11): released when the watcher's suspicion crosses 50 (relations.suspicion_thresholds.document_check_at). v0.1 stub intent: the full document_check action is a phase-3 refinement."
+      }
+    },
+    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. P2e (narrative entropy) replaces the v0.1 flat timer: entropy = sum(seeded-hook weights) + global suspicion + visible physical threats (observable state only, L6). Stagnation releases the lowest-threshold hook when entropy < floor (a tension floor sensor). Explicit triggers (time / place / threshold) fire causally regardless of entropy. Per-NPC cooldown (MinGapBetweenEncounters analogue) prevents targeting spam. Director-off (T8 A/B baseline) = buffer still seeds, nothing releases — the world's emergent chains come from urgencies + reactions. Per-run scope: the buffer reseeds from the log every run (fold of events); policies are pack data. The director never learns the player (Alien named negative). Landed iter-4"
   },
 
   "importance": {

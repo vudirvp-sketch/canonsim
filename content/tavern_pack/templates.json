@@ -44,7 +44,9 @@
     "rumor_told": "{actor} tells {target}: {knows}.",
     "document_check": "{actor} demands papers from {target}.",
     "arrest_attempt": "{actor} moves to arrest {target}.",
+    "arrest_resolved": "{target} is caught — the pursuit holds.",
     "suspicion_changed": "{target} grows warier of {actor}.",
-    "expectation_violation": "{actor} checks on {target} — it is not where it should be."
+    "expectation_violation": "{actor} checks on {target} — it is not where it should be.",
+    "status_decayed": "{target} drifts: {axes} changed."
   }
 }

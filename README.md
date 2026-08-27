@@ -15,19 +15,28 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 3 — the epistemics layer stands: knowledge is a derived
-per-knower index (rebuildable from the log), characters react to what they
-hold (the ev_0007 suspicion + status-flip shape on the reacting crime
-system, novelty-gated), watch rotations swap the posts and brief the
-relief with one-step fidelity decay (the spread of suspicion between
-watchers is transfer events — no group reputation), expectation rules let
-an NPC notice a silent theft as an inferred record cause-chained to the
-theft, a successful talk shares the teller's most salient fact through an
-acceptance roll, and observers at both ends see movement. The natural
-intent-OCC trigger arrived (a rotation breaking a mid-action steal).
-187 tests green, ruff clean; golden fixture regenerated (move events
-gained sighting records). Next: iter-4 · director + goal ticker
-(`docs/TASKS.md`).
+Phase 0, iteration 4 — the director + goal ticker stands: hooks seeded
+at event time sit in a per-run buffer (D-005 — a complication from
+nowhere is a bug); explicit triggers (time / place / threshold) fire
+causally; the stagnation detector releases the lowest-threshold hook
+when narrative entropy (P2e: sum of seeded-hook weights + global
+suspicion + visible physical threats — observable state only, L6)
+drops below the pack's floor. Releases ride the intent door (phase0 §4
+"Objective broadcast") — a released hook produces an IntentData the
+loop enqueues band NPC_REACTION; the director never writes canon
+itself. Director-off (T8 A/B baseline) keeps the buffer seeding but
+suppresses releases. P2b goal ticker (D-021): per-NPC probability
+rolls on the beat cycle, intents through the front door — M5 non-PC
+share non-trivially non-zero by construction. States decay passes
+deferred from iter-3 landed (fatigue/intoxication/fear proportional
+deltas; injury never decays — T4 preserved). Arrest resolution
+(iter-3 leftover): evasion_vs_pursuit → arrest_resolved, `crime_status
+→ caught` (irreversible). Crossings fire in TICK ORDER (rotations and
+beats interleave by tick, not by type — the log writer's
+tick-monotonicity invariant). 219 tests green, ruff clean; golden
+fixture byte-identical (the 58-tick plumbing_smoke scenario crosses
+no beat — no decay, no urgency, no director release). Next: iter-5 ·
+chronicle & CLI (`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 

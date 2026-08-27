@@ -44,7 +44,14 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from core.clock import Clock
-from core.crime import briefing_draft, iter_suspicion_reactions, next_rotation_tick, rotation_plan
+from core.crime import (
+    arrest_resolution_draft,
+    briefing_draft,
+    iter_suspicion_reactions,
+    next_rotation_tick,
+    rotation_plan,
+)
+from core.director import DISABLED, Director, EnabledPolicy
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
@@ -61,11 +68,13 @@ from core.intent import (
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
 from core.log import EventDraft, EventLogWriter, EventRecord
 from core.pack import Pack
-from core.queue import PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
+from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
 from core.resolvers import REGISTRY
 from core.rng import SUBSTANTIVE, RngBank
 from core.scheduler import build, decls_from_rules
+from core.states import decay_drafts
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
+from core.urgencies import urgency_intents
 
 __all__ = [
     "CompletionPayload",
@@ -137,6 +146,8 @@ class Simulator:
         log_path: Path,
         event_schema: Mapping[str, Any],
         commit: str = "unknown",
+        *,
+        director_enabled: bool = True,
     ) -> None:
         self._pack = pack
         self._seed = int(seed)
@@ -161,6 +172,21 @@ class Simulator:
         self._next_rotation = next_rotation_tick(
             pack.rules, self._clock.ticks_per_day, 0
         )
+        # iter-4: the director + the beat cycle (decay / urgencies /
+        # entropy). The beat fires at clock crossings (phase boundaries
+        # by default; pack-tunable via `director.stagnation.beat_ticks`).
+        # Director-off keeps the buffer seeding (D-005 hygiene) but
+        # suppresses releases — the T8 A/B baseline.
+        if director_enabled:
+            policy = EnabledPolicy(
+                entropy_floor=int(pack.rules["director"]["stagnation"][
+                    "entropy_floor"
+                ])
+            )
+        else:
+            policy = DISABLED
+        self._director = Director(pack=pack, policy=policy)
+        self._next_beat = self._first_beat(pack.rules)
 
     @property
     def projection(self) -> Projection:
@@ -171,6 +197,11 @@ class Simulator:
     def knowledge(self) -> KnowledgeView:
         """The runtime knowledge index (L3 — derived, rebuildable from the log)."""
         return self._knowledge
+
+    @property
+    def director(self) -> Director:
+        """The runtime director (T8 A/B uses director_enabled=False at construction)."""
+        return self._director
 
     def run_playscript(self, script: Mapping[str, Any]) -> RunResult:
         """Play seed + ordered intents end-to-end; returns the run summary."""
@@ -201,20 +232,42 @@ class Simulator:
                     )
                     while len(self._queue):
                         entry = self._queue.pop()
-                        # rotations fire when the clock crosses their tick —
-                        # before the entry the crossing happened for
-                        while (
-                            self._next_rotation is not None
-                            and self._next_rotation <= entry.tick
-                        ):
-                            rotation_tick = self._next_rotation
-                            self._clock.advance_to(rotation_tick)
-                            self._run_rotation(rotation_tick)
-                            self._next_rotation = next_rotation_tick(
-                                self._pack.rules,
-                                self._clock.ticks_per_day,
-                                rotation_tick,
-                            )
+                        # clock-crossing beats fire before the popped entry —
+                        # rotations (iter-3) AND decay/urgencies/director
+                        # (iter-4) all ride the same crossing discipline,
+                        # never pre-seeded (a run still ends when its
+                        # script's queue drains). Crossings fire in TICK
+                        # ORDER: a beat at T=720 between rotations at T=360
+                        # and T=1080 fires between them, not after both —
+                        # otherwise the log writer's tick-monotonicity
+                        # invariant would reject the out-of-order commit.
+                        while True:
+                            candidates: list[int] = []
+                            if (
+                                self._next_rotation is not None
+                                and self._next_rotation <= entry.tick
+                            ):
+                                candidates.append(self._next_rotation)
+                            if (
+                                self._next_beat is not None
+                                and self._next_beat <= entry.tick
+                            ):
+                                candidates.append(self._next_beat)
+                            if not candidates:
+                                break
+                            crossing = min(candidates)
+                            is_rotation = crossing == self._next_rotation
+                            self._clock.advance_to(crossing)
+                            if is_rotation:
+                                self._run_rotation(crossing)
+                                self._next_rotation = next_rotation_tick(
+                                    self._pack.rules,
+                                    self._clock.ticks_per_day,
+                                    crossing,
+                                )
+                            else:
+                                self._run_beat(crossing, entry.tick)
+                                self._next_beat = self._next_beat_after(crossing)
                         self._clock.advance_to(entry.tick)
                         if entry.kind == "intent":
                             accepted = self._execute_intent(entry)
@@ -434,6 +487,98 @@ class Simulator:
         if draft is not None:
             self._commit(replace(draft, provenance={"seed": self._seed}))
 
+    # -- the iter-4 beat cycle (decay / urgencies / director releases) --------
+
+    def _first_beat(self, rules: Mapping[str, Any]) -> int | None:
+        """The first beat tick strictly after 0 (the run-start tick). Beat
+        offsets are pack-declared intraday ticks repeated daily, like
+        watch rotations. None when the pack declares no beats (the
+        urgencies/states/director stay silent — a degenerate config)."""
+        offsets = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        if not offsets:
+            return None
+        day = self._clock.ticks_per_day
+        for offset in offsets:
+            if offset > 0:
+                return offset
+        # all offsets are at 0 — the next beat is on day 1
+        return day + offsets[0]
+
+    def _next_beat_after(self, after: int) -> int | None:
+        """The smallest beat tick strictly after `after`. Intraday offsets
+        repeated daily; the rotation's `next_rotation_tick` arithmetic
+        generalised — except the first beat may precede the first
+        rotation (a tick-0 beat belongs to day 1)."""
+        rules = self._pack.rules
+        offsets = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        if not offsets:
+            return None
+        day = self._clock.ticks_per_day
+        day_idx = after // day
+        candidates = sorted(
+            d * day + offset
+            for d in (day_idx, day_idx + 1)
+            for offset in offsets
+        )
+        for candidate in candidates:
+            if candidate > after:
+                return candidate
+        raise AssertionError("unreachable: next-day offsets always exceed `after`")
+
+    def _run_beat(self, beat_tick: int, entry_tick: int) -> None:
+        """One clock-crossing beat (iter-4): states decay passes, NPC
+        urgencies roll, and the director releases one seeded hook. Each
+        piece rides the commit door — the world never changes outside
+        an event (INV-1). Order matters: decay fires first (so the
+        urgency sees the new status), urgencies second (so the director
+        sees their effects in entropy), the director last.
+
+        Decay events are committed at ``beat_tick`` (their canonical
+        tick — the log records them at the beat). Urgency and director
+        Intents are enqueued at ``entry_tick`` (the tick of the entry
+        the loop is currently processing): the entry was already
+        popped, and the queue discipline forbids enqueuing at a tick
+        the clock has already passed (regression). The intents thus
+        fire at the entry's tick — conceptually "after the beat, at
+        the moment the world resumes moving"."""
+        # 1) states decay — every NPC whose status.* deltas are non-zero
+        for draft in decay_drafts(
+            self._pack, self._projection, self._events, beat_tick
+        ):
+            self._commit(replace(
+                draft, cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            ))
+        # 2) NPC urgencies — small-formula goal rolls through the intent door
+        self._director.next_beat()
+        for intent in urgency_intents(
+            self._pack, self._projection, self._bank, beat_tick
+        ):
+            self._enqueue_autonomous(intent, entry_tick)
+        # 3) director releases — explicit triggers + stagnation; budget 1
+        for intent in self._director.releases(
+            self._projection, self._knowledge, beat_tick
+        ):
+            self._enqueue_autonomous(intent, entry_tick)
+
+    def _enqueue_autonomous(self, intent: IntentData, tick: int) -> None:
+        """Enqueue a director or urgency Intent through the same door as a
+        playscript step — band NPC_REACTION (after the player's intents
+        in the same tick) and stamped with the current event_count so
+        OCC re-checks against the live projection. The intent fires at
+        the beat tick itself: the queue's (tick, sub_order) ordering
+        puts it AFTER same-tick system passes (0..99) and player
+        intents (100..199), BEFORE scheduled completions (300+)."""
+        stamped = IntentData(
+            id=intent.id, kind=intent.kind, actor=intent.actor,
+            target=intent.target, fields=dict(intent.fields),
+            based_on_event_seq=self._writer.event_count,
+        )
+        self._queue.push(
+            tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
+            kind="intent", payload=stamped,
+        )
+
     def _run_rotation(self, tick: int) -> None:
         """One watch rotation at a crossed tick (phase0 §3): the post swap
         (positions), the expectation checks (P2d — violations chain to the
@@ -473,8 +618,11 @@ class Simulator:
     def _react(self, record: EventRecord) -> None:
         """Event-driven system reactions (phase0 §3), dispatched from the
         canon door so no call site can forget them: crime first (suspicion,
-        status flip, arrest — chained per knower), then the telling (the
-        conversation's teller shares their most salient novel fact)."""
+        status flip, arrest — chained per knower), then the arrest
+        resolution (iter-4: capture/escape on the attempt), then the
+        telling (the conversation's teller shares their most salient novel
+        fact). iter-4 also seeds the director's buffer (D-005: every hook
+        is seeded at event time, never invented later)."""
         for group in iter_suspicion_reactions(
             self._pack, self._projection, self._knowledge, record
         ):
@@ -484,6 +632,18 @@ class Simulator:
                     replace(draft, cause=previous, provenance={"seed": self._seed})
                 )
                 previous = committed.id
+        # iter-4: arrest resolution rides the same commit-door discipline
+        # as the rest of the reactions (D-037) — the attempt is a fact,
+        # the resolution is its completion.
+        arrest = self._pack.rules["crime_watch"]["arrest"].get("event")
+        if record.type == arrest:
+            resolution = arrest_resolution_draft(
+                self._pack, self._projection, self._bank, record
+            )
+            if resolution is not None:
+                self._commit(
+                    replace(resolution, provenance={"seed": self._seed})
+                )
         telling = telling_reaction(
             self._pack, self._projection, self._knowledge, self._bank, record
         )
@@ -493,6 +653,9 @@ class Simulator:
                     telling, cause=record.id, provenance={"seed": self._seed}
                 )
             )
+        # iter-4: the director seeds hooks at commit time (D-005). The
+        # release decision fires later, at the beat cycle.
+        self._director.seed(record)
 
     def _emit_rejection(
         self,

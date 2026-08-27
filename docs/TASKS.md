@@ -9,31 +9,7 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-4 · director + goal ticker — todo (next)
-
-- Consequence buffer seeded at event time; triggers (time / place /
-  threshold); stagnation detector releases; director on/off switch.
-- **P2b minimal goal/urge ticker** (D-021): goal → occasional autonomous
-  action (drunkard seeks ale, maid roams, guard patrols) through the same
-  queue, same tick discipline — NPCs enqueue through the intent door from
-  this iteration (INTENT_SCHEMA §2). Full LLM planning — never
-  (`VISION.md` §6). Includes the **states decay passes** deferred from
-  iter-3 (fatigue/intoxication/fear decay per `rules.json` `states`;
-  interacts with the goal ticker — D-037 scope note).
-- **P2e narrative entropy** for the stagnation detector (proposal, not yet
-  owner-decided): release the lowest-threshold seeded hook when entropy
-  (sum of seeded-hook weights + global suspicion + visible physical
-  threats) drops below threshold — not on a flat timer. Entropy computed
-  only from seeded hooks + visible state, never invents new threats
-  (D-005 preserved). See DIRECTOR_SPEC sketch in `docs/SPECS_BACKLOG.md`.
-- **Arrest resolution** (iter-3 leftover): `arrest_attempt` is a fact
-  event; capture/escape resolution (pursuit vs evasion, the caught state)
-  is a natural fit once the goal ticker drives guard behavior.
-- AC: seeded hooks fire causally; no "from nothing" complications; world
-  acts without the PC; T4 irreversibility passes; T8 director-off shows
-  ≥3 emergent chains.
-
-### iter-5 · chronicle & CLI — todo
+### iter-5 · chronicle & CLI — todo (next)
 
 - Template chronicle from the log (deterministic tracery engine + ink
   `shuffle` ShufflePool — `docs/blueprint/phase0.md` §5); scene card; CLI:
@@ -150,6 +126,18 @@
 
 ## Done
 
+- iter-4 · 2026-08-28 · director + goal ticker: consequence buffer +
+  triggers (time / place / threshold) + narrative entropy (P2e:
+  sum of seeded-hook weights + global suspicion + visible threats,
+  observable state only — L6) + stagnation release (lowest-threshold
+  hook wins) + director on/off switch; P2b goal ticker (D-021, NPC
+  probability rolls through the intent door — M5 non-PC share
+  non-trivially non-zero by construction); states decay passes
+  deferred from iter-3 (fatigue/intoxication/fear proportional to
+  elapsed ticks, injury never decays — T4); arrest resolution
+  (evasion_vs_pursuit → arrest_resolved, `crime_status → caught`
+  irreversible); D-038/D-039/D-040 recorded; DIRECTOR_SPEC.md written
+  (trigger fired). 219 tests green, golden fixture byte-identical.
 - iter-3 · 2026-08-28 · knowledge, relations, expectations: derived
   KnowledgeView + telling reaction (P2c, salience + acceptance), crime
   reactions (ev_0007 shape on the reacting system; novelty rule), watch

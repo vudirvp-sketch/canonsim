@@ -6,6 +6,25 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
+- core/director.py + core/urgencies.py + core/states.py (D-038:
+  director = event-driven + clock-crossing releases; D-039: urgencies
+  through the intent door, band NPC_REACTION; D-040: arrest resolution
+  via evasion_vs_pursuit) + loop rewire: clock crossings fire in TICK
+  ORDER (rotations + beats interleave by tick, not by type — the log
+  writer's tick-monotonicity invariant); director seeds at commit time
+  (_react extension); beat cycle fires decay / urgencies / director
+  release per beat. Pack: director.hooks (weight/threshold/trigger/
+  intent), urgencies.entries (probability/intent/preconditions),
+  crime_watch.arrest.resolution_* (caught_value irreversible). Templates
+  +arrest_resolved, +status_decayed. DIRECTOR_SPEC.md written (trigger
+  fired). 20 files — task-mandated module set + sync set.
+- Tests 187→219 green (+32: director, urgencies, states suites; arrest
+  test updated for the resolution behavior change); fixture
+  byte-identical (plumbing_smoke crosses no beat — no decay/urgency/
+  release). D-038/D-039/D-040 recorded; STATUS FAQ gains the tick-order
+  + entry.tick-enqueue laws.
+---
 iter-3 · 2026-08-28 · knowledge, relations, expectations (iter-3-knowledge-relations)
 - core/knowledge.py + core/crime.py (D-037: kernel mechanics — the
   import-boundary law beats the old sim/systems plan note) + loop rewire:
@@ -136,19 +155,3 @@ iter-0w · 2026-08-27 · owner-requested post-reference concept realignment (D-0
   worklog, TASKS, AGENT_NAVIGATION) + the five realignment targets; same
   pattern as iter-0u/0v. No code; pytest green, ruff clean. 22nd docs
   iteration (owner-requested, D-022); **iter-1 code is next, unconditionally**.
----
-iter-0v · 2026-08-27 · owner-requested audit patches (the 21-point iter-0u audit, applied)
-- INV-2 rewritten in AGENTS.md per D-028 (one master seed; named streams;
-  sha256-based `stable_hash`); stale one-instance wording purged from TASKS
-  iter-1 / TECH_NOTES §4 / MVP_SCOPE §3+§13; KI#8 opened/closed. The 18
-  remaining audit resolutions landed as sub-clauses: phase0 §1 (pack lint),
-  §2 (DAG language, intent OCC + lifecycle, price precursor), §4 (director
-  rejection + per-run scope), §5 (ShufflePool, prune_window), §6 (T1 fixture
-  guard); phases §1 (eviction), §4 (precedence + provenance), §6 (cycle
-  contract); EVENT_SCHEMA §11 (vocabulary-per-pack); SPECS_BACKLOG sketches;
-  DECISIONS D-028; STATUS synced.
-- KI#7 resolved: worklog trimmed to the 10×3–5 cap, TASKS done-entries
-  collapsed (1187 → ~215 lines; pre-trim history in git). 12 files touched —
-  over the 3–5 soft limit: mandated sync set + the collapse, same pattern as
-  iter-0u. No code; pytest green, ruff clean. 21st docs iteration
-  (owner-requested, D-022); **iter-1 code is next, unconditionally**.

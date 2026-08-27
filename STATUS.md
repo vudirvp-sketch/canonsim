@@ -1,33 +1,38 @@
 # STATUS — canonsim
 
-Iteration: 3 (`iter-3-knowledge-relations`) · Phase: 0 — simulator without
+Iteration: 4 (`iter-4-director-goal-ticker`) · Phase: 0 — simulator without
 LLM · Date: 2026-08-28
 
-The knowledge/relations/expectations iteration (TASKS iter-3, blueprint
-phase0 §3): knowledge is now a derived per-knower index (L3 — `KnowledgeView`,
-rebuildable from the log, T2 applies), characters react to what they hold.
-The ev_0007 shape (suspicion 0→25 + status unknown→suspect) lands on the
-reacting crime system, not the action — suspicion reactions fire on novel
-crime-mapped tokens only (EPIST-1: own state + own knowledge). Watch
-rotations fire on clock crossing (never pre-seeded — run-end semantics
-stable), swap the duty/rest posts and brief the relief: the outgoing
-holder's records pass told with one-step decay (D-006 spread — the relief
-arrives already suspicious). P2a pair map seeded (watcher pair trust 75,
-read by rumor acceptance). P2d expectation violations: a silent theft is
-noticed at the rotation as `inferred: purse_missing` cause-chained to the
-THEFT event (the axis-specific mover — carrier, not the later position
-move), feeding suspicion legitimately (KI#3 closed). P2c telling: a
-successful talk makes the teller share their most salient novel fact
-(importance-then-recency, triggering conversation excluded) with an
-acceptance roll; movement sightings (origin departure + destination
-arrival, new `destination_location` audience) ride the movement events.
-The rotation breaking `same_location` mid-steal is the natural OCC trigger
-KI#12 waited for (cause = the watch_change event). Fixture regenerated
-(move events gained records — deliberate, FAQ procedure). 187 tests green
-(+32: T3 suite, crime/rotation/OCC suites, iter-3 lint), ruff clean;
-D-037 records the architecture (reactions dispatch from the commit door;
-iter-3 systems live in core/, not sim/systems/ — the import-boundary law
-wins over the old plan note).
+The director + goal ticker iteration (TASKS iter-4, blueprint phase0
+§4): the consequence planner stands — hooks seeded at event time
+(D-005) sit in a per-run buffer; explicit triggers (time / place /
+threshold) fire causally; the stagnation detector releases the
+lowest-threshold hook when narrative entropy (P2e: sum of seeded-hook
+weights + global suspicion + visible physical threats, observable
+state only — L6) drops below the pack's floor. Replaces the v0.1
+draft's flat `release_after_ticks_without_visible_event` timer with
+a tension-floor sensor. Releases ride the intent door (D-037:
+"Objective broadcast", phase0 §4) — a released hook produces an
+IntentData enqueued band NPC_REACTION through the same front door as
+a playscript step; the director never writes canon itself. Director-off
+(T8 A/B baseline) keeps the buffer seeding, suppresses releases —
+the world's emergent chains come from urgencies + reactions +
+rotations. P2b goal ticker (D-021) landed: per-NPC probability rolls
+on the beat cycle, intents through the front door, M5 non-PC share
+non-trivially non-zero by construction. States decay passes deferred
+from iter-3 landed: fatigue/intoxication/fear proportional deltas at
+beat ticks, injury never decays (T4 preserved). Arrest resolution
+(iter-3 leftover): the attempt is a fact; the resolution rolls
+evasion_vs_pursuit and commits `arrest_resolved` immediately, with
+`crime_status: suspect → caught` (irreversible). Crossings fire in
+TICK ORDER: rotations and beats interleave by tick — the log
+writer's tick-monotonicity invariant forbids out-of-order commits.
+Golden fixture byte-identical (the 58-tick plumbing_smoke scenario
+crosses no beat — no decay, no urgency, no director release). 219
+tests green (+32: director, urgencies, states suites, arrest
+resolution updated), ruff clean. D-038 records the director-event
++clock-crossing architecture; D-039 the urgencies-through-the-door
+discipline; D-040 the arrest resolution shape.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,12 +53,6 @@ wins over the old plan note).
 
 ## Active KIs
 
-- KI#3 · `expectation_violation` primitive — CLOSED iter-3: implemented as
-  pack-declared expectation rules (`rules.json` `expectations`) checked at
-  watch rotations; a mismatch emits an `inferred` record cause-chained to
-  the event that moved the item on the violated axis (the theft, not the
-  walk). Suspicion-from-absence has its legitimate trigger (`purse_missing`
-  → +20, spreads via the briefing); tests: `test_knowledge.py`.
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` /
   `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no
   tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded
@@ -62,13 +61,10 @@ wins over the old plan note).
   difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20)
   — talk/examine/use/distract never fail as shipped; the failure branches
   are mechanism-tested via a crafted high-difficulty pack copy. Retuning is
-  pack data, validated by `balance-1`.
-- KI#12 · intent OCC natural e2e trigger — CLOSED iter-3: the watch
-  rotation (tick 360) breaking `target.same_location` between a steal's
-  proposal and completion rejects with `projection_moved`, cause = the
-  watch_change event; the test is seed-robust for every move-duration draw
-  (`tests/test_crime.py::
-  test_rotation_mid_action_rejects_the_intent_with_the_breaking_cause`).
+  pack data, validated by `balance-1`. iter-4 observation: the v0.1 urgency
+  probabilities (40/25/15) over the 3-beat-per-day cycle produce non-PC
+  share ~5–15% per run (probe-driven estimate; the iter-6 M5 baseline will
+  measure it formally).
 - KI#13 · resolver desync wrote-then-crashed (iter-2a found+fixed) — CLOSED
   iter-2a: `_drop` hardcoded `from_=None` on the `condition` change; a legal
   take→drop→retake→redrop of a breakable item (seed 34) crashed after the
@@ -107,27 +103,57 @@ wins over the old plan note).
 
 ## FAQ / Pitfalls
 
+- **Crossings fire in tick order, not by type (iter-4 law, D-038).**
+  Rotations (iter-3) and beats (iter-4: decay / urgencies / director
+  release) all ride the clock-crossing discipline — but they interleave
+  by tick, not as "all rotations first then all beats". A beat at T=720
+  between rotations at T=360 and T=1080 fires BETWEEN them, not after
+  both. The log writer's tick-monotonicity invariant forbids out-of-order
+  commits; the loop's crossing logic is `min(candidates)` per iteration,
+  picking whichever rotation-or-beat is soonest. The same rule applies
+  to any future clock-crossing system (per-tick states passes if they
+  arrive, decay sub-passes, etc.).
+- **Autonomous intents enqueue at entry.tick, not beat_tick (iter-4
+  law, D-039).** The beat fires retroactively (T=beat_tick) when the
+  loop is processing an entry at T=entry.tick > beat_tick. The entry
+  was already popped; the queue discipline forbids enqueuing at a tick
+  the clock has already passed (regression). Urgency and director
+  intents thus enqueue at `entry.tick` with sub_order=NPC_REACTION —
+  conceptually "after the beat, at the moment the world resumes
+  moving". Decay events commit directly at `beat_tick` (their canonical
+  tick in the log); they don't go through the queue.
+- **Director releases ride the intent door, not the canon door (D-037,
+  phase0 §4 "Objective broadcast").** A released hook produces an
+  IntentData (id `director_<N>`) enqueued band NPC_REACTION; the front
+  door validates preconditions, runs OCC, rolls checks, and emits the
+  event through the resolver. A rejected director intent emits an
+  `intent_rejected` no-op event with `cause_intent = "director_..."`.
+  The director never moves actors, changes state, or bypasses the
+  Intent→Event front-door — the world's logic is one mechanism, not
+  two. Same door for urgencies (id `urgency_<N>`).
 - **Reactions dispatch from the commit door; novelty is per (knower,
   token) (iter-3 law, D-037).** `Simulator._commit` feeds the knowledge
-  index and runs `_react` (crime → telling) for EVERY committed event —
-  no call site can forget a reaction, and cascades terminate because
-  reaction events carry no records beyond what legitimately spreads.
-  Suspicion reacts only to tokens the knower did not already hold —
-  repeated identical evidence never re-escalates; escalation is the
-  pack's token vocabulary (a total-failure sighting IS novel for an
-  onlooker who had only heard: saw-where-they-heard moves +25). The
-  status flip lands exactly once (lazy per-knower drafting — never build
-  all reaction drafts against a stale projection; the KI#13 lesson
-  generalized). Scheduled beats (rotations) chain cause = last written
-  event; reactions chain cause = the trigger; expectation violations
-  chain cause = the axis-specific mover (carrier vs position).
+  index and runs `_react` (crime → arrest resolution → telling) for
+  EVERY committed event — no call site can forget a reaction, and
+  cascades terminate because reaction events carry no records beyond
+  what legitimately spreads. Suspicion reacts only to tokens the
+  knower did not already hold — repeated identical evidence never
+  re-escalates; escalation is the pack's token vocabulary. The arrest
+  resolution rides the same door — the attempt is a fact, the
+  resolution is its completion, dispatched immediately after the
+  arrest_attempt event commits. Scheduled beats (rotations,
+  urgencies, director) chain cause = last written event; reactions
+  chain cause = the trigger; expectation violations chain cause = the
+  axis-specific mover (carrier vs position).
 - **System passes scan the whole projection, not the events that seeded
   them (KI#16 lesson).** `spread_tick` rolls every burning location with
   unburning spots — including fires ignited after the pass started. Any
   per-layer bookkeeping (cause maps, "already told" flags) must therefore
   be global to the layer and mergeable by new ignitions, never a frozen
   snapshot carried in the queue payload. Same rule for every per-tick
-  system iter-3+ adds (knowledge, relations, states passes).
+  system iter-3+ adds (knowledge, relations, states passes). The iter-4
+  states decay pass follows the same rule: it scans ALL npcs, not just
+  the ones who fired events since the last beat.
 - **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).** A
   resolver that hardcodes a `from_` value instead of reading the
   projection breaks the moment a legal sequence moves that prop before
@@ -135,7 +161,10 @@ wins over the old plan note).
   projection (the `_divert`/`_use_item` pattern) and make repeat effects
   idempotent (the `follow_up_draft` None pattern). The `_commit` gate
   (D-035) makes the failure loud BEFORE the write — the log never holds
-  a desynced event — but the resolver should not rely on the net.
+  a desynced event — but the resolver should not rely on the net. The
+  iter-4 arrest resolution reads `crime_status` from the projection for
+  the `from_` value (not hardcoded "suspect" — a future pack could
+  extend the status enum).
 - **INV-3's stoplist scope (iter-2 interpretation, test-owned).** The
   stoplist (`tests/test_inv3_stoplist.py`) bans **setting** nouns — the
   invariant's named examples plus entity names and location/item
@@ -143,13 +172,20 @@ wins over the old plan note).
   `loc_guardroom` all trip; English derivations like 'guards' do not).
   Mechanic words (take, move, talk, fire, stealth — MVP_SCOPE §7's own
   vocabulary) stay legal; pack data is never grepped. The word list is
-  tied to the pack by a self-check, so it cannot rot silently.
+  tied to the pack by a self-check, so it cannot rot silently. iter-4
+  note: generic status axis names (`fatigue`, `intoxication`, `fear`,
+  `injury`) are mechanic words, NOT setting nouns — they appear in
+  code and in the pack's `rules.states` alike.
 - **The loud/soft front-door line.** Malformed playscript steps (unknown
   fields, missing targets, bad spot names, unknown methods) raise
   `RunnerError` — author bugs crash. Well-formed but world-impossible
   intents emit `intent_rejected` no-op events — character attempts are
   facts. Moving a check from one side to the other is a contract change,
-  not a refactor (INTENT_SCHEMA §9).
+  not a refactor (INTENT_SCHEMA §9). Director and urgency intents go
+  through the same door — a director intent that fails preconditions
+  emits an `intent_rejected` event (the budget is consumed); an urgency
+  that fails preconditions stays silent (no event — the world's noise
+  floor absorbs it; the urgency is autonomous, not director-driven).
 - **The golden T1 fixture is env-pinned.** The log header records the
   Python version (`AGENTS.md` §10 — same-environment determinism only), so
   `tests/fixtures/plumbing_smoke_seed42.jsonl` byte-compares only on the
@@ -157,11 +193,11 @@ wins over the old plan note).
   fails **by design**: regenerate (Simulator, seed 42, commit `"0000000"`,
   playscript `tests/playscripts/plumbing_smoke.json`) and commit the new
   fixture together with the env change. The same procedure applies to a
-  deliberate behavior change that alters emitted bytes — iter-2 kept the
-  fixture byte-identical (move/wait events anchor it), which is the
-  regression proof that the front-door rewire changed no iter-1 canon.
-  The full in-pytest regeneration guard lands with T1 at iter-6
-  (`docs/blueprint/phase0.md` §6).
+  deliberate behavior change that alters emitted bytes — iter-4 kept
+  the fixture byte-identical (the 58-tick plumbing_smoke scenario
+  crosses no beat — no decay, no urgency, no director release), which
+  is the regression proof that the iter-4 director rewiring changed no
+  iter-1..3 canon for the baseline scenario.
 - **A ref citing a spec section it never contained is drift, not history.**
   The pre-D-028 FAQ rule protects *real* historical wording — verify with
   `git log -S "<phrase>" -- <file>` before calling something history.
@@ -205,27 +241,15 @@ wins over the old plan note).
 - **Doc-loop alarm vs owner-requested research.** Twenty-six docs iterations
   in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
-  owner request (iter-0s/0t additionally had fresh external sources;
-  iter-0u/0v — distillation and audit; iter-0w — concept realignment; iter-0x
-  — reference-influence audit; iter-0y — content principles; iter-0z — the
-  quality round with two provided analyses; iter-0aa — the pre-code doc
-  audit — rest on the request alone).
-  iter-0aa is the twenty-sixth docs iteration in a row (0, 0b, 0c, 0e, 0f,
-  0g, 0h, 0i, 0j, 0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x,
-  0y, 0z, 0aa; iter-0d was infra). All ref-N backlog items are complete — ref-1
-  through ref-13 plus the iter-0h cousins; ref-14/ref-15 (Sims, Prom Week)
-  are owner-request-only candidates; no doc pass at all without a fresh
-  owner request. **iter-1 code is next, unconditionally.**
+  owner request. iter-0aa was the twenty-sixth; iter-1..4 are code (no doc
+  pass since iter-0aa); the alarm does not fire on code iterations.
 - **Four places, four jobs (D-027).** `docs/REFERENCES.md` catalogs sources
   (license, URL, phase gating); `docs/CORE_DESIGN_RESEARCH.md` §2 carries
   the one-line synthesis per source; `docs/ref/<source>.md` carries the
   concrete mechanics; `docs/BLUEPRINT.md` + `docs/blueprint/` carry the
   cross-reference resolutions and donor combinations per build component.
   Drift rule: link, never restate; cite ledger row IDs (e.g. "per RNG-1")
-  instead of re-deriving a resolution. The old STATUS "Next step" prose
-  mapping of refs → iterations was exactly this drift and has been folded
-  into the blueprint build index (`docs/BLUEPRINT.md` §3), its single
-  owner.
+  instead of re-deriving a resolution.
 - **Pre-D-028 RNG wording in `docs/ref/*` and `REFERENCES_DEEP.md` is
   historical evidence, not prescription.** Several ref files quote
   "INV-2: one `random.Random(seed)` instance" as it read at deep-dive
@@ -236,10 +260,7 @@ wins over the old plan note).
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap is
   600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, real field lists, type enumerations, per-source
-  verdicts are never cut to fit. The iter-0l..0r per-ref files run
-  101–605 lines each, each under cap by construction or §6.1-justified;
-  the iter-0u blueprint files are 149/340/224 lines — under cap by
-  construction.
+  verdicts are never cut to fit.
 - **"Ref graveyard" check (iter-0x audit method).** To verify the reference
   corpus still influences the plans (not just exists as a folder), grep a
   sample of ledger terms across the planning docs — ShufflePool,
@@ -254,19 +275,14 @@ wins over the old plan note).
   of truth for licenses — `REFERENCES.md` (the catalog) is. Diagnostic:
   before flipping any ref-N row todo→done, grep the source row in
   `REFERENCES.md` and verify the license column matches the index entry.
-  The standing pre-flip check is exercised across iter-0o/0p/0q/0r/0s/0t;
-  iter-0u touched no ref rows, so no check was needed this iteration.
 
 ## Next step
 
-**iter-4 · director + goal ticker** (`docs/TASKS.md`): consequence buffer
-seeded at event time, triggers (time / place / threshold), stagnation
-detector releases, director on/off switch; P2b goal ticker (D-021) — NPCs
-enqueue through the intent door from this iteration, plus the states decay
-passes deferred from iter-3 and the arrest resolution leftover. Read before
-building: `docs/blueprint/phase0.md` §4 + `MVP_SCOPE.md` §11; ledger rows
-DIR-*, EPIST-1; D-005 (no complications from nothing), D-037 (reaction
-dispatch — the director releases must ride the same door discipline).
-Honest watch-out from iter-3: the drunkard→market rumor (ev_0031 shape)
-still has no trigger — autonomous telling is exactly the P2b goal ticker's
-material.
+**iter-5 · chronicle & CLI** (`docs/TASKS.md`): template chronicle from
+the log (deterministic tracery engine + ink `shuffle` ShufflePool —
+`docs/blueprint/phase0.md` §5); scene card; CLI commands: `play`,
+`look`, `wait`, `chronicle`, `state`, `replay`, `directors on|off`,
+`seed`. AC: playable and readable without LLM. iter-4 left the
+director-off switch on the Simulator (`director_enabled=False`); the
+`directors on|off` CLI command is iter-5's wiring of that switch —
+T8's A/B run lands at iter-6.

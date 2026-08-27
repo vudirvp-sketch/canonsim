@@ -74,6 +74,8 @@ class _Lint:
         self._knowledge_rules()
         self._crime_watch()
         self._expectations()
+        self._urgencies()
+        self._director()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -509,6 +511,22 @@ class _Lint:
             f"crime_watch.arrest.event {arrest.get('event')!r} is not in the "
             f"template vocabulary",
         )
+        # iter-4: arrest resolution fields (evasion_vs_pursuit → arrest_resolved)
+        _require(
+            arrest.get("resolution_event") in templates,
+            f"crime_watch.arrest.resolution_event {arrest.get('resolution_event')!r} "
+            f"is not in the template vocabulary",
+        )
+        _require(
+            arrest.get("resolution_check") in rules["checks"]["kinds"],
+            f"crime_watch.arrest.resolution_check "
+            f"{arrest.get('resolution_check')!r} is not a checks.kinds entry",
+        )
+        _require(
+            arrest.get("caught_value") in crime.get("status_values", ()),
+            f"crime_watch.arrest.caught_value {arrest.get('caught_value')!r} "
+            f"is not in crime_watch.status_values",
+        )
         ticks = crime.get("watch_rotation_ticks", [])
         _require(
             all(
@@ -596,6 +614,149 @@ class _Lint:
                 f"{where}: violated by the initial pack state — expectation "
                 f"rules must hold at t=0",
             )
+
+    # -- urgencies (P2b, iter-4) -----------------------------------------------
+
+    def _urgencies(self) -> None:
+        rules = self._data["rules.json"]
+        config = rules.get("urgencies")
+        if config is None:
+            return
+        entities = self._data["entities.json"]
+        npc_ids = _ids(entities["npcs"])
+        actions = {a["intent"]: a for a in self._data["actions.json"]["actions"]}
+        ticks_per_day = rules["time"]["ticks_per_day"]
+        _require(
+            isinstance(config.get("beat_ticks"), list)
+            and all(
+                isinstance(t, int) and not isinstance(t, bool)
+                and 0 <= t < ticks_per_day
+                for t in config["beat_ticks"]
+            ),
+            "urgencies.beat_ticks must be intraday tick offsets",
+        )
+        for entry in config.get("entries", ()):
+            where = f"urgencies.entries[{entry.get('npc')!r}]"
+            _require(entry.get("npc") in npc_ids, f"{where}: unknown npc")
+            _require(
+                isinstance(entry.get("probability_per_beat"), int)
+                and not isinstance(entry.get("probability_per_beat"), bool)
+                and 0 <= entry["probability_per_beat"] <= 100,
+                f"{where}: probability_per_beat must be 0..100",
+            )
+            intent = entry.get("intent", {})
+            _require(
+                isinstance(intent, Mapping)
+                and intent.get("kind") in actions,
+                f"{where}: intent.kind must name a pack action",
+            )
+            for key in ("target", "fields"):
+                if key in intent:
+                    if key == "target" and not isinstance(intent[key], str):
+                        raise PackError(
+                            f"{where}: intent.target must be a string, "
+                            f"got {intent.get('target')!r}"
+                        )
+                    if key == "fields" and not isinstance(intent[key], Mapping):
+                        raise PackError(
+                            f"{where}: intent.fields must be a mapping, "
+                            f"got {intent.get('fields')!r}"
+                        )
+            for cond in entry.get("requires", ()):
+                _require(
+                    cond.get("test") in PRECONDITION_TESTS,
+                    f"{where}: unknown precondition test {cond.get('test')!r}",
+                )
+                for param in ("noun", "with", "who"):
+                    if param in cond:
+                        _require(
+                            cond[param] in _NOUNS,
+                            f"{where}: precondition {param} {cond[param]!r} "
+                            f"must be one of {list(_NOUNS)}",
+                        )
+
+    # -- director (iter-4: consequence buffer + triggers + stagnation) --------
+
+    def _director(self) -> None:
+        rules = self._data["rules.json"]
+        config = rules.get("director")
+        if config is None:
+            return
+        entities = self._data["entities.json"]
+        npc_ids = _ids(entities["npcs"])
+        relation_axes = set(rules["relations"]["axes"])
+        actions = {a["intent"]: a for a in self._data["actions.json"]["actions"]}
+        for trigger_kind in config.get("triggers", ()):
+            _require(
+                trigger_kind in ("time", "place", "threshold"),
+                f"director.triggers: unknown kind {trigger_kind!r}",
+            )
+        stagnation = config.get("stagnation", {})
+        _require(
+            isinstance(stagnation.get("entropy_floor"), int)
+            and not isinstance(stagnation.get("entropy_floor"), bool)
+            and stagnation["entropy_floor"] >= 0,
+            "director.stagnation.entropy_floor must be a non-negative integer",
+        )
+        _require(
+            isinstance(stagnation.get("per_npc_cooldown_beats"), int)
+            and not isinstance(stagnation.get("per_npc_cooldown_beats"), bool)
+            and stagnation["per_npc_cooldown_beats"] >= 1,
+            "director.stagnation.per_npc_cooldown_beats must be >= 1",
+        )
+        for tag, spec in config.get("hooks", {}).items():
+            where = f"director.hooks[{tag!r}]"
+            _require(
+                isinstance(spec.get("weight"), int)
+                and not isinstance(spec.get("weight"), bool)
+                and spec["weight"] >= 0,
+                f"{where}: weight must be a non-negative integer",
+            )
+            _require(
+                isinstance(spec.get("release_threshold"), int)
+                and not isinstance(spec.get("release_threshold"), bool)
+                and spec["release_threshold"] >= 0,
+                f"{where}: release_threshold must be a non-negative integer",
+            )
+            _require(
+                spec.get("target_npc") in npc_ids,
+                f"{where}: target_npc must name an npc",
+            )
+            intent = spec.get("intent", {})
+            _require(
+                isinstance(intent, Mapping)
+                and intent.get("kind") in actions,
+                f"{where}: intent.kind must name a pack action",
+            )
+            trigger = spec.get("trigger")
+            if trigger is not None:
+                _require(
+                    trigger.get("kind") in ("time", "place", "threshold"),
+                    f"{where}: trigger.kind must be time|place|threshold",
+                )
+                if trigger["kind"] == "time":
+                    _require(
+                        isinstance(trigger.get("tick"), int)
+                        and not isinstance(trigger.get("tick"), bool)
+                        and trigger["tick"] >= 0,
+                        f"{where}: time trigger needs a non-negative tick",
+                    )
+                elif trigger["kind"] == "place":
+                    _require(
+                        trigger.get("target_npc") in npc_ids
+                        and trigger.get("location") in _ids(entities["locations"]),
+                        f"{where}: place trigger needs target_npc + location",
+                    )
+                elif trigger["kind"] == "threshold":
+                    _require(
+                        trigger.get("target_npc") in npc_ids
+                        and trigger.get("axis") in relation_axes
+                        and trigger.get("comparator") in ("at_least", "at_most")
+                        and isinstance(trigger.get("value"), int)
+                        and not isinstance(trigger.get("value"), bool),
+                        f"{where}: threshold trigger needs target_npc + axis + "
+                        f"comparator + integer value",
+                    )
 
 
 @dataclass(frozen=True, slots=True)

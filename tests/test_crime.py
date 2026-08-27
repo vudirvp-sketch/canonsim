@@ -158,8 +158,16 @@ def test_arrest_attempt_on_threshold_crossing_co_located(tmp_path: Path) -> None
     # cause-chained to THIS watcher's suspicion event — not to the theft
     assert arrest[0].cause == guard_reaction.id
     assert arrest[0].outcome == {"suspicion": 25, "threshold": 20}
-    assert arrest[0].state_changes == ()  # the attempt is a fact; resolution is later work
-    assert sim.projection["pc_01"]["crime_status"] == "suspect"
+    assert arrest[0].state_changes == ()  # the attempt is a fact
+    # iter-4: the arrest_resolved event follows immediately (the same
+    # commit-door cascade), drawing evasion_vs_pursuit. With seed 1 the
+    # pursuit holds: the suspect is caught (crime_status → caught, T4).
+    resolution = by_type(events, "arrest_resolved")
+    assert len(resolution) == 1
+    assert resolution[0].actor == "npc_guard_01" and resolution[0].target == "pc_01"
+    assert resolution[0].cause == arrest[0].id
+    assert resolution[0].outcome["caught"] is True
+    assert sim.projection["pc_01"]["crime_status"] == "caught"
 
 
 def test_no_arrest_when_the_suspect_is_elsewhere(tmp_path: Path) -> None:
