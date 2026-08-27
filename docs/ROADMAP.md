@@ -43,7 +43,7 @@ economy / combat; no external code donors before their phase. Full list:
 
 | Source | Access | What we take | When |
 |---|---|---|---|
-| DF Legends XML | data | a ready canonical event log: `historical_events`, `event_collections` (war → battle → episode), figures, entities, relations | background, week 1 |
+| DF Legends XML | data | a ready canonical event log: `historical_events`, `event_collections` (war → battle → episode), figures, entities, relations | background (`bg-1`) |
 | DF mechanics | closed | worldgen lesson: history ticks abstractly (populations + notables) — direct confirmation of the LOD principle | pattern |
 | RimWorld / Kenshi | closed | XML-defs "content = data"; the storyteller anti-pattern; "world not player-centered" | pattern |
 | Tabletop (GURPS / FATE) | — | "universal mechanics + setting books" = core/pack | pattern |

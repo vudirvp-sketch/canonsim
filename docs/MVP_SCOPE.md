@@ -103,7 +103,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 |---|---|---|---|
 | 1 | time | tick counter, day phase (morning/afternoon/evening/night), ticks-per-action | integer ticks only |
 | 2 | position & visibility | who is where; line of sight, hearing radius | perception-check input |
-| 3 | relations | per (npc, pc): reputation, suspicion, trust, fear | numeric 0–100 |
+| 3 | relations | per (npc, pc): reputation, suspicion, trust, fear; plus the sparse npc↔npc pair map (iter-3, P2a/D-020) | numeric 0–100 |
 | 4 | knowledge | knowledge records; rumor transfer with fidelity loss | `docs/EVENT_SCHEMA.md` §3 |
 | 5 | states | fatigue, intoxication, fear, injury | modifiers on perception & behavior |
 | 6 | fire | source, flammability, spread, smoke, alarm | irreversible state changes |
@@ -267,7 +267,8 @@ Schema rules (short form; full form in EVENT_SCHEMA.md):
 ```
 
 One artifact, four roles: test fixture, demo, future LLM-circuit benchmark,
-regression anchor. Introduced on day 3 (iter-1/2).
+regression anchor. The runner and the first fixture land in iter-1; the
+suite grows through iter-2.
 
 ## 14. Tests (from day one)
 

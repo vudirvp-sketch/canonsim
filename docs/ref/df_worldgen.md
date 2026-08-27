@@ -53,9 +53,9 @@ anchors, reputation as event.
 
 **What we adapt.**
 
-- **Year-by-year tick → second-by-second tick.** DF worldgen advances
-  years; our phase-0 tick is sub-minute (`MVP_SCOPE.md` §4.1: 1 tick =
-  12 in-world minutes). Phase 5 will need a coarser macro-time tick
+- **Year-by-year tick → minute-by-minute tick.** DF worldgen advances
+  years; our phase-0 tick is one in-world minute (`MVP_SCOPE.md` §8:
+  a full day = 1440 ticks). Phase 5 will need a coarser macro-time tick
   layered over micro-time.
 - **Macro-dense / micro-empty → micro-dense slice** (`df_legends_xml.md`,
   `TECH_NOTES.md` §3) + **worldgen monolith → runtime + history**

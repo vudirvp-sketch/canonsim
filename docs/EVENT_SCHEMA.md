@@ -148,5 +148,5 @@ any field in §2–§4 are closed per `schema_version`: touching them = §8
 applies. Type-specific payload fields (the DF Legends `hf_died` →
 `victim_hfid`/`slayer_hfid` shape) live inside the validated `outcome`
 object, never as ad-hoc top-level fields. Multi-parent event groupings (DF
-`event_collections` many-to-many) are deferred to phase 3+ (P3c) — phase 0
-keeps the single-parent `cause` chain.
+`event_collections` many-to-many) are deferred to phase 3+, arriving with
+arcs (P3c) — phase 0 keeps the single-parent `cause` chain.

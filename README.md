@@ -15,11 +15,11 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0z — quality round (owner round): the architecture
-"bible" (INVARIANT-CORE v3 + Elegant Solutions) absorbed into law —
-abstraction/elegance laws L13/L14, type-discipline build clauses, an
-executable architecture fitness test from iter-1, stack frozen through
-phase 2 (D-031). No code yet; first code lands in iter-1
+Phase 0, iteration 0aa — owner-requested pre-code documentation audit:
+11 drift findings fixed (tick arithmetic, calendar remnants, citation
+mislabels, map gaps); readiness verdict recorded — the rigging for
+iter-1 is complete, one design point open (KI#10: the stdlib
+JSON-Schema validation engine). No code yet; first code lands in iter-1
 (`docs/TASKS.md`) — unconditionally next.
 
 ## For AI agents (primary audience)
@@ -42,7 +42,7 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1 drafted; loader in iter-1) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (empty until iter-1+) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (skeletons since iter-0d; first code lands iter-1) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running

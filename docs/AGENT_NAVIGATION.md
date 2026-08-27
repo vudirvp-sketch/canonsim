@@ -33,7 +33,8 @@
 | `brief/` | frame/brief assembler | skeleton restored iter-0d; reserved for phase 1 |
 | `cli/` | play interface | skeleton restored iter-0d; code lands iter-5 |
 | `tests/` | test suite | pack/schema smoke tests (iter-0d); T0–T8 land iter-1+ |
-| `tests/playscripts/` | seed + ordered-intent fixtures | empty; fixtures land iter-2 |
+| `tests/fixtures/` | committed golden fixtures for T0/T1 (log lines, byte-identical run outputs) | empty; first fixtures land iter-1 (`.gitignore` whitelists `tests/fixtures/*.jsonl`) |
+| `tests/playscripts/` | seed + ordered-intent fixtures | empty; first fixture lands iter-1 (playscript-runner AC), suite grows iter-2 |
 
 ## 2. Reading gradient (what to read before working)
 

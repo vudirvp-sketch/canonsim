@@ -24,7 +24,10 @@
   T1 (two runs byte-identical), smoke boot, and the architecture fitness test
   (`tests/test_architecture.py`, stdlib `ast`, zero new dev deps — D-031:
   import boundary, RNG monopoly, network ban; design in
-  `docs/blueprint/phase0.md` §1).
+  `docs/blueprint/phase0.md` §1). Open design point: the T0 validation
+  engine — stdlib mini-validator for the schema subset vs hand-rolled
+  structural checks (KI#10, owner decision pending; schema-driven
+  preferred — no contract duplication).
 - AC: world creates from seed; an event writes; a playscript plays end-to-end;
   `pytest -q` green.
 
@@ -131,7 +134,7 @@
 - Park et al. 2023 + "Generative Agent Simulations of 1,000 People" (2024)
   figures → `docs/TECH_NOTES.md` cost section.
 
-## Infra backlog (post-sprint, pick by need)
+## Infra backlog (pick by need)
 
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
   Python).
@@ -187,7 +190,8 @@
 - iter-0c · 2026-08-25 · REFERENCES rev v2 merge (D-017) + `content/tavern_pack/` v0.1 drafted.
 - iter-0d · 2026-08-25 · infra restore: `.gitignore`, package skeleton, smoke tests (KI#1/KI#2).
 - iter-0e · 2026-08-25 · `docs/CORE_DESIGN_RESEARCH.md` (synthesis, depth equation, P1–P3, Q1–Q4).
-- iter-0g · 2026-08-26 · research pass: Q1–Q3 absorbed (D-019..D-021); KI#3–KI#5 opened.
+- iter-0f · 2026-08-25 · manifesto absorption (D-018): BRIEF/VALIDATION sketch clauses, P3e psychological_echo, STATUS FAQ git-ls-files pitfall.
+- iter-0g · 2026-08-25 · research pass: Q1–Q3 absorbed (D-019..D-021); KI#3–KI#5 opened.
 - iter-0h · 2026-08-26 · `docs/REFERENCES_DEEP.md` + D-024 anti-drift policy; ref batch 1 (Neighborly, Mesa, DF Legends XML).
 - iter-0i · 2026-08-26 · ref-1 DF worldgen solo dive.
 - iter-0j · 2026-08-26 · ref-2 C:DDA solo dive + cap policy rewrite (D-025).

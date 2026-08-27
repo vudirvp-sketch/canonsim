@@ -32,8 +32,8 @@
   `brogueAssert(rogue.RNG == RNG_SUBSTANTIVE)` loudness.
 - `core/clock.py` — integer tick from 0; day-phase boundaries and
   ticks-per-action are pack rule data (`rules.json`), never constants in
-  code (INV-3). One tick ≈ 12 in-world minutes; a full day ≈ 1440 ticks
-  (`MVP_SCOPE.md` §8 owns the numbers).
+  code (INV-3). One tick = one in-world minute; a full day = 1440 ticks
+  (`MVP_SCOPE.md` §8 owns the numbers; `rules.json`: 1 hour ≈ 60 ticks).
 - `core/queue.py` — one `heapq` (SCHED-1). Entry key `(tick, sub_order,
   actor_id)` plus a monotonic `seq` as the never-compared-before last
   tiebreak so payloads are never ordered. `sub_order` bands, as constants:
@@ -144,7 +144,7 @@ phase-0 answer to "let it crash" (D-031).
   completion entry in the queue; a precondition broken before the
   completion tick → a SEEDED fail-trigger emits `mission_failed` with a
   cause chain to the original accept event. The full offer/accept/decline/
-  complete/fail/defer/visit state machine is a phase-3 refinement (P3c).
+  complete/fail/defer/visit state machine is a phase-3 refinement.
 - **Scheduler DAG (SCHED-1, lands iter-2):** the annotation language —
   every system dataclass declares `reads: tuple[str, ...]` and
   `writes: tuple[str, ...]` as data loaded from JSON packs (entt

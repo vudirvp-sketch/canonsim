@@ -6,6 +6,21 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-0aa · 2026-08-27 · owner-requested pre-code doc audit (drift + readiness)
+- 11 drift findings fixed as KI#11 (closed same iteration): fabricated
+  "1 tick ≈ 12 in-world minutes" citation (phase0 §1 + df_worldgen.md —
+  MVP_SCOPE §8 owns 1 tick = 1 minute, 1440/day); calendar remnants
+  (ROADMAP §4 "week 1" → bg-1; MVP_SCOPE §13 "day 3"; TASKS "post-sprint");
+  TASKS Done gap (iter-0f line restored per git e16c9ab); P3c mislabels
+  (phase0 §2, EVENT_SCHEMA §11); MVP_SCOPE §5 system-3 npc↔npc pair map
+  (D-020); AGENT_NAVIGATION tests/fixtures + playscripts rows; README
+  "empty" → "skeletons".
+- KI#10 opened (stdlib JSON-Schema validation engine for T0 + pack loader;
+  owner decision). Readiness verdict: rigging complete, iter-1
+  unconditionally next. 10 files touched (targets + mandated sync set,
+  same pattern as 0v/0z). No code; pytest green, ruff clean. 26th docs
+  iteration (owner-requested, D-022).
+---
 iter-0z · 2026-08-27 · owner-requested quality round (D-031)
 - INVARIANT-CORE v3 + Elegant Solutions absorbed per the D-018 pattern:
   L13/L14 (BLUEPRINT §2); phase0 §1 type discipline + fail-fast + the
@@ -104,9 +119,3 @@ iter-0s · 2026-08-27 · owner-requested ref-12 solo deep dive (UAP webapp)
   harness patterns, pack-lint vocabulary. License catch: README claims MIT,
   no LICENSE file — reference only. Catalog §9 + index + synthesis + TEST_PLAN/
   PACK_SPEC sketches synced.
----
-iter-0r · 2026-08-26 · owner-requested ref-10 + ref-11 6-batch deep dive
-- New `docs/ref/{entt,bevy,eventstore,sqlite_fts5,duckdb,sqlite_vec}.md`;
-  ref-10/ref-11 flipped todo→done; EventStore license drift fixed (index
-  "MIT" → BSD-3-Clause/ESLv2 pattern-only); sqlite-vec catalog "verify" →
-  dual MIT OR Apache-2.0.
