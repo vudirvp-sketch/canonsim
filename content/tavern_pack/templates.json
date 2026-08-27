@@ -44,6 +44,7 @@
     "rumor_told": "{actor} tells {target}: {knows}.",
     "document_check": "{actor} demands papers from {target}.",
     "arrest_attempt": "{actor} moves to arrest {target}.",
-    "suspicion_changed": "{target} grows warier of {actor}."
+    "suspicion_changed": "{target} grows warier of {actor}.",
+    "expectation_violation": "{actor} checks on {target} — it is not where it should be."
   }
 }

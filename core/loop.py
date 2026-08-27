@@ -26,6 +26,14 @@ per-layer singleton: one pass entry per layer at a time, its cause map
 shared with the ignitions (a second fire while a pass runs merges into it
 instead of forking a parallel pass — parallel passes double the pack's
 chance_per_tick and lose the cause chain, KI#16).
+
+iter-3: `_commit` also feeds the derived knowledge index and dispatches
+the event-driven system reactions (crime first, then the telling) — every
+committed event's records get their reactions, reaction events carry no
+knowledge of their own beyond what legitimately cascades, so the cascade
+terminates. Watch rotations fire when the clock CROSSES a rotation tick
+(never pre-seeded): the swap, the expectation checks (P2d), then the
+briefing (D-006) — each piece cause-chained (phase0 §3).
 """
 
 from __future__ import annotations
@@ -36,6 +44,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from core.clock import Clock
+from core.crime import briefing_draft, iter_suspicion_reactions, next_rotation_tick, rotation_plan
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
@@ -49,13 +58,14 @@ from core.intent import (
     run_check,
     validate_shape,
 )
+from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
 from core.log import EventDraft, EventLogWriter, EventRecord
 from core.pack import Pack
 from core.queue import PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
 from core.resolvers import REGISTRY
 from core.rng import SUBSTANTIVE, RngBank
 from core.scheduler import build, decls_from_rules
-from core.transitions import Ignition, follow_up_draft, ignite, spread_tick
+from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 
 __all__ = [
     "CompletionPayload",
@@ -146,11 +156,21 @@ class Simulator:
         # spread-pass state (KI#16): one live pass per layer, causes shared
         self._pass_causes: dict[str, dict[str, str]] = {}
         self._pass_live: set[str] = set()
+        # derived knowledge index (L3) + the next watch rotation tick
+        self._knowledge = KnowledgeView()
+        self._next_rotation = next_rotation_tick(
+            pack.rules, self._clock.ticks_per_day, 0
+        )
 
     @property
     def projection(self) -> Projection:
         """The runtime incremental projection (STATE-1)."""
         return self._projection
+
+    @property
+    def knowledge(self) -> KnowledgeView:
+        """The runtime knowledge index (L3 — derived, rebuildable from the log)."""
+        return self._knowledge
 
     def run_playscript(self, script: Mapping[str, Any]) -> RunResult:
         """Play seed + ordered intents end-to-end; returns the run summary."""
@@ -181,6 +201,20 @@ class Simulator:
                     )
                     while len(self._queue):
                         entry = self._queue.pop()
+                        # rotations fire when the clock crosses their tick —
+                        # before the entry the crossing happened for
+                        while (
+                            self._next_rotation is not None
+                            and self._next_rotation <= entry.tick
+                        ):
+                            rotation_tick = self._next_rotation
+                            self._clock.advance_to(rotation_tick)
+                            self._run_rotation(rotation_tick)
+                            self._next_rotation = next_rotation_tick(
+                                self._pack.rules,
+                                self._clock.ticks_per_day,
+                                rotation_tick,
+                            )
                         self._clock.advance_to(entry.tick)
                         if entry.kind == "intent":
                             accepted = self._execute_intent(entry)
@@ -400,6 +434,66 @@ class Simulator:
         if draft is not None:
             self._commit(replace(draft, provenance={"seed": self._seed}))
 
+    def _run_rotation(self, tick: int) -> None:
+        """One watch rotation at a crossed tick (phase0 §3): the post swap
+        (positions), the expectation checks (P2d — violations chain to the
+        events that moved the items), then the briefing (D-006 — the
+        outgoing holder's records pass, one fidelity step down). Each piece
+        commits through the canon door, so its reactions cascade."""
+        rotation = self._pack.rules["crime_watch"]["rotation"]
+        changes, outgoing, incoming = rotation_plan(self._pack, self._projection)
+        watch_record = self._commit(
+            EventDraft(
+                t=tick,
+                type=rotation["watch_event"],
+                actor=WORLD,
+                cause=self._writer.last_id,  # a scheduled beat: chronological chain
+                outcome={"outgoing": outgoing, "incoming": incoming},
+                state_changes=changes,
+                importance=pack_importance(
+                    self._pack.rules,
+                    {p for p in (outgoing, incoming) if p is not None},
+                    irreversible=0,
+                    hooks=0,
+                ),
+                provenance={"seed": self._seed},
+            )
+        )
+        for draft in expectation_drafts(
+            self._pack, self._projection, self._knowledge, self._events, tick
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+        briefing = briefing_draft(
+            self._pack, self._projection, self._knowledge, tick,
+            watch_record.id, outgoing, incoming,
+        )
+        if briefing is not None:
+            self._commit(replace(briefing, provenance={"seed": self._seed}))
+
+    def _react(self, record: EventRecord) -> None:
+        """Event-driven system reactions (phase0 §3), dispatched from the
+        canon door so no call site can forget them: crime first (suspicion,
+        status flip, arrest — chained per knower), then the telling (the
+        conversation's teller shares their most salient novel fact)."""
+        for group in iter_suspicion_reactions(
+            self._pack, self._projection, self._knowledge, record
+        ):
+            previous = record.id
+            for draft in group:
+                committed = self._commit(
+                    replace(draft, cause=previous, provenance={"seed": self._seed})
+                )
+                previous = committed.id
+        telling = telling_reaction(
+            self._pack, self._projection, self._knowledge, self._bank, record
+        )
+        if telling is not None:
+            self._commit(
+                replace(
+                    telling, cause=record.id, provenance={"seed": self._seed}
+                )
+            )
+
     def _emit_rejection(
         self,
         intent: IntentData,
@@ -447,4 +541,6 @@ class Simulator:
         record = self._writer.append(draft)
         apply_event(self._projection, record)
         self._events.append(record)  # in-memory cache: OCC attribution only
+        self._knowledge.add(record)  # derived index (L3)
+        self._react(record)  # event-driven reactions (phase0 §3)
         return record

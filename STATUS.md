@@ -1,27 +1,33 @@
 # STATUS — canonsim
 
-Iteration: 2a (`iter-2a-code-audit`) · Phase: 0 — simulator without LLM ·
-Date: 2026-08-28
+Iteration: 3 (`iter-3-knowledge-relations`) · Phase: 0 — simulator without
+LLM · Date: 2026-08-28
 
-Owner-requested audit of the first two code iterations ("re-check iter-1/2
-before the complexity grows"): full read of `core/` + tests + pack +
-contracts against the blueprint, claims verified (148 green, ruff clean,
-golden fixture intact), then probe-driven bug hunting. Four KIs found and
-fixed in place: KI#13 `_drop` hardcoded `from_=None` desynced the
-projection on a legal retake-and-redrop of a broken item — and exposed
-that events were written before their state deltas were validated (the
-new `_commit` gate validates first, D-035; both baseline logs stayed
-byte-identical); KI#14 `next_log_path` could name a live log after a
-middle delete and the writer would truncate it; KI#15 pack-lint gaps
-(`use_effect` axis, knowledge/events branch consistency, bare
-`StopIteration` in the steal resolver); KI#16 two staggered fires forked
-parallel spread passes — double `chance_per_tick` and a `cause=None`
-crash mid-run (seed 19 reproducer); the pass is now a per-layer
-singleton with a shared cause map (D-036). Repeat smoke/burnout
-follow-ups now stay silent instead of duplicating chronicle lines.
-155 tests green (+7 regression), ruff clean; `intent OCC` (KI#12)
-confirmed structurally unreachable in single-actor runs — KI stays open
-until an e2e trigger exists.
+The knowledge/relations/expectations iteration (TASKS iter-3, blueprint
+phase0 §3): knowledge is now a derived per-knower index (L3 — `KnowledgeView`,
+rebuildable from the log, T2 applies), characters react to what they hold.
+The ev_0007 shape (suspicion 0→25 + status unknown→suspect) lands on the
+reacting crime system, not the action — suspicion reactions fire on novel
+crime-mapped tokens only (EPIST-1: own state + own knowledge). Watch
+rotations fire on clock crossing (never pre-seeded — run-end semantics
+stable), swap the duty/rest posts and brief the relief: the outgoing
+holder's records pass told with one-step decay (D-006 spread — the relief
+arrives already suspicious). P2a pair map seeded (watcher pair trust 75,
+read by rumor acceptance). P2d expectation violations: a silent theft is
+noticed at the rotation as `inferred: purse_missing` cause-chained to the
+THEFT event (the axis-specific mover — carrier, not the later position
+move), feeding suspicion legitimately (KI#3 closed). P2c telling: a
+successful talk makes the teller share their most salient novel fact
+(importance-then-recency, triggering conversation excluded) with an
+acceptance roll; movement sightings (origin departure + destination
+arrival, new `destination_location` audience) ride the movement events.
+The rotation breaking `same_location` mid-steal is the natural OCC trigger
+KI#12 waited for (cause = the watch_change event). Fixture regenerated
+(move events gained records — deliberate, FAQ procedure). 187 tests green
+(+32: T3 suite, crime/rotation/OCC suites, iter-3 lint), ruff clean;
+D-037 records the architecture (reactions dispatch from the commit door;
+iter-3 systems live in core/, not sim/systems/ — the import-boundary law
+wins over the old plan note).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -42,18 +48,79 @@ until an e2e trigger exists.
 
 ## Active KIs
 
-- KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
-- KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6). First balance observation from iter-2: with v0.1 numbers, environment checks at difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20) — talk/examine/use/distract never fail as shipped; the failure branches are mechanism-tested via a crafted high-difficulty pack copy. Retuning is pack data, validated by `balance-1`.
-- KI#12 · intent OCC has no natural e2e trigger in iter-2 runs — single-actor sequential playscripts never move the projection between proposal and completion (only the fire chain interleaves, and it moves no positions/carriers). Mechanism + cause attribution are unit-tested (`tests/test_intent.py::test_occ_finds_the_breaking_event`); a natural trigger arrives with NPC reactions (iter-3) or the director (iter-4). iter-2a audit confirmed the unreachability is structural: no current precondition reads a prop any fire event writes. Do not delete until an e2e test exists.
-- KI#13 · resolver desync wrote-then-crashed (iter-2a found+fixed) — CLOSED iter-2a: `_drop` hardcoded `from_=None` on the `condition` change; a legal take→drop→retake→redrop of a breakable item (seed 34) crashed after the bad event was already appended. Fix: idempotent condition change + the `Simulator._commit` gate (state deltas validated against the projection BEFORE the write, D-035) + regression tests; both baseline logs stayed byte-identical.
-- KI#14 · `next_log_path` could truncate a live log — CLOSED iter-2a: after a middle-file delete, `len(existing)` named an existing path and the writer's "w" mode silently truncated it (INV-5 hygiene). Fix: first-free-slot scan + test.
-- KI#15 · pack-lint gaps let data bugs reach mid-run — CLOSED iter-2a: `use_effect.status` not checked against `rules.states` (a typo would silently seed a garbage status axis); `knowledge.failure_total` without `events.failure_total` (a generic resolver would KeyError at completion); the steal resolver raised a bare `StopIteration` when its `carries_flagged` precondition was missing. All three now fail at load or raise a named `RunnerError`; steal's pack data gained the `failure_total` event branch.
-- KI#16 · parallel spread passes broke runs with two fires — CLOSED iter-2a: a second ignition while a pass ran forked a second pass — doubling `chance_per_tick` and rolling the new location without a cause (`cause=None` → `LogError` mid-run; seed 19 reproducer, 3/59 seeds). Fix: the spread pass is a per-layer singleton with a shared cause map ignitions merge into (D-036); repeat smoke/burnout follow-ups now emit nothing instead of duplicate no-op events.
-- KI#5 · runtime state vs test fold not explicitly separated — CLOSED iter-1: the Simulator keeps the incremental projection (`apply_event` per emission), `fold` exists only on the T2 test path — D-023/STATE-1 implemented and test-enforced (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
-- KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1: owner approved the stdlib mini-validator; landed as `core/schema.py` (D-032) — write-time validation in the log writer, T0 on doc examples + committed logs.
+- KI#3 · `expectation_violation` primitive — CLOSED iter-3: implemented as
+  pack-declared expectation rules (`rules.json` `expectations`) checked at
+  watch rotations; a mismatch emits an `inferred` record cause-chained to
+  the event that moved the item on the violated axis (the theft, not the
+  walk). Suspicion-from-absence has its legitimate trigger (`purse_missing`
+  → +20, spreads via the briefing); tests: `test_knowledge.py`.
+- KI#4 · balance harness (1000-sim distribution plots of `suspicion` /
+  `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no
+  tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded
+  into the iter-6 verification stack (`docs/blueprint/phase0.md` §6). First
+  balance observation from iter-2: with v0.1 numbers, environment checks at
+  difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20)
+  — talk/examine/use/distract never fail as shipped; the failure branches
+  are mechanism-tested via a crafted high-difficulty pack copy. Retuning is
+  pack data, validated by `balance-1`.
+- KI#12 · intent OCC natural e2e trigger — CLOSED iter-3: the watch
+  rotation (tick 360) breaking `target.same_location` between a steal's
+  proposal and completion rejects with `projection_moved`, cause = the
+  watch_change event; the test is seed-robust for every move-duration draw
+  (`tests/test_crime.py::
+  test_rotation_mid_action_rejects_the_intent_with_the_breaking_cause`).
+- KI#13 · resolver desync wrote-then-crashed (iter-2a found+fixed) — CLOSED
+  iter-2a: `_drop` hardcoded `from_=None` on the `condition` change; a legal
+  take→drop→retake→redrop of a breakable item (seed 34) crashed after the
+  bad event was already appended. Fix: idempotent condition change + the
+  `Simulator._commit` gate (state deltas validated against the projection
+  BEFORE the write, D-035) + regression tests; both baseline logs stayed
+  byte-identical.
+- KI#14 · `next_log_path` could truncate a live log — CLOSED iter-2a: after
+  a middle-file delete, `len(existing)` named an existing path and the
+  writer's "w" mode silently truncated it (INV-5 hygiene). Fix:
+  first-free-slot scan + test.
+- KI#15 · pack-lint gaps let data bugs reach mid-run — CLOSED iter-2a:
+  `use_effect.status` not checked against `rules.states` (a typo would
+  silently seed a garbage status axis); `knowledge.failure_total` without
+  `events.failure_total` (a generic resolver would KeyError at completion);
+  the steal resolver raised a bare `StopIteration` when its
+  `carries_flagged` precondition was missing. All three now fail at load or
+  raise a named `RunnerError`; steal's pack data gained the `failure_total`
+  event branch.
+- KI#16 · parallel spread passes broke runs with two fires — CLOSED
+  iter-2a: a second ignition while a pass ran forked a second pass —
+  doubling `chance_per_tick` and rolling the new location without a cause
+  (`cause=None` → `LogError` mid-run; seed 19 reproducer, 3/59 seeds). Fix:
+  the spread pass is a per-layer singleton with a shared cause map
+  ignitions merge into (D-036); repeat smoke/burnout follow-ups now emit
+  nothing instead of duplicate no-op events.
+- KI#5 · runtime state vs test fold not explicitly separated — CLOSED
+  iter-1: the Simulator keeps the incremental projection (`apply_event` per
+  emission), `fold` exists only on the T2 test path — D-023/STATE-1
+  implemented and test-enforced
+  (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
+- KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1:
+  owner approved the stdlib mini-validator; landed as `core/schema.py`
+  (D-032) — write-time validation in the log writer, T0 on doc examples +
+  committed logs.
 
 ## FAQ / Pitfalls
 
+- **Reactions dispatch from the commit door; novelty is per (knower,
+  token) (iter-3 law, D-037).** `Simulator._commit` feeds the knowledge
+  index and runs `_react` (crime → telling) for EVERY committed event —
+  no call site can forget a reaction, and cascades terminate because
+  reaction events carry no records beyond what legitimately spreads.
+  Suspicion reacts only to tokens the knower did not already hold —
+  repeated identical evidence never re-escalates; escalation is the
+  pack's token vocabulary (a total-failure sighting IS novel for an
+  onlooker who had only heard: saw-where-they-heard moves +25). The
+  status flip lands exactly once (lazy per-knower drafting — never build
+  all reaction drafts against a stale projection; the KI#13 lesson
+  generalized). Scheduled beats (rotations) chain cause = last written
+  event; reactions chain cause = the trigger; expectation violations
+  chain cause = the axis-specific mover (carrier vs position).
 - **System passes scan the whole projection, not the events that seeded
   them (KI#16 lesson).** `spread_tick` rolls every burning location with
   unburning spots — including fires ignited after the pass started. Any
@@ -192,16 +259,14 @@ until an e2e trigger exists.
 
 ## Next step
 
-**iter-3 · knowledge + relations + expectations** (`docs/TASKS.md`):
-knowledge transfer with fidelity decay (rumor = transfer event,
-`EVENT_SCHEMA.md` §3), the crime system reacting to steal-failure records
-(the ev_0007 state_changes: suspicion 0→25, status → suspect, thresholds
-from `rules.json` `crime_watch`), watch-change transfer, P2a npc↔npc
-relations (D-020), P2d expectation_violation (KI#3), P2c detail callbacks
-(D-033). Read before building: `docs/blueprint/phase0.md` §3 +
-`MVP_SCOPE.md` §10; ledger rows EPIST-1, LOD-1, STATE-1. iter-2a audit
-notes for the builder: `rules.json` carries the arrest threshold (75) in
-two homes (`relations.suspicion_thresholds.arrest_attempt_at` and
-`crime_watch.arrest.requires_suspicion`) — pick one owner when the crime
-system lands; and arson on a fully-burning/destroyed location currently
-logs a no-ignition success (backlog `pack-2` in TASKS).
+**iter-4 · director + goal ticker** (`docs/TASKS.md`): consequence buffer
+seeded at event time, triggers (time / place / threshold), stagnation
+detector releases, director on/off switch; P2b goal ticker (D-021) — NPCs
+enqueue through the intent door from this iteration, plus the states decay
+passes deferred from iter-3 and the arrest resolution leftover. Read before
+building: `docs/blueprint/phase0.md` §4 + `MVP_SCOPE.md` §11; ledger rows
+DIR-*, EPIST-1; D-005 (no complications from nothing), D-037 (reaction
+dispatch — the director releases must ride the same door discipline).
+Honest watch-out from iter-3: the drunkard→market rumor (ev_0031 shape)
+still has no trigger — autonomous telling is exactly the P2b goal ticker's
+material.

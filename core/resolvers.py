@@ -144,12 +144,16 @@ def _movement(
     pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
-    """move: adjacency was a precondition; carry the items along."""
+    """move: adjacency was a precondition; carry the items along. Knowledge
+    resolves against the PRE-move projection: origin observers see the
+    departure (same_location), destination observers the arrival
+    (destination_location) — the movement sighting records (iter-3)."""
     if intent.target is None:
         raise RunnerError("move requires a target location")
     return Resolution(
         event_type=action["events"]["success"],
         outcome={},
+        knowledge=_knowledge(action, "success", pack, projection, intent, tick),
         state_changes=_move_changes(pack, projection, intent.actor, intent.target),
     )
 

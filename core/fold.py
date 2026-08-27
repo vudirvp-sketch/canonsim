@@ -26,7 +26,9 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
     Locations are registered prop-less (state changes may target them);
     position for every positioned entity (npcs, ambient groups, items);
     `status.*` and `relations.*` for npcs — the props iter-2+ events will
-    carry `from` values for. Iteration follows pack list order
+    carry `from` values for; `pair.<id>.<axis>` for the sparse npc↔npc
+    relation map (P2a, iter-3) and `crime_status` where the pack declares
+    one (the crime_watch convention). Iteration follows pack list order
     (construction order — INV-2).
     """
     state: Projection = {}
@@ -42,6 +44,12 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
             _put(npc["id"], f"status.{key}", value)
         for key, value in npc.get("relations", {}).items():
             _put(npc["id"], f"relations.{key}", value)
+        for pair in npc.get("pair_relations", ()):  # P2a: sparse pair map
+            for axis, value in pair.items():
+                if axis != "with":
+                    _put(npc["id"], f"pair.{pair['with']}.{axis}", value)
+        if "crime_status" in npc:
+            _put(npc["id"], "crime_status", npc["crime_status"])
     for ambient in entities.get("ambient_entities", []):
         _put(ambient["id"], "position", ambient["position"])
     for item in entities.get("items", []):

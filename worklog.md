@@ -6,6 +6,18 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-3 · 2026-08-28 · knowledge, relations, expectations (iter-3-knowledge-relations)
+- core/knowledge.py + core/crime.py (D-037: kernel mechanics — the
+  import-boundary law beats the old sim/systems plan note) + loop rewire:
+  reaction cascade in the commit door (crime → telling), clock-crossing
+  watch rotations (swap + expectations + briefing with one-step decay).
+  Pack: expectations/telling/suspicion mapping/rotation/pair seeds/
+  movement sighting templates; arrest threshold single owner. Fold: pair
+  + crime_status seeding. 16 files — task-mandated module set + sync set.
+- Tests 155→187 green (+32: T3, transfers, expectations, OCC e2e, lint);
+  fixture regenerated (move records — deliberate); KI#3 + KI#12 closed;
+  states decay deferred to iter-4; arrest resolution parked (TASKS).
+---
 iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2 (iter-2a-code-audit)
 - Full read core/ + tests + pack + contracts vs blueprint; claims
   verified; probe-driven hunting (brute-forced seeds). 4 KIs found+fixed:
@@ -140,15 +152,3 @@ iter-0v · 2026-08-27 · owner-requested audit patches (the 21-point iter-0u aud
   over the 3–5 soft limit: mandated sync set + the collapse, same pattern as
   iter-0u. No code; pytest green, ruff clean. 21st docs iteration
   (owner-requested, D-022); **iter-1 code is next, unconditionally**.
----
-iter-0u · 2026-08-27 · owner-requested references distillation (synthesis pass)
-- New `docs/BLUEPRINT.md` (149 — resolution ledger: 12 cross-ref tensions →
-  mechanisms; 12 cross-cutting laws; build index) + `docs/blueprint/phase0.md`
-  (340 — iter-1..6 combined donor designs) + `docs/blueprint/phases.md` (224 —
-  phases 1–6 + cross-cutting). D-027: fourth anti-drift place; RNG-1/EPIST-1
-  clarifications enacted as ledger rows.
-- 9 files touched (3 new + mandated sync set: AGENT_NAVIGATION §1/§2/§3,
-  DECISIONS D-027, REFERENCES_DEEP pointer, TASKS, STATUS, worklog). No code;
-  pytest green, ruff clean.
-- Next: iter-1 core plumbing, unconditionally — read `docs/blueprint/
-  phase0.md` §1 + ledger rows RNG-1/SCHED-1/STATE-1/STORE-1/TEST-1 first.

@@ -71,6 +71,9 @@ class _Lint:
         self._time_rules()
         self._systems()
         self._transitions()
+        self._knowledge_rules()
+        self._crime_watch()
+        self._expectations()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -104,6 +107,8 @@ class _Lint:
 
         status_axes = set(rules["states"])
         relation_axes = set(rules["relations"]["axes"])
+        relation_scale = rules["relations"]["scale"]
+        crime_status_values = set(rules["crime_watch"].get("status_values", ()))
         item_ids = _ids(items)
         npc_ids = _ids(npcs)
         for npc in npcs:
@@ -114,6 +119,37 @@ class _Lint:
             _require(not unknown_status, f"npc {npc['id']}: unknown status axes {unknown_status}")
             unknown_axes = set(npc.get("relations", {})) - relation_axes
             _require(not unknown_axes, f"npc {npc['id']}: unknown relation axes {unknown_axes}")
+            if "crime_status" in npc:
+                _require(
+                    npc["crime_status"] in crime_status_values,
+                    f"npc {npc['id']}: crime_status {npc['crime_status']!r} not in "
+                    f"crime_watch.status_values {sorted(crime_status_values)}",
+                )
+            for pair in npc.get("pair_relations", ()):  # P2a: sparse pair map
+                pair_with = pair.get("with")
+                _require(
+                    isinstance(pair_with, str) and pair_with in npc_ids
+                    and pair_with != npc["id"],
+                    f"npc {npc['id']}: pair_relations 'with' must name another "
+                    f"npc, got {pair_with!r}",
+                )
+                _require(
+                    len(pair) >= 2,
+                    f"npc {npc['id']}: pair_relations entry carries no axes",
+                )
+                for axis, value in pair.items():
+                    if axis == "with":
+                        continue
+                    _require(
+                        axis in relation_axes,
+                        f"npc {npc['id']}: unknown pair axis {axis!r}",
+                    )
+                    _require(
+                        isinstance(value, int) and not isinstance(value, bool)
+                        and relation_scale[0] <= value <= relation_scale[1],
+                        f"npc {npc['id']}: pair axis {axis!r} must be an integer "
+                        f"inside {relation_scale}, got {value!r}",
+                    )
 
         players = [npc["id"] for npc in npcs if npc.get("is_player", False)]
         _require(len(players) == 1, f"exactly one is_player npc required, got {players}")
@@ -155,7 +191,10 @@ class _Lint:
 
     # -- actions (the intent contract cross-refs) -----------------------------
 
-    def _knowledge_entry(self, action_intent: str, record: Mapping[str, Any]) -> None:
+    def _knowledge_entry(
+        self, action_intent: str, record: Mapping[str, Any],
+        requires: tuple[Mapping[str, Any], ...] = (),
+    ) -> None:
         knowledge = self._data["rules.json"]["knowledge"]
         where = f"action {action_intent!r} knowledge"
         _require(record["who"] in AUDIENCES, f"{where}: unknown audience {record['who']!r}")
@@ -167,6 +206,19 @@ class _Lint:
             record["fidelity"] in knowledge["fidelity_chain"],
             f"{where}: unknown fidelity {record['fidelity']!r}",
         )
+        if record["who"] == "destination_location":
+            # resolves against the target location: the action must pin the
+            # target's kind to location (movement sighting audiences)
+            _require(
+                any(
+                    cond.get("noun") == "target"
+                    and cond.get("test") == "kind"
+                    and cond.get("is") == "location"
+                    for cond in requires
+                ),
+                f"{where}: audience 'destination_location' requires a "
+                f"target-kind-location precondition",
+            )
         for token in record.get("except", ()):
             _require(
                 token in _EXCEPT_TOKENS,
@@ -268,7 +320,9 @@ class _Lint:
                     f"action {intent}: unknown knowledge branch {branch!r}",
                 )
                 for record in records:
-                    self._knowledge_entry(intent, record)
+                    self._knowledge_entry(
+                        intent, record, tuple(action.get("requires", ()))
+                    )
             for branch, tags in action.get("hooks", {}).items():
                 _require(
                     branch in ("success", "failure"),
@@ -370,6 +424,178 @@ class _Lint:
                 )
             for key, record in config.get("knowledge", {}).items():
                 self._knowledge_entry(f"{layer}.{key}", record)
+
+    # -- knowledge rules (telling + acceptance, iter-3) ------------------------
+
+    def _knowledge_rules(self) -> None:
+        rules = self._data["rules.json"]
+        knowledge = rules.get("knowledge", {})
+        templates = self._data["templates.json"]["events"]
+        relation_axes = set(rules["relations"]["axes"])
+        status_axes = set(rules["states"])
+        _require(
+            knowledge.get("salience") in ("importance_then_recency",),
+            f"knowledge.salience must be one of ['importance_then_recency'], "
+            f"got {knowledge.get('salience')!r}",
+        )
+        acceptance = knowledge.get("rumor_acceptance", {})
+        _require(
+            acceptance.get("trust_axis") in relation_axes,
+            f"knowledge.rumor_acceptance.trust_axis {acceptance.get('trust_axis')!r} "
+            f"is not a relations axis",
+        )
+        _require(
+            acceptance.get("teller_penalty_axis") in status_axes,
+            f"knowledge.rumor_acceptance.teller_penalty_axis "
+            f"{acceptance.get('teller_penalty_axis')!r} is not a status axis",
+        )
+        telling = knowledge.get("telling")
+        if telling is not None:
+            for key in ("on_event", "event"):
+                _require(
+                    telling.get(key) in templates,
+                    f"knowledge.telling.{key} {telling.get(key)!r} is not in the "
+                    f"template vocabulary",
+                )
+            for key in ("teller", "listener"):
+                _require(
+                    telling.get(key) in ("actor", "target"),
+                    f"knowledge.telling.{key} must be 'actor' or 'target'",
+                )
+            _require(
+                isinstance(telling.get("facts"), int)
+                and not isinstance(telling.get("facts"), bool)
+                and telling["facts"] >= 1,
+                "knowledge.telling.facts must be a positive integer",
+            )
+
+    # -- crime_watch (the reacting system, iter-3) ------------------------------
+
+    def _crime_watch(self) -> None:
+        rules = self._data["rules.json"]
+        crime = rules.get("crime_watch", {})
+        if not crime:
+            return
+        templates = self._data["templates.json"]["events"]
+        entities = self._data["entities.json"]
+        location_ids = _ids(entities["locations"])
+        npc_ids = _ids(entities["npcs"])
+        relation_axes = set(rules["relations"]["axes"])
+        _require(
+            crime.get("suspicion_axis") in relation_axes,
+            f"crime_watch.suspicion_axis {crime.get('suspicion_axis')!r} is not "
+            f"a relations axis",
+        )
+        for key in ("reaction_event",):
+            _require(
+                crime.get(key) in templates,
+                f"crime_watch.{key} {crime.get(key)!r} is not in the template "
+                f"vocabulary",
+            )
+        _require(
+            crime.get("status_suspect_value") in crime.get("status_values", ()),
+            "crime_watch.status_suspect_value must be one of status_values",
+        )
+        sources = crime.get("suspicion_sources", {})
+        for token, source in crime.get("suspicion_from_knowledge", {}).items():
+            _require(
+                source in sources,
+                f"crime_watch.suspicion_from_knowledge[{token!r}]: unknown "
+                f"suspicion source {source!r}",
+            )
+        arrest = crime.get("arrest", {})
+        _require(
+            arrest.get("event") in templates,
+            f"crime_watch.arrest.event {arrest.get('event')!r} is not in the "
+            f"template vocabulary",
+        )
+        ticks = crime.get("watch_rotation_ticks", [])
+        _require(
+            all(
+                isinstance(t, int) and not isinstance(t, bool)
+                and 0 <= t < rules["time"]["ticks_per_day"]
+                for t in ticks
+            ),
+            "crime_watch.watch_rotation_ticks must be intraday tick offsets",
+        )
+        if not ticks:
+            return
+        rotation = crime.get("rotation", {})
+        for key in ("duty_post", "rest_post"):
+            _require(
+                rotation.get(key) in location_ids,
+                f"crime_watch.rotation.{key} {rotation.get(key)!r} is not a location",
+            )
+        participants = rotation.get("participants", [])
+        _require(
+            len(participants) >= 2
+            and len(set(participants)) == len(participants)
+            and all(p in npc_ids for p in participants),
+            f"crime_watch.rotation.participants must be >= 2 distinct npcs, "
+            f"got {participants!r}",
+        )
+        for key in ("watch_event", "transfer_event"):
+            _require(
+                rotation.get(key) in templates,
+                f"crime_watch.rotation.{key} {rotation.get(key)!r} is not in "
+                f"the template vocabulary",
+            )
+
+    # -- expectations (P2d, iter-3) ----------------------------------------------
+
+    def _expectations(self) -> None:
+        rules = self._data["rules.json"]
+        config = rules.get("expectations")
+        if config is None:
+            return
+        templates = self._data["templates.json"]["events"]
+        entities = self._data["entities.json"]
+        location_ids = _ids(entities["locations"])
+        npc_ids = _ids(entities["npcs"])
+        item_ids = _ids(entities["items"])
+        _require(
+            config.get("event") in templates,
+            f"expectations.event {config.get('event')!r} is not in the template "
+            f"vocabulary",
+        )
+        _require(
+            config.get("check_at") in ("watch_rotation",),
+            f"expectations.check_at must be 'watch_rotation', got "
+            f"{config.get('check_at')!r}",
+        )
+        items_by_id = {item["id"]: item for item in entities["items"]}
+        for rule in config.get("rules", ()):
+            where = f"expectation rule {rule.get('knows')!r}"
+            _require(rule.get("npc") in npc_ids, f"{where}: unknown npc")
+            _require(rule.get("item") in item_ids, f"{where}: unknown item")
+            modes = [key for key in ("carried_by", "at_location") if key in rule]
+            _require(
+                len(modes) == 1,
+                f"{where}: exactly one of carried_by / at_location is required",
+            )
+            if "carried_by" in rule:
+                _require(rule["carried_by"] in npc_ids, f"{where}: unknown carrier npc")
+            if "at_location" in rule:
+                _require(
+                    rule["at_location"] in location_ids, f"{where}: unknown location"
+                )
+            _require(
+                isinstance(rule.get("knows"), str) and rule["knows"],
+                f"{where}: knows must be a non-empty string",
+            )
+            # a rule must hold on the initial pack state: a violation without
+            # a mover would have no event to chain its cause to (P2d)
+            item = items_by_id[rule["item"]]
+            holds = (
+                item.get("carrier") == rule["carried_by"]
+                if "carried_by" in rule
+                else item["position"] == rule["at_location"]
+            )
+            _require(
+                holds,
+                f"{where}: violated by the initial pack state — expectation "
+                f"rules must hold at t=0",
+            )
 
 
 @dataclass(frozen=True, slots=True)

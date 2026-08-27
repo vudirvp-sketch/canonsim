@@ -9,42 +9,26 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-3 · knowledge + relations + expectations — todo (next)
-
-- Knowledge records; transfer with fidelity decay; suspicion / relations
-  updates (the ev_0007 state_changes — suspicion 0→25, crime status — ride
-  the crime system reacting to steal-failure knowledge, not the action);
-  watch-change transfer; NPC memory driving behavior (guards act on
-  suspicion thresholds); movement-sighting records (the perception pass
-  noticing move/flee).
-- **P2a NPC↔NPC relations** (D-020): sparse pair-keyed relation map — rumor
-  acceptance already weighs trust, trust now has a data home; enables guard
-  coordination and non-PC story lines.
-- **P2d expectation_violation** (KI#3): behaviour rules in `rules.json`
-  generate per-NPC expectations from schedule + position; perception
-  compares expected vs observed; mismatch emits an `inferred`-channel
-  knowledge record (e.g., `purse_missing_from_bar`). No schema change —
-  uses the existing `inferred` channel. Suspicion-from-absence now has a
-  legitimate trigger.
-- **P2c detail callbacks** (D-033): talk topic selection = the teller's
-  most salient known fact — knowledge *used*, not just stored; no schema
-  change (salience is a read over `knowledge`).
-- AC: characters know different things and react differently; NPCs notice
-  absences they had reason to expect; T3 blind-NPC passes.
-
-### iter-4 · director + goal ticker — todo
+### iter-4 · director + goal ticker — todo (next)
 
 - Consequence buffer seeded at event time; triggers (time / place /
   threshold); stagnation detector releases; director on/off switch.
 - **P2b minimal goal/urge ticker** (D-021): goal → occasional autonomous
   action (drunkard seeks ale, maid roams, guard patrols) through the same
-  queue, same tick discipline. Full LLM planning — never (`VISION.md` §6).
+  queue, same tick discipline — NPCs enqueue through the intent door from
+  this iteration (INTENT_SCHEMA §2). Full LLM planning — never
+  (`VISION.md` §6). Includes the **states decay passes** deferred from
+  iter-3 (fatigue/intoxication/fear decay per `rules.json` `states`;
+  interacts with the goal ticker — D-037 scope note).
 - **P2e narrative entropy** for the stagnation detector (proposal, not yet
   owner-decided): release the lowest-threshold seeded hook when entropy
   (sum of seeded-hook weights + global suspicion + visible physical
   threats) drops below threshold — not on a flat timer. Entropy computed
   only from seeded hooks + visible state, never invents new threats
   (D-005 preserved). See DIRECTOR_SPEC sketch in `docs/SPECS_BACKLOG.md`.
+- **Arrest resolution** (iter-3 leftover): `arrest_attempt` is a fact
+  event; capture/escape resolution (pursuit vs evasion, the caught state)
+  is a natural fit once the goal ticker drives guard behavior.
 - AC: seeded hooks fire causally; no "from nothing" complications; world
   acts without the PC; T4 irreversibility passes; T8 director-off shows
   ≥3 emergent chains.
@@ -166,6 +150,13 @@
 
 ## Done
 
+- iter-3 · 2026-08-28 · knowledge, relations, expectations: derived
+  KnowledgeView + telling reaction (P2c, salience + acceptance), crime
+  reactions (ev_0007 shape on the reacting system; novelty rule), watch
+  rotation + briefing spread (D-006), P2a pair map, P2d expectation
+  violations (cause-chained to the axis-specific mover), movement
+  sightings, natural OCC e2e trigger; KI#3/KI#12 closed; T3 suite; fixture
+  regenerated. 187 tests green.
 - iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2: 4 KIs
   found+fixed (drop desync + `_commit` pre-write gate D-035;
   next_log_path truncation; pack-lint gaps; parallel spread passes →

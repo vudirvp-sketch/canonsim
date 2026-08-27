@@ -15,16 +15,19 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 2a — the owner-requested audit of the first two code
-iterations: four defects found and fixed in place (a resolver/projection
-desync that could write a bad event before crashing — events now pass a
-pre-write `_commit` gate; a log-path collision that could truncate a
-prior run's log; three pack-lint gaps; parallel fire-spread passes that
-crashed runs with two staggered fires). 155 tests green, ruff clean;
-both baseline logs byte-identical through the fixes. The action layer
-(iter-2) stands: intent front door with OCC, the 12 pack-driven
-resolvers, scheduler DAG, and the generic fire chain. Next: iter-3 ·
-knowledge, relations, expectations (`docs/TASKS.md`).
+Phase 0, iteration 3 — the epistemics layer stands: knowledge is a derived
+per-knower index (rebuildable from the log), characters react to what they
+hold (the ev_0007 suspicion + status-flip shape on the reacting crime
+system, novelty-gated), watch rotations swap the posts and brief the
+relief with one-step fidelity decay (the spread of suspicion between
+watchers is transfer events — no group reputation), expectation rules let
+an NPC notice a silent theft as an inferred record cause-chained to the
+theft, a successful talk shares the teller's most salient fact through an
+acceptance roll, and observers at both ends see movement. The natural
+intent-OCC trigger arrived (a rotation breaking a mid-action steal).
+187 tests green, ruff clean; golden fixture regenerated (move events
+gained sighting records). Next: iter-4 · director + goal ticker
+(`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 

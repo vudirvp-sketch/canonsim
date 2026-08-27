@@ -62,11 +62,12 @@
       "position": "loc_street",
       "status": {"fatigue": 0, "intoxication": 0, "fear": 0, "injury": 0},
       "relations": {},
+      "crime_status": "unknown",
       "knowledge": [],
       "mood": "wary",
       "goal": "get money, stay free",
       "is_player": true,
-      "notes": "enters the tavern at the start of the §3 walkthrough"
+      "notes": "enters the tavern at the start of the §3 walkthrough; crime_status is the crime_watch convention (rules.json crime_watch.status_values) — flipped to suspect by the first suspicion crossing (ev_0007 shape)"
     },
     {
       "id": "npc_guard_01",
@@ -75,11 +76,12 @@
       "position": "loc_tavern",
       "status": {"fatigue": 10, "intoxication": 0, "fear": 0, "injury": 0},
       "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "pair_relations": [{"with": "npc_guard_02", "trust": 75}],
       "knowledge": [],
       "mood": "alert",
       "goal": "keep order",
       "carries": ["purse_01"],
-      "notes": "stands at the bar (walkthrough §3); pickpocket target; ev_0007 actor-side witness"
+      "notes": "stands at the bar (walkthrough §3); pickpocket target; ev_0007 actor-side witness; expects the purse on himself (rules.expectations)"
     },
     {
       "id": "npc_guard_02",
@@ -88,10 +90,11 @@
       "position": "loc_guardroom",
       "status": {"fatigue": 0, "intoxication": 0, "fear": 0, "injury": 0},
       "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "pair_relations": [{"with": "npc_guard_01", "trust": 75}],
       "knowledge": [],
       "mood": "resting",
       "goal": "keep order",
-      "notes": "receives Doren's knowledge at watch change (transfer event)"
+      "notes": "receives Doren's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020)"
     },
     {
       "id": "npc_barkeep_01",

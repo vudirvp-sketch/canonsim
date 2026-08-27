@@ -122,9 +122,12 @@ def test_knowledge_enums_match_event_schema() -> None:
 
 
 def test_suspicion_thresholds_escalate() -> None:
+    # status flip < document check (relations thresholds) < arrest
+    # (crime_watch.arrest — the single owner since iter-3)
     thresholds = rules()["relations"]["suspicion_thresholds"]
+    arrest_at = rules()["crime_watch"]["arrest"]["requires_suspicion"]
     assert thresholds["status_suspect_at"] < thresholds["document_check_at"]
-    assert thresholds["document_check_at"] < thresholds["arrest_attempt_at"]
+    assert thresholds["document_check_at"] < arrest_at
 
 
 def test_watch_rotation_ticks_are_inside_the_day() -> None:

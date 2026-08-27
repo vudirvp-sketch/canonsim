@@ -519,3 +519,101 @@ def test_pack_lint_catches_knowledge_branch_without_event(tmp_path: Path) -> Non
 
     with pytest.raises(PackError, match="failure_total"):
         load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- pack lint: the iter-3 system cross-refs ------------------------------------
+
+
+def test_pack_lint_catches_bad_pair_relation_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        guard = next(n for n in entities["npcs"] if n["id"] == "npc_guard_01")
+        guard["pair_relations"][0]["admiration"] = 40  # not a relations axis
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="pair axis"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_pair_relation_with_self(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        guard = next(n for n in entities["npcs"] if n["id"] == "npc_guard_01")
+        guard["pair_relations"][0]["with"] = "npc_guard_01"
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="another npc"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_crime_status_value(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        entities["npcs"][0]["crime_status"] = "wanted"  # not in status_values
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="crime_status"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_suspicion_source(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["crime_watch"]["suspicion_from_knowledge"]["purse_missing"] = "bad_hunch"
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="unknown suspicion source"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_rotation_post_outside_the_world(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["crime_watch"]["rotation"]["duty_post"] = "loc_nope"
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="duty_post"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_expectation_broken_at_t0(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["expectations"]["rules"][0]["carried_by"] = "npc_barkeep_01"
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="initial pack state"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_expectation_with_both_modes(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["expectations"]["rules"][0]["at_location"] = "loc_tavern"
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="exactly one"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_destination_audience_without_location_target(
+    tmp_path: Path,
+) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        talk = next(a for a in actions["actions"] if a["intent"] == "talk")
+        talk["knowledge"]["success"][0]["who"] = "destination_location"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="target-kind-location"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_telling_event_outside_vocabulary(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["knowledge"]["telling"]["event"] = "gossip_explosion"
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="telling.event"):
+        load_pack(_broken_pack(tmp_path, mutate))

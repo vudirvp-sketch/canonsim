@@ -32,7 +32,7 @@
     "fire": {"reads": ["fire", "position"], "writes": ["fire", "smoke", "status"], "per_tick": true},
     "crime_watch": {"reads": ["relations", "knowledge"], "writes": ["relations", "status"], "per_tick": false, "after": ["relations"]},
     "director": {"reads": ["hooks", "relations", "fire"], "writes": [], "per_tick": false},
-    "notes": "SCHED-1: reads/writes annotations are data; the scheduler builds the per-tick pass order from the per_tick subset and fails loudly on write-write ambiguity without before/after hints (docs/blueprint/phase0.md §2). Systems flip per_tick as their iterations land (fire: iter-2; knowledge/relations/states: iter-3; director: iter-4)"
+    "notes": "SCHED-1: reads/writes annotations are data; the scheduler builds the per-tick pass order from the per_tick subset and fails loudly on write-write ambiguity without before/after hints (docs/blueprint/phase0.md §2). per_tick remains fire-only (iter-2): the iter-3 systems (knowledge transfer, crime reactions, watch rotation, expectations) are event-driven reactions dispatched from the commit door + clock-crossing rotations — not per-tick passes; states decay passes are deferred to iter-4 (task owner: docs/TASKS.md)"
   },
 
   "checks": {
@@ -76,18 +76,31 @@
     "axes": ["reputation", "suspicion", "trust", "fear"],
     "suspicion_thresholds": {
       "status_suspect_at": 25,
-      "document_check_at": 50,
-      "arrest_attempt_at": 75
+      "document_check_at": 50
     },
-    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; 50/75 are v0.1 defaults for hooks the spec names but does not number. Suspicion state changes land with the crime system (iter-3)"
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; document_check 50 is a v0.1 default for the hook the spec names but does not number (consumed by the director, iter-4). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3 (the iter-2a duplicate was removed). Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
   },
 
   "knowledge": {
     "channels": ["saw", "heard", "told", "inferred"],
     "fidelity_chain": ["exact", "partial", "vague"],
     "transfer_decay_steps": 1,
-    "rumor_acceptance": {"base": 50, "trust_weight": 0.2, "teller_intoxication_penalty_per_10": -1},
-    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). Transfer itself lands iter-3"
+    "salience": "importance_then_recency",
+    "rumor_acceptance": {
+      "base": 50,
+      "trust_axis": "trust",
+      "trust_weight": 0.2,
+      "teller_penalty_axis": "intoxication",
+      "teller_penalty_per_10": -1
+    },
+    "telling": {
+      "on_event": "talk",
+      "teller": "target",
+      "listener": "actor",
+      "event": "rumor_told",
+      "facts": 1
+    },
+    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). P2c (D-033): a successful talk makes the teller share their most salient novel fact — salience = importance then recency, records born on the triggering conversation excluded. Acceptance rolls d100 vs base + trust_weight*trust − teller penalty (all pack numbers); official watch briefings are always accepted (D-006 handover, not a rumor). Landed iter-3"
   },
 
   "states": {
@@ -135,14 +148,41 @@
   "crime_watch": {
     "watch_rotation_ticks": [360, 1080],
     "transfer_on_rotation": true,
-    "document_check": {"hook": "possible_document_check", "delay_ticks": 120},
-    "arrest": {"requires_suspicion": 75, "requires_same_location": true},
+    "rotation": {
+      "duty_post": "loc_tavern",
+      "rest_post": "loc_guardroom",
+      "participants": ["npc_guard_01", "npc_guard_02"],
+      "watch_event": "watch_change",
+      "transfer_event": "knowledge_transfer"
+    },
+    "suspicion_axis": "suspicion",
+    "reaction_event": "suspicion_changed",
+    "status_values": ["unknown", "suspect"],
+    "status_suspect_value": "suspect",
     "suspicion_sources": {
       "witnessed_steal_failure": 25,
       "heard_noise": 10,
-      "rumor_about_figure": 5
+      "rumor_about_figure": 5,
+      "inferred_purse_missing": 20
     },
-    "notes": "watch change = knowledge-transfer event between guards (D-006); 'document check in two hours' = 120 ticks seeded at event time (MVP_SCOPE §11). The reacting crime system lands iter-3; the steal-failure hooks seeded by actions.json reference document_check.hook"
+    "suspicion_from_knowledge": {
+      "figure_reaching_for_purse": "witnessed_steal_failure",
+      "noise_by_the_bar": "heard_noise",
+      "figure_at_back_door_last_night": "rumor_about_figure",
+      "purse_missing": "inferred_purse_missing"
+    },
+    "document_check": {"hook": "possible_document_check", "delay_ticks": 120},
+    "arrest": {"requires_suspicion": 75, "requires_same_location": true, "event": "arrest_attempt"},
+    "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; resolution is later work). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3"
+  },
+
+  "expectations": {
+    "check_at": "watch_rotation",
+    "event": "expectation_violation",
+    "rules": [
+      {"npc": "npc_guard_01", "item": "purse_01", "carried_by": "npc_guard_01", "knows": "purse_missing"}
+    ],
+    "notes": "P2d (KI#3): behaviour rules generate per-NPC expectations; a mismatch at check time emits an inferred-channel record cause-chained to the event that moved the item on the violated axis — the only legal route to suspicion-from-absence (an absence is knowable only as a violated expectation, never as 'not seen'). carried_by expectations check anywhere (their own pocket); at_location expectations additionally require the NPC on site. Checked at watch rotations (v0.1); rules must hold on the initial pack state (load-time lint). Landed iter-3"
   },
 
   "director": {

@@ -124,14 +124,20 @@ rule (MVP_SCOPE §9): entities touched + irreversibility + hooks.
 
 Per action and branch (`success` / `failure` / `failure_total`), the pack
 declares record templates: `who` ∈ {`actor`, `target`, `same_location`,
-`adjacent_locations`} + optional `except` tokens (`actor`, `target`,
-`cause_actor`); `channel`/`fidelity` from the EVENT_SCHEMA enums; `knows`
-is a slot template over `{actor}`, `{target}`, `{location}`,
-`{cause_actor}` (closed set, lint-checked). Audiences resolve to
-knowledge-holders only — npcs and ambient groups, never items; hearing
+`adjacent_locations`, `destination_location`} + optional `except` tokens
+(`actor`, `target`, `cause_actor`); `channel`/`fidelity` from the
+EVENT_SCHEMA enums; `knows` is a slot template over `{actor}`, `{target}`,
+`{location}`, `{cause_actor}` (closed set, lint-checked). Audiences resolve
+to knowledge-holders only — npcs and ambient groups, never items; hearing
 radii follow `rules.json` `position_visibility.hearing` (adjacent
 locations hear vague only). Blind-NPC (T3) holds by construction: no
 record, no knowledge.
+
+Audience notes: `same_location` resolves against the actor's position at
+**completion time, pre-change** — for a move that is the *origin* (the
+departure sighting); `destination_location` (iter-3, movement sightings)
+resolves against the action's target and requires a target-kind-location
+precondition (lint-checked).
 
 ## 8. Rejection events
 

@@ -460,7 +460,13 @@ def pack_importance(
 
 # -- knowledge-record resolution (audiences + slot templates) ------------------
 
-AUDIENCES: Final = ("actor", "target", "same_location", "adjacent_locations")
+AUDIENCES: Final = (
+    "actor",
+    "target",
+    "same_location",
+    "adjacent_locations",
+    "destination_location",  # movement sightings at the arrival end (iter-3)
+)
 KNOWLEDGE_SLOTS: Final = ("actor", "target", "location", "cause_actor")
 
 
@@ -499,6 +505,14 @@ def resolve_knowledge(
             exits = pack.entity(ctx["location"])["exits"]
             for adjacent in exits:  # pack exit order — deterministic
                 who_ids.extend(knowers_at(pack, projection, adjacent))
+        elif audience == "destination_location":
+            destination = ctx["target"]
+            if pack.kind_of(destination) != "location":
+                raise RunnerError(
+                    f"knowledge audience 'destination_location' resolves against a "
+                    f"location target, got {destination!r}"
+                )
+            who_ids = knowers_at(pack, projection, destination)
         else:
             raise RunnerError(f"unknown knowledge audience {audience!r}")
         knows = record["knows"].format_map(ctx)

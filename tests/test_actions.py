@@ -79,8 +79,7 @@ def test_steal_partial_failure_records_ev_0007_family(tmp_path: Path) -> None:
     events, sim = run(tmp_path, 1, TAVERN_STEPS + [
         {"intent": "steal", "target": "npc_guard_01"},
     ])
-    failed = events[-1]
-    assert failed.type == "pickpocket_failed"
+    failed = next(e for e in events if e.type == "pickpocket_failed")
     assert failed.outcome["check"]["passed"] is False
     assert not failed.outcome["check"]["total_failure"]
     assert sim.projection["purse_01"]["carrier"] == "npc_guard_01"  # nothing moved
@@ -100,8 +99,7 @@ def test_steal_total_failure_everyone_saw(tmp_path: Path) -> None:
     events, _ = run(tmp_path, 2, TAVERN_STEPS + [
         {"intent": "steal", "target": "npc_guard_01"},
     ])
-    failed = events[-1]
-    assert failed.type == "pickpocket_failed"
+    failed = next(e for e in events if e.type == "pickpocket_failed")
     assert failed.outcome["check"]["total_failure"] is True
     saw = {r.who for r in failed.knowledge if r.knows == "figure_reaching_for_purse"}
     assert saw == {"npc_guard_01", "npc_barkeep_01", "npc_drunk_01", "npc_maid_01"}
@@ -111,7 +109,7 @@ def test_talk_both_parties_remember(tmp_path: Path) -> None:
     events, _ = run(tmp_path, 42, TAVERN_STEPS + [
         {"intent": "talk", "target": "npc_barkeep_01"},
     ])
-    talk = events[-1]
+    talk = next(e for e in events if e.type == "talk")
     assert talk.type == "talk"
     records = {(r.who, r.knows) for r in talk.knowledge}
     assert records == {
@@ -119,6 +117,12 @@ def test_talk_both_parties_remember(tmp_path: Path) -> None:
         ("npc_barkeep_01", "conversation_with_pc_01"),
     }
     assert all(r.channel == "told" and r.fidelity == "exact" for r in talk.knowledge)
+    # iter-3: the telling reaction follows — the barkeep shares his most
+    # salient fact (the sighting record born on the move)
+    telling = [e for e in events if e.type == "rumor_told"]
+    assert len(telling) == 1
+    assert telling[0].actor == "npc_barkeep_01" and telling[0].target == "pc_01"
+    assert telling[0].cause == talk.id
 
 
 def test_talk_rebuffed_branch(tmp_path: Path) -> None:

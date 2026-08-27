@@ -60,9 +60,15 @@
         {"noun": "target", "test": "adjacent_to", "with": "actor"}
       ],
       "fields": [],
-      "knowledge": {"success": [], "failure": []},
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_left_toward_{target}"},
+          {"who": "destination_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_arrived"}
+        ],
+        "failure": []
+      },
       "hooks": {"success": [], "failure": []},
-      "notes": "movement along the location graph (entities.json exits); carried items move with the carrier; observers' sighting records arrive with the perception system (iter-3)"
+      "notes": "movement along the location graph (entities.json exits); carried items move with the carrier; origin observers see the departure, destination observers the arrival — the movement sighting records (iter-3, position_visibility.sight: same-location only, never through exits)"
     },
     {
       "intent": "talk",
@@ -273,14 +279,15 @@
       "fields": [],
       "knowledge": {
         "success": [
-          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_fled_toward_{target}"}
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_fled_toward_{target}"},
+          {"who": "destination_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_arrived_fleeing"}
         ],
         "failure": [
           {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "exact", "knows": "{actor}_caught_fleeing"}
         ]
       },
       "hooks": {"success": [], "failure": []},
-      "notes": "exit under pursuit: opposed evasion vs the best pursuit skill present; no potential pursuer → automatic; guards' chase knowledge deepens with the crime system (iter-3)"
+      "notes": "exit under pursuit: opposed evasion vs the best pursuit skill present; no potential pursuer → automatic; guards' chase knowledge deepens with the crime system (iter-3): pursuers at the destination see exactly where the runner went"
     }
   ]
 }
