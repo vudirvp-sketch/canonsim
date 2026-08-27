@@ -1,12 +1,20 @@
-"""T1 — determinism (minimal iter-1 form, MVP_SCOPE §14).
+"""T1 — determinism (full iter-6 form, MVP_SCOPE §14, phase0 §6, TEST_PLAN
+§1.1).
 
 Same seed + same playscript + same environment = byte-identical logs, plus
 RngBank fingerprint equality (the substantive draw count, RNG-1). The
 committed golden fixture (`tests/fixtures/plumbing_smoke_seed42.jsonl`) is
 compared byte-for-byte against a fresh run — a divergence with unchanged
-schema_version is a failure. The fixture-regeneration guard (fresh tmp
-regeneration diff) lands with the full T1 at iter-6
-(`docs/blueprint/phase0.md` §6).
+schema_version is a failure.
+
+The iter-6 fixture-regeneration guard (`TEST_PLAN.md` §1.1): T1 executes
+twice — (1) byte-identity of two fresh runs against each other; (2) a
+fresh regeneration into a tmp dir diffed against the committed fixtures
+AND a schema_version pin (the committed fixture's header schema_version
+must equal the version derived from the current
+`schemas/event.schema.json` `$id`). A schema bump without a fixture
+regen fails here loudly — the §3 migration procedure is forced, not
+punted.
 """
 
 from __future__ import annotations
@@ -44,6 +52,46 @@ def test_fresh_run_matches_committed_golden(tmp_path: Path) -> None:
     fresh, fingerprint = run(tmp_path, "fresh.jsonl")
     assert fresh == GOLDEN.read_bytes()
     assert fingerprint == 4  # four drawn move durations in the fixture
+
+
+# -- iter-6: the fixture-regeneration guard (TEST_PLAN §1.1) -----------------
+
+
+def _current_schema_version() -> str:
+    """The version derived from the current schema `$id` (D-010 — the
+    schema file is the single version owner)."""
+    schema_id = SCHEMA.get("$id", "")
+    assert "/" in schema_id, f"schema $id must look like 'canonsim/event/<ver>', got {schema_id!r}"
+    return schema_id.rsplit("/", 1)[-1]
+
+
+def test_committed_fixture_schema_version_matches_current_schema() -> None:
+    """The committed fixture's header `schema_version` must equal the
+    version derived from the current `schemas/event.schema.json` `$id`.
+    A schema bump that didn't regenerate the fixture fails here loudly."""
+    header_line = GOLDEN.read_text(encoding="utf-8").splitlines()[0]
+    header = json.loads(header_line)
+    assert header["schema_version"] == _current_schema_version(), (
+        f"committed fixture schema_version={header['schema_version']!r} "
+        f"!= current schema $id version={_current_schema_version()!r} — "
+        f"regenerate the fixture (TEST_PLAN.md §3) and commit it with the "
+        f"schema change in the same iteration"
+    )
+
+
+def test_fresh_regeneration_byte_diff_against_committed(tmp_path: Path) -> None:
+    """The full fixture-regeneration guard (TEST_PLAN §1.1 step 2): a
+    fresh run regenerates the fixture into a tmp dir; the bytes must
+    match the committed fixture byte-for-byte. This is the existing
+    `test_fresh_run_matches_committed_golden` test made explicit + named
+    for the gate."""
+    fresh, _ = run(tmp_path, "regen.jsonl")
+    committed = GOLDEN.read_bytes()
+    assert fresh == committed, (
+        "fixture regeneration diverged from the committed fixture — a "
+        "behavior change altered emitted bytes; regenerate the fixture "
+        "(TEST_PLAN.md §3) and commit it with the code change"
+    )
 
 
 def test_different_seed_diverges(tmp_path: Path) -> None:

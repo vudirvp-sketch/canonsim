@@ -237,5 +237,43 @@
     },
     "thresholds": {"medium": 2, "high": 4},
     "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks → low/medium/high; never by feel. Mapping thresholds are v0.1 defaults"
+  },
+
+  "metrics": {
+    "system_of_type": {
+      "wait": ["time"],
+      "move": ["position_visibility"],
+      "look_around": ["position_visibility", "knowledge"],
+      "examine": ["position_visibility", "knowledge"],
+      "examine_failed": ["position_visibility", "knowledge"],
+      "talk": ["relations", "knowledge"],
+      "talk_rebuffed": ["relations"],
+      "distract": ["relations"],
+      "distract_ignored": ["relations"],
+      "suspicion_changed": ["relations", "crime_watch"],
+      "steal": ["crime_watch", "position_visibility", "knowledge"],
+      "pickpocket_failed": ["crime_watch", "relations", "knowledge"],
+      "take": ["crime_watch", "position_visibility"],
+      "take_failed": ["crime_watch", "position_visibility"],
+      "drop_break": ["fire", "position_visibility"],
+      "arson": ["fire", "crime_watch"],
+      "fire_started": ["fire"],
+      "fire_spread": ["fire"],
+      "smoke_rising": ["fire", "position_visibility"],
+      "location_burned_out": ["fire"],
+      "alarm_raised": ["fire", "crime_watch"],
+      "use": ["fire", "position_visibility"],
+      "use_failed": ["fire", "position_visibility"],
+      "knowledge_transfer": ["knowledge"],
+      "rumor_told": ["knowledge", "relations"],
+      "expectation_violation": ["knowledge", "crime_watch"],
+      "watch_change": ["crime_watch", "knowledge"],
+      "status_decayed": ["states"],
+      "arrest_attempt": ["crime_watch"],
+      "arrest_resolved": ["crime_watch"],
+      "document_check": ["director", "crime_watch"],
+      "intent_rejected": []
+    },
+    "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction."
   }
 }

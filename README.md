@@ -15,22 +15,23 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 5 — chronicle & CLI landed: the deterministic
-tracery engine (`render/tracery.py`: symbol grammar, ink-shuffle
-ShufflePool with no immediate repeat, modifiers, save/restore,
-conditional text — cosmetic stream only) and the chronicle as a pure
-function of the log (`render/chronicle.py`: day headers, the
-importance gate as pack data, scene card, per-entity history views;
-same log = same bytes, verified hash-seed independent). The play
-interface (`python -m cli`) offers batch `play` / `chronicle` /
-`state` / `replay` plus an interactive session (`look`, `wait N`,
-`directors on|off`, `seed`) — `look` and `wait` go through the same
-intent front door as playscript steps, and a step-by-step session
-produces byte-identical logs to the batch run. KI#21 closed (draft
-templates drifted from the iter-3 event contract — fixed while
-completing the grammar). 264 tests green, ruff clean, golden fixture
-byte-identical. Next: iter-6 · gate (`docs/TASKS.md`) — full T1–T8,
-director-off A/B, M1–M5 metrics, the phase-0 verdict.
+**Phase 0 gate: PASS** (iter-6, 2026-08-28). All `MVP_SCOPE.md` §16
+exit criteria met; no kill-criteria hit. The simulator produces
+facts; the chronicle reads them from the log; the world acts without
+the player (M5 p50=0.77 across 1000 seeds); old events surface later
+via the reaction cascade + watch rotation; losses are permanent (the
+backyard stays destroyed — T4). The gate deliverables: `docs/TEST_PLAN.md`
+(T0–T8 + M1–M5 + gate protocol + UAP crosswalk), `core/metrics.py`
+(M1–M5 + emergent-chain count as pure functions of the log — Mesa
+`DataCollector` inverted), the T1 fixture-regeneration guard
+(schema-version pin + fresh-regen byte diff), `tests/test_t8_ab.py`
+(single-factor A/B: ≥3 emergent chains OFF, director_0000 fires ON,
+seed 125 gate playscript), `scripts/balance_harness.py` (KI#4 close —
+the 1000-sim distribution harness; full table in `output/`). 298 tests
+green, ruff clean, golden fixture byte-identical. Track A frozen at
+phase-0 scope. Next: phase 1 (narrator over the log) — pre-trigger
+spec sketches in `docs/SPECS_BACKLOG.md`. Track B (`bg-1..bg-4`)
+unblocked for parallel LLM-circuit spikes on Dwarf Fortress Legends XML.
 
 ## For AI agents (primary audience)
 
@@ -52,7 +53,8 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2; render + cli landed iter-5) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2; render + cli landed iter-5; `core/metrics.py` landed iter-6) |
+| `scripts/` | persisted generation/analysis scripts (`AGENTS.md` §9 — Script Persistence Rule): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running

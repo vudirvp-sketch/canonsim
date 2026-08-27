@@ -132,22 +132,6 @@ iter-0z · 2026-08-27 · owner-requested quality round (D-031)
   No code; pytest green, ruff clean. 25th docs iteration (owner-requested,
   D-022); **iter-1 code is next, unconditionally**.
 ---
-iter-0y · 2026-08-27 · owner-requested content-principles pass (D-030)
-- D-030: darkness = architecture, not content scripts — `tavern_pack` v0.1
-  unchanged; tone = data asymmetry (price markers, irreversibility,
-  per-NPC rumor damage, D-006 held); grim/romance line = post-gate
-  `pack-1` candidate (TASKS infra backlog) + PACK_SPEC sketch clauses;
-  consent/coercion = crafted records (D-008 pattern). Core corollary for
-  iter-1..3: axis-blind (pack-declared axes/statuses/event vocabulary).
-- 6 files touched — over the 3–5 soft limit: 2 targets (DECISIONS,
-  SPECS_BACKLOG) + the mandated sync set (STATUS, worklog, TASKS, README
-  status drift — same pattern as 0w/0x). KI#7/KI#8 deleted (closed >2
-  iterations); external LLM romance-pack proposal evaluated in chat, verdict
-  distilled into D-030 (insight kept, scope creep fenced off). No code;
-  pytest green, ruff clean. 24th docs iteration (owner-requested, D-022);
-  **iter-1 code is next, unconditionally**.
-
----
 iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
 - render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
   ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
@@ -168,3 +152,36 @@ iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
   Balance observation for KI#4/balance-1: player fatigue is monotonic
   over long waits (no rest action in v0.1) — visible through the
   readable chronicle.
+
+---
+iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
+- docs/TEST_PLAN.md (NEW: trigger-fired spec — T0-T8 formalization,
+  M1-M5 definitions, gate protocol, UAP 7-hole crosswalk, §3 schema-
+  bump migration procedure). core/metrics.py (NEW: M1-M5 + emergent-
+  chain count as pure functions of (events, projection) — Mesa
+  DataCollector inverted; system classification is pack data at
+  rules.json::metrics.system_of_type). tests/test_metrics.py (NEW, 24
+  tests). tests/test_t1_determinism.py EXTENDED with the iter-6
+  fixture-regeneration guard (schema_version pin + fresh regen byte
+  diff). tests/playscripts/day1_full.json (NEW gate playscript, seed
+  125). tests/test_t8_ab.py (NEW: single-factor A/B, ≥3 emergent
+  chains OFF, director_0000 ON, M5 non-zero OFF, M3 mean ≥2 both).
+  scripts/balance_harness.py (NEW: KI#4 close — 1000-sim distribution
+  harness; outputs to output/balance_<N>_seed<S>_<on|off>.txt). Pack
+  data: rules.json gained metrics.system_of_type. 11 files — over the
+  3-5 soft limit; the task mandated it (T1+T8+metrics+harness+spec
+  +sync). D-042/D-043/D-044 recorded.
+- Tests 264→298 green (+34); ruff clean; golden fixture byte-identical.
+  T7 manual playtest (this entry): the day1_full chronicle reads as a
+  story — enter tavern → take lamp → fail 2 steals → succeed → watch
+  rotation → knowledge transfer to relief guard → wait → arson → fire
+  chain → second rotation back to Doren → drift → Day 2. The noise floor
+  is high (15 status_decayed + 4 urgencies 'wait' on a 48-event log);
+  tale_gate.min_importance="medium" is too sparse (only 4 events —
+  fire_chain + pickpocket_failed — survive). Verdict: the gate stays
+  at "low"; the first iter-7+ tuning knob is the IMPORTANCE RULE
+  itself (give story-critical events hooks, not the gate threshold).
+  Balance baseline (1000 seeds): M5 p50=0.77, emergent_chains p50=20,
+  M3_mean p50=13.81, M1 p50=0.24 — see output/balance_1000_seed100_off.
+  Phase-0 verdict: PASS (all §16 exit criteria met; no kill-criteria
+  hit). KI#4 closed (balance harness delivered). Track A frozen.

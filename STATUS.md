@@ -1,31 +1,38 @@
 # STATUS — canonsim
 
-Iteration: 5 (`iter-5-chronicle-cli`) · Phase: 0 — simulator without
-LLM · Date: 2026-08-28
+Iteration: 6 (`iter-6-gate`) · Phase: 0 — simulator without LLM ·
+Date: 2026-08-28 · **Phase-0 gate: PASS** (deferred: bg-1..bg-4, pack-1,
+`doc-1` VISION review — all explicitly post-gate per `ROADMAP.md` §2).
 
-The chronicle & CLI iteration (`docs/blueprint/phase0.md` §5,
-`MVP_SCOPE.md` §12): `render/tracery.py` — the deterministic tracery
-engine (CHRON-1: JSON symbol table with nested `#symbol#` expansion,
-dot-notation hierarchies, `.a`/`.capitalize`/`.upper`/`.lower`
-modifiers, `[key:value]` save/restore, ink-style `{cond?a|b}`
-conditional text; ink-shuffle `ShufflePool` per symbol — candidates =
-`sorted(alternatives)` minus the last pick, seeded cosmetic draw, no
-immediate repeat). `render/chronicle.py` — the tale as a PURE FUNCTION
-of the log: every entry point builds a fresh `RngBank` from the
-log-header seed + fresh pools, so the same log always renders the same
-bytes (T1 covers the chronicle; hash-seed independent, verified);
-day headers via the pack clock; the importance gate is pack data
-(`tale_gate.min_importance`, v0.1 "low" — the iter-6 T7 playtest owns
-the tuning); scene card; UNGATED per-entity history views; replay
-report = read + fold. `cli/main.py` — the play interface: batch
-`play` / `chronicle` / `state` / `replay` subcommands + the interactive
-session (`look` / `wait N` through the same intent front door,
-`directors on|off` swaps the live policy, `seed <n>` restarts into a
-new log). `core/loop.py` factored into `open()` / `run_steps()` /
-`close()` — a step-by-step session produces BYTE-IDENTICAL logs to the
-batch run (tested); `policy_from_rules` single-owns the entropy-floor
-read. `templates.json` completed into the grammar (KI#21). 264 tests
-green (+39), ruff clean, golden fixture byte-identical.
+The gate iteration (`docs/blueprint/phase0.md` §6, `TEST_PLAN.md`,
+`MVP_SCOPE.md` §16): `docs/TEST_PLAN.md` — the trigger-fired spec
+(T0–T8 formalization + M1–M5 definitions + the gate protocol + the
+UAP 7-hole crosswalk + the §3 schema-bump migration procedure).
+`core/metrics.py` — M1–M5 + the emergent-chain count as PURE
+FUNCTIONS of `(events, projection)` (Mesa `DataCollector` inverted:
+the simulator emits, the metric reads; the simulator never knows a
+metric exists — L3 derive-never-store). System classification is pack
+data (`rules.json::metrics.system_of_type` — INV-3: system names are
+MVP_SCOPE §5 mechanic words, not setting nouns). `tests/test_metrics.py`
+— 24 unit tests covering M1–M5 + the emergent-chain walk (the
+director-injected link breaks the chain; the world-actor-only root
+excludes the chain; the player-seeded world fire IS emergent).
+`tests/test_t1_determinism.py` extended with the iter-6 fixture-
+regeneration guard (TEST_PLAN §1.1): two new tests pin (a) the
+committed fixture's header `schema_version` equals the current
+`schemas/event.schema.json` `$id` version, and (b) a fresh regeneration
+into tmp diffed byte-by-byte against the committed fixture. A schema
+bump without a fixture regen fails here loudly. `tests/playscripts/
+day1_full.json` — the T8 gate playscript (seed 125: take → 2 steals
+→ wait 720 → move backyard → drop_break → wait 720). `tests/test_t8_ab.py`
+— single-factor A/B (only the director flag changes), ≥3 emergent
+chains OFF (baseline 26), director_0000 fires ON, M5 non-zero OFF,
+M3 mean ≥2 both runs. `scripts/balance_harness.py` — KI#4 close: the
+1000-sim distribution harness (`scripts/` per AGENTS §9); outputs a
+metrics + suspicion-peaks + destroyed-locations table to
+`output/balance_<N>_seed<S>_<on|off>.txt` (gitignored runtime
+artifact; reproducible from the seed range). 298 tests green (+34),
+ruff clean, golden fixture byte-identical.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -46,20 +53,21 @@ green (+39), ruff clean, golden fixture byte-identical.
 
 ## Active KIs
 
-- KI#4 · balance harness (1000-sim distribution plots of `suspicion` /
-  `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no
-  tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded
-  into the iter-6 verification stack (`docs/blueprint/phase0.md` §6). First
-  balance observation from iter-2: with v0.1 numbers, environment checks at
-  difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20)
-  — talk/examine/use/distract never fail as shipped; the failure branches
-  are mechanism-tested via a crafted high-difficulty pack copy. Retuning is
-  pack data, validated by `balance-1`. iter-4 observation: the v0.1 urgency
-  probabilities (40/25/15) over the 3-beat-per-day cycle produce non-PC
-  share ~5–15% per run (probe estimate; iter-6 M5 measures formally).
-  iter-5 observation (first seen through the readable chronicle): player
-  fatigue is monotonic over long waits — v0.1 has no rest action, so
-  decay-only growth accumulates across days.
+- KI#4 · balance harness — CLOSED iter-6: `scripts/balance_harness.py`
+  runs the gate playscript 1000× across seeds 100–1099 (director off),
+  folds each log through `core/metrics.py`, emits a distribution table for
+  M1–M5 + emergent_chains + suspicion peaks per NPC + destroyed-locations.
+  Baseline numbers (the iter-6 verdict evidence, full table in
+  `output/balance_1000_seed100_off.txt`): M5 p50=0.77 (world not
+  player-centered — strong pass); emergent_chains p50=20 (gate ≥3
+  easily met); M3_mean p50=13.81 (depth ≥2 kill-criterion met); M1
+  p50=0.24 (non-trivial). The three iter-2/4/5 observations now have
+  numbers: (a) v0.1 environment checks CAN auto-succeed at low difficulty
+  (the take-after-steal failure on seed 32 is the counterexample); (b)
+  non-PC share is 73–83% across 1000 seeds (formally M5); (c) player
+  fatigue IS monotonic (no rest action — pack data issue, not a code
+  bug; first rest-action candidate lands in iter-7+ as `pack-2`-style
+  pack data, NOT a core change).
 - KI#21 · draft templates drifted from the shipped event contract
   (iter-5 found+fixed) — CLOSED iter-5: `suspicion_changed` had
   actor/target inverted (the iter-3 reaction events carry actor=watcher,
@@ -302,15 +310,93 @@ green (+39), ruff clean, golden fixture byte-identical.
   entropy-floor read). Between commands the clock stands still:
   beats/rotations fire on crossings during entry processing, exactly
   as in batch.
+- **The metric is a pure function of the log (iter-6 law, M1–M5).**
+  `core/metrics.py` reads `(events, projection)`; the simulator
+  emits, the metric reads, the simulator never knows a metric exists
+  (L3 derive-never-store — Mesa `DataCollector` inverted). M1
+  cross-system share reads the pack's `metrics.system_of_type` table
+  + the state-change prop-prefix map (mechanic vocabulary, FAQ note
+  in INV-3 — system names are MVP_SCOPE §5 mechanic words). M2
+  released-to-seeded ratio on the ON run; the OFF run is 0 by
+  construction (D-005 hygiene — the OFF run is "no releases", not
+  "no director"). M3 walks `cause` links to null; depth is the chain
+  length. M4 counts repeated `(type, actor)` bigrams + distinct
+  `knows` token share (RimWorld's repetitive-tale problem,
+  measured). M5 non-PC event share on the OFF run. The emergent-chain
+  count walks `cause` links back to a player event through a non-PC,
+  non-director tail of length ≥ 2 — a director-injected link breaks
+  the walk (the director is causally upstream; this is not emergent),
+  a world-actor-only root (no player upstream) excludes the chain,
+  a player-seeded world fire IS emergent (the player dropped the
+  lamp; the world ignited it).
+- **The fixture-regeneration guard is the iter-6 T1 discipline
+  (TEST_PLAN §1.1).** Two tests pin the contract: (a) the committed
+  fixture's header `schema_version` equals the current
+  `schemas/event.schema.json` `$id` version — a schema bump without a
+  fixture regen fails here loudly; (b) a fresh run regenerates the
+  fixture into tmp, diffed byte-by-byte against the committed file —
+  a behavior change that altered emitted bytes fails here. The §3
+  migration procedure (regenerate fixtures + commit them with the
+  schema change in the SAME iteration + a migration note in
+  `EVENT_SCHEMA.md` §8) is forced, never punted. A breaking schema
+  change without fixture regen is the loud failure the guard is
+  designed to catch — the alternative is silent drift between the
+  schema, the committed fixtures, and the runtime.
+- **The T8 single-factor A/B (iter-6 law, live-char one-change rule).**
+  The gate runs the same playscript (`tests/playscripts/day1_full.json`,
+  seed 125) with only the director flag changed between runs: ON
+  fires `director_0000` (the document-check release when Doren's
+  suspicion crosses 50 via the inference at watch rotation), OFF
+  fires zero director releases but seeds the same hooks (D-005
+  hygiene — the OFF run is "no releases", not "no director"). The
+  OFF run produces ≥3 emergent chains (baseline 26); the gate
+  minimum is 3 (a regression that drops emergence below the
+  threshold fails loudly — investigate urgency / rotation /
+  crime-reaction regressions). The ON and OFF logs are byte-different
+  (the director's release leaves a trace — the positive complement
+  to T1: same script + same seed, different policy → different
+  canon).
+- **The balance harness is a script, not a test (iter-6 law, KI#4
+  close).** `scripts/balance_harness.py` (committed; `output/*.txt`
+  gitignored runtime artifact, reproducible from the seed range):
+  runs the gate playscript 1000× across seeds 100–1099 (director
+  off — the T8 baseline), folds each log through `core/metrics.py`,
+  emits a distribution table for M1–M5 + emergent_chains + suspicion
+  peaks per NPC + destroyed-locations. The kill-criteria in
+  `MVP_SCOPE.md` §16 ("Events without consequences", "Knowledge does
+  not affect behavior", "The director produces noise instead of
+  causal complications") are operationalized as M3 mean ≥ 2, M1
+  non-trivial, M2 non-zero — directionality first (D-019), numbers
+  from data. The harness is NOT in pytest because a 1000-sim sweep
+  would dominate the suite's runtime; the gate playscript's
+  `tests/test_t8_ab.py` runs the SINGLE seed (125) and asserts the
+  gate minimum (≥3 emergent chains).
 
 ## Next step
 
-**iter-6 · gate** (`docs/TASKS.md`): full T1–T8 (T1 with the
-fixture-regeneration guard — `docs/blueprint/phase0.md` §6),
-director-off A/B on identical seed + playscript, M1–M5 metric report
-from the measured baseline, manual playtest (T7 runs on the iter-5
-chronicle output — `tale_gate.min_importance` is the first tuning
-knob if the playtest finds noise), phase-0 verdict in `worklog.md`.
-The chronicle is readable end-to-end now:
-`python -m cli play tests/playscripts/day1_theft_and_arson.json`;
-`balance-1` feeds the M-baselines (KI#4).
+**Phase-0 gate: PASS** (verdict in `worklog.md` iter-6 entry). The
+simulator produces facts; the chronicle reads them from the log; the
+world acts without the player; old events surface later via the
+reaction cascade + watch rotation; losses are permanent (the backyard
+stays destroyed). Track A is feature-frozen at phase-0 scope.
+
+**Track B (background) is now unblocked** for parallel LLM-circuit
+spikes on foreign canon: `bg-1` (DF export pipeline), `bg-2` (event
+taxonomy), `bg-3` (briefer spike), `bg-4` (cost notes). None of
+these block track A — they exercise the briefer/validator/renderer
+on Dwarf Fortress Legends XML so the phase-1 narrator arrives with
+real data, not speculation.
+
+**Phase 1 (narrator over the log)** is the next track-A work; the
+phase-0 gate must pass first (`ROADMAP.md` §2 — it has). The
+pre-trigger `BRIEF_SPEC.md` / `VALIDATION_SPEC.md` sketches in
+`SPECS_BACKLOG.md` are the design surface; they fire AT phase 1
+start, not before (`SPECS_BACKLOG.md` header rule). The
+`PACK_SPEC.md` trigger stays at phase 6 / 2nd setting (`pack-1` in
+the infra backlog is the grim/romance tavern pack candidate).
+
+Post-gate housekeeping deferred to the phase-1 intake (none block
+phase 0): `doc-1` VISION freeze review; the rest-action candidate
+(`pack-2`-style pack data); `qa-1` mypy (owner-gated; dev tooling is
+capped at pytest + ruff per AGENTS §8/§10, D-031); `ci-1` GitHub
+Actions; `perf-1` 10k-tick timing profile.

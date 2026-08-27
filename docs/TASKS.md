@@ -9,22 +9,12 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-6 · gate — todo (next)
+### iter-6 · gate — done (phase-0 verdict: PASS)
 
-- Full T1–T8 (T1 with the fixture-regeneration guard —
-  `docs/blueprint/phase0.md` §6); director-off A/B on identical seed +
-  playscript; M1–M5 metric report (thresholds set from baseline); manual
-  playtest; phase-0 verdict in `worklog.md`.
-- **M3 causal chain length** (D-019, P1b): mean/median depth of the `cause`
-  chain per event, from the log alone.
-- **M4 novelty/repetition** (D-019, P1c): rate of repeated (type, actor)
-  bigrams; share of distinct `knows` tokens. RimWorld's repetitive-tale
-  problem, measured.
-- **M5 non-PC event share** (D-019, P1d): events with actor ≠ player /
-  all events. "World not player-centered" (Kenshi/RimWorld lesson) made
-  measurable at the director-off gate.
-- AC: exit criteria `MVP_SCOPE.md` §16 all hold — or kill-criteria documented
-  honestly.
+Phase-0 gate closed; full evidence in `worklog.md` iter-6 + the
+`docs/TEST_PLAN.md` spec. Track A is feature-frozen at phase-0 scope;
+the next track-A work is phase 1 (narrator over the log) per
+`docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
 
@@ -70,11 +60,15 @@
   The type-discipline values are law from iter-1 via
   `docs/blueprint/phase0.md` §1; the tool is optional).
 - `perf-1` 10k-tick timing profile (target: seconds, not minutes).
-- `balance-1` 1000-headless-sim distribution harness: playscript runner with
-  sampled intents (seed-varied) → distribution plots of `suspicion` and
-  `fire_spread` over ticks. Validates that `rules.json` thresholds are tuned,
-  not guessed. Uses T1-determinism, no new infra. Prerequisite for iter-6
-  M-baseline (KI#4).
+- `balance-1` 1000-headless-sim distribution harness — DONE iter-6:
+  `scripts/balance_harness.py` runs the gate playscript 1000× across
+  seeds 100–1099 (director off), folds each log through
+  `core/metrics.py`, emits a distribution table for M1–M5 +
+  emergent_chains + suspicion peaks per NPC + destroyed-locations.
+  Baseline (1000 seeds): M5 p50=0.77, emergent_chains p50=20, M3_mean
+  p50=13.81, M1 p50=0.24 — full table at
+  `output/balance_1000_seed100_off.txt` (gitignored runtime artifact;
+  reproducible). KI#4 closed.
 - `doc-1` VISION freeze review after the phase-0 verdict.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
@@ -118,6 +112,15 @@
 
 ## Done
 
+- iter-6 · 2026-08-28 · phase-0 gate: `docs/TEST_PLAN.md` spec (T0–T8 +
+  M1–M5 + gate protocol + UAP crosswalk); `core/metrics.py` (M1–M5 +
+  emergent-chain count as pure functions of the log); T1 fixture-
+  regeneration guard; T8 single-factor A/B (≥3 emergent chains OFF,
+  director_0000 fires ON); `scripts/balance_harness.py` (KI#4 close,
+  1000-sim distribution); `tests/playscripts/day1_full.json` (gate
+  playscript, seed 125). Verdict PASS — all `MVP_SCOPE.md` §16 exit
+  criteria met, no kill-criteria hit. 298 tests green, fixture
+  byte-identical, ruff clean.
 - iter-5 · 2026-08-28 · chronicle & CLI: deterministic tracery engine
   (ShufflePool no-immediate-repeat, modifiers, save/restore, ink
   conditionals — cosmetic stream only) + the chronicle as a pure
