@@ -146,15 +146,25 @@ iter-0y · 2026-08-27 · owner-requested content-principles pass (D-030)
   distilled into D-030 (insight kept, scope creep fenced off). No code;
   pytest green, ruff clean. 24th docs iteration (owner-requested, D-022);
   **iter-1 code is next, unconditionally**.
+
 ---
-iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit
-- Verdict: load-bearing — 4-place chain verified (docs/ref/ → synthesis →
-  blueprint → TASKS/SPECS clauses); ledger-term spot-greps all land in
-  planning docs; INV-2 rewrite (D-028) is the constitutional proof; plan
-  review found no new blockers beyond KI#3/4/5. Caveats: no code yet
-  (iter-1 = the proof point); P2c owner-pending; rules.json flat stagnation
-  timer → narrative entropy at iter-4 (phase0 §4). FAQ: ref-graveyard grep
-  diagnostic.
-- 4 files touched (STATUS, worklog, TASKS, README). No code; pytest green,
-  ruff clean. 23rd docs iteration (owner-requested, D-022); **iter-1 code is
-  next, unconditionally**.
+iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
+- render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
+  ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
+  stream) + render/chronicle.py (tale = pure function of the log: fresh
+  bank from the header seed per pass, day headers, importance gate,
+  scene card, ungated entity views) + cli/main.py + __main__.py (batch
+  play/chronicle/state/replay + interactive session: look, wait N,
+  directors on|off, seed). core/loop.py → open/run_steps/close
+  (session == batch bytes, tested); policy_from_rules owns the entropy
+  floor. templates.json completed into the grammar; KI#21 closed
+  (draft-template drift: inverted suspicion line, '[' collision, steal
+  object); display names gained articles (pack data). 12 files —
+  task-mandated module set + sync set.
+- Tests 225→264 green (+39: tracery units incl. cosmetic-audit + cycle
+  guard, chronicle gate/prefix-stability/T1-chronicle, CLI batch +
+  session + directors A/B on seed 32); ruff clean; golden fixture
+  byte-identical; chronicle verified PYTHONHASHSEED-independent.
+  Balance observation for KI#4/balance-1: player fatigue is monotonic
+  over long waits (no rest action in v0.1) — visible through the
+  readable chronicle.

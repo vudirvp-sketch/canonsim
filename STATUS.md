@@ -1,33 +1,31 @@
 # STATUS — canonsim
 
-Iteration: 4a (`iter-4a-code-audit`) · Phase: 0 — simulator without
+Iteration: 5 (`iter-5-chronicle-cli`) · Phase: 0 — simulator without
 LLM · Date: 2026-08-28
 
-The owner-requested code audit of iter-3/iter-4 (the iter-2a pattern:
-full read of the changed core + tests + pack vs the doc owners, then
-probe-driven hunting — seed sweeps over day1 (60 seeds × director
-on/off), T1 double-runs on beat-crossing scenarios, T2 fold checks,
-crafted unit records; 124 runs, zero crashes/desyncs — determinism and
-event sourcing held). Four KIs found and fixed: KI#17 — an autonomous
-(urgency/director) intent's completion or door rejection fed the NEXT
-player playscript step (the runner fed steps on ANY completion, an
-iter-1 assumption iter-4's queue-riding NPC intents silently broke —
-step 3 committed before step 2's event); fix: the feed gates on the
-entry's actor being the player. KI#18 — the crime-status flip guarded
-only `!= suspect`, so a caught (irreversible, T4) suspect downgraded
-back to suspect on a later watcher's novel token; fix: the flip checks
-the pack's ordered `status_values` progression. KI#19 —
-`states.reset_on_rotation` was declared in the pack and promised by
-the states.py docstring but implemented nowhere; fix: flagged axes
-reset to 0 for the watch participants on the watch_change event, and
-the decay baseline became per-axis last-change-by-any-committer (a
-rotation-fresh NPC gains no fatigue for pre-reset ticks). KI#20 —
-dead pack keys removed (crime_watch.document_check flat-timer remnant,
-document_check_at mirror, states.fear.spike_on_alarm duplicate) —
-single owners stay (director hook trigger value; transitions alarm
-fear_spike). 225 tests green (+6 regressions), ruff clean, golden
-fixture byte-identical. D-041 records the audit laws; KI#13–16
-deleted (closed iter-2a, >2 iterations).
+The chronicle & CLI iteration (`docs/blueprint/phase0.md` §5,
+`MVP_SCOPE.md` §12): `render/tracery.py` — the deterministic tracery
+engine (CHRON-1: JSON symbol table with nested `#symbol#` expansion,
+dot-notation hierarchies, `.a`/`.capitalize`/`.upper`/`.lower`
+modifiers, `[key:value]` save/restore, ink-style `{cond?a|b}`
+conditional text; ink-shuffle `ShufflePool` per symbol — candidates =
+`sorted(alternatives)` minus the last pick, seeded cosmetic draw, no
+immediate repeat). `render/chronicle.py` — the tale as a PURE FUNCTION
+of the log: every entry point builds a fresh `RngBank` from the
+log-header seed + fresh pools, so the same log always renders the same
+bytes (T1 covers the chronicle; hash-seed independent, verified);
+day headers via the pack clock; the importance gate is pack data
+(`tale_gate.min_importance`, v0.1 "low" — the iter-6 T7 playtest owns
+the tuning); scene card; UNGATED per-entity history views; replay
+report = read + fold. `cli/main.py` — the play interface: batch
+`play` / `chronicle` / `state` / `replay` subcommands + the interactive
+session (`look` / `wait N` through the same intent front door,
+`directors on|off` swaps the live policy, `seed <n>` restarts into a
+new log). `core/loop.py` factored into `open()` / `run_steps()` /
+`close()` — a step-by-step session produces BYTE-IDENTICAL logs to the
+batch run (tested); `policy_from_rules` single-owns the entropy-floor
+read. `templates.json` completed into the grammar (KI#21). 264 tests
+green (+39), ruff clean, golden fixture byte-identical.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -58,8 +56,19 @@ deleted (closed iter-2a, >2 iterations).
   are mechanism-tested via a crafted high-difficulty pack copy. Retuning is
   pack data, validated by `balance-1`. iter-4 observation: the v0.1 urgency
   probabilities (40/25/15) over the 3-beat-per-day cycle produce non-PC
-  share ~5–15% per run (probe-driven estimate; the iter-6 M5 baseline will
-  measure it formally).
+  share ~5–15% per run (probe estimate; iter-6 M5 measures formally).
+  iter-5 observation (first seen through the readable chronicle): player
+  fatigue is monotonic over long waits — v0.1 has no rest action, so
+  decay-only growth accumulates across days.
+- KI#21 · draft templates drifted from the shipped event contract
+  (iter-5 found+fixed) — CLOSED iter-5: `suspicion_changed` had
+  actor/target inverted (the iter-3 reaction events carry actor=watcher,
+  target=suspect; the iter-0c draft assumed the opposite); the fallback
+  line used `[` as decoration — a collision with tracery's `[key:value]`
+  save syntax (now `(t {t})`); the steal line named the victim, not the
+  stolen object (`{stolen}` = outcome.stolen). Fixed as pack data while
+  completing the templates; no renderer existed before iter-5, so no
+  output ever showed the wrong lines.
 - KI#17 · autonomous intents advanced the playscript (iter-4a found+fixed)
   — CLOSED iter-4a: `_feed_next` fired after ANY intent rejection or
   completion, including urgency/director NPC entries (an iter-1 assumption
@@ -222,16 +231,14 @@ deleted (closed iter-2a, >2 iterations).
   are absorbed, not filed — no `docs/ARCHITECTURE.md` /
   `TYPE_DISCIPLINE.md` / `TESTING_PHILOSOPHY.md` will be created (the
   D-018 pattern); a new canonical layer is the named anti-pattern.
-- **Zip upload loses dotfiles and empty dirs.** "Add files via upload" on GitHub
-  dropped `.gitignore` (and every dir without tracked files). After any future
-  upload: verify `.gitignore` exists and `git status --short` shows no runtime
-  artifacts (KI#1).
-- **Workspace files ≠ tracked files.** `git status --short` shows changes
-  *vs HEAD*, not what is *in HEAD* — a file present in your working directory
-  may not be committed at all. After any structural change, run
-  `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
-  actually tracked. This is the diagnostic for KI#1-class losses and for
-  "the file exists but tests can't find it" surprises.
+- **GitHub upload / git hygiene (the KI#1 family).** "Add files via
+  upload" on GitHub drops `.gitignore` and every dir without tracked
+  files; after any upload, verify `.gitignore` exists. And
+  `git status --short` shows changes *vs HEAD*, not what is *in HEAD* —
+  a file in the working directory may not be committed at all. After
+  any structural change, run `git ls-files <path>` to confirm what is
+  actually tracked (the diagnostic for KI#1-class losses and "the file
+  exists but tests can't find it" surprises).
 - **Content/tone questions → D-030 + the `PACK_SPEC.md` sketch row.** The
   start pack for phase 0 is `tavern_pack` v0.1 as scoped (`MVP_SCOPE.md`
   §4–§7 own the counts); tone is data asymmetry inside the existing systems,
@@ -242,8 +249,8 @@ deleted (closed iter-2a, >2 iterations).
 - **Doc-loop alarm vs owner-requested research.** Twenty-six docs iterations
   in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
-  owner request. iter-0aa was the twenty-sixth; iter-1..4 are code (no doc
-  pass since iter-0aa); the alarm does not fire on code iterations.
+  owner request. iter-0aa was the twenty-sixth (and last); iter-1..5 are
+  code — the alarm does not fire on code iterations.
 - **Four places, four jobs (D-027).** `docs/REFERENCES.md` catalogs sources
   (license, URL, phase gating); `docs/CORE_DESIGN_RESEARCH.md` §2 carries
   the one-line synthesis per source; `docs/ref/<source>.md` carries the
@@ -251,13 +258,15 @@ deleted (closed iter-2a, >2 iterations).
   cross-reference resolutions and donor combinations per build component.
   Drift rule: link, never restate; cite ledger row IDs (e.g. "per RNG-1")
   instead of re-deriving a resolution.
-- **Pre-D-028 RNG wording in `docs/ref/*` and `REFERENCES_DEEP.md` is
-  historical evidence, not prescription.** Several ref files quote
-  "INV-2: one `random.Random(seed)` instance" as it read at deep-dive
-  time. Do not "fix" those — they document what the donor comparison was
-  made against. The single reading owner of INV-2 is `AGENTS.md` §4
-  (D-028); anything prescriptive points there (same pattern as the KI#6
-  license-drift rule: catalog is the owner, index rows can lag).
+- **Copy-vs-owner drift is evidence, not prescription.** Pre-D-028 RNG
+  wording ("one `random.Random(seed)` instance") quoted in `docs/ref/*`
+  is HISTORICAL — it documents what the donor comparison was made
+  against; the reading owner of INV-2 is `AGENTS.md` §4 (D-028). Same
+  pattern for licenses: the `REFERENCES_DEEP.md` §2 index is NOT the
+  source of truth — `REFERENCES.md` (the catalog) is; before flipping
+  any ref-N row todo→done, verify the license column against the
+  catalog. Verify with `git log -S "<phrase>"` before "fixing" what
+  looks like history (KI#6 pattern).
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap is
   600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, real field lists, type enumerations, per-source
@@ -271,23 +280,37 @@ deleted (closed iter-2a, >2 iterations).
   doc; the concrete mechanics stay owned by `docs/ref/` by design (link,
   never restate — D-027). Verified iter-0x; re-run at the phase-0 gate
   review.
-- **License drift between catalog and index (KI#6, closed iter-0n; pitfall
-  persists).** The `REFERENCES_DEEP.md` §2 index table is **not** the source
-  of truth for licenses — `REFERENCES.md` (the catalog) is. Diagnostic:
-  before flipping any ref-N row todo→done, grep the source row in
-  `REFERENCES.md` and verify the license column matches the index entry.
+- **The render pass is a pure function of the log (iter-5 law, CHRON-1).**
+  Every render entry point (chronicle / scene card / entity view) builds
+  a fresh `RngBank` seeded from the LOG HEADER's seed plus fresh
+  `ShufflePool`s — the same log renders the same bytes in any process,
+  any call order, any `PYTHONHASHSEED` (verified). Within one chronicle
+  pass the pools advance line by line, so a growing log keeps its
+  rendered prefix identical — the session delta-print contract rides on
+  this. Templates own the words: `[` is tracery save syntax
+  (`[key:value]`), literal brackets in template text are impossible by
+  law (ticks in prose use `(t N)`); the renderer writes nothing to the
+  log (INV-1) and draws only cosmetic (RNG-1, audit-tested).
+- **A session is one opened Simulator; the world moves only through the
+  queue it seeds (iter-5 law).** `core/loop.py`'s public doors:
+  `open()` writes the header once; `run_steps()` is a self-contained
+  feed-and-drain cycle, callable repeatedly (the CLI pattern);
+  `close()` ends the run. A step-by-step session and a batch run of
+  the same steps produce byte-identical logs (tested). The seed binds
+  at open — `seed <n>` restarts into a NEW log (INV-5); `directors
+  on|off` swaps the live policy (`policy_from_rules` owns the
+  entropy-floor read). Between commands the clock stands still:
+  beats/rotations fire on crossings during entry processing, exactly
+  as in batch.
 
 ## Next step
 
-**iter-5 · chronicle & CLI** (`docs/TASKS.md`): template chronicle from
-the log (deterministic tracery engine + ink `shuffle` ShufflePool —
-`docs/blueprint/phase0.md` §5); scene card; CLI commands: `play`,
-`look`, `wait`, `chronicle`, `state`, `replay`, `directors on|off`,
-`seed`. AC: playable and readable without LLM. iter-4 left the
-director-off switch on the Simulator (`director_enabled=False`); the
-`directors on|off` CLI command is iter-5's wiring of that switch —
-T8's A/B run lands at iter-6. iter-4a note: the audit is closed —
-determinism, event sourcing and T4 held under 124 probe runs; the
-KIs found were runner/pack-contract bugs, not architecture rot; the
-iter-2a lesson repeats — e2e coverage must exercise the systems
-TOGETHER (beats × rotations × intents), not only in isolation.
+**iter-6 · gate** (`docs/TASKS.md`): full T1–T8 (T1 with the
+fixture-regeneration guard — `docs/blueprint/phase0.md` §6),
+director-off A/B on identical seed + playscript, M1–M5 metric report
+from the measured baseline, manual playtest (T7 runs on the iter-5
+chronicle output — `tale_gate.min_importance` is the first tuning
+knob if the playtest finds noise), phase-0 verdict in `worklog.md`.
+The chronicle is readable end-to-end now:
+`python -m cli play tests/playscripts/day1_theft_and_arson.json`;
+`balance-1` feeds the M-baselines (KI#4).

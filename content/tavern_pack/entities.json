@@ -18,7 +18,7 @@
     },
     {
       "id": "loc_street",
-      "name": "street in front of the tavern",
+      "name": "the street in front of the tavern",
       "role": "escape route, patrol path",
       "exits": ["loc_tavern", "loc_backyard", "loc_guardroom", "loc_market"],
       "flammability": "none",
@@ -27,7 +27,7 @@
     },
     {
       "id": "loc_backyard",
-      "name": "backyard",
+      "name": "the backyard",
       "role": "fire source spot; origin of the 'figure at the back door' rumor",
       "exits": ["loc_tavern", "loc_street"],
       "flammability": "medium",
@@ -36,7 +36,7 @@
     },
     {
       "id": "loc_guardroom",
-      "name": "guard room",
+      "name": "the guard room",
       "role": "watch change → knowledge transfer between guards",
       "exits": ["loc_street"],
       "flammability": "low",
@@ -45,7 +45,7 @@
     },
     {
       "id": "loc_market",
-      "name": "market square",
+      "name": "the market square",
       "role": "the rumor scene (mandatory: this is where hearsay lives)",
       "exits": ["loc_street"],
       "flammability": "none",
@@ -149,7 +149,7 @@
   "items": [
     {
       "id": "oil_lamp_01",
-      "name": "oil lamp",
+      "name": "the oil lamp",
       "position": "loc_tavern",
       "carrier": null,
       "is_fire_source": true,
@@ -159,7 +159,7 @@
     },
     {
       "id": "purse_01",
-      "name": "purse",
+      "name": "the purse",
       "position": "loc_tavern",
       "carrier": "npc_guard_01",
       "is_fire_source": false,
@@ -170,7 +170,7 @@
     },
     {
       "id": "ale_mug_01",
-      "name": "mug of ale",
+      "name": "the mug of ale",
       "position": "loc_tavern",
       "carrier": null,
       "is_fire_source": false,
@@ -181,7 +181,7 @@
     },
     {
       "id": "club_01",
-      "name": "club",
+      "name": "the club",
       "position": "loc_tavern",
       "carrier": "npc_barkeep_01",
       "is_fire_source": false,
@@ -191,7 +191,7 @@
     },
     {
       "id": "rope_01",
-      "name": "rope",
+      "name": "the rope",
       "position": "loc_backyard",
       "carrier": null,
       "is_fire_source": false,

@@ -47,6 +47,7 @@ __all__ = [
     "DisabledPolicy",
     "SeededHook",
     "entropy",
+    "policy_from_rules",
 ]
 
 HOOK_PREFIX: Final = "director"
@@ -117,6 +118,16 @@ class DisabledPolicy:
 
 
 DISABLED: Final = DisabledPolicy()
+
+
+def policy_from_rules(rules: Mapping[str, Any], enabled: bool) -> DirectorPolicy:
+    """The pack-configured policy (the single owner of the entropy-floor
+    read — the loop and the CLI `directors on|off` toggle both come here)."""
+    if not enabled:
+        return DISABLED
+    return EnabledPolicy(
+        entropy_floor=int(rules["director"]["stagnation"]["entropy_floor"])
+    )
 
 
 # -- entropy (P2e: observable state only, never knowledge records) ------------

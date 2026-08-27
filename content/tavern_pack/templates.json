@@ -2,14 +2,27 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "Starter chronicle templates (iter-0c): day headers, scene card and one dry line per event type. Completed in iter-5 together with the renderer. Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. Slots in {braces} are filled from the event log fields; unknown types fall back to the generic line."
+    "notes": "Chronicle templates (iter-0c draft, completed in iter-5 with the renderer). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. Syntax: {slot} binds event data (actor/target/location/t/outcome fields); #symbol# expands the tracery grammar (render/tracery.py — modifiers .a/.capitalize/.upper/.lower); {cond?a|b} is ink-style conditional text on a raw context value; [key:value] saves an expansion for the rest of the line. Lists = alternatives picked via the ink-shuffle ShufflePool (no immediate repeat, cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line at all (MVP_SCOPE §9); v0.1 keeps every event — the iter-6 T7 playtest owns the tuning."
   },
 
-  "day_header": "— Day {day}, {phase} —",
+  "tale_gate": { "min_importance": "low" },
+
+  "day_header": "— Day #day#, #phase.capitalize# —",
 
   "scene_card": "{location_name}: {present_names}",
 
-  "fallback": "[{t}] {event_type}: {actor} → {target}",
+  "fallback": "(t {t}) {event_type}: {actor} → {target}",
+
+  "symbols": {
+    "flame_take": [
+      "Flame takes to {location}.",
+      "Fire catches at {location}."
+    ],
+    "smoke_sign": [
+      "Smoke begins to rise.",
+      "The air grows bitter."
+    ]
+  },
 
   "events": {
     "look_around": "{actor} takes in {location}.",
@@ -24,7 +37,7 @@
     "drop_break": "{target} breaks with a noise.",
     "use": "{actor} uses {target}.",
     "use_failed": "{actor} fumbles with {target}; nothing happens.",
-    "steal": "{actor} lifts {target} unseen.",
+    "steal": "{actor} lifts {stolen} unseen.",
     "pickpocket_failed": "{actor}'s hand drifts toward {target}'s purse — {target} notices the movement.",
     "distract": "{actor} distracts {target}.",
     "distract_ignored": "{target} ignores {actor}'s antics.",
@@ -33,20 +46,27 @@
     "flee_caught": "{actor} is caught.",
     "intent_rejected": "{actor} tries to {action_label} — impossible here.",
 
-    "fire_started": "Flame takes to {location}. Smoke begins to rise.",
-    "fire_spread": "The fire spreads within {location}.",
+    "fire_started": "#flame_take# #smoke_sign#",
+    "fire_spread": [
+      "The fire spreads within {location}.",
+      "Flame reaches further into {location}.",
+      "The blaze gnaws deeper into {location}."
+    ],
     "smoke_rising": "Smoke fills {location}; it is getting hard to see.",
     "alarm_raised": "Someone shouts: fire!",
     "location_burned_out": "{location} burns out. Nothing will be the same here.",
 
-    "watch_change": "The watch changes at the guard room.",
+    "watch_change": "{outgoing?The watch changes: {outgoing} hands the post to {incoming}.|The watch changes: {incoming} takes the post.}",
     "knowledge_transfer": "{actor} briefs {target}; knowledge passes ({fidelity}).",
-    "rumor_told": "{actor} tells {target}: {knows}.",
+    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}",
     "document_check": "{actor} demands papers from {target}.",
     "arrest_attempt": "{actor} moves to arrest {target}.",
-    "arrest_resolved": "{target} is caught — the pursuit holds.",
-    "suspicion_changed": "{target} grows warier of {actor}.",
+    "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
+    "suspicion_changed": "{actor} grows warier of {target}.",
     "expectation_violation": "{actor} checks on {target} — it is not where it should be.",
-    "status_decayed": "{target} drifts: {axes} changed."
+    "status_decayed": [
+      "{target} drifts: {axes} changed.",
+      "The hours tell on {target}: {axes} changed."
+    ]
   }
 }

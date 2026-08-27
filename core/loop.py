@@ -39,9 +39,10 @@ briefing (D-006) — each piece cause-chained (phase0 §3).
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from core.clock import Clock
 from core.crime import (
@@ -51,7 +52,7 @@ from core.crime import (
     next_rotation_tick,
     rotation_plan,
 )
-from core.director import DISABLED, Director, EnabledPolicy
+from core.director import Director, policy_from_rules
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
@@ -178,15 +179,9 @@ class Simulator:
         # by default; pack-tunable via `director.stagnation.beat_ticks`).
         # Director-off keeps the buffer seeding (D-005 hygiene) but
         # suppresses releases — the T8 A/B baseline.
-        if director_enabled:
-            policy = EnabledPolicy(
-                entropy_floor=int(pack.rules["director"]["stagnation"][
-                    "entropy_floor"
-                ])
-            )
-        else:
-            policy = DISABLED
-        self._director = Director(pack=pack, policy=policy)
+        self._director = Director(
+            pack=pack, policy=policy_from_rules(pack.rules, director_enabled)
+        )
         self._next_beat = self._first_beat(pack.rules)
 
     @property
@@ -204,6 +199,104 @@ class Simulator:
         """The runtime director (T8 A/B uses director_enabled=False at construction)."""
         return self._director
 
+    def open(self) -> None:
+        """Write the run header — an incremental session starts here.
+
+        The CLI play loop (`cli/`) opens once, feeds steps through
+        `run_steps` between commands, and closes at exit; the log is one
+        continuous run either way (`run_playscript` is the batch front
+        over the same three doors).
+        """
+        self._writer.write_header(
+            seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
+        )
+
+    def run_steps(self, steps: Sequence[Mapping[str, Any]]) -> RunResult:
+        """Feed player steps through the live simulator until the queue
+        drains. Callable repeatedly on one opened Simulator (the session
+        pattern): each call is a self-contained feed-and-drain cycle, so
+        the world between calls moves only through the queue it seeded —
+        beats, rotations and reactions fire on clock crossings during
+        entry processing, exactly as in a batch run.
+        """
+        steps = list(steps)
+        if steps:
+            with self._bank.assure(SUBSTANTIVE):
+                remaining = steps[1:]
+                self._queue.push(
+                    tick=self._clock.tick, sub_order=PLAYER_INTENT,
+                    actor_id=self._player_id, kind="intent",
+                    payload=self._intent_from_step(steps[0]),
+                )
+                while len(self._queue):
+                    entry = self._queue.pop()
+                    # clock-crossing beats fire before the popped entry —
+                    # rotations (iter-3) AND decay/urgencies/director
+                    # (iter-4) all ride the same crossing discipline,
+                    # never pre-seeded (a run still ends when its
+                    # script's queue drains). Crossings fire in TICK
+                    # ORDER: a beat at T=720 between rotations at T=360
+                    # and T=1080 fires between them, not after both —
+                    # otherwise the log writer's tick-monotonicity
+                    # invariant would reject the out-of-order commit.
+                    while True:
+                        candidates: list[int] = []
+                        if (
+                            self._next_rotation is not None
+                            and self._next_rotation <= entry.tick
+                        ):
+                            candidates.append(self._next_rotation)
+                        if (
+                            self._next_beat is not None
+                            and self._next_beat <= entry.tick
+                        ):
+                            candidates.append(self._next_beat)
+                        if not candidates:
+                            break
+                        crossing = min(candidates)
+                        is_rotation = crossing == self._next_rotation
+                        self._clock.advance_to(crossing)
+                        if is_rotation:
+                            self._run_rotation(crossing)
+                            self._next_rotation = next_rotation_tick(
+                                self._pack.rules,
+                                self._clock.ticks_per_day,
+                                crossing,
+                            )
+                        else:
+                            self._run_beat(crossing, entry.tick)
+                            self._next_beat = self._next_beat_after(crossing)
+                    self._clock.advance_to(entry.tick)
+                    if entry.kind == "intent":
+                        accepted = self._execute_intent(entry)
+                        # only the PLAYER's step lifecycle feeds the next
+                        # playscript step — an autonomous (urgency /
+                        # director) intent ending must never advance the
+                        # script (KI#17: step 3 committed before step 2)
+                        if (
+                            not accepted and remaining
+                            and entry.actor_id == self._player_id
+                        ):
+                            self._feed_next(entry.tick, remaining)
+                    elif entry.kind == "completion":
+                        self._complete(entry)
+                        if remaining and entry.actor_id == self._player_id:
+                            self._feed_next(entry.tick, remaining)
+                    elif entry.kind == "pass":
+                        self._run_pass(entry)
+                    else:
+                        self._run_follow_up(entry)
+        return RunResult(
+            log_path=self._writer.path,
+            event_count=self._writer.event_count,
+            last_tick=self._clock.tick,
+            fingerprint=self._bank.fingerprint,
+        )
+
+    def close(self) -> None:
+        """Flush and close the log — the run is over, the log is canon."""
+        self._writer.close()
+
     def run_playscript(self, script: Mapping[str, Any]) -> RunResult:
         """Play seed + ordered intents end-to-end; returns the run summary."""
         for key in ("name", "seed", "pack", "steps"):
@@ -218,85 +311,11 @@ class Simulator:
                 f"playscript pack {script['pack']!r} != loaded pack "
                 f"{self._pack.name_version!r}"
             )
-        steps = list(script["steps"])
-        self._writer.write_header(
-            seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
-        )
+        self.open()
         try:
-            if steps:
-                with self._bank.assure(SUBSTANTIVE):
-                    remaining = steps[1:]
-                    self._queue.push(
-                        tick=self._clock.tick, sub_order=PLAYER_INTENT,
-                        actor_id=self._player_id, kind="intent",
-                        payload=self._intent_from_step(steps[0]),
-                    )
-                    while len(self._queue):
-                        entry = self._queue.pop()
-                        # clock-crossing beats fire before the popped entry —
-                        # rotations (iter-3) AND decay/urgencies/director
-                        # (iter-4) all ride the same crossing discipline,
-                        # never pre-seeded (a run still ends when its
-                        # script's queue drains). Crossings fire in TICK
-                        # ORDER: a beat at T=720 between rotations at T=360
-                        # and T=1080 fires between them, not after both —
-                        # otherwise the log writer's tick-monotonicity
-                        # invariant would reject the out-of-order commit.
-                        while True:
-                            candidates: list[int] = []
-                            if (
-                                self._next_rotation is not None
-                                and self._next_rotation <= entry.tick
-                            ):
-                                candidates.append(self._next_rotation)
-                            if (
-                                self._next_beat is not None
-                                and self._next_beat <= entry.tick
-                            ):
-                                candidates.append(self._next_beat)
-                            if not candidates:
-                                break
-                            crossing = min(candidates)
-                            is_rotation = crossing == self._next_rotation
-                            self._clock.advance_to(crossing)
-                            if is_rotation:
-                                self._run_rotation(crossing)
-                                self._next_rotation = next_rotation_tick(
-                                    self._pack.rules,
-                                    self._clock.ticks_per_day,
-                                    crossing,
-                                )
-                            else:
-                                self._run_beat(crossing, entry.tick)
-                                self._next_beat = self._next_beat_after(crossing)
-                        self._clock.advance_to(entry.tick)
-                        if entry.kind == "intent":
-                            accepted = self._execute_intent(entry)
-                            # only the PLAYER's step lifecycle feeds the next
-                            # playscript step — an autonomous (urgency /
-                            # director) intent ending must never advance the
-                            # script (KI#17: step 3 committed before step 2)
-                            if (
-                                not accepted and remaining
-                                and entry.actor_id == self._player_id
-                            ):
-                                self._feed_next(entry.tick, remaining)
-                        elif entry.kind == "completion":
-                            self._complete(entry)
-                            if remaining and entry.actor_id == self._player_id:
-                                self._feed_next(entry.tick, remaining)
-                        elif entry.kind == "pass":
-                            self._run_pass(entry)
-                        else:
-                            self._run_follow_up(entry)
-            return RunResult(
-                log_path=self._writer.path,
-                event_count=self._writer.event_count,
-                last_tick=self._clock.tick,
-                fingerprint=self._bank.fingerprint,
-            )
+            return self.run_steps(list(script["steps"]))
         finally:
-            self._writer.close()
+            self.close()
 
     def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
         self._queue.push(

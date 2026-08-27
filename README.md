@@ -15,24 +15,22 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 4a — the owner-requested code audit of iter-3/iter-4
-closed: 124 probe runs (60-seed day1 sweep × director on/off, T1
-double-runs, T2 folds, crafted records) found zero crashes, desyncs or
-replay breaks — determinism, event sourcing and T4 held. Four KIs
-fixed: autonomous (urgency/director) intents never advance the
-playscript (only the player's own step endings feed the next step);
-the crime-status flip guards the pack's ordered `status_values`
-progression (caught never downgrades to suspect — T4);
-`reset_on_rotation` implemented (flagged axes reset for the watch
-participants on the watch_change event; per-axis last-change decay
-baseline); dead pack keys removed (single owners stay — D-024). The
-audited iter-4 systems stand: the consequence-planner director (D-005:
-hooks seeded at event time, entropy floor, releases through the intent
-door), the P2b goal ticker (D-021), states decay passes, arrest
-resolution (evasion_vs_pursuit → arrest_resolved, caught irreversible),
-crossings firing in tick order (D-038). 225 tests green, ruff clean;
-golden fixture byte-identical. Next: iter-5 · chronicle & CLI
-(`docs/TASKS.md`).
+Phase 0, iteration 5 — chronicle & CLI landed: the deterministic
+tracery engine (`render/tracery.py`: symbol grammar, ink-shuffle
+ShufflePool with no immediate repeat, modifiers, save/restore,
+conditional text — cosmetic stream only) and the chronicle as a pure
+function of the log (`render/chronicle.py`: day headers, the
+importance gate as pack data, scene card, per-entity history views;
+same log = same bytes, verified hash-seed independent). The play
+interface (`python -m cli`) offers batch `play` / `chronicle` /
+`state` / `replay` plus an interactive session (`look`, `wait N`,
+`directors on|off`, `seed`) — `look` and `wait` go through the same
+intent front door as playscript steps, and a step-by-step session
+produces byte-identical logs to the batch run. KI#21 closed (draft
+templates drifted from the iter-3 event contract — fixed while
+completing the grammar). 264 tests green, ruff clean, golden fixture
+byte-identical. Next: iter-6 · gate (`docs/TASKS.md`) — full T1–T8,
+director-off A/B, M1–M5 metrics, the phase-0 verdict.
 
 ## For AI agents (primary audience)
 
@@ -54,12 +52,10 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2, render/cli iter-5) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2; render + cli landed iter-5) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running
-
-The core runs headless (the play CLI lands in iter-5):
 
 ```
 pip install -e ".[dev]"
@@ -67,9 +63,21 @@ PYTHONHASHSEED=0 pytest -q
 ruff check .
 ```
 
-A playscript plays end-to-end through the simulator; see
-`tests/test_loop.py` and the fixture `tests/playscripts/plumbing_smoke.json`.
-Its log is byte-identical across runs on the same environment (T1).
+Play the slice (no LLM anywhere):
+
+```
+python -m cli play tests/playscripts/day1_theft_and_arson.json
+python -m cli                      # interactive session ('help' lists commands)
+python -m cli chronicle logs/run_8_0.jsonl
+python -m cli state purse_01 logs/run_8_0.jsonl
+python -m cli replay logs/run_8_0.jsonl
+```
+
+A playscript plays end-to-end through the simulator; its log is
+byte-identical across runs on the same environment (T1), and the
+rendered chronicle is byte-identical, period (a pure function of the
+log). Runtime logs land in `logs/` and rendered chronicles in
+`output/` (both gitignored).
 
 ## License
 

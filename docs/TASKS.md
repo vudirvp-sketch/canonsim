@@ -9,15 +9,7 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-5 · chronicle & CLI — todo (next)
-
-- Template chronicle from the log (deterministic tracery engine + ink
-  `shuffle` ShufflePool — `docs/blueprint/phase0.md` §5); scene card; CLI:
-  `play`, `look`, `wait`, `chronicle`, `state`, `replay`,
-  `directors on|off`, `seed`.
-- AC: playable and readable without LLM.
-
-### iter-6 · gate — todo
+### iter-6 · gate — todo (next)
 
 - Full T1–T8 (T1 with the fixture-regeneration guard —
   `docs/blueprint/phase0.md` §6); director-off A/B on identical seed +
@@ -126,6 +118,15 @@
 
 ## Done
 
+- iter-5 · 2026-08-28 · chronicle & CLI: deterministic tracery engine
+  (ShufflePool no-immediate-repeat, modifiers, save/restore, ink
+  conditionals — cosmetic stream only) + the chronicle as a pure
+  function of the log (day headers, importance gate as pack data,
+  scene card, ungated per-entity views) + CLI (batch
+  play/chronicle/state/replay + interactive session: look, wait N,
+  directors on|off, seed); loop factored open/run_steps/close — a
+  session equals the batch run byte-for-byte; templates completed into
+  the grammar (KI#21); 264 tests green, fixture byte-identical.
 - iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4: probes
   (60-seed sweep × director on/off, T1/T2, crafted records — 124 runs
   clean); KI#17 autonomous completions never advance the playscript;
