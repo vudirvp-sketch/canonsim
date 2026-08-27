@@ -75,10 +75,9 @@
     "neutral": 50,
     "axes": ["reputation", "suspicion", "trust", "fear"],
     "suspicion_thresholds": {
-      "status_suspect_at": 25,
-      "document_check_at": 50
+      "status_suspect_at": 25
     },
-    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; document_check 50 is a v0.1 default for the hook the spec names but does not number (consumed by the director, iter-4). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3 (the iter-2a duplicate was removed). Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; the document-check trigger number lives with its single owner, director.hooks.possible_document_check.trigger.value (iter-4a cleanup — the former document_check_at mirror had no reader). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3 (the iter-2a duplicate was removed). Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
   },
 
   "knowledge": {
@@ -106,10 +105,10 @@
   "states": {
     "fatigue": {"gain_per_360_ticks_awake": 10, "reset_on_rotation": true},
     "intoxication": {"decay_per_360_ticks": 10},
-    "fear": {"decay_per_360_ticks": 5, "spike_on_alarm": 40},
+    "fear": {"decay_per_360_ticks": 5},
     "injury": {"auto_decay": 0},
     "attention": {"decay_per_360_ticks": 0},
-    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes land with the states system (iter-3)"
+    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup)"
   },
 
   "transitions": {
@@ -171,7 +170,6 @@
       "figure_at_back_door_last_night": "rumor_about_figure",
       "purse_missing": "inferred_purse_missing"
     },
-    "document_check": {"hook": "possible_document_check", "delay_ticks": 120},
     "arrest": {
       "requires_suspicion": 75,
       "requires_same_location": true,

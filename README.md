@@ -15,28 +15,24 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 4 — the director + goal ticker stands: hooks seeded
-at event time sit in a per-run buffer (D-005 — a complication from
-nowhere is a bug); explicit triggers (time / place / threshold) fire
-causally; the stagnation detector releases the lowest-threshold hook
-when narrative entropy (P2e: sum of seeded-hook weights + global
-suspicion + visible physical threats — observable state only, L6)
-drops below the pack's floor. Releases ride the intent door (phase0 §4
-"Objective broadcast") — a released hook produces an IntentData the
-loop enqueues band NPC_REACTION; the director never writes canon
-itself. Director-off (T8 A/B baseline) keeps the buffer seeding but
-suppresses releases. P2b goal ticker (D-021): per-NPC probability
-rolls on the beat cycle, intents through the front door — M5 non-PC
-share non-trivially non-zero by construction. States decay passes
-deferred from iter-3 landed (fatigue/intoxication/fear proportional
-deltas; injury never decays — T4 preserved). Arrest resolution
-(iter-3 leftover): evasion_vs_pursuit → arrest_resolved, `crime_status
-→ caught` (irreversible). Crossings fire in TICK ORDER (rotations and
-beats interleave by tick, not by type — the log writer's
-tick-monotonicity invariant). 219 tests green, ruff clean; golden
-fixture byte-identical (the 58-tick plumbing_smoke scenario crosses
-no beat — no decay, no urgency, no director release). Next: iter-5 ·
-chronicle & CLI (`docs/TASKS.md`).
+Phase 0, iteration 4a — the owner-requested code audit of iter-3/iter-4
+closed: 124 probe runs (60-seed day1 sweep × director on/off, T1
+double-runs, T2 folds, crafted records) found zero crashes, desyncs or
+replay breaks — determinism, event sourcing and T4 held. Four KIs
+fixed: autonomous (urgency/director) intents never advance the
+playscript (only the player's own step endings feed the next step);
+the crime-status flip guards the pack's ordered `status_values`
+progression (caught never downgrades to suspect — T4);
+`reset_on_rotation` implemented (flagged axes reset for the watch
+participants on the watch_change event; per-axis last-change decay
+baseline); dead pack keys removed (single owners stay — D-024). The
+audited iter-4 systems stand: the consequence-planner director (D-005:
+hooks seeded at event time, entropy floor, releases through the intent
+door), the P2b goal ticker (D-021), states decay passes, arrest
+resolution (evasion_vs_pursuit → arrest_resolved, caught irreversible),
+crossings firing in tick order (D-038). 225 tests green, ruff clean;
+golden fixture byte-identical. Next: iter-5 · chronicle & CLI
+(`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 

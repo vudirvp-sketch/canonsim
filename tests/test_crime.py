@@ -267,3 +267,42 @@ def test_rotation_mid_action_rejects_the_intent_with_the_breaking_cause(
     assert sim.projection["purse_01"]["carrier"] == "npc_guard_01"
     assert not by_type(events, "suspicion_changed")
     assert rejection.state_changes == () and rejection.knowledge == ()
+
+
+# -- the crime-status progression (KI#18: caught is terminal — T4) --------------
+
+
+def test_caught_suspect_never_downgrades_to_suspect() -> None:
+    """KI#18 regression: the status flip rides only the FIRST crossing.
+    A suspect already `caught` (irreversible per the pack) stays caught
+    even when a *different* watcher crosses the suspect threshold on a
+    novel token — the flip guard checks the pack's ordered
+    `status_values` progression, not just `!= suspect`."""
+    from core.crime import iter_suspicion_reactions
+    from core.knowledge import KnowledgeView
+    from core.log import EventRecord, KnowledgeRecord
+
+    projection = {
+        "pc_01": {"crime_status": "caught", "position": "loc_tavern"},
+        "npc_guard_02": {
+            "position": "loc_tavern",
+            "relations.suspicion": 0,  # a fresh watcher, never reacted
+        },
+    }
+    record = EventRecord(
+        id="ev_0099", t=10, type="rumor_told", actor="npc_drunk_01",
+        target="npc_guard_02", cause=None, outcome={},
+        knowledge=(
+            KnowledgeRecord(
+                who="npc_guard_02", channel="told", fidelity="partial",
+                knows="figure_reaching_for_purse", at=10,
+            ),
+        ),
+        state_changes=(), hooks=(), importance="medium", provenance={},
+    )
+    groups = list(iter_suspicion_reactions(PACK, projection, KnowledgeView(), record))
+    assert len(groups) == 1  # the watcher's suspicion still moves…
+    for draft in groups[0]:
+        assert all(
+            change.entity != "pc_01" for change in draft.state_changes
+        ), "the caught suspect's status must never appear in a reaction"

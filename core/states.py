@@ -13,13 +13,15 @@ the projection fails loudly at the `_commit` gate (D-035 — the log
 never holds a desynced event).
 
 Per-axis rules (pack data, every number tunable):
-- fatigue: `gain_per_360_ticks_awake` (+); `reset_on_rotation` (→ 0 at
-  the watch rotation if true; the relief wakes fresh)
+- fatigue: `gain_per_360_ticks_awake` (+); `reset_on_rotation` (→ 0
+  for the rotation participants at the watch change if true — "the
+  relief wakes fresh")
 - intoxication: `decay_per_360_ticks` (−)
-- fear: `decay_per_360_ticks` (−); `spike_on_alarm` (+, fires from
-  the transition engine's alarm event, NOT here)
+- fear: `decay_per_360_ticks` (−); the alarm spike number lives with the
+  transition layer (`transitions.<layer>.alarm.fear_spike`) — it fires
+  from the transition engine's alarm event, NOT here
 - injury: `auto_decay: 0` (no decay — counter-events only)
-- attention: `decay_per_360_ticks` (−, often 0)
+- attention: `decay_per_360_ticks` (−, often 0); `reset_on_rotation`
 """
 
 from __future__ import annotations
@@ -36,7 +38,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
     from core.pack import Pack
 
-__all__ = ["decay_drafts"]
+__all__ = ["decay_drafts", "rotation_resets"]
 
 DECAY_EVENT: str = "status_decayed"  # templates vocabulary (lint-checked)
 
@@ -98,9 +100,10 @@ def decay_drafts(
     beat_tick: int,
 ) -> tuple[EventDraft, ...]:
     """One decay beat: for each NPC with a `status.*` axis the pack
-    declares a rate for, compute the delta since the last decay event
-    (or run start) and produce a draft. The first NPC with a non-zero
-    delta anchors the event; an empty tuple means no decay this beat.
+    declares a rate for, compute the delta since the last event that
+    changed that axis (decay beat, use effect, rotation reset — or run
+    start) and produce a draft. The first NPC with a non-zero delta
+    anchors the event; an empty tuple means no decay this beat.
 
     The drafts are per-NPC: one `status_decayed` event per NPC with a
     non-empty change set, so the chronicle reads each character's
@@ -119,7 +122,6 @@ def decay_drafts(
             continue
         if props.get("crime_status") == "caught":
             continue  # the caught do not tire
-        last_decay = _last_decay_tick(events, npc_id)
         changes: list[StateChange] = []
         for axis, config in states_config.items():
             if not isinstance(config, Mapping):
@@ -129,7 +131,8 @@ def decay_drafts(
             current = props.get(f"status.{axis}")
             if not isinstance(current, int) or isinstance(current, bool):
                 continue  # NPC has no value on this axis (e.g. attention)
-            delta = _axis_deltas(pack, axis, config, last_decay, beat_tick)
+            last_change = _last_change_tick(events, npc_id, axis)
+            delta = _axis_deltas(pack, axis, config, last_change, beat_tick)
             if delta is None or delta.delta == 0:
                 continue
             scale = pack.rules["relations"]["scale"]
@@ -165,12 +168,59 @@ def decay_drafts(
     return tuple(drafts)
 
 
-def _last_decay_tick(events: Sequence[Any], npc_id: str) -> int | None:
-    """The tick of the NPC's latest `status_decayed` event — the
-    baseline for proportional delta computation. None when the NPC
-    has never decayed (run start)."""
+def _last_change_tick(events: Sequence[Any], npc_id: str, axis: str) -> int | None:
+    """The tick of the latest event that changed the NPC's `status.<axis>`
+    — a decay beat, a use effect, a rotation reset; any committer counts
+    (the baseline must respect a mid-beat reset, or a rotation-fresh NPC
+    gains fatigue for ticks it did not stay awake — the KI#19 lesson).
+    None when the axis never moved (run start)."""
+    prop = f"status.{axis}"
     last: int | None = None
     for event in events:
-        if event.type == DECAY_EVENT and event.target == npc_id:
+        if any(
+            change.entity == npc_id and change.prop == prop
+            for change in event.state_changes
+        ):
             last = event.t
     return last
+
+
+def rotation_resets(
+    pack: "Pack",
+    projection: "Projection",
+    participants: Sequence[str],
+) -> tuple[StateChange, ...]:
+    """The `reset_on_rotation` status resets for the watch participants
+    (KI#19): every axis the pack flags resets to 0 for every participant
+    at the watch change — the handover is a context switch for both
+    posts ("the relief wakes fresh"; a distracted holder hands over
+    neutral). Only non-zero values produce changes; the resets ride the
+    `watch_change` event the loop commits (INV-1 — one committer, one
+    cause chain)."""
+    states_config = pack.rules.get("states", {})
+    if not states_config:
+        return ()
+    changes: list[StateChange] = []
+    for participant in participants:
+        props = projection.get(participant)
+        if props is None:
+            continue
+        for axis, config in states_config.items():
+            if not isinstance(config, Mapping):
+                continue
+            if not config.get("reset_on_rotation", False):
+                continue
+            current = props.get(f"status.{axis}")
+            if not isinstance(current, int) or isinstance(current, bool):
+                continue
+            if current == 0:
+                continue
+            changes.append(
+                StateChange(
+                    entity=participant,
+                    prop=f"status.{axis}",
+                    from_=current,
+                    to_=0,
+                )
+            )
+    return tuple(changes)

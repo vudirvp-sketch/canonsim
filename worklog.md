@@ -6,6 +6,20 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4 (iter-4a-code-audit)
+- Read core (knowledge/crime/director/urgencies/states/loop) + tests
+  + pack vs doc owners; probes: 60-seed day1 sweep × director on/off,
+  T1 double-runs, T2 folds, crafted records — 124 runs, zero crashes.
+  4 KIs fixed: KI#17 autonomous completions fed player steps (feed
+  gates on player actor); KI#18 caught→suspect downgrade (flip guards
+  the status_values progression); KI#19 reset_on_rotation unimplemented
+  (rotation_resets + per-axis last-change decay baseline); KI#20 dead
+  pack keys deleted (document_check section, document_check_at,
+  spike_on_alarm). 11 files — audit fix set + mandated sync set.
+- Tests 219→225 green (+6 regressions), ruff clean, golden fixture
+  byte-identical; D-041 recorded; KI#13–16 deleted (closed >2 iters);
+  FAQ gains the never-advance-the-script + decay-baseline laws.
+---
 iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
 - core/director.py + core/urgencies.py + core/states.py (D-038:
   director = event-driven + clock-crossing releases; D-039: urgencies
@@ -144,14 +158,3 @@ iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit
 - 4 files touched (STATUS, worklog, TASKS, README). No code; pytest green,
   ruff clean. 23rd docs iteration (owner-requested, D-022); **iter-1 code is
   next, unconditionally**.
----
-iter-0w · 2026-08-27 · owner-requested post-reference concept realignment (D-029)
-- Verdict recorded: skeleton (phases 0–6, 3 layers, INV-1..5) stands; the
-  blueprint is the single post-reference mechanics owner. Drift fixed
-  (KI#9 opened/closed): sprint calendar dropped (MVP_SCOPE §17
-  iteration-counted, TASKS day-tags removed); CORE_DESIGN_RESEARCH →
-  absorbed; ROADMAP §2 → blueprint pointer; README Status → 0w; D-029.
-- 9 files touched — over the 3–5 soft limit: the mandated sync set (STATUS,
-  worklog, TASKS, AGENT_NAVIGATION) + the five realignment targets; same
-  pattern as iter-0u/0v. No code; pytest green, ruff clean. 22nd docs
-  iteration (owner-requested, D-022); **iter-1 code is next, unconditionally**.

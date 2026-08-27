@@ -136,3 +136,91 @@ def test_decay_pass_silent_in_short_plumbing_smoke_run(tmp_path: Path) -> None:
     ))
     _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
     assert not by_type(events, DECAY_EVENT)
+
+
+# -- reset_on_rotation (KI#19: pack-declared, landed iter-4a) --------------------
+
+
+def test_rotation_resets_flagged_axes_for_participants() -> None:
+    """The pack's `reset_on_rotation` axes reset to 0 for the watch
+    participants — fatigue 10 → 0 for the on-watch guard; a flat axis
+    (guard_02's fatigue 0) produces no change (from_ == to_ stays
+    silent)."""
+    from core.log import StateChange
+    from core.states import rotation_resets
+
+    projection = initial_projection(PACK.entities)
+    participants = PACK.rules["crime_watch"]["rotation"]["participants"]
+    changes = rotation_resets(PACK, projection, participants)
+    assert changes == (
+        # guard_01 is on duty with fatigue 10 (pack seed); the pack flags
+        # fatigue reset_on_rotation — the handover is a context switch
+        # for both posts, so every participant's flagged axis resets
+        StateChange(
+            entity="npc_guard_01", prop="status.fatigue", from_=10, to_=0
+        ),
+    )
+
+
+def test_watch_change_carries_the_fatigue_reset(tmp_path: Path) -> None:
+    """End-to-end: the rotation at tick 360 rides its position swaps AND
+    the fatigue reset on one watch_change event (one committer, one
+    cause chain)."""
+    sim = Simulator(PACK, 42, tmp_path / "run.jsonl", SCHEMA, commit="0000000")
+    sim.run_playscript({
+        "name": "test", "seed": 42, "pack": "tavern_pack@0.1",
+        "steps": [{"intent": "wait", "ticks": 400}],
+    })
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    watch = by_type(events, "watch_change")[0]
+    resets = [
+        c for c in watch.state_changes if c.prop == "status.fatigue"
+    ]
+    assert resets and resets[0].entity == "npc_guard_01"
+    assert (resets[0].from_, resets[0].to_) == (10, 0)
+    assert sim.projection["npc_guard_01"]["status.fatigue"] == 0
+
+
+def test_decay_baseline_respects_the_rotation_reset(tmp_path: Path) -> None:
+    """KI#19 core lesson: the decay baseline is the last event that
+    changed the axis (any committer), so a guard whose fatigue was reset
+    at the t=360 rotation gains NOTHING at that same-tick beat, and
+    exactly one beat's worth (360 ticks → +10) at the t=720 beat — not
+    the +20 a run-start baseline would produce."""
+    sim = Simulator(PACK, 42, tmp_path / "run.jsonl", SCHEMA, commit="0000000")
+    sim.run_playscript({
+        "name": "test", "seed": 42, "pack": "tavern_pack@0.1",
+        "steps": [{"intent": "wait", "ticks": 730}],
+    })
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    guard_decays = [
+        e for e in by_type(events, DECAY_EVENT) if e.target == "npc_guard_01"
+    ]
+    # no decay draft at t=360 (the reset just landed — elapsed 0)…
+    assert all(e.t != 360 for e in guard_decays)
+    # …and exactly +10 at t=720 (360 ticks since the reset)
+    at_720 = [e for e in guard_decays if e.t == 720]
+    assert at_720
+    fatigue = next(
+        c for e in at_720 for c in e.state_changes
+        if c.prop == "status.fatigue"
+    )
+    assert (fatigue.from_, fatigue.to_) == (0, 10)
+
+
+def test_packs_states_rates_lint(tmp_path: Path) -> None:
+    """The iter-4a lint: states rate keys are non-negative ints,
+    reset_on_rotation is a bool (load-time, not mid-run)."""
+    import shutil
+
+    import pytest as _pytest
+
+    from core.pack import PackError, load_pack
+
+    target = tmp_path / "bad_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text())
+    rules["states"]["fatigue"]["reset_on_rotation"] = "yes"
+    (target / "rules.json").write_text(json.dumps(rules))
+    with _pytest.raises(PackError, match="reset_on_rotation"):
+        load_pack(target)

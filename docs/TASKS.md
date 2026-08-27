@@ -126,6 +126,13 @@
 
 ## Done
 
+- iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4: probes
+  (60-seed sweep × director on/off, T1/T2, crafted records — 124 runs
+  clean); KI#17 autonomous completions never advance the playscript;
+  KI#18 caught→suspect downgrade guarded by the status_values
+  progression; KI#19 reset_on_rotation implemented (rotation_resets +
+  per-axis decay baseline); KI#20 dead pack keys removed; D-041;
+  225 tests green, fixture byte-identical.
 - iter-4 · 2026-08-28 · director + goal ticker: consequence buffer +
   triggers (time / place / threshold) + narrative entropy (P2e:
   sum of seeded-hook weights + global suspicion + visible threats,

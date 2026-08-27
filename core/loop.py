@@ -72,7 +72,7 @@ from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, Even
 from core.resolvers import REGISTRY
 from core.rng import SUBSTANTIVE, RngBank
 from core.scheduler import build, decls_from_rules
-from core.states import decay_drafts
+from core.states import decay_drafts, rotation_resets
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.urgencies import urgency_intents
 
@@ -160,6 +160,7 @@ class Simulator:
         self._initial = initial_projection(pack.entities)
         self._events: list[EventRecord] = []
         self._intent_seq = 0
+        self._player_id = pack.player_id()
         self._schedule = build(decls_from_rules(pack.rules))
         self._system_order = {
             decl.name: index for index, decl in enumerate(self._schedule)
@@ -227,7 +228,7 @@ class Simulator:
                     remaining = steps[1:]
                     self._queue.push(
                         tick=self._clock.tick, sub_order=PLAYER_INTENT,
-                        actor_id=self._pack.player_id(), kind="intent",
+                        actor_id=self._player_id, kind="intent",
                         payload=self._intent_from_step(steps[0]),
                     )
                     while len(self._queue):
@@ -271,11 +272,18 @@ class Simulator:
                         self._clock.advance_to(entry.tick)
                         if entry.kind == "intent":
                             accepted = self._execute_intent(entry)
-                            if not accepted and remaining:
+                            # only the PLAYER's step lifecycle feeds the next
+                            # playscript step — an autonomous (urgency /
+                            # director) intent ending must never advance the
+                            # script (KI#17: step 3 committed before step 2)
+                            if (
+                                not accepted and remaining
+                                and entry.actor_id == self._player_id
+                            ):
                                 self._feed_next(entry.tick, remaining)
                         elif entry.kind == "completion":
                             self._complete(entry)
-                            if remaining:
+                            if remaining and entry.actor_id == self._player_id:
                                 self._feed_next(entry.tick, remaining)
                         elif entry.kind == "pass":
                             self._run_pass(entry)
@@ -293,7 +301,7 @@ class Simulator:
     def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
         self._queue.push(
             tick=tick, sub_order=PLAYER_INTENT,
-            actor_id=self._pack.player_id(), kind="intent",
+            actor_id=self._player_id, kind="intent",
             payload=self._intent_from_step(remaining.pop(0)),
         )
 
@@ -309,7 +317,7 @@ class Simulator:
             if key not in ("intent", "target")
         }
         return IntentData(
-            id=intent_id, kind=kind, actor=self._pack.player_id(),
+            id=intent_id, kind=kind, actor=self._player_id,
             target=step.get("target"), fields=fields,
             based_on_event_seq=self._writer.event_count,
         )
@@ -587,6 +595,12 @@ class Simulator:
         commits through the canon door, so its reactions cascade."""
         rotation = self._pack.rules["crime_watch"]["rotation"]
         changes, outgoing, incoming = rotation_plan(self._pack, self._projection)
+        # KI#19: the pack's `reset_on_rotation` status axes reset for the
+        # participants on the same watch_change event — one committer, one
+        # cause chain ("the relief wakes fresh").
+        changes = changes + rotation_resets(
+            self._pack, self._projection, rotation["participants"]
+        )
         watch_record = self._commit(
             EventDraft(
                 t=tick,

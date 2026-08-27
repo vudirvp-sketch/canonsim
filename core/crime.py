@@ -49,6 +49,21 @@ def _clamp(value: int, scale: Sequence[int]) -> int:
     return max(int(scale[0]), min(int(scale[1]), value))
 
 
+# -- the crime-status progression (status_values is ordered; T4) -------------
+
+
+def _at_or_past(status: Any, target: str, values: Sequence[str]) -> bool:
+    """True when `status` sits at or beyond `target` in the pack's ordered
+    `crime_watch.status_values` progression (v0.1: unknown → suspect →
+    caught). An absent or unknown status precedes everything (None → the
+    flip stays legal). `caught` is terminal — a status at or past `suspect`
+    never flips again (T4: the caught state is irreversible)."""
+    try:
+        return values.index(status) >= values.index(target)
+    except ValueError:
+        return False
+
+
 def iter_suspicion_reactions(
     pack: Pack,
     projection: Mapping[str, Mapping[str, Any]],
@@ -98,9 +113,14 @@ def iter_suspicion_reactions(
             )
         ]
         # the status flip rides the first crossing (ev_0007 shape); the
-        # v0.1 status field is two-valued — flip unless already flipped
+        # flip lands only while the status is still BELOW the suspect value
+        # in the pack's progression — a suspect (or caught) suspect never
+        # re-flips (T4: caught is irreversible, KI#18)
         status = projection.get(suspect_id, {}).get(CRIME_STATUS_PROP)
-        if new >= suspect_at and status != config["status_suspect_value"]:
+        status_values = list(config.get("status_values", ()))
+        if new >= suspect_at and not _at_or_past(
+            status, config["status_suspect_value"], status_values
+        ):
             changes.append(
                 StateChange(
                     entity=suspect_id,

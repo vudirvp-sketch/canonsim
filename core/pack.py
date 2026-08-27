@@ -76,6 +76,7 @@ class _Lint:
         self._expectations()
         self._urgencies()
         self._director()
+        self._states_rules()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -614,6 +615,30 @@ class _Lint:
                 f"{where}: violated by the initial pack state — expectation "
                 f"rules must hold at t=0",
             )
+
+    # -- states rules (decay rates + reset_on_rotation, iter-4a) -------------
+
+    def _states_rules(self) -> None:
+        rules = self._data["rules.json"]
+        states = rules.get("states", {})
+        for axis, config in states.items():
+            if not isinstance(config, Mapping):
+                continue  # the section's notes field
+            where = f"states.{axis}"
+            for rate_key in ("gain_per_360_ticks_awake", "decay_per_360_ticks",
+                             "auto_decay"):
+                if rate_key in config:
+                    _require(
+                        isinstance(config[rate_key], int)
+                        and not isinstance(config[rate_key], bool)
+                        and config[rate_key] >= 0,
+                        f"{where}.{rate_key} must be a non-negative integer",
+                    )
+            if "reset_on_rotation" in config:
+                _require(
+                    isinstance(config["reset_on_rotation"], bool),
+                    f"{where}.reset_on_rotation must be a boolean",
+                )
 
     # -- urgencies (P2b, iter-4) -----------------------------------------------
 

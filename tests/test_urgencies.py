@@ -151,3 +151,35 @@ def test_urgency_intent_goes_through_the_front_door(tmp_path: Path) -> None:
     ]
     # the wait crosses the first beat; some autonomy fired (M5 ≥ 1)
     assert autonomous
+
+
+def test_urgency_completion_never_advances_the_playscript(tmp_path: Path) -> None:
+    """KI#17 regression: only the PLAYER's step lifecycle feeds the next
+    playscript step. An autonomous (urgency / director) intent ending
+    mid-step must not propose the next step early — the script's ordered
+    steps contract (MVP_SCOPE §13) holds. Probed seed: the drunkard's
+    urgency fires while step 2 (a 50-tick wait) is in flight."""
+    sim = make_sim(tmp_path, seed=1, name="run.jsonl")
+    sim.run_playscript(script([
+        {"intent": "wait", "ticks": 700},
+        {"intent": "wait", "ticks": 50},
+        {"intent": "move", "target": "loc_tavern"},
+    ], 1))
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    # an autonomous intent DID fire during the run (the hazard is live)
+    assert any(
+        e.provenance.get("cause_intent", "").startswith("urgency_") for e in events
+    )
+    # the player's own events commit strictly in script order: the move
+    # (step 3) never precedes the 50-tick wait's event (step 2)
+    player_events = [
+        e for e in events
+        if e.provenance.get("cause_intent", "").startswith("intent_")
+    ]
+    order = [e.provenance["cause_intent"] for e in player_events]
+    assert order == [f"intent_{i:04d}" for i in range(len(order))]
+    ticks = [e.t for e in player_events]
+    assert ticks == sorted(ticks)
+    # and no player step's event lands before its predecessor's
+    for earlier, later in zip(player_events, player_events[1:], strict=False):
+        assert later.t >= earlier.t

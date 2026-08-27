@@ -1,38 +1,33 @@
 # STATUS — canonsim
 
-Iteration: 4 (`iter-4-director-goal-ticker`) · Phase: 0 — simulator without
+Iteration: 4a (`iter-4a-code-audit`) · Phase: 0 — simulator without
 LLM · Date: 2026-08-28
 
-The director + goal ticker iteration (TASKS iter-4, blueprint phase0
-§4): the consequence planner stands — hooks seeded at event time
-(D-005) sit in a per-run buffer; explicit triggers (time / place /
-threshold) fire causally; the stagnation detector releases the
-lowest-threshold hook when narrative entropy (P2e: sum of seeded-hook
-weights + global suspicion + visible physical threats, observable
-state only — L6) drops below the pack's floor. Replaces the v0.1
-draft's flat `release_after_ticks_without_visible_event` timer with
-a tension-floor sensor. Releases ride the intent door (D-037:
-"Objective broadcast", phase0 §4) — a released hook produces an
-IntentData enqueued band NPC_REACTION through the same front door as
-a playscript step; the director never writes canon itself. Director-off
-(T8 A/B baseline) keeps the buffer seeding, suppresses releases —
-the world's emergent chains come from urgencies + reactions +
-rotations. P2b goal ticker (D-021) landed: per-NPC probability rolls
-on the beat cycle, intents through the front door, M5 non-PC share
-non-trivially non-zero by construction. States decay passes deferred
-from iter-3 landed: fatigue/intoxication/fear proportional deltas at
-beat ticks, injury never decays (T4 preserved). Arrest resolution
-(iter-3 leftover): the attempt is a fact; the resolution rolls
-evasion_vs_pursuit and commits `arrest_resolved` immediately, with
-`crime_status: suspect → caught` (irreversible). Crossings fire in
-TICK ORDER: rotations and beats interleave by tick — the log
-writer's tick-monotonicity invariant forbids out-of-order commits.
-Golden fixture byte-identical (the 58-tick plumbing_smoke scenario
-crosses no beat — no decay, no urgency, no director release). 219
-tests green (+32: director, urgencies, states suites, arrest
-resolution updated), ruff clean. D-038 records the director-event
-+clock-crossing architecture; D-039 the urgencies-through-the-door
-discipline; D-040 the arrest resolution shape.
+The owner-requested code audit of iter-3/iter-4 (the iter-2a pattern:
+full read of the changed core + tests + pack vs the doc owners, then
+probe-driven hunting — seed sweeps over day1 (60 seeds × director
+on/off), T1 double-runs on beat-crossing scenarios, T2 fold checks,
+crafted unit records; 124 runs, zero crashes/desyncs — determinism and
+event sourcing held). Four KIs found and fixed: KI#17 — an autonomous
+(urgency/director) intent's completion or door rejection fed the NEXT
+player playscript step (the runner fed steps on ANY completion, an
+iter-1 assumption iter-4's queue-riding NPC intents silently broke —
+step 3 committed before step 2's event); fix: the feed gates on the
+entry's actor being the player. KI#18 — the crime-status flip guarded
+only `!= suspect`, so a caught (irreversible, T4) suspect downgraded
+back to suspect on a later watcher's novel token; fix: the flip checks
+the pack's ordered `status_values` progression. KI#19 —
+`states.reset_on_rotation` was declared in the pack and promised by
+the states.py docstring but implemented nowhere; fix: flagged axes
+reset to 0 for the watch participants on the watch_change event, and
+the decay baseline became per-axis last-change-by-any-committer (a
+rotation-fresh NPC gains no fatigue for pre-reset ticks). KI#20 —
+dead pack keys removed (crime_watch.document_check flat-timer remnant,
+document_check_at mirror, states.fear.spike_on_alarm duplicate) —
+single owners stay (director hook trigger value; transitions alarm
+fear_spike). 225 tests green (+6 regressions), ruff clean, golden
+fixture byte-identical. D-041 records the audit laws; KI#13–16
+deleted (closed iter-2a, >2 iterations).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -65,41 +60,38 @@ discipline; D-040 the arrest resolution shape.
   probabilities (40/25/15) over the 3-beat-per-day cycle produce non-PC
   share ~5–15% per run (probe-driven estimate; the iter-6 M5 baseline will
   measure it formally).
-- KI#13 · resolver desync wrote-then-crashed (iter-2a found+fixed) — CLOSED
-  iter-2a: `_drop` hardcoded `from_=None` on the `condition` change; a legal
-  take→drop→retake→redrop of a breakable item (seed 34) crashed after the
-  bad event was already appended. Fix: idempotent condition change + the
-  `Simulator._commit` gate (state deltas validated against the projection
-  BEFORE the write, D-035) + regression tests; both baseline logs stayed
-  byte-identical.
-- KI#14 · `next_log_path` could truncate a live log — CLOSED iter-2a: after
-  a middle-file delete, `len(existing)` named an existing path and the
-  writer's "w" mode silently truncated it (INV-5 hygiene). Fix:
-  first-free-slot scan + test.
-- KI#15 · pack-lint gaps let data bugs reach mid-run — CLOSED iter-2a:
-  `use_effect.status` not checked against `rules.states` (a typo would
-  silently seed a garbage status axis); `knowledge.failure_total` without
-  `events.failure_total` (a generic resolver would KeyError at completion);
-  the steal resolver raised a bare `StopIteration` when its
-  `carries_flagged` precondition was missing. All three now fail at load or
-  raise a named `RunnerError`; steal's pack data gained the `failure_total`
-  event branch.
-- KI#16 · parallel spread passes broke runs with two fires — CLOSED
-  iter-2a: a second ignition while a pass ran forked a second pass —
-  doubling `chance_per_tick` and rolling the new location without a cause
-  (`cause=None` → `LogError` mid-run; seed 19 reproducer, 3/59 seeds). Fix:
-  the spread pass is a per-layer singleton with a shared cause map
-  ignitions merge into (D-036); repeat smoke/burnout follow-ups now emit
-  nothing instead of duplicate no-op events.
-- KI#5 · runtime state vs test fold not explicitly separated — CLOSED
-  iter-1: the Simulator keeps the incremental projection (`apply_event` per
-  emission), `fold` exists only on the T2 test path — D-023/STATE-1
-  implemented and test-enforced
-  (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
-- KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1:
-  owner approved the stdlib mini-validator; landed as `core/schema.py`
-  (D-032) — write-time validation in the log writer, T0 on doc examples +
-  committed logs.
+- KI#17 · autonomous intents advanced the playscript (iter-4a found+fixed)
+  — CLOSED iter-4a: `_feed_next` fired after ANY intent rejection or
+  completion, including urgency/director NPC entries (an iter-1 assumption
+  — only the player had intents — that iter-4's queue-riding autonomy
+  silently broke; step 3 committed before step 2's event, seeds 1/2/3/7/11).
+  Fix: the feed gates on `entry.actor_id == player_id` (D-041). Invisible
+  to the suite: loop e2e runs the 58-tick no-beat fixture; urgency tests
+  use single-step scripts — the runner×autonomy interaction was untested.
+- KI#18 · crime-status flip could downgrade caught → suspect (iter-4a
+  found+fixed) — CLOSED iter-4a: the flip guard was `status != suspect`, so
+  after an (irreversible, T4) `caught`, a LATER watcher's novel crime token
+  crossing `status_suspect_at` flipped the suspect back to `suspect`. Fix:
+  the flip checks the pack's ordered `status_values` progression
+  (`_at_or_past`); suspicion itself still moves — only the flip is guarded.
+- KI#19 · `states.reset_on_rotation` declared but not implemented
+  (iter-4a found+fixed) — CLOSED iter-4a: rules.json flagged fatigue
+  `reset_on_rotation: true` and states.py's docstring promised the reset,
+  but no code read the key (doc↔repo drift, §3). Fix: `rotation_resets`
+  resets flagged axes to 0 for the watch participants on the watch_change
+  event, and the decay baseline is per-axis last-change-by-any-committer
+  (a rotation-fresh NPC no longer gains fatigue for pre-reset ticks).
+  Semantics choice: BOTH participants reset (fatigue is gain-only — an
+  incoming-only reset would peg the outgoing's fatigue at the ceiling
+  across days); owner may veto (D-041).
+- KI#20 · dead pack keys with no reader (iter-4a found+fixed) — CLOSED
+  iter-4a: `crime_watch.document_check` (the v0.1 flat-timer remnant the
+  director replaced), `relations.suspicion_thresholds.document_check_at`
+  (mirrored the director hook's trigger value), `states.fear.spike_on_alarm`
+  (duplicated `transitions.fire.alarm.fear_spike`). All three removed — the
+  number keeps its single live owner (D-024); the smoke escalation-order
+  assertion re-pointed at `director.hooks.possible_document_check.trigger`.
+  No runtime behavior change (nothing read the dead keys).
 
 ## FAQ / Pitfalls
 
@@ -114,14 +106,19 @@ discipline; D-040 the arrest resolution shape.
   to any future clock-crossing system (per-tick states passes if they
   arrive, decay sub-passes, etc.).
 - **Autonomous intents enqueue at entry.tick, not beat_tick (iter-4
-  law, D-039).** The beat fires retroactively (T=beat_tick) when the
+  law, D-039) — and they NEVER advance the playscript (iter-4a law,
+  KI#17).** The beat fires retroactively (T=beat_tick) when the
   loop is processing an entry at T=entry.tick > beat_tick. The entry
   was already popped; the queue discipline forbids enqueuing at a tick
   the clock has already passed (regression). Urgency and director
   intents thus enqueue at `entry.tick` with sub_order=NPC_REACTION —
   conceptually "after the beat, at the moment the world resumes
   moving". Decay events commit directly at `beat_tick` (their canonical
-  tick in the log); they don't go through the queue.
+  tick in the log); they don't go through the queue. And the runner
+  feeds the NEXT playscript step only on the PLAYER's own step endings
+  — an autonomous intent's completion or door rejection must never
+  `_feed_next` (the KI#17 bug: step 3 proposed while step 2 was still
+  in flight).
 - **Director releases ride the intent door, not the canon door (D-037,
   phase0 §4 "Objective broadcast").** A released hook produces an
   IntentData (id `director_<N>`) enqueued band NPC_REACTION; the front
@@ -153,7 +150,11 @@ discipline; D-040 the arrest resolution shape.
   snapshot carried in the queue payload. Same rule for every per-tick
   system iter-3+ adds (knowledge, relations, states passes). The iter-4
   states decay pass follows the same rule: it scans ALL npcs, not just
-  the ones who fired events since the last beat.
+  the ones who fired events since the last beat — and its per-axis
+  baseline is the tick of the LAST event that changed that axis (any
+  committer: decay beat, use effect, rotation reset), so a mid-beat
+  reset is respected (KI#19: a rotation-fresh NPC gains no fatigue
+  for pre-reset ticks).
 - **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).** A
   resolver that hardcodes a `from_` value instead of reading the
   projection breaks the moment a legal sequence moves that prop before
@@ -285,4 +286,8 @@ the log (deterministic tracery engine + ink `shuffle` ShufflePool —
 `seed`. AC: playable and readable without LLM. iter-4 left the
 director-off switch on the Simulator (`director_enabled=False`); the
 `directors on|off` CLI command is iter-5's wiring of that switch —
-T8's A/B run lands at iter-6.
+T8's A/B run lands at iter-6. iter-4a note: the audit is closed —
+determinism, event sourcing and T4 held under 124 probe runs; the
+KIs found were runner/pack-contract bugs, not architecture rot; the
+iter-2a lesson repeats — e2e coverage must exercise the systems
+TOGETHER (beats × rotations × intents), not only in isolation.
