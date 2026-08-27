@@ -46,6 +46,7 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
         _put(ambient["id"], "position", ambient["position"])
     for item in entities.get("items", []):
         _put(item["id"], "position", item["position"])
+        _put(item["id"], "carrier", item.get("carrier"))
     return state
 
 

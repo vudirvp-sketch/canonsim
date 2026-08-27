@@ -7,7 +7,7 @@
 
 | Spec | Trigger | Track | Content sketch |
 |---|---|---|---|
-| `INTENT_SCHEMA.md` | iter-2 starts | A | intent record: type, target, method, risk, uncertainty, `based_on_event_seq` (OCC: reject with cause chain when the projection moved and the precondition broke — `docs/blueprint/phase0.md` §2), lifecycle `PROPOSED → ACCEPTED (SCHEDULED) \| REJECTED (no-op event)`; button/command mapping |
+| `INTENT_SCHEMA.md` | iter-2 starts — **written iter-2** | A | intent record: type, target, method, risk, uncertainty, `based_on_event_seq` (OCC: reject with cause chain when the projection moved and the precondition broke — `docs/blueprint/phase0.md` §2), lifecycle `PROPOSED → ACCEPTED (SCHEDULED) \| REJECTED (no-op event)`; button/command mapping — now lives at `docs/INTENT_SCHEMA.md` |
 | `DIRECTOR_SPEC.md` | iter-4 starts | A | buffer, seeding rules, triggers, stagnation detector; **narrative entropy** (P2e, proposal) = sum(seeded-hook weights) + global suspicion + visible physical threats — stagnation_detector releases when entropy drops below threshold, not on a flat timer; entropy computed only from seeded hooks + visible state, never invents new threats (D-005 preserved) |
 | `TEST_PLAN.md` | iter-6 starts | A | T0–T8 formalization, gate protocol, metrics M1–M5 (M3 causal chain length, M4 novelty/repetition, M5 non-PC event share — D-019); UAP 7-hole taxonomy crosswalk (motivation→T3 blind-NPC, memory→T2 replay, competence→rules-driven behavior, scale→D-005 buffer, resources/ideology/time→tick queue + phase-5 factions — `docs/ref/uap_audit.md`) |
 | `docs/TAXONOMY.md` | bg-2 done | B | 100–300 DF event types mapped onto our ontology |

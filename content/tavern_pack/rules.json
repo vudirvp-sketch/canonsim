@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
+    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9) and the intent contract parameters (docs/INTENT_SCHEMA.md). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
   },
 
   "time": {
@@ -17,17 +17,57 @@
   },
 
   "position_visibility": {
-    "perception_base": 50,
-    "status_modifiers": {
-      "intoxication": {"per_10_points": -2},
-      "fatigue": {"per_10_points": -1},
-      "injury": {"flat": -10},
-      "fear": {"flat_at_50_plus": -10}
-    },
     "sight": {"same_location": true, "through_exits": false},
     "hearing": {"same_location": "normal", "adjacent_location": "vague_only"},
     "smoke_penalty": -20,
-    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9)"
+    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9). The status modifiers on perception live with the perception skill (checks.skills.perception.status_modifiers — single owner); smoke_penalty feeds the perception system (iter-3)"
+  },
+
+  "systems": {
+    "time": {"reads": [], "writes": ["time"], "per_tick": false},
+    "position_visibility": {"reads": ["position", "status", "smoke"], "writes": [], "per_tick": false},
+    "relations": {"reads": ["knowledge"], "writes": ["relations"], "per_tick": false},
+    "knowledge": {"reads": ["knowledge", "position"], "writes": ["knowledge"], "per_tick": false},
+    "states": {"reads": ["time"], "writes": ["status"], "per_tick": false},
+    "fire": {"reads": ["fire", "position"], "writes": ["fire", "smoke", "status"], "per_tick": true},
+    "crime_watch": {"reads": ["relations", "knowledge"], "writes": ["relations", "status"], "per_tick": false, "after": ["relations"]},
+    "director": {"reads": ["hooks", "relations", "fire"], "writes": [], "per_tick": false},
+    "notes": "SCHED-1: reads/writes annotations are data; the scheduler builds the per-tick pass order from the per_tick subset and fails loudly on write-write ambiguity without before/after hints (docs/blueprint/phase0.md §2). Systems flip per_tick as their iterations land (fire: iter-2; knowledge/relations/states: iter-3; director: iter-4)"
+  },
+
+  "checks": {
+    "die": 20,
+    "tie": "defender",
+    "failure_margin": 10,
+    "skills": {
+      "stealth": {"base": 40},
+      "perception": {
+        "base": 50,
+        "status_modifiers": {
+          "intoxication": {"per_10_points": -2},
+          "fatigue": {"per_10_points": -1},
+          "injury": {"flat": -10},
+          "fear": {"flat_at_least": 50, "flat": -10},
+          "attention": {"flat_when": "distracted", "flat": -15}
+        }
+      },
+      "social": {"base": 50},
+      "pursuit": {"base": 45},
+      "evasion": {"base": 45},
+      "context": {"base": 50}
+    },
+    "kinds": {
+      "perception": {"attack": "perception", "defend": null, "defender_source": "environment"},
+      "social": {"attack": "social", "defend": null, "defender_source": "environment"},
+      "context": {"attack": "context", "defend": null, "defender_source": "environment"},
+      "stealth_vs_perception": {"attack": "stealth", "defend": "perception", "defender_source": "target"},
+      "stealth_vs_observers": {"attack": "stealth", "defend": "perception", "defender_source": "best_in_location"},
+      "evasion_vs_pursuit": {"attack": "evasion", "defend": "pursuit", "defender_source": "best_in_location"}
+    },
+    "methods": {
+      "distraction": {"defender_modifier": -10}
+    },
+    "notes": "Opposed check (INTENT_SCHEMA §5): attacker total = skill base + status modifiers + d20 vs defender total; defender = the named skill of the defender entity (target / best-in-location excluding the actor) or the flat difficulty (environment); tie → defender; defender wins by ≥ failure_margin → total failure where the action distinguishes it. Skill numbers are v0.1 defaults; the difficulty column of MVP_SCOPE §7 seeds the per-action values in actions.json"
   },
 
   "relations": {
@@ -39,7 +79,7 @@
       "document_check_at": 50,
       "arrest_attempt_at": 75
     },
-    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; 50/75 are v0.1 defaults for hooks the spec names but does not number"
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; 50/75 are v0.1 defaults for hooks the spec names but does not number. Suspicion state changes land with the crime system (iter-3)"
   },
 
   "knowledge": {
@@ -47,7 +87,7 @@
     "fidelity_chain": ["exact", "partial", "vague"],
     "transfer_decay_steps": 1,
     "rumor_acceptance": {"base": 50, "trust_weight": 0.2, "teller_intoxication_penalty_per_10": -1},
-    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix)"
+    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). Transfer itself lands iter-3"
   },
 
   "states": {
@@ -55,16 +95,41 @@
     "intoxication": {"decay_per_360_ticks": 10},
     "fear": {"decay_per_360_ticks": 5, "spike_on_alarm": 40},
     "injury": {"auto_decay": 0},
-    "notes": "modifiers feed perception (position_visibility) and behavior; no group reputation in v0 (D-006)"
+    "attention": {"decay_per_360_ticks": 0},
+    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes land with the states system (iter-3)"
   },
 
-  "fire": {
-    "ignition": {"requires": ["fire_source", "flammable_spot"], "chance_on_drop_break": 0.9},
-    "spread": {"chance_per_tick_to_adjacent_spot": 0.15, "through_locations": false},
-    "smoke": {"starts_after_ticks": 10, "visibility_penalty": -20},
-    "alarm": {"raised_when": "occupant_present_and_fire_visible", "fear_spike": 40},
-    "burnout": {"location_destroyed_after_ticks_unchecked": 120, "irreversible": true},
-    "notes": "fire has no counter-event: a burned tavern stays burned (T4, EVENT_SCHEMA §4). All rates are v0.1 defaults"
+  "transitions": {
+    "fire": {
+      "system": "fire",
+      "spot_field": "fire_spots",
+      "ignition": {
+        "requires_item_flag": "is_fire_source",
+        "requires_flammability": ["low", "medium", "high"],
+        "chance_on_drop_break": 0.9
+      },
+      "spread": {"chance_per_tick": 0.15, "within": "location"},
+      "smoke": {"after_ticks": 10},
+      "burnout": {"after_ticks": 120, "irreversible": true},
+      "alarm": {"when_occupants_present": true, "fear_spike": 40},
+      "events": {
+        "started": "fire_started",
+        "spread": "fire_spread",
+        "smoke": "smoke_rising",
+        "alarm": "alarm_raised",
+        "burnout": "location_burned_out"
+      },
+      "knowledge": {
+        "started": {"who": "same_location", "except": ["cause_actor"], "channel": "saw", "fidelity": "exact", "knows": "fire_in_{location}"},
+        "spread": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "fire_spreading_in_{location}"},
+        "smoke": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "smoke_in_{location}"},
+        "alarm": {"who": "same_location", "channel": "heard", "fidelity": "exact", "knows": "fire_alarm_in_{location}"},
+        "alarm_adjacent": {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "shouting_near_{location}"},
+        "burnout": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "{location}_burned_down"}
+      },
+      "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED smoke/burnout follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); position_visibility.smoke_penalty stays with the perception input it belongs to"
+    },
+    "notes": "generic transition engine (core/transition.py) iterates pack-declared layers by name — core code carries no layer names (INV-3)"
   },
 
   "crime_watch": {
@@ -77,7 +142,7 @@
       "heard_noise": 10,
       "rumor_about_figure": 5
     },
-    "notes": "watch change = knowledge-transfer event between guards (D-006); 'document check in two hours' = 120 ticks seeded at event time (MVP_SCOPE §11)"
+    "notes": "watch change = knowledge-transfer event between guards (D-006); 'document check in two hours' = 120 ticks seeded at event time (MVP_SCOPE §11). The reacting crime system lands iter-3; the steal-failure hooks seeded by actions.json reference document_check.hook"
   },
 
   "director": {
@@ -85,7 +150,7 @@
     "buffer": "hooks seeded at event time, never invented later",
     "triggers": ["time", "place", "threshold"],
     "stagnation_detector": {"release_after_ticks_without_visible_event": 90, "releases": "lowest-threshold seeded hook only"},
-    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. Director-off A/B is mandatory (T8)"
+    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. Director-off A/B is mandatory (T8). Lands iter-4"
   },
 
   "importance": {

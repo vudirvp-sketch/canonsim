@@ -6,6 +6,22 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-2 · 2026-08-28 · actions — the 12, checks, price (iter-2-actions)
+- core/{intent,resolvers,transitions,scheduler}.py + loop rewire: front
+  door (shape loud / preconditions soft → `intent_rejected` no-ops with
+  cause chains), OCC `based_on_event_seq` with breaking-event attribution,
+  opposed checks + knowledge templates + preconditions all pack-driven;
+  fire = a pack-declared transition layer (generic engine, no layer names
+  in code); system-pass DAG with build-time ambiguity check. INTENT_SCHEMA
+  written (trigger fired). INV-3 stoplist test (segment matching, pack
+  self-check). 20 files — over the 3–5 soft limit (task-mandated module
+  set + sync set, same pattern as iter-1).
+- Tests 77→148 green, ruff clean; golden fixture survived byte-identical.
+  KI#12 opened (OCC lacks a natural e2e trigger until NPC reactions).
+  KI#4 gains the first balance observation (low-difficulty environment
+  checks auto-succeed at v0.1 numbers). Fix during work: spread-pass spot
+  prefix mismatch (prop keys vs spot names) caught by the day1 probe.
+---
 iter-1 · 2026-08-28 · core plumbing — first functional code (iter-1-core-plumbing)
 - core/{schema,rng,ids,clock,queue,log,fold,pack,loop}.py: RngBank guards
   (assure/audit/peek/fingerprint), band-ordered heapq, cause-checked JSONL
@@ -127,6 +143,3 @@ iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (live-char-guide)
   PACK_SPEC lint vocabulary. License clean MIT. All ref-N backlog complete
   (ref-1..ref-13 + iter-0h cousins).
 ---
-iter-0s-followup · 2026-08-27 · post-push verification pass (owner request)
-- KI#7 opened (capped-memory drift: worklog ~880-line entries vs the 3–5
-  law; TASKS done entries uncollapsed); no functional change.

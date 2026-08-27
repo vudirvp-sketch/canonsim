@@ -1,26 +1,27 @@
 # STATUS — canonsim
 
-Iteration: 1 (`iter-1-core-plumbing` — the first functional-code
-iteration; the 26-iteration docs streak ends here)
-· Phase: 0 — simulator without LLM · Date: 2026-08-28
+Iteration: 2 (`iter-2-actions`) · Phase: 0 — simulator without LLM ·
+Date: 2026-08-28
 
-iter-1 lands the core plumbing per `docs/blueprint/phase0.md` §1:
-`core/{schema,rng,ids,clock,queue,log,fold,pack,loop}.py` — the RngBank
-with `assure`/`audit`/`peek` guards and the substantive-draw fingerprint;
-the band-ordered heapq queue `(tick, sub_order, actor_id, seq)`; the
-append-only JSONL writer (cause-chain integrity, gap-free writer-assigned
-ids, write-time schema validation — the only canon-write path); the
-incremental projection + fold (STATE-1, KI#5 closed by construction);
-the pack loader with the phase-0 minimum lint; and the playscript runner
-(movement + wait — the two check-less actions; the ten check-bearing
-ones land iter-2 with the ActionResolver registry). Tests: architecture
-fitness (import boundary · RNG monopoly · network ban · print ban), T0
-(the EVENT_SCHEMA examples are extracted from the doc at test time — no
-fixture copy to drift), minimal T1 (byte-identical runs + the committed
-golden `tests/fixtures/plumbing_smoke_seed42.jsonl`), core units, loop
-e2e — 78 green, ruff clean. Owner decisions recorded: D-032 (KI#10 →
-stdlib mini-validator, closed), D-033 (P2c → iter-3), D-034 (DECISIONS
-cap: collapse at phase gates; the file sits at 34 entries until then).
+iter-2 lands the action layer per `docs/blueprint/phase0.md` §2: the
+intent front door with OCC + lifecycle (`docs/INTENT_SCHEMA.md` — the
+SPECS_BACKLOG trigger fired and the spec is written from the build); the
+12 resolvers as a name→registry (pack data maps intents to generic
+mechanics — INV-3 held in code, enforced by the new grep stoplist test);
+pack-driven preconditions (a closed 13-test structured filter set),
+opposed checks (skills/die/tie/margins — every number in `rules.json`),
+knowledge templates (audiences × slot-filling, hearing radii); the
+system-pass scheduler DAG (build-time ambiguity check, pack `systems`
+data); and the generic transition engine — fire is a pack-declared
+layer (ignite → alarm+spike → spread pass → smoke → irreversible
+burnout), core code carries no layer names. Impossible-but-well-formed
+intents are logged `intent_rejected` no-ops with cause chains — the
+iter-1 loud-raise contract for preconditions is retired (shape errors
+stay loud). AC met: steal/arson/talk are facts in the log with knowledge
+records (ev_0007's record family byte-for-byte its template); T5 partial
+holds (teleport/arson-unsourced/carried-take/absent-item rejected, world
+unchanged). 148 tests green, ruff clean; the iter-1 golden fixture
+survived byte-identical (move/wait event bytes are the anchor).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -42,21 +43,40 @@ cap: collapse at phase gates; the file sits at 34 entries until then).
 ## Active KIs
 
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
-- KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6).
+- KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6). First balance observation from iter-2: with v0.1 numbers, environment checks at difficulty ≤ 30 auto-succeed for an unmodified actor (skill base 50 + d20) — talk/examine/use/distract never fail as shipped; the failure branches are mechanism-tested via a crafted high-difficulty pack copy. Retuning is pack data, validated by `balance-1`.
+- KI#12 · intent OCC has no natural e2e trigger in iter-2 runs — single-actor sequential playscripts never move the projection between proposal and completion (only the fire chain interleaves, and it moves no positions/carriers). The mechanism + cause attribution are unit-tested (`tests/test_intent.py::test_occ_finds_the_breaking_event`); a natural trigger arrives with NPC reactions (iter-3) or the director (iter-4). Do not delete until an e2e test exists.
 - KI#5 · runtime state vs test fold not explicitly separated — CLOSED iter-1: the Simulator keeps the incremental projection (`apply_event` per emission), `fold` exists only on the T2 test path — D-023/STATE-1 implemented and test-enforced (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
 - KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1: owner approved the stdlib mini-validator; landed as `core/schema.py` (D-032) — write-time validation in the log writer, T0 on doc examples + committed logs.
 - KI#11 · doc drift batch, 11 findings — CLOSED iter-0aa: tick arithmetic + fabricated "MVP_SCOPE §4.1" citation (phase0 §1, df_worldgen.md); ROADMAP §4 "week 1"; MVP_SCOPE §13 "day 3" + §5 system-3 npc↔npc gap; TASKS "post-sprint" + missing iter-0f Done line; P3c mislabels (phase0 §2, EVENT_SCHEMA §11); AGENT_NAVIGATION tests rows; README "empty". Details: worklog iter-0aa.
 
 ## FAQ / Pitfalls
 
+- **INV-3's stoplist scope (iter-2 interpretation, test-owned).** The
+  stoplist (`tests/test_inv3_stoplist.py`) bans **setting** nouns — the
+  invariant's named examples plus entity names and location/item
+  vocabulary — matched as code segments (`guard`, `npc_guard_01`,
+  `loc_guardroom` all trip; English derivations like 'guards' do not).
+  Mechanic words (take, move, talk, fire, stealth — MVP_SCOPE §7's own
+  vocabulary) stay legal; pack data is never grepped. The word list is
+  tied to the pack by a self-check, so it cannot rot silently.
+- **The loud/soft front-door line.** Malformed playscript steps (unknown
+  fields, missing targets, bad spot names, unknown methods) raise
+  `RunnerError` — author bugs crash. Well-formed but world-impossible
+  intents emit `intent_rejected` no-op events — character attempts are
+  facts. Moving a check from one side to the other is a contract change,
+  not a refactor (INTENT_SCHEMA §9).
 - **The golden T1 fixture is env-pinned.** The log header records the
   Python version (`AGENTS.md` §10 — same-environment determinism only), so
   `tests/fixtures/plumbing_smoke_seed42.jsonl` byte-compares only on the
   Python it was generated on. On an interpreter bump the byte-compare
   fails **by design**: regenerate (Simulator, seed 42, commit `"0000000"`,
   playscript `tests/playscripts/plumbing_smoke.json`) and commit the new
-  fixture together with the env change. The full in-pytest regeneration
-  guard lands with T1 at iter-6 (`docs/blueprint/phase0.md` §6).
+  fixture together with the env change. The same procedure applies to a
+  deliberate behavior change that alters emitted bytes — iter-2 kept the
+  fixture byte-identical (move/wait events anchor it), which is the
+  regression proof that the front-door rewire changed no iter-1 canon.
+  The full in-pytest regeneration guard lands with T1 at iter-6
+  (`docs/blueprint/phase0.md` §6).
 - **A ref citing a spec section it never contained is drift, not history.**
   The pre-D-028 FAQ rule protects *real* historical wording — verify with
   `git log -S "<phrase>" -- <file>` before calling something history.
@@ -154,11 +174,11 @@ cap: collapse at phase gates; the file sits at 34 entries until then).
 
 ## Next step
 
-**iter-2 · actions** (`docs/TASKS.md`): the 12 actions with
-checks/outcomes/durations (`MVP_SCOPE.md` §7), pack-driven preconditions,
-INTENT_SCHEMA with `based_on_event_seq` OCC, the scheduler DAG with
-`reads`/`writes` annotations, the ActionResolver registry (the two
-iter-1 resolvers grow into it), and the INV-3 grep stoplist test. Read
-before building: `docs/blueprint/phase0.md` §2 + `MVP_SCOPE.md` §7;
-ledger rows TIME-1, EPIST-1 (price precursor), PACK-1, STATE-1
-(`docs/BLUEPRINT.md` §3 build index).
+**iter-3 · knowledge + relations + expectations** (`docs/TASKS.md`):
+knowledge transfer with fidelity decay (rumor = transfer event,
+`EVENT_SCHEMA.md` §3), the crime system reacting to steal-failure records
+(the ev_0007 state_changes: suspicion 0→25, status → suspect, thresholds
+from `rules.json` `crime_watch`), watch-change transfer, P2a npc↔npc
+relations (D-020), P2d expectation_violation (KI#3), P2c detail callbacks
+(D-033). Read before building: `docs/blueprint/phase0.md` §3 +
+`MVP_SCOPE.md` §10; ledger rows EPIST-1, LOD-1, STATE-1.

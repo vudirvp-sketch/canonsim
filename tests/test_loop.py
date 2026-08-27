@@ -75,25 +75,30 @@ def test_t2_fold_equals_runtime_projection(tmp_path: Path) -> None:
 def test_teleport_stays_impossible(tmp_path: Path) -> None:
     sim = make_sim(tmp_path)
     # loc_street is a hub (adjacent to everything); from the tavern only the
-    # street and the backyard are reachable — the market is not.
+    # street and the backyard are reachable — the market is not. The front
+    # door rejects the well-formed but impossible intent with a no-op event
+    # (phase0 §2); the position never changes (T5).
     far = script([
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "move", "target": "loc_market"},
     ])
-    with pytest.raises(RunnerError, match="teleport"):
-        sim.run_playscript(far)
+    result = sim.run_playscript(far)
+    assert result.event_count == 2
+    assert sim.projection["pc_01"]["position"] == "loc_tavern"
+    _, events = read_log(tmp_path / "run_42.jsonl", SCHEMA)
+    rejection = events[-1]
+    assert rejection.type == "intent_rejected"
+    assert rejection.outcome["action"] == "move"
+    assert rejection.outcome["reason"] == "precondition"
+    assert rejection.outcome["failed_test"] == "target.adjacent_to"
+    assert rejection.state_changes == ()  # the world did not change
+    assert rejection.provenance["cause_intent"].startswith("intent_")
 
 
 def test_unknown_intent_is_loud(tmp_path: Path) -> None:
     sim = make_sim(tmp_path)
     with pytest.raises(RunnerError, match="unknown intent"):
         sim.run_playscript(script([{"intent": "fly", "target": "loc_tavern"}]))
-
-
-def test_check_bearing_actions_land_iter_2(tmp_path: Path) -> None:
-    sim = make_sim(tmp_path)
-    with pytest.raises(RunnerError, match="iter-2"):
-        sim.run_playscript(script([{"intent": "steal", "target": "npc_guard_01"}]))
 
 
 def test_wait_requires_positive_ticks(tmp_path: Path) -> None:
@@ -107,7 +112,7 @@ def test_wait_requires_positive_ticks(tmp_path: Path) -> None:
 
 def test_move_rejects_extra_fields_and_missing_target(tmp_path: Path) -> None:
     sim = make_sim(tmp_path)
-    with pytest.raises(RunnerError, match="no extra step fields"):
+    with pytest.raises(RunnerError, match="takes no step fields"):
         sim.run_playscript(script([{"intent": "move", "target": "loc_tavern",
                                     "method": "sneaky"}]))
     sim2 = make_sim(tmp_path)

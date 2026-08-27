@@ -11,7 +11,7 @@ Guards (donor discipline, `docs/blueprint/phase0.md` §1):
   `assureCosmeticRNG`); nesting a *different* stream inside an assured scope
   raises immediately: a wrong-stream draw is loud, never silent.
 - `audit(name)` — assert zero draws on `name` inside the scope (DCSS
-  `ASSERT_stable`); the test guard.
+  `ASSERT_stable`); the test-side assertion.
 - `peek(name)` — non-advancing read of the next float (tests only).
 
 A draw outside any `assure` scope goes to the default active stream:

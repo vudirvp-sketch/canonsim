@@ -31,7 +31,7 @@ PLAYER_INTENT: Final[int] = 100
 NPC_REACTION: Final[int] = 200
 SCHEDULED: Final[int] = 300
 
-QueueKind = Literal["intent", "completion"]
+QueueKind = Literal["intent", "completion", "pass", "follow_up"]
 
 
 @dataclass(frozen=True, slots=True)

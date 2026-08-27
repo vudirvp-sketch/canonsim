@@ -360,10 +360,12 @@ Background: `bg-1..bg-4` run in parallel on foreign canon (`docs/TASKS.md`).
 
 - Python (iterations, schemas, CLI). Rust/TypeScript = separate decision after
   the core is confirmed.
-- `core/` (clock, rng, queue, log writer, fold/replay, ids) · `sim/systems/`
-  (the 8) · `content/tavern_pack/` (JSON: entities, actions, rules, templates)
-  · `render/` (chronicle) · `brief/` (reserved, phase 1) · `cli/` · `tests/` +
-  `tests/playscripts/`.
+- `core/` (clock, rng, queue, log writer, fold/replay, ids, intent
+  front-door + checks + OCC, action resolvers + registry, transitions,
+  scheduler) · `sim/systems/` (the 8 — declared as pack data from iter-2,
+  first system code in iter-3) · `content/tavern_pack/` (JSON: entities,
+  actions, rules, templates) · `render/` (chronicle) · `brief/`
+  (reserved, phase 1) · `cli/` · `tests/` + `tests/playscripts/`.
 - stdlib-only runtime deps; pytest + ruff as dev deps. Type hints on public
   functions. No `print` in committed code (CLI excepted) — log instead.
 - Core code never mentions domain words (INV-3); a grep stoplist test

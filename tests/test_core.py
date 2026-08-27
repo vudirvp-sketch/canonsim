@@ -261,6 +261,8 @@ def test_initial_projection_flattens_pack_state() -> None:
     assert state["npc_guard_01"]["relations.suspicion"] == 0
     assert state["npc_drunk_01"]["status.intoxication"] == 50
     assert state["purse_01"]["position"] == "loc_tavern"
+    assert state["purse_01"]["carrier"] == "npc_guard_01"  # iter-2: carrier projected
+    assert state["oil_lamp_01"]["carrier"] is None
     assert state["loc_tavern"] == {}  # locations: registered, prop-less
 
 
@@ -374,4 +376,103 @@ def test_pack_lint_catches_extra_files(tmp_path: Path) -> None:
         (target / "extra.json").write_text("{}")
 
     with pytest.raises(PackError, match="expected exactly"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- pack lint: the iter-2 intent-contract cross-refs ---------------------------
+
+
+def test_pack_lint_catches_unknown_resolver_key(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        actions["actions"][0]["resolver"] = "levitate"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="not in the registry"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_precondition_test(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        talk = next(a for a in actions["actions"] if a["intent"] == "talk")
+        talk["requires"][0]["test"] = "likes_actor"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown precondition test"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_event_type_outside_vocabulary(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        examine = next(a for a in actions["actions"] if a["intent"] == "examine")
+        examine["events"]["success"] = "examine_superbly"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="template vocabulary"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_check_kind(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        examine = next(a for a in actions["actions"] if a["intent"] == "examine")
+        examine["check"]["kind"] = "luck"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown check kind"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_knowledge_audience(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        look = next(a for a in actions["actions"] if a["intent"] == "look_around")
+        look["knowledge"]["success"][0]["who"] = "everyone"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown audience"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_knowledge_slot(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        look = next(a for a in actions["actions"] if a["intent"] == "look_around")
+        look["knowledge"]["success"][0]["knows"] = "scene_{planet}"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown slot"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_missing_rejection_template(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        templates = json.loads((target / "templates.json").read_text())
+        del templates["events"]["intent_rejected"]
+        (target / "templates.json").write_text(json.dumps(templates))
+
+    with pytest.raises(PackError, match="intent_rejected"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_ambiguous_per_tick_schedule(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        # two per-tick systems both writing 'status' with no explicit order
+        rules["systems"]["states"]["per_tick"] = True
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="both write"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_layer_system_not_per_tick(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["systems"]["fire"]["per_tick"] = False
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="per-tick system"):
         load_pack(_broken_pack(tmp_path, mutate))

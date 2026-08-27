@@ -15,14 +15,16 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 1 — core plumbing landed: RngBank (INV-2 guards,
-substantive/cosmetic streams, draw fingerprint), integer clock, band-ordered
-event queue, append-only JSONL log with header (write-time schema
-validation — the only canon-write path), incremental projection + fold,
-pack loader with the phase-0 minimum lint, playscript runner (movement +
-wait; the ten check-bearing actions land iter-2). 78 tests green, ruff
-clean; the first golden log fixture is committed. Next: iter-2 · actions
-(`docs/TASKS.md`).
+Phase 0, iteration 2 — the action layer landed: the intent front door
+with OCC + lifecycle (`docs/INTENT_SCHEMA.md`), the 12 actions as a
+pack-driven resolver registry (preconditions, opposed checks, knowledge
+templates — all numbers and vocabulary in `content/tavern_pack/`), the
+system-pass scheduler DAG, and the generic transition engine (the fire
+chain: ignite → alarm → spread → smoke → irreversible burnout).
+Impossible intents are logged no-op rejections, never silent drops; steal
+/ arson / talk are facts in the log with knowledge records. 148 tests
+green, ruff clean; the iter-1 golden log fixture survived byte-identical.
+Next: iter-3 · knowledge, relations, expectations (`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 

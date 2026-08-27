@@ -9,20 +9,14 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-2 · actions — todo
-
-- The 12 actions with checks/outcomes/durations (`MVP_SCOPE.md` §7);
-  pack-driven preconditions; event emission for each; INTENT_SCHEMA (with
-  `based_on_event_seq` OCC — `docs/blueprint/phase0.md` §2); scheduler DAG
-  with `reads`/`writes` annotations; INV-3 grep stoplist test.
-- AC: steal / arson / talk = facts in the log with knowledge records;
-  impossible stays impossible (T5 partial).
-
-### iter-3 · knowledge + relations + expectations — todo
+### iter-3 · knowledge + relations + expectations — todo (next)
 
 - Knowledge records; transfer with fidelity decay; suspicion / relations
-  updates; watch-change transfer; NPC memory driving behavior (guards act on
-  suspicion thresholds).
+  updates (the ev_0007 state_changes — suspicion 0→25, crime status — ride
+  the crime system reacting to steal-failure knowledge, not the action);
+  watch-change transfer; NPC memory driving behavior (guards act on
+  suspicion thresholds); movement-sighting records (the perception pass
+  noticing move/flee).
 - **P2a NPC↔NPC relations** (D-020): sparse pair-keyed relation map — rumor
   acceptance already weighs trust, trust now has a data home; enables guard
   coordination and non-PC story lines.
@@ -166,6 +160,11 @@
 
 ## Done
 
+- iter-2 · 2026-08-28 · actions: the 12 resolvers + registry, pack-driven
+  preconditions/checks/knowledge templates, intent OCC + lifecycle
+  (INTENT_SCHEMA.md), scheduler DAG, generic transition engine (fire
+  chain), INV-3 stoplist; steal/arson/talk = facts with records; T5
+  partial (rejections are logged no-ops). 148 tests green.
 - iter-1 · 2026-08-28 · core plumbing: RngBank, clock, queue, JSONL log +
   header, fold/projection, pack loader + lint, playscript runner; T0/T1
   minimal + architecture fitness; KI#10/KI#5 closed, D-032..D-034 recorded.

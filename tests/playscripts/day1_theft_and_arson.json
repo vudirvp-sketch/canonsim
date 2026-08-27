@@ -1,0 +1,13 @@
+{
+  "name": "day1_theft_and_arson",
+  "seed": 8,
+  "pack": "tavern_pack@0.1",
+  "steps": [
+    {"intent": "move", "target": "loc_tavern"},
+    {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+    {"intent": "take", "target": "oil_lamp_01"},
+    {"intent": "move", "target": "loc_backyard"},
+    {"intent": "drop_break", "target": "oil_lamp_01", "near": "back_wall"},
+    {"intent": "wait", "ticks": 200}
+  ]
+}
