@@ -4,11 +4,12 @@
 > when done). Update statuses at the end of every iteration. New ideas enter
 > here, never the diff. Full law: `AGENTS.md` §2. Done-detail lives in git
 > history + `worklog.md` + the owning docs — never restated here (KI#7
-> cleanup, iter-0v).
+> cleanup, iter-0v). Day-tags removed per D-029 (calendar dropped); the
+> build sequence is iteration-counted (`MVP_SCOPE.md` §17).
 
 ## Track A — main (simulator, no LLM)
 
-### iter-1 · core plumbing (sprint days 3–4) — todo
+### iter-1 · core plumbing — todo
 
 - Seed → RngBank (RNG-1, INV-2 per D-028): one master seed; named streams
   deterministically derived (`stable_hash(f"{seed}:{stream}")`, sha256-based)
@@ -24,7 +25,7 @@
 - AC: world creates from seed; an event writes; a playscript plays end-to-end;
   `pytest -q` green.
 
-### iter-2 · actions (days 5–6) — todo
+### iter-2 · actions — todo
 
 - The 12 actions with checks/outcomes/durations (`MVP_SCOPE.md` §7);
   pack-driven preconditions; event emission for each; INTENT_SCHEMA (with
@@ -33,7 +34,7 @@
 - AC: steal / arson / talk = facts in the log with knowledge records;
   impossible stays impossible (T5 partial).
 
-### iter-3 · knowledge + relations + expectations (days 7–8) — todo
+### iter-3 · knowledge + relations + expectations — todo
 
 - Knowledge records; transfer with fidelity decay; suspicion / relations
   updates; watch-change transfer; NPC memory driving behavior (guards act on
@@ -50,7 +51,7 @@
 - AC: characters know different things and react differently; NPCs notice
   absences they had reason to expect; T3 blind-NPC passes.
 
-### iter-4 · director + goal ticker (days 9–10) — todo
+### iter-4 · director + goal ticker — todo
 
 - Consequence buffer seeded at event time; triggers (time / place /
   threshold); stagnation detector releases; director on/off switch.
@@ -67,7 +68,7 @@
   acts without the PC; T4 irreversibility passes; T8 director-off shows
   ≥3 emergent chains.
 
-### iter-5 · chronicle & CLI (days 11–12) — todo
+### iter-5 · chronicle & CLI — todo
 
 - Template chronicle from the log (deterministic tracery engine + ink
   `shuffle` ShufflePool — `docs/blueprint/phase0.md` §5); scene card; CLI:
@@ -75,7 +76,7 @@
   `directors on|off`, `seed`.
 - AC: playable and readable without LLM.
 
-### iter-6 · gate (days 13–14) — todo
+### iter-6 · gate — todo
 
 - Full T1–T8 (T1 with the fixture-regeneration guard —
   `docs/blueprint/phase0.md` §6); director-off A/B on identical seed +
@@ -186,3 +187,4 @@
 - iter-0t · 2026-08-27 · ref-13 live-char-guide dive (SPINE/Price/AP lint).
 - iter-0u · 2026-08-27 · references distillation: `docs/BLUEPRINT.md` + `docs/blueprint/{phase0,phases}.md` (D-027 — 12-resolution ledger + laws + build index).
 - iter-0v · 2026-08-27 · owner-requested audit patches: INV-2 rewritten per D-028 (RngBank law wording; TASKS/TECH_NOTES/MVP_SCOPE synced); 18 audit resolutions landed as blueprint sub-clauses (DAG language, intent OCC + lifecycle, price precursor, eviction contract, retrieval precedence, reflection provenance, copy-from cycle contract, ShufflePool, prune_window, director rejection + per-run scope, T1 fixture guard, phase-0 pack lint, event-vocabulary-per-pack); KI#8 opened/closed; KI#7 resolved (worklog trimmed to cap, TASKS done-collapsed).
+- iter-0w · 2026-08-27 · owner-requested post-reference concept realignment: D-029 — digestion complete, skeleton (phases 0–6, 3 layers, INV-1..5) confirmed, blueprint = the mechanics owner; KI#9 calendar/lifecycle drift fixed (sprint calendar dropped → iteration-counted, CORE_DESIGN_RESEARCH absorbed, ROADMAP §2 blueprint pointer, README Status refreshed).

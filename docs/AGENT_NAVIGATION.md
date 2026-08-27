@@ -19,7 +19,7 @@
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
-| `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | research (iter-0e); absorbed into DECISIONS/TASKS on owner decision |
+| `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | absorbed (D-029; P2c owner-pending); retired at the phase-0 gate review (`doc-1`) |
 | `docs/BLUEPRINT.md` | reference distillation: resolution ledger (12 mechanisms) + cross-cutting laws + build index; entry to `docs/blueprint/` | active (iter-0u); maintained at deep-dive time |
 | `docs/blueprint/` | per-part applied synthesis: `phase0.md` (iter-1..6 combined donor designs), `phases.md` (phases 1–6 architecture + cross-cutting) | active; read before the matching iteration/phase |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |

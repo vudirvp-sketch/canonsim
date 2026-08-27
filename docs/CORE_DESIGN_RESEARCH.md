@@ -4,10 +4,15 @@
 > `docs/SPECS_BACKLOG.md`, specs are born from experiments; this file distills
 > external references (`docs/REFERENCES.md` catalog + widely documented design
 > patterns) into design guidance for the core, written before iter-1 code.
-> Lifecycle: when the owner accepts a proposal, it moves to `docs/TASKS.md` /
-> `docs/DECISIONS.md` and its line here flips to `absorbed → D-0XX`. Nothing
-> here changes phase-0 law (`docs/MVP_SCOPE.md` §2). Cap 400 lines; review at
-> the phase-0 gate alongside `doc-1`.
+> **Status: absorbed (D-029, iter-0w)** — every P1/P2 item is enacted into
+> `docs/DECISIONS.md` / `docs/TASKS.md` / the blueprint (P1a → phase0 §1;
+> P1b–d → D-019; P1e → D-023/KI#5; P2a → D-020; P2b → D-021; P2d → KI#3;
+> P2e → DIRECTOR_SPEC sketch); P2c (detail callbacks) is the single
+> owner-pending candidate (§6); §3's synthesis table is superseded by the
+> blueprint ledger (`docs/BLUEPRINT.md` §1) — retained as research record.
+> Retired at the phase-0 gate review (`doc-1`) alongside the VISION freeze.
+> Nothing here changes phase-0 law (`docs/MVP_SCOPE.md` §2). Cap 600 lines
+> (D-025).
 
 ## 0. The goal function (owner's intent, formalized)
 

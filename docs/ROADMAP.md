@@ -28,6 +28,9 @@ phase-0 gate.
 
 Phase-0 exit/kill details: `docs/MVP_SCOPE.md` §16. Each phase must be
 playable at its exit — the roadmap never crosses a gate with a dead build.
+This table owns gates and kill-criteria; the **post-reference per-phase
+architecture** (D-027/D-029) lives in `docs/blueprint/phases.md` §1–6, the
+phase-0 combined design in `docs/blueprint/phase0.md`.
 
 ## 3. Phase-0 protected non-goals
 

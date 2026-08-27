@@ -15,8 +15,10 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0 — docs & tooling bootstrap. No code yet.
-First code lands in iter-1 (`docs/TASKS.md`).
+Phase 0, iteration 0w — post-reference concept realignment (D-029): the
+research epoch is closed (33 reference deep dives distilled into the blueprint
+layer, `docs/BLUEPRINT.md`); the phase skeleton stands confirmed. No code yet;
+first code lands in iter-1 (`docs/TASKS.md`) — unconditionally next.
 
 ## For AI agents (primary audience)
 

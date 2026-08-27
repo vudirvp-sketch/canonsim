@@ -336,17 +336,22 @@ norm.
 - Knowledge does not affect behavior.
 - The director produces noise instead of causal complications.
 
-## 17. Sprint map (two weeks → iterations)
+## 17. Build sequence (iteration-counted — calendar dropped, D-029)
 
-| Days | Iteration | Deliverable |
-|---|---|---|
-| 1–2 | iter-0 (done) | scope, entities, actions, events, criteria — this docs pack |
-| 3–4 | iter-1 | seed, RNG instance, clock, queue, JSONL log with header, playscript format, pack skeleton: world creates from seed, an event writes, a playscript plays |
-| 5–6 | iter-2 | actions, checks, outcomes, event emission: steal / arson / talk = fact |
-| 7–8 | iter-3 | knowledge records, transfer-rumors, suspicion, relations, NPC memory: characters know different things and react differently |
-| 9–10 | iter-4 | director planner: consequence seeding, triggers, stagnation detector |
-| 11–12 | iter-5 | chronicle templates, scene card, CLI: playable and readable without LLM |
-| 13–14 | iter-6 | tests T1–T8, director-off A/B, manual playtest → phase-0 verdict |
+> The original two-week day-numbered sprint map was dropped: the
+> owner-directed reference-research phase (iter-0..0v) consumed the calendar.
+> Sequencing is by iteration count only; per-iteration donor designs live in
+> `docs/blueprint/phase0.md`, the build index in `docs/BLUEPRINT.md` §3.
+
+| Iteration | Deliverable |
+|---|---|
+| iter-0..0v (done) | docs & tooling bootstrap; reference research: 33 deep dives (`docs/ref/`) distilled into the blueprint (D-027/D-028); concept realignment (D-029) |
+| iter-1 | seed, RngBank, clock, queue, JSONL log with header, playscript format, pack skeleton: world creates from seed, an event writes, a playscript plays |
+| iter-2 | actions, checks, outcomes, event emission: steal / arson / talk = fact |
+| iter-3 | knowledge records, transfer-rumors, suspicion, relations, NPC memory: characters know different things and react differently |
+| iter-4 | director planner: consequence seeding, triggers, stagnation detector |
+| iter-5 | chronicle templates, scene card, CLI: playable and readable without LLM |
+| iter-6 | tests T1–T8, director-off A/B, manual playtest → phase-0 verdict |
 
 Background: `bg-1..bg-4` run in parallel on foreign canon (`docs/TASKS.md`).
 

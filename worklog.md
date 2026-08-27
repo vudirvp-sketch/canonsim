@@ -6,6 +6,17 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-0w · 2026-08-27 · owner-requested post-reference concept realignment (D-029)
+- Verdict recorded: skeleton (phases 0–6, 3 layers, INV-1..5) stands; the
+  blueprint is the single post-reference mechanics owner. Drift fixed
+  (KI#9 opened/closed): sprint calendar dropped (MVP_SCOPE §17
+  iteration-counted, TASKS day-tags removed); CORE_DESIGN_RESEARCH →
+  absorbed; ROADMAP §2 → blueprint pointer; README Status → 0w; D-029.
+- 9 files touched — over the 3–5 soft limit: the mandated sync set (STATUS,
+  worklog, TASKS, AGENT_NAVIGATION) + the five realignment targets; same
+  pattern as iter-0u/0v. No code; pytest green, ruff clean. 22nd docs
+  iteration (owner-requested, D-022); **iter-1 code is next, unconditionally**.
+---
 iter-0v · 2026-08-27 · owner-requested audit patches (the 21-point iter-0u audit, applied)
 - INV-2 rewritten in AGENTS.md per D-028 (one master seed; named streams;
   sha256-based `stable_hash`); stale one-instance wording purged from TASKS
@@ -70,7 +81,3 @@ iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive
 - New `docs/ref/{wesnoth_wml,endless_sky_dsl,ink,tracery}.md` (event/narrative
   grammar family); ref-5 done; KI#6 license drift closed; AGENT_NAV §1 +
   STATUS + worklog + TASKS synced.
----
-iter-0m · 2026-08-26 · owner-requested ref-4 batch deep dive
-- New `docs/ref/{rimworld,l4d_director,alien_isolation}.md` (pacing trio);
-  ref-4 done in-place; AGENT_NAVIGATION §1 + STATUS + worklog + TASKS synced.
