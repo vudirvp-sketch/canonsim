@@ -6,6 +6,18 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-0x · 2026-08-27 · owner-requested reference-influence traceability audit
+- Verdict: load-bearing — 4-place chain verified (docs/ref/ → synthesis →
+  blueprint → TASKS/SPECS clauses); ledger-term spot-greps all land in
+  planning docs; INV-2 rewrite (D-028) is the constitutional proof; plan
+  review found no new blockers beyond KI#3/4/5. Caveats: no code yet
+  (iter-1 = the proof point); P2c owner-pending; rules.json flat stagnation
+  timer → narrative entropy at iter-4 (phase0 §4). FAQ: ref-graveyard grep
+  diagnostic.
+- 4 files touched (STATUS, worklog, TASKS, README). No code; pytest green,
+  ruff clean. 23rd docs iteration (owner-requested, D-022); **iter-1 code is
+  next, unconditionally**.
+---
 iter-0w · 2026-08-27 · owner-requested post-reference concept realignment (D-029)
 - Verdict recorded: skeleton (phases 0–6, 3 layers, INV-1..5) stands; the
   blueprint is the single post-reference mechanics owner. Drift fixed
@@ -76,8 +88,3 @@ iter-0p · 2026-08-26 · owner-requested ref-7 3-batch deep dive
 - New `docs/ref/{generative_agents,ai_town,letta}.md` (LLM-agent precedents,
   mostly negative; bg-4 cost anchors); ref-7-a/b/c flipped todo→done with
   corrected Apache-2.0 license annotation on ref-7-a.
----
-iter-0n · 2026-08-26 · owner-requested ref-5 4-batch deep dive
-- New `docs/ref/{wesnoth_wml,endless_sky_dsl,ink,tracery}.md` (event/narrative
-  grammar family); ref-5 done; KI#6 license drift closed; AGENT_NAV §1 +
-  STATUS + worklog + TASKS synced.

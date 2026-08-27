@@ -15,9 +15,9 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0w — post-reference concept realignment (D-029): the
-research epoch is closed (33 reference deep dives distilled into the blueprint
-layer, `docs/BLUEPRINT.md`); the phase skeleton stands confirmed. No code yet;
+Phase 0, iteration 0x — reference-influence traceability audit (owner round):
+the ref/blueprint corpus is confirmed load-bearing in the plans (4-place
+chain verified; see `STATUS.md`); no new plan-level blockers. No code yet;
 first code lands in iter-1 (`docs/TASKS.md`) — unconditionally next.
 
 ## For AI agents (primary audience)

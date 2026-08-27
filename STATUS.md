@@ -1,22 +1,28 @@
 # STATUS — canonsim
 
-Iteration: 0w (owner-requested: post-reference concept realignment — D-029;
-the skeleton stands, the sprint calendar falls) · Phase: 0 — simulator
-without LLM · Date: 2026-08-27
+Iteration: 0x (owner-requested: reference-influence traceability audit —
+"are the ref/blueprint juices extracted and load-bearing?") · Phase: 0 —
+simulator without LLM · Date: 2026-08-27
 
-iter-0w realigns the plan documents to the post-reference reality (D-029,
-owner-requested concept review). **Verdict: the concept skeleton stands** —
-thesis, three layers, INV-1..5, and the phase gates 0–6 all survived the
-33-reference digestion; what changed is the mechanics inside each phase, now
-owned by the blueprint layer (D-027/D-028). Plan drift fixed (KI#9, opened/
-closed): the pre-research two-week day-numbered sprint calendar is dropped
-(`MVP_SCOPE.md` §17 → iteration-counted; TASKS day-tags removed);
-`CORE_DESIGN_RESEARCH.md` flips to absorbed per its own lifecycle rule (P2c
-remains the only owner-pending proposal); `ROADMAP.md` §2 links the blueprint
-as the per-phase architecture owner; README Status refreshed to 0w. No code,
-no spec writing, no ref-N.
+iter-0x records the owner-requested verification round. **Verdict: the
+references are load-bearing, not a graveyard.** The four owned places
+(D-024/D-026/D-027) chain intact: `docs/ref/` (33 files, per-source
+verdicts) → `CORE_DESIGN_RESEARCH.md` §2 (absorbed) → `BLUEPRINT.md` ledger
++ laws → `blueprint/` parts → TASKS iter-1..6 + SPECS_BACKLOG clauses.
+Evidence: INV-2 itself was rewritten from donor evidence (D-028 — refs
+reached the constitution); ledger terms grep-trace from refs into planning
+docs (ShufflePool, ASSERT_stable, Influence Boundary, promoteTile, bm25,
+copy-from, GeoNames 684); the drafted `rules.json` already carries donor
+decisions (D-005 director mode). The same round's plan review found no new
+plan-level blockers beyond the tracked KIs (KI#3/4/5) — consistent with
+D-029. Caveats on record: no code yet — iter-1..6 is where the blueprint
+becomes load-bearing in code; ref-14/15 (Sims, Prom Week) are
+synthesis-only by design; P2c remains the single owner-pending item; the
+drafted flat stagnation timer in `rules.json` is superseded by narrative
+entropy at iter-4 (`docs/blueprint/phase0.md` §4) — tracked, not lost.
+No code, no spec writing, no ref-N.
 
-**Doc-loop accounting:** 22nd consecutive docs iteration — owner-requested
+**Doc-loop accounting:** 23rd consecutive docs iteration — owner-requested
 exception (D-022 wording: a fresh owner request). The alarm condition stands,
 now with teeth: **iter-1 (functional code) is unconditionally the next
 iteration** — no ref-N, no spec writing, no doc polish without a fresh owner
@@ -59,17 +65,18 @@ request.
   `git ls-files <path>` (or `git ls-files | head -50`) to confirm what is
   actually tracked. This is the diagnostic for KI#1-class losses and for
   "the file exists but tests can't find it" surprises.
-- **Doc-loop alarm vs owner-requested research.** Twenty-two docs iterations
+- **Doc-loop alarm vs owner-requested research.** Twenty-three docs iterations
   in a row would normally force a stop (AGENTS §2.5). Owner-requested passes
   are the explicit exception (D-022) — the documented condition is a fresh
   owner request (iter-0s/0t additionally had fresh external sources;
-  iter-0u/0v — distillation and audit; iter-0w — concept realignment — rest
-  on the request alone). iter-0w is the twenty-second docs iteration in a
-  row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j, 0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r,
-  0s, 0t, 0u, 0v, 0w; iter-0d was infra). All ref-N backlog items are
-  complete — ref-1 through ref-13 plus the iter-0h cousins; ref-14/ref-15
-  (Sims, Prom Week) are owner-request-only candidates; no doc pass at all
-  without a fresh owner request. **iter-1 code is next, unconditionally.**
+  iter-0u/0v — distillation and audit; iter-0w — concept realignment; iter-0x
+  — reference-influence audit — rest on the request alone). iter-0x is the
+  twenty-third docs iteration in a row (0, 0b, 0c, 0e, 0f, 0g, 0h, 0i, 0j,
+  0k, 0l, 0m, 0n, 0o, 0p, 0q, 0r, 0s, 0t, 0u, 0v, 0w, 0x; iter-0d was
+  infra). All ref-N backlog items are complete — ref-1 through ref-13 plus
+  the iter-0h cousins; ref-14/ref-15 (Sims, Prom Week) are owner-request-only
+  candidates; no doc pass at all without a fresh owner request. **iter-1 code
+  is next, unconditionally.**
 - **Four places, four jobs (D-027).** `docs/REFERENCES.md` catalogs sources
   (license, URL, phase gating); `docs/CORE_DESIGN_RESEARCH.md` §2 carries
   the one-line synthesis per source; `docs/ref/<source>.md` carries the
@@ -94,6 +101,15 @@ request.
   101–605 lines each, each under cap by construction or §6.1-justified;
   the iter-0u blueprint files are 149/340/224 lines — under cap by
   construction.
+- **"Ref graveyard" check (iter-0x audit method).** To verify the reference
+  corpus still influences the plans (not just exists as a folder), grep a
+  sample of ledger terms across the planning docs — ShufflePool,
+  ASSERT_stable, Influence Boundary, promoteTile, bm25, copy-from — over
+  `docs/BLUEPRINT.md` + `docs/blueprint/` + `docs/TASKS.md` +
+  `docs/SPECS_BACKLOG.md`: every term must land in at least one planning
+  doc; the concrete mechanics stay owned by `docs/ref/` by design (link,
+  never restate — D-027). Verified iter-0x; re-run at the phase-0 gate
+  review.
 - **License drift between catalog and index (KI#6, closed iter-0n; pitfall
   persists).** The `REFERENCES_DEEP.md` §2 index table is **not** the source
   of truth for licenses — `REFERENCES.md` (the catalog) is. Diagnostic:
