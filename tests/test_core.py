@@ -1,0 +1,377 @@
+"""Unit tests for the iter-1 core modules (rng, ids, clock, queue, log,
+fold, pack). The invariants these tests document: INV-2 (guards, counters,
+sorted/queue order), INV-1 (writer-only canon path, cause-chain integrity,
+from-checked projection), INV-3 (lint over pack data).
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+from core.clock import Clock, Phase
+from core.fold import apply_event, fold, initial_projection
+from core.ids import ActorHandle, sequence_id
+from core.log import (
+    EventDraft,
+    EventLogWriter,
+    KnowledgeRecord,
+    LogError,
+    StateChange,
+    read_log,
+    validate_header,
+)
+from core.pack import PackError, load_pack
+from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, EventQueue
+from core.rng import COSMETIC, SUBSTANTIVE, RngBank, RngError
+
+REPO = Path(__file__).resolve().parents[1]
+SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
+
+
+# -- RngBank (INV-2 guards, RNG-1) ------------------------------------------
+
+
+def test_bank_counts_per_stream_and_fingerprint() -> None:
+    bank = RngBank(42)
+    with bank.assure(SUBSTANTIVE):
+        bank.randint(1, 4)
+        bank.randint(1, 4)
+    with bank.assure(COSMETIC):
+        bank.random()
+    assert bank.count(SUBSTANTIVE) == 2
+    assert bank.count(COSMETIC) == 1
+    assert bank.fingerprint == 2
+
+
+def test_bank_default_active_stream_is_substantive() -> None:
+    bank = RngBank(42)
+    assert bank.active == SUBSTANTIVE
+    bank.randint(1, 2)
+    assert bank.count(SUBSTANTIVE) == 1
+
+
+def test_assure_swaps_and_restores() -> None:
+    bank = RngBank(42)
+    with bank.assure(COSMETIC):
+        assert bank.active == COSMETIC
+        bank.random()
+    assert bank.active == SUBSTANTIVE
+    assert bank.count(COSMETIC) == 1
+
+
+def test_assure_rejects_nested_foreign_stream() -> None:
+    bank = RngBank(42)
+    with pytest.raises(RngError, match="cannot assure"):
+        with bank.assure(SUBSTANTIVE):
+            with bank.assure(COSMETIC):
+                pass
+
+
+def test_audit_passes_without_draws_and_fails_with_them() -> None:
+    bank = RngBank(42)
+    with bank.audit():
+        bank.peek()  # peek never advances — allowed inside audit
+    with pytest.raises(RngError, match="inside audit scope"):
+        with bank.audit():
+            bank.randint(1, 2)
+
+
+def test_peek_does_not_advance() -> None:
+    bank = RngBank(42)
+    first = bank.peek()
+    assert bank.peek() == first
+    bank.random()
+    assert bank.peek() != first
+
+
+def test_unknown_stream_is_loud() -> None:
+    bank = RngBank(42)
+    with pytest.raises(RngError, match="unknown stream"):
+        bank.peek("nope")
+
+
+# -- ids ---------------------------------------------------------------------
+
+
+def test_sequence_id_is_zero_padded_and_bounded() -> None:
+    assert sequence_id("ev", 0) == "ev_0000"
+    assert sequence_id("ev", 7) == "ev_0007"
+    assert sequence_id("intent", 12345) == "intent_12345"
+    with pytest.raises(ValueError):
+        sequence_id("ev", -1)
+
+
+def test_actor_handle_pack_unpack_roundtrip() -> None:
+    handle = ActorHandle(index=17, generation=3)
+    assert ActorHandle.unpack(handle.pack()) == handle
+    with pytest.raises(ValueError):
+        ActorHandle(index=1 << 25, generation=0).pack()
+
+
+# -- clock (pack-owned phases, INV-3) ----------------------------------------
+
+
+def test_clock_from_pack_rules() -> None:
+    pack = load_pack(REPO / "content" / "tavern_pack")
+    clock = Clock.from_rules(dict(pack.rules["time"]))
+    assert clock.phase_of(0) == "morning"
+    assert clock.phase_of(400) == "afternoon"
+    assert clock.phase_of(800) == "evening"
+    assert clock.phase_of(1100) == "night"
+    assert clock.day_of(1440) == 1
+
+
+def test_clock_rejects_gaps_and_regession() -> None:
+    with pytest.raises(ValueError, match="contiguous"):
+        Clock(phases=(Phase("a", 0, 10), Phase("b", 20, 30)), ticks_per_day=30)
+    with pytest.raises(ValueError, match="cover"):
+        Clock(phases=(Phase("a", 0, 10),), ticks_per_day=30)
+    clock = Clock(phases=(Phase("a", 0, 10),), ticks_per_day=10)
+    clock.advance_to(5)
+    with pytest.raises(ValueError, match="regression"):
+        clock.advance_to(4)
+
+
+# -- queue (SCHED-1) ----------------------------------------------------------
+
+
+def test_queue_orders_by_tick_then_band_then_actor() -> None:
+    queue = EventQueue()
+    queue.push(5, SCHEDULED, "npc_b", "completion", None)
+    queue.push(3, NPC_REACTION, "npc_a", "intent", None)
+    queue.push(3, PLAYER_INTENT, "pc_01", "intent", None)
+    queue.push(1, PLAYER_INTENT, "pc_01", "intent", None)
+    order = [(e.tick, e.sub_order, e.actor_id) for e in queue]
+    assert order == [
+        (1, PLAYER_INTENT, "pc_01"),
+        (3, PLAYER_INTENT, "pc_01"),
+        (3, NPC_REACTION, "npc_a"),
+        (5, SCHEDULED, "npc_b"),
+    ]
+
+
+def test_queue_seq_breaks_full_key_ties() -> None:
+    queue = EventQueue()
+    first = queue.push(2, PLAYER_INTENT, "pc_01", "intent", "first")
+    second = queue.push(2, PLAYER_INTENT, "pc_01", "intent", "second")
+    assert queue.pop().payload == first.payload
+    assert queue.pop().payload == second.payload
+
+
+def test_queue_negative_tick_and_empty_pop_are_loud() -> None:
+    queue = EventQueue()
+    with pytest.raises(ValueError):
+        queue.push(-1, 0, "x", "intent", None)
+    with pytest.raises(IndexError):
+        queue.pop()
+    assert queue.peek_tick() is None
+
+
+# -- log writer (INV-1 enforcement point) --------------------------------------
+
+
+def draft(t: int, cause: str | None, **kwargs: Any) -> EventDraft:
+    return EventDraft(t=t, type="wait", actor="pc_01", cause=cause,
+                      outcome={"duration": 1}, provenance={"seed": 42}, **kwargs)
+
+
+def test_writer_rejects_double_header(tmp_path: Path) -> None:
+    writer = EventLogWriter(tmp_path / "run.jsonl", SCHEMA)
+    writer.write_header(seed=1, commit="x", pack="p@1")
+    with pytest.raises(LogError, match="header already written"):
+        writer.write_header(seed=1, commit="x", pack="p@1")
+    writer.close()
+
+
+def test_writer_enforces_cause_chain_and_gap_free_ids(tmp_path: Path) -> None:
+    log = tmp_path / "run.jsonl"
+    writer = EventLogWriter(log, SCHEMA)
+    writer.write_header(seed=42, commit="0000000", pack="tavern_pack@0.1")
+    first = writer.append(draft(1, cause=None))
+    assert first.id == "ev_0000"
+    second = writer.append(draft(2, cause=first.id))
+    assert second.id == "ev_0001"
+    with pytest.raises(LogError, match="cause null"):
+        writer.append(draft(3, cause=None))
+    with pytest.raises(LogError, match="no written event"):
+        writer.append(draft(3, cause="ev_9999"))
+    with pytest.raises(LogError, match="tick regression"):
+        writer.append(draft(1, cause=second.id))
+    writer.close()
+    header, events = read_log(log, SCHEMA)
+    assert header["seed"] == 42
+    assert [e.id for e in events] == ["ev_0000", "ev_0001"]
+
+
+def test_writer_rejects_first_event_with_cause(tmp_path: Path) -> None:
+    writer = EventLogWriter(tmp_path / "bad.jsonl", SCHEMA)
+    writer.write_header(seed=1, commit="c", pack="p@0.1")
+    with pytest.raises(LogError, match="run-start"):
+        writer.append(draft(1, cause="ev_0000"))
+    writer.close()
+
+
+def test_writer_stamps_knowledge_sources(tmp_path: Path) -> None:
+    log = tmp_path / "know.jsonl"
+    writer = EventLogWriter(log, SCHEMA)
+    writer.write_header(seed=42, commit="c", pack="p@0.1")
+    record = writer.append(draft(
+        1, cause=None,
+        knowledge=(KnowledgeRecord(who="npc_1", channel="saw", fidelity="partial",
+                                   knows="figure_reaching_for_purse", at=1),),
+    ))
+    assert record.knowledge[0].source == record.id
+    writer.close()
+    _, events = read_log(log, SCHEMA)
+    line = json.loads(log.read_text().splitlines()[1])
+    assert line["knowledge"][0]["source"] == record.id == "ev_0000"
+
+
+def test_writer_validates_against_schema_at_write_time(tmp_path: Path) -> None:
+    writer = EventLogWriter(tmp_path / "bad.jsonl", SCHEMA)
+    writer.write_header(seed=42, commit="c", pack="p@0.1")
+    with pytest.raises(Exception, match="importance|enum"):
+        writer.append(EventDraft(t=1, type="wait", actor="pc_01", cause=None,
+                                 outcome={}, importance="huge",  # type: ignore[arg-type]
+                                 provenance={"seed": 42}))
+    writer.close()
+
+
+def test_header_contract_rejects_wall_clock_shapes() -> None:
+    with pytest.raises(LogError, match="exactly"):
+        validate_header({"header": True, "schema_version": "0.1", "seed": 1,
+                         "python": "3", "commit": "c", "pack": "p", "ts": 123})
+    with pytest.raises(LogError, match="seed"):
+        validate_header({"header": True, "schema_version": "0.1", "seed": "42",
+                         "python": "3", "commit": "c", "pack": "p"})
+
+
+# -- fold / projection (STATE-1) -----------------------------------------------
+
+
+def test_initial_projection_flattens_pack_state() -> None:
+    pack = load_pack(REPO / "content" / "tavern_pack")
+    state = initial_projection(pack.entities)
+    assert state["pc_01"]["position"] == "loc_street"
+    assert state["npc_guard_01"]["position"] == "loc_tavern"
+    assert state["npc_guard_01"]["relations.suspicion"] == 0
+    assert state["npc_drunk_01"]["status.intoxication"] == 50
+    assert state["purse_01"]["position"] == "loc_tavern"
+    assert state["loc_tavern"] == {}  # locations: registered, prop-less
+
+
+def _record(event_id: str, changes: tuple[StateChange, ...]) -> Any:
+    from core.log import EventRecord, LoggedKnowledgeRecord
+
+    return EventRecord(
+        id=event_id, t=0, type="wait", actor="pc_01", cause=None, outcome={},
+        knowledge=(LoggedKnowledgeRecord(who="x", channel="saw", fidelity="exact",
+                                          knows="k", at=0, source=event_id),),
+        state_changes=changes, hooks=(), importance="low",
+        provenance={"seed": 1}, target=None,
+    )
+
+
+def test_apply_event_checks_from_values() -> None:
+    state = {"pc_01": {"position": "loc_street"}}
+    move = _record("ev_0000", (StateChange("pc_01", "position", "loc_street", "loc_tavern"),))
+    apply_event(state, move)
+    assert state["pc_01"]["position"] == "loc_tavern"
+    stale = _record("ev_0001", (StateChange("pc_01", "position", "loc_street", "loc_x"),))
+    with pytest.raises(ValueError, match="expected from"):
+        apply_event(state, stale)
+    orphan = _record("ev_0002", (StateChange("ghost", "position", "a", "b"),))
+    with pytest.raises(ValueError, match="unknown entity"):
+        apply_event(state, orphan)
+
+
+def test_fold_rebuilds_projection() -> None:
+    initial = {"pc_01": {"position": "loc_street"}}
+    events = [
+        _record("ev_0000", (StateChange("pc_01", "position", "loc_street", "loc_tavern"),)),
+        _record("ev_0001", (StateChange("pc_01", "position", "loc_tavern", "loc_backyard"),)),
+    ]
+    assert fold(events, initial) == {"pc_01": {"position": "loc_backyard"}}
+    assert initial == {"pc_01": {"position": "loc_street"}}  # fold copies, never mutates
+
+
+# -- pack loader + minimum lint -------------------------------------------------
+
+
+def test_load_pack_happy_path() -> None:
+    pack = load_pack(REPO / "content" / "tavern_pack")
+    assert pack.name_version == "tavern_pack@0.1"
+    assert pack.action("move") is not None and pack.action("move")["resolver"] == "movement"
+    assert "move" in pack.event_types() and "rumor_told" in pack.event_types()
+    assert pack.player_id() == "pc_01"
+
+
+def _broken_pack(tmp_path: Path, mutate: Any) -> Path:
+    import shutil
+
+    target = tmp_path / "broken_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    mutate(target)
+    return target
+
+
+def test_pack_lint_catches_orphan_exit(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        entities["locations"][0]["exits"].append("loc_nope")
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="orphan exit"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_carrier_mismatch(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        entities["npcs"][1]["carries"] = []  # drop the guard's purse
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="carrier"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_meta_drift(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        actions["meta"]["version"] = "9.9"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="meta"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_phase_gap(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["time"]["phases"][1]["from"] = 400  # gap 360..400
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="time rules"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_status_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        entities["npcs"][0]["status"]["drunkenness"] = 10  # not in rules.states
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="status axes"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_extra_files(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        (target / "extra.json").write_text("{}")
+
+    with pytest.raises(PackError, match="expected exactly"):
+        load_pack(_broken_pack(tmp_path, mutate))

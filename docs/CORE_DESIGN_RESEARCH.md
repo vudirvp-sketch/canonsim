@@ -4,11 +4,11 @@
 > `docs/SPECS_BACKLOG.md`, specs are born from experiments; this file distills
 > external references (`docs/REFERENCES.md` catalog + widely documented design
 > patterns) into design guidance for the core, written before iter-1 code.
-> **Status: absorbed (D-029, iter-0w)** — every P1/P2 item is enacted into
-> `docs/DECISIONS.md` / `docs/TASKS.md` / the blueprint (P1a → phase0 §1;
+> **Status: absorbed (D-029, iter-0w; P2c accepted via D-033, iter-1)** — every
+> P1/P2 item is enacted into `docs/DECISIONS.md` / `docs/TASKS.md` / the blueprint (P1a → phase0 §1;
 > P1b–d → D-019; P1e → D-023/KI#5; P2a → D-020; P2b → D-021; P2d → KI#3;
-> P2e → DIRECTOR_SPEC sketch); P2c (detail callbacks) is the single
-> owner-pending candidate (§6); §3's synthesis table is superseded by the
+> P2e → DIRECTOR_SPEC sketch); no owner-pending
+> candidates remain; §3's synthesis table is superseded by the
 > blueprint ledger (`docs/BLUEPRINT.md` §1) — retained as research record.
 > Retired at the phase-0 gate review (`doc-1`) alongside the VISION freeze.
 > Nothing here changes phase-0 law (`docs/MVP_SCOPE.md` §2). Cap 600 lines
@@ -179,7 +179,7 @@ gaps (§6 P2).**
 - **P2c Detail callbacks in talk.** "Old events surface later" is a victory
   condition (`MVP_SCOPE.md` §1): talk topic selection = most salient known
   fact of the teller. Cheap; makes knowledge *used*, not just stored.
-  Candidate for iter-3.
+  (absorbed → D-033, iter-1; slated for iter-3.)
 - **P2d expectation_violation.** NPC reacts only to records *present* in
   `knowledge` today — they cannot notice that the purse is gone, or that
   the expected guard is missing. Yet investigation mechanics
@@ -264,7 +264,7 @@ None enters the catalog before verification.
 New proposals from the iter-0g audit (no owner decision yet): P1e (KI#5
 runtime-vs-fold clarification), P2d (KI#3 expectation_violation, slated
 for iter-3), P2e (entropy refinement for iter-4 director), P3f (trait
-crystallization for phase 4 LEGEND_SPEC). P2c remains a candidate for
-iter-3 (owner not yet decided).
+crystallization for phase 4 LEGEND_SPEC). P2c is accepted for iter-3
+(D-033).
 
 Open questions blocking iter-1: none.

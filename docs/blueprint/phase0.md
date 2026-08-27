@@ -249,7 +249,7 @@ dice roll keyed through the RngBank (L5) — a bare `random.` import in
   STATUS iter-0t.)*
 - **Ambient crowd** (`npc_market_crowd_01`): passive knowledge-holder —
   the seed of the LOD ladder (LOD-1), not a simulated individual.
-- **Detail callbacks** (P2c, owner-pending): talk topic selection = most
+- **Detail callbacks** (P2c, accepted — D-033): talk topic selection = most
   salient known fact of the teller — knowledge *used*, not just stored.
 
 **Donor stack.** The Sims (gossip propagation — synthesis-only:

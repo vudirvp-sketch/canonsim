@@ -1,29 +1,26 @@
 # STATUS — canonsim
 
-Iteration: 0aa (owner-requested: pre-code documentation audit — drift
-sweep + core-readiness verdict)
-· Phase: 0 — simulator without LLM · Date: 2026-08-27
+Iteration: 1 (`iter-1-core-plumbing` — the first functional-code
+iteration; the 26-iteration docs streak ends here)
+· Phase: 0 — simulator without LLM · Date: 2026-08-28
 
-iter-0aa sweeps the docs before iter-1 breaks ground: 11 drift findings
-fixed as KI#11 (opened/closed here) — the fabricated "1 tick ≈ 12
-in-world minutes" citation (`phase0.md` §1 + `df_worldgen.md`; truth:
-MVP_SCOPE §8 owns 1440 ticks/day → 1 tick = 1 in-world minute),
-calendar remnants (ROADMAP §4 "week 1" → `bg-1`; MVP_SCOPE §13
-"day 3"; TASKS "post-sprint"), the missing iter-0f line in the TASKS
-Done list, two P3c mislabels (phase0 §2, EVENT_SCHEMA §11), the
-MVP_SCOPE §5 system-3 row missing the npc↔npc pair map (D-020), the
-`tests/fixtures/` + `tests/playscripts/` map rows, README wording.
-Readiness verdict: the rigging for iter-1 is complete — contracts
-synced and test-enforced, pack drafted, module-level design in
-phase0 §1, acceptance criteria in TASKS; one design point is genuinely
-open (KI#10: the stdlib JSON-Schema validation engine). P2c (detail
-callbacks) remains the only owner-pending design item before iter-3.
-
-**Doc-loop accounting:** 26th consecutive docs iteration — owner-requested
-exception (D-022 wording: a fresh owner request — this audit pass).
-The alarm condition stands, now with teeth: **iter-1
-(functional code) is unconditionally the next iteration** — no ref-N, no
-spec writing, no doc polish without a fresh owner request.
+iter-1 lands the core plumbing per `docs/blueprint/phase0.md` §1:
+`core/{schema,rng,ids,clock,queue,log,fold,pack,loop}.py` — the RngBank
+with `assure`/`audit`/`peek` guards and the substantive-draw fingerprint;
+the band-ordered heapq queue `(tick, sub_order, actor_id, seq)`; the
+append-only JSONL writer (cause-chain integrity, gap-free writer-assigned
+ids, write-time schema validation — the only canon-write path); the
+incremental projection + fold (STATE-1, KI#5 closed by construction);
+the pack loader with the phase-0 minimum lint; and the playscript runner
+(movement + wait — the two check-less actions; the ten check-bearing
+ones land iter-2 with the ActionResolver registry). Tests: architecture
+fitness (import boundary · RNG monopoly · network ban · print ban), T0
+(the EVENT_SCHEMA examples are extracted from the doc at test time — no
+fixture copy to drift), minimal T1 (byte-identical runs + the committed
+golden `tests/fixtures/plumbing_smoke_seed42.jsonl`), core units, loop
+e2e — 78 green, ruff clean. Owner decisions recorded: D-032 (KI#10 →
+stdlib mini-validator, closed), D-033 (P2c → iter-3), D-034 (DECISIONS
+cap: collapse at phase gates; the file sits at 34 entries until then).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -46,12 +43,20 @@ spec writing, no doc polish without a fresh owner request.
 
 - KI#3 · `expectation_violation` primitive missing — NPC reacts only to presence in `knowledge`, not to absence (purse gone, guard missing). Fix: P2d in `CORE_DESIGN_RESEARCH.md` §6, slated for iter-3; resolution recorded as ledger row EPIST-1 (`docs/BLUEPRINT.md` §1).
 - KI#4 · balance harness (1000-sim distribution plots of `suspicion` / `fire_spread`) missing — MVP_SCOPE §15 promises an iter-6 baseline but no tool exists. Added as `balance-1` in `docs/TASKS.md` infra backlog; folded into the iter-6 verification stack (`docs/blueprint/phase0.md` §6).
-- KI#5 · runtime state vs test fold not explicitly separated — risk of O(N²) at startup if `fold(log)` is misused as runtime path. D-023 records the rule: runtime = incremental projection; fold = T2 replay only; resolution recorded as ledger row STATE-1.
-- KI#10 · stdlib JSON-Schema validation path undefined — T0 ("every log line validates against `schemas/event.schema.json`") and the pack loader ("JSON-Schema validation at load", phase0 §1) both require schema validation, but `jsonschema` is a runtime dependency (forbidden, D-012) and a dev-dep would breach the pytest+ruff cap (AGENTS §8). Proposed: a stdlib mini-validator for the used schema subset (type/required/enum/pattern/additionalProperties/$defs/minimum, ~100–150 lines) — schema-driven, no contract duplication; fallback: hand-rolled structural checks (test_smoke.py precedent, drift-prone). Owner decision pending; blocks only the T0 mechanism choice, not the rest of iter-1.
+- KI#5 · runtime state vs test fold not explicitly separated — CLOSED iter-1: the Simulator keeps the incremental projection (`apply_event` per emission), `fold` exists only on the T2 test path — D-023/STATE-1 implemented and test-enforced (`tests/test_loop.py::test_t2_fold_equals_runtime_projection`).
+- KI#10 · stdlib JSON-Schema validation path undefined — CLOSED iter-1: owner approved the stdlib mini-validator; landed as `core/schema.py` (D-032) — write-time validation in the log writer, T0 on doc examples + committed logs.
 - KI#11 · doc drift batch, 11 findings — CLOSED iter-0aa: tick arithmetic + fabricated "MVP_SCOPE §4.1" citation (phase0 §1, df_worldgen.md); ROADMAP §4 "week 1"; MVP_SCOPE §13 "day 3" + §5 system-3 npc↔npc gap; TASKS "post-sprint" + missing iter-0f Done line; P3c mislabels (phase0 §2, EVENT_SCHEMA §11); AGENT_NAVIGATION tests rows; README "empty". Details: worklog iter-0aa.
 
 ## FAQ / Pitfalls
 
+- **The golden T1 fixture is env-pinned.** The log header records the
+  Python version (`AGENTS.md` §10 — same-environment determinism only), so
+  `tests/fixtures/plumbing_smoke_seed42.jsonl` byte-compares only on the
+  Python it was generated on. On an interpreter bump the byte-compare
+  fails **by design**: regenerate (Simulator, seed 42, commit `"0000000"`,
+  playscript `tests/playscripts/plumbing_smoke.json`) and commit the new
+  fixture together with the env change. The full in-pytest regeneration
+  guard lands with T1 at iter-6 (`docs/blueprint/phase0.md` §6).
 - **A ref citing a spec section it never contained is drift, not history.**
   The pre-D-028 FAQ rule protects *real* historical wording — verify with
   `git log -S "<phrase>" -- <file>` before calling something history.
@@ -149,17 +154,11 @@ spec writing, no doc polish without a fresh owner request.
 
 ## Next step
 
-**iter-1 · core plumbing** — unconditionally the next iteration (functional
-code, not docs). The research epoch is closed (D-029); the quality bar for
-the code that follows is now law (D-031: L13/L14, type discipline,
-fail-fast, the architecture fitness test). Decide KI#10 (the T0 validation
-engine: stdlib mini-validator vs hand-rolled checks) at iter-1 kickoff —
-the only open design point. Read before building:
-`docs/blueprint/phase0.md` §1 (the combined donor design: RngBank, heapq
-queue with sub_order bands, JSONL writer with cause-chain integrity, fold
-vs incremental projection, pack loader, type discipline,
-`tests/test_architecture.py`) + `docs/BLUEPRINT.md` §1 ledger rows
-RNG-1/SCHED-1/STATE-1/STORE-1/TEST-1 + `MVP_SCOPE.md` §8 + `docs/TASKS.md`
-iter-1 acceptance criteria. The full ref→iteration donor mapping now lives
-in the blueprint build index (`docs/BLUEPRINT.md` §3) — it is no longer
-restated here (D-027).
+**iter-2 · actions** (`docs/TASKS.md`): the 12 actions with
+checks/outcomes/durations (`MVP_SCOPE.md` §7), pack-driven preconditions,
+INTENT_SCHEMA with `based_on_event_seq` OCC, the scheduler DAG with
+`reads`/`writes` annotations, the ActionResolver registry (the two
+iter-1 resolvers grow into it), and the INV-3 grep stoplist test. Read
+before building: `docs/blueprint/phase0.md` §2 + `MVP_SCOPE.md` §7;
+ledger rows TIME-1, EPIST-1 (price precursor), PACK-1, STATE-1
+(`docs/BLUEPRINT.md` §3 build index).

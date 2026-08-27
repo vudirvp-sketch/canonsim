@@ -15,12 +15,14 @@ until the phase-1 gate.
 
 ## Status
 
-Phase 0, iteration 0aa — owner-requested pre-code documentation audit:
-11 drift findings fixed (tick arithmetic, calendar remnants, citation
-mislabels, map gaps); readiness verdict recorded — the rigging for
-iter-1 is complete, one design point open (KI#10: the stdlib
-JSON-Schema validation engine). No code yet; first code lands in iter-1
-(`docs/TASKS.md`) — unconditionally next.
+Phase 0, iteration 1 — core plumbing landed: RngBank (INV-2 guards,
+substantive/cosmetic streams, draw fingerprint), integer clock, band-ordered
+event queue, append-only JSONL log with header (write-time schema
+validation — the only canon-write path), incremental projection + fold,
+pack loader with the phase-0 minimum lint, playscript runner (movement +
+wait; the ten check-bearing actions land iter-2). 78 tests green, ruff
+clean; the first golden log fixture is committed. Next: iter-2 · actions
+(`docs/TASKS.md`).
 
 ## For AI agents (primary audience)
 
@@ -41,19 +43,23 @@ padding.
 | `worklog.md` | capped short-term memory (≤10 entries) |
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
-| `content/tavern_pack/` | setting as data (v0.1 drafted; loader in iter-1) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (skeletons since iter-0d; first code lands iter-1) |
+| `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core landed iter-1; systems land iter-2, render/cli iter-5) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running
 
-Nothing runs yet. When iter-1 lands:
+The core runs headless (the play CLI lands in iter-5):
 
 ```
 pip install -e ".[dev]"
-pytest -q
-python -m cli play tests/playscripts/day1_theft_and_arson.json
+PYTHONHASHSEED=0 pytest -q
+ruff check .
 ```
+
+A playscript plays end-to-end through the simulator; see
+`tests/test_loop.py` and the fixture `tests/playscripts/plumbing_smoke.json`.
+Its log is byte-identical across runs on the same environment (T1).
 
 ## License
 

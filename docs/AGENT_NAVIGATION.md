@@ -19,22 +19,22 @@
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
-| `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | absorbed (D-029; P2c owner-pending); retired at the phase-0 gate review (`doc-1`) |
+| `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | absorbed (D-029; P2c accepted — D-033); retired at the phase-0 gate review (`doc-1`) |
 | `docs/BLUEPRINT.md` | reference distillation: resolution ledger (12 mechanisms) + cross-cutting laws + build index; entry to `docs/blueprint/` | active (iter-0u); maintained at deep-dive time |
 | `docs/blueprint/` | per-part applied synthesis: `phase0.md` (iter-1..6 combined donor designs), `phases.md` (phases 1–6 architecture + cross-cutting) | active; read before the matching iteration/phase |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
 | `docs/REFERENCES_DEEP.md` | index + format template + iteration plan for per-ref deep dives; the deep-dive content lives in `docs/ref/` (D-026) | active (rots — quarterly review alongside `doc-2`) |
 | `docs/ref/` | per-reference deep dives (one file per source: `neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`, `paradox_scripting.md`, `rimworld.md`, `l4d_director.md`, `alien_isolation.md`, `wesnoth_wml.md`, `endless_sky_dsl.md`, `ink.md`, `tracery.md`, `brogue.md`, `dcss.md`, `keeperrl.md`, `generative_agents.md`, `ai_town.md`, `letta.md`, `azgaar_fmg.md`, `natural_earth.md`, `geonames.md`, `libtcod.md`, `rot_js.md`, `red_blob_games.md`, `entt.md`, `bevy.md`, `eventstore.md`, `sqlite_fts5.md`, `duckdb.md`, `sqlite_vec.md`, …); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review alongside `doc-2`) |
 | `schemas/event.schema.json` | machine-readable event contract | synced with `docs/EVENT_SCHEMA.md` |
-| `core/` | engine: clock, rng, queue, log writer, fold/replay | skeleton restored iter-0d; code lands iter-1 |
+| `core/` | engine: `schema` (mini-validator, D-032), `rng` (RngBank), `ids`, `clock`, `queue`, `log` (the only canon-write path), `fold`, `pack` (loader + lint), `loop` (tick driver + playscript runner) | iter-1 landed |
 | `sim/systems/` | the 8 systems (`MVP_SCOPE.md` §5) | skeleton restored iter-0d; code lands iter-2 |
-| `content/tavern_pack/` | the setting as data | v0.1 drafted (iter-0c); loader lands iter-1 |
+| `content/tavern_pack/` | the setting as data | v0.1 (+ resolver keys on the two iter-1-executable actions); loaded + linted by `core/pack.py` |
 | `render/` | chronicle templates | skeleton restored iter-0d; code lands iter-5 |
 | `brief/` | frame/brief assembler | skeleton restored iter-0d; reserved for phase 1 |
 | `cli/` | play interface | skeleton restored iter-0d; code lands iter-5 |
-| `tests/` | test suite | pack/schema smoke tests (iter-0d); T0–T8 land iter-1+ |
-| `tests/fixtures/` | committed golden fixtures for T0/T1 (log lines, byte-identical run outputs) | empty; first fixtures land iter-1 (`.gitignore` whitelists `tests/fixtures/*.jsonl`) |
-| `tests/playscripts/` | seed + ordered-intent fixtures | empty; first fixture lands iter-1 (playscript-runner AC), suite grows iter-2 |
+| `tests/` | test suite | smoke (iter-0d) + architecture fitness, T0, minimal T1/T2, core units, loop e2e (iter-1); T3–T8 grow iter-2+ |
+| `tests/fixtures/` | committed golden fixtures for T0/T1 (log lines, byte-identical run outputs) | `plumbing_smoke_seed42.jsonl` (iter-1; env-pinned — header records the Python version) |
+| `tests/playscripts/` | seed + ordered-intent fixtures | `plumbing_smoke.json` (iter-1); suite grows iter-2 |
 
 ## 2. Reading gradient (what to read before working)
 

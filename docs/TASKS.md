@@ -9,28 +9,6 @@
 
 ## Track A — main (simulator, no LLM)
 
-### iter-1 · core plumbing — todo
-
-- Seed → RngBank (RNG-1, INV-2 per D-028): one master seed; named streams
-  deterministically derived (`stable_hash(f"{seed}:{stream}")`, sha256-based)
-  — `substantive` + `cosmetic` in phase 0; integer clock; `heapq` queue
-  keyed `(tick, sub_order, actor_id)`; JSONL append-only writer with header
-  (no wall-clock); playscript runner (seed + ordered intents); pack loader
-  with the phase-0 minimum lint (orphan refs, closed enums) for the drafted
-  `content/tavern_pack/` v0.1 (entities from `MVP_SCOPE.md` §4 — that table
-  is the source of truth; pack data landed in iter-0c).
-- Tests: T0 schema validation (the EVENT_SCHEMA example is a fixture; the log
-  header shape per EVENT_SCHEMA §1 is validated as a separate fixture), minimal
-  T1 (two runs byte-identical), smoke boot, and the architecture fitness test
-  (`tests/test_architecture.py`, stdlib `ast`, zero new dev deps — D-031:
-  import boundary, RNG monopoly, network ban; design in
-  `docs/blueprint/phase0.md` §1). Open design point: the T0 validation
-  engine — stdlib mini-validator for the schema subset vs hand-rolled
-  structural checks (KI#10, owner decision pending; schema-driven
-  preferred — no contract duplication).
-- AC: world creates from seed; an event writes; a playscript plays end-to-end;
-  `pytest -q` green.
-
 ### iter-2 · actions — todo
 
 - The 12 actions with checks/outcomes/durations (`MVP_SCOPE.md` §7);
@@ -54,6 +32,9 @@
   knowledge record (e.g., `purse_missing_from_bar`). No schema change —
   uses the existing `inferred` channel. Suspicion-from-absence now has a
   legitimate trigger.
+- **P2c detail callbacks** (D-033): talk topic selection = the teller's
+  most salient known fact — knowledge *used*, not just stored; no schema
+  change (salience is a read over `knowledge`).
 - AC: characters know different things and react differently; NPCs notice
   absences they had reason to expect; T3 blind-NPC passes.
 
@@ -185,6 +166,9 @@
 
 ## Done
 
+- iter-1 · 2026-08-28 · core plumbing: RngBank, clock, queue, JSONL log +
+  header, fold/projection, pack loader + lint, playscript runner; T0/T1
+  minimal + architecture fitness; KI#10/KI#5 closed, D-032..D-034 recorded.
 - iter-0 · 2026-08-25 · docs & tooling bootstrap.
 - iter-0b · 2026-08-25 · docs review + external source catalog (`docs/REFERENCES.md`).
 - iter-0c · 2026-08-25 · REFERENCES rev v2 merge (D-017) + `content/tavern_pack/` v0.1 drafted.

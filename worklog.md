@@ -6,6 +6,23 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-1 · 2026-08-28 · core plumbing — first functional code (iter-1-core-plumbing)
+- core/{schema,rng,ids,clock,queue,log,fold,pack,loop}.py: RngBank guards
+  (assure/audit/peek/fingerprint), band-ordered heapq, cause-checked JSONL
+  writer (write-time schema validation, gap-free ids, stamped knowledge
+  sources), incremental projection + fold (T2), pack loader + minimum lint,
+  playscript runner (movement/wait resolvers; the ten check-bearing actions
+  land iter-2). actions.json gained `resolver` keys (INV-3 mapping in data).
+- Tests: architecture fitness (import boundary, RNG monopoly, network ban,
+  print ban), T0 (doc examples extracted at test time), T1 minimal
+  (byte-identical + committed golden fixture tests/fixtures/
+  plumbing_smoke_seed42.jsonl), core units, loop e2e — 78 green, ruff clean.
+  KI#10 closed (D-032 stdlib validator); KI#5 closed (STATE-1 built);
+  D-033 (P2c → iter-3); D-034 (DECISIONS cap: collapse at gates).
+  24 files — over the 3–5 soft limit (task-mandated module set + the
+  AGENTS §6 sync set); DECISIONS at 34 entries, over cap per D-034 until
+  the phase-0 gate collapse.
+---
 iter-0aa · 2026-08-27 · owner-requested pre-code doc audit (drift + readiness)
 - 11 drift findings fixed as KI#11 (closed same iteration): fabricated
   "1 tick ≈ 12 in-world minutes" citation (phase0 §1 + df_worldgen.md —
@@ -113,9 +130,3 @@ iter-0t · 2026-08-27 · owner-requested ref-13 solo deep dive (live-char-guide)
 iter-0s-followup · 2026-08-27 · post-push verification pass (owner request)
 - KI#7 opened (capped-memory drift: worklog ~880-line entries vs the 3–5
   law; TASKS done entries uncollapsed); no functional change.
----
-iter-0s · 2026-08-27 · owner-requested ref-12 solo deep dive (UAP webapp)
-- New `docs/ref/uap_audit.md`: rubric donor, 7-hole test crosswalk, phase-1
-  harness patterns, pack-lint vocabulary. License catch: README claims MIT,
-  no LICENSE file — reference only. Catalog §9 + index + synthesis + TEST_PLAN/
-  PACK_SPEC sketches synced.

@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced). Check/roll parameters are v0.1 tunable defaults resolved against rules.json. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced). Check/roll parameters are v0.1 tunable defaults resolved against rules.json. 'resolver' names the generic core resolver that executes the action (INV-3: the intent-to-code mapping is pack data, never code); movement + wait are executable from iter-1, the remaining ten land with the ActionResolver registry in iter-2. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -27,6 +27,7 @@
     {
       "intent": "move",
       "label": "approach",
+      "resolver": "movement",
       "ticks": {"min": 2, "max": 4},
       "check": null,
       "on_failure": null,
@@ -46,6 +47,7 @@
     {
       "intent": "wait",
       "label": "wait",
+      "resolver": "wait",
       "ticks": "N",
       "check": null,
       "on_failure": null,

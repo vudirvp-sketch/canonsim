@@ -73,7 +73,7 @@ Found a bug → first record it in `STATUS.md` as `KI#<N>`, then fix it.
 | `worklog.md` | ≤10 entries, 3–5 lines each; adding #11 requires deleting the oldest in the same edit (one in, one out) |
 | `docs/*.md` | ≤600 lines each. The cap is **substance-filtered**, not a hard wall — see §6.1. Over cap after a real cruft pass: keep, document the rationale in `worklog.md` |
 | `docs/AGENT_NAVIGATION.md` | structure changes only; never history or narrative |
-| `docs/DECISIONS.md` | append-only; ≤30 entries; supersede, don't delete |
+| `docs/DECISIONS.md` | append-only within a phase; ≤30 entries enforced by collapsing at phase gates (D-034); supersede, don't delete |
 | `docs/TASKS.md` | done tasks collapse to one line at the end of each iteration |
 
 General rule: check the current size before writing to any of these. The trim
