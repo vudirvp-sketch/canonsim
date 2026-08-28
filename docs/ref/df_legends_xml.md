@@ -71,10 +71,18 @@ import (KI#33).
 extracts F7/F8 detail from three record tags (the HANDLED set); every
 other record tag is counted + structurally fingerprinted (every unique
 child-tag set per record tag) by `--audit` (iter-8g). The SQLite sink
-(bg-1 remainder) extracts field values from the UNHANDLED tags; the
-audit lists their child-tag sets so the sink can plan its schema
-without re-parsing a 5 GB export. The matrix is the single owner of
-"which records have detailed extraction today":
+landed (bg-1, `scripts/df_import.py`): typed core + EAV field tables
+for the HANDLED three, one generic JSON `records` table for every
+non-noise UNHANDLED tag — including any future UNDOCUMENTED tag, so a
+drift record still imports instead of breaking the sink. The matrix is
+the single owner of "which sections exist in an export"; any record
+tag outside it renders as UNDOCUMENTED by the audit — a drift signal
+(a future DF version grew the schema; KI#36 — the marker was documented
+here but never implemented until the large world's audit caught two
+real matrix gaps: `artifact`, present in every export, and
+`historical_era`). Section presence is export-dependent: the large
+world's main file carries 14 sections; its landmasses, mountain_peaks
+and rivers live only in the plus companion.
 
 | Section (plural, depth=2) | Record tag (singular, depth=3) | Survey status |
 |---|---|---|
@@ -86,21 +94,23 @@ without re-parsing a 5 GB export. The matrix is the single owner of
 | `entity_populations` | `entity_population` | UNHANDLED — count + fingerprint |
 | `regions` | `region` | UNHANDLED — count + fingerprint |
 | `underground_regions` | `underground_region` | UNHANDLED — count + fingerprint |
-| `landmasses` | `landmass` | UNHANDLED — count + fingerprint |
-| `mountain_peaks` | `mountain_peak` | UNHANDLED — count + fingerprint |
-| `rivers` | `river` | UNHANDLED — count + fingerprint |
+| `landmasses` | `landmass` | UNHANDLED — count + fingerprint (plus-companion-only in the large world) |
+| `mountain_peaks` | `mountain_peak` | UNHANDLED — count + fingerprint (plus-companion-only in the large world) |
+| `rivers` | `river` | UNHANDLED — count + fingerprint (plus-companion-only in the large world) |
 | `creature_collections` | `creature_collection` (+ nested) | UNHANDLED — count + fingerprint |
+| `artifacts` | `artifact` | UNHANDLED — count + fingerprint (KI#36 matrix-gap fix; item names serve bg-2/bg-3) |
 | `art_forms` | `art_form` | UNHANDLED — count + fingerprint (design noise, skip on sink) |
 | `dance_forms` | `dance_form` | UNHANDLED — count + fingerprint (design noise) |
 | `musical_forms` | `musical_form` | UNHANDLED — count + fingerprint (design noise) |
 | `poetic_forms` | `poetic_form` | UNHANDLED — count + fingerprint (design noise) |
 | `written_contents` | `written_content` | UNHANDLED — count + fingerprint (bg-4 interest) |
+| `historical_eras` | `historical_era` | UNHANDLED — count + fingerprint (KI#36; 1 record: name + start_year; large world) |
 
 The "design noise" rows (art/dance/musical/poetic forms) are bg-1
 selective-import skips per `df_design.md` "What we adapt" — briefer
-noise. `written_content` is bg-4 candidate (cost notes); the sink may
-defer it. The audit reports any tag not in the table as UNDOCUMENTED
-— a drift signal (a future DF version grew the schema).
+noise (the sink counts and skips them). `written_content` IS imported
+by the sink as generic records (bg-4's cost notes read them from
+SQLite when that spike lands).
 
 **What we take.**
 

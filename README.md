@@ -32,11 +32,13 @@ the 1000-sim distribution harness; full table in `output/`). Phase 1
 first deliverable at iter-8: `docs/BRIEF_SPEC.md` + `brief/assembler.py`
 — the deterministic six-block brief (budgets, eviction, voice
 isolation) as pure functions of the log, zero RNG, byte-identical on
-the golden fixture. 329 tests green, ruff clean, golden fixture
+the golden fixture. 352 tests green, ruff clean, golden fixture
 byte-identical. Next: iter-9+, `VALIDATION_SPEC.md` + the validator's
 LLM-free half (`docs/TASKS.md`); the narrator LLM boundary is an
-owner-gated checkpoint (AGENTS §8). Track B (`bg-1..bg-4`) unblocked
-for parallel LLM-circuit spikes on Dwarf Fortress Legends XML.
+owner-gated checkpoint (AGENTS §8). Track B: bg-1 CLOSED —
+`scripts/df_import.py` loads a Legends export into SQLite (recipe
+`docs/TECH_NOTES.md` §3.2, D-051); bg-2..bg-4 (taxonomy, briefer
+spike, cost notes) query that DB.
 
 ## For AI agents (primary audience)
 
@@ -59,7 +61,7 @@ padding.
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/assembler.py` landed iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md`) |
-| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) |
+| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; `docs/TECH_NOTES.md` §3.2, D-051) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running

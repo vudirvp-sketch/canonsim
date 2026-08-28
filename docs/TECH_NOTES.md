@@ -55,67 +55,88 @@ gated by `perf-1` data).
 - Cost references: Park et al. 2023 (Generative Agents);
   "Generative Agent Simulations of 1,000 People" (2024).
 
-### 3.1 Measured on the owner's exports (iter-8e; extended iter-8f)
+### 3.1 Measured on the owner's exports (iter-8e; extended iter-8f, bg-1)
 
 `scripts/df_survey.py` over region1-00250-01-01 ("small", 250y, 315.6 MB),
-region2-00500-01-01 ("medium", 500y, 1.99 GB + 302 MB plus), and
-region3-00500-01-01 ("small-dense", 500y, 4.95 GB + 232 MB plus — the
-first export arrived truncated at 2.91 GB, KI#34; the re-export completed
-and reproduces the recovered prefix counts exactly); format: small /
-medium / small-dense. Full tables regenerate to `output/df_survey_*.txt`
+region2-00500-01-01 ("medium", 500y, 1.99 GB + 302 MB plus), region3-00500-01-01
+("small-dense", 500y, 4.95 GB + 232 MB plus — the first export arrived
+truncated at 2.91 GB, KI#34; the re-export completed and reproduces the
+recovered prefix counts exactly), and a fresh region2-00500-01-01 generated
+at the largest world size ("large", 500y, 2.38 GB + 290 MB plus — same slot
+name as the old medium, which it replaced on the owner's machine; the
+medium numbers below stay as measured); format: small / medium /
+small-dense / large. Full tables regenerate to `output/df_survey_*.txt`
 from the same exports (`dfworlds/`, gitignored; cross-version
 reproducibility is not a DF property — the df_design.md determinism
 quarantine). F7/F8 are `docs/ref/df_design.md`'s flaw rows.
 
 Scale (bg-3's "tens of MB, 10^4–10^5 events" is off by 1–2 orders):
 
-- events 450,867 / 1,220,772 / 933,476 · distinct types 97 / 99 / 99 —
-  101 across all exports, all classified (zero UNCLASSIFIED; "site
-  tribute forced" joined in iter-8f, KI#35) · collections 29,663 /
-  110,519 / 93,330 · figures 44,955 / 105,898 / 76,441 (61% / 83% / 83%
-  dead at export) · sites 1,575 / 2,273 / 1,160 · entities 3,253 / 7,013
-  / 6,038 · artifacts 9,158 / 27,872 / 21,383 · written_contents 46,858
-  / 113,000 / 86,166.
+- events 450,867 / 1,220,772 / 933,476 / 1,191,388 · distinct types 97 /
+  99 / 99 / 101 — 101 across all exports, all classified (zero
+  UNCLASSIFIED; "site tribute forced" joined in iter-8f, KI#35; the
+  large world alone reaches the full 101-type union) · collections
+  29,663 / 110,519 / 93,330 / 197,051 · figures 44,955 / 105,898 /
+  76,441 / 98,001 (61% / 83% / 83% / 80% dead at export) · sites 1,575 /
+  2,273 / 1,160 / 4,051 · entities 3,253 / 7,013 / 6,038 / 12,557 ·
+  artifacts 9,158 / 27,872 / 21,383 / 27,250 · written_contents 46,858 /
+  113,000 / 86,166 / 90,947.
+- **World size scales geography and occasions, not history volume** (the
+  owner's "why is the large world barely bigger" question): large vs
+  medium at the same 500y — sites +78%, entities +79%, collections +78%
+  (occasion-ritual share doubles, 5.1% → 10.4%), yet events −2.4%,
+  figures −7.5%, artifacts flat, written_contents −19%; export size +20%
+  (1.99 → 2.38 GB). The notable population and its interaction rate do
+  not scale with map area — the event log is sized by the history
+  engine, the file by geography on top of it.
 - events/year grows with compounding history (small: 890 @y1 → ~2,700
   late; medium peak 6,966 @y361, last-10y 2,297; small-dense mean 1,867,
-  peak 6,176 @y220, last-10y 1,722) — no density cliff inside worldgen.
+  peak 6,176 @y220, last-10y 1,722; large peaks at the year-1 genesis
+  burst — 4,200 @y1 — then declines to last-10y 1,685) — no density
+  cliff inside worldgen, and the large world's shape is front-loaded,
+  unlike the medium's mid-history peak.
 
 F7 (macro-dense, micro-empty) — confirmed, one refinement (shares):
 
-- bookkeeping 57.3% / 52.2% / 48.2% · artifact-culture 16.1% / 16.4% /
-  15.3% · personal-violence 14.6% / 15.5% / 19.9% · **micro
-  (street/personal) 7.7% / 8.8% / 7.7%** · occasion-ritual 3.5% / 5.1% /
-  3.9% · war-geopolitics 0.7% / 1.8% / 4.3% · arcane 0.1% / 0.25% / 0.7%;
-  top-5 types = 60.1% / 55.8% / 53.7% of all events. The dense setting
-  trades bookkeeping for violence and war — the micro ceiling holds.
+- bookkeeping 57.3% / 52.2% / 48.2% / 48.2% · artifact-culture 16.1% /
+  16.4% / 15.3% / 15.3% · personal-violence 14.6% / 15.5% / 19.9% /
+  13.9% · **micro (street/personal) 7.7% / 8.8% / 7.7% / 8.5%** ·
+  occasion-ritual 3.5% / 5.1% / 3.9% / 10.4% · war-geopolitics 0.7% /
+  1.8% / 4.3% / 2.7% · arcane 0.1% / 0.25% / 0.7% / 1.1%; top-5 types =
+  60.1% / 55.8% / 53.7% / 50.0% of all events. The dense setting trades
+  bookkeeping for violence and war; the large setting trades it for
+  occasions — the micro ceiling holds everywhere.
 - Refinement: modern DF is not literally micro-empty — intrigue exists
   (reputation relationships 3.1–3.6%, relationship denied, assume
   identity, trade, gamble, agreements, convictions, reunions) — but it
   is notable-to-notable politics, not street texture: no gossip
   propagation records, theft = artifact theft. The bg-3
   distribution-mismatch warning stands: ≤9% of the log is tavern-scale.
-- events-per-figure: p50 7 mentions, p99 44 / 56 / 73, max 499 / 2,975 /
-  1,644; top-1% of figures hold 9.1% / 11.1% / 12.9% of mentions (long
-  tail, not hub-dominated); 96.4% / 98.5% / 95.4% of figures appear in
-  ≥1 event.
+- events-per-figure: p50 7 mentions, p99 44 / 56 / 73 / 72, max 499 /
+  2,975 / 1,644 / 1,157; top-1% of figures hold 9.1% / 11.1% / 12.9% /
+  12.7% of mentions (long tail, not hub-dominated); 96.4% / 98.5% /
+  95.4% / 98.0% of figures appear in ≥1 event.
 
 F8 (causality as archaeology) — confirmed and sharpened:
 
-- Only **19.3% / 23.8% / 30.7%** of events sit in ANY collection; orphans
-  (no collection ref, no `*_hfid` role, no cause) = 21.3% / 22.7% / 20.3%.
+- Only **19.3% / 23.8% / 30.7% / 29.9%** of events sit in ANY collection;
+  orphans (no collection ref, no `*_hfid` role, no cause) = 21.3% /
+  22.7% / 20.3% / 20.4%.
 - Direct event→collection references are **unique** (0 events with 2+
-  parent collections in any world); collections form strict
-  single-parent trees (max 1 parent per subcollection) — the
-  many-to-many claim is false for these exports (KI#33; triple-confirmed
-  including the dense world). The bg-2 "2+ collections →
-  candidate_causes" trigger fires never; realistic ambiguity = absent
-  role fields (39% / 58% / 59% of deaths carry no slayer) plus the
-  ~69–81% ungrouped mass.
-- `hf died` cause enum: struck 50.6% / 51.7% / 51.0%, old age 21.6% /
-  27.3% / 32.6%, murdered 23.9% / 18.1% / 13.6%, shot ≤1.7%,
-  executions + suicides <1.5%.
-- Median collection holds 1 direct event (p90 = 6, max 665 / 3,222 /
-  826) — grouping context is shallow even where it exists.
+  parent collections in any world — quad-confirmed on the large world);
+  collections form strict single-parent trees (max 1 parent per
+  subcollection) — the many-to-many claim is false for these exports
+  (KI#33). The bg-2 "2+ collections → candidate_causes" trigger fires
+  never; realistic ambiguity = absent role fields (39% / 58% / 59% /
+  64% of deaths carry no slayer — the large world is the most
+  slayer-less) plus the ~70–80% ungrouped mass.
+- `hf died` cause enum: struck 50.6% / 51.7% / 51.0% / 49.8%, old age
+  21.6% / 27.3% / 32.6% / 40.1%, murdered 23.9% / 18.1% / 13.6% / 6.6%,
+  shot ≤1.9%, executions + suicides <2.5% — the large world is the
+  most peaceful (old age dominates for the first time).
+- Median collection holds 1 direct event (p90 = 6 / 6 / 6 / 3, max 665 /
+  3,222 / 826 / 430) — grouping context is shallow even where it
+  exists.
 
 Pipeline (bg-1) — the validated recipe, `scripts/df_survey.py`:
 
@@ -164,7 +185,49 @@ Pipeline (bg-1) — the validated recipe, `scripts/df_survey.py`:
   detail records) is marked, UNHANDLED records (site, entity, region,
   artifact, written_content, …) carry their child-tag sets so bg-1's
   SQLite sink can plan field extraction without re-parsing a 5 GB
-  export. Coverage matrix: `docs/ref/df_legends_xml.md`.
+  export. Coverage matrix: `docs/ref/df_legends_xml.md`. Any record
+  tag outside the matrix renders as UNDOCUMENTED (implemented bg-1,
+  KI#36 — first catches: `artifact`, missing from the matrix despite
+  being in every export, and `historical_era`).
+
+### 3.2 SQLite sink — bg-1 closed (`scripts/df_import.py`, D-051)
+
+The bg-1 AC (parser loads a world into SQLite) is met and
+cross-validated: importing the large world (2.38 GB) reproduces the
+survey's numbers exactly — events 1,191,388 · event_membership 355,596
+(= referenced-by-≥1-collection) · collection_parent 132,875 (= eventcol
+child links; all 1,510 `parent_eventcol` up-edges agree with the parent
+lists) · event_participant 1,030,343 (= total figure mentions) ·
+records 139,534 (= the seven non-noise UNHANDLED sections). Single
+pass, 174 s, 898 MB DB, ~190 MB peak RSS (the survey's streaming law,
+unchanged). Schema and policy, single owner `scripts/df_import.py`
+(docstring); the load-bearing facts:
+
+- **Typed cores + EAV:** events/collections/figures get typed columns
+  (id, type, year/…, race/birth/death) plus `*_fields` EAV tables
+  carrying every other child tag — repeated tags survive, identical
+  duplicates collapse, nested children serialize as canonical JSON
+  (sorted keys, parse order preserved). `event_participant (hfid,
+  event_id)` lifts every direct child tag ending in `hfid` — bg-3's
+  "figure Y's own records" query is a PK prefix scan (measured 4 ms for
+  the world's top figure, 1,157 events). Every non-noise UNHANDLED
+  record lands in one generic `records` table as native JSON —
+  including future UNDOCUMENTED tags, so schema drift never breaks an
+  import.
+- **Truncation policy (the bg-1 remainder's owned decision):** default
+  = flagged partial import (`meta.partial=1`; the record in flight at
+  the cut lands with its parsed prefix of fields — KI#36 measured
+  behavior, shared with the survey so counts cross-validate);
+  `--strict` aborts before parsing. The DB is always rebuilt fresh
+  (rebuildable index, D-003 analog; no journal/fsync pragmas).
+- **Skips:** art/dance/musical/poetic forms (matrix design-noise law —
+  counted, not stored); the plus companion is not imported at all
+  (selective import, never wholesale — its complementary fields defer
+  until bg-2/bg-3 actually need them).
+- **Determinism quarantine:** DB content is a pure function of the
+  export bytes — parse order, canonical JSON, no wall-clock in `meta`;
+  re-import yields identical rows (pinned in `tests/test_df_import.py`).
+  No golden DF fixtures, no cross-DF-version byte-identity claims.
 
 ## 4. Python determinism recipe
 

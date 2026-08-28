@@ -23,7 +23,11 @@ F7/F8 detail above) are marked, UNHANDLED records (site, entity, artifact,
 written_content, region, landmass, mountain_peak, river, creature_raw,
 entity_population, dance/musical/poetic form, …) are listed with their
 unique child-tag sets so bg-1's SQLite sink can plan field extraction
-without re-parsing the export. The audit replaces head/middle/tail
+without re-parsing the export. Any record tag NOT in the coverage matrix
+(`docs/ref/df_legends_xml.md` — DOCUMENTED_RECORD_TAGS below) renders as
+UNDOCUMENTED: a future DF version grew the schema (KI#36 — the large
+world surfaced `historical_era`, present in the export but absent from
+the matrix at the time). The audit replaces head/middle/tail
 positional sampling: it is strictly more information (every structural
 variant is captured, not just three positions) and is bounded by record
 uniformity.
@@ -206,6 +210,30 @@ HANDLED_RECORDS = frozenset({
     "historical_event",
     "historical_event_collection",
     "historical_figure",
+})
+
+# Record tags the coverage matrix documents (`docs/ref/df_legends_xml.md`
+# "Coverage matrix" — the single owner of which sections exist). Anything
+# else on depth=3 renders as UNDOCUMENTED: a drift signal from a future DF
+# version growing the schema (KI#36; first catches: `artifact` — present in
+# every export yet missing from the matrix — and `historical_era`).
+DOCUMENTED_RECORD_TAGS = frozenset(HANDLED_RECORDS | {
+    "site",
+    "entity",
+    "entity_population",
+    "region",
+    "underground_region",
+    "landmass",
+    "mountain_peak",
+    "river",
+    "creature_collection",
+    "artifact",
+    "art_form",
+    "dance_form",
+    "musical_form",
+    "poetic_form",
+    "written_content",
+    "historical_era",
 })
 
 
@@ -628,9 +656,21 @@ def _render_audit_section(add, stats: WorldStats) -> None:
         parts = [f"{tag}:{c:,}" for tag, c in per_tag.most_common()]
         add(f"  {section_tag} -> {{{', '.join(parts)}}}")
     add("  unique child-tag sets per record tag (variants = schema stability signal; >3 = drift):")
+    undocumented_tags = sorted(
+        tag for tag in record_totals if tag not in DOCUMENTED_RECORD_TAGS
+    )
+    if undocumented_tags:
+        add("  UNDOCUMENTED record tags (not in the coverage matrix —"
+            " docs/ref/df_legends_xml.md — schema drift signal): "
+            + ", ".join(undocumented_tags))
     for record_tag in sorted(record_totals):
         variants = stats.unique_child_tag_sets.get(record_tag, set())
-        marker = "HANDLED" if record_tag in HANDLED_RECORDS else "UNHANDLED"
+        if record_tag in HANDLED_RECORDS:
+            marker = "HANDLED"
+        elif record_tag in DOCUMENTED_RECORD_TAGS:
+            marker = "UNHANDLED"
+        else:
+            marker = "UNDOCUMENTED"
         n_records = record_totals[record_tag]
         n_variants = len(variants)
         add(f"  [{marker}] {record_tag} ({n_records:,} records, {n_variants} variant(s))")

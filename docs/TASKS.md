@@ -69,27 +69,6 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
 
-### bg-1 · DF export pipeline — todo
-
-- DF Classic (free) + DFHack `exportlegends info` → 2–3 worlds → XML → SQLite
-  parser. Watch for: HEX errors after fortress play (export from clean legends
-  mode), hundreds of MB per large world, translated-name layers.
-  Pipeline design guidance: `docs/ref/df_design.md` ("What we adapt" —
-  streaming/selective import, name normalization, determinism quarantine).
-  Parsing half VALIDATED (iter-8e; truncation survival iter-8f): the
-  owner supplied three worlds — incl. a truncated copy + its complete
-  re-export, which ground-truth-validated the recovery;
-  `scripts/df_survey.py` is the sanitize+stream core (recipe + measured
-  pitfalls: `docs/TECH_NOTES.md` §3.1) — the remainder is the SQLite
-  sink, which must own its truncation policy (abort vs flagged partial
-  import). **Coverage audit landed (iter-8g)** — `--audit` mode gives
-  the sink a field plan (HANDLED vs UNHANDLED records + every
-  UNHANDLED child-tag set) without re-parsing a 5 GB export; coverage
-  matrix: `docs/ref/df_legends_xml.md`; regression protection:
-  `tests/test_df_survey.py` (9 tests, synthetic DF-like XML).
-- AC: parser loads a world into SQLite; pitfalls recorded in
-  `docs/TECH_NOTES.md` §3.
-
 ### bg-2 · event taxonomy — todo
 
 - 100–300 interesting events across ~16 types (birth, death, murder, theft,
@@ -101,7 +80,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   `event_collections` + role fields, not parsed. Sampling frame sharpened
   (iter-8e): measured type distribution + ambiguity grounding live in
   `docs/TECH_NOTES.md` §3.1 (micro tails, unique collection refs,
-  slayer-less deaths).
+  slayer-less deaths). Query home since bg-1 closed: the SQLite sink
+  (`scripts/df_import.py` → `output/df_world_<stem>.sqlite3`; recipe
+  `docs/TECH_NOTES.md` §3.2) — participant/grouping/name queries run on
+  the DB, not by re-parsing XML.
 
 ### bg-3 · briefer spike — todo
 
@@ -111,7 +93,8 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 - AC: harness runs; numbers in `docs/TECH_NOTES.md`. Expectation to keep
   honest: DF canon is macro-dense and micro-empty — this validates briefer
   *mechanics*, not micro-event interestingness (measure that on our own dry
-  chronicle).
+  chronicle). Y's own records = the `event_participant` index
+  (`docs/TECH_NOTES.md` §3.2; 4 ms measured on the large world).
 
 ### bg-4 · cost notes — todo
 
@@ -186,6 +169,16 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- bg-1 · 2026-08-29 · DF export pipeline CLOSED (bg-1-sqlite-sink; D-051):
+  `scripts/df_import.py` loads a world into SQLite (AC met) over the
+  validated survey core — typed cores + EAV + `event_participant` +
+  generic JSON records; truncation policy owned (flagged partial default,
+  `--strict` abort); cross-validated on the owner's new large world
+  (2.38 GB → 898 MB in 174 s; every count reproduces the survey);
+  `tests/test_df_import.py` (11 tests). KI#36 fixed (UNDOCUMENTED audit
+  marker; matrix gaps `artifact` + `historical_era`). Plus-companion
+  import = documented deferral (TECH_NOTES §3.2), not backlog scope.
+  Survey half history: iter-8e/8f/8g (git).
 - iter-8h · 2026-08-29 · owner-directed derived-index micro-pass (an
   external patch list verified against the code first — every item
   proven semantics-preserving): two derived runtime indexes beside

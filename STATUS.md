@@ -1,31 +1,32 @@
 # STATUS — canonsim
 
-Iteration: 8h (`iter-8h-derived-indexes`) · Phase: 1 · Date: 2026-08-29 ·
-owner-directed perf micro-pass: an external patch list (six items) was
-verified against the code item by item — each proven semantics-preserving
-— then applied (D-050, the single owner of the rationale). Two derived
-runtime indexes beside their single mutation funnels: `KnowledgeView`
-gains `who → token → source-ids` (maintained in `add`, the only writer;
-`holds` drops the row scan — and `before_source` survives: a token
-learned only from the excluded source is NOT held, the plain-token-set
-variant from the external review would have broken exactly that) and
-the Simulator gains `(entity, prop) → last committed tick` (maintained
-in `_commit`; the decay pass reads the index instead of scanning the
-whole log per NPC-axis — the KI#19 "any committer" baseline unchanged).
-Four scan eliminations: `_scene_delta_lines` breaks at the beat-window
-edge (ticks are log-monotonic — the writer invariant; one brief-test
-fixture fixed to be log-shaped, it encoded an out-of-order log),
-`salient()` is a top-1 `max` (first-of-equals ties identical to the
-stable reverse sort), `occ_breaking_cause` folds forward once from the
-proposal point (strict left fold — O(events), not O(w·events)),
-director `entropy` is computed once per `releases()` (was eagerly
-recomputed per policy call — pure waste under a rejecting policy:
-k+1 identical evaluations per beat). Micro-benchmarks (the D-031
-data): decay pass 45×, occ 40×, holds 664×, releases 24×, scene-delta
-5×, salient 1.9× at the measured sizes — all asymptotic wins. 340
-green (was 338; +2 contract pins, T2 extended to the token index),
-ruff clean, golden fixtures byte-identical. KI#33/34/35 deleted (§5,
-due since 8h). No new KIs. iter-9 (VALIDATION_SPEC) unchanged.
+Iteration: bg-1 (`bg-1-sqlite-sink`) · Phase: 1 · Date: 2026-08-29 ·
+owner-directed (the new "large" world export supplied as the input):
+bg-1's remainder landed and the task is CLOSED — `scripts/df_import.py`
+loads a world into SQLite over the unchanged iter-8e/8f/8g survey core
+(sanitize + truncation recovery + streaming; D-051 the single rationale
+owner). Schema: typed cores (events/collections/figures) + EAV
+`*_fields` for every other child tag + `event_participant (hfid,
+event_id)` (bg-3's "figure Y's own records" = a PK prefix scan, 4 ms
+measured on the world's top figure) + membership/parent link tables
+(both nesting sources, deduped) + one generic JSON `records` table for
+every non-noise UNHANDLED tag — including future UNDOCUMENTED tags, so
+schema drift never breaks an import. Truncation policy owned: flagged
+partial import by default (`meta.partial=1`; the in-flight record at
+the cut lands with its parsed prefix of fields — measured, shared with
+the survey so counts cross-validate); `--strict` aborts. Cross-validated
+on the large world: 2.38 GB → 898 MB DB in 174 s; every table count
+reproduces the survey exactly (events 1,191,388 · membership 355,596 =
+referenced-by-≥1 · parents 132,875 = eventcol links · participants
+1,030,343 = mentions). The owner's size question answered (TECH_NOTES
+§3.1): world size scales geography and occasions (sites/entities/
+collections +78%, occasion-ritual share 5.1→10.4%), not history volume
+(events −2.4%, figures −7.5%) — hence only +20% file size. KI#36
+opened+closed: the UNDOCUMENTED audit marker the coverage matrix
+promised was never implemented; its first real run caught two matrix
+gaps (`artifact` — in every export; `historical_era`). 352 green (was
+340; +11 sink tests, +1 audit test), ruff clean, golden fixtures
+byte-identical. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,8 +49,10 @@ due since 8h). No new KIs. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Active KIs
 
-- None. (KI#33/34/35 deleted at iter-8h per §5 — closed iter-8e/8f,
-  history in git.)
+- None. KI#36 opened+closed bg-1 (doc↔tool drift: the UNDOCUMENTED
+  audit marker documented in the coverage matrix was never implemented;
+  plus the 8g truncation-test comment misstated the in-flight-record
+  behavior) — CLOSED bg-1, history in git.
 
 ## FAQ / Pitfalls
 
@@ -137,23 +140,33 @@ due since 8h). No new KIs. iter-9 (VALIDATION_SPEC) unchanged.
   grep a sample of ledger terms across the planning docs — every term
   must land in at least one; verified iter-0x.
 - **DF exports are not well-formed XML and can arrive truncated; the
-  survey tool owns the recipe (iter-8e/8f/8g).** Raw CP437 control bytes
-  (item-quality symbols) sit inside artifact names — byte-level sanitize
-  before any parse; the exporter can die mid-write (no `</df_world>` at
-  EOF) — the survey tail-checks and synthesizes the closing tags
-  best-effort, loudly marking every count PARTIAL (KI#34); stream with
-  iterparse + clear (a non-clearing parse OOMs 4 GB on a 2 GB export);
-  main-file type names are display-style, the plus companion's are
-  snake_case — normalize. **`--audit` (iter-8g) is the coverage census:
+  survey tool owns the recipe, the sink reuses it unchanged (iter-8e/
+  8f/8g; bg-1-sqlite-sink).** Raw CP437 control bytes (item-quality
+  symbols) sit inside artifact names — byte-level sanitize before any
+  parse; the exporter can die mid-write (no `</df_world>` at EOF) — the
+  survey tail-checks and synthesizes the closing tags best-effort,
+  loudly marking every count PARTIAL (KI#34); stream with iterparse +
+  clear (a non-clearing parse OOMs 4 GB on a 2 GB export); main-file
+  type names are display-style, the plus companion's are snake_case —
+  normalize. **`--audit` (iter-8g) is the coverage census:
   per-section per-record-tag counts + every unique child-tag set per
   record tag — a structural fingerprint bounded by DF record uniformity
-  (typically 1-3 variants; >3 = schema drift signal). Replaces
-  head/middle/tail positional sampling strictly — every structural
-  variant is captured, not three positions; runs in the same single
-  streaming pass as the F7/F8 detail (no second parse). Coverage matrix:
-  `docs/ref/df_legends_xml.md`.** Measured numbers + the full recipe:
-  `docs/TECH_NOTES.md` §3; tool: `scripts/df_survey.py`; regression
-  protection: `tests/test_df_survey.py` (9 tests, synthetic DF-like XML).
+  (typically 1-3 variants; >3 = schema drift signal). Coverage matrix:
+  `docs/ref/df_legends_xml.md`.** Any record tag outside the matrix
+  renders **UNDOCUMENTED** — implemented bg-1 (KI#36; the marker was
+  documented but never implemented — its first real run caught two
+  matrix gaps: `artifact`, in every export, and `historical_era`). The
+  record in flight at a truncation cut IS counted (the recovering
+  reader synthesizes its closing tag — measured, test-pinned; survey
+  and sink agree, so counts cross-validate on any export). **The
+  SQLite sink landed (D-051):** typed cores + EAV fields +
+  `event_participant` + generic JSON `records`; truncation policy =
+  flagged partial import by default, `--strict` aborts; the DB is a
+  rebuildable index of the export bytes — content-deterministic, no
+  wall-clock in `meta`, no golden DF fixtures. Measured numbers + the
+  full recipe: `docs/TECH_NOTES.md` §3.1/§3.2; tools:
+  `scripts/df_survey.py` + `scripts/df_import.py`; regression:
+  `tests/test_df_survey.py` + `tests/test_df_import.py`.
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap
   is 600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, field lists, enum values, per-source verdicts
@@ -196,38 +209,25 @@ due since 8h). No new KIs. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Next step
 
-**Phase 1 continues** — iter-8c audit verdict: no rework of
-iter-1..8 required (the 7th-block landing is additive — assembler +
-pack + enum flip atomically per BRIEF_SPEC §9). The plan's single
-owner is `docs/TASKS.md`
-(Track A: iter-9+ = VALIDATION_SPEC + the validator's LLM-free half —
-fact transaction, ExpectedVersion OCC, ≤2 regens, INSUFFICIENT_DATA
-default, golden-set plumbing; then the scene-ledger LLM-free half —
-`brief/ledger.py` + the `scene_texture` 7th block + fixture-shaped
-deltas, per D-048/D-049/blueprint §1 — the hardening gave it complete
-inputs (scene definition, structural pinning, the gateway checks, the
-tombstone window, the texture-OCC mirror); the narrator LLM boundary
-itself remains an AGENTS §8 owner checkpoint, INV-4 holds until then,
-and it carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
-unblocked in parallel — bg-1's parsing half is validated (iter-8e: the
-owner supplied three worlds — incl. a truncated copy + its complete
-re-export, which ground-truth-validated the iter-8f truncation
-recovery; `scripts/df_survey.py` + the measured pitfalls in
-`docs/TECH_NOTES.md` §3); the iter-8g `--audit` mode + the coverage
-matrix in `docs/ref/df_legends_xml.md` give bg-1's SQLite sink the
-field plan (HANDLED vs UNHANDLED records + every UNHANDLED child-tag
-set) without re-parsing a 5 GB export; so bg-1's remainder is the
-SQLite sink over that core (owning its truncation policy — abort vs
-flagged partial import); the survey also sharpened bg-2's sampling
-frame (`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3).
-Backlog
-that did NOT land in iter-8b (each stays in its TASKS home, none
-blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
-GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile
-(the iter-8h micro-pass landed the six locally-provable asymptotic
-wins — the full profile remains the gate for anything structural,
-e.g. a Path-B revisit); `tune-1` rest action + the D-045(b)
-importance-rule knob; the
-BRIEF_SPEC §9 deferrals (relevance signal, lore scheduling grammar,
-precondition-filtered options, exemplar refresh cadence — all arrive
-with the mediator, never early).
+**Phase 1 continues on track A** — iter-9 stays the next code iteration
+(the plan's single owner is `docs/TASKS.md`): VALIDATION_SPEC + the
+validator's LLM-free half (fact transaction, ExpectedVersion OCC, ≤2
+regens, INSUFFICIENT_DATA default, golden-set plumbing), then the
+scene-ledger LLM-free half per D-048/D-049/blueprint §1 (unchanged by
+bg-1 — track B never blocks A; the narrator LLM boundary itself remains
+an AGENTS §8 owner checkpoint, INV-4 holds until then). **Track B:
+bg-1 is CLOSED** (the SQLite sink landed with the owner's large world
+as the validation input; every count reproduces the survey — D-051,
+TECH_NOTES §3.2). bg-2 (event taxonomy) and bg-3 (briefer spike) are
+unblocked and now query the DB (`output/df_world_<stem>.sqlite3` —
+participant/grouping/name queries run on SQLite, not by re-parsing
+XML; bg-3's "figure Y's own records" = the `event_participant` PK
+scan). Backlog that did NOT land in iter-8b (each stays in its TASKS
+home, none blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy +
+`ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick
+profile (the iter-8h micro-pass landed the six locally-provable
+asymptotic wins — the full profile remains the gate for anything
+structural, e.g. a Path-B revisit); `tune-1` rest action + the
+D-045(b) importance-rule knob; the BRIEF_SPEC §9 deferrals (relevance
+signal, lore scheduling grammar, precondition-filtered options,
+exemplar refresh cadence — all arrive with the mediator, never early).

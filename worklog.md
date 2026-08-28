@@ -8,6 +8,26 @@
 > since iter-5).
 
 ---
+bg-1-sqlite-sink · 2026-08-29 · DF SQLite sink — bg-1 closed (D-051)
+- Owner-directed (the new "large" world export supplied as input): the
+  bg-1 remainder landed — `scripts/df_import.py` over the unchanged
+  survey core: typed cores + EAV fields + `event_participant` +
+  membership/parent links + one generic JSON `records` table;
+  truncation policy owned (flagged partial default, `--strict` abort).
+  Cross-validated on the large world (2.38 GB → 898 MB, 174 s): every
+  table count reproduces the survey exactly. 352 green (was 340;
+  +11 sink tests, +1 audit test). KI#36 opened+closed: UNDOCUMENTED
+  marker implemented (first catches: `artifact`, `historical_era` —
+  both matrix gaps fixed); the 8g truncation-test comment corrected
+  (the in-flight record IS counted — measured, now pinned).
+- 10 files (above the 3–5 soft cap; the tool + tests + the AGENTS §6
+  sync set, iter-8e precedent): scripts/{df_survey,df_import}.py,
+  tests/{test_df_survey,test_df_import}.py, TECH_NOTES §3.1+§3.2
+  (fourth world + the owner's size answer: world size scales geography
+  and occasions, not history volume), df_legends_xml.md matrix,
+  TASKS (bg-1 done + bg-2/bg-3 DB pointers), DECISIONS D-051,
+  AGENT_NAVIGATION, STATUS, this worklog.
+---
 iter-8h · 2026-08-29 · derived-index micro-pass (iter-8h-derived-indexes)
 - Owner-directed: an external patch list (six items) verified against
   the code item by item before landing — each proven
@@ -198,27 +218,7 @@ iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assemble
   worklog/README/DECISIONS). 299→329 tests green, ruff clean, golden
   fixture byte-identical.
 ---
-iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
-- Owner-requested retrospective at the phase boundary: baseline
-  re-verified (299 green + ruff clean), then the D-034-mandated
-  DECISIONS collapse 46→30 (ID-preserving family merges; compound IDs
-  use the FULL prefix per member — `D-018/022/029` does not resolve,
-  the FAQ law); 55KB→20KB. TASKS.md regained the what-next ownership
-  (phase-1 sequence: iter-8 BRIEF_SPEC + brief assembler; iter-9+
-  VALIDATION_SPEC; tune-1 knobs); STATUS Next step → pointer.
-- Intake audit fixes: KI#25 stale `_enqueue_autonomous` docstring
-  (beat-tick claim vs the entry-tick law); KI#26 dead-parameter family
-  (Director.releases knowledge — L6-dangerous false interface;
-  briefing_draft projection; urgency_intents beat_tick; _axis_deltas
-  pack) removed with call sites + tests; KI#27 README drift (298→299,
-  "systems land iter-2"); KI#28 residual false "AGENTS §9" citation in
-  AGENT_NAVIGATION §1 (the KI#23 family — iter-6a missed this instance).
-  KI#21 deleted (closed >2 iters); FAQ: ref
-  places + graveyard merged (20 held), the collapse law added.
-- 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
-  299 tests green, ruff clean, golden fixture byte-identical (dead
-  params — no canon-path change).
----
+(iter-7 deleted at bg-1 per the one-in/one-out cap; history in git.)
 (iter-6a deleted at iter-8h per the one-in/one-out cap; history in git.)
 (iter-6 deleted at iter-8g per the one-in/one-out cap; history in git.)
 (iter-5 deleted at iter-8f per the one-in/one-out cap; history in git.)

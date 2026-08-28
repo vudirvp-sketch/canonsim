@@ -145,9 +145,12 @@ def test_recovering_reader_survives_truncation(tmp_path: Path) -> None:
     # Should not raise — the synthesized closing tags complete the parse.
     sanitized, _seconds = df_survey._stream(cut, stats, audit=True)
     reader.close()
-    # We never saw the </historical_event> close, so the partial record
-    # is dropped — but the section wrapper and root are closed by recovery.
-    assert stats.section_counts.get("historical_events", 0) >= 0
+    # The record in flight at the cut IS counted, with its parsed prefix
+    # of fields — the synthesized </historical_event> fires its end event
+    # (KI#36 correction: the old comment claimed it was dropped; measured
+    # behavior, pinned here because the sink's counts ride on it).
+    assert dict(stats.section_counts) == {"historical_events": 1}
+    assert dict(stats.event_types) == {"hf died": 1}
     assert sanitized == 0
 
 
@@ -230,6 +233,35 @@ def test_build_report_with_audit_renders_coverage_section(tiny_xml: Path) -> Non
     assert "entity" in report
     assert "historical_event" in report  # handled
     assert "variant(s)" in report
+
+
+def test_audit_marks_undocumented_record_tags(tmp_path: Path) -> None:
+    """KI#36: a record tag absent from the coverage matrix renders as
+    UNDOCUMENTED — the drift signal the matrix documents but the tool
+    never implemented before (first catch: `historical_era` in the large
+    world)."""
+    raw = b"""<?xml version="1.0"?>
+<df_world>
+  <widgets>
+    <widget><id>1</id><name>new-in-a-future-df</name></widget>
+  </widgets>
+  <historical_events>
+    <historical_event><id>1</id><type>hf died</type><year>2</year></historical_event>
+  </historical_events>
+</df_world>
+"""
+    p = tmp_path / "drift-legends.xml"
+    p.write_bytes(raw)
+    stats = df_survey.WorldStats()
+    df_survey._stream(p, stats, audit=True)
+    report = df_survey.build_report(
+        p, None, stats, 0, 0.0, None, 0, 0.0, audit_mode=True,
+    )
+    assert "UNDOCUMENTED record tags" in report
+    assert "widget" in report
+    assert "[UNDOCUMENTED] widget (1 records" in report
+    # Known tags keep their markers.
+    assert "[HANDLED] historical_event " in report
 
 
 def test_build_report_without_audit_skips_coverage_section(tiny_xml: Path) -> None:
