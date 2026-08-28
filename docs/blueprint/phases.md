@@ -54,7 +54,8 @@ OCC semantics (EventStore) — an Intent references the event version it
 was based on; stale proposals are rejected, not merged. Reverse prose
 validation with ≤2 regenerations; the prose→proposal boundary is
 structural — mode-A prose is never a fact proposal, the C-parser emits
-grammar-constrained Intent JSON, no post-hoc text sanitization (D-018c).
+grammar-constrained Intent JSON, no post-hoc text sanitization (D-018 —
+the structural injection-neutralization clause).
 Honest verdicts default to INSUFFICIENT_DATA, never fabricated (UAP).
 
 **The scene ledger (canon vs texture — D-048; hardened D-049 after an
@@ -106,11 +107,13 @@ cannot desync canon replay).
   one delta — entries are never edited in place (append-only
   discipline).
 - **Lifecycle — discrete states, no floats** (trust-state machine,
-  atlas): `active` → `pinned` → `retired` (narrator-declared, scene
-  close) | `contradicted` (canon overrode; cause-linked to the event)
-  | `promoted` (became canon; cause-linked). One-way arrows only;
-  retirement is always an explicit recorded decision — no TTL, no turn
-  counters, no decay timers (MTTH lesson).
+  atlas): `active` → `pinned` (the structural trigger, below); the
+  live states `active`+`pinned` end in `retired` (narrator-declared,
+  scene close) | `contradicted` (canon overrode; cause-linked to the
+  event) | `promoted` (became canon; cause-linked) — terminal, one-way
+  (no un-pinning, no resurrection). Retirement is always an explicit
+  recorded decision — no TTL, no turn counters, no decay timers (MTTH
+  lesson).
 - **Pinning is structural (D-049).** An entry pins when its id or
   slot/noun is referenced by (a) an Intent through the door (the
   texture noun resolution) or (b) the narrator's own structural delta
@@ -124,7 +127,7 @@ cannot desync canon replay).
   (established/retired/refs) in the SAME call; the mediator parses the
   delta deterministically (zero-LLM capture). The prose→ledger
   boundary is structural, the same law as the prose→proposal boundary
-  (D-018c). Both delta sources — the narrator's inline delta and the
+  (D-018). Both delta sources — the narrator's inline delta and the
   extraction pass's grammar-constrained output — pass the SAME
   validation gateway (scope check, establishment-time canon check,
   tombstone/laundering check, unique-slot check, duplicate rule): the
@@ -214,8 +217,8 @@ cannot desync canon replay).
   object becomes canon) — zombie texture cannot arise through legal
   paths; a pack `unique` slot flag makes cross-scope
   re-establishment of the same slot a laundering refusal (pack data,
-  INV-3-clean). `pinned` entries are never auto-evicted while the
-  scene lasts.
+  INV-3-clean). The ledger never evicts ANY entry (read path) —
+  pinned only wins the brief window's ranking.
 - **Death:** session close discards the ledger. Cross-session
   continuity is canon + phase-4 reflection/legends, never the ledger
   — texture is never summarized, never consolidated (chained-lossy

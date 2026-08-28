@@ -4,7 +4,34 @@
 > files touched. No diffs, no command output, no reasoning traces. Long-term
 > rationale belongs in `docs/DECISIONS.md`.
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
+> Order: newest first (normalized at iter-8c — the order had drifted
+> since iter-5).
 
+---
+iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b (iter-8c-audit)
+- All claims reproduced: 329 green, ruff clean, T1 byte-identical; the
+  8b "2 false alarms" verdict verified against pre-8b git state (the
+  (log, ledger) purity flip WAS already in BRIEF_SPEC §9/D-048); atlas
+  MIT re-verified via the GitHub API. 3 KIs fixed: KI#30 — the D-018c
+  letter-suffix citation never resolved (the KI#23/#28 false-citation
+  family, propagated by 8b into D-049/worklog/phases.md; the lettering
+  died at the iter-7 D-034 collapse, and even pre-collapse the
+  structural boundary was D-018(b)) → plain D-018, 4 sites; KI#31 —
+  blueprint §1 wording debts (stale 8a "pinned never auto-evicted"
+  remnant vs the D-049 ledger-never-evicts resolution; lifecycle
+  notation now matches the precedence/texture-OCC paragraphs:
+  {active, pinned} → terminal states); KI#32 — sync misses (TASKS
+  ref-N line gained ref-16; BLUEPRINT BRIEF-1 gained the atlas donor
+  line + corpus count per its own §0 deep-dive protocol).
+- Verdict on the owner's question: NO rework of iter-1..8 needed —
+  the 7th block lands additively (assembler Block/fill/eviction shape
+  verified; zero new event types; the atomic flip set is enumerated in
+  BRIEF_SPEC §9). Worklog reordered to strict newest-first. 6 files —
+  audit fix set + mandated sync set (iter-6a precedent); docs-only,
+  the D-022 fresh owner request (iter-9 stays the code iteration).
+- 329 tests green, ruff clean, golden fixture byte-identical. No new
+  DECISIONS entries (drift fixes, not decisions); DECISIONS stays
+  33/30 transiently (collapse at the phase-1→2 gate, D-034).
 ---
 iter-8b · 2026-08-28 · scene-ledger hardening (iter-8b-scene-ledger-hardening)
 - Owner-requested dispute-resolution pass on an external LLM review of
@@ -18,7 +45,7 @@ iter-8b · 2026-08-28 · scene-ledger hardening (iter-8b-scene-ledger-hardening)
   (core stays ledger-blind), render-vs-epistemics,
   ledger-never-evicts (bounds live in the brief),
   tombstones-in-brief; every resolution reuses existing law
-  (D-018c/D-035/D-037/D-047/L12/atlas).
+  (D-018/D-035/D-037/D-047/L12/atlas).
 - 7 files — the mechanism owner (blueprint/phases.md §1) + the
   mandated sync set (DECISIONS D-049, BRIEF_SPEC §9 atomic flip set,
   SPECS_BACKLOG VALIDATION_SPEC sketch, TASKS iter-9+, STATUS incl.
@@ -41,6 +68,97 @@ iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
   precedent). Docs-only (D-022 owner-request exception).
 - 329 tests green, ruff clean, golden fixture byte-identical. DECISIONS
   transiently 32/30 (collapse due at the phase-1→2 gate, D-034).
+---
+iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assembler)
+- docs/BRIEF_SPEC.md (trigger fired at phase-1 start: six-block pipeline,
+  two-level budgets — soft fill target / hard per-item ceiling /
+  total_hard whole-block eviction with `[truncated:N]` markers and
+  never-drop-directives, voice isolation L2, max_items = ranking cap not
+  budget drop, §9 just-in-time deferral table) + brief/assembler.py
+  (pure functions of the log, ZERO RNG — byte-identity on the golden
+  fixture across calls, PYTHONHASHSEED-independent; beat arithmetic =
+  the read-side mirror of the loop's day-1-edge law) + rules.json::brief
+  pack contract (budgets + directives/lore/exemplars text) +
+  core/pack.py::_brief lint (BRIEF_BLOCK_IDS closed enum) +
+  tests/test_brief.py (30 tests). D-047 recorded — DECISIONS transiently
+  31/30 mid-phase (iter-1 precedent; collapse due at the phase-1→2 gate).
+- 13 files — task-mandated set (spec + assembler + pack + tests + lint)
+  + the AGENTS §6 sync set (TASKS/SPECS_BACKLOG/AGENT_NAVIGATION/STATUS/
+  worklog/README/DECISIONS). 299→329 tests green, ruff clean, golden
+  fixture byte-identical.
+---
+iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
+- Owner-requested retrospective at the phase boundary: baseline
+  re-verified (299 green + ruff clean), then the D-034-mandated
+  DECISIONS collapse 46→30 (ID-preserving family merges; compound IDs
+  use the FULL prefix per member — `D-018/022/029` does not resolve,
+  the FAQ law); 55KB→20KB. TASKS.md regained the what-next ownership
+  (phase-1 sequence: iter-8 BRIEF_SPEC + brief assembler; iter-9+
+  VALIDATION_SPEC; tune-1 knobs); STATUS Next step → pointer.
+- Intake audit fixes: KI#25 stale `_enqueue_autonomous` docstring
+  (beat-tick claim vs the entry-tick law); KI#26 dead-parameter family
+  (Director.releases knowledge — L6-dangerous false interface;
+  briefing_draft projection; urgency_intents beat_tick; _axis_deltas
+  pack) removed with call sites + tests; KI#27 README drift (298→299,
+  "systems land iter-2"); KI#28 residual false "AGENTS §9" citation in
+  AGENT_NAVIGATION §1 (the KI#23 family — iter-6a missed this instance).
+  KI#21 deleted (closed >2 iters); FAQ: ref
+  places + graveyard merged (20 held), the collapse law added.
+- 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
+  299 tests green, ruff clean, golden fixture byte-identical (dead
+  params — no canon-path change).
+---
+iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-audit)
+- Re-verified end-to-end: 298 green + ruff clean reproduced; the 1000-sim
+  baseline reproduces EXACTLY; T8 OFF = 26 chains / ON = director_0000;
+  chronicle PYTHONHASHSEED-independent; session doors + KI#17 gate
+  correct; tale_gate claims accurate (medium → 4 events).
+- 3 KIs fixed: KI#22 TEST_PLAN/test-docstring drift (seed 32→125 ×4,
+  24→26 ×2, M2 formula vs MVP_SCOPE §15 + impl, §6 filename, §1.2
+  per-endpoint note); KI#23 scripts/ outside the executable invariants
+  + the false "AGENTS §9" citation + the 5–15%/73–83% qualifier loss
+  (D-046; PACKAGE_DIRS += scripts + closure test + CLI-class print
+  exemption, MVP_SCOPE §18 pinned); KI#24 dead fold_events removed.
+- KI#17–20 deleted (closed >2 iters); KI entries to the 2-line cap; FAQ
+  24→20 (purity/drift/fixture/gate families merged + the chain-counting
+  law added). 11 files — audit fix set + mandated sync set.
+- Tests 298→299 green (+1 closure test); ruff clean; golden fixture
+  byte-identical. No canon-path change: the drift was in citing
+  documents, not in the numbers.
+---
+iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
+- TEST_PLAN.md (trigger-fired spec: T0-T8 + M1-M5 + gate protocol + UAP
+  crosswalk + §3 schema-bump migration) + core/metrics.py (M1-M5 +
+  emergent chains as pure functions of the log) + test_metrics.py (24)
+  + the T1 fixture-regeneration guard + tests/playscripts/day1_full.json
+  (seed 125) + test_t8_ab.py (single-factor A/B) +
+  scripts/balance_harness.py (KI#4 close) + rules.json::metrics.
+  11 files — task-mandated. D-042/D-043/D-044/D-045 recorded.
+- Tests 264→298 green (+34); ruff clean; golden fixture byte-identical.
+  T7 playtest + the full verdict evidence live in D-045; the 1000-seed
+  baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
+  p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
+---
+iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
+- render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
+  ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
+  stream) + render/chronicle.py (tale = pure function of the log: fresh
+  bank from the header seed per pass, day headers, importance gate,
+  scene card, ungated entity views) + cli/main.py + __main__.py (batch
+  play/chronicle/state/replay + interactive session: look, wait N,
+  directors on|off, seed). core/loop.py → open/run_steps/close
+  (session == batch bytes, tested); policy_from_rules owns the entropy
+  floor. templates.json completed into the grammar; KI#21 closed
+  (draft-template drift: inverted suspicion line, '[' collision, steal
+  object); display names gained articles (pack data). 12 files —
+  task-mandated module set + sync set.
+- Tests 225→264 green (+39: tracery units incl. cosmetic-audit + cycle
+  guard, chronicle gate/prefix-stability/T1-chronicle, CLI batch +
+  session + directors A/B on seed 32); ruff clean; golden fixture
+  byte-identical; chronicle verified PYTHONHASHSEED-independent.
+  Balance observation for KI#4/balance-1: player fatigue is monotonic
+  over long waits (no rest action in v0.1) — visible through the
+  readable chronicle.
 ---
 iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
 - core/director.py + core/urgencies.py + core/states.py (D-038:
@@ -72,114 +190,8 @@ iter-3 · 2026-08-28 · knowledge, relations, expectations (iter-3-knowledge-rel
 - Tests 155→187 green (+32: T3, transfers, expectations, OCC e2e, lint);
   fixture regenerated (move records — deliberate); KI#3 + KI#12 closed;
   states decay deferred to iter-4; arrest resolution parked (TASKS).
----
-iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2 (iter-2a-code-audit)
-- Full read core/ + tests + pack + contracts vs blueprint; claims
-  verified; probe-driven hunting (brute-forced seeds). 4 KIs found+fixed:
-  KI#13 drop desync + write-before-validate → `Simulator._commit` gate
-  (D-035, validate deltas pre-write); KI#14 next_log_path truncation;
-  KI#15 pack-lint gaps (use_effect axis, failure_total branches,
-  StopIteration guard); KI#16 parallel spread passes (double chance,
-  cause=None crash, seed 19) → per-layer singleton pass + shared cause
-  map (D-036); repeat smoke/burnout now silent. 15 files — audit fix set
-  + mandated sync set.
-- Tests 148→155 green, ruff clean; plumbing_smoke + day1 logs
-  byte-identical to pre-fix baselines; KI#11 deleted (closed >2 iters).
-  Observations parked: arrest-75 duplicated in rules.json (iter-3 picks
-  the owner), arson-on-ashes = backlog pack-2, statuses clamp by the
-  relations scale (documented INTENT_SCHEMA §6 — owner may veto).
+(iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)
 (iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)
 (iter-4a deleted at iter-8a per the one-in/one-out cap; history in git.)
 (iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
 (iter-1 deleted at iter-8 per the one-in/one-out cap; history in git.)
----
-iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
-- render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
-  ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
-  stream) + render/chronicle.py (tale = pure function of the log: fresh
-  bank from the header seed per pass, day headers, importance gate,
-  scene card, ungated entity views) + cli/main.py + __main__.py (batch
-  play/chronicle/state/replay + interactive session: look, wait N,
-  directors on|off, seed). core/loop.py → open/run_steps/close
-  (session == batch bytes, tested); policy_from_rules owns the entropy
-  floor. templates.json completed into the grammar; KI#21 closed
-  (draft-template drift: inverted suspicion line, '[' collision, steal
-  object); display names gained articles (pack data). 12 files —
-  task-mandated module set + sync set.
-- Tests 225→264 green (+39: tracery units incl. cosmetic-audit + cycle
-  guard, chronicle gate/prefix-stability/T1-chronicle, CLI batch +
-  session + directors A/B on seed 32); ruff clean; golden fixture
-  byte-identical; chronicle verified PYTHONHASHSEED-independent.
-  Balance observation for KI#4/balance-1: player fatigue is monotonic
-  over long waits (no rest action in v0.1) — visible through the
-  readable chronicle.
----
-iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
-- TEST_PLAN.md (trigger-fired spec: T0-T8 + M1-M5 + gate protocol + UAP
-  crosswalk + §3 schema-bump migration) + core/metrics.py (M1-M5 +
-  emergent chains as pure functions of the log) + test_metrics.py (24)
-  + the T1 fixture-regeneration guard + tests/playscripts/day1_full.json
-  (seed 125) + test_t8_ab.py (single-factor A/B) +
-  scripts/balance_harness.py (KI#4 close) + rules.json::metrics.
-  11 files — task-mandated. D-042/D-043/D-044/D-045 recorded.
-- Tests 264→298 green (+34); ruff clean; golden fixture byte-identical.
-  T7 playtest + the full verdict evidence live in D-045; the 1000-seed
-  baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
-  p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
----
-iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-audit)
-- Re-verified end-to-end: 298 green + ruff clean reproduced; the 1000-sim
-  baseline reproduces EXACTLY; T8 OFF = 26 chains / ON = director_0000;
-  chronicle PYTHONHASHSEED-independent; session doors + KI#17 gate
-  correct; tale_gate claims accurate (medium → 4 events).
-- 3 KIs fixed: KI#22 TEST_PLAN/test-docstring drift (seed 32→125 ×4,
-  24→26 ×2, M2 formula vs MVP_SCOPE §15 + impl, §6 filename, §1.2
-  per-endpoint note); KI#23 scripts/ outside the executable invariants
-  + the false "AGENTS §9" citation + the 5–15%/73–83% qualifier loss
-  (D-046; PACKAGE_DIRS += scripts + closure test + CLI-class print
-  exemption, MVP_SCOPE §18 pinned); KI#24 dead fold_events removed.
-- KI#17–20 deleted (closed >2 iters); KI entries to the 2-line cap; FAQ
-  24→20 (purity/drift/fixture/gate families merged + the chain-counting
-  law added). 11 files — audit fix set + mandated sync set.
-- Tests 298→299 green (+1 closure test); ruff clean; golden fixture
-  byte-identical. No canon-path change: the drift was in citing
-  documents, not in the numbers.
----
-iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
-- Owner-requested retrospective at the phase boundary: baseline
-  re-verified (299 green + ruff clean), then the D-034-mandated
-  DECISIONS collapse 46→30 (ID-preserving family merges; compound IDs
-  use the FULL prefix per member — `D-018/022/029` does not resolve,
-  the FAQ law); 55KB→20KB. TASKS.md regained the what-next ownership
-  (phase-1 sequence: iter-8 BRIEF_SPEC + brief assembler; iter-9+
-  VALIDATION_SPEC; tune-1 knobs); STATUS Next step → pointer.
-- Intake audit fixes: KI#25 stale `_enqueue_autonomous` docstring
-  (beat-tick claim vs the entry-tick law); KI#26 dead-parameter family
-  (Director.releases knowledge — L6-dangerous false interface;
-  briefing_draft projection; urgency_intents beat_tick; _axis_deltas
-  pack) removed with call sites + tests; KI#27 README drift (298→299,
-  "systems land iter-2"); KI#28 residual false "AGENTS §9" citation in
-  AGENT_NAVIGATION §1 (the KI#23 family — iter-6a missed this instance).
-  KI#21 deleted (closed >2 iters); FAQ: ref
-  places + graveyard merged (20 held), the collapse law added.
-- 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
-  299 tests green, ruff clean, golden fixture byte-identical (dead
-  params — no canon-path change).
----
-iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assembler)
-- docs/BRIEF_SPEC.md (trigger fired at phase-1 start: six-block pipeline,
-  two-level budgets — soft fill target / hard per-item ceiling /
-  total_hard whole-block eviction with `[truncated:N]` markers and
-  never-drop-directives, voice isolation L2, max_items = ranking cap not
-  budget drop, §9 just-in-time deferral table) + brief/assembler.py
-  (pure functions of the log, ZERO RNG — byte-identity on the golden
-  fixture across calls, PYTHONHASHSEED-independent; beat arithmetic =
-  the read-side mirror of the loop's day-1-edge law) + rules.json::brief
-  pack contract (budgets + directives/lore/exemplars text) +
-  core/pack.py::_brief lint (BRIEF_BLOCK_IDS closed enum) +
-  tests/test_brief.py (30 tests). D-047 recorded — DECISIONS transiently
-  31/30 mid-phase (iter-1 precedent; collapse due at the phase-1→2 gate).
-- 13 files — task-mandated set (spec + assembler + pack + tests + lint)
-  + the AGENTS §6 sync set (TASKS/SPECS_BACKLOG/AGENT_NAVIGATION/STATUS/
-  worklog/README/DECISIONS). 299→329 tests green, ruff clean, golden
-  fixture byte-identical.

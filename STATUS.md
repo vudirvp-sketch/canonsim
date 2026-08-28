@@ -1,22 +1,23 @@
 # STATUS — canonsim
 
-Iteration: 8b (`iter-8b-scene-ledger-hardening`) · Phase: 1 · Date:
-2026-08-28 · owner-requested dispute-resolution pass (the D-022
-exception) on an external LLM review of the D-048 scene ledger: every
-claim audited against the repo — 2 false alarms (the (log, ledger)
-purity flip was already recorded in BRIEF_SPEC §9 + D-048; "zero RNG"
-was never a log-determinism claim), 4 real gaps (scene undefined,
-pinning trigger, ledger/brief bound split, no contradicted-feedback
-channel) + 3 wording debts + 2 missed gaps (establishment-time canon
-check; the texture-OCC mirror) — KI#29, closed same iteration.
-Outcome: **D-049** — seven resolutions hardening blueprint §1 in
-place, zero new machinery families (determinism quarantine; scene =
-PC-location interval; structural pinning; grammar/vocabulary split;
-render-vs-epistemics; the ledger never evicts — bounds live in the
-brief; tombstones ride the brief). Docs-only again — the D-022 fresh
-owner request (no doc-loop alarm; iter-9 is the code iteration);
-329 tests green, ruff clean, fixture byte-identical. KI cleanup:
-KI#22–28 deleted (closed >2 iterations).
+Iteration: 8c (`iter-8c-audit`) · Phase: 1 · Date: 2026-08-28 ·
+owner-requested audit of iter-8a/8b (the D-022 exception; docs-only —
+iter-9 stays the code iteration): every claim reproduced (329 green,
+ruff clean, T1 byte-identical; the 8b "false alarm" verdicts verified
+against pre-8b git state — the purity flip WAS already in BRIEF_SPEC
+§9/D-048; atlas MIT re-verified via the GitHub API). Three drift
+families found + fixed: KI#30 (the `D-018c` letter-suffix citation
+never resolved — the KI#23/#28 false-citation family, propagated by
+8b; the lettering died at the iter-7 collapse and was wrong at birth:
+the structural boundary is D-018(b)) → plain `D-018`, 4 sites; KI#31
+(blueprint §1 wording debts: the stale 8a "pinned never auto-evicted"
+remnant vs D-049's ledger-never-evicts; lifecycle notation now allows
+{active, pinned} → terminal, matching the precedence/texture-OCC
+paragraphs); KI#32 (sync misses: the TASKS ref-N line lacked ref-16;
+BLUEPRINT BRIEF-1 lacked the atlas donor line per its own §0
+deep-dive protocol). The owner's rework question answered: NO rework
+of iter-1..8 — the 7th-block landing is additive (BRIEF_SPEC §9
+atomic flip set; zero new event types).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -39,12 +40,19 @@ KI#22–28 deleted (closed >2 iterations).
 
 ## Active KIs
 
-- KI#29 · external D-048 review: 2 false alarms (purity flip already
-  recorded in BRIEF_SPEC §9/D-048; zero-RNG ≠ log-determinism claim),
-  4 real gaps (scene, pinning trigger, ledger/brief bounds,
-  contradicted-feedback) + 3 wording debts — CLOSED iter-8b: D-049
-  hardens blueprint §1 in place (worklog iter-8b).
-- (KI#22–28 deleted at iter-8b — closed more than 2 iterations.)
+- KI#29 · external D-048 review: 2 false alarms, 4 real gaps + 3
+  wording debts + 2 missed gaps — CLOSED iter-8b (D-049, worklog iter-8b).
+- KI#30 · `D-018c` cited 4× but resolves nowhere (the KI#23/#28
+  family; the lettering died at the iter-7 collapse, and pre-collapse
+  it pointed at the wrong consequence) — CLOSED iter-8c: all sites →
+  plain D-018 (worklog iter-8c).
+- KI#31 · blueprint §1 wording debts: stale 8a "pinned never
+  auto-evicted" remnant vs D-049 resolution 6 + lifecycle notation
+  forbidding active→terminal — CLOSED iter-8c: fixed in place
+  ({active, pinned} → terminal states).
+- KI#32 · iter-8a sync misses: TASKS ref-N line and BLUEPRINT
+  BRIEF-1 donor line (the blueprint's own §0 protocol) — CLOSED
+  iter-8c: both added.
 
 ## FAQ / Pitfalls
 
@@ -175,7 +183,10 @@ KI#22–28 deleted (closed >2 iterations).
 
 ## Next step
 
-**Phase 1 continues** — the plan's single owner is `docs/TASKS.md`
+**Phase 1 continues** — iter-8c audit verdict: no rework of
+iter-1..8 required (the 7th-block landing is additive — assembler +
+pack + enum flip atomically per BRIEF_SPEC §9). The plan's single
+owner is `docs/TASKS.md`
 (Track A: iter-9+ = VALIDATION_SPEC + the validator's LLM-free half —
 fact transaction, ExpectedVersion OCC, ≤2 regens, INSUFFICIENT_DATA
 default, golden-set plumbing; then the scene-ledger LLM-free half —

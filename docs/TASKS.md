@@ -139,8 +139,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   closed set) when a precondition slot is next needed — most naturally
   iter-3+, once crime reactions make arson attempts meaningful facts.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
-  in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13 items
-  are done — status one-liners:
+  in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13
+  items are done — status one-liners below; ref-16 (agent-memory-atlas,
+  owner-supplied) was absorbed inside iter-8a, no solo iteration
+  (`docs/ref/agent_memory_atlas.md`):
   - ref-1 DF worldgen — done (iter-0i) → `docs/ref/df_worldgen.md`
   - ref-2 C:DDA data/json — done (iter-0j) → `docs/ref/cdda_data_json.md`
   - ref-3 Paradox scripting — done (iter-0l) → `docs/ref/paradox_scripting.md`
@@ -163,6 +165,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b: every
+  claim reproduced (329 green, ruff clean, T1 byte-identical; the 8b
+  false-alarm verdicts verified against pre-8b git state; atlas MIT
+  re-verified). 3 KIs fixed: KI#30 `D-018c` false citation (never
+  resolved — the KI#23/#28 family) → D-018 ×4 sites; KI#31 blueprint
+  §1 wording debts (stale 8a pinned-eviction remnant vs
+  ledger-never-evicts; lifecycle transitions {active, pinned} →
+  terminal); KI#32 sync misses (TASKS ref-N + ref-16; BLUEPRINT
+  BRIEF-1 atlas donor line). Verdict: no rework of iter-1..8 — the
+  7th block lands additively. Docs-only (D-022 exception); 329 green,
+  ruff clean, fixture byte-identical.
 - iter-8a · 2026-08-28 · scene-ledger design pass (owner-requested
   continuity question: long scenes lose narrator-invented texture —
   the brief is a pure function of the log and free texture had no
