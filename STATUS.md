@@ -1,21 +1,22 @@
 # STATUS — canonsim
 
-Iteration: 8a (`iter-8a-scene-ledger-design`) · Phase: 1 · Date:
-2026-08-28 · owner-requested design pass (the D-022 exception) on the
-session-continuity question: a long scene loses narrator-invented
-texture because the brief is a pure function of the log and "free
-texture at low importance" (`VISION.md` §5) had no storage. Outcome:
-D-048 — the **scene ledger** (mechanism owner `docs/blueprint/phases.md`
-§1): a session-scoped, append-only, mediator-owned second stream;
-discrete lifecycle states; canon always outranks texture; promotion
-only through the intent door; laundering refusal; no TTL; dies with
-the session. Pattern source absorbed as ref-16
-(`docs/ref/agent_memory_atlas.md` — the owner-supplied 151-system
-memory survey, MIT verified via GitHub API). Spec triggers synced
-(SPECS_BACKLOG VALIDATION_SPEC row + BRIEF_SPEC §9 deferral);
-sequencing added to TASKS. Docs-only iteration — no doc-loop alarm
-(iter-8 was code-heavy); 329 tests green, ruff clean, fixture
-byte-identical.
+Iteration: 8b (`iter-8b-scene-ledger-hardening`) · Phase: 1 · Date:
+2026-08-28 · owner-requested dispute-resolution pass (the D-022
+exception) on an external LLM review of the D-048 scene ledger: every
+claim audited against the repo — 2 false alarms (the (log, ledger)
+purity flip was already recorded in BRIEF_SPEC §9 + D-048; "zero RNG"
+was never a log-determinism claim), 4 real gaps (scene undefined,
+pinning trigger, ledger/brief bound split, no contradicted-feedback
+channel) + 3 wording debts + 2 missed gaps (establishment-time canon
+check; the texture-OCC mirror) — KI#29, closed same iteration.
+Outcome: **D-049** — seven resolutions hardening blueprint §1 in
+place, zero new machinery families (determinism quarantine; scene =
+PC-location interval; structural pinning; grammar/vocabulary split;
+render-vs-epistemics; the ledger never evicts — bounds live in the
+brief; tombstones ride the brief). Docs-only again — the D-022 fresh
+owner request (no doc-loop alarm; iter-9 is the code iteration);
+329 tests green, ruff clean, fixture byte-identical. KI cleanup:
+KI#22–28 deleted (closed >2 iterations).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -38,32 +39,12 @@ byte-identical.
 
 ## Active KIs
 
-- KI#25 · stale `_enqueue_autonomous` docstring — "fires at the beat
-  tick itself" contradicted the entry-tick law (D-039, the `_run_beat`
-  docstring, the FAQ) — CLOSED iter-7: rewritten in place.
-- KI#26 · dead-parameter family (L14, the KI#24 precedent):
-  `Director.releases(knowledge)` — the signature falsely implied the
-  director reads knowledge records (L6 forbids it); `briefing_draft(projection)`;
-  `urgency_intents(beat_tick)`; `_axis_deltas(pack)` — CLOSED iter-7:
-  params removed, call sites + tests updated; fixture byte-identical.
-- KI#27 · README drift: "298 tests" (iter-6a made 299) + "systems land
-  iter-2" (the systems live in `core/` per D-037; `sim/systems/` stays
-  reserved) — CLOSED iter-7.
-- KI#28 · residual instance of the KI#23 false citation: AGENT_NAVIGATION
-  §1 `scripts/` row still cited "AGENTS.md §9 — Script Persistence Rule"
-  (superseded by D-046; iter-6a fixed README/TEST_PLAN/D-044 but missed
-  this one) — CLOSED iter-7: row rewritten to the true owner (TEST_PLAN §6).
-- KI#22 · TEST_PLAN + test_t8_ab docstrings drifted from the shipped gate
-  facts (seed "32"→125 ×4; chains "24"→26 ×2; the M2 formula contradicted
-  MVP_SCOPE §15 + the impl; §6 filename) — CLOSED iter-6a (worklog; §1.2
-  gained the per-endpoint counting note).
-- KI#23 · `scripts/` outside the executable invariants + the false
-  "AGENTS §9" citation (README/TEST_PLAN/D-044) + the 5–15%/73–83%
-  qualifier loss — CLOSED iter-6a: D-046; PACKAGE_DIRS += scripts; the
-  closure test; the CLI-class print exemption (MVP_SCOPE §18).
-- KI#24 · dead `fold_events` export with a false docstring in
-  `core/metrics.py` — CLOSED iter-6a: removed (L13/L14).
-- KI#4 deleted at iter-8 (closed iter-6 — more than 2 iterations).
+- KI#29 · external D-048 review: 2 false alarms (purity flip already
+  recorded in BRIEF_SPEC §9/D-048; zero-RNG ≠ log-determinism claim),
+  4 real gaps (scene, pinning trigger, ledger/brief bounds,
+  contradicted-feedback) + 3 wording debts — CLOSED iter-8b: D-049
+  hardens blueprint §1 in place (worklog iter-8b).
+- (KI#22–28 deleted at iter-8b — closed more than 2 iterations.)
 
 ## FAQ / Pitfalls
 
@@ -170,7 +151,12 @@ byte-identical.
   assembler goes further: **zero RNG at all** (dry structured tokens,
   L2 — `brief/assembler.py`, BRIEF_SPEC §2); its recall `max_items` is
   a ranking cap (the O(relevance) top-k), NOT a budget drop — the
-  `[truncated:N]` marker counts budget drops only.
+  `[truncated:N]` marker counts budget drops only. **When the 7th block
+  lands the purity pair becomes (log, ledger) — the D-049 determinism
+  quarantine:** the ledger is session render state (auditable via
+  surface/source/cause, never replayable); T1/T2 canon tests never
+  touch it; "zero RNG" stays a claim about assembler internals, never
+  about log-relative determinism of the ledger-fed brief.
 - **Gate mechanics: the T8 single-factor A/B + the balance harness
   (iter-6 laws).** Same playscript/seed (125), only the director flag
   changes: ON fires `director_0000`; OFF keeps seeding (D-005) and
@@ -194,12 +180,14 @@ byte-identical.
 fact transaction, ExpectedVersion OCC, ≤2 regens, INSUFFICIENT_DATA
 default, golden-set plumbing; then the scene-ledger LLM-free half —
 `brief/ledger.py` + the `scene_texture` 7th block + fixture-shaped
-deltas, per D-048/blueprint §1 — the narrator LLM boundary itself
-remains an AGENTS §8 owner checkpoint, INV-4 holds until then, and it
-carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
+deltas, per D-048/D-049/blueprint §1 — the hardening gave it complete
+inputs (scene definition, structural pinning, the gateway checks, the
+tombstone window, the texture-OCC mirror); the narrator LLM boundary
+itself remains an AGENTS §8 owner checkpoint, INV-4 holds until then,
+and it carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
 unblocked in parallel — note bg-1 needs the owner's local DF Classic
 + DFHack setup (world export cannot run in this sandbox). Backlog
-that did NOT land in iter-8a (each stays in its TASKS home, none
+that did NOT land in iter-8b (each stays in its TASKS home, none
 blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
 GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;
 `tune-1` rest action + the D-045(b) importance-rule knob; the

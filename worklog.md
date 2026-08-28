@@ -6,6 +6,27 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
+iter-8b · 2026-08-28 · scene-ledger hardening (iter-8b-scene-ledger-hardening)
+- Owner-requested dispute-resolution pass on an external LLM review of
+  D-048: claims audited against the repo (2 false alarms — the purity
+  flip was already in BRIEF_SPEC §9/D-048; "zero RNG" was never a
+  log-determinism claim), 4 real gaps + 3 wording debts + 2 missed
+  gaps (establishment-time canon check; texture-OCC mirror) → KI#29,
+  closed same iteration. D-049: seven resolutions hardening the
+  scene ledger in place — determinism quarantine, scene =
+  PC-location interval, structural pinning, grammar/vocabulary split
+  (core stays ledger-blind), render-vs-epistemics,
+  ledger-never-evicts (bounds live in the brief),
+  tombstones-in-brief; every resolution reuses existing law
+  (D-018c/D-035/D-037/D-047/L12/atlas).
+- 7 files — the mechanism owner (blueprint/phases.md §1) + the
+  mandated sync set (DECISIONS D-049, BRIEF_SPEC §9 atomic flip set,
+  SPECS_BACKLOG VALIDATION_SPEC sketch, TASKS iter-9+, STATUS incl.
+  KI#22–28 deletion, this worklog). Docs-only — the D-022 fresh
+  owner request (no doc-loop alarm; iter-9 is code).
+- 329 tests green, ruff clean, golden fixture byte-identical.
+  DECISIONS transiently 33/30 (collapse at the phase-1→2 gate, D-034).
+---
 iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
 - Owner-requested continuity question (long scenes lose narrator texture;
   the brief is log-pure): absorbed the owner-supplied memory atlas as
@@ -67,23 +88,7 @@ iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2 (iter-2a-code-au
   Observations parked: arrest-75 duplicated in rules.json (iter-3 picks
   the owner), arson-on-ashes = backlog pack-2, statuses clamp by the
   relations scale (documented INTENT_SCHEMA §6 — owner may veto).
----
-iter-2 · 2026-08-28 · actions — the 12, checks, price (iter-2-actions)
-- core/{intent,resolvers,transitions,scheduler}.py + loop rewire: front
-  door (shape loud / preconditions soft → `intent_rejected` no-ops with
-  cause chains), OCC `based_on_event_seq` with breaking-event attribution,
-  opposed checks + knowledge templates + preconditions all pack-driven;
-  fire = a pack-declared transition layer (generic engine, no layer names
-  in code); system-pass DAG with build-time ambiguity check. INTENT_SCHEMA
-  written (trigger fired). INV-3 stoplist test (segment matching, pack
-  self-check). 20 files — over the 3–5 soft limit (task-mandated module
-  set + sync set, same pattern as iter-1).
-- Tests 77→148 green, ruff clean; golden fixture survived byte-identical.
-  KI#12 opened (OCC lacks a natural e2e trigger until NPC reactions).
-  KI#4 gains the first balance observation (low-difficulty environment
-  checks auto-succeed at v0.1 numbers). Fix during work: spread-pass spot
-  prefix mismatch (prop keys vs spot names) caught by the day1 probe.
----
+(iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)
 (iter-4a deleted at iter-8a per the one-in/one-out cap; history in git.)
 (iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
 (iter-1 deleted at iter-8 per the one-in/one-out cap; history in git.)
@@ -108,7 +113,6 @@ iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
   Balance observation for KI#4/balance-1: player fatigue is monotonic
   over long waits (no rest action in v0.1) — visible through the
   readable chronicle.
-
 ---
 iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
 - TEST_PLAN.md (trigger-fired spec: T0-T8 + M1-M5 + gate protocol + UAP
@@ -140,7 +144,6 @@ iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-au
 - Tests 298→299 green (+1 closure test); ruff clean; golden fixture
   byte-identical. No canon-path change: the drift was in citing
   documents, not in the numbers.
-
 ---
 iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
 - Owner-requested retrospective at the phase boundary: baseline
@@ -162,7 +165,6 @@ iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
 - 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
   299 tests green, ruff clean, golden fixture byte-identical (dead
   params — no canon-path change).
-
 ---
 iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assembler)
 - docs/BRIEF_SPEC.md (trigger fired at phase-1 start: six-block pipeline,

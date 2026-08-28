@@ -57,72 +57,178 @@ structural — mode-A prose is never a fact proposal, the C-parser emits
 grammar-constrained Intent JSON, no post-hoc text sanitization (D-018c).
 Honest verdicts default to INSUFFICIENT_DATA, never fabricated (UAP).
 
-**The scene ledger (canon vs texture — D-048).** The brief is a pure
-function of the log, and the narrator (any model, any temperature)
-inevitably invents *texture* — candles, a cloak on a chair, an ajar
-window — the "free texture at low importance" `VISION.md` §5 licenses.
-Unstored, that texture dies at beat end: the next call re-receives the
-same canonical brief and the scene drifts (the player says "blow out
-the candles" about candles canon never knew). The fix is a **second
-stream**: the ledger is a session-scoped, append-only, mediator-owned
-record of established texture — never folded into state, never
-committed, never replayed (the cosmetic-stream doctrine, D-028: a
-side-channel that cannot desync canon replay).
+**The scene ledger (canon vs texture — D-048; hardened D-049 after an
+external design review).** The brief is a pure function of the log, and
+the narrator (any model, any temperature) inevitably invents *texture*
+— candles, a cloak on a chair, an ajar window — the "free texture at
+low importance" `VISION.md` §5 licenses. Unstored, that texture dies at
+beat end: the next call re-receives the same canonical brief and the
+scene drifts (the player says "blow out the candles" about candles
+canon never knew). The fix is a **second stream**: the ledger is a
+session-scoped, append-only, mediator-owned record of established
+texture — never folded into **canonical** state (it *is* session
+render state, named and lifecycle-governed — the atlas admission test:
+identity + corrigibility, not sophistication), never committed, never
+replayed (the cosmetic-stream doctrine, D-028: a side-channel that
+cannot desync canon replay).
 
+- **Determinism quarantine (D-049).** The session runs three named
+  streams: (1) the canon log — deterministic, byte-identical replay
+  (INV-2); (2) the ledger — append-only session state, deterministic
+  **given its inputs** (same (log, ledger, pack) → same brief bytes)
+  but auditable, never replayable: its inputs include the narrator, so
+  every entry carries `surface` + `source` + `cause`; (3) the
+  transcript tail — capped, ephemeral, never a ledger source except
+  via the extraction pass. Nondeterminism enters ONLY at the narrator
+  call and is captured structurally once, then frozen. "Zero RNG" is a
+  claim about function internals (the assembler draws no randomness),
+  never about log-relative determinism of the ledger-fed brief. Canon
+  replay (T1/T2) never touches the ledger; the ledger's only write
+  path into the log is the intent door (player-driven).
+- **Scene = PC-location interval (D-049).** A scene is the maximal
+  session interval over which the PC's location is constant: opens at
+  session start or PC arrival, closes when the canon moves the PC (any
+  committed event that changes the PC's location) or the session
+  closes. Identity `(location_id, ordinal)` — a revisit is a NEW
+  scene (scene-scoped texture starts empty; entity-scoped texture
+  survives). Derived by folding the log; zero new event types — scene
+  markers are read-side view state, never logged (the log stays free
+  of mediator concerns). Scene close retires scene-scoped entries in
+  bulk (cause: `scene_close`) — an event-caused recorded decision, not
+  a TTL timer (the MTTH lesson holds).
 - **Entry shape:** `{id: tex_NNNN, t, scope, slot, value, surface,
-  status, cause, source}` — `scope` is `scene:<location>` or
-  `entity:<id>` (scope-as-key, atlas); `slot`+`value` are normalized
-  (the fact), `surface` is the verbatim prose that introduced it
-  (evidence-before-belief, atlas); `source` cites the narration turn.
+  status, cause, source}` — ids allocate in append order (a counter,
+  never a hash, INV-2); `scope` is `scene:<location>` or `entity:<id>`,
+  FIXED at establishment (scope-as-key, atlas); `slot`+`value` are
+  normalized (the fact), `surface` is the verbatim prose that
+  introduced it (evidence-before-belief, atlas); `source` cites the
+  narration turn. In-scene updates are `retire + establish` pairs in
+  one delta — entries are never edited in place (append-only
+  discipline).
 - **Lifecycle — discrete states, no floats** (trust-state machine,
-  atlas): `active` → `pinned` (referenced by an intent) → `retired`
-  (narrator-declared, scene close) | `contradicted` (canon overrode;
-  cause-linked to the event) | `promoted` (became canon; cause-linked).
-  One-way arrows only; retirement is always an explicit recorded
-  decision — no TTL, no turn counters, no decay timers (MTTH lesson).
-- **Write path — one call, two jobs:** the narrator emits prose + a
-  structural texture delta (established/retired) in the SAME call;
-  the mediator parses the delta deterministically (zero-LLM capture).
-  The prose→ledger boundary is structural, the same law as the
-  prose→proposal boundary (D-018c). Degradation ladder: structural
-  delta → post-hoc extraction pass (eats the 2nd call) → dry mode
-  (no ledger; prose must not lean on texture).
+  atlas): `active` → `pinned` → `retired` (narrator-declared, scene
+  close) | `contradicted` (canon overrode; cause-linked to the event)
+  | `promoted` (became canon; cause-linked). One-way arrows only;
+  retirement is always an explicit recorded decision — no TTL, no turn
+  counters, no decay timers (MTTH lesson).
+- **Pinning is structural (D-049).** An entry pins when its id or
+  slot/noun is referenced by (a) an Intent through the door (the
+  texture noun resolution) or (b) the narrator's own structural delta
+  (a `refs` list). Free-text player mentions NEVER pin at the mediator
+  — zero-LLM capture; at phase 2 the parser turns mentions into
+  Intents, which then pin. Un-pinning does not exist: pin holds to a
+  terminal state or scene close. The atlas's four hysteresis knobs
+  collapse to one.
+- **Write path — one call, two jobs, ONE gateway (D-049).** The
+  narrator emits prose + a structural texture delta
+  (established/retired/refs) in the SAME call; the mediator parses the
+  delta deterministically (zero-LLM capture). The prose→ledger
+  boundary is structural, the same law as the prose→proposal boundary
+  (D-018c). Both delta sources — the narrator's inline delta and the
+  extraction pass's grammar-constrained output — pass the SAME
+  validation gateway (scope check, establishment-time canon check,
+  tombstone/laundering check, unique-slot check, duplicate rule): the
+  governed write gateway pattern (atlas "already ours"). The duplicate
+  rule is idempotent: same (slot, value) in scope = a no-op; same slot
+  + different value while active = refused unless the delta retires
+  the old entry first. Degradation ladder: structural delta →
+  post-hoc extraction pass (LLM-based, best-effort, eats the 2nd call;
+  used only when the inline delta is absent or malformed) → dry mode
+  (no ledger this beat; prose must not lean on texture — a legal
+  steady state, never a failure, L12). Extraction failure is
+  continuity loss for a detail, never corruption: the worst case is
+  the status quo ante.
 - **Read path:** a 7th brief block `scene_texture` (position 3, after
   scene_delta; eviction order between scene_delta and voice_exemplars
   — current-scene continuity outranks lore, below voice/options).
-  Bounded: active entries for the current scene + present entities;
-  over-cap evicts oldest-unpinned-first with `[truncated:N]`; zero
-  RNG, construction-order iteration; budgets are pack data
-  (`BRIEF_SPEC.md` §9 deferral). The mediator's context = invariant
-  head + brief blocks + current-beat transcript tail (capped,
-  ephemeral) — the ledger is what survives transcript eviction
-  (letta's fifo adapted; the frontend never owns a window, VISION §10).
-- **Precedence — canon always outranks texture:** on every beat the
-  mediator cross-checks active entries against the new canon delta;
-  prop/slot overlap retires the entry as `contradicted` with a
-  cause link. **Laundering refusal** (rejected-value tombstone,
-  atlas): a narrator delta re-asserting a contradicted or promoted-
-  away value is dropped by the mediator and flagged — the ≤2-regens
-  protocol applies. Texture never carries mechanical load (no
-  relations, no suspicion, no resources); prose that implies state
-  changes is a validator catch, not a ledger job.
-- **Promotion — only through the intent door** (D-037): the player
-  references texture → mode C emits an Intent whose target is a slot
-  (pack action with a texture noun-test in the closed `requires` set;
-  `use`-class vocabulary, pack data, INV-3-clean) → the simulator
-  decides (rolls, preconditions) → the committed event IS the
-  promotion: it carries state_changes + knowledge records (the guard
-  saw the room go dark), feeds the normal brief blocks thereafter,
-  and the entry flips to `promoted` (cause: ev). One-way; composes
-  with existing mechanics (a knocked-over candle near an oil spot
-  seeds the fire chain through the same hooks as drop_break).
-  `pinned` entries are never auto-evicted while the scene lasts.
+  **The ledger never evicts (D-049):** it only transitions entries;
+  ALL boundedness lives in the brief, a windowed view — active+pinned
+  entries whose scope matches the current scene or a present entity,
+  ranked pinned-first then newest-first, construction-order tie-break,
+  capped by block budgets + a max_items ranking cap (D-047 law:
+  ranking cap ≠ budget drop; drops render `[truncated:N]`). Budgets
+  and caps are pack data (`BRIEF_SPEC.md` §9 deferral). Size
+  guarantee: the block is O(current scene), never O(session history).
+  The mediator's context = invariant head + brief blocks +
+  current-beat transcript tail (capped, ephemeral) — the ledger is
+  what survives transcript eviction (letta's fifo adapted; the
+  frontend never owns a window, VISION §10).
+- **Tombstones ride the brief (D-049).** The block carries contradicted
+  entries as short tombstone lines (slot + refuted + cause), scoped to
+  the current scene, newest-first, capped (pack data). Prevention (the
+  narrator sees what was refuted) + enforcement (the laundering
+  refusal) — both exist; prevention is cheap, enforcement is bounded.
+  This is the atlas rejected-value tombstone made feed-forward, and
+  the negative-evidence discipline for the phase-1 regression set
+  (forbidden-assertion cases).
+- **Precedence — canon always outranks texture.** Texture occupies
+  only slots canon does not model: the gateway checks each
+  establishment against current canon state for the scope (slot/prop
+  overlap → dropped + flagged, the same refusal shape); on every beat
+  the mediator cross-checks active entries against the new canon delta
+  and retires overlaps as `contradicted` with a cause link. Both
+  checks are STRUCTURAL (slot/prop overlap only) — semantic
+  invalidation (a spreading fire killing the candlelight texture) is
+  narrator-retirement territory (its own delta) or a validator catch,
+  never mediator guessing (semantics in the mediator is the
+  INV-4-adjacent hazard). **Laundering refusal** (rejected-value
+  tombstone, atlas): a delta re-asserting a contradicted or
+  promoted-away value is dropped and flagged; the flag rides the next
+  call's directives; the ≤2-regens protocol (regen = one narrator
+  re-invocation with the refusal note; exhaustion → dry mode for the
+  beat — never a silent drop, never a blocked beat) is owned by
+  VALIDATION_SPEC. **Render vs epistemics (D-049):** the narrator may
+  render NPCs perceiving shared scene texture (it is the same scene it
+  renders for the player) — this creates NO knowledge records;
+  mechanical load (relations, suspicion, resources) flows only through
+  committed events, and prose implying a state change is a validator
+  catch, not a ledger job. When the noticing must matter, the path is
+  promotion ("the guard saw the room go dark" is the promoted-event
+  shape).
+- **Promotion — only through the intent door; grammar/vocabulary split
+  (D-037, D-049).** The PACK owns the grammar — which action slots are
+  texture-capable (`requires`-level declarations, additive test kinds
+  per INTENT_SCHEMA §10); the LEDGER owns the vocabulary — which
+  texture nouns are addressable (active entries for the current
+  scope). The phase-2 parser's target grammar = pack verbs ∪ active
+  texture nouns, so **ghost interactivity is structurally impossible**
+  — any noun the narrator established is parseable by construction; a
+  noun that is neither canon nor texture gets the disambiguation path
+  (uncertainty surfaced, never guessed) or, well-formed but
+  world-impossible, an `intent_rejected` no-op (attempts are facts).
+  The mediator resolves noun → active entry BEFORE the door (an
+  unresolvable noun never becomes an Intent); core stays ledger-blind
+  — the Intent carries the resolved slot as data, the simulator
+  decides (rolls, preconditions over pack + projection), and the
+  committed event IS the promotion: it carries state_changes +
+  knowledge records (the object's canon birth), feeds the normal brief
+  blocks thereafter, and the entry flips to `promoted` (cause: ev).
+  One-way; composes with existing mechanics (a knocked-over candle
+  near an oil spot seeds the fire chain through the same hooks as
+  drop_break). A failed attempt does NOT kill the texture (the entry
+  stays active+pinned). A pending texture Intent whose entry retires
+  before completion (contradiction, scene close) is withdrawn by the
+  mediator — the ledger-side mirror of intent OCC; protocol clauses
+  are VALIDATION_SPEC's. Inter-scope movement of a texture object is
+  impossible without promotion (take = Intent = committed event = the
+  object becomes canon) — zombie texture cannot arise through legal
+  paths; a pack `unique` slot flag makes cross-scope
+  re-establishment of the same slot a laundering refusal (pack data,
+  INV-3-clean). `pinned` entries are never auto-evicted while the
+  scene lasts.
 - **Death:** session close discards the ledger. Cross-session
   continuity is canon + phase-4 reflection/legends, never the ledger
   — texture is never summarized, never consolidated (chained-lossy
   antipattern, atlas; blueprint §4 originals-never-dropped law).
+  Conscious trade-off (D-049): persisting unpromoted texture grows
+  unbounded uncommitted state toward a second canon — the disease the
+  architecture exists to cure; the escape hatch is promotion (texture
+  that must survive goes through the door and is canon thereafter;
+  phase-4 reflection distills promoted texture — it IS canon — never
+  raw texture).
 - Mode B (phase 4): the scene manager shares one ledger per scene —
-  the chorus reads the same texture block and stays consistent.
+  the chorus reads the same texture block and stays consistent (the
+  scenes are the same PC-anchored intervals).
 
 **The harness** (bg-3): prompt shapes from UAP — role persona in the
 system prompt, full criteria + thresholds + worked examples embedded,

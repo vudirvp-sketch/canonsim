@@ -35,13 +35,18 @@ log; `rules.json::brief` pack contract + `core/pack.py` lint. Detail:
 - `VALIDATION_SPEC.md` trigger fires (fact transaction, ExpectedVersion
   OCC, ≤2 regens, INSUFFICIENT_DATA default) + the validator's LLM-free
   half (proposal shaping, stale-version rejection, golden-set plumbing).
-- The scene-ledger LLM-free half (D-048, mechanism
-  `docs/blueprint/phases.md` §1): `brief/ledger.py` (entry shape,
-  discrete lifecycle, laundering refusal, contradiction retirement) +
-  the `scene_texture` 7th brief block reading it + fixture-shaped
-  narrator deltas under `tests/fixtures/` + pack lint (block budget).
-  Sequenced after VALIDATION_SPEC's LLM-free half — the delta grammar
-  informs the fixture shapes. BRIEF_SPEC §9 deferral flips to written.
+- The scene-ledger LLM-free half (D-048 + the D-049 hardening,
+  mechanism `docs/blueprint/phases.md` §1): `brief/ledger.py` (entry
+  shape, scene = PC-location interval, discrete lifecycle, structural
+  pinning, the validation gateway — scope/establishment-canon/
+  laundering/unique-slot checks + the idempotent duplicate rule,
+  contradiction retirement, the texture-OCC mirror) + the
+  `scene_texture` 7th brief block reading it (pinned-first window +
+  tombstone lines) + fixture-shaped narrator deltas under
+  `tests/fixtures/` + pack lint (block budget + caps). Sequenced after
+  VALIDATION_SPEC's LLM-free half — the delta grammar informs the
+  fixture shapes. BRIEF_SPEC §9 deferral flips to written (the atomic
+  flip set is enumerated there).
 - The narrator LLM boundary itself is a separate owner-gated iteration
   (AGENTS §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
   ladder L12 from day one); it now also carries the scene-ledger live
