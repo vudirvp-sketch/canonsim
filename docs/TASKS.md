@@ -74,6 +74,8 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 - DF Classic (free) + DFHack `exportlegends info` → 2–3 worlds → XML → SQLite
   parser. Watch for: HEX errors after fortress play (export from clean legends
   mode), hundreds of MB per large world, translated-name layers.
+  Pipeline design guidance: `docs/ref/df_design.md` ("What we adapt" —
+  streaming/selective import, name normalization, determinism quarantine).
 - AC: parser loads a world into SQLite; pitfalls recorded in
   `docs/TECH_NOTES.md` §3.
 
@@ -156,6 +158,9 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - ref-11 SQLite FTS5 + DuckDB + sqlite-vec — done (iter-0r) → `docs/ref/{sqlite_fts5,duckdb,sqlite_vec}.md`
   - ref-12 Universe Audit Protocol — done (iter-0s) → `docs/ref/uap_audit.md`
   - ref-13 Live Character Guide — done (iter-0t) → `docs/ref/live_char_guide.md`
+  - ref-17 DF designed experience (the player-facing half; owner-requested
+    research pass, D-022 exception) — done (iter-8d) →
+    `docs/ref/df_design.md`
 - Candidates (owner-request only — D-022 law: no doc pass without a fresh
   owner request; both are synthesis-only today, cited via
   `CORE_DESIGN_RESEARCH.md` §2 and marked as such in the blueprint donor
@@ -165,6 +170,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8d · 2026-08-28 · DF designed-experience deep dive (owner-requested
+  research pass, the D-022 exception; docs-only — iter-9 stays the code
+  iteration; ref-17): `docs/ref/df_design.md` — six enchantment pillars
+  (P1–P6), flaw taxonomy F1–F10 with root causes (every flaw is a missing
+  layer — salience/pacing/audience-epistemology/LOD/continuity — not wrong
+  simulation), successor trade-off matrix (RimWorld/KoDP/SoS/Versu/Rain
+  World/SS13/…: each "fix" amputates a pillar), the structural read
+  (layer-adding is the canonsim thesis), reader-as-knower symmetry, bg-1
+  hardening + bg-2 ambiguity-as-data + bg-3 corpus-division guidance; every
+  flaw mapped to an existing mechanism or recorded phase. No new KIs (all
+  cross-claims verified against the repo); 329 green, ruff clean.
 - iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b: every
   claim reproduced (329 green, ruff clean, T1 byte-identical; the 8b
   false-alarm verdicts verified against pre-8b git state; atlas MIT

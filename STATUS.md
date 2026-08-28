@@ -1,23 +1,23 @@
 # STATUS — canonsim
 
-Iteration: 8c (`iter-8c-audit`) · Phase: 1 · Date: 2026-08-28 ·
-owner-requested audit of iter-8a/8b (the D-022 exception; docs-only —
-iter-9 stays the code iteration): every claim reproduced (329 green,
-ruff clean, T1 byte-identical; the 8b "false alarm" verdicts verified
-against pre-8b git state — the purity flip WAS already in BRIEF_SPEC
-§9/D-048; atlas MIT re-verified via the GitHub API). Three drift
-families found + fixed: KI#30 (the `D-018c` letter-suffix citation
-never resolved — the KI#23/#28 false-citation family, propagated by
-8b; the lettering died at the iter-7 collapse and was wrong at birth:
-the structural boundary is D-018(b)) → plain `D-018`, 4 sites; KI#31
-(blueprint §1 wording debts: the stale 8a "pinned never auto-evicted"
-remnant vs D-049's ledger-never-evicts; lifecycle notation now allows
-{active, pinned} → terminal, matching the precedence/texture-OCC
-paragraphs); KI#32 (sync misses: the TASKS ref-N line lacked ref-16;
-BLUEPRINT BRIEF-1 lacked the atlas donor line per its own §0
-deep-dive protocol). The owner's rework question answered: NO rework
-of iter-1..8 — the 7th-block landing is additive (BRIEF_SPEC §9
-atomic flip set; zero new event types).
+Iteration: 8d (`iter-8d-df-design-lessons`) · Phase: 1 · Date: 2026-08-28 ·
+owner-requested research pass (the D-022 exception; docs-only — iter-9
+stays the code iteration): ref-17 — the DF designed-experience deep
+dive (`docs/ref/df_design.md`), answering the owner's question
+"survey DF's internal flaws (narrative/depth/coherence, not UI) and
+design better instead of copying blindly". Deliverables: six
+enchantment pillars (P1–P6) — what to multiply; flaw taxonomy F1–F10
+with root causes — every flaw is a MISSING LAYER (salience, pacing,
+audience epistemology, LOD, continuity), not wrong simulation; the
+successor trade-off matrix (RimWorld, KoDP, Songs of Syx, Versu, Rain
+World, SS13, … — each "fix" amputated a pillar); the structural read
+(layer-adding over an honest sim IS the canonsim thesis — the
+composition is the novelty); reader-as-knower symmetry; bg-1 pipeline
+hardening + bg-2 ambiguity-as-data + bg-3 corpus-division guidance;
+a verdict table mapping every flaw to an existing mechanism or
+recorded phase. Baseline re-verified before the pass (329 green, ruff
+clean); no new KIs (all cross-claims verified against the repo); KI#29
+deleted (closed >2 iterations — §5 mandatory cleanup).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -40,8 +40,6 @@ atomic flip set; zero new event types).
 
 ## Active KIs
 
-- KI#29 · external D-048 review: 2 false alarms, 4 real gaps + 3
-  wording debts + 2 missed gaps — CLOSED iter-8b (D-049, worklog iter-8b).
 - KI#30 · `D-018c` cited 4× but resolves nowhere (the KI#23/#28
   family; the lettering died at the iter-7 collapse, and pre-collapse
   it pointed at the wrong consequence) — CLOSED iter-8c: all sites →
@@ -197,7 +195,8 @@ tombstone window, the texture-OCC mirror); the narrator LLM boundary
 itself remains an AGENTS §8 owner checkpoint, INV-4 holds until then,
 and it carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
 unblocked in parallel — note bg-1 needs the owner's local DF Classic
-+ DFHack setup (world export cannot run in this sandbox). Backlog
++ DFHack setup (world export cannot run in this sandbox); pipeline
+design guidance for bg-1 now lives in `docs/ref/df_design.md`. Backlog
 that did NOT land in iter-8b (each stays in its TASKS home, none
 blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
 GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;

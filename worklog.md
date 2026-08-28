@@ -8,6 +8,29 @@
 > since iter-5).
 
 ---
+iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-lessons)
+- ref-17 (owner-requested research pass, the D-022 exception):
+  `docs/ref/df_design.md` — the third DF entry (the player-facing
+  half not owned by df_legends_xml.md / df_worldgen.md): six
+  enchantment pillars P1–P6; flaw taxonomy F1–F10 by root cause —
+  every flaw is a MISSING layer (salience/pacing/audience-
+  epistemology/LOD/continuity), not wrong simulation; the successor
+  trade-off matrix (each "fix" amputates a pillar — RimWorld/KoDP/
+  Songs of Syx/Versu/Rain World/SS13/…); the structural read
+  (layer-adding over an honest sim IS the canonsim thesis);
+  reader-as-knower symmetry; bg-1 hardening (streaming/selective/
+  name-normalization/determinism quarantine) + bg-2 ambiguity-as-
+  data + bg-3 corpus-division guidance; a verdict table mapping every
+  flaw to an existing mechanism or recorded phase.
+- 5 files — the ref file + the D-026 mandated index flip
+  (REFERENCES_DEEP §1+§2) + the AGENTS §6 sync set (TASKS incl. the
+  bg-1 guidance link, STATUS incl. the KI#29 >2-iteration deletion,
+  this worklog; iter-3 out per the one-in/one-out cap). Docs-only
+  (fresh owner request; iter-9 stays the code iteration).
+- 329 tests green, ruff clean (baseline re-verified before the
+  pass). No new DECISIONS entries — research verdicts, not stable
+  decisions; recommendations reach their owning docs by link only.
+---
 iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b (iter-8c-audit)
 - All claims reproduced: 329 green, ruff clean, T1 byte-identical; the
   8b "2 false alarms" verdict verified against pre-8b git state (the
@@ -179,17 +202,7 @@ iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
   release). D-038/D-039/D-040 recorded; STATUS FAQ gains the tick-order
   + entry.tick-enqueue laws.
 ---
-iter-3 · 2026-08-28 · knowledge, relations, expectations (iter-3-knowledge-relations)
-- core/knowledge.py + core/crime.py (D-037: kernel mechanics — the
-  import-boundary law beats the old sim/systems plan note) + loop rewire:
-  reaction cascade in the commit door (crime → telling), clock-crossing
-  watch rotations (swap + expectations + briefing with one-step decay).
-  Pack: expectations/telling/suspicion mapping/rotation/pair seeds/
-  movement sighting templates; arrest threshold single owner. Fold: pair
-  + crime_status seeding. 16 files — task-mandated module set + sync set.
-- Tests 155→187 green (+32: T3, transfers, expectations, OCC e2e, lint);
-  fixture regenerated (move records — deliberate); KI#3 + KI#12 closed;
-  states decay deferred to iter-4; arrest resolution parked (TASKS).
+(iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)
 (iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)
 (iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)
 (iter-4a deleted at iter-8a per the one-in/one-out cap; history in git.)
