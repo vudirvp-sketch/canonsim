@@ -2,6 +2,10 @@
 logs/
 output/
 
+# DF Legends XML exports — runtime data for track B, never committed
+# (df_design.md determinism quarantine: no golden DF fixtures; iter-8e)
+dfworlds/
+
 # JSONL outside tests/fixtures/ is runtime log data (INV-5)
 *.jsonl
 !tests/fixtures/*.jsonl

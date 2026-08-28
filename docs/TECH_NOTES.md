@@ -41,8 +41,8 @@ gated by `perf-1` data).
 ## 3. DF spike practical notes
 
 - Export: DF Classic (free) + DFHack `exportlegends info`. HEX errors after
-  playing a fortress — export from a clean legends-mode save. Hundreds of MB
-  for large worlds; translated-name layers to strip.
+  playing a fortress — export from a clean legends-mode save. Translated-name
+  layers to strip.
 - **Causality is reconstructed, not parsed:** it lives in `event_collections`
   (war → battle → episode) and role fields (killer, abductor), not in
   through-going cause chains. Budget inference work, not parsing work —
@@ -54,6 +54,82 @@ gated by `perf-1` data).
   chronicle, else a distribution mismatch yields a false "briefers are bad".
 - Cost references: Park et al. 2023 (Generative Agents);
   "Generative Agent Simulations of 1,000 People" (2024).
+
+### 3.1 Measured on the owner's exports (iter-8e, 2026-08-28)
+
+`scripts/df_survey.py` over region1-00250-01-01 ("small", 250y, 315.6 MB)
+and region2-00500-01-01 ("medium", 500y, 1.99 GB + 302 MB plus companion);
+format: small / medium. Full tables regenerate to `output/df_survey_*.txt`
+from the same exports (`dfworlds/`, gitignored; cross-version
+reproducibility is not a DF property — the df_design.md determinism
+quarantine). F7/F8 are `docs/ref/df_design.md`'s flaw rows.
+
+Scale (bg-3's "tens of MB, 10^4–10^5 events" is off by 1–2 orders):
+
+- events 450,867 / 1,220,772 · distinct types 97 / 99 · collections
+  29,663 / 110,519 · figures 44,955 / 105,898 (61% / 83% dead at export)
+  · sites 1,575 / 2,273 · entities 3,253 / 7,013 · artifacts 9,158 /
+  27,872 · written_contents 46,858 / 113,000.
+- events/year grows with compounding history (small: 890 @y1 → ~2,700
+  late; medium peak 6,966 @y361, last-10y 2,297) — no density cliff
+  inside worldgen.
+
+F7 (macro-dense, micro-empty) — confirmed, one refinement (shares):
+
+- bookkeeping 57.3% / 52.2% · artifact-culture 16.1% / 16.4% ·
+  personal-violence 14.6% / 15.5% · **micro (street/personal) 7.7% /
+  8.8%** · occasion-ritual 3.5% / 5.1% · war-geopolitics 0.7% / 1.8% ·
+  arcane 0.1% / 0.25%; top-5 types = 60.1% / 55.8% of all events.
+- Refinement: modern DF is not literally micro-empty — intrigue exists
+  (reputation relationships 3.1–3.6%, relationship denied, assume
+  identity, trade, gamble, agreements, convictions, reunions) — but it
+  is notable-to-notable politics, not street texture: no gossip
+  propagation records, theft = artifact theft. The bg-3
+  distribution-mismatch warning stands: ≤9% of the log is tavern-scale.
+- events-per-figure: p50 7 mentions, p99 44 / 56, max 499 / 2,975;
+  top-1% of figures hold 9.1% / 11.1% of mentions (long tail, not
+  hub-dominated); 96.4% / 98.5% of figures appear in ≥1 event.
+
+F8 (causality as archaeology) — confirmed and sharpened:
+
+- Only **19.3% / 23.8%** of events sit in ANY collection; orphans (no
+  collection ref, no `*_hfid` role, no cause) = 21.3% / 22.7%.
+- Direct event→collection references are **unique** (0 events with 2+
+  parent collections in either world); collections form strict
+  single-parent trees (max 1 parent per subcollection) — the
+  many-to-many claim is false for these exports (KI#33). The bg-2
+  "2+ collections → candidate_causes" trigger fires never; realistic
+  ambiguity = absent role fields (39% / 58% of deaths carry no slayer)
+  plus the ~76–81% ungrouped mass.
+- `hf died` cause enum: struck 50.6% / 51.7%, old age 21.6% / 27.3%,
+  murdered 23.9% / 18.1%, shot 2.4% / 1.6%, executions + suicides <1.5%.
+- Median collection holds 1 direct event (p90 = 6, max 665 / 3,222) —
+  grouping context is shallow even where it exists.
+
+Pipeline (bg-1) — the validated recipe, `scripts/df_survey.py`:
+
+- Exports are NOT well-formed XML: 24 invalid CP437 control bytes per
+  file (12 artifacts × item-quality symbols 0x10/0x11 inside
+  `<name_string>`). Byte-level sanitize before parse — safe: CP437 is
+  single-byte, UTF-8 continuation bytes are ≥ 0x80.
+- Stream: `iterparse` + `elem.clear()` per record + `section.clear()`
+  every 4096 records. A non-clearing parse OOMs a 4 GB machine on the
+  medium world; the streaming recipe does 1.99 GB in 76 s at 162 MB
+  peak RSS (small: 15 s, 74 MB). Never DOM.
+- Type names are display-style in the main file ("change hf state",
+  "hf died") and snake_case in the plus companion ("change_hf_state")
+  — a normalization table is mandatory (KI#33; the old doc examples
+  mixed the two styles).
+- The plus companion repeats `historical_events` (62% of the main
+  count, complementary fields such as `reason`) and adds
+  `historical_event_relationships` (118,896 / 281,003), `identities`,
+  `creature_raw` — import selectively, never wholesale.
+- Collection nesting lives in parents' `<eventcol>` child lists
+  (15,581 / 61,648 links); the `parent_eventcol` up-edge is almost
+  never set (199 / 710 collections) — reconstruct the tree from parent
+  lists. Actual child tags are `<event>` / `<eventcol>` (repeated
+  elements), not `event_ids` / `subcollection_ids` (KI#33, fixed in
+  `docs/ref/df_legends_xml.md`).
 
 ## 4. Python determinism recipe
 

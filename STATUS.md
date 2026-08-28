@@ -1,23 +1,21 @@
 # STATUS — canonsim
 
-Iteration: 8d (`iter-8d-df-design-lessons`) · Phase: 1 · Date: 2026-08-28 ·
-owner-requested research pass (the D-022 exception; docs-only — iter-9
-stays the code iteration): ref-17 — the DF designed-experience deep
-dive (`docs/ref/df_design.md`), answering the owner's question
-"survey DF's internal flaws (narrative/depth/coherence, not UI) and
-design better instead of copying blindly". Deliverables: six
-enchantment pillars (P1–P6) — what to multiply; flaw taxonomy F1–F10
-with root causes — every flaw is a MISSING LAYER (salience, pacing,
-audience epistemology, LOD, continuity), not wrong simulation; the
-successor trade-off matrix (RimWorld, KoDP, Songs of Syx, Versu, Rain
-World, SS13, … — each "fix" amputated a pillar); the structural read
-(layer-adding over an honest sim IS the canonsim thesis — the
-composition is the novelty); reader-as-knower symmetry; bg-1 pipeline
-hardening + bg-2 ambiguity-as-data + bg-3 corpus-division guidance;
-a verdict table mapping every flaw to an existing mechanism or
-recorded phase. Baseline re-verified before the pass (329 green, ruff
-clean); no new KIs (all cross-claims verified against the repo); KI#29
-deleted (closed >2 iterations — §5 mandatory cleanup).
+Iteration: 8e (`iter-8e-df-empirical-survey`) · Phase: 1 · Date: 2026-08-28 ·
+owner-requested empirical pass (the D-022 exception; the owner attached
+his two world exports, closing iter-8d's not-done item): F7/F8 measured
+on real data via `scripts/df_survey.py` (streaming, sanitized; the
+validated bg-1 parsing core) over region1-00250 (450,867 events) and
+region2-00500 (1,220,772 events, 1.99 GB). F7 confirmed with a
+refinement (bookkeeping 52–57%, micro 7.7–8.8% — notable-to-notable
+intrigue, not street texture); F8 sharpened (only 19–24% of events sit
+in any collection; direct event→collection refs are UNIQUE and the
+collections form strict single-parent trees — the many-to-many claim is
+false for these exports; 39–58% of deaths carry no slayer). Pipeline
+findings: exports are not well-formed XML (24 CP437 control bytes each),
+type names display-style in main vs snake_case in plus, plus companion
+repeats events with complementary fields. Numbers owner:
+`docs/TECH_NOTES.md` §3. KI#33 (df_legends_xml.md schema drift) opened+
+closed same iteration; KI#30–32 deleted (closed >2 iterations, §5).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -40,17 +38,14 @@ deleted (closed >2 iterations — §5 mandatory cleanup).
 
 ## Active KIs
 
-- KI#30 · `D-018c` cited 4× but resolves nowhere (the KI#23/#28
-  family; the lettering died at the iter-7 collapse, and pre-collapse
-  it pointed at the wrong consequence) — CLOSED iter-8c: all sites →
-  plain D-018 (worklog iter-8c).
-- KI#31 · blueprint §1 wording debts: stale 8a "pinned never
-  auto-evicted" remnant vs D-049 resolution 6 + lifecycle notation
-  forbidding active→terminal — CLOSED iter-8c: fixed in place
-  ({active, pinned} → terminal states).
-- KI#32 · iter-8a sync misses: TASKS ref-N line and BLUEPRINT
-  BRIEF-1 donor line (the blueprint's own §0 protocol) — CLOSED
-  iter-8c: both added.
+- KI#33 · `docs/ref/df_legends_xml.md` schema drift vs the real exports:
+  child tags documented as `event_ids`/`subcollection_ids` are actually
+  repeated `<event>`/`<eventcol>` elements; the doc's snake_case type
+  examples are the plus-companion style (main file is display-style
+  "hf died"); the "many-to-many" collection claim is false for the
+  owner's exports (strict single-parent trees) — CLOSED iter-8e: fixed
+  in place against measured data (worklog iter-8e; numbers in
+  `docs/TECH_NOTES.md` §3).
 
 ## FAQ / Pitfalls
 
@@ -135,6 +130,13 @@ deleted (closed >2 iterations — §5 mandatory cleanup).
   restate; cite ledger row IDs (e.g. "per RNG-1"). The audit method:
   grep a sample of ledger terms across the planning docs — every term
   must land in at least one; verified iter-0x.
+- **DF exports are not well-formed XML; the survey tool owns the recipe
+  (iter-8e).** Raw CP437 control bytes (item-quality symbols) sit inside
+  artifact names — byte-level sanitize before any parse; stream with
+  iterparse + clear (a non-clearing parse OOMs 4 GB on a 2 GB export);
+  main-file type names are display-style, the plus companion's are
+  snake_case — normalize. Measured numbers + the full recipe:
+  `docs/TECH_NOTES.md` §3; tool: `scripts/df_survey.py`.
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap
   is 600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, field lists, enum values, per-source verdicts
@@ -163,21 +165,17 @@ deleted (closed >2 iterations — §5 mandatory cleanup).
   surface/source/cause, never replayable); T1/T2 canon tests never
   touch it; "zero RNG" stays a claim about assembler internals, never
   about log-relative determinism of the ledger-fed brief.
-- **Gate mechanics: the T8 single-factor A/B + the balance harness
-  (iter-6 laws).** Same playscript/seed (125), only the director flag
-  changes: ON fires `director_0000`; OFF keeps seeding (D-005) and
-  produces ≥3 emergent chains (baseline 26); the logs byte-differ. The
-  harness is a script, not a test (a 1000-sim sweep would dominate the
-  suite); kill-criteria operationalize as M3 mean ≥2, M1 non-trivial,
-  M2 non-zero.
-- **The emergent-chain count is per qualifying endpoint; decay
-  self-chaining inflates M3 (iter-6a).** Each non-PC, non-director event
-  whose maximal backward cause-walk reaches a player root with ≥2
-  non-PC links counts once — one decay cascade (consecutive
-  `status_decayed` cause-chained per the beat rule) contributes several
-  endpoints, and M3's magnitude is decay-dominated. The directionality
-  targets (≥3 chains; M3 ≥2) are unaffected; phase-1 tuning reads
-  composition, not just totals.
+- **Gate mechanics + chain counting (iter-6/6a laws).** Same
+  playscript/seed (125), only the director flag changes: ON fires
+  `director_0000`; OFF keeps seeding (D-005) and produces ≥3 emergent
+  chains (baseline 26); the logs byte-differ. The harness is a script,
+  not a test (a 1000-sim sweep would dominate the suite); kill-criteria
+  operationalize as M3 mean ≥2, M1 non-trivial, M2 non-zero. M3 counts
+  per qualifying endpoint: each non-PC, non-director event whose maximal
+  backward cause-walk reaches a player root with ≥2 non-PC links counts
+  once — decay self-chaining inflates the total (M3's magnitude is
+  decay-dominated; the targets are unaffected; phase-1 tuning reads
+  composition, not totals).
 
 ## Next step
 
@@ -194,9 +192,11 @@ inputs (scene definition, structural pinning, the gateway checks, the
 tombstone window, the texture-OCC mirror); the narrator LLM boundary
 itself remains an AGENTS §8 owner checkpoint, INV-4 holds until then,
 and it carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
-unblocked in parallel — note bg-1 needs the owner's local DF Classic
-+ DFHack setup (world export cannot run in this sandbox); pipeline
-design guidance for bg-1 now lives in `docs/ref/df_design.md`. Backlog
+unblocked in parallel — bg-1's parsing half is validated (iter-8e: the
+owner supplied two exports; `scripts/df_survey.py` + the measured
+pitfalls in `docs/TECH_NOTES.md` §3), so bg-1's remainder is the SQLite
+sink over that core; the survey also sharpened bg-2's sampling frame
+(`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3). Backlog
 that did NOT land in iter-8b (each stays in its TASKS home, none
 blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
 GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;

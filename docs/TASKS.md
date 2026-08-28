@@ -76,6 +76,9 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   mode), hundreds of MB per large world, translated-name layers.
   Pipeline design guidance: `docs/ref/df_design.md` ("What we adapt" —
   streaming/selective import, name normalization, determinism quarantine).
+  Parsing half VALIDATED (iter-8e): the owner supplied two exports;
+  `scripts/df_survey.py` is the sanitize+stream core (recipe + measured
+  pitfalls: `docs/TECH_NOTES.md` §3.1) — the remainder is the SQLite sink.
 - AC: parser loads a world into SQLite; pitfalls recorded in
   `docs/TECH_NOTES.md` §3.
 
@@ -87,7 +90,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   event: participants, place, cause, witness, long-term consequence,
   expressibility in our ontology → `docs/TAXONOMY.md`.
 - AC: ≥100 entries. Honest note baked in: causality is *reconstructed* from
-  `event_collections` + role fields, not parsed.
+  `event_collections` + role fields, not parsed. Sampling frame sharpened
+  (iter-8e): measured type distribution + ambiguity grounding live in
+  `docs/TECH_NOTES.md` §3.1 (micro tails, unique collection refs,
+  slayer-less deaths).
 
 ### bg-3 · briefer spike — todo
 
@@ -170,6 +176,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8e · 2026-08-28 · DF empirical F7/F8 survey on the owner's two world
+  exports (owner-requested, the D-022 exception; closes iter-8d's not-done
+  item): `scripts/df_survey.py` (sanitize + stream parsing core for bg-1)
+  + measured numbers distilled into `docs/TECH_NOTES.md` §3.1 (single
+  owner) + F7/F8 verdict links in `docs/ref/df_design.md` + KI#33
+  schema-drift fix in `docs/ref/df_legends_xml.md` (actual `<event>`/
+  `<eventcol>` tags, naming duality, single-parent trees — the
+  many-to-many claim corrected). 329 green, ruff clean.
 - iter-8d · 2026-08-28 · DF designed-experience deep dive (owner-requested
   research pass, the D-022 exception; docs-only — iter-9 stays the code
   iteration; ref-17): `docs/ref/df_design.md` — six enchantment pillars

@@ -8,6 +8,25 @@
 > since iter-5).
 
 ---
+iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
+- Owner-requested (files attached; closes iter-8d's not-done item):
+  `scripts/df_survey.py` — the sanitize+stream survey tool (byte-level
+  CP437 control-byte strip + iterparse/clear; the validated bg-1 parsing
+  core) over the owner's two exports; measured F7 (bookkeeping 52–57%,
+  micro 7.7–8.8% notable-to-notable) and F8 (19–24% events in any
+  collection; unique direct refs; single-parent trees; 39–58% slayer-less
+  deaths) — numbers distilled into `docs/TECH_NOTES.md` §3.1 (single
+  owner); F7/F8 verdict one-liners in `docs/ref/df_design.md`; KI#33
+  schema-drift fix in `docs/ref/df_legends_xml.md` (event/eventcol tags,
+  naming duality, many-to-many → single-parent correction).
+- 10 files (above the 3–5 soft limit; task-mandated tool + numbers owner
+  + 2 ref fixes + the AGENTS §6 sync set — precedent iter-8a): the tool,
+  TECH_NOTES (numbers owner), 2 ref fixes, TASKS/STATUS (incl. KI#30–32
+  deletion + FAQ gate-family merge to hold the ≤20 cap), this worklog,
+  AGENT_NAVIGATION/README scripts rows, .gitignore dfworlds/ guard
+  (iter-4 out per the one-in/one-out cap). 329 green, ruff clean.
+  No new DECISIONS (research verdicts; iter-8d precedent).
+---
 iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-lessons)
 - ref-17 (owner-requested research pass, the D-022 exception):
   `docs/ref/df_design.md` — the third DF entry (the player-facing
@@ -183,25 +202,7 @@ iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
   over long waits (no rest action in v0.1) — visible through the
   readable chronicle.
 ---
-iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
-- core/director.py + core/urgencies.py + core/states.py (D-038:
-  director = event-driven + clock-crossing releases; D-039: urgencies
-  through the intent door, band NPC_REACTION; D-040: arrest resolution
-  via evasion_vs_pursuit) + loop rewire: clock crossings fire in TICK
-  ORDER (rotations + beats interleave by tick, not by type — the log
-  writer's tick-monotonicity invariant); director seeds at commit time
-  (_react extension); beat cycle fires decay / urgencies / director
-  release per beat. Pack: director.hooks (weight/threshold/trigger/
-  intent), urgencies.entries (probability/intent/preconditions),
-  crime_watch.arrest.resolution_* (caught_value irreversible). Templates
-  +arrest_resolved, +status_decayed. DIRECTOR_SPEC.md written (trigger
-  fired). 20 files — task-mandated module set + sync set.
-- Tests 187→219 green (+32: director, urgencies, states suites; arrest
-  test updated for the resolution behavior change); fixture
-  byte-identical (plumbing_smoke crosses no beat — no decay/urgency/
-  release). D-038/D-039/D-040 recorded; STATUS FAQ gains the tick-order
-  + entry.tick-enqueue laws.
----
+(iter-4 deleted at iter-8e per the one-in/one-out cap; history in git.)
 (iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)
 (iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)
 (iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)

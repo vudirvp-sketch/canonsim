@@ -15,7 +15,12 @@ external resource** (`ROADMAP.md` §4): a ready canonical event log from a
 real world generator. This entry covers the **export schema** half;
 `df_worldgen.md` covers the worldgen + history layer half.
 
-**Concrete mechanics.**
+**Concrete mechanics.** Field names and structures below verified
+against the owner's real exports (iter-8e survey — measured numbers in
+`docs/TECH_NOTES.md` §3). Note the naming duality: type strings are
+display-style in the main file (`change hf state`, `hf died`) and
+snake_case in the plus companion (`change_hf_state`) — normalize on
+import (KI#33).
 
 - Top-level XML elements (verified against DFHack docs, current DF
   Classic): `regions`, `underground_regions`, `sites`, `landmasses`,
@@ -24,11 +29,14 @@ real world generator. This entry covers the **export schema** half;
   `musical_forms`, `poetic_forms`, `written_contents`, `historical_events`,
   `historical_event_collections`.
 - **`historical_events`** — flat list of typed events, each with `id`
-  (gap-free integer), `year`, `seconds72` (sub-year tick), and
-  type-specific fields. Common types:
-  - `hf_died` (figure died) — `victim_hfid`, `slayer_hfid`,
+  (gap-free integer), `year`, `seconds72` (sub-year tick; `-1` = no
+  sub-year time), and type-specific fields. Common types (normalized
+  names; the main file spells them display-style):
+  - `hf_died` (figure died) — `hfid` (victim), `slayer_hfid`,
     `slayer_race`, `slayer_caste`, `cause` (enum: murdered, old age,
-    shot, …), `site_id`.
+    struck, shot, `exec …`, `suicide …`), `site_id`. Measured: slayer
+    recorded on 42–61% of deaths; struck ~51%, old age 22–27%,
+    murdered 18–24%.
   - `hf_attacked_site` — `attacker_civ_id`, `site_id`, `defender_civ_id`.
   - `artifact_created` — `artifact_id`, `creator_hfid`, `site_id`.
   - `created_site` / `destroyed_site` — `site_id`, `civ_id`, `builder_hfid`.
@@ -37,11 +45,16 @@ real world generator. This entry covers the **export schema** half;
     (enum: rumors of theft, terrorized, …), `strength` (1–100).
   - `entity_reputation_change` — like the above but for an entity.
 - **`historical_event_collections`** — nested groupings; each has `id`,
-  `type`, `start_year`, `end_year`, `event_ids` (children), `subcollection_ids`
-  (recursive children), and role fields (attacker, defender, winner, loser,
-  killer, abductor). Types: `war`, `battle`, `duel`, `abduction`,
-  `site_taken_over`, `beast_attack`, `journey`, `performed_structure` (a
-  dance or music performance).
+  `type`, `start_year`, `end_year`, repeated `<event>` child elements
+  (member event ids) and repeated `<eventcol>` child elements
+  (subcollection ids), plus role fields (attacker, defender, winner,
+  loser, killer, abductor). `parent_eventcol` exists as an up-edge but
+  is almost never set (measured: 199 of 29,663 and 710 of 110,519) —
+  reconstruct nesting from the parents' `<eventcol>` lists. Measured
+  types (16): `war`, `battle`, `duel`, `abduction`, `theft`, `beast
+  attack`, `site conquered`, `persecution`, `journey`, `occasion`,
+  `ceremony`, `performance`, `procession`, `competition`, `purge`,
+  `entity overthrown`.
 - **`historical_figures`** — entry per notable: `name` (with translated
   variant layers), `race`, `caste`, `birth_year`, `death_year`,
   `entity_id`, `site_link`, `ent_pop_id`, `reputation` (nested list of
@@ -63,10 +76,14 @@ real world generator. This entry covers the **export schema** half;
 - **`event_collections` as the precedent for grouping.** Our `cause`
   chain (`EVENT_SCHEMA.md` §2) does similar work in a stricter way:
   an event points at its parent via `cause` (single-parent linear
-  chain). DF's collections are **many-to-many** (a battle belongs to a
-  war AND can be referenced by a journey); our `cause` is single-parent.
-  DF is more expressive here — a future phase may want collection-style
-  multi-parent linking for arcs (P3c, `CORE_DESIGN_RESEARCH.md` §6).
+  chain). Measured (iter-8e): the export's grouping is itself a strict
+  single-parent TREE — direct event→collection references are unique
+  (0 multi-parent events), and no subcollection has 2+ parents; only
+  19–24% of events sit in any collection at all (numbers:
+  `TECH_NOTES.md` §3). Multi-parent arc grouping (a battle under both a
+  war and a journey) remains a hypothetical future extension (P3c,
+  `CORE_DESIGN_RESEARCH.md` §6) — now recorded as our own design
+  idea, not a DF-export property.
 - **Figure-with-affiliation-history pattern.** Our `entity` records
   (knowledge records, `known_by`, etc.) will need the same "track who
   was where when" structure for any non-trivial timeline. DF's
@@ -130,10 +147,17 @@ real world generator. This entry covers the **export schema** half;
   are artifact-theft (a hammer stolen from a museum), not street theft.
   This is why the bg track validates mechanics, not interestingness.
 - **HEX errors after fortress play** (`TECH_NOTES.md` §3) — must export
-  from a clean legends-mode save; the bug is on DFHack's side.
-- **Hundreds of MB per large world; translated-name layers to strip**
-  (`TECH_NOTES.md` §3). A 1000-year world is ~200MB XML; the parser must
-  stream, not load DOM.
+  from a clean legends-mode save; the bug is on DFHack's side. And the
+  export is not well-formed XML: raw CP437 control bytes (item-quality
+  symbols) sit inside artifact names — byte-level sanitize before parse
+  (measured: 24 bytes per world; the recipe lives in `TECH_NOTES.md` §3
+  / `scripts/df_survey.py`).
+- **Scale is brutal and the format is bigger than the docs assumed** —
+  measured 315 MB / 1.99 GB per world (0.45M / 1.22M events), 10–20×
+  the old ballpark; the parser must stream with clearing (a
+  non-clearing parse OOMs 4 GB on the medium world) —
+  `TECH_NOTES.md` §3. Plus companion repeats `historical_events` with
+  complementary fields — import selectively.
 - **Proprietary.** We read exported data, never DF's code or assets
   (`REFERENCES.md` §10). DFHack is Zlib — pattern only; its parser is
   a reference, not a donor.

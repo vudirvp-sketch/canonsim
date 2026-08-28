@@ -106,10 +106,16 @@ would amputate. The owner's constraint holds: UI/graphics out of scope.
 - **F7 Macro-dense, micro-empty.** Legends records wars and artifact
   theft; no gossip, no street theft (`TECH_NOTES.md` §3) — the exact
   inverse of fortress-mode density, and the briefer's
-  distribution-mismatch trap (the bg-3 honest note).
+  distribution-mismatch trap (the bg-3 honest note). *Measured
+  (iter-8e, `TECH_NOTES.md` §3.1): confirmed with a refinement —
+  bookkeeping 52–57%, micro 7.7–8.8% and it is notable-to-notable
+  intrigue, not street texture.*
 - **F8 Causality as archaeology.** Causes are reconstructed from
   `event_collections` + role fields, never recorded (`TECH_NOTES.md`
-  §3; L7 names the anti-pattern).
+  §3; L7 names the anti-pattern). *Measured (iter-8e): only 19–24% of
+  events sit in any collection, the groupings are strict single-parent
+  trees, and 39–58% of deaths carry no slayer — the archaeology is
+  sparser than assumed (`TECH_NOTES.md` §3.1).*
 - **F9 Primitive epistemology.** Reputation is a 1–100 strength scalar
   (`hf_reputation_change`) — no channel, no fidelity; runtime rumors
   exist (adventure mode) but export poorly. DF cannot answer "who
@@ -248,19 +254,28 @@ RimWorld's readability at once, because they live on different layers.
   gitignored runtime artifacts). Community XML viewers (Legends
   Browser et al.) prove the format parses at scale — pattern only,
   not cataloged.
-- **bg-2 ambiguity as data.** An event referenced by 2+ collections
-  records `cause: null` + `candidate_causes` inside `outcome` — legal
-  today (type-specific payload fields are pack data,
+- **bg-2 ambiguity as data.** An event whose causality cannot be
+  grounded records `cause: null` + `candidate_causes` inside `outcome`
+  — legal today (type-specific payload fields are pack data,
   `EVENT_SCHEMA.md` §11); trains briefer/validator on incomplete
-  causality, realistic for phase-4 retrieval. Canon-level
-  multi-parent grouping stays deferred (P3c).
+  causality, realistic for phase-4 retrieval. Measured grounding
+  (iter-8e, `TECH_NOTES.md` §3.1): the original trigger (2+
+  collections referencing one event) fires never in real exports —
+  direct refs are unique and collections are single-parent trees;
+  ground `candidate_causes` instead on absent role fields (no slayer
+  on 39–58% of deaths) and on the ~77–81% of events outside any
+  grouping. Canon-level multi-parent grouping stays deferred (P3c —
+  now our own design idea, not a DF-export property, per
+  `df_legends_xml.md`).
 - **bg-3 corpus division of labor.** DF canon serves macro-scale
-  retrieval stress (tens of MB, 10^4–10^5 events); micro-event
-  interestingness is measured on our own chronicle (the bg-3 honest
-  note). Synthetic micro-events injected from DF macro-events were
-  considered and rejected: they contaminate the one thing DF canon is
-  *for* (scale realism) and duplicate what our own log already
-  provides (micro-density). Two corpora, two jobs — no synthesis.
+  retrieval stress (measured iter-8e: 0.32–2.3 GB per world,
+  4.5×10^5–1.2×10^6 events — an order above the old 10^4–10^5
+  estimate; `TECH_NOTES.md` §3.1); micro-event interestingness is
+  measured on our own chronicle (the bg-3 honest note). Synthetic
+  micro-events injected from DF macro-events were considered and
+  rejected: they contaminate the one thing DF canon is *for* (scale
+  realism) and duplicate what our own log already provides
+  (micro-density). Two corpora, two jobs — no synthesis.
 - **F4 discipline for the narrator.** The non-goals list
   (`MVP_SCOPE.md` §2) doubles as the texture license boundary: the
   pack documents what is not simulated, the importance dial licenses
