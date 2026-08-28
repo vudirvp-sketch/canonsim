@@ -1,32 +1,28 @@
 # STATUS — canonsim
 
-Iteration: bg-1 (`bg-1-sqlite-sink`) · Phase: 1 · Date: 2026-08-29 ·
-owner-directed (the new "large" world export supplied as the input):
-bg-1's remainder landed and the task is CLOSED — `scripts/df_import.py`
-loads a world into SQLite over the unchanged iter-8e/8f/8g survey core
-(sanitize + truncation recovery + streaming; D-051 the single rationale
-owner). Schema: typed cores (events/collections/figures) + EAV
-`*_fields` for every other child tag + `event_participant (hfid,
-event_id)` (bg-3's "figure Y's own records" = a PK prefix scan, 4 ms
-measured on the world's top figure) + membership/parent link tables
-(both nesting sources, deduped) + one generic JSON `records` table for
-every non-noise UNHANDLED tag — including future UNDOCUMENTED tags, so
-schema drift never breaks an import. Truncation policy owned: flagged
-partial import by default (`meta.partial=1`; the in-flight record at
-the cut lands with its parsed prefix of fields — measured, shared with
-the survey so counts cross-validate); `--strict` aborts. Cross-validated
-on the large world: 2.38 GB → 898 MB DB in 174 s; every table count
-reproduces the survey exactly (events 1,191,388 · membership 355,596 =
-referenced-by-≥1 · parents 132,875 = eventcol links · participants
-1,030,343 = mentions). The owner's size question answered (TECH_NOTES
-§3.1): world size scales geography and occasions (sites/entities/
-collections +78%, occasion-ritual share 5.1→10.4%), not history volume
-(events −2.4%, figures −7.5%) — hence only +20% file size. KI#36
-opened+closed: the UNDOCUMENTED audit marker the coverage matrix
-promised was never implemented; its first real run caught two matrix
-gaps (`artifact` — in every export; `historical_era`). 352 green (was
-340; +11 sink tests, +1 audit test), ruff clean, golden fixtures
-byte-identical. iter-9 (VALIDATION_SPEC) unchanged.
+Iteration: iter-9 (`iter-9-validation-spec`) · Phase: 1 · Date: 2026-08-29 ·
+VALIDATION_SPEC written (the phase-1 trigger fired) + the validator's
+LLM-free half landed: `brief/validator.py` — a pure function of
+(proposal, log, pack), writes nothing, no RNG, no network (INV-1/2/4).
+The laws it owns: the CLOSED proposal document (claims + intents +
+`expected_event_seq`; no prose field exists anywhere — prompt injection
+is neutralized structurally, D-018; loud `ProposalError` on shape drift,
+emitter bugs crash); honest verdicts `supported/contradicted/
+insufficient_data` against CURRENT canon under closed-world semantics
+(invented entity/event = contradicted, unmodeled prop = insufficient —
+never fabricated, UAP); ExpectedVersion OCC reusing the intent-door
+semantics (stale+broken → refused with first-break attribution;
+stale+intact → rebased; knowledge/event claims only grow — only state
+claims flip via staleness); the fact-transaction pass-through (intents
+shape-checked against the pack grammar, anchors untouched — the door
+stays the single commit path, D-037); the ≤2-regens protocol + the
+call-budget reconciliation (2-call steady state: narrator + extraction
+OR regen; 3-call worst case: narrator + 2 regens; exhaustion → dry mode
+L12); golden-set plumbing — `tests/fixtures/validation_golden.json`
+pins verdict semantics over the committed smoke log, computed, never
+LLM-judged. 390 green (was 352; +38), ruff clean, golden fixtures
+byte-identical. bg-1 (SQLite sink) closed the previous iteration; the
+scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -49,12 +45,24 @@ byte-identical. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Active KIs
 
-- None. KI#36 opened+closed bg-1 (doc↔tool drift: the UNDOCUMENTED
-  audit marker documented in the coverage matrix was never implemented;
-  plus the 8g truncation-test comment misstated the in-flight-record
-  behavior) — CLOSED bg-1, history in git.
+- None. KI#36 (bg-1: doc↔tool drift — the UNDOCUMENTED audit marker was
+  documented but never implemented; plus the 8g truncation-test comment
+  misstatement) — CLOSED bg-1, history in git; deletes at the next
+  STATUS-touching iteration per §5.
 
 ## FAQ / Pitfalls
+
+- **Validator verdicts follow CURRENT canon, never the anchor (iter-9
+  law).** Verdicts are computed against the full log; the OCC anchor only
+  decides fresh/stale/rebased and the first-break attribution
+  (knowledge and events only grow — only `state` claims can flip via
+  staleness; a claim false at the anchor but true now is SUPPORTED).
+  Closed world: an invented entity/event is `contradicted` (the
+  invented-facts metric), an unmodeled prop is `insufficient_data` —
+  canon never fabricates an opinion. Owner:
+  `docs/VALIDATION_SPEC.md` §4–§5. The call-budget reconciliation
+  (2-call steady state; 3-call regen worst case) is §7 — regen_count is
+  a first-class metric, never absorbed silently.
 
 - **Crossings fire in tick order, not by type (iter-4 law, D-038).**
   Rotations and beats interleave by tick; the loop picks
@@ -167,17 +175,15 @@ byte-identical. iter-9 (VALIDATION_SPEC) unchanged.
   full recipe: `docs/TECH_NOTES.md` §3.1/§3.2; tools:
   `scripts/df_survey.py` + `scripts/df_import.py`; regression:
   `tests/test_df_survey.py` + `tests/test_df_import.py`.
-- **Substance over line count (D-025) + per-ref split (D-026).** The cap
-  is 600 with the §6.1 substance filter as the real law — filler is cut
-  always; named systems, field lists, enum values, per-source verdicts
-  are never cut to fit.
-- **The DECISIONS gate-collapse is ID-preserving (D-034, iter-7 law).**
-  Family merges write compound IDs with the FULL prefix on every member
-  (`D-018/D-022/D-029` — `D-018/022/029` does NOT resolve); compressed
-  rows keep decision→why→consequence and link the single owner of the
-  detail (D-024 anti-drift: spec-restatement in a decision row is
-  duplication, not substance). Pre-collapse history lives in git.
-  Due again at the phase-1→2 gate.
+- **The §6 cap laws: substance over line count (D-025/D-026) + the
+  ID-preserving gate-collapse (D-034).** The docs cap is 600 with the
+  §6.1 substance filter as the real law — filler is cut always; named
+  systems, field lists, enum values, per-source verdicts are never cut
+  to fit. The DECISIONS collapse writes compound IDs with the FULL
+  prefix on every member (`D-018/D-022/D-029` — `D-018/022/029` does
+  NOT resolve); compressed rows keep decision→why→consequence and link
+  the single owner (D-024). Pre-collapse history lives in git; due
+  again at the phase-1→2 gate.
 - **The read-side layers are pure functions of the log (iter-5/6/8 laws).**
   Every render entry point builds a fresh `RngBank` from the log HEADER
   seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -209,25 +215,26 @@ byte-identical. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Next step
 
-**Phase 1 continues on track A** — iter-9 stays the next code iteration
-(the plan's single owner is `docs/TASKS.md`): VALIDATION_SPEC + the
-validator's LLM-free half (fact transaction, ExpectedVersion OCC, ≤2
-regens, INSUFFICIENT_DATA default, golden-set plumbing), then the
-scene-ledger LLM-free half per D-048/D-049/blueprint §1 (unchanged by
-bg-1 — track B never blocks A; the narrator LLM boundary itself remains
-an AGENTS §8 owner checkpoint, INV-4 holds until then). **Track B:
-bg-1 is CLOSED** (the SQLite sink landed with the owner's large world
-as the validation input; every count reproduces the survey — D-051,
-TECH_NOTES §3.2). bg-2 (event taxonomy) and bg-3 (briefer spike) are
-unblocked and now query the DB (`output/df_world_<stem>.sqlite3` —
-participant/grouping/name queries run on SQLite, not by re-parsing
-XML; bg-3's "figure Y's own records" = the `event_participant` PK
-scan). Backlog that did NOT land in iter-8b (each stays in its TASKS
-home, none blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy +
-`ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick
-profile (the iter-8h micro-pass landed the six locally-provable
-asymptotic wins — the full profile remains the gate for anything
-structural, e.g. a Path-B revisit); `tune-1` rest action + the
-D-045(b) importance-rule knob; the BRIEF_SPEC §9 deferrals (relevance
-signal, lore scheduling grammar, precondition-filtered options,
-exemplar refresh cadence — all arrive with the mediator, never early).
+**Phase 1 continues on track A** — iter-10 is the next code iteration
+(the plan's single owner is `docs/TASKS.md`): the scene-ledger LLM-free
+half per D-048/D-049/blueprint §1 — `brief/ledger.py` (entry shape,
+scene = PC-location interval, discrete lifecycle, structural pinning,
+the validation gateway — scope/establishment-canon/laundering/
+unique-slot checks + the idempotent duplicate rule, contradiction
+retirement, the texture-OCC mirror) + the `scene_texture` 7th brief
+block (pinned-first window + tombstone lines; the BRIEF_SPEC §9 atomic
+flip set) + fixture-shaped narrator deltas + pack lint. The gateway
+reuses iter-9's refusal shape and regen budget (VALIDATION_SPEC §8).
+The narrator LLM boundary itself remains an AGENTS §8 owner checkpoint
+(INV-4 holds until then). **Track B: bg-1 CLOSED** (D-051); bg-2
+(taxonomy) and bg-3 (briefer spike) are unblocked and query the DB
+(`output/df_world_<stem>.sqlite3`; bg-3's reverse validation reuses
+iter-9's `invented`/`regen_count` metrics). Backlog (each stays in its
+TASKS home, none blocks iter-10): `doc-1` VISION freeze review; `qa-1`
+mypy + `ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1`
+10k-tick profile (the full profile stays the gate for anything
+structural); `tune-1` rest action + the D-045(b) importance-rule knob;
+the BRIEF_SPEC §9 deferrals that did not land with the ledger
+(relevance signal, lore scheduling grammar, precondition-filtered
+options, exemplar refresh cadence — all arrive with the mediator,
+never early).

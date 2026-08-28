@@ -30,23 +30,27 @@ budgets, eviction contract, voice-isolation law, just-in-time deferrals);
 log; `rules.json::brief` pack contract + `core/pack.py` lint. Detail:
 `worklog.md` iter-8 + `docs/BRIEF_SPEC.md`.
 
-### iter-9+ · phase-1 continuation — todo (sequenced after iter-8)
+### iter-9 · VALIDATION_SPEC + validator LLM-free half — done
 
-- `VALIDATION_SPEC.md` trigger fires (fact transaction, ExpectedVersion
-  OCC, ≤2 regens, INSUFFICIENT_DATA default) + the validator's LLM-free
-  half (proposal shaping, stale-version rejection, golden-set plumbing).
-- The scene-ledger LLM-free half (D-048 + the D-049 hardening,
-  mechanism `docs/blueprint/phases.md` §1): `brief/ledger.py` (entry
-  shape, scene = PC-location interval, discrete lifecycle, structural
-  pinning, the validation gateway — scope/establishment-canon/
-  laundering/unique-slot checks + the idempotent duplicate rule,
-  contradiction retirement, the texture-OCC mirror) + the
-  `scene_texture` 7th brief block reading it (pinned-first window +
-  tombstone lines) + fixture-shaped narrator deltas under
-  `tests/fixtures/` + pack lint (block budget + caps). Sequenced after
-  VALIDATION_SPEC's LLM-free half — the delta grammar informs the
-  fixture shapes. BRIEF_SPEC §9 deferral flips to written (the atomic
-  flip set is enumerated there).
+`docs/VALIDATION_SPEC.md` written (trigger fired; the closed proposal
+document, the honest-verdict law, ExpectedVersion OCC, the fact transaction,
+the ≤2-regens protocol + the call-budget reconciliation, golden-set plumbing)
++ `brief/validator.py` (pure functions of (proposal, log, pack)) + the
+committed golden set `tests/fixtures/validation_golden.json`. Detail:
+`worklog.md` iter-9 + `docs/VALIDATION_SPEC.md`.
+
+### iter-10+ · phase-1 continuation — todo (sequenced after iter-9)
+
+- The scene-ledger LLM-free half (D-048 + the D-049 hardening, mechanism
+  `docs/blueprint/phases.md` §1; protocol clauses owned
+  `docs/VALIDATION_SPEC.md` §8): `brief/ledger.py` (entry shape, scene =
+  PC-location interval, discrete lifecycle, structural pinning, the
+  validation gateway — scope/establishment-canon/laundering/unique-slot
+  checks + the idempotent duplicate rule, contradiction retirement, the
+  texture-OCC mirror) + the `scene_texture` 7th brief block reading it
+  (pinned-first window + tombstone lines) + fixture-shaped narrator deltas
+  under `tests/fixtures/` + pack lint (block budget + caps). BRIEF_SPEC §9
+  deferral flips to written (the atomic flip set is enumerated there).
 - The narrator LLM boundary itself is a separate owner-gated iteration
   (AGENTS §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
   ladder L12 from day one); it now also carries the scene-ledger live

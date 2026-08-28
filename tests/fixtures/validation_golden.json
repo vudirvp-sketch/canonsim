@@ -1,0 +1,23 @@
+{
+  "log": "tests/fixtures/plumbing_smoke_seed42.jsonl",
+  "cases": [
+    {"name": "state_pc_position_supported", "claim": {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_market"}, "expect": "supported"},
+    {"name": "state_pc_position_contradicted", "claim": {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}, "expect": "contradicted"},
+    {"name": "state_pack_init_supported", "claim": {"kind": "state", "entity": "npc_guard_01", "prop": "position", "value": "loc_tavern"}, "expect": "supported"},
+    {"name": "state_unmodeled_prop_insufficient", "claim": {"kind": "state", "entity": "npc_guard_01", "prop": "mood", "value": "calm"}, "expect": "insufficient_data"},
+    {"name": "state_unknown_entity_contradicted", "claim": {"kind": "state", "entity": "npc_ghost_99", "prop": "position", "value": "loc_tavern"}, "expect": "contradicted"},
+    {"name": "state_null_value_supported", "claim": {"kind": "state", "entity": "oil_lamp_01", "prop": "carrier", "value": null}, "expect": "supported"},
+    {"name": "state_carried_contradicted", "claim": {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"}, "expect": "contradicted"},
+    {"name": "state_crime_status_supported", "claim": {"kind": "state", "entity": "pc_01", "prop": "crime_status", "value": "unknown"}, "expect": "supported"},
+    {"name": "knowledge_crowd_supported", "claim": {"kind": "knowledge", "who": "npc_market_crowd_01", "knows": "pc_01_arrived"}, "expect": "supported"},
+    {"name": "knowledge_guard_supported", "claim": {"kind": "knowledge", "who": "npc_guard_01", "knows": "pc_01_arrived"}, "expect": "supported"},
+    {"name": "knowledge_blind_npc_contradicted", "claim": {"kind": "knowledge", "who": "npc_market_crowd_01", "knows": "pc_01_left_toward_loc_backyard"}, "expect": "contradicted"},
+    {"name": "knowledge_unknown_knower_contradicted", "claim": {"kind": "knowledge", "who": "npc_stranger_77", "knows": "pc_01_arrived"}, "expect": "contradicted"},
+    {"name": "knowledge_cannot_know_item", "claim": {"kind": "knowledge", "who": "purse_01", "knows": "pc_01_arrived"}, "expect": "contradicted"},
+    {"name": "knowledge_cannot_know_location", "claim": {"kind": "knowledge", "who": "loc_market", "knows": "pc_01_arrived"}, "expect": "contradicted"},
+    {"name": "event_supported_with_type", "claim": {"kind": "event", "event_id": "ev_0005", "type": "move"}, "expect": "supported"},
+    {"name": "event_supported_id_only", "claim": {"kind": "event", "event_id": "ev_0003"}, "expect": "supported"},
+    {"name": "event_unknown_contradicted", "claim": {"kind": "event", "event_id": "ev_0009"}, "expect": "contradicted"},
+    {"name": "event_type_mismatch_contradicted", "claim": {"kind": "event", "event_id": "ev_0005", "type": "wait"}, "expect": "contradicted"}
+  ]
+}

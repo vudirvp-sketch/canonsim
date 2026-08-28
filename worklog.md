@@ -8,6 +8,28 @@
 > since iter-5).
 
 ---
+iter-9 · 2026-08-29 · VALIDATION_SPEC + validator LLM-free half (iter-9-validation-spec)
+- The phase-1 spec trigger fired: `docs/VALIDATION_SPEC.md` (closed
+  proposal document — no prose field exists, injection neutralized
+  structurally; honest verdicts under closed-world semantics;
+  ExpectedVersion OCC = the intent-door semantics reused; the fact
+  transaction; ≤2-regens protocol + the call-budget reconciliation;
+  scene-ledger protocol clauses for iter-10; golden-set plumbing) +
+  `brief/validator.py` (pure functions of (proposal, log, pack):
+  loud shape gate, per-claim verdicts with first-break attribution,
+  rebase-or-refuse, intent grammar pass-through, RegenBudget,
+  refusal notes, golden-set runner) + the committed golden set
+  `tests/fixtures/validation_golden.json` (18 pinned verdict cases
+  over the smoke fixture log, all three verdicts).
+- 11 files (above the 3–5 soft cap; the spec+code+suite set plus the
+  AGENTS §6 sync set — iter-8 precedent): VALIDATION_SPEC (new),
+  brief/validator.py (new), tests/test_validator.py (new, 38 tests),
+  tests/fixtures/validation_golden.json (new), SPECS_BACKLOG (row →
+  written), TASKS (iter-9 done + iter-10 re-sequenced),
+  AGENT_NAVIGATION §1, DECISIONS D-052, STATUS, README, this worklog.
+  352→390 green, ruff clean, golden fixtures byte-identical. No new KIs.
+- iter-8 evicted per the one-in/one-out cap (history in git).
+---
 bg-1-sqlite-sink · 2026-08-29 · DF SQLite sink — bg-1 closed (D-051)
 - Owner-directed (the new "large" world export supplied as input): the
   bg-1 remainder landed — `scripts/df_import.py` over the unchanged
@@ -200,24 +222,7 @@ iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
 - 329 tests green, ruff clean, golden fixture byte-identical. DECISIONS
   transiently 32/30 (collapse due at the phase-1→2 gate, D-034).
 ---
-iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assembler)
-- docs/BRIEF_SPEC.md (trigger fired at phase-1 start: six-block pipeline,
-  two-level budgets — soft fill target / hard per-item ceiling /
-  total_hard whole-block eviction with `[truncated:N]` markers and
-  never-drop-directives, voice isolation L2, max_items = ranking cap not
-  budget drop, §9 just-in-time deferral table) + brief/assembler.py
-  (pure functions of the log, ZERO RNG — byte-identity on the golden
-  fixture across calls, PYTHONHASHSEED-independent; beat arithmetic =
-  the read-side mirror of the loop's day-1-edge law) + rules.json::brief
-  pack contract (budgets + directives/lore/exemplars text) +
-  core/pack.py::_brief lint (BRIEF_BLOCK_IDS closed enum) +
-  tests/test_brief.py (30 tests). D-047 recorded — DECISIONS transiently
-  31/30 mid-phase (iter-1 precedent; collapse due at the phase-1→2 gate).
-- 13 files — task-mandated set (spec + assembler + pack + tests + lint)
-  + the AGENTS §6 sync set (TASKS/SPECS_BACKLOG/AGENT_NAVIGATION/STATUS/
-  worklog/README/DECISIONS). 299→329 tests green, ruff clean, golden
-  fixture byte-identical.
----
+(iter-8 deleted at iter-9 per the one-in/one-out cap; history in git.)
 (iter-7 deleted at bg-1 per the one-in/one-out cap; history in git.)
 (iter-6a deleted at iter-8h per the one-in/one-out cap; history in git.)
 (iter-6 deleted at iter-8g per the one-in/one-out cap; history in git.)

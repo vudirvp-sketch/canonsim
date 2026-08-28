@@ -32,13 +32,19 @@ the 1000-sim distribution harness; full table in `output/`). Phase 1
 first deliverable at iter-8: `docs/BRIEF_SPEC.md` + `brief/assembler.py`
 — the deterministic six-block brief (budgets, eviction, voice
 isolation) as pure functions of the log, zero RNG, byte-identical on
-the golden fixture. 352 tests green, ruff clean, golden fixture
-byte-identical. Next: iter-9+, `VALIDATION_SPEC.md` + the validator's
-LLM-free half (`docs/TASKS.md`); the narrator LLM boundary is an
-owner-gated checkpoint (AGENTS §8). Track B: bg-1 CLOSED —
-`scripts/df_import.py` loads a Legends export into SQLite (recipe
-`docs/TECH_NOTES.md` §3.2, D-051); bg-2..bg-4 (taxonomy, briefer
-spike, cost notes) query that DB.
+the golden fixture. Its second deliverable landed at iter-9:
+`docs/VALIDATION_SPEC.md` + `brief/validator.py` — the mediator's
+deterministic validation gate (the closed proposal document — prompt
+injection neutralized structurally; honest verdicts
+supported/contradicted/insufficient_data under closed-world semantics;
+ExpectedVersion OCC; the fact-transaction pass-through; the ≤2-regens
+protocol; a committed golden set pinning verdict semantics). 390
+tests green, ruff clean, golden fixtures byte-identical. Next:
+iter-10, the scene-ledger LLM-free half (`docs/TASKS.md`); the
+narrator LLM boundary is an owner-gated checkpoint (AGENTS §8).
+Track B: bg-1 CLOSED — `scripts/df_import.py` loads a Legends export
+into SQLite (recipe `docs/TECH_NOTES.md` §3.2, D-051); bg-2..bg-4
+(taxonomy, briefer spike, cost notes) query that DB.
 
 ## For AI agents (primary audience)
 
