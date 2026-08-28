@@ -1,0 +1,238 @@
+{
+  "_comment": "iter-10 golden texture-delta fixture (D-049): fixture-shaped narrator deltas replayed through the validation gateway (brief/ledger.py::apply_delta) against prefixes of the committed smoke log. The delta document IS the narrator boundary's emitter contract (one call, two jobs: prose + structural delta — the prose lives outside this repo). Each case pins the gateway outcome (established/pinned/retired ids, no-op count, refusal lines) and the full ledger state after the case — one session ledger drives all cases in order. Computed, never LLM-judged (the VALIDATION_SPEC §9 pattern). Owner: docs/BRIEF_SPEC.md §3.3 + docs/blueprint/phases.md §1.",
+  "log": "tests/fixtures/plumbing_smoke_seed42.jsonl",
+  "cases": [
+    {
+      "name": "establish_tavern_texture",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:1",
+        "established": [
+          {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "Tallow candles guttered on the bar."},
+          {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem", "surface": "The guard's cloak trailed a muddy hem."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0000", "tex_0001"],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+      }
+    },
+    {
+      "name": "duplicate_is_noop",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:2",
+        "established": [
+          {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "The same candles."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 1,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+      }
+    },
+    {
+      "name": "slot_conflict_refused",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:3",
+        "established": [
+          {"scope": "scene:loc_tavern", "slot": "candles", "value": "guttering", "surface": "The flames guttered low."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish scene:loc_tavern.candles = guttering (slot_conflict)"],
+        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+      }
+    },
+    {
+      "name": "update_pair_retire_establish",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:4",
+        "retired": [{"scope": "scene:loc_tavern", "slot": "candles"}],
+        "established": [
+          {"scope": "scene:loc_tavern", "slot": "candles", "value": "snuffed", "surface": "The last flame drowned."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0002"],
+        "pinned": [],
+        "retired": ["tex_0000"],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "active", null], ["tex_0002", 32, "active", null]]
+      }
+    },
+    {
+      "name": "ref_pins_entry",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:5",
+        "refs": [{"scope": "entity:npc_guard_01", "slot": "cloak"}]
+      },
+      "expect": {
+        "established": [],
+        "pinned": ["tex_0001"],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null]]
+      }
+    },
+    {
+      "name": "item_texture_via_carrier",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:6",
+        "established": [
+          {"scope": "entity:purse_01", "slot": "clasp", "value": "worn thin", "surface": "The purse's clasp was worn thin."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0003"],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+      }
+    },
+    {
+      "name": "canon_slot_refused",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:7",
+        "established": [
+          {"scope": "entity:npc_guard_01", "slot": "position", "value": "by the door", "surface": "The guard stood by the door."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish entity:npc_guard_01.position = by the door (canon_slot)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+      }
+    },
+    {
+      "name": "absent_entity_refused",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:8",
+        "established": [
+          {"scope": "entity:npc_guard_02", "slot": "scarf", "value": "grey wool", "surface": "A grey wool scarf."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish entity:npc_guard_02.scarf = grey wool (absent_entity)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+      }
+    },
+    {
+      "name": "scene_mismatch_refused",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:9",
+        "established": [
+          {"scope": "scene:loc_backyard", "slot": "bonfire", "value": "smoldering", "surface": "A bonfire smoldered."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish scene:loc_backyard.bonfire = smoldering (scene_mismatch)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+      }
+    },
+    {
+      "name": "unknown_scope_refused",
+      "event_seq": 2,
+      "delta": {
+        "source": "turn:10",
+        "established": [
+          {"scope": "scene:loc_nowhere", "slot": "well", "value": "dry", "surface": "A dry well."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish scene:loc_nowhere.well = dry (scope_target)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+      }
+    },
+    {
+      "name": "market_turn_after_moves",
+      "event_seq": 6,
+      "delta": {
+        "source": "turn:11",
+        "established": [
+          {"scope": "scene:loc_market", "slot": "stalls", "value": "half packed up", "surface": "Stalls stood half packed up."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0004"],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null]]
+      }
+    },
+    {
+      "name": "stale_ref_refused",
+      "event_seq": 6,
+      "delta": {
+        "source": "turn:12",
+        "refs": [{"id": "tex_0002"}]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED ref tex_0002 (stale_ref)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null]]
+      }
+    },
+    {
+      "name": "market_crowd_texture",
+      "event_seq": 6,
+      "delta": {
+        "source": "turn:13",
+        "established": [
+          {"scope": "entity:npc_market_crowd_01", "slot": "murmur", "value": "restless", "surface": "The crowd's murmur turned restless."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0005"],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null]]
+      }
+    }
+  ]
+}

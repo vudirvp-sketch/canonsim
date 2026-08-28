@@ -20,6 +20,7 @@ from typing import Any, Callable
 import pytest
 
 from brief import (
+    SceneLedger,
     assemble_brief,
     beats_crossed,
     brief_from_log,
@@ -457,4 +458,255 @@ def test_pack_lint_catches_duplicate_lore_ids(tmp_path: Path) -> None:
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="unique non-empty strings"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- scene texture: the 7th block (BRIEF_SPEC §3.3, iter-10) ---------------------
+
+
+def _texture_ledger(events: list[Any]) -> SceneLedger:
+    """A ledger with tavern scene texture + guard entity texture, live."""
+    ledger = SceneLedger()
+    ledger.apply_delta(
+        {
+            "source": "turn:1",
+            "established": [
+                {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+                 "surface": "Tallow candles guttered on the bar."},
+                {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
+                 "surface": "The guard's cloak trailed a muddy hem."},
+            ],
+        },
+        events,
+        PACK,
+    )
+    return ledger
+
+
+def test_scene_texture_sits_at_position_three() -> None:
+    text = brief_from_log(GOLDEN, PACK, SCHEMA)
+    headers = [line[3:] for line in text.splitlines() if line.startswith("## ")]
+    assert headers.index("scene_texture") == 2  # after scene_delta, before recalled_facts
+
+
+def test_no_ledger_renders_an_explicit_empty_block() -> None:
+    """ledger=None is the same bytes as an empty ledger (explicit absence,
+    never omission — BRIEF_SPEC §7); the golden log carries no session."""
+    text = brief_from_log(GOLDEN, PACK, SCHEMA)
+    assert "## scene_texture\n\n" in text
+
+
+def test_none_ledger_equals_empty_ledger_bytes() -> None:
+    from core.log import read_log
+
+    _header, events = read_log(GOLDEN, SCHEMA)
+    assert render_brief(assemble_brief(events, PACK)) == render_brief(
+        assemble_brief(events, PACK, SceneLedger())
+    )
+
+
+def test_scene_texture_window_and_line_shapes() -> None:
+    from core.log import read_log
+
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(events[:2])
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: cloak = muddy hem",  # newest first
+        "- [t 32, active] candles = lit",
+    ]
+    # at the full log the PC is at the market: the tavern scene closed
+    # (auto-sync) and the guard is absent — the window is empty
+    body_full = _blocks(render_brief(assemble_brief(events, PACK, ledger)))["scene_texture"]
+    assert body_full == []
+
+
+def test_scene_texture_pinned_first_ranking() -> None:
+    from core.log import read_log
+
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(events[:2])
+    ledger.apply_delta(
+        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[:2], PACK
+    )  # pin the OLDER entry
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, pinned] candles = lit",  # pinned outranks newer actives
+        "- [t 32, active] npc_guard_01: cloak = muddy hem",
+    ]
+
+
+def test_scene_texture_stale_scene_scoped_entries_are_invisible() -> None:
+    """Texture from an earlier scene at the SAME location is gone with
+    that scene even if the ledger never synced (the window law is
+    belt-and-braces: `t >= scene.from_tick` — a revisit starts empty)."""
+    from core.log import StateChange
+
+    def _move(eid: str, t: int, cause: str | None, from_: str, to: str) -> EventRecord:
+        return EventRecord(
+            id=eid, t=t, type="move", actor=PLAYER, cause=cause, outcome={},
+            knowledge=(), hooks=(), importance="low", provenance={"seed": 42},
+            target=to,
+            state_changes=(StateChange(PLAYER, "position", from_, to),),
+        )
+
+    events = [
+        _move("ev_0000", 2, None, "loc_street", "loc_tavern"),
+        _ev("ev_0001", 30, "wait", PLAYER, "ev_0000"),
+        _move("ev_0002", 40, "ev_0001", "loc_tavern", "loc_backyard"),
+        _move("ev_0003", 50, "ev_0002", "loc_backyard", "loc_tavern"),  # revisit
+    ]
+    ledger = SceneLedger()
+    ledger.apply_delta(
+        {
+            "source": "turn:1",
+            "established": [
+                {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+                 "surface": "Tallow candles."}
+            ],
+        },
+        events[:2],
+        PACK,
+    )  # established in tavern scene 0 (t=30); never synced again
+    body = _blocks(render_brief(assemble_brief(events, PACK, ledger)))["scene_texture"]
+    assert body == []  # tavern scene 1 starts empty
+
+
+def test_scene_texture_max_items_is_a_ranking_cap_not_a_drop() -> None:
+    from core.log import read_log
+
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(max_items=1)
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(events[:2])
+    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    body = _blocks(text)["scene_texture"]
+    assert len(body) == 1  # the top-k survivor, newest-first
+    assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
+
+
+def test_scene_texture_tombstones_render_with_cause_and_cap() -> None:
+    from core.log import StateChange, read_log
+
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(tombstone_max_items=1)
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    ledger.apply_delta(
+        {
+            "source": "turn:1",
+            "established": [
+                {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+                 "surface": "Tallow candles."},
+                {"scope": "scene:loc_tavern", "slot": "shutters", "value": "ajar",
+                 "surface": "The shutters stood ajar."},
+            ],
+        },
+        events[:2],
+        PACK,
+    )
+    ledger.retire_contradicted(
+        (
+            EventRecord(
+                id="ev_9000", t=40, type="gust", actor="npc_drunk_01", cause=None,
+                outcome={}, knowledge=(), hooks=(), importance="low",
+                provenance={"seed": 42}, target=None,
+                state_changes=(StateChange("loc_tavern", "candles", None, "scattered"),),
+            ),
+            EventRecord(
+                id="ev_9001", t=44, type="gust", actor="npc_drunk_01", cause="ev_9000",
+                outcome={}, knowledge=(), hooks=(), importance="low",
+                provenance={"seed": 42}, target=None,
+                state_changes=(StateChange("loc_tavern", "shutters", None, "slammed"),),
+            ),
+        )
+    )
+    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    body = _blocks(text)["scene_texture"]
+    assert body == ["- [t 32, refuted] shutters (cause: ev_9001)"]  # newest tombstone only
+
+
+def test_scene_texture_byte_identity_across_calls() -> None:
+    from core.log import read_log
+
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(events[:2])
+    first = render_brief(assemble_brief(events[:2], PACK, ledger))
+    second = render_brief(assemble_brief(events[:2], PACK, ledger))
+    assert first == second  # same (log, ledger, pack) → same brief bytes (D-049)
+
+
+def test_scene_texture_evicted_after_scene_delta_before_exemplars() -> None:
+    """scene_texture's eviction rank: below scene_delta, above
+    voice_exemplars (BRIEF_SPEC §5.2 — continuity outranks lore, sits
+    under voice/options)."""
+    from core.log import read_log
+
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(events[:2])
+
+    pack_free = _mutated_pack(
+        lambda rules: rules["brief"].update(total_hard=10**9)
+    )
+    base = assemble_brief(events[:2], pack_free, ledger)
+    base_total = sum(
+        token_count(line) for block in base.blocks for line in block.render()
+    )
+
+    def freed(block_id: str) -> int:
+        block = next(b for b in base.blocks if b.block_id == block_id)
+        block_tokens = sum(token_count(line) for line in block.render())
+        marker = token_count("[truncated:1 items dropped]")
+        return block_tokens - token_count(f"## {block_id}") - marker
+
+    # evicting {scheduled_lore, recalled_facts, scene_delta} fits:
+    # scene_texture SURVIVES (it outranks scene_delta)
+    total_hard = base_total - (
+        freed("scheduled_lore") + freed("recalled_facts") + freed("scene_delta")
+    )
+    pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
+    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    assert _blocks(text)["scene_texture"]  # survived
+    assert _blocks(text)["voice_exemplars"]  # higher priority, obviously alive
+
+    # evicting through scene_texture fits: voice_exemplars still SURVIVES
+    total_hard = base_total - (
+        freed("scheduled_lore") + freed("recalled_facts") + freed("scene_delta")
+        + freed("scene_texture")
+    )
+    pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
+    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    assert _blocks(text)["scene_texture"] == []  # evicted whole
+    assert _blocks(text)["voice_exemplars"]  # scene_texture fell first
+
+
+def test_pack_lint_requires_scene_texture_config(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        del rules["brief"]["scene_texture"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="scene_texture must be an object"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_bad_texture_caps(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["scene_texture"]["max_items"] = 0
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="max_items must be an integer >= 1"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_duplicate_unique_slots(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["scene_texture"]["unique_slots"] = ["cloak", "cloak"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="unique_slots must be unique"):
         load_pack(_broken_pack(tmp_path, mutate))

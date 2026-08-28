@@ -2,16 +2,19 @@
 owns the field-level contract; `docs/blueprint/phases.md` §1 owns the donor
 design).
 
-The brief is the mediator's input document: six typed blocks with token
+The brief is the mediator's input document: seven typed blocks with token
 budgets, assembled fresh every beat. This module is the LLM-free half —
-**a pure function of the log** (the D-042/D-043/D-044 read-side family):
-same log + same pack → same brief bytes in any process, any call order,
-any `PYTHONHASHSEED`. Unlike the chronicle there is **no randomness at
-all** — every block iterates construction order or an explicit sort over
-deterministic inputs (INV-2); the brief carries facts as structured
-tokens, never prose (L2 — voice lives only in the exemplar block). The
-assembler writes nothing to the log (INV-1) and imports no network code
-(INV-4 — the narrator itself is a later, owner-gated iteration).
+**a pure function of (log, ledger)** (the D-042/D-043/D-044 read-side
+family, widened iter-10 by the D-049 determinism quarantine): same log +
+same ledger + same pack → same brief bytes in any process, any call
+order, any `PYTHONHASHSEED`. The ledger is session render state — never
+canon, never replayed; canon replay (T1/T2) never touches it. Unlike the
+chronicle there is **no randomness at all** — every block iterates
+construction order or an explicit sort over deterministic inputs (INV-2);
+the brief carries facts as structured tokens, never prose (L2 — voice
+lives only in the exemplar block). The assembler writes nothing to the
+log (INV-1) and imports no network code (INV-4 — the narrator itself is
+a later, owner-gated iteration).
 
 All setting text and every budget number lives in the pack
 (`rules.json::brief`, linted at load — `core/pack.py`); this module knows
@@ -26,6 +29,18 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Final
 
+from brief.ledger import (
+    CONTRADICTED,
+    ENTITY_SCOPE_PREFIX,
+    LIVE_STATUSES,
+    PINNED,
+    LedgerEntry,
+    SceneLedger,
+    current_scene,
+    present_entities,
+    split_scope,
+)
+from core.fold import fold, initial_projection
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
 from core.pack import BRIEF_BLOCK_IDS, Pack
@@ -43,11 +58,14 @@ __all__ = [
 ]
 
 # Ascending-priority eviction order for whole-block eviction on total
-# overflow (BRIEF_SPEC §5.2). Directives are NOT in it — never evicted.
+# overflow (BRIEF_SPEC §5.2). Directives are NOT in it — never evicted;
+# scene_texture sits between scene_delta and voice_exemplars (current-scene
+# continuity outranks lore, below voice/options — D-049).
 EVICTABLE_BLOCKS: Final = (
     "scheduled_lore",
     "recalled_facts",
     "scene_delta",
+    "scene_texture",
     "voice_exemplars",
     "active_options",
 )
@@ -75,7 +93,7 @@ class Block:
 
 @dataclass(frozen=True, slots=True)
 class Brief:
-    """The six blocks in pipeline order (BRIEF_SPEC §3)."""
+    """The seven blocks in pipeline order (BRIEF_SPEC §3)."""
 
     blocks: tuple[Block, ...]
 
@@ -189,7 +207,7 @@ def _recalled_fact_lines(
 ) -> list[str]:
     """The PC's own knowledge records, ranked by recency + importance
     (the two deterministic signals; relevance arrives with the mediator —
-    BRIEF_SPEC §3.3), deduped by token, capped at `max_items`."""
+    BRIEF_SPEC §3.4), deduped by token, capped at `max_items`."""
     config = pack.rules["brief"]["recalled_facts"]
     current_tick = events[-1].t if events else 0
     importance_of = {event.id: event.importance for event in events}
@@ -218,7 +236,7 @@ def _recalled_fact_lines(
 
 
 def _lore_lines(pack: Pack, *, beats: int) -> list[str]:
-    """Eligible lore entries, pack declaration order (BRIEF_SPEC §3.4)."""
+    """Eligible lore entries, pack declaration order (BRIEF_SPEC §3.5)."""
     lines: list[str] = []
     for entry in pack.rules["brief"].get("lore", ()):
         if int(entry["from_beat"]) <= beats < int(entry["to_beat"]):
@@ -228,7 +246,7 @@ def _lore_lines(pack: Pack, *, beats: int) -> list[str]:
 
 def _option_lines(pack: Pack) -> list[str]:
     """The pack's action grammar as a choice list, pack order (BRIEF_SPEC
-    §3.6) — the vocabulary, not a precondition-filtered menu: the intent
+    §3.7) — the vocabulary, not a precondition-filtered menu: the intent
     door stays the sole gatekeeper of the possible."""
     lines: list[str] = []
     for action in pack.data["actions.json"]["actions"]:
@@ -237,6 +255,69 @@ def _option_lines(pack: Pack) -> list[str]:
             f"{action['intent']}({', '.join(fields)})" if fields else action["intent"]
         )
         lines.append(f"- {signature}")
+    return lines
+
+
+def _texture_prefix(entry: LedgerEntry) -> str:
+    """The entity address prefix for one texture line — empty for
+    scene-scoped entries (the scope is the current scene), `<id>: ` for
+    entity-scoped ones. Raw ids, never display names: the scope is an
+    address, not prose (BRIEF_SPEC §3.3)."""
+    split = split_scope(entry.scope)
+    if split is not None and split[0] == ENTITY_SCOPE_PREFIX:
+        return f"{split[1]}: "
+    return ""
+
+
+def _scene_texture_items(
+    events: Sequence[EventRecord], pack: Pack, ledger: SceneLedger
+) -> list[str]:
+    """The 7th block's item lines (BRIEF_SPEC §3.3 — the window law):
+    live (active+pinned) entries whose scope matches the current scene
+    or a present entity, ranked pinned-first then newest-first with
+    construction-order tie-break (ids allocate in append order, so the
+    index is the tie-break), capped by `max_items`; then tombstone lines
+    for contradicted entries in the same scope window, newest-first,
+    capped by `tombstone_max_items` (D-049: prevention + enforcement,
+    both bounded). The ledger never evicts — ALL boundedness is this
+    window; the caps are ranking caps, not budget drops (D-047 law).
+    Scene-scoped entries additionally require `t >= scene.from_tick` —
+    texture from an earlier scene at the same location is gone with
+    that scene (a revisit starts empty), even if a stale ledger still
+    holds it live.
+    """
+    config = pack.rules["brief"]["scene_texture"]
+    scene = current_scene(events, pack)
+    state = fold(events, initial_projection(pack.entities))
+    present = present_entities(state, scene.location_id, pack)
+    window: list[tuple[int, LedgerEntry]] = []
+    tombs: list[tuple[int, LedgerEntry]] = []
+    for index, entry in enumerate(ledger.entries):  # construction order
+        split = split_scope(entry.scope)
+        if split is None:
+            continue
+        prefix, target = split
+        if prefix == ENTITY_SCOPE_PREFIX:
+            if target not in present:
+                continue
+        elif target != scene.location_id or entry.t < scene.from_tick:
+            continue
+        if entry.status in LIVE_STATUSES:
+            window.append((index, entry))
+        elif entry.status == CONTRADICTED:
+            tombs.append((index, entry))
+    window.sort(key=lambda pair: (pair[1].status != PINNED, -pair[0]))
+    tombs.sort(key=lambda pair: -pair[0])
+    lines = [
+        f"- [t {entry.t}, {entry.status}] {_texture_prefix(entry)}"
+        f"{entry.slot} = {entry.value}"
+        for _index, entry in window[: int(config["max_items"])]
+    ]
+    lines.extend(
+        f"- [t {entry.t}, refuted] {_texture_prefix(entry)}"
+        f"{entry.slot} (cause: {entry.cause})"
+        for _index, entry in tombs[: int(config["tombstone_max_items"])]
+    )
     return lines
 
 
@@ -261,8 +342,12 @@ def _evict_overflow(
     return assembled
 
 
-def assemble_brief(events: Sequence[EventRecord], pack: Pack) -> Brief:
-    """Assemble the six blocks from a log (pure — BRIEF_SPEC §2/§3).
+def assemble_brief(
+    events: Sequence[EventRecord], pack: Pack, ledger: SceneLedger | None = None
+) -> Brief:
+    """Assemble the seven blocks from a log + ledger (pure — BRIEF_SPEC
+    §2/§3). `ledger=None` renders an empty scene_texture block (a log
+    without a session ledger — the same bytes as an empty one).
 
     Deterministic by construction: no RNG, no wall-clock, construction
     order or explicit sorts only. The pack's lint guarantees the `brief`
@@ -272,10 +357,12 @@ def assemble_brief(events: Sequence[EventRecord], pack: Pack) -> Brief:
     budgets = config["blocks"]
     player_id = pack.player_id()
     beats = beats_crossed(pack.rules, events[-1].t if events else 0)
+    texture_ledger = ledger if ledger is not None else SceneLedger()
 
     items: dict[str, Sequence[str]] = {
         "directives": [str(line) for line in config["directives"]],
         "scene_delta": _scene_delta_lines(events, pack, player_id=player_id),
+        "scene_texture": _scene_texture_items(events, pack, texture_ledger),
         "recalled_facts": _recalled_fact_lines(events, pack, player_id=player_id),
         "scheduled_lore": _lore_lines(pack, beats=beats),
         "voice_exemplars": [str(line) for line in config["voice_exemplars"]],
@@ -300,8 +387,13 @@ def render_brief(brief: Brief) -> str:
     return "\n\n".join(chunks) + "\n"
 
 
-def brief_from_log(log_path: Path, pack: Pack, schema: Mapping[str, Any]) -> str:
+def brief_from_log(
+    log_path: Path,
+    pack: Pack,
+    schema: Mapping[str, Any],
+    ledger: SceneLedger | None = None,
+) -> str:
     """Read a committed log and render its brief — the golden-fixture
-    byte-identity entry point (same log → same brief bytes)."""
+    byte-identity entry point (same (log, ledger) → same brief bytes)."""
     _header, events = read_log(log_path, schema)
-    return render_brief(assemble_brief(events, pack))
+    return render_brief(assemble_brief(events, pack, ledger))

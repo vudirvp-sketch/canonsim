@@ -50,6 +50,7 @@ PACK_FILE_NAMES: Final = ("actions.json", "entities.json", "rules.json", "templa
 BRIEF_BLOCK_IDS: Final = (
     "directives",
     "scene_delta",
+    "scene_texture",
     "recalled_facts",
     "scheduled_lore",
     "voice_exemplars",
@@ -904,6 +905,25 @@ class _Lint:
         _require(
             isinstance(max_items, int) and not isinstance(max_items, bool) and max_items >= 1,
             f"{where}.recalled_facts: max_items must be an integer >= 1",
+        )
+        # iter-10: the 7th block's ranking caps + the unique-slot flag set
+        # (BRIEF_SPEC §3.3/§6 — the scene-texture window law, D-049).
+        texture = config.get("scene_texture")
+        _require(isinstance(texture, Mapping), f"{where}: scene_texture must be an object")
+        for key in ("max_items", "tombstone_max_items"):
+            value = texture.get(key)
+            _require(
+                isinstance(value, int) and not isinstance(value, bool) and value >= 1,
+                f"{where}.scene_texture: {key} must be an integer >= 1",
+            )
+        unique_slots = texture.get("unique_slots")
+        _require(
+            isinstance(unique_slots, list)
+            and all(
+                isinstance(slot, str) and slot.strip() and slot not in unique_slots[: index]
+                for index, slot in enumerate(unique_slots)
+            ),
+            f"{where}.scene_texture: unique_slots must be unique non-empty strings",
         )
 
 

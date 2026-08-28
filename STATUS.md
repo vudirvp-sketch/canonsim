@@ -1,28 +1,26 @@
 # STATUS — canonsim
 
-Iteration: iter-9 (`iter-9-validation-spec`) · Phase: 1 · Date: 2026-08-29 ·
-VALIDATION_SPEC written (the phase-1 trigger fired) + the validator's
-LLM-free half landed: `brief/validator.py` — a pure function of
-(proposal, log, pack), writes nothing, no RNG, no network (INV-1/2/4).
-The laws it owns: the CLOSED proposal document (claims + intents +
-`expected_event_seq`; no prose field exists anywhere — prompt injection
-is neutralized structurally, D-018; loud `ProposalError` on shape drift,
-emitter bugs crash); honest verdicts `supported/contradicted/
-insufficient_data` against CURRENT canon under closed-world semantics
-(invented entity/event = contradicted, unmodeled prop = insufficient —
-never fabricated, UAP); ExpectedVersion OCC reusing the intent-door
-semantics (stale+broken → refused with first-break attribution;
-stale+intact → rebased; knowledge/event claims only grow — only state
-claims flip via staleness); the fact-transaction pass-through (intents
-shape-checked against the pack grammar, anchors untouched — the door
-stays the single commit path, D-037); the ≤2-regens protocol + the
-call-budget reconciliation (2-call steady state: narrator + extraction
-OR regen; 3-call worst case: narrator + 2 regens; exhaustion → dry mode
-L12); golden-set plumbing — `tests/fixtures/validation_golden.json`
-pins verdict semantics over the committed smoke log, computed, never
-LLM-judged. 390 green (was 352; +38), ruff clean, golden fixtures
-byte-identical. bg-1 (SQLite sink) closed the previous iteration; the
-scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
+Iteration: iter-10 (`iter-10-scene-ledger`) · Phase: 1 · Date: 2026-08-29 ·
+The scene-ledger LLM-free half landed (D-053): `brief/ledger.py` — entry
+shape (`tex_NNNN` gap-free counter, scope FIXED at establishment), scenes
+= maximal PC-location intervals (identity `(location, ordinal)`, a pure
+log fold — zero new event types), the discrete one-way lifecycle
+`{active, pinned} → {retired, contradicted, promoted}`, ONE validation
+gateway (scope/canon-slot/laundering/unique-slot/duplicate/slot-conflict
++ presence via position or the carrier closure; refusals in the §7 shape,
+8-reason closed vocabulary, loud `DeltaError` on shape drift), beat-pass
+contradiction retirement (slot/prop overlap only, first-break cause),
+scene-close bulk retirement (entity-scoped survives), auto-sync inside
+`apply_delta` (D-037 discipline), the texture-OCC mirror + the promotion
+marker — plus the `scene_texture` 7th brief block (position 3; window
+law: current scene (t >= from_tick) or present entity, pinned-first,
+tombstones, ranking caps) and the BRIEF_SPEC §9 ATOMIC flip (purity pair
+→ (log, ledger); §3 renumbered — scene_texture is §3.3). Golden delta
+fixture `tests/fixtures/texture_deltas.json` (13 cases). 435 green (was
+390; +45), ruff clean, golden fixtures byte-identical. KI#36 deleted
+per §5 (closed bg-1, >2 iterations). The narrator LLM boundary remains
+the owner-gated next step (AGENTS §8) — it carries the live promotion
+wiring.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -45,10 +43,9 @@ scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
 
 ## Active KIs
 
-- None. KI#36 (bg-1: doc↔tool drift — the UNDOCUMENTED audit marker was
-  documented but never implemented; plus the 8g truncation-test comment
-  misstatement) — CLOSED bg-1, history in git; deletes at the next
-  STATUS-touching iteration per §5.
+- None. KI#36 (bg-1: doc↔tool drift — UNDOCUMENTED audit marker) closed
+  bg-1 and deleted at iter-10 per §5 (closed > 2 iterations; history in
+  git).
 
 ## FAQ / Pitfalls
 
@@ -132,14 +129,13 @@ scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
   `.gitignore` and empty dirs — verify it exists after any upload.
   `git status --short` shows changes vs HEAD, not what IS in HEAD; after
   structural changes run `git ls-files <path>`.
-- **Content/tone questions → D-030 + the `PACK_SPEC.md` sketch row.**
-  Tone is data asymmetry inside existing systems; growing the pack or
-  writing a pack spec before its trigger = scope creep (AGENTS §2.4;
-  SPECS_BACKLOG header rule). Grim material waits in `pack-1` (phase 6 /
-  2nd setting).
-- **Doc-loop alarm vs owner-requested research.** Consecutive doc-only
-  iterations force a stop (AGENTS §2.5); a fresh owner request is the
-  documented exception (D-022). Code iterations never fire the alarm.
+- **Scope-creep guards: content/tone + the doc-loop alarm (AGENTS §2).**
+  Content/tone questions → D-030 + the `PACK_SPEC.md` sketch row: tone
+  is data asymmetry inside existing systems; growing the pack or
+  writing a pack spec before its trigger = scope creep (§2.4; grim
+  material waits in `pack-1`, phase 6 / 2nd setting). Consecutive
+  doc-only iterations force a stop (§2.5) unless a fresh owner request
+  fires (the D-022 exception); code iterations never trigger the alarm.
 - **Four places, four jobs (D-027) + the ref-graveyard diagnostic.**
   `REFERENCES.md` catalogs; `CORE_DESIGN_RESEARCH.md` §2 synthesizes
   (one line per source); `docs/ref/<source>.md` carries mechanics;
@@ -184,23 +180,44 @@ scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
   NOT resolve); compressed rows keep decision→why→consequence and link
   the single owner (D-024). Pre-collapse history lives in git; due
   again at the phase-1→2 gate.
-- **The read-side layers are pure functions of the log (iter-5/6/8 laws).**
-  Every render entry point builds a fresh `RngBank` from the log HEADER
-  seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
+- **The read-side layers are pure functions of their inputs (iter-5/6/8/10
+  laws).** Every render entry point builds a fresh `RngBank` from the log
+  HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
   growing log keeps its rendered prefix (the session delta-print rides
   on this). A session is one opened Simulator: `open`/`run_steps`/
   `close`; session == batch bytes; `seed <n>` starts a NEW log (INV-5).
   `core/metrics.py` reads `(events, projection)` — the simulator never
   knows a metric exists (L3; Mesa DataCollector inverted). The brief
-  assembler goes further: **zero RNG at all** (dry structured tokens,
-  L2 — `brief/assembler.py`, BRIEF_SPEC §2); its recall `max_items` is
+  assembler: **zero RNG at all** (dry structured tokens, L2 —
+  `brief/assembler.py`, BRIEF_SPEC §2); its recall `max_items` is
   a ranking cap (the O(relevance) top-k), NOT a budget drop — the
-  `[truncated:N]` marker counts budget drops only. **When the 7th block
-  lands the purity pair becomes (log, ledger) — the D-049 determinism
-  quarantine:** the ledger is session render state (auditable via
-  surface/source/cause, never replayable); T1/T2 canon tests never
-  touch it; "zero RNG" stays a claim about assembler internals, never
-  about log-relative determinism of the ledger-fed brief.
+  `[truncated:N]` marker counts budget drops only (same law for the
+  texture caps). **Since iter-10 the purity pair is (log, ledger) — the
+  D-049 determinism quarantine LANDED:** the ledger is session render
+  state (auditable via surface/source/cause, never replayable); T1/T2
+  canon tests never touch it; "zero RNG" stays a claim about assembler
+  internals, never about log-relative determinism of the ledger-fed
+  brief.
+- **The scene ledger's session laws (iter-10, D-053; owner blueprint §1 +
+  BRIEF_SPEC §3.3).** The mediator's beat order is `commit →
+  retire_contradicted(window) → sync_scene → assemble → narrator →
+  apply_delta` — `apply_delta` auto-syncs, so a scene close cannot be
+  forgotten (D-037); retire_contradicted runs BEFORE sync so a
+  contradiction (the stronger, tombstoned signal) wins over scene_close
+  on the same entry. Scene-scoped texture belongs to ONE scene
+  (identity `(location, ordinal)`; a revisit starts empty) and is
+  double-guarded: sync retires it AND the window law requires
+  `t >= scene.from_tick` (a stale unsynced ledger leaks nothing).
+  Entity-scoped texture survives scene changes but renders only when
+  the entity is present (position OR carried by a present non-item).
+  Re-asserting a CONTRADICTED or PROMOTED (scope, slot, value) is
+  laundering (refused + flagged); re-asserting after narrator RETIRE is
+  fresh texture (new candles are legal). A ref resolves against LIVE
+  entries — terminal/unknown → stale_ref refusal; refs to live-but-
+  absent entity texture pin harmlessly (visibility is the read path's
+  law, not the gateway's). The live promotion loop (noun resolution →
+  intent door → `mark_promoted`) is the owner-gated narrator boundary's,
+  never the LLM-free half's.
 - **Gate mechanics + chain counting (iter-6/6a laws).** Same
   playscript/seed (125), only the director flag changes: ON fires
   `director_0000`; OFF keeps seeding (D-005) and produces ≥3 emergent
@@ -215,26 +232,22 @@ scene-ledger LLM-free half is now iter-10 (TASKS re-sequenced).
 
 ## Next step
 
-**Phase 1 continues on track A** — iter-10 is the next code iteration
-(the plan's single owner is `docs/TASKS.md`): the scene-ledger LLM-free
-half per D-048/D-049/blueprint §1 — `brief/ledger.py` (entry shape,
-scene = PC-location interval, discrete lifecycle, structural pinning,
-the validation gateway — scope/establishment-canon/laundering/
-unique-slot checks + the idempotent duplicate rule, contradiction
-retirement, the texture-OCC mirror) + the `scene_texture` 7th brief
-block (pinned-first window + tombstone lines; the BRIEF_SPEC §9 atomic
-flip set) + fixture-shaped narrator deltas + pack lint. The gateway
-reuses iter-9's refusal shape and regen budget (VALIDATION_SPEC §8).
-The narrator LLM boundary itself remains an AGENTS §8 owner checkpoint
-(INV-4 holds until then). **Track B: bg-1 CLOSED** (D-051); bg-2
-(taxonomy) and bg-3 (briefer spike) are unblocked and query the DB
+**Phase 1's LLM-free sequence is COMPLETE** — assembler (iter-8),
+validator (iter-9), scene ledger (iter-10) all landed. The next step
+is the **owner gate** (AGENTS §8): the narrator LLM boundary iteration
+— the live mediator session loop, the structural texture delta in the
+call, texture↔canon precedence checks, laundering-refusal flags, the
+promotion wiring (noun resolution → intent door → `mark_promoted`),
+the pack `requires` texture-noun test, and real `unique_slots` values
+(BRIEF_SPEC §9, VALIDATION_SPEC §10; local inference per TECH_NOTES §1,
+degradation ladder L12 from day one). INV-4 holds until the owner opens
+it. Until the gate opens, track A has no un-gated code iteration
+queued: the LLM-free backlog is `tune-1` (rest action + the D-045(b)
+importance knob — owner-gated per TASKS); the phase-1 deferrals all
+arrive with the mediator, never early. **Track B is unblocked:** bg-2
+(taxonomy) and bg-3 (briefer spike) query the DB
 (`output/df_world_<stem>.sqlite3`; bg-3's reverse validation reuses
-iter-9's `invented`/`regen_count` metrics). Backlog (each stays in its
-TASKS home, none blocks iter-10): `doc-1` VISION freeze review; `qa-1`
-mypy + `ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1`
-10k-tick profile (the full profile stays the gate for anything
-structural); `tune-1` rest action + the D-045(b) importance-rule knob;
-the BRIEF_SPEC §9 deferrals that did not land with the ledger
-(relevance signal, lore scheduling grammar, precondition-filtered
-options, exemplar refresh cadence — all arrive with the mediator,
-never early).
+iter-9's `invented`/`regen_count` metrics); bg-4 (cost notes) is a
+read-only pass. Infra backlog: `doc-1` VISION freeze review; `qa-1`
+mypy + `ci-1` GitHub Actions (owner-gated); `perf-1` 10k-tick profile
+(the full profile stays the gate for anything structural).

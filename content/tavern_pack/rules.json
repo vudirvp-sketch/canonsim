@@ -282,6 +282,7 @@
     "blocks": {
       "directives": {"soft": 60, "hard": 80},
       "scene_delta": {"soft": 150, "hard": 200},
+      "scene_texture": {"soft": 100, "hard": 140},
       "recalled_facts": {"soft": 180, "hard": 240},
       "scheduled_lore": {"soft": 90, "hard": 120},
       "voice_exemplars": {"soft": 90, "hard": 120},
@@ -291,6 +292,11 @@
       "max_items": 12,
       "recency_weight": 1.0,
       "importance_weight": 1.0
+    },
+    "scene_texture": {
+      "max_items": 8,
+      "tombstone_max_items": 4,
+      "unique_slots": []
     },
     "directives": [
       "Narrate only what the brief contains; the log is the canon.",
@@ -315,6 +321,6 @@
       "The taproom hummed, low and careless, the way rooms do before anything happens.",
       "Rain started against the shutters — a patient, unhurried sound."
     ],
-    "notes": "iter-8 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction), the two deterministic recall signals, and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
+    "notes": "iter-8/10 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (empty until the narrator boundary declares real slots), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
   }
 }

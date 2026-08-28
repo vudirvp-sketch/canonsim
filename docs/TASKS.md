@@ -39,24 +39,27 @@ the ≤2-regens protocol + the call-budget reconciliation, golden-set plumbing)
 committed golden set `tests/fixtures/validation_golden.json`. Detail:
 `worklog.md` iter-9 + `docs/VALIDATION_SPEC.md`.
 
-### iter-10+ · phase-1 continuation — todo (sequenced after iter-9)
+### iter-10 · scene-ledger LLM-free half — done
 
-- The scene-ledger LLM-free half (D-048 + the D-049 hardening, mechanism
-  `docs/blueprint/phases.md` §1; protocol clauses owned
-  `docs/VALIDATION_SPEC.md` §8): `brief/ledger.py` (entry shape, scene =
-  PC-location interval, discrete lifecycle, structural pinning, the
-  validation gateway — scope/establishment-canon/laundering/unique-slot
-  checks + the idempotent duplicate rule, contradiction retirement, the
-  texture-OCC mirror) + the `scene_texture` 7th brief block reading it
-  (pinned-first window + tombstone lines) + fixture-shaped narrator deltas
-  under `tests/fixtures/` + pack lint (block budget + caps). BRIEF_SPEC §9
-  deferral flips to written (the atomic flip set is enumerated there).
-- The narrator LLM boundary itself is a separate owner-gated iteration
-  (AGENTS §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
-  ladder L12 from day one); it now also carries the scene-ledger live
-  wiring: the structural texture delta in the narrator call, the
-  texture↔canon precedence checks, the laundering-refusal flags, and
-  the texture noun-test in the pack `requires` closed set.
+`brief/ledger.py` (entry shape, scene = PC-location interval, discrete
+lifecycle, structural pinning, the validation gateway — scope/canon/
+laundering/unique-slot/duplicate, contradiction retirement, scene-close
+bulk retirement, texture-OCC mirror, promotion marker) + the
+`scene_texture` 7th brief block (BRIEF_SPEC §3.3 window law: pinned-first
++ newest-first, tombstones, ranking caps) + the committed golden delta
+fixture `tests/fixtures/texture_deltas.json` + pack lint (block budget,
+caps, unique_slots). The BRIEF_SPEC §9 atomic flip landed (§1/§2/§3/§5.2/
+§6/§7/§9 in one commit). Detail: `worklog.md` iter-10 + D-053.
+
+### iter-11+ · phase-1 continuation — todo
+
+- The narrator LLM boundary itself — the owner-gated iteration (AGENTS
+  §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
+  ladder L12 from day one); it carries the scene-ledger live wiring:
+  the structural texture delta in the narrator call, the texture↔canon
+  precedence checks, the laundering-refusal flags, the texture noun-test
+  in the pack `requires` closed set, and real `unique_slots` values
+  (BRIEF_SPEC §9, VALIDATION_SPEC §10).
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -173,6 +176,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger;
+  D-053): `brief/ledger.py` + the `scene_texture` 7th brief block + the
+  BRIEF_SPEC §9 atomic flip + the committed golden delta fixture + pack
+  lint. 435 green (was 390; +45). No new KIs. Detail: worklog iter-10.
 - bg-1 · 2026-08-29 · DF export pipeline CLOSED (bg-1-sqlite-sink; D-051):
   `scripts/df_import.py` loads a world into SQLite (AC met) over the
   validated survey core — typed cores + EAV + `event_participant` +

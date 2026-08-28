@@ -1,5 +1,7 @@
-"""Brief assembly for the mediator: the deterministic block pipeline
-(`docs/BRIEF_SPEC.md` owns the contract). Landed iter-8; the LLM side of
+"""Brief assembly for the mediator: the deterministic block pipeline +
+the session scene ledger (`docs/BRIEF_SPEC.md` owns the block contract,
+`docs/blueprint/phases.md` §1 the ledger mechanism). Landed iter-8;
+validator iter-9; the scene ledger (7th block) iter-10. The LLM side of
 the pipeline is a later, owner-gated iteration (AGENTS §8)."""
 
 from brief.assembler import (
@@ -12,14 +14,62 @@ from brief.assembler import (
     render_brief,
     token_count,
 )
+from brief.ledger import (
+    ACTIVE,
+    CONTRADICTED,
+    ENTITY_SCOPE_PREFIX,
+    LIVE_STATUSES,
+    PINNED,
+    PROMOTED,
+    REFUSAL_REASONS,
+    RETIRED,
+    SCENE_CLOSE_CAUSE,
+    SCENE_SCOPE_PREFIX,
+    TERMINAL_STATUSES,
+    DeltaError,
+    DeltaReport,
+    LedgerEntry,
+    Refusal,
+    Scene,
+    SceneLedger,
+    SceneSync,
+    current_scene,
+    present_entities,
+    refusal_lines,
+    scenes,
+    split_scope,
+)
 
 __all__ = [
+    "ACTIVE",
     "Block",
     "Brief",
+    "CONTRADICTED",
+    "DeltaError",
+    "DeltaReport",
+    "ENTITY_SCOPE_PREFIX",
+    "LedgerEntry",
+    "LIVE_STATUSES",
+    "PINNED",
+    "PROMOTED",
+    "REFUSAL_REASONS",
+    "RETIRED",
+    "Refusal",
+    "SCENE_CLOSE_CAUSE",
+    "SCENE_SCOPE_PREFIX",
+    "Scene",
+    "SceneLedger",
+    "SceneSync",
+    "TERMINAL_STATUSES",
     "assemble_brief",
     "beats_crossed",
     "brief_from_log",
+    "current_scene",
     "last_beat_tick",
+    "present_entities",
+    "refusal_lines",
     "render_brief",
+    "scenes",
+    "split_scope",
     "token_count",
 ]

@@ -3,10 +3,10 @@
 > Trigger fired at phase-1 start (`docs/SPECS_BACKLOG.md`). Single owner
 > of the brief assembler's contract; the donor design lives in
 > `docs/blueprint/phases.md` §1 (ledger row BRIEF-1), the mechanics in
-> `brief/assembler.py`. Field-level clauses are born just-in-time — §9
-> lists what is deliberately deferred. ≤300 lines. No LLM, no network
-> anywhere in this contract (INV-4 holds until the owner-gated
-> narrator-boundary iteration, AGENTS §8).
+> `brief/assembler.py` + `brief/ledger.py` (the scene ledger). Field-level
+> clauses are born just-in-time — §9 lists what is deliberately deferred.
+> ≤300 lines. No LLM, no network anywhere in this contract (INV-4 holds
+> until the owner-gated narrator-boundary iteration, AGENTS §8).
 
 ## 1. What the brief is
 
@@ -19,21 +19,26 @@ the log. The brief carries **facts as structured tokens**; it never
 dry). `importance` dials creative freedom downstream; the brief itself
 never invents, orders by feel, or drops silently.
 
-Phase-0-era scope (this spec, iter-8): the **deterministic assembler**
-— a pure function of a committed log. The LLM side of the pipeline
-(max-2-calls-per-beat mediator, `VISION.md` §4 Layer 3) is a later,
-owner-gated iteration.
+Phase-0-era scope (this spec, iter-8): the **deterministic assembler**;
+since iter-10 the purity pair is **(log, ledger)** (§2/§3.3). The LLM
+side of the pipeline (max-2-calls-per-beat mediator, `VISION.md` §4
+Layer 3) is a later, owner-gated iteration.
 
 ## 2. Determinism & purity (the D-042/D-043/D-044 read-side family)
 
-- `assemble(events, pack)` is a **pure function of the log**: same log
-  + same pack → **same brief bytes** in any process, any call order,
-  any `PYTHONHASHSEED`.
+- `assemble(events, pack, ledger)` is a **pure function of (log, ledger)**
+  (the iter-10 widening, D-049): same log + same ledger + same pack →
+  **same brief bytes** in any process, any call order, any
+  `PYTHONHASHSEED`. `ledger=None` is byte-identical to an empty ledger.
+- The ledger is **session render state, never canon** (the D-049
+  determinism quarantine): auditable (surface/source/cause per entry),
+  never replayable — its inputs include the narrator. Canon replay
+  (T1/T2) never touches it; "zero RNG" is assembler-internal only.
 - The assembler draws **no randomness at all** (unlike the chronicle's
   cosmetic stream): every block is `sorted()`/construction-order
   iteration over deterministic inputs (INV-2).
 - The assembler **writes nothing** (INV-1): it reads events, never
-  emits them. A brief pass that emits canon events is the named
+  emits them — a brief pass that emits canon events is the named
   violation.
 - Dynamic facts are never vector-searched (`TECH_NOTES.md` §6): the
   recalled-facts block reads the PC's own `knowledge` records
@@ -43,26 +48,28 @@ owner-gated iteration.
   chronicle: same events prefix → same block items for the same beat
   window (the window itself moves with the log's last tick).
 
-## 3. The block pipeline (six blocks, fixed order)
+## 3. The block pipeline (seven blocks, fixed order)
 
 Assembled and rendered in this order (BRIEF-1; letta block-manager
-layout; voice exemplars sit near the context end — position 5 of 6,
-the live-char author's-note geometry):
+layout; voice exemplars near the context end — the live-char
+author's-note geometry; scene_texture at position 3 — current-scene
+continuity outranks recall, D-049):
 
-| # | Block | Source (iter-8) | Item shape |
+| # | Block | Source (iter-8/10) | Item shape |
 |---|---|---|---|
 | 1 | `directives` | pack `brief.directives` (static lines) | line, verbatim |
 | 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
-| 3 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
-| 4 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
-| 5 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
-| 6 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
+| 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
+| 4 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
+| 5 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
+| 6 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
+| 7 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
 
 ### 3.1 Directives
 
 Static mode-role lines, verbatim, pack data. Never dropped, never
 truncated (§5). These will seed the narrator's system prompt at the
-LLM boundary; today they are data rendered as text and nothing more.
+LLM boundary.
 
 ### 3.2 Scene delta (the beat-boundary law, D-018)
 
@@ -70,12 +77,11 @@ What the PC perceived **since the last beat** — a delta, never a world
 dump; size bounded O(perception) regardless of log length. Exact
 clauses:
 
-- Window: events with `t > last_beat_tick`, where `last_beat_tick` is
-  the largest beat tick ≤ the log's last event tick (beats = the pack's
-  `urgencies.beat_ticks` offsets repeated every
-  `time.ticks_per_day`, excluding a beat at t=0 — the mirror of the
-  loop's forward scheduling, `core/loop.py` `_next_beat_after`). No
-  beat crossed → the window is the whole log (run start).
+- Window: events with `t > last_beat_tick` — the largest beat tick ≤
+  the log's last event tick (beats = the pack's `urgencies.beat_ticks`
+  offsets repeated every `time.ticks_per_day`, excluding a beat at t=0
+  — the backward mirror of `core/loop.py` `_next_beat_after`). No beat
+  crossed → the window is the whole log (run start).
 - Perceived (the blind-NPC law, T3): the PC is the event's actor, OR
   the event carries a knowledge record with `who == player_id`. No
   record → not in the delta.
@@ -84,7 +90,35 @@ clauses:
 - Display names (pack `entities.json`) resolve ids; the line is dry —
   no prose, no embellishment.
 
-### 3.3 Recalled facts (the three-signal shape, deterministic inputs)
+### 3.3 Scene texture (the 7th block — the ledger window, D-048/D-049)
+
+The scene ledger (`brief/ledger.py`; mechanism blueprint §1, protocol
+VALIDATION_SPEC §8) records established texture — the narrator's
+invented details canon never knew. This block is its **windowed
+view**: the ledger never evicts, all boundedness lives here.
+
+- **Window law.** Live (`active`+`pinned`) entries whose scope matches the
+  current scene: `scene:<loc>` with `loc == the current scene's location
+  AND t >= scene.from_tick` (texture from an earlier scene at the same
+  location is gone with that scene — a revisit starts empty, even if a
+  stale ledger still holds it live), or `entity:<id>` whose entity is
+  **present** (positioned at the scene location, or an item carried by a
+  present non-item — the carrier closure; the PC is covered by
+  construction). Presence is a structural projection read.
+- **Ranking.** Pinned first, then newest-first; construction-order
+  tie-break (ids allocate in append order — the index is the
+  tie-break). Capped by `max_items` — a ranking cap, never a budget
+  drop (§3.4's D-047 law: beyond-cap items render nothing, never
+  dropped).
+- **Tombstones.** `contradicted` entries in the same scope window
+  render as short tombstone lines (slot + refuted + the causing
+  event), newest-first, capped by `tombstone_max_items`, AFTER the
+  live lines (prevention + enforcement both bounded, D-049).
+- **Line shapes** (§3 table): raw ids, never display names — the scope
+  is an address, not prose; the `surface` (verbatim introducing prose)
+  is ledger audit data and NEVER renders (L2).
+
+### 3.4 Recalled facts (the three-signal shape, deterministic inputs)
 
 Top-k over the PC's knowledge records ranked by the Generative Agents
 three-signal shape with deterministic inputs:
@@ -93,7 +127,6 @@ three-signal shape with deterministic inputs:
 score = recency_weight / (1 + current_tick - record.at)
       + importance_weight * rank(record.source_event.importance)
 ```
-
 - `recency_weight`, `importance_weight`, `max_items`: pack data.
   `rank`: low=0, medium=1, high=2.
 - Tie-break: acquisition order (construction order, INV-2).
@@ -104,26 +137,25 @@ score = recency_weight / (1 + current_tick - record.at)
   law), not a budget drop — records beyond it never become block
   items, and the `[truncated:N]` marker counts budget drops only
   (§5). The third signal (**relevance**: cascade-free keyword match
-  against a query) arrives with the mediator, which owns the query
-  (§9). Until then the ranking is the two deterministic signals.
+  against a query) arrives with the mediator (§9); until then the
+  ranking is the two deterministic signals.
 
-### 3.4 Scheduled static lore
+### 3.5 Scheduled static lore
 
 Pack lore entries with a **beat-window schedule**: an entry is
 eligible when `from_beat <= beats_crossed < to_beat`, where
 `beats_crossed` counts beat boundaries ≤ the log's last tick. Order:
 pack declaration order. The full live-char scheduling grammar
 (probability / cooldown / sticky / range-cascade / `exclude_key`) is
-deferred (§9) — it needs the mediator's message cadence to mean
-anything.
+deferred (§9).
 
-### 3.5 Voice exemplars (the voice-isolation law, L2)
+### 3.6 Voice exemplars (the voice-isolation law, L2)
 
 Static style lines, verbatim, pack data, injected near the context
-end. They are the ONLY place style lives; the other five blocks stay
+end. They are the ONLY place style lives; the other six blocks stay
 dry. Refresh cadence (every 5–10 messages) is a mediator concern (§9).
 
-### 3.6 Active options
+### 3.7 Active options
 
 The pack's action intents as a grammar-constrained choice list —
 intent name + declared `fields`, pack order. This is the phase-2
@@ -170,7 +202,7 @@ After per-block assembly, if the total exceeds `brief.total_hard`,
 whole blocks are evicted in ascending priority order:
 
 ```
-scheduled_lore -> recalled_facts -> scene_delta -> voice_exemplars -> active_options
+scheduled_lore -> recalled_facts -> scene_delta -> scene_texture -> voice_exemplars -> active_options
 ```
 
 **Directives are never evicted.** An evicted block renders as its
@@ -188,10 +220,9 @@ substitutes for the other (phases.md §1).
 
 ## 6. Pack data (`rules.json::brief`)
 
-One cohesive section — budgets, ranking weights, and the static text
-(directives, lore, exemplars). `templates.json` stays the tracery
-grammar (chronicle prose); the brief's static text is mediator data,
-not chronicle grammar.
+One cohesive section — budgets, weights, static text.
+`templates.json` stays the tracery grammar (chronicle prose); the
+brief's static text is mediator data, not chronicle grammar.
 
 ```json
 "brief": {
@@ -199,6 +230,7 @@ not chronicle grammar.
   "blocks": {
     "directives":      {"soft": 60, "hard": 80},
     "scene_delta":     {"soft": 150, "hard": 200},
+    "scene_texture":   {"soft": 100, "hard": 140},
     "recalled_facts":  {"soft": 180, "hard": 240},
     "scheduled_lore":  {"soft": 90, "hard": 120},
     "voice_exemplars": {"soft": 90, "hard": 120},
@@ -206,6 +238,7 @@ not chronicle grammar.
   },
   "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
                       "importance_weight": 1.0},
+  "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": []},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
   "voice_exemplars": ["..."]
@@ -213,14 +246,17 @@ not chronicle grammar.
 ```
 
 Load-time lint (fails loudly, `core/pack.py`): the `blocks` key set is
-exactly the six block ids; every budget is a positive int with
+exactly the seven block ids; every budget is a positive int with
 `soft <= hard`; `total_hard` a positive int; `directives` a non-empty
 list of strings; every `directives` line fits its own hard budget
 (never-dropped data must fit by construction); `lore` entries carry
 `id` (unique), `text`, `from_beat >= 0 < to_beat` (ints);
 `voice_exemplars` a list of strings; `recalled_facts` weights
-non-negative numbers, `max_items >= 1`. The eviction order (§5.2) is
-architecture, not balance — it lives in code, not in the pack.
+non-negative numbers, `max_items >= 1`; `scene_texture` caps integers
+>= 1, `unique_slots` unique non-empty strings (empty = no globally-
+unique slots; real values arrive with the narrator boundary). The
+eviction order (§5.2) is architecture, not balance — it lives in code,
+not in the pack.
 
 ## 7. Render format (exact bytes)
 
@@ -240,24 +276,23 @@ architecture, not balance — it lives in code, not in the pack.
   newline. Line shapes per §3. The arrow in scene-delta lines is `->`
   (ASCII — the brief is machine-facing; the chronicle's `→` is
   prose-facing).
-- `brief_from_log(path, pack, schema)` reads a committed log and
-  renders its brief — the golden-fixture byte-identity test pins this
-  exact format; any format change is a spec change first.
+- `brief_from_log(path, pack, schema, ledger=None)` reads a committed
+  log and renders its brief — the golden-fixture byte-identity entry
+  point; §8 owns the change discipline.
 
 ## 8. Versioning
 
 The brief is a derived read-side artifact (no committed bytes), so
 there is no `schema_version` to bump. The **format contract** (§7 line
 shapes, §5 marker text) is owned by this spec: a change to rendered
-bytes = a spec edit in the same commit as the code change. Tests pin
-the golden fixture's exact brief — drift is loud.
+bytes = a spec edit in the same commit as the code change.
 
 ## 9. Deferred (just-in-time — writing these early = scope creep)
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.3 |
-| **Scene-texture block** (`scene_texture`, 7th block, position 3; reads the session scene ledger — assemble becomes a pure function of **(log, ledger)**: same (log, ledger, pack) → same bytes; the ledger is session render state, never canon — the determinism quarantine, D-049; entry lifecycle + scene definition + structural pinning + tombstone lines + promotion: `docs/blueprint/phases.md` §1, D-048/D-049). The landing is an ATOMIC flip, one commit: §1 wording (log → (log, ledger)), §2 purity pair, §3 block table + position, §5.2 eviction order (`scene_texture` between scene_delta and voice_exemplars), §6 pack data + lint (block budget, max_items cap, tombstone cap). The ledger never evicts — all boundedness is this spec's window law (blueprint §1) | the ledger's LLM-free half may land as track-A code (fixture-shaped deltas); the live writer is the owner-gated narrator boundary | blueprint §1 (the scene ledger) |
+| Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.4 |
+| Live texture promotion wiring (noun resolution → intent door → `mark_promoted`; the pack `requires` texture-noun test; real `unique_slots` values) | the owner-gated narrator boundary | blueprint §1 |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |

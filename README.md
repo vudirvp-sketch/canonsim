@@ -30,21 +30,24 @@ seed 125 gate playscript), `scripts/balance_harness.py` (KI#4 close —
 the 1000-sim distribution harness; full table in `output/`). Phase 1
 (narrator over the log) opened with the iter-7 intake and landed its
 first deliverable at iter-8: `docs/BRIEF_SPEC.md` + `brief/assembler.py`
-— the deterministic six-block brief (budgets, eviction, voice
-isolation) as pure functions of the log, zero RNG, byte-identical on
-the golden fixture. Its second deliverable landed at iter-9:
+— the deterministic seven-block brief (budgets, eviction, voice
+isolation) as pure functions of (log, ledger), zero RNG, byte-identical
+on the golden fixture. Its second deliverable landed at iter-9:
 `docs/VALIDATION_SPEC.md` + `brief/validator.py` — the mediator's
 deterministic validation gate (the closed proposal document — prompt
 injection neutralized structurally; honest verdicts
 supported/contradicted/insufficient_data under closed-world semantics;
 ExpectedVersion OCC; the fact-transaction pass-through; the ≤2-regens
-protocol; a committed golden set pinning verdict semantics). 390
-tests green, ruff clean, golden fixtures byte-identical. Next:
-iter-10, the scene-ledger LLM-free half (`docs/TASKS.md`); the
-narrator LLM boundary is an owner-gated checkpoint (AGENTS §8).
-Track B: bg-1 CLOSED — `scripts/df_import.py` loads a Legends export
-into SQLite (recipe `docs/TECH_NOTES.md` §3.2, D-051); bg-2..bg-4
-(taxonomy, briefer spike, cost notes) query that DB.
+protocol; a committed golden set pinning verdict semantics). Its third
+landed at iter-10: `brief/ledger.py` + the `scene_texture` 7th brief
+block — the session scene ledger (the texture stream: entry lifecycle,
+scenes as PC-location intervals, the one validation gateway, canon
+outranks texture, tombstones; the BRIEF_SPEC §9 atomic flip — the
+purity pair is now (log, ledger), D-053). 435 tests green, ruff clean,
+golden fixtures byte-identical. Next: the narrator LLM boundary — an
+owner-gated checkpoint (AGENTS §8); track A's LLM-free sequence is
+complete, track B (bg-2..bg-4) queries the bg-1 SQLite sink
+(`docs/TECH_NOTES.md` §3.2, D-051).
 
 ## For AI agents (primary audience)
 

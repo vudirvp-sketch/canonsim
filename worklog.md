@@ -8,6 +8,29 @@
 > since iter-5).
 
 ---
+iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
+- `brief/ledger.py` (D-053): the entry shape + discrete one-way
+  lifecycle, scenes as PC-location intervals (a pure log fold — zero
+  new event types), the ONE validation gateway (scope/canon-slot/
+  laundering/unique-slot/duplicate/slot-conflict + presence incl. the
+  carrier closure; 8-reason closed refusal vocabulary in the §7 shape,
+  loud DeltaError on document drift), beat-pass contradiction
+  retirement, scene-close bulk retirement, auto-sync inside apply_delta
+  (D-037), texture-OCC withdrawals + the promotion marker. Plus the
+  `scene_texture` 7th brief block (position 3; window law, pinned-first,
+  tombstones, ranking caps) and the BRIEF_SPEC §9 ATOMIC flip (purity
+  pair → (log, ledger); §3 renumbered — scene_texture is §3.3).
+- 15 files (above the 3–5 soft cap; the code+spec+suite+golden set plus
+  the AGENTS §6 sync set — iter-9 precedent): ledger.py (new),
+  assembler.py, brief/__init__.py, core/pack.py (BRIEF_BLOCK_IDS + lint),
+  rules.json (block budget + scene_texture config), test_ledger.py (new,
+  32), test_brief.py (+13), texture_deltas.json (new golden fixture,
+  13 cases), BRIEF_SPEC (flip, held at 300 via a §6.1 cruft pass),
+  VALIDATION_SPEC §8/§10, TASKS, AGENT_NAVIGATION, DECISIONS D-053,
+  STATUS (KI#36 deleted per §5), README, this worklog.
+  390→435 green, ruff clean, golden fixtures byte-identical. No new KIs.
+- iter-8a evicted per the one-in/one-out cap (history in git).
+---
 iter-9 · 2026-08-29 · VALIDATION_SPEC + validator LLM-free half (iter-9-validation-spec)
 - The phase-1 spec trigger fired: `docs/VALIDATION_SPEC.md` (closed
   proposal document — no prose field exists, injection neutralized
@@ -207,21 +230,7 @@ iter-8b · 2026-08-28 · scene-ledger hardening (iter-8b-scene-ledger-hardening)
 - 329 tests green, ruff clean, golden fixture byte-identical.
   DECISIONS transiently 33/30 (collapse at the phase-1→2 gate, D-034).
 ---
-iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
-- Owner-requested continuity question (long scenes lose narrator texture;
-  the brief is log-pure): absorbed the owner-supplied memory atlas as
-  ref-16 (`docs/ref/agent_memory_atlas.md`, MIT verified) and designed
-  the scene ledger into `docs/blueprint/phases.md` §1 — session-scoped
-  append-only mediator stream, discrete states, canon outranks texture,
-  intent-door promotion, laundering refusal, no TTL (D-048).
-- Spec triggers synced (SPECS_BACKLOG VALIDATION_SPEC row, BRIEF_SPEC §9
-  deferral) + TASKS sequencing + intake sync set (REFERENCES,
-  REFERENCES_DEEP, CORE_DESIGN_RESEARCH §2, AGENT_NAVIGATION §1).
-  12 files — task-mandated design set + the intake/sync set (iter-8
-  precedent). Docs-only (D-022 owner-request exception).
-- 329 tests green, ruff clean, golden fixture byte-identical. DECISIONS
-  transiently 32/30 (collapse due at the phase-1→2 gate, D-034).
----
+(iter-8a deleted at iter-10 per the one-in/one-out cap; history in git.)
 (iter-8 deleted at iter-9 per the one-in/one-out cap; history in git.)
 (iter-7 deleted at bg-1 per the one-in/one-out cap; history in git.)
 (iter-6a deleted at iter-8h per the one-in/one-out cap; history in git.)
@@ -231,6 +240,3 @@ iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
 (iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)
 (iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)
 (iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)
-(iter-4a deleted at iter-8a per the one-in/one-out cap; history in git.)
-(iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
-(iter-1 deleted at iter-8 per the one-in/one-out cap; history in git.)
