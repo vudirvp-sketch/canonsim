@@ -1,18 +1,21 @@
 # STATUS — canonsim
 
-Iteration: 8 (`iter-8-brief-spec-assembler`) · Phase: 1 — brief
-assembler · Date: 2026-08-28 · the `BRIEF_SPEC.md` trigger fired at
-phase-1 start: the spec written from the block-pipeline design
-(`docs/blueprint/phases.md` §1, ≤300 lines, field-level clauses
-just-in-time with a §9 deferral table), and the deterministic assembler
-landed in `brief/assembler.py` — pure functions of the log, zero RNG
-(byte-identity on the golden fixture across calls,
-PYTHONHASHSEED-independent). Two-level budgets (soft fill target /
-hard per-item ceiling / total_hard whole-block eviction),
-`[truncated:N]` markers, the never-drop-directives law — all
-unit-tested (+30 tests). D-047 recorded (DECISIONS transiently 31/30
-mid-phase — the iter-1 precedent; collapse due at the phase-1→2 gate
-per D-034). KI#4 deleted (closed >2 iterations).
+Iteration: 8a (`iter-8a-scene-ledger-design`) · Phase: 1 · Date:
+2026-08-28 · owner-requested design pass (the D-022 exception) on the
+session-continuity question: a long scene loses narrator-invented
+texture because the brief is a pure function of the log and "free
+texture at low importance" (`VISION.md` §5) had no storage. Outcome:
+D-048 — the **scene ledger** (mechanism owner `docs/blueprint/phases.md`
+§1): a session-scoped, append-only, mediator-owned second stream;
+discrete lifecycle states; canon always outranks texture; promotion
+only through the intent door; laundering refusal; no TTL; dies with
+the session. Pattern source absorbed as ref-16
+(`docs/ref/agent_memory_atlas.md` — the owner-supplied 151-system
+memory survey, MIT verified via GitHub API). Spec triggers synced
+(SPECS_BACKLOG VALIDATION_SPEC row + BRIEF_SPEC §9 deferral);
+sequencing added to TASKS. Docs-only iteration — no doc-loop alarm
+(iter-8 was code-heavy); 329 tests green, ruff clean, fixture
+byte-identical.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -189,14 +192,17 @@ per D-034). KI#4 deleted (closed >2 iterations).
 **Phase 1 continues** — the plan's single owner is `docs/TASKS.md`
 (Track A: iter-9+ = VALIDATION_SPEC + the validator's LLM-free half —
 fact transaction, ExpectedVersion OCC, ≤2 regens, INSUFFICIENT_DATA
-default, golden-set plumbing; the narrator LLM boundary itself is an
-AGENTS §8 owner checkpoint — INV-4 holds until then). Track B
-(`bg-1..bg-4`) stays unblocked in parallel — note bg-1 needs the
-owner's local DF Classic + DFHack setup (world export cannot run in
-this sandbox). Backlog that did NOT land in iter-8 (each stays in its
-TASKS home, none blocks iter-9): `doc-1` VISION freeze review; `qa-1`
-mypy + `ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1`
-10k-tick profile; `tune-1` rest action + the D-045(b) importance-rule
-knob; the BRIEF_SPEC §9 deferrals (relevance signal, lore scheduling
-grammar, precondition-filtered options, exemplar refresh cadence — all
-arrive with the mediator, never early).
+default, golden-set plumbing; then the scene-ledger LLM-free half —
+`brief/ledger.py` + the `scene_texture` 7th block + fixture-shaped
+deltas, per D-048/blueprint §1 — the narrator LLM boundary itself
+remains an AGENTS §8 owner checkpoint, INV-4 holds until then, and it
+carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
+unblocked in parallel — note bg-1 needs the owner's local DF Classic
++ DFHack setup (world export cannot run in this sandbox). Backlog
+that did NOT land in iter-8a (each stays in its TASKS home, none
+blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
+GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;
+`tune-1` rest action + the D-045(b) importance-rule knob; the
+BRIEF_SPEC §9 deferrals (relevance signal, lore scheduling grammar,
+precondition-filtered options, exemplar refresh cadence — all arrive
+with the mediator, never early).

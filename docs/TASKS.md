@@ -35,9 +35,19 @@ log; `rules.json::brief` pack contract + `core/pack.py` lint. Detail:
 - `VALIDATION_SPEC.md` trigger fires (fact transaction, ExpectedVersion
   OCC, ≤2 regens, INSUFFICIENT_DATA default) + the validator's LLM-free
   half (proposal shaping, stale-version rejection, golden-set plumbing).
+- The scene-ledger LLM-free half (D-048, mechanism
+  `docs/blueprint/phases.md` §1): `brief/ledger.py` (entry shape,
+  discrete lifecycle, laundering refusal, contradiction retirement) +
+  the `scene_texture` 7th brief block reading it + fixture-shaped
+  narrator deltas under `tests/fixtures/` + pack lint (block budget).
+  Sequenced after VALIDATION_SPEC's LLM-free half — the delta grammar
+  informs the fixture shapes. BRIEF_SPEC §9 deferral flips to written.
 - The narrator LLM boundary itself is a separate owner-gated iteration
   (AGENTS §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
-  ladder L12 from day one).
+  ladder L12 from day one); it now also carries the scene-ledger live
+  wiring: the structural texture delta in the narrator call, the
+  texture↔canon precedence checks, the laundering-refusal flags, and
+  the texture noun-test in the pack `requires` closed set.
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -148,6 +158,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8a · 2026-08-28 · scene-ledger design pass (owner-requested
+  continuity question: long scenes lose narrator-invented texture —
+  the brief is a pure function of the log and free texture had no
+  home): `docs/ref/agent_memory_atlas.md` written (the owner-supplied
+  151-system memory survey distilled: 7 marks, 22 patterns, per-pattern
+  take/adapt/reject for canonsim; MIT verified via GitHub API); the
+  scene ledger designed into `docs/blueprint/phases.md` §1 (D-048:
+  session-scoped append-only mediator-owned ledger; discrete states;
+  canon outranks texture; promotion only through the intent door;
+  laundering refusal; no TTL; dies with the session); spec triggers
+  synced (SPECS_BACKLOG VALIDATION_SPEC row + BRIEF_SPEC §9 deferral);
+  TASKS sequencing added. Docs-only — the D-022 owner-request exception
+  (no doc-loop: iter-8 was code-heavy). 329 tests green, ruff clean,
+  fixture byte-identical.
 - iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler: `docs/BRIEF_SPEC.md`
   (trigger fired at phase-1 start — six-block pipeline, two-level budgets
   soft-fill/hard-ceiling, whole-block eviction with `[truncated:N]`

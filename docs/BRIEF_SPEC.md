@@ -257,6 +257,7 @@ the golden fixture's exact brief — drift is loud.
 | Deferred | Arrives with | Owner |
 |---|---|---|
 | Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.3 |
+| **Scene-texture block** (`scene_texture`, 7th block, position 3; reads the session scene ledger — assemble becomes a pure function of (log, ledger); same pair → same bytes; entry lifecycle + promotion: `docs/blueprint/phases.md` §1, D-048) | the ledger's LLM-free half may land as track-A code (fixture-shaped deltas); the live writer is the owner-gated narrator boundary | blueprint §1 (the scene ledger) |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |

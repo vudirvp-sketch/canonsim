@@ -141,6 +141,7 @@
 | nomic-embed-text (nomic-ai) | verify | light CPU embedder for static-lore vectors (phase 4; §14) |
 | bge-m3 (BAAI) | verify | multilingual CPU-friendly embedder — alternative to nomic-embed-text (phase 4; §14) |
 | cross-encoder rerankers (e.g. bge-reranker-v2-m3) | verify | re-rank top-k static-lore candidates (optional, phase 4+; §14) |
+| agent-memory-atlas (neoneye) | MIT | 151-system agent-memory survey: 7 capability marks + 22 named patterns — pattern source for the phase-1 scene ledger (D-048) + phase-4 memory checklist (`docs/ref/agent_memory_atlas.md`) |
 
 ## 6. Storage & event sourcing [P]
 

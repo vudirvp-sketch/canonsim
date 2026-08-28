@@ -6,19 +6,20 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 
 ---
-iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4 (iter-4a-code-audit)
-- Read core (knowledge/crime/director/urgencies/states/loop) + tests
-  + pack vs doc owners; probes: 60-seed day1 sweep × director on/off,
-  T1 double-runs, T2 folds, crafted records — 124 runs, zero crashes.
-  4 KIs fixed: KI#17 autonomous completions fed player steps (feed
-  gates on player actor); KI#18 caught→suspect downgrade (flip guards
-  the status_values progression); KI#19 reset_on_rotation unimplemented
-  (rotation_resets + per-axis last-change decay baseline); KI#20 dead
-  pack keys deleted (document_check section, document_check_at,
-  spike_on_alarm). 11 files — audit fix set + mandated sync set.
-- Tests 219→225 green (+6 regressions), ruff clean, golden fixture
-  byte-identical; D-041 recorded; KI#13–16 deleted (closed >2 iters);
-  FAQ gains the never-advance-the-script + decay-baseline laws.
+iter-8a · 2026-08-28 · scene-ledger design pass (iter-8a-scene-ledger-design)
+- Owner-requested continuity question (long scenes lose narrator texture;
+  the brief is log-pure): absorbed the owner-supplied memory atlas as
+  ref-16 (`docs/ref/agent_memory_atlas.md`, MIT verified) and designed
+  the scene ledger into `docs/blueprint/phases.md` §1 — session-scoped
+  append-only mediator stream, discrete states, canon outranks texture,
+  intent-door promotion, laundering refusal, no TTL (D-048).
+- Spec triggers synced (SPECS_BACKLOG VALIDATION_SPEC row, BRIEF_SPEC §9
+  deferral) + TASKS sequencing + intake sync set (REFERENCES,
+  REFERENCES_DEEP, CORE_DESIGN_RESEARCH §2, AGENT_NAVIGATION §1).
+  12 files — task-mandated design set + the intake/sync set (iter-8
+  precedent). Docs-only (D-022 owner-request exception).
+- 329 tests green, ruff clean, golden fixture byte-identical. DECISIONS
+  transiently 32/30 (collapse due at the phase-1→2 gate, D-034).
 ---
 iter-4 · 2026-08-28 · director + goal ticker (iter-4-director-goal-ticker)
 - core/director.py + core/urgencies.py + core/states.py (D-038:
@@ -83,6 +84,7 @@ iter-2 · 2026-08-28 · actions — the 12, checks, price (iter-2-actions)
   checks auto-succeed at v0.1 numbers). Fix during work: spread-pass spot
   prefix mismatch (prop keys vs spot names) caught by the day1 probe.
 ---
+(iter-4a deleted at iter-8a per the one-in/one-out cap; history in git.)
 (iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
 (iter-1 deleted at iter-8 per the one-in/one-out cap; history in git.)
 ---
