@@ -150,12 +150,17 @@ import (KI#33).
   from a clean legends-mode save; the bug is on DFHack's side. And the
   export is not well-formed XML: raw CP437 control bytes (item-quality
   symbols) sit inside artifact names — byte-level sanitize before parse
-  (measured: 24 bytes per world; the recipe lives in `TECH_NOTES.md` §3
-  / `scripts/df_survey.py`).
+  (measured: 12–24 bytes per world; the recipe lives in `TECH_NOTES.md`
+  §3 / `scripts/df_survey.py`).
+- **The exporter can die mid-write (KI#34, iter-8f)** — one world arrived
+  truncated at 2.91 GB (cut inside a battle collection, no `</df_world>`;
+  the complete re-export is 4.95 GB and reproduces the recovered prefix
+  counts exactly). Tail-check + best-effort closing-tag synthesis,
+  loudly PARTIAL: `TECH_NOTES.md` §3.
 - **Scale is brutal and the format is bigger than the docs assumed** —
-  measured 315 MB / 1.99 GB per world (0.45M / 1.22M events), 10–20×
-  the old ballpark; the parser must stream with clearing (a
-  non-clearing parse OOMs 4 GB on the medium world) —
+  measured 315 MB / 1.99 GB / 4.95 GB per world (0.45M / 1.22M / 0.93M
+  events), 10–20× the old ballpark; the parser must stream with clearing
+  (a non-clearing parse OOMs 4 GB on the medium world) —
   `TECH_NOTES.md` §3. Plus companion repeats `historical_events` with
   complementary fields — import selectively.
 - **Proprietary.** We read exported data, never DF's code or assets

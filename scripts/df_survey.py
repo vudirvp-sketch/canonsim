@@ -18,8 +18,12 @@ Parsing law (bg-1 hardening, `docs/ref/df_design.md` "What we adapt"):
 stream with `iterparse` + element `clear()` + periodic section `clear()`
 (never DOM), sanitize XML-invalid control bytes at the byte level (the DF
 exporter writes raw CP437 quality symbols into artifact names — measured:
-24 bytes per world), no network. This script is the validated parsing core
-bg-1's SQLite loader is expected to reuse.
+12–24 bytes per world), no network. Truncated exports (the exporter can die
+mid-write, losing `</df_world>`; measured on a 2.9 GB export) are caught
+by a tail check and recovered best-effort: the missing closing tags are
+synthesized at EOF so the parse completes, with loud PARTIAL warnings.
+This script is the parsing core bg-1's SQLite loader is expected to reuse
+(truncation survival since iter-8f).
 
 Track law: pure stdlib counting — no RNG, no network, no LLM (INV-4);
 report content is deterministic (sorted tables); the trailing
@@ -38,6 +42,8 @@ from __future__ import annotations
 
 import argparse
 import collections
+import os
+import re
 import resource
 import sys
 import time
@@ -50,9 +56,11 @@ DEFAULT_OUT = REPO / "output"
 
 # --- F7 classification (the single owner of the category assignment). ---
 # Keys are the literal `<type>` strings of the exports (display style with
-# spaces — NOT snake_case; KI#33). Covers the full 100-type vocabulary
-# measured across the owner's two exports; an unknown type lands in
-# UNCLASSIFIED and is reported loudly so the table can be extended.
+# spaces — NOT snake_case; KI#33). Covers the type vocabulary measured
+# across the owner's exports — the count lives in `docs/TECH_NOTES.md`
+# §3.1 (single owner); an unknown type lands in UNCLASSIFIED and is
+# reported loudly so the table can be extended (KI#35: "site tribute
+# forced" was the first such extension).
 CATEGORY_MICRO = "micro (street/personal life)"
 CATEGORIES = (
     "bookkeeping",
@@ -107,6 +115,7 @@ TYPE_CATEGORY: dict[str, str] = {
     "peace accepted": "war-geopolitics",
     "peace rejected": "war-geopolitics",
     "site dispute": "war-geopolitics",
+    "site tribute forced": "war-geopolitics",
     "reclaim site": "war-geopolitics",
     "hf attacked site": "war-geopolitics",
     "hf destroyed site": "war-geopolitics",
@@ -213,6 +222,128 @@ class SanitizingReader:
 
     def close(self) -> None:
         self._f.close()
+
+
+def _tail_closes_root(path: Path, sniff: int = 4096) -> bool:
+    """True when the file tail carries `</df_world>` (intact export)."""
+    with open(path, "rb") as fh:
+        size = fh.seek(0, os.SEEK_END)
+        fh.seek(max(0, size - sniff))
+        return fh.read().rstrip().endswith(b"</df_world>")
+
+
+class _TagStack:
+    """Streaming open-element tracker over sanitized bytes (best-effort).
+
+    DF output carries no comments/CDATA and no `>` inside attribute values,
+    so a flat tag scan mirrors the element nesting; a scanner artifact could
+    only shift the synthesized closing tags — it never touches intact-export
+    numbers, because recovery runs only on files that failed the tail check.
+    """
+
+    _TAG = re.compile(
+        rb"<(/?)([A-Za-z_:][\w.:-]*)((?:\"[^\"]*\"|'[^']*'|[^>\"'])*?)(/?)>"
+    )
+
+    def __init__(self) -> None:
+        self._stack: list[bytes] = []
+        self._carry = b""
+
+    def feed(self, data: bytes) -> None:
+        buf = self._carry + data
+        pos = 0
+        for m in self._TAG.finditer(buf):
+            name = m.group(2)
+            if m.group(1):  # </tag>
+                if name in self._stack:
+                    while self._stack[-1] != name:
+                        self._stack.pop()
+                    self._stack.pop()
+            elif not m.group(4):  # <tag> — not self-closing
+                self._stack.append(name)
+            pos = m.end()
+        rest = buf[pos:]
+        rest = rest[rest.rfind(b">") + 1:]  # drop text; keep a partial tag
+        lt = rest.find(b"<")
+        self._carry = rest[lt:] if lt != -1 else b""
+
+    def closing_bytes(self) -> bytes:
+        """Closing tags for the still-open elements, innermost first."""
+        return b"".join(b"</" + name + b">" for name in reversed(self._stack))
+
+    def depth(self) -> int:
+        return len(self._stack)
+
+    def innermost(self) -> bytes:
+        return self._stack[-1] if self._stack else b""
+
+
+class RecoveringReader:
+    """SanitizingReader wrapper that survives truncated DF exports (KI#34).
+
+    The DF exporter can die mid-write (measured: a 2.9 GB export ends inside
+    a battle collection, no `</df_world>`; the archive CRC was intact, so
+    the cut happened at export time). A raw iterparse then aborts with
+    ParseError at EOF. This wrapper tracks the open-element stack while
+    streaming and synthesizes the missing closing tags at EOF so the parse
+    completes; everything after the cut was never written, so the counted
+    prefix stays honest — but every number from such a file is PARTIAL,
+    and the stderr warnings say so.
+    """
+
+    def __init__(self, inner: SanitizingReader, name: str) -> None:
+        self._inner = inner
+        self._name = name
+        self._tags = _TagStack()
+        self._pending = b""
+        self._recovered = False
+
+    @property
+    def replaced(self) -> int:
+        return self._inner.replaced
+
+    def read(self, size: int = -1) -> bytes:
+        if self._pending:
+            out = self._pending[:size] if size > 0 else self._pending
+            self._pending = self._pending[len(out):]
+            return out
+        data = self._inner.read(size)
+        if data:
+            self._tags.feed(data)
+            return data
+        if self._recovered:
+            return b""
+        self._recovered = True
+        closers = self._tags.closing_bytes()
+        if closers:
+            print(
+                f"WARNING: {self._name}: export cut inside"
+                f" <{self._tags.innermost().decode()}> — synthesized"
+                f" {self._tags.depth()} closing tag(s); everything after"
+                " the cut is lost; counts are PARTIAL",
+                file=sys.stderr,
+            )
+        if size > 0:
+            out, self._pending = closers[:size], closers[size:]
+            return out
+        return closers
+
+    def close(self) -> None:
+        self._inner.close()
+
+
+def _make_reader(path: Path) -> SanitizingReader | RecoveringReader:
+    """SanitizingReader; wrapped for truncation recovery when the tail check fails."""
+    reader = SanitizingReader(path)
+    if _tail_closes_root(path):
+        return reader
+    print(
+        f"WARNING: {path.name}: truncated export (no </df_world> at EOF)"
+        " — best-effort recovery by synthesizing closing tags; ALL counts"
+        " from this file are PARTIAL",
+        file=sys.stderr,
+    )
+    return RecoveringReader(reader, path.name)
 
 
 def _int_text(elem: ET.Element, tag: str) -> int:
@@ -347,7 +478,7 @@ def _stream(path: Path, stats: WorldStats) -> tuple[int, float]:
     records — a naive non-clearing parse of the medium world OOMs a 4 GB
     machine (measured, iter-8e).
     """
-    reader = SanitizingReader(path)
+    reader = _make_reader(path)
     started = time.perf_counter()
     depth = 0
     section: ET.Element | None = None
@@ -382,7 +513,7 @@ def _stream(path: Path, stats: WorldStats) -> tuple[int, float]:
 def _stream_structure(path: Path) -> tuple[collections.Counter[str], int, float]:
     """Light pass for a companion `*-legends_plus.xml`: section counts only."""
     counts: collections.Counter[str] = collections.Counter()
-    reader = SanitizingReader(path)
+    reader = _make_reader(path)
     started = time.perf_counter()
     depth = 0
     section: ET.Element | None = None

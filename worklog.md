@@ -8,6 +8,22 @@
 > since iter-5).
 
 ---
+iter-8f · 2026-08-29 · audit-fix: truncated-export survival + 101st type (iter-8f-audit-fix)
+- Owner-approved option A after the iter-8e audit: KI#34 (raw ParseError
+  on truncated exports) fixed in `scripts/df_survey.py` — tail check +
+  `RecoveringReader` (open-element stack tracking, closing-tag synthesis
+  at EOF, loud PARTIAL warnings); KI#35 ("site tribute forced" →
+  war-geopolitics; vocabulary count re-anchored to TECH_NOTES §3.1).
+  Verified: synthetic truncated fixture (3 synthetic closers = the exact
+  region3 shape; sanitize delegation intact), byte-identical rerun,
+  329 green, ruff clean.
+- The owner's new upload ("large 500") is the completed re-export of the
+  same small-dense region3-00500 world (4.95 GB, intact): the recovered
+  prefix counts reproduce exactly (933,476 events · 99 types · micro
+  7.71% · slayer 41.35%) — ground-truth validation of the recovery;
+  third-column numbers into TECH_NOTES §3.1. 6 files (soft limit 5; the
+  §5 drift-fix in docs/ref/df_legends_xml.md joined the planned 5).
+---
 iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
 - Owner-requested (files attached; closes iter-8d's not-done item):
   `scripts/df_survey.py` — the sanitize+stream survey tool (byte-level
@@ -181,27 +197,7 @@ iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
   baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
   p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
 ---
-iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
-- render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
-  ink conditionals + ShufflePool no-immediate-repeat on the cosmetic
-  stream) + render/chronicle.py (tale = pure function of the log: fresh
-  bank from the header seed per pass, day headers, importance gate,
-  scene card, ungated entity views) + cli/main.py + __main__.py (batch
-  play/chronicle/state/replay + interactive session: look, wait N,
-  directors on|off, seed). core/loop.py → open/run_steps/close
-  (session == batch bytes, tested); policy_from_rules owns the entropy
-  floor. templates.json completed into the grammar; KI#21 closed
-  (draft-template drift: inverted suspicion line, '[' collision, steal
-  object); display names gained articles (pack data). 12 files —
-  task-mandated module set + sync set.
-- Tests 225→264 green (+39: tracery units incl. cosmetic-audit + cycle
-  guard, chronicle gate/prefix-stability/T1-chronicle, CLI batch +
-  session + directors A/B on seed 32); ruff clean; golden fixture
-  byte-identical; chronicle verified PYTHONHASHSEED-independent.
-  Balance observation for KI#4/balance-1: player fatigue is monotonic
-  over long waits (no rest action in v0.1) — visible through the
-  readable chronicle.
----
+(iter-5 deleted at iter-8f per the one-in/one-out cap; history in git.)
 (iter-4 deleted at iter-8e per the one-in/one-out cap; history in git.)
 (iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)
 (iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)

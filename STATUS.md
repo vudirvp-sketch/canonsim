@@ -1,21 +1,20 @@
 # STATUS — canonsim
 
-Iteration: 8e (`iter-8e-df-empirical-survey`) · Phase: 1 · Date: 2026-08-28 ·
-owner-requested empirical pass (the D-022 exception; the owner attached
-his two world exports, closing iter-8d's not-done item): F7/F8 measured
-on real data via `scripts/df_survey.py` (streaming, sanitized; the
-validated bg-1 parsing core) over region1-00250 (450,867 events) and
-region2-00500 (1,220,772 events, 1.99 GB). F7 confirmed with a
-refinement (bookkeeping 52–57%, micro 7.7–8.8% — notable-to-notable
-intrigue, not street texture); F8 sharpened (only 19–24% of events sit
-in any collection; direct event→collection refs are UNIQUE and the
-collections form strict single-parent trees — the many-to-many claim is
-false for these exports; 39–58% of deaths carry no slayer). Pipeline
-findings: exports are not well-formed XML (24 CP437 control bytes each),
-type names display-style in main vs snake_case in plus, plus companion
-repeats events with complementary fields. Numbers owner:
-`docs/TECH_NOTES.md` §3. KI#33 (df_legends_xml.md schema drift) opened+
-closed same iteration; KI#30–32 deleted (closed >2 iterations, §5).
+Iteration: 8f (`iter-8f-audit-fix`) · Phase: 1 · Date: 2026-08-29 ·
+owner-approved option A after the iter-8e audit. KI#34: df_survey.py
+aborted with a raw ParseError on truncated DF exports (the exporter can
+die mid-write, no `</df_world>`; the audit's 2.9 GB region3 case) — now
+a tail check + a RecoveringReader synthesize the missing closing tags at
+EOF (loud PARTIAL warnings), verified on a synthetic truncated fixture
++ a byte-identical rerun. KI#35: "site tribute forced" (101st type)
+mapped to war-geopolitics; the "full 100-type vocabulary" docstring
+claim re-anchored to TECH_NOTES §3.1. The owner's new upload ("large
+500" = the completed re-export of the same small-dense region3-00500
+world, 4.95 GB, intact) surveyed with the fixed tool: the recovered
+prefix counts from the truncated copy reproduce exactly — the recovery
+is ground-truth validated; F7/F8 hold on the third world (numbers:
+`docs/TECH_NOTES.md` §3.1). KI#33 stays (closed iter-8e; §5 deletion
+due from iter-8g).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -46,6 +45,16 @@ closed same iteration; KI#30–32 deleted (closed >2 iterations, §5).
   owner's exports (strict single-parent trees) — CLOSED iter-8e: fixed
   in place against measured data (worklog iter-8e; numbers in
   `docs/TECH_NOTES.md` §3).
+- KI#34 · `scripts/df_survey.py` aborted with a raw `ParseError` on
+  truncated DF exports (exporter dies mid-write, no `</df_world>`; the
+  2.9 GB region3 audit case) — CLOSED iter-8f: tail check +
+  `RecoveringReader` (closing-tag synthesis at EOF, loud PARTIAL
+  warnings; ground-truth validated via the complete re-export). Recipe:
+  `docs/TECH_NOTES.md` §3.
+- KI#35 · `TYPE_CATEGORY` missed "site tribute forced" (101st type,
+  first seen in region3) and the docstring's "full 100-type vocabulary"
+  claim was stale — CLOSED iter-8f: mapped to war-geopolitics; the
+  vocabulary count is owned by `docs/TECH_NOTES.md` §3.1.
 
 ## FAQ / Pitfalls
 
@@ -130,9 +139,12 @@ closed same iteration; KI#30–32 deleted (closed >2 iterations, §5).
   restate; cite ledger row IDs (e.g. "per RNG-1"). The audit method:
   grep a sample of ledger terms across the planning docs — every term
   must land in at least one; verified iter-0x.
-- **DF exports are not well-formed XML; the survey tool owns the recipe
-  (iter-8e).** Raw CP437 control bytes (item-quality symbols) sit inside
-  artifact names — byte-level sanitize before any parse; stream with
+- **DF exports are not well-formed XML and can arrive truncated; the
+  survey tool owns the recipe (iter-8e/8f).** Raw CP437 control bytes
+  (item-quality symbols) sit inside artifact names — byte-level sanitize
+  before any parse; the exporter can die mid-write (no `</df_world>` at
+  EOF) — the survey tail-checks and synthesizes the closing tags
+  best-effort, loudly marking every count PARTIAL (KI#34); stream with
   iterparse + clear (a non-clearing parse OOMs 4 GB on a 2 GB export);
   main-file type names are display-style, the plus companion's are
   snake_case — normalize. Measured numbers + the full recipe:
@@ -193,8 +205,10 @@ tombstone window, the texture-OCC mirror); the narrator LLM boundary
 itself remains an AGENTS §8 owner checkpoint, INV-4 holds until then,
 and it carries the ledger's live wiring). Track B (`bg-1..bg-4`) stays
 unblocked in parallel — bg-1's parsing half is validated (iter-8e: the
-owner supplied two exports; `scripts/df_survey.py` + the measured
-pitfalls in `docs/TECH_NOTES.md` §3), so bg-1's remainder is the SQLite
+owner supplied three worlds — incl. a truncated copy + its complete
+re-export, which ground-truth-validated the iter-8f truncation
+recovery; `scripts/df_survey.py` + the measured pitfalls in
+`docs/TECH_NOTES.md` §3), so bg-1's remainder is the SQLite
 sink over that core; the survey also sharpened bg-2's sampling frame
 (`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3). Backlog
 that did NOT land in iter-8b (each stays in its TASKS home, none

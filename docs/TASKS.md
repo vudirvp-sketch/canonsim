@@ -76,9 +76,13 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   mode), hundreds of MB per large world, translated-name layers.
   Pipeline design guidance: `docs/ref/df_design.md` ("What we adapt" —
   streaming/selective import, name normalization, determinism quarantine).
-  Parsing half VALIDATED (iter-8e): the owner supplied two exports;
+  Parsing half VALIDATED (iter-8e; truncation survival iter-8f): the
+  owner supplied three worlds — incl. a truncated copy + its complete
+  re-export, which ground-truth-validated the recovery;
   `scripts/df_survey.py` is the sanitize+stream core (recipe + measured
-  pitfalls: `docs/TECH_NOTES.md` §3.1) — the remainder is the SQLite sink.
+  pitfalls: `docs/TECH_NOTES.md` §3.1) — the remainder is the SQLite
+  sink, which must own its truncation policy (abort vs flagged partial
+  import).
 - AC: parser loads a world into SQLite; pitfalls recorded in
   `docs/TECH_NOTES.md` §3.
 
@@ -176,6 +180,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8f · 2026-08-29 · audit-fix after the iter-8e audit (owner-approved
+  option A): KI#34 — truncated-export survival in `scripts/df_survey.py`
+  (tail check + RecoveringReader closing-tag synthesis at EOF, loud
+  PARTIAL warnings; ground-truth validated — the complete 4.95 GB
+  re-export of the same small-dense region3-00500 world reproduces the
+  recovered prefix counts exactly) + KI#35 — "site tribute forced" →
+  war-geopolitics (101st type; vocabulary count re-anchored to
+  TECH_NOTES §3.1, third-world numbers added). 329 green, ruff clean.
 - iter-8e · 2026-08-28 · DF empirical F7/F8 survey on the owner's two world
   exports (owner-requested, the D-022 exception; closes iter-8d's not-done
   item): `scripts/df_survey.py` (sanitize + stream parsing core for bg-1)
