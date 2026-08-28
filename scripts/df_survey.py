@@ -14,6 +14,20 @@ archaeology) claim about the corpus:
   figure-role field, no cause), `hf died` slayer/cause breakdown,
   collection nesting.
 
+`--audit` (iter-8g): coverage census instead of measured F7/F8 detail.
+For every top-level section: per-record-tag counts + the set of all
+unique child-tag sets per record tag (DF records are uniform within a
+type, so this set is small — typically 1-3 variants; >3 = schema drift
+signal). HANDLED records (historical_event / _collection / _figure —
+F7/F8 detail above) are marked, UNHANDLED records (site, entity, artifact,
+written_content, region, landmass, mountain_peak, river, creature_raw,
+entity_population, dance/musical/poetic form, …) are listed with their
+unique child-tag sets so bg-1's SQLite sink can plan field extraction
+without re-parsing the export. The audit replaces head/middle/tail
+positional sampling: it is strictly more information (every structural
+variant is captured, not just three positions) and is bounded by record
+uniformity.
+
 Parsing law (bg-1 hardening, `docs/ref/df_design.md` "What we adapt"):
 stream with `iterparse` + element `clear()` + periodic section `clear()`
 (never DOM), sanitize XML-invalid control bytes at the byte level (the DF
@@ -30,8 +44,9 @@ report content is deterministic (sorted tables); the trailing
 "environment" block (wall time, peak RSS) is informational only.
 
 Usage:
-    python -m scripts.df_survey <world-dir-or-legends.xml> [<more>...]
     python scripts/df_survey.py "/path/region1-00250-01-01-legends.xml"
+    python scripts/df_survey.py --audit "/path/region1-00250-01-01-legends.xml"
+    python scripts/df_survey.py /path/dfworlds/
 
 Output: `output/df_survey_<stem>.txt` (gitignored runtime artifact,
 reproducible from the same export) + a stdout summary. The exports
@@ -184,6 +199,14 @@ TYPE_CATEGORY: dict[str, str] = {
 }
 
 _UNKNOWN = "UNCLASSIFIED"
+
+# Records the survey extracts detail from (F7/F8); everything else on
+# depth=3 is counted + structurally fingerprinted by `--audit` only.
+HANDLED_RECORDS = frozenset({
+    "historical_event",
+    "historical_event_collection",
+    "historical_figure",
+})
 
 
 def _sanitize_table() -> bytes:
@@ -393,6 +416,12 @@ class WorldStats:
         self.deaths_with_slayer = 0
         self.death_causes: collections.Counter[str] = collections.Counter()
         self.type_codes: dict[str, int] = {}
+        # Coverage census (iter-8g `--audit`): per-section per-record-tag
+        # counts + every unique child-tag set per record tag (bounded by
+        # DF record uniformity — typically 1-3 variants). Empty when the
+        # audit flag is off (the F7/F8 detail pass does not collect this).
+        self.record_tags_per_section: dict[str, collections.Counter[str]] = {}
+        self.unique_child_tag_sets: dict[str, set[frozenset[str]]] = {}
 
     def type_code(self, event_type: str) -> int:
         code = self.type_codes.get(event_type)
@@ -471,12 +500,18 @@ def _process_figure(elem: ET.Element, stats: WorldStats) -> None:
         stats.figure_dead += 1
 
 
-def _stream(path: Path, stats: WorldStats) -> tuple[int, float]:
+def _stream(path: Path, stats: WorldStats, audit: bool = False) -> tuple[int, float]:
     """One streaming pass over a legends XML; returns (sanitized, seconds).
 
     Memory law: `elem.clear()` per record + `section.clear()` every 4096
     records — a naive non-clearing parse of the medium world OOMs a 4 GB
     machine (measured, iter-8e).
+
+    When `audit` is set, also collect the coverage census (per-section
+    per-record-tag counts + every unique child-tag set per record tag)
+    — a small fixed overhead: the per-record frozenset of immediate
+    child tags is bounded by record uniformity (typically 1-3 variants
+    per record tag, even across 10^5+ records).
     """
     reader = _make_reader(path)
     started = time.perf_counter()
@@ -493,6 +528,8 @@ def _stream(path: Path, stats: WorldStats) -> tuple[int, float]:
             if depth == 3:
                 if section is not None:
                     stats.section_counts[section.tag] += 1
+                    if audit:
+                        _census_record(section.tag, elem, stats)
                     tag = elem.tag
                     if tag == "historical_event":
                         _process_event(elem, stats)
@@ -508,6 +545,28 @@ def _stream(path: Path, stats: WorldStats) -> tuple[int, float]:
     finally:
         reader.close()
     return reader.replaced, time.perf_counter() - started
+
+
+def _census_record(section_tag: str, elem: ET.Element, stats: WorldStats) -> None:
+    """Coverage census contribution from one depth-3 record.
+
+    Records the immediate child tag set (a structural fingerprint) for
+    the record's tag — not the field values, only the shape. DF records
+    of the same type are uniform, so `unique_child_tag_sets[tag]` stays
+    small (1-3 elements typically); growth past 3 is a drift signal.
+    """
+    record_tag = elem.tag
+    counter = stats.record_tags_per_section.get(section_tag)
+    if counter is None:
+        counter = collections.Counter()
+        stats.record_tags_per_section[section_tag] = counter
+    counter[record_tag] += 1
+    child_set = frozenset(child.tag for child in elem)
+    variants = stats.unique_child_tag_sets.get(record_tag)
+    if variants is None:
+        variants = set()
+        stats.unique_child_tag_sets[record_tag] = variants
+    variants.add(child_set)
 
 
 def _stream_structure(path: Path) -> tuple[collections.Counter[str], int, float]:
@@ -542,6 +601,44 @@ def _fmt_pct(part: int, whole: int) -> str:
     return f"{(100.0 * part / whole):5.2f}%" if whole else "  n/a "
 
 
+def _render_audit_section(add, stats: WorldStats) -> None:
+    """Coverage census (iter-8g `--audit`).
+
+    Lists every record tag seen on depth=3, marks HANDLED (the F7/F8
+    detail records) vs UNHANDLED (everything else — site, entity,
+    artifact, written_content, region, landmass, mountain_peak, river,
+    creature_raw, entity_population, dance/musical/poetic form, …), and
+    prints every unique child-tag set per record tag so bg-1's SQLite
+    sink can plan field extraction without re-parsing the export.
+    """
+    add("== 1b. Coverage audit (record tags on depth=3) ==")
+    record_totals: collections.Counter[str] = collections.Counter()
+    for per_tag in stats.record_tags_per_section.values():
+        for record_tag, count in per_tag.items():
+            record_totals[record_tag] += count
+    handled_count = sum(c for t, c in record_totals.items() if t in HANDLED_RECORDS)
+    unhandled_count = sum(c for t, c in record_totals.items() if t not in HANDLED_RECORDS)
+    add(f"  records: {len(record_totals)} distinct tags"
+        f" · {record_totals.total():,} total"
+        f" · HANDLED {handled_count:,} ({_fmt_pct(handled_count, record_totals.total())})"
+        f" · UNHANDLED {unhandled_count:,} ({_fmt_pct(unhandled_count, record_totals.total())})")
+    add("  per-section record-tag census (section -> [tag:count, ...]):")
+    for section_tag in sorted(stats.record_tags_per_section):
+        per_tag = stats.record_tags_per_section[section_tag]
+        parts = [f"{tag}:{c:,}" for tag, c in per_tag.most_common()]
+        add(f"  {section_tag} -> {{{', '.join(parts)}}}")
+    add("  unique child-tag sets per record tag (variants = schema stability signal; >3 = drift):")
+    for record_tag in sorted(record_totals):
+        variants = stats.unique_child_tag_sets.get(record_tag, set())
+        marker = "HANDLED" if record_tag in HANDLED_RECORDS else "UNHANDLED"
+        n_records = record_totals[record_tag]
+        n_variants = len(variants)
+        add(f"  [{marker}] {record_tag} ({n_records:,} records, {n_variants} variant(s))")
+        for variant in sorted(variants, key=lambda s: sorted(s)):
+            tags = ", ".join(sorted(variant)) or "(no children)"
+            add(f"      {{ {tags} }}")
+
+
 def build_report(
     path: Path,
     plus_path: Path | None,
@@ -551,6 +648,7 @@ def build_report(
     plus_counts: collections.Counter[str] | None,
     plus_sanitized: int,
     plus_seconds: float,
+    audit_mode: bool = False,
 ) -> str:
     lines: list[str] = []
     add = lines.append
@@ -574,6 +672,10 @@ def build_report(
         for section, count in sorted(plus_counts.items()):
             add(f"  {count:>9,}  {section}   [plus]")
     add("")
+
+    if audit_mode and stats.record_tags_per_section:
+        _render_audit_section(add, stats)
+        add("")
 
     add(f"== 2. F7 — event type distribution ({len(stats.event_types)} types,"
         f" {total_events:,} events) ==")
@@ -729,13 +831,21 @@ def main(argv: list[str] | None = None) -> int:
         "--out", type=Path, default=DEFAULT_OUT,
         help=f"report directory (default: {DEFAULT_OUT})",
     )
+    parser.add_argument(
+        "--audit", action="store_true",
+        help="coverage census: per-section per-record-tag counts + every "
+             "unique child-tag set per record tag (iter-8g). Replaces "
+             "head/middle/tail positional sampling — strictly more info, "
+             "bounded by record uniformity. Use before a bg-1 SQLite sink "
+             "to plan field extraction without re-parsing.",
+    )
     args = parser.parse_args(argv)
     args.out.mkdir(parents=True, exist_ok=True)
 
     for main_path, plus_path in find_worlds(args.targets):
         print(f"surveying {main_path} ...", file=sys.stderr)
         stats = WorldStats()
-        sanitized, seconds = _stream(main_path, stats)
+        sanitized, seconds = _stream(main_path, stats, audit=args.audit)
         plus_counts: collections.Counter[str] | None = None
         plus_sanitized = 0
         plus_seconds = 0.0
@@ -745,6 +855,7 @@ def main(argv: list[str] | None = None) -> int:
         report = build_report(
             main_path, plus_path, stats, sanitized, seconds,
             plus_counts, plus_sanitized, plus_seconds,
+            audit_mode=args.audit,
         )
         stem = main_path.name.removesuffix("-legends.xml")
         out_path = args.out / f"df_survey_{stem}.txt"
@@ -760,9 +871,26 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {total_events:,} events · {len(stats.event_types)} types ·"
               f" {sum(stats.collection_types.values()):,} collections ·"
               f" {len(stats.figure_info):,} figures")
-        print(f"  micro (street/personal) share: {_fmt_pct(micro, total_events)}"
-              f" · collection-referenced: {_fmt_pct(referenced, total_events)}"
-              f" · ambiguous (2+ refs): {_fmt_pct(multi, total_events)}")
+        if args.audit:
+            record_total = sum(
+                c for per_tag in stats.record_tags_per_section.values()
+                for c in per_tag.values()
+            )
+            handled = sum(
+                c for per_tag in stats.record_tags_per_section.values()
+                for t, c in per_tag.items() if t in HANDLED_RECORDS
+            )
+            unhandled_tags = {
+                t for per_tag in stats.record_tags_per_section.values()
+                for t in per_tag if t not in HANDLED_RECORDS
+            }
+            print(f"  coverage: {len(unhandled_tags)} UNHANDLED record tags"
+                  f" · HANDLED {handled:,} / {record_total:,}"
+                  f" ({_fmt_pct(handled, record_total)})")
+        else:
+            print(f"  micro (street/personal) share: {_fmt_pct(micro, total_events)}"
+                  f" · collection-referenced: {_fmt_pct(referenced, total_events)}"
+                  f" · ambiguous (2+ refs): {_fmt_pct(multi, total_events)}")
         print(f"  report: {out_path}")
     return 0
 

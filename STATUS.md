@@ -1,20 +1,28 @@
 # STATUS — canonsim
 
-Iteration: 8f (`iter-8f-audit-fix`) · Phase: 1 · Date: 2026-08-29 ·
-owner-approved option A after the iter-8e audit. KI#34: df_survey.py
-aborted with a raw ParseError on truncated DF exports (the exporter can
-die mid-write, no `</df_world>`; the audit's 2.9 GB region3 case) — now
-a tail check + a RecoveringReader synthesize the missing closing tags at
-EOF (loud PARTIAL warnings), verified on a synthetic truncated fixture
-+ a byte-identical rerun. KI#35: "site tribute forced" (101st type)
-mapped to war-geopolitics; the "full 100-type vocabulary" docstring
-claim re-anchored to TECH_NOTES §3.1. The owner's new upload ("large
-500" = the completed re-export of the same small-dense region3-00500
-world, 4.95 GB, intact) surveyed with the fixed tool: the recovered
-prefix counts from the truncated copy reproduce exactly — the recovery
-is ground-truth validated; F7/F8 hold on the third world (numbers:
-`docs/TECH_NOTES.md` §3.1). KI#33 stays (closed iter-8e; §5 deletion
-due from iter-8g).
+Iteration: 8g (`iter-8g-df-coverage-audit`) · Phase: 1 · Date: 2026-08-29 ·
+owner-requested coverage audit of the bg-1 parsing core: is anything
+being missed in the giant DF exports? `scripts/df_survey.py --audit`
+(iter-8g) — a coverage census instead of measured F7/F8 detail. For
+every top-level section: per-record-tag counts + every unique
+child-tag set per record tag (a structural fingerprint bounded by DF
+record uniformity — typically 1-3 variants; growth past 3 is a drift
+signal). Replaces head/middle/tail positional sampling strictly — it
+captures every structural variant, not three positions; runs in the
+same single streaming pass as the F7/F8 detail (no second parse).
+HANDLED records (`historical_event` / `_collection` / `_figure` —
+F7/F8 detail) are marked; UNHANDLED records (`site`, `entity`,
+`region`, `artifact`, `written_content`, …) carry their child-tag
+sets so bg-1's SQLite sink can plan field extraction without
+re-parsing a 5 GB export. Coverage matrix: `docs/ref/df_legends_xml.md`
+("Coverage matrix — survey vs SQLite sink" section, the single owner
+of "which records have detailed extraction today"). First
+`tests/test_df_survey.py` (9 tests) pins the four load-bearing
+invariants of the bg-1 parsing core (sanitize, recover, census,
+audit render) on a tiny synthetic DF-like XML — a regression at a
+future DF version now shows up at the bench, not in a 5 GB export.
+338 green (was 329), ruff clean, fixture byte-identical. KI#33/34/35
+stay (closed iter-8e/8f; §5 deletion due from iter-8h).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -140,15 +148,23 @@ due from iter-8g).
   grep a sample of ledger terms across the planning docs — every term
   must land in at least one; verified iter-0x.
 - **DF exports are not well-formed XML and can arrive truncated; the
-  survey tool owns the recipe (iter-8e/8f).** Raw CP437 control bytes
+  survey tool owns the recipe (iter-8e/8f/8g).** Raw CP437 control bytes
   (item-quality symbols) sit inside artifact names — byte-level sanitize
   before any parse; the exporter can die mid-write (no `</df_world>` at
   EOF) — the survey tail-checks and synthesizes the closing tags
   best-effort, loudly marking every count PARTIAL (KI#34); stream with
   iterparse + clear (a non-clearing parse OOMs 4 GB on a 2 GB export);
   main-file type names are display-style, the plus companion's are
-  snake_case — normalize. Measured numbers + the full recipe:
-  `docs/TECH_NOTES.md` §3; tool: `scripts/df_survey.py`.
+  snake_case — normalize. **`--audit` (iter-8g) is the coverage census:
+  per-section per-record-tag counts + every unique child-tag set per
+  record tag — a structural fingerprint bounded by DF record uniformity
+  (typically 1-3 variants; >3 = schema drift signal). Replaces
+  head/middle/tail positional sampling strictly — every structural
+  variant is captured, not three positions; runs in the same single
+  streaming pass as the F7/F8 detail (no second parse). Coverage matrix:
+  `docs/ref/df_legends_xml.md`.** Measured numbers + the full recipe:
+  `docs/TECH_NOTES.md` §3; tool: `scripts/df_survey.py`; regression
+  protection: `tests/test_df_survey.py` (9 tests, synthetic DF-like XML).
 - **Substance over line count (D-025) + per-ref split (D-026).** The cap
   is 600 with the §6.1 substance filter as the real law — filler is cut
   always; named systems, field lists, enum values, per-source verdicts
@@ -208,9 +224,14 @@ unblocked in parallel — bg-1's parsing half is validated (iter-8e: the
 owner supplied three worlds — incl. a truncated copy + its complete
 re-export, which ground-truth-validated the iter-8f truncation
 recovery; `scripts/df_survey.py` + the measured pitfalls in
-`docs/TECH_NOTES.md` §3), so bg-1's remainder is the SQLite
-sink over that core; the survey also sharpened bg-2's sampling frame
-(`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3). Backlog
+`docs/TECH_NOTES.md` §3); the iter-8g `--audit` mode + the coverage
+matrix in `docs/ref/df_legends_xml.md` give bg-1's SQLite sink the
+field plan (HANDLED vs UNHANDLED records + every UNHANDLED child-tag
+set) without re-parsing a 5 GB export; so bg-1's remainder is the
+SQLite sink over that core (owning its truncation policy — abort vs
+flagged partial import); the survey also sharpened bg-2's sampling
+frame (`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3).
+Backlog
 that did NOT land in iter-8b (each stays in its TASKS home, none
 blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
 GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;

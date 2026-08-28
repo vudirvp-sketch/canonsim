@@ -8,6 +8,33 @@
 > since iter-5).
 
 ---
+iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
+- Owner question: "is anything being missed in the giant DF exports?"
+  Answer: `scripts/df_survey.py --audit` — coverage census instead of
+  measured F7/F8 detail. For every top-level section: per-record-tag
+  counts + every unique child-tag set per record tag (a structural
+  fingerprint bounded by DF record uniformity — typically 1-3 variants;
+  growth past 3 = drift signal). HANDLED records (historical_event /
+  _collection / _figure — F7/F8 detail) marked; UNHANDLED records
+  (site, entity, region, artifact, written_content, …) carry their
+  child-tag sets so bg-1's SQLite sink can plan field extraction without
+  re-parsing a 5 GB export. Replaces head/middle/tail positional
+  sampling strictly — every variant captured, not three positions;
+  runs in the same single streaming pass (no second parse). First
+  `tests/test_df_survey.py` (9 tests) pins the four load-bearing
+  invariants (sanitize, recover, census, audit render) on a tiny
+  synthetic DF-like XML. Coverage matrix: `docs/ref/df_legends_xml.md`
+  ("Coverage matrix — survey vs SQLite sink" section).
+- 8 files (above the 3–5 soft limit; the §6 sync set is task-mandated
+  — every AGENTS §6 touched file updated in the same iteration):
+  scripts/df_survey.py (the --audit flag + census + render section),
+  tests/test_df_survey.py (new), docs/ref/df_legends_xml.md (coverage
+  matrix), docs/TECH_NOTES.md §3 (audit note), STATUS.md (iteration
+  header + FAQ sync + Next-step bg-1 update), this worklog, TASKS.md
+  (bg-1 next-step note), docs/AGENT_NAVIGATION.md §1 (scripts/ row).
+  329→338 green, ruff clean, fixture byte-identical. No new KIs.
+- iter-6 evicted per the one-in/one-out cap (history in git).
+---
 iter-8f · 2026-08-29 · audit-fix: truncated-export survival + 101st type (iter-8f-audit-fix)
 - Owner-approved option A after the iter-8e audit: KI#34 (raw ParseError
   on truncated exports) fixed in `scripts/df_survey.py` — tail check +
@@ -197,6 +224,7 @@ iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
   baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
   p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
 ---
+(iter-6 deleted at iter-8g per the one-in/one-out cap; history in git.)
 (iter-5 deleted at iter-8f per the one-in/one-out cap; history in git.)
 (iter-4 deleted at iter-8e per the one-in/one-out cap; history in git.)
 (iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)

@@ -82,7 +82,11 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   `scripts/df_survey.py` is the sanitize+stream core (recipe + measured
   pitfalls: `docs/TECH_NOTES.md` §3.1) — the remainder is the SQLite
   sink, which must own its truncation policy (abort vs flagged partial
-  import).
+  import). **Coverage audit landed (iter-8g)** — `--audit` mode gives
+  the sink a field plan (HANDLED vs UNHANDLED records + every
+  UNHANDLED child-tag set) without re-parsing a 5 GB export; coverage
+  matrix: `docs/ref/df_legends_xml.md`; regression protection:
+  `tests/test_df_survey.py` (9 tests, synthetic DF-like XML).
 - AC: parser loads a world into SQLite; pitfalls recorded in
   `docs/TECH_NOTES.md` §3.
 
@@ -180,6 +184,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8g · 2026-08-29 · DF coverage audit (owner-requested: "is anything
+  being missed in the giant DF exports?"): `scripts/df_survey.py --audit`
+  mode — coverage census (per-section per-record-tag counts + every
+  unique child-tag set per record tag, a structural fingerprint bounded
+  by DF record uniformity — typically 1-3 variants; >3 = drift signal);
+  HANDLED records (F7/F8 detail) marked, UNHANDLED records (site, entity,
+  region, artifact, written_content, …) carry their child-tag sets so
+  bg-1's SQLite sink can plan field extraction without re-parsing a 5 GB
+  export; replaces head/middle/tail positional sampling strictly — every
+  variant captured, not three positions; runs in the same single
+  streaming pass. First `tests/test_df_survey.py` (9 tests) pins the four
+  load-bearing invariants (sanitize, recover, census, audit render) on a
+  tiny synthetic DF-like XML. Coverage matrix: `docs/ref/df_legends_xml.md`.
+  329→338 green, ruff clean, fixture byte-identical. No new KIs.
 - iter-8f · 2026-08-29 · audit-fix after the iter-8e audit (owner-approved
   option A): KI#34 — truncated-export survival in `scripts/df_survey.py`
   (tail check + RecoveringReader closing-tag synthesis at EOF, loud

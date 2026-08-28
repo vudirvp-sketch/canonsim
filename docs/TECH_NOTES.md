@@ -154,6 +154,17 @@ Pipeline (bg-1) — the validated recipe, `scripts/df_survey.py`:
   from parent lists. Actual child tags are `<event>` / `<eventcol>`
   (repeated elements), not `event_ids` / `subcollection_ids` (KI#33,
   fixed in `docs/ref/df_legends_xml.md`).
+- **Coverage audit** (iter-8g, `scripts/df_survey.py --audit`):
+  per-section per-record-tag counts + every unique child-tag set per
+  record tag (a structural fingerprint — DF records of the same type
+  are uniform, so the set is 1-3 elements; growth past 3 is schema
+  drift). Replaces head/middle/tail positional sampling strictly — it
+  captures every structural variant, not three positions. The
+  HANDLED set (historical_event / _collection / _figure — the F7/F8
+  detail records) is marked, UNHANDLED records (site, entity, region,
+  artifact, written_content, …) carry their child-tag sets so bg-1's
+  SQLite sink can plan field extraction without re-parsing a 5 GB
+  export. Coverage matrix: `docs/ref/df_legends_xml.md`.
 
 ## 4. Python determinism recipe
 

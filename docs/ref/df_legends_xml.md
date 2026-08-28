@@ -67,6 +67,41 @@ import (KI#33).
   This is the **TECH_NOTES.md §3** finding: "Causality is reconstructed,
   not parsed — budget inference work, not parsing work."
 
+**Coverage matrix — survey vs SQLite sink.** `scripts/df_survey.py`
+extracts F7/F8 detail from three record tags (the HANDLED set); every
+other record tag is counted + structurally fingerprinted (every unique
+child-tag set per record tag) by `--audit` (iter-8g). The SQLite sink
+(bg-1 remainder) extracts field values from the UNHANDLED tags; the
+audit lists their child-tag sets so the sink can plan its schema
+without re-parsing a 5 GB export. The matrix is the single owner of
+"which records have detailed extraction today":
+
+| Section (plural, depth=2) | Record tag (singular, depth=3) | Survey status |
+|---|---|---|
+| `historical_events` | `historical_event` | HANDLED — F7 type/year/role, F8 collection refs |
+| `historical_event_collections` | `historical_event_collection` | HANDLED — F8 type/parent/child links |
+| `historical_figures` | `historical_figure` | HANDLED — race/birth/death |
+| `sites` | `site` | UNHANDLED — count + child-tag fingerprint only |
+| `entities` | `entity` | UNHANDLED — count + fingerprint |
+| `entity_populations` | `entity_population` | UNHANDLED — count + fingerprint |
+| `regions` | `region` | UNHANDLED — count + fingerprint |
+| `underground_regions` | `underground_region` | UNHANDLED — count + fingerprint |
+| `landmasses` | `landmass` | UNHANDLED — count + fingerprint |
+| `mountain_peaks` | `mountain_peak` | UNHANDLED — count + fingerprint |
+| `rivers` | `river` | UNHANDLED — count + fingerprint |
+| `creature_collections` | `creature_collection` (+ nested) | UNHANDLED — count + fingerprint |
+| `art_forms` | `art_form` | UNHANDLED — count + fingerprint (design noise, skip on sink) |
+| `dance_forms` | `dance_form` | UNHANDLED — count + fingerprint (design noise) |
+| `musical_forms` | `musical_form` | UNHANDLED — count + fingerprint (design noise) |
+| `poetic_forms` | `poetic_form` | UNHANDLED — count + fingerprint (design noise) |
+| `written_contents` | `written_content` | UNHANDLED — count + fingerprint (bg-4 interest) |
+
+The "design noise" rows (art/dance/musical/poetic forms) are bg-1
+selective-import skips per `df_design.md` "What we adapt" — briefer
+noise. `written_content` is bg-4 candidate (cost notes); the sink may
+defer it. The audit reports any tag not in the table as UNDOCUMENTED
+— a drift signal (a future DF version grew the schema).
+
 **What we take.**
 
 - **Event-with-id-and-tick schema shape.** Every DF event has `id`
