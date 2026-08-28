@@ -25,7 +25,7 @@ from pathlib import Path
 from typing import Any
 
 from core.knowledge import KnowledgeView, trust_toward
-from core.log import read_log
+from core.log import EventRecord, LoggedKnowledgeRecord, read_log
 from core.loop import Simulator
 from core.pack import Pack, load_pack
 
@@ -320,3 +320,66 @@ def test_knowledge_view_rebuilds_from_the_log(tmp_path: Path) -> None:
     assert sim.knowledge.knowers() == rebuilt.knowers()
     for who in rebuilt.knowers():
         assert sim.knowledge.records_of(who) == rebuilt.records_of(who)
+        # iter-9: the token index is derived state too — holds (plain and
+        # before_source) must agree between the runtime and rebuilt views
+        for record in rebuilt.records_of(who):
+            assert sim.knowledge.holds(who, record.knows)
+            assert rebuilt.holds(who, record.knows)
+            assert sim.knowledge.holds(
+                who, record.knows, before_source=record.source
+            ) == rebuilt.holds(
+                who, record.knows, before_source=record.source
+            )
+
+
+# -- the token index + the salient top-1 contract (iter-9 pins) ---------------
+
+
+def _teach(
+    view: KnowledgeView, event_id: str, who: str, token: str, at: int,
+    importance: str = "low",
+) -> None:
+    view.add(EventRecord(
+        id=event_id, t=at, type="wait", actor="pc_01", target=None, cause=None,
+        outcome={}, state_changes=(), hooks=(), importance=importance,
+        provenance={"seed": 0},
+        knowledge=(LoggedKnowledgeRecord(
+            who=who, channel="saw", fidelity="exact", knows=token,
+            at=at, source=event_id,
+        ),),
+    ))
+
+
+def test_holds_token_index_pins_novelty_semantics() -> None:
+    """iter-9: `holds` runs on the who->token->sources index. The pins a
+    plain token set would break: a token learned ONLY from the excluded
+    source is not held under `before_source`; a token learned from two
+    sources survives the exclusion of either."""
+    view = KnowledgeView()
+    _teach(view, "ev_0001", "npc_a", "token_x", 5)
+    assert view.holds("npc_a", "token_x")
+    assert view.holds("npc_a", "token_x", before_source="ev_0000")  # other id
+    assert not view.holds("npc_a", "token_x", before_source="ev_0001")
+    _teach(view, "ev_0002", "npc_a", "token_x", 9)  # second source
+    assert view.holds("npc_a", "token_x", before_source="ev_0001")
+    assert view.holds("npc_a", "token_x", before_source="ev_0002")
+    assert not view.holds("npc_b", "token_x")  # unknown knower
+    assert not view.holds("npc_a", "token_y")  # unknown token
+
+
+def test_salient_is_top1_importance_then_recency_first_of_equals() -> None:
+    """iter-9: `salient` picks by max, not a full sort — the pinned
+    contract: importance dominates recency, and among equals the
+    first-acquired record wins (max and the stable reverse sort agree
+    on both). exclude_source still blinds exactly one event's records."""
+    view = KnowledgeView()
+    _teach(view, "ev_0001", "npc_a", "old_high", 1, importance="high")
+    _teach(view, "ev_0002", "npc_a", "new_low", 9, importance="low")
+    assert view.salient("npc_a").knows == "old_high"  # importance first
+    _teach(view, "ev_0003", "npc_a", "new_high", 9, importance="high")
+    assert view.salient("npc_a").knows == "new_high"  # then recency
+    _teach(view, "ev_0004", "npc_a", "tie_first", 9, importance="high")
+    assert view.salient("npc_a").knows == "new_high"  # first of equals
+    assert view.salient("npc_a", exclude_source="ev_0003").knows == "tie_first"
+    assert view.salient("npc_b") is None  # a blind knower
+    assert view.salient("npc_a", exclude_source="ev_0001") is not None

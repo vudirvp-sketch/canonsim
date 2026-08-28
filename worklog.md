@@ -8,6 +8,32 @@
 > since iter-5).
 
 ---
+iter-8h · 2026-08-29 · derived-index micro-pass (iter-8h-derived-indexes)
+- Owner-directed: an external patch list (six items) verified against
+  the code item by item before landing — each proven
+  semantics-preserving; the rejected variant (plain per-knower token
+  SETS) would have broken `holds(before_source=...)` (crime.py's
+  novelty test). D-050 owns the rationale and the benchmark numbers
+  (decay 45×, occ 40×, holds 664×, releases 24×, scene-delta 5×,
+  salient 1.9×; harness outside the repo — D-012).
+- Applied: `KnowledgeView` token→sources index (`add` the only
+  writer; `holds` O(1)); Simulator `(entity, prop) → tick` index in
+  `_commit` (`decay_drafts` signature `events` → `last_change`);
+  scene-delta window break (tick-monotonicity); `salient()` top-1
+  `max`; `occ_breaking_cause` one forward fold; director `entropy`
+  once per `releases()`. Tests +2 contract pins; the T2 rebuild test
+  extended to the token index; one brief-test fixture fixed to be
+  log-shaped (it encoded an out-of-order log the writer forbids).
+- 13 files (above the 3–5 soft cap: six independent micro-patches,
+  each with its code target — the sync set is task-mandated):
+  core/{knowledge,states,loop,intent,director}.py,
+  brief/assembler.py, tests/{states,knowledge,brief}.py +
+  DECISIONS/TASKS/STATUS/this worklog. Worklog found at 11 entries
+  (iter-6's body had survived its own 8g tombstone) — evicted iter-6
+  (per its tombstone) + iter-6a (this entry's one-in/one-out) back to
+  the cap. 338→340 green, ruff clean, golden fixtures
+  byte-identical. No new KIs.
+---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - Owner question: "is anything being missed in the giant DF exports?"
   Answer: `scripts/df_survey.py --audit` — coverage census instead of
@@ -193,37 +219,7 @@ iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
   299 tests green, ruff clean, golden fixture byte-identical (dead
   params — no canon-path change).
 ---
-iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6 (iter-6a-code-audit)
-- Re-verified end-to-end: 298 green + ruff clean reproduced; the 1000-sim
-  baseline reproduces EXACTLY; T8 OFF = 26 chains / ON = director_0000;
-  chronicle PYTHONHASHSEED-independent; session doors + KI#17 gate
-  correct; tale_gate claims accurate (medium → 4 events).
-- 3 KIs fixed: KI#22 TEST_PLAN/test-docstring drift (seed 32→125 ×4,
-  24→26 ×2, M2 formula vs MVP_SCOPE §15 + impl, §6 filename, §1.2
-  per-endpoint note); KI#23 scripts/ outside the executable invariants
-  + the false "AGENTS §9" citation + the 5–15%/73–83% qualifier loss
-  (D-046; PACKAGE_DIRS += scripts + closure test + CLI-class print
-  exemption, MVP_SCOPE §18 pinned); KI#24 dead fold_events removed.
-- KI#17–20 deleted (closed >2 iters); KI entries to the 2-line cap; FAQ
-  24→20 (purity/drift/fixture/gate families merged + the chain-counting
-  law added). 11 files — audit fix set + mandated sync set.
-- Tests 298→299 green (+1 closure test); ruff clean; golden fixture
-  byte-identical. No canon-path change: the drift was in citing
-  documents, not in the numbers.
----
-iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate) · **VERDICT: PASS**
-- TEST_PLAN.md (trigger-fired spec: T0-T8 + M1-M5 + gate protocol + UAP
-  crosswalk + §3 schema-bump migration) + core/metrics.py (M1-M5 +
-  emergent chains as pure functions of the log) + test_metrics.py (24)
-  + the T1 fixture-regeneration guard + tests/playscripts/day1_full.json
-  (seed 125) + test_t8_ab.py (single-factor A/B) +
-  scripts/balance_harness.py (KI#4 close) + rules.json::metrics.
-  11 files — task-mandated. D-042/D-043/D-044/D-045 recorded.
-- Tests 264→298 green (+34); ruff clean; golden fixture byte-identical.
-  T7 playtest + the full verdict evidence live in D-045; the 1000-seed
-  baseline numbers live in D-044 + STATUS KI#4 (M5 p50=0.77, chains
-  p50=20, M3_mean p50=13.81, M1 p50=0.24). Track A frozen.
----
+(iter-6a deleted at iter-8h per the one-in/one-out cap; history in git.)
 (iter-6 deleted at iter-8g per the one-in/one-out cap; history in git.)
 (iter-5 deleted at iter-8f per the one-in/one-out cap; history in git.)
 (iter-4 deleted at iter-8e per the one-in/one-out cap; history in git.)

@@ -1,28 +1,31 @@
 # STATUS — canonsim
 
-Iteration: 8g (`iter-8g-df-coverage-audit`) · Phase: 1 · Date: 2026-08-29 ·
-owner-requested coverage audit of the bg-1 parsing core: is anything
-being missed in the giant DF exports? `scripts/df_survey.py --audit`
-(iter-8g) — a coverage census instead of measured F7/F8 detail. For
-every top-level section: per-record-tag counts + every unique
-child-tag set per record tag (a structural fingerprint bounded by DF
-record uniformity — typically 1-3 variants; growth past 3 is a drift
-signal). Replaces head/middle/tail positional sampling strictly — it
-captures every structural variant, not three positions; runs in the
-same single streaming pass as the F7/F8 detail (no second parse).
-HANDLED records (`historical_event` / `_collection` / `_figure` —
-F7/F8 detail) are marked; UNHANDLED records (`site`, `entity`,
-`region`, `artifact`, `written_content`, …) carry their child-tag
-sets so bg-1's SQLite sink can plan field extraction without
-re-parsing a 5 GB export. Coverage matrix: `docs/ref/df_legends_xml.md`
-("Coverage matrix — survey vs SQLite sink" section, the single owner
-of "which records have detailed extraction today"). First
-`tests/test_df_survey.py` (9 tests) pins the four load-bearing
-invariants of the bg-1 parsing core (sanitize, recover, census,
-audit render) on a tiny synthetic DF-like XML — a regression at a
-future DF version now shows up at the bench, not in a 5 GB export.
-338 green (was 329), ruff clean, fixture byte-identical. KI#33/34/35
-stay (closed iter-8e/8f; §5 deletion due from iter-8h).
+Iteration: 8h (`iter-8h-derived-indexes`) · Phase: 1 · Date: 2026-08-29 ·
+owner-directed perf micro-pass: an external patch list (six items) was
+verified against the code item by item — each proven semantics-preserving
+— then applied (D-050, the single owner of the rationale). Two derived
+runtime indexes beside their single mutation funnels: `KnowledgeView`
+gains `who → token → source-ids` (maintained in `add`, the only writer;
+`holds` drops the row scan — and `before_source` survives: a token
+learned only from the excluded source is NOT held, the plain-token-set
+variant from the external review would have broken exactly that) and
+the Simulator gains `(entity, prop) → last committed tick` (maintained
+in `_commit`; the decay pass reads the index instead of scanning the
+whole log per NPC-axis — the KI#19 "any committer" baseline unchanged).
+Four scan eliminations: `_scene_delta_lines` breaks at the beat-window
+edge (ticks are log-monotonic — the writer invariant; one brief-test
+fixture fixed to be log-shaped, it encoded an out-of-order log),
+`salient()` is a top-1 `max` (first-of-equals ties identical to the
+stable reverse sort), `occ_breaking_cause` folds forward once from the
+proposal point (strict left fold — O(events), not O(w·events)),
+director `entropy` is computed once per `releases()` (was eagerly
+recomputed per policy call — pure waste under a rejecting policy:
+k+1 identical evaluations per beat). Micro-benchmarks (the D-031
+data): decay pass 45×, occ 40×, holds 664×, releases 24×, scene-delta
+5×, salient 1.9× at the measured sizes — all asymptotic wins. 340
+green (was 338; +2 contract pins, T2 extended to the token index),
+ruff clean, golden fixtures byte-identical. KI#33/34/35 deleted (§5,
+due since 8h). No new KIs. iter-9 (VALIDATION_SPEC) unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -45,24 +48,8 @@ stay (closed iter-8e/8f; §5 deletion due from iter-8h).
 
 ## Active KIs
 
-- KI#33 · `docs/ref/df_legends_xml.md` schema drift vs the real exports:
-  child tags documented as `event_ids`/`subcollection_ids` are actually
-  repeated `<event>`/`<eventcol>` elements; the doc's snake_case type
-  examples are the plus-companion style (main file is display-style
-  "hf died"); the "many-to-many" collection claim is false for the
-  owner's exports (strict single-parent trees) — CLOSED iter-8e: fixed
-  in place against measured data (worklog iter-8e; numbers in
-  `docs/TECH_NOTES.md` §3).
-- KI#34 · `scripts/df_survey.py` aborted with a raw `ParseError` on
-  truncated DF exports (exporter dies mid-write, no `</df_world>`; the
-  2.9 GB region3 audit case) — CLOSED iter-8f: tail check +
-  `RecoveringReader` (closing-tag synthesis at EOF, loud PARTIAL
-  warnings; ground-truth validated via the complete re-export). Recipe:
-  `docs/TECH_NOTES.md` §3.
-- KI#35 · `TYPE_CATEGORY` missed "site tribute forced" (101st type,
-  first seen in region3) and the docstring's "full 100-type vocabulary"
-  claim was stale — CLOSED iter-8f: mapped to war-geopolitics; the
-  vocabulary count is owned by `docs/TECH_NOTES.md` §3.1.
+- None. (KI#33/34/35 deleted at iter-8h per §5 — closed iter-8e/8f,
+  history in git.)
 
 ## FAQ / Pitfalls
 
@@ -93,7 +80,9 @@ stay (closed iter-8e/8f; §5 deletion due from iter-8h).
   them (KI#16 lesson).** Per-layer bookkeeping must be global and
   mergeable by new ignitions, never a frozen snapshot in the queue
   payload. The decay pass scans ALL npcs; its per-axis baseline is the
-  tick of the LAST event that changed that axis (KI#19).
+  tick of the LAST event that changed that axis (KI#19) — read from
+  the derived `(entity, prop) → tick` index since iter-8h (D-050),
+  not from a log scan.
 - **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).**
   Read current values from the projection; make repeat effects
   idempotent; the `_commit` gate (D-035) fails loud BEFORE the write.
@@ -234,8 +223,11 @@ frame (`docs/TASKS.md` bg-2, measured tails in TECH_NOTES §3).
 Backlog
 that did NOT land in iter-8b (each stays in its TASKS home, none
 blocks iter-9): `doc-1` VISION freeze review; `qa-1` mypy + `ci-1`
-GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile;
-`tune-1` rest action + the D-045(b) importance-rule knob; the
+GitHub Actions (owner-gated, AGENTS §8); `perf-1` 10k-tick profile
+(the iter-8h micro-pass landed the six locally-provable asymptotic
+wins — the full profile remains the gate for anything structural,
+e.g. a Path-B revisit); `tune-1` rest action + the D-045(b)
+importance-rule knob; the
 BRIEF_SPEC §9 deferrals (relevance signal, lore scheduling grammar,
 precondition-filtered options, exemplar refresh cadence — all arrive
 with the mediator, never early).

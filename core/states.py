@@ -95,7 +95,7 @@ def _axis_deltas(
 def decay_drafts(
     pack: "Pack",
     projection: "Projection",
-    events: Sequence[Any],
+    last_change: Mapping[tuple[str, str], int],
     beat_tick: int,
 ) -> tuple[EventDraft, ...]:
     """One decay beat: for each NPC with a `status.*` axis the pack
@@ -103,6 +103,11 @@ def decay_drafts(
     changed that axis (decay beat, use effect, rotation reset — or run
     start) and produce a draft. The first NPC with a non-zero delta
     anchors the event; an empty tuple means no decay this beat.
+
+    `last_change` is the Simulator's derived index `(entity, prop) ->
+    tick of the latest committed event that changed it`, maintained in
+    the `_commit` funnel (L3 — a strict function of the log, no per-beat
+    event scan; the KI#19 "any committer" baseline for free).
 
     The drafts are per-NPC: one `status_decayed` event per NPC with a
     non-empty change set, so the chronicle reads each character's
@@ -130,8 +135,8 @@ def decay_drafts(
             current = props.get(f"status.{axis}")
             if not isinstance(current, int) or isinstance(current, bool):
                 continue  # NPC has no value on this axis (e.g. attention)
-            last_change = _last_change_tick(events, npc_id, axis)
-            delta = _axis_deltas(axis, config, last_change, beat_tick)
+            last_change_tick = last_change.get((npc_id, f"status.{axis}"))
+            delta = _axis_deltas(axis, config, last_change_tick, beat_tick)
             if delta is None or delta.delta == 0:
                 continue
             scale = pack.rules["relations"]["scale"]
@@ -165,23 +170,6 @@ def decay_drafts(
             )
         )
     return tuple(drafts)
-
-
-def _last_change_tick(events: Sequence[Any], npc_id: str, axis: str) -> int | None:
-    """The tick of the latest event that changed the NPC's `status.<axis>`
-    — a decay beat, a use effect, a rotation reset; any committer counts
-    (the baseline must respect a mid-beat reset, or a rotation-fresh NPC
-    gains fatigue for ticks it did not stay awake — the KI#19 lesson).
-    None when the axis never moved (run start)."""
-    prop = f"status.{axis}"
-    last: int | None = None
-    for event in events:
-        if any(
-            change.entity == npc_id and change.prop == prop
-            for change in event.state_changes
-        ):
-            last = event.t
-    return last
 
 
 def rotation_resets(

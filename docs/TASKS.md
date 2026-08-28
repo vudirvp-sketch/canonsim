@@ -126,7 +126,9 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   capped at pytest + ruff — AGENTS §8/§10; D-031 parks the candidate here.
   The type-discipline values are law from iter-1 via
   `docs/blueprint/phase0.md` §1; the tool is optional).
-- `perf-1` 10k-tick timing profile (target: seconds, not minutes).
+- `perf-1` 10k-tick timing profile (target: seconds, not minutes; the
+  iter-8h micro-pass landed the six locally-provable asymptotic wins —
+  the profile stays the gate for structural work).
 - `balance-1` 1000-headless-sim distribution harness — DONE iter-6:
   `scripts/balance_harness.py` runs the gate playscript 1000× across
   seeds 100–1099 (director off), folds each log through
@@ -184,6 +186,18 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8h · 2026-08-29 · owner-directed derived-index micro-pass (an
+  external patch list verified against the code first — every item
+  proven semantics-preserving): two derived runtime indexes beside
+  their single mutation funnels (`KnowledgeView` `who → token →
+  source-ids` in `add` — `holds` O(1), `before_source` preserved;
+  Simulator `(entity, prop) → tick` in `_commit` — the decay baseline
+  without the per-beat log scan) + four scan eliminations
+  (scene-delta window break on tick-monotonicity, `salient()` top-1
+  `max`, `occ_breaking_cause` one forward fold from the proposal
+  point, director `entropy` once per `releases()`); D-050;
+  micro-benchmarks 1.9×–664×; 338→340 green, ruff clean, golden
+  fixtures byte-identical. Detail: worklog iter-8h + D-050.
 - iter-8g · 2026-08-29 · DF coverage audit (owner-requested: "is anything
   being missed in the giant DF exports?"): `scripts/df_survey.py --audit`
   mode — coverage census (per-section per-record-tag counts + every

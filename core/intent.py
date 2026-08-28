@@ -22,7 +22,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
-from core.fold import Projection, fold
+from core.fold import Projection, apply_event, fold
 from core.log import EventRecord, KnowledgeRecord, StateChange
 from core.rng import RngBank
 
@@ -422,12 +422,16 @@ def occ_breaking_cause(
     initial: Projection,
 ) -> str | None:
     """The event id whose application first broke a precondition after the
-    intent was proposed; None when nothing broke it. Folds forward from the
-    initial projection (test-path machinery reused for attribution only)."""
+    intent was proposed; None when nothing broke it. One forward fold from
+    the proposal point (test-path machinery reused for attribution only):
+    `fold` is a strict left fold over `apply_event`, so folding the prefix
+    once and then applying one event at a time visits exactly the states
+    the per-index refold used to rebuild — at O(events), not O(w·events)."""
     action = pack.action(intent.kind)
     preconditions = list(action.get("requires", ())) if action else []
+    state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
-        state = fold(events[: idx + 1], initial)
+        apply_event(state, events[idx])
         if first_failing(pack, state, intent, preconditions) is not None:
             return events[idx].id
     return None

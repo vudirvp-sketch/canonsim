@@ -282,6 +282,12 @@ class Director:
         unreleased = list(self._unreleased())
         if not unreleased:
             return []
+        # Entropy is invariant across this call — nothing mutates the
+        # buffer, the release set, or the projection before an immediate
+        # return — so it is computed once and reused for every policy
+        # check (the eager per-hook recomputation was pure waste under a
+        # rejecting policy: k+1 identical evaluations per beat).
+        current_entropy = entropy(projection, iter(h for _, h in unreleased))
         # 1) explicit triggers — causal, fire regardless of entropy
         for idx, hook in unreleased:
             if not _trigger_fires(hook.trigger, projection, beat_tick):
@@ -292,13 +298,12 @@ class Director:
                 continue
             if not self.policy.permit_release(
                 explicit_trigger_fires=True,
-                current_entropy=entropy(projection, iter(h for _, h in unreleased)),
+                current_entropy=current_entropy,
             ):
                 continue
             self._mark_released(idx, hook.target_npc)
             return [self._intent(hook)]
         # 2) stagnation release — entropy < floor → lowest-threshold hook
-        current_entropy = entropy(projection, iter(h for _, h in unreleased))
         if not self.policy.permit_release(
             explicit_trigger_fires=False, current_entropy=current_entropy
         ):

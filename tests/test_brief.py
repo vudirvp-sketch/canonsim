@@ -172,10 +172,12 @@ def test_scene_delta_only_pc_perceived_events() -> None:
 
 
 def test_scene_delta_beat_window_excludes_before_last_beat() -> None:
+    # tick-monotonic (log-shaped) events: the writer's invariant — the
+    # assembler's newest-first walk and the window break both rely on it
     events = [
         _ev("ev_0000", 100, "wait", PLAYER, None),
-        _ev("ev_0001", 400, "wait", PLAYER, "ev_0000"),  # after beat 360
-        _ev("ev_0002", 360, "wait", PLAYER, "ev_0001"),  # AT the beat — excluded
+        _ev("ev_0001", 360, "wait", PLAYER, "ev_0000"),  # AT the beat — excluded
+        _ev("ev_0002", 400, "wait", PLAYER, "ev_0001"),  # after beat 360
     ]
     body = _blocks(render_brief(assemble_brief(events, PACK)))["scene_delta"]
     assert body == ["[t 400] wait: the player"]

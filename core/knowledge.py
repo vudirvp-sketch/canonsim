@@ -76,6 +76,10 @@ class KnowledgeView:
 
     def __init__(self) -> None:
         self._rows: dict[str, list[_Row]] = {}
+        # Token novelty index (who -> token -> source event ids), derived
+        # with `add` as its only writer — `holds` is O(1) instead of a row
+        # scan; the same funnel feeds it on replay (`from_events`).
+        self._sources: dict[str, dict[str, set[str]]] = {}
 
     def add(self, event: EventRecord) -> None:
         """Absorb one committed event's records (acquisition order)."""
@@ -83,6 +87,9 @@ class KnowledgeView:
             self._rows.setdefault(record.who, []).append(
                 _Row(record=record, importance=event.importance)
             )
+            self._sources.setdefault(record.who, {}).setdefault(
+                record.knows, set()
+            ).add(record.source)
 
     @classmethod
     def from_events(cls, events: Sequence[EventRecord]) -> KnowledgeView:
@@ -103,12 +110,15 @@ class KnowledgeView:
     def holds(self, who: str, token: str, *, before_source: str | None = None) -> bool:
         """Whether `who` holds `token` — optionally only from events other
         than `before_source` (the novelty test for reactions: a record does
-        not count as old knowledge merely because it just got written)."""
-        return any(
-            row.record.knows == token
-            and (before_source is None or row.record.source != before_source)
-            for row in self._rows.get(who, ())
-        )
+        not count as old knowledge merely because it just got written).
+        O(1) through the token index: a token learned only from the
+        excluded source is NOT held."""
+        sources = self._sources.get(who, {}).get(token)
+        if not sources:
+            return False
+        if before_source is None:
+            return True
+        return any(source != before_source for source in sources)
 
     def _ranked(
         self, who: str, *, exclude_source: str | None
@@ -129,9 +139,21 @@ class KnowledgeView:
     def salient(
         self, who: str, *, exclude_source: str | None = None
     ) -> LoggedKnowledgeRecord | None:
-        """The most salient record (P2c) — or None for a blind knower."""
-        ranked = self._ranked(who, exclude_source=exclude_source)
-        return ranked[0] if ranked else None
+        """The most salient record (P2c) — or None for a blind knower.
+        Top-1 of the `_ranked` order (importance, then recency); `max`
+        returns the first of equals, exactly what the stable reverse sort
+        put at index 0 — so the O(K log K) sort is not paid for one pick."""
+        rows = [
+            row
+            for row in self._rows.get(who, ())
+            if exclude_source is None or row.record.source != exclude_source
+        ]
+        if not rows:
+            return None
+        best = max(
+            rows, key=lambda row: (_IMPORTANCE_RANK[row.importance], row.record.at)
+        )
+        return best.record
 
 
 # -- transfer (one-step fidelity decay, D-007) --------------------------------

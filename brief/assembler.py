@@ -171,7 +171,7 @@ def _scene_delta_lines(
     lines: list[str] = []
     for event in reversed(events):  # newest first — recency dominates
         if window_start is not None and event.t <= window_start:
-            continue
+            break  # ticks are log-monotonic: older events are past the window too
         perceived = event.actor == player_id or any(
             record.who == player_id for record in event.knowledge
         )

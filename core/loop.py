@@ -171,6 +171,10 @@ class Simulator:
         self._pass_live: set[str] = set()
         # derived knowledge index (L3) + the next watch rotation tick
         self._knowledge = KnowledgeView()
+        # derived last-change index (L3): (entity, prop) -> tick of the
+        # latest committed event that changed it — the decay baseline
+        # without a per-beat log scan; `_commit` is its only writer
+        self._last_change: dict[tuple[str, str], int] = {}
         self._next_rotation = next_rotation_tick(
             pack.rules, self._clock.ticks_per_day, 0
         )
@@ -570,7 +574,7 @@ class Simulator:
         the moment the world resumes moving"."""
         # 1) states decay — every NPC whose status.* deltas are non-zero
         for draft in decay_drafts(
-            self._pack, self._projection, self._events, beat_tick
+            self._pack, self._projection, self._last_change, beat_tick
         ):
             self._commit(replace(
                 draft, cause=self._writer.last_id,
@@ -739,6 +743,8 @@ class Simulator:
         record = self._writer.append(draft)
         apply_event(self._projection, record)
         self._events.append(record)  # in-memory cache: OCC attribution only
+        for change in record.state_changes:
+            self._last_change[(change.entity, change.prop)] = record.t
         self._knowledge.add(record)  # derived index (L3)
         self._react(record)  # event-driven reactions (phase0 §3)
         return record

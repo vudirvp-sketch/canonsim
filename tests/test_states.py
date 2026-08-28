@@ -31,7 +31,7 @@ def test_decay_pass_emits_no_drafts_at_zero_elapsed() -> None:
     """A decay pass at the same tick as the last decay event produces
     no drafts — the elapsed time is zero, no axis moves."""
     projection = initial_projection(PACK.entities)
-    drafts = decay_drafts(PACK, projection, events=[], beat_tick=0)
+    drafts = decay_drafts(PACK, projection, last_change={}, beat_tick=0)
     assert drafts == ()
 
 
@@ -41,7 +41,7 @@ def test_decay_pass_emits_drafts_after_six_in_world_hours() -> None:
     to decay on the NPCs at t=0 — all start at 0); injury 0 (auto_decay
     is 0 — the sentinel that says 'never decay')."""
     projection = initial_projection(PACK.entities)
-    drafts = decay_drafts(PACK, projection, events=[], beat_tick=360)
+    drafts = decay_drafts(PACK, projection, last_change={}, beat_tick=360)
     # the drunkard has intoxication 50; the barkeep and Doren have fatigue 10;
     # the maid has fatigue 20. Each NPC with a non-zero delta gets a draft.
     assert drafts  # at least one
@@ -58,7 +58,7 @@ def test_decay_pass_uses_last_decay_event_as_baseline() -> None:
     applies only 360 ticks of decay (not 720)."""
     projection = initial_projection(PACK.entities)
     # first decay at 360: drunkard intoxication 50 -> 40
-    first = decay_drafts(PACK, projection, events=[], beat_tick=360)
+    first = decay_drafts(PACK, projection, last_change={}, beat_tick=360)
     first_drunk = next(d for d in first if d.target == "npc_drunk_01")
     first_intox = next(c for c in first_drunk.state_changes if c.prop == "status.intoxication")
     assert first_intox.to_ == 40
@@ -73,8 +73,14 @@ def test_decay_pass_uses_last_decay_event_as_baseline() -> None:
         state_changes=first_drunk.state_changes, hooks=(), importance="low",
         provenance={},
     )
+    # the runtime equivalent: the Simulator's _commit funnel maintains
+    # exactly this mapping — (entity, prop) -> tick of the latest changer
+    last_change = {
+        (c.entity, c.prop): last_decay_event.t
+        for c in last_decay_event.state_changes
+    }
     # second decay at 720 (another 360 ticks): 40 -> 30
-    second = decay_drafts(PACK, projection, events=[last_decay_event], beat_tick=720)
+    second = decay_drafts(PACK, projection, last_change=last_change, beat_tick=720)
     second_drunk = next(d for d in second if d.target == "npc_drunk_01")
     second_intox = next(c for c in second_drunk.state_changes if c.prop == "status.intoxication")
     assert second_intox.from_ == 40 and second_intox.to_ == 30
@@ -85,7 +91,7 @@ def test_injury_never_decays() -> None:
     counter-event). T4 holds — an injury is permanent."""
     projection = initial_projection(PACK.entities)
     projection["npc_guard_01"]["status.injury"] = 50  # injured
-    drafts = decay_drafts(PACK, projection, events=[], beat_tick=360)
+    drafts = decay_drafts(PACK, projection, last_change={}, beat_tick=360)
     guard = next((d for d in drafts if d.target == "npc_guard_01"), None)
     if guard is not None:
         # if the guard has a draft, it should NOT touch injury
@@ -96,7 +102,7 @@ def test_decay_pass_skips_caught_npcs() -> None:
     """The caught do not tire — a dead-or-captured NPC has no decay."""
     projection = initial_projection(PACK.entities)
     projection["npc_drunk_01"]["crime_status"] = "caught"
-    drafts = decay_drafts(PACK, projection, events=[], beat_tick=360)
+    drafts = decay_drafts(PACK, projection, last_change={}, beat_tick=360)
     # no draft for the drunkard (caught)
     assert all(d.target != "npc_drunk_01" for d in drafts)
 
@@ -106,7 +112,7 @@ def test_decay_clamps_to_relations_scale() -> None:
     relation scale [0, 100] is the floor/ceiling for status too."""
     projection = initial_projection(PACK.entities)
     projection["npc_drunk_01"]["status.intoxication"] = 5  # near floor
-    drafts = decay_drafts(PACK, projection, events=[], beat_tick=360)
+    drafts = decay_drafts(PACK, projection, last_change={}, beat_tick=360)
     drunk = next((d for d in drafts if d.target == "npc_drunk_01"), None)
     if drunk is not None:
         intox = next(c for c in drunk.state_changes if c.prop == "status.intoxication")
