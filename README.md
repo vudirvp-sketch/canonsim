@@ -27,13 +27,16 @@ backyard stays destroyed — T4). The gate deliverables: `docs/TEST_PLAN.md`
 (schema-version pin + fresh-regen byte diff), `tests/test_t8_ab.py`
 (single-factor A/B: ≥3 emergent chains OFF, director_0000 fires ON,
 seed 125 gate playscript), `scripts/balance_harness.py` (KI#4 close —
-the 1000-sim distribution harness; full table in `output/`). 299 tests
-green (iter-6a audit), ruff clean, golden fixture byte-identical. Track A
-frozen at phase-0 scope; phase 1 (narrator over the log) opened with the
-iter-7 intake (DECISIONS collapsed per D-034, TASKS.md re-planned) —
-next: iter-8, BRIEF_SPEC + the deterministic brief assembler
-(`docs/TASKS.md`). Track B (`bg-1..bg-4`) unblocked for parallel
-LLM-circuit spikes on Dwarf Fortress Legends XML.
+the 1000-sim distribution harness; full table in `output/`). Phase 1
+(narrator over the log) opened with the iter-7 intake and landed its
+first deliverable at iter-8: `docs/BRIEF_SPEC.md` + `brief/assembler.py`
+— the deterministic six-block brief (budgets, eviction, voice
+isolation) as pure functions of the log, zero RNG, byte-identical on
+the golden fixture. 329 tests green, ruff clean, golden fixture
+byte-identical. Next: iter-9+, `VALIDATION_SPEC.md` + the validator's
+LLM-free half (`docs/TASKS.md`); the narrator LLM boundary is an
+owner-gated checkpoint (AGENTS §8). Track B (`bg-1..bg-4`) unblocked
+for parallel LLM-circuit spikes on Dwarf Fortress Legends XML.
 
 ## For AI agents (primary audience)
 
@@ -55,7 +58,7 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/assembler.py` landed iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md`) |
 | `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 

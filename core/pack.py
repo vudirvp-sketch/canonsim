@@ -34,9 +34,27 @@ from core.intent import (
 from core.resolvers import REGISTRY
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 
-__all__ = ["PACK_FILE_NAMES", "Pack", "PackError", "load_pack"]
+__all__ = [
+    "BRIEF_BLOCK_IDS",
+    "PACK_FILE_NAMES",
+    "Pack",
+    "PackError",
+    "load_pack",
+]
 
 PACK_FILE_NAMES: Final = ("actions.json", "entities.json", "rules.json", "templates.json")
+
+# The brief pipeline's closed block vocabulary (BRIEF_SPEC §3). Mechanic
+# words, not setting nouns (INV-3); owned here so the lint and the
+# assembler (`brief/assembler.py`) share one source of truth.
+BRIEF_BLOCK_IDS: Final = (
+    "directives",
+    "scene_delta",
+    "recalled_facts",
+    "scheduled_lore",
+    "voice_exemplars",
+    "active_options",
+)
 
 _SNAKE_CASE: Final = re.compile(r"^[a-z][a-z0-9_]*$")
 _SLOT: Final = re.compile(r"\{([a-z_]+)\}")
@@ -77,6 +95,7 @@ class _Lint:
         self._urgencies()
         self._director()
         self._states_rules()
+        self._brief()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -782,6 +801,110 @@ class _Lint:
                         f"{where}: threshold trigger needs target_npc + axis + "
                         f"comparator + integer value",
                     )
+
+    # -- brief (iter-8: the phase-1 assembler contract, BRIEF_SPEC §6) --------
+
+    def _brief(self) -> None:
+        config = self._data["rules.json"].get("brief")
+        if config is None:
+            raise PackError(
+                "rules.json: the brief section is required (phase-1 contract, "
+                "BRIEF_SPEC §6)"
+            )
+        where = "rules.json::brief"
+        blocks = config.get("blocks")
+        _require(isinstance(blocks, Mapping), f"{where}: 'blocks' must be an object")
+        _require(
+            set(blocks) == set(BRIEF_BLOCK_IDS),
+            f"{where}: blocks must be exactly {list(BRIEF_BLOCK_IDS)}, "
+            f"got {sorted(blocks)}",
+        )
+        for block_id, budget in blocks.items():
+            _require(
+                isinstance(budget, Mapping),
+                f"{where}.blocks[{block_id!r}]: budget must be an object",
+            )
+            for key in ("soft", "hard"):
+                value = budget.get(key)
+                _require(
+                    isinstance(value, int) and not isinstance(value, bool) and value > 0,
+                    f"{where}.blocks[{block_id!r}]: {key} must be a positive integer",
+                )
+            _require(
+                budget["soft"] <= budget["hard"],
+                f"{where}.blocks[{block_id!r}]: soft must be <= hard",
+            )
+        total = config.get("total_hard")
+        _require(
+            isinstance(total, int) and not isinstance(total, bool) and total > 0,
+            f"{where}: total_hard must be a positive integer",
+        )
+        directives = config.get("directives")
+        _require(
+            isinstance(directives, list)
+            and directives
+            and all(isinstance(line, str) and line.strip() for line in directives),
+            f"{where}: directives must be a non-empty list of non-empty strings",
+        )
+        # Never-dropped data must fit by construction (BRIEF_SPEC §6):
+        # the fill law never applies to directives, so their own hard
+        # budget is the only ceiling they have.
+        directives_tokens = sum(len(line.split()) for line in directives)
+        _require(
+            directives_tokens <= blocks["directives"]["hard"],
+            f"{where}: directives ({directives_tokens} tokens) exceed their own "
+            f"hard budget {blocks['directives']['hard']}",
+        )
+        lore = config.get("lore")
+        _require(isinstance(lore, list), f"{where}: lore must be a list")
+        seen_ids: set[str] = set()
+        for entry in lore:
+            _require(isinstance(entry, Mapping), f"{where}.lore: entries must be objects")
+            entry_id = entry.get("id")
+            _require(
+                isinstance(entry_id, str) and entry_id.strip() and entry_id not in seen_ids,
+                f"{where}.lore: ids must be unique non-empty strings, got {entry_id!r}",
+            )
+            seen_ids.add(entry_id)
+            where_entry = f"{where}.lore[{entry_id!r}]"
+            _require(
+                isinstance(entry.get("text"), str) and entry["text"].strip(),
+                f"{where_entry}: text must be a non-empty string",
+            )
+            for key in ("from_beat", "to_beat"):
+                value = entry.get(key)
+                _require(
+                    isinstance(value, int) and not isinstance(value, bool) and value >= 0,
+                    f"{where_entry}: {key} must be a non-negative integer",
+                )
+            _require(
+                entry["from_beat"] < entry["to_beat"],
+                f"{where_entry}: from_beat must be < to_beat",
+            )
+        exemplars = config.get("voice_exemplars")
+        _require(
+            isinstance(exemplars, list)
+            and all(isinstance(line, str) and line.strip() for line in exemplars),
+            f"{where}: voice_exemplars must be a list of non-empty strings",
+        )
+        recalled = config.get("recalled_facts")
+        _require(
+            isinstance(recalled, Mapping),
+            f"{where}: recalled_facts must be an object",
+        )
+        for key in ("recency_weight", "importance_weight"):
+            value = recalled.get(key)
+            _require(
+                isinstance(value, (int, float))
+                and not isinstance(value, bool)
+                and value >= 0,
+                f"{where}.recalled_facts: {key} must be a non-negative number",
+            )
+        max_items = recalled.get("max_items")
+        _require(
+            isinstance(max_items, int) and not isinstance(max_items, bool) and max_items >= 1,
+            f"{where}.recalled_facts: max_items must be an integer >= 1",
+        )
 
 
 @dataclass(frozen=True, slots=True)

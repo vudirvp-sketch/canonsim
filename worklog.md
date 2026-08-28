@@ -83,24 +83,8 @@ iter-2 · 2026-08-28 · actions — the 12, checks, price (iter-2-actions)
   checks auto-succeed at v0.1 numbers). Fix during work: spread-pass spot
   prefix mismatch (prop keys vs spot names) caught by the day1 probe.
 ---
-iter-1 · 2026-08-28 · core plumbing — first functional code (iter-1-core-plumbing)
-- core/{schema,rng,ids,clock,queue,log,fold,pack,loop}.py: RngBank guards
-  (assure/audit/peek/fingerprint), band-ordered heapq, cause-checked JSONL
-  writer (write-time schema validation, gap-free ids, stamped knowledge
-  sources), incremental projection + fold (T2), pack loader + minimum lint,
-  playscript runner (movement/wait resolvers; the ten check-bearing actions
-  land iter-2). actions.json gained `resolver` keys (INV-3 mapping in data).
-- Tests: architecture fitness (import boundary, RNG monopoly, network ban,
-  print ban), T0 (doc examples extracted at test time), T1 minimal
-  (byte-identical + committed golden fixture tests/fixtures/
-  plumbing_smoke_seed42.jsonl), core units, loop e2e — 78 green, ruff clean.
-  KI#10 closed (D-032 stdlib validator); KI#5 closed (STATE-1 built);
-  D-033 (P2c → iter-3); D-034 (DECISIONS cap: collapse at gates).
-  24 files — over the 3–5 soft limit (task-mandated module set + the
-  AGENTS §6 sync set); DECISIONS at 34 entries, over cap per D-034 until
-  the phase-0 gate collapse.
----
 (iter-0aa deleted at iter-7 per the one-in/one-out cap; history in git.)
+(iter-1 deleted at iter-8 per the one-in/one-out cap; history in git.)
 ---
 iter-5 · 2026-08-28 · chronicle & CLI (iter-5-chronicle-cli)
 - render/tracery.py (CHRON-1: tracery grammar, modifiers, save/restore,
@@ -176,3 +160,22 @@ iter-7 · 2026-08-28 · phase-1 intake (iter-7-phase1-intake)
 - 13 files — intake fix set + mandated sync set (precedent: iter-4a/6a).
   299 tests green, ruff clean, golden fixture byte-identical (dead
   params — no canon-path change).
+
+---
+iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8-brief-spec-assembler)
+- docs/BRIEF_SPEC.md (trigger fired at phase-1 start: six-block pipeline,
+  two-level budgets — soft fill target / hard per-item ceiling /
+  total_hard whole-block eviction with `[truncated:N]` markers and
+  never-drop-directives, voice isolation L2, max_items = ranking cap not
+  budget drop, §9 just-in-time deferral table) + brief/assembler.py
+  (pure functions of the log, ZERO RNG — byte-identity on the golden
+  fixture across calls, PYTHONHASHSEED-independent; beat arithmetic =
+  the read-side mirror of the loop's day-1-edge law) + rules.json::brief
+  pack contract (budgets + directives/lore/exemplars text) +
+  core/pack.py::_brief lint (BRIEF_BLOCK_IDS closed enum) +
+  tests/test_brief.py (30 tests). D-047 recorded — DECISIONS transiently
+  31/30 mid-phase (iter-1 precedent; collapse due at the phase-1→2 gate).
+- 13 files — task-mandated set (spec + assembler + pack + tests + lint)
+  + the AGENTS §6 sync set (TASKS/SPECS_BACKLOG/AGENT_NAVIGATION/STATUS/
+  worklog/README/DECISIONS). 299→329 tests green, ruff clean, golden
+  fixture byte-identical.

@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9) and the intent contract parameters (docs/INTENT_SCHEMA.md). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
+    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9), the intent contract parameters (docs/INTENT_SCHEMA.md), and the brief assembler contract (docs/BRIEF_SPEC.md §6, iter-8). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
   },
 
   "time": {
@@ -275,5 +275,46 @@
       "intent_rejected": []
     },
     "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction."
+  },
+
+  "brief": {
+    "total_hard": 700,
+    "blocks": {
+      "directives": {"soft": 60, "hard": 80},
+      "scene_delta": {"soft": 150, "hard": 200},
+      "recalled_facts": {"soft": 180, "hard": 240},
+      "scheduled_lore": {"soft": 90, "hard": 120},
+      "voice_exemplars": {"soft": 90, "hard": 120},
+      "active_options": {"soft": 90, "hard": 120}
+    },
+    "recalled_facts": {
+      "max_items": 12,
+      "recency_weight": 1.0,
+      "importance_weight": 1.0
+    },
+    "directives": [
+      "Narrate only what the brief contains; the log is the canon.",
+      "Facts are immutable; prose is yours.",
+      "Never invent events, names, or outcomes."
+    ],
+    "lore": [
+      {
+        "id": "salt_road",
+        "text": "The tavern stands on the old salt road; carts stop rarely since the bridge toll rose.",
+        "from_beat": 0,
+        "to_beat": 3
+      },
+      {
+        "id": "toll_charter",
+        "text": "The watch answers to the tollmaster's charter: two guards, one duty post, no questions after dark.",
+        "from_beat": 1,
+        "to_beat": 6
+      }
+    ],
+    "voice_exemplars": [
+      "The taproom hummed, low and careless, the way rooms do before anything happens.",
+      "Rain started against the shutters — a patient, unhurried sound."
+    ],
+    "notes": "iter-8 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction), the two deterministic recall signals, and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
   }
 }

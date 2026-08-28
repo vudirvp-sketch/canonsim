@@ -1,19 +1,18 @@
 # STATUS — canonsim
 
-Iteration: 7 (`iter-7-phase1-intake`) · Phase: 1 — intake · Date:
-2026-08-28 · owner-requested retrospective + plan reorganization at
-the phase boundary (the iter-2a/4a/6a audit precedent, extended:
-what was audited is the phase-0 result as a whole, not just the last
-two iterations).
-
-Intake executed: the D-034-mandated DECISIONS collapse (46→30,
-ID-preserving family merges, 55KB→20KB); TASKS.md regained the
-"what next" ownership (the phase-1 plan lived only here, in the
-STATUS "Next step" — an ownership drift, AGENT_NAVIGATION §3);
-intake audit fixes KI#25/26/27. Baseline re-verified before any
-edit: 299 tests green + ruff clean; the golden fixture stayed
-byte-identical through the code fixes (the removed parameters were
-dead — no canon-path change).
+Iteration: 8 (`iter-8-brief-spec-assembler`) · Phase: 1 — brief
+assembler · Date: 2026-08-28 · the `BRIEF_SPEC.md` trigger fired at
+phase-1 start: the spec written from the block-pipeline design
+(`docs/blueprint/phases.md` §1, ≤300 lines, field-level clauses
+just-in-time with a §9 deferral table), and the deterministic assembler
+landed in `brief/assembler.py` — pure functions of the log, zero RNG
+(byte-identity on the golden fixture across calls,
+PYTHONHASHSEED-independent). Two-level budgets (soft fill target /
+hard per-item ceiling / total_hard whole-block eviction),
+`[truncated:N]` markers, the never-drop-directives law — all
+unit-tested (+30 tests). D-047 recorded (DECISIONS transiently 31/30
+mid-phase — the iter-1 precedent; collapse due at the phase-1→2 gate
+per D-034). KI#4 deleted (closed >2 iterations).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -51,9 +50,6 @@ dead — no canon-path change).
   §1 `scripts/` row still cited "AGENTS.md §9 — Script Persistence Rule"
   (superseded by D-046; iter-6a fixed README/TEST_PLAN/D-044 but missed
   this one) — CLOSED iter-7: row rewritten to the true owner (TEST_PLAN §6).
-- KI#4 · balance harness — CLOSED iter-6: `scripts/balance_harness.py`
-  (1000-sim distribution; reproduced exactly by the iter-6a audit);
-  baselines M5 p50=0.77, chains p50=20, M3_mean p50=13.81, M1 p50=0.24.
 - KI#22 · TEST_PLAN + test_t8_ab docstrings drifted from the shipped gate
   facts (seed "32"→125 ×4; chains "24"→26 ×2; the M2 formula contradicted
   MVP_SCOPE §15 + the impl; §6 filename) — CLOSED iter-6a (worklog; §1.2
@@ -64,6 +60,7 @@ dead — no canon-path change).
   closure test; the CLI-class print exemption (MVP_SCOPE §18).
 - KI#24 · dead `fold_events` export with a false docstring in
   `core/metrics.py` — CLOSED iter-6a: removed (L13/L14).
+- KI#4 deleted at iter-8 (closed iter-6 — more than 2 iterations).
 
 ## FAQ / Pitfalls
 
@@ -71,7 +68,10 @@ dead — no canon-path change).
   Rotations and beats interleave by tick; the loop picks
   `min(candidates)` per iteration; the writer's tick-monotonicity
   invariant forbids out-of-order commits. Same rule for any future
-  clock-crossing system.
+  clock-crossing system. The read-side mirror of the beat law:
+  `brief/assembler.py` `last_beat_tick`/`beats_crossed` reproduce the
+  same beat set (intraday offsets repeated daily; an offset of 0
+  belongs to day 1+, never t=0) — owner `BRIEF_SPEC.md` §3.2, tested.
 - **Autonomous intents enqueue at entry.tick, never beat_tick (D-039) —
   and NEVER advance the playscript (KI#17).** Urgency/director intents
   enqueue at `entry.tick` (sub_order NPC_REACTION); decay commits
@@ -156,14 +156,18 @@ dead — no canon-path change).
   detail (D-024 anti-drift: spec-restatement in a decision row is
   duplication, not substance). Pre-collapse history lives in git.
   Due again at the phase-1→2 gate.
-- **The read-side layers are pure functions of the log (iter-5/6 laws).**
+- **The read-side layers are pure functions of the log (iter-5/6/8 laws).**
   Every render entry point builds a fresh `RngBank` from the log HEADER
   seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
   growing log keeps its rendered prefix (the session delta-print rides
   on this). A session is one opened Simulator: `open`/`run_steps`/
   `close`; session == batch bytes; `seed <n>` starts a NEW log (INV-5).
   `core/metrics.py` reads `(events, projection)` — the simulator never
-  knows a metric exists (L3; Mesa DataCollector inverted).
+  knows a metric exists (L3; Mesa DataCollector inverted). The brief
+  assembler goes further: **zero RNG at all** (dry structured tokens,
+  L2 — `brief/assembler.py`, BRIEF_SPEC §2); its recall `max_items` is
+  a ranking cap (the O(relevance) top-k), NOT a budget drop — the
+  `[truncated:N]` marker counts budget drops only.
 - **Gate mechanics: the T8 single-factor A/B + the balance harness
   (iter-6 laws).** Same playscript/seed (125), only the director flag
   changes: ON fires `director_0000`; OFF keeps seeding (D-005) and
@@ -182,14 +186,17 @@ dead — no canon-path change).
 
 ## Next step
 
-**Phase 1 is open** — the plan's single owner is `docs/TASKS.md`
-(Track A: iter-8 = BRIEF_SPEC + the deterministic brief assembler;
-iter-9+ = VALIDATION_SPEC + the validator's LLM-free half; the
-narrator LLM boundary is an AGENTS §8 owner checkpoint). Track B
+**Phase 1 continues** — the plan's single owner is `docs/TASKS.md`
+(Track A: iter-9+ = VALIDATION_SPEC + the validator's LLM-free half —
+fact transaction, ExpectedVersion OCC, ≤2 regens, INSUFFICIENT_DATA
+default, golden-set plumbing; the narrator LLM boundary itself is an
+AGENTS §8 owner checkpoint — INV-4 holds until then). Track B
 (`bg-1..bg-4`) stays unblocked in parallel — note bg-1 needs the
 owner's local DF Classic + DFHack setup (world export cannot run in
-this sandbox). Phase-1 intake backlog that did NOT land in iter-7
-(each stays in its TASKS home, none blocks iter-8): `doc-1` VISION
-freeze review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated,
-AGENTS §8); `perf-1` 10k-tick profile; `tune-1` rest action + the
-D-045(b) importance-rule knob.
+this sandbox). Backlog that did NOT land in iter-8 (each stays in its
+TASKS home, none blocks iter-9): `doc-1` VISION freeze review; `qa-1`
+mypy + `ci-1` GitHub Actions (owner-gated, AGENTS §8); `perf-1`
+10k-tick profile; `tune-1` rest action + the D-045(b) importance-rule
+knob; the BRIEF_SPEC §9 deferrals (relevance signal, lore scheduling
+grammar, precondition-filtered options, exemplar refresh cadence — all
+arrive with the mediator, never early).

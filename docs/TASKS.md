@@ -22,20 +22,13 @@ TASKS.md regained the "what next" ownership (the phase-1 plan lived
 only in STATUS "Next step" — drift); intake audit fixes KI#25/26/27.
 Detail: `worklog.md` iter-7 + `STATUS.md`.
 
-### iter-8 · BRIEF_SPEC + brief assembler skeleton — todo
+### iter-8 · BRIEF_SPEC + brief assembler — done
 
-- Phase-1 start fires the `BRIEF_SPEC.md` trigger (`SPECS_BACKLOG.md`):
-  write the spec from the block-pipeline design (`docs/blueprint/phases.md`
-  §1 — six block types, hard/soft budgets, eviction contract,
-  voice-isolation law), field-level clauses born just-in-time, ≤300 lines.
-- `brief/` (skeleton since iter-0d) gains the deterministic assembler:
-  block pipeline + token budgets + eviction as pure functions of the log
-  (the D-042/D-043/D-044 read-side-purity family — same log → same brief
-  bytes). No LLM, no network: INV-4 holds.
-- AC: spec committed; the assembler renders a brief for a committed log
-  (the golden fixture) byte-identically across calls; budgets + eviction
-  unit-tested incl. the `[truncated:N]` marker and the
-  never-drop-directives law; pytest + ruff green.
+`docs/BRIEF_SPEC.md` written (trigger fired; six-block pipeline, two-level
+budgets, eviction contract, voice-isolation law, just-in-time deferrals);
+`brief/assembler.py` — the deterministic assembler as pure functions of the
+log; `rules.json::brief` pack contract + `core/pack.py` lint. Detail:
+`worklog.md` iter-8 + `docs/BRIEF_SPEC.md`.
 
 ### iter-9+ · phase-1 continuation — todo (sequenced after iter-8)
 
@@ -155,6 +148,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler: `docs/BRIEF_SPEC.md`
+  (trigger fired at phase-1 start — six-block pipeline, two-level budgets
+  soft-fill/hard-ceiling, whole-block eviction with `[truncated:N]`
+  markers and the never-drop-directives law, voice-isolation L2, §9
+  just-in-time deferrals incl. the max_items ranking-cap distinction);
+  `brief/assembler.py` — the deterministic assembler, pure functions of
+  the log, zero RNG (byte-identity on the golden fixture across calls,
+  PYTHONHASHSEED-independent); `rules.json::brief` pack contract
+  (budgets + directives/lore/exemplars text) + `core/pack.py::_brief`
+  lint (BRIEF_BLOCK_IDS closed enum). D-047 recorded. 329 tests green
+  (+30), ruff clean, golden fixture byte-identical.
 - iter-7 · 2026-08-28 · phase-1 intake (owner-requested retrospective +
   plan reorganization): DECISIONS collapsed 46→30 per D-034
   (ID-preserving family merges, 55KB→20KB); TASKS.md regained the
