@@ -36,7 +36,8 @@ silent drop, never an exception.
 | `type` | string, snake_case | yes | one of the pack's action intents (`actions.json`) |
 | `actor` | entity id | yes | the proposer (the player in phase 0; NPCs and the director enqueue through the same door from iter-4) |
 | `target` | entity id | no | direct object; required when a precondition references the noun `target` |
-| `fields` | per-action map | no | the action's declared `fields` only (`method`, `ticks`, `near` in tavern_pack) |
+| `fields` | per-action map | no | the action's declared `fields` only (`method`, `ticks`, `near` in tavern_pack; `take` also declares `texture` — iter-11) |
+| `fields.texture` | resolved reference | no | the mediator's noun-resolution output `{entry, scope, slot, value}` — a live ledger entry the mediator resolved BEFORE the door (blueprint §1); core stays ledger-blind: the reference is data, shape-gated loud (`core/intent.py::texture_reference`), never checked for ledger liveness (the withdrawal mirror owns mid-flight retirement, VALIDATION_SPEC §8) |
 | `based_on_event_seq` | integer | yes | the projection's event count at proposal — the OCC anchor (§4) |
 | `risk` | number | reserved | phase 1+ (the mediator's risk dial; no consumer in phase 0 — a dead field would violate L1) |
 | `uncertainty` | number | reserved | phase 1+ (validator confidence input) |
@@ -67,10 +68,24 @@ test. A failing condition rejects the intent with
 | `carried_by` | `who` | the item's runtime `carrier` equals `who` |
 | `uncarried` | — | the item's runtime `carrier` is None |
 | `has_field` | `field` | the pack record has the field (`use_effect`) |
+| `texture_noun` | — | the intent carries a well-formed resolved texture reference whose scope target is a known entity (iter-11; ledger liveness deliberately NOT tested — core is ledger-blind) |
 
-Nouns: `actor`, `target`. Runtime sources: the projection for position /
-carrier / relations / status; the pack for static records. The same
-evaluator runs at proposal time and at completion time (OCC, §4).
+Nouns: `actor`, `target`, `texture` (iter-11 — resolves to the reference's
+scope target, the canon entity a promotion lands on). Runtime sources: the
+projection for position / carrier / relations / status; the pack for static
+records. The same evaluator runs at proposal time and at completion time
+(OCC, §4).
+
+**The texture path (iter-11, blueprint §1 promotion).** When an intent
+carries a `texture` field and the action ships a pack `texture` block, the
+block's `requires` REPLACE the canon list (`core/intent.py::requires_for`)
+and its `knowledge` templates render with the texture context — no canon
+target on that path, so the `{target}` slot is lint-forbidden in the block
+(use `{texture_slot}`). The pack owns which actions are texture-capable
+(the grammar); the ledger owns which nouns are addressable (the
+vocabulary) — the split is D-049. A success commits the promotion itself:
+the scope target gains the slot as a canon prop (the object's canon birth);
+a failure promotes nothing (the entry stays live+pinned).
 
 ## 4. Intent OCC (`based_on_event_seq`)
 
@@ -127,7 +142,8 @@ declares record templates: `who` ∈ {`actor`, `target`, `same_location`,
 `adjacent_locations`, `destination_location`} + optional `except` tokens
 (`actor`, `target`, `cause_actor`); `channel`/`fidelity` from the
 EVENT_SCHEMA enums; `knows` is a slot template over `{actor}`, `{target}`,
-`{location}`, `{cause_actor}` (closed set, lint-checked). Audiences resolve
+`{location}`, `{cause_actor}`, `{texture_slot}` (closed set, lint-checked —
+the texture slot names the promoted texture's slot, iter-11). Audiences resolve
 to knowledge-holders only — npcs and ambient groups, never items; hearing
 radii follow `rules.json` `position_visibility.hearing` (adjacent
 locations hear vague only). Blind-NPC (T3) holds by construction: no

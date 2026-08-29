@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -123,7 +123,7 @@
         {"noun": "target", "test": "same_location", "with": "actor"},
         {"noun": "target", "test": "uncarried"}
       ],
-      "fields": [],
+      "fields": ["texture"],
       "knowledge": {
         "success": [],
         "failure": [
@@ -132,7 +132,22 @@
         ]
       },
       "hooks": {"success": [], "failure": []},
-      "notes": "picking up an uncarried item present in the location; the stealth check applies only with other entities present (MVP_SCOPE §7 'stealth if owner near'); taking a carried item is steal's job"
+      "texture": {
+        "requires": [
+          {"noun": "texture", "test": "texture_noun"},
+          {"noun": "texture", "test": "same_location", "with": "actor"}
+        ],
+        "knowledge": {
+          "success": [
+            {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "{actor}_holds_the_{texture_slot}"}
+          ],
+          "failure": [
+            {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_reaching_for_the_{texture_slot}"},
+            {"who": "actor", "channel": "saw", "fidelity": "partial", "knows": "{actor}_fumbled_the_{texture_slot}"}
+          ]
+        }
+      },
+      "notes": "picking up an uncarried item present in the location; the stealth check applies only with other entities present (MVP_SCOPE §7 'stealth if owner near'); taking a carried item is steal's job. iter-11: texture-capable (blueprint §1 promotion) — a step carrying the mediator-resolved 'texture' reference takes the texture path: the pack's texture.requires replace the canon ones and a success is the slot's canon birth on the scope target"
     },
     {
       "intent": "drop_break",

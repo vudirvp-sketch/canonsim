@@ -43,11 +43,18 @@ landed at iter-10: `brief/ledger.py` + the `scene_texture` 7th brief
 block — the session scene ledger (the texture stream: entry lifecycle,
 scenes as PC-location intervals, the one validation gateway, canon
 outranks texture, tombstones; the BRIEF_SPEC §9 atomic flip — the
-purity pair is now (log, ledger), D-053). 435 tests green, ruff clean,
-golden fixtures byte-identical. Next: the narrator LLM boundary — an
-owner-gated checkpoint (AGENTS §8); track A's LLM-free sequence is
-complete, track B (bg-2..bg-4) queries the bg-1 SQLite sink
-(`docs/TECH_NOTES.md` §3.2, D-051).
+purity pair is now (log, ledger), D-053). Its fourth landed at iter-11:
+the texture promotion door — the narrator boundary's LLM-free half
+(`core/intent.py` texture path: a texture-capable action's pack
+`texture` block replaces the canon preconditions for intents carrying
+the mediator-resolved reference — core stays ledger-blind — and a
+take-success IS the promotion, the slot's canon birth; D-054; the
+laundering + unique_slot golden pins complete the 8-reason refusal
+vocabulary). 443 tests green, ruff clean, golden fixtures
+byte-identical. Next: the narrator LLM call itself — an owner-gated
+checkpoint (AGENTS §8; local inference is a runtime-dependency
+stop-and-confirm item); track B (bg-2..bg-4) queries the bg-1 SQLite
+sink (`docs/TECH_NOTES.md` §3.2, D-051).
 
 ## For AI agents (primary audience)
 

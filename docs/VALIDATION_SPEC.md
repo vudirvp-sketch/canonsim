@@ -190,7 +190,7 @@ invented-facts metric and the §7 `regen_count` ride the same numbers.
 | The C-parser emitting IntentProposal JSON | phase 2 | blueprint §2 |
 | Knowledge-negation claims, fidelity-bearing claims | a real consumer (phase-2 parser disputes) | this spec §3 |
 | Semantic invalidation (a spreading fire kills the candlelight) | narrator delta territory or a later validator pass — never mediator guessing | blueprint §1 |
-| Live texture promotion wiring (noun resolution → door → `mark_promoted`; the pack `requires` texture-noun test) | the owner-gated narrator boundary | blueprint §1, BRIEF_SPEC §9 |
+| Live noun resolution → door → `mark_promoted` session circuit (the door's texture path + the pack `requires` texture-noun test landed iter-11 — INTENT_SCHEMA §3) | the owner-gated narrator boundary | blueprint §1, BRIEF_SPEC §9 |
 
 ## 11. Versioning
 

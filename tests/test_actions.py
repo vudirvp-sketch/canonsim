@@ -20,7 +20,7 @@ from typing import Any
 import pytest
 
 from core.fold import fold, initial_projection
-from core.log import read_log
+from core.log import StateChange, read_log
 from core.loop import Simulator, load_playscript
 from core.pack import Pack, load_pack
 
@@ -530,3 +530,59 @@ def test_steal_without_carries_flagged_precondition_is_loud(
             {"intent": "move", "target": "loc_tavern"},
             {"intent": "steal", "target": "npc_guard_01"},
         ], 1), )
+
+
+# -- the texture promotion path (iter-11: blueprint §1 — the door half) ------------
+
+
+_CANDLES_REF = {
+    "entry": "tex_0000", "scope": "scene:loc_tavern",
+    "slot": "candles", "value": "lit",
+}
+
+
+def test_texture_take_success_is_the_canon_birth(tmp_path: Path) -> None:
+    """A take on a resolved texture reference: the committed event IS the
+    promotion — the scope target gains the slot as a canon prop, the
+    outcome carries the reference, knowledge rides the texture templates.
+    Probed seed: the opposed stealth check passes for pc_01."""
+    events, sim = run(tmp_path, 4, TAVERN_STEPS + [
+        {"intent": "take", "texture": dict(_CANDLES_REF)},
+    ])
+    take = events[-1]
+    assert take.type == "take"
+    assert take.outcome["texture"]["entry"] == "tex_0000"
+    assert take.state_changes == (
+        StateChange("loc_tavern", "candles", None, "lit"),
+    )
+    assert sim.projection["loc_tavern"]["candles"] == "lit"  # canon birth
+    assert any(r.knows == "pc_01_holds_the_candles" for r in take.knowledge)
+    assert take.provenance["cause_intent"].startswith("intent_")
+
+
+def test_texture_take_failure_promotes_nothing(tmp_path: Path) -> None:
+    """The stealth check fails (a hard pack): the failure event commits
+    with the reference in the outcome but NO canon birth — a failed attempt
+    does not kill the texture (blueprint §1)."""
+    pack = hard_pack(tmp_path, {"take": 90})
+    events, sim = run(tmp_path, 7, TAVERN_STEPS + [
+        {"intent": "take", "texture": dict(_CANDLES_REF)},
+    ], pack=pack, name="hard.jsonl")
+    take = events[-1]
+    assert take.type == "take_failed"
+    assert take.outcome["texture"]["entry"] == "tex_0000"
+    assert take.state_changes == ()
+    assert "candles" not in sim.projection["loc_tavern"]  # no canon birth
+    assert any(r.knows == "pc_01_fumbled_the_candles" for r in take.knowledge)
+
+
+def test_texture_take_elsewhere_is_a_soft_rejection(tmp_path: Path) -> None:
+    """Scene-scoped texture at another location: well-formed but
+    world-impossible — an intent_rejected no-op fact, never a crash."""
+    events, sim = run(tmp_path, 5, TAVERN_STEPS + [
+        {"intent": "take", "texture": dict(_CANDLES_REF, scope="scene:loc_backyard")},
+    ])
+    rejected = events[-1]
+    assert rejected.type == "intent_rejected"
+    assert rejected.outcome["failed_test"] == "texture.same_location"
+    assert "candles" not in sim.projection["loc_tavern"]

@@ -1,18 +1,19 @@
 # STATUS — canonsim
 
-Iteration: iter-10a (`iter-10a-audit-sync`) · Phase: 1 · Date: 2026-08-29 ·
-The post-iter-9/10 owner-requested audit's findings landed (the audit
-session itself changed nothing — this iteration is the fix pass): KI#37
-— the doc-sync family: worklog re-trimmed to the 3–5-line cap (the
-drift ran iter-8b→10; the iter-10 file count corrected 15→16), the
-AGENT_NAVIGATION §1 VALIDATION_SPEC row + the README repo map synced to
-iter-9/10 reality, the golden-delta coverage claim qualified (6 of 8
-refusal reasons pinned; the laundering/unique_slot golden pinning
-rides with the narrator boundary — BRIEF_SPEC §9); KI#38 — the INV-3
-stoplist test now scans `brief/` (the engine-side mediator circuit,
-unprotected since iter-8; scans clean). 435 green, ruff clean, golden
-fixtures byte-identical. The narrator LLM boundary remains the
-owner-gated next step (AGENTS §8).
+Iteration: iter-11 (`iter-11-texture-door`) · Phase: 1 · Date: 2026-08-29 ·
+The narrator boundary opened at its LLM-free half — the texture
+promotion DOOR (the owner authorized the AGENTS §8 gate this session):
+a texture-capable action's pack `texture` block replaces the canon
+preconditions for intents carrying the mediator-resolved texture
+reference — core stays ledger-blind, the reference is data on the
+Intent (D-054; INTENT_SCHEMA §2/§3/§7) — and a take-success on the
+reference IS the promotion: the slot's canon birth on the scope target
+(one-way; a failed attempt promotes nothing). `take` is the first
+texture-capable action; real `unique_slots: ["hearth"]`; the golden
+delta fixture grows 13→16 — the laundering + unique_slot pins complete
+the 8-reason refusal vocabulary. 443 green, ruff clean, golden
+fixtures byte-identical. The LLM call itself remains owner-gated: local
+inference is a runtime-dependency stop-and-confirm item (AGENTS §8).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -229,22 +230,25 @@ owner-gated next step (AGENTS §8).
 
 ## Next step
 
-**Phase 1's LLM-free sequence is COMPLETE** — assembler (iter-8),
-validator (iter-9), scene ledger (iter-10) all landed. The next step
-is the **owner gate** (AGENTS §8): the narrator LLM boundary iteration
-— the live mediator session loop, the structural texture delta in the
-call, texture↔canon precedence checks, laundering-refusal flags, the
-promotion wiring (noun resolution → intent door → `mark_promoted`),
-the pack `requires` texture-noun test, and real `unique_slots` values
-(BRIEF_SPEC §9, VALIDATION_SPEC §10; local inference per TECH_NOTES §1,
-degradation ladder L12 from day one). INV-4 holds until the owner opens
-it. Until the gate opens, track A has no un-gated code iteration
-queued: the LLM-free backlog is `tune-1` (rest action + the D-045(b)
-importance knob — owner-gated per TASKS); the phase-1 deferrals all
-arrive with the mediator, never early. **Track B is unblocked:** bg-2
-(taxonomy) and bg-3 (briefer spike) query the DB
-(`output/df_world_<stem>.sqlite3`; bg-3's reverse validation reuses
-iter-9's `invented`/`regen_count` metrics); bg-4 (cost notes) is a
-read-only pass. Infra backlog: `doc-1` VISION freeze review; `qa-1`
-mypy + `ci-1` GitHub Actions (owner-gated); `perf-1` 10k-tick profile
-(the full profile stays the gate for anything structural).
+**The narrator boundary's LLM-free half is COMPLETE** — assembler
+(iter-8), validator (iter-9), scene ledger (iter-10), promotion door
+(iter-11: the texture path through the intent door, the texture-noun
+test, real `unique_slots`, the laundering/unique_slot golden pins —
+all 8 refusal reasons covered). The next step is the **owner gate on
+the LLM call itself** (AGENTS §8): the live mediator session loop —
+texture noun resolution against live entries, the structural texture
+delta in the narrator call, `mark_promoted` live wiring, degradation
+ladder L12 from day one (blueprint §1; BRIEF_SPEC §9, VALIDATION_SPEC
+§10). Local inference (llama.cpp + GBNF, TECH_NOTES §1) is a
+runtime-dependency stop-and-confirm item — the owner decides the
+engine before any code. Until that gate opens, track A has no
+un-gated code iteration queued: the LLM-free backlog is `tune-1`
+(rest action + the D-045(b) importance knob — owner-gated per TASKS);
+the phase-1 deferrals all arrive with the mediator, never early.
+**Track B is unblocked:** bg-2 (taxonomy) and bg-3 (briefer spike)
+query the DB (`output/df_world_<stem>.sqlite3`; bg-3's reverse
+validation reuses iter-9's `invented`/`regen_count` metrics); bg-4
+(cost notes) is a read-only pass. Infra backlog: `doc-1` VISION freeze
+review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
+10k-tick profile (the full profile stays the gate for anything
+structural).

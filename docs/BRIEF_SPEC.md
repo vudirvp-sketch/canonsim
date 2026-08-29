@@ -238,7 +238,7 @@ brief's static text is mediator data, not chronicle grammar.
   },
   "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
                       "importance_weight": 1.0},
-  "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": []},
+  "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
   "voice_exemplars": ["..."]
@@ -254,9 +254,9 @@ list of strings; every `directives` line fits its own hard budget
 `voice_exemplars` a list of strings; `recalled_facts` weights
 non-negative numbers, `max_items >= 1`; `scene_texture` caps integers
 >= 1, `unique_slots` unique non-empty strings (empty = no globally-
-unique slots; real values arrive with the narrator boundary). The
-eviction order (§5.2) is architecture, not balance — it lives in code,
-not in the pack.
+unique slots; iter-11 ships `["hearth"]` — the hearth is one object).
+The eviction order (§5.2) is architecture, not balance — it lives in
+code, not in the pack.
 
 ## 7. Render format (exact bytes)
 
@@ -292,7 +292,7 @@ bytes = a spec edit in the same commit as the code change.
 | Deferred | Arrives with | Owner |
 |---|---|---|
 | Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.4 |
-| Live texture promotion wiring (noun resolution → intent door → `mark_promoted`; the pack `requires` texture-noun test; real `unique_slots` values) | the owner-gated narrator boundary | blueprint §1 |
+| Live noun resolution → door → `mark_promoted` session circuit (the door's texture path, the texture-noun test, and real `unique_slots` landed iter-11 — INTENT_SCHEMA §3) | the owner-gated narrator boundary | blueprint §1 |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |

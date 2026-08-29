@@ -1,5 +1,5 @@
 {
-  "_comment": "iter-10 golden texture-delta fixture (D-049): fixture-shaped narrator deltas replayed through the validation gateway (brief/ledger.py::apply_delta) against prefixes of the committed smoke log. The delta document IS the narrator boundary's emitter contract (one call, two jobs: prose + structural delta — the prose lives outside this repo). Each case pins the gateway outcome (established/pinned/retired ids, no-op count, refusal lines) and the full ledger state after the case — one session ledger drives all cases in order. Computed, never LLM-judged (the VALIDATION_SPEC §9 pattern). Owner: docs/BRIEF_SPEC.md §3.3 + docs/blueprint/phases.md §1.",
+  "_comment": "iter-10 golden texture-delta fixture (D-049): fixture-shaped narrator deltas replayed through the validation gateway (brief/ledger.py::apply_delta) against prefixes of the committed smoke log. The delta document IS the narrator boundary's emitter contract (one call, two jobs: prose + structural delta — the prose lives outside this repo). Each case pins the gateway outcome (established/pinned/retired ids, no-op count, refusal lines) and the full ledger state after the case — one session ledger drives all cases in order. Computed, never LLM-judged (the VALIDATION_SPEC §9 pattern). Owner: docs/BRIEF_SPEC.md §3.3 + docs/blueprint/phases.md §1. iter-11: the laundering + unique_slot pins complete the 8-reason vocabulary coverage; a case may carry `ops` — the mediator's beat ops applied before its delta (here `mark_promoted`; the smoke log models only pc_01.position, so a contradiction window cannot be cut from it — the retire_contradicted path stays unit-pinned in test_ledger.py with synthetic windows).",
   "log": "tests/fixtures/plumbing_smoke_seed42.jsonl",
   "cases": [
     {
@@ -232,6 +232,63 @@
         "no_ops": 0,
         "refusals": [],
         "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null]]
+      }
+    },
+    {
+      "name": "market_hearth_established",
+      "event_seq": 6,
+      "delta": {
+        "source": "turn:14",
+        "established": [
+          {"scope": "scene:loc_market", "slot": "hearth", "value": "newly lit", "surface": "A masoned fire pit stood newly lit between the stalls."}
+        ]
+      },
+      "expect": {
+        "established": ["tex_0006"],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": [],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "active", null]]
+      }
+    },
+    {
+      "name": "second_hearth_across_scopes_refused",
+      "event_seq": 6,
+      "delta": {
+        "source": "turn:15",
+        "established": [
+          {"scope": "entity:npc_market_crowd_01", "slot": "hearth", "value": "their own fire", "surface": "The crowd huddled around their own fire."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish entity:npc_market_crowd_01.hearth = their own fire (unique_slot)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "active", null]]
+      }
+    },
+    {
+      "name": "promoted_hearth_reassertion_refused",
+      "event_seq": 6,
+      "ops": [
+        {"op": "mark_promoted", "entry": "tex_0006", "cause": "ev_0005"}
+      ],
+      "delta": {
+        "source": "turn:16",
+        "established": [
+          {"scope": "scene:loc_market", "slot": "hearth", "value": "newly lit", "surface": "The fire pit stood newly lit, as before."}
+        ]
+      },
+      "expect": {
+        "established": [],
+        "pinned": [],
+        "retired": [],
+        "no_ops": 0,
+        "refusals": ["REFUSED establish scene:loc_market.hearth = newly lit (laundering)"],
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0005"]]
       }
     }
   ]

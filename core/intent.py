@@ -8,6 +8,12 @@ machinery the front door runs:
   event, never silently dropped, never an exception);
 - the closed precondition test set — structured filters, no string
   expression language (L10); the pack references tests by name (INV-3);
+  the texture path: a texture-capable action's `texture` block replaces the
+  canon `requires` for intents carrying a resolved texture reference (the
+  grammar/vocabulary split, D-049 — the pack owns WHICH actions are
+  texture-capable; the ledger owns which nouns are addressable, and that
+  lives outside core: core stays ledger-blind, the Intent carries the
+  resolved slot as data);
 - opposed checks: skill base + status modifiers + die, from `rules.json`
   `checks` — every number is pack data;
 - intent OCC (`based_on_event_seq`): cause attribution for the event that
@@ -38,6 +44,8 @@ __all__ = [
     "REJECTION_EVENT",
     "Resolution",
     "RunnerError",
+    "TEXTURE_FIELD",
+    "TEXTURE_SCOPES",
     "action_duration",
     "first_failing",
     "find_flagged_accessible",
@@ -46,13 +54,26 @@ __all__ = [
     "location_of",
     "occ_breaking_cause",
     "pack_importance",
+    "requires_for",
     "resolve_knowledge",
     "run_check",
     "skill_total",
+    "texture_reference",
+    "texture_scope_target",
     "validate_shape",
 ]
 
 REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
+
+#: The intent field carrying a resolved texture reference (INTENT_SCHEMA §2;
+#: blueprint §1 D-049: the mediator resolves noun -> live entry BEFORE the
+#: door, so the Intent carries the resolved slot as data and core never
+#: sees the ledger).
+TEXTURE_FIELD: Final = "texture"
+#: The texture-reference scope prefixes — the same pair the ledger's
+#: `split_scope` owns (brief/ledger.py); restated here only as the intent
+#: field's shape contract (core may not import brief — D-031).
+TEXTURE_SCOPES: Final = ("scene:", "entity:")
 
 
 class RunnerError(RuntimeError):
@@ -102,9 +123,81 @@ class Resolution:
 # -- shape validation (loud) -------------------------------------------------
 
 
+def _carries_texture(intent: IntentData) -> bool:
+    return TEXTURE_FIELD in intent.fields
+
+
+def texture_reference(intent: IntentData) -> Mapping[str, Any]:
+    """The resolved texture reference from the intent's `texture` field:
+    `{entry, scope, slot, value}` — the mediator's noun-resolution output.
+
+    Loud on a malformed reference (the emitter is the mediator or a
+    playscript author, and author bugs crash): every key a non-empty
+    string, the scope one of the two ledger prefixes. Returns the mapping
+    as-is when well-formed; core NEVER checks ledger liveness — the
+    withdrawal mirror (VALIDATION_SPEC §8) owns that, mediator-side.
+    """
+    value = intent.fields.get(TEXTURE_FIELD)
+    if not isinstance(value, Mapping):
+        raise RunnerError(
+            f"{intent.kind}: field 'texture' must be the mediator's resolved "
+            f"reference object, got {value!r}"
+        )
+    missing = {"entry", "scope", "slot", "value"} - set(value)
+    if missing:
+        raise RunnerError(
+            f"{intent.kind}: texture reference missing keys {sorted(missing)}"
+        )
+    for key in ("entry", "scope", "slot", "value"):
+        if not isinstance(value[key], str) or not value[key].strip():
+            raise RunnerError(
+                f"{intent.kind}: texture reference {key} must be a non-empty "
+                f"string, got {value[key]!r}"
+            )
+    if not value["scope"].startswith(TEXTURE_SCOPES):
+        raise RunnerError(
+            f"{intent.kind}: texture scope must be 'scene:<id>' or 'entity:<id>', "
+            f"got {value['scope']!r}"
+        )
+    if not value["scope"].split(":", 1)[1].strip():
+        raise RunnerError(
+            f"{intent.kind}: texture scope target is empty in {value['scope']!r}"
+        )
+    return value
+
+
+def texture_scope_target(pack: Pack, intent: IntentData) -> str:
+    """The canon entity id a texture-referencing intent acts on: the scope
+    target (a location for scene scope, any other entity for entity scope).
+    Loud when the target is not a known pack entity — the promotion's canon
+    birth lands ON this entity, so it must exist."""
+    reference = texture_reference(intent)
+    target = str(reference["scope"]).split(":", 1)[1]
+    if pack.kind_of(target) is None:
+        raise RunnerError(
+            f"{intent.kind}: texture scope target {target!r} is not a known entity"
+        )
+    return target
+
+
+def requires_for(
+    action: Mapping[str, Any], intent: IntentData
+) -> list[Mapping[str, Any]]:
+    """The precondition list this intent evaluates against: the action's
+    `texture` block when the intent carries a resolved texture reference
+    and the action declares itself texture-capable; the canon `requires`
+    otherwise (blueprint §1 — the PACK owns which actions are texture-
+    capable; validate_shape guarantees the pair is consistent)."""
+    if _carries_texture(intent) and action.get("texture") is not None:
+        return list(action["texture"].get("requires", ()))
+    return list(action.get("requires", ()))
+
+
 def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
     """Author errors are loud: unknown fields, missing target where the
-    preconditions need one. World impossibility is NOT checked here."""
+    preconditions need one, a texture reference on a non-texture action or
+    a malformed one on a texture-capable action. World impossibility is
+    NOT checked here."""
     allowed = set(action.get("fields", ()))
     extras = set(intent.fields) - allowed
     if extras:
@@ -112,6 +205,13 @@ def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
             f"{intent.kind} takes no step fields {sorted(extras)}; "
             f"allowed: {sorted(allowed)}"
         )
+    if _carries_texture(intent):
+        if action.get("texture") is None:
+            raise RunnerError(
+                f"{intent.kind} is not texture-capable (no pack 'texture' block)"
+            )
+        texture_reference(intent)  # loud shape gate
+        return  # the texture block's requires reference no canon target
     needs_target = any(
         value == "target" for cond in action.get("requires", ()) for value in cond.values()
     )
@@ -155,7 +255,11 @@ class _Ctx:
             if self.intent.target is None:
                 raise RunnerError(f"precondition references {noun!r} without a target")
             return self.intent.target
-        raise RunnerError(f"unknown noun {noun!r} (actor | target)")
+        if noun == "texture":
+            # The texture noun resolves to the reference's scope target —
+            # the canon entity the promotion lands on (blueprint §1).
+            return texture_scope_target(self.pack, self.intent)
+        raise RunnerError(f"unknown noun {noun!r} (actor | target | texture)")
 
 
 def location_of(pack: Pack, projection: Projection, entity_id: str) -> str:
@@ -240,6 +344,16 @@ def _test_has_field(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     return cond["field"] in ctx.pack.entity(ctx.entity(cond["noun"]))
 
 
+def _test_texture_noun(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The texture-noun test (INTENT_SCHEMA §3): the intent carries a
+    well-formed resolved reference whose scope target is a known entity.
+    Ledger liveness is deliberately NOT tested — core is ledger-blind; the
+    mediator resolved the noun against live entries and the withdrawal
+    mirror owns mid-flight retirement (VALIDATION_SPEC §8)."""
+    texture_scope_target(ctx.pack, ctx.intent)  # loud on malformed/unknown
+    return True
+
+
 PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "kind": _test_kind,
     "same_location": _test_same_location,
@@ -254,6 +368,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "carried_by": _test_carried_by,
     "uncarried": _test_uncarried,
     "has_field": _test_has_field,
+    "texture_noun": _test_texture_noun,
 }
 
 
@@ -264,7 +379,9 @@ def first_failing(
     preconditions: list[Mapping[str, Any]],
 ) -> str | None:
     """The first failing condition as '<noun>.<test>', or None when the
-    intent is executable. Soft: callers record a no-op rejection event."""
+    intent is executable. Soft: callers record a no-op rejection event.
+    The caller passes the list from `requires_for` — canon or texture per
+    the intent's path."""
     ctx = _Ctx(pack, projection, intent)
     for cond in preconditions:
         test = PRECONDITION_TESTS.get(cond["test"])
@@ -428,7 +545,7 @@ def occ_breaking_cause(
     once and then applying one event at a time visits exactly the states
     the per-index refold used to rebuild — at O(events), not O(w·events)."""
     action = pack.action(intent.kind)
-    preconditions = list(action.get("requires", ())) if action else []
+    preconditions = requires_for(action, intent) if action else []
     state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
         apply_event(state, events[idx])
@@ -471,7 +588,11 @@ AUDIENCES: Final = (
     "adjacent_locations",
     "destination_location",  # movement sightings at the arrival end (iter-3)
 )
-KNOWLEDGE_SLOTS: Final = ("actor", "target", "location", "cause_actor")
+KNOWLEDGE_SLOTS: Final = (
+    "actor", "target", "location", "cause_actor",
+    "texture_slot",  # the promoted texture's slot (iter-11; INTENT_SCHEMA §10
+    # — additive slots are pack/code growth, no bump)
+)
 
 
 def knowers_at(pack: Pack, projection: Projection, location: str) -> list[str]:

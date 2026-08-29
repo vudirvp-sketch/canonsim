@@ -10,6 +10,16 @@
 > since iter-5).
 
 ---
+iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-free half (iter-11-texture-door)
+- core/intent.py texture machine (reference shape gate, requires_for
+  split, texture noun/test, texture_slot slot) + `_pickup` texture branch
+  + loop/OCC wiring: a take-success on a resolved reference IS the
+  promotion (canon birth, D-054); take texture-capable + real unique_slots
+  ["hearth"] + pack lint; INTENT_SCHEMA §2/§3/§7 synced.
+- Golden delta fixture 13→16: laundering + unique_slot pins (8/8 refusal
+  reasons; the runner grows the mark_promoted beat op). 14 files + sync
+  set (iter-9/10 precedent). 435→443 green, ruff clean, byte-identical. No KIs.
+---
 iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync)
 - KI#37 doc-sync: worklog re-trimmed to the line cap (the drift ran
   iter-8b→10; the iter-10 count 15→16), AGENT_NAVIGATION/README synced,
@@ -71,13 +81,7 @@ iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-les
   verdict table. 5 files.
 - 329 green, ruff clean, byte-identical. No new DECISIONS.
 ---
-iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b (iter-8c-audit)
-- All claims reproduced (329 green, T1 byte-identical; the 8b false
-  alarms verified against pre-8b git state). 3 KIs: KI#30 false
-  D-018c citation, KI#31 blueprint wording debts, KI#32 sync misses;
-  verdict — no rework of iter-1..8 (the 7th block is additive).
-- 6 files, docs-only (D-022). Worklog reordered newest-first.
----
+(iter-8c deleted at iter-11 per the one-in/one-out cap; history in git.)
 (iter-8b deleted at iter-10a per the one-in/one-out cap; history in git.)
 (iter-8a deleted at iter-10 per the one-in/one-out cap; history in git.)
 (iter-8 deleted at iter-9 per the one-in/one-out cap; history in git.)

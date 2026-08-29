@@ -28,9 +28,12 @@ from core.intent import (
     location_of,
     occ_breaking_cause,
     pack_importance,
+    requires_for,
     resolve_knowledge,
     run_check,
     skill_total,
+    texture_reference,
+    texture_scope_target,
     validate_shape,
 )
 from core.log import EventRecord, LoggedKnowledgeRecord, StateChange
@@ -373,3 +376,109 @@ def test_pack_importance_mapping() -> None:
     assert pack_importance(rules, {"a", "b"}, 1, 0) == "medium"  # 1 + 2
     assert pack_importance(rules, {"a", "b"}, 1, 1) == "high"  # 1 + 2 + 1
     assert pack_importance(rules, {"a"}, 0, 4) == "high"  # 4 hooks
+
+
+# -- the texture path (iter-11: grammar/vocabulary split, blueprint §1 D-049) --------
+
+
+def _texture_intent(reference: Any) -> IntentData:
+    return IntentData(
+        id="intent_0000", kind="take", actor="pc_01", target=None,
+        fields={"texture": reference}, based_on_event_seq=0,
+    )
+
+
+_CANDLES = {
+    "entry": "tex_0000", "scope": "scene:loc_tavern",
+    "slot": "candles", "value": "lit",
+}
+_TAKE_ACTION: Any = PACK.action("take")
+
+
+def test_texture_reference_shape_gates() -> None:
+    good = _texture_intent(_CANDLES)
+    assert texture_reference(good) == _CANDLES
+    assert texture_scope_target(PACK, good) == "loc_tavern"
+    bad_references = (
+        "candles",                       # the unresolved noun — the mediator resolves
+        {"entry": "tex_0000"},             # missing keys
+        {**_CANDLES, "slot": "  "},        # blank slot
+        {**_CANDLES, "scope": "zone:loc_tavern"},  # unknown prefix
+        {**_CANDLES, "scope": "scene:"},   # empty target
+    )
+    for reference in bad_references:
+        with pytest.raises(RunnerError):
+            texture_reference(_texture_intent(reference))
+
+
+def test_texture_scope_target_must_be_known() -> None:
+    unknown = _texture_intent({**_CANDLES, "scope": "scene:loc_nowhere"})
+    with pytest.raises(RunnerError, match="not a known entity"):
+        texture_scope_target(PACK, unknown)
+
+
+def test_validate_shape_texture_paths() -> None:
+    # the texture path: no canon target needed, the reference is shape-gated
+    validate_shape(_TAKE_ACTION, _texture_intent(_CANDLES))
+    # an undeclared texture field is loud at the fields gate (steal declares
+    # only 'method'); the dedicated non-texture-capable branch fires when an
+    # action declares the field but ships no pack texture block
+    steal: Any = PACK.action("steal")
+    with pytest.raises(RunnerError, match="takes no step fields"):
+        validate_shape(steal, _texture_intent(_CANDLES))
+    synthetic: Any = {"intent": "take", "fields": ["texture"], "requires": []}
+    with pytest.raises(RunnerError, match="not texture-capable"):
+        validate_shape(synthetic, _texture_intent(_CANDLES))
+    # a malformed reference on the texture-capable action is loud
+    with pytest.raises(RunnerError):
+        validate_shape(_TAKE_ACTION, _texture_intent("candles"))
+    # the canon path is unchanged: take still demands its target
+    canon = IntentData(
+        id="intent_0001", kind="take", actor="pc_01", target=None,
+        fields={}, based_on_event_seq=0,
+    )
+    with pytest.raises(RunnerError, match="requires a target"):
+        validate_shape(_TAKE_ACTION, canon)
+
+
+def test_requires_for_picks_the_pack_path() -> None:
+    texture_requires = requires_for(_TAKE_ACTION, _texture_intent(_CANDLES))
+    assert texture_requires == list(_TAKE_ACTION["texture"]["requires"])
+    canon = IntentData(
+        id="intent_0002", kind="take", actor="pc_01", target="purse_01",
+        fields={}, based_on_event_seq=0,
+    )
+    assert requires_for(_TAKE_ACTION, canon) == list(_TAKE_ACTION["requires"])
+
+
+def test_texture_noun_test_and_same_location_through_the_noun() -> None:
+    state = fold(
+        [EventRecord(
+            id="ev_0000", t=2, type="move", actor="pc_01", cause=None,
+            outcome={}, knowledge=(), state_changes=(
+                StateChange("pc_01", "position", "loc_street", "loc_tavern"),
+            ), hooks=(), importance="low", provenance={}, target="loc_tavern",
+        )],
+        initial_projection(PACK.entities),
+    )
+    here = _texture_intent(_CANDLES)
+    assert first_failing(PACK, state, here, requires_for(_TAKE_ACTION, here)) is None
+    # scene-scoped texture at another location: same_location fails softly
+    elsewhere = _texture_intent({**_CANDLES, "scope": "scene:loc_backyard"})
+    assert first_failing(
+        PACK, state, elsewhere, requires_for(_TAKE_ACTION, elsewhere)
+    ) == "texture.same_location"
+    # entity-scoped texture on a present npc resolves through the noun too
+    cloak = _texture_intent({
+        "entry": "tex_0001", "scope": "entity:npc_guard_01",
+        "slot": "cloak", "value": "muddy hem",
+    })
+    assert first_failing(PACK, state, cloak, requires_for(_TAKE_ACTION, cloak)) is None
+    # ...but an absent entity's texture fails the same_location test
+    away = _texture_intent({
+        "entry": "tex_0002", "scope": "entity:npc_guard_02",
+        "slot": "cloak", "value": "muddy hem",
+    })
+    assert first_failing(PACK, state, away, requires_for(_TAKE_ACTION, away)) == (
+        "texture.same_location"
+    )

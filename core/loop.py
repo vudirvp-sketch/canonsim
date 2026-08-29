@@ -63,6 +63,7 @@ from core.intent import (
     first_failing,
     occ_breaking_cause,
     pack_importance,
+    requires_for,
     run_check,
     validate_shape,
 )
@@ -358,7 +359,7 @@ class Simulator:
             )
         validate_shape(action, intent)
         failing = first_failing(
-            self._pack, self._projection, intent, list(action.get("requires", ()))
+            self._pack, self._projection, intent, requires_for(action, intent)
         )
         if failing is not None:
             self._emit_rejection(
@@ -388,7 +389,7 @@ class Simulator:
         if self._writer.event_count > payload.based_on_event_seq:
             failing = first_failing(
                 self._pack, self._projection, intent,
-                list(action.get("requires", ())),
+                requires_for(action, intent),
             )
             if failing is not None:
                 cause = occ_breaking_cause(

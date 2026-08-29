@@ -539,6 +539,14 @@ def test_texture_delta_golden_fixture_replays() -> None:
     _header, events = read_log(REPO / doc["log"], SCHEMA)
     ledger = SceneLedger()
     for case in doc["cases"]:
+        for op in case.get("ops", ()):
+            # the mediator's beat ops, applied before the case's delta — the
+            # laundering pin needs a terminal entry, and the promotion is
+            # this fixture's iter-11 theme (a live take event does not exist
+            # in the smoke log, so the cause is the mediator's observation)
+            assert op["op"] == "mark_promoted", case["name"]
+            promoted = ledger.mark_promoted(op["entry"], op["cause"])
+            assert promoted.status == PROMOTED, case["name"]
         report = ledger.apply_delta(case["delta"], events[: case["event_seq"]], PACK)
         expect = case["expect"]
         assert [entry.id for entry in report.established] == expect["established"], case["name"]

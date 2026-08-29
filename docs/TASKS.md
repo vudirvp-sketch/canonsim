@@ -51,19 +51,27 @@ fixture `tests/fixtures/texture_deltas.json` + pack lint (block budget,
 caps, unique_slots). The BRIEF_SPEC §9 atomic flip landed (§1/§2/§3/§5.2/
 §6/§7/§9 in one commit). Detail: `worklog.md` iter-10 + D-053.
 
-### iter-11+ · phase-1 continuation — todo
+### iter-11 · texture promotion door — done
 
-- The narrator LLM boundary itself — the owner-gated iteration (AGENTS
-  §8; local inference per `docs/TECH_NOTES.md` §1 — degradation
-  ladder L12 from day one); it carries the scene-ledger live wiring:
-  the structural texture delta in the narrator call, the texture↔canon
-  precedence checks, the laundering-refusal flags, the texture noun-test
-  in the pack `requires` closed set, and real `unique_slots` values
-  (BRIEF_SPEC §9, VALIDATION_SPEC §10). The golden delta fixture's
-  laundering/unique_slot pinning rides with it (real `unique_slots`
-  unlock the 8th reason; the fixture runner grows the mediator's beat
-  ops — `retire_contradicted`/`mark_promoted` — which is what a
-  laundering case needs).
+The narrator boundary's LLM-free half (the owner authorized the AGENTS §8
+gate in-session): the intent door's texture path — a texture-capable
+action's pack `texture` block replaces the canon preconditions for
+intents carrying the mediator-resolved reference (core ledger-blind,
+D-054), a take-success IS the promotion (the slot's canon birth on the
+scope target), the `texture_noun` pack test, real `unique_slots`
+(`["hearth"]`), and the laundering + unique_slot golden pins (all 8
+refusal reasons covered). Detail: `worklog.md` iter-11 +
+`docs/INTENT_SCHEMA.md` §3.
+
+### iter-12+ · the narrator LLM call — todo (owner gate)
+
+- The live mediator session loop: texture noun resolution against live
+  entries, the structural texture delta in the narrator call,
+  `mark_promoted` live wiring, degradation ladder L12 from day one
+  (blueprint §1; BRIEF_SPEC §9, VALIDATION_SPEC §10). Local inference
+  (llama.cpp + GBNF, TECH_NOTES §1) is a runtime-dependency
+  stop-and-confirm item per AGENTS §8 — the owner decides the engine
+  before any code.
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 

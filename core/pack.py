@@ -60,7 +60,7 @@ BRIEF_BLOCK_IDS: Final = (
 _SNAKE_CASE: Final = re.compile(r"^[a-z][a-z0-9_]*$")
 _SLOT: Final = re.compile(r"\{([a-z_]+)\}")
 _EXCEPT_TOKENS: Final = ("actor", "target", "cause_actor")
-_NOUNS: Final = ("actor", "target")
+_NOUNS: Final = ("actor", "target", "texture")
 
 
 class PackError(RuntimeError):
@@ -253,6 +253,51 @@ class _Lint:
                 f"{where}: unknown slot {{{slot}}} in {record['knows']!r}",
             )
 
+    def _texture_block(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional texture block (iter-11, blueprint §1 promotion): the
+        pack declares THIS action texture-capable; its `requires` replace
+        the canon ones for intents carrying a resolved texture reference,
+        its `knowledge` templates render with the texture context (no canon
+        target on that path — the {target} slot is forbidden here)."""
+        block = action.get("texture")
+        if block is None:
+            return
+        where = f"action {intent!r} texture"
+        _require(isinstance(block, Mapping), f"{where}: must be an object")
+        _require(
+            "texture" in action.get("fields", ()),
+            f"{where}: the action must declare 'texture' in its fields",
+        )
+        _require(
+            isinstance(block.get("requires"), list),
+            f"{where}: requires must be a list",
+        )
+        for cond in block["requires"]:
+            _require(
+                cond.get("test") in PRECONDITION_TESTS,
+                f"{where}: unknown precondition test {cond.get('test')!r}",
+            )
+            for param in ("noun", "with", "who"):
+                if param in cond:
+                    _require(
+                        cond[param] in _NOUNS,
+                        f"{where}: precondition {param} {cond[param]!r} "
+                        f"must be one of {list(_NOUNS)}",
+                    )
+        for branch, records in block.get("knowledge", {}).items():
+            _require(
+                branch in ("success", "failure", "failure_total"),
+                f"{where}: unknown knowledge branch {branch!r}",
+            )
+            for record in records:
+                self._knowledge_entry(intent, record, tuple(block["requires"]))
+                _require(
+                    "target" not in _SLOT.findall(record["knows"]),
+                    f"{where}: knowledge branch {branch!r} uses the {{target}} "
+                    f"slot — the texture path has no canon target "
+                    f"(use {{{{texture_slot}}}})",
+                )
+
     def _actions(self) -> None:
         actions = self._data["actions.json"]["actions"]
         templates = self._data["templates.json"]["events"]
@@ -346,6 +391,7 @@ class _Lint:
                     self._knowledge_entry(
                         intent, record, tuple(action.get("requires", ()))
                     )
+            self._texture_block(intent, action)
             for branch, tags in action.get("hooks", {}).items():
                 _require(
                     branch in ("success", "failure"),

@@ -26,6 +26,8 @@ from core.intent import (
     find_flagged_carried,
     location_of,
     resolve_knowledge,
+    texture_reference,
+    texture_scope_target,
 )
 from core.log import StateChange
 from core.rng import RngBank
@@ -53,6 +55,17 @@ def _ctx(intent: IntentData, projection: Projection) -> dict[str, Any]:
     }
 
 
+def _texture_ctx(
+    intent: IntentData, projection: Projection
+) -> dict[str, Any]:
+    """The knowledge context for a texture-path resolution: no canon
+    target (the reference carries the slot instead — the pack lint forbids
+    the {target} slot in texture-block templates)."""
+    ctx = _ctx(intent, projection)
+    ctx["texture_slot"] = texture_reference(intent)["slot"]
+    return ctx
+
+
 def _branch(check: CheckResult | None, action: Mapping[str, Any]) -> str:
     """success | failure | failure_total (the margin split is steal's; any
     action with a failure_total template gets it for free)."""
@@ -73,6 +86,22 @@ def _knowledge(
 ) -> tuple[Any, ...]:
     templates = action["knowledge"].get(branch, [])
     return resolve_knowledge(templates, pack, projection, _ctx(intent, projection), tick)
+
+
+def _texture_knowledge(
+    action: Mapping[str, Any],
+    branch: str,
+    pack: Pack,
+    projection: Projection,
+    intent: IntentData,
+    tick: int,
+) -> tuple[Any, ...]:
+    """Texture-path knowledge: the action's `texture.knowledge` templates
+    with the texture context (the slot replaces the absent target)."""
+    templates = action["texture"]["knowledge"].get(branch, [])
+    return resolve_knowledge(
+        templates, pack, projection, _texture_ctx(intent, projection), tick
+    )
 
 
 def _check_outcome(check: CheckResult | None) -> dict[str, Any]:
@@ -184,7 +213,17 @@ def _pickup(
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
     """take: an uncarried present item changes carrier; a failed stealth
-    check is noticed (records for everyone watching)."""
+    check is noticed (records for everyone watching).
+
+    The texture path (iter-11, blueprint §1 promotion): the intent carries
+    the mediator-resolved texture reference; on success the committed
+    event IS the promotion — the slot's canon birth as a prop on the scope
+    target (from_ None: the gateway guarantees canon never modeled it, and
+    a mid-flight canon birth would have retired the entry → withdrawal).
+    The outcome carries the reference so the mediator can mark_promoted;
+    a failed attempt promotes nothing (the entry stays live+pinned)."""
+    if "texture" in intent.fields:
+        return _pickup_texture(pack, projection, intent, action, check, tick)
     if intent.target is None:
         raise RunnerError("take requires a target item")
     branch = _branch(check, action)
@@ -204,6 +243,44 @@ def _pickup(
         event_type=action["events"]["failure"],
         outcome={"check": _check_outcome(check)},
         knowledge=_knowledge(action, branch, pack, projection, intent, tick),
+        hooks=_hooks(action, branch),
+    )
+
+
+def _pickup_texture(
+    pack: Pack, projection: Projection, intent: IntentData,
+    action: Mapping[str, Any], check: CheckResult | None, tick: int,
+) -> Resolution:
+    """The promotion resolution: take on a resolved texture reference.
+
+    Canon birth = the scope target gains the slot as a canon prop holding
+    the texture's value (apply_event accepts an absent prop from None —
+    locations and npcs are registered prop-less). From that moment the
+    gateway's canon-slot check outranks any texture on the slot (canon
+    always outranks texture, D-049), and the mediator flips the entry to
+    `promoted` on observing this event. Fire-chain ignition composition
+    (the knocked-over candle) stays with the pack's existing hook/ignition
+    consumers of the promoted prop — deliberately not re-implemented here."""
+    reference = texture_reference(intent)
+    target = texture_scope_target(pack, intent)
+    branch = _branch(check, action)
+    outcome: dict[str, Any] = {"check": _check_outcome(check), "texture": dict(reference)}
+    if branch == "success":
+        return Resolution(
+            event_type=action["events"]["success"],
+            outcome=outcome,
+            knowledge=_texture_knowledge(action, "success", pack, projection, intent, tick),
+            state_changes=(
+                StateChange(
+                    entity=target, prop=str(reference["slot"]),
+                    from_=None, to_=reference["value"],
+                ),
+            ),
+        )
+    return Resolution(
+        event_type=action["events"]["failure"],
+        outcome=outcome,
+        knowledge=_texture_knowledge(action, branch, pack, projection, intent, tick),
         hooks=_hooks(action, branch),
     )
 
