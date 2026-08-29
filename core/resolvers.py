@@ -117,11 +117,15 @@ def _check_outcome(check: CheckResult | None) -> dict[str, Any]:
     }
 
 
-def _move_changes(
+def movement_changes(
     pack: Pack, projection: Projection, actor: str, destination: str
 ) -> tuple[StateChange, ...]:
     """The actor's position delta plus every carried item's (items travel
-    with their carrier)."""
+    with their carrier — the position contract every mover obeys: a
+    carried item's position == its carrier's, or the next move's `from_`
+    desyncs loudly in `apply_event`). The single owner of the law; the
+    watch rotation reuses it (KI#46: the rotation once left carried
+    items behind, and the st-1 presence fold surfaced the lie)."""
     current = projection[actor]["position"]
     changes = [StateChange(entity=actor, prop="position", from_=current, to_=destination)]
     for item in pack.entities["items"]:
@@ -183,7 +187,7 @@ def _movement(
         event_type=action["events"]["success"],
         outcome={},
         knowledge=_knowledge(action, "success", pack, projection, intent, tick),
-        state_changes=_move_changes(pack, projection, intent.actor, intent.target),
+        state_changes=movement_changes(pack, projection, intent.actor, intent.target),
     )
 
 
@@ -484,7 +488,7 @@ def _flee(
             event_type=action["events"]["success"],
             outcome={"check": _check_outcome(check)},
             knowledge=_knowledge(action, "success", pack, projection, intent, tick),
-            state_changes=_move_changes(pack, projection, intent.actor, intent.target),
+            state_changes=movement_changes(pack, projection, intent.actor, intent.target),
         )
     return Resolution(
         event_type=action["events"]["failure"],

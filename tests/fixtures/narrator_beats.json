@@ -1,5 +1,5 @@
 {
-  "source": "Phase-1 regression set (iter-13/iter-14 validation beats): full narrator response documents distilled from two live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
+  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
   "cases": [
     {
       "name": "honest_supported",
@@ -551,6 +551,215 @@
         }}
       ],
       "expect": {"status": "dry"}
+    },
+    {
+      "name": "quiet_beat_names_the_room_from_the_cards",
+      "seed": 7,
+      "setup": [],
+      "beats": [
+        {"reply": {
+          "prose": "The street lay open and empty in front of the tavern, the salt road running off into the dark. Nobody stood out here with him; the whole night was his alone.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_street"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 1 supported"]}
+    },
+    {
+      "name": "absent_entity_presence_claim_refused",
+      "seed": 7,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": ["CONTRADICTED", "value_mismatch", "npc_guard_02"]
+      }
+    },
+    {
+      "name": "tavern_cards_named_with_sighting_and_pair",
+      "seed": 7,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "The taproom took him in with its low, careless hum. Doren stood at the bar, purse at his belt; the barkeep kept his club close under the counter; the drunkard lolled merry and careful, well clear of the watch; the serving maid threaded the tables. The oil lamp burned on its shelf, and one mug of ale waited on the wood.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_guard_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_drunk_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "npc_guard_01_present"},
+              {"kind": "state", "entity": "npc_drunk_01", "prop": "pair.npc_guard_01.fear", "value": 40}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 4 supported"]}
+    },
+    {
+      "name": "scene_change_cards_follow_the_pc",
+      "seed": 7,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "move", "target": "loc_backyard"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "state", "entity": "rope_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
+            ]
+          },
+          "texture_delta": {
+            "source": "turn:3",
+            "established": [
+              {"scope": "scene:loc_backyard", "slot": "kindling", "value": "dry",
+               "surface": "A stack of dry kindling lay against the boards."}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 3 supported", "BEAT texture: 1 established"]
+      }
+    },
+    {
+      "name": "texture_take_promotes_a_card_scene_line",
+      "seed": 7,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "move", "target": "loc_backyard"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "state", "entity": "rope_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
+            ]
+          },
+          "texture_delta": {
+            "source": "turn:3",
+            "established": [
+              {"scope": "scene:loc_backyard", "slot": "kindling", "value": "dry",
+               "surface": "A stack of dry kindling lay against the boards."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "He crouched by the boards and worked a length of the dry kindling loose — slow, the way a man takes what nobody has counted.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "intents": [
+              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor",
+               "fields": {"texture": {
+                 "entry": "tex_0000", "scope": "scene:loc_backyard",
+                 "slot": "kindling", "value": "dry"}}}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "The kindling sat dry and light in his hand — the yard's one counted thing, counted by him now.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "state", "entity": "loc_backyard", "prop": "kindling", "value": "dry"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "pc_01_holds_the_kindling"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 3 supported"],
+        "last_event_type": "take",
+        "call_contains": "- scene loc_backyard (the backyard) kindling=dry"
+      }
+    },
+    {
+      "name": "post_rotation_cards_track_the_watch",
+      "seed": 7,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "move", "target": "loc_backyard"},
+        {"intent": "wait", "ticks": 360},
+        {"intent": "move", "target": "loc_tavern"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "Six hours had turned the room over. A new face stood the watch at the bar — the relief, settled and square — and Doren was gone from it, walked off to the guard room with the purse and the first sleep of the night. The drunkard kept his distance from the watchman's stool all the same; the serving maid moved slower, weary past the middle of her shift.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_guard_01", "prop": "position", "value": "loc_guardroom"},
+              {"kind": "state", "entity": "npc_maid_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_drunk_01", "prop": "pair.npc_guard_02.fear", "value": 40}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 3 supported, 1 unverifiable"]
+      }
+    },
+    {
+      "name": "quiet_beat_cards_persist_over_time",
+      "seed": 7,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "move", "target": "loc_backyard"},
+        {"intent": "wait", "ticks": 360},
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "wait", "ticks": 360}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The evening settled without event. The relief kept his post, the barkeep his corner, the drunkard his distance, the maid her rounds; nothing in the room asked to be remembered.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_barkeep_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_maid_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "npc_drunk_01", "prop": "position", "value": "loc_tavern"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 4 supported"]}
     }
   ]
 }

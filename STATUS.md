@@ -1,20 +1,21 @@
 # STATUS — canonsim
 
-Iteration: iter-15 (`iter-15-presence`, the stress-test backlog's `st-1` —
-the owner's session delegation "pick what is best") · Phase: 1 · Date:
-2026-08-30 · Presence & entity cards landed (D-056): the 8th brief
-block `present_entities` (position 4 — entity cards: present set, pack
-status-marker table, visibly-carried items folded into the carrier's
-line, promoted props via the D-054 scan, the scene line for
-scene-scoped promoted props, directed pair tokens for present pairs;
-`max_entities`/`max_pairs` ranking caps) + the write-side twin — the
-actor-held per-present-target `knows` expansion (`present_at` sites,
-the `{present}` slot) on `move`: the arrival snapshot (INTENT_SCHEMA
-§7, KI#43's grammar — a knows expansion, not an audience kind).
-Zero new event types; `present_entities`/`present_in_order` moved to
-core/fold.py (single owner of the presence set); the T1 fixture
-regenerated (+10 records on the 4 move events — the iter-3
-precedent); 2 pair-relation seeds; 502→520 green.
+Iteration: iter-16 (`iter-16-validation-beats-3`, STATUS "Next step" #1 —
+the owner's delegation "what is most needed now") · Phase: 1 · Date:
+2026-08-30 · Validation session 3, the first over the iter-15 presence
+machinery (seed 7, 7 beats + 1 regen, 18 supported / 1 unverifiable /
+1 refused-and-caught claims, **0 canon violations**): the st-1
+acceptance probes all hold — quiet-beat room naming from the entity
+cards alone, the absent-presence refusal, arrival-sighting + directed
+pair tokens as supported claims, the unseeded pair axis as
+unverifiable (the honest-verdict law at the pair level), scene-change
+card follow, the promoted prop on the card's scene line, post-rotation
+cards tracking the watch. **KI#46 found live and fixed**: the watch
+rotation left carried items behind (the purse's position stayed at the
+tavern while it rode to the guardroom — the st-1 presence fold
+surfaced the lie); `rotation_plan` now rides `movement_changes`
+(resolvers' carried-item law, single owner). Corpus 25 → 32
+(+7 presence probes); 520 → 528 green, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -38,17 +39,22 @@ precedent); 2 pair-relation seeds; 502→520 green.
 
 ## Active KIs
 
-- KI#44 · accepted-beat verdicts invisible: `apply_reply` dropped the
-  ValidationReport/DeltaReport on accept, so invented/unverifiable/
-  rebased were uncountable in live sessions (the "measurable now"
-  claim held for the regression set only) · CLOSED iter-13 (the `BEAT`
-  summary lines — cli/mediator.py + cli/main.py, VALIDATION_SPEC §7.1;
-  pinned by the corpus + the CLI wiring test). Two iterations elapsed —
-  deletes at iter-16 per AGENTS §5.
+- KI#46 · rotation leaves carried items behind: `rotation_plan` swapped
+  only the participants' positions, breaking the carried-item position
+  contract (`_move_changes` keeps item position == carrier position,
+  `apply_event` fails loud on the next carrier move) — surfaced live by
+  the st-1 presence fold (the t=370 arrival snapshot taught
+  `purse_01_present` at the tavern while the purse rode to the
+  guardroom in Doren's pocket) · CLOSED iter-16 (`rotation_plan` rides
+  `movement_changes` — resolvers' carried-item law, single owner;
+  pinned by tests/test_crime.py
+  `test_rotation_carries_the_items_with_the_guard`; no committed
+  fixture bytes touched — the T1 smoke script crosses no rotation).
 - KI#45 · stale citation: tests/test_brief.py's scheduled-lore comment
   cited BRIEF_SPEC §3.4 while lore lived at §3.5 (predated the iter-15
   renumber — the drift surfaced exactly when the renumber made it
-  load-bearing) · CLOSED iter-15 (the comment now cites §3.6).
+  load-bearing) · CLOSED iter-15 (the comment now cites §3.6). Deletes
+  at iter-17 per AGENTS §5.
 
 ## FAQ / Pitfalls
 
@@ -94,9 +100,14 @@ precedent); 2 pair-relation seeds; 502→520 green.
   tick of the LAST event that changed that axis (KI#19) — read from
   the derived `(entity, prop) → tick` index since iter-8h (D-050),
   not from a log scan.
-- **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).**
-  Read current values from the projection; make repeat effects
-  idempotent; the `_commit` gate (D-035) fails loud BEFORE the write.
+- **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson;
+  KI#46 is the same family).** Read current values from the projection;
+  make repeat effects idempotent; the `_commit` gate (D-035) fails loud
+  BEFORE the write. KI#46's clause: every position writer must carry
+  the items — the carried-item position contract (item position ==
+  carrier position) is single-owned by `movement_changes`
+  (core/resolvers.py); a mover that swaps positions by hand leaves the
+  `from_` desync armed and the presence fold reading the lie.
 - **INV-3's stoplist scope (iter-2 interpretation, test-owned; D-046;
   +`brief/` since iter-10a, KI#38).** The stoplist bans setting nouns
   in the ENGINE (`core/`+`sim/`+`brief/` — the mediator circuit is
@@ -243,17 +254,20 @@ precedent); 2 pair-relation seeds; 502→520 green.
 
 ## Next step
 
-**st-1 closed the twice-confirmed quiet-beat hole (iter-13/14
-evidence): the brief now carries the room's presence structurally —
-entity cards + pair tokens — and the PC's arrivals seed durable
-presence records.** The exit criterion (0 canon violations per 100
-beats, ROADMAP §2) still needs volume. Next, in order:
+**Session 3 closed the st-1 acceptance probes (0 canon violations, 7
+beats): the presence machinery holds — quiet-beat naming, card
+persistence across scene changes and time, pair tokens, promoted props,
+and the rotation no longer lies about carried items (KI#46).** The exit
+criterion (0 canon violations per 100 beats, ROADMAP §2) still needs
+volume — the corpus is 32 cases over 30 live beats; more sessions
+across seeds/scenarios extend it. Next, in order:
 
-1. **Validation beats, session 3** — the first session over the NEW
-   presence machinery: can the narrator now legally name who is in
-   the room (the st-1 acceptance probe), do the cards hold up across
-   scene changes, do pair tokens surface as consistent cross-NPC
-   prose; tallies via the `BEAT` summary lines + the regen notes.
+1. **Validation beats, session 4** — volume: the theft-and-arson
+   scenario over the presence machinery (does the crime cascade read
+   through the cards — witnesses present, the purse carried, suspicion
+   visible on the card markers), or a multi-day session (a second
+   rotation, day-2 rumor telling at the market — lore + recall under a
+   long log). Tallies via the `BEAT` summary lines.
 2. `tune-1` rest action (pack data; the owner's fatigue observation)
    or `st-2` identity persistence per TASKS; `st-3`..`st-5` wait.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
@@ -263,4 +277,6 @@ beats, ROADMAP §2) still needs volume. Next, in order:
 Track B: bg-2 (taxonomy) + bg-3 (briefer spike) query the SQLite sink;
 bg-4 (cost notes) is read-only. Infra backlog: `doc-1` VISION freeze
 review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
-10k-tick profile (the gate for anything structural).
+10k-tick profile (the gate for anything structural). `pack-3` (the
+owner's Sci-Fi setting sketches) is parked in TASKS until the
+2nd-setting gate.

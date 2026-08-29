@@ -113,6 +113,22 @@ the beat level (pin, retire + establish, idempotent no-op). The corpus grew
 16 → 25 cases: every validator refusal reason is now pinned at the beat
 level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
+### iter-16 · validation beats — done (session 3)
+
+Session 3 over the NEW presence machinery (seed 7, 7 beats, 18 supported
+claims, 1 unverifiable, 1 refused-and-caught, **0 canon violations**) —
+the st-1 acceptance probes: the narrator legally names the room on a
+zero-event quiet beat (the cards alone), the absent-presence claim
+(npc_guard_02 "present") is refused (`value_mismatch`), the arrival
+snapshot's `saw` tokens + directed pair tokens hold as supported claims,
+the unseeded pair axis lands `unverifiable` (the honest-verdict law at
+the pair level), the cards follow the PC across a scene change, the
+promoted prop rides the card's scene line, and post-rotation cards
+track the watch. **KI#46 fixed mid-session**: the rotation left carried
+items behind (the purse's position lied; any later carrier move would
+desync loudly) — `rotation_plan` now rides `movement_changes`. Corpus
+25 → 32. Detail: `worklog.md` iter-16 + `docs/VALIDATION_SPEC.md` §7.1.
+
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
 - `tune-1` rest action as pack data (player fatigue is monotonic over
@@ -231,6 +247,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   precondition (e.g. an `unburning_spot`/`not_destroyed` test in the
   closed set) when a precondition slot is next needed — most naturally
   iter-3+, once crime reactions make arson attempts meaningful facts.
+- `pack-3` Sci-Fi setting candidate (owner sketches, 2026-08-30 chat;
+  parked, not scheduled): frontier station / ark fleet / lawless
+  asteroid belt / derelict megastructure. The sketches map
+  mechanic-for-mechanic onto what already exists — watch rotations →
+  station shifts, spreading rumors → leaks & paranoia, arson →
+  sabotage / hull breach, theft → cargo/data theft, status markers →
+  drunk/weary/afraid analogues per setting, pair axes + factions, watch
+  change knowledge transfer → shift handover. Zero core change by
+  design (INV-3's substance: a second pack must require zero ENGINE
+  changes); blocked until the 2nd-setting gate (phase 6, same trigger
+  as `pack-1`, ROADMAP §6).
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13
   items are done — status one-liners below; ref-16 (agent-memory-atlas,

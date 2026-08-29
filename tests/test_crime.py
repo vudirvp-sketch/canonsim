@@ -229,6 +229,29 @@ def test_second_rotation_swaps_back_without_a_transfer(tmp_path: Path) -> None:
     assert not by_type(events, "knowledge_transfer")
 
 
+def test_rotation_carries_the_items_with_the_guard(tmp_path: Path) -> None:
+    """KI#46: the rotation rides `movement_changes` — a guard walking off
+    duty carries his items along, keeping the position contract (a carried
+    item's position == its carrier's). Pre-fix, the purse's position stayed
+    at the tavern while it rode to the guardroom in Doren's pocket, and
+    the st-1 presence fold read the lie back as world fact."""
+    events, sim = run(tmp_path, 1, [{"intent": "wait", "ticks": 400}])
+    watch = by_type(events, "watch_change")[0]
+    purse_moves = [
+        c for c in watch.state_changes
+        if c.entity == "purse_01" and c.prop == "position"
+    ]
+    assert [(c.from_, c.to_) for c in purse_moves] == [
+        ("loc_tavern", "loc_guardroom")
+    ]
+    # the projection invariant: carried == with the carrier, so presence
+    # reads the purse at the guardroom, not at the vacated duty post
+    state = sim.projection
+    assert state["purse_01"]["carrier"] == "npc_guard_01"
+    assert state["purse_01"]["position"] == state["npc_guard_01"]["position"]
+    assert state["purse_01"]["position"] == "loc_guardroom"
+
+
 def test_rotation_tick_arithmetic_repeats_daily() -> None:
     rules = dict(PACK.rules)
     assert next_rotation_tick(rules, 1440, 0) == 360

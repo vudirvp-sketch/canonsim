@@ -10,6 +10,25 @@
 > since iter-5).
 
 ---
+iter-16 · 2026-08-30 · validation beats — session 3 over the presence
+machinery (iter-16-validation-beats-3)
+- Live `narrate` session 3 (seed 7, 7 beats + 1 regen, 18 supported /
+  1 unverifiable / 1 refused-caught, 0 canon violations): all st-1
+  acceptance probes hold — quiet-beat room naming, the
+  absent-presence refusal, sighting + pair tokens, scene-change
+  follow, the promoted prop on the card scene line, post-rotation
+  cards.
+- KI#46 found live + fixed: the rotation left carried items behind —
+  `rotation_plan` (core/crime.py) now rides `movement_changes`
+  (core/resolvers.py, renamed public — the single owner of the
+  carried-item position contract); regression test in test_crime.py.
+- Corpus 25 → 32 (+7 presence probes, seed 7; tests/fixtures/
+  narrator_beats.json). 520→528 green, ruff clean; no fixture bytes
+  touched (the smoke script crosses no rotation). 8 files (2 code +
+  1 test + fixture + the 4-doc sync set — the session+fix scope);
+  TASKS pack-3 row parks the owner's Sci-Fi setting sketches;
+  iter-10a evicted per cap.
+---
 iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056)
 - The 8th brief block `present_entities` (entity cards: status markers,
   carries, promoted props, the scene line, directed pair tokens; ranking
@@ -113,14 +132,7 @@ iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-
 - Golden delta fixture 13→16: laundering + unique_slot pins (8/8 refusal
   reasons; the runner grows the mark_promoted beat op). 14 files + sync
   set (iter-9/10 precedent). 435→443 green, ruff clean, byte-identical. No KIs.
----
-iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync)
-- KI#37 doc-sync: worklog re-trimmed to the line cap (the drift ran
-  iter-8b→10; the iter-10 count 15→16), AGENT_NAVIGATION/README synced,
-  the golden-delta coverage claim qualified (6 of 8 reasons pinned).
-- KI#38: the INV-3 stoplist now scans `brief/` (engine-side since
-  iter-8). 435 green, ruff clean. 6 files; iter-8b evicted per the cap.
----
+(iter-10a deleted at iter-16 per the one-in/one-out cap; history in git.)
 iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
 - (deleted at iter-15 per the one-in/one-out cap; history in git.)
 ---

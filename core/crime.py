@@ -28,6 +28,7 @@ from typing import TYPE_CHECKING, Any
 from core.intent import pack_importance
 from core.knowledge import TOLD, KnowledgeView, decay_fidelity
 from core.log import EventDraft, EventRecord, KnowledgeRecord, StateChange
+from core.resolvers import movement_changes
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
     from core.pack import Pack
@@ -296,7 +297,11 @@ def rotation_plan(
     """The rotation's position swaps plus the briefing pair: outgoing = the
     participant leaving the duty post, incoming = the one leaving the rest
     post. Participants elsewhere (in pursuit, say) simply do not rotate —
-    the pair only forms when both posts are manned."""
+    the pair only forms when both posts are manned. Each swap rides
+    `movement_changes`, so carried items travel with the rotating
+    participant (KI#46: a participant walking off duty with a carried
+    item must not leave its position behind — the st-1 presence fold
+    reads positions as world facts)."""
     config = pack.rules["crime_watch"]["rotation"]
     duty, rest = config["duty_post"], config["rest_post"]
     participants: Sequence[str] = config["participants"]
@@ -306,17 +311,13 @@ def rotation_plan(
     incoming = next(
         (p for p in participants if projection[p]["position"] == rest), None
     )
-    changes = []
+    changes: list[StateChange] = []
     for participant in participants:  # pack order — deterministic
         position = projection[participant]["position"]
         if position == duty:
-            changes.append(
-                StateChange(entity=participant, prop="position", from_=duty, to_=rest)
-            )
+            changes.extend(movement_changes(pack, projection, participant, rest))
         elif position == rest:
-            changes.append(
-                StateChange(entity=participant, prop="position", from_=rest, to_=duty)
-            )
+            changes.extend(movement_changes(pack, projection, participant, duty))
     return tuple(changes), outgoing, incoming
 
 
