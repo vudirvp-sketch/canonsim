@@ -1,21 +1,17 @@
 # STATUS — canonsim
 
-Iteration: iter-13 (`iter-13-validation-beats`) · Phase: 1 · Date: 2026-08-30 ·
-The first live agent-in-the-loop session ran through `narrate` (seed 125,
-11 beats, the external narrator = the owner's assistant over the file
-contract): accept paths (prose+claims, texture establish → take-promote
-→ canon birth ev_0002) plus one probe per refusal family — value_mismatch,
-token_absent (blind NPC), unknown_entity, unknown_event, stale_broken (with
-first-break attribution), laundering, slot_conflict, canon_slot,
-scene_mismatch, future-anchor MALFORMED, withdrawals, the idempotent
-re-assertion, L12 dry. **0 canon violations — every false assertion was
-caught.** Findings: KI#44 (accepted-beat verdicts invisible → the `BEAT`
-summary lines, VALIDATION_SPEC §7.1) + live confirmation of the
-quiet-beat hole (the brief carries no presence block — `st-1`'s case,
-evidence only). The phase-1 regression set landed:
-`tests/fixtures/narrator_beats.json` — 16 cases distilled from the
-session, replayed through the real mediator cycle. KI#43 deleted per
-AGENTS §5 (closed iter-11c; bg-5 + iter-12 elapsed).
+Iteration: iter-14 (`iter-14-validation-beats-2`) · Phase: 1 · Date: 2026-08-30 ·
+Validation-beats session 2: a live agent-in-the-loop `narrate` run over the
+theft-and-arson scenario (seed 8, 12 beats, 22 supported claims, **0 canon
+violations**). The families session 1 left uncovered were probed live and
+all caught: `event_type_mismatch`, `cannot_know`, `stale_ref` (after a scene
+close), the full regen-exhaustion ladder (2/2 → dry, the L12 floor), a
+door-rejected intent (a well-formed world-impossible steal commits
+`intent_rejected` — attempts are facts), rebased intents, and the delta
+vocabulary at the beat level (pin, retire + establish update pair,
+idempotent no-op). The corpus grew 16 → 25 cases: **every validator refusal
+reason is now pinned at the beat level**. No new KIs; KI#44 stays (closed
+iter-13, one iteration elapsed).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -239,20 +235,21 @@ AGENTS §5 (closed iter-11c; bg-5 + iter-12 elapsed).
 
 ## Next step
 
-**Validation beats are running (session 1: 11 beats, 0 violations —
-worklog iter-13).** The regression set is committed
-(`tests/fixtures/narrator_beats.json`); the exit criterion (0 canon
-violations per 100 beats, ROADMAP §2) now needs volume. Next, in order:
+**Validation beats: two sessions down — 23 beats, 0 canon violations
+(worklog iter-13/iter-14); the corpus (25 cases) now pins every validator
+refusal reason, the ladder, and both door outcomes at the beat level.**
+The exit criterion (0 canon violations per 100 beats, ROADMAP §2) still
+needs volume. Next, in order:
 
-1. **More validation beats** — live sessions across seeds/scenarios;
-   tallies via the `BEAT` summary lines + the regen notes; findings
-   extend the corpus (forbidden-assertion cases included). The
-   quiet-beat hole is live-confirmed: the brief carries no presence
-   block, so the narrator cannot legally name who is in the room.
+1. **More validation beats** — sessions 3+ across seeds/scenarios and
+   longer arcs (the two runs so far are 11 + 12 beats); tallies via the
+   `BEAT` summary lines + the regen notes. The quiet-beat hole stands
+   (st-1's evidence, twice-confirmed: the brief carries no presence
+   block, so the narrator cannot legally name who is in the room).
 2. `st-1` presence & entity cards — the strongest next-code-iteration
-   candidate (session 1 is its evidence; closes the quiet-beat,
-   cross-NPC-consistency, and arrival-observation holes) or `tune-1`
-   rest action — the owner's pick; `st-2`..`st-5` wait per TASKS.
+   candidate (closes the quiet-beat, cross-NPC-consistency, and
+   arrival-observation holes) or `tune-1` rest action — the owner's
+   pick; `st-2`..`st-5` wait per TASKS.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).

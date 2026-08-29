@@ -10,6 +10,17 @@
 > since iter-5).
 
 ---
+iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (iter-14-validation-beats-2)
+- Live `narrate` session 2 (seed 8, theft-and-arson scenario, 12 beats,
+  22 supported claims, 0 canon violations): event_type_mismatch,
+  cannot_know, stale_ref, exhaustion→dry, door-rejected intent, rebased
+  intents, pin/retire+establish/no-op — all probed live, all caught.
+- Corpus 16→25 (tests/fixtures/narrator_beats.json): every validator
+  refusal reason + the ladder + both door outcomes pinned at the beat
+  level; source line carries both sessions' provenance.
+- 493→502 green, ruff clean. 5 files (fixture + sync set); iter-9
+  evicted per the cap.
+---
 iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop session (iter-13-validation-beats)
 - Real `narrate` session (seed 125, 11 beats): 0 canon violations;
   every refusal family probed and caught live (claims, gateway, OCC,
@@ -103,13 +114,7 @@ iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
   texture-OCC mirror; scene_texture 7th block; BRIEF_SPEC §9 flip.
 - 16 files (code+spec+suite+golden set + sync set, iter-9 precedent;
   golden delta fixture: 13 cases). 390→435 green, ruff clean. No KIs.
----
-iter-9 · 2026-08-29 · VALIDATION_SPEC + validator LLM-free half (iter-9-validation-spec)
-- docs/VALIDATION_SPEC.md (closed proposal doc, honest verdicts,
-  ExpectedVersion OCC, fact transaction, ≤2-regens protocol) +
-  brief/validator.py + validation_golden.json (18 verdict cases).
-- 11 files (spec+code+suite+golden set + sync set, iter-8 precedent).
-  352→390 green, ruff clean, byte-identical. No new KIs.
+(iter-9 deleted at iter-14 per the one-in/one-out cap; history in git.)
 ---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - (deleted at bg-5 per the one-in/one-out cap; history in git.)

@@ -1,5 +1,5 @@
 {
-  "source": "Phase-1 regression set (iter-13 validation beats): full narrator response documents distilled from the live agent-in-the-loop session (seed 125, log logs/run_125_0.jsonl - a gitignored runtime artifact; provenance worklog iter-13). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
+  "source": "Phase-1 regression set (iter-13/iter-14 validation beats): full narrator response documents distilled from two live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
   "cases": [
     {
       "name": "honest_supported",
@@ -336,6 +336,221 @@
         {"reply": {"prose": "x", "bogus": 1}}
       ],
       "expect": {"status": "regen", "notes_contains": ["MALFORMED"]}
+    },
+    {
+      "name": "event_type_mismatch_refused",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: the whole affair had begun, he told himself, with a steal.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0000", "type": "steal"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "event_type_mismatch"]}
+    },
+    {
+      "name": "cannot_know_items_never_hold_knowledge",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: the purse itself, some said, could feel the road it traveled.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "knowledge", "who": "purse_01", "knows": "pc_01_holds_the_purse"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "cannot_know"]}
+    },
+    {
+      "name": "stale_ref_after_scene_close",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"between": [{"intent": "move", "target": "loc_backyard"}],
+         "reply": {
+          "prose": "PROBE: from the backyard he could still pin the taproom's candlelight.",
+          "texture_delta": {
+            "source": "turn:2",
+            "refs": [
+              {"scope": "scene:loc_tavern", "slot": "candles"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(stale_ref)"]}
+    },
+    {
+      "name": "in_scene_update_is_retire_establish_pair",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "The candles guttered low as the evening wore on.",
+          "texture_delta": {
+            "source": "turn:2",
+            "retired": [
+              {"scope": "scene:loc_tavern", "slot": "candles"}
+            ],
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "guttering", "surface": "The candles guttered low."}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 established, 1 retired"]}
+    },
+    {
+      "name": "ref_pins_a_live_entry",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "He marked the candles; whatever else changed tonight, those stayed.",
+          "texture_delta": {
+            "source": "turn:2",
+            "refs": [
+              {"scope": "scene:loc_tavern", "slot": "candles"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 pinned"]}
+    },
+    {
+      "name": "idempotent_reassertion_is_a_noop",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "The candles burned on, no better and no worse than before.",
+          "texture_delta": {
+            "source": "turn:2",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "The candles burned on, no better and no worse than before."}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 no-op"]}
+    },
+    {
+      "name": "door_rejected_intent_is_a_committed_fact",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_backyard"}],
+      "beats": [
+        {"reply": {
+          "prose": "He thought about going back in for something else of Doren's, and the thinking went nowhere — the man was three walls and a doorway away, and even a fool knows a pocket cannot be picked through brick.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "intents": [
+              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01", "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT intents: 1 fed"], "last_event_type": "intent_rejected"}
+    },
+    {
+      "name": "stale_intact_intent_rebases",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"between": [{"intent": "wait", "ticks": 60}],
+         "reply": {
+          "prose": "There was nothing left for him at the bar; he made for the street door.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
+            ],
+            "intents": [
+              {"kind": "move", "actor": "pc_01", "target": "loc_street", "based_on_event_seq": "anchor", "fields": {}}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT rebased", "BEAT intents: 1 fed"], "last_event_type": "move"}
+    },
+    {
+      "name": "regen_exhaustion_falls_dry",
+      "seed": 8,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE 1: the traveler had never left the street outside.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_street"}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "PROBE 2: the barkeep had watched him pocket the candle.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_holds_the_candles"}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "PROBE 3: a night watchman named Aldric stood beside him and had seen everything.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_watchman_aldric", "prop": "mood", "value": "suspicious"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "dry"}
     }
   ]
 }

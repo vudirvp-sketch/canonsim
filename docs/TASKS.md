@@ -101,6 +101,18 @@ legally name who is in the room). The exit criterion needs volume:
 more sessions across seeds/scenarios, findings extend the corpus.
 Detail: `worklog.md` iter-13 + `docs/VALIDATION_SPEC.md` §7.1.
 
+### iter-14 · validation beats — done (session 2)
+
+Session 2 over the theft-and-arson scenario (seed 8, 12 beats, 22 supported
+claims, **0 canon violations**): the families session 1 left uncovered were
+probed live and all caught — `event_type_mismatch`, `cannot_know`,
+`stale_ref` (after a scene close), the full regen-exhaustion ladder (2/2 →
+dry, L12), a door-rejected intent (a well-formed world-impossible steal
+commits `intent_rejected`), rebased intents, and the delta vocabulary at
+the beat level (pin, retire + establish, idempotent no-op). The corpus grew
+16 → 25 cases: every validator refusal reason is now pinned at the beat
+level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
+
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
 - `tune-1` rest action as pack data (player fatigue is monotonic over
