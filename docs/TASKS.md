@@ -59,7 +59,11 @@ caps, unique_slots). The BRIEF_SPEC §9 atomic flip landed (§1/§2/§3/§5.2/
   the structural texture delta in the narrator call, the texture↔canon
   precedence checks, the laundering-refusal flags, the texture noun-test
   in the pack `requires` closed set, and real `unique_slots` values
-  (BRIEF_SPEC §9, VALIDATION_SPEC §10).
+  (BRIEF_SPEC §9, VALIDATION_SPEC §10). The golden delta fixture's
+  laundering/unique_slot pinning rides with it (real `unique_slots`
+  unlock the 8th reason; the fixture runner grows the mediator's beat
+  ops — `retire_contradicted`/`mark_promoted` — which is what a
+  laundering case needs).
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -175,6 +179,12 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync):
+  KI#37 doc-sync family — worklog re-trimmed to the line cap (iter-10
+  file count 15→16), AGENT_NAVIGATION/README synced, the golden-coverage
+  claim qualified; KI#38 — the INV-3 stoplist test scans `brief/`.
+  435 green, ruff clean. Detail: worklog iter-10a.
 
 - iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger;
   D-053): `brief/ledger.py` + the `scene_texture` 7th brief block + the

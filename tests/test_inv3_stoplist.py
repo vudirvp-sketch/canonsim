@@ -2,7 +2,9 @@
 
 Scope (the interpretation this test enforces): **setting** nouns — the
 invariant's named examples ('guard', 'purse', 'tavern') and the rest of
-the tavern_pack vocabulary — must never appear in `core/` or `sim/` code.
+the tavern_pack vocabulary — must never appear in `core/`, `sim/` or
+`brief/` code (the ENGINE — `brief/` is the mediator circuit,
+engine-side since iter-8: pure functions of (log, ledger, pack)).
 Matching is **segment-based**: a word delimited by non-alphanumerics, so
 both standalone prose words (`guard`) and compound identifiers
 (`npc_guard_01`, `loc_guardroom`) trip it, while English derivations
@@ -15,7 +17,8 @@ cannot rot.
 Periphery scope note (iter-6a audit, D-046): `render/`, `cli/` and
 `scripts/` are OUTSIDE the stoplist by design — they legitimately carry
 pack path strings (`content/tavern_pack`), CLI help-text examples and
-docstring prose; INV-3's substance is the ENGINE (`core/` + `sim/`)
+docstring prose; INV-3's substance is the ENGINE (`core/` + `sim/` +
+`brief/` — the scope grew with the mediator circuit at iter-10a, KI#38)
 hardcoding setting data (a second pack must require zero engine changes —
 the renderer is template-driven, the CLI takes the pack dir as config).
 """
@@ -46,13 +49,13 @@ def _segment_pattern(word: str) -> re.Pattern[str]:
 
 def source_files() -> list[Path]:
     files: list[Path] = []
-    for package in ("core", "sim"):
+    for package in ("core", "sim", "brief"):
         files.extend(sorted((REPO / package).rglob("*.py")))
-    assert files, "no sources found — the stoplist test must see core/ and sim/"
+    assert files, "no sources found — the stoplist test must see core/, sim/ and brief/"
     return files
 
 
-def test_no_setting_words_in_core_or_sim() -> None:
+def test_no_setting_words_in_engine_code() -> None:
     patterns = [(word, _segment_pattern(word)) for word in STOPLIST]
     violations: list[str] = []
     for path in source_files():

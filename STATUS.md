@@ -1,26 +1,18 @@
 # STATUS — canonsim
 
-Iteration: iter-10 (`iter-10-scene-ledger`) · Phase: 1 · Date: 2026-08-29 ·
-The scene-ledger LLM-free half landed (D-053): `brief/ledger.py` — entry
-shape (`tex_NNNN` gap-free counter, scope FIXED at establishment), scenes
-= maximal PC-location intervals (identity `(location, ordinal)`, a pure
-log fold — zero new event types), the discrete one-way lifecycle
-`{active, pinned} → {retired, contradicted, promoted}`, ONE validation
-gateway (scope/canon-slot/laundering/unique-slot/duplicate/slot-conflict
-+ presence via position or the carrier closure; refusals in the §7 shape,
-8-reason closed vocabulary, loud `DeltaError` on shape drift), beat-pass
-contradiction retirement (slot/prop overlap only, first-break cause),
-scene-close bulk retirement (entity-scoped survives), auto-sync inside
-`apply_delta` (D-037 discipline), the texture-OCC mirror + the promotion
-marker — plus the `scene_texture` 7th brief block (position 3; window
-law: current scene (t >= from_tick) or present entity, pinned-first,
-tombstones, ranking caps) and the BRIEF_SPEC §9 ATOMIC flip (purity pair
-→ (log, ledger); §3 renumbered — scene_texture is §3.3). Golden delta
-fixture `tests/fixtures/texture_deltas.json` (13 cases). 435 green (was
-390; +45), ruff clean, golden fixtures byte-identical. KI#36 deleted
-per §5 (closed bg-1, >2 iterations). The narrator LLM boundary remains
-the owner-gated next step (AGENTS §8) — it carries the live promotion
-wiring.
+Iteration: iter-10a (`iter-10a-audit-sync`) · Phase: 1 · Date: 2026-08-29 ·
+The post-iter-9/10 owner-requested audit's findings landed (the audit
+session itself changed nothing — this iteration is the fix pass): KI#37
+— the doc-sync family: worklog re-trimmed to the 3–5-line cap (the
+drift ran iter-8b→10; the iter-10 file count corrected 15→16), the
+AGENT_NAVIGATION §1 VALIDATION_SPEC row + the README repo map synced to
+iter-9/10 reality, the golden-delta coverage claim qualified (6 of 8
+refusal reasons pinned; the laundering/unique_slot golden pinning
+rides with the narrator boundary — BRIEF_SPEC §9); KI#38 — the INV-3
+stoplist test now scans `brief/` (the engine-side mediator circuit,
+unprotected since iter-8; scans clean). 435 green, ruff clean, golden
+fixtures byte-identical. The narrator LLM boundary remains the
+owner-gated next step (AGENTS §8).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -33,9 +25,10 @@ wiring.
   `(tick, sub_order, actor_id)`; cosmetic draws never desync canon replay
   (D-028 — AGENTS.md §4 is the single reading owner).
 - INV-3 Content/code split: no domain words in engine code (`core/` +
-  `sim/`); all setting data in `content/tavern_pack/`; the periphery dirs
-  (`render/`, `cli/`, `scripts/`) carry pack paths/help text/prose by
-  design (D-046).
+  `sim/` + `brief/` — the mediator circuit joined the stoplist at
+  iter-10a); all setting data in `content/tavern_pack/`; the periphery
+  dirs (`render/`, `cli/`, `scripts/`) carry pack paths/help text/prose
+  by design (D-046).
 - INV-4 LLM boundary: no LLM/network calls in track A — executable against
   every package dir incl. `scripts/` since iter-6a (D-046).
 - INV-5 Log immutability: committed logs are never edited; corrections are
@@ -43,9 +36,11 @@ wiring.
 
 ## Active KIs
 
-- None. KI#36 (bg-1: doc↔tool drift — UNDOCUMENTED audit marker) closed
-  bg-1 and deleted at iter-10 per §5 (closed > 2 iterations; history in
-  git).
+- KI#37 · post-iter-9/10 audit drift set (worklog cap breach + the
+  iter-10 file count 15≠16; AGENT_NAVIGATION/README sync gaps; the
+  aspirational golden-coverage claim) · CLOSED iter-10a.
+- KI#38 · INV-3 stoplist test scanned only `core/`+`sim/` — `brief/`
+  (engine-side since iter-8) was unprotected · CLOSED iter-10a.
 
 ## FAQ / Pitfalls
 
@@ -94,12 +89,14 @@ wiring.
 - **Hardcoded `from_` is a desync waiting to happen (KI#13 lesson).**
   Read current values from the projection; make repeat effects
   idempotent; the `_commit` gate (D-035) fails loud BEFORE the write.
-- **INV-3's stoplist scope (iter-2 interpretation, test-owned; D-046).**
-  The stoplist bans setting nouns in the ENGINE (`core/`+`sim/`),
-  segment-matched; mechanic words stay legal; the word list is pack-tied
-  by a self-check. `render/`/`cli/`/`scripts/` are periphery — pack path
-  strings, CLI help examples, docstring prose live there by design
-  (INV-3's substance: a second pack requires zero ENGINE changes).
+- **INV-3's stoplist scope (iter-2 interpretation, test-owned; D-046;
+  +`brief/` since iter-10a, KI#38).** The stoplist bans setting nouns
+  in the ENGINE (`core/`+`sim/`+`brief/` — the mediator circuit is
+  engine-side: pure functions of (log, ledger, pack)), segment-matched;
+  mechanic words stay legal; the word list is pack-tied by a self-check.
+  `render/`/`cli/`/`scripts/` are periphery — pack path strings, CLI help
+  examples, docstring prose live there by design (INV-3's substance: a
+  second pack requires zero ENGINE changes).
 - **The loud/soft front-door line.** Malformed playscript steps raise
   `RunnerError` — author bugs crash. Well-formed but world-impossible
   intents emit `intent_rejected` no-ops — attempts are facts. Director
