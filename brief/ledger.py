@@ -50,6 +50,7 @@ __all__ = [
     "SceneLedger",
     "SceneSync",
     "TERMINAL_STATUSES",
+    "check_delta_shape",
     "current_scene",
     "present_entities",
     "refusal_lines",
@@ -563,6 +564,15 @@ class SceneLedger:
 
 
 # -- the delta document boundary (loud shape gate — D-018's sibling law) --------
+
+
+def check_delta_shape(delta: Mapping[str, Any]) -> None:
+    """The delta document's shape gate, boundary-side (`brief/mediator.py`
+    runs it BEFORE the gateway so a malformed document never reaches
+    `apply_delta` — the degradation ladder's problem, never the gateway's;
+    VALIDATION_SPEC §2/§7.1). Loud `DeltaError` on any drift; silent when
+    the document is well-shaped."""
+    _delta_shape(delta)
 
 
 def _selector_name(item: Mapping[str, Any]) -> str:

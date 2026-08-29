@@ -265,3 +265,45 @@ def test_session_equals_batch_log_bytes(tmp_path: Path) -> None:
         sim2.run_steps([step])
     sim2.close()
     assert batch_log.read_bytes() == session_log.read_bytes()
+
+
+# -- the mediator beat cycle (iter-12, agent-in-the-loop) ------------------------
+
+
+def test_session_narrate_emits_and_applies_a_reply(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """The narrator door drives one full beat: `narrate` emits the call
+    (brief + protocol), `narrate <reply>` runs the cycle — a prose-only
+    reply is accepted; a malformed one degrades (regen), never crashes."""
+    monkeypatch.setattr("cli.main.OUTPUT_DIR", tmp_path)
+    reply = tmp_path / "mediator" / "reply_0000.json"
+    reply.parent.mkdir(parents=True)
+    reply.write_text(json.dumps({"prose": "The common room was warm."}), "utf-8")
+    bad = tmp_path / "mediator" / "reply_0001.json"
+    bad.write_text(json.dumps({"prose": "x", "bogus": 1}), "utf-8")
+    feed(monkeypatch, [
+        "look",
+        "narrate", f"narrate {reply}",
+        "narrate", f"narrate {bad}", "narrate dry",
+        "quit",
+    ])
+    assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
+    out = capsys.readouterr().out
+    call = tmp_path / "mediator" / "call_0000.md"
+    assert call.exists() and "## narrator_protocol" in call.read_text("utf-8")
+    assert "The common room was warm." in out  # the accepted prose
+    assert "refused — regen 1/2" in out  # malformed → the ladder, no crash
+    assert "[dry beat — the L12 floor" in out
+
+
+def test_session_narrate_without_a_beat_is_an_error_not_a_crash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.setattr("cli.main.OUTPUT_DIR", tmp_path)
+    feed(monkeypatch, [f"narrate {tmp_path / 'nope.json'}", "quit"])
+    assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
+    assert "no open narrator beat" in capsys.readouterr().out
+

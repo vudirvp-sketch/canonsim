@@ -1,28 +1,21 @@
 # STATUS — canonsim
 
-Iteration: bg-5 (`bg-5-spec-verdict`) · Phase: 1 · Date: 2026-08-30 ·
-Owner-requested verdict on a pasted external integration spec
-("behavioral engine × canonsim"; docs-only, D-022 counter = 3 —
-all three passes under fresh owner requests; a doc-only pass
-without one MUST stop; the natural exit is the owner-gated
-narrator-boundary code iteration). Verdict: no repo drift — every
-D-ID/INV/doc citation in the spec resolves and its repo-facing
-claims match the code (`max_items` 8, the voice_exemplars block,
-the pinned-first window, ≤2 regens, KnowledgeView). NOT integrated
-as text: it renames established vocabulary (the MECW call-budget
-law → "effective_window / reasoning_reserve / prose_cap"; st-1
-present_entities → "presence_roster"; thinking allowance →
-"reasoning reserve"), re-imports fatigue emulation — rejected by
-ref-13 weakness (4) as the INV-1/INV-5 inversion, with INV-5 cited
-inverted as support — and invents IDs and figures with no owner
-and no provenance (AP-16 — the guide ships 15 APs; the ≤15-token
-exemplar cap — the guide's example blocks are 80–120 tokens; the
-10-repeat promotion threshold; the 1.5/5.0 reasoning multipliers —
-the KI#43 numbers law). Two adoptions, backlog amendments only:
-Script Tax at the mediator (st-4; guide part_07a §7A.5) and the
-repetition-counted promotion option (st-2). KI#39–41 deleted per
-AGENTS §5 (closed >2 iterations). The iter-11b resolutions stay
-owner-verdict-pending, substance unchanged.
+Iteration: iter-12 (`iter-12-mediator-loop`) · Phase: 1 · Date: 2026-08-30 ·
+The owner's engine verdict unlocked the narrator boundary (the D-022
+doc-loop line's natural exit — a code iteration, counter reset): no SoW,
+no llama.cpp now — the dev-time narrator is the EXTERNAL agent
+(agent-in-the-loop, D-055) over a file contract; the repo stays
+LLM-free (INV-4 unchanged — nothing entered the codebase). Landed: the
+call/response documents (BRIEF_SPEC §7.1 / VALIDATION_SPEC §7.1), the
+live mediator session loop (`cli/mediator.py` — the D-049 beat cycle
+commit → retire_contradicted(window) → sync → call → reply → delta →
+intents → mark_promoted), noun resolution + withdrawals, the L12 ladder
+from day one, `narrate` session commands; verified live — the agent
+narrated a beat (prose + texture + claims), the texture rides the next
+brief. SoW audit parked as bg-6 (Track B; the owner defers integration
+"until unavoidable" — ROADMAP §6's law). KI#42 deleted per AGENTS §5
+(closed iter-11b; iter-11c + bg-5 elapsed); KI#43 survives one more
+iteration.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -46,15 +39,12 @@ owner-verdict-pending, substance unchanged.
 
 ## Active KIs
 
-- KI#42 · the stress-test pass reported 2026-08-29 ("iter-11b") never
-  landed: the tmpfiles.org archive expired, no commit/push existed —
-  work reconstructed, re-verified against the code, and landed by this
-  iteration · CLOSED iter-11b.
 - KI#43 · iter-11b precision family (owner re-check): the MECW ~8–16k
   figure carried no single owner (→ TECH_NOTES §2); the arrival
   snapshot mis-named an audience kind (actor-held per-present-target
   `knows` expansion, INTENT_SCHEMA §7/§10); container cycles named
-  pack-load lint only (commit gate added, D-035) · CLOSED iter-11c.
+  pack-load lint only (commit gate added, D-035) · CLOSED iter-11c
+  (delete at the next STATUS touch per AGENTS §5).
 
 ## FAQ / Pitfalls
 
@@ -230,7 +220,11 @@ owner-verdict-pending, substance unchanged.
   absent entity texture pin harmlessly (visibility is the read path's
   law, not the gateway's). The live promotion loop (noun resolution →
   intent door → `mark_promoted`) is the owner-gated narrator boundary's,
-  never the LLM-free half's.
+  never the LLM-free half's. Since iter-12 the narrator half is LIVE
+  and external (D-055: call/reply files under `output/mediator/`, the
+  contract VALIDATION_SPEC §7.1) — a refused document never feeds
+  intents (the beat regens whole); the L12 floor renders the beat's own
+  chronicle lines.
 - **Gate mechanics + chain counting (iter-6/6a laws).** Same
   playscript/seed (125), only the director flag changes: ON fires
   `director_0000`; OFF keeps seeding (D-005) and produces ≥3 emergent
@@ -245,34 +239,34 @@ owner-verdict-pending, substance unchanged.
 
 ## Next step
 
-**The narrator boundary's LLM-free half is COMPLETE** — assembler
-(iter-8), validator (iter-9), scene ledger (iter-10), promotion door
-(iter-11: the texture path through the intent door, the texture-noun
-test, real `unique_slots`, the laundering/unique_slot golden pins —
-all 8 refusal reasons covered; audited + hardened iter-11a: KI#39..41).
-The next step is the **owner gate on
-the LLM call itself** (AGENTS §8): the live mediator session loop —
-texture noun resolution against live entries, the structural texture
-delta in the narrator call, `mark_promoted` live wiring, degradation
-ladder L12 from day one (blueprint §1; BRIEF_SPEC §9, VALIDATION_SPEC
-§10). Local inference (llama.cpp + GBNF, TECH_NOTES §1) is a
-runtime-dependency stop-and-confirm item — the owner decides the
-engine before any code. Until that gate opens, track A has no
-un-gated code iteration queued: the LLM-free backlog is `tune-1`
-(rest action + the D-045(b) importance knob — owner-gated per TASKS);
-the phase-1 deferrals all arrive with the mediator, never early.
-**Track B is unblocked:** bg-2 (taxonomy) and bg-3 (briefer spike)
-query the DB (`output/df_world_<stem>.sqlite3`; bg-3's reverse
-validation reuses iter-9's `invented`/`regen_count` metrics); bg-4
-(cost notes) is a read-only pass. Infra backlog: `doc-1` VISION freeze
+**The narrator boundary is LIVE (agent-in-the-loop, D-055).** The whole
+phase-1 mediator circuit runs end-to-end with the owner's assistant as
+the narrator: brief → `call_<N>.md` → reply `{prose, texture_delta?,
+proposal?}` → verdicts → gateway → intent door → promotion. Next, in
+order:
+
+1. **Validation beats** — real agent-in-the-loop sessions through
+   `narrate`; the phase-1 exit criterion is measurable now (0 canon
+   violations per 100 beats, ROADMAP §2; `invented`/`unverifiable`/
+   regen counts ride the validator's golden plumbing, VALIDATION_SPEC
+   §9). Findings → the phase-1 regression set (forbidden-assertion
+   cases included).
+2. `st-1` presence & entity cards (the strongest iter-13 candidate —
+   the quiet-beat hole bites hardest in live sessions) or `tune-1`
+   rest action — the owner's pick; `st-2`..`st-5` wait per TASKS.
+3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
+   the `bg-6` SoW audit wait for the phase-1 gate — never earlier
+   (ROADMAP §6; the owner's deferral, D-055).
+
+Track B: bg-2 (taxonomy) + bg-3 (briefer spike) query the SQLite sink;
+bg-4 (cost notes) is read-only. Infra backlog: `doc-1` VISION freeze
 review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
-10k-tick profile (the full profile stays the gate for anything
-structural).
+10k-tick profile (the gate for anything structural).
 
 **Owner verdict pending (iter-11b; re-checked iter-11c — verified
 sound, KI#43 precision fixes landed):** the stress-test resolutions
 (blueprint §1/§5/§7; BRIEF_SPEC §9; the `st-1..st-5` TASKS backlog
 rows) are research verdicts — accepted sections become DECISIONS at
 the accepting iteration; `st-4` rides the narrator-boundary gate
-naturally, `st-1`/`st-2` are the strongest iter-12+ candidates, and
+naturally, `st-1`/`st-2` are the strongest iter-13+ candidates, and
 `st-3`/`st-5` wait for phase 5 / GROUP_SPEC's trigger.

@@ -16,10 +16,9 @@ budgets regardless of log length — and assembled fresh every beat from
 the log. The brief carries **facts as structured tokens**; it never
 *describes* style (L2 — voice lives in the exemplar block, facts stay
 dry). `importance` dials creative freedom downstream; the brief itself
-never invents, orders by feel, or drops silently.
-
-Phase-0-era scope (this spec, iter-8): the **deterministic assembler**;
-since iter-10 the purity pair is **(log, ledger)** (§2/§3.3).
+never invents, orders by feel, or drops silently. Scope: the
+deterministic assembler (iter-8); the purity pair is **(log, ledger)**
+since iter-10 (§2/§3.3).
 
 ## 2. Determinism & purity (the D-042/D-043/D-044 read-side family)
 
@@ -207,9 +206,9 @@ state an authoring error, not a runtime gamble.
 
 ### 5.3 Eviction vs compaction
 
-Eviction is *inside-beat assembly policy*; reflection-on-recurrence is
-*periodic compaction between beats* (phase 4) — both exist, neither
-substitutes for the other (phases.md §1).
+Eviction is inside-beat assembly policy; reflection-on-recurrence is
+periodic compaction between beats (phase 4) — both exist, neither
+substitutes for the other (`phases.md` §1 owns the distinction).
 
 ## 6. Pack data (`rules.json::brief`)
 
@@ -273,6 +272,25 @@ code, not in the pack.
   log and renders its brief — the golden-fixture byte-identity entry
   point; §8 owns the change discipline.
 
+### 7.1 The narrator call document (iter-12, D-055)
+
+The mediator's narrator call = the brief (§7 bytes, unchanged) + one
+appended protocol section (block geometry — one blank line separator):
+
+```
+## narrator_protocol
+anchor: <len(events) at assembly>
+regen: <used>/<max>
+<note line>            # refusal / withdrawal notes, verbatim, zero or more
+```
+
+`anchor` is the OCC anchor a reply's proposal must carry
+  (`VALIDATION_SPEC.md` §5); `regen` is the per-beat counter (its §7);
+  notes are the dry refusal lines riding the call's top. A pure function
+  of (log, ledger, pack) + the protocol state — same inputs → same bytes
+  (the D-049 quarantine). The reply document's contract is
+  `VALIDATION_SPEC.md` §7.1's.
+
 ## 8. Versioning
 
 The brief is a derived read-side artifact (no committed bytes), so
@@ -285,13 +303,12 @@ bytes = a spec edit in the same commit as the code change.
 | Deferred | Arrives with | Owner |
 |---|---|---|
 | Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.4 |
-| Live noun resolution → door → `mark_promoted` session circuit (the door's texture path, the texture-noun test, and real `unique_slots` landed iter-11 — INTENT_SCHEMA §3) | the owner-gated narrator boundary | blueprint §1 |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
-| Presence & entity cards (present entities + pairwise relations + promoted props; the quiet-beat hole) | the owner-gated narrator boundary (mode B needs it too) | blueprint §1 |
+| Presence & entity cards (present entities + pairwise relations + promoted props; the quiet-beat hole) | `st-1` (TASKS backlog) | blueprint §1 |
 | Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
-| The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | the owner-gated narrator boundary | blueprint §1 |
+| The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |
 | Static-lore retrieval (FTS5) + trait expansion instead of raw records | phase 4 | STORE-1, LEGEND_SPEC |
-| Any LLM/network call (the narrator itself) | owner-gated boundary iteration | AGENTS §8 |
+| The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |

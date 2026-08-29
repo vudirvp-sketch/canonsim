@@ -5,8 +5,9 @@
 > validator's contract; the mechanism donors are `docs/blueprint/phases.md` §1
 > (the validator + the scene ledger). The intent door stays `INTENT_SCHEMA.md`'s,
 > events stay `docs/EVENT_SCHEMA.md`'s — this doc never restates them. No LLM,
-> no network anywhere in this contract (INV-4 holds until the owner-gated
-> narrator-boundary iteration, AGENTS §8). ≤300 lines.
+> no network anywhere in this contract or its code (INV-4 unchanged — the
+> narrator boundary landed agent-in-the-loop, D-055: the narrator is
+> external, the repo stays engine-only). ≤300 lines.
 
 ## 1. What the validator is
 
@@ -16,14 +17,14 @@ is a pure function of `(proposal, log, pack)` — no RNG, no wall-clock, writes
 nothing (INV-1/INV-2; the D-042 read-side family). The commit step is the
 intent door and ONLY the intent door (D-037): the validator never writes
 canon, never merges, never sanitizes text. The narrative step is the
-narrator's, owner-gated.
+narrator's — external since iter-12 (D-055, §7.1).
 
 Scope split inside phase 1:
 
 | Half | Status | Contents |
 |---|---|---|
 | LLM-free (iter-9, this spec's code) | landed | proposal shaping (§3), verdicts (§4), ExpectedVersion OCC (§5), fact-transaction pass-through (§6), regen protocol core (§7), golden-set plumbing (§9) |
-| Live wiring (owner-gated, AGENTS §8) | deferred | the narrator call itself, the extraction pass, dry-mode rendering, the mediator session loop |
+| Live wiring (iter-12, D-055 — agent-in-the-loop) | landed | the response document + session wiring (§7.1), dry-mode rendering (the L12 ladder), the mediator session loop (`cli/mediator.py`; the extraction pass + the runtime inference engine stay deferred, §10) |
 
 ## 2. The structural boundary (injection neutralization, D-018)
 
@@ -139,6 +140,47 @@ triggers the retry protocol, per beat:
   (`regen_count`, §9), never silent; chronic exhaustion is a narrator or
   prompt bug, observable, not absorbed.
 
+### 7.1 The response document + the session wiring (iter-12, D-055)
+
+The narrator replies with ONE closed document per call
+(`brief/mediator.py::narrator_response_from_mapping` — the boundary's
+shape gate; the call document's format is `BRIEF_SPEC.md` §7.1's):
+
+| Field | Type | Req | Meaning |
+|---|---|---|---|
+| `prose` | non-empty string | yes | the beat's narrative (shown to the player on accept) |
+| `texture_delta` | the ledger delta document | no | established / retired / refs — the §8 gateway's input |
+| `proposal` | the §3 proposal document | no | claims + intents |
+
+- The deep shape gates (`check_delta_shape`, `proposal_from_mapping`)
+  run AT the boundary, before any gate: malformed output is the
+  ladder's problem (a regen with a `MALFORMED` note; exhaustion → dry
+  mode), never the validator's or the gateway's — they never guess,
+  never repair (§2).
+- **A refused document never feeds intents**: delta refusals or
+  contradicted claims regen the WHOLE beat — the re-invocation
+  re-delivers prose, delta and proposal; intents reach the door only on
+  an accepted document. Accepted delta items stay applied across
+  regens (the gateway's idempotent duplicate rule absorbs
+  re-assertions).
+- The narrator is EXTERNAL (D-055): the dev-time engine is the owner's
+  assistant over files — the mediator emits `call_<N>.md`, the operator
+  writes `reply_<N>.json` (gitignored runtime artifacts); no LLM, no
+  network, no runtime dependency in code (INV-4 unchanged).
+- The mediator's noun resolution feeds the door: an intent survives
+  only with a live texture entry (an unresolvable noun never becomes an
+  Intent), a player actor (mode A), and no duplicate entry per document
+  (one promotion per entry per beat — the live-only `mark_promoted`
+  law); everything else is a `WITHDRAWN` note riding the next call,
+  never an event (§8's mirror).
+- The beat order is D-049's: commit → retire_contradicted(window) →
+  sync → assemble/call → reply → delta → intents → `mark_promoted`
+  (`cli/mediator.py` — the orchestration is periphery, D-046; the
+  document layer is `brief/` pure functions).
+- Degradation ladder L12 from day one: narrator → template (the beat's
+  own chronicle lines) → dry log line. Never a blocked beat, never a
+  silent drop (§7).
+
 ## 8. Scene-ledger protocol clauses (mechanism: blueprint §1, D-048/D-049)
 
 The ledger's LLM-free half landed iter-10 (`brief/ledger.py` — entry
@@ -190,11 +232,10 @@ invented-facts metric and the §7 `regen_count` ride the same numbers.
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| The live narrator call, extraction pass, dry-mode rendering, session wiring | the owner-gated narrator boundary (AGENTS §8) | blueprint §1 |
+| The runtime inference engine (llama.cpp + GBNF) + the LLM-based extraction pass + the C-parser wiring | the phase-1 gate (the runtime-engine decision; the dev-time narrator is the external agent door, D-055) | blueprint §1 |
 | The C-parser emitting IntentProposal JSON | phase 2 | blueprint §2 |
 | Knowledge-negation claims, fidelity-bearing claims | a real consumer (phase-2 parser disputes) | this spec §3 |
 | Semantic invalidation (a spreading fire kills the candlelight) | narrator delta territory or a later validator pass — never mediator guessing | blueprint §1 |
-| Live noun resolution → door → `mark_promoted` session circuit (the door's texture path + the pack `requires` texture-noun test landed iter-11 — INTENT_SCHEMA §3) | the owner-gated narrator boundary | blueprint §1, BRIEF_SPEC §9 |
 
 ## 11. Versioning
 

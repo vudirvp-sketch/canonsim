@@ -77,15 +77,15 @@ failure_total branch consistency) + the doc-sync set (INTENT_SCHEMA §9,
 AGENT_NAVIGATION fixtures row, the missing TASKS ## Done line). 453 green.
 Detail: `worklog.md` iter-11a + `STATUS.md`.
 
-### iter-12+ · the narrator LLM call — todo (owner gate)
+### iter-12 · the mediator session loop — done (D-055)
 
-- The live mediator session loop: texture noun resolution against live
-  entries, the structural texture delta in the narrator call,
-  `mark_promoted` live wiring, degradation ladder L12 from day one
-  (blueprint §1; BRIEF_SPEC §9, VALIDATION_SPEC §10). Local inference
-  (llama.cpp + GBNF, TECH_NOTES §1) is a runtime-dependency
-  stop-and-confirm item per AGENTS §8 — the owner decides the engine
-  before any code.
+The owner's engine verdict (2026-08-30): no SoW, no llama.cpp now —
+the dev-time narrator is the external agent over a file contract
+(call_<N>.md → reply_<N>.json); the repo stays LLM-free (INV-4
+unchanged). Landed: the call/response documents, the beat cycle
+(retire→sync→call→reply→delta→intents→promotions), noun resolution
++ withdrawals, the L12 ladder, `narrate` session commands. Detail:
+`worklog.md` iter-12 + `docs/VALIDATION_SPEC.md` §7.1 + D-055.
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -160,6 +160,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 - Park et al. 2023 + "Generative Agent Simulations of 1,000 People" (2024)
   figures → `docs/TECH_NOTES.md` cost section.
+
+### bg-6 · SoW integration audit — todo (owner-deferred)
+
+- Read-only pass over `github.com/jofizcd/Soul-of-Waifu` (registered
+  2026-08-30 at the owner's request; the owner defers integration "until
+  unavoidable"): extension points for a separate simulation chat mode
+  (a new mode vs. invasive edits), where llama.cpp sits, what the
+  frontend must NOT own (the dumb-terminal contract, VISION §10).
+  Output: a TECH_NOTES section + the `SOW_INTEGRATION_SPEC` sketch.
+  Natural slot: just before the phase-1 gate (ROADMAP §6 bans
+  SoW-specific work earlier; never blocks track A).
 
 ## Infra backlog (pick by need)
 

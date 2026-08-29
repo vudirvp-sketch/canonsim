@@ -10,6 +10,17 @@
 > since iter-5).
 
 ---
+iter-12 · 2026-08-30 · the mediator session loop — agent-in-the-loop (iter-12-mediator-loop)
+- Owner verdict D-055: no SoW/llama.cpp — the dev-time narrator is the
+  external agent over files (INV-4 holds); SoW audit parked as bg-6.
+- brief/mediator.py (call/response docs, feedable_intents, promotions
+  scan) + cli/mediator.py (the D-049 beat cycle + the L12 ladder) +
+  `narrate` commands + ledger check_delta_shape.
+- Specs synced: BRIEF_SPEC §7.1 (314/300 — §6.1 pass done, the over-cap
+  is the new format law), VALIDATION_SPEC §7.1, TASKS/STATUS/
+  AGENT_NAVIGATION; KI#42 deleted per §5.
+- 453→476 green, ruff clean; iter-8h evicted per the cap.
+---
 bg-5 · 2026-08-30 · owner-requested external-spec verdict (bg-5-spec-verdict)
 - Pasted behavioral-engine integration spec audited against the repo
   + live-char-guide: every D-ID/INV citation resolves, no repo drift;
@@ -93,13 +104,6 @@ bg-1-sqlite-sink · 2026-08-29 · DF SQLite sink — bg-1 closed (D-051)
   the large world (2.38 GB → 898 MB in 174 s).
 - KI#36 opened+closed (UNDOCUMENTED marker; catches `artifact`,
   `historical_era`). 10 files. 340→352 green, ruff clean.
----
-iter-8h · 2026-08-29 · derived-index micro-pass (iter-8h-derived-indexes)
-- Owner-directed external patch list, each item proven
-  semantics-preserving first (D-050): KnowledgeView token→sources
-  index, Simulator (entity,prop)→tick index, scene-delta window break,
-  salient top-1 max, occ forward fold, director entropy per releases().
-- 13 files. 338→340 green, ruff clean, byte-identical. No new KIs.
 ---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - (deleted at bg-5 per the one-in/one-out cap; history in git.)

@@ -12,10 +12,13 @@ Batch subcommands (one process, one job):
 
 Interactive session (no subcommand) — `look` and `wait` are two of the
 12 actions driven as single-step intents through the same front door as
-playscript steps; `play` loads a script into the live session:
+playscript steps; `play` loads a script into the live session; `narrate`
+drives the mediator beat cycle over an EXTERNAL narrator (the
+agent-in-the-loop door, D-055 — the repo stays LLM-free):
 
-    look · wait N · play <script> · chronicle · state <entity> ·
-    replay <log> · directors on|off · seed [<n>] · help · quit
+    look · wait N · play <script> · narrate [<reply.json> | dry] ·
+    chronicle · state <entity> · replay <log> · directors on|off ·
+    seed [<n>] · help · quit
 
 The session is one opened Simulator (`core/loop.py`): every command
 feeds steps through `run_steps` and the world moves only through the
@@ -34,6 +37,7 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
+from cli.mediator import BeatResult, Mediator, MediatorError
 from core.director import policy_from_rules
 from core.fold import fold, initial_projection
 from core.log import LogError, next_log_path, read_log
@@ -58,6 +62,10 @@ _SESSION_HELP = """commands:
   look              take in the scene (the look_around action)
   wait N            wait N ticks (the world moves: beats, rotations)
   play <script>     run a playscript's steps in this session
+  narrate           emit the narrator call (output/mediator/call_NNNN.md)
+  narrate <reply>   apply a narrator reply JSON {prose, texture_delta?,
+                    proposal?} — the beat cycle runs
+  narrate dry       close the beat without a narrator (template prose)
   chronicle         print the tale so far (re-rendered from the log)
   state <entity>    full history + current state of one entity
   replay <log>      validate + fold another log (T2), report
@@ -110,6 +118,7 @@ class Session:
         self._logs_dir = logs_dir
         self._directors_on = director_enabled
         self._shown_lines = 0  # chronicle lines already printed
+        self._mediator: Mediator | None = None
         self._start(seed)
 
     def _start(self, seed: int) -> None:
@@ -122,6 +131,7 @@ class Session:
         )
         self._sim.open()
         self._shown_lines = 0
+        self._mediator = None  # the ledger dies with its session (D-049)
 
     @property
     def seed(self) -> int:
@@ -151,13 +161,17 @@ class Session:
                 "replay": self._cmd_replay,
                 "directors": self._cmd_directors,
                 "seed": self._cmd_seed,
+                "narrate": self._cmd_narrate,
             }[command]
         except KeyError:
             print(f"unknown command {command!r} — try 'help'")
             return
         try:
             handler(args)
-        except (RunnerError, LogError, RenderError, GrammarError, ValueError) as exc:
+        except (
+            RunnerError, LogError, RenderError, GrammarError,
+            MediatorError, ValueError,
+        ) as exc:
             print(f"error: {exc}")
         except FileNotFoundError as exc:
             print(f"error: {exc}")
@@ -243,6 +257,57 @@ class Session:
         self._sim.close()
         self._start(new_seed)
         print(f"new run: seed {new_seed}, log {self._log_path}")
+
+    # -- the mediator beat cycle (agent-in-the-loop, D-055) -------------------
+
+    def _mediator_or_start(self) -> Mediator:
+        if self._mediator is None:
+            self._mediator = Mediator(
+                self._sim, self._pack, self._schema, self._log_path,
+                OUTPUT_DIR / "mediator",
+            )
+        return self._mediator
+
+    def _cmd_narrate(self, args: list[str]) -> None:
+        mediator = self._mediator_or_start()
+        try:
+            if not args:
+                path = mediator.emit_call()
+                reply = path.with_name(
+                    path.stem.replace("call", "reply") + ".json"
+                )
+                print(f"[narrator call: {path}]")
+                print(
+                    f"[write a JSON reply {{prose, texture_delta?, proposal?}} "
+                    f"at {reply}, then: narrate {reply}]"
+                )
+            elif args == ["dry"]:
+                self._print_beat(mediator.dry_close())
+            elif len(args) == 1:
+                self._print_beat(mediator.apply_reply(Path(args[0])))
+            else:
+                print("usage: narrate [<reply.json> | dry]")
+        finally:
+            self._shown_lines = mediator.shown_lines
+
+    @staticmethod
+    def _print_beat(result: BeatResult) -> None:
+        if result.status == "accepted":
+            print(result.prose)
+            return
+        if result.status == "regen":
+            print(
+                f"[refused — regen {result.regens_used}/{result.max_regens}; "
+                f"next call: {result.call_path}]"
+            )
+            for note in result.notes:
+                print(f"  {note}")
+            return
+        print(result.prose)
+        print(
+            f"[dry beat — the L12 floor; regens used "
+            f"{result.regens_used}/{result.max_regens}]"
+        )
 
     # -- the world-touching path ---------------------------------------------
 
@@ -404,7 +469,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_replay(args)
         return run_session(args)
     except (
-        RunnerError, PackError, LogError, RenderError, GrammarError, ValueError,
+        RunnerError, PackError, LogError, RenderError, GrammarError,
+        MediatorError, ValueError,
     ) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
