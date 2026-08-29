@@ -275,12 +275,20 @@ def test_session_narrate_emits_and_applies_a_reply(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     """The narrator door drives one full beat: `narrate` emits the call
-    (brief + protocol), `narrate <reply>` runs the cycle — a prose-only
-    reply is accepted; a malformed one degrades (regen), never crashes."""
+    (brief + protocol), `narrate <reply>` runs the cycle — a reply with
+    supported claims is accepted and its verdict summary prints (KI#44);
+    a malformed one degrades (regen), never crashes."""
     monkeypatch.setattr("cli.main.OUTPUT_DIR", tmp_path)
     reply = tmp_path / "mediator" / "reply_0000.json"
     reply.parent.mkdir(parents=True)
-    reply.write_text(json.dumps({"prose": "The common room was warm."}), "utf-8")
+    reply.write_text(json.dumps({
+        "prose": "The common room was warm.",
+        "proposal": {
+            "expected_event_seq": 1,
+            "claims": [{"kind": "state", "entity": "pc_01",
+                        "prop": "position", "value": "loc_street"}],
+        },
+    }), "utf-8")
     bad = tmp_path / "mediator" / "reply_0001.json"
     bad.write_text(json.dumps({"prose": "x", "bogus": 1}), "utf-8")
     feed(monkeypatch, [
@@ -294,6 +302,7 @@ def test_session_narrate_emits_and_applies_a_reply(
     call = tmp_path / "mediator" / "call_0000.md"
     assert call.exists() and "## narrator_protocol" in call.read_text("utf-8")
     assert "The common room was warm." in out  # the accepted prose
+    assert "BEAT claims: 1 supported" in out  # KI#44: the verdict summary
     assert "refused — regen 1/2" in out  # malformed → the ladder, no crash
     assert "[dry beat — the L12 floor" in out
 

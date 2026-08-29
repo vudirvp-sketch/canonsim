@@ -35,9 +35,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from brief.ledger import DeltaError, SceneLedger, refusal_lines
+from brief.ledger import DeltaError, DeltaReport, SceneLedger, refusal_lines
 from brief.mediator import (
     NarratorError,
+    NarratorResponse,
     feedable_intents,
     narrator_call,
     narrator_response_from_mapping,
@@ -47,6 +48,7 @@ from brief.validator import (
     IntentProposal,
     ProposalError,
     RegenBudget,
+    ValidationReport,
     refusal_note,
     validate_proposal,
 )
@@ -69,7 +71,9 @@ class BeatResult:
     """One completed beat-cycle step. `status`:
 
     - `accepted` — the narrator reply passed both gates; `prose` is the
-      narrator's text, shown to the player;
+      narrator's text, shown to the player; `notes` carries the beat's
+      dry `BEAT` summary lines (KI#44 — claims/texture/intents/rebased
+      counts; operator output only, never riding the next call);
     - `regen` — the document was refused or malformed; `notes` carries
       the dry refusal lines, `call_path` the auto-emitted re-invocation;
     - `dry` — the L12 floor: the beat closed without a narrator, `prose`
@@ -187,21 +191,26 @@ class Mediator:
         # Accepted: the fact transaction completes. Withdrawals resolve
         # nouns against the post-delta ledger; only feedable intents
         # reach the door; committed promotions flip their entries.
+        fed = withdrawn = 0
         if report is not None and report.intent_proposals:
-            feedable, withdrawn = feedable_intents(
+            feedable, withdrawn_notes = feedable_intents(
                 report.intent_proposals, self.ledger, self._pack.player_id()
             )
-            self._pending_notes.extend(withdrawn)
+            self._pending_notes.extend(withdrawn_notes)
+            fed, withdrawn = len(feedable), len(withdrawn_notes)
             if feedable:
                 before = len(events)
                 self._sim.run_steps([self._step(intent) for intent in feedable])
                 fresh = self._events()
                 for entry_id, event_id in promotions_in(fresh[before:]):
                     self.ledger.mark_promoted(entry_id, event_id)
+        summary = self._beat_summary(
+            response, report, delta_report, fed=fed, withdrawn=withdrawn
+        )
         used, ceiling = self._regens.used, self._regens.max_regens
         self._close_beat()
         return BeatResult(
-            status="accepted", prose=response.prose, notes=(),
+            status="accepted", prose=response.prose, notes=summary,
             call_path=None, regens_used=used, max_regens=ceiling,
         )
 
@@ -222,6 +231,53 @@ class Mediator:
         )
 
     # -- internals --------------------------------------------------------------
+
+    @staticmethod
+    def _beat_summary(
+        response: NarratorResponse,
+        report: ValidationReport | None,
+        delta_report: DeltaReport | None,
+        *,
+        fed: int,
+        withdrawn: int,
+    ) -> tuple[str, ...]:
+        """The accepted beat's dry verdict summary (KI#44): the honest-
+        verdict law made observable at the session level, so a live
+        session can tally the phase-1 exit numbers (invented/unverifiable/
+        rebased/regens per beats — ROADMAP §2; the refusal side is already
+        visible via the regen notes). Operator output only: these lines
+        never enter `_pending_notes`, never ride the next call (only
+        refusals and withdrawals do — BRIEF_SPEC §7.1)."""
+        lines: list[str] = []
+        if report is not None and report.claim_verdicts:
+            supported = (
+                len(report.claim_verdicts) - report.invented - report.unverifiable
+            )
+            parts = [f"{supported} supported"] if supported else []
+            if report.unverifiable:
+                parts.append(f"{report.unverifiable} unverifiable")
+            if parts:
+                lines.append(f"BEAT claims: {', '.join(parts)}")
+            if report.rebased_to is not None:
+                lines.append(
+                    f"BEAT rebased: {response.proposal.expected_event_seq} "
+                    f"-> {report.rebased_to}"
+                )
+        if delta_report is not None:
+            parts = []
+            if delta_report.established:
+                parts.append(f"{len(delta_report.established)} established")
+            if delta_report.pinned:
+                parts.append(f"{len(delta_report.pinned)} pinned")
+            if delta_report.retired:
+                parts.append(f"{len(delta_report.retired)} retired")
+            if delta_report.no_ops:
+                parts.append(f"{len(delta_report.no_ops)} no-op")
+            if parts:
+                lines.append(f"BEAT texture: {', '.join(parts)}")
+        if report is not None and report.intent_proposals:
+            lines.append(f"BEAT intents: {fed} fed, {withdrawn} withdrawn")
+        return tuple(lines)
 
     def _regen_or_dry(self, notes: Sequence[str]) -> BeatResult:
         self._pending_notes.extend(notes)

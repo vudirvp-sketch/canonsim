@@ -180,6 +180,14 @@ shape gate; the call document's format is `BRIEF_SPEC.md` §7.1's):
 - Degradation ladder L12 from day one: narrator → template (the beat's
   own chronicle lines) → dry log line. Never a blocked beat, never a
   silent drop (§7).
+- **Accepted beats surface their verdict summary** (iter-13, KI#44): dry
+  `BEAT claims/texture/intents/rebased` lines in `BeatResult.notes` —
+  the honest-verdict law's visibility clause, so a live session can
+  tally the phase-1 exit numbers (invented/unverifiable/rebased/regens
+  per beats, ROADMAP §2; refusals were always visible via the regen
+  notes). Operator output only: these lines never ride the next call's
+  protocol section (only refusals and withdrawals do). A prose-only
+  beat summarizes nothing.
 
 ## 8. Scene-ledger protocol clauses (mechanism: blueprint §1, D-048/D-049)
 

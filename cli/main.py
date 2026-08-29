@@ -294,6 +294,8 @@ class Session:
     def _print_beat(result: BeatResult) -> None:
         if result.status == "accepted":
             print(result.prose)
+            for note in result.notes:  # the BEAT summary lines (KI#44)
+                print(f"  {note}")
             return
         if result.status == "regen":
             print(

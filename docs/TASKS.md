@@ -87,6 +87,20 @@ unchanged). Landed: the call/response documents, the beat cycle
 + withdrawals, the L12 ladder, `narrate` session commands. Detail:
 `worklog.md` iter-12 + `docs/VALIDATION_SPEC.md` §7.1 + D-055.
 
+### iter-13 · validation beats — done (session 1)
+
+The first live agent-in-the-loop session through `narrate` (seed 125,
+11 beats): **0 canon violations**, every refusal family probed and
+caught; KI#44 fixed (accepted-beat verdicts now print as the `BEAT`
+summary lines — the phase-1 exit numbers are countable in live play);
+the phase-1 regression set committed
+(`tests/fixtures/narrator_beats.json` — 16 cases distilled from the
+session, replayed through the real mediator cycle). Live evidence for
+`st-1`: the brief carries no presence block (the narrator cannot
+legally name who is in the room). The exit criterion needs volume:
+more sessions across seeds/scenarios, findings extend the corpus.
+Detail: `worklog.md` iter-13 + `docs/VALIDATION_SPEC.md` §7.1.
+
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
 - `tune-1` rest action as pack data (player fatigue is monotonic over

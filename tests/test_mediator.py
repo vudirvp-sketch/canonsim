@@ -12,7 +12,11 @@ never see it), the refusal → regen → dry ladder (≤2 regens, L12), the
 accepted path (delta through the real gateway, intents through the real
 door, `mark_promoted` live wiring, canon birth in the projection), the
 withdrawal mirror (a retired entry's intent never feeds), and the
-call-bytes determinism (the D-049 quarantine).
+call-bytes determinism (the D-049 quarantine). Since iter-13 also the
+phase-1 regression set: the narrator-beat corpus (fixtures/
+narrator_beats.json, distilled from the live validation-beats session)
+replayed through the real cycle, plus the accepted-beat `BEAT` summary
+lines (KI#44 — verdict visibility for the phase-1 exit numbers).
 """
 
 from __future__ import annotations
@@ -33,7 +37,7 @@ from brief.mediator import (
     promotions_in,
 )
 from brief.validator import IntentProposal, ProposalError
-from cli.mediator import Mediator, MediatorError
+from cli.mediator import BeatResult, Mediator, MediatorError
 from core.log import EventRecord, StateChange, read_log
 from core.loop import Simulator
 from core.pack import load_pack
@@ -366,3 +370,84 @@ def test_narrator_call_carries_regen_counter_and_notes() -> None:
         f"## narrator_protocol\nanchor: {len(events)}\n"
         "regen: 1/2\nREFUSED x (canon_slot)\n"
     )
+
+
+# -- the phase-1 regression set (iter-13 validation beats) ------------------------
+
+_CORPUS = json.loads(
+    (REPO / "tests" / "fixtures" / "narrator_beats.json").read_text(encoding="utf-8")
+)
+
+
+def _anchor_of(call_path: Path) -> int:
+    """The anchor the emitted call advertised (the narrator's contract —
+    BRIEF_SPEC §7.1; the corpus never hardcodes event counts)."""
+    for line in call_path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("anchor:"):
+            return int(line.split()[1])
+    raise AssertionError(f"no anchor line in {call_path}")
+
+
+def _resolve_anchors(doc: Any, anchor: int) -> Any:
+    """Substitute the corpus's `'anchor'` placeholders with the advertised
+    anchor — exactly what the external narrator does when replying."""
+    if isinstance(doc, dict):
+        return {
+            key: anchor if value == "anchor" else _resolve_anchors(value, anchor)
+            for key, value in doc.items()
+        }
+    if isinstance(doc, list):
+        return [_resolve_anchors(item, anchor) for item in doc]
+    return doc
+
+
+@pytest.mark.parametrize("case", _CORPUS["cases"], ids=lambda case: case["name"])
+def test_phase1_regression_set(case: dict[str, Any], tmp_path: Path) -> None:
+    """The narrator-beat corpus: full response documents from the live
+    iter-13 agent-in-the-loop session, replayed through the REAL mediator
+    cycle (Simulator + Mediator + SceneLedger). Every refusal family and
+    every accept path at the beat level — the phase-1 exit criterion's
+    regression set (0 canon violations per 100 beats, ROADMAP §2)."""
+    run = tmp_path / case["name"]
+    run.mkdir()
+    log = run / "run.jsonl"
+    sim = Simulator(PACK, case["seed"], log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps(case["setup"])
+    mediator = Mediator(sim, PACK, SCHEMA, log, run / "mediator")
+    result: BeatResult | None = None
+    pre_reply = post_reply = 0
+    for beat in case["beats"]:
+        anchor = _anchor_of(mediator.emit_call())
+        sim.run_steps(beat.get("between", []))
+        pre_reply = len(_events(log))
+        reply = run / "reply.json"
+        reply.write_text(
+            json.dumps(_resolve_anchors(beat["reply"], anchor)), encoding="utf-8"
+        )
+        result = mediator.apply_reply(reply)
+        post_reply = len(_events(log))
+    assert result is not None
+    expect = case["expect"]
+    assert result.status == expect["status"]
+    for needle in expect.get("notes_contains", []):
+        assert any(needle in note for note in result.notes), result.notes
+    if expect.get("log_unchanged"):
+        assert post_reply == pre_reply  # withdrawn intents never touch canon
+    if "last_event_type" in expect:
+        assert _events(log)[-1].type == expect["last_event_type"]
+    if "call_contains" in expect:
+        final_call = mediator.emit_call().read_text(encoding="utf-8")
+        assert expect["call_contains"] in final_call
+
+
+def test_prose_only_beat_has_no_summary_lines(tmp_path: Path) -> None:
+    """A prose-only accepted beat summarizes nothing (KI#44: the BEAT
+    lines carry verdict counts, not noise)."""
+    _sim, mediator = _session(tmp_path)
+    mediator.emit_call()
+    result = mediator.apply_reply(
+        _reply(tmp_path, "r1.json", {"prose": "The room was warm."})
+    )
+    assert result.status == "accepted"
+    assert result.notes == ()

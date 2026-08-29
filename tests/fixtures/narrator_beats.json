@@ -1,0 +1,341 @@
+{
+  "source": "Phase-1 regression set (iter-13 validation beats): full narrator response documents distilled from the live agent-in-the-loop session (seed 125, log logs/run_125_0.jsonl - a gitignored runtime artifact; provenance worklog iter-13). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
+  "cases": [
+    {
+      "name": "honest_supported",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "The taproom took the traveler in with the low, careless hum of a room before anything happens.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "event", "event_id": "ev_0000", "type": "move"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 2 supported"]}
+    },
+    {
+      "name": "unmodeled_prop_is_unverifiable_not_contradicted",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "He favored his left hand without thinking about it.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "handedness", "value": "left"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 1 unverifiable"]}
+    },
+    {
+      "name": "forbidden_false_state",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: the traveler stood on the moonlit road.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_moon"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "value_mismatch"]}
+    },
+    {
+      "name": "forbidden_blind_knowledge",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: the barkeep had watched him pocket the candle.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_holds_the_candles"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "token_absent"]}
+    },
+    {
+      "name": "forbidden_invented_entity",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: a bard in the corner laughed at it all.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "npc_bard_99", "prop": "mood", "value": "jolly"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "unknown_entity"]}
+    },
+    {
+      "name": "forbidden_invented_event",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: the whole affair began with the great brawl.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_9999"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "unknown_event"]}
+    },
+    {
+      "name": "future_anchor_is_emitter_bug",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: a version of the world that does not exist yet.",
+          "proposal": {
+            "expected_event_seq": 99,
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["MALFORMED", "in the future"]}
+    },
+    {
+      "name": "texture_establish_rides_next_brief",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT texture: 1 established"],
+        "call_contains": "candles = lit"
+      }
+    },
+    {
+      "name": "texture_take_promotes_to_canon",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "Before anyone thought to look, he palmed one of the candles from its holder.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "intents": [
+              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT intents: 1 fed"],
+        "last_event_type": "take"
+      }
+    },
+    {
+      "name": "laundering_promoted_texture_refused",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "He palmed one of the candles from its holder.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "intents": [
+              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "PROBE: the candles burned again as if never taken.",
+          "texture_delta": {
+            "source": "turn:2",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "The candles burned again."}
+            ]
+          }
+        }}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(laundering)"]}
+    },
+    {
+      "name": "stale_intact_rebases",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {
+          "between": [{"intent": "wait", "ticks": 60}],
+          "reply": {
+            "prose": "A minute passed; the taproom did what taprooms do with time.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {"kind": "event", "event_id": "ev_0001", "type": "look_around"},
+                {"kind": "knowledge", "who": "pc_01", "knows": "scene_loc_tavern"}
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT rebased", "BEAT claims: 2 supported"]
+      }
+    },
+    {
+      "name": "stale_broken_refuses_with_first_break",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {
+          "between": [{"intent": "move", "target": "loc_backyard"}],
+          "reply": {
+            "prose": "PROBE: still inside the taproom, the traveler kept to his corner.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": ["CONTRADICTED", "stale_broken", "cause: ev_0001"]
+      }
+    },
+    {
+      "name": "gateway_canon_slot_and_slot_conflict",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "PROBE: a second hearth stood where none had been, and a door to the north had appeared.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "hearth", "value": "crackling", "surface": "A hearth crackled in the corner."},
+              {"scope": "scene:loc_tavern", "slot": "hearth", "value": "smoldering", "surface": "Another hearth smoldered near it."},
+              {"scope": "scene:loc_tavern", "slot": "exits", "value": "north", "surface": "A door stood to the north."}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": ["(slot_conflict)", "(canon_slot)"]
+      }
+    },
+    {
+      "name": "scene_mismatch_refused",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {
+          "between": [{"intent": "move", "target": "loc_backyard"}],
+          "reply": {
+            "prose": "PROBE: from the backyard, the narrator described the tavern's shadows.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {"scope": "scene:loc_tavern", "slot": "shadows", "value": "long", "surface": "The shadows stretched long."}
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(scene_mismatch)"]}
+    },
+    {
+      "name": "withdrawals_are_notes_never_events",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "beats": [
+        {"reply": {
+          "prose": "A few candles still burned on the tables.",
+          "texture_delta": {
+            "source": "turn:1",
+            "established": [
+              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "Whatever the guard might have wanted to take, he took nothing; whatever did not exist stayed untaken.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "intents": [
+              {"kind": "take", "actor": "npc_guard_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}},
+              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_9999", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT intents: 0 fed, 2 withdrawn"],
+        "log_unchanged": true,
+        "call_contains": "WITHDRAWN intent take"
+      }
+    },
+    {
+      "name": "malformed_outer_shape_degrades",
+      "seed": 125,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {"prose": "x", "bogus": 1}}
+      ],
+      "expect": {"status": "regen", "notes_contains": ["MALFORMED"]}
+    }
+  ]
+}

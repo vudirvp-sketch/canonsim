@@ -10,6 +10,19 @@
 > since iter-5).
 
 ---
+iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop session (iter-13-validation-beats)
+- Real `narrate` session (seed 125, 11 beats): 0 canon violations;
+  every refusal family probed and caught live (claims, gateway, OCC,
+  ladder); the quiet-beat hole confirmed (no presence block — st-1
+  evidence, not implemented).
+- KI#44 fixed: accepted beats print `BEAT` claims/texture/intents/
+  rebased summaries (cli/mediator.py + cli/main.py; VALIDATION_SPEC
+  §7.1) — the phase-1 exit numbers are countable in live play.
+- The phase-1 regression set: tests/fixtures/narrator_beats.json (16
+  cases from the session) replayed through the real cycle
+  (test_mediator.py); CLI wiring pinned (test_cli.py). 476→493 green,
+  ruff clean; bg-1 evicted per the cap.
+---
 iter-12 · 2026-08-30 · the mediator session loop — agent-in-the-loop (iter-12-mediator-loop)
 - Owner verdict D-055: no SoW/llama.cpp — the dev-time narrator is the
   external agent over files (INV-4 holds); SoW audit parked as bg-6.
@@ -97,13 +110,6 @@ iter-9 · 2026-08-29 · VALIDATION_SPEC + validator LLM-free half (iter-9-valida
   brief/validator.py + validation_golden.json (18 verdict cases).
 - 11 files (spec+code+suite+golden set + sync set, iter-8 precedent).
   352→390 green, ruff clean, byte-identical. No new KIs.
----
-bg-1-sqlite-sink · 2026-08-29 · DF SQLite sink — bg-1 closed (D-051)
-- scripts/df_import.py: typed cores + EAV + event_participant + links
-  + generic JSON records; truncation policy owned; cross-validated on
-  the large world (2.38 GB → 898 MB in 174 s).
-- KI#36 opened+closed (UNDOCUMENTED marker; catches `artifact`,
-  `historical_era`). 10 files. 340→352 green, ruff clean.
 ---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - (deleted at bg-5 per the one-in/one-out cap; history in git.)

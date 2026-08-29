@@ -1,21 +1,21 @@
 # STATUS — canonsim
 
-Iteration: iter-12 (`iter-12-mediator-loop`) · Phase: 1 · Date: 2026-08-30 ·
-The owner's engine verdict unlocked the narrator boundary (the D-022
-doc-loop line's natural exit — a code iteration, counter reset): no SoW,
-no llama.cpp now — the dev-time narrator is the EXTERNAL agent
-(agent-in-the-loop, D-055) over a file contract; the repo stays
-LLM-free (INV-4 unchanged — nothing entered the codebase). Landed: the
-call/response documents (BRIEF_SPEC §7.1 / VALIDATION_SPEC §7.1), the
-live mediator session loop (`cli/mediator.py` — the D-049 beat cycle
-commit → retire_contradicted(window) → sync → call → reply → delta →
-intents → mark_promoted), noun resolution + withdrawals, the L12 ladder
-from day one, `narrate` session commands; verified live — the agent
-narrated a beat (prose + texture + claims), the texture rides the next
-brief. SoW audit parked as bg-6 (Track B; the owner defers integration
-"until unavoidable" — ROADMAP §6's law). KI#42 deleted per AGENTS §5
-(closed iter-11b; iter-11c + bg-5 elapsed); KI#43 survives one more
-iteration.
+Iteration: iter-13 (`iter-13-validation-beats`) · Phase: 1 · Date: 2026-08-30 ·
+The first live agent-in-the-loop session ran through `narrate` (seed 125,
+11 beats, the external narrator = the owner's assistant over the file
+contract): accept paths (prose+claims, texture establish → take-promote
+→ canon birth ev_0002) plus one probe per refusal family — value_mismatch,
+token_absent (blind NPC), unknown_entity, unknown_event, stale_broken (with
+first-break attribution), laundering, slot_conflict, canon_slot,
+scene_mismatch, future-anchor MALFORMED, withdrawals, the idempotent
+re-assertion, L12 dry. **0 canon violations — every false assertion was
+caught.** Findings: KI#44 (accepted-beat verdicts invisible → the `BEAT`
+summary lines, VALIDATION_SPEC §7.1) + live confirmation of the
+quiet-beat hole (the brief carries no presence block — `st-1`'s case,
+evidence only). The phase-1 regression set landed:
+`tests/fixtures/narrator_beats.json` — 16 cases distilled from the
+session, replayed through the real mediator cycle. KI#43 deleted per
+AGENTS §5 (closed iter-11c; bg-5 + iter-12 elapsed).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -39,12 +39,12 @@ iteration.
 
 ## Active KIs
 
-- KI#43 · iter-11b precision family (owner re-check): the MECW ~8–16k
-  figure carried no single owner (→ TECH_NOTES §2); the arrival
-  snapshot mis-named an audience kind (actor-held per-present-target
-  `knows` expansion, INTENT_SCHEMA §7/§10); container cycles named
-  pack-load lint only (commit gate added, D-035) · CLOSED iter-11c
-  (delete at the next STATUS touch per AGENTS §5).
+- KI#44 · accepted-beat verdicts invisible: `apply_reply` dropped the
+  ValidationReport/DeltaReport on accept, so invented/unverifiable/
+  rebased were uncountable in live sessions (the "measurable now"
+  claim held for the regression set only) · CLOSED iter-13 (the `BEAT`
+  summary lines — cli/mediator.py + cli/main.py, VALIDATION_SPEC §7.1;
+  pinned by the corpus + the CLI wiring test).
 
 ## FAQ / Pitfalls
 
@@ -239,20 +239,19 @@ iteration.
 
 ## Next step
 
-**The narrator boundary is LIVE (agent-in-the-loop, D-055).** The whole
-phase-1 mediator circuit runs end-to-end with the owner's assistant as
-the narrator: brief → `call_<N>.md` → reply `{prose, texture_delta?,
-proposal?}` → verdicts → gateway → intent door → promotion. Next, in
-order:
+**Validation beats are running (session 1: 11 beats, 0 violations —
+worklog iter-13).** The regression set is committed
+(`tests/fixtures/narrator_beats.json`); the exit criterion (0 canon
+violations per 100 beats, ROADMAP §2) now needs volume. Next, in order:
 
-1. **Validation beats** — real agent-in-the-loop sessions through
-   `narrate`; the phase-1 exit criterion is measurable now (0 canon
-   violations per 100 beats, ROADMAP §2; `invented`/`unverifiable`/
-   regen counts ride the validator's golden plumbing, VALIDATION_SPEC
-   §9). Findings → the phase-1 regression set (forbidden-assertion
-   cases included).
-2. `st-1` presence & entity cards (the strongest iter-13 candidate —
-   the quiet-beat hole bites hardest in live sessions) or `tune-1`
+1. **More validation beats** — live sessions across seeds/scenarios;
+   tallies via the `BEAT` summary lines + the regen notes; findings
+   extend the corpus (forbidden-assertion cases included). The
+   quiet-beat hole is live-confirmed: the brief carries no presence
+   block, so the narrator cannot legally name who is in the room.
+2. `st-1` presence & entity cards — the strongest next-code-iteration
+   candidate (session 1 is its evidence; closes the quiet-beat,
+   cross-NPC-consistency, and arrival-observation holes) or `tune-1`
    rest action — the owner's pick; `st-2`..`st-5` wait per TASKS.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
@@ -262,11 +261,3 @@ Track B: bg-2 (taxonomy) + bg-3 (briefer spike) query the SQLite sink;
 bg-4 (cost notes) is read-only. Infra backlog: `doc-1` VISION freeze
 review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
 10k-tick profile (the gate for anything structural).
-
-**Owner verdict pending (iter-11b; re-checked iter-11c — verified
-sound, KI#43 precision fixes landed):** the stress-test resolutions
-(blueprint §1/§5/§7; BRIEF_SPEC §9; the `st-1..st-5` TASKS backlog
-rows) are research verdicts — accepted sections become DECISIONS at
-the accepting iteration; `st-4` rides the narrator-boundary gate
-naturally, `st-1`/`st-2` are the strongest iter-13+ candidates, and
-`st-3`/`st-5` wait for phase 5 / GROUP_SPEC's trigger.
