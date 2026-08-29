@@ -10,6 +10,19 @@
 > since iter-5).
 
 ---
+iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified)
+- D-022 owner pass, docs-only: the reported-but-lost stress-test
+  reconstructed (KI#42 — archive expired, nothing in git), every claim
+  re-verified against the code first (453 green, ruff clean); three
+  sharpenings: coarse perception tokens (no snapshot semantics),
+  prop-birth ≠ entity-birth promotion, O(N)/beat assembler folds.
+- Problems 4–6 resolved: call-budget law (MECW), thinking = ephemeral
+  texture, transcript-tail contract, mode-B knower parameterization,
+  presence/entity cards + the chorus-call budget named; landed as
+  blueprint §1/§5/§7 + BRIEF_SPEC §9 (+4 deferrals, cap 300 held) +
+  GROUP_SPEC sketch + TASKS st-1..st-5. KI#37/38 deleted per §5.
+  6 files; no code changes.
+---
 iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
 - KI#39 texture-take chronicle prose broken ("takes .") →
   {target?…|…} take templates + texture_slot derived slot (canon bytes
@@ -81,10 +94,7 @@ iter-8f · 2026-08-29 · audit-fix: truncated exports + 101st type (iter-8f-audi
 - 329 green, ruff clean, byte-identical.
 ---
 iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
-- df_survey.py (sanitize + stream core for bg-1) over the owner's two
-  exports; measured F7/F8 → TECH_NOTES §3.1 (single owner); KI#33
-  schema drift fixed in df_legends_xml.md. 10 files.
-- 329 green, ruff clean. No new DECISIONS (research verdicts).
+- (deleted at iter-11b per the one-in/one-out cap; history in git.)
 ---
 iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-lessons)
 - (deleted at iter-11a per the one-in/one-out cap; history in git.)

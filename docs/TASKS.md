@@ -94,6 +94,25 @@ Detail: `worklog.md` iter-11a + `STATUS.md`.
   knob (hooks on story-critical events, NOT `tale_gate`); both refresh
   the 1000-sim baseline when tuned.
 
+### Stress-test backlog (iter-11b resolutions; owner-gated)
+
+- `st-1` presence & entity cards (the 8th-block candidate: present
+  entities + pairwise relation tokens + promoted props) + the arrival
+  snapshot (one perception event → O(present) knowledge records) —
+  closes the quiet-beat, cross-NPC-consistency, and arrival-observation
+  holes (blueprint §1/§5).
+- `st-2` identity persistence: pack `identity_slots` window tier +
+  per-scope quotas (read-path) + the identity promotion door (pack
+  grammar beyond `take`, the D-054 machine; blueprint §1).
+- `st-3` groups & simulation LOD: one id across tiers, aggregate
+  macro-clock events with cardinality, condensation on crossing
+  (GROUP_SPEC trigger = phase 5 or owner request; blueprint §5).
+- `st-4` the call budget (head + brief + tail + thinking + output ≤
+  MECW target) + the transcript-tail contract + thinking-as-ephemeral-
+  texture (the narrator-boundary iteration; blueprint §1).
+- `st-5` containers: the `in` relation + entity-birth promotion
+  (with `st-3`, phase 5; blueprint §7).
+
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 
 Phase-0 gate closed; full evidence in `worklog.md` iter-6 + the
@@ -201,6 +220,18 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-11b · 2026-08-30 · roadmap stress-test, re-verified + problems
+  4–6 (iter-11b-stress-test-verified; docs-only, D-022): the reported
+  but never-landed pass reconstructed (KI#42 — archive expired) and
+  re-verified against the code (3 sharpenings: perception emits coarse
+  tokens, no snapshot semantics; a D-054 promotion births a prop, not
+  a portable entity; write-side LOD was undesigned) + MECW/nuance/
+  reasoning resolved (call-budget law, thinking = ephemeral texture,
+  transcript-tail contract, mode-B knower parameterization, presence/
+  entity cards); landed as blueprint §1/§5/§7 + BRIEF_SPEC §9 (+4
+  deferrals, cap held) + GROUP_SPEC sketch + the st-1..st-5 backlog.
+  453 green, ruff clean, no code changes. Detail: worklog iter-11b.
 
 - iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix): KI#39
   texture-take chronicle prose (`{target?…|…}` conditional templates +

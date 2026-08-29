@@ -5,8 +5,7 @@
 > `docs/blueprint/phases.md` §1 (ledger row BRIEF-1), the mechanics in
 > `brief/assembler.py` + `brief/ledger.py` (the scene ledger). Field-level
 > clauses are born just-in-time — §9 lists what is deliberately deferred.
-> ≤300 lines. No LLM, no network anywhere in this contract (INV-4 holds
-> until the owner-gated narrator-boundary iteration, AGENTS §8).
+> ≤300 lines. No LLM, no network (INV-4; §9).
 
 ## 1. What the brief is
 
@@ -20,9 +19,7 @@ dry). `importance` dials creative freedom downstream; the brief itself
 never invents, orders by feel, or drops silently.
 
 Phase-0-era scope (this spec, iter-8): the **deterministic assembler**;
-since iter-10 the purity pair is **(log, ledger)** (§2/§3.3). The LLM
-side of the pipeline (max-2-calls-per-beat mediator, `VISION.md` §4
-Layer 3) is a later, owner-gated iteration.
+since iter-10 the purity pair is **(log, ledger)** (§2/§3.3).
 
 ## 2. Determinism & purity (the D-042/D-043/D-044 read-side family)
 
@@ -44,9 +41,9 @@ Layer 3) is a later, owner-gated iteration.
   recalled-facts block reads the PC's own `knowledge` records
   (`known_by` as an architectural filter, `VISION.md` §5). Static-lore
   retrieval (FTS5) is a phase-4 concern (§9).
-- A growing log keeps its brief prefix stable in the same sense as the
-  chronicle: same events prefix → same block items for the same beat
-  window (the window itself moves with the log's last tick).
+- A growing log keeps its brief prefix stable: same prefix → same
+  block items for the same beat window (the window moves with the
+  log's last tick).
 
 ## 3. The block pipeline (seven blocks, fixed order)
 
@@ -121,7 +118,8 @@ view**: the ledger never evicts, all boundedness lives here.
 ### 3.4 Recalled facts (the three-signal shape, deterministic inputs)
 
 Top-k over the PC's knowledge records ranked by the Generative Agents
-three-signal shape with deterministic inputs:
+three-signal shape with two deterministic inputs (the relevance signal
+arrives with the mediator, §9):
 
 ```
 score = recency_weight / (1 + current_tick - record.at)
@@ -136,24 +134,19 @@ score = recency_weight / (1 + current_tick - record.at)
 - `max_items` is a **ranking cap** (the top-k of the O(relevance)
   law), not a budget drop — records beyond it never become block
   items, and the `[truncated:N]` marker counts budget drops only
-  (§5). The third signal (**relevance**: cascade-free keyword match
-  against a query) arrives with the mediator (§9); until then the
-  ranking is the two deterministic signals.
+  (§5).
 
 ### 3.5 Scheduled static lore
 
 Pack lore entries with a **beat-window schedule**: an entry is
 eligible when `from_beat <= beats_crossed < to_beat`, where
 `beats_crossed` counts beat boundaries ≤ the log's last tick. Order:
-pack declaration order. The full live-char scheduling grammar
-(probability / cooldown / sticky / range-cascade / `exclude_key`) is
-deferred (§9).
+pack declaration order.
 
 ### 3.6 Voice exemplars (the voice-isolation law, L2)
 
 Static style lines, verbatim, pack data, injected near the context
-end. They are the ONLY place style lives; the other six blocks stay
-dry. Refresh cadence (every 5–10 messages) is a mediator concern (§9).
+end — the only place style lives; the other six blocks stay dry.
 
 ### 3.7 Active options
 
@@ -192,9 +185,9 @@ Items are taken best-first while BOTH hold:
 
 Every item not taken — soft reached, ceiling skip, or list exhausted —
 counts as **dropped**. A block with dropped items ends with the marker
-line `[truncated:N items dropped]`. The marker itself is metadata:
-exempt from the hard-budget check (a marker must always fit — a
-truncated block that hides its truncation would be a silent drop).
+line `[truncated:N items dropped]`. The marker is metadata, exempt
+from the hard-budget check (a marker must always fit — hiding
+truncation would be a silent drop).
 
 ### 5.2 Whole-block eviction (total overflow)
 
@@ -215,7 +208,7 @@ state an authoring error, not a runtime gamble.
 ### 5.3 Eviction vs compaction
 
 Eviction is *inside-beat assembly policy*; reflection-on-recurrence is
-*periodic compaction between beats* (phase 4). Both exist; neither
+*periodic compaction between beats* (phase 4) — both exist, neither
 substitutes for the other (phases.md §1).
 
 ## 6. Pack data (`rules.json::brief`)
@@ -296,5 +289,9 @@ bytes = a spec edit in the same commit as the code change.
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
+| Presence & entity cards (present entities + pairwise relations + promoted props; the quiet-beat hole) | the owner-gated narrator boundary (mode B needs it too) | blueprint §1 |
+| Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
+| The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | the owner-gated narrator boundary | blueprint §1 |
+| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |
 | Static-lore retrieval (FTS5) + trait expansion instead of raw records | phase 4 | STORE-1, LEGEND_SPEC |
 | Any LLM/network call (the narrator itself) | owner-gated boundary iteration | AGENTS §8 |

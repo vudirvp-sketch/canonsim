@@ -233,6 +233,79 @@ cannot desync canon replay).
   the chorus reads the same texture block and stays consistent (the
   scenes are the same PC-anchored intervals).
 
+**Stress-test resolutions (iter-11b — owner-requested roadmap
+stress-test; research verdicts pending the owner's per-section
+decision, nothing in DECISIONS yet).**
+
+- **Identity persistence (the trader problem).** Entity texture
+  survives scene change and renders on presence (BRIEF_SPEC §3.3), but
+  the ONE `max_items` cap for the whole window makes identity (voice,
+  look, mannerisms) compete with fresh scene texture on recency — a
+  crowded scene silently evicts exactly what long sessions must keep.
+  Read-path resolutions (lifecycle and D-049 untouched): pack
+  `identity_slots` rank in a tier with pinned (key: identity-or-pinned
+  → pinned → newest → construction); a per-scope quota (at most K
+  lines per entity, identity slot first) keeps one chatty entity from
+  flooding the window; mode B renders an entity slot
+  (`speech_pattern`) in the exemplar geometry per present NPC (pack
+  may seed static per-entity exemplars; L2 intact). **The identity
+  promotion door**: the D-054 machine with pack grammar widened beyond
+  `take` (an `affirm`/introduce family, pack-owned like the texture
+  block) — a committed `StateChange(npc, trait.slot, None→value)` +
+  knowledge records is an identity trait's canon birth; one door, core
+  ledger-blind. Tombstone feed-forward extends to narrator-retired
+  PINNED identity entries (prevention; the retire+establish gap stays
+  bounded and visible — new candles stay legal). Cross-session
+  PC-side identity already survives via knowledge records + P3f; this
+  adds the world-side path. (Canon names stay defended — the gateway's
+  canon-slot check already refuses pack-modeled fields; epithets are
+  the texture path, KI#41.)
+- **Presence & entity cards (the quiet-beat hole).** A beat with no
+  PC-perceived events carries no structural fact about WHO is present
+  — perception emits coarse tokens only (`look_around` →
+  `scene_<location>`, `examine` → `details_<target>`); no snapshot
+  semantics exist anywhere yet. Resolution: a `present_entities` block
+  candidate — one dry line per present entity (id, display name,
+  observable surface: status markers, visibly-carried items, promoted
+  props) plus pairwise relation tokens for present pairs (O(pairs),
+  capped). A read-side fold, zero new event types; closes quiet-beat
+  presence, cross-NPC consistency (A-fears-B rides the card, not
+  recall luck; AP-11 voice markers get a structural home), and
+  promoted-prop visibility in one mechanism. The write-side twin (the
+  arrival snapshot) is §5's.
+- **The call budget law (MECW) + the transcript tail.** Local
+  27B-class models show a measured effective window (attention
+  dilution / context rot) of ~8–16k tokens — TECH_NOTES §2 already
+  plans @8K and the brief (`total_hard` 700) is ~9% of it; VISION §1/§6
+  encode the thesis. But no spec owns the per-call ledger:
+  `head + brief + transcript tail + thinking + output ≤ MECW target`
+  (pack data per model class; the thinking allowance is 0 for
+  non-thinking models). The tail is the shock absorber (evicted
+  first, directives never); the head is invariant by construction
+  (prefix cache). The transcript-tail contract (what enters: player
+  verbatim + narrator prose; cap; eviction) is a named spec item of
+  the narrator-boundary iteration — it is the nuance channel: player
+  tone and mode-A prose ride the tail to the next call, never the JSON
+  (the intent carries the mechanical skeleton; VISION §5
+  player-input-is-data holds).
+- **Thinking is ephemeral texture.** Hidden CoT / scratchpad lives
+  INSIDE the narrator call — GBNF-separated sections (reasoning →
+  prose → delta), capped by the call budget, discarded at beat end:
+  never in the brief (L2), never in the ledger, never committed
+  (INV-1); quarantined at the call like all narrator nondeterminism
+  (D-049). Regens inherit the same per-call budget. A brief-resident
+  scratchpad would break the purity pair — rejected.
+- **Mode B is knower-parameterized assembly.** The blocks are
+  PC-parameterized today (recalled facts = the PC's records; scene
+  delta = PC perception). An actor-NPC call runs the same pipeline
+  over its own knowledge view (`KnowledgeView.records_of(npc)` — the
+  machinery exists) plus the entity cards of the other present parties
+  (observables only, L6) and its own exemplar geometry. The chorus
+  budget is a named phase-4 spec item: the 2-call law is mode A's; a
+  mode-B beat with K speaking NPCs is up to K actor calls + extraction
+  — a per-beat actor-call cap (pack data) with the L12 template
+  fallback beyond it.
+
 **The harness** (bg-3): prompt shapes from UAP — role persona in the
 system prompt, full criteria + thresholds + worked examples embedded,
 staged context injection (later blocks receive the *distilled weaknesses*
@@ -366,6 +439,34 @@ parent/child relations, alternate names, daily deltas as append-only
 discipline) — shapes and metadata only; CC-BY attribution sidecar at
 intake; fantasy content from packs, not from real-world toponyms.
 
+**Groups & simulation LOD (stress-test resolutions, iter-11b; owner
+verdict pending).** The LOD ladder above is a READ ladder; the write
+side — how off-screen life ticks, how a group becomes an actor, how it
+materializes on crossing — was undesigned. Resolutions, zero new
+machinery families: (1) **one id, all tiers** — a group is a pack
+entity (kind `group`; the event vocabulary is pack data, EVENT_SCHEMA
+§11) acting through the SAME intent door (actor = entity id; urgencies
+and director releases already ride it, D-037/D-039); `member_of` is a
+pair-relation state (D-020); group axes are small-formula data
+(KeeperRL ratio+threshold; D-006 holds — no group reputation, axes are
+per-entity data). (2) **Simulation LOD = O(relevance) in the tick
+loop** — the brief law generalized: notables tick per-beat as today;
+groups/regions tick on macro-clocks (L4 layered clocks) emitting ONE
+aggregate event with cardinality (`band_raid {caravans: 3, losses: 1}`)
+— log growth O(groups × macrobeats), never O(members × ticks);
+off-screen rumor cost rides the same cadence. (3) **Condensation on
+crossing** (DF populations→notables): group region ∩ PC presence →
+members get canon-birth events (the D-054 shape at group scale); the
+aggregate is tombstoned as realized in derived stores only (INV-5
+untouched); the id never changes between tiers — `known_by`, entity
+texture, and old knowledge keys survive without migration. (4)
+**Arrival snapshot** (write side): entering a scene emits ONE
+perception event → O(present) knowledge records with observable
+markers (per-present-target template expansion — one additive audience
+kind, INTENT_SCHEMA §7); the read-side twin is the §1 entity-card
+block. Spec home when its trigger fires: the GROUP_SPEC sketch
+(`SPECS_BACKLOG.md`).
+
 ## 6. Phase 6 — packs & worldbuilder
 
 **The pack system** (PACK-1 top rung): manifest + module contracts + pack
@@ -425,6 +526,36 @@ reskin without core edits, ≤1 day (`ROADMAP.md` §2).
   millions of rows). Nothing in the blueprint has a phase-0-only shape
   that must be rewritten later — the shapes are the scalable ones, only
   the constants are small.
+- **Containers & physical persistence (stress-test resolutions,
+  iter-11b; owner verdict pending).** The `in` relation: position may
+  name a location OR a container entity; `carrier` is the npc-case of
+  the same relation; presence/containment = the transitive closure
+  (the carrier closure generalized); lint caps nesting depth and
+  rejects cycles at load (the PACK-1 copy-from cycle contract).
+  Additive — state values are pack payload (EVENT_SCHEMA §4), only the
+  projection's position semantics generalize. **Prop birth ≠ entity
+  birth:** a D-054 promotion births a PROP on the scope target — right
+  for fixtures (the hearth), insufficient for portable objects (the
+  axe must carry, drop, be stolen). Entity-birth promotion = the same
+  door with pack grammar (the take materializes a pack-declared item
+  entity at the scope target, carrier = actor) — deferred with the
+  depth phase; no parallel write path.
+- **No texture GC — never; append-forever campaigns (stress-test,
+  iter-11b).** Runtime log compaction is INV-5-forbidden by
+  construction; "GC" lives in derived stores (scavenge, DuckDB —
+  phase 4); the ledger dies with the session (D-049); in-session
+  boundedness is the brief window alone; a per-scope live-entry cap is
+  a named contingency (L13 — only on measured need). Campaign
+  continuation = one log per world, a session binding the projection
+  checkpoint (D-023); the resume door (open a session over an existing
+  log) is the named gap — owner-gated with the mediator boundary;
+  segmentation is an owner gate (EVENT_SCHEMA §1), default never.
+- **Read-side indexes (stress-test, iter-11b).** The assembler's
+  per-beat full folds (the scene fold + `KnowledgeView` rebuild +
+  `current_scene`) are O(N)/beat; the D-050 pattern extends to the
+  read side at the mediator iteration (session-held scene tail +
+  knowledge view + projection checkpoint) — the purity claim is about
+  BYTES, not about the fold call, so caching is legality-preserving.
 
 ---
 

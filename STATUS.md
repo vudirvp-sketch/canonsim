@@ -1,21 +1,30 @@
 # STATUS — canonsim
 
-Iteration: iter-11a (`iter-11a-audit-fix`) · Phase: 1 · Date: 2026-08-29 ·
-Owner-requested audit of iter-11 (the D-022 exception; code-heavy, no
-doc-loop). Every iter-11 claim reproduced (443 green, ruff clean,
-fixtures byte-identical). Three defects fixed: KI#39 — a texture-path
-take event rendered broken chronicle prose ("the player takes ."); the
-take/take_failed templates are now `{target?…|…}` conditionals and the
-renderer derives `texture_slot` (canon lines byte-unchanged, T1
-chronicle holds). KI#40 — the unique-slot one-object claim now survives
-promotion/contradiction (every status except retirement holds it;
-golden case 17). KI#41 — canon-slot overlap now includes pack-modeled
-fields (exits/name/mood…), not just event-born props. Hardening: the
-target+texture mix is loud, the pack lint forbids target-defended
-checks on texture-capable actions + `{texture_slot}` in canon templates
-+ texture-only failure_total branches, texture-path OCC attribution
-pinned. 453 green, ruff clean, fixtures byte-identical. The iter-12+
-owner gate is unchanged.
+Iteration: iter-11b (`iter-11b-stress-test-verified`) · Phase: 1 · Date:
+2026-08-30 · Owner-requested deep re-verification (the D-022 exception;
+docs-only, doc-loop counter = 1 — the previous landed iteration was
+code-heavy). The stress-test pass reported in chat on 2026-08-29
+NEVER landed in git (KI#42: the tmpfiles.org archive expired, no
+commit/push existed) — reconstructed here, every claim re-verified
+against the code before landing (453 green, ruff clean, fixtures
+byte-identical reproduced first). The prior analysis holds (identity
+vs the single window cap; take-only promotion grammar; write-side
+LOD undesigned; no-GC laws); three findings sharpened: perception
+actions emit coarse tokens (`look_around` → `scene_<location>`,
+`examine` → `details_<target>`) — no snapshot semantics, so the
+presence/entity-card hole is wider than reported; a D-054 promotion
+births a PROP on the scope target, not a portable entity
+(entity-birth promotion = named gap); the assembler's per-beat full
+folds are O(N). Problems 4–6 (MECW/attention dilution, JSON nuance
+loss, reasoning starvation) resolved: the call-budget law
+(head+brief+tail+thinking+output ≤ MECW), thinking = ephemeral
+texture (in the call, never the brief), the transcript-tail contract
+named (the nuance channel), mode-B knower parameterization,
+presence/entity cards, the mode-B chorus-call budget named. All
+resolutions live in blueprint §1/§5/§7 + BRIEF_SPEC §9 deferrals +
+GROUP_SPEC sketch + the TASKS `st-1..st-5` backlog — owner verdict
+pending, nothing in DECISIONS (research verdicts). KI#37/38 deleted
+per AGENTS §5 (closed >2 iterations).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -39,16 +48,16 @@ owner gate is unchanged.
 
 ## Active KIs
 
-- KI#37 · post-iter-9/10 audit drift set (worklog cap breach + the
-  iter-10 file count 15≠16; AGENT_NAVIGATION/README sync gaps) · CLOSED iter-10a.
-- KI#38 · INV-3 stoplist test scanned only `core/`+`sim/` — `brief/`
-  (engine-side since iter-8) was unprotected · CLOSED iter-10a.
 - KI#39 · iter-11 missed the render side: a texture-path take event
   (no canon target) rendered broken prose — "the player takes ." · CLOSED iter-11a.
 - KI#40 · the unique-slot guard checked LIVE entries only — a promoted
   entry released its one-object claim (a second hearth could reach canon) · CLOSED iter-11a.
 - KI#41 · the canon-slot check read only event-born props — pack-modeled
   fields (exits, name, mood…) are canon too (blueprint §1) · CLOSED iter-11a.
+- KI#42 · the stress-test pass reported 2026-08-29 ("iter-11b") never
+  landed: the tmpfiles.org archive expired, no commit/push existed —
+  work reconstructed, re-verified against the code, and landed by this
+  iteration · CLOSED iter-11b.
 
 ## FAQ / Pitfalls
 
@@ -121,7 +130,9 @@ owner gate is unchanged.
   `git log -S` before acting.** A ref citing a spec section it never
   contained is drift (iter-6a: "AGENTS.md §9 — Script Persistence Rule"
   in README/TEST_PLAN/D-044 — the text bled from the session prompt;
-  D-046 supersedes). Pre-D-028 wording and license copies in
+  D-046 supersedes). A reported-but-unlanded pass is drift too: archives
+  are ephemeral, git is real — check `git log` before building on any
+  reported state (KI#42). Pre-D-028 wording and license copies in
   `docs/ref/*`/`REFERENCES_DEEP.md` are historical; the owners are
   AGENTS.md §4 and `REFERENCES.md` (the catalog).
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
@@ -260,3 +271,10 @@ validation reuses iter-9's `invented`/`regen_count` metrics); bg-4
 review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
 10k-tick profile (the full profile stays the gate for anything
 structural).
+
+**Owner verdict pending (iter-11b):** the stress-test resolutions
+(blueprint §1/§5/§7; BRIEF_SPEC §9; the `st-1..st-5` TASKS backlog
+rows) are research verdicts — accepted sections become DECISIONS at
+the accepting iteration; `st-4` rides the narrator-boundary gate
+naturally, `st-1`/`st-2` are the strongest iter-12+ candidates, and
+`st-3`/`st-5` wait for phase 5 / GROUP_SPEC's trigger.
