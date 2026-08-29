@@ -517,17 +517,27 @@ class SceneLedger:
                 )  # re-asserted refuted/promoted-away value
 
         if slot in unique_slots:
+            # The claim is held by every status except retirement: live
+            # texture, promoted (the object is canon now), contradicted
+            # (canon overrode the slot — the object exists as canon). Only
+            # a narrator-declared retirement releases the claim (the slot
+            # denotes one object, not one lifetime).
             for entry in self._entries:
                 if (
                     entry.slot == slot
                     and entry.scope != scope
-                    and entry.status in LIVE_STATUSES
+                    and entry.status != RETIRED
                 ):
                     return Refusal(
                         f"establish {scope}.{slot} = {value}", "unique_slot"
                     )
 
-        if slot in state.get(target, {}):
+        # Canon overlap is BOTH prop sources: the folded runtime projection
+        # (event-born props, incl. promotions) and the pack-modeled fields
+        # (exits, fire_spots, name, mood, …) — "texture occupies only slots
+        # canon does not model" (blueprint §1) reads canon as the whole
+        # entity record, not just the event-derived half.
+        if slot in state.get(target, {}) or slot in pack.entity(target):
             return Refusal(f"establish {scope}.{slot} = {value}", "canon_slot")
 
         for entry in self._entries:

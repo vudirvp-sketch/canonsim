@@ -107,6 +107,12 @@ def _event_context(
         ),
         "axes": ", ".join(outcome.get("axes", ())),
     }
+    # The promotion door (iter-11, D-054): a texture-path take carries the
+    # mediator-resolved reference in its outcome and NO canon target — the
+    # take templates branch on {target} and render the promoted slot noun.
+    texture = outcome.get("texture")
+    if isinstance(texture, Mapping) and isinstance(texture.get("slot"), str):
+        context["texture_slot"] = texture["slot"]
     for key, value in outcome.items():
         if key not in context:
             context[key] = _display_if_entity(pack, value)

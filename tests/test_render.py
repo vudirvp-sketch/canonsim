@@ -210,6 +210,44 @@ def test_chronicle_renders_day_header_and_lines(tmp_path: Path) -> None:
     assert text.endswith("\n")
 
 
+def _texture_take(event_id: str, t: int, event_type: str) -> EventRecord:
+    """A texture-path take event (iter-11, D-054): the outcome carries the
+    mediator-resolved reference, the canon target is None."""
+    return EventRecord(
+        id=event_id, t=t, type=event_type, actor="pc_01", cause=None,
+        outcome={"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern",
+                             "slot": "candles", "value": "lit"}},
+        knowledge=(), state_changes=(), hooks=(),
+        importance="low", provenance={"seed": 42}, target=None,
+    )
+
+
+def test_chronicle_texture_take_renders_the_slot_noun() -> None:
+    """iter-11a, KI#39: a texture-path take carries no canon target — the
+    take templates branch on {target} and render the promoted slot noun
+    (before the fix both lines read 'the player takes .')."""
+    events = [
+        _texture_take("ev_0000", 4, "take"),
+        _texture_take("ev_0001", 6, "take_failed"),
+    ]
+    text = render_chronicle(events, PACK, seed=42)
+    assert "the player takes the candles." in text
+    assert "the player reaches for the candles — and is noticed." in text
+
+
+def test_chronicle_canon_take_line_is_unchanged() -> None:
+    """The conditional's true branch keeps the canon line byte-for-byte —
+    a targeted take renders exactly as it did before the texture branch
+    existed (the T1 chronicle byte-identity depends on this)."""
+    events = [EventRecord(
+        id="ev_0000", t=4, type="take", actor="pc_01", cause=None,
+        outcome={}, knowledge=(), state_changes=(), hooks=(),
+        importance="low", provenance={"seed": 42}, target="purse_01",
+    )]
+    text = render_chronicle(events, PACK, seed=42)
+    assert "the player takes the purse." in text
+
+
 def test_chronicle_groups_days() -> None:
     events = [crafted_event("ev_0000", 100, "move"),
               crafted_event("ev_0001", 1500, "move")]

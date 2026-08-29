@@ -10,6 +10,18 @@
 > since iter-5).
 
 ---
+iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
+- KI#39 texture-take chronicle prose broken ("takes .") →
+  {target?…|…} take templates + texture_slot derived slot (canon bytes
+  unchanged); KI#40 unique-slot claim survives promotion (golden case
+  17); KI#41 canon-slot overlap += pack-modeled fields (VALIDATION_SPEC
+  §8 synced).
+- Hardening: target+texture mix loud, lint (target-defended checks on
+  texture actions, {texture_slot} in canon templates, texture
+  failure_total consistency), texture-path OCC attribution test,
+  doc-sync (INTENT_SCHEMA §9, AGENT_NAVIGATION, TASKS ## Done iter-11).
+  443→453 green, ruff clean, fixtures byte-identical. 15 files + sync set.
+---
 iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-free half (iter-11-texture-door)
 - core/intent.py texture machine (reference shape gate, requires_for
   split, texture noun/test, texture_slot slot) + `_pickup` texture branch
@@ -75,11 +87,7 @@ iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
 - 329 green, ruff clean. No new DECISIONS (research verdicts).
 ---
 iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-lessons)
-- ref-17 docs-only pass (the D-022 exception): docs/ref/df_design.md —
-  pillars P1–P6, flaw taxonomy F1–F10 (every flaw a MISSING layer),
-  successor trade-off matrix, bg-1/2/3 guidance, flaw→mechanism
-  verdict table. 5 files.
-- 329 green, ruff clean, byte-identical. No new DECISIONS.
+- (deleted at iter-11a per the one-in/one-out cap; history in git.)
 ---
 (iter-8c deleted at iter-11 per the one-in/one-out cap; history in git.)
 (iter-8b deleted at iter-10a per the one-in/one-out cap; history in git.)

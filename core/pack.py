@@ -272,6 +272,19 @@ class _Lint:
             isinstance(block.get("requires"), list),
             f"{where}: requires must be a list",
         )
+        # The texture path carries no canon target: a target-sourced check
+        # would roll against a None defender (a silent nonsense check, not
+        # a crash) — the check must oppose the actor or the environment.
+        checks = self._data["rules.json"]["checks"]
+        check = action.get("check")
+        if check is not None and checks["kinds"][check["kind"]].get(
+            "defender_source"
+        ) == "target":
+            _require(
+                False,
+                f"{where}: check kind {check['kind']!r} defends from the target — "
+                f"the texture path has none (use best_in_location or environment)",
+            )
         for cond in block["requires"]:
             _require(
                 cond.get("test") in PRECONDITION_TESTS,
@@ -289,6 +302,14 @@ class _Lint:
                 branch in ("success", "failure", "failure_total"),
                 f"{where}: unknown knowledge branch {branch!r}",
             )
+            if branch == "failure_total":
+                # _branch decides failure_total from the CANON knowledge
+                # block — without it the texture branch is dead pack data.
+                _require(
+                    "failure_total" in action.get("knowledge", {}),
+                    f"{where}: declares a failure_total branch but the canon "
+                    f"knowledge block does not — _branch can never reach it",
+                )
             for record in records:
                 self._knowledge_entry(intent, record, tuple(block["requires"]))
                 _require(
@@ -390,6 +411,15 @@ class _Lint:
                 for record in records:
                     self._knowledge_entry(
                         intent, record, tuple(action.get("requires", ()))
+                    )
+                    # The mirror of the texture-block {target} ban: the CANON
+                    # context carries no texture slot (only a texture-path
+                    # intent does) — the template would KeyError mid-run.
+                    _require(
+                        "texture_slot" not in _SLOT.findall(record["knows"]),
+                        f"action {intent}: knowledge branch {branch!r} uses the "
+                        f"{{texture_slot}} slot — only a texture block may "
+                        f"(the canon context has no texture reference)",
                     )
             self._texture_block(intent, action)
             for branch, tags in action.get("hooks", {}).items():

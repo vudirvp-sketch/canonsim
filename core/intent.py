@@ -211,6 +211,12 @@ def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
                 f"{intent.kind} is not texture-capable (no pack 'texture' block)"
             )
         texture_reference(intent)  # loud shape gate
+        if intent.target is not None:
+            raise RunnerError(
+                f"{intent.kind}: the texture path carries the resolved reference, "
+                f"not a target (got target {intent.target!r}) — an intent is one "
+                f"path, never both"
+            )
         return  # the texture block's requires reference no canon target
     needs_target = any(
         value == "target" for cond in action.get("requires", ()) for value in cond.values()

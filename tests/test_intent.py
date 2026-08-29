@@ -451,6 +451,42 @@ def test_requires_for_picks_the_pack_path() -> None:
     assert requires_for(_TAKE_ACTION, canon) == list(_TAKE_ACTION["requires"])
 
 
+def test_texture_path_rejects_a_target_mix() -> None:
+    """iter-11a: an intent is ONE path — carrying both the resolved texture
+    reference and a canon target is an author error, loud at the shape gate
+    (the target would otherwise ride the committed event as silently
+    ignored data)."""
+    mixed = IntentData(
+        id="intent_0003", kind="take", actor="pc_01", target="purse_01",
+        fields={"texture": dict(_CANDLES)}, based_on_event_seq=0,
+    )
+    with pytest.raises(RunnerError, match="not a target"):
+        validate_shape(_TAKE_ACTION, mixed)
+
+
+def test_occ_breaking_cause_on_the_texture_path() -> None:
+    """The OCC attribution follows the texture path's preconditions: an
+    entity-scoped reference whose scope target walks away between proposal
+    and completion breaks texture.same_location, attributed to the move."""
+    # pc enters the tavern (the cloak's scope target npc_guard_01 is there)
+    events = [
+        _event("ev_0000", 0, None,
+               (StateChange("pc_01", "position", "loc_street", "loc_tavern"),)),
+        _event("ev_0001", 2, "ev_0000",
+               (StateChange("npc_guard_01", "position", "loc_tavern", "loc_guardroom"),)),
+        _event("ev_0002", 4, "ev_0001", ()),
+    ]
+    cloak = _texture_intent({
+        "entry": "tex_0001", "scope": "entity:npc_guard_01",
+        "slot": "cloak", "value": "muddy hem",
+    })
+    initial = initial_projection(PACK.entities)
+    assert occ_breaking_cause(PACK, events, 1, cloak, initial) == "ev_0001"
+    # nothing breaks when the guard stays
+    staying = [events[0], _event("ev_0001", 2, "ev_0000", ())]
+    assert occ_breaking_cause(PACK, staying, 1, cloak, initial) is None
+
+
 def test_texture_noun_test_and_same_location_through_the_noun() -> None:
     state = fold(
         [EventRecord(

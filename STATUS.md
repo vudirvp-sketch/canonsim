@@ -1,19 +1,21 @@
 # STATUS — canonsim
 
-Iteration: iter-11 (`iter-11-texture-door`) · Phase: 1 · Date: 2026-08-29 ·
-The narrator boundary opened at its LLM-free half — the texture
-promotion DOOR (the owner authorized the AGENTS §8 gate this session):
-a texture-capable action's pack `texture` block replaces the canon
-preconditions for intents carrying the mediator-resolved texture
-reference — core stays ledger-blind, the reference is data on the
-Intent (D-054; INTENT_SCHEMA §2/§3/§7) — and a take-success on the
-reference IS the promotion: the slot's canon birth on the scope target
-(one-way; a failed attempt promotes nothing). `take` is the first
-texture-capable action; real `unique_slots: ["hearth"]`; the golden
-delta fixture grows 13→16 — the laundering + unique_slot pins complete
-the 8-reason refusal vocabulary. 443 green, ruff clean, golden
-fixtures byte-identical. The LLM call itself remains owner-gated: local
-inference is a runtime-dependency stop-and-confirm item (AGENTS §8).
+Iteration: iter-11a (`iter-11a-audit-fix`) · Phase: 1 · Date: 2026-08-29 ·
+Owner-requested audit of iter-11 (the D-022 exception; code-heavy, no
+doc-loop). Every iter-11 claim reproduced (443 green, ruff clean,
+fixtures byte-identical). Three defects fixed: KI#39 — a texture-path
+take event rendered broken chronicle prose ("the player takes ."); the
+take/take_failed templates are now `{target?…|…}` conditionals and the
+renderer derives `texture_slot` (canon lines byte-unchanged, T1
+chronicle holds). KI#40 — the unique-slot one-object claim now survives
+promotion/contradiction (every status except retirement holds it;
+golden case 17). KI#41 — canon-slot overlap now includes pack-modeled
+fields (exits/name/mood…), not just event-born props. Hardening: the
+target+texture mix is loud, the pack lint forbids target-defended
+checks on texture-capable actions + `{texture_slot}` in canon templates
++ texture-only failure_total branches, texture-path OCC attribution
+pinned. 453 green, ruff clean, fixtures byte-identical. The iter-12+
+owner gate is unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -38,10 +40,15 @@ inference is a runtime-dependency stop-and-confirm item (AGENTS §8).
 ## Active KIs
 
 - KI#37 · post-iter-9/10 audit drift set (worklog cap breach + the
-  iter-10 file count 15≠16; AGENT_NAVIGATION/README sync gaps; the
-  aspirational golden-coverage claim) · CLOSED iter-10a.
+  iter-10 file count 15≠16; AGENT_NAVIGATION/README sync gaps) · CLOSED iter-10a.
 - KI#38 · INV-3 stoplist test scanned only `core/`+`sim/` — `brief/`
   (engine-side since iter-8) was unprotected · CLOSED iter-10a.
+- KI#39 · iter-11 missed the render side: a texture-path take event
+  (no canon target) rendered broken prose — "the player takes ." · CLOSED iter-11a.
+- KI#40 · the unique-slot guard checked LIVE entries only — a promoted
+  entry released its one-object claim (a second hearth could reach canon) · CLOSED iter-11a.
+- KI#41 · the canon-slot check read only event-born props — pack-modeled
+  fields (exits, name, mood…) are canon too (blueprint §1) · CLOSED iter-11a.
 
 ## FAQ / Pitfalls
 
@@ -234,7 +241,8 @@ inference is a runtime-dependency stop-and-confirm item (AGENTS §8).
 (iter-8), validator (iter-9), scene ledger (iter-10), promotion door
 (iter-11: the texture path through the intent door, the texture-noun
 test, real `unique_slots`, the laundering/unique_slot golden pins —
-all 8 refusal reasons covered). The next step is the **owner gate on
+all 8 refusal reasons covered; audited + hardened iter-11a: KI#39..41).
+The next step is the **owner gate on
 the LLM call itself** (AGENTS §8): the live mediator session loop —
 texture noun resolution against live entries, the structural texture
 delta in the narrator call, `mark_promoted` live wiring, degradation

@@ -50,8 +50,12 @@ the texture promotion door — the narrator boundary's LLM-free half
 the mediator-resolved reference — core stays ledger-blind — and a
 take-success IS the promotion, the slot's canon birth; D-054; the
 laundering + unique_slot golden pins complete the 8-reason refusal
-vocabulary). 443 tests green, ruff clean, golden fixtures
-byte-identical. Next: the narrator LLM call itself — an owner-gated
+vocabulary). The iter-11a audit hardened the door: conditional take
+templates render the promoted slot noun (the texture-path chronicle
+line), unique-slot claims survive promotion, canon-slot overlap
+includes pack-modeled fields (KI#39..41). 453 tests green, ruff clean,
+golden fixtures byte-identical. Next: the narrator LLM call itself — an
+owner-gated
 checkpoint (AGENTS §8; local inference is a runtime-dependency
 stop-and-confirm item); track B (bg-2..bg-4) queries the bg-1 SQLite
 sink (`docs/TECH_NOTES.md` §3.2, D-051).

@@ -448,6 +448,65 @@ def test_pack_lint_catches_unknown_knowledge_slot(tmp_path: Path) -> None:
         load_pack(_broken_pack(tmp_path, mutate))
 
 
+# -- the texture-block lint (iter-11 clauses; iter-11a hardening) ----------------
+
+
+def _take(actions: dict[str, Any]) -> dict[str, Any]:
+    return next(a for a in actions["actions"] if a["intent"] == "take")
+
+
+def test_pack_lint_texture_block_requires_the_field(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _take(actions)["fields"] = []  # texture block stays, field gone
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="must declare 'texture' in its fields"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_texture_block_forbids_target_defended_checks(tmp_path: Path) -> None:
+    """iter-11a: the texture path carries no canon target — a target-sourced
+    check would silently roll against a None defender (run_check builds the
+    defender from intent.target). Loud at load instead."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _take(actions)["check"]["kind"] = "stealth_vs_perception"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="defends from the target"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_canon_templates_forbid_the_texture_slot(tmp_path: Path) -> None:
+    """iter-11a: the mirror of the texture-block {target} ban — a CANON
+    knowledge template has no texture reference in its context, so
+    {texture_slot} would KeyError mid-run."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        take = _take(actions)
+        take["knowledge"]["failure"][0]["knows"] = "{actor}_fumbled_the_{texture_slot}"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match=r"uses the \{texture_slot\} slot"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_texture_failure_total_needs_canon_branch(tmp_path: Path) -> None:
+    """iter-11a: _branch decides failure_total from the CANON knowledge
+    block — a texture-only failure_total branch is dead pack data."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _take(actions)["texture"]["knowledge"]["failure_total"] = [
+            {"who": "actor", "channel": "saw", "fidelity": "partial",
+             "knows": "{actor}_botched_the_{texture_slot}"}
+        ]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="_branch can never reach it"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
 def test_pack_lint_catches_missing_rejection_template(tmp_path: Path) -> None:
     def mutate(target: Path) -> None:
         templates = json.loads((target / "templates.json").read_text())

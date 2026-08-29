@@ -63,6 +63,20 @@ scope target), the `texture_noun` pack test, real `unique_slots`
 refusal reasons covered). Detail: `worklog.md` iter-11 +
 `docs/INTENT_SCHEMA.md` §3.
 
+### iter-11a · post-iter-11 audit — done
+
+Owner-requested audit of iter-11 (the D-022 exception): every claim
+reproduced (443 green, ruff clean, fixtures byte-identical); 3 defects
+fixed (KI#39 chronicle broken prose on texture-take events — the
+conditional take templates + the `texture_slot` derived slot;
+KI#40 the unique-slot one-object claim now survives promotion;
+KI#41 canon-slot overlap now includes pack-modeled fields) + loud-contract
+hardening (target+texture mix, texture-capable check defender sources,
+the {texture_slot}-in-canon-templates lint mirror, texture
+failure_total branch consistency) + the doc-sync set (INTENT_SCHEMA §9,
+AGENT_NAVIGATION fixtures row, the missing TASKS ## Done line). 453 green.
+Detail: `worklog.md` iter-11a + `STATUS.md`.
+
 ### iter-12+ · the narrator LLM call — todo (owner gate)
 
 - The live mediator session loop: texture noun resolution against live
@@ -187,6 +201,21 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix): KI#39
+  texture-take chronicle prose (`{target?…|…}` conditional templates +
+  the `texture_slot` derived slot — canon lines byte-unchanged), KI#40
+  unique-slot claims survive promotion (golden case 17), KI#41 canon-slot
+  overlap includes pack-modeled fields; +lint hardening, +texture-path
+  OCC attribution test, +doc sync (INTENT_SCHEMA §9, AGENT_NAVIGATION,
+  TASKS). 443→453 green, ruff clean, fixtures byte-identical. Detail:
+  worklog iter-11a.
+
+- iter-11 · 2026-08-29 · texture promotion door (iter-11-texture-door;
+  D-054): the narrator boundary's LLM-free half — the intent door's
+  texture path, the `texture_noun` test, real `unique_slots`, the
+  laundering + unique_slot golden pins (8/8 refusal reasons). 435→443
+  green. Detail: worklog iter-11 + docs/INTENT_SCHEMA.md §3.
 
 - iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync):
   KI#37 doc-sync family — worklog re-trimmed to the line cap (iter-10

@@ -148,12 +148,16 @@ this spec owns:
 
 - **One gateway.** Inline deltas and extraction output pass the SAME
   checks: scope (shape/target; scene match; entity presence),
-  establishment-time canon overlap, laundering (re-asserted
-  contradicted/promoted-away values), unique-slot, and the idempotent
-  duplicate rule (same (slot, value) in scope = no-op). Refusals use the
-  §7 protocol verbatim — one refusal shape (dry `REFUSED <item>
-  (<reason>)` lines riding the next call's directives), one regen
-  budget.
+  establishment-time canon overlap (BOTH prop sources — event-born
+  projection props and the pack-modeled fields of the entity record:
+  `exits`, `name`, `mood`, …; iter-11a), laundering (re-asserted
+  contradicted/promoted-away values), unique-slot (the one-object claim
+  is held by every entry status except retirement — live texture,
+  promoted, contradicted; only a narrator-declared retirement releases
+  it; iter-11a), and the idempotent duplicate rule (same (slot, value)
+  in scope = no-op). Refusals use the §7 protocol verbatim — one
+  refusal shape (dry `REFUSED <item> (<reason>)` lines riding the next
+  call's directives), one regen budget.
 - **Texture-OCC mirror.** A pending texture-referencing Intent whose entry
   retires (contradiction, scene close) is withdrawn by the mediator BEFORE
   the door could complete it — the mediator-side mirror of intent OCC;

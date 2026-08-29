@@ -273,6 +273,44 @@ def test_unique_slot_allows_live_same_scope_rules() -> None:
     assert conflict.refusals[0].reason == "slot_conflict"  # NOT unique_slot
 
 
+def test_unique_slot_promoted_entry_keeps_the_claim() -> None:
+    """iter-11a, KI#40: a PROMOTED entry still occupies its unique slot —
+    the object exists as canon now, so cross-scope re-establishment stays a
+    unique_slot refusal (without this, a second hearth could be promoted
+    into canon elsewhere — two hearths, one world)."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(unique_slots=["cloak"])
+    )
+    events = _golden_events()[:2]
+    ledger = SceneLedger()
+    _establish(ledger, events, "scene:loc_tavern", "cloak", "on a nail")
+    ledger.mark_promoted("tex_0000", "ev_0001")
+    after = ledger.apply_delta(
+        {
+            "source": "turn:2",
+            "established": [
+                {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
+                 "surface": "A muddy hem."}
+            ],
+        },
+        events,
+        pack,
+    )
+    assert after.refusals[0].reason == "unique_slot"
+    assert after.established == ()
+
+
+def test_canon_slot_refusal_for_pack_modeled_fields() -> None:
+    """iter-11a, KI#41: canon overlap includes PACK-modeled fields, not
+    just event-born projection props — texture occupies only slots canon
+    does not model (blueprint §1), and `exits`/`name`/`mood` are canon."""
+    events = _golden_events()[:2]
+    ledger = SceneLedger()
+    report = _establish(ledger, events, "scene:loc_tavern", "exits", "a new door")
+    assert report.refusals[0].reason == "canon_slot"
+    assert report.established == ()
+
+
 def test_laundering_refusal_for_contradicted_values() -> None:
     events = _golden_events()[:2]
     ledger = SceneLedger()

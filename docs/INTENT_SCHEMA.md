@@ -85,7 +85,10 @@ target on that path, so the `{target}` slot is lint-forbidden in the block
 (the grammar); the ledger owns which nouns are addressable (the
 vocabulary) — the split is D-049. A success commits the promotion itself:
 the scope target gains the slot as a canon prop (the object's canon birth);
-a failure promotes nothing (the entry stays live+pinned).
+a failure promotes nothing (the entry stays live+pinned). One intent is ONE
+path: carrying both the reference and a canon `target` is a loud author
+error at the shape gate (iter-11a) — the texture path replaces the target,
+never combines with it.
 
 ## 4. Intent OCC (`based_on_event_seq`)
 
@@ -169,11 +172,12 @@ step consumes no ticks; the playscript continues at the same tick.
 CLI commands and playscript steps map 1:1 to intents — no free text
 (phase-2 parser gate). Current per-action `fields`:
 `steal.method`, `drop_break.near` (a pack spot of the location),
-`wait.ticks` (positive integer, required). Malformed steps (unknown
-fields, missing targets, bad spot names, unknown methods) are **author
-errors**: loud `RunnerError`, never logged as rejections — the line
-between "the character attempted the impossible" (a fact) and "the script
-is wrong" (a bug).
+`wait.ticks` (positive integer, required), `take.texture` (the
+mediator-resolved reference, iter-11). Malformed steps (unknown
+fields, missing targets, a target+texture mix, bad spot names, unknown
+methods) are **author errors**: loud `RunnerError`, never logged as
+rejections — the line between "the character attempted the impossible"
+(a fact) and "the script is wrong" (a bug).
 
 ## 10. Versioning
 
