@@ -1,30 +1,23 @@
 # STATUS — canonsim
 
-Iteration: iter-11b (`iter-11b-stress-test-verified`) · Phase: 1 · Date:
-2026-08-30 · Owner-requested deep re-verification (the D-022 exception;
-docs-only, doc-loop counter = 1 — the previous landed iteration was
-code-heavy). The stress-test pass reported in chat on 2026-08-29
-NEVER landed in git (KI#42: the tmpfiles.org archive expired, no
-commit/push existed) — reconstructed here, every claim re-verified
-against the code before landing (453 green, ruff clean, fixtures
-byte-identical reproduced first). The prior analysis holds (identity
-vs the single window cap; take-only promotion grammar; write-side
-LOD undesigned; no-GC laws); three findings sharpened: perception
-actions emit coarse tokens (`look_around` → `scene_<location>`,
-`examine` → `details_<target>`) — no snapshot semantics, so the
-presence/entity-card hole is wider than reported; a D-054 promotion
-births a PROP on the scope target, not a portable entity
-(entity-birth promotion = named gap); the assembler's per-beat full
-folds are O(N). Problems 4–6 (MECW/attention dilution, JSON nuance
-loss, reasoning starvation) resolved: the call-budget law
-(head+brief+tail+thinking+output ≤ MECW), thinking = ephemeral
-texture (in the call, never the brief), the transcript-tail contract
-named (the nuance channel), mode-B knower parameterization,
-presence/entity cards, the mode-B chorus-call budget named. All
-resolutions live in blueprint §1/§5/§7 + BRIEF_SPEC §9 deferrals +
-GROUP_SPEC sketch + the TASKS `st-1..st-5` backlog — owner verdict
-pending, nothing in DECISIONS (research verdicts). KI#37/38 deleted
-per AGENTS §5 (closed >2 iterations).
+Iteration: iter-11c (`iter-11c-audit`) · Phase: 1 · Date: 2026-08-30 ·
+Owner-requested re-check of iter-11b (the D-022 exception;
+docs-only, doc-loop counter = 2 — both passes sit under fresh owner
+requests; a third doc-only pass without one MUST stop). Verdict:
+iter-11b is sound — every claim reproduced against the code (453
+green, ruff clean, fixtures byte-identical; the perception tokens
+`scene_<location>`/`details_<target>`, the D-054 prop-birth shape,
+the O(N)/beat assembler folds, `KnowledgeView.records_of`, the
+KI#41 canon-slot check, the D-ID/section/law citations, the caps,
+the KI#37/38 deletion — all exact). KI#43 (closed here): three
+precision defects — the MECW ~8–16k figure carried no single owner
+(now TECH_NOTES §2 with provenance + rot marker; blueprint §1
+links it), the arrival snapshot named "one additive audience kind"
+where the grammar needs an actor-held per-present-target `knows`
+expansion (INTENT_SCHEMA §7/§10), and the container cycle guard
+named pack-load lint only (the commit gate added, D-035). The
+iter-11b resolutions stay owner-verdict-pending, substance
+unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -58,6 +51,11 @@ per AGENTS §5 (closed >2 iterations).
   landed: the tmpfiles.org archive expired, no commit/push existed —
   work reconstructed, re-verified against the code, and landed by this
   iteration · CLOSED iter-11b.
+- KI#43 · iter-11b precision family (owner re-check): the MECW ~8–16k
+  figure carried no single owner (→ TECH_NOTES §2); the arrival
+  snapshot mis-named an audience kind (actor-held per-present-target
+  `knows` expansion, INTENT_SCHEMA §7/§10); container cycles named
+  pack-load lint only (commit gate added, D-035) · CLOSED iter-11c.
 
 ## FAQ / Pitfalls
 
@@ -272,7 +270,8 @@ review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
 10k-tick profile (the full profile stays the gate for anything
 structural).
 
-**Owner verdict pending (iter-11b):** the stress-test resolutions
+**Owner verdict pending (iter-11b; re-checked iter-11c — verified
+sound, KI#43 precision fixes landed):** the stress-test resolutions
 (blueprint §1/§5/§7; BRIEF_SPEC §9; the `st-1..st-5` TASKS backlog
 rows) are research verdicts — accepted sections become DECISIONS at
 the accepting iteration; `st-4` rides the narrator-boundary gate

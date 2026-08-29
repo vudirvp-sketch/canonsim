@@ -275,9 +275,10 @@ decision, nothing in DECISIONS yet).**
   arrival snapshot) is §5's.
 - **The call budget law (MECW) + the transcript tail.** Local
   27B-class models show a measured effective window (attention
-  dilution / context rot) of ~8–16k tokens — TECH_NOTES §2 already
-  plans @8K and the brief (`total_hard` 700) is ~9% of it; VISION §1/§6
-  encode the thesis. But no spec owns the per-call ledger:
+  dilution / context rot) of ~8–16k tokens — the figure's owner is
+  TECH_NOTES §2 (which plans @8K); the brief (`total_hard` 700) is
+  ~9% of it; VISION §1/§6 encode the thesis. But no spec owns the
+  per-call ledger:
   `head + brief + transcript tail + thinking + output ≤ MECW target`
   (pack data per model class; the thinking allowance is 0 for
   non-thinking models). The tail is the shock absorber (evicted
@@ -462,8 +463,9 @@ untouched); the id never changes between tiers — `known_by`, entity
 texture, and old knowledge keys survive without migration. (4)
 **Arrival snapshot** (write side): entering a scene emits ONE
 perception event → O(present) knowledge records with observable
-markers (per-present-target template expansion — one additive audience
-kind, INTENT_SCHEMA §7); the read-side twin is the §1 entity-card
+markers (per-present-target expansion of the actor-held `knows`
+template — the audience stays `actor`; additive per INTENT_SCHEMA
+§7/§10); the read-side twin is the §1 entity-card
 block. Spec home when its trigger fires: the GROUP_SPEC sketch
 (`SPECS_BACKLOG.md`).
 
@@ -530,8 +532,10 @@ reskin without core edits, ≤1 day (`ROADMAP.md` §2).
   iter-11b; owner verdict pending).** The `in` relation: position may
   name a location OR a container entity; `carrier` is the npc-case of
   the same relation; presence/containment = the transitive closure
-  (the carrier closure generalized); lint caps nesting depth and
-  rejects cycles at load (the PACK-1 copy-from cycle contract).
+  (the carrier closure generalized); nesting depth is lint-capped and
+  cycles rejected at pack load (the PACK-1 copy-from cycle contract)
+  AND at the commit gate (D-035 — runtime puts can cycle what
+  pack-load lint never sees).
   Additive — state values are pack payload (EVENT_SCHEMA §4), only the
   projection's position semantics generalize. **Prop birth ≠ entity
   birth:** a D-054 promotion births a PROP on the scope target — right

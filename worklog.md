@@ -10,6 +10,17 @@
 > since iter-5).
 
 ---
+iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
+- Verdict: sound — every claim reproduced against the code (453
+  green, ruff clean, fixtures byte-identical; perception tokens,
+  prop-birth shape, O(N)/beat folds, records_of, canon-slot check,
+  D-ID/section citations, caps, KI lifecycle — all exact).
+- KI#43 closed: MECW figure gains its single owner (TECH_NOTES §2,
+  provenance + rot marker; blueprint §1 links), the arrival snapshot
+  re-named to the actor-held per-present-target `knows` expansion
+  (INTENT_SCHEMA §7/§10), container cycle guard += the commit gate
+  (D-035). 5 files; docs-only, D-022 counter = 2.
+---
 iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified)
 - D-022 owner pass, docs-only: the reported-but-lost stress-test
   reconstructed (KI#42 — archive expired, nothing in git), every claim
@@ -88,10 +99,7 @@ iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - 8 files. 329→338 green, ruff clean, byte-identical. No new KIs.
 ---
 iter-8f · 2026-08-29 · audit-fix: truncated exports + 101st type (iter-8f-audit-fix)
-- KI#34 truncated-export survival (tail check + RecoveringReader;
-  ground-truth validated on the complete 4.95 GB re-export); KI#35
-  "site tribute forced" → war-geopolitics. 6 files.
-- 329 green, ruff clean, byte-identical.
+- (deleted at iter-11c per the one-in/one-out cap; history in git.)
 ---
 iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
 - (deleted at iter-11b per the one-in/one-out cap; history in git.)

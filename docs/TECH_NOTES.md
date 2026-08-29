@@ -37,6 +37,12 @@ gated by `perf-1` data).
   mitigate with prefix caching of the invariant prompt head (system + style +
   glossary + PC card). Not fully solvable — the price of a constant-size,
   always-fresh context.
+- Measured effective window (attention dilution / context rot) on local
+  27B-class models: ~8–16k tokens — the figure's single owner (linked from
+  blueprint §1's MECW call-budget law, which budgets against THIS number,
+  never the nominal context size). Owner-reported stress-test figure
+  (2026-08, reconstructed iter-11b, verified iter-11c); rot by design —
+  re-verify before the narrator-boundary iteration.
 
 ## 3. DF spike practical notes
 

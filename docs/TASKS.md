@@ -221,6 +221,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-11c · 2026-08-30 · owner-requested re-check of iter-11b
+  (iter-11c-audit; docs-only, D-022): verdict sound — every claim
+  reproduced against the code (453 green, ruff clean, byte-identical;
+  perception tokens, prop-birth shape, O(N)/beat folds, `records_of`,
+  canon-slot check, citations, caps, KI lifecycle); KI#43 precision
+  family closed (MECW figure → TECH_NOTES §2 single owner +
+  provenance; arrival snapshot → actor-held per-present-target
+  `knows` expansion per INTENT_SCHEMA §7/§10; container cycle guard
+  += the commit gate, D-035). Resolutions stay owner-verdict-pending.
+  Detail: worklog iter-11c + `STATUS.md`.
+
 - iter-11b · 2026-08-30 · roadmap stress-test, re-verified + problems
   4–6 (iter-11b-stress-test-verified; docs-only, D-022): the reported
   but never-landed pass reconstructed (KI#42 — archive expired) and
