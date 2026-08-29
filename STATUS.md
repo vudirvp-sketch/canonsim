@@ -1,23 +1,28 @@
 # STATUS — canonsim
 
-Iteration: iter-11c (`iter-11c-audit`) · Phase: 1 · Date: 2026-08-30 ·
-Owner-requested re-check of iter-11b (the D-022 exception;
-docs-only, doc-loop counter = 2 — both passes sit under fresh owner
-requests; a third doc-only pass without one MUST stop). Verdict:
-iter-11b is sound — every claim reproduced against the code (453
-green, ruff clean, fixtures byte-identical; the perception tokens
-`scene_<location>`/`details_<target>`, the D-054 prop-birth shape,
-the O(N)/beat assembler folds, `KnowledgeView.records_of`, the
-KI#41 canon-slot check, the D-ID/section/law citations, the caps,
-the KI#37/38 deletion — all exact). KI#43 (closed here): three
-precision defects — the MECW ~8–16k figure carried no single owner
-(now TECH_NOTES §2 with provenance + rot marker; blueprint §1
-links it), the arrival snapshot named "one additive audience kind"
-where the grammar needs an actor-held per-present-target `knows`
-expansion (INTENT_SCHEMA §7/§10), and the container cycle guard
-named pack-load lint only (the commit gate added, D-035). The
-iter-11b resolutions stay owner-verdict-pending, substance
-unchanged.
+Iteration: bg-5 (`bg-5-spec-verdict`) · Phase: 1 · Date: 2026-08-30 ·
+Owner-requested verdict on a pasted external integration spec
+("behavioral engine × canonsim"; docs-only, D-022 counter = 3 —
+all three passes under fresh owner requests; a doc-only pass
+without one MUST stop; the natural exit is the owner-gated
+narrator-boundary code iteration). Verdict: no repo drift — every
+D-ID/INV/doc citation in the spec resolves and its repo-facing
+claims match the code (`max_items` 8, the voice_exemplars block,
+the pinned-first window, ≤2 regens, KnowledgeView). NOT integrated
+as text: it renames established vocabulary (the MECW call-budget
+law → "effective_window / reasoning_reserve / prose_cap"; st-1
+present_entities → "presence_roster"; thinking allowance →
+"reasoning reserve"), re-imports fatigue emulation — rejected by
+ref-13 weakness (4) as the INV-1/INV-5 inversion, with INV-5 cited
+inverted as support — and invents IDs and figures with no owner
+and no provenance (AP-16 — the guide ships 15 APs; the ≤15-token
+exemplar cap — the guide's example blocks are 80–120 tokens; the
+10-repeat promotion threshold; the 1.5/5.0 reasoning multipliers —
+the KI#43 numbers law). Two adoptions, backlog amendments only:
+Script Tax at the mediator (st-4; guide part_07a §7A.5) and the
+repetition-counted promotion option (st-2). KI#39–41 deleted per
+AGENTS §5 (closed >2 iterations). The iter-11b resolutions stay
+owner-verdict-pending, substance unchanged.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -41,12 +46,6 @@ unchanged.
 
 ## Active KIs
 
-- KI#39 · iter-11 missed the render side: a texture-path take event
-  (no canon target) rendered broken prose — "the player takes ." · CLOSED iter-11a.
-- KI#40 · the unique-slot guard checked LIVE entries only — a promoted
-  entry released its one-object claim (a second hearth could reach canon) · CLOSED iter-11a.
-- KI#41 · the canon-slot check read only event-born props — pack-modeled
-  fields (exits, name, mood…) are canon too (blueprint §1) · CLOSED iter-11a.
 - KI#42 · the stress-test pass reported 2026-08-29 ("iter-11b") never
   landed: the tmpfiles.org archive expired, no commit/push existed —
   work reconstructed, re-verified against the code, and landed by this

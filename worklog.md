@@ -10,6 +10,16 @@
 > since iter-5).
 
 ---
+bg-5 · 2026-08-30 · owner-requested external-spec verdict (bg-5-spec-verdict)
+- Pasted behavioral-engine integration spec audited against the repo
+  + live-char-guide: every D-ID/INV citation resolves, no repo drift;
+  not integrated (renames of the MECW/st-1/st-2 vocabulary, fatigue
+  emulation re-rejected per ref-13 weakness (4) with INV-5 cited
+  inverted, AP-16 + figures invented with no owner).
+- Adoptions: backlog amendments only — Script Tax at the mediator
+  (st-4) + the repetition-counted promotion option (st-2). KI#39–41
+  deleted per AGENTS §5. 3 files; docs-only, D-022 counter = 3.
+---
 iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
 - Verdict: sound — every claim reproduced against the code (453
   green, ruff clean, fixtures byte-identical; perception tokens,
@@ -92,11 +102,7 @@ iter-8h · 2026-08-29 · derived-index micro-pass (iter-8h-derived-indexes)
 - 13 files. 338→340 green, ruff clean, byte-identical. No new KIs.
 ---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
-- df_survey.py `--audit`: coverage census (per-section record-tag
-  counts + unique child-tag sets per record tag) in one streaming
-  pass; coverage matrix → docs/ref/df_legends_xml.md; first
-  test_df_survey.py (9 tests).
-- 8 files. 329→338 green, ruff clean, byte-identical. No new KIs.
+- (deleted at bg-5 per the one-in/one-out cap; history in git.)
 ---
 iter-8f · 2026-08-29 · audit-fix: truncated exports + 101st type (iter-8f-audit-fix)
 - (deleted at iter-11c per the one-in/one-out cap; history in git.)

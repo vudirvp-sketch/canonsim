@@ -103,13 +103,21 @@ Detail: `worklog.md` iter-11a + `STATUS.md`.
   holes (blueprint §1/§5).
 - `st-2` identity persistence: pack `identity_slots` window tier +
   per-scope quotas (read-path) + the identity promotion door (pack
-  grammar beyond `take`, the D-054 machine; blueprint §1).
+  grammar beyond `take`, the D-054 machine; blueprint §1). Optional
+  second trigger (bg-5): repetition-counted promotion — N repeats of
+  a priced pattern via a counted fold (the ref-13 GHOST-layers
+  counter pattern); owner's call: alongside or instead of the
+  pack-grammar door.
 - `st-3` groups & simulation LOD: one id across tiers, aggregate
   macro-clock events with cardinality, condensation on crossing
   (GROUP_SPEC trigger = phase 5 or owner request; blueprint §5).
 - `st-4` the call budget (head + brief + tail + thinking + output ≤
   MECW target) + the transcript-tail contract + thinking-as-ephemeral-
-  texture (the narrator-boundary iteration; blueprint §1).
+  texture (the narrator-boundary iteration; blueprint §1) + the Script
+  Tax clause (bg-5): non-Latin tail/prose costs ≈1.5–2× tokens on
+  32K-vocab local models (guide part_07a §7A.5; ref-13) — the
+  whitespace proxy under-charges Cyrillic; budget per script at the
+  mediator, never in core.
 - `st-5` containers: the `in` relation + entity-birth promotion
   (with `st-3`, phase 5; blueprint §7).
 
@@ -220,6 +228,15 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- bg-5 · 2026-08-30 · owner-requested verdict on a pasted external
+  integration spec (bg-5-spec-verdict; docs-only, D-022 counter = 3):
+  every citation audited against the repo + live-char-guide — no repo
+  drift; not integrated as text (renames of the MECW/st-1/st-2
+  vocabulary, fatigue emulation re-rejected per ref-13 weakness (4),
+  invented AP-16 and ownerless figures); two adoptions land as the
+  st-4 Script-Tax and st-2 repetition-promotion backlog amendments.
+  Detail: worklog bg-5.
 
 - iter-11c · 2026-08-30 · owner-requested re-check of iter-11b
   (iter-11c-audit; docs-only, D-022): verdict sound — every claim
