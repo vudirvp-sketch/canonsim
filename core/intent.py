@@ -19,7 +19,10 @@ machinery the front door runs:
 - intent OCC (`based_on_event_seq`): cause attribution for the event that
   broke a precondition between proposal and completion;
 - knowledge-record resolution: audience placeholders + slot templates are
-  pack data; the resolver of record is `core/resolvers.py`.
+  pack data; the resolver of record is `core/resolvers.py`; the
+  per-present-target expansion (st-1): an actor-held template with a
+  `present_at` site expands to one record per entity present there —
+  the arrival snapshot's write side (blueprint §5).
 """
 
 from __future__ import annotations
@@ -28,7 +31,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
-from core.fold import Projection, apply_event, fold
+from core.fold import Projection, apply_event, fold, present_in_order
 from core.log import EventRecord, KnowledgeRecord, StateChange
 from core.rng import RngBank
 
@@ -598,7 +601,13 @@ KNOWLEDGE_SLOTS: Final = (
     "actor", "target", "location", "cause_actor",
     "texture_slot",  # the promoted texture's slot (iter-11; INTENT_SCHEMA §10
     # — additive slots are pack/code growth, no bump)
+    "present",  # one present target per expansion record (st-1; only legal
+    # with a `present_at` site — the pack lint pins the pairing)
 )
+# Where a per-present-target expansion may look (st-1, INTENT_SCHEMA §7):
+# the actor's own location (completion time, pre-change) or the action's
+# destination location. Pack data picks; core stays generic.
+PRESENT_SITES: Final = ("location", "destination_location")
 
 
 def knowers_at(pack: Pack, projection: Projection, location: str) -> list[str]:
@@ -612,6 +621,26 @@ def knowers_at(pack: Pack, projection: Projection, location: str) -> list[str]:
     return knowers
 
 
+def _expansion_site(
+    record: Mapping[str, Any], pack: Pack, ctx: Mapping[str, Any]
+) -> str:
+    """The location a per-present-target expansion iterates (st-1,
+    INTENT_SCHEMA §7): `destination_location` resolves against the
+    action's target (location-kind, same law as the audience — the pack
+    lint pre-checks the precondition), `location` against the actor's
+    own position at completion time, pre-change."""
+    site = record["present_at"]
+    if site == "destination_location":
+        destination = ctx["target"]
+        if pack.kind_of(destination) != "location":
+            raise RunnerError(
+                f"knowledge expansion 'present_at=destination_location' resolves "
+                f"against a location target, got {destination!r}"
+            )
+        return str(destination)
+    return str(ctx["location"])
+
+
 def resolve_knowledge(
     records: list[Mapping[str, Any]],
     pack: Pack,
@@ -621,9 +650,31 @@ def resolve_knowledge(
 ) -> tuple[KnowledgeRecord, ...]:
     """Turn pack knowledge templates into records: audience placeholders
     resolve to entity ids, `knows` slots fill from `ctx` (a missing slot
-    fails loudly — the pack lint pre-checks the closed slot set)."""
+    fails loudly — the pack lint pre-checks the closed slot set). A
+    template with a `present_at` site takes the per-present-target
+    expansion branch instead: the audience stays `actor`, and the
+    template emits ONE record per entity present at the site (pack
+    declaration order, the actor itself excluded) — the arrival
+    snapshot's write side (blueprint §5; st-1)."""
     resolved: list[KnowledgeRecord] = []
     for record in records:
+        if "present_at" in record:
+            site = _expansion_site(record, pack, ctx)
+            template_ctx = dict(ctx)
+            for target_id in present_in_order(pack, projection, site):
+                if target_id == ctx["actor"]:
+                    continue  # the arriver knows their own presence
+                template_ctx["present"] = target_id
+                resolved.append(
+                    KnowledgeRecord(
+                        who=ctx["actor"],
+                        channel=record["channel"],
+                        fidelity=record["fidelity"],
+                        knows=record["knows"].format_map(template_ctx),
+                        at=tick,
+                    )
+                )
+            continue
         audience = record["who"]
         if audience == "actor":
             who_ids = [ctx["actor"]]

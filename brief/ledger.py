@@ -27,9 +27,14 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Final
 
-from core.fold import Projection, fold, initial_projection
+from core.fold import Projection, fold, initial_projection, present_entities
 from core.log import EventRecord
 from core.pack import Pack
+
+# `present_entities` is re-exported from `core.fold` (st-1: the structural
+# presence read moved beside its projection — core owns it; the write-side
+# per-present-target `knows` expansion and this module's window law read
+# the same single set).
 
 __all__ = [
     "ACTIVE",
@@ -220,25 +225,8 @@ def split_scope(scope: str) -> tuple[str, str] | None:
     return None
 
 
-def present_entities(state: Projection, location: str, pack: Pack) -> frozenset[str]:
-    """Every entity structurally present at `location` in the projection:
-    positioned there, or an item carried by a present non-item (items
-    keep their spawn `position` — carriers travel, the closure follows).
-    The PC is covered by construction: the scene location IS its
-    position. Membership-only use — never iterated for output (INV-2)."""
-    present = {
-        entity_id
-        for entity_id, props in state.items()
-        if props.get("position") == location
-    }
-    carriers = {
-        entity_id for entity_id in present if pack.kind_of(entity_id) != "item"
-    }
-    for entity_id, props in state.items():
-        carrier = props.get("carrier")
-        if carrier is not None and carrier in carriers:
-            present.add(entity_id)
-    return frozenset(present)
+# (present_entities lives in core.fold since st-1 — re-exported above;
+# the window law below reads it through that import.)
 
 
 # -- the ledger (session render state — auditable, never replayable) ------------

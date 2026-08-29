@@ -67,12 +67,49 @@ def test_move_records_sightings_at_both_ends(tmp_path: Path) -> None:
     # destination observers saw the arrival (the player was never a knower)
     arrived = {r.who for r in first.knowledge if r.knows == "pc_01_arrived"}
     assert arrived == {"npc_guard_01", "npc_barkeep_01", "npc_drunk_01", "npc_maid_01"}
-    assert all(r.channel == "saw" and r.fidelity == "partial" for r in first.knowledge)
+    assert all(
+        r.channel == "saw" and r.fidelity in ("partial", "exact")
+        for r in first.knowledge
+    )
     # origin observers saw the departure toward the backyard
     left = {r.who for r in second.knowledge if r.knows == "pc_01_left_toward_loc_backyard"}
     assert left == {"npc_guard_01", "npc_barkeep_01", "npc_drunk_01", "npc_maid_01"}
     # nobody was in the backyard to see the arrival
     assert not any(r.knows == "pc_01_arrived" for r in second.knowledge)
+
+
+def test_move_arrival_snapshot_is_actor_held_per_present(tmp_path: Path) -> None:
+    """st-1 write side (INTENT_SCHEMA §7, blueprint §5): entering a scene
+    expands the actor-held template to one exact presence record per
+    entity present at the destination — pack declaration order, the
+    mover excluded, items included (the carrier closure is presence)."""
+    events, _sim = run(tmp_path, 42, [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "move", "target": "loc_backyard"},
+    ])
+    first, second = by_type(events, "move")
+    snapshot = [r.knows for r in first.knowledge if r.knows.endswith("_present")]
+    assert snapshot == [
+        "npc_guard_01_present",
+        "npc_barkeep_01_present",
+        "npc_drunk_01_present",
+        "npc_maid_01_present",
+        "oil_lamp_01_present",
+        "purse_01_present",
+        "ale_mug_01_present",
+        "club_01_present",
+    ]
+    assert all(
+        r.who == "pc_01" and r.channel == "saw" and r.fidelity == "exact"
+        for r in first.knowledge
+        if r.knows.endswith("_present")
+    )
+    assert all(r.at == first.t for r in first.knowledge if r.knows.endswith("_present"))
+    # the backyard holds one loose item and nobody else: the mover learns
+    # exactly that — and never a record about their own presence
+    assert [r.knows for r in second.knowledge if r.knows.endswith("_present")] == [
+        "rope_01_present"
+    ]
 
 
 def test_flee_records_arrival_sighting_at_the_destination(tmp_path: Path) -> None:

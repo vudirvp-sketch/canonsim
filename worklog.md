@@ -10,6 +10,19 @@
 > since iter-5).
 
 ---
+iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056)
+- The 8th brief block `present_entities` (entity cards: status markers,
+  carries, promoted props, the scene line, directed pair tokens; ranking
+  caps; eviction between scene_texture and voice) + the write-side twin:
+  the actor-held per-present-target `knows` expansion on move (the
+  arrival snapshot, INTENT_SCHEMA §7 — KI#43's grammar, not an audience).
+- present_entities/present_in_order moved to core/fold.py (single owner);
+  BRIEF_SPEC §3 table+§3.4 renumber+§5.2+§6+§9, INTENT_SCHEMA §7, pack
+  (move template, brief.present_entities, 2 pair seeds), TASKS/NAV sync.
+- T1 fixture regenerated (iter-3 precedent; +10 records, stream
+  identical); KI#45 (stale §3.4 citation) closed. 502→520 green, ruff
+  clean. 10 files + sync set; iter-10 evicted per the cap.
+---
 iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (iter-14-validation-beats-2)
 - Live `narrate` session 2 (seed 8, theft-and-arson scenario, 12 beats,
   22 supported claims, 0 canon violations): event_type_mismatch,
@@ -109,12 +122,7 @@ iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync)
   iter-8). 435 green, ruff clean. 6 files; iter-8b evicted per the cap.
 ---
 iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
-- brief/ledger.py (D-053): lifecycle, scenes as PC-location intervals,
-  the ONE validation gateway (8 refusal reasons), retirement passes,
-  texture-OCC mirror; scene_texture 7th block; BRIEF_SPEC §9 flip.
-- 16 files (code+spec+suite+golden set + sync set, iter-9 precedent;
-  golden delta fixture: 13 cases). 390→435 green, ruff clean. No KIs.
-(iter-9 deleted at iter-14 per the one-in/one-out cap; history in git.)
+- (deleted at iter-15 per the one-in/one-out cap; history in git.)
 ---
 iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
 - (deleted at bg-5 per the one-in/one-out cap; history in git.)

@@ -30,7 +30,7 @@ seed 125 gate playscript), `scripts/balance_harness.py` (KI#4 close —
 the 1000-sim distribution harness; full table in `output/`). Phase 1
 (narrator over the log) opened with the iter-7 intake and landed its
 first deliverable at iter-8: `docs/BRIEF_SPEC.md` + `brief/assembler.py`
-— the deterministic seven-block brief (budgets, eviction, voice
+— the deterministic eight-block brief (budgets, eviction, voice
 isolation) as pure functions of (log, ledger), zero RNG, byte-identical
 on the golden fixture. Its second deliverable landed at iter-9:
 `docs/VALIDATION_SPEC.md` + `brief/validator.py` — the mediator's

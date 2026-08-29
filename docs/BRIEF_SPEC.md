@@ -44,22 +44,24 @@ since iter-10 (§2/§3.3).
   block items for the same beat window (the window moves with the
   log's last tick).
 
-## 3. The block pipeline (seven blocks, fixed order)
+## 3. The block pipeline (eight blocks, fixed order)
 
 Assembled and rendered in this order (BRIEF-1; letta block-manager
 layout; voice exemplars near the context end — the live-char
 author's-note geometry; scene_texture at position 3 — current-scene
-continuity outranks recall, D-049):
+continuity outranks recall, D-049; present_entities at position 4 — the
+scene trio completes before recall, st-1):
 
-| # | Block | Source (iter-8/10) | Item shape |
+| # | Block | Source (iter-8/10/15) | Item shape |
 |---|---|---|---|
 | 1 | `directives` | pack `brief.directives` (static lines) | line, verbatim |
 | 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
 | 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
-| 4 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
-| 5 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
-| 6 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
-| 7 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
+| 4 | `present_entities` | the projection's present set + the pair map + promotions (st-1) | `- <id> (<display>)[ status=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <prop>=<v>` / `- pair <a> -> <b> <axis>=<v>` |
+| 5 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
+| 6 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
+| 7 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
+| 8 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
 
 ### 3.1 Directives
 
@@ -114,7 +116,38 @@ view**: the ledger never evicts, all boundedness lives here.
   is an address, not prose; the `surface` (verbatim introducing prose)
   is ledger audit data and NEVER renders (L2).
 
-### 3.4 Recalled facts (the three-signal shape, deterministic inputs)
+### 3.4 Present entities (the 8th block — st-1, the entity cards)
+
+The quiet-beat fix: a beat with no PC-perceived events still carries
+the structural fact of WHO is present — a read-side fold over the
+projection (`core/fold.py::present_in_order`), zero new event types.
+Closes quiet-beat presence, cross-NPC consistency (A-fears-B rides
+the card, not recall luck), and promoted-prop visibility in one
+mechanism (blueprint §1; the write-side twin is INTENT_SCHEMA §7's
+per-present expansion).
+
+- **Entity lines**: one dry line per present entity in pack declaration
+  order (npcs → ambient → items) — id, display name, then the
+  observable surface, all segments omitted when empty: `status=`
+  markers from the pack's (axis, min, marker) table; `carries=` the
+  visibly-carried items (an item carried by a present non-item folds
+  into the carrier's segment — it is the carrier's surface, not a
+  room fixture; loose items keep their own lines); promoted props as
+  bare `prop=value` pairs (the D-054 scan: events whose outcome
+  carries a texture reference whose state_changes birth the slot).
+- **Scene line**: renders ONLY when the scene location holds promoted
+  props — canon-born scene texture would otherwise vanish from the
+  brief post-promotion (the scene_texture window renders live entries
+  only). Canon props persist across scenes at the same location.
+- **Pair lines**: one line per DIRECTED (holder, other) present pair
+  carrying pair-map axes (`pair.<other>.<axis>`), projection order —
+  A-fears-B and B-trusts-A are different facts; BOTH parties must be
+  present. Capped by `max_pairs`.
+- **Caps**: `max_entities`/`max_pairs` are ranking caps (the D-047
+  law — beyond-cap items render nothing, never a budget drop); the
+  scene line is structural (≤1, never capped).
+
+### 3.5 Recalled facts (the three-signal shape, deterministic inputs)
 
 Top-k over the PC's knowledge records ranked by the Generative Agents
 three-signal shape with two deterministic inputs (the relevance signal
@@ -135,19 +168,19 @@ score = recency_weight / (1 + current_tick - record.at)
   items, and the `[truncated:N]` marker counts budget drops only
   (§5).
 
-### 3.5 Scheduled static lore
+### 3.6 Scheduled static lore
 
 Pack lore entries with a **beat-window schedule**: an entry is
 eligible when `from_beat <= beats_crossed < to_beat`, where
 `beats_crossed` counts beat boundaries ≤ the log's last tick. Order:
 pack declaration order.
 
-### 3.6 Voice exemplars (the voice-isolation law, L2)
+### 3.7 Voice exemplars (the voice-isolation law, L2)
 
 Static style lines, verbatim, pack data, injected near the context
-end — the only place style lives; the other six blocks stay dry.
+end — the only place style lives; the other seven blocks stay dry.
 
-### 3.7 Active options
+### 3.8 Active options
 
 The pack's action intents as a grammar-constrained choice list —
 intent name + declared `fields`, pack order. This is the phase-2
@@ -194,8 +227,13 @@ After per-block assembly, if the total exceeds `brief.total_hard`,
 whole blocks are evicted in ascending priority order:
 
 ```
-scheduled_lore -> recalled_facts -> scene_delta -> scene_texture -> voice_exemplars -> active_options
+scheduled_lore -> recalled_facts -> scene_delta -> scene_texture -> present_entities -> voice_exemplars -> active_options
 ```
+
+`present_entities` sits between scene_texture and voice_exemplars
+(st-1): canon-projection structure outranks narrator-invented texture
+(canon always outranks texture, D-049), below the voice/options
+core.
 
 **Directives are never evicted.** An evicted block renders as its
 header + `[truncated:N items dropped]` (N = all its items). Eviction
@@ -218,11 +256,12 @@ brief's static text is mediator data, not chronicle grammar.
 
 ```json
 "brief": {
-  "total_hard": 700,
+  "total_hard": 800,
   "blocks": {
     "directives":      {"soft": 60, "hard": 80},
     "scene_delta":     {"soft": 150, "hard": 200},
     "scene_texture":   {"soft": 100, "hard": 140},
+    "present_entities": {"soft": 90, "hard": 120},
     "recalled_facts":  {"soft": 180, "hard": 240},
     "scheduled_lore":  {"soft": 90, "hard": 120},
     "voice_exemplars": {"soft": 90, "hard": 120},
@@ -231,6 +270,12 @@ brief's static text is mediator data, not chronicle grammar.
   "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
                       "importance_weight": 1.0},
   "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
+  "present_entities": {"max_entities": 8, "max_pairs": 6,
+                        "status_markers": [
+                          {"axis": "intoxication", "min": 30, "marker": "drunk"},
+                          {"axis": "fatigue", "min": 30, "marker": "weary"},
+                          {"axis": "fear", "min": 30, "marker": "afraid"},
+                          {"axis": "injury", "min": 1, "marker": "hurt"}]},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
   "voice_exemplars": ["..."]
@@ -238,7 +283,7 @@ brief's static text is mediator data, not chronicle grammar.
 ```
 
 Load-time lint (fails loudly, `core/pack.py`): the `blocks` key set is
-exactly the seven block ids; every budget is a positive int with
+exactly the eight block ids; every budget is a positive int with
 `soft <= hard`; `total_hard` a positive int; `directives` a non-empty
 list of strings; every `directives` line fits its own hard budget
 (never-dropped data must fit by construction); `lore` entries carry
@@ -246,9 +291,12 @@ list of strings; every `directives` line fits its own hard budget
 `voice_exemplars` a list of strings; `recalled_facts` weights
 non-negative numbers, `max_items >= 1`; `scene_texture` caps integers
 >= 1, `unique_slots` unique non-empty strings (empty = no globally-
-unique slots; iter-11 ships `["hearth"]` — the hearth is one object).
-The eviction order (§5.2) is architecture, not balance — it lives in
-code, not in the pack.
+unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
+`present_entities` caps integers >= 1 and a `status_markers` table
+whose `axis` is one of the pack's `states` axes, `min` a non-negative
+int, `marker` a non-empty string (marker names are pack vocabulary,
+INV-3). The eviction order (§5.2) is architecture, not balance — it
+lives in code, not in the pack.
 
 ## 7. Render format (exact bytes)
 
@@ -302,11 +350,10 @@ bytes = a spec edit in the same commit as the code change.
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.4 |
+| Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.5 |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
-| Presence & entity cards (present entities + pairwise relations + promoted props; the quiet-beat hole) | `st-1` (TASKS backlog) | blueprint §1 |
 | Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |

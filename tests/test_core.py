@@ -676,3 +676,88 @@ def test_pack_lint_catches_telling_event_outside_vocabulary(tmp_path: Path) -> N
 
     with pytest.raises(PackError, match="telling.event"):
         load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- the per-present-target expansion lint (st-1, INTENT_SCHEMA §7) --------------
+
+
+def _move_action(actions: dict[str, Any]) -> dict[str, Any]:
+    return next(a for a in actions["actions"] if a["intent"] == "move")
+
+
+def test_pack_lint_expansion_requires_actor_audience(tmp_path: Path) -> None:
+    """KI#43's law: the expansion is a `knows` grammar, NOT an audience
+    kind — `who` must stay `actor`."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _move_action(actions)["knowledge"]["success"][2]["who"] = "same_location"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="requires who == 'actor'"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_present_at_site(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _move_action(actions)["knowledge"]["success"][2]["present_at"] = "everywhere"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown present_at site"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_expansion_needs_the_present_slot(tmp_path: Path) -> None:
+    """A site without the slot would emit N identical records — refused."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _move_action(actions)["knowledge"]["success"][2]["knows"] = "a_room"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="lacks the \\{present\\} slot"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_present_slot_needs_a_site(tmp_path: Path) -> None:
+    """The mirror: a {present} slot without present_at has no expansion
+    semantics — the closed-slot lint alone would pass it, so the pairing
+    is enforced explicitly."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        record = _move_action(actions)["knowledge"]["success"][2]
+        del record["present_at"]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="requires a 'present_at'"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_expansion_forbids_except(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        _move_action(actions)["knowledge"]["success"][2]["except"] = ["actor"]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="'except' has no meaning"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_expansion_site_needs_location_target(tmp_path: Path) -> None:
+    """present_at=destination_location needs the target-kind-location
+    precondition, exactly like the destination_location audience (drop
+    the audience record first so the expansion clause is the one firing)."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        move = _move_action(actions)
+        move["requires"] = [
+            {"noun": "target", "test": "adjacent_to", "with": "actor"}
+        ]
+        move["knowledge"]["success"] = [
+            record
+            for record in move["knowledge"]["success"]
+            if record["who"] != "destination_location"
+        ]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="present_at=destination_location' requires"):
+        load_pack(_broken_pack(tmp_path, mutate))

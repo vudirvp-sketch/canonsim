@@ -2,7 +2,7 @@
 owns the field-level contract; `docs/blueprint/phases.md` §1 owns the donor
 design).
 
-The brief is the mediator's input document: seven typed blocks with token
+The brief is the mediator's input document: eight typed blocks with token
 budgets, assembled fresh every beat. This module is the LLM-free half —
 **a pure function of (log, ledger)** (the D-042/D-043/D-044 read-side
 family, widened iter-10 by the D-049 determinism quarantine): same log +
@@ -40,7 +40,7 @@ from brief.ledger import (
     present_entities,
     split_scope,
 )
-from core.fold import fold, initial_projection
+from core.fold import fold, initial_projection, present_in_order
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
 from core.pack import BRIEF_BLOCK_IDS, Pack
@@ -59,13 +59,16 @@ __all__ = [
 
 # Ascending-priority eviction order for whole-block eviction on total
 # overflow (BRIEF_SPEC §5.2). Directives are NOT in it — never evicted;
-# scene_texture sits between scene_delta and voice_exemplars (current-scene
-# continuity outranks lore, below voice/options — D-049).
+# scene_texture sits between scene_delta and present_entities (current-scene
+# continuity outranks lore; canon-projection structure — the entity cards —
+# outranks narrator-invented texture: canon always outranks texture,
+# D-049), both below voice/options — st-1.
 EVICTABLE_BLOCKS: Final = (
     "scheduled_lore",
     "recalled_facts",
     "scene_delta",
     "scene_texture",
+    "present_entities",
     "voice_exemplars",
     "active_options",
 )
@@ -93,7 +96,7 @@ class Block:
 
 @dataclass(frozen=True, slots=True)
 class Brief:
-    """The seven blocks in pipeline order (BRIEF_SPEC §3)."""
+    """The eight blocks in pipeline order (BRIEF_SPEC §3)."""
 
     blocks: tuple[Block, ...]
 
@@ -143,7 +146,7 @@ def last_beat_tick(rules: Mapping[str, Any], tick: int) -> int | None:
 
 def beats_crossed(rules: Mapping[str, Any], tick: int) -> int:
     """How many beat boundaries lie at or before `tick` (the lore schedule
-    input, BRIEF_SPEC §3.4) — same beat set as `last_beat_tick`."""
+    input, BRIEF_SPEC §3.6) — same beat set as `last_beat_tick`."""
     offsets = _beat_offsets(rules)
     day = int(rules["time"]["ticks_per_day"])
     crossed = 0
@@ -207,7 +210,7 @@ def _recalled_fact_lines(
 ) -> list[str]:
     """The PC's own knowledge records, ranked by recency + importance
     (the two deterministic signals; relevance arrives with the mediator —
-    BRIEF_SPEC §3.4), deduped by token, capped at `max_items`."""
+    BRIEF_SPEC §3.5), deduped by token, capped at `max_items`."""
     config = pack.rules["brief"]["recalled_facts"]
     current_tick = events[-1].t if events else 0
     importance_of = {event.id: event.importance for event in events}
@@ -236,7 +239,7 @@ def _recalled_fact_lines(
 
 
 def _lore_lines(pack: Pack, *, beats: int) -> list[str]:
-    """Eligible lore entries, pack declaration order (BRIEF_SPEC §3.5)."""
+    """Eligible lore entries, pack declaration order (BRIEF_SPEC §3.6)."""
     lines: list[str] = []
     for entry in pack.rules["brief"].get("lore", ()):
         if int(entry["from_beat"]) <= beats < int(entry["to_beat"]):
@@ -321,6 +324,122 @@ def _scene_texture_items(
     return lines
 
 
+def _promoted_props(
+    events: Sequence[EventRecord],
+) -> dict[str, list[tuple[str, Any]]]:
+    """Props born by committed promotions (st-1's promoted-prop
+    visibility): an event carrying a texture reference whose
+    state_changes touch the scope target's slot — the D-054 canon-birth
+    shape, the same detection law as `brief/mediator.py::promotions_in`
+    (the mediator's marking scan), read-side output shape
+    `(entity -> [(prop, value)])` in log order. Machine-condition props
+    (`condition`, the `fire.*` layers) are never promotions and never
+    appear here."""
+    out: dict[str, list[tuple[str, Any]]] = {}
+    for event in events:
+        reference = event.outcome.get("texture")
+        if not isinstance(reference, Mapping) or "entry" not in reference:
+            continue
+        split = split_scope(str(reference.get("scope", "")))
+        target = split[1] if split is not None else None
+        for change in event.state_changes:
+            if change.entity == target and change.prop == reference.get("slot"):
+                out.setdefault(change.entity, []).append(
+                    (change.prop, change.to_)
+                )
+    return out
+
+
+def _pair_axis_lines(
+    pack: Pack, state: Any, present: Sequence[str]
+) -> list[str]:
+    """Pairwise relation tokens for present pairs (BRIEF_SPEC §3.8):
+    one line per directed (holder, other) pair that carries pair-map
+    axes — `pair.<other>.<axis>` props on the holder, projection order
+    (construction order — seeds in pack order, event-born axes after).
+    Directed on purpose: A-fears-B and B-trusts-A are different facts
+    (the cross-NPC-consistency home)."""
+    lines: list[str] = []
+    for holder in present:
+        for other in present:
+            if holder == other:
+                continue
+            prefix = f"pair.{other}."
+            axes = [
+                (prop[len(prefix):], value)
+                for prop, value in state[holder].items()
+                if prop.startswith(prefix)
+            ]
+            if not axes:
+                continue
+            rendered = ",".join(f"{axis}={value}" for axis, value in axes)
+            lines.append(f"- pair {holder} -> {other} {rendered}")
+    return lines
+
+
+def _present_entity_items(
+    events: Sequence[EventRecord], pack: Pack
+) -> list[str]:
+    """The 8th block's item lines (BRIEF_SPEC §3.8 — st-1, the entity
+    cards): the room's structural answer to "who is here". A read-side
+    fold — zero new event types; presence is a projection read, the
+    observable surface is pack data. Line order: the scene line (only
+    when the scene location holds promoted props — canon-born texture
+    would otherwise vanish from the brief post-promotion: the
+    scene_texture window renders live entries only), then one dry line
+    per present entity in pack declaration order (carried items fold
+    into their carrier's `carries=` segment instead of a line of their
+    own — they are the carrier's surface, not room fixtures), then the
+    pair lines. `max_entities`/`max_pairs` are ranking caps (D-047 law
+    — beyond-cap items render nothing, never a budget drop)."""
+    config = pack.rules["brief"]["present_entities"]
+    scene = current_scene(events, pack)
+    state = fold(events, initial_projection(pack.entities))
+    present = present_in_order(pack, state, scene.location_id)
+    promoted = _promoted_props(events)
+    lines: list[str] = []
+
+    scene_props = promoted.get(scene.location_id)
+    if scene_props:
+        rendered = " ".join(f"{prop}={value}" for prop, value in scene_props)
+        lines.append(
+            f"- scene {scene.location_id} "
+            f"({display_name(pack, scene.location_id)}) {rendered}"
+        )
+
+    marker_specs = [
+        (str(spec["axis"]), int(spec["min"]), str(spec["marker"]))
+        for spec in config["status_markers"]
+    ]
+    for entity_id in present[: int(config["max_entities"])]:
+        props = state[entity_id]
+        if pack.kind_of(entity_id) == "item" and props.get("carrier") is not None:
+            continue  # carried: the carrier's `carries=` segment renders it
+        segments = [f"- {entity_id} ({display_name(pack, entity_id)})"]
+        markers = [
+            marker
+            for axis, threshold, marker in marker_specs
+            if (value := props.get(f"status.{axis}")) is not None
+            and value >= threshold
+        ]
+        if markers:
+            segments.append(f"status={','.join(markers)}")
+        carries = [
+            item["id"]
+            for item in pack.entities["items"]
+            if state[item["id"]].get("carrier") == entity_id
+        ]
+        if carries:
+            segments.append(f"carries={','.join(carries)}")
+        segments.extend(
+            f"{prop}={value}" for prop, value in promoted.get(entity_id, ())
+        )
+        lines.append(" ".join(segments))
+
+    lines.extend(_pair_axis_lines(pack, state, present)[: int(config["max_pairs"])])
+    return lines
+
+
 def _evict_overflow(
     assembled: dict[str, Block], total_hard: int
 ) -> dict[str, Block]:
@@ -345,7 +464,7 @@ def _evict_overflow(
 def assemble_brief(
     events: Sequence[EventRecord], pack: Pack, ledger: SceneLedger | None = None
 ) -> Brief:
-    """Assemble the seven blocks from a log + ledger (pure — BRIEF_SPEC
+    """Assemble the eight blocks from a log + ledger (pure — BRIEF_SPEC
     §2/§3). `ledger=None` renders an empty scene_texture block (a log
     without a session ledger — the same bytes as an empty one).
 
@@ -363,6 +482,7 @@ def assemble_brief(
         "directives": [str(line) for line in config["directives"]],
         "scene_delta": _scene_delta_lines(events, pack, player_id=player_id),
         "scene_texture": _scene_texture_items(events, pack, texture_ledger),
+        "present_entities": _present_entity_items(events, pack),
         "recalled_facts": _recalled_fact_lines(events, pack, player_id=player_id),
         "scheduled_lore": _lore_lines(pack, beats=beats),
         "voice_exemplars": [str(line) for line in config["voice_exemplars"]],

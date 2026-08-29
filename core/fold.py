@@ -5,7 +5,11 @@ Never fold on the startup hot path — fold is the truth-test, not the
 runtime store. Projection shape: `{entity_id: {prop_path: value}}`, seeded
 from pack entity data (`initial_projection`); `apply_event` enforces each
 `state_change.from` against the current value, so a log that disagrees with
-its own projection fails loudly (INV-1 made executable).
+its own projection fails loudly (INV-1 made executable). Structural
+presence reads live here too (st-1): `present_entities` (the membership
+set — the scene-ledger window law and the entity-card block both read it)
+and `present_in_order` (the pack-declaration-order view for output paths,
+INV-2 — a set must never be iterated for output).
 """
 
 from __future__ import annotations
@@ -15,7 +19,14 @@ from typing import Any
 
 from core.log import EventRecord
 
-__all__ = ["Projection", "apply_event", "fold", "initial_projection"]
+__all__ = [
+    "Projection",
+    "apply_event",
+    "fold",
+    "initial_projection",
+    "present_entities",
+    "present_in_order",
+]
 
 Projection = dict[str, dict[str, Any]]
 
@@ -82,3 +93,42 @@ def fold(events: Iterable[EventRecord], initial: Projection) -> Projection:
     for event in events:
         apply_event(state, event)
     return state
+
+
+# -- structural presence (st-1 — the single owner of the presence set) --------
+
+
+def present_entities(state: Projection, location: str, pack: Any) -> frozenset[str]:
+    """Every entity structurally present at `location` in the projection:
+    positioned there, or an item carried by a present non-item (items
+    keep their spawn `position` — carriers travel, the closure follows).
+    The PC is covered by construction when the scene location IS its
+    position. Membership-only use — output paths iterate
+    `present_in_order` (INV-2)."""
+    present = {
+        entity_id
+        for entity_id, props in state.items()
+        if props.get("position") == location
+    }
+    carriers = {
+        entity_id for entity_id in present if pack.kind_of(entity_id) != "item"
+    }
+    for entity_id, props in state.items():
+        carrier = props.get("carrier")
+        if carrier is not None and carrier in carriers:
+            present.add(entity_id)
+    return frozenset(present)
+
+
+def present_in_order(pack: Any, state: Projection, location: str) -> tuple[str, ...]:
+    """The present set as an ordered tuple — pack declaration order (npcs,
+    then ambient groups, then items; INV-2 construction order). Output
+    paths (the entity-card block, the per-present-target `knows`
+    expansion) MUST iterate this, never the frozenset."""
+    present = present_entities(state, location, pack)
+    return tuple(
+        record["id"]
+        for group in ("npcs", "ambient_entities", "items")
+        for record in pack.entities[group]
+        if record["id"] in present
+    )

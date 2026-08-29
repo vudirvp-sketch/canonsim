@@ -146,7 +146,8 @@ declares record templates: `who` ∈ {`actor`, `target`, `same_location`,
 (`actor`, `target`, `cause_actor`); `channel`/`fidelity` from the
 EVENT_SCHEMA enums; `knows` is a slot template over `{actor}`, `{target}`,
 `{location}`, `{cause_actor}`, `{texture_slot}` (closed set, lint-checked —
-the texture slot names the promoted texture's slot, iter-11). Audiences resolve
+the texture slot names the promoted texture's slot, iter-11), `{present}`
+(only on an expansion record, st-1 — below). Audiences resolve
 to knowledge-holders only — npcs and ambient groups, never items; hearing
 radii follow `rules.json` `position_visibility.hearing` (adjacent
 locations hear vague only). Blind-NPC (T3) holds by construction: no
@@ -157,6 +158,23 @@ Audience notes: `same_location` resolves against the actor's position at
 departure sighting); `destination_location` (iter-3, movement sightings)
 resolves against the action's target and requires a target-kind-location
 precondition (lint-checked).
+
+**The per-present-target expansion (st-1, the arrival snapshot's write
+side; blueprint §5).** A template may declare `present_at` ∈ {`location`,
+`destination_location`} — the audience stays `actor` (KI#43's law: this
+is a `knows` expansion, NOT an audience kind), and the template expands
+to ONE record per entity present at the site: pack declaration order
+(npcs → ambient → items), the actor itself excluded, items included
+(carried items are present via the carrier closure). `knows` must use
+the `{present}` slot (one present target's id per record; the pairing is
+lint-checked both ways — a site without the slot would emit N identical
+records, a slot without a site has no semantics). `present_at:
+destination_location` requires the target-kind-location precondition,
+exactly like the audience; `except` is meaningless on an expansion (the
+audience is the actor alone) and refused at load. The tavern pack's
+`move` carries the canonical use: on arrival the mover learns one exact
+`saw` record per present entity — the durable write-side twin of the
+brief's entity cards (`BRIEF_SPEC.md` §3.4).
 
 ## 8. Rejection events
 

@@ -272,7 +272,10 @@ decision, nothing in DECISIONS yet).**
   presence, cross-NPC consistency (A-fears-B rides the card, not
   recall luck; AP-11 voice markers get a structural home), and
   promoted-prop visibility in one mechanism. The write-side twin (the
-  arrival snapshot) is §5's.
+  arrival snapshot) is §5's. **Landed iter-15 (D-056): the 8th brief
+  block (BRIEF_SPEC §3.4) + the actor-held per-present-target `knows`
+  expansion (INTENT_SCHEMA §7); the scene line carries scene-scoped
+  promoted props (post-promotion visibility).**
 - **The call budget law (MECW) + the transcript tail.** Local
   27B-class models show a measured effective window (attention
   dilution / context rot) of ~8–16k tokens — the figure's owner is
@@ -467,7 +470,10 @@ markers (per-present-target expansion of the actor-held `knows`
 template — the audience stays `actor`; additive per INTENT_SCHEMA
 §7/§10); the read-side twin is the §1 entity-card
 block. Spec home when its trigger fires: the GROUP_SPEC sketch
-(`SPECS_BACKLOG.md`).
+(`SPECS_BACKLOG.md`). **The template half landed iter-15 (D-056): the
+expansion rides the move event's templates (INTENT_SCHEMA §7), not a
+separate perception event — KI#43's grammar correction made the event
+an implementation detail the pack does not need.**
 
 ## 6. Phase 6 — packs & worldbuilder
 

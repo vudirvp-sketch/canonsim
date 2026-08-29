@@ -122,11 +122,6 @@ level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
 ### Stress-test backlog (iter-11b resolutions; owner-gated)
 
-- `st-1` presence & entity cards (the 8th-block candidate: present
-  entities + pairwise relation tokens + promoted props) + the arrival
-  snapshot (one perception event → O(present) knowledge records) —
-  closes the quiet-beat, cross-NPC-consistency, and arrival-observation
-  holes (blueprint §1/§5).
 - `st-2` identity persistence: pack `identity_slots` window tier +
   per-scope quotas (read-path) + the identity promotion door (pack
   grammar beyond `take`, the D-054 machine; blueprint §1). Optional
@@ -265,6 +260,18 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-15 · 2026-08-30 · presence & entity cards — st-1 landed
+  (iter-15-presence, D-056; the owner's session delegation "pick what
+  is best"): the 8th brief block `present_entities` (entity cards:
+  present set + status markers + visibly-carried items + promoted
+  props + directed pair tokens; the scene line keeps canon-born
+  texture visible post-promotion) + the write-side twin — the
+  actor-held per-present-target `knows` expansion on `move` (the
+  arrival snapshot; INTENT_SCHEMA §7, KI#43's grammar). Zero new event
+  types; the T1 fixture regenerated (+10 records, the iter-3
+  precedent); 2 pair-relation seeds. 502→520 green, ruff clean.
+  Detail: worklog iter-15 + `docs/BRIEF_SPEC.md` §3.4 + D-056.
 
 - bg-5 · 2026-08-30 · owner-requested verdict on a pasted external
   integration spec (bg-5-spec-verdict; docs-only, D-022 counter = 3):

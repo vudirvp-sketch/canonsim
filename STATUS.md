@@ -1,17 +1,20 @@
 # STATUS — canonsim
 
-Iteration: iter-14 (`iter-14-validation-beats-2`) · Phase: 1 · Date: 2026-08-30 ·
-Validation-beats session 2: a live agent-in-the-loop `narrate` run over the
-theft-and-arson scenario (seed 8, 12 beats, 22 supported claims, **0 canon
-violations**). The families session 1 left uncovered were probed live and
-all caught: `event_type_mismatch`, `cannot_know`, `stale_ref` (after a scene
-close), the full regen-exhaustion ladder (2/2 → dry, the L12 floor), a
-door-rejected intent (a well-formed world-impossible steal commits
-`intent_rejected` — attempts are facts), rebased intents, and the delta
-vocabulary at the beat level (pin, retire + establish update pair,
-idempotent no-op). The corpus grew 16 → 25 cases: **every validator refusal
-reason is now pinned at the beat level**. No new KIs; KI#44 stays (closed
-iter-13, one iteration elapsed).
+Iteration: iter-15 (`iter-15-presence`, the stress-test backlog's `st-1` —
+the owner's session delegation "pick what is best") · Phase: 1 · Date:
+2026-08-30 · Presence & entity cards landed (D-056): the 8th brief
+block `present_entities` (position 4 — entity cards: present set, pack
+status-marker table, visibly-carried items folded into the carrier's
+line, promoted props via the D-054 scan, the scene line for
+scene-scoped promoted props, directed pair tokens for present pairs;
+`max_entities`/`max_pairs` ranking caps) + the write-side twin — the
+actor-held per-present-target `knows` expansion (`present_at` sites,
+the `{present}` slot) on `move`: the arrival snapshot (INTENT_SCHEMA
+§7, KI#43's grammar — a knows expansion, not an audience kind).
+Zero new event types; `present_entities`/`present_in_order` moved to
+core/fold.py (single owner of the presence set); the T1 fixture
+regenerated (+10 records on the 4 move events — the iter-3
+precedent); 2 pair-relation seeds; 502→520 green.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -40,7 +43,12 @@ iter-13, one iteration elapsed).
   rebased were uncountable in live sessions (the "measurable now"
   claim held for the regression set only) · CLOSED iter-13 (the `BEAT`
   summary lines — cli/mediator.py + cli/main.py, VALIDATION_SPEC §7.1;
-  pinned by the corpus + the CLI wiring test).
+  pinned by the corpus + the CLI wiring test). Two iterations elapsed —
+  deletes at iter-16 per AGENTS §5.
+- KI#45 · stale citation: tests/test_brief.py's scheduled-lore comment
+  cited BRIEF_SPEC §3.4 while lore lived at §3.5 (predated the iter-15
+  renumber — the drift surfaced exactly when the renumber made it
+  load-bearing) · CLOSED iter-15 (the comment now cites §3.6).
 
 ## FAQ / Pitfalls
 
@@ -235,21 +243,19 @@ iter-13, one iteration elapsed).
 
 ## Next step
 
-**Validation beats: two sessions down — 23 beats, 0 canon violations
-(worklog iter-13/iter-14); the corpus (25 cases) now pins every validator
-refusal reason, the ladder, and both door outcomes at the beat level.**
-The exit criterion (0 canon violations per 100 beats, ROADMAP §2) still
-needs volume. Next, in order:
+**st-1 closed the twice-confirmed quiet-beat hole (iter-13/14
+evidence): the brief now carries the room's presence structurally —
+entity cards + pair tokens — and the PC's arrivals seed durable
+presence records.** The exit criterion (0 canon violations per 100
+beats, ROADMAP §2) still needs volume. Next, in order:
 
-1. **More validation beats** — sessions 3+ across seeds/scenarios and
-   longer arcs (the two runs so far are 11 + 12 beats); tallies via the
-   `BEAT` summary lines + the regen notes. The quiet-beat hole stands
-   (st-1's evidence, twice-confirmed: the brief carries no presence
-   block, so the narrator cannot legally name who is in the room).
-2. `st-1` presence & entity cards — the strongest next-code-iteration
-   candidate (closes the quiet-beat, cross-NPC-consistency, and
-   arrival-observation holes) or `tune-1` rest action — the owner's
-   pick; `st-2`..`st-5` wait per TASKS.
+1. **Validation beats, session 3** — the first session over the NEW
+   presence machinery: can the narrator now legally name who is in
+   the room (the st-1 acceptance probe), do the cards hold up across
+   scene changes, do pair tokens surface as consistent cross-NPC
+   prose; tallies via the `BEAT` summary lines + the regen notes.
+2. `tune-1` rest action (pack data; the owner's fatigue observation)
+   or `st-2` identity persistence per TASKS; `st-3`..`st-5` wait.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).

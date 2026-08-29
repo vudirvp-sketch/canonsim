@@ -28,7 +28,12 @@ from brief import (
     render_brief,
     token_count,
 )
-from core.log import EventRecord, LoggedKnowledgeRecord
+from core.log import (
+    EventRecord,
+    LoggedKnowledgeRecord,
+    StateChange,
+    read_log,
+)
 from core.pack import BRIEF_BLOCK_IDS, Pack, PackError, load_pack
 
 REPO = Path(__file__).resolve().parents[1]
@@ -126,10 +131,12 @@ def test_brief_format_blank_line_separation_and_trailing_newline() -> None:
 
 
 def test_empty_block_renders_header_alone() -> None:
-    """The golden fixture's PC holds no knowledge records — recalled_facts
-    is an explicit empty header, never an omission (BRIEF_SPEC §7)."""
+    """The golden fixture carries no session ledger — scene_texture is an
+    explicit empty header, never an omission (BRIEF_SPEC §7). (Until st-1
+    this pin rode recalled_facts: the smoke PC held no records; the
+    arrival snapshot now seeds presence tokens on every move.)"""
     text = brief_from_log(GOLDEN, PACK, SCHEMA)
-    assert "## recalled_facts\n\n" in text
+    assert "## scene_texture\n\n" in text
 
 
 def test_empty_event_list_renders_all_headers() -> None:
@@ -235,7 +242,8 @@ def test_recalled_facts_max_items_is_a_ranking_cap_not_a_drop() -> None:
     assert "[truncated:" not in text.split("## recalled_facts")[1].split("##")[0]
 
 
-# -- scheduled lore (BRIEF_SPEC §3.4) -------------------------------------------
+# -- scheduled lore (BRIEF_SPEC §3.6; was §3.5 — the renumber rode a stale
+# §3.4 citation, KI#45) ------------------------------------------------------------
 
 
 def test_lore_beat_windows() -> None:
@@ -709,4 +717,214 @@ def test_pack_lint_catches_duplicate_unique_slots(tmp_path: Path) -> None:
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="unique_slots must be unique"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- present entities: the 8th block (BRIEF_SPEC §3.8, st-1) ----------------------
+
+
+def _golden_prefix(ticks: int = 2) -> list[EventRecord]:
+    _header, events = read_log(GOLDEN, SCHEMA)
+    return list(events[:ticks])
+
+
+def test_present_entities_cards_and_pair_tokens() -> None:
+    """The entity cards on the tavern prefix: one dry line per present
+    non-carried entity in pack order, status markers from the pack table,
+    carried items folded into the carrier's segment, then the directed
+    pair lines (the cross-NPC-consistency home)."""
+    text = render_brief(assemble_brief(_golden_prefix(), PACK))
+    assert _blocks(text)["present_entities"] == [
+        "- pc_01 (the player)",
+        "- npc_guard_01 (Doren) carries=purse_01",
+        "- npc_barkeep_01 (the barkeep) carries=club_01",
+        "- npc_drunk_01 (the drunkard) status=drunk",
+        "- npc_maid_01 (the serving maid)",
+        "- oil_lamp_01 (the oil lamp)",
+        "- ale_mug_01 (the mug of ale)",
+        "- pair npc_drunk_01 -> npc_guard_01 fear=40",
+        "- pair npc_maid_01 -> npc_barkeep_01 trust=70",
+    ]
+
+
+def test_present_entities_absent_pair_partner_renders_no_pair_line() -> None:
+    """The guards' mutual trust seeds never render in the tavern prefix —
+    npc_guard_02 is at the guardroom: pair lines need BOTH present."""
+    text = render_brief(assemble_brief(_golden_prefix(), PACK))
+    assert "npc_guard_02" not in _blocks(text)["present_entities"].__str__()
+
+
+def test_present_entities_empty_log_renders_the_starting_scene() -> None:
+    """No events: the scene is the PC's pack-start location; presence is
+    the structural projection read (the quiet-beat answer needs no
+    events at all)."""
+    text = render_brief(assemble_brief((), PACK))
+    assert _blocks(text)["present_entities"] == ["- pc_01 (the player)"]
+
+
+def test_present_entities_marker_thresholds_are_pack_data() -> None:
+    """The drunkard's `drunk` marker is the pack's (axis, min) call: at
+    min=60 the intoxicication 50 no longer carries a marker."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["present_entities"]["status_markers"].__setitem__(
+            0, {"axis": "intoxication", "min": 60, "marker": "drunk"}
+        )
+    )
+    text = render_brief(assemble_brief(_golden_prefix(), pack))
+    assert "status=drunk" not in text
+
+
+def test_present_entities_caps_are_ranking_caps_never_drops() -> None:
+    """max_entities/max_pairs cap the ranking (D-047 law): beyond-cap
+    items render nothing and NEVER produce a [truncated:N] marker."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["present_entities"].update(max_entities=2)
+    )
+    text = render_brief(assemble_brief(_golden_prefix(), pack))
+    body = _blocks(text)["present_entities"]
+    # two entity cards (pack order: the player, then Doren) — the pair
+    # lines are a separate ranking, unaffected by max_entities
+    assert body[:2] == [
+        "- pc_01 (the player)",
+        "- npc_guard_01 (Doren) carries=purse_01",
+    ]
+    assert body[2:] == [
+        "- pair npc_drunk_01 -> npc_guard_01 fear=40",
+        "- pair npc_maid_01 -> npc_barkeep_01 trust=70",
+    ]
+    assert "[truncated:" not in text.split("## present_entities")[1].split("##")[0]
+
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["present_entities"].update(max_pairs=1)
+    )
+    body = render_brief(assemble_brief(_golden_prefix(), pack)) \
+        .split("## present_entities")[1].split("##")[0]
+    assert body.count("- pair ") == 1
+
+
+def _promotion_event(
+    eid: str, t: int, scope: str, slot: str, value: str, target: str
+) -> EventRecord:
+    """A committed D-054 promotion: a take event whose outcome carries the
+    texture reference and whose state_changes birth the slot on the scope
+    target (the same detection law as brief/mediator.py::promotions_in)."""
+    return EventRecord(
+        id=eid, t=t, type="take", actor=PLAYER, cause=None, target=None,
+        outcome={"texture": {"entry": "tex_0000", "scope": scope,
+                             "slot": slot, "value": value}},
+        knowledge=(),
+        state_changes=(
+            StateChange(entity=target, prop=slot, from_=None, to_=value),
+        ),
+        hooks=(), importance="low", provenance={"seed": 42},
+    )
+
+
+def test_present_entities_scene_line_needs_promoted_props() -> None:
+    """No promotion: no scene line (the golden prefix has none). A
+    scene-scoped promotion renders the location's canon-born props —
+    post-promotion texture stays visible to the narrator."""
+    text = render_brief(assemble_brief(_golden_prefix(), PACK))
+    assert "- scene" not in text
+
+    events = _golden_prefix() + [
+        _promotion_event(
+            "ev_9000", 2, "scene:loc_tavern", "candles", "lit", "loc_tavern"
+        )
+    ]
+    text = render_brief(assemble_brief(events, PACK))
+    assert (
+        "- scene loc_tavern (Three Barrels tavern) candles=lit"
+        in _blocks(text)["present_entities"]
+    )
+
+
+def test_present_entities_entity_scoped_promotion_rides_the_card() -> None:
+    """An entity-scoped promotion renders on the present entity's card —
+    the promoted-prop visibility law; an absent holder renders nothing."""
+    events = _golden_prefix() + [
+        _promotion_event(
+            "ev_9000", 2, "entity:npc_maid_01", "kerchief", "blue", "npc_maid_01"
+        )
+    ]
+    text = render_brief(assemble_brief(events, PACK))
+    assert (
+        "- npc_maid_01 (the serving maid) kerchief=blue"
+        in _blocks(text)["present_entities"]
+    )
+
+
+def test_present_entities_outranks_scene_texture_in_eviction() -> None:
+    """BRIEF_SPEC §5.2 order: scene_texture evicts before
+    present_entities (canon-projection structure outranks narrator
+    texture), voice_exemplars after it. Needs a NON-empty scene_texture —
+    an empty block frees nothing and is skipped by the eviction loop."""
+    events = _golden_prefix()
+    ledger = _texture_ledger(events)
+    base = assemble_brief(events, PACK, ledger)
+    base_total = sum(
+        token_count(line) for block in base.blocks for line in block.render()
+    )
+
+    def freed(block_id: str) -> int:
+        block = next(b for b in base.blocks if b.block_id == block_id)
+        body_tokens = (
+            sum(token_count(line) for line in block.render())
+            - token_count(f"## {block_id}")
+        )
+        if not block.lines:
+            return 0  # an empty block frees nothing (skipped by the loop)
+        marker = token_count(f"[truncated:{len(block.lines)} items dropped]")
+        return body_tokens - marker
+
+    # evicting through scene_texture fits: present_entities SURVIVES
+    total_hard = base_total - (
+        freed("scheduled_lore") + freed("recalled_facts") + freed("scene_delta")
+        + freed("scene_texture")
+    )
+    pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
+    text = render_brief(assemble_brief(events, pack, ledger))
+    assert _blocks(text)["present_entities"]  # survived
+    assert _blocks(text)["scene_texture"] == []  # fell first
+
+    # evicting through present_entities fits: voice_exemplars survives
+    total_hard = base_total - (
+        freed("scheduled_lore") + freed("recalled_facts") + freed("scene_delta")
+        + freed("scene_texture") + freed("present_entities")
+    )
+    pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
+    text = render_brief(assemble_brief(events, pack, ledger))
+    assert _blocks(text)["present_entities"] == []  # evicted whole
+    assert _blocks(text)["voice_exemplars"]  # never fell before presence
+
+
+def test_pack_lint_requires_present_entities_config(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        del rules["brief"]["present_entities"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="present_entities must be an object"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_bad_presence_caps(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["max_pairs"] = 0
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="max_pairs must be an integer >= 1"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_marker_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["status_markers"].append(
+            {"axis": "grace", "min": 1, "marker": "elegant"}
+        )
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="axis must be one of the pack's status axes"):
         load_pack(_broken_pack(tmp_path, mutate))

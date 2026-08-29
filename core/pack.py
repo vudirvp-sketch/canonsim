@@ -29,6 +29,7 @@ from core.intent import (
     AUDIENCES,
     KNOWLEDGE_SLOTS,
     PRECONDITION_TESTS,
+    PRESENT_SITES,
     REJECTION_EVENT,
 )
 from core.resolvers import REGISTRY
@@ -47,10 +48,14 @@ PACK_FILE_NAMES: Final = ("actions.json", "entities.json", "rules.json", "templa
 # The brief pipeline's closed block vocabulary (BRIEF_SPEC §3). Mechanic
 # words, not setting nouns (INV-3); owned here so the lint and the
 # assembler (`brief/assembler.py`) share one source of truth.
+# `present_entities` sits after scene_texture (st-1: the entity-card block
+# — canon-projection structure closes the quiet-beat hole; it outranks
+# texture in the eviction order, BRIEF_SPEC §5.2).
 BRIEF_BLOCK_IDS: Final = (
     "directives",
     "scene_delta",
     "scene_texture",
+    "present_entities",
     "recalled_facts",
     "scheduled_lore",
     "voice_exemplars",
@@ -241,6 +246,51 @@ class _Lint:
                 ),
                 f"{where}: audience 'destination_location' requires a "
                 f"target-kind-location precondition",
+            )
+        if "present_at" in record:
+            # The per-present-target expansion (st-1, INTENT_SCHEMA §7): the
+            # audience stays `actor` (KI#43's law — this is a `knows`
+            # expansion, NOT an audience kind), the site is a closed set,
+            # and the {present} slot must actually be used — a site without
+            # the slot would emit N identical records.
+            _require(
+                record["who"] == "actor",
+                f"{where}: a 'present_at' expansion requires who == 'actor' "
+                f"(the audience stays actor — INTENT_SCHEMA §7)",
+            )
+            _require(
+                record["present_at"] in PRESENT_SITES,
+                f"{where}: unknown present_at site {record['present_at']!r} "
+                f"(must be one of {list(PRESENT_SITES)})",
+            )
+            _require(
+                not record.get("except"),
+                f"{where}: 'except' has no meaning on a 'present_at' "
+                f"expansion (the audience is the actor alone)",
+            )
+            _require(
+                "present" in _SLOT.findall(record["knows"]),
+                f"{where}: 'present_at' declared but the knows template "
+                f"{record['knows']!r} lacks the {{present}} slot",
+            )
+            if record["present_at"] == "destination_location":
+                _require(
+                    any(
+                        cond.get("noun") == "target"
+                        and cond.get("test") == "kind"
+                        and cond.get("is") == "location"
+                        for cond in requires
+                    ),
+                    f"{where}: 'present_at=destination_location' requires a "
+                    f"target-kind-location precondition",
+                )
+        elif "present" in _SLOT.findall(record["knows"]):
+            # the mirror: the {present} slot has no semantics without a
+            # site — the closed-slot lint alone would pass it
+            _require(
+                False,
+                f"{where}: the {{present}} slot requires a 'present_at' "
+                f"expansion site on the record",
             )
         for token in record.get("except", ()):
             _require(
@@ -1001,6 +1051,48 @@ class _Lint:
             ),
             f"{where}.scene_texture: unique_slots must be unique non-empty strings",
         )
+        # st-1: the 8th block's ranking caps + the observable-marker table
+        # (BRIEF_SPEC §3.8/§6 — the entity-card block). Marker names are
+        # pack vocabulary (INV-3); the axis must be a known status axis of
+        # the pack's states section.
+        present = config.get("present_entities")
+        _require(
+            isinstance(present, Mapping),
+            f"{where}: present_entities must be an object",
+        )
+        for key in ("max_entities", "max_pairs"):
+            value = present.get(key)
+            _require(
+                isinstance(value, int) and not isinstance(value, bool) and value >= 1,
+                f"{where}.present_entities: {key} must be an integer >= 1",
+            )
+        markers = present.get("status_markers")
+        _require(
+            isinstance(markers, list),
+            f"{where}.present_entities: status_markers must be a list",
+        )
+        state_axes = set(self._data["rules.json"].get("states", {})) - {"notes"}
+        for marker in markers:
+            _require(
+                isinstance(marker, Mapping),
+                f"{where}.present_entities.status_markers: entries must be objects",
+            )
+            where_marker = f"{where}.present_entities.status_markers[{marker.get('axis')!r}]"
+            _require(
+                isinstance(marker.get("axis"), str)
+                and marker.get("axis") in state_axes,
+                f"{where_marker}: axis must be one of the pack's status axes "
+                f"{sorted(state_axes)}",
+            )
+            threshold = marker.get("min")
+            _require(
+                isinstance(threshold, int) and not isinstance(threshold, bool) and threshold >= 0,
+                f"{where_marker}: min must be a non-negative integer",
+            )
+            _require(
+                isinstance(marker.get("marker"), str) and marker["marker"].strip(),
+                f"{where_marker}: marker must be a non-empty string",
+            )
 
 
 @dataclass(frozen=True, slots=True)
