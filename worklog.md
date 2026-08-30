@@ -10,6 +10,43 @@
 > since iter-5).
 
 ---
+iter-25 · 2026-08-31 · validation beats — session 10, the
+witnessed-steal-then-alarm chain (iter-25-validation-beats-10)
+- Live narrate session 10 (seed 93, 6 accepted beats + 2
+  refused-and-caught documents, 34 supported claims, 5 intents fed, 0
+  canon violations): sessions 4 and 6 back to back — a total-failure
+  steal (everyone saw; suspicion 35 room-wide, crime_status suspect
+  at the failure) → a silent second steal → the t=360 rotation
+  (expectation_violation pushes both guards to 55, past the
+  document_check threshold 50) → **the director releases
+  director_0000 live for the first time in a narrate session** (the
+  v0.1 stub wait, npc_guard_01 t=409, claimable by id+type — ev_0025,
+  a canon event no card or brief surfaces) → the arson-as-distraction
+  through the door (fire_started + alarm_raised raised_by the relief
+  guard + fear 40 claimable per NPC; the cause actor hears his own
+  alarm) → flee_caught at t=535 (the door batch drained the fire
+  cascade to location_burned_out t=533 first; crime_status stays
+  suspect — 55 < the arrest threshold 75; the purse stays on the
+  thief's card through the catch).
+- Probes: the outgoing guard's fire blindness (npc_guard_01 rotated
+  out pre-fire → `fire_in_loc_tavern` token_absent — session 8's
+  transfer-bounded-by-holder law under the document-check context) +
+  1 live MALFORMED catch (the 'anchor' placeholder left in a live
+  reply — corpus-test sugar, never a live document; the boundary's
+  shape gate caught it; FAQ pitfall (5)).
+- Corpus 99→105 (+6 seed-93 cases, 8 beat documents — the arson rides
+  a `between` batch, the flee rides the door: the iter-23
+  batch-boundary lesson applied); 604→610 green, ruff clean. 5 files
+  (fixture + the 4-doc sync set — incl. KI#49: AGENT_NAVIGATION §1's
+  corpus descriptions made structural, the fixture-count drift
+  family); iter-24's missing TASKS one-liner backfilled (its commit
+  skipped it — the iter-22 precedent, found via `git show --stat`);
+  iter-15 evicted per the cap. TASKS 639→683 stays over the 600 cap
+  by substance (the iter-22/23 precedent — the session findings and
+  the backfill carry load; the last cruft pass ran iter-22). Live
+  beats 101→109 — the corpus moves to the phase-1 gate review
+  (ROADMAP §2).
+---
 iter-24 · 2026-08-31 · validation beats — session 9, the day-2
 return under burned-yard knowledge (iter-24-validation-beats-9)
 - Live narrate session 9 (seed 41, 13 accepted + 2 refused-and-caught,
@@ -234,17 +271,7 @@ machinery (iter-16-validation-beats-3)
   iter-10a evicted per cap.
 ---
 iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056)
-- The 8th brief block `present_entities` (entity cards: status markers,
-  carries, promoted props, the scene line, directed pair tokens; ranking
-  caps; eviction between scene_texture and voice) + the write-side twin:
-  the actor-held per-present-target `knows` expansion on move (the
-  arrival snapshot, INTENT_SCHEMA §7 — KI#43's grammar, not an audience).
-- present_entities/present_in_order moved to core/fold.py (single owner);
-  BRIEF_SPEC §3 table+§3.4 renumber+§5.2+§6+§9, INTENT_SCHEMA §7, pack
-  (move template, brief.present_entities, 2 pair seeds), TASKS/NAV sync.
-- T1 fixture regenerated (iter-3 precedent; +10 records, stream
-  identical); KI#45 (stale §3.4 citation) closed. 502→520 green, ruff
-  clean. 10 files + sync set; iter-10 evicted per the cap.
+- (deleted at iter-25 per the one-in/one-out cap; history in git.)
 ---
 iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (iter-14-validation-beats-2)
 - (deleted at iter-24 per the one-in/one-out cap; history in git.)

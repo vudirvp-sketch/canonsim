@@ -1,57 +1,46 @@
 # STATUS — canonsim
 
-Iteration: iter-24 (`iter-24-validation-beats-9`) · Phase: 1 · Date:
-2026-08-31 · The day-2 return under burned-yard knowledge — the
-multi-day volume push to the phase-1 ≥100-beat exit (live `narrate`
-session 9, seed 41, 13 accepted beats + 2 refused-and-caught probes,
-39 supported claims, 0 canon violations). The day-1 theft-and-arson
-chain (move → take → steal → move → drop_break → wait 1440) lands at
-t=1452, morning of day 2, post-second-rotation. The recall block's
-behavior past day 1 is probed at the beat level: a quiet prose-only
-beat accepts with no BEAT summary (the absence-of-summary law — the
-recall surface renders but does not tally). The day-1 canon events
-are all claimable by id+type under day 2 — fire_started (ev_0005),
-location_burned_out (ev_0008), expectation_violation (ev_0010),
-watch_change (ev_0025) — the 'canon never closes' law across a
-1440-tick gap (complement to session 5's id+type probe on the same
-tick). The burned yard's `destroyed` field is canon-from-birth
-state-claimable under day 2 (the layout/D-057 precedent extended to
-a destruction flag). The arson-on-a-destroyed-yard case is the
-pack-2 backlog's first live probe: the yard's two fire spots are
-still 'burning' (set at t=12/15 and never reset — the halted-state
-law), so `_ignite_action` finds no unburning spot, commits the arson
-event with `spot=None`, no ignition follows — a no-ignition success
-(the pack-2 audit note: 'arson on a fully-burning/destroyed
-location logs a no-ignition success, world unchanged' — pinned live
-at the beat level, distinct from session 8's
-`arson_without_fuel_is_a_logged_no` which was a
-`field_nonempty fire_spots` precondition failure on a spotless
-street). The cause-actor blindness (pc_01 knows
-`fire_in_loc_backyard` → token_absent) persists across days — the
-fire.started exception clause does not time out (the day-1
-exception law complemented). The §3 market leg pinned unreachable
-under day 2 (the drunkard never left the tavern; the tune-3 family).
-A second steal attempt at the tavern on day 2 commits
-`intent_rejected` for reason `target.carries_flagged` — the guard
-has no flagged item left (the purse was taken in setup; a new
-door-rejection family, complement to session 7's
-`target_moved_to_guardroom` co-location half and session 8's
-`nothing_to_burn` arson family — the door-outcome vocabulary
-completes the three axes: not co-located, no flagged target, no
-fuel). The third watch_change (t=1812) hands `purse_missing` to the
-relief guard via `knowledge_transfer` with the
-`transfer_decay_steps=1` fidelity step down (inferred/exact →
-told/partial — the transfer law live under day 2, complement to
-session 7's day-1 pin). The suspicion axis is state-claimable for
-`npc_guard_01` under day 2 (value 20, the post-rotation inferred
-`purse_missing` spike) — the tune-2 boundary re-pinned under day 2:
-observability ≠ claimability; the projection holds the value the
-brief does not surface. Corpus 84→99 (+15 seed-41 cases); 589→604
-green, ruff clean. 4 files (fixture + the 3-doc sync set — the
-iter-18 scope precedent). The phase-1 ≥100-beat exit criterion HIT
-(86→101 live beats); the sandbox narrate-session recipe landed in
-the FAQ (the owner's directive — operational recipe + pitfalls
-made durable across iterations).
+Iteration: iter-25 (`iter-25-validation-beats-10`) · Phase: 1 · Date:
+2026-08-31 · The witnessed-steal-then-alarm chain — sessions 4 and 6
+back to back, the last uncovered combination in the phase-1 corpus
+vocabulary (live `narrate` session 10, seed 93, 6 accepted beats +
+2 refused-and-caught documents, 34 supported claims, 5 intents fed,
+0 canon violations). A total-failure steal (margin ≥ 10 — the
+`failure_total` knowledge path: everyone saw) spikes the whole
+room's suspicion to 35 each (`figure_reaching_for_purse` 25 +
+`noise_by_the_bar` 10 — the guard as target holds both tokens) and
+flips pc crime_status to suspect at the moment of failure; the
+suspicion axis state-claimable at 35 (the tune-2 boundary under the
+witnessed-failure context). A successful second steal moves the
+purse silently (novel tokens only — no new suspicion). The wait
+across the t=360 rotation hands the crime record to the relief
+guard and the expectation_violation pushes both guards to 55 —
+past the document_check threshold (50), so **the director releases
+`director_0000` live for the first time in a narrate session**: the
+v0.1 stub wait intent (npc_guard_01, t=409) is claimable by id+type
+(ev_0025) — a canon event no card or brief ever surfaces; the
+rotation events (watch_change, expectation_violation) claimable by
+id+type, the relief guard's `purse_missing` claimable post-transfer.
+The arson-as-distraction (fed through the door) fires the full alarm
+cascade (fire_started, alarm_raised raised_by the relief guard —
+the first occupant in pack order under a post-rotation tavern, fear
+40 claimable per NPC); the cause-actor alarm exception holds (pc_01
+knows `fire_alarm_in_loc_tavern` — he hears his own alarm). The
+outgoing guard's fire blindness: npc_guard_01 (rotated out at
+t=360, briefed before the fire) holds no fire tokens —
+`fire_in_loc_tavern` is token_absent (the transfer bounded by what
+the holder holds — session 8's law under the document-check
+context). The flee at t=535 — after the arson's door batch drained
+the fire cascade through location_burned_out (t=533) — is caught
+(evasion 53 vs pursuit 55): flee_caught claimable by id+type, pc
+stays at the tavern, crime_status stays suspect (55 < the arrest
+threshold 75 — no arrest_attempt), the purse stays on the thief's
+card through the catch. Corpus 99→105 (+6 seed-93 cases, 8 beat
+documents); 604→610 green, ruff clean. 5 files (fixture + the
+4-doc sync set incl. AGENT_NAVIGATION §1's KI#49 fix + the iter-24
+TASKS backfill — the iter-22 precedent; iter-24's commit skipped its
+TASKS one-liner, found via `git show --stat` per the KI#42
+verify-first law). Live beats 101→109.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -75,7 +64,11 @@ made durable across iterations).
 
 ## Active KIs
 
-(none)
+- KI#49 · AGENT_NAVIGATION §1's corpus descriptions stuck at "41
+  documents / four sessions" while the corpus is at 105 cases / 10
+  sessions (the fixture-count drift family) · opened+CLOSED iter-25
+  (both cells now structural — provenance in the fixture's `source`
+  field, tallies in STATUS.md).
 
 - (KI#48 deleted at iter-22 per AGENTS §5 — closed iter-20, two
   iterations past; the canon_slot dual-source law lives in
@@ -210,7 +203,19 @@ made durable across iterations).
   `run_steps` batch) plus `between` steps are the corpus's vocabulary
   for it; the test's `between` runs post-call, so its reply rides a
   stale anchor through the rebase path (sessions 6/8's noise/arson
-  cases pin the rebased rotation beat live).
+  cases pin the rebased rotation beat live). (5) The `'anchor'`
+  placeholder is corpus-test sugar — the LIVE operator writes the
+  advertised anchor as an integer (a placeholder left in a live
+  reply is a MALFORMED catch at the boundary's shape gate, iter-25
+  session 10's first probe: `expected_event_seq must be a
+  non-negative integer, got 'anchor'`); a runner that resolves the
+  placeholders itself duplicates what the corpus test's
+  `_resolve_anchors` does. A late door batch can jump the clock far
+  past the crossing: the arson's follow-up cascade drains inside the
+  door's own `run_steps` batch (location_burned_out t=533), so the
+  NEXT intent (the flee) starts at t=533, not at the arson's
+  t=413 — the distilled case must carry the fire cascade inside the
+  same batch structure (session 10's seed-93 cases).
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
@@ -329,43 +334,40 @@ made durable across iterations).
 
 ## Next step
 
-**iter-24 closed session 9 (the day-2 return under burned-yard
-knowledge): the phase-1 ≥100-beat exit criterion is HIT — 86→101 live
-beats. Corpus 84→99 (15 single-beat cases over seed 41). The day-1
-canon events are claimable by id+type under day 2 (canon never closes,
-1440-tick gap), the burned yard's `destroyed` flag is canon-from-birth
-state-claimable, the arson-on-a-destroyed-yard case is the pack-2
-backlog's first live probe (no-ignition success — distinct from session
-8's spotless-street `field_nonempty` failure), and the door-outcome
-vocabulary completes its three axes (not co-located, no flagged target,
-no fuel). The tune-2 boundary (suspicion observability ≠ claimability)
-re-pinned under day 2; the tune-3 family (alarm-adjacent + the §3
-market leg) stays unreachable in v0.1, both live-pinned. Next, in
-order:
+**iter-25 closed session 10 (the witnessed-steal-then-alarm chain):
+the last uncovered combination in the phase-1 corpus vocabulary is
+pinned — the corpus moves to the phase-1 gate review (ROADMAP §2).
+Corpus 99→105 (6 seed-93 cases, 8 beat documents); live beats
+101→109; the director released live for the first time in a narrate
+session (`director_0000` — the document-check stub, claimable by
+id+type). Sessions 1–10 now cover: the refusal vocabulary in full,
+the steal ladder from both halves, the fire cascade witnessed and
+unwitnessed, the rotation handover both ways (crime crosses, fire
+does not), the alarm + fear spikes, flee caught and unpursued, the
+door-outcome three axes, multi-day canon, and the director's
+threshold release. Next, in order:
 
-1. **Validation beats, session 10** — a witnessed-steal-then-alarm
-   chain (sessions 4 and 6 back to back: a failed witnessed steal
-   spikes the guard's suspicion past the document_check threshold →
-   the director releases `director_0000`; the thief starts an arson
-   as a distraction → the alarm fires → flee_caught). This is the last
-   uncovered combination in the phase-1 corpus vocabulary; once pinned,
-   the corpus moves to the phase-1 gate review (ROADMAP §2).
-   Alternatively, an `iter-25` cleanup pass on the existing corpus
-   (consolidate the multi-session id+type probes; the corpus is at 99
-   cases and growing — the §6.1 substance filter applies, no line cap
-   concerns yet). Tallies via the `BEAT` summary lines.
+1. **The phase-1 gate review** — the owner's call (a Huge-scale
+   item per the reading gradient: ROADMAP §2 → VISION → DECISIONS).
+   The exit criterion reads "0 canon violations per 100 beats
+   (regression set)": 109 live beats over 10 sessions, 0 violations,
+   corpus 105 cases green. The review decides phase-2 (Parser, mode
+   C) vs. more phase-1 polish; the DECISIONS collapse (D-034) is due
+   at the gate. Alternatively, an `iter-26` corpus cleanup pass
+   (consolidate the multi-session id+type probes; the corpus is at
+   105 cases — the §6.1 substance filter applies, no line-cap
+   concerns yet).
 2. `tune-1` rest action (pack data; the owner's fatigue observation —
-   pc_01 hit fatigue 30 by t=1080 in this session, the monotonic-climb
-   observation holds across two days) or `st-2` identity persistence
-   per TASKS; `tune-2` (suspicion/crime-status observability) and
-   `tune-3` (alarm-adjacent + the §3 market leg — both boundaries
-   live-pinned, under day 1 in iter-21/23 and under day 2 in iter-24)
-   wait for the owner; `st-6` shrinks to the `travel` half,
-   phase-5-gated. `pack-2` (arson-on-ashes guard) — its first live
-   probe landed iter-24 (the no-ignition success); a pack precondition
-   fix (e.g. an `unburning_spot`/`not_destroyed` test in the closed
-   set) is the natural follow-up when a precondition slot is next
-   needed — most naturally alongside the crime reactions tuning.
+   the monotonic climb holds across sessions) or `st-2` identity
+   persistence per TASKS; `tune-2` (suspicion/crime-status
+   observability — re-pinned under the witnessed-failure context at
+   value 35, iter-25) and `tune-3` (alarm-adjacent + the §3 market
+   leg — both boundaries live-pinned under day 1 and day 2) wait for
+   the owner; `st-6` shrinks to the `travel` half, phase-5-gated.
+   `pack-2` (arson-on-ashes guard) — its first live probe landed
+   iter-24; a pack precondition fix (e.g. an `unburning_spot`/
+   `not_destroyed` test in the closed set) is the natural follow-up
+   when a precondition slot is next needed.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).

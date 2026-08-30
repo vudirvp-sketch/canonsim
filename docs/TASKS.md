@@ -260,6 +260,50 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-25 · 2026-08-31 · validation beats — session 10, the
+  witnessed-steal-then-alarm chain (iter-25-validation-beats-10;
+  seed 93, 6 accepted beats + 2 refused-and-caught documents, 34
+  supported claims, 5 intents fed, 0 canon violations): sessions 4
+  and 6 back to back, the last uncovered combination in the phase-1
+  corpus vocabulary — a total-failure steal (everyone saw:
+  suspicion 35 room-wide, crime_status suspect at the failure) → a
+  silent second steal → the t=360 rotation pushes both guards to 55
+  (past the document_check threshold 50) → **the director releases
+  `director_0000` live for the first time in a narrate session**
+  (the v0.1 stub wait claimable by id+type — a canon event no card
+  or brief surfaces) → the arson-as-distraction through the door
+  (fire_started + alarm_raised raised_by the relief guard + fear 40
+  claimable per NPC; the cause actor hears his own alarm; the
+  outgoing guard stays blind to the fire — the transfer bounded by
+  what the holder holds) → flee_caught at t=535 (the door batch
+  drained the fire cascade first; crime_status stays suspect at
+  55 < the arrest threshold 75; the purse stays on the thief's card
+  through the catch). Corpus 99→105; 604→610 green, ruff clean;
+  live beats 101→109 — the corpus moves to the phase-1 gate review
+  (ROADMAP §2). Detail: worklog iter-25 +
+  `docs/VALIDATION_SPEC.md` §7.1.
+
+- iter-24 · 2026-08-31 · validation beats — session 9, the day-2
+  return under burned-yard knowledge (iter-24-validation-beats-9;
+  seed 41, 13 accepted beats + 2 refused-and-caught probes, 39
+  supported claims, 0 canon violations) — the entry backfilled at
+  iter-25 (the iter-24 commit skipped its TASKS one-liner — the
+  iter-22 precedent): the day-1 theft-and-arson chain lands at
+  t=1452 (day-2 morning post-second-rotation); the day-1 canon
+  events all claimable by id+type under day 2 (canon never closes,
+  1440-tick gap); the burned yard's `destroyed` flag
+  canon-from-birth state-claimable; the arson-on-a-destroyed-yard
+  case is the pack-2 backlog's first live probe (no-ignition
+  success — distinct from session 8's spotless-street
+  `field_nonempty` failure); the door-outcome vocabulary completes
+  its three axes (`target.carries_flagged` — no flagged target);
+  the third watch_change hands `purse_missing` to the relief guard
+  (transfer_decay_steps=1 under day 2); the tune-2 boundary
+  re-pinned under day 2. Corpus 84→99; 589→604 green, ruff clean;
+  the phase-1 ≥100-beat exit criterion HIT (86→101 live beats); the
+  sandbox narrate-session recipe landed in the STATUS FAQ. Detail:
+  worklog iter-24 + `docs/VALIDATION_SPEC.md` §7.1.
+
 - iter-23 · 2026-08-31 · validation beats — session 8, the
   arson-after-theft chain (iter-23-validation-beats-8; seed 85, 12
   beats + 3 refused-and-caught probes, 49 supported claims, 0 canon
