@@ -66,6 +66,18 @@ level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
   + the tiny status-prefix generalization in the card renderer; whether
   the narrator SHOULD see NPC-interior suspicion at all is the owner's
   call (mode-A epistemics vs readable crime tension).
+- `tune-3` alarm-adjacent reachability (iter-21 session finding):
+  `transitions.fire.knowledge.alarm_adjacent` (`shouting_near_<loc>`)
+  is structurally unreachable in v0.1 — the token needs a knower
+  adjacent to the fire location at ignition, but NPC placement is
+  static (the rotation is a direct duty↔rest swap, playscript steps
+  are player-only, urgencies are all waits), so the street/backyard
+  are never occupied when the fire starts; the same-location half
+  (alarm + fear spike) fires fine and is corpus-pinned. Owner's
+  call: a v0.2 pack NPC-movement source (e.g. a transit route
+  through the street), leave as declared-but-dormant layer
+  vocabulary (a second pack may exercise it), or phase-5 spatial
+  material.
 
 ### Stress-test backlog (iter-11b resolutions; owner-gated)
 

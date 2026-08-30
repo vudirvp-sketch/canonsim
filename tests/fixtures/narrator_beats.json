@@ -1,5 +1,5 @@
 {
-  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 \u2014 the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit). Session 5 (iter-18, seed 20 \u2014 the arson half over the cards: the fire cascade (fire_started / fire_spread / smoke_rising / location_burned_out) is in canon but its observable surface splits by where the PC stands: the cause-actor never gets fire_in_<loc> (the exception clause in rules.json transitions.fire.knowledge.started), the same-location PC gets the spread/smoke/burnout records via saw/exact, and an absent NPC's fire_in_<loc> claim is token_absent. No alarm fires in the canonical solo-arson scenario (no occupants at the fire location) \u2014 the alarm_knowledge and the fear-spike markers are unclaimable, and an unmodeled fire prop (fire_intensity) reads as insufficient_data, never contradicted (the honest-verdict law, UAP). A canon event is claimable by id+type even when the PC's brief was silent about it (canon never closes).",
+  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 — the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit). Session 5 (iter-18, seed 20 — the arson half over the cards: the fire cascade (fire_started / fire_spread / smoke_rising / location_burned_out) is in canon but its observable surface splits by where the PC stands: the cause-actor never gets fire_in_<loc> (the exception clause in rules.json transitions.fire.knowledge.started), the same-location PC gets the spread/smoke/burnout records via saw/exact, and an absent NPC's fire_in_<loc> claim is token_absent. No alarm fires in the canonical solo-arson scenario (no occupants at the fire location) — the alarm_knowledge and the fear-spike markers are unclaimable, and an unmodeled fire prop (fire_intensity) reads as insufficient_data, never contradicted (the honest-verdict law, UAP). A canon event is claimable by id+type even when the PC's brief was silent about it (canon never closes). Session 6 (iter-21, seed 33 — the alarm-cascade half, the complement to session 5's solo-arson: an NPC present at the fire location) adds: alarm_raised fires with occupants present (raised_by the first occupant in pack order) with the fear spike (status.fear 40) claimable per NPC and rendered as the 'afraid' card marker; the alarm's knowledge audience has no exception clause, so the CAUSE actor holds fire_alarm_in_<loc> (heard/exact) while still blind to fire_in_<loc> (the started-knowledge exception — session 5's cause-actor law holds at a witnessed arson); the shouting-near boundary (an NPC one non-adjacent room away holds no fire tokens — both shouting_near_<loc> and fire_alarm_in_<loc> are token_absent; the adjacent token itself is structurally unreachable in v0.1: NPC placement is static, the rotation is a direct post swap, and playscript steps are player-only, so no knower is ever adjacent at ignition); flee under pursuit (flee_caught: the opposed check lost, the room holds {actor}_caught_fleeing, the player stays in place); the plain move out after a caught flee (no pursuit clause between actions — the door commits it); and the §3 watch-change handover live: watch_change + knowledge_transfer hand the whole fire record set to the relief guard (told, one fidelity step down) while the rotation carries the purse (KI#46's contract) and the alarm's fear decays at the beat (40 -> 36 by elapsed ticks, D-050) — the relief guard walks into the ashes carrying the fire secondhand but unafraid (the briefing transfers knowledge, not fear).",
   "cases": [
     {
       "name": "honest_supported",
@@ -997,7 +997,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "He thought about going back in for something else of Doren's, and the thinking went nowhere \u2014 the man was three walls and a doorway away, and even a fool knows a pocket cannot be picked through brick.",
+            "prose": "He thought about going back in for something else of Doren's, and the thinking went nowhere — the man was three walls and a doorway away, and even a fool knows a pocket cannot be picked through brick.",
             "proposal": {
               "expected_event_seq": "anchor",
               "intents": [
@@ -1180,7 +1180,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables \u2014 and by the door, already stood his round, the relief guard in person.",
+            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1216,7 +1216,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables \u2014 and by the door, already stood his round, the relief guard in person.",
+            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1386,7 +1386,7 @@
         },
         {
           "reply": {
-            "prose": "He crouched by the boards and worked a length of the dry kindling loose \u2014 slow, the way a man takes what nobody has counted.",
+            "prose": "He crouched by the boards and worked a length of the dry kindling loose — slow, the way a man takes what nobody has counted.",
             "proposal": {
               "expected_event_seq": "anchor",
               "intents": [
@@ -1409,7 +1409,7 @@
         },
         {
           "reply": {
-            "prose": "The kindling sat dry and light in his hand \u2014 the yard's one counted thing, counted by him now.",
+            "prose": "The kindling sat dry and light in his hand — the yard's one counted thing, counted by him now.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1468,7 +1468,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "Six hours had turned the room over. A new face stood the watch at the bar \u2014 the relief, settled and square \u2014 and Doren was gone from it, walked off to the guard room with the purse and the first sleep of the night. The drunkard kept his distance from the watchman's stool all the same; the serving maid moved slower, weary past the middle of her shift.",
+            "prose": "Six hours had turned the room over. A new face stood the watch at the bar — the relief, settled and square — and Doren was gone from it, walked off to the guard room with the purse and the first sleep of the night. The drunkard kept his distance from the watchman's stool all the same; the serving maid moved slower, weary past the middle of her shift.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1588,7 +1588,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The taproom took him in with the low, careless hum of a room before anything happens. A guard stood easy by the door \u2014 Doren, by the men's greeting \u2014 purse knotted at his belt where any fool could see it. The drunkard was three cups past caring, and the maid moved between tables like someone counting the hours till her shift ended.",
+            "prose": "The taproom took him in with the low, careless hum of a room before anything happens. A guard stood easy by the door — Doren, by the men's greeting — purse knotted at his belt where any fool could see it. The drunkard was three cups past caring, and the maid moved between tables like someone counting the hours till her shift ended.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1649,7 +1649,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "He watched the purse more than the man wearing it. A drunkard's flailing arm and a spilled mug would buy three seconds of a guard's attention \u2014 long enough for a hand at the wrong belt. He weighed the room once more, marked who faced him, and let his chair scrape back.",
+            "prose": "He watched the purse more than the man wearing it. A drunkard's flailing arm and a spilled mug would buy three seconds of a guard's attention — long enough for a hand at the wrong belt. He weighed the room once more, marked who faced him, and let his chair scrape back.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1705,7 +1705,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The drunkard's arm swept the mug wide \u2014 ale sheeted across the bar \u2014 and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut, and behind the guard the serving maid had gone very still: she had seen the whole reach, hand and purse and all.",
+            "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut, and behind the guard the serving maid had gone very still: she had seen the whole reach, hand and purse and all.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1754,7 +1754,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The drunkard's arm swept the mug wide \u2014 ale sheeted across the bar \u2014 and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut. The maid had turned at the commotion, but the bar and the spill stood between her and the reach \u2014 what she had was the noise, not the sight. Only Doren had seen the hand itself, and Doren's face was doing arithmetic.",
+            "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut. The maid had turned at the commotion, but the bar and the spill stood between her and the reach — what she had was the noise, not the sight. Only Doren had seen the hand itself, and Doren's face was doing arithmetic.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1813,7 +1813,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "A word of apology, a bowed head, the small theater of a man accepting a fool's scolding \u2014 and Doren, satisfied that the lesson was learned, went back to watching the door. That was the mistake. The second attempt asked for no distraction at all: patience, a half-step of shadow, and a hand that had already learned where the knot sat. The purse came free soft as a fish leaving a net.",
+            "prose": "A word of apology, a bowed head, the small theater of a man accepting a fool's scolding — and Doren, satisfied that the lesson was learned, went back to watching the door. That was the mistake. The second attempt asked for no distraction at all: patience, a half-step of shadow, and a hand that had already learned where the knot sat. The purse came free soft as a fish leaving a net.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1840,7 +1840,7 @@
         },
         {
           "reply": {
-            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind. Nothing in his stance had changed; the arithmetic of the missing weight had not started. Whatever alarm would come would come later \u2014 at a belt-check, a hand pat, a round's end \u2014 and by then the purse's new owner meant to be elsewhere.",
+            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind. Nothing in his stance had changed; the arithmetic of the missing weight had not started. Whatever alarm would come would come later — at a belt-check, a hand pat, a round's end — and by then the purse's new owner meant to be elsewhere.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -1895,7 +1895,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind \u2014 and then the arithmetic finished. His hand went to his hip, patted leather, and stopped. He knew: the purse was gone, and gone here, in his own taproom.",
+            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind — and then the arithmetic finished. His hand went to his hip, patted leather, and stopped. He knew: the purse was gone, and gone here, in his own taproom.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2022,7 +2022,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The drunkard leaned in with the confidence of a man holding important news. That commotion by the bar earlier \u2014 he'd heard it, heard it plain, and between the fourth cup and the fifth he delivered his version of it to his new best friend: something had gone wrong by the bar, somebody's night had turned. The traveler nodded along, pockets heavy, and began calculating the distance to the back door.",
+            "prose": "The drunkard leaned in with the confidence of a man holding important news. That commotion by the bar earlier — he'd heard it, heard it plain, and between the fourth cup and the fifth he delivered his version of it to his new best friend: something had gone wrong by the bar, somebody's night had turned. The traveler nodded along, pockets heavy, and began calculating the distance to the back door.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2096,7 +2096,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The back door gave onto the yard: bare ground, a stacked woodpile, a coil of rope gone stiff with rain, and the tavern's old back wall rising dry as tinder on the other side of it. He stood in the quiet with the purse a warm stone against his ribs \u2014 it had come with him, every step, no hand the wiser. Behind him, through the wall, the taproom's noise carried on without missing him. Ahead: the street, the dark, and a long head start.",
+            "prose": "The back door gave onto the yard: bare ground, a stacked woodpile, a coil of rope gone stiff with rain, and the tavern's old back wall rising dry as tinder on the other side of it. He stood in the quiet with the purse a warm stone against his ribs — it had come with him, every step, no hand the wiser. Behind him, through the wall, the taproom's noise carried on without missing him. Ahead: the street, the dark, and a long head start.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2394,7 +2394,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The watchman back in the taproom could not have seen the fire take the yard \u2014 he had stayed at his post through it.",
+            "prose": "The watchman back in the taproom could not have seen the fire take the yard — he had stayed at his post through it.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2488,7 +2488,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The watchman across the wall kept his steady temper \u2014 nothing had reached him to put him afraid.",
+            "prose": "The watchman across the wall kept his steady temper — nothing had reached him to put him afraid.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2536,7 +2536,7 @@
       "beats": [
         {
           "reply": {
-            "prose": "The fire roared high against the wall \u2014 higher than the eye could measure.",
+            "prose": "The fire roared high against the wall — higher than the eye could measure.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
@@ -2658,6 +2658,601 @@
         "status": "accepted",
         "notes_contains": [
           "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "alarm_fires_when_occupants_are_present",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The taproom took him in — low beams, a bar already busy, Doren at his post with the purse knotted at his belt. The drunkard was cups past caring, the maid counting the hours, the barkeep's eye on everything. An oil lamp sat close to hand at the bar's end. He had come in for money; what he chose next was something else entirely.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "npc_guard_01"
+                },
+                {
+                  "kind": "state",
+                  "entity": "oil_lamp_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "status.intoxication",
+                  "value": 50
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0000",
+                  "type": "move"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "pc_01_arrived"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "npc_drunk_01_present"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "arson",
+                  "actor": "pc_01",
+                  "target": "loc_tavern",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "It went up faster than any of them deserved. The flame took the bar's end where the lamp sat, ran the dry wall, and then the room was shouting — Doren's voice over all of it, an alarm that needed no bell. The barkeep dragged at whatever he could reach; the drunkard scrambled back from his table; the maid was already at the far wall. Nobody looked at the stranger by the door, and the stranger was already calculating the cost of being seen.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0001",
+                  "type": "arson"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0002",
+                  "type": "fire_started"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0003",
+                  "type": "alarm_raised"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_barkeep_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_maid_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "loc_tavern",
+                  "prop": "fire.bar",
+                  "value": "burning"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "figure_starting_fire"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_barkeep_01",
+                  "knows": "fire_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_maid_01",
+                  "knows": "fire_alarm_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_alarm_in_loc_tavern"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 12 supported"
+        ]
+      }
+    },
+    {
+      "name": "fear_markers_render_on_the_cards",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Fear ran the room: the guard's hand went to his belt, the barkeep backed off his own bar, the drunkard's cup went over, the maid was already at the wall — every face in the room turned the same pale shade at once.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_barkeep_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "status.fear",
+                  "value": 40
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_maid_01",
+                  "prop": "status.fear",
+                  "value": 40
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ],
+        "call_contains": "status=afraid"
+      }
+    },
+    {
+      "name": "the_alarm_is_heard_by_the_cause_actor",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He had heard the shouting begin — heard it plainly, the alarm going up around him — and he had seen the spread, the smoke, the collapse. But the first breath of the fire itself he never held as a fact he knew; it had been behind his own hand, and canon owes him no memory of it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_alarm_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_spreading_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "loc_tavern_burned_down"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 3 supported"
+        ]
+      }
+    },
+    {
+      "name": "cause_actor_blind_to_ignition_at_a_witnessed_arson",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He had heard the shouting begin — heard it plainly, the alarm going up around him — and of the fire's first breath itself he could have sworn he knew just where it caught.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_alarm_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_in_loc_tavern"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
+      }
+    },
+    {
+      "name": "shouting_near_never_crosses_to_the_guardroom",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Across the way, in the guard room, the relief man must have heard the shouting carried over the street — the alarm's echo surely reached him through the night air.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "shouting_near_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "fire_alarm_in_loc_tavern"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "shouting_near_loc_tavern",
+          "token_absent"
+        ]
+      }
+    },
+    {
+      "name": "caught_fleeing_the_burning_tavern",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The heat pushed him at last. He made for the door at a dead run — and Doren, afraid as any of them, was still a guard: a hand shot for his collar before the night air did.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "loc_tavern",
+                  "prop": "destroyed",
+                  "value": true
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "status.fear",
+                  "value": 40
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "flee",
+                  "actor": "pc_01",
+                  "target": "loc_street",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "The hand did not miss. Held at the door of a burning room, the night's arithmetic turned simple: caught, and caught in front of everyone still standing there.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0008",
+                  "type": "flee_caught"
+                },
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "pc_01_caught_fleeing"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_drunk_01",
+                  "knows": "pc_01_caught_fleeing"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
+    },
+    {
+      "name": "a_caught_man_walks_out",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "flee",
+          "target": "loc_street"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "But a caught man is not a held man, not in this world. When the grip loosened — smoke in everyone's eyes, ruin on everyone's mind — he simply walked out through the front door, unhurried as a paying customer, into the street.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "move",
+                  "actor": "pc_01",
+                  "target": "loc_street",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "The street received him cool and dark. Behind him the tavern's shell ticked and settled; ahead, the guard room's window kept its small light. Nobody followed — not yet.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_street"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0009",
+                  "type": "move"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "pc_01_left_toward_loc_street"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_alarm_in_loc_tavern"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
+    },
+    {
+      "name": "the_watch_change_hands_the_fire_over",
+      "seed": 33,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "arson",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "flee",
+          "target": "loc_street"
+        },
+        {
+          "intent": "move",
+          "target": "loc_street"
+        },
+        {
+          "intent": "wait",
+          "ticks": 360
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The change of watch came in the small hours, indifferent to ruin. Doren walked his fear to the guard room and handed the night over fact by fact — the stranger, the fire, the shout of alarm, the caught man, the man walking out — and the relief guard walked back to stand his post in the ashes of the Three Barrels, carrying all of it secondhand.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0010",
+                  "type": "watch_change"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0011",
+                  "type": "knowledge_transfer"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "position",
+                  "value": "loc_guardroom"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "position",
+                  "value": "loc_guardroom"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "status.fear",
+                  "value": 36
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "status.fear",
+                  "value": 0
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "fire_alarm_in_loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "figure_starting_fire"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "pc_01_caught_fleeing"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 10 supported"
         ]
       }
     }

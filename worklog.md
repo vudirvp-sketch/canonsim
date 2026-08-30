@@ -10,6 +10,30 @@
 > since iter-5).
 
 ---
+iter-21 · 2026-08-31 · validation beats — session 6, the alarm
+cascade (iter-21-validation-beats-6)
+- Live narrate session 6 (seed 33, arson in the crowded taproom,
+  12 beats + 2 refused-regen probes, 53 supported / 0 canon
+  violations): with witnesses present the cascade session 5 could
+  never fire now fires — alarm_raised (raised_by the first
+  occupant in pack order), the fear spike 40 claimable per NPC and
+  rendered as the `afraid` card marker, cause actor hears
+  fire_alarm_in_<loc> yet stays blind to fire_in_<loc> (session
+  5's law holds witnessed).
+- The §3 watch-change handover live: the rotation carries the
+  purse (KI#46) while knowledge_transfer hands the whole fire
+  record set to the relief guard (told, one fidelity step down) —
+  knowledge moves, fear does not (40→36 decay at the beat, D-050);
+  flee_caught and the plain walk-out after it pinned at the beat
+  level.
+- Finding → tune-3 backlog row: shouting_near_<loc> is structurally
+  unreachable in v0.1 (NPC placement static, the rotation a direct
+  post swap, playscript steps player-only) — the guardroom
+  refusal pair pins the boundary.
+- Corpus 51→59 (+8 seed-33 cases); 556→564 green, ruff clean.
+  4 files (fixture + the 3-doc sync set — the iter-18 scope);
+  bg-5 evicted per the cap; KI#47 deleted per AGENTS §5.
+---
 iter-20 · 2026-08-30 · universality pass — the transition + scene-line
 vocabularies become pack data (iter-20-universality, KI#48 + D-057)
 - core/transitions.py iterates rules.json transitions.<layer>.
@@ -145,16 +169,7 @@ iter-12 · 2026-08-30 · the mediator session loop — agent-in-the-loop (iter-1
   is the new format law), VALIDATION_SPEC §7.1, TASKS/STATUS/
   AGENT_NAVIGATION; KI#42 deleted per §5.
 - 453→476 green, ruff clean; iter-8h evicted per the cap.
----
-bg-5 · 2026-08-30 · owner-requested external-spec verdict (bg-5-spec-verdict)
-- Pasted behavioral-engine integration spec audited against the repo
-  + live-char-guide: every D-ID/INV citation resolves, no repo drift;
-  not integrated (renames of the MECW/st-1/st-2 vocabulary, fatigue
-  emulation re-rejected per ref-13 weakness (4) with INV-5 cited
-  inverted, AP-16 + figures invented with no owner).
-- Adoptions: backlog amendments only — Script Tax at the mediator
-  (st-4) + the repetition-counted promotion option (st-2). KI#39–41
-  deleted per AGENTS §5. 3 files; docs-only, D-022 counter = 3.
+(bg-5 deleted at iter-21 per the one-in/one-out cap; history in git.)
 ---
 iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
 - (deleted at iter-20 per the one-in/one-out cap; history in git.)

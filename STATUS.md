@@ -1,23 +1,27 @@
 # STATUS — canonsim
 
-Iteration: iter-20 (`iter-20-universality`, owner-directed from the
-iter-19 re-audit) · Phase: 1 · Date: 2026-08-30 · The universality
-pass: the transition-layer vocabulary (follow-up kinds, flags,
-values, the spreading `spot_state`, the spread `halt_flag`) and the
-brief scene-line vocabulary (`scene_line_fields`) moved from core
-code into pack data (D-057) — a second layer or pack declares its
-own words, zero engine edits. Tavern-pack behavior is
-byte-identical (the T1 golden fixture untouched, event stream
-unchanged); a synthetic `rot` layer (infested/condemned/
-stench/collapse — shares nothing with fire's vocabulary) drives the
-same engine in tests, and the director's threat sensor reads the
-declared `spot_state` set. `layout` landed as a location pack field
-rendered canon-from-birth on the scene line — no `initial_projection`
-seeding, because the gateway's canon_slot check reads BOTH prop
-sources (projection state + pack record): the iter-19 claim was
-factually wrong, recorded as KI#48. 547→556 green, ruff clean.
-17 files (two subsystems + the sync set — the iter-15 scope
-precedent; noted in worklog).
+Iteration: iter-21 (`iter-21-validation-beats-6`) · Phase: 1 · Date:
+2026-08-31 · The alarm-cascade half, the complement to session 5's
+solo-arson: live `narrate` session 6 (seed 33, arson in the crowded
+taproom, 12 beats + 2 refused-regen probes, 53 supported claims,
+0 canon violations). With witnesses present, the cascade the
+solo-arson could never fire now fires: `alarm_raised` (raised_by
+the first occupant in pack order), the fear spike (status.fear 40)
+claimable per NPC and rendered as the `afraid` card marker, and the
+cause actor hears the alarm (`fire_alarm_in_<loc>` — the alarm
+audience has no exception clause) while still blind to the ignition
+(`fire_in_<loc>` — session 5's cause-actor law holds witnessed).
+The §3 watch-change handover ran live: the rotation carries the
+purse (KI#46's contract) while `knowledge_transfer` hands the whole
+fire record set to the relief guard (told, one fidelity step down)
+— who walks into the ashes carrying the fire secondhand but
+unafraid (the briefing moves knowledge, not fear; 40→36 decay at
+the beat, D-050). Finding → `tune-3`: the alarm-adjacent
+`shouting_near_<loc>` token is structurally unreachable in v0.1
+(NPC placement static, the rotation a direct post swap, playscript
+steps player-only) — pinned by the guardroom refusal pair. Corpus
+51→59; 556→564 green, ruff clean. 4 files (fixture + the 3-doc
+sync set — the iter-18 scope precedent).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,14 +52,9 @@ precedent; noted in worklog).
   `exits` precedent); the real gap was scene-line rendering
   (promoted props only) · CLOSED iter-20 (phrases fixed in place;
   layout landed as pack data via `scene_line_fields`, D-057).
-- KI#47 · ref-9/ref-10 drift family: phantom lift-targets
-  (`sim/systems/*.py`, `core/runner.py`, `core/store.py`,
-  `content/packs/*.py`) + never-true "phase-0 uses square/fixed
-  grid" phrases in `docs/ref/` + `REFERENCES_DEEP.md` · CLOSED
-  iter-19 — 9 grid phrases fixed in place (phase-0 = pack-authored
-  location graph); lift-target vocabulary stanced in the FAQ below
-  (pre-D-028 precedent — plans superseded by D-037/D-023);
-  where-things-are owner: `docs/AGENT_NAVIGATION.md` §1.
+- (KI#47 deleted at iter-21 per AGENTS §5 — closed iter-19, two
+  iterations past; the grid-phrase fix detail lives in git +
+  worklog iter-19.)
 
 ## FAQ / Pitfalls
 
@@ -267,26 +266,27 @@ precedent; noted in worklog).
 
 ## Next step
 
-**iter-20 closed the universality pass: the transition layer and the
-scene line are pack-data-driven (D-057) — of the four bottlenecks
-the re-audit named, two are closed (transition kinds/states + the
-scene-line filter); the 12-resolver registry and the closed
-`core/intent.py` enums remain phase-6 territory (blueprint/phases.md
-§6 — declarative resolvers, never before the gate).** Session 5
-left the exit criterion at 51 live beats (target ≥100). Next, in
-order:
+**iter-21 closed the alarm-cascade half: the fire's observable
+surface is now pinned from both sides (solo-arson session 5 +
+witnessed-arson session 6 — alarm, fear markers, the cause-actor
+two-sidedness, the watch-change handover). Session 6 left the exit
+criterion at 63 live beats (target ≥100). Next, in order:
 
-1. **Validation beats, session 6** — volume: the multi-day session (a
-   second rotation, day-2 rumor telling at the market — lore + recall
-   under a long log) or the alarm-cascade half (an NPC present at the
-   fire location so `alarm_raised` fires + the fear markers + the
-   shouting-near knowledge for adjacent occupants). Tallies via the
-   `BEAT` summary lines.
-2. `tune-1` rest action (pack data; the owner's fatigue observation)
-   or `st-2` identity persistence per TASKS; `tune-2` (the
-   suspicion/crime-status observability candidate) waits for the
-   owner; `st-6` shrinks to the `travel` half, phase-5-gated (the
-   `layout` half landed iter-20).
+1. **Validation beats, session 7** — volume toward the ≥100-beat
+   exit: the multi-day session (a second rotation, day-2 recall
+   under a long log — the recall block's behavior past day 1;
+   honest expectation: the §3 "drunkard tells the market" leg is
+   likely unreachable live — the drunkard never leaves the tavern
+   and the market crowd is not a talk target, so probe and pin the
+   boundary rather than force the scene) or a fresh seed over the
+   theft half (the steal ladder under the presence machinery).
+   Tallies via the `BEAT` summary lines.
+2. `tune-1` rest action (pack data; the owner's fatigue
+   observation) or `st-2` identity persistence per TASKS; `tune-2`
+   (suspicion/crime-status observability) and `tune-3` (the
+   alarm-adjacent unreachability) wait for the owner; `st-6`
+   shrinks to the `travel` half, phase-5-gated (the `layout` half
+   landed iter-20).
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).
