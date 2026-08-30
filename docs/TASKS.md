@@ -15,68 +15,6 @@
 > (`docs/SPECS_BACKLOG.md`). INV-4 holds until the narrator-boundary
 > iteration explicitly opens it (AGENTS §8 owner checkpoint).
 
-### iter-7 · phase-1 intake — done
-
-DECISIONS collapsed 46→30 per D-034 (ID-preserving family merges);
-TASKS.md regained the "what next" ownership (the phase-1 plan lived
-only in STATUS "Next step" — drift); intake audit fixes KI#25/26/27.
-Detail: `worklog.md` iter-7 + `STATUS.md`.
-
-### iter-8 · BRIEF_SPEC + brief assembler — done
-
-`docs/BRIEF_SPEC.md` written (trigger fired; six-block pipeline, two-level
-budgets, eviction contract, voice-isolation law, just-in-time deferrals);
-`brief/assembler.py` — the deterministic assembler as pure functions of the
-log; `rules.json::brief` pack contract + `core/pack.py` lint. Detail:
-`worklog.md` iter-8 + `docs/BRIEF_SPEC.md`.
-
-### iter-9 · VALIDATION_SPEC + validator LLM-free half — done
-
-`docs/VALIDATION_SPEC.md` written (trigger fired; the closed proposal
-document, the honest-verdict law, ExpectedVersion OCC, the fact transaction,
-the ≤2-regens protocol + the call-budget reconciliation, golden-set plumbing)
-+ `brief/validator.py` (pure functions of (proposal, log, pack)) + the
-committed golden set `tests/fixtures/validation_golden.json`. Detail:
-`worklog.md` iter-9 + `docs/VALIDATION_SPEC.md`.
-
-### iter-10 · scene-ledger LLM-free half — done
-
-`brief/ledger.py` (entry shape, scene = PC-location interval, discrete
-lifecycle, structural pinning, the validation gateway — scope/canon/
-laundering/unique-slot/duplicate, contradiction retirement, scene-close
-bulk retirement, texture-OCC mirror, promotion marker) + the
-`scene_texture` 7th brief block (BRIEF_SPEC §3.3 window law: pinned-first
-+ newest-first, tombstones, ranking caps) + the committed golden delta
-fixture `tests/fixtures/texture_deltas.json` + pack lint (block budget,
-caps, unique_slots). The BRIEF_SPEC §9 atomic flip landed (§1/§2/§3/§5.2/
-§6/§7/§9 in one commit). Detail: `worklog.md` iter-10 + D-053.
-
-### iter-11 · texture promotion door — done
-
-The narrator boundary's LLM-free half (the owner authorized the AGENTS §8
-gate in-session): the intent door's texture path — a texture-capable
-action's pack `texture` block replaces the canon preconditions for
-intents carrying the mediator-resolved reference (core ledger-blind,
-D-054), a take-success IS the promotion (the slot's canon birth on the
-scope target), the `texture_noun` pack test, real `unique_slots`
-(`["hearth"]`), and the laundering + unique_slot golden pins (all 8
-refusal reasons covered). Detail: `worklog.md` iter-11 +
-`docs/INTENT_SCHEMA.md` §3.
-
-### iter-11a · post-iter-11 audit — done
-
-Owner-requested audit of iter-11 (the D-022 exception): every claim
-reproduced (443 green, ruff clean, fixtures byte-identical); 3 defects
-fixed (KI#39 chronicle broken prose on texture-take events — the
-conditional take templates + the `texture_slot` derived slot;
-KI#40 the unique-slot one-object claim now survives promotion;
-KI#41 canon-slot overlap now includes pack-modeled fields) + loud-contract
-hardening (target+texture mix, texture-capable check defender sources,
-the {texture_slot}-in-canon-templates lint mirror, texture
-failure_total branch consistency) + the doc-sync set (INTENT_SCHEMA §9,
-AGENT_NAVIGATION fixtures row, the missing TASKS ## Done line). 453 green.
-Detail: `worklog.md` iter-11a + `STATUS.md`.
-
 ### iter-12 · the mediator session loop — done (D-055)
 
 The owner's engine verdict (2026-08-30): no SoW, no llama.cpp now —
@@ -113,7 +51,27 @@ the beat level (pin, retire + establish, idempotent no-op). The corpus grew
 16 → 25 cases: every validator refusal reason is now pinned at the beat
 level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
-### iter-17 · validation beats — done (session 4)
+### iter-18 · validation beats — done (session 5, the arson half)
+
+Session 5, the arson-half session over the cards (seed 20, 10 beats,
+29 supported / 4 refused-and-caught / 1 unverifiable, **0 canon
+violations**): the fire cascade (fire_started / fire_spread /
+smoke_rising / location_burned_out) is in canon regardless of who
+stood where; the observable surface splits by location — the
+cause-actor never gets `fire_in_<loc>` (rules.json transitions.fire.
+knowledge.started `except: cause_actor` — token_absent on the PC's
+own ignition knowledge), the same-location PC gets the spread/smoke/
+burnout records via saw/exact, an absent NPC's `fire_in_<loc>` claim
+is token_absent (different location → no record), no alarm fires in
+the canonical solo-arson scenario (no occupants at the fire
+location → `fire_alarm_in_<loc>` and the fear markers stay unclaimable),
+an unmodeled `fire_intensity` prop reads `insufficient_data` (the
+honest-verdict law, UAP), and a canon event is claimable by id+type
+even when the PC's brief was silent about it (the validator checks
+the log, not the brief's perception). Corpus 41 → 51. Detail:
+`worklog.md` iter-18 + `docs/VALIDATION_SPEC.md` §7.1.
+
+### iter-17 · validation beats — done (session 4, crime cascade)
 
 Session 4, the crime-cascade session over the presence machinery (seed
 15, 10 beats, 32 supported / 2 refused-and-caught, 5 intents fed, **0
@@ -295,6 +253,25 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-18 · 2026-08-30 · validation beats — session 5, the arson half
+  over the cards (iter-18-validation-beats-5): the fire cascade
+  (fire_started / fire_spread / smoke_rising / location_burned_out)
+  is in canon regardless of who stood where; the observable surface
+  splits by location — cause-actor blind to ignition (token_absent on
+  `fire_in_<loc>`), absent NPCs cannot perceive fire, no alarm in the
+  canonical solo-arson scenario, an unmodeled `fire_intensity` prop
+  reads `insufficient_data` (UAP), and a canon event is claimable by
+  id+type even when the brief was silent. Corpus 41 → 51; KI#46
+  deleted per AGENTS §5. Detail: worklog iter-18 + VALIDATION_SPEC
+  §7.1.
+
+- iter-17 · 2026-08-30 · validation beats — session 4, crime cascade
+  (iter-17-validation-beats-4): the cascade's observable half reads
+  through the cards — witnesses, per-witness knowledge, the purse
+  carried across cards and through the flee; the suspicion half is
+  invisible through the brief (tune-2 backlog row, owner's call).
+  Corpus 32 → 41. Detail: worklog iter-17 + VALIDATION_SPEC §7.1.
 
 - iter-16 · 2026-08-30 · validation beats — session 3 (iter-16-
   validation-beats-3): the st-1 acceptance probes over the iter-15

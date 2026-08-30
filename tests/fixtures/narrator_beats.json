@@ -1,226 +1,471 @@
 {
-  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 — the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
+  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 \u2014 the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit). Session 5 (iter-18, seed 20 \u2014 the arson half over the cards: the fire cascade (fire_started / fire_spread / smoke_rising / location_burned_out) is in canon but its observable surface splits by where the PC stands: the cause-actor never gets fire_in_<loc> (the exception clause in rules.json transitions.fire.knowledge.started), the same-location PC gets the spread/smoke/burnout records via saw/exact, and an absent NPC's fire_in_<loc> claim is token_absent. No alarm fires in the canonical solo-arson scenario (no occupants at the fire location) \u2014 the alarm_knowledge and the fear-spike markers are unclaimable, and an unmodeled fire prop (fire_intensity) reads as insufficient_data, never contradicted (the honest-verdict law, UAP). A canon event is claimable by id+type even when the PC's brief was silent about it (canon never closes).",
   "cases": [
     {
       "name": "honest_supported",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "The taproom took the traveler in with the low, careless hum of a room before anything happens.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "event", "event_id": "ev_0000", "type": "move"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 2 supported"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "The taproom took the traveler in with the low, careless hum of a room before anything happens.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0000",
+                  "type": "move"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 2 supported"
+        ]
+      }
     },
     {
       "name": "unmodeled_prop_is_unverifiable_not_contradicted",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "He favored his left hand without thinking about it.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "handedness", "value": "left"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 1 unverifiable"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "He favored his left hand without thinking about it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "handedness",
+                  "value": "left"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 unverifiable"
+        ]
+      }
     },
     {
       "name": "forbidden_false_state",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: the traveler stood on the moonlit road.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_moon"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "value_mismatch"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: the traveler stood on the moonlit road.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_moon"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "value_mismatch"
+        ]
+      }
     },
     {
       "name": "forbidden_blind_knowledge",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: the barkeep had watched him pocket the candle.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_holds_the_candles"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "token_absent"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: the barkeep had watched him pocket the candle.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_barkeep_01",
+                  "knows": "pc_01_holds_the_candles"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
+      }
     },
     {
       "name": "forbidden_invented_entity",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: a bard in the corner laughed at it all.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_bard_99", "prop": "mood", "value": "jolly"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "unknown_entity"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: a bard in the corner laughed at it all.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_bard_99",
+                  "prop": "mood",
+                  "value": "jolly"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "unknown_entity"
+        ]
+      }
     },
     {
       "name": "forbidden_invented_event",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: the whole affair began with the great brawl.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_9999"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "unknown_event"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: the whole affair began with the great brawl.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_9999"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "unknown_event"
+        ]
+      }
     },
     {
       "name": "future_anchor_is_emitter_bug",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: a version of the world that does not exist yet.",
-          "proposal": {
-            "expected_event_seq": 99,
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["MALFORMED", "in the future"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: a version of the world that does not exist yet.",
+            "proposal": {
+              "expected_event_seq": 99,
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "MALFORMED",
+          "in the future"
+        ]
+      }
     },
     {
       "name": "texture_establish_rides_next_brief",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT texture: 1 established"],
+        "notes_contains": [
+          "BEAT texture: 1 established"
+        ],
         "call_contains": "candles = lit"
       }
     },
     {
       "name": "texture_take_promotes_to_canon",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
           }
-        }},
-        {"reply": {
-          "prose": "Before anyone thought to look, he palmed one of the candles from its holder.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "intents": [
-              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
-            ]
+        },
+        {
+          "reply": {
+            "prose": "Before anyone thought to look, he palmed one of the candles from its holder.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "take",
+                  "actor": "pc_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "texture": {
+                      "entry": "tex_0000",
+                      "scope": "scene:loc_tavern",
+                      "slot": "candles",
+                      "value": "lit"
+                    }
+                  }
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT intents: 1 fed"],
+        "notes_contains": [
+          "BEAT intents: 1 fed"
+        ],
         "last_event_type": "take"
       }
     },
     {
       "name": "laundering_promoted_texture_refused",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "He palmed one of the candles from its holder.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "intents": [
-              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "PROBE: the candles burned again as if never taken.",
-          "texture_delta": {
-            "source": "turn:2",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "The candles burned again."}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(laundering)"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "He palmed one of the candles from its holder.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "take",
+                  "actor": "pc_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "texture": {
+                      "entry": "tex_0000",
+                      "scope": "scene:loc_tavern",
+                      "slot": "candles",
+                      "value": "lit"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "PROBE: the candles burned again as if never taken.",
+            "texture_delta": {
+              "source": "turn:2",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "The candles burned again."
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "REFUSED",
+          "(laundering)"
+        ]
+      }
     },
     {
       "name": "stale_intact_rebases",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
+      ],
       "beats": [
         {
-          "between": [{"intent": "wait", "ticks": 60}],
+          "between": [
+            {
+              "intent": "wait",
+              "ticks": 60
+            }
+          ],
           "reply": {
             "prose": "A minute passed; the taproom did what taprooms do with time.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
-                {"kind": "event", "event_id": "ev_0001", "type": "look_around"},
-                {"kind": "knowledge", "who": "pc_01", "knows": "scene_loc_tavern"}
+                {
+                  "kind": "event",
+                  "event_id": "ev_0001",
+                  "type": "look_around"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "scene_loc_tavern"
+                }
               ]
             }
           }
@@ -228,22 +473,40 @@
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT rebased", "BEAT claims: 2 supported"]
+        "notes_contains": [
+          "BEAT rebased",
+          "BEAT claims: 2 supported"
+        ]
       }
     },
     {
       "name": "stale_broken_refuses_with_first_break",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
       "beats": [
         {
-          "between": [{"intent": "move", "target": "loc_backyard"}],
+          "between": [
+            {
+              "intent": "move",
+              "target": "loc_backyard"
+            }
+          ],
           "reply": {
             "prose": "PROBE: still inside the taproom, the traveler kept to his corner.",
             "proposal": {
               "expected_event_seq": "anchor",
               "claims": [
-                {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
               ]
             }
           }
@@ -251,79 +514,172 @@
       ],
       "expect": {
         "status": "regen",
-        "notes_contains": ["CONTRADICTED", "stale_broken", "cause: ev_0001"]
+        "notes_contains": [
+          "CONTRADICTED",
+          "stale_broken",
+          "cause: ev_0001"
+        ]
       }
     },
     {
       "name": "gateway_canon_slot_and_slot_conflict",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: a second hearth stood where none had been, and a door to the north had appeared.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "hearth", "value": "crackling", "surface": "A hearth crackled in the corner."},
-              {"scope": "scene:loc_tavern", "slot": "hearth", "value": "smoldering", "surface": "Another hearth smoldered near it."},
-              {"scope": "scene:loc_tavern", "slot": "exits", "value": "north", "surface": "A door stood to the north."}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {
-        "status": "regen",
-        "notes_contains": ["(slot_conflict)", "(canon_slot)"]
-      }
-    },
-    {
-      "name": "scene_mismatch_refused",
-      "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
       "beats": [
         {
-          "between": [{"intent": "move", "target": "loc_backyard"}],
           "reply": {
-            "prose": "PROBE: from the backyard, the narrator described the tavern's shadows.",
+            "prose": "PROBE: a second hearth stood where none had been, and a door to the north had appeared.",
             "texture_delta": {
               "source": "turn:1",
               "established": [
-                {"scope": "scene:loc_tavern", "slot": "shadows", "value": "long", "surface": "The shadows stretched long."}
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "hearth",
+                  "value": "crackling",
+                  "surface": "A hearth crackled in the corner."
+                },
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "hearth",
+                  "value": "smoldering",
+                  "surface": "Another hearth smoldered near it."
+                },
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "exits",
+                  "value": "north",
+                  "surface": "A door stood to the north."
+                }
               ]
             }
           }
         }
       ],
-      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(scene_mismatch)"]}
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "(slot_conflict)",
+          "(canon_slot)"
+        ]
+      }
+    },
+    {
+      "name": "scene_mismatch_refused",
+      "seed": 125,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "between": [
+            {
+              "intent": "move",
+              "target": "loc_backyard"
+            }
+          ],
+          "reply": {
+            "prose": "PROBE: from the backyard, the narrator described the tavern's shadows.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "shadows",
+                  "value": "long",
+                  "surface": "The shadows stretched long."
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "REFUSED",
+          "(scene_mismatch)"
+        ]
+      }
     },
     {
       "name": "withdrawals_are_notes_never_events",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
           }
-        }},
-        {"reply": {
-          "prose": "Whatever the guard might have wanted to take, he took nothing; whatever did not exist stayed untaken.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "intents": [
-              {"kind": "take", "actor": "npc_guard_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}},
-              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor", "fields": {"texture": {"entry": "tex_9999", "scope": "scene:loc_tavern", "slot": "candles", "value": "lit"}}}
-            ]
+        },
+        {
+          "reply": {
+            "prose": "Whatever the guard might have wanted to take, he took nothing; whatever did not exist stayed untaken.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "take",
+                  "actor": "npc_guard_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "texture": {
+                      "entry": "tex_0000",
+                      "scope": "scene:loc_tavern",
+                      "slot": "candles",
+                      "value": "lit"
+                    }
+                  }
+                },
+                {
+                  "kind": "take",
+                  "actor": "pc_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "texture": {
+                      "entry": "tex_9999",
+                      "scope": "scene:loc_tavern",
+                      "slot": "candles",
+                      "value": "lit"
+                    }
+                  }
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT intents: 0 fed, 2 withdrawn"],
+        "notes_contains": [
+          "BEAT intents: 0 fed, 2 withdrawn"
+        ],
         "log_unchanged": true,
         "call_contains": "WITHDRAWN intent take"
       }
@@ -331,378 +687,759 @@
     {
       "name": "malformed_outer_shape_degrades",
       "seed": 125,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {"prose": "x", "bogus": 1}}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["MALFORMED"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "x",
+            "bogus": 1
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "MALFORMED"
+        ]
+      }
     },
     {
       "name": "event_type_mismatch_refused",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: the whole affair had begun, he told himself, with a steal.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0000", "type": "steal"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "event_type_mismatch"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: the whole affair had begun, he told himself, with a steal.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0000",
+                  "type": "steal"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "event_type_mismatch"
+        ]
+      }
     },
     {
       "name": "cannot_know_items_never_hold_knowledge",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE: the purse itself, some said, could feel the road it traveled.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "knowledge", "who": "purse_01", "knows": "pc_01_holds_the_purse"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["CONTRADICTED", "cannot_know"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE: the purse itself, some said, could feel the road it traveled.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "purse_01",
+                  "knows": "pc_01_holds_the_purse"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "cannot_know"
+        ]
+      }
     },
     {
       "name": "stale_ref_after_scene_close",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
-          }
-        }},
-        {"between": [{"intent": "move", "target": "loc_backyard"}],
-         "reply": {
-          "prose": "PROBE: from the backyard he could still pin the taproom's candlelight.",
-          "texture_delta": {
-            "source": "turn:2",
-            "refs": [
-              {"scope": "scene:loc_tavern", "slot": "candles"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "regen", "notes_contains": ["REFUSED", "(stale_ref)"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "between": [
+            {
+              "intent": "move",
+              "target": "loc_backyard"
+            }
+          ],
+          "reply": {
+            "prose": "PROBE: from the backyard he could still pin the taproom's candlelight.",
+            "texture_delta": {
+              "source": "turn:2",
+              "refs": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "REFUSED",
+          "(stale_ref)"
+        ]
+      }
     },
     {
       "name": "in_scene_update_is_retire_establish_pair",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "The candles guttered low as the evening wore on.",
-          "texture_delta": {
-            "source": "turn:2",
-            "retired": [
-              {"scope": "scene:loc_tavern", "slot": "candles"}
-            ],
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "guttering", "surface": "The candles guttered low."}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 established, 1 retired"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "The candles guttered low as the evening wore on.",
+            "texture_delta": {
+              "source": "turn:2",
+              "retired": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles"
+                }
+              ],
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "guttering",
+                  "surface": "The candles guttered low."
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT texture: 1 established, 1 retired"
+        ]
+      }
     },
     {
       "name": "ref_pins_a_live_entry",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "He marked the candles; whatever else changed tonight, those stayed.",
-          "texture_delta": {
-            "source": "turn:2",
-            "refs": [
-              {"scope": "scene:loc_tavern", "slot": "candles"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 pinned"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "He marked the candles; whatever else changed tonight, those stayed.",
+            "texture_delta": {
+              "source": "turn:2",
+              "refs": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT texture: 1 pinned"
+        ]
+      }
     },
     {
       "name": "idempotent_reassertion_is_a_noop",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "A few candles still burned on the tables.",
-          "texture_delta": {
-            "source": "turn:1",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "A few candles still burned on the tables."}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "The candles burned on, no better and no worse than before.",
-          "texture_delta": {
-            "source": "turn:2",
-            "established": [
-              {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit", "surface": "The candles burned on, no better and no worse than before."}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT texture: 1 no-op"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "A few candles still burned on the tables.",
+            "texture_delta": {
+              "source": "turn:1",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "A few candles still burned on the tables."
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "The candles burned on, no better and no worse than before.",
+            "texture_delta": {
+              "source": "turn:2",
+              "established": [
+                {
+                  "scope": "scene:loc_tavern",
+                  "slot": "candles",
+                  "value": "lit",
+                  "surface": "The candles burned on, no better and no worse than before."
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT texture: 1 no-op"
+        ]
+      }
     },
     {
       "name": "door_rejected_intent_is_a_committed_fact",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_backyard"}],
-      "beats": [
-        {"reply": {
-          "prose": "He thought about going back in for something else of Doren's, and the thinking went nowhere — the man was three walls and a doorway away, and even a fool knows a pocket cannot be picked through brick.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "intents": [
-              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01", "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT intents: 1 fed"], "last_event_type": "intent_rejected"}
+      "beats": [
+        {
+          "reply": {
+            "prose": "He thought about going back in for something else of Doren's, and the thinking went nowhere \u2014 the man was three walls and a doorway away, and even a fool knows a pocket cannot be picked through brick.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "steal",
+                  "actor": "pc_01",
+                  "target": "npc_guard_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "method": "distraction"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT intents: 1 fed"
+        ],
+        "last_event_type": "intent_rejected"
+      }
     },
     {
       "name": "stale_intact_intent_rebases",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"between": [{"intent": "wait", "ticks": 60}],
-         "reply": {
-          "prose": "There was nothing left for him at the bar; he made for the street door.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
-            ],
-            "intents": [
-              {"kind": "move", "actor": "pc_01", "target": "loc_street", "based_on_event_seq": "anchor", "fields": {}}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT rebased", "BEAT intents: 1 fed"], "last_event_type": "move"}
+      "beats": [
+        {
+          "between": [
+            {
+              "intent": "wait",
+              "ticks": 60
+            }
+          ],
+          "reply": {
+            "prose": "There was nothing left for him at the bar; he made for the street door.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "move",
+                  "actor": "pc_01",
+                  "target": "loc_street",
+                  "based_on_event_seq": "anchor",
+                  "fields": {}
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT rebased",
+          "BEAT intents: 1 fed"
+        ],
+        "last_event_type": "move"
+      }
     },
     {
       "name": "regen_exhaustion_falls_dry",
       "seed": 8,
-      "setup": [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
-      "beats": [
-        {"reply": {
-          "prose": "PROBE 1: the traveler had never left the street outside.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_street"}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "PROBE 2: the barkeep had watched him pocket the candle.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_holds_the_candles"}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "PROBE 3: a night watchman named Aldric stood beside him and had seen everything.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_watchman_aldric", "prop": "mood", "value": "suspicious"}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "look_around"
+        }
       ],
-      "expect": {"status": "dry"}
+      "beats": [
+        {
+          "reply": {
+            "prose": "PROBE 1: the traveler had never left the street outside.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_street"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "PROBE 2: the barkeep had watched him pocket the candle.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_barkeep_01",
+                  "knows": "pc_01_holds_the_candles"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "PROBE 3: a night watchman named Aldric stood beside him and had seen everything.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_watchman_aldric",
+                  "prop": "mood",
+                  "value": "suspicious"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "dry"
+      }
     },
     {
       "name": "quiet_beat_names_the_room_from_the_cards",
       "seed": 7,
       "setup": [],
       "beats": [
-        {"reply": {
-          "prose": "The street lay open and empty in front of the tavern, the salt road running off into the dark. Nobody stood out here with him; the whole night was his alone.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_street"}
-            ]
+        {
+          "reply": {
+            "prose": "The street lay open and empty in front of the tavern, the salt road running off into the dark. Nobody stood out here with him; the whole night was his alone.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_street"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 1 supported"]}
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
     },
     {
       "name": "absent_entity_presence_claim_refused",
       "seed": 7,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"}
-            ]
+        {
+          "reply": {
+            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables \u2014 and by the door, already stood his round, the relief guard in person.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "regen",
-        "notes_contains": ["CONTRADICTED", "value_mismatch", "npc_guard_02"]
+        "notes_contains": [
+          "CONTRADICTED",
+          "value_mismatch",
+          "npc_guard_02"
+        ]
       }
     },
     {
       "name": "tavern_cards_named_with_sighting_and_pair",
       "seed": 7,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
-      "beats": [
-        {"reply": {
-          "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables — and by the door, already stood his round, the relief guard in person.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"}
-            ]
-          }
-        }},
-        {"reply": {
-          "prose": "The taproom took him in with its low, careless hum. Doren stood at the bar, purse at his belt; the barkeep kept his club close under the counter; the drunkard lolled merry and careful, well clear of the watch; the serving maid threaded the tables. The oil lamp burned on its shelf, and one mug of ale waited on the wood.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_guard_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_drunk_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "npc_guard_01_present"},
-              {"kind": "state", "entity": "npc_drunk_01", "prop": "pair.npc_guard_01.fear", "value": 40}
-            ]
-          }
-        }}
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 4 supported"]}
+      "beats": [
+        {
+          "reply": {
+            "prose": "The taproom gathered itself around the watch: Doren at the bar with his purse, the barkeep in the shadow of his counter, the drunkard merry in his corner, the serving maid threading the tables \u2014 and by the door, already stood his round, the relief guard in person.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "reply": {
+            "prose": "The taproom took him in with its low, careless hum. Doren stood at the bar, purse at his belt; the barkeep kept his club close under the counter; the drunkard lolled merry and careful, well clear of the watch; the serving maid threaded the tables. The oil lamp burned on its shelf, and one mug of ale waited on the wood.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "npc_guard_01_present"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "pair.npc_guard_01.fear",
+                  "value": 40
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
     },
     {
       "name": "scene_change_cards_follow_the_pc",
       "seed": 7,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "move", "target": "loc_backyard"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "state", "entity": "rope_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
-            ]
-          },
-          "texture_delta": {
-            "source": "turn:3",
-            "established": [
-              {"scope": "scene:loc_backyard", "slot": "kindling", "value": "dry",
-               "surface": "A stack of dry kindling lay against the boards."}
-            ]
+        {
+          "reply": {
+            "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "state",
+                  "entity": "rope_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "rope_01_present"
+                }
+              ]
+            },
+            "texture_delta": {
+              "source": "turn:3",
+              "established": [
+                {
+                  "scope": "scene:loc_backyard",
+                  "slot": "kindling",
+                  "value": "dry",
+                  "surface": "A stack of dry kindling lay against the boards."
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 3 supported", "BEAT texture: 1 established"]
+        "notes_contains": [
+          "BEAT claims: 3 supported",
+          "BEAT texture: 1 established"
+        ]
       }
     },
     {
       "name": "texture_take_promotes_a_card_scene_line",
       "seed": 7,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "move", "target": "loc_backyard"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "state", "entity": "rope_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
-            ]
-          },
-          "texture_delta": {
-            "source": "turn:3",
-            "established": [
-              {"scope": "scene:loc_backyard", "slot": "kindling", "value": "dry",
-               "surface": "A stack of dry kindling lay against the boards."}
-            ]
+        {
+          "reply": {
+            "prose": "Out back the night thinned to quiet. The yard held nothing but the coiled rope by the wall and a stack of dry kindling laid against the boards; the tavern's noise went on behind the door without him.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "state",
+                  "entity": "rope_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "rope_01_present"
+                }
+              ]
+            },
+            "texture_delta": {
+              "source": "turn:3",
+              "established": [
+                {
+                  "scope": "scene:loc_backyard",
+                  "slot": "kindling",
+                  "value": "dry",
+                  "surface": "A stack of dry kindling lay against the boards."
+                }
+              ]
+            }
           }
-        }},
-        {"reply": {
-          "prose": "He crouched by the boards and worked a length of the dry kindling loose — slow, the way a man takes what nobody has counted.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "intents": [
-              {"kind": "take", "actor": "pc_01", "based_on_event_seq": "anchor",
-               "fields": {"texture": {
-                 "entry": "tex_0000", "scope": "scene:loc_backyard",
-                 "slot": "kindling", "value": "dry"}}}
-            ]
+        },
+        {
+          "reply": {
+            "prose": "He crouched by the boards and worked a length of the dry kindling loose \u2014 slow, the way a man takes what nobody has counted.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "intents": [
+                {
+                  "kind": "take",
+                  "actor": "pc_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "texture": {
+                      "entry": "tex_0000",
+                      "scope": "scene:loc_backyard",
+                      "slot": "kindling",
+                      "value": "dry"
+                    }
+                  }
+                }
+              ]
+            }
           }
-        }},
-        {"reply": {
-          "prose": "The kindling sat dry and light in his hand — the yard's one counted thing, counted by him now.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "state", "entity": "loc_backyard", "prop": "kindling", "value": "dry"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "pc_01_holds_the_kindling"}
-            ]
+        },
+        {
+          "reply": {
+            "prose": "The kindling sat dry and light in his hand \u2014 the yard's one counted thing, counted by him now.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "kindling",
+                  "value": "dry"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "pc_01_holds_the_kindling"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 3 supported"],
+        "notes_contains": [
+          "BEAT claims: 3 supported"
+        ],
         "last_event_type": "take",
         "call_contains": "- scene loc_backyard (the backyard) kindling=dry"
       }
@@ -711,311 +1448,1217 @@
       "name": "post_rotation_cards_track_the_watch",
       "seed": 7,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "move", "target": "loc_backyard"},
-        {"intent": "wait", "ticks": 360},
-        {"intent": "move", "target": "loc_tavern"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "wait",
+          "ticks": 360
+        },
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "Six hours had turned the room over. A new face stood the watch at the bar — the relief, settled and square — and Doren was gone from it, walked off to the guard room with the purse and the first sleep of the night. The drunkard kept his distance from the watchman's stool all the same; the serving maid moved slower, weary past the middle of her shift.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_guard_01", "prop": "position", "value": "loc_guardroom"},
-              {"kind": "state", "entity": "npc_maid_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_drunk_01", "prop": "pair.npc_guard_02.fear", "value": 40}
-            ]
+        {
+          "reply": {
+            "prose": "Six hours had turned the room over. A new face stood the watch at the bar \u2014 the relief, settled and square \u2014 and Doren was gone from it, walked off to the guard room with the purse and the first sleep of the night. The drunkard kept his distance from the watchman's stool all the same; the serving maid moved slower, weary past the middle of her shift.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "position",
+                  "value": "loc_guardroom"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_maid_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "pair.npc_guard_02.fear",
+                  "value": 40
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 3 supported, 1 unverifiable"]
+        "notes_contains": [
+          "BEAT claims: 3 supported, 1 unverifiable"
+        ]
       }
     },
     {
       "name": "quiet_beat_cards_persist_over_time",
       "seed": 7,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "move", "target": "loc_backyard"},
-        {"intent": "wait", "ticks": 360},
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "wait", "ticks": 360}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "wait",
+          "ticks": 360
+        },
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "wait",
+          "ticks": 360
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The evening settled without event. The relief kept his post, the barkeep his corner, the drunkard his distance, the maid her rounds; nothing in the room asked to be remembered.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "npc_guard_02", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_barkeep_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_maid_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "npc_drunk_01", "prop": "position", "value": "loc_tavern"}
-            ]
+        {
+          "reply": {
+            "prose": "The evening settled without event. The relief kept his post, the barkeep his corner, the drunkard his distance, the maid her rounds; nothing in the room asked to be remembered.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_02",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_barkeep_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_maid_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
-      "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 4 supported"]}
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
     },
     {
       "name": "cards_show_witnesses_and_the_carried_purse",
       "seed": 15,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "The taproom took him in with the low, careless hum of a room before anything happens. A guard stood easy by the door — Doren, by the men's greeting — purse knotted at his belt where any fool could see it. The drunkard was three cups past caring, and the maid moved between tables like someone counting the hours till her shift ended.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"},
-              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "npc_guard_01"},
-              {"kind": "state", "entity": "npc_drunk_01", "prop": "status.intoxication", "value": 50},
-              {"kind": "event", "event_id": "ev_0000", "type": "move"},
-              {"kind": "knowledge", "who": "npc_guard_01", "knows": "pc_01_arrived"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "npc_drunk_01_present"}
-            ]
+        {
+          "reply": {
+            "prose": "The taproom took him in with the low, careless hum of a room before anything happens. A guard stood easy by the door \u2014 Doren, by the men's greeting \u2014 purse knotted at his belt where any fool could see it. The drunkard was three cups past caring, and the maid moved between tables like someone counting the hours till her shift ended.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "npc_guard_01"
+                },
+                {
+                  "kind": "state",
+                  "entity": "npc_drunk_01",
+                  "prop": "status.intoxication",
+                  "value": 50
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0000",
+                  "type": "move"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "pc_01_arrived"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "npc_drunk_01_present"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 6 supported"]
+        "notes_contains": [
+          "BEAT claims: 6 supported"
+        ]
       }
     },
     {
       "name": "crime_intent_feeds_the_door",
       "seed": 15,
-      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
       "beats": [
-        {"reply": {
-          "prose": "He watched the purse more than the man wearing it. A drunkard's flailing arm and a spilled mug would buy three seconds of a guard's attention — long enough for a hand at the wrong belt. He weighed the room once more, marked who faced him, and let his chair scrape back.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "knowledge", "who": "pc_01", "knows": "purse_01_present"},
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
-            ],
-            "intents": [
-              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01",
-               "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
-            ]
+        {
+          "reply": {
+            "prose": "He watched the purse more than the man wearing it. A drunkard's flailing arm and a spilled mug would buy three seconds of a guard's attention \u2014 long enough for a hand at the wrong belt. He weighed the room once more, marked who faced him, and let his chair scrape back.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "purse_01_present"
+                },
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "steal",
+                  "actor": "pc_01",
+                  "target": "npc_guard_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "method": "distraction"
+                  }
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 2 supported", "BEAT intents: 1 fed, 0 withdrawn"]
+        "notes_contains": [
+          "BEAT claims: 2 supported",
+          "BEAT intents: 1 fed, 0 withdrawn"
+        ]
       }
     },
     {
       "name": "blind_witness_knowledge_refused",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut, and behind the guard the serving maid had gone very still: she had seen the whole reach, hand and purse and all.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0001", "type": "pickpocket_failed"},
-              {"kind": "knowledge", "who": "npc_guard_01", "knows": "figure_reaching_for_purse"},
-              {"kind": "knowledge", "who": "npc_maid_01", "knows": "figure_reaching_for_purse"}
-            ]
+        {
+          "reply": {
+            "prose": "The drunkard's arm swept the mug wide \u2014 ale sheeted across the bar \u2014 and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut, and behind the guard the serving maid had gone very still: she had seen the whole reach, hand and purse and all.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0001",
+                  "type": "pickpocket_failed"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "figure_reaching_for_purse"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_maid_01",
+                  "knows": "figure_reaching_for_purse"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "regen",
-        "notes_contains": ["CONTRADICTED", "token_absent"]
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
       }
     },
     {
       "name": "cascade_claims_supported_after_correction",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut. The maid had turned at the commotion, but the bar and the spill stood between her and the reach — what she had was the noise, not the sight. Only Doren had seen the hand itself, and Doren's face was doing arithmetic.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0001", "type": "pickpocket_failed"},
-              {"kind": "event", "event_id": "ev_0002", "type": "suspicion_changed"},
-              {"kind": "state", "entity": "pc_01", "prop": "crime_status", "value": "suspect"},
-              {"kind": "knowledge", "who": "npc_guard_01", "knows": "figure_reaching_for_purse"},
-              {"kind": "knowledge", "who": "npc_maid_01", "knows": "noise_by_the_bar"}
-            ]
+        {
+          "reply": {
+            "prose": "The drunkard's arm swept the mug wide \u2014 ale sheeted across the bar \u2014 and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut. The maid had turned at the commotion, but the bar and the spill stood between her and the reach \u2014 what she had was the noise, not the sight. Only Doren had seen the hand itself, and Doren's face was doing arithmetic.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0001",
+                  "type": "pickpocket_failed"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0002",
+                  "type": "suspicion_changed"
+                },
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "crime_status",
+                  "value": "suspect"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "figure_reaching_for_purse"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_maid_01",
+                  "knows": "noise_by_the_bar"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 5 supported"]
+        "notes_contains": [
+          "BEAT claims: 5 supported"
+        ]
       }
     },
     {
       "name": "second_steal_moves_the_carried_purse",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "A word of apology, a bowed head, the small theater of a man accepting a fool's scolding — and Doren, satisfied that the lesson was learned, went back to watching the door. That was the mistake. The second attempt asked for no distraction at all: patience, a half-step of shadow, and a hand that had already learned where the knot sat. The purse came free soft as a fish leaving a net.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "npc_guard_01"}
-            ],
-            "intents": [
-              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01",
-               "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
-            ]
+        {
+          "reply": {
+            "prose": "A word of apology, a bowed head, the small theater of a man accepting a fool's scolding \u2014 and Doren, satisfied that the lesson was learned, went back to watching the door. That was the mistake. The second attempt asked for no distraction at all: patience, a half-step of shadow, and a hand that had already learned where the knot sat. The purse came free soft as a fish leaving a net.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "npc_guard_01"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "steal",
+                  "actor": "pc_01",
+                  "target": "npc_guard_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "method": "distraction"
+                  }
+                }
+              ]
+            }
           }
-        }},
-        {"reply": {
-          "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind. Nothing in his stance had changed; the arithmetic of the missing weight had not started. Whatever alarm would come would come later — at a belt-check, a hand pat, a round's end — and by then the purse's new owner meant to be elsewhere.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0006", "type": "steal"},
-              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
-              {"kind": "state", "entity": "pc_01", "prop": "crime_status", "value": "suspect"}
-            ]
+        },
+        {
+          "reply": {
+            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind. Nothing in his stance had changed; the arithmetic of the missing weight had not started. Whatever alarm would come would come later \u2014 at a belt-check, a hand pat, a round's end \u2014 and by then the purse's new owner meant to be elsewhere.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0006",
+                  "type": "steal"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "pc_01"
+                },
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "crime_status",
+                  "value": "suspect"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 3 supported"]
+        "notes_contains": [
+          "BEAT claims: 3 supported"
+        ]
       }
     },
     {
       "name": "uninferred_missing_purse_refused",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind — and then the arithmetic finished. His hand went to his hip, patted leather, and stopped. He knew: the purse was gone, and gone here, in his own taproom.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0006", "type": "steal"},
-              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
-              {"kind": "knowledge", "who": "npc_guard_01", "knows": "purse_missing"}
-            ]
+        {
+          "reply": {
+            "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind \u2014 and then the arithmetic finished. His hand went to his hip, patted leather, and stopped. He knew: the purse was gone, and gone here, in his own taproom.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0006",
+                  "type": "steal"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "pc_01"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "purse_missing"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "regen",
-        "notes_contains": ["CONTRADICTED", "purse_missing", "token_absent"]
+        "notes_contains": [
+          "CONTRADICTED",
+          "purse_missing",
+          "token_absent"
+        ]
       }
     },
     {
       "name": "noticed_reach_witnesses_supported",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "take", "target": "oil_lamp_01"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "Casual was not enough. The barkeep's rag stopped mid-wipe; the maid's tray dipped; the drunkard, three cups deep, tracked the hand with the gravity of a judge. Every soul in the taproom had marked the reach for the lamp, and the lamp stayed where it was. He smiled the smile of a man who had only meant to move it away from the flame, and stepped back from the shelf with empty hands and a lighter coat than anyone knew.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0007", "type": "take_failed"},
-              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_reaching_for_oil_lamp_01"},
-              {"kind": "knowledge", "who": "npc_drunk_01", "knows": "pc_01_reaching_for_oil_lamp_01"},
-              {"kind": "state", "entity": "oil_lamp_01", "prop": "position", "value": "loc_tavern"}
-            ]
+        {
+          "reply": {
+            "prose": "Casual was not enough. The barkeep's rag stopped mid-wipe; the maid's tray dipped; the drunkard, three cups deep, tracked the hand with the gravity of a judge. Every soul in the taproom had marked the reach for the lamp, and the lamp stayed where it was. He smiled the smile of a man who had only meant to move it away from the flame, and stepped back from the shelf with empty hands and a lighter coat than anyone knew.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0007",
+                  "type": "take_failed"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_barkeep_01",
+                  "knows": "pc_01_reaching_for_oil_lamp_01"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "npc_drunk_01",
+                  "knows": "pc_01_reaching_for_oil_lamp_01"
+                },
+                {
+                  "kind": "state",
+                  "entity": "oil_lamp_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 4 supported"]
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
       }
     },
     {
       "name": "rumor_told_transfers_the_noise",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "take", "target": "oil_lamp_01"},
-        {"intent": "talk", "target": "npc_drunk_01"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "talk",
+          "target": "npc_drunk_01"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The drunkard leaned in with the confidence of a man holding important news. That commotion by the bar earlier — he'd heard it, heard it plain, and between the fourth cup and the fifth he delivered his version of it to his new best friend: something had gone wrong by the bar, somebody's night had turned. The traveler nodded along, pockets heavy, and began calculating the distance to the back door.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0009", "type": "rumor_told"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "noise_by_the_bar"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "conversation_with_npc_drunk_01"}
-            ],
-            "intents": [
-              {"kind": "move", "actor": "pc_01", "target": "loc_backyard",
-               "based_on_event_seq": "anchor"}
-            ]
+        {
+          "reply": {
+            "prose": "The drunkard leaned in with the confidence of a man holding important news. That commotion by the bar earlier \u2014 he'd heard it, heard it plain, and between the fourth cup and the fifth he delivered his version of it to his new best friend: something had gone wrong by the bar, somebody's night had turned. The traveler nodded along, pockets heavy, and began calculating the distance to the back door.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0009",
+                  "type": "rumor_told"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "noise_by_the_bar"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "conversation_with_npc_drunk_01"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "move",
+                  "actor": "pc_01",
+                  "target": "loc_backyard",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 3 supported", "BEAT intents: 1 fed, 0 withdrawn"]
+        "notes_contains": [
+          "BEAT claims: 3 supported",
+          "BEAT intents: 1 fed, 0 withdrawn"
+        ]
       }
     },
     {
       "name": "carried_purse_rides_the_flee",
       "seed": 15,
       "setup": [
-        {"intent": "move", "target": "loc_tavern"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-        {"intent": "take", "target": "oil_lamp_01"},
-        {"intent": "talk", "target": "npc_drunk_01"},
-        {"intent": "move", "target": "loc_backyard"}
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "talk",
+          "target": "npc_drunk_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        }
       ],
       "beats": [
-        {"reply": {
-          "prose": "The back door gave onto the yard: bare ground, a stacked woodpile, a coil of rope gone stiff with rain, and the tavern's old back wall rising dry as tinder on the other side of it. He stood in the quiet with the purse a warm stone against his ribs — it had come with him, every step, no hand the wiser. Behind him, through the wall, the taproom's noise carried on without missing him. Ahead: the street, the dark, and a long head start.",
-          "proposal": {
-            "expected_event_seq": "anchor",
-            "claims": [
-              {"kind": "event", "event_id": "ev_0010", "type": "move"},
-              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
-              {"kind": "state", "entity": "purse_01", "prop": "position", "value": "loc_backyard"},
-              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
-            ]
+        {
+          "reply": {
+            "prose": "The back door gave onto the yard: bare ground, a stacked woodpile, a coil of rope gone stiff with rain, and the tavern's old back wall rising dry as tinder on the other side of it. He stood in the quiet with the purse a warm stone against his ribs \u2014 it had come with him, every step, no hand the wiser. Behind him, through the wall, the taproom's noise carried on without missing him. Ahead: the street, the dark, and a long head start.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0010",
+                  "type": "move"
+                },
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "carrier",
+                  "value": "pc_01"
+                },
+                {
+                  "kind": "state",
+                  "entity": "purse_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "rope_01_present"
+                }
+              ]
+            }
           }
-        }}
+        }
       ],
       "expect": {
         "status": "accepted",
-        "notes_contains": ["BEAT claims: 5 supported"]
+        "notes_contains": [
+          "BEAT claims: 5 supported"
+        ]
+      }
+    },
+    {
+      "name": "arson_cascade_events_in_canon",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The lamp shattered against the back wall; the fire took the dry wood and the stacked kindling in its stride. Smoke climbed before long, and by the time the yard had burned through, the heat had gone out of it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0004",
+                  "type": "fire_started"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0005",
+                  "type": "fire_spread"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0006",
+                  "type": "smoke_rising"
+                },
+                {
+                  "kind": "event",
+                  "event_id": "ev_0007",
+                  "type": "location_burned_out"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
+    },
+    {
+      "name": "fire_state_claimable_post_arson",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The back wall was burning through its dry timbers and the woodpile had caught the second wave of it; the yard sat under a low haze of smoke, the place burnt hollow.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "fire.back_wall",
+                  "value": "burning"
+                },
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "fire.woodpile",
+                  "value": "burning"
+                },
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "smoke",
+                  "value": true
+                },
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "destroyed",
+                  "value": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 4 supported"
+        ]
+      }
+    },
+    {
+      "name": "player_perceives_spread_and_smoke",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He saw it take the woodpile, watched the smoke thicken over the wall, and stood back when the structure gave in.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_spreading_in_loc_backyard"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "smoke_in_loc_backyard"
+                },
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "loc_backyard_burned_down"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 3 supported"
+        ]
+      }
+    },
+    {
+      "name": "cause_actor_blind_to_ignition",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He had set the fire himself; he could not honestly claim to have witnessed its first spark as a stranger would have.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_in_loc_backyard"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
+      }
+    },
+    {
+      "name": "absent_npc_cannot_perceive_fire",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The watchman back in the taproom could not have seen the fire take the yard \u2014 he had stayed at his post through it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_01",
+                  "knows": "fire_in_loc_backyard"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
+      }
+    },
+    {
+      "name": "alarm_knowledge_never_created",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The yard had been empty save for him; no alarm had rung out across it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_alarm_in_loc_backyard"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ]
+      }
+    },
+    {
+      "name": "no_fear_without_alarm",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The watchman across the wall kept his steady temper \u2014 nothing had reached him to put him afraid.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "status.fear",
+                  "value": 40
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "value_mismatch"
+        ]
+      }
+    },
+    {
+      "name": "unmodeled_fire_prop_is_unverifiable",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The fire roared high against the wall \u2014 higher than the eye could measure.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "fire_intensity",
+                  "value": "high"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 unverifiable"
+        ]
+      }
+    },
+    {
+      "name": "oil_lamp_broken_in_yard",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The lamp lay where it had struck the wall, busted open and cold to the matter of carrying.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "oil_lamp_01",
+                  "prop": "condition",
+                  "value": "broken"
+                },
+                {
+                  "kind": "state",
+                  "entity": "oil_lamp_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 2 supported"
+        ]
+      }
+    },
+    {
+      "name": "canon_event_claimable_even_when_unperceived",
+      "seed": 20,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Back inside, the taproom carried on as though nothing had happened across the yard; the fire, by every account that reached him there, had taken its course.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "event_id": "ev_0006",
+                  "type": "fire_spread"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
       }
     }
   ]

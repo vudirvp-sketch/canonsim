@@ -10,6 +10,20 @@
 > since iter-5).
 
 ---
+iter-18 · 2026-08-30 · validation beats — session 5, the arson half
+over the cards (iter-18-validation-beats-5)
+- Live narrate session 5 (seed 20, 10 beats, 29 supported / 4
+  refused-and-caught / 1 unverifiable, 0 canon violations): the fire
+  cascade is in canon regardless of who stood where; the observable
+  surface splits by location — cause-actor blind to ignition
+  (token_absent on fire_in_<loc>), absent NPCs cannot perceive fire,
+  no alarm in the canonical solo-arson scenario, an unmodeled
+  fire_intensity prop reads insufficient_data (UAP), and a canon
+  event is claimable by id+type even when the brief was silent.
+- Corpus 41 → 51 (+10 arson-half cases); 537 → 547 green, ruff clean.
+  4 files (fixture + the 3-doc sync set); KI#46 deleted per AGENTS §5
+  (closed iter-16, >2 iterations past); iter-11a evicted per cap.
+---
 iter-17 · 2026-08-30 · validation beats — session 4, the crime
 cascade over the presence machinery (iter-17-validation-beats-4)
 - Live narrate session 4 (seed 15, 10 beats, 32 supported /
@@ -128,16 +142,7 @@ iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter
   6 files; no code changes.
 ---
 iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
-- KI#39 texture-take chronicle prose broken ("takes .") →
-  {target?…|…} take templates + texture_slot derived slot (canon bytes
-  unchanged); KI#40 unique-slot claim survives promotion (golden case
-  17); KI#41 canon-slot overlap += pack-modeled fields (VALIDATION_SPEC
-  §8 synced).
-- Hardening: target+texture mix loud, lint (target-defended checks on
-  texture actions, {texture_slot} in canon templates, texture
-  failure_total consistency), texture-path OCC attribution test,
-  doc-sync (INTENT_SCHEMA §9, AGENT_NAVIGATION, TASKS ## Done iter-11).
-  443→453 green, ruff clean, fixtures byte-identical. 15 files + sync set.
+- (deleted at iter-18 per the one-in/one-out cap; history in git.)
 ---
 iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-free half (iter-11-texture-door)
 - (deleted at iter-17 per the one-in/one-out cap; history in git.)

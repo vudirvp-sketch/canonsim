@@ -1,22 +1,26 @@
 # STATUS — canonsim
 
-Iteration: iter-17 (`iter-17-validation-beats-4`, STATUS "Next step" #1
-— volume over the presence machinery) · Phase: 1 · Date: 2026-08-30 ·
-Validation session 4, the crime-cascade session (seed 15, 10 beats,
-32 supported / 2 refused-and-caught claims, 5 intents fed, **0 canon
-violations**): the cascade reads through the cards in its observable
-half — witnesses present with per-witness knowledge claimable (the
-noticed reach), the purse carried moving across cards (guard → player)
-and riding the flee (KI#46's read-side contract, pinned). **The
-suspicion half is invisible through the brief**: `relations.suspicion`
-is not a card marker (the marker lookup is status-prefixed — a
-suspicion row cannot even be expressed in pack data today) and
-`suspicion_changed` never enters scene_delta; the narrator's only
-visible ground is the crime event itself. Canon-true claims about the
-invisible half still validate (verdicts follow canon, never
-observability — §4 law). Two new refusal families caught live: the
-blind witness (heard ≠ saw) and the uninferred `purse_missing`. Corpus
-32 → 41; 528 → 537 green, ruff clean.
+Iteration: iter-18 (`iter-18-validation-beats-5`, STATUS "Next step"
+#1 — the arson half over the cards) · Phase: 1 · Date: 2026-08-30 ·
+Validation session 5, the arson-half session (seed 20, 10 beats, 29
+supported / 4 refused-and-caught / 1 unverifiable, **0 canon
+violations**): the fire cascade (fire_started / fire_spread /
+smoke_rising / location_burned_out) is in canon regardless of who
+stood where; the observable surface splits by location. The
+cause-actor never gets `fire_in_<loc>` (rules.json transitions.fire.
+knowledge.started `except: cause_actor`) — the player cannot claim
+their own ignition knowledge (token_absent). The same-location PC
+gets the spread/smoke/burnout records via `saw/exact`. An absent
+NPC's `fire_in_<loc>` claim is token_absent (different location → no
+record). No alarm fires in the canonical solo-arson scenario (no
+occupants at the fire location) — `fire_alarm_in_<loc>` and the fear
+markers stay unclaimable, and an unmodeled `fire_intensity` prop
+reads `insufficient_data`, never contradicted (the honest-verdict
+law, UAP). A canon event is claimable by id+type even when the PC's
+brief was silent about it (canon never closes — the validator checks
+the log, not the brief's perception). Corpus 41 → 51; 537 → 547
+green, ruff clean. KI#46 deleted per AGENTS §5 (closed iter-16,
+>2 iterations past).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -40,18 +44,8 @@ blind witness (heard ≠ saw) and the uninferred `purse_missing`. Corpus
 
 ## Active KIs
 
-- KI#46 · rotation leaves carried items behind: `rotation_plan` swapped
-  only the participants' positions, breaking the carried-item position
-  contract (`_move_changes` keeps item position == carrier position,
-  `apply_event` fails loud on the next carrier move) — surfaced live by
-  the st-1 presence fold (the t=370 arrival snapshot taught
-  `purse_01_present` at the tavern while the purse rode to the
-  guardroom in Doren's pocket) · CLOSED iter-16 (`rotation_plan` rides
-  `movement_changes` — resolvers' carried-item law, single owner;
-  pinned by tests/test_crime.py
-  `test_rotation_carries_the_items_with_the_guard`; no committed
-  fixture bytes touched — the T1 smoke script crosses no rotation).
-  Deletes at iter-18 per AGENTS §5.
+(none — KI#46 deleted at iter-18 per AGENTS §5: closed iter-16, >2
+iterations past. History in git.)
 
 ## FAQ / Pitfalls
 
@@ -251,20 +245,24 @@ blind witness (heard ≠ saw) and the uninferred `purse_missing`. Corpus
 
 ## Next step
 
-**Session 4 closed the crime-cascade probes (0 canon violations, 10
-beats): the cascade's observable half reads through the cards —
-witnesses, per-witness knowledge, the purse carried across cards and
-through the flee; the suspicion half is invisible through the brief
-(no marker row is even expressible — the tune-2 backlog row is the
-owner's call).** The exit criterion (0 canon violations per 100 beats,
-ROADMAP §2) still needs volume — 40 live beats, corpus 41 cases. Next,
-in order:
+**Session 5 closed the arson-half probes (0 canon violations, 10
+beats, 51 corpus cases): the fire cascade is in canon regardless of
+who stood where; the observable surface splits by location —
+cause-actor is blind to ignition (token_absent on `fire_in_<loc>`),
+absent NPCs cannot perceive fire (token_absent), no alarm fires in
+the canonical solo-arson scenario, and an unmodeled fire prop reads
+`insufficient_data` (the honest-verdict law, UAP). The
+suspicion/crime-status half is still invisible through the brief
+(tune-2, owner's call).** The exit criterion (0 canon violations per
+100 beats, ROADMAP §2) needs more volume — 51 live beats now, the
+target is ≥100. Next, in order:
 
-1. **Validation beats, session 5** — volume: the multi-day session (a
+1. **Validation beats, session 6** — volume: the multi-day session (a
    second rotation, day-2 rumor telling at the market — lore + recall
-   under a long log) or the arson half over the cards (fire birth /
-   spread / burnout + the fear markers + the burned-out scene line).
-   Tallies via the `BEAT` summary lines.
+   under a long log) or the alarm-cascade half (an NPC present at the
+   fire location so `alarm_raised` fires + the fear markers + the
+   shouting-near knowledge for adjacent occupants). Tallies via the
+   `BEAT` summary lines.
 2. `tune-1` rest action (pack data; the owner's fatigue observation)
    or `st-2` identity persistence per TASKS; `tune-2` (the
    suspicion/crime-status observability candidate) waits for the
