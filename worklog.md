@@ -10,6 +10,43 @@
 > since iter-5).
 
 ---
+iter-24 · 2026-08-31 · validation beats — session 9, the day-2
+return under burned-yard knowledge (iter-24-validation-beats-9)
+- Live narrate session 9 (seed 41, 13 accepted + 2 refused-and-caught,
+  39 supported claims, 0 canon violations): the day-1 theft-and-arson
+  chain (move → take → steal → move → drop_break → wait 1440) lands
+  at t=1452 (day-2 morning post-second-rotation); the recall block
+  past day 1 probed at the beat level (a quiet prose-only beat
+  accepts with no BEAT summary — the absence-of-summary law).
+- The day-1 canon events all claimable by id+type under day 2
+  (fire_started / location_burned_out / expectation_violation /
+  watch_change — canon never closes across a 1440-tick gap,
+  complement to session 5's id+type probe on the same tick); the
+  burned yard's `destroyed` flag is canon-from-birth state-claimable
+  under day 2 (the layout/D-057 precedent extended to a destruction
+  flag).
+- The arson-on-a-destroyed-yard case is the pack-2 backlog's first
+  live probe: both fire spots still 'burning' (set t=12/15, never
+  reset — the halted-state law), `_ignite_action` finds no unburning
+  spot, commits the arson event with `spot=None`, no ignition
+  follows — a no-ignition success (distinct from session 8's
+  spotless-street `field_nonempty` failure; the door-outcome
+  vocabulary completes its three axes: not co-located, no flagged
+  target, no fuel). The cause-actor blindness and the §3 market leg
+  pinned unreachable under day 2 (the tune-3 family); the third
+  watch_change (t=1812) hands purse_missing to the relief guard
+  (inferred/exact → told/partial, the transfer_decay_steps=1 law
+  under day 2); the suspicion axis state-claimable for
+  npc_guard_01 (value 20, the tune-2 boundary re-pinned).
+- Corpus 84→99 (+15 seed-41 cases, single-beat each); 589→604
+  green, ruff clean. The phase-1 ≥100-beat exit criterion HIT
+  (86→101 live beats); the sandbox narrate-session recipe landed
+  in the STATUS FAQ (the owner's directive — operational recipe +
+  pitfalls made durable across iterations; consolidated with the
+  iter-23 batch-boundary lesson). 4 files (fixture + the 3-doc
+  sync set — the iter-18 scope precedent); iter-14 evicted per
+  the cap.
+---
 iter-23 · 2026-08-31 · validation beats — session 8, the
 arson-after-theft chain (iter-23-validation-beats-8)
 - Live narrate session 8 (seed 85, 12 beats + 3 refused-and-caught
@@ -210,15 +247,7 @@ iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presen
   clean. 10 files + sync set; iter-10 evicted per the cap.
 ---
 iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (iter-14-validation-beats-2)
-- Live `narrate` session 2 (seed 8, theft-and-arson scenario, 12 beats,
-  22 supported claims, 0 canon violations): event_type_mismatch,
-  cannot_know, stale_ref, exhaustion→dry, door-rejected intent, rebased
-  intents, pin/retire+establish/no-op — all probed live, all caught.
-- Corpus 16→25 (tests/fixtures/narrator_beats.json): every validator
-  refusal reason + the ladder + both door outcomes pinned at the beat
-  level; source line carries both sessions' provenance.
-- 493→502 green, ruff clean. 5 files (fixture + sync set); iter-9
-  evicted per the cap.
+- (deleted at iter-24 per the one-in/one-out cap; history in git.)
 ---
 iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop session (iter-13-validation-beats)
 - (deleted at iter-23 per the one-in/one-out cap; history in git.)

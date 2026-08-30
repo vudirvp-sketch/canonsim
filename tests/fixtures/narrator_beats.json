@@ -1,5 +1,5 @@
 {
-  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 — the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit). Session 5 (iter-18, seed 20 — the arson half over the cards: the fire cascade (fire_started / fire_spread / smoke_rising / location_burned_out) is in canon but its observable surface splits by where the PC stands: the cause-actor never gets fire_in_<loc> (the exception clause in rules.json transitions.fire.knowledge.started), the same-location PC gets the spread/smoke/burnout records via saw/exact, and an absent NPC's fire_in_<loc> claim is token_absent. No alarm fires in the canonical solo-arson scenario (no occupants at the fire location) — the alarm_knowledge and the fear-spike markers are unclaimable, and an unmodeled fire prop (fire_intensity) reads as insufficient_data, never contradicted (the honest-verdict law, UAP). A canon event is claimable by id+type even when the PC's brief was silent about it (canon never closes). Session 6 (iter-21, seed 33 — the alarm-cascade half, the complement to session 5's solo-arson: an NPC present at the fire location) adds: alarm_raised fires with occupants present (raised_by the first occupant in pack order) with the fear spike (status.fear 40) claimable per NPC and rendered as the 'afraid' card marker; the alarm's knowledge audience has no exception clause, so the CAUSE actor holds fire_alarm_in_<loc> (heard/exact) while still blind to fire_in_<loc> (the started-knowledge exception — session 5's cause-actor law holds at a witnessed arson); the shouting-near boundary (an NPC one non-adjacent room away holds no fire tokens — both shouting_near_<loc> and fire_alarm_in_<loc> are token_absent; the adjacent token itself is structurally unreachable in v0.1: NPC placement is static, the rotation is a direct post swap, and playscript steps are player-only, so no knower is ever adjacent at ignition); flee under pursuit (flee_caught: the opposed check lost, the room holds {actor}_caught_fleeing, the player stays in place); the plain move out after a caught flee (no pursuit clause between actions — the door commits it); and the §3 watch-change handover live: watch_change + knowledge_transfer hand the whole fire record set to the relief guard (told, one fidelity step down) while the rotation carries the purse (KI#46's contract) and the alarm's fear decays at the beat (40 -> 36 by elapsed ticks, D-050) — the relief guard walks into the ashes carrying the fire secondhand but unafraid (the briefing transfers knowledge, not fear). Session 7 (iter-22, seed 54 — the theft half under the presence machinery, a fresh seed over the steal ladder): the pre-steal arrival snapshot pins the cards' observable surface BEFORE the crime (guard carries purse, barkeep carries club, drunkard's intoxication renders the 'drunk' marker, the drunk→guard fear 40 and maid→barkeep trust 70 pair tokens render as directed pair lines — session 3 probed the drunk→guard axis under seed 7; this is the same axis under a fresh seed plus the maid→barkeep axis, the second seeded pair, as a supported state claim); a successful first steal (silent — no suspicion because no witnessed_steal_failure; the silent-steal vs failed-steal fork in the steal ladder — session 4 took the failed half, session 7 takes the successful half) moves the purse to the thief's card and leaves crime_status 'unknown' (the flip waits for the inference, not the steal); the watch rotation at t=360 carries the standard crime-cascade events (watch_change, expectation_violation, suspicion_changed for both guards, knowledge_transfer, status_decayed) and the expectation_violation event is claimable by id+type (complement to session 5's fire-event-by-id probe — a theft-half canon event the brief may or may not surface but canon never closes); the post-inference guard's purse_missing knowledge is positively claimable (the complement to session 4's 'before inference' refusal — the inference boundary probed from both sides); the knowledge_transfer carries purse_missing to the relief guard with the transfer_decay_steps=1 fidelity step down (inferred/exact → told/partial — the transfer decay law live at the beat level); the suspicion axis is state-claimable for both guards even though no card marker renders it (the tune-2 boundary — observability ≠ claimability; the projection holds the value the brief does not surface); the second steal after watch rotation returns intent_rejected (target moved to guardroom — co-location precondition fails, distinct from session 4's second-steal-success case where the guard stayed put and the purse was still claimable on him); the stolen purse rides a plain move (no pursuit) to the backyard — the carried-item position contract holds the same way through a move as through a flee (KI#46's read-side pinned again in a non-pursuit context); and the witness-cannot-know-purse_missing refusal: the barkeep never held the purse-on-himself expectation, so the inferred absence is the guard's private arithmetic — claiming it of the barkeep is contradicted (token_absent), the honest-verdict law at the inference boundary. Session 8 (iter-23, seed 85 — the arson-after-theft chain, the cross-system cascade tying sessions 4/5/7 together: a successful take of the lamp, a silent steal of the purse, then the §3 drop_break → fire chain under a successful-theft context): the take and the steal put both prizes on one coat (the two-item card before the crime's second act), the yard arrival claims the departure token (pc_01_left_toward_loc_backyard — the tavern saw him go) alongside the arrival snapshot; the drop_break → fire_started pair is claimed by id+type with fire_started absent from the brief's scene delta (the cause-actor exception hides the ignition from its own author's brief — canon never closes); the cause-actor blindness refusal (pc_01 knows fire_in_loc_backyard → token_absent) and the arsonist's calm (status.fear 0 — the alarm's fear spike excludes the cause actor) pin the exception from both sides; the flee is fed through the door as a narrator intent from a burned-out yard (no pursuit — the unpursued half, complement to session 6's flee_caught) and the purse leaves the fire while the lamp stays with the ashes (the carried-item contract through the fire context); the rotation carries the crime half across the watch change — purse_missing (inferred/exact → told/partial), the movement trail, the noise token, suspicion 20 on both guards — while the fire half never crosses: no alarm ever fired, the yard burned unwitnessed, and guard-side fire tokens (fire_in, fire_alarm_in, loc_backyard_burned_down) are all token_absent refusals (the transfer is bounded by what the holder holds — the negative half of session 6's handover pin); crime_status stays unknown post-inference (suspicion 20 below the status_suspect_at 25 flip — the near-miss arithmetic); the maid's autonomous urgency event is claimable by id+type (the M5 non-PC share visible at the beat level); an arson attempt with nothing to burn is a door rejection (the committed intent_rejected no-op, claimable by id+type — a new action kind in the door-outcome family); and the §3 drunkard-tells-the-market leg is unreachable in v0.1 (the market crowd holds no figure_at_back_door_last_night — the drunkard never leaves the tavern; the boundary probed rather than forced, the tune-3 family).",
+  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 — the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit). Session 5 (iter-18, seed 20 — the arson half over the cards: the fire cascade (fire_started / fire_spread / smoke_rising / location_burned_out) is in canon but its observable surface splits by where the PC stands: the cause-actor never gets fire_in_<loc> (the exception clause in rules.json transitions.fire.knowledge.started), the same-location PC gets the spread/smoke/burnout records via saw/exact, and an absent NPC's fire_in_<loc> claim is token_absent. No alarm fires in the canonical solo-arson scenario (no occupants at the fire location) — the alarm_knowledge and the fear-spike markers are unclaimable, and an unmodeled fire prop (fire_intensity) reads as insufficient_data, never contradicted (the honest-verdict law, UAP). A canon event is claimable by id+type even when the PC's brief was silent about it (canon never closes). Session 6 (iter-21, seed 33 — the alarm-cascade half, the complement to session 5's solo-arson: an NPC present at the fire location) adds: alarm_raised fires with occupants present (raised_by the first occupant in pack order) with the fear spike (status.fear 40) claimable per NPC and rendered as the 'afraid' card marker; the alarm's knowledge audience has no exception clause, so the CAUSE actor holds fire_alarm_in_<loc> (heard/exact) while still blind to fire_in_<loc> (the started-knowledge exception — session 5's cause-actor law holds at a witnessed arson); the shouting-near boundary (an NPC one non-adjacent room away holds no fire tokens — both shouting_near_<loc> and fire_alarm_in_<loc> are token_absent; the adjacent token itself is structurally unreachable in v0.1: NPC placement is static, the rotation is a direct post swap, and playscript steps are player-only, so no knower is ever adjacent at ignition); flee under pursuit (flee_caught: the opposed check lost, the room holds {actor}_caught_fleeing, the player stays in place); the plain move out after a caught flee (no pursuit clause between actions — the door commits it); and the §3 watch-change handover live: watch_change + knowledge_transfer hand the whole fire record set to the relief guard (told, one fidelity step down) while the rotation carries the purse (KI#46's contract) and the alarm's fear decays at the beat (40 -> 36 by elapsed ticks, D-050) — the relief guard walks into the ashes carrying the fire secondhand but unafraid (the briefing transfers knowledge, not fear). Session 7 (iter-22, seed 54 — the theft half under the presence machinery, a fresh seed over the steal ladder): the pre-steal arrival snapshot pins the cards' observable surface BEFORE the crime (guard carries purse, barkeep carries club, drunkard's intoxication renders the 'drunk' marker, the drunk→guard fear 40 and maid→barkeep trust 70 pair tokens render as directed pair lines — session 3 probed the drunk→guard axis under seed 7; this is the same axis under a fresh seed plus the maid→barkeep axis, the second seeded pair, as a supported state claim); a successful first steal (silent — no suspicion because no witnessed_steal_failure; the silent-steal vs failed-steal fork in the steal ladder — session 4 took the failed half, session 7 takes the successful half) moves the purse to the thief's card and leaves crime_status 'unknown' (the flip waits for the inference, not the steal); the watch rotation at t=360 carries the standard crime-cascade events (watch_change, expectation_violation, suspicion_changed for both guards, knowledge_transfer, status_decayed) and the expectation_violation event is claimable by id+type (complement to session 5's fire-event-by-id probe — a theft-half canon event the brief may or may not surface but canon never closes); the post-inference guard's purse_missing knowledge is positively claimable (the complement to session 4's 'before inference' refusal — the inference boundary probed from both sides); the knowledge_transfer carries purse_missing to the relief guard with the transfer_decay_steps=1 fidelity step down (inferred/exact → told/partial — the transfer decay law live at the beat level); the suspicion axis is state-claimable for both guards even though no card marker renders it (the tune-2 boundary — observability ≠ claimability; the projection holds the value the brief does not surface); the second steal after watch rotation returns intent_rejected (target moved to guardroom — co-location precondition fails, distinct from session 4's second-steal-success case where the guard stayed put and the purse was still claimable on him); the stolen purse rides a plain move (no pursuit) to the backyard — the carried-item position contract holds the same way through a move as through a flee (KI#46's read-side pinned again in a non-pursuit context); and the witness-cannot-know-purse_missing refusal: the barkeep never held the purse-on-himself expectation, so the inferred absence is the guard's private arithmetic — claiming it of the barkeep is contradicted (token_absent), the honest-verdict law at the inference boundary. Session 8 (iter-23, seed 85 — the arson-after-theft chain, the cross-system cascade tying sessions 4/5/7 together: a successful take of the lamp, a silent steal of the purse, then the §3 drop_break → fire chain under a successful-theft context): the take and the steal put both prizes on one coat (the two-item card before the crime's second act), the yard arrival claims the departure token (pc_01_left_toward_loc_backyard — the tavern saw him go) alongside the arrival snapshot; the drop_break → fire_started pair is claimed by id+type with fire_started absent from the brief's scene delta (the cause-actor exception hides the ignition from its own author's brief — canon never closes); the cause-actor blindness refusal (pc_01 knows fire_in_loc_backyard → token_absent) and the arsonist's calm (status.fear 0 — the alarm's fear spike excludes the cause actor) pin the exception from both sides; the flee is fed through the door as a narrator intent from a burned-out yard (no pursuit — the unpursued half, complement to session 6's flee_caught) and the purse leaves the fire while the lamp stays with the ashes (the carried-item contract through the fire context); the rotation carries the crime half across the watch change — purse_missing (inferred/exact → told/partial), the movement trail, the noise token, suspicion 20 on both guards — while the fire half never crosses: no alarm ever fired, the yard burned unwitnessed, and guard-side fire tokens (fire_in, fire_alarm_in, loc_backyard_burned_down) are all token_absent refusals (the transfer is bounded by what the holder holds — the negative half of session 6's handover pin); crime_status stays unknown post-inference (suspicion 20 below the status_suspect_at 25 flip — the near-miss arithmetic); the maid's autonomous urgency event is claimable by id+type (the M5 non-PC share visible at the beat level); an arson attempt with nothing to burn is a door rejection (the committed intent_rejected no-op, claimable by id+type — a new action kind in the door-outcome family); and the §3 drunkard-tells-the-market leg is unreachable in v0.1 (the market crowd holds no figure_at_back_door_last_night — the drunkard never leaves the tavern; the boundary probed rather than forced, the tune-3 family). Session 9 (iter-24, seed 41 — the day-2 return under burned-yard knowledge, the multi-day volume push toward the ≥100-beat phase-1 exit): the day-1 theft-and-arson chain (move → take → steal → move → drop_break → wait 1440) lands at t=1452, morning of day 2, post-second-rotation. The recall block's behavior past day 1 is probed at the beat level: a quiet prose-only beat accepts with no BEAT summary (the absence-of-summary law — the recall surface renders but does not tally). The day-1 canon events — fire_started (ev_0005), location_burned_out (ev_0008), expectation_violation (ev_0010), watch_change (ev_0025) — are all claimable by id+type under day 2 (the 'canon never closes' law across a 1440-tick gap, complement to session 5's id+type probe on the same tick). The burned yard's `destroyed` field is canon-from-birth state-claimable under day 2 (the layout/D-057 precedent extended to a destruction flag). The arson-on-a-destroyed-yard case is the pack-2 backlog's first live probe: the yard's two fire spots are still 'burning' (set at t=12/15 and never reset — the halted-state law), so _ignite_action finds no unburning spot, commits the arson event with spot=None, no ignition follows — a no-ignition success (the world logs the attempt as a fact; the ashes do not rekindle; the pack-2 audit note 'arson on a fully-burning/destroyed location logs a no-ignition success, world unchanged' — pinned live at the beat level, distinct from session 8's `arson_without_fuel_is_a_logged_no` which was a `field_nonempty fire_spots` precondition failure on a spotless street). The cause-actor blindness (pc_01 knows fire_in_loc_backyard → token_absent) persists across days — the fire.started exception clause does not time out (the day-1 exception law complemented). The §3 market leg pinned unreachable under day 2 (npc_drunk_01 knows figure_at_back_door_last_night → token_absent; the tune-3 family — the drunkard never left the tavern, the market crowd holds no figure token). A second steal attempt at the tavern on day 2 commits intent_rejected for reason `target.carries_flagged` — the guard has no flagged item left (the purse was taken in setup; a new door-rejection family, complement to session 7's `target_moved_to_guardroom` co-location half and session 8's `nothing_to_burn` arson family — the door-outcome vocabulary completes the three axes: not co-located, no flagged target, no fuel). The third watch_change (t=1812) hands purse_missing to the relief guard (npc_guard_02) via knowledge_transfer with the transfer_decay_steps=1 fidelity step down (inferred/exact → told/partial — the transfer law live under day 2, complement to session 7's day-1 pin). An unmodeled prop (handedness) reads unverifiable under day 2 (the UAP honest-verdict law across the long log). The suspicion axis is state-claimable for npc_guard_01 under day 2 (value 20, the post-rotation inferred purse_missing spike) — the tune-2 boundary re-pinned under day 2: observability ≠ claimability; the projection holds the value the brief does not surface.",
   "cases": [
     {
       "name": "honest_supported",
@@ -4898,6 +4898,858 @@
         "status": "accepted",
         "notes_contains": [
           "BEAT claims: 3 supported"
+        ]
+      }
+    },
+    {
+      "name": "day2_arrival_quiet_recall",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Morning came the second time the way it does in places that have already paid their due: thin light, the smell of cold char still on the air from the yard, and the common room already set for a day no one expected to start."
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted"
+      }
+    },
+    {
+      "name": "tavern_return_under_burned_knowledge",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He crossed the yard the way a man crosses a room he has already wrecked — quickly, with his back to it — and the taproom took him in.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "move",
+                  "actor": "pc_01",
+                  "target": "loc_tavern",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported",
+          "BEAT intents: 1 fed, 0 withdrawn"
+        ],
+        "last_event_type": "move"
+      }
+    },
+    {
+      "name": "day1_arsen_event_recallable_by_id_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "What had burned still burned in the books. The night the lamp went over the back wall was there, recorded plain as a mark on a tally.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "type": "fire_started",
+                  "event_id": "ev_0005"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "day1_burnout_event_recallable_by_id_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The yard had been a yard, and then it had stopped being one. The record of the stopping was as plain as the morning light on the cinders.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "type": "location_burned_out",
+                  "event_id": "ev_0008"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "day1_expectation_violation_recallable_by_id_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The watch had turned at noon and seen what was missing. The record of that seeing sat in the canon as plainly as the purse had once sat on the guard's belt.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "type": "expectation_violation",
+                  "event_id": "ev_0010"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "day1_second_watch_change_recallable_by_id_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Night had come and gone and the watch had turned again. The second turning was as recorded as the first.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "event",
+                  "type": "watch_change",
+                  "event_id": "ev_0025"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "burned_yard_destroyed_canon_persists_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The yard had been a yard once and was now the record of one. The destruction was the morning's first certain fact.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "loc_backyard",
+                  "prop": "destroyed",
+                  "value": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "arson_on_a_destroyed_yard_logs_no_ignition_success",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He set himself to burning the yard again. The yard had no more to give and the world took the attempt as a fact, recorded the no-fire it produced, and moved on. The ashes did not rekindle.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_backyard"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "arson",
+                  "actor": "pc_01",
+                  "target": "loc_backyard",
+                  "based_on_event_seq": "anchor"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported",
+          "BEAT intents: 1 fed, 0 withdrawn"
+        ],
+        "last_event_type": "arson"
+      }
+    },
+    {
+      "name": "cause_actor_still_blind_to_his_own_fire_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He had set the fire, and so the fire was the one fact about the yard he could not bring himself to know. Two mornings past, and the blindness had not lifted.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "pc_01",
+                  "knows": "fire_in_loc_backyard"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ],
+        "log_unchanged": true
+      }
+    },
+    {
+      "name": "the_market_never_heard_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The square was a square. The figure who had stood at the back door was not a fact the square held — not then, not now.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_drunk_01",
+                  "knows": "figure_at_back_door_last_night"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": [
+          "CONTRADICTED",
+          "token_absent"
+        ],
+        "log_unchanged": true
+      }
+    },
+    {
+      "name": "second_steal_rejected_target_has_no_purse_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        },
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The purse was already his — he had taken it the night before. He reached for the guard's belt anyway, the way a hand picks up a habit after a good night, and the world recorded the empty grab for what it was: nothing left to take.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "position",
+                  "value": "loc_tavern"
+                }
+              ],
+              "intents": [
+                {
+                  "kind": "steal",
+                  "actor": "pc_01",
+                  "target": "npc_guard_01",
+                  "based_on_event_seq": "anchor",
+                  "fields": {
+                    "method": "distraction"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported",
+          "BEAT intents: 1 fed, 0 withdrawn"
+        ],
+        "last_event_type": "intent_rejected"
+      }
+    },
+    {
+      "name": "guard_two_holds_purse_missing_after_third_rotation",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The watch turned a third time. Whatever the guards knew, they knew it from telling each other, and the telling had worn the edge off it.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "knowledge",
+                  "who": "npc_guard_02",
+                  "knows": "purse_missing"
+                }
+              ]
+            }
+          },
+          "between": [
+            {
+              "intent": "wait",
+              "ticks": 360
+            }
+          ]
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
+        ]
+      }
+    },
+    {
+      "name": "unmodeled_prop_under_day2_is_unverifiable",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "He favored his left hand without thinking about it — the kind of fact the world does not record.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "pc_01",
+                  "prop": "handedness",
+                  "value": "left"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 unverifiable"
+        ]
+      }
+    },
+    {
+      "name": "final_quiet_close_after_two_days",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "Two mornings past the fire, the day closed the way days close in a town that has already moved on — quietly, with the door open and the books shut."
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted"
+      }
+    },
+    {
+      "name": "guard_one_suspicion_state_claimable_under_day2",
+      "seed": 41,
+      "setup": [
+        {
+          "intent": "move",
+          "target": "loc_tavern"
+        },
+        {
+          "intent": "take",
+          "target": "oil_lamp_01"
+        },
+        {
+          "intent": "steal",
+          "target": "npc_guard_01",
+          "method": "distraction"
+        },
+        {
+          "intent": "move",
+          "target": "loc_backyard"
+        },
+        {
+          "intent": "drop_break",
+          "target": "oil_lamp_01",
+          "near": "back_wall"
+        },
+        {
+          "intent": "wait",
+          "ticks": 1440
+        }
+      ],
+      "beats": [
+        {
+          "reply": {
+            "prose": "The guard who had been on duty when the purse went still wore the arithmetic of it on his face — a private count, never named aloud.",
+            "proposal": {
+              "expected_event_seq": "anchor",
+              "claims": [
+                {
+                  "kind": "state",
+                  "entity": "npc_guard_01",
+                  "prop": "relations.suspicion",
+                  "value": 20
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": [
+          "BEAT claims: 1 supported"
         ]
       }
     }

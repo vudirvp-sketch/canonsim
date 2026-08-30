@@ -1,39 +1,57 @@
 # STATUS — canonsim
 
-Iteration: iter-23 (`iter-23-validation-beats-8`) · Phase: 1 · Date:
-2026-08-31 · The arson-after-theft cross-system session, a fresh seed
-(85) over the full §3 crime chain: live `narrate` session 8 (12 beats
-+ 3 refused-and-caught probes, 49 supported claims, 0 canon
-violations). The take and the silent steal put both prizes on one coat
-(the two-item card); the yard arrival claims the departure token
-(`pc_01_left_toward_loc_backyard` — the tavern saw him go) beside the
-arrival snapshot. The drop_break → fire_started pair is claimed by
-id+type with fire_started absent from the brief's scene delta (the
-cause-actor exception hides the ignition from its own author's brief —
-canon never closes); the blindness refusal (`pc_01` knows
-`fire_in_loc_backyard` → `token_absent`) and the arsonist's calm
-(`status.fear` 0 — the alarm's fear spike excludes the cause actor) pin
-the exception from both sides. The unseen arson is the session's crown:
-the rotation hands the CRIME half across the watch change —
-`purse_missing` (inferred/exact → told/partial, the transfer-decay
-law), the movement-trail and noise tokens, suspicion 20 on both guards
-— while the FIRE half never crosses: no alarm ever fired, the yard
-burned unwitnessed, and guard-side fire tokens (`fire_in`,
-`fire_alarm_in`, `loc_backyard_burned_down`) are all `token_absent`
-refusals (the transfer is bounded by what the holder holds — the
-negative half of session 6's handover pin). `crime_status` stays
-`unknown` post-inference (suspicion 20 below the `status_suspect_at` 25
-flip — the near-miss arithmetic). The flee is fed through the door from
-a burned-out yard (the unpursued half, complement to session 6's
-`flee_caught`): the purse leaves the fire, the lamp stays with the
-ashes. An arson attempt on the street commits `intent_rejected`
-(claimable by id+type — a new action kind in the door-outcome family);
-the maid's autonomous urgency event is claimable by id+type (the M5
-non-PC share at the beat level); the §3 drunkard-tells-the-market leg
-is unreachable in v0.1 (the market crowd holds no figure token — probed
-and pinned, not forced; the tune-3 family). Corpus 70→84; 575→589
-green, ruff clean. 4 files (fixture + the 3-doc sync set — the iter-18
-scope precedent).
+Iteration: iter-24 (`iter-24-validation-beats-9`) · Phase: 1 · Date:
+2026-08-31 · The day-2 return under burned-yard knowledge — the
+multi-day volume push to the phase-1 ≥100-beat exit (live `narrate`
+session 9, seed 41, 13 accepted beats + 2 refused-and-caught probes,
+39 supported claims, 0 canon violations). The day-1 theft-and-arson
+chain (move → take → steal → move → drop_break → wait 1440) lands at
+t=1452, morning of day 2, post-second-rotation. The recall block's
+behavior past day 1 is probed at the beat level: a quiet prose-only
+beat accepts with no BEAT summary (the absence-of-summary law — the
+recall surface renders but does not tally). The day-1 canon events
+are all claimable by id+type under day 2 — fire_started (ev_0005),
+location_burned_out (ev_0008), expectation_violation (ev_0010),
+watch_change (ev_0025) — the 'canon never closes' law across a
+1440-tick gap (complement to session 5's id+type probe on the same
+tick). The burned yard's `destroyed` field is canon-from-birth
+state-claimable under day 2 (the layout/D-057 precedent extended to
+a destruction flag). The arson-on-a-destroyed-yard case is the
+pack-2 backlog's first live probe: the yard's two fire spots are
+still 'burning' (set at t=12/15 and never reset — the halted-state
+law), so `_ignite_action` finds no unburning spot, commits the arson
+event with `spot=None`, no ignition follows — a no-ignition success
+(the pack-2 audit note: 'arson on a fully-burning/destroyed
+location logs a no-ignition success, world unchanged' — pinned live
+at the beat level, distinct from session 8's
+`arson_without_fuel_is_a_logged_no` which was a
+`field_nonempty fire_spots` precondition failure on a spotless
+street). The cause-actor blindness (pc_01 knows
+`fire_in_loc_backyard` → token_absent) persists across days — the
+fire.started exception clause does not time out (the day-1
+exception law complemented). The §3 market leg pinned unreachable
+under day 2 (the drunkard never left the tavern; the tune-3 family).
+A second steal attempt at the tavern on day 2 commits
+`intent_rejected` for reason `target.carries_flagged` — the guard
+has no flagged item left (the purse was taken in setup; a new
+door-rejection family, complement to session 7's
+`target_moved_to_guardroom` co-location half and session 8's
+`nothing_to_burn` arson family — the door-outcome vocabulary
+completes the three axes: not co-located, no flagged target, no
+fuel). The third watch_change (t=1812) hands `purse_missing` to the
+relief guard via `knowledge_transfer` with the
+`transfer_decay_steps=1` fidelity step down (inferred/exact →
+told/partial — the transfer law live under day 2, complement to
+session 7's day-1 pin). The suspicion axis is state-claimable for
+`npc_guard_01` under day 2 (value 20, the post-rotation inferred
+`purse_missing` spike) — the tune-2 boundary re-pinned under day 2:
+observability ≠ claimability; the projection holds the value the
+brief does not surface. Corpus 84→99 (+15 seed-41 cases); 589→604
+green, ruff clean. 4 files (fixture + the 3-doc sync set — the
+iter-18 scope precedent). The phase-1 ≥100-beat exit criterion HIT
+(86→101 live beats); the sandbox narrate-session recipe landed in
+the FAQ (the owner's directive — operational recipe + pitfalls
+made durable across iterations).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -94,15 +112,14 @@ scope precedent).
   enqueue at `entry.tick` (sub_order NPC_REACTION); decay commits
   directly at beat_tick; the runner feeds the next step only on the
   PLAYER's own step endings.
-- **Director releases ride the intent door, not the canon door (D-037).**
-  A released hook = IntentData (`director_<N>`) through the front door
-  (rejections emit `intent_rejected` no-ops with `cause_intent`); the
-  director never bypasses Intent→Event. Same door for urgencies
-  (`urgency_<N>`).
-- **Reactions dispatch from the commit door; novelty is per (knower,
-  token) (D-037).** `_commit` feeds the knowledge index + runs `_react`
-  for EVERY committed event — no call site can forget a reaction;
-  cascades terminate; suspicion reacts only to tokens the knower did not
+- **The intent door and the commit door (D-037).** Director releases
+  and urgencies ride the INTENT door: a released hook = IntentData
+  (`director_<N>` / `urgency_<N>`) through the front door (rejections
+  emit `intent_rejected` no-ops with `cause_intent`); the director
+  never bypasses Intent→Event. Reactions ride the COMMIT door:
+  `_commit` feeds the knowledge index + runs `_react` for EVERY
+  committed event — no call site can forget a reaction; cascades
+  terminate; suspicion reacts only to tokens the knower did not
   already hold; the arrest resolution rides the same door.
 - **System passes scan the whole projection, not the events that seeded
   them (KI#16 lesson).** Per-layer bookkeeping must be global and
@@ -160,17 +177,40 @@ scope precedent).
   `docs/ref/*`/`REFERENCES_DEEP.md` are historical; the owners are
   AGENTS.md §4, `REFERENCES.md` (the catalog), and
   `docs/AGENT_NAVIGATION.md` §1 (where things actually live).
-- **Batch boundaries are world-defining for the corpus (iter-23
-  lesson).** `run_steps` drains the queue to exhaustion between
+- **Live narrate session in the sandbox (operational recipe; iter-24,
+  the owner's directive to make the recipe durable).** `python -m cli`
+  opens the interactive session; the narrator door is `narrate
+  [<reply.json> | dry]`. `emit_call` writes `output/mediator/call_NNNN.md`
+  (gitignored runtime); the operator reads the brief +
+  `narrator_protocol`, composes a reply JSON `{prose, texture_delta?,
+  proposal?}` with `expected_event_seq` = the anchor advertised in the
+  protocol (an int; `'anchor'` resolves to it in the corpus), writes it
+  to a path, and applies via `narrate <reply>`. The beat cycle:
+  `commit → retire_contradicted → sync_scene → assemble → narrator
+  reply → apply_delta → intents → mark_promoted`; a refused document
+  (delta refusals or contradicted claims) regens the WHOLE beat; the
+  L12 ladder: narrator → template (the beat's own chronicle lines) →
+  dry. Sandbox specifics (pitfalls fixed once, never re-derived): (1)
+  `pip install --break-system-packages -e ".[dev]"` (the PEP-668
+  fence); (2) `python -m pytest` — the flat packages
+  (`core`/`brief`/`render`/`cli`/`sim`) are not on PATH, bare `pytest`
+  fails with `ModuleNotFoundError`; (3) `output/` and `logs/` are
+  gitignored runtime artifacts — never stage (`git status --short`
+  before every commit); (4) the call/reply paths are runtime, so a
+  runner script outside the repo (e.g.
+  `/home/z/my-project/scripts/iterNN_runner.py`, Rule 9) is the
+  reproducible way to drive multi-beat sessions — read each call body,
+  hand-compose the reply, apply, harvest the `BEAT` summary lines
+  (KI#44) to pin `notes_contains` for the distilled corpus cases.
+  Batch boundaries are world-defining for the corpus (iter-23 lesson,
+  kept here): `run_steps` drains the queue to exhaustion between
   batches, but steps inside ONE batch interleave with pending clock
-  crossings by tick (D-038): live, the flee ran as its own batch AFTER
-  the fire cascade drained (t=136); a flat setup prefix with the same
-  steps runs it at t=13, BEFORE the smoke. A distilled case must
-  reproduce the live batch structure — the intent-carrying beat (the
-  door's own `run_steps` batch) plus `between` steps are the corpus's
-  vocabulary for it; the test's `between` runs post-call, so its reply
-  rides a stale anchor through the rebase path (session 8's
-  noise/arson cases pin the rebased rotation beat live).
+  crossings by tick (D-038); a distilled case must reproduce the live
+  batch structure — the intent-carrying beat (the door's own
+  `run_steps` batch) plus `between` steps are the corpus's vocabulary
+  for it; the test's `between` runs post-call, so its reply rides a
+  stale anchor through the rebase path (sessions 6/8's noise/arson
+  cases pin the rebased rotation beat live).
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
@@ -289,26 +329,43 @@ scope precedent).
 
 ## Next step
 
-**iter-23 closed the arson-after-theft chain: sessions 4/5/7 are now
-tied — the steal ladder, the fire cascade, and the rotation handover
-have all been probed from both sides, and the cross-system boundary
-(the transfer moves crime but not fire; observability ≠ claimability)
-is corpus-pinned. The exit criterion stands at 86 live beats (target
-≥100). Next, in order:
+**iter-24 closed session 9 (the day-2 return under burned-yard
+knowledge): the phase-1 ≥100-beat exit criterion is HIT — 86→101 live
+beats. Corpus 84→99 (15 single-beat cases over seed 41). The day-1
+canon events are claimable by id+type under day 2 (canon never closes,
+1440-tick gap), the burned yard's `destroyed` flag is canon-from-birth
+state-claimable, the arson-on-a-destroyed-yard case is the pack-2
+backlog's first live probe (no-ignition success — distinct from session
+8's spotless-street `field_nonempty` failure), and the door-outcome
+vocabulary completes its three axes (not co-located, no flagged target,
+no fuel). The tune-2 boundary (suspicion observability ≠ claimability)
+re-pinned under day 2; the tune-3 family (alarm-adjacent + the §3
+market leg) stays unreachable in v0.1, both live-pinned. Next, in
+order:
 
-1. **Validation beats, session 9** — the volume push to the ≥100-beat
-   exit (~14 beats short): the multi-day session (the second rotation
-   at t=1080, day-2 recall under a long log — the recall block's
-   behavior past day 1; probe boundaries, never force scenes — the §3
-   market leg is now pinned unreachable) or fresh seeds over uncovered
-   combinations (a second-day steal under burned-yard knowledge; a
-   witnessed-steal-then-alarm chain — sessions 4 and 6 back to back).
-   Tallies via the `BEAT` summary lines.
-2. `tune-1` rest action (pack data; the owner's fatigue observation)
-   or `st-2` identity persistence per TASKS; `tune-2`
-   (suspicion/crime-status observability) and `tune-3` (alarm-adjacent
-   + the §3 market leg — both boundaries now live-pinned) wait for the
-   owner; `st-6` shrinks to the `travel` half, phase-5-gated.
+1. **Validation beats, session 10** — a witnessed-steal-then-alarm
+   chain (sessions 4 and 6 back to back: a failed witnessed steal
+   spikes the guard's suspicion past the document_check threshold →
+   the director releases `director_0000`; the thief starts an arson
+   as a distraction → the alarm fires → flee_caught). This is the last
+   uncovered combination in the phase-1 corpus vocabulary; once pinned,
+   the corpus moves to the phase-1 gate review (ROADMAP §2).
+   Alternatively, an `iter-25` cleanup pass on the existing corpus
+   (consolidate the multi-session id+type probes; the corpus is at 99
+   cases and growing — the §6.1 substance filter applies, no line cap
+   concerns yet). Tallies via the `BEAT` summary lines.
+2. `tune-1` rest action (pack data; the owner's fatigue observation —
+   pc_01 hit fatigue 30 by t=1080 in this session, the monotonic-climb
+   observation holds across two days) or `st-2` identity persistence
+   per TASKS; `tune-2` (suspicion/crime-status observability) and
+   `tune-3` (alarm-adjacent + the §3 market leg — both boundaries
+   live-pinned, under day 1 in iter-21/23 and under day 2 in iter-24)
+   wait for the owner; `st-6` shrinks to the `travel` half,
+   phase-5-gated. `pack-2` (arson-on-ashes guard) — its first live
+   probe landed iter-24 (the no-ignition success); a pack precondition
+   fix (e.g. an `unburning_spot`/`not_destroyed` test in the closed
+   set) is the natural follow-up when a precondition slot is next
+   needed — most naturally alongside the crime reactions tuning.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).
