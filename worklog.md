@@ -10,6 +10,22 @@
 > since iter-5).
 
 ---
+iter-17 · 2026-08-30 · validation beats — session 4, the crime
+cascade over the presence machinery (iter-17-validation-beats-4)
+- Live narrate session 4 (seed 15, 10 beats, 32 supported /
+  2 refused-and-caught, 5 intents fed, 0 canon violations): the
+  cascade's observable half reads through the cards (witnesses,
+  per-witness knowledge, the purse carried across cards and through
+  the flee — KI#46's read-side pinned); the suspicion half is
+  invisible through the brief (no marker row expressible — the axis
+  lookup is status-prefixed; suspicion_changed never enters
+  scene_delta) → the tune-2 backlog row, owner's call.
+- Corpus 32 → 41 (+9 crime-cascade cases: the blind-witness refusal,
+  the uninferred purse_missing refusal, the rumor transfer, the
+  carried purse); 528 → 537 green, ruff clean. 4 files (fixture +
+  the 3-doc sync set); KI#45 deleted per AGENTS §5; iter-11 evicted
+  per the worklog cap.
+---
 iter-16 · 2026-08-30 · validation beats — session 3 over the presence
 machinery (iter-16-validation-beats-3)
 - Live `narrate` session 3 (seed 7, 7 beats + 1 regen, 18 supported /
@@ -124,14 +140,7 @@ iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
   443→453 green, ruff clean, fixtures byte-identical. 15 files + sync set.
 ---
 iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-free half (iter-11-texture-door)
-- core/intent.py texture machine (reference shape gate, requires_for
-  split, texture noun/test, texture_slot slot) + `_pickup` texture branch
-  + loop/OCC wiring: a take-success on a resolved reference IS the
-  promotion (canon birth, D-054); take texture-capable + real unique_slots
-  ["hearth"] + pack lint; INTENT_SCHEMA §2/§3/§7 synced.
-- Golden delta fixture 13→16: laundering + unique_slot pins (8/8 refusal
-  reasons; the runner grows the mark_promoted beat op). 14 files + sync
-  set (iter-9/10 precedent). 435→443 green, ruff clean, byte-identical. No KIs.
+- (deleted at iter-17 per the one-in/one-out cap; history in git.)
 (iter-10a deleted at iter-16 per the one-in/one-out cap; history in git.)
 iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
 - (deleted at iter-15 per the one-in/one-out cap; history in git.)

@@ -1,21 +1,22 @@
 # STATUS — canonsim
 
-Iteration: iter-16 (`iter-16-validation-beats-3`, STATUS "Next step" #1 —
-the owner's delegation "what is most needed now") · Phase: 1 · Date:
-2026-08-30 · Validation session 3, the first over the iter-15 presence
-machinery (seed 7, 7 beats + 1 regen, 18 supported / 1 unverifiable /
-1 refused-and-caught claims, **0 canon violations**): the st-1
-acceptance probes all hold — quiet-beat room naming from the entity
-cards alone, the absent-presence refusal, arrival-sighting + directed
-pair tokens as supported claims, the unseeded pair axis as
-unverifiable (the honest-verdict law at the pair level), scene-change
-card follow, the promoted prop on the card's scene line, post-rotation
-cards tracking the watch. **KI#46 found live and fixed**: the watch
-rotation left carried items behind (the purse's position stayed at the
-tavern while it rode to the guardroom — the st-1 presence fold
-surfaced the lie); `rotation_plan` now rides `movement_changes`
-(resolvers' carried-item law, single owner). Corpus 25 → 32
-(+7 presence probes); 520 → 528 green, ruff clean.
+Iteration: iter-17 (`iter-17-validation-beats-4`, STATUS "Next step" #1
+— volume over the presence machinery) · Phase: 1 · Date: 2026-08-30 ·
+Validation session 4, the crime-cascade session (seed 15, 10 beats,
+32 supported / 2 refused-and-caught claims, 5 intents fed, **0 canon
+violations**): the cascade reads through the cards in its observable
+half — witnesses present with per-witness knowledge claimable (the
+noticed reach), the purse carried moving across cards (guard → player)
+and riding the flee (KI#46's read-side contract, pinned). **The
+suspicion half is invisible through the brief**: `relations.suspicion`
+is not a card marker (the marker lookup is status-prefixed — a
+suspicion row cannot even be expressed in pack data today) and
+`suspicion_changed` never enters scene_delta; the narrator's only
+visible ground is the crime event itself. Canon-true claims about the
+invisible half still validate (verdicts follow canon, never
+observability — §4 law). Two new refusal families caught live: the
+blind witness (heard ≠ saw) and the uninferred `purse_missing`. Corpus
+32 → 41; 528 → 537 green, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -50,11 +51,7 @@ surfaced the lie); `rotation_plan` now rides `movement_changes`
   pinned by tests/test_crime.py
   `test_rotation_carries_the_items_with_the_guard`; no committed
   fixture bytes touched — the T1 smoke script crosses no rotation).
-- KI#45 · stale citation: tests/test_brief.py's scheduled-lore comment
-  cited BRIEF_SPEC §3.4 while lore lived at §3.5 (predated the iter-15
-  renumber — the drift surfaced exactly when the renumber made it
-  load-bearing) · CLOSED iter-15 (the comment now cites §3.6). Deletes
-  at iter-17 per AGENTS §5.
+  Deletes at iter-18 per AGENTS §5.
 
 ## FAQ / Pitfalls
 
@@ -254,22 +251,24 @@ surfaced the lie); `rotation_plan` now rides `movement_changes`
 
 ## Next step
 
-**Session 3 closed the st-1 acceptance probes (0 canon violations, 7
-beats): the presence machinery holds — quiet-beat naming, card
-persistence across scene changes and time, pair tokens, promoted props,
-and the rotation no longer lies about carried items (KI#46).** The exit
-criterion (0 canon violations per 100 beats, ROADMAP §2) still needs
-volume — the corpus is 32 cases over 30 live beats; more sessions
-across seeds/scenarios extend it. Next, in order:
+**Session 4 closed the crime-cascade probes (0 canon violations, 10
+beats): the cascade's observable half reads through the cards —
+witnesses, per-witness knowledge, the purse carried across cards and
+through the flee; the suspicion half is invisible through the brief
+(no marker row is even expressible — the tune-2 backlog row is the
+owner's call).** The exit criterion (0 canon violations per 100 beats,
+ROADMAP §2) still needs volume — 40 live beats, corpus 41 cases. Next,
+in order:
 
-1. **Validation beats, session 4** — volume: the theft-and-arson
-   scenario over the presence machinery (does the crime cascade read
-   through the cards — witnesses present, the purse carried, suspicion
-   visible on the card markers), or a multi-day session (a second
-   rotation, day-2 rumor telling at the market — lore + recall under a
-   long log). Tallies via the `BEAT` summary lines.
+1. **Validation beats, session 5** — volume: the multi-day session (a
+   second rotation, day-2 rumor telling at the market — lore + recall
+   under a long log) or the arson half over the cards (fire birth /
+   spread / burnout + the fear markers + the burned-out scene line).
+   Tallies via the `BEAT` summary lines.
 2. `tune-1` rest action (pack data; the owner's fatigue observation)
-   or `st-2` identity persistence per TASKS; `st-3`..`st-5` wait.
+   or `st-2` identity persistence per TASKS; `tune-2` (the
+   suspicion/crime-status observability candidate) waits for the
+   owner; `st-3`..`st-5` wait.
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).

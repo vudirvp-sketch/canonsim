@@ -1,5 +1,5 @@
 {
-  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
+  "source": "Phase-1 regression set (iter-13/iter-14/iter-16 validation beats): full narrator response documents distilled from three live agent-in-the-loop sessions (session 1: seed 125, log logs/run_125_0.jsonl; session 2: seed 8, the theft-and-arson scenario, log logs/run_8_1.jsonl; session 3: seed 7, the presence-focused session over the st-1 machinery, log logs/run_7_0.jsonl - gitignored runtime artifacts; provenance worklog iter-13/iter-14/iter-16). Each case replays through the REAL mediator cycle (Simulator + Mediator + SceneLedger, cli/mediator.py) - not the validator or the gateway in isolation: the beat-level pins behind the phase-1 exit criterion '0 canon violations per 100 beats' (ROADMAP 2). After iter-14 the corpus pins every validator refusal reason at the beat level (incl. event_type_mismatch, cannot_know), the stale_ref gateway refusal, the full delta vocabulary (established/pinned/retired/no-op), the regen-exhaustion ladder, and both door outcomes (committed success + committed intent_rejected; rebased intents). Session 3 (iter-16, over the iter-15 presence machinery) adds the st-1 acceptance probes: quiet-beat room naming from the entity cards alone, the absent-presence refusal (naming an entity the cards do not carry), arrival-sighting knowledge + directed pair tokens as supported claims, the unseeded pair axis as unverifiable (the honest-verdict law at the pair level), scene-change card follow, the promoted prop riding the card's scene line, and post-rotation cards tracking the watch (KI#46 fixed in the same iteration: the rotation now carries items - the purse no longer lies about its position). Session 4 (iter-17, seed 15 — the crime-cascade session over the presence machinery: 10 beats, 32 supported / 2 refused-and-caught claims, 5 intents fed, 0 canon violations) adds the crime-cascade probes: witnesses present on the cards with the noticed-reach knowledge claimable per witness, the purse carried moving across cards (guard -> player) and riding the flee (KI#46's read-side contract), the blind-witness refusal (a witness who only heard the noise cannot be claimed to have seen the reach), the uninferred purse_missing refusal (the guard cannot know the purse is gone before the inference event), and the rumor_told transfer to the player. The string 'anchor' in expected_event_seq / based_on_event_seq resolves to the anchor the emitted call advertised (the narrator's contract, BRIEF_SPEC 7.1); integers pass through. Expectations: status + note substrings (+ optional last_event_type, log_unchanged vs the emit moment, call_contains on a final emit).",
   "cases": [
     {
       "name": "honest_supported",
@@ -760,6 +760,263 @@
         }}
       ],
       "expect": {"status": "accepted", "notes_contains": ["BEAT claims: 4 supported"]}
+    },
+    {
+      "name": "cards_show_witnesses_and_the_carried_purse",
+      "seed": 15,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "The taproom took him in with the low, careless hum of a room before anything happens. A guard stood easy by the door — Doren, by the men's greeting — purse knotted at his belt where any fool could see it. The drunkard was three cups past caring, and the maid moved between tables like someone counting the hours till her shift ended.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"},
+              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "npc_guard_01"},
+              {"kind": "state", "entity": "npc_drunk_01", "prop": "status.intoxication", "value": 50},
+              {"kind": "event", "event_id": "ev_0000", "type": "move"},
+              {"kind": "knowledge", "who": "npc_guard_01", "knows": "pc_01_arrived"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "npc_drunk_01_present"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 6 supported"]
+      }
+    },
+    {
+      "name": "crime_intent_feeds_the_door",
+      "seed": 15,
+      "setup": [{"intent": "move", "target": "loc_tavern"}],
+      "beats": [
+        {"reply": {
+          "prose": "He watched the purse more than the man wearing it. A drunkard's flailing arm and a spilled mug would buy three seconds of a guard's attention — long enough for a hand at the wrong belt. He weighed the room once more, marked who faced him, and let his chair scrape back.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "knowledge", "who": "pc_01", "knows": "purse_01_present"},
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_tavern"}
+            ],
+            "intents": [
+              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01",
+               "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 2 supported", "BEAT intents: 1 fed, 0 withdrawn"]
+      }
+    },
+    {
+      "name": "blind_witness_knowledge_refused",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut, and behind the guard the serving maid had gone very still: she had seen the whole reach, hand and purse and all.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0001", "type": "pickpocket_failed"},
+              {"kind": "knowledge", "who": "npc_guard_01", "knows": "figure_reaching_for_purse"},
+              {"kind": "knowledge", "who": "npc_maid_01", "knows": "figure_reaching_for_purse"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": ["CONTRADICTED", "token_absent"]
+      }
+    },
+    {
+      "name": "cascade_claims_supported_after_correction",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The drunkard's arm swept the mug wide — ale sheeted across the bar — and in the three seconds the room's eyes went to the mess, his hand went to the wrong belt. It should have worked. It did not. Doren's wrist caught his like a gate swinging shut. The maid had turned at the commotion, but the bar and the spill stood between her and the reach — what she had was the noise, not the sight. Only Doren had seen the hand itself, and Doren's face was doing arithmetic.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0001", "type": "pickpocket_failed"},
+              {"kind": "event", "event_id": "ev_0002", "type": "suspicion_changed"},
+              {"kind": "state", "entity": "pc_01", "prop": "crime_status", "value": "suspect"},
+              {"kind": "knowledge", "who": "npc_guard_01", "knows": "figure_reaching_for_purse"},
+              {"kind": "knowledge", "who": "npc_maid_01", "knows": "noise_by_the_bar"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 5 supported"]
+      }
+    },
+    {
+      "name": "second_steal_moves_the_carried_purse",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "A word of apology, a bowed head, the small theater of a man accepting a fool's scolding — and Doren, satisfied that the lesson was learned, went back to watching the door. That was the mistake. The second attempt asked for no distraction at all: patience, a half-step of shadow, and a hand that had already learned where the knot sat. The purse came free soft as a fish leaving a net.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "npc_guard_01"}
+            ],
+            "intents": [
+              {"kind": "steal", "actor": "pc_01", "target": "npc_guard_01",
+               "based_on_event_seq": "anchor", "fields": {"method": "distraction"}}
+            ]
+          }
+        }},
+        {"reply": {
+          "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind. Nothing in his stance had changed; the arithmetic of the missing weight had not started. Whatever alarm would come would come later — at a belt-check, a hand pat, a round's end — and by then the purse's new owner meant to be elsewhere.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0006", "type": "steal"},
+              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
+              {"kind": "state", "entity": "pc_01", "prop": "crime_status", "value": "suspect"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 3 supported"]
+      }
+    },
+    {
+      "name": "uninferred_missing_purse_refused",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The purse sat inside his coat like a warm stone. Doren was still watching the door, still working his shift, the weight gone from his belt and not yet from his mind — and then the arithmetic finished. His hand went to his hip, patted leather, and stopped. He knew: the purse was gone, and gone here, in his own taproom.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0006", "type": "steal"},
+              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
+              {"kind": "knowledge", "who": "npc_guard_01", "knows": "purse_missing"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "regen",
+        "notes_contains": ["CONTRADICTED", "purse_missing", "token_absent"]
+      }
+    },
+    {
+      "name": "noticed_reach_witnesses_supported",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "take", "target": "oil_lamp_01"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "Casual was not enough. The barkeep's rag stopped mid-wipe; the maid's tray dipped; the drunkard, three cups deep, tracked the hand with the gravity of a judge. Every soul in the taproom had marked the reach for the lamp, and the lamp stayed where it was. He smiled the smile of a man who had only meant to move it away from the flame, and stepped back from the shelf with empty hands and a lighter coat than anyone knew.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0007", "type": "take_failed"},
+              {"kind": "knowledge", "who": "npc_barkeep_01", "knows": "pc_01_reaching_for_oil_lamp_01"},
+              {"kind": "knowledge", "who": "npc_drunk_01", "knows": "pc_01_reaching_for_oil_lamp_01"},
+              {"kind": "state", "entity": "oil_lamp_01", "prop": "position", "value": "loc_tavern"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 4 supported"]
+      }
+    },
+    {
+      "name": "rumor_told_transfers_the_noise",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "take", "target": "oil_lamp_01"},
+        {"intent": "talk", "target": "npc_drunk_01"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The drunkard leaned in with the confidence of a man holding important news. That commotion by the bar earlier — he'd heard it, heard it plain, and between the fourth cup and the fifth he delivered his version of it to his new best friend: something had gone wrong by the bar, somebody's night had turned. The traveler nodded along, pockets heavy, and began calculating the distance to the back door.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0009", "type": "rumor_told"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "noise_by_the_bar"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "conversation_with_npc_drunk_01"}
+            ],
+            "intents": [
+              {"kind": "move", "actor": "pc_01", "target": "loc_backyard",
+               "based_on_event_seq": "anchor"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 3 supported", "BEAT intents: 1 fed, 0 withdrawn"]
+      }
+    },
+    {
+      "name": "carried_purse_rides_the_flee",
+      "seed": 15,
+      "setup": [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        {"intent": "take", "target": "oil_lamp_01"},
+        {"intent": "talk", "target": "npc_drunk_01"},
+        {"intent": "move", "target": "loc_backyard"}
+      ],
+      "beats": [
+        {"reply": {
+          "prose": "The back door gave onto the yard: bare ground, a stacked woodpile, a coil of rope gone stiff with rain, and the tavern's old back wall rising dry as tinder on the other side of it. He stood in the quiet with the purse a warm stone against his ribs — it had come with him, every step, no hand the wiser. Behind him, through the wall, the taproom's noise carried on without missing him. Ahead: the street, the dark, and a long head start.",
+          "proposal": {
+            "expected_event_seq": "anchor",
+            "claims": [
+              {"kind": "event", "event_id": "ev_0010", "type": "move"},
+              {"kind": "state", "entity": "pc_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "state", "entity": "purse_01", "prop": "carrier", "value": "pc_01"},
+              {"kind": "state", "entity": "purse_01", "prop": "position", "value": "loc_backyard"},
+              {"kind": "knowledge", "who": "pc_01", "knows": "rope_01_present"}
+            ]
+          }
+        }}
+      ],
+      "expect": {
+        "status": "accepted",
+        "notes_contains": ["BEAT claims: 5 supported"]
+      }
     }
   ]
 }

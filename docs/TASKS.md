@@ -113,21 +113,20 @@ the beat level (pin, retire + establish, idempotent no-op). The corpus grew
 16 → 25 cases: every validator refusal reason is now pinned at the beat
 level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
-### iter-16 · validation beats — done (session 3)
+### iter-17 · validation beats — done (session 4)
 
-Session 3 over the NEW presence machinery (seed 7, 7 beats, 18 supported
-claims, 1 unverifiable, 1 refused-and-caught, **0 canon violations**) —
-the st-1 acceptance probes: the narrator legally names the room on a
-zero-event quiet beat (the cards alone), the absent-presence claim
-(npc_guard_02 "present") is refused (`value_mismatch`), the arrival
-snapshot's `saw` tokens + directed pair tokens hold as supported claims,
-the unseeded pair axis lands `unverifiable` (the honest-verdict law at
-the pair level), the cards follow the PC across a scene change, the
-promoted prop rides the card's scene line, and post-rotation cards
-track the watch. **KI#46 fixed mid-session**: the rotation left carried
-items behind (the purse's position lied; any later carrier move would
-desync loudly) — `rotation_plan` now rides `movement_changes`. Corpus
-25 → 32. Detail: `worklog.md` iter-16 + `docs/VALIDATION_SPEC.md` §7.1.
+Session 4, the crime-cascade session over the presence machinery (seed
+15, 10 beats, 32 supported / 2 refused-and-caught, 5 intents fed, **0
+canon violations**): witnesses present with per-witness knowledge
+claimable (the noticed reach), the purse carried moving across cards
+(guard → player) and riding the flee (KI#46's read-side, pinned), the
+blind-witness refusal (heard ≠ saw) and the uninferred `purse_missing`
+refusal both caught live; **the suspicion half is invisible through
+the brief** — `relations.suspicion` is not a card marker (the marker
+lookup is status-prefixed; a suspicion row is not even expressible in
+pack data today) and `suspicion_changed` never enters scene_delta →
+the `tune-2` backlog row, owner's call. Corpus 32 → 41. Detail:
+`worklog.md` iter-17 + `docs/VALIDATION_SPEC.md` §7.1.
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -135,6 +134,15 @@ desync loudly) — `rotation_plan` now rides `movement_changes`. Corpus
   long waits — KI#4/balance observation) + the D-045(b) importance-rule
   knob (hooks on story-critical events, NOT `tale_gate`); both refresh
   the 1000-sim baseline when tuned.
+- `tune-2` crime-cascade observability (iter-17 session finding): the
+  suspicion axis and the `crime_status` flip are invisible through the
+  brief — no card marker (the marker table's axis lookup is
+  status-prefixed, so a `relations.suspicion` row is not even
+  expressible in pack data) and `suspicion_changed` never enters
+  scene_delta. Candidate = a pack marker row for suspicion/crime-status
+  + the tiny status-prefix generalization in the card renderer; whether
+  the narrator SHOULD see NPC-interior suspicion at all is the owner's
+  call (mode-A epistemics vs readable crime tension).
 
 ### Stress-test backlog (iter-11b resolutions; owner-gated)
 
@@ -287,6 +295,15 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-16 · 2026-08-30 · validation beats — session 3 (iter-16-
+  validation-beats-3): the st-1 acceptance probes over the iter-15
+  presence machinery all hold (quiet-beat room naming, the
+  absent-presence refusal, sighting + pair tokens, scene-change card
+  follow, the promoted prop, post-rotation cards; seed 7, 7 beats,
+  0 canon violations); KI#46 found live and fixed (the rotation left
+  carried items behind — `rotation_plan` now rides `movement_changes`).
+  Corpus 25 → 32. Detail: worklog iter-16 + VALIDATION_SPEC §7.1.
 
 - iter-15 · 2026-08-30 · presence & entity cards — st-1 landed
   (iter-15-presence, D-056; the owner's session delegation "pick what
