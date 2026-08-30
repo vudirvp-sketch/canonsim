@@ -10,6 +10,49 @@
 > since iter-5).
 
 ---
+iter-22 · 2026-08-31 · validation beats — session 7, the theft half
+under the presence machinery (iter-22-validation-beats-7)
+- Live narrate session 7 (seed 54, 11 beats, 24 supported /
+  1 refused-and-caught, 0 canon violations): the pre-steal arrival
+  snapshot pins the cards BEFORE the crime (guard carries purse,
+  barkeep carries club, drunkard's intoxication 50 renders the
+  `drunk` marker; the drunk→guard fear 40 + maid→barkeep trust 70
+  pair tokens render as directed pair lines — the second seeded pair
+  axis now state-claimed, complement to session 3's drunk→guard
+  probe under seed 7).
+- A successful first steal moves the purse silently — no
+  witnessed_steal_failure, no suspicion, crime_status stays
+  `unknown` (the silent-steal vs failed-steal fork in the steal
+  ladder; session 4 took the failed half). The watch rotation
+  carries the standard crime cascade; the expectation_violation
+  event is claimable by id+type (complement to session 5's
+  fire-event-by-id); post-inference purse_missing is positively
+  claimable for both guards (inferred/exact for the victim,
+  told/partial — one fidelity step down — for the relief guard,
+  the transfer_decay_steps=1 law live at the beat level).
+- The suspicion axis is state-claimable for both guards even
+  though no card marker renders it (the tune-2 boundary —
+  observability ≠ claimability; the projection holds the value
+  the brief does not surface). The second steal after watch
+  rotation returns intent_rejected (target moved to guardroom —
+  co-location precondition fails, distinct from session 4's
+  second-steal-success case where the guard stayed put); the
+  stolen purse rides a plain move (no pursuit) to the backyard
+  (KI#46's contract in a non-pursuit context); the
+  witness-cannot-know-purse_missing refusal pins the inference
+  boundary (the barkeep never held the purse-on-himself
+  expectation — token_absent).
+- Corpus 59→70 (+11 seed-54 cases); 564→575 green, ruff clean.
+  4 files (fixture + the 3-doc sync set — the iter-18 scope
+  precedent); iter-12 evicted per the cap; iter-21's missing
+  TASKS one-liner backfilled (the iter-21 commit skipped it);
+  TASKS 584→611 — the §6.1 cruft pass ran (iter-7/8/8a/8c/8g/4a
+  trimmed, no substance cut) — substance remains: the iter-22 +
+  iter-21 one-liners carry load-bearing session findings (the
+  silent-steal fork, the expectation_violation id+type probe, the
+  tune-2 re-pin); AGENTS §6.1 substance-vs-cruft law: stays over,
+  recorded here.
+---
 iter-21 · 2026-08-31 · validation beats — session 6, the alarm
 cascade (iter-21-validation-beats-6)
 - Live narrate session 6 (seed 33, arson in the crowded taproom,
@@ -159,17 +202,7 @@ iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop sessi
   (test_mediator.py); CLI wiring pinned (test_cli.py). 476→493 green,
   ruff clean; bg-1 evicted per the cap.
 ---
-iter-12 · 2026-08-30 · the mediator session loop — agent-in-the-loop (iter-12-mediator-loop)
-- Owner verdict D-055: no SoW/llama.cpp — the dev-time narrator is the
-  external agent over files (INV-4 holds); SoW audit parked as bg-6.
-- brief/mediator.py (call/response docs, feedable_intents, promotions
-  scan) + cli/mediator.py (the D-049 beat cycle + the L12 ladder) +
-  `narrate` commands + ledger check_delta_shape.
-- Specs synced: BRIEF_SPEC §7.1 (314/300 — §6.1 pass done, the over-cap
-  is the new format law), VALIDATION_SPEC §7.1, TASKS/STATUS/
-  AGENT_NAVIGATION; KI#42 deleted per §5.
-- 453→476 green, ruff clean; iter-8h evicted per the cap.
-(bg-5 deleted at iter-21 per the one-in/one-out cap; history in git.)
+(iter-12 deleted at iter-22 per the one-in/one-out cap; history in git.)
 ---
 iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
 - (deleted at iter-20 per the one-in/one-out cap; history in git.)

@@ -1,27 +1,36 @@
 # STATUS — canonsim
 
-Iteration: iter-21 (`iter-21-validation-beats-6`) · Phase: 1 · Date:
-2026-08-31 · The alarm-cascade half, the complement to session 5's
-solo-arson: live `narrate` session 6 (seed 33, arson in the crowded
-taproom, 12 beats + 2 refused-regen probes, 53 supported claims,
-0 canon violations). With witnesses present, the cascade the
-solo-arson could never fire now fires: `alarm_raised` (raised_by
-the first occupant in pack order), the fear spike (status.fear 40)
-claimable per NPC and rendered as the `afraid` card marker, and the
-cause actor hears the alarm (`fire_alarm_in_<loc>` — the alarm
-audience has no exception clause) while still blind to the ignition
-(`fire_in_<loc>` — session 5's cause-actor law holds witnessed).
-The §3 watch-change handover ran live: the rotation carries the
-purse (KI#46's contract) while `knowledge_transfer` hands the whole
-fire record set to the relief guard (told, one fidelity step down)
-— who walks into the ashes carrying the fire secondhand but
-unafraid (the briefing moves knowledge, not fear; 40→36 decay at
-the beat, D-050). Finding → `tune-3`: the alarm-adjacent
-`shouting_near_<loc>` token is structurally unreachable in v0.1
-(NPC placement static, the rotation a direct post swap, playscript
-steps player-only) — pinned by the guardroom refusal pair. Corpus
-51→59; 556→564 green, ruff clean. 4 files (fixture + the 3-doc
-sync set — the iter-18 scope precedent).
+Iteration: iter-22 (`iter-22-validation-beats-7`) · Phase: 1 · Date:
+2026-08-31 · The theft half under the presence machinery, a fresh
+seed over the steal ladder: live `narrate` session 7 (seed 54, 11
+beats, 24 supported / 1 refused-and-caught, 0 canon violations).
+The pre-steal arrival snapshot pins the cards BEFORE the crime —
+the guard carries the purse, the barkeep carries the club, the
+drunkard's intoxication renders the `drunk` marker; the drunk→guard
+fear 40 and the maid→barkeep trust 70 pair tokens render as
+directed pair lines (the second seeded pair axis state-claimed,
+complement to session 3's drunk→guard probe). A successful first
+steal moves the purse silently — no suspicion because no
+`witnessed_steal_failure`; `crime_status` stays `unknown` (the
+silent-steal vs failed-steal fork — session 4 took the failed half).
+The watch rotation at t=360 carries the standard crime cascade;
+the `expectation_violation` event is claimable by id+type
+(complement to session 5's fire-event-by-id probe — a theft-half
+canon event the brief may not surface but canon never closes);
+the post-inference `purse_missing` is positively claimable for
+both guards (inferred/exact for the victim, told/partial — one
+fidelity step down, the `transfer_decay_steps=1` law — for the
+relief guard); the suspicion axis is state-claimable for both
+guards though no card marker renders it (the `tune-2` boundary —
+observability ≠ claimability). The second steal after watch
+rotation returns `intent_rejected` (target moved to guardroom —
+co-location precondition fails, distinct from session 4's
+second-steal-success case); the stolen purse rides a plain move
+(no pursuit) to the backyard (KI#46's contract in a non-pursuit
+context); the witness-cannot-know-`purse_missing` refusal pins
+the inference boundary (the barkeep never held the expectation —
+`token_absent`). Corpus 59→70; 564→575 green, ruff clean. 4 files
+(fixture + the 3-doc sync set — the iter-18 scope precedent).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -45,13 +54,12 @@ sync set — the iter-18 scope precedent).
 
 ## Active KIs
 
-- KI#48 · iter-19 doc drift: "layout needs `initial_projection`
-  seeding (canon_slot reads top-level fields only)" was FALSE both
-  ways — the check (`brief/ledger.py::establish`) reads BOTH prop
-  sources (a pack-modeled field was already guarded — KI#41's
-  `exits` precedent); the real gap was scene-line rendering
-  (promoted props only) · CLOSED iter-20 (phrases fixed in place;
-  layout landed as pack data via `scene_line_fields`, D-057).
+(none)
+
+- (KI#48 deleted at iter-22 per AGENTS §5 — closed iter-20, two
+  iterations past; the canon_slot dual-source law lives in
+  `brief/ledger.py::establish` + the §6.1 substance filter notes;
+  detail in git + worklog iter-20.)
 - (KI#47 deleted at iter-21 per AGENTS §5 — closed iter-19, two
   iterations past; the grid-phrase fix detail lives in git +
   worklog iter-19.)
@@ -266,27 +274,33 @@ sync set — the iter-18 scope precedent).
 
 ## Next step
 
-**iter-21 closed the alarm-cascade half: the fire's observable
-surface is now pinned from both sides (solo-arson session 5 +
-witnessed-arson session 6 — alarm, fear markers, the cause-actor
-two-sidedness, the watch-change handover). Session 6 left the exit
-criterion at 63 live beats (target ≥100). Next, in order:
+**iter-22 closed the theft half under the presence machinery: the
+steal ladder is now pinned from both sides (failed-steal session 4
++ silent-steal session 7 — the suspicion fork, the inference
+boundary, the carried-purse contract through plain moves). Session
+7 left the exit criterion at 74 live beats (target ≥100). Next, in
+order:
 
-1. **Validation beats, session 7** — volume toward the ≥100-beat
+1. **Validation beats, session 8** — volume toward the ≥100-beat
    exit: the multi-day session (a second rotation, day-2 recall
    under a long log — the recall block's behavior past day 1;
    honest expectation: the §3 "drunkard tells the market" leg is
    likely unreachable live — the drunkard never leaves the tavern
    and the market crowd is not a talk target, so probe and pin the
-   boundary rather than force the scene) or a fresh seed over the
-   theft half (the steal ladder under the presence machinery).
-   Tallies via the `BEAT` summary lines.
+   boundary rather than force the scene) or a fresh seed over a
+   cross-system cascade not yet covered (the §3 drop_break → fire
+   chain under a successful theft context — the take-failed branch
+   probed in iter-22's exploration; the arson-after-theft chain
+   would tie sessions 4/5/7 together). Tallies via the `BEAT`
+   summary lines.
 2. `tune-1` rest action (pack data; the owner's fatigue
    observation) or `st-2` identity persistence per TASKS; `tune-2`
-   (suspicion/crime-status observability) and `tune-3` (the
-   alarm-adjacent unreachability) wait for the owner; `st-6`
-   shrinks to the `travel` half, phase-5-gated (the `layout` half
-   landed iter-20).
+   (suspicion/crime-status observability — the iter-22 session
+   re-pinned the boundary: the suspicion axis is state-claimable
+   but card-invisible, the same law holds for crime_status) and
+   `tune-3` (the alarm-adjacent unreachability) wait for the owner;
+   `st-6` shrinks to the `travel` half, phase-5-gated (the `layout`
+   half landed iter-20).
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).
