@@ -51,41 +51,6 @@ the beat level (pin, retire + establish, idempotent no-op). The corpus grew
 16 → 25 cases: every validator refusal reason is now pinned at the beat
 level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
-### iter-18 · validation beats — done (session 5, the arson half)
-
-Session 5, the arson-half session over the cards (seed 20, 10 beats,
-29 supported / 4 refused-and-caught / 1 unverifiable, **0 canon
-violations**): the fire cascade (fire_started / fire_spread /
-smoke_rising / location_burned_out) is in canon regardless of who
-stood where; the observable surface splits by location — the
-cause-actor never gets `fire_in_<loc>` (rules.json transitions.fire.
-knowledge.started `except: cause_actor` — token_absent on the PC's
-own ignition knowledge), the same-location PC gets the spread/smoke/
-burnout records via saw/exact, an absent NPC's `fire_in_<loc>` claim
-is token_absent (different location → no record), no alarm fires in
-the canonical solo-arson scenario (no occupants at the fire
-location → `fire_alarm_in_<loc>` and the fear markers stay unclaimable),
-an unmodeled `fire_intensity` prop reads `insufficient_data` (the
-honest-verdict law, UAP), and a canon event is claimable by id+type
-even when the PC's brief was silent about it (the validator checks
-the log, not the brief's perception). Corpus 41 → 51. Detail:
-`worklog.md` iter-18 + `docs/VALIDATION_SPEC.md` §7.1.
-
-### iter-17 · validation beats — done (session 4, crime cascade)
-
-Session 4, the crime-cascade session over the presence machinery (seed
-15, 10 beats, 32 supported / 2 refused-and-caught, 5 intents fed, **0
-canon violations**): witnesses present with per-witness knowledge
-claimable (the noticed reach), the purse carried moving across cards
-(guard → player) and riding the flee (KI#46's read-side, pinned), the
-blind-witness refusal (heard ≠ saw) and the uninferred `purse_missing`
-refusal both caught live; **the suspicion half is invisible through
-the brief** — `relations.suspicion` is not a card marker (the marker
-lookup is status-prefixed; a suspicion row is not even expressible in
-pack data today) and `suspicion_changed` never enters scene_delta →
-the `tune-2` backlog row, owner's call. Corpus 32 → 41. Detail:
-`worklog.md` iter-17 + `docs/VALIDATION_SPEC.md` §7.1.
-
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
 - `tune-1` rest action as pack data (player fatigue is monotonic over
@@ -137,16 +102,17 @@ the `tune-2` backlog row, owner's call. Corpus 32 → 41. Detail:
   the clock jumps ahead so day-scale durations are queue-cheap;
   beats/rotations still fire mid-travel in tick order, D-038); macro
   clocks (L4) enter only when regions/worldgen arrive. (b)
-  **`layout` as a location field, NOT a `fire_spots` promotion**
-  (fire_spots is the arson mechanic — actions.json precondition +
-  transitions spot_field); static architecture = canon from birth via
-  `initial_projection` seeding as location props → the D-056 scene
-  line renders them, the gateway's canon_slot check refuses texture
-  on them (today it reads top-level pack fields only — seeding is
-  what makes it work), the validator adjudicates claims on them;
-  mutable decor stays texture (the existing door). Gates: the
-  phase-5 spatial layer or an owner request — geometry donors are
-  phase-5-gated (ROADMAP §4) and track A is feature-frozen.
+  **`layout` — LANDED iter-20 (D-057/KI#48)**: a top-level pack
+  field on every location rendered canon-from-birth on the scene
+  line via `brief.present_entities.scene_line_fields` — no
+  `initial_projection` seeding (the iter-19 claim that the gateway's
+  canon_slot reads top-level pack fields only was WRONG: the check
+  reads both prop sources, and a pack field was already guarded —
+  the `exits` precedent, KI#41); the validator adjudicates claims on
+  it; mutable decor stays texture (the existing door). Remaining
+  gates for (a): the phase-5 spatial layer or an owner request —
+  geometry donors are phase-5-gated (ROADMAP §4) and track A is
+  feature-frozen.
 
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 
@@ -278,6 +244,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Done
 
+- iter-20 · 2026-08-30 · universality pass — the transition-layer and
+  scene-line vocabularies become pack data (iter-20-universality;
+  KI#48 + D-057): follow-up kinds/flags/values, the spreading
+  `spot_state`, the spread `halt_flag`, and the director's threat
+  vocabulary moved from core code into `rules.json::transitions`
+  (behavior byte-identical — the T1 fixture untouched); `layout`
+  landed as a location pack field rendered on the scene line via
+  `brief.present_entities.scene_line_fields` (canon-from-birth, no
+  seeding); KI#48 records the iter-19 factual error (canon_slot
+  reads BOTH prop sources — projection and pack record). Proven by a
+  synthetic `rot` layer with a wholly different vocabulary in
+  test_transitions.py. 547→556 green, ruff clean. Detail: worklog
+  iter-20 + `docs/BRIEF_SPEC.md` §3.4/§6 + D-057.
+
 - iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial
   analyses (iter-19-spatial-audit; docs-only, D-022 exception):
   verdict ~85–95% repo-true (time/space/canon-vs-texture mechanics
@@ -285,9 +265,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   found — the ref-9/ref-10 lift-target + grid drift family is wider
   than ref-9-c (KI#47: 9 grid phrases fixed; phantom lift-targets
   stanced in the STATUS FAQ), travel is queue-cheap today (clock
-  jump-ahead), `layout` needs projection seeding for gateway
-  protection. Resolution: the `st-6` spatial backlog row (travel +
-  layout, phase-5-gated). Detail: worklog iter-19 + `STATUS.md`.
+  jump-ahead); the layout claim was corrected by KI#48 at iter-20
+  (canon_slot guards pack fields without seeding). Resolution: the
+  `st-6` spatial backlog row (travel, phase-5-gated; layout landed
+  iter-20). Detail: worklog iter-19 + `STATUS.md`.
 
 - iter-18 · 2026-08-30 · validation beats — session 5, the arson half
   over the cards (iter-18-validation-beats-5): the fire cascade

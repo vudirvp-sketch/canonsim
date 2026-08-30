@@ -10,6 +10,27 @@
 > since iter-5).
 
 ---
+iter-20 · 2026-08-30 · universality pass — the transition + scene-line
+vocabularies become pack data (iter-20-universality, KI#48 + D-057)
+- core/transitions.py iterates rules.json transitions.<layer>.
+  follow_ups (kinds/flags/values/blocked_by) + spot_state/halt_flag;
+  resolvers + the director's threat sensor read the declared
+  vocabulary; pack lint joins every kind to an event + knowledge
+  entry. Tavern behavior byte-identical (T1 fixture untouched); a
+  synthetic `rot` layer (infested/condemned/stench/collapse)
+  proves generality (test_transitions.py).
+- `layout` on all 5 locations + brief.present_entities.
+  scene_line_fields: the scene line renders pack fields
+  canon-from-birth (assembler, BRIEF_SPEC §3.4/§6; the corpus
+  call_contains line updated to the new scene-line shape).
+- KI#48 opened+closed: iter-19's "canon_slot reads top-level fields
+  only / seeding needed" was false both ways (the ledger reads BOTH
+  prop sources — KI#41 precedent) — STATUS/worklog/TASKS phrases
+  fixed in place; st-6 shrinks to the travel half.
+- 547→556 green, ruff clean. 17 files (two subsystems + the doc
+  sync set — over the 3–5 soft limit, the iter-15 scope
+  precedent); iter-11c evicted per cap.
+---
 iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses (iter-19-spatial-audit)
 - Verdict ~85–95% repo-true: time/space/canon-vs-texture mechanics
   confirmed (D-048/049/053/054/056, queue key, t+duration); the
@@ -17,8 +38,9 @@ iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses (i
   establish, travel-over-weighted-move, layout-over-fire_spots).
 - Omissions: drift family is ref-9-a/b/c + entt/bevy wide (phantom
   sim/systems, core/runner, core/store, content/packs/*.py);
-  travel is queue-cheap today (clock jump-ahead); layout needs
-  initial_projection seeding for canon_slot protection.
+  travel is queue-cheap today (clock jump-ahead). The layout
+  clause was wrong (KI#48, corrected iter-20: canon_slot reads
+  both prop sources — no seeding needed).
 - KI#47 opened+closed: 9 grid phrases fixed (docs/ref/{libtcod,
   rot_js,red_blob_games}.md + REFERENCES_DEEP rows); lift-target
   vocabulary stanced in the STATUS FAQ (pre-D-028 precedent);
@@ -135,15 +157,7 @@ bg-5 · 2026-08-30 · owner-requested external-spec verdict (bg-5-spec-verdict)
   deleted per AGENTS §5. 3 files; docs-only, D-022 counter = 3.
 ---
 iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
-- Verdict: sound — every claim reproduced against the code (453
-  green, ruff clean, fixtures byte-identical; perception tokens,
-  prop-birth shape, O(N)/beat folds, records_of, canon-slot check,
-  D-ID/section citations, caps, KI lifecycle — all exact).
-- KI#43 closed: MECW figure gains its single owner (TECH_NOTES §2,
-  provenance + rot marker; blueprint §1 links), the arrival snapshot
-  re-named to the actor-held per-present-target `knows` expansion
-  (INTENT_SCHEMA §7/§10), container cycle guard += the commit gate
-  (D-035). 5 files; docs-only, D-022 counter = 2.
+- (deleted at iter-20 per the one-in/one-out cap; history in git.)
 ---
 iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified)
 - (deleted at iter-19 per the one-in/one-out cap; history in git.)

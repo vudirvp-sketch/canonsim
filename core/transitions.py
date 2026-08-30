@@ -1,15 +1,16 @@
 """The generic transition engine (phase0 §2, Brogue `promoteTile` donor):
 one mechanism — flag-gated ignition, stochastic per-tick promotion, SEEDED
 follow-ups — driven entirely by pack-declared layers (`rules.json`
-`transitions`). Core code carries no layer names and no domain words
-(INV-3): the fire chain is data, the engine is mechanics.
+`transitions`). Core code carries no layer names, no state values, and no
+follow-up kinds (INV-3, D-057): the fire chain is data, the engine is
+mechanics.
 
 The engine is pure: it returns event drafts and plans; `core/loop.py` owns
 the writer and the queue (the only canon-write path, INV-1), chains
-`cause`, and stamps `provenance.seed` at append time. State layout on the
-location: `<layer>.<spot>` = "burning" (irreversible), plus `smoke` /
-`destroyed` flags. Spread rolls draw from the substantive stream — they
-change canon.
+`cause`, and stamps `provenance.seed` at append time. Layer state layout
+on the location: `<layer>.<spot>` = the layer's `spot_state` while it
+spreads (irreversible), plus the `follow_ups` flags the pack declares.
+Spread rolls draw from the substantive stream — they change canon.
 """
 
 from __future__ import annotations
@@ -52,14 +53,14 @@ class Ignition:
 class FollowUpSpec:
     """A SEEDED follow-up: emit the layer's `kind` event at `at_tick`."""
 
-    kind: str  # "smoke" | "burnout"
+    kind: str  # a pack-declared follow-up kind (join key: events/knowledge)
     at_tick: int
 
 
 @dataclass(frozen=True, slots=True)
 class IgnitionPlan:
     """What an ignition produces: the started event (+ alarm when others
-    are present, fear spikes per pack rule), smoke/burnout follow-up
+    are present, fear spikes per pack rule), the pack-declared follow-up
     seeds, and whether the spread pass starts."""
 
     drafts: tuple[EventDraft, ...]
@@ -83,20 +84,31 @@ def _layer(pack: Pack, layer: str) -> Mapping[str, Any]:
     return transitions[layer]
 
 
+def _follow_up_spec(layer_cfg: Mapping[str, Any], kind: str) -> Mapping[str, Any]:
+    """The pack-declared spec for one follow-up kind (loud when absent)."""
+    for spec in layer_cfg["follow_ups"]:
+        if spec["kind"] == kind:
+            return spec
+    raise ValueError(f"unknown follow-up kind {kind!r}")
+
+
 def _spots(pack: Pack, layer_cfg: Mapping[str, Any], location: str) -> list[str]:
     return list(pack.entity(location).get(layer_cfg["spot_field"], ()))
 
 
-def _burning_spots(
-    projection: Mapping[str, Mapping[str, Any]], layer: str, location: str
+def _active_spots(
+    projection: Mapping[str, Mapping[str, Any]], layer: str, location: str,
+    state: str,
 ) -> list[str]:
-    """Burning spot NAMES (the layer prefix stripped from the prop path)."""
+    """Spreading spot NAMES (the layer prefix stripped from the prop
+    path — a spot is spreading while its prop holds the layer's
+    `spot_state`)."""
     props = projection[location]
     prefix = f"{layer}."
     return [
         prop[len(prefix):]
         for prop in sorted(props)
-        if prop.startswith(prefix) and props[prop] == "burning"
+        if prop.startswith(prefix) and props[prop] == state
     ]
 
 
@@ -121,14 +133,17 @@ def ignite(
     cause_actor: str,
 ) -> IgnitionPlan:
     """Plan the ignition of one spot: the started event (irreversible),
-    the alarm when other entities are present, smoke/burnout seeds, and
-    the spread pass. Re-igniting an already-burning spot is a no-op plan."""
+    the alarm when other entities are present, the pack-declared
+    follow-up seeds, and the spread pass. Re-igniting a spot that already
+    holds the layer's `spot_state` is a no-op plan."""
     layer_cfg = _layer(pack, ignition.layer)
     location = ignition.location
     spot = ignition.spot
     if spot not in _spots(pack, layer_cfg, location):
         raise ValueError(f"spot {spot!r} is not a {location!r} spot of the pack")
-    if spot in _burning_spots(projection, ignition.layer, location):
+    if spot in _active_spots(
+        projection, ignition.layer, location, layer_cfg["spot_state"]
+    ):
         return IgnitionPlan(drafts=(), follow_ups=(), seed_pass=False)
 
     knowledge_cfg = layer_cfg["knowledge"]
@@ -140,7 +155,7 @@ def ignite(
         entity=location,
         prop=f"{ignition.layer}.{spot}",
         from_=None,
-        to_="burning",
+        to_=layer_cfg["spot_state"],
         irreversible=True,
     )
     started = EventDraft(
@@ -194,9 +209,9 @@ def ignite(
         )
         drafts.append(alarm)
 
-    follow_ups = (
-        FollowUpSpec("smoke", tick + layer_cfg["smoke"]["after_ticks"]),
-        FollowUpSpec("burnout", tick + layer_cfg["burnout"]["after_ticks"]),
+    follow_ups = tuple(
+        FollowUpSpec(str(spec["kind"]), tick + int(spec["after_ticks"]))
+        for spec in layer_cfg["follow_ups"]
     )
     return IgnitionPlan(
         drafts=tuple(drafts), follow_ups=follow_ups, seed_pass=True
@@ -211,28 +226,31 @@ def spread_tick(
     layer: str,
     causes: Mapping[str, str],
 ) -> SpreadResult:
-    """One pass tick: for every burning, not-destroyed location, roll each
-    unburning spot (pack order) against the pack chance; emit one spread
-    event per ignition, cause-chained to the location's last fire event
-    (`causes`, maintained by the loop)."""
+    """One pass tick: for every spreading, not-halted location, roll each
+    remaining spot (pack order) against the pack chance; emit one spread
+    event per ignition, cause-chained to the location's last layer event
+    (`causes`, maintained by the loop). A location whose `halt_flag` is
+    set neither spreads nor keeps the pass alive."""
     layer_cfg = _layer(pack, layer)
     knowledge_cfg = layer_cfg["knowledge"]
     chance = layer_cfg["spread"]["chance_per_tick"]
+    spot_state = layer_cfg["spot_state"]
+    halt_flag = layer_cfg["halt_flag"]
     drafts: list[EventDraft] = []
     continue_pass = False
 
-    burning_locations = sorted(
+    spreading_locations = sorted(
         entity_id
         for entity_id, props in projection.items()
         if any(
-            prop.startswith(f"{layer}.") and value == "burning"
+            prop.startswith(f"{layer}.") and value == spot_state
             for prop, value in props.items()
         )
     )
-    for location in burning_locations:
-        if projection[location].get("destroyed"):
+    for location in spreading_locations:
+        if projection[location].get(halt_flag):
             continue
-        burning = set(_burning_spots(projection, layer, location))
+        burning = set(_active_spots(projection, layer, location, spot_state))
         unburning = [
             spot for spot in _spots(pack, layer_cfg, location) if spot not in burning
         ]
@@ -247,7 +265,7 @@ def spread_tick(
             )
             spot_change = StateChange(
                 entity=location, prop=f"{layer}.{spot}",
-                from_=None, to_="burning", irreversible=True,
+                from_=None, to_=spot_state, irreversible=True,
             )
             drafts.append(
                 EventDraft(
@@ -275,42 +293,35 @@ def follow_up_draft(
     kind: str,
     cause_id: str,
 ) -> EventDraft | None:
-    """The smoke / burnout event for a burning location (SEEDED at
-    ignition time). Idempotent on state: a flag already set means this
-    story was already told — None, no duplicate event, no duplicate
-    chronicle line. None likewise when the burnout pre-empted a pending
-    smoke. A second ignition of the same location seeds a second
-    follow-up pair; the first to fire says the line, the rest stay
-    silent (KI#13 discipline: no no-op duplicates in the canon)."""
+    """The follow-up event for a spreading location (SEEDED at ignition
+    time; the kind, flag, value, and irreversibility are pack data).
+    Idempotent on state: the flag already at its value means this story
+    was already told — None, no duplicate event, no duplicate chronicle
+    line. None likewise when a blocking flag (`blocked_by`) pre-empted
+    it. A second ignition of the same location seeds a second follow-up
+    set; the first to fire says the line, the rest stay silent (KI#13
+    discipline: no no-op duplicates in the canon)."""
     layer_cfg = _layer(pack, layer)
     knowledge_cfg = layer_cfg["knowledge"]
     ctx = {"location": location, "cause_actor": None}
+    spec = _follow_up_spec(layer_cfg, kind)
 
-    if kind == "smoke":
-        if projection[location].get("destroyed"):
-            return None  # the burnout already told this story
-        if projection[location].get("smoke") is True:
-            return None  # the smoke already told this story
-        knowledge = resolve_knowledge(
-            [knowledge_cfg["smoke"]], pack, projection, ctx, tick
-        )
-        changes = (
-            StateChange(entity=location, prop="smoke", from_=None, to_=True),
-        )
-    elif kind == "burnout":
-        if projection[location].get("destroyed") is True:
-            return None  # the burnout already told this story
-        knowledge = resolve_knowledge(
-            [knowledge_cfg["burnout"]], pack, projection, ctx, tick
-        )
-        changes = (
-            StateChange(
-                entity=location, prop="destroyed",
-                from_=None, to_=True, irreversible=True,
-            ),
-        )
-    else:
-        raise ValueError(f"unknown follow-up kind {kind!r}")
+    for blocked in spec.get("blocked_by", ()):
+        if projection[location].get(blocked):
+            return None  # a blocking flag already told this story
+    if projection[location].get(spec["flag"]) == spec["value"]:
+        return None  # this story was already told
+
+    knowledge = resolve_knowledge(
+        [knowledge_cfg[kind]], pack, projection, ctx, tick
+    )
+    changes = (
+        StateChange(
+            entity=location, prop=spec["flag"],
+            from_=None, to_=spec["value"],
+            irreversible=bool(spec["irreversible"]),
+        ),
+    )
 
     return EventDraft(
         t=tick,

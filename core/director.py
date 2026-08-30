@@ -132,15 +132,28 @@ def policy_from_rules(rules: Mapping[str, Any], enabled: bool) -> DirectorPolicy
 # -- entropy (P2e: observable state only, never knowledge records) ------------
 
 
-def _visible_physical_threats(projection: Mapping[str, Mapping[str, Any]]) -> int:
-    """Count of burning transition spots across all locations (one per
-    `<layer>.<spot>` prop whose value is `burning`)."""
+def _threat_states(rules: Mapping[str, Mapping[str, Any]]) -> frozenset[str]:
+    """The active-state values of every declared transition layer — the
+    value a `<layer>.<spot>` prop holds while the layer spreads (pack
+    data, D-057; the director never hardcodes a layer vocabulary)."""
+    return frozenset(
+        str(config["spot_state"])
+        for config in rules.get("transitions", {}).values()
+        if isinstance(config, Mapping) and "spot_state" in config
+    )
+
+
+def _visible_physical_threats(
+    projection: Mapping[str, Mapping[str, Any]], states: frozenset[str]
+) -> int:
+    """Count of spreading transition spots across all locations (one per
+    `<layer>.<spot>` prop holding a layer's active-state value)."""
     threats = 0
     for props in projection.values():
         for prop, value in props.items():
             if "." not in prop:
                 continue
-            if value == "burning":
+            if value in states:
                 threats += 1
     return threats
 
@@ -160,14 +173,19 @@ def _global_suspicion(projection: Mapping[str, Mapping[str, Any]]) -> int:
 def entropy(
     projection: Mapping[str, Mapping[str, Any]],
     unreleased: Iterator[SeededHook],
+    rules: Mapping[str, Mapping[str, Any]],
 ) -> int:
     """P2e: sum of seeded-hook weights + global suspicion + visible
     physical threats — observable state only (L6). Computed from the
-    projection and the buffer, never from knowledge records or PC
-    internals. The stagnation detector releases when this drops below
-    the pack's floor."""
+    projection, the buffer, and the pack's transition declarations,
+    never from knowledge records or PC internals. The stagnation
+    detector releases when this drops below the pack's floor."""
     weights = sum(hook.weight for hook in unreleased)
-    return weights + _global_suspicion(projection) + _visible_physical_threats(projection)
+    return (
+        weights
+        + _global_suspicion(projection)
+        + _visible_physical_threats(projection, _threat_states(rules))
+    )
 
 
 # -- triggers (time / place / threshold — causal, not stagnation) -------------
@@ -287,7 +305,9 @@ class Director:
         # return — so it is computed once and reused for every policy
         # check (the eager per-hook recomputation was pure waste under a
         # rejecting policy: k+1 identical evaluations per beat).
-        current_entropy = entropy(projection, iter(h for _, h in unreleased))
+        current_entropy = entropy(
+            projection, iter(h for _, h in unreleased), self.pack.rules
+        )
         # 1) explicit triggers — causal, fire regardless of entropy
         for idx, hook in unreleased:
             if not _trigger_fires(hook.trigger, projection, beat_tick):

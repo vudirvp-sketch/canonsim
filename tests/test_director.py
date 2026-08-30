@@ -14,6 +14,7 @@ for a given buffer + projection — no RNG in the director itself.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -78,28 +79,43 @@ def test_seed_ignores_events_without_hooks() -> None:
 
 def test_entropy_zero_on_idle_world() -> None:
     projection = initial_projection(PACK.entities)
-    assert entropy(projection, iter([])) == 0  # no hooks, no suspicion, no fires
+    assert entropy(projection, iter([]), PACK.rules) == 0  # no threats
 
 
 def test_entropy_sums_hook_weights() -> None:
     projection = initial_projection(PACK.entities)
     hooks = [_seeded_hook(weight=2), _seeded_hook(weight=3)]
     # only the unreleased contribute
-    assert entropy(projection, iter(hooks)) == 5
+    assert entropy(projection, iter(hooks), PACK.rules) == 5
 
 
 def test_entropy_reads_global_suspicion() -> None:
     projection = initial_projection(PACK.entities)
     projection["npc_guard_01"]["relations.suspicion"] = 25
     projection["npc_guard_02"]["relations.suspicion"] = 10
-    assert entropy(projection, iter([])) == 35
+    assert entropy(projection, iter([]), PACK.rules) == 35
 
 
 def test_entropy_counts_visible_physical_threats() -> None:
     projection = initial_projection(PACK.entities)
     projection["loc_tavern"]["fire.bar"] = "burning"
     projection["loc_tavern"]["fire.tables"] = "burning"
-    assert entropy(projection, iter([])) == 2
+    assert entropy(projection, iter([]), PACK.rules) == 2
+
+
+def test_entropy_threat_states_are_pack_data() -> None:
+    """D-057: the threat sensor reads the layers' declared spot_state —
+    a pack whose layer spreads under a different vocabulary stays
+    visible to the director (zero hardcoded state values)."""
+    projection = initial_projection(PACK.entities)
+    projection["loc_tavern"]["fire.bar"] = "burning"
+    rules = json.loads(json.dumps(dict(PACK.data)))
+    rules["rules.json"]["transitions"]["fire"]["spot_state"] = "smoldering"
+    # the old vocabulary no longer reads as a threat...
+    assert entropy(projection, iter([]), rules["rules.json"]) == 0
+    # ...the declared one does
+    projection["loc_tavern"]["fire.tables"] = "smoldering"
+    assert entropy(projection, iter([]), rules["rules.json"]) == 1
 
 
 def test_entropy_never_reads_knowledge_records() -> None:
@@ -110,7 +126,7 @@ def test_entropy_never_reads_knowledge_records() -> None:
     # stuff a knowledge record into the projection — the director MUST
     # not see it (it lives in the KnowledgeView, not the projection)
     projection["npc_guard_01"]["knowledge.figure_reaching_for_purse"] = True
-    assert entropy(projection, iter([])) == 0
+    assert entropy(projection, iter([]), PACK.rules) == 0
 
 
 # -- explicit triggers (causal, fire regardless of entropy) -------------------

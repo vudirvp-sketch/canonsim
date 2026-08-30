@@ -729,12 +729,14 @@ def _golden_prefix(ticks: int = 2) -> list[EventRecord]:
 
 
 def test_present_entities_cards_and_pair_tokens() -> None:
-    """The entity cards on the tavern prefix: one dry line per present
-    non-carried entity in pack order, status markers from the pack table,
-    carried items folded into the carrier's segment, then the directed
-    pair lines (the cross-NPC-consistency home)."""
+    """The entity cards on the tavern prefix: the scene line
+    (pack-declared layout field, canon-from-birth), then one dry line per
+    present non-carried entity in pack order, status markers from the
+    pack table, carried items folded into the carrier's segment, then
+    the directed pair lines (the cross-NPC-consistency home)."""
     text = render_brief(assemble_brief(_golden_prefix(), PACK))
     assert _blocks(text)["present_entities"] == [
+        "- scene loc_tavern (Three Barrels tavern) layout=low_beamed_hall",
         "- pc_01 (the player)",
         "- npc_guard_01 (Doren) carries=purse_01",
         "- npc_barkeep_01 (the barkeep) carries=club_01",
@@ -755,11 +757,15 @@ def test_present_entities_absent_pair_partner_renders_no_pair_line() -> None:
 
 
 def test_present_entities_empty_log_renders_the_starting_scene() -> None:
-    """No events: the scene is the PC's pack-start location; presence is
-    the structural projection read (the quiet-beat answer needs no
-    events at all)."""
+    """No events: the scene is the PC's pack-start location (the street);
+    presence is the structural projection read (the quiet-beat answer
+    needs no events at all) and the scene line already carries the
+    pack-declared layout — canon from birth, no promotion required."""
     text = render_brief(assemble_brief((), PACK))
-    assert _blocks(text)["present_entities"] == ["- pc_01 (the player)"]
+    assert _blocks(text)["present_entities"] == [
+        "- scene loc_street (the street in front of the tavern) layout=open_street",
+        "- pc_01 (the player)",
+    ]
 
 
 def test_present_entities_marker_thresholds_are_pack_data() -> None:
@@ -782,13 +788,17 @@ def test_present_entities_caps_are_ranking_caps_never_drops() -> None:
     )
     text = render_brief(assemble_brief(_golden_prefix(), pack))
     body = _blocks(text)["present_entities"]
-    # two entity cards (pack order: the player, then Doren) — the pair
-    # lines are a separate ranking, unaffected by max_entities
-    assert body[:2] == [
+    # the scene line is structural (≤1, never capped); two entity cards
+    # (pack order: the player, then Doren) — the pair lines are a separate
+    # ranking, unaffected by max_entities
+    assert body[0] == (
+        "- scene loc_tavern (Three Barrels tavern) layout=low_beamed_hall"
+    )
+    assert body[1:3] == [
         "- pc_01 (the player)",
         "- npc_guard_01 (Doren) carries=purse_01",
     ]
-    assert body[2:] == [
+    assert body[3:] == [
         "- pair npc_drunk_01 -> npc_guard_01 fear=40",
         "- pair npc_maid_01 -> npc_barkeep_01 trust=70",
     ]
@@ -820,12 +830,17 @@ def _promotion_event(
     )
 
 
-def test_present_entities_scene_line_needs_promoted_props() -> None:
-    """No promotion: no scene line (the golden prefix has none). A
-    scene-scoped promotion renders the location's canon-born props —
-    post-promotion texture stays visible to the narrator."""
+def test_present_entities_scene_line_renders_pack_fields_then_promotions() -> None:
+    """The scene line is canon-from-birth architecture plus canon-born
+    props: the pack-declared location fields (scene_line_fields) render
+    with no promotions at all; a scene-scoped promotion appends its props
+    after them (the card law: static surface first, event-born news
+    last — post-promotion texture stays visible to the narrator)."""
     text = render_brief(assemble_brief(_golden_prefix(), PACK))
-    assert "- scene" not in text
+    assert (
+        "- scene loc_tavern (Three Barrels tavern) layout=low_beamed_hall"
+        in _blocks(text)["present_entities"]
+    )
 
     events = _golden_prefix() + [
         _promotion_event(
@@ -834,9 +849,21 @@ def test_present_entities_scene_line_needs_promoted_props() -> None:
     ]
     text = render_brief(assemble_brief(events, PACK))
     assert (
-        "- scene loc_tavern (Three Barrels tavern) candles=lit"
+        "- scene loc_tavern (Three Barrels tavern) "
+        "layout=low_beamed_hall candles=lit"
         in _blocks(text)["present_entities"]
     )
+
+
+def test_present_entities_scene_line_fields_are_pack_data() -> None:
+    """A pack that declares no scene_line_fields keeps the pre-iter-20
+    behavior: no scene line without promoted props (the block is an
+    opt-in, never an engine assumption)."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["present_entities"].pop("scene_line_fields")
+    )
+    text = render_brief(assemble_brief(_golden_prefix(), pack))
+    assert "- scene" not in text
 
 
 def test_present_entities_entity_scoped_promotion_rides_the_card() -> None:
@@ -927,4 +954,18 @@ def test_pack_lint_catches_unknown_marker_axis(tmp_path: Path) -> None:
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="axis must be one of the pack's status axes"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_unknown_scene_line_field(tmp_path: Path) -> None:
+    """iter-20/D-057: scene_line_fields must reference real location
+    fields — a typo'd field name fails at load time, never silently
+    renders nothing."""
+
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["scene_line_fields"] = ["layoutx"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="scene_line_fields must reference"):
         load_pack(_broken_pack(tmp_path, mutate))

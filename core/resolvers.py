@@ -458,7 +458,7 @@ def _ignite_action(
     spots = pack.entity(actor_location).get(layer_cfg["spot_field"], [])
     spot = next(
         (s for s in spots if projection[actor_location].get(f"{config['layer']}.{s}")
-         != "burning"),
+         != layer_cfg["spot_state"]),
         None,
     )
     ignitions = (

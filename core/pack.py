@@ -547,6 +547,11 @@ class _Lint:
                 isinstance(config.get("spot_field"), str),
                 f"{where}: spot_field must be a string",
             )
+            for key in ("spot_state", "halt_flag"):
+                _require(
+                    isinstance(config.get(key), str) and config[key].strip(),
+                    f"{where}: {key} must be a non-empty string",
+                )
             for key, event_type in config["events"].items():
                 _require(
                     event_type in templates,
@@ -565,11 +570,58 @@ class _Lint:
                     and 0 <= config[key]["chance_per_tick"] <= 1,
                     f"{where}: {key} chance must be a probability",
                 )
-            for key in ("smoke", "burnout"):
+            # D-057: the follow-up vocabulary (kinds, flags, values) is layer
+            # data — every kind joins a declared event AND knowledge entry.
+            follow_ups = config.get("follow_ups")
+            _require(
+                isinstance(follow_ups, list) and follow_ups,
+                f"{where}: follow_ups must be a non-empty list",
+            )
+            kinds: set[str] = set()
+            for spec in follow_ups:
                 _require(
-                    isinstance(config[key].get("after_ticks"), int)
-                    and config[key]["after_ticks"] >= 0,
-                    f"{where}: {key} after_ticks must be a non-negative integer",
+                    isinstance(spec, Mapping),
+                    f"{where}.follow_ups: entries must be objects",
+                )
+                kind = spec.get("kind")
+                where_fu = f"{where}.follow_ups[{kind!r}]"
+                _require(
+                    isinstance(kind, str) and kind.strip() and kind not in kinds,
+                    f"{where_fu}: kind must be a unique non-empty string",
+                )
+                kinds.add(kind)
+                _require(
+                    kind in config["events"],
+                    f"{where_fu}: no {kind!r} event declared",
+                )
+                _require(
+                    kind in config.get("knowledge", {}),
+                    f"{where_fu}: no {kind!r} knowledge entry declared",
+                )
+                after = spec.get("after_ticks")
+                _require(
+                    isinstance(after, int)
+                    and not isinstance(after, bool)
+                    and after >= 0,
+                    f"{where_fu}: after_ticks must be a non-negative integer",
+                )
+                _require(
+                    isinstance(spec.get("flag"), str) and spec["flag"].strip(),
+                    f"{where_fu}: flag must be a non-empty string",
+                )
+                _require(
+                    "value" in spec,
+                    f"{where_fu}: value is required",
+                )
+                _require(
+                    isinstance(spec.get("irreversible"), bool),
+                    f"{where_fu}: irreversible must be a boolean",
+                )
+                blocked = spec.get("blocked_by")
+                _require(
+                    isinstance(blocked, list)
+                    and all(isinstance(flag, str) and flag.strip() for flag in blocked),
+                    f"{where_fu}: blocked_by must be a list of non-empty strings",
                 )
             for key, record in config.get("knowledge", {}).items():
                 self._knowledge_entry(f"{layer}.{key}", record)
@@ -1093,6 +1145,32 @@ class _Lint:
                 isinstance(marker.get("marker"), str) and marker["marker"].strip(),
                 f"{where_marker}: marker must be a non-empty string",
             )
+        # iter-20/D-057: pack-declared location fields the scene line
+        # renders canon-from-birth (the st-6 layout answer — no projection
+        # seeding; canon_slot already guards pack-modeled fields).
+        scene_fields = present.get("scene_line_fields")
+        _require(
+            isinstance(scene_fields, list)
+            and all(
+                isinstance(field, str) and field.strip() for field in scene_fields
+            ),
+            f"{where}.present_entities: scene_line_fields must be a list of "
+            f"non-empty strings",
+        )
+        _require(
+            len(set(scene_fields)) == len(scene_fields),
+            f"{where}.present_entities: scene_line_fields must be unique",
+        )
+        location_fields = {
+            key
+            for location in self._data["entities.json"]["locations"]
+            for key in location
+        }
+        _require(
+            all(field in location_fields for field in scene_fields),
+            f"{where}.present_entities: scene_line_fields must reference "
+            f"location fields of the pack",
+        )
 
 
 @dataclass(frozen=True, slots=True)

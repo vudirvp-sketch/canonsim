@@ -383,15 +383,17 @@ def _present_entity_items(
     """The 8th block's item lines (BRIEF_SPEC §3.8 — st-1, the entity
     cards): the room's structural answer to "who is here". A read-side
     fold — zero new event types; presence is a projection read, the
-    observable surface is pack data. Line order: the scene line (only
-    when the scene location holds promoted props — canon-born texture
-    would otherwise vanish from the brief post-promotion: the
-    scene_texture window renders live entries only), then one dry line
-    per present entity in pack declaration order (carried items fold
-    into their carrier's `carries=` segment instead of a line of their
-    own — they are the carrier's surface, not room fixtures), then the
-    pair lines. `max_entities`/`max_pairs` are ranking caps (D-047 law
-    — beyond-cap items render nothing, never a budget drop)."""
+    observable surface is pack data. Line order: the scene line (the
+    pack-declared `scene_line_fields` of the scene location render
+    canon-from-birth, then the promoted props — canon-born texture would
+    otherwise vanish from the brief post-promotion: the scene_texture
+    window renders live entries only; the card law: static surface
+    first, event-born news last), then one dry line per present entity
+    in pack declaration order (carried items fold into their carrier's
+    `carries=` segment instead of a line of their own — they are the
+    carrier's surface, not room fixtures), then the pair lines.
+    `max_entities`/`max_pairs` are ranking caps (D-047 law — beyond-cap
+    items render nothing, never a budget drop)."""
     config = pack.rules["brief"]["present_entities"]
     scene = current_scene(events, pack)
     state = fold(events, initial_projection(pack.entities))
@@ -399,7 +401,13 @@ def _present_entity_items(
     promoted = _promoted_props(events)
     lines: list[str] = []
 
-    scene_props = promoted.get(scene.location_id)
+    location_record = pack.entity(scene.location_id)
+    scene_fields = [
+        (field, location_record[field])
+        for field in config.get("scene_line_fields", ())
+        if field in location_record
+    ]
+    scene_props = (*scene_fields, *promoted.get(scene.location_id, ()))
     if scene_props:
         rendered = " ".join(f"{prop}={value}" for prop, value in scene_props)
         lines.append(

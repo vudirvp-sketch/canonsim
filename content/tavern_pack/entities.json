@@ -3,7 +3,7 @@
     "pack": "tavern_pack",
     "version": "0.1",
     "display": "The Three Barrels — TavernSim v0 slice",
-    "notes": "Phase-0 setting as data, per docs/MVP_SCOPE.md §4 (that table is the source of truth for ids, counts and roles). Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law — retuning is a pack change, never a code change (INV-3). Display names in English (D-009)."
+    "notes": "Phase-0 setting as data, per docs/MVP_SCOPE.md §4 (that table is the source of truth for ids, counts and roles). Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law — retuning is a pack change, never a code change (INV-3). Display names in English (D-009). iter-20: locations carry a `layout` field — static architecture as canon-from-birth pack data (rendered on the brief scene line via rules.json brief.present_entities.scene_line_fields, D-057; the gateway's canon_slot check guards it like every pack-modeled field, KI#48)."
   },
 
   "locations": [
@@ -11,6 +11,7 @@
       "id": "loc_tavern",
       "name": "Three Barrels tavern",
       "role": "main scene: bar, tables, back door",
+      "layout": "low_beamed_hall",
       "exits": ["loc_street", "loc_backyard"],
       "flammability": "high",
       "fire_spots": ["bar", "tables", "back_wall"],
@@ -20,6 +21,7 @@
       "id": "loc_street",
       "name": "the street in front of the tavern",
       "role": "escape route, patrol path",
+      "layout": "open_street",
       "exits": ["loc_tavern", "loc_backyard", "loc_guardroom", "loc_market"],
       "flammability": "none",
       "fire_spots": [],
@@ -29,6 +31,7 @@
       "id": "loc_backyard",
       "name": "the backyard",
       "role": "fire source spot; origin of the 'figure at the back door' rumor",
+      "layout": "enclosed_yard",
       "exits": ["loc_tavern", "loc_street"],
       "flammability": "medium",
       "fire_spots": ["back_wall", "woodpile"],
@@ -38,6 +41,7 @@
       "id": "loc_guardroom",
       "name": "the guard room",
       "role": "watch change → knowledge transfer between guards",
+      "layout": "single_room_post",
       "exits": ["loc_street"],
       "flammability": "low",
       "fire_spots": ["hearth"],
@@ -47,6 +51,7 @@
       "id": "loc_market",
       "name": "the market square",
       "role": "the rumor scene (mandatory: this is where hearsay lives)",
+      "layout": "open_square",
       "exits": ["loc_street"],
       "flammability": "none",
       "fire_spots": [],

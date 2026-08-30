@@ -57,7 +57,7 @@ scene trio completes before recall, st-1):
 | 1 | `directives` | pack `brief.directives` (static lines) | line, verbatim |
 | 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
 | 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
-| 4 | `present_entities` | the projection's present set + the pair map + promotions (st-1) | `- <id> (<display>)[ status=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <prop>=<v>` / `- pair <a> -> <b> <axis>=<v>` |
+| 4 | `present_entities` | the projection's present set + the pair map + promotions + the pack's scene-line fields (st-1, iter-20) | `- <id> (<display>)[ status=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <field>=<v>[...] [<prop>=<v>...]` / `- pair <a> -> <b> <axis>=<v>` |
 | 5 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
 | 6 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
 | 7 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
@@ -135,10 +135,16 @@ per-present expansion).
   room fixture; loose items keep their own lines); promoted props as
   bare `prop=value` pairs (the D-054 scan: events whose outcome
   carries a texture reference whose state_changes birth the slot).
-- **Scene line**: renders ONLY when the scene location holds promoted
-  props — canon-born scene texture would otherwise vanish from the
-  brief post-promotion (the scene_texture window renders live entries
-  only). Canon props persist across scenes at the same location.
+- **Scene line**: the pack's `scene_line_fields` (iter-20, D-057) list
+  the location's pack-modeled fields (e.g. `layout`) that render
+  canon-from-birth — static architecture needs no promotion to be
+  narratable, and the gateway's `canon_slot` check already guards these
+  fields against texture (KI#48). Promoted props append after them
+  (canon-born scene texture would otherwise vanish from the brief
+  post-promotion — the scene_texture window renders live entries only;
+  the card law: static surface first, event-born news last). A pack
+  that declares no `scene_line_fields` renders the line only when the
+  scene location holds promoted props (the pre-iter-20 law).
 - **Pair lines**: one line per DIRECTED (holder, other) present pair
   carrying pair-map axes (`pair.<other>.<axis>`), projection order —
   A-fears-B and B-trusts-A are different facts; BOTH parties must be
@@ -271,6 +277,7 @@ brief's static text is mediator data, not chronicle grammar.
                       "importance_weight": 1.0},
   "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
   "present_entities": {"max_entities": 8, "max_pairs": 6,
+                        "scene_line_fields": ["layout"],
                         "status_markers": [
                           {"axis": "intoxication", "min": 30, "marker": "drunk"},
                           {"axis": "fatigue", "min": 30, "marker": "weary"},
@@ -295,7 +302,9 @@ unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
 `present_entities` caps integers >= 1 and a `status_markers` table
 whose `axis` is one of the pack's `states` axes, `min` a non-negative
 int, `marker` a non-empty string (marker names are pack vocabulary,
-INV-3). The eviction order (§5.2) is architecture, not balance — it
+INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
+a field of at least one location record (a typo'd field fails at load
+time). The eviction order (§5.2) is architecture, not balance — it
 lives in code, not in the pack.
 
 ## 7. Render format (exact bytes)

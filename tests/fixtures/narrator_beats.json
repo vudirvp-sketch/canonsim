@@ -1441,7 +1441,7 @@
           "BEAT claims: 3 supported"
         ],
         "last_event_type": "take",
-        "call_contains": "- scene loc_backyard (the backyard) kindling=dry"
+        "call_contains": "- scene loc_backyard (the backyard) layout=enclosed_yard kindling=dry"
       }
     },
     {

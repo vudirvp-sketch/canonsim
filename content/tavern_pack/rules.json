@@ -115,14 +115,18 @@
     "fire": {
       "system": "fire",
       "spot_field": "fire_spots",
+      "spot_state": "burning",
+      "halt_flag": "destroyed",
       "ignition": {
         "requires_item_flag": "is_fire_source",
         "requires_flammability": ["low", "medium", "high"],
         "chance_on_drop_break": 0.9
       },
       "spread": {"chance_per_tick": 0.15, "within": "location"},
-      "smoke": {"after_ticks": 10},
-      "burnout": {"after_ticks": 120, "irreversible": true},
+      "follow_ups": [
+        {"kind": "smoke", "after_ticks": 10, "flag": "smoke", "value": true, "irreversible": false, "blocked_by": ["destroyed"]},
+        {"kind": "burnout", "after_ticks": 120, "flag": "destroyed", "value": true, "irreversible": true, "blocked_by": []}
+      ],
       "alarm": {"when_occupants_present": true, "fear_spike": 40},
       "events": {
         "started": "fire_started",
@@ -139,9 +143,9 @@
         "alarm_adjacent": {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "shouting_near_{location}"},
         "burnout": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "{location}_burned_down"}
       },
-      "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED smoke/burnout follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); position_visibility.smoke_penalty stays with the perception input it belongs to"
+      "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); iter-20: the follow-up vocabulary (kinds, flags, values, the spreading spot_state, the spread halt_flag) moved from core code into the layer declaration — a second pack declares its own vocabulary, zero engine edits (D-057). position_visibility.smoke_penalty stays with the perception input it belongs to"
     },
-    "notes": "generic transition engine (core/transitions.py) iterates pack-declared layers by name — core code carries no layer names (INV-3)"
+    "notes": "generic transition engine (core/transitions.py) iterates pack-declared layers by name — core code carries no layer names and no follow-up kinds (INV-3; D-057: spot_state/halt_flag/follow_ups are layer data)"
   },
 
   "crime_watch": {
@@ -302,6 +306,7 @@
     "present_entities": {
       "max_entities": 8,
       "max_pairs": 6,
+      "scene_line_fields": ["layout"],
       "status_markers": [
         {"axis": "intoxication", "min": 30, "marker": "drunk"},
         {"axis": "fatigue", "min": 30, "marker": "weary"},
@@ -332,6 +337,6 @@
       "The taproom hummed, low and careless, the way rooms do before anything happens.",
       "Rain started against the shutters — a patient, unhurried sound."
     ],
-    "notes": "iter-8/10/15 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
+    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
   }
 }

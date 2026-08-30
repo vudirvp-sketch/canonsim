@@ -1,25 +1,23 @@
 # STATUS — canonsim
 
-Iteration: iter-19 (`iter-19-spatial-audit`, owner-requested
-analysis pass — the D-022 exception) · Phase: 1 · Date: 2026-08-30 ·
-Audited two owner-pasted spatial analyses (time / space /
-canon-vs-texture) against the repo: verdict ~85–95% true — the
-time model (1440 ticks, phases, queue key, `t + duration`), the
-5-location graph, D-048/049/053/054/056 mechanics (scene windows,
-structural pinning, retire+establish, promotion, carrier closure)
-all confirmed; the second text's corrections are repo-exact
-(D-049 pinning law, in-scene update legality, gateway/validator
-attribution, travel-vs-weighted-move, layout-vs-fire_spots).
-Omissions found: the ref-9/ref-10 drift family is much wider than
-ref-9-c (phantom `sim/systems/*.py` / `core/runner.py` /
-`core/store.py` / `content/packs/*.py` lift-targets + 9 never-true
-"phase-0 grid" phrases — KI#47, fixed in place); long-duration
-travel is queue-cheap TODAY (the clock jumps ahead, D-038); a
-`layout` field needs `initial_projection` seeding to get gateway
-protection (canon_slot reads top-level fields only). Resolution:
-`st-6` spatial backlog row (travel + layout, phase-5-gated). 547
-green, ruff clean. Docs-only (D-022 exception: fresh owner
-request).
+Iteration: iter-20 (`iter-20-universality`, owner-directed from the
+iter-19 re-audit) · Phase: 1 · Date: 2026-08-30 · The universality
+pass: the transition-layer vocabulary (follow-up kinds, flags,
+values, the spreading `spot_state`, the spread `halt_flag`) and the
+brief scene-line vocabulary (`scene_line_fields`) moved from core
+code into pack data (D-057) — a second layer or pack declares its
+own words, zero engine edits. Tavern-pack behavior is
+byte-identical (the T1 golden fixture untouched, event stream
+unchanged); a synthetic `rot` layer (infested/condemned/
+stench/collapse — shares nothing with fire's vocabulary) drives the
+same engine in tests, and the director's threat sensor reads the
+declared `spot_state` set. `layout` landed as a location pack field
+rendered canon-from-birth on the scene line — no `initial_projection`
+seeding, because the gateway's canon_slot check reads BOTH prop
+sources (projection state + pack record): the iter-19 claim was
+factually wrong, recorded as KI#48. 547→556 green, ruff clean.
+17 files (two subsystems + the sync set — the iter-15 scope
+precedent; noted in worklog).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -43,6 +41,13 @@ request).
 
 ## Active KIs
 
+- KI#48 · iter-19 doc drift: "layout needs `initial_projection`
+  seeding (canon_slot reads top-level fields only)" was FALSE both
+  ways — the check (`brief/ledger.py::establish`) reads BOTH prop
+  sources (a pack-modeled field was already guarded — KI#41's
+  `exits` precedent); the real gap was scene-line rendering
+  (promoted props only) · CLOSED iter-20 (phrases fixed in place;
+  layout landed as pack data via `scene_line_fields`, D-057).
 - KI#47 · ref-9/ref-10 drift family: phantom lift-targets
   (`sim/systems/*.py`, `core/runner.py`, `core/store.py`,
   `content/packs/*.py`) + never-true "phase-0 uses square/fixed
@@ -124,13 +129,20 @@ request).
   the fixture header's `schema_version` == the current schema `$id`
   version, (b) a fresh regen byte-diff — a breaking schema change
   without fixture regen fails loudly (§3 migration procedure).
-- **Doc drift is evidence, not prescription — verify with
-  `git log -S` before acting.** A ref citing a spec section it never
-  contained is drift (iter-6a: "AGENTS.md §9 — Script Persistence Rule"
-  in README/TEST_PLAN/D-044 — the text bled from the session prompt;
-  D-046 supersedes). A reported-but-unlanded pass is drift too: archives
-  are ephemeral, git is real — check `git log` before building on any
-  reported state (KI#42). Pre-D-028 wording, license copies, and
+- **Doc drift is evidence, not prescription — verify with `git log -S`
+  AND the pinning test before acting (KI#42/KI#48).** A ref citing a
+  spec section it never contained is drift (iter-6a: "AGENTS.md §9 —
+  Script Persistence Rule" in README/TEST_PLAN/D-044 — the text bled
+  from the session prompt; D-046 supersedes). A reported-but-unlanded
+  pass is drift too: archives are ephemeral, git is real — check
+  `git log` before building on any reported state (KI#42). A
+  code-behavior claim is drift until the test that pins it is named
+  (KI#48: the gateway's canon_slot check reads BOTH prop sources —
+  the folded projection AND the pack record, `brief/ledger.py::
+  establish` — so a pack-modeled field (exits, fire_spots, layout)
+  is texture-guarded the moment the pack declares it; brief
+  rendering of such fields is the pack's `scene_line_fields` list,
+  BRIEF_SPEC §3.4/D-057). Pre-D-028 wording, license copies, and
   iter-0q/0r lift-target notes (`sim/systems/*.py`, `sim/store.py`,
   `core/store.py`, `core/runner.py`, `content/packs/*.py` — names
   that never existed; the plans were superseded by D-037
@@ -255,17 +267,14 @@ request).
 
 ## Next step
 
-**Session 5 closed the arson-half probes (0 canon violations, 10
-beats, 51 corpus cases): the fire cascade is in canon regardless of
-who stood where; the observable surface splits by location —
-cause-actor is blind to ignition (token_absent on `fire_in_<loc>`),
-absent NPCs cannot perceive fire (token_absent), no alarm fires in
-the canonical solo-arson scenario, and an unmodeled fire prop reads
-`insufficient_data` (the honest-verdict law, UAP). The
-suspicion/crime-status half is still invisible through the brief
-(tune-2, owner's call).** The exit criterion (0 canon violations per
-100 beats, ROADMAP §2) needs more volume — 51 live beats now, the
-target is ≥100. Next, in order:
+**iter-20 closed the universality pass: the transition layer and the
+scene line are pack-data-driven (D-057) — of the four bottlenecks
+the re-audit named, two are closed (transition kinds/states + the
+scene-line filter); the 12-resolver registry and the closed
+`core/intent.py` enums remain phase-6 territory (blueprint/phases.md
+§6 — declarative resolvers, never before the gate).** Session 5
+left the exit criterion at 51 live beats (target ≥100). Next, in
+order:
 
 1. **Validation beats, session 6** — volume: the multi-day session (a
    second rotation, day-2 rumor telling at the market — lore + recall
@@ -276,8 +285,8 @@ target is ≥100. Next, in order:
 2. `tune-1` rest action (pack data; the owner's fatigue observation)
    or `st-2` identity persistence per TASKS; `tune-2` (the
    suspicion/crime-status observability candidate) waits for the
-   owner; `st-3`..`st-6` wait (`st-6` = the spatial vocabulary row,
-   travel + layout, phase-5-gated).
+   owner; `st-6` shrinks to the `travel` half, phase-5-gated (the
+   `layout` half landed iter-20).
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).
