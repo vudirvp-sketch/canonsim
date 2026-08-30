@@ -159,7 +159,8 @@ module boundaries.
   closed family of map generators extending one abstract
   base** — each defines a `create(callback)` method. Our
   phase-5+ spatial layer (if we ever add one) inherits the
-  shape; phase-0 tavern uses a fixed grid, not procedural.
+  shape; the phase-0 tavern is a fixed pack-authored location
+  graph, not procedural (no grid; `MVP_SCOPE.md` §4.1).
 - **RNG — Alea algorithm.** `src/rng.ts` declares
   `class RNG { _seed = 0; _s0 = 0; _s1 = 0; _s2 = 0; _c = 0;
   getSeed() { return this._seed; }
@@ -240,7 +241,8 @@ module boundaries.
   sync loop (our core is sync; no async path needed in
   phase 0).
 - The map generator family (11 algorithms) is deferred to
-  phase-5+ spatial layer; phase-0 tavern uses a fixed grid.
+  phase-5+ spatial layer; the phase-0 tavern is a fixed
+  pack-authored location graph (no grid).
 - The `stringgenerator.ts` is superseded by tracery
   (`tracery.md`) as the more polished reference for our
   `templates.json` + `render/` shape.

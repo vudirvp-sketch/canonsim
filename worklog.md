@@ -10,6 +10,23 @@
 > since iter-5).
 
 ---
+iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses (iter-19-spatial-audit)
+- Verdict ~85–95% repo-true: time/space/canon-vs-texture mechanics
+  confirmed (D-048/049/053/054/056, queue key, t+duration); the
+  second text's corrections repo-exact (D-049 pinning, retire+
+  establish, travel-over-weighted-move, layout-over-fire_spots).
+- Omissions: drift family is ref-9-a/b/c + entt/bevy wide (phantom
+  sim/systems, core/runner, core/store, content/packs/*.py);
+  travel is queue-cheap today (clock jump-ahead); layout needs
+  initial_projection seeding for canon_slot protection.
+- KI#47 opened+closed: 9 grid phrases fixed (docs/ref/{libtcod,
+  rot_js,red_blob_games}.md + REFERENCES_DEEP rows); lift-target
+  vocabulary stanced in the STATUS FAQ (pre-D-028 precedent);
+  st-6 spatial backlog row added (travel + layout, phase-5-gated).
+- Docs-only (D-022 exception: fresh owner request); 547 green,
+  ruff clean. 7 files (scope: the family-wide fix); iter-11b
+  evicted per the cap.
+---
 iter-18 · 2026-08-30 · validation beats — session 5, the arson half
 over the cards (iter-18-validation-beats-5)
 - Live narrate session 5 (seed 20, 10 beats, 29 supported / 4
@@ -129,17 +146,7 @@ iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
   (D-035). 5 files; docs-only, D-022 counter = 2.
 ---
 iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified)
-- D-022 owner pass, docs-only: the reported-but-lost stress-test
-  reconstructed (KI#42 — archive expired, nothing in git), every claim
-  re-verified against the code first (453 green, ruff clean); three
-  sharpenings: coarse perception tokens (no snapshot semantics),
-  prop-birth ≠ entity-birth promotion, O(N)/beat assembler folds.
-- Problems 4–6 resolved: call-budget law (MECW), thinking = ephemeral
-  texture, transcript-tail contract, mode-B knower parameterization,
-  presence/entity cards + the chorus-call budget named; landed as
-  blueprint §1/§5/§7 + BRIEF_SPEC §9 (+4 deferrals, cap 300 held) +
-  GROUP_SPEC sketch + TASKS st-1..st-5. KI#37/38 deleted per §5.
-  6 files; no code changes.
+- (deleted at iter-19 per the one-in/one-out cap; history in git.)
 ---
 iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
 - (deleted at iter-18 per the one-in/one-out cap; history in git.)

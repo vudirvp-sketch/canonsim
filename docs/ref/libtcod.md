@@ -119,7 +119,8 @@ discipline, heightmap pipeline).
   partitioning → leaf rooms + connecting corridors** —
   the classic roguelike dungeon generator. Our phase-5+
   spatial layer (if we ever add one) inherits the shape;
-  phase-0 tavern uses a fixed grid, not procedural.
+  phase-0 tavern is a fixed pack-authored location graph, not
+  procedural (no grid; `MVP_SCOPE.md` §4.1).
 - **Heightmap pipeline — Perlin-noise terrain.**
   `src/libtcod/heightmap.h` provides `TCOD_heightmap_t`
   (a 2D float array + width + height) and operations:
@@ -179,8 +180,9 @@ discipline, heightmap pipeline).
   dependency; we adapt by porting the algorithm shapes into
   Python stdlib. No external code is vendored (D-012).
 - The BSP dungeon generator is for procedural spatial layouts;
-  we adapt by deferring to phase-5+ (phase-0 tavern uses a
-  fixed grid). The shape is preserved; the timing is deferred.
+  we adapt by deferring to phase-5+ (the phase-0 tavern is a
+  fixed pack-authored location graph — no grid). The shape is
+  preserved; the timing is deferred.
 - The heightmap pipeline (Perlin-noise terrain) is for
   worldgen; we adapt by deferring to phase-5+ worldgen (cf.
   `azgaar_fmg.md`'s `heightmap-generator.ts` for the same

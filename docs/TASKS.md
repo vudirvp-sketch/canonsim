@@ -124,6 +124,30 @@ the `tune-2` backlog row, owner's call. Corpus 32 → 41. Detail:
 - `st-5` containers: the `in` relation + entity-birth promotion
   (with `st-3`, phase 5; blueprint §7).
 
+### Spatial backlog (owner analyses 2026-08-30, audited iter-19; owner-gated)
+
+- `st-6` spatial vocabulary — `travel` + `layout` (the narrator's
+  revisit-stability question: scene-scoped texture dies on
+  `scene_close` by design, D-049, so important architecture must be
+  canon from birth). (a) **`travel` as a separate action, NOT
+  weighted `move`** — move semantics, `adjacent_to`, and the T1
+  golden fixtures stay untouched; duration = pack-precomputed edge
+  cost (per edge or edge×mode — no runtime division in the
+  resolver); mechanically legal today (`t + duration`, MVP_SCOPE §8;
+  the clock jumps ahead so day-scale durations are queue-cheap;
+  beats/rotations still fire mid-travel in tick order, D-038); macro
+  clocks (L4) enter only when regions/worldgen arrive. (b)
+  **`layout` as a location field, NOT a `fire_spots` promotion**
+  (fire_spots is the arson mechanic — actions.json precondition +
+  transitions spot_field); static architecture = canon from birth via
+  `initial_projection` seeding as location props → the D-056 scene
+  line renders them, the gateway's canon_slot check refuses texture
+  on them (today it reads top-level pack fields only — seeding is
+  what makes it work), the validator adjudicates claims on them;
+  mutable decor stays texture (the existing door). Gates: the
+  phase-5 spatial layer or an owner request — geometry donors are
+  phase-5-gated (ROADMAP §4) and track A is feature-frozen.
+
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 
 Phase-0 gate closed; full evidence in `worklog.md` iter-6 + the
@@ -253,6 +277,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial
+  analyses (iter-19-spatial-audit; docs-only, D-022 exception):
+  verdict ~85–95% repo-true (time/space/canon-vs-texture mechanics
+  confirmed; the second text's corrections repo-exact); omissions
+  found — the ref-9/ref-10 lift-target + grid drift family is wider
+  than ref-9-c (KI#47: 9 grid phrases fixed; phantom lift-targets
+  stanced in the STATUS FAQ), travel is queue-cheap today (clock
+  jump-ahead), `layout` needs projection seeding for gateway
+  protection. Resolution: the `st-6` spatial backlog row (travel +
+  layout, phase-5-gated). Detail: worklog iter-19 + `STATUS.md`.
 
 - iter-18 · 2026-08-30 · validation beats — session 5, the arson half
   over the cards (iter-18-validation-beats-5): the fire cascade

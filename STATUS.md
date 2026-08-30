@@ -1,26 +1,25 @@
 # STATUS — canonsim
 
-Iteration: iter-18 (`iter-18-validation-beats-5`, STATUS "Next step"
-#1 — the arson half over the cards) · Phase: 1 · Date: 2026-08-30 ·
-Validation session 5, the arson-half session (seed 20, 10 beats, 29
-supported / 4 refused-and-caught / 1 unverifiable, **0 canon
-violations**): the fire cascade (fire_started / fire_spread /
-smoke_rising / location_burned_out) is in canon regardless of who
-stood where; the observable surface splits by location. The
-cause-actor never gets `fire_in_<loc>` (rules.json transitions.fire.
-knowledge.started `except: cause_actor`) — the player cannot claim
-their own ignition knowledge (token_absent). The same-location PC
-gets the spread/smoke/burnout records via `saw/exact`. An absent
-NPC's `fire_in_<loc>` claim is token_absent (different location → no
-record). No alarm fires in the canonical solo-arson scenario (no
-occupants at the fire location) — `fire_alarm_in_<loc>` and the fear
-markers stay unclaimable, and an unmodeled `fire_intensity` prop
-reads `insufficient_data`, never contradicted (the honest-verdict
-law, UAP). A canon event is claimable by id+type even when the PC's
-brief was silent about it (canon never closes — the validator checks
-the log, not the brief's perception). Corpus 41 → 51; 537 → 547
-green, ruff clean. KI#46 deleted per AGENTS §5 (closed iter-16,
->2 iterations past).
+Iteration: iter-19 (`iter-19-spatial-audit`, owner-requested
+analysis pass — the D-022 exception) · Phase: 1 · Date: 2026-08-30 ·
+Audited two owner-pasted spatial analyses (time / space /
+canon-vs-texture) against the repo: verdict ~85–95% true — the
+time model (1440 ticks, phases, queue key, `t + duration`), the
+5-location graph, D-048/049/053/054/056 mechanics (scene windows,
+structural pinning, retire+establish, promotion, carrier closure)
+all confirmed; the second text's corrections are repo-exact
+(D-049 pinning law, in-scene update legality, gateway/validator
+attribution, travel-vs-weighted-move, layout-vs-fire_spots).
+Omissions found: the ref-9/ref-10 drift family is much wider than
+ref-9-c (phantom `sim/systems/*.py` / `core/runner.py` /
+`core/store.py` / `content/packs/*.py` lift-targets + 9 never-true
+"phase-0 grid" phrases — KI#47, fixed in place); long-duration
+travel is queue-cheap TODAY (the clock jumps ahead, D-038); a
+`layout` field needs `initial_projection` seeding to get gateway
+protection (canon_slot reads top-level fields only). Resolution:
+`st-6` spatial backlog row (travel + layout, phase-5-gated). 547
+green, ruff clean. Docs-only (D-022 exception: fresh owner
+request).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -44,8 +43,14 @@ green, ruff clean. KI#46 deleted per AGENTS §5 (closed iter-16,
 
 ## Active KIs
 
-(none — KI#46 deleted at iter-18 per AGENTS §5: closed iter-16, >2
-iterations past. History in git.)
+- KI#47 · ref-9/ref-10 drift family: phantom lift-targets
+  (`sim/systems/*.py`, `core/runner.py`, `core/store.py`,
+  `content/packs/*.py`) + never-true "phase-0 uses square/fixed
+  grid" phrases in `docs/ref/` + `REFERENCES_DEEP.md` · CLOSED
+  iter-19 — 9 grid phrases fixed in place (phase-0 = pack-authored
+  location graph); lift-target vocabulary stanced in the FAQ below
+  (pre-D-028 precedent — plans superseded by D-037/D-023);
+  where-things-are owner: `docs/AGENT_NAVIGATION.md` §1.
 
 ## FAQ / Pitfalls
 
@@ -125,9 +130,14 @@ iterations past. History in git.)
   in README/TEST_PLAN/D-044 — the text bled from the session prompt;
   D-046 supersedes). A reported-but-unlanded pass is drift too: archives
   are ephemeral, git is real — check `git log` before building on any
-  reported state (KI#42). Pre-D-028 wording and license copies in
+  reported state (KI#42). Pre-D-028 wording, license copies, and
+  iter-0q/0r lift-target notes (`sim/systems/*.py`, `sim/store.py`,
+  `core/store.py`, `core/runner.py`, `content/packs/*.py` — names
+  that never existed; the plans were superseded by D-037
+  systems-live-in-core and D-023 projection-is-fold) in
   `docs/ref/*`/`REFERENCES_DEEP.md` are historical; the owners are
-  AGENTS.md §4 and `REFERENCES.md` (the catalog).
+  AGENTS.md §4, `REFERENCES.md` (the catalog), and
+  `docs/AGENT_NAVIGATION.md` §1 (where things actually live).
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
   (L13/L14). Build clauses: `docs/blueprint/phase0.md` §1/§2/§6.
@@ -266,7 +276,8 @@ target is ≥100. Next, in order:
 2. `tune-1` rest action (pack data; the owner's fatigue observation)
    or `st-2` identity persistence per TASKS; `tune-2` (the
    suspicion/crime-status observability candidate) waits for the
-   owner; `st-3`..`st-5` wait.
+   owner; `st-3`..`st-6` wait (`st-6` = the spatial vocabulary row,
+   travel + layout, phase-5-gated).
 3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
    the `bg-6` SoW audit wait for the phase-1 gate — never earlier
    (ROADMAP §6; the owner's deferral, D-055).

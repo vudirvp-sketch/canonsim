@@ -82,7 +82,8 @@ above the libtcod/rot.js implementations.
   pixel-to-hex** — the canonical write-up that every other
   hex-grid library (libtcod, rot.js, hexlib, reffy) implements.
   Our phase-5+ spatial layer (if hex-based) inherits the
-  formulas; phase-0 tavern uses a square grid (simpler).
+  formulas; the phase-0 tavern is a fixed pack-authored
+  location graph (no grid at all).
 
 - **A* pathfinding — the canonical write-up.**
   `/pathfinding/a-star/introduction.html` ("Introduction to A*")
@@ -207,9 +208,9 @@ above the libtcod/rot.js implementations.
   small N; the canon log records the result, not the
   computation).
 - The hex grid coordinate algebra is for hex-based games;
-  we adapt by deferring to phase-5+ if we go hex. Phase-0
-  tavern uses a square grid (simpler; the formulas are not
-  needed).
+  we adapt by deferring to phase-5+ if we go hex. The phase-0
+  tavern is a fixed pack-authored location graph (no grid;
+  the formulas are not needed).
 
 **What inspires us.**
 
@@ -275,8 +276,8 @@ above the libtcod/rot.js implementations.
   articles. There is no `git clone` to inspect the
   implementation; the formulas are in the prose + diagrams.
 - The hex grid coordinate algebra is **for hex-based grids**
-  — not directly relevant to phase-0 (square grid). We
-  defer to phase-5+ if we go hex.
+  — not directly relevant to phase-0 (a location graph, no
+  grid). We defer to phase-5+ if we go hex.
 - The polygon map generation is **for fantasy-world
   worldgen** — not directly relevant to phase-0 (fixed
   tavern). We defer to phase-5+ worldgen.
