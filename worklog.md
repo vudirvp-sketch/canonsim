@@ -10,6 +10,35 @@
 > since iter-5).
 
 ---
+iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
+collapse (iter-26-phase1-gate)
+- Evidence re-run per ROADMAP §5: 610 green + ruff clean; T1
+  byte-identity + the fixture guard (the venv 3.12.14 = the fixture's
+  generating interpreter); T8 single-factor A/B on day1_full/seed 125 —
+  OFF 26 chains, ON M1=0.417 / M2=0.500; T7 — the chronicle re-read:
+  the theft→suspicion→rotation→briefing and break→fire→burnout chains
+  read causally across the day boundary, the decay/wariness repetition
+  is the noise floor (tale_gate = the tune-1 knob, owner's call). Exit
+  criterion MET with margin: 109 live beats (the accepted-beat sum
+  alone 104) / 0 canon violations / corpus 105 green; no kill hit
+  (0 breaches in 109 beats — the per-1000 kill reads a rate the live
+  volume cannot yet reach, recorded honestly).
+- DECISIONS collapsed 41→30 per D-034 (the owner's quality-first
+  directive — cleanup INSIDE the gate iteration): 7 family merges, all
+  58 D-IDs resolve (verified by sweep — every D-ID is cited), survivors
+  verbatim, merged rows keep decision→why→consequence + owner links.
+  D-058 = the PASS verdict. KI#50 opened+closed (the FAQ cap-laws
+  bullet cited D-025/D-026 — D-026 is the per-ref split; fixed).
+  doc-1 VISION freeze review closed clean (frozen text verified against
+  phase-1 reality; the freeze stands).
+- TASKS Done consolidated (pre-mediator entries → one-liners per
+  AGENTS §6; all 70 entries verified preserved; TASKS 683→477, back
+  under the 600 cap). Verdict: phase-1 PASS — phase 2 (Parser, mode C)
+  may open, the phase-2-vs-polish call stays the owner's. 4 files (the
+  doc sync set; no code — the gate review IS verification + collapse
+  work, the owner's fresh request per D-022); iter-16 evicted per the
+  cap.
+---
 iter-25 · 2026-08-31 · validation beats — session 10, the
 witnessed-steal-then-alarm chain (iter-25-validation-beats-10)
 - Live narrate session 10 (seed 93, 6 accepted beats + 2
@@ -253,22 +282,7 @@ cascade over the presence machinery (iter-17-validation-beats-4)
 ---
 iter-16 · 2026-08-30 · validation beats — session 3 over the presence
 machinery (iter-16-validation-beats-3)
-- Live `narrate` session 3 (seed 7, 7 beats + 1 regen, 18 supported /
-  1 unverifiable / 1 refused-caught, 0 canon violations): all st-1
-  acceptance probes hold — quiet-beat room naming, the
-  absent-presence refusal, sighting + pair tokens, scene-change
-  follow, the promoted prop on the card scene line, post-rotation
-  cards.
-- KI#46 found live + fixed: the rotation left carried items behind —
-  `rotation_plan` (core/crime.py) now rides `movement_changes`
-  (core/resolvers.py, renamed public — the single owner of the
-  carried-item position contract); regression test in test_crime.py.
-- Corpus 25 → 32 (+7 presence probes, seed 7; tests/fixtures/
-  narrator_beats.json). 520→528 green, ruff clean; no fixture bytes
-  touched (the smoke script crosses no rotation). 8 files (2 code +
-  1 test + fixture + the 4-doc sync set — the session+fix scope);
-  TASKS pack-3 row parks the owner's Sci-Fi setting sketches;
-  iter-10a evicted per cap.
+- (deleted at iter-26 per the one-in/one-out cap; history in git.)
 ---
 iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056)
 - (deleted at iter-25 per the one-in/one-out cap; history in git.)

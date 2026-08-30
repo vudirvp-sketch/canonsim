@@ -51,6 +51,24 @@ the beat level (pin, retire + establish, idempotent no-op). The corpus grew
 16 → 25 cases: every validator refusal reason is now pinned at the beat
 level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
+### iter-26 · phase-1 gate — done (verdict: PASS, D-058)
+
+The owner's quality-first close ("cleanup, re-verification, doc
+actualization before closing the gate — I chase quality, not speed"):
+the full ROADMAP §5 protocol re-run on evidence — 610 green + ruff
+clean; T1 byte-identity + fixture guard; T8 single-factor A/B (OFF =
+26 chains; ON M1=0.417 / M2=0.500); T7 chronicle re-read (the chains
+read causally; the decay/wariness repetition is the noise floor —
+tale_gate stays the owner-gated tune-1 knob). Exit criterion met with
+margin: 109 live beats / 0 canon violations / corpus 105 green; no
+kill-criteria hit. DECISIONS collapsed 41→30 per D-034 in the same
+iteration (7 family merges, all 58 IDs resolve); D-058 = the verdict;
+KI#50 fixed; `doc-1` VISION freeze review closed clean; the pre-mediator
+Done entries collapsed to one-liners (AGENTS §6; TASKS 683→477, back
+under the cap). Phase 2 (Parser, mode C) may open — the
+phase-2-vs-polish call stays the owner's. Detail: worklog iter-26 +
+`docs/DECISIONS.md` D-058 + `docs/TEST_PLAN.md` §4.
+
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
 - `tune-1` rest action as pack data (player fatigue is monotonic over
@@ -201,7 +219,10 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   p50=13.81, M1 p50=0.24 — full table at
   `output/balance_1000_seed100_off.txt` (gitignored runtime artifact;
   reproducible). KI#4 closed.
-- `doc-1` VISION freeze review after the phase-0 verdict.
+- `doc-1` VISION freeze review after the phase-0 verdict — DONE
+  iter-26 (the phase-1 gate's doc-actualization sweep): the frozen text
+  verified against phase-1 reality — the 3-layer shape, the call-budget
+  law, the honest limits all hold; no changes, the freeze stands.
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
   TECH_NOTES review).
 - `pack-1` Grim tavern pack candidate (post-gate; `PACK_SPEC.md` trigger —
@@ -415,246 +436,40 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   carried items behind — `rotation_plan` now rides `movement_changes`).
   Corpus 25 → 32. Detail: worklog iter-16 + VALIDATION_SPEC §7.1.
 
-- iter-15 · 2026-08-30 · presence & entity cards — st-1 landed
-  (iter-15-presence, D-056; the owner's session delegation "pick what
-  is best"): the 8th brief block `present_entities` (entity cards:
-  present set + status markers + visibly-carried items + promoted
-  props + directed pair tokens; the scene line keeps canon-born
-  texture visible post-promotion) + the write-side twin — the
-  actor-held per-present-target `knows` expansion on `move` (the
-  arrival snapshot; INTENT_SCHEMA §7, KI#43's grammar). Zero new event
-  types; the T1 fixture regenerated (+10 records, the iter-3
-  precedent); 2 pair-relation seeds. 502→520 green, ruff clean.
-  Detail: worklog iter-15 + `docs/BRIEF_SPEC.md` §3.4 + D-056.
+- iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056): the `present_entities` 8th brief block (entity cards) + the write-side arrival-snapshot twin; the T1 fixture regenerated in the same commit. Detail: D-056 + `docs/BRIEF_SPEC.md` §3.4.
 
-- bg-5 · 2026-08-30 · owner-requested verdict on a pasted external
-  integration spec (bg-5-spec-verdict; docs-only, D-022 counter = 3):
-  every citation audited against the repo + live-char-guide — no
-  repo drift; not integrated as text (renames of the MECW/st-1/st-2
-  vocabulary, fatigue emulation re-rejected per ref-13 weakness (4),
-  invented AP-16 and ownerless figures); two adoptions land as the
-  st-4 Script-Tax and st-2 repetition-promotion backlog amendments.
-  Detail: worklog bg-5.
+- bg-5 · 2026-08-30 · owner-requested verdict on a pasted external integration spec (bg-5-spec-verdict; docs-only): every citation audited, no repo drift; two adoptions land as the st-4 Script-Tax and st-2 repetition-promotion backlog amendments. Detail: git worklog bg-5.
 
-- iter-11c · 2026-08-30 · owner-requested re-check of iter-11b
-  (iter-11c-audit; docs-only, D-022): verdict sound — every claim
-  reproduced against the code (453 green, ruff clean, byte-identical;
-  perception tokens, prop-birth shape, O(N)/beat folds, `records_of`,
-  canon-slot check, citations, caps, KI lifecycle); KI#43 precision
-  family closed (MECW figure → TECH_NOTES §2 single owner; arrival
-  snapshot → actor-held per-present-target `knows` expansion per
-  INTENT_SCHEMA §7/§10; container cycle guard += the commit gate,
-  D-035). Resolutions stay owner-verdict-pending. Detail: worklog
-  iter-11c + `STATUS.md`.
+- iter-11c · 2026-08-30 · owner-requested re-check of iter-11b (iter-11c-audit; docs-only): every claim reproduced against the code; KI#43 precision family closed (MECW figure + arrival-snapshot grammar + the commit-gate cycle guard). Detail: git worklog iter-11c.
 
-- iter-11b · 2026-08-30 · roadmap stress-test, re-verified + problems
-  4–6 (iter-11b-stress-test-verified; docs-only, D-022): the reported
-  but never-landed pass reconstructed (KI#42 — archive expired) and
-  re-verified against the code (3 sharpenings: perception emits coarse
-  tokens, no snapshot semantics; a D-054 promotion births a prop, not
-  a portable entity; write-side LOD was undesigned) + MECW/nuance/
-  reasoning resolved (call-budget law, thinking = ephemeral texture,
-  transcript-tail contract, mode-B knower parameterization, presence/
-  entity cards); landed as blueprint §1/§5/§7 + BRIEF_SPEC §9 (+4
-  deferrals, cap held) + GROUP_SPEC sketch + the st-1..st-5 backlog.
-  453 green, ruff clean, no code changes. Detail: worklog iter-11b.
+- iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified; docs-only): the reported-but-never-landed pass reconstructed (KI#42) and re-verified; MECW/nuance/reasoning resolved as blueprint §1/§5/§7 + BRIEF_SPEC §9 + the st-1..st-5 backlog. Detail: git worklog iter-11b.
 
-- iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix):
-  KI#39 texture-take chronicle prose (`{target?…|…}` conditional
-  templates + the `texture_slot` derived slot — canon lines
-  byte-unchanged), KI#40 unique-slot claims survive promotion,
-  KI#41 canon-slot overlap includes pack-modeled fields; +lint
-  hardening, +texture-path OCC attribution test, +doc sync.
-  443→453 green, ruff clean, fixtures byte-identical. Detail:
-  worklog iter-11a.
+- iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix): KI#39 texture-take chronicle prose, KI#40 unique-slot claims survive promotion, KI#41 canon-slot overlap incl. pack-modeled fields; +lint hardening. Detail: git worklog iter-11a.
 
-- iter-11 · 2026-08-29 · texture promotion door (iter-11-texture-door;
-  D-054): the narrator boundary's LLM-free half — the intent door's
-  texture path, the `texture_noun` test, real `unique_slots`, the
-  laundering + unique_slot golden pins (8/8 refusal reasons).
-  435→443 green. Detail: worklog iter-11 + docs/INTENT_SCHEMA.md §3.
+- iter-11 · 2026-08-29 · texture promotion door (iter-11-texture-door; D-054): the narrator boundary's LLM-free half — the intent door's texture path, the `texture_noun` test, real `unique_slots`, the laundering pins. Detail: D-054 + `docs/INTENT_SCHEMA.md` §2/§3.
 
-- iter-10a · 2026-08-29 · post-iter-9/10 audit sync
-  (iter-10a-audit-sync): KI#37 doc-sync family — worklog re-trimmed
-  to the line cap, AGENT_NAVIGATION/README synced, the
-  golden-coverage claim qualified; KI#38 — the INV-3 stoplist test
-  scans `brief/`. 435 green, ruff clean. Detail: worklog iter-10a.
+- iter-10a · 2026-08-29 · post-iter-9/10 audit sync (iter-10a-audit-sync): KI#37 doc-sync family (worklog re-trim, AGENT_NAVIGATION/README synced) + KI#38 the INV-3 stoplist scans `brief/`. Detail: git worklog iter-10a.
 
-- iter-10 · 2026-08-29 · scene-ledger LLM-free half
-  (iter-10-scene-ledger;
-  D-053): `brief/ledger.py` + the `scene_texture` 7th brief block + the
-  BRIEF_SPEC §9 atomic flip + the committed golden delta fixture + pack
-  lint. 435 green (was 390; +45). No new KIs. Detail: worklog iter-10.
-- bg-1 · 2026-08-29 · DF export pipeline CLOSED (bg-1-sqlite-sink; D-051):
-  `scripts/df_import.py` loads a world into SQLite (AC met) over the
-  validated survey core — typed cores + EAV + `event_participant` +
-  generic JSON records; truncation policy owned (flagged partial default,
-  `--strict` abort); cross-validated on the owner's new large world
-  (2.38 GB → 898 MB in 174 s; every count reproduces the survey);
-  `tests/test_df_import.py` (11 tests). KI#36 fixed (UNDOCUMENTED audit
-  marker; matrix gaps `artifact` + `historical_era`). Plus-companion
-  import = documented deferral (TECH_NOTES §3.2), not backlog scope.
-  Survey half history: iter-8e/8f/8g (git).
-- iter-8h · 2026-08-29 · owner-directed derived-index micro-pass (an
-  external patch list verified against the code first — every item
-  proven semantics-preserving): two derived runtime indexes beside
-  their single mutation funnels (`KnowledgeView` `who → token →
-  source-ids` in `add` — `holds` O(1); Simulator `(entity, prop) →
-  tick` in `_commit` — the decay baseline without the per-beat log
-  scan) + four scan eliminations (scene-delta window break on
-  tick-monotonicity, `salient()` top-1 `max`,
-  `occ_breaking_cause` one forward fold, director `entropy` once
-  per `releases()`); D-050; micro-benchmarks 1.9×–664×; 338→340
-  green, ruff clean, golden fixtures byte-identical. Detail: worklog
-  iter-8h + D-050.
-- iter-8g · 2026-08-29 · DF coverage audit (owner-requested: "is anything
-  being missed in the giant DF exports?"): `scripts/df_survey.py --audit`
-  mode — coverage census (per-section per-record-tag counts + every
-  unique child-tag set per record tag, a structural fingerprint bounded
-  by DF record uniformity — typically 1-3 variants; >3 = drift signal);
-  HANDLED records (F7/F8 detail) marked, UNHANDLED records (site, entity,
-  region, artifact, written_content, …) carry their child-tag sets so
-  bg-1's SQLite sink can plan field extraction without re-parsing a 5 GB
-  export; replaces head/middle/tail positional sampling — every variant
-  captured. First `tests/test_df_survey.py` (9 tests) pins the four
-  load-bearing invariants on a tiny synthetic DF-like XML. Coverage
-  matrix: `docs/ref/df_legends_xml.md`. 329→338 green, ruff clean,
-  fixture byte-identical. No new KIs.
-- iter-8f · 2026-08-29 · audit-fix after the iter-8e audit (owner-approved
-  option A): KI#34 — truncated-export survival in `scripts/df_survey.py`
-  (tail check + RecoveringReader closing-tag synthesis at EOF, loud
-  PARTIAL warnings; validated — the complete 4.95 GB re-export of the
-  same region3-00500 world reproduces the recovered prefix counts) +
-  KI#35 — "site tribute forced" → war-geopolitics (101st type;
-  vocabulary count re-anchored to TECH_NOTES §3.1, third-world numbers
-  added). 329 green, ruff clean.
-- iter-8e · 2026-08-28 · DF empirical F7/F8 survey on the owner's two world
-  exports (owner-requested, the D-022 exception; closes iter-8d's
-  not-done item): `scripts/df_survey.py` (sanitize + stream parsing core
-  for bg-1) + measured numbers distilled into `docs/TECH_NOTES.md` §3.1
-  (single owner) + F7/F8 verdict links in `docs/ref/df_design.md` +
-  KI#33 schema-drift fix in `docs/ref/df_legends_xml.md` (actual
-  `<event>`/`<eventcol>` tags, naming duality, single-parent trees —
-  the many-to-many claim corrected). 329 green, ruff clean.
-- iter-8d · 2026-08-28 · DF designed-experience deep dive (owner-requested
-  research pass, the D-022 exception; docs-only — iter-9 stays the code
-  iteration; ref-17): `docs/ref/df_design.md` — six enchantment pillars
-  (P1–P6), flaw taxonomy F1–F10 with root causes (every flaw is a missing
-  layer — salience/pacing/audience-epistemology/LOD/continuity — not wrong
-  simulation), successor trade-off matrix (RimWorld/KoDP/SoS/Versu/Rain
-  World/SS13/…: each "fix" amputates a pillar), the structural read
-  (layer-adding is the canonsim thesis), reader-as-knower symmetry, bg-1
-  hardening + bg-2 ambiguity-as-data + bg-3 corpus-division guidance;
-  every flaw mapped to an existing mechanism or recorded phase. No new
-  KIs (all cross-claims verified against the repo); 329 green, ruff clean.
-- iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b: every
-  claim reproduced (329 green, ruff clean, T1 byte-identical; the 8b
-  false-alarm verdicts verified against pre-8b git state; atlas MIT
-  re-verified). 3 KIs fixed: KI#30 `D-018c` false citation (never
-  resolved — the KI#23/#28 family) → D-018 ×4 sites; KI#31 blueprint
-  §1 wording debts (stale 8a pinned-eviction remnant vs
-  ledger-never-evicts; lifecycle transitions {active, pinned} →
-  terminal); KI#32 sync misses (TASKS ref-N + ref-16; BLUEPRINT
-  BRIEF-1 atlas donor line). Verdict: no rework of iter-1..8 — the
-  7th block lands additively. Docs-only (D-022 exception); 329 green,
-  ruff clean, fixture byte-identical.
-- iter-8a · 2026-08-28 · scene-ledger design pass (owner-requested
-  continuity question: long scenes lose narrator-invented texture):
-  `docs/ref/agent_memory_atlas.md` written (the owner-supplied 151-system
-  memory survey distilled: 7 marks, 22 patterns, per-pattern
-  take/adapt/reject; MIT verified); the scene ledger designed into
-  `docs/blueprint/phases.md` §1 (D-048: session-scoped append-only
-  mediator-owned ledger; discrete states; canon outranks texture;
-  promotion only through the intent door; laundering refusal; no TTL;
-  dies with the session); spec triggers synced (SPECS_BACKLOG
-  VALIDATION_SPEC row + BRIEF_SPEC §9 deferral). Docs-only — D-022.
-  329 tests green, ruff clean, fixture byte-identical.
-- iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler: `docs/BRIEF_SPEC.md`
-  (trigger fired at phase-1 start — six-block pipeline, two-level
-  budgets soft-fill/hard-ceiling, whole-block eviction with
-  `[truncated:N]` markers and the never-drop-directives law,
-  voice-isolation L2, §9 just-in-time deferrals incl. the max_items
-  ranking-cap distinction); `brief/assembler.py` — the deterministic
-  assembler, pure functions of the log, zero RNG (byte-identity on
-  the golden fixture, PYTHONHASHSEED-independent); `rules.json::brief`
-  pack contract + `core/pack.py::_brief` lint (BRIEF_BLOCK_IDS closed
-  enum). D-047 recorded. 329 tests green (+30), ruff clean, golden
-  fixture byte-identical.
-- iter-7 · 2026-08-28 · phase-1 intake (owner-requested retrospective +
-  plan reorganization): DECISIONS collapsed 46→30 per D-034
-  (ID-preserving family merges, 55KB→20KB); TASKS.md regained the
-  what-next ownership (phase-1 sequence: iter-8 BRIEF_SPEC + brief
-  assembler, iter-9+ validator, tune-1 rest/importance knobs);
-  intake audit fixes: KI#25 stale `_enqueue_autonomous` docstring,
-  KI#26 dead-parameter family (L14), KI#27 README drift, KI#28
-  residual false §9 citation in AGENT_NAVIGATION. KI#21 deleted
-  (closed >2 iters). 299 tests green, fixture byte-identical, ruff clean.
-- iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6: every
-  gate claim reproduced (298 green, the 1000-sim baseline EXACTLY, T8
-  OFF = 26 chains, PYTHONHASHSEED-independent chronicle); 3 KIs
-  fixed — KI#22 TEST_PLAN/test-docstring drift, KI#23 scripts/
-  outside the executable invariants + the false "AGENTS §9" citation
-  (D-046; PACKAGE_DIRS += scripts + closure test + CLI-class print
-  exemption), KI#24 dead fold_events removed; KI#17–20 deleted
-  (closed >2 iters); FAQ 24→20. 299 tests green, ruff clean, fixture
-  byte-identical.
-- iter-6 · 2026-08-28 · phase-0 gate: `docs/TEST_PLAN.md` spec (T0–T8
-  + M1–M5 + gate protocol + UAP crosswalk); `core/metrics.py`
-  (M1–M5 + emergent-chain count as pure functions of the log); T1
-  fixture-regeneration guard; T8 single-factor A/B (≥3 emergent
-  chains OFF, director_0000 fires ON); `scripts/balance_harness.py`
-  (KI#4 close, 1000-sim distribution); `tests/playscripts/day1_full.json`
-  (gate playscript, seed 125). Verdict PASS — all `MVP_SCOPE.md` §16
-  exit criteria met. 298 tests green, fixture byte-identical, ruff clean.
-- iter-5 · 2026-08-28 · chronicle & CLI: deterministic tracery engine
-  (ShufflePool, modifiers, save/restore, ink conditionals — cosmetic
-  stream only) + the chronicle as a pure function of the log (day
-  headers, importance gate as pack data, scene card, ungated
-  per-entity views) + CLI (batch play/chronicle/state/replay +
-  interactive session: look, wait N, directors on|off, seed); loop
-  factored open/run_steps/close — a session equals the batch run
-  byte-for-byte; templates completed into the grammar (KI#21); 264
-  tests green, fixture byte-identical.
-- iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4:
-  probes (60-seed sweep × director on/off, T1/T2, crafted records —
-  124 runs clean); KI#17 autonomous completions never advance the
-  playscript; KI#18 caught→suspect downgrade guarded; KI#19
-  reset_on_rotation implemented (rotation_resets + per-axis decay
-  baseline); KI#20 dead pack keys removed; D-041; 225 tests green,
-  fixture byte-identical.
-- iter-4 · 2026-08-28 · director + goal ticker: consequence buffer +
-  triggers (time / place / threshold) + narrative entropy (P2e:
-  sum of seeded-hook weights + global suspicion + visible threats,
-  observable state only — L6) + stagnation release + director on/off
-  switch; P2b goal ticker (D-021, NPC probability rolls through the
-  intent door — M5 non-PC share non-trivially non-zero by
-  construction); states decay passes deferred from iter-3
-  (fatigue/intoxication/fear proportional to elapsed ticks, injury
-  never decays — T4); arrest resolution (evasion_vs_pursuit →
-  arrest_resolved, `crime_status → caught` irreversible);
-  D-038/D-039/D-040 recorded; DIRECTOR_SPEC.md written. 219 tests
-  green, golden fixture byte-identical.
-- iter-3 · 2026-08-28 · knowledge, relations, expectations: derived
-  KnowledgeView + telling reaction (P2c, salience + acceptance),
-  crime reactions (ev_0007 shape on the reacting system; novelty
-  rule), watch rotation + briefing spread (D-006), P2a pair map,
-  P2d expectation violations (cause-chained to the axis-specific
-  mover), movement sightings, natural OCC e2e trigger; KI#3/KI#12
-  closed; T3 suite; fixture regenerated. 187 tests green.
-- iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2: 4 KIs
-  found+fixed (drop desync + `_commit` pre-write gate D-035;
-  next_log_path truncation; pack-lint gaps; parallel spread passes →
-  per-layer singleton + shared causes D-036), KI#11 deleted; 155
-  tests green, baselines byte-identical.
-- iter-2 · 2026-08-28 · actions: the 12 resolvers + registry, pack-driven
-  preconditions/checks/knowledge templates, intent OCC + lifecycle
-  (INTENT_SCHEMA.md), scheduler DAG, generic transition engine (fire
-  chain), INV-3 stoplist; steal/arson/talk = facts with records; T5
-  partial (rejections are logged no-ops). 148 tests green.
-- iter-1 · 2026-08-28 · core plumbing: RngBank, clock, queue, JSONL log +
-  header, fold/projection, pack loader + lint, playscript runner;
-  T0/T1 minimal + architecture fitness; KI#10/KI#5 closed,
-  D-032..D-034 recorded.
+- iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger; D-053): `brief/ledger.py` + the `scene_texture` 7th block + the committed golden delta fixture + pack lint. Detail: D-053 + `docs/BRIEF_SPEC.md` §3.3.
+- bg-1 · 2026-08-29 · DF export pipeline CLOSED (bg-1-sqlite-sink; D-051): the SQLite sink (typed cores + EAV + `event_participant` + generic records) over the validated survey core; cross-validated on the owner's 2.38 GB world; KI#36 fixed. Detail: D-051 + `docs/TECH_NOTES.md` §3.2.
+- iter-8h · 2026-08-29 · owner-directed derived-index micro-pass (iter-8h; D-050): two derived indexes beside their single mutation funnels + four scan eliminations; golden fixtures byte-identical. Detail: D-050.
+- iter-8g · 2026-08-29 · DF coverage audit (owner-requested): `scripts/df_survey.py --audit` — the coverage census + UNDOCUMENTED markers (KI#36's two matrix gaps caught on first run); the first `tests/test_df_survey.py`. Detail: `docs/ref/df_legends_xml.md` + git worklog iter-8g.
+- iter-8f · 2026-08-29 · audit-fix after iter-8e (owner-approved): KI#34 truncated-export survival (RecoveringReader, loud PARTIAL) + KI#35 the 101st type vocabulary re-anchor. Detail: git worklog iter-8f.
+- iter-8e · 2026-08-28 · DF empirical F7/F8 survey on the owner's two world exports (owner-requested): `scripts/df_survey.py` + measured numbers in TECH_NOTES §3.1; KI#33 schema-drift fix. Detail: `docs/TECH_NOTES.md` §3.1 + git worklog iter-8e.
+- iter-8d · 2026-08-28 · DF designed-experience deep dive (owner-requested research pass, ref-17): `docs/ref/df_design.md` — six enchantment pillars, the F1–F10 flaw taxonomy, the successor trade-off matrix, the layer-adding thesis. Detail: `docs/ref/df_design.md`.
+- iter-8c · 2026-08-28 · owner-requested audit of iter-8a/8b: every claim reproduced; KI#30 (the D-018c false citation family), KI#31 (blueprint wording debts), KI#32 (sync misses) fixed. Detail: git worklog iter-8c.
+- iter-8a · 2026-08-28 · scene-ledger design pass (owner-requested continuity question): `docs/ref/agent_memory_atlas.md` written + the scene ledger designed into blueprint §1 (D-048). Detail: D-048.
+- iter-8 · 2026-08-28 · BRIEF_SPEC + brief assembler (iter-8; D-047): the trigger-fired spec + the deterministic assembler (pure functions of the log, zero RNG) + the pack brief contract + lint. Detail: D-047 + `docs/BRIEF_SPEC.md`.
+- iter-7 · 2026-08-28 · phase-1 intake (owner-requested retrospective + plan reorganization): DECISIONS collapsed 46→30 per D-034; TASKS regained what-next ownership; KI#25–28 intake fixes. Detail: git worklog iter-7.
+- iter-6a · 2026-08-28 · owner-requested code audit of iter-5/6: every gate claim reproduced (the 1000-sim baseline exactly, T8 OFF = 26 chains); KI#22–24 fixed; D-046. Detail: D-046 + git worklog iter-6a.
+- iter-6 · 2026-08-28 · phase-0 gate (iter-6-gate): `docs/TEST_PLAN.md` + `core/metrics.py` + the T1 fixture guard + the T8 A/B suite + `scripts/balance_harness.py`; verdict PASS (D-045). Detail: D-045 + `docs/TEST_PLAN.md`.
+- iter-5 · 2026-08-28 · chronicle & CLI (iter-5): the deterministic tracery engine (ShufflePool, modifiers, conditionals — cosmetic stream only) + the chronicle as a pure function of the log + the batch/interactive CLI. Detail: git worklog iter-5.
+- iter-4a · 2026-08-28 · owner-requested code audit of iter-3/4 (iter-4a): 60-seed sweep × director on/off clean; KI#17–20 fixed; D-041. Detail: D-041 + git worklog iter-4a.
+- iter-4 · 2026-08-28 · director + goal ticker (iter-4): the consequence buffer + triggers + narrative entropy + the on/off switch; the P2b goal ticker; states decay passes; arrest resolution. Detail: `docs/DIRECTOR_SPEC.md` + D-038/D-039/D-040.
+- iter-3 · 2026-08-28 · knowledge, relations, expectations (iter-3): the derived KnowledgeView + telling reaction + crime reactions + watch rotation + the pair map + expectation violations; D-037. Detail: D-037 + git worklog iter-3.
+- iter-2a · 2026-08-28 · owner-requested code audit of iter-1/2: KI#13–16 fixed (the `_commit` pre-write gate D-035, the per-layer spread singleton D-036, pack-lint gaps). Detail: D-035/D-036 rows + git worklog iter-2a.
+- iter-2 · 2026-08-28 · actions (iter-2): the 12 resolvers + the registry, pack-driven preconditions/checks/knowledge, intent OCC + lifecycle, the scheduler DAG, the generic transition engine, the INV-3 stoplist. Detail: git worklog iter-2.
+- iter-1 · 2026-08-28 · core plumbing (iter-1): RngBank, clock, queue, the JSONL log + header, fold/projection, the pack loader + lint, the playscript runner; T0/T1 minimal + architecture fitness. Detail: git worklog iter-1.
 - iter-0 · 2026-08-25 · docs & tooling bootstrap.
 - iter-0b · 2026-08-25 · docs review + external source catalog (`docs/REFERENCES.md`).
 - iter-0c · 2026-08-25 · REFERENCES rev v2 merge (D-017) + `content/tavern_pack/` v0.1 drafted.

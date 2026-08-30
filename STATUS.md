@@ -1,46 +1,40 @@
 # STATUS — canonsim
 
-Iteration: iter-25 (`iter-25-validation-beats-10`) · Phase: 1 · Date:
-2026-08-31 · The witnessed-steal-then-alarm chain — sessions 4 and 6
-back to back, the last uncovered combination in the phase-1 corpus
-vocabulary (live `narrate` session 10, seed 93, 6 accepted beats +
-2 refused-and-caught documents, 34 supported claims, 5 intents fed,
-0 canon violations). A total-failure steal (margin ≥ 10 — the
-`failure_total` knowledge path: everyone saw) spikes the whole
-room's suspicion to 35 each (`figure_reaching_for_purse` 25 +
-`noise_by_the_bar` 10 — the guard as target holds both tokens) and
-flips pc crime_status to suspect at the moment of failure; the
-suspicion axis state-claimable at 35 (the tune-2 boundary under the
-witnessed-failure context). A successful second steal moves the
-purse silently (novel tokens only — no new suspicion). The wait
-across the t=360 rotation hands the crime record to the relief
-guard and the expectation_violation pushes both guards to 55 —
-past the document_check threshold (50), so **the director releases
-`director_0000` live for the first time in a narrate session**: the
-v0.1 stub wait intent (npc_guard_01, t=409) is claimable by id+type
-(ev_0025) — a canon event no card or brief ever surfaces; the
-rotation events (watch_change, expectation_violation) claimable by
-id+type, the relief guard's `purse_missing` claimable post-transfer.
-The arson-as-distraction (fed through the door) fires the full alarm
-cascade (fire_started, alarm_raised raised_by the relief guard —
-the first occupant in pack order under a post-rotation tavern, fear
-40 claimable per NPC); the cause-actor alarm exception holds (pc_01
-knows `fire_alarm_in_loc_tavern` — he hears his own alarm). The
-outgoing guard's fire blindness: npc_guard_01 (rotated out at
-t=360, briefed before the fire) holds no fire tokens —
-`fire_in_loc_tavern` is token_absent (the transfer bounded by what
-the holder holds — session 8's law under the document-check
-context). The flee at t=535 — after the arson's door batch drained
-the fire cascade through location_burned_out (t=533) — is caught
-(evasion 53 vs pursuit 55): flee_caught claimable by id+type, pc
-stays at the tavern, crime_status stays suspect (55 < the arrest
-threshold 75 — no arrest_attempt), the purse stays on the thief's
-card through the catch. Corpus 99→105 (+6 seed-93 cases, 8 beat
-documents); 604→610 green, ruff clean. 5 files (fixture + the
-4-doc sync set incl. AGENT_NAVIGATION §1's KI#49 fix + the iter-24
-TASKS backfill — the iter-22 precedent; iter-24's commit skipped its
-TASKS one-liner, found via `git show --stat` per the KI#42
-verify-first law). Live beats 101→109.
+Iteration: iter-26 (`iter-26-phase1-gate`) · Phase: 1 closed (gate
+PASS) · Date: 2026-08-31 · The phase-1 gate review — the owner's
+quality-first directive ("cleanup, re-verification, doc actualization
+before closing the gate — I chase quality, not speed"). The full
+ROADMAP §5 protocol re-run on evidence: 610 tests green + ruff clean;
+T1 byte-identity + the fixture-regeneration guard green (the venv
+interpreter 3.12.14 is the fixture's generating interpreter); T8
+single-factor A/B on the gate playscript (day1_full, seed 125) — OFF =
+26 emergent chains (≥3 gate minimum), M1=0.417 / M2=0.500 (1 release /
+2 seeds) on the ON-run; T7 — the day1_full chronicle re-read: the
+theft→suspicion→rotation→briefing and break→fire→burnout chains read
+causally across the day boundary, the decay/wariness repetition is the
+noise floor (the tale_gate knob stays the owner-gated tune-1 item). The
+exit criterion "0 canon violations per 100 beats (regression set)" met
+with margin: 109 live beats over 10 narrate sessions (the recorded
+tally incl. refused-and-caught beat documents; the accepted-beat sum
+alone is 104), 0 canon violations, corpus 105 cases all green; no
+kill-criteria hit (0 breaches in 109 beats — the per-1000 kill reads a
+rate the current live volume cannot yet reach, honestly noted).
+DECISIONS collapsed 41→30 per D-034 IN the gate iteration (the owner's
+directive): 7 family merges (D-002/D-010/D-032 data contracts;
+D-003/D-023 event-sourcing shape; D-004/D-028 determinism;
+D-005/D-038/D-039/D-040/D-041 director+autonomous;
+D-016/D-017/D-024/D-026/D-027 reference architecture; D-025/D-034 cap
+laws; D-048/D-049/D-053 the scene ledger) — all 58 IDs preserved (every
+D-ID is cited somewhere; verified by sweep before the merge), survivor
+rows verbatim, merged rows keep decision→why→consequence + owner links.
+D-058 = the PASS verdict. KI#50: the FAQ cap-laws bullet cited
+"(D-025/D-026)" — D-026 is the per-ref split, not a cap law (caught by
+the collapse's citation-resolution sweep) — fixed in place. The VISION
+freeze review (`doc-1`, overdue since the phase-0 verdict) closed clean:
+the frozen text verified against phase-1 reality (the 3-layer shape,
+the call-budget law, the honest limits all hold) — no changes, the
+freeze stands. Verdict: **phase-1 PASS** (D-058) — phase 2 (Parser,
+mode C) may open; the phase-2-vs-polish call stays the owner's.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -63,6 +57,12 @@ verify-first law). Live beats 101→109.
   new events.
 
 ## Active KIs
+
+- KI#50 · The FAQ cap-laws bullet cited "(D-025/D-026)" for the cap
+  laws — D-026 is the per-ref split, not a cap law (pre-existing drift,
+  caught by the iter-26 collapse's citation-resolution sweep) ·
+  opened+CLOSED iter-26 (the bullet now cites D-025/D-034 — one row
+  since the phase-1 collapse).
 
 - KI#49 · AGENT_NAVIGATION §1's corpus descriptions stuck at "41
   documents / four sessions" while the corpus is at 105 cases / 10
@@ -269,15 +269,17 @@ verify-first law). Live beats 101→109.
   full recipe: `docs/TECH_NOTES.md` §3.1/§3.2; tools:
   `scripts/df_survey.py` + `scripts/df_import.py`; regression:
   `tests/test_df_survey.py` + `tests/test_df_import.py`.
-- **The §6 cap laws: substance over line count (D-025/D-026) + the
-  ID-preserving gate-collapse (D-034).** The docs cap is 600 with the
-  §6.1 substance filter as the real law — filler is cut always; named
-  systems, field lists, enum values, per-source verdicts are never cut
-  to fit. The DECISIONS collapse writes compound IDs with the FULL
-  prefix on every member (`D-018/D-022/D-029` — `D-018/022/029` does
-  NOT resolve); compressed rows keep decision→why→consequence and link
-  the single owner (D-024). Pre-collapse history lives in git; due
-  again at the phase-1→2 gate.
+- **The §6 cap laws: substance over line count (D-025/D-034 — one row
+  since the phase-1 collapse) + the ID-preserving gate-collapse.** The
+docs cap is 600 with the §6.1 substance filter as the real law — filler
+is cut always; named systems, field lists, enum values, per-source
+verdicts are never cut to fit. The DECISIONS collapse writes compound
+IDs with the FULL prefix on every member (`D-018/D-022/D-029` —
+`D-018/022/029` does NOT resolve); compressed rows keep
+decision→why→consequence and link the single owner (D-024).
+Pre-collapse history lives in git; collapsed 46→30 at the phase-0→1
+gate, 41→30 at the phase-1 gate (iter-26); next due at the phase-2→3
+gate.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -334,47 +336,34 @@ verify-first law). Live beats 101→109.
 
 ## Next step
 
-**iter-25 closed session 10 (the witnessed-steal-then-alarm chain):
-the last uncovered combination in the phase-1 corpus vocabulary is
-pinned — the corpus moves to the phase-1 gate review (ROADMAP §2).
-Corpus 99→105 (6 seed-93 cases, 8 beat documents); live beats
-101→109; the director released live for the first time in a narrate
-session (`director_0000` — the document-check stub, claimable by
-id+type). Sessions 1–10 now cover: the refusal vocabulary in full,
-the steal ladder from both halves, the fire cascade witnessed and
-unwitnessed, the rotation handover both ways (crime crosses, fire
-does not), the alarm + fear spikes, flee caught and unpursued, the
-door-outcome three axes, multi-day canon, and the director's
-threshold release. Next, in order:
+**iter-26 closed the phase-1 gate (verdict PASS, D-058): the exit
+criterion met with margin — 109 live beats / 0 canon violations /
+corpus 105 green; the full §5 protocol re-run (T1, T8 A/B OFF=26
+chains, M1=0.417/M2=0.500 ON, T7 chronicle re-read); DECISIONS
+collapsed 41→30 in the same iteration (D-034); the VISION freeze
+review (`doc-1`) closed clean. The phase-2-vs-more-phase-1-polish
+decision is now the owner's call (a Huge-scale item per the reading
+gradient: ROADMAP §2 → VISION → DECISIONS). Next, in order:
 
-1. **The phase-1 gate review** — the owner's call (a Huge-scale
-   item per the reading gradient: ROADMAP §2 → VISION → DECISIONS).
-   The exit criterion reads "0 canon violations per 100 beats
-   (regression set)": 109 live beats over 10 sessions, 0 violations,
-   corpus 105 cases green. The review decides phase-2 (Parser, mode
-   C) vs. more phase-1 polish; the DECISIONS collapse (D-034) is due
-   at the gate. Alternatively, an `iter-26` corpus cleanup pass
-   (consolidate the multi-session id+type probes; the corpus is at
-   105 cases — the §6.1 substance filter applies, no line-cap
-   concerns yet).
-2. `tune-1` rest action (pack data; the owner's fatigue observation —
-   the monotonic climb holds across sessions) or `st-2` identity
-   persistence per TASKS; `tune-2` (suspicion/crime-status
-   observability — re-pinned under the witnessed-failure context at
-   value 35, iter-25) and `tune-3` (alarm-adjacent + the §3 market
-   leg — both boundaries live-pinned under day 1 and day 2) wait for
-   the owner; `st-6` shrinks to the `travel` half, phase-5-gated.
-   `pack-2` (arson-on-ashes guard) — its first live probe landed
-   iter-24; a pack precondition fix (e.g. an `unburning_spot`/
-   `not_destroyed` test in the closed set) is the natural follow-up
-   when a precondition slot is next needed.
-3. The runtime-engine decision (llama.cpp + GBNF, TECH_NOTES §1) and
-   the `bg-6` SoW audit wait for the phase-1 gate — never earlier
-   (ROADMAP §6; the owner's deferral, D-055).
-
-Track B: bg-2 (taxonomy) + bg-3 (briefer spike) query the SQLite sink;
-bg-4 (cost notes) is read-only. Infra backlog: `doc-1` VISION freeze
-review; `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1`
-10k-tick profile (the gate for anything structural). `pack-3` (the
-owner's Sci-Fi setting sketches) is parked in TASKS until the
-2nd-setting gate.
+1. **The owner's phase-2 call** — open phase 2 (Parser, mode C: ≥90%
+   valid intents; disambiguation questions on uncertainty) or more
+   phase-1 polish first. The polish menu (all owner-gated): `tune-1`
+   rest action + the D-045(b) importance-rule knob (the T7
+   noise-floor observation re-flags it — the decay/wariness
+   repetition dominates the chronicle mid-section), `tune-2`
+   crime-cascade observability (re-pinned at value 35, iter-25),
+   `tune-3` alarm-adjacent + the §3 market leg, `st-2` identity
+   persistence, or an `iter-27` corpus consolidation pass (the
+   multi-session id+type probes; 105 cases, §6.1 applies). `pack-2`
+   (arson-on-ashes guard): a pack precondition fix is the natural
+   follow-up when a precondition slot is next needed.
+2. **Unlocked by the gate** (owner's call when): the runtime-engine
+   decision (llama.cpp + GBNF, TECH_NOTES §1) and the `bg-6` SoW
+   audit (ROADMAP §6 lifts with the gate; the D-055 deferral stands
+   until the owner calls it).
+3. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
+   (briefer spike) query the SQLite sink; bg-4 (cost notes) is
+   read-only. Infra backlog: `qa-1` mypy + `ci-1` GitHub Actions
+   (owner-gated); `perf-1` 10k-tick profile (the gate for anything
+   structural). `pack-3` (the owner's Sci-Fi setting sketches) is
+   parked in TASKS until the 2nd-setting gate.
