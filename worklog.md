@@ -10,6 +10,37 @@
 > since iter-5).
 
 ---
+iter-23 · 2026-08-31 · validation beats — session 8, the
+arson-after-theft chain (iter-23-validation-beats-8)
+- Live narrate session 8 (seed 85, 12 beats + 3 refused-and-caught
+  probes, 49 supported claims, 0 canon violations): the take →
+  silent steal → drop_break → fire chain under a successful-theft
+  context — sessions 4/5/7 tied; both prizes on one coat, the
+  departure token (`pc_01_left_toward_loc_backyard`) claimable at
+  the yard arrival.
+- The unseen arson: the rotation hands the crime half across the
+  watch change (purse_missing inferred/exact → told/partial, the
+  trail + noise tokens, suspicion 20 both guards — crime_status
+  stays unknown post-inference, 20 < 25) while the fire half never
+  crosses — guard-side fire tokens all token_absent refusals (the
+  transfer bounded by what the holder holds; session 6's positive
+  half complemented). The arsonist's calm (status.fear 0 — the
+  cause-actor fear exclusion) and the cause-actor blindness refusal
+  pin the ignition exception from both sides.
+- The flee fed through the door from a burned-out yard (the
+  unpursued half; the purse leaves the fire, the lamp stays); the
+  street arson attempt commits intent_rejected (claimable by
+  id+type — a new door-outcome action kind); the maid's autonomous
+  urgency event claimable by id+type; the §3 market leg pinned
+  unreachable live (tune-3 family).
+- Corpus 70→84 (+14 seed-85 cases; the post-cascade batch structure
+  expressed as the flee-intent beat + between-steps — byte-equal to
+  the live stream, the new FAQ lesson); 575→589 green, ruff clean.
+  4 files (fixture + the 3-doc sync set — the iter-18 scope
+  precedent); iter-13 evicted per the cap; TASKS 611→627 stays over
+  the 600 cap by substance (the iter-22 precedent — session findings
+  carry load).
+---
 iter-22 · 2026-08-31 · validation beats — session 7, the theft half
 under the presence machinery (iter-22-validation-beats-7)
 - Live narrate session 7 (seed 54, 11 beats, 24 supported /
@@ -190,17 +221,7 @@ iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (i
   evicted per the cap.
 ---
 iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop session (iter-13-validation-beats)
-- Real `narrate` session (seed 125, 11 beats): 0 canon violations;
-  every refusal family probed and caught live (claims, gateway, OCC,
-  ladder); the quiet-beat hole confirmed (no presence block — st-1
-  evidence, not implemented).
-- KI#44 fixed: accepted beats print `BEAT` claims/texture/intents/
-  rebased summaries (cli/mediator.py + cli/main.py; VALIDATION_SPEC
-  §7.1) — the phase-1 exit numbers are countable in live play.
-- The phase-1 regression set: tests/fixtures/narrator_beats.json (16
-  cases from the session) replayed through the real cycle
-  (test_mediator.py); CLI wiring pinned (test_cli.py). 476→493 green,
-  ruff clean; bg-1 evicted per the cap.
+- (deleted at iter-23 per the one-in/one-out cap; history in git.)
 ---
 (iter-12 deleted at iter-22 per the one-in/one-out cap; history in git.)
 ---

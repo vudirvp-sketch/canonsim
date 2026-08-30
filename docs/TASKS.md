@@ -73,7 +73,11 @@ level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
   static (the rotation is a direct duty↔rest swap, playscript steps
   are player-only, urgencies are all waits), so the street/backyard
   are never occupied when the fire starts; the same-location half
-  (alarm + fear spike) fires fine and is corpus-pinned. Owner's
+  (alarm + fear spike) fires fine and is corpus-pinned. Session 8
+  (iter-23) pinned the same family live on the §3 rumor leg: the
+  market crowd holds no `figure_at_back_door_last_night` — the
+  drunkard never leaves the tavern (the refusal is corpus-pinned,
+  the boundary probed, not forced). Owner's
   call: a v0.2 pack NPC-movement source (e.g. a transit route
   through the street), leave as declared-but-dormant layer
   vocabulary (a second pack may exercise it), or phase-5 spatial
@@ -255,6 +259,30 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-23 · 2026-08-31 · validation beats — session 8, the
+  arson-after-theft chain (iter-23-validation-beats-8; seed 85, 12
+  beats + 3 refused-and-caught probes, 49 supported claims, 0 canon
+  violations): the take → silent steal → drop_break → fire chain
+  under a successful-theft context (sessions 4/5/7 tied); both
+  prizes on one coat; the departure token claimable at the yard
+  arrival; the unseen arson — the rotation hands the crime half
+  across the watch change (purse_missing inferred/exact →
+  told/partial, the trail + noise tokens, suspicion 20 both guards,
+  crime_status unknown post-inference at 20 < 25) while the fire
+  half never crosses (guard-side fire tokens all token_absent — the
+  transfer bounded by what the holder holds); the arsonist's
+  fear-0 calm + the cause-actor blindness refusal (the ignition
+  exception from both sides); the flee fed through the door from a
+  burned-out yard (unpursued; the purse leaves the fire, the lamp
+  stays); the street arson attempt commits `intent_rejected`
+  (claimable by id+type — a new door-outcome action kind); the
+  maid's autonomous urgency event claimable by id+type; the §3
+  market leg pinned unreachable (tune-3 family). Corpus 70→84; the
+  batch-boundary lesson in the STATUS FAQ (a distilled case must
+  reproduce the live batch structure — the intent beat +
+  between-steps vocabulary). 575→589 green, ruff clean. Detail:
+  worklog iter-23 + `docs/VALIDATION_SPEC.md` §7.1.
 
 - iter-22 · 2026-08-31 · validation beats — session 7, the theft half
   under the presence machinery (iter-22-validation-beats-7; seed 54,
