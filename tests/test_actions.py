@@ -92,7 +92,9 @@ def test_steal_partial_failure_records_ev_0007_family(tmp_path: Path) -> None:
     assert ("npc_guard_01", "saw", "partial") in by_channel
     assert ("npc_barkeep_01", "heard", "vague") in by_channel
     assert set(failed.hooks) == {"guard_suspicious_of_pc", "possible_document_check"}
-    assert failed.importance == "medium"
+    # tune-1: pickpocket_failed is story-critical (raw 1+2 hooks) + hook 2
+    # = 5 -> high; it was "medium" before the story-critical score term.
+    assert failed.importance == "high"
 
 
 def test_steal_total_failure_everyone_saw(tmp_path: Path) -> None:
@@ -586,3 +588,85 @@ def test_texture_take_elsewhere_is_a_soft_rejection(tmp_path: Path) -> None:
     assert rejected.type == "intent_rejected"
     assert rejected.outcome["failed_test"] == "texture.same_location"
     assert "candles" not in sim.projection["loc_tavern"]
+
+
+# -- rest (tune-1, iter-27: the fatigue counter-play, KI#4) ---------------------
+
+
+def test_rest_reduces_fatigue_gained_by_long_waits(tmp_path: Path) -> None:
+    """KI#4's balance observation was monotonic player fatigue: long waits
+    climb the axis with no counter-play in v0.1. The rest action (pack data
+    over the recuperate resolver) is the answer — the delta reads CURRENT
+    projection values and clamps to the scale (KI#13: from_ never lies)."""
+    events, sim = run(tmp_path, 5, TAVERN_STEPS + [
+        {"intent": "wait", "ticks": 730},  # ~20 fatigue across two beats
+        {"intent": "rest"},
+    ])
+    assert sim.projection["pc_01"]["status.fatigue"] == 0  # 20 - 30 -> clamp
+    rest = next(e for e in events if e.type == "rest")
+    assert [(c.prop, c.from_, c.to_) for c in rest.state_changes] == [
+        ("status.fatigue", 20, 0)
+    ]
+    # routine recovery is not a tale beat (tune-1: the gate reads the rule)
+    assert rest.importance == "low"
+    # the fold agrees with the runtime projection (T2 shape, INV-1)
+    state = fold(events, initial_projection(PACK.entities))
+    assert state["pc_01"]["status.fatigue"] == 0
+
+
+def test_rest_at_zero_fatigue_is_a_legal_quiet_beat(tmp_path: Path) -> None:
+    """Resting fresh: no state change, no desynced write — the event still
+    commits (time passed, the world moved) exactly like the decay pass's
+    zero-delta skip."""
+    events, sim = run(tmp_path, 6, [{"intent": "rest"}])
+    rest = events[-1]
+    assert rest.type == "rest"
+    assert rest.state_changes == ()
+    assert sim.projection["pc_01"]["status.fatigue"] == 0
+
+
+# -- pack-2 (iter-29, D-061): the arson-on-ashes door check ---------------------
+
+
+def test_arson_on_a_destroyed_location_is_rejected(tmp_path: Path) -> None:
+    """pack-2, the iter-2a audit note + iter-24's live probe: arson on a
+    fully-burning or destroyed location used to log a no-ignition success
+    (spot=None, world unchanged) — a success that pretended. The
+    spot_available door check rejects the attempt as a no-op fact with
+    failed_test target.spot_available (the fourth door-outcome axis:
+    no unburning spot, beside not co-located / no flagged target /
+    no fuel)."""
+    steps = [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "take", "target": "oil_lamp_01"},
+        {"intent": "move", "target": "loc_backyard"},
+        {"intent": "drop_break", "target": "oil_lamp_01", "near": "back_wall"},
+        {"intent": "wait", "ticks": 300},  # the cascade burns out the yard
+        {"intent": "arson", "target": "loc_backyard"},
+    ]
+    events, sim = run(tmp_path, 4, steps)  # seed 4: the take succeeds
+    assert sim.projection["loc_backyard"]["destroyed"] is True
+    rejected = events[-1]
+    assert rejected.type == "intent_rejected"
+    assert rejected.outcome["failed_test"] == "target.spot_available"
+    # the world did not change: no new fire events after the burnout
+    fire_types = {"fire_started", "fire_spread", "smoke_rising",
+                  "location_burned_out"}
+    assert not any(e.type in fire_types for e in events[events.index(rejected):])
+
+
+def test_arson_on_a_fresh_location_still_ignites(tmp_path: Path) -> None:
+    """The happy path is unchanged: a fresh flammable location with an
+    unburning spot passes the new door check and the chain follows (T5's
+    impossible-half and the possible-half stay honest)."""
+    steps = [
+        {"intent": "move", "target": "loc_tavern"},
+        {"intent": "take", "target": "oil_lamp_01"},
+        {"intent": "move", "target": "loc_backyard"},
+        {"intent": "arson", "target": "loc_backyard"},
+    ]
+    events, sim = run(tmp_path, 4, steps)
+    assert any(e.type == "arson" for e in events)
+    assert any(e.type == "fire_started" for e in events)
+    rejected = [e for e in events if e.type == "intent_rejected"]
+    assert not rejected

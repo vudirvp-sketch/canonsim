@@ -15,7 +15,7 @@ REPO = Path(__file__).resolve().parents[1]
 PACK = REPO / "content" / "tavern_pack"
 SCHEMA = REPO / "schemas" / "event.schema.json"
 
-# The 12 phase-0 intents, pinned by docs/MVP_SCOPE.md §7.
+# The action intents pinned by docs/MVP_SCOPE.md §7 (12 phase-0 + rest, tune-1).
 MVP_INTENTS = frozenset(
     {
         "look_around",
@@ -29,6 +29,7 @@ MVP_INTENTS = frozenset(
         "steal",
         "distract",
         "arson",
+        "rest",  # tune-1 (iter-27): the fatigue counter-play, pack data
         "flee",
     }
 )
@@ -141,7 +142,7 @@ def test_watch_rotation_ticks_are_inside_the_day() -> None:
 
 def test_actions_match_mvp_scope() -> None:
     data = load(PACK / "actions.json")
-    assert len(data["actions"]) == 12  # MVP_SCOPE §7
+    assert len(data["actions"]) == 13  # MVP_SCOPE §7: 12 phase-0 + rest (tune-1)
     intents = [a["intent"] for a in data["actions"]]
     assert len(intents) == len(set(intents))
     assert frozenset(intents) == MVP_INTENTS

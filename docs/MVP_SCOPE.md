@@ -20,14 +20,15 @@ not of architecture — a boring four-room scenario is not a verdict on the core
 
 **In scope:**
 
-- 5 locations, 6 NPCs, 5 items, 8 systems, 12 actions (§4–§7).
+- 5 locations, 6 NPCs, 5 items, 8 systems, 13 actions — 12 phase-0 + rest
+  (tune-1/iter-27: the fatigue counter-play, pack data; §4–§7).
 - Deterministic core: seed, RngBank (INV-2, RNG-1), integer tick clock, single event
   queue, JSONL append-only log with header (§8, `docs/EVENT_SCHEMA.md` §1).
 - Event schema v0 with knowledge records, `state_changes`, `hooks`.
 - Content as data: one hand-assembled pack in `content/tavern_pack/` — no
   manifest, no pack CI, no generic loader; a fixed directory read at startup.
 - Chronicle rendered by text templates (no LLM).
-- CLI mapping 1:1 to the 12 actions (buttons/commands; no free-text parsing).
+- CLI mapping 1:1 to the action set (buttons/commands; no free-text parsing).
 - Playscript fixtures, test suite (§14), director-off A/B run (§11).
 
 **Out of scope — do NOT build (phase-0 non-goals):**
@@ -125,7 +126,10 @@ relations, no movement — it only receives knowledge records (rumor listener).
 Eight systems taken separately are trivial — emergence lives at the
 intersections. The log metrics (§15) measure exactly this.
 
-## 7. Actions (12)
+## 7. Actions
+
+Phase 0 landed 12; tune-1 (iter-27, D-059) added `rest` as pack data over
+the `recuperate` resolver — the registry grows only with a new mechanic.
 
 | Action | Intent type | Ticks | Check | On failure | Knowledge produced |
 |---|---|---|---|---|---|
@@ -141,6 +145,7 @@ intersections. The log metrics (§15) measure exactly this.
 | distract | `distract` | 3 | social | ignored | target attention state |
 | set fire | `arson` | 4 | fire source + flammable target required | abort | alarm, smoke, visibility drop |
 | flee | `flee` | 2+ | pursuit | caught | guards: chase knowledge |
+| rest | `rest` | 60 | — | — | — (tune-1: fatigue −30, pack `status_effects`) |
 
 Free-text input arrives when the C-parser can decompose it into these same
 intents (phase 2). Buttons/commands are shortcuts to identical intents.
@@ -201,7 +206,9 @@ Schema rules (short form; full form in EVENT_SCHEMA.md):
 - No group reputations in v0: "reputation among the watch" = knowledge spread
   between guards (transfer event at watch change).
 - `importance` is computed by the pack rule (entities touched +
-  irreversibility + far hooks), never by feel.
+  irreversibility + far hooks + the story-critical hook — tune-1/D-059:
+  pack-listed event types score a bonus, the signal/noise split the tale
+  gate reads), never by feel.
 - `visibility` is perception-check input; `knowledge` is its result — not
   duplicate fields.
 

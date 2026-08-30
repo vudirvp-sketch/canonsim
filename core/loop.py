@@ -431,6 +431,7 @@ class Simulator:
                     1 for change in resolution.state_changes if change.irreversible
                 ),
                 hooks=len(resolution.hooks),
+                event_type=resolution.event_type,
             ),
             provenance={"seed": self._seed, "cause_intent": intent.id},
         )
@@ -640,6 +641,7 @@ class Simulator:
                     {p for p in (outgoing, incoming) if p is not None},
                     irreversible=0,
                     hooks=0,
+                    event_type=rotation["watch_event"],
                 ),
                 provenance={"seed": self._seed},
             )

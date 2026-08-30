@@ -306,6 +306,12 @@ class Mediator:
         fresh_lines = lines[self._shown_lines :]
         self._shown_lines = len(lines)
         if not fresh_lines:
+            # The beat may hold canon events that sit BELOW the tale gate
+            # (routine drift, waits) — "no new canon events" would be a lie
+            # under the tune-1 medium gate; say what actually happened.
+            events = self._events()
+            if len(events) > self._call_events:
+                return "(dry beat — no tale-worthy lines this beat)"
             return "(dry beat — no new canon events)"
         return "\n".join(fresh_lines)
 

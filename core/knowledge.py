@@ -285,7 +285,8 @@ def telling_reaction(
         },
         knowledge=records,
         importance=pack_importance(
-            pack.rules, {teller, listener}, irreversible=0, hooks=0
+            pack.rules, {teller, listener}, irreversible=0, hooks=0,
+            event_type=config["event"],
         ),
     )
 
@@ -373,7 +374,8 @@ def expectation_drafts(
                     ),
                 ),
                 importance=pack_importance(
-                    pack.rules, {npc, rule["item"]}, irreversible=0, hooks=0
+                    pack.rules, {npc, rule["item"]}, irreversible=0, hooks=0,
+                    event_type=config["event"],
                 ),
             )
         )

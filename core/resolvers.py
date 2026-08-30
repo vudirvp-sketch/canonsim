@@ -1,7 +1,9 @@
 """The ActionResolver registry (phase0 §2, D-031): pack data references
 resolvers by name; each resolver is a generic mechanic — no domain words
-(INV-3, enforced by the stoplist test). One iteration = the 12 actions of
-`MVP_SCOPE.md` §7.
+(INV-3, enforced by the stoplist test). Phase 0 landed the 12 actions of
+`MVP_SCOPE.md` §7; the registry grows only with a new MECHANIC (tune-1:
+`recuperate` — pack-declared actor status effects, the fatigue
+counter-play), never for a setting noun.
 
 A resolver runs at completion time (checks have already been rolled by
 `core/intent.py`); it reads the projection, draws nothing except explicit
@@ -497,6 +499,40 @@ def _flee(
     )
 
 
+def _recuperate(
+    pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
+    action: Mapping[str, Any], check: CheckResult | None, tick: int,
+) -> Resolution:
+    """The pack-declared actor status effects (tune-1, KI#4): the action
+    carries a `status_effects` list ({status, delta}); each effect reads
+    the CURRENT value from the projection (KI#13 — `from` is never
+    hardcoded) and clamps to the pack's relation scale. A clamped-to-zero
+    delta emits no StateChange (resting at fatigue 0 is a legal quiet
+    beat — the same no-op discipline as the decay pass), never a
+    desynced write the `_commit` gate would have to refuse."""
+    branch = _branch(check, action)
+    changes: list[StateChange] = []
+    if branch == "success":
+        scale = pack.rules["relations"]["scale"]
+        for effect in action["status_effects"]:
+            prop = f"status.{effect['status']}"
+            current = projection[intent.actor].get(prop, 0)
+            target = max(scale[0], min(scale[1], current + effect["delta"]))
+            if target != current:
+                changes.append(
+                    StateChange(
+                        entity=intent.actor, prop=prop,
+                        from_=current, to_=target,
+                    )
+                )
+    return Resolution(
+        event_type=action["events"][branch],
+        outcome={"check": _check_outcome(check)},
+        knowledge=_knowledge(action, branch, pack, projection, intent, tick),
+        state_changes=tuple(changes),
+    )
+
+
 REGISTRY: Final[dict[str, ResolverFn]] = {
     "observe": _observe,
     "inspect": _inspect,
@@ -510,4 +546,5 @@ REGISTRY: Final[dict[str, ResolverFn]] = {
     "divert": _divert,
     "ignite": _ignite_action,
     "flee": _flee,
+    "recuperate": _recuperate,
 }

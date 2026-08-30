@@ -62,13 +62,16 @@ def director_intents(log_path: Path) -> list[str]:
 def test_play_prints_chronicle_scene_and_writes_files(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    script = write_script(tmp_path, dict(AB_SCRIPT, steps=AB_SCRIPT["steps"][:1]))
+    # steps[:2] = move + steal: the story-critical events render at the
+    # tune-1 medium gate (a move-only script now prints an empty chronicle
+    # — nothing tale-worthy happened, honestly).
+    script = write_script(tmp_path, dict(AB_SCRIPT, steps=AB_SCRIPT["steps"][:2]))
     logs, out = tmp_path / "logs", tmp_path / "out"
     code = main(["play", str(script), "--logs-dir", str(logs), "--out-dir", str(out)])
     assert code == 0
     captured = capsys.readouterr().out
     assert "— Day 1, Morning —" in captured
-    assert "the player heads to Three Barrels tavern." in captured
+    assert "the player's hand drifts toward Doren's purse" in captured
     assert "Three Barrels tavern:" in captured  # the scene card
     assert "[log:" in captured
     log_files = list(logs.glob("run_32_*.jsonl"))
@@ -192,10 +195,11 @@ def test_session_look_wait_seed_quit(
     feed(monkeypatch, ["look", "wait 30", "seed", "quit"])
     assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
     out = capsys.readouterr().out
-    assert "— Day 1, Morning —" in out
-    assert "the player takes in the street in front of the tavern." in out
-    assert "the player waits." in out
+    # tune-1: look/wait are world texture — below the tale gate, so the
+    # delta print stays silent (no chronicle lines); the SCENE CARD is the
+    # command's observable answer, and the session mechanics still run.
     assert "the street in front of the tavern: no one" in out  # scene card
+    assert "the player waits." not in out  # gated noise, not rendered
     assert "session seed: 42" in out
     assert list((tmp_path / "logs").glob("run_42_*.jsonl"))
 
@@ -217,11 +221,22 @@ def test_session_directors_toggle_and_chronicle(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    feed(monkeypatch, ["directors off", "wait 3", "chronicle", "quit"])
+    # A story-bearing script (session seed 42): the clean steal is
+    # story-critical (tune-1), so its line renders in BOTH the post-play
+    # delta print and the full `chronicle` — the prefix-stability law the
+    # waits used to pin before the gate rose.
+    story = write_script(tmp_path, {
+        "name": "session_story", "seed": 42, "pack": "tavern_pack@0.1",
+        "steps": [
+            {"intent": "move", "target": "loc_tavern"},
+            {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+        ],
+    })
+    feed(monkeypatch, ["directors off", f"play {story}", "chronicle", "quit"])
     assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
     out = capsys.readouterr().out
     assert "director releases OFF" in out
-    assert out.count("the player waits.") == 2  # delta print + full chronicle
+    assert out.count("the player lifts the purse unseen.") == 2  # delta + full
 
 
 def test_session_play_with_wrong_seed_is_an_error_not_a_crash(
@@ -229,11 +244,13 @@ def test_session_play_with_wrong_seed_is_an_error_not_a_crash(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     script = write_script(tmp_path, dict(AB_SCRIPT, seed=999))
-    feed(monkeypatch, [f"play {script}", "wait 3", "quit"])
+    feed(monkeypatch, [f"play {script}", "look", "quit"])
     assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
     out = capsys.readouterr().out
     assert "error: playscript seed 999 != session seed 42" in out
-    assert "the player waits." in out  # the session survives the error
+    # the session survives the error: the next command still answers
+    # (its scene card — the wait line itself is below the tune-1 gate)
+    assert "the street in front of the tavern: no one" in out
 
 
 def test_session_unknown_command_suggests_help(

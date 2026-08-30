@@ -10,6 +10,83 @@
 > since iter-5).
 
 ---
+iter-29 · 2026-08-31 · pack-2 — the arson-on-ashes door check
+(iter-29-pack2-spot-available; the owner's finish-phase-1 directive,
+polish item 3)
+- The closed precondition set gains `spot_available` (the 15th test):
+  the target location holds an unburning spot of the declared layer —
+  the exact condition the ignite resolver keys on (door and resolver
+  agree by construction); the arson requires carry it, the `layer`
+  param is lint-checked against rules.json transitions (a typo would
+  KeyError mid-run). INV-3 caught my own first docstring draft ("door
+  guard"/"arson" — setting words) — rewritten, the stoplist holds.
+- Arson on a destroyed or fully-burning location is now an
+  intent_rejected no-op (failed_test target.spot_available) — the
+  door-outcome vocabulary's fourth axis; the iter-24 no-ignition
+  success (a success that pretended the world changed) is closed. The
+  seed-41 corpus probe flipped with it (renamed + prose/last_event_type
+  updated + a provenance note in the fixture's `source`).
+- 626→629 green, ruff clean. 8 files (core intent/pack + actions +
+  corpus + the doc sync set); D-061; iter-19 evicted per the cap.
+  Docs: INTENT_SCHEMA §3 (the test row), TASKS, STATUS, DECISIONS
+  (transiently 33/30 — collapse due at the phase-2→3 gate per D-034).
+---
+iter-28 · 2026-08-31 · tune-2 — the crime cascade renders on the
+cards (iter-28-tune2-card-markers; the owner's finish-phase-1
+directive, polish item 2)
+- The declared candidate landed: `status_markers` → the prop-path
+  `card_markers` table (threshold rows `min` + value rows `value`; the
+  closed marker surface `status.<axis>` / `relations.<axis>` /
+  `crime_status`, lint-checked against the declared axes); the render
+  segment is `markers=` (the old `status=` lied for non-status props);
+  the pack ships `wary` at suspicion ≥ 25 (aligned with the
+  status_suspect_at flip) + `suspect`/`caught` on the player's card —
+  iter-17's claimable-but-invisible asymmetry resolved in the
+  readable-tension direction.
+- The scene_delta half of the finding resolved as lawful blindness
+  (NOT a defect): `suspicion_changed` rides no knowledge record and the
+  delta window is the PC's perception (blind-NPC, D-037) — the card is
+  the narrator's read surface, the delta window the player's; both
+  pinned by tests. The corpus `status=afraid` pin updated to
+  `markers=afraid` (render format, no canon impact).
+- 619→626 green, ruff clean. 9 files (assembler + lint + pack + the
+  doc sync set — within the 3–5 soft limit's family precedent); D-060;
+  KI#50 deleted per AGENTS §5 (closed iter-26); iter-18 evicted per
+  the cap. Docs: BRIEF_SPEC §3.4/§6 (the table law + the render
+  format), TASKS, STATUS, DECISIONS (transiently 32/30 — collapse due
+  at the phase-2→3 gate per D-034).
+---
+iter-27 · 2026-08-31 · tune-1 — the rest action + the story-critical
+importance hook (iter-27-tune1-rest-importance; the owner's
+finish-phase-1 directive opening the polish menu)
+- The D-045(b) knob: `importance.score.story_critical_event` (+2) +
+  `importance.story_critical_events` (19 event types, lint-closed
+  against the template vocabulary); `pack_importance` takes the event
+  type (all 12 emit sites: actions, transitions, crime, knowledge,
+  states, rotations); the tale gate follows low→medium (templates.json)
+  — the RULE owns the signal/noise split, the gate is not the knob.
+  Evidence: day1_full seed 125 OFF renders 47 events → 14 tale lines —
+  the theft ladder, both handovers, both briefings, the fire chain;
+  zero decay/wariness/wait lines (the T7 noise floor: 27/47 events were
+  repetition). Pinned by the tale-split regression test.
+- The KI#4 counter-play: `rest` (13th action, 60 ticks, fatigue −30)
+  as pack data — the new `recuperate` resolver applies the action's
+  `status_effects` (projection-read `from_`, scale-clamped, zero-delta
+  skip); pack lint refuses a typo'd story-critical entry, a
+  status_effects block on a non-recuperate resolver, an undeclared
+  axis, a zero delta. The 1000-sim baseline re-run IDENTICAL (importance
+  is an annotation; the canon stream untouched); T1 fixture
+  byte-identical (smoke = move/wait only); the mediator dry floor now
+  distinguishes "no tale-worthy lines" from "no new canon events"
+  (the medium gate made the old wording a lie).
+- 610→619 green, ruff clean. 17 files (two subsystems + the doc sync
+  set — the iter-15/20 scope precedent; one task ID per TASKS tune-1);
+  D-059; KI#49 deleted per AGENTS §5 (closed iter-25); iter-17 evicted
+  per the cap. Docs synced: MVP_SCOPE §2/§7/§9, EVENT_SCHEMA §6 +
+  schema description (non-breaking), INTENT_SCHEMA §6, TEST_PLAN T7,
+  AGENT_NAVIGATION §1, TASKS, STATUS, DECISIONS (transiently 31/30 —
+  collapse due at the phase-2→3 gate per D-034).
+---
 iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
 collapse (iter-26-phase1-gate)
 - Evidence re-run per ROADMAP §5: 610 green + ruff clean; T1
@@ -232,53 +309,14 @@ vocabularies become pack data (iter-20-universality, KI#48 + D-057)
   sync set — over the 3–5 soft limit, the iter-15 scope
   precedent); iter-11c evicted per cap.
 ---
-iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses (iter-19-spatial-audit)
-- Verdict ~85–95% repo-true: time/space/canon-vs-texture mechanics
-  confirmed (D-048/049/053/054/056, queue key, t+duration); the
-  second text's corrections repo-exact (D-049 pinning, retire+
-  establish, travel-over-weighted-move, layout-over-fire_spots).
-- Omissions: drift family is ref-9-a/b/c + entt/bevy wide (phantom
-  sim/systems, core/runner, core/store, content/packs/*.py);
-  travel is queue-cheap today (clock jump-ahead). The layout
-  clause was wrong (KI#48, corrected iter-20: canon_slot reads
-  both prop sources — no seeding needed).
-- KI#47 opened+closed: 9 grid phrases fixed (docs/ref/{libtcod,
-  rot_js,red_blob_games}.md + REFERENCES_DEEP rows); lift-target
-  vocabulary stanced in the STATUS FAQ (pre-D-028 precedent);
-  st-6 spatial backlog row added (travel + layout, phase-5-gated).
-- Docs-only (D-022 exception: fresh owner request); 547 green,
-  ruff clean. 7 files (scope: the family-wide fix); iter-11b
-  evicted per the cap.
+iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses
+- (deleted at iter-29 per the one-in/one-out cap; history in git.)
 ---
 iter-18 · 2026-08-30 · validation beats — session 5, the arson half
-over the cards (iter-18-validation-beats-5)
-- Live narrate session 5 (seed 20, 10 beats, 29 supported / 4
-  refused-and-caught / 1 unverifiable, 0 canon violations): the fire
-  cascade is in canon regardless of who stood where; the observable
-  surface splits by location — cause-actor blind to ignition
-  (token_absent on fire_in_<loc>), absent NPCs cannot perceive fire,
-  no alarm in the canonical solo-arson scenario, an unmodeled
-  fire_intensity prop reads insufficient_data (UAP), and a canon
-  event is claimable by id+type even when the brief was silent.
-- Corpus 41 → 51 (+10 arson-half cases); 537 → 547 green, ruff clean.
-  4 files (fixture + the 3-doc sync set); KI#46 deleted per AGENTS §5
-  (closed iter-16, >2 iterations past); iter-11a evicted per cap.
+- (deleted at iter-28 per the one-in/one-out cap; history in git.)
 ---
-iter-17 · 2026-08-30 · validation beats — session 4, the crime
-cascade over the presence machinery (iter-17-validation-beats-4)
-- Live narrate session 4 (seed 15, 10 beats, 32 supported /
-  2 refused-and-caught, 5 intents fed, 0 canon violations): the
-  cascade's observable half reads through the cards (witnesses,
-  per-witness knowledge, the purse carried across cards and through
-  the flee — KI#46's read-side pinned); the suspicion half is
-  invisible through the brief (no marker row expressible — the axis
-  lookup is status-prefixed; suspicion_changed never enters
-  scene_delta) → the tune-2 backlog row, owner's call.
-- Corpus 32 → 41 (+9 crime-cascade cases: the blind-witness refusal,
-  the uninferred purse_missing refusal, the rumor transfer, the
-  carried purse); 528 → 537 green, ruff clean. 4 files (fixture +
-  the 3-doc sync set); KI#45 deleted per AGENTS §5; iter-11 evicted
-  per the worklog cap.
+iter-17 · 2026-08-30 · validation beats — session 4, the crime cascade
+- (deleted at iter-27 per the one-in/one-out cap; history in git.)
 ---
 iter-16 · 2026-08-30 · validation beats — session 3 over the presence
 machinery (iter-16-validation-beats-3)

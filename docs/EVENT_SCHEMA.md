@@ -92,7 +92,9 @@ afterthought.
 ## 6. `importance` rule
 
 Computed from pack `rules.json`: a function of entities touched +
-irreversibility + far hooks → mapped to `low` / `medium` / `high`. Never "by
+irreversibility + far hooks + the story-critical hook (tune-1/D-059:
+pack-listed event types in `importance.story_critical_events` score a
+bonus) → mapped to `low` / `medium` / `high`. Never "by
 feel" — the rule is data, and changing it is a pack change, not a code change.
 
 ## 7. `provenance`

@@ -363,6 +363,25 @@ def _test_texture_noun(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     return True
 
 
+def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """pack-2 (iter-29, D-061): the noun (a location) holds at least one
+    spot of the pack-declared transition layer that is NOT in the layer's
+    `spot_state` — the exact condition the ignite resolver keys on when
+    it picks its spot, so the door check and the resolver agree by
+    construction. Igniting a destroyed or fully-burning location is a
+    door rejection, never a no-ignition success that pretends the world
+    changed. The layer's vocabulary (`spot_field`, `spot_state`) is pack
+    data — core stays layer-blind (INV-3)."""
+    layer_cfg = ctx.pack.rules["transitions"][cond["layer"]]
+    location = ctx.entity(cond["noun"])
+    spots = ctx.pack.entity(location).get(layer_cfg["spot_field"], [])
+    props = ctx.projection[location]
+    prefix = f"{cond['layer']}."
+    return any(
+        props.get(f"{prefix}{spot}") != layer_cfg["spot_state"] for spot in spots
+    )
+
+
 PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "kind": _test_kind,
     "same_location": _test_same_location,
@@ -378,6 +397,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "uncarried": _test_uncarried,
     "has_field": _test_has_field,
     "texture_noun": _test_texture_noun,
+    "spot_available": _test_spot_available,
 }
 
 
@@ -571,9 +591,16 @@ def pack_importance(
     entities: set[str],
     irreversible: int,
     hooks: int,
+    event_type: str,
 ) -> str:
-    """Score = entities-touched + irreversibility + hooks, mapped through
-    the pack's thresholds. One rule for action events and world events."""
+    """Score = entities-touched + irreversibility + far hooks + the
+    story-critical hook, mapped through the pack's thresholds. One rule
+    for action events and world events. The story-critical hook (tune-1,
+    D-045(b)/D-059): event types the pack lists in
+    `importance.story_critical_events` score their bonus — the rule, not
+    the tale gate, owns the signal/noise split (a gate raise alone would
+    cut story events the dumb rule scores low: a clean steal, a watch
+    change)."""
     score_rule = rules["importance"]["score"]
     thresholds = rules["importance"]["thresholds"]
     score = 0
@@ -581,6 +608,8 @@ def pack_importance(
         score += score_rule["entities_touched_at_least_2"]
     score += score_rule["irreversible_state_change"] * (1 if irreversible else 0)
     score += score_rule["per_far_hook"] * hooks
+    if event_type in rules["importance"].get("story_critical_events", ()):
+        score += score_rule["story_critical_event"]
     if score >= thresholds["high"]:
         return "high"
     if score >= thresholds["medium"]:

@@ -761,3 +761,127 @@ def test_pack_lint_expansion_site_needs_location_target(tmp_path: Path) -> None:
 
     with pytest.raises(PackError, match="present_at=destination_location' requires"):
         load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- pack lint: the tune-1 blocks (importance story-critical + status_effects) --
+
+
+def test_pack_lint_catches_story_critical_typo(tmp_path: Path) -> None:
+    """A story-critical entry outside the template vocabulary never matches
+    any event — dead pack data refused at load (the KI#15 family)."""
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["importance"]["story_critical_events"].append("fire_startted")
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="story_critical_events"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_non_integer_importance_score(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["importance"]["score"]["story_critical_event"] = 1.5
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="story_critical_event"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_status_effects_on_wrong_resolver(tmp_path: Path) -> None:
+    """status_effects on a non-recuperate action is dead data — the block
+    has exactly one consumer; refuse at load, never silently no-op."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        wait = next(a for a in actions["actions"] if a["intent"] == "wait")
+        wait["status_effects"] = [{"status": "fatigue", "delta": -30}]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="recuperate"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_status_effects_unknown_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        rest = next(a for a in actions["actions"] if a["intent"] == "rest")
+        rest["status_effects"] = [{"status": "boredom", "delta": -10}]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="unknown status axis"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_status_effects_zero_delta(tmp_path: Path) -> None:
+    """A zero delta is a no-op declared as data — refuse it: dead weight
+    with no semantics (the same reason the decay pass skips zero deltas)."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        rest = next(a for a in actions["actions"] if a["intent"] == "rest")
+        rest["status_effects"] = [{"status": "fatigue", "delta": 0}]
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="non-zero integer"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- pack lint: the tune-2 card_markers table (D-060) ---------------------------
+
+
+def test_pack_lint_catches_unknown_marker_relation_axis(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["card_markers"].append(
+            {"prop": "relations.admiration", "min": 1, "marker": "admired"}
+        )
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="relations axes"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_marker_row_with_min_and_value(tmp_path: Path) -> None:
+    """A row with BOTH min and value has no semantics — the renderer would
+    silently pick one; refuse the ambiguity at load."""
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["card_markers"].append(
+            {"prop": "crime_status", "min": 1, "value": "suspect",
+             "marker": "suspect"}
+        )
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="exactly one of min"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_marker_prop_outside_the_closed_surface(tmp_path: Path) -> None:
+    """A marker on an arbitrary prop is dead data today (nothing computes
+    it) — the closed surface grows only with a real need (L13)."""
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["present_entities"]["card_markers"].append(
+            {"prop": "position", "min": 1, "marker": "elsewhere"}
+        )
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="closed marker surface"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- pack lint: the pack-2 spot_available layer param (iter-29, D-061) ----------
+
+
+def test_pack_lint_catches_spot_available_unknown_layer(tmp_path: Path) -> None:
+    """A typo'd layer param would KeyError mid-run — refuse it at load
+    (the KI#15 dead-data family)."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        arson = next(a for a in actions["actions"] if a["intent"] == "arson")
+        for cond in arson["requires"]:
+            if cond.get("test") == "spot_available":
+                cond["layer"] = "frost"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="not a declared transition layer"):
+        load_pack(_broken_pack(tmp_path, mutate))

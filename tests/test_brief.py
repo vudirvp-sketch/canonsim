@@ -740,7 +740,7 @@ def test_present_entities_cards_and_pair_tokens() -> None:
         "- pc_01 (the player)",
         "- npc_guard_01 (Doren) carries=purse_01",
         "- npc_barkeep_01 (the barkeep) carries=club_01",
-        "- npc_drunk_01 (the drunkard) status=drunk",
+        "- npc_drunk_01 (the drunkard) markers=drunk",
         "- npc_maid_01 (the serving maid)",
         "- oil_lamp_01 (the oil lamp)",
         "- ale_mug_01 (the mug of ale)",
@@ -769,15 +769,15 @@ def test_present_entities_empty_log_renders_the_starting_scene() -> None:
 
 
 def test_present_entities_marker_thresholds_are_pack_data() -> None:
-    """The drunkard's `drunk` marker is the pack's (axis, min) call: at
+    """The drunkard's `drunk` marker is the pack's (prop, min) call: at
     min=60 the intoxicication 50 no longer carries a marker."""
     pack = _mutated_pack(
-        lambda rules: rules["brief"]["present_entities"]["status_markers"].__setitem__(
-            0, {"axis": "intoxication", "min": 60, "marker": "drunk"}
+        lambda rules: rules["brief"]["present_entities"]["card_markers"].__setitem__(
+            0, {"prop": "status.intoxication", "min": 60, "marker": "drunk"}
         )
     )
     text = render_brief(assemble_brief(_golden_prefix(), pack))
-    assert "status=drunk" not in text
+    assert "markers=drunk" not in text
 
 
 def test_present_entities_caps_are_ranking_caps_never_drops() -> None:
@@ -948,12 +948,12 @@ def test_pack_lint_catches_bad_presence_caps(tmp_path: Path) -> None:
 def test_pack_lint_catches_unknown_marker_axis(tmp_path: Path) -> None:
     def mutate(target: Path) -> None:
         rules = json.loads((target / "rules.json").read_text())
-        rules["brief"]["present_entities"]["status_markers"].append(
-            {"axis": "grace", "min": 1, "marker": "elegant"}
+        rules["brief"]["present_entities"]["card_markers"].append(
+            {"prop": "status.grace", "min": 1, "marker": "elegant"}
         )
         (target / "rules.json").write_text(json.dumps(rules))
 
-    with pytest.raises(PackError, match="axis must be one of the pack's status axes"):
+    with pytest.raises(PackError, match="is not one of the pack's"):
         load_pack(_broken_pack(tmp_path, mutate))
 
 
@@ -969,3 +969,92 @@ def test_pack_lint_catches_unknown_scene_line_field(tmp_path: Path) -> None:
 
     with pytest.raises(PackError, match="scene_line_fields must reference"):
         load_pack(_broken_pack(tmp_path, mutate))
+
+
+# -- tune-2 (iter-28, D-060): the crime cascade renders on the cards ------------
+
+
+def _suspicion_event(eid: str, t: int, level: int) -> EventRecord:
+    """A suspicion_changed event in the ev_0007 shape: the watcher's
+    relations.suspicion moves and the suspect's crime_status flips on the
+    first crossing of the pack's suspect threshold."""
+    return EventRecord(
+        id=eid, t=t, type="suspicion_changed", actor="npc_guard_01",
+        cause=None, target=PLAYER,
+        outcome={"token": "figure_reaching_for_purse", "delta": 25,
+                 "from": 0, "to": level},
+        knowledge=(),
+        state_changes=(
+            StateChange(entity="npc_guard_01", prop="relations.suspicion",
+                        from_=0, to_=level),
+            StateChange(entity=PLAYER, prop="crime_status",
+                        from_="unknown", to_="suspect"),
+        ),
+        hooks=(), importance="low", provenance={"seed": 42},
+    )
+
+
+def test_card_markers_render_the_crime_cascade() -> None:
+    """tune-2 (iter-17's finding): the suspicion axis and the crime_status
+    flip were invisible through the brief — the marker table's axis lookup
+    was status-prefixed, so a relations.suspicion row was not even
+    expressible in pack data. The card_markers table is prop-path keyed
+    with threshold rows (numeric min) and value rows (string value): the
+    guard's card renders `wary` at suspicion >= 25 and the player's card
+    renders `suspect` on the status flip."""
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    text = render_brief(assemble_brief(events, PACK))
+    body = _blocks(text)["present_entities"]
+    assert "- npc_guard_01 (Doren) markers=wary carries=purse_01" in body
+    assert "- pc_01 (the player) markers=suspect" in body
+
+
+def test_card_markers_threshold_row_respects_the_pack_number() -> None:
+    """The wary threshold is the table's own number (v0.1 aligns it with
+    the status_suspect_at flip at 25): session 8's watch-handover
+    boundary — suspicion 20 both guards, crime_status stays unknown —
+    renders no marker (the threshold row reads the pack data, not the
+    flip)."""
+    events = _golden_prefix() + [
+        EventRecord(
+            id="ev_9000", t=2, type="suspicion_changed", actor="npc_guard_01",
+            cause=None, target=PLAYER,
+            outcome={"token": "trail_and_noise", "delta": 20, "from": 0, "to": 20},
+            knowledge=(),
+            state_changes=(
+                StateChange(entity="npc_guard_01", prop="relations.suspicion",
+                            from_=0, to_=20),
+            ),
+            hooks=(), importance="low", provenance={"seed": 42},
+        )
+    ]
+    text = render_brief(assemble_brief(events, PACK))
+    body = _blocks(text)["present_entities"]
+    assert "- npc_guard_01 (Doren) carries=purse_01" in body  # no wary at 20
+    assert "markers=suspect" not in text  # no flip below the threshold
+
+
+def test_card_markers_value_row_is_pack_data() -> None:
+    """The value-row kind is generic pack data: a mutated pack renders a
+    different marker for the same crime_status value (the row, not the
+    engine, owns the vocabulary)."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["present_entities"]["card_markers"].__setitem__(
+            5, {"prop": "crime_status", "value": "suspect", "marker": "marked"}
+        )
+    )
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    text = render_brief(assemble_brief(events, pack))
+    assert "markers=marked" in _blocks(text)["present_entities"].__str__()
+
+
+def test_scene_delta_stays_blind_to_interior_suspicion() -> None:
+    """The scene_delta half of the iter-17 finding is NOT a defect:
+    suspicion_changed rides no knowledge record, and the delta window is
+    the PC's own perception (the blind-NPC law, BRIEF_SPEC §3.2) — the
+    card is the narrator's read surface for standing state, the delta
+    window is the player's. The two halves have different owners."""
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    text = render_brief(assemble_brief(events, PACK))
+    delta = _blocks(text)["scene_delta"]
+    assert "suspicion_changed" not in delta

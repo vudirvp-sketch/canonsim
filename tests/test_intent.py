@@ -371,11 +371,38 @@ def test_knowers_at_excludes_items_and_locations() -> None:
 
 def test_pack_importance_mapping() -> None:
     rules = PACK.rules
-    assert pack_importance(rules, {"a"}, 0, 0) == "low"
-    assert pack_importance(rules, {"a", "b"}, 0, 0) == "low"  # score 1
-    assert pack_importance(rules, {"a", "b"}, 1, 0) == "medium"  # 1 + 2
-    assert pack_importance(rules, {"a", "b"}, 1, 1) == "high"  # 1 + 2 + 1
-    assert pack_importance(rules, {"a"}, 0, 4) == "high"  # 4 hooks
+    noise = "status_decayed"  # never story-critical: the per-beat bookkeeping
+    assert pack_importance(rules, {"a"}, 0, 0, noise) == "low"
+    assert pack_importance(rules, {"a", "b"}, 0, 0, noise) == "low"  # score 1
+    assert pack_importance(rules, {"a", "b"}, 1, 0, noise) == "medium"  # 1 + 2
+    assert pack_importance(rules, {"a", "b"}, 1, 1, noise) == "high"  # 1 + 2 + 1
+    assert pack_importance(rules, {"a"}, 0, 4, noise) == "high"  # 4 hooks
+
+
+def test_pack_importance_story_critical_hook() -> None:
+    """tune-1 (D-045(b)/D-059): story-critical event types score their pack
+    bonus — the rule, not the tale gate, owns the signal/noise split. The
+    two halves the T7 noise floor pinned: a clean steal (raw score 1) and
+    a watch change climb to medium, while the axis bookkeeping the mid-
+    section drowned in stays low even with the same entity count."""
+    rules = PACK.rules
+    bonus = rules["importance"]["score"]["story_critical_event"]
+    assert bonus == 2
+    # a clean steal: 2 entities (+1) + story-critical (+2) -> medium
+    assert pack_importance(rules, {"pc", "guard"}, 0, 0, "steal") == "medium"
+    # the watch handover: same shape, same climb
+    assert pack_importance(rules, {"outgoing", "incoming"}, 0, 0, "watch_change") == (
+        "medium"
+    )
+    # the noise floor: identical entity count, no hook -> low
+    assert pack_importance(rules, {"world", "npc"}, 0, 0, "status_decayed") == "low"
+    assert pack_importance(rules, {"npc", "pc"}, 0, 0, "suspicion_changed") == "low"
+    # a world texture beat: move stays low
+    assert pack_importance(rules, {"pc", "loc"}, 0, 0, "move") == "low"
+    # the fire chain stacks with irreversibility -> high
+    assert pack_importance(rules, {"world", "loc"}, 1, 0, "fire_started") == "high"
+    # a type outside the list with a big raw score still reads by score alone
+    assert pack_importance(rules, {"a", "b"}, 1, 1, "some_other_type") == "high"
 
 
 # -- the texture path (iter-11: grammar/vocabulary split, blueprint §1 D-049) --------

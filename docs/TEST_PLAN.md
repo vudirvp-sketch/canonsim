@@ -17,7 +17,7 @@
 | T4 | irreversibility | `tests/test_crime.py`, `tests/test_states.py` | `irreversible` state changes never revert without an explicit counter-event (fire has none — `location_burned_out` clamps the spot to `burned_out` and no later event reverts it; the arrest `caught` value is terminal) |
 | T5 | impossible | `tests/test_loop.py::test_teleport_stays_impossible`, `tests/test_intent.py`, `tests/test_actions.py` | teleport / sourceless arson / absent items / knowing the unseen stays impossible — well-formed but world-impossible intents emit `intent_rejected` no-op events (the world did not change); shape errors raise `RunnerError` loud |
 | T6 | smoke | `tests/test_urgencies.py::test_urgencies_fire_when_player_waits_long_enough` (1100-tick wait crosses the 1000-tick line) | 1000 ticks without exceptions or hangs — the queue drains, every system that fires on a beat fires, the writer closes cleanly |
-| T7 | readability | manual (this iteration's playtest entry in `worklog.md`) | a human retells the chronicle in their own words — the only human judgment in the stack; `tale_gate.min_importance` is the first tuning knob |
+| T7 | readability | manual (this iteration's playtest entry in `worklog.md`) | a human retells the chronicle in their own words — the only human judgment in the stack; the tuning knob is the IMPORTANCE RULE's story-critical hook (D-045(b); landed tune-1/iter-27, D-059 — `tale_gate.min_importance` follows the rule, it is not the primary knob) |
 | T8 | director-off | `tests/test_t8_ab.py` (iter-6) | A/B on identical seed + playscript, **single-factor** (live-char one-change rule: only the director flag changes); ≥3 emergent chains without the director. M5 non-PC share is non-zero in the OFF run by construction (D-021 urgencies). |
 
 ### 1.1 T1 fixture-regeneration guard (iter-6 specific — `phase0.md` §6)
@@ -118,8 +118,9 @@ A gate is passed only on evidence. The phase-0 gate runs:
    chains, the director buffer seeds in both runs (D-005 hygiene).
 4. **Human chronicle read** (T7): the gate author retells the
    `day1_full` chronicle in their own words, evaluates noise vs signal,
-   and (if needed) tunes `tale_gate.min_importance` — the first pack
-   knob the gate owns.
+   and (if needed) tunes the importance rule's story-critical hook
+   (D-045(b)/D-059 — the tale gate follows the rule's split; tune-1
+   landed the initial hook + the medium gate, iter-27).
 5. **Verdict in `worklog.md` + `STATUS.md`**: pass / pass-with-deferred /
    kill. A kill-criteria hit stops feature work until the ontology is
    fixed — honestly reported, never averaged away.

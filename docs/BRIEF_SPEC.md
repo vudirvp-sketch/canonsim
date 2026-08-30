@@ -57,7 +57,7 @@ scene trio completes before recall, st-1):
 | 1 | `directives` | pack `brief.directives` (static lines) | line, verbatim |
 | 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
 | 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
-| 4 | `present_entities` | the projection's present set + the pair map + promotions + the pack's scene-line fields (st-1, iter-20) | `- <id> (<display>)[ status=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <field>=<v>[...] [<prop>=<v>...]` / `- pair <a> -> <b> <axis>=<v>` |
+| 4 | `present_entities` | the projection's present set + the pair map + promotions + the pack's scene-line fields (st-1, iter-20; tune-2: the prop-path `card_markers` table) | `- <id> (<display>)[ markers=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <field>=<v>[...] [<prop>=<v>...]` / `- pair <a> -> <b> <axis>=<v>` |
 | 5 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
 | 6 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
 | 7 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
@@ -128,13 +128,26 @@ per-present expansion).
 
 - **Entity lines**: one dry line per present entity in pack declaration
   order (npcs → ambient → items) — id, display name, then the
-  observable surface, all segments omitted when empty: `status=`
-  markers from the pack's (axis, min, marker) table; `carries=` the
+  observable surface, all segments omitted when empty: `markers=`
+  from the pack's `card_markers` table — prop-path keyed with two row
+  kinds (tune-2, D-060): a **threshold row** (`{"prop":
+  "status.fear", "min": 30, "marker": "afraid"}`) renders when the
+  numeric prop meets the min; a **value row** (`{"prop":
+  "crime_status", "value": "suspect", "marker": "suspect"}`)
+  renders on string equality — so `relations.suspicion` and
+  `crime_status` rows are expressible pack data and the crime
+  cascade's standing state reads on the cards (iter-17's finding;
+  the marker surface is the closed prop set `status.<axis>` /
+  `relations.<axis>` / `crime_status`, lint-checked); `carries=` the
   visibly-carried items (an item carried by a present non-item folds
   into the carrier's segment — it is the carrier's surface, not a
   room fixture; loose items keep their own lines); promoted props as
   bare `prop=value` pairs (the D-054 scan: events whose outcome
   carries a texture reference whose state_changes birth the slot).
+  The epistemics split: the CARD is the narrator's read surface for
+  standing state; the PC's own perception stays governed by the
+  blind-NPC law in scene_delta (§3.2 — `suspicion_changed` rides no
+  knowledge record and never enters the delta window by design).
 - **Scene line**: the pack's `scene_line_fields` (iter-20, D-057) list
   the location's pack-modeled fields (e.g. `layout`) that render
   canon-from-birth — static architecture needs no promotion to be
@@ -278,11 +291,14 @@ brief's static text is mediator data, not chronicle grammar.
   "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
   "present_entities": {"max_entities": 8, "max_pairs": 6,
                         "scene_line_fields": ["layout"],
-                        "status_markers": [
-                          {"axis": "intoxication", "min": 30, "marker": "drunk"},
-                          {"axis": "fatigue", "min": 30, "marker": "weary"},
-                          {"axis": "fear", "min": 30, "marker": "afraid"},
-                          {"axis": "injury", "min": 1, "marker": "hurt"}]},
+                        "card_markers": [
+                          {"prop": "status.intoxication", "min": 30, "marker": "drunk"},
+                          {"prop": "status.fatigue", "min": 30, "marker": "weary"},
+                          {"prop": "status.fear", "min": 30, "marker": "afraid"},
+                          {"prop": "status.injury", "min": 1, "marker": "hurt"},
+                          {"prop": "relations.suspicion", "min": 25, "marker": "wary"},
+                          {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
+                          {"prop": "crime_status", "value": "caught", "marker": "caught"}]},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
   "voice_exemplars": ["..."]
@@ -299,10 +315,13 @@ list of strings; every `directives` line fits its own hard budget
 non-negative numbers, `max_items >= 1`; `scene_texture` caps integers
 >= 1, `unique_slots` unique non-empty strings (empty = no globally-
 unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
-`present_entities` caps integers >= 1 and a `status_markers` table
-whose `axis` is one of the pack's `states` axes, `min` a non-negative
-int, `marker` a non-empty string (marker names are pack vocabulary,
-INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
+`present_entities` caps integers >= 1 and a `card_markers` table
+(tune-2, D-060): each row keys `prop` — one of `status.<axis>` (a
+declared states axis), `relations.<axis>` (a declared relations axis),
+or `crime_status` (the closed marker surface) — with EXACTLY ONE of
+`min` (a non-negative int, threshold row) or `value` (a non-empty
+string, value row), and a non-empty `marker` string (marker names are
+pack vocabulary, INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
 a field of at least one location record (a typo'd field fails at load
 time). The eviction order (§5.2) is architecture, not balance — it
 lives in code, not in the pack.

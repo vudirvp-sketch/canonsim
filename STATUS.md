@@ -1,40 +1,23 @@
 # STATUS — canonsim
 
-Iteration: iter-26 (`iter-26-phase1-gate`) · Phase: 1 closed (gate
-PASS) · Date: 2026-08-31 · The phase-1 gate review — the owner's
-quality-first directive ("cleanup, re-verification, doc actualization
-before closing the gate — I chase quality, not speed"). The full
-ROADMAP §5 protocol re-run on evidence: 610 tests green + ruff clean;
-T1 byte-identity + the fixture-regeneration guard green (the venv
-interpreter 3.12.14 is the fixture's generating interpreter); T8
-single-factor A/B on the gate playscript (day1_full, seed 125) — OFF =
-26 emergent chains (≥3 gate minimum), M1=0.417 / M2=0.500 (1 release /
-2 seeds) on the ON-run; T7 — the day1_full chronicle re-read: the
-theft→suspicion→rotation→briefing and break→fire→burnout chains read
-causally across the day boundary, the decay/wariness repetition is the
-noise floor (the tale_gate knob stays the owner-gated tune-1 item). The
-exit criterion "0 canon violations per 100 beats (regression set)" met
-with margin: 109 live beats over 10 narrate sessions (the recorded
-tally incl. refused-and-caught beat documents; the accepted-beat sum
-alone is 104), 0 canon violations, corpus 105 cases all green; no
-kill-criteria hit (0 breaches in 109 beats — the per-1000 kill reads a
-rate the current live volume cannot yet reach, honestly noted).
-DECISIONS collapsed 41→30 per D-034 IN the gate iteration (the owner's
-directive): 7 family merges (D-002/D-010/D-032 data contracts;
-D-003/D-023 event-sourcing shape; D-004/D-028 determinism;
-D-005/D-038/D-039/D-040/D-041 director+autonomous;
-D-016/D-017/D-024/D-026/D-027 reference architecture; D-025/D-034 cap
-laws; D-048/D-049/D-053 the scene ledger) — all 58 IDs preserved (every
-D-ID is cited somewhere; verified by sweep before the merge), survivor
-rows verbatim, merged rows keep decision→why→consequence + owner links.
-D-058 = the PASS verdict. KI#50: the FAQ cap-laws bullet cited
-"(D-025/D-026)" — D-026 is the per-ref split, not a cap law (caught by
-the collapse's citation-resolution sweep) — fixed in place. The VISION
-freeze review (`doc-1`, overdue since the phase-0 verdict) closed clean:
-the frozen text verified against phase-1 reality (the 3-layer shape,
-the call-budget law, the honest limits all hold) — no changes, the
-freeze stands. Verdict: **phase-1 PASS** (D-058) — phase 2 (Parser,
-mode C) may open; the phase-2-vs-polish call stays the owner's.
+Iteration: iter-29 (`iter-29-pack2-spot-available`) · Phase: 1 closed
+(gate PASS, D-058; polish open per the owner's finish-phase-1
+directive) · Date: 2026-08-31 · pack-2 landed, the third polish item:
+the arson-on-ashes door check. The closed precondition set gains
+`spot_available` — the target location holds at least one spot of the
+pack-declared transition layer NOT in the layer's `spot_state`, the
+exact condition the ignite resolver keys on (door and resolver agree
+by construction); the arson requires carry it and the `layer` param
+is lint-checked against the declared layers. Arson on a destroyed or
+fully-burning location is now an `intent_rejected` no-op with
+`failed_test target.spot_available` — the door-outcome vocabulary's
+fourth axis (no unburning spot, beside not co-located / no flagged
+target / no fuel); the iter-24 no-ignition-success probe (a success
+that pretended the world changed) is closed. The seed-41 corpus case
+flipped with it (renamed, prose + last_event_type updated — provenance
+note in the fixture's `source`). 626→629 green, ruff clean. D-061 =
+the decision row; DECISIONS transiently 33/30 (collapse due at the
+phase-2→3 gate per D-034).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -58,25 +41,13 @@ mode C) may open; the phase-2-vs-polish call stays the owner's.
 
 ## Active KIs
 
-- KI#50 · The FAQ cap-laws bullet cited "(D-025/D-026)" for the cap
-  laws — D-026 is the per-ref split, not a cap law (pre-existing drift,
-  caught by the iter-26 collapse's citation-resolution sweep) ·
-  opened+CLOSED iter-26 (the bullet now cites D-025/D-034 — one row
-  since the phase-1 collapse).
-
-- KI#49 · AGENT_NAVIGATION §1's corpus descriptions stuck at "41
-  documents / four sessions" while the corpus is at 105 cases / 10
-  sessions (the fixture-count drift family) · opened+CLOSED iter-25
-  (both cells now structural — provenance in the fixture's `source`
-  field, tallies in STATUS.md).
-
-- (KI#48 deleted at iter-22 per AGENTS §5 — closed iter-20, two
-  iterations past; the canon_slot dual-source law lives in
-  `brief/ledger.py::establish` + the §6.1 substance filter notes;
-  detail in git + worklog iter-20.)
-- (KI#47 deleted at iter-21 per AGENTS §5 — closed iter-19, two
-  iterations past; the grid-phrase fix detail lives in git +
-  worklog iter-19.)
+- (KI#50 deleted at iter-28 per AGENTS §5 — closed iter-26, two
+  iterations past; the cap-laws citation fix detail lives in git +
+  worklog iter-26.)
+- (KI#49 deleted at iter-27 per AGENTS §5 — closed iter-25, two
+  iterations past; the corpus-description drift lesson lives in
+  AGENT_NAVIGATION §1's structural cells + the fixture's `source`
+  field, detail in git + worklog iter-25.)
 
 ## FAQ / Pitfalls
 
@@ -336,32 +307,28 @@ gate.
 
 ## Next step
 
-**iter-26 closed the phase-1 gate (verdict PASS, D-058): the exit
-criterion met with margin — 109 live beats / 0 canon violations /
-corpus 105 green; the full §5 protocol re-run (T1, T8 A/B OFF=26
-chains, M1=0.417/M2=0.500 ON, T7 chronicle re-read); DECISIONS
-collapsed 41→30 in the same iteration (D-034); the VISION freeze
-review (`doc-1`) closed clean. The phase-2-vs-more-phase-1-polish
-decision is now the owner's call (a Huge-scale item per the reading
-gradient: ROADMAP §2 → VISION → DECISIONS). Next, in order:
+**The owner answered the phase-2-vs-polish call (2026-08-31 chat):
+finish everything phase-1 first — "если полировка нужна - делай, нужно
+закончить все что относится к первой фазе". tune-1 (iter-27, D-059),
+tune-2 (iter-28, D-060), and pack-2 (iter-29, D-061) landed; what
+remains:
 
-1. **The owner's phase-2 call** — open phase 2 (Parser, mode C: ≥90%
-   valid intents; disambiguation questions on uncertainty) or more
-   phase-1 polish first. The polish menu (all owner-gated): `tune-1`
-   rest action + the D-045(b) importance-rule knob (the T7
-   noise-floor observation re-flags it — the decay/wariness
-   repetition dominates the chronicle mid-section), `tune-2`
-   crime-cascade observability (re-pinned at value 35, iter-25),
-   `tune-3` alarm-adjacent + the §3 market leg, `st-2` identity
-   persistence, or an `iter-27` corpus consolidation pass (the
-   multi-session id+type probes; 105 cases, §6.1 applies). `pack-2`
-   (arson-on-ashes guard): a pack precondition fix is the natural
-   follow-up when a precondition slot is next needed.
-2. **Unlocked by the gate** (owner's call when): the runtime-engine
+1. **`tune-3`** — no declared candidate (a three-way owner call: a
+   v0.2 NPC-movement source / declared-but-dormant / phase-5
+   spatial); the dormant stance stands as documented until the owner
+   picks. `st-2` and the corpus consolidation pass stay owner-gated
+   backlog (not phase-1 exit criteria — the gate passed without
+   them).
+2. Phase 2 (Parser, mode C: ≥90% valid intents; disambiguation
+   questions on uncertainty) opens on the owner's call — the
+   code-carrying polish menu (tune-1/tune-2/pack-2) is done; what
+   remains (tune-3, st-2, corpus consolidation) carries no declared
+   candidate and waits on the owner.
+3. **Unlocked by the gate** (owner's call when): the runtime-engine
    decision (llama.cpp + GBNF, TECH_NOTES §1) and the `bg-6` SoW
    audit (ROADMAP §6 lifts with the gate; the D-055 deferral stands
    until the owner calls it).
-3. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
+4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
    (briefer spike) query the SQLite sink; bg-4 (cost notes) is
    read-only. Infra backlog: `qa-1` mypy + `ci-1` GitHub Actions
    (owner-gated); `perf-1` 10k-tick profile (the gate for anything

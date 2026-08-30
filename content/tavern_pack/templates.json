@@ -2,10 +2,10 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "Chronicle templates (iter-0c draft, completed in iter-5 with the renderer). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. Syntax: {slot} binds event data (actor/target/location/t/outcome fields); #symbol# expands the tracery grammar (render/tracery.py — modifiers .a/.capitalize/.upper/.lower); {cond?a|b} is ink-style conditional text on a raw context value; [key:value] saves an expansion for the rest of the line. Lists = alternatives picked via the ink-shuffle ShufflePool (no immediate repeat, cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line at all (MVP_SCOPE §9); v0.1 keeps every event — the iter-6 T7 playtest owns the tuning."
+    "notes": "Chronicle templates (iter-0c draft, completed in iter-5 with the renderer). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. Syntax: {slot} binds event data (actor/target/location/t/outcome fields); #symbol# expands the tracery grammar (render/tracery.py — modifiers .a/.capitalize/.upper/.lower); {cond?a|b} is ink-style conditional text on a raw context value; [key:value] saves an expansion for the rest of the line. Lists = alternatives picked via the ink-shuffle ShufflePool (no immediate repeat, cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line at all (MVP_SCOPE §9); tune-1 (iter-27) raised it low—medium: the importance rule now hooks story-critical events (rules.json importance.story_critical_events, D-045(b)/D-059), so medium separates the tale's beats from the per-beat axis bookkeeping (status_decayed/suspicion_changed) and world texture (wait/move/look) — the rule owns the split, the gate follows."
   },
 
-  "tale_gate": { "min_importance": "low" },
+  "tale_gate": { "min_importance": "medium" },
 
   "day_header": "— Day #day#, #phase.capitalize# —",
 
@@ -32,6 +32,7 @@
     "talk": "{actor} talks with {target}.",
     "talk_rebuffed": "{target} gives {actor} the cold shoulder.",
     "wait": "{actor} waits.",
+    "rest": "{actor} rests.",
     "take": "{target?{actor} takes {target}.|{actor} takes the {texture_slot}.}",
     "take_failed": "{target?{actor} reaches for {target} — and is noticed.|{actor} reaches for the {texture_slot} — and is noticed.}",
     "drop_break": "{target} breaks with a noise.",

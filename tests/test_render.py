@@ -87,7 +87,10 @@ def crafted_event(
 
 def test_pack_grammar_loads_and_lints() -> None:
     grammar = Grammar(PACK.templates)
-    assert grammar.tale_gate == "low"
+    # tune-1 (iter-27): the gate rose low→medium behind the story-critical
+    # importance hook (D-045(b)/D-059) — the rule owns the split, the gate
+    # follows. A grammar-level revert to "low" would be a pack regression.
+    assert grammar.tale_gate == "medium"
     assert "event.fire_spread" in grammar
     assert grammar.alternatives("event.fire_spread")  # pooled variety exists
 
@@ -206,19 +209,24 @@ def test_chronicle_renders_day_header_and_lines(tmp_path: Path) -> None:
     assert text.startswith("— Day 1, ")
     assert "the player lifts the purse unseen." in text
     assert "burns out. Nothing will be the same here." in text
-    assert "Doren grows warier of the player." in text  # actor=watcher, target=suspect
+    # tune-1: the wariness repetition is tale noise — the axis bookkeeping
+    # stays below the gate (its CAUSES, the theft and the purse check, carry
+    # the tale); the standing suspicion reads on the entity view (ungated).
+    assert "Doren grows warier of the player." not in text
     assert text.endswith("\n")
 
 
 def _texture_take(event_id: str, t: int, event_type: str) -> EventRecord:
     """A texture-path take event (iter-11, D-054): the outcome carries the
-    mediator-resolved reference, the canon target is None."""
+    mediator-resolved reference, the canon target is None. Importance is
+    medium — take is story-critical in live play (tune-1), and the renderer
+    gates on the event's own field."""
     return EventRecord(
         id=event_id, t=t, type=event_type, actor="pc_01", cause=None,
         outcome={"texture": {"entry": "tex_0000", "scope": "scene:loc_tavern",
                              "slot": "candles", "value": "lit"}},
         knowledge=(), state_changes=(), hooks=(),
-        importance="low", provenance={"seed": 42}, target=None,
+        importance="medium", provenance={"seed": 42}, target=None,
     )
 
 
@@ -242,29 +250,55 @@ def test_chronicle_canon_take_line_is_unchanged() -> None:
     events = [EventRecord(
         id="ev_0000", t=4, type="take", actor="pc_01", cause=None,
         outcome={}, knowledge=(), state_changes=(), hooks=(),
-        importance="low", provenance={"seed": 42}, target="purse_01",
+        importance="medium", provenance={"seed": 42}, target="purse_01",
     )]
     text = render_chronicle(events, PACK, seed=42)
     assert "the player takes the purse." in text
 
 
 def test_chronicle_groups_days() -> None:
-    events = [crafted_event("ev_0000", 100, "move"),
-              crafted_event("ev_0001", 1500, "move")]
+    events = [crafted_event("ev_0000", 100, "fire_spread", importance="medium"),
+              crafted_event("ev_0001", 1500, "fire_spread", importance="medium")]
     text = render_chronicle(events, PACK, seed=42)
     assert "— Day 1, Morning —" in text
     assert "— Day 2, Morning —" in text
 
 
 def test_chronicle_importance_gate(tmp_path: Path) -> None:
+    """The gate mechanism itself: raising it to 'high' drops the medium
+    beats (a clean steal, tune-1's story-critical climb) and keeps the
+    high ones (the burnout). The pack's own gate is 'medium' since
+    tune-1 — this test pins the MECHANISM on top of a stricter pack."""
     events = run_day1(tmp_path)
     data = copy.deepcopy(dict(PACK.data))
     data["templates.json"] = copy.deepcopy(dict(PACK.templates))
-    data["templates.json"]["tale_gate"] = {"min_importance": "medium"}
+    data["templates.json"]["tale_gate"] = {"min_importance": "high"}
     strict_pack = Pack(data=data)
     text = render_chronicle(events, strict_pack, seed=8)
-    assert "the player lifts the purse unseen." not in text  # low: gated out
-    assert "burns out. Nothing will be the same here." in text  # medium: stays
+    assert "the player lifts the purse unseen." not in text  # medium: gated out
+    assert "burns out. Nothing will be the same here." in text  # high: stays
+
+
+def test_chronicle_tale_gate_medium_is_the_tune1_split(tmp_path: Path) -> None:
+    """tune-1's regression pin (D-045(b)/D-059): at the pack's own gate the
+    day-1 tale carries the story beats and NOT the noise floor the T7
+    gate read flagged — the decay/wariness repetition and the routine
+    waits/moves stay below the line while the theft ladder, the watch
+    handover, and the fire chain all render."""
+    events = run_day1(tmp_path)
+    text = render_chronicle(events, PACK, seed=8)
+    # the tale's beats
+    assert "the player takes the oil lamp." in text
+    assert "the player lifts the purse unseen." in text
+    assert "The watch changes:" in text
+    assert "the oil lamp breaks with a noise." in text
+    assert "burns out. Nothing will be the same here." in text
+    # the noise floor, gated out
+    assert "drifts:" not in text  # status_decayed
+    assert "The hours tell on" not in text
+    assert "grows warier" not in text  # suspicion_changed
+    assert "waits." not in text  # routine waits
+    assert "heads to" not in text  # moves
 
 
 def test_chronicle_fallback_for_unknown_type() -> None:

@@ -116,12 +116,14 @@ def _importance(
     pack: Pack,
     location: str,
     state_changes: tuple[StateChange, ...],
+    event_type: str,
 ) -> str:
     return pack_importance(
         pack.rules,
         entities={WORLD, location} | {change.entity for change in state_changes},
         irreversible=sum(1 for change in state_changes if change.irreversible),
         hooks=0,
+        event_type=event_type,
     )
 
 
@@ -167,7 +169,9 @@ def ignite(
         outcome={"location": location, "spot": spot},
         knowledge=started_knowledge,
         state_changes=(spot_change,),
-        importance=_importance(pack, location, (spot_change,)),
+        importance=_importance(
+            pack, location, (spot_change,), layer_cfg["events"]["started"]
+        ),
         provenance={},  # seed stamped by the loop at append time
     )
 
@@ -204,6 +208,7 @@ def ignite(
                 entities={WORLD, location} | set(occupants),
                 irreversible=0,
                 hooks=0,
+                event_type=layer_cfg["events"]["alarm"],
             ),
             provenance={},
         )
@@ -277,7 +282,10 @@ def spread_tick(
                     outcome={"location": location, "spot": spot},
                     knowledge=spread_knowledge,
                     state_changes=(spot_change,),
-                    importance=_importance(pack, location, (spot_change,)),
+                    importance=_importance(
+                        pack, location, (spot_change,),
+                        layer_cfg["events"]["spread"],
+                    ),
                     provenance={},
                 )
             )
@@ -332,6 +340,8 @@ def follow_up_draft(
         outcome={"location": location},
         knowledge=knowledge,
         state_changes=changes,
-        importance=_importance(pack, location, changes),
+        importance=_importance(
+            pack, location, changes, layer_cfg["events"][kind]
+        ),
         provenance={},
     )

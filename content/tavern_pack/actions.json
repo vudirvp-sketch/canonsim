@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The 12 phase-0 actions per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The phase-0 action set per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; tune-1 adds the 13th, rest — the fatigue counter-play as pack data over the recuperate resolver, D-045(a)/D-059); docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'status_effects' (optional, tune-1) declares the actor status deltas the recuperate resolver applies. 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -267,6 +267,7 @@
         {"noun": "target", "test": "location_of", "with": "actor"},
         {"noun": "target", "test": "field_in", "field": "flammability", "values": ["low", "medium", "high"]},
         {"noun": "target", "test": "field_nonempty", "field": "fire_spots"},
+        {"noun": "target", "test": "spot_available", "layer": "fire"},
         {"noun": "actor", "test": "flagged_accessible", "flag": "is_fire_source"}
       ],
       "fields": [],
@@ -278,7 +279,22 @@
       },
       "hooks": {"success": [], "failure": []},
       "ignition": {"layer": "fire", "item_flag": "is_fire_source"},
-      "notes": "impossible without a usable fire source at a flammable target (T5): the front door rejects and the log records the no-op; the irreversible chain follows (T4, rules.json transitions.fire)"
+      "notes": "impossible without a usable fire source at a flammable target (T5): the front door rejects and the log records the no-op; the irreversible chain follows (T4, rules.json transitions.fire). pack-2 (iter-29, D-061): the spot_available guard — arson on ashes (a destroyed or fully-burning location, iter-24's live probe) is a door rejection with failed_test target.spot_available, never the no-ignition success that pretended the world changed; the door-outcome vocabulary's fourth axis (no unburning spot, beside not co-located / no flagged target / no fuel)"
+    },
+    {
+      "intent": "rest",
+      "label": "rest",
+      "resolver": "recuperate",
+      "ticks": 60,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "rest"},
+      "requires": [],
+      "fields": [],
+      "status_effects": [{"status": "fatigue", "delta": -30}],
+      "knowledge": {"success": [], "failure": []},
+      "hooks": {"success": [], "failure": []},
+      "notes": "the fatigue counter-play (tune-1, KI#4: player fatigue was monotonic over long waits — nothing in v0.1 could bring it down). One hour of rest clears 30 fatigue (the 720-tick waits of the canonical day gain 20); resting at fatigue 0 is a legal quiet beat (no state change). The delta lives here beside its action (use_effect precedent); the axis and its gain rate live in rules.json states"
     },
     {
       "intent": "flee",

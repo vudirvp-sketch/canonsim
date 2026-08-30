@@ -101,6 +101,7 @@ class _Lint:
         self._urgencies()
         self._director()
         self._states_rules()
+        self._importance_rules()
         self._brief()
 
     def _meta(self) -> None:
@@ -422,6 +423,19 @@ class _Lint:
                     cond.get("test") in PRECONDITION_TESTS,
                     f"action {intent}: unknown precondition test {cond.get('test')!r}",
                 )
+                # pack-2 (iter-29): the spot_available test's layer param
+                # must name a declared transition layer — a typo would
+                # KeyError mid-run (the KI#15 dead-data family, refused
+                # at load instead).
+                if cond.get("test") == "spot_available":
+                    _require(
+                        cond.get("layer") in self._data["rules.json"].get(
+                            "transitions", {}
+                        ),
+                        f"action {intent}: precondition layer "
+                        f"{cond.get('layer')!r} is not a declared transition "
+                        f"layer",
+                    )
                 for param in ("noun", "with", "who"):
                     if param in cond:
                         _require(
@@ -489,6 +503,40 @@ class _Lint:
                     isinstance(ignition.get("item_flag"), str),
                     f"action {intent}: ignition item_flag must be a string",
                 )
+            self._status_effects(intent, action)
+
+    def _status_effects(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional status-effects block (tune-1, KI#4): the pack
+        declares the actor's status deltas the `recuperate` resolver
+        applies. The axes must be real `rules.states` axes (an undeclared
+        axis is dead data — the resolver would write a prop nothing
+        reads); the block on any other resolver is dead data the same way
+        (KI#15 family: refuse at load, never crash or silently no-op at
+        completion)."""
+        effects = action.get("status_effects")
+        if effects is None:
+            return
+        where = f"action {intent!r} status_effects"
+        _require(
+            action.get("resolver") == "recuperate",
+            f"{where}: only the 'recuperate' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(isinstance(effects, list) and effects, f"{where}: must be a "
+                 f"non-empty list")
+        states = self._data["rules.json"].get("states", {})
+        for effect in effects:
+            _require(isinstance(effect, Mapping), f"{where}: entries must be objects")
+            axis = effect.get("status")
+            _require(
+                isinstance(axis, str) and axis in states,
+                f"{where}: unknown status axis {axis!r} (not a rules.states axis)",
+            )
+            delta = effect.get("delta")
+            _require(
+                isinstance(delta, int) and not isinstance(delta, bool) and delta != 0,
+                f"{where}: status {axis!r} delta must be a non-zero integer",
+            )
 
     def _templates(self) -> None:
         templates = self._data["templates.json"]
@@ -838,6 +886,52 @@ class _Lint:
                     f"{where}.reset_on_rotation must be a boolean",
                 )
 
+    # -- the importance rule (tune-1: the story-critical hook) -----------------
+
+    def _importance_rules(self) -> None:
+        """MVP_SCOPE §9 owns the rule's shape; the pack owns the numbers.
+        The story-critical vocabulary must live in the template vocabulary
+        (EVENT_SCHEMA §11) — a typo would silently never match, the
+        dead-pack-data failure the lint family guards against (KI#15).
+        Every score key must be an int (the rule computes in ints, never
+        floats)."""
+        rules = self._data["rules.json"]
+        section = rules.get("importance")
+        if section is None:
+            return  # the engine reads the section unconditionally at the
+        # first event; a pack without it fails there — nothing more to lint
+        where = "importance"
+        templates = self._data["templates.json"]["events"]
+        for key in ("score", "thresholds"):
+            _require(isinstance(section.get(key), Mapping),
+                     f"{where}.{key} must be an object")
+        story_critical = section.get("story_critical_events", ())
+        _require(isinstance(story_critical, list),
+                 f"{where}.story_critical_events must be a list")
+        for event_type in story_critical:
+            _require(
+                event_type in templates,
+                f"{where}.story_critical_events: {event_type!r} is not in the "
+                f"template vocabulary — a typo here never matches any event",
+            )
+        for key, value in section["score"].items():
+            _require(
+                isinstance(value, int) and not isinstance(value, bool),
+                f"{where}.score.{key} must be an integer",
+            )
+        thresholds = section["thresholds"]
+        for key in ("medium", "high"):
+            _require(
+                isinstance(thresholds.get(key), int)
+                and not isinstance(thresholds[key], bool)
+                and thresholds[key] > 0,
+                f"{where}.thresholds.{key} must be a positive integer",
+            )
+        _require(
+            thresholds["medium"] <= thresholds["high"],
+            f"{where}.thresholds: medium must not exceed high",
+        )
+
     # -- urgencies (P2b, iter-4) -----------------------------------------------
 
     def _urgencies(self) -> None:
@@ -1118,29 +1212,68 @@ class _Lint:
                 isinstance(value, int) and not isinstance(value, bool) and value >= 1,
                 f"{where}.present_entities: {key} must be an integer >= 1",
             )
-        markers = present.get("status_markers")
+        markers = present.get("card_markers")
         _require(
             isinstance(markers, list),
-            f"{where}.present_entities: status_markers must be a list",
+            f"{where}.present_entities: card_markers must be a list",
         )
         state_axes = set(self._data["rules.json"].get("states", {})) - {"notes"}
+        relation_axes = set(self._data["rules.json"].get("relations", {}).get(
+            "axes", ()
+        ))
         for marker in markers:
             _require(
                 isinstance(marker, Mapping),
-                f"{where}.present_entities.status_markers: entries must be objects",
+                f"{where}.present_entities.card_markers: entries must be objects",
             )
-            where_marker = f"{where}.present_entities.status_markers[{marker.get('axis')!r}]"
+            where_marker = (
+                f"{where}.present_entities.card_markers[{marker.get('prop')!r}]"
+            )
+            # tune-2 (D-060): prop-path keyed, two row kinds. The closed
+            # prefix set keeps the table honest — a typo'd prop is dead
+            # data (the marker silently never renders), the KI#15 family.
+            prop = marker.get("prop")
+            _require(isinstance(prop, str) and prop.strip(),
+                     f"{where_marker}: prop must be a non-empty string")
+            if prop.startswith("status."):
+                _require(
+                    prop[len("status."):] in state_axes,
+                    f"{where_marker}: status axis "
+                    f"{prop[len('status.'):]!r} is not one of the pack's "
+                    f"states axes {sorted(state_axes)}",
+                )
+            elif prop.startswith("relations."):
+                _require(
+                    prop[len("relations."):] in relation_axes,
+                    f"{where_marker}: relations axis "
+                    f"{prop[len('relations.'):]!r} is not one of the pack's "
+                    f"relations axes {sorted(relation_axes)}",
+                )
+            else:
+                _require(
+                    prop == "crime_status",
+                    f"{where_marker}: prop must be status.<axis>, "
+                    f"relations.<axis>, or crime_status (the closed marker "
+                    f"surface; grow it only with a real need, L13)",
+                )
+            has_min, has_value = "min" in marker, "value" in marker
             _require(
-                isinstance(marker.get("axis"), str)
-                and marker.get("axis") in state_axes,
-                f"{where_marker}: axis must be one of the pack's status axes "
-                f"{sorted(state_axes)}",
+                has_min != has_value,
+                f"{where_marker}: exactly one of min (threshold row) or "
+                f"value (value row) is required",
             )
-            threshold = marker.get("min")
-            _require(
-                isinstance(threshold, int) and not isinstance(threshold, bool) and threshold >= 0,
-                f"{where_marker}: min must be a non-negative integer",
-            )
+            if has_min:
+                threshold = marker["min"]
+                _require(
+                    isinstance(threshold, int)
+                    and not isinstance(threshold, bool) and threshold >= 0,
+                    f"{where_marker}: min must be a non-negative integer",
+                )
+            else:
+                _require(
+                    isinstance(marker["value"], str) and marker["value"].strip(),
+                    f"{where_marker}: value must be a non-empty string",
+                )
             _require(
                 isinstance(marker.get("marker"), str) and marker["marker"].strip(),
                 f"{where_marker}: marker must be a non-empty string",

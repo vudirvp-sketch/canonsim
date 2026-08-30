@@ -108,7 +108,7 @@
     "fear": {"decay_per_360_ticks": 5},
     "injury": {"auto_decay": 0},
     "attention": {"decay_per_360_ticks": 0},
-    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup)"
+    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup). tune-1 (KI#4): fatigue's counter-play is the rest action — the delta lives in actions.json status_effects beside the action that applies it (the use_effect precedent: the number lives with the effect's owner)"
   },
 
   "transitions": {
@@ -237,10 +237,19 @@
     "score": {
       "entities_touched_at_least_2": 1,
       "irreversible_state_change": 2,
-      "per_far_hook": 1
+      "per_far_hook": 1,
+      "story_critical_event": 2
     },
+    "story_critical_events": [
+      "take", "steal", "pickpocket_failed", "drop_break", "arson",
+      "fire_started", "fire_spread", "smoke_rising",
+      "location_burned_out", "alarm_raised", "watch_change",
+      "knowledge_transfer", "expectation_violation", "rumor_told",
+      "flee", "flee_caught", "arrest_attempt", "arrest_resolved",
+      "document_check"
+    ],
     "thresholds": {"medium": 2, "high": 4},
-    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks → low/medium/high; never by feel. Mapping thresholds are v0.1 defaults"
+    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1."
   },
 
   "metrics": {
@@ -273,12 +282,13 @@
       "expectation_violation": ["knowledge", "crime_watch"],
       "watch_change": ["crime_watch", "knowledge"],
       "status_decayed": ["states"],
+      "rest": ["states"],
       "arrest_attempt": ["crime_watch"],
       "arrest_resolved": ["crime_watch"],
       "document_check": ["director", "crime_watch"],
       "intent_rejected": []
     },
-    "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction."
+    "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction. tune-1: rest joins as the states system's recovery action (single-system by design — the fatigue counter-play is not a cross-system event)."
   },
 
   "brief": {
@@ -307,11 +317,14 @@
       "max_entities": 8,
       "max_pairs": 6,
       "scene_line_fields": ["layout"],
-      "status_markers": [
-        {"axis": "intoxication", "min": 30, "marker": "drunk"},
-        {"axis": "fatigue", "min": 30, "marker": "weary"},
-        {"axis": "fear", "min": 30, "marker": "afraid"},
-        {"axis": "injury", "min": 1, "marker": "hurt"}
+      "card_markers": [
+        {"prop": "status.intoxication", "min": 30, "marker": "drunk"},
+        {"prop": "status.fatigue", "min": 30, "marker": "weary"},
+        {"prop": "status.fear", "min": 30, "marker": "afraid"},
+        {"prop": "status.injury", "min": 1, "marker": "hurt"},
+        {"prop": "relations.suspicion", "min": 25, "marker": "wary"},
+        {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
+        {"prop": "crime_status", "value": "caught", "marker": "caught"}
       ]
     },
     "directives": [
@@ -337,6 +350,6 @@
       "The taproom hummed, low and careless, the way rooms do before anything happens.",
       "Rain started against the shutters — a patient, unhurried sound."
     ],
-    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
+    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth; tune-2 (iter-28, D-060): the card_markers table is prop-path keyed with two row kinds — threshold rows (numeric min) and value rows (string value) — so the crime cascade's standing state renders on the cards (relations.suspicion wary at 25, aligned with the status_suspect_at flip; crime_status suspect/caught on the player's card; the render threshold is this table's own number by design) — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
   }
 }

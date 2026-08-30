@@ -416,22 +416,34 @@ def _present_entity_items(
         )
 
     marker_specs = [
-        (str(spec["axis"]), int(spec["min"]), str(spec["marker"]))
-        for spec in config["status_markers"]
+        (str(spec["prop"]), spec, str(spec["marker"]))
+        for spec in config["card_markers"]
     ]
     for entity_id in present[: int(config["max_entities"])]:
         props = state[entity_id]
         if pack.kind_of(entity_id) == "item" and props.get("carrier") is not None:
             continue  # carried: the carrier's `carries=` segment renders it
         segments = [f"- {entity_id} ({display_name(pack, entity_id)})"]
-        markers = [
-            marker
-            for axis, threshold, marker in marker_specs
-            if (value := props.get(f"status.{axis}")) is not None
-            and value >= threshold
-        ]
+        # tune-2: the marker table is PROP-PATH keyed with two row kinds —
+        # threshold rows (numeric `min`) and value rows (string `value`),
+        # so `relations.suspicion` and `crime_status` rows are expressible
+        # pack data (the card, not the delta window, is the narrator's
+        # read surface for standing state; the PC's own perception stays
+        # governed by the blind-NPC law in scene_delta).
+        markers = []
+        for prop, spec, marker in marker_specs:
+            value = props.get(prop)
+            if "min" in spec:
+                if (
+                    isinstance(value, int)
+                    and not isinstance(value, bool)
+                    and value >= int(spec["min"])
+                ):
+                    markers.append(marker)
+            elif value is not None and value == spec["value"]:
+                markers.append(marker)
         if markers:
-            segments.append(f"status={','.join(markers)}")
+            segments.append(f"markers={','.join(markers)}")
         carries = [
             item["id"]
             for item in pack.entities["items"]

@@ -67,7 +67,7 @@
     },
     "importance": {
       "enum": ["low", "medium", "high"],
-      "description": "Computed by the pack rule (entities touched + irreversibility + far hooks)."
+      "description": "Computed by the pack rule (entities touched + irreversibility + far hooks + the story-critical hook, tune-1/D-059)."
     },
     "provenance": {
       "$ref": "#/$defs/provenance"

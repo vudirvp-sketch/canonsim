@@ -146,7 +146,8 @@ def iter_suspicion_reactions(
                 },
                 state_changes=tuple(changes),
                 importance=pack_importance(
-                    pack.rules, {knowledge.who, suspect_id}, irreversible=0, hooks=0
+                    pack.rules, {knowledge.who, suspect_id}, irreversible=0, hooks=0,
+                    event_type=config["reaction_event"],
                 ),
             )
         ]
@@ -165,7 +166,8 @@ def iter_suspicion_reactions(
                     cause=None,  # the loop chains it to this group's suspicion event
                     outcome={"suspicion": new, "threshold": arrest_at},
                     importance=pack_importance(
-                        pack.rules, {knowledge.who, suspect_id}, irreversible=0, hooks=0
+                        pack.rules, {knowledge.who, suspect_id}, irreversible=0,
+                        hooks=0, event_type=arrest["event"],
                     ),
                 )
             )
@@ -235,6 +237,7 @@ def arrest_resolution_draft(
             pack.rules, {watcher, suspect},
             irreversible=1 if caught and config.get("caught_irreversible") else 0,
             hooks=0,
+            event_type=config["resolution_event"],
         ),
     )
 
@@ -365,6 +368,7 @@ def briefing_draft(
         outcome={"count": len(records)},
         knowledge=tuple(records),
         importance=pack_importance(
-            pack.rules, {outgoing, incoming}, irreversible=0, hooks=0
+            pack.rules, {outgoing, incoming}, irreversible=0, hooks=0,
+            event_type=config["rotation"]["transfer_event"],
         ),
     )

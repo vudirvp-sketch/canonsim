@@ -4,7 +4,7 @@
 > fired; it is written from the iter-2 build, not ahead of it. Owners: the
 > intent record and lifecycle live here; the **event** contract lives in
 > `docs/EVENT_SCHEMA.md` (an Intent is a proposal, an Event is a fact);
-> the 12 actions and their parameters live in
+> the pack's action vocabulary and its parameters live in
 > `content/tavern_pack/actions.json` (`docs/MVP_SCOPE.md` §7 owns the
 > table); the playscript file format lives in `docs/MVP_SCOPE.md` §13.
 > This doc never restates those — it defines the grammar they share.
@@ -68,6 +68,7 @@ test. A failing condition rejects the intent with
 | `carried_by` | `who` | the item's runtime `carrier` equals `who` |
 | `uncarried` | — | the item's runtime `carrier` is None |
 | `has_field` | `field` | the pack record has the field (`use_effect`) |
+| `spot_available` | `layer` | the noun (a location) holds at least one spot of the pack-declared transition layer NOT in the layer's `spot_state` — the exact condition the ignite resolver keys on, so door and resolver agree by construction (pack-2/iter-29: igniting a destroyed or fully-burning location is a door rejection, never a no-ignition success; the layer param is lint-checked against the declared layers) |
 | `texture_noun` | — | the intent carries a well-formed resolved texture reference whose scope target is a known entity (iter-11; ledger liveness deliberately NOT tested — core is ledger-blind) |
 
 Nouns: `actor`, `target`, `texture` (iter-11 — resolves to the reference's
@@ -136,7 +137,18 @@ and **ignitions** (world reactions executed after the primary event:
 `drop_break`/`arson` → the fire layer). State changes compute `from` from
 the projection at completion (items travel with their carrier; status
 deltas clamp to the pack's relation scale). Importance follows the pack
-rule (MVP_SCOPE §9): entities touched + irreversibility + hooks.
+rule (MVP_SCOPE §9): entities touched + irreversibility + far hooks +
+the story-critical hook (tune-1/D-059).
+
+**Actor status effects (tune-1, the `recuperate` resolver).** An action
+may declare a `status_effects` list of `{status, delta}` entries — the
+resolver applies each to the ACTOR, reading the current value from the
+projection (never hardcoding `from`), clamping to the relation scale, and
+skipping clamped-to-zero deltas (a quiet beat, not a desynced write).
+The axes must be declared `rules.states` axes and the block is legal only
+on the `recuperate` resolver (both lint-checked — dead pack data fails at
+load). The tavern pack's `rest` is the canonical use: the fatigue
+counter-play (KI#4).
 
 ## 7. Knowledge templates
 

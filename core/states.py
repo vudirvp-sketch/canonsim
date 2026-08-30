@@ -165,7 +165,8 @@ def decay_drafts(
                 },
                 state_changes=tuple(changes),
                 importance=pack_importance(
-                    pack.rules, {WORLD, npc_id}, irreversible=0, hooks=0
+                    pack.rules, {WORLD, npc_id}, irreversible=0, hooks=0,
+                    event_type=DECAY_EVENT,
                 ),
             )
         )
