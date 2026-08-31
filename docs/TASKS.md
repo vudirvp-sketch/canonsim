@@ -11,68 +11,14 @@
 
 > Phase 0 closed (gate PASS, iter-6; audit-clean iter-6a). Phase 1 closed
 > (gate PASS, iter-26, D-058; the polish menu tune-1/tune-2/pack-2 landed
-> iter-27–29). Phase 2 (parser, mode C) is OPEN — opened iter-31 by the
-> owner's call; architecture owner: `docs/blueprint/phases.md` §2;
-> boundary contract owner: `docs/PARSER_SPEC.md`. INV-4 holds unchanged:
-> the parser is EXTERNAL at dev-time over a file contract (D-062, the
-> D-055 pattern); the runtime-engine decision stays owner-gated
-> (TECH_NOTES §1).
-
-### iter-34 · owner-requested planning-layer audit — done
-
-The owner's audit call (fresh request, D-022; doc-only — streak 1 of
-2): the planning layer vs the post-gate reality — the blueprint had
-not moved since iter-8c/15 while the phase-1 gate, the polish menu,
-the phase-2 opening, and bg-2 all landed. Verdict: the planning core
-is sound; the drift was staleness, not rot. Fixed (KI#55–#59):
-ROADMAP §2 State column + §6 SoW gating; phases.md §2 → the D-062
-architecture + §1 closure/D-055 + §7 perf-1; BLUEPRINT §0/LOD-1; the
-stray root TASKS.md deleted for real (KI#55 — the bg-4 deletion
-never landed); the iter-26 section collapsed (AGENTS §6). 673 green,
-ruff clean. Detail: worklog iter-34 + STATUS KIs.
-
-### iter-31 · phase-2 parser door — done (D-062)
-
-The phase-2 opening iteration (the owner's "start phase 2" call): the
-mode-C boundary's LLM-free half, mirroring the narrator boundary
-(D-055) on the player's free text. Landed: the **grammar snapshot**
-(`brief/parser.py` — the pack's verbs with pack-derived field
-constraints ∪ the addressable nouns, canon entities + live texture
-entries; ghost interactivity structurally impossible), the **parse
-call/reply file contract** (`output/parser/parse_<N>.md` ↔
-`parse_reply_<N>.json` — utterance + grammar + protocol; the closed
-reply {intent | question | no_intent}), the **boundary shape gate**
-(off-grammar = loud ParseError, never a feed — the world never moves
-on a malformed parse; off-grammar targets point at the disambiguation
-path), the **pin law** (`SceneLedger.pin` — blueprint §1(a)'s first
-consumer: the reference IS the pin; a failed attempt keeps it
-live+pinned), the `say` / `say apply` session door sharing the
-session's one ledger (D-049), promotion wiring identical to the
-narrator path, and `docs/PARSER_SPEC.md` (the trigger-fired spec).
-KI#53 (phase-state doc drift: the stale Track-A phase header + the
-README Status tail, stale since iter-11a) fixed. 629→654 green, ruff
-clean. Detail: worklog iter-31 + `docs/PARSER_SPEC.md` + D-062.
-
-### iter-33 · parse-1 batch 2 — say-door corpus growth — done
-
-The owner's corpus-growth call ("continue the plan or grow the corpus —
-whichever is objectively better"): four more live mode-C sessions
-(seeds 111/65/30/32 — the untested verbs, the scene-close retirement,
-the disambiguation ladder, the narrator withdrawal)
-driven by a runner outside the repo through the REAL stack (Simulator +
-Mediator + ParserDoor over ONE shared ledger, D-049). Batch tally per
-PARSER_SPEC §6: 21 utterances (14 intent / 4 question / 2 no_intent + 1
-gate-passed door-rejected cycle), 3/3 off-grammar probes caught, 0
-honest misfires; combined with iter-32: 51 utterances, 35/35 boundary
-validity — the ≥90% criterion holds on the combined volume (the gate
-review stays the owner's). The corpus 6→10 cases
-(`tests/fixtures/parse_replies.json`): examine/use/rest fed live for
-the first time; a PINNED entry dies two ways (scene close, narrator
-withdrawal — RETIRED joins PROMOTED as terminal, fresh establish legal);
-the question→question→intent ladder; the wait-without-ticks
-gate-passed/door-rejected probe; the corpus machinery +note override
-+per-cycle state assert. Detail: worklog iter-33 + `docs/PARSER_SPEC.md`
-§6/§7.
+> iter-27–29). Phase 2 closed (gate PASS, iter-35, D-064 — 35/35 boundary
+> validity over 51 combined utterances, 0 honest misfires; the parse corpus
+> 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
+> Phase 3 (Director) is parked — opens on the owner's call (the iter-31
+> precedent). Architecture owner: `docs/blueprint/phases.md` §2; boundary
+> contract owner: `docs/PARSER_SPEC.md`. INV-4 holds unchanged: the parser
+> is EXTERNAL at dev-time over a file contract (D-062, the D-055 pattern);
+> the runtime-engine decision stays owner-gated (TECH_NOTES §1).
 
 ### Phase-2 parser backlog
 
@@ -81,8 +27,8 @@ gate-passed/door-rejected probe; the corpus machinery +note override
   evidence (PARSER_SPEC §7).
 - `engine-1` (owner-gated) the runtime inference engine decision
   (llama.cpp + GBNF; TECH_NOTES §1) — unlocked by the phase-1 gate,
-  waits on the owner; the dev-time external parser carries phase 2
-  until then.
+  waits on the owner; the dev-time external parser carried phase 2 to
+  its gate PASS (iter-35) and carries mode C until then.
 
 ### iter-26 · phase-1 gate — done (verdict: PASS, D-058)
 
@@ -290,6 +236,23 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-35 · 2026-09-01 · phase-2 gate (iter-35-phase2-gate; the owner's
+  "continue per the plans" session call — the un-gated backlog was empty,
+  the arc's #1 item): verdict **PASS** (D-064) — the ≥90% exit criterion
+  met (35/35 boundary validity over 51 combined utterances, 0 honest
+  misfires, 10/10 off-grammar probes caught); the §5 protocol re-run
+  identical to iter-26 (day1_full ON M1=0.417 / M2=0.500; T8 OFF 26
+  chains ≥ 3; T7 reads as a story); DECISIONS collapsed 35→30; 697 green,
+  ruff clean. Detail: worklog iter-35 + D-064.
+
+- iter-34 · 2026-09-01 · owner-requested planning-layer audit
+  (iter-34-planning-audit; fresh owner request, D-022; doc-only): the
+  planning layer actualized to post-gate reality — KI#55–#59 (ROADMAP
+  State column + SoW gating, phases.md to the D-062 architecture,
+  BLUEPRINT §0/LOD-1, the stray root TASKS.md actually deleted); verdict:
+  the planning core is sound, the drift was staleness. 673 green, ruff
+  clean. Detail: worklog iter-34 + STATUS KIs.
 
 - iter-33 · 2026-09-01 · parse-1 batch 2 (iter-33-parse1-say-sessions2;
   the owner's corpus-growth call): four live say-door sessions (seeds

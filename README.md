@@ -62,19 +62,21 @@ the narrator landed agent-in-the-loop at iter-12 (D-055 — the
 dev-time engine is the owner's assistant over a call/reply file
 contract; the repo stays LLM-free, INV-4 unchanged) and the polish
 menu closed iter-27–29 (tune-1/tune-2/pack-2, D-059–D-061).
-**Phase 2 (parser, mode C) is open** (iter-31, D-062 — the owner's
-call): the mode-C boundary's LLM-free half — the grammar snapshot
-(pack verbs ∪ addressable nouns; ghost interactivity structurally
-impossible), the parse call/reply file contract with the closed
-reply {intent | question | no_intent} gated at the boundary, the
-pin law, the `say`/`say apply` session door; contract owner
+**Phase 2 (parser, mode C) gate: PASS** (iter-31 opened it, D-062 —
+the owner's call; closed iter-35, D-064 — the owner's "continue per
+the plans" session call): the mode-C boundary's LLM-free half — the
+grammar snapshot (pack verbs ∪ addressable nouns; ghost interactivity
+structurally impossible), the parse call/reply file contract with the
+closed reply {intent | question | no_intent} gated at the boundary,
+the pin law, the `say`/`say apply` session door; contract owner
 `docs/PARSER_SPEC.md`. parse-1 validation beats landed iter-32 (six
 live say-door sessions, 30 utterances, 0 honest misfires) and grew
 iter-33, batch 2 (the owner's corpus-growth call: four more sessions —
 seeds 111/65/30/32; 51 combined utterances, 35/35 boundary validity —
-the ≥90% criterion holds on the combined volume per PARSER_SPEC §6;
-the phase-2 gate review is the owner's; the parse-reply regression
-corpus 10 cases). Track B: **bg-2 DONE** (the owner supplied the four
+the ≥90% criterion MET on the combined volume per PARSER_SPEC §6; the
+parse-reply regression corpus 10 cases); the gate's §5 protocol re-run
+reproduced the iter-26 numbers exactly (day1_full ON M1=0.417 /
+M2=0.500; T8 OFF 26 chains). Track B: **bg-2 DONE** (the owner supplied the four
 world exports; `docs/TAXONOMY.md` — 120 DF events across the 16 bg-2
 target types with ontology verdicts + the sink v2 plus pass, D-063);
 **bg-3 DONE** (iter bg-3 — the owner re-supplied large/medium/
@@ -83,9 +85,9 @@ closed-vocabulary reverse validation over the sink + the ≤2-regen
 ladder + the retrieval stress — 4 live cases, 0 honest misfires,
 brief p50 ≈ 2.9 KB on GB-scale exports; numbers owner
 `docs/TECH_NOTES.md` §3.3). 697 tests green, ruff clean,
-golden fixtures byte-identical. Next: the owner's phase-2 gate review +
-the owner-gated set (parse-2, engine-1) — the un-gated backlog is
-empty.
+golden fixtures byte-identical. Next: the owner's phase-3 opening
+call (Director) + the owner-gated set (parse-2, engine-1) — the
+un-gated backlog is empty.
 
 ## For AI agents (primary audience)
 

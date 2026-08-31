@@ -10,6 +10,27 @@
 > since iter-5).
 
 ---
+iter-35 · 2026-09-01 · phase-2 gate — the verdict + the collapse
+(iter-35-phase2-gate; the owner's "continue per the plans" session
+call — the un-gated backlog was empty, the arc's #1 item, the iter-26
+precedent)
+- Verdict **PASS** (D-064): the ≥90% exit criterion met — 51 combined
+  utterances across 10 live say-door sessions, 35/35 boundary validity,
+  0 honest misfires, 10/10 off-grammar probes caught; no kill-criteria
+  hit. The §5 protocol re-run (a runner outside the repo, Rule 9):
+  day1_full ON seed 125 M1=0.417 / M2=0.500 — identical to the iter-26
+  phase-1 gate numbers (phase 2 added the parser without touching a
+  canon path); T8 OFF 26 chains ≥ 3; T7 — the day1_full tale still
+  reads as a story (13 lines, zero noise floor); 697 green, ruff clean.
+- DECISIONS collapsed 35→30 per D-034 (D-012→the D-011 family,
+  D-047→the D-042 family, D-055→D-054, D-057→D-056, D-060/D-061→D-059)
+  + D-064 appended; ROADMAP §2 phase 2 CLOSED, phase 3 parked (the
+  owner's opening call, the iter-31 precedent).
+- Doc-only (streak 1 of 2, the gate-review precedent). 7 files — the
+  gate-review doc-sync set (the iter-26 scope precedent); iter-28
+  evicted per the cap.
+
+---
 iter-34 · 2026-09-01 · owner-requested planning-layer audit
 (iter-34-planning-audit; doc-only — fresh owner request per D-022)
 - KI#55: the bg-4 KI#52 deletion of the stray root TASKS.md (678-line
@@ -226,29 +247,8 @@ polish item 3)
   (transiently 33/30 — collapse due at the phase-2→3 gate per D-034).
 ---
 iter-28 · 2026-08-31 · tune-2 — the crime cascade renders on the
-cards (iter-28-tune2-card-markers; the owner's finish-phase-1
-directive, polish item 2)
-- The declared candidate landed: `status_markers` → the prop-path
-  `card_markers` table (threshold rows `min` + value rows `value`; the
-  closed marker surface `status.<axis>` / `relations.<axis>` /
-  `crime_status`, lint-checked against the declared axes); the render
-  segment is `markers=` (the old `status=` lied for non-status props);
-  the pack ships `wary` at suspicion ≥ 25 (aligned with the
-  status_suspect_at flip) + `suspect`/`caught` on the player's card —
-  iter-17's claimable-but-invisible asymmetry resolved in the
-  readable-tension direction.
-- The scene_delta half of the finding resolved as lawful blindness
-  (NOT a defect): `suspicion_changed` rides no knowledge record and the
-  delta window is the PC's perception (blind-NPC, D-037) — the card is
-  the narrator's read surface, the delta window the player's; both
-  pinned by tests. The corpus `status=afraid` pin updated to
-  `markers=afraid` (render format, no canon impact).
-- 619→626 green, ruff clean. 9 files (assembler + lint + pack + the
-  doc sync set — within the 3–5 soft limit's family precedent); D-060;
-  KI#50 deleted per AGENTS §5 (closed iter-26); iter-18 evicted per
-  the cap. Docs: BRIEF_SPEC §3.4/§6 (the table law + the render
-  format), TASKS, STATUS, DECISIONS (transiently 32/30 — collapse due
-  at the phase-2→3 gate per D-034).
+cards (iter-28-tune2-card-markers)
+- (deleted at iter-35 per the one-in/one-out cap; history in git.)
 ---
 bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
 (bg-3-briefer-spike; the owner re-supplied large/medium/small-dense)

@@ -1,20 +1,22 @@
 # STATUS — canonsim
 
-Iteration: bg-3 (`bg-3-briefer-spike` — the un-gated backlog pick; the
-owner re-supplied the three world exports) · Phase: 2 (parser, mode C)
-OPEN, unchanged · Date: 2026-09-01 · Scope: the Track-B briefer spike
-over the sink DB — the POV mini-briefer, the closed-vocabulary reverse
-validation, the ≤2-regen ladder, the retrieval stress test. **Landed:
-`scripts/df_briefer.py` + `tests/test_df_briefer.py` (673→697 green,
-ruff clean); the live-session and 3-world stress numbers live in
-TECH_NOTES §3.3.** The imports reproduce §3.2's large-world counts
-exactly (1,191,388 events · 3,509,709 plus rows — the cross-validation
-held); medium and small-dense reproduce §3.1 (1,220,772 / 933,476).
-The doc-only streak from iter-34 is reset (bg-3 carried code). No KIs
-opened — no drift found; the exports matched the recorded numbers
-row-for-row. The honest F7 reading held: the briefs read dry
-(macro-dense, micro-empty); the spike validated briefer mechanics,
-not micro-event interestingness.
+Iteration: iter-35 (`iter-35-phase2-gate` — the owner's "continue per
+the plans" session call; doc-only, the iter-26 gate-review precedent —
+streak 1 of 2) · Phase: 2 (parser, mode C) **CLOSED — gate PASS,
+D-064**; phase 3 (Director) parked, opens on the owner's call · Date:
+2026-09-01 · Scope: the phase-2 gate review — the full ROADMAP §5
+protocol re-run + the PARSER_SPEC §6 measurement verdict. **The exit
+criterion "≥90% valid intents" MET: 51 combined utterances across 10
+live say-door sessions — 35 fed intents / 10 questions / 4 no_intent,
+35/35 boundary validity, 0 honest misfires; 10/10 deliberate
+off-grammar probes caught loudly; no kill-criteria hit.** The §5
+re-run is identical to iter-26 (day1_full ON seed 125: M1=0.417 /
+M2=0.500 — phase 2 added the parser without touching a canon path;
+T8 OFF 26 emergent chains ≥ 3; T7 — the day1_full tale still reads as
+a story, 13 lines, zero noise-floor lines); the corpus regression (105
+narrator + 10 parse cases through the REAL stacks) green in the
+697-test suite, ruff clean. DECISIONS collapsed 35→30 per D-034. No
+KIs opened — no drift found.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -383,24 +385,18 @@ gate.
 
 ## Next step
 
-bg-3 landed (the un-gated backlog pick): the briefer spike's LLM-free
-half, the live-session numbers, and the 3-world stress table live in
-TECH_NOTES §3.3 — the doc-only streak from iter-34 is reset (bg-3
-carried code). **The un-gated backlog is now EMPTY** — everything
-left is owner-gated or phase-gated; the next move is the owner's.
+**Phase 2 is CLOSED — gate PASS iter-35, D-064** (the owner's
+"continue per the plans" session call; the iter-26 precedent). The
+un-gated backlog stays EMPTY — everything left is owner-gated or
+phase-gated; the next move is the owner's. The doc-only streak is 1 of
+2 (the gate-review precedent; the next iteration must carry code or a
+fresh owner directive).
 
-**Phase 2 is OPEN.** parse-1 batch 2 landed iter-33 (the owner's
-corpus-growth call): the say-door corpus 6→10 cases, 51 combined
-utterances, 0 honest misfires — the ≥90% boundary-validity criterion
-holds on the combined volume per PARSER_SPEC §6 (the composition
-recorded; the two RETIRED-terminal paths and the gate/door one-owner
-boundary now live-pinned). The phase-2 arc, in order:
-
-1. **The phase-2 gate review is the owner's** (the phase-1 precedent:
-   the criterion hit at iter-24, the gate closed at iter-26) — the
-   corpus now carries the combined volume for it; more parse-1-class
-   session volume only on the owner's next call (the corpus grows the
-   same way on demand).
+1. **Phase 3 (Director) — opens on the owner's call** (the iter-31
+   precedent: phases open by owner call, never spontaneously; ROADMAP
+   §2 — stagnation detector, complication buffer, arcs). More
+   parse-1-class session volume only on the owner's call (the corpus
+   grows the same way on demand).
 2. **`parse-2`** (owner-gated) — disambiguation buttons, multi-intent
    utterances (PARSER_SPEC §7's deferrals; a frontend consumer or
    live-session evidence is the trigger).
@@ -409,11 +405,10 @@ boundary now live-pinned). The phase-2 arc, in order:
    picks), st-2 (identity persistence), the phase-1 corpus
    consolidation pass, `engine-1` (the runtime inference engine
    decision — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external
-   parser carries phase 2 until then), `bg-6` (SoW audit, D-055
-   deferral), `qa-1` mypy + `ci-1` GitHub Actions.
-4. Track B: **bg-2 DONE, bg-3 DONE** (the owner re-supplied the large/
-  medium/small-dense exports this session — the imports reproduce the
-  recorded counts row-for-row; the spike's tool + numbers + regression:
+   parser carried phase 2 to its PASS and carries mode C until then),
+   `bg-6` (SoW audit, D-055 deferral), `qa-1` mypy + `ci-1` GitHub
+   Actions.
+4. Track B: **bg-2 DONE, bg-3 DONE** (tool + numbers + regression:
   `scripts/df_briefer.py`, TECH_NOTES §3.3, `tests/test_df_briefer.py`);
   bg-4 DONE, bg-6 owner-deferred. New track-B ideas (e.g. a bg-7: the
   brief-side epistemology donor — a knowledge-record analog over DF,

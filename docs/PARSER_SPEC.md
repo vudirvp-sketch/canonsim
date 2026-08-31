@@ -182,7 +182,7 @@ never engine work (INV-3).
 | The runtime re-ask ladder (a bounded retry budget for malformed replies; dev-time is manual re-apply) | the runtime engine | blueprint §2 |
 | Disambiguation **buttons** (the grammar enumerates the alternatives; today the question is free text) | a frontend consumer (mode C live play) | ROADMAP §2 |
 | Multi-intent utterances (one reply carries N intents — today one classification per document) | live-session evidence it is needed | this spec §4 |
-| The phase-2 gate review's verdict + more session volume (the corpus landed iter-32/parse-1 — six live sessions distilled into `tests/fixtures/parse_replies.json` — and grew iter-33/parse-1 batch 2, the owner's corpus-growth call: ten sessions total, 51 combined utterances; the ≥90% criterion measured MET on the combined volume, ROADMAP §2) | the owner's gate review | ROADMAP §5 |
+| More session volume (the corpus landed iter-32/parse-1 — six live sessions distilled into `tests/fixtures/parse_replies.json` — and grew iter-33/parse-1 batch 2, the owner's corpus-growth call: ten sessions total, 51 combined utterances; **the gate review landed iter-35, D-064 — verdict PASS** (35/35 boundary validity, 0 honest misfires, the §5 protocol re-run reproducing the iter-26 numbers); phase 2 CLOSED, ROADMAP §2) | the owner's next call | ROADMAP §5 |
 
 ## 8. Versioning
 

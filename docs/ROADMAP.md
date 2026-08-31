@@ -20,7 +20,7 @@ phase-0 gate.
 |---|---|---|---|---|
 | **0. Sim without LLM** (TavernSim) | **CLOSED** — gate PASS iter-6, audit-clean iter-6a | one dense slice: time, position, relations, knowledge, states, fire, watch, director; event log; template chronicle | chronicle reads as a story; full test suite `MVP_SCOPE.md` §16 | mechanisms not expressive, ontology has no combinatorial depth → rethink ontology, not "add LLM" |
 | 1. Narrator | **CLOSED** — gate PASS iter-26, D-058 (polish iter-27–29) | mode A over the log; validator; reverse prose validation | 0 canon violations per 100 beats (regression set) | ≥1 breach per 1000 beats in live play |
-| 2. Parser | **OPEN** — opened iter-31, D-062; the gate review is the owner's | mode C; disambiguation questions / buttons on uncertainty | ≥90% valid intents | else redo the grammar |
+| 2. Parser | **CLOSED** — gate PASS iter-35, D-064 | mode C; disambiguation questions / buttons on uncertainty | ≥90% valid intents (met: 35/35 boundary validity over 51 utterances, 0 honest misfires) | else redo the grammar |
 | 3. Director | parked | stagnation detector, complication buffer, arcs | a scene without an event < N beats | else redo the drama model |
 | 4. Knowledge & scene | parked | `known_by` filter, mode B, scene manager, retrieval + legends (F) | 0 leaks on the blind-NPC suite | else bug in retrieval/filter |
 | 5. Depth | parked | lazy worldgen, factions with goals, long history | an emergent chain of 3+ events without the player | else weak faction model |
