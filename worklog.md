@@ -10,6 +10,30 @@
 > since iter-5).
 
 ---
+iter-37 · 2026-09-01 · dir-2 — the eventless-stretch instrument +
+the pacing A/B (iter-37-eventless-stretch; the owner's "continue per
+the plan" session call, the phase-3 backlog's top un-gated item)
+- core/metrics.py: `eventless_beat_stretches` — the phase-3 exit
+criterion's instrument (tale-gate scene events over the
+`urgencies.beat_ticks` window axis, `(prev_beat, beat]` windows);
+`IMPORTANCE_ORDER` moved to core/log.py (the chronicle imports it —
+one owner of the ordering, D-024); scripts/balance_harness.py:
+`--pacing on|off` (the clock-off arm = a linted pack variant minus
+`director.pacing` under output/, requires `--directors on`) + the
+stretch block. Measured 1000 seeds: both arms byte-identical per
+seed (every day1_full run ends in PEAK — the stagnation path never
+fires; D-065's "un-tuned" note answered), max stretch 1, quiet
+1000/1000 (the (360,720] phase-boundary window).
+- Scope: 13 files (code 5 + tests 2 + pack 1 + the doc-sync set —
+the iter-36 phase-opening precedent).
+- KI#61 (loop comment named the never-read
+`director.stagnation.beat_ticks`; the dead pack key deleted, zero
+behavior change) + KI#62 (worklog order/cap drift — bg-3 moved to
+its chronological position, the over-cap pair evicted) opened +
+closed. Tests 708→727 (+13 metrics, +6 harness incl. the seed-125
+D-065-record pin), ruff clean. D-066; TEST_PLAN §6 the contract
+owner.
+---
 iter-36 · 2026-09-01 · phase-3 opening — the pacing clock (DIR-1)
 (iter-36-pacing-clock; the owner's "continue per the plan" call —
 phase 3 opens on it, the iter-31 precedent)
@@ -51,6 +75,33 @@ precedent)
   gate-review doc-sync set (the iter-26 scope precedent); iter-28
   evicted per the cap.
 
+---
+bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
+(bg-3-briefer-spike; the owner re-supplied large/medium/small-dense)
+- scripts/df_briefer.py (new): the D-055 pattern over foreign canon —
+  the POV brief (assignment frame kept apart from the subject's
+  records; in-window records via the participant prefix scan; plus
+  fields merged, main precedence; collision-aware display keys; the
+  60-record cap with the loud marker) + the closed-vocabulary reply
+  gate (supported/contradicted/beyond_records/unknown_*; prose never
+  parsed; the anchor shape gate) + the ≤2-regen ladder with the dry
+  floor (VALIDATION_SPEC §7 ported) + the retrieval stress (quantile
+  figure spread, double-build byte-compare). Live session: 4
+  TAXONOMY §5-anchored cases, 31 claims — 19 supported / 12
+  deliberate-probe non-supported, 0 honest misfires; 1 regen
+  recovery, 1 exhaustion; the malformed-anchor probe caught at the
+  gate.
+- Numbers (TECH_NOTES §3.3, the AC's owner): 3 worlds re-imported
+  (counts reproduce §3.1/§3.2 row-for-row), brief p50 ≈ 2.9 KB /
+  p99 ≤ 15.6 KB on GB-scale exports, scan p99 ≤ 0.2 ms, build p99 ≤
+  4.4 ms, determinism PASS ×3 — the "tens of MB" worry is dead;
+  KB-scale briefs, sub-ms retrieval. The stress report name gains
+  the world label (large/medium share the region2 stem).
+- Tests 673→697 (+24 tests/test_df_briefer.py — brief/closure
+  blind-spot/verdict families/shape-gate/regen ladder/dry floor/
+  cases/stress), ruff clean. Doc-sync: TECH_NOTES §3.3, TASKS bg-3
+  done, STATUS header+FAQ+Next, AGENT_NAVIGATION §1, README; iter-27
+  evicted per the cap.
 ---
 iter-34 · 2026-09-01 · owner-requested planning-layer audit
 (iter-34-planning-audit; doc-only — fresh owner request per D-022)
@@ -229,74 +280,17 @@ costs (bg-4-cost-notes)
 ---
 iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
 (iter-30-perf1-profile)
-- scripts/profile_harness.py: day1_full's story steps + grid-aligned
-  360-tick waits to the tick target; clean + cProfile double-run with
-  a same-process byte-compare (held at 10k ticks — a T1-family probe,
-  not a cross-environment claim); read-side timings
-  (read_log/fold/metrics/chronicle) over the finished log; outputs to
-  output/perf_*.txt (gitignored runtime artifact).
-- Numbers (owner TECH_NOTES §8): 10k ticks ≈ 0.01–0.02 s write-side
-  (~9.8k events/s), read side ≈ 0.017 s; cost is event-linear (quiet
-  ticks near-free), schema validation the per-event hot spot (~24
-  validate calls/event); "seconds, not minutes" met with ~3 orders of
-  margin — no structural work warranted at v0.1 scale. 43% of the
-  7-day stream is status_decayed (the T7 noise floor in raw counts).
-- 629 green, ruff clean (count unchanged — the balance_harness
-  no-test precedent; the architecture closure test guards the import).
-  6 files (script + the doc sync set); iter-20 evicted per the cap.
-  Docs: TECH_NOTES §8, TASKS, STATUS, AGENT_NAVIGATION §1.
+- (deleted at iter-37 per the one-in/one-out cap + the KI#62
+  cap restore; history in git.)
 ---
 iter-29 · 2026-08-31 · pack-2 — the arson-on-ashes door check
 (iter-29-pack2-spot-available; the owner's finish-phase-1 directive,
-polish item 3)
-- The closed precondition set gains `spot_available` (the 15th test):
-  the target location holds an unburning spot of the declared layer —
-  the exact condition the ignite resolver keys on (door and resolver
-  agree by construction); the arson requires carry it, the `layer`
-  param is lint-checked against rules.json transitions (a typo would
-  KeyError mid-run). INV-3 caught my own first docstring draft ("door
-  guard"/"arson" — setting words) — rewritten, the stoplist holds.
-- Arson on a destroyed or fully-burning location is now an
-  intent_rejected no-op (failed_test target.spot_available) — the
-  door-outcome vocabulary's fourth axis; the iter-24 no-ignition
-  success (a success that pretended the world changed) is closed. The
-  seed-41 corpus probe flipped with it (renamed + prose/last_event_type
-  updated + a provenance note in the fixture's `source`).
-- 626→629 green, ruff clean. 8 files (core intent/pack + actions +
-  corpus + the doc sync set); D-061; iter-19 evicted per the cap.
-  Docs: INTENT_SCHEMA §3 (the test row), TASKS, STATUS, DECISIONS
-  (transiently 33/30 — collapse due at the phase-2→3 gate per D-034).
+- (deleted at iter-37 per the one-in/one-out cap + the KI#62
+  cap restore; history in git.)
 ---
 iter-28 · 2026-08-31 · tune-2 — the crime cascade renders on the
 cards (iter-28-tune2-card-markers)
 - (deleted at iter-35 per the one-in/one-out cap; history in git.)
----
-bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
-(bg-3-briefer-spike; the owner re-supplied large/medium/small-dense)
-- scripts/df_briefer.py (new): the D-055 pattern over foreign canon —
-  the POV brief (assignment frame kept apart from the subject's
-  records; in-window records via the participant prefix scan; plus
-  fields merged, main precedence; collision-aware display keys; the
-  60-record cap with the loud marker) + the closed-vocabulary reply
-  gate (supported/contradicted/beyond_records/unknown_*; prose never
-  parsed; the anchor shape gate) + the ≤2-regen ladder with the dry
-  floor (VALIDATION_SPEC §7 ported) + the retrieval stress (quantile
-  figure spread, double-build byte-compare). Live session: 4
-  TAXONOMY §5-anchored cases, 31 claims — 19 supported / 12
-  deliberate-probe non-supported, 0 honest misfires; 1 regen
-  recovery, 1 exhaustion; the malformed-anchor probe caught at the
-  gate.
-- Numbers (TECH_NOTES §3.3, the AC's owner): 3 worlds re-imported
-  (counts reproduce §3.1/§3.2 row-for-row), brief p50 ≈ 2.9 KB /
-  p99 ≤ 15.6 KB on GB-scale exports, scan p99 ≤ 0.2 ms, build p99 ≤
-  4.4 ms, determinism PASS ×3 — the "tens of MB" worry is dead;
-  KB-scale briefs, sub-ms retrieval. The stress report name gains
-  the world label (large/medium share the region2 stem).
-- Tests 673→697 (+24 tests/test_df_briefer.py — brief/closure
-  blind-spot/verdict families/shape-gate/regen ladder/dry floor/
-  cases/stress), ruff clean. Doc-sync: TECH_NOTES §3.3, TASKS bg-3
-  done, STATUS header+FAQ+Next, AGENT_NAVIGATION §1, README; iter-27
-  evicted per the cap.
 ---
 iter-27 · 2026-08-31 · tune-1 — the rest action + the story-critical
 importance hook (iter-27-tune1-rest-importance)

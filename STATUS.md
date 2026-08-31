@@ -1,26 +1,26 @@
 # STATUS — canonsim
 
-Iteration: iter-36 (`iter-36-pacing-clock` — the owner's "continue
-per the plan" session call; phase 3 opens on it, the iter-31
-precedent; a code iteration — the doc-only streak resets) · Phase: 3
-(Director) **OPEN — the pacing clock landed (DIR-1, D-065)** · Date:
-2026-09-01 · Scope: the L4D peak/rest clock over narrative entropy:
-the per-run RAMP/PEAK/REST/STAGNATION machine (`core/director.py` —
-pack-gated, advanced once per beat, functional transitions), pack
-data `director.pacing` (peak_floor 25 / min_peak 1 / min_rest 1) +
-lint (peak strictly above the stagnation floor, positive minima);
-stagnation releases fire only outside PEAK/REST — REST is the
-post-climax breathing room the flat v0.1 detector lacked (it
-re-injected the beat after a climax); explicit triggers never consult
-the clock (D-005 — causality is not pacing); a pack without the
-block runs the v0.1 minimal pair byte-identically. Zero fixture regen:
-the committed fixtures carry no stagnation releases (the corpus's
-one live director release is the explicit document_check, ungated by
-design; the day1_full ON log is unchanged — all three beats sit in
-PEAK, the M1=0.417/M2=0.500 gate record holds). KI#60 opened +
-closed (phases.md §2 stale OPEN header after the iter-35 closure);
-KI#55–59 deleted per AGENTS §5 (closed iter-34, two iterations
-past). Tests 697→708, ruff clean.
+Iteration: iter-37 (`iter-37-eventless-stretch` — the owner's
+"continue per the plan" session call; the phase-3 backlog's top
+un-gated item, dir-2; a code iteration) · Phase: 3 (Director)
+**OPEN — DIR-1 landed (D-065), DIR-2 landed (D-066)** · Date:
+2026-09-01 · Scope: the exit criterion's instrument —
+`core.metrics.eventless_beat_stretches` (tale-gate scene events over
+the `urgencies.beat_ticks` window axis, `(prev_beat, beat]` windows,
+trailing partial dropped; `IMPORTANCE_ORDER` moved to `core/log.py`,
+the chronicle imports it — one owner of the ordering) + the harness
+`--pacing on|off` A/B (the clock-off arm = a linted pack variant
+minus `director.pacing` under `output/`; zero core changes; requires
+`--directors on`). Measured (1000 seeds, day1_full, director on):
+both arms byte-identical per-seed — max stretch 1, one 1-beat
+stretch per run (the (360,720] phase-boundary window), quiet
+1000/1000; the clock is inert on this pack+script (every run ends
+in PEAK — the stagnation path never fires; D-065's "un-tuned"
+note answered). KI#61 (loop comment named the never-read
+`director.stagnation.beat_ticks` — dead pack key deleted, zero
+behavior change) + KI#62 (worklog order/cap drift: bg-3 below the
+tombstones, 11 live entries) opened + closed. Tests 708→727, ruff
+clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -45,6 +45,18 @@ past). Tests 697→708, ruff clean.
 ## Active KIs
 
 (none open.)
+
+- KI#61 · doc drift: `core/loop.py`'s beat-cycle comment claimed
+  pack-tunability via `director.stagnation.beat_ticks` — a key no
+  code reads (the loop reads `urgencies.beat_ticks`, DIRECTOR_SPEC
+  §7 the owner; the pack carried both, equal by coincidence) ·
+  CLOSED iter-37 (comment corrected; the dead key deleted from
+  rules.json — zero behavior change, T1 pins byte-identity).
+- KI#62 · doc drift: worklog order/cap — bg-3's entry sat below the
+  tombstones (out of newest-first order, inserted at the tail), the
+  file at 11 live entries over the §6 cap · CLOSED iter-37 (moved
+  to its chronological position between iter-35 and iter-34; the
+  over-cap pair iter-30/iter-29 evicted with the iter-37 insertion).
 
 - KI#60 · doc drift: `docs/blueprint/phases.md` §2 header still read
   "OPEN (iter-31, D-062)" after iter-35 closed phase 2 (ROADMAP §2's
@@ -378,14 +390,16 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36, D-065 — the pacing clock landed).** The
-arc lives in `docs/TASKS.md`'s phase-3 backlog: `dir-2` (the
-eventless-stretch instrument — the balance-harness pacing A/B, the
-exit criterion "a scene without an event < N beats" made measurable)
-is the next un-gated item; then `dir-3` (L4D2 layered thresholds +
-PEAK_CLIMAX). The doc-only streak is reset — iter-36 carried code.
+**Phase 3 is OPEN (iter-36/37 — the pacing clock D-065 + the
+exit-criterion instrument D-066 landed).** The arc lives in
+`docs/TASKS.md`'s phase-3 backlog: `dir-3` (L4D2 layered thresholds
++ PEAK_CLIMAX) is the next un-gated item. The dir-2 measurement's
+honest finding: the clock is inert on day1_full (every run ends in
+PEAK — a measurable delta needs a gate-protocol script set that
+walks the world into quiet; recorded in D-066, a phase-gate
+question, not forced).
 
-1. **Phase-3 arc** (TASKS backlog): dir-2 → dir-3 → dir-4 (the
+1. **Phase-3 arc** (TASKS backlog): dir-3 → dir-4 (the
    director-evolution run), drama-1 (the Paradox event grammar),
    social-1/2/arc-1 (the social-depth run).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +

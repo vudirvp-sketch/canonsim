@@ -91,9 +91,14 @@ pacing clock landed first (DIR-1, D-065 — the L4D peak/rest donor:
 the per-run RAMP/PEAK/REST/STAGNATION machine over narrative entropy,
 `director.pacing` pack data + lint, REST = the post-climax breathing
 room, explicit triggers ungated; contract owner `docs/DIRECTOR_SPEC.md`
-§5). 708 tests green, ruff clean, zero fixture regen. Next: the
-phase-3 arc (`dir-2` — the eventless-stretch instrument, then `dir-3`
-layered thresholds + PEAK_CLIMAX; `docs/TASKS.md`) + the owner-gated
+§5); the exit-criterion instrument landed iter-37 (DIR-2, D-066 —
+`core.metrics.eventless_beat_stretches` + the harness `--pacing
+on|off` A/B; measured 1000 seeds: both arms byte-identical — every
+day1_full run ends in PEAK, the clock inert on this pack+script; max
+stretch 1; contract owner `docs/TEST_PLAN.md` §6). 727 tests green,
+ruff clean, zero fixture regen. Next: the phase-3 arc (`dir-3`
+layered thresholds + PEAK_CLIMAX, then `dir-4` multi-channel;
+`docs/TASKS.md`) + the owner-gated
 set (parse-2, engine-1).
 
 ## For AI agents (primary audience)

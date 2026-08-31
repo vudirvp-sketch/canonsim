@@ -26,6 +26,7 @@ from typing import Any, Final
 
 from core.clock import Clock
 from core.fold import Projection, fold, initial_projection
+from core.log import IMPORTANCE_ORDER as _IMPORTANCE_ORDER
 from core.log import EventRecord, read_log
 from core.pack import Pack
 from core.rng import RngBank
@@ -41,7 +42,6 @@ __all__ = [
     "replay_report",
 ]
 
-_IMPORTANCE_ORDER: Final = ("low", "medium", "high")
 _POSITION_PROP: Final = "position"
 
 

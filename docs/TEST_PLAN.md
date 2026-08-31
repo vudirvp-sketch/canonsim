@@ -144,7 +144,7 @@ The crosswalk lives in `TEST_PLAN.md` (this file). The per-hole
 diagnostics are the donor techniques in §1's donor column — the UAP is
 a design lens, not a runtime component.
 
-## 6. balance-1 harness (KI#4 close)
+## 6. balance-1 harness (KI#4 close) + the DIR-2 pacing A/B (iter-37)
 
 The 1000-sim distribution harness (`scripts/balance_harness.py`,
 committed as a script — D-044; operator tooling per D-046): runs the
@@ -155,7 +155,8 @@ spot count at burnout, M5 share, and emergent-chain count. Validates
 that `rules.json` thresholds are tuned, not guessed. Uses T1
 determinism (no new infra). Output:
 `output/balance_<N>_seed<S>_<on|off>.txt` (gitignored runtime
-artifact — never committed).
+artifact — never committed; a `…_nopacing.txt` suffix marks the
+clock-off arm).
 
 The harness is the iter-6 close of KI#4: it exists, it runs, the
 observations accumulated across iter-2..5 are recorded as concrete
@@ -164,3 +165,36 @@ distributions, not feel. The kill-criteria in `MVP_SCOPE.md` §16
 "The director produces noise instead of causal complications") are
 operationalized as M3 mean ≥ 2, M1 share non-trivial, M2 release
 non-zero.
+
+**The DIR-2 pacing A/B (phase 3, iter-37 — the exit criterion's
+measurement).** `--pacing on|off` (default on; requires
+`--directors on` — a disabled director never consults the clock):
+the on arm runs the committed pack, the off arm runs the same pack
+minus `director.pacing` — a pack without the block runs the v0.1
+minimal pair (the pack's own declaration is the gate, INV-3) —
+materialized once per invocation under the gitignored
+`output/pack_nopacing/` and linted on load. The instrument is
+`core.metrics.eventless_beat_stretches(pack_rules, events, gate=…)` —
+a pure function of the log + pack data (D-042): a **scene event** is an
+event at or above the pack's tale gate (`Grammar.tale_gate`, the
+same gate the chronicle renders by — the importance rule owns the
+signal/noise split); a **beat window** is `(previous_beat, beat]`
+over the `urgencies.beat_ticks` axis the loop actually fires
+(DIRECTOR_SPEC §7; an event at a beat's tick belongs to that beat's
+window; the trailing partial window is dropped). A stretch is a
+maximal run of consecutive eventless windows; the table reports
+`eventless_max_stretch` stats, the quiet-run share, and the
+length histogram — the numbers the phase-3 exit criterion ("a
+scene without an event < N beats", ROADMAP §2) reads at its gate.
+
+Measured (iter-37, 1000 seeds 100–1099, day1_full, director on):
+**both arms identical, per-seed byte-identical (10 probed) — max
+stretch 1, one stretch per run (the (360,720] phase-boundary window
+between the theft ladder and the fire chain), quiet 1000/1000.**
+The clock's measurable delta on this pack+script is exactly zero:
+every run ends in PEAK (the double-steal suspicion holds entropy ≥
+peak_floor 25 through the last beat; the stagnation path never
+fires, so REST never gates anything — the D-065 "un-tuned numbers"
+note gets its answer). A measurable delta needs a script/pack that
+walks the world into quiet — a phase-3 gate-protocol script-set
+question, recorded in D-066, not forced here.

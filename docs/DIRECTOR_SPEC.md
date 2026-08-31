@@ -5,7 +5,10 @@
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
 > ≤300 lines. The pacing clock (DIR-1) landed iter-36 (phase 3, D-065);
-> the phase-3 refinements still recorded-not-built live in §11.
+> the phase-3 refinements still recorded-not-built live in §11. The
+> clock's measured impact (DIR-2, iter-37: both pacing arms
+> byte-identical on day1_full — the stagnation path never fires there)
+> is owned by `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 

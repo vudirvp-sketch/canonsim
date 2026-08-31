@@ -181,7 +181,8 @@ class Simulator:
         )
         # iter-4: the director + the beat cycle (decay / urgencies /
         # entropy). The beat fires at clock crossings (phase boundaries
-        # by default; pack-tunable via `director.stagnation.beat_ticks`).
+        # by default; pack-tunable via `urgencies.beat_ticks` —
+        # DIRECTOR_SPEC §7 owns the beat axis; KI#61).
         # Director-off keeps the buffer seeding (D-005 hygiene) but
         # suppresses releases — the T8 A/B baseline.
         self._director = Director(

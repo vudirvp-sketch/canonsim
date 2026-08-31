@@ -210,8 +210,7 @@
     "triggers": ["time", "place", "threshold"],
     "stagnation": {
       "entropy_floor": 5,
-      "per_npc_cooldown_beats": 2,
-      "beat_ticks": [360, 720, 1080]
+      "per_npc_cooldown_beats": 2
     },
     "pacing": {
       "peak_floor": 25,

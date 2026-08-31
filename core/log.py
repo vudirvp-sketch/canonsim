@@ -29,6 +29,7 @@ __all__ = [
     "EventLogWriter",
     "EventRecord",
     "Fidelity",
+    "IMPORTANCE_ORDER",
     "Importance",
     "KnowledgeRecord",
     "LoggedKnowledgeRecord",
@@ -44,6 +45,11 @@ __all__ = [
 Channel = Literal["saw", "heard", "told", "inferred"]
 Fidelity = Literal["exact", "partial", "vague"]
 Importance = Literal["low", "medium", "high"]
+
+# The single owner of the importance ordering (the `Importance` literal's
+# order): the chronicle gate and the eventless-stretch metric both compare
+# against it (D-024 — one owner, linked, never restated).
+IMPORTANCE_ORDER: Final[tuple[str, ...]] = ("low", "medium", "high")
 
 _EVENT_ID_PREFIX: Final = "ev"
 

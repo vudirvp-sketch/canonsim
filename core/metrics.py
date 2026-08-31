@@ -27,11 +27,12 @@ from statistics import mean, median
 from typing import Any
 
 from core.fold import Projection
-from core.log import EventRecord
+from core.log import IMPORTANCE_ORDER, EventRecord
 
 __all__ = [
     "MetricReport",
     "emergent_chains",
+    "eventless_beat_stretches",
     "metrics_report",
     "m1_cross_system_share",
     "m2_hooks_fired_ratio",
@@ -284,6 +285,96 @@ def emergent_chains(
                 (event.id, len(chain), [c.type for c in chain])
             )
     return chains
+
+
+# -- eventless beat-stretches (DIR-2, phase 3; the exit criterion) ------------
+
+
+def eventless_beat_stretches(
+    pack_rules: Mapping[str, Any],
+    events: Sequence[EventRecord],
+    *,
+    gate: str,
+) -> list[int]:
+    """Lengths (in beats) of the maximal eventless beat-stretches in one log.
+
+    The phase-3 exit criterion is "a scene without an event < N beats"
+    (`docs/ROADMAP.md` §2) — this function is its measurement (DIR-2): the
+    length of every maximal run of consecutive beat windows that contain no
+    scene event. A **scene event** is an event whose `importance` ranks at
+    or above `gate` — the same tale gate the chronicle renders by
+    (`templates.json::tale_gate.min_importance`, T7's noise-floor law: the
+    importance rule owns the signal/noise split; per-beat bookkeeping —
+    `status_decayed`, `suspicion_changed` — and world texture stay low and
+    never break a stretch). A **beat window** is `(previous_beat, beat]`
+    over the beat axis the loop actually fires: the pack's
+    `urgencies.beat_ticks` intraday offsets repeated every
+    `time.ticks_per_day` (DIRECTOR_SPEC §7; tick-0 offsets fire at day
+    boundaries from day 1, never at the run-start tick). An event at
+    exactly a beat's tick belongs to that beat's window (a rotation fired
+    *at* the beat is that beat's scene). The axis stops at the last beat
+    at or before the final event's tick — the trailing partial window (the
+    run ended before the next beat fired) carries no beat evidence and is
+    dropped.
+
+    Pure function of the log + pack data (D-042, the Mesa `DataCollector`
+    inverted); the balance harness folds it across the pacing A/B
+    (`scripts/balance_harness.py --directors on --pacing on|off`, the
+    instrument's contract owner `docs/TEST_PLAN.md` §6). Deterministic by
+    construction — no RNG, no wall-clock, iteration via the sorted
+    offsets and a single ordered walk of the scene ticks (INV-2).
+
+    Returns the stretch lengths in beat order (e.g. `[1, 3]` — one
+    one-beat quiet, later a three-beat quiet); `[]` when the log has no
+    events, the pack declares no beats, or no window is ever eventless.
+    """
+    if gate not in IMPORTANCE_ORDER:
+        raise ValueError(
+            f"gate must be one of {list(IMPORTANCE_ORDER)}, got {gate!r}"
+        )
+    offsets = sorted(
+        int(t) for t in pack_rules.get("urgencies", {}).get("beat_ticks", ())
+    )
+    if not offsets or not events:
+        return []
+    ticks_per_day = int(pack_rules["time"]["ticks_per_day"])
+    last_t = max(event.t for event in events)
+    # the beat axis: day_index*day + offset, tick 0 itself never a beat
+    # (the run-start tick; the loop's `_first_beat` law); sorted by
+    # construction (day_index ascending dominates, offsets sorted within)
+    beats = [
+        day_index * ticks_per_day + offset
+        for day_index in range(0, last_t // ticks_per_day + 1)
+        for offset in offsets
+        if 0 < day_index * ticks_per_day + offset <= last_t
+    ]
+    rank = {value: idx for idx, value in enumerate(IMPORTANCE_ORDER)}
+    gate_rank = rank[gate]
+    scene_ticks = sorted(
+        event.t for event in events if rank[event.importance] >= gate_rank
+    )
+    stretches: list[int] = []
+    quiet_run = 0
+    prev_boundary = 0  # the run start
+    ptr = 0
+    for beat in beats:
+        while ptr < len(scene_ticks) and scene_ticks[ptr] <= prev_boundary:
+            ptr += 1
+        if ptr < len(scene_ticks) and scene_ticks[ptr] <= beat:
+            # a scene event lands in (prev_boundary, beat] — the quiet
+            # run ends here (recorded if non-empty); consume every scene
+            # tick inside this window
+            while ptr < len(scene_ticks) and scene_ticks[ptr] <= beat:
+                ptr += 1
+            if quiet_run:
+                stretches.append(quiet_run)
+            quiet_run = 0
+        else:
+            quiet_run += 1
+        prev_boundary = beat
+    if quiet_run:
+        stretches.append(quiet_run)
+    return stretches
 
 
 # -- the one-shot report -----------------------------------------------------

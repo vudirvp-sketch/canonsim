@@ -19,6 +19,7 @@ from core.fold import fold, initial_projection
 from core.log import EventRecord, LoggedKnowledgeRecord, StateChange
 from core.metrics import (
     emergent_chains,
+    eventless_beat_stretches,
     m1_cross_system_share,
     m2_hooks_fired_ratio,
     m3_causal_chain_lengths,
@@ -430,3 +431,171 @@ def test_day1_full_off_run_meets_t8_thresholds() -> None:
     assert report.m5_non_pc_share > 0
     # M3 mean ≥ 2 (one event, then another = failure)
     assert report.m3_mean >= 2.0
+
+
+# -- eventless beat-stretches (DIR-2, phase 3 — the exit criterion) -----------
+
+
+def _rules(offsets: list[int], day: int = 1440) -> dict[str, Any]:
+    """A minimal rules dict carrying only what the beat axis reads."""
+    return {"time": {"ticks_per_day": day}, "urgencies": {"beat_ticks": offsets}}
+
+
+def test_eventless_stretches_empty_events() -> None:
+    assert eventless_beat_stretches(PACK.rules, [], gate="medium") == []
+
+
+def test_eventless_stretches_no_beats_declared() -> None:
+    """A pack without `urgencies.beat_ticks` fires no beats — no windows,
+    no stretches (the degenerate config the loop also allows)."""
+    events = [_ev("ev_0000", 0, "wait", PLAYER, None)]
+    assert eventless_beat_stretches(_rules([]), events, gate="medium") == []
+    assert eventless_beat_stretches(
+        {"time": {"ticks_per_day": 1440}}, events, gate="medium"
+    ) == []
+
+
+def test_eventless_stretches_none_when_every_window_has_a_scene_event() -> None:
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 50, "take", PLAYER, "ev_0000", importance="medium"),
+        _ev("ev_0002", 150, "take", PLAYER, "ev_0001", importance="medium"),
+        _ev("ev_0003", 200, "wait", PLAYER, "ev_0002"),  # the log end
+    ]
+    assert eventless_beat_stretches(_rules([100, 200]), events, gate="medium") == []
+
+
+def test_eventless_stretches_counts_consecutive_quiet_windows() -> None:
+    """The core semantics: a maximal run of consecutive eventless windows
+    is one stretch measured in beats."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 50, "take", PLAYER, "ev_0000", importance="medium"),
+        _ev("ev_0002", 300, "wait", PLAYER, "ev_0001"),  # log end
+    ]
+    # windows: (0,100] scene at 50; (100,200] quiet; (200,300] quiet → [2]
+    assert eventless_beat_stretches(_rules([100, 200, 300]), events, gate="medium") == [2]
+
+
+def test_eventless_stretches_two_separate_runs() -> None:
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 100, "take", PLAYER, "ev_0000", importance="medium"),
+        _ev("ev_0002", 420, "take", PLAYER, "ev_0001", importance="medium"),
+        _ev("ev_0003", 500, "wait", PLAYER, "ev_0002"),  # log end
+    ]
+    # windows: (0,100] scene; (100,200] quiet → 1; (200,300] quiet → 2;
+    # (300,400] quiet → 3; (400,500] scene at 420 → recorded [3]
+    assert eventless_beat_stretches(_rules([100, 200, 300, 400, 500]), events, gate="medium") == [3]
+    # a later scene event splits the quiet run: stretch recorded mid-walk
+    events.append(_ev("ev_0004", 320, "take", PLAYER, "ev_0001", importance="medium"))
+    # now (300,400] has the scene at 320 → the run [2] closes, then
+    # (400,500] has 420 → no trailing quiet → [2]
+    assert eventless_beat_stretches(_rules([100, 200, 300, 400, 500]), events, gate="medium") == [2]
+
+
+def test_eventless_stretches_only_gate_rank_events_break_the_quiet() -> None:
+    """The gate law: low-importance bookkeeping (status decay, texture
+    waits) never breaks a stretch — the importance rule owns the
+    signal/noise split, the metric follows the tale gate."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 50, "status_decayed", "npc_guard_01", "ev_0000"),
+        _ev("ev_0002", 120, "wait", PLAYER, "ev_0001"),
+        _ev("ev_0003", 200, "wait", PLAYER, "ev_0002"),  # log end
+    ]
+    assert eventless_beat_stretches(_rules([100, 200]), events, gate="medium") == [2]
+    # the same events at gate=low: every window has a scene event → []
+    assert eventless_beat_stretches(_rules([100, 200]), events, gate="low") == []
+
+
+def test_eventless_stretches_event_at_the_beat_tick_belongs_to_that_window() -> None:
+    """A rotation fired AT the beat tick is that beat's scene — the
+    window is (previous_beat, beat], lower bound exclusive."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 100, "watch_change", "npc_guard_01", "ev_0000",
+            importance="medium"),
+        _ev("ev_0002", 200, "wait", PLAYER, "ev_0001"),  # log end
+    ]
+    # window (0,100] holds the scene at 100; (100,200] quiet → [1]
+    assert eventless_beat_stretches(_rules([100, 200]), events, gate="medium") == [1]
+
+
+def test_eventless_stretches_day_wrapped_beat_axis() -> None:
+    """The beat axis repeats daily: the night gap 1080 → 1800 is one
+    window, not three; the day boundary multiplies by ticks_per_day."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 400, "arson", PLAYER, "ev_0000", importance="high"),
+        _ev("ev_0002", 2000, "wait", PLAYER, "ev_0001"),  # log end
+    ]
+    # beats: 360, 720, 1080, 1800 (2520 > 2000 excluded)
+    # windows: (0,360] quiet=1; (360,720] scene 400; (720,1080] quiet=1;
+    # (1080,1800] quiet=2 → [1, 2]; trailing (1800,2000] partial — dropped
+    assert eventless_beat_stretches(PACK.rules, events, gate="medium") == [1, 2]
+
+
+def test_eventless_stretches_trailing_partial_window_dropped() -> None:
+    """The run ended before the next beat fired — the trailing partial
+    window carries no beat evidence and never counts."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 250, "wait", PLAYER, "ev_0000"),  # log end
+    ]
+    # beats ≤ 250: only 100 (the next beat is 1000); window (0,100] quiet
+    # → [1]; the trailing (100,250] partial would have made it 2 — dropped
+    assert eventless_beat_stretches(_rules([100], day=1000), events, gate="medium") == [1]
+
+
+def test_eventless_stretches_tick_zero_offset_fires_at_day_boundaries() -> None:
+    """The loop's `_first_beat` law: tick 0 is the run start, never a
+    beat; a 0 offset fires at day boundaries from day 1 on."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 1600, "wait", PLAYER, "ev_0000"),  # log end
+    ]
+    # beats: 500 (day 0), 1000 (day 1 offset 0), 1500 (day 1 offset 500) —
+    # never tick 0; three quiet windows → [3]
+    assert eventless_beat_stretches(_rules([0, 500], day=1000), events, gate="medium") == [3]
+
+
+def test_eventless_stretches_rejects_unknown_gate() -> None:
+    events = [_ev("ev_0000", 0, "wait", PLAYER, None)]
+    try:
+        eventless_beat_stretches(PACK.rules, events, gate="nonsense")
+    except ValueError as exc:
+        assert "nonsense" in str(exc)
+    else:
+        raise AssertionError("unknown gate must fail loudly")
+
+
+def test_eventless_stretches_log_shorter_than_first_beat() -> None:
+    """A run that ends before the first beat fires: no beat axis inside
+    the log's span — no windows, no stretches."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None),
+        _ev("ev_0001", 100, "wait", PLAYER, "ev_0000"),  # log end
+    ]
+    assert eventless_beat_stretches(PACK.rules, events, gate="medium") == []
+
+
+def test_day1_full_stretches_are_short() -> None:
+    """The exit-criterion family smoke on the gate playscript: the
+    committed day1_full seed keeps every eventless stretch ≤ 1 beat (the
+    theft ladder hands off to the fire chain inside one beat)."""
+    from core.log import read_log
+    from core.loop import Simulator, load_playscript
+
+    script = load_playscript(REPO / "tests" / "playscripts" / "day1_full.json")
+    log = Path("/tmp/csm_metrics_dir2.jsonl")
+    if log.exists():
+        log.unlink()
+    sim = Simulator(
+        PACK, script["seed"], log, SCHEMA, commit="0000000",
+        director_enabled=True,
+    )
+    sim.run_playscript(script)
+    _, events = read_log(log, SCHEMA)
+    stretches = eventless_beat_stretches(PACK.rules, events, gate="medium")
+    assert max(stretches, default=0) <= 1

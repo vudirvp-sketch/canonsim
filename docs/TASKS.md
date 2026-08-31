@@ -15,7 +15,8 @@
 > validity over 51 combined utterances, 0 honest misfires; the parse corpus
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
 > Phase 3 (Director) OPEN — iter-36, the owner's "continue per the plan"
-> call (the iter-31 precedent; the pacing clock landed first, D-065).
+> call (the iter-31 precedent; the pacing clock landed first, D-065;
+> the exit-criterion instrument landed iter-37, D-066).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -27,9 +28,13 @@
   peak/rest donor), `director.pacing` pack data + lint, clock-gated
   stagnation releases (REST = post-climax breathing room), explicit
   triggers ungated (D-005).
-- `dir-2` · the eventless-stretch instrument — the balance-harness
-  pacing A/B (the exit criterion's measurement: the distribution of
-  eventless beat-stretches with the clock on/off).
+- `dir-2` · the eventless-stretch instrument — **done (iter-37, D-066)**:
+  `core.metrics.eventless_beat_stretches` (the exit criterion's
+  measurement — tale-gate scene events over the `urgencies.beat_ticks`
+  window axis) + the harness `--pacing on|off` A/B (the clock-off arm
+  = a linted pack variant minus `director.pacing`); 1000 seeds
+  measured — both arms byte-identical, max stretch 1 (the clock is
+  inert on day1_full; detail: D-066 + `docs/TEST_PLAN.md` §6).
 - `dir-3` · layered thresholds (L4D2 three-intensity rule) +
   `PEAK_CLIMAX` (the boss-beat rule — DIRECTOR_SPEC §11).
 - `dir-4` · multi-channel policies (threat / social / ambient).
