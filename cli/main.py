@@ -11,14 +11,16 @@ Batch subcommands (one process, one job):
     python -m cli replay <log.jsonl>
 
 Interactive session (no subcommand) — `look` and `wait` are two of the
-12 actions driven as single-step intents through the same front door as
+13 actions driven as single-step intents through the same front door as
 playscript steps; `play` loads a script into the live session; `narrate`
 drives the mediator beat cycle over an EXTERNAL narrator (the
-agent-in-the-loop door, D-055 — the repo stays LLM-free):
+agent-in-the-loop door, D-055 — the repo stays LLM-free); `say` hands
+free text to the EXTERNAL parser (phase 2, mode C, D-062 — same law:
+the repo stays LLM-free):
 
     look · wait N · play <script> · narrate [<reply.json> | dry] ·
-    chronicle · state <entity> · replay <log> · directors on|off ·
-    seed [<n>] · help · quit
+    say <text> · say apply <reply.json> · chronicle · state <entity> ·
+    replay <log> · directors on|off · seed [<n>] · help · quit
 
 The session is one opened Simulator (`core/loop.py`): every command
 feeds steps through `run_steps` and the world moves only through the
@@ -38,6 +40,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from cli.mediator import BeatResult, Mediator, MediatorError
+from cli.parser import ParseError, ParserDoor, ParseResult
 from core.director import policy_from_rules
 from core.fold import fold, initial_projection
 from core.log import LogError, next_log_path, read_log
@@ -66,6 +69,10 @@ _SESSION_HELP = """commands:
   narrate <reply>   apply a narrator reply JSON {prose, texture_delta?,
                     proposal?} — the beat cycle runs
   narrate dry       close the beat without a narrator (template prose)
+  say <text>        hand free text to the external parser (mode C):
+                    emit the parse call (output/parser/parse_NNNN.md)
+  say apply <file>  apply the parser's reply JSON {intent | question |
+                    no_intent} — the intent feeds the front door
   chronicle         print the tale so far (re-rendered from the log)
   state <entity>    full history + current state of one entity
   replay <log>      validate + fold another log (T2), report
@@ -119,6 +126,7 @@ class Session:
         self._directors_on = director_enabled
         self._shown_lines = 0  # chronicle lines already printed
         self._mediator: Mediator | None = None
+        self._parser: ParserDoor | None = None
         self._start(seed)
 
     def _start(self, seed: int) -> None:
@@ -132,6 +140,7 @@ class Session:
         self._sim.open()
         self._shown_lines = 0
         self._mediator = None  # the ledger dies with its session (D-049)
+        self._parser = None  # the parser door shares that ledger
 
     @property
     def seed(self) -> int:
@@ -162,6 +171,7 @@ class Session:
                 "directors": self._cmd_directors,
                 "seed": self._cmd_seed,
                 "narrate": self._cmd_narrate,
+                "say": self._cmd_say,
             }[command]
         except KeyError:
             print(f"unknown command {command!r} — try 'help'")
@@ -170,7 +180,7 @@ class Session:
             handler(args)
         except (
             RunnerError, LogError, RenderError, GrammarError,
-            MediatorError, ValueError,
+            MediatorError, ParseError, ValueError,
         ) as exc:
             print(f"error: {exc}")
         except FileNotFoundError as exc:
@@ -311,19 +321,78 @@ class Session:
             f"{result.regens_used}/{result.max_regens}]"
         )
 
-    # -- the world-touching path ---------------------------------------------
+    # -- the parser door (mode C, phase 2 — D-062) -----------------------------
 
-    def _run_steps(self, steps: list[dict]) -> None:
-        """Feed steps, then show the fresh chronicle tail + scene card."""
-        self._sim.run_steps(steps)
+    def _parser_door(self) -> ParserDoor:
+        """The session's mode-C door, sharing the mediator's ledger (one
+        scene ledger per session, D-049: the narrator establishes texture,
+        the player's words reference it)."""
+        if self._parser is None:
+            mediator = self._mediator_or_start()
+            self._parser = ParserDoor(
+                self._sim, self._pack, self._schema, self._log_path,
+                mediator.ledger, OUTPUT_DIR / "parser",
+            )
+        return self._parser
+
+    def _cmd_say(self, args: list[str]) -> None:
+        if not args:
+            print("usage: say <free text> | say apply <reply.json>")
+            return
+        door = self._parser_door()
+        if args[0] == "apply":
+            if len(args) != 2:
+                print("usage: say apply <reply.json>")
+                return
+            result = door.apply_reply(Path(args[1]))
+            self._print_parse(result)
+            return
+        path = door.emit_call(" ".join(args))
+        reply = path.with_name(
+            path.stem.replace("parse", "parse_reply") + ".json"
+        )
+        print(f"[parser call: {path}]")
+        print(
+            f"[write a JSON reply {{intent | question | no_intent}} at {reply}, "
+            f"then: say apply {reply}]"
+        )
+
+    def _print_parse(self, result: ParseResult) -> None:
+        """Show the cycle's outcome: an intent feeds the world (fresh
+        chronicle tail + scene card), a question or note surfaces to the
+        player — never a silent drop."""
+        if result.status == "intent":
+            self._print_world_delta()
+            print(
+                f"[parsed intent fed: {result.step['intent']}",
+                f"{result.events} events"
+                + (f", pinned {', '.join(result.pinned)}" if result.pinned else "")
+                + "]"
+            )
+            return
+        if result.status == "question":
+            print(f"[the parser asks: {result.text}]")
+            return
+        print(f"[no intent: {result.text}]")
+
+    def _print_world_delta(self) -> None:
+        """The fresh chronicle tail + scene card (the shared step-output
+        printer — the world moved)."""
         text = _session_log(self._pack, self._schema, self._log_path)
         lines = text.splitlines()
         for line in lines[self._shown_lines :]:
             print(line)
         self._shown_lines = len(lines)
-        header, events = read_log(self._log_path, self._schema)
+        _header, events = read_log(self._log_path, self._schema)
         projection = fold(events, initial_projection(self._pack.entities))
         print(render_scene_card(projection, self._pack, seed=self._seed))
+
+    # -- the world-touching path ---------------------------------------------
+
+    def _run_steps(self, steps: list[dict]) -> None:
+        """Feed steps, then show the fresh chronicle tail + scene card."""
+        self._sim.run_steps(steps)
+        self._print_world_delta()
 
 
 # -- batch subcommands -------------------------------------------------------

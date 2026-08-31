@@ -53,12 +53,27 @@ laundering + unique_slot golden pins complete the 8-reason refusal
 vocabulary). The iter-11a audit hardened the door: conditional take
 templates render the promoted slot noun (the texture-path chronicle
 line), unique-slot claims survive promotion, canon-slot overlap
-includes pack-modeled fields (KI#39..41). 453 tests green, ruff clean,
-golden fixtures byte-identical. Next: the narrator LLM call itself — an
-owner-gated
-checkpoint (AGENTS §8; local inference is a runtime-dependency
-stop-and-confirm item); track B (bg-2..bg-4) queries the bg-1 SQLite
-sink (`docs/TECH_NOTES.md` §3.2, D-051).
+includes pack-modeled fields (KI#39..41). **Phase 1 gate: PASS**
+(iter-26, D-058 — the owner's quality-first close): 109 live beats
+over 10 narrate sessions with **0 canon violations**, the phase-1
+regression corpus at 105 distilled cases replayed through the real
+mediator cycle, T1 byte-identity + the T8 single-factor A/B re-run;
+the narrator landed agent-in-the-loop at iter-12 (D-055 — the
+dev-time engine is the owner's assistant over a call/reply file
+contract; the repo stays LLM-free, INV-4 unchanged) and the polish
+menu closed iter-27–29 (tune-1/tune-2/pack-2, D-059–D-061).
+**Phase 2 (parser, mode C) is open** (iter-31, D-062 — the owner's
+call): the mode-C boundary's LLM-free half — the grammar snapshot
+(pack verbs ∪ addressable nouns; ghost interactivity structurally
+impossible), the parse call/reply file contract with the closed
+reply {intent | question | no_intent} gated at the boundary, the
+pin law, the `say`/`say apply` session door; contract owner
+`docs/PARSER_SPEC.md`. 654 tests green, ruff clean, golden fixtures
+byte-identical. Next: parse-1 validation-beats sessions over the
+`say` door (the ≥90% valid-intents exit criterion rides the session
+volume); track B (bg-2/bg-3) queries the bg-1 SQLite sink
+(`docs/TECH_NOTES.md` §3.2, D-051) when the owner supplies the DF
+exports.
 
 ## For AI agents (primary audience)
 
@@ -80,7 +95,7 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
 | `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; `docs/TECH_NOTES.md` §3.2, D-051) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 

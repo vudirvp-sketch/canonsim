@@ -9,11 +9,52 @@
 
 ## Track A — main (simulator, no LLM)
 
-> Phase 0 closed (gate PASS, iter-6; audit-clean iter-6a). Phase 1
-> (narrator over the log) is open — architecture owner:
-> `docs/blueprint/phases.md` §1; spec triggers fire at phase-1 start
-> (`docs/SPECS_BACKLOG.md`). INV-4 holds until the narrator-boundary
-> iteration explicitly opens it (AGENTS §8 owner checkpoint).
+> Phase 0 closed (gate PASS, iter-6; audit-clean iter-6a). Phase 1 closed
+> (gate PASS, iter-26, D-058; the polish menu tune-1/tune-2/pack-2 landed
+> iter-27–29). Phase 2 (parser, mode C) is OPEN — opened iter-31 by the
+> owner's call; architecture owner: `docs/blueprint/phases.md` §2;
+> boundary contract owner: `docs/PARSER_SPEC.md`. INV-4 holds unchanged:
+> the parser is EXTERNAL at dev-time over a file contract (D-062, the
+> D-055 pattern); the runtime-engine decision stays owner-gated
+> (TECH_NOTES §1).
+
+### iter-31 · phase-2 parser door — done (D-062)
+
+The phase-2 opening iteration (the owner's "start phase 2" call): the
+mode-C boundary's LLM-free half, mirroring the narrator boundary
+(D-055) on the player's free text. Landed: the **grammar snapshot**
+(`brief/parser.py` — the pack's verbs with pack-derived field
+constraints ∪ the addressable nouns, canon entities + live texture
+entries; ghost interactivity structurally impossible), the **parse
+call/reply file contract** (`output/parser/parse_<N>.md` ↔
+`parse_reply_<N>.json` — utterance + grammar + protocol; the closed
+reply {intent | question | no_intent}), the **boundary shape gate**
+(off-grammar = loud ParseError, never a feed — the world never moves
+on a malformed parse; off-grammar targets point at the disambiguation
+path), the **pin law** (`SceneLedger.pin` — blueprint §1(a)'s first
+consumer: the reference IS the pin; a failed attempt keeps it
+live+pinned), the `say` / `say apply` session door sharing the
+session's one ledger (D-049), promotion wiring identical to the
+narrator path, and `docs/PARSER_SPEC.md` (the trigger-fired spec).
+KI#53 (phase-state doc drift: the stale Track-A phase header + the
+README Status tail, stale since iter-11a) fixed. 629→654 green, ruff
+clean. Detail: worklog iter-31 + `docs/PARSER_SPEC.md` + D-062.
+
+### Phase-2 parser backlog
+
+- `parse-1` validation-beats sessions: live `say` cycles across
+  seeds/utterance families (the narrator-session recipe applied to the
+  parse door); the reply-alternative mix tallied; findings extend a
+  parse-reply regression corpus (the narrator-beats fixture's family).
+  The ≥90% valid-intents gate review rides the session volume
+  (PARSER_SPEC §6; ROADMAP §2 owns the exit criterion).
+- `parse-2` (owner-gated) disambiguation buttons + multi-intent
+  utterances — deferred with a frontend consumer / live-session
+  evidence (PARSER_SPEC §7).
+- `engine-1` (owner-gated) the runtime inference engine decision
+  (llama.cpp + GBNF; TECH_NOTES §1) — unlocked by the phase-1 gate,
+  waits on the owner; the dev-time external parser carries phase 2
+  until then.
 
 ### iter-12 · the mediator session loop — done (D-055)
 
@@ -271,6 +312,22 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-31 · 2026-09-01 · phase-2 parser door (iter-31-phase2-parser-door;
+  the owner's "start phase 2" call): the mode-C boundary's LLM-free
+  half — the grammar snapshot (pack verbs with derived field
+  constraints ∪ addressable nouns: canon entities + live texture
+  entries; ghost interactivity structurally impossible), the
+  parse call/reply file contract with the closed reply
+  {intent | question | no_intent} shape-gated at the boundary
+  (off-grammar = loud, never a feed), the pin law
+  (`SceneLedger.pin`, blueprint §1(a)'s first consumer), the
+  `say`/`say apply` session door sharing the session ledger,
+  promotion wiring identical to the narrator path; PARSER_SPEC
+  written (trigger fired); KI#53 (phase-state doc drift: TASKS'
+  header + README Status) fixed.
+  629→654 green, ruff clean. Detail: worklog iter-31 +
+  `docs/PARSER_SPEC.md` + D-062.
 
 - bg-4 · 2026-08-31 · cost notes (bg-4-cost-notes): the prior-art
   LLM-simulation cost section — `docs/TECH_NOTES.md` §9 (single

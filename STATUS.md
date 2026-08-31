@@ -1,29 +1,29 @@
 # STATUS — canonsim
 
-Iteration: bg-4 (`bg-4-cost-notes`) · Phase: 1 closed (gate PASS,
-D-058) · Date: 2026-08-31 · bg-4 closed: the prior-art LLM-simulation
-cost section (`docs/TECH_NOTES.md` §9, single owner) — both papers
-verified against the arXiv full texts. Park 2023 publishes no cost
-table; its own statement is "thousands of dollars in token credits"
-for 25 agents × 2 game days (gpt3.5-turbo, sequential); the
-ref file's "~$70 / Table 2 / §6.4" claim was drift — KI#51, fixed.
-The independent estimate chain (Zhao et al. 2023, Lyfe Agents,
-Appendix F: conservative $2,000 → ≈$25 per agent per human hour at
-10× game speed) and Park 2024 (1,052 participants, GPT-4o; no total
-budget published — the 59-agent retrieval analysis alone ran
-1,281,040 GPT-4o-mini queries) are recorded with the honest reading:
-prior art prices the per-agent-per-step hot loop (N×M×L); our
-phase-1 LLM bill is beat-proportional (2-call steady state,
-VALIDATION_SPEC §7) with the whole N×M simulation measured near-free
-on the deterministic core (§8) — reference points for the split, not
-a cross-over claim. KI#52 (stray 678-line pre-iter-26 `TASKS.md`
-snapshot at the repo root, born in the iter-27 squash commit,
-unreferenced, over cap) opened + closed: deleted. Doc-only streak:
-1 of 2 (iter-30 carried code; the doc-loop alarm fires at 2 — the
-next iteration must carry code or a fresh owner directive). 629
-green, ruff clean (no code touched). The owner-gated remainder is
-unchanged: tune-3 (the three-way fork), st-2, corpus consolidation;
-phase 2 opens on the owner's call.
+Iteration: iter-31 (`iter-31-phase2-parser-door`) · Phase: 2 (parser,
+mode C) OPEN — the owner's call ("if all phase-1 work is done, start
+phase 2"; the phase-1 gate PASSed at iter-26/D-058, the polish menu
+tune-1/tune-2/pack-2 landed iter-27–29, and the remainder — tune-3,
+st-2, corpus consolidation — is owner-gated with no declared
+candidate, not exit criteria) · Date: 2026-09-01 · iter-31 landed the
+mode-C boundary's LLM-free half (D-062, the D-055 pattern on the
+player's free text): the grammar snapshot (pack verbs with pack-derived
+field constraints ∪ addressable nouns — canon entities + live texture
+entries; ghost interactivity structurally impossible, blueprint §2),
+the parse call/reply file contract (`output/parser/parse_<N>.md` ↔
+`parse_reply_<N>.json`; the closed reply {intent | question |
+no_intent}), the boundary shape gate (off-grammar = loud ParseError,
+never a feed — the world never moves on a malformed parse), the pin law
+(`SceneLedger.pin`, blueprint §1(a)'s first consumer: the reference IS
+the pin), the `say`/`say apply` session door sharing the session's one
+ledger (D-049), promotion wiring identical to the narrator path; the
+trigger-fired `docs/PARSER_SPEC.md` written from the build. KI#53 (the
+stale Track-A phase header — "Phase 1 is open" after the iter-26 gate)
+opened + closed. Doc-only streak: 0 (iter-31 carries code). 654 green
+(629→654, +25 parser suites), ruff clean. The phase-2 arc: parse-1
+validation-beats sessions (live `say` cycles, the reply-alternative
+mix, the ≥90% gate review rides the volume); the owner-gated set is
+unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,6 +47,17 @@ phase 2 opens on the owner's call.
 
 ## Active KIs
 
+- KI#53 · phase-state doc drift (two files): `docs/TASKS.md`'s Track-A
+  header still said "Phase 1 … is open" after the phase-1 gate closed
+  (iter-26/D-058 — the last update predates the gate-review sweep), and
+  `README.md`'s Status paragraph still ended at iter-11a ("Next: the
+  narrator LLM call itself") — stale through 15+ iterations incl. the
+  phase-1 close (family: a phase-state header nobody re-reads rots
+  silently) · opened + CLOSED iter-31: TASKS' header rewritten to the
+  phase-2 state; README's Status tail rewritten (phase-1 gate PASS +
+  the D-055 narrator boundary + phase-2 open, D-062) + the repo-map
+  row gains `brief/parser.py`; the phase-state single owner is this
+  file's header — TASKS/README link, never restate.
 - KI#51 · `docs/ref/generative_agents.md` carried a fabricated Park
   2023 cost citation ("Table 2, §6.4, ~$70 for a 2-day 25-agent run" —
   neither the table nor the section exists; the paper says "thousands
@@ -209,6 +220,28 @@ phase 2 opens on the owner's call.
   t=413 — the distilled case must carry the fire cascade inside the
   same batch structure (session 10's seed-93 cases).
 
+- **Live parse session in the sandbox (phase-2 mode-C recipe; iter-31).**
+  Same session as `narrate`: `python -m cli`, the parse door is
+  `say <free text>` → `output/parser/parse_NNNN.md` (utterance +
+  grammar + protocol; gitignored runtime), the operator composes the
+  reply JSON — exactly ONE of `{"intent": {"kind", "target"?,
+  "fields"?}}` (on-grammar: kind a listed verb, target a listed noun,
+  only listed fields with listed values; the texture field copies a
+  live texture entry's `{entry, scope, slot, value}` verbatim, no
+  target — one path per intent), `{"question": "..."}` (uncertainty
+  is asked, never guessed), or `{"no_intent": "..."}` — and applies
+  via `say apply <reply>`. The gate is loud: off-grammar output
+  raises ParseError at the boundary (printed, nothing feeds, the
+  cycle stays open — fix the reply file and re-apply); a
+  door-rejected attempt still commits `intent_rejected` (attempts are
+  facts — parse validity ≠ world legality); a texture reference pins
+  its entry BEFORE the feed (the reference IS the pin — a failed
+  attempt keeps it live+pinned). The parse corpus recipes mirror the
+  narrator's: a runner script outside the repo
+  (`/home/z/my-project/scripts/iterNN_runner.py`, Rule 9) reading
+  each call, hand-composing replies, harvesting `[parsed intent fed`
+  lines. Contract owner: `docs/PARSER_SPEC.md`.
+
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
   (L13/L14). Build clauses: `docs/blueprint/phase0.md` §1/§2/§6.
@@ -328,41 +361,34 @@ gate.
 
 ## Next step
 
-**The owner answered the phase-2-vs-polish call (2026-08-31 chat):
-finish everything phase-1 first — "если полировка нужна - делай, нужно
-закончить все что относится к первой фазе". tune-1 (iter-27, D-059),
-tune-2 (iter-28, D-060), and pack-2 (iter-29, D-061) landed; what
-remains:
+**Phase 2 is OPEN (the owner's 2026-09-01 call: "if all phase-1 work is
+done, start phase 2").** The mode-C boundary's LLM-free half landed
+iter-31 (D-062; `docs/PARSER_SPEC.md`); the phase-2 arc, in order:
 
-1. **`tune-3`** — no declared candidate (a three-way owner call: a
-   v0.2 NPC-movement source / declared-but-dormant / phase-5
-   spatial); the dormant stance stands as documented until the owner
-   picks. `st-2` and the corpus consolidation pass stay owner-gated
-   backlog (not phase-1 exit criteria — the gate passed without
-   them).
-2. Phase 2 (Parser, mode C: ≥90% valid intents; disambiguation
-   questions on uncertainty) opens on the owner's call — the
-   code-carrying polish menu (tune-1/tune-2/pack-2) is done; what
-   remains (tune-3, st-2, corpus consolidation) carries no declared
-   candidate and waits on the owner.
-3. **Unlocked by the gate** (owner's call when): the runtime-engine
-   decision (llama.cpp + GBNF, TECH_NOTES §1) and the `bg-6` SoW
-   audit (ROADMAP §6 lifts with the gate; the D-055 deferral stands
-   until the owner calls it).
+1. **`parse-1`** — validation-beats sessions over the `say` door (the
+   narrator-session recipe applied to parsing): live cycles across
+   seeds/utterance families, the reply-alternative mix tallied, a
+   parse-reply regression corpus grown (the narrator-beats fixture's
+   family); the ≥90% valid-intents exit criterion (ROADMAP §2) is
+   measured per PARSER_SPEC §6 — boundary-accepted intents per
+   utterance, world outcomes never counted as parse failures.
+2. **`parse-2`** (owner-gated) — disambiguation buttons, multi-intent
+   utterances (PARSER_SPEC §7's deferrals; a frontend consumer or
+   live-session evidence is the trigger).
+3. **Owner-gated, unchanged from phase 1:** tune-3 (the three-way
+   NPC-movement fork — the dormant stance stands until the owner
+   picks), st-2 (identity persistence), the phase-1 corpus
+   consolidation pass, `engine-1` (the runtime inference engine
+   decision — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external
+   parser carries phase 2 until then), `bg-6` (SoW audit, D-055
+   deferral), `qa-1` mypy + `ci-1` GitHub Actions.
 4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
-   (briefer spike) query the SQLite sink (they need the owner's DF
-   export files — `dfworlds/` stays outside the repo by design);
-   bg-4 (cost notes) — DONE bg-4 (`docs/TECH_NOTES.md` §9, figures
-   verified against the arXiv full texts; KI#51 fixed in the same
-   pass). With bg-4 closed, the un-gated and un-blocked backlog is
-   EMPTY — the next move is the owner's (the gated set above, the
-   DF exports for bg-2/bg-3, or the bg-6 deferral). Infra backlog:
-   `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1` DONE
-   iter-30 (TECH_NOTES §8 — no structural work warranted at v0.1
-   scale, the gate for anything structural now has data). `pack-3`
-   (the owner's Sci-Fi setting sketches) is parked in TASKS until
-   the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
-   ("phase-0 gate passed") fired at iter-6 but was never scheduled —
-   the just-in-time reading (write specs FROM experiment results at
-   phase start, not ahead of it) defers it to the owner's phase-2
-   call.
+   (briefer spike) still need the owner's DF export files
+   (`dfworlds/` stays outside the repo by design); bg-4 DONE. The
+   un-gated, un-blocked backlog is EMPTY — the next move after
+   parse-1-class work is the owner's. `pack-3` (Sci-Fi sketches)
+   stays parked until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s
+   SPECS_BACKLOG trigger ("phase-0 gate passed") fired at iter-6,
+   was never scheduled, and the just-in-time reading keeps deferring
+   it: write specs FROM experiment results at need, not ahead —
+   phase-2's owner call did not request it; it stays parked.

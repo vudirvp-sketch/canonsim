@@ -10,6 +10,38 @@
 > since iter-5).
 
 ---
+iter-31 · 2026-09-01 · phase-2 parser door — the mode-C boundary's
+LLM-free half (iter-31-phase2-parser-door; the owner's start-phase-2
+call — phase 1 closed at D-058, polish done iter-27–29)
+- brief/parser.py (pure — no RNG, no I/O, no wall-clock): the grammar
+  snapshot (pack verbs with pack-derived field constraints: ticks
+  positive-int, method enum, near spot-list from the actor's folded
+  position, texture live-entry reference; ∪ addressable nouns — canon
+  entities + live ledger entries, ghost interactivity structurally
+  impossible); parse_call (utterance + grammar + protocol,
+  byte-deterministic); parse_reply_from_mapping — the closed
+  {intent | question | no_intent} gate, loud ParseError on
+  off-grammar output, never a feed.
+- cli/parser.py ParserDoor + the `say`/`say apply` session door
+  (shares the session's ONE ledger, D-049): emit (retire window +
+  scene sync + document) → apply (gate against the CURRENT snapshot →
+  pin → feed one step through the front door → promotions wired like
+  the narrator path). The pin law: `SceneLedger.pin` — blueprint
+  §1(a)'s first consumer (the reference IS the pin; a failed attempt
+  keeps it live+pinned — seed-probed both ways; un-pinning does not
+  exist). Attempts are facts: world-impossible intents commit
+  intent_rejected.
+- docs/PARSER_SPEC.md (the trigger-fired phase-2 spec: boundary,
+  snapshot, documents, pin/feed, the ≥90% measurement — parse
+  validity ≠ world legality) + SPECS_BACKLOG row; TASKS phase-2
+  opening + the parse-1/parse-2/engine-1 backlog; STATUS
+  header/FAQ/Next; AGENT_NAVIGATION §1; README Status/repo-map; D-062;
+  KI#53 (phase-state doc drift: TASKS' stale phase header + the README
+  Status tail) opened + closed.
+- 629→654 green (+25: snapshot/call-document/gate/pin/door-e2e/CLI
+  wiring), ruff clean. 7 code+spec+test files + the doc-sync set
+  (the iter-12 boundary precedent); iter-22 evicted per the cap.
+---
 bg-4 · 2026-08-31 · cost notes — the prior-art LLM-simulation
 costs (bg-4-cost-notes)
 - TECH_NOTES §9 (new; single owner of the figures): Park 2023
@@ -267,46 +299,7 @@ arson-after-theft chain (iter-23-validation-beats-8)
 ---
 iter-22 · 2026-08-31 · validation beats — session 7, the theft half
 under the presence machinery (iter-22-validation-beats-7)
-- Live narrate session 7 (seed 54, 11 beats, 24 supported /
-  1 refused-and-caught, 0 canon violations): the pre-steal arrival
-  snapshot pins the cards BEFORE the crime (guard carries purse,
-  barkeep carries club, drunkard's intoxication 50 renders the
-  `drunk` marker; the drunk→guard fear 40 + maid→barkeep trust 70
-  pair tokens render as directed pair lines — the second seeded pair
-  axis now state-claimed, complement to session 3's drunk→guard
-  probe under seed 7).
-- A successful first steal moves the purse silently — no
-  witnessed_steal_failure, no suspicion, crime_status stays
-  `unknown` (the silent-steal vs failed-steal fork in the steal
-  ladder; session 4 took the failed half). The watch rotation
-  carries the standard crime cascade; the expectation_violation
-  event is claimable by id+type (complement to session 5's
-  fire-event-by-id); post-inference purse_missing is positively
-  claimable for both guards (inferred/exact for the victim,
-  told/partial — one fidelity step down — for the relief guard,
-  the transfer_decay_steps=1 law live at the beat level).
-- The suspicion axis is state-claimable for both guards even
-  though no card marker renders it (the tune-2 boundary —
-  observability ≠ claimability; the projection holds the value
-  the brief does not surface). The second steal after watch
-  rotation returns intent_rejected (target moved to guardroom —
-  co-location precondition fails, distinct from session 4's
-  second-steal-success case where the guard stayed put); the
-  stolen purse rides a plain move (no pursuit) to the backyard
-  (KI#46's contract in a non-pursuit context); the
-  witness-cannot-know-purse_missing refusal pins the inference
-  boundary (the barkeep never held the purse-on-himself
-  expectation — token_absent).
-- Corpus 59→70 (+11 seed-54 cases); 564→575 green, ruff clean.
-  4 files (fixture + the 3-doc sync set — the iter-18 scope
-  precedent); iter-12 evicted per the cap; iter-21's missing
-  TASKS one-liner backfilled (the iter-21 commit skipped it);
-  TASKS 584→611 — the §6.1 cruft pass ran (iter-7/8/8a/8c/8g/4a
-  trimmed, no substance cut) — substance remains: the iter-22 +
-  iter-21 one-liners carry load-bearing session findings (the
-  silent-steal fork, the expectation_violation id+type probe, the
-  tune-2 re-pin); AGENTS §6.1 substance-vs-cruft law: stays over,
-  recorded here.
+- (deleted at iter-31 per the one-in/one-out cap; history in git.)
 ---
 iter-21 · 2026-08-31 · validation beats — session 6, the alarm cascade
 (iter-21-validation-beats-6)

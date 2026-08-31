@@ -376,6 +376,26 @@ class SceneLedger:
             return self._replace_status(index, PROMOTED, cause_event_id)
         raise DeltaError(f"{entry_id}: no such ledger entry")
 
+    def pin(self, entry_id: str) -> bool:
+        """Structural pin by entry id (blueprint §1(a), first wired by the
+        phase-2 parser path): an Intent through the door referencing the
+        entry pins it — the reference IS the pin, so a door-rejected
+        attempt still pins (a failure promotes nothing; the entry stays
+        live+pinned). Active → pinned (idempotent: already pinned → no
+        change); not live or unknown → False — the caller withdraws, the
+        attempt never reached the world. One-way like every ledger
+        transition; un-pinning does not exist."""
+        for index, entry in enumerate(self._entries):
+            if entry.id != entry_id:
+                continue
+            if entry.status == PINNED:
+                return True
+            if entry.status == ACTIVE:
+                self._replace_status(index, PINNED, None)
+                return True
+            return False
+        return False
+
     def withdrawals(self, pending: Mapping[str, str]) -> tuple[str, ...]:
         """The texture-OCC mirror: of `pending` (intent id → texture entry
         id), return the intent ids to WITHDRAW — every one whose entry is
