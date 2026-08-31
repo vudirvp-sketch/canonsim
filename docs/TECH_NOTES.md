@@ -256,6 +256,79 @@ unchanged). Schema and policy, single owner `scripts/df_import.py`
   owner): 120 quantile-spread entries over 16 target types from a sink
   DB; determinism law as above (pure function of DB content).
 
+### 3.3 bg-3 briefer spike — the POV mini-briefer + reverse validation (`scripts/df_briefer.py`)
+
+"Tell battle X from figure Y's POV, knowing only Y's own records" — the
+D-055 pattern ported to foreign canon: the repo side stays LLM-free (the
+brief builder, the reply gate, the regen ladder — INV-4 untouched, this
+is track B); the operator is the external narrator over
+`output/df_briefer/call_<N>.md` ↔ `reply_<N>.json` (gitignored runtime;
+the call counter derives from the files on disk — the session state IS
+the file set). Commands: `cases` (deterministic battle/beast-attack
+listing, richest in-battle POV), `call` (emit the POV brief),
+`apply` (validate a reply; drive the ladder), `stress` (the retrieval
+stress test). Regression: `tests/test_df_briefer.py`.
+
+- **The POV brief**: the assignment frame (battle X's curator facts —
+  name, span, place, scale, recorded outcome, parent war — explicitly
+  labeled NOT the subject's knowledge) + the subject card (race, birth,
+  death, record count) + the in-window records (the `event_participant`
+  prefix scan; plus fields merged with main precedence; collision-aware
+  display keys — main `woundee_hfid` vs plus `woundee` both keep raw
+  keys when they collide) + the nearest outside-window records (≤8).
+  Bounded: the 60-record cap with the loud `[truncated: ...]` marker —
+  BRIEF_SPEC's never-a-silent-drop law, ported.
+- **The epistemic model** (the honest reading of "Y's own records"):
+  the closure = Y's participant-index events + the hfid-shaped
+  co-participants + the sites those events reference. The `hfid1`/
+  `hfid2` reputation blind spot is inherited by law (TAXONOMY §4.2) —
+  closure, brief, and validator all agree with the sink's lift rule.
+- **Reverse validation**: the reply is `{anchor, prose, claims}`; prose
+  is NEVER parsed (the structural neutralization law — facts ride
+  structured claims only). Each claim gets one closed-vocabulary
+  verdict: `supported` | `contradicted` (in reach, value differs —
+  evidence: the actual value) | `beyond_records` (in the sink, outside
+  the closure — the POV privacy violation this spike counts as
+  invented) | `unknown_event/figure/site` (not in the sink at all).
+  The invented-facts count = every non-supported claim. Any refusal
+  emits the regen call — same brief, refusal notes riding the protocol
+  (≤2, VALIDATION_SPEC §7 ported verbatim; `regen_count` is
+  first-class, never silent); exhaustion renders the DRY floor (the
+  subject's own in-window records as template lines — the L12 ladder's
+  floor analog). Malformed replies raise at the shape gate (loud, exit
+  3, nothing validated, never a repair).
+- **Live session** (the operator as dev-time narrator, TAXONOM
+  §5-anchored cases on the large world): 4 cases / 6 validated replies
+  + 1 malformed probe = 31 claims — 19 supported, 12 non-supported,
+  ALL 12 deliberate probes (beyond_records×7, unknown_event/figure/
+  site×3, contradicted×2 incl. the type-mismatch family), 0 honest
+  misfires; 1 refusal→regen→accept recovery; 1 exhaustion (2 regens +
+  the dry floor); the anchor-mismatch probe caught at the shape gate.
+- **Retrieval stress** (quantile spread over the mention distribution,
+  64 figures per world; brief cap 60; the double-build byte-compare
+  probe — content determinism; timings environment-specific: sandbox
+  venv, CPython 3.12.14, single thread, 2026-09-01). Worlds: large /
+  medium / small-dense (the owner re-supplied these three; the fourth
+  §3.1 world, "small", was not — its DB is 1:1 rebuildable from
+  §3.1's recipe):
+
+  | | events | figures | rec/fig p50/p99/max | scan p99/max ms | build p50/p99/max ms | brief p50/p99/max B | trunc |
+  |---|---|---|---|---|---|---|---|
+  | large | 1,191,388 | 98,001 | 7 / 72 / 1,157 | 0.2 / 1.6 | 1.1 / 4.4 / 15.0 | 2,890 / 11,804 / 13,805 | 1/64 |
+  | medium | 1,220,772 | 105,898 | 7 / 56 / 2,975 | 0.1 / 4.6 | 1.0 / 3.9 / 36.5 | 3,015 / 8,662 / 13,836 | 1/64 |
+  | sm-dense | 933,476 | 76,441 | 7 / 73 / 1,644 | 0.1 / 3.1 | 1.0 / 4.2 / 23.7 | 2,919 / 14,761 / 15,587 | 1/64 |
+
+  Determinism PASS on all three; `stress_<world>_<stem>.txt` reports
+  (gitignored; the world label disambiguates — large and medium share
+  the `region2-00500-01-01` stem). **Reading: the task's original
+  "tens of MB" worry is dead — briefs are KB-scale (p50 ≈ 2.9 KB) on
+  GB-scale exports, the per-figure retrieval is sub-millisecond at
+  p99, and the brief cost is flat across worlds.** The F7 warning
+  stands: the briefs read DRY (macro-dense, micro-empty) — this
+  validated briefer mechanics, exactly the honest expectation;
+  micro-event interestingness is measured on our own chronicle, never
+  on DF.
+
 ## 4. Python determinism recipe
 
 - `PYTHONHASHSEED=0` (env, CI, docs); randomness flows only through the

@@ -250,36 +250,36 @@ directive, polish item 2)
   format), TASKS, STATUS, DECISIONS (transiently 32/30 — collapse due
   at the phase-2→3 gate per D-034).
 ---
+bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
+(bg-3-briefer-spike; the owner re-supplied large/medium/small-dense)
+- scripts/df_briefer.py (new): the D-055 pattern over foreign canon —
+  the POV brief (assignment frame kept apart from the subject's
+  records; in-window records via the participant prefix scan; plus
+  fields merged, main precedence; collision-aware display keys; the
+  60-record cap with the loud marker) + the closed-vocabulary reply
+  gate (supported/contradicted/beyond_records/unknown_*; prose never
+  parsed; the anchor shape gate) + the ≤2-regen ladder with the dry
+  floor (VALIDATION_SPEC §7 ported) + the retrieval stress (quantile
+  figure spread, double-build byte-compare). Live session: 4
+  TAXONOMY §5-anchored cases, 31 claims — 19 supported / 12
+  deliberate-probe non-supported, 0 honest misfires; 1 regen
+  recovery, 1 exhaustion; the malformed-anchor probe caught at the
+  gate.
+- Numbers (TECH_NOTES §3.3, the AC's owner): 3 worlds re-imported
+  (counts reproduce §3.1/§3.2 row-for-row), brief p50 ≈ 2.9 KB /
+  p99 ≤ 15.6 KB on GB-scale exports, scan p99 ≤ 0.2 ms, build p99 ≤
+  4.4 ms, determinism PASS ×3 — the "tens of MB" worry is dead;
+  KB-scale briefs, sub-ms retrieval. The stress report name gains
+  the world label (large/medium share the region2 stem).
+- Tests 673→697 (+24 tests/test_df_briefer.py — brief/closure
+  blind-spot/verdict families/shape-gate/regen ladder/dry floor/
+  cases/stress), ruff clean. Doc-sync: TECH_NOTES §3.3, TASKS bg-3
+  done, STATUS header+FAQ+Next, AGENT_NAVIGATION §1, README; iter-27
+  evicted per the cap.
+---
 iter-27 · 2026-08-31 · tune-1 — the rest action + the story-critical
-importance hook (iter-27-tune1-rest-importance; the owner's
-finish-phase-1 directive opening the polish menu)
-- The D-045(b) knob: `importance.score.story_critical_event` (+2) +
-  `importance.story_critical_events` (19 event types, lint-closed
-  against the template vocabulary); `pack_importance` takes the event
-  type (all 12 emit sites: actions, transitions, crime, knowledge,
-  states, rotations); the tale gate follows low→medium (templates.json)
-  — the RULE owns the signal/noise split, the gate is not the knob.
-  Evidence: day1_full seed 125 OFF renders 47 events → 14 tale lines —
-  the theft ladder, both handovers, both briefings, the fire chain;
-  zero decay/wariness/wait lines (the T7 noise floor: 27/47 events were
-  repetition). Pinned by the tale-split regression test.
-- The KI#4 counter-play: `rest` (13th action, 60 ticks, fatigue −30)
-  as pack data — the new `recuperate` resolver applies the action's
-  `status_effects` (projection-read `from_`, scale-clamped, zero-delta
-  skip); pack lint refuses a typo'd story-critical entry, a
-  status_effects block on a non-recuperate resolver, an undeclared
-  axis, a zero delta. The 1000-sim baseline re-run IDENTICAL (importance
-  is an annotation; the canon stream untouched); T1 fixture
-  byte-identical (smoke = move/wait only); the mediator dry floor now
-  distinguishes "no tale-worthy lines" from "no new canon events"
-  (the medium gate made the old wording a lie).
-- 610→619 green, ruff clean. 17 files (two subsystems + the doc sync
-  set — the iter-15/20 scope precedent; one task ID per TASKS tune-1);
-  D-059; KI#49 deleted per AGENTS §5 (closed iter-25); iter-17 evicted
-  per the cap. Docs synced: MVP_SCOPE §2/§7/§9, EVENT_SCHEMA §6 +
-  schema description (non-breaking), INTENT_SCHEMA §6, TEST_PLAN T7,
-  AGENT_NAVIGATION §1, TASKS, STATUS, DECISIONS (transiently 31/30 —
-  collapse due at the phase-2→3 gate per D-034).
+importance hook (iter-27-tune1-rest-importance)
+- (deleted at bg-3 per the one-in/one-out cap; history in git.)
 ---
 iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
 collapse (iter-26-phase1-gate)

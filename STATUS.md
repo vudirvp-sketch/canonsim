@@ -1,28 +1,20 @@
 # STATUS — canonsim
 
-Iteration: iter-34 (`iter-34-planning-audit`, owner-requested audit
-call — fresh request per D-022; **doc-only: streak 1 of 2**, the alarm
-does not fire; the next iteration must carry code or a fresh owner
-directive) · Phase: 2 (parser, mode C) OPEN, unchanged · Date:
-2026-09-01 · Scope: the planning layer vs the post-phase-1-gate
-reality — the owner's call after noticing the blueprint had not moved
-for two days of heavy iterations. **Verdict: the planning core is
-sound — no architecture revisited, no decisions to reopen; the drift
-was staleness, not rot.** Fixed (KI#55–#59, all closed this
-iteration): ROADMAP §2 gains the phase State column (0/1 CLOSED, 2
-OPEN, 3–6 parked — the single owner of closed/open) + §6 SoW gating
-actualized (the pre-gate ban expired at D-058); blueprint/phases.md §2
-rewritten from the pre-D-062 plan to the landed architecture (the
-grammar is PACK data — the old "12-action fixed union" text predated
-`rest`, iter-27 — the dev-time parser is external over the file
-contract; 35/35 corpus validity) + §1 closure/D-055 notes + §7 perf-1
-verdict + §4 the bg-2 "DF history is epistemology-empty" donor line;
-BLUEPRINT §0 count 34→35 (df_design, iter-8d, never synced) + LOD-1's
-bg-2 clause; **the stray root TASKS.md actually deleted — the bg-4
-KI#52 deletion never landed in git** (KI#55, the KI#42 family: a
-reported pass is drift until the commit shows it; the git-command
-block must carry `git rm` for deletions — archives cannot delete).
-673 green, ruff clean (no code touched); doc-sync full.
+Iteration: bg-3 (`bg-3-briefer-spike` — the un-gated backlog pick; the
+owner re-supplied the three world exports) · Phase: 2 (parser, mode C)
+OPEN, unchanged · Date: 2026-09-01 · Scope: the Track-B briefer spike
+over the sink DB — the POV mini-briefer, the closed-vocabulary reverse
+validation, the ≤2-regen ladder, the retrieval stress test. **Landed:
+`scripts/df_briefer.py` + `tests/test_df_briefer.py` (673→697 green,
+ruff clean); the live-session and 3-world stress numbers live in
+TECH_NOTES §3.3.** The imports reproduce §3.2's large-world counts
+exactly (1,191,388 events · 3,509,709 plus rows — the cross-validation
+held); medium and small-dense reproduce §3.1 (1,220,772 / 933,476).
+The doc-only streak from iter-34 is reset (bg-3 carried code). No KIs
+opened — no drift found; the exports matched the recorded numbers
+row-for-row. The honest F7 reading held: the briefs read dry
+(macro-dense, micro-empty); the spike validated briefer mechanics,
+not micro-event interestingness.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -314,10 +306,16 @@ block must carry `git rm` for deletions — archives cannot delete).
   findings incl. the `hfid1`/`hfid2` participant-index blind spot —
   reputation events carry 0 participant rows; reputation context needs
   the EAV).** Measured numbers + the full recipe:
-  `docs/TECH_NOTES.md` §3.1/§3.2; tools: `scripts/df_survey.py` +
-  `scripts/df_import.py` + `scripts/df_taxonomy.py`; regression:
-  `tests/test_df_survey.py` + `tests/test_df_import.py` +
-  `tests/test_df_taxonomy.py`.
+  `docs/TECH_NOTES.md` §3.1/§3.2/§3.3; tools: `scripts/df_survey.py` +
+  `scripts/df_import.py` + `scripts/df_taxonomy.py` +
+  `scripts/df_briefer.py` (bg-3 — the POV mini-briefer + the
+  closed-vocabulary reverse validation over the sink; the
+  invented-facts family is `beyond_records` + `unknown_*` +
+  `contradicted`; the epistemic closure IS the participant index,
+  blind spot inherited; the ≤2-regen ladder + dry floor ported from
+  VALIDATION_SPEC §7); regression: `tests/test_df_survey.py` +
+  `tests/test_df_import.py` + `tests/test_df_taxonomy.py` +
+  `tests/test_df_briefer.py`.
 - **The §6 cap laws: substance over line count (D-025/D-034 — one row
   since the phase-1 collapse) + the ID-preserving gate-collapse.** The
 docs cap is 600 with the §6.1 substance filter as the real law — filler
@@ -385,12 +383,11 @@ gate.
 
 ## Next step
 
-iter-34 (doc-only, the owner's audit call) actualized the planning
-layer — phase states, the blueprint's phase-2 architecture, the
-stray-root deletion. Doc-only streak: 1 of 2 — the next iteration
-must carry code (bg-3 is the natural pick) or ride a fresh owner
-directive; a second doc-only audit pass is possible only on the
-owner's explicit call (D-022).
+bg-3 landed (the un-gated backlog pick): the briefer spike's LLM-free
+half, the live-session numbers, and the 3-world stress table live in
+TECH_NOTES §3.3 — the doc-only streak from iter-34 is reset (bg-3
+carried code). **The un-gated backlog is now EMPTY** — everything
+left is owner-gated or phase-gated; the next move is the owner's.
 
 **Phase 2 is OPEN.** parse-1 batch 2 landed iter-33 (the owner's
 corpus-growth call): the say-door corpus 6→10 cases, 51 combined
@@ -414,15 +411,15 @@ boundary now live-pinned). The phase-2 arc, in order:
    decision — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external
    parser carries phase 2 until then), `bg-6` (SoW audit, D-055
    deferral), `qa-1` mypy + `ci-1` GitHub Actions.
-4. Track B: **bg-2 DONE** (the owner supplied the four world exports,
-  byte-identical to the survey set — `docs/TAXONOMY.md` + the sink v2
-  plus pass + `scripts/df_taxonomy.py`, D-063). **bg-3 (briefer
-  spike) is unblocked** — its inputs are the corpus, the v2 query
-  surface, and the TAXONOMY §5 caveats (the `hfid1`/`hfid2` blind
-  spot; plus fields); bg-4 DONE, bg-6 owner-deferred. The un-gated,
-  un-blocked backlog: bg-3 only — otherwise the next move is the
-  owner's. `pack-3` (Sci-Fi sketches) stays parked until the
-   2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
+4. Track B: **bg-2 DONE, bg-3 DONE** (the owner re-supplied the large/
+  medium/small-dense exports this session — the imports reproduce the
+  recorded counts row-for-row; the spike's tool + numbers + regression:
+  `scripts/df_briefer.py`, TECH_NOTES §3.3, `tests/test_df_briefer.py`);
+  bg-4 DONE, bg-6 owner-deferred. New track-B ideas (e.g. a bg-7: the
+  brief-side epistemology donor — a knowledge-record analog over DF,
+  the TAXONOMY §4.1 gap) enter the `docs/TASKS.md` backlog on the
+  owner's call, never spontaneously. `pack-3` (Sci-Fi sketches) stays
+   parked until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
    ("phase-0 gate passed") fired at iter-6, was never scheduled, and
    the just-in-time reading keeps deferring it: write specs FROM
    experiment results at need, not ahead — it stays parked.

@@ -175,18 +175,21 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   is companion-only, D-063). Measured findings + the bg-3 consumer
   caveats: TAXONOMY §4/§5; recipe: TECH_NOTES §3.2.
 
-### bg-3 · briefer spike — todo
+### bg-3 · briefer spike — DONE (bg-3-briefer-spike)
 
-- Mini-briefer "tell battle X from figure Y's POV, knowing only Y's own
-  records" + reverse validation (invented-facts count, regeneration count) +
-  retrieval stress test (tens of MB of XML).
-- AC: harness runs; numbers in `docs/TECH_NOTES.md`. Expectation to keep
-  honest: DF canon is macro-dense and micro-empty — this validates briefer
-  *mechanics*, not micro-event interestingness (measure that on our own dry
-  chronicle). Y's own records = the `event_participant` index
-  (`docs/TECH_NOTES.md` §3.2; 4 ms measured on the large world; + the
-  `hfid1`/`hfid2` reputation blind spot, TAXONOMY §4.2 — reputation
-  context needs the EAV, not the index).
+- Done one-liner: `scripts/df_briefer.py` — the POV mini-briefer (the
+  participant-index prefix scan as the knowledge model; the assignment
+  frame kept apart from the subject's records) + the closed-vocabulary
+  reverse-validation gate (`supported | contradicted | beyond_records |
+  unknown_*`; prose never parsed; the ≤2-regen ladder with the dry
+  floor) + the retrieval stress harness (double-build byte-compare).
+  Live session: 4 TAXONOMY §5-anchored cases, 31 claims — 19 supported
+  / 12 deliberate-probe non-supported, 0 honest misfires; 1 regen
+  recovery, 1 exhaustion. Numbers (brief p50 ≈ 2.9 KB on GB-scale
+  exports; scan p99 ≤ 0.2 ms; 3 worlds, determinism PASS): TECH_NOTES
+  §3.3; regression `tests/test_df_briefer.py`. The F7 honest
+  expectation held — mechanics validated, not micro-event
+  interestingness.
 
 ### bg-6 · SoW integration audit — todo (owner-deferred)
 
