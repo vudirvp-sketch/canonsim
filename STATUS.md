@@ -1,28 +1,28 @@
 # STATUS — canonsim
 
-Iteration: bg-2 (`bg-2-event-taxonomy`, track B) · Phase: 2 (parser,
-mode C) OPEN, unchanged · Date: 2026-09-01 · the owner supplied the four
-world exports (byte-identical to the iter-8e survey set — the import
-cross-validates every §3.2 count). Landed: the **sink v2 plus pass**
-(D-051's recorded deferral fired: `item_stolen` thief/item/method and
-`creature_devoured` eater/victim live ONLY in the companion — 100%
-theft coverage measured; 706,157 companion events → 3,509,709
-`event_plus_fields` rows; main counts unchanged, 202 s / 1,069 MB on the
-large world), **`scripts/df_taxonomy.py`** (15 event-type plans + the
-birth gap + war/beast-attack collection plans; fixed quantile-spread
-selection — a pure function of the DB content), and
-**`docs/TAXONOMY.md`** — 120 entries across the 16 bg-2 target types
-(AC ≥100 MET): per entry participants/place/reconstructed-cause/
-witness/consequence + the E/E+/R/GAP ontology verdicts. Measured
-findings (owner TAXONOMY §4): the witness column is empty by design
-(9/88 figure-bearing entries carry a nearby reputation link — DF has
-NO epistemology events, our knowledge records have no donor); the
-`hfid1`/`hfid2` participant-index blind spot (0 rows lifted for all
-25,079 reputation events — reputation context needs the EAV; the
-lift-rule extension is a deliberate non-change); murders always carry
-slayer+site (5,786/5,786) while old-age/struck deaths are 52.8%
-slayer-less; item loss is mostly terminal (6/8 no follow-ups). 664→673
-green (+6 taxonomy, +3 plus pass), ruff clean; doc-sync full.
+Iteration: iter-34 (`iter-34-planning-audit`, owner-requested audit
+call — fresh request per D-022; **doc-only: streak 1 of 2**, the alarm
+does not fire; the next iteration must carry code or a fresh owner
+directive) · Phase: 2 (parser, mode C) OPEN, unchanged · Date:
+2026-09-01 · Scope: the planning layer vs the post-phase-1-gate
+reality — the owner's call after noticing the blueprint had not moved
+for two days of heavy iterations. **Verdict: the planning core is
+sound — no architecture revisited, no decisions to reopen; the drift
+was staleness, not rot.** Fixed (KI#55–#59, all closed this
+iteration): ROADMAP §2 gains the phase State column (0/1 CLOSED, 2
+OPEN, 3–6 parked — the single owner of closed/open) + §6 SoW gating
+actualized (the pre-gate ban expired at D-058); blueprint/phases.md §2
+rewritten from the pre-D-062 plan to the landed architecture (the
+grammar is PACK data — the old "12-action fixed union" text predated
+`rest`, iter-27 — the dev-time parser is external over the file
+contract; 35/35 corpus validity) + §1 closure/D-055 notes + §7 perf-1
+verdict + §4 the bg-2 "DF history is epistemology-empty" donor line;
+BLUEPRINT §0 count 34→35 (df_design, iter-8d, never synced) + LOD-1's
+bg-2 clause; **the stray root TASKS.md actually deleted — the bg-4
+KI#52 deletion never landed in git** (KI#55, the KI#42 family: a
+reported pass is drift until the commit shows it; the git-command
+block must carry `git rm` for deletions — archives cannot delete).
+673 green, ruff clean (no code touched); doc-sync full.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,23 +48,24 @@ green (+6 taxonomy, +3 plus pass), ruff clean; doc-sync full.
 
 (none open.)
 
+- KI#55 · the bg-4 KI#52 deletion (stray root TASKS.md) never landed —
+  no `git rm` rode the command block · CLOSED iter-34 (deleted; the
+  FAQ git bullet carries the law).
+- KI#56 · phase-state drift: ROADMAP §2 pre-gate wording, §6 expired
+  ban, the TASKS bg-6 slot line · CLOSED iter-34 (State column +
+  actualized gating).
+- KI#57 · phases.md stale: §2 pre-D-062 plan ("12 actions", fixed
+  union), no phase-1 closure/D-055, §7 ECS-vs-perf-1 unresolved ·
+  CLOSED iter-34.
+- KI#58 · BLUEPRINT §0 ref count 34≠35 (df_design, iter-8d) + LOD-1
+  without the bg-2 donor line · CLOSED iter-34.
+- KI#59 · docs/ref/paradox_scripting.md 605/600 over cap, rationale
+  unrecorded · CLOSED iter-34 (kept: substance-only; rationale in
+  worklog iter-34).
+
 - (KI#54 deleted at bg-2 per AGENTS §5 — closed iter-32, two
   iterations past; the FAQ-merge lesson lives in git + worklog
   iter-32.)
-- (KI#53 deleted at iter-33 per AGENTS §5 — closed iter-31, two
-  iterations past; detail in git + worklog iter-31.)
-- (KI#51 deleted at iter-32 per AGENTS §5 — closed bg-4, two
-  iterations past; the false-external-citation lesson lives in
-  TECH_NOTES §9 + worklog bg-4.)
-- (KI#52 deleted at iter-32 per AGENTS §5 — closed bg-4, two
-  iterations past; detail in git + worklog bg-4.)
-- (KI#50 deleted at iter-28 per AGENTS §5 — closed iter-26, two
-  iterations past; the cap-laws citation fix detail lives in git +
-  worklog iter-26.)
-- (KI#49 deleted at iter-27 per AGENTS §5 — closed iter-25, two
-  iterations past; the corpus-description drift lesson lives in
-  AGENT_NAVIGATION §1's structural cells + the fixture's `source`
-  field, detail in git + worklog iter-25.)
 
 ## FAQ / Pitfalls
 
@@ -258,10 +259,14 @@ green (+6 taxonomy, +3 plus pass), ruff clean; doc-sync full.
   Executable: `tests/test_architecture.py` (PACKAGE_DIRS covers every
   top-level code dir — the closure test, D-046) + the stoplist test.
   No new canonical layers (D-018 pattern).
-- **GitHub upload / git hygiene (the KI#1 family).** Uploads drop
-  `.gitignore` and empty dirs — verify it exists after any upload.
+- **GitHub upload / git hygiene (the KI#1 family; KI#55).** Uploads
+  drop `.gitignore` and empty dirs — verify it exists after any upload.
   `git status --short` shows changes vs HEAD, not what IS in HEAD; after
-  structural changes run `git ls-files <path>`.
+  structural changes run `git ls-files <path>`. A file DELETION cannot
+  ride an archive or `git add` — the end-of-report command block must
+  list `git rm <path>` explicitly, else the deletion is reported but
+  never lands (KI#55: bg-4's KI#52 fix sat unlanded for exactly this
+  reason).
 - **Scope-creep guards: content/tone + the doc-loop alarm (AGENTS §2).**
   Content/tone questions → D-030 + the `PACK_SPEC.md` sketch row: tone
   is data asymmetry inside existing systems; growing the pack or
@@ -379,6 +384,13 @@ gate.
   composition, not totals).
 
 ## Next step
+
+iter-34 (doc-only, the owner's audit call) actualized the planning
+layer — phase states, the blueprint's phase-2 architecture, the
+stray-root deletion. Doc-only streak: 1 of 2 — the next iteration
+must carry code (bg-3 is the natural pick) or ride a fresh owner
+directive; a second doc-only audit pass is possible only on the
+owner's explicit call (D-022).
 
 **Phase 2 is OPEN.** parse-1 batch 2 landed iter-33 (the owner's
 corpus-growth call): the say-door corpus 6→10 cases, 51 combined

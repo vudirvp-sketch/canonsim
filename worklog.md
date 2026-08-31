@@ -10,6 +10,27 @@
 > since iter-5).
 
 ---
+iter-34 · 2026-09-01 · owner-requested planning-layer audit
+(iter-34-planning-audit; doc-only — fresh owner request per D-022)
+- KI#55: the bg-4 KI#52 deletion of the stray root TASKS.md (678-line
+  pre-iter-26 snapshot) never landed — no git rm rode the command
+  block; deleted for real this time (the FAQ git bullet carries the
+  law). KI#56/57: ROADMAP §2 State column + §6 SoW gating actualized;
+  phases.md §2 rewritten to the D-062 architecture (pack grammar,
+  external dev-time parser, 35/35 corpus), §1 closure/D-055 notes +
+  the 8-block/eviction updates, §7 perf-1 verdict, §4 bg-2 donor
+  line; TASKS bg-6 slot + the iter-26 section collapsed (cap).
+- KI#58: BLUEPRINT §0 34→35 (df_design iter-8d) + LOD-1's bg-2 clause
+  (DF history canon-dense, epistemology-empty — TAXONOMY §4). KI#59:
+  docs/ref/paradox_scripting.md kept 605/600 over cap — substance-only
+  (0 filler; enum lists are §6.1 substance), the keep rationale is
+  this line. phases.md sits 603/600 after its own cruft pass (7
+  restatement trims) — the overage is the D-062/D-055 architecture
+  records, kept per §6.1.
+- No code touched: 673 green, ruff clean. 5 files + 1 deletion (git
+  rm TASKS.md); iter-26 evicted per the cap. Doc-only streak 1 of 2.
+
+---
 bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus pass
 (bg-2-event-taxonomy; the owner supplied the four world exports)
 - scripts/df_import.py: plus pass, SINK_VERSION 2 — the companion's
@@ -262,32 +283,7 @@ finish-phase-1 directive opening the polish menu)
 ---
 iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
 collapse (iter-26-phase1-gate)
-- Evidence re-run per ROADMAP §5: 610 green + ruff clean; T1
-  byte-identity + the fixture guard (the venv 3.12.14 = the fixture's
-  generating interpreter); T8 single-factor A/B on day1_full/seed 125 —
-  OFF 26 chains, ON M1=0.417 / M2=0.500; T7 — the chronicle re-read:
-  the theft→suspicion→rotation→briefing and break→fire→burnout chains
-  read causally across the day boundary, the decay/wariness repetition
-  is the noise floor (tale_gate = the tune-1 knob, owner's call). Exit
-  criterion MET with margin: 109 live beats (the accepted-beat sum
-  alone 104) / 0 canon violations / corpus 105 green; no kill hit
-  (0 breaches in 109 beats — the per-1000 kill reads a rate the live
-  volume cannot yet reach, recorded honestly).
-- DECISIONS collapsed 41→30 per D-034 (the owner's quality-first
-  directive — cleanup INSIDE the gate iteration): 7 family merges, all
-  58 D-IDs resolve (verified by sweep — every D-ID is cited), survivors
-  verbatim, merged rows keep decision→why→consequence + owner links.
-  D-058 = the PASS verdict. KI#50 opened+closed (the FAQ cap-laws
-  bullet cited D-025/D-026 — D-026 is the per-ref split; fixed).
-  doc-1 VISION freeze review closed clean (frozen text verified against
-  phase-1 reality; the freeze stands).
-- TASKS Done consolidated (pre-mediator entries → one-liners per
-  AGENTS §6; all 70 entries verified preserved; TASKS 683→477, back
-  under the 600 cap). Verdict: phase-1 PASS — phase 2 (Parser, mode C)
-  may open, the phase-2-vs-polish call stays the owner's. 4 files (the
-  doc sync set; no code — the gate review IS verification + collapse
-  work, the owner's fresh request per D-022); iter-16 evicted per the
-  cap.
+- (deleted at iter-34 per the one-in/one-out cap; history in git.)
 ---
 iter-25 · 2026-08-31 · validation beats — session 10, the
 witnessed-steal-then-alarm chain (iter-25-validation-beats-10)

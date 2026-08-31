@@ -18,6 +18,19 @@
 > D-055 pattern); the runtime-engine decision stays owner-gated
 > (TECH_NOTES §1).
 
+### iter-34 · owner-requested planning-layer audit — done
+
+The owner's audit call (fresh request, D-022; doc-only — streak 1 of
+2): the planning layer vs the post-gate reality — the blueprint had
+not moved since iter-8c/15 while the phase-1 gate, the polish menu,
+the phase-2 opening, and bg-2 all landed. Verdict: the planning core
+is sound; the drift was staleness, not rot. Fixed (KI#55–#59):
+ROADMAP §2 State column + §6 SoW gating; phases.md §2 → the D-062
+architecture + §1 closure/D-055 + §7 perf-1; BLUEPRINT §0/LOD-1; the
+stray root TASKS.md deleted for real (KI#55 — the bg-4 deletion
+never landed); the iter-26 section collapsed (AGENTS §6). 673 green,
+ruff clean. Detail: worklog iter-34 + STATUS KIs.
+
 ### iter-31 · phase-2 parser door — done (D-062)
 
 The phase-2 opening iteration (the owner's "start phase 2" call): the
@@ -73,21 +86,9 @@ gate-passed/door-rejected probe; the corpus machinery +note override
 
 ### iter-26 · phase-1 gate — done (verdict: PASS, D-058)
 
-The owner's quality-first close ("cleanup, re-verification, doc
-actualization before closing the gate — I chase quality, not speed"):
-the full ROADMAP §5 protocol re-run on evidence — 610 green + ruff
-clean; T1 byte-identity + fixture guard; T8 single-factor A/B (OFF =
-26 chains; ON M1=0.417 / M2=0.500); T7 chronicle re-read (the chains
-read causally; the decay/wariness repetition is the noise floor —
-tale_gate stays the owner-gated tune-1 knob). Exit criterion met with
-margin: 109 live beats / 0 canon violations / corpus 105 green; no
-kill-criteria hit. DECISIONS collapsed 41→30 per D-034 in the same
-iteration (7 family merges, all 58 IDs resolve); D-058 = the verdict;
-KI#50 fixed; `doc-1` VISION freeze review closed clean; the pre-mediator
-Done entries collapsed to one-liners (AGENTS §6; TASKS 683→477, back
-under the cap). Phase 2 (Parser, mode C) may open — the
-phase-2-vs-polish call stays the owner's. Detail: worklog iter-26 +
-`docs/DECISIONS.md` D-058 + `docs/TEST_PLAN.md` §4.
+Full ROADMAP §5 protocol re-run: 109 live beats / 0 canon violations /
+corpus 105 green; DECISIONS collapsed 41→30; `doc-1` closed clean;
+phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
 
 ### Phase-1 tuning backlog (post-assembler, owner-gated)
 
@@ -195,8 +196,8 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   (a new mode vs. invasive edits), where llama.cpp sits, what the
   frontend must NOT own (the dumb-terminal contract, VISION §10).
   Output: a TECH_NOTES section + the `SOW_INTEGRATION_SPEC` sketch.
-  Natural slot: just before the phase-1 gate (ROADMAP §6 bans
-  SoW-specific work earlier; never blocks track A).
+  Unlocked by the phase-1 gate (D-058); owner-deferred "until
+  unavoidable" (D-055). Never blocks track A.
 
 ## Infra backlog (pick by need)
 

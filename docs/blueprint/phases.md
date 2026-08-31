@@ -8,7 +8,8 @@
 > briefer mechanics on DF Legends XML before phase 1 — they never block
 > track A (`ROADMAP.md` §1).
 
-## 1. Phase 1 — mediator & narrator (mode A; track B graduates)
+## 1. Phase 1 — mediator & narrator (mode A) — CLOSED (gate PASS
+iter-26, D-058; polish iter-27–29, D-059–D-061)
 
 **The block pipeline** (BRIEF-1; `SPECS_BACKLOG.md` BRIEF_SPEC sketch owns
 the field-level clauses — sensory emitters, beat-boundary delta,
@@ -37,12 +38,18 @@ token budgets, assembled fresh every beat (letta block-manager layout;
 6. **Active options** — the available intents as a grammar-constrained
    choice list.
 
+   Flown in flight: the 7th block **scene_texture** (position 3, D-049,
+   below) and the 8th **present_entities** (position 4, iter-15/D-056);
+   positions/budgets: `docs/BRIEF_SPEC.md` §3.
+
 **Eviction contract (BRIEF-1; letta's overflow lesson, deterministic):**
 every block carries a soft and a hard token budget (pack data — doubles as
 the AP-1 pack-budget lint input). When assembly exceeds a block's hard
 budget, blocks are evicted in ascending priority order:
-`scheduled-lore → recalled-facts → scene-delta → voice-exemplars →
-active-options → directives` — **directives are never dropped**; a freed
+`scheduled-lore → recalled-facts → scene-delta → scene_texture →
+present_entities → voice-exemplars → active-options → directives`
+(the two insertions: D-049/D-056; order owner `docs/BRIEF_SPEC.md` §3) —
+**directives are never dropped**; a freed
 slot is replaced by the marker `[truncated:N items dropped]` — silent drops
 are forbidden. Reflection-on-recurrence is *periodic compaction between
 beats*; eviction is *inside-beat assembly policy* — both exist, they are
@@ -139,8 +146,7 @@ cannot desync canon replay).
   used only when the inline delta is absent or malformed) → dry mode
   (no ledger this beat; prose must not lean on texture — a legal
   steady state, never a failure, L12). Extraction failure is
-  continuity loss for a detail, never corruption: the worst case is
-  the status quo ante.
+  continuity loss for a detail, never corruption.
 - **Read path:** a 7th brief block `scene_texture` (position 3, after
   scene_delta; eviction order between scene_delta and voice_exemplars
   — current-scene continuity outranks lore, below voice/options).
@@ -229,13 +235,12 @@ cannot desync canon replay).
   that must survive goes through the door and is canon thereafter;
   phase-4 reflection distills promoted texture — it IS canon — never
   raw texture).
-- Mode B (phase 4): the scene manager shares one ledger per scene —
-  the chorus reads the same texture block and stays consistent (the
-  scenes are the same PC-anchored intervals).
+- Mode B (phase 4): one ledger per scene — the chorus reads the same
+  texture block (see §4).
 
 **Stress-test resolutions (iter-11b — owner-requested roadmap
-stress-test; research verdicts pending the owner's per-section
-decision, nothing in DECISIONS yet).**
+stress-test; verdicts pending per-section — presence landed as
+D-056, the rest owner-gated).**
 
 - **Identity persistence (the trader problem).** Entity texture
   survives scene change and renders on presence (BRIEF_SPEC §3.3), but
@@ -325,18 +330,40 @@ Local inference only (llama.cpp + GBNF / Outlines; `TECH_NOTES.md` §1);
 prefix-cache the invariant prompt head to blunt the prefill cost
 (`TECH_NOTES.md` §2).
 
-## 2. Phase 2 — parser (mode C)
+**The narrator is external at dev-time (D-055, iter-12):** the mediator
+emits `output/mediator/call_<N>.md` (brief + narrator_protocol); the
+operator — the owner's assistant, outside the codebase — returns ONE
+closed reply document with deep shape gates AT the boundary; a refused
+document never feeds intents (the beat regens whole). Zero
+LLM/network/dependency code — INV-4 held through the whole phase; the
+runtime engine is the owner-gated `engine-1` (unlocked at D-058).
 
-Small model (3–8B) + grammar-constrained JSON (`VISION.md` §4 Layer 3 —
-no tool use at 12–27B; grammar-constrained JSON only). The target grammar
-is the phase-0 Intent union — the 12 actions with their fields — so the
-parser is a *classification with slots*, never free-form generation.
-Disambiguation: when parse confidence is low, the mediator asks a
-disambiguation question or offers buttons — uncertainty is surfaced, not
-guessed (exit criterion: ≥90% valid intents; else redo the grammar).
-Player input is data, not instruction (`VISION.md` §5) — the parser
-produces Intents; the simulator decides outcomes; the only cure for
-sycophancy is that the world answers, not the model.
+## 2. Phase 2 — parser (mode C) — OPEN (iter-31, D-062; contract owner
+`docs/PARSER_SPEC.md`)
+
+**Landed half (D-062 — D-055's pattern on the player's free text): the
+parser is EXTERNAL at dev-time over a file contract** — `brief/parser.py`
+(pure: the grammar snapshot, the call document, the closed reply gate —
+off-grammar = loud ParseError, never a feed) + `cli/parser.py`
+`ParserDoor` (`say` / `say apply`, one shared ledger; the pin law —
+blueprint §1(a)'s first consumer: the reference IS the pin). The target
+grammar is PACK data, not a fixed union (INV-3): the pack's verbs with
+pack-derived field constraints (the tavern pack ships 13 — a
+pack-owned count) ∪ the addressable nouns — canon entities + live
+texture entries, ghost interactivity structurally impossible (§1's
+promotion clause). A *classification with slots*, never free-form
+generation. Attempts are facts: parse validity ≠ world legality;
+disambiguation is asked, never guessed (questions live; buttons +
+multi-intent = the `parse-2` deferrals, PARSER_SPEC §7). Exit ≥90%
+boundary-valid intents: 35/35 on the combined 51-utterance corpus
+(iter-32/33) — the gate review is the owner's (the iter-24/26
+precedent).
+
+**Runtime half (owner-gated `engine-1`):** small model (3–8B) +
+grammar-constrained decoding (llama.cpp + GBNF, `TECH_NOTES.md` §1 —
+off-grammar output becomes structurally impossible at the source; the
+dev-time boundary gate is its stand-in). Player input is data, not
+instruction (`VISION.md` §5); the world answers, not the model.
 
 ## 3. Phase 3 — director evolution + event grammar + social depth
 
@@ -389,6 +416,12 @@ collapse into a discrete belief token; traits are derived state (fold of
 subset), expandable back to source records for the brief — memory made
 compressible while echo (P3e) makes it felt.
 
+**Legends donor reality (bg-2 measured, `docs/TAXONOMY.md` §4):** DF
+history is canon-dense, epistemology-empty — no witness/knowledge
+events exist in the exports; DF donates the legends structure
+(collections, participants, causality fields), knowledge propagation
+has no DF donor and stays ours to design.
+
 **Retrieval** (STORE-1): SQLite FTS5 keyword search as the zero-dependency
 default — `bm25()` ranking with column weights, `NEAR` proximity,
 `highlight`/`snippet` for quoted evidence; `rebuild` is the INV-1
@@ -436,12 +469,10 @@ macro-time (years) are layered clocks — same authority, two granularities
 **Factions with goals** (P3b): small-formula dynamics (KeeperRL rebellion
 precedent — a ratio and a threshold, not a psychology engine); Neighborly
 is the settlement cousin reading. Exit criterion: an emergent chain of
-3+ events without the player (`ROADMAP.md` §2). Real-world donors arrive
-as data: Natural Earth (LOD ladder shape, `featurecla` closed enum,
-semantic versioning) and GeoNames (9-class/684-code enum shape, typed
-parent/child relations, alternate names, daily deltas as append-only
-discipline) — shapes and metadata only; CC-BY attribution sidecar at
-intake; fantasy content from packs, not from real-world toponyms.
+3+ events without the player (`ROADMAP.md` §2). Real-world donors (Natural Earth / GeoNames) arrive as data — shapes
+and metadata only, per `docs/ref/natural_earth.md` +
+`docs/ref/geonames.md`; CC-BY sidecar at intake; fantasy content from
+packs, never real-world toponyms.
 
 **Groups & simulation LOD (stress-test resolutions, iter-11b; owner
 verdict pending).** The LOD ladder above is a READ ladder; the write
@@ -511,23 +542,22 @@ reskin without core edits, ≤1 day (`ROADMAP.md` §2).
   profile) shows view iteration dominating; even then, port shapes
   (smallest-pool-leads views, id+version handles), not a framework (D-012).
   Bevy's parallelism is irrelevant — a fold must be serial to be
-  reproducible.
-- **The storage ladder** (STORE-1, one table to rule them all): JSONL log
-  = truth → SQLite projection = runtime + checkpoint → FTS5 = phase-4
-  keyword → sqlite-vec = static-lore vectors (conditional) → DuckDB +
-  parquet = offline analytics. Each rung rebuildable; none authoritative;
-  the canon path touches only the first two.
+  reproducible. **perf-1 ran (iter-30, `TECH_NOTES.md` §8): cost is
+  event-linear with ~3 orders of margin at the phase-0 scale — the
+  revisit is closed at v0.1 scale; no structural work warranted.**
+- **The storage ladder** (STORE-1 — the ledger row owns the rungs):
+  five rebuildable, none authoritative; the canon path touches only the
+  first two (log → SQLite projection).
 - **The determinism contract**: T1 byte-identity holds for the same
   environment (Python version in the header); the RNG fingerprint extends
   it to a cheap invariant check for every test. The four silent breakers,
   each with its named donor counter-example: wall-clock (MTTH), unsorted
   iteration (ai-town), float geometry in canon (Azgaar), unkeyed
   randomness (tracery/ink defaults).
-- **The LLM boundary over time**: INV-4 gates track A until phase-0 exit;
-  track B exercises briefer/validator/renderer on DF Legends XML in
-  parallel (`ROADMAP.md` §1 fork); the switch to our canon happens only
-  after the gate. Early integration is the named hazard — a narrator
-  masks simulator holes with pretty prose (`TECH_NOTES.md` §5).
+- **The LLM boundary over time** (`ROADMAP.md` §1 owns the fork):
+  track B exercises the circuit on DF Legends XML; the switch to our
+  canon happened at the phase-0 gate. The named hazard is early
+  integration (`TECH_NOTES.md` §5).
 - **Scale posture**: phase 0 is one tavern, ~10 entities, 10^3–10^4 ticks;
   every donor discipline above was chosen to hold at 10^6 events (DCSS
   multi-stream at 150k LOC; C:DDA content at 111 categories; FTS5/vec at

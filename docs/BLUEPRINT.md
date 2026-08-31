@@ -19,8 +19,10 @@
 ## 0. Method (how the corpus was digested — and how future refs enter)
 
 The corpus at iter-0u: 33 per-ref deep dives (~10k lines) + the core docs;
-grown to 34 by the atlas (ref-16, iter-8a — the scene-ledger pattern
-source; its donor line is on BRIEF-1 below).
+grown to 35: the atlas (ref-16, iter-8a — the scene-ledger pattern
+source; its donor line is on BRIEF-1 below) and the DF designed-
+experience dive (ref-17, iter-8d). The live count's owner:
+`docs/REFERENCES_DEEP.md` §2.
 Digestion was one full read pass, then a per-component extraction:
 
 1. **Component slice.** For every buildable component (iter-1 plumbing →
@@ -65,7 +67,7 @@ specs: when a spec is written, it draws its donor decisions from here.
 | CHRON-1 | Canon events vs prose: tracery unseeded RNG / ink snapshot state vs byte-identical chronicle | **Event vs tale split** (RimWorld `TaleDef`): the chronicle entry is a derived, prose-ready record; importance gates what surfaces; per-cause-chain pruning bounds the window. Templates = tracery grammar (JSON symbol table, nested expansion, modifiers, save/restore stack) with **every pick from the cosmetic stream or `sorted()` order** — same grammar, deterministic engine, ~200 lines of stdlib | iter-5 |
 | STORE-1 | Log-is-truth vs query speed vs semantic search vs analytics | **The storage ladder**, each rung rebuildable, none authoritative: JSONL log (truth) → SQLite incremental projection (runtime; checkpoint = `MAX(event_seq)`) → FTS5 index (phase-4 keyword; `rebuild` = the INV-1 mechanism) → sqlite-vec (static-lore vectors, conditionally loaded, pure-Python cosine fallback) → DuckDB chronicler + parquet (offline only, never in the runtime import graph). Compaction is offline scavenge with tombstones — corrections are always new events | iter-1 → phase 4 |
 | TEST-1 | Per-donor test lore: Brogue seed catalogs, DCSS RNG audits, UAP rubrics, live-char one-change rule | **The verification stack**: T0–T8 core suite; T1 strengthened with the RNG fingerprint and known-good seed catalogs; `ASSERT_stable` guards in tests; single-factor A/B (one change per run) for every comparison; the UAP 7-hole taxonomy as a test-design crosswalk; golden-set comparison for the chronicler. Metrics M1–M5 computed from the log only — never by feel, never LLM-judged | iter-1 → iter-6 |
-| LOD-1 | DF "macro-dense, micro-empty" vs our micro-dense slice; DF one-tier populations vs full simulation everywhere | **The LOD ladder**, coherent across scales (`natural_earth.md` "multiple LODs of the same data should be coherent"): canon log = ground truth; per-NPC projection = mid LOD; brief cache = top LOD; phase-5 worldgen adds populations-vs-notables below and ambient crowd above. Worldgen = ordered focused passes over the seed (Azgaar pipeline); history ticks abstractly before the PC arrives — the running world the PC walks into | phase 4–5 (crowd seed now) |
+| LOD-1 | DF "macro-dense, micro-empty" vs our micro-dense slice; DF one-tier populations vs full simulation everywhere | **The LOD ladder**, coherent across scales (`natural_earth.md` "multiple LODs of the same data should be coherent"): canon log = ground truth; per-NPC projection = mid LOD; brief cache = top LOD; phase-5 worldgen adds populations-vs-notables below and ambient crowd above. Worldgen = ordered focused passes over the seed (Azgaar pipeline); history ticks abstractly before the PC arrives — the running world the PC walks into. bg-2 (D-063) measured: DF history is canon-dense, epistemology-empty — no witness/knowledge events in the exports (`docs/TAXONOMY.md` §4); DF donates the legends structure, never the knowing side | phase 4–5 (crowd seed now) |
 
 ## 2. The cross-cutting laws (the constitution, distilled)
 
@@ -146,7 +148,7 @@ operationalize the invariants.
 | iter-5 chronicle & CLI | `docs/blueprint/phase0.md` §5 + `MVP_SCOPE.md` §12 | CHRON-1, RNG-1 (cosmetic stream) |
 | iter-6 gate | `docs/blueprint/phase0.md` §6 + `MVP_SCOPE.md` §15–16 + `ROADMAP.md` §5 | TEST-1 |
 | phase 1 mediator | `docs/blueprint/phases.md` §1 + `SPECS_BACKLOG.md` BRIEF/VALIDATION sketches | BRIEF-1, TEST-1 |
-| phase 2 parser | `docs/blueprint/phases.md` §2 | BRIEF-1, L2 |
+| phase 2 parser (OPEN) | `docs/blueprint/phases.md` §2 + `docs/PARSER_SPEC.md` (the written contract) | BRIEF-1, L2 |
 | phase 3 director evolution + grammar | `docs/blueprint/phases.md` §3 | TIME-1, DIR-1, EPIST-1 |
 | phase 4 memory/retrieval | `docs/blueprint/phases.md` §4 | STORE-1, BRIEF-1, LOD-1, L3 |
 | phase 5 worldgen/depth | `docs/blueprint/phases.md` §5 | LOD-1, TIME-1, L9 |

@@ -16,19 +16,21 @@ phase-0 gate.
 
 ## 2. Phase table
 
-| Phase | Build | Exit criteria | Kill-criteria |
-|---|---|---|---|
-| **0. Sim without LLM** (TavernSim — this repo, now) | one dense slice: time, position, relations, knowledge, states, fire, watch, director; event log; template chronicle | chronicle reads as a story; full test suite `MVP_SCOPE.md` §16 | mechanisms not expressive, ontology has no combinatorial depth → rethink ontology, not "add LLM" |
-| 1. Narrator | mode A over the log; validator; reverse prose validation | 0 canon violations per 100 beats (regression set) | ≥1 breach per 1000 beats in live play |
-| 2. Parser | mode C; disambiguation questions / buttons on uncertainty | ≥90% valid intents | else redo the grammar |
-| 3. Director | stagnation detector, complication buffer, arcs | a scene without an event < N beats | else redo the drama model |
-| 4. Knowledge & scene | `known_by` filter, mode B, scene manager, retrieval + legends (F) | 0 leaks on the blind-NPC suite | else bug in retrieval/filter |
-| 5. Depth | lazy worldgen, factions with goals, long history | an emergent chain of 3+ events without the player | else weak faction model |
-| 6. Packs & worldbuilder | pack system, mode G, pack CI | a new T1 reskin without core edits, ≤1 day | else the module contract is wrong |
+| Phase | State | Build | Exit criteria | Kill-criteria |
+|---|---|---|---|---|
+| **0. Sim without LLM** (TavernSim) | **CLOSED** — gate PASS iter-6, audit-clean iter-6a | one dense slice: time, position, relations, knowledge, states, fire, watch, director; event log; template chronicle | chronicle reads as a story; full test suite `MVP_SCOPE.md` §16 | mechanisms not expressive, ontology has no combinatorial depth → rethink ontology, not "add LLM" |
+| 1. Narrator | **CLOSED** — gate PASS iter-26, D-058 (polish iter-27–29) | mode A over the log; validator; reverse prose validation | 0 canon violations per 100 beats (regression set) | ≥1 breach per 1000 beats in live play |
+| 2. Parser | **OPEN** — opened iter-31, D-062; the gate review is the owner's | mode C; disambiguation questions / buttons on uncertainty | ≥90% valid intents | else redo the grammar |
+| 3. Director | parked | stagnation detector, complication buffer, arcs | a scene without an event < N beats | else redo the drama model |
+| 4. Knowledge & scene | parked | `known_by` filter, mode B, scene manager, retrieval + legends (F) | 0 leaks on the blind-NPC suite | else bug in retrieval/filter |
+| 5. Depth | parked | lazy worldgen, factions with goals, long history | an emergent chain of 3+ events without the player | else weak faction model |
+| 6. Packs & worldbuilder | parked | pack system, mode G, pack CI | a new T1 reskin without core edits, ≤1 day | else the module contract is wrong |
 
 Phase-0 exit/kill details: `docs/MVP_SCOPE.md` §16. Each phase must be
 playable at its exit — the roadmap never crosses a gate with a dead build.
-This table owns gates and kill-criteria; the **post-reference per-phase
+This table owns gates and kill-criteria; the **phase state column is
+the single owner of closed/open** — STATUS/TASKS/README carry one-line
+summaries only. The **post-reference per-phase
 architecture** (D-027/D-029) lives in `docs/blueprint/phases.md` §1–6, the
 phase-0 combined design in `docs/blueprint/phase0.md`.
 
@@ -43,7 +45,7 @@ economy / combat; no external code donors before their phase. Full list:
 
 | Source | Access | What we take | When |
 |---|---|---|---|
-| DF Legends XML | data | a ready canonical event log: `historical_events`, `event_collections` (war → battle → episode), figures, entities, relations | background (`bg-1`) |
+| DF Legends XML | data | a ready canonical event log: `historical_events`, `event_collections` (war → battle → episode), figures, entities, relations | background (`bg-1` sink + `bg-2` taxonomy — both landed, D-051/D-063) |
 | DF mechanics | closed | worldgen lesson: history ticks abstractly (populations + notables) — direct confirmation of the LOD principle | pattern |
 | RimWorld / Kenshi | closed | XML-defs "content = data"; the storyteller anti-pattern; "world not player-centered" | pattern |
 | Tabletop (GURPS / FATE) | — | "universal mechanics + setting books" = core/pack | pattern |
@@ -87,5 +89,7 @@ A gate is passed only on evidence:
 End state: a simulation mode inside Soul-of-Waifu (`docs/VISION.md` §10).
 Prerequisites: the mediator protocol specs (BRIEF_SPEC and friends —
 `docs/SPECS_BACKLOG.md`) and the "dumb terminal" frontend contract (the
-frontend renders; the mediator owns the context window). No SoW-specific work
-before the phase-1 gate — any of it now is scope creep.
+frontend renders; the mediator owns the context window). The phase-1
+gate has passed (D-058) — the SoW audit is unlocked but stays
+owner-gated as `bg-6` ("delay until unavoidable", D-055); any
+SoW-specific work before that call is scope creep.
