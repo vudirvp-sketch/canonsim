@@ -1,5 +1,5 @@
 {
- "source": "Phase-2 parse-reply regression set (iter-32 parse-1 validation beats): full say-cycle documents distilled from six live agent-in-the-loop sessions over the mode-C door (s1 walkthrough seed 125; s2 the texture pin survives a failed take seed 42; s3 the texture promotion + canon birth seed 4; s4 the fire chain through the door seed 23; s5 the disambiguation family seed 8; s6 the malformed-probe family seed 41) - each replayed through the REAL session stack (Simulator + Mediator + ParserDoor over ONE shared SceneLedger, cli/parser.py + cli/mediator.py). The narrator half (texture establishment) runs through the real mediator beat; the player half through the say door; the two doors share the session's one ledger (D-049). Per PARSER_SPEC \u00a76 the tally: 30 utterances, mix 21 intent / 6 question / 2 no_intent; 7/7 deliberate off-grammar probes caught loudly at the boundary (off-verb, ghost noun, non-integer ticks, off-enum method, two alternatives in one document, consumed texture reference, double apply); 21/21 boundary-accepted intent replies - 0 honest misfires, validity 100% among intent-alternative replies (questions and no-intent verdicts are honest outcomes, not violations); 3 door failures are world answers (take_failed, 2x intent_rejected), 1 door-law error after the pin (the one-path RunnerError, cycle pinned then refused). Session findings pinned per-cycle: the fire cascade drains INSIDE the door's own run_steps batch (drop_break cycle: 5 events, last location_burned_out - the iter-23 batch-boundary lesson through the say door); a PROMOTED texture entry is terminal - re-referencing it is off-grammar, the parser takes the disambiguation path (s6 cycle 3); a failed take keeps its entry live+pinned (s2, seed 42); a committed take IS the promotion (s3/s6, seeds 4/41 - canon birth loc_tavern.candles=lit); talk ripples 2 events (rumor_told). Provenance: worklog iter-32 + the runner (scripts/iter32_parse_runner.py, outside the repo) - the live logs and call/reply documents are gitignored runtime artifacts under the runner's scratch dir. The corpus's job: pin the phase-2 exit criterion's evidence (ROADMAP \u00a72 - the \u226590% valid-intents gate review rides this volume; PARSER_SPEC \u00a76 owns the measurement).",
+ "source": "Phase-2 parse-reply regression set (iter-32 parse-1 validation beats): full say-cycle documents distilled from six live agent-in-the-loop sessions over the mode-C door (s1 walkthrough seed 125; s2 the texture pin survives a failed take seed 42; s3 the texture promotion + canon birth seed 4; s4 the fire chain through the door seed 23; s5 the disambiguation family seed 8; s6 the malformed-probe family seed 41) - each replayed through the REAL session stack (Simulator + Mediator + ParserDoor over ONE shared SceneLedger, cli/parser.py + cli/mediator.py). The narrator half (texture establishment) runs through the real mediator beat; the player half through the say door; the two doors share the session's one ledger (D-049). Per PARSER_SPEC \u00a76 the tally: 30 utterances, mix 21 intent / 6 question / 2 no_intent; 7/7 deliberate off-grammar probes caught loudly at the boundary (off-verb, ghost noun, non-integer ticks, off-enum method, two alternatives in one document, consumed texture reference, double apply); 21/21 boundary-accepted intent replies - 0 honest misfires, validity 100% among intent-alternative replies (questions and no-intent verdicts are honest outcomes, not violations); 3 door failures are world answers (take_failed, 2x intent_rejected), 1 door-law error after the pin (the one-path RunnerError, cycle pinned then refused). Session findings pinned per-cycle: the fire cascade drains INSIDE the door's own run_steps batch (drop_break cycle: 5 events, last location_burned_out - the iter-23 batch-boundary lesson through the say door); a PROMOTED texture entry is terminal - re-referencing it is off-grammar, the parser takes the disambiguation path (s6 cycle 3); a failed take keeps its entry live+pinned (s2, seed 42); a committed take IS the promotion (s3/s6, seeds 4/41 - canon birth loc_tavern.candles=lit); talk ripples 2 events (rumor_told). Provenance: worklog iter-32 + the runner (scripts/iter32_parse_runner.py, outside the repo) - the live logs and call/reply documents are gitignored runtime artifacts under the runner's scratch dir. The corpus's job: pin the phase-2 exit criterion's evidence (ROADMAP \u00a72 - the \u226590% valid-intents gate review rides this volume; PARSER_SPEC \u00a76 owns the measurement). Batch 2 (iter-33, the owner's corpus-growth call): four more live sessions through the same stack (s7 the untested-verbs walkthrough seed 111 - examine/use/rest fed through the door for the first time, the undeclared-field probe on a fieldless verb, the wait-720 decay batch draining inside the door's own run_steps (16 events, the iter-23 batch law on the quiet side), the per-cycle state pins: use lands intoxication 20, the wait batch gains fatigue 20 while intoxication decays to 1, the second rest clamps 20-30 to 0 - the tune-1 clamp live; s8 the scene-close retirement seed 65 - a pinned entry dies at the scene close when the player leaves and returns, re-referencing it is off-grammar, the fresh establish in the new scene is legal and the fresh take promotes; s9 the disambiguation ladder seed 30 - question, still-ambiguous answer, re-asked question, then the resolved intent; the verb-muse and world-question no_intent families (an utterance naming a verb with no intent now; a question about the world); the wait-without-ticks probe - boundary-ACCEPTED (the gate does not duplicate door-owned checks, PARSER_SPEC \u00a74), then the door's loud RunnerError, cycle consumed, the fixed reply on a fresh say; s10 the narrator withdrawal seed 32 - the texture-OCC retirement of a PINNED entry (the narrator's own assertion dies; un-pinning does not exist but withdrawal does), re-reference off-grammar, fresh candles legal, the fresh take promotes). Batch 2 tally per \u00a76: 21 utterances (14 intent / 4 question / 2 no_intent + the 1 gate-passed door-rejected cycle), 3/3 deliberate off-grammar probes caught loudly (the undeclared field; the RETIRED-entry re-reference x2 - one scene-close cause, one narrator-withdrawal cause), 14/14 fed intents boundary-valid, 0 honest misfires; 2 world answers (take_failed x2, both texture-path takes whose pins survive) + 1 door-law error. Combined corpus tally: 51 utterances, 35 fed intents / 10 questions / 4 no-intents / 2 gate-passed door-rejected cycles; 10/10 off-grammar probes caught; 35/35 boundary validity (the \u226590% criterion holds on the combined volume); 5 world answers + 2 door-law errors. New live law pinned: RETIRED joins PROMOTED as terminal, and a pinned entry can die two ways - the scene close (leaving) and the narrator withdrawal (OCC) - with the reference off-grammar either way; fresh establishment after RETIRE is legal (a new entry id: the new-candles law). Provenance: worklog iter-33 + the runner (scripts/iter33_parse_runner.py, outside the repo).",
  "cases": [
   {
    "name": "s1_walkthrough",
@@ -696,6 +696,563 @@
     "ledger": {
      "tex_0000": "promoted",
      "tex_0001": "pinned"
+    },
+    "state": {
+     "loc_tavern": {
+      "candles": "lit"
+     }
+    }
+   }
+  },
+  {
+   "name": "s7_untested_verbs",
+   "seed": 111,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "say": "I lean on the bar and study the barkeep for a long moment",
+     "reply": {
+      "intent": {
+       "kind": "examine",
+       "target": "npc_barkeep_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "examine"
+     }
+    },
+    {
+     "say": "I take the mug of ale from the bar",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "target": "ale_mug_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "take"
+     }
+    },
+    {
+     "say": "I drink the ale down in one go",
+     "probes": [
+      {
+       "intent": {
+        "kind": "use",
+        "target": "ale_mug_01",
+        "fields": {
+         "method": "distraction"
+        }
+       }
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "use",
+       "target": "ale_mug_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "use",
+      "state": {
+       "pc_01": {
+        "status.intoxication": 20
+       }
+      }
+     }
+    },
+    {
+     "say": "I find a quiet corner and rest a while",
+     "reply": {
+      "intent": {
+       "kind": "rest"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "rest",
+      "state": {
+       "pc_01": {
+        "status.fatigue": 0
+       }
+      }
+     }
+    },
+    {
+     "say": "I wait out the long afternoon",
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 720
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 16,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait",
+      "state": {
+       "pc_01": {
+        "status.fatigue": 20,
+        "status.intoxication": 1
+       }
+      }
+     }
+    },
+    {
+     "say": "I rest again, properly this time",
+     "reply": {
+      "intent": {
+       "kind": "rest"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "rest",
+      "state": {
+       "pc_01": {
+        "status.fatigue": 0
+       }
+      }
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {},
+    "state": {
+     "pc_01": {
+      "status.fatigue": 0,
+      "status.intoxication": 1
+     }
+    }
+   }
+  },
+  {
+   "name": "s8_scene_close_retirement",
+   "seed": 65,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "narrator": {
+      "prose": "Tallow candles guttered on the bar, throwing long shadows over the room.",
+      "texture_delta": {
+       "source": "turn:1",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "I palm one of the candles",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0000",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [
+       "tex_0000"
+      ],
+      "promoted": [],
+      "last_event": "take_failed"
+     }
+    },
+    {
+     "say": "Not worth the risk. I slip out to the street",
+     "reply": {
+      "intent": {
+       "kind": "move",
+       "target": "loc_street"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "move"
+     }
+    },
+    {
+     "say": "I circle back inside",
+     "reply": {
+      "intent": {
+       "kind": "move",
+       "target": "loc_tavern"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "move"
+     }
+    },
+    {
+     "say": "The candles I saw earlier \u2014 I palm one now",
+     "probes": [
+      {
+       "intent": {
+        "kind": "take",
+        "fields": {
+         "texture": {
+          "entry": "tex_0000",
+          "scope": "scene:loc_tavern",
+          "slot": "candles",
+          "value": "lit"
+         }
+        }
+       }
+      }
+     ],
+     "reply": {
+      "question": "the bar is dark now \u2014 what are you trying to take: the purse, the mug of ale, or the oil lamp?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "the bar is dark now \u2014 what are you trying to take: the purse, the mug of ale, or the oil lamp?"
+     }
+    },
+    {
+     "narrator": {
+      "prose": "The barkeep lit fresh candles against the dark.",
+      "texture_delta": {
+       "source": "turn:2",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "New candles. I lift one when nobody looks",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0001",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [
+       "tex_0001"
+      ],
+      "promoted": [
+       "tex_0001"
+      ],
+      "last_event": "take"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {
+     "tex_0000": "retired",
+     "tex_0001": "promoted"
+    },
+    "state": {
+     "loc_tavern": {
+      "candles": "lit"
+     }
+    }
+   }
+  },
+  {
+   "name": "s9_ladder_and_muses",
+   "seed": 30,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "say": "I want a word with that fellow over there",
+     "reply": {
+      "question": "which fellow \u2014 Doren the guard, the barkeep, or the drunkard?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "which fellow \u2014 Doren the guard, the barkeep, or the drunkard?"
+     }
+    },
+    {
+     "say": "Whichever of you tavern folk will hear me out",
+     "reply": {
+      "question": "name one: Doren the guard, the barkeep, or the drunkard"
+     },
+     "expect": {
+      "status": "question",
+      "text": "name one: Doren the guard, the barkeep, or the drunkard"
+     }
+    },
+    {
+     "say": "The drunkard, then. I pick his brain a while",
+     "reply": {
+      "intent": {
+       "kind": "talk",
+       "target": "npc_drunk_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 2,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "rumor_told"
+     }
+    },
+    {
+     "say": "Someday I'll lift something heavy off somebody \u2014 but not tonight",
+     "reply": {
+      "no_intent": "a plan for another night \u2014 no world-touching intent now"
+     },
+     "expect": {
+      "status": "no_intent",
+      "text": "a plan for another night \u2014 no world-touching intent now"
+     }
+    },
+    {
+     "say": "What do I actually know about the guard's habits?",
+     "reply": {
+      "no_intent": "a question about the world \u2014 no world-touching intent"
+     },
+     "expect": {
+      "status": "no_intent",
+      "text": "a question about the world \u2014 no world-touching intent"
+     }
+    },
+    {
+     "say": "I wait",
+     "door_error": true,
+     "reply": {
+      "intent": {
+       "kind": "wait"
+      }
+     }
+    },
+    {
+     "say": "A quarter hour, then. I wait",
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 15
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {}
+   }
+  },
+  {
+   "name": "s10_narrator_withdrawal",
+   "seed": 32,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "narrator": {
+      "prose": "Tallow candles guttered on the bar, long shadows.",
+      "texture_delta": {
+       "source": "turn:1",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "I palm one of the candles",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0000",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [
+       "tex_0000"
+      ],
+      "promoted": [],
+      "last_event": "take_failed"
+     }
+    },
+    {
+     "narrator": {
+      "prose": "The barkeep, tidying up, snuffed the candles; the bar went dark.",
+      "texture_delta": {
+       "source": "turn:2",
+       "retired": [
+        {
+         "id": "tex_0000"
+        }
+       ]
+      }
+     },
+     "note": "texture: 1 retired"
+    },
+    {
+     "say": "I try for one of those candles anyway",
+     "probes": [
+      {
+       "intent": {
+        "kind": "take",
+        "fields": {
+         "texture": {
+          "entry": "tex_0000",
+          "scope": "scene:loc_tavern",
+          "slot": "candles",
+          "value": "lit"
+         }
+        }
+       }
+      }
+     ],
+     "reply": {
+      "question": "the candles were snuffed \u2014 what are you trying to take: the purse, the mug of ale, or the oil lamp?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "the candles were snuffed \u2014 what are you trying to take: the purse, the mug of ale, or the oil lamp?"
+     }
+    },
+    {
+     "narrator": {
+      "prose": "A fresh candle was lit at the bar's end.",
+      "texture_delta": {
+       "source": "turn:3",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "A fresh candle, then. I lift it when nobody looks",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0001",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 1,
+      "pinned": [
+       "tex_0001"
+      ],
+      "promoted": [
+       "tex_0001"
+      ],
+      "last_event": "take"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {
+     "tex_0000": "retired",
+     "tex_0001": "promoted"
     },
     "state": {
      "loc_tavern": {

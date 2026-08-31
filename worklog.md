@@ -10,6 +10,38 @@
 > since iter-5).
 
 ---
+iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth
+(iter-33-parse1-say-sessions2; the owner's corpus-growth call)
+- Four more live mode-C sessions (seeds 111/65/30/32 — the
+  untested-verbs walkthrough, the scene-close retirement, the
+  disambiguation ladder + the muse families, the narrator withdrawal)
+  driven by a runner outside the repo (scripts/iter33_parse_runner.py,
+  Rule 9) through the REAL stack (Simulator + Mediator + ParserDoor
+  over ONE shared ledger, D-049).
+- Batch tally (PARSER_SPEC §6): 21 utterances (14 intent / 4 question /
+  2 no_intent + 1 gate-passed door-rejected cycle), 3/3 deliberate
+  off-grammar probes caught loudly (the undeclared field on a fieldless
+  verb; the RETIRED-entry re-reference ×2 — one scene-close cause, one
+  narrator-withdrawal cause), 0 honest misfires; 2 world answers
+  (take_failed ×2, the pin surviving both). Combined corpus: 51
+  utterances, 35/35 boundary validity — the ≥90% criterion holds on
+  the combined volume (the phase-2 gate review stays the owner's).
+- Corpus 6→10 cases (tests/fixtures/parse_replies.json): examine/use/
+  rest fed live for the first time (the wait-720 decay batch = 16
+  events inside the door's own run_steps; per-cycle state pins — use
+  intoxication 20, the fatigue clamp 20−30→0); a PINNED entry dies two
+  ways (the scene close, the narrator's texture-OCC withdrawal — RETIRED
+  joins PROMOTED as terminal, re-reference off-grammar either way,
+  fresh establish legal); the question→question→intent ladder; the
+  wait-without-ticks gate-passed/door-rejected probe (PARSER_SPEC §4
+  live). Corpus machinery +: the narrator-cycle note override + the
+  optional per-cycle state assert (tests/test_parser.py).
+- 660→664 green, ruff clean. KI#53 deleted per AGENTS §5 (closed
+  iter-31, two iterations past). iter-24 evicted per the cap. Docs:
+  PARSER_SPEC §7, TASKS (+ the iter-12/13/14 lingering sections
+  collapsed to their Done one-liners — back under the 600 cap), STATUS,
+  AGENT_NAVIGATION §1, README Status.
+---
 iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
 (iter-32-parse1-say-sessions; the phase-2 arc's first session batch)
 - Six live mode-C sessions (seeds 125/42/4/23/8/41 — walkthrough,
@@ -268,40 +300,7 @@ witnessed-steal-then-alarm chain (iter-25-validation-beats-10)
 ---
 iter-24 · 2026-08-31 · validation beats — session 9, the day-2
 return under burned-yard knowledge (iter-24-validation-beats-9)
-- Live narrate session 9 (seed 41, 13 accepted + 2 refused-and-caught,
-  39 supported claims, 0 canon violations): the day-1 theft-and-arson
-  chain (move → take → steal → move → drop_break → wait 1440) lands
-  at t=1452 (day-2 morning post-second-rotation); the recall block
-  past day 1 probed at the beat level (a quiet prose-only beat
-  accepts with no BEAT summary — the absence-of-summary law).
-- The day-1 canon events all claimable by id+type under day 2
-  (fire_started / location_burned_out / expectation_violation /
-  watch_change — canon never closes across a 1440-tick gap,
-  complement to session 5's id+type probe on the same tick); the
-  burned yard's `destroyed` flag is canon-from-birth state-claimable
-  under day 2 (the layout/D-057 precedent extended to a destruction
-  flag).
-- The arson-on-a-destroyed-yard case is the pack-2 backlog's first
-  live probe: both fire spots still 'burning' (set t=12/15, never
-  reset — the halted-state law), `_ignite_action` finds no unburning
-  spot, commits the arson event with `spot=None`, no ignition
-  follows — a no-ignition success (distinct from session 8's
-  spotless-street `field_nonempty` failure; the door-outcome
-  vocabulary completes its three axes: not co-located, no flagged
-  target, no fuel). The cause-actor blindness and the §3 market leg
-  pinned unreachable under day 2 (the tune-3 family); the third
-  watch_change (t=1812) hands purse_missing to the relief guard
-  (inferred/exact → told/partial, the transfer_decay_steps=1 law
-  under day 2); the suspicion axis state-claimable for
-  npc_guard_01 (value 20, the tune-2 boundary re-pinned).
-- Corpus 84→99 (+15 seed-41 cases, single-beat each); 589→604
-  green, ruff clean. The phase-1 ≥100-beat exit criterion HIT
-  (86→101 live beats); the sandbox narrate-session recipe landed
-  in the STATUS FAQ (the owner's directive — operational recipe +
-  pitfalls made durable across iterations; consolidated with the
-  iter-23 batch-boundary lesson). 4 files (fixture + the 3-doc
-  sync set — the iter-18 scope precedent); iter-14 evicted per
-  the cap.
+- (deleted at iter-33 per the one-in/one-out cap; history in git.)
 ---
 iter-23 · 2026-08-31 · validation beats — session 8, the
 arson-after-theft chain (iter-23-validation-beats-8)

@@ -26,6 +26,19 @@ Mediator + ParserDoor over ONE shared ledger (D-049): every off-grammar
 probe family caught loudly, both door outcomes, the pin law's live
 paths, the fire cascade inside the door's own batch, and the honest
 question/no-intent surfaces (the ≥90% evidence, PARSER_SPEC §6).
+
+iter-33 (parse-1 batch 2, the owner's corpus-growth call) grows the
+corpus 6→10 cases with the same discipline: the three verbs never fed
+live (examine / use / rest — the undeclared-field probe, the wait-720
+decay batch inside the door's own run_steps, per-cycle state pins for
+the use effect and the fatigue clamp), the scene-close retirement of a
+pinned entry, the narrator-withdrawal (texture-OCC) retirement of a
+pinned entry — RETIRED joins PROMOTED as terminal, both re-reference
+paths off-grammar, fresh establishment legal either way — the
+disambiguation ladder (question, re-asked question, resolved intent),
+the verb-muse / world-question no_intent families, and the
+gate-passed door-rejected wait-without-ticks (PARSER_SPEC §4's
+one-owner-per-law boundary live).
 """
 
 from __future__ import annotations
@@ -559,20 +572,27 @@ def test_phase2_parse_regression_set(
     case: dict[str, Any], tmp_path: Path
 ) -> None:
     """The parse-reply corpus: full say-cycle documents distilled from the
-    six live iter-32 sessions, replayed through the REAL mode-C session
+    live iter-32/iter-33 sessions, replayed through the REAL mode-C session
     stack (Simulator + Mediator + ParserDoor over ONE shared ledger — the
     narrator establishes, the player's words reference, D-049). Pins: every
     off-grammar probe family caught loudly at the boundary (the cycle
     stays open, the fixed reply then applies — off-verb, ghost noun,
     non-integer ticks, off-enum method, two alternatives, the CONSUMED
-    texture reference, the double apply), both door outcomes
+    texture reference, the double apply, the undeclared field on a
+    fieldless verb, the RETIRED-entry re-reference ×2 — scene-close and
+    narrator-withdrawal causes), both door outcomes
     (committed events + intent_rejected/take_failed as world answers),
     the pin law's live paths (a failed take keeps live+pinned; a
-    committed take IS the promotion — canon birth), the one-path
-    RunnerError firing AFTER the pin, the fire cascade draining inside
-    the door's own run_steps batch (the iter-23 batch-boundary lesson
-    through the say door), and the honest question/no-intent surfaces —
-    the phase-2 exit criterion's evidence (ROADMAP §2; PARSER_SPEC §6
+    committed take IS the promotion — canon birth; a pinned entry dies at
+    the scene close or by the narrator's withdrawal, never un-pinned),
+    the one-path RunnerError firing AFTER the pin, the gate-passed
+    door-rejected wait-without-ticks (the boundary does not duplicate
+    door-owned checks, PARSER_SPEC §4), the fire cascade and the wait-720
+    decay batch draining inside the door's own run_steps batch (the
+    iter-23 batch-boundary lesson through the say door), the per-cycle
+    state pins (the use effect, the decay batch, the fatigue clamp), and
+    the honest question/no-intent surfaces (the ladder included) — the
+    phase-2 exit criterion's evidence (ROADMAP §2; PARSER_SPEC §6
     owns the measurement procedure)."""
     run = tmp_path / case["name"]
     run.mkdir()
@@ -591,9 +611,10 @@ def test_phase2_parse_regression_set(
             reply.write_text(json.dumps(cycle["narrator"]), encoding="utf-8")
             beat = mediator.apply_reply(reply)
             assert beat.status == "accepted"
-            assert any(
-                "texture: 1 established" in note for note in beat.notes
-            )
+            # the expected texture note: 1 established by default, or the
+            # cycle's own (iter-33: the withdrawal delta's "1 retired")
+            expected_note = cycle.get("note", "texture: 1 established")
+            assert any(expected_note in note for note in beat.notes)
             continue
         if "double_apply_probe" in cycle:
             probe = run / "double.json"
@@ -625,6 +646,13 @@ def test_phase2_parse_regression_set(
             assert result.pinned == tuple(expect.get("pinned", ()))
             assert result.promoted == tuple(expect.get("promoted", ()))
             assert _events(log)[-1].type == expect["last_event"]
+            if "state" in expect:  # per-cycle world pins (iter-33: the
+                # use effect, the decay batch, the fatigue clamp — the
+                # door-visible state after THIS cycle's batch)
+                state = fold(_events(log), initial_projection(PACK.entities))
+                for entity, props in expect["state"].items():
+                    for prop, value in props.items():
+                        assert state[entity].get(prop) == value
         else:
             assert result.text == expect["text"]
     # case-level: the final ledger and the canon state (canon birth or its

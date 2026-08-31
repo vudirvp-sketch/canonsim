@@ -40,20 +40,26 @@ KI#53 (phase-state doc drift: the stale Track-A phase header + the
 README Status tail, stale since iter-11a) fixed. 629→654 green, ruff
 clean. Detail: worklog iter-31 + `docs/PARSER_SPEC.md` + D-062.
 
-### iter-32 · parse-1 — validation beats over the say door — done
+### iter-33 · parse-1 batch 2 — say-door corpus growth — done
 
-Six live mode-C sessions (seeds 125/42/4/23/8/41 — the walkthrough,
-the texture pin on a failed take, the texture promotion, the fire
-chain, the disambiguation family, the malformed-probe family) driven
-by a runner outside the repo through the REAL stack (Simulator +
-Mediator + ParserDoor over one shared ledger, D-049): the ≥90%
-valid-intents criterion MET on this volume per PARSER_SPEC §6 (0
-honest misfires; the phase-2 gate review stays the owner's — the
-iter-24/26 precedent). The parse-reply regression corpus
-(`tests/fixtures/parse_replies.json` + the `tests/test_parser.py`
-replay) pins the findings (the PROMOTED entry is terminal; the fire
-cascade drains inside the door's own batch; failed takes keep
-live+pinned). Detail: worklog iter-32 + `docs/PARSER_SPEC.md` §6/§7.
+The owner's corpus-growth call ("continue the plan or grow the corpus —
+whichever is objectively better"): four more live mode-C sessions
+(seeds 111/65/30/32 — the untested verbs, the scene-close retirement,
+the disambiguation ladder, the narrator withdrawal)
+driven by a runner outside the repo through the REAL stack (Simulator +
+Mediator + ParserDoor over ONE shared ledger, D-049). Batch tally per
+PARSER_SPEC §6: 21 utterances (14 intent / 4 question / 2 no_intent + 1
+gate-passed door-rejected cycle), 3/3 off-grammar probes caught, 0
+honest misfires; combined with iter-32: 51 utterances, 35/35 boundary
+validity — the ≥90% criterion holds on the combined volume (the gate
+review stays the owner's). The corpus 6→10 cases
+(`tests/fixtures/parse_replies.json`): examine/use/rest fed live for
+the first time; a PINNED entry dies two ways (scene close, narrator
+withdrawal — RETIRED joins PROMOTED as terminal, fresh establish legal);
+the question→question→intent ladder; the wait-without-ticks
+gate-passed/door-rejected probe; the corpus machinery +note override
++per-cycle state assert. Detail: worklog iter-33 + `docs/PARSER_SPEC.md`
+§6/§7.
 
 ### Phase-2 parser backlog
 
@@ -64,42 +70,6 @@ live+pinned). Detail: worklog iter-32 + `docs/PARSER_SPEC.md` §6/§7.
   (llama.cpp + GBNF; TECH_NOTES §1) — unlocked by the phase-1 gate,
   waits on the owner; the dev-time external parser carries phase 2
   until then.
-
-### iter-12 · the mediator session loop — done (D-055)
-
-The owner's engine verdict (2026-08-30): no SoW, no llama.cpp now —
-the dev-time narrator is the external agent over a file contract
-(call_<N>.md → reply_<N>.json); the repo stays LLM-free (INV-4
-unchanged). Landed: the call/response documents, the beat cycle
-(retire→sync→call→reply→delta→intents→promotions), noun resolution
-+ withdrawals, the L12 ladder, `narrate` session commands. Detail:
-`worklog.md` iter-12 + `docs/VALIDATION_SPEC.md` §7.1 + D-055.
-
-### iter-13 · validation beats — done (session 1)
-
-The first live agent-in-the-loop session through `narrate` (seed 125,
-11 beats): **0 canon violations**, every refusal family probed and
-caught; KI#44 fixed (accepted-beat verdicts now print as the `BEAT`
-summary lines — the phase-1 exit numbers are countable in live play);
-the phase-1 regression set committed
-(`tests/fixtures/narrator_beats.json` — 16 cases distilled from the
-session, replayed through the real mediator cycle). Live evidence for
-`st-1`: the brief carries no presence block (the narrator cannot
-legally name who is in the room). The exit criterion needs volume:
-more sessions across seeds/scenarios, findings extend the corpus.
-Detail: `worklog.md` iter-13 + `docs/VALIDATION_SPEC.md` §7.1.
-
-### iter-14 · validation beats — done (session 2)
-
-Session 2 over the theft-and-arson scenario (seed 8, 12 beats, 22 supported
-claims, **0 canon violations**): the families session 1 left uncovered were
-probed live and all caught — `event_type_mismatch`, `cannot_know`,
-`stale_ref` (after a scene close), the full regen-exhaustion ladder (2/2 →
-dry, L12), a door-rejected intent (a well-formed world-impossible steal
-commits `intent_rejected`), rebased intents, and the delta vocabulary at
-the beat level (pin, retire + establish, idempotent no-op). The corpus grew
-16 → 25 cases: every validator refusal reason is now pinned at the beat
-level. Detail: `worklog.md` iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
 
 ### iter-26 · phase-1 gate — done (verdict: PASS, D-058)
 
@@ -321,6 +291,23 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-33 · 2026-09-01 · parse-1 batch 2 (iter-33-parse1-say-sessions2;
+  the owner's corpus-growth call): four live say-door sessions (seeds
+  111/65/30/32), the corpus 6→10 cases, 51 combined utterances / 0
+  honest misfires — the ≥90% criterion holds on the combined volume;
+  examine/use/rest fed live for the first time, the two
+  RETIRED-terminal paths (scene close, narrator withdrawal), the
+  question ladder, the wait-without-ticks gate/door probe, per-cycle
+  state pins. Detail: worklog iter-33 + `docs/PARSER_SPEC.md` §6/§7.
+
+- iter-32 · 2026-09-01 · parse-1 validation beats (iter-32-parse1-say-sessions):
+  six live say-door sessions (seeds 125/42/4/23/8/41), 30 utterances / 0
+  honest misfires — the ≥90% criterion MET on that volume per PARSER_SPEC
+  §6; the parse-reply regression corpus committed (6 cases; the PROMOTED
+  entry is terminal, the fire cascade drains inside the door's own batch,
+  failed takes keep live+pinned); KI#54 opened + closed. Detail: worklog
+  iter-32 + `docs/PARSER_SPEC.md` §6/§7.
 
 - iter-31 · 2026-09-01 · phase-2 parser door (iter-31-phase2-parser-door;
   the owner's "start phase 2" call): the mode-C boundary's LLM-free
@@ -546,6 +533,12 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   Corpus 25 → 32. Detail: worklog iter-16 + VALIDATION_SPEC §7.1.
 
 - iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056): the `present_entities` 8th brief block (entity cards) + the write-side arrival-snapshot twin; the T1 fixture regenerated in the same commit. Detail: D-056 + `docs/BRIEF_SPEC.md` §3.4.
+
+- iter-14 · 2026-08-30 · validation beats — session 2 (iter-14-validation-beats-2; seed 8, 12 beats, 0 canon violations): the uncovered refusal families probed live (`event_type_mismatch`, `cannot_know`, `stale_ref`, the regen-exhaustion ladder, a door-rejected steal); corpus 16→25 — every validator refusal reason pinned at the beat level. Detail: worklog iter-14 + `docs/VALIDATION_SPEC.md` §7.1.
+
+- iter-13 · 2026-08-30 · validation beats — session 1 (iter-13-validation-beats; seed 125, 11 beats, 0 canon violations): the first live agent-in-the-loop `narrate` session; KI#44 fixed (the `BEAT` summary lines); the phase-1 regression set committed (`tests/fixtures/narrator_beats.json`, 16 cases). Detail: worklog iter-13 + `docs/VALIDATION_SPEC.md` §7.1.
+
+- iter-12 · 2026-08-30 · the mediator session loop (iter-12-mediator-loop; D-055, the owner's engine verdict — the dev-time narrator is the external agent over a file contract): the call/response documents, the beat cycle, noun resolution + withdrawals, the L12 ladder, the `narrate` session commands. Detail: worklog iter-12 + `docs/VALIDATION_SPEC.md` §7.1 + D-055.
 
 - bg-5 · 2026-08-30 · owner-requested verdict on a pasted external integration spec (bg-5-spec-verdict; docs-only): every citation audited, no repo drift; two adoptions land as the st-4 Script-Tax and st-2 repetition-promotion backlog amendments. Detail: git worklog bg-5.
 

@@ -1,36 +1,38 @@
 # STATUS — canonsim
 
-Iteration: iter-32 (`iter-32-parse1-say-sessions`) · Phase: 2 (parser,
-mode C) OPEN · Date: 2026-09-01 · parse-1 validation beats landed: six
-live `say`-door sessions (seeds 125/42/4/23/8/41 — the day-one
-walkthrough, the texture pin on a failed take, the texture promotion,
-the fire chain, the disambiguation family, the malformed-probe family)
+Iteration: iter-33 (`iter-33-parse1-say-sessions2`) · Phase: 2 (parser,
+mode C) OPEN · Date: 2026-09-01 · parse-1 batch 2 (the owner's
+corpus-growth call): four live `say`-door sessions (seeds 111/65/30/32 —
+the untested-verbs walkthrough, the scene-close retirement, the
+disambiguation ladder + the muse families, the narrator withdrawal)
 driven by a runner outside the repo through the REAL stack (Simulator +
-Mediator + ParserDoor over ONE shared ledger, D-049 — the narrator half
-establishes, the player's words reference; the operator IS the external
-parser, D-062). PARSER_SPEC §6 tally: 30 utterances, mix 21 intent / 6
-question / 2 no_intent; 7/7 deliberate off-grammar probes caught loudly
-(off-verb, ghost noun, non-integer ticks, off-enum method, two
-alternatives in one document, the CONSUMED texture reference, the
-double apply); 0 honest misfires — boundary validity 21/21 = 100% among
-intent-alternative replies (questions and no-intent verdicts are honest
-outcomes; the mix is the record); 3 door failures are world answers
-(take_failed, 2× intent_rejected) + 1 one-path RunnerError after the
-pin. The ≥90% valid-intents criterion (ROADMAP §2) is MET on this
-volume per the §6 procedure — the phase-2 gate closure stays the
-owner's (the phase-1 precedent: criterion hit iter-24, gate closed
-iter-26). Live findings pinned in the corpus: a PROMOTED texture entry
-is terminal — re-referencing it is off-grammar, the parser takes the
-disambiguation path (found live: the operator's first script assumed
-the candles still addressable after the take; the boundary refused);
-the fire cascade drains INSIDE the door's own run_steps batch
-(drop_break cycle: 5 events, last location_burned_out — the iter-23
-batch law through the say door). The parse-reply regression corpus
-(`tests/fixtures/parse_replies.json`, 6 cases, the narrator-beats
-fixture's family) replays through the real doors. KI#54 (the FAQ crept
-to 21 entries at iter-31, over the ≤20 cap) opened + closed. Doc-only
-streak: 0 (iter-32 carries code + fixture + test). 654→660 green, ruff
-clean.
+Mediator + ParserDoor over ONE shared ledger, D-049). PARSER_SPEC §6
+batch tally: 21 utterances, mix 14 intent / 4 question / 2 no_intent + 1
+gate-passed door-rejected cycle; 3/3 deliberate off-grammar probes
+caught loudly (the undeclared field on a fieldless verb, the
+RETIRED-entry re-reference ×2 — one scene-close cause, one
+narrator-withdrawal cause); 0 honest misfires — boundary validity
+14/14 among fed intents; 2 door failures are world answers (take_failed
+×2, both texture-path takes whose pins survive). Combined corpus tally
+(iter-32 + iter-33): 51 utterances, 35/35 boundary validity — the ≥90%
+criterion (ROADMAP §2) holds on the combined volume per the §6
+procedure; the phase-2 gate closure stays the owner's. Live laws now
+corpus-pinned: examine/use/rest were never fed live before — all three
+land through the door (use lands intoxication 20, the wait-720 decay
+batch drains INSIDE the door's own run_steps batch — 16 events, the
+iter-23 batch law on the quiet side; the fatigue clamp 20−30→0 pinned
+per-cycle); a PINNED texture entry can die two ways — the scene close
+(leaving) and the narrator's withdrawal (a retire delta — un-pinning
+does not exist, but the narrator's own assertion can die) — RETIRED
+joins PROMOTED as terminal, the reference off-grammar either way, fresh
+establishment after RETIRE legal (a new entry id — the new-candles law);
+the wait-without-ticks reply passes the parse gate and dies at the
+door's shape law (PARSER_SPEC §4's gate-does-not-duplicate-door-checks,
+live). The parse-reply regression corpus 6→10 cases
+(`tests/fixtures/parse_replies.json` + the `tests/test_parser.py`
+replay; the corpus machinery grew the narrator-cycle note override and
+the optional per-cycle state assert). Doc-only streak: 0 (iter-33
+carries fixture + test). 660→664 green, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -60,17 +62,8 @@ clean.
   CLOSED iter-32: the narrate + parse session recipes merged into ONE
   "Live sandbox session recipes" entry (they are one session's two
   doors) → 20; the iter-32 lessons folded in.
-- KI#53 · phase-state doc drift (two files): `docs/TASKS.md`'s Track-A
-  header still said "Phase 1 … is open" after the phase-1 gate closed
-  (iter-26/D-058 — the last update predates the gate-review sweep), and
-  `README.md`'s Status paragraph still ended at iter-11a ("Next: the
-  narrator LLM call itself") — stale through 15+ iterations incl. the
-  phase-1 close (family: a phase-state header nobody re-reads rots
-  silently) · opened + CLOSED iter-31: TASKS' header rewritten to the
-  phase-2 state; README's Status tail rewritten (phase-1 gate PASS +
-  the D-055 narrator boundary + phase-2 open, D-062) + the repo-map
-  row gains `brief/parser.py`; the phase-state single owner is this
-  file's header — TASKS/README link, never restate.
+- (KI#53 deleted at iter-33 per AGENTS §5 — closed iter-31, two
+  iterations past; detail in git + worklog iter-31.)
 - (KI#51 deleted at iter-32 per AGENTS §5 — closed bg-4, two
   iterations past; the false-external-citation lesson lives in
   TECH_NOTES §9 + worklog bg-4.)
@@ -257,7 +250,18 @@ clean.
   apart from parse validity). The door-batch law reproduces through
   `say`: the fire cascade drains inside the door's own `run_steps`
   batch (5 events for one drop_break cycle) — distilled cases carry
-  the batch structure, exactly as the narrator corpus does.
+  the batch structure, exactly as the narrator corpus does. iter-33
+  lessons (batch 2): a PINNED entry dies two ways — the scene close
+  (leave + return) and the narrator's own withdrawal (a retire delta;
+  un-pinning does not exist, but the narrator's assertion can die) —
+  either way RETIRED is terminal, the reference off-grammar at the
+  gate, fresh establish legal (a new entry id); `use`/`rest`/`examine`
+  fed live for the first time — the wait-720 decay batch drains inside
+  the door's own `run_steps` exactly like the fire cascade (16
+  events); a wait reply WITHOUT `ticks` passes the parse gate (the
+  gate does not duplicate door-owned checks, PARSER_SPEC §4) and dies
+  loudly at the door — the cycle is consumed, the fixed reply needs a
+  fresh `say`.
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
@@ -378,16 +382,18 @@ gate.
 
 ## Next step
 
-**Phase 2 is OPEN.** parse-1 landed iter-32 (six live `say`-door
-sessions, 30 utterances, 0 honest misfires — the ≥90% boundary-validity
-criterion MET on that volume per PARSER_SPEC §6, the composition
-recorded; the parse-reply regression corpus committed). The phase-2
-arc, in order:
+**Phase 2 is OPEN.** parse-1 batch 2 landed iter-33 (the owner's
+corpus-growth call): the say-door corpus 6→10 cases, 51 combined
+utterances, 0 honest misfires — the ≥90% boundary-validity criterion
+holds on the combined volume per PARSER_SPEC §6 (the composition
+recorded; the two RETIRED-terminal paths and the gate/door one-owner
+boundary now live-pinned). The phase-2 arc, in order:
 
 1. **The phase-2 gate review is the owner's** (the phase-1 precedent:
-   the criterion hit at iter-24, the gate closed at iter-26) — more
-   parse-1-class session volume only on the owner's call for a deeper
-   review; the corpus grows the same way on demand.
+   the criterion hit at iter-24, the gate closed at iter-26) — the
+   corpus now carries the combined volume for it; more parse-1-class
+   session volume only on the owner's next call (the corpus grows the
+   same way on demand).
 2. **`parse-2`** (owner-gated) — disambiguation buttons, multi-intent
    utterances (PARSER_SPEC §7's deferrals; a frontend consumer or
    live-session evidence is the trigger).
