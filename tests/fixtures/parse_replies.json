@@ -1,0 +1,708 @@
+{
+ "source": "Phase-2 parse-reply regression set (iter-32 parse-1 validation beats): full say-cycle documents distilled from six live agent-in-the-loop sessions over the mode-C door (s1 walkthrough seed 125; s2 the texture pin survives a failed take seed 42; s3 the texture promotion + canon birth seed 4; s4 the fire chain through the door seed 23; s5 the disambiguation family seed 8; s6 the malformed-probe family seed 41) - each replayed through the REAL session stack (Simulator + Mediator + ParserDoor over ONE shared SceneLedger, cli/parser.py + cli/mediator.py). The narrator half (texture establishment) runs through the real mediator beat; the player half through the say door; the two doors share the session's one ledger (D-049). Per PARSER_SPEC \u00a76 the tally: 30 utterances, mix 21 intent / 6 question / 2 no_intent; 7/7 deliberate off-grammar probes caught loudly at the boundary (off-verb, ghost noun, non-integer ticks, off-enum method, two alternatives in one document, consumed texture reference, double apply); 21/21 boundary-accepted intent replies - 0 honest misfires, validity 100% among intent-alternative replies (questions and no-intent verdicts are honest outcomes, not violations); 3 door failures are world answers (take_failed, 2x intent_rejected), 1 door-law error after the pin (the one-path RunnerError, cycle pinned then refused). Session findings pinned per-cycle: the fire cascade drains INSIDE the door's own run_steps batch (drop_break cycle: 5 events, last location_burned_out - the iter-23 batch-boundary lesson through the say door); a PROMOTED texture entry is terminal - re-referencing it is off-grammar, the parser takes the disambiguation path (s6 cycle 3); a failed take keeps its entry live+pinned (s2, seed 42); a committed take IS the promotion (s3/s6, seeds 4/41 - canon birth loc_tavern.candles=lit); talk ripples 2 events (rumor_told). Provenance: worklog iter-32 + the runner (scripts/iter32_parse_runner.py, outside the repo) - the live logs and call/reply documents are gitignored runtime artifacts under the runner's scratch dir. The corpus's job: pin the phase-2 exit criterion's evidence (ROADMAP \u00a72 - the \u226590% valid-intents gate review rides this volume; PARSER_SPEC \u00a76 owns the measurement).",
+ "cases": [
+  {
+   "name": "s1_walkthrough",
+   "seed": 125,
+   "setup": [],
+   "cycles": [
+    {
+     "say": "I push through the door and walk into the tavern",
+     "reply": {
+      "intent": {
+       "kind": "move",
+       "target": "loc_tavern"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "move"
+     }
+    },
+    {
+     "say": "Let me have a look around first",
+     "reply": {
+      "intent": {
+       "kind": "look_around"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "look_around"
+     }
+    },
+    {
+     "say": "I keep to myself and bide my time for a good while",
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 30
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait"
+     }
+    },
+    {
+     "say": "That purse on the guard's belt \u2014 I relieve him of it, quietly, while his eyes are on the door",
+     "reply": {
+      "intent": {
+       "kind": "steal",
+       "target": "npc_guard_01",
+       "fields": {
+        "method": "distraction"
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "steal"
+     }
+    },
+    {
+     "say": "I hum an old tune to myself, eyes on the rafters",
+     "reply": {
+      "no_intent": "idle humming \u2014 no world-touching intent"
+     },
+     "expect": {
+      "status": "no_intent",
+      "text": "idle humming \u2014 no world-touching intent"
+     }
+    },
+    {
+     "say": "Get someone's attention for me \u2014 the guard? the drunkard? whoever will look",
+     "reply": {
+      "question": "who should be distracted \u2014 Doren the guard or the drunkard?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "who should be distracted \u2014 Doren the guard or the drunkard?"
+     }
+    },
+    {
+     "say": "The drunkard. I draw his eye with a wave",
+     "reply": {
+      "intent": {
+       "kind": "distract",
+       "target": "npc_drunk_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "distract_ignored"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {}
+   }
+  },
+  {
+   "name": "s2_texture_pin_fails",
+   "seed": 42,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "narrator": {
+      "prose": "Tallow candles guttered on the bar, throwing long shadows over the purses left carelessly close.",
+      "texture_delta": {
+       "source": "turn:1",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "While the barkeep's back is turned, I palm one of those candles",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0000",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [
+       "tex_0000"
+      ],
+      "promoted": [],
+      "last_event": "take_failed"
+     }
+    },
+    {
+     "say": "No matter \u2014 what else is lying about that I could actually lift?",
+     "reply": {
+      "question": "what are you trying to take \u2014 the purse, the mug of ale, or the oil lamp?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "what are you trying to take \u2014 the purse, the mug of ale, or the oil lamp?"
+     }
+    },
+    {
+     "say": "Forget it. I just wait and watch the room",
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 10
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {
+     "tex_0000": "pinned"
+    },
+    "state": {
+     "loc_tavern": {
+      "candles": null
+     }
+    }
+   }
+  },
+  {
+   "name": "s3_texture_promotes",
+   "seed": 4,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "narrator": {
+      "prose": "Tallow candles guttered on the bar, throwing long shadows. Nobody counted them.",
+      "texture_delta": {
+       "source": "turn:1",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "I palm one of the candles and tuck it away",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0000",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [
+       "tex_0000"
+      ],
+      "promoted": [
+       "tex_0000"
+      ],
+      "last_event": "take"
+     }
+    },
+    {
+     "say": "Right. I slip back out to the street before anyone counts the light",
+     "reply": {
+      "intent": {
+       "kind": "move",
+       "target": "loc_street"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "move"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {
+     "tex_0000": "promoted"
+    },
+    "state": {
+     "loc_tavern": {
+      "candles": "lit"
+     }
+    }
+   }
+  },
+  {
+   "name": "s4_fire_chain",
+   "seed": 23,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "say": "I pick up the oil lamp from the bar",
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "target": "oil_lamp_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "take"
+     }
+    },
+    {
+     "say": "Out through the back, into the yard",
+     "reply": {
+      "intent": {
+       "kind": "move",
+       "target": "loc_backyard"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "move"
+     }
+    },
+    {
+     "say": "I smash the lamp down against the woodpile",
+     "reply": {
+      "intent": {
+       "kind": "drop_break",
+       "target": "oil_lamp_01",
+       "fields": {
+        "near": "woodpile"
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 5,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "location_burned_out"
+     }
+    },
+    {
+     "say": "I bolt for the street",
+     "reply": {
+      "intent": {
+       "kind": "flee",
+       "target": "loc_street"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "flee"
+     }
+    },
+    {
+     "say": "And the street itself will burn for me too, while I'm at it",
+     "reply": {
+      "intent": {
+       "kind": "arson",
+       "target": "loc_street"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "intent_rejected"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {}
+   }
+  },
+  {
+   "name": "s5_disambiguation",
+   "seed": 8,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "say": "I want a word with that fellow over there",
+     "reply": {
+      "question": "which fellow \u2014 Doren the guard, the barkeep, or the drunkard?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "which fellow \u2014 Doren the guard, the barkeep, or the drunkard?"
+     }
+    },
+    {
+     "say": "The barkeep. I strike up a conversation about the roads",
+     "reply": {
+      "intent": {
+       "kind": "talk",
+       "target": "npc_barkeep_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 2,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "rumor_told"
+     }
+    },
+    {
+     "say": "I greet the room in general and nurse my drink",
+     "reply": {
+      "no_intent": "a general greeting \u2014 no addressee, no world-touching intent"
+     },
+     "expect": {
+      "status": "no_intent",
+      "text": "a general greeting \u2014 no addressee, no world-touching intent"
+     }
+    },
+    {
+     "say": "Hand me the thing",
+     "reply": {
+      "question": "which thing \u2014 the purse, the mug of ale, or the oil lamp?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "which thing \u2014 the purse, the mug of ale, or the oil lamp?"
+     }
+    },
+    {
+     "say": "I prod the empty air where the ghost should be",
+     "reply": {
+      "question": "there is no ghost here \u2014 who or what do you mean?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "there is no ghost here \u2014 who or what do you mean?"
+     }
+    },
+    {
+     "say": "Never mind. I'll just bide my time here",
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 5
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {}
+   }
+  },
+  {
+   "name": "s6_probe_family",
+   "seed": 41,
+   "setup": [
+    {
+     "intent": "move",
+     "target": "loc_tavern"
+    }
+   ],
+   "cycles": [
+    {
+     "narrator": {
+      "prose": "Tallow candles guttered on the bar. The guard's purse sat in easy reach of a quick hand.",
+      "texture_delta": {
+       "source": "turn:1",
+       "established": [
+        {
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit",
+         "surface": "Tallow candles guttered on the bar, throwing long shadows."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "I swipe the purse right off the guard's belt",
+     "probes": [
+      {
+       "intent": {
+        "kind": "rob",
+        "target": "npc_guard_01"
+       }
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "steal",
+       "target": "npc_guard_01",
+       "fields": {
+        "method": "distraction"
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "steal"
+     }
+    },
+    {
+     "say": "I take one of those candles after all",
+     "probes": [
+      {
+       "intent": {
+        "kind": "take",
+        "target": "npc_ghost_01"
+       }
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "fields": {
+        "texture": {
+         "entry": "tex_0000",
+         "scope": "scene:loc_tavern",
+         "slot": "candles",
+         "value": "lit"
+        }
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [
+       "tex_0000"
+      ],
+      "promoted": [
+       "tex_0000"
+      ],
+      "last_event": "take"
+     }
+    },
+    {
+     "say": "I grab another candle the same way",
+     "probes": [
+      {
+       "intent": {
+        "kind": "take",
+        "fields": {
+         "texture": {
+          "entry": "tex_0000",
+          "scope": "scene:loc_tavern",
+          "slot": "candles",
+          "value": "lit"
+         }
+        }
+       }
+      }
+     ],
+     "reply": {
+      "question": "the candle you pocketed is gone from the bar \u2014 what did you mean to take?"
+     },
+     "expect": {
+      "status": "question",
+      "text": "the candle you pocketed is gone from the bar \u2014 what did you mean to take?"
+     }
+    },
+    {
+     "say": "I wait a while, let the room settle",
+     "probes": [
+      {
+       "intent": {
+        "kind": "wait",
+        "fields": {
+         "ticks": "a while"
+        }
+       }
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "wait",
+       "fields": {
+        "ticks": 20
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "wait"
+     }
+    },
+    {
+     "say": "I try my luck with the barkeep's till",
+     "probes": [
+      {
+       "intent": {
+        "kind": "steal",
+        "target": "npc_barkeep_01",
+        "fields": {
+         "method": "vanish"
+        }
+       }
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "steal",
+       "target": "npc_barkeep_01",
+       "fields": {
+        "method": "distraction"
+       }
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "pinned": [],
+      "promoted": [],
+      "last_event": "intent_rejected"
+     }
+    },
+    {
+     "narrator": {
+      "prose": "The guard's cloak trailed a muddy hem across the floorboards, close enough to grab.",
+      "texture_delta": {
+       "source": "turn:2",
+       "established": [
+        {
+         "scope": "entity:npc_guard_01",
+         "slot": "cloak",
+         "value": "muddy hem",
+         "surface": "The guard's cloak trailed a muddy hem."
+        }
+       ]
+      }
+     }
+    },
+    {
+     "say": "both the guard's purse and that muddy cloak hem, somehow, all in one grab",
+     "door_error": true,
+     "reply": {
+      "intent": {
+       "kind": "take",
+       "target": "purse_01",
+       "fields": {
+        "texture": {
+         "entry": "tex_0001",
+         "scope": "entity:npc_guard_01",
+         "slot": "cloak",
+         "value": "muddy hem"
+        }
+       }
+      }
+     }
+    },
+    {
+     "say": "I chat with the drunkard a moment",
+     "probes": [
+      {
+       "intent": {
+        "kind": "talk",
+        "target": "npc_drunk_01"
+       },
+       "question": "which fellow?"
+      }
+     ],
+     "reply": {
+      "intent": {
+       "kind": "talk",
+       "target": "npc_drunk_01"
+      }
+     },
+     "expect": {
+      "status": "intent",
+      "events": 2,
+      "pinned": [],
+      "promoted": [],
+      "last_event": "rumor_told"
+     }
+    },
+    {
+     "double_apply_probe": {
+      "no_intent": "stale second apply"
+     }
+    }
+   ],
+   "expect": {
+    "ledger": {
+     "tex_0000": "promoted",
+     "tex_0001": "pinned"
+    },
+    "state": {
+     "loc_tavern": {
+      "candles": "lit"
+     }
+    }
+   }
+  }
+ ]
+}

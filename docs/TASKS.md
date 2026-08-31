@@ -40,14 +40,23 @@ KI#53 (phase-state doc drift: the stale Track-A phase header + the
 README Status tail, stale since iter-11a) fixed. 629→654 green, ruff
 clean. Detail: worklog iter-31 + `docs/PARSER_SPEC.md` + D-062.
 
+### iter-32 · parse-1 — validation beats over the say door — done
+
+Six live mode-C sessions (seeds 125/42/4/23/8/41 — the walkthrough,
+the texture pin on a failed take, the texture promotion, the fire
+chain, the disambiguation family, the malformed-probe family) driven
+by a runner outside the repo through the REAL stack (Simulator +
+Mediator + ParserDoor over one shared ledger, D-049): the ≥90%
+valid-intents criterion MET on this volume per PARSER_SPEC §6 (0
+honest misfires; the phase-2 gate review stays the owner's — the
+iter-24/26 precedent). The parse-reply regression corpus
+(`tests/fixtures/parse_replies.json` + the `tests/test_parser.py`
+replay) pins the findings (the PROMOTED entry is terminal; the fire
+cascade drains inside the door's own batch; failed takes keep
+live+pinned). Detail: worklog iter-32 + `docs/PARSER_SPEC.md` §6/§7.
+
 ### Phase-2 parser backlog
 
-- `parse-1` validation-beats sessions: live `say` cycles across
-  seeds/utterance families (the narrator-session recipe applied to the
-  parse door); the reply-alternative mix tallied; findings extend a
-  parse-reply regression corpus (the narrator-beats fixture's family).
-  The ≥90% valid-intents gate review rides the session volume
-  (PARSER_SPEC §6; ROADMAP §2 owns the exit criterion).
 - `parse-2` (owner-gated) disambiguation buttons + multi-intent
   utterances — deferred with a frontend consumer / live-session
   evidence (PARSER_SPEC §7).

@@ -68,12 +68,15 @@ call): the mode-C boundary's LLM-free half — the grammar snapshot
 impossible), the parse call/reply file contract with the closed
 reply {intent | question | no_intent} gated at the boundary, the
 pin law, the `say`/`say apply` session door; contract owner
-`docs/PARSER_SPEC.md`. 654 tests green, ruff clean, golden fixtures
-byte-identical. Next: parse-1 validation-beats sessions over the
-`say` door (the ≥90% valid-intents exit criterion rides the session
-volume); track B (bg-2/bg-3) queries the bg-1 SQLite sink
-(`docs/TECH_NOTES.md` §3.2, D-051) when the owner supplies the DF
-exports.
+`docs/PARSER_SPEC.md`. parse-1 validation beats landed iter-32 (six
+live say-door sessions, 30 utterances, 0 honest misfires — the ≥90%
+boundary-validity criterion MET on that volume per PARSER_SPEC §6;
+the phase-2 gate review is the owner's; the parse-reply regression
+corpus committed). 660 tests green, ruff clean, golden fixtures
+byte-identical. Next: the owner's phase-2 gate review + the
+owner-gated set (parse-2, engine-1); track B (bg-2/bg-3) queries the
+bg-1 SQLite sink (`docs/TECH_NOTES.md` §3.2, D-051) when the owner
+supplies the DF exports.
 
 ## For AI agents (primary audience)
 

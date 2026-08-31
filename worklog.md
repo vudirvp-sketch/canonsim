@@ -10,6 +10,43 @@
 > since iter-5).
 
 ---
+iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
+(iter-32-parse1-say-sessions; the phase-2 arc's first session batch)
+- Six live mode-C sessions (seeds 125/42/4/23/8/41 — walkthrough,
+  texture-pin-on-failed-take, texture promotion, fire chain,
+  disambiguation family, malformed-probe family) driven by a runner
+  outside the repo (scripts/iter32_parse_runner.py, Rule 9) through the
+  REAL stack: Simulator + Mediator + ParserDoor over ONE shared ledger
+  (D-049) — the narrator half establishes, the player's words
+  reference; the operator IS the external parser.
+- PARSER_SPEC §6 tally: 30 utterances (21 intent / 6 question / 2
+  no_intent), 7/7 deliberate off-grammar probes caught loudly, 0 honest
+  misfires → boundary validity 21/21 (the ≥90% criterion MET on this
+  volume; the phase-2 gate review stays the owner's — the iter-24/26
+  precedent); 3 door failures are world answers (take_failed joins
+  intent_rejected in that family) + 1 one-path RunnerError after the
+  pin.
+- Findings distilled live into tests/fixtures/parse_replies.json (6
+  cases, the narrator-beats family; replayed through the real doors in
+  tests/test_parser.py): a PROMOTED entry is terminal (re-reference =
+  off-grammar — found live: the first operator script assumed the
+  candles addressable after the take; the boundary refused, the script
+  was fixed, the catch became a deliberate probe); the fire cascade
+  drains inside the door's own batch (5 events, last
+  location_burned_out — the iter-23 batch law through the say door);
+  failed takes keep live+pinned, committed takes are the promotion
+  (canon birth pinned in the fixture's state asserts).
+- KI#54 (the FAQ crept to 21 entries at iter-31, over the ≤20 cap)
+  opened + closed: the narrate/parse session recipes merged to one
+  entry. 654→660 green, ruff clean. 2 files + the doc-sync set (the
+  iter-25 precedent); iter-23 evicted per the cap. Docs: PARSER_SPEC
+  §7 (the corpus row lands), TASKS, STATUS, AGENT_NAVIGATION §1,
+  README Status. KI#51/KI#52 deleted per AGENTS §5 (closed bg-4, two
+  iterations past). TASKS 598→607 stays over the 600 cap by substance
+  (the iter-22/23 precedent — the session findings carry load; the
+  cruft pass ran: iter-32's own tally restatement cut, single owner
+  STATUS + the fixture's source).
+---
 iter-31 · 2026-09-01 · phase-2 parser door — the mode-C boundary's
 LLM-free half (iter-31-phase2-parser-door; the owner's start-phase-2
 call — phase 1 closed at D-058, polish done iter-27–29)
@@ -268,34 +305,7 @@ return under burned-yard knowledge (iter-24-validation-beats-9)
 ---
 iter-23 · 2026-08-31 · validation beats — session 8, the
 arson-after-theft chain (iter-23-validation-beats-8)
-- Live narrate session 8 (seed 85, 12 beats + 3 refused-and-caught
-  probes, 49 supported claims, 0 canon violations): the take →
-  silent steal → drop_break → fire chain under a successful-theft
-  context — sessions 4/5/7 tied; both prizes on one coat, the
-  departure token (`pc_01_left_toward_loc_backyard`) claimable at
-  the yard arrival.
-- The unseen arson: the rotation hands the crime half across the
-  watch change (purse_missing inferred/exact → told/partial, the
-  trail + noise tokens, suspicion 20 both guards — crime_status
-  stays unknown post-inference, 20 < 25) while the fire half never
-  crosses — guard-side fire tokens all token_absent refusals (the
-  transfer bounded by what the holder holds; session 6's positive
-  half complemented). The arsonist's calm (status.fear 0 — the
-  cause-actor fear exclusion) and the cause-actor blindness refusal
-  pin the ignition exception from both sides.
-- The flee fed through the door from a burned-out yard (the
-  unpursued half; the purse leaves the fire, the lamp stays); the
-  street arson attempt commits intent_rejected (claimable by
-  id+type — a new door-outcome action kind); the maid's autonomous
-  urgency event claimable by id+type; the §3 market leg pinned
-  unreachable live (tune-3 family).
-- Corpus 70→84 (+14 seed-85 cases; the post-cascade batch structure
-  expressed as the flee-intent beat + between-steps — byte-equal to
-  the live stream, the new FAQ lesson); 575→589 green, ruff clean.
-  4 files (fixture + the 3-doc sync set — the iter-18 scope
-  precedent); iter-13 evicted per the cap; TASKS 611→627 stays over
-  the 600 cap by substance (the iter-22 precedent — session findings
-  carry load).
+- (deleted at iter-32 per the one-in/one-out cap; history in git.)
 ---
 iter-22 · 2026-08-31 · validation beats — session 7, the theft half
 under the presence machinery (iter-22-validation-beats-7)

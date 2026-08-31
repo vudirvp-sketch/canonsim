@@ -1,29 +1,36 @@
 # STATUS — canonsim
 
-Iteration: iter-31 (`iter-31-phase2-parser-door`) · Phase: 2 (parser,
-mode C) OPEN — the owner's call ("if all phase-1 work is done, start
-phase 2"; the phase-1 gate PASSed at iter-26/D-058, the polish menu
-tune-1/tune-2/pack-2 landed iter-27–29, and the remainder — tune-3,
-st-2, corpus consolidation — is owner-gated with no declared
-candidate, not exit criteria) · Date: 2026-09-01 · iter-31 landed the
-mode-C boundary's LLM-free half (D-062, the D-055 pattern on the
-player's free text): the grammar snapshot (pack verbs with pack-derived
-field constraints ∪ addressable nouns — canon entities + live texture
-entries; ghost interactivity structurally impossible, blueprint §2),
-the parse call/reply file contract (`output/parser/parse_<N>.md` ↔
-`parse_reply_<N>.json`; the closed reply {intent | question |
-no_intent}), the boundary shape gate (off-grammar = loud ParseError,
-never a feed — the world never moves on a malformed parse), the pin law
-(`SceneLedger.pin`, blueprint §1(a)'s first consumer: the reference IS
-the pin), the `say`/`say apply` session door sharing the session's one
-ledger (D-049), promotion wiring identical to the narrator path; the
-trigger-fired `docs/PARSER_SPEC.md` written from the build. KI#53 (the
-stale Track-A phase header — "Phase 1 is open" after the iter-26 gate)
-opened + closed. Doc-only streak: 0 (iter-31 carries code). 654 green
-(629→654, +25 parser suites), ruff clean. The phase-2 arc: parse-1
-validation-beats sessions (live `say` cycles, the reply-alternative
-mix, the ≥90% gate review rides the volume); the owner-gated set is
-unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
+Iteration: iter-32 (`iter-32-parse1-say-sessions`) · Phase: 2 (parser,
+mode C) OPEN · Date: 2026-09-01 · parse-1 validation beats landed: six
+live `say`-door sessions (seeds 125/42/4/23/8/41 — the day-one
+walkthrough, the texture pin on a failed take, the texture promotion,
+the fire chain, the disambiguation family, the malformed-probe family)
+driven by a runner outside the repo through the REAL stack (Simulator +
+Mediator + ParserDoor over ONE shared ledger, D-049 — the narrator half
+establishes, the player's words reference; the operator IS the external
+parser, D-062). PARSER_SPEC §6 tally: 30 utterances, mix 21 intent / 6
+question / 2 no_intent; 7/7 deliberate off-grammar probes caught loudly
+(off-verb, ghost noun, non-integer ticks, off-enum method, two
+alternatives in one document, the CONSUMED texture reference, the
+double apply); 0 honest misfires — boundary validity 21/21 = 100% among
+intent-alternative replies (questions and no-intent verdicts are honest
+outcomes; the mix is the record); 3 door failures are world answers
+(take_failed, 2× intent_rejected) + 1 one-path RunnerError after the
+pin. The ≥90% valid-intents criterion (ROADMAP §2) is MET on this
+volume per the §6 procedure — the phase-2 gate closure stays the
+owner's (the phase-1 precedent: criterion hit iter-24, gate closed
+iter-26). Live findings pinned in the corpus: a PROMOTED texture entry
+is terminal — re-referencing it is off-grammar, the parser takes the
+disambiguation path (found live: the operator's first script assumed
+the candles still addressable after the take; the boundary refused);
+the fire cascade drains INSIDE the door's own run_steps batch
+(drop_break cycle: 5 events, last location_burned_out — the iter-23
+batch law through the say door). The parse-reply regression corpus
+(`tests/fixtures/parse_replies.json`, 6 cases, the narrator-beats
+fixture's family) replays through the real doors. KI#54 (the FAQ crept
+to 21 entries at iter-31, over the ≤20 cap) opened + closed. Doc-only
+streak: 0 (iter-32 carries code + fixture + test). 654→660 green, ruff
+clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,6 +54,12 @@ unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
 
 ## Active KIs
 
+- KI#54 · FAQ cap drift: iter-31's "Live parse session" entry pushed the
+  FAQ to 21 entries (cap ≤20 — AGENTS §6's general rule "check the
+  current size before writing" was skipped; the KI#50 family) · opened +
+  CLOSED iter-32: the narrate + parse session recipes merged into ONE
+  "Live sandbox session recipes" entry (they are one session's two
+  doors) → 20; the iter-32 lessons folded in.
 - KI#53 · phase-state doc drift (two files): `docs/TASKS.md`'s Track-A
   header still said "Phase 1 … is open" after the phase-1 gate closed
   (iter-26/D-058 — the last update predates the gate-review sweep), and
@@ -58,17 +71,11 @@ unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
   the D-055 narrator boundary + phase-2 open, D-062) + the repo-map
   row gains `brief/parser.py`; the phase-state single owner is this
   file's header — TASKS/README link, never restate.
-- KI#51 · `docs/ref/generative_agents.md` carried a fabricated Park
-  2023 cost citation ("Table 2, §6.4, ~$70 for a 2-day 25-agent run" —
-  neither the table nor the section exists; the paper says "thousands
-  of dollars in token credits"; false-citation family, KI#42) ·
-  opened + CLOSED bg-4: figures re-verified against the arXiv full
-  text, re-homed to TECH_NOTES §9 (single owner), ref file corrected.
-- KI#52 · stray stale `TASKS.md` at the repo root (678 lines,
-  pre-iter-26 snapshot — tune-1/tune-2 listed as todo though landed;
-  born in the iter-27 squash commit; unreferenced, over the 600 cap;
-  single-owner violation of `docs/TASKS.md`) · opened + CLOSED bg-4:
-  deleted; detail in git + worklog bg-4.
+- (KI#51 deleted at iter-32 per AGENTS §5 — closed bg-4, two
+  iterations past; the false-external-citation lesson lives in
+  TECH_NOTES §9 + worklog bg-4.)
+- (KI#52 deleted at iter-32 per AGENTS §5 — closed bg-4, two
+  iterations past; detail in git + worklog bg-4.)
 - (KI#50 deleted at iter-28 per AGENTS §5 — closed iter-26, two
   iterations past; the cap-laws citation fix detail lives in git +
   worklog iter-26.)
@@ -173,9 +180,11 @@ unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
   fully-formed cost citation ("Table 2, §6.4, ~$70") that exists
   nowhere in Park 2023 — verify against the arXiv full text before
   restating any number (bg-4, TECH_NOTES §9).
-- **Live narrate session in the sandbox (operational recipe; iter-24,
-  the owner's directive to make the recipe durable).** `python -m cli`
-  opens the interactive session; the narrator door is `narrate
+- **Live sandbox session recipes — narrate + say (operational; iter-24/
+  31/32; merged per KI#54 — one session, two doors sharing one ledger,
+  D-049).** `python -m cli` opens the interactive session. **narrate**
+  (the narrator door, phase 1; the owner's iter-24 directive to make
+  the recipe durable): `narrate
   [<reply.json> | dry]`. `emit_call` writes `output/mediator/call_NNNN.md`
   (gitignored runtime); the operator reads the brief +
   `narrator_protocol`, composes a reply JSON `{prose, texture_delta?,
@@ -218,11 +227,9 @@ unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
   door's own `run_steps` batch (location_burned_out t=533), so the
   NEXT intent (the flee) starts at t=533, not at the arson's
   t=413 — the distilled case must carry the fire cascade inside the
-  same batch structure (session 10's seed-93 cases).
-
-- **Live parse session in the sandbox (phase-2 mode-C recipe; iter-31).**
-  Same session as `narrate`: `python -m cli`, the parse door is
-  `say <free text>` → `output/parser/parse_NNNN.md` (utterance +
+  same batch structure (session 10's seed-93 cases). **say** (the parse
+  door, phase 2, iter-31/D-062): `say <free text>` →
+  `output/parser/parse_NNNN.md` (utterance +
   grammar + protocol; gitignored runtime), the operator composes the
   reply JSON — exactly ONE of `{"intent": {"kind", "target"?,
   "fields"?}}` (on-grammar: kind a listed verb, target a listed noun,
@@ -240,7 +247,17 @@ unchanged (tune-3, st-2, corpus consolidation, engine-1, bg-6).
   narrator's: a runner script outside the repo
   (`/home/z/my-project/scripts/iterNN_runner.py`, Rule 9) reading
   each call, hand-composing replies, harvesting `[parsed intent fed`
-  lines. Contract owner: `docs/PARSER_SPEC.md`.
+  lines. Contract owner: `docs/PARSER_SPEC.md`. iter-32 lessons (six
+  sessions through the real stack, both doors on one ledger): a
+  PROMOTED texture entry is TERMINAL — a reply referencing it is
+  off-grammar at the gate ("not a live texture entry"), the parser
+  takes the disambiguation path; un-pinning does not exist and neither
+  does re-referencing. `take_failed` joins `intent_rejected` in the
+  world-answer family (attempts are facts; PARSER_SPEC §6 tallies them
+  apart from parse validity). The door-batch law reproduces through
+  `say`: the fire cascade drains inside the door's own `run_steps`
+  batch (5 events for one drop_break cycle) — distilled cases carry
+  the batch structure, exactly as the narrator corpus does.
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
@@ -361,17 +378,16 @@ gate.
 
 ## Next step
 
-**Phase 2 is OPEN (the owner's 2026-09-01 call: "if all phase-1 work is
-done, start phase 2").** The mode-C boundary's LLM-free half landed
-iter-31 (D-062; `docs/PARSER_SPEC.md`); the phase-2 arc, in order:
+**Phase 2 is OPEN.** parse-1 landed iter-32 (six live `say`-door
+sessions, 30 utterances, 0 honest misfires — the ≥90% boundary-validity
+criterion MET on that volume per PARSER_SPEC §6, the composition
+recorded; the parse-reply regression corpus committed). The phase-2
+arc, in order:
 
-1. **`parse-1`** — validation-beats sessions over the `say` door (the
-   narrator-session recipe applied to parsing): live cycles across
-   seeds/utterance families, the reply-alternative mix tallied, a
-   parse-reply regression corpus grown (the narrator-beats fixture's
-   family); the ≥90% valid-intents exit criterion (ROADMAP §2) is
-   measured per PARSER_SPEC §6 — boundary-accepted intents per
-   utterance, world outcomes never counted as parse failures.
+1. **The phase-2 gate review is the owner's** (the phase-1 precedent:
+   the criterion hit at iter-24, the gate closed at iter-26) — more
+   parse-1-class session volume only on the owner's call for a deeper
+   review; the corpus grows the same way on demand.
 2. **`parse-2`** (owner-gated) — disambiguation buttons, multi-intent
    utterances (PARSER_SPEC §7's deferrals; a frontend consumer or
    live-session evidence is the trigger).
@@ -385,10 +401,9 @@ iter-31 (D-062; `docs/PARSER_SPEC.md`); the phase-2 arc, in order:
 4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
    (briefer spike) still need the owner's DF export files
    (`dfworlds/` stays outside the repo by design); bg-4 DONE. The
-   un-gated, un-blocked backlog is EMPTY — the next move after
-   parse-1-class work is the owner's. `pack-3` (Sci-Fi sketches)
-   stays parked until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s
-   SPECS_BACKLOG trigger ("phase-0 gate passed") fired at iter-6,
-   was never scheduled, and the just-in-time reading keeps deferring
-   it: write specs FROM experiment results at need, not ahead —
-   phase-2's owner call did not request it; it stays parked.
+   un-gated, un-blocked backlog is EMPTY — the next move is the
+   owner's. `pack-3` (Sci-Fi sketches) stays parked until the
+   2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
+   ("phase-0 gate passed") fired at iter-6, was never scheduled, and
+   the just-in-time reading keeps deferring it: write specs FROM
+   experiment results at need, not ahead — it stays parked.

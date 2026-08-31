@@ -18,6 +18,14 @@ keeps it live+pinned, a success promotes it — seed-probed like the
 narrator-path promotion test), and the door wiring e2e through the real
 front door (emit → reply → feed, promotions wired exactly like the
 narrator path, attempts are facts).
+
+iter-32 (parse-1 validation beats) adds the phase-2 regression set: the
+parse-reply corpus (`fixtures/parse_replies.json`, the narrator-beats
+fixture's family) replayed through the REAL session stack — Simulator +
+Mediator + ParserDoor over ONE shared ledger (D-049): every off-grammar
+probe family caught loudly, both door outcomes, the pin law's live
+paths, the fire cascade inside the door's own batch, and the honest
+question/no-intent surfaces (the ≥90% evidence, PARSER_SPEC §6).
 """
 
 from __future__ import annotations
@@ -28,7 +36,14 @@ from typing import Any
 
 import pytest
 
-from brief.ledger import PINNED, PROMOTED, RETIRED, SceneLedger
+from brief.ledger import (
+    ACTIVE,
+    CONTRADICTED,
+    PINNED,
+    PROMOTED,
+    RETIRED,
+    SceneLedger,
+)
 from brief.parser import (
     ParseError,
     grammar_snapshot,
@@ -36,6 +51,7 @@ from brief.parser import (
     parse_reply_from_mapping,
 )
 from cli.main import main
+from cli.mediator import Mediator
 from cli.parser import ParserDoor
 from core.fold import fold, initial_projection
 from core.log import read_log
@@ -522,3 +538,103 @@ def test_session_say_question_surfaces_to_the_player(
     out = capsys.readouterr().out
     assert "[the parser asks: do you want to steal or just look?]" in out
     assert "[parsed intent fed" not in out
+
+
+# -- the phase-2 parse regression set (iter-32 validation beats) -----------------
+
+_PARSE_CORPUS = json.loads(
+    (REPO / "tests" / "fixtures" / "parse_replies.json").read_text(encoding="utf-8")
+)
+
+_LEDGER_STATUSES = {
+    "active": ACTIVE, "pinned": PINNED, "retired": RETIRED,
+    "contradicted": CONTRADICTED, "promoted": PROMOTED,
+}
+
+
+@pytest.mark.parametrize(
+    "case", _PARSE_CORPUS["cases"], ids=lambda case: case["name"]
+)
+def test_phase2_parse_regression_set(
+    case: dict[str, Any], tmp_path: Path
+) -> None:
+    """The parse-reply corpus: full say-cycle documents distilled from the
+    six live iter-32 sessions, replayed through the REAL mode-C session
+    stack (Simulator + Mediator + ParserDoor over ONE shared ledger — the
+    narrator establishes, the player's words reference, D-049). Pins: every
+    off-grammar probe family caught loudly at the boundary (the cycle
+    stays open, the fixed reply then applies — off-verb, ghost noun,
+    non-integer ticks, off-enum method, two alternatives, the CONSUMED
+    texture reference, the double apply), both door outcomes
+    (committed events + intent_rejected/take_failed as world answers),
+    the pin law's live paths (a failed take keeps live+pinned; a
+    committed take IS the promotion — canon birth), the one-path
+    RunnerError firing AFTER the pin, the fire cascade draining inside
+    the door's own run_steps batch (the iter-23 batch-boundary lesson
+    through the say door), and the honest question/no-intent surfaces —
+    the phase-2 exit criterion's evidence (ROADMAP §2; PARSER_SPEC §6
+    owns the measurement procedure)."""
+    run = tmp_path / case["name"]
+    run.mkdir()
+    log = run / "run.jsonl"
+    sim = Simulator(PACK, case["seed"], log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps(case["setup"])
+    mediator = Mediator(sim, PACK, SCHEMA, log, run / "mediator")
+    door = ParserDoor(
+        sim, PACK, SCHEMA, log, mediator.ledger, run / "parser"
+    )
+    for i, cycle in enumerate(case["cycles"]):
+        if "narrator" in cycle:  # the narrator half: texture on the ledger
+            mediator.emit_call()
+            reply = run / f"narrator_{i}.json"
+            reply.write_text(json.dumps(cycle["narrator"]), encoding="utf-8")
+            beat = mediator.apply_reply(reply)
+            assert beat.status == "accepted"
+            assert any(
+                "texture: 1 established" in note for note in beat.notes
+            )
+            continue
+        if "double_apply_probe" in cycle:
+            probe = run / "double.json"
+            probe.write_text(
+                json.dumps(cycle["double_apply_probe"]), encoding="utf-8"
+            )
+            with pytest.raises(ParseError):  # a consumed call, no second reply
+                door.apply_reply(probe)
+            continue
+        door.emit_call(cycle["say"])
+        for probe in cycle.get("probes", ()):
+            probe_path = run / f"probe_{i}.json"
+            probe_path.write_text(json.dumps(probe), encoding="utf-8")
+            with pytest.raises(ParseError):  # loud, never a feed
+                door.apply_reply(probe_path)
+        reply_path = run / f"reply_{i}.json"
+        reply_path.write_text(json.dumps(cycle["reply"]), encoding="utf-8")
+        if cycle.get("door_error"):
+            with pytest.raises(RunnerError):  # one-path law, after the pin
+                door.apply_reply(reply_path)
+            continue
+        result = door.apply_reply(reply_path)
+        expect = cycle["expect"]
+        assert result.status == expect["status"]
+        if result.status == "intent":
+            assert result.events > 0
+            if "events" in expect:  # the multi-event door batches (findings)
+                assert result.events == expect["events"]
+            assert result.pinned == tuple(expect.get("pinned", ()))
+            assert result.promoted == tuple(expect.get("promoted", ()))
+            assert _events(log)[-1].type == expect["last_event"]
+        else:
+            assert result.text == expect["text"]
+    # case-level: the final ledger and the canon state (canon birth or its
+    # absence — the failed take leaves no candles in the world)
+    expect = case["expect"]
+    by_id = {entry.id: entry for entry in mediator.ledger.entries}
+    assert set(by_id) == set(expect["ledger"])
+    for entry_id, status in expect["ledger"].items():
+        assert by_id[entry_id].status == _LEDGER_STATUSES[status]
+    state = fold(_events(log), initial_projection(PACK.entities))
+    for entity, props in expect.get("state", {}).items():
+        for prop, value in props.items():
+            assert state[entity].get(prop) == value
