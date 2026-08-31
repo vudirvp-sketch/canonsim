@@ -281,13 +281,15 @@ importance signal.
 - The `Persona` JSON shape is structurally identical
   to our `entities.json` — same static-profile +
   runtime-state split.
-- The paper includes the only public cost-per-tick
-  numbers for a 25-agent LLM simulation — bg-4
-  (`docs/TASKS.md`) inherits this benchmark. Per
-  the paper's Table 2 and §6.4, a 2-day simulation
-  of 25 agents costs roughly $70 in OpenAI API
-  credit (gpt-3.5-turbo at 2023 prices) — the
-  cost scales with N agents × M ticks × L calls-per-tick.
+- The paper's own cost statement (Discussion; verified against
+  the arXiv full text at bg-4, 2026-08-31): simulating 25 agents
+  for two days cost "thousands of dollars in token credits" and
+  took multiple days of wall-clock — the paper publishes no cost
+  table (the earlier "Table 2, §6.4, ~$70" claim was drift, KI#51;
+  neither the table nor the section exists). The verified figures
+  and the independent estimate live in `docs/TECH_NOTES.md` §9
+  (single owner, bg-4) — the cost scales with N agents × M
+  ticks × L calls-per-tick.
 
 **Weaknesses.**
 
@@ -354,11 +356,12 @@ and the **flat memory stream without per-channel routing**
 (our `knowledge` records carry a `channel` field for
 `seen` / `told` / `inferred` — the KI#3 expectation_violation
 fix requires the `inferred` channel; this repo has no
-analogue). Cost benchmark (Table 2, §6.4: ~$70 OpenAI credit
-for a 2-day 25-agent simulation at 2023 prices) is the bg-4
-benchmark (`docs/TASKS.md` track B); the
-`"1,000 People" 2024 follow-up` extends this to N=1000 —
-bg-4 inherits both. The repo is the canonical proof that
+analogue). Cost benchmark (the paper's "thousands of dollars" for a
+2-day 25-agent run, plus the `"1,000 People" 2024
+follow-up` at N=1,052; the verified figures live in
+`docs/TECH_NOTES.md` §9, bg-4) is the bg-4 benchmark
+(`docs/TASKS.md` track B — closed bg-4). The repo is the
+canonical proof that
 LLM-agent simulation is architecturally simple (memory +
 retrieval + LLM-call + parse) and operationally expensive
 (cost ∝ N agents × M ticks × L LLM-calls-per-tick); the

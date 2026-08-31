@@ -10,6 +10,31 @@
 > since iter-5).
 
 ---
+bg-4 · 2026-08-31 · cost notes — the prior-art LLM-simulation
+costs (bg-4-cost-notes)
+- TECH_NOTES §9 (new; single owner of the figures): Park 2023
+  verified against the arXiv full text — "thousands of dollars in
+  token credits" for 25 agents × 2 game days (gpt3.5-turbo,
+  sequential), NO cost table; Zhao et al. 2023 (Lyfe Agents,
+  Appendix F) independent estimate: conservative $2,000 → ≈$25 per
+  agent per human hour at 10× game speed; Park 2024 (1,052
+  participants, GPT-4o) publishes no budget — the 59-agent
+  retrieval analysis alone ran 1,281,040 GPT-4o-mini queries.
+  Honest reading: prior art prices the per-agent-per-step hot loop
+  (N×M×L); our phase-1 bill is beat-proportional (2-call steady
+  state) — reference points for the split, not a cross-over claim.
+- KI#51 (ref/generative_agents.md carried a fabricated cost
+  citation — "Table 2, §6.4, ~$70" never existed in the paper;
+  fixed to the verified quote + the TECH_NOTES §9 link) and KI#52
+  (stray 678-line pre-iter-26 TASKS.md snapshot at the repo root,
+  born in the iter-27 squash commit, over cap, unreferenced —
+  deleted) opened + closed. Doc-only iteration: streak 1 of 2 (the
+  alarm fires at 2; the next iteration must carry code or a fresh
+  owner directive).
+- 629 green, ruff clean (no code touched). 5 files (TECH_NOTES §3
+  pointer + §9, the ref fix, TASKS/STATUS sync, worklog; + root
+  TASKS.md deleted); iter-21 evicted per the cap.
+---
 iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
 (iter-30-perf1-profile)
 - scripts/profile_harness.py: day1_full's story steps + grid-aligned
@@ -283,29 +308,9 @@ under the presence machinery (iter-22-validation-beats-7)
   tune-2 re-pin); AGENTS §6.1 substance-vs-cruft law: stays over,
   recorded here.
 ---
-iter-21 · 2026-08-31 · validation beats — session 6, the alarm
-cascade (iter-21-validation-beats-6)
-- Live narrate session 6 (seed 33, arson in the crowded taproom,
-  12 beats + 2 refused-regen probes, 53 supported / 0 canon
-  violations): with witnesses present the cascade session 5 could
-  never fire now fires — alarm_raised (raised_by the first
-  occupant in pack order), the fear spike 40 claimable per NPC and
-  rendered as the `afraid` card marker, cause actor hears
-  fire_alarm_in_<loc> yet stays blind to fire_in_<loc> (session
-  5's law holds witnessed).
-- The §3 watch-change handover live: the rotation carries the
-  purse (KI#46) while knowledge_transfer hands the whole fire
-  record set to the relief guard (told, one fidelity step down) —
-  knowledge moves, fear does not (40→36 decay at the beat, D-050);
-  flee_caught and the plain walk-out after it pinned at the beat
-  level.
-- Finding → tune-3 backlog row: shouting_near_<loc> is structurally
-  unreachable in v0.1 (NPC placement static, the rotation a direct
-  post swap, playscript steps player-only) — the guardroom
-  refusal pair pins the boundary.
-- Corpus 51→59 (+8 seed-33 cases); 556→564 green, ruff clean.
-  4 files (fixture + the 3-doc sync set — the iter-18 scope);
-  bg-5 evicted per the cap; KI#47 deleted per AGENTS §5.
+iter-21 · 2026-08-31 · validation beats — session 6, the alarm cascade
+(iter-21-validation-beats-6)
+- (deleted at bg-4 per the one-in/one-out cap; history in git.)
 ---
 iter-20 · 2026-08-30 · universality pass — the transition + scene-line
 vocabularies become pack data (iter-20-universality, KI#48 + D-057)

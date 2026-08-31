@@ -172,11 +172,6 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   chronicle). Y's own records = the `event_participant` index
   (`docs/TECH_NOTES.md` §3.2; 4 ms measured on the large world).
 
-### bg-4 · cost notes — todo
-
-- Park et al. 2023 + "Generative Agent Simulations of 1,000 People" (2024)
-  figures → `docs/TECH_NOTES.md` cost section.
-
 ### bg-6 · SoW integration audit — todo (owner-deferred)
 
 - Read-only pass over `github.com/jofizcd/Soul-of-Waifu` (registered
@@ -276,6 +271,21 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- bg-4 · 2026-08-31 · cost notes (bg-4-cost-notes): the prior-art
+  LLM-simulation cost section — `docs/TECH_NOTES.md` §9 (single
+  owner; both papers verified against the arXiv full texts: Park
+  2023 publishes no cost table, its own words are "thousands of
+  dollars in token credits" for 25 agents × 2 game days; Zhao et
+  al. 2023 Appendix F estimates conservatively $2,000 → ≈$25 per
+  agent per human hour at 10× game speed; Park 2024 "1,000 People"
+  publishes no total budget, the 59-agent retrieval analysis alone
+  ran 1,281,040 GPT-4o-mini queries) + the honest reading (prior
+  art prices the per-agent-per-step hot loop; our phase-1 bill is
+  beat-proportional). KI#51 (fabricated cost citation in
+  `docs/ref/generative_agents.md` — fixed) + KI#52 (stray stale
+  root `TASKS.md` deleted) closed in the same pass. 629 green,
+  ruff clean. Detail: worklog bg-4 + `docs/TECH_NOTES.md` §9.
 
 - iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
   (iter-30-perf1-profile): the harness (story + grid-aligned waits;

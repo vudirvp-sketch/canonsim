@@ -58,8 +58,8 @@ gated by `perf-1` data).
   = artifact theft). The spike validates briefer mechanics + reverse
   validation, NOT micro-event interestingness — measure that on our own dry
   chronicle, else a distribution mismatch yields a false "briefers are bad".
-- Cost references: Park et al. 2023 (Generative Agents);
-  "Generative Agent Simulations of 1,000 People" (2024).
+- Cost references: §9 (bg-4 — the verified figures from Park et al.
+  2023, Zhao et al. 2023, and the "1,000 People" 2024 study).
 
 ### 3.1 Measured on the owner's exports (iter-8e; extended iter-8f, bg-1)
 
@@ -327,3 +327,71 @@ work):
   corroborated on a 7-day stream after the tune-1 tale gate landed.
 - Verdict: no structural work is warranted at v0.1 scale; phase-2
   per-beat read-side additions have ~3 orders of headroom.
+
+## 9. bg-4: what prior LLM simulations cost (verified 2026-08-31)
+
+All figures below were re-verified against the arXiv full texts (Park
+2023 via ar5iv; Park 2024 via the v3 PDF, revised 2026-06-28; Zhao
+2023 via ar5iv) — rot by design, re-verify before any phase-2+ budget
+decision. Deep-dive context: `docs/ref/generative_agents.md`; THIS
+section is the single owner of the numbers (KI#51: the ref file's
+earlier "~$70, Table 2, §6.4" citation never existed in the paper).
+
+Park et al. 2023 (arXiv:2304.03442; 25 agents × 2 game days,
+gpt3.5-turbo, sequential):
+
+- The paper publishes **no cost table and no per-run dollar figure**.
+  Its own statement (Discussion): "The present study required
+  substantial time and resources to simulate 25 agents for two days,
+  costing thousands of dollars in token credits and taking multiple
+  days to complete." The only other dollar figures in the paper are
+  $15/hour human-evaluation payments, not compute.
+- Wall-clock: the architecture "runs sequentially in roughly
+  real-time game time (where one second real time is one minute game
+  time)" — 60× game speed, 25 agents serialized, API latency on top.
+- Independent estimate (Zhao et al. 2023, arXiv:2310.02172, "Lyfe
+  Agents", Appendix F): takes "thousands" at its word as a
+  conservative **$2,000 total** → ≥ **$2.5 per agent per game hour**
+  (2,000 / 25 / 16 waking hours / 2 days) → ≈ **$25 per agent per
+  human hour** of real-time play at a conservative 10× game speed
+  (The Sims runs 60×; the estimate scales up with it). The same
+  paper claims its chunked-cognition agents are 30–100× cheaper —
+  the priced component is the per-agent-per-step hot loop either way.
+
+Park et al. 2024 (arXiv:2411.10109, "1,000 People"; 1,052 real
+participants, GPT-4o + GPT-4o-mini):
+
+- **No total compute budget is published.** Cost appears
+  qualitatively: "the costs to run the full interviews through some
+  of these more advanced models are substantial"; the
+  retrieval-mechanism analysis is limited to a 59-agent subsample
+  "to minimize cost" — and that analysis alone ran **1,281,040
+  GPT-4o-mini API queries** (the GSS-question × interview-answer
+  classification grid).
+- The reported spend is dominated by human subjects: $60 (interview +
+  first wave) + $30 (two-week retest) + economic-game bonuses per
+  participant. Model choice: GPT-4o, picked for "the best balance
+  between model capacity and computational cost" at collection time.
+- Why it is cited: accuracy, not cost — GSS predictions at 83%
+  (interview-only) / 82% (survey-only) / 86% (combined) of the
+  participants' own two-week test-retest consistency, vs 74% for
+  demographics-only agents.
+
+What this prices (and what it does not):
+
+- Both papers price the **per-agent-per-step hot loop**: cost ∝
+  N agents × M game time × L LLM calls per agent-step — the
+  architecture INV-4 keeps out of track A.
+- Our phase-1 bill is beat-proportional instead: the 2-call steady
+  state / 3-call regen worst case (`docs/VALIDATION_SPEC.md` §7) at
+  any population, with the whole N×M simulation measured near-free
+  on the deterministic core (10k ticks ≈ 0.01–0.02 s, §8). A 12-beat
+  `narrate` session is ~24–36 narrator calls however many NPCs the
+  tavern holds; Park 2023 spent "thousands of dollars" producing two
+  game days of 25 agents' behavior; §2 owns our cloud-fallback
+  per-turn price (~$0.01–0.03).
+- Honest limit: these are reference points for the split ("the
+  simulator produces facts, the LLM produces prose"), not a
+  cross-over claim — 2023 vs 2026 API prices and per-seat vs
+  per-beat accounting are NOT normalized here; any phase-2+ budget
+  decision re-verifies against then-current prices.

@@ -1,20 +1,29 @@
 # STATUS — canonsim
 
-Iteration: iter-30 (`iter-30-perf1-profile`) · Phase: 1 closed (gate
-PASS, D-058; the code-carrying polish menu done — tune-1/tune-2/pack-2
-landed) · Date: 2026-08-31 · perf-1 closed: the 10k-tick timing
-profile (`scripts/profile_harness.py`; numbers owner TECH_NOTES §8).
-10k ticks ≈ 0.01–0.02 s write-side (~9.8k events/s), read side ≈
-0.017 s; cost is event-linear (quiet ticks near-free), schema
-validation the per-event hot spot (~24 validate calls per event); the
-"seconds, not minutes" target met with ~3 orders of margin — no
-structural work warranted at v0.1 scale. The clean-vs-profiled
-double-run byte-compare held at 10k ticks (a T1-family probe, not a
-cross-environment claim). 629 green, ruff clean (test count unchanged
-— the harness follows the balance_harness no-test precedent; import
-breakage is guarded by the architecture closure test). The owner-gated
-remainder is unchanged: tune-3 (the three-way fork), st-2, corpus
-consolidation; phase 2 opens on the owner's call.
+Iteration: bg-4 (`bg-4-cost-notes`) · Phase: 1 closed (gate PASS,
+D-058) · Date: 2026-08-31 · bg-4 closed: the prior-art LLM-simulation
+cost section (`docs/TECH_NOTES.md` §9, single owner) — both papers
+verified against the arXiv full texts. Park 2023 publishes no cost
+table; its own statement is "thousands of dollars in token credits"
+for 25 agents × 2 game days (gpt3.5-turbo, sequential); the
+ref file's "~$70 / Table 2 / §6.4" claim was drift — KI#51, fixed.
+The independent estimate chain (Zhao et al. 2023, Lyfe Agents,
+Appendix F: conservative $2,000 → ≈$25 per agent per human hour at
+10× game speed) and Park 2024 (1,052 participants, GPT-4o; no total
+budget published — the 59-agent retrieval analysis alone ran
+1,281,040 GPT-4o-mini queries) are recorded with the honest reading:
+prior art prices the per-agent-per-step hot loop (N×M×L); our
+phase-1 LLM bill is beat-proportional (2-call steady state,
+VALIDATION_SPEC §7) with the whole N×M simulation measured near-free
+on the deterministic core (§8) — reference points for the split, not
+a cross-over claim. KI#52 (stray 678-line pre-iter-26 `TASKS.md`
+snapshot at the repo root, born in the iter-27 squash commit,
+unreferenced, over cap) opened + closed: deleted. Doc-only streak:
+1 of 2 (iter-30 carried code; the doc-loop alarm fires at 2 — the
+next iteration must carry code or a fresh owner directive). 629
+green, ruff clean (no code touched). The owner-gated remainder is
+unchanged: tune-3 (the three-way fork), st-2, corpus consolidation;
+phase 2 opens on the owner's call.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -38,6 +47,17 @@ consolidation; phase 2 opens on the owner's call.
 
 ## Active KIs
 
+- KI#51 · `docs/ref/generative_agents.md` carried a fabricated Park
+  2023 cost citation ("Table 2, §6.4, ~$70 for a 2-day 25-agent run" —
+  neither the table nor the section exists; the paper says "thousands
+  of dollars in token credits"; false-citation family, KI#42) ·
+  opened + CLOSED bg-4: figures re-verified against the arXiv full
+  text, re-homed to TECH_NOTES §9 (single owner), ref file corrected.
+- KI#52 · stray stale `TASKS.md` at the repo root (678 lines,
+  pre-iter-26 snapshot — tune-1/tune-2 listed as todo though landed;
+  born in the iter-27 squash commit; unreferenced, over the 600 cap;
+  single-owner violation of `docs/TASKS.md`) · opened + CLOSED bg-4:
+  deleted; detail in git + worklog bg-4.
 - (KI#50 deleted at iter-28 per AGENTS §5 — closed iter-26, two
   iterations past; the cap-laws citation fix detail lives in git +
   worklog iter-26.)
@@ -138,6 +158,10 @@ consolidation; phase 2 opens on the owner's call.
   `docs/ref/*`/`REFERENCES_DEEP.md` are historical; the owners are
   AGENTS.md §4, `REFERENCES.md` (the catalog), and
   `docs/AGENT_NAVIGATION.md` §1 (where things actually live).
+  External-paper figures are drift until fetched: KI#51 caught a
+  fully-formed cost citation ("Table 2, §6.4, ~$70") that exists
+  nowhere in Park 2023 — verify against the arXiv full text before
+  restating any number (bg-4, TECH_NOTES §9).
 - **Live narrate session in the sandbox (operational recipe; iter-24,
   the owner's directive to make the recipe durable).** `python -m cli`
   opens the interactive session; the narrator door is `narrate
@@ -328,9 +352,17 @@ remains:
 4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
    (briefer spike) query the SQLite sink (they need the owner's DF
    export files — `dfworlds/` stays outside the repo by design);
-   bg-4 (cost notes) is read-only. Infra backlog: `qa-1` mypy +
-   `ci-1` GitHub Actions (owner-gated); `perf-1` DONE iter-30
-   (TECH_NOTES §8 — no structural work warranted at v0.1 scale, the
-   gate for anything structural now has data). `pack-3` (the owner's
-   Sci-Fi setting sketches) is parked in TASKS until the 2nd-setting
-   gate.
+   bg-4 (cost notes) — DONE bg-4 (`docs/TECH_NOTES.md` §9, figures
+   verified against the arXiv full texts; KI#51 fixed in the same
+   pass). With bg-4 closed, the un-gated and un-blocked backlog is
+   EMPTY — the next move is the owner's (the gated set above, the
+   DF exports for bg-2/bg-3, or the bg-6 deferral). Infra backlog:
+   `qa-1` mypy + `ci-1` GitHub Actions (owner-gated); `perf-1` DONE
+   iter-30 (TECH_NOTES §8 — no structural work warranted at v0.1
+   scale, the gate for anything structural now has data). `pack-3`
+   (the owner's Sci-Fi setting sketches) is parked in TASKS until
+   the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
+   ("phase-0 gate passed") fired at iter-6 but was never scheduled —
+   the just-in-time reading (write specs FROM experiment results at
+   phase start, not ahead of it) defers it to the owner's phase-2
+   call.
