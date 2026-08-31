@@ -1,23 +1,20 @@
 # STATUS — canonsim
 
-Iteration: iter-29 (`iter-29-pack2-spot-available`) · Phase: 1 closed
-(gate PASS, D-058; polish open per the owner's finish-phase-1
-directive) · Date: 2026-08-31 · pack-2 landed, the third polish item:
-the arson-on-ashes door check. The closed precondition set gains
-`spot_available` — the target location holds at least one spot of the
-pack-declared transition layer NOT in the layer's `spot_state`, the
-exact condition the ignite resolver keys on (door and resolver agree
-by construction); the arson requires carry it and the `layer` param
-is lint-checked against the declared layers. Arson on a destroyed or
-fully-burning location is now an `intent_rejected` no-op with
-`failed_test target.spot_available` — the door-outcome vocabulary's
-fourth axis (no unburning spot, beside not co-located / no flagged
-target / no fuel); the iter-24 no-ignition-success probe (a success
-that pretended the world changed) is closed. The seed-41 corpus case
-flipped with it (renamed, prose + last_event_type updated — provenance
-note in the fixture's `source`). 626→629 green, ruff clean. D-061 =
-the decision row; DECISIONS transiently 33/30 (collapse due at the
-phase-2→3 gate per D-034).
+Iteration: iter-30 (`iter-30-perf1-profile`) · Phase: 1 closed (gate
+PASS, D-058; the code-carrying polish menu done — tune-1/tune-2/pack-2
+landed) · Date: 2026-08-31 · perf-1 closed: the 10k-tick timing
+profile (`scripts/profile_harness.py`; numbers owner TECH_NOTES §8).
+10k ticks ≈ 0.01–0.02 s write-side (~9.8k events/s), read side ≈
+0.017 s; cost is event-linear (quiet ticks near-free), schema
+validation the per-event hot spot (~24 validate calls per event); the
+"seconds, not minutes" target met with ~3 orders of margin — no
+structural work warranted at v0.1 scale. The clean-vs-profiled
+double-run byte-compare held at 10k ticks (a T1-family probe, not a
+cross-environment claim). 629 green, ruff clean (test count unchanged
+— the harness follows the balance_harness no-test precedent; import
+breakage is guarded by the architecture closure test). The owner-gated
+remainder is unchanged: tune-3 (the three-way fork), st-2, corpus
+consolidation; phase 2 opens on the owner's call.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -329,8 +326,11 @@ remains:
    audit (ROADMAP §6 lifts with the gate; the D-055 deferral stands
    until the owner calls it).
 4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
-   (briefer spike) query the SQLite sink; bg-4 (cost notes) is
-   read-only. Infra backlog: `qa-1` mypy + `ci-1` GitHub Actions
-   (owner-gated); `perf-1` 10k-tick profile (the gate for anything
-   structural). `pack-3` (the owner's Sci-Fi setting sketches) is
-   parked in TASKS until the 2nd-setting gate.
+   (briefer spike) query the SQLite sink (they need the owner's DF
+   export files — `dfworlds/` stays outside the repo by design);
+   bg-4 (cost notes) is read-only. Infra backlog: `qa-1` mypy +
+   `ci-1` GitHub Actions (owner-gated); `perf-1` DONE iter-30
+   (TECH_NOTES §8 — no structural work warranted at v0.1 scale, the
+   gate for anything structural now has data). `pack-3` (the owner's
+   Sci-Fi setting sketches) is parked in TASKS until the 2nd-setting
+   gate.

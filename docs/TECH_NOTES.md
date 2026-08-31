@@ -283,3 +283,47 @@ whole); these are the stdlib idioms:
 - slice one actor: add `if e.get('actor')=='guard_01'` to the filter
   idiom; `tail -n`, `wc -l`, and `grep '"cause": "ev_'` for quick
   cause-chain walks — M3's real home is the metric harness, never grep.
+
+## 8. perf-1: the 10k-tick timing profile (iter-30)
+
+Tool: `scripts/profile_harness.py` (committed; the runs and their logs
+are `output/` gitignored artifacts). One session per invocation —
+`day1_full`'s story steps, then grid-aligned 360-tick waits to the tick
+target; each invocation runs the session TWICE (clean + under cProfile)
+and byte-compares the two logs. The compare held at 10k ticks (same
+process, clean vs instrumented — a T1-family probe extending past the
+smoke fixture's horizon, not a cross-environment claim; T1 stays the
+owner of that guarantee).
+
+Measured (sandbox venv, CPython 3.12.14, PYTHONHASHSEED=0, single
+thread, 2026-08-31 — timings are environment-specific like all numbers
+in this file; write side = clean run, read side over the finished log):
+
+| run | end tick | events | write side | read side | ticks/s | events/s |
+|---|---|---|---|---|---|---|
+| seed 125, director OFF | 10105 | 134 | 0.01–0.02 s | 0.017 s | ~737k | ~9.8k |
+| seed 125, director ON | 10105 | 135 | 0.01–0.02 s | 0.017 s | ~733k | ~9.8k |
+
+Read-side split (OFF): read_log 0.007 s · fold < 0.001 s · metrics
+0.001 s · chronicle 0.009 s. The ON/OFF delta is one event — the
+director's released stub wait (the documented T8 divergence).
+
+The "seconds, not minutes" target is met with ~3 orders of magnitude of
+margin. Structural reading (the gate input for any future structural
+work):
+
+- **Cost is event-linear, not tick-linear.** Quiet ticks are near-free:
+  the long-run phase adds ~8.6k ticks for only ~87 events; the write
+  side prices at roughly 0.1 ms per event. Event density, not session
+  length, is the cost driver.
+- **Schema validation dominates the per-event write cost.** 3.2k
+  `validate` calls for 134 events (~24 per event — the event line plus
+  its knowledge records and sub-objects); under instrumentation,
+  `validate` ≈ 0.017 s inside `append`'s ≈ 0.020 s, inside `_commit`'s
+  0.023 s. If a future phase needs 100k-event sessions, the validating
+  writer is the first place to look — measured here, not yet a decision.
+- **The decay noise floor is visible in the raw counts**: 57 of 134
+  events (43%) are `status_decayed` — the T7 repetition finding
+  corroborated on a 7-day stream after the tune-1 tale gate landed.
+- Verdict: no structural work is warranted at v0.1 scale; phase-2
+  per-beat read-side additions have ~3 orders of headroom.

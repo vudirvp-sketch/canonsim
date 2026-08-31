@@ -10,6 +10,25 @@
 > since iter-5).
 
 ---
+iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
+(iter-30-perf1-profile)
+- scripts/profile_harness.py: day1_full's story steps + grid-aligned
+  360-tick waits to the tick target; clean + cProfile double-run with
+  a same-process byte-compare (held at 10k ticks — a T1-family probe,
+  not a cross-environment claim); read-side timings
+  (read_log/fold/metrics/chronicle) over the finished log; outputs to
+  output/perf_*.txt (gitignored runtime artifact).
+- Numbers (owner TECH_NOTES §8): 10k ticks ≈ 0.01–0.02 s write-side
+  (~9.8k events/s), read side ≈ 0.017 s; cost is event-linear (quiet
+  ticks near-free), schema validation the per-event hot spot (~24
+  validate calls/event); "seconds, not minutes" met with ~3 orders of
+  margin — no structural work warranted at v0.1 scale. 43% of the
+  7-day stream is status_decayed (the T7 noise floor in raw counts).
+- 629 green, ruff clean (count unchanged — the balance_harness
+  no-test precedent; the architecture closure test guards the import).
+  6 files (script + the doc sync set); iter-20 evicted per the cap.
+  Docs: TECH_NOTES §8, TASKS, STATUS, AGENT_NAVIGATION §1.
+---
 iter-29 · 2026-08-31 · pack-2 — the arson-on-ashes door check
 (iter-29-pack2-spot-available; the owner's finish-phase-1 directive,
 polish item 3)
@@ -290,24 +309,7 @@ cascade (iter-21-validation-beats-6)
 ---
 iter-20 · 2026-08-30 · universality pass — the transition + scene-line
 vocabularies become pack data (iter-20-universality, KI#48 + D-057)
-- core/transitions.py iterates rules.json transitions.<layer>.
-  follow_ups (kinds/flags/values/blocked_by) + spot_state/halt_flag;
-  resolvers + the director's threat sensor read the declared
-  vocabulary; pack lint joins every kind to an event + knowledge
-  entry. Tavern behavior byte-identical (T1 fixture untouched); a
-  synthetic `rot` layer (infested/condemned/stench/collapse)
-  proves generality (test_transitions.py).
-- `layout` on all 5 locations + brief.present_entities.
-  scene_line_fields: the scene line renders pack fields
-  canon-from-birth (assembler, BRIEF_SPEC §3.4/§6; the corpus
-  call_contains line updated to the new scene-line shape).
-- KI#48 opened+closed: iter-19's "canon_slot reads top-level fields
-  only / seeding needed" was false both ways (the ledger reads BOTH
-  prop sources — KI#41 precedent) — STATUS/worklog/TASKS phrases
-  fixed in place; st-6 shrinks to the travel half.
-- 547→556 green, ruff clean. 17 files (two subsystems + the doc
-  sync set — over the 3–5 soft limit, the iter-15 scope
-  precedent); iter-11c evicted per cap.
+- (deleted at iter-30 per the one-in/one-out cap; history in git.)
 ---
 iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses
 - (deleted at iter-29 per the one-in/one-out cap; history in git.)

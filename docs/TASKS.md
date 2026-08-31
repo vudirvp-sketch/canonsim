@@ -196,9 +196,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   capped at pytest + ruff — AGENTS §8/§10; D-031 parks the candidate here.
   The type-discipline values are law from iter-1 via
   `docs/blueprint/phase0.md` §1; the tool is optional).
-- `perf-1` 10k-tick timing profile (target: seconds, not minutes; the
-  iter-8h micro-pass landed the six locally-provable asymptotic wins —
-  the profile stays the gate for structural work).
+- `perf-1` 10k-tick timing profile — DONE iter-30
+  (iter-30-perf1-profile): `scripts/profile_harness.py` (story phase +
+  grid-aligned waits to the target; clean + cProfile double-run with a
+  byte-compare probe — held at 10k ticks). 10k ticks ≈ 0.01–0.02 s
+  write-side (~9.8k events/s), read side ≈ 0.017 s; cost is
+  event-linear, schema validation dominates the per-event write cost;
+  target met with ~3 orders of margin — no structural work warranted at
+  v0.1 scale. Numbers owner: `docs/TECH_NOTES.md` §8.
 - `balance-1` 1000-headless-sim distribution harness — DONE iter-6:
   `scripts/balance_harness.py` runs the gate playscript 1000× across
   seeds 100–1099 (director off), folds each log through
@@ -271,6 +276,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
+  (iter-30-perf1-profile): the harness (story + grid-aligned waits;
+  clean + cProfile double-run, byte-compare probe held at 10k ticks);
+  10k ticks ≈ 0.01–0.02 s write-side / 0.017 s read-side, event-linear
+  cost, schema validation the per-event hot spot; no structural work
+  warranted at v0.1 scale. Detail: worklog iter-30 +
+  `docs/TECH_NOTES.md` §8.
 
 - iter-29 · 2026-08-31 · pack-2 — the arson-on-ashes door check
   (iter-29-pack2-spot-available): the `spot_available` precondition
