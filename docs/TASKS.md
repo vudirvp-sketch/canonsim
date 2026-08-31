@@ -165,21 +165,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
 
-### bg-2 · event taxonomy — todo
+### bg-2 · event taxonomy — DONE (bg-2-event-taxonomy)
 
-- 100–300 interesting events across ~16 types (birth, death, murder, theft,
-  betrayal, artifact creation, site destruction, war, journey, captivity,
-  escape, founding, item loss, madness, transformation, catastrophe); per
-  event: participants, place, cause, witness, long-term consequence,
-  expressibility in our ontology → `docs/TAXONOMY.md`.
-- AC: ≥100 entries. Honest note baked in: causality is *reconstructed* from
-  `event_collections` + role fields, not parsed. Sampling frame sharpened
-  (iter-8e): measured type distribution + ambiguity grounding live in
-  `docs/TECH_NOTES.md` §3.1 (micro tails, unique collection refs,
-  slayer-less deaths). Query home since bg-1 closed: the SQLite sink
-  (`scripts/df_import.py` → `output/df_world_<stem>.sqlite3`; recipe
-  `docs/TECH_NOTES.md` §3.2) — participant/grouping/name queries run on
-  the DB, not by re-parsing XML.
+- Done one-liner: `docs/TAXONOMY.md` (120 entries across the 16 target
+  types; AC ≥100 MET) + `scripts/df_taxonomy.py` (the quantile-spread
+  survey over the sink DB) + the sink v2 plus pass
+  (`scripts/df_import.py` — D-051's deferral fired: theft/beast detail
+  is companion-only, D-063). Measured findings + the bg-3 consumer
+  caveats: TAXONOMY §4/§5; recipe: TECH_NOTES §3.2.
 
 ### bg-3 · briefer spike — todo
 
@@ -190,7 +183,9 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   honest: DF canon is macro-dense and micro-empty — this validates briefer
   *mechanics*, not micro-event interestingness (measure that on our own dry
   chronicle). Y's own records = the `event_participant` index
-  (`docs/TECH_NOTES.md` §3.2; 4 ms measured on the large world).
+  (`docs/TECH_NOTES.md` §3.2; 4 ms measured on the large world; + the
+  `hfid1`/`hfid2` reputation blind spot, TAXONOMY §4.2 — reputation
+  context needs the EAV, not the index).
 
 ### bg-6 · SoW integration audit — todo (owner-deferred)
 

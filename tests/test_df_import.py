@@ -1,11 +1,13 @@
-"""Unit tests for `scripts/df_import.py` (bg-1 SQLite sink).
+"""Unit tests for `scripts/df_import.py` (bg-1 SQLite sink; plus pass bg-2).
 
 Pins the load-bearing sink invariants on a tiny synthetic DF-like XML
 (the `tests/test_df_survey.py` pattern): typed core + EAV extraction,
 the participant index, collection-membership/parent links, the generic
 records path (incl. id-less records and noise skips), the truncation
-policy (flagged partial default, --strict abort), and content
-determinism (same export bytes -> identical rows).
+policy (flagged partial default, --strict abort), the bg-2 plus pass
+(companion historical_events -> event_plus_fields; everything else in
+the companion counted, not stored), and content determinism (same
+export bytes -> identical rows).
 """
 
 from __future__ import annotations
@@ -119,6 +121,39 @@ TINY_XML = b"""<?xml version="1.0" encoding="UTF-8"?>
 </df_world>
 """
 
+# Companion for the tiny world: `item_stolen` carries the fields the main
+# file lacks (thief/mat/method — the bg-2 trigger). The type mismatch vs.
+# main event 2 is deliberate: the sink keys on id only, never cross-checks
+# types (ids agree by construction in real exports).
+TINY_PLUS_XML = b"""<?xml version="1.0" encoding="UTF-8"?>
+<df_world>
+  <historical_figures>
+    <historical_figure><id>500</id><race>DWARF</race></historical_figure>
+  </historical_figures>
+  <historical_events>
+    <historical_event>
+      <id>2</id>
+      <type>item_stolen</type>
+      <year>205</year>
+      <seconds72>1000</seconds72>
+      <item_type>gem</item_type>
+      <mat>ruby</mat>
+      <histfig>500</histfig>
+      <entity>100</entity>
+      <site>10</site>
+      <circumstance>
+        <type>histeventcollection</type>
+        <hist_event_collection>1</hist_event_collection>
+      </circumstance>
+      <theft_method>theft</theft_method>
+    </historical_event>
+  </historical_events>
+  <identities>
+    <identity><id>1</id><name>disguise</name></identity>
+  </identities>
+</df_world>
+"""
+
 
 @pytest.fixture
 def tiny_xml(tmp_path: Path) -> Path:
@@ -222,7 +257,7 @@ def test_meta_records_policy_and_counts(tiny_db: Path) -> None:
     assert meta["sink_version"] == str(df_import.SINK_VERSION)
     assert meta["source"] == "tiny-legends.xml"
     assert meta["partial"] == "0"
-    assert meta["plus_companion"] == "skipped"
+    assert meta["plus_companion"] == "absent"
     assert "dance_forms" in meta["skipped_sections"]
     assert meta["events"] == "3"
     assert meta["collections"] == "2"
@@ -230,6 +265,61 @@ def test_meta_records_policy_and_counts(tiny_db: Path) -> None:
     assert meta["records"] == "5"
     assert meta["skipped:dance_forms"] == "1"
     assert meta["sanitized_bytes"] == "0"
+
+
+def test_plus_companion_events_imported(tiny_xml: Path, tmp_path: Path) -> None:
+    """bg-2 plus pass: companion historical_events land in the separate
+    event_plus_fields EAV (same ids, fields only); every other companion
+    section is counted, not stored; the typed core and the participant
+    index are untouched (main-file facts never shift)."""
+    plus = tmp_path / "tiny-legends_plus.xml"
+    plus.write_bytes(TINY_PLUS_XML)
+    db = tmp_path / "plus.sqlite3"
+    meta = df_import.import_world(tiny_xml, db, plus)
+    assert _rows(db, "SELECT COUNT(*) FROM events") == [(3,)]
+    assert _rows(db, "SELECT COUNT(*) FROM event_participant") == [(3,)]
+    fields = dict(_rows(
+        db, "SELECT key, value FROM event_plus_fields WHERE event_id = 2",
+    ))
+    assert fields["histfig"] == "500"
+    assert fields["theft_method"] == "theft"
+    assert fields["mat"] == "ruby"
+    assert fields["circumstance"] == json.dumps(
+        {"hist_event_collection": ["1"], "type": ["histeventcollection"]},
+        sort_keys=True,
+    )
+    # Main-file fields never collide: separate tables, id-keyed.
+    assert _rows(
+        db, "SELECT COUNT(*) FROM event_fields WHERE event_id = 2 AND key = 'artifact_id'"
+    ) == [(1,)]
+    assert meta["plus_companion"] == "imported"
+    assert meta["plus:historical_event"] == "1"
+    assert meta["plus:skipped:identities"] == "1"
+    assert meta["plus:skipped:historical_figures"] == "1"
+
+
+def test_plus_companion_deterministic(tiny_xml: Path, tmp_path: Path) -> None:
+    plus = tmp_path / "tiny-legends_plus.xml"
+    plus.write_bytes(TINY_PLUS_XML)
+    rows = []
+    for name in ("a", "b"):
+        db = tmp_path / f"{name}.sqlite3"
+        df_import.import_world(tiny_xml, db, plus)
+        rows.append(_rows(db, "SELECT * FROM event_plus_fields"))
+    assert rows[0] == rows[1]
+
+
+def test_truncated_plus_flags_partial(tiny_xml: Path, tmp_path: Path) -> None:
+    cut = tmp_path / "cut-legends_plus.xml"
+    cut.write_bytes(
+        b"<df_world><historical_events><historical_event><id>2</id>"
+        b"<type>item_stolen</type><mat>ruby"
+    )
+    db = tmp_path / "cutplus.sqlite3"
+    meta = df_import.import_world(tiny_xml, db, cut)
+    assert meta["partial"] == "1"
+    # The recovered prefix of the in-flight companion event landed.
+    assert _rows(db, "SELECT key, value FROM event_plus_fields") == [("mat", "ruby")]
 
 
 def test_truncated_default_is_flagged_partial(tmp_path: Path) -> None:
@@ -268,8 +358,8 @@ def test_reimport_is_content_deterministic(tiny_xml: Path, tmp_path: Path) -> No
     df_import.import_world(tiny_xml, db_a)
     df_import.import_world(tiny_xml, db_b)
     tables = (
-        "meta", "events", "event_fields", "event_participant", "event_membership",
-        "collections", "collection_fields", "collection_parent",
+        "meta", "events", "event_fields", "event_plus_fields", "event_participant",
+        "event_membership", "collections", "collection_fields", "collection_parent",
         "figures", "figure_fields", "records",
     )
     for table in tables:

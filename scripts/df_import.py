@@ -25,9 +25,16 @@ the coverage matrix in `docs/ref/df_legends_xml.md`):
   any future UNDOCUMENTED tag) lands in one generic `records` table as a
   deterministic JSON payload — one code path, no per-tag schema upkeep.
 - Design-noise sections (art/dance/musical/poetic forms) are counted and
-  skipped (coverage-matrix law); the plus companion is NOT imported —
-  selective import, never wholesale; deferred until bg-2/bg-3 need its
-  complementary fields (recorded in `meta`).
+  skipped (coverage-matrix law).
+- **Plus companion (bg-2):** its `historical_events` section IS imported
+  — into a separate `event_plus_fields` EAV table keyed by the SAME event
+  ids (the D-051 deferral fired: theft detail (item, thief, method) and
+  beast-attack victims live ONLY there, plus fields like
+  `item_stolen.histfig`/`creature_devoured.eater`; main-file fields keep
+  precedence at read time — the tables never collide). Everything else
+  in the companion (relationships, identities, repeated
+  figures/sites/… sections) is counted, not stored — still selective
+  import, never wholesale; relationships defer until bg-3 needs them.
 
 Truncation policy (owns the KI#34 recovery semantics; D-051): default =
 flagged PARTIAL import — the recovered prefix lands in the DB, `meta`
@@ -69,7 +76,8 @@ DEFAULT_OUT = REPO / "output"
 
 # Bump on schema change; migration = re-import (the DB is a rebuildable
 # index of the export, not a canon artifact — INV-1/INV-5 do not apply).
-SINK_VERSION = 1
+# v2: + event_plus_fields (the bg-2 plus pass — D-051's deferral fired).
+SINK_VERSION = 2
 
 # Design-noise skips — coverage-matrix law (`docs/ref/df_legends_xml.md`):
 # briefer noise, not canon-relevant structure.
@@ -96,6 +104,12 @@ CREATE TABLE events (
     seconds72 INTEGER NOT NULL
 );
 CREATE TABLE event_fields (
+    event_id INTEGER NOT NULL,
+    key TEXT NOT NULL,
+    value TEXT NOT NULL,
+    PRIMARY KEY (event_id, key, value)
+) WITHOUT ROWID;
+CREATE TABLE event_plus_fields (
     event_id INTEGER NOT NULL,
     key TEXT NOT NULL,
     value TEXT NOT NULL,
@@ -153,6 +167,7 @@ _INDEXES = """
 CREATE INDEX idx_events_type ON events(type);
 CREATE INDEX idx_events_year ON events(year);
 CREATE INDEX idx_event_fields_kv ON event_fields(key, value);
+CREATE INDEX idx_event_plus_fields_kv ON event_plus_fields(key, value);
 CREATE INDEX idx_membership_collection ON event_membership(collection_id);
 CREATE INDEX idx_collection_parent_parent ON collection_parent(parent_id);
 CREATE INDEX idx_records_tag_id ON records(record_tag, id);
@@ -206,6 +221,7 @@ class _Importer:
         self.counts: dict[str, int] = {}
         self._events: list[tuple[int, str, int, int]] = []
         self._event_fields: list[tuple[int, str, str]] = []
+        self._event_plus_fields: list[tuple[int, str, str]] = []
         self._participants: list[tuple[int, int]] = []
         self._membership: list[tuple[int, int]] = []
         self._collections: list[tuple[int, str, int, int]] = []
@@ -240,6 +256,21 @@ class _Importer:
                 if hfid is not None:
                     participants.add(hfid)
         self._participants.extend((hfid, event_id) for hfid in participants)
+
+    def plus_event(self, elem: ET.Element) -> None:
+        """Companion-file event: fields ONLY (the typed row already exists
+        from the main file; ids agree by construction). No participant lift
+        — the plus tags (histfig, eater, …) are not `*hfid`-shaped; the
+        read side resolves them from `event_plus_fields` on demand."""
+        event_id = df_survey._int_text(elem, "id")
+        if event_id == -1:
+            self._bump("malformed:plus_historical_event")
+            return
+        for child in elem:
+            if child.tag in _EVENT_TYPED:
+                continue
+            self._event_plus_fields.append((event_id, child.tag, _child_value(child)))
+        self._bump("plus:historical_event")
 
     def collection(self, elem: ET.Element) -> None:
         col_id = df_survey._int_text(elem, "id")
@@ -292,6 +323,9 @@ class _Importer:
     def noise(self, section_tag: str) -> None:
         self._bump(f"skipped:{section_tag}")
 
+    def plus_skip(self, section_tag: str) -> None:
+        self._bump(f"plus:skipped:{section_tag}")
+
     # -- batch flushing -----------------------------------------------------
 
     def flush(self) -> None:
@@ -310,6 +344,12 @@ class _Importer:
                 "INSERT OR IGNORE INTO event_fields VALUES (?,?,?)", self._event_fields
             )
             self._event_fields.clear()
+        if self._event_plus_fields:
+            conn.executemany(
+                "INSERT OR IGNORE INTO event_plus_fields VALUES (?,?,?)",
+                self._event_plus_fields,
+            )
+            self._event_plus_fields.clear()
         if self._participants:
             conn.executemany(
                 "INSERT OR IGNORE INTO event_participant VALUES (?,?)", self._participants
@@ -348,11 +388,17 @@ class _Importer:
             self._records.clear()
 
 
-def import_world(main_path: Path, db_path: Path, *, strict: bool = False) -> dict[str, str]:
-    """Import one legends XML into a fresh SQLite DB; return the meta mapping.
+def import_world(
+    main_path: Path, db_path: Path, plus_path: Path | None = None, *, strict: bool = False
+) -> dict[str, str]:
+    """Import one legends XML (plus companion, when given) into a fresh
+    SQLite DB; return the meta mapping.
 
     The DB is always rebuilt from scratch (existing file unlinked). Content
     is a pure function of the export bytes — no wall-clock, no randomness.
+    A truncated companion is recovered best-effort and flags `partial=1`
+    (the main-file KI#34 policy; `--strict` pre-checks the main file only —
+    the companion is complementary, its loss degrades detail, not canon).
     """
     if strict and not df_survey._tail_closes_root(main_path):
         raise SystemExit(
@@ -413,6 +459,38 @@ def import_world(main_path: Path, db_path: Path, *, strict: bool = False) -> dic
         reader.close()
 
     importer.flush()
+
+    # -- plus pass (bg-2): companion historical_events -> event_plus_fields.
+    if plus_path is not None and plus_path.exists():
+        plus_reader = df_survey._make_reader(plus_path)
+        if isinstance(plus_reader, df_survey.RecoveringReader):
+            partial = True
+        depth = 0
+        plus_records = 0
+        section: ET.Element | None = None
+        try:
+            for event, elem in ET.iterparse(plus_reader, events=("start", "end")):
+                if event == "start":
+                    depth += 1
+                    if depth == 2:
+                        section = elem
+                    continue
+                if depth == 3:
+                    if section is not None and section.tag == "historical_events":
+                        importer.plus_event(elem)
+                    elif section is not None:
+                        importer.plus_skip(section.tag)
+                    plus_records += 1
+                    elem.clear()
+                    if plus_records % _FLUSH_EVERY == 0:
+                        if section is not None:
+                            section.clear()
+                        importer.flush()
+                depth -= 1
+        finally:
+            plus_reader.close()
+        importer.flush()
+
     conn.execute("COMMIT")
     conn.executescript(_INDEXES)
 
@@ -420,9 +498,9 @@ def import_world(main_path: Path, db_path: Path, *, strict: bool = False) -> dic
     table_counts = {
         table: conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
         for table in (
-            "events", "event_fields", "event_participant", "event_membership",
-            "collections", "collection_fields", "collection_parent",
-            "figures", "figure_fields", "records",
+            "events", "event_fields", "event_plus_fields", "event_participant",
+            "event_membership", "collections", "collection_fields",
+            "collection_parent", "figures", "figure_fields", "records",
         )
     }
 
@@ -432,7 +510,7 @@ def import_world(main_path: Path, db_path: Path, *, strict: bool = False) -> dic
         "source_bytes": str(main_path.stat().st_size),
         "sanitized_bytes": str(reader.replaced),
         "partial": "1" if partial else "0",
-        "plus_companion": "skipped",
+        "plus_companion": ("imported" if plus_path is not None else "absent"),
         "skipped_sections": ",".join(sorted(NOISE_SECTIONS)),
     }
     meta.update({key: str(value) for key, value in table_counts.items()})
@@ -470,14 +548,18 @@ def main(argv: list[str] | None = None) -> int:
     for main_path, plus_path in df_survey.find_worlds(args.targets):
         print(f"importing {main_path} ...", file=sys.stderr)
         if plus_path is not None:
-            print(f"  companion {plus_path.name}: skipped (selective import;"
-                  " deferred until bg-2/bg-3 need its fields)", file=sys.stderr)
+            print(
+                f"  companion {plus_path.name}: importing historical_events"
+                " (complementary fields; the rest counted, not stored)",
+                file=sys.stderr,
+            )
         stem = main_path.name.removesuffix("-legends.xml")
         db_path = args.out / f"df_world_{stem}.sqlite3"
-        meta = import_world(main_path, db_path, strict=args.strict)
+        meta = import_world(main_path, db_path, plus_path, strict=args.strict)
         shown = (
             "events", "collections", "figures", "event_participant",
             "event_membership", "collection_parent", "records",
+            "event_plus_fields",
         )
         summary = " · ".join(f"{k} {int(v):,}" for k, v in meta.items() if k in shown)
         print(f"  {summary}")

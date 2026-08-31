@@ -74,11 +74,13 @@ iter-33, batch 2 (the owner's corpus-growth call: four more sessions —
 seeds 111/65/30/32; 51 combined utterances, 35/35 boundary validity —
 the ≥90% criterion holds on the combined volume per PARSER_SPEC §6;
 the phase-2 gate review is the owner's; the parse-reply regression
-corpus 10 cases). 664 tests green, ruff clean, golden fixtures
-byte-identical. Next: the owner's phase-2 gate review + the
-owner-gated set (parse-2, engine-1); track B (bg-2/bg-3) queries the
-bg-1 SQLite sink (`docs/TECH_NOTES.md` §3.2, D-051) when the owner
-supplies the DF exports.
+corpus 10 cases). Track B: **bg-2 DONE** (the owner supplied the four
+world exports; `docs/TAXONOMY.md` — 120 DF events across the 16 bg-2
+target types with ontology verdicts + the sink v2 plus pass, D-063);
+bg-3 (briefer spike) is unblocked. 673 tests green, ruff clean,
+golden fixtures byte-identical. Next: the owner's phase-2 gate review +
+the owner-gated set (parse-2, engine-1) + bg-3 on the SQLite sink
+(`docs/TECH_NOTES.md` §3.2, D-051/D-063).
 
 ## For AI agents (primary audience)
 
@@ -101,7 +103,7 @@ padding.
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
-| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; `docs/TECH_NOTES.md` §3.2, D-051) |
+| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `profile_harness.py` iter-30 |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running

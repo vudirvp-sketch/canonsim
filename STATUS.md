@@ -1,38 +1,28 @@
 # STATUS — canonsim
 
-Iteration: iter-33 (`iter-33-parse1-say-sessions2`) · Phase: 2 (parser,
-mode C) OPEN · Date: 2026-09-01 · parse-1 batch 2 (the owner's
-corpus-growth call): four live `say`-door sessions (seeds 111/65/30/32 —
-the untested-verbs walkthrough, the scene-close retirement, the
-disambiguation ladder + the muse families, the narrator withdrawal)
-driven by a runner outside the repo through the REAL stack (Simulator +
-Mediator + ParserDoor over ONE shared ledger, D-049). PARSER_SPEC §6
-batch tally: 21 utterances, mix 14 intent / 4 question / 2 no_intent + 1
-gate-passed door-rejected cycle; 3/3 deliberate off-grammar probes
-caught loudly (the undeclared field on a fieldless verb, the
-RETIRED-entry re-reference ×2 — one scene-close cause, one
-narrator-withdrawal cause); 0 honest misfires — boundary validity
-14/14 among fed intents; 2 door failures are world answers (take_failed
-×2, both texture-path takes whose pins survive). Combined corpus tally
-(iter-32 + iter-33): 51 utterances, 35/35 boundary validity — the ≥90%
-criterion (ROADMAP §2) holds on the combined volume per the §6
-procedure; the phase-2 gate closure stays the owner's. Live laws now
-corpus-pinned: examine/use/rest were never fed live before — all three
-land through the door (use lands intoxication 20, the wait-720 decay
-batch drains INSIDE the door's own run_steps batch — 16 events, the
-iter-23 batch law on the quiet side; the fatigue clamp 20−30→0 pinned
-per-cycle); a PINNED texture entry can die two ways — the scene close
-(leaving) and the narrator's withdrawal (a retire delta — un-pinning
-does not exist, but the narrator's own assertion can die) — RETIRED
-joins PROMOTED as terminal, the reference off-grammar either way, fresh
-establishment after RETIRE legal (a new entry id — the new-candles law);
-the wait-without-ticks reply passes the parse gate and dies at the
-door's shape law (PARSER_SPEC §4's gate-does-not-duplicate-door-checks,
-live). The parse-reply regression corpus 6→10 cases
-(`tests/fixtures/parse_replies.json` + the `tests/test_parser.py`
-replay; the corpus machinery grew the narrator-cycle note override and
-the optional per-cycle state assert). Doc-only streak: 0 (iter-33
-carries fixture + test). 660→664 green, ruff clean.
+Iteration: bg-2 (`bg-2-event-taxonomy`, track B) · Phase: 2 (parser,
+mode C) OPEN, unchanged · Date: 2026-09-01 · the owner supplied the four
+world exports (byte-identical to the iter-8e survey set — the import
+cross-validates every §3.2 count). Landed: the **sink v2 plus pass**
+(D-051's recorded deferral fired: `item_stolen` thief/item/method and
+`creature_devoured` eater/victim live ONLY in the companion — 100%
+theft coverage measured; 706,157 companion events → 3,509,709
+`event_plus_fields` rows; main counts unchanged, 202 s / 1,069 MB on the
+large world), **`scripts/df_taxonomy.py`** (15 event-type plans + the
+birth gap + war/beast-attack collection plans; fixed quantile-spread
+selection — a pure function of the DB content), and
+**`docs/TAXONOMY.md`** — 120 entries across the 16 bg-2 target types
+(AC ≥100 MET): per entry participants/place/reconstructed-cause/
+witness/consequence + the E/E+/R/GAP ontology verdicts. Measured
+findings (owner TAXONOMY §4): the witness column is empty by design
+(9/88 figure-bearing entries carry a nearby reputation link — DF has
+NO epistemology events, our knowledge records have no donor); the
+`hfid1`/`hfid2` participant-index blind spot (0 rows lifted for all
+25,079 reputation events — reputation context needs the EAV; the
+lift-rule extension is a deliberate non-change); murders always carry
+slayer+site (5,786/5,786) while old-age/struck deaths are 52.8%
+slayer-less; item loss is mostly terminal (6/8 no follow-ups). 664→673
+green (+6 taxonomy, +3 plus pass), ruff clean; doc-sync full.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -56,12 +46,11 @@ carries fixture + test). 660→664 green, ruff clean.
 
 ## Active KIs
 
-- KI#54 · FAQ cap drift: iter-31's "Live parse session" entry pushed the
-  FAQ to 21 entries (cap ≤20 — AGENTS §6's general rule "check the
-  current size before writing" was skipped; the KI#50 family) · opened +
-  CLOSED iter-32: the narrate + parse session recipes merged into ONE
-  "Live sandbox session recipes" entry (they are one session's two
-  doors) → 20; the iter-32 lessons folded in.
+(none open.)
+
+- (KI#54 deleted at bg-2 per AGENTS §5 — closed iter-32, two
+  iterations past; the FAQ-merge lesson lives in git + worklog
+  iter-32.)
 - (KI#53 deleted at iter-33 per AGENTS §5 — closed iter-31, two
   iterations past; detail in git + worklog iter-31.)
 - (KI#51 deleted at iter-32 per AGENTS §5 — closed bg-4, two
@@ -311,10 +300,19 @@ carries fixture + test). 660→664 green, ruff clean.
   `event_participant` + generic JSON `records`; truncation policy =
   flagged partial import by default, `--strict` aborts; the DB is a
   rebuildable index of the export bytes — content-deterministic, no
-  wall-clock in `meta`, no golden DF fixtures. Measured numbers + the
-  full recipe: `docs/TECH_NOTES.md` §3.1/§3.2; tools:
-  `scripts/df_survey.py` + `scripts/df_import.py`; regression:
-  `tests/test_df_survey.py` + `tests/test_df_import.py`.
+  wall-clock in `meta`, no golden DF fixtures. **bg-2: the sink v2 plus
+  pass (D-063) — the companion's `historical_events` land in a separate
+  `event_plus_fields` EAV (same ids, fields only; everything else in
+  the companion counted-not-stored); theft/beast detail is
+  companion-only. The taxonomy survey: `scripts/df_taxonomy.py` →
+  `docs/TAXONOMY.md` (120 entries, the 16 target types, measured
+  findings incl. the `hfid1`/`hfid2` participant-index blind spot —
+  reputation events carry 0 participant rows; reputation context needs
+  the EAV).** Measured numbers + the full recipe:
+  `docs/TECH_NOTES.md` §3.1/§3.2; tools: `scripts/df_survey.py` +
+  `scripts/df_import.py` + `scripts/df_taxonomy.py`; regression:
+  `tests/test_df_survey.py` + `tests/test_df_import.py` +
+  `tests/test_df_taxonomy.py`.
 - **The §6 cap laws: substance over line count (D-025/D-034 — one row
   since the phase-1 collapse) + the ID-preserving gate-collapse.** The
 docs cap is 600 with the §6.1 substance filter as the real law — filler
@@ -404,11 +402,14 @@ boundary now live-pinned). The phase-2 arc, in order:
    decision — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external
    parser carries phase 2 until then), `bg-6` (SoW audit, D-055
    deferral), `qa-1` mypy + `ci-1` GitHub Actions.
-4. Track B stays parallel + non-blocking: bg-2 (taxonomy) + bg-3
-   (briefer spike) still need the owner's DF export files
-   (`dfworlds/` stays outside the repo by design); bg-4 DONE. The
-   un-gated, un-blocked backlog is EMPTY — the next move is the
-   owner's. `pack-3` (Sci-Fi sketches) stays parked until the
+4. Track B: **bg-2 DONE** (the owner supplied the four world exports,
+  byte-identical to the survey set — `docs/TAXONOMY.md` + the sink v2
+  plus pass + `scripts/df_taxonomy.py`, D-063). **bg-3 (briefer
+  spike) is unblocked** — its inputs are the corpus, the v2 query
+  surface, and the TAXONOMY §5 caveats (the `hfid1`/`hfid2` blind
+  spot; plus fields); bg-4 DONE, bg-6 owner-deferred. The un-gated,
+  un-blocked backlog: bg-3 only — otherwise the next move is the
+  owner's. `pack-3` (Sci-Fi sketches) stays parked until the
    2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
    ("phase-0 gate passed") fired at iter-6, was never scheduled, and
    the just-in-time reading keeps deferring it: write specs FROM

@@ -10,6 +10,34 @@
 > since iter-5).
 
 ---
+bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus pass
+(bg-2-event-taxonomy; the owner supplied the four world exports)
+- scripts/df_import.py: plus pass, SINK_VERSION 2 — the companion's
+  historical_events land in a separate event_plus_fields EAV keyed by
+  the same ids (706,157 events -> 3,509,709 rows on the large world;
+  main counts unchanged; everything else in the companion
+  counted-not-stored). D-051's recorded deferral fired: item_stolen
+  thief/item/method (100% coverage) and creature_devoured
+  eater/victim/race live ONLY there.
+- scripts/df_taxonomy.py (new): 15 event-type plans + the birth gap +
+  war/beast-attack collection plans; fixed quantile-spread selection —
+  pure function of the DB content; per-entry participants/place/
+  reconstructed cause/witness/long-term consequence -> output/
+  df_taxonomy_<stem>.txt (gitignored, reproducible).
+- docs/TAXONOMY.md (new, 335 lines): 120 entries across the 16 TASKS
+  bg-2 target types (AC >=100 MET) + the E/E+/R/GAP verdict table
+  against EVENT_SCHEMA + measured findings: witness gap (9/88 — DF has
+  no epistemology events), the hfid1/hfid2 participant-index blind spot
+  (25,079 reputation events lift 0 rows), murders always carry
+  slayer+site (5,786/5,786), item loss mostly terminal (6/8).
+- Tests 664->673 (+6 tests/test_df_taxonomy.py, +3 the plus-pass suite
+  in tests/test_df_import.py), ruff clean. KI#54 deleted per AGENTS
+  §5 (closed iter-32, two iterations past). Doc-sync: TECH_NOTES §3.2
+  (plus-pass recipe + the blind spot), TASKS bg-2 done, STATUS, AGENT_
+  NAVIGATION §1, SPECS_BACKLOG row, README, D-063; iter-25 evicted per
+  the cap.
+
+---
 iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth
 (iter-33-parse1-say-sessions2; the owner's corpus-growth call)
 - Four more live mode-C sessions (seeds 111/65/30/32 — the
@@ -263,40 +291,7 @@ collapse (iter-26-phase1-gate)
 ---
 iter-25 · 2026-08-31 · validation beats — session 10, the
 witnessed-steal-then-alarm chain (iter-25-validation-beats-10)
-- Live narrate session 10 (seed 93, 6 accepted beats + 2
-  refused-and-caught documents, 34 supported claims, 5 intents fed, 0
-  canon violations): sessions 4 and 6 back to back — a total-failure
-  steal (everyone saw; suspicion 35 room-wide, crime_status suspect
-  at the failure) → a silent second steal → the t=360 rotation
-  (expectation_violation pushes both guards to 55, past the
-  document_check threshold 50) → **the director releases
-  director_0000 live for the first time in a narrate session** (the
-  v0.1 stub wait, npc_guard_01 t=409, claimable by id+type — ev_0025,
-  a canon event no card or brief surfaces) → the arson-as-distraction
-  through the door (fire_started + alarm_raised raised_by the relief
-  guard + fear 40 claimable per NPC; the cause actor hears his own
-  alarm) → flee_caught at t=535 (the door batch drained the fire
-  cascade to location_burned_out t=533 first; crime_status stays
-  suspect — 55 < the arrest threshold 75; the purse stays on the
-  thief's card through the catch).
-- Probes: the outgoing guard's fire blindness (npc_guard_01 rotated
-  out pre-fire → `fire_in_loc_tavern` token_absent — session 8's
-  transfer-bounded-by-holder law under the document-check context) +
-  1 live MALFORMED catch (the 'anchor' placeholder left in a live
-  reply — corpus-test sugar, never a live document; the boundary's
-  shape gate caught it; FAQ pitfall (5)).
-- Corpus 99→105 (+6 seed-93 cases, 8 beat documents — the arson rides
-  a `between` batch, the flee rides the door: the iter-23
-  batch-boundary lesson applied); 604→610 green, ruff clean. 5 files
-  (fixture + the 4-doc sync set — incl. KI#49: AGENT_NAVIGATION §1's
-  corpus descriptions made structural, the fixture-count drift
-  family); iter-24's missing TASKS one-liner backfilled (its commit
-  skipped it — the iter-22 precedent, found via `git show --stat`);
-  iter-15 evicted per the cap. TASKS 639→683 stays over the 600 cap
-  by substance (the iter-22/23 precedent — the session findings and
-  the backfill carry load; the last cruft pass ran iter-22). Live
-  beats 101→109 — the corpus moves to the phase-1 gate review
-  (ROADMAP §2).
+- (deleted at bg-2 per the one-in/one-out cap; history in git.)
 ---
 iter-24 · 2026-08-31 · validation beats — session 9, the day-2
 return under burned-yard knowledge (iter-24-validation-beats-9)

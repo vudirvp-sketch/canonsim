@@ -196,7 +196,7 @@ Pipeline (bg-1) — the validated recipe, `scripts/df_survey.py`:
   KI#36 — first catches: `artifact`, missing from the matrix despite
   being in every export, and `historical_era`).
 
-### 3.2 SQLite sink — bg-1 closed (`scripts/df_import.py`, D-051)
+### 3.2 SQLite sink — bg-1 closed; plus pass landed bg-2 (`scripts/df_import.py`, D-051/D-063)
 
 The bg-1 AC (parser loads a world into SQLite) is met and
 cross-validated: importing the large world (2.38 GB) reproduces the
@@ -226,14 +226,35 @@ unchanged). Schema and policy, single owner `scripts/df_import.py`
   behavior, shared with the survey so counts cross-validate);
   `--strict` aborts before parsing. The DB is always rebuilt fresh
   (rebuildable index, D-003 analog; no journal/fsync pragmas).
+- **Plus pass (bg-2, D-063 — D-051's recorded deferral fired):** the
+  companion's `historical_events` section IS imported since sink v2 —
+  into a separate `event_plus_fields` EAV keyed by the SAME event ids
+  (fields only; no typed duplication; main-file facts never shift).
+  Large-world numbers: 706,157 companion events → 3,509,709 plus field
+  rows; main counts byte-identical to the bg-1 import (1,191,388
+  events); 202 s total, 1,069 MB DB. Everything else in the companion
+  (relationships, identities, the ~19 repeated sections) is counted,
+  not stored — still selective, never wholesale; relationships defer
+  until bg-3 needs them. Why it fired: theft detail (`item_stolen`
+  thief/item/method — 100% coverage measured) and beast-attack victims
+  (`creature_devoured` eater/victim/race) live ONLY there; the main
+  file carries a circumstance pointer. A truncated companion is
+  recovered best-effort and flags `partial=1`.
 - **Skips:** art/dance/musical/poetic forms (matrix design-noise law —
-  counted, not stored); the plus companion is not imported at all
-  (selective import, never wholesale — its complementary fields defer
-  until bg-2/bg-3 actually need them).
+  counted, not stored).
 - **Determinism quarantine:** DB content is a pure function of the
   export bytes — parse order, canonical JSON, no wall-clock in `meta`;
-  re-import yields identical rows (pinned in `tests/test_df_import.py`).
-  No golden DF fixtures, no cross-DF-version byte-identity claims.
+  re-import yields identical rows (pinned in `tests/test_df_import.py`,
+  plus pass included). No golden DF fixtures, no cross-DF-version
+  byte-identity claims. **Known measured blind spot (bg-2):**
+  reputation events key their figures as `hfid1`/`hfid2` — not
+  `hfid`-shaped — so `event_participant` lifts zero rows for all
+  25,079 of them; consumers needing reputation context query the EAV
+  directly (owner: `docs/TAXONOMY.md` §4.2; the lift-rule extension is
+  a deliberate non-change).
+- **bg-2 taxonomy survey** (`scripts/df_taxonomy.py`, `docs/TAXONOMY.md`
+  owner): 120 quantile-spread entries over 16 target types from a sink
+  DB; determinism law as above (pure function of DB content).
 
 ## 4. Python determinism recipe
 
