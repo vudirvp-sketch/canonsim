@@ -1021,6 +1021,28 @@ class _Lint:
             and stagnation["per_npc_cooldown_beats"] >= 1,
             "director.stagnation.per_npc_cooldown_beats must be >= 1",
         )
+        # iter-36 (DIR-1): the pacing clock's pack contract — peak floor
+        # strictly above the stagnation floor (the loud band must not
+        # overlap the quiet one), positive minimum durations (anti-flap).
+        pacing = config.get("pacing")
+        if pacing is not None:
+            _require(
+                isinstance(pacing, Mapping),
+                "director.pacing must be an object",
+            )
+            for key in ("peak_floor", "min_peak_beats", "min_rest_beats"):
+                _require(
+                    isinstance(pacing.get(key), int)
+                    and not isinstance(pacing.get(key), bool)
+                    and pacing[key] >= 1,
+                    f"director.pacing.{key} must be a positive integer",
+                )
+            _require(
+                int(pacing["peak_floor"]) > int(stagnation["entropy_floor"]),
+                "director.pacing.peak_floor must sit strictly above "
+                "director.stagnation.entropy_floor (the PEAK band is the "
+                "loud world, the STAGNATION band the quiet one)",
+            )
         for tag, spec in config.get("hooks", {}).items():
             where = f"director.hooks[{tag!r}]"
             _require(

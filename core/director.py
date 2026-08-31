@@ -4,6 +4,15 @@ sits in a per-run buffer until its trigger fires (time / place /
 threshold) or the stagnation detector releases the lowest-threshold
 hook when narrative entropy drops below the pack's floor.
 
+Phase 3 (DIR-1, the L4D peak/rest donor): the pacing clock — a
+per-run four-state machine (RAMP / PEAK / REST / STAGNATION) over
+narrative entropy, advanced once per beat. REST is the post-climax
+breathing room the flat v0.1 detector lacked: the stagnation path
+releases only OUTSIDE PEAK/REST, so the world is not re-injected the
+beat after a climax. Explicit triggers never consult the clock —
+causality is not pacing (D-005). A pack without `director.pacing`
+runs the v0.1 minimal pair, byte-identically.
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -16,7 +25,10 @@ injections).
 Per-run scope (D-005): the buffer is per-run (folded from the log);
 policies are pack data (constant across runs with the same pack). The
 director never learns the player (Alien named negative — director
-adaptation state is per-run, never persisted).
+adaptation state is per-run, never persisted). The pacing clock is
+derived state the same way: a deterministic fold of the per-beat
+entropy sequence, itself a function of the log (INV-2 — same log, same
+clock, same releases; it writes nothing).
 
 Narrative entropy (P2e): sum of seeded-hook weights + global suspicion
 + visible physical threats — observable state only (L6, never
@@ -44,8 +56,11 @@ __all__ = [
     "DirectorPolicy",
     "EnabledPolicy",
     "DisabledPolicy",
+    "PacingClock",
+    "PacingConfig",
     "SeededHook",
     "entropy",
+    "pacing_from_rules",
     "policy_from_rules",
 ]
 
@@ -78,9 +93,9 @@ class DirectorPolicy(Protocol):
     """The release gate (phase0 §4 "Multi-channel policies"): the
     director asks the policy whether a release is permitted at this
     beat. The minimal pair (Enabled / Disabled) covers T8's A/B
-    baseline; multi-channel (threat / social / ambient) and the
-    pacing-clock escalation factors (RAMP / PEAK / REST / STAGNATION)
-    are phase-3 refinements, recorded not built."""
+    baseline; multi-channel (threat / social / ambient) remains a
+    phase-3 refinement, recorded not built (the pacing clock landed
+    iter-36 — it is Director-side state, not a policy)."""
 
     def permit_release(
         self,
@@ -126,6 +141,98 @@ def policy_from_rules(rules: Mapping[str, Any], enabled: bool) -> DirectorPolicy
         return DISABLED
     return EnabledPolicy(
         entropy_floor=int(rules["director"]["stagnation"]["entropy_floor"])
+    )
+
+
+# -- the pacing clock (DIR-1, phase 3; the L4D peak/rest donor) ----------------
+
+
+@dataclass(frozen=True, slots=True)
+class PacingConfig:
+    """DIR-1 pack data (`director.pacing` + the stagnation floor): the
+    pacing clock's thresholds and minimum durations. `peak_floor` sits
+    strictly above the stagnation `entropy_floor` (pack lint) — the
+    band between them is normal tension (RAMP); below the floor the
+    clock reads STAGNATION (the detector's own band). `min_peak_beats`
+    / `min_rest_beats` are the L4D `PeakDuration` / `RestMinDuration`
+    anti-flap floors (a spike is a peak, a peak is followed by a rest —
+    neither may flap on a one-beat entropy dip)."""
+
+    entropy_floor: int
+    peak_floor: int
+    min_peak_beats: int
+    min_rest_beats: int
+
+
+@dataclass(frozen=True, slots=True)
+class PacingClock:
+    """The per-run pacing state over narrative entropy (DIR-1; the L4D
+    `TimeSincePeak` / `TimeSinceRest` two-clock shape IS this state
+    machine — REST's `beats_in_state` is time-since-peak, PEAK's is
+    time-since-rest-ended). `beats_in_state` counts the beats held
+    INCLUDING the entering beat. Functional by design: `transition`
+    returns a new clock, the Director holds the current one — a
+    deterministic fold of the per-beat entropy sequence (INV-2).
+
+    States: RAMP (normal tension) · PEAK (entropy at or above the peak
+    floor — the world is loud, the director does not add) · REST
+    (post-peak breathing room, holds `min_rest_beats`) · STAGNATION
+    (entropy below the stagnation floor — the quiet the detector
+    exists to break). Only PEAK and REST suppress releases; the
+    RAMP/STAGNATION split is the observable band name (the policy's
+    floor remains the release authority — one owner per law)."""
+
+    state: str = "RAMP"
+    beats_in_state: int = 0
+
+    def transition(self, entropy_value: int, config: PacingConfig) -> "PacingClock":
+        """One beat's deterministic transition. PEAK holds its minimum
+        even through an entropy dip (hysteresis); REST is broken early
+        only by the world re-spiking (entropy back at the peak floor) —
+        the director never ends its own rest with a release."""
+        if self.state == "PEAK":
+            if (
+                entropy_value < config.peak_floor
+                and self.beats_in_state >= config.min_peak_beats
+            ):
+                return PacingClock("REST", 1)  # the peak is over: breathe
+            return PacingClock("PEAK", self.beats_in_state + 1)
+        if self.state == "REST":
+            if entropy_value >= config.peak_floor:
+                return PacingClock("PEAK", 1)  # the world re-spiked: rest over
+            if self.beats_in_state >= config.min_rest_beats:
+                return _quiet_band(entropy_value, config)
+            return PacingClock("REST", self.beats_in_state + 1)
+        # RAMP / STAGNATION — no minimum (the flat band; the policy's
+        # floor, not the clock, is the release authority here)
+        if entropy_value >= config.peak_floor:
+            return PacingClock("PEAK", 1)
+        return _quiet_band(entropy_value, config)
+
+
+def _quiet_band(entropy_value: int, config: PacingConfig) -> PacingClock:
+    """The quiet-band split: below the stagnation floor the clock reads
+    STAGNATION, at or above it RAMP. Observable naming only — both
+    states leave the release decision to the policy."""
+    if entropy_value < config.entropy_floor:
+        return PacingClock("STAGNATION", 1)
+    return PacingClock("RAMP", 1)
+
+
+def pacing_from_rules(rules: Mapping[str, Any]) -> PacingConfig | None:
+    """The pack's pacing declaration (`director.pacing`), beside
+    `policy_from_rules` (the single pacing read). None when the pack
+    declares no pacing — the v0.1 minimal pair, release behavior
+    byte-identical (the pack's own declaration is the gate, INV-3)."""
+    pacing = rules.get("director", {}).get("pacing")
+    if pacing is None:
+        return None
+    stagnation = rules["director"]["stagnation"]
+    return PacingConfig(
+        entropy_floor=int(stagnation["entropy_floor"]),
+        peak_floor=int(pacing["peak_floor"]),
+        min_peak_beats=int(pacing["min_peak_beats"]),
+        min_rest_beats=int(pacing["min_rest_beats"]),
     )
 
 
@@ -234,7 +341,9 @@ class Director:
     """The per-run consequence planner. Holds the seeded-hook buffer and
     the release budget; the loop calls `seed` at commit time and
     `releases` at each beat tick. A release produces an IntentData the
-    loop enqueues — the director never writes canon itself (D-037)."""
+    loop enqueues — the director never writes canon itself (D-037).
+    Since iter-36 it also holds the per-run pacing clock (DIR-1) when
+    the pack declares one."""
 
     pack: "Pack"
     policy: DirectorPolicy
@@ -243,10 +352,24 @@ class Director:
     _released: set[int] = field(default_factory=set)
     _release_seq: int = 0
     _npc_last_release_beat: dict[str, int] = field(default_factory=dict)
+    _pacing_config: PacingConfig | None = field(default=None, init=False, repr=False)
+    _pacing: PacingClock | None = field(default=None, init=False, repr=False)
+    _pacing_beat: int = field(default=-1, init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        self._pacing_config = pacing_from_rules(self.pack.rules)
+        if self._pacing_config is not None:
+            self._pacing = PacingClock()
 
     @property
     def hooks(self) -> tuple[SeededHook, ...]:
         return tuple(self._hooks)
+
+    @property
+    def pacing(self) -> PacingClock | None:
+        """The per-run pacing clock (None when the pack declares no
+        pacing — the v0.1 minimal pair)."""
+        return self._pacing
 
     def next_beat(self) -> int:
         """Advance the beat counter; returns the new beat index."""
@@ -296,18 +419,26 @@ class Director:
 
         Reads observable state only (L6): the projection and the
         seeded-hook buffer — never knowledge records, never PC
-        internals (the entropy law, phases.md/DIRECTOR_SPEC §5)."""
+        internals (the entropy law, phases.md/DIRECTOR_SPEC §5). The
+        pacing clock (DIR-1) advances once per beat BEFORE the gates
+        read it; PEAK/REST suppress the stagnation path, explicit
+        triggers stay ungated (D-005 — causality is not pacing).
+        """
         unreleased = list(self._unreleased())
-        if not unreleased:
-            return []
         # Entropy is invariant across this call — nothing mutates the
         # buffer, the release set, or the projection before an immediate
         # return — so it is computed once and reused for every policy
         # check (the eager per-hook recomputation was pure waste under a
-        # rejecting policy: k+1 identical evaluations per beat).
+        # rejecting policy: k+1 identical evaluations per beat). Computed
+        # even on an empty buffer: the pacing clock models the world's
+        # drama (a burning room is a PEAK with the buffer drained), and
+        # entropy is its only input.
         current_entropy = entropy(
             projection, iter(h for _, h in unreleased), self.pack.rules
         )
+        self._advance_pacing(current_entropy)
+        if not unreleased:
+            return []
         # 1) explicit triggers — causal, fire regardless of entropy
         for idx, hook in unreleased:
             if not _trigger_fires(hook.trigger, projection, beat_tick):
@@ -323,9 +454,19 @@ class Director:
                 continue
             self._mark_released(idx, hook.target_npc)
             return [self._intent(hook)]
-        # 2) stagnation release — entropy < floor → lowest-threshold hook
+        # 2) stagnation release — entropy < floor → lowest-threshold hook.
+        # The pacing clock gates the drama path (DIR-1): PEAK (the world
+        # is loud) and REST (post-peak breathing room) suppress
+        # re-injection — the flat v0.1 detector released the beat after
+        # a climax, flattening the arc. Packs without pacing keep the
+        # ungated v0.1 behavior; the policy's floor stays the release
+        # authority either way (one owner per law).
         if not self.policy.permit_release(
             explicit_trigger_fires=False, current_entropy=current_entropy
+        ):
+            return []
+        if self._pacing is not None and self._pacing.state not in (
+            "RAMP", "STAGNATION"
         ):
             return []
         candidates = [
@@ -343,6 +484,17 @@ class Director:
         return [self._intent(hook)]
 
     # -- helpers (private) ---------------------------------------------------
+
+    def _advance_pacing(self, current_entropy: int) -> None:
+        """One beat's clock transition — guarded so a repeated
+        `releases()` call inside one beat never double-advances (the
+        loop calls once per beat; unit tests probe repeatedly)."""
+        if self._pacing is None or self._pacing_config is None:
+            return
+        if self._pacing_beat == self.beat_count:
+            return
+        self._pacing_beat = self.beat_count
+        self._pacing = self._pacing.transition(current_entropy, self._pacing_config)
 
     def _unreleased(self) -> Iterator[tuple[int, SeededHook]]:
         for idx, hook in enumerate(self._hooks):

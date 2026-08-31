@@ -85,9 +85,16 @@ closed-vocabulary reverse validation over the sink + the ≤2-regen
 ladder + the retrieval stress — 4 live cases, 0 honest misfires,
 brief p50 ≈ 2.9 KB on GB-scale exports; numbers owner
 `docs/TECH_NOTES.md` §3.3). 697 tests green, ruff clean,
-golden fixtures byte-identical. Next: the owner's phase-3 opening
-call (Director) + the owner-gated set (parse-2, engine-1) — the
-un-gated backlog is empty.
+golden fixtures byte-identical. **Phase 3 (Director) OPEN** — iter-36,
+the owner's "continue per the plan" call (the iter-31 precedent): the
+pacing clock landed first (DIR-1, D-065 — the L4D peak/rest donor:
+the per-run RAMP/PEAK/REST/STAGNATION machine over narrative entropy,
+`director.pacing` pack data + lint, REST = the post-climax breathing
+room, explicit triggers ungated; contract owner `docs/DIRECTOR_SPEC.md`
+§5). 708 tests green, ruff clean, zero fixture regen. Next: the
+phase-3 arc (`dir-2` — the eventless-stretch instrument, then `dir-3`
+layered thresholds + PEAK_CLIMAX; `docs/TASKS.md`) + the owner-gated
+set (parse-2, engine-1).
 
 ## For AI agents (primary audience)
 

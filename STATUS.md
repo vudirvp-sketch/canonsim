@@ -1,22 +1,26 @@
 # STATUS — canonsim
 
-Iteration: iter-35 (`iter-35-phase2-gate` — the owner's "continue per
-the plans" session call; doc-only, the iter-26 gate-review precedent —
-streak 1 of 2) · Phase: 2 (parser, mode C) **CLOSED — gate PASS,
-D-064**; phase 3 (Director) parked, opens on the owner's call · Date:
-2026-09-01 · Scope: the phase-2 gate review — the full ROADMAP §5
-protocol re-run + the PARSER_SPEC §6 measurement verdict. **The exit
-criterion "≥90% valid intents" MET: 51 combined utterances across 10
-live say-door sessions — 35 fed intents / 10 questions / 4 no_intent,
-35/35 boundary validity, 0 honest misfires; 10/10 deliberate
-off-grammar probes caught loudly; no kill-criteria hit.** The §5
-re-run is identical to iter-26 (day1_full ON seed 125: M1=0.417 /
-M2=0.500 — phase 2 added the parser without touching a canon path;
-T8 OFF 26 emergent chains ≥ 3; T7 — the day1_full tale still reads as
-a story, 13 lines, zero noise-floor lines); the corpus regression (105
-narrator + 10 parse cases through the REAL stacks) green in the
-697-test suite, ruff clean. DECISIONS collapsed 35→30 per D-034. No
-KIs opened — no drift found.
+Iteration: iter-36 (`iter-36-pacing-clock` — the owner's "continue
+per the plan" session call; phase 3 opens on it, the iter-31
+precedent; a code iteration — the doc-only streak resets) · Phase: 3
+(Director) **OPEN — the pacing clock landed (DIR-1, D-065)** · Date:
+2026-09-01 · Scope: the L4D peak/rest clock over narrative entropy:
+the per-run RAMP/PEAK/REST/STAGNATION machine (`core/director.py` —
+pack-gated, advanced once per beat, functional transitions), pack
+data `director.pacing` (peak_floor 25 / min_peak 1 / min_rest 1) +
+lint (peak strictly above the stagnation floor, positive minima);
+stagnation releases fire only outside PEAK/REST — REST is the
+post-climax breathing room the flat v0.1 detector lacked (it
+re-injected the beat after a climax); explicit triggers never consult
+the clock (D-005 — causality is not pacing); a pack without the
+block runs the v0.1 minimal pair byte-identically. Zero fixture regen:
+the committed fixtures carry no stagnation releases (the corpus's
+one live director release is the explicit document_check, ungated by
+design; the day1_full ON log is unchanged — all three beats sit in
+PEAK, the M1=0.417/M2=0.500 gate record holds). KI#60 opened +
+closed (phases.md §2 stale OPEN header after the iter-35 closure);
+KI#55–59 deleted per AGENTS §5 (closed iter-34, two iterations
+past). Tests 697→708, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -42,24 +46,13 @@ KIs opened — no drift found.
 
 (none open.)
 
-- KI#55 · the bg-4 KI#52 deletion (stray root TASKS.md) never landed —
-  no `git rm` rode the command block · CLOSED iter-34 (deleted; the
-  FAQ git bullet carries the law).
-- KI#56 · phase-state drift: ROADMAP §2 pre-gate wording, §6 expired
-  ban, the TASKS bg-6 slot line · CLOSED iter-34 (State column +
-  actualized gating).
-- KI#57 · phases.md stale: §2 pre-D-062 plan ("12 actions", fixed
-  union), no phase-1 closure/D-055, §7 ECS-vs-perf-1 unresolved ·
-  CLOSED iter-34.
-- KI#58 · BLUEPRINT §0 ref count 34≠35 (df_design, iter-8d) + LOD-1
-  without the bg-2 donor line · CLOSED iter-34.
-- KI#59 · docs/ref/paradox_scripting.md 605/600 over cap, rationale
-  unrecorded · CLOSED iter-34 (kept: substance-only; rationale in
-  worklog iter-34).
+- KI#60 · doc drift: `docs/blueprint/phases.md` §2 header still read
+  "OPEN (iter-31, D-062)" after iter-35 closed phase 2 (ROADMAP §2's
+  State column owns closed/open) · CLOSED iter-36 (flipped to the
+  D-064 closure, the §1 header pattern).
 
-- (KI#54 deleted at bg-2 per AGENTS §5 — closed iter-32, two
-  iterations past; the FAQ-merge lesson lives in git + worklog
-  iter-32.)
+- (KI#55–59 deleted at iter-36 per AGENTS §5 — closed iter-34, two
+  iterations past; the lessons live in the FAQ + git.)
 
 ## FAQ / Pitfalls
 
@@ -385,36 +378,28 @@ gate.
 
 ## Next step
 
-**Phase 2 is CLOSED — gate PASS iter-35, D-064** (the owner's
-"continue per the plans" session call; the iter-26 precedent). The
-un-gated backlog stays EMPTY — everything left is owner-gated or
-phase-gated; the next move is the owner's. The doc-only streak is 1 of
-2 (the gate-review precedent; the next iteration must carry code or a
-fresh owner directive).
+**Phase 3 is OPEN (iter-36, D-065 — the pacing clock landed).** The
+arc lives in `docs/TASKS.md`'s phase-3 backlog: `dir-2` (the
+eventless-stretch instrument — the balance-harness pacing A/B, the
+exit criterion "a scene without an event < N beats" made measurable)
+is the next un-gated item; then `dir-3` (L4D2 layered thresholds +
+PEAK_CLIMAX). The doc-only streak is reset — iter-36 carried code.
 
-1. **Phase 3 (Director) — opens on the owner's call** (the iter-31
-   precedent: phases open by owner call, never spontaneously; ROADMAP
-   §2 — stagnation detector, complication buffer, arcs). More
-   parse-1-class session volume only on the owner's call (the corpus
-   grows the same way on demand).
-2. **`parse-2`** (owner-gated) — disambiguation buttons, multi-intent
-   utterances (PARSER_SPEC §7's deferrals; a frontend consumer or
-   live-session evidence is the trigger).
-3. **Owner-gated, unchanged from phase 1:** tune-3 (the three-way
-   NPC-movement fork — the dormant stance stands until the owner
-   picks), st-2 (identity persistence), the phase-1 corpus
-   consolidation pass, `engine-1` (the runtime inference engine
-   decision — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external
-   parser carried phase 2 to its PASS and carries mode C until then),
-   `bg-6` (SoW audit, D-055 deferral), `qa-1` mypy + `ci-1` GitHub
-   Actions.
-4. Track B: **bg-2 DONE, bg-3 DONE** (tool + numbers + regression:
-  `scripts/df_briefer.py`, TECH_NOTES §3.3, `tests/test_df_briefer.py`);
-  bg-4 DONE, bg-6 owner-deferred. New track-B ideas (e.g. a bg-7: the
-  brief-side epistemology donor — a knowledge-record analog over DF,
-  the TAXONOMY §4.1 gap) enter the `docs/TASKS.md` backlog on the
-  owner's call, never spontaneously. `pack-3` (Sci-Fi sketches) stays
-   parked until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG trigger
-   ("phase-0 gate passed") fired at iter-6, was never scheduled, and
-   the just-in-time reading keeps deferring it: write specs FROM
-   experiment results at need, not ahead — it stays parked.
+1. **Phase-3 arc** (TASKS backlog): dir-2 → dir-3 → dir-4 (the
+   director-evolution run), drama-1 (the Paradox event grammar),
+   social-1/2/arc-1 (the social-depth run).
+2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
+   multi-intent), `engine-1` (the runtime inference engine decision
+   — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
+   carries mode C until then), tune-3 (the three-way NPC-movement
+   fork), st-2 (identity persistence), the phase-1 corpus
+   consolidation pass, `bg-6` (SoW audit, D-055 deferral), `qa-1`
+   mypy + `ci-1` GitHub Actions.
+3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
+   New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
+   call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked
+   until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG
+   trigger ("phase-0 gate passed") fired at iter-6, was never
+   scheduled, and the just-in-time reading keeps deferring it: write
+   specs FROM experiment results at need, not ahead — it stays
+   parked.

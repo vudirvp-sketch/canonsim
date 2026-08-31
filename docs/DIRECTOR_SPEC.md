@@ -4,7 +4,8 @@
 > of the director's runtime contract; the blueprint `docs/blueprint/
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
-> ≤300 lines.
+> ≤300 lines. The pacing clock (DIR-1) landed iter-36 (phase 3, D-065);
+> the phase-3 refinements still recorded-not-built live in §11.
 
 ## 1. What the director is
 
@@ -63,7 +64,7 @@ perceiver to the director itself. Replaces the v0.1 draft's flat
 `release_after_ticks_without_visible_event: 90` timer — a tension
 floor sensor, not a boredom timer.
 
-## 5. Release policy (the minimal pair)
+## 5. Release policy (the minimal pair + the pacing clock)
 
 ```python
 class DirectorPolicy(Protocol):
@@ -76,9 +77,37 @@ class DirectorPolicy(Protocol):
   stagnation releases when `entropy < N`.
 - `DisabledPolicy`: never releases (T8 A/B baseline).
 
-Multi-channel policies (threat / social / ambient) and the
-pacing-clock escalation factors (RAMP / PEAK / REST / STAGNATION)
-are phase-3 refinements, recorded not built.
+**The pacing clock (DIR-1, landed iter-36; the L4D peak/rest donor):**
+a per-run four-state machine `RAMP / PEAK / REST / STAGNATION` over
+narrative entropy, advanced once per beat (guarded against a double
+advance inside one beat). Pack data `director.pacing`
+`{peak_floor, min_peak_beats, min_rest_beats}` — `peak_floor` sits
+strictly above the stagnation floor (lint); a pack WITHOUT the block
+runs the v0.1 minimal pair, byte-identically (the pack's own
+declaration is the gate, INV-3).
+
+- **PEAK** — entropy ≥ `peak_floor`: the world is loud; the director
+  does not add. Holds `min_peak_beats` even through an entropy dip
+  (the L4D `PeakDuration` anti-flap floor).
+- **REST** — entered when a PEAK ends: `min_rest_beats` of post-climax
+  breathing room during which the stagnation path is suppressed (the
+  L4D `RestMinDuration`; the flat v0.1 detector re-injected the beat
+  after a climax, flattening the arc). Broken early only by the world
+  re-spiking — the director never ends its own rest with a release.
+- **STAGNATION** — entropy below the stagnation floor: the only quiet
+  state that releases (the policy's floor stays the release authority
+  — one owner per law; RAMP is the same band above the floor).
+- Explicit triggers NEVER consult the clock (D-005: causality is not
+  pacing — the world's own consequences fire mid-rest).
+
+The clock is derived state — a deterministic fold of the per-beat
+entropy sequence (INV-2: same log → same clock → same releases); it
+writes nothing, and `TimeSincePeak` / `TimeSinceRest` (the donor's
+two-clock fields) are the state machine itself. Measured impact at
+landing (iter-36): the day1_full ON log is unchanged — all three of
+its beats sit in PEAK (the double-steal suspicion), and its sole
+release is the explicit document-check; the committed fixtures carry
+no stagnation releases, so T1/T8/corpus stay byte-identical.
 
 ## 6. Release budget + cooldown
 
@@ -166,9 +195,9 @@ suffices.
 ## 11. What this spec does NOT cover (phase-3+ refinements)
 
 - Multi-channel policies (threat / social / ambient) — L4D family.
-- The pacing clock (DIR-1: RAMP / PEAK / REST / STAGNATION
-  minimum-duration states with `TimeSincePeak` / `TimeSinceRest`).
-- Layered thresholds (L4D2 three-intensity rule) and `PEAK_CLIMAX`.
+- Layered thresholds (L4D2 three-intensity rule) and `PEAK_CLIMAX`
+  (a high-severity hook's release is a climax beat, placed at the end
+  of a peak — donor: the L4D boss rule).
 - The full document_check action (the v0.1 stub uses `wait`; a
   dedicated action arrives when the document-check hook deserves
   its own resolution).

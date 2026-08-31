@@ -338,8 +338,8 @@ document never feeds intents (the beat regens whole). Zero
 LLM/network/dependency code — INV-4 held through the whole phase; the
 runtime engine is the owner-gated `engine-1` (unlocked at D-058).
 
-## 2. Phase 2 — parser (mode C) — OPEN (iter-31, D-062; contract owner
-`docs/PARSER_SPEC.md`)
+## 2. Phase 2 — parser (mode C) — CLOSED (gate PASS iter-35, D-064;
+contract owner `docs/PARSER_SPEC.md`)
 
 **Landed half (D-062 — D-055's pattern on the player's free text): the
 parser is EXTERNAL at dev-time over a file contract** — `brief/parser.py`
@@ -365,7 +365,8 @@ off-grammar output becomes structurally impossible at the source; the
 dev-time boundary gate is its stand-in). Player input is data, not
 instruction (`VISION.md` §5); the world answers, not the model.
 
-## 3. Phase 3 — director evolution + event grammar + social depth
+## 3. Phase 3 — director evolution + event grammar + social depth —
+OPEN (iter-36, the owner's call; the pacing clock landed, D-065)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -379,13 +380,17 @@ become an explicit context argument (`ctx`) with `every/random/any`
 iterator helpers — the cleanest Paradox abstraction, minus the implicit-
 `this` footguns. MTTH stays the named anti-pattern: SAMPLED timing only.
 
-**Director refinements** (recorded at phase 0, built here): layered
-thresholds (L4D2), `PEAK_CLIMAX` for high-severity hooks, three-axis
-anxiety (Alien) — the `unknown` axis becomes measurable as the gap
-between actual state (log) and perceived state (knowledge records);
-the director may pace against the gap, still never against the player
-(L6). Re-plan-on-violation for hook chains (Generative Agents planning
-shape, deterministic engine).
+**Director refinements** (recorded at phase 0, built here): the
+pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /
+REST / STAGNATION` over entropy, pack data `director.pacing`,
+clock-gated stagnation releases, explicit triggers ungated; owner
+`DIRECTOR_SPEC.md` §5); still ahead: layered thresholds (L4D2),
+`PEAK_CLIMAX` for high-severity hooks, three-axis anxiety (Alien) —
+the `unknown` axis becomes measurable as the gap between actual state
+(log) and perceived state (knowledge records); the director may pace
+against the gap, still never against the player (L6). Re-plan-on-
+violation for hook chains (Generative Agents planning shape,
+deterministic engine).
 
 **Social depth**: secrets & leverage as first-class fact clusters (P3a;
 CK3 `add_hook` — a hook *is an event* with target, type, expiry tick,

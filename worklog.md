@@ -10,6 +10,27 @@
 > since iter-5).
 
 ---
+iter-36 · 2026-09-01 · phase-3 opening — the pacing clock (DIR-1)
+(iter-36-pacing-clock; the owner's "continue per the plan" call —
+phase 3 opens on it, the iter-31 precedent)
+- core/director.py: the per-run RAMP/PEAK/REST/STAGNATION clock over
+  narrative entropy (L4D peak/rest donor) — pack-gated via
+  director.pacing, advanced once per beat (guarded), functional
+  transitions; stagnation releases fire only outside PEAK/REST (REST =
+  post-climax breathing room), explicit triggers ungated (D-005);
+  rules.json pacing block (25/1/1) + lint (peak > stagnation floor);
+  tests 697→708 (+11 test_director.py), ruff clean — zero fixture regen
+  (committed fixtures carry no stagnation releases; day1_full ON
+  unchanged, its 3 beats all PEAK).
+- Scope: 13 files (code 2 + test 1 + pack 1 + spec 1 + the doc-sync
+  set — the iter-31 phase-opening precedent).
+- KI#60 (phases.md §2 stale OPEN header post-iter-35) opened + closed;
+  KI#55–59 deleted per AGENTS §5. ROADMAP/phases/TASKS phase-3 OPEN +
+  the arc backlog; D-065; iter-27 evicted per the cap. phases.md
+  608/600 kept per §6.1 (the overage: the D-062/D-055 + the new
+  DIR-1 architecture records — substance, 0 filler added).
+
+---
 iter-35 · 2026-09-01 · phase-2 gate — the verdict + the collapse
 (iter-35-phase2-gate; the owner's "continue per the plans" session
 call — the un-gated backlog was empty, the arc's #1 item, the iter-26
@@ -279,7 +300,7 @@ bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validatio
 ---
 iter-27 · 2026-08-31 · tune-1 — the rest action + the story-critical
 importance hook (iter-27-tune1-rest-importance)
-- (deleted at bg-3 per the one-in/one-out cap; history in git.)
+- (deleted at iter-36 per the one-in/one-out cap; history in git.)
 ---
 iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
 collapse (iter-26-phase1-gate)

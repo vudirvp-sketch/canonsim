@@ -7,28 +7,44 @@ floor. Releases ride the intent door — the director never writes canon
 itself (D-037). Director-off keeps the buffer seeding but suppresses
 releases (T8 A/B baseline).
 
+iter-36 acceptance (phase 3, DIR-1, the L4D peak/rest donor): the
+pacing clock — a per-run RAMP / PEAK / REST / STAGNATION machine over
+narrative entropy, advanced once per beat. REST is the post-climax
+breathing room the flat v0.1 detector lacked (it re-injected the beat
+after a climax); explicit triggers never consult the clock (D-005 —
+causality is not pacing); a pack without `director.pacing` runs the
+v0.1 minimal pair unchanged.
+
 Determinism holds (T1 discipline): the entropy formula reads
 observable state only (L6), and the release decisions are deterministic
-for a given buffer + projection — no RNG in the director itself.
+for a given buffer + projection — no RNG in the director itself. The
+clock is derived state the same way: a fold of the per-beat entropy
+sequence, never a canon write.
 """
 
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
+
+import pytest
 
 from core.director import (
     DISABLED,
     Director,
     DisabledPolicy,
     EnabledPolicy,
+    PacingClock,
+    PacingConfig,
     SeededHook,
     entropy,
+    pacing_from_rules,
 )
 from core.fold import initial_projection
 from core.log import EventRecord
-from core.pack import load_pack
+from core.pack import PackError, load_pack
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
@@ -299,6 +315,188 @@ def test_caught_target_is_never_targeted() -> None:
     director2._hooks.append(hook)
     projection["npc_guard_01"]["crime_status"] = "caught"
     assert director2.releases(projection, beat_tick=0) == []
+
+
+# -- the pacing clock (iter-36, DIR-1; the L4D peak/rest donor) ----------------
+
+
+def _mutated_pack(tmp_path: Path, mutate_rules: Any) -> Any:
+    """A copy of the tavern pack with `rules.json` mutated and re-linted
+    (the test_core `_broken_pack` pattern, local to this suite)."""
+    target = tmp_path / "mutated_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    mutate_rules(rules)
+    (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    return load_pack(target)
+
+
+# pack wiring
+
+
+def test_pack_declares_pacing_and_clock_starts_ramp() -> None:
+    """The tavern pack declares `director.pacing` (the phase-3 arc's first
+    config); the per-run clock starts in RAMP with zero beats held."""
+    config = pacing_from_rules(PACK.rules)
+    assert config is not None
+    assert config == PacingConfig(
+        entropy_floor=5, peak_floor=25, min_peak_beats=1, min_rest_beats=1,
+    )
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    assert director.pacing == PacingClock(state="RAMP", beats_in_state=0)
+
+
+def test_pack_without_pacing_runs_the_v01_minimal_pair(tmp_path: Path) -> None:
+    """A pack that drops `director.pacing` gets no clock — the release
+    behavior is the v0.1 minimal pair (the pack's own declaration is the
+    gate, INV-3; a second pack requires zero engine changes)."""
+    pack = _mutated_pack(tmp_path, lambda rules: rules["director"].pop("pacing"))
+    director = Director(pack=pack, policy=EnabledPolicy(entropy_floor=10))
+    assert director.pacing is None
+    director._hooks.append(_seeded_hook(weight=2, release_threshold=5))  # type: ignore[attr-defined]
+    projection = initial_projection(pack.entities)
+    # v0.1: entropy 2 < floor 10 → release, no clock gate
+    assert len(director.releases(projection, beat_tick=0)) == 1
+
+
+# the state machine (pure PacingClock.transition)
+
+
+def test_clock_ramp_to_peak_on_entropy_spike() -> None:
+    config = PacingConfig(entropy_floor=5, peak_floor=25, min_peak_beats=1, min_rest_beats=1)
+    clock = PacingClock().transition(30, config)
+    assert clock == PacingClock(state="PEAK", beats_in_state=1)
+    # the quiet band names STAGNATION below the floor, RAMP above it
+    assert PacingClock().transition(2, config).state == "STAGNATION"
+    assert PacingClock().transition(10, config).state == "RAMP"
+
+
+def test_clock_peak_holds_minimum_through_an_entropy_dip() -> None:
+    """L4D hysteresis: a spike is a peak — a one-beat dip below the peak
+    floor does not flap the clock out of PEAK before min_peak_beats."""
+    config = PacingConfig(entropy_floor=5, peak_floor=25, min_peak_beats=2, min_rest_beats=1)
+    clock = PacingClock().transition(30, config)  # PEAK(1)
+    clock = clock.transition(10, config)  # dip, but held only 1 < 2 → stay PEAK
+    assert clock == PacingClock(state="PEAK", beats_in_state=2)
+    clock = clock.transition(10, config)  # held 2 ≥ 2 → the peak is over
+    assert clock.state == "REST"
+
+
+def test_clock_peak_to_rest_then_quiet_band() -> None:
+    """The peak is followed by a rest; the rest holds min_rest_beats, then
+    settles by the entropy band (the world re-spiking breaks it early)."""
+    config = PacingConfig(entropy_floor=5, peak_floor=25, min_peak_beats=1, min_rest_beats=2)
+    clock = PacingClock("PEAK", 3).transition(10, config)  # the peak is over
+    assert clock == PacingClock(state="REST", beats_in_state=1)
+    clock = clock.transition(10, config)  # rest held only 1 < 2 → breathe on
+    assert clock == PacingClock(state="REST", beats_in_state=2)
+    clock = clock.transition(2, config)  # held 2 ≥ 2 → below the floor
+    assert clock == PacingClock(state="STAGNATION", beats_in_state=1)
+    # the world re-spiking breaks the rest early
+    resting = PacingClock("REST", 1)
+    assert resting.transition(30, config).state == "PEAK"
+
+
+# the release gate (Director-level, the real PACK's pacing)
+
+
+def test_rest_suppresses_stagnation_release() -> None:
+    """DIR-1's behavioral delta: after a peak, the flat v0.1 detector
+    would re-inject the beat the entropy drops below the floor; the
+    clock holds REST — the world breathes."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    # weight 30 ≥ peak_floor 25 → the beat-1 entropy spike is a PEAK
+    director._hooks.append(_seeded_hook(weight=30, release_threshold=5))  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []  # PEAK: nothing adds
+    assert director.pacing is not None and director.pacing.state == "PEAK"
+    # the tension drains: the peak ends → REST, and the quiet-world hook
+    # the flat detector WOULD release now stays in the buffer
+    director._hooks.clear()
+    director._hooks.append(_seeded_hook(weight=2, release_threshold=5))  # type: ignore[attr-defined]
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []  # REST suppresses
+    assert director.pacing.state == "REST"
+
+
+def test_release_resumes_after_the_rest_completes() -> None:
+    """The rest is bounded (min_rest_beats): once it completes, the quiet
+    band releases again — the exit-criterion family (an eventless
+    stretch stays short)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(_seeded_hook(weight=30, release_threshold=5))  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    director.releases(projection, beat_tick=0)  # PEAK
+    director._hooks.clear()
+    director._hooks.append(_seeded_hook(weight=2, release_threshold=5))  # type: ignore[attr-defined]
+    director.next_beat()
+    director.releases(projection, beat_tick=0)  # REST (min_rest_beats = 1)
+    director.next_beat()
+    # rest held 1 ≥ 1 → STAGNATION (entropy 2 < floor 5) → the detector fires
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    assert director.pacing is not None and director.pacing.state == "STAGNATION"
+
+
+def test_explicit_time_trigger_fires_during_rest() -> None:
+    """D-005: causality is not pacing — the clock never gates explicit
+    triggers; the deferred consequence fires mid-rest."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(_seeded_hook(weight=30, release_threshold=5))  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    director.releases(projection, beat_tick=0)  # PEAK
+    director._hooks.clear()
+    director._hooks.append(_seeded_hook(  # type: ignore[attr-defined]
+        weight=2, release_threshold=5,
+        trigger={"kind": "time", "tick": 100},
+    ))
+    director.next_beat()
+    # beat 2: PEAK → REST (entropy 2 < 25, min_peak met); the stagnation
+    # path is gated, but the explicit time trigger fires in REST
+    released = director.releases(projection, beat_tick=100)
+    assert len(released) == 1
+    assert director.pacing is not None and director.pacing.state == "REST"
+
+
+def test_repeated_releases_calls_never_double_advance_the_clock() -> None:
+    """The loop calls `releases()` once per beat; the unit-test pattern of
+    probing repeatedly inside one beat must not double-advance the clock
+    (the `_pacing_beat` guard)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(_seeded_hook(weight=30, release_threshold=5))  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    director.releases(projection, beat_tick=0)  # RAMP → PEAK
+    first = director.pacing
+    director.releases(projection, beat_tick=0)  # same beat, same projection
+    assert director.pacing == first
+
+
+# pack lint (the pacing contract)
+
+
+def test_pacing_lint_rejects_peak_at_or_below_the_stagnation_floor(
+    tmp_path: Path,
+) -> None:
+    """peak_floor must sit strictly above the stagnation entropy floor —
+    otherwise the PEAK band would swallow the quiet band the detector
+    exists to watch."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["pacing"]["peak_floor"] = 5  # == entropy_floor
+
+    with pytest.raises(PackError, match="strictly above"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_pacing_lint_rejects_non_positive_min_durations(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["pacing"]["min_rest_beats"] = 0
+
+    with pytest.raises(PackError, match="min_rest_beats"):
+        _mutated_pack(tmp_path, mutate)
 
 
 # -- helpers -----------------------------------------------------------------

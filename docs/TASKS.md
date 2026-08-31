@@ -14,11 +14,31 @@
 > iter-27–29). Phase 2 closed (gate PASS, iter-35, D-064 — 35/35 boundary
 > validity over 51 combined utterances, 0 honest misfires; the parse corpus
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
-> Phase 3 (Director) is parked — opens on the owner's call (the iter-31
-> precedent). Architecture owner: `docs/blueprint/phases.md` §2; boundary
-> contract owner: `docs/PARSER_SPEC.md`. INV-4 holds unchanged: the parser
-> is EXTERNAL at dev-time over a file contract (D-062, the D-055 pattern);
-> the runtime-engine decision stays owner-gated (TECH_NOTES §1).
+> Phase 3 (Director) OPEN — iter-36, the owner's "continue per the plan"
+> call (the iter-31 precedent; the pacing clock landed first, D-065).
+> Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
+> owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
+> event < N beats" (ROADMAP §2).
+
+### Phase-3 director backlog (opened iter-36)
+
+- `dir-1` · pacing clock — **done (iter-36, D-065)**: the per-run
+  RAMP/PEAK/REST/STAGNATION clock over narrative entropy (L4D
+  peak/rest donor), `director.pacing` pack data + lint, clock-gated
+  stagnation releases (REST = post-climax breathing room), explicit
+  triggers ungated (D-005).
+- `dir-2` · the eventless-stretch instrument — the balance-harness
+  pacing A/B (the exit criterion's measurement: the distribution of
+  eventless beat-stretches with the clock on/off).
+- `dir-3` · layered thresholds (L4D2 three-intensity rule) +
+  `PEAK_CLIMAX` (the boss-beat rule — DIRECTOR_SPEC §11).
+- `dir-4` · multi-channel policies (threat / social / ambient).
+- `drama-1` · the Paradox-adapted event grammar (trigger predicates as
+  JSON, weight multipliers, option blocks, `on_action` dispatch —
+  phases.md §3 owns the design).
+- `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
+  event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
+  tension shaping (P3c).
 
 ### Phase-2 parser backlog
 
