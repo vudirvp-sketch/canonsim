@@ -19,7 +19,8 @@
 > the exit-criterion instrument landed iter-37, D-066; the climax
 > layer landed iter-38, D-067; the multi-channel split landed iter-39,
 > D-068; the event grammar's predicate + weight layer landed iter-40,
-> drama-1, D-069).
+> drama-1, D-069; the grammar's option layer landed iter-41, drama-2,
+> D-070).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -66,17 +67,23 @@
   (the tag burns after its first release). The pack's live
   instantiation is provably inert on the committed runs (10-seed A/B
   10/10; TEST_PLAN §6). MTTH stays the named anti-pattern (TIME-1).
-- `drama-2` · the grammar's option layer: option blocks with
-  per-option availability gates (the drama-1 predicate grammar) +
-  `ai_chance`-style weighting (the weight_multiplier shape) + the
-  `immediate`/`option`/`after` three-phase lifecycle over the intent
-  door — the Paradox option mechanics, adapted; rides with the ctx
-  scope helpers (`every`/`random`/`any`) where they first earn their
-  keep.
+- `drama-2` · the grammar's option layer — **done (iter-41, D-070)**:
+  option blocks with per-option availability gates (the drama-1
+  predicate grammar) + `ai_chance`-style weighting (a pure
+  deterministic pick — the heaviest effective weight wins, ties by
+  declaration order, zero never picked, all-closed defers the
+  release; the weighted DRAW stays excluded with MTTH) + payload
+  overrides whole-key; the `immediate`/`option`/`after` lifecycle
+  maps to seed/choose/apply (no literal effect blocks — the door's
+  commit + reaction dispatch is the after; DIRECTOR_SPEC §3b the
+  contract owner); the ctx scope helpers did not ride (the gates are
+  single-entity, §9's anti-pattern on runtime targeting) — they wait
+  for drama-3, where entity-set iteration first earns its keep.
 - `drama-3` · the on_action dispatch layer: event X fires → content
   reacts (pack data), with append-not-overwrite composition so packs
   extend without clobbering — the Paradox on_action table, adapted;
-  the sim/content boundary's grammar half.
+  the sim/content boundary's grammar half (the ctx scope helpers ride
+  here — the quantified predicates over "every NPC who witnessed X").
 - `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
   event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
   tension shaping (P3c).

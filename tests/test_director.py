@@ -61,6 +61,7 @@ from core.director import (
     Director,
     DisabledPolicy,
     EnabledPolicy,
+    OptionSpec,
     PacingClock,
     PacingConfig,
     SeededHook,
@@ -92,6 +93,7 @@ def _seeded_hook(
     climax: bool = False, channel: str | None = None,
     weight_modifiers: tuple[dict[str, Any], ...] = (),
     first_time_only: bool = False,
+    options: tuple[OptionSpec, ...] = (),
 ) -> SeededHook:
     return SeededHook(
         tag=tag, seeded_by_event="ev_0001", seeded_at_tick=0,
@@ -99,7 +101,7 @@ def _seeded_hook(
         target_npc=target_npc, intent_kind="wait", intent_target=None,
         intent_fields={"ticks": 1}, trigger=trigger, climax=climax,
         channel=channel, weight_modifiers=weight_modifiers,
-        first_time_only=first_time_only,
+        first_time_only=first_time_only, options=options,
     )
 
 
@@ -1281,3 +1283,404 @@ def test_first_time_only_lint_rejects_non_boolean(tmp_path: Path) -> None:
     with pytest.raises(PackError, match="first_time_only must be a boolean"):
         _mutated_pack(tmp_path, mutate)
 
+
+
+# -- drama-2 (iter-41: the event grammar's option layer) ----------------------
+
+
+def _option(
+    *, weight: Any = 1, trigger: dict[str, Any] | None = None,
+    weight_modifiers: tuple[dict[str, Any], ...] = (),
+    intent: dict[str, Any] | None = None,
+) -> OptionSpec:
+    """A manual option spec (the mirrored `_seeded_hook` helper)."""
+    return OptionSpec(
+        trigger=trigger, weight=int(weight) if isinstance(weight, int) else weight,
+        weight_modifiers=weight_modifiers, intent=intent,
+    )
+
+
+def test_a_hook_without_options_runs_the_v01_payload() -> None:
+    """The pure-addition law: an option-less hook releases the exact
+    v0.1 IntentData — the implicit base option carries the base payload
+    unchanged, the release id sequence starts at director_0000 (the
+    day1_full corpus release's id). The T1/T8/corpus byte-identity is
+    the suite-level pin of the same law."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director.seed(_record(hooks=("possible_document_check",)))
+    projection = initial_projection(PACK.entities)
+    projection["npc_guard_01"]["relations.suspicion"] = 50
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    intent = released[0]
+    assert intent.id == "director_0000"
+    assert intent.kind == "wait"
+    assert intent.actor == "npc_guard_01"
+    assert intent.target is None
+    assert intent.fields == {"ticks": 1}
+
+
+def test_seed_flattens_the_vigil_option_specs() -> None:
+    """The pack's own vigil hook declares the glance/stare pair: seed()
+    flattens both options — the glance's flat 1, the stare's multiplier
+    (base 1 + the escalation tail), the fields-only payload overrides.
+    The flat document-check hook seeds no options (the v0.1 form)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director.seed(_record(hooks=("guard_suspicious_of_pc",)))
+    vigil = director.hooks[0]
+    assert len(vigil.options) == 2
+    glance, stare = vigil.options
+    assert glance.weight == 1 and glance.weight_modifiers == ()
+    assert glance.trigger is None
+    assert glance.intent == {"fields": {"ticks": 1}}
+    assert stare.weight == 1
+    assert len(stare.weight_modifiers) == 1
+    assert stare.weight_modifiers[0]["add"] == 2
+    assert stare.intent == {"fields": {"ticks": 2}}
+    director.seed(_record(hooks=("possible_document_check",), event_id="ev_0002"))
+    assert director.hooks[1].options == ()
+
+
+def test_the_pack_vigil_releases_the_glance_below_the_band() -> None:
+    """The pack's own pair, live through the real quiet path: at
+    suspicion 0 both options weigh 1 — the tie breaks by declaration
+    order, the glance (the v0.1 payload) wins. The release burns the
+    first_time_only tag; a later beat releases nothing."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=10))
+    director.seed(_record(hooks=("guard_suspicious_of_pc",)))
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    assert released[0].kind == "wait"
+    assert released[0].fields == {"ticks": 1}
+    director.next_beat()
+    assert director.releases(projection, beat_tick=360) == []
+
+
+def test_option_weights_decide_the_pick() -> None:
+    """The ai_chance law, deterministic: the heaviest effective weight
+    wins; a tie keeps the earlier declaration. The choice is a pure
+    function of the world — never a draw."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    heavy = _seeded_hook(
+        trigger={"kind": "time", "tick": 0},
+        options=(
+            _option(weight=1, intent={"fields": {"ticks": 1}}),
+            _option(weight=3, intent={"fields": {"ticks": 2}}),
+        ),
+    )
+    tie = _seeded_hook(
+        trigger={"kind": "time", "tick": 0},
+        options=(
+            _option(intent={"fields": {"ticks": 5}}),
+            _option(intent={"fields": {"ticks": 6}}),
+        ),
+    )
+    projection = initial_projection(PACK.entities)
+    director._hooks.append(heavy)  # type: ignore[attr-defined]
+    released = director.releases(projection, beat_tick=0)
+    assert released[0].fields == {"ticks": 2}  # the heavier option
+    director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director2._hooks.append(tie)  # type: ignore[attr-defined]
+    released = director2.releases(projection, beat_tick=0)
+    assert released[0].fields == {"ticks": 5}  # the first declared
+
+
+def test_option_weight_modifiers_read_the_world() -> None:
+    """The pack's own escalation shape, on the pick: below the band the
+    glance wins the tie; in the band the stare's escalated weight (1+2)
+    beats the glance's flat 1 — the release CHOICE hardens with the
+    world exactly as the hook's tension does (two layers, one band)."""
+    glance = _option(weight=1, intent={"fields": {"ticks": 1}})
+    stare = _option(
+        weight_modifiers=(
+            {"add": 2, "when": {
+                "kind": "threshold", "target_npc": "npc_guard_01",
+                "axis": "suspicion", "comparator": "at_least", "value": 50,
+            }},
+        ),
+        intent={"fields": {"ticks": 2}},
+    )
+    projection = initial_projection(PACK.entities)
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(trigger={"kind": "time", "tick": 0}, options=(glance, stare))
+    )
+    released = director.releases(projection, beat_tick=0)
+    assert released[0].fields == {"ticks": 1}  # suspicion 0: the tie -> glance
+    projection["npc_guard_01"]["relations.suspicion"] = 50
+    director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director2._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(trigger={"kind": "time", "tick": 0}, options=(glance, stare))
+    )
+    released = director2.releases(projection, beat_tick=0)
+    assert released[0].fields == {"ticks": 2}  # in the band: the stare
+
+
+def test_option_availability_gate_defers_the_release() -> None:
+    """The deferred-release law: a hook whose options are ALL gated off
+    cannot release that beat — nothing hits the door (the id sequence
+    proves no intent was built), and the hook stays in the buffer until
+    a world where an option opens. The trigger re-fires next beat."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            trigger={"kind": "time", "tick": 0},
+            options=(
+                _option(
+                    trigger={"kind": "time", "tick": 100},
+                    intent={"fields": {"ticks": 2}},
+                ),
+            ),
+        )
+    )
+    projection = initial_projection(PACK.entities)
+    # the hook's own trigger fires at tick 0, but the option's gate
+    # opens only at tick 100: no release, nothing spent
+    assert director.releases(projection, beat_tick=50) == []
+    released = director.releases(projection, beat_tick=100)
+    assert len(released) == 1
+    assert released[0].id == "director_0000"  # the budget was never spent
+    assert released[0].fields == {"ticks": 2}
+
+
+def test_zero_weight_options_are_never_picked() -> None:
+    """The Stellaris factor-0 zero-out: an available option weighing a
+    zero effective weight is never picked — and a hook whose every
+    option zeroes out cannot release at all (the hook may go quiet
+    without seeding a new fact)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            trigger={"kind": "time", "tick": 0},
+            options=(
+                _option(
+                    weight_modifiers=({"factor": 0, "when": {"kind": "time", "tick": 0}},),
+                    intent={"fields": {"ticks": 1}},
+                ),
+                _option(weight=2, intent={"fields": {"ticks": 2}}),
+            ),
+        )
+    )
+    projection = initial_projection(PACK.entities)
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    assert released[0].fields == {"ticks": 2}  # the zeroed option skipped
+    all_zero = _seeded_hook(
+        trigger={"kind": "time", "tick": 0},
+        options=(
+            _option(weight=0, intent={"fields": {"ticks": 1}}),
+            _option(
+                weight_modifiers=({"factor": 0, "when": {"kind": "time", "tick": 0}},),
+                intent={"fields": {"ticks": 2}},
+            ),
+        ),
+    )
+    director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director2._hooks.append(all_zero)  # type: ignore[attr-defined]
+    assert director2.releases(projection, beat_tick=0) == []
+
+
+def test_an_option_intent_overrides_the_base_payload() -> None:
+    """The whole-key merge: each declared key of the option's intent
+    block (kind / target / fields) wholly replaces the base payload's;
+    an undeclared key inherits. An option without an intent block
+    carries the base payload unchanged."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            trigger={"kind": "time", "tick": 0},
+            options=(
+                _option(intent={
+                    "kind": "talk", "target": "npc_barkeep_01",
+                    "fields": {"topic": "the_missing_purse"},
+                }),
+            ),
+        )
+    )
+    projection = initial_projection(PACK.entities)
+    released = director.releases(projection, beat_tick=0)
+    assert released[0].kind == "talk"
+    assert released[0].target == "npc_barkeep_01"
+    assert released[0].fields == {"topic": "the_missing_purse"}
+    # partial override: kind only — target and fields inherit the base
+    director2 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director2._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            trigger={"kind": "time", "tick": 0},
+            options=(_option(intent={"kind": "wait"}),),
+        )
+    )
+    released = director2.releases(projection, beat_tick=0)
+    assert released[0].kind == "wait"
+    assert released[0].target is None
+    assert released[0].fields == {"ticks": 1}
+    # no intent block at all: the base payload, wholly
+    director3 = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director3._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(trigger={"kind": "time", "tick": 0}, options=(_option(),))
+    )
+    released = director3.releases(projection, beat_tick=0)
+    assert released[0].kind == "wait"
+    assert released[0].fields == {"ticks": 1}
+
+
+def test_options_do_not_touch_entropy() -> None:
+    """One owner per number: the HOOK's effective weight is the tension
+    (drama-1's law); the option weights are choice-local and never feed
+    entropy — a hook with heavyweight options contributes exactly its
+    own effective weight."""
+    projection = initial_projection(PACK.entities)
+    flat = _seeded_hook(weight=2)
+    loaded = _seeded_hook(
+        weight=2,
+        options=(
+            _option(weight=9, intent={"fields": {"ticks": 9}}),
+            _option(weight=5),
+        ),
+    )
+    assert entropy(projection, iter([flat]), PACK.rules, 0) == (
+        entropy(projection, iter([loaded]), PACK.rules, 0)
+    )
+
+
+def test_the_climax_path_resolves_the_option_choice() -> None:
+    """The boss path composes with the option layer: the release
+    carries the chosen option's payload and marks the beat PEAK_CLIMAX.
+    A boss whose options are all closed does not release — and does not
+    mark the beat (the state stays PEAK; the closed boss is not a
+    spent boss)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            weight=80, release_threshold=5, climax=True,
+            options=(
+                _option(weight=1, intent={"fields": {"ticks": 1}}),
+                _option(weight=2, intent={"fields": {"ticks": 3}}),
+            ),
+        )
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    assert released[0].fields == {"ticks": 3}
+    assert director.pacing == PacingClock(state="PEAK_CLIMAX", beats_in_state=1)
+    closed = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    closed._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            weight=80, release_threshold=5, climax=True,
+            options=(_option(trigger={"kind": "time", "tick": 9999}),),
+        )
+    )
+    closed.next_beat()
+    assert closed.releases(projection, beat_tick=0) == []
+    assert closed.pacing == PacingClock(state="PEAK", beats_in_state=1)
+
+
+def test_first_time_only_burns_through_the_option_pick() -> None:
+    """The burn law is orthogonal to the choice: whichever option wins,
+    the release burns a first_time_only tag — the second instance
+    never releases (its own options cannot reopen a burned tag)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=10))
+    options = (
+        _option(weight=2, intent={"fields": {"ticks": 2}}),
+        _option(intent={"fields": {"ticks": 1}}),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            weight=2, release_threshold=5, first_time_only=True,
+            options=options,
+        ),
+        _seeded_hook(
+            weight=2, release_threshold=5, first_time_only=True,
+            options=options,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1
+    assert released[0].fields == {"ticks": 2}  # the heavier option won
+    # beat 2: the burned tag filters the second instance — entropy
+    # reads 0, nothing releases
+    director.next_beat()
+    director.next_beat()
+    assert director.releases(projection, beat_tick=720) == []
+
+
+# pack lint (the drama-2 option contract)
+
+
+def test_options_lint_rejects_an_empty_list(tmp_path: Path) -> None:
+    """L1: an empty options list is dead vocabulary — the closed-hook
+    law is for worlds that change, not for pack authors who never
+    declared a choice."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"] = []
+
+    with pytest.raises(PackError, match="options must be a non-empty list"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_options_lint_rejects_unknown_option_key(tmp_path: Path) -> None:
+    """A typo'd key is a shape error, never a silent ignore — `triger`
+    would read as an always-available option (the drift the closed
+    vocabulary exists to catch)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][0]
+        option["triger"] = {"kind": "time", "tick": 0}
+
+    with pytest.raises(PackError, match="unknown option keys"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_option_trigger_lint_rejects_unknown_predicate_kind(
+    tmp_path: Path,
+) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][0]
+        option["trigger"] = {"kind": "omen", "target_npc": "npc_guard_01"}
+
+    with pytest.raises(PackError, match="kind must be"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_option_weight_lint_rejects_both_add_and_factor(
+    tmp_path: Path,
+) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][1]
+        modifier = option["weight"]["modifiers"][0]
+        modifier["factor"] = 0.5
+
+    with pytest.raises(PackError, match="exactly one of add\\|factor"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_option_intent_lint_rejects_unknown_action(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][0]
+        option["intent"] = {"kind": "omen"}
+
+    with pytest.raises(PackError, match="intent.kind must name a pack action"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_option_intent_lint_rejects_non_object_fields(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][0]
+        option["intent"] = {"fields": "one tick please"}
+
+    with pytest.raises(PackError, match="intent.fields must be an object"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_option_intent_lint_rejects_unknown_target(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        option = rules["director"]["hooks"]["guard_suspicious_of_pc"]["options"][0]
+        option["intent"] = {"target": "npc_ghost"}
+
+    with pytest.raises(PackError, match="intent.target must be null or name an entity"):
+        _mutated_pack(tmp_path, mutate)

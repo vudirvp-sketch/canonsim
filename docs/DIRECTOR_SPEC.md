@@ -7,10 +7,12 @@
 > ≤300 lines. Phase-3 landings: the pacing clock DIR-1 (iter-36,
 > D-065), the climax layer DIR-3 (iter-38, D-067), the multi-channel
 > split DIR-4 (iter-39, D-068), the event grammar's predicate + weight
-> layer drama-1 (iter-40, D-069); the phase-3 refinements still
+> layer drama-1 (iter-40, D-069), the grammar's option layer drama-2
+> (iter-41, D-070 — §3b); the phase-3 refinements still
 > recorded-not-built live in §11. Measured impact (every landing
 > byte-identical on day1_full — the D-066 all-PEAK window; the grammar
-> layer's 10-seed A/B included, iter-40): `docs/TEST_PLAN.md` §6.
+> layer's 10-seed A/B included, iter-40; the option layer's too,
+> iter-41): `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
@@ -41,6 +43,7 @@ rotations, not director injections.
 | `channel` | pack (optional, `director.hooks[tag].channel`) | `str` — the hook's pacing dimension (DIR-4; see §5) |
 | `weight_modifiers` | pack (drama-1, from the multiplier object) | the modifier tail — see §3a |
 | `first_time_only` | pack (optional, `director.hooks[tag].first_time_only`) | `bool` — the Wesnoth fire-only-once release policy (drama-1): once any instance of the tag releases, the tag burns for the run; burned instances stay facts in the buffer but never release and never count toward entropy (un-dischargeable tension is noise, not tension) |
+| `options` | pack (optional, `director.hooks[tag].options`; drama-2) | the release's branches — see §3b |
 
 The buffer is **per-run** (folded from the log; reseeds from the
 master seed every run because the events are deterministic per seed).
@@ -101,6 +104,70 @@ INV-2: a stored effective weight would be a projection inside the
 buffer (L3); the buffer keeps data, evaluation computes the number.
 The channel entropies read the same effective values (DIR-4). A pack
 with flat weights runs the v0.1 entropy, byte-identically.
+
+## 3b. The option layer (drama-2, iter-41 — the Paradox option mechanics adapted)
+
+`director.hooks[tag].options` is an optional non-empty list of option
+blocks — the release's branches. Each block carries EXACTLY the closed
+key set `trigger | weight | intent | notes` (an unknown key is a lint
+error, never a silent ignore — a typo'd `triger` would read as an
+always-available option):
+
+| Key | Shape | Meaning |
+|---|---|---|
+| `trigger` | a §3 predicate spec (optional) | the availability gate — closed = unavailable this beat |
+| `weight` | a §3a flat int or multiplier (optional; default base 1) | the ai_chance weight — choice-local, never feeds entropy |
+| `intent` | `{kind?, target?, fields?}` (optional) | the payload override — each declared key wholly replaces the base payload key; undeclared keys inherit |
+| `notes` | prose (optional) | pack documentation |
+
+The choose step (at release, before anything hits the door): every
+option's availability gate evaluates against the projection; a zero
+EFFECTIVE weight is never picked (the Stellaris factor-0 zero-out);
+the heaviest effective weight wins, ties break by declaration order.
+**No RNG** — the choice is a pure function of (pack data, projection,
+beat_tick): every director decision stays RNG-free, and the cross-run
+variety the donor's weighted DRAW provides comes from world state (the
+modifiers read the projection — different runs, different winners).
+The weighted draw itself is deliberately excluded, as MTTH is (the
+TIME-1 family).
+
+Laws composing with the existing machinery:
+
+- **Deferred release**: a hook whose options are ALL gated off or
+  zeroed out cannot release that beat — nothing hits the door, no
+  budget is consumed; the hook waits for a world where an option
+  opens (a closed hook is not a spent hook: the clock does not mark
+  PEAK_CLIMAX for a closed boss). The threshold tiebreak orders
+  releasable hooks only.
+- **The base payload is the fallback**: a hook without `options` has
+  exactly one implicit option — the base payload, always pickable; the
+  v0.1 release path is byte-identical (the pack's own declaration is
+  the gate, INV-3).
+- **One owner per number**: the hook's own weight stays THE tension
+  (§3a — the entropy sensor is unchanged); option weights steer the
+  choice only.
+- **The budget law holds**: 1 release per beat, 1 IntentData per
+  release — the chosen option's payload rides the door (§8 unchanged).
+
+The three-phase lifecycle maps onto the existing doors (phases.md §3):
+immediate → **seed** (the consequence registers at commit time — the
+projection facts the gates read are already canon); option → **choose**
+(the gated weighted pick above); after → **apply** (the door's commit +
+reaction dispatch — D-037's `_commit` runs reactions for every event).
+No literal `immediate`/`after` effect blocks land — the adaptation IS
+the mapping. The ctx scope helpers (`every`/`random`/`any`) do NOT
+ride: the option gates are single-entity predicates (the drama-1
+grammar unchanged) and runtime target picking is §9's named
+anti-pattern — the quantified-predicate question waits for drama-3's
+on_action dispatch, where entity-set iteration first appears.
+
+This pack's live instantiation: the vigil hook's glance/stare pair —
+below the document-check band both weigh 1 and the glance (the v0.1
+nudge) wins the tie by declaration order; in the band the stare's
+escalated weight (1 + 2 when suspicion ≥ 50) wins, so the release
+CHOICE hardens with the world exactly as the hook's tension does (two
+layers, one band, one number each). Inert on the committed runs (the
+vigil never releases there; TEST_PLAN §6 owns the A/B).
 
 ## 4. Narrative entropy (P2e)
 
@@ -323,12 +390,11 @@ suffices.
 - A per-NPC desirability score for hook selection (phase-3).
 - Ambient-channel content (the tavern pack declares the dimension; no
   hook carries it — a content-scale decision, the owner's call).
-- The event grammar's remainder (drama-2/3, phases.md §3): option
-  blocks with per-option availability gates + the
-  `immediate`/`option`/`after` lifecycle, and the on_action dispatch
-  table with append-not-overwrite composition (the ctx scope helpers
-  ride with them — the predicate layer landed iter-40 is their
-  foundation, not their replacement).
+- The event grammar's remainder (drama-3, phases.md §3): the on_action
+  dispatch table with append-not-overwrite composition (the ctx scope
+  helpers ride there — the quantified predicates and entity-set
+  iteration first earn their keep on "every NPC who witnessed X";
+  DIRECTOR_SPEC §3b records why drama-2 did not take them).
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

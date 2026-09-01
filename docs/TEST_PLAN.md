@@ -225,3 +225,17 @@ path never fires; the hook is trigger-less) — so no release decision
 can flip. The escalation, the truncation order, and the burn law are
 unit-pinned instead (tests/test_predicates.py +
 tests/test_director.py; D-069).
+
+Re-measured at iter-41 (drama-2, the option layer landed): the same
+10 seeds, the committed pack (the vigil hook carries the glance/stare
+option pair) vs an options-stripped linted variant
+(`output/pack_nooptions/`, a runner outside the repo per Rule 9) —
+per-seed byte-identical logs 10/10. The mechanism: the option choice
+resolves only at release, and neither tavern hook can release on
+these runs through a changed path — the vigil is quiet-path-only (the
+D-066 all-PEAK window) and the document-check carries no options (its
+causal release runs the implicit base option, the exact v0.1 payload
+path). The pick laws — the tie by declaration order, the escalation
+flip at the band, the zero-out, the deferred release, the closed-boss
+no-mark law — are unit-pinned instead (tests/test_director.py;
+D-070; DIRECTOR_SPEC §3b the contract owner).

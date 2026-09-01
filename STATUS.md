@@ -1,34 +1,40 @@
 # STATUS — canonsim
 
-Iteration: iter-40 (`iter-40-drama1-predicates` — the owner's
-"continue work per the plans" session call; the phase-3 backlog's
-top un-gated item, drama-1; a code iteration) · Phase: 3 (Director)
+Iteration: iter-41 (`iter-41-drama2-options` — the owner's
+"continue working per the plans" session call; the phase-3 backlog's
+top un-gated item, drama-2; a code iteration) · Phase: 3 (Director)
 **OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068),
-drama-1 (D-069) landed** · Date: 2026-09-01 · Scope: the Paradox
-event grammar's predicate + weight layer — the foundation the
-option/on_action layers compose on. `core/predicates.py` (new): the
-JSON predicate grammar over the projection — the three v0.1 leaf
-kinds run byte-identically through it, compound `all`/`any`/`not`
-+ the implicit-AND list root + the generalized `prop` leaf (any
-entity, any path, four comparators; missing props answer honestly;
-`True != 1` guarded); loud ValueError backstop, pack lint validates
-the shape at load. `core/director.py`: triggers delegate to the
-evaluator; the hook weight accepts the `weight_multiplier` object
-(`base` + `modifiers[{add|factor, when}]` — the entropy sensor and
-the channel entropies read the EFFECTIVE weight per beat, pure per
-INV-2, declaration-order application, factor truncates, 0 legally
-zeroes); `first_time_only` burns the tag after its first release
-(burned instances stay facts, never release, never count toward
-entropy — un-dischargeable tension is noise). Live instantiation:
-the vigil hook's escalation modifier (base 2 + 2 when the watcher's
-suspicion ≥ 50) + the burn flag. Fixture discipline: T1/T8/corpus
-byte-identical; a 10-seed grammar-vs-flat A/B 10/10 byte-identical
-(TEST_PLAN §6 — the escalation arm needs suspicion ≥ 50 which
-already saturates every quiet gate; the vigil never releases on
-those runs); the escalation, truncation, and burn laws unit-pinned.
-Tests 757→794 (+24 test_predicates.py + 13 test_director.py), ruff
-clean. The grammar's remainder (option blocks, on_action dispatch,
-ctx iterators) split to the drama-2/drama-3 backlog rows.
+drama-1 (D-069), drama-2 (D-070) landed** · Date: 2026-09-02 ·
+Scope: the Paradox event grammar's option layer. `director.hooks[tag]
+.options` — an optional non-empty list of option blocks (the closed
+key set trigger | weight | intent | notes): an availability gate (any
+drama-1 predicate spec), an ai_chance-style weight (the §3a
+flat/multiplier shapes, default base 1), and a payload override
+({kind?, target?, fields?} — each declared key wholly replaces the
+base payload key). The choose step at release (`_choose_option`,
+pure): gated-off options are unavailable, a zero effective weight is
+never picked (the Stellaris factor-0 zero-out), the heaviest wins,
+ties break by declaration order — NO RNG (the weighted draw stays
+excluded with MTTH; the cross-run variety comes from world state via
+the modifiers). The deferred-release law: all options closed = the
+hook cannot release that beat (nothing hits the door, no budget
+consumed, a closed boss does not mark PEAK_CLIMAX; the threshold
+tiebreak orders releasable hooks only). The budget law holds: 1
+release per beat, 1 IntentData per release (the chosen payload rides
+the door). The immediate/option/after lifecycle maps to
+seed/choose/apply — no literal effect blocks (the door's commit +
+reaction dispatch is the after); the ctx helpers did NOT ride
+(single-entity gates; §9's anti-pattern on runtime targeting — they
+wait for drama-3). Live instantiation: the vigil's glance/stare pair
+(below the band the glance wins the tie by declaration order; in the
+band the stare's escalated 1+2 wins). Fixture discipline: the full
+suite green with zero fixture regen; a 10-seed options-vs-no-options
+A/B (125 + the nine corpus seeds) 10/10 byte-identical (TEST_PLAN
+§6); the pick laws unit-pinned. The pack lint gained the option
+contract (the shared `_lint_weight_spec` extracted — one owner of
+the weight shape). Tests 794→812 (+18 test_director.py), ruff clean.
+The grammar's remainder (on_action dispatch, append-not-overwrite
+composition, the ctx iterators) is the drama-3 backlog row.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -393,28 +399,27 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38/39/40 — the pacing clock D-065 + the
-exit-criterion instrument D-066 + the climax layer D-067 + the
+**Phase 3 is OPEN (iter-36/37/38/39/40/41 — the pacing clock D-065 +
+the exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's predicate + weight layer
-D-069 landed).** The arc lives in `docs/TASKS.md`'s phase-3 backlog:
-`drama-2` (the grammar's option layer — option blocks with
-availability gates, ai_chance-style weighting, the
-immediate/option/after lifecycle) is the next un-gated item; `drama-3`
-(the on_action dispatch + append-not-overwrite composition) follows.
-The dir-3 remainder (the boss flag on a tavern hook) waits on the
-`document_check` action decision — DIRECTOR_SPEC §11, the owner's
-content call; the ambient channel is likewise declared-but-dormant
-(content-scale, the owner's call). The dir-2/dir-4/drama-1
-measurement's honest finding stands: the clock, the channel split,
-and the weight grammar are inert on day1_full (every run ends in PEAK
-— a measurable delta needs a gate-protocol script set that walks the
+D-069 + the grammar's option layer D-070 landed).** The arc lives in
+`docs/TASKS.md`'s phase-3 backlog: `drama-3` (the on_action dispatch
+table with append-not-overwrite composition — the grammar's last
+row; the ctx scope helpers ride there, where entity-set iteration
+first earns its keep) is the next un-gated item. The dir-3 remainder
+(the boss flag on a tavern hook) waits on the `document_check` action
+decision — DIRECTOR_SPEC §11, the owner's content call; the ambient
+channel is likewise declared-but-dormant (content-scale, the owner's
+call). The dir-2/dir-4/drama-1/drama-2 measurement's honest finding
+stands: the clock, the channel split, the weight grammar, and the
+option layer are inert on day1_full (every run ends in PEAK — a
+measurable delta needs a gate-protocol script set that walks the
 world into quiet; recorded in D-066, a phase-gate question, not
 forced).
 
-1. **Phase-3 arc** (TASKS backlog): drama-2 → drama-3 → the
-   owner-gated content decisions (`document_check` + the climax flag
-   + ambient-channel hooks) → social-1/2/arc-1 (the social-depth
-   run).
+1. **Phase-3 arc** (TASKS backlog): drama-3 → the owner-gated content
+   decisions (`document_check` + the climax flag + ambient-channel
+   hooks) → social-1/2/arc-1 (the social-depth run).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

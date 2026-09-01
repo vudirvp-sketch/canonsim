@@ -368,7 +368,8 @@ instruction (`VISION.md` §5); the world answers, not the model.
 ## 3. Phase 3 — director evolution + event grammar + social depth —
 OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
 instrument D-066, climax layer D-067, multi-channel split D-068, the
-grammar's predicate + weight layer D-069)
+grammar's predicate + weight layer D-069, the grammar's option layer
+D-070)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -386,9 +387,19 @@ D-069): trigger specs are predicates (`core/predicates.py` — the three
 v0.1 leaves + compound `all`/`any`/`not` + the generalized `prop`
 leaf), the hook weight carries the multiplier object (the entropy
 sensor reads the effective weight per beat), `first_time_only` burns
-the tag after its first release; the remainder (option blocks, the
-lifecycle, the on_action dispatch, the ctx iterators) is the
-drama-2/drama-3 backlog — the predicate layer is its foundation.**
+the tag after its first release. The grammar's option layer landed
+iter-41 (drama-2, D-070): per-option availability gates (the drama-1
+predicate grammar) + `ai_chance`-style weighting (the multiplier
+shape, a pure deterministic pick — heaviest wins, ties by declaration
+order, zero never picked, all-closed defers the release) + payload
+overrides whole-key; the `immediate`/`option`/`after` lifecycle maps
+onto seed/choose/apply (no literal effect blocks — the door's commit
++ reaction dispatch is the after; DIRECTOR_SPEC §3b owns the
+contract); the ctx scope helpers did NOT ride (single-entity gates,
+§9's anti-pattern on runtime targeting). The remainder — the
+on_action dispatch with append-not-overwrite composition + the ctx
+iterators where entity-set iteration first earns its keep — is the
+drama-3 backlog row.**
 
 **Director refinements** (recorded at phase 0, built here): the
 pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /

@@ -60,6 +60,22 @@ not tension). A pack with flat int weights and no first_time_only
 runs the v0.1 shapes, byte-identically (the pack's own declaration is
 the gate, INV-3).
 
+Phase 3 (drama-2, iter-41 — the Paradox event grammar's option layer;
+phases.md §3 owns the design): a hook may declare `options` — each an
+availability gate (a drama-1 predicate spec) + an ai_chance-style weight
+(the weight_multiplier shape) + an intent payload override. At release
+the director CHOOSES: gated-off options are unavailable, zero effective
+weights are never picked (the Stellaris factor-0 zero-out), the heaviest
+wins, ties break by declaration order — a PURE function of (pack data,
+projection, beat_tick), no RNG (every director decision stays RNG-free;
+the cross-run variety the donor's weighted draw provides comes from
+world state — the modifiers read the projection). When every option is
+closed the hook cannot release that beat: nothing hits the door, no
+budget is consumed — the hook waits for a world where an option opens.
+The chosen option's payload overrides the base whole-key (Paradox
+options are complete alternative effect branches, not patches). A hook
+without options runs the v0.1 release path byte-identically.
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -106,6 +122,7 @@ __all__ = [
     "DirectorPolicy",
     "EnabledPolicy",
     "DisabledPolicy",
+    "OptionSpec",
     "PacingClock",
     "PacingConfig",
     "SeededHook",
@@ -156,6 +173,32 @@ class SeededHook:
     channel: str | None = None  # DIR-4: the pacing dimension (pack data)
     weight_modifiers: tuple[Mapping[str, Any], ...] = ()  # drama-1: the multiplier tail
     first_time_only: bool = False  # drama-1: the Wesnoth fire-only-once release policy
+    options: tuple["OptionSpec", ...] = ()  # drama-2: the option layer (see OptionSpec)
+
+
+@dataclass(frozen=True, slots=True)
+class OptionSpec:
+    """One declared option of a hook's option layer (drama-2 — the
+    Paradox `option` block adapted: an availability gate + an
+    ai_chance-style weight + a payload override). Frozen pack data
+    flattened at seed time; `_choose_option` computes the pick per
+    release — the buffer never stores a choice (L3: a stored pick would
+    be a projection inside the buffer).
+
+    `trigger` is the availability gate (a drama-1 predicate spec; None =
+    always available). `weight`/`weight_modifiers` are the ai_chance
+    shape (a flat base + the modifier tail; an absent pack weight is
+    base 1, the donor's default; a zero EFFECTIVE weight is never
+    picked — the Stellaris factor-0 zero-out). `intent` is the payload
+    override block `{kind?, target?, fields?}`: each declared key
+    wholly replaces the hook's base payload key (Paradox options are
+    complete alternative effect branches, not patches); None inherits
+    the base payload wholly."""
+
+    trigger: Mapping[str, Any] | None
+    weight: int
+    weight_modifiers: tuple[Mapping[str, Any], ...]
+    intent: Mapping[str, Any] | None
 
 
 class DirectorPolicy(Protocol):
@@ -510,9 +553,24 @@ def _resolve_weight(
     modifiers apply; a factor of 0 legally zeroes the weight (the
     Stellaris zero-out shape — a hook may go quiet without seeding a
     new fact). Pure (INV-2): same hook + same projection + same tick =
-    same number, in any process."""
-    weight = hook.weight
-    for modifier in hook.weight_modifiers:
+    the same number, in any process."""
+    return _effective_weight(
+        hook.weight, hook.weight_modifiers, projection, beat_tick
+    )
+
+
+def _effective_weight(
+    weight: int,
+    modifiers: tuple[Mapping[str, Any], ...],
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> int:
+    """The shared effective-tension fold (drama-1's `_resolve_weight`
+    body, extracted for drama-2's option weights): base, then each
+    modifier in declaration order when its `when` predicate passes —
+    `add` sums, `factor` multiplies and truncates toward zero; a factor
+    of 0 legally zeroes. Pure (INV-2)."""
+    for modifier in modifiers:
         if not evaluate(modifier["when"], projection, beat_tick):
             continue
         if "add" in modifier:
@@ -520,6 +578,87 @@ def _resolve_weight(
         else:
             weight = int(weight * float(modifier["factor"]))
     return weight
+
+
+# -- the option layer (drama-2, phase 3; phases.md §3 — the Paradox  ----------
+# -- option mechanics adapted) ------------------------------------------------
+
+
+_BASE_OPTION: Final = OptionSpec(
+    trigger=None, weight=1, weight_modifiers=(), intent=None
+)
+"""The implicit option every option-less hook carries: the base
+payload, always pickable. `_choose_option` answers this for a hook
+with no declared options — never None — so the v0.1 release path is
+byte-identical (the option layer is pure addition, INV-3's
+declaration-is-the-gate law)."""
+
+
+def _choose_option(
+    hook: SeededHook,
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> OptionSpec | None:
+    """The option whose payload a release of `hook` carries (drama-2 —
+    the Paradox option mechanics adapted: availability gates +
+    ai_chance-style weighting, a PURE pick). None means the hook cannot
+    release this beat: every declared option is gated off or zeroed
+    out — the deferred-release law (the hook waits for a world where an
+    option opens; nothing hits the door, no budget is consumed).
+
+    The pick: an option's availability gate (`trigger`, a drama-1
+    predicate spec) must pass; a zero EFFECTIVE weight is never picked
+    (the Stellaris factor-0 zero-out); the heaviest effective weight
+    wins, ties break by declaration order (first declared). No RNG —
+    the choice is a pure function of (pack data, projection,
+    beat_tick): every director decision stays RNG-free (the release
+    pick, the threshold tiebreak), and the cross-run variety the
+    donor's weighted DRAW provides comes here from world state (the
+    modifiers read the projection — different runs, different
+    winners)."""
+    if not hook.options:
+        return _BASE_OPTION
+    best: OptionSpec | None = None
+    best_weight = 0
+    for option in hook.options:  # declaration order (INV-2)
+        if option.trigger is not None and not evaluate(
+            option.trigger, projection, beat_tick
+        ):
+            continue  # the availability gate is closed
+        weight = _effective_weight(
+            option.weight, option.weight_modifiers, projection, beat_tick
+        )
+        if weight <= 0:
+            continue  # zeroed out — never picked
+        if weight > best_weight:  # strict: ties keep the earlier declaration
+            best = option
+            best_weight = weight
+    return best
+
+
+def _option_specs(raw: Any) -> tuple[OptionSpec, ...]:
+    """Flatten the pack's option blocks (drama-2) into buffer data: each
+    weight resolves via `_weight_spec` (flat int = base, no tail; the
+    multiplier object flattens to base + modifier list; an ABSENT
+    weight is base 1, the ai_chance default), the availability gate and
+    the payload override block pass through as linted data. The buffer
+    stores data; `_choose_option` computes the pick per release, never
+    stored (L3 — a stored choice would be a projection inside the
+    buffer)."""
+    if raw is None:
+        return ()
+    specs: list[OptionSpec] = []
+    for option in raw:
+        base, modifiers = _weight_spec(option.get("weight", 1))
+        specs.append(
+            OptionSpec(
+                trigger=option.get("trigger"),
+                weight=base,
+                weight_modifiers=modifiers,
+                intent=option.get("intent"),
+            )
+        )
+    return tuple(specs)
 
 
 # -- triggers (time / place / threshold — causal, not stagnation) -------------
@@ -568,7 +707,10 @@ class Director:
     the pack declares one; since iter-39 the channel table (DIR-4) —
     pack data, constant across runs, like the policies. Since iter-40
     it holds the drama-1 burn set (`first_time_only` tags whose one
-    release already happened — per-run, folded state like the buffer)."""
+    release already happened — per-run, folded state like the buffer).
+    Since iter-41 the option layer rides the release path: every
+    release resolves its option choice first (`_choose_option` — pure,
+    never stored)."""
 
     pack: "Pack"
     policy: DirectorPolicy
@@ -614,7 +756,9 @@ class Director:
         drama-1 weight spec resolves here (flat int = base, no tail;
         the multiplier object flattens to base + modifier list — the
         buffer stores data, the effective weight is computed per
-        evaluation, never stored)."""
+        evaluation, never stored). The drama-2 option blocks flatten
+        the same way (`_option_specs` — the choice is computed per
+        release, never stored)."""
         config = self.pack.rules.get("director", {})
         hook_specs = config.get("hooks", {})
         for tag in event.hooks:
@@ -638,6 +782,7 @@ class Director:
                     channel=spec.get("channel"),
                     weight_modifiers=modifiers,
                     first_time_only=bool(spec.get("first_time_only", False)),
+                    options=_option_specs(spec.get("options")),
                 )
             )
 
@@ -657,6 +802,13 @@ class Director:
         the budget (per-NPC cooldown follows — recorded, the front door
         does the rejecting). Dead actors (no projection entry /
         `crime_status == caught`) are never targeted.
+
+        drama-2 (iter-41): every release resolves its option choice
+        first — a hook whose options are ALL gated off or zeroed out
+        cannot release this beat (nothing hits the door, no budget is
+        consumed; the hook waits for a world where an option opens),
+        and the chosen option's payload overrides the base whole-key.
+        A hook without options runs the v0.1 path byte-identically.
 
         Reads observable state only (L6): the projection and the
         seeded-hook buffer — never knowledge records, never PC
@@ -699,8 +851,14 @@ class Director:
                 current_entropy=current_entropy,
             ):
                 continue
+            option = _choose_option(hook, projection, beat_tick)
+            if option is None:
+                # drama-2: every option is gated off or zeroed out — the
+                # hook cannot release this beat; the next hook in line
+                # gets its chance (nothing hit the door, no budget spent)
+                continue
             self._mark_released(idx, hook)
-            return [self._intent(hook)]
+            return [self._intent(hook, option)]
         # 2) climax release (DIR-3, the L4D2 three-intensity rule + the
         # boss-beat rule): a climax-flagged hook releases at the END of a
         # peak — the clock in PEAK having held `min_peak_beats` (the
@@ -722,11 +880,16 @@ class Director:
                 candidates.sort(
                     key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick)
                 )
-                idx, hook = candidates[0]
-                self._mark_released(idx, hook)
-                assert self._pacing is not None  # the gate passed: pacing exists
-                self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
-                return [self._intent(hook)]
+                # drama-2: a hook whose options are all closed is not a
+                # candidate — the walk takes the first releasable pick
+                for idx, hook in candidates:
+                    option = _choose_option(hook, projection, beat_tick)
+                    if option is None:
+                        continue
+                    self._mark_released(idx, hook)
+                    assert self._pacing is not None  # the gate passed: pacing exists
+                    self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
+                    return [self._intent(hook, option)]
         # 3) the quiet path (the stagnation family). DIR-4 (iter-39 —
         # the L4D multi-channel family): the quiet gate is per hook. A
         # hook carrying a channel the pack declares asks its OWN
@@ -765,11 +928,17 @@ class Director:
         if not candidates:
             return []
         # lowest release_threshold wins; ties break by seeding order
-        # (oldest first — far hooks deserve priority, MVP_SCOPE §5)
+        # (oldest first — far hooks deserve priority, MVP_SCOPE §5).
+        # drama-2: a hook whose options are all closed is not a candidate
+        # — the walk takes the first releasable pick in tiebreak order.
         candidates.sort(key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick))
-        idx, hook = candidates[0]
-        self._mark_released(idx, hook)
-        return [self._intent(hook)]
+        for idx, hook in candidates:
+            option = _choose_option(hook, projection, beat_tick)
+            if option is None:
+                continue
+            self._mark_released(idx, hook)
+            return [self._intent(hook, option)]
+        return []
 
     # -- helpers (private) ---------------------------------------------------
 
@@ -860,16 +1029,33 @@ class Director:
             return False
         return projection[npc].get("crime_status") != "caught"
 
-    def _intent(self, hook: SeededHook) -> IntentData:
+    def _intent(self, hook: SeededHook, option: OptionSpec) -> IntentData:
         """Build the IntentData the loop will enqueue (the director never
-        writes canon — it broadcasts an objective through the door)."""
+        writes canon — it broadcasts an objective through the door). The
+        drama-2 payload merge: the chosen option's intent block overrides
+        the hook's base payload WHOLE-KEY (kind / target / fields each
+        wholly replaced when declared — Paradox options are complete
+        alternative effect branches, not patches); an option without an
+        intent block (and the implicit base option of an option-less
+        hook) carries the base payload unchanged."""
+        kind = hook.intent_kind
+        target = hook.intent_target
+        fields = dict(hook.intent_fields)
+        if option.intent is not None:
+            override = option.intent
+            if "kind" in override:
+                kind = override["kind"]
+            if "target" in override:
+                target = override["target"]
+            if "fields" in override:
+                fields = dict(override["fields"])
         intent_id = sequence_id(HOOK_PREFIX, self._release_seq)
         self._release_seq += 1
         return IntentData(
             id=intent_id,
-            kind=hook.intent_kind,
+            kind=kind,
             actor=hook.target_npc,
-            target=hook.intent_target,
-            fields=hook.intent_fields,
+            target=target,
+            fields=fields,
             based_on_event_seq=0,  # the loop stamps the current count at enqueue
         )

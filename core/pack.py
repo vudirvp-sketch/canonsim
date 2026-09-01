@@ -93,6 +93,79 @@ def _is_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 
+OPTION_KEYS: Final = ("trigger", "weight", "intent", "notes")
+"""The closed option-block vocabulary (drama-2): the availability gate,
+the ai_chance-style weight, the payload override, and prose notes —
+an unknown key is a shape error, never a silent ignore (a typo'd
+`triger` would read as an always-available option)."""
+
+
+def _lint_weight_spec(
+    weight_spec: Any,
+    where: str,
+    npc_ids: set[str],
+    location_ids: set[str],
+    relation_axes: set[str],
+    entity_ids: set[str],
+) -> None:
+    """The shared weight lint (drama-1's hook-weight block, extracted
+    for drama-2's option weights): a flat non-negative int (the v0.1
+    form) or the weight_multiplier object {base, modifiers} — base
+    int >= 0, each modifier EXACTLY one of add (int >= 0) | factor
+    (number >= 0) plus a `when` predicate (the evaluator applies them
+    in declaration order; a factor of 0 legally zeroes). The message
+    prefix is `{where}: weight...` so both call sites read cleanly."""
+    if isinstance(weight_spec, Mapping):
+        _require(
+            _is_int(weight_spec.get("base")) and weight_spec["base"] >= 0,
+            f"{where}: weight.base must be a non-negative integer",
+        )
+        modifiers = weight_spec.get("modifiers", ())
+        _require(
+            isinstance(modifiers, list),
+            f"{where}: weight.modifiers must be a list",
+        )
+        for index, modifier in enumerate(modifiers):
+            mwhere = f"{where}.weight.modifiers[{index}]"
+            _require(
+                isinstance(modifier, Mapping),
+                f"{mwhere}: must be an object",
+            )
+            has_add = "add" in modifier
+            has_factor = "factor" in modifier
+            _require(
+                has_add != has_factor,
+                f"{mwhere}: exactly one of add|factor is required "
+                "(the donor's shape — never both)",
+            )
+            if has_add:
+                _require(
+                    _is_int(modifier["add"]) and modifier["add"] >= 0,
+                    f"{mwhere}: add must be a non-negative integer",
+                )
+            else:
+                _require(
+                    _is_number(modifier["factor"])
+                    and modifier["factor"] >= 0,
+                    f"{mwhere}: factor must be a non-negative number",
+                )
+            when = modifier.get("when")
+            error = _predicate_error(
+                when, f"{mwhere}.when", npc_ids, location_ids,
+                relation_axes, entity_ids,
+            )
+            _require(
+                error is None,
+                error or "unreachable",
+            )
+    else:
+        _require(
+            _is_int(weight_spec) and weight_spec >= 0,
+            f"{where}: weight must be a non-negative integer or a "
+            "weight_multiplier object",
+        )
+
+
 def _predicate_error(
     spec: Any,
     where: str,
@@ -1197,62 +1270,13 @@ class _Lint:
                 channel_names.add(str(name))
         for tag, spec in config.get("hooks", {}).items():
             where = f"director.hooks[{tag!r}]"
-            # drama-1 (iter-40): the hook weight — a flat non-negative
-            # int (the v0.1 form) or the weight_multiplier object
-            # {base, modifiers}: base int >= 0, each modifier EXACTLY one
-            # of add (int >= 0) | factor (number >= 0) plus a `when`
-            # predicate (the evaluator applies them in declaration
-            # order; a factor of 0 legally zeroes the tension)
-            weight_spec = spec.get("weight")
-            if isinstance(weight_spec, Mapping):
-                _require(
-                    _is_int(weight_spec.get("base")) and weight_spec["base"] >= 0,
-                    f"{where}: weight.base must be a non-negative integer",
-                )
-                modifiers = weight_spec.get("modifiers", ())
-                _require(
-                    isinstance(modifiers, list),
-                    f"{where}: weight.modifiers must be a list",
-                )
-                for index, modifier in enumerate(modifiers):
-                    mwhere = f"{where}.weight.modifiers[{index}]"
-                    _require(
-                        isinstance(modifier, Mapping),
-                        f"{mwhere}: must be an object",
-                    )
-                    has_add = "add" in modifier
-                    has_factor = "factor" in modifier
-                    _require(
-                        has_add != has_factor,
-                        f"{mwhere}: exactly one of add|factor is required "
-                        "(the donor's shape — never both)",
-                    )
-                    if has_add:
-                        _require(
-                            _is_int(modifier["add"]) and modifier["add"] >= 0,
-                            f"{mwhere}: add must be a non-negative integer",
-                        )
-                    else:
-                        _require(
-                            _is_number(modifier["factor"])
-                            and modifier["factor"] >= 0,
-                            f"{mwhere}: factor must be a non-negative number",
-                        )
-                    when = modifier.get("when")
-                    error = _predicate_error(
-                        when, f"{mwhere}.when", npc_ids, location_ids,
-                        relation_axes, entity_ids,
-                    )
-                    _require(
-                        error is None,
-                        error or "unreachable",
-                    )
-            else:
-                _require(
-                    _is_int(weight_spec) and weight_spec >= 0,
-                    f"{where}: weight must be a non-negative integer or a "
-                    "weight_multiplier object",
-                )
+            # drama-1 (iter-40): the hook weight — flat int or the
+            # weight_multiplier object (the shared lint, extracted for
+            # drama-2's option weights: `_lint_weight_spec`)
+            _lint_weight_spec(
+                spec.get("weight"), where, npc_ids, location_ids,
+                relation_axes, entity_ids,
+            )
             # drama-1: the Wesnoth fire-only-once release policy — boolean
             _require(
                 "first_time_only" not in spec
@@ -1313,6 +1337,75 @@ class _Lint:
                     error is None,
                     error or "unreachable",
                 )
+            # drama-2 (iter-41): the option layer — each block an
+            # availability gate (the drama-1 predicate grammar) + an
+            # ai_chance-style weight (the shared weight lint) + a
+            # payload override (kind names an action, fields an
+            # object, target null or an entity — the option block is
+            # new vocabulary, its lint complete from day one; the
+            # hook-level intent lint stays kind-only, the pre-existing
+            # laxness is not this iteration's scope)
+            options = spec.get("options")
+            if options is not None:
+                _require(
+                    isinstance(options, list) and len(options) > 0,
+                    f"{where}: options must be a non-empty list",
+                )
+                for index, option in enumerate(options):
+                    owhere = f"{where}.options[{index}]"
+                    _require(
+                        isinstance(option, Mapping),
+                        f"{owhere}: must be an object",
+                    )
+                    unknown = sorted(set(option) - set(OPTION_KEYS))
+                    _require(
+                        not unknown,
+                        f"{owhere}: unknown option keys {unknown} "
+                        f"(the closed vocabulary: {' | '.join(OPTION_KEYS)})",
+                    )
+                    _require(
+                        "notes" not in option
+                        or isinstance(option.get("notes"), str),
+                        f"{owhere}: notes must be a string",
+                    )
+                    option_trigger = option.get("trigger")
+                    if option_trigger is not None:
+                        error = _predicate_error(
+                            option_trigger, f"{owhere}.trigger", npc_ids,
+                            location_ids, relation_axes, entity_ids,
+                        )
+                        _require(
+                            error is None,
+                            error or "unreachable",
+                        )
+                    if "weight" in option:
+                        _lint_weight_spec(
+                            option["weight"], owhere, npc_ids,
+                            location_ids, relation_axes, entity_ids,
+                        )
+                    option_intent = option.get("intent")
+                    if option_intent is not None:
+                        _require(
+                            isinstance(option_intent, Mapping),
+                            f"{owhere}: intent must be an object",
+                        )
+                        if "kind" in option_intent:
+                            _require(
+                                option_intent.get("kind") in actions,
+                                f"{owhere}: intent.kind must name a pack action",
+                            )
+                        if "fields" in option_intent:
+                            _require(
+                                isinstance(option_intent.get("fields"), Mapping),
+                                f"{owhere}: intent.fields must be an object",
+                            )
+                        if "target" in option_intent:
+                            _require(
+                                option_intent.get("target") is None
+                                or option_intent.get("target") in entity_ids,
+                                f"{owhere}: intent.target must be null or "
+                                "name an entity",
+                            )
 
     # -- brief (iter-8: the phase-1 assembler contract, BRIEF_SPEC §6) --------
 

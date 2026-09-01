@@ -10,6 +10,36 @@
 > since iter-5).
 
 ---
+iter-41 · 2026-09-02 · drama-2 — the event grammar's option layer
+(iter-41-drama2-options; the owner's "continue working per the
+plans" call, the phase-3 backlog's top un-gated item)
+- core/director.py: `OptionSpec` + `SeededHook.options` + the choose
+  step (`_choose_option`, pure — availability gates, zero effective
+  weights never picked, heaviest wins, ties by declaration order, NO
+  RNG; the weighted draw stays excluded with MTTH) + the deferred-
+  release law (all options closed = no release, no budget, a closed
+  boss does not mark PEAK_CLIMAX) + the whole-key payload override in
+  `_intent`; `_effective_weight` extracted (shared with the option
+  weights).
+- core/pack.py: the option contract (the closed key set, the gate
+  predicate lint, the shared `_lint_weight_spec`, the intent override
+  checks); rules.json: the vigil's glance/stare pair (live, inert on
+  the committed runs — the D-066 all-PEAK window; the document-check
+  carries no options, its causal release runs the implicit base
+  option).
+- The lifecycle maps immediate/option/after → seed/choose/apply (no
+  literal effect blocks — DIRECTOR_SPEC §3b the contract owner); the
+  ctx helpers did NOT ride (single-entity gates, §9's anti-pattern —
+  they wait for drama-3).
+- Fixture discipline: the full suite green, zero regen; 10-seed
+  options-vs-no-options A/B (125 + the nine corpus seeds, a runner
+  outside the repo per Rule 9) 10/10 byte-identical (TEST_PLAN §6);
+  the pick laws unit-pinned. Tests 794→812 (+18 test_director.py),
+  ruff clean. D-070; DIRECTOR_SPEC 400/300 + TASKS 656/600 + phases.md
+  633 kept by §6.1 (the grammar tables + the landing records are
+  substance, the iter-40 precedent; 0 filler added); drama-3 is the
+  remainder. iter-33 evicted per the cap.
+---
 iter-40 · 2026-09-01 · drama-1 — the event grammar's predicate +
 weight layer (iter-40-drama1-predicates; the owner's "continue work
 per the plans" call, the phase-3 backlog's top un-gated item)
@@ -245,35 +275,7 @@ bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus
 ---
 iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth
 (iter-33-parse1-say-sessions2; the owner's corpus-growth call)
-- Four more live mode-C sessions (seeds 111/65/30/32 — the
-  untested-verbs walkthrough, the scene-close retirement, the
-  disambiguation ladder + the muse families, the narrator withdrawal)
-  driven by a runner outside the repo (scripts/iter33_parse_runner.py,
-  Rule 9) through the REAL stack (Simulator + Mediator + ParserDoor
-  over ONE shared ledger, D-049).
-- Batch tally (PARSER_SPEC §6): 21 utterances (14 intent / 4 question /
-  2 no_intent + 1 gate-passed door-rejected cycle), 3/3 deliberate
-  off-grammar probes caught loudly (the undeclared field on a fieldless
-  verb; the RETIRED-entry re-reference ×2 — one scene-close cause, one
-  narrator-withdrawal cause), 0 honest misfires; 2 world answers
-  (take_failed ×2, the pin surviving both). Combined corpus: 51
-  utterances, 35/35 boundary validity — the ≥90% criterion holds on
-  the combined volume (the phase-2 gate review stays the owner's).
-- Corpus 6→10 cases (tests/fixtures/parse_replies.json): examine/use/
-  rest fed live for the first time (the wait-720 decay batch = 16
-  events inside the door's own run_steps; per-cycle state pins — use
-  intoxication 20, the fatigue clamp 20−30→0); a PINNED entry dies two
-  ways (the scene close, the narrator's texture-OCC withdrawal — RETIRED
-  joins PROMOTED as terminal, re-reference off-grammar either way,
-  fresh establish legal); the question→question→intent ladder; the
-  wait-without-ticks gate-passed/door-rejected probe (PARSER_SPEC §4
-  live). Corpus machinery +: the narrator-cycle note override + the
-  optional per-cycle state assert (tests/test_parser.py).
-- 660→664 green, ruff clean. KI#53 deleted per AGENTS §5 (closed
-  iter-31, two iterations past). iter-24 evicted per the cap. Docs:
-  PARSER_SPEC §7, TASKS (+ the iter-12/13/14 lingering sections
-  collapsed to their Done one-liners — back under the 600 cap), STATUS,
-  AGENT_NAVIGATION §1, README Status.
+- (deleted at iter-41 per the one-in/one-out cap; history in git.)
 ---
 iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
 (iter-32-parse1-say-sessions; the phase-2 arc's first session batch)
