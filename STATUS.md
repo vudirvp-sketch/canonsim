@@ -1,40 +1,50 @@
 # STATUS — canonsim
 
-Iteration: iter-41 (`iter-41-drama2-options` — the owner's
-"continue working per the plans" session call; the phase-3 backlog's
-top un-gated item, drama-2; a code iteration) · Phase: 3 (Director)
+Iteration: iter-42 (`iter-42-drama3-onaction` — the owner's
+"continue working per the plan" session call; the phase-3 backlog's
+top un-gated item, drama-3; a code iteration) · Phase: 3 (Director)
 **OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068),
-drama-1 (D-069), drama-2 (D-070) landed** · Date: 2026-09-02 ·
-Scope: the Paradox event grammar's option layer. `director.hooks[tag]
-.options` — an optional non-empty list of option blocks (the closed
-key set trigger | weight | intent | notes): an availability gate (any
-drama-1 predicate spec), an ai_chance-style weight (the §3a
-flat/multiplier shapes, default base 1), and a payload override
-({kind?, target?, fields?} — each declared key wholly replaces the
-base payload key). The choose step at release (`_choose_option`,
-pure): gated-off options are unavailable, a zero effective weight is
-never picked (the Stellaris factor-0 zero-out), the heaviest wins,
-ties break by declaration order — NO RNG (the weighted draw stays
-excluded with MTTH; the cross-run variety comes from world state via
-the modifiers). The deferred-release law: all options closed = the
-hook cannot release that beat (nothing hits the door, no budget
-consumed, a closed boss does not mark PEAK_CLIMAX; the threshold
-tiebreak orders releasable hooks only). The budget law holds: 1
-release per beat, 1 IntentData per release (the chosen payload rides
-the door). The immediate/option/after lifecycle maps to
-seed/choose/apply — no literal effect blocks (the door's commit +
-reaction dispatch is the after); the ctx helpers did NOT ride
-(single-entity gates; §9's anti-pattern on runtime targeting — they
-wait for drama-3). Live instantiation: the vigil's glance/stare pair
-(below the band the glance wins the tie by declaration order; in the
-band the stare's escalated 1+2 wins). Fixture discipline: the full
-suite green with zero fixture regen; a 10-seed options-vs-no-options
-A/B (125 + the nine corpus seeds) 10/10 byte-identical (TEST_PLAN
-§6); the pick laws unit-pinned. The pack lint gained the option
-contract (the shared `_lint_weight_spec` extracted — one owner of
-the weight shape). Tests 794→812 (+18 test_director.py), ruff clean.
-The grammar's remainder (on_action dispatch, append-not-overwrite
-composition, the ctx iterators) is the drama-3 backlog row.
+drama-1 (D-069), drama-2 (D-070), drama-3 (D-071) landed — the
+event grammar's three layers are complete** · Date: 2026-09-02 ·
+Scope: the on_action dispatch — the Paradox on_action table adapted
+(DIRECTOR_SPEC §3c the contract owner, `core/onaction.py` the
+mechanics). `on_action` in rules.json: a table keyed by committed
+event type; the reaction dispatch rides `_react` APPENDED after the
+hardcoded system reactions (the donor's append-not-overwrite
+composition — vanilla runs, custom entries add, never replace;
+every entry of the keyed list dispatches). Each entry the closed key
+set `scope | gate | event | state | actor | target | notes`: the
+`witnesses` scope (the event's OWN knowledge records, deduped by
+first occurrence, event order — the named "every NPC who witnessed
+X"; the explicit ctx argument, no implicit this), the per-entity
+quantified gate ({prop, comparator, value} evaluated with the
+CANDIDATE as the argument — the spec carries no entity field; the
+predicates.py comparison semantics incl. the honest-missing and
+bool-guard laws), the reaction event type, and the alarm-shaped
+state change ({prop, add}: one event per entry, clamped numeric
+deltas on relations.scale, a candidate without a numeric home
+dropped — the suspicion law; an empty gated scope emits NOTHING).
+The reaction carries no knowledge and no hooks — the one-hop law
+(pack lint): no table key may name a reaction event the table emits;
+the cascade terminates by construction. Lazy generator: each entry's
+draft reads the projection as left by the previous commit (KI#13).
+Pure per INV-2 (no RNG, no clock, no stored choice). The pack's
+declaration is DORMANT vocabulary, the iter-38 climax-flag pattern:
+`document_check` → `crowd_wary` (every witness of the public check
+grows warier) — no producer emits the key, so nothing fires anywhere
+until the action lands (§11, the owner's content call). The alarm
+panic echo was probed LIVE and reverted: it fires on the phase-1
+corpus's distraction-fire beats, whose beat anchors and event-count
+pins are committed fixtures (§8 — a fixture rewrite is owner-gated);
+the live machinery is proven through linted pack variants instead
+(the iter-36 mutated-pack pattern) — the crowded-room ignition, the
+append composition + the lazy-group law, the cause chain, the
+termination. Fixture discipline: the full suite green with zero
+fixture regen; a 10-seed on-vs-stripped A/B (125 + the nine corpus
+seeds, a runner outside the repo per Rule 9) 10/10 byte-identical
+(TEST_PLAN §6). The `any`/`random` scope helpers and knowledge-
+bearing reactions stay recorded-not-built (the first-consumer law,
+§11). Tests 812→836 (+24 tests/test_onaction.py), ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -399,27 +409,30 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38/39/40/41 — the pacing clock D-065 +
+**Phase 3 is OPEN (iter-36/37/38/39/40/41/42 — the pacing clock D-065 +
 the exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's predicate + weight layer
-D-069 + the grammar's option layer D-070 landed).** The arc lives in
-`docs/TASKS.md`'s phase-3 backlog: `drama-3` (the on_action dispatch
-table with append-not-overwrite composition — the grammar's last
-row; the ctx scope helpers ride there, where entity-set iteration
-first earns its keep) is the next un-gated item. The dir-3 remainder
-(the boss flag on a tavern hook) waits on the `document_check` action
-decision — DIRECTOR_SPEC §11, the owner's content call; the ambient
-channel is likewise declared-but-dormant (content-scale, the owner's
-call). The dir-2/dir-4/drama-1/drama-2 measurement's honest finding
-stands: the clock, the channel split, the weight grammar, and the
-option layer are inert on day1_full (every run ends in PEAK — a
-measurable delta needs a gate-protocol script set that walks the
-world into quiet; recorded in D-066, a phase-gate question, not
-forced).
+D-069 + the grammar's option layer D-070 + the grammar's on_action
+dispatch D-071 landed — the event grammar's three layers are
+COMPLETE).** The phase-3 arc in `docs/TASKS.md`'s backlog now runs
+into the owner-gated content decisions and the social-depth run:
+`social-1` (secrets & leverage as fact clusters — P3a, a hook IS an
+event) is the next un-gated row, then `social-2`/`arc-1`. The
+owner-gated content set: the `document_check` action (DIRECTOR_SPEC
+§11 — with it the climax flag on the hook AND the live crowd-witness
+reaction the on_action table already declares), the alarm panic echo
+(probed live iter-42, reverted on the phase-1 corpus's committed
+anchors — §11), ambient-channel hooks. The dir-2/dir-4/drama-1/2/3
+measurement's honest finding stands: the clock, the channel split,
+the weight grammar, the option layer, and the dispatch are inert on
+day1_full (every run ends in PEAK — a measurable delta needs a
+gate-protocol script set that walks the world into quiet; recorded in
+D-066, a phase-gate question, not forced).
 
-1. **Phase-3 arc** (TASKS backlog): drama-3 → the owner-gated content
-   decisions (`document_check` + the climax flag + ambient-channel
-   hooks) → social-1/2/arc-1 (the social-depth run).
+1. **Phase-3 arc** (TASKS backlog): social-1 → social-2/arc-1 (the
+   social-depth run) → the owner-gated content decisions
+   (`document_check` + the climax flag + the alarm echo +
+   ambient-channel hooks).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

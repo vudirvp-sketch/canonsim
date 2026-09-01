@@ -20,7 +20,8 @@
 > layer landed iter-38, D-067; the multi-channel split landed iter-39,
 > D-068; the event grammar's predicate + weight layer landed iter-40,
 > drama-1, D-069; the grammar's option layer landed iter-41, drama-2,
-> D-070).
+> D-070; the grammar's on_action dispatch landed iter-42, drama-3,
+> D-071 — the grammar's last row).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -79,11 +80,25 @@
   contract owner); the ctx scope helpers did not ride (the gates are
   single-entity, §9's anti-pattern on runtime targeting) — they wait
   for drama-3, where entity-set iteration first earns its keep.
-- `drama-3` · the on_action dispatch layer: event X fires → content
-  reacts (pack data), with append-not-overwrite composition so packs
-  extend without clobbering — the Paradox on_action table, adapted;
-  the sim/content boundary's grammar half (the ctx scope helpers ride
-  here — the quantified predicates over "every NPC who witnessed X").
+- `drama-3` · the on_action dispatch layer — **done (iter-42, D-071)**:
+  `on_action` in rules.json — a pack table keyed by committed event
+  type (event X commits → content reacts), appended AFTER the
+  hardcoded system reactions (the donor's append-not-overwrite
+  composition — vanilla runs, custom entries add, never replace;
+  every entry of the keyed list dispatches). Each entry: the
+  `witnesses` scope (the event's own knowers, deduped, event order —
+  "every NPC who witnessed X"), the per-entity quantified gate
+  ({prop, comparator, value} with the CANDIDATE as the explicit ctx
+  argument — no entity field, no implicit this), the reaction event,
+  and the alarm-shaped state change (one event per entry, clamped
+  deltas; an empty scope emits nothing; no knowledge, no hooks — the
+  one-hop lint terminates the cascade). The pack's declaration is
+  dormant on `document_check` → `crowd_wary` (no producer yet, the
+  iter-38 climax-flag pattern); the alarm panic echo was probed live
+  and reverted — it fires on the phase-1 corpus's beats, whose
+  anchors are committed fixtures (DIRECTOR_SPEC §11, the owner's
+  content call). The `any`/`random` scope helpers stay
+  recorded-not-built (the first-consumer law).
 - `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
   event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
   tension shaping (P3c).

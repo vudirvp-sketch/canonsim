@@ -8,11 +8,12 @@
 > D-065), the climax layer DIR-3 (iter-38, D-067), the multi-channel
 > split DIR-4 (iter-39, D-068), the event grammar's predicate + weight
 > layer drama-1 (iter-40, D-069), the grammar's option layer drama-2
-> (iter-41, D-070 — §3b); the phase-3 refinements still
+> (iter-41, D-070 — §3b), the grammar's on_action dispatch drama-3
+> (iter-42, D-071 — §3c); the phase-3 refinements still
 > recorded-not-built live in §11. Measured impact (every landing
 > byte-identical on day1_full — the D-066 all-PEAK window; the grammar
 > layer's 10-seed A/B included, iter-40; the option layer's too,
-> iter-41): `docs/TEST_PLAN.md` §6.
+> iter-41; the dispatch's too, iter-42): `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
@@ -155,11 +156,12 @@ projection facts the gates read are already canon); option → **choose**
 (the gated weighted pick above); after → **apply** (the door's commit +
 reaction dispatch — D-037's `_commit` runs reactions for every event).
 No literal `immediate`/`after` effect blocks land — the adaptation IS
-the mapping. The ctx scope helpers (`every`/`random`/`any`) do NOT
-ride: the option gates are single-entity predicates (the drama-1
+the mapping. The ctx scope helpers (`every`/`random`/`any`) did NOT
+ride HERE: the option gates are single-entity predicates (the drama-1
 grammar unchanged) and runtime target picking is §9's named
-anti-pattern — the quantified-predicate question waits for drama-3's
-on_action dispatch, where entity-set iteration first appears.
+anti-pattern — the quantified-predicate question landed with drama-3's
+on_action dispatch instead (§3c: the witnesses scope + the per-entity
+gate, the entity-set iteration's first earner).
 
 This pack's live instantiation: the vigil hook's glance/stare pair —
 below the document-check band both weigh 1 and the glance (the v0.1
@@ -168,6 +170,69 @@ escalated weight (1 + 2 when suspicion ≥ 50) wins, so the release
 CHOICE hardens with the world exactly as the hook's tension does (two
 layers, one band, one number each). Inert on the committed runs (the
 vigil never releases there; TEST_PLAN §6 owns the A/B).
+
+## 3c. The on_action dispatch (drama-3, iter-42 — the Paradox on_action
+table adapted; `core/onaction.py` the mechanics)
+
+`on_action` in rules.json: a table keyed by **committed event type**
+— event X commits → content reacts, as pack data. The reaction runs
+INSIDE `_react` (the canon door, D-037), APPENDED after the hardcoded
+system reactions (suspicion → arrest → telling) and before the
+director seeding — the donor's append-not-overwrite composition law:
+vanilla logic runs, custom entries add, never replace; every entry of
+the keyed LIST dispatches (the list is the append semantics — a
+second declaration never replaces the first). The reaction is
+immediate and cause-chained; nothing schedules (TIME-1 — MTTH stays
+excluded with the weighted draw).
+
+Each entry — the closed key set `scope | gate | event | state |
+actor | target | notes` (an unknown key is a lint error, never a
+silent ignore):
+
+| Key | Shape | Meaning |
+|---|---|---|
+| `scope` | `"witnesses"` (the closed v0.1 vocabulary) | the entity-set selector: the triggering event's OWN knowledge records, deduped by first occurrence, in event order — "every NPC who witnessed X". The EXPLICIT ctx argument: no implicit `this`, no inherited scope |
+| `gate` | a non-empty list of `{prop, comparator, value}` (optional) | the quantified predicate — per-entity conditions evaluated with the CANDIDATE as the argument (the spec carries NO entity field; `comparator` is the predicates.py vocabulary; a missing prop answers honestly, a bool never equals a number) |
+| `event` | a templates event type (required) | the reaction event |
+| `state` | `{prop, add}` — add a non-zero int (required) | the scoped state change: one clamped numeric delta per passing candidate (`relations.scale`, the one numeric scale — the alarm precedent); a candidate without a numeric home is dropped (the suspicion law); a clamped no-op is dropped (KI#13) |
+| `actor` / `target` | `world` \| `source_actor` \| `source_target` (optional; defaults actor `world`, target `source_target`) | the closed one-hop resolution vocabulary — the donor's this/from chain collapsed to three names |
+| `notes` | prose (optional) | pack documentation |
+
+The reaction body is the **alarm shape**: ONE event per entry, t =
+the source's tick, cause chained to the source, the outcome carrying
+the source location (the event's own `location` outcome field, else
+the source actor's position — the chronicle's fallback law) and the
+reacting set; an empty gated scope emits NOTHING (a world answer, not
+an event). The reaction event carries NO knowledge and NO hooks: the
+system reactions skip a knowledge-less event, deferred consequences
+ride the actions' own hooks (D-005), and pack lint enforces the
+**one-hop law** — no table key may name a reaction event type the
+table itself emits (a second-order declaration is a load-time error;
+the cascade terminates by construction). The generator is lazy: each
+entry's draft reads the projection as left by the previously
+committed entries (KI#13). Pure per INV-2: a function of (pack data,
+projection, record) — no RNG, no clock, no stored choice.
+
+The grammar's ctx scope helpers: `every` rides as the scope+gate pair
+above (the named use case — "every NPC who witnessed X"); `any` (the
+exists-quantifier entry gate) and `random` (a one-pick iterator) stay
+recorded-not-built — no content need has earned them (the ambient-
+channel pattern; they land with their first consumer). Knowledge-
+bearing reactions (a reaction that teaches) wait the same way.
+
+This pack's declaration is DORMANT vocabulary, the iter-38 climax-flag
+pattern: the entry keys on `document_check` → `crowd_wary` (every
+witness of the public check grows warier — the crowd-reaction layer
+the token-keyed crime system does not cover) — no action emits
+`document_check` yet, so nothing fires on any committed run or live
+session; the entry fires the moment the action lands (§11, the
+owner's content call). The alarm panic echo (witnesses of
+`alarm_raised` gain fear — the through-the-walls law) was probed live
+at iter-42 and reverted: it fires on the phase-1 corpus's
+distraction-fire beats, and the corpus's beat anchors and event-count
+pins are committed fixtures — that content lands on the owner's call
+with them. A pack without the `on_action` block runs the v0.1
+reaction behavior, byte-identically (TEST_PLAN §6 owns the A/B).
 
 ## 4. Narrative entropy (P2e)
 
@@ -386,15 +451,19 @@ suffices.
 - The full document_check action (the v0.1 stub uses `wait`; a
   dedicated action arrives when the document-check hook deserves
   its own resolution — and with it the climax flag on the hook, per
-  §5's scope note).
+  §5's scope note, AND the live crowd-witness reaction the on_action
+  entry already declares on `document_check`, §3c).
+- The alarm panic echo as pack content (§3c): witnesses of
+  `alarm_raised` gaining fear — probed live at iter-42, reverted
+  because it fires on the phase-1 corpus's distraction-fire beats
+  (the corpus's beat anchors are committed fixtures, §8); lands on
+  the owner's content call, with the corpus regen it implies.
+- The on_action grammar's `any`/`random` scope helpers and
+  knowledge-bearing reactions (§3c — recorded-not-built, the
+  first-consumer law).
 - A per-NPC desirability score for hook selection (phase-3).
 - Ambient-channel content (the tavern pack declares the dimension; no
   hook carries it — a content-scale decision, the owner's call).
-- The event grammar's remainder (drama-3, phases.md §3): the on_action
-  dispatch table with append-not-overwrite composition (the ctx scope
-  helpers ride there — the quantified predicates and entity-set
-  iteration first earn their keep on "every NPC who witnessed X";
-  DIRECTOR_SPEC §3b records why drama-2 did not take them).
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

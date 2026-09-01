@@ -369,7 +369,7 @@ instruction (`VISION.md` §5); the world answers, not the model.
 OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
 instrument D-066, climax layer D-067, multi-channel split D-068, the
 grammar's predicate + weight layer D-069, the grammar's option layer
-D-070)
+D-070, the grammar's on_action dispatch D-071)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -396,10 +396,20 @@ overrides whole-key; the `immediate`/`option`/`after` lifecycle maps
 onto seed/choose/apply (no literal effect blocks — the door's commit
 + reaction dispatch is the after; DIRECTOR_SPEC §3b owns the
 contract); the ctx scope helpers did NOT ride (single-entity gates,
-§9's anti-pattern on runtime targeting). The remainder — the
-on_action dispatch with append-not-overwrite composition + the ctx
-iterators where entity-set iteration first earns its keep — is the
-drama-3 backlog row.**
+§9's anti-pattern on runtime targeting). The grammar's LAST layer
+landed iter-42 (drama-3, D-071): the on_action dispatch — a pack
+table keyed by committed event type, appended after the hardcoded
+system reactions (the donor's append-not-overwrite composition),
+each entry the witnesses scope (the event's own knowers — the named
+"every NPC who witnessed X") + the per-entity quantified gate (the
+CANDIDATE as the explicit ctx argument, no entity field in the spec)
++ the alarm-shaped state change (one event per entry, clamped
+deltas, no knowledge and no hooks); the one-hop lint terminates the
+cascade; the pack's declaration is dormant on document_check (the
+iter-38 climax-flag pattern — the live alarm echo reverts to
+DIRECTOR_SPEC §11 on the phase-1 corpus's committed anchors). The
+`any`/`random` scope helpers stay recorded-not-built (the
+first-consumer law).**
 
 **Director refinements** (recorded at phase 0, built here): the
 pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /

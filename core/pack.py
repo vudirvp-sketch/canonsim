@@ -8,8 +8,10 @@ resolver keys against the registry, precondition tests against the closed
 set, action event types against the template vocabulary, check kinds
 against `rules.checks`, knowledge audiences/channels/fidelity/slots
 against their closed sets, transition layers against the template
-vocabulary, and the system-pass DAG (an ambiguity fails at load —
-`core/scheduler.py`). `"_"` commentary fields are ignored wherever
+vocabulary, the system-pass DAG (an ambiguity fails at load —
+`core/scheduler.py`), and — from drama-3 — the on_action reaction
+table (closed key sets, the scope/gate/event/state vocabularies, the
+one-hop law). `"_"` commentary fields are ignored wherever
 references are collected. Full pack JSON-Schemas are a phase-6 rung
 (`docs/BLUEPRINT.md` PACK-1); the event-contract enums the pack mirrors
 are cross-checked by `tests/test_smoke.py` against the schema.
@@ -32,6 +34,13 @@ from core.intent import (
     PRECONDITION_TESTS,
     PRESENT_SITES,
     REJECTION_EVENT,
+)
+from core.onaction import (
+    ACTOR_TARGET_KEYS,
+    ENTRY_KEYS,
+    GATE_KEYS,
+    SCOPES,
+    STATE_KEYS,
 )
 from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
 from core.resolvers import REGISTRY
@@ -273,6 +282,7 @@ class _Lint:
         self._expectations()
         self._urgencies()
         self._director()
+        self._on_action()
         self._states_rules()
         self._importance_rules()
         self._brief()
@@ -1406,6 +1416,181 @@ class _Lint:
                                 f"{owhere}: intent.target must be null or "
                                 "name an entity",
                             )
+
+    # -- on_action (drama-3, iter-42: the pack's reaction table) ---------------
+
+    def _on_action(self) -> None:
+        """The on_action dispatch contract (DIRECTOR_SPEC §3c the owner;
+        core/onaction.py owns the vocabulary constants). The block is
+        OPTIONAL — a pack without it runs the v0.1 reaction behavior,
+        byte-identically (the pack's own declaration is the gate, INV-3)."""
+        rules = self._data["rules.json"]
+        config = rules.get("on_action")
+        if config is None:
+            return
+        templates = self._data["templates.json"]["events"]
+        status_axes = set(rules["states"])
+        relation_axes = set(rules["relations"]["axes"])
+        _require(
+            isinstance(config, Mapping) and config,
+            "on_action must be a non-empty object keyed by event type",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                "on_action.notes must be a string (prose — never a table key)",
+            )
+        emitted: set[str] = set()  # the reaction event types (the one-hop law)
+        for event_type, entries in config.items():
+            if event_type == "notes":  # prose commentary, not a table key
+                continue
+            where = f"on_action[{event_type!r}]"
+            # the key must name a declared event type — a typo'd key is
+            # silent dead vocabulary otherwise (the closed-set law)
+            _require(
+                event_type in templates,
+                f"{where}: the key must name a template event type",
+            )
+            # the append law: the value is a LIST — every entry dispatches,
+            # a second declaration never replaces the first
+            _require(
+                isinstance(entries, list) and entries,
+                f"{where}: must be a non-empty list of reaction entries "
+                "(the append composition — one entry, not a bare object)",
+            )
+            for index, entry in enumerate(entries):
+                error = self._on_action_entry(
+                    entry, f"{where}[{index}]", templates,
+                    status_axes, relation_axes,
+                )
+                if error is not None:
+                    raise PackError(error)
+                emitted.add(entry["event"])
+        # the one-hop law: an on_action reaction event never dispatches
+        # further on_action reactions — no table key may name a reaction
+        # event type the table itself emits (second-order reactions have
+        # no v0.1 semantics; the cascade terminates by construction)
+        overlap = sorted((set(config) - {"notes"}) & emitted)
+        _require(
+            not overlap,
+            f"on_action: second-order reaction declared — the table keys "
+            f"{overlap} are reaction event types it emits itself (v0.1 "
+            "dispatches one hop; DIRECTOR_SPEC §3c)",
+        )
+
+    def _on_action_entry(
+        self,
+        entry: Any,
+        where: str,
+        templates: Mapping[str, Any],
+        status_axes: set[str],
+        relation_axes: set[str],
+    ) -> str | None:
+        """Validate one reaction entry; returns the error message or None
+        (the `_predicate_error` pattern). The closed key set comes from
+        core/onaction.py — the single vocabulary owner."""
+        if not isinstance(entry, Mapping):
+            return f"{where}: must be an object"
+        unknown = sorted(set(entry) - set(ENTRY_KEYS))
+        if unknown:
+            return (
+                f"{where}: unknown entry keys {unknown} (the closed "
+                f"vocabulary: {' | '.join(ENTRY_KEYS)})"
+            )
+        if entry.get("scope") not in SCOPES:
+            return (
+                f"{where}: scope must be one of {list(SCOPES)} — the entity-set "
+                "selector (the explicit ctx argument, never an implicit this)"
+            )
+        if entry.get("event") not in templates:
+            return f"{where}: event must name a template event type"
+        state = entry.get("state")
+        if not isinstance(state, Mapping) or sorted(state) != sorted(STATE_KEYS):
+            return (
+                f"{where}: state must be an object with exactly "
+                f"{list(STATE_KEYS)} — the scoped state change"
+            )
+        prop = state.get("prop")
+        if not isinstance(prop, str) or not prop:
+            return f"{where}: state.prop must be a non-empty string"
+        error = self._prop_path_error(prop, f"{where}.state.prop",
+                                       status_axes, relation_axes)
+        if error is not None:
+            return error
+        if not _is_int(state.get("add")) or state["add"] == 0:
+            return (
+                f"{where}: state.add must be a non-zero integer (a zero delta "
+                "is dead vocabulary, L1)"
+            )
+        gate = entry.get("gate")
+        if gate is not None:
+            if not isinstance(gate, list) or not gate:
+                return (
+                    f"{where}: gate must be a non-empty list of per-entity "
+                    "conditions (an empty gate is dead vocabulary, L1)"
+                )
+            for gindex, condition in enumerate(gate):
+                gwhere = f"{where}.gate[{gindex}]"
+                if not isinstance(condition, Mapping) or sorted(condition) != sorted(
+                    GATE_KEYS
+                ):
+                    return (
+                        f"{gwhere}: must be an object with exactly "
+                        f"{list(GATE_KEYS)} — the quantified predicate's "
+                        "per-entity read (the candidate is the argument, "
+                        "the spec carries no entity field)"
+                    )
+                cprop = condition.get("prop")
+                if not isinstance(cprop, str) or not cprop:
+                    return f"{gwhere}: prop must be a non-empty string"
+                error = self._prop_path_error(
+                    cprop, f"{gwhere}.prop", status_axes, relation_axes
+                )
+                if error is not None:
+                    return error
+                if condition.get("comparator") not in COMPARATORS:
+                    return (
+                        f"{gwhere}: comparator must be one of "
+                        f"{list(COMPARATORS)} (the predicates.py vocabulary)"
+                    )
+                if condition.get("comparator") in ("at_least", "at_most") and not _is_int(
+                    condition.get("value")
+                ):
+                    return f"{gwhere}: {condition['comparator']} needs an integer value"
+                if "value" not in condition:
+                    return f"{gwhere}: the condition needs a value"
+        for key in ("actor", "target"):
+            if key in entry and entry[key] not in ACTOR_TARGET_KEYS:
+                return (
+                    f"{where}.{key} must be one of {list(ACTOR_TARGET_KEYS)} "
+                    "(the source-event resolution vocabulary)"
+                )
+        if "notes" in entry and not isinstance(entry.get("notes"), str):
+            return f"{where}: notes must be a string"
+        return None
+
+    def _prop_path_error(
+        self,
+        prop: str,
+        where: str,
+        status_axes: set[str],
+        relation_axes: set[str],
+    ) -> str | None:
+        """The prop-path known-prefix gate: a `relations.X` path must name
+        a declared axis, a `status.X` path must name a declared status
+        axis — everything else is the open projection vocabulary (layer
+        flags, spot props). The runtime drops candidates without a
+        numeric home on the path (the suspicion law); this gate catches
+        the pack-author typo before it becomes a silent no-op."""
+        if prop.startswith("relations."):
+            axis = prop[len("relations."):]
+            if axis not in relation_axes:
+                return f"{where}: {prop!r} does not name a relations axis"
+        if prop.startswith("status."):
+            axis = prop[len("status."):]
+            if axis not in status_axes:
+                return f"{where}: {prop!r} does not name a status axis"
+        return None
 
     # -- brief (iter-8: the phase-1 assembler contract, BRIEF_SPEC §6) --------
 

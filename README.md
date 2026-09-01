@@ -112,16 +112,26 @@ the Paradox trigger block adapted: `core/predicates.py` the JSON
 predicate grammar (the three v0.1 leaves byte-identical + compound
 `all`/`any`/`not` + the `prop` leaf), the `weight_multiplier` object
 (the entropy sensor reads the effective weight per beat),
-`first_time_only` the burn policy; contract owner
-`docs/DIRECTOR_SPEC.md` §3/§3a; the option blocks + on_action
-dispatch are the drama-2/3 backlog). 794 tests
-green, ruff clean, zero fixture regen (a 10-seed grammar vs flat A/B:
-10/10 byte-identical — the escalation arm saturates every quiet gate
-on its own; TEST_PLAN §6).
-Next: the phase-3 arc (`drama-2` the grammar's option layer, `drama-3`
-the on_action dispatch, `social-1/2`, `arc-1`; `docs/TASKS.md`) + the
-owner-gated set (parse-2, engine-1, the document_check content
-decision, ambient-channel content).
+`first_time_only` the burn policy); the grammar's option layer landed
+iter-41 (drama-2, D-070 — per-option availability gates +
+`ai_chance`-style weights (a pure deterministic pick: heaviest wins,
+ties by declaration order, zero never picked, all-closed defers) +
+whole-key payload overrides); the grammar's on_action dispatch landed
+iter-42 (drama-3, D-071 — `core/onaction.py` + the `on_action` pack
+table: event X commits → content reacts, appended after the hardcoded
+system reactions (the donor's append-not-overwrite composition); the
+`witnesses` scope + the per-entity quantified gate (the explicit ctx
+argument — "every NPC who witnessed X") + the alarm-shaped state
+change; the one-hop law terminates the cascade; the pack's entry is
+dormant on `document_check` until the action lands, the owner's
+content call — the grammar's three layers are COMPLETE). 836 tests
+green, ruff clean, zero fixture regen (the 10-seed A/B per landing:
+10/10 byte-identical each time; TEST_PLAN §6). Contract owner
+`docs/DIRECTOR_SPEC.md` §3/§3a/§3b/§3c.
+Next: the phase-3 social-depth run (`social-1/2`, `arc-1`;
+`docs/TASKS.md`) + the owner-gated set (parse-2, engine-1, the
+document_check content decision — with it the climax flag and the
+crowd-witness reaction, ambient-channel content).
 
 ## For AI agents (primary audience)
 

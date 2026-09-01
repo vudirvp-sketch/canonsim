@@ -239,3 +239,19 @@ path). The pick laws — the tie by declaration order, the escalation
 flip at the band, the zero-out, the deferred release, the closed-boss
 no-mark law — are unit-pinned instead (tests/test_director.py;
 D-070; DIRECTOR_SPEC §3b the contract owner).
+
+Re-measured at iter-42 (drama-3, the on_action dispatch landed): the
+same 10 seeds, the committed pack (the dormant `document_check` →
+`crowd_wary` entry) vs an on_action-stripped linted variant
+(`output/pack_noonaction/`, a runner outside the repo per Rule 9) —
+per-seed byte-identical logs 10/10. The mechanism: the entry keys on
+`document_check`, and no action emits that event in v0.1 (the
+director's stub releases a wait) — nothing fires anywhere, so the
+dispatch is inert by construction (the dormant declaration, not a
+lucky path). The dispatch laws — the witnesses scope, the quantified
+gate, the clamped delta, the append composition + the lazy-group
+discipline, the one-hop termination — are pinned through linted pack
+variants instead (tests/test_onaction.py; D-071; DIRECTOR_SPEC §3c
+the contract owner). The alarm panic echo (the live content probed
+and reverted on the phase-1 corpus's committed anchors) is recorded
+in DIRECTOR_SPEC §11, the owner's content call.

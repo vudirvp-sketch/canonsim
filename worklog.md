@@ -10,6 +10,36 @@
 > since iter-5).
 
 ---
+---
+iter-42 · 2026-09-02 · drama-3 — the event grammar's on_action
+dispatch (iter-42-drama3-onaction; the owner's "continue work per
+the plan" session call, the phase-3 backlog's top un-gated item)
+- core/onaction.py (NEW): the dispatch — the `witnesses` scope (the
+  event's own knowers, deduped, event order), the per-entity
+  quantified gate (the CANDIDATE as the explicit ctx argument, no
+  entity field in the spec), the alarm-shaped state change (one
+  event per entry, clamped deltas, empty scope = no event, no
+  knowledge, no hooks); lazy generator (KI#13). loop.py::_react:
+  the dispatch appended after the hardcoded systems, before the
+  director seeding (the donor's append-not-overwrite composition).
+- core/pack.py lint: the closed key sets + vocabularies, the
+  relations/status prop-path gates, the ONE-HOP law (no key may
+  name a reaction the table emits — the cascade terminates).
+  rules.json: the dormant `document_check` → `crowd_wary` entry
+  (the iter-38 climax-flag pattern); templates.json: crowd_wary.
+- The alarm panic echo probed live and REVERTED: it fires on the
+  phase-1 corpus's distraction-fire beats (committed fixtures, §8)
+  — recorded in DIRECTOR_SPEC §11, the owner's content call. The
+  live machinery proven through linted pack variants instead.
+- Fixture discipline: the full suite green, zero regen; 10-seed
+  on-vs-stripped A/B (125 + the nine corpus seeds, a runner outside
+  the repo per Rule 9) 10/10 byte-identical (TEST_PLAN §6). Tests
+  812→836 (+24 tests/test_onaction.py), ruff clean. D-071;
+  DIRECTOR_SPEC §3c the contract owner (469/300 kept by §6.1 — the
+  grammar tables + landing records, the iter-40/41 precedent; 0
+  filler added); TASKS 671/600 kept by §6.1 (the phase-3 landing
+  rows, the iter-39/40/41 substance precedent); `any`/`random`
+  scope helpers recorded-not-built. bg-2 evicted per the cap.
 iter-41 · 2026-09-02 · drama-2 — the event grammar's option layer
 (iter-41-drama2-options; the owner's "continue working per the
 plans" call, the phase-3 backlog's top un-gated item)
@@ -247,30 +277,7 @@ iter-34 · 2026-09-01 · owner-requested planning-layer audit
 ---
 bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus pass
 (bg-2-event-taxonomy; the owner supplied the four world exports)
-- scripts/df_import.py: plus pass, SINK_VERSION 2 — the companion's
-  historical_events land in a separate event_plus_fields EAV keyed by
-  the same ids (706,157 events -> 3,509,709 rows on the large world;
-  main counts unchanged; everything else in the companion
-  counted-not-stored). D-051's recorded deferral fired: item_stolen
-  thief/item/method (100% coverage) and creature_devoured
-  eater/victim/race live ONLY there.
-- scripts/df_taxonomy.py (new): 15 event-type plans + the birth gap +
-  war/beast-attack collection plans; fixed quantile-spread selection —
-  pure function of the DB content; per-entry participants/place/
-  reconstructed cause/witness/long-term consequence -> output/
-  df_taxonomy_<stem>.txt (gitignored, reproducible).
-- docs/TAXONOMY.md (new, 335 lines): 120 entries across the 16 TASKS
-  bg-2 target types (AC >=100 MET) + the E/E+/R/GAP verdict table
-  against EVENT_SCHEMA + measured findings: witness gap (9/88 — DF has
-  no epistemology events), the hfid1/hfid2 participant-index blind spot
-  (25,079 reputation events lift 0 rows), murders always carry
-  slayer+site (5,786/5,786), item loss mostly terminal (6/8).
-- Tests 664->673 (+6 tests/test_df_taxonomy.py, +3 the plus-pass suite
-  in tests/test_df_import.py), ruff clean. KI#54 deleted per AGENTS
-  §5 (closed iter-32, two iterations past). Doc-sync: TECH_NOTES §3.2
-  (plus-pass recipe + the blind spot), TASKS bg-2 done, STATUS, AGENT_
-  NAVIGATION §1, SPECS_BACKLOG row, README, D-063; iter-25 evicted per
-  the cap.
+- (deleted at iter-42 per the one-in/one-out cap; history in git.)
 
 ---
 iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth

@@ -69,6 +69,7 @@ from core.intent import (
 )
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
 from core.log import EventDraft, EventLogWriter, EventRecord
+from core.onaction import on_action_drafts
 from core.pack import Pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
 from core.resolvers import REGISTRY
@@ -664,7 +665,9 @@ class Simulator:
         status flip, arrest — chained per knower), then the arrest
         resolution (iter-4: capture/escape on the attempt), then the
         telling (the conversation's teller shares their most salient novel
-        fact). iter-4 also seeds the director's buffer (D-005: every hook
+        fact), then the pack's on_action reactions (drama-3 — appended,
+        never overwriting the systems), then the director buffer seeding.
+        iter-4 also seeds the director's buffer (D-005: every hook
         is seeded at event time, never invented later)."""
         for group in iter_suspicion_reactions(
             self._pack, self._projection, self._knowledge, record
@@ -695,6 +698,16 @@ class Simulator:
                 replace(
                     telling, cause=record.id, provenance={"seed": self._seed}
                 )
+            )
+        # drama-3 (iter-42): the pack's on_action reactions, appended
+        # AFTER the hardcoded systems (the donor's append-not-overwrite
+        # composition — vanilla logic runs, custom entries add, never
+        # replace) and BEFORE the director seeding. Lazy on purpose:
+        # each entry's draft reads the projection as left by the
+        # previously committed reactions (the KI#13 discipline).
+        for draft in on_action_drafts(self._pack, self._projection, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
             )
         # iter-4: the director seeds hooks at commit time (D-005). The
         # release decision fires later, at the beat cycle.
