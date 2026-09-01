@@ -1,28 +1,34 @@
 # STATUS — canonsim
 
-Iteration: iter-38 (`iter-38-climax` — the owner's
-"continue work per the plan" session call; the phase-3 backlog's top
-un-gated item, dir-3; a code iteration) · Phase: 3 (Director)
-**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067) landed** · Date:
-2026-09-01 · Scope: the climax layer — the L4D2 three-intensity rule
-as pack data (`director.pacing.climax_floor`, 75 = 3× peak_floor 25;
-lint: strictly above the peak floor) + the climax release path (a
-climax-flagged hook at the END of a peak — clock in PEAK held
-`min_peak_beats`, entropy at the third layer; excluded from the quiet
-path: a boss never spawns because the world is boring) + the one-beat
-`PEAK_CLIMAX` state (entered only by a climax release, exited to
-REST — boss beat + reset) + the `permit_climax` policy question
-(separate from `permit_release`: the boss fires at high entropy,
-the stagnation path at low). The tavern pack declares the layer,
-no hook carries the flag: the flag was probed live (the full suite
-green with `possible_document_check.climax: true`), but the v0.1
-stub intent would make a hollow boss — the flag lands with the
-`document_check` action (DIRECTOR_SPEC §11), the owner's content
-call. Fixture discipline: T1/T8/corpus/metrics byte-identical (the
-layer is inert without a flagged hook; the harness A/B re-measured
-— 10 seeds, both arms byte-identical, stretch blocks equal). KI#60
-deleted per AGENTS §5 (closed iter-36, two iterations past). Tests
-727→739, ruff clean.
+Iteration: iter-39 (`iter-39-dir4` — the owner's "continue work
+per the plan" session call; the phase-3 backlog's top un-gated item,
+dir-4; a code iteration) · Phase: 3 (Director)
+**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068)
+landed** · Date: 2026-09-01 · Scope: the multi-channel quiet split —
+the L4D three-director family (Horde / S.I. / Music → threat /
+social / ambient, the names are the pack's own). `director.channels`
+declares the pacing dimensions: an `entropy_floor` + the observable
+inputs it binds (the closed vocabulary `suspicion |
+physical_threats`; the channel's own unreleased hook weights always
+feed it — a channel never senses another channel's hooks). A hook
+opts in per hook (`channel` — the per-hook opt-in mirrors the climax
+flag): the quiet gate asks the hook's OWN channel's floor against
+that channel's entropy, so a quiet social channel can inject while
+the threat channel burns. Channelless hooks keep the v0.1 global
+floor (the mixed mode is legal); a tag without the block is inert
+dormant vocabulary. Global ON PURPOSE: the pacing clock (one drama
+arc over TOTAL entropy), the budget (1/beat, the global tiebreak),
+the climax path, explicit triggers (D-005), the cooldown. Pack
+instantiation: threat 3 (the document-check's weight self-blocks the
+quiet path — an escalation never spawns because the world is
+boring), social 5 (guard_suspicious_of_pc), ambient 2
+(inputless, declared-but-dormant — the owner's content call).
+Fixture discipline: T1/T8/corpus byte-identical; a 10-seed
+channels-vs-no-channels A/B 10/10 byte-identical (the quiet path
+never fires on day1_full — the D-066 all-PEAK window; the split is
+unit-pinned). KI#63 (phases.md §3 listed iter-38's landings as
+still-ahead + the nav tests row missed the climax suite) opened +
+closed. Tests 739→757, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,18 +54,16 @@ deleted per AGENTS §5 (closed iter-36, two iterations past). Tests
 
 (none open.)
 
-- KI#61 · doc drift: `core/loop.py`'s beat-cycle comment claimed
-  pack-tunability via `director.stagnation.beat_ticks` — a key no
-  code reads (the loop reads `urgencies.beat_ticks`, DIRECTOR_SPEC
-  §7 the owner; the pack carried both, equal by coincidence) ·
-  CLOSED iter-37 (comment corrected; the dead key deleted from
-  rules.json — zero behavior change, T1 pins byte-identity).
-- KI#62 · doc drift: worklog order/cap — bg-3's entry sat below the
-  tombstones (out of newest-first order, inserted at the tail), the
-  file at 11 live entries over the §6 cap · CLOSED iter-37 (moved
-  to its chronological position between iter-35 and iter-34; the
-  over-cap pair iter-30/iter-29 evicted with the iter-37 insertion).
-
+- KI#63 · doc drift: `docs/blueprint/phases.md` §3 still listed
+  "layered thresholds (L4D2), PEAK_CLIMAX" as still-ahead — both
+  landed iter-38 (D-067); iter-38's doc-sync set skipped phases.md
+  (and the AGENT_NAVIGATION tests row never gained the climax-suite
+  note) · opened 2026-09-01 · CLOSED iter-39 (the refinement list
+  actualized: layered thresholds + PEAK_CLIMAX + multi-channel
+  landed, three-axis anxiety + re-plan-on-violation remain ahead;
+  the tests row gained both the iter-38 and iter-39 suite notes).
+- (KI#61/KI#62 deleted at iter-39 per AGENTS §5 — closed iter-37,
+  two iterations past; the lessons live in git + the worklog.)
 - (KI#60 deleted at iter-38 per AGENTS §5 — closed iter-36, two
   iterations past; the lesson lives in the FAQ + git.)
 - (KI#55–59 deleted at iter-36 per AGENTS §5 — closed iter-34, two
@@ -389,21 +393,23 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38 — the pacing clock D-065 + the
-exit-criterion instrument D-066 + the climax layer D-067 landed).**
-The arc lives in `docs/TASKS.md`'s phase-3 backlog: `dir-4`
-(multi-channel policies — threat / social / ambient) is the next
-un-gated item. The dir-3 remainder (the boss flag on a tavern hook)
-waits on the `document_check` action decision — DIRECTOR_SPEC §11,
-the owner's content call. The dir-2 measurement's honest finding
-stands: the clock is inert on day1_full (every run ends in PEAK —
+**Phase 3 is OPEN (iter-36/37/38/39 — the pacing clock D-065 + the
+exit-criterion instrument D-066 + the climax layer D-067 + the
+multi-channel split D-068 landed).** The arc lives in
+`docs/TASKS.md`'s phase-3 backlog: `drama-1` (the Paradox event
+grammar) is the next un-gated item. The dir-3 remainder (the boss
+flag on a tavern hook) waits on the `document_check` action decision
+— DIRECTOR_SPEC §11, the owner's content call; the ambient channel
+is likewise declared-but-dormant (content-scale, the owner's call).
+The dir-2/dir-4 measurement's honest finding stands: the clock and
+the channel split are inert on day1_full (every run ends in PEAK —
 a measurable delta needs a gate-protocol script set that walks the
 world into quiet; recorded in D-066, a phase-gate question, not
 forced).
 
-1. **Phase-3 arc** (TASKS backlog): dir-4 → the owner-gated content
-   decisions (`document_check` + the climax flag) → drama-1 (the
-   Paradox event grammar), social-1/2/arc-1 (the social-depth run).
+1. **Phase-3 arc** (TASKS backlog): drama-1 → the owner-gated content
+   decisions (`document_check` + the climax flag + ambient-channel
+   hooks) → social-1/2/arc-1 (the social-depth run).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

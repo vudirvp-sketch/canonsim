@@ -26,6 +26,24 @@ pack's declaration is the gate (INV-3): a pack without `climax_floor`
 runs the iter-36 two-layer clock, byte-identically, and a climax-flagged
 hook without the layer is explicit-trigger-only.
 
+Phase 3 (DIR-4, iter-39 — the L4D multi-channel family): the quiet
+path decomposes per channel. `director.channels` (pack data) declares
+named pacing dimensions — each its own entropy floor plus the
+observable inputs it senses (the closed vocabulary {suspicion,
+physical_threats}; the channel's own unreleased hook weights always
+feed it). A hook opts in per hook (`director.hooks[tag].channel`):
+the quiet gate asks the hook's OWN channel — a quiet social channel
+can inject while the threat channel burns (the multi-channel win the
+single global floor cannot express). The pacing clock stays global
+(one drama arc over TOTAL entropy — PEAK/REST suppress every
+channel); explicit triggers stay ungated (D-005); the budget stays 1
+release per beat across all channels; the climax path ignores
+channels (the boss gate reads total entropy). A pack without
+`director.channels` runs the v0.1 global-floor quiet path,
+byte-identically; a channelless hook keeps that global floor even in
+a channels pack (the per-hook opt-in mirrors the climax flag — a tag
+without the block is dormant vocabulary).
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -65,6 +83,8 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
 
 __all__ = [
     "DISABLED",
+    "CHANNEL_INPUTS",
+    "ChannelConfig",
     "Director",
     "DirectorPolicy",
     "EnabledPolicy",
@@ -72,6 +92,8 @@ __all__ = [
     "PacingClock",
     "PacingConfig",
     "SeededHook",
+    "channel_entropies",
+    "channels_from_rules",
     "entropy",
     "pacing_from_rules",
     "policy_from_rules",
@@ -104,24 +126,30 @@ class SeededHook:
     intent_fields: Mapping[str, Any]
     trigger: Mapping[str, Any] | None  # {"kind": "time"|"place"|"threshold", ...}
     climax: bool = False  # DIR-3: the boss-beat flag (pack data)
+    channel: str | None = None  # DIR-4: the pacing dimension (pack data)
 
 
 class DirectorPolicy(Protocol):
     """The release gate (phase0 §4 "Multi-channel policies"): the
     director asks the policy whether a release is permitted at this
     beat. The minimal pair (Enabled / Disabled) covers T8's A/B
-    baseline; multi-channel (threat / social / ambient) remains a
-    phase-3 refinement, recorded not built (the pacing clock landed
-    iter-36 — it is Director-side state, not a policy). The climax
-    question (DIR-3) is separate from the quiet-path question: the
-    boss releases at high entropy where the stagnation path releases
-    at low entropy — one boolean, `permit_release`, cannot serve both
-    honestly."""
+    baseline. The quiet question split per release path at phase 3:
+    `permit_climax` (DIR-3 — the boss fires at HIGH entropy where the
+    stagnation path fires at LOW; one boolean cannot serve both
+    honestly) and `permit_quiet` (DIR-4 — each channel owns its floor;
+    the global floor cannot serve three pacing dimensions honestly).
+    The pacing clock is Director-side state, not a policy (iter-36);
+    the channel table likewise lives on the Director — the policy only
+    answers."""
 
     def permit_release(
         self,
         explicit_trigger_fires: bool,
         current_entropy: int,
+    ) -> bool: ...
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
     ) -> bool: ...
 
     def permit_climax(self) -> bool: ...
@@ -144,18 +172,32 @@ class EnabledPolicy:
             return True
         return current_entropy < self.entropy_floor
 
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
+    ) -> bool:
+        """DIR-4: the per-channel quiet question — the channel's entropy
+        against the channel's own floor (each pacing dimension owns its
+        quiet gate; one global floor cannot serve three honestly)."""
+        return channel_entropy < channel.entropy_floor
+
     def permit_climax(self) -> bool:
         return True
 
 
 @dataclass(frozen=True, slots=True)
 class DisabledPolicy:
-    """T8 A/B baseline: no releases ever — the boss included. The buffer
-    still seeds — D-005 hygiene holds (a complication from nowhere is
-    still a bug); A/B measures the delta the director's releases make."""
+    """T8 A/B baseline: no releases ever — the boss and every channel
+    included. The buffer still seeds — D-005 hygiene holds (a
+    complication from nowhere is still a bug); A/B measures the delta
+    the director's releases make."""
 
     def permit_release(
         self, explicit_trigger_fires: bool, current_entropy: int
+    ) -> bool:
+        return False
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
     ) -> bool:
         return False
 
@@ -174,6 +216,52 @@ def policy_from_rules(rules: Mapping[str, Any], enabled: bool) -> DirectorPolicy
     return EnabledPolicy(
         entropy_floor=int(rules["director"]["stagnation"]["entropy_floor"])
     )
+
+
+# -- the release channels (DIR-4, phase 3; the L4D multi-channel family) ------
+
+
+CHANNEL_INPUTS: Final = ("suspicion", "physical_threats")
+"""The closed vocabulary of observable P2e terms a channel may bind
+(`director.channels.<name>.inputs`): the entropy formula's two
+world-sensing terms, decomposed per dimension. The channel's own
+unreleased hook weights always feed it — that input is not listable."""
+
+
+@dataclass(frozen=True, slots=True)
+class ChannelConfig:
+    """DIR-4 pack data (`director.channels.<name>`): one pacing
+    dimension — the L4D family (Horde / S.I. / Music; the names are the
+    pack's own — this pack instantiates threat / social / ambient).
+    `entropy_floor` is the channel's quiet gate (the stagnation
+    detector's per-channel floor); `inputs` binds the observable terms
+    the channel senses (a subset of CHANNEL_INPUTS). A channel never
+    senses another channel's hooks — the split is the point: a quiet
+    social channel can inject while the threat channel burns."""
+
+    entropy_floor: int
+    inputs: frozenset[str]
+
+
+def channels_from_rules(
+    rules: Mapping[str, Any],
+) -> Mapping[str, ChannelConfig] | None:
+    """The pack's channel declarations (`director.channels`), beside
+    `pacing_from_rules` (the single channels read). None when the pack
+    declares no channels — the v0.1 global-floor quiet path,
+    byte-identical (the pack's own declaration is the gate, INV-3).
+    The channel NAMES are free-form pack data; only the input
+    vocabulary is closed (CHANNEL_INPUTS)."""
+    channels = rules.get("director", {}).get("channels")
+    if channels is None:
+        return None
+    return {
+        str(name): ChannelConfig(
+            entropy_floor=int(spec["entropy_floor"]),
+            inputs=frozenset(spec.get("inputs", ())),
+        )
+        for name, spec in channels.items()
+    }
 
 
 # -- the pacing clock (DIR-1, phase 3; the L4D peak/rest donor) ----------------
@@ -349,6 +437,34 @@ def entropy(
     )
 
 
+def channel_entropies(
+    channels: Mapping[str, ChannelConfig],
+    projection: Mapping[str, Mapping[str, Any]],
+    unreleased: Iterator[SeededHook],
+    rules: Mapping[str, Mapping[str, Any]],
+) -> dict[str, int]:
+    """DIR-4: the per-channel entropy map. Each declared channel senses
+    its OWN unreleased hook weights (always) plus the inputs it binds
+    (CHANNEL_INPUTS — the P2e world-sensing terms, decomposed per
+    dimension). Hooks in no declared channel count toward the TOTAL
+    only (the pacing clock's input, unchanged). Deterministic: the
+    channels iterate sorted(), the buffer in construction order
+    (INV-2)."""
+    suspicion = _global_suspicion(projection)
+    threats = _visible_physical_threats(projection, _threat_states(rules))
+    totals = {name: 0 for name in sorted(channels)}
+    for hook in unreleased:
+        if hook.channel in totals:
+            totals[hook.channel] += hook.weight
+    for name in sorted(channels):
+        inputs = channels[name].inputs
+        if "suspicion" in inputs:
+            totals[name] += suspicion
+        if "physical_threats" in inputs:
+            totals[name] += threats
+    return totals
+
+
 # -- triggers (time / place / threshold — causal, not stagnation) -------------
 
 
@@ -397,7 +513,8 @@ class Director:
     `releases` at each beat tick. A release produces an IntentData the
     loop enqueues — the director never writes canon itself (D-037).
     Since iter-36 it also holds the per-run pacing clock (DIR-1) when
-    the pack declares one."""
+    the pack declares one; since iter-39 the channel table (DIR-4) —
+    pack data, constant across runs, like the policies."""
 
     pack: "Pack"
     policy: DirectorPolicy
@@ -409,11 +526,15 @@ class Director:
     _pacing_config: PacingConfig | None = field(default=None, init=False, repr=False)
     _pacing: PacingClock | None = field(default=None, init=False, repr=False)
     _pacing_beat: int = field(default=-1, init=False, repr=False)
+    _channels: Mapping[str, ChannelConfig] | None = field(
+        default=None, init=False, repr=False
+    )
 
     def __post_init__(self) -> None:
         self._pacing_config = pacing_from_rules(self.pack.rules)
         if self._pacing_config is not None:
             self._pacing = PacingClock()
+        self._channels = channels_from_rules(self.pack.rules)
 
     @property
     def hooks(self) -> tuple[SeededHook, ...]:
@@ -454,6 +575,7 @@ class Director:
                     intent_fields=dict(spec["intent"].get("fields", {})),
                     trigger=spec.get("trigger"),
                     climax=bool(spec.get("climax", False)),
+                    channel=spec.get("channel"),
                 )
             )
 
@@ -464,19 +586,22 @@ class Director:
     ) -> list[IntentData]:
         """One beat's worth of releases (phase0 §4): explicit triggers
         fire causally first; the climax path (DIR-3) checks the boss
-        gate; then the stagnation detector releases the
-        lowest-threshold hook if the policy permits it (entropy < floor
-        under EnabledPolicy). Budget: 1 release per beat (the director
-        never spams). A rejected director Intent consumes the budget
-        (per-NPC cooldown follows — recorded, the front door does the
-        rejecting). Dead actors (no projection entry /
+        gate; then the quiet path — per channel since iter-39 (DIR-4):
+        each hook's own channel floor gates it when the pack declares
+        channels and the hook carries a channel; the v0.1 global floor
+        otherwise. Budget: 1 release per beat (the director never
+        spams, across ALL channels — the pick stays the global
+        lowest-threshold tiebreak). A rejected director Intent consumes
+        the budget (per-NPC cooldown follows — recorded, the front door
+        does the rejecting). Dead actors (no projection entry /
         `crime_status == caught`) are never targeted.
 
         Reads observable state only (L6): the projection and the
         seeded-hook buffer — never knowledge records, never PC
         internals (the entropy law, phases.md/DIRECTOR_SPEC §5). The
         pacing clock (DIR-1) advances once per beat BEFORE the gates
-        read it; PEAK/REST suppress the stagnation path, explicit
+        read it; PEAK/REST suppress the quiet path — every channel
+        (the clock reads TOTAL entropy: one drama arc), explicit
         triggers stay ungated (D-005 — causality is not pacing).
         """
         unreleased = list(self._unreleased())
@@ -535,26 +660,40 @@ class Director:
                 assert self._pacing is not None  # the gate passed: pacing exists
                 self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
                 return [self._intent(hook)]
-        # 3) stagnation release — entropy < floor → lowest-threshold hook.
-        # The pacing clock gates the drama path (DIR-1): PEAK (the world
-        # is loud) and REST (post-peak breathing room) suppress
-        # re-injection — the flat v0.1 detector released the beat after
-        # a climax, flattening the arc. Packs without pacing keep the
-        # ungated v0.1 behavior; the policy's floor stays the release
-        # authority either way (one owner per law).
-        if not self.policy.permit_release(
+        # 3) the quiet path (the stagnation family). DIR-4 (iter-39 —
+        # the L4D multi-channel family): the quiet gate is per hook. A
+        # hook carrying a channel the pack declares asks its OWN
+        # channel's floor against that channel's entropy — a quiet
+        # channel can inject while another burns (the multi-channel win
+        # the single global floor cannot express); every other hook
+        # keeps the v0.1 global-floor question (the per-hook opt-in
+        # mirrors the climax flag: a tag without the block is dormant
+        # vocabulary). The clock gate stays global (PEAK/REST suppress
+        # every channel); the pick stays the global lowest-threshold
+        # tiebreak — the budget is one release per beat, all channels.
+        global_quiet = self.policy.permit_release(
             explicit_trigger_fires=False, current_entropy=current_entropy
-        ):
+        )
+        if self._channels is None and not global_quiet:
             return []
         if self._pacing is not None and self._pacing.state not in (
             "RAMP", "STAGNATION"
         ):
             return []
+        per_channel = (
+            channel_entropies(
+                self._channels, projection,
+                iter(hook for _, hook in unreleased), self.pack.rules,
+            )
+            if self._channels is not None
+            else None
+        )
         candidates = [
             (idx, hook) for idx, hook in unreleased
             if not hook.climax  # the boss never spawns because the world is boring
             and not self._on_cooldown(hook.target_npc)
             and self._target_alive(projection, hook.target_npc)
+            and self._quiet_gate(hook, per_channel, global_quiet)
         ]
         if not candidates:
             return []
@@ -566,6 +705,29 @@ class Director:
         return [self._intent(hook)]
 
     # -- helpers (private) ---------------------------------------------------
+
+    def _quiet_gate(
+        self,
+        hook: SeededHook,
+        per_channel: Mapping[str, int] | None,
+        global_quiet: bool,
+    ) -> bool:
+        """The per-hook quiet gate (DIR-4): the hook's own channel floor
+        when it carries a channel the pack declares; the v0.1 global
+        answer otherwise (channelless, the tag names no declared
+        channel — dormant vocabulary, the climax-flag-without-layer
+        law — or the pack declares no channels). The global question is
+        asked once in `releases`, never per hook."""
+        if (
+            per_channel is not None
+            and hook.channel is not None
+            and hook.channel in per_channel
+        ):
+            assert self._channels is not None  # per_channel set: channels declared
+            return self.policy.permit_quiet(
+                self._channels[hook.channel], per_channel[hook.channel]
+            )
+        return global_quiet
 
     def _climax_gate(self, current_entropy: int) -> bool:
         """The layered-threshold release gate (DIR-3): the pack declares

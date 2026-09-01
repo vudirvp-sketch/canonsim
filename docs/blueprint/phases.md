@@ -366,7 +366,8 @@ dev-time boundary gate is its stand-in). Player input is data, not
 instruction (`VISION.md` §5); the world answers, not the model.
 
 ## 3. Phase 3 — director evolution + event grammar + social depth —
-OPEN (iter-36, the owner's call; the pacing clock landed, D-065)
+OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
+instrument D-066, climax layer D-067, multi-channel split D-068)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -384,8 +385,12 @@ iterator helpers — the cleanest Paradox abstraction, minus the implicit-
 pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /
 REST / STAGNATION` over entropy, pack data `director.pacing`,
 clock-gated stagnation releases, explicit triggers ungated; owner
-`DIRECTOR_SPEC.md` §5); still ahead: layered thresholds (L4D2),
-`PEAK_CLIMAX` for high-severity hooks, three-axis anxiety (Alien) —
+`DIRECTOR_SPEC.md` §5); the eventless-stretch instrument **landed
+iter-37** (DIR-2, D-066); layered thresholds + `PEAK_CLIMAX` for
+high-severity hooks **landed iter-38** (DIR-3, the L4D2 layering +
+boss-beat rules, D-067); the multi-channel quiet split **landed
+iter-39** (DIR-4, the L4D three-director family — per-channel floors
++ input bindings, D-068). Still ahead: three-axis anxiety (Alien) —
 the `unknown` axis becomes measurable as the gap between actual state
 (log) and perceived state (knowledge records); the director may pace
 against the gap, still never against the player (L6). Re-plan-on-

@@ -10,6 +10,47 @@
 > since iter-5).
 
 ---
+iter-39 · 2026-09-01 · dir-4 — the multi-channel quiet split
+(iter-39-dir4; the owner's "continue work per the plan" session
+call, the phase-3 backlog's top un-gated item)
+- core/director.py: `director.channels` pack data (ChannelConfig —
+  per-channel quiet floor + the closed CHANNEL_INPUTS binding
+  vocabulary {suspicion, physical_threats}; the channel's own
+  unreleased hook weights always feed it) + `SeededHook.channel` +
+  the per-hook quiet gate (`permit_quiet` — the third policy
+  question; the channel table lives on the Director, the policy only
+  answers) + `channel_entropies` (pure, mirrors `entropy`). Global
+  ON PURPOSE: the pacing clock (one drama arc over TOTAL entropy —
+  PEAK/REST suppress every channel), the budget (1/beat, the global
+  tiebreak), the climax path, explicit triggers (D-005), the
+  cooldown. Channelless hooks keep the v0.1 global floor (the
+  per-hook opt-in, the climax-flag pattern; a tag without the block
+  is dormant vocabulary).
+- rules.json: threat 3 (the document-check's weight self-blocks the
+  quiet path — an escalation never spawns because the world is
+  boring) / social 5 (guard_suspicious_of_pc, suspicion-bound) /
+  ambient 2 (inputless, declared-but-dormant — the owner's content
+  call); both hooks channel-tagged. pack.py lint: the block shape,
+  floors, the closed input vocabulary, the hook tag must name a
+  declared channel when the block exists.
+- Scope: 13 files (code 2 + tests 1 + pack 1 + the doc-sync set —
+  the iter-36/37/38 precedent; TASKS 599→613 over the 600 cap by
+  substance, the iter-32 precedent — the landing rows carry load).
+- Fixture discipline: T1/T8/corpus byte-identical; 10-seed A/B
+  (channels vs no-channels, a runner outside the repo per Rule 9)
+  10/10 byte-identical — the quiet path never fires on day1_full
+  (the D-066 all-PEAK window; the split is unit-pinned).
+  KI#63 (phases.md §3 stale "still-ahead" after iter-38 + the nav
+  tests row's missing climax note) opened + closed; KI#61/KI#62
+  deleted per AGENTS §5 (closed iter-37, two iterations past).
+  Tests 739→757 (+18 test_director.py: the input binding, the
+  quiet-channel-while-another-burns law + the v0.1 comparison arm,
+  the escalation self-block, the global clock gate,
+  explicit-ungated, the fallbacks, the shared budget, director-off,
+  climax-ignores-channels, the dormant tag, the four lint refusals),
+  ruff clean. D-068; DIRECTOR_SPEC §5 the contract owner; iter-31
+  evicted per the cap.
+---
 iter-38 · 2026-09-01 · dir-3 — the climax layer + PEAK_CLIMAX
 (iter-38-climax; the owner's "continue work per the plan" session
 call, the phase-3 backlog's top un-gated item)
@@ -249,36 +290,8 @@ iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
   STATUS + the fixture's source).
 ---
 iter-31 · 2026-09-01 · phase-2 parser door — the mode-C boundary's
-LLM-free half (iter-31-phase2-parser-door; the owner's start-phase-2
-call — phase 1 closed at D-058, polish done iter-27–29)
-- brief/parser.py (pure — no RNG, no I/O, no wall-clock): the grammar
-  snapshot (pack verbs with pack-derived field constraints: ticks
-  positive-int, method enum, near spot-list from the actor's folded
-  position, texture live-entry reference; ∪ addressable nouns — canon
-  entities + live ledger entries, ghost interactivity structurally
-  impossible); parse_call (utterance + grammar + protocol,
-  byte-deterministic); parse_reply_from_mapping — the closed
-  {intent | question | no_intent} gate, loud ParseError on
-  off-grammar output, never a feed.
-- cli/parser.py ParserDoor + the `say`/`say apply` session door
-  (shares the session's ONE ledger, D-049): emit (retire window +
-  scene sync + document) → apply (gate against the CURRENT snapshot →
-  pin → feed one step through the front door → promotions wired like
-  the narrator path). The pin law: `SceneLedger.pin` — blueprint
-  §1(a)'s first consumer (the reference IS the pin; a failed attempt
-  keeps it live+pinned — seed-probed both ways; un-pinning does not
-  exist). Attempts are facts: world-impossible intents commit
-  intent_rejected.
-- docs/PARSER_SPEC.md (the trigger-fired phase-2 spec: boundary,
-  snapshot, documents, pin/feed, the ≥90% measurement — parse
-  validity ≠ world legality) + SPECS_BACKLOG row; TASKS phase-2
-  opening + the parse-1/parse-2/engine-1 backlog; STATUS
-  header/FAQ/Next; AGENT_NAVIGATION §1; README Status/repo-map; D-062;
-  KI#53 (phase-state doc drift: TASKS' stale phase header + the README
-  Status tail) opened + closed.
-- 629→654 green (+25: snapshot/call-document/gate/pin/door-e2e/CLI
-  wiring), ruff clean. 7 code+spec+test files + the doc-sync set
-  (the iter-12 boundary precedent); iter-22 evicted per the cap.
+LLM-free half
+- (deleted at iter-39 per the one-in/one-out cap; history in git.)
 ---
 (bg-4 deleted at iter-38 per the one-in/one-out cap; history in git.)
 ---

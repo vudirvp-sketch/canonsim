@@ -100,11 +100,20 @@ landed iter-38 (DIR-3, D-067 — the L4D2 three-intensity rule:
 `director.pacing.climax_floor` 75 = 3× the peak floor, the climax
 release path at the END of a peak, the one-beat `PEAK_CLIMAX` boss
 state; the pack declares the layer, no hook carries the flag — it
-lands with the `document_check` action, the owner's content call).
-739 tests green,
-ruff clean, zero fixture regen. Next: the phase-3 arc (`dir-4`
-multi-channel policies; `docs/TASKS.md`) + the owner-gated
-set (parse-2, engine-1, the document_check content decision).
+lands with the `document_check` action, the owner's content call);
+the multi-channel quiet split landed iter-39 (DIR-4, D-068 — the L4D
+three-director family: `director.channels` threat/social/ambient with
+per-channel quiet floors + input bindings, `SeededHook.channel`, the
+per-hook `permit_quiet` gate; clock/budget/climax/explicit triggers
+stay global on purpose; the v0.1 global floor survives for channelless
+hooks — the per-hook opt-in, the climax-flag pattern). 757 tests
+green, ruff clean, zero fixture regen (a 10-seed channels vs
+no-channels A/B: 10/10 byte-identical — the quiet path never fires
+on day1_full, the D-066 all-PEAK window; the split is unit-pinned).
+Next: the phase-3 arc (`drama-1` the Paradox event grammar,
+`social-1/2`, `arc-1`; `docs/TASKS.md`) + the owner-gated
+set (parse-2, engine-1, the document_check content decision,
+ambient-channel content).
 
 ## For AI agents (primary audience)
 

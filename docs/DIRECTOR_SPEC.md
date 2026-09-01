@@ -5,12 +5,14 @@
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
 > ≤300 lines. The pacing clock (DIR-1) landed iter-36 (phase 3, D-065);
-> the climax layer (DIR-3) landed iter-38 (D-067); the phase-3
-> refinements still recorded-not-built live in §11. The clock's
-> measured impact (DIR-2, iter-37: both pacing arms byte-identical on
-> day1_full — the stagnation path never fires there; the climax layer
-> likewise inert without a flagged hook, iter-38 re-measured) is owned
-> by `docs/TEST_PLAN.md` §6.
+> the climax layer (DIR-3) landed iter-38 (D-067); the multi-channel
+> split (DIR-4) landed iter-39 (D-068); the phase-3 refinements still
+> recorded-not-built live in §11. The clock's measured impact (DIR-2,
+> iter-37: both pacing arms byte-identical on day1_full — the
+> stagnation path never fires there; the climax layer likewise inert
+> without a flagged hook, iter-38 re-measured; the channel split
+> likewise inert on day1_full, iter-39 re-measured) is owned by
+> `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
@@ -38,6 +40,7 @@ urgencies + reactions + rotations, not director injections.
 | `intent_fields` | pack | mapping |
 | `trigger` | pack (optional) | `{kind, ...}` (see §3) |
 | `climax` | pack (optional, `director.hooks[tag].climax`) | `bool` — the boss-beat flag (DIR-3; see §5) |
+| `channel` | pack (optional, `director.hooks[tag].channel`) | `str` — the hook's pacing dimension (DIR-4; see §5) |
 
 The buffer is **per-run** (folded from the log; reseeds from the
 master seed every run because the events are deterministic per seed).
@@ -70,18 +73,30 @@ perceiver to the director itself. Replaces the v0.1 draft's flat
 `release_after_ticks_without_visible_event: 90` timer — a tension
 floor sensor, not a boredom timer.
 
-## 5. Release policy (the minimal pair + the pacing clock + the climax layer)
+## 5. Release policy (the minimal pair + the pacing clock + the climax
+layer + the multi-channel split)
 
 ```python
 class DirectorPolicy(Protocol):
     def permit_release(
         self, explicit_trigger_fires: bool, current_entropy: int
     ) -> bool: ...
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
+    ) -> bool: ...
+
+    def permit_climax(self) -> bool: ...
 ```
 
 - `EnabledPolicy(entropy_floor=N)`: explicit triggers always release;
-  stagnation releases when `entropy < N`.
-- `DisabledPolicy`: never releases (T8 A/B baseline).
+  stagnation releases when `entropy < N` (the v0.1 global-floor quiet
+  question — channelless hooks keep it even in a channels pack);
+  `permit_quiet` compares the channel's entropy against the channel's
+  own floor; the climax path is permitted whenever the pacing gates
+  pass.
+- `DisabledPolicy`: never releases (T8 A/B baseline) — every channel
+  and the boss included.
 
 **The pacing clock (DIR-1, landed iter-36; the L4D peak/rest donor):**
 a per-run four-state machine `RAMP / PEAK / REST / STAGNATION` over
@@ -143,6 +158,39 @@ committed fixtures, but the document-check's v0.1 stub intent would
 make a hollow boss — the flag lands with the `document_check` action
 (§11), the owner's content call.
 
+**The multi-channel split (DIR-4, landed iter-39; the L4D
+three-director family — Horde / S.I. / Music → threat / social /
+ambient, the names are the pack's own):** `director.channels`
+declares the pacing dimensions — each an `entropy_floor` plus the
+observable inputs it binds (`inputs`, the closed vocabulary
+`suspicion | physical_threats`; the channel's own unreleased hook
+weights always feed it). A hook opts in per hook
+(`director.hooks[tag].channel` — the per-hook opt-in mirrors the
+climax flag): the quiet gate asks the hook's OWN channel's floor
+against that channel's entropy, so a quiet social channel can inject
+while the threat channel burns — the multi-channel win the single
+global floor cannot express. Channelless hooks keep the v0.1
+`entropy_floor` question even in a channels pack (the mixed mode is
+legal); a channel tag without the block is inert dormant vocabulary
+(the climax-flag-without-layer law; pack lint rejects a tag naming no
+declared channel when the block exists). The pack's declaration is
+the gate (INV-3): a pack without `director.channels` runs the v0.1
+global-floor quiet path, byte-identically. What stays global on
+purpose: the pacing clock (one drama arc over TOTAL entropy —
+PEAK/REST suppress every channel), the budget (1 release per beat
+across ALL channels; the pick stays the global lowest-threshold
+tiebreak), the climax path (the boss gate reads total entropy), the
+explicit triggers (D-005: causality is not channeling), the per-NPC
+cooldown and the dead-actor skip. This pack's instantiation: threat 3
+(an escalation's weight meets its own floor — the quiet path
+self-blocks; `possible_document_check` fires causally), social 5 (the
+v0.1 floor carried, suspicion-bound; `guard_suspicious_of_pc`),
+ambient 2 (inputless noise floor — declared-but-dormant, no hook
+carries it yet, the owner's content call). Measured at landing
+(iter-39): 10 seeds of day1_full, channels vs no-channels arms
+byte-identical — the quiet path never fires there (the D-066
+all-PEAK finding; the unit tests exercise the split directly).
+
 ## 6. Release budget + cooldown
 
 - **1 release per beat** (the director never spams). The budget is
@@ -174,7 +222,8 @@ fires three pieces in order, each through the commit door (D-037):
    preconditions fail stays silent — the NPC tried, the world said
    no (no rejection event; the world's noise floor absorbs it).
 3. **Director releases**: explicit triggers first, then the climax
-   path (DIR-3 — the boss gate), then the stagnation detector. Each
+   path (DIR-3 — the boss gate), then the quiet path (the stagnation
+   family — per channel since DIR-4). Each
    release produces an IntentData enqueued the same way as an urgency.
 
 Crossings fire in **tick order**: a beat at T=720 between rotations
@@ -228,12 +277,13 @@ suffices.
 
 ## 11. What this spec does NOT cover (phase-3+ refinements)
 
-- Multi-channel policies (threat / social / ambient) — L4D family.
 - The full document_check action (the v0.1 stub uses `wait`; a
   dedicated action arrives when the document-check hook deserves
   its own resolution — and with it the climax flag on the hook, per
   §5's scope note).
 - A per-NPC desirability score for hook selection (phase-3).
+- Ambient-channel content (the tavern pack declares the dimension; no
+  hook carries it — a content-scale decision, the owner's call).
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

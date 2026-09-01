@@ -17,7 +17,8 @@
 > Phase 3 (Director) OPEN — iter-36, the owner's "continue per the plan"
 > call (the iter-31 precedent; the pacing clock landed first, D-065;
 > the exit-criterion instrument landed iter-37, D-066; the climax
-> layer landed iter-38, D-067).
+> layer landed iter-38, D-067; the multi-channel split landed iter-39,
+> D-068).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -49,7 +50,13 @@
   document-check's v0.1 stub intent would make a hollow boss; the
   flag lands with the `document_check` action (DIRECTOR_SPEC §11),
   the owner's content call.
-- `dir-4` · multi-channel policies (threat / social / ambient).
+- `dir-4` · multi-channel policies — **done (iter-39, D-068)**:
+  `director.channels` pack data (threat / social / ambient — the L4D
+  family; per-channel quiet floors + the closed input vocabulary
+  suspicion | physical_threats), `SeededHook.channel` + the per-hook
+  quiet gate (`permit_quiet`); the clock / budget / climax / explicit
+  triggers stay global on purpose; the v0.1 global floor survives for
+  channelless hooks (the per-hook opt-in, the climax-flag pattern).
 - `drama-1` · the Paradox-adapted event grammar (trigger predicates as
   JSON, weight multipliers, option blocks, `on_action` dispatch —
   phases.md §3 owns the design).
@@ -273,6 +280,18 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-39 · 2026-09-01 · dir-4 multi-channel policies
+  (iter-39-dir4; the owner's "continue work per the plan" session
+  call, the phase-3 backlog's top un-gated item): the L4D
+  three-director family landed as the quiet-path split —
+  `director.channels` (threat 3 / social 5 / ambient 2 + input
+  bindings), `SeededHook.channel`, `permit_quiet` on the policy
+  protocol, the per-hook quiet gate; clock/budget/climax/explicit
+  stay global. T1/T8/corpus byte-identical; 10-seed A/B 10/10
+  identical (the quiet path never fires on day1_full — the D-066
+  all-PEAK window; the split is unit-pinned). KI#63 opened + closed.
+  Detail: worklog iter-39 + `docs/DIRECTOR_SPEC.md` §5 + D-068.
 
 - iter-35 · 2026-09-01 · phase-2 gate (iter-35-phase2-gate; the owner's
   "continue per the plans" session call — the un-gated backlog was empty,

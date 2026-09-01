@@ -203,3 +203,12 @@ Re-measured at iter-38 (DIR-3, the climax layer landed): 10 seeds,
 both arms byte-identical, stretch blocks equal — the climax layer is
 likewise inert without a climax-flagged hook (the pack declares
 `climax_floor` 75, no hook carries the flag; D-067).
+
+Re-measured at iter-39 (DIR-4, the multi-channel split landed): 10
+seeds, the committed pack (channels declared, both hooks tagged) vs a
+channels-stripped linted variant — per-seed byte-identical logs
+10/10. The channel split only gates the quiet path, and the quiet
+path never fires on day1_full (every run ends in PEAK, the D-066
+finding) — the split is unit-pinned instead
+(tests/test_director.py: the quiet-channel-while-another-burns law,
+the escalation self-block, the global clock gate; D-068).

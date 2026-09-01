@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from core.clock import Clock
+from core.director import CHANNEL_INPUTS
 from core.intent import (
     AUDIENCES,
     KNOWLEDGE_SLOTS,
@@ -1057,6 +1058,39 @@ class _Lint:
                     "climax layer is the third, above the peak — the "
                     "L4D2 layering law)",
                 )
+        # iter-39 (DIR-4): the multi-channel contract — `director.channels`
+        # declares the pacing dimensions (a per-channel quiet floor + the
+        # closed input vocabulary CHANNEL_INPUTS, owned by core.director).
+        # A hook's channel tag, when present, must name a declared channel
+        # when the block exists (a typo check); without the block the tag is
+        # inert dormant vocabulary — the climax-flag-without-layer law.
+        channels = config.get("channels")
+        channel_names: set[str] = set()
+        if channels is not None:
+            _require(
+                isinstance(channels, Mapping),
+                "director.channels must be an object",
+            )
+            for name, spec in channels.items():
+                where = f"director.channels[{name!r}]"
+                _require(
+                    isinstance(spec, Mapping),
+                    f"{where}: must be an object",
+                )
+                _require(
+                    isinstance(spec.get("entropy_floor"), int)
+                    and not isinstance(spec.get("entropy_floor"), bool)
+                    and spec["entropy_floor"] >= 0,
+                    f"{where}: entropy_floor must be a non-negative integer",
+                )
+                inputs = spec.get("inputs", ())
+                _require(
+                    isinstance(inputs, list)
+                    and all(item in CHANNEL_INPUTS for item in inputs),
+                    f"{where}: inputs must list channel inputs "
+                    f"({' | '.join(CHANNEL_INPUTS)})",
+                )
+                channel_names.add(str(name))
         for tag, spec in config.get("hooks", {}).items():
             where = f"director.hooks[{tag!r}]"
             _require(
@@ -1072,6 +1106,23 @@ class _Lint:
                 "climax" not in spec or isinstance(spec.get("climax"), bool),
                 f"{where}: climax must be a boolean",
             )
+            # iter-39 (DIR-4): the hook's pacing dimension — a string;
+            # with the channels block present it must name a declared
+            # channel (a typo check), without the block it is inert
+            # dormant vocabulary
+            hook_channel = spec.get("channel")
+            if channel_names:
+                _require(
+                    isinstance(hook_channel, str)
+                    and hook_channel in channel_names,
+                    f"{where}: channel must name a declared "
+                    "director.channels entry",
+                )
+            else:
+                _require(
+                    hook_channel is None or isinstance(hook_channel, str),
+                    f"{where}: channel must be a string",
+                )
             _require(
                 isinstance(spec.get("release_threshold"), int)
                 and not isinstance(spec.get("release_threshold"), bool)
