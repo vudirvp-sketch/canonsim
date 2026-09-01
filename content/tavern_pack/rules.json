@@ -215,7 +215,8 @@
     "pacing": {
       "peak_floor": 25,
       "min_peak_beats": 1,
-      "min_rest_beats": 1
+      "min_rest_beats": 1,
+      "climax_floor": 75
     },
     "hooks": {
       "guard_suspicious_of_pc": {
@@ -234,7 +235,7 @@
         "notes": "the document-check deferred consequence (MVP_SCOPE §11): released when the watcher's suspicion crosses the trigger value above (the single owner of the number since iter-4a). v0.1 stub intent: the full document_check action is a phase-3 refinement."
       }
     },
-    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. P2e (narrative entropy) replaces the v0.1 flat timer: entropy = sum(seeded-hook weights) + global suspicion + visible physical threats (observable state only, L6). Stagnation releases the lowest-threshold hook when entropy < floor (a tension floor sensor). Explicit triggers (time / place / threshold) fire causally regardless of entropy. Per-NPC cooldown (MinGapBetweenEncounters analogue) prevents targeting spam. Director-off (T8 A/B baseline) = buffer still seeds, nothing releases — the world's emergent chains come from urgencies + reactions. Per-run scope: the buffer reseeds from the log every run (fold of events); policies are pack data. The director never learns the player (Alien named negative). Pacing (DIR-1, iter-36, L4D donor): the per-run RAMP/PEAK/REST/STAGNATION clock over entropy — peak_floor sits strictly above the stagnation floor (lint); stagnation releases fire only outside PEAK/REST (REST = min_rest_beats of post-climax breathing room — the flat detector re-injected the beat after a climax); explicit triggers never consult the clock (causality is not pacing). A pack without the pacing block runs the v0.1 minimal pair unchanged. Landed iter-4; pacing iter-36."
+    "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. P2e (narrative entropy) replaces the v0.1 flat timer: entropy = sum(seeded-hook weights) + global suspicion + visible physical threats (observable state only, L6). Stagnation releases the lowest-threshold hook when entropy < floor (a tension floor sensor). Explicit triggers (time / place / threshold) fire causally regardless of entropy. Per-NPC cooldown (MinGapBetweenEncounters analogue) prevents targeting spam. Director-off (T8 A/B baseline) = buffer still seeds, nothing releases — the world's emergent chains come from urgencies + reactions. Per-run scope: the buffer reseeds from the log every run (fold of events); policies are pack data. The director never learns the player (Alien named negative). Pacing (DIR-1, iter-36, L4D donor): the per-run RAMP/PEAK/REST/STAGNATION clock over entropy — peak_floor sits strictly above the stagnation floor (lint); stagnation releases fire only outside PEAK/REST (REST = min_rest_beats of post-climax breathing room — the flat detector re-injected the beat after a climax); explicit triggers never consult the clock (causality is not pacing). A pack without the pacing block runs the v0.1 minimal pair unchanged. Climax (DIR-3, iter-38, L4D2 donor): climax_floor is the third threshold layer (75 = 3x the peak floor 25 — the L4D2 three-intensity ratio, this pack's own instantiation); a hook flagged climax releases only at the end of a peak with entropy at this layer, never from the quiet path (a boss does not spawn because the world is boring). No tavern hook carries the flag yet: probed byte-safe on the committed fixtures, but the document-check's v0.1 stub intent would make a hollow boss — the flag lands with the document_check action (DIRECTOR_SPEC §11), the owner's content call. Landed iter-4; pacing iter-36; climax layer iter-38."
   },
 
   "importance": {

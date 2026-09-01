@@ -16,7 +16,8 @@
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
 > Phase 3 (Director) OPEN — iter-36, the owner's "continue per the plan"
 > call (the iter-31 precedent; the pacing clock landed first, D-065;
-> the exit-criterion instrument landed iter-37, D-066).
+> the exit-criterion instrument landed iter-37, D-066; the climax
+> layer landed iter-38, D-067).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -35,8 +36,19 @@
   = a linted pack variant minus `director.pacing`); 1000 seeds
   measured — both arms byte-identical, max stretch 1 (the clock is
   inert on day1_full; detail: D-066 + `docs/TEST_PLAN.md` §6).
-- `dir-3` · layered thresholds (L4D2 three-intensity rule) +
-  `PEAK_CLIMAX` (the boss-beat rule — DIRECTOR_SPEC §11).
+- `dir-3` · layered thresholds + `PEAK_CLIMAX` — **done (iter-38,
+  D-067)**: the third threshold layer `director.pacing.climax_floor`
+  (75 = 3× the peak floor, the L4D2 three-intensity ratio) + the
+  climax release path (a climax-flagged hook at the end of a peak,
+  entropy at the third layer, never from the quiet path) + the
+  one-beat `PEAK_CLIMAX` state (boss beat + REST reset) + the
+  `permit_climax` policy question; pack lint (layer strictly above
+  the peak floor; the hook flag boolean). The tavern pack declares
+  the layer as dormant vocabulary — no hook carries the flag yet:
+  probed byte-safe on the committed fixtures, but the
+  document-check's v0.1 stub intent would make a hollow boss; the
+  flag lands with the `document_check` action (DIRECTOR_SPEC §11),
+  the owner's content call.
 - `dir-4` · multi-channel policies (threat / social / ambient).
 - `drama-1` · the Paradox-adapted event grammar (trigger predicates as
   JSON, weight multipliers, option blocks, `on_action` dispatch —

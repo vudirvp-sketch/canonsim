@@ -1024,6 +1024,9 @@ class _Lint:
         # iter-36 (DIR-1): the pacing clock's pack contract — peak floor
         # strictly above the stagnation floor (the loud band must not
         # overlap the quiet one), positive minimum durations (anti-flap).
+        # iter-38 (DIR-3): the climax layer — the L4D2 three-intensity
+        # rule's third threshold, strictly above the peak floor (a
+        # climax_floor inside the peak band would swallow the layering).
         pacing = config.get("pacing")
         if pacing is not None:
             _require(
@@ -1043,6 +1046,17 @@ class _Lint:
                 "director.stagnation.entropy_floor (the PEAK band is the "
                 "loud world, the STAGNATION band the quiet one)",
             )
+            climax_floor = pacing.get("climax_floor")
+            if climax_floor is not None:
+                _require(
+                    isinstance(climax_floor, int)
+                    and not isinstance(climax_floor, bool)
+                    and climax_floor > int(pacing["peak_floor"]),
+                    "director.pacing.climax_floor must be an integer "
+                    "strictly above director.pacing.peak_floor (the "
+                    "climax layer is the third, above the peak — the "
+                    "L4D2 layering law)",
+                )
         for tag, spec in config.get("hooks", {}).items():
             where = f"director.hooks[{tag!r}]"
             _require(
@@ -1050,6 +1064,13 @@ class _Lint:
                 and not isinstance(spec.get("weight"), bool)
                 and spec["weight"] >= 0,
                 f"{where}: weight must be a non-negative integer",
+            )
+            # iter-38 (DIR-3): the boss-beat flag — a boolean; a climax
+            # hook without a climax_floor layer is legal (explicit-trigger
+            # only — the nopacing harness variant is exactly that pack)
+            _require(
+                "climax" not in spec or isinstance(spec.get("climax"), bool),
+                f"{where}: climax must be a boolean",
             )
             _require(
                 isinstance(spec.get("release_threshold"), int)

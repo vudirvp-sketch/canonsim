@@ -15,6 +15,16 @@ after a climax); explicit triggers never consult the clock (D-005 —
 causality is not pacing); a pack without `director.pacing` runs the
 v0.1 minimal pair unchanged.
 
+iter-38 acceptance (phase 3, DIR-3, the L4D2 three-intensity rule +
+the boss-beat rule): the climax layer — `director.pacing.climax_floor`,
+the third threshold strictly above the peak floor; the `PEAK_CLIMAX`
+state (one beat — the boss beat, entered only by a climax release,
+exited to REST); the climax release path (a climax-flagged hook at the
+END of a peak, entropy at the third layer, never from the quiet path).
+No tavern hook carries the flag yet — the pack declares the layer as
+dormant vocabulary; the tests exercise the path via manual hooks and
+mutated packs (the iter-36 pattern).
+
 Determinism holds (T1 discipline): the entropy formula reads
 observable state only (L6), and the release decisions are deterministic
 for a given buffer + projection — no RNG in the director itself. The
@@ -62,12 +72,13 @@ def _record(hooks: tuple[str, ...] = (), event_id: str = "ev_0001", t: int = 0) 
 def _seeded_hook(
     *, tag: str = "guard_suspicious_of_pc", target_npc: str = "npc_guard_01",
     weight: int = 2, release_threshold: int = 5, trigger: dict[str, Any] | None = None,
+    climax: bool = False,
 ) -> SeededHook:
     return SeededHook(
         tag=tag, seeded_by_event="ev_0001", seeded_at_tick=0,
         weight=weight, release_threshold=release_threshold,
         target_npc=target_npc, intent_kind="wait", intent_target=None,
-        intent_fields={"ticks": 1}, trigger=trigger,
+        intent_fields={"ticks": 1}, trigger=trigger, climax=climax,
     )
 
 
@@ -82,6 +93,9 @@ def test_seed_absorbs_hooks_the_pack_declares() -> None:
     assert director.hooks[0].tag == "guard_suspicious_of_pc"
     assert director.hooks[0].target_npc == "npc_guard_01"
     assert director.hooks[0].intent_kind == "wait"
+    # no tavern hook carries the climax flag (DIR-3: declared-but-dormant
+    # layer vocabulary — the flag is a content decision, TASKS records it)
+    assert director.hooks[0].climax is False
 
 
 def test_seed_ignores_events_without_hooks() -> None:
@@ -336,11 +350,14 @@ def _mutated_pack(tmp_path: Path, mutate_rules: Any) -> Any:
 
 def test_pack_declares_pacing_and_clock_starts_ramp() -> None:
     """The tavern pack declares `director.pacing` (the phase-3 arc's first
-    config); the per-run clock starts in RAMP with zero beats held."""
+    config) — with the climax layer (DIR-3: 75 = 3x peak_floor 25, the
+    L4D2 three-intensity ratio); the per-run clock starts in RAMP with
+    zero beats held."""
     config = pacing_from_rules(PACK.rules)
     assert config is not None
     assert config == PacingConfig(
         entropy_floor=5, peak_floor=25, min_peak_beats=1, min_rest_beats=1,
+        climax_floor=75,
     )
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
     assert director.pacing == PacingClock(state="RAMP", beats_in_state=0)
@@ -496,6 +513,216 @@ def test_pacing_lint_rejects_non_positive_min_durations(tmp_path: Path) -> None:
         rules["director"]["pacing"]["min_rest_beats"] = 0
 
     with pytest.raises(PackError, match="min_rest_beats"):
+        _mutated_pack(tmp_path, mutate)
+
+
+# -- the climax layer (iter-38, DIR-3; the L4D2 three-intensity rule) ---------
+
+
+def test_climax_beat_is_one_beat_then_the_rest() -> None:
+    """PEAK_CLIMAX is the boss beat itself — one beat, exited to REST
+    unconditionally (boss beat + reset); a still-loud world breaks the
+    rest per the existing re-spike law, on the transition after."""
+    config = PacingConfig(
+        entropy_floor=5, peak_floor=25, min_peak_beats=1, min_rest_beats=1,
+        climax_floor=75,
+    )
+    boss = PacingClock("PEAK_CLIMAX", 1)
+    # quiet, ramp-band, peak-band, climax-layer entropy: always the rest
+    for entropy_value in (2, 10, 30, 80):
+        assert boss.transition(entropy_value, config) == PacingClock("REST", 1)
+
+
+def test_climax_release_fires_at_the_end_of_a_peak() -> None:
+    """The climax path: a boss hook at the climax layer with the clock in
+    PEAK having held its minimum — the release IS the boss beat (the
+    clock marks PEAK_CLIMAX), and the next beat is the rest."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    # weight 80: entropy 80 >= climax_floor 75 and >= peak_floor 25 — the
+    # beat-1 spike is a PEAK holding its minimum (1) — the peak's END
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=80, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1
+    assert director.pacing == PacingClock(state="PEAK_CLIMAX", beats_in_state=1)
+    # beat 2: the reset is the rest — the world breathes (entropy dropped
+    # to 0 with the buffer drained; REST suppresses the quiet path)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []
+    assert director.pacing is not None and director.pacing.state == "REST"
+
+
+def test_climax_requires_the_layered_threshold() -> None:
+    """The L4D2 three-intensity rule: the boss needs the THIRD layer —
+    the peak band alone (entropy >= peak_floor, < climax_floor) never
+    releases a climax hook, however long the peak holds."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=30, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(PACK.entities)
+    for _ in range(3):
+        director.next_beat()
+        assert director.releases(projection, beat_tick=0) == []
+    # the clock held PEAK past its minimum — but 30 < 75 (the third layer)
+    assert director.pacing is not None and director.pacing.state == "PEAK"
+
+
+def test_climax_requires_the_peak_minimum(tmp_path: Path) -> None:
+    """The boss beat is placed at the END of a peak — the peak must have
+    held its anti-flap minimum first (a pack with min_peak_beats=2: the
+    entry beat is the peak's start, not its end)."""
+    pack = _mutated_pack(
+        tmp_path,
+        lambda rules: rules["director"]["pacing"].update(min_peak_beats=2),
+    )
+    director = Director(pack=pack, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=80, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(pack.entities)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []  # PEAK held 1 < 2
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1  # held 2 >= 2
+    assert director.pacing is not None and director.pacing.state == "PEAK_CLIMAX"
+
+
+def test_climax_hooks_never_release_from_the_quiet_path() -> None:
+    """A boss does not spawn because the world is boring: the climax flag
+    excludes the hook from the stagnation path even in STAGNATION — the
+    un-flagged twin (test_stagnation_releases_when_entropy_below_floor)
+    releases under exactly these conditions."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=2, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []
+    assert director.pacing is not None and director.pacing.state == "STAGNATION"
+
+
+def test_explicit_trigger_beats_the_climax_path() -> None:
+    """D-005: causality is not pacing — when a climax hook's explicit
+    trigger fires at the same beat the climax gate passes, the explicit
+    path releases first and the clock does NOT mark PEAK_CLIMAX (the
+    day1_full shape: the document-check's threshold trigger at beat 1,
+    entropy 220 with the climax layer met — the explicit release wins)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(
+            weight=80, release_threshold=5, climax=True,
+            trigger={"kind": "time", "tick": 0},
+        )
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1
+    # released via the causal path: the clock advanced into PEAK and stays
+    assert director.pacing is not None and director.pacing.state == "PEAK"
+
+
+def test_post_climax_beat_is_inert_to_repeated_calls() -> None:
+    """No double boss: after the climax release, a repeated releases()
+    call inside the same beat returns nothing and the clock stays
+    PEAK_CLIMAX (the advance guard + the state gate — PEAK_CLIMAX does
+    not re-open the climax gate, state != PEAK)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=80, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1
+    assert director.releases(projection, beat_tick=0) == []
+    assert director.pacing == PacingClock(state="PEAK_CLIMAX", beats_in_state=1)
+
+
+def test_director_off_blocks_the_climax_path() -> None:
+    """T8 A/B: a disabled director never releases — the boss included
+    (DisabledPolicy.permit_climax is False). The clock still runs: it is
+    derived state, not a release path."""
+    director = Director(pack=PACK, policy=DISABLED)
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=80, release_threshold=5, climax=True)
+    )
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=0) == []
+    assert director.pacing is not None and director.pacing.state == "PEAK"
+
+
+def test_climax_flag_without_the_layer_is_explicit_trigger_only(
+    tmp_path: Path,
+) -> None:
+    """A pack that flags climax hooks but declares no climax_floor runs
+    the two-layer clock: no climax path, the quiet path still excluded,
+    the explicit trigger untouched (the nopacing harness variant is
+    exactly this pack — the flag stays meaningful without the layer)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["pacing"].pop("climax_floor")
+        hook = rules["director"]["hooks"]["guard_suspicious_of_pc"]
+        hook["climax"] = True
+        hook["trigger"] = {"kind": "time", "tick": 5}
+
+    pack = _mutated_pack(tmp_path, mutate)
+    config = pacing_from_rules(pack.rules)
+    assert config is not None and config.climax_floor is None
+    director = Director(pack=pack, policy=EnabledPolicy(entropy_floor=10))
+    director.seed(_record(hooks=("guard_suspicious_of_pc",)))
+    assert director.hooks[0].climax is True
+    projection = initial_projection(pack.entities)
+    director.next_beat()
+    # entropy 2 < floor 10: the quiet path would fire — the flag excludes it
+    assert director.releases(projection, beat_tick=0) == []
+    director.next_beat()
+    # beat_tick >= 5: the explicit time trigger fires (causal, ungated)
+    assert len(director.releases(projection, beat_tick=100)) == 1
+
+
+def test_two_layer_pack_keeps_the_iter36_release_behavior(
+    tmp_path: Path,
+) -> None:
+    """The pack's own declaration is the gate (INV-3): dropping only the
+    climax layer changes nothing about the two-layer paths — the quiet
+    release behaves exactly as the iter-36 clock did."""
+    pack = _mutated_pack(
+        tmp_path, lambda rules: rules["director"]["pacing"].pop("climax_floor")
+    )
+    director = Director(pack=pack, policy=EnabledPolicy(entropy_floor=5))
+    director._hooks.append(  # type: ignore[attr-defined]
+        _seeded_hook(weight=2, release_threshold=5)
+    )
+    projection = initial_projection(pack.entities)
+    director.next_beat()
+    # entropy 2 < floor 5, the clock reads STAGNATION → the detector fires
+    assert len(director.releases(projection, beat_tick=0)) == 1
+
+
+# pack lint (the climax-layer contract)
+
+
+def test_climax_floor_lint_rejects_at_or_below_the_peak_floor(
+    tmp_path: Path,
+) -> None:
+    """The layering law: climax_floor strictly above peak_floor — a
+    climax layer inside the peak band would swallow the layering (the
+    L4D2 Boss-threshold-gates-Peak-threshold shape)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["pacing"]["climax_floor"] = 25  # == peak_floor
+
+    with pytest.raises(PackError, match="climax_floor"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_climax_flag_lint_rejects_non_boolean(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["guard_suspicious_of_pc"]["climax"] = 1
+
+    with pytest.raises(PackError, match="climax must be a boolean"):
         _mutated_pack(tmp_path, mutate)
 
 

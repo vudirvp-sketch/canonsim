@@ -95,11 +95,16 @@ room, explicit triggers ungated; contract owner `docs/DIRECTOR_SPEC.md`
 `core.metrics.eventless_beat_stretches` + the harness `--pacing
 on|off` A/B; measured 1000 seeds: both arms byte-identical — every
 day1_full run ends in PEAK, the clock inert on this pack+script; max
-stretch 1; contract owner `docs/TEST_PLAN.md` §6). 727 tests green,
-ruff clean, zero fixture regen. Next: the phase-3 arc (`dir-3`
-layered thresholds + PEAK_CLIMAX, then `dir-4` multi-channel;
-`docs/TASKS.md`) + the owner-gated
-set (parse-2, engine-1).
+stretch 1; contract owner `docs/TEST_PLAN.md` §6); the climax layer
+landed iter-38 (DIR-3, D-067 — the L4D2 three-intensity rule:
+`director.pacing.climax_floor` 75 = 3× the peak floor, the climax
+release path at the END of a peak, the one-beat `PEAK_CLIMAX` boss
+state; the pack declares the layer, no hook carries the flag — it
+lands with the `document_check` action, the owner's content call).
+739 tests green,
+ruff clean, zero fixture regen. Next: the phase-3 arc (`dir-4`
+multi-channel policies; `docs/TASKS.md`) + the owner-gated
+set (parse-2, engine-1, the document_check content decision).
 
 ## For AI agents (primary audience)
 

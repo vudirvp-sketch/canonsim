@@ -13,6 +13,19 @@ beat after a climax. Explicit triggers never consult the clock —
 causality is not pacing (D-005). A pack without `director.pacing`
 runs the v0.1 minimal pair, byte-identically.
 
+Phase 3 (DIR-3, iter-38 — the L4D2 three-intensity rule + the boss-beat
+rule): layered thresholds — an optional third entropy layer
+`director.pacing.climax_floor`, strictly above the peak floor (pack
+lint), and the climax release path. A climax-flagged hook (pack data
+`director.hooks[tag].climax`) releases at the END of a peak — the clock
+in PEAK having held `min_peak_beats`, entropy at the third layer — and
+never from the quiet path (a boss does not spawn because the world is
+boring). The release marks the beat PEAK_CLIMAX (one beat — the boss
+beat itself); the next transition is REST (boss beat + reset). The
+pack's declaration is the gate (INV-3): a pack without `climax_floor`
+runs the iter-36 two-layer clock, byte-identically, and a climax-flagged
+hook without the layer is explicit-trigger-only.
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -73,9 +86,12 @@ class SeededHook:
     hook tag and the pack's `director.hooks` config declared what to do
     about it. A hook with no explicit trigger is stagnation-only — it
     releases only when entropy drops below the floor (the
-    lowest-threshold one wins, phase0 §4). Immutable; the Director
-    tracks release state via a separate index set, not by mutating the
-    record (the frozen-ness documents INV-5: a seeded hook is a fact)."""
+    lowest-threshold one wins, phase0 §4) — UNLESS it carries the
+    climax flag (DIR-3): a boss hook never releases from the quiet
+    path; its door is the climax layer (or an explicit trigger).
+    Immutable; the Director tracks release state via a separate index
+    set, not by mutating the record (the frozen-ness documents INV-5:
+    a seeded hook is a fact)."""
 
     tag: str
     seeded_by_event: str
@@ -87,6 +103,7 @@ class SeededHook:
     intent_target: str | None
     intent_fields: Mapping[str, Any]
     trigger: Mapping[str, Any] | None  # {"kind": "time"|"place"|"threshold", ...}
+    climax: bool = False  # DIR-3: the boss-beat flag (pack data)
 
 
 class DirectorPolicy(Protocol):
@@ -95,7 +112,11 @@ class DirectorPolicy(Protocol):
     beat. The minimal pair (Enabled / Disabled) covers T8's A/B
     baseline; multi-channel (threat / social / ambient) remains a
     phase-3 refinement, recorded not built (the pacing clock landed
-    iter-36 — it is Director-side state, not a policy)."""
+    iter-36 — it is Director-side state, not a policy). The climax
+    question (DIR-3) is separate from the quiet-path question: the
+    boss releases at high entropy where the stagnation path releases
+    at low entropy — one boolean, `permit_release`, cannot serve both
+    honestly."""
 
     def permit_release(
         self,
@@ -103,11 +124,16 @@ class DirectorPolicy(Protocol):
         current_entropy: int,
     ) -> bool: ...
 
+    def permit_climax(self) -> bool: ...
+
 
 @dataclass(frozen=True, slots=True)
 class EnabledPolicy:
     """Default: explicit triggers always release (causal); stagnation
-    releases the lowest-threshold hook when entropy < floor."""
+    releases the lowest-threshold hook when entropy < floor; the climax
+    path is permitted whenever the pacing gates pass (the clock state
+    and the layered threshold decided — the policy only switches the
+    director on or off)."""
 
     entropy_floor: int
 
@@ -118,16 +144,22 @@ class EnabledPolicy:
             return True
         return current_entropy < self.entropy_floor
 
+    def permit_climax(self) -> bool:
+        return True
+
 
 @dataclass(frozen=True, slots=True)
 class DisabledPolicy:
-    """T8 A/B baseline: no releases ever. The buffer still seeds — D-005
-    hygiene holds (a complication from nowhere is still a bug); A/B
-    measures the delta the director's releases make."""
+    """T8 A/B baseline: no releases ever — the boss included. The buffer
+    still seeds — D-005 hygiene holds (a complication from nowhere is
+    still a bug); A/B measures the delta the director's releases make."""
 
     def permit_release(
         self, explicit_trigger_fires: bool, current_entropy: int
     ) -> bool:
+        return False
+
+    def permit_climax(self) -> bool:
         return False
 
 
@@ -156,12 +188,19 @@ class PacingConfig:
     clock reads STAGNATION (the detector's own band). `min_peak_beats`
     / `min_rest_beats` are the L4D `PeakDuration` / `RestMinDuration`
     anti-flap floors (a spike is a peak, a peak is followed by a rest —
-    neither may flap on a one-beat entropy dip)."""
+    neither may flap on a one-beat entropy dip).
+
+    `climax_floor` (DIR-3, iter-38) is the optional third threshold
+    layer — the L4D2 three-intensity rule (a Boss threshold gates a
+    Peak threshold gates a Calm threshold). It sits strictly above
+    `peak_floor` (pack lint); `None` means the pack declares two layers
+    and runs the iter-36 clock, byte-identically."""
 
     entropy_floor: int
     peak_floor: int
     min_peak_beats: int
     min_rest_beats: int
+    climax_floor: int | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -180,7 +219,14 @@ class PacingClock:
     (entropy below the stagnation floor — the quiet the detector
     exists to break). Only PEAK and REST suppress releases; the
     RAMP/STAGNATION split is the observable band name (the policy's
-    floor remains the release authority — one owner per law)."""
+    floor remains the release authority — one owner per law).
+
+    PEAK_CLIMAX (DIR-3) is the boss beat itself — one beat, entered
+    ONLY by a climax release (never by entropy alone: the state marks
+    the placement of a high-severity hook, not an intensity band),
+    exited to REST unconditionally (boss beat + reset; a still-loud
+    world breaks the rest on the transition after, per the re-spike
+    law)."""
 
     state: str = "RAMP"
     beats_in_state: int = 0
@@ -189,7 +235,10 @@ class PacingClock:
         """One beat's deterministic transition. PEAK holds its minimum
         even through an entropy dip (hysteresis); REST is broken early
         only by the world re-spiking (entropy back at the peak floor) —
-        the director never ends its own rest with a release."""
+        the director never ends its own rest with a release. The boss
+        beat (PEAK_CLIMAX) ends the peak: the reset is the rest."""
+        if self.state == "PEAK_CLIMAX":
+            return PacingClock("REST", 1)  # boss beat + reset: breathe
         if self.state == "PEAK":
             if (
                 entropy_value < config.peak_floor
@@ -223,7 +272,9 @@ def pacing_from_rules(rules: Mapping[str, Any]) -> PacingConfig | None:
     """The pack's pacing declaration (`director.pacing`), beside
     `policy_from_rules` (the single pacing read). None when the pack
     declares no pacing — the v0.1 minimal pair, release behavior
-    byte-identical (the pack's own declaration is the gate, INV-3)."""
+    byte-identical (the pack's own declaration is the gate, INV-3).
+    A pacing block without `climax_floor` declares the two-layer
+    iter-36 clock (climax_floor None — the climax path is off)."""
     pacing = rules.get("director", {}).get("pacing")
     if pacing is None:
         return None
@@ -233,6 +284,9 @@ def pacing_from_rules(rules: Mapping[str, Any]) -> PacingConfig | None:
         peak_floor=int(pacing["peak_floor"]),
         min_peak_beats=int(pacing["min_peak_beats"]),
         min_rest_beats=int(pacing["min_rest_beats"]),
+        climax_floor=(
+            int(pacing["climax_floor"]) if "climax_floor" in pacing else None
+        ),
     )
 
 
@@ -399,6 +453,7 @@ class Director:
                     intent_target=spec["intent"].get("target"),
                     intent_fields=dict(spec["intent"].get("fields", {})),
                     trigger=spec.get("trigger"),
+                    climax=bool(spec.get("climax", False)),
                 )
             )
 
@@ -408,14 +463,14 @@ class Director:
         beat_tick: int,
     ) -> list[IntentData]:
         """One beat's worth of releases (phase0 §4): explicit triggers
-        fire causally first; if none fire and the policy permits a
-        stagnation release (entropy < floor under EnabledPolicy), the
-        stagnation detector releases the lowest-threshold hook. Budget:
-        1 release per beat (the director never spams). A rejected
-        director Intent consumes the budget (per-NPC cooldown follows —
-        recorded, the front door does the rejecting). Dead actors (no
-        projection entry / `crime_status == caught`) are never
-        targeted.
+        fire causally first; the climax path (DIR-3) checks the boss
+        gate; then the stagnation detector releases the
+        lowest-threshold hook if the policy permits it (entropy < floor
+        under EnabledPolicy). Budget: 1 release per beat (the director
+        never spams). A rejected director Intent consumes the budget
+        (per-NPC cooldown follows — recorded, the front door does the
+        rejecting). Dead actors (no projection entry /
+        `crime_status == caught`) are never targeted.
 
         Reads observable state only (L6): the projection and the
         seeded-hook buffer — never knowledge records, never PC
@@ -454,7 +509,33 @@ class Director:
                 continue
             self._mark_released(idx, hook.target_npc)
             return [self._intent(hook)]
-        # 2) stagnation release — entropy < floor → lowest-threshold hook.
+        # 2) climax release (DIR-3, the L4D2 three-intensity rule + the
+        # boss-beat rule): a climax-flagged hook releases at the END of a
+        # peak — the clock in PEAK having held `min_peak_beats` (the
+        # placement law: boss beats end peaks, never start them), entropy
+        # at the third layer (`climax_floor`, strictly above the peak
+        # floor — pack lint). The release marks the beat PEAK_CLIMAX (one
+        # beat); the next transition is REST — the post-climax breathing
+        # room the clock already defines. The pack's declaration is the
+        # gate (INV-3): no `climax_floor`, no climax path — and a
+        # climax-flagged hook never falls through to the quiet path.
+        if self._climax_gate(current_entropy):
+            candidates = [
+                (idx, hook) for idx, hook in unreleased
+                if hook.climax
+                and not self._on_cooldown(hook.target_npc)
+                and self._target_alive(projection, hook.target_npc)
+            ]
+            if candidates:
+                candidates.sort(
+                    key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick)
+                )
+                idx, hook = candidates[0]
+                self._mark_released(idx, hook.target_npc)
+                assert self._pacing is not None  # the gate passed: pacing exists
+                self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
+                return [self._intent(hook)]
+        # 3) stagnation release — entropy < floor → lowest-threshold hook.
         # The pacing clock gates the drama path (DIR-1): PEAK (the world
         # is loud) and REST (post-peak breathing room) suppress
         # re-injection — the flat v0.1 detector released the beat after
@@ -471,7 +552,8 @@ class Director:
             return []
         candidates = [
             (idx, hook) for idx, hook in unreleased
-            if not self._on_cooldown(hook.target_npc)
+            if not hook.climax  # the boss never spawns because the world is boring
+            and not self._on_cooldown(hook.target_npc)
             and self._target_alive(projection, hook.target_npc)
         ]
         if not candidates:
@@ -484,6 +566,26 @@ class Director:
         return [self._intent(hook)]
 
     # -- helpers (private) ---------------------------------------------------
+
+    def _climax_gate(self, current_entropy: int) -> bool:
+        """The layered-threshold release gate (DIR-3): the pack declares
+        the third layer AND the clock is at a peak's end (PEAK having
+        held its minimum) AND entropy sits at the climax layer AND the
+        policy permits the boss path. Note the clock's PEAK_CLIMAX
+        state does not re-open this gate (state != PEAK) — no double
+        boss; a PEAK entry beat below `min_peak_beats` is the peak's
+        start, not its end (the L4D placement law)."""
+        if self._pacing_config is None or self._pacing is None:
+            return False
+        if self._pacing_config.climax_floor is None:
+            return False
+        if self._pacing.state != "PEAK":
+            return False
+        if self._pacing.beats_in_state < self._pacing_config.min_peak_beats:
+            return False
+        if current_entropy < self._pacing_config.climax_floor:
+            return False
+        return self.policy.permit_climax()
 
     def _advance_pacing(self, current_entropy: int) -> None:
         """One beat's clock transition — guarded so a repeated

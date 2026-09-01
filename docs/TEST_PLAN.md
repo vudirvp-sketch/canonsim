@@ -198,3 +198,8 @@ fires, so REST never gates anything — the D-065 "un-tuned numbers"
 note gets its answer). A measurable delta needs a script/pack that
 walks the world into quiet — a phase-3 gate-protocol script-set
 question, recorded in D-066, not forced here.
+
+Re-measured at iter-38 (DIR-3, the climax layer landed): 10 seeds,
+both arms byte-identical, stretch blocks equal — the climax layer is
+likewise inert without a climax-flagged hook (the pack declares
+`climax_floor` 75, no hook carries the flag; D-067).

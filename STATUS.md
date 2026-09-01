@@ -1,26 +1,28 @@
 # STATUS — canonsim
 
-Iteration: iter-37 (`iter-37-eventless-stretch` — the owner's
-"continue per the plan" session call; the phase-3 backlog's top
-un-gated item, dir-2; a code iteration) · Phase: 3 (Director)
-**OPEN — DIR-1 landed (D-065), DIR-2 landed (D-066)** · Date:
-2026-09-01 · Scope: the exit criterion's instrument —
-`core.metrics.eventless_beat_stretches` (tale-gate scene events over
-the `urgencies.beat_ticks` window axis, `(prev_beat, beat]` windows,
-trailing partial dropped; `IMPORTANCE_ORDER` moved to `core/log.py`,
-the chronicle imports it — one owner of the ordering) + the harness
-`--pacing on|off` A/B (the clock-off arm = a linted pack variant
-minus `director.pacing` under `output/`; zero core changes; requires
-`--directors on`). Measured (1000 seeds, day1_full, director on):
-both arms byte-identical per-seed — max stretch 1, one 1-beat
-stretch per run (the (360,720] phase-boundary window), quiet
-1000/1000; the clock is inert on this pack+script (every run ends
-in PEAK — the stagnation path never fires; D-065's "un-tuned"
-note answered). KI#61 (loop comment named the never-read
-`director.stagnation.beat_ticks` — dead pack key deleted, zero
-behavior change) + KI#62 (worklog order/cap drift: bg-3 below the
-tombstones, 11 live entries) opened + closed. Tests 708→727, ruff
-clean.
+Iteration: iter-38 (`iter-38-climax` — the owner's
+"continue work per the plan" session call; the phase-3 backlog's top
+un-gated item, dir-3; a code iteration) · Phase: 3 (Director)
+**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067) landed** · Date:
+2026-09-01 · Scope: the climax layer — the L4D2 three-intensity rule
+as pack data (`director.pacing.climax_floor`, 75 = 3× peak_floor 25;
+lint: strictly above the peak floor) + the climax release path (a
+climax-flagged hook at the END of a peak — clock in PEAK held
+`min_peak_beats`, entropy at the third layer; excluded from the quiet
+path: a boss never spawns because the world is boring) + the one-beat
+`PEAK_CLIMAX` state (entered only by a climax release, exited to
+REST — boss beat + reset) + the `permit_climax` policy question
+(separate from `permit_release`: the boss fires at high entropy,
+the stagnation path at low). The tavern pack declares the layer,
+no hook carries the flag: the flag was probed live (the full suite
+green with `possible_document_check.climax: true`), but the v0.1
+stub intent would make a hollow boss — the flag lands with the
+`document_check` action (DIRECTOR_SPEC §11), the owner's content
+call. Fixture discipline: T1/T8/corpus/metrics byte-identical (the
+layer is inert without a flagged hook; the harness A/B re-measured
+— 10 seeds, both arms byte-identical, stretch blocks equal). KI#60
+deleted per AGENTS §5 (closed iter-36, two iterations past). Tests
+727→739, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -58,11 +60,8 @@ clean.
   to its chronological position between iter-35 and iter-34; the
   over-cap pair iter-30/iter-29 evicted with the iter-37 insertion).
 
-- KI#60 · doc drift: `docs/blueprint/phases.md` §2 header still read
-  "OPEN (iter-31, D-062)" after iter-35 closed phase 2 (ROADMAP §2's
-  State column owns closed/open) · CLOSED iter-36 (flipped to the
-  D-064 closure, the §1 header pattern).
-
+- (KI#60 deleted at iter-38 per AGENTS §5 — closed iter-36, two
+  iterations past; the lesson lives in the FAQ + git.)
 - (KI#55–59 deleted at iter-36 per AGENTS §5 — closed iter-34, two
   iterations past; the lessons live in the FAQ + git.)
 
@@ -390,18 +389,21 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37 — the pacing clock D-065 + the
-exit-criterion instrument D-066 landed).** The arc lives in
-`docs/TASKS.md`'s phase-3 backlog: `dir-3` (L4D2 layered thresholds
-+ PEAK_CLIMAX) is the next un-gated item. The dir-2 measurement's
-honest finding: the clock is inert on day1_full (every run ends in
-PEAK — a measurable delta needs a gate-protocol script set that
-walks the world into quiet; recorded in D-066, a phase-gate
-question, not forced).
+**Phase 3 is OPEN (iter-36/37/38 — the pacing clock D-065 + the
+exit-criterion instrument D-066 + the climax layer D-067 landed).**
+The arc lives in `docs/TASKS.md`'s phase-3 backlog: `dir-4`
+(multi-channel policies — threat / social / ambient) is the next
+un-gated item. The dir-3 remainder (the boss flag on a tavern hook)
+waits on the `document_check` action decision — DIRECTOR_SPEC §11,
+the owner's content call. The dir-2 measurement's honest finding
+stands: the clock is inert on day1_full (every run ends in PEAK —
+a measurable delta needs a gate-protocol script set that walks the
+world into quiet; recorded in D-066, a phase-gate question, not
+forced).
 
-1. **Phase-3 arc** (TASKS backlog): dir-3 → dir-4 (the
-   director-evolution run), drama-1 (the Paradox event grammar),
-   social-1/2/arc-1 (the social-depth run).
+1. **Phase-3 arc** (TASKS backlog): dir-4 → the owner-gated content
+   decisions (`document_check` + the climax flag) → drama-1 (the
+   Paradox event grammar), social-1/2/arc-1 (the social-depth run).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

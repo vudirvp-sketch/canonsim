@@ -10,6 +10,33 @@
 > since iter-5).
 
 ---
+iter-38 · 2026-09-01 · dir-3 — the climax layer + PEAK_CLIMAX
+(iter-38-climax; the owner's "continue work per the plan" session
+call, the phase-3 backlog's top un-gated item)
+- core/director.py: `PacingConfig.climax_floor` (the third entropy
+layer, the L4D2 three-intensity rule) + the climax release path (a
+climax-flagged hook at the END of a peak — clock in PEAK held
+`min_peak_beats`, entropy at the layer; never from the quiet path) +
+the one-beat PEAK_CLIMAX state (entered only by a release, exited to
+REST) + `permit_climax` on the policy protocol (the boss fires at
+HIGH entropy — one boolean cannot serve both paths). rules.json:
+climax_floor 75 (3x peak_floor, the donor ratio); lint: the layer
+strictly above the peak floor, the hook flag boolean. The flag on
+`possible_document_check` was probed live (suite green) but reverted:
+the v0.1 wait-stub would make a hollow boss — the flag lands with
+the document_check action (DIRECTOR_SPEC §11), the owner's call.
+- Scope: 12 files (code 2 + tests 1 + pack 1 + spec 1 + the doc-sync
+  set — the iter-36/37 precedent).
+- KI#60 deleted per AGENTS §5 (closed iter-36, two iterations past).
+Tests 727→739 (+12 test_director.py: the clock's boss-beat exit, the
+layered threshold + peak-minimum + placement gates, the quiet-path
+exclusion, explicit-beats-climax, the no-double-boss guard,
+director-off, the flagless-layer semantics, the two-layer
+byte-identity, the two lint refusals), ruff clean; harness A/B
+re-measured (10 seeds, both arms byte-identical — the layer is inert
+without a flagged hook). D-067; DIRECTOR_SPEC §5 the contract owner;
+bg-4 evicted per the cap.
+---
 iter-37 · 2026-09-01 · dir-2 — the eventless-stretch instrument +
 the pacing A/B (iter-37-eventless-stretch; the owner's "continue per
 the plan" session call, the phase-3 backlog's top un-gated item)
@@ -253,30 +280,7 @@ call — phase 1 closed at D-058, polish done iter-27–29)
   wiring), ruff clean. 7 code+spec+test files + the doc-sync set
   (the iter-12 boundary precedent); iter-22 evicted per the cap.
 ---
-bg-4 · 2026-08-31 · cost notes — the prior-art LLM-simulation
-costs (bg-4-cost-notes)
-- TECH_NOTES §9 (new; single owner of the figures): Park 2023
-  verified against the arXiv full text — "thousands of dollars in
-  token credits" for 25 agents × 2 game days (gpt3.5-turbo,
-  sequential), NO cost table; Zhao et al. 2023 (Lyfe Agents,
-  Appendix F) independent estimate: conservative $2,000 → ≈$25 per
-  agent per human hour at 10× game speed; Park 2024 (1,052
-  participants, GPT-4o) publishes no budget — the 59-agent
-  retrieval analysis alone ran 1,281,040 GPT-4o-mini queries.
-  Honest reading: prior art prices the per-agent-per-step hot loop
-  (N×M×L); our phase-1 bill is beat-proportional (2-call steady
-  state) — reference points for the split, not a cross-over claim.
-- KI#51 (ref/generative_agents.md carried a fabricated cost
-  citation — "Table 2, §6.4, ~$70" never existed in the paper;
-  fixed to the verified quote + the TECH_NOTES §9 link) and KI#52
-  (stray 678-line pre-iter-26 TASKS.md snapshot at the repo root,
-  born in the iter-27 squash commit, over cap, unreferenced —
-  deleted) opened + closed. Doc-only iteration: streak 1 of 2 (the
-  alarm fires at 2; the next iteration must carry code or a fresh
-  owner directive).
-- 629 green, ruff clean (no code touched). 5 files (TECH_NOTES §3
-  pointer + §9, the ref fix, TASKS/STATUS sync, worklog; + root
-  TASKS.md deleted); iter-21 evicted per the cap.
+(bg-4 deleted at iter-38 per the one-in/one-out cap; history in git.)
 ---
 iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
 (iter-30-perf1-profile)

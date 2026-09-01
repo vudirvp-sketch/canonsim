@@ -5,10 +5,12 @@
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
 > ≤300 lines. The pacing clock (DIR-1) landed iter-36 (phase 3, D-065);
-> the phase-3 refinements still recorded-not-built live in §11. The
-> clock's measured impact (DIR-2, iter-37: both pacing arms
-> byte-identical on day1_full — the stagnation path never fires there)
-> is owned by `docs/TEST_PLAN.md` §6.
+> the climax layer (DIR-3) landed iter-38 (D-067); the phase-3
+> refinements still recorded-not-built live in §11. The clock's
+> measured impact (DIR-2, iter-37: both pacing arms byte-identical on
+> day1_full — the stagnation path never fires there; the climax layer
+> likewise inert without a flagged hook, iter-38 re-measured) is owned
+> by `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
@@ -35,6 +37,7 @@ urgencies + reactions + rotations, not director injections.
 | `intent_target` | pack (optional) | entity id or `null` |
 | `intent_fields` | pack | mapping |
 | `trigger` | pack (optional) | `{kind, ...}` (see §3) |
+| `climax` | pack (optional, `director.hooks[tag].climax`) | `bool` — the boss-beat flag (DIR-3; see §5) |
 
 The buffer is **per-run** (folded from the log; reseeds from the
 master seed every run because the events are deterministic per seed).
@@ -67,7 +70,7 @@ perceiver to the director itself. Replaces the v0.1 draft's flat
 `release_after_ticks_without_visible_event: 90` timer — a tension
 floor sensor, not a boredom timer.
 
-## 5. Release policy (the minimal pair + the pacing clock)
+## 5. Release policy (the minimal pair + the pacing clock + the climax layer)
 
 ```python
 class DirectorPolicy(Protocol):
@@ -112,6 +115,34 @@ its beats sit in PEAK (the double-steal suspicion), and its sole
 release is the explicit document-check; the committed fixtures carry
 no stagnation releases, so T1/T8/corpus stay byte-identical.
 
+**The climax layer (DIR-3, landed iter-38; the L4D2 three-intensity
+rule + the boss-beat rule):** layered thresholds — the optional third
+entropy layer `director.pacing.climax_floor`, strictly above
+`peak_floor` (pack lint; the donor's instantiation is 3× the peak
+threshold — this pack's 75 = 3 × 25). A climax-flagged hook releases
+only through the climax path: the clock in PEAK having held
+`min_peak_beats` (the placement law — boss beats END peaks, never
+start them) and entropy at the third layer. The release marks the
+beat `PEAK_CLIMAX` — one beat, entered only by a climax release,
+never by entropy alone (the state marks the placement of a
+high-severity hook, not an intensity band) — and the next transition
+is REST unconditionally (boss beat + reset; a still-loud world breaks
+the rest per the re-spike law, the transition after). Climax hooks
+never release through the stagnation path — a boss does not spawn
+because the world is boring — and explicit triggers stay causal
+(D-005): when both fire at one beat, the explicit path releases
+first and the clock does not mark PEAK_CLIMAX. The policy question is
+separate (`permit_climax()` on the protocol — the boss releases at
+high entropy where the stagnation path releases at low; one boolean
+cannot serve both honestly). A pack without `climax_floor` runs the
+iter-36 two-layer clock byte-identically, and a flagged hook without
+the layer is explicit-trigger-only (the nopacing harness variant is
+exactly that pack — legal, not drift). The tavern pack declares the
+layer but no hook carries the flag yet: probed byte-safe on the
+committed fixtures, but the document-check's v0.1 stub intent would
+make a hollow boss — the flag lands with the `document_check` action
+(§11), the owner's content call.
+
 ## 6. Release budget + cooldown
 
 - **1 release per beat** (the director never spams). The budget is
@@ -142,9 +173,9 @@ fires three pieces in order, each through the commit door (D-037):
    `kind="intent"` band `NPC_REACTION`. A roll that hits but
    preconditions fail stays silent — the NPC tried, the world said
    no (no rejection event; the world's noise floor absorbs it).
-3. **Director releases**: explicit triggers first, then the
-   stagnation detector. Each release produces an IntentData enqueued
-   the same way as an urgency.
+3. **Director releases**: explicit triggers first, then the climax
+   path (DIR-3 — the boss gate), then the stagnation detector. Each
+   release produces an IntentData enqueued the same way as an urgency.
 
 Crossings fire in **tick order**: a beat at T=720 between rotations
 at T=360 and T=1080 fires between them, not after both — otherwise
@@ -198,12 +229,10 @@ suffices.
 ## 11. What this spec does NOT cover (phase-3+ refinements)
 
 - Multi-channel policies (threat / social / ambient) — L4D family.
-- Layered thresholds (L4D2 three-intensity rule) and `PEAK_CLIMAX`
-  (a high-severity hook's release is a climax beat, placed at the end
-  of a peak — donor: the L4D boss rule).
 - The full document_check action (the v0.1 stub uses `wait`; a
   dedicated action arrives when the document-check hook deserves
-  its own resolution).
+  its own resolution — and with it the climax flag on the hook, per
+  §5's scope note).
 - A per-NPC desirability score for hook selection (phase-3).
 
 Recorded, not built — the trigger for each refinement is the
