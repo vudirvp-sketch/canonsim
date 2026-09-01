@@ -10,6 +10,29 @@
 > since iter-5).
 
 ---
+iter-40 · 2026-09-01 · drama-1 — the event grammar's predicate +
+weight layer (iter-40-drama1-predicates; the owner's "continue work
+per the plans" call, the phase-3 backlog's top un-gated item)
+- core/predicates.py (NEW): the JSON predicate grammar over the
+  projection — the 3 v0.1 leaf kinds byte-identical, compound
+  all/any/not + the implicit-AND list root, the generalized `prop`
+  leaf; loud ValueError backstop, pack lint owns load-time shape.
+- core/director.py + pack.py lint + rules.json: triggers delegate to
+  the evaluator; `weight` accepts the multiplier object {base,
+  modifiers[{add|factor, when}]} — entropy + channel entropies read
+  the EFFECTIVE weight per beat (beat_tick threaded);
+  `first_time_only` burns the tag after its first release (burned
+  instances never release, never count toward entropy).
+- The vigil hook instantiates the escalation modifier + burn flag
+  live — T1/T8/corpus byte-identical, a 10-seed grammar-vs-flat A/B
+  10/10 byte-identical (TEST_PLAN §6; a runner outside the repo per
+  Rule 9). Tests 757→794 (+24 tests/test_predicates.py + 13
+  test_director.py), ruff clean. D-069; DIRECTOR_SPEC §3/§3a the
+  contract owner (335/300 kept by §6.1 — the grammar tables are
+  substance; TASKS 649/600 the iter-39 substance precedent); the
+  remainder (options, on_action dispatch, ctx iterators) split to
+  drama-2/drama-3 backlog rows. iter-32 evicted per the cap.
+---
 iter-39 · 2026-09-01 · dir-4 — the multi-channel quiet split
 (iter-39-dir4; the owner's "continue work per the plan" session
 call, the phase-3 backlog's top un-gated item)
@@ -254,40 +277,7 @@ iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth
 ---
 iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
 (iter-32-parse1-say-sessions; the phase-2 arc's first session batch)
-- Six live mode-C sessions (seeds 125/42/4/23/8/41 — walkthrough,
-  texture-pin-on-failed-take, texture promotion, fire chain,
-  disambiguation family, malformed-probe family) driven by a runner
-  outside the repo (scripts/iter32_parse_runner.py, Rule 9) through the
-  REAL stack: Simulator + Mediator + ParserDoor over ONE shared ledger
-  (D-049) — the narrator half establishes, the player's words
-  reference; the operator IS the external parser.
-- PARSER_SPEC §6 tally: 30 utterances (21 intent / 6 question / 2
-  no_intent), 7/7 deliberate off-grammar probes caught loudly, 0 honest
-  misfires → boundary validity 21/21 (the ≥90% criterion MET on this
-  volume; the phase-2 gate review stays the owner's — the iter-24/26
-  precedent); 3 door failures are world answers (take_failed joins
-  intent_rejected in that family) + 1 one-path RunnerError after the
-  pin.
-- Findings distilled live into tests/fixtures/parse_replies.json (6
-  cases, the narrator-beats family; replayed through the real doors in
-  tests/test_parser.py): a PROMOTED entry is terminal (re-reference =
-  off-grammar — found live: the first operator script assumed the
-  candles addressable after the take; the boundary refused, the script
-  was fixed, the catch became a deliberate probe); the fire cascade
-  drains inside the door's own batch (5 events, last
-  location_burned_out — the iter-23 batch law through the say door);
-  failed takes keep live+pinned, committed takes are the promotion
-  (canon birth pinned in the fixture's state asserts).
-- KI#54 (the FAQ crept to 21 entries at iter-31, over the ≤20 cap)
-  opened + closed: the narrate/parse session recipes merged to one
-  entry. 654→660 green, ruff clean. 2 files + the doc-sync set (the
-  iter-25 precedent); iter-23 evicted per the cap. Docs: PARSER_SPEC
-  §7 (the corpus row lands), TASKS, STATUS, AGENT_NAVIGATION §1,
-  README Status. KI#51/KI#52 deleted per AGENTS §5 (closed bg-4, two
-  iterations past). TASKS 598→607 stays over the 600 cap by substance
-  (the iter-22/23 precedent — the session findings carry load; the
-  cruft pass ran: iter-32's own tally restatement cut, single owner
-  STATUS + the fixture's source).
+- (deleted at iter-40 per the one-in/one-out cap; history in git.)
 ---
 iter-31 · 2026-09-01 · phase-2 parser door — the mode-C boundary's
 LLM-free half

@@ -4,26 +4,24 @@
 > of the director's runtime contract; the blueprint `docs/blueprint/
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
-> ≤300 lines. The pacing clock (DIR-1) landed iter-36 (phase 3, D-065);
-> the climax layer (DIR-3) landed iter-38 (D-067); the multi-channel
-> split (DIR-4) landed iter-39 (D-068); the phase-3 refinements still
-> recorded-not-built live in §11. The clock's measured impact (DIR-2,
-> iter-37: both pacing arms byte-identical on day1_full — the
-> stagnation path never fires there; the climax layer likewise inert
-> without a flagged hook, iter-38 re-measured; the channel split
-> likewise inert on day1_full, iter-39 re-measured) is owned by
-> `docs/TEST_PLAN.md` §6.
+> ≤300 lines. Phase-3 landings: the pacing clock DIR-1 (iter-36,
+> D-065), the climax layer DIR-3 (iter-38, D-067), the multi-channel
+> split DIR-4 (iter-39, D-068), the event grammar's predicate + weight
+> layer drama-1 (iter-40, D-069); the phase-3 refinements still
+> recorded-not-built live in §11. Measured impact (every landing
+> byte-identical on day1_full — the D-066 all-PEAK window; the grammar
+> layer's 10-seed A/B included, iter-40): `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
 A **consequence planner** (D-005) that releases already-seeded hooks
 into the world through the intent door — never an improviser. The
-buffer holds hooks seeded at event time; triggers (time / place /
-threshold) fire causally; the stagnation detector releases the
-lowest-threshold hook when narrative entropy (P2e) drops below the
-pack's floor. Director-off (T8 A/B baseline) keeps the buffer seeding
-but suppresses releases — the world's emergent chains come from
-urgencies + reactions + rotations, not director injections.
+buffer holds hooks seeded at event time; predicate triggers (§3) fire
+causally; the stagnation detector releases the lowest-threshold hook
+when narrative entropy (P2e) drops below the pack's floor. Director-off
+(T8 A/B baseline) keeps the buffer seeding but suppresses releases —
+the world's emergent chains come from urgencies + reactions +
+rotations, not director injections.
 
 ## 2. The buffer
 
@@ -32,15 +30,17 @@ urgencies + reactions + rotations, not director injections.
 | `tag` | event (the `hooks[]` entry) | `str` |
 | `seeded_by_event` | commit door | event id |
 | `seeded_at_tick` | commit door | `int` |
-| `weight` | pack (`director.hooks[tag].weight`) | `int ≥ 0` |
+| `weight` | pack (`director.hooks[tag].weight`) | `int ≥ 0` — the BASE tension (drama-1: a flat int, or the `weight_multiplier` object `{base, modifiers}` — see §3a) |
 | `release_threshold` | pack | `int ≥ 0` |
 | `target_npc` | pack | npc id |
 | `intent_kind` | pack | action name |
 | `intent_target` | pack (optional) | entity id or `null` |
 | `intent_fields` | pack | mapping |
-| `trigger` | pack (optional) | `{kind, ...}` (see §3) |
+| `trigger` | pack (optional) | a predicate spec (see §3) |
 | `climax` | pack (optional, `director.hooks[tag].climax`) | `bool` — the boss-beat flag (DIR-3; see §5) |
 | `channel` | pack (optional, `director.hooks[tag].channel`) | `str` — the hook's pacing dimension (DIR-4; see §5) |
+| `weight_modifiers` | pack (drama-1, from the multiplier object) | the modifier tail — see §3a |
+| `first_time_only` | pack (optional, `director.hooks[tag].first_time_only`) | `bool` — the Wesnoth fire-only-once release policy (drama-1): once any instance of the tag releases, the tag burns for the run; burned instances stay facts in the buffer but never release and never count toward entropy (un-dischargeable tension is noise, not tension) |
 
 The buffer is **per-run** (folded from the log; reseeds from the
 master seed every run because the events are deterministic per seed).
@@ -48,21 +48,64 @@ The pack data (`director.hooks`, policies, stagnation parameters) is
 constant across runs. Director adaptation state never persists (INV-1:
 `state = fold(log)`, the log is per-run).
 
-## 3. Triggers (causal — fire regardless of entropy)
+## 3. Triggers (drama-1 predicates — causal, fire regardless of entropy)
+
+A hook's `trigger` is a **predicate spec** — a JSON structure over the
+folded projection, evaluated by `core/predicates.py` (the grammar's
+single owner; pack lint validates the shape at load, the evaluator is
+the loud runtime backstop). Pure (INV-2): a predicate only answers,
+never schedules (TIME-1 — MTTH is the named anti-pattern the grammar
+exists to replace).
+
+Leaves (a Mapping carrying `kind`):
 
 | Kind | Fields | Fires when |
 |---|---|---|
 | `time` | `tick` | `beat_tick ≥ tick` |
 | `place` | `target_npc`, `location` | the target's projection position == location |
 | `threshold` | `target_npc`, `axis`, `comparator` (`at_least` / `at_most`), `value` | the target's `relations.<axis>` meets the comparison |
+| `prop` | `of`, `path`, `comparator` (`at_least` / `at_most` / `equals` / `not_equals`), `value` | the generalized projection read: any entity, any prop path |
+
+Compounds (one discriminator key per node): `{"all": [spec, ...]}`
+(AND), `{"any": [spec, ...]}` (OR), `{"not": spec}` (single inner —
+the donor's own recommendation). A bare LIST of specs is the
+implicit-AND root (the Paradox trigger body). The v0.1 leaf kinds run
+unchanged through the grammar — a pack's flat triggers are
+byte-identical. A missing prop / missing entity answers False (a
+world answer, not an error); a bool never equals a number (`True != 1`
+guarded); empty `all`/`any` lists are dead vocabulary (L1 — pack lint
+rejects them).
 
 A hook with `trigger: null` is **stagnation-only** — its trigger
 never fires on its own; it relies on the stagnation detector.
 
+## 3a. The weight_multiplier (drama-1 — context-sensitive tension)
+
+`director.hooks[tag].weight` is a flat int (the v0.1 form) or the
+multiplier object:
+
+```json
+{"base": 2,
+ "modifiers": [
+   {"add": 2, "when": {"kind": "threshold", "...": "..."}},
+   {"factor": 0.5, "when": {"kind": "prop", "...": "..."}}
+ ]}
+```
+
+Each modifier carries EXACTLY one of `add` (int ≥ 0) or `factor`
+(number ≥ 0 — 0 legally zeroes the tension) plus a `when` predicate
+(any spec from §3). The entropy sensor reads the **effective weight**
+per beat: base, then each modifier whose `when` passes, in declaration
+order — `add` sums, `factor` multiplies and truncates. Pure per
+INV-2: a stored effective weight would be a projection inside the
+buffer (L3); the buffer keeps data, evaluation computes the number.
+The channel entropies read the same effective values (DIR-4). A pack
+with flat weights runs the v0.1 entropy, byte-identically.
+
 ## 4. Narrative entropy (P2e)
 
 ```
-entropy = sum(weight of unreleased hooks)
+entropy = sum(EFFECTIVE weight of unreleased, un-burned hooks)
         + sum(relations.suspicion across NPCs with the axis)
         + count of burning <layer>.<spot> props across all locations
 ```
@@ -124,11 +167,9 @@ declaration is the gate, INV-3).
 The clock is derived state — a deterministic fold of the per-beat
 entropy sequence (INV-2: same log → same clock → same releases); it
 writes nothing, and `TimeSincePeak` / `TimeSinceRest` (the donor's
-two-clock fields) are the state machine itself. Measured impact at
-landing (iter-36): the day1_full ON log is unchanged — all three of
-its beats sit in PEAK (the double-steal suspicion), and its sole
-release is the explicit document-check; the committed fixtures carry
-no stagnation releases, so T1/T8/corpus stay byte-identical.
+two-clock fields) are the state machine itself. Measured at landing:
+day1_full byte-identical, no fixture regen (TEST_PLAN §6 owns the
+numbers).
 
 **The climax layer (DIR-3, landed iter-38; the L4D2 three-intensity
 rule + the boss-beat rule):** layered thresholds — the optional third
@@ -153,10 +194,9 @@ cannot serve both honestly). A pack without `climax_floor` runs the
 iter-36 two-layer clock byte-identically, and a flagged hook without
 the layer is explicit-trigger-only (the nopacing harness variant is
 exactly that pack — legal, not drift). The tavern pack declares the
-layer but no hook carries the flag yet: probed byte-safe on the
-committed fixtures, but the document-check's v0.1 stub intent would
-make a hollow boss — the flag lands with the `document_check` action
-(§11), the owner's content call.
+layer but no hook carries the flag yet — the document-check's v0.1
+stub intent would make a hollow boss; the flag lands with the
+`document_check` action (§11), the owner's content call.
 
 **The multi-channel split (DIR-4, landed iter-39; the L4D
 three-director family — Horde / S.I. / Music → threat / social /
@@ -186,10 +226,9 @@ cooldown and the dead-actor skip. This pack's instantiation: threat 3
 self-blocks; `possible_document_check` fires causally), social 5 (the
 v0.1 floor carried, suspicion-bound; `guard_suspicious_of_pc`),
 ambient 2 (inputless noise floor — declared-but-dormant, no hook
-carries it yet, the owner's content call). Measured at landing
-(iter-39): 10 seeds of day1_full, channels vs no-channels arms
-byte-identical — the quiet path never fires there (the D-066
-all-PEAK finding; the unit tests exercise the split directly).
+carries it yet, the owner's content call). Measured at landing: the
+10-seed A/B byte-identical (TEST_PLAN §6; the unit tests exercise
+the split directly).
 
 ## 6. Release budget + cooldown
 
@@ -284,6 +323,12 @@ suffices.
 - A per-NPC desirability score for hook selection (phase-3).
 - Ambient-channel content (the tavern pack declares the dimension; no
   hook carries it — a content-scale decision, the owner's call).
+- The event grammar's remainder (drama-2/3, phases.md §3): option
+  blocks with per-option availability gates + the
+  `immediate`/`option`/`after` lifecycle, and the on_action dispatch
+  table with append-not-overwrite composition (the ctx scope helpers
+  ride with them — the predicate layer landed iter-40 is their
+  foundation, not their replacement).
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

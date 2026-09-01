@@ -33,6 +33,7 @@ from core.intent import (
     PRESENT_SITES,
     REJECTION_EVENT,
 )
+from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
 from core.resolvers import REGISTRY
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 
@@ -80,6 +81,104 @@ def _require(condition: bool, message: str) -> None:
 
 def _ids(records: list[Mapping[str, Any]]) -> set[str]:
     return {record["id"] for record in records}
+
+
+def _is_int(value: Any) -> bool:
+    """A JSON integer (bool excluded — a flag is never a count)."""
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _is_number(value: Any) -> bool:
+    """A JSON number (int or float, bool excluded)."""
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _predicate_error(
+    spec: Any,
+    where: str,
+    npc_ids: set[str],
+    location_ids: set[str],
+    relation_axes: set[str],
+    entity_ids: set[str],
+) -> str | None:
+    """Validate one drama-1 predicate spec (core/predicates.py owns the
+    grammar; this is the load-time shape gate — the evaluator's loud
+    ValueError is the runtime backstop, never the first line of defense).
+    Returns the error message or None when the spec is valid. Recursive;
+    `where` carries the pack path for the message (e.g.
+    `director.hooks['x'].trigger.all[0]`)."""
+    if isinstance(spec, list):
+        if not spec:  # L1: an empty AND is dead vocabulary
+            return f"{where}: an empty predicate list is dead vocabulary"
+        for index, item in enumerate(spec):
+            error = _predicate_error(
+                item, f"{where}[{index}]", npc_ids, location_ids,
+                relation_axes, entity_ids,
+            )
+            if error:
+                return error
+        return None
+    if not isinstance(spec, Mapping) or not spec:
+        return f"{where}: predicate must be a non-empty object or a list"
+    compounds = [key for key in COMPOUND_KEYS if key in spec]
+    if compounds:
+        if len(spec) != 1:
+            return (
+                f"{where}: a compound carries extra keys {sorted(spec)} "
+                f"beside {compounds[0]!r}"
+            )
+        inner = spec[compounds[0]]
+        if compounds[0] == "not":
+            return _predicate_error(
+                inner, f"{where}.not", npc_ids, location_ids,
+                relation_axes, entity_ids,
+            )
+        if not isinstance(inner, list) or not inner:  # L1: dead vocabulary
+            return f"{where}.{compounds[0]}: must be a non-empty list"
+        for index, item in enumerate(inner):
+            error = _predicate_error(
+                item, f"{where}.{compounds[0]}[{index}]", npc_ids,
+                location_ids, relation_axes, entity_ids,
+            )
+            if error:
+                return error
+        return None
+    kind = spec.get("kind")
+    if kind not in LEAF_KINDS:
+        return f"{where}: kind must be one of {list(LEAF_KINDS)}, got {kind!r}"
+    if kind == "time":
+        if not _is_int(spec.get("tick")) or spec["tick"] < 0:
+            return f"{where}: time predicate needs a non-negative integer tick"
+    elif kind == "place":
+        if spec.get("target_npc") not in npc_ids:
+            return f"{where}: place predicate target_npc must name an npc"
+        if spec.get("location") not in location_ids:
+            return f"{where}: place predicate location must name a location"
+    elif kind == "threshold":
+        if spec.get("target_npc") not in npc_ids:
+            return f"{where}: threshold predicate target_npc must name an npc"
+        if spec.get("axis") not in relation_axes:
+            return f"{where}: threshold predicate axis must be a relations axis"
+        if spec.get("comparator") not in ("at_least", "at_most"):
+            return f"{where}: threshold comparator must be at_least|at_most"
+        if not _is_int(spec.get("value")):
+            return f"{where}: threshold value must be an integer"
+    else:  # prop — the generalized projection read (drama-1)
+        if spec.get("of") not in entity_ids:
+            return f"{where}: prop predicate 'of' must name an entity"
+        if not isinstance(spec.get("path"), str) or not spec["path"]:
+            return f"{where}: prop predicate 'path' must be a non-empty string"
+        if spec.get("comparator") not in COMPARATORS:
+            return (
+                f"{where}: prop comparator must be one of {list(COMPARATORS)}"
+            )
+        if spec.get("comparator") in ("at_least", "at_most") and not _is_int(
+            spec.get("value")
+        ):
+            return f"{where}: prop {spec['comparator']} needs an integer value"
+        if "value" not in spec:
+            return f"{where}: prop predicate needs a value"
+    return None
 
 
 class _Lint:
@@ -1002,11 +1101,16 @@ class _Lint:
             return
         entities = self._data["entities.json"]
         npc_ids = _ids(entities["npcs"])
+        location_ids = _ids(entities["locations"])
+        entity_ids = (
+            location_ids | npc_ids | _ids(entities["ambient_entities"])
+            | _ids(entities["items"])
+        )
         relation_axes = set(rules["relations"]["axes"])
         actions = {a["intent"]: a for a in self._data["actions.json"]["actions"]}
         for trigger_kind in config.get("triggers", ()):
             _require(
-                trigger_kind in ("time", "place", "threshold"),
+                trigger_kind in LEAF_KINDS,
                 f"director.triggers: unknown kind {trigger_kind!r}",
             )
         stagnation = config.get("stagnation", {})
@@ -1093,11 +1197,67 @@ class _Lint:
                 channel_names.add(str(name))
         for tag, spec in config.get("hooks", {}).items():
             where = f"director.hooks[{tag!r}]"
+            # drama-1 (iter-40): the hook weight — a flat non-negative
+            # int (the v0.1 form) or the weight_multiplier object
+            # {base, modifiers}: base int >= 0, each modifier EXACTLY one
+            # of add (int >= 0) | factor (number >= 0) plus a `when`
+            # predicate (the evaluator applies them in declaration
+            # order; a factor of 0 legally zeroes the tension)
+            weight_spec = spec.get("weight")
+            if isinstance(weight_spec, Mapping):
+                _require(
+                    _is_int(weight_spec.get("base")) and weight_spec["base"] >= 0,
+                    f"{where}: weight.base must be a non-negative integer",
+                )
+                modifiers = weight_spec.get("modifiers", ())
+                _require(
+                    isinstance(modifiers, list),
+                    f"{where}: weight.modifiers must be a list",
+                )
+                for index, modifier in enumerate(modifiers):
+                    mwhere = f"{where}.weight.modifiers[{index}]"
+                    _require(
+                        isinstance(modifier, Mapping),
+                        f"{mwhere}: must be an object",
+                    )
+                    has_add = "add" in modifier
+                    has_factor = "factor" in modifier
+                    _require(
+                        has_add != has_factor,
+                        f"{mwhere}: exactly one of add|factor is required "
+                        "(the donor's shape — never both)",
+                    )
+                    if has_add:
+                        _require(
+                            _is_int(modifier["add"]) and modifier["add"] >= 0,
+                            f"{mwhere}: add must be a non-negative integer",
+                        )
+                    else:
+                        _require(
+                            _is_number(modifier["factor"])
+                            and modifier["factor"] >= 0,
+                            f"{mwhere}: factor must be a non-negative number",
+                        )
+                    when = modifier.get("when")
+                    error = _predicate_error(
+                        when, f"{mwhere}.when", npc_ids, location_ids,
+                        relation_axes, entity_ids,
+                    )
+                    _require(
+                        error is None,
+                        error or "unreachable",
+                    )
+            else:
+                _require(
+                    _is_int(weight_spec) and weight_spec >= 0,
+                    f"{where}: weight must be a non-negative integer or a "
+                    "weight_multiplier object",
+                )
+            # drama-1: the Wesnoth fire-only-once release policy — boolean
             _require(
-                isinstance(spec.get("weight"), int)
-                and not isinstance(spec.get("weight"), bool)
-                and spec["weight"] >= 0,
-                f"{where}: weight must be a non-negative integer",
+                "first_time_only" not in spec
+                or isinstance(spec.get("first_time_only"), bool),
+                f"{where}: first_time_only must be a boolean",
             )
             # iter-38 (DIR-3): the boss-beat flag — a boolean; a climax
             # hook without a climax_floor layer is legal (explicit-trigger
@@ -1141,33 +1301,18 @@ class _Lint:
             )
             trigger = spec.get("trigger")
             if trigger is not None:
-                _require(
-                    trigger.get("kind") in ("time", "place", "threshold"),
-                    f"{where}: trigger.kind must be time|place|threshold",
+                # drama-1 (iter-40): the full predicate grammar — the
+                # v0.1 leaf kinds unchanged, plus compound all/any/not
+                # forms, the implicit-AND list root, and the generalized
+                # `prop` leaf (core/predicates.py owns the vocabulary)
+                error = _predicate_error(
+                    trigger, f"{where}.trigger", npc_ids, location_ids,
+                    relation_axes, entity_ids,
                 )
-                if trigger["kind"] == "time":
-                    _require(
-                        isinstance(trigger.get("tick"), int)
-                        and not isinstance(trigger.get("tick"), bool)
-                        and trigger["tick"] >= 0,
-                        f"{where}: time trigger needs a non-negative tick",
-                    )
-                elif trigger["kind"] == "place":
-                    _require(
-                        trigger.get("target_npc") in npc_ids
-                        and trigger.get("location") in _ids(entities["locations"]),
-                        f"{where}: place trigger needs target_npc + location",
-                    )
-                elif trigger["kind"] == "threshold":
-                    _require(
-                        trigger.get("target_npc") in npc_ids
-                        and trigger.get("axis") in relation_axes
-                        and trigger.get("comparator") in ("at_least", "at_most")
-                        and isinstance(trigger.get("value"), int)
-                        and not isinstance(trigger.get("value"), bool),
-                        f"{where}: threshold trigger needs target_npc + axis + "
-                        f"comparator + integer value",
-                    )
+                _require(
+                    error is None,
+                    error or "unreachable",
+                )
 
     # -- brief (iter-8: the phase-1 assembler contract, BRIEF_SPEC §6) --------
 

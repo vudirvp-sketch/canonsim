@@ -1,34 +1,34 @@
 # STATUS — canonsim
 
-Iteration: iter-39 (`iter-39-dir4` — the owner's "continue work
-per the plan" session call; the phase-3 backlog's top un-gated item,
-dir-4; a code iteration) · Phase: 3 (Director)
-**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068)
-landed** · Date: 2026-09-01 · Scope: the multi-channel quiet split —
-the L4D three-director family (Horde / S.I. / Music → threat /
-social / ambient, the names are the pack's own). `director.channels`
-declares the pacing dimensions: an `entropy_floor` + the observable
-inputs it binds (the closed vocabulary `suspicion |
-physical_threats`; the channel's own unreleased hook weights always
-feed it — a channel never senses another channel's hooks). A hook
-opts in per hook (`channel` — the per-hook opt-in mirrors the climax
-flag): the quiet gate asks the hook's OWN channel's floor against
-that channel's entropy, so a quiet social channel can inject while
-the threat channel burns. Channelless hooks keep the v0.1 global
-floor (the mixed mode is legal); a tag without the block is inert
-dormant vocabulary. Global ON PURPOSE: the pacing clock (one drama
-arc over TOTAL entropy), the budget (1/beat, the global tiebreak),
-the climax path, explicit triggers (D-005), the cooldown. Pack
-instantiation: threat 3 (the document-check's weight self-blocks the
-quiet path — an escalation never spawns because the world is
-boring), social 5 (guard_suspicious_of_pc), ambient 2
-(inputless, declared-but-dormant — the owner's content call).
-Fixture discipline: T1/T8/corpus byte-identical; a 10-seed
-channels-vs-no-channels A/B 10/10 byte-identical (the quiet path
-never fires on day1_full — the D-066 all-PEAK window; the split is
-unit-pinned). KI#63 (phases.md §3 listed iter-38's landings as
-still-ahead + the nav tests row missed the climax suite) opened +
-closed. Tests 739→757, ruff clean.
+Iteration: iter-40 (`iter-40-drama1-predicates` — the owner's
+"continue work per the plans" session call; the phase-3 backlog's
+top un-gated item, drama-1; a code iteration) · Phase: 3 (Director)
+**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068),
+drama-1 (D-069) landed** · Date: 2026-09-01 · Scope: the Paradox
+event grammar's predicate + weight layer — the foundation the
+option/on_action layers compose on. `core/predicates.py` (new): the
+JSON predicate grammar over the projection — the three v0.1 leaf
+kinds run byte-identically through it, compound `all`/`any`/`not`
++ the implicit-AND list root + the generalized `prop` leaf (any
+entity, any path, four comparators; missing props answer honestly;
+`True != 1` guarded); loud ValueError backstop, pack lint validates
+the shape at load. `core/director.py`: triggers delegate to the
+evaluator; the hook weight accepts the `weight_multiplier` object
+(`base` + `modifiers[{add|factor, when}]` — the entropy sensor and
+the channel entropies read the EFFECTIVE weight per beat, pure per
+INV-2, declaration-order application, factor truncates, 0 legally
+zeroes); `first_time_only` burns the tag after its first release
+(burned instances stay facts, never release, never count toward
+entropy — un-dischargeable tension is noise). Live instantiation:
+the vigil hook's escalation modifier (base 2 + 2 when the watcher's
+suspicion ≥ 50) + the burn flag. Fixture discipline: T1/T8/corpus
+byte-identical; a 10-seed grammar-vs-flat A/B 10/10 byte-identical
+(TEST_PLAN §6 — the escalation arm needs suspicion ≥ 50 which
+already saturates every quiet gate; the vigil never releases on
+those runs); the escalation, truncation, and burn laws unit-pinned.
+Tests 757→794 (+24 test_predicates.py + 13 test_director.py), ruff
+clean. The grammar's remainder (option blocks, on_action dispatch,
+ctx iterators) split to the drama-2/drama-3 backlog rows.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -393,23 +393,28 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38/39 — the pacing clock D-065 + the
+**Phase 3 is OPEN (iter-36/37/38/39/40 — the pacing clock D-065 + the
 exit-criterion instrument D-066 + the climax layer D-067 + the
-multi-channel split D-068 landed).** The arc lives in
-`docs/TASKS.md`'s phase-3 backlog: `drama-1` (the Paradox event
-grammar) is the next un-gated item. The dir-3 remainder (the boss
-flag on a tavern hook) waits on the `document_check` action decision
-— DIRECTOR_SPEC §11, the owner's content call; the ambient channel
-is likewise declared-but-dormant (content-scale, the owner's call).
-The dir-2/dir-4 measurement's honest finding stands: the clock and
-the channel split are inert on day1_full (every run ends in PEAK —
-a measurable delta needs a gate-protocol script set that walks the
+multi-channel split D-068 + the grammar's predicate + weight layer
+D-069 landed).** The arc lives in `docs/TASKS.md`'s phase-3 backlog:
+`drama-2` (the grammar's option layer — option blocks with
+availability gates, ai_chance-style weighting, the
+immediate/option/after lifecycle) is the next un-gated item; `drama-3`
+(the on_action dispatch + append-not-overwrite composition) follows.
+The dir-3 remainder (the boss flag on a tavern hook) waits on the
+`document_check` action decision — DIRECTOR_SPEC §11, the owner's
+content call; the ambient channel is likewise declared-but-dormant
+(content-scale, the owner's call). The dir-2/dir-4/drama-1
+measurement's honest finding stands: the clock, the channel split,
+and the weight grammar are inert on day1_full (every run ends in PEAK
+— a measurable delta needs a gate-protocol script set that walks the
 world into quiet; recorded in D-066, a phase-gate question, not
 forced).
 
-1. **Phase-3 arc** (TASKS backlog): drama-1 → the owner-gated content
-   decisions (`document_check` + the climax flag + ambient-channel
-   hooks) → social-1/2/arc-1 (the social-depth run).
+1. **Phase-3 arc** (TASKS backlog): drama-2 → drama-3 → the
+   owner-gated content decisions (`document_check` + the climax flag
+   + ambient-channel hooks) → social-1/2/arc-1 (the social-depth
+   run).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

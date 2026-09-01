@@ -90,13 +90,16 @@ def _seeded_hook(
     *, tag: str = "guard_suspicious_of_pc", target_npc: str = "npc_guard_01",
     weight: int = 2, release_threshold: int = 5, trigger: dict[str, Any] | None = None,
     climax: bool = False, channel: str | None = None,
+    weight_modifiers: tuple[dict[str, Any], ...] = (),
+    first_time_only: bool = False,
 ) -> SeededHook:
     return SeededHook(
         tag=tag, seeded_by_event="ev_0001", seeded_at_tick=0,
         weight=weight, release_threshold=release_threshold,
         target_npc=target_npc, intent_kind="wait", intent_target=None,
         intent_fields={"ticks": 1}, trigger=trigger, climax=climax,
-        channel=channel,
+        channel=channel, weight_modifiers=weight_modifiers,
+        first_time_only=first_time_only,
     )
 
 
@@ -127,28 +130,28 @@ def test_seed_ignores_events_without_hooks() -> None:
 
 def test_entropy_zero_on_idle_world() -> None:
     projection = initial_projection(PACK.entities)
-    assert entropy(projection, iter([]), PACK.rules) == 0  # no threats
+    assert entropy(projection, iter([]), PACK.rules, 0) == 0  # no threats
 
 
 def test_entropy_sums_hook_weights() -> None:
     projection = initial_projection(PACK.entities)
     hooks = [_seeded_hook(weight=2), _seeded_hook(weight=3)]
     # only the unreleased contribute
-    assert entropy(projection, iter(hooks), PACK.rules) == 5
+    assert entropy(projection, iter(hooks), PACK.rules, 0) == 5
 
 
 def test_entropy_reads_global_suspicion() -> None:
     projection = initial_projection(PACK.entities)
     projection["npc_guard_01"]["relations.suspicion"] = 25
     projection["npc_guard_02"]["relations.suspicion"] = 10
-    assert entropy(projection, iter([]), PACK.rules) == 35
+    assert entropy(projection, iter([]), PACK.rules, 0) == 35
 
 
 def test_entropy_counts_visible_physical_threats() -> None:
     projection = initial_projection(PACK.entities)
     projection["loc_tavern"]["fire.bar"] = "burning"
     projection["loc_tavern"]["fire.tables"] = "burning"
-    assert entropy(projection, iter([]), PACK.rules) == 2
+    assert entropy(projection, iter([]), PACK.rules, 0) == 2
 
 
 def test_entropy_threat_states_are_pack_data() -> None:
@@ -160,10 +163,10 @@ def test_entropy_threat_states_are_pack_data() -> None:
     rules = json.loads(json.dumps(dict(PACK.data)))
     rules["rules.json"]["transitions"]["fire"]["spot_state"] = "smoldering"
     # the old vocabulary no longer reads as a threat...
-    assert entropy(projection, iter([]), rules["rules.json"]) == 0
+    assert entropy(projection, iter([]), rules["rules.json"], 0) == 0
     # ...the declared one does
     projection["loc_tavern"]["fire.tables"] = "smoldering"
-    assert entropy(projection, iter([]), rules["rules.json"]) == 1
+    assert entropy(projection, iter([]), rules["rules.json"], 0) == 1
 
 
 def test_entropy_never_reads_knowledge_records() -> None:
@@ -174,7 +177,7 @@ def test_entropy_never_reads_knowledge_records() -> None:
     # stuff a knowledge record into the projection — the director MUST
     # not see it (it lives in the KnowledgeView, not the projection)
     projection["npc_guard_01"]["knowledge.figure_reaching_for_purse"] = True
-    assert entropy(projection, iter([]), PACK.rules) == 0
+    assert entropy(projection, iter([]), PACK.rules, 0) == 0
 
 
 # -- explicit triggers (causal, fire regardless of entropy) -------------------
@@ -791,13 +794,13 @@ def test_channel_entropies_bind_only_the_declared_inputs() -> None:
         _seeded_hook(channel="ambient", weight=1),
         _seeded_hook(weight=2),  # channelless: total only
     ]
-    per_channel = channel_entropies(channels, projection, iter(hooks), PACK.rules)
+    per_channel = channel_entropies(channels, projection, iter(hooks), PACK.rules, 0)
     assert per_channel == {
         "threat": 3 + 1,  # own weights + the burning spot
         "social": 2 + 10,  # own weights + global suspicion
         "ambient": 1,  # own weights only
     }
-    assert entropy(projection, iter(hooks), PACK.rules) == 2 + 3 + 1 + 2 + 10 + 1
+    assert entropy(projection, iter(hooks), PACK.rules, 0) == 2 + 3 + 1 + 2 + 10 + 1
 
 
 # the quiet path, per channel
@@ -1041,3 +1044,240 @@ def test_channels_lint_rejects_non_string_channel(tmp_path: Path) -> None:
 
 
 # -- helpers -----------------------------------------------------------------
+
+
+# -- drama-1 (iter-40: the event grammar's predicate + weight layer) ----------
+
+
+def test_seed_reads_the_multiplier_shape() -> None:
+    """The pack's own vigil hook declares the weight_multiplier object +
+    first_time_only: seed() flattens to (base, modifier tail) and the
+    burn flag — the buffer stores data, the effective weight is
+    computed per evaluation (L3: never a stored projection). The flat
+    document-check weight stays the v0.1 form."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director.seed(_record(hooks=("guard_suspicious_of_pc",)))
+    vigil = director.hooks[0]
+    assert vigil.weight == 2
+    assert len(vigil.weight_modifiers) == 1
+    assert vigil.weight_modifiers[0]["add"] == 2
+    assert vigil.first_time_only is True
+    director.seed(_record(hooks=("possible_document_check",), event_id="ev_0002"))
+    check = director.hooks[1]
+    assert check.weight == 3
+    assert check.weight_modifiers == ()
+    assert check.first_time_only is False
+
+
+def test_entropy_reads_the_pack_escalation() -> None:
+    """The pack's own modifier: the vigil doubles its tension once the
+    watcher's suspicion reaches the document-check band (50). The
+    suspicion axis itself sums into entropy — at 49 the total is
+    2 + 49, at 50 it jumps to 4 + 50 (the escalation a flat weight
+    cannot express)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
+    director.seed(_record(hooks=("guard_suspicious_of_pc",)))
+    hook = director.hooks[0]
+    projection = initial_projection(PACK.entities)
+    projection["npc_guard_01"]["relations.suspicion"] = 49
+    assert entropy(projection, iter([hook]), PACK.rules, 0) == 2 + 49
+    projection["npc_guard_01"]["relations.suspicion"] = 50
+    assert entropy(projection, iter([hook]), PACK.rules, 0) == 4 + 50
+
+
+def test_entropy_weight_modifier_reads_any_predicate() -> None:
+    """A modifier's `when` may read any leaf — here a prop (fatigue, an
+    axis entropy never sums) and a time leaf (the beat_tick threading:
+    the tension can ripen with the clock)."""
+    fatigue_hook = _seeded_hook(
+        weight_modifiers=({"add": 2, "when": {
+            "kind": "prop", "of": "npc_guard_01", "path": "status.fatigue",
+            "comparator": "at_least", "value": 30,
+        }},),
+    )
+    time_hook = _seeded_hook(
+        weight_modifiers=({"factor": 2.0, "when": {"kind": "time", "tick": 100}},),
+    )
+    projection = initial_projection(PACK.entities)
+    projection["npc_guard_01"]["status.fatigue"] = 29
+    assert entropy(projection, iter([fatigue_hook]), PACK.rules, 0) == 2
+    projection["npc_guard_01"]["status.fatigue"] = 30
+    assert entropy(projection, iter([fatigue_hook]), PACK.rules, 0) == 4
+    assert entropy(projection, iter([time_hook]), PACK.rules, 99) == 2
+    assert entropy(projection, iter([time_hook]), PACK.rules, 100) == 4
+
+
+def test_weight_modifiers_apply_in_order_and_truncate() -> None:
+    """add runs before a later factor (declaration order), factors
+    truncate toward zero (weights are non-negative — floor), and a
+    factor of 0 legally zeroes the tension (a hook may go quiet
+    without seeding a new fact)."""
+    composed = _seeded_hook(
+        weight=2,
+        weight_modifiers=(
+            {"add": 3, "when": {"kind": "time", "tick": 0}},
+            {"factor": 0.5, "when": {"kind": "time", "tick": 0}},
+        ),
+    )
+    zeroed = _seeded_hook(
+        weight_modifiers=({"factor": 0, "when": {"kind": "time", "tick": 0}},),
+    )
+    truncated = _seeded_hook(
+        weight=3,
+        weight_modifiers=({"factor": 0.5, "when": {"kind": "time", "tick": 0}},),
+    )
+    projection = initial_projection(PACK.entities)
+    hooks = iter([composed, zeroed, truncated])
+    # (2 + 3) * 0.5 = 2.5 -> 2; 2 * 0 = 0; 3 * 0.5 = 1.5 -> 1
+    assert entropy(projection, hooks, PACK.rules, 0) == 2 + 0 + 1
+
+
+def test_first_time_only_burns_the_tag() -> None:
+    """The Wesnoth fire-only-once law: once any instance of a
+    first_time_only tag releases, the tag burns for the run — the
+    remaining instance never releases AND stops counting toward
+    entropy (un-dischargeable tension is noise). The beat-3
+    differential proves the filter: un-burned, the second instance
+    (weight 2, threshold 5, cooldown expired) would release there."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=10))
+    first = _seeded_hook(
+        tag="guard_suspicious_of_pc", weight=2, release_threshold=5,
+        first_time_only=True,
+    )
+    second = _seeded_hook(
+        tag="guard_suspicious_of_pc", weight=2, release_threshold=5,
+        first_time_only=True,
+    )
+    other = _seeded_hook(
+        tag="possible_document_check", target_npc="npc_drunk_01",
+        weight=1, release_threshold=20,
+    )
+    director._hooks.extend([first, second, other])  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    # beat 1: entropy 5 < floor 10; lowest threshold (5) wins, oldest
+    # first — the first vigil releases and burns the tag
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1
+    # beat 2: the burned instance is filtered; the other tag is free
+    # (its npc never had a release) and releases on the quiet path
+    director.next_beat()
+    released = director.releases(projection, beat_tick=360)
+    assert len(released) == 1
+    # beat 3: only the burned instance remains — filtered from the
+    # buffer view, so entropy reads 0 and nothing releases
+    director.next_beat()
+    assert director.releases(projection, beat_tick=720) == []
+
+
+def test_repeatable_tag_releases_every_instance() -> None:
+    """Without first_time_only the v0.1 law holds: every seeded
+    instance is its own consequence — the second failure's vigil
+    releases on its own beat (after the per-NPC cooldown clears)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=10))
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(weight=2, release_threshold=5),
+        _seeded_hook(weight=2, release_threshold=5),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1
+    director.next_beat()
+    # beat 2: the cooldown (2 beats on npc_guard_01) still holds
+    assert director.releases(projection, beat_tick=360) == []
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=720)) == 1
+
+
+def test_compound_trigger_needs_every_leg() -> None:
+    """A compound trigger composes leaves: the hook releases only when
+    every leg holds (the Paradox implicit-AND root, as a hook
+    trigger)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    hook = _seeded_hook(
+        trigger={"all": [
+            {"kind": "threshold", "target_npc": "npc_guard_01",
+             "axis": "suspicion", "comparator": "at_least", "value": 25},
+            {"kind": "place", "target_npc": "npc_guard_01",
+             "location": "loc_tavern"},
+        ]},
+    )
+    director._hooks.append(hook)  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    # the guard is at the tavern but suspicion is 0: the threshold leg fails
+    assert director.releases(projection, beat_tick=0) == []
+    projection["npc_guard_01"]["relations.suspicion"] = 25
+    assert len(director.releases(projection, beat_tick=0)) == 1
+
+
+# pack lint (the drama-1 grammar contract)
+
+
+def test_weight_lint_rejects_modifier_with_both_add_and_factor(
+    tmp_path: Path,
+) -> None:
+    """The donor's modifier shape is exactly one of add|factor — both
+    in one modifier is a shape error, never an evaluation-order
+    guess."""
+    def mutate(rules: dict[str, Any]) -> None:
+        modifier = rules["director"]["hooks"]["guard_suspicious_of_pc"][
+            "weight"]["modifiers"][0]
+        modifier["factor"] = 0.5
+
+    with pytest.raises(PackError, match="exactly one of add\\|factor"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_weight_lint_rejects_malformed_when_predicate(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        modifier = rules["director"]["hooks"]["guard_suspicious_of_pc"][
+            "weight"]["modifiers"][0]
+        modifier["when"] = {"kind": "vibes", "target_npc": "npc_guard_01"}
+
+    with pytest.raises(PackError, match="kind must be"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_trigger_lint_rejects_unknown_predicate_kind(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["possible_document_check"]["trigger"] = {
+            "kind": "omen", "target_npc": "npc_guard_01",
+        }
+
+    with pytest.raises(PackError, match="kind must be"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_trigger_lint_rejects_prop_with_unknown_entity(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["possible_document_check"]["trigger"] = {
+            "kind": "prop", "of": "npc_ghost", "path": "status.fear",
+            "comparator": "at_least", "value": 10,
+        }
+
+    with pytest.raises(PackError, match="'of' must name an entity"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_trigger_lint_rejects_empty_compound_as_dead_vocabulary(
+    tmp_path: Path,
+) -> None:
+    """L1: an empty all/any is dead vocabulary (vacuous semantics are
+    the evaluator's honesty, not a license for empty pack data)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["possible_document_check"]["trigger"] = {
+            "all": [],
+        }
+
+    with pytest.raises(PackError, match="non-empty list"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_first_time_only_lint_rejects_non_boolean(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["guard_suspicious_of_pc"][
+            "first_time_only"
+        ] = "yes"
+
+    with pytest.raises(PackError, match="first_time_only must be a boolean"):
+        _mutated_pack(tmp_path, mutate)
+

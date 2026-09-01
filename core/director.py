@@ -44,6 +44,22 @@ byte-identically; a channelless hook keeps that global floor even in
 a channels pack (the per-hook opt-in mirrors the climax flag — a tag
 without the block is dormant vocabulary).
 
+Phase 3 (drama-1, iter-40 — the Paradox event grammar's predicate +
+weight layer; phases.md §3 owns the design): triggers are now JSON
+predicate specs over the projection (`core/predicates.py` owns the
+grammar — the three v0.1 leaf kinds plus compound `all`/`any`/`not`
+forms, an implicit-AND list root, the generalized `prop` leaf). The
+hook weight gains the `weight_multiplier` shape (base +
+modifiers{add|factor, when} — context-sensitive tension: the entropy
+sensor reads the EFFECTIVE weight per beat, a pure function of the
+projection). `first_time_only` (the Wesnoth fire-only-once law) is a
+release policy: once any instance of the tag releases, the tag burns
+for the run — burned instances stay facts in the buffer but stop
+counting toward entropy (tension that can never discharge is noise,
+not tension). A pack with flat int weights and no first_time_only
+runs the v0.1 shapes, byte-identically (the pack's own declaration is
+the gate, INV-3).
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -75,6 +91,7 @@ from typing import TYPE_CHECKING, Any, Final, Protocol
 
 from core.ids import sequence_id
 from core.intent import IntentData
+from core.predicates import evaluate
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
@@ -113,7 +130,17 @@ class SeededHook:
     path; its door is the climax layer (or an explicit trigger).
     Immutable; the Director tracks release state via a separate index
     set, not by mutating the record (the frozen-ness documents INV-5:
-    a seeded hook is a fact)."""
+    a seeded hook is a fact).
+
+    `weight` is the BASE tension (the v0.1 flat int; the drama-1
+    `weight_multiplier` pack shape resolves to base + modifiers at
+    seed time). `weight_modifiers` are the drama-1 multiplier tail:
+    each `{add: N | factor: N, when: <predicate>}` applies in
+    declaration order when its predicate passes — the entropy sensor
+    reads the EFFECTIVE weight (`_resolve_weight`), never the bare
+    base. `first_time_only` burns the tag after its first release
+    (the remaining instances stay facts but never release and never
+    count toward entropy again)."""
 
     tag: str
     seeded_by_event: str
@@ -124,9 +151,11 @@ class SeededHook:
     intent_kind: str
     intent_target: str | None
     intent_fields: Mapping[str, Any]
-    trigger: Mapping[str, Any] | None  # {"kind": "time"|"place"|"threshold", ...}
+    trigger: Mapping[str, Any] | None  # a drama-1 predicate spec (core/predicates.py)
     climax: bool = False  # DIR-3: the boss-beat flag (pack data)
     channel: str | None = None  # DIR-4: the pacing dimension (pack data)
+    weight_modifiers: tuple[Mapping[str, Any], ...] = ()  # drama-1: the multiplier tail
+    first_time_only: bool = False  # drama-1: the Wesnoth fire-only-once release policy
 
 
 class DirectorPolicy(Protocol):
@@ -423,13 +452,16 @@ def entropy(
     projection: Mapping[str, Mapping[str, Any]],
     unreleased: Iterator[SeededHook],
     rules: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
 ) -> int:
-    """P2e: sum of seeded-hook weights + global suspicion + visible
-    physical threats — observable state only (L6). Computed from the
-    projection, the buffer, and the pack's transition declarations,
-    never from knowledge records or PC internals. The stagnation
-    detector releases when this drops below the pack's floor."""
-    weights = sum(hook.weight for hook in unreleased)
+    """P2e: sum of seeded-hook EFFECTIVE weights + global suspicion +
+    visible physical threats — observable state only (L6). Computed
+    from the projection, the buffer, the pack's transition declarations,
+    and the beat tick (a drama-1 modifier's `when` predicate may read
+    the clock), never from knowledge records or PC internals. The
+    stagnation detector releases when this drops below the pack's
+    floor."""
+    weights = sum(_resolve_weight(hook, projection, beat_tick) for hook in unreleased)
     return (
         weights
         + _global_suspicion(projection)
@@ -442,20 +474,21 @@ def channel_entropies(
     projection: Mapping[str, Mapping[str, Any]],
     unreleased: Iterator[SeededHook],
     rules: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
 ) -> dict[str, int]:
     """DIR-4: the per-channel entropy map. Each declared channel senses
-    its OWN unreleased hook weights (always) plus the inputs it binds
-    (CHANNEL_INPUTS — the P2e world-sensing terms, decomposed per
-    dimension). Hooks in no declared channel count toward the TOTAL
-    only (the pacing clock's input, unchanged). Deterministic: the
-    channels iterate sorted(), the buffer in construction order
-    (INV-2)."""
+    its OWN unreleased hook weights (always — at their drama-1 effective
+    values) plus the inputs it binds (CHANNEL_INPUTS — the P2e
+    world-sensing terms, decomposed per dimension). Hooks in no declared
+    channel count toward the TOTAL only (the pacing clock's input,
+    unchanged). Deterministic: the channels iterate sorted(), the buffer
+    in construction order (INV-2)."""
     suspicion = _global_suspicion(projection)
     threats = _visible_physical_threats(projection, _threat_states(rules))
     totals = {name: 0 for name in sorted(channels)}
     for hook in unreleased:
         if hook.channel in totals:
-            totals[hook.channel] += hook.weight
+            totals[hook.channel] += _resolve_weight(hook, projection, beat_tick)
     for name in sorted(channels):
         inputs = channels[name].inputs
         if "suspicion" in inputs:
@@ -463,6 +496,30 @@ def channel_entropies(
         if "physical_threats" in inputs:
             totals[name] += threats
     return totals
+
+
+def _resolve_weight(
+    hook: SeededHook,
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> int:
+    """The hook's EFFECTIVE tension (drama-1): the base weight, then
+    each modifier in declaration order — `{add: N}` adds, `{factor: N}`
+    multiplies and truncates toward zero (deterministic; weights are
+    non-negative by lint so truncation is floor). Only passing
+    modifiers apply; a factor of 0 legally zeroes the weight (the
+    Stellaris zero-out shape — a hook may go quiet without seeding a
+    new fact). Pure (INV-2): same hook + same projection + same tick =
+    same number, in any process."""
+    weight = hook.weight
+    for modifier in hook.weight_modifiers:
+        if not evaluate(modifier["when"], projection, beat_tick):
+            continue
+        if "add" in modifier:
+            weight += int(modifier["add"])
+        else:
+            weight = int(weight * float(modifier["factor"]))
+    return weight
 
 
 # -- triggers (time / place / threshold — causal, not stagnation) -------------
@@ -473,34 +530,29 @@ def _trigger_fires(
     projection: Mapping[str, Mapping[str, Any]],
     beat_tick: int,
 ) -> bool:
-    """A hook's explicit trigger (time / place / threshold). A hook with
-    `trigger is None` is stagnation-only — its trigger never fires on
-    its own; it relies on the stagnation detector. Otherwise:
-    - `time`: fires when `beat_tick >= trigger.tick`
-    - `place`: fires when the `target_npc` is at `trigger.location`
-    - `threshold`: fires when the target_npc's relations axis meets
-      the comparison (`at_least` / `at_most`)
+    """A hook's explicit trigger. A hook with `trigger is None` is
+    stagnation-only — its trigger never fires on its own; it relies on
+    the stagnation detector. Otherwise the spec is a drama-1 predicate
+    (core/predicates.py owns the grammar: the three v0.1 leaf kinds —
+    time / place / threshold — evaluate byte-identically to the pre-
+    drama-1 shapes, and compound `all`/`any`/`not` forms are legal pack
+    data since this iteration).
     """
-    if trigger is None:
-        return False
-    kind = trigger["kind"]
-    if kind == "time":
-        return beat_tick >= int(trigger["tick"])
-    if kind == "place":
-        npc = trigger["target_npc"]
-        return projection.get(npc, {}).get("position") == trigger["location"]
-    if kind == "threshold":
-        npc = trigger["target_npc"]
-        prop = f"relations.{trigger['axis']}"
-        value = projection.get(npc, {}).get(prop)
-        if not isinstance(value, int) or isinstance(value, bool):
-            return False
-        if trigger["comparator"] == "at_least":
-            return value >= int(trigger["value"])
-        if trigger["comparator"] == "at_most":
-            return value <= int(trigger["value"])
-        raise ValueError(f"unknown threshold comparator {trigger['comparator']!r}")
-    raise ValueError(f"unknown trigger kind {kind!r}")
+    return trigger is not None and evaluate(trigger, projection, beat_tick)
+
+
+def _weight_spec(spec: Any) -> tuple[int, tuple[Mapping[str, Any], ...]]:
+    """Resolve the pack's hook weight (drama-1): a flat non-negative
+    int is the v0.1 form (base, no tail); the multiplier object
+    `{base, modifiers}` flattens to (base, tuple(modifiers)) — the
+    buffer stores the data, `_resolve_weight` computes the effective
+    value per evaluation (a stored effective weight would be a
+    projection inside the buffer — L3's drift hazard). Pack lint owns
+    the shape validation; this resolver only trusts what the lint
+    passed."""
+    if isinstance(spec, int) and not isinstance(spec, bool):
+        return spec, ()
+    return int(spec["base"]), tuple(spec.get("modifiers", ()))
 
 
 # -- the director -----------------------------------------------------------
@@ -514,13 +566,16 @@ class Director:
     loop enqueues — the director never writes canon itself (D-037).
     Since iter-36 it also holds the per-run pacing clock (DIR-1) when
     the pack declares one; since iter-39 the channel table (DIR-4) —
-    pack data, constant across runs, like the policies."""
+    pack data, constant across runs, like the policies. Since iter-40
+    it holds the drama-1 burn set (`first_time_only` tags whose one
+    release already happened — per-run, folded state like the buffer)."""
 
     pack: "Pack"
     policy: DirectorPolicy
     beat_count: int = 0
     _hooks: list[SeededHook] = field(default_factory=list)
     _released: set[int] = field(default_factory=set)
+    _burned_tags: set[str] = field(default_factory=set)  # drama-1 first_time_only
     _release_seq: int = 0
     _npc_last_release_beat: dict[str, int] = field(default_factory=dict)
     _pacing_config: PacingConfig | None = field(default=None, init=False, repr=False)
@@ -555,19 +610,24 @@ class Director:
         """Absorb an event's hooks into the buffer (D-005: a complication
         is seeded at event time, never invented later). Tags the pack
         does not declare are silently ignored — a hook without a
-        release intent is just a tag, not a deferred consequence."""
+        release intent is just a tag, not a deferred consequence. The
+        drama-1 weight spec resolves here (flat int = base, no tail;
+        the multiplier object flattens to base + modifier list — the
+        buffer stores data, the effective weight is computed per
+        evaluation, never stored)."""
         config = self.pack.rules.get("director", {})
         hook_specs = config.get("hooks", {})
         for tag in event.hooks:
             spec = hook_specs.get(tag)
             if spec is None:
                 continue
+            base, modifiers = _weight_spec(spec["weight"])
             self._hooks.append(
                 SeededHook(
                     tag=tag,
                     seeded_by_event=event.id,
                     seeded_at_tick=event.t,
-                    weight=int(spec["weight"]),
+                    weight=base,
                     release_threshold=int(spec["release_threshold"]),
                     target_npc=spec["target_npc"],
                     intent_kind=spec["intent"]["kind"],
@@ -576,6 +636,8 @@ class Director:
                     trigger=spec.get("trigger"),
                     climax=bool(spec.get("climax", False)),
                     channel=spec.get("channel"),
+                    weight_modifiers=modifiers,
+                    first_time_only=bool(spec.get("first_time_only", False)),
                 )
             )
 
@@ -604,7 +666,12 @@ class Director:
         (the clock reads TOTAL entropy: one drama arc), explicit
         triggers stay ungated (D-005 — causality is not pacing).
         """
-        unreleased = list(self._unreleased())
+        unreleased = [
+            (idx, hook) for idx, hook in self._unreleased()
+            if hook.tag not in self._burned_tags  # drama-1: a burned tag
+            # never releases again and never counts toward entropy — its
+            # remaining instances are facts (INV-5) but not tension.
+        ]
         # Entropy is invariant across this call — nothing mutates the
         # buffer, the release set, or the projection before an immediate
         # return — so it is computed once and reused for every policy
@@ -614,7 +681,7 @@ class Director:
         # drama (a burning room is a PEAK with the buffer drained), and
         # entropy is its only input.
         current_entropy = entropy(
-            projection, iter(h for _, h in unreleased), self.pack.rules
+            projection, iter(h for _, h in unreleased), self.pack.rules, beat_tick
         )
         self._advance_pacing(current_entropy)
         if not unreleased:
@@ -632,7 +699,7 @@ class Director:
                 current_entropy=current_entropy,
             ):
                 continue
-            self._mark_released(idx, hook.target_npc)
+            self._mark_released(idx, hook)
             return [self._intent(hook)]
         # 2) climax release (DIR-3, the L4D2 three-intensity rule + the
         # boss-beat rule): a climax-flagged hook releases at the END of a
@@ -656,7 +723,7 @@ class Director:
                     key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick)
                 )
                 idx, hook = candidates[0]
-                self._mark_released(idx, hook.target_npc)
+                self._mark_released(idx, hook)
                 assert self._pacing is not None  # the gate passed: pacing exists
                 self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
                 return [self._intent(hook)]
@@ -683,7 +750,7 @@ class Director:
         per_channel = (
             channel_entropies(
                 self._channels, projection,
-                iter(hook for _, hook in unreleased), self.pack.rules,
+                iter(hook for _, hook in unreleased), self.pack.rules, beat_tick,
             )
             if self._channels is not None
             else None
@@ -701,7 +768,7 @@ class Director:
         # (oldest first — far hooks deserve priority, MVP_SCOPE §5)
         candidates.sort(key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick))
         idx, hook = candidates[0]
-        self._mark_released(idx, hook.target_npc)
+        self._mark_released(idx, hook)
         return [self._intent(hook)]
 
     # -- helpers (private) ---------------------------------------------------
@@ -765,9 +832,14 @@ class Director:
             if idx not in self._released:
                 yield idx, hook
 
-    def _mark_released(self, idx: int, npc: str) -> None:
+    def _mark_released(self, idx: int, hook: SeededHook) -> None:
         self._released.add(idx)
-        self._npc_last_release_beat[npc] = self.beat_count
+        self._npc_last_release_beat[hook.target_npc] = self.beat_count
+        if hook.first_time_only:
+            # drama-1: the Wesnoth fire-only-once law — the tag burns for
+            # the run; its remaining instances stop counting (releases()
+            # filters them) and never release.
+            self._burned_tags.add(hook.tag)
 
     def _on_cooldown(self, npc: str) -> bool:
         """Per-NPC cooldown after a release (the MinGapBetweenEncounters

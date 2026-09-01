@@ -367,7 +367,8 @@ instruction (`VISION.md` §5); the world answers, not the model.
 
 ## 3. Phase 3 — director evolution + event grammar + social depth —
 OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
-instrument D-066, climax layer D-067, multi-channel split D-068)
+instrument D-066, climax layer D-067, multi-channel split D-068, the
+grammar's predicate + weight layer D-069)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -380,6 +381,14 @@ clobbering. `first_time_only` (Wesnoth) = hook release policy. Scopes
 become an explicit context argument (`ctx`) with `every/random/any`
 iterator helpers — the cleanest Paradox abstraction, minus the implicit-
 `this` footguns. MTTH stays the named anti-pattern: SAMPLED timing only.
+**The grammar's predicate + weight layer landed iter-40 (drama-1,
+D-069): trigger specs are predicates (`core/predicates.py` — the three
+v0.1 leaves + compound `all`/`any`/`not` + the generalized `prop`
+leaf), the hook weight carries the multiplier object (the entropy
+sensor reads the effective weight per beat), `first_time_only` burns
+the tag after its first release; the remainder (option blocks, the
+lifecycle, the on_action dispatch, the ctx iterators) is the
+drama-2/drama-3 backlog — the predicate layer is its foundation.**
 
 **Director refinements** (recorded at phase 0, built here): the
 pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /

@@ -18,7 +18,8 @@
 > call (the iter-31 precedent; the pacing clock landed first, D-065;
 > the exit-criterion instrument landed iter-37, D-066; the climax
 > layer landed iter-38, D-067; the multi-channel split landed iter-39,
-> D-068).
+> D-068; the event grammar's predicate + weight layer landed iter-40,
+> drama-1, D-069).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -57,9 +58,25 @@
   quiet gate (`permit_quiet`); the clock / budget / climax / explicit
   triggers stay global on purpose; the v0.1 global floor survives for
   channelless hooks (the per-hook opt-in, the climax-flag pattern).
-- `drama-1` · the Paradox-adapted event grammar (trigger predicates as
-  JSON, weight multipliers, option blocks, `on_action` dispatch —
-  phases.md §3 owns the design).
+- `drama-1` · the Paradox-adapted event grammar, first layer —
+  **done (iter-40, D-069)**: trigger predicates as JSON (the three
+  v0.1 leaves + compound `all`/`any`/`not` + the `prop` leaf —
+  `core/predicates.py`), the `weight_multiplier` object (the entropy
+  sensor reads the effective weight per beat), `first_time_only`
+  (the tag burns after its first release). The pack's live
+  instantiation is provably inert on the committed runs (10-seed A/B
+  10/10; TEST_PLAN §6). MTTH stays the named anti-pattern (TIME-1).
+- `drama-2` · the grammar's option layer: option blocks with
+  per-option availability gates (the drama-1 predicate grammar) +
+  `ai_chance`-style weighting (the weight_multiplier shape) + the
+  `immediate`/`option`/`after` three-phase lifecycle over the intent
+  door — the Paradox option mechanics, adapted; rides with the ctx
+  scope helpers (`every`/`random`/`any`) where they first earn their
+  keep.
+- `drama-3` · the on_action dispatch layer: event X fires → content
+  reacts (pack data), with append-not-overwrite composition so packs
+  extend without clobbering — the Paradox on_action table, adapted;
+  the sim/content boundary's grammar half.
 - `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
   event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
   tension shaping (P3c).
@@ -280,6 +297,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   - `ref-15` Prom Week — academic paper + GDC talk; no code repo.
 
 ## Done
+
+- iter-40 · 2026-09-01 · drama-1 event grammar, predicate + weight layer
+  (iter-40-drama1-predicates; the owner's "continue work per the
+  plans" session call, the phase-3 backlog's top un-gated item): the
+  Paradox grammar's foundation landed — `core/predicates.py` (the
+  JSON predicate grammar: three v0.1 leaves byte-identical + compound
+  all/any/not + the `prop` leaf, loud backstop), the
+  `weight_multiplier` (effective weights in entropy + channels),
+  `first_time_only` (the burn set). The vigil hook instantiates the
+  escalation modifier + burn flag live — T1/T8/corpus byte-identical,
+  a 10-seed A/B 10/10 identical (TEST_PLAN §6); the escalation,
+  truncation, and burn laws unit-pinned. The remainder (option
+  blocks, on_action dispatch, ctx iterators) split to drama-2/3.
+  Detail: worklog iter-40 + `docs/DIRECTOR_SPEC.md` §3/§3a + D-069.
 
 - iter-39 · 2026-09-01 · dir-4 multi-channel policies
   (iter-39-dir4; the owner's "continue work per the plan" session

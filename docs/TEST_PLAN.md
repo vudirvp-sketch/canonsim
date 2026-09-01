@@ -212,3 +212,16 @@ path never fires on day1_full (every run ends in PEAK, the D-066
 finding) — the split is unit-pinned instead
 (tests/test_director.py: the quiet-channel-while-another-burns law,
 the escalation self-block, the global clock gate; D-068).
+
+Re-measured at iter-40 (drama-1, the event grammar's predicate +
+weight layer landed): 10 seeds (125 + the nine corpus-session seeds),
+the committed pack (the vigil hook carries the weight_multiplier
+object + first_time_only) vs a grammar-stripped linted variant
+(`output/pack_nogrammar/`) — per-seed byte-identical logs 10/10. The
+mechanism: the multiplier only ADDS tension on these runs (the
+escalation arm needs suspicion ≥ 50, which already puts every quiet
+gate over its floor) and the vigil never releases there (the quiet
+path never fires; the hook is trigger-less) — so no release decision
+can flip. The escalation, the truncation order, and the burn law are
+unit-pinned instead (tests/test_predicates.py +
+tests/test_director.py; D-069).

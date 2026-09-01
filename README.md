@@ -106,14 +106,22 @@ three-director family: `director.channels` threat/social/ambient with
 per-channel quiet floors + input bindings, `SeededHook.channel`, the
 per-hook `permit_quiet` gate; clock/budget/climax/explicit triggers
 stay global on purpose; the v0.1 global floor survives for channelless
-hooks — the per-hook opt-in, the climax-flag pattern). 757 tests
-green, ruff clean, zero fixture regen (a 10-seed channels vs
-no-channels A/B: 10/10 byte-identical — the quiet path never fires
-on day1_full, the D-066 all-PEAK window; the split is unit-pinned).
-Next: the phase-3 arc (`drama-1` the Paradox event grammar,
-`social-1/2`, `arc-1`; `docs/TASKS.md`) + the owner-gated
-set (parse-2, engine-1, the document_check content decision,
-ambient-channel content).
+hooks — the per-hook opt-in, the climax-flag pattern); the event
+grammar's predicate + weight layer landed iter-40 (drama-1, D-069 —
+the Paradox trigger block adapted: `core/predicates.py` the JSON
+predicate grammar (the three v0.1 leaves byte-identical + compound
+`all`/`any`/`not` + the `prop` leaf), the `weight_multiplier` object
+(the entropy sensor reads the effective weight per beat),
+`first_time_only` the burn policy; contract owner
+`docs/DIRECTOR_SPEC.md` §3/§3a; the option blocks + on_action
+dispatch are the drama-2/3 backlog). 794 tests
+green, ruff clean, zero fixture regen (a 10-seed grammar vs flat A/B:
+10/10 byte-identical — the escalation arm saturates every quiet gate
+on its own; TEST_PLAN §6).
+Next: the phase-3 arc (`drama-2` the grammar's option layer, `drama-3`
+the on_action dispatch, `social-1/2`, `arc-1`; `docs/TASKS.md`) + the
+owner-gated set (parse-2, engine-1, the document_check content
+decision, ambient-channel content).
 
 ## For AI agents (primary audience)
 
