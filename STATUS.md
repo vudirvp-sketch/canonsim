@@ -1,55 +1,52 @@
 # STATUS — canonsim
 
-Iteration: iter-43 (`iter-43-doccheck-live` — the owner's blanket
-quality directive resolving the DIRECTOR_SPEC §11 content call: the
-document_check action lands, with it the climax flag live on the
-watcher pair AND the crowd-witness reaction the on_action table
-declares) · Phase: 3 (Director)
-**OPEN — the grammar's first LIVE content consumer: content-1 (D-072)
-landed — the whole boss beat is pack data over the standing layers
-(zero engine edits; the deferred-release law gates every release
-path)** · Date: 2026-09-02 ·
-Scope: the crime ladder's public rung. The action (actions.json):
-`document_check` over the STANDING `inspect` resolver — the actor's
-scrutiny (a new pack check kind, perception_vs_social) vs the
-target's composure; both branch types per the house pattern
-(document_check / document_check_failed — a `{passed?…}` conditional
-template was probed and rejected: the chronicle context is flat, the
-nested outcome.check is unreachable, the silent wrong arm is a lie;
-the branch types are the honest carrier); co-location preconditions;
-the success branch's actor record `papers_unsatisfactory` (exact) is
-the ONLY crime-mapped token — the watcher escalates on what THIS
-knower holds (EPIST-1), +25 through the standing crime reactions,
-the arrest attempt + resolution through the standing machinery; the
-room's `papers_demanded_of_{target}` sighting is deliberately
-un-mapped crowd memory (rumor material AND the witnesses the
-crowd_wary scope reads). The institutional consequence is a watcher
-PAIR (rules.json): `possible_document_check` (guard_01) +
-`possible_document_check_relief` (guard_02) — each with the plain
-threshold trigger (its own watcher's band), the OPTION-GATED
-confrontation (place: the watcher at the duty post + prop: the
-stranger present — the D-070 deferred-release law: a closed option
-waits, nothing hits the door, no budget, no PEAK_CLIMAX mark),
-climax: true (the DIR-3 boss path consults the same gate), and
-first_time_only (one check per watcher per run). The naive
-single-hook design was rejected pre-landing: the threshold-only
-trigger releases the beat the rotation empties the seeded watcher's
-post — the door would reject the attempt AND the trigger-blind
-climax path would burn the boss on a no-op; the relief's half fires
-AT the rotation right after the briefing (the corpus session-10
-shape) while Doren's waits all run. The on_action crowd reaction is
-LIVE on both branch types (the table's double key; +5 per witnessing
-home-holder, the checked stranger dropped). Measured: seed 19 runs
-the full ladder (verdict → +25 → arrest → caught, irreversible);
-seed 2 releases through the CLIMAX PATH with the band never open
-(the L4D2 three-intensity rule live, PEAK_CLIMAX marked, one rung
-short of the arrest); seeds 93/125 talk the check down. Corpus regen
-paid in-iteration: 4 seed-93 cases re-distilled (the iter-15
-precedent); the 10-seed on_action A/B: 1/10 fire on day1_full (the
-take shifts each seed's stream), the divergence exactly the
-crowd_wary events. The only core edit: the hook-payload target lint
-(pack.py, mirroring the option lint). Tests 836→846
-(+10 tests/test_doccheck.py), ruff clean.
+Iteration: iter-44 (`iter-44-social1-leverage` — the owner's
+"continue work per the plan" session call, the phase-3 backlog's top
+un-gated item: social-1, secrets & leverage as fact clusters) ·
+Phase: 3 (Director)
+**OPEN — P3a landed: the CK3 `add_hook` precedent adapted (a hook IS
+an event — target, type, expiry tick, cause; the leverage fact is born
+as an event and never mutates, its liveness is a read-side fold)** ·
+Date: 2026-09-03 ·
+Scope: `core/leverage.py` (NEW) — the secrets reaction: a committed
+event's knowledge records ride the reaction cascade; a record whose
+token the pack's `rules.json::secrets` registry declares, held by a
+NOVEL knower (the crime reaction's own novelty law, `before_source`),
+kind npc, not the subject, mints ONE `leverage_gained` fact event per
+(knower, token) pair — actor = holder, target = subject, the cause
+chained to the event that taught them, the acquisition fidelity riding
+the cluster, `expires_at = t + expires_ticks`. Told secrets confer
+leverage (the transfer event's records are knowledge like any other):
+the watch briefing's transfer mints the relief watcher's cluster — the
+institution's knowledge becomes the institution's leverage. The cluster
+carries no knowledge, no hooks, no state changes — the social fact, not
+the epistemic one; the reaction systems skip it by construction (the
+one-hop law's sibling); the director buffer is untouched (L6 — the
+director never reads knowledge). Expiry is a read-side window (INV-1:
+the fact is immutable, its liveness is a fold — `live_leverage` the
+single read owner, live strictly before `expires_at`; the spend is a
+future event naming the cluster's id, social-1b). The name decision:
+the repo's "hook" word is the director's (SeededHook, D-005) — the CK3
+hook is our LEVERAGE, a social fact never a release. Pack data: the
+registry (closed key sets, the subject/type/expiry per token, the
+literal-mintable token vocabulary lint — a templated token's subject
+varies with the world, so only literal `knows` values are declarable),
+ONE live token (the theft secret `figure_reaching_for_purse` over
+pc_01, type blackmail, 720 ticks); the document_check verdict stays
+un-declared on purpose (institutional — the crime ladder owns that
+rung); `leverage_gained` joins story-critical events (the tale line
+renders) + metrics.system_of_type (knowledge+relations). Measured:
+seed 93 — the total steal failure mints the room (4 clusters, all
+cause-chained to the pickpocket) + the briefing mints the relief
+(vague fidelity, two decay steps down); seed 19 — two failures, ONE
+mint round (the novelty law live); the 10-seed A/B (day1_full): 1/10
+seeds mint (125, the same hot seed as iter-43's check), the divergence
+exactly the leverage events, 9/10 byte-identical. Corpus regen paid
+in-iteration (the iter-15/43 precedent): 9 cases re-distilled (the
+seed-93 room + the seed-15 second-steal family — the claim ids
+re-pinned to the shifted stream; a re-distill runner outside the repo
+per Rule 9). KI#64 opened+closed (the KI#63 deletion drift). Tests
+846→870 (+24 tests/test_leverage.py), ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -75,14 +72,22 @@ crowd_wary events. The only core edit: the hook-payload target lint
 
 (none open.)
 
-- KI#63 · doc drift: `docs/blueprint/phases.md` §3 still listed
-  "layered thresholds (L4D2), PEAK_CLIMAX" as still-ahead — both
-  landed iter-38 (D-067); iter-38's doc-sync set skipped phases.md
-  (and the AGENT_NAVIGATION tests row never gained the climax-suite
-  note) · opened 2026-09-01 · CLOSED iter-39 (the refinement list
-  actualized: layered thresholds + PEAK_CLIMAX + multi-channel
-  landed, three-axis anxiety + re-plan-on-violation remain ahead;
-  the tests row gained both the iter-38 and iter-39 suite notes).
+- KI#65 · doc drift: MVP_SCOPE §2's scale line still said "13 actions"
+  after iter-43 landed the 14th (document_check) — the D-072 doc-sync
+  set updated §7's table but missed §2's snapshot; the rules.json meta
+  note carried the stale "8 systems" alongside · opened 2026-09-03 ·
+  CLOSED iter-44 (both actualized: 9 systems / 14 actions with the
+  growth rows named).
+- KI#64 · cap-law drift: KI#63 (closed iter-39) survived five
+  iterations past its close — the §5 mandatory deletion was skipped by
+  every doc-sync since iter-42; the FAQ sits at 21/20 (grew one entry
+  past the cap without the trim) · opened 2026-09-03 · CLOSED iter-44
+  (KI#63 deleted this iteration; the FAQ kept at 21/20 per §6.1 after a
+  real cruft pass — every entry owns a distinct law, no merge without a
+  substance cut; the trim owes at the phase-3→4 gate alongside the
+  DECISIONS collapse).
+- (KI#63 deleted at iter-44 per AGENTS §5 — closed iter-39, five
+  iterations past; the lesson lives in git + the FAQ.)
 - (KI#61/KI#62 deleted at iter-39 per AGENTS §5 — closed iter-37,
   two iterations past; the lessons live in git + the worklog.)
 - (KI#60 deleted at iter-38 per AGENTS §5 — closed iter-36, two
@@ -428,30 +433,35 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38/39/40/41/42/43 — the pacing clock
-D-065 + the exit-criterion instrument D-066 + the climax layer D-067 +
-the multi-channel split D-068 + the grammar's three layers D-069/
-D-070/D-071 + the document_check content set D-072 landed — the
-grammar's first LIVE content consumer: the boss beat runs end to end
-as pack data, zero engine edits).** The phase-3 arc in
-`docs/TASKS.md`'s backlog: `social-1` (secrets & leverage as fact
-clusters — P3a, a hook IS an event) is the next un-gated row, then
-`social-2`/`arc-1`; the owner's standing quality directive (this
-session) resolves the remaining content rows on the documented
-design — each as its own iteration: `content-2` (the alarm panic
-echo, with its corpus regen — the content-1 precedent), `content-3`
-(ambient-channel content). The dir-2/dir-4/drama-1/2/3 measurement's
-honest finding STANDS SUPERSEDED in part: the document_check landing
-is the first deliberate divergence (the check fires on the runs that
-reach the confrontation — 1/10 day1_full seeds; the corpus's seed-93
-script fires), while the clock/channel/weight layers stay inert on
-day1_full (every run ends in PEAK — a measurable pacing delta needs a
-gate-protocol script set that walks the world into quiet; recorded in
-D-066, a phase-gate question, not forced).
+**Phase 3 is OPEN (iter-36..44 — the pacing clock D-065 + the
+exit-criterion instrument D-066 + the climax layer D-067 + the
+multi-channel split D-068 + the grammar's three layers D-069/D-070/
+D-071 + the document_check content set D-072 + the secrets & leverage
+fact clusters D-073 landed — the boss beat runs end to end as pack
+data, and the social layer mints first-class facts: the room's
+knowledge of the theft is now leverage, live in the log and the tale).**
+The phase-3 arc in `docs/TASKS.md`'s backlog: `social-1b` (the
+leverage use — the coerce door, the fact cluster's first consumer),
+then `social-2` (psychological echo, P3e)/`arc-1` (arcs & tension
+shaping, P3c); the owner's standing quality directive resolves the
+remaining content rows on the documented design — each as its own
+iteration: `content-2` (the alarm panic echo, with its corpus regen —
+the content-1 precedent), `content-3` (ambient-channel content, its
+own row — it did NOT ride social-1). The dir-2/dir-4/drama-1/2/3
+measurement's honest finding STANDS SUPERSEDED in part: the
+document_check landing is the first deliberate divergence (the check
+fires on the runs that reach the confrontation — 1/10 day1_full
+seeds; the corpus's seed-93 script fires), and social-1 adds the
+second (the same 1/10 hot seed mints the leverage facts — the same
+steal failure drives both), while the clock/channel/weight layers
+stay inert on day1_full (every run ends in PEAK — a measurable pacing
+delta needs a gate-protocol script set that walks the world into
+quiet; recorded in D-066, a phase-gate question, not forced).
 
-1. **Phase-3 arc** (TASKS backlog): social-1 → social-2/arc-1 (the
-   social-depth run) → the content rows (`content-2` the alarm echo
-   with its corpus regen; `content-3` ambient-channel).
+1. **Phase-3 arc** (TASKS backlog): social-1b (the leverage use) →
+   social-2/arc-1 (the social-depth run) → the content rows
+   (`content-2` the alarm echo with its corpus regen; `content-3`
+   ambient-channel).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

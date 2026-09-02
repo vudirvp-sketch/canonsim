@@ -1846,7 +1846,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0006",
+         "event_id": "ev_0007",
          "type": "steal"
         },
         {
@@ -1961,7 +1961,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0007",
+         "event_id": "ev_0008",
          "type": "take_failed"
         },
         {
@@ -2028,7 +2028,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0009",
+         "event_id": "ev_0010",
          "type": "rumor_told"
         },
         {
@@ -2102,7 +2102,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0010",
+         "event_id": "ev_0011",
          "type": "move"
         },
         {
@@ -5824,7 +5824,7 @@
      "BEAT claims: 6 supported",
      "BEAT intents: 1 fed, 0 withdrawn"
     ],
-    "last_event_type": "suspicion_changed"
+    "last_event_type": "leverage_gained"
    }
   },
   {
@@ -5934,7 +5934,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0010",
+         "event_id": "ev_0014",
          "type": "steal"
         },
         {
@@ -6005,12 +6005,12 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0011",
+         "event_id": "ev_0015",
          "type": "watch_change"
         },
         {
          "kind": "event",
-         "event_id": "ev_0012",
+         "event_id": "ev_0016",
          "type": "expectation_violation"
         },
         {
@@ -6032,12 +6032,12 @@
         },
         {
          "kind": "event",
-         "event_id": "ev_0025",
+         "event_id": "ev_0030",
          "type": "document_check_failed"
         },
         {
          "kind": "event",
-         "event_id": "ev_0026",
+         "event_id": "ev_0031",
          "type": "crowd_wary"
         },
         {
@@ -6092,12 +6092,6 @@
    ],
    "beats": [
     {
-     "between": [
-      {
-       "intent": "arson",
-       "target": "loc_tavern"
-      }
-     ],
      "reply": {
       "prose": "It went up faster than any of them deserved. The lamp went over at the bar's end, the flame took the dry wall behind it, and within a breath the taproom was shouting \u2014 the relief guard's voice over all of it, an alarm that needed no bell. The barkeep dragged at whatever he could reach; the drunkard scrambled back from his table, cup still in hand; the maid was already at the far wall with her sleeves over her mouth. Smoke found the beams. The stranger stood in the middle of it all with a purse against his ribs and a fire he had personally arranged \u2014 and now, at last, a room with no eyes left for anything but the burning. He moved for the door at a dead run, the crowd's own panic for cover.",
       "proposal": {
@@ -6105,17 +6099,17 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0027",
+         "event_id": "ev_0032",
          "type": "arson"
         },
         {
          "kind": "event",
-         "event_id": "ev_0028",
+         "event_id": "ev_0033",
          "type": "fire_started"
         },
         {
          "kind": "event",
-         "event_id": "ev_0029",
+         "event_id": "ev_0034",
          "type": "alarm_raised"
         },
         {
@@ -6144,7 +6138,13 @@
         }
        ]
       }
-     }
+     },
+     "between": [
+      {
+       "intent": "arson",
+       "target": "loc_tavern"
+      }
+     ]
     },
     {
      "reply": {
@@ -6154,17 +6154,17 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0027",
+         "event_id": "ev_0032",
          "type": "arson"
         },
         {
          "kind": "event",
-         "event_id": "ev_0028",
+         "event_id": "ev_0033",
          "type": "fire_started"
         },
         {
          "kind": "event",
-         "event_id": "ev_0029",
+         "event_id": "ev_0034",
          "type": "alarm_raised"
         },
         {
@@ -6236,12 +6236,6 @@
    ],
    "beats": [
     {
-     "between": [
-      {
-       "intent": "arson",
-       "target": "loc_tavern"
-      }
-     ],
      "reply": {
       "prose": "It went up faster than any of them deserved. The lamp went over at the bar's end, the flame took the dry wall behind it, and within a breath the taproom was shouting \u2014 the relief guard's voice over all of it, an alarm that needed no bell. The barkeep dragged at whatever he could reach; the drunkard scrambled back from his table, cup still in hand; the maid was already at the far wall with her sleeves over her mouth. Smoke found the beams. The stranger stood in the middle of it all with a purse against his ribs and a fire he had personally arranged \u2014 and now, at last, a room with no eyes left for anything but the burning. He moved for the door at a dead run, the crowd's own panic for cover.",
       "proposal": {
@@ -6249,7 +6243,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0028",
+         "event_id": "ev_0033",
          "type": "fire_started"
         }
        ],
@@ -6262,7 +6256,13 @@
         }
        ]
       }
-     }
+     },
+     "between": [
+      {
+       "intent": "arson",
+       "target": "loc_tavern"
+      }
+     ]
     },
     {
      "reply": {
@@ -6272,7 +6272,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0034",
+         "event_id": "ev_0039",
          "type": "flee_caught"
         },
         {

@@ -66,6 +66,7 @@
     "arrest_attempt": "{actor} moves to arrest {target}.",
     "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
     "suspicion_changed": "{actor} grows warier of {target}.",
+    "leverage_gained": "{actor} now holds something over {target}.",
     "expectation_violation": "{actor} checks on {target} — it is not where it should be.",
     "status_decayed": [
       "{target} drifts: {axes} changed.",

@@ -22,7 +22,10 @@
 > drama-1, D-069; the grammar's option layer landed iter-41, drama-2,
 > D-070; the grammar's on_action dispatch landed iter-42, drama-3,
 > D-071 — the grammar's last row; the document_check content set
-> landed iter-43, D-072 — the grammar's first LIVE content consumer).
+> landed iter-43, D-072 — the grammar's first LIVE content consumer;
+> the secrets & leverage fact clusters landed iter-44, social-1,
+> D-073 — P3a, the CK3 add_hook precedent: the social layer's first
+> first-class facts in the log).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -110,16 +113,31 @@
   crowd-witness reaction on both branch types, and the 4-case corpus
   regen the landing implied (the iter-15 precedent). Zero engine edits
   — the whole boss beat is pack data over the landed grammar layers.
-- `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
-  event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
-  tension shaping (P3c).
+- `social-1` · secrets & leverage as fact clusters — **done (iter-44,
+  D-073)**: `core/leverage.py` + `rules.json::secrets` — the CK3
+  `add_hook` precedent (a hook IS an event: target, type, expiry tick,
+  cause): a novel knower of a pack-declared secret token mints a
+  `leverage_gained` fact event (no knowledge/hooks/state — the cascade
+  terminates; expiry a read-side fold, `live_leverage` the read owner);
+  told secrets confer leverage (the briefing mints the relief's
+  cluster); ONE live token (the theft secret over pc_01); corpus regen
+  paid (9 cases re-distilled).
+- `social-1b` · the leverage use — the coerce door: an action that
+  SPENDS a live fact cluster (the spend is a new event naming the
+  cluster's id, never a mutation — the fold's `source` already
+  supports it); the pre-condition reads `live_leverage` (the intent
+  door's first leverage test); the balance (what a spent cluster buys
+  — a relation shift, an urgency nudge) is pack data. The fact
+  cluster's first runtime consumer.
+- `social-2` · psychological echo (P3e); `arc-1` · arcs & tension
+  shaping (P3c).
 - `content-2` · the alarm panic echo (witnesses of `alarm_raised`
   gain fear — the through-the-walls law; the iter-42 live probe
   reverted on the phase-1 corpus's committed anchors): lands with the
   corpus regen it implies; the content-1 precedent.
 - `content-3` · ambient-channel content (the declared dimension, no
-  hook carries it): lands with `social-1`'s fact clusters or its own
-  row.
+  hook carries it): its own row — social-1 landed without it (the
+  fact-cluster work was not hook content, the iter-44 call).
 
 ### Phase-2 parser backlog
 

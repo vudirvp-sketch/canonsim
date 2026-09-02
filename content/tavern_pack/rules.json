@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "Rule parameters for the 8 systems (docs/MVP_SCOPE.md §5) plus the importance rule (§9), the intent contract parameters (docs/INTENT_SCHEMA.md), and the brief assembler contract (docs/BRIEF_SPEC.md §6, iter-8). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
+    "notes": "Rule parameters for the 9 systems (docs/MVP_SCOPE.md §5 — 8 phase-0 + the iter-44 secrets & leverage registry) plus the importance rule (§9), the intent contract parameters (docs/INTENT_SCHEMA.md), and the brief assembler contract (docs/BRIEF_SPEC.md §6, iter-8). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
   },
 
   "time": {
@@ -303,6 +303,18 @@
     "notes": "drama-3 (iter-42, D-071; DIRECTOR_SPEC §3c the contract owner): the Paradox on_action table adapted — event X commits → content reacts, as pack data, appended AFTER the hardcoded system reactions (suspicion / arrest / telling) and never replacing them (the donor's append-not-overwrite composition). Each entry: the scope (the explicit entity-set selector; witnesses = the triggering event's own knowers, deduped, event order), an optional per-entity gate (the quantified predicate — {prop, comparator, value} conditions evaluated with the CANDIDATE as the argument, no entity field in the spec, no implicit this), the reaction event type, and the scoped state change (a clamped numeric delta on relations.scale, the one numeric scale — the alarm precedent). One event per entry (the alarm shape); an empty gated scope emits nothing. No knowledge, no hooks on the reaction event — cascades terminate; the one-hop law (lint): no table key may name a reaction event the table emits. A pack without the block runs the v0.1 reaction behavior byte-identically"
   },
 
+  "secrets": {
+    "event": "leverage_gained",
+    "tokens": {
+      "figure_reaching_for_purse": {
+        "subject": "pc_01",
+        "type": "blackmail",
+        "expires_ticks": 720
+      }
+    },
+    "notes": "social-1 (iter-44, P3a; phases.md §3 — the CK3 add_hook precedent: secrets and leverage as first-class fact clusters, a hook IS an event; core/leverage.py owns the machinery, MVP_SCOPE §5 row 9 the system row). The registry: which knowledge tokens are SECRETS in this setting — a record whose token is declared here, held by a NOVEL knower (kind npc, not the subject), mints one leverage_gained fact event (actor = holder, target = subject, outcome {secret, type, fidelity, expires_at}); the cause chains to the event that taught them. Told secrets confer leverage too (the watch briefing's transfer mints the relief watcher's cluster — the institution's knowledge becomes the institution's leverage); the acquisition fidelity rides the cluster (how well the holder knows it). The cluster carries no knowledge, no hooks, no state changes — the social fact, not the epistemic one; the subject never learns of it; the cascade terminates (the one-hop law's sibling); the director buffer is untouched (L6). Expiry is a read-side window (live while t < expires_at — never an event, INV-1: the fact is immutable, its liveness is a fold; live_leverage is the single read owner, the spend is a future event naming the cluster's id — social-1b). The v0.1 content set: ONE live token — the theft secret (the steal failure's partial branch teaches it to the target, the total branch to the whole room; every holder gains the cluster over the stranger). The document_check verdict (papers_unsatisfactory) stays UNdeclared on purpose: the verdict is institutional — the watcher escalates through the crime machinery, and the check's actor is always the watcher; a personal-leverage twin would double-count the same knowledge (the crime ladder owns that rung). The ambient-channel row (content-3) did NOT ride: it is a director-hook content decision, not fact-cluster work — its own row per DIRECTOR_SPEC §11"
+  },
+
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,
@@ -316,7 +328,8 @@
       "location_burned_out", "alarm_raised", "crowd_wary",
       "watch_change", "knowledge_transfer", "expectation_violation",
       "rumor_told", "flee", "flee_caught", "arrest_attempt",
-      "arrest_resolved", "document_check", "document_check_failed"
+      "arrest_resolved", "document_check", "document_check_failed",
+      "leverage_gained"
     ],
     "thresholds": {"medium": 2, "high": 4},
     "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1."
@@ -357,6 +370,7 @@
       "arrest_resolved": ["crime_watch"],
       "document_check": ["director", "crime_watch"],
       "document_check_failed": ["director", "relations"],
+      "leverage_gained": ["knowledge", "relations"],
       "intent_rejected": []
     },
     "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction. tune-1: rest joins as the states system's recovery action (single-system by design — the fatigue counter-play is not a cross-system event)."

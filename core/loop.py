@@ -68,6 +68,7 @@ from core.intent import (
     validate_shape,
 )
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
+from core.leverage import leverage_drafts
 from core.log import EventDraft, EventLogWriter, EventRecord
 from core.onaction import on_action_drafts
 from core.pack import Pack
@@ -706,6 +707,17 @@ class Simulator:
         # each entry's draft reads the projection as left by the
         # previously committed reactions (the KI#13 discipline).
         for draft in on_action_drafts(self._pack, self._projection, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
+            )
+        # social-1 (iter-44, P3a): the secrets reaction — a novel knower
+        # of a pack-declared secret mints the leverage fact cluster (the
+        # CK3 add_hook precedent: a hook IS an event). Appended after the
+        # on_action dispatch (the same append composition), before the
+        # director seeding; the drafts carry no knowledge and no hooks,
+        # so the cascade terminates by construction (the one-hop law's
+        # sibling) and the director buffer is untouched (L6).
+        for draft in leverage_drafts(self._pack, self._knowledge, record):
             self._commit(
                 replace(draft, cause=record.id, provenance={"seed": self._seed})
             )

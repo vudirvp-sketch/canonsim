@@ -35,6 +35,7 @@ from core.intent import (
     PRESENT_SITES,
     REJECTION_EVENT,
 )
+from core.leverage import SECRETS_BLOCK_KEYS, TOKEN_KEYS
 from core.onaction import (
     ACTOR_TARGET_KEYS,
     ENTRY_KEYS,
@@ -283,6 +284,7 @@ class _Lint:
         self._urgencies()
         self._director()
         self._on_action()
+        self._secrets()
         self._states_rules()
         self._importance_rules()
         self._brief()
@@ -1578,6 +1580,125 @@ class _Lint:
         if "notes" in entry and not isinstance(entry.get("notes"), str):
             return f"{where}: notes must be a string"
         return None
+
+    # -- secrets & leverage (social-1, P3a — the fact-cluster registry) -----
+
+    def _secrets(self) -> None:
+        """The secrets registry contract (`core/leverage.py` owns the
+        vocabulary constants; `phases.md` §3 P3a the architecture row).
+        The block is OPTIONAL — a pack without it runs the v0.1 reaction
+        behavior, byte-identically (the pack's own declaration is the
+        gate, INV-3)."""
+        rules = self._data["rules.json"]
+        config = rules.get("secrets")
+        if config is None:
+            return
+        templates = self._data["templates.json"]["events"]
+        npc_ids = {npc["id"] for npc in self._data["entities.json"]["npcs"]}
+        if not isinstance(config, Mapping):
+            raise PackError("secrets must be an object")
+        unknown = sorted(set(config) - set(SECRETS_BLOCK_KEYS))
+        if unknown:
+            raise PackError(
+                f"secrets: unknown keys {unknown} (the closed vocabulary: "
+                f"{' | '.join(SECRETS_BLOCK_KEYS)})"
+            )
+        event_type = config.get("event")
+        _require(
+            isinstance(event_type, str) and event_type in templates,
+            f"secrets.event {event_type!r} is not in the template vocabulary "
+            "(EVENT_SCHEMA §11 — the fact event renders in the chronicle)",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                "secrets.notes must be a string (prose — never a table key)",
+            )
+        tokens = config.get("tokens")
+        _require(
+            isinstance(tokens, Mapping) and tokens,
+            "secrets.tokens must be a non-empty object keyed by knowledge "
+            "token",
+        )
+        mintable = self._literal_knows_tokens()
+        for token, spec in tokens.items():
+            where = f"secrets.tokens[{token!r}]"
+            # a token nobody can ever learn is dead vocabulary — the token
+            # must be minted by a declared knowledge template (the closed-set
+            # law; templated tokens are ineligible by construction: a
+            # secret's subject must be a fixed entity, a templated token's
+            # subject varies with the world)
+            _require(
+                token in mintable,
+                f"{where}: no declared knowledge template mints this token "
+                "(the literal `knows` vocabulary: actions / expectations / "
+                "transition layers)",
+            )
+            _require(
+                isinstance(spec, Mapping),
+                f"{where}: must be an object",
+            )
+            unknown_token = sorted(set(spec) - set(TOKEN_KEYS))
+            if unknown_token:
+                raise PackError(
+                    f"{where}: unknown keys {unknown_token} (the closed "
+                    f"vocabulary: {' | '.join(TOKEN_KEYS)})"
+                )
+            _require(
+                spec.get("subject") in npc_ids,
+                f"{where}: subject must be an npc id — the cluster targets "
+                "a social actor",
+            )
+            _require(
+                isinstance(spec.get("type"), str) and spec["type"].strip(),
+                f"{where}: type must be a non-empty string (the donor's "
+                "add_hook type — v0.1 vocabulary, no consumer yet)",
+            )
+            _require(
+                _is_int(spec.get("expires_ticks")) and spec["expires_ticks"] > 0,
+                f"{where}: expires_ticks must be a positive integer (the "
+                "donor's days — the read-side liveness window)",
+            )
+
+    def _literal_knows_tokens(self) -> set[str]:
+        """Every knowledge token the pack can mint as a literal string:
+        the `knows` values declared without slot braces across the three
+        birth sites — action knowledge templates (all branches + the
+        texture path), expectation rules, and transition-layer knowledge
+        entries. The reaction systems (telling, crime) only transfer
+        existing tokens, so this IS the birth vocabulary; templated
+        values (containing `{`) are excluded — a secret's subject is a
+        fixed entity, and a templated token's subject varies with the
+        world."""
+        tokens: set[str] = set()
+
+        def _take(entry: Any) -> None:
+            knows = entry.get("knows") if isinstance(entry, Mapping) else None
+            if isinstance(knows, str) and "{" not in knows:
+                tokens.add(knows)
+
+        for action in self._data["actions.json"]["actions"]:
+            knowledge = action.get("knowledge", {})
+            if isinstance(knowledge, Mapping):
+                for branch in knowledge.values():
+                    if isinstance(branch, list):
+                        for entry in branch:
+                            _take(entry)
+            texture = action.get("texture", {})
+            if isinstance(texture, Mapping):
+                for branch in texture.get("knowledge", {}).values():
+                    if isinstance(branch, list):
+                        for entry in branch:
+                            _take(entry)
+        rules = self._data["rules.json"]
+        for rule in rules.get("expectations", {}).get("rules", ()):
+            if isinstance(rule, Mapping):
+                _take(rule)
+        for config in rules.get("transitions", {}).values():
+            if isinstance(config, Mapping):
+                for entry in config.get("knowledge", {}).values():
+                    _take(entry)
+        return tokens
 
     def _prop_path_error(
         self,

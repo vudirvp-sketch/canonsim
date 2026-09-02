@@ -20,8 +20,9 @@ not of architecture — a boring four-room scenario is not a verdict on the core
 
 **In scope:**
 
-- 5 locations, 6 NPCs, 5 items, 8 systems, 13 actions — 12 phase-0 + rest
-  (tune-1/iter-27: the fatigue counter-play, pack data; §4–§7).
+- 5 locations, 6 NPCs, 5 items, 9 systems, 14 actions — 12 phase-0
+  plus the growth rows (rest tune-1/iter-27; document_check iter-43;
+  the 9th system, secrets & leverage, iter-44; §4–§7).
 - Deterministic core: seed, RngBank (INV-2, RNG-1), integer tick clock, single event
   queue, JSONL append-only log with header (§8, `docs/EVENT_SCHEMA.md` §1).
 - Event schema v0 with knowledge records, `state_changes`, `hooks`.
@@ -98,7 +99,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | `club_01` | club | barkeep's, under the bar |
 | `rope_01` | rope | utility, in the backyard |
 
-## 5. Systems (8)
+## 5. Systems (9)
 
 | # | System | Owns | Notes |
 |---|---|---|---|
@@ -110,6 +111,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | 6 | fire | source, flammability, spread, smoke, alarm | irreversible state changes |
 | 7 | crime & watch | suspicion thresholds, document check, arrest attempt, watch change | no group reputation — knowledge spread models it (§10) |
 | 8 | director | deferred-consequence buffer, triggers, stagnation detector | §11 |
+| 9 | secrets & leverage (iter-44, P3a) | the fact-cluster registry (`rules.json::secrets`) + the leverage birth reaction; a novel knower of a declared secret token mints a `leverage_gained` fact event (holder, subject, type, expiry); liveness is a read-side fold | `core/leverage.py`; the CK3 `add_hook` precedent — the fact is immutable, the spend a future event (social-1b) |
 
 ## 6. Intersection matrix (first-class design artifact)
 
@@ -122,9 +124,13 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | hooks → buffer → director release | delayed consequences fire causally |
 | position → visibility → crime success | where you stand decides what you can steal |
 | relations → talk → rumor acceptance | trusted tellers spread rumors faster |
+| knowledge → secrets → leverage | a witnessed secret becomes a social fact: novel knowers mint immutable leverage clusters (told secrets included — the briefing mints the relief's) |
 
 Eight systems taken separately are trivial — emergence lives at the
-intersections. The log metrics (§15) measure exactly this.
+intersections. The log metrics (§15) measure exactly this. (The ninth
+— secrets & leverage, iter-44 — is a knowledge-family reaction: its
+intersections are the two rows above that already pass through
+knowledge.)
 
 ## 7. Actions
 

@@ -13,6 +13,38 @@
 ---
 ---
 ---
+iter-44 · 2026-09-03 · social-1 — the secrets & leverage fact clusters
+(iter-44-social1-leverage; the owner's "continue work per the plan"
+session call, the phase-3 backlog's top un-gated item)
+- core/leverage.py (NEW): the secrets reaction — a novel knower of a
+  pack-declared secret token mints a leverage_gained fact event (the
+  CK3 add_hook shape: target/type/expiry/cause; no knowledge, no hooks,
+  no state — the cascade terminates; expiry a read-side fold,
+  live_leverage the read owner). loop.py::_react: wired after
+  on_action, before the director seeding. pack.py: the secrets lint
+  (closed keys, the mintable-token vocabulary, subject/type/expiry).
+  rules.json: the registry + the ONE live token (the theft secret over
+  pc_01, blackmail, 720 ticks) + story-critical + system_of_type;
+  templates.json: the tale line.
+- Measured: seed 93 mints the room (4) + the briefing mints the relief
+  (told, vague); seed 19 two failures → ONE mint round (novelty); the
+  10-seed day1_full A/B: 1/10 mint (125, the hot seed), divergence
+  exactly the leverage events, 9/10 byte-identical. Corpus regen paid
+  in-iteration (the iter-15/43 precedent): 9 narrator-beats cases
+  re-distilled (claim ids re-pinned; a runner outside the repo per
+  Rule 9). KI#64 opened+closed (KI#63 deletion drift + FAQ 21/20
+  kept per §6.1 — no substance-free merge; trim owes at the gate);
+  KI#65 opened+closed (MVP_SCOPE §2's stale action count + the
+  rules.json meta's stale system count — the iter-43 §2 miss).
+- +24 tests/test_leverage.py, tests 846→870, ruff clean. D-073;
+  MVP_SCOPE §5/§6 + §2, AGENT_NAVIGATION §1, TASKS (social-1 done +
+  social-1b opened; 707/600 kept per §6.1 — the phase-3 landing rows,
+  the iter-39..43 substance precedent), STATUS, this file synced.
+  12 files — over the 3-5 soft limit: the corpus regen + the
+  doc-sync law (§6 same-turn; the iter-43 precedent). bg-3 evicted
+  per the cap.
+
+---
 iter-43 · 2026-09-02 · content-1 — the document_check action, the §11
 content call resolved (iter-43-doccheck-live; the owner's blanket
 "quality, no crutches, do as best" directive)
@@ -260,31 +292,9 @@ precedent)
 
 ---
 bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
-(bg-3-briefer-spike; the owner re-supplied large/medium/small-dense)
-- scripts/df_briefer.py (new): the D-055 pattern over foreign canon —
-  the POV brief (assignment frame kept apart from the subject's
-  records; in-window records via the participant prefix scan; plus
-  fields merged, main precedence; collision-aware display keys; the
-  60-record cap with the loud marker) + the closed-vocabulary reply
-  gate (supported/contradicted/beyond_records/unknown_*; prose never
-  parsed; the anchor shape gate) + the ≤2-regen ladder with the dry
-  floor (VALIDATION_SPEC §7 ported) + the retrieval stress (quantile
-  figure spread, double-build byte-compare). Live session: 4
-  TAXONOMY §5-anchored cases, 31 claims — 19 supported / 12
-  deliberate-probe non-supported, 0 honest misfires; 1 regen
-  recovery, 1 exhaustion; the malformed-anchor probe caught at the
-  gate.
-- Numbers (TECH_NOTES §3.3, the AC's owner): 3 worlds re-imported
-  (counts reproduce §3.1/§3.2 row-for-row), brief p50 ≈ 2.9 KB /
-  p99 ≤ 15.6 KB on GB-scale exports, scan p99 ≤ 0.2 ms, build p99 ≤
-  4.4 ms, determinism PASS ×3 — the "tens of MB" worry is dead;
-  KB-scale briefs, sub-ms retrieval. The stress report name gains
-  the world label (large/medium share the region2 stem).
-- Tests 673→697 (+24 tests/test_df_briefer.py — brief/closure
-  blind-spot/verdict families/shape-gate/regen ladder/dry floor/
-  cases/stress), ruff clean. Doc-sync: TECH_NOTES §3.3, TASKS bg-3
-  done, STATUS header+FAQ+Next, AGENT_NAVIGATION §1, README; iter-27
-  evicted per the cap.
+(bg-3-briefer-spike)
+- (deleted at iter-44 per the one-in/one-out cap; history in git.)
+
 ---
 iter-34 · 2026-09-01 · owner-requested planning-layer audit
 (iter-34-planning-audit; doc-only — fresh owner request per D-022)
