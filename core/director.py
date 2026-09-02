@@ -76,6 +76,31 @@ The chosen option's payload overrides the base whole-key (Paradox
 options are complete alternative effect branches, not patches). A hook
 without options runs the v0.1 release path byte-identically.
 
+Phase 3 (arc-1, iter-47 — arcs & tension shaping, P3c; the DF
+event_collections / Paradox event-chain precedent, phases.md §3 owns
+the design): `director.arcs` (pack data) declares named release
+CHAINS — an ordered members list of hook tags plus the arc's own
+`min_gap_beats`. The ORDER law: a member tag is a release candidate
+only while it is its arc's CURRENT member (the first member not yet
+released this run); the chain gates candidacy on ALL release paths,
+explicit triggers included (an arc is pack-declared CAUSALITY, not
+pacing — D-005's ungated-explicit law is about the clock). The GAP
+law (the tension-shaping half): the current member may not release
+through the quiet or climax path within `min_gap_beats` beats of the
+arc's previous member's release — the arc's beats march, they do not
+dump; explicit triggers bypass the gap (causality is not pacing — the
+world's own consequences fire mid-gap exactly as they fire mid-rest).
+The entropy mirror: instances of PASSED members (a member whose tag
+already released — the cursor moved past it) stop counting toward
+entropy, the `first_time_only` burn law's twin (one play per arc
+beat; un-dischargeable tension is noise); the current and FUTURE
+members count normally — the seeded buffer's meaning is unchanged (a
+three-member arc fully seeded reads its whole weight until it starts
+marching). The cursor is per-run folded state, like the burn set
+(INV-2: a deterministic function of the release sequence). A pack
+without `director.arcs` runs the v0.1 release path byte-identically
+(the pack's own declaration is the gate, INV-3).
+
 Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
 a released hook produces an IntentData the loop enqueues through the
 normal queue, validated by the same front door as a playscript step.
@@ -116,7 +141,9 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
 
 __all__ = [
     "DISABLED",
+    "ARC_KEYS",
     "CHANNEL_INPUTS",
+    "ArcConfig",
     "ChannelConfig",
     "Director",
     "DirectorPolicy",
@@ -128,6 +155,7 @@ __all__ = [
     "SeededHook",
     "channel_entropies",
     "channels_from_rules",
+    "arcs_from_rules",
     "entropy",
     "pacing_from_rules",
     "policy_from_rules",
@@ -333,6 +361,54 @@ def channels_from_rules(
             inputs=frozenset(spec.get("inputs", ())),
         )
         for name, spec in channels.items()
+    }
+
+
+# -- the arc layer (arc-1, phase 3; P3c — the DF event_collections /
+# Paradox event-chain donor, tension shaped as an ordered chain) -------
+
+
+ARC_KEYS: Final = ("members", "min_gap_beats", "notes")
+"""The closed key set of a `director.arcs.<name>` block (pack lint
+owns the shape; an unknown key is a load error, never a silent
+ignore — the option-block precedent)."""
+
+
+@dataclass(frozen=True, slots=True)
+class ArcConfig:
+    """arc-1 pack data (`director.arcs.<name>`): one release chain —
+    the ordered `members` (hook tags; membership is declared HERE
+    ONLY, one-sided — the single owner of the fact, D-024; the hook
+    spec itself carries no arc key) and the chain's own
+    `min_gap_beats` (the tension-shaping floor: the arc's next beat
+    waits at least this many beats after its previous one — the
+    one-per-beat budget already enforces 1, so the lint floor is 2).
+    The names are free-form pack data; the members must name declared
+    hook tags and no tag may ride two arcs (ambiguous order — pack
+    lint refuses both at load)."""
+
+    members: tuple[str, ...]
+    min_gap_beats: int
+
+
+def arcs_from_rules(
+    rules: Mapping[str, Any],
+) -> Mapping[str, ArcConfig] | None:
+    """The pack's arc declarations (`director.arcs`), beside
+    `pacing_from_rules` / `channels_from_rules` (the single arcs
+    read). None when the pack declares no arcs — the v0.1 release
+    path, byte-identical (the pack's own declaration is the gate,
+    INV-3). An EMPTY block is legal and inert: no members, no
+    chains, the same release behavior as absence."""
+    arcs = rules.get("director", {}).get("arcs")
+    if arcs is None:
+        return None
+    return {
+        str(name): ArcConfig(
+            members=tuple(str(tag) for tag in spec["members"]),
+            min_gap_beats=int(spec["min_gap_beats"]),
+        )
+        for name, spec in arcs.items()
     }
 
 
@@ -710,7 +786,10 @@ class Director:
     release already happened — per-run, folded state like the buffer).
     Since iter-41 the option layer rides the release path: every
     release resolves its option choice first (`_choose_option` — pure,
-    never stored)."""
+    never stored). Since iter-47 it holds the arc-1 chain state: the
+    pack's arc table (constant, like the channels) plus the per-run
+    cursor (which member each arc is waiting on) and the last-release
+    beat feeding the gap law — folded state, INV-2."""
 
     pack: "Pack"
     policy: DirectorPolicy
@@ -726,12 +805,33 @@ class Director:
     _channels: Mapping[str, ChannelConfig] | None = field(
         default=None, init=False, repr=False
     )
+    _arcs: Mapping[str, ArcConfig] | None = field(
+        default=None, init=False, repr=False
+    )
+    _tag_arc: dict[str, str] = field(  # tag → its arc's name (arc-1)
+        default_factory=dict, init=False, repr=False
+    )
+    _tag_pos: dict[str, int] = field(  # tag → its position in that arc
+        default_factory=dict, init=False, repr=False
+    )
+    _arc_cursor: dict[str, int] = field(  # arc → first member not yet released
+        default_factory=dict, init=False, repr=False
+    )
+    _arc_last_beat: dict[str, int] = field(  # arc → beat of its previous member release
+        default_factory=dict, init=False, repr=False
+    )
 
     def __post_init__(self) -> None:
         self._pacing_config = pacing_from_rules(self.pack.rules)
         if self._pacing_config is not None:
             self._pacing = PacingClock()
         self._channels = channels_from_rules(self.pack.rules)
+        self._arcs = arcs_from_rules(self.pack.rules)
+        if self._arcs is not None:
+            for name, arc in self._arcs.items():
+                for position, tag in enumerate(arc.members):
+                    self._tag_arc[tag] = name
+                    self._tag_pos[tag] = position
 
     @property
     def hooks(self) -> tuple[SeededHook, ...]:
@@ -817,6 +917,14 @@ class Director:
         read it; PEAK/REST suppress the quiet path — every channel
         (the clock reads TOTAL entropy: one drama arc), explicit
         triggers stay ungated (D-005 — causality is not pacing).
+
+        arc-1 (iter-47): the arc order law gates CANDIDACY on all
+        three paths (a chain is pack-declared causality, not pacing —
+        the clock is not consulted, the chain is); the gap law gates
+        the quiet + climax paths only (it IS pacing — explicit
+        triggers fire mid-gap, D-005). The entropy view mirrors the
+        burn filter: instances of PASSED members stop counting (one
+        play per arc beat — the twin of the first_time_only law).
         """
         unreleased = [
             (idx, hook) for idx, hook in self._unreleased()
@@ -824,6 +932,25 @@ class Director:
             # never releases again and never counts toward entropy — its
             # remaining instances are facts (INV-5) but not tension.
         ]
+        # arc-1: the two views split when the pack declares arcs. The
+        # TENSION view (entropy's input) drops instances of PASSED
+        # members — a member whose tag already released; its remaining
+        # instances are spent facts, the burn law's twin. The CANDIDATE
+        # view (the three release paths' input) keeps only each arc's
+        # CURRENT member — the order law. Without arcs both views are
+        # the burned-tag list itself (the two comprehensions below are
+        # guarded no-ops — the v0.1 hot path is untouched).
+        tension = unreleased
+        eligible = unreleased
+        if self._arcs is not None:
+            tension = [
+                (idx, hook) for idx, hook in unreleased
+                if not self._arc_passed(hook.tag)
+            ]
+            eligible = [
+                (idx, hook) for idx, hook in tension
+                if self._arc_current(hook.tag)
+            ]
         # Entropy is invariant across this call — nothing mutates the
         # buffer, the release set, or the projection before an immediate
         # return — so it is computed once and reused for every policy
@@ -833,13 +960,16 @@ class Director:
         # drama (a burning room is a PEAK with the buffer drained), and
         # entropy is its only input.
         current_entropy = entropy(
-            projection, iter(h for _, h in unreleased), self.pack.rules, beat_tick
+            projection, iter(h for _, h in tension), self.pack.rules, beat_tick
         )
         self._advance_pacing(current_entropy)
         if not unreleased:
             return []
         # 1) explicit triggers — causal, fire regardless of entropy
-        for idx, hook in unreleased:
+        # (arc-1: the ORDER law applies — a non-current member's
+        # trigger is held by the chain; the GAP law does not — the
+        # world's own consequences fire mid-gap, D-005)
+        for idx, hook in eligible:
             if not _trigger_fires(hook.trigger, projection, beat_tick):
                 continue
             if self._on_cooldown(hook.target_npc):
@@ -871,10 +1001,15 @@ class Director:
         # climax-flagged hook never falls through to the quiet path.
         if self._climax_gate(current_entropy):
             candidates = [
-                (idx, hook) for idx, hook in unreleased
+                (idx, hook) for idx, hook in eligible
                 if hook.climax
                 and not self._on_cooldown(hook.target_npc)
                 and self._target_alive(projection, hook.target_npc)
+                and self._arc_gap_open(hook.tag)  # arc-1: the boss beat
+                # respects the chain's spacing too — an arc's beats
+                # march, they do not dump (the gap is pacing, so it
+                # gates this path and the quiet path — never the
+                # explicit one)
             ]
             if candidates:
                 candidates.sort(
@@ -913,17 +1048,22 @@ class Director:
         per_channel = (
             channel_entropies(
                 self._channels, projection,
-                iter(hook for _, hook in unreleased), self.pack.rules, beat_tick,
+                iter(hook for _, hook in tension), self.pack.rules, beat_tick,
             )
             if self._channels is not None
             else None
         )
+        # arc-1: the tension view feeds the channel entropies too (a
+        # passed member's instances are not tension in ANY entropy —
+        # the mirror is one law, not a global-entropy special case)
         candidates = [
-            (idx, hook) for idx, hook in unreleased
+            (idx, hook) for idx, hook in eligible
             if not hook.climax  # the boss never spawns because the world is boring
             and not self._on_cooldown(hook.target_npc)
             and self._target_alive(projection, hook.target_npc)
             and self._quiet_gate(hook, per_channel, global_quiet)
+            and self._arc_gap_open(hook.tag)  # arc-1: the gap law — the
+            # quiet path never dumps two of one arc's beats back to back
         ]
         if not candidates:
             return []
@@ -1009,6 +1149,67 @@ class Director:
             # the run; its remaining instances stop counting (releases()
             # filters them) and never release.
             self._burned_tags.add(hook.tag)
+        # arc-1: the chain's cursor advances when its CURRENT member
+        # releases — emit-time, the same law the budget and the cooldown
+        # follow (a door rejection still counts: the beat was spent, the
+        # world noticed the attempt). Only the current member can reach
+        # here (the candidacy filter); the position check keeps a manual
+        # _mark_released call honest — a no-op, never a silent cursor
+        # jump.
+        arc = self._tag_arc.get(hook.tag) if self._arcs is not None else None
+        if arc is not None:
+            assert self._arcs is not None
+            cursor = self._arc_cursor.get(arc, 0)
+            members = self._arcs[arc].members
+            if cursor < len(members) and members[cursor] == hook.tag:
+                self._arc_cursor[arc] = cursor + 1
+                self._arc_last_beat[arc] = self.beat_count
+
+    # -- the arc laws (arc-1, iter-47) ---------------------------------------
+
+    def _arc_current(self, tag: str) -> bool:
+        """The ORDER law: a member tag is a release candidate only while
+        it is its arc's current member — the first member not yet
+        released this run (the cursor). A completed arc (cursor past the
+        last member) has no current member: its leftover instances are
+        spent facts. A tag in no arc (or a pack without arcs) is always
+        current — the v0.1 law, untouched."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return True
+        return self._tag_pos[tag] == self._arc_cursor.get(arc, 0)
+
+    def _arc_passed(self, tag: str) -> bool:
+        """The entropy mirror's half of the order law: True when the
+        member's turn already came and went (its position precedes the
+        cursor — one instance of it released, the arc moved on). The
+        remaining instances are spent facts: they never release and stop
+        counting toward entropy (the first_time_only burn law's twin —
+        one play per arc beat). Future members are NOT passed: the
+        buffer's meaning is unchanged, a fully-seeded chain reads its
+        whole weight until it starts marching."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return False
+        return self._tag_pos[tag] < self._arc_cursor.get(arc, 0)
+
+    def _arc_gap_open(self, tag: str) -> bool:
+        """The GAP law (the tension-shaping half): the current member's
+        beat must sit at least `min_gap_beats` after the arc's previous
+        member's release — the chain's beats march, they do not dump.
+        The first member has no predecessor (the gap never gates it);
+        a tag in no arc is never gated. Consulted by the quiet and
+        climax paths ONLY — explicit triggers fire mid-gap (D-005:
+        causality is not pacing, the exact law that lets the world's
+        own consequences fire mid-rest)."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return True
+        assert self._arcs is not None
+        last = self._arc_last_beat.get(arc)
+        if last is None:
+            return True
+        return self.beat_count - last >= self._arcs[arc].min_gap_beats
 
     def _on_cooldown(self, npc: str) -> bool:
         """Per-NPC cooldown after a release (the MinGapBetweenEncounters

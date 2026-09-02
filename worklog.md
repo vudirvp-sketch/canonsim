@@ -12,6 +12,42 @@
 ---
 ---
 ---
+iter-47 · 2026-09-03 · arc-1 — arcs & tension shaping, the release-chain
+layer (iter-47-arc1-chains; the owner's "continue work per the plan,
+quality over speed" session call, the phase-3 backlog's top un-gated
+item — the LAST engine row of the phase-3 build column)
+- core/director.py: `director.arcs` pack chains — the ORDER law (a
+  member tag is a candidate only while it is its arc's CURRENT
+  member, all release paths, explicit triggers included: pack-declared
+  causality, not pacing), the GAP law (min_gap_beats spacing, quiet/
+  climax paths only — D-005), the ENTROPY MIRROR (passed members'
+  instances stop counting, the burn law's twin; future members count —
+  the buffer's meaning unchanged), the per-run cursor (folded state,
+  INV-2). One-sided membership (the members list is the single owner,
+  D-024) — no hook key, no SeededHook/loop/schema change.
+- pack.py lint: the closed key set, members ≥ 2 unique declared tags,
+  one arc per tag, gap ≥ 2 (1 = the budget's own law = dead
+  vocabulary). DORMANT (no chain in the committed set — content-6
+  owns the live driver): the 10-seed day1_full A/B (HEAD vs the arc
+  machinery, a runner outside the repo per Rule 9) 10/10
+  byte-identical, zero corpus regen. The naive watcher-pair chaining
+  probed live and REFUSED as the driver (the e2e: seed 125's
+  corpus-pinned relief release held forever by a predecessor that
+  never fires — content-6 needs a first member live on its runs).
+- +19 tests/test_director.py, tests 924→943, ruff clean. D-076;
+  DIRECTOR_SPEC §3d + §11 (the Alien unknown-axis L6 conflict
+  recorded for the owner, NOT silently resolved; re-plan-on-violation
+  recorded-not-built), MVP_SCOPE §5/§6, TASKS (arc-1 done, content-6
+  opened), phases.md §3, README, AGENT_NAVIGATION §1, STATUS + this
+  file synced; KI#66 deleted per AGENTS §5. 12 files — over the 3-5
+  soft limit: the doc-sync law (§6 same-turn, the iter-38..46
+  precedent). DECISIONS transiently 42/30 + TASKS 763/600 +
+  DIRECTOR_SPEC 582/300 + phases 662/600 kept per §6.1 (the landing
+  records are substance, 0 filler added; the trims owe at the
+  phase-3→4 gate alongside the FAQ, the KI#64 note). iter-37 evicted
+  per the cap.
+
+---
 iter-46 · 2026-09-03 · social-2 — the psychological echo, the residue
 read model (iter-46-social2-echo; the owner's "continue work per the
 plan, quality over speed" session call, the phase-3 backlog's top
@@ -295,26 +331,7 @@ bg-4 evicted per the cap.
 iter-37 · 2026-09-01 · dir-2 — the eventless-stretch instrument +
 the pacing A/B (iter-37-eventless-stretch; the owner's "continue per
 the plan" session call, the phase-3 backlog's top un-gated item)
-- core/metrics.py: `eventless_beat_stretches` — the phase-3 exit
-criterion's instrument (tale-gate scene events over the
-`urgencies.beat_ticks` window axis, `(prev_beat, beat]` windows);
-`IMPORTANCE_ORDER` moved to core/log.py (the chronicle imports it —
-one owner of the ordering, D-024); scripts/balance_harness.py:
-`--pacing on|off` (the clock-off arm = a linted pack variant minus
-`director.pacing` under output/, requires `--directors on`) + the
-stretch block. Measured 1000 seeds: both arms byte-identical per
-seed (every day1_full run ends in PEAK — the stagnation path never
-fires; D-065's "un-tuned" note answered), max stretch 1, quiet
-1000/1000 (the (360,720] phase-boundary window).
-- Scope: 13 files (code 5 + tests 2 + pack 1 + the doc-sync set —
-the iter-36 phase-opening precedent).
-- KI#61 (loop comment named the never-read
-`director.stagnation.beat_ticks`; the dead pack key deleted, zero
-behavior change) + KI#62 (worklog order/cap drift — bg-3 moved to
-its chronological position, the over-cap pair evicted) opened +
-closed. Tests 708→727 (+13 metrics, +6 harness incl. the seed-125
-D-065-record pin), ruff clean. D-066; TEST_PLAN §6 the contract
-owner.
+- (deleted at iter-47 per the one-in/one-out cap; history in git.)
 ---
 iter-36 · 2026-09-01 · phase-3 opening — the pacing clock
 (iter-36-pacing-clock; the owner's "continue per the plan" call —

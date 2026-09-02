@@ -43,6 +43,22 @@ observable state only (L6), and the release decisions are deterministic
 for a given buffer + projection — no RNG in the director itself. The
 clock is derived state the same way: a fold of the per-beat entropy
 sequence, never a canon write.
+
+iter-47 acceptance (phase 3, arc-1, P3c — arcs & tension shaping; the
+DF event_collections / Paradox event-chain precedent): `director.arcs`
+declares named release CHAINS. The ORDER law — a member tag is a
+release candidate only while it is its arc's current member (the
+chain gates ALL release paths, explicit triggers included: an arc is
+pack-declared causality, not pacing). The GAP law — the current
+member waits `min_gap_beats` after the previous member's release,
+consulted by the quiet and climax paths only (D-005: the world's own
+consequences fire mid-gap exactly as they fire mid-rest). The entropy
+mirror — instances of PASSED members stop counting (one play per arc
+beat, the first_time_only burn law's twin); future members count
+normally (a fully-seeded chain reads its whole weight). No committed
+hook rides an arc yet — the pack declares no chains (the content row
+owns the live driver); the tests exercise the laws via mutated packs
+(the iter-36/38/42 pattern).
 """
 
 from __future__ import annotations
@@ -55,8 +71,10 @@ from typing import Any
 import pytest
 
 from core.director import (
+    ARC_KEYS,
     CHANNEL_INPUTS,
     DISABLED,
+    ArcConfig,
     ChannelConfig,
     Director,
     DisabledPolicy,
@@ -65,6 +83,7 @@ from core.director import (
     PacingClock,
     PacingConfig,
     SeededHook,
+    arcs_from_rules,
     channel_entropies,
     channels_from_rules,
     entropy,
@@ -1728,4 +1747,508 @@ def test_option_intent_lint_rejects_unknown_target(tmp_path: Path) -> None:
         option["intent"] = {"target": "npc_ghost"}
 
     with pytest.raises(PackError, match="intent.target must be null or name an entity"):
+        _mutated_pack(tmp_path, mutate)
+
+
+# -- arc-1 acceptance (iter-47, P3c — release chains + tension shaping) ----
+
+
+def _arc_pack(
+    tmp_path: Path,
+    gap: int = 3,
+    members: tuple[str, ...] = (
+        "possible_document_check", "possible_document_check_relief",
+    ),
+) -> Any:
+    """The tavern pack plus one declared arc over the watcher pair (the
+    test's own members/gap), re-linted — the mutated-pack pattern."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": list(members),
+                "min_gap_beats": gap,
+                "notes": "the test's chain",
+            }
+        }
+
+    return _mutated_pack(tmp_path, mutate)
+
+
+def test_the_committed_pack_declares_no_arcs() -> None:
+    """The dormancy pin (the iter-38/42/45/46 pattern): no chain is live
+    in the committed content set — the arc table lands with its content
+    row, and a pack without `director.arcs` runs the v0.1 release path
+    byte-identically (the pack's own declaration is the gate, INV-3)."""
+    assert arcs_from_rules(PACK.rules) is None
+
+
+def test_arcs_from_rules_reads_the_declared_chains(tmp_path: Path) -> None:
+    """The single arcs read: the members tuple and the gap floor,
+flattened at load exactly like the pacing and channel configs. The
+closed key set is pinned beside it (the lint's vocabulary, one owner)."""
+    assert ARC_KEYS == ("members", "min_gap_beats", "notes")
+    pack = _arc_pack(tmp_path, gap=4)
+    assert arcs_from_rules(pack.rules) == {
+        "papers": ArcConfig(
+            members=("possible_document_check", "possible_document_check_relief"),
+            min_gap_beats=4,
+        )
+    }
+
+
+def test_an_empty_arcs_block_is_legal_and_inert(tmp_path: Path) -> None:
+    """`director.arcs: {}` declares no chains — the same release behavior
+    as an absent block (the v0.1 tiebreak decides, the lowest threshold
+    first). An empty block is not dead vocabulary the way a one-member
+    arc is: it declares nothing at all."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {}
+
+    pack = _mutated_pack(tmp_path, mutate)
+    assert arcs_from_rules(pack.rules) == {}
+    director = Director(pack=pack, policy=EnabledPolicy(entropy_floor=10))
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+        ),
+    ])
+    projection = initial_projection(pack.entities)
+    director.next_beat()
+    released = director.releases(projection, beat_tick=0)
+    # v0.1: both eligible, the tiebreak picks the lowest threshold (the
+    # relief twin, threshold 1) — no chain holds anything
+    assert len(released) == 1 and released[0].actor == "npc_guard_02"
+
+
+def test_the_order_law_reorders_the_quiet_path(tmp_path: Path) -> None:
+    """The ORDER law bites against the v0.1 tiebreak: the relief twin
+holds the LOWER threshold (it would win the un-chained pick), but the
+chain's first member releases first — the successor is not a candidate
+until its predecessor's beat is spent. The un-chained arm (the
+committed pack, same hooks) releases the twin first — the differential
+that proves the reordering is the arc's, not the world's."""
+    hooks = [
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+        ),
+    ]
+    chained = Director(
+        pack=_arc_pack(tmp_path), policy=EnabledPolicy(entropy_floor=10),
+    )
+    chained._hooks.extend(hooks)  # type: ignore[attr-defined]
+    projection = initial_projection(PACK.entities)
+    chained.next_beat()
+    released = chained.releases(projection, beat_tick=0)
+    assert len(released) == 1 and released[0].actor == "npc_guard_01"
+    plain = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=10))
+    plain._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+        ),
+    ])
+    plain.next_beat()
+    released = plain.releases(initial_projection(PACK.entities), beat_tick=0)
+    assert len(released) == 1 and released[0].actor == "npc_guard_02"
+
+
+def test_the_order_law_holds_explicit_triggers(
+    tmp_path: Path,
+) -> None:
+    """The chain is causality, not pacing: a non-current member's FIRING
+trigger is held (beat 1 — nothing releases, though the twin's time
+trigger fires and the quiet path is closed); the predecessor's own
+trigger releases it (beat 2); the successor then releases through its
+still-firing trigger IMMEDIATELY (beat 3) — the gap law does not gate
+the explicit path (D-005: causality is not pacing, the mid-rest law's
+twin)."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=3), policy=EnabledPolicy(entropy_floor=5),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+            trigger={"kind": "time", "tick": 1},
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+            trigger={"kind": "time", "tick": 0},
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    # the twin's trigger fires but the chain holds it; the quiet path is
+    # closed (entropy 5 >= floor 5) — nothing releases
+    assert director.releases(projection, beat_tick=0) == []
+    director.next_beat()
+    released = director.releases(projection, beat_tick=360)
+    assert len(released) == 1 and released[0].actor == "npc_guard_01"
+    director.next_beat()
+    # gap 3 would hold the twin until beat 4 on the quiet path — the
+    # explicit path does not consult it
+    released = director.releases(projection, beat_tick=720)
+    assert len(released) == 1 and released[0].actor == "npc_guard_02"
+
+
+def test_the_gap_law_spaces_the_quiet_path(tmp_path: Path) -> None:
+    """The tension-shaping half: the chain's beats march. After the first
+member releases (beat 1), the successor is held while
+`beat_count - last_release < min_gap_beats` (beats 2-3) and releases
+the beat the gap opens (beat 4 — a three-beat spacing at gap 3)."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=3), policy=EnabledPolicy(entropy_floor=10),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1  # member 1
+    director.next_beat()
+    assert director.releases(projection, beat_tick=360) == []  # gap 1/3
+    director.next_beat()
+    assert director.releases(projection, beat_tick=720) == []  # gap 2/3
+    director.next_beat()
+    released = director.releases(projection, beat_tick=1080)  # gap open
+    assert len(released) == 1 and released[0].actor == "npc_guard_02"
+
+
+def test_future_members_count_toward_entropy(tmp_path: Path) -> None:
+    """The buffer's meaning is unchanged by the chain: a fully-seeded
+arc reads its whole weight. The successor (weight 25) alone holds the
+clock in PEAK after the first member's explicit release — if future
+members were excluded from entropy the world would read quiet (the
+rest band), and the assert would fail. The first member releases
+explicitly mid-PEAK — the D-005 ungated-explicit pin riding along."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=2), policy=EnabledPolicy(entropy_floor=0),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=5, release_threshold=5,
+            trigger={"kind": "time", "tick": 0},
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=25, release_threshold=1,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1  # the explicit path, mid-PEAK (ungated)
+    director.next_beat()
+    assert director.releases(projection, beat_tick=360) == []  # never quiet
+    assert director.pacing is not None
+    assert director.pacing.state == "PEAK"  # the successor's 25 holds it
+    director.next_beat()
+    director.releases(projection, beat_tick=720)
+    assert director.pacing.state == "PEAK"
+
+
+def test_passed_instances_stop_counting_toward_entropy(
+    tmp_path: Path,
+) -> None:
+    """The burn law's twin: a member whose turn came and went drops its
+remaining instances from entropy. The counterfactual is arithmetic —
+the second instance of the first member (weight 5) still counting
+would read entropy 14 >= the floor 10 and the un-chained hook (weight
+4, threshold 50) would never release; excluded, entropy reads 9 < 10
+and the quiet path opens for it on beat 2 (the successor itself is
+gap-held)."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=3), policy=EnabledPolicy(entropy_floor=10),
+    )
+    first = _seeded_hook(
+        tag="possible_document_check", target_npc="npc_guard_01",
+        weight=5, release_threshold=5, trigger={"kind": "time", "tick": 0},
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        first,
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=5, release_threshold=5,
+        ),  # the spent instance — passed the moment the first releases
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=5, release_threshold=1,
+        ),
+        _seeded_hook(
+            tag="guard_suspicious_of_pc", target_npc="npc_drunk_01",
+            weight=4, release_threshold=50,
+        ),  # un-chained: the quiet path's probe
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    assert len(director.releases(projection, beat_tick=0)) == 1  # member 1
+    director.next_beat()
+    # entropy 9 (5 successor + 4 probe; the spent instance excluded) <
+    # 10 — the quiet path opens; the successor is gap-held, the probe
+    # is not chained and releases (the lowest releasable candidate)
+    released = director.releases(projection, beat_tick=360)
+    assert len(released) == 1 and released[0].actor == "npc_drunk_01"
+
+
+def test_one_play_per_arc_beat(tmp_path: Path) -> None:
+    """A spent member's later instances never release: the cursor moved,
+they are passed facts (the coerce one-secret-one-play twin). The
+sequence pins exactly two releases — the first member's first
+instance, then the successor after the gap — and nothing after the
+chain completes (beat 5: the leftover instance would release if the
+filter leaked; entropy reads 0, the quiet path is open, it does not)."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=3), policy=EnabledPolicy(entropy_floor=10),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=5, release_threshold=5, trigger={"kind": "time", "tick": 0},
+        ),
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=5, release_threshold=5,
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=5, release_threshold=5,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    order: list[str] = []
+    director.next_beat()
+    order.extend(
+        i.actor for i in director.releases(projection, beat_tick=0)
+    )
+    for tick in (360, 720, 1080, 1440, 1800):
+        director.next_beat()
+        order.extend(
+            i.actor for i in director.releases(projection, beat_tick=tick)
+        )
+    assert order == ["npc_guard_01", "npc_guard_02"]
+
+
+def test_the_climax_path_respects_the_chain(tmp_path: Path) -> None:
+    """The boss gate composes with both chain laws: a climax-flagged
+SUCCESSOR is held while its predecessor is unreleased (beat 1 — the
+climax gate is open, entropy at the third layer, and nothing releases);
+the predecessor's explicit trigger fires first (beat 2 — explicit
+beats the boss path, and a non-climax release never marks
+PEAK_CLIMAX); the successor then waits the gap INSIDE the peak (beat
+3 — the clock is back in PEAK, the gate re-opens, the gap holds) and
+releases when it opens (beat 4), marking the boss beat."""
+    director = Director(
+        pack=_arc_pack(tmp_path, gap=3), policy=EnabledPolicy(entropy_floor=5),
+    )
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+            trigger={"kind": "time", "tick": 1},
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=80, release_threshold=1, climax=True,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    director.next_beat()
+    # the climax gate is open (entropy 82 >= 75, PEAK held its minimum)
+    # but the flagged successor is not the chain's current member
+    assert director.releases(projection, beat_tick=0) == []
+    director.next_beat()
+    released = director.releases(projection, beat_tick=360)
+    assert len(released) == 1 and released[0].actor == "npc_guard_01"
+    assert director.pacing is not None
+    assert director.pacing.state == "PEAK"  # not marked: not a boss release
+    director.next_beat()
+    assert director.releases(projection, beat_tick=720) == []  # gap 1/3
+    director.next_beat()
+    assert director.releases(projection, beat_tick=1080) == []  # gap 2/3
+    director.next_beat()
+    released = director.releases(projection, beat_tick=1440)
+    assert len(released) == 1 and released[0].actor == "npc_guard_02"
+    assert director.pacing.state == "PEAK_CLIMAX"  # the boss beat
+
+
+def test_director_off_suppresses_the_chain(tmp_path: Path) -> None:
+    """The T8 baseline holds under chaining: a disabled director never
+releases — the chain never advances, no member ever spends its beat."""
+    director = Director(pack=_arc_pack(tmp_path), policy=DisabledPolicy())
+    director._hooks.extend([  # type: ignore[attr-defined]
+        _seeded_hook(
+            tag="possible_document_check", target_npc="npc_guard_01",
+            weight=2, release_threshold=5,
+            trigger={"kind": "time", "tick": 0},
+        ),
+        _seeded_hook(
+            tag="possible_document_check_relief", target_npc="npc_guard_02",
+            weight=3, release_threshold=1,
+        ),
+    ])
+    projection = initial_projection(PACK.entities)
+    for tick in (0, 360, 720, 1080):
+        director.next_beat()
+        assert director.releases(projection, beat_tick=tick) == []
+
+
+# pack lint (the arc-1 chain contract)
+
+
+def test_arc_lint_rejects_unknown_member_tag(tmp_path: Path) -> None:
+    """A typo'd member is silent dead vocabulary — the chain would wait
+forever on a tag that never seeds."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": ["possible_document_check", "possible_document"],
+                "min_gap_beats": 2,
+            }
+        }
+
+    with pytest.raises(PackError, match="must name a declared director.hooks tag"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_a_one_member_arc(tmp_path: Path) -> None:
+    """L1: a chain of one has no successor — the order law and the gap
+law are both vacuous on it (dead vocabulary, refused at load)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": ["possible_document_check"],
+                "min_gap_beats": 2,
+            }
+        }
+
+    with pytest.raises(PackError, match="at least two tags"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_a_doubled_member(tmp_path: Path) -> None:
+    """A tag chained to itself has no order semantics — the successor
+and the predecessor are the same release."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check",
+                ],
+                "min_gap_beats": 2,
+            }
+        }
+
+    with pytest.raises(PackError, match="members must be unique"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_a_tag_in_two_arcs(tmp_path: Path) -> None:
+    """Two chains claiming one tag have ambiguous order — which chain's
+cursor governs its candidacy is a question load refuses to answer."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check_relief",
+                ],
+                "min_gap_beats": 2,
+            },
+            "papers_again": {
+                "members": [
+                    "possible_document_check", "guard_suspicious_of_pc",
+                ],
+                "min_gap_beats": 2,
+            },
+        }
+
+    with pytest.raises(PackError, match="already belongs to arc"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_gap_below_the_budget(tmp_path: Path) -> None:
+    """min_gap_beats 1 is the 1-per-beat budget's own law — declaring it
+buys nothing (dead vocabulary, the empty-compound family)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check_relief",
+                ],
+                "min_gap_beats": 1,
+            }
+        }
+
+    with pytest.raises(PackError, match="min_gap_beats must be an integer >= 2"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_non_integer_gap(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check_relief",
+                ],
+                "min_gap_beats": "two",
+            }
+        }
+
+    with pytest.raises(PackError, match="min_gap_beats must be an integer >= 2"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_unknown_arc_key(tmp_path: Path) -> None:
+    """A typo'd key is a shape error, never a silent ignore — `memebers`
+would read as an unvalidated extra (the option-block precedent)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check_relief",
+                ],
+                "min_gap_beats": 2,
+                "memebers": [],
+            }
+        }
+
+    with pytest.raises(PackError, match="unknown arc keys"):
+        _mutated_pack(tmp_path, mutate)
+
+
+def test_arc_lint_rejects_non_string_notes(tmp_path: Path) -> None:
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["arcs"] = {
+            "papers": {
+                "members": [
+                    "possible_document_check", "possible_document_check_relief",
+                ],
+                "min_gap_beats": 2,
+                "notes": 3,
+            }
+        }
+
+    with pytest.raises(PackError, match="notes must be a string"):
         _mutated_pack(tmp_path, mutate)

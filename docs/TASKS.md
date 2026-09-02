@@ -27,8 +27,12 @@
 > D-073 — P3a, the CK3 add_hook precedent: the social layer's first
 > first-class facts in the log; the leverage use — the coerce door,
 > the spend — landed iter-45, social-1b, D-074: the fact cluster's
-> first runtime consumer; the psychological echo landed iter-46,
-> social-2, D-075 — P3e: the residue read model + the behavior gate).
+> first runtime consumer; the psychological echo — the residue read
+> model — landed iter-46, social-2, D-075, P3e; the release-chain
+> layer — arcs & tension shaping — landed iter-47, arc-1, D-076,
+> P3c: the last engine row of the phase-3 build column (the order
+> law + the gap law + the entropy mirror, DIRECTOR_SPEC §3d; dormant
+> — the 10-seed A/B byte-identical, the live driver is content-6).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -145,7 +149,21 @@
   (the day-1 walkthrough's four tokens) declared DORMANT — no
   consumer in the committed set, the 10-seed A/B byte-identical, zero
   corpus regen; the live driver is content-5.
-- `arc-1` · arcs & tension shaping (P3c).
+- `arc-1` · arcs & tension shaping (P3c) — **done (iter-47, D-076)**:
+  `director.arcs` pack chains — the DF event_collections / Paradox
+  event-chain precedent as the release-side twin. The ORDER law (a
+  member tag is a candidate only while it is its arc's current
+  member — the chain gates all release paths, explicit triggers
+  included: pack-declared causality, not pacing), the GAP law
+  (`min_gap_beats` spacing on the quiet/climax paths, never the
+  explicit one — D-005), the entropy mirror (passed members' leftover
+  instances stop counting, the burn law's twin; future members count
+  — the buffer's meaning unchanged), the one-sided membership lint
+  (members-only declaration, one arc per tag, gap ≥ 2). DORMANT (no
+  chain in the committed set — content-6 owns the live driver); the
+  10-seed A/B byte-identical, zero corpus regen. The Alien
+  three-axis unknown-axis conflict and the re-plan-on-violation
+  refinement recorded-not-built (DIRECTOR_SPEC §11, the owner's call).
 - `content-2` · the alarm panic echo (witnesses of `alarm_raised`
   gain fear — the through-the-walls law; the iter-42 live probe
   reverted on the phase-1 corpus's committed anchors): lands with the
@@ -164,6 +182,15 @@
   content-4 law — any urgency entry shifts the stream); the iter-46
   live-fire tests on crafted copies carry the mechanism proof until
   then.
+- `content-6` · the arc driver — the live content set for the landed
+  chain layer (a `director.arcs` declaration over hooks that actually
+  co-release on the committed runs — NOT the naive watcher-pair
+  chaining: the D-076 e2e probe showed the corpus-pinned relief
+  release is held forever by a predecessor that never fires on seed
+  125; the driver needs a chain whose first member is live on the
+  runs it targets): lands with the corpus regen any release-stream
+  change implies (the content-4/5 law); the iter-47 mutated-pack
+  tests carry the mechanism proof until then.
 - `content-3` · ambient-channel content (the declared dimension, no
   hook carries it): its own row — social-1 landed without it (the
   fact-cluster work was not hook content, the iter-44 call).

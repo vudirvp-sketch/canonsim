@@ -1,73 +1,58 @@
 # STATUS — canonsim
 
-Iteration: iter-46 (`iter-46-social2-echo` — the owner's "continue
-work per the plan, quality over speed" session call, the phase-3
-backlog's top un-gated item: social-2, P3e — the psychological echo) ·
+Iteration: iter-47 (`iter-47-arc1-chains` — the owner's "continue
+work per the plan, quality over speed" session call; the phase-3
+backlog's top un-gated item: arc-1, P3c — arcs & tension shaping,
+the LAST engine row of the phase-3 build column) ·
 Phase: 3 (Director)
-**OPEN — the residue read model landed: the emotional residue of what
-an NPC knows, as a pure fold (per-NPC valence, linear decay, fidelity
-scaled) driving behavior through the intent door's gate — "a watcher
-who saw the fire is jittery next morning", and the residue fades so
-events that happened but no longer matter stop driving behavior (the
-P3e headline)** · Date: 2026-09-03 ·
-Scope: `core/echo.py` (NEW) — the read-side fold: score(who, axis) =
-Σ over the knower's records of pack-declared token valence ×
-(fades_ticks − age) // fades_ticks × the fidelity percent (integer,
-floored; dead AT the boundary tick — the leverage expiry law's twin;
-a re-learned token RENEWS — records sum; a vague telling carries a
-quarter of the seeing), clamped to the pack scale; zero pairs absent
-from the tuple — a missing pair IS zero, the honest answer. The echo
-writes NOTHING (no events, no knowledge, no hooks, no state, no
-templates, no metrics — INV-1 by construction, the social family's
-cleanest landing: iter-44 minted facts, the echo never even does
-that); the fold runs ONLY for intents whose preconditions carry the
-echo test (the iter-45 laziness — every other action pays nothing);
-the L6 fence holds by construction: per-NPC valence over the NPC's
-OWN records, never player-adapted, NEVER an entropy input
-(DIRECTOR_SPEC §4 — the director reads observable state only; a
-knowledge-derived score is not observable). The consumer:
-`echo_at_least` (axis, value) — the closed test set's 17th, the P2b
-behavior gate (the sketch's "the urge ticker acts on the echo"
-dependency); scores duck-typed through `first_failing(...,
-echoes=...)` (the import direction one-way — core.intent never
-imports core.echo); the window law GENERALIZED: `WINDOWED_TESTS` =
-(leverage_over, echo_at_least) — the OCC re-check unconditional for
-the family, `occ_breaking_cause` excludes the family (a decay close
-never attributes an event the log does not hold); the loop reads each
-fold lazily per evaluation point (the door at the entry tick, the beat
-gate at the beat tick, the completion at its own). The pack:
-`rules.json::echo` — scale [0,100], fidelity_weight over the pack's
-own chain (100/50/25), four tokens = the day-1 walkthrough's residue
-(the theft sighting dread 25 / wariness 35, fades 720; the
-fire-starting sighting dread 60 / wariness 30, fades 1440; the
-inferred absence wariness 30; the bar noise wariness 15, fades 360;
-papers_unsatisfactory UNdeclared — the iter-44 institutional call,
-the crime ladder owns that rung's escalation). Lint: `_echo` (the
-closed key sets, the chain coverage, the mintable-token law, non-zero
-valence — a sign is legal, zero is dead vocabulary) + the requires
-cross-lint on BOTH sides (actions + urgencies: axis declared, value
-strictly above the scale floor and at or below the ceiling — a dead
-gate refused at load, the leverage `who` family). DORMANT in the
-committed content set (the iter-38/42/45 pattern — no action or
-urgency carries echo_at_least; the live driver is content-5's row):
-the declaration is INERT — the 10-seed day1_full A/B (125 + the nine
-corpus seeds, a runner outside the repo per Rule 9) 10/10
-byte-identical, ZERO corpus regen (the first social-family landing
-with none — the echo writes nothing; iter-44 paid 9 cases because
-the mint is event-driven). Measured (crafted driver, seed 93, tuned
-token dread 100 / fades 720): the drunk's partial sighting at t=5
-reads dread 25 at the beat-360 gate → the driver's look_around fires
-once (t=406); the beat-720 read is 0 — the roll silent (the fade
-law live); the window-close probe (the ACTION carrying the gate,
-ticks 400 — the coerce shape: the door and the OCC re-validate what
-the action declares): the door accepts at 405 (residue 22 at the
-caller's own tick), the completion at 805 rejects
-projection_moved / actor.echo_at_least with the cause chained to the
-last committed canon; the committed valence reads real residue on
-the committed pack (dread 6 / wariness 8 at the beat-360 read).
-KI#67 opened+closed (README's Status froze at iter-43 — "846 tests",
-the social rows absent; the KI#66 family, iter-44/45 both skipped
-the README sync). Tests 895→924 (+29 tests/test_echo.py), ruff
+**OPEN — the release-chain layer landed: named hook CHAINS as pack
+data (`director.arcs`), the drama's order finally first-class — a
+successor's beat presupposes its predecessor's, the chain's beats
+march instead of dumping, and the tension curve is shapeable by
+declaration** · Date: 2026-09-03 ·
+Scope: `director.arcs.<name>` = {members (≥2 unique declared hook
+tags, ONE-SIDED — the members list is the single owner of the fact,
+D-024; no hook key, no SeededHook/loop/schema change, no new
+events), min_gap_beats (int ≥ 2 — 1 is the budget's own law, dead
+vocabulary, refused at load)}. The ORDER law (causality, not
+pacing): a member tag is a release candidate ONLY while it is its
+arc's current member (a per-run cursor, folded state like the burn
+set, INV-2) — the chain gates ALL release paths, explicit triggers
+included (D-005's ungated-explicit law is about the CLOCK; the
+chain is pack-declared causal structure, not an intensity band —
+the design's load-bearing distinction). The GAP law (the
+tension-shaping half — pacing): the current member waits
+`min_gap_beats` after the previous member's release on the
+quiet/climax paths ONLY — explicit triggers fire mid-gap (the
+mid-rest law's twin). The ENTROPY MIRROR: instances of PASSED
+members (position < cursor — one instance released, the arc moved
+on) never release and stop counting toward entropy AND the channel
+entropies (one law, both views) — the first_time_only burn law's
+twin (one play per arc beat); current + FUTURE members count
+normally — the seeded buffer's meaning is UNCHANGED (the D-065..72
+tuned floors stay valid); a stalled arc's future members keep
+counting exactly as any permanently-blocked hook does today (no new
+hazard, recorded honestly). The cursor advances at emit-time inside
+_mark_released (the budget/cooldown law — a door rejection still
+spends the beat). Composes with channels (AND), the climax flag
+(boss = current + the climax path + gap open), options,
+first_time_only. The STALL is honest: a member that can never
+release parks the chain — the re-plan-on-violation refinement
+(Generative Agents shape) recorded-not-built (§11, the
+first-consumer law). DORMANT in the committed pack (the
+iter-38/42/45/46 pattern — NO chain declared): the 10-seed
+day1_full A/B (HEAD vs the arc machinery, a runner outside the repo
+per Rule 9) 10/10 byte-IDENTICAL, zero corpus regen; the naive
+watcher-pair chaining was probed live and REFUSED as the live
+driver (the e2e: seed 125's corpus-pinned relief release would be
+held forever by a predecessor that never fires on that run —
+content-6 needs a first member live on the runs it targets). The
+Alien three-axis unknown-axis CONFLICT (phases.md §3 sketch "may
+pace against the [knowledge] gap" vs DIRECTOR_SPEC §4 entropy law
+"observable state only, L6" — the iter-46 echo FAQ's exact fence)
+recorded in DIRECTOR_SPEC §11 for the owner to resolve, NOT
+silently. KI#66 deleted per AGENTS §5 (closed iter-45, two
+iterations past). Tests 924→943 (+19 tests/test_director.py), ruff
 clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -101,11 +86,9 @@ clean.
   in a second place, both left stale) · opened 2026-09-03 · CLOSED
   iter-46 (the paragraph actualized: the social-1/1b/2 landings, 924
   green, the Next line re-aimed at the content rows).
-- KI#66 · doc drift: `cli/main.py`'s docstring still said "13 actions"
-  after iter-43 landed the 14th — the iter-43 doc-sync updated
-  MVP_SCOPE/DIRECTOR_SPEC/TASKS but missed the CLI module docstring
-  (the KI#65 family: a count restated in a second place) · opened
-  2026-09-03 · CLOSED iter-45 (actualized to 15 with coerce's landing).
+- (KI#66 deleted at iter-47 per AGENTS §5 — closed iter-45, two
+  iterations past; the lesson lives in git + the KI#67 family —
+  every count restated in a second place goes stale.)
 - (KI#65 deleted at iter-46 per AGENTS §5 — closed iter-44, two
   iterations past; the lesson lives in git + the FAQ.)
 - (KI#64 deleted at iter-46 per AGENTS §5 — closed iter-44, two
@@ -471,42 +454,51 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36..44 — the pacing clock D-065 + the
+**Phase 3 is OPEN (iter-36..47 — the pacing clock D-065 + the
 exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's three layers D-069/D-070/
-D-071 + the document_check content set D-072 + the secrets & leverage
-fact clusters D-073 landed — the boss beat runs end to end as pack
-data, and the social layer mints first-class facts: the room's
-knowledge of the theft is now leverage, live in the log and the tale).**
-The phase-3 arc in `docs/TASKS.md`'s backlog: `social-1b` (the
-leverage use — the coerce door, the fact cluster's first consumer),
-then `social-2` (psychological echo, P3e)/`arc-1` (arcs & tension
-shaping, P3c); the owner's standing quality directive resolves the
-remaining content rows on the documented design — each as its own
-iteration: `content-2` (the alarm panic echo, with its corpus regen —
-the content-1 precedent), `content-3` (ambient-channel content, its
-own row — it did NOT ride social-1). The dir-2/dir-4/drama-1/2/3
-measurement's honest finding STANDS SUPERSEDED in part: the
-document_check landing is the first deliberate divergence (the check
-fires on the runs that reach the confrontation — 1/10 day1_full
-seeds; the corpus's seed-93 script fires), and social-1 adds the
-second (the same 1/10 hot seed mints the leverage facts — the same
-steal failure drives both), while the clock/channel/weight layers
-stay inert on day1_full (every run ends in PEAK — a measurable pacing
-delta needs a gate-protocol script set that walks the world into
-quiet; recorded in D-066, a phase-gate question, not forced).
+D-071 + the document_check content set D-072 + the secrets &
+leverage fact clusters D-073 + the coerce door D-074 + the
+psychological echo D-075 + the release-chain layer D-076 landed —
+the phase-3 build column's ENGINE side is complete: stagnation
+detector, complication buffer, arcs. What remains of phase 3 is
+CONTENT (the live drivers) + the gate.)** The phase-3 remainder in
+`docs/TASKS.md`'s backlog: the content rows, each as its own
+iteration on the documented design — `content-2` (the alarm panic
+echo, with its corpus regen — the content-1 precedent),
+`content-4` (the coerce driver), `content-5` (the echo driver),
+`content-6` (the arc driver — NOT the naive watcher-pair chaining:
+the D-076 e2e showed a never-firing predecessor holds the
+corpus-pinned successor forever; the driver needs a first member
+live on the runs it targets), `content-3` (ambient-channel
+content). The dir-2/dir-4/drama-1/2/3 measurement's honest finding
+STANDS SUPERSEDED in part: the document_check landing is the first
+deliberate divergence (the check fires on the runs that reach the
+confrontation — 1/10 day1_full seeds; the corpus's seed-93 script
+fires), and social-1 adds the second (the same 1/10 hot seed mints
+the leverage facts — the same steal failure drives both), while the
+clock/channel/weight/arc layers stay inert on day1_full (every run
+ends in PEAK — a measurable pacing delta needs a gate-protocol
+script set that walks the world into quiet; recorded in D-066, a
+phase-gate question, not forced).
 
-1. **Phase-3 arc** (TASKS backlog): social-1b (the leverage use) →
-   social-2/arc-1 (the social-depth run) → the content rows
-   (`content-2` the alarm echo with its corpus regen; `content-3`
-   ambient-channel).
+1. **Phase-3 remainder** (TASKS backlog): the content rows
+   (`content-2` the alarm echo with its corpus regen; `content-4`
+   the coerce driver; `content-5` the echo driver; `content-6` the
+   arc driver; `content-3` ambient-channel) → then the phase-3→4
+   gate (DECISIONS 42/30 collapse + the FAQ trim owed per the
+   KI#64 note + TASKS/phases over-cap trims — all recorded as owed
+   at the gate).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
    carries mode C until then), tune-3 (the three-way NPC-movement
    fork), st-2 (identity persistence), the phase-1 corpus
    consolidation pass, `bg-6` (SoW audit, D-055 deferral), `qa-1`
-   mypy + `ci-1` GitHub Actions.
+   mypy + `ci-1` GitHub Actions. NEW for the owner: the Alien
+   unknown-axis L6 conflict (DIRECTOR_SPEC §11 — the sketch vs the
+   entropy law; resolve before any phase-3+ pacing work reads
+   knowledge records).
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
    New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked

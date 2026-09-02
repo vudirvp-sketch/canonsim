@@ -151,10 +151,23 @@ grammar landing was 10/10 byte-identical each time; the content
 landing is the first deliberate divergence — 1/10 day1_full seeds
 fire, the delta exactly the crowd reaction; TEST_PLAN §6). Contract
 owner `docs/DIRECTOR_SPEC.md` §3/§3a/§3b/§3c.
-Next: the phase-3 social-depth remainder (`arc-1`; `docs/TASKS.md`)
-+ the content rows (the alarm panic echo and the coerce/echo drivers
-with their corpus regens, ambient-channel content) + the owner-gated
-set (parse-2, engine-1).
+The release-chain layer landed iter-47 (arc-1, D-076 — P3c, the last
+engine row of the phase-3 build column): `director.arcs` pack chains
+— the order law (a member tag is a release candidate only while it
+is its arc's current member, all release paths, explicit triggers
+included: pack-declared causality, not pacing) + the gap law
+(`min_gap_beats` spacing between a chain's beats, quiet/climax paths
+only — D-005) + the entropy mirror (a passed member's leftover
+instances stop counting, the first_time_only burn law's twin — one
+play per arc beat); the DF event_collections / Paradox event-chain
+precedent; no chain declared in the committed pack — the 10-seed
+A/B byte-identical vs HEAD, zero corpus regen (content-6 owns the
+live driver). 943 tests green, ruff clean. Contract owner
+`docs/DIRECTOR_SPEC.md` §3d (the Alien unknown-axis conflict and the
+re-plan-on-violation refinement recorded in §11, the owner's call).
+Next: the phase-3 content rows (the alarm panic echo and the coerce/
+echo/arc drivers with their corpus regens, ambient-channel content —
+`docs/TASKS.md`) + the owner-gated set (parse-2, engine-1).
 
 ## For AI agents (primary audience)
 

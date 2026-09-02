@@ -369,7 +369,8 @@ instruction (`VISION.md` §5); the world answers, not the model.
 OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
 instrument D-066, climax layer D-067, multi-channel split D-068, the
 grammar's predicate + weight layer D-069, the grammar's option layer
-D-070, the grammar's on_action dispatch D-071)
+D-070, the grammar's on_action dispatch D-071, the release-chain
+layer D-076)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -429,9 +430,20 @@ deterministic engine).
 
 **Social depth**: secrets & leverage as first-class fact clusters (P3a;
 CK3 `add_hook` — a hook *is an event* with target, type, expiry tick,
-cause — **landed iter-44 + iter-45, D-073/D-074**); arcs & tension
-shaping (P3c; L4D/Alien pacing layered over the seeded buffer, never
-replacing it); **psychological echo (P3e) — landed iter-46 (D-075,
+cause — **landed iter-44 + iter-45, D-073/D-074**); **arcs & tension
+shaping (P3c) — landed iter-47 (arc-1, D-076): `director.arcs` pack
+chains — the order law (a member releases only as its arc's current
+member, all paths, explicit triggers included — pack-declared
+causality, not pacing) + the gap law (`min_gap_beats` spacing on the
+quiet/climax paths only, never the explicit one) + the entropy mirror
+(passed members' instances stop counting — the burn law's twin); the
+DF event_collections / Paradox event-chain precedent, dormant in the
+committed pack (the content-6 driver owns the live call); the Alien
+three-axis unknown-axis is recorded NOT built — its sketch ("the
+director may pace against the [knowledge] gap") conflicts with the
+entropy law's L6 fence (observable state only — the iter-46 echo FAQ
+pinned the same line), the owner's call to resolve
+(DIRECTOR_SPEC §11)**; **psychological echo (P3e) — landed iter-46 (D-075,
 social-2): NPC behavior modifiers derived from own knowledge records +
 ticks since learned** — `core/echo.py`, a pure read-side fold (per-NPC
 valence, linear decay over the pack's `fades_ticks`, fidelity-scaled,

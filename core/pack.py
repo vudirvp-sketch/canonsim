@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from core.clock import Clock
-from core.director import CHANNEL_INPUTS
+from core.director import ARC_KEYS, CHANNEL_INPUTS
 from core.echo import ECHO_BLOCK_KEYS, ECHO_TOKEN_KEYS
 from core.intent import (
     AUDIENCES,
@@ -1491,6 +1491,77 @@ class _Lint:
                                 f"{owhere}: intent.target must be null or "
                                 "name an entity",
                             )
+        # iter-47 (arc-1, P3c): the arc contract — `director.arcs`
+        # declares the release chains (the DF event_collections /
+        # Paradox event-chain precedent). Membership is one-sided —
+        # the members list IS the declaration (a hook spec carries no
+        # arc key; the single owner of the fact, D-024); every member
+        # must name a declared hook tag and no tag may ride two arcs
+        # (ambiguous order). The gap floor is >= 2: the one-per-beat
+        # budget already enforces a one-beat spacing, so a 1 declares
+        # nothing — dead vocabulary, refused at load (the empty-
+        # compound law's family).
+        arcs = config.get("arcs")
+        if arcs is not None:
+            _require(
+                isinstance(arcs, Mapping),
+                "director.arcs must be an object keyed by arc name",
+            )
+            hook_tags = set(config.get("hooks", {}))
+            member_arc: dict[str, str] = {}
+            for name, spec in arcs.items():
+                where = f"director.arcs[{name!r}]"
+                _require(
+                    isinstance(spec, Mapping),
+                    f"{where}: must be an object",
+                )
+                unknown = sorted(set(spec) - set(ARC_KEYS))
+                _require(
+                    not unknown,
+                    f"{where}: unknown arc keys {unknown} "
+                    f"(the closed vocabulary: {' | '.join(ARC_KEYS)})",
+                )
+                members = spec.get("members")
+                _require(
+                    isinstance(members, list)
+                    and len(members) >= 2
+                    and all(isinstance(member, str) for member in members),
+                    f"{where}: members must be a list of at least two "
+                    "tags (a chain has a successor — a one-member arc "
+                    "is dead vocabulary)",
+                )
+                _require(
+                    len(set(members)) == len(members),
+                    f"{where}: members must be unique (a doubled tag "
+                    "chains to itself)",
+                )
+                for member in members:
+                    _require(
+                        member in hook_tags,
+                        f"{where}: member {member!r} must name a "
+                        "declared director.hooks tag",
+                    )
+                    _require(
+                        member not in member_arc,
+                        # the message formats eagerly — .get() keeps the
+                        # first-sight member out of the KeyError path
+                        f"{where}: member {member!r} already belongs to "
+                        f"arc {member_arc.get(member, '')!r} (a tag in two "
+                        "arcs has ambiguous order)",
+                    )
+                    member_arc[member] = str(name)
+                _require(
+                    isinstance(spec.get("min_gap_beats"), int)
+                    and not isinstance(spec.get("min_gap_beats"), bool)
+                    and spec["min_gap_beats"] >= 2,
+                    f"{where}: min_gap_beats must be an integer >= 2 "
+                    "(the 1-per-beat budget already enforces 1 — a "
+                    "smaller gap is dead vocabulary)",
+                )
+                _require(
+                    "notes" not in spec or isinstance(spec.get("notes"), str),
+                    f"{where}: notes must be a string",
+                )
 
     # -- on_action (drama-3, iter-42: the pack's reaction table) ---------------
 

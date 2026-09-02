@@ -111,7 +111,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | 5 | states | fatigue, intoxication, fear, injury | modifiers on perception & behavior |
 | 6 | fire | source, flammability, spread, smoke, alarm | irreversible state changes |
 | 7 | crime & watch | suspicion thresholds, document check, arrest attempt, watch change | no group reputation — knowledge spread models it (§10) |
-| 8 | director | deferred-consequence buffer, triggers, stagnation detector | §11 |
+| 8 | director | deferred-consequence buffer, triggers, stagnation detector; the release-chain layer (arc-1/iter-47, P3c — `director.arcs` pack chains: the order law + the min-gap pacing + the entropy mirror, DIRECTOR_SPEC §3d) | §11 |
 | 9 | secrets & leverage (iter-44, P3a) | the fact-cluster registry (`rules.json::secrets`) + the leverage birth reaction and spend door; a novel knower of a declared secret token mints a `leverage_gained` fact event (holder, subject, type, expiry); liveness is a read-side fold | `core/leverage.py`; the CK3 `add_hook` precedent — the fact is immutable, the spend a new event naming the cluster's id (iter-45: the `coerce` action, `leverage_over` the door) |
 
 ## 6. Intersection matrix (first-class design artifact)
@@ -123,6 +123,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | intoxication → perception → witness quality | the drunkard's testimony is vague by construction |
 | time → fatigue → NPC goals | guards rotate, the maid goes home |
 | hooks → buffer → director release | delayed consequences fire causally |
+| hooks → arc → ordered release | the chain's beats march in pack-declared order, spaced by the gap law — tension shaped as a sequence, not a pile (arc-1/iter-47, P3c; DIRECTOR_SPEC §3d) |
 | position → visibility → crime success | where you stand decides what you can steal |
 | relations → talk → rumor acceptance | trusted tellers spread rumors faster |
 | knowledge → secrets → leverage → coerce | a witnessed secret becomes a social fact: novel knowers mint immutable leverage clusters (told secrets included — the briefing mints the relief's); the spend (iter-45) plays the card — the cluster dies in the fold, the subject's directed pair axes shift (the balance) |

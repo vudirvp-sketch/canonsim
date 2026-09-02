@@ -15,7 +15,9 @@
 > layers were byte-identical on day1_full at landing — the D-066
 > all-PEAK window; the document_check landing is the first DELIBERATE
 > divergence: the check fires on the runs that reach the confrontation,
-> with the corpus regen it implied): `docs/TEST_PLAN.md` §6.
+> with the corpus regen it implied): `docs/TEST_PLAN.md` §6. arc-1
+> (iter-47, D-076): the release-chain layer (§3d) — landed dormant, the
+> 10-seed A/B byte-identical, zero corpus regen.
 
 ## 1. What the director is
 
@@ -239,6 +241,88 @@ pins are committed fixtures — the next content row, with the corpus
 regen it implies (§11). A pack without the `on_action` block runs
 the v0.1 reaction behavior, byte-identically on runs that fire no
 entry (TEST_PLAN §6 owns the A/B).
+
+## 3d. The arc layer (arc-1, iter-47 — the release chains; P3c, the
+DF event_collections / Paradox event-chain precedent)
+
+`director.arcs` (pack data) declares named CHAINS of hook tags —
+the arcs & tension shaping layer (P3c; the last engine row of the
+phase-3 build column). Each arc block carries the closed key set
+`members | min_gap_beats | notes` (an unknown key is a lint error,
+never a silent ignore — the option-block precedent):
+
+| Key | Shape | Meaning |
+|---|---|---|
+| `members` | a list of ≥ 2 unique declared hook tags | the chain's release ORDER; membership is declared HERE ONLY — one-sided, the members list is the single owner of the fact (D-024; a hook spec carries no arc key) |
+| `min_gap_beats` | `int ≥ 2` | the chain's own pacing floor — the next member's beat waits at least this many beats after the previous one (1 is the 1-per-beat budget's own law — dead vocabulary, refused at load) |
+| `notes` | prose (optional) | pack documentation |
+
+Pack lint also refuses: a member naming no declared hook tag (a
+typo'd member waits forever), a doubled member (a tag chained to
+itself), and a tag in two arcs (ambiguous order — which cursor
+governs its candidacy).
+
+**The order law (causality, not pacing):** a member tag is a release
+CANDIDATE only while it is its arc's current member — the first
+member not yet released this run (a per-run cursor, folded state like
+the burn set, INV-2). The chain gates candidacy on ALL release paths,
+explicit triggers included: an arc is pack-declared causal structure
+(a second beat that presupposes the first), not an intensity band —
+D-005's ungated-explicit law is about the CLOCK, and the chain is not
+the clock. A held explicit trigger re-evaluates per beat; when the
+cursor reaches that member it fires if its trigger still holds (a
+transient trigger that died while held is the pack author's liveness
+question, honestly unanswered). A completed arc has no current member:
+its leftover instances are spent facts. **The stall is honest** — if a
+member's target dies or its trigger never fires, the chain stops
+there and later members never release (the world's causality broke
+the plan; the re-plan-on-violation refinement, §11, is the recorded
+future escape hatch). Measured live (D-076, seed 125, day1_full, the
+watcher pair chained as an e2e probe): the corpus-pinned relief-twin
+release is HELD all run — its predecessor never releases on that run
+("the post emptied the beat his band opened", iter-43) — the chain
+semantics working, not a bug.
+
+**The gap law (the tension-shaping half — pacing):** the current
+member may not release through the quiet or climax path within
+`min_gap_beats` beats of the arc's previous member's release — the
+chain's beats march, they do not dump. Explicit triggers bypass the
+gap (D-005: causality is not pacing — the world's own consequences
+fire mid-gap exactly as they fire mid-rest). The first member has no
+predecessor and is never gap-gated.
+
+**The entropy mirror:** instances of PASSED members (a member whose
+position precedes the cursor — one instance of it released, the arc
+moved on) never release again and stop counting toward entropy — the
+`first_time_only` burn law's twin (one play per arc beat;
+un-dischargeable tension is noise). The CURRENT and FUTURE members
+count normally — the seeded buffer's meaning is unchanged (a
+fully-seeded chain reads its whole weight until it starts marching;
+the channel entropies read the same view — the mirror is one law, not
+a global-entropy special case). A stalled arc's future members keep
+counting, exactly as any permanently-blocked hook does today (entropy
+measures unresolved tension; a dead man's hook is noise the v0.1 law
+already tolerates — no new hazard, unchanged).
+
+The cursor advances at emit-time inside `_mark_released` — the same
+law the budget and the per-NPC cooldown follow (a door rejection
+still spends the member's beat: `intent_rejected` is a fact, the
+world noticed the attempt; re-firing a spent member is the
+re-plan-on-violation question, not this layer). Composes with every
+standing layer: channels (a member may carry one — both gates
+AND-compose), the climax flag (a boss member releases only through
+the climax path AND only when current AND only gap-open), options
+(the chosen option's payload rides the member's release),
+`first_time_only` (orthogonal — a burned tag cannot advance the
+cursor it already advanced).
+
+A pack without `director.arcs` runs the v0.1 release path
+byte-identically (the pack's own declaration is the gate, INV-3); an
+EMPTY block is legal and inert. No chain is live in the committed
+content set — the live driver is the content-6 row (the iter-38/42/
+45/46 dormancy pattern; the machinery is unit-pinned on mutated packs
++ the 10-seed day1_full A/B 10/10 byte-identical vs HEAD, zero corpus
+regen — D-076, TEST_PLAN §6 owns the protocol).
 
 ## 4. Narrative entropy (P2e)
 
@@ -470,6 +554,23 @@ suffices.
   hook carries it — a content-scale decision; lands with `social-1`'s
   fact-cluster work or its own row).
 - A per-NPC desirability score for hook selection (phase-3).
+- The arc layer's re-plan-on-violation (the Generative Agents
+  planning shape, deterministic): a stalled chain today STAYS
+  stalled (§3d — the stall is honest); a future refinement may let a
+  pack declare a recovery (e.g. skip the stuck member, or re-seed the
+  chain's remainder) — recorded-not-built, the first-consumer law
+  (content-6's live driver decides whether any content needs it).
+- The Alien three-axis `unknown` axis — pacing against the gap
+  between actual state (log) and perceived state (knowledge records):
+  the sketch (phases.md §3) says the director MAY pace against the
+  gap; §4's entropy law says entropy reads observable state ONLY
+  (L6/EPIST-1) and a knowledge-derived score is not observable state
+  (the iter-46 FAQ pinned the same fence for the echo — an
+  invariant-grade violation if wired). These two records CONFLICT and
+  the conflict is the owner's to resolve: either the unknown axis
+  never feeds entropy (a separate pacing input with its own declared
+  fence), or the entropy law is amended by the owner with the L6
+  boundary redrawn explicitly. Not built, not silently resolved.
 
 The document_check action itself LANDED (iter-43, D-072 — the
 §11 first row of the pre-iter-43 record, the owner's content call):
