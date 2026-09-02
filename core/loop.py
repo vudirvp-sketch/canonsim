@@ -53,9 +53,11 @@ from core.crime import (
     rotation_plan,
 )
 from core.director import Director, policy_from_rules
+from core.echo import echo_scores
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
+    ECHO_TEST,
     LEVERAGE_TEST,
     REJECTION_EVENT,
     IntentData,
@@ -353,12 +355,37 @@ class Simulator:
     # -- the intent front door -------------------------------------------------
 
     def _windowed(self, preconditions: Sequence[Mapping[str, Any]]) -> bool:
-        """Whether the precondition list gates on the leverage window
-        (iter-45, social-1b): those intents are evaluated against the
-        live-leverage fold read at THE CALLER'S OWN TICK — a pure read,
-        no RNG, no events, computed only when the action asks for it
-        (every other action pays nothing)."""
-        return any(cond.get("test") == LEVERAGE_TEST for cond in preconditions)
+        """Whether the precondition list carries any tick-windowed test
+        (the leverage liveness window, iter-45; the echo decay, iter-46):
+        those intents are evaluated against the derived folds read at
+        THE CALLER'S OWN TICK — pure reads, no RNG, no events, computed
+        only when the action asks for them (every other action pays
+        nothing)."""
+        return any(
+            cond.get("test") in (LEVERAGE_TEST, ECHO_TEST)
+            for cond in preconditions
+        )
+
+    def _fold_reads(
+        self, preconditions: Sequence[Mapping[str, Any]], tick: int
+    ) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
+        """The lazy fold pair for one evaluation: the live leverage facts
+        and the echo scores, each computed ONLY when the precondition
+        list reads that fold (the iter-45 laziness law — an echo-gated
+        intent never pays the leverage scan and vice versa), both read
+        at the caller's own tick (the window law)."""
+        tests = {cond.get("test") for cond in preconditions}
+        facts = (
+            live_leverage(self._pack, self._events, tick)
+            if LEVERAGE_TEST in tests
+            else ()
+        )
+        echoes = (
+            echo_scores(self._pack, self._knowledge, tick)
+            if ECHO_TEST in tests
+            else ()
+        )
+        return facts, echoes
 
     def _execute_intent(self, entry: Any) -> bool:
         """PROPOSED → ACCEPTED (SCHEDULED) | REJECTED (no-op event).
@@ -371,13 +398,10 @@ class Simulator:
             )
         validate_shape(action, intent)
         preconditions = requires_for(action, intent)
-        facts = (
-            live_leverage(self._pack, self._events, entry.tick)
-            if self._windowed(preconditions)
-            else ()
-        )
+        facts, echoes = self._fold_reads(preconditions, entry.tick)
         failing = first_failing(
-            self._pack, self._projection, intent, preconditions, facts=facts
+            self._pack, self._projection, intent, preconditions,
+            facts=facts, echoes=echoes,
         )
         if failing is not None:
             self._emit_rejection(
@@ -401,14 +425,15 @@ class Simulator:
         world reactions (ignitions, passes, follow-ups).
 
         iter-45 (social-1b): the OCC re-check is UNCONDITIONAL for
-        windowed intents (the leverage preconditions) — the projection is
-        event-driven, but the leverage window is TICK-driven: it can
-        close between accept and completion with no event committed, and
-        the re-check must catch that too (the rejection chains to the
-        last committed event — `occ_breaking_cause` never attributes a
-        window close to an event it did not break). The spend stamping:
-        an intent resolving to the pack-declared `secrets.spend_event`
-        type carries the spent cluster's id, secret and type in its
+        intents carrying a tick-windowed test (the leverage window, the
+        echo decay) — the projection is event-driven, but the windows
+        are tick-driven: they can close between accept and completion
+        with no event committed, and the re-check must catch that too
+        (the rejection chains to the last committed event —
+        `occ_breaking_cause` never attributes a window close to an
+        event it did not break). The spend stamping: an intent
+        resolving to the pack-declared `secrets.spend_event` type
+        carries the spent cluster's id, secret and type in its
         outcome — the log names the fact it consumed (the loop owns the
         log, so the loop owns the reference; the resolver stays
         fold-blind — the arrest-resolution precedent for loop-side,
@@ -420,12 +445,11 @@ class Simulator:
 
         preconditions = requires_for(action, intent)
         windowed = self._windowed(preconditions)
-        facts = (
-            live_leverage(self._pack, self._events, entry.tick) if windowed else ()
-        )
+        facts, echoes = self._fold_reads(preconditions, entry.tick)
         if self._writer.event_count > payload.based_on_event_seq or windowed:
             failing = first_failing(
-                self._pack, self._projection, intent, preconditions, facts=facts
+                self._pack, self._projection, intent, preconditions,
+                facts=facts, echoes=echoes,
             )
             if failing is not None:
                 cause = occ_breaking_cause(
@@ -630,14 +654,17 @@ class Simulator:
                 provenance={"seed": self._seed},
             ))
         # 2) NPC urgencies — small-formula goal rolls through the intent door;
-        # the live-leverage fold read at the BEAT tick rides the gate (a
+        # the derived folds read at the BEAT tick ride the gates (a
         # leverage-gated urgency stays silent until the holder actually
-        # holds a live cluster — iter-45; the front door re-validates at
-        # the entry tick with its own facts)
+        # holds a live cluster — iter-45; an echo-gated one until the
+        # residue clears the bar — iter-46; the front door re-validates
+        # at the entry tick with its own reads)
         self._director.next_beat()
+        beat_echoes = echo_scores(self._pack, self._knowledge, beat_tick)
         for intent in urgency_intents(
             self._pack, self._projection, self._bank,
             facts=live_leverage(self._pack, self._events, beat_tick),
+            echoes=beat_echoes,
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1

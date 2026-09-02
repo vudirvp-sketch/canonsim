@@ -27,7 +27,8 @@
 > D-073 — P3a, the CK3 add_hook precedent: the social layer's first
 > first-class facts in the log; the leverage use — the coerce door,
 > the spend — landed iter-45, social-1b, D-074: the fact cluster's
-> first runtime consumer).
+> first runtime consumer; the psychological echo landed iter-46,
+> social-2, D-075 — P3e: the residue read model + the behavior gate).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -134,8 +135,17 @@
   directed pair-axis shifts, the status_effects precedent). DORMANT in
   the committed content set (the iter-38/42 pattern — the corpus stays
   byte-identical; the live driver is content-4).
-- `social-2` · psychological echo (P3e); `arc-1` · arcs & tension
-  shaping (P3c).
+- `social-2` · psychological echo (P3e) — **done (iter-46, D-075)**:
+  `core/echo.py` — the residue as a pure read-side fold over the
+  knowledge view (per-NPC valence, linear decay over `fades_ticks`,
+  fidelity-scaled, clamped; writes nothing, renders nothing, feeds no
+  metric) + `echo_at_least`, the intent door's behavior gate (the P2b
+  consumer; the iter-45 window law generalized to
+  `WINDOWED_TESTS`); the pack's `rules.json::echo` valence table
+  (the day-1 walkthrough's four tokens) declared DORMANT — no
+  consumer in the committed set, the 10-seed A/B byte-identical, zero
+  corpus regen; the live driver is content-5.
+- `arc-1` · arcs & tension shaping (P3c).
 - `content-2` · the alarm panic echo (witnesses of `alarm_raised`
   gain fear — the through-the-walls law; the iter-42 live probe
   reverted on the phase-1 corpus's committed anchors): lands with the
@@ -147,6 +157,13 @@
   it implies (any driver draws the stream — the whole 105-case set
   re-distills, the iter-42 alarm-echo lesson); the content-1/iter-43
   precedent for the probe protocol.
+- `content-5` · the echo driver — the live content set for the landed
+  residue gate (an urgency entry or action carrying `echo_at_least` —
+  the jittery-watcher beat, the residue visibly driving behavior on
+  the committed runs): lands with the corpus regen it implies (the
+  content-4 law — any urgency entry shifts the stream); the iter-46
+  live-fire tests on crafted copies carry the mechanism proof until
+  then.
 - `content-3` · ambient-channel content (the declared dimension, no
   hook carries it): its own row — social-1 landed without it (the
   fact-cluster work was not hook content, the iter-44 call).

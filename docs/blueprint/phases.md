@@ -429,11 +429,18 @@ deterministic engine).
 
 **Social depth**: secrets & leverage as first-class fact clusters (P3a;
 CK3 `add_hook` — a hook *is an event* with target, type, expiry tick,
-cause); arcs & tension shaping (P3c; L4D/Alien pacing layered over the
-seeded buffer, never replacing it); **psychological echo** (P3e) — NPC
-behavior modifiers derived from own knowledge records + ticks since
-learned; the emotional residue is per-NPC valence, never player-adapted
-(L6). C:DDA field/smoke mechanics arrive here as content scale; state-
+cause — **landed iter-44 + iter-45, D-073/D-074**); arcs & tension
+shaping (P3c; L4D/Alien pacing layered over the seeded buffer, never
+replacing it); **psychological echo (P3e) — landed iter-46 (D-075,
+social-2): NPC behavior modifiers derived from own knowledge records +
+ticks since learned** — `core/echo.py`, a pure read-side fold (per-NPC
+valence, linear decay over the pack's `fades_ticks`, fidelity-scaled,
+never canon, never an entropy input — L6), consumed by the intent
+door's `echo_at_least` gate (the P2b dependency; INTENT_SCHEMA §3 —
+the residue drives autonomous behavior and fades with time). The
+emotional residue is per-NPC valence, never player-adapted (L6). The
+live driver is the content-5 row (the iter-38/42/45 dormancy pattern).
+C:DDA field/smoke mechanics arrive here as content scale; state-
 gated epilogue blocks (C:DDA) as director trigger data.
 
 ## 4. Phase 4 — knowledge, scene, retrieval, legends

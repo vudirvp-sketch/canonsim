@@ -28,8 +28,10 @@ from typing import Any, Final
 
 from core.clock import Clock
 from core.director import CHANNEL_INPUTS
+from core.echo import ECHO_BLOCK_KEYS, ECHO_TOKEN_KEYS
 from core.intent import (
     AUDIENCES,
+    ECHO_TEST,
     KNOWLEDGE_SLOTS,
     LEVERAGE_TEST,
     PRECONDITION_TESTS,
@@ -286,6 +288,7 @@ class _Lint:
         self._director()
         self._on_action()
         self._secrets()
+        self._echo()
         self._states_rules()
         self._importance_rules()
         self._brief()
@@ -618,6 +621,11 @@ class _Lint:
                         f"action {intent}: precondition leverage_over requires "
                         f"'who' (the entity the noun holds leverage over)",
                     )
+                # iter-46 (social-2): the echo gate's axis/value must
+                # name the declared vocabulary — a dead gate is refused
+                # at load (the leverage `who` family)
+                if cond.get("test") == ECHO_TEST:
+                    self._lint_echo_cond(cond, f"action {intent}")
                 # pack-2 (iter-29): the spot_available test's layer param
                 # must name a declared transition layer — a typo would
                 # KeyError mid-run (the KI#15 dead-data family, refused
@@ -1222,6 +1230,8 @@ class _Lint:
                     cond.get("test") in PRECONDITION_TESTS,
                     f"{where}: unknown precondition test {cond.get('test')!r}",
                 )
+                if cond.get("test") == ECHO_TEST:
+                    self._lint_echo_cond(cond, where)
                 for param in ("noun", "with", "who"):
                     if param in cond:
                         _require(
@@ -1748,6 +1758,127 @@ class _Lint:
                 f"{where}: expires_ticks must be a positive integer (the "
                 "donor's days — the read-side liveness window)",
             )
+
+    def _echo(self) -> None:
+        """The psychological echo contract (`core/echo.py` owns the
+        vocabulary constants; `phases.md` §3 P3e the architecture row).
+        The block is OPTIONAL — a pack without it folds no residue and
+        runs the v0.1 behavior, byte-identically (the pack's own
+        declaration is the gate, INV-3). Declaring the table costs
+        nothing at runtime until a consumer reads it (the iter-45
+        laziness law: the fold runs only for intents whose preconditions
+        carry the echo test)."""
+        rules = self._data["rules.json"]
+        config = rules.get("echo")
+        if config is None:
+            return
+        if not isinstance(config, Mapping):
+            raise PackError("echo must be an object")
+        unknown = sorted(set(config) - set(ECHO_BLOCK_KEYS))
+        if unknown:
+            raise PackError(
+                f"echo: unknown keys {unknown} (the closed vocabulary: "
+                f"{' | '.join(ECHO_BLOCK_KEYS)})"
+            )
+        # the scale: [lo, hi] — the per-axis sums clamp to it
+        scale = config.get("scale")
+        _require(
+            isinstance(scale, list)
+            and len(scale) == 2
+            and all(_is_int(bound) for bound in scale)
+            and scale[0] < scale[1],
+            "echo.scale must be [lo, hi] integers with lo < hi "
+            "(the residue clamp bounds)",
+        )
+        # the fidelity percents: closed against the pack's own fidelity
+        # chain — a chain member without a percent would KeyError at the
+        # fold (the KI#15 family, refused at load instead)
+        chain = rules["knowledge"]["fidelity_chain"]
+        percents = config.get("fidelity_weight")
+        _require(
+            isinstance(percents, Mapping)
+            and sorted(percents) == sorted(chain)
+            and all(
+                _is_int(percents[step]) and 0 < percents[step] <= 100
+                for step in percents
+            ),
+            f"echo.fidelity_weight must map every fidelity chain member "
+            f"({list(chain)}) to a percent in 1..100 — a missing step "
+            "would KeyError at the fold",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                "echo.notes must be a string (prose — never a table key)",
+            )
+        tokens = config.get("tokens")
+        _require(
+            isinstance(tokens, Mapping) and tokens,
+            "echo.tokens must be a non-empty object keyed by knowledge "
+            "token",
+        )
+        mintable = self._literal_knows_tokens()
+        for token, spec in tokens.items():
+            where = f"echo.tokens[{token!r}]"
+            # the secrets lint's law: a token nobody can ever learn is
+            # dead vocabulary — the residue must ride a declared
+            # knowledge template
+            _require(
+                token in mintable,
+                f"{where}: no declared knowledge template mints this "
+                "token (the literal `knows` vocabulary: actions / "
+                "expectations / transition layers)",
+            )
+            _require(isinstance(spec, Mapping), f"{where}: must be an object")
+            unknown_token = sorted(set(spec) - set(ECHO_TOKEN_KEYS))
+            if unknown_token:
+                raise PackError(
+                    f"{where}: unknown keys {unknown_token} (the closed "
+                    f"vocabulary: {' | '.join(ECHO_TOKEN_KEYS)})"
+                )
+            _require(
+                _is_int(spec.get("fades_ticks")) and spec["fades_ticks"] > 0,
+                f"{where}: fades_ticks must be a positive integer (the "
+                "residue's lifetime — dead at the boundary tick itself)",
+            )
+            axes = spec.get("axes")
+            _require(
+                isinstance(axes, Mapping)
+                and axes
+                and all(
+                    _is_int(weight) and weight != 0 for weight in axes.values()
+                ),
+                f"{where}: axes must be a non-empty object of non-zero "
+                "integer valence weights (valence has a sign; zero is "
+                "dead vocabulary)",
+            )
+
+    def _lint_echo_cond(self, cond: Mapping[str, Any], where: str) -> None:
+        """The echo_at_least precondition contract, shared by the action
+        and urgency `requires` lints: `axis` must name a declared echo
+        axis and `value` must sit strictly above the scale floor and at
+        or below the ceiling — outside those bounds the gate can never
+        pass (score clamps into the scale) or never fails (always above
+        the floor), dead vocabulary either way, refused at load."""
+        echo_cfg = self._data["rules.json"].get("echo")
+        axes: set[str] = set()
+        if isinstance(echo_cfg, Mapping):
+            for spec in echo_cfg.get("tokens", {}).values():
+                if isinstance(spec, Mapping):
+                    axes.update(spec.get("axes", ()))
+        _require(
+            bool(axes) and cond.get("axis") in axes,
+            f"{where}: precondition echo_at_least requires 'axis' naming "
+            "a declared echo axis (the fold scores only the declared "
+            "vocabulary — anything else is dead data)",
+        )
+        lo, hi = echo_cfg["scale"]
+        _require(
+            _is_int(cond.get("value")) and lo < cond["value"] <= hi,
+            f"{where}: precondition echo_at_least value must be an "
+            f"integer in {lo + 1}..{hi} (the score clamps to the scale — "
+            "outside it the gate is dead vocabulary)",
+        )
 
     def _literal_knows_tokens(self) -> set[str]:
         """Every knowledge token the pack can mint as a literal string:

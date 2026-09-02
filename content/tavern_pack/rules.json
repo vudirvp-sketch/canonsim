@@ -703,6 +703,46 @@
     "notes": "social-1 (iter-44, P3a; phases.md §3 — the CK3 add_hook precedent: secrets and leverage as first-class fact clusters, a hook IS an event; core/leverage.py owns the machinery, MVP_SCOPE §5 row 9 the system row). The registry: which knowledge tokens are SECRETS in this setting — a record whose token is declared here, held by a NOVEL knower (kind npc, not the subject), mints one leverage_gained fact event (actor = holder, target = subject, outcome {secret, type, fidelity, expires_at}); the cause chains to the event that taught them. Told secrets confer leverage too (the watch briefing's transfer mints the relief watcher's cluster — the institution's knowledge becomes the institution's leverage); the acquisition fidelity rides the cluster (how well the holder knows it). The cluster carries no knowledge, no hooks, no state changes — the social fact, not the epistemic one; the subject never learns of it; the cascade terminates (the one-hop law's sibling); the director buffer is untouched (L6). Expiry is a read-side window (live while t < expires_at — never an event, INV-1: the fact is immutable, its liveness is a fold; live_leverage is the single read owner). social-1b (iter-45): spend_event names the coerce action's success event — the spend is a new event naming the cluster's id in outcome.cluster (never a mutation: the fold kills the cluster at the spend's tick, so one secret buys one play); the producing action MUST carry the leverage_over precondition (the pack lint owns that contract — the door and the OCC re-check guarantee the fold non-empty at completion). The v0.1 content set: ONE live token — the theft secret (the steal failure's partial branch teaches it to the target, the total branch to the whole room; every holder gains the cluster over the stranger). The document_check verdict (papers_unsatisfactory) stays UNdeclared on purpose: the verdict is institutional — the watcher escalates through the crime machinery, and the check's actor is always the watcher; a personal-leverage twin would double-count the same knowledge (the crime ladder owns that rung). The ambient-channel row (content-3) did NOT ride: it is a director-hook content decision, not fact-cluster work — its own row per DIRECTOR_SPEC §11",
     "spend_event": "coerce"
   },
+  "echo": {
+    "scale": [
+      0,
+      100
+    ],
+    "fidelity_weight": {
+      "exact": 100,
+      "partial": 50,
+      "vague": 25
+    },
+    "tokens": {
+      "figure_reaching_for_purse": {
+        "fades_ticks": 720,
+        "axes": {
+          "dread": 25,
+          "wariness": 35
+        }
+      },
+      "figure_starting_fire": {
+        "fades_ticks": 1440,
+        "axes": {
+          "dread": 60,
+          "wariness": 30
+        }
+      },
+      "purse_missing": {
+        "fades_ticks": 720,
+        "axes": {
+          "wariness": 30
+        }
+      },
+      "noise_by_the_bar": {
+        "fades_ticks": 360,
+        "axes": {
+          "wariness": 15
+        }
+      }
+    },
+    "notes": "social-2 (iter-46, P3e; phases.md §3 the architecture row; core/echo.py owns the machinery, INTENT_SCHEMA §3 the door test echo_at_least). The registry: which knowledge tokens carry EMOTIONAL RESIDUE for whoever holds them, on which named axes, decaying linearly over fades_ticks since learned (dead at the boundary tick, the leverage expiry twin) and scaled by the record's fidelity percent (a vague telling carries a quarter of the seeing; hearing it again renews the residue — both records sum). A READ MODEL, never canon: no events, no state, no templates, no metrics; DORMANT until a consumer reads it (the iter-38/42/45 pattern — no urgency or action carries echo_at_least in this committed set; the live driver is content-5's call, the corpus staying green is the byte-identity proof). The v0.1 valence set is the day-1 walkthrough's residue: the theft sighting (dread 25 / wariness 35, half a day), the fire-starting sighting (dread 60 / wariness 30, a full day — the watcher who saw it is jittery next morning), the inferred absence (wariness 30 — watches the suspect's hands), the vague bar noise (wariness 15, fades in a watch). papers_unsatisfactory stays UNdeclared on purpose (the iter-44 institutional call: the verdict's behavioral escalation rides the crime ladder; an echo twin would double-count the same knowledge channel). The L6 fence: the score is per-NPC valence over the NPC's own records, never player-adapted, and never an entropy input (DIRECTOR_SPEC 4 — the director reads observable state only)."
+  },
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,

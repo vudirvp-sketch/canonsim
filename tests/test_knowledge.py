@@ -323,6 +323,12 @@ def test_at_location_expectation_needs_the_watcher_on_site(tmp_path: Path) -> No
         {"npc": "npc_guard_01", "item": "rope_01", "at_location": "loc_tavern",
          "knows": "rope_gone_seen_by_absentee"},
     ]
+    # iter-46 (social-2): the surgery replaced the expectation rules
+    # wholesale, which removed the ONLY birth site of `purse_missing` —
+    # the echo table's entry for it must go too (the lint's law: a
+    # residue token nothing can mint is dead vocabulary, refused at
+    # load — a variant that removes content prunes its readers)
+    rules["echo"]["tokens"].pop("purse_missing", None)
     (target / "rules.json").write_text(json.dumps(rules))
     site_pack = load_pack(target)
 

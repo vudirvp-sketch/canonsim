@@ -71,14 +71,19 @@ test. A failing condition rejects the intent with
 | `spot_available` | `layer` | the noun (a location) holds at least one spot of the pack-declared transition layer NOT in the layer's `spot_state` — the exact condition the ignite resolver keys on, so door and resolver agree by construction (pack-2/iter-29: igniting a destroyed or fully-burning location is a door rejection, never a no-ignition success; the layer param is lint-checked against the declared layers) |
 | `texture_noun` | — | the intent carries a well-formed resolved texture reference whose scope target is a known entity (iter-11; ledger liveness deliberately NOT tested — core is ledger-blind) |
 | `leverage_over` | `who` | the noun entity holds live leverage over `who` — some fact in the caller-supplied live-leverage fold pairs them (iter-45, social-1b: the door's first fold-reading test; the facts are `core.leverage.live_leverage` read at the caller's own tick — door, beat gate, or completion — a tick-windowed precondition is never evaluated on stale facts) |
+| `echo_at_least` | `axis`, `value` | the noun entity's psychological residue on `axis` is at least `value` — a score in the caller-supplied echo fold (iter-46, social-2, P3e: `core.echo.echo_scores` read at the caller's own tick, the same window law; a missing pair IS zero — the world's honest answer, never an error) |
 
 Nouns: `actor`, `target`, `texture` (iter-11 — resolves to the reference's
 scope target, the canon entity a promotion lands on). Runtime sources: the
 projection for position / carrier / relations / status; the pack for static
-records; the live-leverage fold for the leverage window (a derived read
-model, not projection state — the facts arrive as data at each evaluation).
-The same evaluator runs at proposal time and at completion time
-(OCC, §4).
+records; the derived folds for the tick-windowed tests (the live-leverage
+facts and the echo scores — read models, not projection state: the facts
+arrive as data at each evaluation). The same evaluator runs at proposal
+time and at completion time (OCC, §4). The beat gate (an urgency entry's
+`requires`) runs the same test set against the beat-tick reads — the entry
+gate filters SILENTLY (the world's noise floor), while the door re-validates
+what the ACTION declares (the coerce shape: the action carries the test,
+so the OCC window law applies; the pack author picks per gate).
 
 **The texture path (iter-11, blueprint §1 promotion).** When an intent
 carries a `texture` field and the action ships a pack `texture` block, the
@@ -106,14 +111,16 @@ attribution only; STATE-1 is untouched). A moved projection with intact
 preconditions proceeds normally — one mechanism, the same semantics the
 phase-1 validator uses (phase0 §2).
 
-**Tick-windowed preconditions (iter-45, social-1b):** an intent whose
-`requires` carry `leverage_over` re-runs the full check at completion
-**unconditionally** — the leverage window is tick-driven and can close
-with no event committed, which the event-count guard above would miss.
-The window close is still a `projection_moved` rejection (the derived
-liveness moved), but never attributes a breaking event the log does not
-hold: `occ_breaking_cause` excludes the window test, and the cause falls
-back to the last committed event id.
+**Tick-windowed preconditions (iter-45, social-1b; generalized to the
+family at iter-46, social-2):** an intent whose `requires` carry a test
+from the windowed family (`leverage_over`, `echo_at_least` — truth driven
+by TIME, not by event application) re-runs the full check at completion
+**unconditionally** — the windows are tick-driven and can close with no
+event committed, which the event-count guard above would miss. The window
+close is still a `projection_moved` rejection (the derived liveness or
+residue moved), but never attributes a breaking event the log does not
+hold: `occ_breaking_cause` excludes the windowed family, and the cause
+falls back to the last committed event id.
 
 ## 5. Checks (opposed rolls)
 

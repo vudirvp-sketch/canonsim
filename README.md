@@ -84,8 +84,7 @@ small-dense; `scripts/df_briefer.py`: the POV mini-briefer + the
 closed-vocabulary reverse validation over the sink + the ≤2-regen
 ladder + the retrieval stress — 4 live cases, 0 honest misfires,
 brief p50 ≈ 2.9 KB on GB-scale exports; numbers owner
-`docs/TECH_NOTES.md` §3.3). 697 tests green, ruff clean,
-golden fixtures byte-identical. **Phase 3 (Director) OPEN** — iter-36,
+`docs/TECH_NOTES.md` §3.3). **Phase 3 (Director) OPEN** — iter-36,
 the owner's "continue per the plan" call (the iter-31 precedent): the
 pacing clock landed first (DIR-1, D-065 — the L4D peak/rest donor:
 the per-run RAMP/PEAK/REST/STAGNATION machine over narrative entropy,
@@ -132,15 +131,30 @@ arrest), the climax flag live on the watcher pair, the crowd-witness
 reaction live on both branch types — the whole boss beat is pack
 data over the landed layers, zero engine edits; the 4 seed-93 corpus
 cases re-distilled in the same iteration (the iter-15 regen
-precedent). 846 tests green, ruff clean (the 10-seed A/B per
+precedent). The secrets & leverage fact clusters landed iter-44
+(social-1, D-073 — the CK3 `add_hook` precedent as event-sourced
+facts: a novel knower of a pack-declared secret token mints a
+`leverage_gained` cluster, expiry a read-side fold; the 9-case corpus
+re-distill the live mint implied). The coerce door landed iter-45
+(social-1b, D-074 — the leverage spend: the 15th action, the
+`leverage_over` fold-reading precondition, the unconditional
+tick-window OCC re-check, the pack-declared pair-axis balance; the
+driver dormant, content-4 owns the live call). The psychological
+echo landed iter-46 (social-2, D-075 — P3e: `core/echo.py`, the
+emotional residue as a pure read-side fold over the knowledge view
+(per-NPC valence, linear decay, fidelity-scaled — writes nothing),
+gating autonomous behavior through the intent door's
+`echo_at_least` test; the valence table declared dormant, the 10-seed
+A/B byte-identical, zero corpus regen; content-5 owns the live
+driver). 924 tests green, ruff clean (the 10-seed A/B per
 grammar landing was 10/10 byte-identical each time; the content
 landing is the first deliberate divergence — 1/10 day1_full seeds
 fire, the delta exactly the crowd reaction; TEST_PLAN §6). Contract
 owner `docs/DIRECTOR_SPEC.md` §3/§3a/§3b/§3c.
-Next: the phase-3 social-depth run (`social-1/2`, `arc-1`;
-`docs/TASKS.md`) + the content rows (the alarm panic echo with its
-corpus regen, ambient-channel content) + the owner-gated set
-(parse-2, engine-1).
+Next: the phase-3 social-depth remainder (`arc-1`; `docs/TASKS.md`)
++ the content rows (the alarm panic echo and the coerce/echo drivers
+with their corpus regens, ambient-channel content) + the owner-gated
+set (parse-2, engine-1).
 
 ## For AI agents (primary audience)
 

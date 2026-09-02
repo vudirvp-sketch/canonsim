@@ -107,7 +107,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | 1 | time | tick counter, day phase (morning/afternoon/evening/night), ticks-per-action | integer ticks only |
 | 2 | position & visibility | who is where; line of sight, hearing radius | perception-check input |
 | 3 | relations | per (npc, pc): reputation, suspicion, trust, fear; plus the sparse npc↔npc pair map (iter-3, P2a/D-020) | numeric 0–100 |
-| 4 | knowledge | knowledge records; rumor transfer with fidelity loss | `docs/EVENT_SCHEMA.md` §3 |
+| 4 | knowledge | knowledge records; rumor transfer with fidelity loss | `docs/EVENT_SCHEMA.md` §3; the psychological echo (social-2/iter-46, P3e) reads these records — `core/echo.py`, the residue as a behavior gate (INTENT_SCHEMA §3 `echo_at_least`) |
 | 5 | states | fatigue, intoxication, fear, injury | modifiers on perception & behavior |
 | 6 | fire | source, flammability, spread, smoke, alarm | irreversible state changes |
 | 7 | crime & watch | suspicion thresholds, document check, arrest attempt, watch change | no group reputation — knowledge spread models it (§10) |
@@ -126,6 +126,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | position → visibility → crime success | where you stand decides what you can steal |
 | relations → talk → rumor acceptance | trusted tellers spread rumors faster |
 | knowledge → secrets → leverage → coerce | a witnessed secret becomes a social fact: novel knowers mint immutable leverage clusters (told secrets included — the briefing mints the relief's); the spend (iter-45) plays the card — the cluster dies in the fold, the subject's directed pair axes shift (the balance) |
+| knowledge → echo → behavior | the emotional residue of what an NPC knows — per-NPC valence decaying with ticks since learned, scaled by fidelity — gates autonomous behavior (`echo_at_least`, the P2b read; iter-46, P3e: the watcher who saw the fire is jittery next morning, and the residue fades so "events that happened but no longer matter" stop driving behavior) — a read model, never canon, never an entropy input (L6) |
 | leverage → relations | what a spent cluster buys is pack data: trust breaks fast, fear spikes — the directed pair map, never a group reputation |
 
 Eight systems taken separately are trivial — emergence lives at the

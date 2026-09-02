@@ -12,6 +12,45 @@
 ---
 ---
 ---
+iter-46 · 2026-09-03 · social-2 — the psychological echo, the residue
+read model (iter-46-social2-echo; the owner's "continue work per the
+plan, quality over speed" session call, the phase-3 backlog's top
+un-gated item)
+- core/echo.py (NEW): the pure read-side fold over the knowledge view —
+  per-NPC valence (pack tokens × linear fade × fidelity percent,
+  clamped; dead at the boundary tick; renewed on re-learning; a
+  missing pair IS zero). Writes NOTHING (INV-1 by construction), the
+  fold runs only for intents asking for it (the iter-45 laziness), the
+  L6 fence: never an entropy input, never rendered.
+- The consumer: echo_at_least (the closed test set's 17th) — the P2b
+  behavior gate, scores duck-typed through first_failing(…, echoes=…);
+  the window law generalized to WINDOWED_TESTS (the unconditional OCC
+  re-check + the attribution exclusion, both folds); loop reads lazily
+  at door/beat/completion. rules.json::echo (scale, fidelity_weight
+  over the chain, 4 walkthrough tokens) + pack lint (_echo + the
+  requires cross-lint both sides). DORMANT (no consumer in the
+  committed set — content-5 owns the live driver).
+- Measured (crafted driver, seed 93): the driver fires once at the
+  beat-360 read (residue 25), silent at 720 (0 — the fade law); the
+  action-gated window probe rejects projection_moved /
+  actor.echo_at_least at completion 805 (residue dead, cause = last
+  canon); the 10-seed day1_full A/B (echo block vs none) 10/10
+  byte-identical — ZERO corpus regen (the echo writes nothing; the
+  first social-family landing without one). KI#67 opened+closed
+  (README froze at iter-43 — the KI#66 family); KI#65/KI#64 deleted
+  per AGENTS §5.
+- +29 tests/test_echo.py, tests 895→924, ruff clean. D-075;
+  INTENT_SCHEMA §3/§4 + MVP_SCOPE §5/§6 + TASKS (social-2 done,
+  content-5 opened) + AGENT_NAVIGATION §1 + phases.md §3 + README +
+  STATUS + this file synced. 13 files — over the 3-5 soft limit: the
+  new module + the test suite + the doc-sync law (§6 same-turn; the
+  iter-44/45 precedent). The FAQ sits at 22/20 and TASKS at 736/600
+  and phases.md at 650/600 kept per §6.1 (the landing rows and the
+  L6-fence entry are substance, 0 filler added; the trims owe at the
+  phase-3→4 gate alongside the DECISIONS collapse, the KI#64 note).
+  iter-36 evicted per the cap.
+
+---
 iter-45 · 2026-09-03 · social-1b — the leverage use: the coerce door
 (iter-45-social1b-coerce; the owner's "continue work per the plan"
 session call, the phase-3 backlog's top un-gated item)
@@ -277,25 +316,10 @@ closed. Tests 708→727 (+13 metrics, +6 harness incl. the seed-125
 D-065-record pin), ruff clean. D-066; TEST_PLAN §6 the contract
 owner.
 ---
-iter-36 · 2026-09-01 · phase-3 opening — the pacing clock (DIR-1)
+iter-36 · 2026-09-01 · phase-3 opening — the pacing clock
 (iter-36-pacing-clock; the owner's "continue per the plan" call —
 phase 3 opens on it, the iter-31 precedent)
-- core/director.py: the per-run RAMP/PEAK/REST/STAGNATION clock over
-  narrative entropy (L4D peak/rest donor) — pack-gated via
-  director.pacing, advanced once per beat (guarded), functional
-  transitions; stagnation releases fire only outside PEAK/REST (REST =
-  post-climax breathing room), explicit triggers ungated (D-005);
-  rules.json pacing block (25/1/1) + lint (peak > stagnation floor);
-  tests 697→708 (+11 test_director.py), ruff clean — zero fixture regen
-  (committed fixtures carry no stagnation releases; day1_full ON
-  unchanged, its 3 beats all PEAK).
-- Scope: 13 files (code 2 + test 1 + pack 1 + spec 1 + the doc-sync
-  set — the iter-31 phase-opening precedent).
-- KI#60 (phases.md §2 stale OPEN header post-iter-35) opened + closed;
-  KI#55–59 deleted per AGENTS §5. ROADMAP/phases/TASKS phase-3 OPEN +
-  the arc backlog; D-065; iter-27 evicted per the cap. phases.md
-  608/600 kept per §6.1 (the overage: the D-062/D-055 + the new
-  DIR-1 architecture records — substance, 0 filler added).
+- (deleted at iter-46 per the one-in/one-out cap; history in git.)
 
 ---
 iter-35 · 2026-09-01 · phase-2 gate — the verdict + the collapse

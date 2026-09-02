@@ -99,6 +99,7 @@ def urgency_intents(
     projection: "Projection",
     bank: "RngBank",
     facts: Sequence[Any] = (),
+    echoes: Sequence[Any] = (),
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -112,7 +113,12 @@ def urgency_intents(
     BEAT tick — an urgency whose `requires` gate on `leverage_over`
     stays silent until the holder actually holds a live cluster (the
     same silent-skip law as any other world-impossible attempt; the
-    front door re-validates at the entry tick with its own facts)."""
+    front door re-validates at the entry tick with its own facts).
+    `echoes` (iter-46, social-2): the residue fold read at the BEAT
+    tick — an urgency whose `requires` gate on `echo_at_least` stays
+    silent until the residue actually clears the bar (the same law;
+    the behavior acts on the echo exactly as the P2b dependency
+    names it, and the door re-validates with its own read)."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
@@ -126,7 +132,8 @@ def urgency_intents(
         intent = _build_intent(spec, seq)
         if spec.requires:
             failing = first_failing(
-                pack, projection, intent, list(spec.requires), facts=facts
+                pack, projection, intent, list(spec.requires),
+                facts=facts, echoes=echoes,
             )
             if failing is not None:
                 continue  # the world said no — silent, no rejection event

@@ -1,52 +1,74 @@
 # STATUS — canonsim
 
-Iteration: iter-45 (`iter-45-social1b-coerce` — the owner's
-"continue work per the plan" session call, the phase-3 backlog's top
-un-gated item: social-1b, the leverage use — the coerce door) ·
+Iteration: iter-46 (`iter-46-social2-echo` — the owner's "continue
+work per the plan, quality over speed" session call, the phase-3
+backlog's top un-gated item: social-2, P3e — the psychological echo) ·
 Phase: 3 (Director)
-**OPEN — the fact cluster's first runtime consumer landed: an action
-that SPENDS a live cluster (the spend is a new event naming the
-cluster's id, never a mutation; the fold kills it at the spend's tick —
-one secret buys one play)** · Date: 2026-09-03 ·
-Scope: the 15th action `coerce` (actions.json, over the NEW `coerce`
-resolver) — the door reads the live-leverage fold via `leverage_over`,
-the intent door's first fold-reading precondition (the facts re-read
-AT THE CALLER'S OWN TICK: the door at the entry tick, the urgency gate
-at the beat, the OCC re-check at completion — a tick-windowed
-precondition is never evaluated on stale facts; threaded duck-typed
-through `first_failing(..., facts=...)`, the import direction
-one-way). The OCC re-check runs UNCONDITIONAL for leverage-carrying
-intents — the window can close between accept and completion with no
-event committed (the projection is event-driven, the window is
-tick-driven); the rejection keeps `projection_moved` while
-`occ_breaking_cause` excludes the window test (a window close never
-attributes an event the log does not hold — cause = the last committed
-id). The loop stamps `outcome.cluster/secret/type` from the live fold
-at commit (the arrest-resolution precedent — loop-side, event-type-
-keyed, pack-declared via `secrets.spend_event`; the resolver stays
-fold-blind, no ResolverFn signature change). The balance (what a spent
-cluster buys) is pack data on the action (the status_effects
-precedent): subject-directed pair-axis shifts — an absent axis
-materializes at neutral+delta (the trust_toward read law made a write),
-clamped, the clamped-to-unchanged delta a quiet beat; v0.1: trust −25
-(D-030 break-fast) + fear +25; a status/urgency nudge stays
-recorded-not-built (the first-consumer law). No check (the leverage IS
-the power), no knowledge (the quiet corner — the cascade terminates
-as the mint's does). DORMANT in the committed content set: no driver
-carries it (the iter-38/42 pattern — an urgency entry shifts the
-SUBSTANTIVE stream for every run and re-distills all 105 corpus cases;
-content-4 owns the live call; the corpus staying green IS the
-byte-identity proof, the live-fire tests run on crafted pack copies —
-the hard_pack precedent). Measured (crafted driver, seed 93): the beat
-at 360 enqueues the drunkard's coerce at 405, completion 408 — cluster
-= the drunk's own fact, pair trust None→25 / fear None→75, the drunk
-dead in the fold while the room's four live on; the second beat
-silent; the window-close probe rejects projection_moved /
-actor.leverage_over with the cause chained to the last committed
-canon; the leverageless player coerce on the UNMODIFIED pack is a
-plain door rejection. KI#66 opened+closed (cli/main.py's stale "13
-actions" — the KI#65 family, the iter-43 miss). Tests 870→895
-(+25 tests/test_coerce.py), ruff clean.
+**OPEN — the residue read model landed: the emotional residue of what
+an NPC knows, as a pure fold (per-NPC valence, linear decay, fidelity
+scaled) driving behavior through the intent door's gate — "a watcher
+who saw the fire is jittery next morning", and the residue fades so
+events that happened but no longer matter stop driving behavior (the
+P3e headline)** · Date: 2026-09-03 ·
+Scope: `core/echo.py` (NEW) — the read-side fold: score(who, axis) =
+Σ over the knower's records of pack-declared token valence ×
+(fades_ticks − age) // fades_ticks × the fidelity percent (integer,
+floored; dead AT the boundary tick — the leverage expiry law's twin;
+a re-learned token RENEWS — records sum; a vague telling carries a
+quarter of the seeing), clamped to the pack scale; zero pairs absent
+from the tuple — a missing pair IS zero, the honest answer. The echo
+writes NOTHING (no events, no knowledge, no hooks, no state, no
+templates, no metrics — INV-1 by construction, the social family's
+cleanest landing: iter-44 minted facts, the echo never even does
+that); the fold runs ONLY for intents whose preconditions carry the
+echo test (the iter-45 laziness — every other action pays nothing);
+the L6 fence holds by construction: per-NPC valence over the NPC's
+OWN records, never player-adapted, NEVER an entropy input
+(DIRECTOR_SPEC §4 — the director reads observable state only; a
+knowledge-derived score is not observable). The consumer:
+`echo_at_least` (axis, value) — the closed test set's 17th, the P2b
+behavior gate (the sketch's "the urge ticker acts on the echo"
+dependency); scores duck-typed through `first_failing(...,
+echoes=...)` (the import direction one-way — core.intent never
+imports core.echo); the window law GENERALIZED: `WINDOWED_TESTS` =
+(leverage_over, echo_at_least) — the OCC re-check unconditional for
+the family, `occ_breaking_cause` excludes the family (a decay close
+never attributes an event the log does not hold); the loop reads each
+fold lazily per evaluation point (the door at the entry tick, the beat
+gate at the beat tick, the completion at its own). The pack:
+`rules.json::echo` — scale [0,100], fidelity_weight over the pack's
+own chain (100/50/25), four tokens = the day-1 walkthrough's residue
+(the theft sighting dread 25 / wariness 35, fades 720; the
+fire-starting sighting dread 60 / wariness 30, fades 1440; the
+inferred absence wariness 30; the bar noise wariness 15, fades 360;
+papers_unsatisfactory UNdeclared — the iter-44 institutional call,
+the crime ladder owns that rung's escalation). Lint: `_echo` (the
+closed key sets, the chain coverage, the mintable-token law, non-zero
+valence — a sign is legal, zero is dead vocabulary) + the requires
+cross-lint on BOTH sides (actions + urgencies: axis declared, value
+strictly above the scale floor and at or below the ceiling — a dead
+gate refused at load, the leverage `who` family). DORMANT in the
+committed content set (the iter-38/42/45 pattern — no action or
+urgency carries echo_at_least; the live driver is content-5's row):
+the declaration is INERT — the 10-seed day1_full A/B (125 + the nine
+corpus seeds, a runner outside the repo per Rule 9) 10/10
+byte-identical, ZERO corpus regen (the first social-family landing
+with none — the echo writes nothing; iter-44 paid 9 cases because
+the mint is event-driven). Measured (crafted driver, seed 93, tuned
+token dread 100 / fades 720): the drunk's partial sighting at t=5
+reads dread 25 at the beat-360 gate → the driver's look_around fires
+once (t=406); the beat-720 read is 0 — the roll silent (the fade
+law live); the window-close probe (the ACTION carrying the gate,
+ticks 400 — the coerce shape: the door and the OCC re-validate what
+the action declares): the door accepts at 405 (residue 22 at the
+caller's own tick), the completion at 805 rejects
+projection_moved / actor.echo_at_least with the cause chained to the
+last committed canon; the committed valence reads real residue on
+the committed pack (dread 6 / wariness 8 at the beat-360 read).
+KI#67 opened+closed (README's Status froze at iter-43 — "846 tests",
+the social rows absent; the KI#66 family, iter-44/45 both skipped
+the README sync). Tests 895→924 (+29 tests/test_echo.py), ruff
+clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -72,25 +94,23 @@ actions" — the KI#65 family, the iter-43 miss). Tests 870→895
 
 (none open.)
 
+- KI#67 · doc drift: README.md's Status paragraph froze at iter-43
+  ("846 tests green"; the social-depth rows absent — the "Next:" line
+  still pointed at social-1/2) — the iter-44/45 doc-sync sets skipped
+  the README entirely (the KI#66 family: a count and a status restated
+  in a second place, both left stale) · opened 2026-09-03 · CLOSED
+  iter-46 (the paragraph actualized: the social-1/1b/2 landings, 924
+  green, the Next line re-aimed at the content rows).
 - KI#66 · doc drift: `cli/main.py`'s docstring still said "13 actions"
   after iter-43 landed the 14th — the iter-43 doc-sync updated
   MVP_SCOPE/DIRECTOR_SPEC/TASKS but missed the CLI module docstring
   (the KI#65 family: a count restated in a second place) · opened
   2026-09-03 · CLOSED iter-45 (actualized to 15 with coerce's landing).
-- KI#65 · doc drift: MVP_SCOPE §2's scale line still said "13 actions"
-  after iter-43 landed the 14th (document_check) — the D-072 doc-sync
-  set updated §7's table but missed §2's snapshot; the rules.json meta
-  note carried the stale "8 systems" alongside · opened 2026-09-03 ·
-  CLOSED iter-44 (both actualized: 9 systems / 14 actions with the
-  growth rows named).
-- KI#64 · cap-law drift: KI#63 (closed iter-39) survived five
-  iterations past its close — the §5 mandatory deletion was skipped by
-  every doc-sync since iter-42; the FAQ sits at 21/20 (grew one entry
-  past the cap without the trim) · opened 2026-09-03 · CLOSED iter-44
-  (KI#63 deleted this iteration; the FAQ kept at 21/20 per §6.1 after a
-  real cruft pass — every entry owns a distinct law, no merge without a
-  substance cut; the trim owes at the phase-3→4 gate alongside the
-  DECISIONS collapse).
+- (KI#65 deleted at iter-46 per AGENTS §5 — closed iter-44, two
+  iterations past; the lesson lives in git + the FAQ.)
+- (KI#64 deleted at iter-46 per AGENTS §5 — closed iter-44, two
+  iterations past; the FAQ trim it flagged owes at the phase-3→4 gate
+  alongside the DECISIONS collapse.)
 - (KI#63 deleted at iter-44 per AGENTS §5 — closed iter-39, five
   iterations past; the lesson lives in git + the FAQ.)
 - (KI#61/KI#62 deleted at iter-39 per AGENTS §5 — closed iter-37,
@@ -101,6 +121,19 @@ actions" — the KI#65 family, the iter-43 miss). Tests 870→895
   iterations past; the lessons live in the FAQ + git.)
 
 ## FAQ / Pitfalls
+
+- **The echo is a read model gated by L6 — NEVER an entropy input
+  (iter-46 law).** The psychological residue (`core/echo.py`) is
+  knowledge-derived per-NPC valence: the intent door's `echo_at_least`
+  gate may read it (behavior selection, the P2b consumer), but the
+  DIRECTOR may not — narrative entropy reads observable state only
+  (DIRECTOR_SPEC §4, L6/EPIST-1), and a score folded from an NPC's
+  private knowledge records is not observable state. Wiring the echo
+  into `entropy` (or any channel input) would make the director read
+  minds through a derived number — an invariant-grade bug that would
+  look like a tuning change. Same fence for the chronicle: the echo
+  renders nothing; the behavior it gates (the intent's own event) is
+  the only legal visibility.
 
 - **Chronicle conditionals read FLAT context keys; the action check
   outcome is NESTED (iter-43 law).** `{cond?a|b}` addresses

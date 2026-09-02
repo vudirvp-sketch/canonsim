@@ -41,6 +41,7 @@ if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pac
 __all__ = [
     "AUDIENCES",
     "CheckResult",
+    "ECHO_TEST",
     "IntentData",
     "KNOWLEDGE_SLOTS",
     "LEVERAGE_TEST",
@@ -50,6 +51,7 @@ __all__ = [
     "RunnerError",
     "TEXTURE_FIELD",
     "TEXTURE_SCOPES",
+    "WINDOWED_TESTS",
     "action_duration",
     "first_failing",
     "find_flagged_accessible",
@@ -75,6 +77,23 @@ REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
 #: spend machinery — the import direction stays one-way (leverage →
 #: intent), so the facts themselves are duck-typed below.
 LEVERAGE_TEST: Final = "leverage_over"
+
+#: The intent door's echo test (social-2, iter-46): the noun entity's
+#: psychological residue on `axis` is at least `value` — the P2b
+#: behavior gate over the per-NPC valence fold. Same discipline as the
+#: leverage test: the scores arrive as duck-typed data
+#: (`core.echo.echo_scores` read at the caller's own tick); this module
+#: never imports `core.echo` (the import direction stays one-way).
+ECHO_TEST: Final = "echo_at_least"
+
+#: The tick-windowed precondition family — tests whose truth is driven
+#: by TIME, not by event application (the leverage liveness window,
+#: the echo decay). Two laws ride this name: the OCC re-check runs
+#: UNCONDITIONAL for intents carrying one (the window can move between
+#: accept and completion with no event committed), and
+#: `occ_breaking_cause` excludes them (a window close never attributes
+#: a breaking event the log does not hold).
+WINDOWED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST)
 
 #: The intent field carrying a resolved texture reference (INTENT_SCHEMA §2;
 #: blueprint §1 D-049: the mediator resolves noun -> live entry BEFORE the
@@ -259,13 +278,14 @@ def action_duration(
 
 class _Ctx:
     """Evaluation context: pack + projection + the intent's nouns + the
-    live leverage facts (iter-45). The facts are the caller's read of
-    `core.leverage.live_leverage` AT THE CALLER'S OWN TICK — the door at
-    the entry tick, the urgency gate at the beat, the OCC re-check at
-    completion: a tick-windowed precondition must be re-read at every
-    evaluation, never cached. Duck-typed (holder/subject attributes) —
-    core.intent never imports core.leverage (the import direction is
-    one-way; the leverage module owns the fact type)."""
+    live leverage facts (iter-45) and echo scores (iter-46). Both are
+    the caller's reads of the derived folds AT THE CALLER'S OWN TICK —
+    the door at the entry tick, the urgency gate at the beat, the OCC
+    re-check at completion: a tick-windowed precondition must be re-read
+    at every evaluation, never cached. Both duck-typed (holder/subject
+    and who/axis/score attributes) — core.intent never imports
+    core.leverage or core.echo (the import direction is one-way; the
+    owning modules own the fact types)."""
 
     def __init__(
         self,
@@ -273,11 +293,13 @@ class _Ctx:
         projection: Projection,
         intent: IntentData,
         facts: Sequence[Any] = (),
+        echoes: Sequence[Any] = (),
     ) -> None:
         self.pack = pack
         self.projection = projection
         self.intent = intent
         self.facts = facts
+        self.echoes = echoes
 
     def entity(self, noun: str) -> str:
         if noun == "actor":
@@ -400,6 +422,23 @@ def _test_leverage_over(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     )
 
 
+def _test_echo_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's echo test (social-2, iter-46): the noun entity's
+    residue on `axis` is at least `value` — a score in the
+    caller-supplied fold (read at the caller's own tick). With no
+    scores the test fails — a silent world carries no residue, the
+    behavior does not fire (the honest answer, never an error: a
+    missing pair IS zero). The pack lint requires `axis` declared in
+    the echo table and `value` within the scale (dead vocabulary is
+    refused at load — the KI#15 family)."""
+    return any(
+        score.who == ctx.entity(cond["noun"])
+        and score.axis == cond["axis"]
+        and score.score >= cond["value"]
+        for score in ctx.echoes
+    )
+
+
 def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     """pack-2 (iter-29, D-061): the noun (a location) holds at least one
     spot of the pack-declared transition layer that is NOT in the layer's
@@ -436,6 +475,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "texture_noun": _test_texture_noun,
     "spot_available": _test_spot_available,
     "leverage_over": _test_leverage_over,
+    "echo_at_least": _test_echo_at_least,
 }
 
 
@@ -445,14 +485,16 @@ def first_failing(
     intent: IntentData,
     preconditions: list[Mapping[str, Any]],
     facts: Sequence[Any] = (),
+    echoes: Sequence[Any] = (),
 ) -> str | None:
     """The first failing condition as '<noun>.<test>', or None when the
     intent is executable. Soft: callers record a no-op rejection event.
     The caller passes the list from `requires_for` — canon or texture per
-    the intent's path — and, when the list carries the leverage test, the
-    live leverage facts read at the caller's own tick (the window law:
-    a tick-driven precondition is never evaluated on stale facts)."""
-    ctx = _Ctx(pack, projection, intent, facts)
+    the intent's path — and, when the list carries a tick-windowed test
+    (`WINDOWED_TESTS`), the matching fold read at the caller's own tick
+    (the leverage facts and/or the echo scores — the window law: a
+    tick-driven precondition is never evaluated on stale reads)."""
+    ctx = _Ctx(pack, projection, intent, facts, echoes)
     for cond in preconditions:
         test = PRECONDITION_TESTS.get(cond["test"])
         if test is None:
@@ -616,14 +658,16 @@ def occ_breaking_cause(
     the per-index refold used to rebuild — at O(events), not O(w·events)."""
     action = pack.action(intent.kind)
     preconditions = requires_for(action, intent) if action else []
-    # Window preconditions (the leverage test) never attribute a breaking
-    # EVENT: their failure is tick-driven (the window closes by time, not
-    # by an application). They are excluded from the attribution fold —
-    # a window-close rejection chains to the last committed event (the
-    # caller's fallback), never falsely to the first event after the
-    # proposal (iter-45, social-1b).
+    # Window preconditions (the tick-windowed family: the leverage
+    # liveness window, the echo decay) never attribute a breaking
+    # EVENT: their failure is tick-driven (the window closes by time,
+    # not by an application). They are excluded from the attribution
+    # fold — a window-close rejection chains to the last committed
+    # event (the caller's fallback), never falsely to the first event
+    # after the proposal (iter-45, social-1b; generalized to the family
+    # at iter-46, social-2).
     attributable = [
-        cond for cond in preconditions if cond.get("test") != LEVERAGE_TEST
+        cond for cond in preconditions if cond.get("test") not in WINDOWED_TESTS
     ]
     state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
