@@ -3,7 +3,8 @@ resolvers by name; each resolver is a generic mechanic — no domain words
 (INV-3, enforced by the stoplist test). Phase 0 landed the 12 actions of
 `MVP_SCOPE.md` §7; the registry grows only with a new MECHANIC (tune-1:
 `recuperate` — pack-declared actor status effects, the fatigue
-counter-play), never for a setting noun.
+counter-play; iter-45: `coerce` — pack-declared subject-directed pair
+shifts, the leverage spend), never for a setting noun.
 
 A resolver runs at completion time (checks have already been rolled by
 `core/intent.py`); it reads the projection, draws nothing except explicit
@@ -146,7 +147,7 @@ def _hooks(action: Mapping[str, Any], branch: str) -> tuple[str, ...]:
     return tuple(action.get("hooks", {}).get(key, ()))
 
 
-# -- the twelve ---------------------------------------------------------------
+# -- the resolvers --------------------------------------------------------------
 
 
 def _observe(
@@ -533,6 +534,47 @@ def _recuperate(
     )
 
 
+def _coerce(
+    pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
+    action: Mapping[str, Any], check: CheckResult | None, tick: int,
+) -> Resolution:
+    """coerce (social-1b, iter-45): spend the live fact cluster over the
+    target. The resolver is the BALANCE half only — the pack-declared
+    pair-axis shifts landing on the SUBJECT toward the actor ({axis,
+    delta}, one directed `pair.<actor>.<axis>` prop each; an absent pair
+    axis starts from the pack's neutral — the `trust_toward` read law,
+    materialized by the write). The loop stamps the CLUSTER half at
+    commit: the event names the spent fact's id in `outcome.cluster`
+    (from the live fold — the log's only view of the fact, never a
+    resolver-side mutation). A clamped-to-unchanged delta emits no
+    StateChange (the rest/decay quiet-beat discipline); `from` is read
+    from the projection, never hardcoded (KI#13)."""
+    if intent.target is None:
+        raise RunnerError("coerce requires a target npc")
+    relations = pack.rules["relations"]
+    scale = relations["scale"]
+    neutral = int(relations["neutral"])
+    changes: list[StateChange] = []
+    for effect in action["balance"]:
+        prop = f"pair.{intent.actor}.{effect['axis']}"
+        current = projection[intent.target].get(prop)
+        base = neutral if current is None else int(current)
+        shifted = max(scale[0], min(scale[1], base + int(effect["delta"])))
+        if shifted != current:
+            changes.append(
+                StateChange(
+                    entity=intent.target, prop=prop,
+                    from_=current, to_=shifted,
+                )
+            )
+    return Resolution(
+        event_type=action["events"]["success"],
+        outcome={},  # the loop stamps cluster/secret/type from the live fold
+        knowledge=_knowledge(action, "success", pack, projection, intent, tick),
+        state_changes=tuple(changes),
+    )
+
+
 REGISTRY: Final[dict[str, ResolverFn]] = {
     "observe": _observe,
     "inspect": _inspect,
@@ -547,4 +589,5 @@ REGISTRY: Final[dict[str, ResolverFn]] = {
     "ignite": _ignite_action,
     "flee": _flee,
     "recuperate": _recuperate,
+    "coerce": _coerce,
 }

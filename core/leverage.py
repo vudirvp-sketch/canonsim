@@ -34,6 +34,16 @@ actions' own hooks), NO state changes (the fact is the cluster, not a
 delta): the reaction systems skip it by construction, so the cascade
 terminates exactly as the on_action one-hop law does (DIRECTOR_SPEC §3c).
 
+The spend (social-1b, iter-45): the coerce door — the fact cluster's
+first runtime consumer. The spend is a NEW EVENT naming the cluster's
+id in its `outcome.cluster` (never a mutation — INV-1): the fold treats
+a cluster as dead from its spend event's tick on, exactly as expiry
+does. The pack declares the spend's event type in `secrets.spend_event`
+(the action producing it must carry the `leverage_over` precondition —
+the pack lint owns that contract). `spendable_leverage` picks the fact
+a spend consumes: the first live fact with the holder/subject pair, in
+log order (deterministic).
+
 Pure per INV-2: a function of (pack data, knowledge view, record) with
 no RNG, no clock (only `record.t`), iteration in event order; the
 generator is lazy (each draft is built only when consumed — the KI#13
@@ -45,7 +55,7 @@ from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
-from core.intent import pack_importance
+from core.intent import RunnerError, pack_importance
 from core.log import EventDraft
 
 if TYPE_CHECKING:  # pack + view are duck-typed — no runtime cycle
@@ -59,12 +69,14 @@ __all__ = [
     "LeverageFact",
     "leverage_drafts",
     "live_leverage",
+    "spendable_leverage",
 ]
 
-SECRETS_BLOCK_KEYS: Final = ("event", "tokens", "notes")
+SECRETS_BLOCK_KEYS: Final = ("event", "spend_event", "tokens", "notes")
 """The closed `rules.json::secrets` key set (an unknown key is a lint
-error, never a silent ignore): the fact event's type, the token table,
-prose."""
+error, never a silent ignore): the fact event's type, the spend event's
+type (optional — absent means the pack declares clusters no action can
+spend; they simply expire), the token table, prose."""
 
 TOKEN_KEYS: Final = ("subject", "type", "expires_ticks")
 """The closed per-token key set: the secret's subject (whom the cluster
@@ -152,16 +164,29 @@ def live_leverage(
     """The read-side fold: every leverage fact live at `at_tick`, in log
     order. Liveness is a window, never an event (INV-1 — the immutable
     fact expires by derivation): live iff `at_tick < expires_at`, dead at
-    the boundary tick itself. A pack without a `secrets` block folds to
-    the empty tuple. The spend (a future event naming `source`) joins
-    with the first consumer; the fold's shape already supports it."""
+    the boundary tick itself — and dead from the tick of the event that
+    SPENT it (the spend names the cluster's id in `outcome.cluster`; the
+    holder cannot milk one secret twice). A pack without a `secrets` block
+    folds to the empty tuple. The spend (a new event naming `source`)
+    joined with the first consumer, iter-45: the fold's shape supports
+    it by construction — a second pass over the log, not a log edit."""
     config = pack.rules.get("secrets")
     if config is None:
         return ()
     event_type = config["event"]
+    spend_type = config.get("spend_event")
+    spent: set[str] = set()
+    if spend_type is not None:
+        for event in events:
+            if event.type == spend_type and event.t <= at_tick:
+                cluster = event.outcome.get("cluster")
+                if isinstance(cluster, str):
+                    spent.add(cluster)
     facts: list[LeverageFact] = []
     for event in events:
         if event.type != event_type:
+            continue
+        if event.id in spent:
             continue
         expires_at = int(event.outcome["expires_at"])
         if at_tick >= expires_at:
@@ -177,3 +202,23 @@ def live_leverage(
             )
         )
     return tuple(facts)
+
+
+def spendable_leverage(
+    facts: Sequence[LeverageFact], holder: str, subject: str
+) -> LeverageFact:
+    """The fact a spend consumes: the first live fact with the
+    holder/subject pair, in log order — deterministic. Loud when none
+    exists (a spend without a live cluster is unreachable by construction:
+    the `leverage_over` precondition gates the door and the OCC re-check;
+    reaching this with an empty fold is a contract break, never a silent
+    no-op — the KI#15 family)."""
+    for fact in facts:
+        if fact.holder == holder and fact.subject == subject:
+            return fact
+    raise RunnerError(
+        f"no live leverage held by {holder!r} over {subject!r} — the spend "
+        "requires a live fact cluster (the leverage_over precondition and "
+        "the OCC re-check guarantee one; reaching here empty is a contract "
+        "break)"
+    )

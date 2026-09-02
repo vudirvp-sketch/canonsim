@@ -1,52 +1,52 @@
 # STATUS — canonsim
 
-Iteration: iter-44 (`iter-44-social1-leverage` — the owner's
+Iteration: iter-45 (`iter-45-social1b-coerce` — the owner's
 "continue work per the plan" session call, the phase-3 backlog's top
-un-gated item: social-1, secrets & leverage as fact clusters) ·
+un-gated item: social-1b, the leverage use — the coerce door) ·
 Phase: 3 (Director)
-**OPEN — P3a landed: the CK3 `add_hook` precedent adapted (a hook IS
-an event — target, type, expiry tick, cause; the leverage fact is born
-as an event and never mutates, its liveness is a read-side fold)** ·
-Date: 2026-09-03 ·
-Scope: `core/leverage.py` (NEW) — the secrets reaction: a committed
-event's knowledge records ride the reaction cascade; a record whose
-token the pack's `rules.json::secrets` registry declares, held by a
-NOVEL knower (the crime reaction's own novelty law, `before_source`),
-kind npc, not the subject, mints ONE `leverage_gained` fact event per
-(knower, token) pair — actor = holder, target = subject, the cause
-chained to the event that taught them, the acquisition fidelity riding
-the cluster, `expires_at = t + expires_ticks`. Told secrets confer
-leverage (the transfer event's records are knowledge like any other):
-the watch briefing's transfer mints the relief watcher's cluster — the
-institution's knowledge becomes the institution's leverage. The cluster
-carries no knowledge, no hooks, no state changes — the social fact, not
-the epistemic one; the reaction systems skip it by construction (the
-one-hop law's sibling); the director buffer is untouched (L6 — the
-director never reads knowledge). Expiry is a read-side window (INV-1:
-the fact is immutable, its liveness is a fold — `live_leverage` the
-single read owner, live strictly before `expires_at`; the spend is a
-future event naming the cluster's id, social-1b). The name decision:
-the repo's "hook" word is the director's (SeededHook, D-005) — the CK3
-hook is our LEVERAGE, a social fact never a release. Pack data: the
-registry (closed key sets, the subject/type/expiry per token, the
-literal-mintable token vocabulary lint — a templated token's subject
-varies with the world, so only literal `knows` values are declarable),
-ONE live token (the theft secret `figure_reaching_for_purse` over
-pc_01, type blackmail, 720 ticks); the document_check verdict stays
-un-declared on purpose (institutional — the crime ladder owns that
-rung); `leverage_gained` joins story-critical events (the tale line
-renders) + metrics.system_of_type (knowledge+relations). Measured:
-seed 93 — the total steal failure mints the room (4 clusters, all
-cause-chained to the pickpocket) + the briefing mints the relief
-(vague fidelity, two decay steps down); seed 19 — two failures, ONE
-mint round (the novelty law live); the 10-seed A/B (day1_full): 1/10
-seeds mint (125, the same hot seed as iter-43's check), the divergence
-exactly the leverage events, 9/10 byte-identical. Corpus regen paid
-in-iteration (the iter-15/43 precedent): 9 cases re-distilled (the
-seed-93 room + the seed-15 second-steal family — the claim ids
-re-pinned to the shifted stream; a re-distill runner outside the repo
-per Rule 9). KI#64 opened+closed (the KI#63 deletion drift). Tests
-846→870 (+24 tests/test_leverage.py), ruff clean.
+**OPEN — the fact cluster's first runtime consumer landed: an action
+that SPENDS a live cluster (the spend is a new event naming the
+cluster's id, never a mutation; the fold kills it at the spend's tick —
+one secret buys one play)** · Date: 2026-09-03 ·
+Scope: the 15th action `coerce` (actions.json, over the NEW `coerce`
+resolver) — the door reads the live-leverage fold via `leverage_over`,
+the intent door's first fold-reading precondition (the facts re-read
+AT THE CALLER'S OWN TICK: the door at the entry tick, the urgency gate
+at the beat, the OCC re-check at completion — a tick-windowed
+precondition is never evaluated on stale facts; threaded duck-typed
+through `first_failing(..., facts=...)`, the import direction
+one-way). The OCC re-check runs UNCONDITIONAL for leverage-carrying
+intents — the window can close between accept and completion with no
+event committed (the projection is event-driven, the window is
+tick-driven); the rejection keeps `projection_moved` while
+`occ_breaking_cause` excludes the window test (a window close never
+attributes an event the log does not hold — cause = the last committed
+id). The loop stamps `outcome.cluster/secret/type` from the live fold
+at commit (the arrest-resolution precedent — loop-side, event-type-
+keyed, pack-declared via `secrets.spend_event`; the resolver stays
+fold-blind, no ResolverFn signature change). The balance (what a spent
+cluster buys) is pack data on the action (the status_effects
+precedent): subject-directed pair-axis shifts — an absent axis
+materializes at neutral+delta (the trust_toward read law made a write),
+clamped, the clamped-to-unchanged delta a quiet beat; v0.1: trust −25
+(D-030 break-fast) + fear +25; a status/urgency nudge stays
+recorded-not-built (the first-consumer law). No check (the leverage IS
+the power), no knowledge (the quiet corner — the cascade terminates
+as the mint's does). DORMANT in the committed content set: no driver
+carries it (the iter-38/42 pattern — an urgency entry shifts the
+SUBSTANTIVE stream for every run and re-distills all 105 corpus cases;
+content-4 owns the live call; the corpus staying green IS the
+byte-identity proof, the live-fire tests run on crafted pack copies —
+the hard_pack precedent). Measured (crafted driver, seed 93): the beat
+at 360 enqueues the drunkard's coerce at 405, completion 408 — cluster
+= the drunk's own fact, pair trust None→25 / fear None→75, the drunk
+dead in the fold while the room's four live on; the second beat
+silent; the window-close probe rejects projection_moved /
+actor.leverage_over with the cause chained to the last committed
+canon; the leverageless player coerce on the UNMODIFIED pack is a
+plain door rejection. KI#66 opened+closed (cli/main.py's stale "13
+actions" — the KI#65 family, the iter-43 miss). Tests 870→895
+(+25 tests/test_coerce.py), ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -72,6 +72,11 @@ per Rule 9). KI#64 opened+closed (the KI#63 deletion drift). Tests
 
 (none open.)
 
+- KI#66 · doc drift: `cli/main.py`'s docstring still said "13 actions"
+  after iter-43 landed the 14th — the iter-43 doc-sync updated
+  MVP_SCOPE/DIRECTOR_SPEC/TASKS but missed the CLI module docstring
+  (the KI#65 family: a count restated in a second place) · opened
+  2026-09-03 · CLOSED iter-45 (actualized to 15 with coerce's landing).
 - KI#65 · doc drift: MVP_SCOPE §2's scale line still said "13 actions"
   after iter-43 landed the 14th (document_check) — the D-072 doc-sync
   set updated §7's table but missed §2's snapshot; the rules.json meta

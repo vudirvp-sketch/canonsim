@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The phase-0 action set per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; tune-1 adds the 13th, rest — the fatigue counter-play as pack data over the recuperate resolver, D-045(a)/D-059; iter-43 adds the 14th, document_check — the crime ladder's public rung as pack data over the inspect resolver, D-072); docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'status_effects' (optional, tune-1) declares the actor status deltas the recuperate resolver applies. 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The phase-0 action set per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; tune-1 adds the 13th, rest — the fatigue counter-play as pack data over the recuperate resolver, D-045(a)/D-059; iter-43 adds the 14th, document_check — the crime ladder's public rung as pack data over the inspect resolver, D-072; iter-45 adds the 15th, coerce — the leverage spend as pack data over the coerce resolver, social-1b/D-074); docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'status_effects' (optional, tune-1) declares the actor status deltas the recuperate resolver applies. 'balance' (optional, iter-45) declares the subject-directed pair-axis shifts the coerce resolver applies when a live fact cluster is spent (what the cluster buys — pack data, never code). 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -320,6 +320,28 @@
       },
       "hooks": {"success": [], "failure": []},
       "notes": "the crime ladder's public rung (MVP_SCOPE §5 system 7, §7; the full action lands iter-43 over the inspect resolver — a checked interaction producing knowledge, zero state change of its own: the escalation rides the crime reactions on the verdict token, the crowd layer on the on_action entry). The check: the actor's scrutiny (perception) vs the target's composure (social) — a passed check is a DAMNING verdict (the stranger cannot satisfy; the branch type carries it, the house pattern — take/take_failed, flee/flee_caught); a failed one is talked down (document_check_failed — the same demand, the answer satisfies). The actor's success-branch record (papers_unsatisfactory, exact) is the only crime-mapped token — the arresting watcher escalates on what THIS knower holds (EPIST-1); the room's partial sighting (papers_demanded_of_{target}) is un-mapped crowd memory — rumor material, and the witnesses the on_action crowd_wary scope reads (the entry keys BOTH branch types: the public challenge unsettles the room either way). Seeded as the possible_document_check pair's payload (rules.json director.hooks); the arrest attempt + resolution follow through the standing crime machinery when the verdict crosses the arrest threshold"
+    },
+    {
+      "intent": "coerce",
+      "label": "lean on",
+      "resolver": "coerce",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "coerce"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "npc"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "actor", "test": "leverage_over", "who": "target"}
+      ],
+      "fields": [],
+      "balance": [
+        {"axis": "trust", "delta": -25},
+        {"axis": "fear", "delta": 25}
+      ],
+      "knowledge": {"success": [], "failure": []},
+      "hooks": {"success": [], "failure": []},
+      "notes": "the leverage spend (social-1b, iter-45, D-074 — the fact cluster's first runtime consumer): the holder plays the card. The door is the leverage test itself (actor.leverage_over — the intent door's first fold-reading precondition; a holder with no live cluster is rejected, a spent or expired cluster likewise — the fold is the only truth); the spend is a NEW EVENT naming the cluster's id in outcome.cluster (never a mutation — the fold kills the cluster at the spend's tick, INV-1), the loop stamping cluster/secret/type from the live fold at commit. The balance (what the cluster buys): the subject's directed pair axes toward the holder shift — trust breaks fast (−25, D-030's darkness-as-data law) and fear spikes (+25) — the v0.1 buy is the relation shift itself; a status/urgency nudge stays recorded-not-built (the first-consumer law). No check: the leverage IS the power (the reveal happens; a resisting subject is the option layer's future, the drama-2 grammar). No knowledge records: the corner is quiet — the room sees nothing, the reaction cascade terminates exactly as leverage_gained's does (the one-hop law's sibling). The compliance (the subject DOING what the holder wants) is P3e psychological-echo territory — never this action. DORMANT in the committed content set: no urgency/director driver carries it (the iter-38 climax-flag pattern — landing one shifts the RNG stream and re-distills the whole corpus; content-4 owns the live call). The subject must be an npc (kind test — pc_01 is one); the actor is whoever holds a live cluster over them"
     },
     {
       "intent": "flee",

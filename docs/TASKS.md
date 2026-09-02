@@ -25,7 +25,9 @@
 > landed iter-43, D-072 — the grammar's first LIVE content consumer;
 > the secrets & leverage fact clusters landed iter-44, social-1,
 > D-073 — P3a, the CK3 add_hook precedent: the social layer's first
-> first-class facts in the log).
+> first-class facts in the log; the leverage use — the coerce door,
+> the spend — landed iter-45, social-1b, D-074: the fact cluster's
+> first runtime consumer).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -122,19 +124,29 @@
   told secrets confer leverage (the briefing mints the relief's
   cluster); ONE live token (the theft secret over pc_01); corpus regen
   paid (9 cases re-distilled).
-- `social-1b` · the leverage use — the coerce door: an action that
-  SPENDS a live fact cluster (the spend is a new event naming the
-  cluster's id, never a mutation — the fold's `source` already
-  supports it); the pre-condition reads `live_leverage` (the intent
-  door's first leverage test); the balance (what a spent cluster buys
-  — a relation shift, an urgency nudge) is pack data. The fact
-  cluster's first runtime consumer.
+- `social-1b` · the leverage use — the coerce door — **done (iter-45,
+  D-074)**: the 15th action (`coerce` over the coerce resolver): the
+  door's first fold-reading precondition (`leverage_over` — the facts
+  re-read at the caller's own tick), the spend a NEW event naming the
+  cluster's id in `outcome.cluster` (never a mutation — the fold kills
+  it at the spend's tick; one secret buys one play), the unconditional
+  tick-window OCC re-check, and the balance as pack data (subject-
+  directed pair-axis shifts, the status_effects precedent). DORMANT in
+  the committed content set (the iter-38/42 pattern — the corpus stays
+  byte-identical; the live driver is content-4).
 - `social-2` · psychological echo (P3e); `arc-1` · arcs & tension
   shaping (P3c).
 - `content-2` · the alarm panic echo (witnesses of `alarm_raised`
   gain fear — the through-the-walls law; the iter-42 live probe
   reverted on the phase-1 corpus's committed anchors): lands with the
   corpus regen it implies; the content-1 precedent.
+- `content-4` · the coerce driver — the live content set for the
+  landed spend door (an urgency entry or director hook carrying the
+  `coerce` intent; a pack-declared status/urgency nudge joining the
+  pair shifts if the balance wants it): lands with the corpus regen
+  it implies (any driver draws the stream — the whole 105-case set
+  re-distills, the iter-42 alarm-echo lesson); the content-1/iter-43
+  precedent for the probe protocol.
 - `content-3` · ambient-channel content (the declared dimension, no
   hook carries it): its own row — social-1 landed without it (the
   fact-cluster work was not hook content, the iter-44 call).

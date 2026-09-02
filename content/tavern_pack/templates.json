@@ -4,15 +4,12 @@
     "version": "0.1",
     "notes": "Chronicle templates (iter-0c draft, completed in iter-5 with the renderer). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. Syntax: {slot} binds event data (actor/target/location/t/outcome fields); #symbol# expands the tracery grammar (render/tracery.py — modifiers .a/.capitalize/.upper/.lower); {cond?a|b} is ink-style conditional text on a raw context value; [key:value] saves an expansion for the rest of the line. Lists = alternatives picked via the ink-shuffle ShufflePool (no immediate repeat, cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line at all (MVP_SCOPE §9); tune-1 (iter-27) raised it low—medium: the importance rule now hooks story-critical events (rules.json importance.story_critical_events, D-045(b)/D-059), so medium separates the tale's beats from the per-beat axis bookkeeping (status_decayed/suspicion_changed) and world texture (wait/move/look) — the rule owns the split, the gate follows."
   },
-
-  "tale_gate": { "min_importance": "medium" },
-
+  "tale_gate": {
+    "min_importance": "medium"
+  },
   "day_header": "— Day #day#, #phase.capitalize# —",
-
   "scene_card": "{location_name}: {present_names}",
-
   "fallback": "(t {t}) {event_type}: {actor} → {target}",
-
   "symbols": {
     "flame_take": [
       "Flame takes to {location}.",
@@ -23,7 +20,6 @@
       "The air grows bitter."
     ]
   },
-
   "events": {
     "look_around": "{actor} takes in {location}.",
     "examine": "{actor} examines {target}.",
@@ -46,7 +42,6 @@
     "flee": "{actor} runs.",
     "flee_caught": "{actor} is caught.",
     "intent_rejected": "{actor} tries to {action_label} — impossible here.",
-
     "fire_started": "#flame_take# #smoke_sign#",
     "fire_spread": [
       "The fire spreads within {location}.",
@@ -57,7 +52,6 @@
     "alarm_raised": "Someone shouts: fire!",
     "crowd_wary": "The room watches {target} closely.",
     "location_burned_out": "{location} burns out. Nothing will be the same here.",
-
     "watch_change": "{outgoing?The watch changes: {outgoing} hands the post to {incoming}.|The watch changes: {incoming} takes the post.}",
     "knowledge_transfer": "{actor} briefs {target}; knowledge passes ({fidelity}).",
     "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}",
@@ -71,6 +65,7 @@
     "status_decayed": [
       "{target} drifts: {axes} changed.",
       "The hours tell on {target}: {axes} changed."
-    ]
+    ],
+    "coerce": "{actor} leans on {target} — the hold is spent."
   }
 }

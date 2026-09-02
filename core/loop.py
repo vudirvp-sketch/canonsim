@@ -56,6 +56,7 @@ from core.director import Director, policy_from_rules
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
+    LEVERAGE_TEST,
     REJECTION_EVENT,
     IntentData,
     RunnerError,
@@ -68,7 +69,7 @@ from core.intent import (
     validate_shape,
 )
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
-from core.leverage import leverage_drafts
+from core.leverage import leverage_drafts, live_leverage, spendable_leverage
 from core.log import EventDraft, EventLogWriter, EventRecord
 from core.onaction import on_action_drafts
 from core.pack import Pack
@@ -351,6 +352,14 @@ class Simulator:
 
     # -- the intent front door -------------------------------------------------
 
+    def _windowed(self, preconditions: Sequence[Mapping[str, Any]]) -> bool:
+        """Whether the precondition list gates on the leverage window
+        (iter-45, social-1b): those intents are evaluated against the
+        live-leverage fold read at THE CALLER'S OWN TICK — a pure read,
+        no RNG, no events, computed only when the action asks for it
+        (every other action pays nothing)."""
+        return any(cond.get("test") == LEVERAGE_TEST for cond in preconditions)
+
     def _execute_intent(self, entry: Any) -> bool:
         """PROPOSED → ACCEPTED (SCHEDULED) | REJECTED (no-op event).
         Returns whether the intent was accepted."""
@@ -361,8 +370,14 @@ class Simulator:
                 f"unknown intent {intent.kind!r} (not in the pack's actions)"
             )
         validate_shape(action, intent)
+        preconditions = requires_for(action, intent)
+        facts = (
+            live_leverage(self._pack, self._events, entry.tick)
+            if self._windowed(preconditions)
+            else ()
+        )
         failing = first_failing(
-            self._pack, self._projection, intent, requires_for(action, intent)
+            self._pack, self._projection, intent, preconditions, facts=facts
         )
         if failing is not None:
             self._emit_rejection(
@@ -383,16 +398,34 @@ class Simulator:
 
     def _complete(self, entry: Any) -> None:
         """Completion: OCC re-check → opposed check → resolver → event →
-        world reactions (ignitions, passes, follow-ups)."""
+        world reactions (ignitions, passes, follow-ups).
+
+        iter-45 (social-1b): the OCC re-check is UNCONDITIONAL for
+        windowed intents (the leverage preconditions) — the projection is
+        event-driven, but the leverage window is TICK-driven: it can
+        close between accept and completion with no event committed, and
+        the re-check must catch that too (the rejection chains to the
+        last committed event — `occ_breaking_cause` never attributes a
+        window close to an event it did not break). The spend stamping:
+        an intent resolving to the pack-declared `secrets.spend_event`
+        type carries the spent cluster's id, secret and type in its
+        outcome — the log names the fact it consumed (the loop owns the
+        log, so the loop owns the reference; the resolver stays
+        fold-blind — the arrest-resolution precedent for loop-side,
+        event-type-keyed, pack-declared decoration)."""
         payload: CompletionPayload = entry.payload
         intent = payload.intent
         action = self._pack.action(intent.kind)
         assert action is not None  # validated at the front door
 
-        if self._writer.event_count > payload.based_on_event_seq:
+        preconditions = requires_for(action, intent)
+        windowed = self._windowed(preconditions)
+        facts = (
+            live_leverage(self._pack, self._events, entry.tick) if windowed else ()
+        )
+        if self._writer.event_count > payload.based_on_event_seq or windowed:
             failing = first_failing(
-                self._pack, self._projection, intent,
-                requires_for(action, intent),
+                self._pack, self._projection, intent, preconditions, facts=facts
             )
             if failing is not None:
                 cause = occ_breaking_cause(
@@ -418,13 +451,24 @@ class Simulator:
         if intent.target is not None:
             entities.add(intent.target)
         entities.update(change.entity for change in resolution.state_changes)
+        outcome: dict[str, Any] = {
+            "duration": payload.duration, **resolution.outcome,
+        }
+        spend_type = self._pack.rules.get("secrets", {}).get("spend_event")
+        if spend_type is not None and resolution.event_type == spend_type:
+            if intent.target is None:  # unreachable: the door demands a target
+                raise RunnerError("a leverage spend requires a target npc")
+            fact = spendable_leverage(facts, intent.actor, intent.target)
+            outcome["cluster"] = fact.source
+            outcome["secret"] = fact.secret
+            outcome["type"] = fact.type
         draft = EventDraft(
             t=entry.tick,
             type=resolution.event_type,
             actor=intent.actor,
             target=intent.target,
             cause=self._writer.last_id,  # None only for the run-start event
-            outcome={"duration": payload.duration, **resolution.outcome},
+            outcome=outcome,
             knowledge=resolution.knowledge,
             state_changes=resolution.state_changes,
             hooks=resolution.hooks,
@@ -585,10 +629,15 @@ class Simulator:
                 draft, cause=self._writer.last_id,
                 provenance={"seed": self._seed},
             ))
-        # 2) NPC urgencies — small-formula goal rolls through the intent door
+        # 2) NPC urgencies — small-formula goal rolls through the intent door;
+        # the live-leverage fold read at the BEAT tick rides the gate (a
+        # leverage-gated urgency stays silent until the holder actually
+        # holds a live cluster — iter-45; the front door re-validates at
+        # the entry tick with its own facts)
         self._director.next_beat()
         for intent in urgency_intents(
-            self._pack, self._projection, self._bank
+            self._pack, self._projection, self._bank,
+            facts=live_leverage(self._pack, self._events, beat_tick),
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1

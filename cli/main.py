@@ -11,7 +11,7 @@ Batch subcommands (one process, one job):
     python -m cli replay <log.jsonl>
 
 Interactive session (no subcommand) — `look` and `wait` are two of the
-13 actions driven as single-step intents through the same front door as
+15 actions driven as single-step intents through the same front door as
 playscript steps; `play` loads a script into the live session; `narrate`
 drives the mediator beat cycle over an EXTERNAL narrator (the
 agent-in-the-loop door, D-055 — the repo stays LLM-free); `say` hands

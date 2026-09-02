@@ -31,6 +31,7 @@ from core.director import CHANNEL_INPUTS
 from core.intent import (
     AUDIENCES,
     KNOWLEDGE_SLOTS,
+    LEVERAGE_TEST,
     PRECONDITION_TESTS,
     PRESENT_SITES,
     REJECTION_EVENT,
@@ -608,6 +609,15 @@ class _Lint:
                     cond.get("test") in PRECONDITION_TESTS,
                     f"action {intent}: unknown precondition test {cond.get('test')!r}",
                 )
+                # iter-45 (social-1b): the leverage test's `who` is
+                # mandatory — a missing key would KeyError mid-run at the
+                # door (the carried_by family, refused at load instead).
+                if cond.get("test") == LEVERAGE_TEST:
+                    _require(
+                        cond.get("who") in _NOUNS,
+                        f"action {intent}: precondition leverage_over requires "
+                        f"'who' (the entity the noun holds leverage over)",
+                    )
                 # pack-2 (iter-29): the spot_available test's layer param
                 # must name a declared transition layer — a typo would
                 # KeyError mid-run (the KI#15 dead-data family, refused
@@ -689,6 +699,49 @@ class _Lint:
                     f"action {intent}: ignition item_flag must be a string",
                 )
             self._status_effects(intent, action)
+            self._balance(intent, action)
+
+    def _balance(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional balance block (iter-45, social-1b): the pack
+        declares what a spent leverage cluster BUYS — subject-directed
+        pair-axis shifts ({axis, delta}) the `coerce` resolver applies
+        toward the actor. The status_effects precedent owns the shape:
+        the block lives beside its action, only its resolver consumes
+        it, axes must be real relations axes, deltas non-zero integers
+        (an undeclared axis or a zero delta is dead data — KI#15 family:
+        refuse at load, never a silent no-op at completion)."""
+        balance = action.get("balance")
+        if balance is None:
+            return
+        where = f"action {intent!r} balance"
+        _require(
+            action.get("resolver") == "coerce",
+            f"{where}: only the 'coerce' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(
+            isinstance(balance, list) and balance,
+            f"{where}: must be a non-empty list",
+        )
+        axes = set(self._data["rules.json"].get("relations", {}).get("axes", ()))
+        for effect in balance:
+            _require(isinstance(effect, Mapping), f"{where}: entries must be objects")
+            unknown = sorted(set(effect) - {"axis", "delta"})
+            if unknown:
+                raise PackError(
+                    f"{where}: unknown keys {unknown} (the closed "
+                    "vocabulary: axis | delta)"
+                )
+            axis = effect.get("axis")
+            _require(
+                isinstance(axis, str) and axis in axes,
+                f"{where}: unknown pair axis {axis!r} (not a relations axis)",
+            )
+            delta = effect.get("delta")
+            _require(
+                isinstance(delta, int) and not isinstance(delta, bool) and delta != 0,
+                f"{where}: axis {axis!r} delta must be a non-zero integer",
+            )
 
     def _status_effects(self, intent: str, action: Mapping[str, Any]) -> None:
         """The optional status-effects block (tune-1, KI#4): the pack
@@ -1609,6 +1662,42 @@ class _Lint:
             f"secrets.event {event_type!r} is not in the template vocabulary "
             "(EVENT_SCHEMA §11 — the fact event renders in the chronicle)",
         )
+        # iter-45 (social-1b): the spend door. The event type must render,
+        # must be PRODUCED by a declared action, and every action that
+        # produces it must gate on the leverage test — the loop's spend
+        # stamping reads the live fold that very test guarantees at
+        # completion (an ungated spend would reach the stamping with an
+        # empty fold and crash mid-run — the KI#15 family, refused at
+        # load instead).
+        spend_type = config.get("spend_event")
+        if spend_type is not None:
+            _require(
+                isinstance(spend_type, str) and spend_type in templates,
+                f"secrets.spend_event {spend_type!r} is not in the template "
+                "vocabulary (EVENT_SCHEMA §11 — the spend renders in the "
+                "chronicle)",
+            )
+            spenders = [
+                action for action in self._data["actions.json"]["actions"]
+                if action.get("events", {}).get("success") == spend_type
+            ]
+            _require(
+                spenders,
+                f"secrets.spend_event {spend_type!r} is no action's success "
+                "event — the spend door is dead vocabulary",
+            )
+            for action in spenders:
+                intent = action.get("intent")
+                _require(
+                    any(
+                        cond.get("test") == LEVERAGE_TEST
+                        for cond in action.get("requires", ())
+                    ),
+                    f"action {intent!r} spends leverage (its success event is "
+                    f"secrets.spend_event) but carries no leverage_over "
+                    "precondition — the door would not guarantee a live "
+                    "cluster at completion",
+                )
         if "notes" in config:
             _require(
                 isinstance(config["notes"], str),

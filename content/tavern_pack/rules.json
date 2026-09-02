@@ -4,86 +4,242 @@
     "version": "0.1",
     "notes": "Rule parameters for the 9 systems (docs/MVP_SCOPE.md §5 — 8 phase-0 + the iter-44 secrets & leverage registry) plus the importance rule (§9), the intent contract parameters (docs/INTENT_SCHEMA.md), and the brief assembler contract (docs/BRIEF_SPEC.md §6, iter-8). Every number here is v0.1 tunable pack data — balance changes never touch code (INV-3). Values pinned by MVP_SCOPE or EVENT_SCHEMA examples are marked with a source note."
   },
-
   "time": {
     "ticks_per_day": 1440,
     "phases": [
-      {"id": "morning", "from": 0, "to": 360},
-      {"id": "afternoon", "from": 360, "to": 720},
-      {"id": "evening", "from": 720, "to": 1080},
-      {"id": "night", "from": 1080, "to": 1440}
+      {
+        "id": "morning",
+        "from": 0,
+        "to": 360
+      },
+      {
+        "id": "afternoon",
+        "from": 360,
+        "to": 720
+      },
+      {
+        "id": "evening",
+        "from": 720,
+        "to": 1080
+      },
+      {
+        "id": "night",
+        "from": 1080,
+        "to": 1440
+      }
     ],
     "notes": "MVP_SCOPE §8: full day ≈ 1440 ticks; 1 hour ≈ 60 ticks; typical action 2–8 ticks (see actions.json)"
   },
-
   "position_visibility": {
-    "sight": {"same_location": true, "through_exits": false},
-    "hearing": {"same_location": "normal", "adjacent_location": "vague_only"},
+    "sight": {
+      "same_location": true,
+      "through_exits": false
+    },
+    "hearing": {
+      "same_location": "normal",
+      "adjacent_location": "vague_only"
+    },
     "smoke_penalty": -20,
     "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9). The status modifiers on perception live with the perception skill (checks.skills.perception.status_modifiers — single owner); smoke_penalty feeds the perception system (iter-3)"
   },
-
   "systems": {
-    "time": {"reads": [], "writes": ["time"], "per_tick": false},
-    "position_visibility": {"reads": ["position", "status", "smoke"], "writes": [], "per_tick": false},
-    "relations": {"reads": ["knowledge"], "writes": ["relations"], "per_tick": false},
-    "knowledge": {"reads": ["knowledge", "position"], "writes": ["knowledge"], "per_tick": false},
-    "states": {"reads": ["time"], "writes": ["status"], "per_tick": false},
-    "fire": {"reads": ["fire", "position"], "writes": ["fire", "smoke", "status"], "per_tick": true},
-    "crime_watch": {"reads": ["relations", "knowledge"], "writes": ["relations", "status"], "per_tick": false, "after": ["relations"]},
-    "director": {"reads": ["hooks", "relations", "fire"], "writes": [], "per_tick": false},
+    "time": {
+      "reads": [],
+      "writes": [
+        "time"
+      ],
+      "per_tick": false
+    },
+    "position_visibility": {
+      "reads": [
+        "position",
+        "status",
+        "smoke"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
+    "relations": {
+      "reads": [
+        "knowledge"
+      ],
+      "writes": [
+        "relations"
+      ],
+      "per_tick": false
+    },
+    "knowledge": {
+      "reads": [
+        "knowledge",
+        "position"
+      ],
+      "writes": [
+        "knowledge"
+      ],
+      "per_tick": false
+    },
+    "states": {
+      "reads": [
+        "time"
+      ],
+      "writes": [
+        "status"
+      ],
+      "per_tick": false
+    },
+    "fire": {
+      "reads": [
+        "fire",
+        "position"
+      ],
+      "writes": [
+        "fire",
+        "smoke",
+        "status"
+      ],
+      "per_tick": true
+    },
+    "crime_watch": {
+      "reads": [
+        "relations",
+        "knowledge"
+      ],
+      "writes": [
+        "relations",
+        "status"
+      ],
+      "per_tick": false,
+      "after": [
+        "relations"
+      ]
+    },
+    "director": {
+      "reads": [
+        "hooks",
+        "relations",
+        "fire"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
     "notes": "SCHED-1: reads/writes annotations are data; the scheduler builds the per-tick pass order from the per_tick subset and fails loudly on write-write ambiguity without before/after hints (docs/blueprint/phase0.md §2). per_tick remains fire-only (iter-2): the iter-3 systems (knowledge transfer, crime reactions, watch rotation, expectations) are event-driven reactions dispatched from the commit door + clock-crossing rotations — not per-tick passes; states decay passes are deferred to iter-4 (task owner: docs/TASKS.md)"
   },
-
   "checks": {
     "die": 20,
     "tie": "defender",
     "failure_margin": 10,
     "skills": {
-      "stealth": {"base": 40},
+      "stealth": {
+        "base": 40
+      },
       "perception": {
         "base": 50,
         "status_modifiers": {
-          "intoxication": {"per_10_points": -2},
-          "fatigue": {"per_10_points": -1},
-          "injury": {"flat": -10},
-          "fear": {"flat_at_least": 50, "flat": -10},
-          "attention": {"flat_when": "distracted", "flat": -15}
+          "intoxication": {
+            "per_10_points": -2
+          },
+          "fatigue": {
+            "per_10_points": -1
+          },
+          "injury": {
+            "flat": -10
+          },
+          "fear": {
+            "flat_at_least": 50,
+            "flat": -10
+          },
+          "attention": {
+            "flat_when": "distracted",
+            "flat": -15
+          }
         }
       },
-      "social": {"base": 50},
-      "pursuit": {"base": 45},
-      "evasion": {"base": 45},
-      "context": {"base": 50}
+      "social": {
+        "base": 50
+      },
+      "pursuit": {
+        "base": 45
+      },
+      "evasion": {
+        "base": 45
+      },
+      "context": {
+        "base": 50
+      }
     },
     "kinds": {
-      "perception": {"attack": "perception", "defend": null, "defender_source": "environment"},
-      "social": {"attack": "social", "defend": null, "defender_source": "environment"},
-      "context": {"attack": "context", "defend": null, "defender_source": "environment"},
-      "stealth_vs_perception": {"attack": "stealth", "defend": "perception", "defender_source": "target"},
-      "stealth_vs_observers": {"attack": "stealth", "defend": "perception", "defender_source": "best_in_location"},
-      "evasion_vs_pursuit": {"attack": "evasion", "defend": "pursuit", "defender_source": "best_in_location"},
-      "perception_vs_social": {"attack": "perception", "defend": "social", "defender_source": "target"}
+      "perception": {
+        "attack": "perception",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "social": {
+        "attack": "social",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "context": {
+        "attack": "context",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "stealth_vs_perception": {
+        "attack": "stealth",
+        "defend": "perception",
+        "defender_source": "target"
+      },
+      "stealth_vs_observers": {
+        "attack": "stealth",
+        "defend": "perception",
+        "defender_source": "best_in_location"
+      },
+      "evasion_vs_pursuit": {
+        "attack": "evasion",
+        "defend": "pursuit",
+        "defender_source": "best_in_location"
+      },
+      "perception_vs_social": {
+        "attack": "perception",
+        "defend": "social",
+        "defender_source": "target"
+      }
     },
     "methods": {
-      "distraction": {"defender_modifier": -10}
+      "distraction": {
+        "defender_modifier": -10
+      }
     },
     "notes": "Opposed check (INTENT_SCHEMA §5): attacker total = skill base + status modifiers + d20 vs defender total; defender = the named skill of the defender entity (target / best-in-location excluding the actor) or the flat difficulty (environment); tie → defender; defender wins by ≥ failure_margin → total failure where the action distinguishes it. Skill numbers are v0.1 defaults; the difficulty column of MVP_SCOPE §7 seeds the per-action values in actions.json"
   },
-
   "relations": {
-    "scale": [0, 100],
+    "scale": [
+      0,
+      100
+    ],
     "neutral": 50,
-    "axes": ["reputation", "suspicion", "trust", "fear"],
+    "axes": [
+      "reputation",
+      "suspicion",
+      "trust",
+      "fear"
+    ],
     "suspicion_thresholds": {
       "status_suspect_at": 25
     },
     "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; the document-check band (50) lives with its two owners, the director.hooks.possible_document_check[_relief].trigger.value pair (iter-4a cleanup removed the doc's document_check_at mirror — the band is now declared per watcher, iter-43; the pack's balance, not a doc number). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3 (the iter-2a duplicate was removed); the verdict delta (+25, papers_unsatisfactory) lives in suspicion_sources — the three numbers compose the ladder per watcher: band 50 + verdict 25 >= arrest 75. Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
   },
-
   "knowledge": {
-    "channels": ["saw", "heard", "told", "inferred"],
-    "fidelity_chain": ["exact", "partial", "vague"],
+    "channels": [
+      "saw",
+      "heard",
+      "told",
+      "inferred"
+    ],
+    "fidelity_chain": [
+      "exact",
+      "partial",
+      "vague"
+    ],
     "transfer_decay_steps": 1,
     "salience": "importance_then_recency",
     "rumor_acceptance": {
@@ -102,16 +258,25 @@
     },
     "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). P2c (D-033): a successful talk makes the teller share their most salient novel fact — salience = importance then recency, records born on the triggering conversation excluded. Acceptance rolls d100 vs base + trust_weight*trust − teller penalty (all pack numbers); official watch briefings are always accepted (D-006 handover, not a rumor). Landed iter-3"
   },
-
   "states": {
-    "fatigue": {"gain_per_360_ticks_awake": 10, "reset_on_rotation": true},
-    "intoxication": {"decay_per_360_ticks": 10},
-    "fear": {"decay_per_360_ticks": 5},
-    "injury": {"auto_decay": 0},
-    "attention": {"decay_per_360_ticks": 0},
+    "fatigue": {
+      "gain_per_360_ticks_awake": 10,
+      "reset_on_rotation": true
+    },
+    "intoxication": {
+      "decay_per_360_ticks": 10
+    },
+    "fear": {
+      "decay_per_360_ticks": 5
+    },
+    "injury": {
+      "auto_decay": 0
+    },
+    "attention": {
+      "decay_per_360_ticks": 0
+    },
     "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup). tune-1 (KI#4): fatigue's counter-play is the rest action — the delta lives in actions.json status_effects beside the action that applies it (the use_effect precedent: the number lives with the effect's owner)"
   },
-
   "transitions": {
     "fire": {
       "system": "fire",
@@ -120,15 +285,41 @@
       "halt_flag": "destroyed",
       "ignition": {
         "requires_item_flag": "is_fire_source",
-        "requires_flammability": ["low", "medium", "high"],
+        "requires_flammability": [
+          "low",
+          "medium",
+          "high"
+        ],
         "chance_on_drop_break": 0.9
       },
-      "spread": {"chance_per_tick": 0.15, "within": "location"},
+      "spread": {
+        "chance_per_tick": 0.15,
+        "within": "location"
+      },
       "follow_ups": [
-        {"kind": "smoke", "after_ticks": 10, "flag": "smoke", "value": true, "irreversible": false, "blocked_by": ["destroyed"]},
-        {"kind": "burnout", "after_ticks": 120, "flag": "destroyed", "value": true, "irreversible": true, "blocked_by": []}
+        {
+          "kind": "smoke",
+          "after_ticks": 10,
+          "flag": "smoke",
+          "value": true,
+          "irreversible": false,
+          "blocked_by": [
+            "destroyed"
+          ]
+        },
+        {
+          "kind": "burnout",
+          "after_ticks": 120,
+          "flag": "destroyed",
+          "value": true,
+          "irreversible": true,
+          "blocked_by": []
+        }
       ],
-      "alarm": {"when_occupants_present": true, "fear_spike": 40},
+      "alarm": {
+        "when_occupants_present": true,
+        "fear_spike": 40
+      },
       "events": {
         "started": "fire_started",
         "spread": "fire_spread",
@@ -137,31 +328,73 @@
         "burnout": "location_burned_out"
       },
       "knowledge": {
-        "started": {"who": "same_location", "except": ["cause_actor"], "channel": "saw", "fidelity": "exact", "knows": "fire_in_{location}"},
-        "spread": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "fire_spreading_in_{location}"},
-        "smoke": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "smoke_in_{location}"},
-        "alarm": {"who": "same_location", "channel": "heard", "fidelity": "exact", "knows": "fire_alarm_in_{location}"},
-        "alarm_adjacent": {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "shouting_near_{location}"},
-        "burnout": {"who": "same_location", "channel": "saw", "fidelity": "exact", "knows": "{location}_burned_down"}
+        "started": {
+          "who": "same_location",
+          "except": [
+            "cause_actor"
+          ],
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "fire_in_{location}"
+        },
+        "spread": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "fire_spreading_in_{location}"
+        },
+        "smoke": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "smoke_in_{location}"
+        },
+        "alarm": {
+          "who": "same_location",
+          "channel": "heard",
+          "fidelity": "exact",
+          "knows": "fire_alarm_in_{location}"
+        },
+        "alarm_adjacent": {
+          "who": "adjacent_locations",
+          "channel": "heard",
+          "fidelity": "vague",
+          "knows": "shouting_near_{location}"
+        },
+        "burnout": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "{location}_burned_down"
+        }
       },
       "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); iter-20: the follow-up vocabulary (kinds, flags, values, the spreading spot_state, the spread halt_flag) moved from core code into the layer declaration — a second pack declares its own vocabulary, zero engine edits (D-057). position_visibility.smoke_penalty stays with the perception input it belongs to"
     },
     "notes": "generic transition engine (core/transitions.py) iterates pack-declared layers by name — core code carries no layer names and no follow-up kinds (INV-3; D-057: spot_state/halt_flag/follow_ups are layer data)"
   },
-
   "crime_watch": {
-    "watch_rotation_ticks": [360, 1080],
+    "watch_rotation_ticks": [
+      360,
+      1080
+    ],
     "transfer_on_rotation": true,
     "rotation": {
       "duty_post": "loc_tavern",
       "rest_post": "loc_guardroom",
-      "participants": ["npc_guard_01", "npc_guard_02"],
+      "participants": [
+        "npc_guard_01",
+        "npc_guard_02"
+      ],
       "watch_event": "watch_change",
       "transfer_event": "knowledge_transfer"
     },
     "suspicion_axis": "suspicion",
     "reaction_event": "suspicion_changed",
-    "status_values": ["unknown", "suspect", "caught"],
+    "status_values": [
+      "unknown",
+      "suspect",
+      "caught"
+    ],
     "status_suspect_value": "suspect",
     "suspicion_sources": {
       "witnessed_steal_failure": 25,
@@ -188,29 +421,79 @@
     },
     "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; iter-4 resolves it via arrest.resolution_check evasion vs pursuit — caught_value flips the suspect's crime_status irreversibly, T4). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3; arrest resolution added iter-4"
   },
-
   "expectations": {
     "check_at": "watch_rotation",
     "event": "expectation_violation",
     "rules": [
-      {"npc": "npc_guard_01", "item": "purse_01", "carried_by": "npc_guard_01", "knows": "purse_missing"}
+      {
+        "npc": "npc_guard_01",
+        "item": "purse_01",
+        "carried_by": "npc_guard_01",
+        "knows": "purse_missing"
+      }
     ],
     "notes": "P2d (KI#3): behaviour rules generate per-NPC expectations; a mismatch at check time emits an inferred-channel record cause-chained to the event that moved the item on the violated axis — the only legal route to suspicion-from-absence (an absence is knowable only as a violated expectation, never as 'not seen'). carried_by expectations check anywhere (their own pocket); at_location expectations additionally require the NPC on site. Checked at watch rotations (v0.1); rules must hold on the initial pack state (load-time lint). Landed iter-3"
   },
-
   "urgencies": {
-    "beat_ticks": [360, 720, 1080],
+    "beat_ticks": [
+      360,
+      720,
+      1080
+    ],
     "entries": [
-      {"npc": "npc_drunk_01", "probability_per_beat": 40, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [], "notes": "the drunkard lingers — a small-formula nudge toward ale-seeking; the §3 walkthrough's rumor teller needs to be in-scene to overhear"},
-      {"npc": "npc_maid_01", "probability_per_beat": 25, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [], "notes": "the maid finishes her shift — a low-key rest; her presence at the tavern keeps the sighting pool rich"},
-      {"npc": "npc_guard_02", "probability_per_beat": 15, "intent": {"kind": "wait", "fields": {"ticks": 1}}, "requires": [{"noun": "actor", "test": "flagged_accessible", "flag": "is_fire_source"}], "notes": "the relief guard's patrol impulse — fires when something is happening in the actor's location (the precondition is a placeholder for ambient alertness; v0.1)"}
+      {
+        "npc": "npc_drunk_01",
+        "probability_per_beat": 40,
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 1
+          }
+        },
+        "requires": [],
+        "notes": "the drunkard lingers — a small-formula nudge toward ale-seeking; the §3 walkthrough's rumor teller needs to be in-scene to overhear"
+      },
+      {
+        "npc": "npc_maid_01",
+        "probability_per_beat": 25,
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 1
+          }
+        },
+        "requires": [],
+        "notes": "the maid finishes her shift — a low-key rest; her presence at the tavern keeps the sighting pool rich"
+      },
+      {
+        "npc": "npc_guard_02",
+        "probability_per_beat": 15,
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 1
+          }
+        },
+        "requires": [
+          {
+            "noun": "actor",
+            "test": "flagged_accessible",
+            "flag": "is_fire_source"
+          }
+        ],
+        "notes": "the relief guard's patrol impulse — fires when something is happening in the actor's location (the precondition is a placeholder for ambient alertness; v0.1)"
+      }
     ],
     "notes": "P2b (D-021): NPC goals → occasional autonomous action through the same queue, same tick discipline. Small-formula dynamics: a probability roll per beat, an intent template, optional preconditions. World acts without the PC by construction — M5 (non-PC event share) becomes non-trivially non-zero at director-off (T8). Full LLM planning — never (VISION §6). Beat cycle at phase boundaries (every 360 ticks = 6 in-world hours); the same beats carry the states decay pass and the director's entropy release (one beat, three pieces — D-037). Landed iter-4"
   },
-
   "director": {
     "mode": "consequence_planner",
-    "triggers": ["time", "place", "threshold", "prop"],
+    "triggers": [
+      "time",
+      "place",
+      "threshold",
+      "prop"
+    ],
     "stagnation": {
       "entropy_floor": 5,
       "per_npc_cooldown_beats": 2
@@ -222,26 +505,83 @@
       "climax_floor": 75
     },
     "channels": {
-      "threat": {"entropy_floor": 3, "inputs": ["physical_threats"]},
-      "social": {"entropy_floor": 5, "inputs": ["suspicion"]},
-      "ambient": {"entropy_floor": 2, "inputs": []}
+      "threat": {
+        "entropy_floor": 3,
+        "inputs": [
+          "physical_threats"
+        ]
+      },
+      "social": {
+        "entropy_floor": 5,
+        "inputs": [
+          "suspicion"
+        ]
+      },
+      "ambient": {
+        "entropy_floor": 2,
+        "inputs": []
+      }
     },
     "hooks": {
       "guard_suspicious_of_pc": {
         "weight": {
           "base": 2,
           "modifiers": [
-            {"add": 2, "when": {"kind": "threshold", "target_npc": "npc_guard_01", "axis": "suspicion", "value": 50, "comparator": "at_least"}}
+            {
+              "add": 2,
+              "when": {
+                "kind": "threshold",
+                "target_npc": "npc_guard_01",
+                "axis": "suspicion",
+                "value": 50,
+                "comparator": "at_least"
+              }
+            }
           ]
         },
         "release_threshold": 10,
         "target_npc": "npc_guard_01",
-        "intent": {"kind": "wait", "fields": {"ticks": 1}},
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 1
+          }
+        },
         "channel": "social",
         "first_time_only": true,
         "options": [
-          {"weight": 1, "intent": {"fields": {"ticks": 1}}, "notes": "the quiet glance — the v0.1 nudge payload, the tie-loser by declaration order"},
-          {"weight": {"base": 1, "modifiers": [{"add": 2, "when": {"kind": "threshold", "target_npc": "npc_guard_01", "axis": "suspicion", "value": 50, "comparator": "at_least"}}]}, "intent": {"fields": {"ticks": 2}}, "notes": "the fixed stare — the watcher plants himself: the option's weight escalates in the document-check band (base 1 + 2 when suspicion at_least 50), so the release CHOICE hardens with the world while the hook's own tension escalates in parallel (two layers, one band, one number each)"}
+          {
+            "weight": 1,
+            "intent": {
+              "fields": {
+                "ticks": 1
+              }
+            },
+            "notes": "the quiet glance — the v0.1 nudge payload, the tie-loser by declaration order"
+          },
+          {
+            "weight": {
+              "base": 1,
+              "modifiers": [
+                {
+                  "add": 2,
+                  "when": {
+                    "kind": "threshold",
+                    "target_npc": "npc_guard_01",
+                    "axis": "suspicion",
+                    "value": 50,
+                    "comparator": "at_least"
+                  }
+                }
+              ]
+            },
+            "intent": {
+              "fields": {
+                "ticks": 2
+              }
+            },
+            "notes": "the fixed stare — the watcher plants himself: the option's weight escalates in the document-check band (base 1 + 2 when suspicion at_least 50), so the release CHOICE hardens with the world while the hook's own tension escalates in parallel (two layers, one band, one number each)"
+          }
         ],
         "notes": "the watcher grows wary — a low-key vigil; seeded on a steal failure (hooks.failure in actions.json steal). drama-1 (D-069): the weight is the multiplier shape — the vigil doubles its tension once the watcher's suspicion reaches the document-check band (base 2 + 2 when suspicion at_least 50, the escalation a single flat int cannot express); first_time_only — the vigil releases at most once per run, a second failure never doubles the watch. DIR-4: a SOCIAL-channel nudge — its quiet gate is 2 + global suspicion < 5, so the vigil can land while threat tension holds. drama-2 (D-070): the option layer — below the band the glance wins the 1-vs-1 tie by declaration order; in the band the stare's escalated weight (3) wins. The choice is a pure read of the world, never a draw"
       },
@@ -249,16 +589,38 @@
         "weight": 3,
         "release_threshold": 5,
         "target_npc": "npc_guard_01",
-        "intent": {"kind": "document_check", "target": "pc_01"},
-        "trigger": {"kind": "threshold", "target_npc": "npc_guard_01", "axis": "suspicion", "value": 50, "comparator": "at_least"},
+        "intent": {
+          "kind": "document_check",
+          "target": "pc_01"
+        },
+        "trigger": {
+          "kind": "threshold",
+          "target_npc": "npc_guard_01",
+          "axis": "suspicion",
+          "value": 50,
+          "comparator": "at_least"
+        },
         "channel": "threat",
         "climax": true,
         "first_time_only": true,
         "options": [
-          {"trigger": [
-            {"kind": "place", "target_npc": "npc_guard_01", "location": "loc_tavern"},
-            {"kind": "prop", "of": "pc_01", "path": "position", "comparator": "equals", "value": "loc_tavern"}
-          ], "notes": "the confrontation gate (drama-2's deferred-release law): the watcher on the post AND the stranger in the room — a closed option means the hook WAITS (no door attempt, no budget, no PEAK_CLIMAX mark); the gate's place leaf names the duty post (crime_watch.rotation.duty_post's value — the pack's setting data)"}
+          {
+            "trigger": [
+              {
+                "kind": "place",
+                "target_npc": "npc_guard_01",
+                "location": "loc_tavern"
+              },
+              {
+                "kind": "prop",
+                "of": "pc_01",
+                "path": "position",
+                "comparator": "equals",
+                "value": "loc_tavern"
+              }
+            ],
+            "notes": "the confrontation gate (drama-2's deferred-release law): the watcher on the post AND the stranger in the room — a closed option means the hook WAITS (no door attempt, no budget, no PEAK_CLIMAX mark); the gate's place leaf names the duty post (crime_watch.rotation.duty_post's value — the pack's setting data)"
+          }
         ],
         "notes": "the document-check deferred consequence, the seeded watcher's half (MVP_SCOPE §11; the single owner of the band number since iter-4a — the relief twin declares the same 50 on its own axis, the pack's balance). iter-43 (D-072): the stub wait becomes the real action (the payload target names the pack's player). The trigger stays the plain threshold leaf — the CAUSAL band; the confrontation world rides the option gate: the release fires only when both pass (the deferred-release law — the door never sees a world-impossible attempt from this hook on the canonical timeline: Doren rotates off the post the beat his band opens, his half waits). climax: the DIR-3 flag live — the boss path (PEAK-end, entropy at the third layer) also consults the option gate (a closed boss does not mark PEAK_CLIMAX, D-070); the explicit trigger never consults the clock (D-005). first_time_only: the Wesnoth fire-only-once law — one check per watcher per run, a talked-down verdict never re-rolls. DIR-4: THREAT-channel — the weight 3 meets its own channel floor 3, the quiet path self-blocks (an escalation never spawns because the world is boring)"
       },
@@ -266,29 +628,53 @@
         "weight": 3,
         "release_threshold": 5,
         "target_npc": "npc_guard_02",
-        "intent": {"kind": "document_check", "target": "pc_01"},
-        "trigger": {"kind": "threshold", "target_npc": "npc_guard_02", "axis": "suspicion", "value": 50, "comparator": "at_least"},
+        "intent": {
+          "kind": "document_check",
+          "target": "pc_01"
+        },
+        "trigger": {
+          "kind": "threshold",
+          "target_npc": "npc_guard_02",
+          "axis": "suspicion",
+          "value": 50,
+          "comparator": "at_least"
+        },
         "channel": "threat",
         "climax": true,
         "first_time_only": true,
         "options": [
-          {"trigger": [
-            {"kind": "place", "target_npc": "npc_guard_02", "location": "loc_tavern"},
-            {"kind": "prop", "of": "pc_01", "path": "position", "comparator": "equals", "value": "loc_tavern"}
-          ], "notes": "the confrontation gate, the relief twin (the same deferred-release law)"}
+          {
+            "trigger": [
+              {
+                "kind": "place",
+                "target_npc": "npc_guard_02",
+                "location": "loc_tavern"
+              },
+              {
+                "kind": "prop",
+                "of": "pc_01",
+                "path": "position",
+                "comparator": "equals",
+                "value": "loc_tavern"
+              }
+            ],
+            "notes": "the confrontation gate, the relief twin (the same deferred-release law)"
+          }
         ],
         "notes": "the institution's half (iter-43, D-072): the watch's consequence, not Doren's — the briefing at the rotation transfers the seeded watcher's tokens to the relief (D-006: spread between watchers is transfer events), so the relief's band opens at the handover and his check fires AT the rotation beat (the corpus session-10 shape: the new man with 'a briefing already in them, the look of a man reading a list of descriptions'). Seeded by the same steal-failure hooks list (the theft registers the institutional consequence once, both halves buffered); the option gate is the per-watcher confrontation world. The ladder composes per watcher: band 50 + verdict 25 >= the arrest threshold 75 (each number's single owner unchanged — the band in the two triggers, the verdict in suspicion_sources, the threshold in crime_watch.arrest); the arrest attempt + resolution ride the standing crime machinery. The two halves never double-fire a beat: the budget is 1 per beat across all channels, and first_time_only burns each tag after its own release"
       }
     },
     "notes": "D-005: the director releases already-seeded consequences; a complication from nowhere is a bug. P2e (narrative entropy) replaces the v0.1 flat timer: entropy = sum(seeded-hook weights) + global suspicion + visible physical threats (observable state only, L6). Stagnation releases the lowest-threshold hook when entropy < floor (a tension floor sensor). Explicit triggers (time / place / threshold) fire causally regardless of entropy. Per-NPC cooldown (MinGapBetweenEncounters analogue) prevents targeting spam. Director-off (T8 A/B baseline) = buffer still seeds, nothing releases — the world's emergent chains come from urgencies + reactions. Per-run scope: the buffer reseeds from the log every run (fold of events); policies are pack data. The director never learns the player (Alien named negative). Pacing (DIR-1, iter-36, L4D donor): the per-run RAMP/PEAK/REST/STAGNATION clock over entropy — peak_floor sits strictly above the stagnation floor (lint); stagnation releases fire only outside PEAK/REST (REST = min_rest_beats of post-climax breathing room — the flat detector re-injected the beat after a climax); explicit triggers never consult the clock (causality is not pacing). A pack without the pacing block runs the v0.1 minimal pair unchanged. Climax (DIR-3, iter-38, L4D2 donor): climax_floor is the third threshold layer (75 = 3x the peak floor 25 — the L4D2 three-intensity ratio, this pack's own instantiation); a hook flagged climax releases only at the end of a peak with entropy at this layer, never from the quiet path (a boss does not spawn because the world is boring). iter-43 (D-072): the document-check pair carries the flag live — the boss path consults the option gate (a closed boss does not mark PEAK_CLIMAX, D-070), so the flag never burns on a world-impossible release. Channels (DIR-4, iter-39, the L4D three-director family: Horde / S.I. / Music → threat / social / ambient): the quiet path decomposes per dimension — each channel declares its own entropy floor + the observable inputs it senses (the closed vocabulary suspicion | physical_threats; the channel's own unreleased hook weights always feed it); a hook opts in per hook (channel tag — the per-hook opt-in mirrors the climax flag; a tag without the block is dormant vocabulary; a channelless hook keeps the v0.1 global floor). Numbers are v0.1 tunable: threat 3 (an escalation's weight meets its own floor — the quiet path self-blocks), social 5 (the v0.1 floor carried, suspicion-bound), ambient 2 (the noise floor, inputless — declared-but-dormant: no hook carries it yet, the owner's content call). The pacing clock stays global (one drama arc over TOTAL entropy — PEAK/REST suppress every channel); explicit triggers stay ungated; the budget stays 1 release per beat across all channels. A pack without the channels block runs the v0.1 global-floor quiet path, byte-identically. Landed iter-4; pacing iter-36; climax layer iter-38; channels iter-39. Event grammar iter-40 (drama-1, D-069): trigger specs are predicates (the three v0.1 leaf kinds + compound all/any/not + the prop leaf — core/predicates.py owns the grammar, lint checks the shape); the hook weight may be the multiplier object {base, modifiers} — the entropy sensor reads the EFFECTIVE weight per beat; first_time_only burns the tag after its first release (the remaining instances stay facts but never release and never count toward entropy). Flat weights and leaf triggers run the v0.1 shapes byte-identically; this pack's live instantiation is the vigil's escalation modifier + burn flag (inert on the committed runs: the quiet path never fires there). Option layer iter-41 (drama-2, D-070): a hook may declare options — each an availability gate (predicate) + an ai_chance-style weight (flat or multiplier) + an intent payload override (whole-key: kind/target/fields); the pick is pure (heaviest effective weight wins, ties by declaration order, zero weights never picked, all-closed = the hook waits that beat); a hook without options runs the v0.1 release byte-identically. This pack's live instantiation is the vigil's glance/stare pair (inert on the committed runs for the same reason) PLUS the document-check pair's confrontation gates (iter-43, LIVE on the canonical runs: the relief's gate opens at the rotation beat — the corpus session-10 shape; Doren's waits — his post emptied the beat his band opened); the immediate/option/after lifecycle maps to seed/choose/apply — no literal effect blocks, the door's commit + reaction dispatch is the after (DIRECTOR_SPEC §3b). The document_check action itself (the ladder's rung: the verdict token → the arrest machinery, the crowd reaction on the witnesses) is actions.json + crime_watch pack data over the standing resolvers/reactions — zero engine edits (D-072)."
   },
-
   "on_action": {
     "document_check": [
       {
         "scope": "witnesses",
         "event": "crowd_wary",
-        "state": {"prop": "relations.suspicion", "add": 5},
+        "state": {
+          "prop": "relations.suspicion",
+          "add": 5
+        },
         "notes": "the crowd-witness reaction (drama-3, D-071): every NPC who witnessed the public document check grows warier of the stranger it targeted — the crowd-reaction layer the token-keyed crime system does not cover (no knowledge token maps a check; the room's papers_demanded_of sighting is deliberately un-mapped crowd memory; the scope reads the check's own witnesses). LIVE since iter-43 (D-072): the action emits the event, the entry fires on every committed run and live session where the check lands — cause-chained to the check, the reacting set = the witnesses with a suspicion home (the checked stranger is dropped — no home, the suspicion law). The entry keys BOTH branch types (the table's second key below) — a public challenge unsettles the room whether the papers satisfied or not. The alarm panic echo (witnesses of alarm_raised gain fear — the through-the-walls law) stays the recorded-not-landed row (DIRECTOR_SPEC §11): it fires on the phase-1 corpus's distraction-fire beats, whose beat anchors and event-count pins are committed fixtures — the next content row, with the corpus regen it implies"
       }
     ],
@@ -296,13 +682,15 @@
       {
         "scope": "witnesses",
         "event": "crowd_wary",
-        "state": {"prop": "relations.suspicion", "add": 5},
+        "state": {
+          "prop": "relations.suspicion",
+          "add": 5
+        },
         "notes": "the talked-down branch's own key — the same crowd reaction (the public challenge happened; the answer satisfying the watcher does not un-see it)"
       }
     ],
     "notes": "drama-3 (iter-42, D-071; DIRECTOR_SPEC §3c the contract owner): the Paradox on_action table adapted — event X commits → content reacts, as pack data, appended AFTER the hardcoded system reactions (suspicion / arrest / telling) and never replacing them (the donor's append-not-overwrite composition). Each entry: the scope (the explicit entity-set selector; witnesses = the triggering event's own knowers, deduped, event order), an optional per-entity gate (the quantified predicate — {prop, comparator, value} conditions evaluated with the CANDIDATE as the argument, no entity field in the spec, no implicit this), the reaction event type, and the scoped state change (a clamped numeric delta on relations.scale, the one numeric scale — the alarm precedent). One event per entry (the alarm shape); an empty gated scope emits nothing. No knowledge, no hooks on the reaction event — cascades terminate; the one-hop law (lint): no table key may name a reaction event the table emits. A pack without the block runs the v0.1 reaction behavior byte-identically"
   },
-
   "secrets": {
     "event": "leverage_gained",
     "tokens": {
@@ -312,9 +700,9 @@
         "expires_ticks": 720
       }
     },
-    "notes": "social-1 (iter-44, P3a; phases.md §3 — the CK3 add_hook precedent: secrets and leverage as first-class fact clusters, a hook IS an event; core/leverage.py owns the machinery, MVP_SCOPE §5 row 9 the system row). The registry: which knowledge tokens are SECRETS in this setting — a record whose token is declared here, held by a NOVEL knower (kind npc, not the subject), mints one leverage_gained fact event (actor = holder, target = subject, outcome {secret, type, fidelity, expires_at}); the cause chains to the event that taught them. Told secrets confer leverage too (the watch briefing's transfer mints the relief watcher's cluster — the institution's knowledge becomes the institution's leverage); the acquisition fidelity rides the cluster (how well the holder knows it). The cluster carries no knowledge, no hooks, no state changes — the social fact, not the epistemic one; the subject never learns of it; the cascade terminates (the one-hop law's sibling); the director buffer is untouched (L6). Expiry is a read-side window (live while t < expires_at — never an event, INV-1: the fact is immutable, its liveness is a fold; live_leverage is the single read owner, the spend is a future event naming the cluster's id — social-1b). The v0.1 content set: ONE live token — the theft secret (the steal failure's partial branch teaches it to the target, the total branch to the whole room; every holder gains the cluster over the stranger). The document_check verdict (papers_unsatisfactory) stays UNdeclared on purpose: the verdict is institutional — the watcher escalates through the crime machinery, and the check's actor is always the watcher; a personal-leverage twin would double-count the same knowledge (the crime ladder owns that rung). The ambient-channel row (content-3) did NOT ride: it is a director-hook content decision, not fact-cluster work — its own row per DIRECTOR_SPEC §11"
+    "notes": "social-1 (iter-44, P3a; phases.md §3 — the CK3 add_hook precedent: secrets and leverage as first-class fact clusters, a hook IS an event; core/leverage.py owns the machinery, MVP_SCOPE §5 row 9 the system row). The registry: which knowledge tokens are SECRETS in this setting — a record whose token is declared here, held by a NOVEL knower (kind npc, not the subject), mints one leverage_gained fact event (actor = holder, target = subject, outcome {secret, type, fidelity, expires_at}); the cause chains to the event that taught them. Told secrets confer leverage too (the watch briefing's transfer mints the relief watcher's cluster — the institution's knowledge becomes the institution's leverage); the acquisition fidelity rides the cluster (how well the holder knows it). The cluster carries no knowledge, no hooks, no state changes — the social fact, not the epistemic one; the subject never learns of it; the cascade terminates (the one-hop law's sibling); the director buffer is untouched (L6). Expiry is a read-side window (live while t < expires_at — never an event, INV-1: the fact is immutable, its liveness is a fold; live_leverage is the single read owner). social-1b (iter-45): spend_event names the coerce action's success event — the spend is a new event naming the cluster's id in outcome.cluster (never a mutation: the fold kills the cluster at the spend's tick, so one secret buys one play); the producing action MUST carry the leverage_over precondition (the pack lint owns that contract — the door and the OCC re-check guarantee the fold non-empty at completion). The v0.1 content set: ONE live token — the theft secret (the steal failure's partial branch teaches it to the target, the total branch to the whole room; every holder gains the cluster over the stranger). The document_check verdict (papers_unsatisfactory) stays UNdeclared on purpose: the verdict is institutional — the watcher escalates through the crime machinery, and the check's actor is always the watcher; a personal-leverage twin would double-count the same knowledge (the crime ladder owns that rung). The ambient-channel row (content-3) did NOT ride: it is a director-hook content decision, not fact-cluster work — its own row per DIRECTOR_SPEC §11",
+    "spend_event": "coerce"
   },
-
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,
@@ -323,70 +711,205 @@
       "story_critical_event": 2
     },
     "story_critical_events": [
-      "take", "steal", "pickpocket_failed", "drop_break", "arson",
-      "fire_started", "fire_spread", "smoke_rising",
-      "location_burned_out", "alarm_raised", "crowd_wary",
-      "watch_change", "knowledge_transfer", "expectation_violation",
-      "rumor_told", "flee", "flee_caught", "arrest_attempt",
-      "arrest_resolved", "document_check", "document_check_failed",
-      "leverage_gained"
+      "take",
+      "steal",
+      "pickpocket_failed",
+      "drop_break",
+      "arson",
+      "fire_started",
+      "fire_spread",
+      "smoke_rising",
+      "location_burned_out",
+      "alarm_raised",
+      "crowd_wary",
+      "watch_change",
+      "knowledge_transfer",
+      "expectation_violation",
+      "rumor_told",
+      "flee",
+      "flee_caught",
+      "arrest_attempt",
+      "arrest_resolved",
+      "document_check",
+      "document_check_failed",
+      "leverage_gained",
+      "coerce"
     ],
-    "thresholds": {"medium": 2, "high": 4},
+    "thresholds": {
+      "medium": 2,
+      "high": 4
+    },
     "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1."
   },
-
   "metrics": {
     "system_of_type": {
-      "wait": ["time"],
-      "move": ["position_visibility"],
-      "look_around": ["position_visibility", "knowledge"],
-      "examine": ["position_visibility", "knowledge"],
-      "examine_failed": ["position_visibility", "knowledge"],
-      "talk": ["relations", "knowledge"],
-      "talk_rebuffed": ["relations"],
-      "distract": ["relations"],
-      "distract_ignored": ["relations"],
-      "suspicion_changed": ["relations", "crime_watch"],
-      "steal": ["crime_watch", "position_visibility", "knowledge"],
-      "pickpocket_failed": ["crime_watch", "relations", "knowledge"],
-      "take": ["crime_watch", "position_visibility"],
-      "take_failed": ["crime_watch", "position_visibility"],
-      "drop_break": ["fire", "position_visibility"],
-      "arson": ["fire", "crime_watch"],
-      "fire_started": ["fire"],
-      "fire_spread": ["fire"],
-      "smoke_rising": ["fire", "position_visibility"],
-      "location_burned_out": ["fire"],
-      "alarm_raised": ["fire", "crime_watch"],
-      "use": ["fire", "position_visibility"],
-      "use_failed": ["fire", "position_visibility"],
-      "knowledge_transfer": ["knowledge"],
-      "rumor_told": ["knowledge", "relations"],
-      "expectation_violation": ["knowledge", "crime_watch"],
-      "watch_change": ["crime_watch", "knowledge"],
-      "status_decayed": ["states"],
-      "rest": ["states"],
-      "arrest_attempt": ["crime_watch"],
-      "arrest_resolved": ["crime_watch"],
-      "document_check": ["director", "crime_watch"],
-      "document_check_failed": ["director", "relations"],
-      "leverage_gained": ["knowledge", "relations"],
-      "intent_rejected": []
+      "wait": [
+        "time"
+      ],
+      "move": [
+        "position_visibility"
+      ],
+      "look_around": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "examine": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "examine_failed": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "talk": [
+        "relations",
+        "knowledge"
+      ],
+      "talk_rebuffed": [
+        "relations"
+      ],
+      "distract": [
+        "relations"
+      ],
+      "distract_ignored": [
+        "relations"
+      ],
+      "suspicion_changed": [
+        "relations",
+        "crime_watch"
+      ],
+      "steal": [
+        "crime_watch",
+        "position_visibility",
+        "knowledge"
+      ],
+      "pickpocket_failed": [
+        "crime_watch",
+        "relations",
+        "knowledge"
+      ],
+      "take": [
+        "crime_watch",
+        "position_visibility"
+      ],
+      "take_failed": [
+        "crime_watch",
+        "position_visibility"
+      ],
+      "drop_break": [
+        "fire",
+        "position_visibility"
+      ],
+      "arson": [
+        "fire",
+        "crime_watch"
+      ],
+      "fire_started": [
+        "fire"
+      ],
+      "fire_spread": [
+        "fire"
+      ],
+      "smoke_rising": [
+        "fire",
+        "position_visibility"
+      ],
+      "location_burned_out": [
+        "fire"
+      ],
+      "alarm_raised": [
+        "fire",
+        "crime_watch"
+      ],
+      "use": [
+        "fire",
+        "position_visibility"
+      ],
+      "use_failed": [
+        "fire",
+        "position_visibility"
+      ],
+      "knowledge_transfer": [
+        "knowledge"
+      ],
+      "rumor_told": [
+        "knowledge",
+        "relations"
+      ],
+      "expectation_violation": [
+        "knowledge",
+        "crime_watch"
+      ],
+      "watch_change": [
+        "crime_watch",
+        "knowledge"
+      ],
+      "status_decayed": [
+        "states"
+      ],
+      "rest": [
+        "states"
+      ],
+      "arrest_attempt": [
+        "crime_watch"
+      ],
+      "arrest_resolved": [
+        "crime_watch"
+      ],
+      "document_check": [
+        "director",
+        "crime_watch"
+      ],
+      "document_check_failed": [
+        "director",
+        "relations"
+      ],
+      "leverage_gained": [
+        "knowledge",
+        "relations"
+      ],
+      "intent_rejected": [],
+      "coerce": [
+        "relations"
+      ]
     },
     "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction. tune-1: rest joins as the states system's recovery action (single-system by design — the fatigue counter-play is not a cross-system event)."
   },
-
   "brief": {
     "total_hard": 800,
     "blocks": {
-      "directives": {"soft": 60, "hard": 80},
-      "scene_delta": {"soft": 150, "hard": 200},
-      "scene_texture": {"soft": 100, "hard": 140},
-      "present_entities": {"soft": 90, "hard": 120},
-      "recalled_facts": {"soft": 180, "hard": 240},
-      "scheduled_lore": {"soft": 90, "hard": 120},
-      "voice_exemplars": {"soft": 90, "hard": 120},
-      "active_options": {"soft": 90, "hard": 120}
+      "directives": {
+        "soft": 60,
+        "hard": 80
+      },
+      "scene_delta": {
+        "soft": 150,
+        "hard": 200
+      },
+      "scene_texture": {
+        "soft": 100,
+        "hard": 140
+      },
+      "present_entities": {
+        "soft": 90,
+        "hard": 120
+      },
+      "recalled_facts": {
+        "soft": 180,
+        "hard": 240
+      },
+      "scheduled_lore": {
+        "soft": 90,
+        "hard": 120
+      },
+      "voice_exemplars": {
+        "soft": 90,
+        "hard": 120
+      },
+      "active_options": {
+        "soft": 90,
+        "hard": 120
+      }
     },
     "recalled_facts": {
       "max_items": 12,
@@ -396,20 +919,52 @@
     "scene_texture": {
       "max_items": 8,
       "tombstone_max_items": 4,
-      "unique_slots": ["hearth"]
+      "unique_slots": [
+        "hearth"
+      ]
     },
     "present_entities": {
       "max_entities": 8,
       "max_pairs": 6,
-      "scene_line_fields": ["layout"],
+      "scene_line_fields": [
+        "layout"
+      ],
       "card_markers": [
-        {"prop": "status.intoxication", "min": 30, "marker": "drunk"},
-        {"prop": "status.fatigue", "min": 30, "marker": "weary"},
-        {"prop": "status.fear", "min": 30, "marker": "afraid"},
-        {"prop": "status.injury", "min": 1, "marker": "hurt"},
-        {"prop": "relations.suspicion", "min": 25, "marker": "wary"},
-        {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
-        {"prop": "crime_status", "value": "caught", "marker": "caught"}
+        {
+          "prop": "status.intoxication",
+          "min": 30,
+          "marker": "drunk"
+        },
+        {
+          "prop": "status.fatigue",
+          "min": 30,
+          "marker": "weary"
+        },
+        {
+          "prop": "status.fear",
+          "min": 30,
+          "marker": "afraid"
+        },
+        {
+          "prop": "status.injury",
+          "min": 1,
+          "marker": "hurt"
+        },
+        {
+          "prop": "relations.suspicion",
+          "min": 25,
+          "marker": "wary"
+        },
+        {
+          "prop": "crime_status",
+          "value": "suspect",
+          "marker": "suspect"
+        },
+        {
+          "prop": "crime_status",
+          "value": "caught",
+          "marker": "caught"
+        }
       ]
     },
     "directives": [

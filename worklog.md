@@ -12,6 +12,34 @@
 ---
 ---
 ---
+iter-45 · 2026-09-03 · social-1b — the leverage use: the coerce door
+(iter-45-social1b-coerce; the owner's "continue work per the plan"
+session call, the phase-3 backlog's top un-gated item)
+- The spend door: the 15th action `coerce` over the NEW `coerce`
+  resolver (actions.json + rules.json spend_event + the tale line);
+  `leverage_over` — the intent door's first fold-reading precondition
+  (facts re-read at the caller's own tick, threaded duck-typed);
+  the unconditional tick-window OCC re-check + the window-attribution
+  exclusion; the loop stamps outcome.cluster/secret/type (the
+  arrest-resolution precedent, the resolver stays fold-blind); the
+  balance = subject-directed pair shifts as pack data
+  (trust −25 / fear +25, the status_effects precedent).
+- DORMANT driver (the iter-38/42 pattern — an urgency entry shifts
+  the stream for all 105 corpus cases; content-4 owns the live call;
+  the corpus green IS the byte-identity proof). Measured on a crafted
+  driver (seed 93): the beat enqueues the drunkard's coerce, the spend
+  names his cluster, the fold kills it (one secret one play), the
+  window-close OCC rejection live. KI#66 opened+closed (cli/main.py's
+  stale "13 actions").
+- +25 tests/test_coerce.py, tests 870→895, ruff clean. D-074;
+  INTENT_SCHEMA §3/§4 + MVP_SCOPE §2/§5/§6/§7 + TASKS (social-1b done,
+  content-4 opened) + AGENT_NAVIGATION §1 + STATUS + this file synced.
+  19 files — over the 3-5 soft limit: the pack trio + the count-guard
+  test + the doc-sync law
+  (§6 same-turn; the iter-43/44 precedent). TASKS 719/600 kept per
+  §6.1 (the phase-3 landing rows, the iter-39..44 substance
+  precedent). iter-35 evicted per the cap.
+
 ---
 iter-44 · 2026-09-03 · social-1 — the secrets & leverage fact clusters
 (iter-44-social1-leverage; the owner's "continue work per the plan"
@@ -271,24 +299,8 @@ phase 3 opens on it, the iter-31 precedent)
 
 ---
 iter-35 · 2026-09-01 · phase-2 gate — the verdict + the collapse
-(iter-35-phase2-gate; the owner's "continue per the plans" session
-call — the un-gated backlog was empty, the arc's #1 item, the iter-26
-precedent)
-- Verdict **PASS** (D-064): the ≥90% exit criterion met — 51 combined
-  utterances across 10 live say-door sessions, 35/35 boundary validity,
-  0 honest misfires, 10/10 off-grammar probes caught; no kill-criteria
-  hit. The §5 protocol re-run (a runner outside the repo, Rule 9):
-  day1_full ON seed 125 M1=0.417 / M2=0.500 — identical to the iter-26
-  phase-1 gate numbers (phase 2 added the parser without touching a
-  canon path); T8 OFF 26 chains ≥ 3; T7 — the day1_full tale still
-  reads as a story (13 lines, zero noise floor); 697 green, ruff clean.
-- DECISIONS collapsed 35→30 per D-034 (D-012→the D-011 family,
-  D-047→the D-042 family, D-055→D-054, D-057→D-056, D-060/D-061→D-059)
-  + D-064 appended; ROADMAP §2 phase 2 CLOSED, phase 3 parked (the
-  owner's opening call, the iter-31 precedent).
-- Doc-only (streak 1 of 2, the gate-review precedent). 7 files — the
-  gate-review doc-sync set (the iter-26 scope precedent); iter-28
-  evicted per the cap.
+
+- (deleted at iter-45 per the one-in/one-out cap; history in git.)
 
 ---
 bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation

@@ -20,9 +20,10 @@ not of architecture — a boring four-room scenario is not a verdict on the core
 
 **In scope:**
 
-- 5 locations, 6 NPCs, 5 items, 9 systems, 14 actions — 12 phase-0
+- 5 locations, 6 NPCs, 5 items, 9 systems, 15 actions — 12 phase-0
   plus the growth rows (rest tune-1/iter-27; document_check iter-43;
-  the 9th system, secrets & leverage, iter-44; §4–§7).
+  the 9th system, secrets & leverage, iter-44; coerce, the leverage
+  spend, iter-45; §4–§7).
 - Deterministic core: seed, RngBank (INV-2, RNG-1), integer tick clock, single event
   queue, JSONL append-only log with header (§8, `docs/EVENT_SCHEMA.md` §1).
 - Event schema v0 with knowledge records, `state_changes`, `hooks`.
@@ -111,7 +112,7 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | 6 | fire | source, flammability, spread, smoke, alarm | irreversible state changes |
 | 7 | crime & watch | suspicion thresholds, document check, arrest attempt, watch change | no group reputation — knowledge spread models it (§10) |
 | 8 | director | deferred-consequence buffer, triggers, stagnation detector | §11 |
-| 9 | secrets & leverage (iter-44, P3a) | the fact-cluster registry (`rules.json::secrets`) + the leverage birth reaction; a novel knower of a declared secret token mints a `leverage_gained` fact event (holder, subject, type, expiry); liveness is a read-side fold | `core/leverage.py`; the CK3 `add_hook` precedent — the fact is immutable, the spend a future event (social-1b) |
+| 9 | secrets & leverage (iter-44, P3a) | the fact-cluster registry (`rules.json::secrets`) + the leverage birth reaction and spend door; a novel knower of a declared secret token mints a `leverage_gained` fact event (holder, subject, type, expiry); liveness is a read-side fold | `core/leverage.py`; the CK3 `add_hook` precedent — the fact is immutable, the spend a new event naming the cluster's id (iter-45: the `coerce` action, `leverage_over` the door) |
 
 ## 6. Intersection matrix (first-class design artifact)
 
@@ -124,7 +125,8 @@ relations, no movement — it only receives knowledge records (rumor listener).
 | hooks → buffer → director release | delayed consequences fire causally |
 | position → visibility → crime success | where you stand decides what you can steal |
 | relations → talk → rumor acceptance | trusted tellers spread rumors faster |
-| knowledge → secrets → leverage | a witnessed secret becomes a social fact: novel knowers mint immutable leverage clusters (told secrets included — the briefing mints the relief's) |
+| knowledge → secrets → leverage → coerce | a witnessed secret becomes a social fact: novel knowers mint immutable leverage clusters (told secrets included — the briefing mints the relief's); the spend (iter-45) plays the card — the cluster dies in the fold, the subject's directed pair axes shift (the balance) |
+| leverage → relations | what a spent cluster buys is pack data: trust breaks fast, fear spikes — the directed pair map, never a group reputation |
 
 Eight systems taken separately are trivial — emergence lives at the
 intersections. The log metrics (§15) measure exactly this. (The ninth
@@ -139,7 +141,11 @@ the `recuperate` resolver — the registry grows only with a new mechanic;
 iter-43 (D-072) added `document_check` as pack data over the `inspect`
 resolver — the crime ladder's public rung (the deferred consequence
 became a real action: the watcher's scrutiny vs the stranger's composure,
-the verdict token escalating through the standing crime reactions).
+the verdict token escalating through the standing crime reactions);
+iter-45 (D-074) added `coerce` as pack data over the `coerce` resolver —
+the leverage spend (social-1b): the fact cluster's first runtime consumer,
+the door reading the live-leverage fold, the balance (what the cluster
+buys) pack-declared pair-axis shifts.
 
 | Action | Intent type | Ticks | Check | On failure | Knowledge produced |
 |---|---|---|---|---|---|
@@ -157,6 +163,7 @@ the verdict token escalating through the standing crime reactions).
 | flee | `flee` | 2+ | pursuit | caught | guards: chase knowledge |
 | rest | `rest` | 60 | — | — | — (tune-1: fatigue −30, pack `status_effects`) |
 | demand papers | `document_check` | 2 | scrutiny (perception) vs composure (social) | talked down | actor: the verdict; room: the public challenge (iter-43) |
+| lean on | `coerce` | 3 | live leverage required (the door reads the fold) | door rejection | — : the quiet corner; the subject's pair axes shift (iter-45) |
 
 Free-text input arrives when the C-parser can decompose it into these same
 intents (phase 2). Buttons/commands are shortcuts to identical intents.

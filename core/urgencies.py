@@ -23,7 +23,7 @@ intents use. The world's logic is one mechanism, not two — M5
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -98,6 +98,7 @@ def urgency_intents(
     pack: "Pack",
     projection: "Projection",
     bank: "RngBank",
+    facts: Sequence[Any] = (),
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -105,7 +106,13 @@ def urgency_intents(
     yield the IntentData. The loop enqueues them through the intent
     door (band NPC_REACTION) at the popped entry's tick, so they
     execute after the player's intents in the same tick (the
-    entry-tick enqueue law, D-039)."""
+    entry-tick enqueue law, D-039).
+
+    `facts` (iter-45, social-1b): the live leverage fold read at the
+    BEAT tick — an urgency whose `requires` gate on `leverage_over`
+    stays silent until the holder actually holds a live cluster (the
+    same silent-skip law as any other world-impossible attempt; the
+    front door re-validates at the entry tick with its own facts)."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
@@ -118,7 +125,9 @@ def urgency_intents(
             continue
         intent = _build_intent(spec, seq)
         if spec.requires:
-            failing = first_failing(pack, projection, intent, list(spec.requires))
+            failing = first_failing(
+                pack, projection, intent, list(spec.requires), facts=facts
+            )
             if failing is not None:
                 continue  # the world said no — silent, no rejection event
         out.append(intent)

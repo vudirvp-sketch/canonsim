@@ -70,11 +70,14 @@ test. A failing condition rejects the intent with
 | `has_field` | `field` | the pack record has the field (`use_effect`) |
 | `spot_available` | `layer` | the noun (a location) holds at least one spot of the pack-declared transition layer NOT in the layer's `spot_state` — the exact condition the ignite resolver keys on, so door and resolver agree by construction (pack-2/iter-29: igniting a destroyed or fully-burning location is a door rejection, never a no-ignition success; the layer param is lint-checked against the declared layers) |
 | `texture_noun` | — | the intent carries a well-formed resolved texture reference whose scope target is a known entity (iter-11; ledger liveness deliberately NOT tested — core is ledger-blind) |
+| `leverage_over` | `who` | the noun entity holds live leverage over `who` — some fact in the caller-supplied live-leverage fold pairs them (iter-45, social-1b: the door's first fold-reading test; the facts are `core.leverage.live_leverage` read at the caller's own tick — door, beat gate, or completion — a tick-windowed precondition is never evaluated on stale facts) |
 
 Nouns: `actor`, `target`, `texture` (iter-11 — resolves to the reference's
 scope target, the canon entity a promotion lands on). Runtime sources: the
 projection for position / carrier / relations / status; the pack for static
-records. The same evaluator runs at proposal time and at completion time
+records; the live-leverage fold for the leverage window (a derived read
+model, not projection state — the facts arrive as data at each evaluation).
+The same evaluator runs at proposal time and at completion time
 (OCC, §4).
 
 **The texture path (iter-11, blueprint §1 promotion).** When an intent
@@ -102,6 +105,15 @@ precondition** (found by folding forward from the initial projection —
 attribution only; STATE-1 is untouched). A moved projection with intact
 preconditions proceeds normally — one mechanism, the same semantics the
 phase-1 validator uses (phase0 §2).
+
+**Tick-windowed preconditions (iter-45, social-1b):** an intent whose
+`requires` carry `leverage_over` re-runs the full check at completion
+**unconditionally** — the leverage window is tick-driven and can close
+with no event committed, which the event-count guard above would miss.
+The window close is still a `projection_moved` rejection (the derived
+liveness moved), but never attributes a breaking event the log does not
+hold: `occ_breaking_cause` excludes the window test, and the cause falls
+back to the last committed event id.
 
 ## 5. Checks (opposed rolls)
 

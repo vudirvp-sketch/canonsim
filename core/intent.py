@@ -27,7 +27,7 @@ machinery the front door runs:
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -43,6 +43,7 @@ __all__ = [
     "CheckResult",
     "IntentData",
     "KNOWLEDGE_SLOTS",
+    "LEVERAGE_TEST",
     "PRECONDITION_TESTS",
     "REJECTION_EVENT",
     "Resolution",
@@ -67,6 +68,13 @@ __all__ = [
 ]
 
 REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
+
+#: The intent door's first leverage test (social-1b, iter-45): the actor
+#: holds live leverage over `who`. The name is this module's vocabulary
+#: (the closed test set's owner); `core/leverage.py` reads it for the
+#: spend machinery — the import direction stays one-way (leverage →
+#: intent), so the facts themselves are duck-typed below.
+LEVERAGE_TEST: Final = "leverage_over"
 
 #: The intent field carrying a resolved texture reference (INTENT_SCHEMA §2;
 #: blueprint §1 D-049: the mediator resolves noun -> live entry BEFORE the
@@ -250,12 +258,26 @@ def action_duration(
 
 
 class _Ctx:
-    """Evaluation context: pack + projection + the intent's nouns."""
+    """Evaluation context: pack + projection + the intent's nouns + the
+    live leverage facts (iter-45). The facts are the caller's read of
+    `core.leverage.live_leverage` AT THE CALLER'S OWN TICK — the door at
+    the entry tick, the urgency gate at the beat, the OCC re-check at
+    completion: a tick-windowed precondition must be re-read at every
+    evaluation, never cached. Duck-typed (holder/subject attributes) —
+    core.intent never imports core.leverage (the import direction is
+    one-way; the leverage module owns the fact type)."""
 
-    def __init__(self, pack: Pack, projection: Projection, intent: IntentData) -> None:
+    def __init__(
+        self,
+        pack: Pack,
+        projection: Projection,
+        intent: IntentData,
+        facts: Sequence[Any] = (),
+    ) -> None:
         self.pack = pack
         self.projection = projection
         self.intent = intent
+        self.facts = facts
 
     def entity(self, noun: str) -> str:
         if noun == "actor":
@@ -363,6 +385,21 @@ def _test_texture_noun(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     return True
 
 
+def _test_leverage_over(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's first leverage test (social-1b, iter-45): the
+    noun entity holds live leverage over `who` — some fact in the
+    caller-supplied fold pairs them. The facts arrive as data (the
+    caller's `live_leverage` read at its own tick); with no facts the
+    test fails — nobody holds leverage over anyone, the door rejects.
+    The pack lint requires the `who` param (a missing key would KeyError
+    mid-run — the KI#15 family)."""
+    return any(
+        fact.holder == ctx.entity(cond["noun"])
+        and fact.subject == ctx.entity(cond["who"])
+        for fact in ctx.facts
+    )
+
+
 def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     """pack-2 (iter-29, D-061): the noun (a location) holds at least one
     spot of the pack-declared transition layer that is NOT in the layer's
@@ -398,6 +435,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "has_field": _test_has_field,
     "texture_noun": _test_texture_noun,
     "spot_available": _test_spot_available,
+    "leverage_over": _test_leverage_over,
 }
 
 
@@ -406,12 +444,15 @@ def first_failing(
     projection: Projection,
     intent: IntentData,
     preconditions: list[Mapping[str, Any]],
+    facts: Sequence[Any] = (),
 ) -> str | None:
     """The first failing condition as '<noun>.<test>', or None when the
     intent is executable. Soft: callers record a no-op rejection event.
     The caller passes the list from `requires_for` — canon or texture per
-    the intent's path."""
-    ctx = _Ctx(pack, projection, intent)
+    the intent's path — and, when the list carries the leverage test, the
+    live leverage facts read at the caller's own tick (the window law:
+    a tick-driven precondition is never evaluated on stale facts)."""
+    ctx = _Ctx(pack, projection, intent, facts)
     for cond in preconditions:
         test = PRECONDITION_TESTS.get(cond["test"])
         if test is None:
@@ -575,10 +616,19 @@ def occ_breaking_cause(
     the per-index refold used to rebuild — at O(events), not O(w·events)."""
     action = pack.action(intent.kind)
     preconditions = requires_for(action, intent) if action else []
+    # Window preconditions (the leverage test) never attribute a breaking
+    # EVENT: their failure is tick-driven (the window closes by time, not
+    # by an application). They are excluded from the attribution fold —
+    # a window-close rejection chains to the last committed event (the
+    # caller's fallback), never falsely to the first event after the
+    # proposal (iter-45, social-1b).
+    attributable = [
+        cond for cond in preconditions if cond.get("test") != LEVERAGE_TEST
+    ]
     state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
         apply_event(state, events[idx])
-        if first_failing(pack, state, intent, preconditions) is not None:
+        if first_failing(pack, state, intent, attributable) is not None:
             return events[idx].id
     return None
 
