@@ -2,7 +2,7 @@
   "meta": {
     "pack": "tavern_pack",
     "version": "0.1",
-    "notes": "The phase-0 action set per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; tune-1 adds the 13th, rest — the fatigue counter-play as pack data over the recuperate resolver, D-045(a)/D-059); docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'status_effects' (optional, tune-1) declares the actor status deltas the recuperate resolver applies. 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
+    "notes": "The phase-0 action set per docs/MVP_SCOPE.md §7 (that table is the source of truth for intent types, ticks, checks, failure modes and knowledge produced; tune-1 adds the 13th, rest — the fatigue counter-play as pack data over the recuperate resolver, D-045(a)/D-059; iter-43 adds the 14th, document_check — the crime ladder's public rung as pack data over the inspect resolver, D-072); docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar). Check/roll parameters resolve against rules.json checks. 'resolver' names the generic core resolver (INV-3: the intent-to-code mapping is pack data, never code). 'events' names the success/failure/failure_total event types (templates.json owns the closed vocabulary). 'requires' is the structured precondition list (closed test set in core/intent.py). 'texture' (optional, iter-11) declares an action texture-capable: its requires/knowledge replace the canon ones for intents carrying the mediator-resolved texture reference (blueprint §1 promotion; the {target} slot is lint-forbidden there — use {texture_slot}). 'status_effects' (optional, tune-1) declares the actor status deltas the recuperate resolver applies. 'knowledge' templates: who = actor|target|same_location|adjacent_locations, optional 'except' tokens, knows slots {actor}/{target}/{location}. Free-text input never reaches here directly: everything arrives as one of these intents (buttons/commands in phase 0, the C-parser in phase 2)."
   },
 
   "actions": [
@@ -226,7 +226,7 @@
       },
       "hooks": {
         "success": [],
-        "failure": ["guard_suspicious_of_pc", "possible_document_check"]
+        "failure": ["guard_suspicious_of_pc", "possible_document_check", "possible_document_check_relief"]
       },
       "notes": "the ev_0007 scenario: failure produces the richest knowledge records in the slice (partial = target saw + others heard; total = everyone saw); the margin rule lives in rules.checks.failure_margin; method 'distraction' is the in-attempt gambit (rules.checks.methods); the suspicion state changes land with the crime system (iter-3)"
     },
@@ -295,6 +295,31 @@
       "knowledge": {"success": [], "failure": []},
       "hooks": {"success": [], "failure": []},
       "notes": "the fatigue counter-play (tune-1, KI#4: player fatigue was monotonic over long waits — nothing in v0.1 could bring it down). One hour of rest clears 30 fatigue (the 720-tick waits of the canonical day gain 20); resting at fatigue 0 is a legal quiet beat (no state change). The delta lives here beside its action (use_effect precedent); the axis and its gain rate live in rules.json states"
+    },
+    {
+      "intent": "document_check",
+      "label": "demand papers",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {"kind": "perception_vs_social", "difficulty": 50},
+      "on_failure": "talked down",
+      "events": {"success": "document_check", "failure": "document_check_failed"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "npc"},
+        {"noun": "target", "test": "same_location", "with": "actor"}
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "papers_unsatisfactory"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "papers_demanded_of_{target}"}
+        ],
+        "failure": [
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "papers_demanded_of_{target}"}
+        ]
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "the crime ladder's public rung (MVP_SCOPE §5 system 7, §7; the full action lands iter-43 over the inspect resolver — a checked interaction producing knowledge, zero state change of its own: the escalation rides the crime reactions on the verdict token, the crowd layer on the on_action entry). The check: the actor's scrutiny (perception) vs the target's composure (social) — a passed check is a DAMNING verdict (the stranger cannot satisfy; the branch type carries it, the house pattern — take/take_failed, flee/flee_caught); a failed one is talked down (document_check_failed — the same demand, the answer satisfies). The actor's success-branch record (papers_unsatisfactory, exact) is the only crime-mapped token — the arresting watcher escalates on what THIS knower holds (EPIST-1); the room's partial sighting (papers_demanded_of_{target}) is un-mapped crowd memory — rumor material, and the witnesses the on_action crowd_wary scope reads (the entry keys BOTH branch types: the public challenge unsettles the room either way). Seeded as the possible_document_check pair's payload (rules.json director.hooks); the arrest attempt + resolution follow through the standing crime machinery when the verdict crosses the arrest threshold"
     },
     {
       "intent": "flee",

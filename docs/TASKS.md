@@ -21,7 +21,8 @@
 > D-068; the event grammar's predicate + weight layer landed iter-40,
 > drama-1, D-069; the grammar's option layer landed iter-41, drama-2,
 > D-070; the grammar's on_action dispatch landed iter-42, drama-3,
-> D-071 — the grammar's last row).
+> D-071 — the grammar's last row; the document_check content set
+> landed iter-43, D-072 — the grammar's first LIVE content consumer).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -99,9 +100,26 @@
   anchors are committed fixtures (DIRECTOR_SPEC §11, the owner's
   content call). The `any`/`random` scope helpers stay
   recorded-not-built (the first-consumer law).
+- `content-1` · the document_check content set — **done (iter-43,
+  D-072)**: the owner's blanket quality directive ("quality, no
+  crutches, do as best") resolved the DIRECTOR_SPEC §11 content call.
+  The full action over the `inspect` resolver (scrutiny vs composure,
+  the verdict token `papers_unsatisfactory` → the standing arrest
+  machinery), the climax flag live on the watcher pair (the boss path
+  consults the option gate — a closed boss never burns), the live
+  crowd-witness reaction on both branch types, and the 4-case corpus
+  regen the landing implied (the iter-15 precedent). Zero engine edits
+  — the whole boss beat is pack data over the landed grammar layers.
 - `social-1` · secrets & leverage as fact clusters (P3a — a hook IS an
   event); `social-2` · psychological echo (P3e); `arc-1` · arcs &
   tension shaping (P3c).
+- `content-2` · the alarm panic echo (witnesses of `alarm_raised`
+  gain fear — the through-the-walls law; the iter-42 live probe
+  reverted on the phase-1 corpus's committed anchors): lands with the
+  corpus regen it implies; the content-1 precedent.
+- `content-3` · ambient-channel content (the declared dimension, no
+  hook carries it): lands with `social-1`'s fact clusters or its own
+  row.
 
 ### Phase-2 parser backlog
 

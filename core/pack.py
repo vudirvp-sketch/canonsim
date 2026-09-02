@@ -1333,6 +1333,16 @@ class _Lint:
                 and intent.get("kind") in actions,
                 f"{where}: intent.kind must name a pack action",
             )
+            # iter-43 (D-072): the hook-level payload now carries targets
+            # (the document-check pair names the pack's player) — the
+            # target lint mirrors the option payload's (the iter-41 note
+            # closed its own gap: new vocabulary, its lint complete from
+            # day one).
+            if "target" in intent:
+                _require(
+                    intent.get("target") is None or intent.get("target") in entity_ids,
+                    f"{where}: intent.target must be null or name an entity",
+                )
             trigger = spec.get("trigger")
             if trigger is not None:
                 # drama-1 (iter-40): the full predicate grammar — the

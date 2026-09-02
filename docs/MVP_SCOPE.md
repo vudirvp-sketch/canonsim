@@ -129,7 +129,11 @@ intersections. The log metrics (§15) measure exactly this.
 ## 7. Actions
 
 Phase 0 landed 12; tune-1 (iter-27, D-059) added `rest` as pack data over
-the `recuperate` resolver — the registry grows only with a new mechanic.
+the `recuperate` resolver — the registry grows only with a new mechanic;
+iter-43 (D-072) added `document_check` as pack data over the `inspect`
+resolver — the crime ladder's public rung (the deferred consequence
+became a real action: the watcher's scrutiny vs the stranger's composure,
+the verdict token escalating through the standing crime reactions).
 
 | Action | Intent type | Ticks | Check | On failure | Knowledge produced |
 |---|---|---|---|---|---|
@@ -146,6 +150,7 @@ the `recuperate` resolver — the registry grows only with a new mechanic.
 | set fire | `arson` | 4 | fire source + flammable target required | abort | alarm, smoke, visibility drop |
 | flee | `flee` | 2+ | pursuit | caught | guards: chase knowledge |
 | rest | `rest` | 60 | — | — | — (tune-1: fatigue −30, pack `status_effects`) |
+| demand papers | `document_check` | 2 | scrutiny (perception) vs composure (social) | talked down | actor: the verdict; room: the public challenge (iter-43) |
 
 Free-text input arrives when the C-parser can decompose it into these same
 intents (phase 2). Buttons/commands are shortcuts to identical intents.

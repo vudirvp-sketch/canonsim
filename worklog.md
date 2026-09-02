@@ -11,6 +11,38 @@
 
 ---
 ---
+---
+---
+iter-43 · 2026-09-02 · content-1 — the document_check action, the §11
+content call resolved (iter-43-doccheck-live; the owner's blanket
+"quality, no crutches, do as best" directive)
+- actions.json: the 14th action over the STANDING inspect resolver
+  (perception_vs_social, both branch types, the verdict token
+  papers_unsatisfactory the only crime-mapped record; the room's
+  papers_demanded_of sighting un-mapped crowd memory). rules.json:
+  the watcher PAIR (guard_01 + the relief twin: the plain threshold
+  trigger, the OPTION-GATED confrontation, climax + first_time_only,
+  the real payload), the token mapping, the on_action double key.
+  templates.json: the two branch lines. pack.py: the hook-payload
+  target lint. The naive single-hook design REJECTED pre-landing
+  (the rotation empties the seeded watcher's post the beat his band
+  opens — the climax path would burn the boss on a door rejection).
+- The corpus regen paid in-iteration (4 seed-93 cases re-distilled,
+  the iter-15 precedent: the claims re-pinned, the release case now
+  pins the real check + crowd + token). A/B re-measured (TEST_PLAN
+  §6): 1/10 day1_full seeds fire (seed 125), diverging by exactly
+  the crowd_wary events.
+- +10 tests/test_doccheck.py (the ladder seed 19: verdict → arrest →
+  caught IRREV; talked-down seed 93; the deferred release + the
+  climax-path release seed 2; the declarations; the door; the
+  chronicle). 836→846 green, ruff clean. D-072; DIRECTOR_SPEC
+  §3c/§5/§11 (481/300 kept per §6.1 — the landing records, the
+  iter-40..42 precedent) + MVP_SCOPE §7 + TASKS (689/600 kept per
+  §6.1 — the phase-3 landing rows, the same precedent) + DECISIONS
+  (transiently 38/30, collapse due at the phase-3→4 gate) synced.
+  16 files — over the 3-5 soft limit: the pack trio + the corpus
+  regen + the doc-sync law (§6 same-turn). iter-34 evicted per
+  the cap.
 iter-42 · 2026-09-02 · drama-3 — the event grammar's on_action
 dispatch (iter-42-drama3-onaction; the owner's "continue work per
 the plan" session call, the phase-3 backlog's top un-gated item)
@@ -256,23 +288,7 @@ bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validatio
 ---
 iter-34 · 2026-09-01 · owner-requested planning-layer audit
 (iter-34-planning-audit; doc-only — fresh owner request per D-022)
-- KI#55: the bg-4 KI#52 deletion of the stray root TASKS.md (678-line
-  pre-iter-26 snapshot) never landed — no git rm rode the command
-  block; deleted for real this time (the FAQ git bullet carries the
-  law). KI#56/57: ROADMAP §2 State column + §6 SoW gating actualized;
-  phases.md §2 rewritten to the D-062 architecture (pack grammar,
-  external dev-time parser, 35/35 corpus), §1 closure/D-055 notes +
-  the 8-block/eviction updates, §7 perf-1 verdict, §4 bg-2 donor
-  line; TASKS bg-6 slot + the iter-26 section collapsed (cap).
-- KI#58: BLUEPRINT §0 34→35 (df_design iter-8d) + LOD-1's bg-2 clause
-  (DF history canon-dense, epistemology-empty — TAXONOMY §4). KI#59:
-  docs/ref/paradox_scripting.md kept 605/600 over cap — substance-only
-  (0 filler; enum lists are §6.1 substance), the keep rationale is
-  this line. phases.md sits 603/600 after its own cruft pass (7
-  restatement trims) — the overage is the D-062/D-055 architecture
-  records, kept per §6.1.
-- No code touched: 673 green, ruff clean. 5 files + 1 deletion (git
-  rm TASKS.md); iter-26 evicted per the cap. Doc-only streak 1 of 2.
+- (deleted at iter-43 per the one-in/one-out cap; history in git.)
 
 ---
 bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus pass

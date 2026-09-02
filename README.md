@@ -99,8 +99,9 @@ stretch 1; contract owner `docs/TEST_PLAN.md` §6); the climax layer
 landed iter-38 (DIR-3, D-067 — the L4D2 three-intensity rule:
 `director.pacing.climax_floor` 75 = 3× the peak floor, the climax
 release path at the END of a peak, the one-beat `PEAK_CLIMAX` boss
-state; the pack declares the layer, no hook carries the flag — it
-lands with the `document_check` action, the owner's content call);
+state; since iter-43 the document-check watcher pair carries the flag
+live — the boss path consults the option gate, a closed boss never
+burns);
 the multi-channel quiet split landed iter-39 (DIR-4, D-068 — the L4D
 three-director family: `director.channels` threat/social/ambient with
 per-channel quiet floors + input bindings, `SeededHook.channel`, the
@@ -122,16 +123,24 @@ table: event X commits → content reacts, appended after the hardcoded
 system reactions (the donor's append-not-overwrite composition); the
 `witnesses` scope + the per-entity quantified gate (the explicit ctx
 argument — "every NPC who witnessed X") + the alarm-shaped state
-change; the one-hop law terminates the cascade; the pack's entry is
-dormant on `document_check` until the action lands, the owner's
-content call — the grammar's three layers are COMPLETE). 836 tests
-green, ruff clean, zero fixture regen (the 10-seed A/B per landing:
-10/10 byte-identical each time; TEST_PLAN §6). Contract owner
-`docs/DIRECTOR_SPEC.md` §3/§3a/§3b/§3c.
+change; the one-hop law terminates the cascade). The document_check
+content set landed iter-43 (D-072 — the owner's quality directive
+resolved the §11 content call): the full action over the standing
+`inspect` resolver (scrutiny vs composure, both branch types, the
+verdict token escalating through the standing crime reactions to the
+arrest), the climax flag live on the watcher pair, the crowd-witness
+reaction live on both branch types — the whole boss beat is pack
+data over the landed layers, zero engine edits; the 4 seed-93 corpus
+cases re-distilled in the same iteration (the iter-15 regen
+precedent). 846 tests green, ruff clean (the 10-seed A/B per
+grammar landing was 10/10 byte-identical each time; the content
+landing is the first deliberate divergence — 1/10 day1_full seeds
+fire, the delta exactly the crowd reaction; TEST_PLAN §6). Contract
+owner `docs/DIRECTOR_SPEC.md` §3/§3a/§3b/§3c.
 Next: the phase-3 social-depth run (`social-1/2`, `arc-1`;
-`docs/TASKS.md`) + the owner-gated set (parse-2, engine-1, the
-document_check content decision — with it the climax flag and the
-crowd-witness reaction, ambient-channel content).
+`docs/TASKS.md`) + the content rows (the alarm panic echo with its
+corpus regen, ambient-channel content) + the owner-gated set
+(parse-2, engine-1).
 
 ## For AI agents (primary audience)
 

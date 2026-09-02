@@ -189,16 +189,46 @@ def test_threshold_trigger_fires_when_suspicion_crosses() -> None:
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
     director.seed(_record(hooks=("possible_document_check",)))
     projection = initial_projection(PACK.entities)
-    # suspicion below the threshold (50): trigger does not fire
+    # suspicion below the threshold (50): trigger does not fire — even
+    # with the confrontation world in place (guard on post, PC present)
+    projection["npc_guard_01"]["position"] = "loc_tavern"
+    projection["pc_01"]["position"] = "loc_tavern"
     assert director.releases(projection, beat_tick=0) == []
-    # suspicion crosses 50: trigger fires — entropy_floor=0 means
-    # stagnation never releases (entropy can't be negative), only the
-    # explicit threshold trigger can release here
+    # suspicion crosses 50 with the confrontation world open: the
+    # trigger + the option gate both pass — the real document_check
+    # intent releases (iter-43: the stub wait became the action, D-072).
+    # entropy_floor=0 means stagnation never releases (entropy can't be
+    # negative), only the explicit threshold trigger can release here
     projection["npc_guard_01"]["relations.suspicion"] = 50
     released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
-    assert released[0].kind == "wait"
+    assert released[0].kind == "document_check"
     assert released[0].actor == "npc_guard_01"
+    assert released[0].target == "pc_01"
+    assert released[0].fields == {}
+
+
+def test_the_confrontation_gate_defers_the_release() -> None:
+    """iter-43 (D-072): the option gate is the release's world check —
+    the band open without the confrontation (the watcher off the post,
+    or the stranger elsewhere) means the hook WAITS: nothing hits the
+    door, no budget is consumed (the drama-2 deferred-release law; the
+    canonical day1 shape — Doren rotates off the post the beat his
+    band opens)."""
+    director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
+    director.seed(_record(hooks=("possible_document_check",)))
+    projection = initial_projection(PACK.entities)
+    projection["npc_guard_01"]["relations.suspicion"] = 55  # the band
+    # the watcher sits at the guardroom (post-rotation), the PC at the
+    # tavern: the gate's place leaf fails — the hook waits
+    projection["npc_guard_01"]["position"] = "loc_guardroom"
+    projection["pc_01"]["position"] = "loc_tavern"
+    assert director.releases(projection, beat_tick=0) == []
+    # the watcher returns to the post with the stranger present: the
+    # gate opens, the release fires
+    projection["npc_guard_01"]["position"] = "loc_tavern"
+    released = director.releases(projection, beat_tick=0)
+    assert len(released) == 1 and released[0].kind == "document_check"
 
 
 def test_time_trigger_fires_after_the_packed_tick() -> None:
@@ -1068,7 +1098,10 @@ def test_seed_reads_the_multiplier_shape() -> None:
     check = director.hooks[1]
     assert check.weight == 3
     assert check.weight_modifiers == ()
-    assert check.first_time_only is False
+    # iter-43: the document-check pair burns after its one release
+    # (the Wesnoth fire-only-once law — a talked-down verdict never
+    # re-rolls); the flat weight stays the v0.1 form
+    assert check.first_time_only is True
 
 
 def test_entropy_reads_the_pack_escalation() -> None:
@@ -1302,14 +1335,20 @@ def _option(
 
 def test_a_hook_without_options_runs_the_v01_payload() -> None:
     """The pure-addition law: an option-less hook releases the exact
-    v0.1 IntentData — the implicit base option carries the base payload
-    unchanged, the release id sequence starts at director_0000 (the
-    day1_full corpus release's id). The T1/T8/corpus byte-identity is
-    the suite-level pin of the same law."""
+    base payload — the implicit base option carries it unchanged, the
+    release id sequence starts at director_0000. Since iter-43 every
+    pack hook declares options (the vigil's pair, the document-check
+    pair's confrontation gates), so the law is pinned through a
+    synthetic option-less hook — the mechanism, not a pack instance.
+    The T1/T8/corpus byte-identity is the suite-level pin of the same
+    law."""
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
-    director.seed(_record(hooks=("possible_document_check",)))
+    director._hooks.append(_seeded_hook(  # type: ignore[attr-defined]
+        tag="hookless_v01", target_npc="npc_guard_01",
+        trigger={"kind": "threshold", "target_npc": "npc_guard_01",
+                 "axis": "suspicion", "value": 0, "comparator": "at_least"},
+    ))
     projection = initial_projection(PACK.entities)
-    projection["npc_guard_01"]["relations.suspicion"] = 50
     released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     intent = released[0]
@@ -1324,7 +1363,9 @@ def test_seed_flattens_the_vigil_option_specs() -> None:
     """The pack's own vigil hook declares the glance/stare pair: seed()
     flattens both options — the glance's flat 1, the stare's multiplier
     (base 1 + the escalation tail), the fields-only payload overrides.
-    The flat document-check hook seeds no options (the v0.1 form)."""
+    The document-check pair (iter-43) declares the confrontation gates:
+    one option each, the compound implicit-AND root, the default
+    weight, no payload override — the base payload rides."""
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=5))
     director.seed(_record(hooks=("guard_suspicious_of_pc",)))
     vigil = director.hooks[0]
@@ -1338,7 +1379,11 @@ def test_seed_flattens_the_vigil_option_specs() -> None:
     assert stare.weight_modifiers[0]["add"] == 2
     assert stare.intent == {"fields": {"ticks": 2}}
     director.seed(_record(hooks=("possible_document_check",), event_id="ev_0002"))
-    assert director.hooks[1].options == ()
+    (gate,) = director.hooks[1].options
+    assert gate.weight == 1 and gate.weight_modifiers == ()
+    assert gate.intent is None  # no override: the base payload rides
+    assert isinstance(gate.trigger, list) and len(gate.trigger) == 2
+    assert {leaf["kind"] for leaf in gate.trigger} == {"place", "prop"}
 
 
 def test_the_pack_vigil_releases_the_glance_below_the_band() -> None:

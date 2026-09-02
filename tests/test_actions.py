@@ -91,7 +91,13 @@ def test_steal_partial_failure_records_ev_0007_family(tmp_path: Path) -> None:
     by_channel = {(r.who, r.channel, r.fidelity) for r in failed.knowledge}
     assert ("npc_guard_01", "saw", "partial") in by_channel
     assert ("npc_barkeep_01", "heard", "vague") in by_channel
-    assert set(failed.hooks) == {"guard_suspicious_of_pc", "possible_document_check"}
+    # iter-43: the steal failure registers the institutional consequence
+    # — both watcher halves (D-072: the seeded watcher's + the relief's)
+    assert set(failed.hooks) == {
+        "guard_suspicious_of_pc",
+        "possible_document_check",
+        "possible_document_check_relief",
+    }
     # tune-1: pickpocket_failed is story-critical (raw 1+2 hooks) + hook 2
     # = 5 -> high; it was "medium" before the story-critical score term.
     assert failed.importance == "high"

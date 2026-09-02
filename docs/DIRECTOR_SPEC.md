@@ -9,11 +9,13 @@
 > split DIR-4 (iter-39, D-068), the event grammar's predicate + weight
 > layer drama-1 (iter-40, D-069), the grammar's option layer drama-2
 > (iter-41, D-070 — §3b), the grammar's on_action dispatch drama-3
-> (iter-42, D-071 — §3c); the phase-3 refinements still
-> recorded-not-built live in §11. Measured impact (every landing
-> byte-identical on day1_full — the D-066 all-PEAK window; the grammar
-> layer's 10-seed A/B included, iter-40; the option layer's too,
-> iter-41; the dispatch's too, iter-42): `docs/TEST_PLAN.md` §6.
+> (iter-42, D-071 — §3c), the document_check content landing (iter-43,
+> D-072 — §11's first pre-iter-43 row closed); the phase-3 refinements
+> still recorded-not-built live in §11. Measured impact (the grammar
+> layers were byte-identical on day1_full at landing — the D-066
+> all-PEAK window; the document_check landing is the first DELIBERATE
+> divergence: the check fires on the runs that reach the confrontation,
+> with the corpus regen it implied): `docs/TEST_PLAN.md` §6.
 
 ## 1. What the director is
 
@@ -220,19 +222,23 @@ recorded-not-built — no content need has earned them (the ambient-
 channel pattern; they land with their first consumer). Knowledge-
 bearing reactions (a reaction that teaches) wait the same way.
 
-This pack's declaration is DORMANT vocabulary, the iter-38 climax-flag
-pattern: the entry keys on `document_check` → `crowd_wary` (every
-witness of the public check grows warier — the crowd-reaction layer
-the token-keyed crime system does not cover) — no action emits
-`document_check` yet, so nothing fires on any committed run or live
-session; the entry fires the moment the action lands (§11, the
-owner's content call). The alarm panic echo (witnesses of
-`alarm_raised` gain fear — the through-the-walls law) was probed live
-at iter-42 and reverted: it fires on the phase-1 corpus's
+This pack's declaration is LIVE since iter-43 (D-072 — the
+owner's content call landed): the entry keys both branch types of
+the check — `document_check` and `document_check_failed` →
+`crowd_wary` (every witness of the public check grows warier —
+the crowd-reaction layer the token-keyed crime system does not
+cover; the scope reads the check's own witnesses, the room's
+sighting token is deliberately un-mapped crowd memory). It fires on
+every committed run and live session where the check lands
+(cause-chained to the check; the reacting set = the witnesses with
+a numeric home). The alarm panic echo (witnesses of
+`alarm_raised` gain fear — the through-the-walls law) stays
+recorded-not-landed: it fires on the phase-1 corpus's
 distraction-fire beats, and the corpus's beat anchors and event-count
-pins are committed fixtures — that content lands on the owner's call
-with them. A pack without the `on_action` block runs the v0.1
-reaction behavior, byte-identically (TEST_PLAN §6 owns the A/B).
+pins are committed fixtures — the next content row, with the corpus
+regen it implies (§11). A pack without the `on_action` block runs
+the v0.1 reaction behavior, byte-identically on runs that fire no
+entry (TEST_PLAN §6 owns the A/B).
 
 ## 4. Narrative entropy (P2e)
 
@@ -325,10 +331,13 @@ high entropy where the stagnation path releases at low; one boolean
 cannot serve both honestly). A pack without `climax_floor` runs the
 iter-36 two-layer clock byte-identically, and a flagged hook without
 the layer is explicit-trigger-only (the nopacing harness variant is
-exactly that pack — legal, not drift). The tavern pack declares the
-layer but no hook carries the flag yet — the document-check's v0.1
-stub intent would make a hollow boss; the flag lands with the
-`document_check` action (§11), the owner's content call.
+exactly that pack — legal, not drift). Since iter-43 (D-072) the
+document-check pair carries the flag: the boss path consults the
+option gate (a closed boss does not mark PEAK_CLIMAX, §3b's
+deferred-release law), so the flag never burns on a world-impossible
+release — measured live: a run whose watchers never reach the band
+but whose tension sits at the third layer still releases the check
+(the seed-2 shape, pinned in tests/test_doccheck.py).
 
 **The multi-channel split (DIR-4, landed iter-39; the L4D
 three-director family — Horde / S.I. / Music → threat / social /
@@ -448,22 +457,25 @@ suffices.
 
 ## 11. What this spec does NOT cover (phase-3+ refinements)
 
-- The full document_check action (the v0.1 stub uses `wait`; a
-  dedicated action arrives when the document-check hook deserves
-  its own resolution — and with it the climax flag on the hook, per
-  §5's scope note, AND the live crowd-witness reaction the on_action
-  entry already declares on `document_check`, §3c).
 - The alarm panic echo as pack content (§3c): witnesses of
   `alarm_raised` gaining fear — probed live at iter-42, reverted
   because it fires on the phase-1 corpus's distraction-fire beats
-  (the corpus's beat anchors are committed fixtures, §8); lands on
-  the owner's content call, with the corpus regen it implies.
+  (the corpus's beat anchors are committed fixtures, §8); lands as
+  its own content row with the corpus regen it implies (the
+  document_check landing's 4-case regen is the precedent, D-072).
 - The on_action grammar's `any`/`random` scope helpers and
   knowledge-bearing reactions (§3c — recorded-not-built, the
   first-consumer law).
-- A per-NPC desirability score for hook selection (phase-3).
 - Ambient-channel content (the tavern pack declares the dimension; no
-  hook carries it — a content-scale decision, the owner's call).
+  hook carries it — a content-scale decision; lands with `social-1`'s
+  fact-cluster work or its own row).
+- A per-NPC desirability score for hook selection (phase-3).
+
+The document_check action itself LANDED (iter-43, D-072 — the
+§11 first row of the pre-iter-43 record, the owner's content call):
+the full action over the `inspect` resolver, the climax flag on the
+watcher pair, and the live crowd-witness reaction — the design
+records live in `docs/DECISIONS.md` D-072 and the pack's own notes.
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

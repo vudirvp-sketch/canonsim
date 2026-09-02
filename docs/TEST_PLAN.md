@@ -241,17 +241,25 @@ no-mark law — are unit-pinned instead (tests/test_director.py;
 D-070; DIRECTOR_SPEC §3b the contract owner).
 
 Re-measured at iter-42 (drama-3, the on_action dispatch landed): the
-same 10 seeds, the committed pack (the dormant `document_check` →
-`crowd_wary` entry) vs an on_action-stripped linted variant
-(`output/pack_noonaction/`, a runner outside the repo per Rule 9) —
-per-seed byte-identical logs 10/10. The mechanism: the entry keys on
-`document_check`, and no action emits that event in v0.1 (the
-director's stub releases a wait) — nothing fires anywhere, so the
-dispatch is inert by construction (the dormant declaration, not a
-lucky path). The dispatch laws — the witnesses scope, the quantified
-gate, the clamped delta, the append composition + the lazy-group
-discipline, the one-hop termination — are pinned through linted pack
-variants instead (tests/test_onaction.py; D-071; DIRECTOR_SPEC §3c
-the contract owner). The alarm panic echo (the live content probed
-and reverted on the phase-1 corpus's committed anchors) is recorded
-in DIRECTOR_SPEC §11, the owner's content call.
+same 10 seeds, the committed pack (the then-dormant
+`document_check` → `crowd_wary` entry) vs an on_action-stripped
+linted variant — per-seed byte-identical logs 10/10 (the entry keyed
+on an event no action emitted).
+
+Re-measured at iter-43 (the document_check action landed — D-072,
+the owner's content call): the entry is LIVE, so the A/B measures its
+real delta. The same 10 seeds on day1_full, the committed pack vs the
+on_action-stripped variant (a runner outside the repo per Rule 9):
+the check fires on 1/10 (seed 125 — the only seed whose day1_full
+steal geometry opens a watcher's band with the confrontation world
+open; the `take` shifts each seed's stream), that seed diverges by
+exactly the `crowd_wary` reaction events, the other 9 stay
+byte-identical (no check, no entry — the corpus's own seed-93 script
+fires instead: 4 corpus cases re-distilled in the same iteration, the
+iter-15 regen precedent). The dispatch's live behavior — the ladder
+(verdict → arrest → caught), the talked-down branch, the deferred
+release, the climax-path release, the crowd reaction on both branch
+types — is pinned directly (tests/test_doccheck.py; D-072;
+DIRECTOR_SPEC §3c/§11). The alarm panic echo stays the
+recorded-not-landed row (DIRECTOR_SPEC §11) — the next content row,
+with its own corpus regen.

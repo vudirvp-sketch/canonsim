@@ -1,50 +1,55 @@
 # STATUS — canonsim
 
-Iteration: iter-42 (`iter-42-drama3-onaction` — the owner's
-"continue working per the plan" session call; the phase-3 backlog's
-top un-gated item, drama-3; a code iteration) · Phase: 3 (Director)
-**OPEN — DIR-1 (D-065), DIR-2 (D-066), DIR-3 (D-067), DIR-4 (D-068),
-drama-1 (D-069), drama-2 (D-070), drama-3 (D-071) landed — the
-event grammar's three layers are complete** · Date: 2026-09-02 ·
-Scope: the on_action dispatch — the Paradox on_action table adapted
-(DIRECTOR_SPEC §3c the contract owner, `core/onaction.py` the
-mechanics). `on_action` in rules.json: a table keyed by committed
-event type; the reaction dispatch rides `_react` APPENDED after the
-hardcoded system reactions (the donor's append-not-overwrite
-composition — vanilla runs, custom entries add, never replace;
-every entry of the keyed list dispatches). Each entry the closed key
-set `scope | gate | event | state | actor | target | notes`: the
-`witnesses` scope (the event's OWN knowledge records, deduped by
-first occurrence, event order — the named "every NPC who witnessed
-X"; the explicit ctx argument, no implicit this), the per-entity
-quantified gate ({prop, comparator, value} evaluated with the
-CANDIDATE as the argument — the spec carries no entity field; the
-predicates.py comparison semantics incl. the honest-missing and
-bool-guard laws), the reaction event type, and the alarm-shaped
-state change ({prop, add}: one event per entry, clamped numeric
-deltas on relations.scale, a candidate without a numeric home
-dropped — the suspicion law; an empty gated scope emits NOTHING).
-The reaction carries no knowledge and no hooks — the one-hop law
-(pack lint): no table key may name a reaction event the table emits;
-the cascade terminates by construction. Lazy generator: each entry's
-draft reads the projection as left by the previous commit (KI#13).
-Pure per INV-2 (no RNG, no clock, no stored choice). The pack's
-declaration is DORMANT vocabulary, the iter-38 climax-flag pattern:
-`document_check` → `crowd_wary` (every witness of the public check
-grows warier) — no producer emits the key, so nothing fires anywhere
-until the action lands (§11, the owner's content call). The alarm
-panic echo was probed LIVE and reverted: it fires on the phase-1
-corpus's distraction-fire beats, whose beat anchors and event-count
-pins are committed fixtures (§8 — a fixture rewrite is owner-gated);
-the live machinery is proven through linted pack variants instead
-(the iter-36 mutated-pack pattern) — the crowded-room ignition, the
-append composition + the lazy-group law, the cause chain, the
-termination. Fixture discipline: the full suite green with zero
-fixture regen; a 10-seed on-vs-stripped A/B (125 + the nine corpus
-seeds, a runner outside the repo per Rule 9) 10/10 byte-identical
-(TEST_PLAN §6). The `any`/`random` scope helpers and knowledge-
-bearing reactions stay recorded-not-built (the first-consumer law,
-§11). Tests 812→836 (+24 tests/test_onaction.py), ruff clean.
+Iteration: iter-43 (`iter-43-doccheck-live` — the owner's blanket
+quality directive resolving the DIRECTOR_SPEC §11 content call: the
+document_check action lands, with it the climax flag live on the
+watcher pair AND the crowd-witness reaction the on_action table
+declares) · Phase: 3 (Director)
+**OPEN — the grammar's first LIVE content consumer: content-1 (D-072)
+landed — the whole boss beat is pack data over the standing layers
+(zero engine edits; the deferred-release law gates every release
+path)** · Date: 2026-09-02 ·
+Scope: the crime ladder's public rung. The action (actions.json):
+`document_check` over the STANDING `inspect` resolver — the actor's
+scrutiny (a new pack check kind, perception_vs_social) vs the
+target's composure; both branch types per the house pattern
+(document_check / document_check_failed — a `{passed?…}` conditional
+template was probed and rejected: the chronicle context is flat, the
+nested outcome.check is unreachable, the silent wrong arm is a lie;
+the branch types are the honest carrier); co-location preconditions;
+the success branch's actor record `papers_unsatisfactory` (exact) is
+the ONLY crime-mapped token — the watcher escalates on what THIS
+knower holds (EPIST-1), +25 through the standing crime reactions,
+the arrest attempt + resolution through the standing machinery; the
+room's `papers_demanded_of_{target}` sighting is deliberately
+un-mapped crowd memory (rumor material AND the witnesses the
+crowd_wary scope reads). The institutional consequence is a watcher
+PAIR (rules.json): `possible_document_check` (guard_01) +
+`possible_document_check_relief` (guard_02) — each with the plain
+threshold trigger (its own watcher's band), the OPTION-GATED
+confrontation (place: the watcher at the duty post + prop: the
+stranger present — the D-070 deferred-release law: a closed option
+waits, nothing hits the door, no budget, no PEAK_CLIMAX mark),
+climax: true (the DIR-3 boss path consults the same gate), and
+first_time_only (one check per watcher per run). The naive
+single-hook design was rejected pre-landing: the threshold-only
+trigger releases the beat the rotation empties the seeded watcher's
+post — the door would reject the attempt AND the trigger-blind
+climax path would burn the boss on a no-op; the relief's half fires
+AT the rotation right after the briefing (the corpus session-10
+shape) while Doren's waits all run. The on_action crowd reaction is
+LIVE on both branch types (the table's double key; +5 per witnessing
+home-holder, the checked stranger dropped). Measured: seed 19 runs
+the full ladder (verdict → +25 → arrest → caught, irreversible);
+seed 2 releases through the CLIMAX PATH with the band never open
+(the L4D2 three-intensity rule live, PEAK_CLIMAX marked, one rung
+short of the arrest); seeds 93/125 talk the check down. Corpus regen
+paid in-iteration: 4 seed-93 cases re-distilled (the iter-15
+precedent); the 10-seed on_action A/B: 1/10 fire on day1_full (the
+take shifts each seed's stream), the divergence exactly the
+crowd_wary events. The only core edit: the hook-payload target lint
+(pack.py, mirroring the option lint). Tests 836→846
+(+10 tests/test_doccheck.py), ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -86,6 +91,20 @@ bearing reactions stay recorded-not-built (the first-consumer law,
   iterations past; the lessons live in the FAQ + git.)
 
 ## FAQ / Pitfalls
+
+- **Chronicle conditionals read FLAT context keys; the action check
+  outcome is NESTED (iter-43 law).** `{cond?a|b}` addresses
+  `context[cond]` — a one-level flat lookup (`render/tracery.py::
+  _expand_brace`); an action event's check result lives at
+  `outcome.check.passed`, unreachable by the conditional (a missing
+  key silently takes the else arm — a wrong-arm line is a LIE in the
+  chronicle, never an error). The house carrier for a checked
+  action's verdict is the BRANCH EVENT TYPE (take/take_failed,
+  flee/flee_caught — and document_check/document_check_failed since
+  iter-43): each type owns its template line, no conditional needed.
+  Top-level outcome fields (arrest_resolved's `caught`, rumor_told's
+  `accepted`) are the ONLY legal conditional keys.
+
 
 - **Validator verdicts follow CURRENT canon, never the anchor (iter-9
   law).** Verdicts are computed against the full log; the OCC anchor only
@@ -351,8 +370,8 @@ IDs with the FULL prefix on every member (`D-018/D-022/D-029` —
 `D-018/022/029` does NOT resolve); compressed rows keep
 decision→why→consequence and link the single owner (D-024).
 Pre-collapse history lives in git; collapsed 46→30 at the phase-0→1
-gate, 41→30 at the phase-1 gate (iter-26); next due at the phase-2→3
-gate.
+gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
+(iter-35); next due at the phase-3→4 gate.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -409,30 +428,30 @@ gate.
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36/37/38/39/40/41/42 — the pacing clock D-065 +
-the exit-criterion instrument D-066 + the climax layer D-067 + the
-multi-channel split D-068 + the grammar's predicate + weight layer
-D-069 + the grammar's option layer D-070 + the grammar's on_action
-dispatch D-071 landed — the event grammar's three layers are
-COMPLETE).** The phase-3 arc in `docs/TASKS.md`'s backlog now runs
-into the owner-gated content decisions and the social-depth run:
-`social-1` (secrets & leverage as fact clusters — P3a, a hook IS an
-event) is the next un-gated row, then `social-2`/`arc-1`. The
-owner-gated content set: the `document_check` action (DIRECTOR_SPEC
-§11 — with it the climax flag on the hook AND the live crowd-witness
-reaction the on_action table already declares), the alarm panic echo
-(probed live iter-42, reverted on the phase-1 corpus's committed
-anchors — §11), ambient-channel hooks. The dir-2/dir-4/drama-1/2/3
-measurement's honest finding stands: the clock, the channel split,
-the weight grammar, the option layer, and the dispatch are inert on
-day1_full (every run ends in PEAK — a measurable delta needs a
+**Phase 3 is OPEN (iter-36/37/38/39/40/41/42/43 — the pacing clock
+D-065 + the exit-criterion instrument D-066 + the climax layer D-067 +
+the multi-channel split D-068 + the grammar's three layers D-069/
+D-070/D-071 + the document_check content set D-072 landed — the
+grammar's first LIVE content consumer: the boss beat runs end to end
+as pack data, zero engine edits).** The phase-3 arc in
+`docs/TASKS.md`'s backlog: `social-1` (secrets & leverage as fact
+clusters — P3a, a hook IS an event) is the next un-gated row, then
+`social-2`/`arc-1`; the owner's standing quality directive (this
+session) resolves the remaining content rows on the documented
+design — each as its own iteration: `content-2` (the alarm panic
+echo, with its corpus regen — the content-1 precedent), `content-3`
+(ambient-channel content). The dir-2/dir-4/drama-1/2/3 measurement's
+honest finding STANDS SUPERSEDED in part: the document_check landing
+is the first deliberate divergence (the check fires on the runs that
+reach the confrontation — 1/10 day1_full seeds; the corpus's seed-93
+script fires), while the clock/channel/weight layers stay inert on
+day1_full (every run ends in PEAK — a measurable pacing delta needs a
 gate-protocol script set that walks the world into quiet; recorded in
 D-066, a phase-gate question, not forced).
 
 1. **Phase-3 arc** (TASKS backlog): social-1 → social-2/arc-1 (the
-   social-depth run) → the owner-gated content decisions
-   (`document_check` + the climax flag + the alarm echo +
-   ambient-channel hooks).
+   social-depth run) → the content rows (`content-2` the alarm echo
+   with its corpus regen; `content-3` ambient-channel).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

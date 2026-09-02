@@ -27,16 +27,13 @@ The laws pinned here:
   a pack without the `on_action` block runs the v0.1 reaction
   behavior, byte-identically.
 
-The pack's own entry is DORMANT vocabulary, the iter-38 climax-flag
-pattern: `document_check` → `crowd_wary` (every witness of the public
-check grows warier) — no action emits document_check yet, so the entry
-never fires on any committed run or live session; it fires the moment
-the document_check action lands (DIRECTOR_SPEC §11, the owner's
-content call). The live path (an alarm-keyed variant — the panic echo)
-was probed at iter-42 and reverted: it fires on the phase-1 corpus's
-distraction-fire beats, and the corpus's beat anchors are committed
-fixtures (§8) — the tests below exercise the live machinery through
-linted pack variants instead (the iter-36 mutated-pack pattern).
+The pack's own entry is LIVE since iter-43 (D-072): the
+document_check action landed, so `document_check` → `crowd_wary`
+(every witness of the public check grows warier) fires on every run
+where the check lands — pinned live in tests/test_doccheck.py; the
+tests here keep the machinery's laws through linted pack variants (the
+alarm-keyed entry — the panic echo family, the recorded-not-landed
+content row, DIRECTOR_SPEC §11).
 """
 
 from __future__ import annotations
@@ -418,13 +415,19 @@ def test_a_pack_without_the_block_runs_the_v01_reactions(
 ) -> None:
     """The pack's own declaration is the gate (INV-3): dropping the
     on_action block changes NOTHING on a run that fires no entry — the
-    logs are byte-identical (the v0.1 reaction behavior)."""
+    logs are byte-identical (the v0.1 reaction behavior). iter-43 note:
+    day1_full no longer qualifies (the document_check action landed —
+    the entry fires live, pinned in tests/test_doccheck.py); the
+    single-steal theft-and-arson script keeps the law's stage: it never
+    reaches the document-check band, so no entry can key."""
     stripped = _mutated_pack(tmp_path, lambda rules: rules.pop("on_action"))
     log_committed = tmp_path / "committed.jsonl"
     log_stripped = tmp_path / "stripped.jsonl"
     from core.loop import load_playscript
 
-    script = load_playscript(REPO / "tests" / "playscripts" / "day1_full.json")
+    script = load_playscript(
+        REPO / "tests" / "playscripts" / "day1_theft_and_arson.json"
+    )
     _sim(PACK, log_committed, script["seed"]).run_playscript(script)
     _sim(stripped, log_stripped, script["seed"]).run_playscript(script)
     assert log_committed.read_bytes() == log_stripped.read_bytes()
