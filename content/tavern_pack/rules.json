@@ -445,13 +445,22 @@
         "npc": "npc_drunk_01",
         "probability_per_beat": 40,
         "intent": {
-          "kind": "wait",
-          "fields": {
-            "ticks": 1
-          }
+          "kind": "coerce",
+          "target": "pc_01"
         },
-        "requires": [],
-        "notes": "the drunkard lingers — a small-formula nudge toward ale-seeking; the §3 walkthrough's rumor teller needs to be in-scene to overhear"
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          },
+          {
+            "noun": "actor",
+            "test": "leverage_over",
+            "who": "target"
+          }
+        ],
+        "notes": "the coerce driver (content-4, iter-49, D-078 — social-1b's live content set): the drunkard's own roll re-armed — the idle linger becomes the card-play. The REPLACEMENT law: the entry keeps its slot and weight, so the per-beat draw COUNT is unchanged and the checks downstream keep their draw positions — the corpus's designed ladders hold (an ADDED entry shifts every later check draw; the iter-49 measurement: 3 flipped ladders, the document_check fail-branch among them — the engine-side stream split is recorded-not-built (engine-2, the TASKS infra backlog)). While he holds a live cluster over the stranger he leans on him (2-in-5 per beat; the beat gate reads the live fold, the door re-reads at its own tick — an expired card rejects as a fact, the seed-125 shape); one secret buys one play (the fold kills the cluster at the spend); the 720 expiry is the card's shelf life. His static placement is what keeps him in-scene (the tune-3 law), never the old wait nudge — its removal costs noise-floor events only (the day1_full A/B: the waits gone, zero outcome flips)"
       },
       {
         "npc": "npc_maid_01",
@@ -484,7 +493,7 @@
         "notes": "the relief guard's patrol impulse — fires when something is happening in the actor's location (the precondition is a placeholder for ambient alertness; v0.1)"
       }
     ],
-    "notes": "P2b (D-021): NPC goals → occasional autonomous action through the same queue, same tick discipline. Small-formula dynamics: a probability roll per beat, an intent template, optional preconditions. World acts without the PC by construction — M5 (non-PC event share) becomes non-trivially non-zero at director-off (T8). Full LLM planning — never (VISION §6). Beat cycle at phase boundaries (every 360 ticks = 6 in-world hours); the same beats carry the states decay pass and the director's entropy release (one beat, three pieces — D-037). Landed iter-4"
+    "notes": "P2b (D-021): NPC goals → occasional autonomous action through the same queue, same tick discipline. Small-formula dynamics: a probability roll per beat, an intent template, optional preconditions. World acts without the PC by construction — M5 (non-PC event share) becomes non-trivially non-zero at director-off (T8). Full LLM planning — never (VISION §6). Beat cycle at phase boundaries (every 360 ticks = 6 in-world hours); the same beats carry the states decay pass and the director's entropy release (one beat, three pieces — D-037). Landed iter-4; the drunkard's entry re-armed as the coerce driver iter-49 (content-4, D-078 — the replacement law: the slot and the weight stay, the draw count with them)"
   },
   "director": {
     "mode": "consequence_planner",

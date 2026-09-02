@@ -810,7 +810,7 @@
      },
      "expect": {
       "status": "intent",
-      "events": 16,
+      "events": 15,
       "pinned": [],
       "promoted": [],
       "last_event": "wait",

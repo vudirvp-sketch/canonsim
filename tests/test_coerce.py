@@ -27,14 +27,19 @@ The laws pinned here:
 - **The quiet law**: the spend carries no knowledge, no hooks — the
   corner is private; the reaction cascade terminates exactly as the
   mint's does.
-- **The dormancy law (the iter-38/42 pattern)**: the committed pack
-  declares the action but NO driver carries it — the corpus replay
-  (870 tests, unchanged) is the byte-identity proof; the live-fire
-  tests run on crafted pack copies (the hard_pack precedent: mechanism
-  proof, the driver is content-4's call).
+- **The driver law (content-4, iter-49, D-078)**: the committed pack
+  CARRIES the driver — the drunkard's urgency entry re-armed as the
+  coerce carrier (the replacement law: the slot and weight stay, the
+  per-beat draw count with them — the corpus's check ladders hold; an
+  ADDED entry would shift every later check draw). The live-fire tests
+  run on the COMMITTED content; the crafted-copy pattern survives only
+  for the shrunk-expiry window probe (a pack copy mutating nothing but
+  the cluster's lifetime).
 
 Seeds probed to be deterministic (T1): seed 93 — the total steal
-failure (the room mints) + the beat-driven drunkard coercion.
+failure (the room mints) + the beat-driven drunkard coercion (the
+committed p-40 roll hits at the beat; his own cluster expires unspent
+on seeds where the roll misses).
 """
 
 from __future__ import annotations
@@ -79,26 +84,18 @@ def run(tmp_path: Path, pack: Any, seed: int, steps: list[dict[str, Any]],
     return events, sim
 
 
-def armed_pack(tmp_path: Path, mutate_rules: Any = None) -> Any:
-    """A pack copy plus the drunkard's coerce urgency (probability 100 —
-    the roll is deterministic; the leverage gate is the filter), the
-    hard_pack pattern: mechanism proof on a crafted copy, the committed
-    driver stays content-4's call."""
-    target = tmp_path / "pack_armed"
+def shrunk_pack(tmp_path: Path, expires_ticks: int) -> Any:
+    """A pack copy with ONLY the theft secret's lifetime shrunk (the
+    window probe's one knob — the committed driver stays as landed; the
+    iter-45 armed_pack append pattern died with content-4: the committed
+    entry IS the driver now, and appending a second drunkard entry would
+    contaminate the roll table)."""
+    target = tmp_path / "pack_shrunk"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
-    rules["urgencies"]["entries"].append({
-        "npc": "npc_drunk_01",
-        "probability_per_beat": 100,
-        "intent": {"kind": "coerce", "target": "pc_01"},
-        "requires": [
-            {"noun": "target", "test": "same_location", "with": "actor"},
-            {"noun": "actor", "test": "leverage_over", "who": "target"},
-        ],
-        "notes": "probe entry — the drunkard plays the card while he holds it",
-    })
-    if mutate_rules is not None:
-        mutate_rules(rules)
+    rules["secrets"]["tokens"]["figure_reaching_for_purse"][
+        "expires_ticks"
+    ] = expires_ticks
     (target / "rules.json").write_text(json.dumps(rules, indent=2),
                                        encoding="utf-8")
     return load_pack(target)
@@ -311,37 +308,37 @@ def test_a_targetless_coerce_is_loud() -> None:
 # -- the urgency gate (unit) ------------------------------------------------------
 
 
-def test_the_urgency_gate_is_silent_without_facts(tmp_path: Path) -> None:
-    """The beat gate: a leverage-gated urgency rolls, sees no live fact,
-    and stays SILENT (the world's noise floor — no rejection event); the
-    same roll with a live fact enqueues the coerce."""
-    pack = armed_pack(tmp_path)
-    state = initial_projection(pack.entities)
+def test_the_urgency_gate_is_silent_without_facts() -> None:
+    """The beat gate on the COMMITTED driver (content-4): the drunkard's
+    roll hits, sees no live fact, and stays SILENT (the world's noise
+    floor — no rejection event); the same roll with a live fact enqueues
+    the coerce. RngBank(7)'s first substantive draw is a hit (probed),
+    so the gate — not the dice — is the only filter here."""
+    state = initial_projection(PACK.entities)
     state["npc_drunk_01"]["position"] = "loc_tavern"
     state["pc_01"]["position"] = "loc_tavern"
-    # probe the roll: probability 100 always hits — only the gate filters
-    silent = urgency_intents(pack, state, RngBank(7), facts=())
+    silent = urgency_intents(PACK, state, RngBank(7), facts=())
     assert not any(i.kind == "coerce" for i in silent)
     armed = urgency_intents(
-        pack, state, RngBank(7), facts=(_fact("npc_drunk_01", "pc_01"),)
+        PACK, state, RngBank(7), facts=(_fact("npc_drunk_01", "pc_01"),)
     )
     coerces = [i for i in armed if i.kind == "coerce"]
     assert len(coerces) == 1
     assert coerces[0].actor == "npc_drunk_01" and coerces[0].target == "pc_01"
 
 
-# -- the live path (e2e, crafted pack — the dormancy law) -------------------------
+# -- the live path (e2e, the committed content — the driver law) ------------------
 
 
 def test_the_drunkard_spends_his_cluster(tmp_path: Path) -> None:
-    """Seed 93: the room failure mints the drunkard's cluster; the beat's
-    urgency enqueues the coerce; the door accepts (the fold is live);
-    completion commits the spend — outcome.cluster names HIS cluster
-    (the log names the fact it consumed), the balance lands as the
-    subject's pair axes, importance medium (story-critical + two
-    entities), the cascade quiet (no knowledge, no hooks)."""
-    pack = armed_pack(tmp_path)
-    events, sim = run(tmp_path, pack, 93, ROOM_FAILURE_WAIT, "spend.jsonl")
+    """Seed 93 on the COMMITTED content (content-4): the room failure
+    mints the drunkard's cluster; the beat's urgency enqueues the coerce;
+    the door accepts (the fold is live); completion commits the spend —
+    outcome.cluster names HIS cluster (the log names the fact it
+    consumed), the balance lands as the subject's pair axes, importance
+    medium (story-critical + two entities), the cascade quiet (no
+    knowledge, no hooks)."""
+    events, sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "spend.jsonl")
     coerces = [e for e in events if e.type == "coerce"]
     assert len(coerces) == 1
     spend = coerces[0]
@@ -356,7 +353,7 @@ def test_the_drunkard_spends_his_cluster(tmp_path: Path) -> None:
     assert sim.projection["pc_01"]["pair.npc_drunk_01.trust"] == 25
     assert sim.projection["pc_01"]["pair.npc_drunk_01.fear"] == 75
     # the fold: the drunk's cluster is dead, the room's still live
-    facts = live_leverage(pack, events, spend.t + 1)
+    facts = live_leverage(PACK, events, spend.t + 1)
     assert "npc_drunk_01" not in {f.holder for f in facts}
     assert {f.holder for f in facts} == {
         "npc_guard_01", "npc_guard_02", "npc_barkeep_01", "npc_maid_01",
@@ -364,12 +361,16 @@ def test_the_drunkard_spends_his_cluster(tmp_path: Path) -> None:
 
 
 def test_one_secret_buys_one_play(tmp_path: Path) -> None:
-    """The second beat's roll stays silent: the drunk's cluster is spent,
-    the gate sees nothing live, no second coerce, no rejection noise —
-    the world's noise floor (the urgency law)."""
-    pack = armed_pack(tmp_path)
-    steps = ROOM_FAILURE_WAIT + [{"intent": "wait", "ticks": 400}]
-    events, _sim = run(tmp_path, pack, 93, steps, "twice.jsonl")
+    """The committed driver across three further beats: the drunk's
+    cluster is spent at the first coercion, every later roll's gate sees
+    a dead fold, no second coerce, no rejection noise — the world's
+    noise floor (the urgency law; the door-rejection path is the expiry
+    window, pinned next)."""
+    steps = ROOM_FAILURE_WAIT + [
+        {"intent": "wait", "ticks": 400},
+        {"intent": "wait", "ticks": 800},
+    ]
+    events, _sim = run(tmp_path, PACK, 93, steps, "twice.jsonl")
     assert len([e for e in events if e.type == "coerce"]) == 1
     rejections = [
         e for e in events if e.type == "intent_rejected"
@@ -379,9 +380,10 @@ def test_one_secret_buys_one_play(tmp_path: Path) -> None:
 
 
 def test_the_door_rejects_the_leverageless_coerce(tmp_path: Path) -> None:
-    """The committed pack (no driver — the dormancy law): a player step
-    coercing without holding any cluster is a plain door rejection, the
-    intent door's first leverage test live on the unmodified content."""
+    """A player step coercing without holding any cluster is a plain door
+    rejection — the intent door's first leverage test live on the
+    committed content (the driver gates the drunkard's beat rolls; the
+    player's own attempts meet the door directly)."""
     events, _sim = run(tmp_path, PACK, 93, [
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "coerce", "target": "npc_drunk_01"},
@@ -400,9 +402,10 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
     rejects (reason projection_moved — the derived liveness moved, never
     a breaking event the log does not hold), the cause chains to the
     last committed canon. Two-pass pin (the probe discipline): read the
-    accept tick, shrink the window, re-run."""
-    pack = armed_pack(tmp_path)
-    events, _sim = run(tmp_path, pack, 93, ROOM_FAILURE_WAIT, "pass1.jsonl")
+    accept tick, shrink the window, re-run. The committed p-40 driver
+    fires on seed 93 (probed) — the shrunk copy mutates nothing but the
+    cluster's lifetime."""
+    events, _sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "pass1.jsonl")
     first = next(e for e in events if e.type == "coerce")
     accept = first.t - 3  # the coerce duration
     mint = min(
@@ -411,12 +414,7 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
     )
     window = accept - mint + 2  # dies at accept+2, completion at accept+3
 
-    def shrink(rules: dict[str, Any]) -> None:
-        rules["secrets"]["tokens"]["figure_reaching_for_purse"][
-            "expires_ticks"
-        ] = window
-
-    shrunk = armed_pack(tmp_path / "arm2", mutate_rules=shrink)
+    shrunk = shrunk_pack(tmp_path / "shrink", window)
     events2, _sim2 = run(tmp_path, shrunk, 93, ROOM_FAILURE_WAIT, "pass2.jsonl")
     assert not any(e.type == "coerce" for e in events2)
     rejection = next(
@@ -433,26 +431,75 @@ def test_the_chronicle_renders_the_spend_line(tmp_path: Path) -> None:
     the gate, the actor's display name in the house's dry voice."""
     from render.chronicle import chronicle_from_log
 
-    pack = armed_pack(tmp_path)
-    run(tmp_path, pack, 93, ROOM_FAILURE_WAIT, "tale.jsonl")
-    text = chronicle_from_log(tmp_path / "tale.jsonl", pack, SCHEMA)
+    run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "tale.jsonl")
+    text = chronicle_from_log(tmp_path / "tale.jsonl", PACK, SCHEMA)
     assert "the drunkard leans on the player — the hold is spent." in text
 
 
 def test_the_declarations() -> None:
     """The pack rows: the spend event declared, the action's success
     event matches, the tale line present, the story-critical hook and
-    the metrics row in place (the rule owns the signal/noise split)."""
+    the metrics row in place (the rule owns the signal/noise split),
+    and the driver's entry carries the coerce template (content-4 — the
+    committed content set is live)."""
     rules = json.loads(
         (REPO / "content" / "tavern_pack" / "rules.json").read_text(encoding="utf-8")
     )
     assert rules["secrets"]["spend_event"] == "coerce"
     assert "coerce" in rules["importance"]["story_critical_events"]
     assert rules["metrics"]["system_of_type"]["coerce"] == ["relations"]
+    drunk = next(
+        e for e in rules["urgencies"]["entries"]
+        if e["npc"] == "npc_drunk_01"
+    )
+    assert drunk["intent"] == {"kind": "coerce", "target": "pc_01"}
+    assert drunk["probability_per_beat"] == 40
+    assert {c["test"] for c in drunk["requires"]} == {
+        "same_location", "leverage_over",
+    }
     templates = json.loads(
         (REPO / "content" / "tavern_pack" / "templates.json").read_text(encoding="utf-8")
     )
     assert templates["events"]["coerce"]
+
+
+def test_the_corpus_pins_the_spend_and_the_pair_axes() -> None:
+    """The re-distill (the iter-48 pattern, D-078): the corpus's
+    outgoing_guard case carries the landing's own claims — the spend
+    event claimable by id and the subject's pair axes at the coerce's
+    buy (trust 25 / fear 75) — and the silent_second case's tail is the
+    spend itself (the last event type re-pinned crowd_wary -> coerce:
+    the drunkard's card lands inside the final door batch). The corpus
+    test replays these through the real cycle; this pin guards the
+    fixture against a silent rollback of the content landing."""
+    corpus = json.loads(
+        (REPO / "tests" / "fixtures" / "narrator_beats.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    outgoing = next(
+        c for c in corpus["cases"]
+        if c["name"] == "outgoing_guard_blind_to_the_distraction_fire"
+    )
+    claims = outgoing["beats"][0]["reply"]["proposal"]["claims"]
+    coerce_claims = [c for c in claims if c.get("type") == "coerce"]
+    assert len(coerce_claims) == 1
+    assert coerce_claims[0]["event_id"] == "ev_0031"
+    pair = {
+        c["prop"]: c["value"] for c in claims
+        if c.get("entity") == "pc_01" and c.get("prop", "").startswith(
+            "pair.npc_drunk_01"
+        )
+    }
+    assert pair == {
+        "pair.npc_drunk_01.trust": 25,
+        "pair.npc_drunk_01.fear": 75,
+    }
+    silent = next(
+        c for c in corpus["cases"]
+        if c["name"] == "silent_second_steal_waits_out_the_watch"
+    )
+    assert silent["expect"]["last_event_type"] == "coerce"
 
 
 # -- the pack lint ----------------------------------------------------------------

@@ -285,3 +285,27 @@ tick, the beat-360 decay reads 50→46 / 10→6), the chronicle line
 directly after the shout, the one-hop termination, the stripped-
 entry byte-identity on alarm-free runs — is pinned directly
 (tests/test_panic.py; D-077; DIRECTOR_SPEC §3c).
+
+Re-measured at iter-49 (content-4, the coerce driver landed —
+D-078, social-1b's live content set): the entry is LIVE, so the A/B
+measures its real delta — 2/10 byte-identical (seeds 15, 85: the
+drunkard's roll misses at every crossed beat), the 8 diverging seeds
+change by exactly the drunkard's idle waits disappearing (event-id
+shifts, ZERO outcome flips — the replacement law keeps the per-beat
+draw count, so every check keeps its draw position) plus seed 125's
+two `intent_rejected` (failed_test `actor.leverage_over`: the theft
+failure mints the room's clusters at t=9 expiring at 729, the
+beat-720 gate passes on the live fold, the door's own re-read at the
+entry tick finds the card expired — the tick-window law live on
+day1_full, the world's honest record of a stale reach). No coerce
+commits on day1_full: the gate script's theft succeeds on 9 seeds
+(no mint, no card to play), and the one minting seed's card expires
+before the door. The live behavior — the spend's outcome.cluster
+naming the drunkard's mint, the pair axes 25/75, one-secret-one-
+play, the expired-card rejection, the chronicle line — is pinned
+directly on the COMMITTED pack (tests/test_coerce.py; D-078). The
+corpus re-distill (the fixed-point runner, identity-proved first —
+105/105 zero-change on the unshifted stream): 2 id re-pins + the
+silent_second tail re-pin (crowd_wary → coerce) + the deliberate
+spend claims on outgoing_guard beat0, zero ladder flips; 4 seed-93
+corpus cases see the coercion.

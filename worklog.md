@@ -17,6 +17,42 @@
 ---
 ---
 ---
+iter-49 · 2026-09-03 · content-4 — the coerce driver, the
+drunkard's roll re-armed (iter-49-content4-coerce-driver; the owner's
+"continue work per the plan, quality over speed" session call, the
+phase-3 backlog's top un-gated item)
+- rules.json: the drunkard's urgency entry re-armed as the coerce
+  carrier ({coerce, target pc_01} + the same_location/leverage gates,
+  weight 40 kept) — the REPLACEMENT law: the slot and weight stay, the
+  per-beat draw COUNT with them, so every later check draw keeps its
+  position and the corpus's designed ladders hold (an ADDED entry was
+  measured and REFUSED: 3 flipped ladders, the doccheck fail branch
+  — the corpus's only pin — among them; the stream split is the
+  owner's engine-2 row). Zero engine edits.
+- The corpus re-distill through the REBUILT fixed-point runner
+  (outside the repo per Rule 9), identity-proved FIRST (105 cases,
+  the pristine corpus its own fixed point, zero false re-pins): 2 id
+  re-pins (doccheck) + the silent_second tail re-pin (crowd_wary ->
+  coerce, the spend inside the final door batch) + the deliberate
+  pins on outgoing_guard beat0 (the coerce by id, the pair axes
+  25/75); 4 seed-93 cases coerce; zero ladder flips. The corpus test
+  green after the write is the fixed-point verdict.
+- The live-fire tests moved onto the committed pack (the armed_pack
+  append pattern retired; the shrunk-expiry window probe keeps a
+  one-knob copy); the world-change pins re-pinned (test_leverage
+  5->4 + the births A/B filters the coerce; the urgency seeds
+  re-probed — the maid carries the plain-roll pins; the parse corpus
+  16->15). +1 corpus pin test, tests 951->952, ruff clean. D-078;
+  the day1_full A/B 2/10 identical, the delta = the drunkard's idle
+  waits + seed 125's expired-card rejections (TEST_PLAN §6). TASKS
+  (content-4 done, engine-2 opened), phases.md §3, README, STATUS
+  (header + the FAQ regen laws 4-6), this file synced. 12 files —
+  over the 3-5 soft limit: the corpus regen + the doc-sync law (§6
+  same-turn, the iter-43/44/48 precedent). DECISIONS transiently
+  44/30 kept per §6.1 (the landing records are substance; the
+  collapse owes at the phase-3->4 gate, the KI#64 note). iter-39
+  evicted per the cap — verified in this edit (the KI#68 law).
+
 iter-48 · 2026-09-03 · content-2 — the alarm panic echo, the
 through-the-walls law LIVE (iter-48-content2-alarm-echo; the owner's
 "continue work per the plan, quality over speed" session call, the
@@ -297,45 +333,3 @@ per the plans" call, the phase-3 backlog's top un-gated item)
   substance; TASKS 649/600 the iter-39 substance precedent); the
   remainder (options, on_action dispatch, ctx iterators) split to
   drama-2/drama-3 backlog rows. iter-32 evicted per the cap.
----
-iter-39 · 2026-09-01 · dir-4 — the multi-channel quiet split
-(iter-39-dir4; the owner's "continue work per the plan" session
-call, the phase-3 backlog's top un-gated item)
-- core/director.py: `director.channels` pack data (ChannelConfig —
-  per-channel quiet floor + the closed CHANNEL_INPUTS binding
-  vocabulary {suspicion, physical_threats}; the channel's own
-  unreleased hook weights always feed it) + `SeededHook.channel` +
-  the per-hook quiet gate (`permit_quiet` — the third policy
-  question; the channel table lives on the Director, the policy only
-  answers) + `channel_entropies` (pure, mirrors `entropy`). Global
-  ON PURPOSE: the pacing clock (one drama arc over TOTAL entropy —
-  PEAK/REST suppress every channel), the budget (1/beat, the global
-  tiebreak), the climax path, explicit triggers (D-005), the
-  cooldown. Channelless hooks keep the v0.1 global floor (the
-  per-hook opt-in, the climax-flag pattern; a tag without the block
-  is dormant vocabulary).
-- rules.json: threat 3 (the document-check's weight self-blocks the
-  quiet path — an escalation never spawns because the world is
-  boring) / social 5 (guard_suspicious_of_pc, suspicion-bound) /
-  ambient 2 (inputless, declared-but-dormant — the owner's content
-  call); both hooks channel-tagged. pack.py lint: the block shape,
-  floors, the closed input vocabulary, the hook tag must name a
-  declared channel when the block exists.
-- Scope: 13 files (code 2 + tests 1 + pack 1 + the doc-sync set —
-  the iter-36/37/38 precedent; TASKS 599→613 over the 600 cap by
-  substance, the iter-32 precedent — the landing rows carry load).
-- Fixture discipline: T1/T8/corpus byte-identical; 10-seed A/B
-  (channels vs no-channels, a runner outside the repo per Rule 9)
-  10/10 byte-identical — the quiet path never fires on day1_full
-  (the D-066 all-PEAK window; the split is unit-pinned).
-  KI#63 (phases.md §3 stale "still-ahead" after iter-38 + the nav
-  tests row's missing climax note) opened + closed; KI#61/KI#62
-  deleted per AGENTS §5 (closed iter-37, two iterations past).
-  Tests 739→757 (+18 test_director.py: the input binding, the
-  quiet-channel-while-another-burns law + the v0.1 comparison arm,
-  the escalation self-block, the global clock gate,
-  explicit-ungated, the fallbacks, the shared budget, director-off,
-  climax-ignores-channels, the dormant tag, the four lint refusals),
-  ruff clean. D-068; DIRECTOR_SPEC §5 the contract owner; iter-31
-  evicted per the cap.
----

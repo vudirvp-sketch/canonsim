@@ -178,10 +178,30 @@ fixed-point regen runner); the day1_full 10-seed A/B 10/10
 byte-identical (the empty-backyard law — the echo's divergence is
 corpus-script-only, TEST_PLAN §6). 951 tests green, ruff clean.
 Contract owner `docs/DIRECTOR_SPEC.md` §3c.
-Next: the phase-3 driver rows (the coerce/echo/arc drivers —
-content-4/5/6, each with the corpus regen the fixed-point protocol
-now owns — and ambient-channel content-3) + the owner-gated set
-(parse-2, engine-1).
+The coerce driver landed iter-49 (content-4, D-078): the drunkard's
+urgency entry re-armed as the coerce carrier — the REPLACEMENT law
+(the slot and the 2-in-5 weight stay, so the per-beat draw count
+and every later check draw's position stay: the corpus's designed
+ladders hold, where an ADDED entry was measured to flip 3 of them —
+the urgency rolls share the substantive stream with the checks; the
+engine-side stream split is the owner's recorded call, the engine-2
+infra row). The committed content set is LIVE: 4 seed-93 corpus
+cases see the drunkard play his card (the spend claimable by id +
+the subject's pair axes trust 25 / fear 75 as the deliberate pins,
+the iter-48 pattern; the silent_second case's tail IS the spend),
+the corpus re-distill = 2 id re-pins + 1 tail re-pin through the
+rebuilt fixed-point runner (identity-proved first — 105/105
+zero-change), zero ladder flips; the live-fire tests run on the
+committed pack; the day1_full A/B diverges by exactly the drunkard's
+idle waits gone + seed 125's expired-card door rejections (the
+tick-window law live, zero outcome flips). 952 tests green, ruff
+clean. The landing is pack data over iter-45's standing door — no
+DIRECTOR_SPEC surface (the urgency table's own notes + TASKS
+content-4 carry the contract).
+Next: the phase-3 driver rows (the echo/arc drivers — content-5/6,
+each with the corpus regen the fixed-point protocol now owns — and
+ambient-channel content-3) + the owner-gated set (parse-2, engine-1,
+engine-2).
 
 ## For AI agents (primary audience)
 

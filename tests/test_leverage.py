@@ -281,7 +281,9 @@ def test_the_second_failure_never_re_mints(tmp_path: Path) -> None:
 def test_live_leverage_expires_at_the_boundary(tmp_path: Path) -> None:
     """The read-side fold: live strictly before the expiry tick, dead AT
     it (the boundary is exclusive) — the room's window closes first, the
-    relief's (minted at the rotation, 360) outlives it."""
+    relief's (minted at the rotation, 360) outlives it. Four live, not
+    five: the drunkard's card is SPENT at the beat coercion (content-4,
+    D-078) — the spend kills the cluster long before its own expiry."""
     events = run(tmp_path, 93, ROOM_FAILURE_WAIT)
     clusters = [e for e in events if e.type == "leverage_gained"]
     room_expiry = max(
@@ -290,8 +292,12 @@ def test_live_leverage_expires_at_the_boundary(tmp_path: Path) -> None:
     relief_expiry = max(
         int(e.outcome["expires_at"]) for e in clusters if e.t >= 300
     )
-    assert live_leverage(PACK, events, room_expiry - 1)  # all five live
-    assert len(live_leverage(PACK, events, room_expiry - 1)) == 5
+    assert live_leverage(PACK, events, room_expiry - 1)  # four live
+    assert len(live_leverage(PACK, events, room_expiry - 1)) == 4
+    # the drunkard's cluster is dead already (the spend, not the expiry)
+    assert "npc_drunk_01" not in {
+        f.holder for f in live_leverage(PACK, events, room_expiry - 1)
+    }
     # AT the room's boundary: the room dies, the relief survives
     surviving = live_leverage(PACK, events, room_expiry)
     assert [f.holder for f in surviving] == ["npc_guard_02"]
@@ -340,10 +346,12 @@ def test_no_births_no_divergence_byte_identical(tmp_path: Path) -> None:
 
 
 def test_births_are_the_only_divergence(tmp_path: Path) -> None:
-    """On a birth run the divergence is EXACTLY the leverage events:
-    filtering them out of the committed arm's log reproduces the
-    stripped arm's stream event-for-event (ids, types, ticks, actors —
-    the inserted facts shift nothing else)."""
+    """On a birth run the divergence is EXACTLY the leverage events and
+    their first runtime consumption: filtering the births AND the
+    drunkard's spend (the coerce driver riding his cluster, content-4)
+    out of the committed arm's log reproduces the stripped arm's stream
+    event-for-event (ids, types, ticks, actors — the inserted facts and
+    the behavior they bought shift nothing else)."""
     steps = ROOM_FAILURE_WAIT
     with_log = tmp_path / "with.jsonl"
     without_log = tmp_path / "without.jsonl"
@@ -356,13 +364,17 @@ def test_births_are_the_only_divergence(tmp_path: Path) -> None:
     )
     _h, with_events = read_log(with_log, SCHEMA)
     _h, without_events = read_log(without_log, SCHEMA)
-    remainder = [e for e in with_events if e.type != "leverage_gained"]
+    remainder = [
+        e for e in with_events
+        if e.type not in ("leverage_gained", "coerce")
+    ]
     assert len(remainder) == len(without_events)
     for new, old in zip(remainder, without_events, strict=True):
         assert (new.type, new.t, new.actor, new.target) == (
             old.type, old.t, old.actor, old.target
         )
     assert any(e.type == "leverage_gained" for e in with_events)
+    assert any(e.type == "coerce" for e in with_events)
 
 
 # -- the pack lint ----------------------------------------------------------------

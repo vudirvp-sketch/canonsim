@@ -1,44 +1,50 @@
 # STATUS — canonsim
 
-Iteration: iter-48 (`iter-48-content2-alarm-echo` — the owner's
+Iteration: iter-49 (`iter-49-content4-coerce-driver` — the owner's
 "continue work per the plan, quality over speed" session call; the
-phase-3 backlog's top un-gated item: content-2 — the alarm panic
-echo, the DIRECTOR_SPEC §11 first row closing, the LAST content row
-that owed a corpus regen) ·
+phase-3 backlog's top un-gated item: content-4 — the coerce driver,
+social-1b's live content set) ·
 Phase: 3 (Director)
-**OPEN — the alarm panic echo landed LIVE: the through-the-walls
-law as one on_action entry over the standing drama-3 dispatch —
-witnesses of `alarm_raised` gain fear, the panic contagion compounding
-on the direct spike, its own chronicle line directly after the shout;
-zero engine edits, the 7-case corpus re-distill paid in-iteration**
-· Date: 2026-09-03 ·
-Scope: `alarm_raised` → `panic_ripple` (scope `witnesses`, state
-`status.fear` +10 — the CONTAGION quarter of the hardcoded +40
-direct spike; NO gate — the alarm's own knowledge resolution decides
-who heard the shout; the adjacent-hearer half dormant per the tune-3
-static-placement finding), the event type story-critical with the
-static chronicle line "Panic ripples through the walls of
-{location}.", NO system_of_type entry (the crowd_wary precedent —
-the state changes classify it to one system, M1 untouched). The
-measured semantics: the occupants compound 40→50 (the fire seen AND
-the panic heard), the cause actor 0→10 (hears his own shout — the
-corpus's own knowledge pin made a fear fact), the echo commits at
-the alarm's own tick (the decay baseline stays — beat-360 decay
-50→46 / 10→6), the cascade terminates (no knowledge, no hooks, the
-one-hop law). The corpus regen (the fixed-point runner outside the
-repo per Rule 9, the iter-43/44 precedent): 7 fire-family cases
-re-distilled — the fear claims re-pinned 40→50 (guard_01's decayed
-36→46), the post-alarm event ids +1 (the panic insert), the alarm
-case gaining the echo's own claims (the panic event by id + the
-cause actor's fear), the regen-ladder shapes preserved
-(outgoing_guard beat 0 stays the designed blind-guard refusal). The
-day1_full 10-seed A/B (committed vs the alarm-entry-stripped
-variant) 10/10 byte-IDENTICAL — the empty-backyard law (the gate
-script's fire never shares a room; the live divergence lives in the
-corpus's seed-33/93 scripts, TEST_PLAN §6). Tests 943→951
-(+8 tests/test_panic.py; test_actions' folded-fear pin 40→50, the
-intentional world change), ruff clean. KI#67 deleted per AGENTS §5
-(closed iter-46, two iterations past).
+**OPEN — the drunkard's urgency entry re-armed as the coerce carrier:
+the roll is the same draw, the leverage gate decides emission; the
+committed content set is LIVE (4 seed-93 corpus cases see him play his
+card), zero engine edits, the corpus regen paid in-iteration through
+the rebuilt fixed-point runner (identity-proved first)** ·
+Date: 2026-09-03 ·
+Scope: the REPLACEMENT law (the entry keeps its slot and 2-in-5
+weight — the per-beat draw COUNT is unchanged, so the checks
+downstream keep their draw positions and the corpus's designed
+ladders hold; an ADDED entry was measured and REFUSED: 3 flipped
+check ladders, the document_check fail branch — the corpus's only pin
+of it — among them; the engine-side stream split recorded-not-built,
+the engine-2 infra row, the owner's call). The regen: the runner
+rebuilt outside the repo per Rule 9, its soundness PROVED by the
+identity check (105 cases, the pristine corpus its own fixed point,
+zero false re-pins) before touching the shifted stream; the corpus
+re-distill = the doccheck case's 2 id re-pins (the idle-wait
+disappearance), the silent_second tail re-pin (crowd_wary → coerce —
+the spend lands inside the final door batch), and the deliberate
+pins on outgoing_guard beat0 (the coerce event by id + pc_01's pair
+axes trust 25 / fear 75 — the landing's own claims, the iter-48
+pattern; 4 corpus cases coerce: doccheck, outgoing_guard,
+caught_at, silent_second). The day1_full 10-seed A/B: 2/10
+byte-identical (15, 85 — the drunkard's roll misses), the divergence
+on the rest = exactly the drunkard's idle waits gone + seed 125's two
+expired-card door rejections (the cluster dies at 729 between the
+beat-720 gate pass and the door's re-read — the tick-window law live
+on day1_full, zero outcome flips). The live-fire tests moved onto
+the committed pack (the armed_pack append pattern retired; the
+shrunk-expiry window probe keeps a minimal copy); the world-change
+pins re-pinned: test_leverage's boundary count 5→4 (the drunkard's
+cluster spent before its expiry) + the births A/B filtering the
+coerce (the facts' first runtime consumer rides the cluster), the
+urgency tests' seeds re-probed (the maid carries the plain-roll
+pins now), the parse corpus's wait-720 count 16→15. Tests
+951→952 (+1 corpus pin test, the module totals re-balanced), ruff
+clean. D-078; TASKS (content-4 done, engine-2 opened), TEST_PLAN §6,
+phases.md §3, DECISIONS D-078 appended, README synced, the FAQ regen
+entry actualized with the iter-49 laws, worklog trimmed to cap
+(iter-40 evicted, verified present-tense).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -305,17 +311,17 @@ intentional world change), ruff clean. KI#67 deleted per AGENTS §5
   loudly at the door — the cycle is consumed, the fixed reply needs a
   fresh `say`.
 
-- **The corpus-regen protocol (iter-48 law; content-4/5/6 will need
-  it).** A content landing that shifts the event stream re-distills
-  the affected cases through the REAL mediator cycle with a
-  FIXED-POINT runner outside the repo (Rule 9; the iter-43/44 hand
-  re-pin is the manual precedent). The three laws the runner taught:
-  (1) the corpus test pins only the LAST beat's status — a beat may
-  be a DESIGNED refusal (the regen-ladder probes: outgoing_guard
-  beat 0); the reference ladder comes from the HEAD-pack green
-  replay, and convergence means the ladder SHAPE is preserved, not
-  that every beat accepts; (2) the per-beat measurements (the state
-  fold at each beat's reply gate, the event-id alignment) are
+- **The corpus-regen protocol (iter-48 law, actualized iter-49;
+  content-5/6 will need it).** A content landing that shifts the event
+  stream re-distills the affected cases through the REAL mediator
+  cycle with a FIXED-POINT runner outside the repo (Rule 9; the
+  iter-43/44 hand re-pin is the manual precedent). The three laws the
+  runner taught: (1) the corpus test pins only the LAST beat's status
+  — a beat may be a DESIGNED refusal (the regen-ladder probes:
+  outgoing_guard beat 0); the reference ladder comes from the HEAD-pack
+  green replay, and convergence means the ladder SHAPE is preserved,
+  not that every beat accepts; (2) the per-beat measurements (the
+  state fold at each beat's reply gate, the event-id alignment) are
   trustworthy only when the beat's PREDECESSORS landed their HEAD
   statuses — a refused beat never feeds its intents, so every later
   stream is starved until the refusal's cause is re-pinned; (3) the
@@ -324,9 +330,26 @@ intentional world change), ruff clean. KI#67 deleted per AGENTS §5
   it forever; the fixed point never settles). New-event claims (the
   deliberate pins of the landing's own events) ride AFTER
   convergence — the old-id alignment must never touch them. The
-  runner: `/home/z/my-project/scripts/iter48_regen.py` (ephemeral
-  session artifact; the laws live here, the runner's shape in
-  worklog iter-48).
+  iter-49 laws (the 105-case pass): (4) **prove the runner first** —
+  the identity check replays the pristine corpus through the re-pin
+  machinery and asserts ZERO changes (a runner that mis-pins on an
+  unshifted stream will mis-pin worse on a shifted one); the corpus
+  test green after the fixture write is the fixed-point verdict, not
+  a second re-pin pass; (5) **a designed-refusal claim is never
+  re-pinned** — the re-pin rule is `fixture value == pristine truth
+  AND != current truth → take the current truth`; a claim that never
+  matched the pristine truth is the case's own wrongness (the refusal
+  family), and an id re-pin follows the pristine referent's role so
+  the type mismatch reproduces; (6) **the draw-count coupling is the
+  regen's hard edge** — an ADDED urgency entry shifts every later
+  check draw and flips designed ladders (3 cases at one entry; the
+  doccheck fail branch — the corpus's only pin — would have been
+  LOST, not re-pinned); re-arm an existing entry instead (the
+  replacement law — content-4), or land the stream split first
+  (engine-2, the owner's call). The runner:
+  `/home/z/my-project/scripts/iter49_regen.py` (ephemeral session
+  artifact; the laws live here, the runner's shape in worklog
+  iter-49).
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2

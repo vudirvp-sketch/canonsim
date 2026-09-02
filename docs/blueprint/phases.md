@@ -431,7 +431,18 @@ deterministic engine).
 
 **Social depth**: secrets & leverage as first-class fact clusters (P3a;
 CK3 `add_hook` — a hook *is an event* with target, type, expiry tick,
-cause — **landed iter-44 + iter-45, D-073/D-074**); **arcs & tension
+cause — **landed iter-44 + iter-45, D-073/D-074**); **the coerce
+driver LIVE — landed iter-49 (content-4, D-078): the drunkard's
+urgency entry re-armed as the coerce carrier — the replacement law
+(the slot and weight stay, so the per-beat draw count and every
+later check draw's position stay — the corpus's designed ladders
+hold; an ADDED entry was measured to flip 3 of them — the urgency
+rolls share the substantive stream with the checks, the engine-2
+stream split is the owner's recorded call); 4 seed-93 corpus cases
+see the spend (the deliberate pins: the coerce by id + the
+subject's pair axes), the live-fire tests run on the committed
+pack, the expired card's door rejection is the world's honest
+record**; **arcs & tension
 shaping (P3c) — landed iter-47 (arc-1, D-076): `director.arcs` pack
 chains — the order law (a member releases only as its arc's current
 member, all paths, explicit triggers included — pack-declared

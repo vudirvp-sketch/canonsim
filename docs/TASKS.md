@@ -177,18 +177,32 @@
   10-seed A/B 10/10 byte-identical (the empty-backyard law — the
   gate script's fire never shares a room; the live divergence lives
   in the corpus's seed-33/93 scripts, TEST_PLAN §6).
-- `content-4` · the coerce driver — the live content set for the
-  landed spend door (an urgency entry or director hook carrying the
-  `coerce` intent; a pack-declared status/urgency nudge joining the
-  pair shifts if the balance wants it): lands with the corpus regen
-  it implies (any driver draws the stream — the whole 105-case set
-  re-distills, the iter-42 alarm-echo lesson); the content-1/iter-43
-  precedent for the probe protocol.
+- `content-4` · the coerce driver — **done (iter-49, D-078)**: the
+  drunkard's urgency entry re-armed as the coerce carrier — the
+  REPLACEMENT law (the slot and the 2-in-5 weight stay, so the per-beat
+  draw COUNT is unchanged and the corpus's designed check ladders hold;
+  an ADDED entry shifts every later check draw — the iter-49
+  measurement: 3 flipped ladders at p=40, the document_check fail branch
+  among them; the engine-side stream split is the recorded-not-built
+  answer, the `engine-2` infra row). The committed content set is LIVE:
+  4 seed-93 corpus cases see the drunkard play his card (the spend
+  claimable by id + the subject's pair axes as the deliberate pins, the
+  iter-48 pattern), the corpus regen = 2 id re-pins + the silent_second
+  tail re-pin (crowd_wary → coerce — the spend lands inside the final
+  door batch), zero ladder flips; the live-fire tests moved onto the
+  committed pack (the armed_pack append pattern retired with the
+  landing); the day1_full A/B: 2/10 byte-identical, the divergence =
+  the drunkard's idle waits gone + seed 125's two expired-card door
+  rejections (the tick-window law live, zero outcome flips). The
+  optional status/urgency nudge: not wanted — the pair shifts carry the
+  drama (the action's own v0.1-buy note stands).
 - `content-5` · the echo driver — the live content set for the landed
   residue gate (an urgency entry or action carrying `echo_at_least` —
   the jittery-watcher beat, the residue visibly driving behavior on
   the committed runs): lands with the corpus regen it implies (the
-  content-4 law — any urgency entry shifts the stream); the iter-46
+  content-4 lesson — an ADDED urgency entry shifts every later check
+  draw; re-arm an existing entry instead, the replacement law, or land
+  `engine-2` first); the iter-46
   live-fire tests on crafted copies carry the mechanism proof until
   then.
 - `content-6` · the arc driver — the live content set for the landed
@@ -334,6 +348,18 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Infra backlog (pick by need)
 
+- `engine-2` (owner-gated) the urgency-roll stream split — the
+  INV-2-adjacent decoupling the iter-49 measurement exposed: urgency
+  rolls share the substantive stream with the checks, so ANY added
+  urgency entry shifts every later check draw (the corpus's designed
+  ladders flip — 3 cases at one entry, the doccheck fail branch lost).
+  The replacement law (re-arm an existing entry) covers content-4/5
+  per-drivers; the general fix — a third named stream (the `assure`
+  scoping law reworked) — pays a one-time corpus migration flip (the
+  checks shift by the removed draws) and buys permanent add-safety for
+  future urgency growth. The owner's call: land it before the pack's
+  urgency table grows past its three slots, or keep the replacement
+  discipline as the content law.
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
   Python).
 - `qa-1` mypy --strict on `core/` (owner-approval-gated: dev tooling is
