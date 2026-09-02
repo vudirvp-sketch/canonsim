@@ -263,3 +263,25 @@ types — is pinned directly (tests/test_doccheck.py; D-072;
 DIRECTOR_SPEC §3c/§11). The alarm panic echo stays the
 recorded-not-landed row (DIRECTOR_SPEC §11) — the next content row,
 with its own corpus regen.
+
+Re-measured at iter-48 (content-2, the alarm panic echo landed —
+D-077, the §11 row closing): the entry is LIVE, so the A/B measures
+its real delta — but the day1_full stage never gives it one: the
+same 10 seeds, the committed pack vs the alarm-entry-stripped
+linted variant (a runner outside the repo per Rule 9) — 10/10
+byte-identical, zero `alarm_raised` events in any log (the
+empty-backyard law: the gate script's arson burns the yard the PC
+stands alone in, `when_occupants_present` raises no alarm, no event
+for the entry to key on — the iter-42 dormant-arm shape, now for a
+LIVE entry). The echo's live divergence lives in the corpus's own
+occupied-room scripts: the 7 fire-family cases (seeds 33 and 93)
+re-distilled in the same iteration (the occupants' fear claims
+40→50, the post-alarm event ids +1, the alarm case gaining the
+panic event claim + the cause actor's fear — the iter-43 regen
+precedent, the fixed-point runner outside the repo). The live
+behavior — the compounding (spike + contagion), the cause actor's
+own-shout fear, the decay baseline (the echo commits at the alarm's
+tick, the beat-360 decay reads 50→46 / 10→6), the chronicle line
+directly after the shout, the one-hop termination, the stripped-
+entry byte-identity on alarm-free runs — is pinned directly
+(tests/test_panic.py; D-077; DIRECTOR_SPEC §3c).

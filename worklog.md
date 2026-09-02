@@ -6,12 +6,50 @@
 > Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
 > Entries re-trimmed to the line cap at iter-10a (KI#37; the drift ran
 > iter-8b→10) — pre-trim detail lives in git history.
+> Re-trimmed 39→10 at iter-48 (KI#68: the cap had drifted silently —
+> the iter-43..47 "evicted per the cap" claims never executed; the
+> eviction is now verified in the same edit, not claimed). Pre-trim
+> history lives in git.
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 
 ---
 ---
 ---
+---
+iter-48 · 2026-09-03 · content-2 — the alarm panic echo, the
+through-the-walls law LIVE (iter-48-content2-alarm-echo; the owner's
+"continue work per the plan, quality over speed" session call, the
+phase-3 backlog's top un-gated item — the DIRECTOR_SPEC §11 first row
+closing, the last content row that owed a corpus regen)
+- content/tavern_pack/rules.json + templates.json: the on_action
+  entry `alarm_raised` → `panic_ripple` (witnesses, status.fear +10 —
+  the CONTAGION quarter of the hardcoded +40 spike; NO gate), the
+  story-critical list, the static chronicle line. ZERO engine edits —
+  pure pack data over the drama-3 dispatch (the content-1 pattern).
+- The 7-case corpus re-distill (the FIXED-POINT regen runner outside
+  the repo per Rule 9, the iter-43/44 precedent): the fear claims
+  40→50 (guard_01 decayed 36→46), the post-alarm ids +1, the alarm
+  case gaining the echo's own claims (panic by id + pc_01 fear 10);
+  the ladder shapes preserved (the designed-refusal beats stay).
+  Runner laws recorded in the STATUS FAQ (content-4/5/6 will need
+  them). The day1_full 10-seed A/B: 10/10 byte-identical
+  (empty-backyard law — the echo's divergence is corpus-script-only,
+  TEST_PLAN §6).
+- KI#68 opened+closed (the worklog cap drift: 44 entries vs 10, the
+  iter-43..47 eviction claims never executed — trimmed to the newest
+  10 in this edit, pre-trim history in git). KI#67 deleted per
+  AGENTS §5. +8 tests/test_panic.py, tests 943→951, ruff clean;
+  test_actions' folded-fear pin 40→50 (the intentional world
+  change). D-077; DIRECTOR_SPEC §3c/§11 + the header, TEST_PLAN §6,
+  TASKS (content-2 done), phases.md §3, AGENT_NAVIGATION §1, README,
+  STATUS + this file synced. 12 files — over the 3-5 soft limit: the
+  corpus regen + the doc-sync law (§6 same-turn, the iter-43/44
+  precedent). DECISIONS transiently 43/30 + TASKS 775/600 +
+  phases.md 663/600 kept per §6.1 (landing records are substance,
+  0 filler added; the trims owe at the phase-3→4 gate, the KI#64
+  note). The 9 kept entries re-verified present.
+
 iter-47 · 2026-09-03 · arc-1 — arcs & tension shaping, the release-chain
 layer (iter-47-arc1-chains; the owner's "continue work per the plan,
 quality over speed" session call, the phase-3 backlog's top un-gated
@@ -301,184 +339,3 @@ call, the phase-3 backlog's top un-gated item)
   ruff clean. D-068; DIRECTOR_SPEC §5 the contract owner; iter-31
   evicted per the cap.
 ---
-iter-38 · 2026-09-01 · dir-3 — the climax layer + PEAK_CLIMAX
-(iter-38-climax; the owner's "continue work per the plan" session
-call, the phase-3 backlog's top un-gated item)
-- core/director.py: `PacingConfig.climax_floor` (the third entropy
-layer, the L4D2 three-intensity rule) + the climax release path (a
-climax-flagged hook at the END of a peak — clock in PEAK held
-`min_peak_beats`, entropy at the layer; never from the quiet path) +
-the one-beat PEAK_CLIMAX state (entered only by a release, exited to
-REST) + `permit_climax` on the policy protocol (the boss fires at
-HIGH entropy — one boolean cannot serve both paths). rules.json:
-climax_floor 75 (3x peak_floor, the donor ratio); lint: the layer
-strictly above the peak floor, the hook flag boolean. The flag on
-`possible_document_check` was probed live (suite green) but reverted:
-the v0.1 wait-stub would make a hollow boss — the flag lands with
-the document_check action (DIRECTOR_SPEC §11), the owner's call.
-- Scope: 12 files (code 2 + tests 1 + pack 1 + spec 1 + the doc-sync
-  set — the iter-36/37 precedent).
-- KI#60 deleted per AGENTS §5 (closed iter-36, two iterations past).
-Tests 727→739 (+12 test_director.py: the clock's boss-beat exit, the
-layered threshold + peak-minimum + placement gates, the quiet-path
-exclusion, explicit-beats-climax, the no-double-boss guard,
-director-off, the flagless-layer semantics, the two-layer
-byte-identity, the two lint refusals), ruff clean; harness A/B
-re-measured (10 seeds, both arms byte-identical — the layer is inert
-without a flagged hook). D-067; DIRECTOR_SPEC §5 the contract owner;
-bg-4 evicted per the cap.
----
-iter-37 · 2026-09-01 · dir-2 — the eventless-stretch instrument +
-the pacing A/B (iter-37-eventless-stretch; the owner's "continue per
-the plan" session call, the phase-3 backlog's top un-gated item)
-- (deleted at iter-47 per the one-in/one-out cap; history in git.)
----
-iter-36 · 2026-09-01 · phase-3 opening — the pacing clock
-(iter-36-pacing-clock; the owner's "continue per the plan" call —
-phase 3 opens on it, the iter-31 precedent)
-- (deleted at iter-46 per the one-in/one-out cap; history in git.)
-
----
-iter-35 · 2026-09-01 · phase-2 gate — the verdict + the collapse
-
-- (deleted at iter-45 per the one-in/one-out cap; history in git.)
-
----
-bg-3 · 2026-09-01 · briefer spike — the POV mini-briefer + reverse validation
-(bg-3-briefer-spike)
-- (deleted at iter-44 per the one-in/one-out cap; history in git.)
-
----
-iter-34 · 2026-09-01 · owner-requested planning-layer audit
-(iter-34-planning-audit; doc-only — fresh owner request per D-022)
-- (deleted at iter-43 per the one-in/one-out cap; history in git.)
-
----
-bg-2 · 2026-09-01 · event taxonomy — the 120-entry corpus + the sink v2 plus pass
-(bg-2-event-taxonomy; the owner supplied the four world exports)
-- (deleted at iter-42 per the one-in/one-out cap; history in git.)
-
----
-iter-33 · 2026-09-01 · parse-1 batch 2 — say-door corpus growth
-(iter-33-parse1-say-sessions2; the owner's corpus-growth call)
-- (deleted at iter-41 per the one-in/one-out cap; history in git.)
----
-iter-32 · 2026-09-01 · parse-1 — validation beats over the say door
-(iter-32-parse1-say-sessions; the phase-2 arc's first session batch)
-- (deleted at iter-40 per the one-in/one-out cap; history in git.)
----
-iter-31 · 2026-09-01 · phase-2 parser door — the mode-C boundary's
-LLM-free half
-- (deleted at iter-39 per the one-in/one-out cap; history in git.)
----
-(bg-4 deleted at iter-38 per the one-in/one-out cap; history in git.)
----
-iter-30 · 2026-08-31 · perf-1 — the 10k-tick timing profile
-(iter-30-perf1-profile)
-- (deleted at iter-37 per the one-in/one-out cap + the KI#62
-  cap restore; history in git.)
----
-iter-29 · 2026-08-31 · pack-2 — the arson-on-ashes door check
-(iter-29-pack2-spot-available; the owner's finish-phase-1 directive,
-- (deleted at iter-37 per the one-in/one-out cap + the KI#62
-  cap restore; history in git.)
----
-iter-28 · 2026-08-31 · tune-2 — the crime cascade renders on the
-cards (iter-28-tune2-card-markers)
-- (deleted at iter-35 per the one-in/one-out cap; history in git.)
----
-iter-27 · 2026-08-31 · tune-1 — the rest action + the story-critical
-importance hook (iter-27-tune1-rest-importance)
-- (deleted at iter-36 per the one-in/one-out cap; history in git.)
----
-iter-26 · 2026-08-31 · phase-1 gate review — the verdict + the
-collapse (iter-26-phase1-gate)
-- (deleted at iter-34 per the one-in/one-out cap; history in git.)
----
-iter-25 · 2026-08-31 · validation beats — session 10, the
-witnessed-steal-then-alarm chain (iter-25-validation-beats-10)
-- (deleted at bg-2 per the one-in/one-out cap; history in git.)
----
-iter-24 · 2026-08-31 · validation beats — session 9, the day-2
-return under burned-yard knowledge (iter-24-validation-beats-9)
-- (deleted at iter-33 per the one-in/one-out cap; history in git.)
----
-iter-23 · 2026-08-31 · validation beats — session 8, the
-arson-after-theft chain (iter-23-validation-beats-8)
-- (deleted at iter-32 per the one-in/one-out cap; history in git.)
----
-iter-22 · 2026-08-31 · validation beats — session 7, the theft half
-under the presence machinery (iter-22-validation-beats-7)
-- (deleted at iter-31 per the one-in/one-out cap; history in git.)
----
-iter-21 · 2026-08-31 · validation beats — session 6, the alarm cascade
-(iter-21-validation-beats-6)
-- (deleted at bg-4 per the one-in/one-out cap; history in git.)
----
-iter-20 · 2026-08-30 · universality pass — the transition + scene-line
-vocabularies become pack data (iter-20-universality, KI#48 + D-057)
-- (deleted at iter-30 per the one-in/one-out cap; history in git.)
----
-iter-19 · 2026-08-30 · owner-requested audit of two pasted spatial analyses
-- (deleted at iter-29 per the one-in/one-out cap; history in git.)
----
-iter-18 · 2026-08-30 · validation beats — session 5, the arson half
-- (deleted at iter-28 per the one-in/one-out cap; history in git.)
----
-iter-17 · 2026-08-30 · validation beats — session 4, the crime cascade
-- (deleted at iter-27 per the one-in/one-out cap; history in git.)
----
-iter-16 · 2026-08-30 · validation beats — session 3 over the presence
-machinery (iter-16-validation-beats-3)
-- (deleted at iter-26 per the one-in/one-out cap; history in git.)
----
-iter-15 · 2026-08-30 · presence & entity cards — st-1 landed (iter-15-presence, D-056)
-- (deleted at iter-25 per the one-in/one-out cap; history in git.)
----
-iter-14 · 2026-08-30 · validation beats — session 2, the corpus completes (iter-14-validation-beats-2)
-- (deleted at iter-24 per the one-in/one-out cap; history in git.)
----
-iter-13 · 2026-08-30 · validation beats — first live agent-in-the-loop session (iter-13-validation-beats)
-- (deleted at iter-23 per the one-in/one-out cap; history in git.)
----
-(iter-12 deleted at iter-22 per the one-in/one-out cap; history in git.)
----
-iter-11c · 2026-08-30 · owner-requested iter-11b re-check (iter-11c-audit)
-- (deleted at iter-20 per the one-in/one-out cap; history in git.)
----
-iter-11b · 2026-08-30 · roadmap stress-test re-verified + problems 4–6 (iter-11b-stress-test-verified)
-- (deleted at iter-19 per the one-in/one-out cap; history in git.)
----
-iter-11a · 2026-08-29 · post-iter-11 audit (iter-11a-audit-fix)
-- (deleted at iter-18 per the one-in/one-out cap; history in git.)
----
-iter-11 · 2026-08-29 · texture promotion door — the narrator boundary's LLM-free half (iter-11-texture-door)
-- (deleted at iter-17 per the one-in/one-out cap; history in git.)
-(iter-10a deleted at iter-16 per the one-in/one-out cap; history in git.)
-iter-10 · 2026-08-29 · scene-ledger LLM-free half (iter-10-scene-ledger)
-- (deleted at iter-15 per the one-in/one-out cap; history in git.)
----
-iter-8g · 2026-08-29 · DF coverage audit (iter-8g-df-coverage-audit)
-- (deleted at bg-5 per the one-in/one-out cap; history in git.)
----
-iter-8f · 2026-08-29 · audit-fix: truncated exports + 101st type (iter-8f-audit-fix)
-- (deleted at iter-11c per the one-in/one-out cap; history in git.)
----
-iter-8e · 2026-08-28 · DF empirical F7/F8 survey (iter-8e-df-empirical-survey)
-- (deleted at iter-11b per the one-in/one-out cap; history in git.)
----
-iter-8d · 2026-08-28 · DF designed-experience deep dive (iter-8d-df-design-lessons)
-- (deleted at iter-11a per the one-in/one-out cap; history in git.)
----
-(iter-8c deleted at iter-11 per the one-in/one-out cap; history in git.)
-(iter-8b deleted at iter-10a per the one-in/one-out cap; history in git.)
-(iter-8a deleted at iter-10 per the one-in/one-out cap; history in git.)
-(iter-8 deleted at iter-9 per the one-in/one-out cap; history in git.)
-(iter-7 deleted at bg-1 per the one-in/one-out cap; history in git.)
-(iter-6a deleted at iter-8h per the one-in/one-out cap; history in git.)
-(iter-6 deleted at iter-8g per the one-in/one-out cap; history in git.)
-(iter-5 deleted at iter-8f per the one-in/one-out cap; history in git.)
-(iter-4 deleted at iter-8e per the one-in/one-out cap; history in git.)
-(iter-3 deleted at iter-8d per the one-in/one-out cap; history in git.)
-(iter-2a deleted at iter-8c per the one-in/one-out cap; history in git.)
-(iter-2 deleted at iter-8b per the one-in/one-out cap; history in git.)

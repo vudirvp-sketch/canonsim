@@ -10,7 +10,9 @@
 > layer drama-1 (iter-40, D-069), the grammar's option layer drama-2
 > (iter-41, D-070 — §3b), the grammar's on_action dispatch drama-3
 > (iter-42, D-071 — §3c), the document_check content landing (iter-43,
-> D-072 — §11's first pre-iter-43 row closed); the phase-3 refinements
+> D-072 — §11's first pre-iter-43 row closed), the alarm panic echo
+> (iter-48, content-2, D-077 — §3c's second live entry, the 7-case
+> corpus re-distill); the phase-3 refinements
 > still recorded-not-built live in §11. Measured impact (the grammar
 > layers were byte-identical on day1_full at landing — the D-066
 > all-PEAK window; the document_check landing is the first DELIBERATE
@@ -233,12 +235,23 @@ cover; the scope reads the check's own witnesses, the room's
 sighting token is deliberately un-mapped crowd memory). It fires on
 every committed run and live session where the check lands
 (cause-chained to the check; the reacting set = the witnesses with
-a numeric home). The alarm panic echo (witnesses of
-`alarm_raised` gain fear — the through-the-walls law) stays
-recorded-not-landed: it fires on the phase-1 corpus's
-distraction-fire beats, and the corpus's beat anchors and event-count
-pins are committed fixtures — the next content row, with the corpus
-regen it implies (§11). A pack without the `on_action` block runs
+a numeric home). The alarm panic echo is LIVE since iter-48
+(content-2, D-077): `alarm_raised` → `panic_ripple` — every witness
+of the shout gains fear (the through-the-walls law). The +10 delta
+is the CONTAGION half, a quarter of the hardcoded +40 direct spike
+(fear seen AND panic heard compound: the occupants 40 → 50, the
+cause actor 0 → 10 — he hears his own shout); the scope is un-gated
+(a shout unsettles everyone who heard it — the alarm's own
+knowledge resolution decides who that is; the adjacent-hearer half
+is structurally empty on the day-1 runs per the tune-3 static-
+placement finding, dormant until NPC movement exists). The echo
+commits at the alarm's own tick (the fear decay baseline stays
+where the alarm set it); no knowledge, no hooks (the one-hop law);
+`panic_ripple` is story-critical with its own chronicle line. The
+landing paid the corpus regen it always implied (7 fire-family
+cases re-distilled, the iter-43 precedent; the alarm case gained
+the echo's own claims — the panic event by id + the cause actor's
+fear). A pack without the `on_action` block runs
 the v0.1 reaction behavior, byte-identically on runs that fire no
 entry (TEST_PLAN §6 owns the A/B).
 
@@ -541,12 +554,6 @@ suffices.
 
 ## 11. What this spec does NOT cover (phase-3+ refinements)
 
-- The alarm panic echo as pack content (§3c): witnesses of
-  `alarm_raised` gaining fear — probed live at iter-42, reverted
-  because it fires on the phase-1 corpus's distraction-fire beats
-  (the corpus's beat anchors are committed fixtures, §8); lands as
-  its own content row with the corpus regen it implies (the
-  document_check landing's 4-case regen is the precedent, D-072).
 - The on_action grammar's `any`/`random` scope helpers and
   knowledge-bearing reactions (§3c — recorded-not-built, the
   first-consumer law).
@@ -577,6 +584,10 @@ The document_check action itself LANDED (iter-43, D-072 — the
 the full action over the `inspect` resolver, the climax flag on the
 watcher pair, and the live crowd-witness reaction — the design
 records live in `docs/DECISIONS.md` D-072 and the pack's own notes.
+The alarm panic echo LANDED next (iter-48, content-2, D-077 — the
+pre-iter-48 §11's first row): the through-the-walls law as one
+on_action entry over the standing dispatch, with the 7-case corpus
+re-distill (§3c the landing record).
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

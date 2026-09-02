@@ -51,6 +51,7 @@
     "smoke_rising": "Smoke fills {location}; it is getting hard to see.",
     "alarm_raised": "Someone shouts: fire!",
     "crowd_wary": "The room watches {target} closely.",
+    "panic_ripple": "Panic ripples through the walls of {location}.",
     "location_burned_out": "{location} burns out. Nothing will be the same here.",
     "watch_change": "{outgoing?The watch changes: {outgoing} hands the post to {incoming}.|The watch changes: {incoming} takes the post.}",
     "knowledge_transfer": "{actor} briefs {target}; knowledge passes ({fidelity}).",

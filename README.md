@@ -165,9 +165,23 @@ A/B byte-identical vs HEAD, zero corpus regen (content-6 owns the
 live driver). 943 tests green, ruff clean. Contract owner
 `docs/DIRECTOR_SPEC.md` §3d (the Alien unknown-axis conflict and the
 re-plan-on-violation refinement recorded in §11, the owner's call).
-Next: the phase-3 content rows (the alarm panic echo and the coerce/
-echo/arc drivers with their corpus regens, ambient-channel content —
-`docs/TASKS.md`) + the owner-gated set (parse-2, engine-1).
+The alarm panic echo landed iter-48 (content-2, D-077): the
+through-the-walls law LIVE as one on_action entry over the standing
+drama-3 dispatch — witnesses of `alarm_raised` gain fear
+(`panic_ripple`, +10 `status.fear` — the contagion quarter of the
+hardcoded +40 spike; the occupants compound 40→50, the cause actor
+hears his own shout 0→10), story-critical with its own chronicle
+line ("Panic ripples through the walls of Three Barrels tavern.",
+right after the shout), zero engine edits. The 7-case fire-family
+corpus re-distill paid in-iteration (the iter-43 precedent, the
+fixed-point regen runner); the day1_full 10-seed A/B 10/10
+byte-identical (the empty-backyard law — the echo's divergence is
+corpus-script-only, TEST_PLAN §6). 951 tests green, ruff clean.
+Contract owner `docs/DIRECTOR_SPEC.md` §3c.
+Next: the phase-3 driver rows (the coerce/echo/arc drivers —
+content-4/5/6, each with the corpus regen the fixed-point protocol
+now owns — and ambient-channel content-3) + the owner-gated set
+(parse-2, engine-1).
 
 ## For AI agents (primary audience)
 

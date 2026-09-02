@@ -164,10 +164,19 @@
   10-seed A/B byte-identical, zero corpus regen. The Alien
   three-axis unknown-axis conflict and the re-plan-on-violation
   refinement recorded-not-built (DIRECTOR_SPEC §11, the owner's call).
-- `content-2` · the alarm panic echo (witnesses of `alarm_raised`
-  gain fear — the through-the-walls law; the iter-42 live probe
-  reverted on the phase-1 corpus's committed anchors): lands with the
-  corpus regen it implies; the content-1 precedent.
+- `content-2` · the alarm panic echo — **done (iter-48, D-077)**: the
+  through-the-walls law LIVE as one on_action entry
+  (`alarm_raised` → `panic_ripple`, witnesses +10 `status.fear` — the
+  contagion quarter of the direct +40 spike; the occupants compound
+  40→50, the cause actor hears his own shout 0→10), story-critical
+  with its own chronicle line, zero engine edits; the 7-case
+  fire-family corpus re-distill paid in-iteration (the occupants'
+  fear claims re-pinned, the post-alarm event ids +1, the alarm case
+  gaining the echo's own claims — the panic event by id + the cause
+  actor's fear; the regen-ladder shape preserved). The day1_full
+  10-seed A/B 10/10 byte-identical (the empty-backyard law — the
+  gate script's fire never shares a room; the live divergence lives
+  in the corpus's seed-33/93 scripts, TEST_PLAN §6).
 - `content-4` · the coerce driver — the live content set for the
   landed spend door (an urgency entry or director hook carrying the
   `coerce` intent; a pack-declared status/urgency nudge joining the

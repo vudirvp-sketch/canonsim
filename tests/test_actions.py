@@ -171,7 +171,9 @@ def test_arson_chain_alarm_and_burnout(tmp_path: Path) -> None:
         "npc_guard_01", "npc_barkeep_01", "npc_drunk_01", "npc_maid_01",
     }
     assert all(c.prop == "status.fear" and c.to_ == 40 for c in alarm.state_changes)
-    assert sim.projection["npc_guard_01"]["status.fear"] == 40
+    # the folded fear: the direct spike (40) + the panic echo (+10, the
+    # through-the-walls contagion — content-2, D-077) = 50
+    assert sim.projection["npc_guard_01"]["status.fear"] == 50
     heard = {r.who for r in alarm.knowledge}
     assert heard == {"pc_01", "npc_guard_01", "npc_barkeep_01",
                      "npc_drunk_01", "npc_maid_01"}

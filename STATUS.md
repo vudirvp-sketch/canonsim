@@ -1,59 +1,44 @@
 # STATUS — canonsim
 
-Iteration: iter-47 (`iter-47-arc1-chains` — the owner's "continue
-work per the plan, quality over speed" session call; the phase-3
-backlog's top un-gated item: arc-1, P3c — arcs & tension shaping,
-the LAST engine row of the phase-3 build column) ·
+Iteration: iter-48 (`iter-48-content2-alarm-echo` — the owner's
+"continue work per the plan, quality over speed" session call; the
+phase-3 backlog's top un-gated item: content-2 — the alarm panic
+echo, the DIRECTOR_SPEC §11 first row closing, the LAST content row
+that owed a corpus regen) ·
 Phase: 3 (Director)
-**OPEN — the release-chain layer landed: named hook CHAINS as pack
-data (`director.arcs`), the drama's order finally first-class — a
-successor's beat presupposes its predecessor's, the chain's beats
-march instead of dumping, and the tension curve is shapeable by
-declaration** · Date: 2026-09-03 ·
-Scope: `director.arcs.<name>` = {members (≥2 unique declared hook
-tags, ONE-SIDED — the members list is the single owner of the fact,
-D-024; no hook key, no SeededHook/loop/schema change, no new
-events), min_gap_beats (int ≥ 2 — 1 is the budget's own law, dead
-vocabulary, refused at load)}. The ORDER law (causality, not
-pacing): a member tag is a release candidate ONLY while it is its
-arc's current member (a per-run cursor, folded state like the burn
-set, INV-2) — the chain gates ALL release paths, explicit triggers
-included (D-005's ungated-explicit law is about the CLOCK; the
-chain is pack-declared causal structure, not an intensity band —
-the design's load-bearing distinction). The GAP law (the
-tension-shaping half — pacing): the current member waits
-`min_gap_beats` after the previous member's release on the
-quiet/climax paths ONLY — explicit triggers fire mid-gap (the
-mid-rest law's twin). The ENTROPY MIRROR: instances of PASSED
-members (position < cursor — one instance released, the arc moved
-on) never release and stop counting toward entropy AND the channel
-entropies (one law, both views) — the first_time_only burn law's
-twin (one play per arc beat); current + FUTURE members count
-normally — the seeded buffer's meaning is UNCHANGED (the D-065..72
-tuned floors stay valid); a stalled arc's future members keep
-counting exactly as any permanently-blocked hook does today (no new
-hazard, recorded honestly). The cursor advances at emit-time inside
-_mark_released (the budget/cooldown law — a door rejection still
-spends the beat). Composes with channels (AND), the climax flag
-(boss = current + the climax path + gap open), options,
-first_time_only. The STALL is honest: a member that can never
-release parks the chain — the re-plan-on-violation refinement
-(Generative Agents shape) recorded-not-built (§11, the
-first-consumer law). DORMANT in the committed pack (the
-iter-38/42/45/46 pattern — NO chain declared): the 10-seed
-day1_full A/B (HEAD vs the arc machinery, a runner outside the repo
-per Rule 9) 10/10 byte-IDENTICAL, zero corpus regen; the naive
-watcher-pair chaining was probed live and REFUSED as the live
-driver (the e2e: seed 125's corpus-pinned relief release would be
-held forever by a predecessor that never fires on that run —
-content-6 needs a first member live on the runs it targets). The
-Alien three-axis unknown-axis CONFLICT (phases.md §3 sketch "may
-pace against the [knowledge] gap" vs DIRECTOR_SPEC §4 entropy law
-"observable state only, L6" — the iter-46 echo FAQ's exact fence)
-recorded in DIRECTOR_SPEC §11 for the owner to resolve, NOT
-silently. KI#66 deleted per AGENTS §5 (closed iter-45, two
-iterations past). Tests 924→943 (+19 tests/test_director.py), ruff
-clean.
+**OPEN — the alarm panic echo landed LIVE: the through-the-walls
+law as one on_action entry over the standing drama-3 dispatch —
+witnesses of `alarm_raised` gain fear, the panic contagion compounding
+on the direct spike, its own chronicle line directly after the shout;
+zero engine edits, the 7-case corpus re-distill paid in-iteration**
+· Date: 2026-09-03 ·
+Scope: `alarm_raised` → `panic_ripple` (scope `witnesses`, state
+`status.fear` +10 — the CONTAGION quarter of the hardcoded +40
+direct spike; NO gate — the alarm's own knowledge resolution decides
+who heard the shout; the adjacent-hearer half dormant per the tune-3
+static-placement finding), the event type story-critical with the
+static chronicle line "Panic ripples through the walls of
+{location}.", NO system_of_type entry (the crowd_wary precedent —
+the state changes classify it to one system, M1 untouched). The
+measured semantics: the occupants compound 40→50 (the fire seen AND
+the panic heard), the cause actor 0→10 (hears his own shout — the
+corpus's own knowledge pin made a fear fact), the echo commits at
+the alarm's own tick (the decay baseline stays — beat-360 decay
+50→46 / 10→6), the cascade terminates (no knowledge, no hooks, the
+one-hop law). The corpus regen (the fixed-point runner outside the
+repo per Rule 9, the iter-43/44 precedent): 7 fire-family cases
+re-distilled — the fear claims re-pinned 40→50 (guard_01's decayed
+36→46), the post-alarm event ids +1 (the panic insert), the alarm
+case gaining the echo's own claims (the panic event by id + the
+cause actor's fear), the regen-ladder shapes preserved
+(outgoing_guard beat 0 stays the designed blind-guard refusal). The
+day1_full 10-seed A/B (committed vs the alarm-entry-stripped
+variant) 10/10 byte-IDENTICAL — the empty-backyard law (the gate
+script's fire never shares a room; the live divergence lives in the
+corpus's seed-33/93 scripts, TEST_PLAN §6). Tests 943→951
+(+8 tests/test_panic.py; test_actions' folded-fear pin 40→50, the
+intentional world change), ruff clean. KI#67 deleted per AGENTS §5
+(closed iter-46, two iterations past).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -79,13 +64,17 @@ clean.
 
 (none open.)
 
-- KI#67 · doc drift: README.md's Status paragraph froze at iter-43
-  ("846 tests green"; the social-depth rows absent — the "Next:" line
-  still pointed at social-1/2) — the iter-44/45 doc-sync sets skipped
-  the README entirely (the KI#66 family: a count and a status restated
-  in a second place, both left stale) · opened 2026-09-03 · CLOSED
-  iter-46 (the paragraph actualized: the social-1/1b/2 landings, 924
-  green, the Next line re-aimed at the content rows).
+- KI#68 · worklog cap drift: the file held 44 entries vs the 10 cap;
+  the iter-43..47 entries each CLAIMED an eviction ("iter-NN evicted
+  per the cap") that never landed — the named entries are present
+  (the KI#62 family recurred; the claims were drift, the trim was
+  never executed) · opened 2026-09-03 · CLOSED iter-48 (trimmed to
+  the newest 10 in the same turn, per §6 "the trim is part of the
+  task"; pre-trim history lives in git, the header note actualized;
+  every future entry re-verifies the eviction actually happened).
+
+- (KI#67 deleted at iter-48 per AGENTS §5 — closed iter-46, two
+  iterations past; the lesson lives in git + the README sync law.)
 - (KI#66 deleted at iter-47 per AGENTS §5 — closed iter-45, two
   iterations past; the lesson lives in git + the KI#67 family —
   every count restated in a second place goes stale.)
@@ -316,6 +305,29 @@ clean.
   loudly at the door — the cycle is consumed, the fixed reply needs a
   fresh `say`.
 
+- **The corpus-regen protocol (iter-48 law; content-4/5/6 will need
+  it).** A content landing that shifts the event stream re-distills
+  the affected cases through the REAL mediator cycle with a
+  FIXED-POINT runner outside the repo (Rule 9; the iter-43/44 hand
+  re-pin is the manual precedent). The three laws the runner taught:
+  (1) the corpus test pins only the LAST beat's status — a beat may
+  be a DESIGNED refusal (the regen-ladder probes: outgoing_guard
+  beat 0); the reference ladder comes from the HEAD-pack green
+  replay, and convergence means the ladder SHAPE is preserved, not
+  that every beat accepts; (2) the per-beat measurements (the state
+  fold at each beat's reply gate, the event-id alignment) are
+  trustworthy only when the beat's PREDECESSORS landed their HEAD
+  statuses — a refused beat never feeds its intents, so every later
+  stream is starved until the refusal's cause is re-pinned; (3) the
+  id re-pin must be IDEMPOTENT — the alignment always maps
+  pristine-old → current-new (re-aligning a re-pinned id increments
+  it forever; the fixed point never settles). New-event claims (the
+  deliberate pins of the landing's own events) ride AFTER
+  convergence — the old-id alignment must never touch them. The
+  runner: `/home/z/my-project/scripts/iter48_regen.py` (ephemeral
+  session artifact; the laws live here, the runner's shape in
+  worklog iter-48).
+
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
   (L13/L14). Build clauses: `docs/blueprint/phase0.md` §1/§2/§6.
@@ -454,18 +466,20 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36..47 — the pacing clock D-065 + the
+**Phase 3 is OPEN (iter-36..48 — the pacing clock D-065 + the
 exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's three layers D-069/D-070/
 D-071 + the document_check content set D-072 + the secrets &
 leverage fact clusters D-073 + the coerce door D-074 + the
-psychological echo D-075 + the release-chain layer D-076 landed —
-the phase-3 build column's ENGINE side is complete: stagnation
-detector, complication buffer, arcs. What remains of phase 3 is
-CONTENT (the live drivers) + the gate.)** The phase-3 remainder in
+psychological echo D-075 + the release-chain layer D-076 + the
+alarm panic echo D-077 landed — the phase-3 build column's ENGINE
+side is complete: stagnation detector, complication buffer, arcs;
+the content rows: the alarm echo is LIVE, its corpus regen paid.
+What remains of phase 3 is the DRIVER rows (content-4/5/6 — each
+shifting the substantive stream, the fixed-point regen protocol
+now proven) + content-3 + the gate.)** The phase-3 remainder in
 `docs/TASKS.md`'s backlog: the content rows, each as its own
-iteration on the documented design — `content-2` (the alarm panic
-echo, with its corpus regen — the content-1 precedent),
+iteration on the documented design —
 `content-4` (the coerce driver), `content-5` (the echo driver),
 `content-6` (the arc driver — NOT the naive watcher-pair chaining:
 the D-076 e2e showed a never-firing predecessor holds the
@@ -477,16 +491,17 @@ deliberate divergence (the check fires on the runs that reach the
 confrontation — 1/10 day1_full seeds; the corpus's seed-93 script
 fires), and social-1 adds the second (the same 1/10 hot seed mints
 the leverage facts — the same steal failure drives both), while the
+content-2 echo is corpus-script-only (the day1_full A/B 10/10
+byte-identical — the empty-backyard law) and the
 clock/channel/weight/arc layers stay inert on day1_full (every run
 ends in PEAK — a measurable pacing delta needs a gate-protocol
 script set that walks the world into quiet; recorded in D-066, a
 phase-gate question, not forced).
 
 1. **Phase-3 remainder** (TASKS backlog): the content rows
-   (`content-2` the alarm echo with its corpus regen; `content-4`
-   the coerce driver; `content-5` the echo driver; `content-6` the
-   arc driver; `content-3` ambient-channel) → then the phase-3→4
-   gate (DECISIONS 42/30 collapse + the FAQ trim owed per the
+   (`content-4` the coerce driver; `content-5` the echo driver; `content-6`
+   the arc driver; `content-3` ambient-channel) → then the phase-3→4
+   gate (DECISIONS 43/30 collapse + the FAQ trim owed per the
    KI#64 note + TASKS/phases over-cap trims — all recorded as owed
    at the gate).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +

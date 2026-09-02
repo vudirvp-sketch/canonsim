@@ -406,9 +406,10 @@ each entry the witnesses scope (the event's own knowers — the named
 CANDIDATE as the explicit ctx argument, no entity field in the spec)
 + the alarm-shaped state change (one event per entry, clamped
 deltas, no knowledge and no hooks); the one-hop lint terminates the
-cascade; the pack's declaration is dormant on document_check (the
-iter-38 climax-flag pattern — the live alarm echo reverts to
-DIRECTOR_SPEC §11 on the phase-1 corpus's committed anchors). The
+cascade; the pack's live declarations: the document_check crowd
+reaction (iter-43, D-072) and the alarm panic echo (iter-48,
+content-2, D-077 — the reverted iter-42 probe landed with its
+7-case corpus re-distill). The
 `any`/`random` scope helpers stay recorded-not-built (the
 first-consumer law).**
 
