@@ -309,3 +309,25 @@ corpus re-distill (the fixed-point runner, identity-proved first —
 silent_second tail re-pin (crowd_wary → coerce) + the deliberate
 spend claims on outgoing_guard beat0, zero ladder flips; 4 seed-93
 corpus cases see the coercion.
+
+Re-measured at iter-50 (engine-2, D-079 — the urgency-roll stream
+split): two arms. The FLIP arm (HEAD vs the split, the one-time
+migration's honest measure): 0/10 byte-identical — every seed
+diverges at the beat-720 region, the checks shift by the removed
+draws (fingerprints 15→6 / 17→10 / 20→14 / 38→11 / 35→13: the
+urgency draws left the substantive stream and the flipped ladders
+changed the downstream draw counts); seed 125's doccheck ladder
+flips (intent_rejected → document_check_failed — the confrontation
+now passes its check). The ADD-SAFETY arm (the iter-49 refused
+scenario rehabilitated: an ADDED p=40 entry, silent by gate): 10/10
+byte-identical — the per-entry streams decouple the rolls from the
+checks AND from each other. The single shared urgency stream was
+measured FIRST and refused: 4/10 byte-identical (the added entry
+shifts the later beats' roll positions — the maid's urgency stops
+firing; the entries couple by draw position). The corpus
+migration: 2 narrator cases (the flee-pursuit check flipped; one
+case migrates to the refusal family — its caught-fleeing knowledge
+claims die with the vanished flee_caught event) + 1 parse pin (the
+s7 wait-720 batch 15→14) + 2 unit seed re-probes, through the
+identity-proved fixed-point runner (105/105 zero-change on the
+unshifted stream, the runner rebuilt per the FAQ laws).

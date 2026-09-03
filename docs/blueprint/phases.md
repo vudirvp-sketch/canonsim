@@ -437,8 +437,15 @@ urgency entry re-armed as the coerce carrier — the replacement law
 (the slot and weight stay, so the per-beat draw count and every
 later check draw's position stay — the corpus's designed ladders
 hold; an ADDED entry was measured to flip 3 of them — the urgency
-rolls share the substantive stream with the checks, the engine-2
-stream split is the owner's recorded call); 4 seed-93 corpus cases
+rolls then shared the substantive stream with the checks, resolved
+by **engine-2 — landed iter-50 (D-079): the per-entry urgency
+streams `urgency:<npc>:<kind>`** (content-addressed, pack-linted
+unique, lazily registered, the `assure` nesting law reworked for
+the family — an added or removed entry shifts neither a later check
+draw nor another entry's rolls; add-safety 10/10 day1_full
+byte-identical, the single shared stream measured and refused at
+4/10 — the entries couple by draw position; the one-time migration
+flip paid: 2 corpus cases + 1 parse pin)); 4 seed-93 corpus cases
 see the spend (the deliberate pins: the coerce by id + the
 subject's pair axes), the live-fire tests run on the committed
 pack, the expired card's door rejection is the world's honest

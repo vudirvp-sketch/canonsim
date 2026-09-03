@@ -493,10 +493,12 @@ fires three pieces in order, each through the commit door (D-037):
    event (or run start). Injury has `auto_decay: 0` — never decays
    (T4 holds; only a counter-event can change it).
 2. **Urgencies** (`core/urgencies.py`, P2b): per-NPC goal rolls
-   (`probability_per_beat` against the substantive stream). A hit
-   that passes the preconditions yields an IntentData enqueued as
-   `kind="intent"` band `NPC_REACTION`. A roll that hits but
-   preconditions fail stays silent — the NPC tried, the world said
+   (`probability_per_beat`, each entry on its own `urgency:<npc>:<kind>`
+   stream — engine-2, D-079: stream-isolated from the checks and from the
+   other entries, so pack urgency growth shifts no draw positions). A
+   hit that passes the preconditions yields an IntentData enqueued as
+   `kind="intent"` band `NPC_REACTION`. A roll that hits but fails
+   preconditions stays silent — the NPC tried, the world said
    no (no rejection event; the world's noise floor absorbs it).
 3. **Director releases**: explicit triggers first, then the climax
    path (DIR-3 — the boss gate), then the quiet path (the stagnation

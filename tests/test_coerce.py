@@ -312,15 +312,16 @@ def test_the_urgency_gate_is_silent_without_facts() -> None:
     """The beat gate on the COMMITTED driver (content-4): the drunkard's
     roll hits, sees no live fact, and stays SILENT (the world's noise
     floor — no rejection event); the same roll with a live fact enqueues
-    the coerce. RngBank(7)'s first substantive draw is a hit (probed),
-    so the gate — not the dice — is the only filter here."""
+    the coerce. RngBank(4)'s first urgency-stream draw is a hit
+    (21 <= 40, re-probed at engine-2 — the rolls left the substantive
+    stream), so the gate — not the dice — is the only filter here."""
     state = initial_projection(PACK.entities)
     state["npc_drunk_01"]["position"] = "loc_tavern"
     state["pc_01"]["position"] = "loc_tavern"
-    silent = urgency_intents(PACK, state, RngBank(7), facts=())
+    silent = urgency_intents(PACK, state, RngBank(4), facts=())
     assert not any(i.kind == "coerce" for i in silent)
     armed = urgency_intents(
-        PACK, state, RngBank(7), facts=(_fact("npc_drunk_01", "pc_01"),)
+        PACK, state, RngBank(4), facts=(_fact("npc_drunk_01", "pc_01"),)
     )
     coerces = [i for i in armed if i.kind == "coerce"]
     assert len(coerces) == 1

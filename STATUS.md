@@ -1,50 +1,43 @@
 # STATUS — canonsim
 
-Iteration: iter-49 (`iter-49-content4-coerce-driver` — the owner's
-"continue work per the plan, quality over speed" session call; the
-phase-3 backlog's top un-gated item: content-4 — the coerce driver,
-social-1b's live content set) ·
+Iteration: iter-50 (`iter-50-engine2-stream-split` — the owner's
+"quality over speed" fork call: the engine-2 row's owner-gate
+resolved by the session directive — spend the iteration now, buy
+the permanent add-safety; the content-5 fork "replacement law vs
+engine-2 first" taken the quality way) ·
 Phase: 3 (Director)
-**OPEN — the drunkard's urgency entry re-armed as the coerce carrier:
-the roll is the same draw, the leverage gate decides emission; the
-committed content set is LIVE (4 seed-93 corpus cases see him play his
-card), zero engine edits, the corpus regen paid in-iteration through
-the rebuilt fixed-point runner (identity-proved first)** ·
+**OPEN — the urgency rolls split onto PER-ENTRY streams
+`urgency:<npc>:<kind>` (content-addressed, pack-linted unique,
+lazily registered; the `assure` nesting law reworked for the
+family): an added or removed entry shifts neither a later check
+draw NOR another entry's rolls — the add-safety A/B (the iter-49
+refused scenario, an added p=40 entry silent by gate) 10/10
+day1_full byte-identical; the single shared urgency stream was
+measured FIRST and refused (4/10 — the entries couple by draw
+position)** ·
 Date: 2026-09-03 ·
-Scope: the REPLACEMENT law (the entry keeps its slot and 2-in-5
-weight — the per-beat draw COUNT is unchanged, so the checks
-downstream keep their draw positions and the corpus's designed
-ladders hold; an ADDED entry was measured and REFUSED: 3 flipped
-check ladders, the document_check fail branch — the corpus's only pin
-of it — among them; the engine-side stream split recorded-not-built,
-the engine-2 infra row, the owner's call). The regen: the runner
-rebuilt outside the repo per Rule 9, its soundness PROVED by the
-identity check (105 cases, the pristine corpus its own fixed point,
-zero false re-pins) before touching the shifted stream; the corpus
-re-distill = the doccheck case's 2 id re-pins (the idle-wait
-disappearance), the silent_second tail re-pin (crowd_wary → coerce —
-the spend lands inside the final door batch), and the deliberate
-pins on outgoing_guard beat0 (the coerce event by id + pc_01's pair
-axes trust 25 / fear 75 — the landing's own claims, the iter-48
-pattern; 4 corpus cases coerce: doccheck, outgoing_guard,
-caught_at, silent_second). The day1_full 10-seed A/B: 2/10
-byte-identical (15, 85 — the drunkard's roll misses), the divergence
-on the rest = exactly the drunkard's idle waits gone + seed 125's two
-expired-card door rejections (the cluster dies at 729 between the
-beat-720 gate pass and the door's re-read — the tick-window law live
-on day1_full, zero outcome flips). The live-fire tests moved onto
-the committed pack (the armed_pack append pattern retired; the
-shrunk-expiry window probe keeps a minimal copy); the world-change
-pins re-pinned: test_leverage's boundary count 5→4 (the drunkard's
-cluster spent before its expiry) + the births A/B filtering the
-coerce (the facts' first runtime consumer rides the cluster), the
-urgency tests' seeds re-probed (the maid carries the plain-roll
-pins now), the parse corpus's wait-720 count 16→15. Tests
-951→952 (+1 corpus pin test, the module totals re-balanced), ruff
-clean. D-078; TASKS (content-4 done, engine-2 opened), TEST_PLAN §6,
-phases.md §3, DECISIONS D-078 appended, README synced, the FAQ regen
-entry actualized with the iter-49 laws, worklog trimmed to cap
-(iter-40 evicted, verified present-tense).
+Scope: `core/rng.py` (the family law: lazy registration for
+`urgency:*`, the nesting guard, `urgency_stream_name`),
+`core/urgencies.py` (the roll under the entry's own assured
+stream), `core/pack.py` (the (npc, kind) uniqueness lint — the
+stream-name injectivity). The one-time migration flip paid
+in-iteration (the 0/10 flip A/B: the checks shift by the removed
+draws; seed 125's doccheck ladder flips, the fingerprints drop
+15→6/17→10/20→14/38→11/35→13): 2 narrator corpus cases re-distilled
+(the flee-pursuit check flipped — one case migrates to the refusal
+family: its caught-fleeing knowledge claims die with the vanished
+flee_caught event, the deliberate `token_absent` needle), 1 parse
+pin (the s7 wait-720 batch 15→14 — the maid's roll draws its own
+stream now), 2 unit seed re-probes (the coerce gate seed 7→4, the
+KI#17 playscript-order seed 2→3), all through the identity-proved
+fixed-point runner (105/105 zero-change on the unshifted stream,
+rebuilt per the FAQ laws; the write-back lesson recorded there).
+Tests 952→959 (+4 bank-family laws, +2 stream-split laws, +1
+duplicate-pair lint), ruff clean. D-079; TASKS (engine-2 done,
+content-5/6 relieved of the stream-shift regen), TEST_PLAN §6,
+BLUEPRINT RNG-1 + phase0 §1, DIRECTOR_SPEC §7, README, the FAQ
+actualized, worklog trimmed to cap (iter-40 evicted, verified
+present-tense).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -311,7 +304,7 @@ entry actualized with the iter-49 laws, worklog trimmed to cap
   loudly at the door — the cycle is consumed, the fixed reply needs a
   fresh `say`.
 
-- **The corpus-regen protocol (iter-48 law, actualized iter-49;
+- **The corpus-regen protocol (iter-48 law, actualized iter-49/50;
   content-5/6 will need it).** A content landing that shifts the event
   stream re-distills the affected cases through the REAL mediator
   cycle with a FIXED-POINT runner outside the repo (Rule 9; the
@@ -341,15 +334,28 @@ entry actualized with the iter-49 laws, worklog trimmed to cap
   matched the pristine truth is the case's own wrongness (the refusal
   family), and an id re-pin follows the pristine referent's role so
   the type mismatch reproduces; (6) **the draw-count coupling is the
-  regen's hard edge** — an ADDED urgency entry shifts every later
-  check draw and flips designed ladders (3 cases at one entry; the
+  regen's hard edge** — an ADDED urgency entry shifted every later
+  check draw and flipped designed ladders (3 cases at one entry; the
   doccheck fail branch — the corpus's only pin — would have been
-  LOST, not re-pinned); re-arm an existing entry instead (the
-  replacement law — content-4), or land the stream split first
-  (engine-2, the owner's call). The runner:
-  `/home/z/my-project/scripts/iter49_regen.py` (ephemeral session
+  LOST, not re-pinned); engine-2 LANDED (iter-50, D-079): the
+  per-entry urgency streams remove this coupling entirely — an
+  added/removed entry shifts no check draw and no other entry's
+  rolls; a landing's regen now covers only its OWN events. The
+  iter-50 runner laws: (7) **re-pin writes must land in the
+  FIXTURE, not just the applied reply** — `_resolve_anchors` (and
+  any deep copy) REBUILDS the reply document, so the re-pinned claims
+  must be written back into the fixture's own beats (the identity
+  check on HEAD cannot catch a missing write-back: nothing re-pins
+  on an unshifted stream — the corpus test green after the write is
+  the only verdict); (8) **a measured-and-refused intermediate
+  design never lands in the fixtures** — when a landing candidate is
+  reworked mid-iteration (engine-2's single shared stream, refused
+  at 4/10), the migration re-runs from the PRISTINE fixture, never
+  from the refused candidate's output (a second pass over re-pinned
+  claims would misread them as designed wrongness). The runner:
+  `/home/z/my-project/scripts/iter50_regen.py` (ephemeral session
   artifact; the laws live here, the runner's shape in worklog
-  iter-49).
+  iter-50).
 
 - **Where the code-quality bar lives (D-031).** Law: AGENTS §4+§9
   (invariants, canon-write privilege, DoD). Constitution: BLUEPRINT §2
@@ -489,42 +495,41 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36..48 — the pacing clock D-065 + the
+**Phase 3 is OPEN (iter-36..50 — the pacing clock D-065 + the
 exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's three layers D-069/D-070/
 D-071 + the document_check content set D-072 + the secrets &
 leverage fact clusters D-073 + the coerce door D-074 + the
 psychological echo D-075 + the release-chain layer D-076 + the
-alarm panic echo D-077 landed — the phase-3 build column's ENGINE
-side is complete: stagnation detector, complication buffer, arcs;
-the content rows: the alarm echo is LIVE, its corpus regen paid.
-What remains of phase 3 is the DRIVER rows (content-4/5/6 — each
-shifting the substantive stream, the fixed-point regen protocol
-now proven) + content-3 + the gate.)** The phase-3 remainder in
-`docs/TASKS.md`'s backlog: the content rows, each as its own
-iteration on the documented design —
-`content-4` (the coerce driver), `content-5` (the echo driver),
+alarm panic echo D-077 + the coerce driver D-078 + the urgency
+stream split D-079 landed — the phase-3 build column's ENGINE side
+is complete, and the CONTENT rows' stream-shift tax is paid off:
+content landings regen only their own events now. What remains of
+phase 3 is the DRIVER rows (content-5/6) + content-3 + the gate.)**
+The phase-3 remainder in `docs/TASKS.md`'s backlog: the content
+rows, each as its own iteration on the documented design —
+`content-5` (the echo driver — an added urgency entry is now
+stream-safe; the regen covers only the landing's own events),
 `content-6` (the arc driver — NOT the naive watcher-pair chaining:
 the D-076 e2e showed a never-firing predecessor holds the
 corpus-pinned successor forever; the driver needs a first member
 live on the runs it targets), `content-3` (ambient-channel
 content). The dir-2/dir-4/drama-1/2/3 measurement's honest finding
 STANDS SUPERSEDED in part: the document_check landing is the first
-deliberate divergence (the check fires on the runs that reach the
-confrontation — 1/10 day1_full seeds; the corpus's seed-93 script
-fires), and social-1 adds the second (the same 1/10 hot seed mints
-the leverage facts — the same steal failure drives both), while the
-content-2 echo is corpus-script-only (the day1_full A/B 10/10
-byte-identical — the empty-backyard law) and the
-clock/channel/weight/arc layers stay inert on day1_full (every run
-ends in PEAK — a measurable pacing delta needs a gate-protocol
-script set that walks the world into quiet; recorded in D-066, a
-phase-gate question, not forced).
+deliberate divergence (1/10 day1_full seeds; the corpus's seed-93
+script fires), social-1 adds the second (the same 1/10 hot seed
+mints the leverage facts), the content-2 echo is corpus-script-only
+(the empty-backyard law), the clock/channel/weight/arc layers stay
+inert on day1_full (every run ends in PEAK — a measurable pacing
+delta needs a gate-protocol script set that walks the world into
+quiet; recorded in D-066, a phase-gate question, not forced), and
+engine-2's flip is the third deliberate divergence (0/10 — the
+one-time migration; the corpus fixed point recorded).
 
 1. **Phase-3 remainder** (TASKS backlog): the content rows
-   (`content-4` the coerce driver; `content-5` the echo driver; `content-6`
-   the arc driver; `content-3` ambient-channel) → then the phase-3→4
-   gate (DECISIONS 43/30 collapse + the FAQ trim owed per the
+   (`content-5` the echo driver; `content-6` the arc driver;
+   `content-3` ambient-channel) → then the phase-3→4
+   gate (DECISIONS 44/30 collapse + the FAQ trim owed per the
    KI#64 note + TASKS/phases over-cap trims — all recorded as owed
    at the gate).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +

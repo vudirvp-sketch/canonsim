@@ -27,7 +27,13 @@ from core.log import (
 )
 from core.pack import PackError, load_pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, EventQueue
-from core.rng import COSMETIC, SUBSTANTIVE, RngBank, RngError
+from core.rng import (
+    COSMETIC,
+    SUBSTANTIVE,
+    RngBank,
+    RngError,
+    urgency_stream_name,
+)
 
 REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
@@ -70,6 +76,66 @@ def test_assure_rejects_nested_foreign_stream() -> None:
         with bank.assure(SUBSTANTIVE):
             with bank.assure(COSMETIC):
                 pass
+
+
+def test_assure_urgency_family_nests_inside_substantive_scope() -> None:
+    """engine-2 (D-079): an urgency-family stream (per-entry,
+    content-addressed `urgency:<npc>:<kind>`) may shadow the assured run
+    scope — the per-beat goal rolls are canon-relevant but
+    stream-isolated PER ENTRY, so pack urgency growth shifts neither a
+    later check draw (the iter-49 measurement flipped 3 corpus ladders
+    when the rolls shared the substantive stream) nor another entry's
+    rolls. The draws count on the entry's stream; the substantive
+    counter — the T1 fingerprint — is untouched; the active stream
+    restores on scope exit."""
+    entry = urgency_stream_name("npc_maid_01", "wait")
+    bank = RngBank(42)
+    with bank.assure(SUBSTANTIVE):
+        bank.randint(1, 6)  # a check draws
+        with bank.assure(entry):
+            assert bank.active == entry
+            bank.randint(1, 100)
+            bank.randint(1, 100)
+        assert bank.active == SUBSTANTIVE
+        bank.randint(1, 6)  # the checks resume on their own stream
+    assert bank.count(entry) == 2
+    assert bank.count(SUBSTANTIVE) == 2
+    assert bank.fingerprint == 2
+
+
+def test_assure_rejects_substantive_inside_urgency_scope() -> None:
+    """The reverse nesting is a bug, not a feature: a substantive draw
+    inside an urgency scope would put canon checks on the wrong stream —
+    the family law allows exactly one pairing."""
+    bank = RngBank(42)
+    with pytest.raises(RngError, match="cannot assure"):
+        with bank.assure(urgency_stream_name("npc_maid_01", "wait")):
+            with bank.assure(SUBSTANTIVE):
+                pass
+
+
+def test_urgency_streams_register_lazily_and_derive_per_seed() -> None:
+    """The per-entry streams register on first use (content-derived,
+    never hand-written); the derivation is the standard stream law
+    (INV-2): per (seed, name), distinct from substantive and cosmetic,
+    reproducible; a typo outside the family stays loud."""
+    entry = urgency_stream_name("npc_drunk_01", "coerce")
+    bank = RngBank(42)
+    assert bank.peek(entry) != bank.peek(SUBSTANTIVE)
+    assert bank.peek(entry) != bank.peek(COSMETIC)
+    assert RngBank(42).peek(entry) == RngBank(42).peek(entry)
+    assert RngBank(42).peek(entry) != RngBank(43).peek(entry)
+    with pytest.raises(RngError, match="unknown stream"):
+        bank.peek("urgencyy:typo")  # outside the family — the tripwire
+
+
+def test_urgency_stream_name_is_content_addressed() -> None:
+    """The name builder is the single owner of the naming grammar:
+    `urgency:<npc>:<kind>` — the pack lint's (npc, kind) uniqueness makes
+    it injective, so one entry = one stream."""
+    assert urgency_stream_name("npc_maid_01", "wait") == "urgency:npc_maid_01:wait"
+    assert urgency_stream_name("a", "b") != urgency_stream_name("a", "c")
+    assert urgency_stream_name("a", "b") != urgency_stream_name("b", "a")
 
 
 def test_audit_passes_without_draws_and_fails_with_them() -> None:
@@ -359,6 +425,21 @@ def test_pack_lint_catches_phase_gap(tmp_path: Path) -> None:
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="time rules"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_duplicate_urgency_pair(tmp_path: Path) -> None:
+    """engine-2 (D-079): the (npc, intent.kind) pair addresses the entry's
+    roll stream — a duplicate puts two entries on one stream and couples
+    their draws; the lint refuses it at load."""
+
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        entry = dict(rules["urgencies"]["entries"][1])  # the maid's wait
+        rules["urgencies"]["entries"].append(entry)
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="duplicate urgency"):
         load_pack(_broken_pack(tmp_path, mutate))
 
 

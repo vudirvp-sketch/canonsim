@@ -17,6 +17,45 @@
 ---
 ---
 ---
+iter-50 · 2026-09-03 · engine-2 — the urgency-roll stream split,
+per-entry streams (iter-50-engine2-stream-split; the owner's
+"quality over speed" fork call — the engine-2 row's owner-gate
+resolved by the session directive)
+- core/rng.py: the urgency family — per-entry streams
+  `urgency:<npc>:<kind>` (content-addressed via urgency_stream_name,
+  lazily registered — the closed-set tripwire survives outside the
+  family), the assure nesting law reworked (a family stream may
+  shadow the assured substantive run scope, nothing else nests);
+  core/urgencies.py: the roll under the entry's own assured stream;
+  core/pack.py: the (npc, kind) uniqueness lint (the stream-name
+  injectivity). The single SHARED urgency stream was measured first
+  and REFUSED: the add-safety A/B 4/10 — the entries couple by draw
+  position (the added entry's per-beat draw shifts every later
+  roll); the per-entry design re-measured 10/10 byte-identical (the
+  iter-49 refused scenario: an added p=40 entry, silent by gate).
+- The one-time migration flip paid in-iteration (the flip A/B 0/10:
+  the checks shift by the removed draws; fingerprints 15→6 / 35→13;
+  seed 125's doccheck ladder flips): the corpus re-distill through
+  the rebuilt fixed-point runner (identity-proved FIRST on the
+  unshifted stream — 105/105 zero-change; the write-back law and
+  the pristine-restart law recorded in the FAQ, iter-50 items 7-8):
+  2 narrator cases (the flee-pursuit check flipped; one migrates to
+  the refusal family — the caught-fleeing knowledge claims die with
+  the vanished flee_caught event, the deliberate token_absent
+  needle) + 1 parse pin (s7's wait-720 batch 15→14) + 2 unit seed
+  re-probes (coerce gate 7→4, KI#17 order 2→3).
+- +7 tests (4 bank-family laws + 2 stream-split laws incl. the
+  e2e add-safety byte-identity with the check AFTER the beats + the
+  duplicate-pair lint), tests 952→959, ruff clean. D-079; TASKS
+  (engine-2 done, content-5/6 relieved of the stream-shift regen),
+  TEST_PLAN §6, BLUEPRINT RNG-1 + phase0 §1, DIRECTOR_SPEC §7,
+  README, STATUS (header + FAQ laws 7-8 + Next step), this file
+  synced. 11 files — over the 3-5 soft limit: the corpus migration
+  + the doc-sync law (§6 same-turn, the iter-43..49 precedent).
+  DECISIONS transiently 45/30 kept per §6.1 (the landing record is
+  substance; the collapse owes at the phase-3→4 gate, the KI#64
+  note). iter-40 evicted per the cap — verified in this edit.
+
 iter-49 · 2026-09-03 · content-4 — the coerce driver, the
 drunkard's roll re-armed (iter-49-content4-coerce-driver; the owner's
 "continue work per the plan, quality over speed" session call, the
@@ -311,25 +350,3 @@ plans" call, the phase-3 backlog's top un-gated item)
   substance, the iter-40 precedent; 0 filler added); drama-3 is the
   remainder. iter-33 evicted per the cap.
 ---
-iter-40 · 2026-09-01 · drama-1 — the event grammar's predicate +
-weight layer (iter-40-drama1-predicates; the owner's "continue work
-per the plans" call, the phase-3 backlog's top un-gated item)
-- core/predicates.py (NEW): the JSON predicate grammar over the
-  projection — the 3 v0.1 leaf kinds byte-identical, compound
-  all/any/not + the implicit-AND list root, the generalized `prop`
-  leaf; loud ValueError backstop, pack lint owns load-time shape.
-- core/director.py + pack.py lint + rules.json: triggers delegate to
-  the evaluator; `weight` accepts the multiplier object {base,
-  modifiers[{add|factor, when}]} — entropy + channel entropies read
-  the EFFECTIVE weight per beat (beat_tick threaded);
-  `first_time_only` burns the tag after its first release (burned
-  instances never release, never count toward entropy).
-- The vigil hook instantiates the escalation modifier + burn flag
-  live — T1/T8/corpus byte-identical, a 10-seed grammar-vs-flat A/B
-  10/10 byte-identical (TEST_PLAN §6; a runner outside the repo per
-  Rule 9). Tests 757→794 (+24 tests/test_predicates.py + 13
-  test_director.py), ruff clean. D-069; DIRECTOR_SPEC §3/§3a the
-  contract owner (335/300 kept by §6.1 — the grammar tables are
-  substance; TASKS 649/600 the iter-39 substance precedent); the
-  remainder (options, on_action dispatch, ctx iterators) split to
-  drama-2/drama-3 backlog rows. iter-32 evicted per the cap.

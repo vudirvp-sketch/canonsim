@@ -199,21 +199,22 @@
 - `content-5` · the echo driver — the live content set for the landed
   residue gate (an urgency entry or action carrying `echo_at_least` —
   the jittery-watcher beat, the residue visibly driving behavior on
-  the committed runs): lands with the corpus regen it implies (the
-  content-4 lesson — an ADDED urgency entry shifts every later check
-  draw; re-arm an existing entry instead, the replacement law, or land
-  `engine-2` first); the iter-46
-  live-fire tests on crafted copies carry the mechanism proof until
-  then.
+  the committed runs): engine-2 landed (iter-50, D-079), so an ADDED
+  entry no longer shifts the checks or the other entries' rolls — the
+  corpus regen now covers only the landing's own events (the iter-48
+  scale, not the 105-case flip); the replacement law is retired as a
+  REQUIREMENT (a re-arm stays available when the table's semantics
+  prefer it); the iter-46 live-fire tests on crafted copies carry the
+  mechanism proof until then.
 - `content-6` · the arc driver — the live content set for the landed
   chain layer (a `director.arcs` declaration over hooks that actually
   co-release on the committed runs — NOT the naive watcher-pair
   chaining: the D-076 e2e probe showed the corpus-pinned relief
   release is held forever by a predecessor that never fires on seed
   125; the driver needs a chain whose first member is live on the
-  runs it targets): lands with the corpus regen any release-stream
-  change implies (the content-4/5 law); the iter-47 mutated-pack
-  tests carry the mechanism proof until then.
+  runs it targets): same engine-2 relief — the regen covers only the
+  landing's own events; the iter-47 mutated-pack tests carry the
+  mechanism proof until then.
 - `content-3` · ambient-channel content (the declared dimension, no
   hook carries it): its own row — social-1 landed without it (the
   fact-cluster work was not hook content, the iter-44 call).
@@ -348,18 +349,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Infra backlog (pick by need)
 
-- `engine-2` (owner-gated) the urgency-roll stream split — the
-  INV-2-adjacent decoupling the iter-49 measurement exposed: urgency
-  rolls share the substantive stream with the checks, so ANY added
-  urgency entry shifts every later check draw (the corpus's designed
-  ladders flip — 3 cases at one entry, the doccheck fail branch lost).
-  The replacement law (re-arm an existing entry) covers content-4/5
-  per-drivers; the general fix — a third named stream (the `assure`
-  scoping law reworked) — pays a one-time corpus migration flip (the
-  checks shift by the removed draws) and buys permanent add-safety for
-  future urgency growth. The owner's call: land it before the pack's
-  urgency table grows past its three slots, or keep the replacement
-  discipline as the content law.
+- `engine-2` · the urgency-roll stream split — **done (iter-50,
+  D-079)**: the owner's "quality over speed" fork call. Per-entry
+  streams `urgency:<npc>:<kind>` (content-addressed, pack-linted
+  unique, lazily registered, the assure nesting law reworked for the
+  family); the single shared stream was measured and refused (the
+  entries couple by draw position). Add-safety 10/10 day1_full
+  byte-identical on the iter-49 refused scenario; the one-time flip
+  paid (0/10, 2 corpus cases + 1 parse pin + 2 seed re-probes).
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
   Python).
 - `qa-1` mypy --strict on `core/` (owner-approval-gated: dev tooling is

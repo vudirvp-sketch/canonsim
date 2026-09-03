@@ -6241,7 +6241,7 @@
      "BEAT claims: 7 supported",
      "BEAT intents: 1 fed, 0 withdrawn"
     ],
-    "last_event_type": "flee_caught"
+    "last_event_type": "flee"
    }
   },
   {
@@ -6306,13 +6306,13 @@
         {
          "kind": "event",
          "event_id": "ev_0040",
-         "type": "flee_caught"
+         "type": "flee"
         },
         {
          "kind": "state",
          "entity": "pc_01",
          "prop": "position",
-         "value": "loc_tavern"
+         "value": "loc_street"
         },
         {
          "kind": "state",
@@ -6342,11 +6342,11 @@
     }
    ],
    "expect": {
-    "status": "accepted",
+    "status": "regen",
     "notes_contains": [
-     "BEAT claims: 6 supported"
+     "token_absent"
     ],
-    "last_event_type": "flee_caught"
+    "last_event_type": "flee"
    }
   }
  ]

@@ -1189,6 +1189,7 @@ class _Lint:
         npc_ids = _ids(entities["npcs"])
         actions = {a["intent"]: a for a in self._data["actions.json"]["actions"]}
         ticks_per_day = rules["time"]["ticks_per_day"]
+        seen_pairs: set[tuple[str | None, str | None]] = set()
         _require(
             isinstance(config.get("beat_ticks"), list)
             and all(
@@ -1213,6 +1214,18 @@ class _Lint:
                 and intent.get("kind") in actions,
                 f"{where}: intent.kind must name a pack action",
             )
+            # engine-2 (D-079): the (npc, kind) pair addresses the entry's
+            # roll stream `urgency:<npc>:<kind>` — a duplicate pair would
+            # put two entries on one stream and couple their draws
+            # (exactly what the per-entry split exists to prevent)
+            pair = (entry.get("npc"), intent.get("kind"))
+            _require(
+                pair not in seen_pairs,
+                f"{where}: duplicate urgency (npc, intent.kind) {pair} — "
+                f"one goal per NPC per verb (the roll stream is "
+                f"content-addressed, engine-2)",
+            )
+            seen_pairs.add(pair)
             for key in ("target", "fields"):
                 if key in intent:
                     if key == "target" and not isinstance(intent[key], str):

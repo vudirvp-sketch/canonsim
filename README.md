@@ -183,9 +183,9 @@ urgency entry re-armed as the coerce carrier — the REPLACEMENT law
 (the slot and the 2-in-5 weight stay, so the per-beat draw count
 and every later check draw's position stay: the corpus's designed
 ladders hold, where an ADDED entry was measured to flip 3 of them —
-the urgency rolls share the substantive stream with the checks; the
-engine-side stream split is the owner's recorded call, the engine-2
-infra row). The committed content set is LIVE: 4 seed-93 corpus
+the urgency rolls then shared the substantive stream with the checks;
+the engine-side stream split resolved this at iter-50, engine-2,
+D-079). The committed content set is LIVE: 4 seed-93 corpus
 cases see the drunkard play his card (the spend claimable by id +
 the subject's pair axes trust 25 / fear 75 as the deliberate pins,
 the iter-48 pattern; the silent_second case's tail IS the spend),
@@ -198,10 +198,29 @@ tick-window law live, zero outcome flips). 952 tests green, ruff
 clean. The landing is pack data over iter-45's standing door — no
 DIRECTOR_SPEC surface (the urgency table's own notes + TASKS
 content-4 carry the contract).
+The urgency-roll stream split landed iter-50 (engine-2, D-079 — the
+owner's "quality over speed" fork call resolving the engine-2 row):
+each pack urgency entry rolls d100 on its OWN content-addressed
+stream `urgency:<npc>:<kind>` (lazily registered, pack-linted unique
+per (npc, kind)), nested inside the run's assured substantive scope
+— the `assure` nesting law reworked for the family. An added or
+removed entry now shifts NEITHER a later check draw NOR another
+entry's rolls: the add-safety A/B (the iter-49 refused scenario —
+an added p=40 entry, silent by gate) is 10/10 day1_full
+byte-identical; the single shared urgency stream was measured first
+and REFUSED (4/10 — the entries couple by draw position). The
+one-time migration flip paid in-iteration (the 0/10 flip A/B: the
+checks shift by the removed draws, seed 125's doccheck ladder
+flipping with them): 2 narrator corpus cases re-distilled (the
+flee-pursuit check flipped — one case migrates to the refusal
+family honestly) + 1 parse pin (the s7 wait-720 batch 15→14) + 2
+unit seed re-probes, all through the identity-proved fixed-point
+runner. 959 tests green, ruff clean. Contract owner
+`core/rng.py` (the stream family law) + D-079.
 Next: the phase-3 driver rows (the echo/arc drivers — content-5/6,
-each with the corpus regen the fixed-point protocol now owns — and
-ambient-channel content-3) + the owner-gated set (parse-2, engine-1,
-engine-2).
+now landing WITHOUT the stream-shift corpus regen — and
+ambient-channel content-3) + the owner-gated set (parse-2,
+engine-1) + the phase-3→4 gate.
 
 ## For AI agents (primary audience)
 

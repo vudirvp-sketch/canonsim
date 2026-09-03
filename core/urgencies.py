@@ -13,6 +13,8 @@ hits AND passes the preconditions yields an IntentData enqueued as
 any playscript step. A roll that hits but fails preconditions stays
 silent (the NPC tried, the world said no — no rejection event; the
 world's noise floor absorbs autonomous attempts that don't fire).
+Each entry rolls on its own `urgency:<npc>:<kind>` stream (engine-2,
+D-079): canon-relevant, stream-isolated per entry from the checks.
 
 Through-the-door discipline (D-037): urgencies never write canon
 directly. They broadcast objectives through the intent door; the loop
@@ -29,6 +31,7 @@ from typing import TYPE_CHECKING, Any, Final
 
 from core.ids import sequence_id
 from core.intent import IntentData, first_failing
+from core.rng import urgency_stream_name
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
@@ -126,8 +129,18 @@ def urgency_intents(
             continue
         if projection[spec.npc].get("crime_status") == "caught":
             continue
-        # the roll: d100 ≤ probability (substantive stream — canon rolls)
-        if bank.randint(1, 100) > spec.probability_per_beat:
+        # the roll: d100 <= probability, on the entry's OWN urgency-family
+        # stream `urgency:<npc>:<kind>` (engine-2, D-079) — canon-relevant
+        # but stream-isolated PER ENTRY, nested inside the run's assured
+        # substantive scope: an added or removed entry shifts neither a
+        # later check draw (the iter-49 measurement flipped 3 corpus
+        # ladders at one added entry) nor another entry's rolls (the
+        # single shared urgency stream was measured and refused — the
+        # entries coupled by draw position; the per-entry streams buy
+        # permanent add-safety for pack urgency growth)
+        with bank.assure(urgency_stream_name(spec.npc, spec.intent_kind)):
+            roll = bank.randint(1, 100)
+        if roll > spec.probability_per_beat:
             continue
         intent = _build_intent(spec, seq)
         if spec.requires:

@@ -17,19 +17,27 @@
   "big")` — sha256-based, environment-independent (stream derivation never
   relies on `PYTHONHASHSEED`; INV-2 per D-028) —
   `substantive` (canon) and `cosmetic` (render-only) are the two phase-0
-  streams. Guards lifted from the donors: an `assure(name)` context manager
-  (Brogue `assureCosmeticRNG`) that swaps and restores the active stream —
-  canon-emitting code paths run under `assure('substantive')`, render paths
-  under `assure('cosmetic')`; an `audit()` context manager (DCSS
-  `ASSERT_stable`) asserting zero draws on a chosen stream inside the scope
-  (the test guard — T5 wraps perception checks in it); `peek()` non-advancing
-  reads for tests; per-stream draw counters — the substantive counter is the
-  replay fingerprint T1 compares. A draw from the wrong stream is a bug of
-  INV-2 severity; the guards make it loud instead of silent. **Lint rule
-  (substantive by definition):** any draw whose value lands in an event's
-  `outcome`/`state_changes`/`knowledge` is substantive — a cosmetic draw on a
-  canon path fires the `assure` guard with Brogue's
-  `brogueAssert(rogue.RNG == RNG_SUBSTANTIVE)` loudness.
+  streams, plus the URGENCY FAMILY (engine-2, D-079): per-entry streams
+  `urgency:<npc>:<kind>`, content-addressed, pack-linted unique, lazily
+  registered — one stream per pack urgency entry, so adding an entry
+  shifts neither a later check draw nor another entry's rolls (a single
+  shared urgency stream was measured and refused: the entries couple by
+  draw position). Guards lifted from the donors: an `assure(name)`
+  context manager (Brogue `assureCosmeticRNG`) that swaps and restores
+  the active stream — canon-emitting code paths run under
+  `assure('substantive')`, render paths under `assure('cosmetic')`, and
+  an urgency-family stream may nest inside the assured substantive run
+  scope (the only legal nesting; engine-2); an `audit()` context manager
+  (DCSS `ASSERT_stable`) asserting zero draws on a chosen stream inside
+  the scope (the test guard — T5 wraps perception checks in it);
+  `peek()` non-advancing reads for tests; per-stream draw counters — the
+  substantive counter is the replay fingerprint T1 compares. A draw from
+  the wrong stream is a bug of INV-2 severity; the guards make it loud
+  instead of silent. **Lint rule (substantive by definition):** any draw
+  whose value lands in an event's `outcome`/`state_changes`/`knowledge`
+  is substantive — a cosmetic draw on a canon path fires the `assure`
+  guard with Brogue's `brogueAssert(rogue.RNG == RNG_SUBSTANTIVE)`
+  loudness.
 - `core/clock.py` — integer tick from 0; day-phase boundaries and
   ticks-per-action are pack rule data (`rules.json`), never constants in
   code (INV-3). One tick = one in-world minute; a full day = 1440 ticks
@@ -165,7 +173,8 @@ phase-0 answer to "let it crash" (D-031).
   donor; we take the *fields*, not the syntax.
 - **The 12 actions** (`MVP_SCOPE.md` §7 owns the table): each is pack data
   — checks with modifier tables, duration → SCHEDULED completion entry,
-  outcome payloads. Checks draw from the substantive stream only.
+  outcome payloads. Checks draw from the substantive stream only; the
+  urgency rolls draw on their per-entry family streams (engine-2, D-079).
 - **Resolution dispatch = name→resolver registry (D-031):** action types
   map to resolver callables through a registry; pack data references
   resolvers by name (INV-3 preserved — a string in data, a generic class

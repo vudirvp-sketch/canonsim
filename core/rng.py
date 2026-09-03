@@ -2,14 +2,23 @@
 
 One master seed; named streams deterministically derived via
 `stable_hash(f"{seed}:{stream}")` — sha256-based, environment-independent
-(never relies on PYTHONHASHSEED). Phase-0 streams: `substantive` (canon) and
-`cosmetic` (render-only). All draws flow through the bank, which counts them
-per stream; the substantive counter is the replay fingerprint T1 compares.
-Guards (donor discipline, `docs/blueprint/phase0.md` §1):
+(never relies on PYTHONHASHSEED). Registered streams: `substantive` (canon
+checks) and `cosmetic` (render-only); plus the URGENCY FAMILY — per-entry
+streams `urgency:<npc>:<kind>` (engine-2, D-079) that register lazily on
+first use (the names are content-derived and pack-linted, built by
+`urgency_stream_name` — never hand-written). All draws flow through the
+bank, which counts them per stream; the substantive counter is the replay
+fingerprint T1 compares. Guards (donor discipline,
+`docs/blueprint/phase0.md` §1):
 
 - `assure(name)` — run a scope with `name` as the active stream (Brogue
-  `assureCosmeticRNG`); nesting a *different* stream inside an assured scope
-  raises immediately: a wrong-stream draw is loud, never silent.
+  `assureCosmeticRNG`). Nesting a *different* stream inside an assured
+  scope raises immediately — EXCEPT an urgency-family stream inside the
+  assured `substantive` run scope (engine-2): the per-beat goal rolls are
+canon-relevant but stream-isolated PER ENTRY, so an added or removed
+pack urgency entry shifts neither a later check draw nor another entry's
+roll — the single shared stream was measured and refused (the entries
+coupled by draw position; D-079). A wrong-stream draw is loud, never silent.
 - `audit(name)` — assert zero draws on `name` inside the scope (DCSS
   `ASSERT_stable`); the test-side assertion.
 - `peek(name)` — non-advancing read of the next float (tests only).
@@ -26,11 +35,30 @@ from collections.abc import Iterable, Iterator
 from contextlib import contextmanager
 from typing import Final
 
-__all__ = ["COSMETIC", "PHASE0_STREAMS", "SUBSTANTIVE", "RngBank", "RngError", "stable_hash"]
+__all__ = [
+    "COSMETIC",
+    "PHASE0_STREAMS",
+    "SUBSTANTIVE",
+    "URGENCY_PREFIX",
+    "RngBank",
+    "RngError",
+    "stable_hash",
+    "urgency_stream_name",
+]
 
 SUBSTANTIVE: Final = "substantive"
 COSMETIC: Final = "cosmetic"
+URGENCY_PREFIX: Final = "urgency:"
 PHASE0_STREAMS: Final = (SUBSTANTIVE, COSMETIC)
+
+
+def urgency_stream_name(npc: str, intent_kind: str) -> str:
+    """The per-entry urgency roll stream: content-addressed
+    `urgency:<npc>:<kind>` (engine-2, D-079). One stream per pack urgency
+    entry — the (npc, kind) pair is pack-linted unique, so the name is
+    injective; adding an entry adds a NEW stream and never shifts another
+    entry's draws (the add-safety law)."""
+    return f"{URGENCY_PREFIX}{npc}:{intent_kind}"
 
 
 class RngError(RuntimeError):
@@ -71,7 +99,16 @@ class RngBank:
 
     def _rng(self, name: str) -> random.Random:
         if name not in self._streams:
-            raise RngError(f"unknown stream {name!r} (known: {sorted(self._streams)})")
+            if name.startswith(URGENCY_PREFIX):
+                # engine-2: the per-entry urgency streams register lazily —
+                # content-derived (npc:kind), pack-linted, built by
+                # `urgency_stream_name`; the closed-set tripwire survives
+                # for every non-family name (a typo stays loud).
+                self._register(name)
+            else:
+                raise RngError(
+                    f"unknown stream {name!r} (known: {sorted(self._streams)})"
+                )
         return self._streams[name]
 
     def count(self, name: str = SUBSTANTIVE) -> int:
@@ -85,9 +122,19 @@ class RngBank:
 
     @contextmanager
     def assure(self, name: str) -> Iterator[None]:
-        """Scope with `name` active; a nested different stream is an error."""
+        """Scope with `name` active; nesting a foreign stream is an error
+        unless the pairing is the engine-2 family law: an urgency-family
+        stream may shadow the assured substantive run scope — and nothing
+        else may nest anywhere."""
         self._rng(name)
-        if self._assured is not None and self._assured != name:
+        if (
+            self._assured is not None
+            and self._assured != name
+            and not (
+                name.startswith(URGENCY_PREFIX)
+                and self._assured == SUBSTANTIVE
+            )
+        ):
             raise RngError(
                 f"cannot assure {name!r} inside an assured {self._assured!r} scope"
             )

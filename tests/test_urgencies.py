@@ -26,7 +26,7 @@ from core.leverage import LeverageFact
 from core.log import read_log
 from core.loop import Simulator
 from core.pack import Pack, load_pack
-from core.rng import RngBank
+from core.rng import SUBSTANTIVE, RngBank, urgency_stream_name
 from core.urgencies import urgency_intents
 
 REPO = Path(__file__).resolve().parents[1]
@@ -197,14 +197,16 @@ def test_urgency_completion_never_advances_the_playscript(tmp_path: Path) -> Non
     """KI#17 regression: only the PLAYER's step lifecycle feeds the next
     playscript step. An autonomous (urgency / director) intent ending
     mid-step must not propose the next step early — the script's ordered
-    steps contract (MVP_SCOPE §13) holds. Probed seed 2: the maid's
-    urgency fires while step 2 (a 50-tick wait) is in flight."""
-    sim = make_sim(tmp_path, seed=2, name="run.jsonl")
+    steps contract (MVP_SCOPE §13) holds. Probed seed 3 (re-probed at
+    engine-2 — the rolls draw on the urgency stream now, seed 2's maid
+    roll misses): the maid's urgency fires while step 2 (a 50-tick wait)
+    is in flight."""
+    sim = make_sim(tmp_path, seed=3, name="run.jsonl")
     sim.run_playscript(script([
         {"intent": "wait", "ticks": 700},
         {"intent": "wait", "ticks": 50},
         {"intent": "move", "target": "loc_tavern"},
-    ], 2))
+    ], 3))
     _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
     # an autonomous intent DID fire during the run (the hazard is live)
     assert any(
@@ -223,3 +225,62 @@ def test_urgency_completion_never_advances_the_playscript(tmp_path: Path) -> Non
     # and no player step's event lands before its predecessor's
     for earlier, later in zip(player_events, player_events[1:], strict=False):
         assert later.t >= earlier.t
+
+
+# -- engine-2 (D-079): the per-entry stream split + the add-safety law ----
+
+
+def test_urgency_rolls_count_on_the_entrys_own_stream() -> None:
+    """engine-2: each entry rolls on its OWN urgency-family stream
+    (content-addressed `urgency:<npc>:<kind>`), nested inside the run's
+    assured substantive scope — the rolls advance their own counter and
+    never the fingerprint (the T1 replay identity). All three committed
+    entries roll, hit or miss; the requires gate runs AFTER the roll (a
+    gated miss still consumes the draw)."""
+    projection = initial_projection(PACK.entities)
+    projection["pc_01"]["position"] = "loc_tavern"
+    bank = RngBank(42)
+    with bank.assure(SUBSTANTIVE):
+        before = bank.fingerprint
+        urgency_intents(PACK, projection, bank)
+    assert bank.count(urgency_stream_name("npc_drunk_01", "coerce")) == 1
+    assert bank.count(urgency_stream_name("npc_maid_01", "wait")) == 1
+    assert bank.count(urgency_stream_name("npc_guard_02", "wait")) == 1
+    assert bank.fingerprint == before
+
+
+def test_added_urgency_entry_never_shifts_checks(tmp_path: Path) -> None:
+    """engine-2's headline law: an ADDED urgency entry draws its roll on
+    its OWN stream — the checks' draws (the substantive stream) are
+    untouched AND the other entries' rolls keep their draw positions, so
+    the log is byte-identical when the added entry never fires. The steal
+    (an opposed check) runs AFTER the beats on purpose: six urgency rolls
+    precede its dice, so a surviving draw position proves the streams are
+    decoupled. This is exactly the probe the iter-49 measurement refused:
+    one added p=40 entry flipped 3 corpus check ladders when the rolls
+    shared the substantive stream; the per-entry split buys permanent
+    add-safety for future urgency growth (the pack's table grows past its
+    three slots without a corpus migration)."""
+    import shutil
+
+    target = tmp_path / "grown_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["urgencies"]["entries"].append({
+        "npc": "npc_barkeep_01",
+        "probability_per_beat": 0,
+        "intent": {"kind": "wait", "fields": {"ticks": 1}},
+    })
+    (target / "rules.json").write_text(json.dumps(rules))
+    grown = load_pack(target)  # a valid pack — the lint must pass
+    steps = [
+        {"intent": "wait", "ticks": 720},  # crosses beats 360/720: rolls
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+    ]
+    script_ = script(steps, 125)
+    base = make_sim(tmp_path, seed=125, name="base.jsonl")
+    base_result = base.run_playscript(script_)
+    grown_sim = Simulator(grown, 125, tmp_path / "grown.jsonl", SCHEMA, commit="0000000")
+    grown_result = grown_sim.run_playscript(script_)
+    assert (tmp_path / "grown.jsonl").read_bytes() == (tmp_path / "base.jsonl").read_bytes()
+    assert grown_result.fingerprint == base_result.fingerprint
