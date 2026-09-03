@@ -19,7 +19,9 @@
 > divergence: the check fires on the runs that reach the confrontation,
 > with the corpus regen it implied): `docs/TEST_PLAN.md` §6. arc-1
 > (iter-47, D-076): the release-chain layer (§3d) — landed dormant, the
-> 10-seed A/B byte-identical, zero corpus regen.
+> 10-seed A/B byte-identical, zero corpus regen. The arc driver
+> (iter-52, content-6, D-081): the aftermath chain LIVE, the gap law
+> load-bearing, zero corpus re-distill (§3d + TEST_PLAN §6).
 
 ## 1. What the director is
 
@@ -331,11 +333,33 @@ cursor it already advanced).
 
 A pack without `director.arcs` runs the v0.1 release path
 byte-identically (the pack's own declaration is the gate, INV-3); an
-EMPTY block is legal and inert. No chain is live in the committed
-content set — the live driver is the content-6 row (the iter-38/42/
-45/46 dormancy pattern; the machinery is unit-pinned on mutated packs
-+ the 10-seed day1_full A/B 10/10 byte-identical vs HEAD, zero corpus
-regen — D-076, TEST_PLAN §6 owns the protocol).
+EMPTY block is legal and inert. **The aftermath chain is LIVE since
+iter-52 (content-6, D-081 — the dormancy ended):**
+`[possible_document_check_relief, barkeep_wary_sweep]` gap 2 — the
+room's reckoning, the day's closing beat. The design laws (the
+measurements live in TEST_PLAN §6 + D-081, the single owners): the
+relief is the FIRST member because it is the one hook live on the
+runs the driver targets (the order law never holds the
+corpus-pinned release — the D-076 naive watcher-pair chaining
+refused). The successor — the barkeep's wary sweep — is
+trigger-less (the climax path is its only road, so the ARC is the
+beat's whole timing), climax-flagged (the CLOSING beat that ends
+the day's peak: PEAK_CLIMAX + REST, the denouement the clock
+already defines; the D-067 "high-severity" wording is the donor's
+description — the pack's declaration is the law, the owner may
+veto), weight 0 (a closing beat carries no tension — the entropy
+footprint exactly zero, no floor can flip on any run), and seeded
+on the steal failure APPENDED LAST (the buffer order never steals
+the relief's budget slot). The GAP law is the load-bearing half:
+without the chain the sweep releases one beat earlier and lands its
+event BEFORE the check's own event (both intents ride the same
+entry tick; the queue's actor_id tiebreak decides — a second beat
+landing before its predecessor is a causality lie in the canon);
+the march holds it to the day's last event. The live-fire pins:
+`tests/test_arc_driver.py` (the march, the stripped-arc inversion,
+the defused-relief stall, the fingerprint identity, the
+declarations); the machinery stays unit-pinned on mutated packs
+(D-076).
 
 ## 4. Narrative entropy (P2e)
 
@@ -567,8 +591,12 @@ suffices.
   planning shape, deterministic): a stalled chain today STAYS
   stalled (§3d — the stall is honest); a future refinement may let a
   pack declare a recovery (e.g. skip the stuck member, or re-seed the
-  chain's remainder) — recorded-not-built, the first-consumer law
-  (content-6's live driver decides whether any content needs it).
+  chain's remainder) — recorded-not-built, the first-consumer law.
+  content-6's answer (iter-52): the landed driver needs NO recovery —
+  the live chain stalls only when its predecessor's world honestly
+  died (the defused-relief pin), and the corpus's own brevity protects
+  the runs the driver targets; the row stays parked until a real
+  content consumer asks for it.
 - The Alien three-axis `unknown` axis — pacing against the gap
   between actual state (log) and perceived state (knowledge records):
   the sketch (phases.md §3) says the director MAY pace against the

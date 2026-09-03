@@ -360,3 +360,38 @@ the two scans (beats 360/720) then the fade silence (beat 1080,
 dread 7 < 15), the scan's snapshot mint, the silent-skip law, the
 driver-stripped fingerprint identity — is pinned directly
 (tests/test_echo.py; D-080).
+
+Re-measured at iter-52 (content-6, the arc driver landed — D-081,
+arc-1's live content set): the chain is LIVE, so the A/B measures its
+real delta — the same 10 seeds on day1_full, the committed pack (the
+aftermath arc `[possible_document_check_relief, barkeep_wary_sweep]`
+gap 2) vs the arcs-stripped linted variant (a runner outside the repo
+per Rule 9): **9/10 byte-identical** (the quiet seeds' steals succeed
+— no failure event, no seeding, the successor never enters the
+buffer; not even the hooks field diverges), **seed 125 diverges by
+exactly ONE appended event** (ev_0052, t=1456, the barkeep's
+look_around via director_0001 — after everything HEAD held, zero id
+shifts; the release march: the relief at beat 1, the sweep at beat 3,
+the gap law holding beat 720). The STRIPPED arm's shape is the
+driver's proof: the sweep releases at beat 720 instead — both
+intents ride the same entry tick (t=732) and the queue's actor_id
+tiebreak pops the barkeep BEFORE the relief guard, so the sweep's
+event lands at t=733, BEFORE the check's own event at t=734 — a
+second beat landing before its predecessor is a causality lie in the
+canon, and the gap law is what prevents it (the arc load-bearing,
+not decorative: removing it changes WHERE the beat lands and what
+the canon order says). The corpus: **105/105 pin-green, ZERO
+re-distill** — the first content landing with none (the 14
+theft-failure cases diverge by exactly the seeding event's own
+`hooks` field, the birth record; no new corpus event — the runs the
+driver targets end before a second beat scan, and the unchained arm
+fires zero sweeps there too). The successor's weight 0 keeps the
+entropy footprint exactly zero on every run (the +W gate-flip class
+dead by construction); the fingerprint identity (the sweep adds no
+draws) and the quiet-seed byte-identity are pinned directly
+(tests/test_arc_driver.py; D-081). The nopacing arm (DIR-2's A/B)
+now differs by exactly the sweep: the trigger-less climax-flagged
+successor dies without the climax layer — the D-065
+"both arms identical" record superseded in part (the clock's
+PEAK/REST bands still gate nothing; the closing beat rides the
+climax path), re-pinned in tests/test_balance_harness.py.

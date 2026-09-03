@@ -118,10 +118,18 @@ def test_harness_nopacing_arm_labels_and_file(tmp_path: Path) -> None:
 
 
 def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
-    """D-065 pinned: the day1_full seed-125 ON run keeps all three beats
-    in PEAK — the pacing clock never gates a release, so the two arms
-    run byte-identically and their metric rows agree (only the arm label
-    differs). This test pins that record against regression."""
+    """D-065 pinned, superseded in part at iter-52 (D-081): the
+    day1_full seed-125 ON run keeps all three beats in PEAK — the
+    clock's PEAK/REST bands still gate no release — but the day's
+    closing beat now rides the CLIMAX PATH (the barkeep's sweep:
+    trigger-less, climax-flagged — the arc driver's successor), so the
+    nopacing arm (the pack minus `director.pacing` — no climax_floor,
+    a flagged hook falls back to explicit-trigger-only and dies with
+    no trigger) loses exactly that beat: the ON log is the OFF log
+    plus ONE appended sweep line, and the structure rows (chains, M5,
+    destroyed locations, the stretch block, the suspicion peaks) agree
+    — only the event-count-derived rows (events, M1, M3, M4) move by
+    the one event."""
     argv = [
         "--runs", "1", "--seed-base", "125", "--directors", "on",
         "--out-dir", str(tmp_path),
@@ -132,17 +140,29 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     off_table = (
         tmp_path / "balance_1_seed125_on_nopacing.txt"
     ).read_text(encoding="utf-8")
-    _skip = ("balance", "-", "eventless", "stretch", "suspicion", "npc")
-    on_rows = [
-        line for line in on_table.splitlines()
-        if line[:22].strip() and not line.startswith(_skip)
-    ]
-    off_rows = [
-        line for line in off_table.splitlines()
-        if line[:22].strip() and not line.startswith(_skip)
-    ]
-    assert on_rows == off_rows
-    # and the A/B's per-run logs are byte-identical for this seed
-    on_log = (tmp_path / "balance_125_on.jsonl").read_text(encoding="utf-8")
-    off_log = (tmp_path / "balance_125_on_nopacing.jsonl").read_text(encoding="utf-8")
-    assert on_log == off_log
+    # the structure the D-065 record was about: the clock's own bands
+    # changed nothing — chains, M5, the destroyed world, the stretches
+    for row_start in (
+        "M5", "emergent_chains", "destroyed_locations",
+        "eventless_max_stretch",
+    ):
+        on_row = next(
+            ln for ln in on_table.splitlines() if ln.startswith(row_start)
+        )
+        off_row = next(
+            ln for ln in off_table.splitlines() if ln.startswith(row_start)
+        )
+        assert on_row == off_row, row_start
+    # and the A/B's per-run logs: the ON arm is the OFF arm plus the
+    # one clock-gated beat, appended at the end (zero id shifts)
+    on_log = (tmp_path / "balance_125_on.jsonl").read_text(
+        encoding="utf-8"
+    ).splitlines()
+    off_log = (
+        tmp_path / "balance_125_on_nopacing.jsonl"
+    ).read_text(encoding="utf-8").splitlines()
+    assert on_log[:-1] == off_log
+    sweep = on_log[-1]
+    assert '"type": "look_around"' in sweep
+    assert '"cause_intent": "director_0001"' in sweep
+    assert '"t": 1456' in sweep

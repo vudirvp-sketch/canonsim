@@ -31,8 +31,9 @@
 > model — landed iter-46, social-2, D-075, P3e; the release-chain
 > layer — arcs & tension shaping — landed iter-47, arc-1, D-076,
 > P3c: the last engine row of the phase-3 build column (the order
-> law + the gap law + the entropy mirror, DIRECTOR_SPEC §3d; dormant
-> — the 10-seed A/B byte-identical, the live driver is content-6).
+> law + the gap law + the entropy mirror, DIRECTOR_SPEC §3d; its
+> live driver landed iter-52, content-6, D-081 — the aftermath chain
+> LIVE, the gap law load-bearing, zero corpus re-distill).
 > Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
 > owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
 > event < N beats" (ROADMAP §2).
@@ -212,15 +213,35 @@
   byte-identical (TEST_PLAN §6). The live-fire tests on the COMMITTED
   pack (the fade arc); the iter-46 crafted-copy tests stay the
   mechanism isolation (the probe family strips the committed driver).
-- `content-6` · the arc driver — the live content set for the landed
-  chain layer (a `director.arcs` declaration over hooks that actually
-  co-release on the committed runs — NOT the naive watcher-pair
-  chaining: the D-076 e2e probe showed the corpus-pinned relief
-  release is held forever by a predecessor that never fires on seed
-  125; the driver needs a chain whose first member is live on the
-  runs it targets): same engine-2 relief — the regen covers only the
-  landing's own events; the iter-47 mutated-pack tests carry the
-  mechanism proof until then.
+- `content-6` · the arc driver — **done (iter-52, D-081)**: the
+  aftermath chain LIVE — `[possible_document_check_relief,
+  barkeep_wary_sweep]` gap 2, the release-chain layer's first LIVE
+  consumer (the D-076 dormancy ended). Measured-first: the survey's
+  law — the relief is the ONLY tag releasing on any committed run, so
+  the relief is the FIRST member (the order law never holds the
+  corpus pin; the D-076 naive watcher-pair chaining refused for
+  exactly that). The successor: the barkeep's wary sweep (the room's
+  reckoning, the day's closing beat) — trigger-less, climax-flagged
+  (the closing beat that ends the peak: PEAK_CLIMAX + REST), weight 0
+  (the entropy footprint exactly zero — no floor can flip anywhere),
+  seeded on the steal failure APPENDED LAST (the buffer order never
+  steals the relief's slot). The GAP law is the load-bearing half:
+  the unchained sweep would land its event at t=733 BEFORE the
+  check's t=734 (the same-tick intent ordering — a causality lie);
+  the march holds it to beat 1080 (t=1456, the day's last event,
+  zero id shifts). ZERO engine edits; the live-fire suite
+  tests/test_arc_driver.py (the march, the stripped-arc inversion,
+  the defused-relief stall, the fingerprint identity, the
+  declarations). The footprint: day1 9/10 byte-identical, seed 125
+  +1 appended event; the corpus 105/105 pin-green, ZERO re-distill —
+  the first content landing with none (the 14 theft-failure cases
+  diverge by the seeding event's hooks field, the birth record). The
+  nopacing arm now differs by exactly the sweep (the D-065 record
+  superseded in part, re-pinned). The NPC-move successor arm (the
+  relieved watcher walking back — the first NPC movement) was
+  weighed and refused: the tune-3/st-6 owner-gated NPC-movement
+  fork, not a content row's to open; the climaxed closing beat is
+  the legal alternative.
 - `content-3` · ambient-channel content (the declared dimension, no
   hook carries it): its own row — social-1 landed without it (the
   fact-cluster work was not hook content, the iter-44 call).

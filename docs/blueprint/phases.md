@@ -456,8 +456,11 @@ member, all paths, explicit triggers included — pack-declared
 causality, not pacing) + the gap law (`min_gap_beats` spacing on the
 quiet/climax paths only, never the explicit one) + the entropy mirror
 (passed members' instances stop counting — the burn law's twin); the
-DF event_collections / Paradox event-chain precedent, dormant in the
-committed pack (the content-6 driver owns the live call); the Alien
+DF event_collections / Paradox event-chain precedent — the live
+driver landed iter-52 (content-6, D-081: the aftermath chain
+`[the relief's check, the barkeep's wary sweep]` gap 2 — the gap law
+load-bearing on the committed runs, the closing beat riding the
+climax path, zero corpus re-distill); the Alien
 three-axis unknown-axis is recorded NOT built — its sketch ("the
 director may pace against the [knowledge] gap") conflicts with the
 entropy law's L6 fence (observable state only — the iter-46 echo FAQ

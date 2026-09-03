@@ -226,7 +226,7 @@
       },
       "hooks": {
         "success": [],
-        "failure": ["guard_suspicious_of_pc", "possible_document_check", "possible_document_check_relief"]
+        "failure": ["guard_suspicious_of_pc", "possible_document_check", "possible_document_check_relief", "barkeep_wary_sweep"]
       },
       "notes": "the ev_0007 scenario: failure produces the richest knowledge records in the slice (partial = target saw + others heard; total = everyone saw); the margin rule lives in rules.checks.failure_margin; method 'distraction' is the in-attempt gambit (rules.checks.methods); the suspicion state changes land with the crime system (iter-3)"
     },

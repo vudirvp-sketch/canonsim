@@ -240,14 +240,16 @@ def test_the_pack_declares_the_watcher_pair() -> None:
         assert spec["first_time_only"] is True
         (gate,) = spec["options"]
         assert {leaf["kind"] for leaf in gate["trigger"]} == {"place", "prop"}
-    # the steal failure registers both halves (the institutional seed)
+    # the steal failure registers both halves (the institutional seed);
+    # iter-52: + the room's latent wariness (the arc driver's seed,
+    # content-6/D-081 — appended last, the buffer-order law)
     steal = next(
         a for a in PACK.data["actions.json"]["actions"]
         if a["intent"] == "steal"
     )
     assert set(steal["hooks"]["failure"]) == {
         "guard_suspicious_of_pc", "possible_document_check",
-        "possible_document_check_relief",
+        "possible_document_check_relief", "barkeep_wary_sweep",
     }
     # the verdict token is the only crime-mapped check knowledge
     mapping = PACK.rules["crime_watch"]["suspicion_from_knowledge"]

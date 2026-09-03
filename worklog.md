@@ -14,6 +14,56 @@
 > since iter-5).
 
 ---
+iter-52 · 2026-09-04 · content-6 — the arc driver, the aftermath
+chain LIVE (iter-52-content6-arc-driver; the owner's "continue per
+the plan, quality over speed" session call, the phase-3 backlog's
+top un-gated row — arc-1's live content set, the release-chain
+layer's first LIVE consumer)
+- rules.json: the `barkeep_wary_sweep` successor hook (the room's
+  reckoning — trigger-less, climax-flagged [the closing beat that
+  ends the peak], weight 0 [the entropy footprint exactly zero],
+  first_time_only, seeded on the steal failure APPENDED LAST) +
+  the `director.arcs.aftermath` declaration
+  [possible_document_check_relief, barkeep_wary_sweep] gap 2;
+  actions.json: the steal-failure hooks list + the tag. Zero
+  engine edits.
+- Measured-first (a runner outside the repo per Rule 9, both arms):
+  the survey's law — the relief is the ONLY tag releasing on any
+  committed run, so it is the FIRST member (the order law never
+  holds the corpus pin; the D-076 naive watcher-pair chaining
+  refused for exactly that). The GAP law is the load-bearing half:
+  the unchained sweep would land its event at t=733 BEFORE the
+  check's t=734 (the same-tick NPC_REACTION intent ordering — a
+  causality lie); the march holds it to beat 1080 (t=1456, the
+  day's LAST event, zero id shifts). The NPC-move successor arm
+  (the relieved watcher walking back — the first NPC movement)
+  was weighed and refused: the tune-3/st-6 owner-gated fork.
+- The footprint: day1 9/10 byte-identical (the quiet seeds' steals
+  succeed — no seeding at all) + seed 125's one appended event;
+  the corpus 105/105 pin-green, ZERO re-distill (the first content
+  landing with none — the 14 theft-failure cases diverge by the
+  seeding event's hooks field, the birth record); the nopacing arm
+  now differs by exactly the sweep (the D-065 record superseded in
+  part, re-pinned). +6 tests/test_arc_driver.py (the march, the
+  stripped-arc inversion, the defused-relief stall, the
+  fingerprint identity, the quiet-seed identity, the declarations);
+  the honest pin flips: test_actions + test_doccheck (the
+  seeded-hooks set), test_director (the dormancy pin → the
+  live-declaration pin), test_balance_harness (the D-065 re-pin).
+  Tests 960→966, ruff clean. D-081; TASKS (content-6 done),
+  TEST_PLAN §6, DIRECTOR_SPEC §3d+§11, phases.md §3, README,
+  AGENT_NAVIGATION §1, STATUS (header + the regen FAQ law 9 + Next
+  step), this file synced. 9 files — over the 3-5 soft limit: the
+  doc-sync law (§6 same-turn, the iter-43..51 precedent); DIRECTOR_SPEC
+  622/600 + TASKS 822/600 kept per §6.1 (the landing records are
+  substance, the numbers live in TEST_PLAN/D-081 — the single owners;
+  the trims owe at the phase-3→4 gate, the KI#64 note). iter-42
+  evicted per the cap — verified in this edit (the block removed
+  between iter-43's and the EOF separator); the three separators
+  the iter-50/51 edits silently lost (before iter-49/48/47)
+  restored in the same edit; the count is 10 after the insert.
+
+---
 iter-51 · 2026-09-04 · content-5 — the echo driver, the
 jittery-watcher beat LIVE (iter-51-content5-echo-driver; the owner's
 "continue per the plan, quality over speed" session call, the
@@ -86,6 +136,7 @@ resolved by the session directive)
   substance; the collapse owes at the phase-3→4 gate, the KI#64
   note). iter-40 evicted per the cap — verified in this edit.
 
+---
 iter-49 · 2026-09-03 · content-4 — the coerce driver, the
 drunkard's roll re-armed (iter-49-content4-coerce-driver; the owner's
 "continue work per the plan, quality over speed" session call, the
@@ -122,6 +173,7 @@ phase-3 backlog's top un-gated item)
   collapse owes at the phase-3->4 gate, the KI#64 note). iter-39
   evicted per the cap — verified in this edit (the KI#68 law).
 
+---
 iter-48 · 2026-09-03 · content-2 — the alarm panic echo, the
 through-the-walls law LIVE (iter-48-content2-alarm-echo; the owner's
 "continue work per the plan, quality over speed" session call, the
@@ -155,6 +207,7 @@ closing, the last content row that owed a corpus regen)
   0 filler added; the trims owe at the phase-3→4 gate, the KI#64
   note). The 9 kept entries re-verified present.
 
+---
 iter-47 · 2026-09-03 · arc-1 — arcs & tension shaping, the release-chain
 layer (iter-47-arc1-chains; the owner's "continue work per the plan,
 quality over speed" session call, the phase-3 backlog's top un-gated
@@ -321,33 +374,4 @@ content call resolved (iter-43-doccheck-live; the owner's blanket
   16 files — over the 3-5 soft limit: the pack trio + the corpus
   regen + the doc-sync law (§6 same-turn). iter-34 evicted per
   the cap.
-iter-42 · 2026-09-02 · drama-3 — the event grammar's on_action
-dispatch (iter-42-drama3-onaction; the owner's "continue work per
-the plan" session call, the phase-3 backlog's top un-gated item)
-- core/onaction.py (NEW): the dispatch — the `witnesses` scope (the
-  event's own knowers, deduped, event order), the per-entity
-  quantified gate (the CANDIDATE as the explicit ctx argument, no
-  entity field in the spec), the alarm-shaped state change (one
-  event per entry, clamped deltas, empty scope = no event, no
-  knowledge, no hooks); lazy generator (KI#13). loop.py::_react:
-  the dispatch appended after the hardcoded systems, before the
-  director seeding (the donor's append-not-overwrite composition).
-- core/pack.py lint: the closed key sets + vocabularies, the
-  relations/status prop-path gates, the ONE-HOP law (no key may
-  name a reaction the table emits — the cascade terminates).
-  rules.json: the dormant `document_check` → `crowd_wary` entry
-  (the iter-38 climax-flag pattern); templates.json: crowd_wary.
-- The alarm panic echo probed live and REVERTED: it fires on the
-  phase-1 corpus's distraction-fire beats (committed fixtures, §8)
-  — recorded in DIRECTOR_SPEC §11, the owner's content call. The
-  live machinery proven through linted pack variants instead.
-- Fixture discipline: the full suite green, zero regen; 10-seed
-  on-vs-stripped A/B (125 + the nine corpus seeds, a runner outside
-  the repo per Rule 9) 10/10 byte-identical (TEST_PLAN §6). Tests
-  812→836 (+24 tests/test_onaction.py), ruff clean. D-071;
-  DIRECTOR_SPEC §3c the contract owner (469/300 kept by §6.1 — the
-  grammar tables + landing records, the iter-40/41 precedent; 0
-  filler added); TASKS 671/600 kept by §6.1 (the phase-3 landing
-  rows, the iter-39/40/41 substance precedent); `any`/`random`
-  scope helpers recorded-not-built. bg-2 evicted per the cap.
 ---

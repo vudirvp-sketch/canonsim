@@ -1,34 +1,48 @@
 # STATUS — canonsim
 
-Iteration: iter-51 (`iter-51-content5-echo-driver` — the owner's
+Iteration: iter-52 (`iter-52-content6-arc-driver` — the owner's
 "continue per the plan, quality over speed" session call, the
-phase-3 backlog's top un-gated item — social-2's live content set,
-the read model's first LIVE runtime consumer) ·
+phase-3 backlog's top un-gated row — arc-1's live content set, the
+release-chain layer's first LIVE consumer) ·
 Phase: 3 (Director)
-**OPEN — the jittery-watcher beat LIVE: the guard's ADDED urgency
-entry (`look_around`, `echo_at_least dread >= 15`, p=100 the
-compulsion semantics — the residue IS the gate; the drunkard's
-2-in-5 is the deliberate-act idiom) — the measured live shape: the
-seed-33 fire family's partial sighting reads dread 22 / 15 / 7
-across beats 360 / 720 / 1080 — TWO scans then the fade silence
-(P3e's headline law on the committed pack, pinned live). The
-wariness arm measured and REFUSED first (34 cases + 10/10 day1,
-the anchor-starved arson beat, the rotation-renewed residue)** ·
+**OPEN — the aftermath chain LIVE: `[possible_document_check_relief,
+barkeep_wary_sweep]` gap 2 (the D-076 dormancy ended). Measured-first
+landed: the survey's law — the relief is the ONLY tag releasing on
+any committed run, so it is the FIRST member (the order law never
+holds the corpus pin; the naive watcher-pair chaining refused at
+D-076 for exactly that). The successor — the barkeep's wary sweep,
+the room's reckoning (the day's closing beat: trigger-less,
+climax-flagged, weight 0 — the entropy footprint exactly zero, the
++W gate-flip class dead by construction; seeded on the steal failure
+APPENDED LAST, the buffer order never steals the relief's slot). The
+GAP law is the load-bearing half: the unchained sweep would land its
+event at t=733 BEFORE the check's t=734 (the same-tick intent
+ordering — a causality lie); the march holds it to t=1456, the day's
+last event. day1 9/10 byte-identical + seed 125's one appended event;
+the corpus 105/105 pin-green, ZERO re-distill (the first content
+landing with none); the nopacing arm now differs by exactly the
+sweep (the D-065 record superseded in part, re-pinned)** ·
 Date: 2026-09-04 ·
-Scope: `content/tavern_pack/rules.json` (the urgency entry — pure
-pack data, zero engine edits; the echo block's dormancy note
-retired), `tests/test_echo.py` (the live-fire fade arc + the
-load-bearing table flip + the probe family's driver-stripping
-isolation), `tests/fixtures/narrator_beats.json` (the deliberate
-pins on the watch-change case — the scan by id + the scene
-snapshot knowledge, 12 claims: ZERO broken pins, the first content
-landing with no forced re-distill — engine-2's add-safety delivered
-at the corpus level, the landing's events ride after the case's
-claimed ids). The A/B (TEST_PLAN §6): day1_full 10/10 byte-identical
-(the dread-silent law), the corpus 1/105 diverging by exactly the
-scan. Tests 959→960, ruff clean. D-080; TASKS (content-5 done),
-TEST_PLAN §6, phases.md §3, README, KI#68 deleted per AGENTS §5,
-this file + worklog synced.
+Scope: `content/tavern_pack/rules.json` (the successor hook + the
+arcs declaration — pure pack data, zero engine edits),
+`content/tavern_pack/actions.json` (the steal-failure hooks list,
+the successor appended last),
+`tests/test_arc_driver.py` (+6: the march, the stripped-arc
+inversion, the defused-relief stall, the fingerprint identity, the
+quiet-seed byte-identity, the declarations); the honest pin flips:
+`tests/test_actions.py` + `tests/test_doccheck.py` (the seeded-hooks
+set — the world-change precedent), `tests/test_director.py` (the
+dormancy pin → the live-declaration pin, the iter-51 flip pattern),
+`tests/test_balance_harness.py` (the D-065 record re-pinned: the
+clock-off arm minus the closing beat). Tests 960→966, ruff clean.
+D-081; TASKS (content-6 done), TEST_PLAN §6, DIRECTOR_SPEC §3d+§11,
+phases.md §3, README, AGENT_NAVIGATION §1, this file + worklog
+synced. 9 files — over the 3-5 soft limit: the doc-sync law (§6
+same-turn, the iter-43..51 precedent). DECISIONS transiently 47/30
++ DIRECTOR_SPEC 622/600 + TASKS 822/600 kept per §6.1 (the landing
+records are substance, the numbers live in TEST_PLAN/D-081 — the
+single owners; the trims owe at the phase-3→4 gate, the KI#64
+note). iter-42 evicted per the worklog cap — verified in this edit.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -341,7 +355,16 @@ this file + worklog synced.
   reworked mid-iteration (engine-2's single shared stream, refused
   at 4/10), the migration re-runs from the PRISTINE fixture, never
   from the refused candidate's output (a second pass over re-pinned
-  claims would misread them as designed wrongness). The runner:
+  claims would misread them as designed wrongness). The iter-52 law
+  (the true ZERO-regen landing, content-6): (9) **the event's `hooks`
+  field IS the seeding record — a pack tag added to a hooks list
+  diverges the SEEDING event's bytes on every run that fires it** (a
+  birth certificate, not a behavior change: pin-green survives, 14
+  corpus cases byte-diverged by one field, ZERO re-distill). A
+  weight-0 successor with no draws and no corpus-stage release
+  closes the ladder: measure BOTH arms first, and when the only
+  divergence is the seeding field + appended events, the landing
+  ships with pin updates alone. The runner:
   `/home/z/my-project/scripts/iter50_regen.py` (ephemeral session
   artifact; the laws live here, the runner's shape in worklog
   iter-50).
@@ -484,45 +507,44 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36..50 — the pacing clock D-065 + the
+**Phase 3 is OPEN (iter-36..52 — the pacing clock D-065 + the
 exit-criterion instrument D-066 + the climax layer D-067 + the
 multi-channel split D-068 + the grammar's three layers D-069/D-070/
 D-071 + the document_check content set D-072 + the secrets &
 leverage fact clusters D-073 + the coerce door D-074 + the
 psychological echo D-075 + the release-chain layer D-076 + the
 alarm panic echo D-077 + the coerce driver D-078 + the urgency
-stream split D-079 + the echo driver D-080 landed — the phase-3
-build column's ENGINE side is complete, the CONTENT rows' stream-
-shift tax is paid off, and the FIRST driver row is live (content-5:
-the residue visibly driving behavior on the committed runs, the
-corpus pinning it). What remains of phase 3 is content-6 +
+stream split D-079 + the echo driver D-080 + the ARC DRIVER D-081
+landed — the phase-3 build column's engine side AND its driver
+rows are complete except content-3: every layer has a live content
+consumer, the arc chain marches on the committed runs (the gap law
+load-bearing, zero corpus re-distill). What remains of phase 3 is
 content-3 + the gate.)**
 The phase-3 remainder in `docs/TASKS.md`'s backlog:
-`content-6` (the arc driver — NOT the naive watcher-pair chaining:
-the D-076 e2e showed a never-firing predecessor holds the
-corpus-pinned successor forever; the driver needs a first member
-live on the runs it targets; same engine-2 relief — the regen
-would cover only the landing's own events), `content-3`
-(ambient-channel content). The dir-2/dir-4/drama-1/2/3
-measurement's honest finding STANDS SUPERSEDED in part: the
-document_check landing is the first deliberate divergence (1/10
-day1_full seeds; the corpus's seed-93 script fires), social-1 adds
-the second (the same 1/10 hot seed mints the leverage facts), the
-content-2 echo is corpus-script-only (the empty-backyard law), the
-echo driver is corpus-script-only too (the dread-silent law — the
-1/105 watch-change scan, day1_full 10/10 byte-identical), the
-clock/channel/weight/arc layers stay inert on day1_full (every run
-ends in PEAK — a measurable pacing delta needs a gate-protocol
-script set that walks the world into quiet; recorded in D-066, a
-phase-gate question, not forced), and engine-2's flip is the third
-deliberate divergence (0/10 — the one-time migration; the corpus
-fixed point recorded).
+`content-3` (ambient-channel content — the declared dimension, no
+hook carries it; the successor's social channel tag is inert
+vocabulary on a climax hook, NOT the row's answer). The
+dir-2/dir-4/drama-1/2/3 measurement's honest finding STANDS
+SUPERSEDED in part: the document_check landing is the first
+deliberate divergence (1/10 day1_full seeds; the corpus's seed-93
+script fires), social-1 adds the second (the same 1/10 hot seed
+mints the leverage facts), the content-2 echo is corpus-script-only
+(the empty-backyard law), the echo driver is corpus-script-only too
+(the dread-silent law — the 1/105 watch-change scan, day1_full
+10/10 byte-identical), the clock/channel/weight layers stay inert
+on day1_full (every run ends in PEAK — a measurable pacing delta
+needs a gate-protocol script set that walks the world into quiet;
+recorded in D-066, a phase-gate question, not forced), engine-2's
+flip is the third deliberate divergence (0/10 — the one-time
+migration; the corpus fixed point recorded), and the ARC DRIVER is
+the fourth (day1 9/10 + seed 125's one appended event; the corpus
+105/105 pin-green — and the nopacing arm's D-065 record now reads
+superseded in part: the closing beat rides the climax path).
 
-1. **Phase-3 remainder** (TASKS backlog): the content rows
-   (`content-6` the arc driver; `content-3` ambient-channel) →
-   then the phase-3→4 gate (DECISIONS 46/30 collapse + the FAQ trim
-   owed per the KI#64 note + TASKS/phases over-cap trims — all
-   recorded as owed at the gate).
+1. **Phase-3 remainder** (TASKS backlog): `content-3`
+   (ambient-channel content) → then the phase-3→4 gate (DECISIONS
+   47/30 collapse + the FAQ trim owed per the KI#64 note + TASKS/
+   phases over-cap trims — all recorded as owed at the gate).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
@@ -532,7 +554,10 @@ fixed point recorded).
    mypy + `ci-1` GitHub Actions. NEW for the owner: the Alien
    unknown-axis L6 conflict (DIRECTOR_SPEC §11 — the sketch vs the
    entropy law; resolve before any phase-3+ pacing work reads
-   knowledge records).
+   knowledge records) + the arc driver's review question (the
+   climax flag on a weight-0 closing beat — the D-067
+   "high-severity" wording vs the pack's denouement use; D-081
+   records the tension, the owner may veto).
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
    New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked

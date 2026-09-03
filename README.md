@@ -160,9 +160,16 @@ included: pack-declared causality, not pacing) + the gap law
 only — D-005) + the entropy mirror (a passed member's leftover
 instances stop counting, the first_time_only burn law's twin — one
 play per arc beat); the DF event_collections / Paradox event-chain
-precedent; no chain declared in the committed pack — the 10-seed
-A/B byte-identical vs HEAD, zero corpus regen (content-6 owns the
-live driver). 943 tests green, ruff clean. Contract owner
+precedent; the live driver landed iter-52 (content-6, D-081): the
+aftermath chain `[the relief's check, the barkeep's wary sweep]`
+gap 2 — the gap law load-bearing (the unchained sweep would land
+its event BEFORE the check's own: the same-tick intent ordering,
+a causality lie the march prevents; pinned in
+tests/test_arc_driver.py), the closing beat riding the climax path
+(weight 0 — the entropy footprint exactly zero), day1 9/10
+byte-identical + seed 125's one appended event, the corpus 105/105
+pin-green with ZERO re-distill (the first such content landing;
+TEST_PLAN §6). 966 tests green, ruff clean. Contract owner
 `docs/DIRECTOR_SPEC.md` §3d (the Alien unknown-axis conflict and the
 re-plan-on-violation refinement recorded in §11, the owner's call).
 The alarm panic echo landed iter-48 (content-2, D-077): the
@@ -237,9 +244,26 @@ delivered at the corpus level); day1_full 10/10 byte-identical (the
 dread-silent law, TEST_PLAN §6). 960 tests green, ruff clean. The
 landing is pack data over iter-46's standing door — the urgency
 table's own notes + TASKS content-5 + D-080 carry the contract.
-Next: the phase-3 driver rows (the arc driver — content-6, landing
-WITHOUT the stream-shift corpus regen — and ambient-channel
-content-3) + the owner-gated set (parse-2, engine-1) + the
+The arc driver landed iter-52 (content-6, D-081 — the release-chain
+layer's live content set, the phase-3 build column's last engine
+row fully LIVE): the aftermath chain — the relief's public check
+first, the barkeep's wary sweep second (the room's reckoning, the
+day's closing beat: trigger-less, climax-flagged, weight 0, seeded
+on the steal failure appended last). Measured-first: the relief is
+the ONLY tag releasing on any committed run (the survey's law), so
+it is the FIRST member — the order law never holds the corpus pin;
+the GAP law is the load-bearing half: the unchained sweep would
+land its event at t=733 BEFORE the check's t=734 (the same-tick
+intent ordering — a causality lie), the march holds it to t=1456,
+the day's last event. day1 9/10 byte-identical + seed 125's one
+appended event; the corpus 105/105 pin-green, ZERO re-distill (the
+first content landing with none); the nopacing arm now differs by
+exactly the sweep (the D-065 record superseded in part, re-pinned).
+966 tests green, ruff clean. The live-fire suite
+tests/test_arc_driver.py + TASKS content-6 + D-081 carry the
+contract.
+Next: ambient-channel content-3 (the phase-3 build column's last
+content row) + the owner-gated set (parse-2, engine-1) + the
 phase-3→4 gate.
 
 ## For AI agents (primary audience)

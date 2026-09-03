@@ -1774,12 +1774,19 @@ def _arc_pack(
     return _mutated_pack(tmp_path, mutate)
 
 
-def test_the_committed_pack_declares_no_arcs() -> None:
-    """The dormancy pin (the iter-38/42/45/46 pattern): no chain is live
-    in the committed content set — the arc table lands with its content
-    row, and a pack without `director.arcs` runs the v0.1 release path
-    byte-identically (the pack's own declaration is the gate, INV-3)."""
-    assert arcs_from_rules(PACK.rules) is None
+def test_the_committed_pack_declares_the_aftermath_arc() -> None:
+    """The live-declaration pin (the iter-51 dormancy flip, content-6's
+    landing): the aftermath chain is LIVE in the committed content set —
+    the relief's check first (the one hook that releases on any committed
+    run — the order law never holds the corpus pin), the barkeep's sweep
+    second, gap 2 (the march's spacing: beat 720 refused, beat 1080 the
+    room's own — the gap law load-bearing, DIRECTOR_SPEC §3d/D-081)."""
+    assert arcs_from_rules(PACK.rules) == {
+        "aftermath": ArcConfig(
+            members=("possible_document_check_relief", "barkeep_wary_sweep"),
+            min_gap_beats=2,
+        )
+    }
 
 
 def test_arcs_from_rules_reads_the_declared_chains(tmp_path: Path) -> None:
