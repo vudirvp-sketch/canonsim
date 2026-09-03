@@ -26,12 +26,13 @@ The laws pinned here:
 - **The L6 fence**: per-NPC valence over the NPC's own records, never
   player-adapted, never an entropy input — the director is untouched
   by construction (DIRECTOR_SPEC §4).
-- **The dormancy law (the iter-38/42/45 pattern)**: the committed pack
-  declares the valence table but NO action or urgency carries
-  `echo_at_least` — the fold runs for no intent, the corpus staying
-  green is the byte-identity proof; the live-fire tests run on crafted
-  pack copies (the hard_pack precedent; the live driver is content-5's
-  call).
+- **The dormancy law RETIRED (iter-51, content-5, D-080)**: the committed
+  pack's guard entry carries `echo_at_least` — the jittery-watcher beat
+  is LIVE (the scans commit, the corpus pins stay green — engine-2's
+  add-safety delivered: the landing's events ride after the case's
+  claimed ids); the live-fire tests run on the COMMITTED pack; the
+  crafted-pack tests below stay the mechanism isolation (the probe
+  family strips the committed driver).
 
 Seeds probed to be deterministic (T1): seed 93 — the total steal
 failure (the room sees; the drunk's partial sighting at t=5) + the
@@ -74,6 +75,20 @@ FADE_SCRIPT: list[dict[str, Any]] = ROOM_FAILURE_WAIT + [
     {"intent": "wait", "ticks": 400},
 ]
 
+# the jittery-watcher beat's fade arc (iter-51, content-5): the seed-33
+# fire family's geometry — the occupied-room arson, the flight, then
+# waits crossing beats 360 / 720 / 1080 (the dread ladder 22 / 15 / 7:
+# two scans then the fade-below-bar silence)
+FADE_ARC: list[dict[str, Any]] = [
+    {"intent": "move", "target": "loc_tavern"},
+    {"intent": "arson", "target": "loc_tavern"},
+    {"intent": "flee", "target": "loc_street"},
+    {"intent": "move", "target": "loc_street"},
+    {"intent": "wait", "ticks": 360},
+    {"intent": "wait", "ticks": 400},
+    {"intent": "wait", "ticks": 400},
+]
+
 # the tuned probe token (the hard_pack pattern): dread 100, fades 720 —
 # the drunk's partial sighting at t=5 scores 25 at the beat-360 read,
 # 22 at the door tick 405, dead at the completion tick 805
@@ -103,13 +118,20 @@ def run(tmp_path: Path, pack: Any, seed: int, steps: list[dict[str, Any]],
 
 def tuned_pack(tmp_path: Path, *, mutate_rules: Any = None,
                mutate_actions: Any = None) -> Any:
-    """A pack copy plus the tuned token and the echo-gated driver (the
-    hard_pack pattern): mechanism proof on a crafted copy, the committed
-    driver stays content-5's call."""
+    """A pack copy plus the tuned token and the echo-gated probe driver
+    (the hard_pack pattern): mechanism proof on a crafted copy. The
+    committed guard driver (iter-51) is STRIPPED here — the probe family
+    isolates the drunk's mechanism from the landed content, which has
+    its own committed-pack tests below."""
     target = tmp_path / "pack_tuned"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     rules["echo"]["tokens"]["figure_reaching_for_purse"] = PROBE_TOKEN
+    rules["urgencies"]["entries"] = [
+        e for e in rules["urgencies"]["entries"]
+        if not any(c.get("test") == "echo_at_least"
+                   for c in e.get("requires", ()))
+    ]
     rules["urgencies"]["entries"].append(PROBE_DRIVER)
     if mutate_rules is not None:
         mutate_rules(rules)
@@ -276,11 +298,19 @@ def test_the_tuple_order_is_deterministic(tmp_path: Path) -> None:
 
 def test_a_pack_without_the_block_folds_empty(tmp_path: Path) -> None:
     """The declaration is the gate (INV-3): a pack without the `echo`
-    block folds to the empty tuple no matter what the view holds."""
+    block folds to the empty tuple no matter what the view holds. The
+    copy must strip the guard driver too — an echo-gated entry in a
+    block-less pack is a lint error now (the cross-lint, iter-51: the
+    fold scores nothing, the gate can never pass)."""
     target = tmp_path / "pack_plain"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     del rules["echo"]
+    rules["urgencies"]["entries"] = [
+        e for e in rules["urgencies"]["entries"]
+        if not any(c.get("test") == "echo_at_least"
+                   for c in e.get("requires", ()))
+    ]
     (target / "rules.json").write_text(json.dumps(rules, indent=2),
                                        encoding="utf-8")
     pack = load_pack(target)
@@ -370,7 +400,7 @@ def test_the_window_test_never_attributes_a_breaking_event(
     assert occ_breaking_cause(gated, list(events), 0, intent, state) is None
 
 
-# -- the live path (e2e, crafted pack — the dormancy law) ----------------------------
+# -- the live path (e2e, crafted pack — the mechanism isolation) --------------------
 
 
 def test_the_residue_drives_the_behavior(tmp_path: Path) -> None:
@@ -400,12 +430,58 @@ def test_the_residue_drives_the_behavior(tmp_path: Path) -> None:
     )
 
 
+def test_the_jittery_watcher_beat_fires_and_fades(tmp_path: Path) -> None:
+    """The committed driver (content-5, iter-51): the seed-33 fire
+    family's occupied-room arson leaves the guard's partial sighting
+    (t=6) — the jittery-watcher beat is LIVE on the committed pack. The
+    scan fires at beat 360 (dread 22) and beat 720 (dread 15 — the
+    half-window bar, the boundary INCLUSIVE), then stays SILENT at beat
+    1080 (dread 7): the scan stops while the fire is still remembered —
+    "events that happened but no longer matter", P3e's headline law on
+    the committed pack. Each scan takes the actor's CURRENT room in (the
+    rotation moved him to the guardroom at 360) and mints the snapshot
+    record; the silent-skip law holds (no rejection ever)."""
+    events, sim = run(tmp_path, PACK, 33, FADE_ARC, "jittery.jsonl")
+    looks = [e for e in events if e.type == "look_around"]
+    assert [(e.t, e.actor) for e in looks] == [
+        (374, "npc_guard_01"), (774, "npc_guard_01"),
+    ]
+    assert all(e.outcome["location"] == "loc_guardroom" for e in looks)
+    assert all(
+        rec.knows == "scene_loc_guardroom"
+        for e in looks for rec in e.knowledge
+    )
+    # the dread ladder the gates read (the fade, measured at the beats)
+    for beat, expected in ((360, 22), (720, 15), (1080, 7)):
+        assert next(
+            s.score for s in echo_scores(PACK, sim.knowledge, beat)
+            if s.who == "npc_guard_01" and s.axis == "dread"
+        ) == expected
+    # the silent-skip law: the beat-1080 gate failure (7 < 15) never
+    # becomes a rejection — the world's noise floor absorbs it
+    assert not any(
+        e.type == "intent_rejected" and e.outcome.get("action") == "look_around"
+        for e in events
+    )
+    # the residue renews NOTHING for the witness: the 360 briefing passes
+    # his records TO the relief (novelty law — the minted records ride
+    # the incoming's view), the 1080 rotation passes nothing back (he
+    # already holds it all), so HIS ladder decays monotonically — the
+    # single partial@6 sighting is the whole residue
+    fire_records = [
+        rec for rec in sim.knowledge.records_of("npc_guard_01")
+        if rec.knows == "figure_starting_fire"
+    ]
+    assert [(rec.fidelity, rec.at) for rec in fire_records] == [("partial", 6)]
+
+
 def test_the_committed_valence_table_reads_real_residue(tmp_path: Path) -> None:
     """The committed numbers on the committed pack: the drunk's partial
     sighting at t=5 under the declared valence (dread 25 / wariness 35,
     fades 720, partial 50%) reads dread 6 / wariness 8 at the beat-360
-    tick — the table is live-readable even while dormant (no consumer
-    gates on it)."""
+    tick — and the landed guard driver stays SILENT on the reach family
+    (6 < 15, the half-window bar: the scan is the fire-watcher's, not
+    the purse-watcher's)."""
     events, sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "plain.jsonl")
     assert not any(e.type == "look_around" for e in events)
     scores = {
@@ -454,30 +530,46 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
     )
 
 
-def test_the_declared_table_costs_nothing_at_runtime(tmp_path: Path) -> None:
-    """The INV-3 gate law: the committed pack (echo block declared) and
-    a copy WITHOUT the block produce byte-identical logs on the same
-    seed — the fold runs only for intents that ask for it, and none do
-    (the dormancy proof at the byte level)."""
-    target = tmp_path / "pack_plain"
+def _fingerprint(events: list[Any]) -> list[tuple[str, int, str]]:
+    return [(e.type, e.t, e.actor) for e in events]
+
+
+def test_the_declared_table_gates_the_driver_at_runtime(tmp_path: Path) -> None:
+    """The iter-46 dormancy law retired (content-5, iter-51): the echo
+    block is LOAD-BEARING now — the same script on the committed pack
+    and a driver-stripped copy diverges by EXACTLY the guard's scan
+    events (the residue-driven behavior is the block's runtime cost;
+    everything else byte-stable — the engine-2 add-safety law, live)."""
+    target = tmp_path / "pack_stripped"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
-    del rules["echo"]
+    rules["urgencies"]["entries"] = [
+        e for e in rules["urgencies"]["entries"]
+        if not any(c.get("test") == "echo_at_least"
+                   for c in e.get("requires", ()))
+    ]
     (target / "rules.json").write_text(json.dumps(rules, indent=2),
                                        encoding="utf-8")
-    plain = load_pack(target)
-    run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "with.jsonl")
-    run(tmp_path, plain, 93, ROOM_FAILURE_WAIT, "without.jsonl")
-    assert (tmp_path / "with.jsonl").read_bytes() == (
-        tmp_path / "without.jsonl").read_bytes()
+    stripped = load_pack(target)
+    live = run(tmp_path, PACK, 33, FADE_ARC, "live.jsonl")[0]
+    plain = run(tmp_path, stripped, 33, FADE_ARC, "plain.jsonl")[0]
+    assert [e.type for e in live if e.type == "look_around"] == [
+        "look_around", "look_around",
+    ]
+    assert not any(e.type == "look_around" for e in plain)
+    # the fingerprint law: live minus the scans IS the stripped run
+    assert [row for row in _fingerprint(live)
+            if row[0] != "look_around"] == _fingerprint(plain)
 
 
 def test_the_declarations() -> None:
     """The pack rows: the closed block keys, the fidelity percents over
-    the pack's own chain, the four declared tokens — and NO consumer
-    anywhere (no action, no urgency carries echo_at_least — the
-    dormancy law); papers_unsatisfactory stays undeclared (the iter-44
-    institutional call)."""
+    the pack's own chain, the four declared tokens — and exactly ONE
+    consumer, the guard's urgency entry (content-5, iter-51: the driver
+    landed; no ACTION carries echo_at_least — the action side stays
+    consumer-free, its window law pinned on crafted copies);
+    papers_unsatisfactory stays undeclared (the iter-44 institutional
+    call)."""
     rules = json.loads(
         (REPO / "content" / "tavern_pack" / "rules.json").read_text(
             encoding="utf-8")
@@ -501,11 +593,20 @@ def test_the_declarations() -> None:
             cond.get("test") == "echo_at_least"
             for cond in action.get("requires", ())
         )
-    for entry in rules["urgencies"]["entries"]:
-        assert not any(
-            cond.get("test") == "echo_at_least"
-            for cond in entry.get("requires", ())
-        )
+    drivers = [
+        entry for entry in rules["urgencies"]["entries"]
+        if any(cond.get("test") == "echo_at_least"
+               for cond in entry.get("requires", ()))
+    ]
+    assert len(drivers) == 1
+    driver = drivers[0]
+    assert driver["npc"] == "npc_guard_01"
+    assert driver["probability_per_beat"] == 100
+    assert driver["intent"] == {"kind": "look_around"}
+    assert driver["requires"] == [
+        {"noun": "actor", "test": "echo_at_least", "axis": "dread",
+         "value": 15},
+    ]
 
 
 # -- the pack lint ------------------------------------------------------------------
@@ -534,6 +635,13 @@ def test_lint_the_block_keys_are_closed(tmp_path: Path) -> None:
 
 def test_lint_the_scale_bounds(tmp_path: Path) -> None:
     def mutate(rules: dict[str, Any]) -> None:
+        # strip the committed driver first: an inverted scale also breaks
+        # the driver's value-in-range check (the entries lint runs first)
+        rules["urgencies"]["entries"] = [
+            e for e in rules["urgencies"]["entries"]
+            if not any(c.get("test") == "echo_at_least"
+                       for c in e.get("requires", ()))
+        ]
         rules["echo"]["scale"] = [100, 0]
 
     assert "echo.scale must be" in _lint_error(tmp_path, mutate)

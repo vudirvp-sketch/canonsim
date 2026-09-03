@@ -196,16 +196,22 @@
   rejections (the tick-window law live, zero outcome flips). The
   optional status/urgency nudge: not wanted — the pair shifts carry the
   drama (the action's own v0.1-buy note stands).
-- `content-5` · the echo driver — the live content set for the landed
-  residue gate (an urgency entry or action carrying `echo_at_least` —
-  the jittery-watcher beat, the residue visibly driving behavior on
-  the committed runs): engine-2 landed (iter-50, D-079), so an ADDED
-  entry no longer shifts the checks or the other entries' rolls — the
-  corpus regen now covers only the landing's own events (the iter-48
-  scale, not the 105-case flip); the replacement law is retired as a
-  REQUIREMENT (a re-arm stays available when the table's semantics
-  prefer it); the iter-46 live-fire tests on crafted copies carry the
-  mechanism proof until then.
+- `content-5` · the echo driver — **done (iter-51, D-080)**: the
+  jittery-watcher beat LIVE — the guard's urgency entry (`look_around`,
+  `echo_at_least dread >= 15`, p=100 the compulsion semantics — the
+  residue IS the gate). Measured-first design: the DREAD axis (the
+  fire-fear, the echo's own channel; the wariness arm measured and
+  REFUSED — 34 cases + 10/10 day1_full, the anchor-starved arson beat,
+  the rotation-renewed purse residue never fading); the fire family's
+  partial sighting reads dread 22/15/7 across beats 360/720/1080 — two
+  scans then the fade silence (P3e's headline law on the committed
+  pack). The corpus regen: ZERO broken pins (the scan rides after the
+  case's claimed ids — engine-2's add-safety delivered at the corpus
+  level) + the deliberate pins on the watch-change case (the scan by id
+  + the scene snapshot knowledge, 12 claims); day1_full 10/10
+  byte-identical (TEST_PLAN §6). The live-fire tests on the COMMITTED
+  pack (the fade arc); the iter-46 crafted-copy tests stay the
+  mechanism isolation (the probe family strips the committed driver).
 - `content-6` · the arc driver — the live content set for the landed
   chain layer (a `director.arcs` declaration over hooks that actually
   co-release on the committed runs — NOT the naive watcher-pair

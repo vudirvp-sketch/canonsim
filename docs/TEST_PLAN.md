@@ -331,3 +331,32 @@ claims die with the vanished flee_caught event) + 1 parse pin (the
 s7 wait-720 batch 15→14) + 2 unit seed re-probes, through the
 identity-proved fixed-point runner (105/105 zero-change on the
 unshifted stream, the runner rebuilt per the FAQ laws).
+
+Re-measured at iter-51 (content-5, the echo driver landed — D-080,
+social-2's live content set): the entry is LIVE, so the A/B measures
+its real delta — the same 10 seeds, the committed pack vs a
+driver-stripped linted variant (a runner outside the repo per Rule
+9): **10/10 byte-identical** (the dread-silent law: day1_full's
+residue channels all sit below the dread-15 bar — the reach family's
+partial sighting reads 6, the purse family's inference is
+wariness-only; the empty-backyard fire never mints a sighting). The
+live divergence is corpus-script-only: **1/105 cases** — the
+watch-change case (seed 33, the fire family) diverges by exactly the
+guard's scan (ev_0020, t=374, the guardroom), the trailing wait's id
++1, ZERO ladder flips and ZERO broken pins — the corpus regen is the
+deliberate pins alone (the scan claim by id + the scene snapshot
+knowledge, the case's beat needle 10→12; the iter-48/49 deliberate-
+pin law with no forced re-distill behind it — engine-2's add-safety
+delivered at the corpus level: the landing's events ride after the
+case's claimed ids). The refused design arm (the wariness gate over
+the purse residue): 34/105 cases + 10/10 day1_full seeds would fire,
+the document-check release case's arson beat starves on the
+anchor-shifted event ids (the stream count moves the reply gate —
+the fixed-point runner would own it, but the designed ladder's
+survival becomes re-pin luck), and the rotation briefings renew the
+purse residue every 720 — the jitteriness would never fade on
+multi-day runs; refused and recorded in D-080. The live behavior —
+the two scans (beats 360/720) then the fade silence (beat 1080,
+dread 7 < 15), the scan's snapshot mint, the silent-skip law, the
+driver-stripped fingerprint identity — is pinned directly
+(tests/test_echo.py; D-080).

@@ -470,7 +470,9 @@ never canon, never an entropy input — L6), consumed by the intent
 door's `echo_at_least` gate (the P2b dependency; INTENT_SCHEMA §3 —
 the residue drives autonomous behavior and fades with time). The
 emotional residue is per-NPC valence, never player-adapted (L6). The
-live driver is the content-5 row (the iter-38/42/45 dormancy pattern).
+live driver landed iter-51 (content-5, D-080: the guard's
+jittery-watcher beat — dread-gated, the fade arc pinned on the
+committed pack).
 C:DDA field/smoke mechanics arrive here as content scale; state-
 gated epilogue blocks (C:DDA) as director trigger data.
 

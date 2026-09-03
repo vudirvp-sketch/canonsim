@@ -217,10 +217,30 @@ family honestly) + 1 parse pin (the s7 wait-720 batch 15→14) + 2
 unit seed re-probes, all through the identity-proved fixed-point
 runner. 959 tests green, ruff clean. Contract owner
 `core/rng.py` (the stream family law) + D-079.
-Next: the phase-3 driver rows (the echo/arc drivers — content-5/6,
-now landing WITHOUT the stream-shift corpus regen — and
-ambient-channel content-3) + the owner-gated set (parse-2,
-engine-1) + the phase-3→4 gate.
+The echo driver landed iter-51 (content-5, D-080 — social-2's live
+content set): the jittery-watcher beat LIVE — the guard's urgency
+entry (`look_around`, `echo_at_least dread >= 15`, p=100 the
+compulsion semantics: a symptom, not a decision — the residue IS the
+gate; the drunkard's 2-in-5 is the deliberate-act idiom). The DREAD
+axis over the wariness channel (the fire-fear is the echo's own; the
+purse wariness would double-count the crime ladder — the iter-44
+institutional call's family), the wariness arm measured and refused
+(34 corpus cases + 10/10 day1_full, the anchor-starved arson beat,
+the rotation-renewed residue never fading). The measured live shape
+on the committed set: the seed-33 fire family's partial sighting
+reads dread 22/15/7 across beats 360/720/1080 — two scans then the
+fade silence (P3e's headline law on the committed pack, pinned in
+tests/test_echo.py); the corpus regen is the deliberate pins alone
+(the watch-change case: the scan claim by id + the scene snapshot
+knowledge, 12 claims — ZERO broken pins, engine-2's add-safety
+delivered at the corpus level); day1_full 10/10 byte-identical (the
+dread-silent law, TEST_PLAN §6). 960 tests green, ruff clean. The
+landing is pack data over iter-46's standing door — the urgency
+table's own notes + TASKS content-5 + D-080 carry the contract.
+Next: the phase-3 driver rows (the arc driver — content-6, landing
+WITHOUT the stream-shift corpus regen — and ambient-channel
+content-3) + the owner-gated set (parse-2, engine-1) + the
+phase-3→4 gate.
 
 ## For AI agents (primary audience)
 

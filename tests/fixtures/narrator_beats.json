@@ -3215,6 +3215,11 @@
          "type": "knowledge_transfer"
         },
         {
+         "kind": "event",
+         "event_id": "ev_0020",
+         "type": "look_around"
+        },
+        {
          "kind": "state",
          "entity": "npc_guard_01",
          "prop": "position",
@@ -3258,6 +3263,11 @@
          "kind": "knowledge",
          "who": "npc_guard_02",
          "knows": "pc_01_caught_fleeing"
+        },
+        {
+         "kind": "knowledge",
+         "who": "npc_guard_01",
+         "knows": "scene_loc_guardroom"
         }
        ]
       }
@@ -3267,7 +3277,7 @@
    "expect": {
     "status": "accepted",
     "notes_contains": [
-     "BEAT claims: 10 supported"
+     "BEAT claims: 12 supported"
     ],
     "last_event_type": "wait"
    }

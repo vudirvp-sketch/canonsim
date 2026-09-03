@@ -14,8 +14,38 @@
 > since iter-5).
 
 ---
----
----
+iter-51 · 2026-09-04 · content-5 — the echo driver, the
+jittery-watcher beat LIVE (iter-51-content5-echo-driver; the owner's
+"continue per the plan, quality over speed" session call, the
+phase-3 backlog's top un-gated item — social-2's live content set)
+- rules.json: the guard's ADDED urgency entry (look_around,
+  echo_at_least dread >= 15, p=100 the compulsion semantics — the
+  residue IS the gate; DREAD over wariness: the fire-fear is the
+  echo's own channel, the purse wariness double-counts the crime
+  ladder). The wariness arm measured FIRST and refused: 34/105
+  corpus cases + 10/10 day1_full (the anchor-starved arson beat, the
+  rotation-renewed residue never fading) — the measured record in
+  TEST_PLAN §6 + D-080. Zero engine edits.
+- Measured live shape: the seed-33 fire family's partial sighting
+  reads dread 22/15/7 across beats 360/720/1080 — two scans (t=374,
+  t=774) then the fade silence; day1_full 10/10 byte-identical (the
+  dread-silent law). The corpus landing: ZERO broken pins (the scan
+  rides after the case's claimed ids — engine-2's add-safety
+  delivered at the corpus level, the first content landing with no
+  forced re-distill) + the deliberate pins on the watch-change case
+  (the scan by id + the scene snapshot knowledge, 12 claims).
+- tests/test_echo.py: the live-fire fade arc on the COMMITTED pack +
+  the dormancy tests flipped (the table is load-bearing now) + the
+  probe family strips the committed driver (mechanism isolation);
+  the lint tests isolated from the cross-lint. Tests 959→960, ruff
+  clean. D-080; TASKS (content-5 done), TEST_PLAN §6, phases.md §3,
+  README, STATUS (header + KI#68 deleted + Next step + the FAQ
+  regen entry actualized), this file synced. 8 files — over the 3-5
+  soft limit: the doc-sync law (§6 same-turn, the iter-43..50
+  precedent). DECISIONS transiently 46/30 kept per §6.1 (the collapse
+  owes at the phase-3→4 gate, the KI#64 note). iter-41 evicted per
+  the cap — verified in this edit (the KI#68 law).
+
 ---
 iter-50 · 2026-09-03 · engine-2 — the urgency-roll stream split,
 per-entry streams (iter-50-engine2-stream-split; the owner's
@@ -320,33 +350,4 @@ the plan" session call, the phase-3 backlog's top un-gated item)
   filler added); TASKS 671/600 kept by §6.1 (the phase-3 landing
   rows, the iter-39/40/41 substance precedent); `any`/`random`
   scope helpers recorded-not-built. bg-2 evicted per the cap.
-iter-41 · 2026-09-02 · drama-2 — the event grammar's option layer
-(iter-41-drama2-options; the owner's "continue working per the
-plans" call, the phase-3 backlog's top un-gated item)
-- core/director.py: `OptionSpec` + `SeededHook.options` + the choose
-  step (`_choose_option`, pure — availability gates, zero effective
-  weights never picked, heaviest wins, ties by declaration order, NO
-  RNG; the weighted draw stays excluded with MTTH) + the deferred-
-  release law (all options closed = no release, no budget, a closed
-  boss does not mark PEAK_CLIMAX) + the whole-key payload override in
-  `_intent`; `_effective_weight` extracted (shared with the option
-  weights).
-- core/pack.py: the option contract (the closed key set, the gate
-  predicate lint, the shared `_lint_weight_spec`, the intent override
-  checks); rules.json: the vigil's glance/stare pair (live, inert on
-  the committed runs — the D-066 all-PEAK window; the document-check
-  carries no options, its causal release runs the implicit base
-  option).
-- The lifecycle maps immediate/option/after → seed/choose/apply (no
-  literal effect blocks — DIRECTOR_SPEC §3b the contract owner); the
-  ctx helpers did NOT ride (single-entity gates, §9's anti-pattern —
-  they wait for drama-3).
-- Fixture discipline: the full suite green, zero regen; 10-seed
-  options-vs-no-options A/B (125 + the nine corpus seeds, a runner
-  outside the repo per Rule 9) 10/10 byte-identical (TEST_PLAN §6);
-  the pick laws unit-pinned. Tests 794→812 (+18 test_director.py),
-  ruff clean. D-070; DIRECTOR_SPEC 400/300 + TASKS 656/600 + phases.md
-  633 kept by §6.1 (the grammar tables + the landing records are
-  substance, the iter-40 precedent; 0 filler added); drama-3 is the
-  remainder. iter-33 evicted per the cap.
 ---
