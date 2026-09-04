@@ -16,6 +16,21 @@
 
 
 ---
+iter-58 · 2026-09-05 · leg-3b — the tavern reflection set (arming
+the v0.1 pack block; the owner's §2 design review first — endorsed)
+- content/tavern_pack rules+templates: the live reflection block —
+  `sneak_at_work_here`/`figure_reaching_for_purse` (the watcher) +
+  `trouble_by_the_bar`/`noise_by_the_bar` (the room), threshold 2;
+  `conclusion_drawn` story-critical, renders in the tale.
+- Measured-first: the corpus price ZERO (narrator 105 + parse 10 +
+  the T1 golden untouched; 8/10 day1 seeds byte-identical, exactly
+  123/128 mint 4 events each); the told-conclusion law live (the
+  briefing tells the insight, never-re-reflect blocks the re-derivation).
+- tests/test_reflection.py: the dormancy test flipped to the armed
+  law + 4 committed-pack pins. 1026→1030, ruff clean. LEGEND_SPEC §7
+  + TASKS leg-3b done + D-087 into the phase family (cap 30 held).
+  iter-48 evicted; 10 entries after.
+---
 iter-57 · 2026-09-05 · leg-3 — reflection & memory compaction (phase 4,
 phases.md §4's memory paragraph; LEGEND_SPEC written just-in-time)
 - core/reflection.py (NEW) + the _reflection lint + the loop._react
@@ -133,13 +148,3 @@ roll re-armed (social-1b's live content set)
   runner (2 id re-pins + the silent_second tail, zero ladder flips);
   the live-fire tests moved onto the committed pack. 951→952, ruff
   clean. D-078 + TASKS + TEST_PLAN §6.
----
-iter-48 · 2026-09-03 · content-2 — the alarm panic echo, the
-through-the-walls law LIVE (the last content row owing a corpus regen)
-- rules.json + templates.json: the `alarm_raised` → `panic_ripple`
-  on_action entry (witnesses +10 fear, the contagion quarter), the
-  story-critical list, the chronicle line; zero engine edits.
-- The 7-case corpus re-distill (the fixed-point runner); KI#68
-  opened+closed (the worklog cap drift, trimmed to 10 in the same
-  edit). +8 tests/test_panic.py; 943→951, ruff clean. D-077 + TASKS
-  + TEST_PLAN §6.

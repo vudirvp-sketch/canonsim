@@ -68,6 +68,7 @@
       "The hours tell on {target}: {axes} changed."
     ],
     "coerce": "{actor} leans on {target} — the hold is spent.",
-    "ramble": "{actor} rambles to no one in particular."
+    "ramble": "{actor} rambles to no one in particular.",
+    "conclusion_drawn": "{actor} had noticed it before, and named it: {knows}."
   }
 }

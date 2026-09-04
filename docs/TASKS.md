@@ -50,15 +50,16 @@
   committed pack (the 10-seed A/B byte-identical, zero corpus
   regen); LEGEND_SPEC.md written just-in-time at this row. Detail:
   D-086 + LEGEND_SPEC + tests/test_reflection.py.
-- `leg-3b` · the tavern reflection set (arming the v0.1 pack block):
-  which recurring families crystallize into which insights — the
-  measured candidates are day1_full seeds 123/128 (the retried
-  theft: the targeted guard holds the sighting twice; the room
-  holds the noise twice) — the chronicle line, the
-  `importance.story_critical_events` question, and the corpus
-  re-distill price through the fixed-point runner (the STATUS
-  regen-protocol FAQ owns the procedure). Owner-gated on the
-  pack-change review, the content-column precedent.
+- `leg-3b` · the tavern reflection set (arming the v0.1 pack block) —
+  **done (iter-58, D-087)**: the measured recurrence (day1_full seeds
+  123/128 — the retried theft) arms the insight pair
+  `sneak_at_work_here`/`figure_reaching_for_purse` (the watcher's
+  conclusion) + `trouble_by_the_bar`/`noise_by_the_bar` (the room's);
+  `conclusion_drawn` story-critical, renders in the tale; the corpus
+  price measured ZERO (the narrator corpus 105, the parse corpus 10,
+  the T1 golden — untouched; 8/10 day1 seeds byte-identical) — the
+  iter-52 zero-regen landing. Detail: D-087 + LEGEND_SPEC §7 +
+  tests/test_reflection.py.
 - `retr-1` · the retrieval ladder (STORE-1): SQLite FTS5 `bm25()` the
   zero-dep default, the sqlite-vec probe + fallback chain
   (vec → pure-Python cosine → FTS5-only, never an empty result), the

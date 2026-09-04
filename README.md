@@ -334,13 +334,24 @@ the never-re-reflect law, the read-side `stale` fold, and
 `expand_reflection` the expansion's demand side; no RNG, no
 hooks/state changes (L6 — the director untouched), the knower gate
 npc-only. Measured: the recurrence exists on the committed corpus
-(day1_full seeds 123/128 — the retried theft); the committed pack
-carries no reflection block — DORMANT (the arc-1 precedent), the
-10-seed A/B byte-identical, zero corpus regen, the arming row
-(leg-3b) tags the corpus price. 1026 tests green, ruff clean.
+(day1_full seeds 123/128 — the retried theft). leg-3b LANDED
+(iter-58, D-087 — the arming, the owner's §2 design review first):
+the committed pack's LIVE reflection block — the insight pair
+`sneak_at_work_here` (the watcher's conclusion, over the repeated
+sighting) and `trouble_by_the_bar` (the room's, over the repeated
+noise), the event `conclusion_drawn` rendering in the tale
+(story-critical); the corpus price measured ZERO (the narrator
+corpus, the parse corpus, and the T1 golden untouched; 8/10 day1
+seeds byte-identical, exactly 123/128 mint 4 conclusions each), and
+the told-conclusion law composing live: the watch-change briefing
+tells the relief guard the minted insight (told/partial, one step
+down) and the never-re-reflect gate blocks his own re-derivation —
+he holds what he was told, never re-derives it. 1030 tests green,
+ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
-`core/reflection.py` + LEGEND_SPEC.md + TASKS leg-1/leg-2/leg-3 +
-D-084/D-085/D-086.
+`core/reflection.py` + LEGEND_SPEC.md + TASKS leg-1/leg-2/leg-3/
+leg-3b +
+D-084/D-085/D-086/D-087.
 
 ## For AI agents (primary audience)
 

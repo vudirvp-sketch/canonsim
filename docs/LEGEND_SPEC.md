@@ -15,7 +15,7 @@
 | Surface | Owner | Status |
 |---|---|---|
 | The reflection mint (recurrence → event) | `core/reflection.py::reflection_drafts` | live (leg-3, iter-57) |
-| The pack block + lint | `rules.json::reflection` + `core/pack.py::_reflection` | live, DORMANT in the committed pack |
+| The pack block + lint | `rules.json::reflection` + `core/pack.py::_reflection` | live; ARMED (leg-3b, iter-58) |
 | Reflection provenance (`list[event_id]`) | the event's `outcome.provenance` | live (leg-3) |
 | The `stale` flag (read side) | `core/reflection.py::stale_reflections` | live (leg-3); consumers: retr-1, leg-4 |
 | The expansion law (demand side) | `core/reflection.py::expand_reflection` | live (leg-3) |
@@ -167,19 +167,32 @@ The block is **optional**: a pack without it mints no reflection
 events and runs byte-identically (the pack's own declaration is the
 gate, INV-3).
 
-## 7. Dormancy & the arming row
+## 7. The arming (leg-3b, iter-58)
 
-The committed v0.1 pack carries **no `reflection` block** — leg-3
-landed the machinery DORMANT (the arc-1/iter-47 precedent): the
-10-seed day1_full A/B (seeds 120..129) is byte-identical through the
-landing, zero corpus regen. The **measured recurrence** that will arm
-it: day1_full seeds 123/128 — the PC retries the theft; the targeted
-guard holds `figure_reaching_for_purse` twice (the second
-`pickpocket_failed` at t=12), the room holds `noise_by_the_bar`
-twice. The TASKS `leg-3b` row owns the arming (which families
-crystallize into which insights, the chronicle line, the corpus
-re-distill price through the fixed-point runner — the STATUS
-regen-protocol FAQ owns the procedure).
+The committed pack carries the LIVE block: the measured recurrence
+(day1_full seeds 123/128 — the PC retries the theft) mints the pack's
+insight pair, one per axis of the theft's evidence —
+`sneak_at_work_here` over `figure_reaching_for_purse` (the watcher's
+conclusion: the targeted guard holds the sighting twice, t=9/12) and
+`trouble_by_the_bar` over `noise_by_the_bar` (the room's conclusion:
+the barkeep, the drunkard, and the serving maid each hold the noise
+twice). `threshold` 2; the event `conclusion_drawn` renders
+"{actor} had noticed it before, and named it: {knows}." and rides
+`importance.story_critical_events` — a named conclusion is a tale
+beat (the knowledge-flow precedent: knowledge_transfer and
+rumor_told are story-critical too).
+
+The zero-regen landing (the iter-52 precedent): 8/10 day1 seeds
+byte-identical (exactly 123/128 mint — 4 events each, cause-chained
+to the second `pickpocket_failed`); the narrator corpus (105 cases),
+the parse corpus (10 cases), and the T1 golden fixture measured
+untouched through the real mediator/parser cycles — zero re-distill.
+The told-conclusion law rides LIVE through the watch-change
+briefing: the briefing tells the relief guard the minted conclusion
+(told/partial, one fidelity step down) with the evidence, and the
+never-re-reflect gate blocks his own re-derivation — he holds
+`figure_reaching_for_purse` twice from the one transfer, yet mints
+nothing. The laws compose without special cases.
 
 ## 8. What this spec deliberately does not own
 

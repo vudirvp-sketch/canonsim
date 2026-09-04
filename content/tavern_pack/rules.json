@@ -826,6 +826,25 @@
     },
     "notes": "leg-1 (iter-55, P3f; phases.md §4 the architecture row — the LEGEND_SPEC sketch's trait half; core/traits.py owns the machinery, core/pack.py::_traits the lint). The registry: which knowledge-token families crystallize into a STABLE belief once a knower holds threshold distinct tokens of the family (breadth, not repetition — the echo owns renewal; the source event ids ride the trait as provenance, the brief's derived-trait read is leg-2's row). A READ MODEL, never canon: no events, no state, no templates, no metrics, no decay term — the evidence holds while the log holds. DORMANT: no consumer reads the fold yet (the iter-47 arc precedent; the 10-seed A/B byte-identical, zero corpus regen). figure_starting_fire stays outside the families on purpose: a single sighting is fear (the echo's dread 60), not a crystallized belief — no fire family exists to join in the v0.1 literal vocabulary. papers_unsatisfactory stays UNdeclared per the iter-44 institutional call (the crime ladder owns the verdict's escalation; a belief twin would double-count the same knowledge channel). The L6 fence: a belief is per-NPC derived state over the NPC's own records, never player-adapted, never an entropy input (DIRECTOR_SPEC 4)."
   },
+  "reflection": {
+    "event": "conclusion_drawn",
+    "threshold": 2,
+    "reflections": {
+      "sneak_at_work_here": {
+        "family": [
+          "figure_reaching_for_purse"
+        ],
+        "notes": "The watcher's conclusion: the same figure reaching for the same purse twice is not chance — a sneak is at work. Measured recurrence: day1_full seeds 123/128 (the PC retries the theft; the targeted guard holds the sighting twice, t=9/12 and t=8/11). The watch-change briefing (t=360) then TELLS the relief guard the conclusion with the evidence — told/partial, one fidelity step down — and the never-re-reflect law keeps the hearsay knower honest: he holds what he was told, never re-derives it."
+      },
+      "trouble_by_the_bar": {
+        "family": [
+          "noise_by_the_bar"
+        ],
+        "notes": "The room's conclusion: the same noise from the same corner twice means trouble keeps coming from there. Measured recurrence: day1_full seeds 123/128 — the barkeep, the drunkard, and the serving maid each hold the noise twice (both theft attempts). One insight per axis of the theft's evidence: the figure is the watcher's business, the noise the room's (the echo/traits/reflection split: felt / believed / concluded)."
+      }
+    },
+    "notes": "leg-3b (iter-58; LEGEND_SPEC §6/§7 — the arming row, the content-column precedent iter-43): the measured recurrence crystallizes into the pack's first live insight pair. Both families recur exactly on day1_full seeds 123/128 (4 mints per seed: the targeted guard + the room trio at the second pickpocket; 8/10 seeds byte-identical); the narrator corpus (105 cases), the parse corpus (10 cases), and the T1 golden fixture are UNTOUCHED — zero re-distill, the iter-52 zero-regen landing. The told-conclusion law is LIVE through the watch-change briefing: the minted insight travels as ordinary knowledge (one fidelity step down), and the never-re-reflect gate blocks the briefed knower's own re-derivation (he holds figure_reaching_for_purse twice from ONE transfer — the within-event dedup would yield one draft, but view.holds on the told insight refuses even that). Every number here is pack data (INV-3); the machinery is core/reflection.py, the lint core/pack.py::_reflection."
+  },
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,
@@ -858,7 +877,8 @@
       "document_check_failed",
       "leverage_gained",
       "coerce",
-      "ramble"
+      "ramble",
+      "conclusion_drawn"
     ],
     "thresholds": {
       "medium": 2,

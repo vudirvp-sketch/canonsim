@@ -426,3 +426,21 @@ the nopacing arm now closes on the ramble (t=1458) where the ON arm
 closes on the sweep (t=1456); both arms share their 52-line prefix
 (the clock's presence swaps WHICH director beat closes the day —
 tests/test_balance_harness.py).
+
+Re-measured at iter-58 (leg-3b, the reflection arming — D-087, the
+content column's phase-4 row): the same 10 day1_full seeds, the
+committed ARMED pack vs the block-stripped twin (a runner outside the
+repo per Rule 9): **8/10 byte-identical** (the recurrence lives only
+on 123/128 — the PC retries the theft), **exactly 123/128 diverge,
++4 `conclusion_drawn` events each** (the targeted guard's
+`sneak_at_work_here` + the room trio's `trouble_by_the_bar`, all
+cause-chained to the second `pickpocket_failed`, minted in the
+reaction cascade — later ids shift by 4, everything before the
+crossing untouched); the watch-change briefing then TELLS the relief
+guard the insight (told/partial) and the never-re-reflect gate holds
+his own mint off (zero extra events). The narrator corpus (105
+cases), the parse corpus (10 cases), and the T1 golden fixture
+replayed through the real mediator/parser cycles: **zero reflection
+mints, zero pin changes** — the zero-regen landing measured BEFORE
+the commit, pinned as the byte-identity witness
+(tests/test_reflection.py; D-087).

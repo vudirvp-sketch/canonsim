@@ -1,53 +1,58 @@
 # STATUS — canonsim
 
-Iteration: iter-57 (`iter-57-reflection-mint` — TASKS.md's top phase-4
-todo, leg-3: reflection & memory compaction, phases.md §4's memory
-paragraph) ·
+Iteration: iter-58 (`iter-58-reflection-arming` — TASKS.md's top phase-4
+todo, leg-3b: the tavern reflection set, the content-column arming of
+leg-3's machinery; the owner's session call — the LEGEND_SPEC §2
+design review first, "the ideal solution" verdict, then the top row) ·
 Phase: 4 (Knowledge & scene) — OPEN (iter-55)
-**leg-3 landed: reflection-on-recurrence (D-086) —
-`core/reflection.py` mints the higher-level entry as an EVENT through
-the canon door: a knower whose held records of a `rules.json::
-reflection` family reach the block's threshold (REPEATS — recurrence,
-where traits count breadth) mints ONE reflection event per (knower,
-insight) per run, `outcome.provenance` the `list[event_id]` demand
-handle (the source always queryable, the reflection a derived view,
-never a replacement — `expand_reflection` the demand side), the
-never-re-reflect law (`view.holds` on the insight token — records are
-never dropped, INV-1), `stale_reflections` the read-side stale flag
-(empty on any whole log by construction; the derived-store scavenge
-screening retr-1 must consult, the source-outranks-recency ranking
-recorded as retr-1's contract), no RNG in the mint, no hooks/state
-changes (L6 — knowledge-side canon, the director untouched by
-construction), the knower gate kind npc, `letta`'s
-`summarize_messages_in_place` the named anti-pattern refused (an
-append, never a rewrite — INV-1/INV-5). Measured-first: the
-recurrence EXISTS on the committed corpus — day1_full seeds 123/128
-(the PC retries the theft; the targeted guard holds the sighting
-twice, the room the noise twice); the committed pack carries NO
-reflection block — DORMANT (the arc-1 precedent), the 10-seed
-day1_full A/B (seeds 120..129) 10/10 byte-identical through the
-landing, zero corpus regen; the craft-pack live-fire mints exactly
-one event (provenance [ev_0002, ev_0015], cause-chained, the cascade
-terminating). `docs/LEGEND_SPEC.md` written just-in-time at this row
-(the D-022 law) — the compression half's contract owner.**
+**leg-3b landed: the arming (D-087) — the committed pack's LIVE
+`rules.json::reflection` block: the measured recurrence (day1_full
+seeds 123/128 — the PC retries the theft) mints the pack's insight
+pair, one per axis of the theft's evidence — `sneak_at_work_here`
+over `figure_reaching_for_purse` (the watcher's conclusion: the
+targeted guard holds the sighting twice) and `trouble_by_the_bar`
+over `noise_by_the_bar` (the room's: the barkeep, the drunkard, the
+serving maid each hold the noise twice), threshold 2; the event
+`conclusion_drawn` renders "{actor} had noticed it before, and named
+it: {knows}." and rides `importance.story_critical_events` (a named
+conclusion is a tale beat — the knowledge-flow precedent; the
+director untouched: importance feeds the tale gate and the metrics,
+never entropy). ZERO-REGEN measured-first landing (the iter-52
+precedent): the corpus price measured BEFORE the commit — the
+narrator corpus (105 cases) and the parse corpus (10 cases) replay
+through the real mediator/parser cycles with ZERO reflection mints,
+the T1 golden byte-identical, 8/10 day1 seeds byte-identical (exactly
+123/128 mint, 4 events each, cause-chained to the second
+`pickpocket_failed`, provenance [ev_0002, ev_0015]); the
+told-conclusion law LIVE through the watch-change briefing — the
+briefing tells the relief guard the minted insight (told/partial, one
+fidelity step down) and the never-re-reflect gate blocks his own
+re-derivation (he holds the sighting twice from the ONE transfer,
+mints nothing — the laws compose without special cases). LEGEND_SPEC
+§2 design verdict (the owner's question): the three-axis split
+echo/traits/reflection = felt/believed/concluded reviewed against the
+alternatives (letta's in-place rewrite — INV-1/INV-5 violation;
+Generative Agents' replacement-priority reflection — the source
+outranks here; DF's collections — epistemology-empty, bg-2 measured;
+one unified memory score — collapses the axes the live corpus
+exercises differently) — ENDORSED as the ideal synthesis, the arming
+proceeds on the owner's directive.**
 ·
 Date: 2026-09-05 ·
-Scope: `core/reflection.py` (NEW — the mint + the stale fold + the
-expansion), `core/pack.py` (the `_reflection` lint — closed keys,
-threshold >= 2, mintable family tokens, one-sided membership, the
-insight-token vocabulary hygiene), `core/loop.py` (`_react` wiring —
-appended after leverage, before the director seeding),
-`docs/LEGEND_SPEC.md` (NEW — the just-in-time spec), 
-`tests/test_reflection.py` (NEW, +22: the mint laws, the provenance
-law, the never-re-reflect gate, the within-event dedup, the knower
-gate, the insight-as-ordinary-knowledge law, determinism + RNG-free,
-L6 structural, the stale family, the expansion family, the lint
-family), `docs/TASKS.md` (leg-3 done + the leg-3b arming row),
-`docs/DECISIONS.md` (D-086 into the D-084/D-085/D-086 phase family,
-cap 30 held), `docs/SPECS_BACKLOG.md` (the LEGEND_SPEC row flipped),
-`worklog.md`, `docs/AGENT_NAVIGATION.md` (§1 the new files),
-`README.md` (the phase-4 paragraph's leg-3 sentence), `STATUS.md`
-(this header + Next step). 1004→1026 tests green, ruff clean.
+Scope: `content/tavern_pack/rules.json` (the `reflection` block —
+event `conclusion_drawn`, threshold 2, the two-insight table with the
+measured-recurrence notes; `conclusion_drawn` appended to
+`importance.story_critical_events`), `content/tavern_pack/
+templates.json` (the `conclusion_drawn` chronicle line),
+`tests/test_reflection.py` (the dormancy test reworked to the armed
+law + 4 new committed-pack pins: the four conclusions, the
+told-conclusion block, the tale line, the 8/10 byte-identity
+witness), `docs/LEGEND_SPEC.md` (§1 status + §7 the arming record),
+`docs/TASKS.md` (leg-3b done), `docs/DECISIONS.md` (D-087 into the
+D-084/D-085/D-086/D-087 phase family, cap 30 held), `worklog.md`
+(iter-48 evicted), `README.md` (the phase-4 paragraph's leg-3b
+sentence), `STATUS.md` (this header + Next step; KI#70 deleted per
+§5). 1026→1030 tests green, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -71,13 +76,11 @@ cap 30 held), `docs/SPECS_BACKLOG.md` (the LEGEND_SPEC row flipped),
 
 ## Active KIs
 
-- KI#70 · the BRIEF_SPEC self-cap drift (the header declared "≤300
-  lines" while the file carried 389 at iter-55 HEAD — the cap rotted
-  as the just-in-time clauses landed, iter-8→55) · opened+closed
-  iter-56: the header now reads the owning law (AGENTS §6: ≤600,
-  substance-filtered §6.1 — the field-level clauses are substance,
-  never cut to fit an aspirational number); flagged at the leg-2
-  spec edit when the file crossed 400.
+- (none — the board is clean at iter-58.)
+
+- (KI#70 deleted at iter-58 per AGENTS §5 — closed iter-56, two
+  iterations past; the lesson lives in git + the BRIEF_SPEC header
+  that now reads the owning law, AGENTS §6/§6.1.)
 
 - (KI#69 deleted at iter-56 per AGENTS §5 — closed iter-54, two
   iterations past; the lesson lives in git + the worklog's
@@ -508,30 +511,30 @@ phase-4→5 gate.
 
 ## Next step
 
-**Phase 4 (Knowledge & scene) is OPEN — leg-1/leg-2/leg-3 are LANDED
-(D-084/D-085/D-086, the phase family row): the trait fold with its
-brief read, and now the reflection mint — compaction emits
-higher-level entries that are themselves log events (provenance
-`list[event_id]`, the never-re-reflect law, the stale fold), DORMANT
-in the committed pack with the 10-seed A/B byte-identical through
-every landing so far. The natural next rows: `leg-3b` the tavern
-reflection set (arming the block — the measured recurrence: seeds
-123/128; the corpus re-distill price tagged) OR `retr-1` the
-retrieval ladder (the deterministic re-ranker + the two contract
-points LEGEND_SPEC fixes for it: consult `stale_reflections`, the
-source outranks the reflection on contradiction). The exit criterion
-"0 leaks on the blind-NPC suite" reads T3 (`docs/TEST_PLAN.md` §1)
-extended to the phase-4 surfaces — the blind-1 row owns the
-instrument. The phase-3 verdict record: D-083 + worklog iter-54.**
+**Phase 4 (Knowledge & scene) is OPEN — leg-1/leg-2/leg-3/leg-3b are
+LANDED
+(D-084/D-085/D-086/D-087, the phase family row): the trait fold with
+its brief read, the reflection mint, and now the ARMING — the
+committed pack's live insight pair (seeds 123/128 mint; 8/10 seeds
+and every corpus untouched, the zero-regen landing), with the
+told-conclusion law composing live through the watch-change briefing.
+The next row: `retr-1` the retrieval ladder (the deterministic
+re-ranker + the two contract points LEGEND_SPEC fixes for it: consult
+`stale_reflections`, the source outranks the reflection on
+contradiction — the arming gives it live reflections to rank). The
+exit criterion "0 leaks on the blind-NPC suite" reads T3
+(`docs/TEST_PLAN.md` §1) extended to the phase-4 surfaces — the
+blind-1 row owns the instrument. The phase-3 verdict record: D-083 +
+worklog iter-54.**
 
 1. **The phase-4 queue (TASKS.md owns the rows):** `leg-3` —
-   LANDED (iter-57, D-086 — the reflection mint + LEGEND_SPEC; the
-   machinery DORMANT in the committed pack, the 10-seed A/B
-   byte-identical) → `leg-3b` the tavern reflection set (arming the
-   block; the measured recurrence seeds 123/128, the corpus price
-   tagged) → `retr-1` the retrieval ladder (LEGEND_SPEC §4/§5 fixed
-   its two contract points: consult `stale_reflections`, the source
-   outranks the reflection on contradiction) → `scene-1` the scene
+   LANDED (iter-57, D-086 — the reflection mint + LEGEND_SPEC) →
+   `leg-3b` LANDED (iter-58, D-087 — the arming: the insight pair
+   live, `conclusion_drawn` story-critical, zero corpus regen; the
+   told-conclusion law composing through the briefing) → `retr-1` the
+   retrieval ladder (LEGEND_SPEC §4/§5 fixed its two contract points:
+   consult `stale_reflections`, the source outranks the reflection on
+   contradiction) → `scene-1` the scene
    manager + mode B → `leg-4` mode F offline → `blind-1` the leak
    suite's extension.
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +

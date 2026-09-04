@@ -1,9 +1,11 @@
-"""iter-57 acceptance — reflection & memory compaction (leg-3, phase 4;
-TASKS.md's leg-3 row: "phases.md §4 — reflection provenance
+"""iter-57/iter-58 acceptance — reflection & memory compaction (leg-3
++ leg-3b, phase 4; TASKS.md's rows: "phases.md §4 — reflection provenance
 `list[event_id]`, the source outranks the reflection's recency on
 contradiction, the `stale` flag, reflection-on-recurrence never
 `summarize_messages_in_place`; LEGEND_SPEC.md written just-in-time at
-this row"). The contract owner is `docs/LEGEND_SPEC.md`.
+this row"; leg-3b — "the tavern reflection set, arming the v0.1 pack
+block ... the measured candidates are day1_full seeds 123/128"). The
+contract owner is `docs/LEGEND_SPEC.md`.
 
 The laws pinned here:
 
@@ -30,21 +32,30 @@ The laws pinned here:
   state changes — the director buffer is untouched, entropy never
   reads a knowledge-derived entry; the cascade terminates by
   construction.
-- **The dormancy law**: the committed v0.1 pack carries no
-  `reflection` block — the run is byte-identical through the landing
-  (the 10-seed day1_full A/B, seeds 120..129); the TASKS arming row
-  owns the corpus price (the measured recurrence: seeds 123/128).
+- **The arming law (leg-3b, iter-58)**: the committed pack carries
+  the LIVE block — the measured recurrence (day1_full seeds 123/128:
+  the PC retries the theft) mints the pack's four conclusions (the
+  targeted guard's `sneak_at_work_here`, the room trio's
+  `trouble_by_the_bar`); every other seed, the narrator corpus (105
+  cases), the parse corpus (10 cases), and the T1 golden fixture are
+  untouched — the zero-regen landing (8/10 seeds byte-identical; the
+  pack's own declaration is the gate, INV-3). The told-conclusion law
+  rides LIVE through the watch-change briefing: the minted insight
+  travels as ordinary knowledge (told, one fidelity step down) and
+  the never-re-reflect gate blocks the briefed knower's own
+  re-derivation.
 - **The lint laws**: closed vocabularies, threshold >= 2 (a first
   occurrence is an event, not a recurrence), the event type renders,
   family tokens mintable and one-sided, the insight token never
   collides with the mintable knowledge vocabulary.
 
-Live-fire on the CRAFTED pack (the iter-46 crafted-block family): the
-committed pack has no block, so every live-fire test copies the pack
-and declares one — the probe insight `sneak_at_work_here` over the
-`figure_reaching_for_purse` family, the measured day1_full seed-123
-recurrence (the PC retries the theft; the room's other witnesses hold
-the sighting once and honestly stay unreflected).
+Live-fire on two packs: the COMMITTED pack (armed at iter-58 — its own
+pins: the four conclusions, the told-conclusion block, the tale line,
+the 8/10 byte-identity witness) and the CRAFTED probe pack (the
+iter-46 crafted-block family: a copy whose block is OVERWRITTEN with
+the probe insight `sneak_at_work_here` over the
+`figure_reaching_for_purse` family — the mechanism isolated from the
+committed insights, the measured day1_full seed-123 recurrence).
 """
 
 from __future__ import annotations
@@ -65,6 +76,7 @@ from core.reflection import (
     reflection_drafts,
     stale_reflections,
 )
+from render.chronicle import render_chronicle
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
@@ -145,12 +157,14 @@ def run_crafted(tmp_path: Path, seed: int = 123) -> list[EventRecord]:
 # -- the mint ------------------------------------------------------------
 
 
-def test_no_block_yields_nothing_and_the_run_is_v0_1(tmp_path: Path) -> None:
-    """The dormancy law: the committed pack declares no block, so the
-    mint yields nothing, the log holds no reflection events, and the
-    read side folds empty — the byte-identical v0.1 behavior (the
-    10-seed A/B witness measured at the landing)."""
-    log = tmp_path / "day1_v01.jsonl"
+def test_no_recurrence_mints_nothing(tmp_path: Path) -> None:
+    """The armed gate law: the committed pack DECLARES the block, but a
+    seed without the measured recurrence (125 — the canonical seed)
+    mints nothing — the pack's declaration arms the machinery, the
+    recurrence pulls the trigger (INV-3: the pack's own data is the
+    gate; the below-threshold fold is the honest answer, never an
+    error)."""
+    log = tmp_path / "day1_armed_125.jsonl"
     script = dict(DAY1)
     script["seed"] = 125
     sim = Simulator(PACK, 125, log, SCHEMA, commit="0000000")
@@ -158,7 +172,8 @@ def test_no_block_yields_nothing_and_the_run_is_v0_1(tmp_path: Path) -> None:
     sim.close()
     _header, events = read_log(log, SCHEMA)
     view = KnowledgeView.from_events(events)
-    assert "reflection" not in PACK.rules
+    assert "reflection" in PACK.rules  # armed (leg-3b, iter-58)
+    assert not [e for e in events if e.type == REFLECTION_EVENT]
     drafts = list(
         reflection_drafts(PACK, view, events[1])
     )
@@ -181,6 +196,126 @@ def test_the_mint_fires_at_the_threshold_crossing(tmp_path: Path) -> None:
     # the cascade terminates: the reflection event's own reaction pass
     # mints nothing (no recursion — exactly one event in the log)
     assert sum(1 for e in events if e.type == REFLECTION_EVENT) == 1
+
+
+# -- the committed arming (leg-3b, iter-58) ---------------------------------
+
+
+COMMITTED_EVENT = "conclusion_drawn"
+
+
+def run_armed(tmp_path: Path, seed: int = 123) -> list[EventRecord]:
+    """The committed pack's own live fire (the armed block, no
+    crafting): day1_full on the measured seed."""
+    log = tmp_path / f"day1_armed_{seed}.jsonl"
+    script = dict(DAY1)
+    script["seed"] = seed
+    sim = Simulator(PACK, seed, log, SCHEMA, commit="0000000")
+    sim.run_playscript(script)
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    return events
+
+
+def test_the_committed_pack_arms_the_measured_recurrence(
+    tmp_path: Path,
+) -> None:
+    """leg-3b live: the committed block's own mint — seed 123's second
+    theft attempt (ev_0015, the measured recurrence) mints the pack's
+    four conclusions: the targeted guard's `sneak_at_work_here` and
+    the room trio's `trouble_by_the_bar`, each cause-chained to the
+    attempt, in event order × declaration order (INV-2)."""
+    events = run_armed(tmp_path)
+    minted = [e for e in events if e.type == COMMITTED_EVENT]
+    assert [(e.actor, e.outcome["about"]) for e in minted] == [
+        ("npc_guard_01", "sneak_at_work_here"),
+        ("npc_barkeep_01", "trouble_by_the_bar"),
+        ("npc_drunk_01", "trouble_by_the_bar"),
+        ("npc_maid_01", "trouble_by_the_bar"),
+    ]
+    assert all(e.cause == "ev_0015" and e.t == 12 for e in minted)
+    guard = minted[0]
+    assert guard.outcome["provenance"] == ["ev_0002", "ev_0015"]
+    assert guard.outcome["recurrence"] == 2
+
+
+def test_the_told_conclusion_law_is_live(tmp_path: Path) -> None:
+    """The told-conclusion law, live on the committed pack: the
+    watch-change briefing (t=360) tells the relief guard the minted
+    conclusion — `told`, one fidelity step down (`partial`) — and the
+    never-re-reflect gate blocks his own re-derivation: he holds
+    `figure_reaching_for_purse` twice from the ONE transfer, yet no
+    second `sneak_at_work_here` mint fires. The hearsay knower's
+    honest state: he holds what he was told, never re-derives it."""
+    events = run_armed(tmp_path)
+    view = KnowledgeView.from_events(events)
+    told = [
+        r
+        for r in view.records_of("npc_guard_02")
+        if r.knows == "sneak_at_work_here"
+    ]
+    assert len(told) == 1
+    assert told[0].channel == "told"
+    assert told[0].fidelity == "partial"
+    assert told[0].source == "ev_0021"  # the briefing event
+    minted = [e for e in events if e.type == COMMITTED_EVENT]
+    assert not any(e.actor == "npc_guard_02" for e in minted)
+
+
+def test_the_conclusion_renders_in_the_tale(tmp_path: Path) -> None:
+    """leg-3b's importance call: a named conclusion is a tale beat —
+    `conclusion_drawn` rides the story-critical list (the
+    knowledge-flow precedent: knowledge_transfer and rumor_told are
+    story-critical too), so the mint renders through the tale gate."""
+    events = run_armed(tmp_path)
+    tale = render_chronicle(events, PACK, 123)
+    assert (
+        "Doren had noticed it before, and named it: sneak_at_work_here."
+        in tale
+    )
+    assert (
+        "the barkeep had noticed it before, and named it: "
+        "trouble_by_the_bar." in tale
+    )
+
+
+def stripped_pack(tmp_path: Path) -> Any:
+    """The committed pack with the reflection block removed — the
+    block-less twin (the arming's A/B witness, the hard_pack pattern)."""
+    target = tmp_path / "pack_stripped"
+    if target.exists():
+        shutil.rmtree(target)
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    del rules["reflection"]
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
+
+
+def test_arming_is_byte_identical_off_the_measured_seeds(
+    tmp_path: Path,
+) -> None:
+    """The arming's A/B witness: the block-less twin vs the armed
+    committed pack, day1_full seeds 120..129 — the eight seeds without
+    the measured recurrence are byte-identical; exactly 123/128 (the
+    recurrence) diverge. The zero-regen landing's own pin."""
+    twin = stripped_pack(tmp_path)
+    diverged: list[int] = []
+    for seed in range(120, 130):
+        bytes_of: dict[str, bytes] = {}
+        for label, p in (("twin", twin), ("armed", PACK)):
+            log = tmp_path / f"ab_{label}_{seed}.jsonl"
+            script = dict(DAY1)
+            script["seed"] = seed
+            sim = Simulator(p, seed, log, SCHEMA, commit="0000000")
+            sim.run_playscript(script)
+            sim.close()
+            bytes_of[label] = log.read_bytes()
+        if bytes_of["twin"] != bytes_of["armed"]:
+            diverged.append(seed)
+    assert diverged == [123, 128]
 
 
 def test_provenance_is_the_source_event_id_list(tmp_path: Path) -> None:
