@@ -76,6 +76,7 @@ from core.log import EventDraft, EventLogWriter, EventRecord
 from core.onaction import on_action_drafts
 from core.pack import Pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
+from core.reflection import reflection_drafts
 from core.resolvers import REGISTRY
 from core.rng import SUBSTANTIVE, RngBank
 from core.scheduler import build, decls_from_rules
@@ -794,6 +795,22 @@ class Simulator:
         # so the cascade terminates by construction (the one-hop law's
         # sibling) and the director buffer is untouched (L6).
         for draft in leverage_drafts(self._pack, self._knowledge, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
+            )
+        # leg-3 (iter-57): reflection-on-recurrence — the memory
+        # compaction mint (Generative Agents' reflection, event-sourced:
+        # the higher-level entry is itself an event, originals never
+        # dropped — INV-1; never letta's in-place summarization). A
+        # knower whose family records reach the pack's recurrence
+        # threshold mints ONE reflection event per (knower, insight) per
+        # run (the never-re-reflect gate rides the live view). Appended
+        # after the leverage reaction (the same append composition),
+        # before the director seeding; the drafts carry no hooks and no
+        # state changes, so the cascade terminates by construction and
+        # the entropy is untouched (L6 — a reflection is knowledge-side
+        # canon, never an entropy input).
+        for draft in reflection_drafts(self._pack, self._knowledge, record):
             self._commit(
                 replace(draft, cause=record.id, provenance={"seed": self._seed})
             )

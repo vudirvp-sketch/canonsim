@@ -47,6 +47,7 @@ from core.onaction import (
     STATE_KEYS,
 )
 from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
+from core.reflection import REFLECTION_BLOCK_KEYS, REFLECTION_INSIGHT_KEYS
 from core.resolvers import REGISTRY
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
@@ -291,6 +292,7 @@ class _Lint:
         self._secrets()
         self._echo()
         self._traits()
+        self._reflection()
         self._states_rules()
         self._importance_rules()
         self._brief()
@@ -2065,6 +2067,117 @@ class _Lint:
                 f"reach threshold {threshold} — dead vocabulary, refused "
                 "at load (grow the family or lower the threshold)",
             )
+            if "notes" in spec:
+                _require(
+                    isinstance(spec["notes"], str),
+                    f"{where}: notes must be a string (prose)",
+                )
+
+    def _reflection(self) -> None:
+        """The reflection & compaction contract (`core/reflection.py`
+        owns the vocabulary constants; `phases.md` §4 the reflection
+        paragraph — the LEGEND_SPEC compression half, landed iter-57).
+        The block is OPTIONAL — a pack without it mints no reflection
+        events and runs the v0.1 behavior, byte-identically (the
+        pack's own declaration is the gate, INV-3; the committed v0.1
+        pack carries no block — the TASKS arming row owns the
+        corpus price)."""
+        rules = self._data["rules.json"]
+        config = rules.get("reflection")
+        if config is None:
+            return
+        templates = self._data["templates.json"]["events"]
+        if not isinstance(config, Mapping):
+            raise PackError("reflection must be an object")
+        unknown = sorted(set(config) - set(REFLECTION_BLOCK_KEYS))
+        if unknown:
+            raise PackError(
+                f"reflection: unknown keys {unknown} (the closed "
+                f"vocabulary: {' | '.join(REFLECTION_BLOCK_KEYS)})"
+            )
+        event_type = config.get("event")
+        _require(
+            isinstance(event_type, str) and event_type in templates,
+            f"reflection.event {event_type!r} is not in the template "
+            "vocabulary (EVENT_SCHEMA §11 — the reflection renders in the "
+            "chronicle)",
+        )
+        # the threshold: the recurrence count that compacts — a first
+        # occurrence is an event, not a pattern (the compaction floor,
+        # the traits threshold's twin)
+        threshold = config.get("threshold")
+        _require(
+            _is_int(threshold) and threshold >= 2,
+            "reflection.threshold must be an integer >= 2 (a single "
+            "record is an occurrence, not a recurrence — the LEGEND_SPEC "
+            "floor)",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                "reflection.notes must be a string (prose — never a table "
+                "key)",
+            )
+        insights = config.get("reflections")
+        _require(
+            isinstance(insights, Mapping) and insights,
+            "reflection.reflections must be a non-empty object keyed by "
+            "insight token",
+        )
+        mintable = self._literal_knows_tokens()
+        seen_members: dict[str, str] = {}  # token -> owning insight
+        for insight, spec in insights.items():
+            where = f"reflection.reflections[{insight!r}]"
+            # the vocabulary-hygiene check (the traits law): an insight
+            # token colliding with a mintable knowledge token puts one
+            # string in two vocabularies — the template mint would hold
+            # it and the never-re-reflect gate would block the fold's
+            # own mint forever
+            _require(
+                insight not in mintable,
+                f"{where}: the insight token is also a mintable knowledge "
+                "token (one string, two vocabularies — rename the insight)",
+            )
+            _require(isinstance(spec, Mapping), f"{where}: must be an object")
+            unknown_insight = sorted(set(spec) - set(REFLECTION_INSIGHT_KEYS))
+            if unknown_insight:
+                raise PackError(
+                    f"{where}: unknown keys {unknown_insight} (the closed "
+                    f"vocabulary: {' | '.join(REFLECTION_INSIGHT_KEYS)})"
+                )
+            family = spec.get("family")
+            _require(
+                isinstance(family, list) and family,
+                f"{where}: family must be a non-empty list of knowledge "
+                "tokens",
+            )
+            _require(
+                all(isinstance(token, str) for token in family),
+                f"{where}: family entries must be strings",
+            )
+            _require(
+                len(set(family)) == len(family),
+                f"{where}: family contains duplicate tokens (a duplicate "
+                "double-counts one recurrence — dead data)",
+            )
+            for token in family:
+                # the secrets/echo/traits lint's law: a token nobody can
+                # ever learn is dead vocabulary — the recurrence must
+                # ride a declared knowledge template
+                _require(
+                    token in mintable,
+                    f"{where}: family token {token!r} is not mintable "
+                    "(no declared knowledge template mints it — the "
+                    "literal `knows` vocabulary)",
+                )
+                owner = seen_members.get(token)
+                _require(
+                    owner is None,
+                    f"{where}: family token {token!r} already belongs to "
+                    f"insight {owner!r} (the one-sided membership law — a "
+                    "token feeds exactly one reflection)",
+                )
+                seen_members[token] = insight
             if "notes" in spec:
                 _require(
                     isinstance(spec["notes"], str),

@@ -16,6 +16,22 @@
 
 
 ---
+iter-57 · 2026-09-05 · leg-3 — reflection & memory compaction (phase 4,
+phases.md §4's memory paragraph; LEGEND_SPEC written just-in-time)
+- core/reflection.py (NEW) + the _reflection lint + the loop._react
+  wiring (after leverage): reflection-on-recurrence mints ONE event
+  per (knower, insight) per run — outcome.provenance the
+  list[event_id] handle, the never-re-reflect law, the stale fold,
+  expand_reflection the demand side; no RNG, no hooks (L6).
+- Measured-first: the recurrence EXISTS (day1_full seeds 123/128);
+  the committed pack carries NO block — DORMANT (the arc-1
+  precedent): the 10-seed A/B 10/10 byte-identical, zero corpus
+  regen; +22 tests/test_reflection.py. 1004→1026, ruff clean.
+- LEGEND_SPEC.md (193 lines) + SPECS_BACKLOG flip + TASKS leg-3
+  done + the leg-3b arming row (the corpus price tagged) + D-086
+  into the D-084/D-085/D-086 family (cap 30 held). iter-47 evicted;
+  10 entries after.
+---
 iter-56 · 2026-09-05 · leg-2 — the brief's derived-trait read, leg-1's
 first consumer (phase 4, BRIEF_SPEC's phase-4 clause)
 - brief/assembler.py + core/traits.py (+14 tests: 10 brief, 4 traits):
@@ -127,13 +143,3 @@ through-the-walls law LIVE (the last content row owing a corpus regen)
   opened+closed (the worklog cap drift, trimmed to 10 in the same
   edit). +8 tests/test_panic.py; 943→951, ruff clean. D-077 + TASKS
   + TEST_PLAN §6.
----
-iter-47 · 2026-09-03 · arc-1 — arcs & tension shaping, the
-release-chain layer (the LAST engine row of the build column)
-- core/director.py: `director.arcs` pack chains — the ORDER law +
-  the GAP law + the entropy mirror + the per-run cursor; one-sided
-  membership, the pack lint. DORMANT (content-6 owns the driver).
-- The naive watcher-pair chaining probed and REFUSED live (the
-  corpus-pinned relief held forever by a never-firing predecessor).
-  +19 tests/test_director.py; 924→943, ruff clean. D-076 + TASKS +
-  DIRECTOR_SPEC §3d.

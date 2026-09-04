@@ -321,9 +321,26 @@ records render nothing raw (the derived view replaces them; a
 below-threshold family stays raw), `core/traits.py::expand_trait` the
 expansion law's demand side. The PC holds no family token on any
 committed corpus — zero brief bytes changed: the 10-seed A/B
-byte-identical (brief + log), zero corpus regen. 1004 tests green,
-ruff clean. Contract owner `core/traits.py` + BRIEF_SPEC §3.5 + TASKS
-leg-1/leg-2 + D-084/D-085.
+byte-identical (brief + log), zero corpus regen. leg-3 LANDED
+(iter-57, D-086 — the LEGEND_SPEC compression half, written
+just-in-time at the row): `core/reflection.py` mints
+reflection-on-recurrence — a knower whose family records REPEAT to
+the pack's threshold mints ONE reflection event per (knower,
+insight) per run through the canon door (compaction emits
+higher-level entries that are themselves log entries; originals
+never dropped, INV-1 — never letta's in-place summarization), the
+event's `outcome.provenance` the `list[event_id]` demand handle,
+the never-re-reflect law, the read-side `stale` fold, and
+`expand_reflection` the expansion's demand side; no RNG, no
+hooks/state changes (L6 — the director untouched), the knower gate
+npc-only. Measured: the recurrence exists on the committed corpus
+(day1_full seeds 123/128 — the retried theft); the committed pack
+carries no reflection block — DORMANT (the arc-1 precedent), the
+10-seed A/B byte-identical, zero corpus regen, the arming row
+(leg-3b) tags the corpus price. 1026 tests green, ruff clean.
+Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
+`core/reflection.py` + LEGEND_SPEC.md + TASKS leg-1/leg-2/leg-3 +
+D-084/D-085/D-086.
 
 ## For AI agents (primary audience)
 

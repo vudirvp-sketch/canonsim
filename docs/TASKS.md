@@ -39,11 +39,26 @@
   Zero-regen landing (the PC holds no family token on any committed
   corpus; the 10-seed A/B byte-identical). Detail: D-085 +
   BRIEF_SPEC §3.5 + tests/test_brief.py.
-- `leg-3` · reflection & memory compaction (phases.md §4 — reflection
-  provenance: `provenance: list[event_id]`, the source outranks the
-  reflection's recency on contradiction, the `stale` flag;
-  reflection-on-recurrence, never `summarize_messages_in_place`);
-  LEGEND_SPEC.md written just-in-time at this row (the D-022 law).
+- `leg-3` · reflection & memory compaction — **done (iter-57, D-086)**:
+  `core/reflection.py` — reflection-on-recurrence mints the
+  higher-level entry as an EVENT through the canon door (originals
+  never dropped, INV-1; never `summarize_messages_in_place`),
+  `outcome.provenance` the `list[event_id]` demand handle, the
+  never-re-reflect law, `stale_reflections` (the read-side flag,
+  derived stores after scavenge) + `expand_reflection` the expansion
+  law's demand side; `rules.json::reflection` linted, DORMANT in the
+  committed pack (the 10-seed A/B byte-identical, zero corpus
+  regen); LEGEND_SPEC.md written just-in-time at this row. Detail:
+  D-086 + LEGEND_SPEC + tests/test_reflection.py.
+- `leg-3b` · the tavern reflection set (arming the v0.1 pack block):
+  which recurring families crystallize into which insights — the
+  measured candidates are day1_full seeds 123/128 (the retried
+  theft: the targeted guard holds the sighting twice; the room
+  holds the noise twice) — the chronicle line, the
+  `importance.story_critical_events` question, and the corpus
+  re-distill price through the fixed-point runner (the STATUS
+  regen-protocol FAQ owns the procedure). Owner-gated on the
+  pack-change review, the content-column precedent.
 - `retr-1` · the retrieval ladder (STORE-1): SQLite FTS5 `bm25()` the
   zero-dep default, the sqlite-vec probe + fallback chain
   (vec → pure-Python cosine → FTS5-only, never an empty result), the
