@@ -812,6 +812,20 @@
     },
     "notes": "social-2 (iter-46, P3e; phases.md §3 the architecture row; core/echo.py owns the machinery, INTENT_SCHEMA §3 the door test echo_at_least). The registry: which knowledge tokens carry EMOTIONAL RESIDUE for whoever holds them, on which named axes, decaying linearly over fades_ticks since learned (dead at the boundary tick, the leverage expiry twin) and scaled by the record's fidelity percent (a vague telling carries a quarter of the seeing; hearing it again renews the residue — both records sum). A READ MODEL, never canon: no events, no state, no templates, no metrics; LIVE since iter-51 — the guard's urgency entry carries echo_at_least (content-5, D-080, the jittery-watcher beat), the corpus staying green through the landing is the pin-stability proof (engine-2's add-safety delivered: the driver's events land after the case's claimed ids). The v0.1 valence set is the day-1 walkthrough's residue: the theft sighting (dread 25 / wariness 35, half a day), the fire-starting sighting (dread 60 / wariness 30, a full day — the watcher who saw it is jittery next morning), the inferred absence (wariness 30 — watches the suspect's hands), the vague bar noise (wariness 15, fades in a watch). papers_unsatisfactory stays UNdeclared on purpose (the iter-44 institutional call: the verdict's behavioral escalation rides the crime ladder; an echo twin would double-count the same knowledge channel). The L6 fence: the score is per-NPC valence over the NPC's own records, never player-adapted, and never an entropy input (DIRECTOR_SPEC 4 — the director reads observable state only)."
   },
+  "traits": {
+    "threshold": 3,
+    "beliefs": {
+      "paranoid_about_thieves": {
+        "family": [
+          "figure_reaching_for_purse",
+          "noise_by_the_bar",
+          "purse_missing"
+        ],
+        "notes": "The LEGEND_SPEC sketch's own example, LIVE on the canonical run: the guard pair on day1_full (seed 125) holds all three tokens (the sighting, the known distraction, the inferred absence) — the room's other witnesses hold two (no purse expectation, no inference) and honestly stay uncrystallized. One theft's whole evidence chain in one belief: seeing the attempt, knowing the noise covered it, inferring the purse gone."
+      }
+    },
+    "notes": "leg-1 (iter-55, P3f; phases.md §4 the architecture row — the LEGEND_SPEC sketch's trait half; core/traits.py owns the machinery, core/pack.py::_traits the lint). The registry: which knowledge-token families crystallize into a STABLE belief once a knower holds threshold distinct tokens of the family (breadth, not repetition — the echo owns renewal; the source event ids ride the trait as provenance, the brief's derived-trait read is leg-2's row). A READ MODEL, never canon: no events, no state, no templates, no metrics, no decay term — the evidence holds while the log holds. DORMANT: no consumer reads the fold yet (the iter-47 arc precedent; the 10-seed A/B byte-identical, zero corpus regen). figure_starting_fire stays outside the families on purpose: a single sighting is fear (the echo's dread 60), not a crystallized belief — no fire family exists to join in the v0.1 literal vocabulary. papers_unsatisfactory stays UNdeclared per the iter-44 institutional call (the crime ladder owns the verdict's escalation; a belief twin would double-count the same knowledge channel). The L6 fence: a belief is per-NPC derived state over the NPC's own records, never player-adapted, never an entropy input (DIRECTOR_SPEC 4)."
+  },
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,

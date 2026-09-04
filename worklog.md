@@ -16,6 +16,22 @@
 
 
 ---
+iter-55 · 2026-09-05 · phase-4 open + leg-1 — trait crystallization
+(P3f; the owner's "start phase 4" call, the iter-36 opener precedent)
+- core/traits.py (NEW) + the _traits lint + rules.json::traits (the
+  v0.1 belief set) + 18 tests: the belief-token fold — threshold
+  DISTINCT family tokens crystallize a belief, source ids as
+  provenance; read-model laws (no writes, no entropy — L6; no decay).
+- Measured-first: day1_full seed 125 — the guard pair crystallizes
+  paranoid_about_thieves (eyewitness 2 events / hearsay 1 event);
+  10-seed A/B (120..129) 10/10 byte-identical, zero corpus regen —
+  DORMANT (leg-2 owns the brief's derived-trait read).
+- Phase 4 OPENED: ROADMAP §2 flipped, TASKS phase-4 backlog drafted
+  from phases.md §4 (leg-1..4, retr-1, scene-1, blind-1); the
+  phase-3 ledger condensed to a link row; DECISIONS D-084 + the
+  gate-verdict family merge (cap 30 held). 973→991 tests, ruff
+  clean. D-084 + STATUS. iter-45 evicted; 10 entries after.
+---
 iter-54 · 2026-09-05 · phase-3 gate — verdict PASS (the owner's "finish
 at gate 3, then approach 4" call; docs-only, the iter-35 precedent)
 - The §5 protocol green: seed-125 ON M1=0.509/M2=0.333, OFF T8 26
@@ -116,13 +132,3 @@ read model (the P2b consumer's engine half)
 - Measured: the crafted driver fires once then fades; the 10-seed
   A/B 10/10 byte-identical — zero corpus regen. +29
   tests/test_echo.py; 895→924, ruff clean. D-075 + TASKS.
----
-iter-45 · 2026-09-03 · social-1b — the leverage use: the coerce door
-(the fact cluster's first runtime consumer)
-- The 15th action `coerce` over the NEW coerce resolver: the
-  leverage_over fold-reading precondition, the unconditional
-  tick-window OCC re-check, the loop-stamped spend event, the
-  balance as pack data (the actions/rules/templates trio).
-- DORMANT driver (content-4 owns the live call). +25
-  tests/test_coerce.py; 870→895, ruff clean. D-074 + TASKS +
-  INTENT_SCHEMA/MVP_SCOPE.

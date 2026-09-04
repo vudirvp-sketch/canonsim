@@ -293,6 +293,30 @@ clean); the doc debts paid (DECISIONS 48→30, the FAQ 23→20, TASKS
 854→510, DIRECTOR_SPEC 641→593; phases.md kept over per §6.1 with
 the rationale in the worklog). Phase 4 (Knowledge & scene) is
 UNLOCKED — it opens on the owner's call (the iter-36 precedent).
+Phase 4 OPENED (iter-55, D-084 — the owner's "start phase 4" call
++ the character-psychology question naming the trait row): the
+phase table flipped, the phase-4 backlog drafted from
+`docs/blueprint/phases.md` §4 (leg-1..leg-4, retr-1, scene-1,
+blind-1), and the phase's #1 row landed in the same iteration —
+trait crystallization (P3f, the LEGEND_SPEC sketch's trait half):
+`core/traits.py` + the `_traits` pack lint + the v0.1 belief table.
+The fold: a knower holding `threshold` DISTINCT tokens of a
+declared family crystallizes the belief, the contributing records'
+source event ids riding as provenance (the expansion law — the
+trait expands back to source records; the belief a derived view,
+never a replacement, INV-1 preserved). A read model, the echo's
+sibling: writes nothing, feeds no entropy (the L6 fence), no
+decay term — the evidence holds while the log holds. Measured
+live on the canonical run (day1_full, seed 125): the guard pair
+crystallizes `paranoid_about_thieves` — the eyewitness (sighting
++ inference, two source events) and the hearsay knower (the watch
+transfer minted all three tokens in one event); the room's other
+witnesses hold two tokens and honestly stay uncrystallized. The
+10-seed day1_full A/B (seeds 120..129) byte-identical through the
+landing — DORMANT (the iter-47 arc precedent; leg-2 owns the
+brief's derived-trait read, BRIEF_SPEC's phase-4 clause). 991
+tests green, ruff clean. Contract owner `core/traits.py` + TASKS
+leg-1 + D-084.
 
 ## For AI agents (primary audience)
 

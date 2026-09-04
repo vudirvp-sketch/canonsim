@@ -49,6 +49,7 @@ from core.onaction import (
 from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
 from core.resolvers import REGISTRY
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
+from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
 
 __all__ = [
     "BRIEF_BLOCK_IDS",
@@ -289,6 +290,7 @@ class _Lint:
         self._on_action()
         self._secrets()
         self._echo()
+        self._traits()
         self._states_rules()
         self._importance_rules()
         self._brief()
@@ -1963,6 +1965,111 @@ class _Lint:
             f"integer in {lo + 1}..{hi} (the score clamps to the scale — "
             "outside it the gate is dead vocabulary)",
         )
+
+    def _traits(self) -> None:
+        """The trait crystallization contract (`core/traits.py` owns the
+        vocabulary constants; `phases.md` §4 P3f the architecture row —
+        the LEGEND_SPEC sketch's trait half, landed iter-55). The block
+        is OPTIONAL — a pack without it folds no beliefs and runs the
+        v0.1 behavior, byte-identically (the pack's own declaration is
+        the gate, INV-3). Declaring the table costs nothing at runtime
+        until a consumer reads it (the iter-45 laziness law; nothing
+        reads the fold yet — the phase-4 backlog's leg-2 row owns the
+        brief's derived-trait read)."""
+        rules = self._data["rules.json"]
+        config = rules.get("traits")
+        if config is None:
+            return
+        if not isinstance(config, Mapping):
+            raise PackError("traits must be an object")
+        unknown = sorted(set(config) - set(TRAIT_BLOCK_KEYS))
+        if unknown:
+            raise PackError(
+                f"traits: unknown keys {unknown} (the closed vocabulary: "
+                f"{' | '.join(TRAIT_BLOCK_KEYS)})"
+            )
+        # the threshold: the family size that crystallizes a belief —
+        # one record is a fact, not a belief (the crystallization floor)
+        threshold = config.get("threshold")
+        _require(
+            _is_int(threshold) and threshold >= 2,
+            "traits.threshold must be an integer >= 2 (a single record "
+            "is a fact, not a crystallized belief — the LEGEND_SPEC floor)",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                "traits.notes must be a string (prose — never a table key)",
+            )
+        beliefs = config.get("beliefs")
+        _require(
+            isinstance(beliefs, Mapping) and beliefs,
+            "traits.beliefs must be a non-empty object keyed by belief "
+            "token",
+        )
+        mintable = self._literal_knows_tokens()
+        seen_members: dict[str, str] = {}  # token -> owning belief
+        for belief, spec in beliefs.items():
+            where = f"traits.beliefs[{belief!r}]"
+            # the vocabulary-hygiene check: a belief token colliding
+            # with a mintable knowledge token would put one string in
+            # two vocabularies the brief reads (holds vs trait lookups)
+            _require(
+                belief not in mintable,
+                f"{where}: the belief token is also a mintable knowledge "
+                "token (one string, two vocabularies — rename the belief)",
+            )
+            _require(isinstance(spec, Mapping), f"{where}: must be an object")
+            unknown_belief = sorted(set(spec) - set(TRAIT_BELIEF_KEYS))
+            if unknown_belief:
+                raise PackError(
+                    f"{where}: unknown keys {unknown_belief} (the closed "
+                    f"vocabulary: {' | '.join(TRAIT_BELIEF_KEYS)})"
+                )
+            family = spec.get("family")
+            _require(
+                isinstance(family, list) and family,
+                f"{where}: family must be a non-empty list of knowledge "
+                "tokens",
+            )
+            _require(
+                all(isinstance(token, str) for token in family),
+                f"{where}: family entries must be strings",
+            )
+            _require(
+                len(set(family)) == len(family),
+                f"{where}: family contains duplicate tokens (a duplicate "
+                "double-counts one piece of evidence — dead data)",
+            )
+            for token in family:
+                # the secrets/echo lint's law: a token nobody can ever
+                # learn is dead vocabulary — the belief must ride a
+                # declared knowledge template
+                _require(
+                    token in mintable,
+                    f"{where}: family token {token!r} is not mintable "
+                    "(no declared knowledge template mints it — the "
+                    "literal `knows` vocabulary)",
+                )
+                owner = seen_members.get(token)
+                _require(
+                    owner is None,
+                    f"{where}: family token {token!r} already belongs to "
+                    f"belief {owner!r} (the one-sided membership law — a "
+                    "token feeds exactly one belief)",
+                )
+                seen_members[token] = belief
+            _require(
+                len(family) >= threshold,
+                f"{where}: family of {len(family)} token(s) can never "
+                f"reach threshold {threshold} — dead vocabulary, refused "
+                "at load (grow the family or lower the threshold)",
+            )
+            if "notes" in spec:
+                _require(
+                    isinstance(spec["notes"], str),
+                    f"{where}: notes must be a string (prose)",
+                )
 
     def _literal_knows_tokens(self) -> set[str]:
         """Every knowledge token the pack can mint as a literal string:

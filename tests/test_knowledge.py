@@ -329,6 +329,10 @@ def test_at_location_expectation_needs_the_watcher_on_site(tmp_path: Path) -> No
     # residue token nothing can mint is dead vocabulary, refused at
     # load — a variant that removes content prunes its readers)
     rules["echo"]["tokens"].pop("purse_missing", None)
+    # iter-55 (leg-1): the traits family rides the same removed token —
+    # the whole traits block goes with it (same pruning law; the block
+    # is optional, the crafted scenario folds no beliefs)
+    rules.pop("traits", None)
     (target / "rules.json").write_text(json.dumps(rules))
     site_pack = load_pack(target)
 

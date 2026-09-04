@@ -14,32 +14,60 @@
 > iter-27–29). Phase 2 closed (gate PASS, iter-35, D-064 — 35/35 boundary
 > validity over 51 combined utterances, 0 honest misfires; the parse corpus
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
-> Phase 3 (Director) CLOSED — gate PASS iter-54, D-083 (opened iter-36, the owner's "continue per the plan"
-> call (the iter-31 precedent; the pacing clock landed first, D-065;
-> the exit-criterion instrument landed iter-37, D-066; the climax
-> layer landed iter-38, D-067; the multi-channel split landed iter-39,
-> D-068; the event grammar's predicate + weight layer landed iter-40,
-> drama-1, D-069; the grammar's option layer landed iter-41, drama-2,
-> D-070; the grammar's on_action dispatch landed iter-42, drama-3,
-> D-071 — the grammar's last row; the document_check content set
-> landed iter-43, D-072 — the grammar's first LIVE content consumer;
-> the secrets & leverage fact clusters landed iter-44, social-1,
-> D-073 — P3a, the CK3 add_hook precedent: the social layer's first
-> first-class facts in the log; the leverage use — the coerce door,
-> the spend — landed iter-45, social-1b, D-074: the fact cluster's
-> first runtime consumer; the psychological echo — the residue read
-> model — landed iter-46, social-2, D-075, P3e; the release-chain
-> layer — arcs & tension shaping — landed iter-47, arc-1, D-076,
-> P3c: the last engine row of the phase-3 build column (the order
-> law + the gap law + the entropy mirror, DIRECTOR_SPEC §3d; its
-> live driver landed iter-52, content-6, D-081 — the aftermath chain
-> LIVE, the gap law load-bearing, zero corpus re-distill); the
-> ambient driver landed iter-53, content-3, D-082 — the last content
-> row: every declared dimension now carries a live consumer. The
-> build column completed; the gate passed at iter-54.)
-> Architecture owner: `docs/blueprint/phases.md` §3; runtime contract
-> owner: `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an
-> event < N beats" (ROADMAP §2).
+> Phase 3 (Director) CLOSED — gate PASS iter-54, D-083 (the D-083 row owns
+> the phase-3 landing ledger). Phase 4 (Knowledge & scene) OPENED iter-55
+> (the owner's "start phase 4" session call; the backlog below is drafted
+> from `docs/blueprint/phases.md` §4 — the phase's architecture owner).
+> Architecture owner: `docs/blueprint/phases.md` §4; exit criterion
+> "0 leaks on the blind-NPC suite" (ROADMAP §2 — the T3 family,
+> `docs/TEST_PLAN.md` §1, extends to the phase-4 surfaces).
+
+### Phase-4 backlog (opened iter-55)
+
+- `leg-1` · trait crystallization (P3f) — **done (iter-55, D-084)**:
+  `core/traits.py` — the belief-token fold (a knower holding
+  `threshold` DISTINCT tokens of a declared family crystallizes the
+  belief, the source event ids riding as provenance); the read-model
+  laws + the lint's closed vocabulary; DORMANT until leg-2 (the
+  iter-47 arc precedent — the 10-seed A/B byte-identical). Detail:
+  D-084 + tests/test_traits.py.
+- `leg-2` · the brief's derived-trait read (leg-1's first consumer):
+  BRIEF_SPEC's phase-4 clause — the brief reads derived traits instead
+  of raw `knowledge.records` when both exist, brief size
+  O(traits × PC perception) not O(history); the expansion law (the
+  trait's source records on demand).
+- `leg-3` · reflection & memory compaction (phases.md §4 — reflection
+  provenance: `provenance: list[event_id]`, the source outranks the
+  reflection's recency on contradiction, the `stale` flag;
+  reflection-on-recurrence, never `summarize_messages_in_place`);
+  LEGEND_SPEC.md written just-in-time at this row (the D-022 law).
+- `retr-1` · the retrieval ladder (STORE-1): SQLite FTS5 `bm25()` the
+  zero-dep default, the sqlite-vec probe + fallback chain
+  (vec → pure-Python cosine → FTS5-only, never an empty result), the
+  deterministic re-ranker `α·recency + β·authority + γ·bm25 + δ·cosine`
+  (coefficients as pack data); hard boundary: dynamic world state =
+  SQL + `known_by`, never vectors.
+- `scene-1` · the scene manager + mode B (one NPC per call — the
+  chorus is a queue, not a convention; the per-NPC brief's leak
+  surface).
+- `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
+  over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
+  into SQLite — never in the runtime import graph, D-012).
+- `blind-1` · the blind-NPC leak suite extended to the phase-4
+  surfaces (the exit criterion's instrument — the dir-2 precedent:
+  mode B + retrieval outputs under T3's zero-leak law).
+
+> Phase 3 (Director) landing ledger, condensed: the pacing stack
+> iter-36..39 (D-065..D-068), the event grammar iter-40..42
+> (D-069/D-070/D-071 — predicate/weight, options, on_action), the
+> social stack iter-44..46 (D-073/D-074/D-075 — secrets, leverage,
+> the echo), the arcs iter-47 (D-076), the content column
+> iter-43/48/49/51/52/53 (D-072/D-077/D-078/D-080/D-081/D-082 —
+> every layer and declared channel dimension live); the build column
+> completed at iter-53, the gate PASS at iter-54. Architecture owner:
+> `docs/blueprint/phases.md` §3; runtime contract owner:
+> `docs/DIRECTOR_SPEC.md`; exit criterion "a scene without an event
+> < N beats" (ROADMAP §2). Detail: the D-083 compound row + worklog.
 
 ### Phase-3 director backlog (opened iter-36)
 

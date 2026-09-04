@@ -1,42 +1,46 @@
 # STATUS — canonsim
 
-Iteration: iter-54 (`iter-54-phase3-gate` — the owner's "finish all
-business and final runs at gate 3, then approach 4" session call; the
-build column was completed at iter-53, the gate is the arc's #1 item,
-the iter-35 precedent) ·
-Phase: 3 (Director) — **CLOSED, gate PASS (D-083)**
-**CLOSED — the verdict: PASS. The full ROADMAP §5 protocol re-run:
-the corpus 105 + the parse corpus green in the 973-test suite, ruff
-clean; the canonical seed-125 pair — ON M1=0.509 / M2=0.333 /
-M3_mean=11.72 / M5=0.849, OFF T8 26 emergent chains ≥ 3 (the kill
-floor holds; M2's honest move 0.500→0.333: the seeded-hook
-denominator grew with the phase-3 tags, the ratio stays non-zero);
-the eventless-stretch table 10/10 max stretch 1 on both pacing arms
-(the all-PEAK law stands) AND on the quiet-walk stage (the D-066
-recorded question answered by the murmur's own stage: the max
-stretch stays 1 there too — the murmur lands in the window AFTER its
-release beat, the intent/completion latency is structural). T7 — the
-day1 chronicle reads as a story (the crime→consequence→escalation→
-fire→institutional arc), the quiet stage reads as the room's rhythm.
-The exit criterion "a scene without an event < N beats" reads N=2 —
-no two consecutive eventless beat windows on any measured stage. No
-kill-criteria hit. The doc debts paid in the same iteration (the
-KI#64 note): DECISIONS collapsed 48→30 (82 ids resolve in the
-leading column), the FAQ trimmed 23→20 (two family merges), TASKS
-854→510 (the Done section to one-liners per the §6 law, the phase-3
-backlog rows to their decision + links), DIRECTOR_SPEC 641→593, and
-phases.md 696→644 KEPT OVER per §6.1 (the architecture substance —
-the block pipeline, the ledger laws, the cross-cutting resolutions —
-is that file's purpose; the rationale recorded in the worklog).** ·
+Iteration: iter-55 (`iter-55-phase4-open` — the owner's "start phase 4"
+session call + the character-psychology question naming the trait row;
+the opener flips the phase table, drafts the phase-4 backlog from
+phases.md §4, and lands the phase's #1 row — the iter-36 precedent) ·
+Phase: 4 (Knowledge & scene) — **OPEN (iter-55)**
+**leg-1 landed: trait crystallization (P3f, D-084) — `core/traits.py`,
+the belief-token fold: a knower holding `threshold` DISTINCT tokens of
+a pack-declared family crystallizes the belief, the source event ids
+riding as provenance (the expansion law — the trait expands back to
+source records; the source is always queryable, the belief a derived
+view, never a replacement). A read model, the echo's sibling: writes
+nothing, feeds no entropy (the L6 fence), no decay term — the evidence
+holds while the log holds; `at_tick` gates contribution (the honest
+read-model law). DORMANT (the iter-47 arc precedent — nothing reads
+the fold yet; leg-2 owns the brief's derived-trait read). Measured:
+the canonical day1_full (seed 125) — the guard pair crystallizes
+`paranoid_about_thieves` (the LEGEND_SPEC sketch's own example): the
+eyewitness (sighting + inference, 2 source events) and the hearsay
+knower (the watch transfer minted all three tokens in one event,
+provenance length 1); the room's other witnesses hold two tokens and
+honestly stay uncrystallized. The 10-seed day1_full A/B (seeds
+120..129) byte-identical through the landing — zero corpus regen.**
+·
 Date: 2026-09-05 ·
-Scope: docs only — the gate iteration (the iter-34/35 precedent):
-`docs/DECISIONS.md` (the collapse + D-083), `docs/ROADMAP.md` (the
-phase-table flip — the single owner of closed/open), `docs/TASKS.md`
-(the gate row + the Done collapse + the backlog compression),
-`docs/DIRECTOR_SPEC.md` + `docs/blueprint/phases.md` (the landing
-records now link the single owners; phases.md §3's header flipped),
-`STATUS.md` (this header + the FAQ trim + Next step), `worklog.md`,
-`README.md`. 973 tests green, ruff clean — no code touched.
+Scope: the phase opener + one engine row: `core/traits.py` (new —
+the fold), `core/pack.py` (the `_traits` lint: closed vocabularies,
+threshold >= 2, family >= threshold, mintable tokens, one-sided
+membership, the belief-token collision check), `content/tavern_pack/
+rules.json` (the `traits` block — the v0.1 belief set, measured),
+`tests/test_traits.py` (18 tests: the read-model laws, the mechanics,
+the live canonical pin, the lint family), `tests/test_knowledge.py`
+(the crafted-pack surgery prunes the traits block too — the iter-46
+pruning law), `docs/ROADMAP.md` (the phase-table flip),
+`docs/TASKS.md` (the phase-4 backlog drafted from phases.md §4; the
+phase-3 ledger condensed to a link row), `STATUS.md` (this header +
+the FAQ family extension + Next step), `worklog.md`, `docs/
+DECISIONS.md` (D-084 + the gate-verdict family merge holding the 30
+cap), `docs/AGENT_NAVIGATION.md` (§1 structure: the traits row),
+`docs/SPECS_BACKLOG.md` (the LEGEND_SPEC row status),
+`README.md` (the phase-4 opening paragraph). 991 tests green, ruff
+clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -95,18 +99,21 @@ records now link the single owners; phases.md §3's header flipped),
 
 ## FAQ / Pitfalls
 
-- **The echo is a read model gated by L6 — NEVER an entropy input
-  (iter-46 law).** The psychological residue (`core/echo.py`) is
-  knowledge-derived per-NPC valence: the intent door's `echo_at_least`
-  gate may read it (behavior selection, the P2b consumer), but the
-  DIRECTOR may not — narrative entropy reads observable state only
-  (DIRECTOR_SPEC §4, L6/EPIST-1), and a score folded from an NPC's
-  private knowledge records is not observable state. Wiring the echo
-  into `entropy` (or any channel input) would make the director read
-  minds through a derived number — an invariant-grade bug that would
-  look like a tuning change. Same fence for the chronicle: the echo
-  renders nothing; the behavior it gates (the intent's own event) is
-  the only legal visibility.
+- **The read-side folds (echo, traits) are gated by L6 — NEVER entropy
+  inputs (iter-46 law; the traits twin iter-55).** The psychological
+  residue (`core/echo.py`) and the crystallized beliefs
+  (`core/traits.py`) are knowledge-derived per-NPC read models: the
+  intent door's `echo_at_least` gate may read the echo (behavior
+  selection, the P2b consumer), and the traits feed the brief's
+  derived-trait read (leg-2, BRIEF_SPEC's phase-4 clause) — but the
+  DIRECTOR may not read either: narrative entropy reads observable
+  state only (DIRECTOR_SPEC §4, L6/EPIST-1), and a score or belief
+  folded from an NPC's private knowledge records is not observable
+  state. Wiring a fold into `entropy` (or any channel input) would
+  make the director read minds through a derived number — an
+  invariant-grade bug that would look like a tuning change. Same
+  fence for the chronicle: the folds render nothing; the behavior a
+  fold gates (the intent's own event) is the only legal visibility.
 
 - **Chronicle conditionals read FLAT context keys; the action check
   outcome is NESTED (iter-43 law).** `{cond?a|b}` addresses
@@ -488,51 +495,48 @@ phase-4→5 gate.
 
 ## Next step
 
-**Phase 3 is CLOSED (gate PASS, iter-54, D-083 — opened iter-36, the
-build column completed at iter-53: the pacing stack D-065..D-068, the
-grammar D-069/D-070/D-071, the content column D-072..D-082 — every
-engine layer and every declared channel dimension carries a live
-consumer, the arc chain marches on the committed runs, the murmur
-fires on the quiet stage. The verdict record: D-083 + worklog
-iter-54.)**
-The dir-2/dir-4/drama-1/2/3 measurement's honest finding STANDS
-SUPERSEDED in part (the honest phase-3 divergence ledger): the
-document_check landing is the first deliberate divergence (1/10 day1_full seeds; the corpus's seed-93
-script fires), social-1 adds the second (the same 1/10 hot seed
-mints the leverage facts), the content-2 echo is corpus-script-only
-(the empty-backyard law), the echo driver is corpus-script-only too
-(the dread-silent law — the 1/105 watch-change scan, day1_full
-10/10 byte-identical), the clock/channel/weight layers stay inert
-on day1_full (every run ends in PEAK — a measurable pacing delta
-needs a gate-protocol script set that walks the world into quiet;
-recorded in D-066, a phase-gate question, not forced), engine-2's
-flip is the third deliberate divergence (0/10 — the one-time
-migration; the corpus fixed point recorded), and the ARC DRIVER is
-the fourth (day1 9/10 + seed 125's one appended event; the corpus
-105/105 pin-green — and the nopacing arm's D-065 record now reads
-superseded in part: the closing beat rides the climax path).
+**Phase 4 (Knowledge & scene) is OPEN — opened iter-55, the owner's
+"start phase 4" call (the iter-36 precedent: the ROADMAP table
+flipped, the backlog drafted from phases.md §4, the phase's #1 row
+landed in the same iteration). leg-1 (trait crystallization, P3f,
+D-084) is LANDED and DORMANT: the fold is live on the canonical run
+(the guard pair crystallizes `paranoid_about_thieves` — the sketch's
+own example, measured), the 10-seed A/B byte-identical, zero corpus
+regen. The exit criterion "0 leaks on the blind-NPC suite" reads T3
+(`docs/TEST_PLAN.md` §1) extended to the phase-4 surfaces — the
+blind-1 row owns the instrument. The phase-3 verdict record: D-083 +
+worklog iter-54; the honest phase-3 divergence ledger stands as
+recorded there.**
 
-1. **Phase 4 (Knowledge & scene) is UNLOCKED — it opens on the
-   owner's call** (the iter-36 precedent: the ROADMAP table's phase-4
-   row reads "parked — UNLOCKED by the phase-3 gate"; the first
-   session call names the phase's #1 row and the phase-4 backlog
-   gets drafted from phases.md §4 — memory/reflection provenance,
-   trait crystallization, the retrieval ladder (FTS5 + the vec
-   fallback), the scene manager + mode B. Nothing phase-4 has
-   started: this gate iteration is docs-only by design).
+1. **The phase-4 queue (TASKS.md owns the rows):** `leg-2` — the
+   brief's derived-trait read (leg-1's first consumer, BRIEF_SPEC's
+   phase-4 clause: the brief reads derived traits instead of raw
+   `knowledge.records` when both exist — O(traits × PC perception),
+   not O(history); the natural next row, the consumer-first
+   discipline) → `leg-3` reflection & provenance (LEGEND_SPEC.md
+   written just-in-time there) → `retr-1` the retrieval ladder →
+   `scene-1` the scene manager + mode B → `leg-4` mode F offline →
+   `blind-1` the leak suite's extension.
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
    carries mode C until then), tune-3 (the three-way NPC-movement
    fork), st-2 (identity persistence), the phase-1 corpus
    consolidation pass, `bg-6` (SoW audit, D-055 deferral), `qa-1`
-   mypy + `ci-1` GitHub Actions. NEW for the owner: the Alien
-   unknown-axis L6 conflict (DIRECTOR_SPEC §11 — the sketch vs the
-   entropy law; resolve before any phase-3+ pacing work reads
-   knowledge records) + the arc driver's review question (the
-   climax flag on a weight-0 closing beat — the D-067
-   "high-severity" wording vs the pack's denouement use; D-081
-   records the tension, the owner may veto).
+   mypy + `ci-1` GitHub Actions. Still open for the owner: the Alien
+   unknown-axis L6 conflict (DIRECTOR_SPEC §11) + the arc driver's
+   review question (the climax flag on a weight-0 closing beat;
+   D-081 records the tension, the owner may veto). NEW for the owner
+   (leg-1's recorded questions): the testimony-crystallization
+   fidelity floor — v0.1 counts any held token toward the family
+   however learned (the hearsay shape: one telling of three related
+   facts crystallizes the belief, provenance length 1); a fidelity
+   floor for testimony (e.g. `told`-channel records counting only
+   above the chain floor) is a pack-grammar question, recorded here,
+   not forced; and the static-personality half of the owner's
+   character-card question (spine lints, archetype expansion) stays
+   PACK_SPEC territory (phase 6 / the 2nd-setting gate, the AP
+   crosswalk already sketched there).
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
    New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked
