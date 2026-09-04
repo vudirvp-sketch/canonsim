@@ -10,8 +10,11 @@ and any frontend integration stay deferred to the phase-1 gate
 assembly and inspection as functions of (log, ledger, pack):
 
 - the **call document** = the brief (BRIEF_SPEC §7 bytes, unchanged) plus
-  one `narrator_protocol` section (anchor / regen counter / refusal
-  notes) — everything the external narrator may draw on for one beat;
+  one `narrator_protocol` section (actor / anchor / regen counter /
+  refusal notes) — everything the external narrator may draw on for one
+  beat; mode B (scene-1) passes `knower=<npc>` — the actor call, one NPC
+  per call, the chorus queue's own document (the actor line names whose
+  beat-projection it carries);
 - the **response document** — one CLOSED document `{prose, texture_delta?,
   proposal?}`: prose for the player, the structural texture delta, and
   the fact proposal, all in the same call (one call, two jobs, D-049).
@@ -124,23 +127,32 @@ def narrator_call(
     pack: Pack,
     ledger: SceneLedger,
     *,
+    knower: str | None = None,
     notes: Sequence[str] = (),
     regens_used: int = 0,
     max_regens: int = MAX_REGENS,
 ) -> str:
     """Assemble the narrator call document (pure): the brief bytes
     (BRIEF_SPEC §7, unchanged) + the `narrator_protocol` section —
-    `anchor` (the log's event count: the OCC anchor a proposal must
-    carry), `regen` (the per-beat counter, VALIDATION_SPEC §7), and the
+    `actor` (mode B only: the knower whose beat-projection the call
+    carries — mode A omits the line, the player is the narrator's own
+    subject by construction, the committed corpus bytes), `anchor` (the
+    log's event count: the OCC anchor a proposal must carry), `regen`
+    (the per-beat counter, VALIDATION_SPEC §7), and the
     refusal/withdrawal note lines verbatim (they ride the call's top,
-    where directives live). Same (log, ledger, pack) → same bytes."""
-    brief = render_brief(assemble_brief(events, pack, ledger))
-    lines = [
-        f"## {PROTOCOL_BLOCK}",
-        f"anchor: {len(events)}",
-        f"regen: {regens_used}/{max_regens}",
-        *notes,
-    ]
+    where directives live). Same (log, ledger, pack, knower) → same
+    bytes."""
+    brief = render_brief(assemble_brief(events, pack, ledger, knower=knower))
+    lines = [f"## {PROTOCOL_BLOCK}"]
+    if knower is not None and knower != pack.player_id():
+        lines.append(f"actor: {knower}")
+    lines.extend(
+        [
+            f"anchor: {len(events)}",
+            f"regen: {regens_used}/{max_regens}",
+            *notes,
+        ]
+    )
     return f"{brief}\n" + "\n".join(lines) + "\n"
 
 

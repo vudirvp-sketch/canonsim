@@ -362,12 +362,29 @@ retrieved reflection ordered below its own provenance sources — the
 seed-123 live-fire: the higher-scoring conclusion demoted by law).
 The committed block is declarative-only — the corpus price zero
 (the 10-seed A/B byte-identical); the mediator's keyword query is
-the consumer (mode B). 1055 tests green, ruff clean.
+the consumer (mode B). scene-1 LANDED (iter-60, D-089 — the scene
+manager + mode B, one NPC per call): `brief/scene.py::speaking_queue`
+the chorus queue (presence-gated at the current scene, pack-gated by
+the `brief.actors` entry, kind-gated — the player and ambients never
+queued — pack declaration order, capped by `brief.chorus.
+max_actor_calls`, the beyond-cap NPCs the L12 template rung) and the
+knower parameter `assemble_brief(knower=...)` / `narrator_call(
+knower=...)` — mode A byte-identical by construction; mode B the SAME
+pipeline with the actor's own perception (the blind-NPC law
+parameterized), own memory (records + beliefs, the per-knower traits
+fold), own role text and voice (the actors entry), the shared blocks
+shared (one ledger per scene, observables-only cards, the door's
+grammar); the actor call document carries the `actor:` protocol
+line. The leak surface closed by construction and measured: every
+declared actor's brief leak-free at every beat window; the queue
+live on day1 (the watch change swaps the guard by PRESENCE); the
+corpus price zero. 1085 tests green, ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
-phases.md §4 (the retrieval paragraph) + TASKS
-leg-1/leg-2/leg-3/leg-3b/retr-1 +
-D-084/D-085/D-086/D-087/D-088.
+phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
+BRIEF_SPEC §3.9 + TASKS
+leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1 +
+D-084/D-085/D-086/D-087/D-088/D-089.
 
 ## For AI agents (primary audience)
 

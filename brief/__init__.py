@@ -1,8 +1,10 @@
 """Brief assembly for the mediator: the deterministic block pipeline +
 the session scene ledger (`docs/BRIEF_SPEC.md` owns the block contract,
 `docs/blueprint/phases.md` §1 the ledger mechanism). Landed iter-8;
-validator iter-9; the scene ledger (7th block) iter-10. The LLM side of
-the pipeline is a later, owner-gated iteration (AGENTS §8)."""
+validator iter-9; the scene ledger (7th block) iter-10; the scene
+manager — the chorus queue, mode B's drain order (scene-1) — lives in
+`brief/scene.py`. The LLM side of the pipeline is a later, owner-gated
+iteration (AGENTS §8)."""
 
 from brief.assembler import (
     Block,
@@ -39,6 +41,7 @@ from brief.ledger import (
     scenes,
     split_scope,
 )
+from brief.scene import speaking_queue
 
 __all__ = [
     "ACTIVE",
@@ -70,6 +73,7 @@ __all__ = [
     "refusal_lines",
     "render_brief",
     "scenes",
+    "speaking_queue",
     "split_scope",
     "token_count",
 ]

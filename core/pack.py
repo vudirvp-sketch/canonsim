@@ -2570,6 +2570,104 @@ class _Lint:
             f"{where}.present_entities: scene_line_fields must reference "
             f"location fields of the pack",
         )
+        # scene-1 (iter-60): the chorus budget + the mode-B actor table
+        # (BRIEF_SPEC §3.9/§6 — one NPC per call, the pack's own
+        # declaration the gate; mode A's static text stays the block's
+        # own, so the player never appears in `actors`).
+        chorus = config.get("chorus")
+        if chorus is not None:
+            unknown_chorus = sorted(set(chorus) - {"max_actor_calls", "notes"})
+            _require(
+                not unknown_chorus,
+                f"{where}.chorus: unknown keys {unknown_chorus} (the closed "
+                "vocabulary: max_actor_calls | notes)",
+            )
+            cap = chorus.get("max_actor_calls")
+            _require(
+                isinstance(cap, int) and not isinstance(cap, bool) and cap >= 1,
+                f"{where}.chorus.max_actor_calls must be an integer >= 1 (a "
+                "zero cap is a block-less pack — declare nothing instead)",
+            )
+            if "notes" in chorus:
+                _require(
+                    isinstance(chorus["notes"], str),
+                    f"{where}.chorus: notes must be a string (prose)",
+                )
+        actors = config.get("actors")
+        if actors is not None:
+            _require(
+                isinstance(actors, Mapping) and actors,
+                f"{where}.actors must be a non-empty object keyed by npc id "
+                "(an empty actor table is dead data — declare nothing)",
+            )
+            npc_ids = {
+                record["id"]
+                for record in self._data["entities.json"]["npcs"]
+            }
+            player_ids = {
+                record["id"]
+                for record in self._data["entities.json"]["npcs"]
+                if record.get("is_player", False)
+            }
+            for actor_id, entry in actors.items():
+                spot = f"{where}.actors[{actor_id!r}]"
+                _require(
+                    actor_id in npc_ids,
+                    f"{spot}: no pack npc carries this id (an actor entry for "
+                    "a nonexistent entity is dead vocabulary)",
+                )
+                _require(
+                    actor_id not in player_ids,
+                    f"{spot}: the player never carries an actor entry (mode A "
+                    "owns its directives — the two tables are disjoint by law)",
+                )
+                _require(
+                    isinstance(entry, Mapping),
+                    f"{spot}: the entry must be an object",
+                )
+                unknown_actor = sorted(set(entry) - {
+                    "directives", "voice_exemplars", "notes"
+                })
+                _require(
+                    not unknown_actor,
+                    f"{spot}: unknown keys {unknown_actor} (the closed "
+                    "vocabulary: directives | voice_exemplars | notes)",
+                )
+                directives = entry.get("directives")
+                _require(
+                    isinstance(directives, list)
+                    and directives
+                    and all(
+                        isinstance(line, str) and line.strip()
+                        for line in directives
+                    ),
+                    f"{spot}: directives must be a non-empty list of "
+                    "non-empty strings (never-dropped data — the mode-B "
+                    "call is roleless without them)",
+                )
+                # Same construction-fit law as the block's own directives
+                # (BRIEF_SPEC §6): the fill law never applies to them.
+                actor_tokens = sum(len(line.split()) for line in directives)
+                _require(
+                    actor_tokens <= blocks["directives"]["hard"],
+                    f"{spot}: directives ({actor_tokens} tokens) exceed the "
+                    f"directives hard budget {blocks['directives']['hard']}",
+                )
+                exemplars = entry.get("voice_exemplars")
+                _require(
+                    isinstance(exemplars, list)
+                    and all(
+                        isinstance(line, str) and line.strip()
+                        for line in exemplars
+                    ),
+                    f"{spot}: voice_exemplars must be a list of non-empty "
+                    "strings (L2 — the only place the actor's style lives)",
+                )
+                if "notes" in entry:
+                    _require(
+                        isinstance(entry["notes"], str),
+                        f"{spot}: notes must be a string (prose)",
+                    )
 
 
 @dataclass(frozen=True, slots=True)

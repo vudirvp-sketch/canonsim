@@ -75,9 +75,26 @@
   provenance sources); the committed block declarative-only, the
   corpus price zero (the 10-seed A/B). Detail: D-088 + tests/
   test_retrieval.py + phases.md §4's retrieval paragraph.
-- `scene-1` · the scene manager + mode B (one NPC per call — the
-  chorus is a queue, not a convention; the per-NPC brief's leak
-  surface).
+- `scene-1` · the scene manager + mode B — **done (iter-60, D-089)**:
+  `brief/scene.py::speaking_queue` the chorus queue (presence-gated at
+  the current scene, pack-gated by the `brief.actors` entry,
+  kind-gated — the player and ambients never queued — pack declaration
+  order, capped by `brief.chorus.max_actor_calls`; beyond-cap NPCs the
+  L12 template rung) + the knower parameter
+  (`assemble_brief(knower=...)` / `narrator_call(knower=...)` — mode A
+  byte-identical by construction; mode B: the actor's own perception
+  and memory, its own role text and voice; the shared blocks shared)
+  + the `actor:` protocol line; the leak surface closed by construction
+  (every declared actor's brief leak-free at every beat window); the
+  corpus price zero. Detail: D-089 + BRIEF_SPEC §3.9 +
+  tests/test_scene.py.
+- `scene-2` · the mode-B session wiring — the mediator drains the
+  queue inside the beat cycle (one actor call per queued NPC; the
+  beyond-cap NPCs stay on the template rung), the actor reply door
+  (proposals with `actor=<npc>` through the intent door —
+  `feedable_intents`' mode-B half), the mediator's keyword query
+  (BRIEF_SPEC §3.5's relevance signal — the retrieval ladder's first
+  QUERY consumer, retr-1's DORMANT gate).
 - `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
   over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
   into SQLite — never in the runtime import graph, D-012).

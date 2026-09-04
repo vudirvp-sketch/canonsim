@@ -1143,6 +1143,67 @@
       "The taproom hummed, low and careless, the way rooms do before anything happens.",
       "Rain started against the shutters — a patient, unhurried sound."
     ],
-    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth; tune-2 (iter-28, D-060): the card_markers table is prop-path keyed with two row kinds — threshold rows (numeric min) and value rows (string value) — so the crime cascade's standing state renders on the cards (relations.suspicion wary at 25, aligned with the status_suspect_at flip; crime_status suspect/caught on the player's card; the render threshold is this table's own number by design) — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here."
+    "chorus": {
+      "max_actor_calls": 2,
+      "notes": "scene-1 / BRIEF_SPEC §6: the per-beat actor-call budget (mode B, one NPC per call — the chorus is a queue, not a convention): the queue drains head-first in pack declaration order, the NPCs beyond the cap fall to the L12 template rung (their beats already render through the chronicle — never a blocked beat). v0.1 keeps the dev-time operator's cost at two actor utterances per beat. A pack without this block runs mode B off: the chorus is empty, every run byte-identical (the pack's own declaration is the gate, INV-3)."
+    },
+    "actors": {
+      "npc_guard_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "You keep order: challenge what is out of place, never invent it."
+        ],
+        "voice_exemplars": [
+          "\"Easy now. Hands where I can see them.\"",
+          "\"I count the room twice before I trust it.\""
+        ],
+        "notes": "the targeted guard — clipped, watchful (walkthrough §3)"
+      },
+      "npc_guard_02": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "You are fresh on the watch; your partner's word carries weight."
+        ],
+        "voice_exemplars": [
+          "\"Anything I should know before you go?\"",
+          "\"First night quiet. Long may it hold.\""
+        ],
+        "notes": "the relief guard — steady, trusts the briefing (D-007 transfer)"
+      },
+      "npc_barkeep_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The counter is yours: coin on wood, the property behind it defended."
+        ],
+        "voice_exemplars": [
+          "\"What'll it be? Cash on the barrelhead.\"",
+          "\"Not another drop till I see coin.\""
+        ],
+        "notes": "the barkeep — curt, proprietary (the club is under the bar)"
+      },
+      "npc_drunk_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The room swims; you want one more ale and mean no harm."
+        ],
+        "voice_exemplars": [
+          "\"Jush' one more... a small one.\"",
+          "\"Shee that? Floor's tilting.\""
+        ],
+        "notes": "the drunkard — thick-tongued, harmless (intoxication 50, §6)"
+      },
+      "npc_maid_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The shift ends when the trays are dry; watch the room sideways."
+        ],
+        "voice_exemplars": [
+          "\"Coming through — mind the tray.\"",
+          "\"Same crowd, same spill, every night.\""
+        ],
+        "notes": "the serving maid — sidelong, tired (same-location roaming)"
+      }
+    },
+    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth; tune-2 (iter-28, D-060): the card_markers table is prop-path keyed with two row kinds — threshold rows (numeric min) and value rows (string value) — so the crime cascade's standing state renders on the cards (relations.suspicion wary at 25, aligned with the status_suspect_at flip; crime_status suspect/caught on the player's card; the render threshold is this table's own number by design) — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here. scene-1 (iter-60): chorus = the per-beat actor-call budget; actors = mode B's per-NPC role text and voice (the knower-parameterized assembly's static half — the player never appears here, mode A owns its directives)."
   }
 }

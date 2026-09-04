@@ -228,6 +228,53 @@ brief lists the vocabulary; the intent door (INTENT_SCHEMA §1) remains
 the sole gatekeeper of what is actually possible — a listed option the
 world rejects is an `intent_rejected` fact, not a brief bug.
 
+### 3.9 Mode B — the knower parameter (scene-1, iter-60)
+
+The blocks are PC-parameterized by default. `assemble_brief` takes
+`knower=None` (mode A — the player; the committed corpus bytes,
+byte-identical by construction: an explicit player id renders the same
+bytes) or `knower=<npc>` (mode B — one NPC per call, the chorus served
+head-first through `brief/scene.py::speaking_queue`). Mode B runs the
+SAME pipeline with three parameterized halves and four shared ones:
+
+- **scene_delta** reads the knower's own perception — the blind-NPC
+  law (§3.2) parameterized: the knower is the event's actor or holds
+  a record born on the event. An event nobody told this knower about
+  never renders for it; the empty window after departure is the
+  honest answer, never a leak.
+- **recalled_facts** reads the knower's own memory — its records and
+  its crystallized beliefs (§3.5, the per-knower traits fold). The
+  leak surface is closed by construction: the records ARE the
+  knower's fold, a held-by-another token can never render.
+- **directives** and **voice_exemplars** come from the pack's
+  `brief.actors` entry — the actor's role text and voice, never the
+  narrator's (mode A's static text stays the block's own; the tables
+  are disjoint by lint).
+- **Shared, never parameterized**: `scene_texture` (one ledger per
+  scene — the chorus reads the same texture block, D-049),
+  `present_entities` (the cards are observables, L6 — the room's
+  structural answer is the same for every present party),
+  `scheduled_lore` (pack-declared shared background), and
+  `active_options` (the door's grammar, not the knower's).
+
+The **knower gate**: an id that is neither the player nor a pack NPC
+carrying an `actors` entry is a loud `ValueError`, never a wrong
+brief — an ambient group holds records but never speaks (the
+knower-gate law's sibling); an item or a location is not a knower at
+all; the player never carries an `actors` entry (mode A owns its
+directives).
+
+The **scene manager** — `brief/scene.py::speaking_queue` — is the
+chorus queue law: the present, actors-declared NPCs at the current
+scene's location, pack declaration order (INV-2), capped by
+`brief.chorus.max_actor_calls` per beat; the NPCs beyond the cap fall
+to the L12 template rung (their beats already render through the
+chronicle — never a blocked beat). A pack without the `chorus` block
+runs mode B off — the queue is empty, every run byte-identical (the
+pack's own declaration is the gate, INV-3). The session-loop wiring —
+when the chorus fires inside the beat cycle, and how actor replies
+feed the door — is the `scene-2` row (TASKS backlog).
+
 ## 4. Token model
 
 - `token_count(text) = len(text.split())` — whitespace tokens. A
@@ -321,7 +368,15 @@ brief's static text is mediator data, not chronicle grammar.
                           {"prop": "crime_status", "value": "caught", "marker": "caught"}]},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
-  "voice_exemplars": ["..."]
+  "voice_exemplars": ["..."],
+  "chorus": {"max_actor_calls": 2},
+  "actors": {
+    "npc_guard_01": {
+      "directives": ["...", "..."],
+      "voice_exemplars": ["..."],
+      "notes": "..."
+    }
+  }
 }
 ```
 
@@ -343,7 +398,16 @@ or `crime_status` (the closed marker surface) — with EXACTLY ONE of
 string, value row), and a non-empty `marker` string (marker names are
 pack vocabulary, INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
 a field of at least one location record (a typo'd field fails at load
-time). The eviction order (§5.2) is architecture, not balance — it
+time). The mode-B pair (scene-1, §3.9): `chorus` is optional with a
+closed key set (`max_actor_calls` an integer >= 1 — a zero cap is a
+block-less pack, declare nothing instead; `notes` prose); `actors` is
+optional, non-empty, keyed by pack NPC id — never the player (mode A
+owns its directives; the tables are disjoint by law) — with a closed
+per-actor key set (`directives` a non-empty string list whose total
+fits the `directives` hard budget — the same construction-fit law for
+never-dropped data; `voice_exemplars` a string list, L2's only home
+for the actor's style; `notes` prose). The eviction order (§5.2) is
+architecture, not balance — it
 lives in code, not in the pack.
 
 ## 7. Render format (exact bytes)
@@ -385,7 +449,12 @@ regen: <used>/<max>
   notes are the dry refusal lines riding the call's top. A pure function
   of (log, ledger, pack) + the protocol state — same inputs → same bytes
   (the D-049 quarantine). The reply document's contract is
-  `VALIDATION_SPEC.md` §7.1's.
+  `VALIDATION_SPEC.md` §7.1's. **Mode B (scene-1, §3.9): the actor call
+  is the same document with `knower=<npc>` — the protocol section's
+  first line becomes `actor: <id>` (whose beat-projection the call
+  carries — the operator knows whose voice to speak); mode A's bytes
+  carry no actor line (the player is the narrator's subject by
+  construction — the committed corpus shape, unchanged).**
 
 ## 8. Versioning
 
@@ -402,8 +471,8 @@ bytes = a spec edit in the same commit as the code change.
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
-| Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
+| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | the mode-B session wiring (`scene-2`) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
-| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |
+| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9; the session wiring + the actor reply door is the `scene-2` row) | blueprint §1 |
 | Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder; the brief's own read stays scheduled-window until the mediator's query arrives) | STORE-1 |
 | The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |

@@ -16,6 +16,15 @@ lives only in the exemplar block). The assembler writes nothing to the
 log (INV-1) and imports no network code (INV-4 — the narrator itself is
 a later, owner-gated iteration).
 
+The knower parameter (scene-1, mode B — BRIEF_SPEC §3.9): mode A
+(knower=None, the player) is the committed corpus shape, byte-identical
+by construction; mode B (knower=<npc>) runs the SAME pipeline for an
+actor — its own perception (scene_delta), its own memory
+(recalled_facts), its own role text and voice (the pack's
+`brief.actors` entry) — the per-NPC brief's leak surface closed by
+construction, the chorus served one knower per call
+(`brief/scene.py::speaking_queue`).
+
 All setting text and every budget number lives in the pack
 (`rules.json::brief`, linted at load — `core/pack.py`); this module knows
 block ids and the eviction order, which are architecture (BRIEF_SPEC §5.2),
@@ -184,18 +193,20 @@ def _fill(block_id: str, items: Sequence[str], budget: Mapping[str, Any]) -> Blo
 
 
 def _scene_delta_lines(
-    events: Sequence[EventRecord], pack: Pack, *, player_id: str
+    events: Sequence[EventRecord], pack: Pack, *, knower: str
 ) -> list[str]:
-    """What the PC perceived since the last beat, newest first (BRIEF_SPEC
-    §3.2): the PC is the actor or holds a record born on the event (the
-    blind-NPC law — no record, no delta line)."""
+    """What the knower perceived since the last beat, newest first
+    (BRIEF_SPEC §3.2): the knower is the actor or holds a record born on
+    the event (the blind-NPC law — no record, no delta line). Mode A
+    passes the player; mode B passes the actor (scene-1 — the same law,
+    one knower, never a world dump)."""
     window_start = last_beat_tick(pack.rules, events[-1].t if events else 0)
     lines: list[str] = []
     for event in reversed(events):  # newest first — recency dominates
         if window_start is not None and event.t <= window_start:
             break  # ticks are log-monotonic: older events are past the window too
-        perceived = event.actor == player_id or any(
-            record.who == player_id for record in event.knowledge
+        perceived = event.actor == knower or any(
+            record.who == knower for record in event.knowledge
         )
         if not perceived:
             continue
@@ -225,22 +236,25 @@ def _belief_lines(
 
 
 def _recalled_fact_lines(
-    events: Sequence[EventRecord], pack: Pack, *, player_id: str
+    events: Sequence[EventRecord], pack: Pack, *, knower: str
 ) -> list[str]:
-    """The PC's own knowledge, ranked by recency + importance (the two
-    deterministic signals; relevance arrives with the mediator —
+    """The knower's own knowledge, ranked by recency + importance (the
+    two deterministic signals; relevance arrives with the mediator —
     BRIEF_SPEC §3.5), deduped by token, capped at `max_items` — and read
     through the derived-trait lens (leg-2, the phase-4 clause): the
-    PC's crystallized beliefs lead the block as belief lines, and the
-    family records that minted them render nothing raw — the belief is
-    the derived view, the source records stay queryable on demand via
-    the provenance ids (the expansion law, `core/traits.py::
-    expand_trait`). Size O(traits + records), never O(history)."""
+    knower's crystallized beliefs lead the block as belief lines, and
+    the family records that minted them render nothing raw — the belief
+    is the derived view, the source records stay queryable on demand
+    via the provenance ids (the expansion law, `core/traits.py::
+    expand_trait`). Size O(traits + records), never O(history). Mode A
+    passes the player; mode B passes the actor (scene-1 — the per-NPC
+    brief's leak surface: a record the knower does not hold can never
+    render, by construction — the records ARE the knower's fold)."""
     config = pack.rules["brief"]["recalled_facts"]
     current_tick = events[-1].t if events else 0
     importance_of = {event.id: event.importance for event in events}
     view = KnowledgeView.from_events(events)
-    records = view.records_of(player_id)
+    records = view.records_of(knower)
     recency_weight = float(config["recency_weight"])
     importance_weight = float(config["importance_weight"])
 
@@ -253,7 +267,7 @@ def _recalled_fact_lines(
     beliefs = [
         trait
         for trait in crystallized_traits(pack, view, current_tick)
-        if trait.who == player_id
+        if trait.who == knower
     ]
     belief_config = pack.rules.get("traits")
     replaced: set[str] = set()
@@ -527,12 +541,49 @@ def _evict_overflow(
     return assembled
 
 
+def _knower_id(pack: Pack, knower: str | None) -> str:
+    """Resolve the brief's knower (scene-1, mode B — BRIEF_SPEC §3.9):
+    `None` is the player (mode A's default, byte-identical by
+    construction); any other id must name a pack NPC (the chorus knower
+    gate — an ambient group holds records but never speaks, an item or
+    location is not a knower at all) and carry a `brief.actors` entry
+    (the pack's own declaration is the gate — an undeclared NPC has no
+    mode-B role text and no brief)."""
+    player = pack.player_id()
+    if knower is None or knower == player:
+        return player
+    if pack.kind_of(knower) != "npc":
+        raise ValueError(
+            f"knower {knower!r} is neither the player nor a pack npc "
+            "(the mode-B knower gate — BRIEF_SPEC §3.9)"
+        )
+    if knower not in pack.rules["brief"].get("actors", {}):
+        raise ValueError(
+            f"knower {knower!r} carries no brief.actors entry "
+            "(the pack's own declaration is the mode-B gate — BRIEF_SPEC §3.9)"
+        )
+    return knower
+
+
 def assemble_brief(
-    events: Sequence[EventRecord], pack: Pack, ledger: SceneLedger | None = None
+    events: Sequence[EventRecord],
+    pack: Pack,
+    ledger: SceneLedger | None = None,
+    *,
+    knower: str | None = None,
 ) -> Brief:
     """Assemble the eight blocks from a log + ledger (pure — BRIEF_SPEC
     §2/§3). `ledger=None` renders an empty scene_texture block (a log
     without a session ledger — the same bytes as an empty one).
+    `knower=None` assembles mode A (the player's brief — the committed
+    corpus bytes); `knower=<npc>` assembles mode B (the actor brief:
+    scene_delta and recalled_facts read the knower's own perception and
+    memory — the blind-NPC law parameterized, the per-NPC brief's leak
+    surface; directives and voice exemplars come from the pack's
+    `brief.actors` entry — the actor's role and voice, never the
+    narrator's; the scene_texture window, the entity cards, the lore,
+    and the options stay shared — one scene, one grammar, observables
+    only, L6).
 
     Deterministic by construction: no RNG, no wall-clock, construction
     order or explicit sorts only. The pack's lint guarantees the `brief`
@@ -540,18 +591,26 @@ def assemble_brief(
     """
     config = pack.rules["brief"]
     budgets = config["blocks"]
+    knower = _knower_id(pack, knower)
     player_id = pack.player_id()
+    if knower == player_id:
+        directive_lines = [str(line) for line in config["directives"]]
+        exemplar_lines = [str(line) for line in config["voice_exemplars"]]
+    else:  # mode B: the actor's own role text and voice (BRIEF_SPEC §3.9)
+        entry = config["actors"][knower]
+        directive_lines = [str(line) for line in entry["directives"]]
+        exemplar_lines = [str(line) for line in entry["voice_exemplars"]]
     beats = beats_crossed(pack.rules, events[-1].t if events else 0)
     texture_ledger = ledger if ledger is not None else SceneLedger()
 
     items: dict[str, Sequence[str]] = {
-        "directives": [str(line) for line in config["directives"]],
-        "scene_delta": _scene_delta_lines(events, pack, player_id=player_id),
+        "directives": directive_lines,
+        "scene_delta": _scene_delta_lines(events, pack, knower=knower),
         "scene_texture": _scene_texture_items(events, pack, texture_ledger),
         "present_entities": _present_entity_items(events, pack),
-        "recalled_facts": _recalled_fact_lines(events, pack, player_id=player_id),
+        "recalled_facts": _recalled_fact_lines(events, pack, knower=knower),
         "scheduled_lore": _lore_lines(pack, beats=beats),
-        "voice_exemplars": [str(line) for line in config["voice_exemplars"]],
+        "voice_exemplars": exemplar_lines,
         "active_options": _option_lines(pack),
     }
     assembled: dict[str, Block] = {}
@@ -578,8 +637,11 @@ def brief_from_log(
     pack: Pack,
     schema: Mapping[str, Any],
     ledger: SceneLedger | None = None,
+    *,
+    knower: str | None = None,
 ) -> str:
     """Read a committed log and render its brief — the golden-fixture
-    byte-identity entry point (same (log, ledger) → same brief bytes)."""
+    byte-identity entry point (same (log, ledger) → same brief bytes);
+    `knower` passes through to `assemble_brief` (mode B)."""
     _header, events = read_log(log_path, schema)
-    return render_brief(assemble_brief(events, pack, ledger))
+    return render_brief(assemble_brief(events, pack, ledger, knower=knower))
