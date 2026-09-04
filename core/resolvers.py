@@ -211,8 +211,17 @@ def _wait(
     pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
-    """wait: time passes, nothing else (the world moves via passes)."""
-    return Resolution(event_type=action["events"]["success"], outcome={})
+    """wait: time passes, nothing else (the world moves via passes).
+    The action's hooks lists mint with the event (iter-53, content-3:
+    idle time is the ambient tag's seed — the hooks minting was
+    resolver-sparse (the steal family only), a silent dead-data gap of
+    the KI#15 family; the first-consumer law applies: each resolver
+    mints the day its first pack consumer arrives)."""
+    return Resolution(
+        event_type=action["events"]["success"],
+        outcome={},
+        hooks=_hooks(action, "success"),
+    )
 
 
 def _pickup(

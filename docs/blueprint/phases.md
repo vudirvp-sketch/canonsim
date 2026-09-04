@@ -366,11 +366,10 @@ dev-time boundary gate is its stand-in). Player input is data, not
 instruction (`VISION.md` §5); the world answers, not the model.
 
 ## 3. Phase 3 — director evolution + event grammar + social depth —
-OPEN (iter-36, the owner's call; pacing clock D-065, eventless-stretch
-instrument D-066, climax layer D-067, multi-channel split D-068, the
-grammar's predicate + weight layer D-069, the grammar's option layer
-D-070, the grammar's on_action dispatch D-071, the release-chain
-layer D-076)
+CLOSED (gate PASS iter-54, D-083; opened iter-36 on the owner's call;
+the full build column: the pacing stack D-065..D-068, the grammar
+D-069/D-070/D-071, the content column D-072..D-082 — every layer and
+every declared channel dimension carries a live consumer)
 
 **The Paradox grammar, adapted** (TIME-1 rides underneath; L10 keeps it
 data): trigger predicates as JSON structures over the projection;
@@ -383,35 +382,18 @@ clobbering. `first_time_only` (Wesnoth) = hook release policy. Scopes
 become an explicit context argument (`ctx`) with `every/random/any`
 iterator helpers — the cleanest Paradox abstraction, minus the implicit-
 `this` footguns. MTTH stays the named anti-pattern: SAMPLED timing only.
-**The grammar's predicate + weight layer landed iter-40 (drama-1,
-D-069): trigger specs are predicates (`core/predicates.py` — the three
-v0.1 leaves + compound `all`/`any`/`not` + the generalized `prop`
-leaf), the hook weight carries the multiplier object (the entropy
-sensor reads the effective weight per beat), `first_time_only` burns
-the tag after its first release. The grammar's option layer landed
-iter-41 (drama-2, D-070): per-option availability gates (the drama-1
-predicate grammar) + `ai_chance`-style weighting (the multiplier
-shape, a pure deterministic pick — heaviest wins, ties by declaration
-order, zero never picked, all-closed defers the release) + payload
-overrides whole-key; the `immediate`/`option`/`after` lifecycle maps
-onto seed/choose/apply (no literal effect blocks — the door's commit
-+ reaction dispatch is the after; DIRECTOR_SPEC §3b owns the
-contract); the ctx scope helpers did NOT ride (single-entity gates,
-§9's anti-pattern on runtime targeting). The grammar's LAST layer
-landed iter-42 (drama-3, D-071): the on_action dispatch — a pack
-table keyed by committed event type, appended after the hardcoded
-system reactions (the donor's append-not-overwrite composition),
-each entry the witnesses scope (the event's own knowers — the named
-"every NPC who witnessed X") + the per-entity quantified gate (the
-CANDIDATE as the explicit ctx argument, no entity field in the spec)
-+ the alarm-shaped state change (one event per entry, clamped
-deltas, no knowledge and no hooks); the one-hop lint terminates the
-cascade; the pack's live declarations: the document_check crowd
-reaction (iter-43, D-072) and the alarm panic echo (iter-48,
-content-2, D-077 — the reverted iter-42 probe landed with its
-7-case corpus re-distill). The
-`any`/`random` scope helpers stay recorded-not-built (the
-first-consumer law).**
+**The grammar landed in three layers (drama-1/2/3, iter-40/41/42,
+D-069/D-070/D-071): predicates (`core/predicates.py` — the v0.1 leaves
++ compounds + the `prop` leaf) + the weight multiplier + the
+`first_time_only` burn; then the option blocks (availability gates +
+the deterministic ai_chance-style pick, payload overrides whole-key,
+the immediate/option/after lifecycle onto seed/choose/apply); then
+the on_action dispatch (a pack table keyed by committed event type,
+append-not-overwrite, the witnesses scope + the quantified gate + the
+alarm-shaped state change, the one-hop lint). The `any`/`random`
+scope helpers stay recorded-not-built (the first-consumer law);
+DIRECTOR_SPEC §3/§3a-§3c owns the contracts, the D-069/D-070/D-071
+compound row the landing records.**
 
 **Director refinements** (recorded at phase 0, built here): the
 pacing clock **landed iter-36** (DIR-1, L4D peak/rest — `RAMP / PEAK /
@@ -431,51 +413,27 @@ deterministic engine).
 
 **Social depth**: secrets & leverage as first-class fact clusters (P3a;
 CK3 `add_hook` — a hook *is an event* with target, type, expiry tick,
-cause — **landed iter-44 + iter-45, D-073/D-074**); **the coerce
-driver LIVE — landed iter-49 (content-4, D-078): the drunkard's
-urgency entry re-armed as the coerce carrier — the replacement law
-(the slot and weight stay, so the per-beat draw count and every
-later check draw's position stay — the corpus's designed ladders
-hold; an ADDED entry was measured to flip 3 of them — the urgency
-rolls then shared the substantive stream with the checks, resolved
-by **engine-2 — landed iter-50 (D-079): the per-entry urgency
-streams `urgency:<npc>:<kind>`** (content-addressed, pack-linted
-unique, lazily registered, the `assure` nesting law reworked for
-the family — an added or removed entry shifts neither a later check
-draw nor another entry's rolls; add-safety 10/10 day1_full
-byte-identical, the single shared stream measured and refused at
-4/10 — the entries couple by draw position; the one-time migration
-flip paid: 2 corpus cases + 1 parse pin)); 4 seed-93 corpus cases
-see the spend (the deliberate pins: the coerce by id + the
-subject's pair axes), the live-fire tests run on the committed
-pack, the expired card's door rejection is the world's honest
-record**; **arcs & tension
-shaping (P3c) — landed iter-47 (arc-1, D-076): `director.arcs` pack
-chains — the order law (a member releases only as its arc's current
-member, all paths, explicit triggers included — pack-declared
-causality, not pacing) + the gap law (`min_gap_beats` spacing on the
-quiet/climax paths only, never the explicit one) + the entropy mirror
-(passed members' instances stop counting — the burn law's twin); the
-DF event_collections / Paradox event-chain precedent — the live
-driver landed iter-52 (content-6, D-081: the aftermath chain
-`[the relief's check, the barkeep's wary sweep]` gap 2 — the gap law
-load-bearing on the committed runs, the closing beat riding the
-climax path, zero corpus re-distill); the Alien
-three-axis unknown-axis is recorded NOT built — its sketch ("the
-director may pace against the [knowledge] gap") conflicts with the
-entropy law's L6 fence (observable state only — the iter-46 echo FAQ
-pinned the same line), the owner's call to resolve
-(DIRECTOR_SPEC §11)**; **psychological echo (P3e) — landed iter-46 (D-075,
+cause) **landed iter-44/45 + the coerce driver iter-49, D-073/D-074/
+D-078** (the replacement law holds the draw count; the coupling
+resolved by **engine-2, iter-50, D-079: the per-entry urgency streams
+`urgency:<npc>:<kind>`** — an added/removed entry shifts no check draw
+and no other entry's rolls); **arcs & tension shaping (P3c) landed
+iter-47 + its driver iter-52, D-076/D-081** (the order law + the gap
+law + the entropy mirror; the aftermath chain's gap law
+load-bearing); **the ambient driver landed iter-53, D-082** (the
+drunkard's ramble — weight 0, the ambient channel's own quiet gate,
+seeded on the wait action's hooks, first_time_only; the recurring
+variant recorded-not-built); the Alien three-axis unknown-axis is
+recorded NOT built — its sketch conflicts with the entropy law's L6
+fence, the owner's call to resolve (DIRECTOR_SPEC §11); **psychological echo (P3e) — landed iter-46 (D-075,
 social-2): NPC behavior modifiers derived from own knowledge records +
 ticks since learned** — `core/echo.py`, a pure read-side fold (per-NPC
 valence, linear decay over the pack's `fades_ticks`, fidelity-scaled,
 never canon, never an entropy input — L6), consumed by the intent
 door's `echo_at_least` gate (the P2b dependency; INTENT_SCHEMA §3 —
 the residue drives autonomous behavior and fades with time). The
-emotional residue is per-NPC valence, never player-adapted (L6). The
-live driver landed iter-51 (content-5, D-080: the guard's
-jittery-watcher beat — dread-gated, the fade arc pinned on the
-committed pack).
+emotional residue is per-NPC valence, never player-adapted (L6). The live driver landed iter-51 (content-5, D-080 — the guard's
+jittery-watcher beat).
 C:DDA field/smoke mechanics arrive here as content scale; state-
 gated epilogue blocks (C:DDA) as director trigger data.
 

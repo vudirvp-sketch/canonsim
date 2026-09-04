@@ -1,48 +1,42 @@
 # STATUS — canonsim
 
-Iteration: iter-52 (`iter-52-content6-arc-driver` — the owner's
-"continue per the plan, quality over speed" session call, the
-phase-3 backlog's top un-gated row — arc-1's live content set, the
-release-chain layer's first LIVE consumer) ·
-Phase: 3 (Director)
-**OPEN — the aftermath chain LIVE: `[possible_document_check_relief,
-barkeep_wary_sweep]` gap 2 (the D-076 dormancy ended). Measured-first
-landed: the survey's law — the relief is the ONLY tag releasing on
-any committed run, so it is the FIRST member (the order law never
-holds the corpus pin; the naive watcher-pair chaining refused at
-D-076 for exactly that). The successor — the barkeep's wary sweep,
-the room's reckoning (the day's closing beat: trigger-less,
-climax-flagged, weight 0 — the entropy footprint exactly zero, the
-+W gate-flip class dead by construction; seeded on the steal failure
-APPENDED LAST, the buffer order never steals the relief's slot). The
-GAP law is the load-bearing half: the unchained sweep would land its
-event at t=733 BEFORE the check's t=734 (the same-tick intent
-ordering — a causality lie); the march holds it to t=1456, the day's
-last event. day1 9/10 byte-identical + seed 125's one appended event;
-the corpus 105/105 pin-green, ZERO re-distill (the first content
-landing with none); the nopacing arm now differs by exactly the
-sweep (the D-065 record superseded in part, re-pinned)** ·
-Date: 2026-09-04 ·
-Scope: `content/tavern_pack/rules.json` (the successor hook + the
-arcs declaration — pure pack data, zero engine edits),
-`content/tavern_pack/actions.json` (the steal-failure hooks list,
-the successor appended last),
-`tests/test_arc_driver.py` (+6: the march, the stripped-arc
-inversion, the defused-relief stall, the fingerprint identity, the
-quiet-seed byte-identity, the declarations); the honest pin flips:
-`tests/test_actions.py` + `tests/test_doccheck.py` (the seeded-hooks
-set — the world-change precedent), `tests/test_director.py` (the
-dormancy pin → the live-declaration pin, the iter-51 flip pattern),
-`tests/test_balance_harness.py` (the D-065 record re-pinned: the
-clock-off arm minus the closing beat). Tests 960→966, ruff clean.
-D-081; TASKS (content-6 done), TEST_PLAN §6, DIRECTOR_SPEC §3d+§11,
-phases.md §3, README, AGENT_NAVIGATION §1, this file + worklog
-synced. 9 files — over the 3-5 soft limit: the doc-sync law (§6
-same-turn, the iter-43..51 precedent). DECISIONS transiently 47/30
-+ DIRECTOR_SPEC 622/600 + TASKS 822/600 kept per §6.1 (the landing
-records are substance, the numbers live in TEST_PLAN/D-081 — the
-single owners; the trims owe at the phase-3→4 gate, the KI#64
-note). iter-42 evicted per the worklog cap — verified in this edit.
+Iteration: iter-54 (`iter-54-phase3-gate` — the owner's "finish all
+business and final runs at gate 3, then approach 4" session call; the
+build column was completed at iter-53, the gate is the arc's #1 item,
+the iter-35 precedent) ·
+Phase: 3 (Director) — **CLOSED, gate PASS (D-083)**
+**CLOSED — the verdict: PASS. The full ROADMAP §5 protocol re-run:
+the corpus 105 + the parse corpus green in the 973-test suite, ruff
+clean; the canonical seed-125 pair — ON M1=0.509 / M2=0.333 /
+M3_mean=11.72 / M5=0.849, OFF T8 26 emergent chains ≥ 3 (the kill
+floor holds; M2's honest move 0.500→0.333: the seeded-hook
+denominator grew with the phase-3 tags, the ratio stays non-zero);
+the eventless-stretch table 10/10 max stretch 1 on both pacing arms
+(the all-PEAK law stands) AND on the quiet-walk stage (the D-066
+recorded question answered by the murmur's own stage: the max
+stretch stays 1 there too — the murmur lands in the window AFTER its
+release beat, the intent/completion latency is structural). T7 — the
+day1 chronicle reads as a story (the crime→consequence→escalation→
+fire→institutional arc), the quiet stage reads as the room's rhythm.
+The exit criterion "a scene without an event < N beats" reads N=2 —
+no two consecutive eventless beat windows on any measured stage. No
+kill-criteria hit. The doc debts paid in the same iteration (the
+KI#64 note): DECISIONS collapsed 48→30 (82 ids resolve in the
+leading column), the FAQ trimmed 23→20 (two family merges), TASKS
+854→510 (the Done section to one-liners per the §6 law, the phase-3
+backlog rows to their decision + links), DIRECTOR_SPEC 641→593, and
+phases.md 696→644 KEPT OVER per §6.1 (the architecture substance —
+the block pipeline, the ledger laws, the cross-cutting resolutions —
+is that file's purpose; the rationale recorded in the worklog).** ·
+Date: 2026-09-05 ·
+Scope: docs only — the gate iteration (the iter-34/35 precedent):
+`docs/DECISIONS.md` (the collapse + D-083), `docs/ROADMAP.md` (the
+phase-table flip — the single owner of closed/open), `docs/TASKS.md`
+(the gate row + the Done collapse + the backlog compression),
+`docs/DIRECTOR_SPEC.md` + `docs/blueprint/phases.md` (the landing
+records now link the single owners; phases.md §3's header flipped),
+`STATUS.md` (this header + the FAQ trim + Next step), `worklog.md`,
+`README.md`. 973 tests green, ruff clean — no code touched.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -67,6 +61,14 @@ note). iter-42 evicted per the worklog cap — verified in this edit.
 ## Active KIs
 
 (none open.)
+
+- KI#69 · the worklog line-cap drift (the KI#68 family: the 3-5
+  lines/entry cap had drifted to 30-40 since ~iter-49; the COUNT was
+  enforced, the lines were not) · opened+closed iter-54: all 10
+  entries trimmed to 9-11 lines (the head + the files-touched +
+  measurement structure the house actually carries; the strict 3-5
+  reading conflicts with the "what changed, why, files touched" law —
+  recorded here for the owner, the residual tension is visible).
 
 - (KI#68 deleted at iter-51 per AGENTS §5 — closed iter-48, two
   iterations past; the lesson lives in git + the worklog header's
@@ -132,28 +134,25 @@ note). iter-42 evicted per the worklog cap — verified in this edit.
   (2-call steady state; 3-call regen worst case) is §7 — regen_count is
   a first-class metric, never absorbed silently.
 
-- **Crossings fire in tick order, not by type (iter-4 law, D-038).**
-  Rotations and beats interleave by tick; the loop picks
-  `min(candidates)` per iteration; the writer's tick-monotonicity
-  invariant forbids out-of-order commits. Same rule for any future
-  clock-crossing system. The read-side mirror of the beat law:
-  `brief/assembler.py` `last_beat_tick`/`beats_crossed` reproduce the
-  same beat set (intraday offsets repeated daily; an offset of 0
-  belongs to day 1+, never t=0) — owner `BRIEF_SPEC.md` §3.2, tested.
-- **Autonomous intents enqueue at entry.tick, never beat_tick (D-039) —
-  and NEVER advance the playscript (KI#17).** Urgency/director intents
-  enqueue at `entry.tick` (sub_order NPC_REACTION); decay commits
-  directly at beat_tick; the runner feeds the next step only on the
-  PLAYER's own step endings.
-- **The intent door and the commit door (D-037).** Director releases
-  and urgencies ride the INTENT door: a released hook = IntentData
-  (`director_<N>` / `urgency_<N>`) through the front door (rejections
-  emit `intent_rejected` no-ops with `cause_intent`); the director
-  never bypasses Intent→Event. Reactions ride the COMMIT door:
-  `_commit` feeds the knowledge index + runs `_react` for EVERY
-  committed event — no call site can forget a reaction; cascades
-  terminate; suspicion reacts only to tokens the knower did not
-  already hold; the arrest resolution rides the same door.
+- **The queue + door laws (D-037/D-038/D-039).** Crossings fire in
+  tick order, never by type: rotations and beats interleave by tick,
+  the loop picks `min(candidates)` per iteration, the writer's
+  tick-monotonicity invariant forbids out-of-order commits (the
+  read-side mirror: `brief/assembler.py`'s `last_beat_tick`/
+  `beats_crossed` reproduce the same beat set — BRIEF_SPEC §3.2,
+  tested). Autonomous (urgency/director) intents enqueue at
+  `entry.tick`, never beat_tick (sub_order NPC_REACTION), decay
+  commits directly at beat_tick, and the runner feeds the next
+  playscript step only on the PLAYER's own step endings (KI#17). The
+  two doors: director releases and urgencies ride the INTENT door
+  (a released hook = IntentData `director_<N>`/`urgency_<N>` through
+  the front door; rejections emit `intent_rejected` no-ops with
+  `cause_intent`; the director never bypasses Intent→Event) —
+  reactions ride the COMMIT door: `_commit` feeds the knowledge
+  index + runs `_react` for EVERY committed event (no call site can
+  forget a reaction; cascades terminate; suspicion reacts only to
+  tokens the knower did not already hold; the arrest resolution
+  rides the same door).
 - **System passes scan the whole projection, not the events that seeded
   them (KI#16 lesson).** Per-layer bookkeeping must be global and
   mergeable by new ignitions, never a frozen snapshot in the queue
@@ -189,31 +188,19 @@ note). iter-42 evicted per the worklog cap — verified in this edit.
   the fixture header's `schema_version` == the current schema `$id`
   version, (b) a fresh regen byte-diff — a breaking schema change
   without fixture regen fails loudly (§3 migration procedure).
-- **Doc drift is evidence, not prescription — verify with `git log -S`
-  AND the pinning test before acting (KI#42/KI#48).** A ref citing a
-  spec section it never contained is drift (iter-6a: "AGENTS.md §9 —
-  Script Persistence Rule" in README/TEST_PLAN/D-044 — the text bled
-  from the session prompt; D-046 supersedes). A reported-but-unlanded
-  pass is drift too: archives are ephemeral, git is real — check
-  `git log` before building on any reported state (KI#42). A
-  code-behavior claim is drift until the test that pins it is named
-  (KI#48: the gateway's canon_slot check reads BOTH prop sources —
-  the folded projection AND the pack record, `brief/ledger.py::
-  establish` — so a pack-modeled field (exits, fire_spots, layout)
-  is texture-guarded the moment the pack declares it; brief
-  rendering of such fields is the pack's `scene_line_fields` list,
-  BRIEF_SPEC §3.4/D-057). Pre-D-028 wording, license copies, and
-  iter-0q/0r lift-target notes (`sim/systems/*.py`, `sim/store.py`,
-  `core/store.py`, `core/runner.py`, `content/packs/*.py` — names
-  that never existed; the plans were superseded by D-037
-  systems-live-in-core and D-023 projection-is-fold) in
-  `docs/ref/*`/`REFERENCES_DEEP.md` are historical; the owners are
-  AGENTS.md §4, `REFERENCES.md` (the catalog), and
-  `docs/AGENT_NAVIGATION.md` §1 (where things actually live).
-  External-paper figures are drift until fetched: KI#51 caught a
-  fully-formed cost citation ("Table 2, §6.4, ~$70") that exists
-  nowhere in Park 2023 — verify against the arXiv full text before
-  restating any number (bg-4, TECH_NOTES §9).
+- **Doc drift is evidence, not prescription — and every fact has ONE
+  owner (D-024/D-027).** Verify drift with `git log -S` AND the
+  pinning test before acting (KI#42/KI#48: a ref citing a section it
+  never contained, a reported-but-unlanded pass, a behavior claim
+  without its pinning test — archives are ephemeral, git is real;
+  KI#51: external-paper figures are drift until fetched). Four
+  places, four jobs: `REFERENCES.md` catalogs;
+  `CORE_DESIGN_RESEARCH.md` §2 synthesizes; `docs/ref/<source>.md`
+  carries mechanics; `BLUEPRINT.md` + `docs/blueprint/` carry
+  resolutions. Link, never restate; cite ledger row IDs (e.g. "per
+  RNG-1"). The audit method: grep a sample of ledger terms across
+  the planning docs — every term must land in at least one (verified
+  iter-0x; the ref-graveyard diagnostic).
 - **Live sandbox session recipes — narrate + say (operational; iter-24/
   31/32; merged per KI#54 — one session, two doors sharing one ledger,
   D-049).** `python -m cli` opens the interactive session. **narrate**
@@ -390,13 +377,6 @@ note). iter-42 evicted per the worklog cap — verified in this edit.
   material waits in `pack-1`, phase 6 / 2nd setting). Consecutive
   doc-only iterations force a stop (§2.5) unless a fresh owner request
   fires (the D-022 exception); code iterations never trigger the alarm.
-- **Four places, four jobs (D-027) + the ref-graveyard diagnostic.**
-  `REFERENCES.md` catalogs; `CORE_DESIGN_RESEARCH.md` §2 synthesizes
-  (one line per source); `docs/ref/<source>.md` carries mechanics;
-  `BLUEPRINT.md` + `docs/blueprint/` carry resolutions. Link, never
-  restate; cite ledger row IDs (e.g. "per RNG-1"). The audit method:
-  grep a sample of ledger terms across the planning docs — every term
-  must land in at least one; verified iter-0x.
 - **DF exports are not well-formed XML and can arrive truncated; the
   survey tool owns the recipe, the sink reuses it unchanged (iter-8e/
   8f/8g; bg-1-sqlite-sink).** Raw CP437 control bytes (item-quality
@@ -450,7 +430,8 @@ IDs with the FULL prefix on every member (`D-018/D-022/D-029` —
 decision→why→consequence and link the single owner (D-024).
 Pre-collapse history lives in git; collapsed 46→30 at the phase-0→1
 gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
-(iter-35); next due at the phase-3→4 gate.
+(iter-35), 48→30 at the phase-3→4 gate (iter-54); next due at the
+phase-4→5 gate.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -507,26 +488,16 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 
 ## Next step
 
-**Phase 3 is OPEN (iter-36..52 — the pacing clock D-065 + the
-exit-criterion instrument D-066 + the climax layer D-067 + the
-multi-channel split D-068 + the grammar's three layers D-069/D-070/
-D-071 + the document_check content set D-072 + the secrets &
-leverage fact clusters D-073 + the coerce door D-074 + the
-psychological echo D-075 + the release-chain layer D-076 + the
-alarm panic echo D-077 + the coerce driver D-078 + the urgency
-stream split D-079 + the echo driver D-080 + the ARC DRIVER D-081
-landed — the phase-3 build column's engine side AND its driver
-rows are complete except content-3: every layer has a live content
-consumer, the arc chain marches on the committed runs (the gap law
-load-bearing, zero corpus re-distill). What remains of phase 3 is
-content-3 + the gate.)**
-The phase-3 remainder in `docs/TASKS.md`'s backlog:
-`content-3` (ambient-channel content — the declared dimension, no
-hook carries it; the successor's social channel tag is inert
-vocabulary on a climax hook, NOT the row's answer). The
-dir-2/dir-4/drama-1/2/3 measurement's honest finding STANDS
-SUPERSEDED in part: the document_check landing is the first
-deliberate divergence (1/10 day1_full seeds; the corpus's seed-93
+**Phase 3 is CLOSED (gate PASS, iter-54, D-083 — opened iter-36, the
+build column completed at iter-53: the pacing stack D-065..D-068, the
+grammar D-069/D-070/D-071, the content column D-072..D-082 — every
+engine layer and every declared channel dimension carries a live
+consumer, the arc chain marches on the committed runs, the murmur
+fires on the quiet stage. The verdict record: D-083 + worklog
+iter-54.)**
+The dir-2/dir-4/drama-1/2/3 measurement's honest finding STANDS
+SUPERSEDED in part (the honest phase-3 divergence ledger): the
+document_check landing is the first deliberate divergence (1/10 day1_full seeds; the corpus's seed-93
 script fires), social-1 adds the second (the same 1/10 hot seed
 mints the leverage facts), the content-2 echo is corpus-script-only
 (the empty-backyard law), the echo driver is corpus-script-only too
@@ -541,10 +512,14 @@ the fourth (day1 9/10 + seed 125's one appended event; the corpus
 105/105 pin-green — and the nopacing arm's D-065 record now reads
 superseded in part: the closing beat rides the climax path).
 
-1. **Phase-3 remainder** (TASKS backlog): `content-3`
-   (ambient-channel content) → then the phase-3→4 gate (DECISIONS
-   47/30 collapse + the FAQ trim owed per the KI#64 note + TASKS/
-   phases over-cap trims — all recorded as owed at the gate).
+1. **Phase 4 (Knowledge & scene) is UNLOCKED — it opens on the
+   owner's call** (the iter-36 precedent: the ROADMAP table's phase-4
+   row reads "parked — UNLOCKED by the phase-3 gate"; the first
+   session call names the phase's #1 row and the phase-4 backlog
+   gets drafted from phases.md §4 — memory/reflection provenance,
+   trait crystallization, the retrieval ladder (FTS5 + the vec
+   fallback), the scene manager + mode B. Nothing phase-4 has
+   started: this gate iteration is docs-only by design).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

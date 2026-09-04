@@ -1563,6 +1563,16 @@
          "entity": "npc_drunk_01",
          "prop": "position",
          "value": "loc_tavern"
+        },
+        {
+         "kind": "event",
+         "event_id": "ev_0020",
+         "type": "ramble"
+        },
+        {
+         "kind": "knowledge",
+         "who": "npc_barkeep_01",
+         "knows": "rambling_by_npc_drunk_01"
         }
        ]
       }
@@ -1572,7 +1582,7 @@
    "expect": {
     "status": "accepted",
     "notes_contains": [
-     "BEAT claims: 4 supported"
+     "BEAT claims: 6 supported"
     ]
    }
   },

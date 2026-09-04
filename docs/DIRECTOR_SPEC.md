@@ -228,34 +228,17 @@ recorded-not-built — no content need has earned them (the ambient-
 channel pattern; they land with their first consumer). Knowledge-
 bearing reactions (a reaction that teaches) wait the same way.
 
-This pack's declaration is LIVE since iter-43 (D-072 — the
-owner's content call landed): the entry keys both branch types of
-the check — `document_check` and `document_check_failed` →
-`crowd_wary` (every witness of the public check grows warier —
-the crowd-reaction layer the token-keyed crime system does not
-cover; the scope reads the check's own witnesses, the room's
-sighting token is deliberately un-mapped crowd memory). It fires on
-every committed run and live session where the check lands
-(cause-chained to the check; the reacting set = the witnesses with
-a numeric home). The alarm panic echo is LIVE since iter-48
-(content-2, D-077): `alarm_raised` → `panic_ripple` — every witness
-of the shout gains fear (the through-the-walls law). The +10 delta
-is the CONTAGION half, a quarter of the hardcoded +40 direct spike
-(fear seen AND panic heard compound: the occupants 40 → 50, the
-cause actor 0 → 10 — he hears his own shout); the scope is un-gated
-(a shout unsettles everyone who heard it — the alarm's own
-knowledge resolution decides who that is; the adjacent-hearer half
-is structurally empty on the day-1 runs per the tune-3 static-
-placement finding, dormant until NPC movement exists). The echo
-commits at the alarm's own tick (the fear decay baseline stays
-where the alarm set it); no knowledge, no hooks (the one-hop law);
-`panic_ripple` is story-critical with its own chronicle line. The
-landing paid the corpus regen it always implied (7 fire-family
-cases re-distilled, the iter-43 precedent; the alarm case gained
-the echo's own claims — the panic event by id + the cause actor's
-fear). A pack without the `on_action` block runs
-the v0.1 reaction behavior, byte-identically on runs that fire no
-entry (TEST_PLAN §6 owns the A/B).
+This pack's LIVE declarations: `document_check` +
+`document_check_failed` → `crowd_wary` (iter-43, D-072 — every
+witness of the public check grows warier; the room's sighting token
+deliberately un-mapped crowd memory) and `alarm_raised` →
+`panic_ripple` (iter-48, D-077 — every witness of the shout gains
+fear, the through-the-walls law: the +10 contagion quarter of the
++40 direct spike, committing at the alarm's own tick, story-critical
+with its own line, the 7-case corpus re-distill paid at landing). A
+pack without the `on_action` block runs the v0.1 reaction behavior,
+byte-identically on runs that fire no entry (TEST_PLAN §6 owns the
+A/B).
 
 ## 3d. The arc layer (arc-1, iter-47 — the release chains; P3c, the
 DF event_collections / Paradox event-chain precedent)
@@ -292,11 +275,9 @@ its leftover instances are spent facts. **The stall is honest** — if a
 member's target dies or its trigger never fires, the chain stops
 there and later members never release (the world's causality broke
 the plan; the re-plan-on-violation refinement, §11, is the recorded
-future escape hatch). Measured live (D-076, seed 125, day1_full, the
-watcher pair chained as an e2e probe): the corpus-pinned relief-twin
-release is HELD all run — its predecessor never releases on that run
-("the post emptied the beat his band opened", iter-43) — the chain
-semantics working, not a bug.
+future escape hatch). Measured live (D-076, seed 125: the relief-twin
+release HELD all run behind a predecessor that never fires — the
+chain semantics working; TEST_PLAN §6).
 
 **The gap law (the tension-shaping half — pacing):** the current
 member may not release through the quiet or climax path within
@@ -334,32 +315,14 @@ cursor it already advanced).
 A pack without `director.arcs` runs the v0.1 release path
 byte-identically (the pack's own declaration is the gate, INV-3); an
 EMPTY block is legal and inert. **The aftermath chain is LIVE since
-iter-52 (content-6, D-081 — the dormancy ended):**
-`[possible_document_check_relief, barkeep_wary_sweep]` gap 2 — the
-room's reckoning, the day's closing beat. The design laws (the
-measurements live in TEST_PLAN §6 + D-081, the single owners): the
-relief is the FIRST member because it is the one hook live on the
-runs the driver targets (the order law never holds the
-corpus-pinned release — the D-076 naive watcher-pair chaining
-refused). The successor — the barkeep's wary sweep — is
-trigger-less (the climax path is its only road, so the ARC is the
-beat's whole timing), climax-flagged (the CLOSING beat that ends
-the day's peak: PEAK_CLIMAX + REST, the denouement the clock
-already defines; the D-067 "high-severity" wording is the donor's
-description — the pack's declaration is the law, the owner may
-veto), weight 0 (a closing beat carries no tension — the entropy
-footprint exactly zero, no floor can flip on any run), and seeded
-on the steal failure APPENDED LAST (the buffer order never steals
-the relief's budget slot). The GAP law is the load-bearing half:
-without the chain the sweep releases one beat earlier and lands its
-event BEFORE the check's own event (both intents ride the same
-entry tick; the queue's actor_id tiebreak decides — a second beat
-landing before its predecessor is a causality lie in the canon);
-the march holds it to the day's last event. The live-fire pins:
-`tests/test_arc_driver.py` (the march, the stripped-arc inversion,
-the defused-relief stall, the fingerprint identity, the
-declarations); the machinery stays unit-pinned on mutated packs
-(D-076).
+iter-52 (content-6, D-081):** `[possible_document_check_relief,
+barkeep_wary_sweep]` gap 2 — the room's reckoning, the day's closing
+beat (the relief first because it is the one hook live on the
+targeted runs; the sweep trigger-less + climax-flagged + weight 0 +
+first_time_only, seeded on the steal failure appended last; the
+measurements and the design walk live in TEST_PLAN §6 + the
+D-076/D-081 compound row, the single owners; the march and the
+gap-law inversion are pinned in tests/test_arc_driver.py).
 
 ## 4. Narrative entropy (P2e)
 
@@ -487,10 +450,17 @@ cooldown and the dead-actor skip. This pack's instantiation: threat 3
 (an escalation's weight meets its own floor — the quiet path
 self-blocks; `possible_document_check` fires causally), social 5 (the
 v0.1 floor carried, suspicion-bound; `guard_suspicious_of_pc`),
-ambient 2 (inputless noise floor — declared-but-dormant, no hook
-carries it yet, the owner's content call). Measured at landing: the
-10-seed A/B byte-identical (TEST_PLAN §6; the unit tests exercise
-the split directly).
+ambient 2 (the inputless noise floor — LIVE since iter-53, content-3,
+D-082: `ambient_drunkard_ramble`, the drunkard's murmur — weight 0,
+so the ambient entropy stays exactly 0 and no floor can flip
+anywhere; seeded by the WAIT action's success hooks (idle time is
+the murmur's domain — D-005: seeded at event time; the wait resolver
+minted action hooks for the first time at iter-53, the minting was
+resolver-sparse before); trigger-less, the channel's own quiet gate
+its only road; first_time_only — one murmur per run, the recurring
+variant recorded-not-built, §11). Measured at landing (TEST_PLAN §6 owns every
+A/B: iter-39 byte-identical; iter-53 the ambient row's birth-record-only
+day1 footprint + the quiet-stage live fire).
 
 ## 6. Release budget + cooldown
 
@@ -583,9 +553,14 @@ suffices.
 - The on_action grammar's `any`/`random` scope helpers and
   knowledge-bearing reactions (§3c — recorded-not-built, the
   first-consumer law).
-- Ambient-channel content (the tavern pack declares the dimension; no
-  hook carries it — a content-scale decision; lands with `social-1`'s
-  fact-cluster work or its own row).
+- A recurring ambient murmur: the ambient channel itself LANDED
+  (iter-53, content-3, D-082 — the murmur first_time_only, one per
+  run; §5 owns the record). A repeatable variant that re-fires on
+  every quiet beat is the L4D Music's full shape and waits for a
+  real multi-day quiet consumer (the first-consumer law; the
+  knowledge-mint growth on long runs is the design cost its owner
+  would be buying). The remaining resolvers' hooks minting follows
+  the same law — each mints the day its first pack consumer arrives.
 - A per-NPC desirability score for hook selection (phase-3).
 - The arc layer's re-plan-on-violation (the Generative Agents
   planning shape, deterministic): a stalled chain today STAYS
@@ -609,15 +584,10 @@ suffices.
   fence), or the entropy law is amended by the owner with the L6
   boundary redrawn explicitly. Not built, not silently resolved.
 
-The document_check action itself LANDED (iter-43, D-072 — the
-§11 first row of the pre-iter-43 record, the owner's content call):
-the full action over the `inspect` resolver, the climax flag on the
-watcher pair, and the live crowd-witness reaction — the design
-records live in `docs/DECISIONS.md` D-072 and the pack's own notes.
-The alarm panic echo LANDED next (iter-48, content-2, D-077 — the
-pre-iter-48 §11's first row): the through-the-walls law as one
-on_action entry over the standing dispatch, with the 7-case corpus
-re-distill (§3c the landing record).
+Landed from this section over phase 3: the document_check action
+(iter-43, D-072), the alarm panic echo (iter-48, D-077), the ambient
+channel (iter-53, D-082) — the landing records live in the DECISIONS
+content-column compound row + TEST_PLAN §6, the single owners.
 
 Recorded, not built — the trigger for each refinement is the
 matching phase gate or a fresh owner request.

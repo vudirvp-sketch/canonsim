@@ -84,7 +84,7 @@ small-dense; `scripts/df_briefer.py`: the POV mini-briefer + the
 closed-vocabulary reverse validation over the sink + the ≤2-regen
 ladder + the retrieval stress — 4 live cases, 0 honest misfires,
 brief p50 ≈ 2.9 KB on GB-scale exports; numbers owner
-`docs/TECH_NOTES.md` §3.3). **Phase 3 (Director) OPEN** — iter-36,
+`docs/TECH_NOTES.md` §3.3). **Phase 3 (Director) CLOSED** — gate PASS iter-54, D-083 (opened iter-36,
 the owner's "continue per the plan" call (the iter-31 precedent): the
 pacing clock landed first (DIR-1, D-065 — the L4D peak/rest donor:
 the per-run RAMP/PEAK/REST/STAGNATION machine over narrative entropy,
@@ -262,9 +262,37 @@ exactly the sweep (the D-065 record superseded in part, re-pinned).
 966 tests green, ruff clean. The live-fire suite
 tests/test_arc_driver.py + TASKS content-6 + D-081 carry the
 contract.
-Next: ambient-channel content-3 (the phase-3 build column's last
-content row) + the owner-gated set (parse-2, engine-1) + the
-phase-3→4 gate.
+The ambient driver landed iter-53 (content-3, D-082 — DIR-4's last
+declared-but-dormant dimension gains its live consumer, the L4D Music
+analog): the drunkard's ramble, the room's murmur — the 16th action
+(`ramble` over the observe resolver: no check, the room-heard
+knowledge mint, its own event type + chronicle line + story-critical
+entry) + the `ambient_drunkard_ramble` hook (weight 0 — the
+inputless noise floor flips no gate anywhere, the iter-52 law;
+trigger-less — the ambient channel's own quiet gate the only road;
+first_time_only — one murmur per run, the recurring variant
+recorded-not-built). The seeding side: the WAIT action's success
+hooks (idle time is the murmur's domain, D-005) — which closed the
+wait resolver's hooks-minting gap (the minting was resolver-sparse,
+the steal family only: a silent dead-data gap of the KI#15 family;
+the first-consumer law). Measured-first: day1_full 10/10 — the ONLY
+divergence is the wait events' `hooks` field (the birth record, zero
+appended events — the all-PEAK law); the T1 fixture regenerated in
+the same commit; the corpus 105/105 pin-green with ONE deliberate
+divergence (the quiet-beat case's ramble — its claims grown to pin
+the murmur, the iter-51 pattern); the nopacing arm re-pinned (the
+D-065 record superseded again: the ramble closes the clockless arm).
+973 tests green, ruff clean. The live-fire suite
+tests/test_ambient.py + TASKS content-3 + D-082 carry the contract.
+The phase-3 gate CLOSED the phase (iter-54, D-083 — verdict PASS):
+the full §5 protocol re-run green (the seed-125 pair ON M1=0.509 /
+M2=0.333, OFF T8 26 chains ≥ 3; the stretch table max 1 on both
+pacing arms and the quiet-walk stage; T7 reads as a story; the
+corpus 105 + parse corpus green in the 973-test suite, ruff
+clean); the doc debts paid (DECISIONS 48→30, the FAQ 23→20, TASKS
+854→510, DIRECTOR_SPEC 641→593; phases.md kept over per §6.1 with
+the rationale in the worklog). Phase 4 (Knowledge & scene) is
+UNLOCKED — it opens on the owner's call (the iter-36 precedent).
 
 ## For AI agents (primary audience)
 

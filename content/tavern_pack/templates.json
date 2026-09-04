@@ -67,6 +67,7 @@
       "{target} drifts: {axes} changed.",
       "The hours tell on {target}: {axes} changed."
     ],
-    "coerce": "{actor} leans on {target} — the hold is spent."
+    "coerce": "{actor} leans on {target} — the hold is spent.",
+    "ramble": "{actor} rambles to no one in particular."
   }
 }

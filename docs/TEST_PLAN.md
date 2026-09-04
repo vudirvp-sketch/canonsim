@@ -395,3 +395,34 @@ successor dies without the climax layer — the D-065
 "both arms identical" record superseded in part (the clock's
 PEAK/REST bands still gate nothing; the closing beat rides the
 climax path), re-pinned in tests/test_balance_harness.py.
+
+Re-measured at iter-53 (content-3, the ambient driver landed — D-082,
+DIR-4's declared-but-dormant dimension gains its live consumer): the
+hook is LIVE but day1_full never opens its gate — the same 10 seeds,
+the committed pack vs the landing-stripped linted variant (a runner
+outside the repo per Rule 9): **10/10 diverge by EXACTLY the wait
+events' `hooks` field** (2-5 lines per seed, the ambient tag's birth
+record — the iter-52 zero-regen shape) and **zero appended events on
+every seed** (the all-PEAK law: the quiet path is suppressed at every
+beat; seed 125's closing sweep stays the last event). The T1 fixture
+regenerated in the same commit (the plumbing waits' birth record —
+two `hooks` fields, byte-diff verified as exactly those two lines,
+TEST_PLAN §3 procedure). The corpus: **105/105 pin-green, ONE
+deliberate divergence** — the quiet-beat case (seed 7) gains the
+ramble at t=733, its LAST event; the case's own claims grown to pin
+the murmur by id+type + the barkeep's heard record (the iter-51
+deliberate-pin pattern, no re-distill behind it). The live behavior
+— the quiet march (the wait-seeded tag, the beat-720 release through
+the ambient channel's own floor with the rotated guard honestly
+absent from the listeners), the chronicle line in log order, the
+burn, the directors-off arm, the seeding-stripped isolation, the
+fingerprint identity (the ramble draws nothing; its one honest
+downstream — the heard record crossing the t=1080 watch change as
+the evening guard's briefing) — is pinned directly
+(tests/test_ambient.py; D-082). The nopacing arm of THIS test's
+D-065 record re-pinned: without the pacing clock no PEAK suppression
+remains, so the ambient channel's own floor gates the last beat —
+the nopacing arm now closes on the ramble (t=1458) where the ON arm
+closes on the sweep (t=1456); both arms share their 52-line prefix
+(the clock's presence swaps WHICH director beat closes the day —
+tests/test_balance_harness.py).

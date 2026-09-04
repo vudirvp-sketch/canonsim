@@ -108,8 +108,8 @@
       "requires": [],
       "fields": ["ticks"],
       "knowledge": {"success": [], "failure": []},
-      "hooks": {"success": [], "failure": []},
-      "notes": "advance N ticks; the world moves while the player stands still"
+      "hooks": {"success": ["ambient_drunkard_ramble"], "failure": []},
+      "notes": "advance N ticks; the world moves while the player stands still. content-3 (iter-53, D-082): every committed wait seeds the ambient tag — idle time is the noise floor's domain (D-005: the murmur is seeded at event time, never improvised; the tag is weight 0, so the seeding shifts no entropy anywhere)"
     },
     {
       "intent": "take",
@@ -367,6 +367,25 @@
       },
       "hooks": {"success": [], "failure": []},
       "notes": "exit under pursuit: opposed evasion vs the best pursuit skill present; no potential pursuer → automatic; guards' chase knowledge deepens with the crime system (iter-3): pursuers at the destination see exactly where the runner went"
+    },
+    {
+      "intent": "ramble",
+      "label": "ramble",
+      "resolver": "observe",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "ramble"},
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "heard", "fidelity": "vague", "knows": "rambling_by_{actor}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "the 16th action (content-3, iter-53, D-082 — DIR-4's ambient channel gains its live consumer): an idle audible beat — the actor rambles, the room hears (vague, heard). No check (noise is not communication), no state change, no consequence hooks of its own. The observe resolver is the mechanic (an in-location perception event whose knowledge templates are this pack data); the director's ambient hook is the driver, the parse grammar gains a legal idle verb beside wait/look_around."
     }
   ]
 }

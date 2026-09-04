@@ -33,6 +33,7 @@ MVP_INTENTS = frozenset(
         "flee",
         "document_check",  # iter-43: the crime ladder's public rung (D-072)
         "coerce",  # iter-45: the leverage spend, social-1b (D-074)
+        "ramble",  # iter-53: the ambient idle beat, content-3 (D-082)
     }
 )
 
@@ -145,8 +146,8 @@ def test_watch_rotation_ticks_are_inside_the_day() -> None:
 def test_actions_match_mvp_scope() -> None:
     data = load(PACK / "actions.json")
     # MVP_SCOPE §7: 12 phase-0 + rest (tune-1) + document_check (iter-43)
-    # + coerce (iter-45)
-    assert len(data["actions"]) == 15
+    # + coerce (iter-45) + ramble (iter-53, content-3's ambient idle beat)
+    assert len(data["actions"]) == 16
     intents = [a["intent"] for a in data["actions"]]
     assert len(intents) == len(set(intents))
     assert frozenset(intents) == MVP_INTENTS

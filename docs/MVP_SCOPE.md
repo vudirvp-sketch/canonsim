@@ -20,10 +20,10 @@ not of architecture — a boring four-room scenario is not a verdict on the core
 
 **In scope:**
 
-- 5 locations, 6 NPCs, 5 items, 9 systems, 15 actions — 12 phase-0
+- 5 locations, 6 NPCs, 5 items, 9 systems, 16 actions — 12 phase-0
   plus the growth rows (rest tune-1/iter-27; document_check iter-43;
   the 9th system, secrets & leverage, iter-44; coerce, the leverage
-  spend, iter-45; §4–§7).
+  spend, iter-45; ramble, the ambient idle beat, iter-53; §4–§7).
 - Deterministic core: seed, RngBank (INV-2, RNG-1), integer tick clock, single event
   queue, JSONL append-only log with header (§8, `docs/EVENT_SCHEMA.md` §1).
 - Event schema v0 with knowledge records, `state_changes`, `hooks`.

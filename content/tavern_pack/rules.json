@@ -699,6 +699,17 @@
         "climax": true,
         "first_time_only": true,
         "notes": "the arc driver (content-6, iter-52, D-081 — arc-1's live content set, the release-chain layer's first LIVE consumer): the room's reckoning, the day's closing beat. The theft's public failures seed the room's latent wariness — the barkeep witnessed the reaching and the noise (his own suspicion tokens, minted at the failure), so the beat seeds on the same steal-failure hooks list as the watcher pair, APPENDED LAST: the explicit scan's buffer order can never steal the relief's budget slot at the band-opening beat (the corpus pin's belt-and-suspenders — the order law holds the sweep non-current there anyway). Trigger-less by design: the beat carries no causal band of its own — it releases ONLY through the DIR-3 climax path (PEAK-end, the third layer) and never the quiet one (the boss-shape law), so the ARC is the beat's whole timing: chained after the relief's check (the aftermath chain, the arcs block below) with the gap law holding the march — beat 720 refused (one beat past the check), beat 1080 the room's own. The climax flag's use here is the CLOSING beat — the beat that ends the day's peak (PEAK_CLIMAX + the unconditional REST, the denouement the clock already defines); weight 0 on purpose (a closing beat carries no tension — the entropy sensor never sees it, so the landing shifts no floor on any run, the whole +W gate-flip class dead by construction); release_threshold 10 (the climax walk's tiebreak — the sweep yields to any live confrontation, the pair's 5 outranks it); first_time_only (one reckoning per run). DIR-4: SOCIAL-channel (the crowd-wariness family — the same dimension the check's own crowd_wary reaction feeds; the tag is inert vocabulary on a climax hook, declared for the lint's closed set). Measured live (day1_full seed 125, the only live stage): the check commits at t=734, the sweep at t=1456 — the day's LAST event, appended after everything HEAD held (zero id shifts); the knowledge mint is the barkeep's scene snapshot — the room, taken stock"
+      },
+      "ambient_drunkard_ramble": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_drunk_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "the ambient driver (content-3, iter-53, D-082 — the DIR-4 declared-but-dormant dimension gains its live consumer, the L4D Music analog): the room's murmur. Trigger-less — the ambient channel's own quiet gate is the whole release path (the hook's weight 0 keeps the ambient entropy exactly 0, the inputless noise floor as declared; the clock stays the global gate: PEAK/REST suppress it like every channel, RAMP/STAGNATION admit it — the multi-channel win: the murmur can return while a threat channel burns). Seeded by idle time itself (the wait action's success hooks list, D-005). first_time_only: one murmur per run — the recurring variant is the recorded-not-built refinement (DIRECTOR_SPEC §11); release_threshold 10: in a mixed quiet buffer the murmur yields to the document checks (5) and ties with the guard's glance by seeding order behind it. The drunkard: the room's own noise source — his static placement the tune-3 law, the coerce urgency his loud half, this his quiet half."
       }
     },
     "arcs": {
@@ -832,7 +843,8 @@
       "document_check",
       "document_check_failed",
       "leverage_gained",
-      "coerce"
+      "coerce",
+      "ramble"
     ],
     "thresholds": {
       "medium": 2,
