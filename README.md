@@ -313,10 +313,17 @@ crystallizes `paranoid_about_thieves` — the eyewitness (sighting
 transfer minted all three tokens in one event); the room's other
 witnesses hold two tokens and honestly stay uncrystallized. The
 10-seed day1_full A/B (seeds 120..129) byte-identical through the
-landing — DORMANT (the iter-47 arc precedent; leg-2 owns the
-brief's derived-trait read, BRIEF_SPEC's phase-4 clause). 991
-tests green, ruff clean. Contract owner `core/traits.py` + TASKS
-leg-1 + D-084.
+landing. leg-2 LANDED (iter-56, D-085 — leg-1's first consumer, the
+BRIEF_SPEC phase-4 clause): `brief/assembler.py` reads the fold —
+the PC's crystallized beliefs LEAD the recalled_facts block as belief
+lines `- belief <token> (t <cross>, sources: <ids>)`, the family
+records render nothing raw (the derived view replaces them; a
+below-threshold family stays raw), `core/traits.py::expand_trait` the
+expansion law's demand side. The PC holds no family token on any
+committed corpus — zero brief bytes changed: the 10-seed A/B
+byte-identical (brief + log), zero corpus regen. 1004 tests green,
+ruff clean. Contract owner `core/traits.py` + BRIEF_SPEC §3.5 + TASKS
+leg-1/leg-2 + D-084/D-085.
 
 ## For AI agents (primary audience)
 

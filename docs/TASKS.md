@@ -31,11 +31,14 @@
   laws + the lint's closed vocabulary; DORMANT until leg-2 (the
   iter-47 arc precedent — the 10-seed A/B byte-identical). Detail:
   D-084 + tests/test_traits.py.
-- `leg-2` · the brief's derived-trait read (leg-1's first consumer):
-  BRIEF_SPEC's phase-4 clause — the brief reads derived traits instead
-  of raw `knowledge.records` when both exist, brief size
-  O(traits × PC perception) not O(history); the expansion law (the
-  trait's source records on demand).
+- `leg-2` · the brief's derived-trait read (leg-1's first consumer) —
+  **done (iter-56, D-085)**: `brief/assembler.py::_recalled_fact_lines`
+  reads the fold — belief lines lead the recalled_facts block (provenance
+  ids inline, the expansion law's demand handle), the family records
+  render nothing raw; `core/traits.py::expand_trait` the demand side.
+  Zero-regen landing (the PC holds no family token on any committed
+  corpus; the 10-seed A/B byte-identical). Detail: D-085 +
+  BRIEF_SPEC §3.5 + tests/test_brief.py.
 - `leg-3` · reflection & memory compaction (phases.md §4 — reflection
   provenance: `provenance: list[event_id]`, the source outranks the
   reflection's recency on contradiction, the `stale` flag;

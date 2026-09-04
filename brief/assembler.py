@@ -44,6 +44,7 @@ from core.fold import fold, initial_projection, present_in_order
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
 from core.pack import BRIEF_BLOCK_IDS, Pack
+from core.traits import Trait, crystallized_traits
 from render.chronicle import display_name
 
 __all__ = [
@@ -205,18 +206,61 @@ def _scene_delta_lines(
     return lines
 
 
+def _belief_lines(
+    traits: Sequence[Trait], events: Sequence[EventRecord]
+) -> list[str]:
+    """The derived-trait read's item lines (BRIEF_SPEC §3.5, the phase-4
+    clause): one line per crystallized belief, declaration order (the
+    fold's order for one knower) — the belief carries its provenance
+    event ids, the expansion law's demand handle; the cross tick is the
+    threshold crossing (the latest source event's t). Dry ids, never
+    prose: the line is an address into the log, not a narrative."""
+    tick_of = {event.id: event.t for event in events}
+    lines: list[str] = []
+    for trait in traits:
+        cross = max((tick_of.get(sid, 0) for sid in trait.sources), default=0)
+        sources = ", ".join(trait.sources)
+        lines.append(f"- belief {trait.token} (t {cross}, sources: {sources})")
+    return lines
+
+
 def _recalled_fact_lines(
     events: Sequence[EventRecord], pack: Pack, *, player_id: str
 ) -> list[str]:
-    """The PC's own knowledge records, ranked by recency + importance
-    (the two deterministic signals; relevance arrives with the mediator —
-    BRIEF_SPEC §3.5), deduped by token, capped at `max_items`."""
+    """The PC's own knowledge, ranked by recency + importance (the two
+    deterministic signals; relevance arrives with the mediator —
+    BRIEF_SPEC §3.5), deduped by token, capped at `max_items` — and read
+    through the derived-trait lens (leg-2, the phase-4 clause): the
+    PC's crystallized beliefs lead the block as belief lines, and the
+    family records that minted them render nothing raw — the belief is
+    the derived view, the source records stay queryable on demand via
+    the provenance ids (the expansion law, `core/traits.py::
+    expand_trait`). Size O(traits + records), never O(history)."""
     config = pack.rules["brief"]["recalled_facts"]
     current_tick = events[-1].t if events else 0
     importance_of = {event.id: event.importance for event in events}
-    records = KnowledgeView.from_events(events).records_of(player_id)
+    view = KnowledgeView.from_events(events)
+    records = view.records_of(player_id)
     recency_weight = float(config["recency_weight"])
     importance_weight = float(config["importance_weight"])
+
+    # leg-2: the fold reads as DATA at the assembly tick (the honest
+    # read-model law shared with the echo); beliefs in declaration
+    # order, the replaced tokens are the crystallized families' own —
+    # evidence is evidence, a held family record never survives its
+    # belief raw (a below-threshold family still renders raw: no belief,
+    # no replacement).
+    beliefs = [
+        trait
+        for trait in crystallized_traits(pack, view, current_tick)
+        if trait.who == player_id
+    ]
+    belief_config = pack.rules.get("traits")
+    replaced: set[str] = set()
+    for trait in beliefs:
+        if belief_config is not None:
+            replaced.update(belief_config["beliefs"][trait.token]["family"])
+    lines = _belief_lines(beliefs, events)
 
     def score(record: Any) -> float:
         age = current_tick - record.at
@@ -224,17 +268,19 @@ def _recalled_fact_lines(
         return recency_weight / (1 + age) + importance_weight * rank
 
     ranked = sorted(records, key=score, reverse=True)  # stable: acquisition wins ties
-    lines: list[str] = []
     seen: set[str] = set()
+    max_items = int(config["max_items"])
     for record in ranked:
+        if len(lines) >= max_items:
+            break  # the top-k law: belief lines count against the cap
         if record.knows in seen:
             continue  # the brief shows what the PC knows, not the learning history
+        if record.knows in replaced:
+            continue  # the belief subsumes its family's raw evidence
         seen.add(record.knows)
         lines.append(
             f"- [t {record.at}, {record.channel}, {record.fidelity}] {record.knows}"
         )
-        if len(lines) >= int(config["max_items"]):
-            break
     return lines
 
 

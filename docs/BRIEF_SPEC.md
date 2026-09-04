@@ -5,7 +5,9 @@
 > `docs/blueprint/phases.md` §1 (ledger row BRIEF-1), the mechanics in
 > `brief/assembler.py` + `brief/ledger.py` (the scene ledger). Field-level
 > clauses are born just-in-time — §9 lists what is deliberately deferred.
-> ≤300 lines. No LLM, no network (INV-4; §9).
+> ≤600 lines, substance-filtered (`AGENTS.md` §6/§6.1; the original ≤300
+> self-cap had rotted to 389 by iter-55 — KI#70, the header now reads the
+> owning law). No LLM, no network (INV-4; §9).
 
 ## 1. What the brief is
 
@@ -58,7 +60,7 @@ scene trio completes before recall, st-1):
 | 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
 | 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
 | 4 | `present_entities` | the projection's present set + the pair map + promotions + the pack's scene-line fields (st-1, iter-20; tune-2: the prop-path `card_markers` table) | `- <id> (<display>)[ markers=<m>][ carries=<ids>][ <prop>=<v>]` / `- scene <loc> (<display>) <field>=<v>[...] [<prop>=<v>...]` / `- pair <a> -> <b> <axis>=<v>` |
-| 5 | `recalled_facts` | the PC's `knowledge` records, ranked | `- [t <at>, <channel>, <fidelity>] <knows>` |
+| 5 | `recalled_facts` | the PC's crystallized beliefs (leg-2, the derived-trait read) + non-family `knowledge` records, ranked | `- belief <token> (t <cross>, sources: <id>, <id>)` / `- [t <at>, <channel>, <fidelity>] <knows>` |
 | 6 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
 | 7 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
 | 8 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
@@ -166,11 +168,29 @@ per-present expansion).
   law — beyond-cap items render nothing, never a budget drop); the
   scene line is structural (≤1, never capped).
 
-### 3.5 Recalled facts (the three-signal shape, deterministic inputs)
+### 3.5 Recalled facts (the derived-trait read + the three-signal shape)
 
-Top-k over the PC's knowledge records ranked by the Generative Agents
-three-signal shape with two deterministic inputs (the relevance signal
-arrives with the mediator, §9):
+Top-k over the PC's knowledge read **through the derived-trait lens**
+(the phase-4 clause, leg-2; `core/traits.py` owns the fold): the PC's
+crystallized beliefs render as **belief lines that lead the block**,
+and the family records that minted them render nothing raw — the
+belief is the derived view, the source records stay queryable on
+demand via the provenance ids (`core/traits.py::expand_trait`, the
+expansion law — the source is always queryable, the belief never a
+replacement). Size O(traits + records), never O(history); a
+below-threshold family still renders raw (no belief, no replacement).
+Belief line shape: `- belief <token> (t <cross>, sources: <id>, <id>)`
+— `cross` is the threshold crossing (the latest source event's tick),
+`sources` the contributing records' event ids in acquisition order
+deduped first-seen (an event minting two family records is one
+source). Beliefs render in pack declaration order; belief lines count
+against `max_items` (the top-k law). No pack data beyond
+`rules.json::traits` — the traits block's existence is the gate
+(INV-3).
+
+The surviving raw records rank by the Generative Agents three-signal
+shape with two deterministic inputs (the relevance signal arrives with
+the mediator, §9):
 
 ```
 score = recency_weight / (1 + current_tick - record.at)
@@ -385,5 +405,5 @@ bytes = a spec edit in the same commit as the code change.
 | Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |
-| Static-lore retrieval (FTS5) + trait expansion instead of raw records | phase 4 | STORE-1, LEGEND_SPEC |
+| Static-lore retrieval (FTS5) | `retr-1` (phase 4) | STORE-1 |
 | The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |

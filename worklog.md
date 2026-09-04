@@ -16,6 +16,22 @@
 
 
 ---
+iter-56 · 2026-09-05 · leg-2 — the brief's derived-trait read, leg-1's
+first consumer (phase 4, BRIEF_SPEC's phase-4 clause)
+- brief/assembler.py + core/traits.py (+14 tests: 10 brief, 4 traits):
+  the PC's crystallized beliefs LEAD recalled_facts as belief lines
+  `- belief <token> (t <cross>, sources: <ids>)`, the family records
+  render nothing raw; expand_trait the demand side (the expansion
+  law). BRIEF_SPEC §3.5 + §3 table + §9 split — same commit (§8).
+- Measured-first: the PC holds no family token on ANY committed
+  corpus — the 10-seed day1_full A/B (120..129) 10/10 byte-identical
+  (brief + log), zero corpus regen; the golden no-belief pin.
+- DECISIONS D-085 merged into the D-084/D-085 phase family (cap 30
+  held); TASKS leg-2 done; KI#70 (the BRIEF_SPEC self-cap rot,
+  389 > the declared 300 at HEAD — the header now reads AGENTS §6)
+  opened+closed; KI#69 deleted per §5. 991→1004 tests, ruff clean.
+  iter-46 evicted; 10 entries after.
+---
 iter-55 · 2026-09-05 · phase-4 open + leg-1 — trait crystallization
 (P3f; the owner's "start phase 4" call, the iter-36 opener precedent)
 - core/traits.py (NEW) + the _traits lint + rules.json::traits (the
@@ -121,14 +137,3 @@ release-chain layer (the LAST engine row of the build column)
   corpus-pinned relief held forever by a never-firing predecessor).
   +19 tests/test_director.py; 924→943, ruff clean. D-076 + TASKS +
   DIRECTOR_SPEC §3d.
----
-iter-46 · 2026-09-03 · social-2 — the psychological echo, the residue
-read model (the P2b consumer's engine half)
-- core/echo.py (NEW): the pure read-side fold over the knowledge
-  view (per-NPC valence, linear fade, fidelity-scaled, clamped);
-  writes nothing, feeds no entropy (the L6 fence). The
-  echo_at_least gate + the WINDOWED_TESTS generalization; rules.json
-  the valence table, declared DORMANT (content-5 owns the driver).
-- Measured: the crafted driver fires once then fades; the 10-seed
-  A/B 10/10 byte-identical — zero corpus regen. +29
-  tests/test_echo.py; 895→924, ruff clean. D-075 + TASKS.

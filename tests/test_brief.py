@@ -242,6 +242,168 @@ def test_recalled_facts_max_items_is_a_ranking_cap_not_a_drop() -> None:
     assert "[truncated:" not in text.split("## recalled_facts")[1].split("##")[0]
 
 
+# -- the derived-trait read (leg-2, phase 4 — BRIEF_SPEC §3.5) -------------------
+# The committed family: the pack's own `traits` declaration is the gate —
+# the PC holding all three tokens crystallizes `paranoid_about_thieves`.
+FAMILY = ("figure_reaching_for_purse", "noise_by_the_bar", "purse_missing")
+
+
+def _belief_events() -> list[EventRecord]:
+    """The PC holds all three family tokens (t 10/20/30) plus one
+    non-family record (t 40) — the crystallized shape plus a survivor."""
+    return [
+        _ev("ev_0001", 10, "rumor_told", "npc_drunk_01", None,
+            knowledge=(_rec(PLAYER, FAMILY[0], 10, "ev_0001"),)),
+        _ev("ev_0002", 20, "rumor_told", "npc_drunk_01", "ev_0001",
+            knowledge=(_rec(PLAYER, FAMILY[1], 20, "ev_0002"),)),
+        _ev("ev_0003", 30, "rumor_told", "npc_drunk_01", "ev_0002",
+            knowledge=(_rec(PLAYER, FAMILY[2], 30, "ev_0003"),)),
+        _ev("ev_0004", 40, "rumor_told", "npc_drunk_01", "ev_0003",
+            knowledge=(_rec(PLAYER, "fire_spreading_in_loc_backyard", 40, "ev_0004"),)),
+    ]
+
+
+def test_belief_leads_the_block_and_replaces_the_family_records() -> None:
+    """The phase-4 clause: the belief line leads, the family records
+    render nothing raw (the derived view replaces them), the non-family
+    record survives — exact bytes (BRIEF_SPEC §3.5)."""
+    body = _blocks(render_brief(assemble_brief(_belief_events(), PACK)))[
+        "recalled_facts"
+    ]
+    assert body == [
+        "- belief paranoid_about_thieves (t 30, sources: ev_0001, ev_0002, ev_0003)",
+        "- [t 40, saw, exact] fire_spreading_in_loc_backyard",
+    ]
+
+
+def test_the_cross_tick_is_the_threshold_crossing() -> None:
+    """The belief's tick is the LATEST source event's t (when the third
+    token landed), not the first — the crossing, not the onset."""
+    events = _belief_events()
+    body = _blocks(render_brief(assemble_brief(events, PACK)))["recalled_facts"]
+    assert body[0] == (
+        "- belief paranoid_about_thieves (t 30, sources: ev_0001, ev_0002, ev_0003)"
+    )
+    # the same log truncated before the third token: no belief at all
+    short = _blocks(render_brief(assemble_brief(events[:2], PACK)))["recalled_facts"]
+    assert short == [
+        f"- [t 20, saw, exact] {FAMILY[1]}",
+        f"- [t 10, saw, exact] {FAMILY[0]}",
+    ]
+
+
+def test_below_threshold_family_stays_raw() -> None:
+    """No belief, no replacement (the honest answer): a two-token family
+    renders its records raw, exactly the pre-leg-2 shape."""
+    events = [
+        _ev("ev_0001", 10, "rumor_told", "npc_drunk_01", None,
+            knowledge=(_rec(PLAYER, FAMILY[0], 10, "ev_0001"),)),
+        _ev("ev_0002", 20, "rumor_told", "npc_drunk_01", "ev_0001",
+            knowledge=(_rec(PLAYER, FAMILY[1], 20, "ev_0002"),)),
+    ]
+    body = _blocks(render_brief(assemble_brief(events, PACK)))["recalled_facts"]
+    assert [line.rsplit(" ", 1)[1] for line in body] == [FAMILY[1], FAMILY[0]]
+
+
+def test_one_event_minting_two_tokens_is_one_source() -> None:
+    """The hearsay shape: a transfer event minting two family records
+    rides the provenance once — sources are event ids, deduped
+    first-seen."""
+    events = [
+        _ev("ev_0001", 10, "watch_transfer", "npc_guard_01", None,
+            knowledge=(_rec(PLAYER, FAMILY[0], 10, "ev_0001"),
+                       _rec(PLAYER, FAMILY[1], 10, "ev_0001"))),
+        _ev("ev_0002", 20, "rumor_told", "npc_drunk_01", "ev_0001",
+            knowledge=(_rec(PLAYER, FAMILY[2], 20, "ev_0002"),)),
+    ]
+    body = _blocks(render_brief(assemble_brief(events, PACK)))["recalled_facts"]
+    assert body == ["- belief paranoid_about_thieves (t 20, sources: ev_0001, ev_0002)"]
+
+
+def test_belief_lines_count_against_max_items() -> None:
+    """The top-k law: belief lines are items — max_items 1 renders the
+    belief alone, records beyond the cap render nothing, and the marker
+    never fires (a ranking cap, not a budget drop)."""
+
+    def shrink(rules: dict[str, Any]) -> None:
+        rules["brief"]["recalled_facts"]["max_items"] = 1
+
+    text = render_brief(assemble_brief(_belief_events(), _mutated_pack(shrink)))
+    body = _blocks(text)["recalled_facts"]
+    assert body == [
+        "- belief paranoid_about_thieves (t 30, sources: ev_0001, ev_0002, ev_0003)"
+    ]
+    assert "[truncated:" not in text.split("## recalled_facts")[1].split("##")[0]
+
+
+def test_two_beliefs_render_in_declaration_order() -> None:
+    """INV-2 at the block level: two crystallized beliefs lead in pack
+    declaration order (the fold's order for one knower), regardless of
+    when their tokens landed."""
+
+    def two_beliefs(rules: dict[str, Any]) -> None:
+        rules["traits"]["beliefs"] = {
+            "first_belief": {"family": [FAMILY[0], FAMILY[1]]},
+            "second_belief": {
+                "family": ["figure_starting_fire", "papers_unsatisfactory"]
+            },
+        }
+        rules["traits"]["threshold"] = 2
+
+    pack = _mutated_pack(two_beliefs)
+    events = [
+        _ev("ev_0001", 10, "arson", "pc_01", None,
+            knowledge=(_rec(PLAYER, "figure_starting_fire", 10, "ev_0001"),)),
+        _ev("ev_0002", 20, "rumor_told", "npc_drunk_01", "ev_0001",
+            knowledge=(_rec(PLAYER, FAMILY[0], 20, "ev_0002"),)),
+        _ev("ev_0003", 30, "arson", "pc_01", "ev_0002",
+            knowledge=(_rec(PLAYER, "papers_unsatisfactory", 30, "ev_0003"),)),
+        _ev("ev_0004", 40, "rumor_told", "npc_drunk_01", "ev_0003",
+            knowledge=(_rec(PLAYER, FAMILY[1], 40, "ev_0004"),)),
+    ]
+    body = _blocks(render_brief(assemble_brief(events, pack)))["recalled_facts"]
+    assert [line.split()[2] for line in body] == ["first_belief", "second_belief"]
+
+
+def test_brief_with_beliefs_is_deterministic() -> None:
+    """Same log -> same brief bytes through the derived-trait read: no
+    RNG, no call-order state (BRIEF_SPEC §2 — the lens changes nothing
+    about purity)."""
+    events = _belief_events()
+    assert render_brief(assemble_brief(events, PACK)) == render_brief(
+        assemble_brief(events, PACK)
+    )
+
+
+def test_no_pack_traits_block_renders_the_pre_leg2_shape() -> None:
+    """INV-3's gate: a pack without the traits block renders raw records
+    only — the v0.1 behavior, byte-stable (the block's own declaration
+    is the gate)."""
+
+    def strip(rules: dict[str, Any]) -> None:
+        del rules["traits"]
+
+    pack = _mutated_pack(strip)
+    body = _blocks(render_brief(assemble_brief(_belief_events(), pack)))[
+        "recalled_facts"
+    ]
+    assert [line.rsplit(" ", 1)[1] for line in body] == [
+        "fire_spreading_in_loc_backyard",
+        FAMILY[2],
+        FAMILY[1],
+        FAMILY[0],
+    ]
+
+
+def test_golden_brief_carries_no_belief_line() -> None:
+    """The zero-regen witness (measured at the landing): the golden
+    fixture's PC holds no family tokens — the derived-trait read changes
+    nothing on the committed corpora; the block renders the pre-leg-2
+    shape."""
+    text = brief_from_log(GOLDEN, PACK, SCHEMA)
+    assert "- belief " not in text
+
+
 # -- scheduled lore (BRIEF_SPEC §3.6; was §3.5 — the renumber rode a stale
 # §3.4 citation, KI#45) ------------------------------------------------------------
 

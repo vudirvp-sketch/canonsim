@@ -19,11 +19,12 @@ The laws pinned here:
   (INV-1), so the evidence holds while the log holds; `at_tick` gates
   CONTRIBUTION (the honest read-model law shared with the echo), never
   the belief's persistence.
-- **The dormancy law**: no runtime consumer reads the fold (the iter-47
-  arc precedent) — the loop never imports `core.traits`; the day1_full
-  10-seed A/B is byte-identical through the landing (the worklog's
-  measurement); leg-2 (the brief's derived-trait read, BRIEF_SPEC's
-  phase-4 clause) owns the first consumer.
+- **The dormancy law, post leg-2**: the CANON loop never imports
+  `core.traits` (the write side stays untouched — the day1_full
+  10-seed A/B is byte-identical through the landing, iter-55 and
+  iter-56); the fold's first consumer is the brief's read-side lens
+  (leg-2, `brief/assembler.py::_recalled_fact_lines` — BRIEF_SPEC
+  §3.5), which reads the fold as DATA and writes nothing.
 - **The L6 fence**: a belief is per-NPC derived state over the NPC's
   own records — never player-adapted, never an entropy input; the
   director is untouched by construction (DIRECTOR_SPEC §4).
@@ -55,7 +56,7 @@ from core.knowledge import KnowledgeView
 from core.log import EventRecord, LoggedKnowledgeRecord, read_log
 from core.loop import Simulator
 from core.pack import PackError, load_pack
-from core.traits import Trait, crystallized_traits
+from core.traits import Trait, crystallized_traits, expand_trait
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
@@ -253,6 +254,65 @@ def test_the_canonical_crystallization(tmp_path: Path) -> None:
     assert len(by_who[RELIEF].sources) == 1  # the one-event hearsay shape
     ids = {event.id for event in events}
     assert all(s in ids for t in traits for s in t.sources)
+
+
+# -- the expansion law (leg-2's demand side) -----------------------------
+
+
+def test_expand_trait_returns_the_family_records() -> None:
+    """The expansion law: the trait expands back to its source records —
+    EVERY family record the knower holds in acquisition order, evidence
+    is evidence (not just the threshold-crossing subset); the non-family
+    record stays out."""
+    view = KnowledgeView()
+    view.add(_ev("a", 1, (_rec(GUARD, FAMILY[0], 1, "a"),)))
+    view.add(_ev("b", 2, (_rec(GUARD, "pc_01_arrived", 2, "b"),)))
+    view.add(_ev("c", 3, (_rec(GUARD, FAMILY[1], 3, "c"),)))
+    view.add(_ev("d", 4, (_rec(GUARD, FAMILY[2], 4, "d"),)))
+    trait = Trait(who=GUARD, token="paranoid_about_thieves",
+                  sources=("a", "c", "d"))
+    assert [r.knows for r in expand_trait(PACK, view, trait)] == [
+        FAMILY[0], FAMILY[1], FAMILY[2],
+    ]
+
+
+def test_expand_trait_unknown_token_folds_empty() -> None:
+    """A trait whose belief the pack no longer declares (crafted views —
+    packs are never edited under a live log) expands to the honest empty
+    answer, never an error."""
+    view = KnowledgeView()
+    view.add(_ev("a", 1, (_rec(GUARD, FAMILY[0], 1, "a"),)))
+    ghost = Trait(who=GUARD, token="no_such_belief", sources=("a",))
+    assert expand_trait(PACK, view, ghost) == ()
+
+
+def test_expansion_purity() -> None:
+    """The expansion is a read like the fold: two reads agree, the view's
+    rows are untouched (INV-1 by construction)."""
+    view = KnowledgeView()
+    view.add(_ev("a", 1, (_rec(GUARD, FAMILY[0], 1, "a"),)))
+    view.add(_ev("b", 2, (_rec(GUARD, FAMILY[1], 2, "b"),)))
+    view.add(_ev("c", 3, (_rec(GUARD, FAMILY[2], 3, "c"),)))
+    trait = crystallized_traits(PACK, view, 3)[0]
+    before = {who: view.records_of(who) for who in view.knowers()}
+    first = expand_trait(PACK, view, trait)
+    second = expand_trait(PACK, view, trait)
+    after = {who: view.records_of(who) for who in view.knowers()}
+    assert first == second
+    assert before == after
+
+
+def test_the_canonical_expansion(tmp_path: Path) -> None:
+    """The live pin: guard_01's crystallized belief expands back to its
+    full family evidence — the sighting, the noise, the inferred
+    absence — while the log holds them untouched (the expansion law on
+    the canonical run)."""
+    events, view = run_day1(tmp_path)
+    traits = crystallized_traits(PACK, view, events[-1].t)
+    guard_trait = next(t for t in traits if t.who == GUARD)
+    records = expand_trait(PACK, view, guard_trait)
+    assert sorted(r.knows for r in records) == sorted(FAMILY)
+    assert {r.source for r in records} == set(guard_trait.sources)
 
 
 # -- the pack lint --------------------------------------------------------

@@ -13,9 +13,9 @@ always queryable, the belief a derived view, never a replacement. The
 module writes NOTHING: no events, no knowledge, no hooks, no state
 changes (INV-1 by construction). It renders nothing and feeds no
 metric — a belief becomes visible only through the consumer that reads
-it (the brief's derived-trait read, BRIEF_SPEC's phase-4 clause — the
-phase-4 backlog's leg-2 row; nothing reads the fold yet, the iter-47
-dormancy precedent).
+it (the brief's derived-trait read, BRIEF_SPEC's phase-4 clause — leg-2,
+`brief/assembler.py::_recalled_fact_lines`; `expand_trait` below is the
+expansion law's demand side).
 
 The DISTINCT-token law (v0.1 engine semantics): crystallization counts
 breadth, not repetition — a family's held distinct tokens against the
@@ -47,6 +47,7 @@ from typing import TYPE_CHECKING, Any, Final
 
 if TYPE_CHECKING:  # pack + view are duck-typed — no runtime imports
     from core.knowledge import KnowledgeView
+    from core.log import LoggedKnowledgeRecord
     from core.pack import Pack
 
 __all__ = [
@@ -54,6 +55,7 @@ __all__ = [
     "TRAIT_BELIEF_KEYS",
     "Trait",
     "crystallized_traits",
+    "expand_trait",
 ]
 
 TRAIT_BLOCK_KEYS: Final = ("threshold", "beliefs", "notes")
@@ -109,3 +111,33 @@ def crystallized_traits(
             )
             out.append(Trait(who=who, token=belief, sources=sources))
     return tuple(out)
+
+
+def expand_trait(
+    pack: "Pack",
+    view: "KnowledgeView",
+    trait: Trait,
+) -> tuple["LoggedKnowledgeRecord", ...]:
+    """The expansion law's read side (phases.md §4, the reflection
+    provenance paragraph applied to traits): the records a crystallized
+    belief derives from, read back from the knowledge view in
+    acquisition order — EVERY family record the knower holds, evidence
+    is evidence, not just the threshold-crossing subset. The source is
+    always queryable, the belief a derived view, never a replacement;
+    the brief's derived-trait read (BRIEF_SPEC §3.5) replaces the raw
+    family lines with the belief and hands the source ids to the
+    consumer — this is the demand side of that contract. Pure: reads
+    the view, writes nothing. A trait whose family the knower no longer
+    fully mirrors (possible only in crafted views — records are never
+    dropped, INV-1) still expands to whatever is held; an unknown
+    belief token folds to the empty tuple, the honest answer."""
+    config: Mapping[str, Any] | None = pack.rules.get("traits")
+    spec = config["beliefs"].get(trait.token) if config is not None else None
+    if spec is None:
+        return ()
+    family = frozenset(spec["family"])
+    return tuple(
+        record
+        for record in view.records_of(trait.who)  # acquisition order
+        if record.knows in family
+    )
