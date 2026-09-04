@@ -21,8 +21,8 @@ phase-0 gate.
 | **0. Sim without LLM** (TavernSim) | **CLOSED** — gate PASS iter-6, audit-clean iter-6a | one dense slice: time, position, relations, knowledge, states, fire, watch, director; event log; template chronicle | chronicle reads as a story; full test suite `MVP_SCOPE.md` §16 | mechanisms not expressive, ontology has no combinatorial depth → rethink ontology, not "add LLM" |
 | 1. Narrator | **CLOSED** — gate PASS iter-26, D-058 (polish iter-27–29) | mode A over the log; validator; reverse prose validation | 0 canon violations per 100 beats (regression set) | ≥1 breach per 1000 beats in live play |
 | 2. Parser | **CLOSED** — gate PASS iter-35, D-064 | mode C; disambiguation questions / buttons on uncertainty | ≥90% valid intents (met: 35/35 boundary validity over 51 utterances, 0 honest misfires) | else redo the grammar |
-| 3. Director | **OPEN** — iter-36 (the owner's "continue per the plan" call; the pacing clock landed, D-065) | stagnation detector, complication buffer, arcs | a scene without an event < N beats | else redo the drama model |
-| 4. Knowledge & scene | parked | `known_by` filter, mode B, scene manager, retrieval + legends (F) | 0 leaks on the blind-NPC suite | else bug in retrieval/filter |
+| 3. Director | **CLOSED** — gate PASS iter-54, D-083 (opened iter-36; the full build column D-065..D-082 — every layer and declared dimension live) | stagnation detector, complication buffer, arcs | a scene without an event < N beats (met: max stretch 1 on every measured stage, both pacing arms + the quiet-walk stage; N reads 2) | else redo the drama model |
+| 4. Knowledge & scene | parked — UNLOCKED by the phase-3 gate (opens on the owner's call, the iter-36 precedent) | `known_by` filter, mode B, scene manager, retrieval + legends (F) | 0 leaks on the blind-NPC suite | else bug in retrieval/filter |
 | 5. Depth | parked | lazy worldgen, factions with goals, long history | an emergent chain of 3+ events without the player | else weak faction model |
 | 6. Packs & worldbuilder | parked | pack system, mode G, pack CI | a new T1 reskin without core edits, ≤1 day | else the module contract is wrong |
 
