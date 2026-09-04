@@ -20,7 +20,7 @@
 | The `stale` flag (read side) | `core/reflection.py::stale_reflections` | live (leg-3); consumers: retr-1, leg-4 |
 | The expansion law (demand side) | `core/reflection.py::expand_reflection` | live (leg-3) |
 | Trait crystallization (P3f) | `core/traits.py` + D-084 + BRIEF_SPEC §3.5 | landed (leg-1/leg-2) |
-| The retrieval ladder (ranking, `α·recency + …`) | `retr-1` (TASKS row) | not this spec's code |
+| The retrieval ladder (ranking, `α·recency + …`) | `core/retrieval.py` | live (retr-1, iter-59) — the §4/§5 contract points honored |
 | Offline scavenge (tombstones, DuckDB) | `leg-4` (TASKS row), D-012 | not this spec's code |
 | Legends collections (DF structure) | `docs/TAXONOMY.md` (bg-2) | not this spec's code |
 
@@ -113,10 +113,11 @@ the same shape, BRIEF_SPEC §3.5):
   expansion; evidence is evidence, the `expand_trait` twin).
 - **On contradiction, the source outranks the reflection's
   recency** (phases.md §4). This is a retrieval-time ranking law:
-  it lands with **retr-1** (the deterministic re-ranker), recorded
-  here as the contract the ladder must honor — the runtime salience
-  rank (`importance, then recency`) does not compare claims and must
-  not be patched to.
+  it landed with **retr-1** (iter-59, `core/retrieval.py` — a
+  retrieved reflection orders below its retrieved provenance
+  sources), recorded here as the contract the ladder must honor — the
+  runtime salience rank (`importance, then recency`) does not compare
+  claims and must not be patched to.
 
 ## 5. The stale law
 
@@ -131,9 +132,10 @@ are never dropped (INV-1), so every minted provenance id resolves.
 The flag earns its keep only in **derived stores after offline
 scavenge** (leg-4's tombstones — the log itself is never edited,
 INV-5): a scavenged index that dropped a source record must screen
-its reflections before serving them. **retr-1 must consult this fold**
-— serving a stale reflection as fact is the derived-store lie this
-law exists to prevent.
+its reflections before serving them. **retr-1 consults this fold**
+(live, iter-59 — the build excludes a stale reflection's minted
+record at insert) — serving a stale reflection as fact is the
+derived-store lie this law exists to prevent.
 
 ## 6. The pack contract (`rules.json::reflection`)
 

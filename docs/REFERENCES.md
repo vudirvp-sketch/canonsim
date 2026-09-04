@@ -153,7 +153,7 @@
 | AxonFramework | Apache-2.0 | CQRS / event-sourcing architecture patterns |
 | qdrant | Apache-2.0 | static-lore RAG vectors (phase 4) — demoted by rev v2: only where server infra already exists; local-first default = lancedb / sqlite-vec |
 | lancedb | Apache-2.0 | lightweight local vector store (phase 4) |
-| sqlite-vec (asg017) | verify | vector search inside SQLite for static-lore RAG (phase 4; §14) |
+| sqlite-vec (asg017) | MIT OR Apache-2.0 (dual — verified 2026-08-26, `docs/ref/sqlite_vec.md`; flipped iter-59, KI#71) | vector search inside SQLite for static-lore RAG (phase 4; landed iter-59 as the probed-optional rung, §14) |
 
 ## 7. ECS references [P]
 

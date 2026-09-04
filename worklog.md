@@ -16,6 +16,23 @@
 
 
 ---
+iter-59 · 2026-09-05 · retr-1 — the retrieval ladder (phase 4,
+phases.md §4's STORE-1 row; the owner's "continue per plans" call,
+the §2 verdict standing from iter-58)
+- core/retrieval.py (NEW) + the _retrieval lint + rules.json::retrieval
+  (α=β=γ=δ=1.0, knn_k=8, no vectors — D-012): the FTS5 index + the
+  vec probe/scan/floor chain + the pack-coefficient re-ranker; the
+  knower query param IS known_by; LEGEND_SPEC §4/§5 live (the stale
+  exclusion, the source-outranks demotion).
+- Measured-first: the block declarative-only — the 10-seed day1_full
+  A/B 10/10 byte-identical (zero corpus price); the live-fire over
+  the armed pack (the reflection's 1.77 vs the sightings' 1.15, yet
+  demoted below both — the law over the score).
+- +25 tests/test_retrieval.py; 1030→1055, ruff clean. D-088 into the
+  phase family (cap 30 held); KI#71 (the sqlite-vec license drift,
+  REFERENCES §6 + TECH_NOTES §6) opened+closed. iter-49 evicted;
+  10 entries after.
+---
 iter-58 · 2026-09-05 · leg-3b — the tavern reflection set (arming
 the v0.1 pack block; the owner's §2 design review first — endorsed)
 - content/tavern_pack rules+templates: the live reflection block —
@@ -137,14 +154,3 @@ per-entry streams (the owner's "quality over speed" fork call)
   pin + 2 seed re-probes) via the identity-proved fixed-point runner
   (the laws in the STATUS FAQ). +7 tests; 952→959, ruff clean.
   D-079 + TASKS + TEST_PLAN §6.
----
-iter-49 · 2026-09-03 · content-4 — the coerce driver, the drunkard's
-roll re-armed (social-1b's live content set)
-- rules.json: the drunkard's urgency entry re-armed as the coerce
-  carrier — the REPLACEMENT law (the slot and weight stay, the draw
-  count holds, the corpus ladders hold); an ADDED entry was measured
-  and refused (3 flipped ladders — engine-2 opened for it).
-- The corpus re-distill through the identity-proved fixed-point
-  runner (2 id re-pins + the silent_second tail, zero ladder flips);
-  the live-fire tests moved onto the committed pack. 951→952, ruff
-  clean. D-078 + TASKS + TEST_PLAN §6.

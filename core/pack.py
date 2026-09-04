@@ -20,6 +20,7 @@ are cross-checked by `tests/test_smoke.py` against the schema.
 from __future__ import annotations
 
 import json
+import math
 import re
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -49,6 +50,7 @@ from core.onaction import (
 from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
 from core.reflection import REFLECTION_BLOCK_KEYS, REFLECTION_INSIGHT_KEYS
 from core.resolvers import REGISTRY
+from core.retrieval import RETRIEVAL_BLOCK_KEYS
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
 
@@ -296,6 +298,7 @@ class _Lint:
         self._states_rules()
         self._importance_rules()
         self._brief()
+        self._retrieval()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -2183,6 +2186,97 @@ class _Lint:
                     isinstance(spec["notes"], str),
                     f"{where}: notes must be a string (prose)",
                 )
+
+    def _retrieval(self) -> None:
+        """The retrieval-ladder contract (`core/retrieval.py` owns the
+        vocabulary constants; `phases.md` §4 the ladder's architecture
+        — retr-1, STORE-1). The block is OPTIONAL: a pack without it
+        builds no index and runs byte-identically (the pack's own
+        declaration is the gate, INV-3; the runtime never queries —
+        the mediator's keyword query is the consumer, BRIEF_SPEC §9's
+        deferral)."""
+        rules = self._data["rules.json"]
+        config = rules.get("retrieval")
+        if config is None:
+            return
+        where = "retrieval"
+        if not isinstance(config, Mapping):
+            raise PackError(f"{where} must be an object")
+        unknown = sorted(set(config) - set(RETRIEVAL_BLOCK_KEYS))
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed "
+                f"vocabulary: {' | '.join(RETRIEVAL_BLOCK_KEYS)})"
+            )
+        coefficients: list[float] = []
+        for key in ("alpha", "beta", "gamma", "delta"):
+            value = config.get(key)
+            _require(
+                _is_number(value) and float(value) >= 0,
+                f"{where}.{key} must be a non-negative number (the "
+                "re-ranker coefficient — pack data, never a code default)",
+            )
+            coefficients.append(float(value))
+        _require(
+            any(value > 0 for value in coefficients),
+            f"{where}: at least one coefficient must be positive (an "
+            "all-zero block ranks by construction order alone — dead "
+            "data, refused)",
+        )
+        knn_k = config.get("knn_k")
+        _require(
+            _is_int(knn_k) and knn_k >= 1,
+            f"{where}.knn_k must be an integer >= 1 (the vec rung's "
+            "kNN limit — the scan rung's top-k)",
+        )
+        if "notes" in config:
+            _require(
+                isinstance(config["notes"], str),
+                f"{where}.notes must be a string (prose)",
+            )
+        vectors = config.get("vectors")
+        if vectors is None:
+            return
+        _require(
+            isinstance(vectors, Mapping) and vectors,
+            f"{where}.vectors must be a non-empty object keyed by lore "
+            "id (an absent key is the honest no-embeddings state — an "
+            "empty table is dead data, refused)",
+        )
+        lore_ids = {
+            entry["id"]
+            for entry in rules["brief"].get("lore", ())
+            if isinstance(entry, Mapping) and isinstance(entry.get("id"), str)
+        }
+        dim: int | None = None
+        for lore_id, embedding in vectors.items():
+            spot = f"{where}.vectors[{lore_id!r}]"
+            _require(
+                lore_id in lore_ids,
+                f"{spot}: no brief.lore entry carries this id (a vector "
+                "for a nonexistent lore row is dead data)",
+            )
+            _require(
+                isinstance(embedding, list) and embedding,
+                f"{spot}: must be a non-empty list of numbers (the "
+                "embedding — the offline embedder's output, pack data)",
+            )
+            _require(
+                all(
+                    _is_number(x) and math.isfinite(float(x))
+                    for x in embedding
+                ),
+                f"{spot}: entries must be finite numbers (a NaN or inf "
+                "poisons the ranking — refused loudly)",
+            )
+            if dim is None:
+                dim = len(embedding)
+            _require(
+                len(embedding) == dim,
+                f"{spot}: dimension {len(embedding)} differs from {dim} "
+                "(one embedder, one dimension — the query side must "
+                "match)",
+            )
 
     def _literal_knows_tokens(self) -> set[str]:
         """Every knowledge token the pack can mint as a literal string:

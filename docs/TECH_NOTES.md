@@ -353,13 +353,20 @@ gate. One track can be dropped without losing the other.
 - Zero-dependency default: **SQLite FTS5** keyword search over facts and lore.
 - Vector layer, **static lore only**: sqlite-vec or LanceDB + a light CPU
   embedder (nomic-embed-text / bge-m3); optional cross-encoder reranker if
-  the corpus outgrows keyword search. Licenses not yet verified — "verify" in
-  `REFERENCES.md` §5/§6; D-016 check at phase-4 intake.
+  the corpus outgrows keyword search. sqlite-vec's license verified
+  2026-08-26 (MIT OR Apache-2.0 dual — `docs/ref/sqlite_vec.md`); this
+  restated line had drifted to "not yet verified" and was flipped at
+  iter-59 together with the `REFERENCES.md` §6 catalog row (KI#71 — the
+  KI#66 restatement family).
 - Qdrant demoted (rev v2): only where server infra already exists;
   local-first is the default.
 - Hard boundary (`VISION §5`): dynamic world state = SQL + `known_by`, never
   vector search. RAG never touches dynamic facts; the LLM receives a brief,
   not a retrieval session.
+- Landed iter-59 (retr-1, `core/retrieval.py`, D-088): FTS5 first, the
+  vec extension probed-optional (absence = normal operation, D-012), the
+  pure-Python cosine scan the rung's semantic definition; the embedder is
+  offline pack-authoring, never runtime.
 - Phase-1 QA metrics from the survey: p50/p95 turn latency, repeat and
   stagnation counters, degradation/refusal rates — wire into the mode-A
   harness when it exists.

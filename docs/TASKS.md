@@ -60,12 +60,21 @@
   the T1 golden — untouched; 8/10 day1 seeds byte-identical) — the
   iter-52 zero-regen landing. Detail: D-087 + LEGEND_SPEC §7 +
   tests/test_reflection.py.
-- `retr-1` · the retrieval ladder (STORE-1): SQLite FTS5 `bm25()` the
-  zero-dep default, the sqlite-vec probe + fallback chain
-  (vec → pure-Python cosine → FTS5-only, never an empty result), the
-  deterministic re-ranker `α·recency + β·authority + γ·bm25 + δ·cosine`
-  (coefficients as pack data); hard boundary: dynamic world state =
-  SQL + `known_by`, never vectors.
+- `retr-1` · the retrieval ladder (STORE-1) — **done (iter-59, D-088)**:
+  `core/retrieval.py` — the in-memory rebuildable FTS5 index (the
+  unicode61 word view — dry underscored tokens are word-retrievable),
+  the vec probe + fallback chain (vec0 kNN → pure-Python cosine scan →
+  keyword floor; the scan is the rung's semantic definition, a failure
+  degrades never breaks), the deterministic re-ranker
+  `α·recency + β·authority + γ·bm25 + δ·cosine` (coefficients as pack
+  data, ties by construction order); the `knower` query parameter IS
+  the `known_by` boundary — facts never vector-searched, never
+  knower-free; the two LEGEND_SPEC §4/§5 contract points LIVE (the
+  stale exclusion at build, the source-outranks demotion — the seed-123
+  live-fire: the higher-scoring reflection ordered below its own
+  provenance sources); the committed block declarative-only, the
+  corpus price zero (the 10-seed A/B). Detail: D-088 + tests/
+  test_retrieval.py + phases.md §4's retrieval paragraph.
 - `scene-1` · the scene manager + mode B (one NPC per call — the
   chorus is a queue, not a convention; the per-NPC brief's leak
   surface).

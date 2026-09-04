@@ -845,6 +845,14 @@
     },
     "notes": "leg-3b (iter-58; LEGEND_SPEC §6/§7 — the arming row, the content-column precedent iter-43): the measured recurrence crystallizes into the pack's first live insight pair. Both families recur exactly on day1_full seeds 123/128 (4 mints per seed: the targeted guard + the room trio at the second pickpocket; 8/10 seeds byte-identical); the narrator corpus (105 cases), the parse corpus (10 cases), and the T1 golden fixture are UNTOUCHED — zero re-distill, the iter-52 zero-regen landing. The told-conclusion law is LIVE through the watch-change briefing: the minted insight travels as ordinary knowledge (one fidelity step down), and the never-re-reflect gate blocks the briefed knower's own re-derivation (he holds figure_reaching_for_purse twice from ONE transfer — the within-event dedup would yield one draft, but view.holds on the told insight refuses even that). Every number here is pack data (INV-3); the machinery is core/reflection.py, the lint core/pack.py::_reflection."
   },
+  "retrieval": {
+    "alpha": 1.0,
+    "beta": 1.0,
+    "gamma": 1.0,
+    "delta": 1.0,
+    "knn_k": 8,
+    "notes": "The retrieval ladder's v0.1 balance (retr-1, STORE-1): all four signals equal weight - the neutral default, tuned when the mediator's keyword query arrives (mode B, BRIEF_SPEC's deferral). No vectors ship in v0.1: the embedder is offline pack-authoring, never runtime (D-012); the vec rung engages only when a pack carries vectors, and the sqlite-vec extension itself stays probed-optional (its absence is normal operation, the pure-Python cosine scan answers). The block is declarative-only - nothing in the runtime queries it, so the corpus price is zero (the 10-seed A/B witness in tests/test_retrieval.py)."
+  },
   "importance": {
     "score": {
       "entities_touched_at_least_2": 1,

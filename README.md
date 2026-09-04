@@ -346,12 +346,28 @@ seeds byte-identical, exactly 123/128 mint 4 conclusions each), and
 the told-conclusion law composing live: the watch-change briefing
 tells the relief guard the minted insight (told/partial, one step
 down) and the never-re-reflect gate blocks his own re-derivation —
-he holds what he was told, never re-derives it. 1030 tests green,
-ruff clean.
+he holds what he was told, never re-derives it. retr-1 LANDED
+(iter-59, D-088 — the STORE-1 row): `core/retrieval.py`, the
+read-side retrieval ladder — an in-memory rebuildable SQLite index
+over (pack, events) with FTS5 BM25 as the zero-dep rung, the
+sqlite-vec extension probed-optional (its absence normal operation,
+D-012; the pure-Python cosine scan the rung's semantic definition,
+a failure degrades never breaks), and the deterministic re-ranker
+`alpha*recency + beta*authority + gamma*bm25 + delta*cosine`
+(coefficients pack data, ties by construction order); the `knower`
+query parameter IS the `known_by` boundary — facts are never
+vector-searched and never knower-free; the two LEGEND_SPEC §4/§5
+contract points live (the stale reflection excluded at build; a
+retrieved reflection ordered below its own provenance sources — the
+seed-123 live-fire: the higher-scoring conclusion demoted by law).
+The committed block is declarative-only — the corpus price zero
+(the 10-seed A/B byte-identical); the mediator's keyword query is
+the consumer (mode B). 1055 tests green, ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
-`core/reflection.py` + LEGEND_SPEC.md + TASKS leg-1/leg-2/leg-3/
-leg-3b +
-D-084/D-085/D-086/D-087.
+`core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
+phases.md §4 (the retrieval paragraph) + TASKS
+leg-1/leg-2/leg-3/leg-3b/retr-1 +
+D-084/D-085/D-086/D-087/D-088.
 
 ## For AI agents (primary audience)
 

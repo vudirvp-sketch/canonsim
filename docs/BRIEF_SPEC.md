@@ -405,5 +405,5 @@ bytes = a spec edit in the same commit as the code change.
 | Identity-slot tier + per-scope quotas in the scene_texture window ranking | phase 4 (mode B; with per-entity exemplar geometry) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | phase 4 (mode B) | blueprint §1 |
-| Static-lore retrieval (FTS5) | `retr-1` (phase 4) | STORE-1 |
+| Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder; the brief's own read stays scheduled-window until the mediator's query arrives) | STORE-1 |
 | The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |
