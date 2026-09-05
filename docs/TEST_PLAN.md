@@ -481,3 +481,44 @@ replayed through the real mediator/parser cycles: **zero reflection
 mints, zero pin changes** — the zero-regen landing measured BEFORE
 the commit, pinned as the byte-identity witness
 (tests/test_reflection.py; D-087).
+
+## 7. leg-4 offline chronicler acceptance (iter-64, D-093)
+
+The mode-F chronicler suite (`tests/test_chronicle.py`; the tool:
+`scripts/chronicle.py`; architecture owner `docs/blueprint/phases.md`
+§4 "Choricler mode F offline"; the donor pattern set
+`docs/ref/duckdb.md`). NOT a gate test — an offline tool's acceptance
+suite, the balance-harness §6 precedent. Runs only with the
+`[chronicler]` extra installed (`pytest.importorskip` — the pure-dev
+env stays green: 1168 passed + 1 module skip; the chronicler env runs
+all: 1178 passed).
+
+The laws under test, each by an independent stdlib fold of the same
+log via `core.log.read_log` (the blind-1 instrument law — never the
+checked pipeline's own code):
+
+- **The count gate**: every log line minus the header appears as a
+  row; a line DuckDB cannot serve but the file holds (truncated JSON)
+  = ChronicleError, nothing written. A line-aligned prefix is a legal
+  log (append-only) and archives as its own event count.
+- **The archive is the log**: `events.parquet` ids == read_log ids,
+  order and count; always the twelve canonical columns (typed NULLs
+  for absent fields — a header-only log is handled uniformly).
+- **The window-diff law**: `state_diffs.parquet` == a pure Python
+  LAG fold per (entity, prop) ordered by (t, event id) — `prev_to`,
+  `continuous` (NULL on a state's first change).
+- **The summary cross-check**: every `chronicle.sqlite` table
+  (facts_summary / state_current / type_histogram /
+  knowledge_summary / chronicle_meta) equals the stdlib fold's
+  numbers.
+- **Determinism (INV-2's spirit, offline)**: two full runs — every
+  artifact byte-identical; the manifest is content-derived only (no
+  wall-clock, no absolute paths; the exact key set is pinned).
+- **The write ladder (L12)**: attach and stdlib paths produce
+  logically identical summaries; the manifest's `write_mode` records
+  which ran; `autoinstall_known_extensions=false` — the chronicler
+  never phones home (the ref's offline law, INV-4's spirit).
+- **D-012 executable** (in `tests/test_architecture.py`, runs
+  everywhere): the runtime import graph (core/sim/render/brief/cli)
+  imports only stdlib + local packages + ImportError-guarded optional
+  probes — duckdb or any future third-party root fails loudly.

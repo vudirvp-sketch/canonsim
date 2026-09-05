@@ -1,63 +1,68 @@
 # STATUS — canonsim
 
-Iteration: iter-63 (`iter-63-blind-1` — the STATUS Next-step fork
-`leg-4`/`blind-1` resolved by law, not taste: `leg-4` names DuckDB —
-the §8 dependency fence keeps it the owner's explicit call, and the
-environment carries no duckdb — while `blind-1` is the exit
-criterion's own instrument, dependency-free with the dir-2 precedent:
-the legal-now branch of "leg-4 or blind-1 on the owner's call"; the
-owner's blanket "continue per plans" + the fork directive — no
+Iteration: iter-64 (`iter-64-leg4` — TASKS' last phase-4 row; the
+owner's session directives: "continue per plans" + the explicit
+duckdb approval — the §8 dependency fence crossed by the owner's own
+call, exactly the gate the iter-63 Next-step fork recorded; no
 conflict, no KI) ·
-Phase: 4 (Knowledge & scene) — OPEN (iter-55)
-**blind-1 landed: the blind-NPC leak suite's phase-4 extension
-(D-092) — the phase-4 exit criterion ("0 leaks on the blind-NPC
-suite") now owns its instrument: `tests/test_blind.py`, the
-instrument-first design. The predicates are pure TEST-SIDE folds,
-never the engine's own code paths (a checker that shares the checked
-code cannot catch its bugs): every scene_delta line backed by a
-perceived event count-for-count (the multiset law — the line's own
-`(t, type, actor, target)` bytes, never a coarse `(t, type)` key),
-every recalled_facts line (raw or belief) mapped to the knower's own
-fold (the raw line's exact record quadruple; the belief line's exact
-`(token, sources, cross)` triple — the provenance IS the leak signal,
-not just the token), every retrieval fact row mapped to the named
-knower's record. Four layers, all measured zero-leak: (1) the offline
-sweep — the 10-seed day1 family + the committed golden fixture, EVERY
-log prefix (any prefix is a legal assembly state, the log
-append-only), every declared actor + the player — the test_scene
-core generalized from selected cuts to the exhaustive sweep (~2s);
-(2) the retrieval sweep — the known_by boundary under MAXIMAL
-adversarial input: the real fresh-window query AND the omniscient
-query (every token on the whole log — the query that knows the
-future), every knower the fold holds (ambient groups included), plus
-the `knower=None` probe (no fact ever served without a knower) and
-the assembler twin: the query is a ranking signal, never a content
-source; (3) the live session wiring — a multi-beat drain over the
-cap-raised pack (11 emitted call documents: the tavern's four actors,
-the empty backyard chorus, the return), every one verified against
-its OWN anchor-addressed prefix (anchor = the emission-time event
-count; append-only makes `events[:anchor]` of the final log the
-emission-time log — the document carries its own log address):
-composition byte-exact (the knowledge blocks are the document's own
-knower's assembly, the query line IS recall_query, the retrieval rows
-ARE the ladder's top-3) + the leak law independently; (4) the teeth
-law — planted leaks flagged (crafted records: a foreign fact quad, a
-foreign delta line, a foreign belief, a foreign retrieval row; the
-pinned seed-125 cross-knower divergence — the instrument sees the
-provenance, not just the token): a checker that cannot fail is
-decoration.**
+Phase: 4 (Knowledge & scene) — OPEN (iter-55) — **the build column
+is COMPLETE (leg-1..leg-4, retr-1, scene-1/2, tex-1, blind-1 all
+landed, D-084..D-093); the phase-4 gate review is the only remaining
+row, on the owner's call (the iter-54 protocol precedent)**
+**leg-4 landed: the mode F offline chronicler (D-093) —
+`scripts/chronicle.py`, the DuckDB pipeline over one JSONL run log,
+NEVER in the runtime import graph (D-012 now EXECUTABLE:
+`tests/test_architecture.py::test_runtime_imports_stdlib_only` —
+the runtime graph may import stdlib + local packages +
+ImportError-guarded optional probes only; duckdb or any future
+third-party root fails loudly). The no-ETL intake
+(`read_ndjson_auto`, the run-header line drops via NULL `id`)
+behind a COUNT GATE: every log line minus the header must appear as
+a row — a silent drop is an integrity failure, exit 1, nothing
+written (the line-aligned prefix law: any prefix is a legal log,
+archived at its own count). `events.parquet` — the canonical
+12-column cold archive (typed NULLs keep the schema uniform over
+absent fields; a header-only log handled uniformly), ORDER BY id.
+`state_diffs.parquet` — the LAG/LEAD window-diff law per
+(entity, prop) ordered by (t, id): `prev_to`, `continuous` (NULL on
+a state's first change; then from == previous to — the
+fold-consistency read, measured 0 breaks on day1 seed 123).
+`chronicle.sqlite` — the stdlib-readable summary
+(facts_summary/state_current/type_histogram/knowledge_summary/
+chronicle_meta — the artifact carries its own identity) through the
+PROBE+FALLBACK write ladder: `ATTACH ... (TYPE SQLITE)` when
+sqlite_scanner is locally available (the lifted pattern), stdlib
+sqlite3 otherwise (the never-breaks floor, L12) — both paths
+byte-deterministic per environment and logically identical to each
+other (measured); `SET autoinstall_known_extensions=false` closes
+the network door by construction (the ref's offline law — the
+chronicler never phones home). `manifest.json` — the content-derived
+audit record (log sha256, counts, the header's
+seed/schema_version/python/commit/pack, duckdb_version, write_mode,
+per-artifact sha256+rows; no wall-clock, no absolute paths; the
+exact key set pinned). The `[chronicler]` optional extra (duckdb
+>=1.0; runtime `dependencies` stay `[]`); the suite
+importorskips — the pure-dev env stays green (1168 passed + 1
+module skip); offline compaction (scavenge with tombstones) is the
+deferred `scav-1` backlog row, per the scope law.**
 ·
 Date: 2026-09-06 ·
-Scope: `tests/test_blind.py` (+26 — the suite's own home; the
-test_scene.py core stays — scene-1's acceptance pin),
-`docs/TEST_PLAN.md` (§1.3 — the extension's contract owner; the T3
-row's pointer), `docs/TASKS.md` (blind-1 done, the family pattern),
-`docs/DECISIONS.md` (D-092 into the phase family, cap 30 held),
-`docs/AGENT_NAVIGATION.md` (the tests/ row — structure changed),
-`worklog.md` (iter-53 evicted), `STATUS.md` (this header + the Next
-step flip + KI#72 deleted per §5 — closed iter-61, two iterations
-past, the KI#70 precedent). 7 files. 1141→1167 tests green, ruff
-clean.
+Scope: `scripts/chronicle.py` (NEW — the chronicler),
+`tests/test_chronicle.py` (NEW — 10: the stdlib-fold cross-checks
+— the archive is the log, the LAG law, every summary table; the
+byte-determinism double-run; the ladder equivalence; both gates;
+the manifest contract), `tests/test_architecture.py` (+1 — D-012
+executable), `pyproject.toml` (the [chronicler] extra),
+`docs/TEST_PLAN.md` (§7 — the acceptance contract),
+`docs/TASKS.md` (leg-4 done + the scav-1 deferral row),
+`docs/DECISIONS.md` (D-093 into the phase family, cap 30 held),
+`docs/AGENT_NAVIGATION.md` (the scripts/ row),
+`worklog.md` (iter-54 evicted), `STATUS.md` (this header + the
+Next flip). 10 files — over the soft limit, the tool+fence+extra+
+tests+doc-sync mechanism family (the iter-60..63 scope pattern).
+1167→1178 tests green with the extra (1168+1 skip without), ruff
+clean; the corpus price zero by construction (no runtime file
+touched).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -532,24 +537,21 @@ phase-4→5 gate.
 
 ## Next step
 
-**Phase 4 (Knowledge & scene) is OPEN — leg-1/leg-2/leg-3/leg-3b/
-retr-1/scene-1/scene-2/tex-1/blind-1 are LANDED (D-084..D-092, the
-phase family row): the trait fold with its brief read, the reflection
-mint, the arming, the retrieval ladder (queried by the runtime since
-scene-2), the scene manager + mode B, the session wiring, the texture
-window's read-path pair (the identity tier + the per-entity quota),
-and the blind-NPC leak suite's phase-4 extension — the exit
-criterion's instrument is LIVE (TEST_PLAN §1.3: the leak predicates,
-the every-prefix sweep, the adversarial retrieval probe, the
-anchor-addressed drain check, the teeth law; zero leaks measured).
-The last phase-4 row: `leg-4` mode F offline chronicler — OWNER-GATED
-(the row names DuckDB; §8's dependency fence makes it the owner's
-explicit call — install/declare duckdb or re-point the row to a
-stdlib path; the fork resolved to blind-1 at iter-63 by exactly this
-law). The exit criterion "0 leaks on the blind-NPC suite" now reads
-T3 (`docs/TEST_PLAN.md` §1 + §1.3) with the instrument in place —
-the phase-4 gate protocol can run when the owner calls it. The
-phase-3 verdict record: D-083 + worklog iter-54.**
+**Phase 4 (Knowledge & scene): the BUILD COLUMN IS COMPLETE —
+leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2/tex-1/blind-1/leg-4
+all LANDED (D-084..D-093, the phase family row). leg-4 (iter-64):
+the mode F offline chronicler — the owner's duckdb approval crossed
+the §8 fence, the chronicler landed OUTSIDE the runtime graph
+(`scripts/chronicle.py`, the [chronicler] extra; D-012 executable),
+and the exit criterion "0 leaks on the blind-NPC suite" still reads
+T3 (`docs/TEST_PLAN.md` §1 + §1.3, zero leaks measured at iter-63;
+the chronicler touches no runtime file — the corpus price zero by
+construction). The ONE remaining phase-4 action: the GATE REVIEW —
+ROADMAP §5's protocol re-run on the owner's call (the iter-54
+precedent: the committed playscripts, M1/M2, the director-off A/B,
+the exit criterion re-measured, the doc debts, then the verdict row
++ phase 5 unlocked). The phase-3 verdict record: D-083 + worklog
+iter-54.**
 
 1. **The phase-4 queue (TASKS.md owns the rows):** leg-1/leg-2 —
    LANDED (iter-55/56, D-084/D-085) → leg-3/leg-3b — LANDED
@@ -567,8 +569,11 @@ phase-3 verdict record: D-083 + worklog iter-54.**
    armed declarative-only, the corpus price zero) → `blind-1` LANDED
    (iter-63, D-092 — the leak suite's phase-4 extension: the
    instrument + the four layers, zero leaks measured, the exit
-   criterion's own instrument) → `leg-4` mode F offline chronicler
-   (OWNER-GATED: DuckDB = the §8 dependency fence).
+   criterion's own instrument) → `leg-4` LANDED (iter-64, D-093 —
+   the mode F offline chronicler: `scripts/chronicle.py`, the count
+   gate, the parquet pair, the sqlite summary through the attach→
+   stdlib ladder, the manifest; the [chronicler] extra; D-012
+   executable) → the phase-4 GATE REVIEW, on the owner's call.
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

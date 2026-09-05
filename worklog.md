@@ -16,6 +16,31 @@
 
 
 ---
+iter-64 · 2026-09-06 · leg-4 — the mode F offline chronicler (phase 4,
+TASKS' last phase-4 row; the owner's explicit duckdb approval crossing
+the §8 dependency fence — the recorded leg-4/blind-1 owner-gate
+resolved; 10 files — over the soft limit: tool + fence + extra + tests
++ doc sync are one mechanism family, the iter-60..63 scope pattern)
+- scripts/chronicle.py (NEW): read_ndjson_auto no-ETL intake behind a
+  count gate (a silent drop = integrity failure, nothing written);
+  events.parquet (canonical 12-column archive), state_diffs.parquet
+  (the LAG/LEAD window-diff, the continuous fold read), chronicle.
+  sqlite (facts_summary/state_current/type_histogram/knowledge_
+  summary/chronicle_meta) via the attach→stdlib probe+fallback ladder
+  (autoinstall off — never phones home), manifest.json (content-
+  derived, no wall-clock, no abs paths). pyproject [chronicler] extra
+  (duckdb>=1.0, runtime deps stay []); D-012 executable
+  (test_runtime_imports_stdlib_only).
+- Measured: 55/55 events day1 seed 123 (all intake combos); state
+  continuity 0 breaks; both write paths byte-deterministic per run,
+  logically identical; corpus price zero by construction.
+- +10 tests/test_chronicle.py (stdlib-fold cross-checks, determinism,
+  ladder, gates; importorskip — pure-dev env 1168+1 skip); 1167→1178,
+  ruff clean. D-093 (family, cap 30 held); TEST_PLAN §7; TASKS leg-4
+  done + scav-1 deferred (TASKS 626 — over the 600 cap per the §6.1
+  phase-ledger pattern, the collapse at the phase-4 gate, the iter-63
+  precedent at 606); AGENT_NAVIGATION; iter-54 evicted; 10 after.
+---
 iter-63 · 2026-09-06 · blind-1 — the blind-NPC leak suite's phase-4
 extension (phase 4; the STATUS fork leg-4/blind-1 resolved by law:
 leg-4 names DuckDB = the §8 dependency fence (the owner's explicit
@@ -183,15 +208,3 @@ iter-55 · 2026-09-05 · phase-4 open + leg-1 — trait crystallization
   phase-3 ledger condensed to a link row; DECISIONS D-084 + the
   gate-verdict family merge (cap 30 held). 973→991 tests, ruff
   clean. D-084 + STATUS. iter-45 evicted; 10 entries after.
----
-iter-54 · 2026-09-05 · phase-3 gate — verdict PASS (the owner's "finish
-at gate 3, then approach 4" call; docs-only, the iter-35 precedent)
-- The §5 protocol green: seed-125 ON M1=0.509/M2=0.333, OFF T8 26
-  chains, stretch max 1 (both arms + the quiet-walk stage), T7 a
-  story, 973 tests + ruff clean; the exit criterion reads N=2.
-- The doc debts paid: DECISIONS 48→30, FAQ 23→20, TASKS 854→510,
-  DIRECTOR_SPEC 641→593; phases.md 644 kept over per §6.1 (the
-  architecture substance — rationale here). ROADMAP §2 flipped;
-  phase 4 UNLOCKED (opens on the owner's call). KI#69 (the worklog
-  line-cap drift, the KI#68 family) opened+closed — trimmed in this
-  edit. Detail: D-083 + STATUS. iter-44 evicted; 10 entries after.

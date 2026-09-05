@@ -7,6 +7,12 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6"]
+# The offline chronicler's engine (leg-4, D-093; the owner's explicit §8
+# approval 2026-09-06). NEVER a runtime dependency: scripts/chronicle.py is
+# the only importer, outside the runtime module graph (D-012 — enforced by
+# tests/test_architecture.py::test_runtime_imports_stdlib_only). The
+# chronicler suite skips cleanly without it (tests/test_chronicle.py).
+chronicler = ["duckdb>=1.0"]
 
 [tool.setuptools]
 # Explicit list: flat-layout auto-discovery aborts on multiple top-level dirs

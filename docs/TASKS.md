@@ -102,9 +102,24 @@
   first by construction, scene scopes and tombstones unquota'd);
   the pack armed declarative-only, the corpus price zero. Detail:
   D-091 + BRIEF_SPEC §3.3/§6 + tests/test_brief.py.
-- `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
-  over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
-  into SQLite — never in the runtime import graph, D-012).
+- `leg-4` · mode F offline chronicler — **done (iter-64, D-093)**:
+  `scripts/chronicle.py` — the DuckDB pipeline over one JSONL run log,
+  never in the runtime import graph (D-012 now executable:
+  `test_runtime_imports_stdlib_only`). The no-ETL intake
+  (`read_ndjson_auto`, the header line drops by NULL `id`) behind a
+  count gate (a silent drop = integrity failure, nothing written);
+  `events.parquet` (the canonical 12-column cold archive, ORDER BY id);
+  `state_diffs.parquet` (the LAG/LEAD window-diff law per entity+prop,
+  the `continuous` fold-consistency read); `chronicle.sqlite` (the
+  stdlib-readable summary: facts_summary/state_current/type_histogram/
+  knowledge_summary/chronicle_meta) through the probe+fallback ladder
+  (ATTACH when sqlite_scanner is locally available, stdlib sqlite3 as
+  the never-breaks floor; autoinstall off — the chronicler never phones
+  home); `manifest.json` (content-derived, no wall-clock, no abs
+  paths; byte-deterministic per environment). The `[chronicler]`
+  optional extra (duckdb, the owner's explicit §8 approval 2026-09-06;
+  runtime deps stay []). Detail: D-093 + TEST_PLAN §7 +
+  tests/test_chronicle.py.
 - `blind-1` · the blind-NPC leak suite's phase-4 extension — **done
   (iter-63, D-092)**: the exit criterion's instrument — the leak
   predicates (test-side folds, never the engine's paths) + the three
@@ -112,6 +127,11 @@
   retrieval under the adversarial omniscient query + the None probe;
   the live drain's every emitted call, anchor-addressed) + the teeth
   law. Detail: D-092 + TEST_PLAN §1.3.
+- `scav-1` · offline compaction = scavenge with tombstones (the
+  EventStore shape, phases.md §4's later half): derived-store entries
+  drop with tombstones AFTER the chronicler's rollups make them
+  rebuildable; committed logs never edited (INV-5). Out of leg-4's
+  named scope by the scope-creep law — deferred here, not forced.
 
 > Phase 3 (Director) landing ledger, condensed: the pacing stack
 > iter-36..39 (D-065..D-068), the event grammar iter-40..42
