@@ -53,10 +53,13 @@ import pytest
 
 from brief import SceneLedger, assemble_brief, render_brief, speaking_queue
 from brief.mediator import narrator_call
+from brief.scene import present_at_scene, recall_query
+from cli.mediator import Mediator
 from core.knowledge import KnowledgeView
-from core.log import read_log
-from core.loop import Simulator
+from core.log import EventRecord, LoggedKnowledgeRecord, read_log
+from core.loop import RunnerError, Simulator
 from core.pack import Pack, PackError, load_pack
+from core.retrieval import RetrievalIndex
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
@@ -531,3 +534,479 @@ def test_lint_accepts_the_committed_pack() -> None:
     assert sorted(PACK.rules["brief"]["actors"]) == [
         BARKEEP, DRUNK, GUARD, RELIEF, MAID,
     ]
+
+
+# -- scene-2: the session wiring (the drain, the actor door, the query) -------
+
+
+def _mediator_session(
+    tmp_path: Path, seed: int = 42
+) -> tuple[Simulator, Mediator]:
+    """A live session at the tavern (the test_mediator pattern): the
+    chorus queue over the fresh arrival is (guard, barkeep) — the cap
+    clips the tavern's four declared actors to the pack-order head."""
+    log = tmp_path / "run.jsonl"
+    sim = Simulator(PACK, seed, log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps([{"intent": "move", "target": "loc_tavern"}])
+    mediator = Mediator(sim, PACK, SCHEMA, log, tmp_path / "mediator")
+    return sim, mediator
+
+
+def _reply(tmp_path: Path, name: str, doc: dict[str, Any]) -> Path:
+    path = tmp_path / name
+    path.write_text(json.dumps(doc), encoding="utf-8")
+    return path
+
+
+def test_actor_step_feeds_the_door_as_the_npc(tmp_path: Path) -> None:
+    """The actor reply door: a step carrying `actor=<npc>` goes through
+    the SAME front door — the committed event's actor IS the NPC
+    (INTENT_SCHEMA §9's actor key, mode B's reply path; the player's
+    default needs no key — mode A unchanged)."""
+    log = tmp_path / "run.jsonl"
+    sim = Simulator(PACK, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps([{"intent": "look_around", "actor": GUARD}])
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    assert any(event.actor == GUARD for event in events)
+
+
+@pytest.mark.parametrize("bad", ["purse_01", "loc_tavern", "npc_unknown", 7])
+def test_bad_step_actor_is_a_loud_author_error(
+    tmp_path: Path, bad: Any
+) -> None:
+    """The actor key is an author error when it names anything but a
+    pack NPC (an item, a location, an unknown id, a non-string) — the
+    loud/soft front-door line (INTENT_SCHEMA §9), never a silent
+    player-substitution."""
+    log = tmp_path / "run.jsonl"
+    sim = Simulator(PACK, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    with pytest.raises(RunnerError, match="actor must be a pack npc id"):
+        sim.run_steps([{"intent": "look_around", "actor": bad}])
+    sim.close()
+
+
+def test_actor_steps_chain_like_player_steps(tmp_path: Path) -> None:
+    """KI#17's generalization: the runner feeds the next step when the
+    CURRENT step's own intent ends — actor steps chain exactly like
+    player steps (the mode-B reply lists), and autonomous intents
+    (different intent ids) never advance the script."""
+    log = tmp_path / "run.jsonl"
+    sim = Simulator(PACK, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps([
+        {"intent": "look_around"},
+        {"intent": "look_around", "actor": GUARD},
+        {"intent": "look_around", "actor": BARKEEP},
+    ])
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    actors = [event.actor for event in events if event.type == "look_around"]
+    assert actors == [PLAYER, GUARD, BARKEEP]
+
+
+def test_the_drain_hands_actor_calls_after_the_players_beat(
+    tmp_path: Path,
+) -> None:
+    """The wiring: an accepted player beat hands the chorus's calls one
+    per queued NPC (head-first, pack order — guard then barkeep at the
+    cap-2 tavern); each actor's accept advances the drain; the LAST
+    accept closes the beat. The actor calls ride the same files, the
+    same reply flow, the same ladder."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    result = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))
+    assert result.status == "accepted" and result.actor is None
+    assert result.call_path is not None  # the chorus's first actor call
+    guard_call = result.call_path.read_text(encoding="utf-8")
+    assert f"actor: {GUARD}" in guard_call
+    result2 = mediator.apply_reply(_reply(tmp_path, "r2.json", {
+        "prose": "Easy now. Hands where I can see them.",
+    }))
+    assert result2.status == "accepted" and result2.actor == GUARD
+    assert f"actor: {BARKEEP}" in result2.call_path.read_text(encoding="utf-8")
+    result3 = mediator.apply_reply(_reply(tmp_path, "r3.json", {
+        "prose": "Ale's on the house.",
+    }))
+    assert result3.status == "accepted" and result3.actor == BARKEEP
+    assert result3.call_path is None  # the drain emptied
+    assert not mediator.beat_open
+    sim.close()
+
+
+def test_the_player_dry_closes_the_whole_beat(tmp_path: Path) -> None:
+    """Declining the PLAYER's call declines the beat: the chorus never
+    starts (the beat's head is its subject — the template rung renders
+    the whole beat; no actor call is ever emitted)."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    result = mediator.dry_close()
+    assert result.status == "dry" and result.actor is None
+    assert not mediator.beat_open
+    assert sorted(p.name for p in (tmp_path / "mediator").glob("call_*.md")) == [
+        "call_0000.md"
+    ]
+    sim.close()
+
+
+def test_actor_dry_skips_and_advances(tmp_path: Path) -> None:
+    """`narrate dry` on an ACTOR's call skips that actor (the template
+    rung — its beats already render through the chronicle) and hands
+    the next queued NPC's call; the last skip closes the beat."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))  # the accept hands the guard's call
+    skip = mediator.dry_close()
+    assert skip.status == "dry" and skip.actor == GUARD
+    assert skip.call_path is not None
+    assert f"actor: {BARKEEP}" in skip.call_path.read_text(encoding="utf-8")
+    skip2 = mediator.dry_close()
+    assert skip2.status == "dry" and skip2.actor == BARKEEP
+    assert skip2.call_path is None
+    assert not mediator.beat_open
+    sim.close()
+
+
+def test_a_bare_narrate_drops_the_pending_drain_and_the_notes_wait(
+    tmp_path: Path,
+) -> None:
+    """The drop law: a bare `narrate` (emit_call) DROPS a pending drain
+    — the unanswered actor calls fall to the template rung (the operator
+    moved on; never a blocked beat). The withdrawal notes minted by the
+    player's reply wait through the chorus and ride the player's NEXT
+    call (BRIEF_SPEC §7.1's subject-scoped note law — the actor calls
+    never consume them)."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    _header, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    anchor = len(events)
+    result = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The barkeep fidgeted.",
+        "proposal": {"expected_event_seq": anchor, "intents": [
+            {"kind": "look_around", "actor": BARKEEP,
+             "based_on_event_seq": anchor},
+        ]},
+    }))
+    assert result.status == "accepted"  # the barkeep proposal: withdrawn
+    guard_call = result.call_path.read_text(encoding="utf-8")
+    assert "WITHDRAWN" not in guard_call  # the actor call does not consume
+    next_call = mediator.emit_call()  # the drop + the player's next beat
+    text = next_call.read_text(encoding="utf-8")
+    assert "actor:" not in text  # the player's call, not an actor's
+    assert "WITHDRAWN intent look_around" in text  # the notes arrived home
+    sim.close()
+
+
+def test_mid_drain_departure_skips_the_absent_actor(tmp_path: Path) -> None:
+    """The live presence re-verification: the world may move between an
+    actor's call and its reply (the corpus's own `between` pattern) —
+    an NPC no longer present at the current scene is SKIPPED (the
+    template rung), never called for a scene it stands outside of."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    accepted = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))
+    assert accepted.call_path is not None  # the guard's call is open
+    sim.run_steps([{"intent": "move", "target": "loc_backyard"}])  # mid-drain
+    skip = mediator.dry_close()  # the guard declines — the scene moved
+    assert skip.actor == GUARD
+    assert skip.call_path is None  # the barkeep: not present, skipped
+    assert not mediator.beat_open
+    sim.close()
+
+
+def test_actor_refusals_regen_then_fall_to_the_template_rung(
+    tmp_path: Path,
+) -> None:
+    """The actor's own L12 ladder: refusals spend the actor exchange's
+    budget (a FRESH budget per exchange — the player's spend never
+    leaks in), the re-emit carries the actor's own refusal notes, and
+    exhaustion drops the actor to the template rung with the notes on
+    the result — the drain lives on (the next actor's call awaits)."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    mediator.apply_reply(_reply(tmp_path, "r.json", {"prose": "Warm."}))
+    refused = {  # `exits` is pack-modeled — the canon_slot refusal family
+        "prose": "A door stood to the north.",
+        "texture_delta": {"source": "turn:1", "established": [{
+            "scope": "scene:loc_tavern", "slot": "exits", "value": "north",
+            "surface": "A door stood to the north.",
+        }]},
+    }
+    first = mediator.apply_reply(_reply(tmp_path, "r1.json", refused))
+    assert first.status == "regen" and first.regens_used == 1
+    assert first.actor == GUARD  # the fresh budget: 1, not 1 + the player's
+    assert "REFUSED" in first.call_path.read_text(encoding="utf-8")
+    second = mediator.apply_reply(_reply(tmp_path, "r2.json", refused))
+    assert second.status == "regen" and second.regens_used == 2
+    third = mediator.apply_reply(_reply(tmp_path, "r3.json", refused))
+    assert third.status == "dry" and third.actor == GUARD
+    assert any("REFUSED" in note for note in third.notes)  # why it fell
+    assert third.call_path is not None  # the barkeep's call: drain lives
+    assert mediator.beat_open
+    sim.close()
+
+
+def test_the_actor_reply_feeds_the_callers_intents(tmp_path: Path) -> None:
+    """The caller law end-to-end: an actor call's reply feeds the
+    ACTOR's proposals through the door (the committed event's actor is
+    the NPC — mode B's write path), and the summary counts the feed."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    result = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))
+    actor_call = result.call_path.read_text(encoding="utf-8")
+    anchor = int(
+        next(line.split()[1] for line in actor_call.splitlines()
+             if line.startswith("anchor:"))
+    )
+    _header, before = read_log(tmp_path / "run.jsonl", SCHEMA)
+    result2 = mediator.apply_reply(_reply(tmp_path, "r2.json", {
+        "prose": "Easy now. Hands where I can see them.",
+        "proposal": {"expected_event_seq": anchor, "intents": [
+            {"kind": "look_around", "actor": GUARD,
+             "based_on_event_seq": anchor},
+        ]},
+    }))
+    assert result2.status == "accepted" and result2.actor == GUARD
+    _header, after = read_log(tmp_path / "run.jsonl", SCHEMA)
+    fresh = after[len(before):]
+    assert any(event.actor == GUARD for event in fresh)  # THE DOOR
+    assert "BEAT intents: 1 fed, 0 withdrawn" in result2.notes
+    sim.close()
+
+
+# -- scene-2: the keyword query (§3.5's relevance signal) ----------------------
+
+
+def test_recall_query_is_the_fresh_window_tokens(tmp_path: Path) -> None:
+    """The query derivation: the knows tokens the beat window minted
+    for the knower, first-seen order, space-joined — leak-free by
+    construction (the tokens ARE the knower's own fresh records; the
+    pre-first-beat window is the whole log)."""
+    events = run_day1(tmp_path, 123)
+    assert recall_query(events[:10], PACK, GUARD) == (
+        "pc_01_arrived pc_01_reaching_for_oil_lamp_01 noise_in_loc_tavern "
+        "figure_reaching_for_purse noise_by_the_bar"
+    )
+    # the maid's own fresh tokens — never the guard's
+    assert "purse_missing" not in recall_query(events[:10], PACK, MAID)
+
+
+def test_recall_query_empty_when_the_window_mints_nothing(
+    tmp_path: Path,
+) -> None:
+    """The honest empty query: a window that mints nothing for the
+    knower yields the empty string (no fabricated signal — the
+    two-signal ranking stands; the late-day window is quiet for the
+    rotated-out guard)."""
+    events = run_day1(tmp_path, 123)
+    assert recall_query(events, PACK, GUARD) == ""
+
+
+def test_present_at_scene_reads_the_live_projection(tmp_path: Path) -> None:
+    """The drain's re-verification fold: presence is read from the
+    projection at the CURRENT scene — the guard mid-tavern, gone after
+    the watch change (the rotation moved him; the fold reads the world,
+    never a convention about who talked)."""
+    events = run_day1(tmp_path, 123)
+    assert present_at_scene(events[:10], PACK, GUARD)
+    assert not present_at_scene(events[:25], PACK, GUARD)
+
+
+def test_the_relevance_term_reranks_the_actors_memory() -> None:
+    """§3.5's third signal: with a query, an OLD record sharing words
+    with the fresh ones rides UP (the token overlap over the word view
+    — rung-independent, pure); without a query the two-signal shape
+    stands (mode A's committed bytes). Synthetic records: the fresh
+    `ale_order_shouted` query pulls `ale_spilled` above
+    `song_by_the_hearth` (recency alone ranks them the other way)."""
+    records = (
+        ("ev_0000", 2, "ale_spilled"),
+        ("ev_0001", 4, "song_by_the_hearth"),
+        ("ev_0002", 50, "ale_order_shouted"),
+    )
+    events = [
+        EventRecord(
+            id=eid, t=t, type="rumor_told", actor=BARKEEP, cause=None,
+            outcome={}, knowledge=(LoggedKnowledgeRecord(
+                who=GUARD, channel="told", fidelity="partial",
+                knows=knows, at=t, source=eid,
+            ),), state_changes=(), hooks=(),
+            importance="low", provenance={}, target=None,
+        )
+        for eid, t, knows in records
+    ]
+    without = _block(render_brief(assemble_brief(events, PACK, knower=GUARD)), "recalled_facts")
+    with_query = _block(render_brief(
+        assemble_brief(events, PACK, knower=GUARD, query="ale_order_shouted")
+    ), "recalled_facts")
+    assert without == [
+        "- [t 50, told, partial] ale_order_shouted",
+        "- [t 4, told, partial] song_by_the_hearth",
+        "- [t 2, told, partial] ale_spilled",
+    ]
+    assert with_query[:1] == without[:1]  # the fresh record still leads
+    assert with_query[1:] == [  # the flip: the old ale record rides up
+        "- [t 2, told, partial] ale_spilled",
+        "- [t 4, told, partial] song_by_the_hearth",
+    ]
+
+
+def test_mode_a_bytes_ignore_the_relevance_weight(tmp_path: Path) -> None:
+    """The corpus price: `relevance_weight` is inert on the mode-A path
+    — no query ever arrives there, any weight renders the same bytes
+    (the pack-data gate; the zero-regen landing)."""
+    events = run_day1(tmp_path, 123)
+    zeroed = _mutated_pack(
+        lambda rules: rules["brief"]["recalled_facts"].__setitem__(
+            "relevance_weight", 0.0
+        )
+    )
+    assert render_brief(assemble_brief(events, PACK)) == render_brief(
+        assemble_brief(events, zeroed)
+    )
+
+
+# -- scene-2: the retrieval ladder's first runtime query ----------------------
+
+
+def test_the_actor_call_carries_query_and_retrieval_lines(
+    tmp_path: Path,
+) -> None:
+    """The actor call's protocol extension (BRIEF_SPEC §7.1): the
+    `query:` line (the relevance signal made visible) and the ladder's
+    top `retrieval:` rows — dry demand handles with the fidelity and
+    the minting event id inline; mode A carries neither."""
+    events = run_day1(tmp_path, 123)
+    window = events[:10]
+    query = recall_query(window, PACK, GUARD)
+    index = RetrievalIndex.build(PACK, window)
+    assert index is not None  # the committed pack declares the block
+    try:
+        rows = index.query(query, knower=GUARD)
+    finally:
+        index.close()
+    document = narrator_call(
+        window, PACK, SceneLedger(), knower=GUARD, query=query, retrieval=rows,
+    )
+    tail = document.splitlines()[-8:]
+    assert tail == [
+        "## narrator_protocol",
+        f"actor: {GUARD}",
+        "anchor: 10",
+        "regen: 0/2",
+        "query: pc_01_arrived pc_01_reaching_for_oil_lamp_01 "
+        "noise_in_loc_tavern figure_reaching_for_purse noise_by_the_bar",
+        "retrieval: fact figure_reaching_for_purse (saw/partial, ev_0002)",
+        "retrieval: fact noise_by_the_bar (heard/vague, ev_0002)",
+        "retrieval: fact pc_01_reaching_for_oil_lamp_01 (saw/partial, ev_0001)",
+    ]
+    mode_a = narrator_call(window, PACK, SceneLedger())
+    assert "query:" not in mode_a and "retrieval:" not in mode_a
+
+
+def test_the_mediator_queries_the_ladder_per_actor_call(
+    tmp_path: Path,
+) -> None:
+    """retr-1's DORMANT gate opened: the live drain builds the index and
+    queries it per actor call (the mode-B path pays it; mode A never
+    does) — the auto-emitted guard call carries the query and the
+    ladder's top row for it (the session's own arrival record)."""
+    sim, mediator = _mediator_session(tmp_path)
+    mediator.emit_call()
+    result = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))
+    call = result.call_path.read_text(encoding="utf-8")
+    assert "query: pc_01_arrived" in call
+    assert "retrieval: fact pc_01_arrived (saw/partial, ev_0000)" in call
+    sim.close()
+
+
+def test_a_blockless_pack_runs_the_ladder_off(tmp_path: Path) -> None:
+    """The DORMANT family: a pack without the `retrieval` block keeps
+    the query line (the relevance signal is pack-independent — the
+    assembler's own overlap) but serves no retrieval rows; the ladder
+    is the pack's own declaration, INV-3."""
+    blockless = _mutated_pack(lambda rules: rules.pop("retrieval"))
+    log = tmp_path / "run.jsonl"
+    sim = Simulator(blockless, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps([{"intent": "move", "target": "loc_tavern"}])
+    _header, events = read_log(log, SCHEMA)
+    query = recall_query(list(events), blockless, GUARD)
+    index = RetrievalIndex.build(blockless, list(events))
+    assert index is None
+    document = narrator_call(
+        list(events), blockless, SceneLedger(), knower=GUARD, query=query,
+    )
+    assert "query: pc_01_arrived" in document
+    assert "retrieval:" not in document
+    # and the live drain over the blockless pack: the same law
+    mediator = Mediator(sim, blockless, SCHEMA, log, tmp_path / "mediator")
+    mediator.emit_call()
+    result = mediator.apply_reply(_reply(tmp_path, "r.json", {
+        "prose": "The common room was warm.",
+    }))
+    call = result.call_path.read_text(encoding="utf-8")
+    assert "query: pc_01_arrived" in call
+    assert "retrieval:" not in call
+    sim.close()
+
+
+@pytest.mark.parametrize("seed", range(120, 130))
+def test_scene_2_corpus_price_is_zero(seed: int, tmp_path: Path) -> None:
+    """The 10-seed day1_full A/B (the retr-1 witness pattern): the
+    committed pack (chorus + actors + retrieval + relevance_weight)
+    vs the block-less copy — the playscript path never touches the
+    mediator, every run byte-identical; the mode-A corpus (the narrator
+    corpus 105 + the parse corpus 10 + the T1 golden) replays green in
+    the same suite."""
+    baseline = tmp_path / "baseline.jsonl"
+    sim = Simulator(PACK, seed, baseline, SCHEMA, commit="0000000")
+    sim.run_playscript(dict(DAY1, seed=seed))
+    sim.close()
+    blockless = _mutated_pack(
+        lambda rules: (
+            rules["brief"].pop("chorus"),
+            rules["brief"].pop("actors"),
+            rules.pop("retrieval"),
+            rules["brief"]["recalled_facts"].__setitem__(
+                "relevance_weight", 0.0
+            ),
+        )
+    )
+    stripped = tmp_path / "stripped.jsonl"
+    sim2 = Simulator(blockless, seed, stripped, SCHEMA, commit="0000000")
+    sim2.run_playscript(dict(DAY1, seed=seed))
+    sim2.close()
+    assert baseline.read_bytes() == stripped.read_bytes()
+
+
+def test_the_actor_call_bytes_are_deterministic(tmp_path: Path) -> None:
+    """The D-049 quarantine extends to the actor call: two sessions over
+    the same seed assemble the same actor call bytes (the ladder's
+    answer is same-environment deterministic — the call document is
+    session render state, never canon, never committed)."""
+    documents = []
+    for run in ("a", "b"):
+        target = tmp_path / run
+        target.mkdir()
+        sim, mediator = _mediator_session(target)
+        mediator.emit_call()
+        result = mediator.apply_reply(_reply(target, "r.json", {
+            "prose": "The common room was warm.",
+        }))
+        documents.append(result.call_path.read_text(encoding="utf-8"))
+        sim.close()
+    assert documents[0] == documents[1]

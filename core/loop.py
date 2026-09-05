@@ -169,6 +169,11 @@ class Simulator:
         self._events: list[EventRecord] = []
         self._intent_seq = 0
         self._player_id = pack.player_id()
+        # the current playscript step's intent id (scene-2: the KI#17
+        # generalization — the feed advances on THE STEP'S OWN ending,
+        # whatever its actor; autonomous intents carry other ids and
+        # never advance the script)
+        self._step_intent_id: str | None = None
         self._schedule = build(decls_from_rules(pack.rules))
         self._system_order = {
             decl.name: index for index, decl in enumerate(self._schedule)
@@ -235,10 +240,11 @@ class Simulator:
         if steps:
             with self._bank.assure(SUBSTANTIVE):
                 remaining = steps[1:]
+                first = self._intent_from_step(steps[0])
+                self._step_intent_id = first.id
                 self._queue.push(
-                    tick=self._clock.tick, sub_order=PLAYER_INTENT,
-                    actor_id=self._player_id, kind="intent",
-                    payload=self._intent_from_step(steps[0]),
+                    tick=self._clock.tick, sub_order=self._step_band(first),
+                    actor_id=first.actor, kind="intent", payload=first,
                 )
                 while len(self._queue):
                     entry = self._queue.pop()
@@ -281,18 +287,25 @@ class Simulator:
                     self._clock.advance_to(entry.tick)
                     if entry.kind == "intent":
                         accepted = self._execute_intent(entry)
-                        # only the PLAYER's step lifecycle feeds the next
-                        # playscript step — an autonomous (urgency /
+                        # only the CURRENT step's own lifecycle feeds the
+                        # next playscript step — an autonomous (urgency /
                         # director) intent ending must never advance the
-                        # script (KI#17: step 3 committed before step 2)
+                        # script (KI#17: step 3 committed before step 2;
+                        # scene-2 generalizes the proxy "the actor is the
+                        # player" to the exact law: the ending entry IS
+                        # the step's own intent — actor steps chain the
+                        # same way, autonomous intents never match)
                         if (
                             not accepted and remaining
-                            and entry.actor_id == self._player_id
+                            and entry.payload.id == self._step_intent_id
                         ):
                             self._feed_next(entry.tick, remaining)
                     elif entry.kind == "completion":
                         self._complete(entry)
-                        if remaining and entry.actor_id == self._player_id:
+                        if (
+                            remaining
+                            and entry.payload.intent.id == self._step_intent_id
+                        ):
                             self._feed_next(entry.tick, remaining)
                     elif entry.kind == "pass":
                         self._run_pass(entry)
@@ -330,25 +343,44 @@ class Simulator:
             self.close()
 
     def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
+        intent = self._intent_from_step(remaining.pop(0))
+        self._step_intent_id = intent.id
         self._queue.push(
-            tick=tick, sub_order=PLAYER_INTENT,
-            actor_id=self._player_id, kind="intent",
-            payload=self._intent_from_step(remaining.pop(0)),
+            tick=tick, sub_order=self._step_band(intent),
+            actor_id=intent.actor, kind="intent", payload=intent,
         )
+
+    def _step_band(self, intent: IntentData) -> int:
+        """The step's sub_order band: PLAYER_INTENT for the player's own
+        steps (mode A — the default, no actor key), NPC_REACTION for an
+        actor step (mode B's reply door — the chorus rides the same band
+        as the autonomous intents, after the player's intents at the
+        same tick, before scheduled completions; D-037's band law)."""
+        if intent.actor == self._player_id:
+            return PLAYER_INTENT
+        return NPC_REACTION
 
     def _intent_from_step(self, step: Mapping[str, Any]) -> IntentData:
         kind = step.get("intent")
         if not isinstance(kind, str):
             raise RunnerError(f"playscript step missing 'intent': {step!r}")
+        actor = step.get("actor", self._player_id)
+        if actor != self._player_id and (
+            not isinstance(actor, str) or self._pack.kind_of(actor) != "npc"
+        ):
+            raise RunnerError(
+                f"playscript step actor must be a pack npc id, got {actor!r} "
+                f"(the player needs no actor key — mode A's default)"
+            )
         intent_id = sequence_id("intent", self._intent_seq)
         self._intent_seq += 1
         fields = {
             key: value
             for key, value in step.items()
-            if key not in ("intent", "target")
+            if key not in ("intent", "target", "actor")
         }
         return IntentData(
-            id=intent_id, kind=kind, actor=self._player_id,
+            id=intent_id, kind=kind, actor=actor,
             target=step.get("target"), fields=fields,
             based_on_event_seq=self._writer.event_count,
         )

@@ -2,9 +2,10 @@
 the session scene ledger (`docs/BRIEF_SPEC.md` owns the block contract,
 `docs/blueprint/phases.md` §1 the ledger mechanism). Landed iter-8;
 validator iter-9; the scene ledger (7th block) iter-10; the scene
-manager — the chorus queue, mode B's drain order (scene-1) — lives in
-`brief/scene.py`. The LLM side of the pipeline is a later, owner-gated
-iteration (AGENTS §8)."""
+manager — the chorus queue, mode B's drain order (scene-1) and the
+session-side folds (scene-2: presence re-verification + the keyword
+query) — lives in `brief/scene.py`. The LLM side of the pipeline is a
+later, owner-gated iteration (AGENTS §8)."""
 
 from brief.assembler import (
     Block,
@@ -41,7 +42,7 @@ from brief.ledger import (
     scenes,
     split_scope,
 )
-from brief.scene import speaking_queue
+from brief.scene import present_at_scene, recall_query, speaking_queue
 
 __all__ = [
     "ACTIVE",
@@ -69,7 +70,9 @@ __all__ = [
     "brief_from_log",
     "current_scene",
     "last_beat_tick",
+    "present_at_scene",
     "present_entities",
+    "recall_query",
     "refusal_lines",
     "render_brief",
     "scenes",

@@ -27,7 +27,9 @@ feeds steps through `run_steps` and the world moves only through the
 queue it seeds — the log is one continuous deterministic run. The
 renderer is a pure function of the log (CHRON-1); `chronicle` re-renders
 from the log file, so re-running a command on a longer log keeps every
-earlier line identical.
+earlier line identical. With the chorus armed (mode B, scene-2) an
+accepted player beat hands the present actors' calls one by one —
+reply, dry-skip, or move on (`narrate` again drops the rest).
 """
 
 from __future__ import annotations
@@ -67,8 +69,12 @@ _SESSION_HELP = """commands:
   play <script>     run a playscript's steps in this session
   narrate           emit the narrator call (output/mediator/call_NNNN.md)
   narrate <reply>   apply a narrator reply JSON {prose, texture_delta?,
-                    proposal?} — the beat cycle runs
-  narrate dry       close the beat without a narrator (template prose)
+                    proposal?} — the beat cycle runs; an accepted player
+                    beat then hands the chorus's actor calls (mode B,
+                    one per present declared NPC — reply, dry, or move on)
+  narrate dry       close the open call without a narrator: an actor
+                    call is skipped (the template rung), the player's
+                    call closes the whole beat
   say <text>        hand free text to the external parser (mode C):
                     emit the parse call (output/parser/parse_NNNN.md)
   say apply <file>  apply the parser's reply JSON {intent | question |
@@ -302,24 +308,38 @@ class Session:
 
     @staticmethod
     def _print_beat(result: BeatResult) -> None:
+        who = f"[{result.actor}] " if result.actor else ""
         if result.status == "accepted":
-            print(result.prose)
+            print(f"{who}{result.prose}")
             for note in result.notes:  # the BEAT summary lines (KI#44)
                 print(f"  {note}")
+            if result.call_path is not None:  # scene-2: the chorus continues
+                print(
+                    f"[chorus: the next actor call awaits — {result.call_path}]"
+                )
             return
         if result.status == "regen":
             print(
-                f"[refused — regen {result.regens_used}/{result.max_regens}; "
+                f"{who}[refused — regen {result.regens_used}/{result.max_regens}; "
                 f"next call: {result.call_path}]"
             )
             for note in result.notes:
                 print(f"  {note}")
             return
-        print(result.prose)
-        print(
-            f"[dry beat — the L12 floor; regens used "
-            f"{result.regens_used}/{result.max_regens}]"
-        )
+        if result.actor is not None:  # an actor's floor: the template rung
+            print(f"{who}{result.prose}")
+            print(
+                f"[{result.actor} fell to the template rung — the chronicle "
+                f"renders the beat]"
+            )
+        else:
+            print(result.prose)
+            print(
+                f"[dry beat — the L12 floor; regens used "
+                f"{result.regens_used}/{result.max_regens}]"
+            )
+        if result.call_path is not None:
+            print(f"[chorus: the next actor call awaits — {result.call_path}]")
 
     # -- the parser door (mode C, phase 2 — D-062) -----------------------------
 

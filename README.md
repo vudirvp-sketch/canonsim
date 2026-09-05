@@ -378,13 +378,24 @@ grammar); the actor call document carries the `actor:` protocol
 line. The leak surface closed by construction and measured: every
 declared actor's brief leak-free at every beat window; the queue
 live on day1 (the watch change swaps the guard by PRESENCE); the
-corpus price zero. 1085 tests green, ruff clean.
+corpus price zero. scene-2 LANDED (iter-61, D-090 — the mode-B
+session wiring): the mediator drains the chorus inside the beat
+cycle — the player's accept snapshots the queue (the beat's cast,
+fixed at curtain), one actor call per queued NPC, live presence
+re-verification, the drop law, one regen budget per exchange; the
+actor reply door (the step grammar's `actor` key through the SAME
+front door — the committed event's actor IS the NPC; KI#17's exact
+intent-id feed law); the mediator's keyword query (BRIEF_SPEC
+§3.5's relevance signal: `recall_query` the leak-free derivation,
+the assembler's pure third term, the retrieval ladder's first
+runtime QUERY consumer — the actor calls' `query:`/`retrieval:`
+protocol lines). 1118 tests green, ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
 BRIEF_SPEC §3.9 + TASKS
-leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1 +
-D-084/D-085/D-086/D-087/D-088/D-089.
+leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2 +
+D-084/D-085/D-086/D-087/D-088/D-089/D-090.
 
 ## For AI agents (primary audience)
 

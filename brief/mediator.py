@@ -11,10 +11,16 @@ assembly and inspection as functions of (log, ledger, pack):
 
 - the **call document** = the brief (BRIEF_SPEC §7 bytes, unchanged) plus
   one `narrator_protocol` section (actor / anchor / regen counter /
-  refusal notes) — everything the external narrator may draw on for one
-  beat; mode B (scene-1) passes `knower=<npc>` — the actor call, one NPC
-  per call, the chorus queue's own document (the actor line names whose
-  beat-projection it carries);
+  query + retrieval rows / refusal notes) — everything the external
+  narrator may draw on for one beat; mode B (scene-1) passes
+  `knower=<npc>` — the actor call, one NPC per call, the chorus queue's
+  own document (the actor line names whose beat-projection it carries);
+  mode B's session wiring (scene-2) also passes the **keyword query**
+  that ranked the actor's memory (§3.5's relevance signal — the `query:`
+  line) and the retrieval ladder's top rows for it (the `retrieval:`
+  lines — dry demand handles: the evidence and lore the query surfaced,
+  source event ids inline, the ladder's precedence law visible in the
+  order); mode A's bytes carry neither — the committed corpus shape;
 - the **response document** — one CLOSED document `{prose, texture_delta?,
   proposal?}`: prose for the player, the structural texture delta, and
   the fact proposal, all in the same call (one call, two jobs, D-049).
@@ -24,10 +30,13 @@ assembly and inspection as functions of (log, ledger, pack):
   never guess, never repair (VALIDATION_SPEC §2);
 - **feedable intents** — the mediator's noun resolution: proposal intents
   survive to the door only when their texture entry is live (an
-  unresolvable noun never becomes an Intent — blueprint §1), the actor is
-  the player (mode A), and no two intents ride the same texture entry (a
-  duplicate promotion would crash `mark_promoted`'s live-only law).
-  Withdrawals are notes, never events (the texture-OCC mirror).
+  unresolvable noun never becomes an Intent — blueprint §1), the actor
+  is the call's own caller (scene-2's mode-B half: a reply proposes its
+  own caller's actions — mode A's caller is the player, mode B's the
+  actor whose call the reply answers), and no two intents ride the same
+  texture entry (a duplicate promotion would crash `mark_promoted`'s
+  live-only law). Withdrawals are notes, never events (the texture-OCC
+  mirror).
 
 No RNG, no wall-clock, no I/O, writes nothing (INV-1/2/4; the D-049
 determinism quarantine — same (log, ledger, pack) → same call bytes).
@@ -53,9 +62,11 @@ from brief.validator import (
 )
 from core.log import EventRecord
 from core.pack import Pack
+from core.retrieval import Retrieved
 
 __all__ = [
     "PROTOCOL_BLOCK",
+    "RETRIEVAL_LINES",
     "NarratorError",
     "NarratorResponse",
     "feedable_intents",
@@ -66,6 +77,12 @@ __all__ = [
 
 #: The protocol section's block id (BRIEF_SPEC §7.1 block geometry).
 PROTOCOL_BLOCK: Final = "narrator_protocol"
+
+#: The actor call's retrieval-line budget (BRIEF_SPEC §7.1 — the
+#: protocol's own geometry, architecture not balance: the ladder's top
+#: rows ride as dry demand handles, capped by the document's line
+#: budget the way the notes ride uncapped-free but bounded by design).
+RETRIEVAL_LINES: Final = 3
 
 
 class NarratorError(RuntimeError):
@@ -131,6 +148,8 @@ def narrator_call(
     notes: Sequence[str] = (),
     regens_used: int = 0,
     max_regens: int = MAX_REGENS,
+    query: str | None = None,
+    retrieval: Sequence[Retrieved] = (),
 ) -> str:
     """Assemble the narrator call document (pure): the brief bytes
     (BRIEF_SPEC §7, unchanged) + the `narrator_protocol` section —
@@ -138,11 +157,17 @@ def narrator_call(
     carries — mode A omits the line, the player is the narrator's own
     subject by construction, the committed corpus bytes), `anchor` (the
     log's event count: the OCC anchor a proposal must carry), `regen`
-    (the per-beat counter, VALIDATION_SPEC §7), and the
-    refusal/withdrawal note lines verbatim (they ride the call's top,
-    where directives live). Same (log, ledger, pack, knower) → same
+    (the per-beat counter, VALIDATION_SPEC §7), `query` (mode B, scene-2:
+    the keyword query that ranked this actor's memory — §3.5's
+    relevance signal made visible to the operator; mode A never carries
+    it), the `retrieval` rows (the ladder's top hits for the query —
+    dry demand handles, the source ids inline; the order IS the
+    ladder's precedence law), and the refusal/withdrawal note lines
+    verbatim. Same (log, ledger, pack, knower, query, retrieval) → same
     bytes."""
-    brief = render_brief(assemble_brief(events, pack, ledger, knower=knower))
+    brief = render_brief(
+        assemble_brief(events, pack, ledger, knower=knower, query=query)
+    )
     lines = [f"## {PROTOCOL_BLOCK}"]
     if knower is not None and knower != pack.player_id():
         lines.append(f"actor: {knower}")
@@ -150,38 +175,66 @@ def narrator_call(
         [
             f"anchor: {len(events)}",
             f"regen: {regens_used}/{max_regens}",
-            *notes,
         ]
     )
+    if query:
+        lines.append(f"query: {query}")
+    lines.extend(_retrieval_lines(retrieval))
+    lines.extend(notes)
     return f"{brief}\n" + "\n".join(lines) + "\n"
+
+
+def _retrieval_lines(rows: Sequence[Retrieved]) -> list[str]:
+    """The ladder's top rows as the actor call's dry demand handles
+    (BRIEF_SPEC §7.1): `retrieval: fact <ref> (<channel>/<fidelity>,
+    <source>)` — the record's address and the minting event id, the
+    expansion law's handle; `retrieval: lore <ref>` — the static
+    background the query surfaced. No scores, no prose (L2): the ORDER
+    carries the ranking (the source-outranks law visible — the derived
+    view never shadows its own evidence); capped by RETRIEVAL_LINES."""
+    out: list[str] = []
+    for row in rows[:RETRIEVAL_LINES]:
+        if row.kind == "lore":
+            out.append(f"retrieval: lore {row.ref}")
+        else:
+            out.append(
+                f"retrieval: fact {row.ref} "
+                f"({row.channel}/{row.fidelity}, {row.source})"
+            )
+    return out
 
 
 def feedable_intents(
     intents: Sequence[IntentProposal],
     ledger: SceneLedger,
-    player_id: str,
+    caller: str,
 ) -> tuple[tuple[IntentProposal, ...], tuple[str, ...]]:
     """The mediator's noun resolution, pre-door (blueprint §1): keep the
     intents that may legally reach the door; return dry WITHDRAWN notes
     for the rest (withdrawal is not an event — the attempt never reached
     the world, VALIDATION_SPEC §8).
 
-    Dropped kinds: a non-player actor (mode A — the narrator proposes the
-    player's actions only), a texture reference whose entry is not live
-    (retired / contradicted / promoted / unknown — the unresolvable-noun
-    law), and a second intent on a texture entry already claimed within
-    the same document (one promotion per entry per beat: the live-only
-    `mark_promoted` would crash on the duplicate).
+    Dropped kinds: an actor that is not the call's own caller (scene-2's
+    mode-B half of the mode-A law: a reply proposes its own caller's
+    actions — mode A's caller is the player, mode B's the actor whose
+    call the reply answers; another NPC's or the player's proposals ride
+    a mode-B reply only as withdrawals), a texture reference whose entry
+    is not live (retired / contradicted / promoted / unknown — the
+    unresolvable-noun law), and a second intent on a texture entry
+    already claimed within the same document (one promotion per entry
+    per beat: the live-only `mark_promoted` would crash on the
+    duplicate).
     """
     live_ids = {entry.id for entry in ledger.live()}
     claimed: set[str] = set()
     feedable: list[IntentProposal] = []
     withdrawn: list[str] = []
     for intent in intents:
-        if intent.actor != player_id:
+        if intent.actor != caller:
             withdrawn.append(
                 f"WITHDRAWN intent {intent.kind} (actor {intent.actor!r} is not "
-                f"the player — mode A proposes player actions only)"
+                f"the caller {caller!r} — a reply proposes its own caller's "
+                f"actions only)"
             )
             continue
         reference = intent.fields.get("texture")

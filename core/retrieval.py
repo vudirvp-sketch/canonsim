@@ -106,6 +106,7 @@ __all__ = [
     "Retrieved",
     "RetrievalIndex",
     "cosine_sim",
+    "word_tokens",
 ]
 
 RETRIEVAL_BLOCK_KEYS: Final = (
@@ -125,6 +126,15 @@ optional static-lore vector table (lore id → embedding), prose."""
 _TOKEN_RE: Final = re.compile(r"[^\W_]+", re.UNICODE)
 """The floor tokenizer (FTS5's unicode61 approximation: alphanumeric
 runs, underscore a separator — the dry tokens' own word shape)."""
+
+
+def word_tokens(text: str) -> tuple[str, ...]:
+    """The word view of a dry token text: alphanumeric runs, casefolded,
+    underscores split (the ladder's floor semantics — the single owner
+    of the word view; the brief's relevance term (BRIEF_SPEC §3.5,
+    scene-2) reads the same view, so keyword overlap and floor
+    containment agree by construction)."""
+    return tuple(match.group(0).casefold() for match in _TOKEN_RE.finditer(text))
 
 _KIND_LORE: Final = "lore"
 _KIND_FACT: Final = "fact"
@@ -178,18 +188,13 @@ def cosine_sim(a: Sequence[float], b: Sequence[float]) -> float:
     return dot / (norm_a * norm_b)
 
 
-def _tokens(text: str) -> list[str]:
-    """The alphanumeric token runs, casefolded (the floor's word view)."""
-    return [match.group(0).casefold() for match in _TOKEN_RE.finditer(text)]
-
-
 def _match_string(query: str) -> str:
     """The safe FTS5 MATCH expression: every whitespace term quoted
     (inner quotes doubled — FTS5 syntax can never crash the ladder),
     terms without tokens dropped, OR-joined — retrieval is recall
     first, the re-ranker sorts (bm25 sums the per-term contributions a
     row actually matched)."""
-    terms = [term for term in query.split() if _tokens(term)]
+    terms = [term for term in query.split() if word_tokens(term)]
     return " OR ".join(
         f'"{term.replace(chr(34), chr(34) * 2)}"' for term in terms
     )
@@ -522,9 +527,9 @@ class RetrievalIndex:
             ):
                 raw[int(rowid)] = float(value)
         else:
-            terms = frozenset(_tokens(text))
+            terms = frozenset(word_tokens(text))
             for rowid, row in enumerate(self._rows, start=1):
-                if terms & frozenset(_tokens(row.text)):
+                if terms & frozenset(word_tokens(row.text)):
                     raw[rowid] = 0.0
         out: dict[int, float] = {}
         for rowid, value in raw.items():

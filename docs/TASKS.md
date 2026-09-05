@@ -14,13 +14,13 @@
 > iter-27–29). Phase 2 closed (gate PASS, iter-35, D-064 — 35/35 boundary
 > validity over 51 combined utterances, 0 honest misfires; the parse corpus
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
-> Phase 3 (Director) CLOSED — gate PASS iter-54, D-083 (the D-083 row owns
-> the phase-3 landing ledger). Phase 4 (Knowledge & scene) OPENED iter-55
+> Phase 3 (Director) CLOSED — see the condensed ledger below. Phase 4
+> (Knowledge & scene) OPENED iter-55
 > (the owner's "start phase 4" session call; the backlog below is drafted
 > from `docs/blueprint/phases.md` §4 — the phase's architecture owner).
 > Architecture owner: `docs/blueprint/phases.md` §4; exit criterion
-> "0 leaks on the blind-NPC suite" (ROADMAP §2 — the T3 family,
-> `docs/TEST_PLAN.md` §1, extends to the phase-4 surfaces).
+> "0 leaks on the blind-NPC suite" (ROADMAP §2 — T3's family, extended
+> to the phase-4 surfaces; TEST_PLAN §1).
 
 ### Phase-4 backlog (opened iter-55)
 
@@ -88,13 +88,20 @@
   (every declared actor's brief leak-free at every beat window); the
   corpus price zero. Detail: D-089 + BRIEF_SPEC §3.9 +
   tests/test_scene.py.
-- `scene-2` · the mode-B session wiring — the mediator drains the
-  queue inside the beat cycle (one actor call per queued NPC; the
-  beyond-cap NPCs stay on the template rung), the actor reply door
-  (proposals with `actor=<npc>` through the intent door —
-  `feedable_intents`' mode-B half), the mediator's keyword query
-  (BRIEF_SPEC §3.5's relevance signal — the retrieval ladder's first
-  QUERY consumer, retr-1's DORMANT gate).
+- `scene-2` · the mode-B session wiring — **done (iter-61, D-090)**:
+  the mediator drains the chorus inside the beat cycle (the snapshot
+  at the player's accept — the cast fixed at curtain, one actor call
+  per NPC, live presence re-verification, the drop law, one budget
+  per exchange), the actor reply door (the step grammar's `actor` key
+  through the SAME front door, `feedable_intents`' caller law), the
+  mediator's keyword query (§3.5's relevance signal + the retrieval
+  ladder's first runtime QUERY consumer — the actor calls'
+  `query:`/`retrieval:` lines). Detail: D-090 + BRIEF_SPEC §3.9/§7.1
+  + tests/test_scene.py.
+- `tex-1` · the scene_texture window's identity tier + per-scope
+  quotas (blueprint §1's identity-persistence resolution — pack
+  `identity_slots` ranked with pinned, at most K lines per entity;
+  re-pointed from scene-2's §9 projection — the underdeliver law).
 - `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
   over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
   into SQLite — never in the runtime import graph, D-012).

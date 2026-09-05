@@ -228,6 +228,24 @@ methods) are **author errors**: loud `RunnerError`, never logged as
 rejections — the line between "the character attempted the impossible"
 (a fact) and "the script is wrong" (a bug).
 
+**The actor step key (scene-2, mode B's reply door).** A step may
+carry `actor: <npc id>` — the intent's proposer is that NPC (default:
+the player, no key — mode A). The key is loud: anything but a pack NPC
+id (an item, a location, an unknown id, a non-string) is an author
+error at the shape gate, never a silent player-substitution. An actor
+step enqueues on the NPC_REACTION band (after the player's intents at
+the same tick, before scheduled completions — the same band as the
+autonomous intents, D-037) and goes through the SAME front door: the
+committed event's `actor` IS the NPC, its knowledge templates render
+`{actor}` as the NPC, the OCC anchor stamps at feed. The step-feeding
+law (KI#17) is exact since scene-2: the runner feeds the next step when
+the CURRENT step's own intent ends (reject or complete — identified by
+intent id, not by actor); autonomous intents carry other ids and never
+advance the script. The mediator is the canonical feeder (the actor
+replies' proposals, `feedable_intents`' caller gate — a reply proposes
+its own caller's actions); playscripts may carry actor steps for
+testing the door directly.
+
 ## 10. Versioning
 
 This contract is code+pack owned (`core/intent.py`, `actions.json`,

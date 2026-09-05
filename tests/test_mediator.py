@@ -187,10 +187,36 @@ def test_feedable_intents_filters_for_the_door(tmp_path: Path) -> None:
     )
     assert feedable == (plain, texture)
     assert withdrawn == (
-        "WITHDRAWN intent take (actor 'npc_guard_01' is not the player "
-        "— mode A proposes player actions only)",
+        "WITHDRAWN intent take (actor 'npc_guard_01' is not the caller "
+        "'pc_01' — a reply proposes its own caller's actions only)",
         "WITHDRAWN intent take (texture entry not live: tex_9999)",
         "WITHDRAWN intent take (duplicate texture entry in one document: tex_0000)",
+    )
+
+
+def test_feedable_intents_mode_b_gates_on_the_caller(tmp_path: Path) -> None:
+    """scene-2's mode-B half: the caller law — a reply proposes its own
+    caller's actions. An actor call's reply feeds only that actor's
+    proposals; the player's and other NPCs' ride as withdrawals (the
+    same noun-resolution laws apply — liveness, duplicates)."""
+    _sim, mediator = _session(tmp_path)
+    mediator.ledger.apply_delta(
+        {"source": "turn:1", "established": [dict(_CANDLES)]},
+        _events(tmp_path / "run.jsonl"), PACK,
+    )
+    own = _intent(actor="npc_guard_01", texture=dict(_CANDLES_REF))
+    feedable, withdrawn = feedable_intents(
+        [own, _intent(texture=dict(_CANDLES_REF, entry="tex_9999")),
+         _intent(actor="npc_barkeep_01"),
+        ],
+        mediator.ledger, "npc_guard_01",
+    )
+    assert feedable == (own,)
+    assert withdrawn == (
+        "WITHDRAWN intent take (actor 'pc_01' is not the caller "
+        "'npc_guard_01' — a reply proposes its own caller's actions only)",
+        "WITHDRAWN intent take (actor 'npc_barkeep_01' is not the caller "
+        "'npc_guard_01' — a reply proposes its own caller's actions only)",
     )
 
 
@@ -306,6 +332,13 @@ def test_texture_intent_feeds_the_door_and_promotes(tmp_path: Path) -> None:
     assert take.type == "take"
     assert entry.cause == take.id  # the committed take event is the promotion cause
     assert sim.projection["loc_tavern"]["candles"] == "lit"  # canon birth
+    # scene-2: the accept started the chorus drain (the session moved to
+    # the tavern — the queue holds the present declared NPCs) — the beat
+    # closes only when the drain resolves: an actor reply, a dry skip, or
+    # the next player call dropping the drain
+    assert mediator.beat_open
+    while mediator.beat_open:
+        mediator.dry_close()  # the operators decline each actor — template rung
     assert not mediator.beat_open
 
 

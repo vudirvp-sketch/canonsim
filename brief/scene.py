@@ -24,11 +24,21 @@ about who talks. `speaking_queue` is that fold:
   through the chronicle — the deterministic prose of phase 0; never a
   blocked beat, never a silent drop).
 
+Scene-2's session-side folds (the drain's own laws, BRIEF_SPEC §3.9):
+
+- `present_at_scene` — the drain's live re-verification: an actor's
+  call never goes to an NPC standing elsewhere (presence re-read at
+  each emission, the snapshot never trusted past its tick);
+- `recall_query` — the mediator's keyword query: the knows tokens the
+  beat window minted for the knower (BRIEF_SPEC §3.5's relevance
+  signal — leak-free by construction: the tokens ARE the knower's own
+  fresh records).
+
 Pure: reads (events, pack), writes nothing (INV-1); no RNG, no
 wall-clock (INV-2); no LLM, no network (INV-4). The session-loop
-wiring — when the chorus fires inside the beat cycle and how actor
-replies feed the door — is the next row (TASKS `scene-2`); this module
-is the law the wiring will obey.
+wiring — the drain inside the beat cycle and the actor replies through
+the intent door — is `cli/mediator.py` (scene-2); this module is the
+law the wiring obeys.
 """
 
 from __future__ import annotations
@@ -36,6 +46,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import TYPE_CHECKING
 
+from brief.assembler import last_beat_tick
 from brief.ledger import current_scene
 from core.fold import fold, initial_projection, present_in_order
 from core.log import EventRecord
@@ -43,7 +54,7 @@ from core.log import EventRecord
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle
     from core.pack import Pack
 
-__all__ = ["speaking_queue"]
+__all__ = ["present_at_scene", "recall_query", "speaking_queue"]
 
 
 def speaking_queue(events: Sequence[EventRecord], pack: "Pack") -> tuple[str, ...]:
@@ -69,3 +80,44 @@ def speaking_queue(events: Sequence[EventRecord], pack: "Pack") -> tuple[str, ..
         and pack.kind_of(entity_id) == "npc"
         and entity_id in actors
     )[:cap]
+
+
+def present_at_scene(
+    events: Sequence[EventRecord], pack: "Pack", entity_id: str
+) -> bool:
+    """Whether the entity is structurally present at the current scene's
+    location (scene-2, the drain's live re-verification): the chorus
+    snapshot is taken once per beat, but a call never goes to an NPC
+    standing elsewhere — presence is re-read from the projection at
+    each emission, never trusted past its tick (the presence fold's own
+    answer, no second mechanism)."""
+    scene = current_scene(events, pack)
+    state = fold(events, initial_projection(pack.entities))
+    return entity_id in present_in_order(pack, state, scene.location_id)
+
+
+def recall_query(
+    events: Sequence[EventRecord], pack: "Pack", knower: str
+) -> str:
+    """The knower's keyword query (scene-2, mode B — BRIEF_SPEC §3.5's
+    relevance signal, the mediator's own): the `knows` tokens the beat
+    window minted for the knower — the §3.2 window law (events after
+    the last beat tick; the whole log before the first beat), first-seen
+    order, space-joined. The query ranks the knower's own memory: its
+    OLD records sharing words with the fresh ones ride up (the
+    three-signal shape's third term). Leak-free by construction — the
+    tokens ARE the knower's own fresh records, a held-by-another token
+    can never enter the query (T3's twin). The empty window is the
+    honest empty query: no fresh fact, no fabricated signal — the
+    two-signal ranking stands."""
+    window_start = last_beat_tick(pack.rules, events[-1].t if events else 0)
+    tokens: list[str] = []
+    seen: set[str] = set()
+    for event in events:
+        if window_start is not None and event.t <= window_start:
+            continue
+        for record in event.knowledge:
+            if record.who == knower and record.knows not in seen:
+                seen.add(record.knows)
+                tokens.append(record.knows)
+    return " ".join(tokens)

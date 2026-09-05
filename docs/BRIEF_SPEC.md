@@ -189,15 +189,26 @@ against `max_items` (the top-k law). No pack data beyond
 (INV-3).
 
 The surviving raw records rank by the Generative Agents three-signal
-shape with two deterministic inputs (the relevance signal arrives with
-the mediator, §9):
+shape (the relevance signal landed with scene-2 — the mediator owns
+the query, §9's deferral closed):
 
 ```
 score = recency_weight / (1 + current_tick - record.at)
       + importance_weight * rank(record.source_event.importance)
+      + relevance_weight * overlap(query, record)
 ```
-- `recency_weight`, `importance_weight`, `max_items`: pack data.
-  `rank`: low=0, medium=1, high=2.
+- `recency_weight`, `importance_weight`, `relevance_weight`,
+  `max_items`: pack data.  `rank`: low=0, medium=1, high=2.
+- `overlap(query, record) = |query_words ∩ knows_words| /
+  |query_words|` over the word view (`core.retrieval.word_tokens` —
+  the ladder's floor semantics, the single owner of the word view;
+  rung-independent by construction: the brief's bytes never hinge on
+  a SQLite build's FTS5 presence).
+- The query is **mode B only**: the knower's fresh-window tokens
+  (`brief/scene.py::recall_query` — the knows tokens the beat window
+  minted for the knower; leak-free by construction, T3's twin). Mode
+  A never queries — the two-signal shape, the committed corpus bytes
+  (any `relevance_weight` is inert there; the zero-regen law).
 - Tie-break: acquisition order (construction order, INV-2).
 - **Dedup by `knows` token**: the best-ranked record per token
   survives — the brief shows what the PC knows, not the learning
@@ -271,9 +282,40 @@ scene's location, pack declaration order (INV-2), capped by
 to the L12 template rung (their beats already render through the
 chronicle — never a blocked beat). A pack without the `chorus` block
 runs mode B off — the queue is empty, every run byte-identical (the
-pack's own declaration is the gate, INV-3). The session-loop wiring —
-when the chorus fires inside the beat cycle, and how actor replies
-feed the door — is the `scene-2` row (TASKS backlog).
+pack's own declaration is the gate, INV-3).
+
+**The session wiring (scene-2 — the drain inside the beat cycle).**
+The mediator (`cli/mediator.py`) owns the drain: a beat is the
+player's exchange, then the chorus. On the player's ACCEPT the
+mediator snapshots `speaking_queue` over the post-action log — **the
+beat's own cast, fixed at curtain** (mid-beat arrivals join the NEXT
+beat's chorus; the queue is never re-taken mid-beat) — and drains it
+head-first, one actor call per queued NPC. Each actor exchange is the
+SAME cycle (shape gate → proposal verdicts → texture gateway →
+intents through the door → promotions) with its own regen budget (one
+budget per narrator exchange — the mode-A law preserved exactly) and
+its own **caller gate**: `feedable_intents` keeps a proposal only when
+its actor is the call's own caller (a reply proposes its own caller's
+actions — mode A's caller is the player, mode B's the actor; the
+actor's intents feed the door as actor steps, INTENT_SCHEMA §9). The
+drain's guards, all L12 — never a blocked beat, never a silent drop:
+
+- **live presence re-verification** — each emission re-reads presence
+  (`brief/scene.py::present_at_scene`): an NPC who left the scene
+  mid-drain is skipped (the template rung); a call never goes to an
+  NPC standing elsewhere.
+- **`narrate dry`** on an actor call skips that actor and advances;
+  on the player's call it closes the whole beat (declining the head
+  declines the beat — the chorus never starts).
+- **a bare `narrate`** (the player's next beat) DROPS a pending drain
+  — the unanswered actor calls fall to the template rung (the
+  operator moved on).
+- an exhausted actor budget drops that actor to the template rung
+  with the refusal notes on the result; the drain lives on.
+
+The notes' law is subject-scoped (§7.1): the withdrawal notes minted
+by a reply wait for the NEXT PLAYER call — the actor calls never
+consume them; an actor's own regen refusals ride its own re-emit.
 
 ## 4. Token model
 
@@ -354,7 +396,8 @@ brief's static text is mediator data, not chronicle grammar.
     "active_options":  {"soft": 90, "hard": 120}
   },
   "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
-                      "importance_weight": 1.0},
+                      "importance_weight": 1.0,
+                      "relevance_weight": 1.0},
   "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
   "present_entities": {"max_entities": 8, "max_pairs": 6,
                         "scene_line_fields": ["layout"],
@@ -387,7 +430,9 @@ list of strings; every `directives` line fits its own hard budget
 (never-dropped data must fit by construction); `lore` entries carry
 `id` (unique), `text`, `from_beat >= 0 < to_beat` (ints);
 `voice_exemplars` a list of strings; `recalled_facts` weights
-non-negative numbers, `max_items >= 1`; `scene_texture` caps integers
+non-negative numbers (`recency_weight`, `importance_weight`, and
+`relevance_weight` — scene-2's third signal, inert without a query),
+`max_items >= 1`; `scene_texture` caps integers
 >= 1, `unique_slots` unique non-empty strings (empty = no globally-
 unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
 `present_entities` caps integers >= 1 and a `card_markers` table
@@ -439,14 +484,20 @@ appended protocol section (block geometry — one blank line separator):
 
 ```
 ## narrator_protocol
+actor: <id>            # mode B only (scene-1): whose beat-projection
 anchor: <len(events) at assembly>
 regen: <used>/<max>
+query: <keywords>      # mode B, scene-2: the relevance signal's text
+retrieval: fact <ref> (<channel>/<fidelity>, <source>)  # the ladder's top rows
+retrieval: lore <ref>
 <note line>            # refusal / withdrawal notes, verbatim, zero or more
 ```
 
 `anchor` is the OCC anchor a reply's proposal must carry
-  (`VALIDATION_SPEC.md` §5); `regen` is the per-beat counter (its §7);
-  notes are the dry refusal lines riding the call's top. A pure function
+  (`VALIDATION_SPEC.md` §5); `regen` is the per-exchange counter (its
+  §7 — scene-2: one budget per narrator exchange, the mode-A law
+  preserved exactly); notes are the dry refusal lines riding the
+  re-invocation. A pure function
   of (log, ledger, pack) + the protocol state — same inputs → same bytes
   (the D-049 quarantine). The reply document's contract is
   `VALIDATION_SPEC.md` §7.1's. **Mode B (scene-1, §3.9): the actor call
@@ -455,6 +506,27 @@ regen: <used>/<max>
   carries — the operator knows whose voice to speak); mode A's bytes
   carry no actor line (the player is the narrator's subject by
   construction — the committed corpus shape, unchanged).**
+
+**Scene-2's protocol lines (mode B only; mode A's bytes carry none of
+them):** `query:` — the keyword query that ranked this actor's memory
+(§3.5's relevance signal, `brief/scene.py::recall_query` — the
+operator sees WHY the records ranked as they did); `retrieval:` — the
+retrieval ladder's top rows for that query (`RetrievalIndex.query`,
+capped at `RETRIEVAL_LINES = 3` — the ladder's first runtime QUERY
+consumer, one index build per actor call, `cli/mediator.py::_emit_actor`):
+dry demand handles, no scores, no prose (L2) — the ORDER carries the
+ranking (the source-outranks law visible); fact rows carry the
+fidelity and the minting event id (the expansion law's handle), lore
+rows the lore id. A pack without a `retrieval` block serves no rows
+(the ladder is the pack's own declaration, INV-3).
+
+**The notes' subject-scoping (scene-2):** the withdrawal notes minted
+by a reply (whose proposals were withdrawn — the caller gate or the
+noun resolution) ride the NEXT PLAYER call — the actor calls never
+consume them (the operator's beat-level feedback channel); an actor's
+own regen refusals ride that actor's re-emit. The committed corpus
+pins this law: the withdrawals surface on the player's next call,
+unchanged by the chorus in between.
 
 ## 8. Versioning
 
@@ -467,12 +539,12 @@ bytes = a spec edit in the same commit as the code change.
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| Relevance signal (query keyword match) | the mediator (it owns the query) | BRIEF_SPEC §3.5 |
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
-| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | the mode-B session wiring (`scene-2`) | blueprint §1 |
+| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | `tex-1` (TASKS backlog — scene-2's row carried the wiring only; the underdeliver law, the remainder re-pointed) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
-| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9; the session wiring + the actor reply door is the `scene-2` row) | blueprint §1 |
-| Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder; the brief's own read stays scheduled-window until the mediator's query arrives) | STORE-1 |
+| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9) | blueprint §1 |
+| Relevance signal (query keyword match) | **landed iter-61** (scene-2: `assemble_brief(query=...)` the third signal + `recall_query` the derivation + the ladder's first runtime query — §3.5/§7.1) | BRIEF_SPEC §3.5 |
+| Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder); **queried by the runtime since iter-61** (the actor calls' `retrieval:` lines — §7.1) | STORE-1 |
 | The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |

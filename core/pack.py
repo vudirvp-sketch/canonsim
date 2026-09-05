@@ -2431,7 +2431,7 @@ class _Lint:
             isinstance(recalled, Mapping),
             f"{where}: recalled_facts must be an object",
         )
-        for key in ("recency_weight", "importance_weight"):
+        for key in ("recency_weight", "importance_weight", "relevance_weight"):
             value = recalled.get(key)
             _require(
                 isinstance(value, (int, float))

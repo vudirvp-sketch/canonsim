@@ -1,78 +1,82 @@
 # STATUS — canonsim
 
-Iteration: iter-60 (`iter-60-scene-1` — TASKS.md's top phase-4 todo,
-scene-1: the scene manager + mode B; the owner's "continue per plans"
-call, the §2 design-review verdict standing from iter-58/D-087 —
-re-affirmed this session: the echo/traits/reflection axis split IS
-the ideal solution, no conflict, no KI) ·
+Iteration: iter-61 (`iter-61-scene-2` — TASKS.md's top phase-4 todo,
+scene-2: the mode-B session wiring; the owner's "continue per plans"
+call — no design fork this session: the drain, the door, and the
+query are one mechanism family, the scene-1 verdict's own wiring row;
+no conflict, no KI) ·
 Phase: 4 (Knowledge & scene) — OPEN (iter-55)
-**scene-1 landed: the scene manager + mode B (D-089) —
-`brief/scene.py::speaking_queue` the chorus queue (THE chorus is a
-queue, not a convention: presence-gated at the current scene — a
-projection read; pack-gated — an NPC without a `brief.actors`
-entry is not chorus-eligible, the DORMANT family precedent; kind-
-gated — the player never queued (mode A owns its call), ambients
-never (the knower gate: a group holds records but does not speak);
-pack declaration order, INV-2; capped by `brief.chorus.
-max_actor_calls` — the per-beat actor-call budget, the
-beyond-cap NPCs the L12 template rung, the chronicle already renders
-their beats). The knower parameter `assemble_brief(knower=...)` /
-`narrator_call(knower=...)`: mode A (None, the player) the
-committed corpus bytes BYTE-IDENTICAL by construction (an explicit
-player id renders the same bytes — the zero-regen law); mode B
-(knower=<npc>) the SAME pipeline with three parameterized halves —
-scene_delta the knower's own perception (the blind-NPC law
-parameterized: the knower is the event's actor or holds a record
-born on it; an event nobody told it about never renders, the empty
-window after departure the honest answer), recalled_facts its own
-records + beliefs (the per-knower traits fold — the leak surface
-closed by construction: the records ARE the knower's fold, a
-held-by-another token can never render), directives +
-voice_exemplars the `brief.actors` entry's own role text and voice
-(never the narrator's; the tables disjoint by lint) — and four
-SHARED blocks (scene_texture — one ledger per scene, the chorus
-reads the same texture block, D-049; present_entities —
-observables, L6, the room's structural answer the same for every
-present party; scheduled_lore; active_options — the door's
-grammar, not the knower's). The knower gate: an id that is neither
-the player nor a declared pack NPC is a loud ValueError, never a
-wrong brief. The actor call document: the protocol's `actor: <id>`
-first line (whose beat-projection the call carries — the
-operator knows whose voice to speak; mode A's bytes unchanged, the
-committed corpus shape). MEASURED: the queue live on day1 seed 123
-— (guard_01, barkeep) mid-tavern → (guard_02, barkeep) after
-the watch change (PRESENCE swaps the guard, never a convention
-about who talked) → () at the backyard; the leak surface ZERO
-— every declared actor's brief leak-free at every beat window (6
-windows × 5 actors: every scene_delta line maps to a perceived
-event, every recalled_facts line to a held record or belief; the
-guard-only sighting token never renders in the maid's brief); the
-mode-B belief line live on seed 125 (the guard's
-`paranoid_about_thieves` leads HIS brief with his own provenance,
-the relief's hearsay mint his own); the corpus price ZERO — the
-new pack data inert on the mode-A path (the committed pack vs the
-block-less copy byte-identical), 1055→1085 with zero fixture
-regen.**
+**scene-2 landed: the mode-B session wiring (D-090) — the beat is the
+player's exchange, then the chorus. `cli/mediator.py` owns the drain:
+the player's ACCEPT snapshots `speaking_queue` over the post-action
+log — the beat's own cast, FIXED AT CURTAIN (mid-beat arrivals join
+the NEXT beat's chorus) — and drains it head-first, ONE actor call
+per queued NPC; each actor exchange is the SAME cycle with its OWN
+regen budget (one per narrator exchange — the mode-A per-beat law
+preserved exactly) and its own caller gate. The guards, all L12 —
+never a blocked beat, never a silent drop: the live presence
+re-verification (`brief/scene.py::present_at_scene` — an NPC who
+left mid-drain is skipped, the template rung), `narrate dry` on an
+actor call skips and advances (on the player's call it closes the
+whole beat — declining the head declines the beat), a bare `narrate`
+DROPS a pending drain (the operator moved on). The actor reply door:
+the step grammar's `actor` key (INTENT_SCHEMA §9 — anything but a
+pack NPC id is a loud author error; the band NPC_REACTION) and
+KI#17's generalization — the runner feeds the next step when the
+CURRENT step's own intent ends (intent id, not the actor proxy;
+behavior-preserving for every committed flow); `feedable_intents`'
+caller law (a reply proposes its own caller's actions). The
+mediator's keyword query (BRIEF_SPEC §3.5's relevance signal, the
+deferral closed): `recall_query` the derivation (the knower's
+fresh-window tokens — leak-free by construction, T3's twin; the
+empty window the honest empty query), the assembler's third signal
+(the token overlap over the shared word view — rung-independent,
+the brief's bytes never hinge on a SQLite build; `relevance_weight`
+pack data, mode A never queries — the term inert), and the
+retrieval ladder's first runtime QUERY consumer (one index build +
+query per actor call — the mode-B path pays it, mode A never does;
+the actor calls' `query:`/`retrieval:` protocol lines: the signal
+made visible + the ladder's top rows as dry demand handles, the
+source-outranks order visible in the document). The notes'
+subject-scoping: the withdrawal notes ride the NEXT PLAYER call —
+the actor calls never consume them (the committed corpus pins the
+law). MEASURED: the drain live on a seed-7 session — the player's
+accept hands the guard's call, the guard's the barkeep's, the
+barkeep's closes the beat (the guard's call carries
+query `pc_01_arrived` + the ladder's top row); the caller law
+end-to-end (the guard's reply feeds the guard's look, the committed
+event's actor IS the NPC); the mid-drain departure skipped (the
+PC's move between the guard's call and its dry — the barkeep not
+present, the beat closes); the actor's refusal ladder (a fresh
+budget per exchange, the exhaustion's notes on the result, the
+drain living on); the relevance rerank (the old-record flip under
+the fresh-token query); the actor-call determinism double-run
+identical; the corpus price ZERO — the 10-seed day1_full A/B
+(committed pack vs the chorus/actors/retrieval/relevance-less copy)
+10/10 byte-identical, the narrator corpus 105 + the parse corpus 10
++ the T1 golden replay green unchanged.**
 ·
 Date: 2026-09-05 ·
-Scope: `brief/scene.py` (NEW — the scene manager: the chorus
-queue law), `brief/assembler.py` (the knower parameter — the
-mode-B assembly + the actor static text + the knower gate),
-`brief/mediator.py` (the actor call document), `brief/__init__.py`
-(the speaking_queue export), `core/pack.py` (the chorus + actors
-lint — closed vocabularies, the player-disjoint law, the
-directives construction-fit), `content/tavern_pack/rules.json` (the
-`chorus` block + the 5-NPC `actors` table — role text and voice
-per NPC), `tests/test_scene.py` (NEW — 30 tests: the queue law
-family, the mode-B laws, the leak suite core, the actor call
-document, the lint family), `docs/BRIEF_SPEC.md` (§3.9 + §6 +
-§7.1 + §9's two rows flipped), `docs/TASKS.md` (scene-1 done +
-the scene-2 row — the wiring, the actor reply door, the keyword
-query), `docs/DECISIONS.md` (D-089 into the D-084..D-088 phase
-family, cap 30 held), `docs/AGENT_NAVIGATION.md` (§ brief/ +
-tests/ rows), `worklog.md` (iter-50 evicted), `README.md` (the
-phase-4 paragraph), `STATUS.md` (this header + the Next step flip).
-1055→1085 tests green, ruff clean.
+Scope: `cli/mediator.py` (the drain state machine: the cast snapshot,
+the per-exchange budgets, the drop law, the ladder orchestration,
+`BeatResult.actor`), `core/loop.py` (the actor step key + KI#17's
+exact intent-id feed law), `brief/mediator.py` (the query/retrieval
+protocol lines + `feedable_intents`' caller parameter),
+`brief/scene.py` (`recall_query` + `present_at_scene` — the
+session-side folds), `brief/assembler.py` (the `query` parameter +
+the relevance term), `brief/__init__.py` (the exports),
+`core/retrieval.py` (`word_tokens` public — the word view's single
+owner), `core/pack.py` (the `relevance_weight` lint),
+`content/tavern_pack/rules.json` (`relevance_weight: 1.0` — the GA
+neutral), `cli/main.py` (the chorus print surface + the session
+help), `tests/test_scene.py` (+33 — the scene-2 family),
+`tests/test_mediator.py` (+1 the caller gate; the beat-close law
+adapted to the drain), `docs/BRIEF_SPEC.md` (§3.5/§3.9/§6/§7.1/§9),
+`docs/INTENT_SCHEMA.md` (§9), `docs/TASKS.md` (scene-2 done + the
+tex-1 row), `docs/DECISIONS.md` (D-090 into the phase family, cap
+30 held), `worklog.md` (iter-51 evicted), `STATUS.md` (this header
++ the Next step flip). 20 files — the one-mechanism-family scope
+(the iter-60 pattern). 1085→1118 tests green, ruff clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -95,6 +99,14 @@ phase-4 paragraph), `STATUS.md` (this header + the Next step flip).
   new events.
 
 ## Active KIs
+
+- KI#72 · the BRIEF_SPEC §9 identity-slot row over-projected onto
+  scene-2 vs the TASKS row's scope (both written by iter-60's own
+  edit — the deferral ledger promised the texture-window identity
+  tier with a wiring row that never carried it) · opened+closed
+  iter-61 (re-pointed to the `tex-1` row, the underdeliver law; the
+  lesson: the deferral table's "arrives with" must name the TASKS
+  row's OWN scope, never a projection past it).
 
 - KI#71 · the sqlite-vec license drift (REFERENCES §6 `verify` +
   TECH_NOTES §6 "not yet verified" vs the verified ref doc — the
@@ -542,21 +554,21 @@ phase-4→5 gate.
 ## Next step
 
 **Phase 4 (Knowledge & scene) is OPEN — leg-1/leg-2/leg-3/leg-3b/
-retr-1/scene-1 are LANDED (D-084..D-089, the phase family row): the
-trait fold with its brief read, the reflection mint, the arming, the
-retrieval ladder, and now the scene manager + mode B — the chorus
-queue (`brief/scene.py::speaking_queue`: presence/pack/kind gates,
-pack order, the per-beat cap) and the knower-parameterized brief
-(mode A byte-identical; mode B the actor's own perception, memory,
-role and voice — the leak surface closed by construction and measured
-zero on every declared actor at every beat window; the actor call
-document's `actor:` line). The next row: `scene-2` the mode-B session
-wiring — the mediator drains the queue inside the beat cycle (one
-actor call per queued NPC, the beyond-cap NPCs the template rung),
-the actor reply door (proposals with actor=<npc> through the intent
-door — `feedable_intents`' mode-B half), and the mediator's keyword
-query (BRIEF_SPEC §3.5's relevance signal — the retrieval ladder's
-first QUERY consumer, retr-1's DORMANT gate). The exit criterion
+retr-1/scene-1/scene-2 are LANDED (D-084..D-090, the phase family
+row): the trait fold with its brief read, the reflection mint, the
+arming, the retrieval ladder (now QUERIED by the runtime — the actor
+calls' protocol lines), the scene manager + mode B, and now the
+session wiring — the chorus drain inside the beat cycle (the cast
+fixed at curtain, live presence re-verification, the drop law, one
+budget per exchange), the actor reply door (the step grammar's
+`actor` key through the SAME front door, KI#17's exact feed law,
+`feedable_intents`' caller gate), and the keyword query (§3.5's
+relevance signal: the leak-free derivation, the pure third term,
+the ladder's first runtime QUERY consumer). The next row: `tex-1`
+the scene_texture window's identity tier + per-scope quotas
+(blueprint §1's identity-persistence resolution, re-pointed from
+scene-2's projection — the underdeliver law) or `leg-4` mode F
+offline on the owner's call. The exit criterion
 "0 leaks on the blind-NPC suite" reads T3 (`docs/TEST_PLAN.md` §1)
 extended to the phase-4 surfaces — the blind-1 row owns the
 instrument (mode B + retrieval outputs under the zero-leak law); the
@@ -571,10 +583,11 @@ verdict record: D-083 + worklog iter-54.**
    two LEGEND_SPEC contract points live; the corpus price zero) →
    `scene-1` LANDED (iter-60, D-089 — the chorus queue + the knower
    parameter + the actor call document; the leak suite core live;
-   the corpus price zero) → `scene-2` the mode-B session wiring (the
-   queue drain in the beat cycle, the actor reply door, the
-   mediator's keyword query — the ladder's first QUERY consumer) →
-   `leg-4` mode F offline → `blind-1` the leak
+   the corpus price zero) → `scene-2` LANDED (iter-61, D-090 — the
+   drain, the actor reply door, the keyword query; the ladder's
+   DORMANT gate opened; the corpus price zero) → `tex-1` the
+   texture-window identity tier (re-pointed from scene-2's §9
+   projection) / `leg-4` mode F offline → `blind-1` the leak
    suite's extension.
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision

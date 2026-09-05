@@ -53,6 +53,7 @@ from core.fold import fold, initial_projection, present_in_order
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
 from core.pack import BRIEF_BLOCK_IDS, Pack
+from core.retrieval import word_tokens
 from core.traits import Trait, crystallized_traits
 from render.chronicle import display_name
 
@@ -236,20 +237,25 @@ def _belief_lines(
 
 
 def _recalled_fact_lines(
-    events: Sequence[EventRecord], pack: Pack, *, knower: str
+    events: Sequence[EventRecord], pack: Pack, *, knower: str,
+    query: str | None = None,
 ) -> list[str]:
-    """The knower's own knowledge, ranked by recency + importance (the
-    two deterministic signals; relevance arrives with the mediator —
-    BRIEF_SPEC §3.5), deduped by token, capped at `max_items` — and read
-    through the derived-trait lens (leg-2, the phase-4 clause): the
-    knower's crystallized beliefs lead the block as belief lines, and
-    the family records that minted them render nothing raw — the belief
-    is the derived view, the source records stay queryable on demand
-    via the provenance ids (the expansion law, `core/traits.py::
-    expand_trait`). Size O(traits + records), never O(history). Mode A
-    passes the player; mode B passes the actor (scene-1 — the per-NPC
-    brief's leak surface: a record the knower does not hold can never
-    render, by construction — the records ARE the knower's fold)."""
+    """The knower's own knowledge, ranked by the Generative-Agents
+    signal shape (BRIEF_SPEC §3.5): recency + importance always, plus
+    relevance when the mediator's query rides the assembly (scene-2,
+    mode B — the token-overlap match of the query's words against the
+    record's `knows` words; `query=None` is mode A's two-signal shape,
+    the committed corpus bytes), deduped by token, capped at
+    `max_items` — and read through the derived-trait lens (leg-2, the
+    phase-4 clause): the knower's crystallized beliefs lead the block
+    as belief lines, and the family records that minted them render
+    nothing raw — the belief is the derived view, the source records
+    stay queryable on demand via the provenance ids (the expansion
+    law, `core/traits.py::expand_trait`). Size O(traits + records),
+    never O(history). Mode A passes the player; mode B passes the
+    actor (scene-1 — the per-NPC brief's leak surface: a record the
+    knower does not hold can never render, by construction — the
+    records ARE the knower's fold)."""
     config = pack.rules["brief"]["recalled_facts"]
     current_tick = events[-1].t if events else 0
     importance_of = {event.id: event.importance for event in events}
@@ -257,6 +263,8 @@ def _recalled_fact_lines(
     records = view.records_of(knower)
     recency_weight = float(config["recency_weight"])
     importance_weight = float(config["importance_weight"])
+    relevance_weight = float(config["relevance_weight"])
+    query_terms = frozenset(word_tokens(query)) if query else frozenset()
 
     # leg-2: the fold reads as DATA at the assembly tick (the honest
     # read-model law shared with the echo); beliefs in declaration
@@ -279,7 +287,17 @@ def _recalled_fact_lines(
     def score(record: Any) -> float:
         age = current_tick - record.at
         rank = _IMPORTANCE_RANK[importance_of[record.source]]
-        return recency_weight / (1 + age) + importance_weight * rank
+        relevance = (
+            len(query_terms & frozenset(word_tokens(record.knows)))
+            / len(query_terms)
+            if query_terms
+            else 0.0
+        )
+        return (
+            recency_weight / (1 + age)
+            + importance_weight * rank
+            + relevance_weight * relevance
+        )
 
     ranked = sorted(records, key=score, reverse=True)  # stable: acquisition wins ties
     seen: set[str] = set()
@@ -571,6 +589,7 @@ def assemble_brief(
     ledger: SceneLedger | None = None,
     *,
     knower: str | None = None,
+    query: str | None = None,
 ) -> Brief:
     """Assemble the eight blocks from a log + ledger (pure — BRIEF_SPEC
     §2/§3). `ledger=None` renders an empty scene_texture block (a log
@@ -584,6 +603,14 @@ def assemble_brief(
     narrator's; the scene_texture window, the entity cards, the lore,
     and the options stay shared — one scene, one grammar, observables
     only, L6).
+
+    `query` is the mediator's keyword query (scene-2, mode B — §3.5's
+    relevance signal): `None` keeps the two-signal ranking (mode A —
+    the committed corpus bytes, byte-identical by construction); a
+    query string adds the relevance term — the token-overlap match of
+    the query's words against each record's `knows` words (the word
+    view `core.retrieval.word_tokens` owns; rung-independent — the
+    brief's bytes never hinge on a SQLite build's FTS5 presence).
 
     Deterministic by construction: no RNG, no wall-clock, construction
     order or explicit sorts only. The pack's lint guarantees the `brief`
@@ -608,7 +635,9 @@ def assemble_brief(
         "scene_delta": _scene_delta_lines(events, pack, knower=knower),
         "scene_texture": _scene_texture_items(events, pack, texture_ledger),
         "present_entities": _present_entity_items(events, pack),
-        "recalled_facts": _recalled_fact_lines(events, pack, knower=knower),
+        "recalled_facts": _recalled_fact_lines(
+            events, pack, knower=knower, query=query
+        ),
         "scheduled_lore": _lore_lines(pack, beats=beats),
         "voice_exemplars": exemplar_lines,
         "active_options": _option_lines(pack),
@@ -639,9 +668,12 @@ def brief_from_log(
     ledger: SceneLedger | None = None,
     *,
     knower: str | None = None,
+    query: str | None = None,
 ) -> str:
     """Read a committed log and render its brief — the golden-fixture
     byte-identity entry point (same (log, ledger) → same brief bytes);
-    `knower` passes through to `assemble_brief` (mode B)."""
+    `knower`/`query` pass through to `assemble_brief` (mode B)."""
     _header, events = read_log(log_path, schema)
-    return render_brief(assemble_brief(events, pack, ledger, knower=knower))
+    return render_brief(
+        assemble_brief(events, pack, ledger, knower=knower, query=query)
+    )

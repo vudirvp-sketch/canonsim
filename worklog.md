@@ -16,6 +16,28 @@
 
 
 ---
+iter-61 · 2026-09-05 · scene-2 — the mode-B session wiring (phase 4,
+TASKS' top row; the owner's "continue per plans" call; 20 files —
+over the soft limit: the drain + the door + the query + the pack
+arming + the corpus suite are one mechanism family, the iter-60 scope
+pattern)
+- cli/mediator.py (the drain: the cast snapshot at the player's
+  accept, one actor call per NPC, live presence re-verification, the
+  drop law, one budget per exchange) + the actor step key through the
+  door (core/loop.py, KI#17's exact intent-id law) +
+  feedable_intents' caller gate (brief/mediator.py).
+- The keyword query: recall_query (brief/scene.py) + the assembler's
+  relevance term (pure overlap, rung-independent) + the ladder's
+  first runtime query — the actor calls' query:/retrieval: lines.
+- Measured: the drain live on seed 7 (guard → barkeep → close); the
+  caller's event committed; the corpus price zero (10-seed A/B, the
+  corpus 105 + T1 untouched). +33 test_scene; 1085→1118, ruff clean.
+  D-090 into the phase family (cap 30 held); TASKS scene-2 done +
+  tex-1 re-pointed. TASKS 601 — one over the 600 cap after the
+  done-row collapse, two squeezes, and a phase-3-verdict de-dup pass:
+  the remaining rows are phase-ledger substance (§6.1, kept). iter-51
+  evicted; 10 entries after.
+---
 iter-60 · 2026-09-05 · scene-1 — the scene manager + mode B (phase 4,
 TASKS' top row; the owner's "continue per plans" call; 14 files —
 over the soft limit: the queue + the parameterization + the pack
@@ -151,14 +173,3 @@ LIVE (the release-chain layer's first LIVE consumer)
   corpus 105/105 pin-green, ZERO re-distill (the birth-record law).
   +6 tests/test_arc_driver.py; 960→966, ruff clean. D-081 + TASKS
   + TEST_PLAN §6.
----
-iter-51 · 2026-09-04 · content-5 — the echo driver, the jittery-watcher
-beat LIVE (social-2's live content set)
-- rules.json: the guard's urgency entry (look_around, echo_at_least
-  dread >= 15, p=100); the wariness arm measured FIRST and refused
-  (34/105 cases + the never-fading rotation-renewed residue). Zero
-  engine edits.
-- The corpus: ZERO broken pins + the deliberate pins on the
-  watch-change case; day1_full 10/10 byte-identical (the
-  dread-silent law). tests/test_echo.py flipped to the committed
-  pack; 959→960, ruff clean. D-080 + TASKS + TEST_PLAN §6.
