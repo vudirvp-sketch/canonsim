@@ -355,13 +355,24 @@ def _scene_texture_items(
 ) -> list[str]:
     """The 7th block's item lines (BRIEF_SPEC §3.3 — the window law):
     live (active+pinned) entries whose scope matches the current scene
-    or a present entity, ranked pinned-first then newest-first with
+    or a present entity, ranked by the identity-or-pinned tier — an
+    entry whose `slot` is pack-declared `identity_slots` ranks WITH
+    `pinned` (tex-1, blueprint §1's identity-persistence resolution:
+    identity must not compete with fresh texture on recency), pinned
+    above identity within the tier — then newest-first with
     construction-order tie-break (ids allocate in append order, so the
-    index is the tie-break), capped by `max_items`; then tombstone lines
-    for contradicted entries in the same scope window, newest-first,
-    capped by `tombstone_max_items` (D-049: prevention + enforcement,
-    both bounded). The ledger never evicts — ALL boundedness is this
-    window; the caps are ranking caps, not budget drops (D-047 law).
+    index is the tie-break; an empty `identity_slots` reduces the key
+    to the pinned-only law exactly, the D-048 bytes). The per-entity
+    quota walk follows the ranking: at most `per_entity_max_items`
+    lines per entity scope (a chatty entity cannot flood the window —
+    and the tier already put its identity slots first, "identity slot
+    first" by construction), then capped by `max_items`. Both caps are
+    ranking caps, not budget drops (the D-047 law: beyond-cap items
+    render nothing, never dropped, never marked). Tombstones for
+    contradicted entries in the same scope window render newest-first,
+    capped by `tombstone_max_items`, AFTER the live lines (prevention +
+    enforcement both bounded, D-049; tombstones carry no quota — their
+    own cap bounds them, and a refuted identity line is gone).
     Scene-scoped entries additionally require `t >= scene.from_tick` —
     texture from an earlier scene at the same location is gone with
     that scene (a revisit starts empty), even if a stale ledger still
@@ -371,6 +382,8 @@ def _scene_texture_items(
     scene = current_scene(events, pack)
     state = fold(events, initial_projection(pack.entities))
     present = present_entities(state, scene.location_id, pack)
+    identity_slots = frozenset(config["identity_slots"])
+    per_entity_cap = int(config["per_entity_max_items"])
     window: list[tuple[int, LedgerEntry]] = []
     tombs: list[tuple[int, LedgerEntry]] = []
     for index, entry in enumerate(ledger.entries):  # construction order
@@ -387,12 +400,37 @@ def _scene_texture_items(
             window.append((index, entry))
         elif entry.status == CONTRADICTED:
             tombs.append((index, entry))
-    window.sort(key=lambda pair: (pair[1].status != PINNED, -pair[0]))
+
+    def tier_key(pair: tuple[int, LedgerEntry]) -> tuple[bool, bool, int]:
+        # identity-or-pinned -> pinned -> newest -> construction: the
+        # tier term first (identity joins pinned), pinned within the
+        # tier, then the index descending (newest, the construction
+        # tie-break — the pre-tex-1 key when identity_slots is empty).
+        pinned = pair[1].status == PINNED
+        return (
+            not pinned and pair[1].slot not in identity_slots,
+            not pinned,
+            -pair[0],
+        )
+
+    window.sort(key=tier_key)
     tombs.sort(key=lambda pair: -pair[0])
+    taken: list[LedgerEntry] = []
+    entity_counts: dict[str, int] = {}
+    for _index, entry in window:
+        split = split_scope(entry.scope)
+        if split is not None and split[0] == ENTITY_SCOPE_PREFIX:
+            count = entity_counts.get(split[1], 0)
+            if count >= per_entity_cap:
+                continue  # the quota: beyond-K entity lines render nothing
+            entity_counts[split[1]] = count + 1
+        taken.append(entry)
+        if len(taken) == int(config["max_items"]):
+            break
     lines = [
         f"- [t {entry.t}, {entry.status}] {_texture_prefix(entry)}"
         f"{entry.slot} = {entry.value}"
-        for _index, entry in window[: int(config["max_items"])]
+        for entry in taken
     ]
     lines.extend(
         f"- [t {entry.t}, refuted] {_texture_prefix(entry)}"

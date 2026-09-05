@@ -882,6 +882,340 @@ def test_pack_lint_catches_duplicate_unique_slots(tmp_path: Path) -> None:
         load_pack(_broken_pack(tmp_path, mutate))
 
 
+# -- tex-1: the identity tier + per-scope quotas (iter-62, blueprint §1) ---------
+
+
+def _establish(
+    ledger: SceneLedger, events: list[Any], items: list[dict[str, str]]
+) -> None:
+    """One multi-establishment delta (the tex-1 fixture family: identity
+    slots, chatty entities, scene texture in one construction order)."""
+    ledger.apply_delta({"source": "turn:1", "established": items}, events, PACK)
+
+
+def test_scene_texture_identity_slot_outranks_newer_plain_texture() -> None:
+    """The trader problem (blueprint §1, tex-1): identity must not compete
+    with fresh scene texture on recency — an identity slot on an OLDER
+    construction index ranks above every newer plain entry; the tier, not
+    the tick, keeps long-session identity alive."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "He spoke in clipped halves."},
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+        {"scope": "entity:npc_barkeep_01", "slot": "apron", "value": "stained",
+         "surface": "A stained apron."},
+    ])
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
+        "- [t 32, active] npc_barkeep_01: apron = stained",  # newest plain
+        "- [t 32, active] candles = lit",
+    ]
+
+
+def test_scene_texture_identity_slot_is_a_slot_class_not_a_scope_condition() -> None:
+    """The tier keys the SLOT name (the pack's identity vocabulary), never
+    the scope kind: a scene-scoped entry in a declared identity slot ranks
+    in the tier too — one rule, no scope special case (L14)."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "scene:loc_tavern", "slot": "shadows", "value": "long",
+         "surface": "Long shadows."},
+        {"scope": "scene:loc_tavern", "slot": "look", "value": "smoky",
+         "surface": "A smoky look."},
+    ])
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] look = smoky",  # the identity slot ranks in the tier
+        "- [t 32, active] shadows = long",
+    ]
+
+
+def test_scene_texture_pinned_outranks_identity_within_the_tier() -> None:
+    """Blueprint §1's key: identity-or-pinned -> pinned -> newest ->
+    construction — pinning is the explicit mark, identity the class law;
+    within the tier pinned ranks first (the pre-tex-1 law's exact top)."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped halves."},
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+    ])
+    ledger.apply_delta(
+        {"source": "turn:2", "refs": [{"id": "tex_0001"}]}, events[:2], PACK
+    )  # pin the scene entry
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, pinned] candles = lit",  # pinned within the tier
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
+    ]
+
+
+def test_scene_texture_identity_survives_max_items_pressure() -> None:
+    """The resolution's point, live: with the ONE global cap squeezed to
+    1, the older identity slot survives and the newer plain entry renders
+    nothing — a crowded scene never silently evicts identity (the
+    pre-tex-1 behavior evicted exactly what long sessions must keep)."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(max_items=1)
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped halves."},
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+    ])
+    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    body = _blocks(text)["scene_texture"]
+    assert body == ["- [t 32, active] npc_guard_01: speech_pattern = clipped"]
+    assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
+
+
+def test_scene_texture_per_entity_quota_caps_a_chatty_entity() -> None:
+    """The per-scope quota (at most K lines per entity): a chatty guard
+    (three plain entries + one identity) renders exactly K=2 lines — the
+    identity slot first (the tier put it there before the walk), the
+    newest plain second — while the barkeep's and the scene's lines pass
+    untouched (the quota frees the window for the room and the others)."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+        {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
+         "surface": "Muddy."},
+        {"scope": "entity:npc_guard_01", "slot": "scar", "value": "brow",
+         "surface": "Scar."},
+        {"scope": "entity:npc_guard_01", "slot": "gait", "value": "limping",
+         "surface": "Limping."},
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped."},
+        {"scope": "entity:npc_barkeep_01", "slot": "apron", "value": "stained",
+         "surface": "Stained."},
+    ])
+    text = render_brief(assemble_brief(events[:2], PACK, ledger))
+    body = _blocks(text)["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
+        "- [t 32, active] npc_barkeep_01: apron = stained",  # newest plain
+        "- [t 32, active] npc_guard_01: gait = limping",  # the guard's Kth line
+        "- [t 32, active] candles = lit",  # scene scope: never quota'd
+    ]
+    assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
+
+
+def test_scene_texture_quota_bounds_identity_too() -> None:
+    """The quota is the anti-flood law, the tier the anti-eviction law —
+    they compose without exception: an entity holding MORE identity slots
+    than K renders exactly K of them (newest identity first); identity
+    cannot become a flooding channel."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped."},
+        {"scope": "entity:npc_guard_01", "slot": "look", "value": "weathered",
+         "surface": "Weathered."},
+        {"scope": "entity:npc_guard_01", "slot": "mannerism", "value": "thumb on belt",
+         "surface": "Thumb."},
+    ])
+    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: mannerism = thumb on belt",  # newest identity
+        "- [t 32, active] npc_guard_01: look = weathered",  # the Kth identity
+    ]
+
+
+def test_scene_texture_quota_at_max_items_is_the_inert_state() -> None:
+    """The documented off switch: a quota >= max_items changes nothing —
+    the chatty-entity ledger renders every live line (the pack's own
+    declaration is the gate, INV-3)."""
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(per_entity_max_items=8)
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+        {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
+         "surface": "Muddy."},
+        {"scope": "entity:npc_guard_01", "slot": "scar", "value": "brow",
+         "surface": "Scar."},
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped."},
+    ])
+    body = _blocks(render_brief(assemble_brief(events[:2], pack, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
+        "- [t 32, active] npc_guard_01: scar = brow",
+        "- [t 32, active] npc_guard_01: cloak = muddy hem",
+        "- [t 32, active] candles = lit",
+    ]
+
+
+def test_scene_texture_tombstones_carry_no_quota() -> None:
+    """The quota walks the LIVE window only: contradicted entries render
+    by their own cap (tombstone_max_items), newest-first — a refuted
+    identity line is gone, the tombstone half has its own boundedness
+    (D-049)."""
+    from core.log import StateChange
+
+    pack = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(per_entity_max_items=1)
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
+         "surface": "Muddy."},
+        {"scope": "entity:npc_guard_01", "slot": "scar", "value": "brow",
+         "surface": "Scar."},
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped."},
+    ])
+    ledger.retire_contradicted(
+        (
+            EventRecord(
+                id="ev_9000", t=40, type="scuffle", actor="npc_drunk_01", cause=None,
+                outcome={}, knowledge=(), hooks=(), importance="low",
+                provenance={"seed": 42}, target=None,
+                state_changes=(StateChange("npc_guard_01", "cloak", None, "torn"),),
+            ),
+            EventRecord(
+                id="ev_9001", t=44, type="scuffle", actor="npc_drunk_01", cause="ev_9000",
+                outcome={}, knowledge=(), hooks=(), importance="low",
+                provenance={"seed": 42}, target=None,
+                state_changes=(StateChange("npc_guard_01", "scar", None, "hidden"),),
+            ),
+        )
+    )
+    body = _blocks(render_brief(assemble_brief(events[:2], pack, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # K=1 live line
+        "- [t 32, refuted] npc_guard_01: scar (cause: ev_9001)",  # tombs unquota'd
+        "- [t 32, refuted] npc_guard_01: cloak (cause: ev_9000)",
+    ]
+
+
+def test_scene_texture_empty_identity_slots_is_the_pinned_only_law() -> None:
+    """The reduction law: with `identity_slots` empty the tier key
+    collapses to the pre-tex-1 pinned-only key exactly — the speech entry
+    ranks among the plain by construction index, pinned still first
+    (the D-048 bytes preserved for any pack that declares no tier)."""
+    stripped = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(identity_slots=[])
+    )
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = SceneLedger()
+    _establish(ledger, list(events[:2]), [
+        {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
+         "surface": "Tallow candles."},
+        {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
+         "surface": "Clipped."},
+        {"scope": "entity:npc_guard_01", "slot": "gait", "value": "limping",
+         "surface": "Limping."},
+    ])
+    ledger.apply_delta(
+        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[:2], PACK
+    )  # pin the scene entry
+    body = _blocks(render_brief(assemble_brief(events[:2], stripped, ledger)))["scene_texture"]
+    assert body == [
+        "- [t 32, pinned] candles = lit",  # pinned first (the old law's top)
+        "- [t 32, active] npc_guard_01: gait = limping",  # newest plain
+        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
+    ]
+
+
+def test_pack_lint_catches_duplicate_identity_slots(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["scene_texture"]["identity_slots"] = [
+            "speech_pattern", "speech_pattern",
+        ]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="identity_slots must be unique"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_non_string_identity_slots(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["scene_texture"]["identity_slots"] = ["speech_pattern", 3]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="identity_slots must be unique"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_requires_per_entity_quota(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        del rules["brief"]["scene_texture"]["per_entity_max_items"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="per_entity_max_items must be an integer >= 1"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_zero_per_entity_quota(tmp_path: Path) -> None:
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules["brief"]["scene_texture"]["per_entity_max_items"] = 0
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="per_entity_max_items must be an integer >= 1"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+@pytest.mark.parametrize("seed", range(120, 130))
+def test_tex_1_corpus_price_is_zero(seed: int, tmp_path: Path) -> None:
+    """The zero-price witness (the scene-2 family pattern): the committed
+    pack (identity_slots + per_entity_max_items armed) vs the stripped
+    copy (the empty tier, the inert quota) — playscript bytes identical
+    (the canon path never renders briefs), and the golden-prefix brief
+    bytes identical (the committed corpora carry scene-scoped texture
+    only). The narrator corpus 105 replays green in the same suite over
+    the ARMED pack — its ledgers' slots are candles/hearth/exits/shadows/
+    kindling, all scene-scoped: no tier member, no entity scope past the
+    quota. The pack's own declaration is the gate (INV-3)."""
+    from core.loop import Simulator
+
+    day1 = json.loads(
+        (REPO / "tests" / "playscripts" / "day1_full.json").read_text()
+    )
+    baseline = tmp_path / "baseline.jsonl"
+    sim = Simulator(PACK, seed, baseline, SCHEMA, commit="0000000")
+    sim.run_playscript(dict(day1, seed=seed))
+    sim.close()
+    stripped = _mutated_pack(
+        lambda rules: rules["brief"]["scene_texture"].update(
+            identity_slots=[], per_entity_max_items=8
+        )
+    )
+    other = tmp_path / "stripped.jsonl"
+    sim2 = Simulator(stripped, seed, other, SCHEMA, commit="0000000")
+    sim2.run_playscript(dict(day1, seed=seed))
+    sim2.close()
+    assert baseline.read_bytes() == other.read_bytes()
+    # the brief surface: the golden prefix with the texture fixture —
+    # no identity slot, one entity line (under any K): identical bytes
+    _header, events = read_log(GOLDEN, SCHEMA)
+    ledger = _texture_ledger(list(events[:2]))
+    assert render_brief(assemble_brief(events[:2], PACK, ledger)) == render_brief(
+        assemble_brief(events[:2], stripped, ledger)
+    )
+
+
 # -- present entities: the 8th block (BRIEF_SPEC §3.8, st-1) ----------------------
 
 

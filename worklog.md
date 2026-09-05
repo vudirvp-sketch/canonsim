@@ -16,6 +16,30 @@
 
 
 ---
+iter-62 · 2026-09-06 · tex-1 — the scene_texture window's identity
+tier + per-scope quotas (phase 4, TASKS' top row; the owner's
+"continue per plans" call; 9 files — over the soft limit: the tier,
+the quota, the lint, the pack arming, and the test family are one
+mechanism family, the iter-60/61 scope pattern)
+- brief/assembler.py::_scene_texture_items: the ranking key widened
+  to the identity-or-pinned tier (pack `identity_slots`, the slot a
+  class, pinned above identity within the tier; an empty set = the
+  pinned-only D-048 bytes) + the quota walk (`per_entity_max_items`
+  per entity scope, identity first by construction; scene scopes and
+  tombstones unquota'd, the D-047 no-drop law).
+- core/pack.py the two-key lint (the required closed set) +
+  rules.json the declarative-only arming (speech_pattern/look/
+  mannerism, K=2). Measured: the tier live (identity survives
+  max_items=1 pressure — the trader problem closed), the quota live
+  (the chatty guard capped at 2), the 10-seed day1 A/B
+  byte-identical, the narrator corpus 105 + the T1 golden green.
+- +23 tests/test_brief.py; 1118→1141, ruff clean. D-091 into the
+  phase family (cap 30 held); TASKS tex-1 done + st-2 re-pointed to
+  the promotion door; TASKS 602 — two over the 600 cap after the
+  family squeeze: the phase-4 done rows are the phase ledger (§6.1,
+  kept; the collapse lands at the phase gate, the iter-61 precedent
+  at 601). KI#71 deleted per §5. iter-52 evicted; 10 entries after.
+---
 iter-61 · 2026-09-05 · scene-2 — the mode-B session wiring (phase 4,
 TASKS' top row; the owner's "continue per plans" call; 20 files —
 over the soft limit: the drain + the door + the query + the pack
@@ -161,15 +185,3 @@ iter-53 · 2026-09-05 · content-3 — the ambient driver, the murmur LIVE
   case's deliberate pins, the nopacing arm re-pinned (D-065 again).
   +7 tests/test_ambient.py; 966→973, ruff clean. D-082 + TASKS +
   TEST_PLAN §6 carry the detail.
----
-iter-52 · 2026-09-04 · content-6 — the arc driver, the aftermath chain
-LIVE (the release-chain layer's first LIVE consumer)
-- rules.json + actions.json: the `barkeep_wary_sweep` successor
-  (trigger-less, climax-flagged, weight 0, first_time_only) + the
-  aftermath arc gap 2; zero engine edits. The GAP law load-bearing
-  (the unchained sweep would land before the check — a causality
-  lie).
-- day1 9/10 byte-identical + seed 125's one appended event; the
-  corpus 105/105 pin-green, ZERO re-distill (the birth-record law).
-  +6 tests/test_arc_driver.py; 960→966, ruff clean. D-081 + TASKS
-  + TEST_PLAN §6.

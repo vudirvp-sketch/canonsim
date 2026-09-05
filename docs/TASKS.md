@@ -76,18 +76,14 @@
   corpus price zero (the 10-seed A/B). Detail: D-088 + tests/
   test_retrieval.py + phases.md §4's retrieval paragraph.
 - `scene-1` · the scene manager + mode B — **done (iter-60, D-089)**:
-  `brief/scene.py::speaking_queue` the chorus queue (presence-gated at
-  the current scene, pack-gated by the `brief.actors` entry,
-  kind-gated — the player and ambients never queued — pack declaration
-  order, capped by `brief.chorus.max_actor_calls`; beyond-cap NPCs the
-  L12 template rung) + the knower parameter
-  (`assemble_brief(knower=...)` / `narrator_call(knower=...)` — mode A
-  byte-identical by construction; mode B: the actor's own perception
-  and memory, its own role text and voice; the shared blocks shared)
-  + the `actor:` protocol line; the leak surface closed by construction
-  (every declared actor's brief leak-free at every beat window); the
-  corpus price zero. Detail: D-089 + BRIEF_SPEC §3.9 +
-  tests/test_scene.py.
+  `brief/scene.py::speaking_queue` the chorus queue (presence/pack/
+  kind gates, pack declaration order, the `brief.chorus.max_actor_calls`
+  cap; beyond-cap NPCs the L12 template rung) + the knower parameter
+  `assemble_brief(knower=...)` (mode A byte-identical by construction;
+  mode B: the actor's own perception, memory, role text, and voice;
+  the shared blocks shared) + the `actor:` protocol line; the leak
+  surface closed by construction; the corpus price zero. Detail:
+  D-089 + BRIEF_SPEC §3.9 + tests/test_scene.py.
 - `scene-2` · the mode-B session wiring — **done (iter-61, D-090)**:
   the mediator drains the chorus inside the beat cycle (the snapshot
   at the player's accept — the cast fixed at curtain, one actor call
@@ -99,9 +95,13 @@
   `query:`/`retrieval:` lines). Detail: D-090 + BRIEF_SPEC §3.9/§7.1
   + tests/test_scene.py.
 - `tex-1` · the scene_texture window's identity tier + per-scope
-  quotas (blueprint §1's identity-persistence resolution — pack
-  `identity_slots` ranked with pinned, at most K lines per entity;
-  re-pointed from scene-2's §9 projection — the underdeliver law).
+  quotas — **done (iter-62, D-091)**: blueprint §1's identity-
+  persistence read path — `identity_slots` rank in the
+  identity-or-pinned tier (an empty set = the pinned-only D-048
+  bytes) + the per-entity quota `per_entity_max_items` (identity
+  first by construction, scene scopes and tombstones unquota'd);
+  the pack armed declarative-only, the corpus price zero. Detail:
+  D-091 + BRIEF_SPEC §3.3/§6 + tests/test_brief.py.
 - `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
   over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
   into SQLite — never in the runtime import graph, D-012).
@@ -258,9 +258,10 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
 
 ### Stress-test backlog (iter-11b resolutions; owner-gated)
 
-- `st-2` identity persistence: pack `identity_slots` window tier +
-  per-scope quotas (read-path) + the identity promotion door (pack
-  grammar beyond `take`, the D-054 machine; blueprint §1). Optional
+- `st-2` identity persistence: the identity promotion door (pack
+  grammar beyond `take`, the D-054 machine; blueprint §1) — the
+  read-path half (the window tier + per-scope quotas) landed as
+  `tex-1` (iter-62, D-091); only the door remains. Optional
   second trigger (bg-5): repetition-counted promotion — N repeats of
   a priced pattern via a counted fold (the ref-13 GHOST-layers
   counter pattern); owner's call: alongside or instead of the

@@ -105,11 +105,28 @@ view**: the ledger never evicts, all boundedness lives here.
   **present** (positioned at the scene location, or an item carried by a
   present non-item — the carrier closure; the PC is covered by
   construction). Presence is a structural projection read.
-- **Ranking.** Pinned first, then newest-first; construction-order
-  tie-break (ids allocate in append order — the index is the
-  tie-break). Capped by `max_items` — a ranking cap, never a budget
-  drop (§3.4's D-047 law: beyond-cap items render nothing, never
-  dropped).
+- **Ranking (tex-1, iter-62 — blueprint §1's identity-persistence
+  resolution).** The identity-or-pinned tier first: an entry whose
+  `slot` is pack-declared `identity_slots` ranks WITH `pinned` (key:
+  identity-or-pinned → pinned → newest → construction; the slot is a
+  CLASS, never a scope condition — a scene-scoped entry in a declared
+  identity slot ranks in the tier too), pinned above identity within
+  the tier, then newest-first with construction-order tie-break (ids
+  allocate in append order — the index is the tie-break). An empty
+  `identity_slots` reduces the key to the pinned-only law exactly
+  (the D-048 bytes). Capped by `max_items` — a ranking cap, never a
+  budget drop (§3.4's D-047 law: beyond-cap items render nothing,
+  never dropped).
+- **Per-entity quota (tex-1).** At most `per_entity_max_items` lines
+  per entity scope — one chatty entity cannot flood the window. The
+  quota walk follows the ranking, so an entity's identity slots fill
+  its quota first ("identity slot first" by construction — identity
+  cannot become the flooding channel either). Scene scopes carry no
+  quota (the room's texture is the block's core content; `max_items`
+  bounds it); tombstones carry none (their own cap bounds them — a
+  refuted identity line is gone). Beyond-quota lines render nothing,
+  never dropped (the D-047 law). A value >= `max_items` is the
+  documented inert state.
 - **Tombstones.** `contradicted` entries in the same scope window
   render as short tombstone lines (slot + refuted + the causing
   event), newest-first, capped by `tombstone_max_items`, AFTER the
@@ -398,7 +415,10 @@ brief's static text is mediator data, not chronicle grammar.
   "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
                       "importance_weight": 1.0,
                       "relevance_weight": 1.0},
-  "scene_texture": {"max_items": 8, "tombstone_max_items": 4, "unique_slots": ["hearth"]},
+  "scene_texture": {"max_items": 8, "tombstone_max_items": 4,
+                      "unique_slots": ["hearth"],
+                      "identity_slots": ["speech_pattern", "look", "mannerism"],
+                      "per_entity_max_items": 2},
   "present_entities": {"max_entities": 8, "max_pairs": 6,
                         "scene_line_fields": ["layout"],
                         "card_markers": [
@@ -435,6 +455,10 @@ non-negative numbers (`recency_weight`, `importance_weight`, and
 `max_items >= 1`; `scene_texture` caps integers
 >= 1, `unique_slots` unique non-empty strings (empty = no globally-
 unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
+`identity_slots` unique non-empty strings (tex-1: empty = no tier
+beyond pinned — the D-048 bytes) and `per_entity_max_items` an
+integer >= 1 (tex-1: the per-entity quota; a value >= `max_items` is
+the documented inert state);
 `present_entities` caps integers >= 1 and a `card_markers` table
 (tune-2, D-060): each row keys `prop` — one of `status.<axis>` (a
 declared states axis), `relations.<axis>` (a declared relations axis),
@@ -542,7 +566,7 @@ bytes = a spec edit in the same commit as the code change.
 | Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
 | Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
 | Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
-| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | `tex-1` (TASKS backlog — scene-2's row carried the wiring only; the underdeliver law, the remainder re-pointed) | blueprint §1 |
+| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | **landed iter-62** (tex-1: `identity_slots` + `per_entity_max_items` — §3.3/§6; the promotion-door half stays `st-2`, owner-gated) | blueprint §1 |
 | The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | `st-4` (TASKS backlog) | blueprint §1 |
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9) | blueprint §1 |
 | Relevance signal (query keyword match) | **landed iter-61** (scene-2: `assemble_brief(query=...)` the third signal + `recall_query` the derivation + the ladder's first runtime query — §3.5/§7.1) | BRIEF_SPEC §3.5 |

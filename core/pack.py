@@ -2446,9 +2446,13 @@ class _Lint:
         )
         # iter-10: the 7th block's ranking caps + the unique-slot flag set
         # (BRIEF_SPEC §3.3/§6 — the scene-texture window law, D-049).
+        # tex-1 (iter-62): the identity-tier slot set + the per-entity
+        # quota — both required, closed vocabulary (empty identity_slots
+        # = no tier beyond pinned; a quota >= max_items is the documented
+        # inert state).
         texture = config.get("scene_texture")
         _require(isinstance(texture, Mapping), f"{where}: scene_texture must be an object")
-        for key in ("max_items", "tombstone_max_items"):
+        for key in ("max_items", "tombstone_max_items", "per_entity_max_items"):
             value = texture.get(key)
             _require(
                 isinstance(value, int) and not isinstance(value, bool) and value >= 1,
@@ -2462,6 +2466,15 @@ class _Lint:
                 for index, slot in enumerate(unique_slots)
             ),
             f"{where}.scene_texture: unique_slots must be unique non-empty strings",
+        )
+        identity_slots = texture.get("identity_slots")
+        _require(
+            isinstance(identity_slots, list)
+            and all(
+                isinstance(slot, str) and slot.strip() and slot not in identity_slots[: index]
+                for index, slot in enumerate(identity_slots)
+            ),
+            f"{where}.scene_texture: identity_slots must be unique non-empty strings",
         )
         # st-1: the 8th block's ranking caps + the observable-marker table
         # (BRIEF_SPEC §3.8/§6 — the entity-card block). Marker names are
