@@ -1,68 +1,47 @@
 # STATUS — canonsim
 
-Iteration: iter-64 (`iter-64-leg4` — TASKS' last phase-4 row; the
-owner's session directives: "continue per plans" + the explicit
-duckdb approval — the §8 dependency fence crossed by the owner's own
-call, exactly the gate the iter-63 Next-step fork recorded; no
-conflict, no KI) ·
-Phase: 4 (Knowledge & scene) — OPEN (iter-55) — **the build column
-is COMPLETE (leg-1..leg-4, retr-1, scene-1/2, tex-1, blind-1 all
-landed, D-084..D-093); the phase-4 gate review is the only remaining
-row, on the owner's call (the iter-54 protocol precedent)**
-**leg-4 landed: the mode F offline chronicler (D-093) —
-`scripts/chronicle.py`, the DuckDB pipeline over one JSONL run log,
-NEVER in the runtime import graph (D-012 now EXECUTABLE:
-`tests/test_architecture.py::test_runtime_imports_stdlib_only` —
-the runtime graph may import stdlib + local packages +
-ImportError-guarded optional probes only; duckdb or any future
-third-party root fails loudly). The no-ETL intake
-(`read_ndjson_auto`, the run-header line drops via NULL `id`)
-behind a COUNT GATE: every log line minus the header must appear as
-a row — a silent drop is an integrity failure, exit 1, nothing
-written (the line-aligned prefix law: any prefix is a legal log,
-archived at its own count). `events.parquet` — the canonical
-12-column cold archive (typed NULLs keep the schema uniform over
-absent fields; a header-only log handled uniformly), ORDER BY id.
-`state_diffs.parquet` — the LAG/LEAD window-diff law per
-(entity, prop) ordered by (t, id): `prev_to`, `continuous` (NULL on
-a state's first change; then from == previous to — the
-fold-consistency read, measured 0 breaks on day1 seed 123).
-`chronicle.sqlite` — the stdlib-readable summary
-(facts_summary/state_current/type_histogram/knowledge_summary/
-chronicle_meta — the artifact carries its own identity) through the
-PROBE+FALLBACK write ladder: `ATTACH ... (TYPE SQLITE)` when
-sqlite_scanner is locally available (the lifted pattern), stdlib
-sqlite3 otherwise (the never-breaks floor, L12) — both paths
-byte-deterministic per environment and logically identical to each
-other (measured); `SET autoinstall_known_extensions=false` closes
-the network door by construction (the ref's offline law — the
-chronicler never phones home). `manifest.json` — the content-derived
-audit record (log sha256, counts, the header's
-seed/schema_version/python/commit/pack, duckdb_version, write_mode,
-per-artifact sha256+rows; no wall-clock, no absolute paths; the
-exact key set pinned). The `[chronicler]` optional extra (duckdb
->=1.0; runtime `dependencies` stay `[]`); the suite
-importorskips — the pure-dev env stays green (1168 passed + 1
-module skip); offline compaction (scavenge with tombstones) is the
-deferred `scav-1` backlog row, per the scope law.**
+Iteration: iter-65 (`iter-65-gate` — the phase-4 gate review, TASKS'
+last phase-4 row, on the owner's explicit "final check of everything
+before closing and preparing for phase 5" session call; the iter-54
+protocol precedent — no fork, no KI) ·
+Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
+the build column complete at iter-64, D-084..D-093); phase 5
+UNLOCKED — opens on the owner's call (the iter-55 precedent)**
+**The verdict record: the full ROADMAP §5 protocol re-run green —
+the corpus 105 + parse corpus (1178 collected: 1168 passed + 1
+module skip pure-dev / 1177 + 1 offline-probe skip with the
+[chronicler] extra; ruff clean); the seed-125 pair ON M1=0.509 /
+M2=0.333 / OFF T8 26 chains ≥ 3 — IDENTICAL to the iter-54 numbers
+(the phase-4 landings kept the corpus-price-zero promise on the
+committed scenario); the stretch table max 1, both arms (the
+phase-3 exit criterion holds — no regression); T1 double-run
+byte-identical; T7 reads as a story; the phase-4 exit criterion
+re-measured — 0 leaks on the blind-NPC suite (26 tests, all four
+layers); the mode-F chronicler acceptance green (TEST_PLAN §7: the
+fresh gate log 53/53 through the count gate, the manifest
+content-derived, the stdlib ladder live in the offline env).**
+**The doc debts paid at the gate (the iter-54 scope pattern): TASKS
+626→589 — the phase-4 ledger collapsed to one-liners + the condensed
+ledger + the iter-65 gate row (the trim the iter-61..64 rows
+deferred to exactly this gate); DECISIONS 30 held (D-094 joins the
+D-045/D-058/D-064/D-083 verdict family — no collapse owed, every
+phase-4 landing rode the single D-084..D-093 family row as it
+landed); FAQ 20 held; README resynced (KI#73: the
+tex-1/blind-1/leg-4 landings had gone unrecorded).**
 ·
 Date: 2026-09-06 ·
-Scope: `scripts/chronicle.py` (NEW — the chronicler),
-`tests/test_chronicle.py` (NEW — 10: the stdlib-fold cross-checks
-— the archive is the log, the LAG law, every summary table; the
-byte-determinism double-run; the ladder equivalence; both gates;
-the manifest contract), `tests/test_architecture.py` (+1 — D-012
-executable), `pyproject.toml` (the [chronicler] extra),
-`docs/TEST_PLAN.md` (§7 — the acceptance contract),
-`docs/TASKS.md` (leg-4 done + the scav-1 deferral row),
-`docs/DECISIONS.md` (D-093 into the phase family, cap 30 held),
-`docs/AGENT_NAVIGATION.md` (the scripts/ row),
-`worklog.md` (iter-54 evicted), `STATUS.md` (this header + the
-Next flip). 10 files — over the soft limit, the tool+fence+extra+
-tests+doc-sync mechanism family (the iter-60..63 scope pattern).
-1167→1178 tests green with the extra (1168+1 skip without), ruff
-clean; the corpus price zero by construction (no runtime file
-touched).
+Scope: `docs/ROADMAP.md` (phase-4 CLOSED + phase-5 UNLOCKED — the
+phase table is the single owner of closed/open), `docs/DECISIONS.md`
+(D-094 into the verdict family + the header note), `docs/TASKS.md`
+(the phase-4 ledger collapse + the gate row), `STATUS.md` (this
+header + KI#73 + the Next flip), `worklog.md` (iter-65 in, iter-55
+out), `README.md` (the three-landing sync + the verdict + the
+scripts/chronicle.py row — KI#73's fix). 6 files — one over the
+soft limit: the gate's doc-debt family (verdict + collapse + sync
+are one mechanism, the iter-54 scope pattern). No runtime file
+touched — the corpus price zero by construction. 1178 collected
+green, ruff clean; doc-only iteration, the alarm's streak 1 of 2
+(the §5 protocol re-run IS the substance; the iter-35 precedent).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -86,7 +65,13 @@ touched).
 
 ## Active KIs
 
-- (none — the ledger is clean; KI#72 deleted at iter-63 per AGENTS §5
+- KI#73 · README Status drift: the tex-1/blind-1/leg-4 landings
+  unrecorded (the section ended at scene-2/1118 vs the repo's 1178;
+  the scripts/chronicle.py map row missing — the KI#67 restated-
+  count family) · CLOSED iter-65 — the gate's §5 re-run caught it;
+  the sync + the map row landed in the same iteration.
+
+- (none else — the ledger is clean; KI#72 deleted at iter-63 per AGENTS §5
   — closed iter-61, two iterations past; the lesson lives in git +
   the deferral-ledger rows it re-pointed: the deferral table's
   "arrives with" must name the TASKS row's OWN scope, never a
@@ -471,8 +456,10 @@ IDs with the FULL prefix on every member (`D-018/D-022/D-029` —
 decision→why→consequence and link the single owner (D-024).
 Pre-collapse history lives in git; collapsed 46→30 at the phase-0→1
 gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
-(iter-35), 48→30 at the phase-3→4 gate (iter-54); next due at the
-phase-4→5 gate.
+(iter-35), 48→30 at the phase-3→4 gate (iter-54); 30 HELD at the
+phase-4→5 gate (iter-65 — no collapse owed: the phase-4 landings rode
+the single D-084..D-093 family row as they landed, the verdict D-094
+joined the gate-verdict family); next due at the phase-5→6 gate.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -537,64 +524,42 @@ phase-4→5 gate.
 
 ## Next step
 
-**Phase 4 (Knowledge & scene): the BUILD COLUMN IS COMPLETE —
-leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2/tex-1/blind-1/leg-4
-all LANDED (D-084..D-093, the phase family row). leg-4 (iter-64):
-the mode F offline chronicler — the owner's duckdb approval crossed
-the §8 fence, the chronicler landed OUTSIDE the runtime graph
-(`scripts/chronicle.py`, the [chronicler] extra; D-012 executable),
-and the exit criterion "0 leaks on the blind-NPC suite" still reads
-T3 (`docs/TEST_PLAN.md` §1 + §1.3, zero leaks measured at iter-63;
-the chronicler touches no runtime file — the corpus price zero by
-construction). The ONE remaining phase-4 action: the GATE REVIEW —
-ROADMAP §5's protocol re-run on the owner's call (the iter-54
-precedent: the committed playscripts, M1/M2, the director-off A/B,
-the exit criterion re-measured, the doc debts, then the verdict row
-+ phase 5 unlocked). The phase-3 verdict record: D-083 + worklog
-iter-54.**
+**Phase 4 (Knowledge & scene) CLOSED — gate PASS iter-65, D-094 (the
+full ROADMAP §5 protocol re-run on the owner's "final check + prepare
+for phase 5" call; the evidence: the ROADMAP §2 row — the single
+owner of closed/open — + the D-094 verdict segment + worklog
+iter-65; the phase-4 landing ledger condensed in TASKS). Phase 5
+(Depth) UNLOCKED — it opens on the owner's call (the iter-55/36
+precedent): the phase-5 backlog drafts from `docs/blueprint/phases.md`
+§5 at the opening iteration, never before.**
 
-1. **The phase-4 queue (TASKS.md owns the rows):** leg-1/leg-2 —
-   LANDED (iter-55/56, D-084/D-085) → leg-3/leg-3b — LANDED
-   (iter-57/58, D-086/D-087) → `retr-1` LANDED (iter-59, D-088 — the
-   ladder: the FTS5 index + the vec probe/scan/floor chain + the
-   pack-coefficient re-ranker; the knower parameter IS known_by; the
-   two LEGEND_SPEC contract points live; the corpus price zero) →
-   `scene-1` LANDED (iter-60, D-089 — the chorus queue + the knower
-   parameter + the actor call document; the leak suite core live;
-   the corpus price zero) → `scene-2` LANDED (iter-61, D-090 — the
-   drain, the actor reply door, the keyword query; the ladder's
-   DORMANT gate opened; the corpus price zero) → `tex-1` LANDED
-   (iter-62, D-091 — the identity-or-pinned tier + the per-entity
-   quota, blueprint §1's identity-persistence read path; the pack
-   armed declarative-only, the corpus price zero) → `blind-1` LANDED
-   (iter-63, D-092 — the leak suite's phase-4 extension: the
-   instrument + the four layers, zero leaks measured, the exit
-   criterion's own instrument) → `leg-4` LANDED (iter-64, D-093 —
-   the mode F offline chronicler: `scripts/chronicle.py`, the count
-   gate, the parquet pair, the sqlite summary through the attach→
-   stdlib ladder, the manifest; the [chronicler] extra; D-012
-   executable) → the phase-4 GATE REVIEW, on the owner's call.
-2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
+1. **Phase 5 (Depth) — the parked build column:** lazy worldgen,
+   factions with goals, long history (`docs/blueprint/phases.md` §5
+   the architecture owner); the exit criterion "an emergent chain of
+   3+ events without the player" (ROADMAP §2 — T8's OFF arm already
+   reads 26 chains on the committed scenario; the phase-5 target is
+   the worldgen-fed form of it). The phase-5 donor material
+   (ROADMAP §4): Azgaar FMG (states/cultures/religions + a
+   chronology generator), Neighborly (the closest cousin's
+   architecture reading). The phase-5 spatial row `st-6(a)` (travel
+   as a separate action) waits on this layer; `st-3`/`st-5`
+   (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.
+2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
    carries mode C until then), tune-3 (the three-way NPC-movement
    fork), st-2 (the identity promotion door — the read-path half
    landed as tex-1, iter-62), the phase-1 corpus
    consolidation pass, `bg-6` (SoW audit, D-055 deferral), `qa-1`
-   mypy + `ci-1` GitHub Actions. Still open for the owner: the Alien
-   unknown-axis L6 conflict (DIRECTOR_SPEC §11) + the arc driver's
-   review question (the climax flag on a weight-0 closing beat;
-   D-081 records the tension, the owner may veto). NEW for the owner
-   (leg-1's recorded questions): the testimony-crystallization
-   fidelity floor — v0.1 counts any held token toward the family
-   however learned (the hearsay shape: one telling of three related
-   facts crystallizes the belief, provenance length 1); a fidelity
-   floor for testimony (e.g. `told`-channel records counting only
-   above the chain floor) is a pack-grammar question, recorded here,
-   not forced; and the static-personality half of the owner's
-   character-card question (spine lints, archetype expansion) stays
-   PACK_SPEC territory (phase 6 / the 2nd-setting gate, the AP
-   crosswalk already sketched there).
+   mypy + `ci-1` GitHub Actions, `scav-1` (offline compaction —
+   tombstones after the chronicler's rollups, TASKS' deferred row).
+   Still open for the owner: the Alien unknown-axis L6 conflict
+   (DIRECTOR_SPEC §11) + the arc driver's review question (the
+   climax flag on a weight-0 closing beat; D-081 records the
+   tension, the owner may veto). The leg-1 recorded questions (the
+   testimony-crystallization fidelity floor; the static-personality
+   half of the character-card question — PACK_SPEC territory at the
+   2nd-setting gate) carry unchanged.
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
    New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked

@@ -15,123 +15,86 @@
 > validity over 51 combined utterances, 0 honest misfires; the parse corpus
 > 10 cases + the full §5 protocol re-run, M1/M2 identical to iter-26).
 > Phase 3 (Director) CLOSED — see the condensed ledger below. Phase 4
-> (Knowledge & scene) OPENED iter-55
-> (the owner's "start phase 4" session call; the backlog below is drafted
-> from `docs/blueprint/phases.md` §4 — the phase's architecture owner).
-> Architecture owner: `docs/blueprint/phases.md` §4; exit criterion
-> "0 leaks on the blind-NPC suite" (ROADMAP §2 — T3's family, extended
-> to the phase-4 surfaces; TEST_PLAN §1).
+> (Knowledge & scene) CLOSED — gate PASS iter-65, D-094 (opened iter-55,
+> the owner's "start phase 4" call; the backlog below was drafted from
+> `docs/blueprint/phases.md` §4 — the phase's architecture owner; every
+> declared row landed). Architecture owner: `docs/blueprint/phases.md` §4;
+> exit criterion "0 leaks on the blind-NPC suite" (ROADMAP §2 — MET:
+> zero leaks on all four layers; TEST_PLAN §1/§1.3). Phase 5 (Depth)
+> UNLOCKED — opens on the owner's call (the iter-55 precedent).
 
-### Phase-4 backlog (opened iter-55)
+### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
-- `leg-1` · trait crystallization (P3f) — **done (iter-55, D-084)**:
-  `core/traits.py` — the belief-token fold (a knower holding
-  `threshold` DISTINCT tokens of a declared family crystallizes the
-  belief, the source event ids riding as provenance); the read-model
-  laws + the lint's closed vocabulary; DORMANT until leg-2 (the
-  iter-47 arc precedent — the 10-seed A/B byte-identical). Detail:
-  D-084 + tests/test_traits.py.
-- `leg-2` · the brief's derived-trait read (leg-1's first consumer) —
-  **done (iter-56, D-085)**: `brief/assembler.py::_recalled_fact_lines`
-  reads the fold — belief lines lead the recalled_facts block (provenance
-  ids inline, the expansion law's demand handle), the family records
-  render nothing raw; `core/traits.py::expand_trait` the demand side.
-  Zero-regen landing (the PC holds no family token on any committed
-  corpus; the 10-seed A/B byte-identical). Detail: D-085 +
-  BRIEF_SPEC §3.5 + tests/test_brief.py.
-- `leg-3` · reflection & memory compaction — **done (iter-57, D-086)**:
-  `core/reflection.py` — reflection-on-recurrence mints the
-  higher-level entry as an EVENT through the canon door (originals
-  never dropped, INV-1; never `summarize_messages_in_place`),
-  `outcome.provenance` the `list[event_id]` demand handle, the
-  never-re-reflect law, `stale_reflections` (the read-side flag,
-  derived stores after scavenge) + `expand_reflection` the expansion
-  law's demand side; `rules.json::reflection` linted, DORMANT in the
-  committed pack (the 10-seed A/B byte-identical, zero corpus
-  regen); LEGEND_SPEC.md written just-in-time at this row. Detail:
-  D-086 + LEGEND_SPEC + tests/test_reflection.py.
-- `leg-3b` · the tavern reflection set (arming the v0.1 pack block) —
-  **done (iter-58, D-087)**: the measured recurrence (day1_full seeds
-  123/128 — the retried theft) arms the insight pair
-  `sneak_at_work_here`/`figure_reaching_for_purse` (the watcher's
-  conclusion) + `trouble_by_the_bar`/`noise_by_the_bar` (the room's);
-  `conclusion_drawn` story-critical, renders in the tale; the corpus
-  price measured ZERO (the narrator corpus 105, the parse corpus 10,
-  the T1 golden — untouched; 8/10 day1 seeds byte-identical) — the
-  iter-52 zero-regen landing. Detail: D-087 + LEGEND_SPEC §7 +
+- `leg-1` · trait crystallization (P3f) — done (iter-55, D-084):
+  the belief-token fold. Detail: the D-084..D-093 family row +
+  tests/test_traits.py.
+- `leg-2` · the brief's derived-trait read — done (iter-56, D-085):
+  belief lines lead recalled_facts. Detail: BRIEF_SPEC §3.5 +
+  tests/test_brief.py.
+- `leg-3` · reflection & memory compaction — done (iter-57, D-086):
+  reflection-on-recurrence through the canon door. Detail:
+  LEGEND_SPEC + tests/test_reflection.py.
+- `leg-3b` · the tavern reflection set — done (iter-58, D-087): the
+  arming, `conclusion_drawn` story-critical. Detail: LEGEND_SPEC §7 +
   tests/test_reflection.py.
-- `retr-1` · the retrieval ladder (STORE-1) — **done (iter-59, D-088)**:
-  `core/retrieval.py` — the in-memory rebuildable FTS5 index (the
-  unicode61 word view — dry underscored tokens are word-retrievable),
-  the vec probe + fallback chain (vec0 kNN → pure-Python cosine scan →
-  keyword floor; the scan is the rung's semantic definition, a failure
-  degrades never breaks), the deterministic re-ranker
-  `α·recency + β·authority + γ·bm25 + δ·cosine` (coefficients as pack
-  data, ties by construction order); the `knower` query parameter IS
-  the `known_by` boundary — facts never vector-searched, never
-  knower-free; the two LEGEND_SPEC §4/§5 contract points LIVE (the
-  stale exclusion at build, the source-outranks demotion — the seed-123
-  live-fire: the higher-scoring reflection ordered below its own
-  provenance sources); the committed block declarative-only, the
-  corpus price zero (the 10-seed A/B). Detail: D-088 + tests/
-  test_retrieval.py + phases.md §4's retrieval paragraph.
-- `scene-1` · the scene manager + mode B — **done (iter-60, D-089)**:
-  `brief/scene.py::speaking_queue` the chorus queue (presence/pack/
-  kind gates, pack declaration order, the `brief.chorus.max_actor_calls`
-  cap; beyond-cap NPCs the L12 template rung) + the knower parameter
-  `assemble_brief(knower=...)` (mode A byte-identical by construction;
-  mode B: the actor's own perception, memory, role text, and voice;
-  the shared blocks shared) + the `actor:` protocol line; the leak
-  surface closed by construction; the corpus price zero. Detail:
-  D-089 + BRIEF_SPEC §3.9 + tests/test_scene.py.
-- `scene-2` · the mode-B session wiring — **done (iter-61, D-090)**:
-  the mediator drains the chorus inside the beat cycle (the snapshot
-  at the player's accept — the cast fixed at curtain, one actor call
-  per NPC, live presence re-verification, the drop law, one budget
-  per exchange), the actor reply door (the step grammar's `actor` key
-  through the SAME front door, `feedable_intents`' caller law), the
-  mediator's keyword query (§3.5's relevance signal + the retrieval
-  ladder's first runtime QUERY consumer — the actor calls'
-  `query:`/`retrieval:` lines). Detail: D-090 + BRIEF_SPEC §3.9/§7.1
-  + tests/test_scene.py.
-- `tex-1` · the scene_texture window's identity tier + per-scope
-  quotas — **done (iter-62, D-091)**: blueprint §1's identity-
-  persistence read path — `identity_slots` rank in the
-  identity-or-pinned tier (an empty set = the pinned-only D-048
-  bytes) + the per-entity quota `per_entity_max_items` (identity
-  first by construction, scene scopes and tombstones unquota'd);
-  the pack armed declarative-only, the corpus price zero. Detail:
-  D-091 + BRIEF_SPEC §3.3/§6 + tests/test_brief.py.
-- `leg-4` · mode F offline chronicler — **done (iter-64, D-093)**:
-  `scripts/chronicle.py` — the DuckDB pipeline over one JSONL run log,
-  never in the runtime import graph (D-012 now executable:
-  `test_runtime_imports_stdlib_only`). The no-ETL intake
-  (`read_ndjson_auto`, the header line drops by NULL `id`) behind a
-  count gate (a silent drop = integrity failure, nothing written);
-  `events.parquet` (the canonical 12-column cold archive, ORDER BY id);
-  `state_diffs.parquet` (the LAG/LEAD window-diff law per entity+prop,
-  the `continuous` fold-consistency read); `chronicle.sqlite` (the
-  stdlib-readable summary: facts_summary/state_current/type_histogram/
-  knowledge_summary/chronicle_meta) through the probe+fallback ladder
-  (ATTACH when sqlite_scanner is locally available, stdlib sqlite3 as
-  the never-breaks floor; autoinstall off — the chronicler never phones
-  home); `manifest.json` (content-derived, no wall-clock, no abs
-  paths; byte-deterministic per environment). The `[chronicler]`
-  optional extra (duckdb, the owner's explicit §8 approval 2026-09-06;
-  runtime deps stay []). Detail: D-093 + TEST_PLAN §7 +
-  tests/test_chronicle.py.
-- `blind-1` · the blind-NPC leak suite's phase-4 extension — **done
-  (iter-63, D-092)**: the exit criterion's instrument — the leak
-  predicates (test-side folds, never the engine's paths) + the three
-  surfaces (mode B briefs every prefix × every knower × 10 seeds;
-  retrieval under the adversarial omniscient query + the None probe;
-  the live drain's every emitted call, anchor-addressed) + the teeth
-  law. Detail: D-092 + TEST_PLAN §1.3.
+- `retr-1` · the retrieval ladder (STORE-1) — done (iter-59, D-088):
+  FTS5 + the vec probe/scan/floor chain + the re-ranker; `knower` IS
+  known_by. Detail: tests/test_retrieval.py + phases.md §4.
+- `scene-1` · the scene manager + mode B — done (iter-60, D-089):
+  the chorus queue + the knower parameter. Detail: BRIEF_SPEC §3.9 +
+  tests/test_scene.py.
+- `scene-2` · the mode-B session wiring — done (iter-61, D-090):
+  the drain + the actor reply door + the keyword query. Detail:
+  BRIEF_SPEC §3.9/§7.1 + tests/test_scene.py.
+- `tex-1` · the texture identity tier + quotas — done (iter-62,
+  D-091): `identity_slots` + `per_entity_max_items`. Detail:
+  BRIEF_SPEC §3.3/§6 + tests/test_brief.py.
+- `leg-4` · mode F offline chronicler — done (iter-64, D-093):
+  `scripts/chronicle.py`, the [chronicler] extra, D-012 executable.
+  Detail: TEST_PLAN §7 + tests/test_chronicle.py.
+- `blind-1` · the blind-NPC leak suite's phase-4 extension — done
+  (iter-63, D-092): the exit criterion's instrument. Detail:
+  TEST_PLAN §1.3.
 - `scav-1` · offline compaction = scavenge with tombstones (the
   EventStore shape, phases.md §4's later half): derived-store entries
   drop with tombstones AFTER the chronicler's rollups make them
   rebuildable; committed logs never edited (INV-5). Out of leg-4's
   named scope by the scope-creep law — deferred here, not forced.
+
+> Phase 4 (Knowledge & scene) landing ledger, condensed: the folds
+> iter-55..58 (D-084..D-087 — traits, the brief's belief read,
+> reflection-on-recurrence, the tavern arming), the retrieval ladder
+> iter-59 (D-088), the scene stack iter-60..62 (D-089/D-090/D-091 —
+> mode B + the chorus queue, the session wiring, the identity tier),
+> the leak suite's instrument iter-63 (D-092), the mode F chronicler
+> iter-64 (D-093 — the owner's duckdb approval crossing the §8 fence,
+> the chronicler outside the runtime graph); the build column
+> completed at iter-64, the gate PASS at iter-65. Architecture
+> owner: `docs/blueprint/phases.md` §4; exit criterion "0 leaks on
+> the blind-NPC suite" (ROADMAP §2 — MET). Detail: the
+> D-084..D-093 family row + the per-row owners above + worklog +
+> git (the pre-collapse detail lives there, KI#7 law).
+
+### iter-65 · phase-4 gate — done (verdict: PASS, D-094)
+
+Full ROADMAP §5 protocol re-run on the owner's call: the corpus 105
++ parse corpus green (1178 tests collected — 1168 passed + 1 module
+skip pure-dev, 1177 passed + 1 offline-probe skip with the
+[chronicler] extra; ruff clean); the seed-125 pair ON M1=0.509 /
+M2=0.333 / OFF T8 26 chains ≥ 3 — IDENTICAL to the iter-54 record
+(the phase-4 landings kept the corpus-price-zero promise on the
+committed scenario); the stretch table max 1 (both arms — the
+phase-3 exit criterion holds, no regression); T1 double-run
+byte-identical; T7 reads as a story; the exit criterion re-measured
+— 0 leaks on the blind-NPC suite (all four layers); the mode-F
+chronicler acceptance green (TEST_PLAN §7: 53/53 through the count
+gate, manifest content-derived, write_mode=stdlib in the offline
+env). The doc debts paid: TASKS 626→589 (the phase-4 ledger
+collapse — the deferred trim landing at its promised gate),
+DECISIONS 30 held (D-094 joins the verdict family), FAQ 20 held,
+README resynced (KI#73 — three landings had gone unrecorded).
+Phase 5 unlocked — opens on the owner's call. Detail: worklog
+iter-65 + D-094.
 
 > Phase 3 (Director) landing ledger, condensed: the pacing stack
 > iter-36..39 (D-065..D-068), the event grammar iter-40..42

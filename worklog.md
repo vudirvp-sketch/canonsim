@@ -16,6 +16,26 @@
 
 
 ---
+iter-65 · 2026-09-06 · phase-4 gate — the verdict PASS (D-094; the
+owner's "final check of everything before closing and preparing for
+phase 5" call; 6 files — one over the soft limit: verdict + collapse
++ sync are the gate's one doc-debt mechanism, the iter-54 pattern)
+- Full ROADMAP §5 protocol re-run green: the corpus 105 + parse
+  corpus (1178 collected — 1168+1 module skip pure-dev, 1177+1
+  offline-probe skip with [chronicler]; ruff clean); the seed-125
+  pair ON M1=0.509/M2=0.333 / OFF T8 26 chains — IDENTICAL to
+  iter-54 (the phase-4 landings kept the corpus price zero on the
+  committed scenario); stretch max 1 both arms; T1 double-run
+  byte-identical; T7 a story; 0 leaks on the blind suite (26 tests,
+  all four layers); the mode-F chronicler 53/53 through the count
+  gate, manifest content-derived.
+- Doc debts paid: TASKS 626→589 (the phase-4 ledger collapse — the
+  trim the iter-61..64 rows deferred to this gate), DECISIONS 30
+  held (D-094 joins the verdict family), FAQ 20 held, README
+  resynced (KI#73 opened+closed: tex-1/blind-1/leg-4 unrecorded).
+- ROADMAP §2: phase 4 CLOSED, phase 5 UNLOCKED (opens on the
+  owner's call). No runtime file touched. Doc-only streak 1 of 2.
+---
 iter-64 · 2026-09-06 · leg-4 — the mode F offline chronicler (phase 4,
 TASKS' last phase-4 row; the owner's explicit duckdb approval crossing
 the §8 dependency fence — the recorded leg-4/blind-1 owner-gate
@@ -192,19 +212,3 @@ first consumer (phase 4, BRIEF_SPEC's phase-4 clause)
   389 > the declared 300 at HEAD — the header now reads AGENTS §6)
   opened+closed; KI#69 deleted per §5. 991→1004 tests, ruff clean.
   iter-46 evicted; 10 entries after.
----
-iter-55 · 2026-09-05 · phase-4 open + leg-1 — trait crystallization
-(P3f; the owner's "start phase 4" call, the iter-36 opener precedent)
-- core/traits.py (NEW) + the _traits lint + rules.json::traits (the
-  v0.1 belief set) + 18 tests: the belief-token fold — threshold
-  DISTINCT family tokens crystallize a belief, source ids as
-  provenance; read-model laws (no writes, no entropy — L6; no decay).
-- Measured-first: day1_full seed 125 — the guard pair crystallizes
-  paranoid_about_thieves (eyewitness 2 events / hearsay 1 event);
-  10-seed A/B (120..129) 10/10 byte-identical, zero corpus regen —
-  DORMANT (leg-2 owns the brief's derived-trait read).
-- Phase 4 OPENED: ROADMAP §2 flipped, TASKS phase-4 backlog drafted
-  from phases.md §4 (leg-1..4, retr-1, scene-1, blind-1); the
-  phase-3 ledger condensed to a link row; DECISIONS D-084 + the
-  gate-verdict family merge (cap 30 held). 973→991 tests, ruff
-  clean. D-084 + STATUS. iter-45 evicted; 10 entries after.

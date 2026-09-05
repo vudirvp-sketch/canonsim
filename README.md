@@ -390,12 +390,71 @@ intent-id feed law); the mediator's keyword query (BRIEF_SPEC
 the assembler's pure third term, the retrieval ladder's first
 runtime QUERY consumer — the actor calls' `query:`/`retrieval:`
 protocol lines). 1118 tests green, ruff clean.
+tex-1 LANDED (iter-62, D-091 — the scene_texture window's identity
+tier + per-scope quotas): `brief/assembler.py::_scene_texture_items`
+— the ranking key widened to the identity-or-pinned tier (pack
+`identity_slots`: the slot a class, pinned above identity within the
+tier; an empty set = the pinned-only D-048 bytes) + the quota walk
+(`per_entity_max_items` per entity scope, identity first by
+construction; scene scopes and tombstones unquota'd — the D-047
+no-drop law); `core/pack.py` the two-key lint + rules.json the
+declarative-only arming (speech_pattern/look/mannerism, K=2).
+Measured: identity survives max_items=1 pressure (the trader problem
+closed), the chatty guard caps at 2; the 10-seed day1 A/B
+byte-identical, the corpus 105 + the T1 golden green. 1141 tests
+green, ruff clean. blind-1 LANDED (iter-63, D-092 — the blind-NPC
+leak suite's phase-4 extension, the phase's exit-criterion
+instrument): tests/test_blind.py (+26, the new file) — the leak
+predicates (pure test-side folds: the multiset delta law, the
+record-quad / trait-provenance fact laws, the retrieval-row law) +
+four layers — the every-prefix × every-knower 10-seed + golden
+sweep, the adversarial omniscient-query retrieval sweep + the `None`
+probe, the live drain's anchor-addressed call check (composition +
+leak law), the teeth family (planted leaks flagged). Measured: zero
+leaks, the suite ~3s. 1167 tests green, ruff clean. leg-4 LANDED
+(iter-64, D-093 — the mode F offline chronicler, TASKS' last
+phase-4 row; the owner's explicit DuckDB approval crossing the §8
+dependency fence): `scripts/chronicle.py` (NEW) — read_ndjson_auto
+no-ETL intake behind a count gate (a silent drop = integrity
+failure, nothing written); events.parquet (the canonical 12-column
+archive) + state_diffs.parquet (the LAG/LEAD window-diff, the
+continuous fold read) + chronicle.sqlite (facts_summary /
+state_current / type_histogram / knowledge_summary /
+chronicle_meta) via the attach→stdlib probe+fallback ladder
+(autoinstall off — never phones home); manifest.json content-derived
+(no wall-clock, no abs paths). The pyproject `[chronicler]` extra
+(duckdb>=1.0 — NEVER a runtime dependency: D-012 executable via
+test_runtime_imports_stdlib_only; the suite skips cleanly without
+the extra). Measured: 55/55 events day1 seed 123 across all intake
+combos, state continuity 0 breaks, both write paths
+byte-deterministic per run and logically identical; the corpus price
+zero by construction. 1178 tests green, ruff clean. The phase-4 gate
+CLOSED the phase (iter-65, D-094 — verdict PASS, the owner's "final
+check of everything before closing and preparing for phase 5" call):
+the full §5 protocol re-run green — the seed-125 pair ON M1=0.509 /
+M2=0.333, OFF T8 26 chains ≥ 3, IDENTICAL to the iter-54 record (the
+phase-4 landings kept the corpus-price-zero promise on the committed
+scenario); the stretch table max 1 both pacing arms + the quiet-walk
+stage; T1 double-run byte-identical; T7 reads as a story; 0 leaks on
+the blind suite — the phase's exit criterion re-measured at the gate
+(26 tests, all four layers); the mode-F chronicler acceptance green
+(53/53 through the count gate, the manifest content-derived); the
+corpus 105 + parse corpus green in the 1178-test collection (1168
+passed + 1 module skip pure-dev; 1177 passed + 1 offline-probe skip
+with `[chronicler]`), ruff clean. The doc debts paid: TASKS 626→589
+(the phase-4 ledger collapse — the trim the iter-61..64 rows
+deferred to exactly this gate), DECISIONS 30 held (D-094 joins the
+D-045/D-058/D-064/D-083 verdict family), FAQ 20 held, README
+resynced (KI#73 — the tex-1/blind-1/leg-4 landings had gone
+unrecorded). Phase 5 (Depth) is UNLOCKED — it opens on the owner's
+call (the iter-55 precedent).
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
-BRIEF_SPEC §3.9 + TASKS
-leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2 +
-D-084/D-085/D-086/D-087/D-088/D-089/D-090.
+BRIEF_SPEC §3.9 + BRIEF_SPEC §3.3/§6 (tex-1) + TEST_PLAN §1.3
+(blind-1) + `scripts/chronicle.py` + TEST_PLAN §7 (leg-4) + TASKS
+leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2/tex-1/blind-1/leg-4
++ D-084/D-085/D-086/D-087/D-088/D-089/D-090/D-091/D-092/D-093/D-094.
 
 ## For AI agents (primary audience)
 
@@ -418,7 +477,7 @@ padding.
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
-| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `df_briefer.py` bg-3 (the POV mini-briefer + reverse validation over the sink; `docs/TECH_NOTES.md` §3.3) · `profile_harness.py` iter-30 |
+| `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `df_briefer.py` bg-3 (the POV mini-briefer + reverse validation over the sink; `docs/TECH_NOTES.md` §3.3) · `profile_harness.py` iter-30 · `chronicle.py` iter-64 (the mode-F offline chronicler — read_ndjson_auto intake behind the count gate, the parquet pair + the sqlite summary via the stdlib ladder, the content-derived manifest; `[chronicler]` extra, D-093, `docs/TEST_PLAN.md` §7) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 
 ## Running
