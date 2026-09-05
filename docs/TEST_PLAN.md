@@ -13,7 +13,7 @@
 | T0 | schema | `tests/test_t0_schema.py` | every log line validates; the doc example is the fixture (D-010) |
 | T1 | determinism | `tests/test_t1_determinism.py` | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ fixture-regeneration guard** (iter-6): a fresh regeneration into a tmp dir diffed against the committed fixtures; a divergence with unchanged `schema_version` = fail. The committed fixture's header `schema_version` must equal the version derived from the current `schemas/event.schema.json` `$id` — a schema bump without a fixture regen fails here. |
 | T2 | replay | `tests/test_loop.py::test_t2_fold_equals_runtime_projection` | `fold(log) == state`; the simulator's incremental projection and a fresh fold of the committed log produce equal state (EventStore projection equivalence) |
-| T3 | blind-NPC | `tests/test_knowledge.py` | zero knowledge leaks on the suite; UAP motivation-hole crosswalk designs the cases (an NPC with no record for a fact cannot act on it; suspicion-from-absence is illegal without an `inferred`-channel record cause-chained to the trigger event) |
+| T3 | blind-NPC | `tests/test_knowledge.py` (+ `tests/test_blind.py` — the phase-4 extension, §1.3) | zero knowledge leaks on the suite; UAP motivation-hole crosswalk designs the cases (an NPC with no record for a fact cannot act on it; suspicion-from-absence is illegal without an `inferred`-channel record cause-chained to the trigger event); blind-1 (iter-63) extends the law to the phase-4 surfaces — mode B + retrieval outputs under the zero-leak law |
 | T4 | irreversibility | `tests/test_crime.py`, `tests/test_states.py` | `irreversible` state changes never revert without an explicit counter-event (fire has none — `location_burned_out` clamps the spot to `burned_out` and no later event reverts it; the arrest `caught` value is terminal) |
 | T5 | impossible | `tests/test_loop.py::test_teleport_stays_impossible`, `tests/test_intent.py`, `tests/test_actions.py` | teleport / sourceless arson / absent items / knowing the unseen stays impossible — well-formed but world-impossible intents emit `intent_rejected` no-op events (the world did not change); shape errors raise `RunnerError` loud |
 | T6 | smoke | `tests/test_urgencies.py::test_urgencies_fire_when_player_waits_long_enough` (1100-tick wait crosses the 1000-tick line) | 1000 ticks without exceptions or hangs — the queue drains, every system that fires on a beat fires, the writer closes cleanly |
@@ -57,6 +57,43 @@ kill-criterion read directionality, not deduplicated path counts.
 The OFF run of the gate playscript (`tests/playscripts/day1_full.json`,
 seed 125) produces ≥ 3 such chains. The full count is reported in
 `worklog.md`; the test asserts the gate minimum (3).
+
+### 1.3 T3's phase-4 extension — the blind-NPC leak suite (blind-1, iter-63)
+
+The phase-4 exit criterion ("0 leaks on the blind-NPC suite",
+`ROADMAP.md` §2) reads T3's zero-leak law over the phase-4 surfaces:
+mode B briefs, the retrieval ladder's outputs, and the live session
+wiring. Owner: `tests/test_blind.py` (the dir-2 instrument precedent);
+the suite core — every declared actor at the selected beat windows —
+stays in `tests/test_scene.py` (scene-1's acceptance pin).
+
+The instrument: pure test-side folds, never the engine's own code
+paths (a checker that shares the checked code cannot catch its bugs).
+Every scene_delta line is backed by a perceived event count-for-count
+(the multiset law — the line's own `(t, type, actor, target)` bytes,
+never a coarse `(t, type)` key); every recalled_facts line (raw or
+belief) maps to the knower's own fold — the raw line's exact
+`(at, channel, fidelity, knows)` quadruple, the belief line's exact
+`(token, sources, cross)` triple (the provenance IS the leak signal,
+not just the token); every retrieval fact row maps to the named
+knower's record. The adversarial form: the omniscient query (every
+`knows` token on the whole log — the query that knows the future) and
+the `knower=None` probe — the known_by boundary must hold under
+maximal input. The teeth law: planted leaks are flagged (crafted
+records + the pinned seed-125 cross-knower divergence) — a checker
+that cannot fail is decoration.
+
+The sweep: the 10-seed day1 family (seeds 120..129, the corpus-price
+witness pattern) + the committed golden fixture, EVERY log prefix
+(any prefix is a legal assembly state — the log is append-only),
+every declared actor + the player; the live drain's every emitted
+call document is verified against its own anchor-addressed prefix
+(`anchor` = the emission-time event count; append-only makes the
+final log's `events[:anchor]` the emission-time log — the document
+carries its own log address): composition byte-exact (the knowledge
+blocks are the document's own knower's assembly, the query line IS
+`recall_query`, the retrieval rows ARE the ladder's top-3) plus the
+leak law independently. Zero leaks measured; the suite runs ~3 s.
 
 ## 2. Metrics M1–M5 (`MVP_SCOPE.md` §15 owns the definitions)
 

@@ -105,9 +105,13 @@
 - `leg-4` · mode F offline chronicler (DuckDB `read_ndjson_auto()`
   over the JSONL, per-actor state diffs, parquet rollups, ATTACH back
   into SQLite — never in the runtime import graph, D-012).
-- `blind-1` · the blind-NPC leak suite extended to the phase-4
-  surfaces (the exit criterion's instrument — the dir-2 precedent:
-  mode B + retrieval outputs under T3's zero-leak law).
+- `blind-1` · the blind-NPC leak suite's phase-4 extension — **done
+  (iter-63, D-092)**: the exit criterion's instrument — the leak
+  predicates (test-side folds, never the engine's paths) + the three
+  surfaces (mode B briefs every prefix × every knower × 10 seeds;
+  retrieval under the adversarial omniscient query + the None probe;
+  the live drain's every emitted call, anchor-addressed) + the teeth
+  law. Detail: D-092 + TEST_PLAN §1.3.
 
 > Phase 3 (Director) landing ledger, condensed: the pacing stack
 > iter-36..39 (D-065..D-068), the event grammar iter-40..42

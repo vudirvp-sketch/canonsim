@@ -1,64 +1,63 @@
 # STATUS — canonsim
 
-Iteration: iter-62 (`iter-62-tex-1` — TASKS.md's top phase-4 todo,
-tex-1: the scene_texture window's identity tier + per-scope quotas;
-the owner's "continue per plans" call — no design fork this session:
-the tier and the quota are the two halves of blueprint §1's ONE
-identity-persistence resolution; no conflict, no KI) ·
+Iteration: iter-63 (`iter-63-blind-1` — the STATUS Next-step fork
+`leg-4`/`blind-1` resolved by law, not taste: `leg-4` names DuckDB —
+the §8 dependency fence keeps it the owner's explicit call, and the
+environment carries no duckdb — while `blind-1` is the exit
+criterion's own instrument, dependency-free with the dir-2 precedent:
+the legal-now branch of "leg-4 or blind-1 on the owner's call"; the
+owner's blanket "continue per plans" + the fork directive — no
+conflict, no KI) ·
 Phase: 4 (Knowledge & scene) — OPEN (iter-55)
-**tex-1 landed: the identity tier + per-scope quotas (D-091) —
-identity never loses to fresh texture, one entity never floods the
-window. `brief/assembler.py::_scene_texture_items` owns both
-read-path laws (the write side — the ledger, the lifecycle, D-049 —
-untouched): the ranking key widened to the identity-or-pinned tier
-(an entry whose slot is pack-declared `identity_slots` ranks WITH
-pinned; key: identity-or-pinned → pinned → newest → construction; the
-slot is a CLASS, never a scope condition; pinned above identity
-within the tier; an EMPTY set reduces the key to the pinned-only law
-exactly — the D-048 bytes), and the quota walk AFTER the ranking (at
-most `per_entity_max_items` lines per entity scope — a chatty entity
-renders nothing beyond K, its identity slots filling its quota first
-by construction — "identity slot first" without a second mechanism;
-identity itself is bounded too, it cannot become the flooding
-channel; scene scopes carry no quota — the room's texture is the
-block's core content, `max_items` bounds it; tombstones carry none —
-their own cap bounds them, a refuted identity line is gone;
-beyond-quota lines render nothing, never drop, never mark — the
-D-047 law; a value >= `max_items` is the documented inert state).
-The pack contract: `identity_slots` + `per_entity_max_items` join
-the REQUIRED `scene_texture` key set (lint `core/pack.py::_brief`,
-the closed-vocabulary family); the committed pack armed
-DECLARATIVE-ONLY (speech_pattern/look/mannerism, K=2 — the chorus
-cap's own cost posture) with the corpus price zero by construction:
-the committed corpora carry scene-scoped texture only
-(candles/hearth/exits/shadows/kindling — no tier member, no entity
-scope past any K). MEASURED: the tier live — the OLDER identity slot
-above every newer plain entry, and identity SURVIVES max_items=1
-pressure (the trader problem closed: a crowded scene never silently
-evicts exactly what long sessions must keep); pinned above identity
-within the tier; the quota live — the chatty guard (three plain +
-identity) capped at K=2, identity first, the barkeep's and the
-scene's lines untouched; three identity slots render exactly two;
-the tombstone half unquota'd (K=1, both refuted lines render); the
-empty-set reduction pinned (the pre-tex-1 bytes); the corpus price
-ZERO — the 10-seed day1_full A/B (committed pack vs the empty-tier /
-inert-quota copy) 10/10 byte-identical, the golden-prefix brief
-byte-identical over the texture fixture, the narrator corpus 105 +
-the parse corpus 10 + the T1 golden replay green unchanged over the
-ARMED pack.**
+**blind-1 landed: the blind-NPC leak suite's phase-4 extension
+(D-092) — the phase-4 exit criterion ("0 leaks on the blind-NPC
+suite") now owns its instrument: `tests/test_blind.py`, the
+instrument-first design. The predicates are pure TEST-SIDE folds,
+never the engine's own code paths (a checker that shares the checked
+code cannot catch its bugs): every scene_delta line backed by a
+perceived event count-for-count (the multiset law — the line's own
+`(t, type, actor, target)` bytes, never a coarse `(t, type)` key),
+every recalled_facts line (raw or belief) mapped to the knower's own
+fold (the raw line's exact record quadruple; the belief line's exact
+`(token, sources, cross)` triple — the provenance IS the leak signal,
+not just the token), every retrieval fact row mapped to the named
+knower's record. Four layers, all measured zero-leak: (1) the offline
+sweep — the 10-seed day1 family + the committed golden fixture, EVERY
+log prefix (any prefix is a legal assembly state, the log
+append-only), every declared actor + the player — the test_scene
+core generalized from selected cuts to the exhaustive sweep (~2s);
+(2) the retrieval sweep — the known_by boundary under MAXIMAL
+adversarial input: the real fresh-window query AND the omniscient
+query (every token on the whole log — the query that knows the
+future), every knower the fold holds (ambient groups included), plus
+the `knower=None` probe (no fact ever served without a knower) and
+the assembler twin: the query is a ranking signal, never a content
+source; (3) the live session wiring — a multi-beat drain over the
+cap-raised pack (11 emitted call documents: the tavern's four actors,
+the empty backyard chorus, the return), every one verified against
+its OWN anchor-addressed prefix (anchor = the emission-time event
+count; append-only makes `events[:anchor]` of the final log the
+emission-time log — the document carries its own log address):
+composition byte-exact (the knowledge blocks are the document's own
+knower's assembly, the query line IS recall_query, the retrieval rows
+ARE the ladder's top-3) + the leak law independently; (4) the teeth
+law — planted leaks flagged (crafted records: a foreign fact quad, a
+foreign delta line, a foreign belief, a foreign retrieval row; the
+pinned seed-125 cross-knower divergence — the instrument sees the
+provenance, not just the token): a checker that cannot fail is
+decoration.**
 ·
 Date: 2026-09-06 ·
-Scope: `brief/assembler.py` (the tier key + the quota walk — the one
-mechanism), `core/pack.py` (the two-key lint),
-`content/tavern_pack/rules.json` (the declarative-only arming + the
-notes), `tests/test_brief.py` (+23 — the tex-1 family: the tier, the
-quota, the lint, the 10-seed A/B), `docs/BRIEF_SPEC.md`
-(§3.3/§6/§9 — the same-commit law §8), `docs/TASKS.md` (tex-1 done
-+ st-2 re-pointed to the promotion door), `docs/DECISIONS.md` (D-091
-into the phase family, cap 30 held), `worklog.md` (iter-52 evicted),
-`STATUS.md` (this header + the Next step flip + KI#71 deleted per
-§5). 9 files — the one-mechanism-family scope (the iter-60/61
-pattern). 1118→1141 tests green, ruff clean.
+Scope: `tests/test_blind.py` (+26 — the suite's own home; the
+test_scene.py core stays — scene-1's acceptance pin),
+`docs/TEST_PLAN.md` (§1.3 — the extension's contract owner; the T3
+row's pointer), `docs/TASKS.md` (blind-1 done, the family pattern),
+`docs/DECISIONS.md` (D-092 into the phase family, cap 30 held),
+`docs/AGENT_NAVIGATION.md` (the tests/ row — structure changed),
+`worklog.md` (iter-53 evicted), `STATUS.md` (this header + the Next
+step flip + KI#72 deleted per §5 — closed iter-61, two iterations
+past, the KI#70 precedent). 7 files. 1141→1167 tests green, ruff
+clean.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -82,14 +81,11 @@ pattern). 1118→1141 tests green, ruff clean.
 
 ## Active KIs
 
-- KI#72 · the BRIEF_SPEC §9 identity-slot row over-projected onto
-  scene-2 vs the TASKS row's scope (both written by iter-60's own
-  edit — the deferral ledger promised the texture-window identity
-  tier with a wiring row that never carried it) · opened+closed
-  iter-61 (re-pointed to the `tex-1` row, the underdeliver law — the
-  row is now LANDED, the debt paid; the lesson: the deferral table's
+- (none — the ledger is clean; KI#72 deleted at iter-63 per AGENTS §5
+  — closed iter-61, two iterations past; the lesson lives in git +
+  the deferral-ledger rows it re-pointed: the deferral table's
   "arrives with" must name the TASKS row's OWN scope, never a
-  projection past it).
+  projection past it.)
 
 - (KI#71 deleted at iter-62 per AGENTS §5 — closed iter-59, three
   iterations past; the lesson lives in git + the REFERENCES/TECH_NOTES
@@ -537,23 +533,23 @@ phase-4→5 gate.
 ## Next step
 
 **Phase 4 (Knowledge & scene) is OPEN — leg-1/leg-2/leg-3/leg-3b/
-retr-1/scene-1/scene-2/tex-1 are LANDED (D-084..D-091, the phase
-family row): the trait fold with its brief read, the reflection mint,
-the arming, the retrieval ladder (now QUERIED by the runtime — the
-actor calls' protocol lines), the scene manager + mode B, the
-session wiring (the chorus drain inside the beat cycle, the actor
-reply door, the keyword query), and now the texture window's own
-read-path pair — the identity-or-pinned tier (identity never loses
-to fresh texture on recency) + the per-entity quota (one chatty
-entity never floods the window). The next row: `leg-4` mode F
-offline chronicler or `blind-1` the leak suite's extension to the
-phase-4 surfaces (the exit criterion's own instrument) on the
-owner's call. The exit criterion
-"0 leaks on the blind-NPC suite" reads T3 (`docs/TEST_PLAN.md` §1)
-extended to the phase-4 surfaces — the blind-1 row owns the
-instrument (mode B + retrieval outputs under the zero-leak law); the
-suite's core is already live in tests/test_scene.py. The phase-3
-verdict record: D-083 + worklog iter-54.**
+retr-1/scene-1/scene-2/tex-1/blind-1 are LANDED (D-084..D-092, the
+phase family row): the trait fold with its brief read, the reflection
+mint, the arming, the retrieval ladder (queried by the runtime since
+scene-2), the scene manager + mode B, the session wiring, the texture
+window's read-path pair (the identity tier + the per-entity quota),
+and the blind-NPC leak suite's phase-4 extension — the exit
+criterion's instrument is LIVE (TEST_PLAN §1.3: the leak predicates,
+the every-prefix sweep, the adversarial retrieval probe, the
+anchor-addressed drain check, the teeth law; zero leaks measured).
+The last phase-4 row: `leg-4` mode F offline chronicler — OWNER-GATED
+(the row names DuckDB; §8's dependency fence makes it the owner's
+explicit call — install/declare duckdb or re-point the row to a
+stdlib path; the fork resolved to blind-1 at iter-63 by exactly this
+law). The exit criterion "0 leaks on the blind-NPC suite" now reads
+T3 (`docs/TEST_PLAN.md` §1 + §1.3) with the instrument in place —
+the phase-4 gate protocol can run when the owner calls it. The
+phase-3 verdict record: D-083 + worklog iter-54.**
 
 1. **The phase-4 queue (TASKS.md owns the rows):** leg-1/leg-2 —
    LANDED (iter-55/56, D-084/D-085) → leg-3/leg-3b — LANDED
@@ -568,9 +564,11 @@ verdict record: D-083 + worklog iter-54.**
    DORMANT gate opened; the corpus price zero) → `tex-1` LANDED
    (iter-62, D-091 — the identity-or-pinned tier + the per-entity
    quota, blueprint §1's identity-persistence read path; the pack
-   armed declarative-only, the corpus price zero) → `leg-4` mode F
-   offline chronicler / `blind-1` the leak
-   suite's extension.
+   armed declarative-only, the corpus price zero) → `blind-1` LANDED
+   (iter-63, D-092 — the leak suite's phase-4 extension: the
+   instrument + the four layers, zero leaks measured, the exit
+   criterion's own instrument) → `leg-4` mode F offline chronicler
+   (OWNER-GATED: DuckDB = the §8 dependency fence).
 2. **Owner-gated, unchanged from phase 1/2:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

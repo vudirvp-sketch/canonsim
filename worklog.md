@@ -16,6 +16,28 @@
 
 
 ---
+iter-63 · 2026-09-06 · blind-1 — the blind-NPC leak suite's phase-4
+extension (phase 4; the STATUS fork leg-4/blind-1 resolved by law:
+leg-4 names DuckDB = the §8 dependency fence (the owner's explicit
+call), blind-1 the exit criterion's instrument, dependency-free —
+the dir-2 precedent)
+- tests/test_blind.py (+26, the new file): the leak predicates
+  (pure test-side folds — the multiset delta law, the record-quad /
+  trait-provenance fact laws, the retrieval-row law) + four layers:
+  the every-prefix × every-knower 10-seed + golden sweep, the
+  adversarial omniscient-query retrieval sweep + the None probe,
+  the live drain's anchor-addressed call check (composition +
+  leak law), the teeth family (planted leaks flagged).
+- docs: TEST_PLAN §1.3 (the T3 extension's contract owner) + the T3
+  row pointer; TASKS blind-1 done (606 — over the 600 cap per the
+  §6.1 phase-ledger pattern, the collapse at the phase gate, the
+  iter-62 precedent at 602); D-092 into the phase family (cap 30
+  held); AGENT_NAVIGATION tests row; STATUS Next flip (leg-4
+  owner-gated on DuckDB).
+- 1141→1167 green, ruff clean; zero leaks measured, the suite ~3s.
+  iter-53 evicted (verified in this edit); 10 entries after. KI#72
+  deleted per §5 (closed iter-61, two iterations past).
+---
 iter-62 · 2026-09-06 · tex-1 — the scene_texture window's identity
 tier + per-scope quotas (phase 4, TASKS' top row; the owner's
 "continue per plans" call; 9 files — over the soft limit: the tier,
@@ -173,15 +195,3 @@ at gate 3, then approach 4" call; docs-only, the iter-35 precedent)
   phase 4 UNLOCKED (opens on the owner's call). KI#69 (the worklog
   line-cap drift, the KI#68 family) opened+closed — trimmed in this
   edit. Detail: D-083 + STATUS. iter-44 evicted; 10 entries after.
----
-iter-53 · 2026-09-05 · content-3 — the ambient driver, the murmur LIVE
-(the phase-3 backlog's last content row)
-- The 16th action `ramble` + the weight-0 ambient hook (the channel's
-  own quiet gate, first_time_only), seeded on the wait action's hooks —
-  the resolver-sparse minting gap closed (the KI#15 family,
-  first-consumer law). core/resolvers.py + the pack trio.
-- Measured: day1 10/10 birth-record-only (the all-PEAK law), the T1
-  fixture regen (two fields), the corpus 105/105 + the quiet-beat
-  case's deliberate pins, the nopacing arm re-pinned (D-065 again).
-  +7 tests/test_ambient.py; 966→973, ruff clean. D-082 + TASKS +
-  TEST_PLAN §6 carry the detail.
