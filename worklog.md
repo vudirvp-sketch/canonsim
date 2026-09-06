@@ -16,6 +16,22 @@
 
 
 ---
+iter-66 · 2026-09-06 · prosefloor — the invented-entity prose floor
+(C2'', D-095, the v0.2 refinement family's first landing; 10 files —
+over the 3–5 soft limit: one code mechanism + its suite + the §9 doc
+sync; the TASKS intake rides this diff per the owner's D-022 sanction)
+- brief/scan.py (NEW, pure) + the apply_reply wiring after the shape
+  gate: the closed world's names (pack display names, existence never
+  visibility) vs the prose's mid-sentence capitals; REFUSED prose
+  <name> (invented_entity) through the existing ladder. +17 tests
+  (1185+1, ruff clean).
+- Corpus price ZERO both arms: the 105-case FP=0 pin + the designed
+  Aldric probe caught with its pinned `dry` shape preserved — zero
+  re-distill, zero call-side bytes. TASKS 616 (over the 600 cap: the
+  intake is substance, §6.1 — next trim at the phase-5→6 gate);
+  DECISIONS 31 (D-095, the between-gates precedent); FAQ 20 held (two
+  clauses in existing entries). iter-56 evicted; 10 entries after.
+---
 iter-65 · 2026-09-06 · phase-4 gate — the verdict PASS (D-094; the
 owner's "final check of everything before closing and preparing for
 phase 5" call; 6 files — one over the soft limit: verdict + collapse
@@ -196,19 +212,3 @@ phases.md §4's memory paragraph; LEGEND_SPEC written just-in-time)
   done + the leg-3b arming row (the corpus price tagged) + D-086
   into the D-084/D-085/D-086 family (cap 30 held). iter-47 evicted;
   10 entries after.
----
-iter-56 · 2026-09-05 · leg-2 — the brief's derived-trait read, leg-1's
-first consumer (phase 4, BRIEF_SPEC's phase-4 clause)
-- brief/assembler.py + core/traits.py (+14 tests: 10 brief, 4 traits):
-  the PC's crystallized beliefs LEAD recalled_facts as belief lines
-  `- belief <token> (t <cross>, sources: <ids>)`, the family records
-  render nothing raw; expand_trait the demand side (the expansion
-  law). BRIEF_SPEC §3.5 + §3 table + §9 split — same commit (§8).
-- Measured-first: the PC holds no family token on ANY committed
-  corpus — the 10-seed day1_full A/B (120..129) 10/10 byte-identical
-  (brief + log), zero corpus regen; the golden no-belief pin.
-- DECISIONS D-085 merged into the D-084/D-085 phase family (cap 30
-  held); TASKS leg-2 done; KI#70 (the BRIEF_SPEC self-cap rot,
-  389 > the declared 300 at HEAD — the header now reads AGENTS §6)
-  opened+closed; KI#69 deleted per §5. 991→1004 tests, ruff clean.
-  iter-46 evicted; 10 entries after.

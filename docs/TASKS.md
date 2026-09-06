@@ -23,6 +23,22 @@
 > zero leaks on all four layers; TEST_PLAN §1/§1.3). Phase 5 (Depth)
 > UNLOCKED — opens on the owner's call (the iter-55 precedent).
 
+### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
+
+> The research review's confirmed holes, landed additively — one family
+> row D-095; no breaking schema change; every landing measures its own
+> corpus price first (the both-arms law).
+
+- `prosefloor` · the invented-entity prose floor (C2'') — done
+  (iter-66, D-095; detail: VALIDATION_SPEC §2.1).
+- `beliefwire` · the `trait_held` leaf (a requires-GATE, never a
+  multiplier), the traits channel into the loop's reads, the
+  counter-family in the fold — todo (iter-67).
+- `rumordrift` · A2'' mechanics declarative-only then pack arming
+  (68a/68b; `drift:<family>` stream isolation is law) — todo.
+- `suspectaxis` · per-target suspicion, the drift teeth's first
+  consumer — todo (iter-69).
+
 ### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
 - `leg-1` · trait crystallization (P3f) — done (iter-55, D-084):
@@ -298,6 +314,17 @@ Phase-0 gate closed; full evidence in `worklog.md` iter-6 + the
 phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
+
+### bg-7 · engine + confabulation probe — todo (the owner's expanded scope)
+
+The refinement lance's LLM-side companion (track B — never blocks
+track A; the owner's 2026-09-06 scope confirmation): (i) the
+51-utterance set × {3–8B, GBNF} vs the 35/35 baseline; (ii) a prose
+probe with the LIVE floor (the sentence-initial gap's first numbers);
+(iii) the Cyrillic Script Tax; (iv) confabulations on degraded
+knows-strings (the C3.5 gate); (v) the surface-section A/B. Runner
+outside the repo (Rule 9, INV-4); results → TECH_NOTES; engine-1
+feeds on these numbers.
 
 ### bg-2 · event taxonomy — DONE (bg-2-event-taxonomy)
 

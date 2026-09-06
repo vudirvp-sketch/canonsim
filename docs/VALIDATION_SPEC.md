@@ -39,6 +39,30 @@ Malformed LLM output is the boundary's degradation problem (ladder:
 extraction pass → dry mode, L12), handled BEFORE the validator is called —
 the validator itself never guesses, never repairs, never degrades.
 
+### 2.1 The invented-entity prose floor (iter-66, D-095)
+
+The response document's `prose` (§7.1) is the boundary's one free-text
+field. It is never parsed, never repaired, never read as instructions —
+the §2 law holds unchanged. It carries exactly ONE structural check,
+the closed-world twin of the claim side's `unknown_entity` verdict: a
+capitalized token in unambiguous proper-noun position (non-sentence-
+initial; quotes and line breaks restart the capital law, commas and
+dashes do not) must be a word of a declared entity's display name
+(`brief/scan.py::name_manifest` — the pack's own fields, read directly,
+never restated). **Existence, never visibility**: a name may be legally
+narrated off-stage (the world holds what the current call's cards do
+not show) — knowledge-state is the leak suite's instrument (all four
+layers), never this floor's. Violations are dry `REFUSED prose <name>
+(invented_entity)` lines through the §7 ladder verbatim; the floor runs
+at the boundary AFTER the shape gate and BEFORE the proposal/delta
+gates (the cheapest gate first — a hallucinated world is more
+fundamental than a mismatched claim). Sentence-initial capitals are
+exempt by law: English mandates the capital there, and telling a
+fronted common noun from a name requires a dictionary — out of scope
+under the stdlib-only law; the live gap is bg-7's to measure before
+any extension is considered (the surface-section decision rides those
+numbers).
+
 ## 3. The proposal document
 
 One document per narrator call, machine-shaped:
@@ -157,6 +181,11 @@ shape gate; the call document's format is `BRIEF_SPEC.md` §7.1's):
   ladder's problem (a regen with a `MALFORMED` note; exhaustion → dry
   mode), never the validator's or the gateway's — they never guess,
   never repair (§2).
+- The invented-entity prose floor (§2.1) runs at the boundary after
+  the shape gate and before the proposal/delta gates: an invented name
+  refuses the whole document through this section's ladder — same
+  budget, same L12 exhaustion, the REFUSED line riding the
+  re-invocation, never a crash.
 - **A refused document never feeds intents**: delta refusals or
   contradicted claims regen the WHOLE beat — the re-invocation
   re-delivers prose, delta and proposal; intents reach the door only on
@@ -235,6 +264,9 @@ comparison is computed (dict equality over structured verdicts); no LLM
 judges anything, ever. The report carries the harness metrics: `invented`
 (contradicted count) and `unverifiable` (insufficient_data count) — bg-3's
 invented-facts metric and the §7 `regen_count` ride the same numbers.
+The floor's `invented_entity` refusals ride the same notes: the session
+tallies read every refusal family from the same place, no second
+counter exists.
 
 ## 10. Deferred (just-in-time — writing these early = scope creep)
 

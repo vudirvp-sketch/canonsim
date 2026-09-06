@@ -1,47 +1,49 @@
 # STATUS — canonsim
 
-Iteration: iter-65 (`iter-65-gate` — the phase-4 gate review, TASKS'
-last phase-4 row, on the owner's explicit "final check of everything
-before closing and preparing for phase 5" session call; the iter-54
-protocol precedent — no fork, no KI) ·
+Iteration: iter-66 (`iter-66-prosefloor` — the v0.2 refinement family's
+first landing, D-095; the owner's post-gate quality pass on the research
+review's confirmed holes; the D-059/D-060/D-061 post-gate-polish
+precedent) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
-the build column complete at iter-64, D-084..D-093); phase 5
-UNLOCKED — opens on the owner's call (the iter-55 precedent)**
-**The verdict record: the full ROADMAP §5 protocol re-run green —
-the corpus 105 + parse corpus (1178 collected: 1168 passed + 1
-module skip pure-dev / 1177 + 1 offline-probe skip with the
-[chronicler] extra; ruff clean); the seed-125 pair ON M1=0.509 /
-M2=0.333 / OFF T8 26 chains ≥ 3 — IDENTICAL to the iter-54 numbers
-(the phase-4 landings kept the corpus-price-zero promise on the
-committed scenario); the stretch table max 1, both arms (the
-phase-3 exit criterion holds — no regression); T1 double-run
-byte-identical; T7 reads as a story; the phase-4 exit criterion
-re-measured — 0 leaks on the blind-NPC suite (26 tests, all four
-layers); the mode-F chronicler acceptance green (TEST_PLAN §7: the
-fresh gate log 53/53 through the count gate, the manifest
-content-derived, the stdlib ladder live in the offline env).**
-**The doc debts paid at the gate (the iter-54 scope pattern): TASKS
-626→589 — the phase-4 ledger collapsed to one-liners + the condensed
-ledger + the iter-65 gate row (the trim the iter-61..64 rows
-deferred to exactly this gate); DECISIONS 30 held (D-094 joins the
-D-045/D-058/D-064/D-083 verdict family — no collapse owed, every
-phase-4 landing rode the single D-084..D-093 family row as it
-landed); FAQ 20 held; README resynced (KI#73: the
-tex-1/blind-1/leg-4 landings had gone unrecorded).**
+the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
+UNLOCKED — opens on the owner's call (the iter-55 precedent); the
+refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
+refinement, never phase-5 scope**
+**The landing: the invented-entity prose floor (C2'') — the response
+document's one free-text field gets the closed-world law's prose twin
+(a capitalized token in non-sentence-initial position must be a word
+of a declared entity's display name — existence, never visibility;
+knowledge-state stays the leak suite's). `brief/scan.py` pure (the
+manifest reads the pack's own display-name fields — one source, INV-3
+clean) + the boundary wiring after the shape gate, before
+proposal/delta (the cheapest gate first). `REFUSED prose <name>
+(invented_entity)` through the §7 ladder verbatim — same budget, same
+L12, never a crash.**
+**Corpus price ZERO, both arms pinned: the 105-case corpus FP=0 (the
+designed Aldric probe of `regen_exhaustion_falls_dry` caught at the
+floor — its pinned `dry` ladder shape preserved, no re-distill, the
+fixture untouched); +17 tests (1185 passed + 1 skipped, ruff clean).
+Zero call-side changes — the manifest never renders into the call
+bytes (the committed corpus shape holds by construction).**
 ·
 Date: 2026-09-06 ·
-Scope: `docs/ROADMAP.md` (phase-4 CLOSED + phase-5 UNLOCKED — the
-phase table is the single owner of closed/open), `docs/DECISIONS.md`
-(D-094 into the verdict family + the header note), `docs/TASKS.md`
-(the phase-4 ledger collapse + the gate row), `STATUS.md` (this
-header + KI#73 + the Next flip), `worklog.md` (iter-65 in, iter-55
-out), `README.md` (the three-landing sync + the verdict + the
-scripts/chronicle.py row — KI#73's fix). 6 files — one over the
-soft limit: the gate's doc-debt family (verdict + collapse + sync
-are one mechanism, the iter-54 scope pattern). No runtime file
-touched — the corpus price zero by construction. 1178 collected
-green, ruff clean; doc-only iteration, the alarm's streak 1 of 2
-(the §5 protocol re-run IS the substance; the iter-35 precedent).
+Scope: `brief/scan.py` (NEW — the floor), `cli/mediator.py` (the
+wiring + the session manifest), `tests/test_scan.py` (NEW — the
+floor's suite: the manifest/position/refusal laws + the both-arms
+corpus pin), `tests/test_mediator.py` (the wiring pair: the floor
+refuses before the gateway, the exhaustion falls dry),
+`docs/VALIDATION_SPEC.md` (§2.1 the floor's contract + the §7.1 gate
+order + the §9 metric clause), `docs/TASKS.md` (the v0.2 refinement
+backlog + the bg-7 row — 616, over the 600 cap with the intake as
+substance, §6.1 recorded in worklog), `docs/DECISIONS.md` (D-095, the
+family's compound row — 31 rows, the over-cap-between-gates
+precedent), `docs/AGENT_NAVIGATION.md` (§1: the scan.py + suite
+segments), `STATUS.md` (this header + the two FAQ clauses + the Next
+flip), `worklog.md` (iter-66 in, iter-56 out). 10 files — over the
+3–5 soft limit: one code mechanism + its suite + the mandated doc
+sync (§9); the intake rides this diff per the D-022 sanction (the
+research session's plan, TASKS' "new ideas enter here" law). A code
+iteration — the doc-loop streak cleared (iter-65's 1 of 2).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -132,7 +134,15 @@ green, ruff clean; doc-only iteration, the alarm's streak 1 of 2
   fence for the chronicle: the folds render nothing (the brief's
   belief line is the fold's one legal render — a read-side document,
   not canon); the behavior a fold gates (the intent's own event) is
-  the only legal canon visibility.
+  the only legal canon visibility. The flip side (the B3 trap's
+  record, iter-66): gating behavior through the INTENT door is legal
+  and precedent-backed — a `trait_held` requires-leaf may arm or
+  disarm an urgency entry (a GATE, never a probability multiplier;
+  p=100 is compulsion semantics, the content-5/iter-51 form — one
+  leaf, two legal uses). The fence is directional: folds flow into
+  behavior selection through the door, never into channel inputs —
+  and the predicate layer must receive the fold through its declared
+  projection parameter, never by reaching into the fold modules.
 
 - **Chronicle conditionals read FLAT context keys; the action check
   outcome is NESTED (iter-43 law).** `{cond?a|b}` addresses
@@ -226,7 +236,14 @@ green, ruff clean; doc-only iteration, the alarm's streak 1 of 2
   resolutions. Link, never restate; cite ledger row IDs (e.g. "per
   RNG-1"). The audit method: grep a sample of ledger terms across
   the planning docs — every term must land in at least one (verified
-  iter-0x; the ref-graveyard diagnostic).
+  iter-0x; the ref-graveyard diagnostic). External session
+  prompt-cards (bootstrap texts) age the same way: on any conflict,
+  AGENTS §4/§6, the DECISIONS rows and the repo's own bytes own the
+  truth — a bootstrap text is a convenience copy, never a second
+  source (the 2026-09-06 research session's four confirmed
+  conflicts — the cap, the phase frame, the RNG law, the
+  dependencies — none worth a KI; the record lives here).
+
 - **Live sandbox session recipes — narrate + say (operational; iter-24/
   31/32; merged per KI#54 — one session, two doors sharing one ledger,
   D-049).** `python -m cli` opens the interactive session. **narrate**
@@ -524,11 +541,15 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**Phase 4 (Knowledge & scene) CLOSED — gate PASS iter-65, D-094 (the
-full ROADMAP §5 protocol re-run on the owner's "final check + prepare
-for phase 5" call; the evidence: the ROADMAP §2 row — the single
-owner of closed/open — + the D-094 verdict segment + worklog
-iter-65; the phase-4 landing ledger condensed in TASKS). Phase 5
+**The v0.2 refinement lance in flight (iter-66 done): prosefloor landed
+(D-095, corpus price zero, both arms pinned); next iter-67-beliefwire
+— the `trait_held` requires-leaf + the traits channel into the loop's
+read points + the counter-family in the fold (TASKS' refinement
+backlog owns the rows; each landing measures its own corpus price
+first). The lance rides between the gates — track A refinement, never
+phase-5 scope. Phase 4 (Knowledge & scene) CLOSED — gate PASS
+iter-65, D-094 (the full ROADMAP §5 protocol re-run; the phase-4
+landing ledger condensed in TASKS). Phase 5
 (Depth) UNLOCKED — it opens on the owner's call (the iter-55/36
 precedent): the phase-5 backlog drafts from `docs/blueprint/phases.md`
 §5 at the opening iteration, never before.**
@@ -560,7 +581,9 @@ precedent): the phase-5 backlog drafts from `docs/blueprint/phases.md`
    testimony-crystallization fidelity floor; the static-personality
    half of the character-card question — PACK_SPEC territory at the
    2nd-setting gate) carry unchanged.
-3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred.
+3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE**, bg-6 owner-deferred,
+   **bg-7 todo** (the refinement lance's engine + confabulation probe,
+   the owner's expanded scope — TASKS' bg-7 row owns the five probes).
    New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked
    until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG

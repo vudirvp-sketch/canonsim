@@ -65,6 +65,7 @@ from brief.mediator import (
     narrator_response_from_mapping,
     promotions_in,
 )
+from brief.scan import invented_names, name_manifest, prose_refusal_lines
 from brief.scene import present_at_scene, recall_query, speaking_queue
 from brief.validator import (
     IntentProposal,
@@ -143,6 +144,10 @@ class Mediator:
         self._regens = RegenBudget()
         self._beat_open = False
         self._shown_lines = 0  # chronicle lines already emitted as template prose
+        # the invented-entity prose floor's manifest: the pack is immutable
+        # for the session's lifetime, so the closed world's names are
+        # derived once (iter-66, VALIDATION_SPEC §2.1)
+        self._name_floor = name_manifest(pack)
         # scene-2: the chorus drain's state
         self._chorus: tuple[str, ...] = ()  # the beat's remaining drain (the accept's snapshot)
         self._knower: str | None = None  # the open call's subject (None = the player's)
@@ -210,6 +215,15 @@ class Mediator:
             response = narrator_response_from_mapping(doc)
         except (NarratorError, DeltaError, ProposalError) as exc:
             return self._regen_or_dry((f"MALFORMED {exc}",))
+
+        # The invented-entity prose floor (iter-66, VALIDATION_SPEC
+        # §2.1): the one free-text field gets the same closed-world law
+        # the claims get, BEFORE the proposal/delta gates — the cheapest
+        # gate first, and a hallucinated world is more fundamental than
+        # a mismatched claim. Same refusal ladder as every gate family.
+        violations = invented_names(response.prose, self._name_floor)
+        if violations:
+            return self._regen_or_dry(prose_refusal_lines(violations))
 
         events = self._events()
         report = None

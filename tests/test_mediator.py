@@ -8,7 +8,10 @@ stays LLM-free (INV-4 — no network, no inference, no runtime dependency
 landed with this boundary). The suite pins: the call document's bytes
 (brief + protocol, pure in (log, ledger, pack)), the response document's
 closed shape gate (malformed = degradation, never a crash — the gates
-never see it), the refusal → regen → dry ladder (≤2 regens, L12), the
+never see it), the invented-entity prose floor's wiring (iter-66: the
+one free-text field gets the closed-world law — REFUSED lines, the same
+regen ladder, the L12 floor, never a crash), the refusal → regen → dry
+ladder (≤2 regens, L12), the
 accepted path (delta through the real gateway, intents through the real
 door, `mark_promoted` live wiring, canon birth in the projection), the
 withdrawal mirror (a retired entry's intent never feeds), and the
@@ -288,6 +291,60 @@ def test_malformed_reply_is_degradation_not_crash(tmp_path: Path) -> None:
     assert result.status == "regen"
     assert result.notes[0].startswith("MALFORMED")
     assert "MALFORMED" in result.call_path.read_text(encoding="utf-8")
+
+
+# -- the invented-entity prose floor (iter-66) ----------------------------------
+
+
+def test_prose_floor_refuses_before_the_gateway_and_notes_ride(
+    tmp_path: Path,
+) -> None:
+    """The floor's position and protocol (VALIDATION_SPEC §2.1): an
+    invented name in proper-noun position refuses the WHOLE document —
+    BEFORE the delta gateway (a hallucinated world is more fundamental
+    than a mismatched claim; the delta below is legal and must not have
+    applied), through the same regen ladder — the REFUSED line rides the
+    re-invocation's protocol section, the operator sees the name. The
+    clean re-reply accepts, and the same delta applies then (accepted
+    items survive across regens — the gateway's idempotent rule)."""
+    _sim, mediator = _session(tmp_path)
+    mediator.emit_call()
+    invented = {
+        "prose": "A stranger named Marlowe leaned on the bar.",
+        "texture_delta": {"source": "turn:1", "established": [dict(_CANDLES)]},
+    }
+    first = mediator.apply_reply(_reply(tmp_path, "r1.json", invented))
+    assert first.status == "regen" and first.regens_used == 1
+    assert first.notes == ("REFUSED prose Marlowe (invented_entity)",)
+    assert (
+        "REFUSED prose Marlowe (invented_entity)"
+        in first.call_path.read_text(encoding="utf-8")
+    )
+    assert not mediator.ledger.live()  # the legal delta never applied
+    second = mediator.apply_reply(_reply(tmp_path, "r2.json", {
+        "prose": "A few candles still burned on the tables.",
+        "texture_delta": {"source": "turn:1", "established": [dict(_CANDLES)]},
+    }))
+    assert second.status == "accepted"
+    assert [entry.id for entry in mediator.ledger.live()] == ["tex_0000"]
+
+
+def test_prose_floor_exhaustion_falls_dry_never_blocks(tmp_path: Path) -> None:
+    """The floor spends the existing regen budget like every refusal
+    family: exhaustion falls to the L12 floor (the beat's template
+    prose), never a blocked beat — the corpus's designed probe lands on
+    the same ladder shape (its pinned final status `dry` is why the
+    fixture needed no re-distill)."""
+    _sim, mediator = _session(tmp_path)
+    mediator.emit_call()
+    invented = {"prose": "Marlowe was there, and Bodkin beside him."}
+    first = mediator.apply_reply(_reply(tmp_path, "r1.json", invented))
+    second = mediator.apply_reply(_reply(tmp_path, "r2.json", invented))
+    third = mediator.apply_reply(_reply(tmp_path, "r3.json", invented))
+    assert first.status == "regen" and second.status == "regen"
+    assert third.status == "dry"
+    assert not mediator.beat_open
+    assert third.prose  # template prose, never a blocked beat
 
 
 def test_contradicted_claims_refuse_the_document(tmp_path: Path) -> None:
