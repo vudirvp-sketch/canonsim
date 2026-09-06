@@ -16,6 +16,27 @@
 
 
 ---
+iter-69 · 2026-09-07 · suspectaxis — the per-target suspicion
+mechanics, declarative-only (the v0.2 refinement family's fifth
+segment, D-101; 4 runtime files + the suite + the doc sync — one
+mechanism family, the iter-60..68 scope pattern)
+- core/crime.py the `{source, figure}` mapping mode: the knower's axis
+  at `pair.<figure>.<axis>` (the P2a home, the seed is the reaction's
+  permission), the status flip + the arrest aimed at the figure (the
+  parameterized suspect_id); the flat string shape keeps the v0.1
+  bytes. core/pack.py the no-mixing/figure lint; core/director.py +
+  scripts/balance_harness.py the axis summed in either home.
+- Corpus price ZERO, measured: the committed pack stays flat (the mode
+  pin) + the git-HEAD A/B byte-identical (day1_full 125,
+  day1_theft_and_arson, guard-talk seeds 1/2, the seed-15 talk). +12
+  tests/test_suspectaxis.py (1227→1239+1, ruff clean) — the drift
+  teeth's blame pinned live on the 68b geometry (seed 2 hit / seed 1
+  miss). KI#75 opened+closed (the ev_0007 example props never matched
+  the runtime; EVENT_SCHEMA §10 + MVP_SCOPE synced, §4 the
+  suspicion-home clause). D-101; TASKS suspectaxis done +
+  suspectaxis-2 laid. iter-62 evicted (verified in this edit); 10
+  after.
+---
 iter-68b · 2026-09-07 · rumordrift arming — the first LIVE
 knowledge.drift family in the committed pack (68a's arming row,
 D-100; 2 runtime files + the suite — under the soft limit)
@@ -182,30 +203,6 @@ the dir-2 precedent)
 - 1141→1167 green, ruff clean; zero leaks measured, the suite ~3s.
   iter-53 evicted (verified in this edit); 10 entries after. KI#72
   deleted per §5 (closed iter-61, two iterations past).
----
-iter-62 · 2026-09-06 · tex-1 — the scene_texture window's identity
-tier + per-scope quotas (phase 4, TASKS' top row; the owner's
-"continue per plans" call; 9 files — over the soft limit: the tier,
-the quota, the lint, the pack arming, and the test family are one
-mechanism family, the iter-60/61 scope pattern)
-- brief/assembler.py::_scene_texture_items: the ranking key widened
-  to the identity-or-pinned tier (pack `identity_slots`, the slot a
-  class, pinned above identity within the tier; an empty set = the
-  pinned-only D-048 bytes) + the quota walk (`per_entity_max_items`
-  per entity scope, identity first by construction; scene scopes and
-  tombstones unquota'd, the D-047 no-drop law).
-- core/pack.py the two-key lint (the required closed set) +
-  rules.json the declarative-only arming (speech_pattern/look/
-  mannerism, K=2). Measured: the tier live (identity survives
-  max_items=1 pressure — the trader problem closed), the quota live
-  (the chatty guard capped at 2), the 10-seed day1 A/B
-  byte-identical, the narrator corpus 105 + the T1 golden green.
-- +23 tests/test_brief.py; 1118→1141, ruff clean. D-091 into the
-  phase family (cap 30 held); TASKS tex-1 done + st-2 re-pointed to
-  the promotion door; TASKS 602 — two over the 600 cap after the
-  family squeeze: the phase-4 done rows are the phase ledger (§6.1,
-  kept; the collapse lands at the phase gate, the iter-61 precedent
-  at 601). KI#71 deleted per §5. iter-52 evicted; 10 entries after.
 ---
 (end of log — cap 10; pre-trim history lives in git)
 

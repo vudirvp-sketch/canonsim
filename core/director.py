@@ -556,14 +556,24 @@ def _visible_physical_threats(
 
 
 def _global_suspicion(projection: Mapping[str, Mapping[str, Any]]) -> int:
-    """Sum of the `relations.suspicion` axis across NPCs that have one
-    (the player and ambient groups lack it — by convention, never
-    raised). The aggregate tension the director senses."""
+    """Sum of the suspicion axis across NPCs that hold one, in EITHER
+    home (suspectaxis, iter-69): the flat v0.1 `relations.suspicion` or
+    the per-target `pair.<figure>.suspicion` records. A pack runs one
+    mode and the other home never moves (the pack lint's no-mixing law),
+    so the sum never double-counts; the director senses the axis, not
+    the storage. The player and ambient groups hold neither home by
+    convention — never raised. The aggregate tension the director
+    senses."""
     total = 0
     for props in projection.values():
         value = props.get("relations.suspicion")
         if isinstance(value, int) and not isinstance(value, bool):
             total += value
+        for prop, value in props.items():
+            if not (prop.startswith("pair.") and prop.endswith(".suspicion")):
+                continue
+            if isinstance(value, int) and not isinstance(value, bool):
+                total += value
     return total
 
 

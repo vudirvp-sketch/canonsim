@@ -95,16 +95,26 @@ def _suspicion_peaks(
     events: Sequence[Any], projection: dict[str, dict[str, Any]]
 ) -> dict[str, int]:
     """Peak suspicion per NPC across the run (max value seen, not just
-    final — a guard who escalated then de-escalated still peaked)."""
+    final — a guard who escalated then de-escalated still peaked).
+    Either home counts (suspectaxis, iter-69): the flat v0.1
+    `relations.suspicion` axis and the per-target
+    `pair.<figure>.suspicion` records — a pack runs one mode, the other
+    home never moves; peaks key by the NPC holding them either way."""
     peaks: dict[str, int] = {}
     # init from projection (0 default per the pack)
     for npc_id in projection:
-        if "relations.suspicion" in projection[npc_id]:
-            peaks[npc_id] = int(projection[npc_id]["relations.suspicion"])
-    # walk every state_change on the suspicion axis
+        for prop, value in projection[npc_id].items():
+            if prop == "relations.suspicion" or (
+                prop.startswith("pair.") and prop.endswith(".suspicion")
+            ):
+                peaks[npc_id] = max(peaks.get(npc_id, 0), int(value))
+    # walk every state_change on the suspicion axis (either home)
     for event in events:
         for change in event.state_changes:
-            if change.prop == "relations.suspicion":
+            if change.prop == "relations.suspicion" or (
+                change.prop.startswith("pair.")
+                and change.prop.endswith(".suspicion")
+            ):
                 current = peaks.get(change.entity, 0)
                 peaks[change.entity] = max(current, int(change.to_))
     return peaks

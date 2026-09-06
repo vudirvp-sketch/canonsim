@@ -1007,12 +1007,39 @@ class _Lint:
             "crime_watch.status_suspect_value must be one of status_values",
         )
         sources = crime.get("suspicion_sources", {})
-        for token, source in crime.get("suspicion_from_knowledge", {}).items():
+        flat_shape = targeted_shape = False
+        for token, spec in crime.get("suspicion_from_knowledge", {}).items():
+            if isinstance(spec, str):  # v0.1: token -> source (the player implicit)
+                flat_shape = True
+                _require(
+                    spec in sources,
+                    f"crime_watch.suspicion_from_knowledge[{token!r}]: unknown "
+                    f"suspicion source {spec!r}",
+                )
+                continue
+            # per-target (suspectaxis, iter-69): token -> {source, figure}
+            targeted_shape = True
             _require(
-                source in sources,
-                f"crime_watch.suspicion_from_knowledge[{token!r}]: unknown "
-                f"suspicion source {source!r}",
+                isinstance(spec, dict),
+                f"crime_watch.suspicion_from_knowledge[{token!r}]: a string "
+                f"(flat) or an object (per-target) — got {type(spec).__name__}",
             )
+            _require(
+                spec.get("source") in sources,
+                f"crime_watch.suspicion_from_knowledge[{token!r}].source: "
+                f"unknown suspicion source {spec.get('source')!r}",
+            )
+            figure = spec.get("figure")
+            _require(
+                figure in npc_ids,
+                f"crime_watch.suspicion_from_knowledge[{token!r}].figure "
+                f"{figure!r} is not an npc",
+            )
+        _require(
+            not (flat_shape and targeted_shape),
+            "crime_watch.suspicion_from_knowledge mixes the flat v0.1 shape "
+            "and the per-target shape — one mode per pack",
+        )
         arrest = crime.get("arrest", {})
         _require(
             arrest.get("event") in templates,

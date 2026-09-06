@@ -57,7 +57,22 @@
   tells a non-member token), live on the guard-talk geometry (12/22
   seeds hit). Detail: tests/test_rumordrift.py.
 - `suspectaxis` · per-target suspicion, the drift teeth's first
-  consumer — todo (iter-69).
+  consumer — done (iter-69, D-101, mechanics declarative-only: the
+  `{source, figure}` mapping, the `pair.<figure>.<axis>` home, the
+  parameterized flip/arrest — the committed pack stays flat, corpus
+  price ZERO by construction + byte-measured; the blame surfaces live
+  on crafted packs, the 68b guard-talk geometry reused. Detail:
+  tests/test_suspectaxis.py).
+- `suspectaxis-2` · the pack arming — the committed pack's per-target
+  switch: the object-shaped mapping (both crime sightings + the noise
+  mapped to their figures, `figure_starting_fire` gaining a LIVE
+  source — the drift's teeth on the committed scenario), the pair
+  homes seeded on the watchful NPCs, the flat `relations.suspicion`
+  seeding dropped (dead vocabulary), the director hook trigger
+  re-declared on the `prop` leaf — the corpus price measured FIRST
+  (the 8 narrator `relations.suspicion` claims re-pinned to the pair
+  path, the M1/M2 arms re-measured, the day1 divergence documented) —
+  todo.
 - `testproto` · the intermediate-build LLM-integration test protocol —
   done (iter-68, D-098 — research, doc-only): the fork closed by
   decomposition into the three-layer spiral (contract simulacrum /

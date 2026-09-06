@@ -90,6 +90,14 @@ Transfer example — the drunkard at the market:
 
 Fire has no counter-event: a burned tavern stays burned (T4).
 
+The suspicion home (suspectaxis, iter-69): the crime reactions write the
+knower's axis in ONE of two pack-declared homes — the flat v0.1
+`relations.<axis>` (string-shaped `crime_watch.suspicion_from_knowledge`,
+the suspect implicit: the player) or the per-target
+`pair.<figure>.<axis>` (object-shaped `{source, figure}` — the token
+names its suspect; the status flip and the arrest aim at the figure).
+One mode per pack; the figure must be an npc of the same pack.
+
 ## 5. `hooks`
 
 Tags seeded at event time and consumed by the director's buffer. Each hook
@@ -140,8 +148,8 @@ provenance joins the same field family when the LLM circuit arrives (phase 1+).
     { "who": "npc_barkeep_01", "channel": "heard", "fidelity": "vague",
       "knows": "noise_by_the_bar", "at": 412, "source": "ev_0007" } ],
   "state_changes": [
-    { "entity": "npc_guard_01", "prop": "suspicion_of.pc_01", "from": 0, "to": 25 },
-    { "entity": "pc_01", "prop": "status", "from": "unknown", "to": "suspect" } ],
+    { "entity": "npc_guard_01", "prop": "relations.suspicion", "from": 0, "to": 25 },
+    { "entity": "pc_01", "prop": "crime_status", "from": "unknown", "to": "suspect" } ],
   "hooks": ["guard_suspicious_of_pc", "possible_document_check"],
   "importance": "medium",
   "provenance": { "seed": 42, "cause_intent": "intent_0006" } }

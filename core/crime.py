@@ -11,6 +11,18 @@ is pack data (`rules.json` `crime_watch`) — the code is the mechanic.
   threshold while co-located with the suspect emits an arrest attempt —
   the reacting watcher acts on what *this* knower holds (EPIST-1); the
   attempt is a fact, its resolution is later work.
+- **Per-target suspicion (suspectaxis, iter-69):** the pack's
+  `suspicion_from_knowledge` may map a token to `{source, figure}` —
+  the token names its suspect, the knower's axis lives at
+  `pair.<figure>.<axis>` (the P2a directed-pair home, seeded like any
+  pair axis), and the status flip / arrest target THAT figure (the
+  parameterized suspect_id — v0.1 hard-wired the player). A
+  string-shaped mapping keeps the v0.1 flat mode byte-identical: the
+  axis stays `relations.<axis>`, the suspect stays the player — the
+  committed pack's mode until suspectaxis-2 arms it. One mode per pack
+  (the pack lint refuses mixing). The drift consumer: a rumor-mutated
+  token rides the MUTATED token's figure — the blame lands where the
+  drift put it, never where the sighting did.
 - **Watch rotation:** the pack-declared duty/rest posts swap their
   participants; the outgoing holder briefs the incoming one — a transfer
   event decaying fidelity one step (D-006: spread between watchers is
@@ -65,6 +77,22 @@ def _at_or_past(status: Any, target: str, values: Sequence[str]) -> bool:
         return False
 
 
+def _spec(
+    spec: Any,
+) -> tuple[str | None, str | None]:
+    """One `suspicion_from_knowledge` entry, normalized: `(source,
+    figure)`. A string is the v0.1 FLAT shape — the source, the suspect
+    hard-wired to the player by the caller. An object is the per-target
+    shape (suspectaxis, iter-69) — `{source, figure}`, the token names
+    its suspect. `(None, None)` for anything else — the pack lint makes
+    that unreachable; the reader stays total out of the same distrust."""
+    if isinstance(spec, str):
+        return spec, None
+    if isinstance(spec, dict):
+        return spec.get("source"), spec.get("figure")
+    return None, None
+
+
 def iter_suspicion_reactions(
     pack: Pack,
     projection: Mapping[str, Mapping[str, Any]],
@@ -77,9 +105,16 @@ def iter_suspicion_reactions(
     co-located with the suspect, the arrest attempt that follows it.
     Lazy on purpose: each group reads the projection as left by the
     previously committed groups — the status flip lands exactly once
-    (the KI#13 lesson: never build all drafts against a stale world)."""
+    (the KI#13 lesson: never build all drafts against a stale world).
+
+    The mode rides the mapping's shape (per-target, iter-69): a flat
+    entry keeps the v0.1 bytes — the axis `relations.<axis>`, the
+    suspect the player; a per-target entry writes the knower's
+    `pair.<figure>.<axis>` (the P2a home — the seeded pair axis is the
+    reaction's permission, the same "no suspicion home" law) and aims
+    the flip and the arrest at the figure."""
     config = pack.rules["crime_watch"]
-    mapping: Mapping[str, str] = config.get("suspicion_from_knowledge", {})
+    mapping: Mapping[str, Any] = config.get("suspicion_from_knowledge", {})
     if not mapping:
         return
     axis = config["suspicion_axis"]
@@ -88,43 +123,46 @@ def iter_suspicion_reactions(
     suspect_at = int(thresholds["status_suspect_at"])
     arrest = config["arrest"]
     arrest_at = int(arrest["requires_suspicion"])
-    suspect_id = pack.player_id()
+    flat_suspect = pack.player_id()
     sources: Mapping[str, int] = config["suspicion_sources"]
+    status_values = list(config.get("status_values", ()))
 
     for knowledge in record.knowledge:  # event order — deterministic
-        source = mapping.get(knowledge.knows)
+        source, figure = _spec(mapping.get(knowledge.knows))
         if source is None:
             continue
+        suspect = flat_suspect if figure is None else figure
+        prop = f"relations.{axis}" if figure is None else f"pair.{figure}.{axis}"
         if view.holds(knowledge.who, knowledge.knows, before_source=record.id):
             continue  # not novel: the knower already reacted to this token
         props = projection.get(knowledge.who)
-        if props is None or f"relations.{axis}" not in props:
+        if props is None or prop not in props:
             continue  # no suspicion home: the player, ambient groups
         delta = int(sources[source])
-        current = int(props[f"relations.{axis}"])
+        current = int(props[prop])
         new = _clamp(current + delta, scale)
         if new == current:
             continue
         changes = [
             StateChange(
                 entity=knowledge.who,
-                prop=f"relations.{axis}",
+                prop=prop,
                 from_=current,
                 to_=new,
             )
         ]
         # the status flip rides the first crossing (ev_0007 shape); the
-        # flip lands only while the status is still BELOW the suspect value
-        # in the pack's progression — a suspect (or caught) suspect never
-        # re-flips (T4: caught is irreversible, KI#18)
-        status = projection.get(suspect_id, {}).get(CRIME_STATUS_PROP)
-        status_values = list(config.get("status_values", ()))
+        # flip lands only while the suspect's status is still BELOW the
+        # suspect value in the pack's progression — a suspect (or
+        # caught) suspect never re-flips (T4: caught is irreversible,
+        # KI#18)
+        status = projection.get(suspect, {}).get(CRIME_STATUS_PROP)
         if new >= suspect_at and not _at_or_past(
             status, config["status_suspect_value"], status_values
         ):
             changes.append(
                 StateChange(
-                    entity=suspect_id,
+                    entity=suspect,
                     prop=CRIME_STATUS_PROP,
                     from_=status,
                     to_=config["status_suspect_value"],
@@ -135,7 +173,7 @@ def iter_suspicion_reactions(
                 t=record.t,
                 type=config["reaction_event"],
                 actor=knowledge.who,
-                target=suspect_id,
+                target=suspect,
                 cause=None,  # the loop chains the cause to the triggering event
                 outcome={
                     "token": knowledge.knows,
@@ -146,7 +184,7 @@ def iter_suspicion_reactions(
                 },
                 state_changes=tuple(changes),
                 importance=pack_importance(
-                    pack.rules, {knowledge.who, suspect_id}, irreversible=0, hooks=0,
+                    pack.rules, {knowledge.who, suspect}, irreversible=0, hooks=0,
                     event_type=config["reaction_event"],
                 ),
             )
@@ -154,7 +192,7 @@ def iter_suspicion_reactions(
         if (
             current < arrest_at <= new
             and arrest.get("requires_same_location", False)
-            and projection.get(suspect_id, {}).get("position")
+            and projection.get(suspect, {}).get("position")
             == projection[knowledge.who].get("position")
         ):
             drafts.append(
@@ -162,11 +200,11 @@ def iter_suspicion_reactions(
                     t=record.t,
                     type=arrest["event"],
                     actor=knowledge.who,
-                    target=suspect_id,
+                    target=suspect,
                     cause=None,  # the loop chains it to this group's suspicion event
                     outcome={"suspicion": new, "threshold": arrest_at},
                     importance=pack_importance(
-                        pack.rules, {knowledge.who, suspect_id}, irreversible=0,
+                        pack.rules, {knowledge.who, suspect}, irreversible=0,
                         hooks=0, event_type=arrest["event"],
                     ),
                 )
