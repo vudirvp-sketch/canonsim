@@ -16,6 +16,23 @@
 
 
 ---
+iter-68a · 2026-09-07 · rumordrift — the A2'' mechanics,
+declarative-only (the v0.2 refinement family's third segment,
+D-095/D-099; 10 files — over the soft limit: rng family + mechanics
++ lint + suite + the §9 doc sync are one mechanism family, the
+iter-60..67 pattern)
+- core/rng.py the `drift:<family>` stream family (lazy, nests only
+  inside the assured substantive scope — the engine-2 family law's
+  second member); core/knowledge.py DriftFamily/drift_families/
+  drifted_knows + the telling wiring (the received-fidelity ladder
+  rung, `drifted_from` in outcome, the briefing verbatim); core/
+  pack.py::_drift the lint (mintable orbit, one-sided, full ladder).
+- Corpus price ZERO by construction (the committed pack declares no
+  block — 68b owns the arming) + the add-safety pin (an armed
+  all-zero twin, 10 seeds byte-identical). +22 tests (1201→1223+1,
+  ruff clean). EVENT_SCHEMA §3 the clause; D-099; KI#74 deleted per
+  §5. iter-60 evicted (verified in this edit); 10 after.
+---
 iter-68 · 2026-09-07 · testproto — the LLM-integration test protocol's
 research close (D-098; 5 files, doc-only — the streak is 1 of 2,
 iter-67 was functional; the owner's 2026-09-07 ask + the living-world
@@ -196,23 +213,5 @@ pattern)
   the remaining rows are phase-ledger substance (§6.1, kept). iter-51
   evicted; 10 entries after.
 ---
-iter-60 · 2026-09-05 · scene-1 — the scene manager + mode B (phase 4,
-TASKS' top row; the owner's "continue per plans" call; 14 files —
-over the soft limit: the queue + the parameterization + the pack
-arming + the leak suite are one mechanism family, the iter-59
-scope pattern)
-- brief/scene.py (NEW — the chorus queue: presence/pack/kind gates,
-  pack order, the per-beat cap, the L12 beyond-cap rung) + the
-  knower parameter on assemble_brief/narrator_call (mode A
-  byte-identical; mode B the actor's own perception/memory/role/voice;
-  the actor: protocol line) + rules.json chorus+actors (5 NPCs) +
-  the _brief lint family.
-- Measured-first: the leak surface ZERO (6 windows × 5 actors on day1
-  seed 123); the queue live (the watch change swaps the guard by
-  PRESENCE); the corpus price zero (mode A byte-identical vs the
-  block-less copy). The §2 design-review verdict re-affirmed.
-- +30 tests/test_scene.py; 1055→1085, ruff clean. D-089 into the
-  phase family (cap 30 held); TASKS scene-1 done + the scene-2 row
-  (the wiring, the actor reply door, the keyword query). iter-50
-  evicted; 10 entries after.
+(end of log — cap 10; pre-trim history lives in git)
 

@@ -40,6 +40,7 @@ from core.intent import (
     REJECTION_EVENT,
     TRAIT_TEST,
 )
+from core.knowledge import DRIFT_SPEC_KEYS
 from core.leverage import SECRETS_BLOCK_KEYS, TOKEN_KEYS
 from core.onaction import (
     ACTOR_TARGET_KEYS,
@@ -295,6 +296,7 @@ class _Lint:
         self._secrets()
         self._echo()
         self._traits()
+        self._drift()
         self._reflection()
         self._states_rules()
         self._importance_rules()
@@ -2151,6 +2153,99 @@ class _Lint:
                     "never fire, dead vocabulary, refused at load (grow "
                     "the counters or lower the threshold)",
                 )
+            if "notes" in spec:
+                _require(
+                    isinstance(spec["notes"], str),
+                    f"{where}: notes must be a string (prose)",
+                )
+
+    def _drift(self) -> None:
+        """The rumor-drift contract (rumordrift, A2''/D-095; the v0.2
+        refinement family's third segment, iter-68a — mechanics only,
+        the pack arming is 68b). The block is OPTIONAL and lives INSIDE
+        `rules.json::knowledge` (the rumor path's config home, beside
+        `telling` and `rumor_acceptance`): `knowledge.drift` maps family
+        id → spec. A pack without it drifts nothing and runs the v0.1
+        bytes, byte-identically (the pack's own declaration is the
+        arming, INV-3; `core/knowledge.py::drift_families` the reader).
+        Family ids name the drift streams (`drift:<family>`, D-095:
+        isolation is law) — map keys, injective by construction."""
+        rules = self._data["rules.json"]
+        config = rules.get("knowledge", {}).get("drift")
+        if config is None:
+            return
+        _require(
+            isinstance(config, Mapping) and config,
+            "knowledge.drift must be a non-empty object keyed by family "
+            "id (an empty block is dead data — omit it for v0.1 bytes)",
+        )
+        mintable = self._literal_knows_tokens()
+        chain = rules["knowledge"]["fidelity_chain"]
+        seen_tokens: dict[str, str] = {}  # token -> owning family
+        for family, spec in config.items():
+            where = f"knowledge.drift[{family!r}]"
+            _require(
+                isinstance(family, str) and family,
+                f"{where}: family ids must be non-empty strings (they "
+                "name the drift stream `drift:<family>`)",
+            )
+            _require(isinstance(spec, Mapping), f"{where}: must be an object")
+            unknown = sorted(set(spec) - set(DRIFT_SPEC_KEYS))
+            if unknown:
+                raise PackError(
+                    f"{where}: unknown keys {unknown} (the closed "
+                    f"vocabulary: {' | '.join(DRIFT_SPEC_KEYS)})"
+                )
+            tokens = spec.get("tokens")
+            _require(
+                isinstance(tokens, list)
+                and len(tokens) >= 2
+                and all(isinstance(token, str) for token in tokens),
+                f"{where}: tokens must be a list of >= 2 knowledge tokens "
+                "(a one-token orbit can never drift — dead vocabulary)",
+            )
+            _require(
+                len(set(tokens)) == len(tokens),
+                f"{where}: tokens contains duplicates (a duplicate orbit "
+                "member is dead data)",
+            )
+            for token in tokens:
+                # the secrets/echo/traits lint's law: a token nobody can
+                # ever learn is dead vocabulary — a drift orbit must ride
+                # declared knowledge templates (the telling path only
+                # transfers what the world minted)
+                _require(
+                    token in mintable,
+                    f"{where}: orbit token {token!r} is not mintable (no "
+                    "declared knowledge template mints it — the literal "
+                    "`knows` vocabulary)",
+                )
+                owner = seen_tokens.get(token)
+                _require(
+                    owner is None,
+                    f"{where}: orbit token {token!r} already belongs to "
+                    f"family {owner!r} (the one-sided membership law — a "
+                    "token drifts in exactly one family, else the stream "
+                    "isolation law breaks: two families' rolls would "
+                    "couple over one token)",
+                )
+                seen_tokens[token] = family
+            # the ladder: closed against the pack's own fidelity chain —
+            # the echo.fidelity_weight law (a chain member without a
+            # chance would KeyError at the roll, refused at load instead)
+            ladder = spec.get("ladder")
+            _require(
+                isinstance(ladder, Mapping)
+                and sorted(ladder) == sorted(chain)
+                and all(
+                    _is_int(chance) and 0 <= chance <= 100
+                    for chance in ladder.values()
+                ),
+                f"{where}: ladder must map every fidelity chain member "
+                f"({list(chain)}) to a d100 chance in 0..100 — the drift "
+                "rolls at the RECEIVED fidelity (a missing step would "
+                "KeyError at the roll)",
+            )
             if "notes" in spec:
                 _require(
                     isinstance(spec["notes"], str),

@@ -21,6 +21,17 @@ Mechanics (every name and number that is not a mechanic lives in the pack):
   read from the pair map first (P2a), then the toward-the-player axis,
   else the pack neutral — the Influence Boundary holds (EPIST-1): only
   the listener's own trust and the teller's own status feed the roll.
+- **Rumor drift** (A2'', rumordrift, iter-68a): a told fact whose token
+  rides a pack-declared `knowledge.drift` family may mutate to a sibling
+  token — the family's fidelity-ladder profile gives the chance at the
+  RECEIVED fidelity (the vaguer the record, the likelier the drift). The
+  roll rides the family's own `drift:<family>` stream (isolation is law,
+  D-095: arming a family shifts neither a canon check draw nor another
+  family's rolls); the outcome's `drifted_from` names the pre-drift token
+  (EVENT_SCHEMA §11: an outcome payload addition, no bump). An undeclared
+  block drifts nothing — v0.1 bytes (the pack's own declaration is the
+  arming, INV-3; the pack arming is 68b). The official watch briefing
+  (crime_watch, D-006) never drifts — handovers transfer verbatim.
 - **Expectation checks** (P2d, KI#3): pack behaviour rules generate
   per-NPC expectations (an item carried by someone / lying at a location);
   a mismatch at check time emits an `inferred` record cause-chained to the
@@ -42,15 +53,18 @@ from core.log import (
     KnowledgeRecord,
     LoggedKnowledgeRecord,
 )
-from core.rng import RngBank
+from core.rng import RngBank, drift_stream_name
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
     from core.pack import Pack
 
 __all__ = [
+    "DriftFamily",
     "KnowledgeView",
     "acceptance_score",
     "decay_fidelity",
+    "drift_families",
+    "drifted_knows",
     "expectation_drafts",
     "telling_reaction",
     "trust_toward",
@@ -167,6 +181,71 @@ def decay_fidelity(fidelity: str, chain: Sequence[str], steps: int = 1) -> str:
     return chain[index]
 
 
+# -- rumor drift (A2'', rumordrift iter-68a) ----------------------------------
+
+
+DRIFT_SPEC_KEYS: Final = ("tokens", "ladder", "notes")  # closed set, pack-linted
+
+
+@dataclass(frozen=True, slots=True)
+class DriftFamily:
+    """One pack-declared drift family: the orbit of tokens the rumor path
+    may substitute (pack order — the target pick is deterministic), plus
+    the fidelity-ladder chance profile (received fidelity → d100 chance).
+    Built by `drift_families` from `rules.json::knowledge.drift`."""
+
+    family: str
+    tokens: tuple[str, ...]
+    ladder: Mapping[str, int]
+
+
+def drift_families(pack: Pack) -> dict[str, DriftFamily]:
+    """The token → family index over `rules.json::knowledge.drift` (the
+    lint's one-sided membership law makes it a function, never a
+    one-to-many). An absent or empty block answers the empty index — the
+    telling path then never rolls, byte-identical v0.1 (the pack's own
+    declaration is the arming; the committed pack declares none until 68b)."""
+    config = pack.rules.get("knowledge", {}).get("drift")
+    if not config:
+        return {}
+    index: dict[str, DriftFamily] = {}
+    for family, spec in config.items():  # pack order — deterministic
+        entry = DriftFamily(
+            family=family,
+            tokens=tuple(spec["tokens"]),
+            ladder=spec["ladder"],
+        )
+        for token in entry.tokens:
+            index[token] = entry
+    return index
+
+
+def drifted_knows(
+    bank: RngBank,
+    families: Mapping[str, DriftFamily],
+    token: str,
+    fidelity: str,
+) -> str:
+    """The token a transferred record carries after the drift gate: a
+    family member rolls d100 at the RECEIVED fidelity's ladder chance — a
+    miss keeps the token (the roll still consumed its draw: the urgency
+    law, the count never depends on the ladder's numbers); a hit picks
+    one uniform OTHER member (one draw). Both draws ride the family's own
+    `drift:<family>` stream, nested inside the run's assured substantive
+    scope — isolation is law (D-095): the drift never shifts a canon
+    check draw or another family's rolls, and the fingerprint never sees
+    it. A token outside every family answers itself — no roll, no stream."""
+    entry = families.get(token)
+    if entry is None:
+        return token
+    with bank.assure(drift_stream_name(entry.family)):
+        if bank.randint(1, 100) > entry.ladder[fidelity]:
+            return token
+        source = entry.tokens.index(token)
+        pick = bank.randint(0, len(entry.tokens) - 2)
+    return entry.tokens[pick] if pick < source else entry.tokens[pick + 1]
+
+
 def trust_toward(
     pack: Pack,
     projection: Mapping[str, Mapping[str, Any]],
@@ -257,33 +336,47 @@ def telling_reaction(
     chain = pack.rules["knowledge"]["fidelity_chain"]
     score = acceptance_score(pack, projection, teller, listener)
     accepted = bank.randint(1, 100) <= score
-    records = (
-        tuple(
-            KnowledgeRecord(
-                who=listener,
-                channel=TOLD,  # type: ignore[arg-type]
-                fidelity=decay_fidelity(pick.fidelity, chain),  # type: ignore[arg-type]
-                knows=pick.knows,
-                at=record.t,
+    # the drift gate runs only on ACCEPTED records — a refused telling
+    # transfers nothing, so nothing mutates (the drift draw count is a
+    # function of the log's acceptances, never of the ladder's numbers)
+    families = drift_families(pack)
+    records: list[KnowledgeRecord] = []
+    drifted_from: str | None = None
+    if accepted:
+        for index, pick in enumerate(picks):
+            received = decay_fidelity(pick.fidelity, chain)
+            knows = drifted_knows(bank, families, pick.knows, received)
+            if index == 0 and knows != pick.knows:
+                drifted_from = pick.knows
+            records.append(
+                KnowledgeRecord(
+                    who=listener,
+                    channel=TOLD,  # type: ignore[arg-type]
+                    fidelity=received,  # type: ignore[arg-type]
+                    knows=knows,
+                    at=record.t,
+                )
             )
-            for pick in picks
-        )
-        if accepted
-        else ()
-    )
+    outcome: dict[str, Any] = {
+        "accepted": accepted,
+        "score": score,
+        "knows": records[0].knows if records else picks[0].knows,
+        "fidelity": (
+            records[0].fidelity
+            if records
+            else decay_fidelity(picks[0].fidelity, chain)
+        ),
+    }
+    if drifted_from is not None:
+        outcome["drifted_from"] = drifted_from
     return EventDraft(
         t=record.t,
         type=config["event"],
         actor=teller,
         target=listener,
         cause=None,  # the loop chains the cause to the triggering event
-        outcome={
-            "accepted": accepted,
-            "score": score,
-            "knows": picks[0].knows,
-            "fidelity": decay_fidelity(picks[0].fidelity, chain),
-        },
-        knowledge=records,
+        outcome=outcome,
+        knowledge=tuple(records),
         importance=pack_importance(
             pack.rules, {teller, listener}, irreversible=0, hooks=0,
             event_type=config["event"],

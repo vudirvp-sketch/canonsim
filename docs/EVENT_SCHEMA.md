@@ -54,6 +54,14 @@ Rules:
   listener with fidelity decayed one step (`exact → partial → vague`,
   `channel: told`). Distortion comes from source incompleteness; no separate
   rumor system.
+- **Rumor drift (A2'', rumordrift):** the telling path may also mutate the
+  token — a pack-declared `knowledge.drift` family (a closed token orbit,
+  one family per token) rolls d100 at the received fidelity's ladder
+  chance on the family's own `drift:<family>` stream; a hit substitutes a
+  sibling token. The outcome's `drifted_from` names the pre-drift token
+  (an outcome payload addition — §11, no bump; present only on an actual
+  drift). Official watch briefings (D-006) never drift — handovers are
+  verbatim.
 - **A lie is a crafted record:** distorted `knows` or misrepresented fidelity —
   legal data, the foundation for `believes/lies` in phase 4.
 - **Blind-NPC rule:** no record → cannot know, cannot say (T3).

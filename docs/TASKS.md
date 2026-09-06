@@ -44,8 +44,11 @@
   thief-belief gate — wrong semantic AND a corpus break; a new
   guard_02 entry fires on the 125 canonical corpus). The arming pays
   its price deliberately or rides the rumordrift content wave — todo.
-- `rumordrift` · A2'' mechanics declarative-only then pack arming
-  (68a/68b; `drift:<family>` stream isolation is law) — todo.
+- `rumordrift` · A2'' mechanics — done (iter-68a, D-099): the
+  fidelity-ladder drift profiles + the `drift:<family>` streams
+  (isolation is law) + `drifted_from` in outcome (EVENT_SCHEMA §3,
+  §11 no-bump; tests/test_rumordrift.py; corpus price zero — the
+  committed pack declares no block). The pack arming — todo (68b).
 - `suspectaxis` · per-target suspicion, the drift teeth's first
   consumer — todo (iter-69).
 - `testproto` · the intermediate-build LLM-integration test protocol —

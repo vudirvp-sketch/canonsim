@@ -3,22 +3,26 @@
 One master seed; named streams deterministically derived via
 `stable_hash(f"{seed}:{stream}")` — sha256-based, environment-independent
 (never relies on PYTHONHASHSEED). Registered streams: `substantive` (canon
-checks) and `cosmetic` (render-only); plus the URGENCY FAMILY — per-entry
-streams `urgency:<npc>:<kind>` (engine-2, D-079) that register lazily on
-first use (the names are content-derived and pack-linted, built by
-`urgency_stream_name` — never hand-written). All draws flow through the
-bank, which counts them per stream; the substantive counter is the replay
+checks) and `cosmetic` (render-only); plus two CONTENT-ADDRESSED FAMILIES
+of lazily registered streams, whose names are built by the owning module
+and pack-linted before any draw — `urgency:<npc>:<kind>` (engine-2,
+D-079, `urgency_stream_name`) and `drift:<family>` (rumordrift, A2''/
+D-099, `drift_stream_name`). All draws flow through the bank, which
+counts them per stream; the substantive counter is the replay
 fingerprint T1 compares. Guards (donor discipline,
 `docs/blueprint/phase0.md` §1):
 
 - `assure(name)` — run a scope with `name` as the active stream (Brogue
   `assureCosmeticRNG`). Nesting a *different* stream inside an assured
-  scope raises immediately — EXCEPT an urgency-family stream inside the
-  assured `substantive` run scope (engine-2): the per-beat goal rolls are
-canon-relevant but stream-isolated PER ENTRY, so an added or removed
-pack urgency entry shifts neither a later check draw nor another entry's
-roll — the single shared stream was measured and refused (the entries
-coupled by draw position; D-079). A wrong-stream draw is loud, never silent.
+  scope raises immediately — EXCEPT the two content-addressed families:
+  an urgency-family or drift-family stream may shadow the assured
+  `substantive` run scope (engine-2 + rumordrift): both are
+  canon-relevant but stream-isolated per declared entry, so an added,
+  removed, or re-armed pack entry shifts neither a later canon check
+draw nor another entry's roll — the single shared stream was measured
+  and refused for urgencies (the entries coupled by draw position;
+  D-079); drift inherits the same isolation law (D-095: "isolation is
+  law"). A wrong-stream draw is loud, never silent.
 - `audit(name)` — assert zero draws on `name` inside the scope (DCSS
   `ASSERT_stable`); the test-side assertion.
 - `peek(name)` — non-advancing read of the next float (tests only).
@@ -37,11 +41,13 @@ from typing import Final
 
 __all__ = [
     "COSMETIC",
+    "DRIFT_PREFIX",
     "PHASE0_STREAMS",
     "SUBSTANTIVE",
     "URGENCY_PREFIX",
     "RngBank",
     "RngError",
+    "drift_stream_name",
     "stable_hash",
     "urgency_stream_name",
 ]
@@ -49,6 +55,7 @@ __all__ = [
 SUBSTANTIVE: Final = "substantive"
 COSMETIC: Final = "cosmetic"
 URGENCY_PREFIX: Final = "urgency:"
+DRIFT_PREFIX: Final = "drift:"
 PHASE0_STREAMS: Final = (SUBSTANTIVE, COSMETIC)
 
 
@@ -59,6 +66,15 @@ def urgency_stream_name(npc: str, intent_kind: str) -> str:
     injective; adding an entry adds a NEW stream and never shifts another
     entry's draws (the add-safety law)."""
     return f"{URGENCY_PREFIX}{npc}:{intent_kind}"
+
+
+def drift_stream_name(family: str) -> str:
+    """The per-family rumor-drift stream: content-addressed
+    `drift:<family>` (rumordrift, A2''/D-099). One stream per pack-declared
+    `knowledge.drift` family — family ids are map keys, so the name is
+    injective; arming, adding, or removing a family shifts neither a canon
+    check draw nor another family's rolls (the isolation law, D-095)."""
+    return f"{DRIFT_PREFIX}{family}"
 
 
 class RngError(RuntimeError):
@@ -99,11 +115,12 @@ class RngBank:
 
     def _rng(self, name: str) -> random.Random:
         if name not in self._streams:
-            if name.startswith(URGENCY_PREFIX):
-                # engine-2: the per-entry urgency streams register lazily —
-                # content-derived (npc:kind), pack-linted, built by
-                # `urgency_stream_name`; the closed-set tripwire survives
-                # for every non-family name (a typo stays loud).
+            if name.startswith((URGENCY_PREFIX, DRIFT_PREFIX)):
+                # engine-2 + rumordrift: the two content-addressed stream
+                # families register lazily — names built by
+                # `urgency_stream_name` / `drift_stream_name`, pack-linted
+                # before any draw; the closed-set tripwire survives for
+                # every non-family name (a typo stays loud).
                 self._register(name)
             else:
                 raise RngError(
@@ -123,15 +140,15 @@ class RngBank:
     @contextmanager
     def assure(self, name: str) -> Iterator[None]:
         """Scope with `name` active; nesting a foreign stream is an error
-        unless the pairing is the engine-2 family law: an urgency-family
-        stream may shadow the assured substantive run scope — and nothing
-        else may nest anywhere."""
+        unless the pairing is the content-addressed family law: an
+        urgency-family or drift-family stream may shadow the assured
+        substantive run scope — and nothing else may nest anywhere."""
         self._rng(name)
         if (
             self._assured is not None
             and self._assured != name
             and not (
-                name.startswith(URGENCY_PREFIX)
+                name.startswith((URGENCY_PREFIX, DRIFT_PREFIX))
                 and self._assured == SUBSTANTIVE
             )
         ):
