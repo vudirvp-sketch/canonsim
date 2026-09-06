@@ -547,6 +547,43 @@ expansion rides the move event's templates (INTENT_SCHEMA §7), not a
 separate perception event — KI#43's grammar correction made the event
 an implementation detail the pack does not need.**
 
+**Research intake 2 (iter-66a, D-096): the depth-phase design material
+— recorded here, drafted into TASKS only at the phase-5 opening.**
+
+- **Lazy detail materialization.** A scene's unobserved detail is
+  generated deterministically from a content-addressed stream
+  `scene:<id>:detail` (the D-079 family law: lazy registration,
+  injective name, add-safety) on first meaningful observation;
+  re-observation reproduces the same detail. The significant action is
+  a MATERIALIZATION EVENT validated against the committed world — the
+  D-054 texture-promotion law at scene scale: first-commit-wins, the
+  loser rejected with the cause chain (the ledger's texture-OCC
+  mirror, `slot_conflict`), a slot already described empty rejects the
+  later gold. Never a second mechanism beside the ledger/promotion
+  door.
+- **Scene LOD (three zones).** GROUP_SPEC owns the group macro-tick;
+  scenes get the same discipline: the active scene ticks per-beat, the
+  warm ring (adjacent scenes) ticks every Nth beat (a scheduler rule —
+  INV-2 clean, never entropy), the cold background rides aggregate
+  events only. Log growth stays O(active + warm/N + aggregates) — the
+  long-history fear bounded by construction.
+- **Perception depth — the acquisition side.** The intake's "knowledge
+  is binary by presence" premise is FALSE today (channels
+  saw/heard/told/inferred, birth fidelity exact/partial/vague,
+  `position_visibility` hearing vague-only to adjacent locations,
+  perception checks with status modifiers + smoke_penalty — live since
+  iter-3). The real gap: continuous acquisition CONDITIONS (light,
+  noise, distance, obstruction) feeding birth fidelity — pack data in
+  rules.json, mechanics in the perception path/knowledge templates,
+  never a second knowledge store; rumordrift (68a/68b) gains its
+  distorting medium here.
+- **Fold checkpoints.** The live projection and KnowledgeView are
+  incremental — full refold pays only on replay/branch, the phase-5
+  long-history cost. A snapshot is a DERIVED artifact (the SQLite-index
+  law, INV-5): fold-checkpoint + event-index offset, grown from the
+  chronicler family (iter-64's LAG/LEAD state diffs); rollback =
+  snapshot + tail replay. Never truth, never committed, never edited.
+
 ## 6. Phase 6 — packs & worldbuilder
 
 **The pack system** (PACK-1 top rung): manifest + module contracts + pack

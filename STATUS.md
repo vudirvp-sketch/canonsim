@@ -1,49 +1,48 @@
 # STATUS — canonsim
 
-Iteration: iter-66 (`iter-66-prosefloor` — the v0.2 refinement family's
-first landing, D-095; the owner's post-gate quality pass on the research
-review's confirmed holes; the D-059/D-060/D-061 post-gate-polish
-precedent) ·
+Iteration: iter-66a (`iter-66a-intake2` — the research intake 2,
+D-096; doc-only: the external depth-architecture review verified
+against the repo, then landed surgically per the D-018/D-022 absorption
+pattern; the owner's "record it where the right moment finds it" call) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
 the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
 UNLOCKED — opens on the owner's call (the iter-55 precedent); the
 refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
-refinement, never phase-5 scope**
-**The landing: the invented-entity prose floor (C2'') — the response
-document's one free-text field gets the closed-world law's prose twin
-(a capitalized token in non-sentence-initial position must be a word
-of a declared entity's display name — existence, never visibility;
-knowledge-state stays the leak suite's). `brief/scan.py` pure (the
-manifest reads the pack's own display-name fields — one source, INV-3
-clean) + the boundary wiring after the shape gate, before
-proposal/delta (the cheapest gate first). `REFUSED prose <name>
-(invented_entity)` through the §7 ladder verbatim — same budget, same
-L12, never a crash.**
-**Corpus price ZERO, both arms pinned: the 105-case corpus FP=0 (the
-designed Aldric probe of `regen_exhaustion_falls_dry` caught at the
-floor — its pinned `dry` ladder shape preserved, no re-distill, the
-fixture untouched); +17 tests (1185 passed + 1 skipped, ruff clean).
-Zero call-side changes — the manifest never renders into the call
-bytes (the committed corpus shape holds by construction).**
+refinement, never phase-5 scope; the intake is a doc-only sync inside
+the same lane, the lance untouched**
+**The landing: the intake, not code — three corrections recorded
+(D-096): the prose-floor extension to relations/attributes WAITS ON
+bg-7 (D-095's own gate — lowercase tokens are invisible to the position
+law, the detection surface is the work, the refusal ladder is not);
+the review's "knowledge is binary by presence" premise is FALSE
+(channels, birth fidelity, `position_visibility`, perception checks
+live since iter-3 — the real gap is continuous acquisition conditions:
+light/noise/distance/obstruction feeding birth fidelity); the
+affordance example already lives as pack data (flammability +
+fire_spots + `spot_available`, pack-2). Routing: three TASKS
+one-liners (prosefloor-2 bg-7-gated, packtaxonomy owner-gated,
+story-critical objects owner-gated), the phase-5 design material to
+phases.md §5 per the never-before-opening law (seed materialization
+over the D-054/ledger-OCC law + `scene:<id>:detail` streams,
+three-zone scene LOD, perception acquisition conditions, fold
+checkpoints), the affordance clause to the PACK_SPEC sketch. The
+review's rejections endorsed unchanged (free-text speech in canon,
+open action parsing, LLM traces as canon).**
+**Zero runtime files, zero corpus surface, zero tests touched —
+§9 re-verified green on the doc-only diff; the lance untouched: next
+iter-67-beliefwire.**
 ·
-Date: 2026-09-06 ·
-Scope: `brief/scan.py` (NEW — the floor), `cli/mediator.py` (the
-wiring + the session manifest), `tests/test_scan.py` (NEW — the
-floor's suite: the manifest/position/refusal laws + the both-arms
-corpus pin), `tests/test_mediator.py` (the wiring pair: the floor
-refuses before the gateway, the exhaustion falls dry),
-`docs/VALIDATION_SPEC.md` (§2.1 the floor's contract + the §7.1 gate
-order + the §9 metric clause), `docs/TASKS.md` (the v0.2 refinement
-backlog + the bg-7 row — 616, over the 600 cap with the intake as
-substance, §6.1 recorded in worklog), `docs/DECISIONS.md` (D-095, the
-family's compound row — 31 rows, the over-cap-between-gates
-precedent), `docs/AGENT_NAVIGATION.md` (§1: the scan.py + suite
-segments), `STATUS.md` (this header + the two FAQ clauses + the Next
-flip), `worklog.md` (iter-66 in, iter-56 out). 10 files — over the
-3–5 soft limit: one code mechanism + its suite + the mandated doc
-sync (§9); the intake rides this diff per the D-022 sanction (the
-research session's plan, TASKS' "new ideas enter here" law). A code
-iteration — the doc-loop streak cleared (iter-65's 1 of 2).
+Date: 2026-09-07 ·
+Scope: `docs/TASKS.md` (the research-intake-2 section — 3 rows,
+637, the §6.1 over-cap substance law rides, trim at the phase-5→6
+gate), `docs/blueprint/phases.md` (§5 the depth-phase design material
+— 4 laws, 681, same law), `docs/SPECS_BACKLOG.md` (the PACK_SPEC
+affordance clause), `docs/DECISIONS.md` (D-096 — 32 rows, rides above
+30 until the phase-5→6 gate, the D-095 precedent), `STATUS.md` (this
+header + the Next flip), `worklog.md` (iter-66a in, iter-57 out). 6
+files — over the 3–5 soft limit: one intake, every owner doc synced
+same-turn (§9/§6.1, the D-018 surgical-absorption pattern). A
+doc-only iteration — streak 1 of 2 (iter-66 was code).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -541,8 +540,9 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**The v0.2 refinement lance in flight (iter-66 done): prosefloor landed
-(D-095, corpus price zero, both arms pinned); next iter-67-beliefwire
+**The v0.2 refinement lance in flight (iter-66 done; the research
+intake 2 landed doc-only as iter-66a/D-096 — TASKS' intake section,
+phases.md §5, the PACK_SPEC affordance clause): next iter-67-beliefwire
 — the `trait_held` requires-leaf + the traits channel into the loop's
 read points + the counter-family in the fold (TASKS' refinement
 backlog owns the rows; each landing measures its own corpus price
@@ -552,7 +552,9 @@ iter-65, D-094 (the full ROADMAP §5 protocol re-run; the phase-4
 landing ledger condensed in TASKS). Phase 5
 (Depth) UNLOCKED — it opens on the owner's call (the iter-55/36
 precedent): the phase-5 backlog drafts from `docs/blueprint/phases.md`
-§5 at the opening iteration, never before.**
+§5 at the opening iteration, never before (the iter-66a additions —
+materialization, scene LOD, perception conditions, fold checkpoints —
+are the drafting material, in place).**
 
 1. **Phase 5 (Depth) — the parked build column:** lazy worldgen,
    factions with goals, long history (`docs/blueprint/phases.md` §5

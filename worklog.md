@@ -16,6 +16,21 @@
 
 
 ---
+iter-66a · 2026-09-07 · intake2 — the research intake 2 (doc-only,
+D-096; the D-018/D-022 surgical-absorption pattern; 6 files — over the
+soft limit: one intake, every owner doc synced same-turn per §9)
+- The depth-architecture review verified against the repo first (three
+  corrections in D-096: prosefloor-2 waits on bg-7; the "binary
+  knowledge" premise false; the affordance example already pack data),
+  then routed: TASKS 3 one-liners, phases.md §5 the phase-5 design
+  material (materialization over D-054/ledger-OCC, `scene:<id>:detail`
+  streams, scene LOD, perception conditions, fold checkpoints),
+  SPECS_BACKLOG the PACK_SPEC affordance clause.
+- Zero runtime files; the lance untouched (next iter-67-beliefwire).
+  TASKS 637 / phases.md 681 / DECISIONS 32 — over-cap substance, §6.1,
+  trim at the phase-5→6 gate (the D-095 precedent). Doc-only streak
+  1 of 2. iter-57 evicted (verified in this edit); 10 entries after.
+---
 iter-66 · 2026-09-06 · prosefloor — the invented-entity prose floor
 (C2'', D-095, the v0.2 refinement family's first landing; 10 files —
 over the 3–5 soft limit: one code mechanism + its suite + the §9 doc
@@ -196,19 +211,3 @@ the v0.1 pack block; the owner's §2 design review first — endorsed)
   law + 4 committed-pack pins. 1026→1030, ruff clean. LEGEND_SPEC §7
   + TASKS leg-3b done + D-087 into the phase family (cap 30 held).
   iter-48 evicted; 10 entries after.
----
-iter-57 · 2026-09-05 · leg-3 — reflection & memory compaction (phase 4,
-phases.md §4's memory paragraph; LEGEND_SPEC written just-in-time)
-- core/reflection.py (NEW) + the _reflection lint + the loop._react
-  wiring (after leverage): reflection-on-recurrence mints ONE event
-  per (knower, insight) per run — outcome.provenance the
-  list[event_id] handle, the never-re-reflect law, the stale fold,
-  expand_reflection the demand side; no RNG, no hooks (L6).
-- Measured-first: the recurrence EXISTS (day1_full seeds 123/128);
-  the committed pack carries NO block — DORMANT (the arc-1
-  precedent): the 10-seed A/B 10/10 byte-identical, zero corpus
-  regen; +22 tests/test_reflection.py. 1004→1026, ruff clean.
-- LEGEND_SPEC.md (193 lines) + SPECS_BACKLOG flip + TASKS leg-3
-  done + the leg-3b arming row (the corpus price tagged) + D-086
-  into the D-084/D-085/D-086 family (cap 30 held). iter-47 evicted;
-  10 entries after.

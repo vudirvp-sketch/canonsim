@@ -39,6 +39,27 @@
 - `suspectaxis` · per-target suspicion, the drift teeth's first
   consumer — todo (iter-69).
 
+### Research intake 2 (iter-66a; the depth-architecture review, D-096)
+
+> The external depth-architecture review (2026-09-07), verified against
+> the repo before intake — D-096 records the three corrections and the
+> routing. The phase-5 design material lives in
+> `docs/blueprint/phases.md` §5 (the never-before-opening law, STATUS
+> Next — drafted into TASKS only at the phase-5 opening), never here.
+
+- `prosefloor-2` · relations/attribute claims in prose — todo, WAITS
+  ON bg-7 (D-095's recorded gate: lowercase tokens are invisible to
+  the position law — the detection surface is the work, the refusal
+  ladder is not; the surface-section decision rides the bg-7 numbers).
+- `packtaxonomy` · material-derived props (the flammability
+  generalization) — owner-gated (phase-6 PACK-1: the authoring path is
+  the reserved `copy-from` chain, phases.md §6; a runtime
+  material-to-props fold would be core code — the fork is the owner's).
+- `story-critical objects` · the `story_critical` pack flag, director
+  activation through NPCs — owner-gated (phase-5+; the director
+  grammar, DIRECTOR_SPEC — events already have the arc/hook/complication
+  family, objects would need the flag + a release path; detail: D-096).
+
 ### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
 - `leg-1` · trait crystallization (P3f) — done (iter-55, D-084):
