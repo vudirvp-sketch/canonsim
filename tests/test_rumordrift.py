@@ -1,8 +1,9 @@
-"""iter-68a acceptance — rumordrift (the v0.2 refinement family's third
-segment, A2''/D-095/TASKS: "fidelity-ladder drift profiles,
+"""iter-68a/68b acceptance — rumordrift (the v0.2 refinement family's
+third segment, A2''/D-095/TASKS: "fidelity-ladder drift profiles,
 `drift:<family>` streams — isolation is law, `drifted_from` in outcome,
-EVENT_SCHEMA §11 no-bump"). Mechanics only, declarative — the committed
-pack declares no `knowledge.drift` block (the arming is 68b's row).
+EVENT_SCHEMA §11 no-bump"). Mechanics (iter-68a) + the committed-pack
+ARMING (iter-68b): the pack declares the `figure_deeds` family — the
+tavern's two crime sightings drift into each other as rumors spread.
 
 The laws pinned here:
 
@@ -34,17 +35,27 @@ The laws pinned here:
   would couple their rolls over it — refused); >= 2 members; the ladder
   maps EVERY fidelity chain member to a 0..100 chance (a missing step
   would KeyError at the roll).
-- **The corpus-price law (the both-arms pin)**: the committed pack
-  (no block) vs a twin armed with an all-zero-chance family over the
-  very token the rumor path tells — ten seeds byte-identical, the
-  fingerprints identical: the armed family's rolls ride the isolated
-  stream and never shift a canon byte (the engine-2 add-safety pin's
-  drift twin).
+- **The corpus-price law (the both-arms pins)**: (iter-68a) a twin
+  armed with an all-zero-chance family over the very token the rumor
+  path tells vs the block-popped v0.1 twin — ten seeds byte-identical,
+  the fingerprints identical: the armed family's rolls ride the
+  isolated stream and never shift a canon byte (the engine-2
+  add-safety pin's drift twin); (iter-68b) the ARMED committed pack vs
+  the block-popped twin over the corpus geometries — byte-identical:
+  every talk in the committed corpora tells a NON-member token (the
+  narrator corpus's seed-15 noise, the parse corpus's arrival
+  rumors), so no roll ever fires there — the measured price ZERO.
+  The liveness law: a geometry whose teller holds the member token
+  rolls — a hit (seed 2) mutates the outcome and the bytes; a miss
+  (seed 1) keeps the v0.1 bytes verbatim.
 
 Live-fire on CRAFTED packs (the iter-46 crafted-pack family): the
 canonical seed-1 day1 geometry — the failed pickpocket (the guard's
 partial sighting), the talk that shares it (told/vague), the rotation
 briefing that hands the evidence over (verbatim, never drifted).
+Live-fire on the COMMITTED pack (iter-68b): the guard-talk geometry
+(seed 2 drifts, seed 1 misses) + the guard-pair traits pin (the
+beliefwire-2 same-wave record).
 """
 
 from __future__ import annotations
@@ -105,8 +116,9 @@ def _duck_pack(
 def crafted_pack(
     tmp_path: Path, name: str, families: dict[str, Any] | None = None
 ) -> Pack:
-    """A committed-pack copy with `knowledge.drift` set (or removed when
-    None) — the 68b arming shape, crafted for the live-fire laws."""
+    """A committed-pack copy with `knowledge.drift` set (or REMOVED when
+    None — the v0.1 twin: the committed pack is armed since 68b, so the
+    unarmed arm of every A/B pin is this crafted block-popped copy)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -151,8 +163,15 @@ def test_the_index_and_the_empty_block() -> None:
     assert entry.family == "f"
     assert entry.tokens == (SOURCE, SIBLING)
     assert entry.ladder == LADDER_FULL
-    # the committed pack declares no block — the rumor path never rolls
-    assert drift_families(PACK) == {}
+    # the committed pack is ARMED (68b): the figure_deeds family — the
+    # two crime sightings, the monotone ladder (the vaguer, the likelier)
+    committed = drift_families(PACK)
+    assert set(committed) == {SOURCE, SIBLING}
+    armed = committed[SOURCE]
+    assert armed.family == "figure_deeds"
+    assert armed.ladder == {"exact": 0, "partial": 30, "vague": 50}
+    chances = [armed.ladder[run] for run in ("exact", "partial", "vague")]
+    assert chances == sorted(chances)
 
 
 def test_the_ladder_rolls_at_the_received_fidelity() -> None:
@@ -444,21 +463,24 @@ def test_the_official_briefing_never_drifts(tmp_path: Path) -> None:
 def test_the_add_safety_pin_armed_zero_chance_family_ten_seeds(
     tmp_path: Path,
 ) -> None:
-    """The engine-2 add-safety pin's drift twin: the committed pack (no
-    block) vs a twin armed with an all-zero-chance family over the very
-    token the rumor path tells — ten seeds byte-identical, the
-    fingerprints identical. The armed family's rolls ride the isolated
-    `drift:` stream (they HAPPEN — the ladder is zero, not the block
-    absent), never a canon byte: isolation is law (D-095)."""
+    """The engine-2 add-safety pin's drift twin: the v0.1 twin (the
+    block popped — the committed pack is armed since 68b, so the
+    unarmed arm is crafted) vs a twin armed with an all-zero-chance
+    family over the very token the rumor path tells — ten seeds
+    byte-identical, the fingerprints identical. The armed family's
+    rolls ride the isolated `drift:` stream (they HAPPEN — the ladder
+    is zero, not the block absent), never a canon byte: isolation is
+    law (D-095)."""
     twin = crafted_pack(tmp_path, "zero", {"figure_deeds": dict(
         _spec([SOURCE, SIBLING], LADDER_ZERO),
         notes="probe — armed at zero chance: the rolls happen, the "
               "mutations never do",
     )})
+    unarmed = crafted_pack(tmp_path, "v01", None)
     told = 0
     for seed in range(120, 130):
         bytes_of: dict[str, bytes] = {}
-        for label, p in (("twin", twin), ("committed", PACK)):
+        for label, p in (("twin", twin), ("v01", unarmed)):
             log = tmp_path / f"ab_{label}_{seed}.jsonl"
             sim = Simulator(p, seed, log, SCHEMA, commit="0000000")
             sim.run_playscript(
@@ -467,7 +489,7 @@ def test_the_add_safety_pin_armed_zero_chance_family_ten_seeds(
             )
             sim.close()
             bytes_of[label] = log.read_bytes()
-        assert bytes_of["twin"] == bytes_of["committed"], f"seed {seed} diverged"
+        assert bytes_of["twin"] == bytes_of["v01"], f"seed {seed} diverged"
         _, events = read_log(tmp_path / f"ab_twin_{seed}.jsonl", SCHEMA)
         told += sum(
             1 for e in events
@@ -477,3 +499,163 @@ def test_the_add_safety_pin_armed_zero_chance_family_ten_seeds(
     # non-vacuity: the family token really passed the rumor path (the
     # drift stream rolled) in the pinned seeds
     assert told >= 1
+
+
+# -- the committed arming (68b): the corpus price + the liveness ----------------
+
+
+SEED15_TALK: list[dict[str, Any]] = [
+    {"intent": "move", "target": "loc_tavern"},
+    {"intent": "steal", "target": GUARD, "method": "distraction"},
+    {"intent": "steal", "target": GUARD, "method": "distraction"},
+    {"intent": "take", "target": "oil_lamp_01"},
+    {"intent": "talk", "target": "npc_drunk_01"},
+]
+
+
+def test_the_committed_arming_corpus_price_zero(tmp_path: Path) -> None:
+    """The measured price (the both-arms law, 68b): the ARMED committed
+    pack vs the block-popped v0.1 twin over the corpus geometries — the
+    narrator corpus's seed-15 talk session (the drunk tells the noise, a
+    non-member) and the day1_full ten-seed family (no talks at all) —
+    byte-identical. Every talk in the committed corpora tells a
+    non-member token, so no roll ever fires there: the arming costs the
+    corpora nothing; the live corpus stays at its iter-13 fixed point
+    (zero re-distill, zero regen)."""
+    unarmed = crafted_pack(tmp_path, "v01", None)
+    for seed in range(120, 130):
+        for name, steps in (
+            ("seed15", SEED15_TALK),
+            ("day1_full", json.loads(
+                (REPO / "tests" / "playscripts" / "day1_full.json")
+                .read_text(encoding="utf-8")
+            )["steps"]),
+        ):
+            bytes_of: dict[str, bytes] = {}
+            for label, p in (("armed", PACK), ("v01", unarmed)):
+                log = tmp_path / f"price_{label}_{name}_{seed}.jsonl"
+                sim = Simulator(p, seed, log, SCHEMA, commit="0000000")
+                sim.run_playscript(
+                    {"name": name, "seed": seed, "pack": "tavern_pack@0.1",
+                     "steps": steps}
+                )
+                sim.close()
+                bytes_of[label] = log.read_bytes()
+            assert bytes_of["armed"] == bytes_of["v01"], (
+                f"{name} seed {seed} diverged"
+            )
+    # non-vacuity: the seed-15 session really fires a telling (the
+    # noise the drunk shares) — an accepted non-member transfer
+    log = tmp_path / "vacuity.jsonl"
+    sim = Simulator(PACK, 15, log, SCHEMA, commit="0000000")
+    sim.run_playscript(
+        {"name": "v", "seed": 15, "pack": "tavern_pack@0.1",
+         "steps": SEED15_TALK}
+    )
+    sim.close()
+    _, events = read_log(log, SCHEMA)
+    telling = by_type(events, "rumor_told")[0]
+    assert telling.outcome["accepted"] is True
+    assert telling.outcome["knows"] == "noise_by_the_bar"
+    assert "drifted_from" not in telling.outcome
+
+
+GUARD_TALK: list[dict[str, Any]] = [
+    {"intent": "move", "target": "loc_tavern"},
+    {"intent": "steal", "target": GUARD},
+    {"intent": "talk", "target": GUARD},
+]
+
+
+def test_the_committed_family_is_live_a_hit_drifts(tmp_path: Path) -> None:
+    """The liveness law (the both-arms second half): a geometry whose
+    teller holds the member token ROLLS — seed 2 hits: the outcome's
+    knows flips to the sibling, `drifted_from` names the sighting, the
+    player's record carries the sibling, the teller keeps the true
+    token, and the log bytes DIVERGE from the block-popped twin (the
+    armed family is live canon, not declarative dead weight)."""
+    unarmed = crafted_pack(tmp_path, "v01", None)
+    bytes_of: dict[str, bytes] = {}
+    for label, p in (("armed", PACK), ("v01", unarmed)):
+        log = tmp_path / f"live_{label}.jsonl"
+        sim = Simulator(p, 2, log, SCHEMA, commit="0000000")
+        sim.run_playscript(
+            {"name": "live", "seed": 2, "pack": "tavern_pack@0.1",
+             "steps": GUARD_TALK}
+        )
+        sim.close()
+        bytes_of[label] = log.read_bytes()
+    assert bytes_of["armed"] != bytes_of["v01"]  # the hit is a real byte
+    events, sim = run(tmp_path, PACK, 2, GUARD_TALK, "hit.jsonl")
+    telling = by_type(events, "rumor_told")[0]
+    assert telling.outcome["accepted"] is True
+    assert telling.outcome["knows"] == SIBLING
+    assert telling.outcome["drifted_from"] == SOURCE
+    player = [
+        (r.knows, r.channel, r.fidelity)
+        for r in sim.knowledge.records_of("pc_01")
+    ]
+    assert (SIBLING, "told", "vague") in player
+    assert not any(knows == SOURCE for knows, _, _ in player)
+    guard = [
+        (r.knows, r.channel, r.fidelity)
+        for r in sim.knowledge.records_of(GUARD)
+    ]
+    assert (SOURCE, "saw", "partial") in guard
+
+
+def test_a_miss_keeps_the_v0_1_bytes(tmp_path: Path) -> None:
+    """The miss law: seed 1's roll misses (the same draw position that
+    hit at seed 2) — the outcome keeps the token verbatim, no
+    `drifted_from`, and the log bytes match the block-popped v0.1 twin
+    exactly: the draw rode the isolated stream and shifted nothing
+    (isolation is law, D-095; the miss is the v0.1 path in bytes)."""
+    unarmed = crafted_pack(tmp_path, "v01", None)
+    bytes_of: dict[str, bytes] = {}
+    for label, p in (("armed", PACK), ("v01", unarmed)):
+        log = tmp_path / f"miss_{label}.jsonl"
+        sim = Simulator(p, 1, log, SCHEMA, commit="0000000")
+        sim.run_playscript(
+            {"name": "miss", "seed": 1, "pack": "tavern_pack@0.1",
+             "steps": GUARD_TALK}
+        )
+        sim.close()
+        bytes_of[label] = log.read_bytes()
+    assert bytes_of["armed"] == bytes_of["v01"]
+    events, _ = run(tmp_path, PACK, 1, GUARD_TALK, "miss.jsonl")
+    telling = by_type(events, "rumor_told")[0]
+    assert telling.outcome["accepted"] is True
+    assert telling.outcome["knows"] == SOURCE
+    assert "drifted_from" not in telling.outcome
+
+
+def test_the_guard_pair_traits_survive_the_arming(tmp_path: Path) -> None:
+    """The beliefwire-2 same-wave record (68b's TASKS row): the drift
+    never touches the direct-mint records (the guard's own sighting,
+    the inferred absence) nor the verbatim watch briefing — so the
+    guard pair's paranoid_about_thieves crystallization on the
+    canonical day1_full run is unchanged by the arming: guard_01 the
+    two-source eyewitness, guard_02 the one-event hearsay shape. The
+    live trait consumer's substrate (the fold's input) is
+    byte-identical; the beliefwire-2 arming price stands as measured at
+    iter-67."""
+    from core.traits import crystallized_traits
+
+    day1 = json.loads(
+        (REPO / "tests" / "playscripts" / "day1_full.json")
+        .read_text(encoding="utf-8")
+    )["steps"]
+    log = tmp_path / "traits.jsonl"
+    sim = Simulator(PACK, 125, log, SCHEMA, commit="0000000")
+    sim.run_playscript(
+        {"name": "t", "seed": 125, "pack": "tavern_pack@0.1", "steps": day1}
+    )
+    sim.close()
+    _, events = read_log(log, SCHEMA)
+    by_who = {
+        t.who: t for t in crystallized_traits(PACK, sim.knowledge, events[-1].t)
+    }
+    assert set(by_who) == {GUARD, "npc_guard_02"}
+    assert by_who[GUARD].token == "paranoid_about_thieves"
+    assert len(by_who[GUARD].sources) == 2  # the sighting + the inference
+    assert len(by_who["npc_guard_02"].sources) == 1  # the one-event hearsay

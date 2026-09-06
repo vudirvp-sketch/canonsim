@@ -42,13 +42,20 @@
   look_around price, tests/test_beliefwire.py's channel pin), and no
   zero-price live path exists (the seed-33 panic scan dies under a
   thief-belief gate — wrong semantic AND a corpus break; a new
-  guard_02 entry fires on the 125 canonical corpus). The arming pays
-  its price deliberately or rides the rumordrift content wave — todo.
-- `rumordrift` · A2'' mechanics — done (iter-68a, D-099): the
-  fidelity-ladder drift profiles + the `drift:<family>` streams
-  (isolation is law) + `drifted_from` in outcome (EVENT_SCHEMA §3,
-  §11 no-bump; tests/test_rumordrift.py; corpus price zero — the
-  committed pack declares no block). The pack arming — todo (68b).
+  guard_02 entry fires on the 125 canonical corpus). The price
+  re-measured on the armed-drift pack (iter-68b, the same content
+  wave): the drift never touches the direct-mint records nor the
+  verbatim briefings — the traits substrate is byte-identical, the
+  crystallization unchanged (the same-wave pin,
+  tests/test_rumordrift.py), so the iter-67 price stands verbatim —
+  todo.
+- `rumordrift` · A2'' — done (iter-68a/68b, D-099/D-100): the
+  mechanics + the stream-isolation law + `drifted_from` in outcome
+  (EVENT_SCHEMA §3, §11 no-bump); the pack ARMED (68b) — the
+  `figure_deeds` family (the two crime sightings), the monotone
+  0/30/50 ladder, the measured corpus price ZERO (every corpus talk
+  tells a non-member token), live on the guard-talk geometry (12/22
+  seeds hit). Detail: tests/test_rumordrift.py.
 - `suspectaxis` · per-target suspicion, the drift teeth's first
   consumer — todo (iter-69).
 - `testproto` · the intermediate-build LLM-integration test protocol —

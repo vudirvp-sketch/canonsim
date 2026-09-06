@@ -256,7 +256,14 @@
       "event": "rumor_told",
       "facts": 1
     },
-    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). P2c (D-033): a successful talk makes the teller share their most salient novel fact — salience = importance then recency, records born on the triggering conversation excluded. Acceptance rolls d100 vs base + trust_weight*trust − teller penalty (all pack numbers); official watch briefings are always accepted (D-006 handover, not a rumor). Landed iter-3"
+    "drift": {
+      "figure_deeds": {
+        "tokens": ["figure_reaching_for_purse", "figure_starting_fire"],
+        "ladder": {"exact": 0, "partial": 30, "vague": 50},
+        "notes": "iter-68b (68a's arming row, D-100): the tavern's two crime sightings drift into each other as rumors spread — the pickpocket's figure becomes the firebug's figure, the thief blamed for the arson. The mutation rides the RECEIVED fidelity (the vaguer the record, the likelier the drift): exact never drifts, a partial retelling drifts 30, a vague one 50. The roll is uniform over the OTHER member; a miss keeps the token (the draw still consumed). Only the telling path consults the family — the watch briefing (D-006) stays verbatim. Corpus price zero (measured): every talk in the committed corpora tells a non-member token (the narrator corpus's seed-15 noise, the parse corpus's arrival rumors) — no roll ever fires there. The figure_deeds stream: drift:figure_deeds."
+      }
+    },
+    "notes": "EVENT_SCHEMA §3: rumor = transfer event with one-step fidelity decay; distortion from source incompleteness (D-007). Trusted tellers spread faster (§6 matrix). P2c (D-033): a successful talk makes the teller share their most salient novel fact — salience = importance then recency, records born on the triggering conversation excluded. Acceptance rolls d100 vs base + trust_weight*trust − teller penalty (all pack numbers); official watch briefings are always accepted (D-006 handover, not a rumor). Landed iter-3; rumor drift armed iter-68b"
   },
   "states": {
     "fatigue": {

@@ -1,42 +1,46 @@
 # STATUS — canonsim
 
-Iteration: iter-68a (`iter-68a-rumordrift` — the v0.2 refinement
-family's third segment, A2''/D-095/TASKS: the rumor-drift MECHANICS,
-declarative-only — the pack arming is 68b's row; the owner's
-"продолжай работу по планам" call, STATUS Next's named next) ·
+Iteration: iter-68b (`iter-68b-rumordrift` — the PACK ARMING, 68a's
+arming row / D-100 / TASKS: the committed pack's first LIVE
+`knowledge.drift` family; the owner's "продолжай работу по планам"
+call, STATUS Next's named next) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
 the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
 UNLOCKED — opens on the owner's call (the iter-55 precedent); the
 refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
 refinement, never phase-5 scope**
-**The landing: FUNCTIONAL (the doc-only streak resets — iter-68 was
-research): the telling reaction's token-mutation half — a pack-declared
-`rules.json::knowledge.drift` family (closed orbit, mintable members,
-one-sided membership, the full-ladder lint) rolls d100 at the RECEIVED
-fidelity's rung on the family's own `drift:<family>` stream (the
-RngBank's second content-addressed family after urgency: lazy,
-nesting legal only inside the assured substantive scope; isolation is
-law — arming shifts neither a canon draw nor another family's rolls,
-the D-079 add-safety pin's drift twin); a hit substitutes one uniform
-other member; `drifted_from` names the pre-drift token in the outcome
-(EVENT_SCHEMA §11 no-bump, §3 the clause); the novelty gate keeps
-testing the teller's token; the watch briefing stays verbatim (D-006).
-Corpus price ZERO by construction: the committed pack declares no
-block (68b owns the arming) — 1223+1 green, ruff clean.**
+**The landing: FUNCTIONAL: the committed pack ARMED — the
+`figure_deeds` family over the tavern's two crime sightings
+(`figure_reaching_for_purse` ↔ `figure_starting_fire`), the monotone
+ladder exact 0 / partial 30 / vague 50 (the vaguer the received
+record, the likelier the mutation — the only story-true orbit in the
+5-token literal vocabulary: the pickpocket's figure becomes the
+firebug's figure, the thief blamed for the arson). Corpus price
+measured FIRST, ZERO (the both-arms law): the armed pack vs the
+block-popped v0.1 twin — byte-identical over every committed surface
+(T1 golden, day1_full 10 seeds + 125, day1_theft_and_arson, the
+narrator corpus's seed-15 talk session); the told-token census
+explains the zero: every talk in the committed corpora tells a
+NON-member token, so no roll ever fires there; the full-suite flip
+ledger = the two self-referential pins (re-pointed to the crafted
+v0.1 twin, the 68b inversion). Liveness pinned on the guard-talk
+geometry: seed 2 hits (the outcome flips, `drifted_from` names the
+sighting), seed 1 misses (the v0.1 bytes verbatim); 12/22 swept
+seeds hit. The beliefwire-2 same-wave record: the drift never
+touches direct-mint records nor verbatim briefings — the iter-67
+trait-consumer price stands verbatim — 1227+1 green, ruff clean.**
 ·
 Date: 2026-09-07 ·
-Scope: `core/rng.py` (the drift stream family), `core/knowledge.py`
-(DriftFamily + drift_families + drifted_knows + the telling wiring),
-`core/pack.py` (the `_drift` lint), `tests/test_rumordrift.py` (NEW,
-+22 — mechanics, streams, lint, live-fire, the add-safety pin),
-`docs/EVENT_SCHEMA.md` (§3 the drift clause), `docs/DECISIONS.md`
-(D-099 — 35 rows, rides above 30 until the phase-5→6 gate, the
-recorded precedent), `docs/TASKS.md` (the rumordrift row split — the
-mechanics done, the arming 68b), `docs/AGENT_NAVIGATION.md` (the
-tests row), `STATUS.md` (this header + Next), `worklog.md` (iter-68a
-in, iter-60 out). 10 files — over the 3–5 soft limit: one mechanism
-family (rng + mechanics + lint + suite + the §9 doc sync, the
-iter-60..67 scope pattern; noted in worklog).
+Scope: `content/tavern_pack/rules.json` (the drift block + the
+knowledge notes line), `tests/test_rumordrift.py` (+4 — the
+corpus-price pin, the live hit, the miss law, the traits same-wave
+pin; the two 68a committed-pack pins re-pointed to the crafted v0.1
+twin), `docs/DECISIONS.md` (D-100 — 36 rows, rides above 30 until
+the phase-5→6 gate, the recorded precedent), `docs/TASKS.md`
+(rumordrift done + the beliefwire-2 price re-measure), `worklog.md`
+(iter-68b in, iter-61 out), `STATUS.md` (this header + Next). 6
+files — the 2-runtime-file core under the soft limit, the four doc
+syncs ride along.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -534,17 +538,17 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**The v0.2 refinement lance in flight (iter-66/66a/67/68/68a done —
-prosefloor, the intake 2, beliefwire, testproto, rumordrift's
-mechanics): next iter-68b-rumordrift — the PACK ARMING, the first LIVE
-`knowledge.drift` family over the committed orbit (the corpus price
-measured FIRST — which seeds/cases flip, the fixed-point regen if any,
-the both-arms law; the beliefwire-2 arming row records the measured
-price for a live trait consumer — the same wave, TASKS' own row).
-Then suspectaxis (iter-69 — per-target suspicion, the drift teeth's
-first consumer). rumordrift's mechanics CLOSED (iter-68a, D-099): the
-mechanics + the lint + the stream family law, corpus price zero by
-construction. testproto CLOSED (iter-68, D-098): the three-layer
+**The v0.2 refinement lance in flight (iter-66/66a/67/68/68a/68b done
+— prosefloor, the intake 2, beliefwire, testproto, rumordrift's
+mechanics + the pack arming): next iter-69-suspectaxis — per-target
+suspicion, the drift teeth's first CONSUMER (suspicion moves from the
+flat watch-score to per-figure records; the drift family's mutated
+tokens must surface as blame — the 68b liveness geometry already
+grows the seeds). rumordrift CLOSED (iter-68a/68b, D-099/D-100): the
+mechanics + the lint + the stream family law + the committed pack
+ARMED (`figure_deeds`, the monotone 0/30/50 ladder) — corpus price
+measured ZERO, live on the guard-talk geometry. testproto CLOSED
+(iter-68, D-098): the three-layer
 protocol — contract: TEST_PLAN §8; the live half laid as bg-8
 (owner-gated, tracks bg-7's numbers; the heartbeat never blocks track
 A — the gap-row law). The lance

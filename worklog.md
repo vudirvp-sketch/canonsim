@@ -16,6 +16,22 @@
 
 
 ---
+iter-68b · 2026-09-07 · rumordrift arming — the first LIVE
+knowledge.drift family in the committed pack (68a's arming row,
+D-100; 2 runtime files + the suite — under the soft limit)
+- content/tavern_pack/rules.json the figure_deeds family (the two
+  crime sightings, monotone 0/30/50 ladder) + the knowledge notes
+  line; tests/test_rumordrift.py +4 (the corpus-price pin, the live
+  hit seed 2, the miss law seed 1, the traits same-wave pin) and the
+  two 68a committed-pack pins re-pointed to the crafted v01 twin.
+- Corpus price measured FIRST, ZERO: every committed-corpus talk tells
+  a non-member token (the told-token census) — the 105-case narrator
+  corpus, the 10-case parse corpus, the T1 golden, day1_full 10 seeds,
+  the traits crystallization all byte-identical; the full-suite flip
+  ledger = the two self-referential pins. 1223→1227+1 green, ruff
+  clean. D-100; TASKS rumordrift done + beliefwire-2 price re-measured
+  (stands verbatim). iter-61 evicted (verified in this edit); 10 after.
+---
 iter-68a · 2026-09-07 · rumordrift — the A2'' mechanics,
 declarative-only (the v0.2 refinement family's third segment,
 D-095/D-099; 10 files — over the soft limit: rng family + mechanics
@@ -190,28 +206,6 @@ mechanism family, the iter-60/61 scope pattern)
   family squeeze: the phase-4 done rows are the phase ledger (§6.1,
   kept; the collapse lands at the phase gate, the iter-61 precedent
   at 601). KI#71 deleted per §5. iter-52 evicted; 10 entries after.
----
-iter-61 · 2026-09-05 · scene-2 — the mode-B session wiring (phase 4,
-TASKS' top row; the owner's "continue per plans" call; 20 files —
-over the soft limit: the drain + the door + the query + the pack
-arming + the corpus suite are one mechanism family, the iter-60 scope
-pattern)
-- cli/mediator.py (the drain: the cast snapshot at the player's
-  accept, one actor call per NPC, live presence re-verification, the
-  drop law, one budget per exchange) + the actor step key through the
-  door (core/loop.py, KI#17's exact intent-id law) +
-  feedable_intents' caller gate (brief/mediator.py).
-- The keyword query: recall_query (brief/scene.py) + the assembler's
-  relevance term (pure overlap, rung-independent) + the ladder's
-  first runtime query — the actor calls' query:/retrieval: lines.
-- Measured: the drain live on seed 7 (guard → barkeep → close); the
-  caller's event committed; the corpus price zero (10-seed A/B, the
-  corpus 105 + T1 untouched). +33 test_scene; 1085→1118, ruff clean.
-  D-090 into the phase family (cap 30 held); TASKS scene-2 done +
-  tex-1 re-pointed. TASKS 601 — one over the 600 cap after the
-  done-row collapse, two squeezes, and a phase-3-verdict de-dup pass:
-  the remaining rows are phase-ledger substance (§6.1, kept). iter-51
-  evicted; 10 entries after.
 ---
 (end of log — cap 10; pre-trim history lives in git)
 
