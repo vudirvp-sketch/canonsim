@@ -1,46 +1,40 @@
 # STATUS — canonsim
 
-Iteration: iter-67 (`iter-67-beliefwire` — the v0.2 refinement
-family's second segment, D-095/TASKS: the `trait_held` requires-GATE
-(a gate, never a multiplier), the loop's traits channel, the
-counter-family in the fold; the pack arming deferred to beliefwire-2
-— no zero-price live path exists, measured) ·
+Iteration: iter-68 (`iter-68-testproto` — the intermediate-build
+LLM-integration test protocol's RESEARCH close, D-098/TASKS; the
+owner's 2026-09-07 ask + the living-world clarification: how well do
+the current gates simulate the REAL local-LLM loop, is the corpus a
+self-diagnosis trap, and how does the world answer off-script play) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
 the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
 UNLOCKED — opens on the owner's call (the iter-55 precedent); the
 refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
 refinement, never phase-5 scope**
-**The landing: all three mechanisms, zero corpus price by construction
-(D-097): the leaf in the door's closed set (INTENT_SCHEMA §3), the
-channel in the windowed family (§4 — the fold read at the caller's
-own tick, the OCC re-check unconditional, `occ_breaking_cause`
-excluded), the counter-block in the fold (`counters` at the same
-breadth bar, provenance/expansion untouched). Pinned: the 10-seed
-day1_full A/B armed-vs-stripped byte-identical; the live e2e pair
-(beat-gated scan on the crafted pack; the watch-transfer-borne
-counters de-crystallizing an in-flight intent through
-`projection_moved`/`actor.trait_held`). +16 tests, 1201 green, ruff
-clean. KI#74 (the pack notes' stale DORMANT claim — false since
-leg-2) opened+closed; the testproto research row laid per the
-owner's 2026-09-07 ask (TASKS, owner-gated on bg-7's numbers).**
+**The landing: doc-only (research — zero runtime files; the doc-only
+streak 1 of 2, iter-67 was functional — no alarm): the fork closed by
+DECOMPOSITION, not election — the three candidates answer three
+different questions, so the protocol runs all three over ONE pinned
+corpus + ONE metric vocabulary (TEST_PLAN §8.1): the contract
+simulacrum (pytest, INV-4-clean, calibrated from bg-7 transcripts),
+the live probes (the runner outside the repo, Rule 9), the heartbeat
+(each gate, the same pins — a trend line that never blocks track A:
+a missed run records a gap row). The anti-trap law (§8.2): the corpus
+grows from author-declared cases + the NEW deviation corpus (F1–F6,
+authored to break the boundary) + live transcripts re-distilled —
+never imagination alone. The owner's living-world ask is the
+world-answer law (§8.3): every world-touching utterance ends in a
+committed event (attempts are facts), a question, or no_intent —
+silence is the measured failure. 1201+1 green, ruff clean (docs-only
+diff). bg-8 laid in TASKS (owner-gated, tracks bg-7's numbers).**
 ·
 Date: 2026-09-07 ·
-Scope: `core/intent.py` (the TRAIT_TEST constant, the windowed
-family, `_Ctx.traits`, the test, `first_failing(traits=)`),
-`core/traits.py` (the counter-family fold + the block law),
-`core/loop.py` (the channel: `_windowed`/`_fold_reads`/the two
-`first_failing` calls/the beat-gate read), `core/urgencies.py`
-(`urgency_intents(traits=)`), `core/pack.py` (`_lint_trait_cond` +
-the counters lint laws), `tests/test_beliefwire.py` (NEW, 16 tests),
-`tests/test_traits.py` (the dormancy law → the laziness law),
-`content/tavern_pack/rules.json` (KI#74's one-line notes fix —
-prose only, zero behavior), `docs/INTENT_SCHEMA.md` (§3/§4),
-`docs/TASKS.md` (beliefwire done + beliefwire-2/testproto rows),
-`docs/DECISIONS.md` (D-097), `STATUS.md` (this header + Next),
-`worklog.md` (iter-67 in, iter-58 out). 13 files — over the 3–5
-soft limit: one mechanism family (the leaf + the channel + the fold
-+ the lint + the suite + the §9 doc sync are one landing, the
-iter-60..63 scope pattern).
+Scope: `docs/TEST_PLAN.md` (§8 NEW — 524→600, at the cap),
+`docs/DECISIONS.md` (D-098 — 34 rows, rides above 30 until the
+phase-5→6 gate, the D-096 precedent), `docs/TASKS.md` (testproto
+done-collapse + the bg-8 row — 668, +7 net, the §6.1 phase-ledger
+law), `STATUS.md` (this header + Next), `worklog.md` (iter-68 in,
+iter-59 out). 5 files — inside the 3–5 soft limit (one research
+close, every owner doc synced same-turn per §9).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -540,15 +534,17 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**The v0.2 refinement lance in flight (iter-66/66a/67 done —
-prosefloor, the intake 2, beliefwire): next iter-68a-rumordrift —
+**The v0.2 refinement lance in flight (iter-66/66a/67/68 done —
+prosefloor, the intake 2, beliefwire, testproto): next iter-68a-rumordrift —
 A2'' mechanics declarative-only (`drift:<family>` stream isolation is
 law; `drifted_from` in outcome, EVENT_SCHEMA §11 no-bump), the pack
 arming 68b after (TASKS' refinement backlog owns the rows; each
 landing measures its own corpus price first — beliefwire's zero-price
 pin the pattern; the beliefwire-2 arming row records the measured
-price for a live consumer). The testproto research row rides
-owner-gated on bg-7's numbers (the owner's 2026-09-07 ask). The lance
+price for a live consumer). testproto CLOSED (iter-68, D-098): the
+three-layer protocol — contract: TEST_PLAN §8; the live half laid as
+bg-8 (owner-gated, tracks bg-7's numbers; the heartbeat never blocks
+track A — the gap-row law). The lance
 rides between the gates — track A refinement, never phase-5 scope.
 Phase 4 (Knowledge & scene) CLOSED — gate PASS
 iter-65, D-094 (the full ROADMAP §5 protocol re-run; the phase-4

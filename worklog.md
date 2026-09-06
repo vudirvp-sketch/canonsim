@@ -16,6 +16,22 @@
 
 
 ---
+iter-68 · 2026-09-07 · testproto — the LLM-integration test protocol's
+research close (D-098; 5 files, doc-only — the streak is 1 of 2,
+iter-67 was functional; the owner's 2026-09-07 ask + the living-world
+clarification)
+- The fork closed by decomposition: the three candidates answer three
+  different questions, so the protocol runs all three (TEST_PLAN §8.1
+  — contract simulacrum / live probes / gate heartbeat) over one
+  pinned corpus + one metric vocabulary; each con neutralized by a
+  named mechanism (bg-7 transcript calibration, the gap-row law,
+  corpus growth from measured failure — §8.2's anti-trap law).
+- The living-world ask landed as the world-answer law (§8.3) + the
+  deviation corpus families F1–F6 (§8.2); TEST_PLAN 524→600 (§8 NEW);
+  D-098; TASKS testproto done + the bg-8 row (owner-gated, tracks
+  bg-7); 1201+1 green, ruff clean (docs-only diff). iter-59 evicted
+  (verified in this edit); 10 after.
+---
 iter-67 · 2026-09-07 · beliefwire — the trait gate + the channel + the
 counter-family (the v0.2 refinement family's second segment, D-095;
 13 files — over the soft limit: the leaf + the channel + the fold +
@@ -199,22 +215,4 @@ scope pattern)
   phase family (cap 30 held); TASKS scene-1 done + the scene-2 row
   (the wiring, the actor reply door, the keyword query). iter-50
   evicted; 10 entries after.
----
-iter-59 · 2026-09-05 · retr-1 — the retrieval ladder (phase 4,
-phases.md §4's STORE-1 row; the owner's "continue per plans" call,
-the §2 verdict standing from iter-58)
-- core/retrieval.py (NEW) + the _retrieval lint + rules.json::retrieval
-  (α=β=γ=δ=1.0, knn_k=8, no vectors — D-012): the FTS5 index + the
-  vec probe/scan/floor chain + the pack-coefficient re-ranker; the
-  knower query param IS known_by; LEGEND_SPEC §4/§5 live (the stale
-  exclusion, the source-outranks demotion).
-- Measured-first: the block declarative-only — the 10-seed day1_full
-  A/B 10/10 byte-identical (zero corpus price); the live-fire over
-  the armed pack (the reflection's 1.77 vs the sightings' 1.15, yet
-  demoted below both — the law over the score).
-- +25 tests/test_retrieval.py; 1030→1055, ruff clean. D-088 into the
-  phase family (cap 30 held); KI#71 (the sqlite-vec license drift,
-  REFERENCES §6 + TECH_NOTES §6) opened+closed. iter-49 evicted;
-  10 entries after.
----
 

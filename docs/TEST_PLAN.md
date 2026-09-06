@@ -522,3 +522,79 @@ checked pipeline's own code):
   everywhere): the runtime import graph (core/sim/render/brief/cli)
   imports only stdlib + local packages + ImportError-guarded optional
   probes — duckdb or any future third-party root fails loudly.
+
+## 8. testproto — the intermediate-build LLM-integration protocol (iter-68, D-098)
+
+The fork closed by decomposition, not election: the three candidates
+(bg-7's one-shot probes, the phase-gate heartbeat, the adversarial
+simulacrum) answer three different questions — what the real loop
+does, whether it drifted since the last gate, whether the boundary
+survives the worst case deterministically — so the protocol runs all
+three, over ONE pinned corpus set and ONE metric vocabulary. Protocol
+contract owner: this section; verdict: D-098; live runner: `bg-8`
+(TASKS, owner-gated, tracks bg-7). NOT a gate test — the §6/§7
+acceptance-instrument precedent; nothing executes until bg-8 lands.
+
+### 8.1 The three layers (what each measures — and nothing else)
+
+| Layer | Runs | Measures | Structurally cannot |
+|---|---|---|---|
+| 1 Contract (simulacrum) | in-repo pytest, every commit; INV-4-clean (scripts, never calls) | the boundary under scripted worst-case repliers: the refusal ladder (REFUSED lines, ≤2 regens, the L12 dry floor), the reply gates (shape, closed alternatives, enum/texture-verbatim), the world-answer law (§8.3), injection immunity (the reply is data), OCC/pin/promotion under degraded replies | model quality, distributions, latency, window rot — no model exists here |
+| 2 Live probes (bg-7/bg-8 runner; outside the repo, Rule 9) | on demand; a real engine on real hardware | output distribution (utterance → grammar alternative), refusal/confabulation rates (real denominators), context pressure (brief token distribution vs the ~8–16k effective window, TECH_NOTES §2), latency/hardware fit, the Cyrillic Script Tax | regression protection — a snapshot, not a fence; determinism |
+| 3 Heartbeat (a protocol, not a harness) | each phase gate: Layer 2 re-run over the SAME pins + metrics | the trend line — drift across engine/model/hardware changes | blocking anything: track B never blocks track A (ROADMAP §1); a run that cannot happen records a gap row, the gate proceeds on track-A evidence, the heartbeat is advisory to engine-1 |
+
+The contract-vs-live split: what the boundary decides (gates,
+refusals, no-op facts) is Layer-1-testable without the model; what a
+model emits (mapping quality, rates, pressure, latency) needs the
+live partner. Layer 1's scripts are CALIBRATED from bg-7 transcripts
+(the anti-tautology law: a same-author adversary is the trap reborn).
+
+### 8.2 One corpus, three sources (the anti-trap law)
+
+"Is the corpus a self-diagnosis trap?" — YES by construction (corpus
+and gates share one author) unless the corpus grows from sources that
+author did not see. Three pinned sources, committed data under
+`tests/fixtures/` (replies are fixtures, never calls — INV-4-clean):
+
+1. **Author-declared cases** — the existing families (the 105-case
+   narrator corpus; the 51-utterance parse corpus).
+2. **The deviation corpus** (the owner's 2026-09-07 clarification —
+   off-script play as a first-class protocol member), authored to
+   break the boundary's comfort, never to confirm it:
+3. **Live transcripts re-distilled** — bg-7/bg-8 outputs become new
+   pinned cases; their confabulation shapes calibrate Layer 1.
+
+| Family | Probes | The honest outcome |
+|---|---|---|
+| F1 verb paraphrase | "have a good look at" → examine; "loiter" → wait | a mapped intent or a question |
+| F2 oblique/role nouns | "the barmaid" / Cyrillic "барменша" → the serving maid / the barkeep | semantic mapping or the question — never a guess |
+| F3 invented names | the prose floor's input-side twin (a ghost noun cannot feed, PARSER_SPEC §2) | a disambiguation question or no_intent |
+| F4 unmodeled actions | "dance on the table" — world-touching but no verb exists | question / no_intent — the honest answer family |
+| F5 register noise | Cyrillic, casing, filler — the script-tax family | the gates are script-agnostic; the mapping cost is Layer 2's |
+| F6 injection payloads | instructions inside player text and reply prose | data-not-instruction (VISION §5); refused, never executed |
+
+Growth law: the corpus grows from measured failure, never the author's
+imagination alone. The first measured gap: the grammar snapshot's noun
+surface is the entity name only (PARSER_SPEC §2) — role/alias text is
+pack data the snapshot does not yet carry; the fix (pack-declared
+aliases, engine-generic, INV-3-clean) is a candidate bg-8/engine-1
+landing, routed to the backlog, not ahead of the numbers.
+
+### 8.3 The world-answer law (the living-world metric)
+
+The measurable form of VISION §5 ("player input is data; the world
+answers"): every deviation-corpus utterance that carries world-touching
+intent must end in exactly one of — a committed event (attempts
+included: `intent_rejected` is a fact, PARSER_SPEC §5), a surfaced
+disambiguation question, or a `no_intent` verdict; a silent drop, a
+crash, or an off-grammar leak reaching the player is a measured
+failure with a pinned case. The metric is answer coverage; the target
+rides bg-7's numbers, never a guessed threshold.
+
+### 8.4 The runner boundary (Rule-9 shape)
+
+The repo exports the pins, the metric definitions (this section), and
+the boundary contracts (PARSER_SPEC, BRIEF_SPEC §7.1, VALIDATION_SPEC
+§7.1); the runner owns the engine, the transcripts, the hardware.
+Transcripts flow back one way — re-distilled into corpus rows (§8.2
+source 3) and TECH_NOTES numbers; the runner never writes repo files.

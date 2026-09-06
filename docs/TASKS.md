@@ -49,19 +49,12 @@
 - `suspectaxis` · per-target suspicion, the drift teeth's first
   consumer — todo (iter-69).
 - `testproto` · the intermediate-build LLM-integration test protocol —
-  a RESEARCH iteration (the owner's 2026-09-07 ask: how well do the
-  current gates simulate the REAL local-LLM loop — context window,
-  degradation, hardware; is the corpus a self-diagnosis trap?): weigh
-  bg-7's one-shot probe family vs a repeatable phase-gate heartbeat
-  (the canonical scenario × a real engine at each gate, metrics: brief
-  token distribution vs the window, refusal/confabulation rates vs the
-  corpus pins, latency/hardware fit) vs an adversarial simulacrum
-  harness (a scripted worst-case replier inside INV-4); name which
-  parts are contract-testable without the model (the boundary's
-  refusal ladder — already covered) vs which need the live partner
-  (the output distribution, the context pressure); the runner outside
-  the repo (bg-7's Rule-9 shape); a concrete proposal lands as
-  bg-8/engine — todo, owner-gated (tracks with bg-7's numbers).
+  done (iter-68, D-098 — research, doc-only): the fork closed by
+  decomposition into the three-layer spiral (contract simulacrum /
+  live probes / gate heartbeat) over one pinned corpus + one metric
+  vocabulary; the anti-trap corpus-growth law; the deviation corpus
+  + the world-answer law (the owner's living-world clarification,
+  2026-09-07). Detail: TEST_PLAN §8; the live half: bg-8 (below).
 
 ### Research intake 2 (iter-66a; the depth-architecture review, D-096)
 
@@ -370,6 +363,20 @@ probe with the LIVE floor (the sentence-initial gap's first numbers);
 knows-strings (the C3.5 gate); (v) the surface-section A/B. Runner
 outside the repo (Rule 9, INV-4); results → TECH_NOTES; engine-1
 feeds on these numbers.
+
+### bg-8 · engine — the LLM-integration test runner — todo (owner-gated)
+
+The testproto proposal's live half (D-098; the protocol contract:
+TEST_PLAN §8): the runner outside the repo (Rule 9, INV-4) — consumes
+the repo's pinned corpora + metric definitions, drives a real engine
+over bg-7's probe families + the deviation corpus's F1–F6 (the
+world-answer law's first live numbers); transcripts flow back one way
+— TECH_NOTES numbers + re-distilled corpus rows + Layer-1 script
+calibration; the heartbeat's first run records the baseline trend row
+(never blocks track A — the gap-row law). Owner-gated: real hardware
+time; opens on bg-7's numbers. Candidate follow-on, routed not forced:
+pack-declared noun aliases into the grammar snapshot (engine-generic,
+INV-3-clean — TEST_PLAN §8.2's measured gap).
 
 ### bg-2 · event taxonomy — DONE (bg-2-event-taxonomy)
 
