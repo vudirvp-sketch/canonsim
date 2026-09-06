@@ -51,6 +51,7 @@ __all__ = [
     "RunnerError",
     "TEXTURE_FIELD",
     "TEXTURE_SCOPES",
+    "TRAIT_TEST",
     "WINDOWED_TESTS",
     "action_duration",
     "first_failing",
@@ -86,14 +87,31 @@ LEVERAGE_TEST: Final = "leverage_over"
 #: never imports `core.echo` (the import direction stays one-way).
 ECHO_TEST: Final = "echo_at_least"
 
-#: The tick-windowed precondition family — tests whose truth is driven
-#: by TIME, not by event application (the leverage liveness window,
-#: the echo decay). Two laws ride this name: the OCC re-check runs
-#: UNCONDITIONAL for intents carrying one (the window can move between
-#: accept and completion with no event committed), and
-#: `occ_breaking_cause` excludes them (a window close never attributes
-#: a breaking event the log does not hold).
-WINDOWED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST)
+#: The intent door's trait test (beliefwire, iter-67 — the v0.2
+#: refinement family, D-095): the noun entity HOLDS the declared belief
+#: token — the crystallized-trait fold read at the caller's own tick.
+#: A GATE, never a probability multiplier (D-095's own law): the test
+#: answers pass/fail and touches no roll, no score, no weight — the
+#: roll is the urgency's own stream, the belief only filters. Same
+#: discipline as the leverage/echo pair: the traits arrive as
+#: duck-typed data (`core.traits.crystallized_traits`, the `Trait`
+#: who/token pair); this module never imports `core.traits` (the
+#: import direction stays one-way; the owning module owns the type).
+TRAIT_TEST: Final = "trait_held"
+
+#: The tick-windowed precondition family — tests whose truth reads a
+#: DERIVED FOLD at the caller's own tick (the leverage liveness window,
+#: the echo decay, the trait crystallization): the fold is a read model
+#: over the log, never reconstructible inside the projection-only
+#: attribution fold. Three laws ride this name: the reads are fresh at
+#: every evaluation (never stale, never cached), the OCC re-check runs
+#: UNCONDITIONAL for intents carrying one (the fold's answer can move
+#: between accept and completion — the counter-block can un-crystallize
+#: a belief on later records, the windows close by time), and
+#: `occ_breaking_cause` excludes them (a fold move never attributes a
+#: breaking event the log does not hold; the rejection chains to the
+#: last committed event — the caller's fallback).
+WINDOWED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
 
 #: The intent field carrying a resolved texture reference (INTENT_SCHEMA §2;
 #: blueprint §1 D-049: the mediator resolves noun -> live entry BEFORE the
@@ -278,14 +296,15 @@ def action_duration(
 
 class _Ctx:
     """Evaluation context: pack + projection + the intent's nouns + the
-    live leverage facts (iter-45) and echo scores (iter-46). Both are
-    the caller's reads of the derived folds AT THE CALLER'S OWN TICK —
+    live leverage facts (iter-45), echo scores (iter-46), and the
+    crystallized traits (beliefwire, iter-67). All three are the
+    caller's reads of the derived folds AT THE CALLER'S OWN TICK —
     the door at the entry tick, the urgency gate at the beat, the OCC
     re-check at completion: a tick-windowed precondition must be re-read
-    at every evaluation, never cached. Both duck-typed (holder/subject
-    and who/axis/score attributes) — core.intent never imports
-    core.leverage or core.echo (the import direction is one-way; the
-    owning modules own the fact types)."""
+    at every evaluation, never cached. All duck-typed (holder/subject,
+    who/axis/score, and who/token attributes) — core.intent never
+    imports core.leverage, core.echo, or core.traits (the import
+    direction is one-way; the owning modules own the fold types)."""
 
     def __init__(
         self,
@@ -294,12 +313,14 @@ class _Ctx:
         intent: IntentData,
         facts: Sequence[Any] = (),
         echoes: Sequence[Any] = (),
+        traits: Sequence[Any] = (),
     ) -> None:
         self.pack = pack
         self.projection = projection
         self.intent = intent
         self.facts = facts
         self.echoes = echoes
+        self.traits = traits
 
     def entity(self, noun: str) -> str:
         if noun == "actor":
@@ -439,6 +460,24 @@ def _test_echo_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     )
 
 
+def _test_trait_held(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's trait test (beliefwire, iter-67): the noun
+    entity holds the declared belief token — some trait in the
+    caller-supplied fold pairs them (the crystallized-trait read at the
+    caller's own tick). With no traits supplied the test fails — nobody
+    holds any belief, the door rejects (the honest answer, never an
+    error: an entity that is not a knower holds no beliefs — a missing
+    knower IS an unheld trait). A GATE, never a multiplier: the test
+    answers pass/fail and reads no roll, no score, no weight (D-095's
+    own law). The pack lint requires the `token` param to name a
+    declared belief (a missing key would KeyError mid-run — the KI#15
+    family)."""
+    return any(
+        trait.who == ctx.entity(cond["noun"]) and trait.token == cond["token"]
+        for trait in ctx.traits
+    )
+
+
 def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     """pack-2 (iter-29, D-061): the noun (a location) holds at least one
     spot of the pack-declared transition layer that is NOT in the layer's
@@ -476,6 +515,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "spot_available": _test_spot_available,
     "leverage_over": _test_leverage_over,
     "echo_at_least": _test_echo_at_least,
+    "trait_held": _test_trait_held,
 }
 
 
@@ -486,15 +526,17 @@ def first_failing(
     preconditions: list[Mapping[str, Any]],
     facts: Sequence[Any] = (),
     echoes: Sequence[Any] = (),
+    traits: Sequence[Any] = (),
 ) -> str | None:
     """The first failing condition as '<noun>.<test>', or None when the
     intent is executable. Soft: callers record a no-op rejection event.
     The caller passes the list from `requires_for` — canon or texture per
     the intent's path — and, when the list carries a tick-windowed test
     (`WINDOWED_TESTS`), the matching fold read at the caller's own tick
-    (the leverage facts and/or the echo scores — the window law: a
-    tick-driven precondition is never evaluated on stale reads)."""
-    ctx = _Ctx(pack, projection, intent, facts, echoes)
+    (the leverage facts, the echo scores, and/or the crystallized
+    traits — the window law: a tick-driven precondition is never
+    evaluated on stale reads)."""
+    ctx = _Ctx(pack, projection, intent, facts, echoes, traits)
     for cond in preconditions:
         test = PRECONDITION_TESTS.get(cond["test"])
         if test is None:

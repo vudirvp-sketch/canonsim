@@ -72,13 +72,15 @@ test. A failing condition rejects the intent with
 | `texture_noun` | — | the intent carries a well-formed resolved texture reference whose scope target is a known entity (iter-11; ledger liveness deliberately NOT tested — core is ledger-blind) |
 | `leverage_over` | `who` | the noun entity holds live leverage over `who` — some fact in the caller-supplied live-leverage fold pairs them (iter-45, social-1b: the door's first fold-reading test; the facts are `core.leverage.live_leverage` read at the caller's own tick — door, beat gate, or completion — a tick-windowed precondition is never evaluated on stale facts) |
 | `echo_at_least` | `axis`, `value` | the noun entity's psychological residue on `axis` is at least `value` — a score in the caller-supplied echo fold (iter-46, social-2, P3e: `core.echo.echo_scores` read at the caller's own tick, the same window law; a missing pair IS zero — the world's honest answer, never an error) |
+| `trait_held` | `token` | the noun entity holds the declared belief — some trait in the caller-supplied fold pairs them (beliefwire, iter-67, D-095: `core.traits.crystallized_traits` read at the caller's own tick, the same window law — a GATE, never a probability multiplier: the roll is the urgency's own stream, the belief only filters; a knower that is not a knower holds nothing — the honest False, never an error; the pack lint refuses a `token` the traits block never declares) |
 
 Nouns: `actor`, `target`, `texture` (iter-11 — resolves to the reference's
 scope target, the canon entity a promotion lands on). Runtime sources: the
 projection for position / carrier / relations / status; the pack for static
 records; the derived folds for the tick-windowed tests (the live-leverage
-facts and the echo scores — read models, not projection state: the facts
-arrive as data at each evaluation). The same evaluator runs at proposal
+facts, the echo scores, the crystallized traits — read models, not
+projection state: the facts arrive as data at each evaluation). The same
+evaluator runs at proposal
 time and at completion time (OCC, §4). The beat gate (an urgency entry's
 `requires`) runs the same test set against the beat-tick reads — the entry
 gate filters SILENTLY (the world's noise floor), while the door re-validates
@@ -112,11 +114,16 @@ preconditions proceeds normally — one mechanism, the same semantics the
 phase-1 validator uses (phase0 §2).
 
 **Tick-windowed preconditions (iter-45, social-1b; generalized to the
-family at iter-46, social-2):** an intent whose `requires` carry a test
-from the windowed family (`leverage_over`, `echo_at_least` — truth driven
-by TIME, not by event application) re-runs the full check at completion
-**unconditionally** — the windows are tick-driven and can close with no
-event committed, which the event-count guard above would miss. The window
+family at iter-46, social-2; the traits join at iter-67, beliefwire):**
+an intent whose `requires` carry a test from the windowed family
+(`leverage_over`, `echo_at_least`, `trait_held` — truth read from a
+DERIVED FOLD at the caller's own tick, never reconstructible inside the
+projection-only attribution fold; the windows close by time, and the
+trait fold moves on later records — the counter-block can
+un-crystallize a belief) re-runs the full check at completion
+**unconditionally** — the folds are tick-read and can move between
+accept and completion with no event committed, which the event-count
+guard above would miss. The window
 close is still a `projection_moved` rejection (the derived liveness or
 residue moved), but never attributes a breaking event the log does not
 hold: `occ_breaking_cause` excludes the windowed family, and the cause

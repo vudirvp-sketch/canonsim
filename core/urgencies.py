@@ -15,6 +15,9 @@ silent (the NPC tried, the world said no — no rejection event; the
 world's noise floor absorbs autonomous attempts that don't fire).
 Each entry rolls on its own `urgency:<npc>:<kind>` stream (engine-2,
 D-079): canon-relevant, stream-isolated per entry from the checks.
+The trait gate (beliefwire, iter-67) never touches that roll — the
+belief filters AFTER the roll, a requires-GATE, never a probability
+multiplier (D-095's own law).
 
 Through-the-door discipline (D-037): urgencies never write canon
 directly. They broadcast objectives through the intent door; the loop
@@ -103,6 +106,7 @@ def urgency_intents(
     bank: "RngBank",
     facts: Sequence[Any] = (),
     echoes: Sequence[Any] = (),
+    traits: Sequence[Any] = (),
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -121,7 +125,14 @@ def urgency_intents(
     tick — an urgency whose `requires` gate on `echo_at_least` stays
     silent until the residue actually clears the bar (the same law;
     the behavior acts on the echo exactly as the P2b dependency
-    names it, and the door re-validates with its own read)."""
+    names it, and the door re-validates with its own read).
+    `traits` (iter-67, beliefwire — the v0.2 refinement family,
+    D-095): the crystallized-trait fold read at the BEAT tick — an
+    urgency whose `requires` gate on `trait_held` stays silent until
+    the belief actually crystallizes (the same law; a GATE, never a
+    probability multiplier — the roll already fired on the entry's
+    own stream, the belief only filters; the door re-validates with
+    its own read at the entry tick)."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
@@ -146,7 +157,7 @@ def urgency_intents(
         if spec.requires:
             failing = first_failing(
                 pack, projection, intent, list(spec.requires),
-                facts=facts, echoes=echoes,
+                facts=facts, echoes=echoes, traits=traits,
             )
             if failing is not None:
                 continue  # the world said no — silent, no rejection event

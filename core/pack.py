@@ -38,6 +38,7 @@ from core.intent import (
     PRECONDITION_TESTS,
     PRESENT_SITES,
     REJECTION_EVENT,
+    TRAIT_TEST,
 )
 from core.leverage import SECRETS_BLOCK_KEYS, TOKEN_KEYS
 from core.onaction import (
@@ -633,6 +634,11 @@ class _Lint:
                 # at load (the leverage `who` family)
                 if cond.get("test") == ECHO_TEST:
                     self._lint_echo_cond(cond, f"action {intent}")
+                # beliefwire (iter-67): the trait gate's token must name
+                # a declared belief — a token the fold never mints is a
+                # dead gate, refused at load (the echo axis family)
+                if cond.get("test") == TRAIT_TEST:
+                    self._lint_trait_cond(cond, f"action {intent}")
                 # pack-2 (iter-29): the spot_available test's layer param
                 # must name a declared transition layer — a typo would
                 # KeyError mid-run (the KI#15 dead-data family, refused
@@ -1252,6 +1258,8 @@ class _Lint:
                 )
                 if cond.get("test") == ECHO_TEST:
                     self._lint_echo_cond(cond, where)
+                if cond.get("test") == TRAIT_TEST:
+                    self._lint_trait_cond(cond, where)
                 for param in ("noun", "with", "who"):
                     if param in cond:
                         _require(
@@ -1971,16 +1979,35 @@ class _Lint:
             "outside it the gate is dead vocabulary)",
         )
 
+    def _lint_trait_cond(self, cond: Mapping[str, Any], where: str) -> None:
+        """The trait_held precondition contract (beliefwire, iter-67),
+        shared by the action and urgency `requires` lints: `token` must
+        name a declared belief in `rules.json::traits.beliefs` — the
+        fold only answers tokens the block declares, anything else is a
+        dead gate (the echo_at_least axis family: dead vocabulary is
+        refused at load, never silently always-False). A pack without a
+        traits block carrying a trait gate is the same refusal — the
+        gate names vocabulary nobody minted."""
+        beliefs = self._data["rules.json"].get("traits", {}).get("beliefs", {})
+        _require(
+            cond.get("token") in beliefs,
+            f"{where}: precondition trait_held requires 'token' naming a "
+            "declared traits.beliefs belief (the fold answers only the "
+            "declared vocabulary — anything else is dead data)",
+        )
+
     def _traits(self) -> None:
         """The trait crystallization contract (`core/traits.py` owns the
         vocabulary constants; `phases.md` §4 P3f the architecture row —
-        the LEGEND_SPEC sketch's trait half, landed iter-55). The block
-        is OPTIONAL — a pack without it folds no beliefs and runs the
-        v0.1 behavior, byte-identically (the pack's own declaration is
-        the gate, INV-3). Declaring the table costs nothing at runtime
-        until a consumer reads it (the iter-45 laziness law; nothing
-        reads the fold yet — the phase-4 backlog's leg-2 row owns the
-        brief's derived-trait read)."""
+        the LEGEND_SPEC sketch's trait half, landed iter-55; the
+        counter-family is beliefwire, iter-67). The block is OPTIONAL —
+        a pack without it folds no beliefs and runs the v0.1 behavior,
+        byte-identically (the pack's own declaration is the gate, INV-3).
+        Declaring the table costs nothing at runtime until a consumer
+        reads it (the iter-45 laziness law — the fold's readers are the
+        brief's derived-trait read, leg-2, and the loop's traits channel
+        behind a `trait_held` require, beliefwire; neither computes
+        unasked)."""
         rules = self._data["rules.json"]
         config = rules.get("traits")
         if config is None:
@@ -2070,6 +2097,60 @@ class _Lint:
                 f"reach threshold {threshold} — dead vocabulary, refused "
                 "at load (grow the family or lower the threshold)",
             )
+            # beliefwire (iter-67): the counter-family — exoneration
+            # tokens at the SAME breadth bar block the crystallization.
+            # Every family law applies verbatim (mintable, no duplicates,
+            # can reach the bar, one-sided membership) plus the family/
+            # counters disjointness inside one belief (a token that is
+            # both evidence and counter-evidence feeds the belief both
+            # ways — author error, refused loudly).
+            counters = spec.get("counters")
+            if counters is not None:
+                _require(
+                    isinstance(counters, list) and counters,
+                    f"{where}: counters must be a non-empty list of "
+                    "knowledge tokens (an empty list is dead data)",
+                )
+                _require(
+                    all(isinstance(token, str) for token in counters),
+                    f"{where}: counters entries must be strings",
+                )
+                _require(
+                    len(set(counters)) == len(counters),
+                    f"{where}: counters contains duplicate tokens (a "
+                    "duplicate double-counts one piece of evidence — "
+                    "dead data)",
+                )
+                overlap = sorted(set(counters) & set(family))
+                _require(
+                    not overlap,
+                    f"{where}: counters overlaps the family at {overlap} "
+                    "(a token that is both evidence and counter-evidence "
+                    "feeds the belief both ways — split the vocabularies)",
+                )
+                for token in counters:
+                    _require(
+                        token in mintable,
+                        f"{where}: counters token {token!r} is not "
+                        "mintable (no declared knowledge template mints "
+                        "it — the literal `knows` vocabulary)",
+                    )
+                    owner = seen_members.get(token)
+                    _require(
+                        owner is None,
+                        f"{where}: counters token {token!r} already "
+                        f"belongs to belief {owner!r} (the one-sided "
+                        "membership law — a token feeds exactly one "
+                        "belief, either side)",
+                    )
+                    seen_members[token] = belief
+                _require(
+                    len(counters) >= threshold,
+                    f"{where}: counters of {len(counters)} token(s) can "
+                    f"never reach threshold {threshold} — the block can "
+                    "never fire, dead vocabulary, refused at load (grow "
+                    "the counters or lower the threshold)",
+                )
             if "notes" in spec:
                 _require(
                     isinstance(spec["notes"], str),

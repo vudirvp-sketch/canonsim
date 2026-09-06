@@ -1,48 +1,46 @@
 # STATUS — canonsim
 
-Iteration: iter-66a (`iter-66a-intake2` — the research intake 2,
-D-096; doc-only: the external depth-architecture review verified
-against the repo, then landed surgically per the D-018/D-022 absorption
-pattern; the owner's "record it where the right moment finds it" call) ·
+Iteration: iter-67 (`iter-67-beliefwire` — the v0.2 refinement
+family's second segment, D-095/TASKS: the `trait_held` requires-GATE
+(a gate, never a multiplier), the loop's traits channel, the
+counter-family in the fold; the pack arming deferred to beliefwire-2
+— no zero-price live path exists, measured) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
 the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
 UNLOCKED — opens on the owner's call (the iter-55 precedent); the
 refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
-refinement, never phase-5 scope; the intake is a doc-only sync inside
-the same lane, the lance untouched**
-**The landing: the intake, not code — three corrections recorded
-(D-096): the prose-floor extension to relations/attributes WAITS ON
-bg-7 (D-095's own gate — lowercase tokens are invisible to the position
-law, the detection surface is the work, the refusal ladder is not);
-the review's "knowledge is binary by presence" premise is FALSE
-(channels, birth fidelity, `position_visibility`, perception checks
-live since iter-3 — the real gap is continuous acquisition conditions:
-light/noise/distance/obstruction feeding birth fidelity); the
-affordance example already lives as pack data (flammability +
-fire_spots + `spot_available`, pack-2). Routing: three TASKS
-one-liners (prosefloor-2 bg-7-gated, packtaxonomy owner-gated,
-story-critical objects owner-gated), the phase-5 design material to
-phases.md §5 per the never-before-opening law (seed materialization
-over the D-054/ledger-OCC law + `scene:<id>:detail` streams,
-three-zone scene LOD, perception acquisition conditions, fold
-checkpoints), the affordance clause to the PACK_SPEC sketch. The
-review's rejections endorsed unchanged (free-text speech in canon,
-open action parsing, LLM traces as canon).**
-**Zero runtime files, zero corpus surface, zero tests touched —
-§9 re-verified green on the doc-only diff; the lance untouched: next
-iter-67-beliefwire.**
+refinement, never phase-5 scope**
+**The landing: all three mechanisms, zero corpus price by construction
+(D-097): the leaf in the door's closed set (INTENT_SCHEMA §3), the
+channel in the windowed family (§4 — the fold read at the caller's
+own tick, the OCC re-check unconditional, `occ_breaking_cause`
+excluded), the counter-block in the fold (`counters` at the same
+breadth bar, provenance/expansion untouched). Pinned: the 10-seed
+day1_full A/B armed-vs-stripped byte-identical; the live e2e pair
+(beat-gated scan on the crafted pack; the watch-transfer-borne
+counters de-crystallizing an in-flight intent through
+`projection_moved`/`actor.trait_held`). +16 tests, 1201 green, ruff
+clean. KI#74 (the pack notes' stale DORMANT claim — false since
+leg-2) opened+closed; the testproto research row laid per the
+owner's 2026-09-07 ask (TASKS, owner-gated on bg-7's numbers).**
 ·
 Date: 2026-09-07 ·
-Scope: `docs/TASKS.md` (the research-intake-2 section — 3 rows,
-637, the §6.1 over-cap substance law rides, trim at the phase-5→6
-gate), `docs/blueprint/phases.md` (§5 the depth-phase design material
-— 4 laws, 681, same law), `docs/SPECS_BACKLOG.md` (the PACK_SPEC
-affordance clause), `docs/DECISIONS.md` (D-096 — 32 rows, rides above
-30 until the phase-5→6 gate, the D-095 precedent), `STATUS.md` (this
-header + the Next flip), `worklog.md` (iter-66a in, iter-57 out). 6
-files — over the 3–5 soft limit: one intake, every owner doc synced
-same-turn (§9/§6.1, the D-018 surgical-absorption pattern). A
-doc-only iteration — streak 1 of 2 (iter-66 was code).
+Scope: `core/intent.py` (the TRAIT_TEST constant, the windowed
+family, `_Ctx.traits`, the test, `first_failing(traits=)`),
+`core/traits.py` (the counter-family fold + the block law),
+`core/loop.py` (the channel: `_windowed`/`_fold_reads`/the two
+`first_failing` calls/the beat-gate read), `core/urgencies.py`
+(`urgency_intents(traits=)`), `core/pack.py` (`_lint_trait_cond` +
+the counters lint laws), `tests/test_beliefwire.py` (NEW, 16 tests),
+`tests/test_traits.py` (the dormancy law → the laziness law),
+`content/tavern_pack/rules.json` (KI#74's one-line notes fix —
+prose only, zero behavior), `docs/INTENT_SCHEMA.md` (§3/§4),
+`docs/TASKS.md` (beliefwire done + beliefwire-2/testproto rows),
+`docs/DECISIONS.md` (D-097), `STATUS.md` (this header + Next),
+`worklog.md` (iter-67 in, iter-58 out). 13 files — over the 3–5
+soft limit: one mechanism family (the leaf + the channel + the fold
++ the lint + the suite + the §9 doc sync are one landing, the
+iter-60..63 scope pattern).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -66,17 +64,19 @@ doc-only iteration — streak 1 of 2 (iter-66 was code).
 
 ## Active KIs
 
-- KI#73 · README Status drift: the tex-1/blind-1/leg-4 landings
-  unrecorded (the section ended at scene-2/1118 vs the repo's 1178;
-  the scripts/chronicle.py map row missing — the KI#67 restated-
-  count family) · CLOSED iter-65 — the gate's §5 re-run caught it;
-  the sync + the map row landed in the same iteration.
+- KI#74 · Pack notes drift: the tavern traits notes claimed "DORMANT:
+  no consumer reads the fold yet" — false since iter-56 (leg-2's
+  brief read; falser after beliefwire's channel) · CLOSED iter-67 —
+  the one-line notes fix landed same-turn (the KI#73 restated-claim
+  family: pack prose is repo docs).
 
-- (none else — the ledger is clean; KI#72 deleted at iter-63 per AGENTS §5
-  — closed iter-61, two iterations past; the lesson lives in git +
-  the deferral-ledger rows it re-pointed: the deferral table's
-  "arrives with" must name the TASKS row's OWN scope, never a
-  projection past it.)
+- (none else — the ledger is clean; KI#73 deleted at iter-67 per
+  AGENTS §5 — closed iter-65, two iterations past, the KI#72
+  precedent; the lesson lives in git + the gate's §5 re-run record.
+  KI#72 deleted at iter-63 per AGENTS §5 — closed iter-61; the
+  lesson lives in git + the deferral-ledger rows it re-pointed: the
+  deferral table's "arrives with" must name the TASKS row's OWN
+  scope, never a projection past it.)
 
 - (KI#71 deleted at iter-62 per AGENTS §5 — closed iter-59, three
   iterations past; the lesson lives in git + the REFERENCES/TECH_NOTES
@@ -540,14 +540,17 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**The v0.2 refinement lance in flight (iter-66 done; the research
-intake 2 landed doc-only as iter-66a/D-096 — TASKS' intake section,
-phases.md §5, the PACK_SPEC affordance clause): next iter-67-beliefwire
-— the `trait_held` requires-leaf + the traits channel into the loop's
-read points + the counter-family in the fold (TASKS' refinement
-backlog owns the rows; each landing measures its own corpus price
-first). The lance rides between the gates — track A refinement, never
-phase-5 scope. Phase 4 (Knowledge & scene) CLOSED — gate PASS
+**The v0.2 refinement lance in flight (iter-66/66a/67 done —
+prosefloor, the intake 2, beliefwire): next iter-68a-rumordrift —
+A2'' mechanics declarative-only (`drift:<family>` stream isolation is
+law; `drifted_from` in outcome, EVENT_SCHEMA §11 no-bump), the pack
+arming 68b after (TASKS' refinement backlog owns the rows; each
+landing measures its own corpus price first — beliefwire's zero-price
+pin the pattern; the beliefwire-2 arming row records the measured
+price for a live consumer). The testproto research row rides
+owner-gated on bg-7's numbers (the owner's 2026-09-07 ask). The lance
+rides between the gates — track A refinement, never phase-5 scope.
+Phase 4 (Knowledge & scene) CLOSED — gate PASS
 iter-65, D-094 (the full ROADMAP §5 protocol re-run; the phase-4
 landing ledger condensed in TASKS). Phase 5
 (Depth) UNLOCKED — it opens on the owner's call (the iter-55/36

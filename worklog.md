@@ -16,6 +16,26 @@
 
 
 ---
+iter-67 · 2026-09-07 · beliefwire — the trait gate + the channel + the
+counter-family (the v0.2 refinement family's second segment, D-095;
+13 files — over the soft limit: the leaf + the channel + the fold +
+the lint + the suite + the §9 sync are one mechanism family, the
+iter-60..63 pattern)
+- core/intent.py TRAIT_TEST (a GATE, never a multiplier) into the
+  windowed family + _Ctx.traits; core/loop.py the lazy door reads and
+  the eager beat read; core/urgencies.py the traits param;
+  core/traits.py the counter-block (same breadth bar, sources
+  untouched); core/pack.py the token/counters lint pair.
+- Corpus price ZERO by construction, pinned: the 10-seed day1_full A/B
+  armed-vs-traits-stripped byte-identical (the committed pack declares
+  no trait_held); the arming deferred to beliefwire-2 (no zero-price
+  live path — measured: +3 scans on the canonical 125 run). +16 tests
+  (1185→1201, ruff clean). KI#74 opened+closed (the pack notes' stale
+  DORMANT claim); KI#73 deleted per §5 (closed iter-65, two
+  iterations past, the KI#72 precedent). The testproto research row
+  laid (owner-gated, bg-7-tracked). iter-58 evicted (verified in
+  this edit); 10 after.
+---
 iter-66a · 2026-09-07 · intake2 — the research intake 2 (doc-only,
 D-096; the D-018/D-022 surgical-absorption pattern; 6 files — over the
 soft limit: one intake, every owner doc synced same-turn per §9)
@@ -197,17 +217,4 @@ the §2 verdict standing from iter-58)
   REFERENCES §6 + TECH_NOTES §6) opened+closed. iter-49 evicted;
   10 entries after.
 ---
-iter-58 · 2026-09-05 · leg-3b — the tavern reflection set (arming
-the v0.1 pack block; the owner's §2 design review first — endorsed)
-- content/tavern_pack rules+templates: the live reflection block —
-  `sneak_at_work_here`/`figure_reaching_for_purse` (the watcher) +
-  `trouble_by_the_bar`/`noise_by_the_bar` (the room), threshold 2;
-  `conclusion_drawn` story-critical, renders in the tale.
-- Measured-first: the corpus price ZERO (narrator 105 + parse 10 +
-  the T1 golden untouched; 8/10 day1 seeds byte-identical, exactly
-  123/128 mint 4 events each); the told-conclusion law live (the
-  briefing tells the insight, never-re-reflect blocks the re-derivation).
-- tests/test_reflection.py: the dormancy test flipped to the armed
-  law + 4 committed-pack pins. 1026→1030, ruff clean. LEGEND_SPEC §7
-  + TASKS leg-3b done + D-087 into the phase family (cap 30 held).
-  iter-48 evicted; 10 entries after.
+

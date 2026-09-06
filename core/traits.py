@@ -14,8 +14,9 @@ module writes NOTHING: no events, no knowledge, no hooks, no state
 changes (INV-1 by construction). It renders nothing and feeds no
 metric — a belief becomes visible only through the consumer that reads
 it (the brief's derived-trait read, BRIEF_SPEC's phase-4 clause — leg-2,
-`brief/assembler.py::_recalled_fact_lines`; `expand_trait` below is the
-expansion law's demand side).
+`brief/assembler.py::_recalled_fact_lines`; the loop's traits channel
+and the `trait_held` door gate — beliefwire, iter-67; `expand_trait`
+below is the expansion law's demand side).
 
 The DISTINCT-token law (v0.1 engine semantics): crystallization counts
 breadth, not repetition — a family's held distinct tokens against the
@@ -28,6 +29,23 @@ record born after it contributes nothing — the honest read-model law
 shared with the echo); a crystallized belief itself has no decay term —
 records are never dropped (INV-1), so the evidence holds while the log
 holds, stability by construction, not by a timer.
+
+The counter-family law (beliefwire, iter-67 — the v0.2 refinement
+family, D-095): a belief spec may declare `counters`, a token family of
+EXONERATING evidence. The same breadth bar governs both sides — a
+knower whose held distinct COUNTER tokens reach the block threshold
+holds a counter-case at the crystallizing strength, and the belief does
+not fold. The counter-block is not negation-by-decay and not erasure:
+records are never dropped, so the fold answers honestly per read — a
+belief held at tick T can be absent at tick T' > T when counter records
+born in between push the held distinct counter tokens to the bar (the
+de-crystallization path — evidence arrived, the read model changed its
+answer; the log holds both families forever). Counter records never
+ride `sources`: provenance is the family's evidence, the counter-block
+is a check, not a contribution; `expand_trait` expands to the family
+records only, unchanged. A knower below the counter bar folds exactly
+as v0.1 did — an undeclared `counters` key is the v0.1 behavior,
+byte-identical (the pack's own declaration is the gate, INV-3).
 
 The L6 fence (the echo's twin): a belief is per-NPC derived state over
 the NPC's own records — never player-adapted, never an entropy input
@@ -63,9 +81,12 @@ TRAIT_BLOCK_KEYS: Final = ("threshold", "beliefs", "notes")
 error, never a silent ignore): the family-size threshold that
 crystallizes a belief, the belief table, prose."""
 
-TRAIT_BELIEF_KEYS: Final = ("family", "notes")
+TRAIT_BELIEF_KEYS: Final = ("family", "counters", "notes")
 """The closed per-belief key set: the knowledge-token family whose held
-distinct tokens count against the block's threshold, and prose."""
+distinct tokens count against the block's threshold, the optional
+counter-family (beliefwire, iter-67 — counter-evidence tokens whose
+held distinct tokens, counted at the SAME threshold, block the
+crystallization), and prose."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -90,7 +111,9 @@ def crystallized_traits(
     minting two family records is one source event, provenance is event
     ids). A pack without a `traits` block folds to the empty tuple; a
     family whose held distinct tokens sit below the threshold
-    contributes nothing (the honest answer, never an error)."""
+    contributes nothing (the honest answer, never an error); a declared
+    counter-family at or above the threshold blocks the belief (the
+    counter-block law — the same breadth bar, the exoneration side)."""
     config: Mapping[str, Any] | None = pack.rules.get("traits")
     if config is None:
         return ()
@@ -106,6 +129,15 @@ def crystallized_traits(
             ]
             if len({record.knows for record in contributing}) < threshold:
                 continue
+            counters = spec.get("counters", ())
+            if counters:
+                blocked = {
+                    record.knows
+                    for record in view.records_of(who)
+                    if record.knows in counters and record.at <= at_tick
+                }
+                if len(blocked) >= threshold:
+                    continue  # the counter-case reached the bar — no belief
             sources = tuple(
                 dict.fromkeys(record.source for record in contributing)
             )

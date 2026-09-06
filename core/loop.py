@@ -60,6 +60,7 @@ from core.intent import (
     ECHO_TEST,
     LEVERAGE_TEST,
     REJECTION_EVENT,
+    TRAIT_TEST,
     IntentData,
     RunnerError,
     action_duration,
@@ -81,6 +82,7 @@ from core.resolvers import REGISTRY
 from core.rng import SUBSTANTIVE, RngBank
 from core.scheduler import build, decls_from_rules
 from core.states import decay_drafts, rotation_resets
+from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.urgencies import urgency_intents
 
@@ -389,24 +391,28 @@ class Simulator:
 
     def _windowed(self, preconditions: Sequence[Mapping[str, Any]]) -> bool:
         """Whether the precondition list carries any tick-windowed test
-        (the leverage liveness window, iter-45; the echo decay, iter-46):
-        those intents are evaluated against the derived folds read at
-        THE CALLER'S OWN TICK — pure reads, no RNG, no events, computed
-        only when the action asks for them (every other action pays
-        nothing)."""
+        (the leverage liveness window, iter-45; the echo decay, iter-46;
+        the trait crystallization, iter-67 — beliefwire): those intents
+        are evaluated against the derived folds read at THE CALLER'S OWN
+        TICK — pure reads, no RNG, no events, computed only when the
+        action asks for them (every other action pays nothing)."""
         return any(
-            cond.get("test") in (LEVERAGE_TEST, ECHO_TEST)
+            cond.get("test") in (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
             for cond in preconditions
         )
 
     def _fold_reads(
         self, preconditions: Sequence[Mapping[str, Any]], tick: int
-    ) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
-        """The lazy fold pair for one evaluation: the live leverage facts
-        and the echo scores, each computed ONLY when the precondition
-        list reads that fold (the iter-45 laziness law — an echo-gated
-        intent never pays the leverage scan and vice versa), both read
-        at the caller's own tick (the window law)."""
+    ) -> tuple[tuple[Any, ...], tuple[Any, ...], tuple[Any, ...]]:
+        """The lazy fold triple for one evaluation: the live leverage
+        facts, the echo scores, and the crystallized traits, each
+        computed ONLY when the precondition list reads that fold (the
+        iter-45 laziness law — an echo-gated intent never pays the
+        leverage scan, a trait-gated one never pays either, and an
+        ungated one pays nothing), all read at the caller's own tick
+        (the window law — beliefwire, iter-67, joins the family: the
+        fold's answer is per-tick, the counter-block can un-crystallize
+        a belief on records born between evaluations)."""
         tests = {cond.get("test") for cond in preconditions}
         facts = (
             live_leverage(self._pack, self._events, tick)
@@ -418,7 +424,12 @@ class Simulator:
             if ECHO_TEST in tests
             else ()
         )
-        return facts, echoes
+        traits = (
+            crystallized_traits(self._pack, self._knowledge, tick)
+            if TRAIT_TEST in tests
+            else ()
+        )
+        return facts, echoes, traits
 
     def _execute_intent(self, entry: Any) -> bool:
         """PROPOSED → ACCEPTED (SCHEDULED) | REJECTED (no-op event).
@@ -431,10 +442,10 @@ class Simulator:
             )
         validate_shape(action, intent)
         preconditions = requires_for(action, intent)
-        facts, echoes = self._fold_reads(preconditions, entry.tick)
+        facts, echoes, traits = self._fold_reads(preconditions, entry.tick)
         failing = first_failing(
             self._pack, self._projection, intent, preconditions,
-            facts=facts, echoes=echoes,
+            facts=facts, echoes=echoes, traits=traits,
         )
         if failing is not None:
             self._emit_rejection(
@@ -478,11 +489,11 @@ class Simulator:
 
         preconditions = requires_for(action, intent)
         windowed = self._windowed(preconditions)
-        facts, echoes = self._fold_reads(preconditions, entry.tick)
+        facts, echoes, traits = self._fold_reads(preconditions, entry.tick)
         if self._writer.event_count > payload.based_on_event_seq or windowed:
             failing = first_failing(
                 self._pack, self._projection, intent, preconditions,
-                facts=facts, echoes=echoes,
+                facts=facts, echoes=echoes, traits=traits,
             )
             if failing is not None:
                 cause = occ_breaking_cause(
@@ -690,14 +701,16 @@ class Simulator:
         # the derived folds read at the BEAT tick ride the gates (a
         # leverage-gated urgency stays silent until the holder actually
         # holds a live cluster — iter-45; an echo-gated one until the
-        # residue clears the bar — iter-46; the front door re-validates
-        # at the entry tick with its own reads)
+        # residue clears the bar — iter-46; a trait-gated one until the
+        # belief crystallizes — iter-67, beliefwire; the front door
+        # re-validates at the entry tick with its own reads)
         self._director.next_beat()
         beat_echoes = echo_scores(self._pack, self._knowledge, beat_tick)
         for intent in urgency_intents(
             self._pack, self._projection, self._bank,
             facts=live_leverage(self._pack, self._events, beat_tick),
             echoes=beat_echoes,
+            traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1

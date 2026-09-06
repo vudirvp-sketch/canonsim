@@ -33,11 +33,35 @@
   (iter-66, D-095; detail: VALIDATION_SPEC §2.1).
 - `beliefwire` · the `trait_held` leaf (a requires-GATE, never a
   multiplier), the traits channel into the loop's reads, the
-  counter-family in the fold — todo (iter-67).
+  counter-family in the fold — done (iter-67, D-097; detail:
+  INTENT_SCHEMA §3/§4 + tests/test_beliefwire.py).
+- `beliefwire-2` · the pack arming — the first LIVE `trait_held`
+  consumer in the committed pack + the counter-family content (the
+  leg-3b precedent): measured at iter-67 — a trait-gated guard scan
+  flips three beats live on the canonical seed-125 run (the +3
+  look_around price, tests/test_beliefwire.py's channel pin), and no
+  zero-price live path exists (the seed-33 panic scan dies under a
+  thief-belief gate — wrong semantic AND a corpus break; a new
+  guard_02 entry fires on the 125 canonical corpus). The arming pays
+  its price deliberately or rides the rumordrift content wave — todo.
 - `rumordrift` · A2'' mechanics declarative-only then pack arming
   (68a/68b; `drift:<family>` stream isolation is law) — todo.
 - `suspectaxis` · per-target suspicion, the drift teeth's first
   consumer — todo (iter-69).
+- `testproto` · the intermediate-build LLM-integration test protocol —
+  a RESEARCH iteration (the owner's 2026-09-07 ask: how well do the
+  current gates simulate the REAL local-LLM loop — context window,
+  degradation, hardware; is the corpus a self-diagnosis trap?): weigh
+  bg-7's one-shot probe family vs a repeatable phase-gate heartbeat
+  (the canonical scenario × a real engine at each gate, metrics: brief
+  token distribution vs the window, refusal/confabulation rates vs the
+  corpus pins, latency/hardware fit) vs an adversarial simulacrum
+  harness (a scripted worst-case replier inside INV-4); name which
+  parts are contract-testable without the model (the boundary's
+  refusal ladder — already covered) vs which need the live partner
+  (the output distribution, the context pressure); the runner outside
+  the repo (bg-7's Rule-9 shape); a concrete proposal lands as
+  bg-8/engine — todo, owner-gated (tracks with bg-7's numbers).
 
 ### Research intake 2 (iter-66a; the depth-architecture review, D-096)
 

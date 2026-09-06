@@ -19,12 +19,16 @@ The laws pinned here:
   (INV-1), so the evidence holds while the log holds; `at_tick` gates
   CONTRIBUTION (the honest read-model law shared with the echo), never
   the belief's persistence.
-- **The dormancy law, post leg-2**: the CANON loop never imports
-  `core.traits` (the write side stays untouched — the day1_full
-  10-seed A/B is byte-identical through the landing, iter-55 and
-  iter-56); the fold's first consumer is the brief's read-side lens
-  (leg-2, `brief/assembler.py::_recalled_fact_lines` — BRIEF_SPEC
-  §3.5), which reads the fold as DATA and writes nothing.
+- **The laziness law, post beliefwire (iter-67)**: the CANON loop now
+  imports `core.traits` — the traits channel — but computes the fold
+  ONLY behind a `trait_held` require at the door (the iter-45 family
+  law; the committed pack declares none, so no door evaluation pays
+  the scan) and at the beat gate alongside the leverage/echo reads
+  (the family's eager-at-beat pattern). The fold's answer is discarded
+  when no consumer asks — the day1_full 10-seed A/B stays
+  byte-identical (the both-arms pin: tests/test_beliefwire.py); the
+  fold's first DOOR consumer is the `trait_held` gate (beliefwire,
+  D-095), the brief's derived-trait read stays leg-2's row.
 - **The L6 fence**: a belief is per-NPC derived state over the NPC's
   own records — never player-adapted, never an entropy input; the
   director is untouched by construction (DIRECTOR_SPEC §4).
