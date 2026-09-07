@@ -16,6 +16,25 @@
 
 
 ---
+iter-71 · 2026-09-08 · plansync — the owner's analysis-intake plan
+sync, doc-only (the iter-66a/68 precedent; 4 files — zero code,
+zero tests; verified 1240+1 green, ruff clean after the edits)
+- docs/TASKS.md: the research-intake-3 section (weather-1: ambient
+  weather events + canon erosion via state_changes, pack data, no-TTL
+  D-049; companion-1: the companion role as pack data over existing
+  doors, deps tune-3/st-6a/resume door BY REFERENCE — the D-076/D-081
+  precedent) + the pack-1 gate fix (stale "phase-0 gate" line — a
+  D-024 violation, 64 iterations stale — now defers to the STATUS FAQ).
+- STATUS.md: the iter-71 header + the Next-step re-pin (the queue:
+  prosefloor-2, then the owner's phase-5 start signal); README.md: the
+  lance section's intake-3 line (the KI#73/78 family). TASKS 693→724,
+  STATUS 640→630 (the iter-70 landing paragraph → the iter-71 one),
+  both over-cap on substance (§6.1) — TASKS collapses at the
+  phase-5 opening.
+  Doc-only streak 1 of 2 (iter-70 was functional — no alarm; the next
+  iteration must be functional). iter-66 evicted (verified in this
+  edit); 10 entries after.
+---
 iter-70 · 2026-09-07 · beliefwire-2 — the trait-consumer arming, the
 lance's last track-A row (D-103; 16 files — the pack arming + its
 measured corpus price + the doc sync, one mechanism family, the
@@ -178,21 +197,5 @@ soft limit: one intake, every owner doc synced same-turn per §9)
   TASKS 637 / phases.md 681 / DECISIONS 32 — over-cap substance, §6.1,
   trim at the phase-5→6 gate (the D-095 precedent). Doc-only streak
   1 of 2. iter-57 evicted (verified in this edit); 10 entries after.
----
-iter-66 · 2026-09-06 · prosefloor — the invented-entity prose floor
-(C2'', D-095, the v0.2 refinement family's first landing; 10 files —
-over the 3–5 soft limit: one code mechanism + its suite + the §9 doc
-sync; the TASKS intake rides this diff per the owner's D-022 sanction)
-- brief/scan.py (NEW, pure) + the apply_reply wiring after the shape
-  gate: the closed world's names (pack display names, existence never
-  visibility) vs the prose's mid-sentence capitals; REFUSED prose
-  <name> (invented_entity) through the existing ladder. +17 tests
-  (1185+1, ruff clean).
-- Corpus price ZERO both arms: the 105-case FP=0 pin + the designed
-  Aldric probe caught with its pinned `dry` shape preserved — zero
-  re-distill, zero call-side bytes. TASKS 616 (over the 600 cap: the
-  intake is substance, §6.1 — next trim at the phase-5→6 gate);
-  DECISIONS 31 (D-095, the between-gates precedent); FAQ 20 held (two
-  clauses in existing entries). iter-56 evicted; 10 entries after.
 (end of log — cap 10; pre-trim history lives in git)
 

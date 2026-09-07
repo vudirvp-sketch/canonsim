@@ -98,6 +98,35 @@
   grammar, DIRECTOR_SPEC — events already have the arc/hook/complication
   family, objects would need the flag + a release path; detail: D-096).
 
+### Research intake 3 (iter-71; the owner's vision-vs-repo cross-review, routed)
+
+> The owner's 2026-09-08 analysis session: two external model reviews
+> cross-checked against HEAD `0b09508` (1240+1 green, ruff clean,
+> re-verified) before intake — every factual claim landed against the
+> owning docs/code. The fabricated mechanics in the reviewed texts
+> (texture durability params, fade timers, autonomous intents
+> addressing texture) are D-049/D-054 refusals on record — no KI, no
+> new decision owed. The two confirmed holes route below; the
+> sequencing (prosefloor-2, then the phase-5 start signal) is STATUS
+> Next's.
+
+- `weather-1` · ambient weather + canon erosion — todo, owner-gated:
+  weather as ambient-channel events (the director's seeded
+  consequences, TIME-1) + erosion of promoted canon objects via
+  `state_changes` in seeded follow-ups (the arson family's shape);
+  all pack data over the existing doors (INV-3) — no TTL, no turn
+  counters, no decay timers (D-049); persistence is the promotion
+  door's (st-2). Gate: phase 5 (the ambient channel + macro clocks)
+  or pack-1.
+- `companion-1` · the companion/party role — todo, owner-gated: pack
+  data over the existing doors, zero new core systems — follow-duty
+  in the rotation/urgency grammar, mode B actors voice (scene-1),
+  pair-relations axes, presence re-verification (iter-61), the landed
+  arrival-snapshot knowledge records (iter-15/D-056 — what §5 still
+  owns is the group-scale form). Dependencies BY REFERENCE, never
+  duplicated rows (the D-076/D-081 refused-fork precedent): tune-3,
+  st-6a, the resume door (phases.md §7). Gate: phase 5, after st-6a.
+
 ### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
 - `leg-1` · trait crystallization (P3f) — done (iter-55, D-084):
@@ -486,7 +515,9 @@ INV-3-clean — TEST_PLAN §8.2's measured gap).
   consequence hooks (jealousy, exposure, regret), dark templates, item
   extensions. Darkness levers per D-030; zero core change (axis-blind core;
   event vocabulary per pack, EVENT_SCHEMA §11). Distillation source:
-  D-030 + the PACK_SPEC sketch row. Blocked until: phase-0 gate passed.
+  D-030 + the PACK_SPEC sketch row. Gate: the PACK_SPEC trigger
+  (phase 6 / 2nd setting; the when-one-liner's owner is the STATUS
+  FAQ, D-024 — the stale "phase-0 gate" clause removed iter-71).
 - `pack-2` Arson-on-ashes guard (iter-2a audit note) — DONE iter-29
   (D-061): the `spot_available` door check (the closed precondition
   set's 15th test, layer-param lint-checked) — arson on a destroyed or

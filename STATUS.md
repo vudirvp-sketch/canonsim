@@ -1,60 +1,44 @@
 # STATUS — canonsim
 
-Iteration: iter-70 (`iter-70-beliefwire2` — the v0.2 refinement
-lance's last track-A row, TASKS' beliefwire-2: the trait-consumer
-arming + the counter-family content) · Phase: 4 (Knowledge & scene) —
+Iteration: iter-71 (`iter-71-plansync` — the owner's analysis-intake
+plan sync, doc-only: the research intake 3 rows + the pack-1 gate
+fix) · Phase: 4 (Knowledge & scene) —
 **CLOSED — gate PASS (iter-65, D-094); phase 5 UNLOCKED — opens on
 the owner's call (the iter-55 precedent); the refinement lance
-(iter-66..69b + bg-7 + iter-70) rides BETWEEN the gates — track A
+(iter-66..69b + bg-7 + iter-70) rode BETWEEN the gates — track A
 refinement, never phase-5 scope. With iter-70 the lance's track-A
 backlog is EMPTY (prosefloor-2 is the one remaining row — the intake
-row, not the declared family)**
-**The landing: the committed pack's FIRST LIVE `trait_held` consumer
-— the relief guard's belief-gated scan (urgencies.entries, p=100 the
-iter-51 compulsion idiom, the trait twin of the jittery-watcher) —
-plus the counter content: the arson action's fled-sighting line (the
-witnesses see the figure set the fire and bolt — one event both
-halves) + the counters trio figure_starting_fire / figure_fled_the_room
-/ papers_unsatisfactory at the threshold-3 bar. The shape settled by
-MEASUREMENT, the iter-67 both-arms record confirmed verbatim: the
-new-entry shape (the guard_01 re-gate was refused on record — the
-seed-33 panic scan dies under a thief-belief gate: wrong semantic AND
-a corpus break); the price paid in the same landing: +3 look_around
-on the canonical seed-125 run ONLY (the only seed of the day1 ten
-where the guard pair crystallizes — 9/10 byte-identical, the seed-33
-panic corpus and theft_and_arson untouched, no theft chain no belief)
-+ the seed-93 narrator family's 11 claim-id re-pins through the
-fixed-point runner (the iter-50 protocol: pristine-HEAD identity
-105/105, the PARALLEL incremental alignment — the claims reference
-the between-steps' own events, so the pin map refreshes mid-beat, a
-refused beat never feeds its intents (FAQ law 2); idempotency 0) +
-the M1 shift (ON 0.509→0.54 / OFF 0.500→0.52, the scans are the
-arming's own events; the arms' structure rows agree — the D-065
-record re-pinned). KI#77 opened+closed (the lint order: `_traits`
-must run before `_urgencies` — the trait-cond lint reads the block's
-shape, a crafted non-object block crashed with AttributeError before
-the clean PackError; surfaced by the arming, fixed by the reorder,
-the pruning law generalized: removing the belief content prunes the
-consumer). KI#78 opened+closed (the README drift: the whole lance
-iter-66..69b + bg-7 unrecorded — the KI#73 family; the lance paragraph
-landed). 1240+1 green, ruff clean.**
+row, not the declared family; the next working iteration on the
+owner's go)**
+**The landing: the owner's 2026-09-08 cross-review of two external
+model analyses (the vision-vs-repo gap), verified against HEAD
+`0b09508` before intake — the verification base re-run: 1240+1
+green, ruff clean. Every factual claim checked against the owning
+docs/code; the fabricated mechanics in the reviewed texts (texture
+durability params, fade timers, autonomous intents addressing
+texture) are D-049/D-054 refusals on record — no KI, no new
+decision. Routed into TASKS as the research intake 3: `weather-1`
+(ambient weather events + canon erosion via state_changes — pack
+data over the existing doors, D-049's no-TTL law intact) and
+`companion-1` (the companion role as pack data over the existing
+doors; dependencies tune-3/st-6a/resume door BY REFERENCE, the
+D-076/D-081 precedent — never duplicated rows). Plus the pack-1
+gate fix: the stale "Blocked until: phase-0 gate passed" line (64
+iterations stale, a D-024 violation inside TASKS) replaced by the
+PACK_SPEC-trigger clause deferring to the STATUS FAQ one-liner.
+Docs only — zero code, zero tests touched; 1240+1 green, ruff clean
+re-verified after the edits (the doc changes move nothing).**
 ·
-Date: 2026-09-07 ·
-Scope: `content/tavern_pack/rules.json` (the trait driver entry + the
-counters declaration + the traits notes' live-consumer clause),
-`content/tavern_pack/actions.json` (the arson fled line), `core/pack.py`
-(KI#77: the lint order), `tests/test_beliefwire.py` (the channel pin
-re-pointed to the COMMITTED consumer, the both-arms price pin, the
-declarations, the crafted-family re-points), `tests/test_traits.py` +
-`tests/test_knowledge.py` (the pruning-law chain: the crafted variants
-prune the consumer with the block), `tests/test_actions.py` +
-`tests/test_arc_driver.py` + `tests/test_balance_harness.py` +
-`tests/test_coerce.py` (the arming's own ledger re-pins),
-`tests/fixtures/narrator_beats.json` (11 claim-id re-pins, surgical),
-`README.md` (KI#78: the lance record). 16 files — the pack arming + its
-measured corpus price + the doc sync, one mechanism family, the
-iter-60..69b scope pattern; the runner + its transcripts live outside
-the repo (`/home/z/my-project/scripts/`, Rule 9).
+Date: 2026-09-08 ·
+Scope: `docs/TASKS.md` (the research-intake-3 section: weather-1 +
+companion-1, owner-gated; the pack-1 gate line — the D-024 fix),
+`STATUS.md` (this header + the Next step re-pin), `worklog.md` (the
+iter-71 entry, one in / one out — iter-66 evicted, 10 held),
+`README.md` (the lance section's intake-3 line). 4 files — doc-only,
+the iter-66a/iter-68 precedent (no doc-loop alarm: iter-70 was
+functional); TASKS stays over the 600 cap on substance (owner-gated
+todo rows + gate citations) — the phase-5 opening collapses per the
+gate precedent.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -598,7 +582,13 @@ landing ledger condensed in TASKS). Phase 5
 precedent): the phase-5 backlog drafts from `docs/blueprint/phases.md`
 §5 at the opening iteration, never before (the iter-66a additions —
 materialization, scene LOD, perception conditions, fold checkpoints —
-are the drafting material, in place).**
+are the drafting material, in place). iter-71 (2026-09-08, doc-only
+— the iter-66a/68 precedent) landed the analysis-intake plan sync:
+the research intake 3 (TASKS — `weather-1` + `companion-1`, routed
+from the owner's two-model cross-review, owner-gated) + the pack-1
+gate fix (D-024). The queue: prosefloor-2 (the lance's one open row,
+UNBLOCKED) as the next working iteration, then the owner's phase-5
+start signal; bg-8 opens on hardware time.**
 
 1. **Phase 5 (Depth) — the parked build column:** lazy worldgen,
    factions with goals, long history (`docs/blueprint/phases.md` §5
