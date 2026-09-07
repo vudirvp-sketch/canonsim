@@ -273,13 +273,14 @@
       "fields": [],
       "knowledge": {
         "success": [
-          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "figure_starting_fire"}
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "figure_starting_fire"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "figure_fled_the_room"}
         ],
         "failure": []
       },
       "hooks": {"success": [], "failure": []},
       "ignition": {"layer": "fire", "item_flag": "is_fire_source"},
-      "notes": "impossible without a usable fire source at a flammable target (T5): the front door rejects and the log records the no-op; the irreversible chain follows (T4, rules.json transitions.fire). pack-2 (iter-29, D-061): the spot_available guard — arson on ashes (a destroyed or fully-burning location, iter-24's live probe) is a door rejection with failed_test target.spot_available, never the no-ignition success that pretended the world changed; the door-outcome vocabulary's fourth axis (no unburning spot, beside not co-located / no flagged target / no fuel)"
+      "notes": "impossible without a usable fire source at a flammable target (T5): the front door rejects and the log records the no-op; the irreversible chain follows (T4, rules.json transitions.fire). pack-2 (iter-29, D-061): the spot_available guard — arson on ashes (a destroyed or fully-burning location, iter-24's live probe) is a door rejection with failed_test target.spot_available, never the no-ignition success that pretended the world changed; the door-outcome vocabulary's fourth axis (no unburning spot, beside not co-located / no flagged target / no fuel). beliefwire-2 (iter-70, D-103): the success knowledge gains the fled sighting — the witnesses see the figure set the fire and bolt, one event both halves; the token is the counter-family's second mint (traits.beliefs.counters reads it, the de-crystallization path's evidence — the crafted e2e shape of iter-67 made committed)"
     },
     {
       "intent": "rest",

@@ -290,12 +290,19 @@ class _Lint:
         self._knowledge_rules()
         self._crime_watch()
         self._expectations()
+        # beliefwire-2 (iter-70, KI#77): the traits block's shape lint
+        # runs BEFORE the urgency/action cond lints that read it —
+        # _lint_trait_cond reads rules["traits"]["beliefs"], so a crafted
+        # variant with a non-object traits block must hit _traits' clean
+        # PackError here, never an AttributeError downstream (the order
+        # was load-bearing only once the committed pack gained a
+        # trait_held consumer).
+        self._traits()
         self._urgencies()
         self._director()
         self._on_action()
         self._secrets()
         self._echo()
-        self._traits()
         self._drift()
         self._reflection()
         self._states_rules()

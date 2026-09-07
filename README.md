@@ -456,6 +456,50 @@ BRIEF_SPEC §3.9 + BRIEF_SPEC §3.3/§6 (tex-1) + TEST_PLAN §1.3
 leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2/tex-1/blind-1/leg-4
 + D-084/D-085/D-086/D-087/D-088/D-089/D-090/D-091/D-092/D-093/D-094.
 
+### The v0.2 refinement lance (opened iter-66 — the post-gate quality pass; track A COMPLETE at iter-70)
+
+The research review's confirmed holes landed additively between the
+gates (D-095's family; every landing measured its own corpus price
+both-arms first). prosefloor LANDED (iter-66, D-095): the
+invented-entity prose floor — `brief/scan.py`, the closed-world
+manifest, `REFUSED prose <name> (invented_entity)`; corpus price zero
+(FP=0 over the 105-case corpus, the designed Aldric probe caught).
+The research intake 2 (iter-66a, D-096) routed the depth-architecture
+review into TASKS/phases §5/SPECS_BACKLOG. beliefwire LANDED (iter-67,
+D-097): the `trait_held` requires-GATE (never a multiplier) + the
+loop's traits channel + the counter-family fold; price zero by
+construction (no consumer committed). testproto LANDED (iter-68,
+D-098): the intermediate-build LLM-integration test protocol as the
+three-layer spiral (TEST_PLAN §8) — research, doc-only. rumordrift
+LANDED (iter-68a/68b, D-099/D-100): the fidelity-ladder token drift on
+`drift:<family>` streams + `figure_deeds` live in the pack (the thief
+blamed for the arson through vague retellings); price zero (the
+told-token census). suspectaxis LANDED (iter-69/69b, D-101/D-102):
+per-target suspicion on the `pair.<figure>.<axis>` home, the committed
+pack switched to the object mode, `figure_starting_fire` reacting live;
+the price paid in-landing (the 8 suspicion claims + the arson-case
+stream shifts re-distilled, M1/M2 arms identical). bg-7 DONE: the
+LLM-side companion's five probes measured on a real API engine
+(TECH_NOTES §10 — the parse door 88.6% after one re-ask, the prose
+floor 0/8, the claims channel as the refusal engine, the Cyrillic tax
+zero, the surface A/B null; the {3–8B, GBNF} arm the gap row).
+beliefwire-2 LANDED (iter-70, D-103): the pack arming — the relief
+guard's trait-gated scan (the first live `trait_held` consumer, p=100,
+the rotation's transfer the belief's conduit) + the counter-family
+content (the arson fled line + the exoneration trio at the threshold
+bar); the price paid: +3 scans on the canonical seed-125 run only
+(9/10 day1 seeds byte-identical), the seed-93 narrator family
+re-distilled (11 id re-pins, the fixed-point runner), M1 0.54/0.52; the
+KI#77 lint-order fix + the KI#78 README sync rode the landing. The
+lance's remainder: prosefloor-2 (the intake row, unblocked on bg-7's
+numbers) + bg-8 (owner-gated). 1240 tests green, ruff clean.
+Contract owners: TASKS v0.2 backlog rows + D-095/D-096/D-097/D-098/
+D-099/D-100/D-101/D-102/D-103 + TEST_PLAN §8 + TECH_NOTES §10 +
+tests/test_beliefwire.py + tests/test_rumordrift.py +
+tests/test_suspectaxis.py + tests/test_scan.py + brief/scan.py +
+core/traits.py (the counter law) + core/knowledge.py (drift) +
+core/crime.py (the pair mode).
+
 ## For AI agents (primary audience)
 
 1. `AGENTS.md` — the law: invariants, iteration protocol, caps, git safety.

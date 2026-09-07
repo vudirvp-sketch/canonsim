@@ -6068,12 +6068,12 @@
         },
         {
          "kind": "event",
-         "event_id": "ev_0029",
+         "event_id": "ev_0030",
          "type": "document_check_failed"
         },
         {
          "kind": "event",
-         "event_id": "ev_0030",
+         "event_id": "ev_0031",
          "type": "crowd_wary"
         },
         {
@@ -6135,17 +6135,17 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0032",
+         "event_id": "ev_0033",
          "type": "arson"
         },
         {
          "kind": "event",
-         "event_id": "ev_0039",
+         "event_id": "ev_0040",
          "type": "fire_started"
         },
         {
          "kind": "event",
-         "event_id": "ev_0040",
+         "event_id": "ev_0041",
          "type": "alarm_raised"
         },
         {
@@ -6166,7 +6166,7 @@
         },
         {
          "kind": "event",
-         "event_id": "ev_0031",
+         "event_id": "ev_0032",
          "type": "coerce"
         },
         {
@@ -6207,17 +6207,17 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0032",
+         "event_id": "ev_0033",
          "type": "arson"
         },
         {
          "kind": "event",
-         "event_id": "ev_0039",
+         "event_id": "ev_0040",
          "type": "fire_started"
         },
         {
          "kind": "event",
-         "event_id": "ev_0040",
+         "event_id": "ev_0041",
          "type": "alarm_raised"
         },
         {
@@ -6296,7 +6296,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0039",
+         "event_id": "ev_0040",
          "type": "fire_started"
         }
        ],
@@ -6325,7 +6325,7 @@
        "claims": [
         {
          "kind": "event",
-         "event_id": "ev_0040",
+         "event_id": "ev_0041",
          "type": "flee"
         },
         {

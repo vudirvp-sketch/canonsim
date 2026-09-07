@@ -110,12 +110,18 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     """The canonical day1_full run (seed 125, the only live stage): the
     relief's check releases first (the corpus pin untouched — director_0000,
     t=734), the barkeep's sweep second (director_0001) — and the sweep's
-    event lands at t=1456, the day's LAST event, AFTER the check and after
-    everything HEAD held (the append-only footprint: zero id shifts). The
-    arc completes: the cursor sits past its members, and the sweep's
-    release marks the day's closing beat (PEAK_CLIMAX — the denouement
-    the clock already defines). The knowledge mint is the barkeep's scene
-    snapshot: the room, taken stock."""
+    event lands at t=1456, the day's last DIRECTOR event, AFTER the check
+    and after everything HEAD held (the append-only footprint: zero id
+    shifts). The arc completes: the cursor sits past its members, and the
+    sweep's release marks the day's closing beat (PEAK_CLIMAX — the
+    denouement the clock already defines). Since beliefwire-2 (iter-70)
+    exactly one event follows the sweep at the same tick: the off-duty
+    relief guard's belief-gated scan (the paranoid look after the
+    handover — the urgency stream's own event, pinned in
+    tests/test_beliefwire.py), and nothing else — the STORY's closer is
+    still the sweep, the day's last beat is the watcher's symptom. The
+    knowledge mint is the barkeep's scene snapshot: the room, taken
+    stock."""
     events, sim, _ = run_day1(tmp_path)
     (check,) = checks(events)
     (sweep,) = sweeps(events)
@@ -125,7 +131,13 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     assert sweep.t == 1456
     # the canon order IS the declared causality: the sweep after the check
     assert sweep.id > check.id
-    assert events[-1].id == sweep.id  # the day's last event, nothing after
+    # the sweep is the day's last director event; the beliefwire-2 scan
+    # follows it at the same tick and closes the log — nothing after
+    assert events[-2].id == sweep.id
+    assert events[-1].type == "look_around"
+    assert events[-1].actor == "npc_guard_02"
+    assert events[-1].t == 1456
+    assert str(events[-1].provenance["cause_intent"]).startswith("urgency_")
     # the arc marched: beat 1 (the check) -> beat 3 (the sweep, gap 2 held
     # beat 720) — the cursor now past the chain's end
     assert sim.director._arc_cursor == {"aftermath": 2}  # type: ignore[attr-defined]
@@ -218,9 +230,13 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     is RNG-free end to end — the director's choice draws nothing, the
     look_around action carries no opposed check and a fixed 1-tick
     duration. The committed run and the successor-stripped run (the
-    hook + the arc + the seeding tag all removed — HEAD's shape) draw
-    from identical stream positions: the RngBank fingerprints are EQUAL,
-    and the log grows by exactly one event, appended at the end."""
+    hook + the arc + the seeding tag all removed) draw from identical
+    stream positions: the RngBank fingerprints are EQUAL (the
+    beliefwire-2 scan's urgency rolls fire in BOTH arms — the entry is
+    HEAD's shape since iter-70, its stream untouched by the arc strip),
+    and the log grows by exactly one event: the sweep, inserted at the
+    day's end between the wait and the paranoid scan — both arms share
+    their whole prefix up to the wait, each closing on its own shape."""
     def mutate_rules(rules: dict[str, Any]) -> None:
         rules["director"].pop("arcs")
         rules["director"]["hooks"].pop(SWEEP_TAG)
@@ -237,9 +253,15 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     )
     assert live_result.fingerprint == stripped_result.fingerprint
     assert len(live_events) == len(stripped_events) + 1
-    # every HEAD event keeps its id: the sweep rides after them all
-    assert [e.id for e in live_events[:-1]] == [e.id for e in stripped_events]
-    assert live_events[-1].id == "ev_0052"
+    # every shared event keeps its id: the prefix through the day's wait
+    # is identical, the sweep rides after it and before the beliefwire
+    # scan's own slot (the scan closes BOTH runs — HEAD's shape)
+    assert [e.id for e in live_events[:-2]] == [e.id for e in stripped_events[:-1]]
+    assert live_events[-2].id == "ev_0054"  # the sweep, the inserted event
+    assert live_events[-1].actor == "npc_guard_02"
+    assert live_events[-1].id == "ev_0055"
+    assert stripped_events[-1].actor == "npc_guard_02"
+    assert stripped_events[-1].id == "ev_0054"
 
 
 def test_the_quiet_seeds_stay_byte_identical(tmp_path: Path) -> None:

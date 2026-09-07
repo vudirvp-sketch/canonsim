@@ -157,11 +157,18 @@ def test_arson_chain_alarm_and_burnout(tmp_path: Path) -> None:
     by_type = {e.type: e for e in events}
     arson, started = by_type["arson"], by_type["fire_started"]
     # witnesses saw the figure starting the fire (the price marker, L8)
-    assert {r.who for r in arson.knowledge} == {
+    # — and, since beliefwire-2 (iter-70), the figure fleeing it: the
+    # counter-family's mint, one event both halves
+    witnesses = {
         "npc_guard_01", "npc_barkeep_01", "npc_drunk_01", "npc_maid_01",
     }
+    assert {r.who for r in arson.knowledge} == witnesses
+    assert {(r.who, r.knows) for r in arson.knowledge} == {
+        (who, token) for who in witnesses
+        for token in ("figure_starting_fire", "figure_fled_the_room")
+    }
     assert all(r.channel == "saw" and r.fidelity == "partial"
-               and r.knows == "figure_starting_fire" for r in arson.knowledge)
+               for r in arson.knowledge)
     # the fire itself: irreversible burning state, cause-chained to the action
     assert started.cause == arson.id
     assert started.actor == "world"

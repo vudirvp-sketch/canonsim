@@ -333,6 +333,16 @@ def test_at_location_expectation_needs_the_watcher_on_site(tmp_path: Path) -> No
     # the whole traits block goes with it (same pruning law; the block
     # is optional, the crafted scenario folds no beliefs)
     rules.pop("traits", None)
+    # iter-70 (beliefwire-2, KI#77): the trait-gated urgency entry rides
+    # the same chain — the consumer names the block's vocabulary, so the
+    # pruned block prunes its reader too (the dead-gate lint refuses at
+    # load otherwise)
+    rules["urgencies"]["entries"] = [
+        e for e in rules["urgencies"]["entries"]
+        if not any(
+            c.get("test") == "trait_held" for c in e.get("requires", ())
+        )
+    ]
     (target / "rules.json").write_text(json.dumps(rules))
     site_pack = load_pack(target)
 

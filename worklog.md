@@ -16,6 +16,29 @@
 
 
 ---
+iter-70 · 2026-09-07 · beliefwire-2 — the trait-consumer arming, the
+lance's last track-A row (D-103; 16 files — the pack arming + its
+measured corpus price + the doc sync, one mechanism family, the
+iter-60..69b scope pattern)
+- content/tavern_pack/rules.json the relief guard's trait-gated scan
+  (p=100, the new-entry shape — the guard_01 re-gate refused on
+  record) + the counters trio; actions.json the arson fled line (the
+  counter mint, one event both halves); core/pack.py KI#77 (the lint
+  order: _traits before _urgencies — the cond lint reads the block's
+  shape; the pruning law: removing the belief vocabulary prunes the
+  consumer, test_traits/test_knowledge re-pointed).
+- The price measured FIRST both arms and paid in the landing: +3
+  look_around on seed 125 ONLY (9/10 day1 seeds byte-identical vs the
+  disarm twin; the seed-33 panic corpus + theft_and_arson untouched) +
+  the seed-93 narrator family re-distilled through the fixed-point
+  runner (pristine identity 105/105, the PARALLEL incremental
+  alignment — the pin map refreshes mid-beat, a refused beat never
+  feeds; 11 claim-id re-pins, idempotency 0) + M1 0.509→0.54/0.500→0.52
+  (the D-065 record re-pinned). KI#78 opened+closed (the README lance
+  drift). 1240+1 green, ruff clean. TASKS beliefwire-2 done; the
+  lance's remainder: prosefloor-2. iter-65 evicted (verified in this
+  edit); 10 after.
+---
 bg-7 · 2026-09-07 · engine + confabulation probe — the five probes'
 first numbers on a REAL engine (track B, D-098's Layer-2 runner; the
 repo diff is doc-only — the runner + transcripts live outside per
@@ -171,26 +194,5 @@ sync; the TASKS intake rides this diff per the owner's D-022 sanction)
   intake is substance, §6.1 — next trim at the phase-5→6 gate);
   DECISIONS 31 (D-095, the between-gates precedent); FAQ 20 held (two
   clauses in existing entries). iter-56 evicted; 10 entries after.
----
-iter-65 · 2026-09-06 · phase-4 gate — the verdict PASS (D-094; the
-owner's "final check of everything before closing and preparing for
-phase 5" call; 6 files — one over the soft limit: verdict + collapse
-+ sync are the gate's one doc-debt mechanism, the iter-54 pattern)
-- Full ROADMAP §5 protocol re-run green: the corpus 105 + parse
-  corpus (1178 collected — 1168+1 module skip pure-dev, 1177+1
-  offline-probe skip with [chronicler]; ruff clean); the seed-125
-  pair ON M1=0.509/M2=0.333 / OFF T8 26 chains — IDENTICAL to
-  iter-54 (the phase-4 landings kept the corpus price zero on the
-  committed scenario); stretch max 1 both arms; T1 double-run
-  byte-identical; T7 a story; 0 leaks on the blind suite (26 tests,
-  all four layers); the mode-F chronicler 53/53 through the count
-  gate, manifest content-derived.
-- Doc debts paid: TASKS 626→589 (the phase-4 ledger collapse — the
-  trim the iter-61..64 rows deferred to this gate), DECISIONS 30
-  held (D-094 joins the verdict family), FAQ 20 held, README
-  resynced (KI#73 opened+closed: tex-1/blind-1/leg-4 unrecorded).
-- ROADMAP §2: phase 4 CLOSED, phase 5 UNLOCKED (opens on the
-  owner's call). No runtime file touched. Doc-only streak 1 of 2.
----
 (end of log — cap 10; pre-trim history lives in git)
 

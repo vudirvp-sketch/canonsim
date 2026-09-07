@@ -119,20 +119,26 @@ def test_harness_nopacing_arm_labels_and_file(tmp_path: Path) -> None:
 
 def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     """D-065 pinned, superseded in part at iter-52 (D-081), re-pinned at
-    iter-53 (D-082, content-3): the day1_full seed-125 ON run keeps all
-    three beats in PEAK — the clock's PEAK/REST bands still gate no
-    quiet release — and the day's closing beat rides the CLIMAX PATH
-    (the barkeep's sweep: trigger-less, climax-flagged). The nopacing
-    arm (the pack minus `director.pacing` — no climax_floor, a flagged
-    hook dies with no trigger AND no clock) now closes on the AMBIENT
-    beat instead: without the pacing clock there is no PEAK suppression
-    of the quiet path, and the ambient channel's own floor (0 < 2) is
-    the only gate left — the drunkard's ramble rides the channel gate
-    at the last beat. Both arms share their 52-line prefix; the ON arm
-    appends the sweep (t=1456), the OFF arm appends the ramble
-    (t=1458) — the clock's presence swaps WHICH director beat closes
-    the day, and the structure rows (chains, M5, destroyed locations,
-    the stretch block, the suspicion peaks) agree."""
+    iter-53 (D-082, content-3), re-pinned at iter-70 (beliefwire-2,
+    D-103): the day1_full seed-125 ON run keeps all three beats in
+    PEAK — the clock's PEAK/REST bands still gate no quiet release —
+    and the day's closing beat rides the CLIMAX PATH (the barkeep's
+    sweep: trigger-less, climax-flagged). The nopacing arm (the pack
+    minus `director.pacing` — no climax_floor, a flagged hook dies
+    with no trigger AND no clock) now closes on the AMBIENT beat
+    instead: without the pacing clock there is no PEAK suppression of
+    the quiet path, and the ambient channel's own floor (0 < 2) is the
+    only gate left — the drunkard's ramble rides the channel gate at
+    the last beat. Since iter-70 the beliefwire-2 scan (the relief
+    guard's trait-gated look, pack-side urgency — the pacing clock
+    never gates it) fires in BOTH arms: the arms share their whole
+    55-line prefix through the day's wait; the ON arm appends the
+    sweep (t=1456) with the paranoid scan following it at the same
+    tick (the day's last beat, the arc suite's twin pin), the OFF arm
+    appends its own scan copy then the ramble (t=1458) — the clock's
+    presence swaps WHICH director beat closes the story, and the
+    structure rows (chains, M5, destroyed locations, the stretch
+    block, the suspicion peaks) agree."""
     argv = [
         "--runs", "1", "--seed-base", "125", "--directors", "on",
         "--out-dir", str(tmp_path),
@@ -156,19 +162,30 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
             ln for ln in off_table.splitlines() if ln.startswith(row_start)
         )
         assert on_row == off_row, row_start
-    # and the A/B's per-run logs: the arms share their whole prefix
-    # (zero id shifts); each appends exactly its own closing beat
+    # and the A/B's per-run logs: the arms share their whole prefix up to
+    # the closers (zero id shifts); the beliefwire-2 scan fires in BOTH
+    # arms — the entry is pack-side, the pacing clock never gates it —
+    # so each arm appends its own closers after the shared wait
     on_log = (tmp_path / "balance_125_on.jsonl").read_text(
         encoding="utf-8"
     ).splitlines()
     off_log = (
         tmp_path / "balance_125_on_nopacing.jsonl"
     ).read_text(encoding="utf-8").splitlines()
-    assert on_log[:-1] == off_log[:-1]
-    sweep = on_log[-1]
+    assert on_log[:-2] == off_log[:-2]
+    sweep = on_log[-2]
     assert '"type": "look_around"' in sweep
     assert '"cause_intent": "director_0001"' in sweep
     assert '"t": 1456' in sweep
+    # the paranoid scan closes the ON arm's day (after the sweep, same tick)
+    scan = on_log[-1]
+    assert '"actor": "npc_guard_02"' in scan
+    assert '"cause_intent": "urgency_0004"' in scan
+    assert '"t": 1456' in scan
+    # the OFF arm's own scan copy (before the ramble — the story's closer)
+    off_scan = off_log[-2]
+    assert '"actor": "npc_guard_02"' in off_scan
+    assert '"cause_intent": "urgency_0004"' in off_scan
     ramble = off_log[-1]
     assert '"type": "ramble"' in ramble
     assert '"actor": "npc_drunk_01"' in ramble

@@ -35,20 +35,14 @@
   multiplier), the traits channel into the loop's reads, the
   counter-family in the fold — done (iter-67, D-097; detail:
   INTENT_SCHEMA §3/§4 + tests/test_beliefwire.py).
-- `beliefwire-2` · the pack arming — the first LIVE `trait_held`
-  consumer in the committed pack + the counter-family content (the
-  leg-3b precedent): measured at iter-67 — a trait-gated guard scan
-  flips three beats live on the canonical seed-125 run (the +3
-  look_around price, tests/test_beliefwire.py's channel pin), and no
-  zero-price live path exists (the seed-33 panic scan dies under a
-  thief-belief gate — wrong semantic AND a corpus break; a new
-  guard_02 entry fires on the 125 canonical corpus). The price
-  re-measured on the armed-drift pack (iter-68b, the same content
-  wave): the drift never touches the direct-mint records nor the
-  verbatim briefings — the traits substrate is byte-identical, the
-  crystallization unchanged (the same-wave pin,
-  tests/test_rumordrift.py), so the iter-67 price stands verbatim —
-  todo.
+- `beliefwire-2` · the pack arming — done (iter-70, D-103): the
+  relief guard's trait-gated scan (the new-entry shape — the guard_01
+  re-gate refused on record) + the counter-family content (the arson
+  fled line, the counters trio at the threshold bar); the price paid
+  in the landing: +3 scans on the canonical seed-125 run only, the
+  seed-93 narrator family re-distilled (11 id re-pins), the M1 pair
+  0.54/0.52, the KI#77 lint-order fix riding the arming. Detail:
+  tests/test_beliefwire.py + the D-103 row.
 - `rumordrift` · A2'' — done (iter-68a/68b, D-099/D-100): the
   mechanics + the stream-isolation law + `drifted_from` in outcome
   (EVENT_SCHEMA §3, §11 no-bump); the pack ARMED (68b) — the

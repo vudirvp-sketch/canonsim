@@ -91,10 +91,21 @@ def _ev(
 def tuned_pack(tmp_path: Path, mutate: Any) -> Any:
     """A committed-pack copy with the `traits` block replaced by
     `mutate(rules)` (the hard_pack pattern): the crafted-block tests
-    stay isolated from the committed live set."""
+    stay isolated from the committed live set — including the
+    trait-gated urgency entry (iter-70's consumer), which is PRUNED
+    with the block it reads (the KI#77 pruning law: a crafted variant
+    that replaces or strips the belief vocabulary prunes its reader
+    too, or the dead-gate lint refuses at load — the fold tests never
+    measure the urgency machinery)."""
     target = tmp_path / "pack_traits"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["urgencies"]["entries"] = [
+        e for e in rules["urgencies"]["entries"]
+        if not any(
+            c.get("test") == "trait_held" for c in e.get("requires", ())
+        )
+    ]
     mutate(rules)
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
     return load_pack(target)
