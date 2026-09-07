@@ -446,8 +446,20 @@ with `[chronicler]`), ruff clean. The doc debts paid: TASKS 626→589
 deferred to exactly this gate), DECISIONS 30 held (D-094 joins the
 D-045/D-058/D-064/D-083 verdict family), FAQ 20 held, README
 resynced (KI#73 — the tex-1/blind-1/leg-4 landings had gone
-unrecorded). Phase 5 (Depth) is UNLOCKED — it opens on the owner's
-call (the iter-55 precedent).
+unrecorded). Phase 5 (Depth) OPENED iter-73 on the owner's call
+(D-105: the ROADMAP §2 flip, the depth-1..7 backlog drafted from
+`phases.md` §5, research intake 4 routed, depth-1 the acquisition
+gate — `core/intent.py::acquisition_fidelity`, mechanics in the
+perception path, pack data in `rules.json::position_visibility.
+acquisition`); depth-1b the ARMING landed iter-74 (D-106: the
+committed pack's own block — smoke on saw/heard + the night-light
+`phase_in`/`unless_flag` — plus `entities.json::locations.flags`
+birth state, `{lit: true}` on the lamplit hall + the hearth post,
+seeding the projection as site props via `core/fold.py`); the
+corpus price measured FIRST both arms and paid fidelity-only (the
+fire geometries' burnout sighting born partial — zero re-distill,
+zero fixture regen, M1/M2/T8 identical). 1281 tests green, ruff
+clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +

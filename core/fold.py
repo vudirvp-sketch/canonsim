@@ -34,8 +34,12 @@ Projection = dict[str, dict[str, Any]]
 def initial_projection(entities: Mapping[str, Any]) -> Projection:
     """Flatten pack entity state into the projection.
 
-    Locations are registered prop-less (state changes may target them);
-    position for every positioned entity (npcs, ambient groups, items);
+    Locations are registered (state changes may target them) and seed
+    their declared `flags` mapping as raw site props (depth-1b, iter-74 —
+    the acquisition gate's `unless_flag`/`when_flag` read the site's
+    committed state, so pack-declared birth flags like a lit room must
+    live here, the structural twin of npc `status`); position for every
+    positioned entity (npcs, ambient groups, items);
     `status.*` and `relations.*` for npcs — the props iter-2+ events will
     carry `from` values for; `pair.<id>.<axis>` for the sparse npc↔npc
     relation map (P2a, iter-3) and `crime_status` where the pack declares
@@ -49,6 +53,8 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
 
     for loc in entities.get("locations", []):
         state[loc["id"]] = {}  # registered so state_changes can target it
+        for key, value in loc.get("flags", {}).items():
+            _put(loc["id"], key, value)
     for npc in entities.get("npcs", []):
         _put(npc["id"], "position", npc["position"])
         for key, value in npc.get("status", {}).items():

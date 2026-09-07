@@ -1,52 +1,46 @@
 # STATUS — canonsim
 
-Iteration: iter-73 (`iter-73-depthopen` — the owner's phase-5 start
-call: the opener + research intake 4 + depth-1 the acquisition gate) ·
-Phase: 4 (Knowledge & scene) — CLOSED — gate PASS (iter-65, D-094) ·
-**Phase: 5 (Depth) — OPEN (iter-73, D-105 — the owner's call, the
-iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog drafted
-from phases.md §5 + the D-096 material; the v0.2 lance COMPLETE —
-track A rode into the opening debt-free)**
-**The landing: `core/intent.py` gains `acquisition_fidelity` — the
-acquisition gate (D-096's named real gap: continuous acquisition
-CONDITIONS feeding birth fidelity — mechanics in the perception path,
-never a second knowledge store): pack-declared conditions step born
-records down the fidelity chain at the EVENT SITE (`when_flag`+`is`:
-the site's committed prop, e.g. a fire layer's smoke flag;
-`phase_in`+`unless_flag`: the clock phase at birth, the lit-room
-exemption; `steps` >= 1, accumulating, floor-sticking — D-007's
-documented twin). Wired once at the resolve point — both template
-branches (audience + per-present expansion), so the resolvers' texture
-path and the transitions layer ride it for free; the observer's own
-state stays with the perception checks' status modifiers (single
-owner). The closed vocabulary is pack-linted (`core/pack.py
-::_acquisition`: ambient channels saw/heard only — told/inferred have
-no acquisition surface; unknown keys, steps < 1, dead phases refused
-loud). The committed pack declares NO block: v0.1 bytes by
-construction, the gate consumes no draws EVER — even the fingerprint
-cannot see an armed-but-silent pack (the 68a pattern; the arming is
-depth-1b). Intake 4 routed the same edit (the D-096 verify-then-route
-law): the two confirmed additions to phases.md §5 — the sha256 anchor
-on the fold-checkpoint's derived-index record (never an event in the
-truth) + margins on any future threshold surface; the texts' proposed
-violations (queue-key change, mypy-in-CI, global float ban, canon-log
-anchor) are refusals on record. +20 tests (1255→1275+1), ruff
-clean.**
+Iteration: iter-74 (`iter-74-acquisition-arm` — depth-1b, the
+acquisition arming, D-105's arming row; the 68a→68b pattern
+executed) · Phase: 4 (Knowledge & scene) — CLOSED — gate PASS
+(iter-65, D-094) · **Phase: 5 (Depth) — OPEN (iter-73, D-105 — the
+owner's call, the iter-55/36 opener precedent; depth-1 the gate +
+depth-1b the arming LANDED)**
+**The landing: the committed pack's `position_visibility.acquisition`
+block (smoke on saw/heard over the fire layer's raw follow-up flag;
+night-light `phase_in` + the lit-room `unless_flag` on saw only —
+darkness never deafens) + the flag data the row demanded:
+`entities.json::locations.flags` (`{lit: true}` on the lamplit hall
++ the hearth post) — a pack-declared BIRTH-STATE sub-object (the
+structural twin of npc `status`) seeded into the projection as RAW
+SITE PROPS by `core/fold.py` (one read surface — the gate never
+gains a second read path; INV-1 untouched: the seed is the fold's
+t=0, not a state change), scalar-shape linted in `core/pack.py`.
+The corpus price measured FIRST both arms (a probe outside the repo,
+Rule 9 — the working tree vs a `git archive HEAD` twin): talk
+geometry ZERO bytes; fire geometries ONE stepped record per run
+(the burnout sighting, fidelity-only — no id shifts, no appended
+events); the narrator corpus's diverged log-bytes ALL
+fidelity-only (statuses/notes/closers identical — the 105-case
+pin-set green untouched, ZERO re-distill, ZERO fixture regen); the
+T1 golden byte-identical; M1/M2/T8 arms identical. The 68a pins
+re-pointed to the crafted block-popped v0.1 twin (the 68b law). +6
+tests (1275→1281+1), ruff clean.**
 ·
 Date: 2026-09-08 ·
-Scope: `core/intent.py` (the gate + both resolve branches),
-`core/pack.py` (the acquisition lint), `core/clock.py`
-(`phase_of_tick` — the rules-level twin of `Clock.phase_of`),
-`tests/test_acquisition.py` (+20 tests: the gate units, the wiring
-pins, the both-arms corpus-price law, the liveness law, the lint
-laws), `docs/ROADMAP.md` (§2's phase-5 flip), `docs/TASKS.md` (the
-phase-5 backlog + intake 4), `docs/blueprint/phases.md` (§5: the two
-intake additions + the depth-1/1b pointer), `docs/DECISIONS.md`
-(D-105), `docs/AGENT_NAVIGATION.md` (§1's clock/pack/intent cells),
-`STATUS.md` (this header + the Next re-pin), `worklog.md`
-(the iter-73 entry, one in / one out — iter-67 evicted; the log held
-9 at HEAD, the count did not grow). 11 files — the iter-55
-opener+leg footprint (4 code + 7 doc sync).
+Scope: `content/tavern_pack/rules.json` (the acquisition block),
+`content/tavern_pack/entities.json` (the location flags + the meta
+note), `core/fold.py` (the flags seed), `core/pack.py` (the
+location-flags lint), `tests/test_acquisition.py` (the re-pointed
+A/B pins + the paid-price pin + the night-arming law + 4 flag-lint
+tests), `tests/test_core.py` (the projection pin), `STATUS.md` (this
+header + the Next re-pin), `worklog.md` (the iter-74 entry, one in /
+one out — iter-68 evicted; the duplicated header artifact removed in
+the same edit), `docs/TASKS.md` (depth-1b done), `docs/DECISIONS.md`
+(D-106), `docs/AGENT_NAVIGATION.md` (§1's fold/pack/content cells),
+`README.md` (the phase-5 state line). 12 files — 4 code/pack + 8
+test/doc sync, the iter-60..69b scope pattern (the pack arming +
+its corpus price + the doc sync are one mechanism family).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -556,33 +550,34 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**Phase 5 (Depth) OPENED iter-73, D-105 — the owner's start call
-(the iter-55/36 opener precedent): the ROADMAP §2 flip + the backlog
-drafted from `docs/blueprint/phases.md` §5 (the D-096 drafting
-material now TASKS' depth rows) + research intake 4 routed (the
-owner's two-model cross-review chain — the two confirmed additions
-in phases.md §5, the proposed violations refusals on record) +
-depth-1 LANDED: the acquisition gate, mechanics unarmed (the 68a
-pattern — v0.1 bytes, 1275+1 green). Track A rode in debt-free
-(the v0.2 lance complete, prosefloor-2 D-104 the last row); bg-8
-keeps its opening numbers + lowercase-gap instrument, owner-gated
-on hardware. The queue: `depth-1b` — the acquisition arming (the
-committed pack's `position_visibility.acquisition` block + the
-corpus price measured FIRST both arms, the 68b pattern).**
+**Phase 5 (Depth) OPEN (iter-73, D-105 — the owner's start call,
+the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
+drafted from `docs/blueprint/phases.md` §5) — depth-1 the
+acquisition gate + depth-1b the arming LANDED (iter-73/74, D-105/
+D-106: mechanics + the committed pack's own block, the corpus price
+paid fidelity-only — zero re-distill, 1281+1 green). Track A is
+debt-free (the v0.2 lance COMPLETE); bg-8 keeps its opening numbers
++ lowercase-gap instrument, owner-gated on hardware. The queue:
+`depth-2` — lazy detail materialization (`scene:<id>:detail`
+content-addressed streams, the D-054 texture-promotion door at
+scene scale — first-commit-wins, the `slot_conflict` mirror;
+phases.md §5 the owner).**
 
-1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-1..7
+1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-2..7
    rows; `docs/blueprint/phases.md` §5 the architecture owner):
-   depth-1 done (the acquisition gate), depth-1b next (the arming),
-   then lazy worldgen passes, factions with goals, long history;
-   the exit criterion "an emergent chain of 3+ events without the
-   player" (ROADMAP §2 — T8's OFF arm already reads 26 chains on the
-   committed scenario; the phase-5 target is the worldgen-fed form
-   of it). The phase-5 donor material (ROADMAP §4): Azgaar FMG
-   (states/cultures/religions + a chronology generator), Neighborly
-   (the closest cousin's architecture reading). The phase-5 spatial
-   row `st-6(a)` (travel as a separate action) waits on this layer;
-   `st-3`/`st-5` (groups/LOD, containers) carry their GROUP_SPEC
-   trigger = phase 5.
+   depth-2 next (lazy detail materialization), then scene LOD
+   (after depth-5's first passes), fold checkpoints (the sha256
+   index-anchor, depth-4), lazy worldgen passes, factions with
+   goals, groups & simulation LOD (owner verdict pending on the
+   iter-11b resolutions); the exit criterion "an emergent chain of
+   3+ events without the player" (ROADMAP §2 — T8's OFF arm already
+   reads 26 chains on the committed scenario; the phase-5 target is
+   the worldgen-fed form of it). The phase-5 donor material (ROADMAP
+   §4): Azgaar FMG (states/cultures/religions + a chronology
+   generator), Neighborly (the closest cousin's architecture
+   reading). The phase-5 spatial row `st-6(a)` (travel as a separate
+   action) waits on this layer; `st-3`/`st-5` (groups/LOD,
+   containers) carry their GROUP_SPEC trigger = phase 5.
 2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser

@@ -341,6 +341,28 @@ class _Lint:
                     loc["id"] in by_location[exit_id]["exits"],
                     f"exit graph asymmetric: {loc['id']} -> {exit_id}",
                 )
+            # depth-1b (iter-74): pack-declared birth flags seed the
+            # projection as raw site props (core/fold.py) — the closed
+            # shape the acquisition gate's when_flag/unless_flag read.
+            flags = loc.get("flags")
+            if flags is not None:
+                _require(
+                    isinstance(flags, Mapping),
+                    f"location {loc['id']}: flags must be an object "
+                    "(pack-declared site props)",
+                )
+                for key, value in flags.items():
+                    _require(
+                        isinstance(key, str) and key.strip(),
+                        f"location {loc['id']}: flag names must be "
+                        "non-empty strings",
+                    )
+                    _require(
+                        isinstance(value, (str, int, bool)),
+                        f"location {loc['id']}: flag {key!r} must be a "
+                        "scalar (str | int | bool) — comparable values "
+                        "only, never nested objects",
+                    )
 
         status_axes = set(rules["states"])
         relation_axes = set(rules["relations"]["axes"])

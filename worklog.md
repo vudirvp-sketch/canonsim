@@ -13,6 +13,24 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-74 · 2026-09-08 · acquisition-arm — depth-1b, the acquisition
+arming (12 files — 4 code/pack + 8 test/doc sync: the pack arming +
+its measured corpus price + the doc sync are one mechanism family,
+the iter-60..69b scope pattern)
+- rules.json the acquisition block (smoke saw/heard + night-light
+  phase_in/unless_flag); entities.json locations.flags {lit: true} on
+  the tavern + guardroom; core/fold.py the flags seed (raw site props);
+  core/pack.py the location-flags shape lint.
+- Price measured FIRST both arms (a runner outside the repo, Rule 9):
+  talk geometry zero; fire geometries ONE stepped record (the burnout
+  sighting, fidelity-only — no id shifts, no appended events, zero
+  re-distill, zero regen, corpus pins hold, M1/M2/T8 arms identical).
+  68a pins re-pointed to the v0.1 twin (the 68b pattern). +6 tests
+  (1275→1281+1, ruff clean; the paid-price pin, the night-arming law,
+  4 flag-lint tests). iter-68 evicted (verified in this edit); 10
+  after. The iter-73 edit's duplicated header block removed in the
+  same edit (a pre-existing artifact — git holds the history).
+---
 iter-73 · 2026-09-08 · depthopen — the owner's phase-5 start call: the
 opener + research intake 4 + depth-1 the acquisition gate (11 files —
 the iter-55 opener+leg footprint: 4 code + 7 doc sync)
@@ -28,23 +46,6 @@ the iter-55 opener+leg footprint: 4 code + 7 doc sync)
   pin + the smoke-geometry liveness law). iter-67 evicted (verified
   in this edit); 9 after (the log held 9 at HEAD — the cap law is
   held, the count did not grow).
-# worklog — canonsim
-
-> Cap: 10 entries, one in / one out. 3–5 lines per entry: what changed, why,
-> files touched. No diffs, no command output, no reasoning traces. Long-term
-> rationale belongs in `docs/DECISIONS.md`.
-> Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
-> Entries re-trimmed to the line cap at iter-10a (KI#37; the drift ran
-> iter-8b→10) — pre-trim detail lives in git history.
-> Re-trimmed 39→10 at iter-48 (KI#68: the cap had drifted silently —
-> the iter-43..47 "evicted per the cap" claims never executed; the
-> eviction is now verified in the same edit, not claimed). Pre-trim
-> history lives in git.
-> Order: newest first (normalized at iter-8c — the order had drifted
-> since iter-5).
-
-
-
 ---
 iter-72 · 2026-09-08 · prosefloor-2 — the lowercase assertion surface,
 the lance's last row (D-104; 10 files — the iter-66 family footprint:
@@ -196,21 +197,5 @@ iter-60..67 pattern)
   all-zero twin, 10 seeds byte-identical). +22 tests (1201→1223+1,
   ruff clean). EVENT_SCHEMA §3 the clause; D-099; KI#74 deleted per
   §5. iter-60 evicted (verified in this edit); 10 after.
----
-iter-68 · 2026-09-07 · testproto — the LLM-integration test protocol's
-research close (D-098; 5 files, doc-only — the streak is 1 of 2,
-iter-67 was functional; the owner's 2026-09-07 ask + the living-world
-clarification)
-- The fork closed by decomposition: the three candidates answer three
-  different questions, so the protocol runs all three (TEST_PLAN §8.1
-  — contract simulacrum / live probes / gate heartbeat) over one
-  pinned corpus + one metric vocabulary; each con neutralized by a
-  named mechanism (bg-7 transcript calibration, the gap-row law,
-  corpus growth from measured failure — §8.2's anti-trap law).
-- The living-world ask landed as the world-answer law (§8.3) + the
-  deviation corpus families F1–F6 (§8.2); TEST_PLAN 524→600 (§8 NEW);
-  D-098; TASKS testproto done + the bg-8 row (owner-gated, tracks
-  bg-7); 1201+1 green, ruff clean (docs-only diff). iter-59 evicted
-  (verified in this edit); 10 after.
 
 (end of log — cap 10; pre-trim history lives in git)

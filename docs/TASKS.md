@@ -38,12 +38,19 @@
   committed pack UNARMED (v0.1 bytes, the 68a pattern; the gate
   consumes no draws ever, so even the fingerprint cannot see it).
   Detail: tests/test_acquisition.py.
-- `depth-1b` · the acquisition arming — **todo**: the committed pack's
-  `position_visibility.acquisition` block (smoke on saw/heard over the
-  fire layer's raw follow-up flags; night-light `phase_in` with the
-  lit-room `unless_flag` — the flag data itself rides this row) + the
-  corpus price measured FIRST both arms (the 68b pattern: the re-pin
-  if any corpus byte moves).
+- `depth-1b` · the acquisition arming — **done (iter-74, D-106)**: the
+  committed pack's `position_visibility.acquisition` block (smoke on
+  saw/heard over the fire layer's raw follow-up flag; night-light
+  `phase_in` with the lit-room `unless_flag` — the flag data itself
+  landed: `entities.json::locations.flags` `{lit: true}` on the tavern
+  + the guardroom, seeding the projection as raw site props,
+  `core/fold.py`; the location-flags shape lint in `core/pack.py`).
+  The corpus price measured FIRST both arms and paid in the landing:
+  the talk geometry ZERO bytes; the fire geometries exactly ONE
+  stepped record per run (the burnout sighting, fidelity-only — no id
+  shifts, no appended events, zero re-distill, zero fixture regen, the
+  corpus pins all hold); M1/M2/T8 arms identical. Detail:
+  tests/test_acquisition.py.
 - `depth-2` · lazy detail materialization — todo: `scene:<id>:detail`
   content-addressed streams, the D-054 texture-promotion door at scene
   scale (first-commit-wins, the `slot_conflict` mirror); phases.md §5

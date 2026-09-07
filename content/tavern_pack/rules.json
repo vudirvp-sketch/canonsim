@@ -40,7 +40,28 @@
       "adjacent_location": "vague_only"
     },
     "smoke_penalty": -20,
-    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9). The status modifiers on perception live with the perception skill (checks.skills.perception.status_modifiers — single owner); smoke_penalty feeds the perception system (iter-3)"
+    "acquisition": {
+      "saw": [
+        {
+          "when_flag": "smoke",
+          "is": true,
+          "steps": 1
+        },
+        {
+          "phase_in": ["night"],
+          "unless_flag": "lit",
+          "steps": 1
+        }
+      ],
+      "heard": [
+        {
+          "when_flag": "smoke",
+          "is": true,
+          "steps": 1
+        }
+      ]
+    },
+    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9). The status modifiers on perception live with the perception skill (checks.skills.perception.status_modifiers — single owner); smoke_penalty feeds the perception system (iter-3). depth-1b (iter-74, D-106): the acquisition arming — birth fidelity steps down the chain (core/intent.py::acquisition_fidelity, the 68b pattern) when the EVENT SITE is smoking (the fire layer's raw follow-up flag, both ambient channels) or unlit at night (entities.json locations.flags carries the lit-room data: the lamplit hall + the hearth post are lit, open ground is not). pack data, no code — a pack without the block answers the base fidelity (v0.1 bytes)"
   },
   "systems": {
     "time": {

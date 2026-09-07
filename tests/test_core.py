@@ -330,7 +330,9 @@ def test_initial_projection_flattens_pack_state() -> None:
     assert state["purse_01"]["position"] == "loc_tavern"
     assert state["purse_01"]["carrier"] == "npc_guard_01"  # iter-2: carrier projected
     assert state["oil_lamp_01"]["carrier"] is None
-    assert state["loc_tavern"] == {}  # locations: registered, prop-less
+    assert state["loc_tavern"] == {"lit": True}  # depth-1b: location flags seed
+    assert state["loc_guardroom"] == {"lit": True}
+    assert state["loc_street"] == {}  # unlit open ground: no declared flags
 
 
 def _record(event_id: str, changes: tuple[StateChange, ...]) -> Any:

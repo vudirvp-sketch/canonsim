@@ -3,7 +3,7 @@
     "pack": "tavern_pack",
     "version": "0.1",
     "display": "The Three Barrels — TavernSim v0 slice",
-    "notes": "Phase-0 setting as data, per docs/MVP_SCOPE.md §4 (that table is the source of truth for ids, counts and roles). Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law — retuning is a pack change, never a code change (INV-3). Display names in English (D-009). iter-20: locations carry a `layout` field — static architecture as canon-from-birth pack data (rendered on the brief scene line via rules.json brief.present_entities.scene_line_fields, D-057; the gateway's canon_slot check guards it like every pack-modeled field, KI#48)."
+    "notes": "Phase-0 setting as data, per docs/MVP_SCOPE.md §4 (that table is the source of truth for ids, counts and roles). Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law — retuning is a pack change, never a code change (INV-3). Display names in English (D-009). iter-20: locations carry a `layout` field — static architecture as canon-from-birth pack data (rendered on the brief scene line via rules.json brief.present_entities.scene_line_fields, D-057; the gateway's canon_slot check guards it like every pack-modeled field, KI#48). iter-74/depth-1b: locations carry a `flags` object — pack-declared birth state seeding the projection as raw site props (the acquisition gate's condition vocabulary; the lit-room data for the night-light arming)."
   },
 
   "locations": [
@@ -15,7 +15,10 @@
       "exits": ["loc_street", "loc_backyard"],
       "flammability": "high",
       "fire_spots": ["bar", "tables", "back_wall"],
-      "notes": "wooden building, dry beams — the arson target (MVP_SCOPE §3)"
+      "flags": {
+        "lit": true
+      },
+      "notes": "wooden building, dry beams — the arson target (MVP_SCOPE §3). depth-1b: the lamplit hall — the night-light acquisition condition's exempt room (rules.json position_visibility.acquisition, the flags seed the projection as site props)"
     },
     {
       "id": "loc_street",
@@ -45,7 +48,10 @@
       "exits": ["loc_street"],
       "flammability": "low",
       "fire_spots": ["hearth"],
-      "notes": "off-duty position; knowledge transfer fires here at rotation ticks (rules.json)"
+      "flags": {
+        "lit": true
+      },
+      "notes": "off-duty position; knowledge transfer fires here at rotation ticks (rules.json). depth-1b: the hearth post — the other lit room (the night watch briefs by firelight, no fidelity loss)"
     },
     {
       "id": "loc_market",
