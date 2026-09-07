@@ -496,3 +496,113 @@ What this prices (and what it does not):
   cross-over claim — 2023 vs 2026 API prices and per-seat vs
   per-beat accounting are NOT normalized here; any phase-2+ budget
   decision re-verifies against then-current prices.
+
+## 10. bg-7: the engine + confabulation probe — first numbers (2026-09-07)
+
+Environment honesty first: the engine is the **sandbox API engine**
+(glm-4-plus via the z-ai CLI), NOT the task's named `{3–8B, GBNF}` arm —
+that arm **records the gap row** (owner hardware; TEST_PLAN §8.1 Layer
+3's law — engine-1's decision input unchanged). Runner + transcripts
+outside the repo (Rule 9, `/home/z/my-project/scripts/`, the §8.4 shape:
+pins + metric definitions from the repo, engine + transcripts outside;
+the runner never writes repo files — verified clean). Engine envelope:
+353 CLI attempts / 267 completions (86 rate-limit failures — the sandbox
+quota, environmental, excluded from validity denominators); latency
+p50 1.1 s / p95 6.3 s / max 20.4 s; prompt tokens p50 800, completion
+p50 52.
+
+**(i) The 51-utterance parse corpus through the REAL mode-C door**
+(the operator's 35/35 baseline — the corpus replies were
+hand-distilled):
+
+- engine_ok 44/51 (7 rate-limit failures); **raw gate validity
+  35/44 = 79.5%**; ONE re-ask (the gate's own error riding the
+  follow-up — the deferred re-ask ladder's first numbers, PARSER_SPEC
+  §7) rescued 4/9 → **39/44 = 88.6%**.
+- Refusal families: 8 unknown-keys (the texture reference as an
+  intent-level sibling of `kind`/`target` instead of inside `fields` —
+  GBNF makes the shape structurally impossible), 1 off-grammar noun;
+  zero unparseable-JSON failures (valid JSON under a raw-JSON
+  instruction).
+- Alternative mix (44): 29 intent / 9 question / 6 no_intent; on the
+  30 pinned-intent utterances: 27 intents, 1 question, 2 no_intent
+  (honest mapping shifts: "bide my time for a good while" →
+  no_intent).
+- Full intent agreement (kind+target+fields exact): 16/30 on the
+  pinned-intent family. The systematic gaps, all reproduced twice:
+  the steal victim/target confusion (`target=purse_01` where the
+  operator pinned `npc_guard_01` — gate-valid, the door answers
+  `intent_rejected`; attempts are facts, PARSER_SPEC §6), the
+  wait-ticks calibration ("a good while" → `ticks=1` or no_intent vs
+  the operator's 30), the texture shape above. Door world-rejects: 4.
+
+**(ii) The prose probe with the LIVE floor** — 8 beats over day1_full
+(seed 125), the full mediator pipeline (regen ladder to budget):
+
+- **The floor: 0/8 invented names. The sentence-initial gap: 0/8
+  name-shaped tokens** — every sentence-initial capital on 24 beats
+  (3 arms) is a common opener (The/An/In/Rain/Before/Earlier/Smoke).
+  FP=0 confirmed at this engine class; the dark figure is zero here —
+  the weaker class re-measures (the gap row's scope).
+- **The claims channel is where the beats die**: 54 claims → 27
+  `unknown_entity` + 17 value + 1 malformed refusals; 7/8 beats
+  regen-exhausted → dry (the L12 floor held everywhere — never a
+  crash, never a blocked beat); the 2 accepted beats: 1+4 supported,
+  4+4 unverifiable (`insufficient_data` dominates — the engine
+  asserts unmodeled props).
+- The refusal anatomy: the engine mirrors the BRIEF'S SURFACE as
+  claim entities ("the player", "scene loc_tavern", "pair npc_x ->
+  npc_y.fear", who="the relief guard") — never the claim grammar's
+  ids. **The brief-surface vs claim-id vocabulary mismatch IS the
+  refusal engine** on prompt-constrained engines. Zero instruction
+  leakage: no `intents`, no `texture_delta` in 24 beat replies.
+
+**(iii) The Cyrillic Script Tax** — s1 twins (7) + crafted F2/F5 (4,
+1 rate-limit failure):
+
+- Twins: gate-valid 7/7, alternative agreement 7/7, full intent
+  agreement 3/5 — **identical to the English s1 arm** (7/7, 6/7,
+  3/5; the same error shapes reproduce in both scripts — the
+  purse-target quirk; the wait calibration misses differently).
+  **The script tax on this engine class: zero on the twin family.**
+- Crafted: 4/4 gate-valid; the disambiguation-question path NEVER
+  fired on oblique Cyrillic role-nouns — "барменша" →
+  `talk npc_barkeep_01` (a guessed mapping, gate-valid — a rumor
+  actually spread), "к служанке" → `move npc_maid_01` (the wrong
+  verb; the door answered). F2's "never a guess" needs the structural
+  constraint (GBNF) or the disambiguation buttons (parse-2's deferred
+  row). Casing/mixed-script noise mapped correctly (the world
+  answered `intent_rejected` — already inside).
+
+**(iv) Confabulations on degraded-knows-strings (C3.5)** — every
+knows-string degraded to `[t N, heard, vague]` (the pack's own ladder
+floor):
+
+- Floor: 0/8 on first replies; 1 `REFUSED prose NPCs
+  (invented_entity)` on a regen reply — the generic-capital family:
+  degraded knowledge pushed the engine toward "NPCs" instead of
+  grounded names. **The C3.5 first number: 0 (clean) vs 1 (degraded)
+  at n=8 — thin, a snapshot, never a verdict**; the 3–8B arm
+  re-measures. Refusals 22+16+2 claims + the 1 prose; 1 accepted
+  (prose-only — the engine dropped claims after the refusals).
+
+**(v) The surface-section A/B** (+`cast_surface` = the closed world's
+declared display names):
+
+- Floor 0/8, gap 0/8 — identical to the clean arm; claim refusals
+  ROSE (55 vs 45; the richer surface invites more claims). **At this
+  engine class the cast surface earns nothing** — the prose was
+  already manifest-disciplined, and the refusals are surface/id
+  mismatches, not name availability. prosefloor-2's surface-section
+  decision: no extension warranted by THESE numbers; the
+  weaker-engine arm owns the real question.
+
+**The engine-1 feed** (what these numbers decide): grammar-constrained
+decoding is load-bearing for the **claims channel** and the **F2
+disambiguation path** (both refuse/guess on a 27B-class
+prompt-constrained engine while prose stays clean); the re-ask ladder
+pays (79.5 → 88.6%); the API quota is an operational constraint the
+local engine class does not share. Gap rows: the {3–8B, GBNF} arm
+(all five families, owner hardware), the target-class latency numbers,
+bg-8's deviation-corpus F1–F6 run (the world-answer law's first live
+numbers — owner-gated, opens on these numbers).

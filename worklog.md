@@ -16,6 +16,22 @@
 
 
 ---
+bg-7 · 2026-09-07 · engine + confabulation probe — the five probes'
+first numbers on a REAL engine (track B, D-098's Layer-2 runner; the
+repo diff is doc-only — the runner + transcripts live outside per
+Rule 9/INV-4 and never wrote a repo byte, git clean through the run)
+- The sandbox API engine (glm-4-plus; the {3–8B, GBNF} arm = the gap
+  row, engine-1's input unchanged) through the REAL doors: the
+  51-utterance corpus 39/44 gate-valid after ONE re-ask (79.5→88.6%,
+  the deferred ladder's first numbers); 24 prose beats — floor 0, gap
+  0, the claims-channel refusal engine = the brief-surface vs
+  claim-id mismatch; the Cyrillic twin tax zero; C3.5's 0→1 signal;
+  the surface A/B null. TECH_NOTES §10 (608 — over-cap substance per
+  §6.1, trim at the phase-5→6 gate; TASKS 699 — the same stance, the
+  iter-66a precedent); TASKS bg-7 done + prosefloor-2
+  UNBLOCKED. 1239+1 green, ruff clean. iter-64 evicted (verified in
+  this edit); 10 after.
+---
 iter-69b · 2026-09-07 · suspectaxis-2 — the committed pack's
 per-target ARMING (D-101's arming row, D-102; 25 files — the pack
 arming + its measured corpus price + the doc sync are one mechanism
@@ -175,31 +191,6 @@ phase 5" call; 6 files — one over the soft limit: verdict + collapse
   resynced (KI#73 opened+closed: tex-1/blind-1/leg-4 unrecorded).
 - ROADMAP §2: phase 4 CLOSED, phase 5 UNLOCKED (opens on the
   owner's call). No runtime file touched. Doc-only streak 1 of 2.
----
-iter-64 · 2026-09-06 · leg-4 — the mode F offline chronicler (phase 4,
-TASKS' last phase-4 row; the owner's explicit duckdb approval crossing
-the §8 dependency fence — the recorded leg-4/blind-1 owner-gate
-resolved; 10 files — over the soft limit: tool + fence + extra + tests
-+ doc sync are one mechanism family, the iter-60..63 scope pattern)
-- scripts/chronicle.py (NEW): read_ndjson_auto no-ETL intake behind a
-  count gate (a silent drop = integrity failure, nothing written);
-  events.parquet (canonical 12-column archive), state_diffs.parquet
-  (the LAG/LEAD window-diff, the continuous fold read), chronicle.
-  sqlite (facts_summary/state_current/type_histogram/knowledge_
-  summary/chronicle_meta) via the attach→stdlib probe+fallback ladder
-  (autoinstall off — never phones home), manifest.json (content-
-  derived, no wall-clock, no abs paths). pyproject [chronicler] extra
-  (duckdb>=1.0, runtime deps stay []); D-012 executable
-  (test_runtime_imports_stdlib_only).
-- Measured: 55/55 events day1 seed 123 (all intake combos); state
-  continuity 0 breaks; both write paths byte-deterministic per run,
-  logically identical; corpus price zero by construction.
-- +10 tests/test_chronicle.py (stdlib-fold cross-checks, determinism,
-  ladder, gates; importorskip — pure-dev env 1168+1 skip); 1167→1178,
-  ruff clean. D-093 (family, cap 30 held); TEST_PLAN §7; TASKS leg-4
-  done + scav-1 deferred (TASKS 626 — over the 600 cap per the §6.1
-  phase-ledger pattern, the collapse at the phase-4 gate, the iter-63
-  precedent at 606); AGENT_NAVIGATION; iter-54 evicted; 10 after.
 ---
 (end of log — cap 10; pre-trim history lives in git)
 

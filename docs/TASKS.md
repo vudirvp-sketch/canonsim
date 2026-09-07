@@ -88,10 +88,13 @@
 > `docs/blueprint/phases.md` §5 (the never-before-opening law, STATUS
 > Next — drafted into TASKS only at the phase-5 opening), never here.
 
-- `prosefloor-2` · relations/attribute claims in prose — todo, WAITS
-  ON bg-7 (D-095's recorded gate: lowercase tokens are invisible to
-  the position law — the detection surface is the work, the refusal
-  ladder is not; the surface-section decision rides the bg-7 numbers).
+- `prosefloor-2` · relations/attribute claims in prose — todo,
+  UNBLOCKED (bg-7's numbers landed: the surface-section decision is
+  recorded — TECH_NOTES §10(v), no cast-surface extension warranted
+  by the API-engine numbers, the weaker-engine arm re-measures; the
+  row's own work stays the detection surface — lowercase
+  relations/attribute tokens are invisible to the position law, and
+  the refusal ladder is not the work).
 - `packtaxonomy` · material-derived props (the flammability
   generalization) — owner-gated (phase-6 PACK-1: the authoring path is
   the reserved `copy-from` chain, phases.md §6; a runtime
@@ -377,16 +380,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Track B — background (evenings, foreign canon)
 
-### bg-7 · engine + confabulation probe — todo (the owner's expanded scope)
+### bg-7 · engine + confabulation probe — done (2026-09-07)
 
-The refinement lance's LLM-side companion (track B — never blocks
-track A; the owner's 2026-09-06 scope confirmation): (i) the
-51-utterance set × {3–8B, GBNF} vs the 35/35 baseline; (ii) a prose
-probe with the LIVE floor (the sentence-initial gap's first numbers);
-(iii) the Cyrillic Script Tax; (iv) confabulations on degraded
-knows-strings (the C3.5 gate); (v) the surface-section A/B. Runner
-outside the repo (Rule 9, INV-4); results → TECH_NOTES; engine-1
-feeds on these numbers.
+- Done one-liner: all five probes' FIRST NUMBERS on the sandbox API
+  engine (glm-4-plus) — TECH_NOTES §10 (the 51-utterance corpus
+  39/44 gate-valid after one re-ask vs the 35/35 operator baseline;
+  the prose floor 0/24 beats and the sentence-initial gap 0/24; the
+  claims-channel refusal engine = the brief-surface vs claim-id
+  vocabulary mismatch; the Cyrillic twin tax ZERO; C3.5's thin 0→1
+  signal; the surface A/B null). The `{3–8B, GBNF}` arm records the
+  gap row (owner hardware — engine-1's decision input unchanged,
+  TEST_PLAN §8.1 Layer 3's law); runner + transcripts outside the
+  repo (Rule 9); prosefloor-2's gate now holds its numbers — the
+  surface-section decision: no extension warranted by the API-engine
+  numbers, the weaker-engine arm re-measures.
 
 ### bg-8 · engine — the LLM-integration test runner — todo (owner-gated)
 
