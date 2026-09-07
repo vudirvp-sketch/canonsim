@@ -18,9 +18,10 @@ is pack data (`rules.json` `crime_watch`) — the code is the mechanic.
   pair axis), and the status flip / arrest target THAT figure (the
   parameterized suspect_id — v0.1 hard-wired the player). A
   string-shaped mapping keeps the v0.1 flat mode byte-identical: the
-  axis stays `relations.<axis>`, the suspect stays the player — the
-  committed pack's mode until suspectaxis-2 arms it. One mode per pack
-  (the pack lint refuses mixing). The drift consumer: a rumor-mutated
+  axis stays `relations.<axis>`, the suspect stays the player — a mode
+  for crafted packs since suspectaxis-2 armed the committed pack
+  (iter-69b). One mode per pack (the pack lint refuses mixing). The
+  drift consumer: a rumor-mutated
   token rides the MUTATED token's figure — the blame lands where the
   drift put it, never where the sighting did.
 - **Watch rotation:** the pack-declared duty/rest posts swap their

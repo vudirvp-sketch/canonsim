@@ -325,7 +325,7 @@ def test_initial_projection_flattens_pack_state() -> None:
     state = initial_projection(pack.entities)
     assert state["pc_01"]["position"] == "loc_street"
     assert state["npc_guard_01"]["position"] == "loc_tavern"
-    assert state["npc_guard_01"]["relations.suspicion"] == 0
+    assert state["npc_guard_01"]["pair.pc_01.suspicion"] == 0
     assert state["npc_drunk_01"]["status.intoxication"] == 50
     assert state["purse_01"]["position"] == "loc_tavern"
     assert state["purse_01"]["carrier"] == "npc_guard_01"  # iter-2: carrier projected

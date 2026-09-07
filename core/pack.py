@@ -2554,6 +2554,7 @@ class _Lint:
                 "BRIEF_SPEC §6)"
             )
         where = "rules.json::brief"
+        npc_ids = _ids(self._data["entities.json"]["npcs"])
         blocks = config.get("blocks")
         _require(isinstance(blocks, Mapping), f"{where}: 'blocks' must be an object")
         _require(
@@ -2731,12 +2732,26 @@ class _Lint:
                     f"{prop[len('relations.'):]!r} is not one of the pack's "
                     f"relations axes {sorted(relation_axes)}",
                 )
+            elif prop.startswith("pair."):
+                # suspectaxis-2 (iter-69b): the directed-axis home — a marker
+                # may key `pair.<npc>.<axis>` (the wary marker followed the
+                # suspicion axis to its new address). The marker fires on the
+                # HOLDER of the pair record; the named npc is the figure.
+                parts = prop.split(".")
+                _require(
+                    len(parts) == 3 and parts[1] in npc_ids
+                    and parts[2] in relation_axes,
+                    f"{where_marker}: pair marker path {prop!r} must be "
+                    f"pair.<npc>.<axis> — the npc one of {sorted(npc_ids)}, "
+                    f"the axis one of {sorted(relation_axes)}",
+                )
             else:
                 _require(
                     prop == "crime_status",
                     f"{where_marker}: prop must be status.<axis>, "
-                    f"relations.<axis>, or crime_status (the closed marker "
-                    f"surface; grow it only with a real need, L13)",
+                    f"relations.<axis>, pair.<npc>.<axis>, or crime_status "
+                    f"(the closed marker surface; grow it only with a real "
+                    f"need, L13)",
                 )
             has_min, has_value = "min" in marker, "value" in marker
             _require(

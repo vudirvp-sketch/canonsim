@@ -281,8 +281,8 @@ def test_silent_theft_noticed_as_expectation_violation(tmp_path: Path) -> None:
     )
     # the violation feeds the crime reaction (suspicion 0→20) and spreads
     # to the relief watcher through the briefing (dedup: told once, partial)
-    assert sim.projection["npc_guard_01"]["relations.suspicion"] == 20
-    assert sim.projection["npc_guard_02"]["relations.suspicion"] == 20
+    assert sim.projection["npc_guard_01"]["pair.pc_01.suspicion"] == 20
+    assert sim.projection["npc_guard_02"]["pair.pc_01.suspicion"] == 20
     transfer = by_type(events, "knowledge_transfer")[0]
     spread = [r for r in transfer.knowledge if r.knows == "purse_missing"]
     assert spread[0].channel == "told" and spread[0].fidelity == "partial"

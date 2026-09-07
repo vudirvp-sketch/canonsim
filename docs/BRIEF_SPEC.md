@@ -153,11 +153,14 @@ per-present expansion).
   "status.fear", "min": 30, "marker": "afraid"}`) renders when the
   numeric prop meets the min; a **value row** (`{"prop":
   "crime_status", "value": "suspect", "marker": "suspect"}`)
-  renders on string equality — so `relations.suspicion` and
+  renders on string equality — so `pair.pc_01.suspicion` and
   `crime_status` rows are expressible pack data and the crime
   cascade's standing state reads on the cards (iter-17's finding;
-  the marker surface is the closed prop set `status.<axis>` /
-  `relations.<axis>` / `crime_status`, lint-checked); `carries=` the
+  suspectaxis-2 moved the wary marker to the directed-axis home: the
+  closed marker surface is `status.<axis>` / `relations.<axis>` /
+  `pair.<npc>.<axis>` / `crime_status`, lint-checked — a pair-path row
+  fires on the HOLDER of the pair record, the named npc is the figure);
+  `carries=` the
   visibly-carried items (an item carried by a present non-item folds
   into the carrier's segment — it is the carrier's surface, not a
   room fixture; loose items keep their own lines); promoted props as
@@ -426,7 +429,7 @@ brief's static text is mediator data, not chronicle grammar.
                           {"prop": "status.fatigue", "min": 30, "marker": "weary"},
                           {"prop": "status.fear", "min": 30, "marker": "afraid"},
                           {"prop": "status.injury", "min": 1, "marker": "hurt"},
-                          {"prop": "relations.suspicion", "min": 25, "marker": "wary"},
+                          {"prop": "pair.pc_01.suspicion", "min": 25, "marker": "wary"},
                           {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
                           {"prop": "crime_status", "value": "caught", "marker": "caught"}]},
   "directives": ["...", "..."],

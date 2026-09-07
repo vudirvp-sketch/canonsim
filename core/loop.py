@@ -550,20 +550,28 @@ class Simulator:
             ),
             provenance={"seed": self._seed, "cause_intent": intent.id},
         )
-        self._commit(draft)
+        record = self._commit(draft)
 
         for ignition in resolution.ignitions:
-            self._execute_ignition(ignition, entry.tick, intent.actor)
+            self._execute_ignition(
+                ignition, entry.tick, intent.actor, record.id
+            )
 
-    def _execute_ignition(self, ignition: Ignition, tick: int, actor: str) -> None:
+    def _execute_ignition(
+        self, ignition: Ignition, tick: int, actor: str, cause_id: str
+    ) -> None:
         """Run a transition ignition: emit the layer's events (cause
         chained), seed the smoke/burnout follow-ups, start the spread pass.
         A pass already running for the layer absorbs the new fire (the
         shared cause map gains the location) — one pass, one chance per
-        tick per spot, one intact cause chain (KI#16)."""
+        tick per spot, one intact cause chain (KI#16). The first layer
+        event chains to the ACTION that ignited (suspectaxis-2: the
+        commit door may run knowledge reactions between the action and
+        the ignition — the fire's cause is the igniting action, never a
+        bystander's suspicion reaction)."""
         layer_cfg = self._pack.rules["transitions"][ignition.layer]
         plan = ignite(self._pack, self._projection, tick, ignition, actor)
-        last_id = self._writer.last_id
+        last_id = cause_id
         started_id: str | None = None
         for draft in plan.drafts:
             record = self._commit(

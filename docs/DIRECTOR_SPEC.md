@@ -328,7 +328,9 @@ gap-law inversion are pinned in tests/test_arc_driver.py).
 
 ```
 entropy = sum(EFFECTIVE weight of unreleased, un-burned hooks)
-        + sum(relations.suspicion across NPCs with the axis)
+        + sum(the suspicion axis across NPCs that hold one, EITHER home
+          — the flat `relations.suspicion` or the per-target
+          `pair.<figure>.suspicion`; suspectaxis, one mode per pack)
         + count of burning <layer>.<spot> props across all locations
 ```
 

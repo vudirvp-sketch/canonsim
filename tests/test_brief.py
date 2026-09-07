@@ -1240,7 +1240,14 @@ def test_present_entities_cards_and_pair_tokens() -> None:
         "- npc_maid_01 (the serving maid)",
         "- oil_lamp_01 (the oil lamp)",
         "- ale_mug_01 (the mug of ale)",
+        # suspectaxis-2: the watchful NPCs' directed suspicion homes —
+        # four pair lines toward the player (guard_02 absent, his line
+        # needs both present), interleaved by the other-in-present order
+        "- pair npc_guard_01 -> pc_01 suspicion=0",
+        "- pair npc_barkeep_01 -> pc_01 suspicion=0",
+        "- pair npc_drunk_01 -> pc_01 suspicion=0",
         "- pair npc_drunk_01 -> npc_guard_01 fear=40",
+        "- pair npc_maid_01 -> pc_01 suspicion=0",
         "- pair npc_maid_01 -> npc_barkeep_01 trust=70",
     ]
 
@@ -1295,7 +1302,11 @@ def test_present_entities_caps_are_ranking_caps_never_drops() -> None:
         "- npc_guard_01 (Doren) carries=purse_01",
     ]
     assert body[3:] == [
+        "- pair npc_guard_01 -> pc_01 suspicion=0",
+        "- pair npc_barkeep_01 -> pc_01 suspicion=0",
+        "- pair npc_drunk_01 -> pc_01 suspicion=0",
         "- pair npc_drunk_01 -> npc_guard_01 fear=40",
+        "- pair npc_maid_01 -> pc_01 suspicion=0",
         "- pair npc_maid_01 -> npc_barkeep_01 trust=70",
     ]
     assert "[truncated:" not in text.split("## present_entities")[1].split("##")[0]
@@ -1471,9 +1482,10 @@ def test_pack_lint_catches_unknown_scene_line_field(tmp_path: Path) -> None:
 
 
 def _suspicion_event(eid: str, t: int, level: int) -> EventRecord:
-    """A suspicion_changed event in the ev_0007 shape: the watcher's
-    relations.suspicion moves and the suspect's crime_status flips on the
-    first crossing of the pack's suspect threshold."""
+    """A suspicion_changed event in the ev_0007 shape (the armed home):
+    the watcher's pair.pc_01.suspicion moves and the suspect's
+    crime_status flips on the first crossing of the pack's suspect
+    threshold."""
     return EventRecord(
         id=eid, t=t, type="suspicion_changed", actor="npc_guard_01",
         cause=None, target=PLAYER,
@@ -1481,7 +1493,7 @@ def _suspicion_event(eid: str, t: int, level: int) -> EventRecord:
                  "from": 0, "to": level},
         knowledge=(),
         state_changes=(
-            StateChange(entity="npc_guard_01", prop="relations.suspicion",
+            StateChange(entity="npc_guard_01", prop="pair.pc_01.suspicion",
                         from_=0, to_=level),
             StateChange(entity=PLAYER, prop="crime_status",
                         from_="unknown", to_="suspect"),
@@ -1493,11 +1505,11 @@ def _suspicion_event(eid: str, t: int, level: int) -> EventRecord:
 def test_card_markers_render_the_crime_cascade() -> None:
     """tune-2 (iter-17's finding): the suspicion axis and the crime_status
     flip were invisible through the brief — the marker table's axis lookup
-    was status-prefixed, so a relations.suspicion row was not even
-    expressible in pack data. The card_markers table is prop-path keyed
-    with threshold rows (numeric min) and value rows (string value): the
-    guard's card renders `wary` at suspicion >= 25 and the player's card
-    renders `suspect` on the status flip."""
+    was status-prefixed, so a pair-axis suspicion row was not even
+    expressible in pack data (suspectaxis-2 grew the pair prefix family).
+    The card_markers table is prop-path keyed with threshold rows (numeric
+    min) and value rows (string value): the guard's card renders `wary` at
+    suspicion >= 25 and the player's card renders `suspect` on the flip."""
     events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
     text = render_brief(assemble_brief(events, PACK))
     body = _blocks(text)["present_entities"]
@@ -1518,7 +1530,7 @@ def test_card_markers_threshold_row_respects_the_pack_number() -> None:
             outcome={"token": "trail_and_noise", "delta": 20, "from": 0, "to": 20},
             knowledge=(),
             state_changes=(
-                StateChange(entity="npc_guard_01", prop="relations.suspicion",
+                StateChange(entity="npc_guard_01", prop="pair.pc_01.suspicion",
                             from_=0, to_=20),
             ),
             hooks=(), importance="low", provenance={"seed": 42},

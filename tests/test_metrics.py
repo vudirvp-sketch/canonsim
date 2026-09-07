@@ -354,7 +354,7 @@ def test_metrics_report_combines_all_metrics() -> None:
         _ev("ev_0000", 0, "steal", PLAYER, None,
             hooks=("guard_suspicious_of_pc",),
             state_changes=(
-                StateChange("npc_guard_01", "relations.suspicion", 0, 25),
+                StateChange("npc_guard_01", "pair.pc_01.suspicion", 0, 25),
                 StateChange("pc_01", "position", "loc_street", "loc_tavern"),
             ),
             knowledge=(

@@ -80,8 +80,11 @@
       "role": "on-duty guard",
       "position": "loc_tavern",
       "status": {"fatigue": 10, "intoxication": 0, "fear": 0, "injury": 0},
-      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
-      "pair_relations": [{"with": "npc_guard_02", "trust": 75}],
+      "relations": {"reputation": 50, "trust": 50, "fear": 0},
+      "pair_relations": [
+        {"with": "npc_guard_02", "trust": 75},
+        {"with": "pc_01", "suspicion": 0}
+      ],
       "knowledge": [],
       "mood": "alert",
       "goal": "keep order",
@@ -94,12 +97,15 @@
       "role": "Doren's relief",
       "position": "loc_guardroom",
       "status": {"fatigue": 0, "intoxication": 0, "fear": 0, "injury": 0},
-      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
-      "pair_relations": [{"with": "npc_guard_01", "trust": 75}],
+      "relations": {"reputation": 50, "trust": 50, "fear": 0},
+      "pair_relations": [
+        {"with": "npc_guard_01", "trust": 75},
+        {"with": "pc_01", "suspicion": 0}
+      ],
       "knowledge": [],
       "mood": "resting",
       "goal": "keep order",
-      "notes": "receives Doren's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020)"
+      "notes": "receives Doren's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020); the pair.pc_01.suspicion home — the watchful NPCs' directed suspicion seat (suspectaxis-2, D-102)"
     },
     {
       "id": "npc_barkeep_01",
@@ -107,7 +113,8 @@
       "role": "tavern owner",
       "position": "loc_tavern",
       "status": {"fatigue": 10, "intoxication": 0, "fear": 0, "injury": 0},
-      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
+      "relations": {"reputation": 50, "trust": 50, "fear": 0},
+      "pair_relations": [{"with": "pc_01", "suspicion": 0}],
       "knowledge": [],
       "mood": "busy",
       "goal": "protect the property",
@@ -120,8 +127,11 @@
       "role": "witness by accident",
       "position": "loc_tavern",
       "status": {"fatigue": 0, "intoxication": 50, "fear": 0, "injury": 0},
-      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
-      "pair_relations": [{"with": "npc_guard_01", "fear": 40}],
+      "relations": {"reputation": 50, "trust": 50, "fear": 0},
+      "pair_relations": [
+        {"with": "npc_guard_01", "fear": 40},
+        {"with": "pc_01", "suspicion": 0}
+      ],
       "knowledge": [],
       "mood": "merry",
       "goal": "get ale",
@@ -133,8 +143,11 @@
       "role": "moves around, sees much",
       "position": "loc_tavern",
       "status": {"fatigue": 20, "intoxication": 0, "fear": 0, "injury": 0},
-      "relations": {"reputation": 50, "suspicion": 0, "trust": 50, "fear": 0},
-      "pair_relations": [{"with": "npc_barkeep_01", "trust": 70}],
+      "relations": {"reputation": 50, "trust": 50, "fear": 0},
+      "pair_relations": [
+        {"with": "npc_barkeep_01", "trust": 70},
+        {"with": "pc_01", "suspicion": 0}
+      ],
       "knowledge": [],
       "mood": "tired",
       "goal": "finish the shift",

@@ -408,14 +408,16 @@
       "heard_noise": 10,
       "rumor_about_figure": 5,
       "inferred_purse_missing": 20,
-      "papers_unsatisfactory": 25
+      "papers_unsatisfactory": 25,
+      "witnessed_arson": 30
     },
     "suspicion_from_knowledge": {
-      "figure_reaching_for_purse": "witnessed_steal_failure",
-      "noise_by_the_bar": "heard_noise",
-      "figure_at_back_door_last_night": "rumor_about_figure",
-      "purse_missing": "inferred_purse_missing",
-      "papers_unsatisfactory": "papers_unsatisfactory"
+      "figure_reaching_for_purse": {"source": "witnessed_steal_failure", "figure": "pc_01"},
+      "noise_by_the_bar": {"source": "heard_noise", "figure": "pc_01"},
+      "figure_at_back_door_last_night": {"source": "rumor_about_figure", "figure": "pc_01"},
+      "purse_missing": {"source": "inferred_purse_missing", "figure": "pc_01"},
+      "papers_unsatisfactory": {"source": "papers_unsatisfactory", "figure": "pc_01"},
+      "figure_starting_fire": {"source": "witnessed_arson", "figure": "pc_01"}
     },
     "arrest": {
       "requires_suspicion": 75,
@@ -426,7 +428,7 @@
       "caught_value": "caught",
       "caught_irreversible": true
     },
-    "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; iter-4 resolves it via arrest.resolution_check evasion vs pursuit — caught_value flips the suspect's crime_status irreversibly, T4). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3; arrest resolution added iter-4"
+    "notes": "Watch change = knowledge-transfer event between watchers (D-006); rotations fire when the clock crosses a tick in watch_rotation_ticks — the duty/rest posts swap, expectations are checked (rules.expectations), then the outgoing holder briefs the incoming one (one fidelity step down, dedup by token). The crime system reacts to KNOWLEDGE, not to actions: a novel crime-mapped token moves the knower's suspicion axis (crime_watch.suspicion_axis) by suspicion_sources delta; the crime-status flip (entities crime_status → status_suspect_value) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape on the reacting system. Novel tokens only: repeated evidence with the same token never re-escalates (escalation is the pack's token vocabulary). Crossing arrest.requires_suspicion co-located with the suspect emits the arrest attempt (a fact; iter-4 resolves it via arrest.resolution_check evasion vs pursuit — caught_value flips the suspect's crime_status irreversibly, T4). figure_at_back_door_last_night maps for the §3 drunkard rumor (autonomous telling arrives iter-4). Landed iter-3; arrest resolution added iter-4. suspectaxis-2 (iter-69b, D-102): the per-target mode ARMED — every entry object-shaped {source, figure}, the knower's axis at pair.<figure>.suspicion (the P2a home, seeded on the watchful NPCs in entities.json — the flat relations.suspicion seeding dropped as dead vocabulary), the flip and the arrest aimed at the figure; figure_starting_fire gains its LIVE source (witnessed_arson 30 — the drift family's fire sibling now reacts wherever acquired: the direct sighting escalates the room, a drifted telling blames the token's figure under the arson delta — the teeth, the thief blamed for the arson through the mutated retelling). The pack's flat-mode readers re-declared on the pair home: the two document-check triggers (the prop leaf, pair.pc_01.suspicion at_least 50 — the band's number unchanged), the vigil's escalation modifiers, the crowd reaction's state prop, the brief's wary card marker"
   },
   "expectations": {
     "check_at": "watch_rotation",
@@ -562,9 +564,9 @@
             {
               "add": 2,
               "when": {
-                "kind": "threshold",
-                "target_npc": "npc_guard_01",
-                "axis": "suspicion",
+                "kind": "prop",
+                "of": "npc_guard_01",
+                "path": "pair.pc_01.suspicion",
                 "value": 50,
                 "comparator": "at_least"
               }
@@ -598,9 +600,9 @@
                 {
                   "add": 2,
                   "when": {
-                    "kind": "threshold",
-                    "target_npc": "npc_guard_01",
-                    "axis": "suspicion",
+                    "kind": "prop",
+                    "of": "npc_guard_01",
+                    "path": "pair.pc_01.suspicion",
                     "value": 50,
                     "comparator": "at_least"
                   }
@@ -615,7 +617,7 @@
             "notes": "the fixed stare — the watcher plants himself: the option's weight escalates in the document-check band (base 1 + 2 when suspicion at_least 50), so the release CHOICE hardens with the world while the hook's own tension escalates in parallel (two layers, one band, one number each)"
           }
         ],
-        "notes": "the watcher grows wary — a low-key vigil; seeded on a steal failure (hooks.failure in actions.json steal). drama-1 (D-069): the weight is the multiplier shape — the vigil doubles its tension once the watcher's suspicion reaches the document-check band (base 2 + 2 when suspicion at_least 50, the escalation a single flat int cannot express); first_time_only — the vigil releases at most once per run, a second failure never doubles the watch. DIR-4: a SOCIAL-channel nudge — its quiet gate is 2 + global suspicion < 5, so the vigil can land while threat tension holds. drama-2 (D-070): the option layer — below the band the glance wins the 1-vs-1 tie by declaration order; in the band the stare's escalated weight (3) wins. The choice is a pure read of the world, never a draw"
+        "notes": "the watcher grows wary — a low-key vigil; seeded on a steal failure (hooks.failure in actions.json steal). drama-1 (D-069): the weight is the multiplier shape — the vigil doubles its tension once the watcher's suspicion reaches the document-check band (base 2 + 2 when suspicion at_least 50, the escalation a single flat int cannot express); first_time_only — the vigil releases at most once per run, a second failure never doubles the watch. suspectaxis-2 (iter-69b): the escalation `when` re-declared on the prop leaf — the watcher's pair.pc_01.suspicion home, the band's number unchanged. DIR-4: a SOCIAL-channel nudge — its quiet gate is 2 + global suspicion < 5, so the vigil can land while threat tension holds. drama-2 (D-070): the option layer — below the band the glance wins the 1-vs-1 tie by declaration order; in the band the stare's escalated weight (3) wins. The choice is a pure read of the world, never a draw"
       },
       "possible_document_check": {
         "weight": 3,
@@ -626,9 +628,9 @@
           "target": "pc_01"
         },
         "trigger": {
-          "kind": "threshold",
-          "target_npc": "npc_guard_01",
-          "axis": "suspicion",
+          "kind": "prop",
+          "of": "npc_guard_01",
+          "path": "pair.pc_01.suspicion",
           "value": 50,
           "comparator": "at_least"
         },
@@ -654,7 +656,7 @@
             "notes": "the confrontation gate (drama-2's deferred-release law): the watcher on the post AND the stranger in the room — a closed option means the hook WAITS (no door attempt, no budget, no PEAK_CLIMAX mark); the gate's place leaf names the duty post (crime_watch.rotation.duty_post's value — the pack's setting data)"
           }
         ],
-        "notes": "the document-check deferred consequence, the seeded watcher's half (MVP_SCOPE §11; the single owner of the band number since iter-4a — the relief twin declares the same 50 on its own axis, the pack's balance). iter-43 (D-072): the stub wait becomes the real action (the payload target names the pack's player). The trigger stays the plain threshold leaf — the CAUSAL band; the confrontation world rides the option gate: the release fires only when both pass (the deferred-release law — the door never sees a world-impossible attempt from this hook on the canonical timeline: Doren rotates off the post the beat his band opens, his half waits). climax: the DIR-3 flag live — the boss path (PEAK-end, entropy at the third layer) also consults the option gate (a closed boss does not mark PEAK_CLIMAX, D-070); the explicit trigger never consults the clock (D-005). first_time_only: the Wesnoth fire-only-once law — one check per watcher per run, a talked-down verdict never re-rolls. DIR-4: THREAT-channel — the weight 3 meets its own channel floor 3, the quiet path self-blocks (an escalation never spawns because the world is boring)"
+        "notes": "the document-check deferred consequence, the seeded watcher's half (MVP_SCOPE §11; the single owner of the band number since iter-4a — the relief twin declares the same 50 on its own axis, the pack's balance). iter-43 (D-072): the stub wait becomes the real action (the payload target names the pack's player). The trigger stays the CAUSAL band; suspectaxis-2 (iter-69b) re-declares it on the prop leaf — the watcher's pair.pc_01.suspicion home, the generalized predicate speaking what the threshold leaf read flat; the confrontation world rides the option gate: the release fires only when both pass (the deferred-release law — the door never sees a world-impossible attempt from this hook on the canonical timeline: Doren rotates off the post the beat his band opens, his half waits). climax: the DIR-3 flag live — the boss path (PEAK-end, entropy at the third layer) also consults the option gate (a closed boss does not mark PEAK_CLIMAX, D-070); the explicit trigger never consults the clock (D-005). first_time_only: the Wesnoth fire-only-once law — one check per watcher per run, a talked-down verdict never re-rolls. DIR-4: THREAT-channel — the weight 3 meets its own channel floor 3, the quiet path self-blocks (an escalation never spawns because the world is boring)"
       },
       "possible_document_check_relief": {
         "weight": 3,
@@ -665,9 +667,9 @@
           "target": "pc_01"
         },
         "trigger": {
-          "kind": "threshold",
-          "target_npc": "npc_guard_02",
-          "axis": "suspicion",
+          "kind": "prop",
+          "of": "npc_guard_02",
+          "path": "pair.pc_01.suspicion",
           "value": 50,
           "comparator": "at_least"
         },
@@ -748,10 +750,10 @@
         "scope": "witnesses",
         "event": "crowd_wary",
         "state": {
-          "prop": "relations.suspicion",
+          "prop": "pair.pc_01.suspicion",
           "add": 5
         },
-        "notes": "the crowd-witness reaction (drama-3, D-071): every NPC who witnessed the public document check grows warier of the stranger it targeted — the crowd-reaction layer the token-keyed crime system does not cover (no knowledge token maps a check; the room's papers_demanded_of sighting is deliberately un-mapped crowd memory; the scope reads the check's own witnesses). LIVE since iter-43 (D-072): the action emits the event, the entry fires on every committed run and live session where the check lands — cause-chained to the check, the reacting set = the witnesses with a suspicion home (the checked stranger is dropped — no home, the suspicion law). The entry keys BOTH branch types (the table's second key below) — a public challenge unsettles the room whether the papers satisfied or not. The alarm panic echo rides the table's own alarm_raised key since iter-48 (D-077) — the through-the-walls law, landed with its corpus regen"
+        "notes": "the crowd-witness reaction (drama-3, D-071): every NPC who witnessed the public document check grows warier of the stranger it targeted — the crowd-reaction layer the token-keyed crime system does not cover (no knowledge token maps a check; the room's papers_demanded_of sighting is deliberately un-mapped crowd memory; the scope reads the check's own witnesses). LIVE since iter-43 (D-072): the action emits the event, the entry fires on every committed run and live session where the check lands — cause-chained to the check, the reacting set = the witnesses with a suspicion home (the checked stranger is dropped — no home, the suspicion law). The entry keys BOTH branch types (the table's second key below) — a public challenge unsettles the room whether the papers satisfied or not. suspectaxis-2 (iter-69b): the state prop re-declared on the pair home — the crowd's wariness of the checked stranger rides the crime axis's own address, the flat relations.suspicion seeding dropped as dead vocabulary. The alarm panic echo rides the table's own alarm_raised key since iter-48 (D-077) — the through-the-walls law, landed with its corpus regen"
       }
     ],
     "document_check_failed": [
@@ -759,7 +761,7 @@
         "scope": "witnesses",
         "event": "crowd_wary",
         "state": {
-          "prop": "relations.suspicion",
+          "prop": "pair.pc_01.suspicion",
           "add": 5
         },
         "notes": "the talked-down branch's own key — the same crowd reaction (the public challenge happened; the answer satisfying the watcher does not un-see it)"
@@ -1119,7 +1121,7 @@
           "marker": "hurt"
         },
         {
-          "prop": "relations.suspicion",
+          "prop": "pair.pc_01.suspicion",
           "min": 25,
           "marker": "wary"
         },

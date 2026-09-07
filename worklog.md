@@ -16,6 +16,25 @@
 
 
 ---
+iter-69b · 2026-09-07 · suspectaxis-2 — the committed pack's
+per-target ARMING (D-101's arming row, D-102; 25 files — the pack
+arming + its measured corpus price + the doc sync are one mechanism
+family, the iter-60..69 scope pattern)
+- rules.json the object mapping (all figures pc_01) + witnessed_arson
+  30 + the pair-home re-declarations (triggers, vigil modifiers, crowd
+  prop, wary marker); entities.json the pair homes, the flat drop;
+  core/loop.py the ignition cause re-anchored to the action; core/pack.py
+  the marker lint's pair.<npc>.<axis> family.
+- Corpus price measured FIRST both arms, paid in-landing: the D-101
+  projection (8 claims) undercounted — the true ledger + the
+  arson-case stream shifts (the witnessed-arson reactions, the seed-93
+  arrest family) via the fixed-point re-distill (31 claim edits, the
+  iter-50 idempotency law). M1/M2 identical; day1 11/11 diverged, the
+  T1 golden + theft_and_arson byte-identical. 1239+1 green, ruff clean.
+  KI#76 opened+closed (the DIRECTOR_SPEC §4 formula). TASKS
+  suspectaxis-2 done; the lance's remainder: beliefwire-2 + bg-7.
+  iter-63 evicted (verified in this edit); 10 after.
+---
 iter-69 · 2026-09-07 · suspectaxis — the per-target suspicion
 mechanics, declarative-only (the v0.2 refinement family's fifth
 segment, D-101; 4 runtime files + the suite + the doc sync — one
@@ -181,28 +200,6 @@ resolved; 10 files — over the soft limit: tool + fence + extra + tests
   done + scav-1 deferred (TASKS 626 — over the 600 cap per the §6.1
   phase-ledger pattern, the collapse at the phase-4 gate, the iter-63
   precedent at 606); AGENT_NAVIGATION; iter-54 evicted; 10 after.
----
-iter-63 · 2026-09-06 · blind-1 — the blind-NPC leak suite's phase-4
-extension (phase 4; the STATUS fork leg-4/blind-1 resolved by law:
-leg-4 names DuckDB = the §8 dependency fence (the owner's explicit
-call), blind-1 the exit criterion's instrument, dependency-free —
-the dir-2 precedent)
-- tests/test_blind.py (+26, the new file): the leak predicates
-  (pure test-side folds — the multiset delta law, the record-quad /
-  trait-provenance fact laws, the retrieval-row law) + four layers:
-  the every-prefix × every-knower 10-seed + golden sweep, the
-  adversarial omniscient-query retrieval sweep + the None probe,
-  the live drain's anchor-addressed call check (composition +
-  leak law), the teeth family (planted leaks flagged).
-- docs: TEST_PLAN §1.3 (the T3 extension's contract owner) + the T3
-  row pointer; TASKS blind-1 done (606 — over the 600 cap per the
-  §6.1 phase-ledger pattern, the collapse at the phase gate, the
-  iter-62 precedent at 602); D-092 into the phase family (cap 30
-  held); AGENT_NAVIGATION tests row; STATUS Next flip (leg-4
-  owner-gated on DuckDB).
-- 1141→1167 green, ruff clean; zero leaks measured, the suite ~3s.
-  iter-53 evicted (verified in this edit); 10 entries after. KI#72
-  deleted per §5 (closed iter-61, two iterations past).
 ---
 (end of log — cap 10; pre-trim history lives in git)
 

@@ -63,16 +63,15 @@
   price ZERO by construction + byte-measured; the blame surfaces live
   on crafted packs, the 68b guard-talk geometry reused. Detail:
   tests/test_suspectaxis.py).
-- `suspectaxis-2` · the pack arming — the committed pack's per-target
-  switch: the object-shaped mapping (both crime sightings + the noise
-  mapped to their figures, `figure_starting_fire` gaining a LIVE
-  source — the drift's teeth on the committed scenario), the pair
-  homes seeded on the watchful NPCs, the flat `relations.suspicion`
-  seeding dropped (dead vocabulary), the director hook trigger
-  re-declared on the `prop` leaf — the corpus price measured FIRST
-  (the 8 narrator `relations.suspicion` claims re-pinned to the pair
-  path, the M1/M2 arms re-measured, the day1 divergence documented) —
-  todo.
+- `suspectaxis-2` · the pack arming — done (iter-69b, D-102): the
+  committed pack's per-target switch, every flat-mode pack reader
+  re-declared on the pair home, `figure_starting_fire` live
+  (witnessed_arson 30). The corpus price measured FIRST both arms and
+  paid in the same landing: the 8 state claims re-pinned + the
+  arson-action cases' stream shifts (the witnessed-arson reactions, the
+  seed-93 arrest family) through the fixed-point re-distill — 31 claim
+  edits, the projection's undercount recorded in D-102. Detail:
+  tests/test_suspectaxis.py.
 - `testproto` · the intermediate-build LLM-integration test protocol —
   done (iter-68, D-098 — research, doc-only): the fork closed by
   decomposition into the three-layer spiral (contract simulacrum /

@@ -96,7 +96,12 @@ knower's axis in ONE of two pack-declared homes — the flat v0.1
 the suspect implicit: the player) or the per-target
 `pair.<figure>.<axis>` (object-shaped `{source, figure}` — the token
 names its suspect; the status flip and the arrest aim at the figure).
-One mode per pack; the figure must be an npc of the same pack.
+One mode per pack; the figure must be an npc of the same pack. Since
+iter-69b (suspectaxis-2) the committed pack runs the per-target mode:
+the pair homes are seeded on the watchful NPCs, the flat
+`relations.suspicion` seeding is dropped, and the pack's flat-mode
+readers (the director triggers, the crowd reaction, the card markers)
+are re-declared on the pair home — pack data, the number unchanged.
 
 ## 5. `hooks`
 
@@ -148,7 +153,7 @@ provenance joins the same field family when the LLM circuit arrives (phase 1+).
     { "who": "npc_barkeep_01", "channel": "heard", "fidelity": "vague",
       "knows": "noise_by_the_bar", "at": 412, "source": "ev_0007" } ],
   "state_changes": [
-    { "entity": "npc_guard_01", "prop": "relations.suspicion", "from": 0, "to": 25 },
+    { "entity": "npc_guard_01", "prop": "pair.pc_01.suspicion", "from": 0, "to": 25 },
     { "entity": "pc_01", "prop": "crime_status", "from": "unknown", "to": "suspect" } ],
   "hooks": ["guard_suspicious_of_pc", "possible_document_check"],
   "importance": "medium",

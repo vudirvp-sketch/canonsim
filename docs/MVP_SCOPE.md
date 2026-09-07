@@ -205,7 +205,7 @@ Full contract: `docs/EVENT_SCHEMA.md`. Canonical example (`ev_0007`):
     { "who": "npc_barkeep_01", "channel": "heard", "fidelity": "vague",
       "knows": "noise_by_the_bar", "at": 412, "source": "ev_0007" } ],
   "state_changes": [
-    { "entity": "npc_guard_01", "prop": "relations.suspicion", "from": 0, "to": 25 },
+    { "entity": "npc_guard_01", "prop": "pair.pc_01.suspicion", "from": 0, "to": 25 },
     { "entity": "pc_01", "prop": "crime_status", "from": "unknown", "to": "suspect" } ],
   "hooks": ["guard_suspicious_of_pc", "possible_document_check"],
   "importance": "medium",

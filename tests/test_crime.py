@@ -83,7 +83,7 @@ def test_steal_failure_reactions_match_ev_0007(tmp_path: Path) -> None:
     }
     assert guard.state_changes == (
         guard.state_changes[0].__class__(  # same shape, explicit below
-            entity="npc_guard_01", prop="relations.suspicion", from_=0, to_=25),
+            entity="npc_guard_01", prop="pair.pc_01.suspicion", from_=0, to_=25),
         guard.state_changes[0].__class__(
             entity="pc_01", prop="crime_status", from_="unknown", to_="suspect"),
     )
@@ -95,8 +95,8 @@ def test_steal_failure_reactions_match_ev_0007(tmp_path: Path) -> None:
     assert sim.projection["pc_01"]["crime_status"] == "suspect"
     assert all(e.knowledge == () for e in reactions)
     # characters know different things and react differently (the AC)
-    assert sim.projection["npc_guard_01"]["relations.suspicion"] == 25
-    assert sim.projection["npc_barkeep_01"]["relations.suspicion"] == 10
+    assert sim.projection["npc_guard_01"]["pair.pc_01.suspicion"] == 25
+    assert sim.projection["npc_barkeep_01"]["pair.pc_01.suspicion"] == 10
 
 
 def test_repeated_evidence_never_re_escalates(tmp_path: Path) -> None:
@@ -124,8 +124,8 @@ def test_repeated_evidence_never_re_escalates(tmp_path: Path) -> None:
     # two partial failures, same tokens: only the FIRST acquisition reacts
     assert len(by_type(events, "pickpocket_failed")) == 2
     assert len(by_type(events, "suspicion_changed")) == 4  # from attempt one only
-    assert sim.projection["npc_guard_01"]["relations.suspicion"] == 25
-    assert sim.projection["npc_barkeep_01"]["relations.suspicion"] == 10
+    assert sim.projection["npc_guard_01"]["pair.pc_01.suspicion"] == 25
+    assert sim.projection["npc_barkeep_01"]["pair.pc_01.suspicion"] == 10
 
 
 def test_player_knowledge_moves_no_suspicion(tmp_path: Path) -> None:
@@ -212,7 +212,7 @@ def test_rotation_swaps_posts_and_briefs_the_relief(tmp_path: Path) -> None:
     relief = next(e for e in by_type(events, "suspicion_changed")
                   if e.actor == "npc_guard_02")
     assert relief.outcome["delta"] == 25 and relief.cause == transfer[0].id
-    assert sim.projection["npc_guard_02"]["relations.suspicion"] == 25
+    assert sim.projection["npc_guard_02"]["pair.pc_01.suspicion"] == 25
     # the second rotation (tick 1080, crossed by nothing here) never ran
     assert len(by_type(events, "watch_change")) == 1
 
@@ -309,7 +309,7 @@ def test_caught_suspect_never_downgrades_to_suspect() -> None:
         "pc_01": {"crime_status": "caught", "position": "loc_tavern"},
         "npc_guard_02": {
             "position": "loc_tavern",
-            "relations.suspicion": 0,  # a fresh watcher, never reacted
+            "pair.pc_01.suspicion": 0,  # a fresh watcher, never reacted
         },
     }
     record = EventRecord(

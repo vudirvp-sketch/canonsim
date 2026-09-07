@@ -1,10 +1,13 @@
-"""iter-69 acceptance — suspectaxis (the v0.2 refinement family's fifth
-segment, D-095/D-101/TASKS: "per-target suspicion: the pair axis + the
-parameterized suspect_id" — the drift teeth's first CONSUMER). Mechanics
-landed declarative-only: the committed pack keeps the flat v0.1 mapping
-(the string shape), so the committed bytes are the v0.1 bytes by
-construction — the arming (the committed pack's per-target switch + the
-measured corpus price) is suspectaxis-2's row, the 68a→68b pattern.
+"""iter-69/69b acceptance — suspectaxis (the v0.2 refinement family's
+fifth segment, D-095/D-101/TASKS: "per-target suspicion: the pair axis +
+the parameterized suspect_id" — the drift teeth's first CONSUMER), plus
+suspectaxis-2 (iter-69b, D-102): the committed pack's per-target ARMING —
+every mapping entry object-shaped `{source, figure}`, the pair homes
+seeded on the watchful NPCs, the flat `relations.suspicion` vocabulary
+dropped, `figure_starting_fire` gaining its LIVE source (witnessed_arson
+— the fire sighting escalates the room, a drifted telling blames the
+token's figure). The flat v0.1 mode lives on CRAFTED packs — the mode
+law is symmetric, either shape loads, one mode per pack.
 
 The laws pinned here:
 
@@ -13,8 +16,9 @@ The laws pinned here:
   `relations.<axis>`, the suspect hard-wired to the player) or the
   per-target object (token → `{source, figure}`; the knower's axis
   `pair.<figure>.<axis>`, the status flip and the arrest aimed at the
-  figure). One mode per pack — the lint refuses mixing; a flat mapping
-  keeps the v0.1 event shapes verbatim (the zero-price construction).
+  figure). One mode per pack — the lint refuses mixing; either shape
+  is a loadable pack (the armed committed pack runs the per-target
+  mode, the crafted flat twin keeps the v0.1 event shapes).
 - **The pair-home law:** the reaction's permission is the SEEDED pair
   axis (the P2a home — the "no suspicion home" law translated from the
   flat seed); a knower without the home never reacts, the player
@@ -42,6 +46,7 @@ from typing import Any
 import pytest
 
 from core.director import _global_suspicion
+from core.fold import initial_projection
 from core.log import read_log
 from core.loop import Simulator
 from core.pack import Pack, PackError, load_pack
@@ -73,14 +78,18 @@ def targeted_pack(
     pair_seeds: dict[str, dict[str, int]] | None = None,
     status_seeds: dict[str, str] | None = None,
     extra_sources: dict[str, int] | None = None,
+    strip_pc_homes: bool = False,
 ) -> Pack:
-    """A committed-pack copy switched to the per-target mode: the
-    mapping re-shaped (token → {source, figure}), the named pair homes
-    seeded (`pair.<with>.<axis>` on the holder), optional crime_status
-    seeds, optional new suspicion sources. The drift family and every
-    check number ride the committed pack verbatim — no draw shifts, the
-    68b seed geometry replicates (the mechanism-proof pattern,
-    test_crime.py's tuned_pack)."""
+    """A committed-pack copy with the mapping swapped: token →
+    {source, figure} (per-target) or token → source (the flat v0.1 twin
+    since the arming), the named pair homes seeded
+    (`pair.<with>.<axis>` on the holder), optional crime_status seeds,
+    optional new suspicion sources. `strip_pc_homes` removes the
+    committed pair.pc_01.suspicion homes first — the pre-arming entity
+    shape, for the home-law tests that need knowers WITHOUT the home.
+    The drift family and every check number ride the committed pack
+    verbatim — no draw shifts, the 68b seed geometry replicates (the
+    mechanism-proof pattern, test_crime.py's tuned_pack)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -90,6 +99,15 @@ def targeted_pack(
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
     entities = json.loads((target / "entities.json").read_text(encoding="utf-8"))
     for npc in entities["npcs"]:
+        if strip_pc_homes:
+            kept = [
+                pair for pair in npc.get("pair_relations", ())
+                if not (pair.get("with") == PLAYER and "suspicion" in pair)
+            ]
+            if kept:
+                npc["pair_relations"] = kept
+            else:
+                npc.pop("pair_relations", None)
         for other, value in (pair_seeds or {}).get(npc["id"], {}).items():
             npc.setdefault("pair_relations", []).append(
                 {"with": other, "suspicion": value}
@@ -132,29 +150,73 @@ def suspicion_changes(events: list[Any]) -> list[Any]:
     return out
 
 
-# -- the zero-price construction (the declarative-only law) --------------------
+# -- the committed arming (suspectaxis-2, iter-69b) ----------------------------
 
 
-def test_the_committed_pack_stays_flat() -> None:
-    """The declarative-only pin: every committed mapping entry is the
-    v0.1 string shape — the flat mode, the suspect hard-wired to the
-    player. The per-target shape is live on crafted packs only until
-    suspectaxis-2 arms the committed pack (the 68a→68b pattern: the
-    mechanics land, the arming is its own measured row)."""
+FLAT_V01_MAPPING = {
+    "figure_reaching_for_purse": "witnessed_steal_failure",
+    "noise_by_the_bar": "heard_noise",
+    "figure_at_back_door_last_night": "rumor_about_figure",
+    "purse_missing": "inferred_purse_missing",
+    "papers_unsatisfactory": "papers_unsatisfactory",
+}
+
+
+def test_the_committed_pack_is_per_target() -> None:
+    """The arming pin (iter-69b): every committed mapping entry is the
+    object shape — the token names its suspect (all figures the player,
+    the walkthrough's own culprit), and `figure_starting_fire` carries
+    its LIVE source (witnessed_arson — the drift family's fire sibling
+    reacts wherever acquired, the teeth armed on the committed
+    vocabulary). The pair homes are seeded on the watchful NPCs and the
+    flat vocabulary is GONE: no `relations.suspicion` prop exists
+    anywhere in the initial projection (dead vocabulary dropped, not
+    merely unused)."""
     mapping = PACK.rules["crime_watch"]["suspicion_from_knowledge"]
     assert mapping, "the committed pack must map suspicion tokens"
-    assert all(isinstance(spec, str) for spec in mapping.values())
+    assert all(isinstance(spec, dict) for spec in mapping.values())
+    for spec in mapping.values():
+        assert set(spec) == {"source", "figure"}
+        assert spec["figure"] == PLAYER
+    assert mapping[SIBLING]["source"] == "witnessed_arson"
+    assert PACK.rules["crime_watch"]["suspicion_sources"]["witnessed_arson"] == 30
+    projection = initial_projection(PACK.entities)
+    watchful = {
+        "npc_guard_01", "npc_guard_02", "npc_barkeep_01",
+        "npc_drunk_01", "npc_maid_01",
+    }
+    for npc in watchful:
+        assert projection[npc][f"pair.{PLAYER}.suspicion"] == 0
+    for npc in ("pc_01", "npc_market_crowd_01"):
+        assert f"pair.{PLAYER}.suspicion" not in projection.get(npc, {})
+    for props in projection.values():
+        assert "relations.suspicion" not in props
 
 
 def test_flat_mode_events_are_the_v01_shapes(tmp_path: Path) -> None:
-    """The zero-price pin's live half: the committed (flat) pack over the
-    68b guard-talk geometry emits the v0.1 event shapes verbatim — the
-    guard's reaction lands on `relations.suspicion`, the event targets
-    the player, the outcome carries exactly the v0.1 fields, and no
-    pair-axis suspicion state change exists anywhere in the log (the
-    mechanics changed nothing for the committed mode; test_crime.py's
-    suite pins the same contract on the other geometries)."""
-    events, _ = run(tmp_path, PACK, 2, GUARD_TALK, "flat.jsonl")
+    """The mode law's flat half, CRAFTED since the arming (the 68b
+    inversion): a v0.1-shaped twin — the string mapping, the flat
+    relations.suspicion homes re-seeded, the pair homes stripped — over
+    the 68b guard-talk geometry emits the v0.1 event shapes verbatim:
+    the guard's reaction lands on `relations.suspicion`, the event
+    targets the player, the outcome carries exactly the v0.1 fields,
+    and no pair-axis suspicion state change exists anywhere in the log
+    (either mode is a loadable pack; test_crime.py's suite pins the
+    committed arm's shapes on the same geometry)."""
+    pack = targeted_pack(
+        tmp_path, "flat_v01",
+        mapping=dict(FLAT_V01_MAPPING),
+        strip_pc_homes=True,
+    )
+    # the flat twin re-seeds the flat homes (the pre-arming entities)
+    entities_path = tmp_path / "flat_v01" / "entities.json"
+    entities = json.loads(entities_path.read_text(encoding="utf-8"))
+    for npc in entities["npcs"]:
+        if npc["id"] != PLAYER:
+            npc.setdefault("relations", {})["suspicion"] = 0
+    entities_path.write_text(json.dumps(entities, indent=2), encoding="utf-8")
+    pack = load_pack(tmp_path / "flat_v01")
+    events, _ = run(tmp_path, pack, 2, GUARD_TALK, "flat.jsonl")
     reactions = by_type(events, "suspicion_changed")
     assert reactions, "the failed steal must move the guard's suspicion"
     for event in reactions:
@@ -233,6 +295,7 @@ def test_a_knower_without_the_pair_home_never_reacts(tmp_path: Path) -> None:
         pair_seeds={GUARD: {PLAYER: 0}},
         status_seeds={BARKEEP: "unknown"},
         extra_sources=WITNESSED_ARSON,
+        strip_pc_homes=True,  # the pre-arming entities: only the guard homed
     )
     events, _ = run(tmp_path, pack, 2, GUARD_TALK, "homeless.jsonl")
     telling = by_type(events, "rumor_told")[0]
@@ -371,11 +434,10 @@ def test_the_lint_refuses_mode_mixing(tmp_path: Path) -> None:
     """One mode per pack: a string entry beside an object entry refuses
     to load (the flat and per-target homes must never both move — the
     director's aggregate would double-count, the fold would hold two
-    homes for one fact)."""
+    homes for one fact). Since the arming the committed entries are ALL
+    objects, so the probe reverts one entry to the v0.1 string shape."""
     def mutate(crime: dict[str, Any]) -> None:
-        crime["suspicion_from_knowledge"][SOURCE] = {
-            "source": "witnessed_steal_failure", "figure": PLAYER,
-        }
+        crime["suspicion_from_knowledge"][SOURCE] = "witnessed_steal_failure"
 
     with pytest.raises(PackError, match="mixes the flat v0.1 shape"):
         load_pack(_mutate_committed(tmp_path, "mixed", mutate))

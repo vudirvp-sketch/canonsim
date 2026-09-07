@@ -127,11 +127,14 @@ def test_knowledge_enums_match_event_schema() -> None:
 
 def test_suspicion_thresholds_escalate() -> None:
     # status flip (relations thresholds) < document check (the director
-    # hook's threshold trigger — single owner since the iter-4a cleanup)
+    # hook's trigger — single owner since the iter-4a cleanup; suspectaxis-2
+    # re-declared it on the prop leaf, the pair home, the number unchanged)
     # < arrest (crime_watch.arrest)
     thresholds = rules()["relations"]["suspicion_thresholds"]
     doc_check = rules()["director"]["hooks"]["possible_document_check"]["trigger"]
-    assert doc_check["kind"] == "threshold" and doc_check["axis"] == "suspicion"
+    assert doc_check["kind"] == "prop" and doc_check["of"] == "npc_guard_01"
+    assert doc_check["path"] == "pair.pc_01.suspicion"
+    assert doc_check["comparator"] == "at_least"
     arrest_at = rules()["crime_watch"]["arrest"]["requires_suspicion"]
     assert thresholds["status_suspect_at"] < doc_check["value"]
     assert doc_check["value"] < arrest_at

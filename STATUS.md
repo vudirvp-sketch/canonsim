@@ -1,56 +1,72 @@
 # STATUS — canonsim
 
-Iteration: iter-69 (`iter-69-suspectaxis` — the PER-TARGET SUSPICION
-MECHANICS, D-095's fifth segment / D-101 / TASKS: the drift teeth's
-first CONSUMER, mechanics declarative-only — the pack arming is
-suspectaxis-2's row, the 68a→68b pattern; the owner's "продолжай
-работу по планам" call, STATUS Next's named next) ·
+Iteration: iter-69b (`iter-69b-suspectaxis-2` — THE PACK ARMING, D-101's
+recorded arming row / D-102 / TASKS: the committed pack's per-target
+switch, the 68a→68b pattern; the owner's "продолжай работу по планам"
+call, STATUS Next's named next) ·
 Phase: 4 (Knowledge & scene) — **CLOSED — gate PASS (iter-65, D-094;
 the verdict record: TASKS iter-65 + the D-094 verdict row); phase 5
 UNLOCKED — opens on the owner's call (the iter-55 precedent); the
-refinement lance (iter-66..69 + bg-7) rides BETWEEN the gates — track A
+refinement lance (iter-66..69b + bg-7) rides BETWEEN the gates — track A
 refinement, never phase-5 scope**
-**The landing: FUNCTIONAL: the suspicion reaction's per-target mode —
-a `crime_watch.suspicion_from_knowledge` entry may be the object
-`{source, figure}`: the token names its suspect, the knower's axis
-moves to `pair.<figure>.<axis>` (the P2a directed-pair home — the
-SEEDED pair axis is the reaction's permission, the v0.1 "no suspicion
-home" law translated; a self-pair is pack-illegal, so self-blame is
-structurally impossible), and the status flip + the arrest aim at the
-FIGURE (the parameterized suspect_id — v0.1 hard-wired the player).
-The string shape keeps the flat mode byte-identical (one mode per
-pack, the no-mixing lint; the figure must be an npc of the same
-pack). THE DRIFT TEETH, LIVE: a rumor-mutated token reacts under the
-MUTATED token's figure — the blame lands where the drift put it,
-never where the sighting did: the guard's purse-reach sighting told
-as the fire sibling makes the listener blame the sibling's figure
-under the arson delta, flip its crime_status, arrest it — a suspect
-manufactured by a retelling, no fire required (the 68b guard-talk
-geometry reused verbatim: seed 2 hit / seed 1 miss). Corpus price
-ZERO, measured by construction (the committed pack's mapping stays
-string-shaped — the mode pin) AND by bytes (the git-HEAD A/B over
-day1_full 125, day1_theft_and_arson, guard-talk 1/2, the seed-15
-talk — every committed surface identical). The director's
-`_global_suspicion` + the balance harness's peaks sum the axis in
-EITHER home (the committed coerce shifts trust/fear only — the pair
-term never fires on a committed surface). KI#75 opened+closed (the
-ev_0007 doc example's props never matched the runtime — synced).
-1239+1 green, ruff clean.**
+**The landing: FUNCTIONAL: the committed pack's per-target switch —
+every `suspicion_from_knowledge` entry the object `{source, figure}`
+(all figures pc_01, the walkthrough's own culprit), the pair homes
+seeded on the five watchful NPCs, the flat `relations.suspicion`
+seeding dropped (dead vocabulary), and `figure_starting_fire` GAINING
+ITS LIVE SOURCE (witnessed_arson 30 — the drift family's fire sibling
+reacts wherever acquired: the arson witnesses escalate the room, a
+drifted telling blames the token's figure). Every flat-mode pack
+reader re-declared on the pair home, pack data only: the two
+document-check triggers (the prop leaf, `pair.pc_01.suspicion`
+at_least 50 — the generalized predicate, the band's number unchanged),
+the vigil's escalation modifiers, the crowd reaction's state prop, the
+brief's wary card marker (the marker lint grew the `pair.<npc>.<axis>`
+prefix family, the L13 real need). Engine-side: the ignition's cause
+re-anchored to the igniting ACTION (the commit door may run knowledge
+reactions between the action and the ignition — the fire's cause is
+never a bystander's suspicion reaction). THE CORPUS PRICE, measured
+FIRST both arms and paid in the same landing: the D-101 projection (8
+claims) UNDERCOUNTED — the true ledger is the 8 `relations.suspicion`
+claims re-pinned to the pair home across 5 cases PLUS the arson-action
+cases' stream shifts (the witnessed-arson reactions insert after the
+arson: +4/+5 `suspicion_changed` over 11 corpus cases, the seed-93 pair
+gaining the full arrest family — the ladder completes at 55+30=85),
+paid through the fixed-point re-distill (the iter-48/49/50 protocol:
+the pristine-HEAD alignment, the assignment re-pin per the iter-50
+idempotency law, 31 claim edits, the corpus test green after; the
+projection's miss recorded in D-102, honestly). The M1/M2 arms
+re-measured IDENTICAL (seed 125: ON M1 0.509/M2 0.333, OFF M1 0.500,
+events 53/50, chains 26/26 — the pair prefix maps to the relations
+system, the home moves no metric); day1_full 11/11 byte-diverged (the
+arming's own ledger — the reaction events' state_changes prop),
+day1_theft_and_arson + the T1 golden byte-IDENTICAL (no crime tokens
+minted there). KI#76 opened+closed (DIRECTOR_SPEC §4's entropy formula
+line never carried iter-69's either-home sum). 1239+1 green, ruff
+clean.**
 ·
 Date: 2026-09-07 ·
-Scope: `core/crime.py` (the dual-mode reaction — the flat branch
-character-identical, the per-target branch new), `core/pack.py` (the
-no-mixing/figure/source lint), `core/director.py` +
-`scripts/balance_harness.py` (the axis in either home),
-`tests/test_suspectaxis.py` (NEW, +12), `docs/EVENT_SCHEMA.md` (§4
-the suspicion-home clause; §10 the KI#75 example sync),
-`docs/MVP_SCOPE.md` (the same example sync), `docs/DECISIONS.md`
-(D-101 — 37 rows, rides above 30 until the phase-5→6 gate, the
-recorded precedent), `docs/TASKS.md` (suspectaxis done +
-suspectaxis-2 laid), `worklog.md` (iter-69 in, iter-62 out),
-`STATUS.md` (this header + KI#75 + Next). 11 files — the
-4-runtime-file core + the suite + the doc sync are one mechanism
-family, the iter-60..68 scope pattern.
+Scope: `content/tavern_pack/rules.json` (the mapping + the live
+source + the triggers + the modifiers + the crowd prop + the marker),
+`content/tavern_pack/entities.json` (the pair homes, the flat drop),
+`core/loop.py` (the ignition cause anchor), `core/pack.py` (the marker
+lint's pair prefix family), `core/crime.py` (the docstring sync),
+`tests/fixtures/narrator_beats.json` (the fixed-point re-distill),
+`tests/test_suspectaxis.py` (the arming pin + the crafted flat twin +
+strip_pc_homes), `tests/test_crime.py` + `tests/test_knowledge.py` +
+`tests/test_core.py` + `tests/test_smoke.py` + `tests/test_doccheck.py`
++ `tests/test_onaction.py` + `tests/test_brief.py` +
+`tests/test_metrics.py` + `tests/test_director.py` +
+`tests/test_panic.py` (the pair-home re-points, the flip ledger's own
+price), `docs/EVENT_SCHEMA.md` (§4 the arming note + §10 the example
+sync), `docs/MVP_SCOPE.md` (the example sync), `docs/BRIEF_SPEC.md`
+(the marker surface law), `docs/DIRECTOR_SPEC.md` (§4 the formula —
+KI#76), `docs/DECISIONS.md` (D-102), `docs/TASKS.md` (suspectaxis-2
+done), `worklog.md` (iter-69b in, iter-63 out), `STATUS.md` (this
+header + KI#76 + Next). 25 files — the pack arming + its corpus price
++ the doc sync are one mechanism family, the iter-60..69 scope
+pattern; the flip ledger (39 test flips measured) owns the breadth,
+the both-arms measurement is the law that sized it.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -74,11 +90,18 @@ family, the iter-60..68 scope pattern.
 
 ## Active KIs
 
+- KI#76 · DIRECTOR_SPEC §4's entropy formula line still read the flat
+  `relations.suspicion` sum — iter-69's either-home code
+  (`core/director.py::_global_suspicion`) never reached the spec's
+  formula block, drift since iter-69 · CLOSED iter-69b (the formula
+  now names both homes + the one-mode clause; the D-101 row's
+  aggregate claim was the code's, the spec lagged behind it).
 - KI#75 · the ev_0007 doc example's props (`suspicion_of.pc_01`, bare
   `status`) never matched the runtime (`relations.suspicion`,
   `crime_status`) — drift since the restore, found iter-69 · CLOSED
   iter-69 (EVENT_SCHEMA §10 + MVP_SCOPE synced; the pair-grammar clause
-  is §4's — detail: worklog iter-69).
+  is §4's — detail: worklog iter-69; iter-69b re-synced the example's
+  prop to the armed home `pair.pc_01.suspicion`).
 - (KI#74 deleted at iter-68a per AGENTS
   §5 — closed iter-67, two iterations past (iter-68 + iter-68a — the
   sub-iteration counts as its own, the iter-66a streak precedent; the
@@ -553,26 +576,17 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**The v0.2 refinement lance in flight (iter-66/66a/67/68/68a/68b/69
+**The v0.2 refinement lance in flight (iter-66/66a/67/68/68a/68b/69/69b
 done — prosefloor, the intake 2, beliefwire, testproto, rumordrift's
-mechanics + the pack arming, suspectaxis's MECHANICS): next
-iter-69b-suspectaxis-2 — THE PACK ARMING, the per-target switch on the
-committed pack (D-095's recorded segment, the 68a→68b pattern): the
-object-shaped mapping (both crime sightings + the noise mapped to
-their figures, `figure_starting_fire` gaining a LIVE source — the
-drift's teeth on the committed scenario, the thief blamed for the
-arson through the mutated token), the pair homes seeded on the
-watchful NPCs, the flat `relations.suspicion` seeding dropped (dead
-vocabulary), the director hook trigger re-declared on the `prop` leaf
-(`pair.pc_01.suspicion` — pack data only, the generalized predicate
-already speaks it) — the corpus price measured FIRST and paid in the
-same landing (the 8 narrator `relations.suspicion` claims re-pinned
-to the pair path across 5 cases, the M1/M2 arms re-measured, the
-day1 byte divergence documented as the arming's own ledger). The
-lance's remainder after that: beliefwire-2 (the trait-consumer
-arming, the iter-67 price stands verbatim) + bg-7 (the engine +
-confabulation probe — prosefloor-2 waits on its numbers). The lance
-rides between the gates — track A refinement, never phase-5 scope.
+mechanics + the pack arming, suspectaxis's mechanics + THE PACK ARMING,
+D-102): the lance's remainder — beliefwire-2 (the trait-consumer
+arming, the iter-67 price stands verbatim: a trait-gated guard scan
+flips three beats live on the canonical seed-125 run, the +3
+look_around price, no zero-price live path; the drift never touches
+the traits substrate, so the price holds on the armed-drift pack) +
+bg-7 (the engine + confabulation probe — prosefloor-2 waits on its
+numbers; TASKS' bg-7 row owns the five probes). The lance rides
+between the gates — track A refinement, never phase-5 scope.
 Phase 4 (Knowledge & scene) CLOSED — gate PASS
 iter-65, D-094 (the full ROADMAP §5 protocol re-run; the phase-4
 landing ledger condensed in TASKS). Phase 5

@@ -177,9 +177,9 @@ def test_the_delta_is_clamped_and_zero_effect_is_dropped() -> None:
     scale's edge whose clamped delta is zero is dropped (the KI#13 no-op
     discipline — no zero-change rows in canon)."""
     state = projection()
-    state["npc_guard_01"]["relations.suspicion"] = 98  # +5 clamps to 100
-    state["npc_barkeep_01"]["relations.suspicion"] = 100  # clamps: no-op
-    state["npc_drunk_01"]["relations.suspicion"] = 40
+    state["npc_guard_01"]["pair.pc_01.suspicion"] = 98  # +5 clamps to 100
+    state["npc_barkeep_01"]["pair.pc_01.suspicion"] = 100  # clamps: no-op
+    state["npc_drunk_01"]["pair.pc_01.suspicion"] = 40
     record = _record(knowledge=(
         _knower("npc_guard_01"), _knower("npc_barkeep_01"),
         _knower("npc_drunk_01"),
@@ -196,9 +196,9 @@ def test_a_candidate_without_a_numeric_home_is_dropped() -> None:
     player, ambient groups have no suspicion home); a bool is never a
     number (the predicates.py guard)."""
     state = projection()
-    state["npc_guard_01"]["relations.suspicion"] = 40
-    state["npc_maid_01"].pop("relations.suspicion")  # missing home
-    state["npc_drunk_01"]["relations.suspicion"] = True  # a flag, not a count
+    state["npc_guard_01"]["pair.pc_01.suspicion"] = 40
+    state["npc_maid_01"].pop("pair.pc_01.suspicion")  # missing home
+    state["npc_drunk_01"]["pair.pc_01.suspicion"] = True  # a flag, not a count
     record = _record(knowledge=(
         _knower("npc_guard_01"), _knower("npc_maid_01"),
         _knower("npc_drunk_01"), _knower("pc_01"),  # the PC: no home either
@@ -227,35 +227,35 @@ def test_the_gate_is_the_quantified_predicate() -> None:
     predicates.py's: a missing prop answers False under at_least and
     equals, True under not_equals; a bool never equals a number."""
     state = projection()
-    state["npc_guard_01"]["relations.suspicion"] = 30
-    state["npc_maid_01"]["relations.suspicion"] = 10
+    state["npc_guard_01"]["pair.pc_01.suspicion"] = 30
+    state["npc_maid_01"]["pair.pc_01.suspicion"] = 10
     record = _record(knowledge=(
         _knower("npc_guard_01"), _knower("npc_maid_01"),
     ))
-    gated = _gate_pack({"prop": "relations.suspicion",
+    gated = _gate_pack({"prop": "pair.pc_01.suspicion",
                         "comparator": "at_least", "value": 20})
     (draft,) = on_action_drafts(gated, state, record)
     assert [c.entity for c in draft.state_changes] == ["npc_guard_01"]
-    equals = _gate_pack({"prop": "relations.suspicion",
+    equals = _gate_pack({"prop": "pair.pc_01.suspicion",
                          "comparator": "equals", "value": 10})
     (draft,) = on_action_drafts(equals, state, record)
     assert [c.entity for c in draft.state_changes] == ["npc_maid_01"]
-    not_equals = _gate_pack({"prop": "relations.suspicion",
+    not_equals = _gate_pack({"prop": "pair.pc_01.suspicion",
                              "comparator": "not_equals", "value": 10})
     (draft,) = on_action_drafts(not_equals, state, record)
     assert [c.entity for c in draft.state_changes] == ["npc_guard_01"]
     # a missing prop answers honestly: False under at_least
     stripped = projection()
-    stripped["npc_guard_01"].pop("relations.suspicion")
-    missing = _gate_pack({"prop": "relations.suspicion",
+    stripped["npc_guard_01"].pop("pair.pc_01.suspicion")
+    missing = _gate_pack({"prop": "pair.pc_01.suspicion",
                           "comparator": "at_least", "value": 0})
     assert list(on_action_drafts(missing, stripped, _record(
         knowledge=(_knower("npc_guard_01"),)
     ))) == []
     # a bool never equals the number 1 even where the value is True
     bool_state = projection()
-    bool_state["npc_guard_01"]["relations.suspicion"] = True
-    bools = _gate_pack({"prop": "relations.suspicion",
+    bool_state["npc_guard_01"]["pair.pc_01.suspicion"] = True
+    bools = _gate_pack({"prop": "pair.pc_01.suspicion",
                         "comparator": "equals", "value": 1})
     assert list(on_action_drafts(bools, bool_state, _record(
         knowledge=(_knower("npc_guard_01"),)
@@ -270,8 +270,8 @@ def test_the_reaction_event_shape_is_the_alarm_shape() -> None:
     hooks of its own — the cascade terminates by construction,
     importance by the pack rule."""
     state = projection()
-    state["npc_guard_01"]["relations.suspicion"] = 20
-    state["npc_maid_01"]["relations.suspicion"] = 10
+    state["npc_guard_01"]["pair.pc_01.suspicion"] = 20
+    state["npc_maid_01"]["pair.pc_01.suspicion"] = 10
     record = _record(knowledge=(
         _knower("npc_guard_01"), _knower("npc_maid_01"),
     ), event_id="ev_0005", t=10, actor="npc_guard_01", target="pc_01")
@@ -359,7 +359,7 @@ def test_the_crowded_room_ignition_fires_the_reaction_live(
         assert change.to_ == change.from_ + 5
     state = fold(events, initial_projection(pack.entities))
     for who in knowers - {"pc_01"}:
-        assert state[who]["relations.suspicion"] >= 5
+        assert state[who]["pair.pc_01.suspicion"] >= 5
     # nothing dispatched on the reaction itself (no knowledge, no hooks,
     # the one-hop lint) — the events after it are the fire's own cascade
     after = events[events.index(reaction) + 1:]

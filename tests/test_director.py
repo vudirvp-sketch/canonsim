@@ -217,8 +217,9 @@ def test_threshold_trigger_fires_when_suspicion_crosses() -> None:
     # trigger + the option gate both pass — the real document_check
     # intent releases (iter-43: the stub wait became the action, D-072).
     # entropy_floor=0 means stagnation never releases (entropy can't be
-    # negative), only the explicit threshold trigger can release here
-    projection["npc_guard_01"]["relations.suspicion"] = 50
+    # negative), only the explicit trigger can release here — suspectaxis-2:
+    # the armed home, the watcher's pair record toward the player
+    projection["npc_guard_01"]["pair.pc_01.suspicion"] = 50
     released = director.releases(projection, beat_tick=0)
     assert len(released) == 1
     assert released[0].kind == "document_check"
@@ -237,7 +238,7 @@ def test_the_confrontation_gate_defers_the_release() -> None:
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
     director.seed(_record(hooks=("possible_document_check",)))
     projection = initial_projection(PACK.entities)
-    projection["npc_guard_01"]["relations.suspicion"] = 55  # the band
+    projection["npc_guard_01"]["pair.pc_01.suspicion"] = 55  # the band
     # the watcher sits at the guardroom (post-rotation), the PC at the
     # tavern: the gate's place leaf fails — the hook waits
     projection["npc_guard_01"]["position"] = "loc_guardroom"
@@ -1133,9 +1134,9 @@ def test_entropy_reads_the_pack_escalation() -> None:
     director.seed(_record(hooks=("guard_suspicious_of_pc",)))
     hook = director.hooks[0]
     projection = initial_projection(PACK.entities)
-    projection["npc_guard_01"]["relations.suspicion"] = 49
+    projection["npc_guard_01"]["pair.pc_01.suspicion"] = 49
     assert entropy(projection, iter([hook]), PACK.rules, 0) == 2 + 49
-    projection["npc_guard_01"]["relations.suspicion"] = 50
+    projection["npc_guard_01"]["pair.pc_01.suspicion"] = 50
     assert entropy(projection, iter([hook]), PACK.rules, 0) == 4 + 50
 
 
@@ -1364,8 +1365,11 @@ def test_a_hook_without_options_runs_the_v01_payload() -> None:
     director = Director(pack=PACK, policy=EnabledPolicy(entropy_floor=0))
     director._hooks.append(_seeded_hook(  # type: ignore[attr-defined]
         tag="hookless_v01", target_npc="npc_guard_01",
-        trigger={"kind": "threshold", "target_npc": "npc_guard_01",
-                 "axis": "suspicion", "value": 0, "comparator": "at_least"},
+        # the armed home: the threshold leaf would read the dead flat
+        # axis — the prop leaf speaks the pair record the pack seeds
+        trigger={"kind": "prop", "of": "npc_guard_01",
+                 "path": "pair.pc_01.suspicion",
+                 "value": 0, "comparator": "at_least"},
     ))
     projection = initial_projection(PACK.entities)
     released = director.releases(projection, beat_tick=0)

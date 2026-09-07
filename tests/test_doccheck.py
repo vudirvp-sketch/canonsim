@@ -70,13 +70,17 @@ def all_checks(events: list[Any]) -> list[Any]:
 
 def suspicion_before(events: list[Any], event_id: str, npc: str) -> int:
     """The npc's suspicion as left by the events strictly before the
-    given event (the pre-check world the release read)."""
+    given event (the pre-check world the release read) — the pair home,
+    the arming's address."""
     value = 0
     for e in events:
         if e.id == event_id:
             return value
         for change in e.state_changes:
-            if change.entity == npc and change.prop == "relations.suspicion":
+            if (
+                change.entity == npc
+                and change.prop == "pair.pc_01.suspicion"
+            ):
                 value = int(change.to_)
     return value
 
@@ -234,8 +238,12 @@ def test_the_pack_declares_the_watcher_pair() -> None:
         spec = hooks[tag]
         assert spec["target_npc"] == watcher
         assert spec["intent"] == {"kind": "document_check", "target": "pc_01"}
-        assert spec["trigger"]["kind"] == "threshold"
-        assert spec["trigger"]["target_npc"] == watcher
+        # suspectaxis-2: the trigger re-declared on the prop leaf — the
+        # watcher's pair home, the band's number unchanged
+        assert spec["trigger"]["kind"] == "prop"
+        assert spec["trigger"]["of"] == watcher
+        assert spec["trigger"]["path"] == "pair.pc_01.suspicion"
+        assert spec["trigger"]["value"] == 50
         assert spec["climax"] is True
         assert spec["first_time_only"] is True
         (gate,) = spec["options"]
@@ -253,7 +261,9 @@ def test_the_pack_declares_the_watcher_pair() -> None:
     }
     # the verdict token is the only crime-mapped check knowledge
     mapping = PACK.rules["crime_watch"]["suspicion_from_knowledge"]
-    assert mapping["papers_unsatisfactory"] == "papers_unsatisfactory"
+    assert mapping["papers_unsatisfactory"] == {
+        "source": "papers_unsatisfactory", "figure": "pc_01",
+    }
     assert PACK.rules["crime_watch"]["suspicion_sources"]["papers_unsatisfactory"] == 25
 
 
