@@ -456,7 +456,7 @@ BRIEF_SPEC §3.9 + BRIEF_SPEC §3.3/§6 (tex-1) + TEST_PLAN §1.3
 leg-1/leg-2/leg-3/leg-3b/retr-1/scene-1/scene-2/tex-1/blind-1/leg-4
 + D-084/D-085/D-086/D-087/D-088/D-089/D-090/D-091/D-092/D-093/D-094.
 
-### The v0.2 refinement lance (opened iter-66 — the post-gate quality pass; track A COMPLETE at iter-70)
+### The v0.2 refinement lance (opened iter-66 — the post-gate quality pass; track A COMPLETE — the declared family at iter-70, the intake row at iter-72)
 
 The research review's confirmed holes landed additively between the
 gates (D-095's family; every landing measured its own corpus price
@@ -491,16 +491,23 @@ bar); the price paid: +3 scans on the canonical seed-125 run only
 (9/10 day1 seeds byte-identical), the seed-93 narrator family
 re-distilled (11 id re-pins, the fixed-point runner), M1 0.54/0.52; the
 KI#77 lint-order fix + the KI#78 README sync rode the landing. The
-lance's remainder: prosefloor-2 (the intake row, unblocked on bg-7's
-numbers) + bg-8 (owner-gated). The research intake 3 (iter-71,
-doc-only — the KI#78 family discipline) routed the owner's two-model
-cross-review, verified against HEAD first: the `weather-1` +
-`companion-1` backlog rows (TASKS, owner-gated — pack data over the
-existing doors, dependencies by reference) + the pack-1 gate-line fix
-(the stale "phase-0 gate" clause, D-024). The lance's remainder
-unchanged. 1240 tests green, ruff clean.
+research intake 3 (iter-71, doc-only — the KI#78 family discipline)
+routed the owner's two-model cross-review, verified against HEAD
+first: the `weather-1` + `companion-1` backlog rows (TASKS,
+owner-gated — pack data over the existing doors, dependencies by
+reference) + the pack-1 gate-line fix (the stale "phase-0 gate"
+clause, D-024). prosefloor-2 LANDED (iter-72, D-104): the lowercase
+assertion surface, the detection half D-096 routed — `brief/scan.py`
+exports `relation_attribute_tokens` (the two unambiguous assertion
+slots: the copular predicate head + the possessive tail) and
+`modeled_vocabulary` (the grounded half); a measurement export for
+bg-8's weaker-engine arm, never a gate — no refusal, no wiring, the
+corpus split pinned in tests/test_scan.py (the single owner of the
+numbers). The lance's track-A remainder: none — the lance is
+COMPLETE; bg-8 (owner-gated) is its only open row. 1255 tests green,
+ruff clean.
 Contract owners: TASKS v0.2 backlog rows + D-095/D-096/D-097/D-098/
-D-099/D-100/D-101/D-102/D-103 + the TASKS research-intake-3 rows +
+D-099/D-100/D-101/D-102/D-103/D-104 + the TASKS research-intake-3 rows +
 TEST_PLAN §8 + TECH_NOTES §10 +
 tests/test_beliefwire.py + tests/test_rumordrift.py +
 tests/test_suspectaxis.py + tests/test_scan.py + brief/scan.py +

@@ -82,13 +82,12 @@
 > `docs/blueprint/phases.md` §5 (the never-before-opening law, STATUS
 > Next — drafted into TASKS only at the phase-5 opening), never here.
 
-- `prosefloor-2` · relations/attribute claims in prose — todo,
-  UNBLOCKED (bg-7's numbers landed: the surface-section decision is
-  recorded — TECH_NOTES §10(v), no cast-surface extension warranted
-  by the API-engine numbers, the weaker-engine arm re-measures; the
-  row's own work stays the detection surface — lowercase
-  relations/attribute tokens are invisible to the position law, and
-  the refusal ladder is not the work).
+- `prosefloor-2` · relations/attribute claims in prose — done
+  (iter-72, D-104: the DETECTION surface only, D-096's routing — the
+  two assertion slots + the modeled-vocabulary split in
+  `brief/scan.py`, a measurement export for bg-8's weaker-engine arm;
+  no refusal, no wiring, corpus price zero by construction; detail:
+  VALIDATION_SPEC §2.1 + tests/test_scan.py).
 - `packtaxonomy` · material-derived props (the flammability
   generalization) — owner-gated (phase-6 PACK-1: the authoring path is
   the reserved `copy-from` chain, phases.md §6; a runtime

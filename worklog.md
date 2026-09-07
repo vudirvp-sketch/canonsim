@@ -16,6 +16,26 @@
 
 
 ---
+iter-72 · 2026-09-08 · prosefloor-2 — the lowercase assertion surface,
+the lance's last row (D-104; 10 files — the iter-66 family footprint:
+the instrument + its doc sync)
+- brief/scan.py: `relation_attribute_tokens` (the two assertion slots —
+  the copular predicate head with the 's contraction + up to two
+  interveners, the possessive tail with the intensifier skip; the
+  closed classes are English function words only, INV-3-clean) +
+  `modeled_vocabulary` (names/roles/moods/axes, the name manifest
+  reused); a measurement export, NEVER a gate (D-096) — no refusal,
+  no regen spend, no boundary wiring.
+- tests/test_scan.py +15: the boundary pins + the corpus calibration
+  baseline pinned exact (129 strings / 133 token-hits / 81 unique /
+  14 grounded / 67 unmodeled — the single owner of the split numbers,
+  D-024); corpus price ZERO by construction (no pipeline byte moved,
+  T1/T2/corpus/mediator untouched). Docs: VALIDATION_SPEC §2.1,
+  TEST_PLAN §8.4, TASKS (prosefloor-2 done — the v0.2 lance COMPLETE),
+  README, AGENT_NAVIGATION §1, DECISIONS D-104. KI#76/77/78 deleted
+  per §5 (two-plus iterations past). 1255+1 green, ruff clean.
+  iter-66a evicted (verified in this edit); 10 after.
+---
 iter-71 · 2026-09-08 · plansync — the owner's analysis-intake plan
 sync, doc-only (the iter-66a/68 precedent; 4 files — zero code,
 zero tests; verified 1240+1 green, ruff clean after the edits)
@@ -182,20 +202,4 @@ iter-60..63 pattern)
   iterations past, the KI#72 precedent). The testproto research row
   laid (owner-gated, bg-7-tracked). iter-58 evicted (verified in
   this edit); 10 after.
----
-iter-66a · 2026-09-07 · intake2 — the research intake 2 (doc-only,
-D-096; the D-018/D-022 surgical-absorption pattern; 6 files — over the
-soft limit: one intake, every owner doc synced same-turn per §9)
-- The depth-architecture review verified against the repo first (three
-  corrections in D-096: prosefloor-2 waits on bg-7; the "binary
-  knowledge" premise false; the affordance example already pack data),
-  then routed: TASKS 3 one-liners, phases.md §5 the phase-5 design
-  material (materialization over D-054/ledger-OCC, `scene:<id>:detail`
-  streams, scene LOD, perception conditions, fold checkpoints),
-  SPECS_BACKLOG the PACK_SPEC affordance clause.
-- Zero runtime files; the lance untouched (next iter-67-beliefwire).
-  TASKS 637 / phases.md 681 / DECISIONS 32 — over-cap substance, §6.1,
-  trim at the phase-5→6 gate (the D-095 precedent). Doc-only streak
-  1 of 2. iter-57 evicted (verified in this edit); 10 entries after.
 (end of log — cap 10; pre-trim history lives in git)
-

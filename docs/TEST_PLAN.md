@@ -593,7 +593,12 @@ rides bg-7's numbers, never a guessed threshold.
 
 ### 8.4 The runner boundary (Rule-9 shape)
 
-The repo exports the pins, the metric definitions (this section), and
+The repo exports the pins, the metric definitions (this section), the
+prose-surface instruments (`brief/scan.py` — VALIDATION_SPEC §2.1's
+prosefloor-2 clause, iter-72/D-104: `relation_attribute_tokens` +
+`modeled_vocabulary`, the lowercase assertion surface and its
+grounded/unmodeled split — the weaker-engine arm's lowercase-gap
+metric, its calibration baseline pinned in `tests/test_scan.py`), and
 the boundary contracts (PARSER_SPEC, BRIEF_SPEC §7.1, VALIDATION_SPEC
 §7.1); the runner owns the engine, the transcripts, the hardware.
 Transcripts flow back one way — re-distilled into corpus rows (§8.2

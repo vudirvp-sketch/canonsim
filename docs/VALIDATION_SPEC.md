@@ -63,6 +63,28 @@ under the stdlib-only law; the live gap is bg-7's to measure before
 any extension is considered (the surface-section decision rides those
 numbers).
 
+**prosefloor-2 (iter-72, D-104) — the lowercase twin's DETECTION half
+(D-096's routing: the refusal ladder is NOT the work).** The position
+law is blind to lowercase relation/attribute assertions ("the thief's
+brother", "a gift"), so `brief/scan.py` exports two instruments, never
+a gate: `relation_attribute_tokens(prose)` — the lowercase tokens in
+the two unambiguous assertion slots (the determiner-headed copular
+predicate, the 's contraction and up to two lowercase interveners
+included; the possessive tail, the intensifiers own/very skipped; bare
+adjectival predicates are EXCLUDED by declared law — tone-vs-claim
+needs semantics, the sentence-initial exemption's class — and
+capitalized tokens stay out, the name floor's domain) — and
+`modeled_vocabulary(pack)` — the pack's declared English words (display
+names, role words, NPC moods, relation/state axes; the name manifest
+reused, trait/knowledge snake_case tokens and enum values out). The
+split is the consumer's set arithmetic: grounded / unmodeled — a
+measurement export for bg-8's weaker-engine arm (TEST_PLAN §8.4); a
+future ladder may only ride those numbers, never these. No refusal
+lines, no regen spend, no boundary wiring: the pipeline's bytes are
+untouched by the instrument. The corpus calibration baseline is pinned
+exact in `tests/test_scan.py` — the single owner of the split numbers
+(D-024).
+
 ## 3. The proposal document
 
 One document per narrator call, machine-shaped:
