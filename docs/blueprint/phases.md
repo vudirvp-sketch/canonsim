@@ -576,13 +576,24 @@ an implementation detail the pack does not need.**
   noise, distance, obstruction) feeding birth fidelity — pack data in
   rules.json, mechanics in the perception path/knowledge templates,
   never a second knowledge store; rumordrift (68a/68b) gains its
-  distorting medium here.
+  distorting medium here. **The acquisition gate landed iter-73 as
+  depth-1 (D-105): mechanics only, the committed pack unarmed — the
+  arming (rules.json `position_visibility.acquisition`) is depth-1b.**
+  Any future threshold-crossing surface carries pack-declared margins
+  (a deadband — boundary churn is a number, never entropy; intake-4's
+  addition). Distance/obstruction condition kinds wait on world state
+  that can express them (doors, sight-lines — the depth-5 layer).
 - **Fold checkpoints.** The live projection and KnowledgeView are
   incremental — full refold pays only on replay/branch, the phase-5
   long-history cost. A snapshot is a DERIVED artifact (the SQLite-index
   law, INV-5): fold-checkpoint + event-index offset, grown from the
   chronicler family (iter-64's LAG/LEAD state diffs); rollback =
   snapshot + tail replay. Never truth, never committed, never edited.
+  The checkpoint's derived-index record carries the snapshot's sha256
+  (byte-deterministic serialization, the `stable_hash` family's
+  hashlib; verified by re-fold) — the integrity anchor lives in the
+  index, never an event in the truth (intake-4's addition; the resume
+  door stays owner-gated, §7).
 
 ## 6. Phase 6 — packs & worldbuilder
 

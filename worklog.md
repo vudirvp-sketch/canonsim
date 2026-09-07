@@ -12,6 +12,36 @@
 > history lives in git.
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
+---
+iter-73 · 2026-09-08 · depthopen — the owner's phase-5 start call: the
+opener + research intake 4 + depth-1 the acquisition gate (11 files —
+the iter-55 opener+leg footprint: 4 code + 7 doc sync)
+- ROADMAP §2's phase-5 flip; TASKS the phase-5 backlog (depth-1..7)
+  + intake 4; phases.md §5 the two intake additions (the sha256 index
+  anchor, threshold margins) + the depth-1/1b pointer; D-105.
+- depth-1: core/intent.py::acquisition_fidelity (the event-site
+  emission law, both resolve branches, D-007's documented twin walk),
+  core/pack.py::_acquisition (the closed vocabulary lint),
+  core/clock.py::phase_of_tick (the rules-level twin).
+- The committed pack UNARMED — v0.1 bytes (the 68a pattern; no draws
+  ever); +20 tests (1255→1275+1, ruff clean; the both-arms zero-price
+  pin + the smoke-geometry liveness law). iter-67 evicted (verified
+  in this edit); 9 after (the log held 9 at HEAD — the cap law is
+  held, the count did not grow).
+# worklog — canonsim
+
+> Cap: 10 entries, one in / one out. 3–5 lines per entry: what changed, why,
+> files touched. No diffs, no command output, no reasoning traces. Long-term
+> rationale belongs in `docs/DECISIONS.md`.
+> Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
+> Entries re-trimmed to the line cap at iter-10a (KI#37; the drift ran
+> iter-8b→10) — pre-trim detail lives in git history.
+> Re-trimmed 39→10 at iter-48 (KI#68: the cap had drifted silently —
+> the iter-43..47 "evicted per the cap" claims never executed; the
+> eviction is now verified in the same edit, not claimed). Pre-trim
+> history lives in git.
+> Order: newest first (normalized at iter-8c — the order had drifted
+> since iter-5).
 
 
 
@@ -182,24 +212,5 @@ clarification)
   D-098; TASKS testproto done + the bg-8 row (owner-gated, tracks
   bg-7); 1201+1 green, ruff clean (docs-only diff). iter-59 evicted
   (verified in this edit); 10 after.
----
-iter-67 · 2026-09-07 · beliefwire — the trait gate + the channel + the
-counter-family (the v0.2 refinement family's second segment, D-095;
-13 files — over the soft limit: the leaf + the channel + the fold +
-the lint + the suite + the §9 sync are one mechanism family, the
-iter-60..63 pattern)
-- core/intent.py TRAIT_TEST (a GATE, never a multiplier) into the
-  windowed family + _Ctx.traits; core/loop.py the lazy door reads and
-  the eager beat read; core/urgencies.py the traits param;
-  core/traits.py the counter-block (same breadth bar, sources
-  untouched); core/pack.py the token/counters lint pair.
-- Corpus price ZERO by construction, pinned: the 10-seed day1_full A/B
-  armed-vs-traits-stripped byte-identical (the committed pack declares
-  no trait_held); the arming deferred to beliefwire-2 (no zero-price
-  live path — measured: +3 scans on the canonical 125 run). +16 tests
-  (1185→1201, ruff clean). KI#74 opened+closed (the pack notes' stale
-  DORMANT claim); KI#73 deleted per §5 (closed iter-65, two
-  iterations past, the KI#72 precedent). The testproto research row
-  laid (owner-gated, bg-7-tracked). iter-58 evicted (verified in
-  this edit); 10 after.
+
 (end of log — cap 10; pre-trim history lives in git)

@@ -31,6 +31,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
+from core.clock import phase_of_tick
 from core.fold import Projection, apply_event, fold, present_in_order
 from core.log import EventRecord, KnowledgeRecord, StateChange
 from core.rng import RngBank
@@ -39,6 +40,7 @@ if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pac
     from core.pack import Pack
 
 __all__ = [
+    "ACQUISITION_CHANNELS",
     "AUDIENCES",
     "CheckResult",
     "ECHO_TEST",
@@ -53,6 +55,7 @@ __all__ = [
     "TEXTURE_SCOPES",
     "TRAIT_TEST",
     "WINDOWED_TESTS",
+    "acquisition_fidelity",
     "action_duration",
     "first_failing",
     "find_flagged_accessible",
@@ -806,6 +809,52 @@ def _expansion_site(
     return str(ctx["location"])
 
 
+# depth-1 (D-105): the ambient channels an acquisition condition may
+# degrade — told/inferred have no acquisition surface (transfer rides the
+# fidelity chain, inference is internal; both stay single-owner).
+ACQUISITION_CHANNELS: Final = ("saw", "heard")
+
+
+def acquisition_fidelity(
+    pack: Pack, projection: Projection, channel: str, site: str,
+    tick: int, fidelity: str,
+) -> str:
+    """Birth fidelity after the pack's acquisition conditions (depth-1,
+    D-105; `phases.md` §5 the design owner — the D-096 gap: continuous
+    acquisition CONDITIONS feeding birth fidelity, pack data in
+    rules.json, mechanics here in the perception path, never a second
+    knowledge store). Each armed condition that fails at the EVENT SITE
+    steps the record down the fidelity chain, floor-sticking — the
+    documented twin of `decay_fidelity`'s walk (D-007's ladder; inlined
+    because intent.py sits below knowledge.py in the import graph — the
+    transfer law stays the ladder's single owner). Conditions read the
+    EMISSION side (the site's smoke, the site's darkness); the observer's
+    own state rides the perception checks' status modifiers — the
+    existing law, single owner. An absent or empty block answers the
+    base fidelity: v0.1 bytes, the pack's own declaration is the arming
+    (the 68a pattern; the reader of the block is the pack lint,
+    `core/pack.py::_acquisition`)."""
+    config = pack.rules.get("position_visibility", {}).get("acquisition")
+    if not config or channel not in ACQUISITION_CHANNELS:
+        return fidelity
+    steps = 0
+    for condition in config.get(channel, ()):  # pack order — deterministic
+        site_state = projection.get(site, {})
+        if "when_flag" in condition:
+            if site_state.get(condition["when_flag"]) == condition["is"]:
+                steps += int(condition["steps"])
+        else:  # phase_in — the lint pins exactly one kind per condition
+            phase = phase_of_tick(pack.rules["time"], tick)
+            if phase in condition["phase_in"]:
+                exempt = condition.get("unless_flag")
+                if exempt is None or not site_state.get(exempt):
+                    steps += int(condition["steps"])
+    if not steps:
+        return fidelity
+    chain = pack.rules["knowledge"]["fidelity_chain"]
+    return chain[min(chain.index(fidelity) + steps, len(chain) - 1)]
+
+
 def resolve_knowledge(
     records: list[Mapping[str, Any]],
     pack: Pack,
@@ -825,6 +874,10 @@ def resolve_knowledge(
     for record in records:
         if "present_at" in record:
             site = _expansion_site(record, pack, ctx)
+            fidelity = acquisition_fidelity(
+                pack, projection, record["channel"], site, tick,
+                record["fidelity"],
+            )
             template_ctx = dict(ctx)
             for target_id in present_in_order(pack, projection, site):
                 if target_id == ctx["actor"]:
@@ -834,7 +887,7 @@ def resolve_knowledge(
                     KnowledgeRecord(
                         who=ctx["actor"],
                         channel=record["channel"],
-                        fidelity=record["fidelity"],
+                        fidelity=fidelity,
                         knows=record["knows"].format_map(template_ctx),
                         at=tick,
                     )
@@ -862,6 +915,19 @@ def resolve_knowledge(
             who_ids = knowers_at(pack, projection, destination)
         else:
             raise RunnerError(f"unknown knowledge audience {audience!r}")
+        # depth-1: the event site the conditions read — the origin for
+        # actor/target/same/adjacent audiences (the emission side), the
+        # destination for destination_location (same resolution the
+        # audience itself just passed).
+        site = (
+            str(ctx["target"])
+            if audience == "destination_location"
+            else str(ctx["location"])
+        )
+        fidelity = acquisition_fidelity(
+            pack, projection, record["channel"], site, tick,
+            record["fidelity"],
+        )
         knows = record["knows"].format_map(ctx)
         except_ids = {
             ctx[token]
@@ -875,7 +941,7 @@ def resolve_knowledge(
                 KnowledgeRecord(
                     who=who,
                     channel=record["channel"],
-                    fidelity=record["fidelity"],
+                    fidelity=fidelity,
                     knows=knows,
                     at=tick,
                 )

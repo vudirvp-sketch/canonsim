@@ -18,10 +18,75 @@
 > (Knowledge & scene) CLOSED — gate PASS iter-65, D-094 (opened iter-55,
 > the owner's "start phase 4" call; the backlog below was drafted from
 > `docs/blueprint/phases.md` §4 — the phase's architecture owner; every
-> declared row landed). Architecture owner: `docs/blueprint/phases.md` §4;
-> exit criterion "0 leaks on the blind-NPC suite" (ROADMAP §2 — MET:
-> zero leaks on all four layers; TEST_PLAN §1/§1.3). Phase 5 (Depth)
-> UNLOCKED — opens on the owner's call (the iter-55 precedent).
+> declared row landed). Phase 5 (Depth) **OPEN — opened iter-73, the
+> owner's start call (D-105)**; the backlog below drafted from
+> `docs/blueprint/phases.md` §5 + the D-096 drafting material (in place
+> since iter-66a). Architecture owner: `docs/blueprint/phases.md` §5;
+> exit criterion "an emergent chain of 3+ events without the player"
+> (ROADMAP §2 — T8's OFF arm already reads 26 chains on the committed
+> scenario; the phase-5 target is the worldgen-fed form).
+
+### Phase-5 depth backlog (opened iter-73; the owner's start call, D-105)
+
+- `depth-1` · the acquisition gate — **done (iter-73, D-105)**: the
+  D-096-named real gap — continuous acquisition CONDITIONS feeding
+  birth fidelity; mechanics in `core/intent.py::acquisition_fidelity`
+  (the resolve path, both branches; event-site emission law;
+  floor-stick ladder, D-007's documented twin) + the closed condition
+  vocabulary (`when_flag`/`is`, `phase_in`/`unless_flag`, `steps`;
+  ambient channels saw/heard only) linted in `core/pack.py` — the
+  committed pack UNARMED (v0.1 bytes, the 68a pattern; the gate
+  consumes no draws ever, so even the fingerprint cannot see it).
+  Detail: tests/test_acquisition.py.
+- `depth-1b` · the acquisition arming — **todo**: the committed pack's
+  `position_visibility.acquisition` block (smoke on saw/heard over the
+  fire layer's raw follow-up flags; night-light `phase_in` with the
+  lit-room `unless_flag` — the flag data itself rides this row) + the
+  corpus price measured FIRST both arms (the 68b pattern: the re-pin
+  if any corpus byte moves).
+- `depth-2` · lazy detail materialization — todo: `scene:<id>:detail`
+  content-addressed streams, the D-054 texture-promotion door at scene
+  scale (first-commit-wins, the `slot_conflict` mirror); phases.md §5
+  the owner.
+- `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
+  clean, never entropy) — needs the multi-scene layer, gate: after
+  depth-5's first passes.
+- `depth-4` · fold checkpoints — todo: the chronicler-family derived
+  artifact (fold-checkpoint + event-index offset) + the sha256
+  index-anchor (intake-4's addition, phases.md §5); the resume door
+  stays owner-gated (phases.md §7).
+- `depth-5` · lazy worldgen passes — todo: ordered passes over the seed
+  (Azgaar + Red Blob donors, ROADMAP §4; integer/fixed-point geometry
+  discipline, phases.md §5) + pre-PC history seeding the director's
+  buffer; the phase's build-column headline.
+- `depth-6` · factions with goals — todo: small-formula dynamics
+  (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
+- `depth-7` · groups & simulation LOD — todo (**owner verdict pending**
+  on the iter-11b stress-test resolutions, phases.md §5): one id all
+  tiers, macro-clock aggregates, condensation on crossing; the st-3 /
+  st-5 / st-6a dependencies by reference, never duplicated rows.
+
+### Research intake 4 (iter-73; the phase-5 synthesis cross-review, routed)
+
+> The owner's 2026-09-08 analysis session: a two-model chain (a
+> phase-5 synthesis text + its cross-review) verified against
+> HEAD `742d7e9`/`198b657` before intake — every load-bearing claim
+> landed against the owning docs/code. The reinvented half (the
+> D-055/D-062 file contract, engine-1's owner gating, the scoped float
+> law, the three-zone LOD design) is already law or already-drafted
+> material — no new decision owed there; the violations the texts
+> proposed (the queue-key change, a mypy-in-CI tool against §10, the
+> global float ban, a snapshot anchor event in the canon log) are
+> refusals on record. The two confirmed additions routed below; the
+> numbering intake-4 follows the landed intake-3 (iter-71).
+
+- `sha256` integrity anchor on the fold-checkpoint's derived-index
+  record — done (iter-73, routed to phases.md §5, depth-4's row):
+  byte-deterministic serialization, verified by re-fold, never an
+  event in the truth.
+- pack-declared margins on any future threshold-crossing surface —
+  done (iter-73, routed to phases.md §5, depth-1's row): deadband,
+  never entropy.
 
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 

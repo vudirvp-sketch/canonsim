@@ -31,6 +31,7 @@ from core.clock import Clock
 from core.director import ARC_KEYS, CHANNEL_INPUTS
 from core.echo import ECHO_BLOCK_KEYS, ECHO_TOKEN_KEYS
 from core.intent import (
+    ACQUISITION_CHANNELS,
     AUDIENCES,
     ECHO_TEST,
     KNOWLEDGE_SLOTS,
@@ -288,6 +289,7 @@ class _Lint:
         self._systems()
         self._transitions()
         self._knowledge_rules()
+        self._acquisition()
         self._crime_watch()
         self._expectations()
         # beliefwire-2 (iter-70, KI#77): the traits block's shape lint
@@ -2191,6 +2193,117 @@ class _Lint:
                 _require(
                     isinstance(spec["notes"], str),
                     f"{where}: notes must be a string (prose)",
+                )
+
+    def _acquisition(self) -> None:
+        """The acquisition-conditions contract (depth-1, D-105 — the
+        D-096-named phase-5 gap: continuous acquisition CONDITIONS feeding
+        birth fidelity; pack data here, mechanics in
+        `core/intent.py::acquisition_fidelity`, never a second knowledge
+        store). The block is OPTIONAL and lives INSIDE
+        `rules.json::position_visibility` (the perception inputs' config
+        home, beside `sight`/`hearing`/`smoke_penalty`):
+        `position_visibility.acquisition` maps an ambient channel
+        (saw | heard — told/inferred have no acquisition surface) to a
+        condition list. Each condition is exactly one kind — `when_flag`
+        + `is` (the site entity's prop equals the value: smoke, a
+        declared layer flag) or `phase_in` (the clock phase at record
+        birth, optionally lifted by `unless_flag` — the site's truthy
+        flag: the lit room at night) — plus `steps` (an int >= 1 down
+        the fidelity chain). A pack without the block answers the base
+        fidelity everywhere and runs the v0.1 bytes, byte-identically
+        (the pack's own declaration is the arming, the 68a pattern)."""
+        rules = self._data["rules.json"]
+        config = rules.get("position_visibility", {}).get("acquisition")
+        if config is None:
+            return
+        pv = "position_visibility.acquisition"
+        _require(
+            isinstance(config, Mapping) and config,
+            f"{pv} must be a non-empty object keyed by channel (an empty "
+            "block is dead data — omit it for v0.1 bytes)",
+        )
+        phase_ids = {
+            phase["id"] for phase in rules.get("time", {}).get("phases", ())
+        }
+        for channel, conditions in config.items():
+            where = f"{pv}[{channel!r}]"
+            _require(
+                channel in ACQUISITION_CHANNELS,
+                f"{where}: channel must be an ambient channel "
+                f"({list(ACQUISITION_CHANNELS)} — told/inferred have no "
+                "acquisition surface)",
+            )
+            _require(
+                isinstance(conditions, list) and conditions,
+                f"{where} must be a non-empty list of conditions",
+            )
+            for index, condition in enumerate(conditions):
+                spot = f"{where}[{index}]"
+                _require(
+                    isinstance(condition, Mapping), f"{spot} must be an object"
+                )
+                kinds = [k for k in ("when_flag", "phase_in") if k in condition]
+                _require(
+                    len(kinds) == 1,
+                    f"{spot}: exactly one condition kind is required "
+                    "(when_flag | phase_in)",
+                )
+                unknown = sorted(
+                    set(condition)
+                    - {"when_flag", "phase_in", "is", "unless_flag", "steps"}
+                )
+                if unknown:
+                    raise PackError(
+                        f"{spot}: unknown keys {unknown} (the closed "
+                        "vocabulary: when_flag|phase_in + is|unless_flag "
+                        "+ steps)"
+                    )
+                if "when_flag" in condition:
+                    _require(
+                        isinstance(condition["when_flag"], str)
+                        and condition["when_flag"],
+                        f"{spot}.when_flag must be a non-empty site prop "
+                        "name (a location-entity prop, e.g. a layer flag)",
+                    )
+                    _require(
+                        "is" in condition,
+                        f"{spot}: when_flag requires 'is' (the compared "
+                        "value — explicit, no default)",
+                    )
+                    _require(
+                        "unless_flag" not in condition,
+                        f"{spot}: unless_flag belongs to phase_in "
+                        "conditions only",
+                    )
+                else:
+                    phases = condition["phase_in"]
+                    _require(
+                        isinstance(phases, list) and phases,
+                        f"{spot}.phase_in must be a non-empty list of "
+                        "phase ids",
+                    )
+                    for phase in phases:
+                        _require(
+                            phase in phase_ids,
+                            f"{spot}.phase_in names unknown phase {phase!r} "
+                            "(time.phases is the single owner)",
+                        )
+                    _require(
+                        "is" not in condition,
+                        f"{spot}: 'is' belongs to when_flag conditions only",
+                    )
+                if "unless_flag" in condition:
+                    _require(
+                        isinstance(condition["unless_flag"], str)
+                        and condition["unless_flag"],
+                        f"{spot}.unless_flag must be a non-empty site prop "
+                        "name (truthy on the site lifts the condition)",
+                    )
+                _require(
+                    _is_int(condition.get("steps")) and condition["steps"] >= 1,
+                    f"{spot}.steps must be an int >= 1 (0 is a dead "
+                    "condition)",
                 )
 
     def _drift(self) -> None:

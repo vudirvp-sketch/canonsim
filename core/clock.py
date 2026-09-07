@@ -6,9 +6,11 @@ pack's `rules.json` (`MVP_SCOPE.md` §8) and cross-checked at load.
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass
+from typing import Any
 
-__all__ = ["Clock", "Phase"]
+__all__ = ["Clock", "Phase", "phase_of_tick"]
 
 
 @dataclass(frozen=True, slots=True)
@@ -18,6 +20,22 @@ class Phase:
     id: str
     from_tick: int
     to_tick: int
+
+
+def phase_of_tick(time_rules: Mapping[str, Any], tick: int) -> str:
+    """Phase id for a tick straight from the pack's `time` rules — the
+    rules-level twin of `Clock.phase_of` (D-024: the Clock owns the run's
+    monotonic counter and its lookup; this pure twin serves the read-side
+    paths that hold rules + a tick but no Clock instance, e.g. the
+    acquisition gate. The pack lint has already validated contiguity via
+    `Clock.from_rules`, so an uncovered tick here is a simulator bug)."""
+    day_tick = tick % int(time_rules["ticks_per_day"])
+    for phase in time_rules["phases"]:
+        if int(phase["from"]) <= day_tick < int(phase["to"]):
+            return str(phase["id"])
+    raise ValueError(
+        f"tick {tick} (day offset {day_tick}) is covered by no phase"
+    )
 
 
 class Clock:
