@@ -603,3 +603,26 @@ the boundary contracts (PARSER_SPEC, BRIEF_SPEC §7.1, VALIDATION_SPEC
 §7.1); the runner owns the engine, the transcripts, the hardware.
 Transcripts flow back one way — re-distilled into corpus rows (§8.2
 source 3) and TECH_NOTES numbers; the runner never writes repo files.
+Landed bg-8 (D-109): the deviation corpus is a committed pin
+(`tests/fixtures/deviation_corpus.json`, Layer 1's regression teeth in
+`tests/test_deviation.py`) and the heartbeat's first run is the §8.5
+baseline row — the numbers live in TECH_NOTES §11, never restated here.
+
+### 8.5 The heartbeat ledger (Layer 3 — the trend rows)
+
+One row per heartbeat run; a missed family records a gap row, the gate
+proceeds (§8.1 Layer 3's law). The metrics per row: engine_ok, raw gate
+validity → after one re-ask, alternative mix (intent/question/
+no_intent), full intent agreement vs the pins, the refusal-family
+census, the deviation coverage. Numbers' owner: TECH_NOTES; this table
+carries the trend pointers only.
+
+| Run | Date | Engine | Validity raw → 1 re-ask | Mix i/q/n | Agreement | Trend note |
+|---|---|---|---|---|---|---|
+| bg-7 | 2026-09-07 | glm-4-plus API | 79.5% → 88.6% | 29/9/6 | 16/30 full | the one-shot probes (TECH_NOTES §10) |
+| bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
+
+Gap rows standing: the {3–8B, GBNF} arm (all families, owner
+hardware); the bg-7 prose families (ii)–(v) skipped in the bg-8
+heartbeat (rate-limit economics); the per-family latency distribution.
+

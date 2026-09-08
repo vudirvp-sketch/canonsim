@@ -513,19 +513,29 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   surface-section decision: no extension warranted by the API-engine
   numbers, the weaker-engine arm re-measures.
 
-### bg-8 · engine — the LLM-integration test runner — todo (owner-gated)
+### bg-8 · engine — the LLM-integration test runner — done (2026-09-09)
 
-The testproto proposal's live half (D-098; the protocol contract:
-TEST_PLAN §8): the runner outside the repo (Rule 9, INV-4) — consumes
-the repo's pinned corpora + metric definitions, drives a real engine
-over bg-7's probe families + the deviation corpus's F1–F6 (the
-world-answer law's first live numbers); transcripts flow back one way
-— TECH_NOTES numbers + re-distilled corpus rows + Layer-1 script
-calibration; the heartbeat's first run records the baseline trend row
-(never blocks track A — the gap-row law). Owner-gated: real hardware
-time; opens on bg-7's numbers. Candidate follow-on, routed not forced:
-pack-declared noun aliases into the grammar snapshot (engine-generic,
-INV-3-clean — TEST_PLAN §8.2's measured gap).
+- Done one-liner: the testproto live half LANDED (the owner's
+  sandbox-simulation call lifting the hardware gate — the same API
+  engine class as bg-7, glm-4-plus; the {3–8B, GBNF} arm stays the gap
+  row) — the deviation corpus F1–F6 through the REAL mode-C door: **the
+  world-answer law's first live numbers, coverage 34/34 = 100%** (the
+  failures live in mapping quality: F3 invented names 1/6 — the guess
+  engine, 4 wrong world actions committed; F4 unmodeled verbs 2/6 —
+  closest-verb guesses; F6 injections 0/6 — two EXECUTED, the
+  protocol-echo leak the run's only unanswered cycle; honest 17/36) +
+  the heartbeat's first run (the parse corpus re-driven: 84.4 → 93.3%
+  after one re-ask, refusal families DRIFT run-to-run — TEST_PLAN §8.5
+  the baseline row). Transcripts re-distilled one way:
+  `tests/fixtures/deviation_corpus.json` (Layer-1's calibrated
+  worst-case repliers) + `tests/test_deviation.py` (the world-answer
+  law's regression teeth, +8 tests, 1315 → 1323) + TECH_NOTES §11.
+  Gap rows standing: the {3–8B, GBNF} arm (owner hardware), the bg-7
+  prose families skipped this heartbeat (rate-limit economics), the
+  per-family latency distribution. The candidate follow-on (pack-
+  declared noun aliases) stays routed not forced — the F2 numbers
+  (6/6 honest, the question fired) do not force it. Detail: TEST_PLAN
+  §8.2/§8.5, TECH_NOTES §11.
 
 ### bg-2 · event taxonomy — DONE (bg-2-event-taxonomy)
 

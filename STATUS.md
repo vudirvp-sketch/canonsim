@@ -1,49 +1,53 @@
 # STATUS — canonsim
 
-Iteration: iter-76 (`iter-76-scenedetail-arm` — depth-2b, the
-scene-detail ARMING, the 68a→68b pattern) · Phase: 4 (Knowledge & scene)
-— CLOSED — gate PASS (iter-65, D-094) · **Phase: 5 (Depth) — OPEN
-(iter-73, D-105 — the owner's call, the iter-55/36 opener precedent;
-depth-1 + depth-1b + depth-2 + depth-2b LANDED)**
-**The landing: the committed pack's own `rules.json::scene_detail`
-block — loc_tavern (under_bench/behind_barrel) + loc_guardroom
-(under_cot) — exactly the two scenes the committed corpus observes
-(the recon's answer; never-observed scenes refused as dead weight).
-The knowledge-surface decision (the row's own question, D-108): the
-materialized detail's surface is the event's own payload
-(`state_changes` + the `materialized` outcome key) + the folded canon
-— ZERO new knowledge tokens, the `knows` templates stay
-`scene_{location}`/`rambling_by_{actor}` (actions.json untouched —
-the corpus claim surface never moves). The corpus price measured
-FIRST both arms (the Rule-9 probe: the armed pack vs the block-popped
-v0.1 twin) and paid strictly fidelity-only: every paid line differs
-only in {state_changes, outcome} — the day1 ten (director ON, the
-Simulator default — the probe's first pass measured the OFF arm and
-undercounted; the default arm is the corpus geometry): 4 seeds zero,
-5 seeds one barkeep-look payload (the run's first tavern observation),
-seed 125 the two guard scans (the later tavern looks read canon — one
-draw per slot ever); the fire corpus + plumbing zero; T8 arms two
-payloads, M1..M5 + chain counts identical; the narrator corpus
-105: 90 identical, 15 cases one payload each — every status, note,
-anchor, and call document identical. The 68a pins re-pointed to the
-crafted v0.1 twin (4 tests) + the murmur's state-surface pin
-re-worded (the ramble's only state changes are the scene's lazy
-births — the observe family's second member, live); +6 tests
-(1309→1315+1), ruff clean.**
+Iteration: bg-8 (`bg-8-engine-runner` — track B, the LLM-integration
+test runner, the testproto live half, D-098's Layer 2; the owner's
+2026-09-09 sandbox-simulation call lifted the hardware gate) · Phase: 5
+(Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2 + depth-2b
+LANDED, the queue: depth-4 next) · Track A untouched this session —
+track B never blocks it (ROADMAP §1).
+**The landing: the deviation corpus F1–F6 through the REAL mode-C door
+on the sandbox API engine (glm-4-plus, the bg-7 engine class; the
+{3–8B, GBNF} arm stays the gap row, TEST_PLAN §8.1 Layer 3's law) —
+THE WORLD-ANSWER LAW'S FIRST LIVE NUMBERS: coverage 34/34
+world-touching probes = 100% (25 committed events — attempts included,
+4 `intent_rejected` facts, 2 world steals, 5 talk+rumor pairs — plus 2
+questions and 8 no_intent: the boundary answers everything; the
+measured failures live in MAPPING QUALITY: F1 4/6, F2 6/6 with the
+disambiguation question FIRED, F3 1/6 the guess engine — invented
+names → fabricated on-grammar mappings, 4 WRONG WORLD ACTIONS
+committed; F4 2/6 closest-verb guesses; F5 4/6 — casing/typo/mixed-
+script map clean, "…" confabulated a look_around; F6 0/6 — two
+injections EXECUTED, one a committed world steal, the protocol echo
+the run's only unanswered cycle; honest 17/36) + the heartbeat's
+FIRST RUN (the 51-utterance parse corpus re-driven through the live
+door: 84.4 → 93.3% after one re-ask — bg-7: 79.5 → 88.6; the re-ask
+rescued 4/4, all texture-reference staleness — bg-7's unknown-keys
+shape did NOT reproduce: the refusal families DRIFT run-to-run, which
+is what the trend line exists to catch; mix 32/4/6, full intent
+agreement 20/35; TEST_PLAN §8.5 the baseline row). The transcripts
+re-distilled ONE WAY into the Layer-1 pin:
+`tests/fixtures/deviation_corpus.json` (the engine's replies verbatim
+— the honest mappings AND the measured failures, the anti-tautology
+law) + `tests/test_deviation.py` (the world-answer law's regression
+teeth: the family replays, the leak probe's loudness, the
+injection-immunity pins, the totals census). 1315 → 1323 passed +1
+skipped, ruff clean; the runner + transcripts outside the repo (Rule
+9; `git status` verified clean through the run).**
 ·
-Date: 2026-09-08 ·
-Scope: `content/tavern_pack/rules.json` (the `scene_detail` block —
-the arming itself, pack data only), `tests/test_detail.py` (the
-re-pointed pins + the arming family: the declared block, the live
-pools, the D-108 knowledge surface, the paid day1 ledger, the ten's
-seed split, the armed replay), `tests/test_ambient.py` (the murmur's
-state-surface re-pin), `STATUS.md` (this header + the Next re-pin),
-`worklog.md` (the iter-76 entry, one in / one out — iter-74 evicted),
-`docs/TASKS.md` (depth-2b done), `docs/DECISIONS.md` (D-108),
-`docs/EVENT_SCHEMA.md` (§4 the committed-arming clause),
-`README.md` (the phase-5 state line). 9 files — 1 pack + 2 suites +
-6 doc sync (the iter-68b/74 arming footprint: the pack arming + its
-measured corpus price + the doc sync are one mechanism family).
+Date: 2026-09-09 ·
+Scope: `tests/fixtures/deviation_corpus.json` (NEW — the F1–F6
+deviation corpus, 36 probes, the live transcripts re-distilled),
+`tests/test_deviation.py` (NEW — the Layer-1 suite, +8 tests),
+`docs/TECH_NOTES.md` (§11 the bg-8 numbers), `docs/TEST_PLAN.md`
+(§8.4 the landed pointer + §8.5 the heartbeat ledger),
+`docs/TASKS.md` (bg-8 done + the gap rows), `STATUS.md` (this header
++ the Next re-pin + KI#79 deleted per §5), `worklog.md` (the bg-8
+entry, one in / one out — iter-68b evicted), `docs/DECISIONS.md`
+(D-109), `README.md` (the track-B state line),
+`docs/AGENT_NAVIGATION.md` §1 (the two new file rows). 10 files — 2
+new test artifacts + 8 doc sync (the bg-7 footprint family: the live
+run outside, the repo diff doc-side).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -67,11 +71,10 @@ measured corpus price + the doc sync are one mechanism family).
 
 ## Active KIs
 
-- KI#79 · INV-3 stoplist word in a fresh comment (the tavern noun
-  "guard" inside a `core/pack.py::_scene_detail` assert comment —
-  caught by the stoplist test on the first suite run, the comment
-  re-worded; the lesson: fresh mechanic prose stays noun-audited
-  even in comments) · opened+CLOSED iter-75.
+- (KI#79 deleted at bg-8 per AGENTS §5 — closed iter-75, two
+  iterations past (iter-76 + bg-8); the lesson lives in git + the
+  stoplist law: fresh mechanic prose stays noun-audited even in
+  comments. No active KIs — ≤15 held with room.)
 
 - (KI#78 deleted at iter-72 per AGENTS §5 — closed iter-70, two
   iterations past (iter-71 + iter-72); the lesson lives in git + the
@@ -565,10 +568,12 @@ drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
 gate + depth-2b the ARMING LANDED (iter-73/74/75/76,
 D-105/D-106/D-107/D-108; the corpus prices paid fidelity-only /
-zero-by-construction, 1315+1 green). Track A is debt-free; bg-8 keeps
-its opening numbers + lowercase-gap instrument, owner-gated on
-hardware. The queue: `depth-4` fold checkpoints (the chronicler-
-family derived artifact — fold-checkpoint + event-index offset + the
+zero-by-construction, 1315+1 green). Track A is debt-free. Track B:
+bg-8 LANDED (2026-09-09, D-109 — the deviation corpus's first live
+numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
+prose heartbeat families the standing gap rows). The queue: `depth-4`
+fold checkpoints (the chronicler-family derived artifact —
+fold-checkpoint + event-index offset + the
 sha256 index-anchor, intake-4's addition; the resume door stays
 owner-gated, phases.md §7), then `depth-5` lazy worldgen passes (the
 phase's build-column headline — ordered passes over the seed, Azgaar
@@ -612,11 +617,14 @@ resolutions).**
    testimony-crystallization fidelity floor; the static-personality
    half of the character-card question — PACK_SPEC territory at the
    2nd-setting gate) carry unchanged.
-3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE, bg-7 DONE** (the five
-   probes' first numbers on the sandbox API engine + the gap row —
-   TECH_NOTES §10), bg-6 owner-deferred, **bg-8 todo** (the live
-   runner — owner-gated on hardware time, opens on bg-7's numbers).
-   New track-B ideas enter the `docs/TASKS.md` backlog on the owner's
+3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE, bg-7 DONE, bg-8 DONE**
+   (the five probes' first numbers + the deviation corpus's first live
+   numbers + the heartbeat baseline — TECH_NOTES §10/§11, TEST_PLAN
+   §8.5), bg-6 owner-deferred. The standing gap rows: the {3–8B,
+   GBNF} arm (owner hardware — engine-1's decision input), the bg-7
+   prose families skipped in the bg-8 heartbeat (rate-limit
+   economics), the per-family latency distribution. New track-B ideas
+   enter the `docs/TASKS.md` backlog on the owner's
    call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked
    until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG
    trigger ("phase-0 gate passed") fired at iter-6, was never

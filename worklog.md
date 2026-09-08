@@ -13,6 +13,32 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+bg-8 · 2026-09-09 · engine-runner — the LLM-integration test runner,
+testproto's live half (track B, D-098 Layer 2, the owner's
+sandbox-simulation call; 10 files — 2 new test artifacts + 8 doc
+sync, the bg-7 footprint family)
+- The runner outside the repo (Rule 9:
+  /home/z/my-project/scripts/bg8_runner.py + bg8_distill.py) drove
+  the sandbox API engine (glm-4-plus) through the REAL mode-C door:
+  the deviation corpus F1–F6 (36 probes) + the heartbeat (the
+  51-utterance parse corpus re-run — the first trend row, TEST_PLAN
+  §8.5).
+- Numbers (TECH_NOTES §11): world-answer coverage 34/34 = 100% — the
+  measured failures are mapping quality (F3 1/6 the guess engine, F4
+  2/6 closest-verb, F6 0/6 two injections EXECUTED + the
+  protocol-echo leak; honest 17/36); the heartbeat 84.4 → 93.3%
+  after one re-ask, the refusal families DRIFT run-to-run
+  (unknown-keys → texture-reference).
+- The transcripts re-distilled into the Layer-1 pin:
+  tests/fixtures/deviation_corpus.json + tests/test_deviation.py
+  (+8 tests, 1315 → 1323 passed +1 skipped, ruff clean; the runner
+  never wrote a repo byte, git verified). D-109; TASKS bg-8 done +
+  the standing gap rows ({3–8B, GBNF}, the prose families,
+  latency). iter-68b evicted (verified in this edit); 10 after.
+  Caps: STATUS 633 / TASKS 829 / TECH_NOTES 695 / TEST_PLAN 628 /
+  DECISIONS 73 (45 rows) — over-cap on substance (§6.1, the
+  D-095..D-108 precedent), trim at the phase-5→6 gate.
+---
 iter-76 · 2026-09-08 · scenedetail-arm — depth-2b, the scene-detail
 ARMING (9 files — 1 pack + 2 suites + 6 doc sync: the pack arming +
 its measured corpus price + the doc sync are one mechanism family,
@@ -200,20 +226,4 @@ mechanism family, the iter-60..68 scope pattern)
   suspicion-home clause). D-101; TASKS suspectaxis done +
   suspectaxis-2 laid. iter-62 evicted (verified in this edit); 10
   after.
----
-iter-68b · 2026-09-07 · rumordrift arming — the first LIVE
-knowledge.drift family in the committed pack (68a's arming row,
-D-100; 2 runtime files + the suite — under the soft limit)
-- content/tavern_pack/rules.json the figure_deeds family (the two
-  crime sightings, monotone 0/30/50 ladder) + the knowledge notes
-  line; tests/test_rumordrift.py +4 (the corpus-price pin, the live
-  hit seed 2, the miss law seed 1, the traits same-wave pin) and the
-  two 68a committed-pack pins re-pointed to the crafted v01 twin.
-- Corpus price measured FIRST, ZERO: every committed-corpus talk tells
-  a non-member token (the told-token census) — the 105-case narrator
-  corpus, the 10-case parse corpus, the T1 golden, day1_full 10 seeds,
-  the traits crystallization all byte-identical; the full-suite flip
-  ledger = the two self-referential pins. 1223→1227+1 green, ruff
-  clean. D-100; TASKS rumordrift done + beliefwire-2 price re-measured
-  (stands verbatim). iter-61 evicted (verified in this edit); 10 after.
 (end of log — cap 10; pre-trim history lives in git)

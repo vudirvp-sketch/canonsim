@@ -472,9 +472,13 @@ knowledge surface stays the event's own payload, zero new knowledge
 tokens; the corpus price measured both arms and paid fidelity-only —
 the day1 ten pays only the observing seeds, the narrator corpus
 15/105 cases one payload each, statuses/anchors/call documents
-untouched). 1315
-tests green, ruff
-clean.
+untouched). Track B alongside: bg-8 LANDED 2026-09-09 (D-109 —
+testproto's live half on the sandbox API engine: the deviation corpus
+F1–F6 through the REAL mode-C door, the world-answer law's first live
+numbers — coverage 34/34, honest 17/36, F3 the guess engine, F6 two
+injections EXECUTED; the heartbeat's first trend row; the transcripts
+re-distilled into `tests/fixtures/deviation_corpus.json` +
+`tests/test_deviation.py`). 1323 tests green, ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
@@ -531,15 +535,19 @@ slots: the copular predicate head + the possessive tail) and
 bg-8's weaker-engine arm, never a gate — no refusal, no wiring, the
 corpus split pinned in tests/test_scan.py (the single owner of the
 numbers). The lance's track-A remainder: none — the lance is
-COMPLETE; bg-8 (owner-gated) is its only open row. 1255 tests green,
-ruff clean.
+COMPLETE; bg-8 — its only open row at the lance's close — DONE
+2026-09-09 (D-109: the deviation corpus's world-answer coverage 34/34
++ the heartbeat baseline row, TECH_NOTES §11; the {3–8B, GBNF} arm
+the standing gap row). 1255 tests green at the lance's close, ruff
+clean.
 Contract owners: TASKS v0.2 backlog rows + D-095/D-096/D-097/D-098/
-D-099/D-100/D-101/D-102/D-103/D-104 + the TASKS research-intake-3 rows +
-TEST_PLAN §8 + TECH_NOTES §10 +
+D-099/D-100/D-101/D-102/D-103/D-104/D-109 + the TASKS research-intake-3 rows +
+TEST_PLAN §8 + TECH_NOTES §10/§11 +
 tests/test_beliefwire.py + tests/test_rumordrift.py +
 tests/test_suspectaxis.py + tests/test_scan.py + brief/scan.py +
 core/traits.py (the counter law) + core/knowledge.py (drift) +
-core/crime.py (the pair mode).
+core/crime.py (the pair mode) + tests/test_deviation.py (the Layer-1
+world-answer teeth).
 
 ## For AI agents (primary audience)
 
