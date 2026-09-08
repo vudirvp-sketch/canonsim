@@ -65,19 +65,30 @@
   st-5 / st-6a dependencies by reference, never duplicated rows.
 
 ### iter-77 · meta-analysis routed candidates (the owner's two-text
-cross-review; **verdict pending — none execute without the owner's
-call**)
+cross-review, re-verified claim-by-claim and strengthened at iter-78
+against HEAD `cb91cbe`; **verdict pending — none execute without the
+owner's call**)
 
 - `pred-failclosed` · todo (owner verdict): `not_equals` on a missing
   prop answers True — fail-open (`core/predicates.py::_prop` + the
   `core/onaction.py` gate twin, docstring-pinned "honestly"). The
   candidate: missing → False under ALL comparators, negation via
   `{"not": …}`; two code sites + the missing-prop pins +
-  DIRECTOR_SPEC §3a sync + a D-row; the committed pack carries zero
+  DIRECTOR_SPEC §3/§3c sync + a D-row; the committed pack carries zero
   `not_equals` (migration cost zero). The `of`-typo case is already
   lint-dead (`core/pack.py` validates 'of' against entity ids); the
   live surface is `path` typos (lint checks non-empty string only) +
-  runtime-absent props.
+  runtime-absent props. iter-78 strengthening: DIRECTOR_SPEC §3's
+  blanket "a missing prop / missing entity answers False" was born
+  iter-40 WITH the prop leaf — the spec (the contract owner) has
+  pinned fail-closed all along; the `not_equals` exception is a
+  37-iteration code-vs-spec drift, so ACCEPT restores the spec, not
+  changes semantics (then §3 needs no edit — only §3c's "answers
+  honestly" wording, the two module docstrings, and the two existing
+  "answers honestly" pins that flip: `test_predicates.py` + the
+  onaction stripped-gate twin; REJECT instead documents the exception
+  INTO §3). The compound escape hatch holds: explicit absence stays
+  writable as `{"not": {"kind": "prop", …}}`.
 - `pred-contract` · todo (owner verdict): `_prop` reads
   `spec["comparator"]`/`spec["value"]` directly — KeyError where the
   docstring promises ValueError; one loud-backstop fix + pin.
@@ -90,8 +101,12 @@ call**)
 - `rule9-resolver` · todo (owner verdict): one line in AGENTS §7 —
   session runner scripts (live sandbox drivers) live outside the
   repo (the operator's Rule 9); `scripts/` holds only committed repo
-  tooling (D-046) — resolves the four dangling citations (STATUS FAQ
-  x3, TASKS).
+  tooling (D-046) — resolves every dangling citation at once. iter-78
+  census: the true count is ~19, not iter-77's 4 (STATUS FAQ x3,
+  TASKS x1, TEST_PLAN x8 incl. §8.4's own title, TECH_NOTES x2,
+  DECISIONS x5 — D-098/D-103/D-106/D-108/D-109; the 4x was a
+  STATUS+TASKS-scoped grep undercount). Defining the term once
+  in-repo resolves all of them with zero citation edits.
 - `verify-seed` · todo (owner verdict): the bootstrap verify line
   gains `PYTHONHASHSEED=0` (AGENTS §10 alignment; suite empirically
   green under any seed — consistency, not a live flap); optionally a
@@ -107,6 +122,16 @@ call**)
   doc-drift family); its un-routed protocol proposals (stratified
   sampling, budget caps, n≥3 CIs, provider rotation, brief-size
   growth curve) route or drop with it.
+- Re-raise guard (iter-78, the owner's ignore-list ruling — re-flag
+  only with NEW measured evidence): LLM-drift / rate-limit /
+  token-econ concerns are already TEST_PLAN §8.1–8.5 law + the gap
+  rows (Layer 1 = fence, L2/3 = advisory — new mechanisms are YAGNI);
+  stream-name injectivity holds by construction (kinds are a closed
+  ":"-free vocabulary; the scene family's lint docstring pins "map
+  keys, injective by construction" — a lint is L1 noise); the FAQ
+  aging + cap trim ride the phase-5→6 gate; the sandbox essay's
+  value-prop section (its own §9, chat-side — no repo section) is
+  correct self-description, no action.
 
 ### Research intake 4 (iter-73; the phase-5 synthesis cross-review, routed)
 

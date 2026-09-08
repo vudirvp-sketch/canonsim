@@ -13,6 +13,34 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-78 · 2026-09-09 · meta-land — the owner's ultimate-variant text
+re-verified claim-by-claim against HEAD `cb91cbe` and landed (3
+files: STATUS header + Next-step line, this log, the TASKS iter-77
+routed section strengthened; the iter-19/34/71/77 owner-requested
+precedent; doc-only streak 2 of 2, both owner-requested — iter-79
+must be functional)
+- Verified TRUE (every claim of the text): the fail-open
+  `not_equals` (`predicates._prop` + `onaction._gate_passes`); lint
+  covers 'of', `path` is string-only; content/ carries zero
+  `not_equals`; the audit except-branch is deliberate design
+  (try/else REQUIRES except, the re-raise never masks); TECH_NOTES
+  has no §12; the five sandbox adaptations un-routed; the
+  session-prefix law already AGENTS §2.2 (iter-19/34/71/77).
+- Three findings landed into the TASKS rows: (1) DIRECTOR_SPEC §3's
+  "missing prop answers False" was born iter-40 WITH the prop leaf
+  — the spec pins fail-closed; the `not_equals` exception is a
+  37-iteration code-vs-spec drift → the candidate is spec
+  RESTORATION (ACCEPT: §3 unchanged, §3c wording + 2 docstrings +
+  2 existing pins flip; REJECT: §3 documents the exception); (2)
+  the Rule-9 census is ~19 citations (STATUS x3, TASKS x1,
+  TEST_PLAN x8, TECH_NOTES x2, DECISIONS x5), not iter-77's 4x —
+  the AGENTS §7 one-liner resolves all; (3) the owner's ignore-list
+  landed as the routed section's re-raise guard. pred-contract was
+  already routed — the text missed it; the TASKS collapse + the
+  rng.py/of corrections were already iter-77's. 1323+1 green under
+  seeds 0/42/unset, ruff clean. iter-69b evicted (verified in this
+  edit); 10 after.
+---
 iter-77 · 2026-09-09 · meta-analysis — the owner's two-text
 cross-review, doc-only (3 files: STATUS header + Next-step line,
 this log, TASKS rows; the iter-19/34/71 owner-requested precedent;
@@ -215,23 +243,4 @@ Rule 9/INV-4 and never wrote a repo byte, git clean through the run)
   iter-66a precedent); TASKS bg-7 done + prosefloor-2
   UNBLOCKED. 1239+1 green, ruff clean. iter-64 evicted (verified in
   this edit); 10 after.
----
-iter-69b · 2026-09-07 · suspectaxis-2 — the committed pack's
-per-target ARMING (D-101's arming row, D-102; 25 files — the pack
-arming + its measured corpus price + the doc sync are one mechanism
-family, the iter-60..69 scope pattern)
-- rules.json the object mapping (all figures pc_01) + witnessed_arson
-  30 + the pair-home re-declarations (triggers, vigil modifiers, crowd
-  prop, wary marker); entities.json the pair homes, the flat drop;
-  core/loop.py the ignition cause re-anchored to the action; core/pack.py
-  the marker lint's pair.<npc>.<axis> family.
-- Corpus price measured FIRST both arms, paid in-landing: the D-101
-  projection (8 claims) undercounted — the true ledger + the
-  arson-case stream shifts (the witnessed-arson reactions, the seed-93
-  arrest family) via the fixed-point re-distill (31 claim edits, the
-  iter-50 idempotency law). M1/M2 identical; day1 11/11 diverged, the
-  T1 golden + theft_and_arson byte-identical. 1239+1 green, ruff clean.
-  KI#76 opened+closed (the DIRECTOR_SPEC §4 formula). TASKS
-  suspectaxis-2 done; the lance's remainder: beliefwire-2 + bg-7.
-  iter-63 evicted (verified in this edit); 10 after.
 (end of log — cap 10; pre-trim history lives in git)

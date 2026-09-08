@@ -1,44 +1,52 @@
 # STATUS — canonsim
 
-Iteration: iter-77 (`iter-77-meta-analysis` — the owner's two-text
-cross-review: the bootstrap gap-analysis + the sandbox-constraints
-essay, every claim re-verified against HEAD; doc-only, the
-iter-19/34/71 owner-requested precedent) · Phase: 5 (Depth) — OPEN
-(iter-73, D-105; depth-1 + depth-1b + depth-2 + depth-2b LANDED,
-the queue: depth-4 next) · Track A untouched this session — track B
-never blocks it (ROADMAP §1).
-**The landing: CONFIRMED — the three-pointer sequencing conflict
-(bootstrap "top todo" = the gate-blocked `depth-3` row vs STATUS's
-queue depth-4 vs NAVIGATION §3 "What to do next → TASKS.md"); the
-bootstrap verify line runs without `PYTHONHASHSEED=0` while AGENTS
-§10 pins it (suite empirically green under seeds 0/unset/42 — a
-consistency gap, not a live flap; INV-2's discipline holds today);
-Rule 9 cited 4x (STATUS FAQ x3, TASKS) and defined nowhere in-repo;
-`not_equals` on a missing prop answers True (fail-open;
-`core/predicates.py::_prop` + the `core/onaction.py` gate twin,
-pinned "honestly" — the `of`-typo case is already lint-dead in
-`core/pack.py` ('of' must name an entity), the live surface is
-`path` typos + runtime-absent props); TASKS done-row collapse debt
-(829/600 over-cap on substance). CORRECTED — the audit
-`except BaseException: raise` branch is syntax-bearing (a try/else
-REQUIRES an except; the deliberate no-masking semantics, not
-cruft); the sandbox text's stop-point claim "saved in TECH_NOTES
-§12" is NOT in HEAD (no §12 exists — a reported-but-unlanded
-deliverable, the KI#48 doc-drift family); its layer discipline is
-law (TEST_PLAN §8.1) but stratified sampling / budget caps / n>=3
-CIs / provider rotation / the brief-size curve are un-routed
-proposals. The verdict set + ultimate variants issued in chat
-(Russian); the repo-side candidates routed to TASKS (the iter-77
-section, owner verdict pending). 1323 passed +1 skipped, ruff
-clean.**
+Iteration: iter-78 (`iter-78-meta-land` — the owner's ultimate-variant
+text: every claim re-verified against HEAD `cb91cbe`, the iter-77
+corrections carried, the routed candidates strengthened with the
+new findings; doc-only, the iter-19/34/71/77 owner-requested
+precedent) · Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 +
+depth-1b + depth-2 + depth-2b LANDED, the queue: depth-4 next) ·
+Track A untouched this session — track B never blocks it (ROADMAP
+§1).
+**The landing: CONFIRMED — the text verified true claim-by-claim:
+the fail-open `not_equals` on a missing prop (`core/predicates.py::
+_prop` + the `core/onaction.py` gate twin, both pinned "honestly");
+pack lint covers `of` but `path` is non-empty-string-only; content/
+carries zero `not_equals`; the audit `except BaseException: raise`
+branch is deliberate design (a try/else REQUIRES an except, and the
+re-raise never masks the original error); TECH_NOTES has no §12;
+session-type prefixes are already law (AGENTS §2.2 — the
+iter-19/34/71/77 owner-requested precedent). Already resolved by
+iter-77, not by this session (the text predates `cb91cbe`): the
+phase-5 done-row collapse; the of-typo lint correction. STRENGTHENED
+— three new findings landed into the TASKS iter-77 rows: (1)
+DIRECTOR_SPEC §3's blanket "a missing prop / missing entity answers
+False" was born iter-40 WITH the prop leaf — the spec (the contract
+owner) has pinned fail-closed all along, the `not_equals` exception
+is a 37-iteration code-vs-spec drift, so the fail-closed candidate
+is spec RESTORATION, not a semantics change (ACCEPT: §3 needs no
+edit — §3c's "honestly" wording, two docstrings, two existing pins
+flip; REJECT: §3 gains the exception); (2) the Rule-9 citation
+census is ~19 (STATUS FAQ x3, TASKS x1, TEST_PLAN x8 incl. §8.4's
+title, TECH_NOTES x2, DECISIONS x5), not iter-77's 4x — the one-line
+AGENTS §7 fix resolves all; (3) the owner's ignore-list is now the
+routed section's re-raise guard (LLM-drift concerns are TEST_PLAN
+§8.1–8.5 law; injectivity holds by construction; the FAQ trim rides
+the phase-5→6 gate). Owner verdicts pending on the full candidate
+set (TASKS' iter-77 section: pred-failclosed, pred-contract,
+seq-owner, rule9-resolver, verify-seed, archive-protocol,
+tn12-claim) — none execute without the call. 1323 passed +1
+skipped under seeds 0/42/unset, ruff clean. Doc-only streak 2 of 2
+(both owner-requested — the §2.5.3 alarm's ask-the-owner condition
+is pre-satisfied by this very call); iter-79 MUST be functional.**
 ·
 Date: 2026-09-09 ·
 Scope: `STATUS.md` (this header + the Next-step owner-gated line),
-`worklog.md` (the iter-77 entry, one in / one out — iter-69
-evicted), `docs/TASKS.md` (the iter-77 routed-candidate rows + the
-phase-5 done-row collapse per the TASKS header law — the detail
-lives in git + worklog + the D-105..D-108 rows). 3 files — doc-only
-(streak 1 of 2; the next iteration must be functional).
+`worklog.md` (the iter-78 entry, one in / one out — iter-69b
+evicted), `docs/TASKS.md` (the iter-77 routed-candidate section
+strengthened: pred-failclosed + rule9-resolver + the re-raise
+guard; the detail lives in git + worklog). 3 files — doc-only
+(streak 2 of 2, both owner-requested; iter-79 must be functional).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -607,12 +615,15 @@ resolutions).**
    tension, the owner may veto). The leg-1 recorded questions (the
    testimony-crystallization fidelity floor; the static-personality
    half of the character-card question — PACK_SPEC territory at the
-   2nd-setting gate) carry unchanged. New from iter-77: the routed
-   meta-analysis candidates (TASKS' iter-77 section — the predicate
-   fail-closed design, the sequencing single-owner split, the Rule-9
-   resolver line, the verify-line seed, the archive protocol, the
-   TECH_NOTES §12 landing-or-drop) await the owner's verdict; none
-   execute without the call.
+   2nd-setting gate) carry unchanged. New from iter-77/78: the
+   routed meta-analysis candidates (TASKS' iter-77 section,
+   strengthened at iter-78 — pred-failclosed, now a spec-restoration
+   case: DIRECTOR_SPEC §3 pinned missing→False from iter-40;
+   pred-contract; the sequencing single-owner split; the Rule-9
+   resolver line, ~19 citations not 4; the verify-line seed; the
+   archive protocol; the TECH_NOTES §12 landing-or-drop) await the
+   owner's verdict; none execute without the call. iter-79 must be
+   functional (doc-only streak 2 of 2, both owner-requested).
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE, bg-7 DONE, bg-8 DONE**
    (the five probes' first numbers + the deviation corpus's first live
    numbers + the heartbeat baseline — TECH_NOTES §10/§11, TEST_PLAN
