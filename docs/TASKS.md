@@ -28,57 +28,24 @@
 
 ### Phase-5 depth backlog (opened iter-73; the owner's start call, D-105)
 
-- `depth-1` · the acquisition gate — **done (iter-73, D-105)**: the
-  D-096-named real gap — continuous acquisition CONDITIONS feeding
-  birth fidelity; mechanics in `core/intent.py::acquisition_fidelity`
-  (the resolve path, both branches; event-site emission law;
-  floor-stick ladder, D-007's documented twin) + the closed condition
-  vocabulary (`when_flag`/`is`, `phase_in`/`unless_flag`, `steps`;
-  ambient channels saw/heard only) linted in `core/pack.py` — the
-  committed pack UNARMED (v0.1 bytes, the 68a pattern; the gate
-  consumes no draws ever, so even the fingerprint cannot see it).
-  Detail: tests/test_acquisition.py.
-- `depth-1b` · the acquisition arming — **done (iter-74, D-106)**: the
-  committed pack's `position_visibility.acquisition` block (smoke on
-  saw/heard over the fire layer's raw follow-up flag; night-light
-  `phase_in` with the lit-room `unless_flag` — the flag data itself
-  landed: `entities.json::locations.flags` `{lit: true}` on the tavern
-  + the guardroom, seeding the projection as raw site props,
-  `core/fold.py`; the location-flags shape lint in `core/pack.py`).
-  The corpus price measured FIRST both arms and paid in the landing:
-  the talk geometry ZERO bytes; the fire geometries exactly ONE
-  stepped record per run (the burnout sighting, fidelity-only — no id
-  shifts, no appended events, zero re-distill, zero fixture regen, the
-  corpus pins all hold); M1/M2/T8 arms identical. Detail:
+- `depth-1` · the acquisition gate — **done (iter-73, D-105;
+  collapsed iter-77 per the header law — the detail lives in git +
+  worklog + D-105)**: acquisition_fidelity at the resolve point,
+  pack-linted closed condition vocabulary, the committed pack
+  unarmed (v0.1 bytes). Detail: tests/test_acquisition.py.
+- `depth-1b` · the acquisition arming — **done (iter-74, D-106;
+  collapsed iter-77)**: the pack's `position_visibility.acquisition`
+  block + location flags; corpus price paid fidelity-only. Detail:
   tests/test_acquisition.py.
-- `depth-2` · lazy detail materialization, the gate — **done (iter-75,
-  D-107)**: the `scene:<id>:detail` stream family (`core/rng.py`, the
-  D-079 law's third member: lazy registration, injective name, the
-  scene-granular isolation); the draw gate
-  `core/detail.py::materialize_scene_detail` (first meaningful
-  observation = the observe-resolver family, pack slot order,
-  first-commit-wins canon-skip, `from_ None` births riding the
-  observation event + the `materialized` outcome key, present only
-  when something materialized); the slot_conflict mirror
-  `detail_claim` (commit / no_op / refused with the cause chain —
-  the future external claimers' gate, the worldgen passes); the
-  closed `{slot | values}` lint with the double-claim and one-object
-  laws. The committed pack UNARMED — v0.1 bytes, zero draws (the 68a
-  pattern). Detail: tests/test_detail.py.
-- `depth-2b` · the scene-detail ARMING — **done (iter-76, D-108)**: the
-  committed pack's own `scene_detail` block (the tavern's two slots +
-  the guardroom's cot — exactly the scenes the committed corpus
-  observes); the corpus price measured FIRST both arms (the Rule-9
-  probe) and paid fidelity-only: the day1 ten pays only where an
-  observation fires (4 seeds zero, 5 seeds one barkeep-look payload,
-  seed 125 the two guard scans), the fire corpus + plumbing zero, T8
-  arms two payloads with M1..M5 identical, the narrator corpus 15/105
-  cases one payload each — statuses, notes, anchors, call documents
-  untouched. The knowledge-surface decision (the row's question): the
-  materialized detail's surface is the event's own payload + the
-  folded canon — ZERO new knowledge tokens, the `knows` templates
-  stay `scene_{location}`/`rambling_by_{actor}` (D-108). Detail:
+- `depth-2` · lazy detail materialization, the gate — **done
+  (iter-75, D-107; collapsed iter-77)**: the `scene:<id>:detail`
+  stream family + `materialize_scene_detail` + the `detail_claim`
+  mirror + the lint; zero corpus price by construction. Detail:
   tests/test_detail.py.
+- `depth-2b` · the scene-detail ARMING — **done (iter-76, D-108;
+  collapsed iter-77)**: the pack's `scene_detail` block; the price
+  measured both arms, paid fidelity-only; zero new knowledge tokens
+  (D-108). Detail: tests/test_detail.py.
 - `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
   clean, never entropy) — needs the multi-scene layer, gate: after
   depth-5's first passes.
@@ -96,6 +63,50 @@
   on the iter-11b stress-test resolutions, phases.md §5): one id all
   tiers, macro-clock aggregates, condensation on crossing; the st-3 /
   st-5 / st-6a dependencies by reference, never duplicated rows.
+
+### iter-77 · meta-analysis routed candidates (the owner's two-text
+cross-review; **verdict pending — none execute without the owner's
+call**)
+
+- `pred-failclosed` · todo (owner verdict): `not_equals` on a missing
+  prop answers True — fail-open (`core/predicates.py::_prop` + the
+  `core/onaction.py` gate twin, docstring-pinned "honestly"). The
+  candidate: missing → False under ALL comparators, negation via
+  `{"not": …}`; two code sites + the missing-prop pins +
+  DIRECTOR_SPEC §3a sync + a D-row; the committed pack carries zero
+  `not_equals` (migration cost zero). The `of`-typo case is already
+  lint-dead (`core/pack.py` validates 'of' against entity ids); the
+  live surface is `path` typos (lint checks non-empty string only) +
+  runtime-absent props.
+- `pred-contract` · todo (owner verdict): `_prop` reads
+  `spec["comparator"]`/`spec["value"]` directly — KeyError where the
+  docstring promises ValueError; one loud-backstop fix + pin.
+- `seq-owner` · todo (owner verdict): the sequencing single-owner
+  split — bootstrap gains "the row pinned by STATUS 'Next step'
+  (sequencing owner); TASKS owns the backlog, never the order;
+  owner-gated and gate-blocked rows are not candidates", and
+  AGENT_NAVIGATION §3's "What to do next" row gains "the ORDER →
+  STATUS.md 'Next step'".
+- `rule9-resolver` · todo (owner verdict): one line in AGENTS §7 —
+  session runner scripts (live sandbox drivers) live outside the
+  repo (the operator's Rule 9); `scripts/` holds only committed repo
+  tooling (D-046) — resolves the four dangling citations (STATUS FAQ
+  x3, TASKS).
+- `verify-seed` · todo (owner verdict): the bootstrap verify line
+  gains `PYTHONHASHSEED=0` (AGENTS §10 alignment; suite empirically
+  green under any seed — consistency, not a live flap); optionally a
+  tests-side guard that fails loud on a missing seed as the
+  mechanism side.
+- `archive-protocol` · todo (owner verdict, bootstrap-owned): every
+  archive carries BASE_COMMIT.txt (the agent clone's HEAD hash) +
+  "the git commands are for the owner, to run after applying the
+  archive" + the no-network fallback (paste the diff inline).
+- `tn12-claim` · todo (owner verdict): the bg-8 stop-point claims
+  "saved in TECH_NOTES.md §12" — no §12 exists at HEAD: land a
+  cleaned §12 (the constraints essay) or drop the claim (KI#48
+  doc-drift family); its un-routed protocol proposals (stratified
+  sampling, budget caps, n≥3 CIs, provider rotation, brief-size
+  growth curve) route or drop with it.
 
 ### Research intake 4 (iter-73; the phase-5 synthesis cross-review, routed)
 

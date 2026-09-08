@@ -13,6 +13,35 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-77 · 2026-09-09 · meta-analysis — the owner's two-text
+cross-review, doc-only (3 files: STATUS header + Next-step line,
+this log, TASKS rows; the iter-19/34/71 owner-requested precedent;
+doc-only streak 1 of 2 — the next iteration must be functional)
+- Verified claim-by-claim against HEAD: the sequencing three-pointer
+  (bootstrap "top todo" = gate-blocked depth-3 vs STATUS queue
+  depth-4 vs NAVIGATION §3); the verify line's missing
+  PYTHONHASHSEED=0 (suite green under seeds 0/unset/42 — consistency
+  gap, not a live flap); Rule-9 dangling citations (4x); not_equals
+  fail-open on a missing prop (predicates._prop + the onaction gate
+  twin, pinned "honestly"; the of-typo case already lint-dead —
+  pack.py validates 'of' against entity ids; the live surface is
+  path typos + runtime-absent props); TASKS collapse debt.
+- Corrected the texts: the audit except-branch is syntax-bearing
+  (try/else REQUIRES except — deliberate no-masking, not cruft);
+  the sandbox text's "saved in TECH_NOTES §12" is not in HEAD
+  (no §12 — a reported-but-unlanded deliverable, the KI#48
+  family); its stratified-sampling / budget-cap / n>=3 /
+  provider-rotation / brief-size-curve items are un-routed
+  proposals, not law. Routed the candidates to TASKS (iter-77
+  section, owner verdict pending); ultimate variants in chat
+  (Russian). 1323+1 green under all three seeds, ruff clean;
+  phase-5 done rows collapsed per the TASKS header law. iter-69
+  evicted (verified in this edit); 10 after. Caps: STATUS 629 /
+  TASKS 840 (the collapse paid −33, the routed section +44) /
+  TECH_NOTES 695 / TEST_PLAN 628 — over-cap on
+  substance (§6.1, the D-095..D-109 precedent), trim at the
+  phase-5→6 gate.
+---
 bg-8 · 2026-09-09 · engine-runner — the LLM-integration test runner,
 testproto's live half (track B, D-098 Layer 2, the owner's
 sandbox-simulation call; 10 files — 2 new test artifacts + 8 doc
@@ -205,25 +234,4 @@ family, the iter-60..69 scope pattern)
   KI#76 opened+closed (the DIRECTOR_SPEC §4 formula). TASKS
   suspectaxis-2 done; the lance's remainder: beliefwire-2 + bg-7.
   iter-63 evicted (verified in this edit); 10 after.
----
-iter-69 · 2026-09-07 · suspectaxis — the per-target suspicion
-mechanics, declarative-only (the v0.2 refinement family's fifth
-segment, D-101; 4 runtime files + the suite + the doc sync — one
-mechanism family, the iter-60..68 scope pattern)
-- core/crime.py the `{source, figure}` mapping mode: the knower's axis
-  at `pair.<figure>.<axis>` (the P2a home, the seed is the reaction's
-  permission), the status flip + the arrest aimed at the figure (the
-  parameterized suspect_id); the flat string shape keeps the v0.1
-  bytes. core/pack.py the no-mixing/figure lint; core/director.py +
-  scripts/balance_harness.py the axis summed in either home.
-- Corpus price ZERO, measured: the committed pack stays flat (the mode
-  pin) + the git-HEAD A/B byte-identical (day1_full 125,
-  day1_theft_and_arson, guard-talk seeds 1/2, the seed-15 talk). +12
-  tests/test_suspectaxis.py (1227→1239+1, ruff clean) — the drift
-  teeth's blame pinned live on the 68b geometry (seed 2 hit / seed 1
-  miss). KI#75 opened+closed (the ev_0007 example props never matched
-  the runtime; EVENT_SCHEMA §10 + MVP_SCOPE synced, §4 the
-  suspicion-home clause). D-101; TASKS suspectaxis done +
-  suspectaxis-2 laid. iter-62 evicted (verified in this edit); 10
-  after.
 (end of log — cap 10; pre-trim history lives in git)

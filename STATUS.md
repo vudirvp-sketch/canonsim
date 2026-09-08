@@ -1,53 +1,44 @@
 # STATUS — canonsim
 
-Iteration: bg-8 (`bg-8-engine-runner` — track B, the LLM-integration
-test runner, the testproto live half, D-098's Layer 2; the owner's
-2026-09-09 sandbox-simulation call lifted the hardware gate) · Phase: 5
-(Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2 + depth-2b
-LANDED, the queue: depth-4 next) · Track A untouched this session —
-track B never blocks it (ROADMAP §1).
-**The landing: the deviation corpus F1–F6 through the REAL mode-C door
-on the sandbox API engine (glm-4-plus, the bg-7 engine class; the
-{3–8B, GBNF} arm stays the gap row, TEST_PLAN §8.1 Layer 3's law) —
-THE WORLD-ANSWER LAW'S FIRST LIVE NUMBERS: coverage 34/34
-world-touching probes = 100% (25 committed events — attempts included,
-4 `intent_rejected` facts, 2 world steals, 5 talk+rumor pairs — plus 2
-questions and 8 no_intent: the boundary answers everything; the
-measured failures live in MAPPING QUALITY: F1 4/6, F2 6/6 with the
-disambiguation question FIRED, F3 1/6 the guess engine — invented
-names → fabricated on-grammar mappings, 4 WRONG WORLD ACTIONS
-committed; F4 2/6 closest-verb guesses; F5 4/6 — casing/typo/mixed-
-script map clean, "…" confabulated a look_around; F6 0/6 — two
-injections EXECUTED, one a committed world steal, the protocol echo
-the run's only unanswered cycle; honest 17/36) + the heartbeat's
-FIRST RUN (the 51-utterance parse corpus re-driven through the live
-door: 84.4 → 93.3% after one re-ask — bg-7: 79.5 → 88.6; the re-ask
-rescued 4/4, all texture-reference staleness — bg-7's unknown-keys
-shape did NOT reproduce: the refusal families DRIFT run-to-run, which
-is what the trend line exists to catch; mix 32/4/6, full intent
-agreement 20/35; TEST_PLAN §8.5 the baseline row). The transcripts
-re-distilled ONE WAY into the Layer-1 pin:
-`tests/fixtures/deviation_corpus.json` (the engine's replies verbatim
-— the honest mappings AND the measured failures, the anti-tautology
-law) + `tests/test_deviation.py` (the world-answer law's regression
-teeth: the family replays, the leak probe's loudness, the
-injection-immunity pins, the totals census). 1315 → 1323 passed +1
-skipped, ruff clean; the runner + transcripts outside the repo (Rule
-9; `git status` verified clean through the run).**
+Iteration: iter-77 (`iter-77-meta-analysis` — the owner's two-text
+cross-review: the bootstrap gap-analysis + the sandbox-constraints
+essay, every claim re-verified against HEAD; doc-only, the
+iter-19/34/71 owner-requested precedent) · Phase: 5 (Depth) — OPEN
+(iter-73, D-105; depth-1 + depth-1b + depth-2 + depth-2b LANDED,
+the queue: depth-4 next) · Track A untouched this session — track B
+never blocks it (ROADMAP §1).
+**The landing: CONFIRMED — the three-pointer sequencing conflict
+(bootstrap "top todo" = the gate-blocked `depth-3` row vs STATUS's
+queue depth-4 vs NAVIGATION §3 "What to do next → TASKS.md"); the
+bootstrap verify line runs without `PYTHONHASHSEED=0` while AGENTS
+§10 pins it (suite empirically green under seeds 0/unset/42 — a
+consistency gap, not a live flap; INV-2's discipline holds today);
+Rule 9 cited 4x (STATUS FAQ x3, TASKS) and defined nowhere in-repo;
+`not_equals` on a missing prop answers True (fail-open;
+`core/predicates.py::_prop` + the `core/onaction.py` gate twin,
+pinned "honestly" — the `of`-typo case is already lint-dead in
+`core/pack.py` ('of' must name an entity), the live surface is
+`path` typos + runtime-absent props); TASKS done-row collapse debt
+(829/600 over-cap on substance). CORRECTED — the audit
+`except BaseException: raise` branch is syntax-bearing (a try/else
+REQUIRES an except; the deliberate no-masking semantics, not
+cruft); the sandbox text's stop-point claim "saved in TECH_NOTES
+§12" is NOT in HEAD (no §12 exists — a reported-but-unlanded
+deliverable, the KI#48 doc-drift family); its layer discipline is
+law (TEST_PLAN §8.1) but stratified sampling / budget caps / n>=3
+CIs / provider rotation / the brief-size curve are un-routed
+proposals. The verdict set + ultimate variants issued in chat
+(Russian); the repo-side candidates routed to TASKS (the iter-77
+section, owner verdict pending). 1323 passed +1 skipped, ruff
+clean.**
 ·
 Date: 2026-09-09 ·
-Scope: `tests/fixtures/deviation_corpus.json` (NEW — the F1–F6
-deviation corpus, 36 probes, the live transcripts re-distilled),
-`tests/test_deviation.py` (NEW — the Layer-1 suite, +8 tests),
-`docs/TECH_NOTES.md` (§11 the bg-8 numbers), `docs/TEST_PLAN.md`
-(§8.4 the landed pointer + §8.5 the heartbeat ledger),
-`docs/TASKS.md` (bg-8 done + the gap rows), `STATUS.md` (this header
-+ the Next re-pin + KI#79 deleted per §5), `worklog.md` (the bg-8
-entry, one in / one out — iter-68b evicted), `docs/DECISIONS.md`
-(D-109), `README.md` (the track-B state line),
-`docs/AGENT_NAVIGATION.md` §1 (the two new file rows). 10 files — 2
-new test artifacts + 8 doc sync (the bg-7 footprint family: the live
-run outside, the repo diff doc-side).
+Scope: `STATUS.md` (this header + the Next-step owner-gated line),
+`worklog.md` (the iter-77 entry, one in / one out — iter-69
+evicted), `docs/TASKS.md` (the iter-77 routed-candidate rows + the
+phase-5 done-row collapse per the TASKS header law — the detail
+lives in git + worklog + the D-105..D-108 rows). 3 files — doc-only
+(streak 1 of 2; the next iteration must be functional).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -616,7 +607,12 @@ resolutions).**
    tension, the owner may veto). The leg-1 recorded questions (the
    testimony-crystallization fidelity floor; the static-personality
    half of the character-card question — PACK_SPEC territory at the
-   2nd-setting gate) carry unchanged.
+   2nd-setting gate) carry unchanged. New from iter-77: the routed
+   meta-analysis candidates (TASKS' iter-77 section — the predicate
+   fail-closed design, the sequencing single-owner split, the Rule-9
+   resolver line, the verify-line seed, the archive protocol, the
+   TECH_NOTES §12 landing-or-drop) await the owner's verdict; none
+   execute without the call.
 3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE, bg-7 DONE, bg-8 DONE**
    (the five probes' first numbers + the deviation corpus's first live
    numbers + the heartbeat baseline — TECH_NOTES §10/§11, TEST_PLAN
