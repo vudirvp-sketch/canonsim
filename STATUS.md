@@ -1,56 +1,49 @@
 # STATUS — canonsim
 
-Iteration: iter-75 (`iter-75-scenedetail-gate` — depth-2, lazy detail
-materialization, MECHANICS ONLY (the 68a pattern; the committed pack
-unarmed, the arming is depth-2b's row)) · Phase: 4 (Knowledge & scene)
+Iteration: iter-76 (`iter-76-scenedetail-arm` — depth-2b, the
+scene-detail ARMING, the 68a→68b pattern) · Phase: 4 (Knowledge & scene)
 — CLOSED — gate PASS (iter-65, D-094) · **Phase: 5 (Depth) — OPEN
 (iter-73, D-105 — the owner's call, the iter-55/36 opener precedent;
-depth-1 + depth-1b + depth-2 LANDED)**
-**The landing: the `scene:<id>:detail` content-addressed stream family
-(`core/rng.py`, the D-079 law's third member — lazy registration,
-injective name, the shared `FAMILY_PREFIXES` nesting law, the
-scene-granular isolation) + the draw gate
-`core/detail.py::materialize_scene_detail` (the first meaningful
-observation = the observe-resolver family; one draw per pack-declared
-slot in pack order, canon-skip per slot = first-commit-wins —
-re-observation reads canon and NEVER redraws, so the stream advances
-only on an actual birth; the births ride the observation event as
-`StateChange(location, slot, None → value)` — the D-054 promotion
-shape, plus the `materialized` outcome key, present only when
-something materialized, the drifted_from law) + the claim gate
-`detail_claim` (the ledger's texture-OCC mirror at scene scale:
-commit / no_op / `slot_conflict` with the CAUSE CHAIN — the last
-write on the slot, the current authority; `empty` is just a value, so
-a materialized empty rejects later gold with no special casing; the
-loop's own draw never calls it — the external claimers' gate, the
-depth-5 worldgen passes the first legal caller, pinned now) + the
-closed `{slot | values}` lint (`core/pack.py::_scene_detail`, after
-_brief per the KI#77 order law: real location ids, unique slots,
-unique values, the double-claim law — a slot the location models can
-never birth, the one-object law — no unique-slot overlap). Corpus
-price ZERO by construction and pinned both ways: the committed pack
-has no block (the gate answers () before any assure — the fingerprint
-and the v0.1 bytes untouched, the full suite green through the
-landing), the laziness pin (an armed never-observed scene is
-byte-identical), and the measurable-arming pin (the armed run differs
-exactly by the births + the outcome key — event count and types
-unchanged). +28 tests (1281→1309+1), ruff clean.**
+depth-1 + depth-1b + depth-2 + depth-2b LANDED)**
+**The landing: the committed pack's own `rules.json::scene_detail`
+block — loc_tavern (under_bench/behind_barrel) + loc_guardroom
+(under_cot) — exactly the two scenes the committed corpus observes
+(the recon's answer; never-observed scenes refused as dead weight).
+The knowledge-surface decision (the row's own question, D-108): the
+materialized detail's surface is the event's own payload
+(`state_changes` + the `materialized` outcome key) + the folded canon
+— ZERO new knowledge tokens, the `knows` templates stay
+`scene_{location}`/`rambling_by_{actor}` (actions.json untouched —
+the corpus claim surface never moves). The corpus price measured
+FIRST both arms (the Rule-9 probe: the armed pack vs the block-popped
+v0.1 twin) and paid strictly fidelity-only: every paid line differs
+only in {state_changes, outcome} — the day1 ten (director ON, the
+Simulator default — the probe's first pass measured the OFF arm and
+undercounted; the default arm is the corpus geometry): 4 seeds zero,
+5 seeds one barkeep-look payload (the run's first tavern observation),
+seed 125 the two guard scans (the later tavern looks read canon — one
+draw per slot ever); the fire corpus + plumbing zero; T8 arms two
+payloads, M1..M5 + chain counts identical; the narrator corpus
+105: 90 identical, 15 cases one payload each — every status, note,
+anchor, and call document identical. The 68a pins re-pointed to the
+crafted v0.1 twin (4 tests) + the murmur's state-surface pin
+re-worded (the ramble's only state changes are the scene's lazy
+births — the observe family's second member, live); +6 tests
+(1309→1315+1), ruff clean.**
 ·
 Date: 2026-09-08 ·
-Scope: `core/rng.py` (the stream family + the FAMILY_PREFIXES law),
-`core/detail.py` (NEW — the draw gate + the claim mirror + the
-outcome decoration), `core/resolvers.py` (`_observe` wiring),
-`core/pack.py` (the `_scene_detail` lint), `tests/test_detail.py`
-(NEW — 28 pins: the stream laws, the draw laws, the claim laws, the
-wiring laws, the lint laws), `docs/EVENT_SCHEMA.md` (§4 the
-scene-detail home clause), `STATUS.md` (this header + the Next
-re-pin), `worklog.md` (the iter-75 entry, one in / one out — iter-68a evicted),
-`docs/TASKS.md` (depth-2 done + depth-2b laid), `docs/DECISIONS.md`
-(D-107), `docs/AGENT_NAVIGATION.md` (§1's rng/pack/detail/resolvers
-cells), `README.md` (the phase-5 state line). 12 files — 4 code +
-1 suite + 7 doc sync, the iter-60..74 scope pattern (the stream
-family + the gates + the lint + the doc sync are one mechanism
-family).
+Scope: `content/tavern_pack/rules.json` (the `scene_detail` block —
+the arming itself, pack data only), `tests/test_detail.py` (the
+re-pointed pins + the arming family: the declared block, the live
+pools, the D-108 knowledge surface, the paid day1 ledger, the ten's
+seed split, the armed replay), `tests/test_ambient.py` (the murmur's
+state-surface re-pin), `STATUS.md` (this header + the Next re-pin),
+`worklog.md` (the iter-76 entry, one in / one out — iter-74 evicted),
+`docs/TASKS.md` (depth-2b done), `docs/DECISIONS.md` (D-108),
+`docs/EVENT_SCHEMA.md` (§4 the committed-arming clause),
+`README.md` (the phase-5 state line). 9 files — 1 pack + 2 suites +
+6 doc sync (the iter-68b/74 arming footprint: the pack arming + its
+measured corpus price + the doc sync are one mechanism family).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -570,30 +563,29 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
 drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
-gate LANDED (iter-73/74/75, D-105/D-106/D-107; the corpus prices
-paid fidelity-only / zero-by-construction, 1309+1 green). Track A
-is debt-free; bg-8 keeps its opening numbers + lowercase-gap
-instrument, owner-gated on hardware. The queue: `depth-2b` — the
-scene-detail ARMING (the committed pack's own `scene_detail` block;
-the corpus price measured FIRST both arms, the Rule-9 probe — the
-armed pack's look_arounds materialize, so the price is the event
-payloads + downstream consumers, paid fidelity-only or the block
-trimmed before landing; the knowledge surface of the materialized
-detail is the row's own question — the observation's `knows`
-templates are pack data). Then `depth-3` scene LOD (after depth-5's
-first passes), `depth-4` fold checkpoints (the sha256 index-anchor),
-`depth-5` lazy worldgen passes (the phase's build-column headline —
-and the claim gate `detail_claim`'s first legal caller), `depth-6`
-factions, `depth-7` groups & simulation LOD (owner verdict pending
-on the iter-11b resolutions).**
+gate + depth-2b the ARMING LANDED (iter-73/74/75/76,
+D-105/D-106/D-107/D-108; the corpus prices paid fidelity-only /
+zero-by-construction, 1315+1 green). Track A is debt-free; bg-8 keeps
+its opening numbers + lowercase-gap instrument, owner-gated on
+hardware. The queue: `depth-4` fold checkpoints (the chronicler-
+family derived artifact — fold-checkpoint + event-index offset + the
+sha256 index-anchor, intake-4's addition; the resume door stays
+owner-gated, phases.md §7), then `depth-5` lazy worldgen passes (the
+phase's build-column headline — ordered passes over the seed, Azgaar
++ Red Blob donors, integer/fixed-point geometry discipline, +
+pre-PC history seeding the director's buffer — and the claim gate
+`detail_claim`'s first legal caller), then `depth-3` scene LOD
+(gated: after depth-5's first passes), `depth-6` factions, `depth-7`
+groups & simulation LOD (owner verdict pending on the iter-11b
+resolutions).**
 
-1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-2b..7
+1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-3..7
    rows; `docs/blueprint/phases.md` §5 the architecture owner):
-   depth-2b next (the scene-detail ARMING — the committed pack's own
-   `scene_detail` block, the corpus price measured FIRST both arms),
+   depth-4 fold checkpoints next (the chronicler-family derived
+   artifact + the sha256 index-anchor, the resume door owner-gated),
+   then lazy worldgen passes (depth-5, the build-column headline),
    then scene LOD
-   (after depth-5's first passes), fold checkpoints (the sha256
-   index-anchor, depth-4), lazy worldgen passes, factions with
+   (after depth-5's first passes), factions with
    goals, groups & simulation LOD (owner verdict pending on the
    iter-11b resolutions); the exit criterion "an emergent chain of
    3+ events without the player" (ROADMAP §2 — T8's OFF arm already

@@ -136,9 +136,26 @@ def test_the_quiet_march_releases_the_murmur(tmp_path: Path) -> None:
     assert ramble.actor == "npc_drunk_01"
     assert str(ramble.provenance["cause_intent"]) == "director_0000"
     # the murmur rides the door: the observe resolver, the pack's
-    # knowledge templates, no check, no state change
+    # knowledge templates, no check, no hooks — and since the depth-2b
+    # arming (iter-76) the drunk's ramble is this run's FIRST tavern
+    # observation, so its only state surface is the scene's LAZY BIRTHS
+    # (the murmur writes nothing of its own: the slots are the committed
+    # scene_detail block's, pack order, from_ None — the drunk takes
+    # the room in while rambling; the values from the declared pools)
     assert ramble.outcome["duration"] == 3
-    assert not ramble.state_changes
+    assert [(c.entity, c.prop, c.from_) for c in ramble.state_changes] == [
+        ("loc_tavern", "under_bench", None),
+        ("loc_tavern", "behind_barrel", None),
+    ]
+    pools = {
+        entry["slot"]: entry["values"]
+        for entry in PACK.rules["scene_detail"]["loc_tavern"]
+    }
+    assert all(c.to_ in pools[c.prop] for c in ramble.state_changes)
+    assert [m["slot"] for m in ramble.outcome["materialized"]] == [
+        "under_bench", "behind_barrel",
+    ]
+    assert not ramble.hooks
     assert ramble.importance == "medium"  # story-critical: tale-gated
     assert [(k.who, k.channel, k.fidelity, k.knows) for k in ramble.knowledge] == [
         ("pc_01", "heard", "vague", "rambling_by_npc_drunk_01"),

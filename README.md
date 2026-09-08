@@ -465,7 +465,14 @@ the D-079 law's third member; the draw gate
 resolver (first
 commit-wins, re-observation reads canon); `detail_claim` the
 slot_conflict mirror with the cause chain; the committed pack
-UNARMED — corpus price zero by construction, v0.1 bytes). 1309
+UNARMED — corpus price zero by construction, v0.1 bytes) and ARMED
+iter-76 (depth-2b, D-108: the committed `scene_detail` block — the
+tavern + the guardroom, exactly the scenes the corpus observes; the
+knowledge surface stays the event's own payload, zero new knowledge
+tokens; the corpus price measured both arms and paid fidelity-only —
+the day1 ten pays only the observing seeds, the narrator corpus
+15/105 cases one payload each, statuses/anchors/call documents
+untouched). 1315
 tests green, ruff
 clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +

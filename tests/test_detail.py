@@ -1,10 +1,11 @@
 """iter-75 acceptance — depth-2, lazy detail materialization (phase 5's
 second row, TASKS/phases.md §5 — the D-096 research-intake design: seed
 materialization over the D-054/ledger-OCC law with `scene:<id>:detail`
-streams). Mechanics (iter-75) — the committed pack UNARMED (the 68a
-pattern; the arming is depth-2b's row, so the unarmed arm of every A/B
-pin below is the committed pack itself or a crafted never-observed
-twin).
+streams). Mechanics (iter-75) + the ARMING (iter-76, depth-2b — the
+68b pattern): the committed pack carries the block (the tavern's two
+slots + the guardroom's cot), so the unarmed arm of every A/B pin
+below is the crafted v0.1 twin (the block-popped copy) or a scene
+the committed arming does not list.
 
 The laws pinned here:
 
@@ -42,7 +43,13 @@ The laws pinned here:
   shape) and its outcome names them under `materialized` (present only
   when something materialized — the drifted_from law, so unarmed
   events never move); the fold rebuilds the projection from the log
-  (INV-1's truth test).
+  (INV-1's truth test). Since iter-76 the committed arming is live:
+  the knowledge surface of the materialized detail is the event's OWN
+  payload + the folded canon — ZERO new knowledge tokens (the
+  observation's `knows` templates stay the pack's declared
+  `scene_{location}` / `rambling_by_{actor}` — detail tokens never
+  ride the knowledge records, D-108 — so the corpus claim surface
+  never moves).
 - **The lint laws**: the closed entry vocabulary `{slot | values}`;
   location ids must be real locations; slots unique within a location
   (a duplicate would couple stream positions); the double-claim law
@@ -108,8 +115,10 @@ ARMED_STREET: dict[str, Any] = {
 
 def _duck_pack(scene_detail: Any) -> Any:
     """The unit-test pack stub: rules only, the shape the gate reads
-    (duck-typed — the gate never imports pack.py at runtime)."""
-    return SimpleNamespace(rules={"scene_detail": scene_detail})
+    (duck-typed — the gate never imports pack.py at runtime). `None`
+    builds the v0.1 shape: no `scene_detail` key at all."""
+    rules = {} if scene_detail is None else {"scene_detail": scene_detail}
+    return SimpleNamespace(rules=rules)
 
 
 def crafted_pack(
@@ -201,12 +210,15 @@ def test_the_family_nests_inside_the_substantive_scope() -> None:
 
 
 def test_the_unarmed_pack_draws_nothing_and_touches_no_stream() -> None:
-    """The unarmed law: no block, an unlisted location, or an empty
+    """The unarmed law: no block (the v0.1 twin's rules — the committed
+    pack is armed since depth-2b), an unlisted location, or an empty
     slot list answers an empty tuple BEFORE any assure or draw — the
     fingerprint law holds by construction (v0.1 bytes)."""
     bank = RngBank(42)
     projection: dict[str, dict[str, Any]] = {"loc_tavern": {}}
-    assert materialize_scene_detail(bank, PACK, projection, "loc_tavern") == ()
+    assert materialize_scene_detail(
+        bank, _duck_pack(None), projection, "loc_tavern"
+    ) == ()
     assert materialize_scene_detail(
         bank, _duck_pack({}), projection, "loc_tavern"
     ) == ()
@@ -372,15 +384,18 @@ def test_a_written_then_emptied_slot_still_refuses() -> None:
 # -- the wiring (integration) -------------------------------------------------
 
 
-def test_the_unarmed_committed_pack_observes_without_materializing(
+def test_the_unarmed_v01_twin_observes_without_materializing(
     tmp_path: Path,
 ) -> None:
-    """The committed pack (no block) runs look_around as v0.1: no
-    state_changes, no `materialized` key on the event — the outcome
-    decoration is present only when something materialized (the
-    drifted_from law), so the unarmed bytes never move."""
+    """The unarmed law, integration arm: the v0.1 twin (the committed
+    pack with the block popped — the committed arming is live since
+    depth-2b) runs look_around as v0.1: no state_changes, no
+    `materialized` key on the event — the outcome decoration is present
+    only when something materialized (the drifted_from law), so the
+    unarmed bytes never move."""
+    v01 = crafted_pack(tmp_path, "v01_look", None)
     log = run(
-        tmp_path, PACK, 42,
+        tmp_path, v01, 42,
         [{"intent": "look_around"}, {"intent": "look_around"}],
         "unarmed_look",
     )
@@ -441,22 +456,19 @@ def test_re_observation_in_run_is_byte_stable(
 def test_the_laziness_law_an_unobserved_scene_costs_zero_bytes(
     tmp_path: Path,
 ) -> None:
-    """The 68a corpus pin: an armed block on a scene the script never
-    observes is dead until observed — the run is byte-identical to the
-    committed (unarmed) pack's run of the same steps. The arming's
-    corpus price is paid only where observation actually fires
-    (depth-2b measures it first)."""
+    """The corpus pin on the committed arming: the armed block's scenes
+    are dead until observed — the run (backyard look only) is
+    byte-identical to the v0.1 twin's. The arming's corpus price is
+    paid only where observation actually fires (the day1 ten's price
+    is the guard-scan seed's own pin below)."""
     steps = [
         {"intent": "move", "target": "loc_backyard"},
         {"intent": "look_around"},
         {"intent": "wait", "ticks": 3},
     ]
-    unobserved = crafted_pack(
-        tmp_path, "unobserved",
-        {"loc_guardroom": [{"slot": "under_cot", "values": ["empty", "spare_boots"]}]},
-    )
-    baseline = run(tmp_path, PACK, 42, steps, "baseline")
-    lazy = run(tmp_path, unobserved, 42, steps, "lazy")
+    v01 = crafted_pack(tmp_path, "v01_lazy", None)
+    baseline = run(tmp_path, v01, 42, steps, "baseline")
+    lazy = run(tmp_path, PACK, 42, steps, "lazy")
     assert baseline.read_bytes() == lazy.read_bytes()
 
 
@@ -470,7 +482,8 @@ def test_the_armed_run_differs_only_where_observation_fires(
     fidelity-only family law, paid in the event's own payload)."""
     steps = [{"intent": "look_around"}]
     pack = crafted_pack(tmp_path, "armed3", ARMED_STREET)
-    baseline = run(tmp_path, PACK, 42, steps, "baseline2")
+    v01 = crafted_pack(tmp_path, "v01_diff", None)
+    baseline = run(tmp_path, v01, 42, steps, "baseline2")
     armed = run(tmp_path, pack, 42, steps, "armed_run")
     base_events = look_events(baseline)
     armed_events = look_events(armed)
@@ -479,6 +492,191 @@ def test_the_armed_run_differs_only_where_observation_fires(
     assert armed_events[0].state_changes != ()
     assert base_events[0].state_changes == ()
     assert base_events[0].outcome["location"] == armed_events[0].outcome["location"]
+
+
+# -- the committed arming (depth-2b, iter-76 — the 68b pattern) ----------------
+
+DAY1 = json.loads(
+    (REPO / "tests" / "playscripts" / "day1_full.json").read_text(encoding="utf-8")
+)
+
+
+def run_day1(tmp_path: Path, pack: Pack, seed: int, name: str) -> Path:
+    """One day1_full playscript run; answers the log path (bytes are the pin)."""
+    log = tmp_path / f"{name}.jsonl"
+    sim = Simulator(pack, seed, log, SCHEMA, commit="0000000")
+    sim.run_playscript(dict(DAY1, seed=seed))
+    sim.close()
+    return log
+
+
+def test_the_committed_arming_is_the_declared_block() -> None:
+    """The committed pack carries the block (depth-2b, iter-76): exactly
+    the two scenes the committed corpus observes — the tavern (the
+    narrator looks + the guard's scans + the murmur's room) and the
+    guardroom (the rotation scans). The lint accepts it at load."""
+    assert PACK.rules["scene_detail"] == {
+        "loc_tavern": [
+            {"slot": "under_bench", "values": ["empty", "old_cloak"]},
+            {"slot": "behind_barrel", "values": ["empty", "lost_ring"]},
+        ],
+        "loc_guardroom": [
+            {"slot": "under_cot", "values": ["empty", "spare_boots"]},
+        ],
+    }
+
+
+def test_the_live_arming_materializes_the_committed_pools(
+    tmp_path: Path,
+) -> None:
+    """The live arming: the committed pack's first tavern observation
+    materializes the declared slots from the declared pools, in pack
+    order, the births riding the event — and the fold rebuilds the
+    projection from the log alone (INV-1's truth test, live)."""
+    log = run(
+        tmp_path, PACK, 42,
+        [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}],
+        "live_arming",
+    )
+    event = look_events(log)[0]
+    assert [(c.entity, c.prop, c.from_) for c in event.state_changes] == [
+        ("loc_tavern", "under_bench", None),
+        ("loc_tavern", "behind_barrel", None),
+    ]
+    pools = {
+        entry["slot"]: entry["values"]
+        for entry in PACK.rules["scene_detail"]["loc_tavern"]
+    }
+    assert all(c.to_ in pools[c.prop] for c in event.state_changes)
+    assert [m["slot"] for m in event.outcome["materialized"]] == [
+        "under_bench", "behind_barrel",
+    ]
+    _header, events = read_log(log, SCHEMA)
+    state = fold(events, initial_projection(PACK.entities))
+    assert state["loc_tavern"]["under_bench"] == event.state_changes[0].to_
+    assert state["loc_tavern"]["behind_barrel"] == event.state_changes[1].to_
+
+
+def test_the_knowledge_surface_stays_the_declared_templates(
+    tmp_path: Path,
+) -> None:
+    """The arming-time decision (D-108): the materialized detail's
+    knowledge surface is the event's own payload + the folded canon —
+    ZERO new knowledge tokens. The observation's knowledge records are
+    identical to the v0.1 twin's (`scene_{location}` unchanged: detail
+    tokens never ride the records), so the corpus claim surface never
+    moves — the measured both-arms law, pinned."""
+    steps = [{"intent": "move", "target": "loc_tavern"}, {"intent": "look_around"}]
+    v01 = crafted_pack(tmp_path, "v01_knows", None)
+    armed = run(tmp_path, PACK, 42, steps, "knows_armed")
+    base = run(tmp_path, v01, 42, steps, "knows_base")
+    armed_event = look_events(armed)[0]
+    base_event = look_events(base)[0]
+    assert armed_event.state_changes != ()
+    assert armed_event.knowledge == base_event.knowledge
+    assert [(k.who, k.channel, k.fidelity, k.knows) for k in armed_event.knowledge] == [
+        (PLAYER, "saw", "exact", "scene_loc_tavern"),
+    ]
+
+
+def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
+    """The corpus-price law's paid half (measured both arms, iter-76):
+    over the day1 ten's scan seed (125 — the guard's belief-gated
+    scans, the beliefwire-2 arming's own price row; director ON, the
+    Simulator default) the scene-detail arming costs exactly TWO event
+    payloads — the guard's first tavern scan (the second reads canon:
+    one draw per slot ever; the barkeep's later director look reads it
+    too) and the guardroom rotation scan — and NOTHING else: same
+    event count, same ids, same types, same knowledge, same
+    importance, same t/cause; the price is the births + the outcome
+    key on the materializing events themselves (the fidelity-only
+    family law)."""
+    v01 = crafted_pack(tmp_path, "v01_day1", None)
+    base = run_day1(tmp_path, v01, 125, "paid_base")
+    armed = run_day1(tmp_path, PACK, 125, "paid_armed")
+    base_lines = base.read_text().splitlines()
+    armed_lines = armed.read_text().splitlines()
+    assert len(base_lines) == len(armed_lines)
+    diffed = [
+        (json.loads(a), json.loads(b))
+        for a, b in zip(armed_lines, base_lines, strict=True)
+        if a != b
+    ]
+    assert len(diffed) == 2
+    for armed_event, base_event in diffed:
+        assert armed_event["type"] == "look_around"
+        assert armed_event["actor"] == "npc_guard_02"
+        assert set(armed_event) == set(base_event)
+        changed = {
+            key for key in armed_event
+            if armed_event[key] != base_event[key]
+        }
+        assert changed <= {"state_changes", "outcome"}
+        assert armed_event["knowledge"] == base_event["knowledge"]
+        assert armed_event["importance"] == base_event["importance"]
+        assert armed_event["t"] == base_event["t"]
+        assert armed_event["cause"] == base_event["cause"]
+    scans = [event for event, _ in diffed]
+    assert scans[0]["id"] == "ev_0037"  # the first tavern scan materializes
+    assert scans[0]["outcome"]["materialized"] == [
+        {"slot": "under_bench", "value": "old_cloak"},
+        {"slot": "behind_barrel", "value": "lost_ring"},
+    ]
+    assert scans[1]["id"] == "ev_0055"  # the guardroom rotation scan
+    assert scans[1]["outcome"]["materialized"] == [
+        {"slot": "under_cot", "value": "empty"},
+    ]
+
+
+def test_the_day1_ten_pays_only_the_observing_seeds(tmp_path: Path) -> None:
+    """The corpus-price law's shape (measured both arms, iter-76):
+    the day1 ten (director ON — the Simulator default) pays ONLY where
+    an observation of an armed scene actually fires. Four seeds carry
+    no observation at all (121, 122, 126, 129 — zero bytes); five
+    seeds pay exactly ONE payload — the director-released barkeep look,
+    the run's FIRST tavern observation (120, 123, 124, 127, 128); the
+    scan seed (125) pays two — its own pin above. Every paid line is
+    fidelity-only: fields <= {state_changes, outcome}, the knowledge,
+    importance, t and cause untouched."""
+    v01 = crafted_pack(tmp_path, "v01_ten", None)
+    zero_seeds = (121, 122, 126, 129)
+    look_seeds = (120, 123, 124, 127, 128)
+    for seed in zero_seeds:
+        base = run_day1(tmp_path, v01, seed, f"ten_base_{seed}")
+        armed = run_day1(tmp_path, PACK, seed, f"ten_armed_{seed}")
+        assert base.read_bytes() == armed.read_bytes(), f"seed {seed}"
+    for seed in look_seeds:
+        base = run_day1(tmp_path, v01, seed, f"ten_base_{seed}")
+        armed = run_day1(tmp_path, PACK, seed, f"ten_armed_{seed}")
+        base_lines = base.read_text().splitlines()
+        armed_lines = armed.read_text().splitlines()
+        assert len(base_lines) == len(armed_lines), f"seed {seed}"
+        diffed = [
+            (json.loads(a), json.loads(b))
+            for a, b in zip(armed_lines, base_lines, strict=True)
+            if a != b
+        ]
+        assert len(diffed) == 1, f"seed {seed}: {len(diffed)} lines paid"
+        armed_event, base_event = diffed[0]
+        assert armed_event["type"] == "look_around", f"seed {seed}"
+        assert armed_event["actor"] == "npc_barkeep_01", f"seed {seed}"
+        changed = {
+            key for key in armed_event
+            if armed_event[key] != base_event[key]
+        }
+        assert changed <= {"state_changes", "outcome"}, f"seed {seed}"
+        assert armed_event["knowledge"] == base_event["knowledge"]
+
+
+def test_the_armed_day1_seed_replays_byte_identically(
+    tmp_path: Path,
+) -> None:
+    """The T1 discipline on the armed pack: the committed arming is
+    deterministic — the same seed replays the same births, byte for
+    byte (the lazy detail is replay-stable, INV-2)."""
+    first = run_day1(tmp_path, PACK, 125, "replay_a")
+    second = run_day1(tmp_path, PACK, 125, "replay_b")
+    assert first.read_bytes() == second.read_bytes()
 
 
 # -- the lint (crafted packs) --------------------------------------------------

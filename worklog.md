@@ -13,6 +13,33 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-76 · 2026-09-08 · scenedetail-arm — depth-2b, the scene-detail
+ARMING (9 files — 1 pack + 2 suites + 6 doc sync: the pack arming +
+its measured corpus price + the doc sync are one mechanism family,
+the iter-68b/74 arming footprint)
+- rules.json the `scene_detail` block (loc_tavern under_bench +
+  behind_barrel, loc_guardroom under_cot — the two scenes the corpus
+  observes; pure-flavor values, no claim-surface token);
+  tests/test_detail.py the 68a pins re-pointed to the crafted v0.1
+  twin + the arming family (the declared block, the live pools, the
+  D-108 knowledge surface, the paid day1 ledger, the ten's seed
+  split, the armed replay); tests/test_ambient.py the murmur's
+  state-surface re-pin (the ramble's only state changes are the
+  scene's lazy births).
+- Price measured FIRST both arms (a runner outside the repo, Rule 9):
+  strictly fidelity-only — day1 ten (director ON, the default): 4
+  seeds zero, 5 seeds one barkeep-look payload, seed 125 the two
+  guard scans; fire corpus + plumbing zero; T8 arms two payloads,
+  M1..M5 identical; narrator corpus 105: 90 identical, 15 one payload
+  (statuses/notes/anchors/call documents untouched). The probe lesson:
+  the default-director arm is the corpus geometry (first pass measured
+  OFF and undercounted — caught before landing). +6 tests
+  (1309→1315+1, ruff clean). D-108 (the knowledge-surface decision:
+  zero new knowledge tokens); TASKS depth-2b done. iter-74 evicted
+  (verified in this edit); 10 after. Caps: STATUS 626 / TASKS 817 /
+  DECISIONS 73 lines (44 rows) — over-cap on substance (§6.1, the
+  D-095..D-107 precedent), trim at the phase-5→6 gate.
+---
 iter-75 · 2026-09-08 · scenedetail-gate — depth-2, lazy detail
 materialization, mechanics only (12 files — 4 code + 1 suite + 7 doc
 sync: the stream family + the draw gate + the claim mirror + the lint
@@ -39,24 +66,6 @@ pattern)
   substance (the landing headers' own record, the D-095/D-096
   precedent), trim at the phase-5→6 gate; DECISIONS 43 — rides
   above 30 until the same gate.
----
-iter-74 · 2026-09-08 · acquisition-arm — depth-1b, the acquisition
-arming (12 files — 4 code/pack + 8 test/doc sync: the pack arming +
-its measured corpus price + the doc sync are one mechanism family,
-the iter-60..69b scope pattern)
-- rules.json the acquisition block (smoke saw/heard + night-light
-  phase_in/unless_flag); entities.json locations.flags {lit: true} on
-  the tavern + guardroom; core/fold.py the flags seed (raw site props);
-  core/pack.py the location-flags shape lint.
-- Price measured FIRST both arms (a runner outside the repo, Rule 9):
-  talk geometry zero; fire geometries ONE stepped record (the burnout
-  sighting, fidelity-only — no id shifts, no appended events, zero
-  re-distill, zero regen, corpus pins hold, M1/M2/T8 arms identical).
-  68a pins re-pointed to the v0.1 twin (the 68b pattern). +6 tests
-  (1275→1281+1, ruff clean; the paid-price pin, the night-arming law,
-  4 flag-lint tests). iter-68 evicted (verified in this edit); 10
-  after. The iter-73 edit's duplicated header block removed in the
-  same edit (a pre-existing artifact — git holds the history).
 ---
 iter-73 · 2026-09-08 · depthopen — the owner's phase-5 start call: the
 opener + research intake 4 + depth-1 the acquisition gate (11 files —

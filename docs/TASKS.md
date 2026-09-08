@@ -65,15 +65,20 @@
   closed `{slot | values}` lint with the double-claim and one-object
   laws. The committed pack UNARMED — v0.1 bytes, zero draws (the 68a
   pattern). Detail: tests/test_detail.py.
-- `depth-2b` · the scene-detail ARMING — todo (iter-75's arming row,
-  the 68a→68b pattern): the committed pack's own `scene_detail`
-  block; the corpus price measured FIRST both arms (the Rule-9 probe
-  — every corpus geometry's look_arounds now materialize, so the
-  price is the event payloads + any downstream consumers; paid
-  fidelity-only or the block trimmed before landing); the knowledge
-  surface of the materialized detail is this row's question (the
-  observation's `knows` templates are pack data — detail tokens are
-  an arming-time decision).
+- `depth-2b` · the scene-detail ARMING — **done (iter-76, D-108)**: the
+  committed pack's own `scene_detail` block (the tavern's two slots +
+  the guardroom's cot — exactly the scenes the committed corpus
+  observes); the corpus price measured FIRST both arms (the Rule-9
+  probe) and paid fidelity-only: the day1 ten pays only where an
+  observation fires (4 seeds zero, 5 seeds one barkeep-look payload,
+  seed 125 the two guard scans), the fire corpus + plumbing zero, T8
+  arms two payloads with M1..M5 identical, the narrator corpus 15/105
+  cases one payload each — statuses, notes, anchors, call documents
+  untouched. The knowledge-surface decision (the row's question): the
+  materialized detail's surface is the event's own payload + the
+  folded canon — ZERO new knowledge tokens, the `knows` templates
+  stay `scene_{location}`/`rambling_by_{actor}` (D-108). Detail:
+  tests/test_detail.py.
 - `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
   clean, never entropy) — needs the multi-scene layer, gate: after
   depth-5's first passes.

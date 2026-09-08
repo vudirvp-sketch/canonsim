@@ -115,7 +115,10 @@ the births under `materialized` (`[{slot, value}]`, present only when
 something materialized — the drifted_from law); `empty` is just a
 value, so a materialized empty rejects later gold with no special
 casing (`core/detail.py::detail_claim` — the slot_conflict mirror,
-cause-chained to the winning event).
+cause-chained to the winning event). Since iter-76 (depth-2b, D-108)
+the committed pack is ARMED — the tavern + the guardroom scenes, the
+knowledge surface of the detail staying the event's own payload
+(zero new knowledge tokens, the templates unchanged).
 
 ## 5. `hooks`
 
