@@ -62,7 +62,7 @@
 | Phase-0 scope: entities, systems, actions, tests | `docs/MVP_SCOPE.md` | link, never restate |
 | Event fields, enums, header, versioning | `docs/EVENT_SCHEMA.md` ↔ `schemas/event.schema.json` (2-place sync, test-enforced) | examples must match |
 | Phases, gates, kill-criteria, donors | `docs/ROADMAP.md` | link |
-| What to do next | `docs/TASKS.md` | link |
+| What to do next | the ORDER: `STATUS.md`'s **Next step** line (re-pinned every iteration; owner-gated / gate-blocked rows are not auto-candidates) · the backlog COMPOSITION: `docs/TASKS.md` | link |
 | Why it all exists, honest limits | `docs/VISION.md` | link |
 | Stable design decisions | `docs/DECISIONS.md` | link |
 | Core-design research & depth proposals | `docs/CORE_DESIGN_RESEARCH.md` | link; accepted items move to DECISIONS/TASKS, line flips to `absorbed` |

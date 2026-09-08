@@ -84,7 +84,9 @@ the donor's own recommendation). A bare LIST of specs is the
 implicit-AND root (the Paradox trigger body). The v0.1 leaf kinds run
 unchanged through the grammar — a pack's flat triggers are
 byte-identical. A missing prop / missing entity answers False (a
-world answer, not an error); a bool never equals a number (`True != 1`
+world answer, not an error) under EVERY comparator; a null `value` is
+lint-refused (absence is not a value — explicit absence is writable
+as `{"not": …}`); a bool never equals a number (`True != 1`
 guarded); empty `all`/`any` lists are dead vocabulary (L1 — pack lint
 rejects them).
 
@@ -200,7 +202,7 @@ silent ignore):
 | Key | Shape | Meaning |
 |---|---|---|
 | `scope` | `"witnesses"` (the closed v0.1 vocabulary) | the entity-set selector: the triggering event's OWN knowledge records, deduped by first occurrence, in event order — "every NPC who witnessed X". The EXPLICIT ctx argument: no implicit `this`, no inherited scope |
-| `gate` | a non-empty list of `{prop, comparator, value}` (optional) | the quantified predicate — per-entity conditions evaluated with the CANDIDATE as the argument (the spec carries NO entity field; `comparator` is the predicates.py vocabulary; a missing prop answers honestly, a bool never equals a number) |
+| `gate` | a non-empty list of `{prop, comparator, value}` (optional) | the quantified predicate — per-entity conditions evaluated with the CANDIDATE as the argument (the spec carries NO entity field; `comparator` is the predicates.py vocabulary; a missing prop answers False under every comparator — §3's blanket fail-closed, no gate-level negation so `not_equals` means present AND ≠ X; a null value is lint-refused; a bool never equals a number) |
 | `event` | a templates event type (required) | the reaction event |
 | `state` | `{prop, add}` — add a non-zero int (required) | the scoped state change: one clamped numeric delta per passing candidate (`relations.scale`, the one numeric scale — the alarm precedent); a candidate without a numeric home is dropped (the suspicion law); a clamped no-op is dropped (KI#13) |
 | `actor` / `target` | `world` \| `source_actor` \| `source_target` (optional; defaults actor `world`, target `source_target`) | the closed one-hop resolution vocabulary — the donor's this/from chain collapsed to three names |

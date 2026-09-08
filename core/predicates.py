@@ -99,14 +99,15 @@ def evaluate(
     if kind == "threshold":
         npc = _text(spec, "target_npc")
         prop = f"relations.{_text(spec, 'axis')}"
+        comparator = _require(spec, "comparator")
         value = projection.get(npc, {}).get(prop)
         if not isinstance(value, int) or isinstance(value, bool):
             return False
-        if spec["comparator"] == "at_least":
+        if comparator == "at_least":
             return value >= _int(spec, "value")
-        if spec["comparator"] == "at_most":
+        if comparator == "at_most":
             return value <= _int(spec, "value")
-        raise ValueError(f"unknown threshold comparator {spec['comparator']!r}")
+        raise ValueError(f"unknown threshold comparator {comparator!r}")
     if kind == "prop":
         return _prop(spec, projection)
     raise ValueError(f"unknown predicate kind {kind!r}")
@@ -136,14 +137,18 @@ def _prop(
     projection: Mapping[str, Mapping[str, Any]],
 ) -> bool:
     """The generalized projection read: any entity, any prop path. A
-    missing prop answers False under the ordering comparators and under
-    `equals`, True under `not_equals` (the value genuinely is not that);
+    missing entity or prop answers False under EVERY comparator —
+    DIRECTOR_SPEC §3's blanket fail-closed (a typo'd path never fires
+    a trigger; explicit absence stays writable as `{"not": …}`);
     a bool-vs-number comparison is never equal (Python's `True == 1`
     footgun, guarded explicitly)."""
     entity = _text(spec, "of")
-    actual = projection.get(entity, {}).get(_text(spec, "path"))
-    expected = spec["value"]
-    comparator = spec["comparator"]
+    path = _text(spec, "path")
+    expected = _require(spec, "value")
+    comparator = _require(spec, "comparator")
+    actual = projection.get(entity, {}).get(path)
+    if actual is None:
+        return False
     if comparator == "equals":
         return _same_kind(actual, expected) and actual == expected
     if comparator == "not_equals":
@@ -161,6 +166,19 @@ def _same_kind(left: Any, right: Any) -> bool:
     """True when the two values are comparable without the bool/int
     conflation (True == 1 in Python — a flag must not equal a count)."""
     return isinstance(left, bool) == isinstance(right, bool)
+
+
+def _require(spec: Mapping[str, Any], key: str) -> Any:
+    """The loud raw-read: a field that must be PRESENT (presence alone
+    — type checks are `_int`/`_text`). A missing key is a ValueError
+    naming the field and the keys the spec does carry; KeyError never
+    leaks from the evaluator (the never-guesses contract)."""
+    if key not in spec:
+        raise ValueError(
+            f"predicate field {key!r} must be present, "
+            f"spec carries {sorted(spec)!r}"
+        )
+    return spec[key]
 
 
 def _int(spec: Mapping[str, Any], key: str) -> int:

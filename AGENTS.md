@@ -126,6 +126,10 @@ the worklog records why.
 - NEVER `git add -A` / `git add .` / `git add -u`. Only `git add <specific paths>`.
 - Runtime artifacts are gitignored and must never be staged: `logs/`, `output/`,
   any `*.jsonl` outside `tests/fixtures/`.
+- Live session runners (sandbox drivers, corpus-price probes, LLM-circuit
+  test runners) live OUTSIDE the repo — the operator's **Rule 9**; `scripts/`
+  holds only git-committed repo tooling (D-046). Never stage, commit, or
+  archive an ephemeral runner into the repo.
 - Committed by design: `docs/`, `schemas/`, `content/`, `tests/` (including
   `tests/playscripts/*.json` fixtures).
 - Commit messages: `iter-N-desc: what changed`. No secrets, no `.env`.

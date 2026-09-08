@@ -1313,6 +1313,21 @@ def test_trigger_lint_rejects_prop_with_unknown_entity(tmp_path: Path) -> None:
         _mutated_pack(tmp_path, mutate)
 
 
+def test_trigger_lint_rejects_a_null_prop_value(tmp_path: Path) -> None:
+    """A null `value` on a prop leaf is refused at load: absence is the
+    world's answer (False, DIRECTOR_SPEC §3's blanket fail-closed),
+    never a pack value — the equals-null probe on a missing prop is
+    the closed hole (a null never resurrects a missing read)."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["director"]["hooks"]["possible_document_check"]["trigger"] = {
+            "kind": "prop", "of": "npc_guard_01", "path": "crime_status",
+            "comparator": "equals", "value": None,
+        }
+
+    with pytest.raises(PackError, match="value' must not be null"):
+        _mutated_pack(tmp_path, mutate)
+
+
 def test_trigger_lint_rejects_empty_compound_as_dead_vocabulary(
     tmp_path: Path,
 ) -> None:

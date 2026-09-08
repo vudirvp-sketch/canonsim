@@ -48,7 +48,7 @@ import pytest
 
 from core.fold import fold, initial_projection
 from core.log import EventRecord, KnowledgeRecord, read_log
-from core.onaction import on_action_drafts
+from core.onaction import _gate_passes, on_action_drafts
 from core.pack import PackError, load_pack
 from core.transitions import WORLD
 
@@ -224,8 +224,10 @@ def test_the_gate_is_the_quantified_predicate() -> None:
     """The per-entity gate: each condition {prop, comparator, value}
     evaluates with the CANDIDATE as the explicit argument — the entity
     is not in the spec (no implicit this). The comparison semantics are
-    predicates.py's: a missing prop answers False under at_least and
-    equals, True under not_equals; a bool never equals a number."""
+    predicates.py's: a missing prop answers False under EVERY
+    comparator (DIRECTOR_SPEC §3's blanket fail-closed — the gate has
+    no negation, so not_equals means present AND ≠ X); a bool never
+    equals a number."""
     state = projection()
     state["npc_guard_01"]["pair.pc_01.suspicion"] = 30
     state["npc_maid_01"]["pair.pc_01.suspicion"] = 10
@@ -244,12 +246,19 @@ def test_the_gate_is_the_quantified_predicate() -> None:
                              "comparator": "not_equals", "value": 10})
     (draft,) = on_action_drafts(not_equals, state, record)
     assert [c.entity for c in draft.state_changes] == ["npc_guard_01"]
-    # a missing prop answers honestly: False under at_least
+    # a missing prop fails closed: False under at_least
     stripped = projection()
     stripped["npc_guard_01"].pop("pair.pc_01.suspicion")
     missing = _gate_pack({"prop": "pair.pc_01.suspicion",
                           "comparator": "at_least", "value": 0})
     assert list(on_action_drafts(missing, stripped, _record(
+        knowledge=(_knower("npc_guard_01"),)
+    ))) == []
+    # and under not_equals — the restored §3 blanket law (the twin of
+    # the predicates.py flip: present AND ≠ X, never absent-passes)
+    not_equals_missing = _gate_pack({"prop": "pair.pc_01.suspicion",
+                                     "comparator": "not_equals", "value": 10})
+    assert list(on_action_drafts(not_equals_missing, stripped, _record(
         knowledge=(_knower("npc_guard_01"),)
     ))) == []
     # a bool never equals the number 1 even where the value is True
@@ -260,6 +269,38 @@ def test_the_gate_is_the_quantified_predicate() -> None:
     assert list(on_action_drafts(bools, bool_state, _record(
         knowledge=(_knower("npc_guard_01"),)
     ))) == []
+
+
+def test_the_gate_backstop_is_loud_not_keyerror() -> None:
+    """The runtime backstop: a malformed condition (missing key, wrong
+    shape, unknown comparator) raises ValueError naming the field —
+    KeyError/TypeError never leak from the gate. The pack lint owns
+    load time (exactly GATE_KEYS); this is the loud backstop for
+    runtime-constructed conditions — the `_require` mirror of
+    predicates.py's family fix (D-111)."""
+    state = projection()
+    state["npc_guard_01"]["pair.pc_01.suspicion"] = 30
+    with pytest.raises(ValueError, match="'prop' must be present"):
+        _gate_passes([{"comparator": "equals", "value": 30}], state,
+                     "npc_guard_01")
+    with pytest.raises(ValueError, match="'value' must be present"):
+        _gate_passes([{"prop": "pair.pc_01.suspicion",
+                       "comparator": "equals"}], state, "npc_guard_01")
+    with pytest.raises(ValueError, match="'comparator' must be present"):
+        _gate_passes([{"prop": "pair.pc_01.suspicion", "value": 30}],
+                     state, "npc_guard_01")
+    with pytest.raises(ValueError, match="unknown gate comparator"):
+        _gate_passes([{"prop": "pair.pc_01.suspicion",
+                       "comparator": "roughly", "value": 30}],
+                     state, "npc_guard_01")
+    with pytest.raises(ValueError, match="gate condition must be an object"):
+        _gate_passes(["pair.pc_01.suspicion"], state,  # type: ignore[list-item]
+                     "npc_guard_01")
+    # a candidate absent from the projection fails the gate (the
+    # blanket world answer — missing entity, missing prop, one law)
+    assert _gate_passes([{"prop": "pair.pc_01.suspicion",
+                          "comparator": "not_equals", "value": 99}],
+                         state, "npc_ghost") is False
 
 
 def test_the_reaction_event_shape_is_the_alarm_shape() -> None:
@@ -511,6 +552,19 @@ def test_lint_rejects_an_unknown_gate_comparator(tmp_path: Path) -> None:
         ]
     error = _lint_error(tmp_path, mutate)
     assert "comparator must be one of" in error
+
+
+def test_lint_rejects_a_null_gate_value(tmp_path: Path) -> None:
+    """A null `value` is refused at load — absence is the world's
+    answer (False, DIRECTOR_SPEC §3), never a pack value; the
+    equals-null probe on a missing prop is the closed hole."""
+    def mutate(rules: dict[str, Any]) -> None:
+        rules["on_action"]["document_check"][0]["gate"] = [
+            {"prop": "pair.pc_01.suspicion", "comparator": "not_equals",
+             "value": None}
+        ]
+    error = _lint_error(tmp_path, mutate)
+    assert "value must not be null" in error
 
 
 def test_lint_rejects_unknown_prop_paths(tmp_path: Path) -> None:

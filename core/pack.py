@@ -272,6 +272,12 @@ def _predicate_error(
             return f"{where}: prop {spec['comparator']} needs an integer value"
         if "value" not in spec:
             return f"{where}: prop predicate needs a value"
+        if spec.get("value") is None:
+            return (
+                f"{where}: prop predicate 'value' must not be null — "
+                "absence is the world's answer (False, DIRECTOR_SPEC §3), "
+                "never a pack value"
+            )
     return None
 
 
@@ -1800,6 +1806,12 @@ class _Lint:
                     return f"{gwhere}: {condition['comparator']} needs an integer value"
                 if "value" not in condition:
                     return f"{gwhere}: the condition needs a value"
+                if condition.get("value") is None:
+                    return (
+                        f"{gwhere}: the condition's value must not be null — "
+                        "absence is the world's answer (False, "
+                        "DIRECTOR_SPEC §3), never a pack value"
+                    )
         for key in ("actor", "target"):
             if key in entry and entry[key] not in ACTOR_TARGET_KEYS:
                 return (

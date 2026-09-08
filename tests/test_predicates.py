@@ -9,9 +9,10 @@ The laws pinned here:
   byte-identically to the pre-drama-1 `_trigger_fires` semantics — the
   committed pack's own trigger spec is replayed as the parity pin.
 - The `prop` leaf is the generalized projection read (any entity, any
-  path, four comparators); a missing prop answers honestly (False
-  under ordering and equals, True under not_equals); Python's
-  `True == 1` conflation is guarded.
+  path, four comparators); a missing prop or entity answers False
+  under EVERY comparator (DIRECTOR_SPEC §3's blanket fail-closed,
+  restored iter-79 — explicit absence stays writable as `{"not": …}`);
+  Python's `True == 1` conflation is guarded.
 - Compounds compose: `all` (AND), `any` (OR), `not` (single inner),
   and the implicit-AND list root (the Paradox trigger body shape).
 - The grammar is loud: unknown kinds, malformed shapes, and unknown
@@ -159,17 +160,64 @@ def test_prop_leaf_bool_never_equals_one() -> None:
     assert evaluate({**flag_as_one, "comparator": "not_equals"}, PROJECTION, 0) is True
 
 
-def test_prop_leaf_missing_prop_answers_honestly() -> None:
-    """A missing prop: not equal to anything (False under equals, True
-    under not_equals), never comparable (False under ordering)."""
+def test_prop_leaf_missing_prop_fails_closed() -> None:
+    """A missing prop: False under EVERY comparator — DIRECTOR_SPEC
+    §3's blanket fail-closed (a typo'd path never fires a trigger;
+    `not_equals` means present AND ≠ X). The hidden twin hole, closed
+    with it: `equals` with a null value answered True on a missing
+    prop (None == None) — the lint now refuses null values outright.
+    The escape hatch is the compound negation, which flips the world
+    answer (absent OR ≠ X)."""
     base = {
         "kind": "prop", "of": "npc_drunk_01", "path": "status.injury",
     }
     assert evaluate({**base, "comparator": "equals", "value": 0}, PROJECTION, 0) is False
     assert evaluate({**base, "comparator": "not_equals", "value": 0},
-                    PROJECTION, 0) is True
+                    PROJECTION, 0) is False
     assert evaluate({**base, "comparator": "at_least", "value": 0},
                     PROJECTION, 0) is False
+    # the closed hole: a null `value` never resurrects a missing read
+    assert evaluate({**base, "comparator": "equals", "value": None},
+                    PROJECTION, 0) is False
+    # the compound escape: explicit absence stays writable
+    spec = {"not": {**base, "comparator": "equals", "value": 0}}
+    assert evaluate(spec, PROJECTION, 0) is True
+    # a missing ENTITY is the same world answer (§3: prop / entity)
+    absent = {"kind": "prop", "of": "npc_ghost", "path": "status.fear",
+              "comparator": "not_equals", "value": 0}
+    assert evaluate(absent, PROJECTION, 0) is False
+
+
+def test_prop_and_threshold_missing_fields_are_loud() -> None:
+    """The never-guesses contract: a missing `value`/`comparator` is a
+    ValueError naming the field — KeyError never leaks from the
+    evaluator (the `_require` family backstop; pack lint owns load
+    time, so runtime-constructed specs are the reachable surface).
+    Loud BEFORE the world answer: a malformed spec raises even when
+    the prop is missing (shape errors never ride on world state)."""
+    spec = {
+        "kind": "prop", "of": "npc_guard_01", "path": "crime_status",
+        "comparator": "equals",
+    }
+    with pytest.raises(ValueError, match="'value' must be present"):
+        evaluate(spec, PROJECTION, 0)
+    spec = dict(spec, value="unknown")
+    del spec["comparator"]
+    with pytest.raises(ValueError, match="'comparator' must be present"):
+        evaluate(spec, PROJECTION, 0)
+    # loud even when the read target is absent from the projection
+    missing_path = {
+        "kind": "prop", "of": "npc_ghost", "path": "status.fear",
+        "comparator": "equals",
+    }
+    with pytest.raises(ValueError, match="'value' must be present"):
+        evaluate(missing_path, PROJECTION, 0)
+    threshold = {
+        "kind": "threshold", "target_npc": "npc_guard_01",
+        "axis": "suspicion", "value": 50,
+    }
+    with pytest.raises(ValueError, match="'comparator' must be present"):
+        evaluate(threshold, PROJECTION, 0)
 
 
 def test_prop_leaf_unknown_comparator_is_loud() -> None:

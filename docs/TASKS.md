@@ -59,69 +59,39 @@
   buffer; the phase's build-column headline.
 - `depth-6` · factions with goals — todo: small-formula dynamics
   (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
-- `depth-7` · groups & simulation LOD — todo (**owner verdict pending**
-  on the iter-11b stress-test resolutions, phases.md §5): one id all
+- `depth-7` · groups & simulation LOD — todo (design RATIFIED
+  iter-79, D-112: the iter-11b resolutions — phases.md §5 write-side
+  LOD in the D-056-amended edition + §7 Containers — one id all
   tiers, macro-clock aggregates, condensation on crossing; the st-3 /
-  st-5 / st-6a dependencies by reference, never duplicated rows.
+  st-5 / st-6a dependencies by reference, never duplicated rows).
 
-### iter-77 · meta-analysis routed candidates (the owner's two-text
-cross-review, re-verified claim-by-claim and strengthened at iter-78
-against HEAD `cb91cbe`; **verdict pending — none execute without the
-owner's call**)
+### iter-77 · meta-analysis routed candidates — LANDED (the owner's
+iter-79 verdict call executed; every row below collapsed per the
+header law — the detail lives in git + worklog + D-110..D-113)
 
-- `pred-failclosed` · todo (owner verdict): `not_equals` on a missing
-  prop answers True — fail-open (`core/predicates.py::_prop` + the
-  `core/onaction.py` gate twin, docstring-pinned "honestly"). The
-  candidate: missing → False under ALL comparators, negation via
-  `{"not": …}`; two code sites + the missing-prop pins +
-  DIRECTOR_SPEC §3/§3c sync + a D-row; the committed pack carries zero
-  `not_equals` (migration cost zero). The `of`-typo case is already
-  lint-dead (`core/pack.py` validates 'of' against entity ids); the
-  live surface is `path` typos (lint checks non-empty string only) +
-  runtime-absent props. iter-78 strengthening: DIRECTOR_SPEC §3's
-  blanket "a missing prop / missing entity answers False" was born
-  iter-40 WITH the prop leaf — the spec (the contract owner) has
-  pinned fail-closed all along; the `not_equals` exception is a
-  37-iteration code-vs-spec drift, so ACCEPT restores the spec, not
-  changes semantics (then §3 needs no edit — only §3c's "answers
-  honestly" wording, the two module docstrings, and the two existing
-  "answers honestly" pins that flip: `test_predicates.py` + the
-  onaction stripped-gate twin; REJECT instead documents the exception
-  INTO §3). The compound escape hatch holds: explicit absence stays
-  writable as `{"not": {"kind": "prop", …}}`.
-- `pred-contract` · todo (owner verdict): `_prop` reads
-  `spec["comparator"]`/`spec["value"]` directly — KeyError where the
-  docstring promises ValueError; one loud-backstop fix + pin.
-- `seq-owner` · todo (owner verdict): the sequencing single-owner
-  split — bootstrap gains "the row pinned by STATUS 'Next step'
-  (sequencing owner); TASKS owns the backlog, never the order;
-  owner-gated and gate-blocked rows are not candidates", and
-  AGENT_NAVIGATION §3's "What to do next" row gains "the ORDER →
-  STATUS.md 'Next step'".
-- `rule9-resolver` · todo (owner verdict): one line in AGENTS §7 —
-  session runner scripts (live sandbox drivers) live outside the
-  repo (the operator's Rule 9); `scripts/` holds only committed repo
-  tooling (D-046) — resolves every dangling citation at once. iter-78
-  census: the true count is ~19, not iter-77's 4 (STATUS FAQ x3,
-  TASKS x1, TEST_PLAN x8 incl. §8.4's own title, TECH_NOTES x2,
-  DECISIONS x5 — D-098/D-103/D-106/D-108/D-109; the 4x was a
-  STATUS+TASKS-scoped grep undercount). Defining the term once
-  in-repo resolves all of them with zero citation edits.
-- `verify-seed` · todo (owner verdict): the bootstrap verify line
-  gains `PYTHONHASHSEED=0` (AGENTS §10 alignment; suite empirically
-  green under any seed — consistency, not a live flap); optionally a
-  tests-side guard that fails loud on a missing seed as the
-  mechanism side.
-- `archive-protocol` · todo (owner verdict, bootstrap-owned): every
-  archive carries BASE_COMMIT.txt (the agent clone's HEAD hash) +
-  "the git commands are for the owner, to run after applying the
-  archive" + the no-network fallback (paste the diff inline).
-- `tn12-claim` · todo (owner verdict): the bg-8 stop-point claims
-  "saved in TECH_NOTES.md §12" — no §12 exists at HEAD: land a
-  cleaned §12 (the constraints essay) or drop the claim (KI#48
-  doc-drift family); its un-routed protocol proposals (stratified
-  sampling, budget caps, n≥3 CIs, provider rotation, brief-size
-  growth curve) route or drop with it.
+- `pred-failclosed` · **done (iter-79, D-110)**: §3's blanket
+  fail-closed restored — missing → False under ALL comparators in
+  both twins; the equals-null hole closed by the lint ban.
+- `pred-contract` · **done (iter-79, D-111)**: the `_require` family —
+  ValueError on every raw-read surface (6 sites), KeyError never
+  leaks.
+- `seq-owner` · **done (iter-79, D-113)**: the split landed —
+  NAVIGATION §3 (ORDER → STATUS Next step; composition → TASKS) +
+  the bootstrap text (chat-side).
+- `rule9-resolver` · **done (iter-79, D-113)**: Rule 9 defined in
+  AGENTS §7 (census verified 25 hits / 8 files + worklog).
+- `verify-seed` · **done (iter-79, chat-side per D-113)**: the
+  bootstrap verify line gains `PYTHONHASHSEED=0` — §10 alignment;
+  repo untouched (the suite is seed-agnostic, the guard was the
+  rejected crutch).
+- `archive-protocol` · **done (iter-79, chat-side per D-113)**:
+  BASE_COMMIT.txt + owner-runs-git + inline-diff fallback adopted
+  into the bootstrap; the metadata-never-in-worktree clause included.
+- `tn12-claim` · **done (iter-79, D-113)**: the claim DROPPED — no
+  §12 landed; each of the five proposals already had an owner
+  (D-109/§8.5 gap rows, D-109's snapshot law, §8.1 Layer 2, YAGNI);
+  zero diff (no §12 reference in the tree besides the claim's own
+  record).
 - Re-raise guard (iter-78, the owner's ignore-list ruling — re-flag
   only with NEW measured evidence): LLM-drift / rate-limit /
   token-econ concerns are already TEST_PLAN §8.1–8.5 law + the gap

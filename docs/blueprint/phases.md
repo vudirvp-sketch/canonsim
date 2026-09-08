@@ -515,8 +515,9 @@ and metadata only, per `docs/ref/natural_earth.md` +
 `docs/ref/geonames.md`; CC-BY sidecar at intake; fantasy content from
 packs, never real-world toponyms.
 
-**Groups & simulation LOD (stress-test resolutions, iter-11b; owner
-verdict pending).** The LOD ladder above is a READ ladder; the write
+**Groups & simulation LOD (stress-test resolutions, iter-11b;
+RATIFIED iter-79 — D-112, in the D-056-amended edition below).**
+The LOD ladder above is a READ ladder; the write
 side — how off-screen life ticks, how a group becomes an actor, how it
 materializes on crossing — was undesigned. Resolutions, zero new
 machinery families: (1) **one id, all tiers** — a group is a pack
@@ -536,16 +537,16 @@ members get canon-birth events (the D-054 shape at group scale); the
 aggregate is tombstoned as realized in derived stores only (INV-5
 untouched); the id never changes between tiers — `known_by`, entity
 texture, and old knowledge keys survive without migration. (4)
-**Arrival snapshot** (write side): entering a scene emits ONE
-perception event → O(present) knowledge records with observable
-markers (per-present-target expansion of the actor-held `knows`
-template — the audience stays `actor`; additive per INTENT_SCHEMA
-§7/§10); the read-side twin is the §1 entity-card
-block. Spec home when its trigger fires: the GROUP_SPEC sketch
-(`SPECS_BACKLOG.md`). **The template half landed iter-15 (D-056): the
-expansion rides the move event's templates (INTENT_SCHEMA §7), not a
-separate perception event — KI#43's grammar correction made the event
-an implementation detail the pack does not need.**
+**Arrival snapshot** (write side, ratified in the D-056-landed form):
+entering a scene feeds knowledge per present target through the move
+event's own templates (INTENT_SCHEMA §7 — the template half landed
+iter-15, D-056; KI#43's grammar correction made a separate perception
+event an implementation detail the pack does not need) → O(present)
+knowledge records with observable markers (the actor-held `knows`
+template expanded per present target — the audience stays `actor`;
+additive per INTENT_SCHEMA §7/§10); the read-side twin is the §1
+entity-card block. Spec home when its trigger fires: the GROUP_SPEC
+sketch (`SPECS_BACKLOG.md`).
 
 **Research intake 2 (iter-66a, D-096): the depth-phase design material
 — recorded here, drafted into TASKS only at the phase-5 opening.**
@@ -654,7 +655,7 @@ reskin without core edits, ≤1 day (`ROADMAP.md` §2).
   that must be rewritten later — the shapes are the scalable ones, only
   the constants are small.
 - **Containers & physical persistence (stress-test resolutions,
-  iter-11b; owner verdict pending).** The `in` relation: position may
+  iter-11b; RATIFIED iter-79 — D-112).** The `in` relation: position may
   name a location OR a container entity; `carrier` is the npc-case of
   the same relation; presence/containment = the transitive closure
   (the carrier closure generalized); nesting depth is lint-capped and

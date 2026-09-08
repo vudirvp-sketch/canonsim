@@ -195,15 +195,25 @@ def _gate_passes(
     an explicit ARGUMENT — the spec carries only the prop read, so
     there is no implicit `this` to misread. The comparison semantics
     are `core/predicates.py`'s own (the single owner): a missing prop
-    answers False under the ordering comparators and `equals`, True
-    under `not_equals`; a bool never equals a number."""
+    answers False under every comparator (DIRECTOR_SPEC §3's blanket
+    fail-closed — the world answer, never an error; the gate has no
+    negation, so `not_equals` means present AND ≠ X); a bool never
+    equals a number. Malformed conditions raise ValueError loudly
+    (the pack lint owns load time; this is the runtime backstop)."""
     for condition in gate:
-        props = projection.get(who)
-        actual = props.get(condition["prop"]) if props else None
-        expected = condition["value"]
-        comparator = condition["comparator"]
+        if not isinstance(condition, Mapping):
+            raise ValueError(
+                f"gate condition must be an object, got {condition!r}"
+            )
+        prop = _require(condition, "prop")
+        expected = _require(condition, "value")
+        comparator = _require(condition, "comparator")
         if comparator not in COMPARATORS:
             raise ValueError(f"unknown gate comparator {comparator!r}")
+        props = projection.get(who)
+        actual = props.get(prop) if props else None
+        if actual is None:
+            return False  # fail-closed: the missing prop answers the world
         if comparator == "equals":
             if not _same_kind(actual, expected) or actual != expected:
                 return False
@@ -218,6 +228,20 @@ def _gate_passes(
             if comparator == "at_most" and actual > expected:
                 return False
     return True
+
+
+def _require(condition: Mapping[str, Any], key: str) -> Any:
+    """The predicates.py `_require` twin (linked owner:
+    `core/predicates.py::_require`): a missing gate-condition key is a
+    ValueError naming the field and the keys the condition does carry
+    — KeyError never leaks from the gate (the runtime backstop for
+    runtime-constructed conditions; the pack lint owns load time)."""
+    if key not in condition:
+        raise ValueError(
+            f"gate condition field {key!r} must be present, "
+            f"condition carries {sorted(condition)!r}"
+        )
+    return condition[key]
 
 
 def _same_kind(left: Any, right: Any) -> bool:

@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-79 · 2026-09-09 · verdict-land — the owner's call on the
+iter-77/78 routed candidates executed (14 files — 3 code + 3 suites
++ 8 doc sync: the verdict-set as one mechanism family, the
+iter-70/73 scope pattern, AGENTS §2.3 noted here)
+- pred-failclosed + pred-contract (D-110/D-111): DIRECTOR_SPEC §3's
+  blanket fail-closed restored in BOTH comparison twins
+  (predicates._prop + onaction._gate_passes — missing → False under
+  every comparator, `not_equals` = present AND ≠ X, `{"not": …}`
+  the escape); the equals-null hole closed by the pack-lint null ban
+  (prop leaf + gate condition); the `_require` family — 6 raw-read
+  surfaces → ValueError naming the field (census corrected 5 → 6:
+  the gate's comparator guard covered wrong values, not missing
+  keys), shape errors before the world answer. Zero pack migration
+  (zero not_equals + zero nulls, verified; T1 + corpus pins green
+  byte-identical). DIRECTOR_SPEC §3/§3c + two docstrings + two pins
+  flipped ("answers honestly" → fails closed).
+- D-112: iter-11b resolutions RATIFIED — phases.md §5 in the
+  D-056-amended edition (the arrival snapshot folded to one answer)
+  + §7 Containers covered; both pending tags cleared; TASKS depth-7
+  stays a todo BUILD row with the design pinned.
+- D-113: Rule 9 defined in AGENTS §7 (verified census 25 hits / 8
+  files — both earlier counts under); NAVIGATION §3 the sequencing
+  split (ORDER = STATUS Next step, composition = TASKS); tn12-claim
+  dropped (zero diff — every proposal had a named owner);
+  verify-seed + archive-protocol = the owner's bootstrap text
+  (chat-side). 1323 → 1327 passed +1 skipped, ruff clean. bg-7
+  evicted (verified in this edit); 10 after. Caps: STATUS 647 /
+  TASKS 835 / DECISIONS 78 lines (49 rows) / TECH_NOTES 695 / phases
+  693 — over-cap on substance (§6.1, the D-095..D-109 precedent),
+  trim at the phase-5→6 gate.
+---
 iter-78 · 2026-09-09 · meta-land — the owner's ultimate-variant text
 re-verified claim-by-claim against HEAD `cb91cbe` and landed (3
 files: STATUS header + Next-step line, this log, the TASKS iter-77
@@ -227,20 +258,4 @@ iter-60..69b scope pattern)
   drift). 1240+1 green, ruff clean. TASKS beliefwire-2 done; the
   lance's remainder: prosefloor-2. iter-65 evicted (verified in this
   edit); 10 after.
----
-bg-7 · 2026-09-07 · engine + confabulation probe — the five probes'
-first numbers on a REAL engine (track B, D-098's Layer-2 runner; the
-repo diff is doc-only — the runner + transcripts live outside per
-Rule 9/INV-4 and never wrote a repo byte, git clean through the run)
-- The sandbox API engine (glm-4-plus; the {3–8B, GBNF} arm = the gap
-  row, engine-1's input unchanged) through the REAL doors: the
-  51-utterance corpus 39/44 gate-valid after ONE re-ask (79.5→88.6%,
-  the deferred ladder's first numbers); 24 prose beats — floor 0, gap
-  0, the claims-channel refusal engine = the brief-surface vs
-  claim-id mismatch; the Cyrillic twin tax zero; C3.5's 0→1 signal;
-  the surface A/B null. TECH_NOTES §10 (608 — over-cap substance per
-  §6.1, trim at the phase-5→6 gate; TASKS 699 — the same stance, the
-  iter-66a precedent); TASKS bg-7 done + prosefloor-2
-  UNBLOCKED. 1239+1 green, ruff clean. iter-64 evicted (verified in
-  this edit); 10 after.
 (end of log — cap 10; pre-trim history lives in git)
