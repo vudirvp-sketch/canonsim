@@ -1,49 +1,53 @@
 # STATUS — canonsim
 
-Iteration: iter-80 (`iter-80-foldcheck` — depth-4, the STATUS
-queue's top row: the fold-checkpoint mechanism family landed — the
-chronicler-family derived artifact + the sha256 index-anchor, the
-first depth row with NO runtime wiring by design (the resume door
-owner-gated, phases.md §7)) · Phase: 5 (Depth) — OPEN (iter-73,
-D-105; depth-1 + depth-1b + depth-2 + depth-2b + depth-4 LANDED,
-the queue: depth-5 next) · Track A touched this session
-(`core/checkpoint.py` + `scripts/checkpoint.py`) — track B never
-blocks it (ROADMAP §1).
-**The landing (D-114): `core/checkpoint.py` — `FoldCheckpoint` = a
-deep-copied projection snapshot + event-index offset (`events[:offset]`
-folded in, `events[offset:]` the tail); ONE canonical serialization
-(compact JSON, sorted keys); `restore` = rollback as snapshot + tail
-replay (the from_-net loud on a diverged snapshot); `verify`/
-`verify_all` the re-fold law (the batch form folds once for all
-offsets, O(N + states)); the sha256 anchor lives in the derived index
-`index.json` (CheckpointRecord: offset + snapshot sha256 + prefix
-sha256 — NEVER an event in the truth, intake-4's refusal held);
-`prefix_digest` = sha256 over the first 1+offset log lines,
-append-stable (INV-5 — the checkpoint stays bound to its log as it
-grows); `load_checkpoint`/`read_index` the anchor teeth (edited
-artifact, re-filed offset, hand-edited index — all loud).
-`scripts/checkpoint.py` the chronicler-family builder: read_log full
-validation + the pack↔header name_version identity gate + one
-incremental fold snapshotting every requested offset + born-verified
-(verify_all BEFORE any write, the count-gate spirit); default the
-single END checkpoint, `--every N` the cadence ∪ the end, `--offsets`
-explicit; artifacts under `output/checkpoints/<log_stem>/` (gitignored
-— never truth, never committed). The KnowledgeView half deliberately
-OUT (its shape is core/knowledge.py-internal — a frozen copy would be
-a second owner; its incremental form is the read-side-indexes row at
-the mediator iteration, phases.md §7). Corpus price ZERO by
-construction (no runtime pipeline byte moved — the depth-2 precedent;
-T1 + every corpus pin green byte-identical inside the suite). No KI
-opened. 1327 → 1352 passed +1 skipped, ruff clean (seeds 0/42/unset).**
+Iteration: iter-81 (`iter-81-worldgen` — depth-5, the STATUS
+queue's top row: the phase's build-column headline landed — the
+ordered worldgen pass family, mechanics only, the committed pack
+UNARMED (the 68a pattern; the arming is depth-5b)) · Phase: 5
+(Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2 +
+depth-2b + depth-4 + depth-5 LANDED, the queue: depth-5b the arming
+or depth-3 scene LOD next) · Track A touched this session
+(`core/rng.py` + `core/worldgen.py` + `core/loop.py` +
+`core/pack.py`) — track B never blocks it (ROADMAP §1).
+**The landing (D-115): `core/worldgen.py` — `PASS_ORDER` the ordered
+passes over the seed (sites: jittered integer lattice; relax:
+integer-centroid Lloyd; height/moisture: integer-octave value noise,
+fixed-point weights that divide out, normalized into 0..9999;
+watershed: downhill flow + rivers at the threshold; biomes: the band
+table + the coastal refinement; states: capitals + nearest-capital
+growth; chronicle: pre-PC history) — every drawing pass on its OWN
+`worldgen:<pass>` stream (the D-079 family law's fourth member, pass
+granularity isolation: the armed arm's substantive fingerprint EQUALS
+the unarmed arm's, pinned — the corpus price of worldgen is the
+genesis events alone); INTEGER-ONLY geometry (the Azgaar float-drift
+refusal made executable — a test walks the model); the claims ride
+`detail_claim` — the gate's FIRST LEGAL CALLER (commit rides
+world_formed's state_changes, no_op skipped, slot_conflict refused
+with the cause chain in the outcome — the future lazy mid-run door's
+law, pinned); `Simulator.open()` runs the genesis for an ARMED pack:
+world_formed (cause null — the run-start event) + history events in
+ascending macro-year carrying the pack-declared hooks (the director's
+buffer pre-seeded before any player step — the PC walks into a
+running world) and NO knowledge records (the DF epistemology-empty
+discipline, bg-2's measured finding); the PC's first event chains to
+the LAST genesis event. `core/pack.py::_worldgen` the shape lint
+(closed vocabularies at every level, the template closure, the
+declared-hook law, the claim double-claim family — modeled slot /
+scene_detail overlap / duplicate pair / site bounds). Corpus price
+ZERO by construction (the committed pack unarmed: zero streams
+touched, zero events, v0.1 bytes — T1 + every corpus pin green
+byte-identical inside the suite). No KI opened. 1352 → 1378 passed
++1 skipped, ruff clean (seeds 0/42/unset).**
 ·
 Date: 2026-09-09 ·
-Scope: `core/checkpoint.py`, `scripts/checkpoint.py`,
-`tests/test_checkpoint.py`, `docs/blueprint/phases.md`,
-`docs/AGENT_NAVIGATION.md`, `docs/TEST_PLAN.md` (§7.1), `README.md`,
-`docs/TASKS.md`, `docs/DECISIONS.md`, `worklog.md`, `STATUS.md`
-(this file) — 11 files: the mechanism family (1 new code + 1 new
-operator tool + 1 new suite + 7 doc sync, the iter-75 footprint
-pattern, AGENTS §2.3 scope noted in worklog).
+Scope: `core/rng.py`, `core/worldgen.py` (new), `core/loop.py`,
+`core/pack.py`, `tests/test_worldgen.py` (new),
+`docs/blueprint/phases.md`, `docs/AGENT_NAVIGATION.md`,
+`docs/TEST_PLAN.md` (§7.2), `README.md`, `docs/TASKS.md`,
+`docs/DECISIONS.md`, `worklog.md`, `STATUS.md` (this file) — 13
+files: the mechanism family (3 code edit + 1 new code + 1 new suite
++ 8 doc sync, the iter-75 footprint pattern, AGENTS §2.3 scope noted
+in worklog).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -562,30 +566,36 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
 drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
-gate + depth-2b the ARMING + depth-4 fold checkpoints LANDED
-(iter-73/74/75/76/80, D-105/D-106/D-107/D-108/D-114; the corpus
-prices paid fidelity-only / zero-by-construction / zero-by-
-construction, 1352+1 green). Track A is debt-free. Track B: bg-8
+gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
+ordered worldgen passes LANDED
+(iter-73/74/75/76/80/81, D-105/D-106/D-107/D-108/D-114/D-115; the
+corpus prices paid fidelity-only / zero-by-construction /
+zero-by-construction / zero-by-construction, 1378+1 green). Track
+A is debt-free. Track B: bg-8
 LANDED (2026-09-09, D-109 — the deviation corpus's first live
 numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
 prose heartbeat families the standing gap rows). The queue:
-`depth-5` lazy worldgen passes (the phase's build-column headline —
-ordered passes over the seed, Azgaar + Red Blob donors, integer/
-fixed-point geometry discipline, + pre-PC history seeding the
-director's buffer — and the claim gate `detail_claim`'s first legal
-caller; the depth-4 checkpoints bound its long-history replay
-cost), then `depth-3` scene LOD (gated: after depth-5's first
-passes), `depth-6` factions, `depth-7` groups & simulation LOD
+`depth-5b` the worldgen ARMING (the committed pack's own
+worldgen block + the template line, the corpus price measured BOTH
+arms first — the price is the genesis events alone by construction,
+the canon fingerprint pinned equal; the M5 run-start note rides
+there), then `depth-3` scene LOD (its depth-5 gate is satisfied —
+the passes are landed), `depth-6` factions, `depth-7` groups &
+simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
 phases.md §5/§7).**
 
 1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-3..7
    rows; `docs/blueprint/phases.md` §5 the architecture owner):
-   depth-5 lazy worldgen passes next (the build-column headline),
-   then scene LOD
-   (after depth-5's first passes), factions with
-   goals, groups & simulation LOD (design ratified iter-79, D-112 —
-   the iter-11b resolutions, phases.md §5/§7); the exit criterion "an
+   depth-5 LANDED (iter-81, D-115 — the ordered passes over the
+   seed, `detail_claim`'s first legal caller, the genesis seeding
+   the director's buffer; mechanics only, the committed pack
+   unarmed, corpus price zero by construction); the queue:
+   depth-5b the arming next, then scene LOD
+   (its depth-5 gate is satisfied — the passes are landed), factions
+   with goals, groups & simulation LOD (design ratified iter-79,
+   D-112 — the iter-11b resolutions, phases.md §5/§7); the exit
+   criterion "an
    emergent chain of
    3+ events without the player" (ROADMAP §2 — T8's OFF arm already
    reads 26 chains on the committed scenario; the phase-5 target is

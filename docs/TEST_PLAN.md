@@ -561,6 +561,62 @@ sees):
   cadence law (0, N, 2N, … ∪ the end); pack mismatch and a malformed
   log exit 1 with nothing written (the count-gate spirit).
 
+### 7.2 depth-5 worldgen acceptance (iter-81, D-115)
+
+The worldgen suite (`tests/test_worldgen.py`; mechanism owner
+`core/worldgen.py`; lint `core/pack.py::_worldgen`; genesis wiring
+`core/loop.py::open`; design `docs/blueprint/phases.md` §5 "Ordered
+generator passes"). Runs everywhere (stdlib only): 1378 passed + 1
+skipped. NOT a gate test — a mechanism family's acceptance suite, the
+§7.1 precedent. The committed pack is UNARMED (the 68a pattern): the
+unarmed arm of every A/B pin is the committed pack itself; the armed
+arm is the crafted twin (the `worldgen` block + the `world_history`
+template line, bands calibrated so seed 42 spans the whole biome
+vocabulary).
+
+The laws under test:
+
+- **The stream law** (the D-079 family's fourth member):
+  `worldgen:<pass>` content-addressed, injective over the closed
+  ":"-free PASS_ORDER, lazily registered, per-seed derived; the
+  closed-set tripwire survives for non-family names; the one legal
+  nesting is inside the assured substantive scope (never the
+  reverse).
+- **The unarmed law**: no block → `(None, ())` before any stream
+  touch (no lazy registration — `count` is a KeyError), zero draws,
+  the committed run stays v0.1 (no genesis events, `world` None).
+- **The integer discipline**: every model value an int in bounds
+  (sites, height 0..9999, moisture, flow) — the Azgaar float-drift
+  refusal made executable.
+- **The pass laws**: same seed → same model, different seed →
+  different; the lattice count (extent//spacing)²; the relax round
+  moves sites in-bounds; the biome vocabulary closed with the
+  coastal rule structural (band-1 + an ocean neighbor); the
+  watershed flow/rivers at the threshold; capitals + nearest-region
+  growth; the chronicle capped (events_max), years ascending inside
+  [1, years], kinds closed, hooks declared.
+- **The claim gate's first legal caller**: commit on an empty log;
+  no_op skipped; slot_conflict refused with the cause chain —
+  world_formed carries ONLY the committed claims, the refused list
+  rides the outcome (never-empty keys only when non-empty).
+- **The genesis integration**: the world forms at open time (before
+  any player step), the first genesis event is the run-start (cause
+  null), the chain is linear, the PC's first event chains to the
+  LAST genesis event; the director's buffer holds exactly the
+  genesis hooks; the claims live in the projection AND replay
+  through the fold (INV-1); NO knowledge records on any genesis
+  event (the DF epistemology-empty discipline); same seed →
+  byte-identical logs; **the isolation law** — the armed arm's
+  substantive fingerprint EQUALS the unarmed arm's (the corpus price
+  of worldgen is the genesis events alone).
+- **The lint + backstop family**: closed vocabularies at every
+  level; the range laws; the template closure (the genesis event
+  type is pack vocabulary); the declared-hook law; the claim
+  double-claim family (modeled slot, scene_detail overlap, duplicate
+  pair, site bounds, unknown location); the runtime backstop
+  (WorldgenError naming the offender — KeyError/IndexError never
+  leak).
+
 ## 8. testproto — the intermediate-build LLM-integration protocol (iter-68, D-098)
 
 The fork closed by decomposition, not election: the three candidates

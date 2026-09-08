@@ -57,6 +57,7 @@ from core.resolvers import REGISTRY
 from core.retrieval import RETRIEVAL_BLOCK_KEYS
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
+from core.worldgen import CLAIM_FIELDS, FIELD_MAX, WORLDGEN_BLOCK
 
 __all__ = [
     "BRIEF_BLOCK_IDS",
@@ -113,6 +114,26 @@ def _is_number(value: Any) -> bool:
     """A JSON number (int or float, bool excluded)."""
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
+
+# The worldgen block's closed sub-block and map-key vocabularies
+# (depth-5; `core/worldgen.py` owns the pass semantics, the lint owns
+# the shape).
+WORLDGEN_SUB_BLOCKS: Final = (
+    "map",
+    "biomes",
+    "watershed",
+    "states",
+    "chronicle",
+    "claims",
+)
+WORLDGEN_MAP_KEYS: Final = (
+    "extent",
+    "spacing",
+    "jitter",
+    "relax_rounds",
+    "height_octaves",
+    "moisture_octaves",
+)
 
 OPTION_KEYS: Final = ("trigger", "weight", "intent", "notes")
 """The closed option-block vocabulary (drama-2): the availability gate,
@@ -324,6 +345,11 @@ class _Lint:
         # brief must hit _brief's clean PackError, never a KeyError
         # downstream).
         self._scene_detail()
+        # depth-5 (iter-81): last — the worldgen block's cross-lints
+        # read the director hook table, the template vocabulary, the
+        # scene_detail block (the overlap refusal), and the entities'
+        # modeled-slot law, all validated before it.
+        self._worldgen()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -2555,6 +2581,277 @@ class _Lint:
                     "duplicate member is dead draw vocabulary — weighting "
                     "would be an explicit feature, never an accident)",
                 )
+
+
+    def _worldgen(self) -> None:
+        """The worldgen contract (depth-5, `phases.md` §5 — the ordered
+        passes' config home; mechanics in `core/worldgen.py`, the
+        genesis wiring in `core/loop.py::open`, the streams in
+        `core/rng.py::worldgen_stream_name`). The block is OPTIONAL and
+        lives at rules.json top level (`worldgen`); a pack without it
+        runs the v0.1 bytes, byte-identically (the pack's own
+        declaration is the arming — the 68a pattern, depth-5b). Closed
+        key vocabulary per sub-block; every value an explicit integer
+        (a default would be a second config surface — D-024). The
+        cross-lints: the chronicle event type must live in the template
+        vocabulary (EVENT_SCHEMA §11 — closed per pack); the chronicle
+        hook tags must be DECLARED director hooks (a genesis hook the
+        director does not know is dead data); the claims' site index
+        must name a generated site (the site count is
+        (extent // spacing)^2); the claims' slots obey the
+        double-claim law family — never modeled by the location entity
+        (the scene_detail law verbatim: lazy/worldgen detail occupies
+        only slots canon does not model), never declared in
+        scene_detail for the same location (the overlap refusal: the
+        genesis claims at open time, before any observation, so the
+        scene's lazy draw could never fire — dead pack data), and the
+        (location, slot) pairs are unique within the block (a double
+        claim is the double-declaration refusal)."""
+        rules = self._data["rules.json"]
+        config = rules.get(WORLDGEN_BLOCK)
+        if config is None:
+            return
+        where = f"rules.json::{WORLDGEN_BLOCK}"
+        _require(
+            isinstance(config, Mapping),
+            f"{where} must be an object (the closed vocabulary: map | "
+            "biomes | watershed | states | chronicle | claims)",
+        )
+        unknown = sorted(set(config) - set(WORLDGEN_SUB_BLOCKS))
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "map | biomes | watershed | states | chronicle | claims)"
+            )
+
+        map_cfg = config["map"]
+        _require(
+            isinstance(map_cfg, Mapping),
+            f"{where}.map must be an object",
+        )
+        unknown = sorted(set(map_cfg) - set(WORLDGEN_MAP_KEYS))
+        if unknown:
+            raise PackError(
+                f"{where}.map: unknown keys {unknown} (the closed "
+                f"vocabulary: {sorted(WORLDGEN_MAP_KEYS)})"
+            )
+        for key in WORLDGEN_MAP_KEYS:
+            _require(
+                _is_int(map_cfg.get(key)),
+                f"{where}.map.{key} must be an integer",
+            )
+        _require(
+            map_cfg["extent"] > map_cfg["spacing"] > 0,
+            f"{where}.map: extent must exceed spacing (both positive)",
+        )
+        _require(
+            2 * map_cfg["jitter"] < map_cfg["spacing"],
+            f"{where}.map: 2*jitter < spacing (a bigger jitter collapses "
+            "the lattice — the sites would stop being distinct cells)",
+        )
+        _require(
+            0 <= map_cfg["relax_rounds"] <= 4,
+            f"{where}.map.relax_rounds must be 0..4 (relaxation beyond a "
+            "few rounds buys nothing — the lattice already regularizes)",
+        )
+        for key in ("height_octaves", "moisture_octaves"):
+            _require(
+                1 <= map_cfg[key] <= 5,
+                f"{where}.map.{key} must be 1..5 (the octave range the "
+                "integer noise normalizes over)",
+            )
+        site_count = (map_cfg["extent"] // map_cfg["spacing"]) ** 2
+
+        biome_cfg = config["biomes"]
+        _require(
+            isinstance(biome_cfg, Mapping),
+            f"{where}.biomes must be an object",
+        )
+        unknown = sorted(set(biome_cfg) - {"height_bands", "moisture_bands"})
+        if unknown:
+            raise PackError(
+                f"{where}.biomes: unknown keys {unknown} (the closed "
+                "vocabulary: height_bands | moisture_bands)"
+            )
+        for key in ("height_bands", "moisture_bands"):
+            bands = biome_cfg.get(key)
+            _require(
+                isinstance(bands, list) and len(bands) == 3
+                and all(_is_int(edge) for edge in bands),
+                f"{where}.biomes.{key} must be a list of three integer "
+                "band edges (four bands per axis)",
+            )
+            _require(
+                all(
+                    0 < left < right < FIELD_MAX
+                    for left, right in zip(bands, bands[1:], strict=False)
+                ),
+                f"{where}.biomes.{key} must be strictly ascending inside "
+                "(0, 9999) — the fields' normalized range",
+            )
+
+        watershed_cfg = config["watershed"]
+        _require(
+            isinstance(watershed_cfg, Mapping),
+            f"{where}.watershed must be an object",
+        )
+        unknown = sorted(set(watershed_cfg) - {"neighbors", "river_flow"})
+        if unknown:
+            raise PackError(
+                f"{where}.watershed: unknown keys {unknown} (the closed "
+                "vocabulary: neighbors | river_flow)"
+            )
+        for key in ("neighbors", "river_flow"):
+            _require(
+                _is_int(watershed_cfg.get(key)),
+                f"{where}.watershed.{key} must be an integer",
+            )
+        _require(
+            2 <= watershed_cfg["neighbors"] <= 8,
+            f"{where}.watershed.neighbors must be 2..8 (the k-nearest "
+            "adjacency window)",
+        )
+        _require(
+            watershed_cfg["river_flow"] >= 2,
+            f"{where}.watershed.river_flow must be at least 2 (a "
+            "threshold of 1 makes every site a river)",
+        )
+
+        states_cfg = config["states"]
+        _require(
+            isinstance(states_cfg, Mapping),
+            f"{where}.states must be an object",
+        )
+        unknown = sorted(set(states_cfg) - {"capitals"})
+        if unknown:
+            raise PackError(
+                f"{where}.states: unknown keys {unknown} (the closed "
+                "vocabulary: capitals)"
+            )
+        _require(
+            _is_int(states_cfg.get("capitals")),
+            f"{where}.states.capitals must be an integer",
+        )
+        _require(
+            1 <= states_cfg["capitals"] <= site_count,
+            f"{where}.states.capitals must be 1..{site_count} (one "
+            "capital per generated site at most)",
+        )
+
+        chronicle_cfg = config["chronicle"]
+        _require(
+            isinstance(chronicle_cfg, Mapping),
+            f"{where}.chronicle must be an object",
+        )
+        unknown = sorted(
+            set(chronicle_cfg) - {"years", "events_max", "event_type", "hooks"}
+        )
+        if unknown:
+            raise PackError(
+                f"{where}.chronicle: unknown keys {unknown} (the closed "
+                "vocabulary: years | events_max | event_type | hooks)"
+            )
+        for key in ("years", "events_max"):
+            _require(
+                _is_int(chronicle_cfg.get(key)) and chronicle_cfg[key] >= 1,
+                f"{where}.chronicle.{key} must be an integer >= 1 (zero "
+                "or negative is dead data — omit the block for v0.1 "
+                "bytes)",
+            )
+        templates = self._data["templates.json"]["events"]
+        event_type = chronicle_cfg.get("event_type")
+        _require(
+            isinstance(event_type, str) and event_type in templates,
+            f"{where}.chronicle.event_type {event_type!r} is not in the "
+            "template vocabulary (EVENT_SCHEMA §11 — closed per pack)",
+        )
+        hooks = chronicle_cfg.get("hooks")
+        _require(
+            isinstance(hooks, list) and hooks
+            and all(isinstance(tag, str) and tag.strip() for tag in hooks)
+            and len(set(hooks)) == len(hooks),
+            f"{where}.chronicle.hooks must be a non-empty list of unique "
+            "non-empty strings",
+        )
+        declared_hooks = set(self._data["rules.json"].get("director", {}).get("hooks", {}))
+        unknown = sorted(set(hooks) - declared_hooks)
+        if unknown:
+            raise PackError(
+                f"{where}.chronicle.hooks names undeclared director "
+                f"hooks {unknown} — a genesis hook the director does not "
+                "know would never release (dead data; declare it in "
+                "director.hooks first)"
+            )
+
+        claims = config.get("claims")
+        _require(
+            isinstance(claims, list) and claims,
+            f"{where}.claims must be a non-empty list of claim entries "
+            "(an empty list is dead data — omit the key)",
+        )
+        scene_detail = rules.get("scene_detail", {})
+        locations = {
+            record["id"]: record
+            for record in self._data["entities.json"]["locations"]
+        }
+        seen_pairs: set[tuple[str, str]] = set()
+        for index, entry in enumerate(claims):
+            spot = f"{where}.claims[{index}]"
+            _require(isinstance(entry, Mapping), f"{spot}: must be an object")
+            unknown = sorted(set(entry) - {"location", "slot", "field", "site"})
+            if unknown:
+                raise PackError(
+                    f"{spot}: unknown keys {unknown} (the closed "
+                    "vocabulary: location | slot | field | site)"
+                )
+            location = entry.get("location")
+            record = locations.get(location)
+            _require(
+                record is not None,
+                f"{spot}.location {location!r}: unknown location id "
+                "(entities.json locations is the single owner)",
+            )
+            slot = entry.get("slot")
+            _require(
+                isinstance(slot, str) and slot.strip(),
+                f"{spot}.slot must be a non-empty string",
+            )
+            modeled = set(record) | set(record.get("flags", {}))
+            _require(
+                slot not in modeled,
+                f"{spot}.slot {slot!r} is modeled by the location entity "
+                "(the double-claim law, the scene_detail twin: lazy and "
+                "worldgen detail occupy only slots canon does not "
+                "model — the fold seeds flags as raw site props, so a "
+                "pre-claimed slot could never birth)",
+            )
+            _require(
+                slot not in {spec["slot"] for spec in scene_detail.get(location, ())},
+                f"{spot}.slot {slot!r} is also declared in scene_detail "
+                "for the same location (the overlap refusal: the genesis "
+                "claims at open time, before any observation, so the "
+                "scene's lazy draw could never fire — dead pack data)",
+            )
+            field = entry.get("field")
+            _require(
+                field in CLAIM_FIELDS,
+                f"{spot}.field {field!r} is not in the closed set "
+                f"{list(CLAIM_FIELDS)}",
+            )
+            site = entry.get("site")
+            _require(
+                _is_int(site) and 0 <= site < site_count,
+                f"{spot}.site must be an integer in 0..{site_count - 1} "
+                "(the site count is (extent // spacing)^2)",
+            )
+            pair = (location, slot)
+            _require(
+                pair not in seen_pairs,
+                f"{spot}: the (location, slot) pair {pair} is claimed "
+                "twice (the double-declaration refusal — first-commit-"
+                "wins decides runtime order, not pack duplication)",
+            )
+            seen_pairs.add(pair)
 
     def _reflection(self) -> None:
         """The reflection & compaction contract (`core/reflection.py`

@@ -472,7 +472,23 @@ knowledge surface stays the event's own payload, zero new knowledge
 tokens; the corpus price measured both arms and paid fidelity-only —
 the day1 ten pays only the observing seeds, the narrator corpus
 15/105 cases one payload each, statuses/anchors/call documents
-untouched). Track B alongside: bg-8 LANDED 2026-09-09 (D-109 —
+untouched). depth-4 fold checkpoints landed iter-80 (D-114: the
+derived snapshot + event-index offset, the sha256 index-anchor,
+rollback = snapshot + tail replay — the replay-cost bound for the
+long histories depth-5 mints; corpus price zero by construction, no
+runtime pipeline byte moved). depth-5 the ordered worldgen passes
+landed iter-81 (D-115: `core/worldgen.py` — `PASS_ORDER` the
+Azgaar/Red Blob pass shapes over the seed, integer-only geometry,
+per-pass `worldgen:<pass>` streams (the D-079 family's fourth
+member — pass granularity isolation, the canon fingerprint pinned
+equal between arms); `detail_claim`'s FIRST legal caller — the
+worldgen claims validate against canon, first-commit-wins; the
+genesis at `open()` for an armed pack: world_formed + pre-PC
+history events whose hooks pre-seed the director's buffer (the PC
+walks into a running world), NO knowledge records — the DF
+epistemology-empty discipline; the committed pack UNARMED, corpus
+price zero by construction, the arming = depth-5b). Track B
+alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus
 F1–F6 through the REAL mode-C door, the world-answer law's first live
 numbers — coverage 34/34, honest 17/36, F3 the guess engine, F6 two
@@ -569,7 +585,7 @@ padding.
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
-| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
+| `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `core/worldgen.py` iter-81 (depth-5 — the ordered passes, the claim gate's first caller, the genesis); `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
 | `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `df_briefer.py` bg-3 (the POV mini-briefer + reverse validation over the sink; `docs/TECH_NOTES.md` §3.3) · `profile_harness.py` iter-30 · `chronicle.py` iter-64 (the mode-F offline chronicler — read_ndjson_auto intake behind the count gate, the parquet pair + the sqlite summary via the stdlib ladder, the content-derived manifest; `[chronicler]` extra, D-093, `docs/TEST_PLAN.md` §7) · `checkpoint.py` iter-80 (depth-4 fold checkpoints — the derived snapshot + event-index offset over one committed log: the pack↔header identity gate, the born-verified re-fold pass, `checkpoint_<offset>.json` + `index.json` the sha256 anchor records under `output/checkpoints/`; `core/checkpoint.py` the mechanism, D-114, `docs/TEST_PLAN.md` §7.1) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 

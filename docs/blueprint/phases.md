@@ -495,7 +495,26 @@ each pass a focused algorithm with clear inputs/outputs, one file per
 system (L9). Geometry discipline: integer coordinates or fixed-point in
 the canonical path; floats live in the render layer only (Azgaar's
 cross-engine float drift is the named cause; Brogue's fixed-point is the
-precedent).
+precedent). **Landed iter-81 as depth-5 (D-115): `core/worldgen.py` the
+pass family — `PASS_ORDER` = sites (jittered integer lattice) → relax
+(integer-centroid Lloyd) → height/moisture (integer-octave value noise,
+fixed-point weights that divide out, normalized into 0..9999) →
+watershed (downhill flow, rivers at the threshold) → biomes (the band
+table + the coastal refinement) → states (capitals + nearest-capital
+growth) → chronicle (pre-PC history); every drawing pass owns one
+`worldgen:<pass>` stream (the D-079 family law's fourth member — pass
+granularity isolation: re-tuning the map shifts neither a canon check
+draw nor another pass's draws); the claims ride `detail_claim` (the
+gate's first legal caller — commit/no_op/slot_conflict, canon outranks
+the generator); the genesis (world_formed + history events, hooks
+seeding the director's buffer, NO knowledge records — the DF
+epistemology-empty discipline) commits through the canon door at
+`Simulator.open()`; the committed pack UNARMED (the 68a pattern —
+zero draws, zero events, v0.1 bytes; the arming is depth-5b). The
+populations/macros half stays depth-7's row; the lazy mid-run
+materialization door (a site's passes re-running against a non-empty
+log) is the future consumer the claim gate's conflict/no_op verdicts
+wait for.**
 
 **The LOD ladder** (LOD-1), coherent at every scale: canon log = ground
 truth; per-NPC projection = mid LOD; brief cache = top LOD; populations

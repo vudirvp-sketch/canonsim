@@ -55,10 +55,22 @@
   rollback = snapshot + tail replay, verified by re-fold; the resume
   door stays owner-gated (phases.md §7). Detail:
   tests/test_checkpoint.py.
-- `depth-5` · lazy worldgen passes — todo: ordered passes over the seed
-  (Azgaar + Red Blob donors, ROADMAP §4; integer/fixed-point geometry
-  discipline, phases.md §5) + pre-PC history seeding the director's
-  buffer; the phase's build-column headline.
+- `depth-5` · the ordered worldgen passes — **done (iter-81, D-115)**:
+  the pass family `core/worldgen.py` (PASS_ORDER, integer-only
+  geometry, `worldgen:<pass>` streams — the D-079 family's fourth
+  member, `detail_claim`'s first legal caller, the genesis at open
+  time seeding the director's buffer; NO knowledge records — the DF
+  epistemology-empty discipline); the committed pack UNARMED (the 68a
+  pattern — zero draws, zero events, v0.1 bytes). Detail:
+  tests/test_worldgen.py.
+- `depth-5b` · the worldgen ARMING — todo: the committed pack's own
+  `worldgen` block (the map + chronicle + claims; the template line
+  + the director hooks it may seed), the corpus price measured BOTH
+  arms first (the both-arms law, D-108's precedent — the price is the
+  genesis events alone by construction, the canon fingerprint
+  pinned); the M5 run-start note (the first event of an armed run is
+  the world_formed genesis, actor world — metrics.py's v0.1 docstring
+  re-pin rides here).
 - `depth-6` · factions with goals — todo: small-formula dynamics
   (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
 - `depth-7` · groups & simulation LOD — todo (design RATIFIED

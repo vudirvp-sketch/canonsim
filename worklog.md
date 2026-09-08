@@ -13,6 +13,41 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-81 · 2026-09-09 · worldgen — depth-5, the ordered worldgen
+passes, mechanics only (13 files — 3 code edit + 1 new code + 1 new
+suite + 8 doc sync: the pass family + its lint + its genesis wiring +
+its pins are one mechanism family, the iter-75 footprint; AGENTS §2.3:
+13 > 5-6, the objective scope noted here)
+- core/rng.py: `worldgen:<pass>` — the D-079 family law's fourth
+  member (`WORLDGEN_PREFIX` + `worldgen_stream_name` + the assure
+  nesting law); per-pass isolation pinned (the armed arm's
+  substantive fingerprint EQUALS the unarmed arm's — the corpus price
+  of worldgen is the genesis events alone).
+- core/worldgen.py (new): `PASS_ORDER` the ordered passes — sites
+  (jittered integer lattice) → relax (integer-centroid Lloyd) →
+  height/moisture (integer-octave value noise, fixed-point weights
+  that divide out, normalized 0..9999) → watershed (downhill flow +
+  rivers) → biomes (band table + coastal refinement) → states
+  (capitals + growth) → chronicle (pre-PC history); WorldModel
+  INTEGER-ONLY (the Azgaar float-drift refusal, test-walked);
+  `resolve_claims` = `detail_claim`'s FIRST LEGAL CALLER (commit
+  rides world_formed, no_op skipped, slot_conflict refused with the
+  cause chain); genesis drafts (world_formed cause-null + history
+  events ascending year, hooks, NO knowledge — the DF
+  epistemology-empty law); core/loop.py::open the armed-only genesis
+  (the director's buffer pre-seeded, the PC chains to the last
+  genesis event); core/pack.py::_worldgen the shape lint (closed
+  vocabularies, template closure, declared-hook law, the claim
+  double-claim family). Committed pack UNARMED — v0.1 bytes (the 68a
+  pattern; depth-5b the arming row laid).
+- +26 tests (tests/test_worldgen.py, 1352→1378+1 green, ruff clean;
+  corpus price ZERO by construction — no committed-pack byte moved,
+  T1 + every corpus pin green). D-115; TASKS depth-5 done + depth-5b
+  laid. iter-71 evicted (verified in this edit); 10 after. Caps:
+  STATUS 643 / TASKS 849 / DECISIONS 80 lines (51 rows) / TECH_NOTES
+  695 / TEST_PLAN 722 / phases 719 — over-cap on substance (§6.1, the
+  D-095..D-114 precedent), trim at the phase-5→6 gate.
+---
 iter-80 · 2026-09-09 · foldcheck — depth-4, the fold-checkpoint
 mechanism family (11 files — 1 new code + 1 new operator tool + 1
 new suite + 7 doc sync: the mechanism + its builder + its pins are
@@ -249,23 +284,4 @@ the instrument + its doc sync)
   per §5 (two-plus iterations past). 1255+1 green, ruff clean.
   iter-66a evicted (verified in this edit); 10 after.
 ---
-iter-71 · 2026-09-08 · plansync — the owner's analysis-intake plan
-sync, doc-only (the iter-66a/68 precedent; 4 files — zero code,
-zero tests; verified 1240+1 green, ruff clean after the edits)
-- docs/TASKS.md: the research-intake-3 section (weather-1: ambient
-  weather events + canon erosion via state_changes, pack data, no-TTL
-  D-049; companion-1: the companion role as pack data over existing
-  doors, deps tune-3/st-6a/resume door BY REFERENCE — the D-076/D-081
-  precedent) + the pack-1 gate fix (stale "phase-0 gate" line — a
-  D-024 violation, 64 iterations stale — now defers to the STATUS FAQ).
-- STATUS.md: the iter-71 header + the Next-step re-pin (the queue:
-  prosefloor-2, then the owner's phase-5 start signal); README.md: the
-  lance section's intake-3 line (the KI#73/78 family). TASKS 693→724,
-  STATUS 640→630 (the iter-70 landing paragraph → the iter-71 one),
-  both over-cap on substance (§6.1) — TASKS collapses at the
-  phase-5 opening.
-  Doc-only streak 1 of 2 (iter-70 was functional — no alarm; the next
-  iteration must be functional). iter-66 evicted (verified in this
-  edit); 10 entries after.
-
 (end of log — cap 10; pre-trim history lives in git)

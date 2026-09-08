@@ -85,6 +85,7 @@ from core.states import decay_drafts, rotation_resets
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.urgencies import urgency_intents
+from core.worldgen import WorldModel, genesis
 
 __all__ = [
     "CompletionPayload",
@@ -202,11 +203,22 @@ class Simulator:
             pack=pack, policy=policy_from_rules(pack.rules, director_enabled)
         )
         self._next_beat = self._first_beat(pack.rules)
+        # depth-5: the generated world (None for an unarmed pack — the
+        # 68a pattern; `open` runs the genesis only when the pack
+        # declares the worldgen block)
+        self._world: WorldModel | None = None
 
     @property
     def projection(self) -> Projection:
         """The runtime incremental projection (STATE-1)."""
         return self._projection
+
+    @property
+    def world(self) -> WorldModel | None:
+        """The generated world model (depth-5): None for an unarmed
+        pack, else the ordered passes' output — derived, rebuildable
+        from the seed, never truth (L11)."""
+        return self._world
 
     @property
     def knowledge(self) -> KnowledgeView:
@@ -225,10 +237,36 @@ class Simulator:
         `run_steps` between commands, and closes at exit; the log is one
         continuous run either way (`run_playscript` is the batch front
         over the same three doors).
+
+        depth-5: an ARMED pack (the `worldgen` block) runs the genesis
+        here — the ordered passes over the seed, the claims through the
+        gate, then the pre-PC history events committed through the one
+        canon door BEFORE any player step: the PC walks into a running
+        world, the director's buffer pre-seeded (phases.md §5). The
+        first genesis event is the run's run-start event (cause null);
+        each later event chains to its predecessor (the `_react`
+        pattern). The worldgen streams are family-isolated from the
+        substantive canon checks, so the run's canon draws never move —
+        the armed arm's price is the genesis events alone. An unarmed
+        pack answers `(None, ())` before any stream touch: zero draws,
+        zero events, the v0.1 bytes untouched by construction.
         """
         self._writer.write_header(
             seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
         )
+        model, drafts = genesis(
+            self._bank, self._pack.rules, self._events, self._seed
+        )
+        self._world = model
+        if model is None:
+            return
+        with self._bank.assure(SUBSTANTIVE):
+            previous: str | None = None
+            for draft in drafts:
+                record = self._commit(
+                    replace(draft, cause=previous)
+                )
+                previous = record.id
 
     def run_steps(self, steps: Sequence[Mapping[str, Any]]) -> RunResult:
         """Feed player steps through the live simulator until the queue
