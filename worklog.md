@@ -13,6 +13,38 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-80 · 2026-09-09 · foldcheck — depth-4, the fold-checkpoint
+mechanism family (11 files — 1 new code + 1 new operator tool + 1
+new suite + 7 doc sync: the mechanism + its builder + its pins are
+one family, the iter-75 footprint pattern; AGENTS §2.3: 11 > 5-6,
+the objective scope noted here)
+- core/checkpoint.py (new): FoldCheckpoint = deep-copied projection
+snapshot + event-index offset; ONE canonical serialization (compact
+JSON, sorted keys); restore = snapshot + tail replay (rollback, the
+from_-net loud); verify/verify_all the re-fold law (batch folds
+once, O(N + states)); the sha256 anchor in the derived index
+index.json (offset + snapshot sha256 + prefix sha256 — never an
+event in the truth, intake-4's refusal held); prefix_digest =
+sha256 over the first 1+offset log lines, append-stable (INV-5);
+load/read anchor teeth (edited artifact, re-filed offset, hand-ed
+index — loud).
+- scripts/checkpoint.py (new): the chronicler-family builder —
+read_log validation + the pack↔header name_version gate + one
+incremental fold, snapshots at every requested offset, born-verified
+BEFORE any write (the count-gate spirit); default the END
+checkpoint, --every N the cadence ∪ the end; output/checkpoints/
+(gitignored). The KnowledgeView half deliberately OUT (shape is
+knowledge-internal — the read-side-indexes row owns it at the
+mediator iteration; the resume door owner-gated, phases.md §7).
+- +25 tests (tests/test_checkpoint.py, 1327→1352+1 green, ruff
+clean; the rollback law cross-checked against the LIVE runtime
+projection — the blind-1 instrument; corpus price ZERO by
+construction, no runtime pipeline byte moved). D-114; TASKS depth-4
+done. iter-70 evicted (verified in this edit); 10 after. Caps:
+STATUS 633 / TASKS 837 / DECISIONS 79 lines (50 rows) / TECH_NOTES
+695 / TEST_PLAN 666 / phases 700 — over-cap on substance (§6.1, the
+D-095..D-113 precedent), trim at the phase-5→6 gate.
+---
 iter-79 · 2026-09-09 · verdict-land — the owner's call on the
 iter-77/78 routed candidates executed (14 files — 3 code + 3 suites
 + 8 doc sync: the verdict-set as one mechanism family, the
@@ -235,27 +267,5 @@ zero tests; verified 1240+1 green, ruff clean after the edits)
   Doc-only streak 1 of 2 (iter-70 was functional — no alarm; the next
   iteration must be functional). iter-66 evicted (verified in this
   edit); 10 entries after.
----
-iter-70 · 2026-09-07 · beliefwire-2 — the trait-consumer arming, the
-lance's last track-A row (D-103; 16 files — the pack arming + its
-measured corpus price + the doc sync, one mechanism family, the
-iter-60..69b scope pattern)
-- content/tavern_pack/rules.json the relief guard's trait-gated scan
-  (p=100, the new-entry shape — the guard_01 re-gate refused on
-  record) + the counters trio; actions.json the arson fled line (the
-  counter mint, one event both halves); core/pack.py KI#77 (the lint
-  order: _traits before _urgencies — the cond lint reads the block's
-  shape; the pruning law: removing the belief vocabulary prunes the
-  consumer, test_traits/test_knowledge re-pointed).
-- The price measured FIRST both arms and paid in the landing: +3
-  look_around on seed 125 ONLY (9/10 day1 seeds byte-identical vs the
-  disarm twin; the seed-33 panic corpus + theft_and_arson untouched) +
-  the seed-93 narrator family re-distilled through the fixed-point
-  runner (pristine identity 105/105, the PARALLEL incremental
-  alignment — the pin map refreshes mid-beat, a refused beat never
-  feeds; 11 claim-id re-pins, idempotency 0) + M1 0.509→0.54/0.500→0.52
-  (the D-065 record re-pinned). KI#78 opened+closed (the README lance
-  drift). 1240+1 green, ruff clean. TASKS beliefwire-2 done; the
-  lance's remainder: prosefloor-2. iter-65 evicted (verified in this
-  edit); 10 after.
+
 (end of log — cap 10; pre-trim history lives in git)

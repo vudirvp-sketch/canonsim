@@ -1,60 +1,49 @@
 # STATUS — canonsim
 
-Iteration: iter-79 (`iter-79-verdict-land` — the owner's verdict call
-on the iter-77/78 routed candidates: the predicate contract's two
-halves restored in CODE (fail-closed + the loud family backstop),
-the iter-11b resolutions ratified, the doc-law verdicts landed; the
-functional iteration the doc-only streak demanded) · Phase: 5
-(Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2 +
-depth-2b LANDED, the queue: depth-4 next) · Track A touched this
-session (`core/predicates.py` + `core/onaction.py` + the pack lint)
-— track B never blocks it (ROADMAP §1).
-**The landing: (1) pred-failclosed (D-110) — DIRECTOR_SPEC §3's
-blanket "a missing prop / missing entity answers False" (pinned
-iter-40, unchanged) RESTORED in both comparison twins:
-`core/predicates.py::_prop` + `core/onaction.py::_gate_passes`
-answer False under EVERY comparator on a missing read (`not_equals`
-= present AND ≠ X; explicit absence stays writable as `{"not": …}`
-at triggers); the hidden twin hole closed with it — `equals` with a
-null `value` answered True on a missing prop (None == None), and the
-pack lint now refuses null values on both surfaces (prop leaf +
-gate condition: absence is the world's answer, never a pack value);
-§3 needed no edit (the spec was right all along — a 37-iteration
-code-vs-spec drift), §3c's gate row + the two module docstrings +
-the two existing pins flipped ("answers honestly" → fails closed);
-the committed pack carries zero `not_equals` and zero null values
-(verified — zero migration; T1 + every corpus pin green
-byte-identical). No KI opened: found by the owner's iter-77
-meta-analysis, routed as a TASKS candidate (the tracking record),
-verdict + fix in one iteration — the KI#48 reported-but-unlanded
-family's own lesson. (2) pred-contract (D-111) — the `_require`
-family: six raw-read surfaces (verified census; the candidate said
-five — the gate's `comparator` guard covered wrong values, not
-missing keys) raise ValueError naming the field, KeyError never
-leaks; shape errors fire BEFORE the world answer (a malformed spec
-is loud even on a missing read target). (3) depth-7 (D-112) — the
-iter-11b stress-test resolutions RATIFIED in the D-056-amended
-edition (§5's arrival snapshot folded to ONE answer: the move-event
-template expansion IS the mechanism) + §7 Containers covered
-explicitly (the TASKS row's uncited twin); phases.md's two pending
-tags cleared, depth-7 stays a todo BUILD row. (4) D-113 — Rule 9
-defined in AGENTS §7 (verified census 25 hits / 8 files; iter-77's
-4x and iter-78's ~19 were both undercounts), NAVIGATION §3 the
-sequencing split (ORDER = STATUS Next step, composition = TASKS —
-the three-pointer conflict is dead), tn12-claim DROPPED (every
-proposal had a named owner, zero diff); verify-seed +
-archive-protocol are the owner's bootstrap text (chat-side, §10
-already owns the repo-side truth). 1323 → 1327 passed +1 skipped,
-ruff clean.**
+Iteration: iter-80 (`iter-80-foldcheck` — depth-4, the STATUS
+queue's top row: the fold-checkpoint mechanism family landed — the
+chronicler-family derived artifact + the sha256 index-anchor, the
+first depth row with NO runtime wiring by design (the resume door
+owner-gated, phases.md §7)) · Phase: 5 (Depth) — OPEN (iter-73,
+D-105; depth-1 + depth-1b + depth-2 + depth-2b + depth-4 LANDED,
+the queue: depth-5 next) · Track A touched this session
+(`core/checkpoint.py` + `scripts/checkpoint.py`) — track B never
+blocks it (ROADMAP §1).
+**The landing (D-114): `core/checkpoint.py` — `FoldCheckpoint` = a
+deep-copied projection snapshot + event-index offset (`events[:offset]`
+folded in, `events[offset:]` the tail); ONE canonical serialization
+(compact JSON, sorted keys); `restore` = rollback as snapshot + tail
+replay (the from_-net loud on a diverged snapshot); `verify`/
+`verify_all` the re-fold law (the batch form folds once for all
+offsets, O(N + states)); the sha256 anchor lives in the derived index
+`index.json` (CheckpointRecord: offset + snapshot sha256 + prefix
+sha256 — NEVER an event in the truth, intake-4's refusal held);
+`prefix_digest` = sha256 over the first 1+offset log lines,
+append-stable (INV-5 — the checkpoint stays bound to its log as it
+grows); `load_checkpoint`/`read_index` the anchor teeth (edited
+artifact, re-filed offset, hand-edited index — all loud).
+`scripts/checkpoint.py` the chronicler-family builder: read_log full
+validation + the pack↔header name_version identity gate + one
+incremental fold snapshotting every requested offset + born-verified
+(verify_all BEFORE any write, the count-gate spirit); default the
+single END checkpoint, `--every N` the cadence ∪ the end, `--offsets`
+explicit; artifacts under `output/checkpoints/<log_stem>/` (gitignored
+— never truth, never committed). The KnowledgeView half deliberately
+OUT (its shape is core/knowledge.py-internal — a frozen copy would be
+a second owner; its incremental form is the read-side-indexes row at
+the mediator iteration, phases.md §7). Corpus price ZERO by
+construction (no runtime pipeline byte moved — the depth-2 precedent;
+T1 + every corpus pin green byte-identical inside the suite). No KI
+opened. 1327 → 1352 passed +1 skipped, ruff clean (seeds 0/42/unset).**
 ·
 Date: 2026-09-09 ·
-Scope: `core/predicates.py`, `core/onaction.py`, `core/pack.py`,
-`tests/test_predicates.py`, `tests/test_onaction.py`,
-`tests/test_director.py`, `docs/DIRECTOR_SPEC.md`, `AGENTS.md`,
-`docs/AGENT_NAVIGATION.md`, `docs/blueprint/phases.md`,
+Scope: `core/checkpoint.py`, `scripts/checkpoint.py`,
+`tests/test_checkpoint.py`, `docs/blueprint/phases.md`,
+`docs/AGENT_NAVIGATION.md`, `docs/TEST_PLAN.md` (§7.1), `README.md`,
 `docs/TASKS.md`, `docs/DECISIONS.md`, `worklog.md`, `STATUS.md`
-(this file) — 14 files: the verdict-set as one mechanism family
-(the iter-70/73 scope pattern, AGENTS §2.3 noted in worklog).
+(this file) — 11 files: the mechanism family (1 new code + 1 new
+operator tool + 1 new suite + 7 doc sync, the iter-75 footprint
+pattern, AGENTS §2.3 scope noted in worklog).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -573,29 +562,26 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
 drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
-gate + depth-2b the ARMING LANDED (iter-73/74/75/76,
-D-105/D-106/D-107/D-108; the corpus prices paid fidelity-only /
-zero-by-construction, 1315+1 green). Track A is debt-free. Track B:
-bg-8 LANDED (2026-09-09, D-109 — the deviation corpus's first live
+gate + depth-2b the ARMING + depth-4 fold checkpoints LANDED
+(iter-73/74/75/76/80, D-105/D-106/D-107/D-108/D-114; the corpus
+prices paid fidelity-only / zero-by-construction / zero-by-
+construction, 1352+1 green). Track A is debt-free. Track B: bg-8
+LANDED (2026-09-09, D-109 — the deviation corpus's first live
 numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
-prose heartbeat families the standing gap rows). The queue: `depth-4`
-fold checkpoints (the chronicler-family derived artifact —
-fold-checkpoint + event-index offset + the
-sha256 index-anchor, intake-4's addition; the resume door stays
-owner-gated, phases.md §7), then `depth-5` lazy worldgen passes (the
-phase's build-column headline — ordered passes over the seed, Azgaar
-+ Red Blob donors, integer/fixed-point geometry discipline, +
-pre-PC history seeding the director's buffer — and the claim gate
-`detail_claim`'s first legal caller), then `depth-3` scene LOD
-(gated: after depth-5's first passes), `depth-6` factions, `depth-7`
-groups & simulation LOD (design ratified iter-79, D-112 — the
-iter-11b resolutions, phases.md §5/§7).**
+prose heartbeat families the standing gap rows). The queue:
+`depth-5` lazy worldgen passes (the phase's build-column headline —
+ordered passes over the seed, Azgaar + Red Blob donors, integer/
+fixed-point geometry discipline, + pre-PC history seeding the
+director's buffer — and the claim gate `detail_claim`'s first legal
+caller; the depth-4 checkpoints bound its long-history replay
+cost), then `depth-3` scene LOD (gated: after depth-5's first
+passes), `depth-6` factions, `depth-7` groups & simulation LOD
+(design ratified iter-79, D-112 — the iter-11b resolutions,
+phases.md §5/§7).**
 
 1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-3..7
    rows; `docs/blueprint/phases.md` §5 the architecture owner):
-   depth-4 fold checkpoints next (the chronicler-family derived
-   artifact + the sha256 index-anchor, the resume door owner-gated),
-   then lazy worldgen passes (depth-5, the build-column headline),
+   depth-5 lazy worldgen passes next (the build-column headline),
    then scene LOD
    (after depth-5's first passes), factions with
    goals, groups & simulation LOD (design ratified iter-79, D-112 —

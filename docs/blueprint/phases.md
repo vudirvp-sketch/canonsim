@@ -594,7 +594,14 @@ sketch (`SPECS_BACKLOG.md`).
   (byte-deterministic serialization, the `stable_hash` family's
   hashlib; verified by re-fold) — the integrity anchor lives in the
   index, never an event in the truth (intake-4's addition; the resume
-  door stays owner-gated, §7).
+  door stays owner-gated, §7). **Landed iter-80 as depth-4 (D-114):
+  `core/checkpoint.py` the mechanism (canonical bytes, the anchor,
+  verify/verify_all, restore) + `scripts/checkpoint.py` the
+  chronicler-family builder + the prefix digest (the append-stable
+  log-prefix identity, sha256 over the first 1+offset lines); the
+  projection is the checkpointed surface, the KnowledgeView rides the
+  read-side-indexes row at the mediator iteration (§7 below) — no
+  consumer before then.**
 
 ## 6. Phase 6 — packs & worldbuilder
 

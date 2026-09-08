@@ -523,6 +523,44 @@ checked pipeline's own code):
   imports only stdlib + local packages + ImportError-guarded optional
   probes — duckdb or any future third-party root fails loudly.
 
+### 7.1 depth-4 fold-checkpoint acceptance (iter-80, D-114)
+
+The checkpoint suite (`tests/test_checkpoint.py`; mechanism owner
+`core/checkpoint.py`; builder `scripts/checkpoint.py`; design
+`docs/blueprint/phases.md` §5 "Fold checkpoints"). Runs everywhere
+(stdlib only — no extra, unlike §7's `[chronicler]` gate): 1352
+passed + 1 skipped. NOT a gate test — an offline derived-artifact
+family's acceptance suite, the §7 precedent.
+
+The laws under test, the rollback law cross-checked against the LIVE
+runtime projection (the blind-1 instrument — the Simulator's
+incremental state is an evolution path the checkpoint code never
+sees):
+
+- **Rollback = snapshot + tail replay**: restoring at any offset and
+  replaying the tail reproduces the full fold AND the live runtime
+  projection (the three-way agreement); offset 0 is the initial
+  projection; restore is loud on a truncated log, and a tampered
+  snapshot goes loud on the first diverged-prop tail event
+  (apply_event's from_-net, INV-1's own net).
+- **The re-fold law**: verify/verify_all catch a tampered snapshot, a
+  mislabeled offset, an out-of-bounds offset; verify_all is the batch
+  shape (one pass, all offsets) and rejects duplicate offsets.
+- **The anchor teeth** (the anchor lives in the index, never an event
+  in the truth): load_checkpoint rejects an edited artifact (sha
+  mismatch), a missing file, a re-filed offset; read_index rejects
+  unsorted/wrong-keys/bad-digest hand edits; from_bytes rejects every
+  shape drift.
+- **Append-stability** (INV-5): the prefix digest of offset K is
+  unchanged when the log grows; it equals sha256 over the first
+  1+offset raw lines; loud on a short log.
+- **Byte-determinism**: the canonical serialization is exact (sorted
+  compact JSON), two builder runs produce identical artifact + index
+  bytes.
+- **The builder CLI**: default = the single end checkpoint; the
+  cadence law (0, N, 2N, … ∪ the end); pack mismatch and a malformed
+  log exit 1 with nothing written (the count-gate spirit).
+
 ## 8. testproto — the intermediate-build LLM-integration protocol (iter-68, D-098)
 
 The fork closed by decomposition, not election: the three candidates

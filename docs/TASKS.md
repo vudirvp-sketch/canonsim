@@ -49,10 +49,12 @@
 - `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
   clean, never entropy) — needs the multi-scene layer, gate: after
   depth-5's first passes.
-- `depth-4` · fold checkpoints — todo: the chronicler-family derived
-  artifact (fold-checkpoint + event-index offset) + the sha256
-  index-anchor (intake-4's addition, phases.md §5); the resume door
-  stays owner-gated (phases.md §7).
+- `depth-4` · fold checkpoints — **done (iter-80, D-114)**: the
+  chronicler-family derived artifact (fold-checkpoint + event-index
+  offset, `core/checkpoint.py`) + the sha256 index-anchor (intake-4);
+  rollback = snapshot + tail replay, verified by re-fold; the resume
+  door stays owner-gated (phases.md §7). Detail:
+  tests/test_checkpoint.py.
 - `depth-5` · lazy worldgen passes — todo: ordered passes over the seed
   (Azgaar + Red Blob donors, ROADMAP §4; integer/fixed-point geometry
   discipline, phases.md §5) + pre-PC history seeding the director's
