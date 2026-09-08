@@ -103,6 +103,20 @@ the pair homes are seeded on the watchful NPCs, the flat
 readers (the director triggers, the crowd reaction, the card markers)
 are re-declared on the pair home — pack data, the number unchanged.
 
+The lazy scene-detail home (depth-2, iter-75 — the D-054
+texture-promotion law at scene scale): an observation of an ARMED
+scene materializes its pack-declared detail slots as births on the
+LOCATION entity — one `StateChange(location, slot, None → value)` per
+slot, `from` None (canon never modeled it, the lint guarantees), the
+value drawn from the scene's own `scene:<id>:detail` stream
+(first-commit-wins: a canon-held slot is never redrawn —
+re-observation reads canon). The observation event's outcome names
+the births under `materialized` (`[{slot, value}]`, present only when
+something materialized — the drifted_from law); `empty` is just a
+value, so a materialized empty rejects later gold with no special
+casing (`core/detail.py::detail_claim` — the slot_conflict mirror,
+cause-chained to the winning event).
+
 ## 5. `hooks`
 
 Tags seeded at event time and consumed by the director's buffer. Each hook

@@ -458,7 +458,15 @@ birth state, `{lit: true}` on the lamplit hall + the hearth post,
 seeding the projection as site props via `core/fold.py`); the
 corpus price measured FIRST both arms and paid fidelity-only (the
 fire geometries' burnout sighting born partial — zero re-distill,
-zero fixture regen, M1/M2/T8 identical). 1281 tests green, ruff
+zero fixture regen, M1/M2/T8 identical). depth-2 the lazy-detail
+gate landed iter-75 (D-107: the `scene:<id>:detail` stream family —
+the D-079 law's third member; the draw gate
+`core/detail.py::materialize_scene_detail` wired into the observe
+resolver (first
+commit-wins, re-observation reads canon); `detail_claim` the
+slot_conflict mirror with the cause chain; the committed pack
+UNARMED — corpus price zero by construction, v0.1 bytes). 1309
+tests green, ruff
 clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +

@@ -51,10 +51,29 @@
   shifts, no appended events, zero re-distill, zero fixture regen, the
   corpus pins all hold); M1/M2/T8 arms identical. Detail:
   tests/test_acquisition.py.
-- `depth-2` · lazy detail materialization — todo: `scene:<id>:detail`
-  content-addressed streams, the D-054 texture-promotion door at scene
-  scale (first-commit-wins, the `slot_conflict` mirror); phases.md §5
-  the owner.
+- `depth-2` · lazy detail materialization, the gate — **done (iter-75,
+  D-107)**: the `scene:<id>:detail` stream family (`core/rng.py`, the
+  D-079 law's third member: lazy registration, injective name, the
+  scene-granular isolation); the draw gate
+  `core/detail.py::materialize_scene_detail` (first meaningful
+  observation = the observe-resolver family, pack slot order,
+  first-commit-wins canon-skip, `from_ None` births riding the
+  observation event + the `materialized` outcome key, present only
+  when something materialized); the slot_conflict mirror
+  `detail_claim` (commit / no_op / refused with the cause chain —
+  the future external claimers' gate, the worldgen passes); the
+  closed `{slot | values}` lint with the double-claim and one-object
+  laws. The committed pack UNARMED — v0.1 bytes, zero draws (the 68a
+  pattern). Detail: tests/test_detail.py.
+- `depth-2b` · the scene-detail ARMING — todo (iter-75's arming row,
+  the 68a→68b pattern): the committed pack's own `scene_detail`
+  block; the corpus price measured FIRST both arms (the Rule-9 probe
+  — every corpus geometry's look_arounds now materialize, so the
+  price is the event payloads + any downstream consumers; paid
+  fidelity-only or the block trimmed before landing); the knowledge
+  surface of the materialized detail is this row's question (the
+  observation's `knows` templates are pack data — detail tokens are
+  an arming-time decision).
 - `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
   clean, never entropy) — needs the multi-scene layer, gate: after
   depth-5's first passes.

@@ -20,6 +20,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, Callable, Final
 
+from core.detail import materialize_scene_detail, materialized_fields
 from core.intent import (
     CheckResult,
     IntentData,
@@ -154,12 +155,25 @@ def _observe(
     pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
-    """look_around: the actor learns a scene snapshot of the location."""
+    """look_around: the actor learns a scene snapshot of the location —
+    and the scene's UNOBSERVED detail materializes (depth-2, phases.md
+    §5): the lazy draw runs here, inside the resolver, on the folded
+    projection (the committed world); the event's state_changes carry
+    each birth and its outcome names them. The materialization surface
+    is the scene-snapshot resolver family (the actions routed here —
+    their knowledge is the scene itself); the targeted inspection
+    resolver (inspect) stays out — examining one named thing never
+    materializes the scene around it. An unarmed pack draws nothing."""
     location = projection[intent.actor]["position"]
+    changes = materialize_scene_detail(bank, pack, projection, location)
+    outcome: dict[str, Any] = {"location": location}
+    if changes:
+        outcome["materialized"] = materialized_fields(changes)
     return Resolution(
         event_type=action["events"]["success"],
-        outcome={"location": location},
+        outcome=outcome,
         knowledge=_knowledge(action, "success", pack, projection, intent, tick),
+        state_changes=changes,
     )
 
 

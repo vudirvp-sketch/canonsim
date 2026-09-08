@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from core.clock import Clock
+from core.detail import SCENE_DETAIL_BLOCK
 from core.director import ARC_KEYS, CHANNEL_INPUTS
 from core.echo import ECHO_BLOCK_KEYS, ECHO_TOKEN_KEYS
 from core.intent import (
@@ -311,6 +312,12 @@ class _Lint:
         self._importance_rules()
         self._brief()
         self._retrieval()
+        # depth-2 (iter-75): after _brief — the one-object law reads
+        # brief.scene_texture.unique_slots, whose shape _brief validates
+        # first (the KI#77 order law: a crafted variant with a malformed
+        # brief must hit _brief's clean PackError, never a KeyError
+        # downstream).
+        self._scene_detail()
 
     def _meta(self) -> None:
         names = {name: d["meta"]["pack"] for name, d in self._data.items()}
@@ -2419,6 +2426,122 @@ class _Lint:
                 _require(
                     isinstance(spec["notes"], str),
                     f"{where}: notes must be a string (prose)",
+                )
+
+    def _scene_detail(self) -> None:
+        """The lazy scene-detail contract (depth-2, `phases.md` §5 — the
+        D-054 texture-promotion law at scene scale; mechanics in
+        `core/detail.py::materialize_scene_detail`, wired into the
+        observe resolver; the claim gate `detail_claim`; the stream
+        `core/rng.py::scene_detail_stream_name`). The block is OPTIONAL
+        and lives at rules.json top level (`scene_detail` — the system
+        config home, the position_visibility.acquisition precedent: a
+        rules block keyed by world ids): `location_id -> slot list`.
+        Each slot entry is exactly `{slot, values}` — `slot` a
+        non-empty string unique within the location, `values` a list
+        of unique non-empty strings (the closed draw vocabulary;
+        `empty` is just a value — first-commit-wins makes a
+        materialized empty reject later gold, no special casing).
+        The double-claim law: a scene_detail slot must NOT be modeled
+        by the location entity (any record key or declared flag —
+        lazy detail occupies only slots canon does not model, the
+        texture law's twin; the fold seeds flags as raw site props,
+        so a pre-claimed slot could never birth). The one-object law:
+        the slot must not appear in brief.scene_texture.unique_slots
+        (a unique slot denotes one cross-scope object — a lazy pool
+        on it would declare the same object twice). Location ids name
+        the detail streams (`scene:<id>:detail`, D-079's family law)
+        — map keys, injective by construction. A pack without the
+        block materializes nothing and runs the v0.1 bytes,
+        byte-identically (the pack's own declaration is the arming,
+        depth-2b — the 68a pattern)."""
+        rules = self._data["rules.json"]
+        config = rules.get(SCENE_DETAIL_BLOCK)
+        if config is None:
+            return
+        where = f"rules.json::{SCENE_DETAIL_BLOCK}"
+        _require(
+            isinstance(config, Mapping) and config,
+            f"{where} must be a non-empty object keyed by location id "
+            "(an empty block is dead data — omit it for v0.1 bytes)",
+        )
+        unique_slots = set(
+            rules.get("brief", {}).get("scene_texture", {}).get("unique_slots", ())
+        )
+        locations = {
+            record["id"]: record
+            for record in self._data["entities.json"]["locations"]
+        }
+        for location_id, slots in config.items():
+            spot = f"{where}[{location_id!r}]"
+            record = locations.get(location_id)
+            _require(
+                record is not None,
+                f"{spot}: unknown location id (entities.json locations "
+                "is the single owner — the id also names the detail "
+                "stream `scene:<id>:detail`)",
+            )
+            assert record is not None  # _require above is the protection
+            _require(
+                isinstance(slots, list) and slots,
+                f"{spot}: must be a non-empty list of slot entries (an "
+                "empty list is dead data — omit the location)",
+            )
+            seen: set[str] = set()
+            modeled = set(record) | set(record.get("flags", {}))
+            for index, entry in enumerate(slots):
+                entry_spot = f"{spot}[{index}]"
+                _require(
+                    isinstance(entry, Mapping),
+                    f"{entry_spot}: must be an object",
+                )
+                unknown = sorted(set(entry) - {"slot", "values"})
+                if unknown:
+                    raise PackError(
+                        f"{entry_spot}: unknown keys {unknown} (the "
+                        "closed vocabulary: slot | values)"
+                    )
+                slot = entry.get("slot")
+                _require(
+                    isinstance(slot, str) and slot.strip(),
+                    f"{entry_spot}.slot must be a non-empty string",
+                )
+                _require(
+                    slot not in seen,
+                    f"{entry_spot}.slot {slot!r} is declared twice in "
+                    "the location (one slot, one draw, one birth — a "
+                    "duplicate would couple the stream positions)",
+                )
+                seen.add(slot)
+                _require(
+                    slot not in modeled,
+                    f"{entry_spot}.slot {slot!r} is already modeled by "
+                    "the location entity (a record key or declared flag) "
+                    "— lazy detail occupies only slots canon does not "
+                    "model (the texture law's twin)",
+                )
+                _require(
+                    slot not in unique_slots,
+                    f"{entry_spot}.slot {slot!r} is a "
+                    "brief.scene_texture unique slot (one object, one "
+                    "vocabulary — the double-declaration refusal)",
+                )
+                values = entry.get("values")
+                _require(
+                    isinstance(values, list)
+                    and values
+                    and all(
+                        isinstance(value, str) and value.strip()
+                        for value in values
+                    ),
+                    f"{entry_spot}.values must be a non-empty list of "
+                    "non-empty strings (the closed draw vocabulary)",
+                )
+                _require(
+                    len(set(values)) == len(values),
+                    f"{entry_spot}.values contains duplicates (a "
+                    "duplicate member is dead draw vocabulary — weighting "
+                    "would be an explicit feature, never an accident)",
                 )
 
     def _reflection(self) -> None:

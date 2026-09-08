@@ -13,6 +13,33 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-75 · 2026-09-08 · scenedetail-gate — depth-2, lazy detail
+materialization, mechanics only (12 files — 4 code + 1 suite + 7 doc
+sync: the stream family + the draw gate + the claim mirror + the lint
++ the doc sync are one mechanism family, the iter-60..74 scope
+pattern)
+- core/rng.py the `scene:<id>:detail` stream family (the D-079 law's
+  third member: lazy registration, injective name, the shared
+  FAMILY_PREFIXES tuple); core/detail.py (new) the draw gate
+  (canon-skip = first-commit-wins, pack-order draws, from_ None
+  births) + `detail_claim` (the slot_conflict mirror with the cause
+  chain); core/resolvers.py::_observe the wiring (the
+  scene-snapshot family; `materialized` outcome key, present only
+  when something materialized); core/pack.py::_scene_detail the
+  closed-vocabulary lint (double-claim + one-object laws, after
+  _brief per KI#77).
+- Corpus price ZERO by construction, pinned both ways: the committed
+  pack unarmed (v0.1 bytes, the fingerprint untouched — the gate
+  answers () before any assure) + the laziness pin (an armed
+  never-observed scene is byte-identical) + the measurable-arming
+  pin (the armed run differs exactly by the births and the outcome
+  key). +28 tests (1281→1309+1, ruff clean). D-107; TASKS depth-2
+  done + depth-2b (the arming row) laid. iter-68a evicted (verified
+  in this edit); 10 after. Caps: STATUS 633 / TASKS 814 over 600 —
+  substance (the landing headers' own record, the D-095/D-096
+  precedent), trim at the phase-5→6 gate; DECISIONS 43 — rides
+  above 30 until the same gate.
+---
 iter-74 · 2026-09-08 · acquisition-arm — depth-1b, the acquisition
 arming (12 files — 4 code/pack + 8 test/doc sync: the pack arming +
 its measured corpus price + the doc sync are one mechanism family,
@@ -180,22 +207,4 @@ D-100; 2 runtime files + the suite — under the soft limit)
   ledger = the two self-referential pins. 1223→1227+1 green, ruff
   clean. D-100; TASKS rumordrift done + beliefwire-2 price re-measured
   (stands verbatim). iter-61 evicted (verified in this edit); 10 after.
----
-iter-68a · 2026-09-07 · rumordrift — the A2'' mechanics,
-declarative-only (the v0.2 refinement family's third segment,
-D-095/D-099; 10 files — over the soft limit: rng family + mechanics
-+ lint + suite + the §9 doc sync are one mechanism family, the
-iter-60..67 pattern)
-- core/rng.py the `drift:<family>` stream family (lazy, nests only
-  inside the assured substantive scope — the engine-2 family law's
-  second member); core/knowledge.py DriftFamily/drift_families/
-  drifted_knows + the telling wiring (the received-fidelity ladder
-  rung, `drifted_from` in outcome, the briefing verbatim); core/
-  pack.py::_drift the lint (mintable orbit, one-sided, full ladder).
-- Corpus price ZERO by construction (the committed pack declares no
-  block — 68b owns the arming) + the add-safety pin (an armed
-  all-zero twin, 10 seeds byte-identical). +22 tests (1201→1223+1,
-  ruff clean). EVENT_SCHEMA §3 the clause; D-099; KI#74 deleted per
-  §5. iter-60 evicted (verified in this edit); 10 after.
-
 (end of log — cap 10; pre-trim history lives in git)
