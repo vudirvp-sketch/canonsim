@@ -1,101 +1,123 @@
 # STATUS — canonsim
 
-Iteration: iter-91 (`iter-91-lod1` — depth-3, the
-scene LOD, D-116's W2 consumer head, the macro clock's
-FIRST consumer calling D-124's surface at the crossing:
-the ZONE PARTITION (`core/lod.py::scene_zones` — the
-module is the zones' single owner; a pure function of the
-pack's exits graph + the PC's live position — ACTIVE the
-PC's location (per-beat), WARM its exits (the pack's own
-declaration order, self-exits and duplicates filtered),
-COLD the rest (declaration order); INV-2 by construction
-order, never a set; loud on an unreadable fold — LodError,
-the pred-contract family; a LIVE fold view recomputed at
-each tick it scopes — the PC moves, the zones follow), the
-ONE-GATE LAW (the LOD engages exactly when the macro clock
-is armed — the warm cadence IS the macro cadence, one
-clock with the calendar, "every Nth beat" the derived
-ratio, never a second declaration; the UNARMED law is the
-one-scene world — the whole simulation per-beat, the v0.1
-bytes; ZERO new pack vocabulary: the zones derive from
-exits + position, the cadence from time.macro, the census
-from the projection, L3 everywhere), the WARM RING at the
-crossings (`_run_macro` — the beat machinery minus the
-director: the turn event FIRST (the clock's own event
-opens its crossing), then the warm NPCs' decay drafts
-commit at the crossing tick chained AFTER the turn (the
-consumer rides the clock's event), then their urgency
-entries ROLL at the crossing tick (the gates' fold reads
-at this tick) enqueueing at the ENTRY tick (the
-never-regress law); the decay law stays
-interval-proportional — the coarser sampling lands the
-same linear drift floored per event, never a second
-scoring path; the roll CADENCE is the LOD's cost, the odds
-never change; the DIRECTOR stays global — the story layer,
-pack-authored hooks, budget-bounded, never ambient life),
-the COLD CENSUS (`COLD_COUNT_KEY = "cold_npcs"` on
-`macro_turn_draft`'s counts — the D-112 cardinality shape
-made real: counts for populations, events for notables;
-the cold zone's kind-npc population as ONE flat count
-beside `year`, its only representation in the log; the
-ambient groups never count — they never tick; L3 derived,
-INV-1 recorded, never stored; the template MAY bind it —
-the flat-keys family), the LOD FILTERS (`decay_drafts` /
-`urgency_intents` gain `locations=None` — None the
-one-scene law, a zone tuple the scoped walk), KI#83 (the
-entities lint's missing-`exits` KeyError leak — the KI#82
-family — found at the row's probe, fixed the same
-iteration with the named-PackError guard), the corpus
-price ZERO by construction (the committed pack unarmed,
-the one-scene law byte-identical; measured BOTH arms: the
-unarmed crafted twin runs plumbing_smoke + day1_full
-byte-identical to the committed pack, the armed arm's
-delta the macro family alone — seed 42: 18 vs 6 events,
-2 turns + 10 warm drifts, the substantive fingerprint
-EQUAL at 0, the warm rolls on the isolated urgency
-streams; ZERO re-pins, git-verified — no fixture in the
-diff; the iter-90 corpus pin in test_macro re-pinned to
-the consumer's price law)) ·
+Iteration: iter-92 (`iter-92-fact1` — depth-6, factions
+with goals, the W2 row after depth-3, small-formula
+dynamics — the KeeperRL rebellion precedent, a ratio
+and a threshold, never a psychology engine: THE GROUP
+ENTITY KIND (`entities.json::groups` — OPTIONAL, the
+68a pattern; D-112's "one id, all tiers" at its acting
+half: `{id, name, position, members, notes}`, closed
+vocabulary, pack-linted — the ANCHOR a declared
+location seeding the projection, the members declared
+npcs, ids unique across categories; the group is
+positioned but NEVER a scene body — presence views
+never list it, it acts, it does not appear; the
+condensation/arrival visibility is depth-7's row),
+THE SMALL FORMULA (`core/factions.py::
+faction_probability` — pure integer arithmetic,
+INV-2-clean: affected = the members whose
+`status.<axis>` >= trigger_value, fraction =
+affected*100 // total (floored per-cent), p = 0
+at-or-below the threshold (the DEADBAND) else
+min(max_per_beat, (fraction-threshold)*max_per_beat
+// (100-threshold)) — the linear ramp to the pack's
+own ceiling; D-006 holds verbatim — the members' LIVE
+fold values, L3 derived at roll time, never a stored
+group score, no group reputation; a member with no
+value on the axis sits the ratio out (the decay
+pass's read family); a memberless or valueless
+faction never fires (the vacuity law); the
+probability form is churn-free by construction — no
+state flips, no hysteresis owed), THE WALK + THE
+STREAM (`faction_intents` rides the SAME clock
+crossings as the urgencies — per-beat under the
+unarmed macro clock (the one-scene law), the active
+zone's beats + the warm ring's crossings under an
+armed one, the faction's ANCHOR scoping it (depth-3's
+one-gate law — the zones follow the reader, the cold
+zone's factions silent, their population-scale
+representation depth-7's aggregates); the roll: d100
+on the entry's OWN `faction:<group>:<kind>` stream —
+the D-079 family's FIFTH member, engine-2's per-entry
+isolation (an added/removed/re-tuned faction shifts
+neither a canon check draw nor another entry's
+rolls), ONE draw per walk per entry (the cadence law
+— bar 0 still consumes the roll, the stream advances
+uniformly); on a hit the intent enqueues through the
+front door (D-037/D-039: band NPC_REACTION at the
+entry tick, actor = the group id, the `faction_NNNN`
+handle in provenance, the same OCC/resolver pipeline
+as the player's steps); a hit failing the `requires`
+gates stays silent (the noise-floor law)), THE LINT
+(`core/pack.py::_factions` after `_urgencies` — its
+sibling goal block + the groups half in `_entities`:
+the `rules.json::factions` block OPTIONAL (the
+unarmed law), closed vocabulary at block AND entry
+level, axis ∈ rules.states (D-006), trigger_value >=
+0, threshold 0..99 (100 is dead data — refused),
+max_per_beat 1..100 (0 is dead data — refused), the
+(group, kind) pair unique (engine-2's twin), the
+requires the closed precondition set), THE CORPUS
+PRICE zero by construction (the 68a pattern — the
+committed pack declares neither groups nor factions:
+no specs, no draws, no intents, the v0.1 bytes; the
+arming rides with a future content row, the
+depth-1/2/5 family law; measured BOTH arms per
+D-108: the INERT twin — groups + action + template,
+no `factions` block — runs the committed corpus
+scripts BYTE-IDENTICALLY; the armed-vs-inert A/B:
+the substantive fingerprint EQUAL, the event delta
+the faction family ALONE, every other event
+byte-equal modulo the interleaving's id renumbering;
+ZERO re-pins, git-verified — no fixture in the diff,
+the T1 golden untouched; the mechanics future-layer
+placeholder renamed factions→guilds — the placeholder
+WAS the depth-6 block's own name, the law's own
+lifecycle)) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
-chron-2 + place-1 + geo-1 + maclock-1 + depth-3 LANDED,
-the queue: the W2 consumers — depth-6
-factions / depth-7 + name-1 per D-116's wave order; st-6a a live
+chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 LANDED,
+the queue: the W2 consumers — depth-7
++ name-1 per D-116's wave order; st-6a a live
 candidate (its gate chain satisfied); weather-1's gate satisfied)
-· 1459
+· 1493
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
 42 + 0 + unset spot-checked).
 ·
 Date: 2026-09-10 ·
-Scope: `core/lod.py` (new), `core/states.py`, `core/urgencies.py`,
-`core/loop.py`, `core/macro.py` (the docstring's consumer re-pin),
-`core/pack.py` (the KI#83 guard), `tests/test_lod.py` (new),
-`tests/test_core.py` (the KI#83 probe), `tests/test_macro.py`
-(the corpus pin re-measured)
+Scope: `core/factions.py` (new), `core/rng.py` (the fifth stream
+family), `core/pack.py` (the groups category + the `_factions`
+lint), `core/fold.py` (the anchor seed), `core/loop.py` (the walk
+at both crossings), `render/chronicle.py` (the position-fold
+anchor seed), `tests/test_factions.py` (new),
+`tests/test_mechanics.py` (the future-layer placeholder rename)
 + the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
-`docs/blueprint/phases.md` (§5 — the scene-LOD paragraph + the
-intake bullet's landing tag), `docs/AGENT_NAVIGATION.md` (§1 — the
-`lod` module row, the states/urgencies/loop extensions),
-`README.md` (the narrative sentence + the code-map line + the test
-count synced), `worklog.md`, `STATUS.md` (this file) —
-16 files (git-verified: 7 modified + 2 new code/test + 7 doc;
-the zones + the filters + the loop integration + the pins are one
-family, the iter-86..90 footprint; AGENTS §2.3: 16 > 5-6, the
-objective scope noted in worklog): +17 tests (the partition — the
-committed pack's shape, the PC-follow, the loud guards, the
-census's npc-only law, the self-exit filter; the filters — the
-decay scope with the L13 no-rescore law, the urgency scope with
-the draw-driven stream registry, the surface's census key; the
-integration — the warm ring's crossings with the cause chain, the
-active-per-beat vs warm-at-the-crossing split, the cold zone's
-silence + the census ride, the census following the PC across the
-move, the unarmed twin's byte-identity over the corpus scripts,
-byte-identical determinism, the co-occurring tick's family order,
-the template's census binding),
-D-125, TASKS depth-3 done, phases.md §5 the scene-LOD paragraph,
+`docs/blueprint/phases.md` (§5 — the P3b landing tag),
+`docs/AGENT_NAVIGATION.md` (§1 — the factions module row, the rng
+five-family, the loop/fold/render extensions), `README.md` (the
+narrative + the code-map row + the test count synced), `worklog.md`,
+`STATUS.md` (this file) —
+15 files (git-verified: 5 modified code/render + 1 new module + 1
+new test file + 1 test-side rename + 7 doc; the formula + the
+entity kind + the lint + the walk + the pins are one family, the
+iter-90..92 footprint; AGENTS §2.3: 17 > 5-6, the objective scope
+noted in worklog): +34 tests (the formula — the vacuity, the
+deadband, the at-the-bar boundary, the ramp's floor and ceiling,
+monotonicity; the lints — the groups record's refusals + the
+factions entry's closed vocabulary and dead-data refusals,
+parametrized; the walk — the one-id intent, the isolated stream,
+the cadence law at bar 0, the non-holder sit-out, the LOD scoping
+by the anchor, the silent gates, the unarmed committed pack's
+zero; the integration — the door with the cause chain + the
+faction handle in provenance, byte-identical determinism, the
+warm/active/cold arms under an armed clock, the tale's render
+line, the both-arms price with the fingerprint EQUAL + the delta
+the faction family alone, the inert twin's byte-identity over the
+corpus scripts),
+D-126, TASKS depth-6 done, phases.md §5 the P3b paragraph,
 this header + the Next-step re-pin.
-· The prior iteration's record: iter-90 (maclock-1, D-124 — the
-macro-clock primitive). The detail lives in TASKS + worklog + git.
+· The prior iteration's record: iter-91 (depth-3, D-125 — the
+scene LOD). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -646,10 +668,11 @@ gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
 the scene-line projection pipe + chron-2 the history bridge +
 place-1 the placement discipline + geo-1 the geometry rework +
-maclock-1 the macro-clock primitive + depth-3 the scene LOD LANDED
-(iter-73/74/75/76/80/81/83/86/87/88/89/90/91,
+maclock-1 the macro-clock primitive + depth-3 the scene LOD +
+depth-6 factions with goals LANDED
+(iter-73/74/75/76/80/81/83/86/87/88/89/90/91/92,
 D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122/D-123/
-D-124/D-125;
+D-124/D-125/D-126;
 the corpus
 prices paid fidelity-only / zero-by-construction ×3 / the genesis
 events + the id shift — the murmur's pre-seed timing the one
@@ -660,7 +683,8 @@ byte-identical by exactness proof — zero re-pins, 1424+1 green /
 unarmed by the 68a pattern, the fingerprint equal both arms — zero
 re-pins, 1442+1 green / unarmed one-scene law, the unarmed twin
 byte-identical over the corpus scripts — zero re-pins, 1459+1
-green) +
+green / unarmed by the inert-twin law, the fingerprint equal both
+arms — zero re-pins, 1493+1 green) +
 the iter-82 concept-land verdict set (D-116: the 13 questions resolved,
 the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
@@ -677,10 +701,16 @@ three zones, the warm ring at the crossings, `cold_npcs` the cold
 census on the turn; the one-gate law — the LOD engages exactly when
 the macro clock is armed, the unarmed pack the one-scene world; the
 committed pack's macro ARMING still rides with weather-1's row) →
-`depth-6` factions, `depth-7` groups &
+`depth-6` factions LANDED (iter-92, D-126 — small-formula dynamics,
+the KeeperRL ratio+threshold over the members' live per-entity
+axes; the group entity kind acting through the intent door, the
+`faction:<group>:<kind>` roll stream the D-079 family's fifth
+member, the anchor-scoped LOD; the committed pack unarmed — the
+arming rides with a future content row) → `depth-7` groups &
 simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
-phases.md §5/§7; the group macro-ticks ride the primitive) + `name-1`
+phases.md §5/§7; the group macro-ticks ride the primitive, the
+member_of state door + the condensation law land there) + `name-1`
 the name generator (D-116: the Azgaar
 split — condensation's canon-birth events need names). st-6(a)
 travel is a live candidate (its gate chain satisfied: depth-5 +
@@ -755,13 +785,28 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    urgency walks (None the one-scene law); KI#83 the entities-lint
    KeyError leak found + fixed the same iteration; corpus price
    zero — the unarmed twin byte-identical over the corpus scripts,
-   zero re-pins);
+   zero re-pins); depth-6 LANDED (iter-92, D-126 — factions with
+   goals: the small-formula dynamics `core/factions.py` (the
+   KeeperRL ratio+threshold — the affected fraction of the
+   membership vs the pack-declared threshold, ramping to the pack's
+   ceiling; the deadband, the vacuity law; D-006 holds — the
+   members' LIVE per-entity axes, never a stored group score), the
+   group entity kind `entities.json::groups` (D-112's one id — the
+   faction acts through the intent door, actor = the entity id; the
+   anchor seeds the projection, presence views never list it), the
+   `faction:<group>:<kind>` roll stream (the D-079 family's fifth
+   member, engine-2's per-entry isolation), the walk at the beats +
+   the crossings (the anchor scoping the scene LOD's zones — cold
+   factions silent, their population ride depth-7's aggregates);
+   corpus price zero — the inert twin byte-identical over the corpus
+   scripts, the armed arm's delta the faction family alone, zero
+   re-pins);
    the
    queue: the W2 consumers —
-   factions
-   with goals, groups & simulation LOD + name-1 (design ratified
+   groups & simulation LOD + name-1 (design ratified
    iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7; the
-   group macro-ticks ride the primitive); the
+   group macro-ticks ride the primitive, the member_of state door +
+   the condensation law land there); the
    exit
    criterion "an
    emergent chain of

@@ -84,8 +84,19 @@
   checkpoint flow, the entities/config drift guards), the reserved
   claim-slot law; NO lint ceilings (D-116 held). Detail:
   tests/test_worldgen.py.
-- `depth-6` · factions with goals — todo: small-formula dynamics
-  (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
+- `depth-6` · factions with goals — **done (iter-92, D-126)**: the
+  small-formula dynamics `core/factions.py` (the KeeperRL
+  ratio+threshold over the members' LIVE per-entity axes — D-006
+  holds, never a stored group score; the `faction:<group>:<kind>`
+  roll stream, the D-079 family's fifth member) + the group entity
+  kind (`entities.json::groups`, D-112's one id all tiers — the
+  faction acts through the intent door, actor = the entity id) + the
+  `factions` pack block (closed vocabulary, pack-linted) + the walk
+  at the beats and the crossings (the scene-LOD scoping by the
+  faction's ANCHOR, depth-3's one-gate law); the committed pack
+  unarmed (the 68a pattern — zero entries, zero draws, the v0.1
+  bytes; the arming rides with a future content row). Detail:
+  tests/test_factions.py.
 - `depth-7` · groups & simulation LOD — todo (design RATIFIED
   iter-79, D-112: the iter-11b resolutions — phases.md §5 write-side
   LOD in the D-056-amended edition + §7 Containers — one id all

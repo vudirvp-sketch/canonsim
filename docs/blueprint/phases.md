@@ -634,8 +634,21 @@ macro-time (years) are layered clocks — same authority, two granularities
 
 **Factions with goals** (P3b): small-formula dynamics (KeeperRL rebellion
 precedent — a ratio and a threshold, not a psychology engine); Neighborly
-is the settlement cousin reading. Exit criterion: an emergent chain of
-3+ events without the player (`ROADMAP.md` §2). Real-world donors (Natural Earth / GeoNames) arrive as data — shapes
+is the settlement cousin reading. **Landed iter-92 as depth-6 (D-126):
+`core/factions.py` the formula family — the affected fraction of the
+membership (per-cent, floored) against the pack-declared threshold,
+ramping to `max_per_beat` (the deadband at-or-below the bar; the
+probability form is churn-free by construction — no state flips, no
+hysteresis owed); the faction is a GROUP ENTITY (`entities.json::groups`,
+D-112's one id: actor = the entity id through the SAME intent door,
+positioned by its ANCHOR, never a scene body) whose members are the
+pack's static initial condition; the goal rolls on the entry's own
+`faction:<group>:<kind>` stream (the D-079 family's fifth member) at the
+beats and the macro crossings — the scene-LOD scoping by the anchor
+(depth-3's one-gate law); the committed pack unarmed (the 68a pattern —
+the arming rides with a content row; the runtime `member_of` state door
+and the condensation law are depth-7's).** Exit criterion: an emergent
+chain of 3+ events without the player (`ROADMAP.md` §2). Real-world donors (Natural Earth / GeoNames) arrive as data — shapes
 and metadata only, per `docs/ref/natural_earth.md` +
 `docs/ref/geonames.md`; CC-BY sidecar at intake; fantasy content from
 packs, never real-world toponyms.

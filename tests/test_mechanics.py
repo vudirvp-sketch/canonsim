@@ -81,19 +81,23 @@ def test_matrix_token_and_prop_queries() -> None:
 def test_matrix_unknown_block_is_listed_not_rejected(tmp_path: Path) -> None:
     """The future-layer law: a new top-level rules block loads (the pack
     lint passes) and appears in the unindexed listing — visible the
-    iteration it lands; a shape rule joins later, never a rewrite."""
+    iteration it lands; a shape rule joins later, never a rewrite.
+    depth-6 note: this test's placeholder WAS `factions` — the block
+    became real (the closed vocabulary landed with it), so the probe
+    moved to the next still-unknown name, exactly the law's own
+    lifecycle."""
     variant_dir = tmp_path / "pack_variant"
     variant_dir.mkdir()
     for name in ("actions.json", "entities.json", "templates.json"):
         shutil.copyfile(PACK_DIR / name, variant_dir / name)
     rules = json.loads((PACK_DIR / "rules.json").read_text(encoding="utf-8"))
-    rules["factions"] = {"houses": {"house_01": {"honor": 5}}}
+    rules["guilds"] = {"houses": {"house_01": {"honor": 5}}}
     (variant_dir / "rules.json").write_text(
         json.dumps(rules, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     variant = load_pack(variant_dir)  # the full lint runs on load
     out = mechanics.render_matrix(variant, event="pickpocket_failed")
-    assert "factions (1 keys)" in out
+    assert "guilds (1 keys)" in out
     assert "steal.failure" in out  # the known wiring still resolves
 
 

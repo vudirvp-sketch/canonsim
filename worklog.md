@@ -375,52 +375,60 @@ log + STATUS). Doc-only, no code/fixtures/pins touched.
 - The suite re-run green AFTER these edits (1392+1, ruff clean);
   archive: STATUS.md + worklog.md + BASE_COMMIT 21ea6a7.
 ---
-iter-83 · 2026-09-09 · worldgen-arm — depth-5b, the worldgen ARMING,
-EXTENDED per D-116 (33 files — 3 code + 2 pack data + 5 fixture
-regen/re-pin + 18 test files: 1 landing + 17 re-pins + 5 doc sync;
-re-counted vs git at iter-83a, KI#80: the arming + its lint laws +
-its pins + its paid price are one mechanism family, the iter-76/81
-footprint; AGENTS §2.3: 33 > 5-6, the objective scope noted here)
-- core/worldgen.py: the flat claim keys — each committed claim's slot
-  rides the world_formed outcome as a render-surface key (D-116 (4):
-  the template binds them through `_event_context`; the `claims` list
-  stays the structured record) + RESERVED_CLAIM_SLOTS (the collision
-  law: outcome keys are clobbered, derived slots shadowed);
-  core/pack.py::_worldgen: CONDUCTANCE (the genesis importances
-  computed through `pack_importance` against the tale gate — the
-  dead-arming refusal; tune-1's law enforced by computation, never a
-  second scoring path) + REACHABILITY (L1: `_bound_template_slots`
-  scans the template braces, `_director_prop_reads` the hook prop
-  leaves — every armed claim names a live consumer) + the
-  reserved-slot refusal; core/metrics.py: the M5 run-start note
-  re-pinned (the genesis prefix counts as non-PC, actor world).
-- content/tavern_pack ARMED: rules.json the worldgen block (48/8 map,
-  jitter 3, relax 1, octaves 3/2, bands [4000,5000,7000]/
-  [2500,5000,7500], watershed 4/6, 3 capitals, chronicle 150y / 5
-  events / world_history / hooks [the sweep + the murmur], 3 claims:
-  terrain + world_region @ loc_tavern, near_river @ loc_street) +
-  world_history in importance.story_critical_events; templates.json
-  the world_history line (the {year?…} shape branch + the claim
-  clauses — the binding surface).
-- The price, measured BOTH arms first (the D-108 law, a Rule-9 probe
-  over the smoke + day1 ten + arson): the genesis events alone + the
-  mechanical id shift — fingerprint equal on every probe, the
-  post-genesis stream identical modulo id references. Paid: the T1
-  fixture regenerated (12 lines, the iter-15 precedent), the corpus
-  fixtures re-pinned (+5 ev ids / event_seqs / causes; the murmur's
-  release moved to the FIRST quiet beat — the pre-seed's designed
-  price, D-005: the genesis seeds the director's buffer), ~70 test
-  pins updated across the 17 re-pinned files (the day1 scan ids,
-  the golden-log slices, the reflection/retrieval pins, the pacing
-  A/B record).
-- +14 tests (tests/test_worldgen.py 26→40: conductance both arms,
-  reachability both consumer arms + the reserved law, the flat keys,
-  the live template render, the both-arms price law (smoke + day1
-  seed 125, ids remapped), the M5 note, double-open loud, the genesis
-  checkpoint/restore, the two drift guards) — 1378→1392+1 green, ruff
-  clean. D-117; TASKS depth-5b done; STATUS re-pinned (the queue:
-  bridge-1 next — inseparable, D-116); AGENT_NAVIGATION §1 the armed
-  rows. 11 entries held after this edit (10 + this, the eviction
-  missed — restored to 10 at iter-83a, KI#80).
+iter-92 · 2026-09-10 · fact1 — depth-6, factions with goals (D-116's
+W2 row after depth-3; 15 files — 6 code/render (factions.py new,
+rng, pack, fold, loop, chronicle) + 2 test (test_factions.py new,
+test_mechanics the future-layer placeholder rename) + 7 doc sync:
+the
+formula + the entity kind + the lint + the walk are one family, the
+iter-90..92 footprint; AGENTS §2.3: 9 > 5-6, the objective scope
+noted here)
+- core/factions.py (new): the factions' single owner —
+  `faction_probability` the KeeperRL small formula (the affected
+  fraction of the membership, per-cent floored, against the pack
+  threshold, ramping to `max_per_beat`; the deadband at-or-below the
+  bar, the vacuity law; pure integer arithmetic), `faction_intents`
+  the goal walk (each member's LIVE `status.<axis>` — D-006, never a
+  stored group score; d100 on the entry's OWN
+  `faction:<group>:<kind>` stream — the D-079 family's FIFTH member,
+  one draw per walk, bar 0 included (the cadence law); a hit rides
+  the front door, actor = the group id — D-112's one id; the
+  requires gates stay silent). core/rng.py: FACTION_PREFIX +
+  `faction_stream_name` (five families).
+- core/pack.py: the `groups` category (OPTIONAL, the 68a pattern —
+  anchor a declared location, members declared npcs, ids unique
+  across categories, closed vocabulary) + the `_factions` lint (after
+  `_urgencies`: axis ∈ rules.states, trigger ≥ 0, threshold 0..99 /
+  max 1..100 — dead data refused, the (group, kind) pair unique,
+  engine-2's twin). core/fold.py: the anchor seeds the projection (an
+  actor's read surface, never a scene body). core/loop.py: the
+  faction walk beside the urgencies at the beats AND the crossings
+  (the anchor scoping the zone — cold factions silent, their
+  population ride depth-7's aggregates). render/chronicle.py: the
+  position fold seeds the anchors ({location} renders for a group).
+- +34 tests (tests/test_factions.py — the formula's integer laws; the
+  lint refusals (groups + entries, parametrized); the walk: the
+  one-id intent, the isolated stream (draw-driven registry), the
+  cadence law at bar 0, the non-holder sit-out, the LOD scoping by
+  the anchor, the silent gates; the integration: the door + the cause
+  chain + `faction_0000` in provenance, byte-identical determinism,
+  the warm/active/cold arms under an armed clock, the tale line; the
+  both-arms price: the fingerprint EQUAL, the delta the muster family
+  ALONE; the inert twin byte-identical over plumbing_smoke +
+  day1_full) — 1459→1493+1 green, ruff clean (3.12.14, the env pin;
+  seeds 42 + 0 + unset spot-checked). ZERO re-pins (git-verified: no
+  fixture in the diff, the committed pack untouched — no groups, no
+  factions, zero draws). tests/test_mechanics.py: the future-layer
+  placeholder renamed factions→guilds — the placeholder WAS the
+  depth-6 block's own name (the law's own lifecycle, D-126).
+- docs: DECISIONS D-126, TASKS depth-6 done, phases.md §5 the P3b
+  landing tag, NAV §1 (the factions row + the rng five-family + the
+  loop/fold/render extensions), README (the narrative + the code-map
+  row + the count 1459→1493), STATUS re-pinned (the queue: depth-7 +
+  name-1 per D-116's wave order) + this file. iter-83 evicted here
+  (verified against git in this edit); 10 after. Caps: STATUS 861 /
+  TASKS 1055 / DECISIONS 92 lines (62 rows) / phases 841 / README
+  701 — over-cap on substance (§6.1, the D-095..D-126 precedent),
+  trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

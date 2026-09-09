@@ -440,6 +440,10 @@ class _Lint:
         # trait_held consumer).
         self._traits()
         self._urgencies()
+        # depth-6 (iter-92): after _urgencies — the sibling goal block
+        # reads the entities' groups, the states axes, and the actions,
+        # all validated before it.
+        self._factions()
         self._director()
         self._on_action()
         self._secrets()
@@ -477,9 +481,18 @@ class _Lint:
         npcs = entities["npcs"]
         ambients = entities["ambient_entities"]
         items = entities["items"]
+        # depth-6 (D-112's "one id, all tiers"): the GROUP category —
+        # OPTIONAL (the 68a pattern: the committed pack declares no
+        # groups, zero factions, the v0.1 bytes untouched; a group is a
+        # pack entity acting through the intent door, never a body in
+        # a scene — presence views never list it).
+        groups = entities.get("groups", ())
 
-        all_ids = _ids(locations) | _ids(npcs) | _ids(ambients) | _ids(items)
-        total = sum(map(len, (locations, npcs, ambients, items)))
+        all_ids = (
+            _ids(locations) | _ids(npcs) | _ids(ambients) | _ids(items)
+            | _ids(groups)
+        )
+        total = sum(map(len, (locations, npcs, ambients, items, groups)))
         _require(len(all_ids) == total, "entity ids are not unique across categories")
 
         location_ids = _ids(locations)
@@ -527,6 +540,45 @@ class _Lint:
         crime_status_values = set(rules["crime_watch"].get("status_values", ()))
         item_ids = _ids(items)
         npc_ids = _ids(npcs)
+        # depth-6: the group record's contract — an anchor on the exits
+        # graph (a vertex, the spatial model's law) and a static
+        # member list over declared npcs (the pack's initial
+        # condition; the runtime `member_of` state door is depth-7's
+        # row, never this lint's).
+        for group in groups:
+            where = f"group {group['id']}"
+            _require(
+                group.get("position") in location_ids,
+                f"{where}: unknown position {group.get('position')!r}",
+            )
+            members = group.get("members")
+            _require(
+                isinstance(members, list),
+                f"{where}: members must be a list (the membership's "
+                "explicit initial condition, possibly empty)",
+            )
+            seen_members: set[str] = set()
+            for member in members:
+                _require(
+                    member in npc_ids,
+                    f"{where}: member {member!r} is not a declared npc",
+                )
+                _require(
+                    member not in seen_members,
+                    f"{where}: duplicate member {member!r}",
+                )
+                seen_members.add(member)
+            if "name" in group:
+                _require(
+                    isinstance(group["name"], str),
+                    f"{where}: name must be a string",
+                )
+            unknown = sorted(set(group) - {"id", "name", "position", "members", "notes"})
+            _require(
+                not unknown,
+                f"{where}: unknown keys {unknown} (the closed "
+                "vocabulary: id | name | position | members | notes)",
+            )
         for npc in npcs:
             _require(npc["position"] in location_ids, f"npc {npc['id']}: unknown position")
             for carried in npc.get("carries", []):
@@ -1485,6 +1537,131 @@ class _Lint:
                 f"{where}: duplicate urgency (npc, intent.kind) {pair} — "
                 f"one goal per NPC per verb (the roll stream is "
                 f"content-addressed, engine-2)",
+            )
+            seen_pairs.add(pair)
+            for key in ("target", "fields"):
+                if key in intent:
+                    if key == "target" and not isinstance(intent[key], str):
+                        raise PackError(
+                            f"{where}: intent.target must be a string, "
+                            f"got {intent.get('target')!r}"
+                        )
+                    if key == "fields" and not isinstance(intent[key], Mapping):
+                        raise PackError(
+                            f"{where}: intent.fields must be a mapping, "
+                            f"got {intent.get('fields')!r}"
+                        )
+            for cond in entry.get("requires", ()):
+                _require(
+                    cond.get("test") in PRECONDITION_TESTS,
+                    f"{where}: unknown precondition test {cond.get('test')!r}",
+                )
+                if cond.get("test") == ECHO_TEST:
+                    self._lint_echo_cond(cond, where)
+                if cond.get("test") == TRAIT_TEST:
+                    self._lint_trait_cond(cond, where)
+                for param in ("noun", "with", "who"):
+                    if param in cond:
+                        _require(
+                            cond[param] in _NOUNS,
+                            f"{where}: precondition {param} {cond[param]!r} "
+                            f"must be one of {list(_NOUNS)}",
+                        )
+
+    # -- factions (depth-6: small-formula goal dynamics, P3b) ---------------
+
+    def _factions(self) -> None:
+        rules = self._data["rules.json"]
+        config = rules.get("factions")
+        if config is None:
+            return  # the unarmed law (the 68a pattern: zero entries, zero draws)
+        entities = self._data["entities.json"]
+        groups = entities.get("groups", ())
+        group_ids = _ids(groups)
+        status_axes = {
+            axis for axis in rules.get("states", {}) if axis != "notes"
+        }
+        actions = {a["intent"]: a for a in self._data["actions.json"]["actions"]}
+        seen_pairs: set[tuple[str | None, str | None]] = set()
+        _require(
+            isinstance(config, Mapping),
+            "factions must be an object",
+        )
+        unknown = sorted(set(config) - {"entries", "notes"})
+        _require(
+            not unknown,
+            f"factions: unknown keys {unknown} (the closed vocabulary: "
+            "entries | notes)",
+        )
+        _require(
+            isinstance(config.get("entries", ()), list),
+            "factions.entries must be a list",
+        )
+        for entry in config.get("entries", ()):
+            _require(
+                isinstance(entry, Mapping),
+                f"factions.entries: each entry must be an object, got {entry!r}",
+            )
+            where = f"factions.entries[{entry.get('group')!r}]"
+            unknown = sorted(
+                set(entry)
+                - {
+                    "group", "axis", "trigger_value", "threshold",
+                    "max_per_beat", "intent", "requires", "notes",
+                }
+            )
+            _require(
+                not unknown,
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "group | axis | trigger_value | threshold | max_per_beat "
+                "| intent | requires | notes)",
+            )
+            _require(
+                entry.get("group") in group_ids,
+                f"{where}: unknown group {entry.get('group')!r} (declare it "
+                "in entities.json groups first)",
+            )
+            _require(
+                entry.get("axis") in status_axes,
+                f"{where}: axis {entry.get('axis')!r} is not a rules.states "
+                "axis (D-006 — the formula reads per-entity status axes)",
+            )
+            _require(
+                _is_int(entry.get("trigger_value"))
+                and entry["trigger_value"] >= 0,
+                f"{where}: trigger_value must be an integer >= 0 "
+                f"(the status family is non-negative), got "
+                f"{entry.get('trigger_value')!r}",
+            )
+            _require(
+                _is_int(entry.get("threshold"))
+                and 0 <= entry["threshold"] <= 99,
+                f"{where}: threshold must be an integer 0..99 (per-cent of "
+                "the membership; 100 is dead data — the fraction never "
+                "exceeds it)",
+            )
+            _require(
+                _is_int(entry.get("max_per_beat"))
+                and 1 <= entry["max_per_beat"] <= 100,
+                f"{where}: max_per_beat must be an integer 1..100 (the ramp's "
+                "endpoint — 0 is dead data, never a goal)",
+            )
+            intent = entry.get("intent", {})
+            _require(
+                isinstance(intent, Mapping)
+                and intent.get("kind") in actions,
+                f"{where}: intent.kind must name a pack action",
+            )
+            # D-079 (engine-2's twin): the (group, kind) pair addresses
+            # the entry's roll stream `faction:<group>:<kind>` — a
+            # duplicate pair puts two entries on one stream and couples
+            # their draws (exactly what the per-entry split prevents)
+            pair = (entry.get("group"), intent.get("kind"))
+            _require(
+                pair not in seen_pairs,
+                f"{where}: duplicate faction (group, intent.kind) {pair} — "
+                f"one goal per group per verb (the roll stream is "
+                "content-addressed, engine-2's twin)",
             )
             seen_pairs.add(pair)
             for key in ("target", "fields"):
@@ -3943,21 +4120,25 @@ class Pack:
 
     def entity(self, entity_id: str) -> Mapping[str, Any] | None:
         """The pack record for an entity id, or None (any category)."""
-        for category in ("locations", "npcs", "ambient_entities", "items"):
-            for record in self.entities[category]:
+        for category in (
+            "locations", "npcs", "ambient_entities", "items", "groups",
+        ):
+            for record in self.entities.get(category, ()):
                 if record["id"] == entity_id:
                     return record
         return None
 
     def kind_of(self, entity_id: str) -> str | None:
-        """The entity category: location | npc | ambient | item, or None."""
+        """The entity category: location | npc | ambient | item | group,
+        or None."""
         for category, kind in (
             ("locations", "location"),
             ("npcs", "npc"),
             ("ambient_entities", "ambient"),
             ("items", "item"),
+            ("groups", "group"),
         ):
-            for record in self.entities[category]:
+            for record in self.entities.get(category, ()):
                 if record["id"] == entity_id:
                     return kind
         return None

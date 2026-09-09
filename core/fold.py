@@ -43,7 +43,9 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
     `status.*` and `relations.*` for npcs — the props iter-2+ events will
     carry `from` values for; `pair.<id>.<axis>` for the sparse npc↔npc
     relation map (P2a, iter-3) and `crime_status` where the pack declares
-    one (the crime_watch convention). Iteration follows pack list order
+    one (the crime_watch convention). depth-6: the group entities' anchor
+    positions (position alone — a group is an actor, never a scene
+    body). Iteration follows pack list order
     (construction order — INV-2).
     """
     state: Projection = {}
@@ -72,6 +74,14 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
     for item in entities.get("items", []):
         _put(item["id"], "position", item["position"])
         _put(item["id"], "carrier", item.get("carrier"))
+    # depth-6 (D-112's "one id, all tiers"): the GROUP entities —
+    # pack-declared, OPTIONAL (the 68a pattern). Position alone: the
+    # anchor is the vertex the intent door's location reads and the
+    # scene-LOD filter scope (the group ACTS, it never appears —
+    # `present_in_order` lists bodies only, never groups; the
+    # condensation/arrival visibility is depth-7's row).
+    for group in entities.get("groups", ()):
+        _put(group["id"], "position", group["position"])
     return state
 
 

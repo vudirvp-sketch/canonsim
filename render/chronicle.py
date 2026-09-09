@@ -71,6 +71,11 @@ class _Positions:
         for category in ("npcs", "ambient_entities", "items"):
             for record in pack.entities[category]:
                 self._where[record["id"]] = record["position"]
+        # depth-6: the group entities' anchors (optional category — the
+        # 68a pattern; a group ACTS through the door, and its events
+        # render the anchor as {location} like any actor's)
+        for record in pack.entities.get("groups", ()):
+            self._where[record["id"]] = record["position"]
 
     def apply(self, event: EventRecord) -> None:
         for change in event.state_changes:

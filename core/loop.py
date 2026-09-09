@@ -67,6 +67,7 @@ from core.crime import (
 )
 from core.director import Director, policy_from_rules
 from core.echo import echo_scores
+from core.factions import faction_intents
 from core.fold import Projection, apply_event, initial_projection
 from core.ids import sequence_id
 from core.intent import (
@@ -778,11 +779,12 @@ class Simulator:
 
     def _run_beat(self, beat_tick: int, entry_tick: int) -> None:
         """One clock-crossing beat (iter-4): states decay passes, NPC
-        urgencies roll, and the director releases one seeded hook. Each
-        piece rides the commit door — the world never changes outside
-        an event (INV-1). Order matters: decay fires first (so the
-        urgency sees the new status), urgencies second (so the director
-        sees their effects in entropy), the director last.
+        urgencies roll, faction goals roll (depth-6), and the director
+        releases one seeded hook. Each piece rides the commit door —
+        the world never changes outside an event (INV-1). Order
+        matters: decay fires first (so the urgency sees the new
+        status), urgencies second (so the director sees their effects
+        in entropy), the director last.
 
         Decay events are committed at ``beat_tick`` (their canonical
         tick — the log records them at the beat). Urgency and director
@@ -823,6 +825,22 @@ class Simulator:
         self._director.next_beat()
         beat_echoes = echo_scores(self._pack, self._knowledge, beat_tick)
         for intent in urgency_intents(
+            self._pack, self._projection, self._bank,
+            facts=live_leverage(self._pack, self._events, beat_tick),
+            echoes=beat_echoes,
+            traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
+            locations=locations,
+        ):
+            self._enqueue_autonomous(intent, entry_tick)
+        # 2b) faction goals (depth-6) — the small-formula dynamics at
+        # the urgencies' own cadence: the KeeperRL ratio+threshold bar
+        # computed from the LIVE fold (per-member status axes, D-006),
+        # rolled on the entry's own faction-family stream, through the
+        # SAME front door (D-112's one id: the group entity IS the
+        # actor). The LOD filter scopes by the faction's ANCHOR
+        # position; the collective after the individual (construction
+        # order — INV-2).
+        for intent in faction_intents(
             self._pack, self._projection, self._bank,
             facts=live_leverage(self._pack, self._events, beat_tick),
             echoes=beat_echoes,
@@ -872,7 +890,11 @@ class Simulator:
         their urgency entries roll at the crossing tick (the gates'
         fold reads at this tick — the beat's own law) enqueued at the
         ENTRY tick (the queue discipline: never a tick the clock has
-        passed). No knowledge on the turn (a world event), no
+        passed). depth-6: the warm ring's FACTION goals ride the same
+        crossings (the small formula over the members' live axes, the
+        anchor scoping the ring; the cold zone's factions stay silent —
+        their population-scale representation is depth-7's aggregate
+        machinery). No knowledge on the turn (a world event), no
         state_changes (the year and the census are derived, L3), no
         hooks (the director boundary is the consumers' own rows,
         never the clock's); importance rides the pack's own rule (the
@@ -910,6 +932,20 @@ class Simulator:
         # tick (the beat's own law), the intents enqueue at the entry
         # tick (the never-regress law)
         for intent in urgency_intents(
+            self._pack, self._projection, self._bank,
+            facts=live_leverage(self._pack, self._events, tick),
+            echoes=echo_scores(self._pack, self._knowledge, tick),
+            traits=crystallized_traits(self._pack, self._knowledge, tick),
+            locations=zones.warm,
+        ):
+            self._enqueue_autonomous(intent, entry_tick)
+        # the warm ring's FACTION goals (depth-6) — the same clock's
+        # crossings, the same door: a faction anchored in the warm ring
+        # rolls its small formula here (the beat machinery minus the
+        # director, exactly as the warm NPCs above; the cold zone's
+        # factions are silent — their population-scale ride is depth-7's
+        # aggregate machinery, never this walk's)
+        for intent in faction_intents(
             self._pack, self._projection, self._bank,
             facts=live_leverage(self._pack, self._events, tick),
             echoes=echo_scores(self._pack, self._knowledge, tick),
