@@ -187,6 +187,10 @@ load loudly. Schema-level enums (`channel`, `fidelity`, `importance`) and
 any field in §2–§4 are closed per `schema_version`: touching them = §8
 applies. Type-specific payload fields (the DF Legends `hf_died` →
 `victim_hfid`/`slayer_hfid` shape) live inside the validated `outcome`
-object, never as ad-hoc top-level fields. Multi-parent event groupings (DF
-`event_collections` many-to-many) are deferred to phase 3+, arriving with
-arcs (P3c) — phase 0 keeps the single-parent `cause` chain.
+object, never as ad-hoc top-level fields. Multi-parent event groupings
+(DF `event_collections` many-to-many) stay deferred — chron-2 (D-121)
+landed the collection layer as the SINGLE-PARENT encoding: pack-
+declared tier vocabulary (`chronicle.collections`) over the `cause`
+chain (a member's cause names its nearest lower-tier predecessor —
+the grouping recorded at write time, L7), the many-to-many form
+returning only via a D-row on measured need.

@@ -232,6 +232,19 @@ class ShufflePool:
         return chosen
 
 
+def _render_value(value: Any) -> str:
+    """A context value's rendering law (chron-2): strings verbatim,
+    sequences joined with `', '` (the narrator document never carries
+    the host language's repr — D-120's law generalized from the brief
+    side: the DF legends fields — participants, places — ride canon
+    as LISTS), the scalars via `str()` (ints render dry)."""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, Sequence) and not isinstance(value, (bytes, bytearray)):
+        return ", ".join(_render_value(item) for item in value)
+    return str(value)
+
+
 class Engine:
     """One render pass: the grammar plus the per-symbol pool state.
 
@@ -322,14 +335,12 @@ class Engine:
             raise GrammarError(f"slot name {slot!r} is not snake_case")
         if slot not in context:
             raise GrammarError(f"unknown slot {{{slot}}} (context: {sorted(context)})")
-        value = context[slot]
-        return value if isinstance(value, str) else str(value)
+        return _render_value(context[slot])
 
     def _expand_ref(self, ref: str, context: Mapping[str, Any], depth: int) -> str:
         symbol, modifiers, context_key = self._grammar.decompose(ref)
         if context_key is not None and context_key in context:
-            value = context[context_key]
-            text = value if isinstance(value, str) else str(value)
+            text = _render_value(context[context_key])
         elif symbol in self._grammar:
             text = self._expand_symbol(symbol, context, depth)
         elif context_key is not None:

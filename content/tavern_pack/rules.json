@@ -488,7 +488,11 @@
       "years": 150,
       "events_max": 5,
       "event_type": "world_history",
-      "hooks": ["barkeep_wary_sweep", "ambient_drunkard_ramble"]
+      "hooks": ["barkeep_wary_sweep", "ambient_drunkard_ramble"],
+      "collections": [
+        {"type": "feud", "kinds": ["war_fought"]},
+        {"type": "quarrel", "kinds": ["pact_signed", "lineage_ended"], "members": 2}
+      ]
     },
     "claims": [
       {

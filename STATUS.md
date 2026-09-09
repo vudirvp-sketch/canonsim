@@ -1,38 +1,52 @@
 # STATUS — canonsim
 
-Iteration: iter-86 (`iter-86-bridge1` — the scene-line projection
-pipe, D-116 (1) verbatim, W1's head: `brief/assembler.py`'s scene
-fields read the FOLDED PROJECTION — the committed claims (terrain /
-world_region / near_river) ride world_formed's state_changes into the
-fold and render in the brief of the scene that claims them, the pack
-record the fallback for unclaimed fields; the card law preserved
-(static first, event-born last — the claims ARE event-born);
-JSON-style booleans; the pack migration `scene_line_fields` += the
-three claim slots; the lint pair — the `_brief` legal set gains the
-armed claim slots (defensive walk, the order law), the reachability
-lint gains the scene-line consumer arm (the claims' first
-brief-side consumer); L3 read-side, the corpus price zero by
-construction — no runtime byte reads `scene_line_fields`, the T1 +
-corpus fixtures byte-identical, zero re-pins) ·
+Iteration: iter-87 (`iter-87-chron2` — the history bridge, D-116's W1
+wave order, the second bridge: the DF legends shape — every history
+event's outcome gains `participants` (two DISTINCT regions, the run's
+root anchor's draw INHERITED by its members, the DF collection's role
+fields) and `places` (one site, drawn per event; world_formed carries
+neither); the war→battle→episode hierarchy as a PACK-DECLARED
+collection vocabulary (`chronicle.collections`, the DF
+`event_collections` donor shape, L10: JSON + lint, never string
+languages — the tiers root-first, the root anchors, the nested tiers
+carry the member caps; HISTORY_KINDS stayed closed — the 4 verbs);
+the cause TREE (L7 — the chain visible at record time: a member
+chains to its nearest lower-tier predecessor, a top-level event to
+the previous top-level, the flat form the linear chain; the drafts'
+PARENT MAP resolved through the writer's own ids at commit — the id
+law single-owner); the walk draw-free; the render — the tracery
+value law (lists join, never the host repr) + the line's optional
+clauses; the lint widening — the closure at alternative granularity,
+capitals >= 2, the reserved family += the history outcome keys; the
+corpus price: the pass-1 stream positions FROZEN (the drawn
+years/kinds/hooks verbatim, the murmur's pre-seed pins stable, zero
+corpus re-pins), the T1 fixture the one re-pin — 4 outcome lines) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
-+ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 LANDED, the
-queue: chron-2 the chronicle v2 next — D-116's W1 wave order) · 1406
++ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 + chron-2 LANDED,
+the queue: place-1 the placement discipline next — D-116's W1 wave
+order) · 1417
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seeds
 0/42/unset).
 ·
 Date: 2026-09-10 ·
-Scope: `brief/assembler.py`, `content/tavern_pack/rules.json`,
-`core/pack.py`, `tests/test_brief.py`, `tests/test_worldgen.py`,
-`docs/BRIEF_SPEC.md`, `docs/DECISIONS.md`, `docs/TASKS.md`,
-`worklog.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md` (this file) —
-11 files (git-verified: 11 modified, 0 new; the mechanism + the pack
-migration + the lint pair + the pins + the doc sync are one family,
-the iter-75/83 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
-noted in worklog): +3 tests (the pipe pin both claim arms +
-determinism, the lint negative, the reachability scene-line arm),
-D-120, TASKS bridge-1 done, this header + the Next-step re-pin.
-· The prior iteration's record: iter-85 (intake-6, D-119 — doc-only,
-the queue untouched). The detail lives in TASKS + worklog + git.
+Scope: `core/worldgen.py`, `core/pack.py`, `core/loop.py`,
+`render/tracery.py`, `content/tavern_pack/rules.json`,
+`content/tavern_pack/templates.json`, `tests/test_worldgen.py`,
+`tests/test_render.py`, `tests/fixtures/plumbing_smoke_seed42.jsonl`
++ the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
+`docs/blueprint/phases.md`, `docs/EVENT_SCHEMA.md`, `README.md`,
+`worklog.md`, `STATUS.md` (this file) —
+16 files (git-verified: 16 modified, 0 new; the mechanism + the pack
+migration + the lint widening + the pins + the doc sync are one family,
+the iter-75/83/86 footprint; AGENTS §2.3: 16 > 5-6, the objective scope
+noted in worklog): +11 tests (the DF shape, the pass-1 freeze, the
+walk + the cap + the flat form, the cause tree in the committed log,
+the tier render, the lint refusals, the reserved family, the runtime
+backstop arms, the tracery list-join),
+D-121, TASKS chron-2 done, this header + the Next-step re-pin + the
+KI#80/KI#81 deletions (AGENTS §5, the lessons in git + the FAQ).
+· The prior iteration's record: iter-86 (bridge-1, D-120 — the
+scene-line projection pipe). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -56,23 +70,14 @@ the queue untouched). The detail lives in TASKS + worklog + git.
 
 ## Active KIs
 
-- KI#81 · CLOSED iter-85 · iter-84's worklog landing double defect:
-  the entry landed WITHOUT its closing `---` (iter-84 and iter-83a
-  fused into one block) AND without the owed eviction — 11 entries
-  held at HEAD while the entry claimed "10 entries held (9 + this
-  one, git-verified per the KI#80 law)" · the KI#80 family, second
-  recurrence · fixed: separator restored, iter-76 (the eviction
-  iter-84 owed) + bg-8 evicted, 10 held, re-counted against git in
-  the same edit.
-
-- KI#80 · CLOSED iter-83a · iter-83's landing counts asserted, not
-  verified — "17 files" claimed vs 33 actual (the worklog breakdown
-  summed to neither), the worklog at 11 entries vs the 10 cap ("10
-  held" claimed), iter-82's "9 after" off-by-one; the KI#66/68
-  family · fixed: the counts re-counted against `git show --stat`,
-  the two owed evictions landed (iter-73/75, 10 held), the FAQ
-  carries the law (landing counts are git-verified, never
-  asserted).
+- (KI#81 deleted at iter-87 per AGENTS §5 — closed iter-85, two
+  iterations past (iter-86 + iter-87); the lesson lives in git + the
+  KI#80 family law: the worklog's separator + eviction land in the
+  SAME edit, git-verified. KI#80 deleted at iter-87 per AGENTS §5 —
+  closed iter-83a, four iterations past (iter-84, iter-85, iter-86,
+  iter-87); the lesson lives in git + the FAQ's law: landing counts
+  are git-verified, never asserted. No active KIs — ≤15 held with
+  room.)
 
 - (KI#79 deleted at bg-8 per AGENTS §5 — closed iter-75, two
   iterations past (iter-76 + bg-8); the lesson lives in git + the
@@ -574,25 +579,25 @@ drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
 gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
-the scene-line projection pipe LANDED
-(iter-73/74/75/76/80/81/83/86,
-D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120; the corpus prices
-paid fidelity-only / zero-by-construction ×3 / the genesis events +
-the id shift — the murmur's pre-seed timing the one designed shift —
-/ read-side zero, 1406+1 green) + the iter-82 concept-land verdict
-set (D-116: the 13
-questions resolved, the wave plan routed, the spatial model pinned as
-phase law). Track A is debt-free. (iter-85 intake-6 landed doc-only
-between mech-1 and bridge-1 — the owner's variant-A call, the ORDER
-owner's prerogative; D-119's catalog rows + refusals; the queue
-itself untouched.) Track B: bg-8
-LANDED (2026-09-09, D-109 — the deviation corpus's first live
-numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
-prose heartbeat families the standing gap rows). The queue (D-116's
-wave order): `chron-2` chronicle v2 next (the history events gain
-participants/places/cause — the DF legends shape, L7) → `place-1`
-placement
-discipline → `geo-1` the geometry rework (before any big-world pack)
+the scene-line projection pipe + chron-2 the history bridge LANDED
+(iter-73/74/75/76/80/81/83/86/87,
+D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121; the corpus
+prices paid fidelity-only / zero-by-construction ×3 / the genesis
+events + the id shift — the murmur's pre-seed timing the one
+designed shift — / read-side zero / the pass-1 positions frozen —
+the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green) + the
+iter-82 concept-land verdict set (D-116: the 13 questions resolved,
+the wave plan routed, the spatial model pinned as phase law). Track
+A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
+bridge-1 — the owner's variant-A call, the ORDER owner's
+prerogative; D-119's catalog rows + refusals; the queue itself
+untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
+corpus's first live numbers + the heartbeat baseline row; the
+{3–8B, GBNF} arm + the prose heartbeat families the standing gap
+rows). The queue (D-116's wave order): `place-1` placement
+discipline next (the claim↔exits consistency lint — the map↔graph
+coherence the derived travel prices read) → `geo-1` the geometry
+rework (before any big-world pack)
 → `maclock-1` the macro-clock primitive (FIRST among its consumers)
 → `depth-3` scene LOD (its depth-5 gate is satisfied — the passes are
 landed), `depth-6` factions, `depth-7` groups & simulation LOD
@@ -620,9 +625,16 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    the scene fields read the folded projection, the claims render in
    the brief of the scene that claims them, the pack record the
    fallback; the reachability lint's scene-line arm; read-side zero);
+   chron-2 LANDED (iter-87, D-121 — the history bridge: the DF
+   legends shape (participants/places), the pack-declared collection
+   vocabulary (feud → quarrel committed, the war→battle→episode
+   mechanism pinned on crafted tiers), the cause TREE (the parent
+   map resolved through the writer's ids); the corpus price — the
+   pass-1 positions frozen, zero corpus re-pins, the T1 fixture the
+   one re-pin);
    the
-   queue: chron-2 chronicle v2 next (the history bridge),
-   place-1, geo-1, maclock-1, then scene LOD
+   queue: place-1 placement discipline next,
+   geo-1, maclock-1, then scene LOD
    (its depth-5 gate is satisfied — the passes are landed), factions
    with goals, groups & simulation LOD + name-1 (design ratified
    iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7); the

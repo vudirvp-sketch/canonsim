@@ -6,7 +6,10 @@ pattern — the committed pack unarmed); **iter-83/depth-5b lands the
 ARMING: the committed pack's own `worldgen` block + the `world_history`
 template line + the story-critical listing — every A/B pin's armed arm
 is the COMMITTED pack itself, the unarmed arm the crafted twin (the
-block removed).**
+block removed).** **iter-87/chron-2 lands the history bridge: the DF
+legends shape (participants/places on every history event) + the
+pack-declared collection vocabulary (the war→battle→episode walk) +
+the cause TREE (L7 — the chain visible at record time).**
 
 The laws pinned here:
 
@@ -18,7 +21,7 @@ The laws pinned here:
   names; the ONE legal nesting is inside the assured substantive run
   scope (a worldgen stream may shadow `substantive`, never the
   reverse).
-- **The unarmed law**: a pack without the block answers `(None, ())`
+- **The unarmed law**: a pack without the block answers `(None, (), ())`
   BEFORE any stream touch — zero registrations, zero draws, zero
   events; the crafted unarmed twin runs the v0.1 shape (the committed
   pack is armed since depth-5b).
@@ -29,6 +32,19 @@ The laws pinned here:
   count, the relax discipline, the closed biome vocabulary + the
   coastal rule, the watershed flow/rivers, the capitals/regions
   growth, the chronicle cap and ordering.
+- **The DF legends shape (chron-2)**: every history event carries two
+  distinct region participants + one site place; the pass-1 stream
+  positions are FROZEN (the years/kinds/hooks for a seed are the
+  pre-chron-2 draws verbatim — the murmur's pre-seed corpus price
+  zero); the walk is draw-free.
+- **The collection walk (chron-2, the pack's tier vocabulary)**: the
+  root-kind event anchors, the nested-kind events join at their first
+  matching tier under the member caps, the capped/unaffiliated events
+  close the run and re-process; the members chain to their nearest
+  lower-tier predecessor (the DF nesting), the top-level events chain
+  to the previous top-level (the sagas, never the episodes); the
+  members INHERIT the anchor's participants (the DF collection
+  roles); the flat form (no vocabulary) is the linear chain.
 - **The claim gate (`detail_claim`'s first legal caller)**: commit on
   an empty log; `no_op` skipped (the idempotent duplicate);
   `slot_conflict` refused with the cause chain — the world-forming
@@ -37,17 +53,22 @@ The laws pinned here:
   law).
 - **The genesis integration**: the world forms at open time, BEFORE
   any player step; the first genesis event is the run-start (cause
-  null); events chain; the PC's first event chains to the LAST
-  genesis event; the director's buffer holds the genesis hooks; the
-  claims live in the projection and replay through the fold (INV-1);
-  history carries NO knowledge records (the DF discipline: history is
-  canon-dense, epistemology-empty); the isolation law — the armed
-  arm's substantive fingerprint equals the unarmed arm's (the worldgen
-  streams never move a canon draw); same seed → byte-identical logs.
+  null); the loop resolves the worldgen's PARENT MAP through the
+  writer's own ids (the id law single-owner); the PC's first event
+  chains to the LAST genesis event; the director's buffer holds the
+  genesis hooks; the claims live in the projection and replay through
+  the fold (INV-1); history carries NO knowledge records (the DF
+  discipline: history is canon-dense, epistemology-empty); the
+  isolation law — the armed arm's substantive fingerprint equals the
+  unarmed arm's (the worldgen streams never move a canon draw); same
+  seed → byte-identical logs.
 - **The lint family** (`core/pack.py::_worldgen`): the closed
-  vocabulary at every level, the range laws, the template closure, the
+  vocabulary at every level, the range laws (capitals ≥ 2 — the
+  participants' two sides), the template closure (the chronicle
+  line's every alternative binds the DF legends fields), the
   declared-hook law, the claim double-claim laws (modeled slot /
-  scene_detail overlap / duplicate pair / site bounds).
+  scene_detail overlap / duplicate pair / site bounds / the reserved
+  vocabulary incl. the history outcome keys).
 - **The depth-5b arming laws (D-116)**: CONDUCTANCE — the genesis types
   clear the tale gate through the pack's own importance rule (the
   dead-arming lint refuses what the listing forgot); REACHABILITY (L1)
@@ -112,8 +133,15 @@ EVENT_TYPE = "world_history"
 #: events carry `year`, world_formed does not — the missing-key else
 #: arm is the designed branch), and each claim slot rides its own
 #: optional clause — the L1 binding surface (the flat claim keys).
+#: chron-2: the history arm gains the DF legends clauses — the
+#: participants (the two regions, the collection's roles), the place
+#: (the site), the collection tier's type (present only when grouped;
+#: the missing-key else arm renders nothing for independents).
 TEMPLATE_LINE = (
-    "{year?{actor} remembers: {kind}, in the year {year}.|"
+    "{year?{actor} remembers: {kind}, in the year {year}"
+    "{participants?, between {participants}}"
+    "{places?, at site {places}}"
+    "{collection?, in the {collection}}.|"
     "{actor} takes shape: {sites} sites, {regions} regions, {years} years"
     "{terrain?, {terrain} ground}{world_region?, {world_region} lands}"
     "{near_river?, river near}.}"
@@ -145,6 +173,11 @@ WG: dict[str, Any] = {
         "events_max": 5,
         "event_type": EVENT_TYPE,
         "hooks": ["barkeep_wary_sweep", "ambient_drunkard_ramble"],
+        "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+            {"type": "quarrel", "kinds": ["pact_signed", "lineage_ended"],
+             "members": 2},
+        ],
     },
     "claims": [
         {"location": "loc_tavern", "slot": "terrain", "field": "biome", "site": 0},
@@ -282,7 +315,7 @@ def test_the_unarmed_law_answers_nothing_before_any_stream_touch() -> None:
     KeyError — the stream never existed), zero draws, fingerprint
     zero."""
     bank = RngBank(42)
-    model, drafts = genesis(bank, _rules_with(None), [], 42)
+    model, drafts, _parents = genesis(bank, _rules_with(None), [], 42)
     assert model is None and drafts == ()
     for pass_name in PASS_ORDER:
         with pytest.raises(KeyError):
@@ -424,8 +457,10 @@ def test_the_chronicle_is_capped_ordered_and_closed() -> None:
     history draws, years ascending inside [1, years], kinds from the
     closed vocabulary, hooks from the declared tags, all at t=0 with
     the world actor and NO knowledge records (the DF discipline)."""
-    model, drafts = genesis(RngBank(42), _rules_with(WG), [], 42)
+    model, drafts, parents = genesis(RngBank(42), _rules_with(WG), [], 42)
     assert model is not None and len(drafts) == WG["chronicle"]["events_max"]
+    assert parents[0] == -1  # world_formed is the run-start
+    assert len(parents) == len(drafts)
     assert drafts[0].outcome["kind"] == "world_formed"
     years = [draft.outcome["year"] for draft in drafts[1:]]
     assert years == sorted(years)
@@ -447,7 +482,7 @@ def test_the_importance_rides_the_pack_rule() -> None:
     importance is `pack_importance`'s answer over the same inputs —
     never a second scoring path."""
     rules = _rules_with(WG)
-    model, drafts = genesis(RngBank(42), rules, [], 42)
+    model, drafts, _parents = genesis(RngBank(42), rules, [], 42)
     assert model is not None
     formed, *history = drafts
     assert formed.importance == pack_importance(
@@ -457,6 +492,135 @@ def test_the_importance_rides_the_pack_rule() -> None:
         assert draft.importance == pack_importance(
             rules, set(), 0, len(draft.hooks), EVENT_TYPE
         )
+
+
+# -- chron-2: the DF legends shape + the collection walk (the history bridge) ---
+
+
+def test_the_history_events_carry_the_df_legends_shape() -> None:
+    """The DF legends event shape, unconditional: every history event's
+    outcome carries PARTICIPANTS — a list of two distinct regions from
+    the model's own set — and PLACES — a list of one site index in
+    bounds; world_formed carries NEITHER (its shape is the map's own,
+    not a history event's)."""
+    model, drafts, _parents = genesis(RngBank(42), _rules_with(WG), [], 42)
+    assert model is not None
+    regions = sorted(set(model.regions))
+    formed, *history = drafts
+    for key in ("year", "participants", "places", "collection"):
+        assert key not in formed.outcome
+    for draft in history:
+        pair = draft.outcome["participants"]
+        assert isinstance(pair, list) and len(pair) == 2
+        assert pair[0] != pair[1]
+        assert all(region in regions for region in pair)
+        places = draft.outcome["places"]
+        assert isinstance(places, list) and len(places) == 1
+        assert 0 <= places[0] < len(model.sites)
+
+
+def test_the_pass_one_stream_positions_are_frozen() -> None:
+    """The chron-2 corpus-price law, executable: pass 1 draws exactly
+    the depth-5 triple at the SAME stream positions — the years, kinds
+    and hook tags for a given seed are the pre-chron-2 draws verbatim
+    (the murmur's pre-seed corpus pins ride them; the drawn content is
+    stable across the landing). The DF legends draws APPEND after the
+    tag; the walk draws nothing."""
+    _model, drafts, _parents = genesis(RngBank(42), _rules_with(WG), [], 42)
+    history = drafts[1:]
+    assert [draft.outcome["kind"] for draft in history] == [
+        "pact_signed", "lineage_ended", "pact_signed", "settlement_founded",
+    ]
+    assert [draft.outcome["year"] for draft in history] == [35, 64, 96, 146]
+    assert [draft.hooks for draft in history] == [
+        ("ambient_drunkard_ramble",),
+        ("ambient_drunkard_ramble",),
+        ("barkeep_wary_sweep",),
+        ("ambient_drunkard_ramble",),
+    ]
+
+
+#: The walk probe's tier vocabulary — the war→battle→episode hierarchy
+#: (the row's DF donor shape) mapped onto seed 42's drawn kinds
+#: (pact→lineage→pact→settlement): the pact anchors the war, the
+#: lineage joins as the battle, the second pact descends to the
+#: episode tier, the settlement stays independent.
+WALK_TIERS: list[dict[str, Any]] = [
+    {"type": "war", "kinds": ["pact_signed"]},
+    {"type": "battle", "kinds": ["lineage_ended"], "members": 1},
+    {"type": "episode", "kinds": ["pact_signed"], "members": 1},
+]
+
+
+def _walk_config(tiers: list[dict[str, Any]]) -> dict[str, Any]:
+    """WG with the chronicle's collection vocabulary swapped for the
+    probe's tiers (the walk is the pack's declaration over the same
+    pass-1 draws)."""
+    return {**WG, "chronicle": {**WG["chronicle"], "collections": tiers}}
+
+
+def test_the_collection_walk_builds_the_df_nesting() -> None:
+    """The walk (zero draws — a pure function of the drawn kinds + the
+    declaration): the root-kind event anchors a collection, the
+    following nested-kind events join at their FIRST matching nested
+    tier, a member chains to its NEAREST LOWER-TIER predecessor (the
+    DF nesting recorded, L7), and the unaffiliated event closes the
+    run and goes independent chaining to the ANCHOR — the sagas chain,
+    never the episodes. The members INHERIT the anchor's participants
+    (the DF collection's role fields); the independent draws its own."""
+    model, drafts, parents = genesis(
+        RngBank(42), _rules_with(_walk_config(WALK_TIERS)), [], 42
+    )
+    assert model is not None
+    _formed, *history = drafts
+    assert parents == (-1, 0, 1, 2, 1)  # the tree, not the linear chain
+    assert [draft.outcome.get("collection") for draft in history] == [
+        "war", "battle", "episode", None,
+    ]
+    anchor_pair = history[0].outcome["participants"]
+    assert history[1].outcome["participants"] == anchor_pair
+    assert history[2].outcome["participants"] == anchor_pair
+    pair = history[3].outcome["participants"]
+    regions = sorted(set(model.regions))
+    assert len(pair) == 2 and pair[0] != pair[1]
+    assert all(region in regions for region in pair)
+
+
+def test_the_member_cap_closes_the_run_and_re_anchors() -> None:
+    """The tier's member cap CLOSES the run; the capped event
+    re-processes FRESH — a root-kind event opens the NEXT collection
+    (the sagas chain: the new anchor's parent is the previous anchor,
+    never the capped run's last member). Seed 42 with the battle tier
+    widened to both nested kinds at cap 1: the lineage joins, the
+    second pact is capped into a NEW war anchor, the settlement (the
+    unaffiliated closer) chains to that anchor."""
+    tiers = [
+        {"type": "war", "kinds": ["pact_signed"]},
+        {"type": "battle", "kinds": ["lineage_ended", "pact_signed"], "members": 1},
+    ]
+    _model, drafts, parents = genesis(
+        RngBank(42), _rules_with(_walk_config(tiers)), [], 42
+    )
+    _formed, *history = drafts
+    assert parents == (-1, 0, 1, 1, 3)
+    assert [draft.outcome.get("collection") for draft in history] == [
+        "war", "battle", "war", None,
+    ]
+
+
+def test_the_flat_form_is_the_linear_chain() -> None:
+    """A pack without the collection vocabulary (the key omitted) keeps
+    the flat chronicle: every history event top-level, the cause the
+    LINEAR chain — the pre-chron-2 law preserved byte-for-byte on the
+    un-grouped genesis."""
+    flat = {**WG, "chronicle": {
+        key: value for key, value in WG["chronicle"].items()
+        if key != "collections"
+    }}
+    _model, drafts, parents = genesis(RngBank(42), _rules_with(flat), [], 42)
+    _formed, *history = drafts
+    assert parents == (-1, 0, 1, 2, 3)
+    assert all("collection" not in draft.outcome for draft in history)
 
 
 # -- the claim gate (the first legal caller) ------------------------------------
@@ -499,7 +663,7 @@ def test_the_gate_answers_no_op_and_conflict_with_the_cause_chain() -> None:
     assert refused.outcome == SLOT_CONFLICT and refused.cause == "ev_0005"
     assert by_slot["near_river"].outcome == COMMIT
 
-    _model, drafts = genesis(RngBank(42), _rules_with(WG), events, 42)
+    _model, drafts, _parents = genesis(RngBank(42), _rules_with(WG), events, 42)
     formed = drafts[0]
     # only the committed claim writes; the no_op is skipped, the
     # conflict refused
@@ -519,7 +683,7 @@ def test_a_claims_free_genesis_omits_the_outcome_keys() -> None:
     only when non-empty — a claims-free genesis (map + history alone)
     writes a lean world_formed outcome."""
     config = {**WG, "claims": []}
-    model, drafts = genesis(RngBank(42), _rules_with(config), [], 42)
+    model, drafts, _parents = genesis(RngBank(42), _rules_with(config), [], 42)
     assert model is not None
     assert "claims" not in drafts[0].outcome
     assert "refused" not in drafts[0].outcome
@@ -535,8 +699,10 @@ def test_the_genesis_commits_before_the_first_step_and_seeds_the_buffer(
     """The PC walks into a running world: open() forms the world, the
     claims live in the projection, the director's buffer holds the
     genesis hooks — all BEFORE any player step; the first genesis
-    event is the run's run-start (cause null), the chain is linear,
-    and the PC's first event chains to the LAST genesis event."""
+    event is the run's run-start (cause null), the chain is LINEAR
+    here (seed 42 draws no root-kind event — the flat form; the tree
+    form is pinned by the chron-2 walk tests above), and the PC's
+    first event chains to the LAST genesis event."""
     armed = crafted_pack(tmp_path, "armed", WG)
     log = tmp_path / "genesis.jsonl"
     sim = Simulator(armed, 42, log, SCHEMA, commit="0000000")
@@ -606,13 +772,64 @@ def test_the_genesis_events_carry_no_knowledge(tmp_path: Path) -> None:
     assert all(event.knowledge == () for event in events)
 
 
+# -- chron-2: the cause tree + the collection render (the integration) ----------
+
+
+def test_the_genesis_cause_tree_lands_in_the_committed_log(
+    tmp_path: Path,
+) -> None:
+    """L7 end to end: the loop resolves the worldgen's parent map
+    through the WRITER'S OWN ids (the id law single-owner), so the
+    committed log carries the TREE — the episode's cause is the battle
+    (the nearest lower tier), the independent's cause is the ANCHOR
+    (the sagas chain, never the linear predecessor ev_0003), the
+    writer's chain law accepts every reference (backward-only by the
+    walk's construction), and the log replays through the fold
+    (INV-1/T2)."""
+    armed = crafted_pack(tmp_path, "tree", _walk_config(WALK_TIERS))
+    log = tmp_path / "tree.jsonl"
+    sim = Simulator(armed, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    try:
+        _header, events = read_log(log, SCHEMA)
+        assert [event.cause for event in events] == [
+            None, "ev_0000", "ev_0001", "ev_0002", "ev_0001",
+        ]
+        fold(events, initial_projection(armed.entities))  # T2 clean
+    finally:
+        sim.close()
+
+
+def test_the_chronicle_renders_the_collection_tier_names(
+    tmp_path: Path,
+) -> None:
+    """The line's collection clause renders the tier's PACK-DECLARED
+    type on the grouped events (in the war / in the battle / in the
+    episode) and nothing on the independent (the missing-key else arm
+    — the designed branch); the participants and the place render on
+    every history line (the joined lists, never the host repr)."""
+    armed = crafted_pack(tmp_path, "tale_col", _walk_config(WALK_TIERS))
+    log, _sim = _run(tmp_path, armed, 42, [], "tale_col")
+    _header, events = read_log(log, SCHEMA)
+    tale = render_chronicle(events, armed, 42)
+    lines = tale.splitlines()[2:]  # past the day header + world_formed
+    assert len(lines) == 4
+    assert lines[0].endswith("in the war.")
+    assert lines[1].endswith("in the battle.")
+    assert lines[2].endswith("in the episode.")
+    assert not re.search(r", in the [a-z]+\.$", lines[3])  # no tier clause
+    for line in lines:
+        assert "between region_" in line and "at site " in line
+
+
 # -- the runtime backstop (D-111 — the loud raw-read family) ---------------------
 
 
 def test_the_runtime_backstop_is_loud_on_hand_built_configs() -> None:
-    """A hand-built config missing a block, a bad claim field, or an
-    out-of-range site raises WorldgenError naming the offender —
-    KeyError/IndexError never leak (the pred-contract family law)."""
+    """A hand-built config missing a block, a bad claim field, an
+    out-of-range site, a malformed collection tier, or a one-region
+    world raises WorldgenError naming the offender — KeyError/IndexError/
+    ValueError never leak (the pred-contract family law)."""
     bank = RngBank(42)
     with pytest.raises(WorldgenError, match="missing the 'states' block"):
         genesis(bank, _rules_with({k: v for k, v in WG.items() if k != "states"}), [], 42)
@@ -621,6 +838,15 @@ def test_the_runtime_backstop_is_loud_on_hand_built_configs() -> None:
         model.claim_value("biomes", 0)
     with pytest.raises(WorldgenError, match="outside 0"):
         model.claim_value("biome", len(model.sites))
+    bad_tiers = {**WG, "chronicle": {**WG["chronicle"], "collections": [
+        {"type": "feud", "kinds": ["war_fought"]},
+        {"type": "quarrel", "members": 1},
+    ]}}
+    with pytest.raises(WorldgenError, match="missing the 'kinds' key"):
+        genesis(RngBank(42), _rules_with(bad_tiers), [], 42)
+    one_region = {**WG, "states": {**WG["states"], "capitals": 1}}
+    with pytest.raises(WorldgenError, match="two distinct regions"):
+        genesis(RngBank(42), _rules_with(one_region), [], 42)
 
 
 # -- the lint family (`core/pack.py::_worldgen`) ---------------------------------
@@ -854,12 +1080,101 @@ def test_the_lint_refuses_a_reserved_claim_slot(tmp_path: Path) -> None:
     assert "kind" in RESERVED_CLAIM_SLOTS and "actor" in RESERVED_CLAIM_SLOTS
 
 
+def test_the_lint_refuses_a_history_key_claim_slot(tmp_path: Path) -> None:
+    """The chron-2 arm of the reserved law: a claim slot named for a
+    HISTORY event's outcome key is a BRANCH FAKE — `year` would flip
+    the world_formed line's `{year?…}` conditional to the history arm
+    (the claim's flat key rides world_formed's outcome), the other
+    history keys collide with the history events' own fields across
+    the genesis family."""
+    faked = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "year", "field": "biome", "site": 0}
+    ]}
+    assert "reserved" in _lint_error(tmp_path, faked)
+    colliding = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "participants", "field": "biome", "site": 0}
+    ]}
+    assert "reserved" in _lint_error(tmp_path, colliding)
+    for key in ("year", "participants", "places", "collection"):
+        assert key in RESERVED_CLAIM_SLOTS
+
+
+def test_the_lint_refuses_bad_collection_vocabularies(tmp_path: Path) -> None:
+    """The pack-declared tier vocabulary (the DF event_collections
+    donor shape, L10): at least two tiers (a lone tier labels without
+    grouping — dead vocabulary), the root carries NO member cap (it
+    anchors; the nested tiers carry the caps), the kinds ⊆ the closed
+    HISTORY_KINDS, the types unique, the caps ≥ 1."""
+    base = WG["chronicle"]
+    cases: list[tuple[dict[str, Any], str]] = [
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+        ]}}, "at least two tiers"),
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"], "members": 1},
+            {"type": "quarrel", "kinds": ["pact_signed"], "members": 1},
+        ]}}, "unknown keys"),
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+            {"type": "quarrel", "kinds": ["pact_signed"]},
+        ]}}, "members must be an integer"),
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+            {"type": "quarrel", "kinds": ["raid"], "members": 1},
+        ]}}, "closed history vocabulary"),
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+            {"type": "feud", "kinds": ["pact_signed"], "members": 1},
+        ]}}, "declared twice"),
+        ({**WG, "chronicle": {**base, "collections": [
+            {"type": "feud", "kinds": ["war_fought"]},
+            {"type": "quarrel", "kinds": ["pact_signed"], "members": 0},
+        ]}}, "members must be an integer"),
+        ({**WG, "states": {**WG["states"], "capitals": 1}}, "capitals"),
+    ]
+    for worldgen, needle in cases:
+        assert needle in _lint_error(tmp_path, worldgen)
+
+
+def test_the_lint_refuses_a_line_that_drops_the_df_legends_fields(
+    tmp_path: Path,
+) -> None:
+    """The chron-2 closure (the L1 law at alternative granularity): the
+    chronicle line's every alternative binds the DF legends fields —
+    `participants`/`places` unconditionally, `collection` when the tier
+    vocabulary is declared (the tier types would be dead data
+    otherwise). The FLAT form (no vocabulary) may drop the collection
+    clause — the conditional never fires, nothing is dead."""
+    no_participants = TEMPLATE_LINE.replace(
+        "{participants?, between {participants}}", ""
+    )
+    assert "{participants" not in no_participants
+    with pytest.raises(PackError, match="binds no .participants."):
+        crafted_pack(tmp_path, "no_pair", WG, template=no_participants)
+    no_places = TEMPLATE_LINE.replace("{places?, at site {places}}", "")
+    assert "{places" not in no_places
+    with pytest.raises(PackError, match="binds no .places."):
+        crafted_pack(tmp_path, "no_place", WG, template=no_places)
+    no_collection = TEMPLATE_LINE.replace(
+        "{collection?, in the {collection}}", ""
+    )
+    assert "{collection" not in no_collection
+    with pytest.raises(PackError, match="binds no .collection."):
+        crafted_pack(tmp_path, "no_col", WG, template=no_collection)
+    # the flat form: no vocabulary declared, the clause droppable
+    flat = {**WG, "chronicle": {
+        key: value for key, value in WG["chronicle"].items()
+        if key != "collections"
+    }}
+    crafted_pack(tmp_path, "flat_ok", flat, template=no_collection)  # no raise
+
+
 def test_the_world_formed_outcome_binds_the_claim_slots_flat() -> None:
     """The render surface (depth-5b): each committed claim's slot rides
     the world_formed outcome as a FLAT key — the template line binds it
     through `_event_context` (the D-116 (4) law) — while the `claims`
     list stays the structured record (two jobs, two shapes)."""
-    model, drafts = genesis(RngBank(42), _rules_with(WG), [], 42)
+    model, drafts, _parents = genesis(RngBank(42), _rules_with(WG), [], 42)
     assert model is not None
     formed = drafts[0]
     assert formed.outcome["terrain"] == model.biomes[0]
@@ -884,7 +1199,7 @@ def test_the_template_line_renders_the_genesis_both_arms(tmp_path: Path) -> None
     tale = render_chronicle(events, PACK, 42)
     lines = tale.splitlines()
     model = generate_world(RngBank(42), WG)
-    _m, drafts = genesis(RngBank(42), _rules_with(WG), [], 42)
+    _m, drafts, _parents = genesis(RngBank(42), _rules_with(WG), [], 42)
     expected_formed = (
         "the world takes shape: 36 sites, 3 regions, 150 years"
         + (f", {model.biomes[0]} ground" if "terrain" in drafts[0].outcome else "")
@@ -895,9 +1210,14 @@ def test_the_template_line_renders_the_genesis_both_arms(tmp_path: Path) -> None
     assert lines[0].startswith("— Day 1")
     assert lines[1] == expected_formed
     for line, draft in zip(lines[2 : GENESIS + 1], drafts[1:], strict=True):
+        # seed 42 draws no war_fought: the flat form, no run — the
+        # collection clause renders nothing (the missing-key else arm)
+        assert "collection" not in draft.outcome
         assert line == (
             f"the world remembers: {draft.outcome['kind']}, "
-            f"in the year {draft.outcome['year']}."
+            f"in the year {draft.outcome['year']}"
+            f", between {', '.join(draft.outcome['participants'])}"
+            f", at site {draft.outcome['places'][0]}."
         )
     # the unarmed twin: no genesis block at all — the lone wait is
     # low-importance, under the medium gate, so the tale renders empty

@@ -243,30 +243,36 @@ class Simulator:
         gate, then the pre-PC history events committed through the one
         canon door BEFORE any player step: the PC walks into a running
         world, the director's buffer pre-seeded (phases.md §5). The
-        first genesis event is the run's run-start event (cause null);
-        each later event chains to its predecessor (the `_react`
-        pattern). The worldgen streams are family-isolated from the
+        first genesis event is the run's run-start event (cause null).
+        chron-2 (L7 — the chain visible at record time): the worldgen
+        owns the CAUSE TREE (the parent map, draft indices — a
+        collection member chains to its nearest lower-tier predecessor,
+        a top-level event to the previous top-level event; the flat
+        form is the linear chain); this loop resolves each parent
+        through the WRITER'S OWN ids as it commits — the id law stays
+        the writer's single owner. The worldgen streams are
+        family-isolated from the
         substantive canon checks, so the run's canon draws never move —
         the armed arm's price is the genesis events alone. An unarmed
-        pack answers `(None, ())` before any stream touch: zero draws,
-        zero events, the v0.1 bytes untouched by construction.
+        pack answers `(None, (), ())` before any stream touch: zero
+        draws, zero events, the v0.1 bytes untouched by construction.
         """
         self._writer.write_header(
             seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
         )
-        model, drafts = genesis(
+        model, drafts, parents = genesis(
             self._bank, self._pack.rules, self._events, self._seed
         )
         self._world = model
         if model is None:
             return
         with self._bank.assure(SUBSTANTIVE):
-            previous: str | None = None
-            for draft in drafts:
+            ids: list[str] = []
+            for draft, parent in zip(drafts, parents, strict=True):
                 record = self._commit(
-                    replace(draft, cause=previous)
+                    replace(draft, cause=None if parent < 0 else ids[parent])
                 )
-                previous = record.id
+                ids.append(record.id)
 
     def run_steps(self, steps: Sequence[Mapping[str, Any]]) -> RunResult:
         """Feed player steps through the live simulator until the queue

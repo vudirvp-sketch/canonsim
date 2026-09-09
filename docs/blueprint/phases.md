@@ -511,6 +511,18 @@ seeding the director's buffer, NO knowledge records — the DF
 epistemology-empty discipline) commits through the canon door at
 `Simulator.open()`; the committed pack UNARMED (the 68a pattern —
 zero draws, zero events, v0.1 bytes; the arming is depth-5b). The
+chronicle pass's chron-2 form (iter-87, D-121 — the history bridge):
+the history events carry the DF legends shape (two distinct region
+participants — the run's anchor's draw inherited by its members, the
+DF collection's role fields; one site place per event) and the cause
+TREE (L7 — a member chains to its nearest lower-tier predecessor, a
+top-level event to the previous top-level; the drafts' parent map
+resolved through the writer's ids at commit); the war→battle→episode
+hierarchy is a PACK-DECLARED collection vocabulary
+(`chronicle.collections`, the tiers root-first with the nested member
+caps, the kinds ⊆ the closed HISTORY_KINDS — L10, never string
+languages); the walk is draw-free (the grouping opportunistic, the
+DF-measured minority shape). The
 populations/macros half stays depth-7's row; the lazy mid-run
 materialization door (a site's passes re-running against a non-empty
 log) is the future consumer the claim gate's conflict/no_op verdicts

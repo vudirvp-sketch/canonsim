@@ -178,6 +178,26 @@ def test_conditional_reads_raw_truthiness() -> None:
     assert engine.expand_text("{flag?yes|no}", {"flag": False}) == "no"
 
 
+def test_list_values_render_joined_never_repr() -> None:
+    """The value-rendering law (chron-2): a context slot holding a LIST
+    renders joined with ', ' — never the host language's repr (the DF
+    legends fields — participants, places — ride canon as lists;
+    D-120's law generalized to the chronicle side). The `#ref#`
+    context path carries the same law; ints inside a list render dry."""
+    engine = Engine(Grammar(MINI_TEMPLATES), RngBank(42))
+    context = {
+        "actor": "the world",
+        "participants": ["region_01", "region_02"],
+        "places": [13],
+    }
+    assert engine.expand_text(
+        "{actor} between {participants} at site {places}.", context
+    ) == "the world between region_01, region_02 at site 13."
+    assert engine.expand_text(
+        "{actor} between #participants# at site #places#.", context
+    ) == "the world between region_01, region_02 at site 13."
+
+
 def test_slot_reference_with_modifier() -> None:
     engine = Engine(Grammar(MINI_TEMPLATES), RngBank(42))
     assert engine.expand_symbol("day_header", {"day": 3, "phase": "night"}) == (

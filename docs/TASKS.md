@@ -180,15 +180,29 @@ header law — the detail lives in git + worklog + D-110..D-113)
   defensively; the reachability lint gains the scene-line consumer
   arm — the claims' first brief-side consumer). Detail:
   tests/test_brief.py + tests/test_worldgen.py.
-- `chron-2` · chronicle v2, the history bridge (W1) — todo: the
-  history events gain participants (regions), places (sites), and
-  cause (L7 — the chain visible at record time, the DF legends
-  shape); the war→battle→episode hierarchy as a PACK-DECLARED
-  collection vocabulary (the DF `event_collections` donor shape,
-  L10: JSON + schema, never string languages); HISTORY_KINDS stays
-  closed (the 4 verbs; collections are the pack's layer); template
-  closure linted (the genesis event types are pack vocabulary,
-  EVENT_SCHEMA §11).
+- `chron-2` · chronicle v2, the history bridge (W1) — **done (iter-87,
+  D-121)**: the history events gain the DF legends shape
+  (participants — two distinct regions, the run's root anchor's draw
+  inherited by its members, the DF collection's role fields; places —
+  one site per event; world_formed carries neither) and the cause
+  TREE (L7 — the chain visible at record time: a member chains to its
+  nearest lower-tier predecessor, a top-level event to the previous
+  top-level, the flat form the linear chain; the drafts ride a parent
+  map the loop resolves through the writer's own ids — the id law
+  single-owner); the war→battle→episode hierarchy as a PACK-DECLARED
+  collection vocabulary (`chronicle.collections`, the DF
+  `event_collections` donor shape, L10: JSON + lint, never string
+  languages — the tiers root-first, the root anchors, the nested
+  tiers carry the member caps; the walk draw-free, the grouping
+  opportunistic per the DF measurement); HISTORY_KINDS stayed closed
+  (the 4 verbs; the collection types are the pack's layer); template
+  closure linted at alternative granularity + the reserved-slot
+  family widened (the history outcome keys) + capitals ≥ 2 (the
+  participants' two sides); the committed pack declares feud →
+  quarrel; the corpus price: the pass-1 stream positions frozen (the
+  drawn years/kinds/hooks verbatim, the murmur's pre-seed pins
+  stable, zero corpus re-pins), the T1 fixture the one re-pin (4
+  outcome lines). Detail: tests/test_worldgen.py + D-121.
 - `place-1` · placement discipline (W1) — todo: the claim↔exits
   consistency lint — a location's claimed site must be topologically
   compatible with its exits (two locations joined by exits never read

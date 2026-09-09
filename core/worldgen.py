@@ -54,24 +54,45 @@ cause chain, recorded in the event's outcome. First-commit-wins for the
 claimer, canon outranks the generator — never a second write path
 beside the ledger/promotion door.
 
-**The genesis (pre-PC history):** `WorldModel` is DERIVED data (a pure
-function of seed + pack config, rebuildable, never truth — L11); the
-world's canon-visible facts ride EVENTS like everything else (INV-1).
-`genesis_drafts` builds them: event 0 = `world_formed` (the map's shape
-in the outcome + the committed claims as births, `from` None — the
-canon-birth shape of the texture promotion), then history events in
-ascending macro-year (`outcome: {kind, year}` — micro-ticks and
-macro-years are layered clocks, the same authority at two
-granularities, L4). History events carry NO knowledge records (the DF
+**The genesis (pre-PC history, chron-2's DF legends shape):** `WorldModel`
+is DERIVED data (a pure function of seed + pack config, rebuildable,
+never truth — L11); the world's canon-visible facts ride EVENTS like
+everything else (INV-1). `genesis_drafts` builds them: event 0 =
+`world_formed` (the map's shape in the outcome + the committed claims
+as births, `from` None — the canon-birth shape of the texture
+promotion), then history events in ascending macro-year — each carrying
+the DF legends event shape (`outcome: {kind, year, participants,
+places}` + `collection` when grouped): PARTICIPANTS are two distinct
+region ids (the DF war's attacker/defender — the pair is drawn once at
+the collection's root anchor and INHERITED by its members, the DF
+collection-role shape; independents draw their own), PLACES are site
+indices (one drawn per event, the DF `site_id`), and the COLLECTION
+field names the tier a grouped event belongs to. The war→battle→episode
+hierarchy is a PACK-DECLARED collection vocabulary (the DF
+`event_collections` donor shape, L10: JSON in the rules, linted —
+never string languages): the pack's `chronicle.collections` lists the
+tiers root-first, each `{type, kinds}` (the root anchors) or
+`{type, kinds, members}` (the nested tiers carry the member caps);
+HISTORY_KINDS stays closed — the four engine verbs are the kinds the
+tiers may name, the collection types are the pack's own layer. The
+walk is DRAW-FREE (a pure function of the drawn kinds and the
+declaration — DF measured: only a minority of events sit in any
+collection; the grouping is opportunistic, not structural). Micro-ticks
+and macro-years are layered clocks, the same authority at two
+granularities (L4). History events carry NO knowledge records (the DF
 discipline measured at bg-2: DF history is canon-dense,
 epistemology-empty — the world the PC walks into has a past nobody
 knows) and carry the pack-declared hook tags that seed the director's
 initial buffer (D-005: a complication is seeded at event time — here,
-at world time). The loop commits the drafts through the one canon door
-(`Simulator._commit`); `cause` chains event-to-event, the first genesis
-event carrying `cause: null` (the run-start event of an armed run).
-`events_max` caps the genesis — log growth O(declared), never
-O(years).
+at world time). The CAUSE is the chron-2 law (L7 — the chain visible
+at record time): the drafts ride a PARENT MAP (draft indices, -1 = the
+run-start `world_formed`) — a collection member chains to its nearest
+lower-tier predecessor in the run, a top-level event (an anchor or an
+independent) to the previous top-level event. The loop commits the
+drafts through the one canon door (`Simulator._commit`), resolving the
+parents through the writer's own ids (the id law stays the writer's
+single owner). `events_max` caps the genesis — log growth
+O(declared), never O(years).
 
 Not here (phases.md §5/§7): populations as macro-tick aggregates (the
 group family, depth-7 — the first tranche seeds the map, the claims,
@@ -102,6 +123,7 @@ __all__ = [
     "PASS_ORDER",
     "RESERVED_CLAIM_SLOTS",
     "WORLDGEN_BLOCK",
+    "HistoryDraw",
     "ResolvedClaim",
     "WorldModel",
     "genesis",
@@ -147,18 +169,25 @@ BIOMES: Final = (
 #: The claim-field closed set: which model read a claim's value takes.
 CLAIM_FIELDS: Final = ("biome", "height", "region", "river")
 
-#: The claim slots' reserved vocabulary (depth-5b): a slot colliding
-#: with the world_formed outcome's fixed keys is CLOBBERED (the flat
-#: claim keys write after them), and a slot named for the render
+#: The claim slots' reserved vocabulary (depth-5b + chron-2): a slot
+#: colliding with the world_formed outcome's fixed keys is CLOBBERED
+#: (the flat claim keys write after them), a slot named for the render
 #: context's derived slots is SHADOWED (`render/chronicle.py::
 #: _event_context` writes the derived slots first, so the claim's flat
 #: key would never surface — restated here because core may not import
-#: render; the lint refuses the collision either way). The flat keys
-#: are the template binding surface — the reachability law's live
-#: consumer.
+#: render; the lint refuses the collision either way), and a slot
+#: named for a HISTORY event's outcome key is a BRANCH FAKE (chron-2:
+#: the line's `{year?…}` conditional branches on the outcome shape — a
+#: claim slot named `year` would flip world_formed's render to the
+#: history arm, `participants`/`places`/`collection` would collide
+#: with the history events' own fields across the genesis family).
+#: The flat keys are the template binding surface — the reachability
+#: law's live consumer.
 RESERVED_CLAIM_SLOTS: Final = (
     # the world_formed outcome's fixed keys
     "kind", "sites", "regions", "years", "claims", "refused",
+    # the history events' outcome keys (chron-2, the DF legends shape)
+    "year", "participants", "places", "collection",
     # the render context's derived slots
     "t", "event_type", "actor", "target", "target_location",
     "location", "action_label", "knows", "fidelity", "axes",
@@ -252,6 +281,29 @@ def _require_config(config: Mapping[str, Any]) -> None:
             continue
         if not isinstance(value, Mapping):
             raise WorldgenError(f"worldgen.{block} must be an object")
+        if block == "chronicle":
+            # chron-2: the optional collection tiers — each entry an
+            # object carrying `type` + `kinds` (+ `members` past the
+            # root); the LINT owns the full closed vocabulary, this is
+            # the raw-read backstop (the walk reads these keys).
+            tiers = value.get("collections")
+            if isinstance(tiers, list):
+                for index, tier in enumerate(tiers):
+                    if not isinstance(tier, Mapping):
+                        raise WorldgenError(
+                            "worldgen.chronicle.collections entries must "
+                            "be objects (the tier vocabulary: type | kinds "
+                            "| members)"
+                        )
+                    for key in ("type", "kinds") + (
+                        ("members",) if index else ()
+                    ):
+                        if key not in tier:
+                            raise WorldgenError(
+                                f"worldgen.chronicle.collections[{index}] "
+                                f"is missing the {key!r} key (the lint owns "
+                                "the full contract)"
+                            )
         for key in _REQUIRED.get(block, ()):
             if key not in value:
                 raise WorldgenError(
@@ -318,6 +370,27 @@ class ResolvedClaim:
     @property
     def refused(self) -> bool:
         return self.outcome == "slot_conflict"
+
+
+@dataclass(frozen=True, slots=True)
+class HistoryDraw:
+    """One drawn pre-PC history event, the DF legends shape (chron-2):
+    the pass-1 draw (kind, macro-year, hook tag), the participants (two
+    distinct region ids — the run's ROOT ANCHOR's draw, inherited by the
+    members: the DF collection's role fields; an independent's own),
+    the place (one site index, per event — the DF `site_id`), and the
+    walk's answers: the collection tier's pack-declared type (None =
+    independent) and the cause parent (the DRAFT index it chains to:
+    0 = world_formed, i+1 = history event i — L7, the chain recorded
+    at draw time)."""
+
+    kind: str
+    year: int
+    tag: str
+    participants: tuple[str, str]
+    place: int
+    collection: str | None
+    parent: int
 
 
 # -- the passes (each a focused algorithm; drawing passes own a stream) ------
@@ -550,20 +623,100 @@ def _pass_states(
     return tuple(regions), frozenset(chosen)
 
 
+def _walk_collections(
+    kinds: Sequence[str],
+    tiers: Sequence[Mapping[str, Any]] | None,
+) -> tuple[list[str | None], list[int], list[int]]:
+    """Group the year-sorted kinds into collection runs (chron-2, the
+    DF `event_collections` tree over the single-parent cause chain).
+    ZERO DRAWS — a pure function of the drawn kinds and the pack's
+    declaration (root tier first). A run opens at a root-tier kind;
+    the following events join while their kinds match a NESTED tier
+    (searched from tier 1 up, the first match) and that tier's member
+    count is under its cap; anything else — a root kind, an
+    unaffiliated kind, a capped tier — CLOSES the run, and the closing
+    event re-processes fresh (a root kind opens the next run, an
+    unaffiliated kind goes independent). Returns per event: the
+    collection tier's TYPE (None = independent), the assigned TIER
+    index (-1 = independent), and the cause parent in HISTORY index
+    space (-1 = world_formed) — a member chains to its nearest
+    preceding STRICTLY-lower-tier event in the run (the anchor is
+    tier 0, always found), a top-level event to the previous
+    top-level event (never a run member: the sagas chain, not the
+    episodes)."""
+
+    n = len(kinds)
+    collection: list[str | None] = [None] * n
+    tier_of: list[int] = [-1] * n
+    parent: list[int] = [-1] * n
+    if tiers is None:
+        # the flat form (no vocabulary declared): every event
+        # top-level, the linear chain — the iter-86 law preserved.
+        for i in range(n):
+            parent[i] = i - 1
+        return collection, tier_of, parent
+    root_kinds = frozenset(tiers[0]["kinds"])
+    nested = tuple(
+        (t, frozenset(tiers[t]["kinds"])) for t in range(1, len(tiers))
+    )
+    last_top = -1
+    i = 0
+    while i < n:
+        if kinds[i] in root_kinds:
+            tier_of[i] = 0
+            collection[i] = str(tiers[0]["type"])
+            parent[i] = last_top
+            last_top = i
+            counts: dict[int, int] = {}
+            j = i + 1
+            while j < n:
+                member_tier = next(
+                    (t for t, k in nested if kinds[j] in k), None
+                )
+                if member_tier is None:
+                    break
+                if counts.get(member_tier, 0) >= int(tiers[member_tier]["members"]):
+                    break
+                counts[member_tier] = counts.get(member_tier, 0) + 1
+                tier_of[j] = member_tier
+                collection[j] = str(tiers[member_tier]["type"])
+                parent[j] = next(
+                    k for k in range(j - 1, i - 1, -1)
+                    if tier_of[k] < member_tier
+                )
+                j += 1
+            i = j
+        else:
+            parent[i] = last_top
+            last_top = i
+            i += 1
+    return collection, tier_of, parent
+
+
 def _pass_chronicle(
-    bank: RngBank, config: Mapping[str, Any]
-) -> tuple[tuple[str, int, str], ...]:
-    """The chronicle draws (the Azgaar chronology shape): per history
-    event a macro-year in [1, years], a history kind, and a hook tag
-    from the pack-declared director tags this genesis may seed. Drawn
-    in index order, EMITTED in ascending year (log order = chronology
-    order — the INV-2 output discipline). `events_max` counts the
-    WHOLE genesis: event 0 is world_formed, so history draws
-    events_max - 1."""
+    bank: RngBank, config: Mapping[str, Any], model: WorldModel,
+) -> tuple[HistoryDraw, ...]:
+    """The chronicle draws (the Azgaar chronology shape + the DF
+    legends event shape, chron-2): TWO passes over the one
+    `worldgen:chronicle` stream. Pass 1 draws exactly the depth-5
+    triple per event (year, kind, hook tag) in index order — those
+    stream positions are FROZEN (the murmur's pre-seed corpus pins
+    ride them; re-tuning the shape may not move the drawn content),
+    then sorts by year (log order = chronology order — the INV-2
+    output discipline). The WALK groups the sorted kinds into
+    collections per the pack-declared tier vocabulary — zero draws, a
+    pure function of the drawn kinds and the declaration. Pass 2
+    draws the DF legends shape: per top-level event (an anchor or an
+    independent) TWO DISTINCT regions (the offset draw — always
+    distinct, always two draws; the members INHERIT the root anchor's
+    pair, the DF collection's role fields), per event ONE site (the
+    place). `events_max` counts the WHOLE genesis: event 0 is
+    world_formed, so history draws events_max - 1."""
     chronicle = config["chronicle"]
     years = int(chronicle["years"])
     events_max = int(chronicle["events_max"])
     hook_tags = list(chronicle["hooks"])
+    tiers = chronicle.get("collections")
     history_count = max(0, events_max - 1)
     drawn: list[tuple[int, str, str]] = []
     with bank.assure(worldgen_stream_name("chronicle")):
@@ -572,8 +725,44 @@ def _pass_chronicle(
             kind = HISTORY_KINDS[bank.randint(0, len(HISTORY_KINDS) - 1)]
             tag = hook_tags[bank.randint(0, len(hook_tags) - 1)]
             drawn.append((year, kind, tag))
-    drawn.sort(key=lambda item: (item[0],))
-    return tuple((kind, year, tag) for year, kind, tag in drawn)
+        drawn.sort(key=lambda item: (item[0],))
+        collection, tier, parent = _walk_collections(
+            [kind for _year, kind, _tag in drawn], tiers
+        )
+        regions = sorted(set(model.regions))
+        if len(regions) < 2:
+            raise WorldgenError(
+                "the chronicle's history events need two distinct "
+                f"regions for their participants — the states pass drew "
+                f"{len(regions)} (states.capitals >= 2, the DF war shape; "
+                "the lint owns the full contract)"
+            )
+        site_count = len(model.sites)
+        history: list[HistoryDraw] = []
+        for index, (year, kind, tag) in enumerate(drawn):
+            if tier[index] <= 0:  # an anchor (0) or an independent (-1)
+                first = bank.randint(0, len(regions) - 1)
+                second = (
+                    first + 1 + bank.randint(0, len(regions) - 2)
+                ) % len(regions)
+                pair = (regions[first], regions[second])
+            else:
+                # the members inherit the run's ROOT anchor's pair —
+                # the DF collection's role fields (the anchor precedes
+                # its members in the sorted order, so the pair is drawn)
+                anchor = next(
+                    a for a in range(index - 1, -1, -1) if tier[a] == 0
+                )
+                pair = history[anchor].participants
+            history.append(
+                HistoryDraw(
+                    kind=kind, year=year, tag=tag, participants=pair,
+                    place=bank.randint(0, site_count - 1),
+                    collection=collection[index],
+                    parent=parent[index] + 1,  # draft space: 0 = world_formed
+                )
+            )
+    return tuple(history)
 
 
 # -- the one door --------------------------------------------------------------
@@ -582,23 +771,29 @@ def _pass_chronicle(
 def genesis(
     bank: RngBank, rules: Mapping[str, Any], events: Sequence[EventRecord],
     seed: int,
-) -> tuple[WorldModel | None, tuple[EventDraft, ...]]:
+) -> tuple[WorldModel | None, tuple[EventDraft, ...], tuple[int, ...]]:
     """The one door the loop calls at open time: generate the world from
     the seed, validate the pack's claims against the committed log
-    through the claim gate, and build the genesis drafts. An UNARMED
-    pack (no `worldgen` block) answers `(None, ())` BEFORE any stream
+    through the claim gate, and build the genesis drafts with their
+    PARENT MAP (draft indices into the drafts tuple, -1 = the run-start
+    world_formed — chron-2's L7 law: the loop resolves each parent into
+    the writer's own event id at commit time). An UNARMED
+    pack (no `worldgen` block) answers `(None, (), ())` BEFORE any stream
     is touched — the 68a pattern; the v0.1 bytes are untouched by
     construction. The armed arm's corpus price is the genesis events
     alone: the worldgen streams are isolated from the substantive canon
     checks (the family law), so the run's canon draws never move."""
     config = rules.get(WORLDGEN_BLOCK)
     if config is None:
-        return None, ()
+        return None, (), ()
     _require_config(config)
     model = generate_world(bank, config)
     claims = resolve_claims(events, model, config["claims"])
-    history = _pass_chronicle(bank, config)
-    return model, genesis_drafts(model, claims, config, history, rules, seed)
+    history = _pass_chronicle(bank, config, model)
+    drafts, parents = genesis_drafts(
+        model, claims, config, history, rules, seed
+    )
+    return model, drafts, parents
 
 
 def generate_world(bank: RngBank, config: Mapping[str, Any]) -> WorldModel:
@@ -670,22 +865,28 @@ def genesis_drafts(
     model: WorldModel,
     claims: Sequence[ResolvedClaim],
     config: Mapping[str, Any],
-    history: Sequence[tuple[str, int, str]],
+    history: Sequence[HistoryDraw],
     rules: Mapping[str, Any],
     seed: int,
-) -> tuple[EventDraft, ...]:
-    """Build the pre-PC genesis events. Event 0 = `world_formed`: the
-    map's shape in the outcome + the COMMIT verdicts' claims as canon
-    births (`StateChange(location, slot, None -> value)`) + the refused
-    claims with their cause chains (both keys present only when
-    non-empty — the drifted_from law). Then the history events in
-    ascending macro-year: `{kind, year}` outcomes, the drawn hook tags,
-    NO knowledge records (the DF discipline: history is canon-dense,
-    epistemology-empty). Importance rides the pack's own rule
-    (`pack_importance` — one rule for action events and world events).
-    The drafts carry `cause: None` — the loop chains them
-    event-to-event as it commits (the `_react` pattern), the first
-    committed event of the run being its run-start event."""
+) -> tuple[tuple[EventDraft, ...], tuple[int, ...]]:
+    """Build the pre-PC genesis events + their cause parent map.
+    Event 0 = `world_formed`: the map's shape in the outcome + the
+    COMMIT verdicts' claims as canon births (`StateChange(location,
+    slot, None -> value)`) + the refused claims with their cause chains
+    (both keys present only when non-empty — the drifted_from law).
+    Then the history events in ascending macro-year — the DF legends
+    shape (`outcome: {kind, year, participants, places}` + `collection`
+    when grouped; the participants/places ride canon as LISTS, the
+    tracery value-rendering law joins them at render time), the drawn
+    hook tags, NO knowledge records (the DF discipline: history is
+    canon-dense, epistemology-empty). Importance rides the pack's own
+    rule (`pack_importance` — one rule for action events and world
+    events). The CAUSE is the chron-2 law (L7 — the chain visible at
+    record time): the drafts carry `cause: None` and the returned
+    PARENT MAP (draft indices, -1 = the run-start world_formed)
+    carries the semantic tree — the loop resolves the parents through
+    the writer's own ids as it commits (the id law stays the writer's
+    single owner, the chain the worldgen's semantic one)."""
     event_type = str(config["chronicle"]["event_type"])
     committed = [claim for claim in claims if claim.outcome == COMMIT]
     refused = [claim for claim in claims if claim.refused]
@@ -736,17 +937,26 @@ def genesis_drafts(
             provenance={"seed": seed, "worldgen": True},
         )
     ]
-    for kind, year, tag in history:
+    parents: list[int] = [-1]
+    for draw in history:
+        history_outcome: dict[str, Any] = {
+            "kind": draw.kind,
+            "year": draw.year,
+            "participants": list(draw.participants),
+            "places": [draw.place],
+        }
+        if draw.collection is not None:
+            history_outcome["collection"] = draw.collection
         drafts.append(
             EventDraft(
                 t=0,
                 type=event_type,
                 actor=WORLD,
                 cause=None,
-                outcome={"kind": kind, "year": year},
+                outcome=history_outcome,
                 knowledge=(),
                 state_changes=(),
-                hooks=(tag,),
+                hooks=(draw.tag,),
                 importance=pack_importance(
                     rules, set(), irreversible=0, hooks=1,
                     event_type=event_type,
@@ -754,4 +964,5 @@ def genesis_drafts(
                 provenance={"seed": seed, "worldgen": True},
             )
         )
-    return tuple(drafts)
+        parents.append(draw.parent)
+    return tuple(drafts), tuple(parents)

@@ -13,6 +13,56 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-87 · 2026-09-10 · chron2 — the history bridge (W1's second,
+D-116's wave order; 16 files — 4 code + 2 pack data + 3 test files
+(the T1 fixture re-pin among them) + 7 doc sync: the mechanism + the
+pack migration + the lint widening + the pins + the doc sync are one
+family, the iter-75/83/86 footprint; AGENTS §2.3: 16 > 5-6, the
+objective scope noted here)
+- core/worldgen.py: the DF legends shape — every history event's
+  outcome gains `participants` (two DISTINCT regions, the offset
+  pair draw) + `places` (one site per event); the walk (`_walk_-
+collections`, DRAW-FREE — a pure function of the year-sorted kinds +
+  the pack's `chronicle.collections` tier declaration) groups the
+  runs: the root-kind event anchors, the nested-kind events join at
+  their first matching tier under the member caps, anything else
+  closes + re-processes; the members INHERIT the anchor's pair (the
+  DF collection's role fields); the PARENT MAP (draft indices, -1 =
+  world_formed) — a member chains to its nearest lower-tier
+  predecessor, a top-level event to the previous top-level (the flat
+  form the linear chain); genesis() → (model, drafts, parents).
+- core/loop.py: open() resolves the parents through the WRITER'S
+  OWN ids at commit (the id law single-owner — the drafts predict
+  nothing). core/pack.py: the lint widening — the collections'
+  closed vocabulary (≥ 2 tiers, the root positional key set, the
+  kinds ⊆ HISTORY_KINDS, the types unique, the caps ≥ 1), capitals
+  ≥ 2 (the participants' two sides), the template closure at
+  ALTERNATIVE granularity (participants/places unconditional,
+  collection when declared), RESERVED_CLAIM_SLOTS += the history
+  outcome keys (`year` the branch fake). render/tracery.py:
+  `_render_value` — lists join `', '`, never the host repr (D-120's
+  law generalized to the chronicle side).
+- content: rules.json chronicle.collections = feud → quarrel (the
+  tavern-scale war→battle); templates.json the history arm's three
+  optional clauses. +11 tests (the DF shape, the pass-1 freeze, the
+  walk + the cap + the flat form, the cause tree in the committed
+  log + the fold replay, the tier render, the lint refusals, the
+  reserved family, the backstop arms, the tracery list-join) —
+  1406→1417+1 green, ruff clean (3.12.14, the env pin; seeds
+  0/42/unset spot-checked). Corpus price, measured: the pass-1
+  stream positions FROZEN (the years/kinds/hooks verbatim — the
+  murmur's pre-seed pins stable), the event count unchanged (no id
+  shift), zero corpus fixture re-pins; the T1 fixture the ONE re-pin
+  (4 outcome lines, git-verified).
+- docs: DECISIONS D-121, TASKS chron-2 done, phases.md §5 the
+  chronicle pass's chron-2 form, EVENT_SCHEMA §11 the single-parent
+  collection note, README the narrative sentence + the map line,
+  STATUS re-pinned (the queue: place-1 next, the W1 wave order) +
+  the KI#80/81 deletions (AGENTS §5). iter-78 evicted (verified
+  against git in this edit); 10 held. Caps: STATUS 690 / TASKS
+  1019 / DECISIONS 86 lines (57 rows) — over-cap on substance
+  (§6.1, the D-095..D-120 precedent), trim at the phase-5→6 gate.
+---
 iter-86 · 2026-09-10 · bridge1 — the scene-line projection pipe (W1's
 head, D-116 (1) verbatim; 11 files — 2 code + 1 pack data + 2 test
 files + 6 doc sync: the pipe + the pack migration + the lint pair +
@@ -311,33 +361,5 @@ iter-70/73 scope pattern, AGENTS §2.3 noted here)
   TASKS 835 / DECISIONS 78 lines (49 rows) / TECH_NOTES 695 / phases
   693 — over-cap on substance (§6.1, the D-095..D-109 precedent),
   trim at the phase-5→6 gate.
----
-iter-78 · 2026-09-09 · meta-land — the owner's ultimate-variant text
-re-verified claim-by-claim against HEAD `cb91cbe` and landed (3
-files: STATUS header + Next-step line, this log, the TASKS iter-77
-routed section strengthened; the iter-19/34/71/77 owner-requested
-precedent; doc-only streak 2 of 2, both owner-requested — iter-79
-must be functional)
-- Verified TRUE (every claim of the text): the fail-open
-  `not_equals` (`predicates._prop` + `onaction._gate_passes`); lint
-  covers 'of', `path` is string-only; content/ carries zero
-  `not_equals`; the audit except-branch is deliberate design
-  (try/else REQUIRES except, the re-raise never masks); TECH_NOTES
-  has no §12; the five sandbox adaptations un-routed; the
-  session-prefix law already AGENTS §2.2 (iter-19/34/71/77).
-- Three findings landed into the TASKS rows: (1) DIRECTOR_SPEC §3's
-  "missing prop answers False" was born iter-40 WITH the prop leaf
-  — the spec pins fail-closed; the `not_equals` exception is a
-  37-iteration code-vs-spec drift → the candidate is spec
-  RESTORATION (ACCEPT: §3 unchanged, §3c wording + 2 docstrings +
-  2 existing pins flip; REJECT: §3 documents the exception); (2)
-  the Rule-9 census is ~19 citations (STATUS x3, TASKS x1,
-  TEST_PLAN x8, TECH_NOTES x2, DECISIONS x5), not iter-77's 4x —
-  the AGENTS §7 one-liner resolves all; (3) the owner's ignore-list
-  landed as the routed section's re-raise guard. pred-contract was
-  already routed — the text missed it; the TASKS collapse + the
-  rng.py/of corrections were already iter-77's. 1323+1 green under
-  seeds 0/42/unset, ruff clean. iter-69b evicted (verified in this
-  edit); 10 after.
 ---
 (end of log — cap 10; pre-trim history lives in git)

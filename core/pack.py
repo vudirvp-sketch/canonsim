@@ -62,6 +62,7 @@ from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
 from core.worldgen import (
     CLAIM_FIELDS,
     FIELD_MAX,
+    HISTORY_KINDS,
     RESERVED_CLAIM_SLOTS,
     WORLDGEN_BLOCK,
 )
@@ -2722,7 +2723,17 @@ class _Lint:
         are dead data); REACHABILITY (L1) — every armed claim names at
         least one live consumer (a template line binding the slot, a
         declared director hook reading the pair, or the scene line
-        declaring the slot — bridge-1's brief-side consumer arm)."""
+        declaring the slot — bridge-1's brief-side consumer arm). The
+        chron-2 laws (the history bridge): the chronicle's optional
+        `collections` is the PACK-DECLARED tier vocabulary (the DF
+        event_collections donor shape, L10 — at least two tiers, the
+        list order is the hierarchy, the kinds ⊆ the closed
+        HISTORY_KINDS, the types unique, the nested caps ≥ 1) and the
+        chronicle line's every alternative binds the DF legends fields
+        (`participants`/`places` unconditionally, `collection` when
+        the vocabulary is declared — the L1 law at alternative
+        granularity); states.capitals ≥ 2 (the participants' two
+        distinct regions)."""
         rules = self._data["rules.json"]
         config = rules.get(WORLDGEN_BLOCK)
         if config is None:
@@ -2849,9 +2860,11 @@ class _Lint:
             f"{where}.states.capitals must be an integer",
         )
         _require(
-            1 <= states_cfg["capitals"] <= site_count,
-            f"{where}.states.capitals must be 1..{site_count} (one "
-            "capital per generated site at most)",
+            2 <= states_cfg["capitals"] <= site_count,
+            f"{where}.states.capitals must be 2..{site_count} (the history "
+            "events' participants need two distinct regions — the DF war "
+            "shape's two sides; a one-region world cannot arm the "
+            "chronicle)",
         )
 
         chronicle_cfg = config["chronicle"]
@@ -2860,12 +2873,13 @@ class _Lint:
             f"{where}.chronicle must be an object",
         )
         unknown = sorted(
-            set(chronicle_cfg) - {"years", "events_max", "event_type", "hooks"}
+            set(chronicle_cfg) - {"years", "events_max", "event_type", "hooks", "collections"}
         )
         if unknown:
             raise PackError(
                 f"{where}.chronicle: unknown keys {unknown} (the closed "
-                "vocabulary: years | events_max | event_type | hooks)"
+                "vocabulary: years | events_max | event_type | hooks | "
+                "collections)"
             )
         for key in ("years", "events_max"):
             _require(
@@ -2898,6 +2912,100 @@ class _Lint:
                 "know would never release (dead data; declare it in "
                 "director.hooks first)"
             )
+
+        # chron-2, the PACK-DECLARED collection vocabulary (the DF
+        # event_collections donor shape, L10: JSON + lint, never string
+        # languages). The list order IS the hierarchy — the root tier
+        # anchors (type + kinds), each nested tier carries its member
+        # cap. HISTORY_KINDS stays closed: the kinds the tiers may name
+        # are the engine's four verbs, the collection types are the
+        # pack's own layer (INV-3).
+        collections = chronicle_cfg.get("collections")
+        if collections is not None:
+            _require(
+                isinstance(collections, list) and len(collections) >= 2,
+                f"{where}.chronicle.collections must be a list of at least "
+                "two tiers (the root + a member tier — a single tier "
+                "labels every event without grouping it, dead "
+                "vocabulary; omit the key for the flat form)",
+            )
+            tier_types: set[str] = set()
+            for index, tier in enumerate(collections):
+                spot = f"{where}.chronicle.collections[{index}]"
+                _require(
+                    isinstance(tier, Mapping),
+                    f"{spot}: must be an object",
+                )
+                legal = (
+                    {"type", "kinds"} if index == 0
+                    else {"type", "kinds", "members"}
+                )
+                unknown = sorted(set(tier) - legal)
+                if unknown:
+                    raise PackError(
+                        f"{spot}: unknown keys {unknown} (the tier "
+                        f"vocabulary: {sorted(legal)} — the list order is "
+                        "the hierarchy, the root first; the root anchors, "
+                        "the nested tiers carry the member caps)"
+                    )
+                tier_type = tier.get("type")
+                _require(
+                    isinstance(tier_type, str) and tier_type.strip(),
+                    f"{spot}.type must be a non-empty string",
+                )
+                _require(
+                    tier_type not in tier_types,
+                    f"{spot}.type {tier_type!r} is declared twice (the "
+                    "tier types are the collection vocabulary — unique)",
+                )
+                tier_types.add(tier_type)
+                kinds = tier.get("kinds")
+                _require(
+                    isinstance(kinds, list) and kinds
+                    and all(isinstance(kind, str) for kind in kinds)
+                    and len(set(kinds)) == len(kinds),
+                    f"{spot}.kinds must be a non-empty list of unique "
+                    "strings",
+                )
+                unknown_kinds = sorted(set(kinds) - set(HISTORY_KINDS))
+                if unknown_kinds:
+                    raise PackError(
+                        f"{spot}.kinds names {unknown_kinds} — not in the "
+                        f"closed history vocabulary {list(HISTORY_KINDS)} "
+                        "(HISTORY_KINDS stays closed; the collection types "
+                        "are the pack's layer, the kinds are the engine's)"
+                    )
+                if index > 0:
+                    _require(
+                        _is_int(tier.get("members")) and tier["members"] >= 1,
+                        f"{spot}.members must be an integer >= 1 (the "
+                        "tier's member cap within one collection)",
+                    )
+
+        # chron-2, the template closure (EVENT_SCHEMA §11 — the genesis
+        # event types are pack vocabulary, the line is the fields'
+        # consumer): every alternative of the chronicle line binds the
+        # DF legends fields (a shuffle pick that drops them leaves canon
+        # data unrendered — the L1 law at alternative granularity), and
+        # the collection slot when the tier vocabulary is declared (the
+        # tier types would be dead data otherwise).
+        line = self._data["templates.json"]["events"][event_type]
+        alternatives = line if isinstance(line, list) else [line]
+        required = ["participants", "places"] + (
+            ["collection"] if collections is not None else []
+        )
+        for index, alternative in enumerate(alternatives):
+            bound = set(_BRACE_SLOT.findall(alternative)) | set(
+                _BRACE_COND.findall(alternative)
+            )
+            missing = [slot for slot in required if slot not in bound]
+            if missing:
+                raise PackError(
+                    f"templates.json events.{event_type}[{index}]: binds "
+                    f"no {{{missing[0]}}} — the history events carry "
+                    "the DF legends shape unconditionally (dead data, the "
+                    "L1 law; the chronicle line is the fields' consumer)"
+                )
 
         claims = config.get("claims")
         _require(
