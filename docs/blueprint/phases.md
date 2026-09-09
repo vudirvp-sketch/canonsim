@@ -684,7 +684,26 @@ knowledge records with observable markers (the actor-held `knows`
 template expanded per present target — the audience stays `actor`;
 additive per INTENT_SCHEMA §7/§10); the read-side twin is the §1
 entity-card block. Spec home when its trigger fires: the GROUP_SPEC
-sketch (`SPECS_BACKLOG.md`).
+sketch (`SPECS_BACKLOG.md`). **Landed iter-93 as depth-7 (D-127 —
+after depth-6's one-id actor, iter-92): `core/groups.py` the
+write-side LOD's single owner. The `member_of` door (D-020's
+pair-relation): the projection seeds NOTHING (absence IS None, the
+D-054 slot shape) — the condensation births it, the fold validates
+every join/leave/transfer; the depth-6 walk keeps its static-list
+read (the iter-92 law). The population tier: one aggregate event per
+cold group per macro crossing (actor = the group id, the unborn
+population's count under `population`, draw-free — the cardinality
+the engine can honestly derive; domain counts like the `band_raid`
+example ride future pack grammar, never engine arithmetic). The
+condensation on crossing the warm transition (warm ring ∪ active
+scene, detected at the zone recomputations — beats AND crossings,
+the load state the origin): ONE event per group with the un-born
+members' births (the D-054 shape: already-holders skipped) plus the
+write-once tombstone marker (`condensed`), after which the
+macro-ticks stay silent (the derived store, INV-5). Per-group opt-in
+(the 68a pattern): the record's `macro_event`/`condense_event`
+(template-closure linted, memberless refused — dead data); the
+runtime join/leave pack grammar stays st-3's own row.**
 
 **Research intake 2 (iter-66a, D-096): the depth-phase design material
 — recorded here, drafted into TASKS only at the phase-5 opening.**

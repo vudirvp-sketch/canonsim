@@ -544,6 +544,19 @@ the `faction:<group>:<kind>` roll stream (the D-079 family's fifth
 member, engine-2's per-entry isolation); the committed pack unarmed —
 zero entries, zero draws, the v0.1 bytes (corpus price zero by
 construction, zero re-pins).
+depth-7 groups & simulation LOD landed iter-93 (D-127 — the write
+side of the LOD ladder at group scale): `core/groups.py` the
+`member_of` state door (D-020's pair-relation — no fold seed, absence
+IS None, the D-054 slot shape), the population tier (one aggregate
+event per cold group per macro crossing — actor = the group id, the
+unborn population's count, draw-free), the condensation on crossing
+the warm transition (ONE event per group: the un-born members' canon
+births + the write-once tombstone that silences the macro-ticks —
+detected at the zone recomputations, beats AND crossings, the load
+state the origin); the per-group opt-in (`macro_event`/
+`condense_event`, template-closure linted, memberless refused as
+dead data) — without them depth-6's intent-door actor alone; the
+committed pack unarmed (zero corpus price, zero re-pins).
 Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus
@@ -551,7 +564,7 @@ F1–F6 through the REAL mode-C door, the world-answer law's first live
 numbers — coverage 34/34, honest 17/36, F3 the guess engine, F6 two
 injections EXECUTED; the heartbeat's first trend row; the transcripts
 re-distilled into `tests/fixtures/deviation_corpus.json` +
-`tests/test_deviation.py`). 1493 tests green, ruff clean.
+`tests/test_deviation.py`). 1516 tests green, ruff clean.
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
@@ -659,6 +672,11 @@ factions with goals: the KeeperRL small formula over the members'
 live per-entity axes, the group entity kind `entities.json::groups`
 acting through the intent door, the `faction:<group>:<kind>` roll
 stream — the D-079 family's fifth member, the anchor-scoped LOD; the
+committed pack unarmed — the 68a pattern); `core/groups.py` iter-93
+(depth-7, D-127 — the write-side LOD at group scale: the `member_of`
+state door, the population tier's macro-tick aggregates, the
+condensation on crossing the warm transition + the write-once
+tombstone, the per-group opt-in `macro_event`/`condense_event`; the
 committed pack unarmed — the 68a pattern); `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
 | `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `df_briefer.py` bg-3 (the POV mini-briefer + reverse validation over the sink; `docs/TECH_NOTES.md` §3.3) · `profile_harness.py` iter-30 · `chronicle.py` iter-64 (the mode-F offline chronicler — read_ndjson_auto intake behind the count gate, the parquet pair + the sqlite summary via the stdlib ladder, the content-derived manifest; `[chronicler]` extra, D-093, `docs/TEST_PLAN.md` §7) · `checkpoint.py` iter-80 (depth-4 fold checkpoints — the derived snapshot + event-index offset over one committed log: the pack↔header identity gate, the born-verified re-fold pass, `checkpoint_<offset>.json` + `index.json` the sha256 anchor records under `output/checkpoints/`; `core/checkpoint.py` the mechanism, D-114, `docs/TEST_PLAN.md` §7.1) · `mechanics.py` iter-84 (mech-1, D-118 — the mechanics introspection CLI: matrix/trace/why/blast; the shadow-replay law, INV-2-equal to the runtime; `tests/test_mechanics.py`) · `worldgen_profile.py` iter-89 (geo-1, D-123 — the worldgen timing profile: the site ladder 36→10k over the committed pack's own block, clean + cProfile double-run with the fingerprints compared; the measured numbers in `docs/TECH_NOTES.md` §12) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |

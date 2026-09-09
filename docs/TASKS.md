@@ -97,11 +97,28 @@
   unarmed (the 68a pattern — zero entries, zero draws, the v0.1
   bytes; the arming rides with a future content row). Detail:
   tests/test_factions.py.
-- `depth-7` · groups & simulation LOD — todo (design RATIFIED
-  iter-79, D-112: the iter-11b resolutions — phases.md §5 write-side
-  LOD in the D-056-amended edition + §7 Containers — one id all
-  tiers, macro-clock aggregates, condensation on crossing; the st-3 /
-  st-5 / st-6a dependencies by reference, never duplicated rows).
+- `depth-7` · groups & simulation LOD — **done (iter-93, D-127)**: the
+  write-side LOD at group scale, D-112's ratified resolutions executed
+  — the `member_of` state door (D-020's pair-relation: no fold seed,
+  absence IS None — the D-054 slot shape; the fold validates every
+  join/leave/transfer from-value), the population tier
+  (`core/groups.py::macro_tick_drafts`: one aggregate event per cold
+  group per macro crossing, actor = the group id, the unborn
+  population's count under `population` — a live fold read, draw-free),
+  the condensation on crossing the warm transition (ONE event per
+  group: the un-born members' canon births — the D-054 promotion shape
+  at group scale, already-holders skipped — plus the write-once
+  tombstone marker; detected at the zone recomputations, beats AND
+  crossings, the load state the origin), the per-group opt-in (the
+  group record's `macro_event`/`condense_event` — template-closure
+  linted, memberless refused as dead data; without them depth-6's
+  intent-door actor alone — zero re-pins, the depth-6 pinned behaviors
+  pass unchanged); the loop order at the crossing: turn →
+  condensations → aggregates → warm drift → rolls; the unarmed law
+  keeps the one-scene world. +23 tests, 1493→1516+1 green, corpus
+  price zero measured both arms (the inert twin byte-identical seeds
+  42/0/125; the armed delta the tier families alone, the fingerprint
+  equal). Detail: tests/test_groups.py + D-127.
 
 ### iter-77 · meta-analysis routed candidates — LANDED (the owner's
 iter-79 verdict call executed; every row below collapsed per the

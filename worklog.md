@@ -13,6 +13,122 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-93 · 2026-09-10 · gsim1 — depth-7, groups & simulation LOD
+(D-112's ratified resolutions executed — the write side of the LOD
+ladder at group scale, the W2 row after depth-6; 11 files — 3 code
+(groups.py new, pack, loop) + 1 new test file + 7 doc sync: the
+door + the tiers + the lint + the integration are one family, the
+iter-90..93 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
+noted here)
+- core/groups.py (new): the write-side LOD's single owner —
+  `macro_tick_drafts` the population tier (one aggregate event per
+  COLD group per macro crossing, actor = the group id — D-112's one
+  id, the unborn population's count under `population` — the static
+  members whose member_of is still None, a live fold read; no
+  knowledge/state_changes/hooks, DRAW-FREE), `condensation_drafts`
+  the tier transition on crossing the warm transition (ONE event
+  per group: the un-born members' canon births — the D-054
+  promotion shape, already-holders skipped — plus the write-once
+  tombstone marker `condensed`; the load state the origin),
+  `is_condensed` the marker read (the aggregate's gate). The
+  member_of door: NO fold seed (absence IS None, the slot shape);
+  the fold validates every join/leave/transfer; the depth-6 walk
+  keeps its static-list read (the iter-92 law, zero re-pins).
+- core/pack.py: the tier-vocabulary lint — the group record's
+  optional `macro_event`/`condense_event` (both in the template
+  closure, EVENT_SCHEMA §11; memberless refused — dead data, the
+  vacuity law's lint arm). core/loop.py: `_condense_groups` the
+  tier-transition pass FIRST at the beats AND the crossings (the
+  materialization precedes the machinery the members then ride);
+  `_run_macro`'s order — turn → condensations → cold aggregates →
+  warm drift → rolls; both under an armed clock alone (the unarmed
+  one-scene law, the v0.1 bytes).
+- +23 tests (tests/test_groups.py — the units: the aggregate's
+  shape, the tombstone gate, the zone filter, the population's
+  live-fold read; the condensation: the births + the marker, the
+  skip law, the write-once marker, the per-group opt-in; the door:
+  the fold's join/leave/transfer validation, the stale birth loud;
+  the lint refusals, parametrized; the integration: the cold
+  aggregates with the cause chain, the warm/active condensations at
+  the first crossing, the beat's detection arm (cadence beyond the
+  beat interval), the tombstone story with the contrast twin,
+  byte-identical determinism, the both-arms price — the fingerprint
+  EQUAL, the delta the tier families alone, the shared (t, type,
+  actor) sequence unchanged; the inert twin byte-identical over
+  plumbing_smoke + day1_full; the tale's render lines binding
+  {population}/{members}) — 1493→1516+1 green, ruff clean (3.12.14,
+  the env pin; seeds 42 + 0 + 125 spot-checked). Corpus price ZERO
+  by construction: the committed pack declares no groups and no
+  time.macro; the per-group opt-in keeps every depth-6 pinned test
+  UNTOUCHED (zero re-pins, git-verified: no fixture in the diff).
+- docs: DECISIONS D-127, TASKS depth-7 done, phases.md §5 the
+  write-side-LOD landing tag, NAV §1 (the groups module row + the
+  pack/loop extensions), README (the narrative + the code-map row +
+  the count 1493→1516), STATUS re-pinned (the queue: name-1 next,
+  per D-116's wave order) + KI#83 deleted (closed iter-91, two
+  iterations past, the KI#81 precedent) + this file (the order
+  normalized — iter-92 had been appended at the END, newest-first
+  restored; iter-87's missing separator restored). iter-83a evicted
+  here (verified in the same edit); 10 after. Caps: STATUS 863 /
+  TASKS 1072 / DECISIONS 93 lines (63 rows) / phases 860 / README
+  719 — over-cap on substance (§6.1, the D-095..D-127 precedent),
+  trim at the phase-5→6 gate.
+---
+iter-92 · 2026-09-10 · fact1 — depth-6, factions with goals (D-116's
+W2 row after depth-3; 15 files — 6 code/render (factions.py new,
+rng, pack, fold, loop, chronicle) + 2 test (test_factions.py new,
+test_mechanics the future-layer placeholder rename) + 7 doc sync:
+the
+formula + the entity kind + the lint + the walk are one family, the
+iter-90..92 footprint; AGENTS §2.3: 9 > 5-6, the objective scope
+noted here)
+- core/factions.py (new): the factions' single owner —
+  `faction_probability` the KeeperRL small formula (the affected
+  fraction of the membership, per-cent floored, against the pack
+  threshold, ramping to `max_per_beat`; the deadband at-or-below the
+  bar, the vacuity law; pure integer arithmetic), `faction_intents`
+  the goal walk (each member's LIVE `status.<axis>` — D-006, never a
+  stored group score; d100 on the entry's OWN
+  `faction:<group>:<kind>` stream — the D-079 family's FIFTH member,
+  one draw per walk, bar 0 included (the cadence law); a hit rides
+  the front door, actor = the group id — D-112's one id; the
+  requires gates stay silent). core/rng.py: FACTION_PREFIX +
+  `faction_stream_name` (five families).
+- core/pack.py: the `groups` category (OPTIONAL, the 68a pattern —
+  anchor a declared location, members declared npcs, ids unique
+  across categories, closed vocabulary) + the `_factions` lint (after
+  `_urgencies`: axis ∈ rules.states, trigger ≥ 0, threshold 0..99 /
+  max 1..100 — dead data refused, the (group, kind) pair unique,
+  engine-2's twin). core/fold.py: the anchor seeds the projection (an
+  actor's read surface, never a scene body). core/loop.py: the
+  faction walk beside the urgencies at the beats AND the crossings
+  (the anchor scoping the zone — cold factions silent, their
+  population ride depth-7's aggregates). render/chronicle.py: the
+  position fold seeds the anchors ({location} renders for a group).
+- +34 tests (tests/test_factions.py — the formula's integer laws; the
+  lint refusals (groups + entries, parametrized); the walk: the
+  one-id intent, the isolated stream (draw-driven registry), the
+  cadence law at bar 0, the non-holder sit-out, the LOD scoping by
+  the anchor, the silent gates; the integration: the door + the cause
+  chain + `faction_0000` in provenance, byte-identical determinism,
+  the warm/active/cold arms under an armed clock, the tale line; the
+  both-arms price: the fingerprint EQUAL, the delta the muster family
+  ALONE; the inert twin byte-identical over plumbing_smoke +
+  day1_full) — 1459→1493+1 green, ruff clean (3.12.14, the env pin;
+  seeds 42 + 0 + unset spot-checked). ZERO re-pins (git-verified: no
+  fixture in the diff, the committed pack untouched — no groups, no
+  factions, zero draws). tests/test_mechanics.py: the future-layer
+  placeholder renamed factions→guilds — the placeholder WAS the
+  depth-6 block's own name (the law's own lifecycle, D-126).
+- docs: DECISIONS D-126, TASKS depth-6 done, phases.md §5 the P3b
+  landing tag, NAV §1 (the factions row + the rng five-family + the
+  loop/fold/render extensions), README (the narrative + the code-map
+  row + the count 1459→1493), STATUS re-pinned (the queue: depth-7 +
+  name-1 per D-116's wave order) + this file. iter-83 evicted here
+  (verified against git in this edit); 10 after. Caps: STATUS 861 /
+  TASKS 1055 / DECISIONS 92 lines (62 rows) / phases 841 / README
+  701 — over-cap on substance (§6.1, the D-095..D-126 precedent),
+  trim at the phase-5→6 gate.
 iter-91 · 2026-09-10 · lod1 — depth-3, the scene LOD (D-116's W2
 consumer head, the macro clock's FIRST consumer; 16 files — 6 code
 (lod.py new, states, urgencies, loop, macro docstring, pack the
@@ -208,6 +324,7 @@ noted here)
   1031 / DECISIONS 87 lines (58 rows) / phases 775 / README 651 —
   over-cap on substance (§6.1, the D-095..D-122 precedent), trim at
   the phase-5→6 gate.
+---
 iter-87 · 2026-09-10 · chron2 — the history bridge (W1's second,
 D-116's wave order; 16 files — 4 code + 2 pack data + 3 test files
 (the T1 fixture re-pin among them) + 7 doc sync: the mechanism + the
@@ -353,82 +470,5 @@ makes it equal the runtime; the runtime is never instrumented.
   README 627 / DECISIONS 83 lines (54 rows) — over-cap on substance
   (§6.1, the D-095..D-116 precedent), trim at the phase-5→6 gate.
 ---
-iter-83a · 2026-09-09 · audit-fix — the owner's re-check of iter-83
-(the iter-11c precedent): substance VERDICT SOUND — 1392+1 green
-re-verified under seeds 0/42/unset, ruff clean, the D-116 W0
-checklist fully landed, the T1 genesis diff (5 events + the id
-shift) + the murmur-timing pins reproduced; the defects were the
-LANDING COUNTS (KI#80, opened + closed in this edit; 2 files: this
-log + STATUS). Doc-only, no code/fixtures/pins touched.
-- worklog: iter-83's counts corrected vs git — "17 files" → 33
-  (3 code + 2 pack data + 5 fixtures + 18 test files: 1 landing +
-  17 re-pins + 5 doc sync), "14 suites" → the 17 re-pinned files,
-  "10 entries held" → 11 (the missed eviction); iter-82's "9
-  after" → 10; iter-73 (the eviction iter-83 owed) + iter-75 (this
-  entry's own) evicted — 10 held, verified against git in this
-  edit (the KI#68 law).
-- STATUS: the Scope re-counted (`docs/AGENT_NAVIGATION.md` named,
-  17 re-pin suites, 33 files); KI#80 recorded; the audit note in
-  the header; one clause in the FAQ doc-drift entry — the durable
-  law: landing counts are git-verified, never asserted. D-117's
-  own "17 files" left per the append-only law; git owns the count.
-- The suite re-run green AFTER these edits (1392+1, ruff clean);
-  archive: STATUS.md + worklog.md + BASE_COMMIT 21ea6a7.
----
-iter-92 · 2026-09-10 · fact1 — depth-6, factions with goals (D-116's
-W2 row after depth-3; 15 files — 6 code/render (factions.py new,
-rng, pack, fold, loop, chronicle) + 2 test (test_factions.py new,
-test_mechanics the future-layer placeholder rename) + 7 doc sync:
-the
-formula + the entity kind + the lint + the walk are one family, the
-iter-90..92 footprint; AGENTS §2.3: 9 > 5-6, the objective scope
-noted here)
-- core/factions.py (new): the factions' single owner —
-  `faction_probability` the KeeperRL small formula (the affected
-  fraction of the membership, per-cent floored, against the pack
-  threshold, ramping to `max_per_beat`; the deadband at-or-below the
-  bar, the vacuity law; pure integer arithmetic), `faction_intents`
-  the goal walk (each member's LIVE `status.<axis>` — D-006, never a
-  stored group score; d100 on the entry's OWN
-  `faction:<group>:<kind>` stream — the D-079 family's FIFTH member,
-  one draw per walk, bar 0 included (the cadence law); a hit rides
-  the front door, actor = the group id — D-112's one id; the
-  requires gates stay silent). core/rng.py: FACTION_PREFIX +
-  `faction_stream_name` (five families).
-- core/pack.py: the `groups` category (OPTIONAL, the 68a pattern —
-  anchor a declared location, members declared npcs, ids unique
-  across categories, closed vocabulary) + the `_factions` lint (after
-  `_urgencies`: axis ∈ rules.states, trigger ≥ 0, threshold 0..99 /
-  max 1..100 — dead data refused, the (group, kind) pair unique,
-  engine-2's twin). core/fold.py: the anchor seeds the projection (an
-  actor's read surface, never a scene body). core/loop.py: the
-  faction walk beside the urgencies at the beats AND the crossings
-  (the anchor scoping the zone — cold factions silent, their
-  population ride depth-7's aggregates). render/chronicle.py: the
-  position fold seeds the anchors ({location} renders for a group).
-- +34 tests (tests/test_factions.py — the formula's integer laws; the
-  lint refusals (groups + entries, parametrized); the walk: the
-  one-id intent, the isolated stream (draw-driven registry), the
-  cadence law at bar 0, the non-holder sit-out, the LOD scoping by
-  the anchor, the silent gates; the integration: the door + the cause
-  chain + `faction_0000` in provenance, byte-identical determinism,
-  the warm/active/cold arms under an armed clock, the tale line; the
-  both-arms price: the fingerprint EQUAL, the delta the muster family
-  ALONE; the inert twin byte-identical over plumbing_smoke +
-  day1_full) — 1459→1493+1 green, ruff clean (3.12.14, the env pin;
-  seeds 42 + 0 + unset spot-checked). ZERO re-pins (git-verified: no
-  fixture in the diff, the committed pack untouched — no groups, no
-  factions, zero draws). tests/test_mechanics.py: the future-layer
-  placeholder renamed factions→guilds — the placeholder WAS the
-  depth-6 block's own name (the law's own lifecycle, D-126).
-- docs: DECISIONS D-126, TASKS depth-6 done, phases.md §5 the P3b
-  landing tag, NAV §1 (the factions row + the rng five-family + the
-  loop/fold/render extensions), README (the narrative + the code-map
-  row + the count 1459→1493), STATUS re-pinned (the queue: depth-7 +
-  name-1 per D-116's wave order) + this file. iter-83 evicted here
-  (verified against git in this edit); 10 after. Caps: STATUS 861 /
-  TASKS 1055 / DECISIONS 92 lines (62 rows) / phases 841 / README
-  701 — over-cap on substance (§6.1, the D-095..D-126 precedent),
-  trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

@@ -47,6 +47,13 @@ count on the aggregate surface), the warm ring's NPCs tick at the
 crossing (drift + goal rolls, `core/lod.py` owns the zones), and the
 beats scope to the ACTIVE scene alone; the unarmed law keeps the
 one-scene world (the whole simulation per-beat, the v0.1 bytes).
+depth-7: the write-side LOD at group scale rides the same discipline
+(`core/groups.py`) — the condensation (a group's anchor crossing into
+the warm/active zones births its members' canon `member_of`, the
+tombstone marker stopping the group's population-tier macro-ticks)
+and the cold background's macro-tick aggregates (one cardinality
+event per cold group per crossing, actor = the group id — D-112's
+one id, all tiers).
 """
 
 from __future__ import annotations
@@ -69,6 +76,7 @@ from core.director import Director, policy_from_rules
 from core.echo import echo_scores
 from core.factions import faction_intents
 from core.fold import Projection, apply_event, initial_projection
+from core.groups import condensation_drafts, macro_tick_drafts
 from core.ids import sequence_id
 from core.intent import (
     ECHO_TEST,
@@ -777,13 +785,41 @@ class Simulator:
                 return candidate
         raise AssertionError("unreachable: next-day offsets always exceed `after`")
 
+    def _condense_groups(self, zones: SceneZones, tick: int) -> None:
+        """depth-7's tier-transition pass (one law, two ride points —
+        the zone recomputations at the beats AND the crossings): the
+        groups whose ANCHOR crossed into the warm ring or the active
+        scene (the PC's approach; the partition follows the reader)
+        and are not yet condensed materialize — ONE event per group
+        carrying the un-born members' canon `member_of` births + the
+        tombstone marker (`core/groups.py` owns the drafts; the
+        materialization precedes every tick the members then ride —
+        the beat machinery below, the warm ring's crossing cadence).
+        Chained to the writer's last id (the chronological-chain law)
+        and committed through the canon door (INV-1). The load state
+        counts as the origin: a group warm/active at the FIRST
+        computation condenses immediately — the PC walks into a
+        materialized world (the DF precedent)."""
+        for draft in condensation_drafts(
+            self._pack, self._projection, tick,
+            locations=(*zones.warm, zones.active),
+        ):
+            self._commit(replace(
+                draft, cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            ))
+
     def _run_beat(self, beat_tick: int, entry_tick: int) -> None:
-        """One clock-crossing beat (iter-4): states decay passes, NPC
+        """One clock-crossing beat (iter-4): the depth-7 condensation
+        pass (under an armed clock — the tier transitions detected at
+        this zone computation materialize BEFORE the machinery the
+        members then ride), states decay passes, NPC
         urgencies roll, faction goals roll (depth-6), and the director
         releases one seeded hook. Each piece rides the commit door —
         the world never changes outside an event (INV-1). Order
-        matters: decay fires first (so the urgency sees the new
-        status), urgencies second (so the director sees their effects
+        matters: the condensation first (the members are canon before
+        they tick), decay second (so the urgency sees the new
+        status), urgencies third (so the director sees their effects
         in entropy), the director last.
 
         Decay events are committed at ``beat_tick`` (their canonical
@@ -806,6 +842,14 @@ class Simulator:
         locations: Collection[str] | None = (
             None if zones is None else (zones.active,)
         )
+        # 0) depth-7 (the write-side LOD): the condensation pass —
+        # under an armed clock the zone recomputation detects the
+        # tier transitions FIRST (the members' canon births precede
+        # the beat machinery they then ride); the unarmed law has no
+        # tiers at all (the one-scene world — no zones, no
+        # condensation, the v0.1 bytes).
+        if zones is not None:
+            self._condense_groups(zones, beat_tick)
         # 1) states decay — every NPC whose status.* deltas are non-zero
         for draft in decay_drafts(
             self._pack, self._projection, self._last_change, beat_tick,
@@ -899,7 +943,17 @@ class Simulator:
         hooks (the director boundary is the consumers' own rows,
         never the clock's); importance rides the pack's own rule (the
         story-critical listing decides tale visibility — the tune-1
-        split)."""
+        split). depth-7: the write-side LOD rides the crossing in
+        order — the CONDENSATIONS first (the groups whose anchor
+        crossed into the warm ring or the active scene birth their
+        members' canon `member_of`, the materialization preceding
+        every warm tick the members then ride), then the COLD
+        background's MACRO-TICK AGGREGATES (one cardinality event per
+        cold uncondensed group, actor = the group id, chained to the
+        turn — the population tier's only per-group representation;
+        the tombstone silences a condensed group's ticks for good);
+        both draw-free (the counts and the births are pure fold
+        reads, the fingerprint never sees a tier event)."""
         zones = scene_zones(self._pack, self._projection)
         draft = macro_turn_draft(
             self._pack.rules, tick,
@@ -916,6 +970,23 @@ class Simulator:
                 provenance={"seed": self._seed},
             )
         )
+        # depth-7 (the write-side LOD): the tier transitions first —
+        # the condensations ride the crossing's own event, before the
+        # warm ring's machinery (the members materialize, then stir)
+        self._condense_groups(zones, tick)
+        # depth-7: the cold background's macro-tick aggregates — one
+        # cardinality event per cold uncondensed group, chained to the
+        # turn (the consumer rides the clock's own event, the drift's
+        # precedent); the tombstone gates a realized group silent
+        for tick_draft in macro_tick_drafts(
+            self._pack, self._projection, tick, locations=zones.cold,
+        ):
+            self._commit(
+                replace(
+                    tick_draft, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
         # the warm ring's status drift, chained to the turn (the
         # consumer rides the clock's own event)
         for drift in decay_drafts(

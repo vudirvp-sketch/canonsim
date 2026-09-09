@@ -543,8 +543,12 @@ class _Lint:
         # depth-6: the group record's contract — an anchor on the exits
         # graph (a vertex, the spatial model's law) and a static
         # member list over declared npcs (the pack's initial
-        # condition; the runtime `member_of` state door is depth-7's
-        # row, never this lint's).
+        # condition). depth-7: the tier vocabulary — the optional
+        # macro-tick aggregate + condensation event types (both in
+        # the template closure, EVENT_SCHEMA §11; both refused on a
+        # memberless group — the dead-data law, a population of
+        # nobody never carries a count and never births).
+        group_templates = self._data["templates.json"]["events"]
         for group in groups:
             where = f"group {group['id']}"
             _require(
@@ -573,11 +577,35 @@ class _Lint:
                     isinstance(group["name"], str),
                     f"{where}: name must be a string",
                 )
-            unknown = sorted(set(group) - {"id", "name", "position", "members", "notes"})
+            for tier_key in ("macro_event", "condense_event"):
+                event_type = group.get(tier_key)
+                if event_type is None:
+                    continue  # the per-group unarmed law (the 68a pattern)
+                _require(
+                    isinstance(event_type, str)
+                    and event_type in group_templates,
+                    f"{where}: {tier_key} {event_type!r} is not in the "
+                    "template vocabulary (EVENT_SCHEMA §11 — the tier "
+                    "events are pack-declared)",
+                )
+                _require(
+                    bool(members),
+                    f"{where}: {tier_key} on a memberless group is dead "
+                    "data — the population tier needs a membership (the "
+                    "vacuity law, the threshold-100 family)",
+                )
+            unknown = sorted(
+                set(group)
+                - {
+                    "id", "name", "position", "members",
+                    "macro_event", "condense_event", "notes",
+                }
+            )
             _require(
                 not unknown,
                 f"{where}: unknown keys {unknown} (the closed "
-                "vocabulary: id | name | position | members | notes)",
+                "vocabulary: id | name | position | members | "
+                "macro_event | condense_event | notes)",
             )
         for npc in npcs:
             _require(npc["position"] in location_ids, f"npc {npc['id']}: unknown position")
