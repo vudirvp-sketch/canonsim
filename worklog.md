@@ -13,6 +13,49 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-90 · 2026-09-10 · maclock1 — the macro-clock primitive (W2's
+head, D-116's wave order, FIRST among its consumers; 11 files — 3
+code + 1 new test + 7 doc sync: the primitive + the loop
+integration + the lint + the pins are one family, the iter-86..89
+footprint; AGENTS §2.3: 11 > 5-6, the objective scope noted here)
+- core/macro.py (new): the scheduler cadence rule (`next_macro_tick`
+  — the positive multiples of the pack-declared
+  `time.macro.cadence_ticks`, pure arithmetic, never entropy), the
+  macro-year counter (`macro_year = start + t // cadence`, derived
+  never stored; the start BINDS to the worldgen chronicle horizon —
+  the calendar binding, one timeline, 0 unarmed), the aggregate
+  emission surface (`macro_turn_draft` — the D-112
+  one-event-with-cardinality shape, the counts flat integer keys
+  beside `year`, a `year` count a refused branch fake; the future
+  consumers depth-3/depth-7/st-6a/weather-1 call it at the
+  crossing); the raw-read guards raise MacroError (D-111 family).
+- core/loop.py: the third crossing cursor `_next_macro` (session-
+  persistent like the rotation/beat cursors) fired COARSEST-FIRST at
+  a co-occurring tick (macro → rotation → beat); `_run_macro` — one
+  turn event through the commit door, cause = the writer's last id,
+  no knowledge/state_changes/hooks, importance via the pack's own
+  rule. core/pack.py: the `time.macro` lint (closed vocabulary,
+  cadence ≥ 1, the event type in the template closure).
+- +18 tests (tests/test_macro.py — the arithmetic, the binding, the
+  surface's refusals, the crafted-pack integration: the turns with
+  the cause chain, the co-occurrence order, the A/B both-arms price,
+  byte-identical determinism, the session cursor, the render arms,
+  the lint refusals) — 1424→1442+1 green, ruff clean (3.12.14, the
+  env pin; seed 42 + unset spot-checked). Corpus price ZERO by
+  construction: the committed pack declares no time.macro (the 68a
+  pattern — the arming rides with the primitive's first consumer,
+  weather-1 the natural first); measured both arms — the fingerprint
+  EQUAL, the event-count delta the turns alone, zero re-pins
+  (git-verified: no fixture in the diff).
+- docs: DECISIONS D-124, TASKS maclock-1 done (weather-1/st-6a gate
+  notes re-pinned), phases.md §5 the macro-clock paragraph, NAV §1
+  + README the core/macro rows, STATUS re-pinned (the queue: the W2
+  consumers). iter-81 evicted here (verified against git in this
+  edit); 10 after. Caps: STATUS 767 / TASKS 1041 / DECISIONS 90
+  lines (60 rows) / TECH_NOTES 773 / README 669 — over-cap on
+  substance (§6.1, the D-095..D-124 precedent), trim at the
+  phase-5→6 gate.
+---
 iter-89 · 2026-09-10 · geo1 — the geometry rework (W1's fourth,
 D-116's wave order, BEFORE any big-world pack; 10 files — 1 code
 edit + 1 new tool + 1 test file + 7 doc sync: the mechanism + the
@@ -354,40 +397,5 @@ pin); no code touched.
   iter-82 in / iter-72 out (verified in this edit); 10 after (the
   log held 10 at HEAD — the cap law held, the count did not grow;
   the 9s corrected iter-83a, KI#80).
----
-iter-81 · 2026-09-09 · worldgen — depth-5, the ordered worldgen
-passes, mechanics only (13 files — 3 code edit + 1 new code + 1 new
-suite + 8 doc sync: the pass family + its lint + its genesis wiring +
-its pins are one mechanism family, the iter-75 footprint; AGENTS §2.3:
-13 > 5-6, the objective scope noted here)
-- core/rng.py: `worldgen:<pass>` — the D-079 family law's fourth
-  member (`WORLDGEN_PREFIX` + `worldgen_stream_name` + the assure
-  nesting law); per-pass isolation pinned (the armed arm's
-  substantive fingerprint EQUALS the unarmed arm's — the corpus price
-  of worldgen is the genesis events alone).
-- core/worldgen.py (new): `PASS_ORDER` the ordered passes — sites
-  (jittered integer lattice) → relax (integer-centroid Lloyd) →
-  height/moisture (integer-octave value noise, fixed-point weights
-  that divide out, normalized 0..9999) → watershed (downhill flow +
-  rivers) → biomes (band table + coastal refinement) → states
-  (capitals + growth) → chronicle (pre-PC history); WorldModel
-  INTEGER-ONLY (the Azgaar float-drift refusal, test-walked);
-  `resolve_claims` = `detail_claim`'s FIRST LEGAL CALLER (commit
-  rides world_formed, no_op skipped, slot_conflict refused with the
-  cause chain); genesis drafts (world_formed cause-null + history
-  events ascending year, hooks, NO knowledge — the DF
-  epistemology-empty law); core/loop.py::open the armed-only genesis
-  (the director's buffer pre-seeded, the PC chains to the last
-  genesis event); core/pack.py::_worldgen the shape lint (closed
-  vocabularies, template closure, declared-hook law, the claim
-  double-claim family). Committed pack UNARMED — v0.1 bytes (the 68a
-  pattern; depth-5b the arming row laid).
-- +26 tests (tests/test_worldgen.py, 1352→1378+1 green, ruff clean;
-  corpus price ZERO by construction — no committed-pack byte moved,
-  T1 + every corpus pin green). D-115; TASKS depth-5 done + depth-5b
-  laid. iter-71 evicted (verified in this edit); 10 after. Caps:
-  STATUS 643 / TASKS 849 / DECISIONS 80 lines (51 rows) / TECH_NOTES
-  695 / TEST_PLAN 722 / phases 719 — over-cap on substance (§6.1, the
-  D-095..D-114 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

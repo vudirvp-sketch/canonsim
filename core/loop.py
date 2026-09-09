@@ -34,6 +34,13 @@ knowledge of their own beyond what legitimately cascades, so the cascade
 terminates. Watch rotations fire when the clock CROSSES a rotation tick
 (never pre-seeded): the swap, the expectation checks (P2d), then the
 briefing (D-006) — each piece cause-chained (phase0 §3).
+maclock-1: the macro-clock crossings join the same discipline (L4
+layered clocks — the third crossing): the positive multiples of the
+pack-declared `time.macro.cadence_ticks`, fired coarsest-first at a
+co-occurring tick (the year turns before the day's rotation, the
+rotation before the beat), each turn ONE event through the canon door
+(the calendar's increments are canon, INV-1 — `core/macro.py` owns the
+primitive).
 """
 
 from __future__ import annotations
@@ -74,6 +81,7 @@ from core.intent import (
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
 from core.leverage import leverage_drafts, live_leverage, spendable_leverage
 from core.log import EventDraft, EventLogWriter, EventRecord
+from core.macro import macro_turn_draft, next_macro_tick
 from core.onaction import on_action_drafts
 from core.pack import Pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
@@ -192,6 +200,14 @@ class Simulator:
         self._last_change: dict[tuple[str, str], int] = {}
         self._next_rotation = next_rotation_tick(
             pack.rules, self._clock.ticks_per_day, 0
+        )
+        # maclock-1 (L4): the macro-clock's next crossing — None for an
+        # unarmed pack (no `time.macro` block; zero crossings, zero
+        # events, the v0.1 bytes untouched — the 68a pattern). The
+        # crossing state persists across `run_steps` calls like the
+        # rotation and beat cursors (the session law).
+        self._next_macro = next_macro_tick(
+            pack.rules["time"].get("macro"), 0
         )
         # iter-4: the director + the beat cycle (decay / urgencies /
         # entropy). The beat fires at clock crossings (phase boundaries
@@ -315,12 +331,29 @@ class Simulator:
                             and self._next_beat <= entry.tick
                         ):
                             candidates.append(self._next_beat)
+                        if (
+                            self._next_macro is not None
+                            and self._next_macro <= entry.tick
+                        ):
+                            candidates.append(self._next_macro)
                         if not candidates:
                             break
                         crossing = min(candidates)
-                        is_rotation = crossing == self._next_rotation
                         self._clock.advance_to(crossing)
-                        if is_rotation:
+                        # maclock-1: at a co-occurring tick the COARSEST
+                        # clock fires first (the year turns before the
+                        # day's rotation, the rotation before the beat —
+                        # the calendar contains the day, the day contains
+                        # the beat); one crossing kind per iteration, the
+                        # equal-tick remaining candidates re-loop (the
+                        # writer's tick-monotonicity allows equal ticks).
+                        if crossing == self._next_macro:
+                            self._run_macro(crossing)
+                            self._next_macro = next_macro_tick(
+                                self._pack.rules["time"].get("macro"),
+                                crossing,
+                            )
+                        elif crossing == self._next_rotation:
                             self._run_rotation(crossing)
                             self._next_rotation = next_rotation_tick(
                                 self._pack.rules,
@@ -789,6 +822,28 @@ class Simulator:
         self._queue.push(
             tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
             kind="intent", payload=stamped,
+        )
+
+    def _run_macro(self, tick: int) -> None:
+        """One macro-clock crossing (maclock-1, L4): the year turns —
+        ONE event through the canon door, cause-chained to the writer's
+        last id (the chronological-chain law, the rotation's scheduled-
+        beat precedent). The primitive's own event carries the counter
+        alone; the aggregate surface's counts (D-112's cardinality
+        shape) are the consumers' — depth-3/depth-7/st-6a/weather-1
+        land after the primitive and call `macro_turn_draft` with their
+        counts at this crossing. No knowledge (a world event), no state
+        changes (the year is derived, L3), no hooks (the director
+        boundary is the consumers' rows); importance rides the pack's
+        own rule (the story-critical listing decides tale visibility —
+        the tune-1 split)."""
+        draft = macro_turn_draft(self._pack.rules, tick)
+        self._commit(
+            replace(
+                draft,
+                cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            )
         )
 
     def _run_rotation(self, tick: int) -> None:

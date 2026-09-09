@@ -239,17 +239,17 @@ header law — the detail lives in git + worklog + D-110..D-113)
   re-pins); the exactness oracles (the pre-geo-1 full scans as
   brute-force references) in tests/test_worldgen.py. Detail:
   tests/test_worldgen.py + D-123 + TECH_NOTES §12.
-- `maclock-1` · the macro-clock primitive (W2, FIRST among its
-  consumers) — todo: the scheduler cadence rule (INV-2-clean:
-  tick-derived, sorted order, never entropy — the depth-3
-  "scheduler rule" family), the macro-year counter (the calendar
-  binding lands HERE as a pack-declared cadence under L4 layered
-  clocks — D-116: neither a global tick↔year constant nor
-  forever-decorative years), the aggregate-event emission surface
-  (one event with cardinality, the D-112 shape) that depth-3 (warm
-  ring), depth-7 (group ticks), st-6a (travel), and weather-1
-  (ambient) read. Consumers land AFTER the primitive (one primitive,
-  one row, first — the scheduler blast-radius insurance).
+- `maclock-1` · the macro-clock primitive — **done (iter-90, D-124)**:
+  `core/macro.py` (the cadence rule — the positive multiples of the
+  pack-declared `time.macro.cadence_ticks`, the loop's THIRD crossing,
+  coarsest-first at a co-occurring tick; the macro-year counter —
+  `start + t // cadence`, derived never stored, the calendar binding
+  to the worldgen chronicle horizon; the aggregate emission surface —
+  `macro_turn_draft`, one event with cardinality, the D-112 shape) +
+  the `time.macro` lint + 18 tests; the committed pack UNARMED (the
+  68a pattern — the arming rides with the primitive's first
+  consumer), corpus price zero measured both arms. Detail:
+  tests/test_macro.py + D-124.
 - `name-1` · the name generator (W2, beside depth-7) — todo:
   pack-declared phonotactic profiles (culture-keyed n-gram pools —
   the CK3/Azgaar donor shape; deep dive owed at the row: ref-19,
@@ -400,8 +400,11 @@ header law — the detail lives in git + worklog + D-110..D-113)
   `state_changes` in seeded follow-ups (the arson family's shape);
   all pack data over the existing doors (INV-3) — no TTL, no turn
   counters, no decay timers (D-049); persistence is the promotion
-  door's (st-2). Gate: phase 5 (the ambient channel + macro clocks)
-  or pack-1.
+  door's (st-2). Gate: phase 5 (the ambient channel + macro clocks
+  — bridge-1 + maclock-1 both LANDED, the gate satisfied) or pack-1;
+  the macro cadence the ambient family rides is `core/macro.py`'s
+  (maclock-1, D-124 — the committed pack's arming rides here, the
+  primitive's first consumer).
 - `companion-1` · the companion/party role — todo, owner-gated: pack
   data over the existing doors, zero new core systems — follow-duty
   in the rotation/urgency grammar, mode B actors voice (scene-1),
@@ -680,8 +683,8 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   (a): SATISFIED (depth-5 landed, D-115 — the phase-5 spatial layer
   exists; D-116 amended the price law above; place-1 LANDED iter-88,
   D-122 — the exits↔map consistency the prices read) — the row is a
-  live candidate after maclock-1 alone (the edge-state cadence,
-  space packs).
+  live candidate (maclock-1 LANDED iter-90, D-124 — the macro
+  cadence the edge-state aggregates ride is `core/macro.py`'s).
 
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 

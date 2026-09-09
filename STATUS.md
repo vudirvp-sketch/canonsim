@@ -1,70 +1,71 @@
 # STATUS — canonsim
 
-Iteration: iter-89 (`iter-89-geo1` — the geometry rework,
-D-116's W1 wave order, the fourth row, BEFORE any big-world pack:
-the two quadratic walls of the depth-5 worldgen form removed by
-EXACT reworks, never ceilings — the GRID-HASH NEIGHBOR WALK
-(`core/worldgen.py::_neighbors`: the sites bucketed at spacing
-scale, expanding Chebyshev rings under the ring-floor exactness
-law — a site in a bucket at ring ≥ r+1 is farther than r·scale
-along one axis, so once the k-th best sits within (r·scale)² the
-unexplored rings are provably out of reach, ties included; amortized
-O(N), the tuple answer byte-identical to the full O(N² log N) sort)
-computed ONCE and shared by watershed + biomes (the second
-computation was the free half of the old wall), and the PER-SITE
-BOUNDING-BOX RELAX WALK (`_pass_relax` + `_nearest_owner_walk`:
-each site sweeps its box, each lattice point examined once per
-covering site — O(extent²) at the lattice's constant, the old
-O(extent²·N·R) wall; the runtime exactness check — a best within
-radius² proves the true nearest's box covered the point — with the
-deterministic doubling retry, the WorldgenError at the covering
-radius the unreachable backstop); the MEASURED PROFILE (the row's
-exit evidence): `scripts/worldgen_profile.py` (the perf-1 precedent
-on the map side — the ladder 36→10k sites, clean + cProfile
-double-run, the fingerprints sha256-compared, the 36-site row
-reproducing the corpus digest verbatim); TECH_NOTES §12 owns the
-numbers — the old walls measured on HEAD `795bb1b` first (relax
-2.27/11.77/37.81 s at 400/900/1600 sites, the quadratic fit ~25 min
-at 10k; neighbors 0.05/0.25/0.82 s × two computations), the new
-curve (the 10k-site full genesis door 1.19 s clean, sites/s
-~8.4–10k across the ladder, the cost now DRAW-LINEAR — the largest
-cProfile line `rng.randint` at 280k calls, the perf-1 event-linear
-verdict's map-side twin); the corpus price: ZERO, measured both
-arms (the genesis fingerprints seeds 0/42/125 byte-identical
-before/after — cd85495945b7f09b / f55c3547230aea5b /
-fca783da67c8020e — the T1 + corpus fixtures byte-identical, zero
-re-pins, git-verified; the exactness oracles — the pre-geo-1 full
-scans inlined as brute-force references — pin the walks against
-ties, duplicate positions, k beyond the site count, the clustered
-retry path, the empty-world degenerate)) ·
-Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
-+ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 + chron-2 +
-place-1 + geo-1 LANDED,
-the queue: maclock-1 the macro-clock primitive next — D-116's W2
-wave order, FIRST among its consumers) · 1424
-passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seeds
-0/42/unset).
+Iteration: iter-90 (`iter-90-maclock1` — the macro-clock
+primitive, D-116's W2 wave head, FIRST among its consumers: the
+SCHEDULER CADENCE RULE (`core/macro.py::next_macro_tick` — the
+crossings are the POSITIVE MULTIPLES of the pack-declared
+`time.macro.cadence_ticks`, pure tick arithmetic, never entropy;
+the loop's THIRD crossing cursor, fired COARSEST-FIRST at a
+co-occurring tick — the year turns before the day's rotation, the
+rotation before the beat, the pre-existing order unchanged), the
+MACRO-YEAR COUNTER + the CALENDAR BINDING (D-116 (4): `year =
+start + t // cadence` — derived, never stored, L3; the start
+BINDS to the worldgen chronicle horizon — the genesis years are
+the world's history before the run, ONE timeline — 0 for an
+unarmed pack; neither a global tick↔year constant nor
+forever-decorative years), and the AGGREGATE-EVENT EMISSION
+SURFACE (`macro_turn_draft`, the D-112 one-event-with-cardinality
+shape: the consumer's counts ride the outcome as flat integer
+keys beside `year` — the depth-3 warm ring, depth-7 group ticks,
+st-6a travel, weather-1 ambient read it; a count named `year` a
+refused branch fake; consumers land AFTER the primitive — one
+primitive, one row, first, the scheduler blast-radius
+insurance); the `time.macro` LINT (closed vocabulary, cadence ≥
+1, the event type in the template closure; the runtime
+raw-read guards raise MacroError, the pred-contract family); the
+committed pack UNARMED — the 68a pattern, the arming rides with
+the primitive's first consumer (weather-1 the natural first, its
+gate now satisfied); the corpus price ZERO by construction,
+measured both arms (the crafted armed arm vs the unarmed twin:
+the substantive fingerprint EQUAL — the macro path draws nothing
+— the event-count delta exactly the turns, zero re-pins,
+git-verified)) ·
+Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
+depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
+chron-2 + place-1 + geo-1 + maclock-1 LANDED,
+the queue: the W2 consumers — depth-3 scene LOD / depth-6
+factions / depth-7 + name-1 per D-116's wave order; st-6a a live
+candidate (its gate chain satisfied); weather-1's gate satisfied)
+· 1442
+passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
+42 + unset spot-checked).
 ·
 Date: 2026-09-10 ·
-Scope: `core/worldgen.py`, `scripts/worldgen_profile.py` (new),
-`tests/test_worldgen.py`
+Scope: `core/macro.py` (new), `core/loop.py`, `core/pack.py`,
+`tests/test_macro.py` (new)
 + the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
-`docs/TECH_NOTES.md` (§12 — the measured profile),
-`docs/AGENT_NAVIGATION.md` (the scripts row — the structure sync),
-`README.md` (the scripts map line),
+`docs/blueprint/phases.md` (§5 — the macro-clock paragraph, the
+phase's architecture owner), `docs/AGENT_NAVIGATION.md` (§1 — the
+core/ row, the structure sync), `README.md` (the narrative
+sentence + the code-map line),
 `worklog.md`, `STATUS.md` (this file) —
-10 files (git-verified: 9 modified + 1 new; the mechanism + the
-measured instrument + the pins + the doc sync are one family, the
-iter-81/88 footprint; AGENTS §2.3: 10 > 5-6, the objective
-scope noted in worklog): +2 tests (the grid-hash exactness oracle
-— ties, duplicate positions, k at and beyond the site count, the
-single-site world; the box-walk exactness oracle — every round
-count, the clustered retry path walked directly, the empty-world
-degenerate),
-D-123, TASKS geo-1 done, TECH_NOTES §12 the curve, this header + the
-Next-step re-pin.
-· The prior iteration's record: iter-88 (place-1, D-122 — the
-placement discipline). The detail lives in TASKS + worklog + git.
+11 files (git-verified: 9 modified + 2 new; the primitive + the
+loop integration + the lint + the pins + the doc sync are one
+family, the iter-86..89 footprint; AGENTS §2.3: 11 > 5-6, the
+objective scope noted in worklog): +18 tests (the cadence
+arithmetic — unarmed None, multiples, the broken-cadence
+refusals; the counter — the horizon binding, the derived law, the
+armed-only guard; the surface — the D-112 shape, the reserved-key
+and non-count refusals, the story-critical visibility split; the
+integration — the armed run's turns at the crossings with the
+cause chain, the unarmed-worldgen twin counting from 0, the A/B
+both-arms price, byte-identical determinism, the co-occurring
+tick's order, the session-boundary cursor, the render arms; the
+lint refusals),
+D-124, TASKS maclock-1 done, phases.md §5 the macro-clock
+paragraph, this header + the Next-step re-pin.
+· The prior iteration's record: iter-89 (geo-1, D-123 — the
+geometry rework). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -225,14 +226,17 @@ placement discipline). The detail lives in TASKS + worklog + git.
   a first-class metric, never absorbed silently.
 
 - **The queue + door laws (D-037/D-038/D-039).** Crossings fire in
-  tick order, never by type: rotations and beats interleave by tick,
-  the loop picks `min(candidates)` per iteration, the writer's
-  tick-monotonicity invariant forbids out-of-order commits (the
-  read-side mirror: `brief/assembler.py`'s `last_beat_tick`/
-  `beats_crossed` reproduce the same beat set — BRIEF_SPEC §3.2,
-  tested). Autonomous (urgency/director) intents enqueue at
-  `entry.tick`, never beat_tick (sub_order NPC_REACTION), decay
-  commits directly at beat_tick, and the runner feeds the next
+  tick order, never by type: rotations, beats and (since maclock-1)
+  the macro-clock interleave by tick, the loop picks `min(candidates)`
+  per iteration, the writer's tick-monotonicity invariant forbids
+  out-of-order commits (the read-side mirror: `brief/assembler.py`'s
+  `last_beat_tick`/`beats_crossed` reproduce the same beat set —
+  BRIEF_SPEC §3.2, tested). At a CO-OCCURRING tick the coarsest
+  clock fires first (macro → rotation → beat — the calendar contains
+  the day, the day contains the beat). Autonomous
+  (urgency/director) intents enqueue at `entry.tick`, never beat_tick
+  (sub_order NPC_REACTION), decay commits directly at beat_tick, and
+  the runner feeds the next
   playscript step only on the PLAYER's own step endings (KI#17). The
   two doors: director releases and urgencies ride the INTENT door
   (a released hook = IntentData `director_<N>`/`urgency_<N>` through
@@ -242,7 +246,9 @@ placement discipline). The detail lives in TASKS + worklog + git.
   index + runs `_react` for EVERY committed event (no call site can
   forget a reaction; cascades terminate; suspicion reacts only to
   tokens the knower did not already hold; the arrest resolution
-  rides the same door).
+  rides the same door). The macro turn rides the COMMIT door at its
+  crossing (the rotation's world-schedule precedent — no queue band,
+  the bands are for actor ordering).
 - **System passes scan the whole projection, not the events that seeded
   them (KI#16 lesson).** Per-layer bookkeeping must be global and
   mergeable by new ignitions, never a frozen snapshot in the queue
@@ -605,16 +611,20 @@ acquisition gate + depth-1b the arming + depth-2 the lazy-detail
 gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
 the scene-line projection pipe + chron-2 the history bridge +
-place-1 the placement discipline + geo-1 the geometry rework LANDED
-(iter-73/74/75/76/80/81/83/86/87/88/89,
-D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122/D-123;
+place-1 the placement discipline + geo-1 the geometry rework +
+maclock-1 the macro-clock primitive LANDED
+(iter-73/74/75/76/80/81/83/86/87/88/89/90,
+D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122/D-123/
+D-124;
 the corpus
 prices paid fidelity-only / zero-by-construction ×3 / the genesis
 events + the id shift — the murmur's pre-seed timing the one
 designed shift — / read-side zero / the pass-1 positions frozen —
 the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green /
 lint-side + pack data alone — zero re-pins, 1422+1 green /
-byte-identical by exactness proof — zero re-pins, 1424+1 green) +
+byte-identical by exactness proof — zero re-pins, 1424+1 green /
+unarmed by the 68a pattern, the fingerprint equal both arms — zero
+re-pins, 1442+1 green) +
 the iter-82 concept-land verdict set (D-116: the 13 questions resolved,
 the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
@@ -623,21 +633,28 @@ prerogative; D-119's catalog rows + refusals; the queue itself
 untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
-rows). The queue (D-116's wave order): `maclock-1` the macro-clock
-primitive (W2, FIRST among its consumers)
-→ `depth-3` scene LOD (its depth-5 gate is satisfied — the passes are
-landed), `depth-6` factions, `depth-7` groups & simulation LOD
+rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,
+D-124 — the primitive first among its consumers, the scheduler
+blast-radius insurance paid at zero corpus price; the committed
+pack's macro arming rides with the primitive's first consumer)
+→ `depth-3` scene LOD (its depth-5 gate is satisfied — the passes
+are landed; the macro cadence its warm-ring scheduler rule reads is
+`core/macro.py`'s), `depth-6` factions, `depth-7` groups &
+simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
-phases.md §5/§7) + `name-1` the name generator (D-116: the Azgaar
+phases.md §5/§7; the group macro-ticks ride the primitive) + `name-1`
+the name generator (D-116: the Azgaar
 split — condensation's canon-birth events need names). st-6(a)
-travel is a live candidate after maclock-1 alone (place-1 LANDED
-iter-88 — the claim↔exits consistency the derived travel prices
+travel is a live candidate (its gate chain satisfied: depth-5 +
+place-1 + maclock-1 LANDED — the claim↔exits consistency the
+derived travel prices
 read; the price law amended — derived from the WorldModel, pack
 override wins). W3
-closes without rows: the calendar binding is maclock-1's own,
-weather-1's row stands (intake-3, its gate read as bridge-1 +
-maclock-1 landed — bridge-1 now landed, the gate waits on maclock-1
-alone). The phase-6 instruments pinned owner-gated:
+closes without rows: the calendar binding LANDED as maclock-1's own
+(the macro-year the macro-clock's counter, the cadence
+pack-declared), weather-1's gate SATISFIED (bridge-1 + maclock-1
+landed — the ambient family rides `core/macro.py`'s cadence). The
+phase-6 instruments pinned owner-gated:
 `world-2` (the two-level gate), `res-1` (the resource layer —
 scarcity gets its row owner), `roads-1` (the generated exits).**
 
@@ -676,13 +693,26 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    (the old walls measured on HEAD first, the 10k-site full genesis
    door 1.19 s clean, the cost now draw-linear); corpus price zero —
    byte-identical by exactness proof, the both-arms fingerprints
-   equal, zero re-pins);
+   equal, zero re-pins); maclock-1 LANDED (iter-90, D-124 — the
+   macro-clock primitive: the scheduler cadence rule (the positive
+   multiples of the pack-declared `time.macro.cadence_ticks`, the
+   loop's third crossing, coarsest-first at a co-occurring tick),
+   the macro-year counter (derived `start + t // cadence`, the
+   calendar binding to the worldgen chronicle horizon — one
+   timeline), the aggregate emission surface (`macro_turn_draft`,
+   the D-112 one-event-with-cardinality shape the depth-3/7 +
+   st-6a/weather-1 consumers call); the committed pack unarmed —
+   the 68a pattern, the arming rides with the first consumer;
+   corpus price zero — the fingerprint equal both arms, zero
+   re-pins);
    the
-   queue: maclock-1 the macro-clock primitive next (W2, FIRST
-   among its consumers), then scene LOD
-   (its depth-5 gate is satisfied — the passes are landed), factions
+   queue: the W2 consumers — scene LOD
+   (its depth-5 gate is satisfied — the passes are landed; the
+   macro cadence its warm-ring scheduler rule reads is live),
+   factions
    with goals, groups & simulation LOD + name-1 (design ratified
-   iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7); the
+   iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7; the
+   group macro-ticks ride the primitive); the
    exit
    criterion "an
    emergent chain of
@@ -694,7 +724,8 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    split; cultures/religions/burgs re-gated to phase 6), Neighborly
    (the closest cousin's architecture reading). The phase-5 spatial
    row `st-6(a)` (travel as a separate action) is a live candidate
-   after maclock-1 alone (place-1 LANDED iter-88, D-122 — the
+   (its gate chain satisfied: depth-5 + place-1 + maclock-1 LANDED,
+   D-122/D-124 — the
    claim↔exits consistency the derived travel prices read; D-116: the price law amended — derived
    from the WorldModel, pack override wins); `st-3`/`st-5`
    (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.

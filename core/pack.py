@@ -1000,6 +1000,37 @@ class _Lint:
             Clock.from_rules(time_rules)
         except ValueError as exc:
             raise PackError(f"time rules invalid: {exc}") from exc
+        # maclock-1 (L4): the macro sub-block — the second granularity's
+        # own declaration. OPTIONAL (the unarmed law: an absent block is
+        # zero crossings, zero events, the v0.1 bytes untouched — the
+        # 68a pattern; the committed pack's arming rides with the
+        # primitive's first consumer). Closed vocabulary, positive-int
+        # cadence, the event type in the template closure (EVENT_SCHEMA
+        # §11 — the macro turn is a pack-declared event type, never an
+        # engine word, INV-3).
+        macro = time_rules.get("macro")
+        if macro is not None:
+            where = "time.macro"
+            _require(isinstance(macro, Mapping), f"{where} must be an object")
+            unknown = sorted(set(macro) - {"cadence_ticks", "event_type"})
+            if unknown:
+                raise PackError(
+                    f"{where}: unknown keys {unknown} (the closed "
+                    "vocabulary: cadence_ticks | event_type)"
+                )
+            _require(
+                _is_int(macro.get("cadence_ticks"))
+                and macro["cadence_ticks"] >= 1,
+                f"{where}.cadence_ticks must be an integer >= 1 (zero or "
+                "negative is an infinite crossing loop, never a clock)",
+            )
+            templates = self._data["templates.json"]["events"]
+            event_type = macro.get("event_type")
+            _require(
+                isinstance(event_type, str) and event_type in templates,
+                f"{where}.event_type {event_type!r} is not in the template "
+                "vocabulary (EVENT_SCHEMA §11 — closed per pack)",
+            )
 
     # -- systems (the scheduler DAG) -------------------------------------------
 

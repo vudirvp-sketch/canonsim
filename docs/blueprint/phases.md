@@ -550,6 +550,34 @@ refused (the single-tier twin law, never a policy ceiling); the
 passes never read the `place` block (placement is a load-time law —
 the runtime backstop's required set stays six-block).
 
+**The macro-clock primitive (maclock-1, iter-90/D-124):** L4's second
+granularity, live — micro-time (ticks) and macro-time (years) are
+layered clocks, one authority. The CADENCE is pack-declared
+(`rules.json::time.macro`: `cadence_ticks` + `event_type`, closed
+vocabulary, linted; absent = the unarmed law — zero crossings, zero
+events, the v0.1 bytes untouched, the 68a pattern; the committed
+pack's arming rides with the primitive's first consumer). The
+crossings are the positive multiples of the cadence — pure tick
+arithmetic, never entropy (the depth-3 "scheduler rule" family); the
+loop fires them in the crossing discipline, COARSEST CLOCK FIRST at
+a co-occurring tick (the year turns before the day's rotation, the
+rotation before the beat). The MACRO-YEAR is the macro-clock's
+counter — `start + t // cadence`, derived never stored (L3); the
+start BINDS to the worldgen chronicle horizon (the genesis years are
+the world's history before the run — one timeline, D-116 (4): neither
+a global tick↔year constant nor forever-decorative years). Each turn
+is ONE event through the canon door (INV-1): actor `world`, cause =
+the chronological chain, no knowledge, no state changes, no hooks;
+importance rides the pack's own rule (the story-critical listing
+decides tale visibility). The AGGREGATE-EVENT EMISSION SURFACE
+(`core/macro.py::macro_turn_draft`, the D-112 shape — one event with
+cardinality): the consumer's counts ride the outcome as flat integer
+keys beside `year`; the consumers — depth-3 (warm ring), depth-7
+(group ticks), st-6a (travel), weather-1 (ambient) — land AFTER the
+primitive, each calling the surface at the crossing (log growth
+O(consumers × macrobeats), never O(members × ticks); the count
+vocabulary is theirs, the surface shape-only).
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the
