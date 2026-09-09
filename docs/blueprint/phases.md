@@ -528,6 +528,28 @@ materialization door (a site's passes re-running against a non-empty
 log) is the future consumer the claim gate's conflict/no_op verdicts
 wait for.**
 
+**The placement discipline (place-1, iter-88/D-122):** the claim↔exits
+consistency — a location's claimed site must be topologically
+compatible with its exits. The LATTICE is the topology of record
+(`core/worldgen.py::lattice_distance`: row-major cells, Chebyshev
+steps — a pure function of the site indices + the map config,
+computable pre-draw at load time; the drawn sites are the lattice's
+jittered, relaxed realization, each bounded in its cell's
+neighborhood, so the cell-step distance bounds every realization);
+the RELATION is the pack's (`worldgen.place.max_edge_span`, the exits
+graph's edge contract — the engine measures, the pack decides; never
+engine geography knowledge, INV-3). Every exits edge joining two
+claimed locations must read sites within the span — two locations
+joined by exits never read sites from opposite corners of the map:
+the map↔graph coherence the derived travel prices of st-6a read
+(D-116 (5) — an edge-local price needs edge-local sites; authored
+packs override per edge, the pack wins). Edges with an unclaimed
+endpoint impose nothing (the law is edge-mediated). The vacuity law:
+a span at the lattice diameter accepts every pair — dead data,
+refused (the single-tier twin law, never a policy ceiling); the
+passes never read the `place` block (placement is a load-time law —
+the runtime backstop's required set stays six-block).
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the

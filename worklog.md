@@ -13,6 +13,47 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-88 · 2026-09-10 · place1 — the placement discipline (W1's
+third, D-116's wave order; 11 files — 2 code + 1 pack data + 1 test
+file + 7 doc sync incl. AGENT_NAVIGATION's worldgen/pack rows (the
+structure sync — the metric + the seventh sub-block): the lint + the
+metric + the pack declaration + the pins are one family, the
+iter-86/87 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
+noted here)
+- core/worldgen.py: `lattice_distance` — the row-major lattice as
+  the topology of record (Chebyshev cell steps, a pure function of
+  the indices + the map config, pre-draw load-time) + the module
+  docstring's place-1 paragraph + the `_SUB_BLOCKS` comment re-pinned
+  (the runtime backstop's set stays six-block — the passes never
+  read `place`).
+- core/pack.py: `WORLDGEN_SUB_BLOCKS` += `place` (the seventh
+  REQUIRED sub-block); the shape lint (the closed vocabulary
+  {max_edge_span}, 0..columns-2 — the VACUITY law: a span at the
+  lattice diameter accepts every pair, dead data, the single-tier
+  collection's twin, never a policy ceiling); the claim↔exits
+  consistency check — every exits edge joining two claimed
+  locations, ALL cross-pairs within the span (edges with an
+  unclaimed endpoint impose nothing); KI#82 FIXED (the
+  missing-sub-block KeyError leak — the named-PackError loop,
+  probed first on a crafted twin). rules.json: the committed
+  `place` block (max_edge_span 1 — the tavern↔street pair, sites 0
+  and 1).
+- +5 tests (the metric pins, the opposite-corner refusal + the
+  co-located/zero-span arms, the vacuity/range/missing family, the
+  all-seven-blocks KI#82 loop, the runtime split) — 1417→1422+1
+  green, ruff clean (3.12.14, the env pin; seeds 0/42/unset
+  spot-checked). Corpus price, measured: ZERO by construction —
+  lint-side + pack data alone, no runtime byte reads `place`; the
+  T1 + corpus fixtures byte-identical, zero re-pins (git-verified).
+  KI#82 opened + closed in the same iteration (AGENTS §5).
+- docs: DECISIONS D-122, TASKS place-1 done + the st-6a gate note
+  (maclock-1 alone now), phases.md §5 the placement-discipline
+  paragraph, README the narrative sentence, STATUS re-pinned (the
+  queue: geo-1 next, the W1 wave order). iter-79 evicted here
+  (verified in this edit); 10 after. Caps: STATUS 710 / TASKS
+  1031 / DECISIONS 87 lines (58 rows) / phases 775 / README 651 —
+  over-cap on substance (§6.1, the D-095..D-122 precedent), trim at
+  the phase-5→6 gate.
 iter-87 · 2026-09-10 · chron2 — the history bridge (W1's second,
 D-116's wave order; 16 files — 4 code + 2 pack data + 3 test files
 (the T1 fixture re-pin among them) + 7 doc sync: the mechanism + the
@@ -330,36 +371,5 @@ done. iter-70 evicted (verified in this edit); 10 after. Caps:
 STATUS 633 / TASKS 837 / DECISIONS 79 lines (50 rows) / TECH_NOTES
 695 / TEST_PLAN 666 / phases 700 — over-cap on substance (§6.1, the
 D-095..D-113 precedent), trim at the phase-5→6 gate.
----
-iter-79 · 2026-09-09 · verdict-land — the owner's call on the
-iter-77/78 routed candidates executed (14 files — 3 code + 3 suites
-+ 8 doc sync: the verdict-set as one mechanism family, the
-iter-70/73 scope pattern, AGENTS §2.3 noted here)
-- pred-failclosed + pred-contract (D-110/D-111): DIRECTOR_SPEC §3's
-  blanket fail-closed restored in BOTH comparison twins
-  (predicates._prop + onaction._gate_passes — missing → False under
-  every comparator, `not_equals` = present AND ≠ X, `{"not": …}`
-  the escape); the equals-null hole closed by the pack-lint null ban
-  (prop leaf + gate condition); the `_require` family — 6 raw-read
-  surfaces → ValueError naming the field (census corrected 5 → 6:
-  the gate's comparator guard covered wrong values, not missing
-  keys), shape errors before the world answer. Zero pack migration
-  (zero not_equals + zero nulls, verified; T1 + corpus pins green
-  byte-identical). DIRECTOR_SPEC §3/§3c + two docstrings + two pins
-  flipped ("answers honestly" → fails closed).
-- D-112: iter-11b resolutions RATIFIED — phases.md §5 in the
-  D-056-amended edition (the arrival snapshot folded to one answer)
-  + §7 Containers covered; both pending tags cleared; TASKS depth-7
-  stays a todo BUILD row with the design pinned.
-- D-113: Rule 9 defined in AGENTS §7 (verified census 25 hits / 8
-  files — both earlier counts under); NAVIGATION §3 the sequencing
-  split (ORDER = STATUS Next step, composition = TASKS); tn12-claim
-  dropped (zero diff — every proposal had a named owner);
-  verify-seed + archive-protocol = the owner's bootstrap text
-  (chat-side). 1323 → 1327 passed +1 skipped, ruff clean. bg-7
-  evicted (verified in this edit); 10 after. Caps: STATUS 647 /
-  TASKS 835 / DECISIONS 78 lines (49 rows) / TECH_NOTES 695 / phases
-  693 — over-cap on substance (§6.1, the D-095..D-109 precedent),
-  trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

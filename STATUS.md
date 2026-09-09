@@ -1,52 +1,54 @@
 # STATUS — canonsim
 
-Iteration: iter-87 (`iter-87-chron2` — the history bridge, D-116's W1
-wave order, the second bridge: the DF legends shape — every history
-event's outcome gains `participants` (two DISTINCT regions, the run's
-root anchor's draw INHERITED by its members, the DF collection's role
-fields) and `places` (one site, drawn per event; world_formed carries
-neither); the war→battle→episode hierarchy as a PACK-DECLARED
-collection vocabulary (`chronicle.collections`, the DF
-`event_collections` donor shape, L10: JSON + lint, never string
-languages — the tiers root-first, the root anchors, the nested tiers
-carry the member caps; HISTORY_KINDS stayed closed — the 4 verbs);
-the cause TREE (L7 — the chain visible at record time: a member
-chains to its nearest lower-tier predecessor, a top-level event to
-the previous top-level, the flat form the linear chain; the drafts'
-PARENT MAP resolved through the writer's own ids at commit — the id
-law single-owner); the walk draw-free; the render — the tracery
-value law (lists join, never the host repr) + the line's optional
-clauses; the lint widening — the closure at alternative granularity,
-capitals >= 2, the reserved family += the history outcome keys; the
-corpus price: the pass-1 stream positions FROZEN (the drawn
-years/kinds/hooks verbatim, the murmur's pre-seed pins stable, zero
-corpus re-pins), the T1 fixture the one re-pin — 4 outcome lines) ·
+Iteration: iter-88 (`iter-88-place1` — the placement discipline,
+D-116's W1 wave order, the third bridge: the claim↔exits consistency
+lint — every exits edge joining two CLAIMED locations reads sites
+within the pack-declared `place.max_edge_span` lattice steps (two
+locations joined by exits never read sites from opposite corners of
+the map — the map↔graph coherence the derived travel prices of
+st-6a read, D-116 (5)); the METRIC the engine's
+(`core/worldgen.py::lattice_distance` — the row-major lattice as
+the topology of record, Chebyshev cell steps, a pure function of
+the indices + the map config, computable pre-draw at load time),
+the RELATION the pack's (`worldgen.place`, the graph's edge
+contract, the seventh REQUIRED sub-block — the engine measures, the
+pack decides, INV-3); the VACUITY law (a span at the lattice
+diameter accepts every pair — dead data, the single-tier twin law,
+never a policy ceiling); the passes never read `place` (load-time
+law alone — the runtime backstop stays six-block); the committed
+pack declares span 1 (the tavern↔street pair: sites 0 and 1); KI#82
+opened + fixed in the same iteration (the missing-sub-block
+KeyError leak in `_worldgen` — probed, then the named-PackError
+loop); the corpus price: zero by construction (lint-side + pack
+data alone — no runtime byte reads `place`, the T1 + corpus
+fixtures byte-identical, zero re-pins, git-verified)) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
-+ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 + chron-2 LANDED,
-the queue: place-1 the placement discipline next — D-116's W1 wave
-order) · 1417
++ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 + chron-2 +
+place-1 LANDED,
+the queue: geo-1 the geometry rework next — D-116's W1 wave
+order) · 1422
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seeds
 0/42/unset).
 ·
 Date: 2026-09-10 ·
-Scope: `core/worldgen.py`, `core/pack.py`, `core/loop.py`,
-`render/tracery.py`, `content/tavern_pack/rules.json`,
-`content/tavern_pack/templates.json`, `tests/test_worldgen.py`,
-`tests/test_render.py`, `tests/fixtures/plumbing_smoke_seed42.jsonl`
+Scope: `core/worldgen.py`, `core/pack.py`,
+`content/tavern_pack/rules.json`, `tests/test_worldgen.py`
 + the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
-`docs/blueprint/phases.md`, `docs/EVENT_SCHEMA.md`, `README.md`,
+`docs/blueprint/phases.md`, `README.md`,
+`docs/AGENT_NAVIGATION.md` (the worldgen/pack rows — the structure
+sync, the lattice metric + the seventh sub-block),
 `worklog.md`, `STATUS.md` (this file) —
-16 files (git-verified: 16 modified, 0 new; the mechanism + the pack
-migration + the lint widening + the pins + the doc sync are one family,
-the iter-75/83/86 footprint; AGENTS §2.3: 16 > 5-6, the objective scope
-noted in worklog): +11 tests (the DF shape, the pass-1 freeze, the
-walk + the cap + the flat form, the cause tree in the committed log,
-the tier render, the lint refusals, the reserved family, the runtime
-backstop arms, the tracery list-join),
-D-121, TASKS chron-2 done, this header + the Next-step re-pin + the
-KI#80/KI#81 deletions (AGENTS §5, the lessons in git + the FAQ).
-· The prior iteration's record: iter-86 (bridge-1, D-120 — the
-scene-line projection pipe). The detail lives in TASKS + worklog + git.
+11 files (git-verified: 11 modified, 0 new; the mechanism + the
+lint + the pack data + the pins + the doc sync are one family, the
+iter-75/83/86/87 footprint; AGENTS §2.3: 11 > 5-6, the objective
+scope noted in worklog): +5 tests (the lattice metric, the
+opposite-corner refusal + the co-located/zero-span arms, the
+vacuity/range/missing family, the KI#82 all-seven-blocks loop, the
+runtime split),
+D-122, TASKS place-1 done + the st-6a gate note, this header + the
+Next-step re-pin.
+· The prior iteration's record: iter-87 (chron-2, D-121 — the
+history bridge). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -69,6 +71,13 @@ scene-line projection pipe). The detail lives in TASKS + worklog + git.
   new events.
 
 ## Active KIs
+
+- KI#82 · the `_worldgen` pack lint leaked a raw KeyError on a
+  MISSING sub-block (only unknown extra keys were checked; a crafted
+  pack minus `map` died with `KeyError('map')`, not a named
+  PackError — the pred-contract family law) · opened 2026-09-10 ·
+  CLOSED iter-88 (the missing-block loop naming the block; tested
+  for all seven blocks).
 
 - (KI#81 deleted at iter-87 per AGENTS §5 — closed iter-85, two
   iterations past (iter-86 + iter-87); the lesson lives in git + the
@@ -579,13 +588,16 @@ drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
 gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
-the scene-line projection pipe + chron-2 the history bridge LANDED
-(iter-73/74/75/76/80/81/83/86/87,
-D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121; the corpus
+the scene-line projection pipe + chron-2 the history bridge +
+place-1 the placement discipline LANDED
+(iter-73/74/75/76/80/81/83/86/87/88,
+D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122; the
+corpus
 prices paid fidelity-only / zero-by-construction ×3 / the genesis
 events + the id shift — the murmur's pre-seed timing the one
 designed shift — / read-side zero / the pass-1 positions frozen —
-the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green) + the
+the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green /
+lint-side + pack data alone — zero re-pins, 1422+1 green) + the
 iter-82 concept-land verdict set (D-116: the 13 questions resolved,
 the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
@@ -594,18 +606,18 @@ prerogative; D-119's catalog rows + refusals; the queue itself
 untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
-rows). The queue (D-116's wave order): `place-1` placement
-discipline next (the claim↔exits consistency lint — the map↔graph
-coherence the derived travel prices read) → `geo-1` the geometry
-rework (before any big-world pack)
+rows). The queue (D-116's wave order): `geo-1` the geometry rework
+next (before any big-world pack)
 → `maclock-1` the macro-clock primitive (FIRST among its consumers)
 → `depth-3` scene LOD (its depth-5 gate is satisfied — the passes are
 landed), `depth-6` factions, `depth-7` groups & simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
 phases.md §5/§7) + `name-1` the name generator (D-116: the Azgaar
 split — condensation's canon-birth events need names). st-6(a)
-travel is a live candidate after place-1 + maclock-1 (the price law
-amended — derived from the WorldModel, pack override wins). W3
+travel is a live candidate after maclock-1 alone (place-1 LANDED
+iter-88 — the claim↔exits consistency the derived travel prices
+read; the price law amended — derived from the WorldModel, pack
+override wins). W3
 closes without rows: the calendar binding is maclock-1's own,
 weather-1's row stands (intake-3, its gate read as bridge-1 +
 maclock-1 landed — bridge-1 now landed, the gate waits on maclock-1
@@ -631,10 +643,17 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    mechanism pinned on crafted tiers), the cause TREE (the parent
    map resolved through the writer's ids); the corpus price — the
    pass-1 positions frozen, zero corpus re-pins, the T1 fixture the
-   one re-pin);
+   one re-pin); place-1 LANDED (iter-88, D-122 — the placement
+   discipline: the claim↔exits consistency lint — every exits edge
+   joining two claimed locations reads sites within the
+   pack-declared `place.max_edge_span` lattice steps; the metric the
+   engine's row-major Chebyshev lattice, the threshold the pack's
+   (INV-3); the vacuity law; KI#82 the missing-sub-block KeyError
+   leak opened + fixed the same iteration; corpus price zero —
+   lint-side + pack data alone, zero re-pins);
    the
-   queue: place-1 placement discipline next,
-   geo-1, maclock-1, then scene LOD
+   queue: geo-1 the geometry rework next,
+   maclock-1, then scene LOD
    (its depth-5 gate is satisfied — the passes are landed), factions
    with goals, groups & simulation LOD + name-1 (design ratified
    iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7); the
@@ -649,7 +668,8 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    split; cultures/religions/burgs re-gated to phase 6), Neighborly
    (the closest cousin's architecture reading). The phase-5 spatial
    row `st-6(a)` (travel as a separate action) is a live candidate
-   after place-1 + maclock-1 (D-116: the price law amended — derived
+   after maclock-1 alone (place-1 LANDED iter-88, D-122 — the
+   claim↔exits consistency the derived travel prices read; D-116: the price law amended — derived
    from the WorldModel, pack override wins); `st-3`/`st-5`
    (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.
 2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +

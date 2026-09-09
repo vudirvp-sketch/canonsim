@@ -513,7 +513,10 @@
         "field": "river",
         "site": 1
       }
-    ]
+    ],
+    "place": {
+      "max_edge_span": 1
+    }
   },
   "urgencies": {
     "beat_ticks": [

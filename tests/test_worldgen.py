@@ -69,6 +69,15 @@ The laws pinned here:
   declared-hook law, the claim double-claim laws (modeled slot /
   scene_detail overlap / duplicate pair / site bounds / the reserved
   vocabulary incl. the history outcome keys).
+- **The placement discipline (place-1, W1)**: the claim↔exits
+  consistency — every exits edge joining two CLAIMED locations reads
+  sites within the pack-declared `place.max_edge_span` lattice steps
+  (the graph's edge contract; the metric is the engine's
+  `lattice_distance`, the threshold the pack's — INV-3); the vacuity
+  law (a span at the lattice diameter accepts every pair, dead
+  data); a MISSING sub-block is a loud PackError, never a KeyError
+  (KI#82); the runtime split — the passes never read `place`, so the
+  raw-read backstop's set stays six-block.
 - **The depth-5b arming laws (D-116)**: CONDUCTANCE — the genesis types
   clear the tale gate through the pack's own importance rule (the
   dead-arming lint refuses what the listing forgot); REACHABILITY (L1)
@@ -118,6 +127,7 @@ from core.worldgen import (
     WorldgenError,
     generate_world,
     genesis,
+    lattice_distance,
     resolve_claims,
 )
 from render.chronicle import render_chronicle
@@ -184,6 +194,7 @@ WG: dict[str, Any] = {
         {"location": "loc_tavern", "slot": "world_region", "field": "region", "site": 0},
         {"location": "loc_street", "slot": "near_river", "field": "river", "site": 1},
     ],
+    "place": {"max_edge_span": 1},
 }
 
 CLAIM_SLOTS = ("terrain", "world_region", "near_river")
@@ -941,6 +952,121 @@ def test_the_lint_refuses_the_claim_double_claim_family(tmp_path: Path) -> None:
     assert "unknown location id" in _lint_error(tmp_path, unknown_location)
     empty_claims = {**WG, "claims": []}
     assert "dead data" in _lint_error(tmp_path, empty_claims)
+
+
+# -- place-1: the placement discipline (the claim-exits consistency) ------------
+
+
+def test_the_lattice_distance_is_the_cell_topology() -> None:
+    """The placement metric: row-major cells, Chebyshev steps — the
+    same cell 0, adjacent columns 1, DIAGONAL neighbors 1 (the king
+    move — the square lattice's own adjacency), the opposite corners
+    the diameter (columns - 1). A pure function of (indices, map
+    config) — computable pre-draw, load-time; symmetric; the map's
+    TOPOLOGY of record (the drawn sites are its jittered, relaxed
+    realization)."""
+    # WG's map: extent 48, spacing 8 -> 6 columns, 36 sites
+    assert lattice_distance(0, 0, 48, 8) == 0
+    assert lattice_distance(0, 1, 48, 8) == 1  # same row, next column
+    assert lattice_distance(0, 7, 48, 8) == 1  # diagonal neighbor
+    assert lattice_distance(0, 6, 48, 8) == 1  # same column, next row
+    assert lattice_distance(0, 35, 48, 8) == 5  # opposite corners
+    assert lattice_distance(35, 0, 48, 8) == 5  # symmetric
+    assert lattice_distance(5, 30, 48, 8) == 5  # (0,5) vs (5,0)
+    assert lattice_distance(8, 9, 48, 8) == 1  # mid-map neighbors
+    assert lattice_distance(8, 16, 48, 8) == 2  # (1,2) vs (2,4)
+
+
+def test_the_lint_refuses_the_claim_exits_inconsistency(
+    tmp_path: Path,
+) -> None:
+    """place-1, the row's letter: a location's claimed site must be
+    topologically compatible with its exits. loc_tavern and loc_street
+    are joined by exits, so their claimed sites must sit within the
+    declared span — the street's river claim at the OPPOSITE CORNER
+    (site 35, five steps from the tavern's site 0, beyond span 1) is
+    refused: the map-graph coherence the derived travel prices of
+    st-6a read (an edge-local price needs edge-local sites). The
+    co-located twin (site 0, zero steps) passes; a span of 0 tightens
+    the law to same-cell only and refuses the committed 0-vs-1 pair."""
+    far = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "terrain", "field": "biome", "site": 0},
+        {"location": "loc_tavern", "slot": "world_region", "field": "region",
+         "site": 0},
+        {"location": "loc_street", "slot": "near_river", "field": "river", "site": 35},
+    ]}
+    message = _lint_error(tmp_path, far)
+    assert "loc_street <-> loc_tavern" in message  # the sorted pair
+    assert "lattice steps apart" in message
+    assert "max_edge_span 1" in message
+    co_located = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "terrain", "field": "biome", "site": 0},
+        {"location": "loc_tavern", "slot": "world_region", "field": "region",
+         "site": 0},
+        {"location": "loc_street", "slot": "near_river", "field": "river", "site": 0},
+    ]}
+    crafted_pack(tmp_path, "co_located", co_located)  # distance 0 <= 1: loads
+    zero_span = {**WG, "place": {"max_edge_span": 0}}
+    assert "lattice steps apart" in _lint_error(tmp_path, zero_span)
+
+
+def test_the_lint_refuses_a_vacuous_or_malformed_span(
+    tmp_path: Path,
+) -> None:
+    """The vacuity law: a span at the lattice DIAMETER (columns - 1 = 5
+    on WG's 6-column lattice) accepts every site pair including the
+    opposite corners — the relation can never refuse, dead data (the
+    single-tier collection's twin law, NOT a policy ceiling — D-116
+    (3) refuses those). The range law: a negative span is nonsense; a
+    non-integer is a shape error; an unknown key is a second config
+    surface. A missing `place` block is a missing sub-block — the
+    arming is a complete declaration."""
+    vacuous = {**WG, "place": {"max_edge_span": 5}}
+    assert "vacuous dead data" in _lint_error(tmp_path, vacuous)
+    beyond = {**WG, "place": {"max_edge_span": 99}}
+    assert "vacuous dead data" in _lint_error(tmp_path, beyond)
+    negative = {**WG, "place": {"max_edge_span": -1}}
+    assert "must be an integer in 0..4" in _lint_error(tmp_path, negative)
+    not_int = {**WG, "place": {"max_edge_span": "1"}}
+    assert "must be an integer in 0..4" in _lint_error(tmp_path, not_int)
+    unknown = {**WG, "place": {"max_edge_span": 1, "scale": 2}}
+    assert "unknown keys" in _lint_error(tmp_path, unknown)
+    missing = {k: v for k, v in WG.items() if k != "place"}
+    assert "is missing the 'place' sub-block" in _lint_error(tmp_path, missing)
+
+
+def test_a_missing_sub_block_is_a_loud_packerror_never_keyerror(
+    tmp_path: Path,
+) -> None:
+    """KI#82: removing ANY sub-block from the worldgen config is a
+    PackError NAMING the block — never a raw KeyError from the lint's
+    own indexing (the pred-contract family law: loud, named, before
+    the world answer). Before the fix only unknown EXTRA keys were
+    checked; a MISSING block leaked KeyError('map') straight through
+    `load_pack` (probed on a crafted twin)."""
+    for block in ("map", "biomes", "watershed", "states", "chronicle",
+                  "claims", "place"):
+        broken = {k: v for k, v in WG.items() if k != block}
+        assert f"is missing the {block!r} sub-block" in _lint_error(
+            tmp_path, broken
+        )
+
+
+def test_the_place_block_is_lint_side_alone_the_backstop_ignores_it() -> None:
+    """The runtime split: the passes never read `place`, so the
+    raw-read backstop's required set stays six-block — a hand-built
+    config WITHOUT `place` generates a world and answers the genesis
+    fine (placement is a load-time law; the pack lint owns the
+    contract, the backstop owns what runtime touches). The LINT
+    refuses the same config — the two sets diverge by design."""
+    stripped = {k: v for k, v in WG.items() if k != "place"}
+    model, drafts, _parents = genesis(
+        RngBank(42), _rules_with(stripped), [], 42
+    )
+    assert model is not None and len(drafts) == WG["chronicle"]["events_max"]
+    assert generate_world(RngBank(42), stripped).sites == generate_world(
+        RngBank(42), WG
+    ).sites  # the block changes no draw, no model value
 
 
 # -- the depth-5b arming laws (D-116: conductance + reachability) ----------------

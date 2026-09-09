@@ -54,6 +54,20 @@ cause chain, recorded in the event's outcome. First-commit-wins for the
 claimer, canon outranks the generator — never a second write path
 beside the ledger/promotion door.
 
+**The placement discipline (place-1, W1):** the claim↔exits
+consistency — a location's claimed site must be topologically
+compatible with its exits (two locations joined by exits never read
+sites from opposite corners of the map; the map↔graph coherence the
+derived travel prices of st-6a read, D-116 (5)). The METRIC is the
+engine's (`lattice_distance` — the row-major cell topology, Chebyshev
+steps, a pure function of the indices + the map config, computable
+pre-draw at load time); the RELATION is the PACK's
+(`worldgen.place.max_edge_span`, the exits graph's edge contract —
+INV-3: the engine measures, the pack decides, never engine geography
+knowledge). The lint lives in `core/pack.py::_worldgen`; the passes
+never read the `place` block (the runtime backstop's set stays
+six-block — placement is a load-time law alone).
+
 **The genesis (pre-PC history, chron-2's DF legends shape):** `WorldModel`
 is DERIVED data (a pure function of seed + pack config, rebuildable,
 never truth — L11); the world's canon-visible facts ride EVENTS like
@@ -129,6 +143,7 @@ __all__ = [
     "genesis",
     "generate_world",
     "genesis_drafts",
+    "lattice_distance",
     "resolve_claims",
 ]
 
@@ -236,7 +251,11 @@ _BIOME_TABLE: Final[dict[tuple[int, int], str]] = {
     (3, 3): "mountain",
 }
 
-#: The sub-blocks of the worldgen config (the lint's closed key set).
+#: The sub-blocks the RUNTIME reads (the raw-read backstop's required
+#: set, `_require_config`; the LINT's full closed key set lives in
+#: `core/pack.py::WORLDGEN_SUB_BLOCKS`). place-1: `place` is lint-side
+#: alone — the passes never read it, so it sits in the lint's set, not
+#: here (the backstop owns what runtime touches, the lint the contract).
 _SUB_BLOCKS: Final = ("map", "biomes", "watershed", "states", "chronicle", "claims")
 
 #: The required ints of each sub-block (the runtime raw-read backstop;
@@ -763,6 +782,33 @@ def _pass_chronicle(
                 )
             )
     return tuple(history)
+
+
+# -- the placement metric (place-1) --------------------------------------------
+
+
+def lattice_distance(
+    site_a: int, site_b: int, extent: int, spacing: int
+) -> int:
+    """The lattice distance (place-1, the placement discipline's
+    metric): the Chebyshev distance in CELL STEPS between two site
+    indices on the row-major lattice — `columns = extent // spacing`
+    cells per row, cell (row, col) = divmod(site, columns). The LATTICE
+    is the map's topology of record: the drawn sites are its jittered,
+    relaxed realization (each site stays in its cell's neighborhood —
+    the jitter law 2*jitter < spacing, the relax centroids), so the
+    cell-step distance bounds every realization; opposite corners read
+    `columns - 1`, adjacent cells 1, the same cell 0. A pure function
+    of (indices, map config) — computable pre-draw, load-time, the
+    pack lint's metric for the claim↔exits consistency law
+    (`core/pack.py::_worldgen`); the PACK declares the compatibility
+    threshold (`worldgen.place.max_edge_span`), the engine only
+    measures (INV-3). Site indices are the lint's responsibility —
+    bounds are checked before the call, not here."""
+    columns = extent // spacing
+    row_a, col_a = divmod(site_a, columns)
+    row_b, col_b = divmod(site_b, columns)
+    return max(abs(row_a - row_b), abs(col_a - col_b))
 
 
 # -- the one door --------------------------------------------------------------

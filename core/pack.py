@@ -65,6 +65,7 @@ from core.worldgen import (
     HISTORY_KINDS,
     RESERVED_CLAIM_SLOTS,
     WORLDGEN_BLOCK,
+    lattice_distance,
 )
 
 __all__ = [
@@ -133,6 +134,7 @@ WORLDGEN_SUB_BLOCKS: Final = (
     "states",
     "chronicle",
     "claims",
+    "place",
 )
 WORLDGEN_MAP_KEYS: Final = (
     "extent",
@@ -2733,7 +2735,12 @@ class _Lint:
         (`participants`/`places` unconditionally, `collection` when
         the vocabulary is declared — the L1 law at alternative
         granularity); states.capitals ≥ 2 (the participants' two
-        distinct regions)."""
+        distinct regions). The place-1 law (W1, the placement
+        discipline): the claim↔exits consistency — every exits edge
+        joining two CLAIMED locations must read sites within the
+        pack-declared `place.max_edge_span` lattice steps (the graph's
+        edge contract; the metric is the engine's lattice, the
+        threshold the pack's — INV-3)."""
         rules = self._data["rules.json"]
         config = rules.get(WORLDGEN_BLOCK)
         if config is None:
@@ -2742,13 +2749,25 @@ class _Lint:
         _require(
             isinstance(config, Mapping),
             f"{where} must be an object (the closed vocabulary: map | "
-            "biomes | watershed | states | chronicle | claims)",
+            "biomes | watershed | states | chronicle | claims | place)",
         )
         unknown = sorted(set(config) - set(WORLDGEN_SUB_BLOCKS))
         if unknown:
             raise PackError(
                 f"{where}: unknown keys {unknown} (the closed vocabulary: "
-                "map | biomes | watershed | states | chronicle | claims)"
+                "map | biomes | watershed | states | chronicle | claims | "
+                "place)"
+            )
+        # KI#82: a MISSING sub-block is a loud PackError naming the
+        # block, never a raw KeyError from the indexing below (the
+        # pred-contract family law — only unknown EXTRA keys were
+        # checked before; the leak was probed on a crafted twin).
+        for block in WORLDGEN_SUB_BLOCKS:
+            _require(
+                block in config,
+                f"{where} is missing the {block!r} sub-block (the "
+                "closed vocabulary: map | biomes | watershed | states | "
+                "chronicle | claims | place)",
             )
 
         map_cfg = config["map"]
@@ -2787,7 +2806,8 @@ class _Lint:
                 f"{where}.map.{key} must be 1..5 (the octave range the "
                 "integer noise normalizes over)",
             )
-        site_count = (map_cfg["extent"] // map_cfg["spacing"]) ** 2
+        columns = map_cfg["extent"] // map_cfg["spacing"]
+        site_count = columns**2
 
         biome_cfg = config["biomes"]
         _require(
@@ -3007,6 +3027,35 @@ class _Lint:
                     "L1 law; the chronicle line is the fields' consumer)"
                 )
 
+        # place-1 (W1), the placement discipline's own block: the
+        # PACK-DECLARED edge contract. `max_edge_span` is the maximum
+        # lattice distance (Chebyshev cell steps, `lattice_distance`)
+        # the exits graph tolerates between the claimed sites of two
+        # exits-joined locations. 0 = co-located rooms (the building
+        # scale); the lattice diameter (columns - 1) is REFUSED — a
+        # span there accepts every site pair including the opposite
+        # corners, vacuous dead data (the single-tier collection's
+        # twin law, NOT a policy ceiling — D-116 (3) refuses those).
+        place_cfg = config["place"]
+        _require(
+            isinstance(place_cfg, Mapping),
+            f"{where}.place must be an object",
+        )
+        unknown = sorted(set(place_cfg) - {"max_edge_span"})
+        if unknown:
+            raise PackError(
+                f"{where}.place: unknown keys {unknown} (the closed "
+                "vocabulary: max_edge_span)"
+            )
+        span = place_cfg.get("max_edge_span")
+        _require(
+            _is_int(span) and 0 <= span <= columns - 2,
+            f"{where}.place.max_edge_span must be an integer in "
+            f"0..{columns - 2} (0 = co-located rooms; {columns - 1} is "
+            f"the {columns}-column lattice's diameter — a span there "
+            "accepts every site pair, vacuous dead data)",
+        )
+
         claims = config.get("claims")
         _require(
             isinstance(claims, list) and claims,
@@ -3084,6 +3133,52 @@ class _Lint:
                 "a colliding claim can never bind; see "
                 "core/worldgen.py::RESERVED_CLAIM_SLOTS)",
             )
+
+        # place-1 (W1), the claim↔exits consistency: a location's
+        # claimed site must be topologically compatible with its
+        # exits. For every UNDIRECTED exits edge joining two CLAIMED
+        # locations, every cross-pair of their claimed sites must sit
+        # within the declared max_edge_span lattice steps — two
+        # locations joined by exits never read sites from opposite
+        # corners of the map (the map↔graph coherence the derived
+        # travel prices of st-6a read, D-116 (5): an edge-local price
+        # needs edge-local sites). Edges with an unclaimed endpoint
+        # impose nothing (the law is edge-mediated — an unclaimed
+        # neighbor renders its pack-record fields); a location's own
+        # claims are unordered (all cross-pairs checked, the strictest
+        # reading — a far claim is refused whatever its siblings).
+        # The exits graph is symmetric (the entities lint runs before
+        # this one), so the sorted unique pairs cover every edge once.
+        sites_by_location: dict[str, list[int]] = {}
+        for entry in claims:
+            sites_by_location.setdefault(
+                str(entry["location"]), []
+            ).append(int(entry["site"]))
+        edges: set[tuple[str, str]] = set()
+        for record in self._data["entities.json"]["locations"]:
+            for exit_id in record["exits"]:
+                left, right = sorted((str(record["id"]), str(exit_id)))
+                edges.add((left, right))
+        for left, right in sorted(edges):
+            left_sites = sites_by_location.get(left, ())
+            right_sites = sites_by_location.get(right, ())
+            if not left_sites or not right_sites:
+                continue
+            for site_a in left_sites:
+                for site_b in right_sites:
+                    distance = lattice_distance(
+                        site_a, site_b,
+                        map_cfg["extent"], map_cfg["spacing"],
+                    )
+                    _require(
+                        distance <= span,
+                        f"{where}.place: the exits edge {left} <-> {right} "
+                        f"reads sites {site_a} and {site_b} — {distance} "
+                        f"lattice steps apart, beyond max_edge_span {span} "
+                        "(the claim-exits consistency law: two locations "
+                        "joined by exits never claim sites the edge cannot "
+                        "reach — claim reachable sites or raise the span)",
+                    )
 
         # D-116 (2), CONDUCTANCE: dead template lines are dead data. The
         # genesis event types must clear the tale gate THROUGH THE PACK'S

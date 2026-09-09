@@ -203,13 +203,24 @@ header law — the detail lives in git + worklog + D-110..D-113)
   drawn years/kinds/hooks verbatim, the murmur's pre-seed pins
   stable, zero corpus re-pins), the T1 fixture the one re-pin (4
   outcome lines). Detail: tests/test_worldgen.py + D-121.
-- `place-1` · placement discipline (W1) — todo: the claim↔exits
-  consistency lint — a location's claimed site must be topologically
-  compatible with its exits (two locations joined by exits never read
-  sites from opposite corners of the map); the map↔graph coherence
-  the derived travel prices (st-6a, D-116) read; site compatibility
-  is a pack-declared relation (the graph's edge contract), never
-  engine geography knowledge (INV-3).
+- `place-1` · placement discipline (W1) — **done (iter-88, D-122)**:
+  the claim↔exits consistency lint — every exits edge joining two
+  CLAIMED locations reads sites within the pack-declared
+  `place.max_edge_span` lattice steps (`worldgen.place`, the graph's
+  edge contract: the METRIC is the engine's row-major Chebyshev
+  `lattice_distance`, the THRESHOLD the pack's — never engine
+  geography knowledge, INV-3; two locations joined by exits never
+  read sites from opposite corners of the map — the map↔graph
+  coherence the derived travel prices of st-6a read, D-116 (5)); the
+  vacuity law (a span at the lattice diameter accepts every pair —
+  dead data, the single-tier twin law, never a policy ceiling); the
+  passes never read `place` (load-time law alone, the runtime
+  backstop stays six-block); the committed pack declares span 1 (the
+  tavern↔street pair: sites 0 and 1, one step); KI#82 (the
+  missing-sub-block KeyError leak) opened + fixed in the same
+  iteration; corpus price zero (lint-side + pack data alone — the T1
+  + corpus fixtures byte-identical, zero re-pins). Detail:
+  tests/test_worldgen.py + D-122.
 - `geo-1` · the geometry rework (W1, BEFORE any big-world pack) —
   todo: the grid-hash neighbor walk (buckets at spacing scale —
   `_neighbors` O(N) amortized, computed ONCE and shared by watershed
@@ -660,9 +671,10 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   the `exits` precedent, KI#41); the validator adjudicates claims on
   it; mutable decor stays texture (the existing door). The gates for
   (a): SATISFIED (depth-5 landed, D-115 — the phase-5 spatial layer
-  exists; D-116 amended the price law above) — the row is a live
-  candidate after place-1 (the exits↔map consistency the prices
-  read) + maclock-1 (the edge-state cadence, space packs).
+  exists; D-116 amended the price law above; place-1 LANDED iter-88,
+  D-122 — the exits↔map consistency the prices read) — the row is a
+  live candidate after maclock-1 alone (the edge-state cadence,
+  space packs).
 
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 

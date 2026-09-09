@@ -498,7 +498,17 @@ cause TREE (L7 — a member chains to its nearest lower-tier
 predecessor, the loop resolves the worldgen's parent map through the
 writer's own ids); the corpus price: the pass-1 stream positions
 frozen (the drawn years/kinds/hooks verbatim, zero corpus re-pins),
-the T1 fixture the one re-pin — 4 outcome lines). Track B
+the T1 fixture the one re-pin — 4 outcome lines). place-1 the
+placement discipline landed iter-88 (D-122: the claim↔exits
+consistency lint — every exits edge joining two claimed locations
+reads sites within the pack-declared `worldgen.place.max_edge_span`
+lattice steps; the metric the engine's row-major Chebyshev lattice,
+the threshold the pack's — the graph's edge contract, INV-3; the
+map↔graph coherence st-6a's derived travel prices read; the vacuity
+law — a span at the diameter is dead data; corpus price zero:
+lint-side + pack data alone, zero re-pins; KI#82 the
+missing-sub-block KeyError leak found + fixed the same iteration).
+Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus
 F1–F6 through the REAL mode-C door, the world-answer law's first live
