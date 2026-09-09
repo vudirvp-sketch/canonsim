@@ -1,39 +1,31 @@
 # STATUS — canonsim
 
-Iteration: iter-83 (`iter-83-worldgen-arm` — depth-5b, the worldgen
-ARMING, EXTENDED per D-116 (W0): the committed pack's own `worldgen`
-block + the `world_history` template line + the story-critical
-listing — the 68a pattern's final form; the conductance + reachability
-lint laws; the corpus price measured both arms FIRST and paid
-(fingerprint equal, the price = the genesis events + the mechanical
-id shift; the T1 fixture regenerated, the corpus re-pinned, the
-murmur's release moved to the first quiet beat as the pre-seed's
-designed price) — D-117) · Phase: 5 (Depth) — OPEN (iter-73, D-105;
-depth-1 + depth-1b + depth-2 + depth-2b + depth-4 + depth-5 +
-depth-5b LANDED, the queue: bridge-1 the scene-line pipe next —
-D-116's wave order, inseparable from the arming) · 1392 passed +1
-skipped, ruff clean (Python 3.12.14, the env pin; seeds 0/42/unset).
+Iteration: iter-84 (`iter-84-mech-1` — the mechanics introspection CLI,
+the owner's session call: an infra slot ahead of the queue's bridge-1,
+the ORDER owner's prerogative, the queue itself untouched; D-118 the
+shadow-replay law — the tool replays the log through the engine's
+public pipeline, INV-2-equal to the runtime, never instruments it) ·
+Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
++ depth-2b + depth-4 + depth-5 + depth-5b LANDED, the queue: bridge-1
+the scene-line pipe next — D-116's wave order, inseparable from the
+arming) · 1403 passed +1 skipped, ruff clean (Python 3.12.14, the env
+pin; seeds 0/42/unset).
 ·
-Date: 2026-09-09 ·
-Scope: `core/worldgen.py`, `core/pack.py`, `core/metrics.py`,
-`content/tavern_pack/rules.json`, `content/tavern_pack/templates.json`,
-`tests/test_worldgen.py`, `tests/fixtures/plumbing_smoke_seed42.jsonl`,
-`tests/fixtures/narrator_beats.json`, `tests/fixtures/validation_golden.json`,
-`tests/fixtures/texture_deltas.json`, `tests/fixtures/parse_replies.json`,
-+ the suite re-pins (17 test files' id/count/timing pins),
+Date: 2026-09-10 ·
+Scope: `scripts/mechanics.py`, `tests/test_mechanics.py`,
 `docs/TASKS.md`, `docs/DECISIONS.md`, `docs/AGENT_NAVIGATION.md`,
-`worklog.md`, `STATUS.md` (this file) — 33 files (3 code + 2 pack
-data + 5 fixture regen/re-pin + 18 test files — 1 landing + 17
-re-pins + 5 doc sync; re-counted vs git at iter-83a, KI#80): the
-arming + its lint laws + its pins + its paid price are one mechanism
-family (the iter-76/81 footprint; AGENTS §2.3 scope noted in
-worklog).
-· Audited iter-83a (the owner's re-check call, the iter-11c
-precedent): substance SOUND — 1392+1 green re-verified under seeds
-0/42/unset, ruff clean, the D-116 W0 checklist fully landed, the T1
-genesis diff reproduced (5 events + the id shift); the defects were
-the landing counts (KI#80, fixed in this edit). Doc-only, the
-suite green after the edits.
+`README.md`, `worklog.md`, `STATUS.md` (this file) — 8 files
+(git-verified: 2 new + 6 doc sync; AGENTS §2.3: 8 > 3–5, the
+objective scope noted in worklog): the four instruments — `matrix`
+(static wiring queries +
+the unindexed future-layer fallback), `trace` (the shadow replay,
+per-tick events + beat panels), `why` (the blocked-hook postmortem
+with option-gate verdicts), `blast` (the two-arm same-seed A/B) —
+plus the exactness pin (the shadow's release ids == the log's
+director events on day1_full) and the D-118 law row.
+· The prior iteration's record: iter-83 (depth-5b, the worldgen ARMING,
+D-117) audited iter-83a — substance SOUND, the landing-count defects
+fixed (KI#80); the detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 

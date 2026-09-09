@@ -715,6 +715,22 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 
 ## Infra backlog (pick by need)
 
+- `mech-1` · the mechanics introspection CLI — **done (iter-84, D-118)**:
+  the owner's agent-tooling call (an infra slot ahead of the queue's
+  bridge-1 — the ORDER owner's prerogative, the queue itself untouched).
+  `scripts/mechanics.py` (D-046 operator tooling, stdlib + core imports
+  only, stdout-only): `matrix` (static wiring off the loaded pack —
+  --event/--hook/--token/--prop queries + the unindexed-blocks fallback:
+  a future layer is listed the iteration it lands, a shape rule joins
+  later, never a rewrite), `trace` (the shadow replay — the log's events
+  and beats through the real fold/Director/predicates, INV-2-equal to the
+  runtime: the release-equality pin), `why --hook TAG` (the postmortem —
+  seeded/armed/option-gate/entropy/pacing values; the law stays
+  DIRECTOR_SPEC's, D-024), `blast` (the two-arm same-seed A/B — the
+  corpus-price pattern; no resume door, both arms replay from t=0).
+  11 pins in `tests/test_mechanics.py` (the exactness pin + the STATUS
+  pins: the relief's check t=734, the sweep last t=1456); 1392→1403+1,
+  ruff clean, seeds 0/42/unset.
 - `engine-2` · the urgency-roll stream split — **done (iter-50,
   D-079)**: the owner's "quality over speed" fork call. Per-entry
   streams `urgency:<npc>:<kind>` (content-addressed, pack-linted

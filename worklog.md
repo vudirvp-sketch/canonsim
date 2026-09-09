@@ -13,6 +13,33 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-84 · 2026-09-10 · mech-1 — the mechanics introspection CLI (the
+owner's session call: an infra slot ahead of the queue's bridge-1, the
+ORDER owner's prerogative; 8 files — 1 tool + 1 suite + 6 doc sync
+(git-verified: 2 new + 6 modified), AGENTS §2.3 scope noted here).
+`scripts/mechanics.py` (D-046
+CLI-class, stdlib + core imports only, stdout-only): `matrix` (static
+wiring queries --event/--hook/--token/--prop + the unindexed-blocks
+fallback — a future layer is listed, never guessed), `trace` (the
+shadow replay: per-tick events + beat panels with entropy/pacing),
+`why --hook TAG` (the postmortem: seeded/armed/option-gate values),
+`blast` (the two-arm same-seed A/B — the corpus-price pattern, no
+resume door). D-118: the shadow-replay law — the tool replays the log
+through the public pipeline (fold/Director/predicates/entropy), INV-2
+makes it equal the runtime; the runtime is never instrumented.
+- tests/test_mechanics.py: 11 pins — the exactness pin (the shadow's
+  release ids == the log's director events on day1_full) + the STATUS
+  pins (the relief's check at t=734, the sweep last at t=1456) + the
+  future-layer law (an unknown rules block loads and lists). 1392→
+  1403+1, ruff clean (3.12.14, the env pin; seeds 0/42/unset all
+  green, verified in this iteration).
+- docs: TASKS the mech-1 row, AGENT_NAVIGATION §1 scripts row + §2
+  Normal + §5, DECISIONS D-118, README the scripts-map line, STATUS
+  header. The queue is untouched:
+  bridge-1 stays the pinned Next step. 10 entries held (9 + this one,
+  git-verified per the KI#80 law). Caps: STATUS 654 / TASKS 985 /
+  README 627 / DECISIONS 83 lines (54 rows) — over-cap on substance
+  (§6.1, the D-095..D-116 precedent), trim at the phase-5→6 gate.
 iter-83a · 2026-09-09 · audit-fix — the owner's re-check of iter-83
 (the iter-11c precedent): substance VERDICT SOUND — 1392+1 green
 re-verified under seeds 0/42/unset, ruff clean, the D-116 W0
