@@ -13,12 +13,34 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-83a · 2026-09-09 · audit-fix — the owner's re-check of iter-83
+(the iter-11c precedent): substance VERDICT SOUND — 1392+1 green
+re-verified under seeds 0/42/unset, ruff clean, the D-116 W0
+checklist fully landed, the T1 genesis diff (5 events + the id
+shift) + the murmur-timing pins reproduced; the defects were the
+LANDING COUNTS (KI#80, opened + closed in this edit; 2 files: this
+log + STATUS). Doc-only, no code/fixtures/pins touched.
+- worklog: iter-83's counts corrected vs git — "17 files" → 33
+  (3 code + 2 pack data + 5 fixtures + 18 test files: 1 landing +
+  17 re-pins + 5 doc sync), "14 suites" → the 17 re-pinned files,
+  "10 entries held" → 11 (the missed eviction); iter-82's "9
+  after" → 10; iter-73 (the eviction iter-83 owed) + iter-75 (this
+  entry's own) evicted — 10 held, verified against git in this
+  edit (the KI#68 law).
+- STATUS: the Scope re-counted (`docs/AGENT_NAVIGATION.md` named,
+  17 re-pin suites, 33 files); KI#80 recorded; the audit note in
+  the header; one clause in the FAQ doc-drift entry — the durable
+  law: landing counts are git-verified, never asserted. D-117's
+  own "17 files" left per the append-only law; git owns the count.
+- The suite re-run green AFTER these edits (1392+1, ruff clean);
+  archive: STATUS.md + worklog.md + BASE_COMMIT 21ea6a7.
+---
 iter-83 · 2026-09-09 · worldgen-arm — depth-5b, the worldgen ARMING,
-EXTENDED per D-116 (17 files — 2 code + 2 pack data + 4 fixture
-regen/re-pin + 10 suite re-pin + 5 doc sync: the arming + its lint
-laws + its pins + its paid price are one mechanism family, the
-iter-76/81 footprint; AGENTS §2.3: 17 > 5-6, the objective scope
-noted here)
+EXTENDED per D-116 (33 files — 3 code + 2 pack data + 5 fixture
+regen/re-pin + 18 test files: 1 landing + 17 re-pins + 5 doc sync;
+re-counted vs git at iter-83a, KI#80: the arming + its lint laws +
+its pins + its paid price are one mechanism family, the iter-76/81
+footprint; AGENTS §2.3: 33 > 5-6, the objective scope noted here)
 - core/worldgen.py: the flat claim keys — each committed claim's slot
   rides the world_formed outcome as a render-surface key (D-116 (4):
   the template binds them through `_event_context`; the `claims` list
@@ -48,8 +70,9 @@ noted here)
   fixtures re-pinned (+5 ev ids / event_seqs / causes; the murmur's
   release moved to the FIRST quiet beat — the pre-seed's designed
   price, D-005: the genesis seeds the director's buffer), ~70 test
-  pins updated across 14 suites (the day1 scan ids, the golden-log
-  slices, the reflection/retrieval pins, the pacing A/B record).
+  pins updated across the 17 re-pinned files (the day1 scan ids,
+  the golden-log slices, the reflection/retrieval pins, the pacing
+  A/B record).
 - +14 tests (tests/test_worldgen.py 26→40: conductance both arms,
   reachability both consumer arms + the reserved law, the flat keys,
   the live template render, the both-arms price law (smoke + day1
@@ -57,7 +80,8 @@ noted here)
   checkpoint/restore, the two drift guards) — 1378→1392+1 green, ruff
   clean. D-117; TASKS depth-5b done; STATUS re-pinned (the queue:
   bridge-1 next — inseparable, D-116); AGENT_NAVIGATION §1 the armed
-  rows. 10 entries held (9 + this, at cap).
+  rows. 11 entries held after this edit (10 + this, the eviction
+  missed — restored to 10 at iter-83a, KI#80).
 ---
 iter-82 · 2026-09-09 · concept-land — doc-only, the generator-concept
 verdict set (D-116; 8 files — the verdict row + the routed plan are
@@ -91,8 +115,9 @@ pin); no code touched.
   economics/culture donors) + Kenshi amended; docs/REFERENCES_DEEP.md
   §1: ref-18/19/20 planned just-in-time at their consumers.
 - STATUS.md re-pinned (iter-82 header + the wave queue); worklog
-  iter-82 in / iter-72 out (verified in this edit); 9 after (the log
-  held 9 at HEAD — the cap law is held, the count did not grow).
+  iter-82 in / iter-72 out (verified in this edit); 10 after (the
+  log held 10 at HEAD — the cap law held, the count did not grow;
+  the 9s corrected iter-83a, KI#80).
 ---
 iter-81 · 2026-09-09 · worldgen — depth-5, the ordered worldgen
 passes, mechanics only (13 files — 3 code edit + 1 new code + 1 new
@@ -301,48 +326,5 @@ the iter-68b/74 arming footprint)
   (verified in this edit); 10 after. Caps: STATUS 626 / TASKS 817 /
   DECISIONS 73 lines (44 rows) — over-cap on substance (§6.1, the
   D-095..D-107 precedent), trim at the phase-5→6 gate.
----
-iter-75 · 2026-09-08 · scenedetail-gate — depth-2, lazy detail
-materialization, mechanics only (12 files — 4 code + 1 suite + 7 doc
-sync: the stream family + the draw gate + the claim mirror + the lint
-+ the doc sync are one mechanism family, the iter-60..74 scope
-pattern)
-- core/rng.py the `scene:<id>:detail` stream family (the D-079 law's
-  third member: lazy registration, injective name, the shared
-  FAMILY_PREFIXES tuple); core/detail.py (new) the draw gate
-  (canon-skip = first-commit-wins, pack-order draws, from_ None
-  births) + `detail_claim` (the slot_conflict mirror with the cause
-  chain); core/resolvers.py::_observe the wiring (the
-  scene-snapshot family; `materialized` outcome key, present only
-  when something materialized); core/pack.py::_scene_detail the
-  closed-vocabulary lint (double-claim + one-object laws, after
-  _brief per KI#77).
-- Corpus price ZERO by construction, pinned both ways: the committed
-  pack unarmed (v0.1 bytes, the fingerprint untouched — the gate
-  answers () before any assure) + the laziness pin (an armed
-  never-observed scene is byte-identical) + the measurable-arming
-  pin (the armed run differs exactly by the births and the outcome
-  key). +28 tests (1281→1309+1, ruff clean). D-107; TASKS depth-2
-  done + depth-2b (the arming row) laid. iter-68a evicted (verified
-  in this edit); 10 after. Caps: STATUS 633 / TASKS 814 over 600 —
-  substance (the landing headers' own record, the D-095/D-096
-  precedent), trim at the phase-5→6 gate; DECISIONS 43 — rides
-  above 30 until the same gate.
----
-iter-73 · 2026-09-08 · depthopen — the owner's phase-5 start call: the
-opener + research intake 4 + depth-1 the acquisition gate (11 files —
-the iter-55 opener+leg footprint: 4 code + 7 doc sync)
-- ROADMAP §2's phase-5 flip; TASKS the phase-5 backlog (depth-1..7)
-  + intake 4; phases.md §5 the two intake additions (the sha256 index
-  anchor, threshold margins) + the depth-1/1b pointer; D-105.
-- depth-1: core/intent.py::acquisition_fidelity (the event-site
-  emission law, both resolve branches, D-007's documented twin walk),
-  core/pack.py::_acquisition (the closed vocabulary lint),
-  core/clock.py::phase_of_tick (the rules-level twin).
-- The committed pack UNARMED — v0.1 bytes (the 68a pattern; no draws
-  ever); +20 tests (1255→1275+1, ruff clean; the both-arms zero-price
-  pin + the smoke-geometry liveness law). iter-67 evicted (verified
-  in this edit); 9 after (the log held 9 at HEAD — the cap law is
-  held, the count did not grow).
 ---
 (end of log — cap 10; pre-trim history lives in git)

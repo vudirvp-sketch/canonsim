@@ -20,11 +20,20 @@ Scope: `core/worldgen.py`, `core/pack.py`, `core/metrics.py`,
 `tests/test_worldgen.py`, `tests/fixtures/plumbing_smoke_seed42.jsonl`,
 `tests/fixtures/narrator_beats.json`, `tests/fixtures/validation_golden.json`,
 `tests/fixtures/texture_deltas.json`, `tests/fixtures/parse_replies.json`,
-+ the suite re-pins (10 test files' id/count/timing pins),
-`docs/TASKS.md`, `docs/DECISIONS.md`, `worklog.md`, `STATUS.md` (this
-file) — 17 files: the arming + its lint laws + its pins + its paid
-price are one mechanism family (the iter-76/81 footprint; AGENTS §2.3
-scope noted in worklog).
++ the suite re-pins (17 test files' id/count/timing pins),
+`docs/TASKS.md`, `docs/DECISIONS.md`, `docs/AGENT_NAVIGATION.md`,
+`worklog.md`, `STATUS.md` (this file) — 33 files (3 code + 2 pack
+data + 5 fixture regen/re-pin + 18 test files — 1 landing + 17
+re-pins + 5 doc sync; re-counted vs git at iter-83a, KI#80): the
+arming + its lint laws + its pins + its paid price are one mechanism
+family (the iter-76/81 footprint; AGENTS §2.3 scope noted in
+worklog).
+· Audited iter-83a (the owner's re-check call, the iter-11c
+precedent): substance SOUND — 1392+1 green re-verified under seeds
+0/42/unset, ruff clean, the D-116 W0 checklist fully landed, the T1
+genesis diff reproduced (5 events + the id shift); the defects were
+the landing counts (KI#80, fixed in this edit). Doc-only, the
+suite green after the edits.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,6 +56,15 @@ scope noted in worklog).
   new events.
 
 ## Active KIs
+
+- KI#80 · CLOSED iter-83a · iter-83's landing counts asserted, not
+  verified — "17 files" claimed vs 33 actual (the worklog breakdown
+  summed to neither), the worklog at 11 entries vs the 10 cap ("10
+  held" claimed), iter-82's "9 after" off-by-one; the KI#66/68
+  family · fixed: the counts re-counted against `git show --stat`,
+  the two owed evictions landed (iter-73/75, 10 held), the FAQ
+  carries the law (landing counts are git-verified, never
+  asserted).
 
 - (KI#79 deleted at bg-8 per AGENTS §5 — closed iter-75, two
   iterations past (iter-76 + bg-8); the lesson lives in git + the
@@ -227,7 +245,10 @@ scope noted in worklog).
   pinning test before acting (KI#42/KI#48: a ref citing a section it
   never contained, a reported-but-unlanded pass, a behavior claim
   without its pinning test — archives are ephemeral, git is real;
-  KI#51: external-paper figures are drift until fetched). Four
+  KI#51: external-paper figures are drift until fetched; KI#80:
+  landing counts — files, entries, suites — are re-counted against
+  `git show --stat` before the stop-point report, a count asserted
+  from the plan is drift at write time). Four
   places, four jobs: `REFERENCES.md` catalogs;
   `CORE_DESIGN_RESEARCH.md` §2 synthesizes; `docs/ref/<source>.md`
   carries mechanics; `BLUEPRINT.md` + `docs/blueprint/` carry
