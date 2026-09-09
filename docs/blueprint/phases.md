@@ -516,6 +516,28 @@ materialization door (a site's passes re-running against a non-empty
 log) is the future consumer the claim gate's conflict/no_op verdicts
 wait for.**
 
+**The spatial model (D-116, the generator-concept verdict — phase
+law):** no native 3D — integer-only geometry and the event-simulator
+nature forbid it (heavy determinants, the int64/long-arith risk, the
+wrong corpus weight); space needs no voxels, it needs movement
+between significant nodes. The world is a **graph of scales** (sector
+→ system → surface → interior): a scale transition is a change of the
+ACTIVE GRAPH, never physical nesting — locations are vertices with
+`exits` (the v0.1 shape); the `in`-relation + transitive closure are
+st-5 / D-112 §7. **Attributive Z**: `orbit_depth` / `z_layer` /
+`elevation_band` / `deck_level` are entity-or-edge state values (pack
+payload on `state_changes`, EVENT_SCHEMA §4) — vertical edges
+(`stairs` / `hatch` / `airlock` — pack vocabulary) instead of
+geometry; "the ship above the target" is a checks modifier, never
+geometry. **Layered maps** = Z-levels joined by edges (each layer 2D
+or graph). **Topology: bounded plane of record** — the passes'
+contract (border sinks in the watershed, the coastal refinement at
+the border — the edge rules explicit); sphere breaks integer-only
+and the lattice; torus is integer-friendly but changes neighbor
+semantics everywhere — both return only via a D-row on measured
+need. Void filtering (a space map's empty cells) is a pack-CI
+sanitizer (phase 6), never a core pass.
+
 **The LOD ladder** (LOD-1), coherent at every scale: canon log = ground
 truth; per-NPC projection = mid LOD; brief cache = top LOD; populations
 vs notables below (DF worldgen — history ticks abstractly, counts for

@@ -90,6 +90,9 @@ without re-judging.
 | ref-13 | Live Character Guide (owner's own) | solo (owner-requested, fresh external source) | character-card methodology: SPINE/Price/observability → pack lint + brief-layer injection grammar; license clean (MIT) |
 | ref-16 | agent-memory-atlas (neoneye) | solo (owner-requested, fresh external source; absorbed inside iter-8a — the D-022 exception, no solo iteration) | 151-system memory survey: 7 marks + 22 patterns → phase-1 scene ledger (D-048) + phase-4 memory checklist; license clean (MIT, GitHub API 2026-08-28) |
 | ref-17 | DF designed experience (the player-facing half not covered by iter-0h-c / ref-1) | solo (owner-requested research pass — the D-022 exception, iter-8d) | enchantment pillars P1–P6 + flaw taxonomy F1–F10 (missing layers, not wrong simulation) + successor trade-off matrix feed bg-1 hardening, phase-3 director posture, phase-5 LOD; every flaw maps to an existing mechanism or recorded phase |
+| ref-18 | X4 + Stellaris economy + Distant Worlds | 3-batch (planned, D-116 — just-in-time at res-1's opening) | the economy trio: agent supply chains + cascading failures / abstract trade value + piracy risk / private-vs-state sector — res-1's design backbone (phase 6) |
+| ref-19 | CK3 (pillars/tags/name pools) + the Azgaar name pools | 2-batch (planned, D-116 — just-in-time at name-1's row) | the name generator's phonotactic profiles + the culture-as-pillar data shape — name-1's design backbone (phase 5) |
+| ref-20 | EVE + Path of Exile + Albion + Shadows of Doubt (+ Kenshi's economy loop) | 4-batch (planned, D-116 — just-in-time at res-1's/pack-CI's opening) | economy-as-social-contract + physical tracing: sinks, friction, information asymmetry, risk premiums — res-1's lesson set + the theft family's confirmation (phase 6) |
 
 A "batch" iteration produces one file per source — the batching is a
 scheduling concept (which sources to read in the same evening), not a

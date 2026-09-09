@@ -13,6 +13,41 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-82 · 2026-09-09 · concept-land — doc-only, the generator-concept
+verdict set (D-116; 8 files — the verdict row + the routed plan are
+one family, the iter-77/78 footprint; AGENTS §2.3: 8 > 5-6, the
+objective scope noted here). The suite re-verified green at HEAD
+`0d6a3bf` BEFORE the edits (1378+1, ruff clean, 3.12.14 — the env
+pin); no code touched.
+- docs/DECISIONS.md: D-116 — the 13 owner-questions resolved as
+  best-of-variants syntheses (the scene-line reads the folded
+  projection; conductance through the importance rule + the
+  dead-arming lint; ceilings REFUSED in favor of the geo-1 rework —
+  policy ≠ correctness; the calendar deferred to maclock-1 as the
+  macro-clock's counter; travel prices derived from the WorldModel
+  with pack-override; maclock-1 the dedicated primitive row; bounded
+  plane the topology of record; the LOD ladder as mode G's boundary;
+  renotation through the render layer; world-2 the phase-6 gate
+  instrument; the Azgaar donor split; res-1 the owner-gated resource
+  layer) + the 13 contradictions dissolved (native 3D = final
+  refusal, the spatial model pinned as phase law).
+- docs/TASKS.md: intake-5 the wave plan routed (bridge-1 / chron-2 /
+  place-1 / geo-1 / maclock-1 / name-1 + world-2 / res-1 / roads-1
+  owner-gated at phase 6); depth-5b EXTENDED (conductance +
+  reachability + genesis×resume + the T1 regen, NO ceilings); st-6a's
+  price law amended (derived + pack-override, the gate satisfied).
+  TASKS 971 — rides above 600 (substance rows: the plan; the pattern
+  documented here per §6.1).
+- docs/blueprint/phases.md §5: the spatial model pinned as phase law
+  (the graph of scales, attributive Z, vertical edges, bounded plane
+  of record, void filtering = pack-CI); docs/ROADMAP.md §4: the
+  Azgaar donor split; docs/REFERENCES.md §10: eight catalog rows (the
+  economics/culture donors) + Kenshi amended; docs/REFERENCES_DEEP.md
+  §1: ref-18/19/20 planned just-in-time at their consumers.
+- STATUS.md re-pinned (iter-82 header + the wave queue); worklog
+  iter-82 in / iter-72 out (verified in this edit); 9 after (the log
+  held 9 at HEAD — the cap law is held, the count did not grow).
+---
 iter-81 · 2026-09-09 · worldgen — depth-5, the ordered worldgen
 passes, mechanics only (13 files — 3 code edit + 1 new code + 1 new
 suite + 8 doc sync: the pass family + its lint + its genesis wiring +
@@ -263,25 +298,5 @@ the iter-55 opener+leg footprint: 4 code + 7 doc sync)
   pin + the smoke-geometry liveness law). iter-67 evicted (verified
   in this edit); 9 after (the log held 9 at HEAD — the cap law is
   held, the count did not grow).
----
-iter-72 · 2026-09-08 · prosefloor-2 — the lowercase assertion surface,
-the lance's last row (D-104; 10 files — the iter-66 family footprint:
-the instrument + its doc sync)
-- brief/scan.py: `relation_attribute_tokens` (the two assertion slots —
-  the copular predicate head with the 's contraction + up to two
-  interveners, the possessive tail with the intensifier skip; the
-  closed classes are English function words only, INV-3-clean) +
-  `modeled_vocabulary` (names/roles/moods/axes, the name manifest
-  reused); a measurement export, NEVER a gate (D-096) — no refusal,
-  no regen spend, no boundary wiring.
-- tests/test_scan.py +15: the boundary pins + the corpus calibration
-  baseline pinned exact (129 strings / 133 token-hits / 81 unique /
-  14 grounded / 67 unmodeled — the single owner of the split numbers,
-  D-024); corpus price ZERO by construction (no pipeline byte moved,
-  T1/T2/corpus/mediator untouched). Docs: VALIDATION_SPEC §2.1,
-  TEST_PLAN §8.4, TASKS (prosefloor-2 done — the v0.2 lance COMPLETE),
-  README, AGENT_NAVIGATION §1, DECISIONS D-104. KI#76/77/78 deleted
-  per §5 (two-plus iterations past). 1255+1 green, ruff clean.
-  iter-66a evicted (verified in this edit); 10 after.
 ---
 (end of log — cap 10; pre-trim history lives in git)

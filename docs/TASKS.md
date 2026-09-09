@@ -63,14 +63,29 @@
   epistemology-empty discipline); the committed pack UNARMED (the 68a
   pattern — zero draws, zero events, v0.1 bytes). Detail:
   tests/test_worldgen.py.
-- `depth-5b` · the worldgen ARMING — todo: the committed pack's own
-  `worldgen` block (the map + chronicle + claims; the template line
-  + the director hooks it may seed), the corpus price measured BOTH
-  arms first (the both-arms law, D-108's precedent — the price is the
-  genesis events alone by construction, the canon fingerprint
-  pinned); the M5 run-start note (the first event of an armed run is
-  the world_formed genesis, actor world — metrics.py's v0.1 docstring
-  re-pin rides here).
+- `depth-5b` · the worldgen ARMING — todo (EXTENDED per D-116, W0):
+  the committed pack's own `worldgen` block (the map + chronicle +
+  claims; the template line + the director hooks it may seed), the
+  corpus price measured BOTH arms first (the both-arms law, D-108's
+  precedent — the price is the genesis events alone by construction,
+  the canon fingerprint pinned); the M5 run-start note (the first
+  event of an armed run is the world_formed genesis, actor world —
+  metrics.py's v0.1 docstring re-pin rides here). The D-116 additions:
+  (1) CONDUCTANCE — the pack lists `world_formed` + the chronicle
+  event type in `importance.story_critical_events` (tune-1's law:
+  the rule owns the split), and the `_worldgen` lint refuses an armed
+  chronicle whose genesis types cannot clear the tale gate
+  (world_formed scores 0 / history 1 per_far_hook / gate medium 2 —
+  dead template lines = dead data); (2) REACHABILITY — every armed
+  claim names at least one LIVE consumer (a template line binding
+  the slot, a declared director hook; the scene-line joins the
+  consumer set at bridge-1) — the L1 law, lint-enforced;
+  (3) the genesis×resume test (double `open()` at fold/resume — the
+  double world_formed commit is unpinned today — + the config-drift
+  guard when the pack changes between fold and resume); (4) the T1
+  planned regen (the iter-15 precedent, same iteration — the arming
+  moves seed-42 output). NO lint ceilings (D-116: geo-1 is the wall's
+  answer, the queue order the guard).
 - `depth-6` · factions with goals — todo: small-formula dynamics
   (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
 - `depth-7` · groups & simulation LOD — todo (design RATIFIED
@@ -138,6 +153,113 @@ header law — the detail lives in git + worklog + D-110..D-113)
 - pack-declared margins on any future threshold-crossing surface —
   done (iter-73, routed to phases.md §5, depth-1's row): deadband,
   never entropy.
+
+### Research intake 5 (iter-82; the generator-concept verdict set, routed)
+
+> The owner's 2026-09-09 concept text — a two-pass-verified analysis
+> of the generator's state (three independent clone reviews + a
+> worldgen/space/dimensionality memorandum + a procedural-generation
+> essay, with an economics/culture donor digest) — cross-checked
+> against HEAD `0d6a3bf` before intake; the load-bearing claims
+> confirmed on the code this session (the scene-line pack-record read
+> at `brief/assembler.py`; the importance trap — world_formed 0 /
+> history 1 / gate 2; the O(extent²·N·R) relax; the double
+> `_neighbors`; the absent `worldgen` block in the committed pack;
+> the 4 claim fields / 8 biomes / 4 history verbs). The verdict set is
+> D-116 (each question a best-of-variants synthesis); the wave plan
+> routes below, W0 → W4. The concept text itself stays outside the
+> repo (the convenience-copy law, STATUS FAQ).
+
+- `bridge-1` · the scene-line projection pipe (W1, the main rework) —
+  todo: `brief/assembler.py`'s scene fields read the FOLDED
+  PROJECTION — the committed claims (biome/height/region/river slots
+  ride world_formed's state_changes into the fold) — with the pack
+  record the fallback for unclaimed fields; the card law preserved
+  (static surface first, event-born news last — the claims ARE
+  event-born); L3 held (read-side derive, never store); the pipe
+  test: an armed claim visible in the brief of the scene that claims
+  it, determinism pinned; the corpus price measured both arms
+  (read-side — zero by construction, the fingerprint pin).
+  Inseparable from depth-5b: an armed world invisible to the narrator
+  is half-armed (D-116).
+- `chron-2` · chronicle v2, the history bridge (W1) — todo: the
+  history events gain participants (regions), places (sites), and
+  cause (L7 — the chain visible at record time, the DF legends
+  shape); the war→battle→episode hierarchy as a PACK-DECLARED
+  collection vocabulary (the DF `event_collections` donor shape,
+  L10: JSON + schema, never string languages); HISTORY_KINDS stays
+  closed (the 4 verbs; collections are the pack's layer); template
+  closure linted (the genesis event types are pack vocabulary,
+  EVENT_SCHEMA §11).
+- `place-1` · placement discipline (W1) — todo: the claim↔exits
+  consistency lint — a location's claimed site must be topologically
+  compatible with its exits (two locations joined by exits never read
+  sites from opposite corners of the map); the map↔graph coherence
+  the derived travel prices (st-6a, D-116) read; site compatibility
+  is a pack-declared relation (the graph's edge contract), never
+  engine geography knowledge (INV-3).
+- `geo-1` · the geometry rework (W1, BEFORE any big-world pack) —
+  todo: the grid-hash neighbor walk (buckets at spacing scale —
+  `_neighbors` O(N) amortized, computed ONCE and shared by watershed
+  + biomes), the relax pass's per-site bounding-box walk (the ×N
+  factor leaves the cost: each lattice point examined once per
+  nearby site, O(extent²) total — the current O(extent²·N·R) wall
+  measured, not projected), and the worldgen perf profile (measured
+  numbers → TECH_NOTES, the perf-1 `profile_harness.py` precedent;
+  the 10k-site synthetic probe's curve the exit evidence). NO lint
+  ceilings (D-116: policy ≠ correctness — the queue order is the
+  guard).
+- `maclock-1` · the macro-clock primitive (W2, FIRST among its
+  consumers) — todo: the scheduler cadence rule (INV-2-clean:
+  tick-derived, sorted order, never entropy — the depth-3
+  "scheduler rule" family), the macro-year counter (the calendar
+  binding lands HERE as a pack-declared cadence under L4 layered
+  clocks — D-116: neither a global tick↔year constant nor
+  forever-decorative years), the aggregate-event emission surface
+  (one event with cardinality, the D-112 shape) that depth-3 (warm
+  ring), depth-7 (group ticks), st-6a (travel), and weather-1
+  (ambient) read. Consumers land AFTER the primitive (one primitive,
+  one row, first — the scheduler blast-radius insurance).
+- `name-1` · the name generator (W2, beside depth-7) — todo:
+  pack-declared phonotactic profiles (culture-keyed n-gram pools —
+  the CK3/Azgaar donor shape; deep dive owed at the row: ref-19,
+  DEEP §1), pure functions over per-stream draws (the D-079 family
+  law; INV-2 deterministic, INV-3 clean — phonotactics are pack
+  data, the generator is pure functions); the consumers: depth-7's
+  condensation canon-birth events (region_00 does not scale) +
+  world-2's cultures. Output linted against the entity namespace
+  (no collision).
+- `world-2` · the second world, the phase-6 gate's own instrument
+  (W4, owner-gated — new name: pack-2 is the made iter-29
+  door-check) — todo: the TWO-LEVEL gate — level 1 the T1 reskin
+  ≤ 1 day (ROADMAP §2's phase-6 exit, measured on this pack),
+  level 2 the deep second world (weeks — VISION §7's honest twin;
+  the mero distinguishing a reskin from a real world). A fantasy
+  province at pack scale (the concept's W4 shape); the phase-5 exit
+  needs NO second world (the emergent chain rides the armed
+  committed pack, depth-5b + the worldgen hooks).
+- `res-1` · the resource/economy layer (W4, owner-gated, phase 6 —
+  VISION §6's "scarcity" formula word gets its row owner) — todo:
+  the closed scarcity cycle (source → flow → sink) as PACK DATA: the
+  dependency graph (nodes/edges, integer inventories as state on the
+  existing surfaces), flows as aggregate macro-events on maclock
+  cadence (a convoy loss → a station's halt — the X4 cascade shape),
+  sinks via the existing irreversible item laws (the INV-5 family),
+  price spreads as derived read-side values (L3); never a second
+  economy engine beside the canon door (D-116). Deep dives owed at
+  the phase-6 opening (ref-18/ref-20, DEEP §1).
+- `roads-1` · the generated-exits pass (W4, owner-gated, phase
+  6/mode G) — todo: mode G must EMIT exits for generated worlds
+  (hand-authoring a generated world's edges is impossible — the
+  concept's §8.6 measured need); an MST/k-nearest graph over the
+  sites (the Red Blob family); a PASS_ORDER growth = a D-row when it
+  lands (core change, the closed-vocabulary discipline); authored
+  packs keep manual exits (the pack wins).
+
+> W3 closes without new rows: the calendar binding is maclock-1's own
+> (D-116), weather-1's row stands (intake-3 — its gate read as
+> bridge-1 + maclock-1 landed), directions are pack data over the
+> graph today (zero core — no row owed until a measured need).
 
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 
@@ -493,8 +615,10 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   canon from birth). (a) **`travel` as a separate action, NOT
   weighted `move`** — move semantics, `adjacent_to`, and the T1
   golden fixtures stay untouched; duration = pack-precomputed edge
-  cost (per edge or edge×mode — no runtime division in the
-  resolver); mechanically legal today (`t + duration`, MVP_SCOPE §8;
+  cost OR derived from the WorldModel (D-116: a pure integer function
+  of distance + height/river modifiers at resolve time — generated
+  worlds never hand-author prices; the pack override wins per edge;
+  integer math, no runtime division in the resolver); mechanically legal today (`t + duration`, MVP_SCOPE §8;
   the clock jumps ahead so day-scale durations are queue-cheap;
   beats/rotations still fire mid-travel in tick order, D-038); macro
   clocks (L4) enter only when regions/worldgen arrive. (b)
@@ -505,10 +629,11 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   canon_slot reads top-level pack fields only was WRONG: the check
   reads both prop sources, and a pack field was already guarded —
   the `exits` precedent, KI#41); the validator adjudicates claims on
-  it; mutable decor stays texture (the existing door). Remaining
-  gates for (a): the phase-5 spatial layer or an owner request —
-  geometry donors are phase-5-gated (ROADMAP §4) and track A is
-  feature-frozen.
+  it; mutable decor stays texture (the existing door). The gates for
+  (a): SATISFIED (depth-5 landed, D-115 — the phase-5 spatial layer
+  exists; D-116 amended the price law above) — the row is a live
+  candidate after place-1 (the exits↔map consistency the prices
+  read) + maclock-1 (the edge-state cadence, space packs).
 
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 

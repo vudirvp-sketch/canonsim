@@ -52,7 +52,7 @@ economy / combat; no external code donors before their phase. Full list:
 | C:DDA (CC-BY-SA) | code + data | the reference for content-as-JSON; field/fire/smoke mechanics | phase 3 |
 | BrogueCE (AGPL) | code | level generation, if dungeons ever arrive | late phases |
 | KeeperRL (GPL-2.0) | code | creature micro-simulation with needs | as needed |
-| Azgaar FMG (MIT) | code | the most valuable code donor: states, cultures, religions, a chronology generator (JS → Python port is trivial); "a small DF worldgen", readable in an evening | phase 5 |
+| Azgaar FMG (MIT) | code | the most valuable code donor: states, a chronology generator (JS → Python port is trivial); "a small DF worldgen", readable in an evening; the name pools (`name-1`, D-116) | phase 5 (states + chronology + names — D-116; cultures/religions/burgs re-gated to phase 6, pack richness over mode G) |
 | AI Town (MIT) | code | negative reference for runtime LLM agents | pattern |
 | Park et al. 2023 + "1000 People" 2024 | papers | the cost benchmark: why runtime LLM agents are not our path | reference |
 | Endless Sky (GPL-3.0) | data + pattern | mission language: events, factions, world state | phase 3 |

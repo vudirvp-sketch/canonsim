@@ -199,10 +199,18 @@
 |---|---|
 | Dwarf Fortress | worldgen / Legends: procedural history, event collections, epistemology schema |
 | RimWorld | XML-defs content-as-data; IncidentDefs; storyteller = named anti-pattern (D-005) |
-| Kenshi | faction simulation without plot; region-based hostile world |
+| Kenshi | faction simulation without plot; region-based hostile world; the desperation economy (no supply → crime patterns) — the emergent-chain donor shape (D-116) |
 | Left 4 Dead AI Director (GDC talks) | pacing: tension curve, peaks and rests |
 | Alien: Isolation (GDC talks) | dual-AI director: pressure, hunt, adaptation |
 | Paradox event scripting (CK3 / EU4 / Stellaris wikis) | event grammar: trigger, weight, mean-time-to-happen, effect, option |
+| EVE Online (D-116) | the closed economy loop: absolute item sinks (ships die forever), interdependence chains, geographic friction (price spreads = risk premiums), information asymmetry — res-1's donor sketch |
+| X4: Foundations (D-116) | agent supply chains + cascading failures (convoy loss → station halt → local price shock) — res-1's dependency-graph backbone |
+| Stellaris economy (D-116) | abstract logistics: trade value flow + piracy risk accumulating on long routes — the aggregate edge-state carrier (dynamic edge weights, the concept's §8.2) |
+| Distant Worlds: Universe (D-116) | private vs state sector: the simulator owns rules + supply/demand, trader behavior emergent — res-1's boundary law |
+| Crusader Kings III (D-116) | culture/religion as pillar + tag components; dynastic name pools — name-1 + the phase-6 culture rows' data shape |
+| Shadows of Doubt (D-116) | items with physical location + owner_id; theft leaves evidence — the theft/arson family's state-surface confirmation |
+| Path of Exile (D-116) | functional currency (consumed on use) — leverage-as-currency's devaluation-on-publication analogy (the social-economy note) |
+| Albion Online (D-116) | regional markets + full-loot risk premiums — risk as price regulator (the fear → boycott/stagnation loop) |
 
 ## 11. Unverified / misattributed (anti-hallucination log)
 

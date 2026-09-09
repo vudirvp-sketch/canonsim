@@ -1,53 +1,64 @@
 # STATUS — canonsim
 
-Iteration: iter-81 (`iter-81-worldgen` — depth-5, the STATUS
-queue's top row: the phase's build-column headline landed — the
-ordered worldgen pass family, mechanics only, the committed pack
-UNARMED (the 68a pattern; the arming is depth-5b)) · Phase: 5
+Iteration: iter-82 (`iter-82-concept-land` — doc-only, the
+generator-concept verdict set: the owner's session directive resolving
+the concept text's 13 owner-questions + 13 contradictions as
+best-of-variants syntheses — D-116; the wave plan routed into TASKS
+(intake-5), the spatial model pinned as phase law (phases.md §5), the
+donor drift closed (ROADMAP §4 + REFERENCES §10 + DEEP §1)) · Phase: 5
 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2 +
-depth-2b + depth-4 + depth-5 LANDED, the queue: depth-5b the arming
-or depth-3 scene LOD next) · Track A touched this session
-(`core/rng.py` + `core/worldgen.py` + `core/loop.py` +
-`core/pack.py`) — track B never blocks it (ROADMAP §1).
-**The landing (D-115): `core/worldgen.py` — `PASS_ORDER` the ordered
-passes over the seed (sites: jittered integer lattice; relax:
-integer-centroid Lloyd; height/moisture: integer-octave value noise,
-fixed-point weights that divide out, normalized into 0..9999;
-watershed: downhill flow + rivers at the threshold; biomes: the band
-table + the coastal refinement; states: capitals + nearest-capital
-growth; chronicle: pre-PC history) — every drawing pass on its OWN
-`worldgen:<pass>` stream (the D-079 family law's fourth member, pass
-granularity isolation: the armed arm's substantive fingerprint EQUALS
-the unarmed arm's, pinned — the corpus price of worldgen is the
-genesis events alone); INTEGER-ONLY geometry (the Azgaar float-drift
-refusal made executable — a test walks the model); the claims ride
-`detail_claim` — the gate's FIRST LEGAL CALLER (commit rides
-world_formed's state_changes, no_op skipped, slot_conflict refused
-with the cause chain in the outcome — the future lazy mid-run door's
-law, pinned); `Simulator.open()` runs the genesis for an ARMED pack:
-world_formed (cause null — the run-start event) + history events in
-ascending macro-year carrying the pack-declared hooks (the director's
-buffer pre-seeded before any player step — the PC walks into a
-running world) and NO knowledge records (the DF epistemology-empty
-discipline, bg-2's measured finding); the PC's first event chains to
-the LAST genesis event. `core/pack.py::_worldgen` the shape lint
-(closed vocabularies at every level, the template closure, the
-declared-hook law, the claim double-claim family — modeled slot /
-scene_detail overlap / duplicate pair / site bounds). Corpus price
-ZERO by construction (the committed pack unarmed: zero streams
-touched, zero events, v0.1 bytes — T1 + every corpus pin green
-byte-identical inside the suite). No KI opened. 1352 → 1378 passed
-+1 skipped, ruff clean (seeds 0/42/unset).**
+depth-2b + depth-4 + depth-5 LANDED, the queue: depth-5b the EXTENDED
+arming or depth-3 scene LOD next — D-116's wave order) · Track A
+doc-only this session (`docs/` only, the suite re-verified green at
+HEAD before the edits) — track B never blocks it (ROADMAP §1).
+**The landing (D-116): THIRTEEN questions resolved by synthesis, each
+taking the strongest variant's plus and neutralizing the other's minus
+with a NAMED mechanism — (1) the scene-line reads the FOLDED
+PROJECTION (the committed claims; pack record the fallback —
+read-side, L3, canon price zero; carrier bridge-1); (2) genesis
+conductance through the EXISTING rule (the pack lists world_formed +
+the chronicle type in importance.story_critical_events — tune-1's
+law) AND the _worldgen lint refuses an armed chronicle whose genesis
+types cannot clear the tale gate (dead template lines = dead data;
+the trap verified: world_formed 0 / history 1 / gate 2); (3) absolute
+extent/site_count ceilings REFUSED (policy ≠ correctness — the geo-1
+rework is the wall's answer, the queue order the guard, the measured
+perf profile the exit evidence); (4) the calendar DEFERRED to
+maclock-1 by design (the macro-year is the macro-clock's counter, the
+binding a pack-declared cadence under L4 — neither a tick↔year
+constant nor decorative forever); (5) travel prices DERIVED from the
+WorldModel (integer distance + terrain modifiers at resolve time,
+pack override wins — st-6a amended, its gate SATISFIED); (6) the
+macro-clock a DEDICATED row BEFORE its consumers (maclock-1); (7)
+weather-1's gate read as bridge-1 + maclock-1; (8) bounded plane the
+topology of record (sphere/torus = D-row on measured need); (9) the
+LOD ladder is mode G's boundary (never a second population
+simulation); (10) pack-3's lexicon = renotation through the pack's
+render layer (engine words stay closed; sanitizers are pack-CI);
+(11) world-2 IS the phase-6 gate's instrument (the two-level gate:
+T1 reskin ≤ 1 day + the deep weeks-form — VISION §7's twin); (12) the
+Azgaar donor split (name-1 phase-5 beside depth-7;
+cultures/religions/burgs phase-6 — the drift closes); (13) res-1 the
+owner-gated resource layer at phase 6 (the scarcity cycle as pack
+data over the canon door — never a second economy engine). THIRTEEN
+contradictions dissolved with carriers/return conditions (native 3D =
+final refusal, the spatial model pinned as phase law; map mutation =
+events writing location slots, the worldgen re-run stays refused;
+dynamic edge weights = aggregate macro-events; roads = roads-1 at
+mode G; core sanitizers = never). The wave plan routed (TASKS
+intake-5: bridge-1 / chron-2 / place-1 / geo-1 / maclock-1 / name-1 +
+world-2 / res-1 / roads-1 owner-gated; depth-5b EXTENDED with the
+conductance lint + the claim-reachability law + the genesis×resume
+test + the T1 planned regen, NO ceilings). No KI opened. 1378 passed
++1 skipped re-verified at HEAD `0d6a3bf` before the edits, ruff clean
+(Python 3.12.14, the env pin; seeds 0/42/unset).**
 ·
 Date: 2026-09-09 ·
-Scope: `core/rng.py`, `core/worldgen.py` (new), `core/loop.py`,
-`core/pack.py`, `tests/test_worldgen.py` (new),
-`docs/blueprint/phases.md`, `docs/AGENT_NAVIGATION.md`,
-`docs/TEST_PLAN.md` (§7.2), `README.md`, `docs/TASKS.md`,
-`docs/DECISIONS.md`, `worklog.md`, `STATUS.md` (this file) — 13
-files: the mechanism family (3 code edit + 1 new code + 1 new suite
-+ 8 doc sync, the iter-75 footprint pattern, AGENTS §2.3 scope noted
-in worklog).
+Scope: `docs/TASKS.md`, `docs/DECISIONS.md`,
+`docs/blueprint/phases.md`, `docs/ROADMAP.md`, `docs/REFERENCES.md`,
+`docs/REFERENCES_DEEP.md`, `worklog.md`, `STATUS.md` (this file) — 8
+files: one verdict-set family, doc-only (the iter-77/78 footprint
+pattern; AGENTS §2.3 scope noted in worklog).
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -570,41 +581,62 @@ gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes LANDED
 (iter-73/74/75/76/80/81, D-105/D-106/D-107/D-108/D-114/D-115; the
 corpus prices paid fidelity-only / zero-by-construction /
-zero-by-construction / zero-by-construction, 1378+1 green). Track
+zero-by-construction / zero-by-construction, 1378+1 green) + the
+iter-82 concept-land verdict set (D-116: the 13 questions resolved,
+the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. Track B: bg-8
 LANDED (2026-09-09, D-109 — the deviation corpus's first live
 numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
-prose heartbeat families the standing gap rows). The queue:
-`depth-5b` the worldgen ARMING (the committed pack's own
-worldgen block + the template line, the corpus price measured BOTH
-arms first — the price is the genesis events alone by construction,
-the canon fingerprint pinned equal; the M5 run-start note rides
-there), then `depth-3` scene LOD (its depth-5 gate is satisfied —
-the passes are landed), `depth-6` factions, `depth-7` groups &
-simulation LOD
+prose heartbeat families the standing gap rows). The queue (D-116's
+wave order): `depth-5b` the worldgen ARMING, EXTENDED (the committed
+pack's own worldgen block + the template line, the corpus price
+measured BOTH arms first — the price is the genesis events alone by
+construction, the canon fingerprint pinned equal; the M5 run-start
+note rides there; + the conductance lint + the claim-reachability
+law + the genesis×resume test + the T1 planned regen; NO lint
+ceilings) → `bridge-1` the scene-line projection pipe (inseparable
+from the arming — an armed world invisible to the narrator is
+half-armed) → `chron-2` chronicle v2 → `place-1` placement
+discipline → `geo-1` the geometry rework (before any big-world pack)
+→ `maclock-1` the macro-clock primitive (FIRST among its consumers)
+→ `depth-3` scene LOD (its depth-5 gate is satisfied — the passes are
+landed), `depth-6` factions, `depth-7` groups & simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
-phases.md §5/§7).**
+phases.md §5/§7) + `name-1` the name generator (D-116: the Azgaar
+split — condensation's canon-birth events need names). st-6(a)
+travel is a live candidate after place-1 + maclock-1 (the price law
+amended — derived from the WorldModel, pack override wins). W3
+closes without rows: the calendar binding is maclock-1's own,
+weather-1's row stands (intake-3, its gate read as bridge-1 +
+maclock-1 landed). The phase-6 instruments pinned owner-gated:
+`world-2` (the two-level gate), `res-1` (the resource layer —
+scarcity gets its row owner), `roads-1` (the generated exits).**
 
 1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-3..7
-   rows; `docs/blueprint/phases.md` §5 the architecture owner):
+   rows + intake-5's bridge rows; `docs/blueprint/phases.md` §5 the
+   architecture owner, the spatial model now phase law there):
    depth-5 LANDED (iter-81, D-115 — the ordered passes over the
    seed, `detail_claim`'s first legal caller, the genesis seeding
    the director's buffer; mechanics only, the committed pack
-   unarmed, corpus price zero by construction); the queue:
-   depth-5b the arming next, then scene LOD
+   unarmed, corpus price zero by construction); the queue: depth-5b
+   the EXTENDED arming next, then bridge-1 the scene-line pipe
+   (inseparable), chron-2, place-1, geo-1, maclock-1, then scene LOD
    (its depth-5 gate is satisfied — the passes are landed), factions
-   with goals, groups & simulation LOD (design ratified iter-79,
-   D-112 — the iter-11b resolutions, phases.md §5/§7); the exit
+   with goals, groups & simulation LOD + name-1 (design ratified
+   iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7); the
+   exit
    criterion "an
    emergent chain of
    3+ events without the player" (ROADMAP §2 — T8's OFF arm already
    reads 26 chains on the committed scenario; the phase-5 target is
    the worldgen-fed form of it). The phase-5 donor material (ROADMAP
-   §4): Azgaar FMG (states/cultures/religions + a chronology
-   generator), Neighborly (the closest cousin's architecture
-   reading). The phase-5 spatial row `st-6(a)` (travel as a separate
-   action) waits on this layer; `st-3`/`st-5` (groups/LOD,
-   containers) carry their GROUP_SPEC trigger = phase 5.
+   §4): Azgaar FMG (states + chronology + the name pools — the D-116
+   split; cultures/religions/burgs re-gated to phase 6), Neighborly
+   (the closest cousin's architecture reading). The phase-5 spatial
+   row `st-6(a)` (travel as a separate action) is a live candidate
+   after place-1 + maclock-1 (D-116: the price law amended — derived
+   from the WorldModel, pack override wins); `st-3`/`st-5`
+   (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.
 2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
    — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
