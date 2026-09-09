@@ -1,10 +1,16 @@
 # STATUS — canonsim
 
-Iteration: iter-84 (`iter-84-mech-1` — the mechanics introspection CLI,
-the owner's session call: an infra slot ahead of the queue's bridge-1,
-the ORDER owner's prerogative, the queue itself untouched; D-118 the
-shadow-replay law — the tool replays the log through the engine's
-public pipeline, INV-2-equal to the runtime, never instruments it) ·
+Iteration: iter-85 (`iter-85-intake6` — research intake 6, the
+consolidated-analysis residue cataloged, doc-only: the owner's
+variant-A call on the external text, the D-096/D-116 intake family;
+D-119 the verdict set — 3 donor rows into REFERENCES §10 (Dune,
+Warhammer 40k, Outer Wilds anti-reference), the record-systems
+dictionary + ethos mutagenesis deferred to the phase-6 opening on
+the existing owner-gated W4 rows (just-in-time), Actor Model + CRDT
+refused (the pros already delivered by the standing mechanisms, the
+minuses fatal to INV-2/L4/T1); the queue untouched, bridge-1 stays
+pinned; KI#81 opened + closed — the worklog separator/eviction drift
+iter-84 left, the KI#80 family) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
 + depth-2b + depth-4 + depth-5 + depth-5b LANDED, the queue: bridge-1
 the scene-line pipe next — D-116's wave order, inseparable from the
@@ -12,20 +18,16 @@ arming) · 1403 passed +1 skipped, ruff clean (Python 3.12.14, the env
 pin; seeds 0/42/unset).
 ·
 Date: 2026-09-10 ·
-Scope: `scripts/mechanics.py`, `tests/test_mechanics.py`,
-`docs/TASKS.md`, `docs/DECISIONS.md`, `docs/AGENT_NAVIGATION.md`,
-`README.md`, `worklog.md`, `STATUS.md` (this file) — 8 files
-(git-verified: 2 new + 6 doc sync; AGENTS §2.3: 8 > 3–5, the
-objective scope noted in worklog): the four instruments — `matrix`
-(static wiring queries +
-the unindexed future-layer fallback), `trace` (the shadow replay,
-per-tick events + beat panels), `why` (the blocked-hook postmortem
-with option-gate verdicts), `blast` (the two-arm same-seed A/B) —
-plus the exactness pin (the shadow's release ids == the log's
-director events on day1_full) and the D-118 law row.
-· The prior iteration's record: iter-83 (depth-5b, the worldgen ARMING,
-D-117) audited iter-83a — substance SOUND, the landing-count defects
-fixed (KI#80); the detail lives in TASKS + worklog + git.
+Scope: `docs/REFERENCES.md`, `docs/DECISIONS.md`, `docs/TASKS.md`,
+`worklog.md`, `STATUS.md` (this file) — 5 files (git-verified: 5
+modified, 0 new; doc-only, the iter-66a/82 intake footprint family):
+REFERENCES §10 +3 rows, DECISIONS D-119, TASKS the intake-6 section,
+the worklog repair (separator + the double eviction), this header +
+KI#81.
+· The prior iteration's record: iter-84 (mech-1, the mechanics
+introspection CLI, D-118 — the four instruments + the exactness pin);
+its worklog landing carried the KI#81 drift, fixed here. The detail
+lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -48,6 +50,15 @@ fixed (KI#80); the detail lives in TASKS + worklog + git.
   new events.
 
 ## Active KIs
+
+- KI#81 · CLOSED iter-85 · iter-84's worklog landing double defect:
+  the entry landed WITHOUT its closing `---` (iter-84 and iter-83a
+  fused into one block) AND without the owed eviction — 11 entries
+  held at HEAD while the entry claimed "10 entries held (9 + this
+  one, git-verified per the KI#80 law)" · the KI#80 family, second
+  recurrence · fixed: separator restored, iter-76 (the eviction
+  iter-84 owed) + bg-8 evicted, 10 held, re-counted against git in
+  the same edit.
 
 - KI#80 · CLOSED iter-83a · iter-83's landing counts asserted, not
   verified — "17 files" claimed vs 33 actual (the worklog breakdown
@@ -564,7 +575,10 @@ fidelity-only / zero-by-construction ×3 / the genesis events + the
 id shift — the murmur's pre-seed timing the one designed shift,
 1392+1 green) + the iter-82 concept-land verdict set (D-116: the 13
 questions resolved, the wave plan routed, the spatial model pinned as
-phase law). Track A is debt-free. Track B: bg-8
+phase law). Track A is debt-free. (iter-85 intake-6 landed doc-only
+between mech-1 and bridge-1 — the owner's variant-A call, the ORDER
+owner's prerogative; D-119's catalog rows + refusals; the queue
+itself untouched.) Track B: bg-8
 LANDED (2026-09-09, D-109 — the deviation corpus's first live
 numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
 prose heartbeat families the standing gap rows). The queue (D-116's

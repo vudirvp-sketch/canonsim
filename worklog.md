@@ -13,6 +13,30 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-85 · 2026-09-10 · intake6 — research intake 6, the
+consolidated-analysis residue cataloged (doc-only, 5 files:
+REFERENCES, DECISIONS, TASKS, this log, STATUS; the owner's
+variant-A call, the D-096/D-116 intake family; every claim verified
+against HEAD `cf8d06e` — ~80% of the text already landed/cataloged).
+- D-119: REFERENCES §10 +3 rows (Dune → res-1's pack-declaration
+  shape; Warhammer 40k → depth-6/PACK_SPEC prohibitions framing;
+  Outer Wilds anti-reference, knowledge-as-progression refuted); the
+  record-systems dictionary + ethos mutagenesis deferred to the
+  phase-6 opening on the existing owner-gated W4 rows (just-in-time);
+  Actor Model + CRDT refused — the pros already delivered by
+  SCHED-1/STATE-1/D-114/single-writer log, the minuses fatal to
+  INV-2/L4/T1. The queue untouched: bridge-1 stays pinned.
+- KI#81 opened + closed this edit: iter-84's worklog entry landed
+  without its closing separator AND without the owed eviction (11
+  entries held vs the claimed "10 held (9 + this one, git-verified)"
+  — the KI#80 family, second recurrence). Fixed here: separator
+  restored, iter-76 (the eviction iter-84 owed) + bg-8 (this
+  entry's own) evicted — 10 held, verified against git in this
+  edit. 1403+1 green, ruff clean (3.12.14; seeds 0/42/unset).
+  Caps: STATUS 668 / TASKS 1002 / REFERENCES 305 / DECISIONS 84
+  (55 rows) — over-cap held on substance (§6.1), trim at the
+  phase-5→6 gate.
+---
 iter-84 · 2026-09-10 · mech-1 — the mechanics introspection CLI (the
 owner's session call: an infra slot ahead of the queue's bridge-1, the
 ORDER owner's prerogative; 8 files — 1 tool + 1 suite + 6 doc sync
@@ -40,6 +64,7 @@ makes it equal the runtime; the runtime is never instrumented.
   git-verified per the KI#80 law). Caps: STATUS 654 / TASKS 985 /
   README 627 / DECISIONS 83 lines (54 rows) — over-cap on substance
   (§6.1, the D-095..D-116 precedent), trim at the phase-5→6 gate.
+---
 iter-83a · 2026-09-09 · audit-fix — the owner's re-check of iter-83
 (the iter-11c precedent): substance VERDICT SOUND — 1392+1 green
 re-verified under seeds 0/42/unset, ruff clean, the D-116 W0
@@ -300,58 +325,5 @@ doc-only streak 1 of 2 — the next iteration must be functional)
   TECH_NOTES 695 / TEST_PLAN 628 — over-cap on
   substance (§6.1, the D-095..D-109 precedent), trim at the
   phase-5→6 gate.
----
-bg-8 · 2026-09-09 · engine-runner — the LLM-integration test runner,
-testproto's live half (track B, D-098 Layer 2, the owner's
-sandbox-simulation call; 10 files — 2 new test artifacts + 8 doc
-sync, the bg-7 footprint family)
-- The runner outside the repo (Rule 9:
-  /home/z/my-project/scripts/bg8_runner.py + bg8_distill.py) drove
-  the sandbox API engine (glm-4-plus) through the REAL mode-C door:
-  the deviation corpus F1–F6 (36 probes) + the heartbeat (the
-  51-utterance parse corpus re-run — the first trend row, TEST_PLAN
-  §8.5).
-- Numbers (TECH_NOTES §11): world-answer coverage 34/34 = 100% — the
-  measured failures are mapping quality (F3 1/6 the guess engine, F4
-  2/6 closest-verb, F6 0/6 two injections EXECUTED + the
-  protocol-echo leak; honest 17/36); the heartbeat 84.4 → 93.3%
-  after one re-ask, the refusal families DRIFT run-to-run
-  (unknown-keys → texture-reference).
-- The transcripts re-distilled into the Layer-1 pin:
-  tests/fixtures/deviation_corpus.json + tests/test_deviation.py
-  (+8 tests, 1315 → 1323 passed +1 skipped, ruff clean; the runner
-  never wrote a repo byte, git verified). D-109; TASKS bg-8 done +
-  the standing gap rows ({3–8B, GBNF}, the prose families,
-  latency). iter-68b evicted (verified in this edit); 10 after.
-  Caps: STATUS 633 / TASKS 829 / TECH_NOTES 695 / TEST_PLAN 628 /
-  DECISIONS 73 (45 rows) — over-cap on substance (§6.1, the
-  D-095..D-108 precedent), trim at the phase-5→6 gate.
----
-iter-76 · 2026-09-08 · scenedetail-arm — depth-2b, the scene-detail
-ARMING (9 files — 1 pack + 2 suites + 6 doc sync: the pack arming +
-its measured corpus price + the doc sync are one mechanism family,
-the iter-68b/74 arming footprint)
-- rules.json the `scene_detail` block (loc_tavern under_bench +
-  behind_barrel, loc_guardroom under_cot — the two scenes the corpus
-  observes; pure-flavor values, no claim-surface token);
-  tests/test_detail.py the 68a pins re-pointed to the crafted v0.1
-  twin + the arming family (the declared block, the live pools, the
-  D-108 knowledge surface, the paid day1 ledger, the ten's seed
-  split, the armed replay); tests/test_ambient.py the murmur's
-  state-surface re-pin (the ramble's only state changes are the
-  scene's lazy births).
-- Price measured FIRST both arms (a runner outside the repo, Rule 9):
-  strictly fidelity-only — day1 ten (director ON, the default): 4
-  seeds zero, 5 seeds one barkeep-look payload, seed 125 the two
-  guard scans; fire corpus + plumbing zero; T8 arms two payloads,
-  M1..M5 identical; narrator corpus 105: 90 identical, 15 one payload
-  (statuses/notes/anchors/call documents untouched). The probe lesson:
-  the default-director arm is the corpus geometry (first pass measured
-  OFF and undercounted — caught before landing). +6 tests
-  (1309→1315+1, ruff clean). D-108 (the knowledge-surface decision:
-  zero new knowledge tokens); TASKS depth-2b done. iter-74 evicted
-  (verified in this edit); 10 after. Caps: STATUS 626 / TASKS 817 /
-  DECISIONS 73 lines (44 rows) — over-cap on substance (§6.1, the
-  D-095..D-107 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

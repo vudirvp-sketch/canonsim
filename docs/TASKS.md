@@ -256,6 +256,23 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > bridge-1 + maclock-1 landed), directions are pack data over the
 > graph today (zero core — no row owed until a measured need).
 
+### Research intake 6 (iter-85; the consolidated-analysis residue, cataloged)
+
+> The owner's 2026-09-10 external text (an economy/social/procedural
+> consolidation, the D-096/D-116 intake family) verified against HEAD
+> `cf8d06e` before landing: ~80% already landed or cataloged; the
+> verdict set is D-119 (catalog / defer / refuse). NO new backlog
+> rows: the three donor rows landed in REFERENCES §10 (Dune → res-1's
+> pack-declaration shape; Warhammer 40k → depth-6/PACK_SPEC
+> prohibitions framing; Outer Wilds anti-reference — knowledge-as-
+> progression refuted). The deferred residue — the medieval
+> record-systems dictionary (the economic half rides res-1, the social
+> half PACK_SPEC) and ethos mutagenesis (the phase-6 culture rows) —
+> lands on the EXISTING owner-gated W4 rows at the phase-6 opening,
+> just-in-time. Actor Model + CRDT refused (INV-2/L4/T1/L13 — the
+> pros already delivered by SCHED-1/STATE-1/D-114/single-writer log).
+> The text itself stays outside the repo (convenience-copy law).
+
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 
 > The research review's confirmed holes, landed additively — one family

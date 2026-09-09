@@ -211,6 +211,9 @@
 | Shadows of Doubt (D-116) | items with physical location + owner_id; theft leaves evidence — the theft/arson family's state-surface confirmation |
 | Path of Exile (D-116) | functional currency (consumed on use) — leverage-as-currency's devaluation-on-publication analogy (the social-economy note) |
 | Albion Online (D-116) | regional markets + full-loot risk premiums — risk as price regulator (the fear → boycott/stagnation loop) |
+| Dune (D-119) | the single critical resource: a pack declares ONE resource binding economy, religion, and politics (scarcity's focal point) — res-1's pack-declaration shape, the closed cycle's pressure valve |
+| Warhammer 40k (D-119) | ideology as constraint grammar: what a faction CANNOT do — prohibitions as pack metadata, never bonuses — depth-6's faction dynamics + the PACK_SPEC prohibitions framing |
+| Outer Wilds (D-119) | anti-reference: knowledge-as-progression metagates — anything learned lands in `known_by` state, never in a gate (L6/EPIST-1 held; the anti-row for future progression talk) |
 
 ## 11. Unverified / misattributed (anti-hallucination log)
 
