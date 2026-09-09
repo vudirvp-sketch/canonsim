@@ -222,16 +222,23 @@ header law — the detail lives in git + worklog + D-110..D-113)
   + corpus fixtures byte-identical, zero re-pins). Detail:
   tests/test_worldgen.py + D-122.
 - `geo-1` · the geometry rework (W1, BEFORE any big-world pack) —
-  todo: the grid-hash neighbor walk (buckets at spacing scale —
-  `_neighbors` O(N) amortized, computed ONCE and shared by watershed
-  + biomes), the relax pass's per-site bounding-box walk (the ×N
-  factor leaves the cost: each lattice point examined once per
-  nearby site, O(extent²) total — the current O(extent²·N·R) wall
-  measured, not projected), and the worldgen perf profile (measured
-  numbers → TECH_NOTES, the perf-1 `profile_harness.py` precedent;
-  the 10k-site synthetic probe's curve the exit evidence). NO lint
-  ceilings (D-116: policy ≠ correctness — the queue order is the
-  guard).
+  **done (iter-89, D-123)**: the grid-hash neighbor walk (buckets at
+  spacing scale — `_neighbors` O(N) amortized under the ring-floor
+  exactness law, computed ONCE and shared by watershed + biomes), the
+  relax pass's per-site bounding-box walk (the ×N factor leaves the
+  cost: each lattice point examined once per covering site, O(extent²)
+  total — the old O(extent²·N·R) wall measured on HEAD first, 2.27/
+  11.77/37.81 s at 400/900/1600 sites, the quadratic fit ~25 min at
+  10k), the worldgen perf profile (`scripts/worldgen_profile.py`, the
+  perf-1 precedent — the ladder 36→10k, clean + cProfile double-run,
+  the fingerprints compared; the numbers in TECH_NOTES §12: the 10k
+  site full door 1.19 s clean, sites/s ~8.4–10k, the cost
+  draw-linear). NO lint ceilings (D-116: policy ≠ correctness — the
+  queue order is the enforcement). Corpus price zero, measured both
+  arms (the genesis fingerprints seeds 0/42/125 byte-identical, zero
+  re-pins); the exactness oracles (the pre-geo-1 full scans as
+  brute-force references) in tests/test_worldgen.py. Detail:
+  tests/test_worldgen.py + D-123 + TECH_NOTES §12.
 - `maclock-1` · the macro-clock primitive (W2, FIRST among its
   consumers) — todo: the scheduler cadence rule (INV-2-clean:
   tick-derived, sorted order, never entropy — the depth-3

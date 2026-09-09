@@ -13,6 +13,56 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-89 · 2026-09-10 · geo1 — the geometry rework (W1's fourth,
+D-116's wave order, BEFORE any big-world pack; 10 files — 1 code
+edit + 1 new tool + 1 test file + 7 doc sync: the mechanism + the
+measured instrument + the pins are one family, the iter-81/88
+footprint; AGENTS §2.3: 10 > 5-6, the objective scope noted here)
+- core/worldgen.py: `_neighbors` — the GRID-HASH walk (buckets at
+  spacing scale, expanding Chebyshev rings, the ring-floor exactness
+  law: a bucket at ring ≥ r+1 is farther than r·scale on one axis,
+  so the k-th best within (r·scale)² proves the unexplored rings out
+  of reach, ties included) — amortized O(N), byte-identical to the
+  full sort, computed ONCE in `generate_world` and shared by
+  watershed + biomes (the signatures take the cache; the second
+  computation was the free half of the old wall).
+- core/worldgen.py: `_pass_relax` — the PER-SITE BOUNDING-BOX WALK
+  (`_nearest_owner_walk`: each site sweeps its box, each point once
+  per covering site, O(extent²) at the lattice's constant; index
+  visit order IS the (d², index) tie law); the runtime EXACTNESS
+  CHECK (a best within radius² proves the true nearest's box covered
+  the point) + the deterministic doubling retry (the output never
+  depends on the radius), the WorldgenError at the covering radius
+  the unreachable backstop; the empty-site degenerate keeps the old
+  silent shape.
+- scripts/worldgen_profile.py (new, D-046 CLI-class): the perf-1
+  precedent on the map side — the ladder 36→10k sites over the
+  committed pack's own block (extent scaled alone), clean + cProfile
+  double-run with the fingerprints sha256-compared; the 36-site row
+  reproduces the corpus digest verbatim (the ladder's anchor).
+  TECH_NOTES §12 the numbers: the old walls measured on HEAD
+  795bb1b FIRST (relax 2.27/11.77/37.81 s at 400/900/1600, the
+  quadratic fit ~25 min at 10k; neighbors ×2), the new curve (10k
+  full door 1.19 s clean, sites/s ~8.4–10k, cost draw-linear — the
+  largest cProfile line rng.randint at 280k calls).
+- +2 tests (the brute-force oracles: the pre-geo-1 full scans
+  inlined as references — the grid-hash exact vs ties/duplicates/
+  k-beyond/single-site; the box-walk exact for rounds 0..3 + the
+  clustered retry path walked directly + the empty-world degenerate)
+  — 1422→1424+1 green, ruff clean (3.12.14, the env pin; seeds
+  0/42/125 + unset spot-checked). Corpus price, measured BOTH arms:
+  ZERO — the genesis fingerprints (seeds 0/42/125) byte-identical
+  before/after (cd85495945b7f09b / f55c3547230aea5b /
+  fca783da67c8020e), the T1 + corpus fixtures untouched, zero
+  re-pins (git-verified).
+- docs: DECISIONS D-123, TASKS geo-1 done, TECH_NOTES §12 (the
+  curve), AGENT_NAVIGATION §1 + README the scripts rows,
+  STATUS re-pinned (the queue: maclock-1 next, the W2 wave order).
+  iter-80 evicted here (verified against git in this edit); 10
+  after. Caps: STATUS 736 / TASKS 1038 / DECISIONS 88 lines (59
+  rows) / TECH_NOTES 773 / README 651 — over-cap on substance
+  (§6.1, the D-095..D-123 precedent), trim at the phase-5→6 gate.
+---
 iter-88 · 2026-09-10 · place1 — the placement discipline (W1's
 third, D-116's wave order; 11 files — 2 code + 1 pack data + 1 test
 file + 7 doc sync incl. AGENT_NAVIGATION's worldgen/pack rows (the
@@ -339,37 +389,5 @@ its pins are one mechanism family, the iter-75 footprint; AGENTS §2.3:
   STATUS 643 / TASKS 849 / DECISIONS 80 lines (51 rows) / TECH_NOTES
   695 / TEST_PLAN 722 / phases 719 — over-cap on substance (§6.1, the
   D-095..D-114 precedent), trim at the phase-5→6 gate.
----
-iter-80 · 2026-09-09 · foldcheck — depth-4, the fold-checkpoint
-mechanism family (11 files — 1 new code + 1 new operator tool + 1
-new suite + 7 doc sync: the mechanism + its builder + its pins are
-one family, the iter-75 footprint pattern; AGENTS §2.3: 11 > 5-6,
-the objective scope noted here)
-- core/checkpoint.py (new): FoldCheckpoint = deep-copied projection
-snapshot + event-index offset; ONE canonical serialization (compact
-JSON, sorted keys); restore = snapshot + tail replay (rollback, the
-from_-net loud); verify/verify_all the re-fold law (batch folds
-once, O(N + states)); the sha256 anchor in the derived index
-index.json (offset + snapshot sha256 + prefix sha256 — never an
-event in the truth, intake-4's refusal held); prefix_digest =
-sha256 over the first 1+offset log lines, append-stable (INV-5);
-load/read anchor teeth (edited artifact, re-filed offset, hand-ed
-index — loud).
-- scripts/checkpoint.py (new): the chronicler-family builder —
-read_log validation + the pack↔header name_version gate + one
-incremental fold, snapshots at every requested offset, born-verified
-BEFORE any write (the count-gate spirit); default the END
-checkpoint, --every N the cadence ∪ the end; output/checkpoints/
-(gitignored). The KnowledgeView half deliberately OUT (shape is
-knowledge-internal — the read-side-indexes row owns it at the
-mediator iteration; the resume door owner-gated, phases.md §7).
-- +25 tests (tests/test_checkpoint.py, 1327→1352+1 green, ruff
-clean; the rollback law cross-checked against the LIVE runtime
-projection — the blind-1 instrument; corpus price ZERO by
-construction, no runtime pipeline byte moved). D-114; TASKS depth-4
-done. iter-70 evicted (verified in this edit); 10 after. Caps:
-STATUS 633 / TASKS 837 / DECISIONS 79 lines (50 rows) / TECH_NOTES
-695 / TEST_PLAN 666 / phases 700 — over-cap on substance (§6.1, the
-D-095..D-113 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

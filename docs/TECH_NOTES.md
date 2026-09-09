@@ -693,3 +693,81 @@ families (ii)–(v) not re-run in this heartbeat (rate-limit economics —
 the §10 numbers stand, the weaker-engine arm owns the real question);
 the per-family latency distribution (only the envelope p50/p95 carried
 from §10's instrument).
+
+## 12. geo-1: the worldgen timing profile (iter-89)
+
+Tool: `scripts/worldgen_profile.py` (committed; the runs are `output/`
+gitignored artifacts) — the perf-1 precedent on the map side: each
+ladder scale runs the full `genesis` door over the committed pack's own
+`worldgen` block with the extent scaled to the site target (every
+other value the pack's own), twice — clean (the headline) + under
+cProfile (the hot-spot table) — with the two fingerprints
+sha256-compared (an in-run determinism probe; T1 stays the
+cross-environment owner). Wall-clock BY DESIGN (operator tooling,
+INV-2 applies to the log, not the harness). All numbers: sandbox,
+CPython 3.12.14, PYTHONHASHSEED=0, single thread, 2026-09-10 —
+environment-specific like every number in this file; the baseline
+(old-code) rows were measured on HEAD `795bb1b` before the rework, per
+the both-arms law (D-108).
+
+**The old walls, measured** (per-pass direct timing, the exact
+`generate_world` composition — relax 1 round, neighbors 4, spacing 8):
+
+| sites | extent | relax | watershed(+nbrs) | biomes(+nbrs) | TOTAL |
+|---|---|---|---|---|---|
+| 100 | 80 | 0.14 | 0.00 | 0.00 | 0.14 |
+| 400 | 160 | 2.27 | 0.05 | 0.05 | 2.31 |
+| 900 | 240 | 11.77 | 0.25 | 0.25 | 12.02 |
+| 1600 | 320 | 37.81 | 0.82 | 0.82 | 39.50 |
+
+Both walls are quadratic in site count at fixed spacing, as measured:
+4× sites → ~16× relax (2.27→11.77→37.81 at 2.2×/3.2× per 2.25×/1.78×
+step) — the O(extent²·N·R) partition, R=1; and ~16× neighbors per 4×
+sites (0.05→0.82), computed TWICE (watershed + biomes). The fit puts
+10k sites at ~25 minutes (relax ~1477 s + neighbors ~64 s) — the wall
+geo-1 exists to remove, measured before the rework, not projected.
+
+**The rework** (core/worldgen.py, D-123): the relax partition is the
+per-site bounding-box walk (each lattice point examined once per
+covering site, O(extent²) at the lattice's constant; the runtime
+exactness check + the doubling retry), the neighbor walk is the
+grid-hash (buckets at spacing scale, expanding Chebyshev rings, the
+ring-floor exactness law; amortized O(N)) computed ONCE and shared.
+Both EXACT — byte-identical outputs (the brute-force oracles in
+tests/test_worldgen.py; the corpus fingerprints equal on seeds
+0/42/125: cd85495945b7f09b / f55c3547230aea5b / fca783da67c8020e, and
+the 36-site ladder row reproduces the last one verbatim — the corpus
+price zero, no fixture re-pinned).
+
+**The new curve** (the same per-pass timing, the ladder to the 10k
+exit evidence):
+
+| sites | extent | relax | noise | neighbors(ONCE) | watershed | biomes | states | TOTAL |
+|---|---|---|---|---|---|---|---|---|
+| 100 | 80 | 0.01 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.01 |
+| 900 | 240 | 0.05 | 0.02 | 0.01 | 0.00 | 0.00 | 0.00 | 0.09 |
+| 1600 | 320 | 0.09 | 0.05 | 0.02 | 0.00 | 0.00 | 0.00 | 0.17 |
+| 2500 | 400 | 0.15 | 0.07 | 0.03 | 0.00 | 0.00 | 0.00 | 0.28 |
+| 4900 | 560 | 0.32 | 0.15 | 0.07 | 0.01 | 0.01 | 0.01 | 0.56 |
+| 10000 | 800 | 0.68 | 0.30 | 0.14 | 0.01 | 0.01 | 0.01 | 1.19 |
+
+Full-genesis clean wall-clock (the harness's own ladder, seed 125):
+36→0.00 s, 100→0.01, 400→0.04, 900→0.09, 2500→0.28, 4900→0.56,
+10000→**1.19 s** — sites/s holds ~8.4–10k across the ladder (linear at
+fixed spacing; the mild slope is the noise node grids' extent² term).
+Every pass is now linear-shaped: relax 0.02→0.68 for 25× sites,
+neighbors 0.00→0.14, watershed/biomes/states flat ≤ 0.01. Structural
+reading: **the cost is DRAW-LINEAR** — under cProfile at 10k the
+largest single line is `rng.randint` (280k calls, 0.64 s of the 1.98 s
+profiled total: sites 20k draws + noise 260k node values), the same
+place perf-1 landed for the tick side (event-linear); the geometry
+itself no longer has a term that outgrows the draws. No new wall: the
+top instrumented rows are noise (0.80 s), relax (0.69 s), neighbors
+(0.37 s) — balanced, nothing dominating.
+
+Verdict: the 10k-site exit evidence is met with ~3 orders of magnitude
+of margin (the old fit's ~25 min → 1.19 s); a big-world pack's genesis
+prices in seconds. The next structural surface, only if a pack ever
+needs it (measured here, not yet a decision): the noise node grids'
+(extent/step)² draws — O(extent²) at the deepest octave — and the
+states pass's O(N·capitals) join, both visible in the flat rows above.

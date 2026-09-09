@@ -32,6 +32,14 @@ The laws pinned here:
   count, the relax discipline, the closed biome vocabulary + the
   coastal rule, the watershed flow/rivers, the capitals/regions
   growth, the chronicle cap and ordering.
+- **The geometry performance law (geo-1, W1)**: the grid-hash
+  neighbor walk and the per-site bounding-box relax walk are EXACT
+  reworks, not approximations — the brute-force references (the
+  pre-geo-1 full scans, inlined here as the oracles) answer the same
+  tuples byte-for-byte, on ties, duplicate positions, k beyond the
+  site count, and the clustered crafted sites that force the relax
+  walk's doubling retry; the corpus above (T1 + the fixtures) is the
+  both-arms byte-identity at the committed scale.
 - **The DF legends shape (chron-2)**: every history event carries two
   distinct region participants + one site place; the pass-1 stream
   positions are FROZEN (the years/kinds/hooks for a seed are the
@@ -125,6 +133,10 @@ from core.worldgen import (
     RESERVED_CLAIM_SLOTS,
     WORLDGEN_BLOCK,
     WorldgenError,
+    _nearest_owner_walk,
+    _neighbors,
+    _pass_relax,
+    _pass_sites,
     generate_world,
     genesis,
     lattice_distance,
@@ -405,6 +417,124 @@ def test_the_lattice_count_and_the_relax_discipline() -> None:
     assert all(
         0 <= x < 48 and 0 <= y < 48 for x, y in relaxed.sites
     )
+
+
+def _brute_neighbors(
+    sites: list[tuple[int, int]], k: int
+) -> tuple[tuple[int, ...], ...]:
+    """The pre-geo-1 full sort — the exactness oracle (the old
+    semantics verbatim: every other site ranked by (distance²,
+    index), the first k taken)."""
+    result: list[tuple[int, ...]] = []
+    for i, (x, y) in enumerate(sites):
+        ranked = sorted(
+            ((x - sx) ** 2 + (y - sy) ** 2, j)
+            for j, (sx, sy) in enumerate(sites)
+            if j != i
+        )
+        result.append(tuple(j for _, j in ranked[:k]))
+    return tuple(result)
+
+
+def _brute_lloyd(
+    map_cfg: dict[str, Any], sites: list[tuple[int, int]]
+) -> tuple[tuple[int, int], ...]:
+    """The pre-geo-1 relax partition — the exactness oracle (the old
+    per-point scan over all sites, verbatim)."""
+    extent = int(map_cfg["extent"])
+    current = list(sites)
+    for _ in range(max(0, int(map_cfg["relax_rounds"]))):
+        sums: list[list[int]] = [[0, 0, 0] for _ in current]
+        for y in range(extent):
+            for x in range(extent):
+                best = min(
+                    range(len(current)),
+                    key=lambda i: (
+                        (x - current[i][0]) ** 2 + (y - current[i][1]) ** 2,
+                        i,
+                    ),
+                )
+                sums[best][0] += x
+                sums[best][1] += y
+                sums[best][2] += 1
+        moved = list(current)
+        for i, (total_x, total_y, count) in enumerate(sums):
+            if count:
+                moved[i] = (
+                    (total_x * 2 + count) // (2 * count),
+                    (total_y * 2 + count) // (2 * count),
+                )
+        current = moved
+    return tuple(current)
+
+
+def test_the_grid_hash_neighbor_walk_is_exact() -> None:
+    """geo-1's neighbor law: the grid-hash ring walk answers the exact
+    k-nearest under the old full-sort semantics — byte-identical
+    tuples on the drawn lattice, on ties, on duplicate positions, on
+    bucket-edge coordinates, on k at and beyond the site count, and on
+    the degenerate single-site world (the ring floor's provable
+    out-of-reach, exercised not trusted)."""
+    # the committed map's own relaxed sites at the pack's k and scale
+    model = generate_world(RngBank(42), WG)
+    drawn = list(model.sites)
+    for k in (1, 4, 8, len(drawn), len(drawn) + 5):
+        assert _neighbors(drawn, k, 8) == _brute_neighbors(drawn, k)
+    # crafted shapes: ties by distance (index order decides),
+    # duplicate positions, one bucket holding everything (scale
+    # beyond the coordinates), a diagonal spread crossing bucket
+    # edges, and the single-site world
+    tied = [(0, 0), (0, 2), (0, 4), (2, 0), (2, 2)]
+    duplicates = [(5, 5), (5, 5), (6, 6), (48, 9)]
+    spread = [(0, 0), (3, 3), (7, 7), (15, 15), (31, 31), (0, 31)]
+    for sites, scales in (
+        (tied, (1, 2, 3)),
+        (duplicates, (1, 4, 10)),
+        (spread, (2, 4, 8, 32)),
+    ):
+        for scale in scales:
+            for k in (0, 1, 2, 3, len(sites), len(sites) + 2):
+                assert _neighbors(sites, k, scale) == _brute_neighbors(
+                    sites, k
+                )
+    assert _neighbors([(17, 17)], 4, 8) == ((),)
+
+
+def test_the_bounding_box_relax_walk_is_exact_and_the_retry_is_lawful() -> None:
+    """geo-1's relax law: the per-site bounding-box walk reproduces the
+    per-point full scan byte-for-byte — the Lloyd centroids equal for
+    every round count, including the crafted CLUSTERED sites whose
+    round-one radius cannot prove the assignment (the doubling retry
+    fires; the output never depends on the radius). The empty-site
+    degenerate keeps the old silent shape."""
+    map_cfg = dict(WG["map"])
+    drawn = list(_pass_sites(RngBank(42), map_cfg))
+    for rounds in (0, 1, 2, 3):
+        cfg = {**map_cfg, "relax_rounds": rounds}
+        assert _pass_relax(cfg, drawn) == _brute_lloyd(cfg, drawn)
+    # the clustered crafted sites: all four in one corner of a wide
+    # extent — the round-one radius (spacing-derived) cannot cover the
+    # far lattice points, so the walk answers None (unproven, never
+    # silently wrong) and the radius doubles until the check clears;
+    # the centroids still equal the brute-force scan's
+    clustered = [(1, 1), (2, 2), (3, 3), (4, 4)]
+    cfg = {**map_cfg, "extent": 40, "relax_rounds": 2}
+    assert _nearest_owner_walk(clustered, 40, 10) is None  # unproven
+    owners = _nearest_owner_walk(clustered, 40, 80)
+    assert owners is not None
+    for y in range(40):  # the proven walk IS the brute argmin
+        for x in range(40):
+            brute = min(
+                range(4),
+                key=lambda i: (
+                    (x - clustered[i][0]) ** 2 + (y - clustered[i][1]) ** 2,
+                    i,
+                ),
+            )
+            assert owners[y * 40 + x] == brute
+    assert _pass_relax(cfg, clustered) == _brute_lloyd(cfg, clustered)
+    # the degenerate empty world: the old silent shape, kept
+    assert _pass_relax({**map_cfg, "relax_rounds": 1}, []) == ()
 
 
 def test_the_biome_vocabulary_is_closed_and_the_coast_law_holds() -> None:

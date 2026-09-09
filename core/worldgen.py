@@ -16,6 +16,20 @@ INTEGER-ONLY — every coordinate, height, moisture, distance, and flow
 count is a Python int. Floats live in the render layer only
 (phases.md §5); a test walks the model and pins the discipline.
 
+**The geometry performance law (geo-1, D-116 (3) — the wall removed,
+never ceilinged):** the two quadratic walls of the depth-5 form are
+gone — the neighbor walk (grid-hash buckets at spacing scale, expanding
+Chebyshev rings, the ring-floor exactness law; amortized O(N), computed
+ONCE per world and shared by the watershed and the biome passes) and the
+relax partition (the per-site bounding-box walk, O(extent²) — each
+lattice point examined once per covering site, the runtime exactness
+check with the doubling retry). Both reworks are EXACT, not
+approximate: their outputs are byte-identical to the full scans they
+replace (the proofs ride the docstrings; the corpus price zero by
+construction). No lint ceilings — policy is not correctness; the queue
+order is the enforcement, the measured curve the evidence
+(`scripts/worldgen_profile.py`, TECH_NOTES §12).
+
 **The stream law (D-079's family law's fourth member,**
 `core/rng.py::worldgen_stream_name`): every DRAWING pass owns one
 content-addressed `worldgen:<pass>` stream; the pure passes (relax,
@@ -119,7 +133,8 @@ tiers is the depth-7 row).
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+import math
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Final
 
@@ -250,6 +265,13 @@ _BIOME_TABLE: Final[dict[tuple[int, int], str]] = {
     (3, 2): "mountain",
     (3, 3): "mountain",
 }
+
+#: The walk's "no site reached this lattice point yet" sentinel —
+#: larger than any real squared distance (2·(extent-1)² for any extent
+#: the lattice can hold in memory) and larger than any walk radius²,
+#: so both the first write and the sufficiency check read it as
+#: beyond (geo-1).
+_BEYOND: Final = 1 << 62
 
 #: The sub-blocks the RUNTIME reads (the raw-read backstop's required
 #: set, `_require_config`; the LINT's full closed key set lives in
@@ -435,6 +457,48 @@ def _pass_sites(
     return tuple(sites)
 
 
+def _nearest_owner_walk(
+    sites: Sequence[tuple[int, int]], extent: int, radius: int,
+) -> list[int] | None:
+    """The per-site bounding-box walk (geo-1): assign every lattice
+    point in [0, extent)² to its nearest site by squared distance,
+    ties by the LOWER site index — the walk visits sites in index order
+    and only a strictly smaller distance displaces, so the first site
+    to reach a distance owns the point (the (d², index) tuple law
+    without building tuples). Returns the row-major owner indices, or
+    None when `radius` cannot be PROVEN exact: the sufficiency check
+    reads every point's best distance — a best within `radius²`
+    implies the point's true nearest site is within the same bound
+    (Chebyshev bounds Euclidean from above), hence its box covered the
+    point, hence it was examined and the best IS the true nearest; a
+    best beyond the radius proves nothing and the caller re-walks
+    wider. Pure."""
+    total = extent * extent
+    best: list[int] = [_BEYOND] * total
+    owner: list[int] = [-1] * total
+    for i, (sx, sy) in enumerate(sites):
+        x_lo = max(0, sx - radius)
+        x_hi = min(extent - 1, sx + radius)
+        y_lo = max(0, sy - radius)
+        y_hi = min(extent - 1, sy + radius)
+        for y in range(y_lo, y_hi + 1):
+            dy = y - sy
+            dy2 = dy * dy
+            row = y * extent
+            for x in range(x_lo, x_hi + 1):
+                dx = x - sx
+                d2 = dx * dx + dy2
+                p = row + x
+                if d2 < best[p]:
+                    best[p] = d2
+                    owner[p] = i
+    r2 = radius * radius
+    for d2 in best:
+        if d2 > r2:
+            return None
+    return owner
+
+
 def _pass_relax(
     config: Mapping[str, Any], sites: Sequence[tuple[int, int]]
 ) -> tuple[tuple[int, int], ...]:
@@ -444,24 +508,52 @@ def _pass_relax(
     cell's centroid (round-half-up integer division). Pure — no draws;
     `relax_rounds` repeats it. A site whose cell empties (swallowed by
     a neighbor after a move) keeps its position — the degenerate-cell
-    law."""
+    law.
+
+    geo-1: the partition is the per-site bounding-box walk
+    (`_nearest_owner_walk`), not the per-point scan over all sites (the
+    measured O(extent²·N·R) wall): each site sweeps only the lattice
+    points of its box, each point once per covering site — O(extent²)
+    at the lattice's own constant. The walk radius starts at round
+    one's airtight bound (every lattice point's own-cell site stands
+    within spacing//2 + jitter on each axis — the jitter law — so the
+    nearest site is within that square's diagonal) and doubles on the
+    walk's None verdict, capped at the radius whose boxes cover every
+    pair — the check always clears there, the WorldgenError on top of
+    the cap is the unreachable backstop (the raw-read family). The
+    retry is deterministic: the output never depends on the radius,
+    only the timing does. An empty site tuple answers itself (the
+    degenerate hand-built config — the old silent shape, kept)."""
     extent = int(config["extent"])
     rounds = int(config["relax_rounds"])
+    spacing = int(config["spacing"])
+    jitter = int(config["jitter"])
     current = list(sites)
+    if not current:
+        return tuple(current)
     for _ in range(max(0, rounds)):
+        radius = 1 + math.isqrt(2 * (spacing // 2 + jitter) ** 2)
+        cap = 1 + math.isqrt(2 * extent * extent)
+        while True:
+            owner = _nearest_owner_walk(current, extent, radius)
+            if owner is not None:
+                break
+            if radius >= cap:
+                raise WorldgenError(
+                    f"the relax walk cannot prove the nearest-site "
+                    f"assignment even at the covering radius {cap} — "
+                    "unreachable by construction; a degenerate config "
+                    "slipped past the bounds"
+                )
+            radius *= 2
         sums: list[list[int]] = [[0, 0, 0] for _ in current]  # x, y, count
         for y in range(extent):
+            row = y * extent
             for x in range(extent):
-                best = min(
-                    range(len(current)),
-                    key=lambda i: (
-                        (x - current[i][0]) ** 2 + (y - current[i][1]) ** 2,
-                        i,
-                    ),
-                )
-                sums[best][0] += x
-                sums[best][1] += y
-                sums[best][2] += 1
+                cell = sums[owner[row + x]]
+                cell[0] += x
+                cell[1] += y
+                cell[2] += 1
         moved = list(current)
         for i, (total_x, total_y, count) in enumerate(sums):
             if count:
@@ -524,20 +616,77 @@ def _octave_noise(
     return tuple(value // total_amp for value in values)
 
 
+def _ring_cells(bx: int, by: int, ring: int) -> Iterator[tuple[int, int]]:
+    """The bucket cells at Chebyshev distance `ring` from (bx, by) —
+    the square's four edges, corners included (geo-1). Cells outside
+    the bucket grid cost one empty dict lookup, never a computation."""
+    if ring == 0:
+        yield (bx, by)
+        return
+    for cx in range(bx - ring, bx + ring + 1):
+        yield (cx, by - ring)
+        yield (cx, by + ring)
+    for cy in range(by - ring + 1, by + ring):
+        yield (bx - ring, cy)
+        yield (bx + ring, cy)
+
+
 def _neighbors(
-    sites: Sequence[tuple[int, int]], k: int
+    sites: Sequence[tuple[int, int]], k: int, scale: int,
 ) -> tuple[tuple[int, ...], ...]:
     """The k nearest sites per site (squared integer distance, ties by
     index — the Delaunay-adjacency surrogate the watershed and the
-    coastal refinement read). Pure."""
+    coastal refinement read). Pure.
+
+    geo-1: the grid-hash neighbor walk — the sites bucketed at
+    `scale` (the spacing, the lattice's own cell size: ~one site per
+    bucket at the drawn lattice), each query answered by expanding
+    Chebyshev rings of buckets under the EXACTNESS LAW: any site in a
+    bucket at ring >= r+1 is farther than r·scale along one axis
+    (floor division is monotone), so farther in Euclidean distance;
+    once the k-th best found sits within (r·scale)² the unexplored
+    rings are PROVABLY out of reach — the gathered candidates hold
+    the exact top-k (strictly beyond the k-th distance, an unexplored
+    site cannot displace even on a tie). Amortized O(N) — the sites
+    examined per query are the bucket occupancy around it, a constant
+    of the lattice — replacing the full O(N² log N) sort. Computed
+    ONCE per world and shared by the watershed and the biome passes
+    (D-116 (3)). `k <= 0` answers empty tuples (the pack lint pins
+    watershed.neighbors 2..8; the old slice semantics for a negative
+    k were an artifact, not a law — the closed vocabulary)."""
+    if k <= 0 or not sites:
+        return tuple(() for _ in sites)
+    cell = max(1, int(scale))
+    buckets: dict[tuple[int, int], list[int]] = {}
+    for j, (x, y) in enumerate(sites):
+        buckets.setdefault((x // cell, y // cell), []).append(j)
+    min_bx = min(key[0] for key in buckets)
+    max_bx = max(key[0] for key in buckets)
+    min_by = min(key[1] for key in buckets)
+    max_by = max(key[1] for key in buckets)
     result: list[tuple[int, ...]] = []
-    for i, (x, y) in enumerate(sites):
-        ranked = sorted(
-            ((x - sx) ** 2 + (y - sy) ** 2, j)
-            for j, (sx, sy) in enumerate(sites)
-            if j != i
-        )
-        result.append(tuple(j for _, j in ranked[:k]))
+    for i, (qx, qy) in enumerate(sites):
+        bx, by = qx // cell, qy // cell
+        limit = max(bx - min_bx, max_bx - bx, by - min_by, max_by - by)
+        found: list[tuple[int, int]] = []
+        ring = 0
+        while True:
+            for cx, cy in _ring_cells(bx, by, ring):
+                for j in buckets.get((cx, cy), ()):
+                    if j == i:
+                        continue
+                    dx = sites[j][0] - qx
+                    dy = sites[j][1] - qy
+                    found.append((dx * dx + dy * dy, j))
+            if len(found) >= k:
+                found.sort()
+                if found[k - 1][0] <= (ring * cell) ** 2:
+                    break
+            if ring >= limit:
+                break
+            ring += 1
+        found.sort()
+        result.append(tuple(j for _, j in found[:k]))
     return tuple(result)
 
 
@@ -545,15 +694,20 @@ def _pass_watershed(
     config: Mapping[str, Any],
     sites: Sequence[tuple[int, int]],
     height: Sequence[int],
+    neighbor_sets: tuple[tuple[int, ...], ...],
 ) -> tuple[tuple[int, ...], frozenset[int]]:
     """The downhill flow (the Red Blob watershed): sites in
     height-DESCENDING order (ties by index — INV-2) each pass their
     accumulated flow to their lowest-height neighbor; a site lower than
     all neighbors is a sink (its flow stays). Rivers = sites whose
-    accumulated flow reaches the pack-declared threshold. Pure."""
-    k = int(config["neighbors"])
+    accumulated flow reaches the pack-declared threshold. Pure.
+
+    geo-1: the neighbor sets arrive PRECOMPUTED (the shared
+    `generate_world` cache — `_neighbors` runs once per world, this
+    pass and the biomes read the same tuples; `config` keeps only
+    `river_flow` — `neighbors` was consumed at the cache's call
+    site)."""
     threshold = int(config["river_flow"])
-    neighbor_sets = _neighbors(sites, k)
     flow = [1] * len(sites)
     order = sorted(range(len(sites)), key=lambda i: (-height[i], i))
     for i in order:
@@ -578,15 +732,18 @@ def _pass_biomes(
     sites: Sequence[tuple[int, int]],
     height: Sequence[int],
     moisture: Sequence[int],
+    neighbor_sets: tuple[tuple[int, ...], ...],
 ) -> tuple[str, ...]:
     """The biome table: (height band × moisture band) -> biome over the
     pack-declared edges, then the coastal refinement (height-band-1
     sites neighboring an ocean site become coast — Azgaar's coast
     detection over the same neighbor structure the watershed reads).
-    Pure."""
+    Pure.
+
+    geo-1: the neighbor sets arrive PRECOMPUTED (the shared
+    `generate_world` cache — the same tuples the watershed read; the
+    pass no longer derives `k` itself)."""
     biome_cfg = config["biomes"]
-    k = int(config["watershed"]["neighbors"])
-    neighbor_sets = _neighbors(sites, k)
     base = [
         _BIOME_TABLE[
             (_band(height[i], biome_cfg["height_bands"]),
@@ -860,8 +1017,20 @@ def generate_world(bank: RngBank, config: Mapping[str, Any]) -> WorldModel:
         int(config["map"]["extent"]), int(config["map"]["spacing"]),
         int(config["map"]["moisture_octaves"]), sites,
     )
-    flow, rivers = _pass_watershed(config["watershed"], sites, height)
-    biomes = _pass_biomes(config, sites, height, moisture)
+    # geo-1: the neighbor cache — computed ONCE per world (D-116 (3))
+    # and read by the watershed and the biome passes alike (both
+    # consumed watershed.neighbors; the second computation was the
+    # free half of the old wall).
+    neighbor_sets = _neighbors(
+        sites, int(config["watershed"]["neighbors"]),
+        int(config["map"]["spacing"]),
+    )
+    flow, rivers = _pass_watershed(
+        config["watershed"], sites, height, neighbor_sets
+    )
+    biomes = _pass_biomes(
+        config, sites, height, moisture, neighbor_sets
+    )
     regions, capitals = _pass_states(bank, config["states"], sites)
     return WorldModel(
         extent=int(config["map"]["extent"]),
