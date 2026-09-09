@@ -174,12 +174,25 @@ per-present expansion).
   the location's pack-modeled fields (e.g. `layout`) that render
   canon-from-birth — static architecture needs no promotion to be
   narratable, and the gateway's `canon_slot` check already guards these
-  fields against texture (KI#48). Promoted props append after them
+  fields against texture (KI#48). **bridge-1 (iter-86, D-116 (1) — the
+  projection pipe): the field's value source is the FOLDED PROJECTION**
+  — a field the scene location's folded projection holds renders its
+  canon value (the armed claims: biome/height/region/river slots ride
+  world_formed's state_changes into the fold; so does any event-written
+  location prop), with the pack record the fallback for UNCLAIMED
+  fields (a field neither holds renders nothing). The card law holds:
+  static surface first (pack-record fields, pack-declared order),
+  event-born news last — the claims ARE event-born (world_formed), so
+  they render after the static fields, before the promoted props in
+  log order. Booleans render JSON-style (`near_river=false` — the
+  values are JSON-born canon state, never the host language's caps).
+  L3: read-side derive, never stored — the pipe costs the canon zero
+  (no runtime byte reads scene_line_fields; the corpus price is the
+  visible claim tokens alone). Promoted props append after them
   (canon-born scene texture would otherwise vanish from the brief
-  post-promotion — the scene_texture window renders live entries only;
-  the card law: static surface first, event-born news last). A pack
-  that declares no `scene_line_fields` renders the line only when the
-  scene location holds promoted props (the pre-iter-20 law).
+  post-promotion — the scene_texture window renders live entries only).
+  A pack that declares no `scene_line_fields` renders the line only
+  when the scene location holds promoted props (the pre-iter-20 law).
 - **Pair lines**: one line per DIRECTED (holder, other) present pair
   carrying pair-map axes (`pair.<other>.<axis>`), projection order —
   A-fears-B and B-trusts-A are different facts; BOTH parties must be
@@ -423,7 +436,8 @@ brief's static text is mediator data, not chronicle grammar.
                       "identity_slots": ["speech_pattern", "look", "mannerism"],
                       "per_entity_max_items": 2},
   "present_entities": {"max_entities": 8, "max_pairs": 6,
-                        "scene_line_fields": ["layout"],
+                        "scene_line_fields": ["layout", "terrain",
+                                               "world_region", "near_river"],
                         "card_markers": [
                           {"prop": "status.intoxication", "min": 30, "marker": "drunk"},
                           {"prop": "status.fatigue", "min": 30, "marker": "weary"},
@@ -469,8 +483,10 @@ or `crime_status` (the closed marker surface) — with EXACTLY ONE of
 `min` (a non-negative int, threshold row) or `value` (a non-empty
 string, value row), and a non-empty `marker` string (marker names are
 pack vocabulary, INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
-a field of at least one location record (a typo'd field fails at load
-time). The mode-B pair (scene-1, §3.9): `chorus` is optional with a
+a field of at least one location record or an ARMED claim's slot (bridge-1:
+the pipe's render surface — a typo'd field, or a claim slot without its
+worldgen block, fails at load time; the defensive claims walk runs before
+the worldgen block's own shape lint, the order law). The mode-B pair (scene-1, §3.9): `chorus` is optional with a
 closed key set (`max_actor_calls` an integer >= 1 — a zero cap is a
 block-less pack, declare nothing instead; `notes` prose); `actors` is
 optional, non-empty, keyed by pack NPC id — never the player (mode A

@@ -1,33 +1,38 @@
 # STATUS — canonsim
 
-Iteration: iter-85 (`iter-85-intake6` — research intake 6, the
-consolidated-analysis residue cataloged, doc-only: the owner's
-variant-A call on the external text, the D-096/D-116 intake family;
-D-119 the verdict set — 3 donor rows into REFERENCES §10 (Dune,
-Warhammer 40k, Outer Wilds anti-reference), the record-systems
-dictionary + ethos mutagenesis deferred to the phase-6 opening on
-the existing owner-gated W4 rows (just-in-time), Actor Model + CRDT
-refused (the pros already delivered by the standing mechanisms, the
-minuses fatal to INV-2/L4/T1); the queue untouched, bridge-1 stays
-pinned; KI#81 opened + closed — the worklog separator/eviction drift
-iter-84 left, the KI#80 family) ·
+Iteration: iter-86 (`iter-86-bridge1` — the scene-line projection
+pipe, D-116 (1) verbatim, W1's head: `brief/assembler.py`'s scene
+fields read the FOLDED PROJECTION — the committed claims (terrain /
+world_region / near_river) ride world_formed's state_changes into the
+fold and render in the brief of the scene that claims them, the pack
+record the fallback for unclaimed fields; the card law preserved
+(static first, event-born last — the claims ARE event-born);
+JSON-style booleans; the pack migration `scene_line_fields` += the
+three claim slots; the lint pair — the `_brief` legal set gains the
+armed claim slots (defensive walk, the order law), the reachability
+lint gains the scene-line consumer arm (the claims' first
+brief-side consumer); L3 read-side, the corpus price zero by
+construction — no runtime byte reads `scene_line_fields`, the T1 +
+corpus fixtures byte-identical, zero re-pins) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b + depth-2
-+ depth-2b + depth-4 + depth-5 + depth-5b LANDED, the queue: bridge-1
-the scene-line pipe next — D-116's wave order, inseparable from the
-arming) · 1403 passed +1 skipped, ruff clean (Python 3.12.14, the env
-pin; seeds 0/42/unset).
++ depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 LANDED, the
+queue: chron-2 the chronicle v2 next — D-116's W1 wave order) · 1406
+passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seeds
+0/42/unset).
 ·
 Date: 2026-09-10 ·
-Scope: `docs/REFERENCES.md`, `docs/DECISIONS.md`, `docs/TASKS.md`,
-`worklog.md`, `STATUS.md` (this file) — 5 files (git-verified: 5
-modified, 0 new; doc-only, the iter-66a/82 intake footprint family):
-REFERENCES §10 +3 rows, DECISIONS D-119, TASKS the intake-6 section,
-the worklog repair (separator + the double eviction), this header +
-KI#81.
-· The prior iteration's record: iter-84 (mech-1, the mechanics
-introspection CLI, D-118 — the four instruments + the exactness pin);
-its worklog landing carried the KI#81 drift, fixed here. The detail
-lives in TASKS + worklog + git.
+Scope: `brief/assembler.py`, `content/tavern_pack/rules.json`,
+`core/pack.py`, `tests/test_brief.py`, `tests/test_worldgen.py`,
+`docs/BRIEF_SPEC.md`, `docs/DECISIONS.md`, `docs/TASKS.md`,
+`worklog.md`, `docs/AGENT_NAVIGATION.md`, `STATUS.md` (this file) —
+11 files (git-verified: 11 modified, 0 new; the mechanism + the pack
+migration + the lint pair + the pins + the doc sync are one family,
+the iter-75/83 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
+noted in worklog): +3 tests (the pipe pin both claim arms +
+determinism, the lint negative, the reachability scene-line arm),
+D-120, TASKS bridge-1 done, this header + the Next-step re-pin.
+· The prior iteration's record: iter-85 (intake-6, D-119 — doc-only,
+the queue untouched). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -568,12 +573,14 @@ the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
 drafted from `docs/blueprint/phases.md` §5) — depth-1 the
 acquisition gate + depth-1b the arming + depth-2 the lazy-detail
 gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
-ordered worldgen passes + depth-5b the worldgen ARMING LANDED
-(iter-73/74/75/76/80/81/83,
-D-105/D-106/D-107/D-108/D-114/D-115/D-117; the corpus prices paid
-fidelity-only / zero-by-construction ×3 / the genesis events + the
-id shift — the murmur's pre-seed timing the one designed shift,
-1392+1 green) + the iter-82 concept-land verdict set (D-116: the 13
+ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
+the scene-line projection pipe LANDED
+(iter-73/74/75/76/80/81/83/86,
+D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120; the corpus prices
+paid fidelity-only / zero-by-construction ×3 / the genesis events +
+the id shift — the murmur's pre-seed timing the one designed shift —
+/ read-side zero, 1406+1 green) + the iter-82 concept-land verdict
+set (D-116: the 13
 questions resolved, the wave plan routed, the spatial model pinned as
 phase law). Track A is debt-free. (iter-85 intake-6 landed doc-only
 between mech-1 and bridge-1 — the owner's variant-A call, the ORDER
@@ -582,11 +589,9 @@ itself untouched.) Track B: bg-8
 LANDED (2026-09-09, D-109 — the deviation corpus's first live
 numbers + the heartbeat baseline row; the {3–8B, GBNF} arm + the
 prose heartbeat families the standing gap rows). The queue (D-116's
-wave order): `bridge-1` the scene-line projection pipe next
-(inseparable from the arming — an armed world invisible to the
-narrator is half-armed; the claims' first brief-side consumer, the
-folded projection read + the pack record fallback) → `chron-2`
-chronicle v2 → `place-1` placement
+wave order): `chron-2` chronicle v2 next (the history events gain
+participants/places/cause — the DF legends shape, L7) → `place-1`
+placement
 discipline → `geo-1` the geometry rework (before any big-world pack)
 → `maclock-1` the macro-clock primitive (FIRST among its consumers)
 → `depth-3` scene LOD (its depth-5 gate is satisfied — the passes are
@@ -598,7 +603,8 @@ travel is a live candidate after place-1 + maclock-1 (the price law
 amended — derived from the WorldModel, pack override wins). W3
 closes without rows: the calendar binding is maclock-1's own,
 weather-1's row stands (intake-3, its gate read as bridge-1 +
-maclock-1 landed). The phase-6 instruments pinned owner-gated:
+maclock-1 landed — bridge-1 now landed, the gate waits on maclock-1
+alone). The phase-6 instruments pinned owner-gated:
 `world-2` (the two-level gate), `res-1` (the resource layer —
 scarcity gets its row owner), `roads-1` (the generated exits).**
 
@@ -609,10 +615,14 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    committed pack's own block + the world_history template line + the
    story-critical listing; the conductance + reachability lint laws;
    the flat claim keys; the price paid — the genesis events + the id
-   shift, the murmur's pre-seed timing the one designed shift); the
-   queue: bridge-1 the scene-line pipe
-   next (inseparable — the claims' first brief-side consumer),
-   chron-2, place-1, geo-1, maclock-1, then scene LOD
+   shift, the murmur's pre-seed timing the one designed shift);
+   bridge-1 LANDED (iter-86, D-120 — the scene-line projection pipe:
+   the scene fields read the folded projection, the claims render in
+   the brief of the scene that claims them, the pack record the
+   fallback; the reachability lint's scene-line arm; read-side zero);
+   the
+   queue: chron-2 chronicle v2 next (the history bridge),
+   place-1, geo-1, maclock-1, then scene LOD
    (its depth-5 gate is satisfied — the passes are landed), factions
    with goals, groups & simulation LOD + name-1 (design ratified
    iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7); the

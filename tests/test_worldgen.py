@@ -52,8 +52,9 @@ The laws pinned here:
   clear the tale gate through the pack's own importance rule (the
   dead-arming lint refuses what the listing forgot); REACHABILITY (L1)
   — every armed claim names a live consumer (a template line binding
-  the slot — the flat claim keys are the binding surface — or a
-  declared director hook reading the pair), plus the
+  the slot — the flat claim keys are the binding surface — a declared
+  director hook reading the pair, or the scene line declaring the slot:
+  bridge-1's brief-side consumer arm), plus the
   reserved-vocabulary collision law; the corpus price measured both
   arms (the genesis events + the mechanical id shift alone); the M5
   run-start note (the genesis prefix counts as non-PC); the
@@ -165,7 +166,13 @@ def crafted_pack(
     TEMPLATE_LINE — a no-op rewrite; a string: that line, the
     reachability probes' unbound variants; False: REMOVED — the
     closure refusal probe; the lint's template closure: the genesis
-    event type is pack vocabulary, EVENT_SCHEMA §11)."""
+    event type is pack vocabulary, EVENT_SCHEMA §11). bridge-1: the
+    scene line syncs with the block — the crafted twin carries the
+    UNARMED `scene_line_fields` (["layout"] alone): the claim slots are
+    dead fields without their claims (the widened _brief law), and the
+    variants that mutate the claims must not inherit the committed
+    slots either (a probe declaring the scene-line consumer sets the
+    fields itself)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -173,6 +180,7 @@ def crafted_pack(
         rules.pop(WORLDGEN_BLOCK, None)
     else:
         rules[WORLDGEN_BLOCK] = worldgen
+    rules["brief"]["present_entities"]["scene_line_fields"] = ["layout"]
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
     templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
     if template is False:
@@ -779,6 +787,12 @@ def test_the_lint_accepts_a_director_hook_as_the_live_consumer(
         "location": "loc_tavern", "slot": "ocean_wind",
         "field": "biome", "site": 0,
     }
+    # bridge-1: the replaced claim's slot leaves the scene line too —
+    # a dead field (terrain names no claim anymore) is refused by the
+    # widened _brief law before the reachability answer can land.
+    rules["brief"]["present_entities"]["scene_line_fields"] = [
+        field for field in CLAIM_SLOTS if field != "terrain"
+    ] + ["layout"]
     rules["director"]["hooks"]["storm_watcher"] = {
         "weight": 1,
         "release_threshold": 10,
@@ -798,6 +812,30 @@ def test_the_lint_accepts_a_director_hook_as_the_live_consumer(
     )
     pack = load_pack(target)  # no raise — the hook is the consumer
     assert pack.rules["worldgen"]["claims"][0]["slot"] == "ocean_wind"
+
+
+def test_the_lint_accepts_the_scene_line_as_the_live_consumer(
+    tmp_path: Path,
+) -> None:
+    """The reachability law's third consumer arm (bridge-1, D-116 (1)):
+    a claim no template line binds and no director hook reads is still
+    LIVE when the scene line declares its slot — the claims' first
+    brief-side consumer (the pipe reads the slot out of the folded
+    projection into the scene line; the committed pack names all three
+    slots there, so dropping the template clause alone keeps them
+    live)."""
+    target = tmp_path / "scene_consumer"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
+    templates["events"][EVENT_TYPE] = TEMPLATE_LINE.replace(
+        "{terrain?, {terrain} ground}", ""
+    )
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
+    pack = load_pack(target)  # no raise — the scene line is the consumer
+    fields = pack.rules["brief"]["present_entities"]["scene_line_fields"]
+    assert "terrain" in fields  # the committed pipe surface, untouched
 
 
 def test_the_lint_refuses_a_reserved_claim_slot(tmp_path: Path) -> None:

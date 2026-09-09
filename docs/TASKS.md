@@ -165,18 +165,21 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > routes below, W0 → W4. The concept text itself stays outside the
 > repo (the convenience-copy law, STATUS FAQ).
 
-- `bridge-1` · the scene-line projection pipe (W1, the main rework) —
-  todo: `brief/assembler.py`'s scene fields read the FOLDED
-  PROJECTION — the committed claims (biome/height/region/river slots
-  ride world_formed's state_changes into the fold) — with the pack
-  record the fallback for unclaimed fields; the card law preserved
-  (static surface first, event-born news last — the claims ARE
-  event-born); L3 held (read-side derive, never store); the pipe
+- `bridge-1` · the scene-line projection pipe — **done (iter-86,
+  D-120)**: the scene fields read the FOLDED PROJECTION (the committed
+  claims ride world_formed's state_changes into the fold; the pipe
   test: an armed claim visible in the brief of the scene that claims
-  it, determinism pinned; the corpus price measured both arms
-  (read-side — zero by construction, the fingerprint pin).
-  Inseparable from depth-5b: an armed world invisible to the narrator
-  is half-armed (D-116).
+  it, determinism pinned), the pack record the fallback for unclaimed
+  fields (the card law preserved — static surface first, event-born
+  news last, the claims ARE event-born; L3 held, read-side derive);
+  the corpus price read-side zero by construction (no runtime byte
+  reads `scene_line_fields` — the T1 + corpus fixtures byte-identical,
+  zero re-pins; the price paid is the visible claim tokens alone);
+  the pack migration (scene_line_fields += the three claim slots) +
+  the lint pair (the _brief legal set gains the armed claim slots,
+  defensively; the reachability lint gains the scene-line consumer
+  arm — the claims' first brief-side consumer). Detail:
+  tests/test_brief.py + tests/test_worldgen.py.
 - `chron-2` · chronicle v2, the history bridge (W1) — todo: the
   history events gain participants (regions), places (sites), and
   cause (L7 — the chain visible at record time, the DF legends

@@ -13,6 +13,49 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-86 · 2026-09-10 · bridge1 — the scene-line projection pipe (W1's
+head, D-116 (1) verbatim; 11 files — 2 code + 1 pack data + 2 test
+files + 6 doc sync: the pipe + the pack migration + the lint pair +
+the pins are one family, the iter-75/83 footprint; AGENTS §2.3: 11 >
+5-6, the objective scope noted here)
+- brief/assembler.py: the scene fields' VALUE SOURCE is the FOLDED
+  PROJECTION — a prop the scene location's fold holds renders its
+  canon value (the claims ride world_formed's state_changes), the pack
+  record the fallback for unclaimed fields, a field neither holds
+  renders nothing; the card law held (static first, event-born last —
+  the claims ARE event-born; then promoted props in log order);
+  `_token_value` renders booleans JSON-style (`near_river=false` — the
+  values are JSON-born canon, never the host language's caps).
+- content/tavern_pack/rules.json: scene_line_fields += terrain /
+  world_region / near_river (the arming's visible half — an armed
+  world invisible to the narrator is no longer half-armed) + the
+  bridge-1 note in the block's notes.
+- core/pack.py: `_brief`'s scene-line legal set = location record
+  fields ∪ armed claim slots (`_armed_claim_slots`, the defensive walk
+  — the worldgen shape lint runs last, the KI#77 order law);
+  `_worldgen`'s REACHABILITY gains the scene-line consumer arm (the
+  claims' first brief-side consumer, D-117's pinned future landed).
+- +3 tests (the pipe pin: the tavern scene line carries
+  terrain=coast + world_region=region_00 after the static layout; the
+  street arm near_river=false over the genesis-only log; the
+  determinism double-assembly; the lint negative — the unarmed twin's
+  dead claim fields refuse at load; the reachability scene-line arm
+  positive + the crafted_pack scene-line sync + the hook-consumer
+  test's slot sync) — 1403→1406+1 green, ruff clean (3.12.14, the env
+  pin; seeds 0/42/unset spot-checked). Corpus price ZERO by
+  construction, measured both arms: no runtime byte reads
+  scene_line_fields — the T1 + corpus fixtures byte-identical (zero
+  re-pins, git-verified); the price paid is the visible claim tokens
+  in genesis-bearing briefs (the pipe's purpose); the narrator
+  corpus's 4 call pins unaffected (loc_backyard carries no claims).
+- docs: BRIEF_SPEC §3.8/§6 + the example, DECISIONS D-120, TASKS
+  bridge-1 done, STATUS re-pinned (the queue: chron-2 next, D-116's
+  wave order), AGENT_NAVIGATION §1 the brief/core/content/tests rows.
+  D-120. iter-77 evicted (verified against git in this edit); 10
+  held. Caps: STATUS 678 / TASKS 1005 / DECISIONS 85 lines (56 rows)
+  — over-cap on substance (§6.1, the D-095..D-119 precedent), trim at
+  the phase-5→6 gate.
+---
 iter-85 · 2026-09-10 · intake6 — research intake 6, the
 consolidated-analysis residue cataloged (doc-only, 5 files:
 REFERENCES, DECISIONS, TASKS, this log, STATUS; the owner's
@@ -296,34 +339,5 @@ must be functional)
   rng.py/of corrections were already iter-77's. 1323+1 green under
   seeds 0/42/unset, ruff clean. iter-69b evicted (verified in this
   edit); 10 after.
----
-iter-77 · 2026-09-09 · meta-analysis — the owner's two-text
-cross-review, doc-only (3 files: STATUS header + Next-step line,
-this log, TASKS rows; the iter-19/34/71 owner-requested precedent;
-doc-only streak 1 of 2 — the next iteration must be functional)
-- Verified claim-by-claim against HEAD: the sequencing three-pointer
-  (bootstrap "top todo" = gate-blocked depth-3 vs STATUS queue
-  depth-4 vs NAVIGATION §3); the verify line's missing
-  PYTHONHASHSEED=0 (suite green under seeds 0/unset/42 — consistency
-  gap, not a live flap); Rule-9 dangling citations (4x); not_equals
-  fail-open on a missing prop (predicates._prop + the onaction gate
-  twin, pinned "honestly"; the of-typo case already lint-dead —
-  pack.py validates 'of' against entity ids; the live surface is
-  path typos + runtime-absent props); TASKS collapse debt.
-- Corrected the texts: the audit except-branch is syntax-bearing
-  (try/else REQUIRES except — deliberate no-masking, not cruft);
-  the sandbox text's "saved in TECH_NOTES §12" is not in HEAD
-  (no §12 — a reported-but-unlanded deliverable, the KI#48
-  family); its stratified-sampling / budget-cap / n>=3 /
-  provider-rotation / brief-size-curve items are un-routed
-  proposals, not law. Routed the candidates to TASKS (iter-77
-  section, owner verdict pending); ultimate variants in chat
-  (Russian). 1323+1 green under all three seeds, ruff clean;
-  phase-5 done rows collapsed per the TASKS header law. iter-69
-  evicted (verified in this edit); 10 after. Caps: STATUS 629 /
-  TASKS 840 (the collapse paid −33, the routed section +44) /
-  TECH_NOTES 695 / TEST_PLAN 628 — over-cap on
-  substance (§6.1, the D-095..D-109 precedent), trim at the
-  phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

@@ -1364,6 +1364,36 @@ def test_present_entities_scene_line_renders_pack_fields_then_promotions() -> No
     )
 
 
+def test_present_entities_scene_line_reads_the_folded_projection() -> None:
+    """bridge-1 (D-116 (1)), the scene-line projection pipe: the scene
+    fields' VALUE SOURCE is the FOLDED PROJECTION — the armed claims
+    (terrain/world_region @ loc_tavern, near_river @ loc_street) ride
+    world_formed's state_changes into the fold and render in the brief
+    of the scene that claims them, event-born AFTER the static surface
+    (the card law — the claims ARE event-born); booleans render
+    JSON-style (the log's own form, never the host language's caps).
+    The fallback law is the suite's pre-bridge scene-line pins: the
+    player-only prefix (no genesis in the fold) renders the unclaimed
+    slots nothing, the pack record answers — the same bytes."""
+    _header, events = read_log(GOLDEN, SCHEMA)
+    tavern = render_brief(assemble_brief(events[:6], PACK))
+    assert (
+        "- scene loc_tavern (Three Barrels tavern) "
+        "layout=low_beamed_hall terrain=coast world_region=region_00"
+        in _blocks(tavern)["present_entities"]
+    )
+    # the street's claim: the PC's pack-start scene over the genesis
+    # alone — near_river carries the river field's boolean
+    street = render_brief(assemble_brief(events[:5], PACK))
+    assert (
+        "- scene loc_street (the street in front of the tavern) "
+        "layout=open_street near_river=false"
+        in _blocks(street)["present_entities"]
+    )
+    # determinism: the same slice assembles to the same bytes
+    assert tavern == render_brief(assemble_brief(events[:6], PACK))
+
+
 def test_present_entities_scene_line_fields_are_pack_data() -> None:
     """A pack that declares no scene_line_fields keeps the pre-iter-20
     behavior: no scene line without promoted props (the block is an
@@ -1474,6 +1504,24 @@ def test_pack_lint_catches_unknown_scene_line_field(tmp_path: Path) -> None:
     def mutate(target: Path) -> None:
         rules = json.loads((target / "rules.json").read_text())
         rules["brief"]["present_entities"]["scene_line_fields"] = ["layoutx"]
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="scene_line_fields must reference"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_refuses_claim_slot_scene_fields_without_the_claims(
+    tmp_path: Path,
+) -> None:
+    """bridge-1: a scene field naming an armed claim's slot is legal
+    only while the claim exists — the unarmed twin (the worldgen block
+    popped) keeps DEAD fields and is refused at load (the iter-20 typo
+    law widened to the claim slots; the crafted twin must sync its
+    scene line with the block's presence)."""
+
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        rules.pop("worldgen", None)
         (target / "rules.json").write_text(json.dumps(rules))
 
     with pytest.raises(PackError, match="scene_line_fields must reference"):

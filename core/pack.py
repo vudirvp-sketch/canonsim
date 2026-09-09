@@ -178,6 +178,28 @@ def _bound_template_slots(templates: Mapping[str, Any]) -> frozenset[str]:
     return frozenset(slots)
 
 
+def _armed_claim_slots(rules: Mapping[str, Any]) -> frozenset[str]:
+    """The armed claims' slots (bridge-1, D-116 (1)): the scene-line
+    legal set's worldgen half — a scene field may name an armed claim's
+    slot (the claims' first brief-side consumer: the pipe reads the slot
+    from the folded projection). A DEFENSIVE walk — the worldgen block's
+    own shape lint runs LAST (the order law, the KI#77 family), so only
+    well-formed entries contribute here; a malformed block contributes
+    nothing and still gets its own clean refusal in `_worldgen`."""
+    config = rules.get(WORLDGEN_BLOCK)
+    if not isinstance(config, Mapping):
+        return frozenset()
+    claims = config.get("claims")
+    if not isinstance(claims, list):
+        return frozenset()
+    return frozenset(
+        entry["slot"]
+        for entry in claims
+        if isinstance(entry, Mapping)
+        and isinstance(entry.get("slot"), str)
+    )
+
+
 def _director_prop_reads(rules: Mapping[str, Any]) -> frozenset[tuple[str, str]]:
     """Every `(entity, path)` pair a declared director hook reads
     through a `prop` predicate leaf (depth-5b, the reachability law's
@@ -2699,8 +2721,8 @@ class _Lint:
         through the pack's own importance rule (dead template lines
         are dead data); REACHABILITY (L1) — every armed claim names at
         least one live consumer (a template line binding the slot, a
-        declared director hook reading the pair; the scene-line joins
-        the consumer set at bridge-1)."""
+        declared director hook reading the pair, or the scene line
+        declaring the slot — bridge-1's brief-side consumer arm)."""
         rules = self._data["rules.json"]
         config = rules.get(WORLDGEN_BLOCK)
         if config is None:
@@ -2989,23 +3011,32 @@ class _Lint:
         # D-116 (2), REACHABILITY (L1): every armed claim names at least
         # one LIVE consumer — a template line binding the slot (a
         # `{slot}` / `{slot?…}` reference; the flat claim key is the
-        # binding surface) or a declared director hook reading the
-        # (location, slot) pair through a prop predicate. The
-        # scene-line joins the consumer set at bridge-1.
+        # binding surface), a declared director hook reading the
+        # (location, slot) pair through a prop predicate, or the SCENE
+        # LINE declaring the slot (bridge-1, D-116 (1) — the claims'
+        # first brief-side consumer: the pipe reads the slot from the
+        # folded projection into the scene line).
         bound = _bound_template_slots(templates_all)
         reads = _director_prop_reads(rules)
+        scene_fields = frozenset(
+            rules.get("brief", {})
+            .get("present_entities", {})
+            .get("scene_line_fields", ())
+        )
         for index, entry in enumerate(claims):
             slot = str(entry["slot"])
             if slot in bound:
                 continue
             if (str(entry["location"]), slot) in reads:
                 continue
+            if slot in scene_fields:
+                continue
             raise PackError(
                 f"{where}.claims[{index}]: the slot {slot!r} names no "
-                "live consumer — no template line binds it and no "
-                "declared director hook reads "
-                f"({entry['location']}, {slot}) (dead pack data, the L1 "
-                "law; the scene-line joins the consumer set at bridge-1)"
+                "live consumer — no template line binds it, no declared "
+                f"director hook reads ({entry['location']}, {slot}), and "
+                "the scene line does not declare it (dead pack data, "
+                "the L1 law)"
             )
 
     def _reflection(self) -> None:
@@ -3507,6 +3538,10 @@ class _Lint:
         # iter-20/D-057: pack-declared location fields the scene line
         # renders canon-from-birth (the st-6 layout answer — no projection
         # seeding; canon_slot already guards pack-modeled fields).
+        # bridge-1 (D-116 (1)): the field source is the FOLDED PROJECTION
+        # — a scene field may also name an ARMED claim's slot (the claims'
+        # first brief-side consumer); the pack record stays the fallback
+        # for unclaimed fields.
         scene_fields = present.get("scene_line_fields")
         _require(
             isinstance(scene_fields, list)
@@ -3525,10 +3560,15 @@ class _Lint:
             for location in self._data["entities.json"]["locations"]
             for key in location
         }
+        legal_fields = location_fields | _armed_claim_slots(
+            self._data["rules.json"]
+        )
         _require(
-            all(field in location_fields for field in scene_fields),
+            all(field in legal_fields for field in scene_fields),
             f"{where}.present_entities: scene_line_fields must reference "
-            f"location fields of the pack",
+            f"location fields of the pack or armed claim slots "
+            f"(a field neither the pack models nor a claim claims "
+            "renders nothing — dead data)",
         )
         # scene-1 (iter-60): the chorus budget + the mode-B actor table
         # (BRIEF_SPEC §3.9/§6 — one NPC per call, the pack's own

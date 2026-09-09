@@ -493,23 +493,33 @@ def _pair_axis_lines(
     return lines
 
 
+def _token_value(value: Any) -> str:
+    """One prop value as a scene-line token: JSON-style booleans — the
+    values are JSON-born canon state (the log's own serialization), and
+    Python's `True`/`False` capitals would leak the host language into
+    the narrator's document (bridge-1: the river claims carry booleans;
+    every other scene value is a string or an int, where str() is
+    already the JSON form)."""
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    return str(value)
+
+
 def _present_entity_items(
     events: Sequence[EventRecord], pack: Pack
 ) -> list[str]:
     """The 8th block's item lines (BRIEF_SPEC §3.8 — st-1, the entity
     cards): the room's structural answer to "who is here". A read-side
     fold — zero new event types; presence is a projection read, the
-    observable surface is pack data. Line order: the scene line (the
-    pack-declared `scene_line_fields` of the scene location render
-    canon-from-birth, then the promoted props — canon-born texture would
-    otherwise vanish from the brief post-promotion: the scene_texture
-    window renders live entries only; the card law: static surface
-    first, event-born news last), then one dry line per present entity
-    in pack declaration order (carried items fold into their carrier's
-    `carries=` segment instead of a line of their own — they are the
-    carrier's surface, not room fixtures), then the pair lines.
-    `max_entities`/`max_pairs` are ranking caps (D-047 law — beyond-cap
-    items render nothing, never a budget drop)."""
+    observable surface is pack data. Line order: the scene line, then
+    one dry line per present entity in pack declaration order (carried
+    items fold into their carrier's `carries=` segment instead of a
+    line of their own — they are the carrier's surface, not room
+    fixtures), then the pair lines. `max_entities`/`max_pairs` are
+    ranking caps (D-047 law — beyond-cap items render nothing, never a
+    budget drop)."""
     config = pack.rules["brief"]["present_entities"]
     scene = current_scene(events, pack)
     state = fold(events, initial_projection(pack.entities))
@@ -517,15 +527,34 @@ def _present_entity_items(
     promoted = _promoted_props(events)
     lines: list[str] = []
 
+    # bridge-1 (D-116 (1), the scene-line projection pipe): the scene
+    # fields' VALUE SOURCE is the FOLDED PROJECTION — the committed
+    # claims (biome/height/region/river slots) ride world_formed's
+    # state_changes into the fold — with the PACK RECORD the fallback
+    # for unclaimed fields (static architecture). The card law holds:
+    # static surface first (pack-record fields, pack-declared order),
+    # event-born news last (fold-held props — the claims ARE event-born
+    # — then promoted props in log order). A field the fold holds for
+    # the scene location always outranks the record read (an event
+    # re-writing a pack-modeled field renders its canon value, never
+    # the stale birth bytes); a field neither holds renders nothing.
+    # L3: read-side derive, never stored.
     location_record = pack.entity(scene.location_id)
-    scene_fields = [
-        (field, location_record[field])
-        for field in config.get("scene_line_fields", ())
-        if field in location_record
-    ]
-    scene_props = (*scene_fields, *promoted.get(scene.location_id, ()))
+    location_props = state[scene.location_id]  # locations always register
+    static_fields: list[tuple[str, Any]] = []
+    born_fields: list[tuple[str, Any]] = []
+    for field in config.get("scene_line_fields", ()):
+        if field in location_props:
+            born_fields.append((field, location_props[field]))
+        elif field in location_record:
+            static_fields.append((field, location_record[field]))
+    scene_props = (
+        *static_fields, *born_fields, *promoted.get(scene.location_id, ())
+    )
     if scene_props:
-        rendered = " ".join(f"{prop}={value}" for prop, value in scene_props)
+        rendered = " ".join(
+            f"{prop}={_token_value(value)}" for prop, value in scene_props
+        )
         lines.append(
             f"- scene {scene.location_id} "
             f"({display_name(pack, scene.location_id)}) {rendered}"
