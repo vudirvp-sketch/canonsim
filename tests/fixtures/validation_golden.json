@@ -15,9 +15,9 @@
     {"name": "knowledge_unknown_knower_contradicted", "claim": {"kind": "knowledge", "who": "npc_stranger_77", "knows": "pc_01_arrived"}, "expect": "contradicted"},
     {"name": "knowledge_cannot_know_item", "claim": {"kind": "knowledge", "who": "purse_01", "knows": "pc_01_arrived"}, "expect": "contradicted"},
     {"name": "knowledge_cannot_know_location", "claim": {"kind": "knowledge", "who": "loc_market", "knows": "pc_01_arrived"}, "expect": "contradicted"},
-    {"name": "event_supported_with_type", "claim": {"kind": "event", "event_id": "ev_0005", "type": "move"}, "expect": "supported"},
-    {"name": "event_supported_id_only", "claim": {"kind": "event", "event_id": "ev_0003"}, "expect": "supported"},
-    {"name": "event_unknown_contradicted", "claim": {"kind": "event", "event_id": "ev_0009"}, "expect": "contradicted"},
-    {"name": "event_type_mismatch_contradicted", "claim": {"kind": "event", "event_id": "ev_0005", "type": "wait"}, "expect": "contradicted"}
+    {"name": "event_supported_with_type", "claim": {"kind": "event", "event_id": "ev_0010", "type": "move"}, "expect": "supported"},
+    {"name": "event_supported_id_only", "claim": {"kind": "event", "event_id": "ev_0008"}, "expect": "supported"},
+    {"name": "event_unknown_contradicted", "claim": {"kind": "event", "event_id": "ev_0019"}, "expect": "contradicted"},
+    {"name": "event_type_mismatch_contradicted", "claim": {"kind": "event", "event_id": "ev_0010", "type": "wait"}, "expect": "contradicted"}
   ]
 }

@@ -133,8 +133,8 @@ def test_queue_is_presence_pack_order_and_cap(tmp_path: Path) -> None:
     never a convention about who talked); the PC's departure empties
     the chorus (no declared actor remains at the backyard)."""
     events = run_day1(tmp_path, 123)
-    assert speaking_queue(events[:10], pack=PACK) == (GUARD, BARKEEP)
-    assert speaking_queue(events[:25], pack=PACK) == (RELIEF, BARKEEP)
+    assert speaking_queue(events[5:15], pack=PACK) == (GUARD, BARKEEP)
+    assert speaking_queue(events[5:30], pack=PACK) == (RELIEF, BARKEEP)
     assert speaking_queue(events, pack=PACK) == ()
 
 
@@ -145,7 +145,7 @@ def test_the_player_and_ambients_are_never_queued(tmp_path: Path) -> None:
     cap-raised queue over the tavern scene holds only kind-npc ids."""
     events = run_day1(tmp_path, 123)
     open_cap = _raised_cap(PACK, 9)
-    queue = speaking_queue(events[:10], pack=open_cap)
+    queue = speaking_queue(events[5:15], pack=open_cap)
     assert queue == (GUARD, BARKEEP, DRUNK, MAID)
     assert PLAYER not in queue
     assert all(open_cap.kind_of(entity_id) == "npc" for entity_id in queue)
@@ -160,7 +160,7 @@ def test_no_chorus_block_is_the_empty_chorus(tmp_path: Path) -> None:
     declaration is the gate, INV-3)."""
     events = run_day1(tmp_path, 123)
     blockless = _mutated_pack(lambda rules: rules["brief"].pop("chorus"))
-    assert speaking_queue(events[:25], pack=blockless) == ()
+    assert speaking_queue(events[5:30], pack=blockless) == ()
 
 
 def test_the_actors_entry_is_the_eligibility_gate(tmp_path: Path) -> None:
@@ -176,8 +176,8 @@ def test_the_actors_entry_is_the_eligibility_gate(tmp_path: Path) -> None:
             rules["brief"]["actors"].pop(DRUNK),
         )
     )
-    assert speaking_queue(events[:10], pack=open_cap) == (GUARD, BARKEEP, DRUNK, MAID)
-    assert speaking_queue(events[:10], pack=silenced) == (GUARD, BARKEEP, MAID)
+    assert speaking_queue(events[5:15], pack=open_cap) == (GUARD, BARKEEP, DRUNK, MAID)
+    assert speaking_queue(events[5:15], pack=silenced) == (GUARD, BARKEEP, MAID)
 
 
 def test_the_cap_clips_head_first(tmp_path: Path) -> None:
@@ -187,7 +187,7 @@ def test_the_cap_clips_head_first(tmp_path: Path) -> None:
     already renders their beats)."""
     events = run_day1(tmp_path, 123)
     one = _raised_cap(PACK, 1)
-    assert speaking_queue(events[:10], pack=one) == (GUARD,)
+    assert speaking_queue(events[5:15], pack=one) == (GUARD,)
 
 
 def test_queue_is_a_pure_fold(tmp_path: Path) -> None:
@@ -195,9 +195,9 @@ def test_queue_is_a_pure_fold(tmp_path: Path) -> None:
     wall-clock (INV-2); the queue moves only when the projection moves
     (the watch-change swap)."""
     events = run_day1(tmp_path, 123)
-    assert speaking_queue(events[:10], pack=PACK) == speaking_queue(events[:10], pack=PACK)
-    assert speaking_queue(events[:10], pack=PACK) != speaking_queue(
-        events[:25], pack=PACK
+    assert speaking_queue(events[5:15], pack=PACK) == speaking_queue(events[5:15], pack=PACK)
+    assert speaking_queue(events[5:15], pack=PACK) != speaking_queue(
+        events[5:30], pack=PACK
     )
 
 
@@ -286,7 +286,7 @@ def test_mode_b_scene_delta_is_the_knowers_perception(tmp_path: Path) -> None:
     for cut in (13, 16, 20, 25, 30, len(events)):
         brief = render_brief(assemble_brief(events[:cut], knower=GUARD, pack=PACK))
         _run_delta_is_leak_free(events[:cut], GUARD, brief)
-    mid = render_brief(assemble_brief(events[:16], knower=GUARD, pack=PACK))
+    mid = render_brief(assemble_brief(events[5:21], knower=GUARD, pack=PACK))
     assert _block(mid, "scene_delta")  # the guard saw the theft beats
     late = render_brief(assemble_brief(events, knower=GUARD, pack=PACK))
     assert _block(late, "scene_delta") == []  # departed: the window is not his
@@ -336,7 +336,7 @@ def test_mode_b_beliefs_are_the_knowers_own(tmp_path: Path) -> None:
         "recalled_facts",
     )
     assert guard[0] == (
-        "- belief paranoid_about_thieves (t 360, sources: ev_0002, ev_0017)"
+        "- belief paranoid_about_thieves (t 360, sources: ev_0007, ev_0022)"
     )
     assert any(
         line.startswith("- belief paranoid_about_thieves (t ") for line in relief
@@ -794,12 +794,12 @@ def test_recall_query_is_the_fresh_window_tokens(tmp_path: Path) -> None:
     construction (the tokens ARE the knower's own fresh records; the
     pre-first-beat window is the whole log)."""
     events = run_day1(tmp_path, 123)
-    assert recall_query(events[:10], PACK, GUARD) == (
+    assert recall_query(events[5:15], PACK, GUARD) == (
         "pc_01_arrived pc_01_reaching_for_oil_lamp_01 noise_in_loc_tavern "
         "figure_reaching_for_purse noise_by_the_bar"
     )
     # the maid's own fresh tokens — never the guard's
-    assert "purse_missing" not in recall_query(events[:10], PACK, MAID)
+    assert "purse_missing" not in recall_query(events[5:15], PACK, MAID)
 
 
 def test_recall_query_empty_when_the_window_mints_nothing(
@@ -819,8 +819,8 @@ def test_present_at_scene_reads_the_live_projection(tmp_path: Path) -> None:
     the watch change (the rotation moved him; the fold reads the world,
     never a convention about who talked)."""
     events = run_day1(tmp_path, 123)
-    assert present_at_scene(events[:10], PACK, GUARD)
-    assert not present_at_scene(events[:25], PACK, GUARD)
+    assert present_at_scene(events[5:15], PACK, GUARD)
+    assert not present_at_scene(events[5:30], PACK, GUARD)
 
 
 def test_the_relevance_term_reranks_the_actors_memory() -> None:
@@ -888,7 +888,7 @@ def test_the_actor_call_carries_query_and_retrieval_lines(
     top `retrieval:` rows — dry demand handles with the fidelity and
     the minting event id inline; mode A carries neither."""
     events = run_day1(tmp_path, 123)
-    window = events[:10]
+    window = events[5:15]
     query = recall_query(window, PACK, GUARD)
     index = RetrievalIndex.build(PACK, window)
     assert index is not None  # the committed pack declares the block
@@ -907,9 +907,9 @@ def test_the_actor_call_carries_query_and_retrieval_lines(
         "regen: 0/2",
         "query: pc_01_arrived pc_01_reaching_for_oil_lamp_01 "
         "noise_in_loc_tavern figure_reaching_for_purse noise_by_the_bar",
-        "retrieval: fact figure_reaching_for_purse (saw/partial, ev_0002)",
-        "retrieval: fact noise_by_the_bar (heard/vague, ev_0002)",
-        "retrieval: fact pc_01_reaching_for_oil_lamp_01 (saw/partial, ev_0001)",
+        "retrieval: fact figure_reaching_for_purse (saw/partial, ev_0007)",
+        "retrieval: fact noise_by_the_bar (heard/vague, ev_0007)",
+        "retrieval: fact pc_01_reaching_for_oil_lamp_01 (saw/partial, ev_0006)",
     ]
     mode_a = narrator_call(window, PACK, SceneLedger())
     assert "query:" not in mode_a and "retrieval:" not in mode_a
@@ -929,7 +929,7 @@ def test_the_mediator_queries_the_ladder_per_actor_call(
     }))
     call = result.call_path.read_text(encoding="utf-8")
     assert "query: pc_01_arrived" in call
-    assert "retrieval: fact pc_01_arrived (saw/partial, ev_0000)" in call
+    assert "retrieval: fact pc_01_arrived (saw/partial, ev_0005)" in call
     sim.close()
 
 

@@ -30,6 +30,19 @@ any stream is touched — zero assures, zero draws, zero events, the v0.1
 bytes untouched by construction. The pack's own declaration is the
 arming (depth-5b); `core/pack.py::_worldgen` owns the block's shape.
 
+**The arming laws (depth-5b, D-116):** CONDUCTANCE — the genesis event
+types must clear the pack's tale gate through the pack's own importance
+rule (the lint computes `pack_importance` for both genesis shapes and
+refuses a dead arming: template lines that can never render are dead
+data; the trap is measured — world_formed scores 0, a history event 1
+per_far_hook, against the medium gate's 2). REACHABILITY (L1) — every
+armed claim names at least one LIVE consumer: a template line binding
+the slot (the flat claim key is the binding surface — `{slot}` and
+`{slot?…}` references; the scene-line joins the consumer set at
+bridge-1) or a declared director hook reading the (location, slot)
+pair through a prop predicate. NO lint ceilings (D-116: geo-1 is the
+wall's answer, the queue order the enforcement).
+
 **The claim gate (`core/detail.py::detail_claim`) — the first legal
 caller, pinned since depth-2:** the worldgen never writes a scene slot
 directly. Each pack-declared claim `{location, slot, field, site}` reads
@@ -87,6 +100,7 @@ __all__ = [
     "CLAIM_FIELDS",
     "HISTORY_KINDS",
     "PASS_ORDER",
+    "RESERVED_CLAIM_SLOTS",
     "WORLDGEN_BLOCK",
     "ResolvedClaim",
     "WorldModel",
@@ -132,6 +146,24 @@ BIOMES: Final = (
 
 #: The claim-field closed set: which model read a claim's value takes.
 CLAIM_FIELDS: Final = ("biome", "height", "region", "river")
+
+#: The claim slots' reserved vocabulary (depth-5b): a slot colliding
+#: with the world_formed outcome's fixed keys is CLOBBERED (the flat
+#: claim keys write after them), and a slot named for the render
+#: context's derived slots is SHADOWED (`render/chronicle.py::
+#: _event_context` writes the derived slots first, so the claim's flat
+#: key would never surface — restated here because core may not import
+#: render; the lint refuses the collision either way). The flat keys
+#: are the template binding surface — the reachability law's live
+#: consumer.
+RESERVED_CLAIM_SLOTS: Final = (
+    # the world_formed outcome's fixed keys
+    "kind", "sites", "regions", "years", "claims", "refused",
+    # the render context's derived slots
+    "t", "event_type", "actor", "target", "target_location",
+    "location", "action_label", "knows", "fidelity", "axes",
+    "texture_slot",
+)
 
 #: The closed history-kind vocabulary (the chronicle pass's draws) —
 #: generic history verbs, never setting nouns (INV-3).
@@ -667,6 +699,14 @@ def genesis_drafts(
         outcome["claims"] = [
             {"slot": claim.slot, "value": claim.value} for claim in committed
         ]
+        # depth-5b: each committed claim's slot rides the outcome as a
+        # FLAT key — the template binding surface (D-116 (4): the line
+        # binds it through `_event_context`; the `claims` list stays
+        # the structured record, the flat key is the render surface —
+        # two jobs, two shapes). Written AFTER the fixed keys, so the
+        # lint's RESERVED_CLAIM_SLOTS collision law is the backstop.
+        for claim in committed:
+            outcome[claim.slot] = claim.value
     if refused:
         outcome["refused"] = [
             {"slot": claim.slot, "cause": claim.cause} for claim in refused

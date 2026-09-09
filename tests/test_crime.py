@@ -262,7 +262,9 @@ def test_rotation_tick_arithmetic_repeats_daily() -> None:
 
 def test_no_rotation_before_the_first_offset(tmp_path: Path) -> None:
     events, _ = run(tmp_path, 1, [{"intent": "wait", "ticks": 300}])
-    assert len(events) == 1 and not by_type(events, "watch_change")
+    # depth-5b: the 5-event genesis prefix rides the run; the wait is the
+    # only player event and no rotation fires before the first offset
+    assert len(events) == 6 and not by_type(events, "watch_change")
 
 
 # -- intent OCC: the natural e2e trigger (KI#12) ----------------------------------

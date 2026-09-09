@@ -60,32 +60,27 @@
   geometry, `worldgen:<pass>` streams — the D-079 family's fourth
   member, `detail_claim`'s first legal caller, the genesis at open
   time seeding the director's buffer; NO knowledge records — the DF
-  epistemology-empty discipline); the committed pack UNARMED (the 68a
-  pattern — zero draws, zero events, v0.1 bytes). Detail:
+  epistemology-empty discipline); the committed pack unarmed at the
+  landing (the 68a pattern — zero draws, zero events, v0.1 bytes; the
+  arming is depth-5b below). Detail: tests/test_worldgen.py.
+- `depth-5b` · the worldgen ARMING — **done (iter-83, D-117)**: the
+  committed pack's own `worldgen` block (the map + chronicle + claims)
+  + the `world_history` template line (the `{year?…}` shape branch +
+  the claim clauses — the flat claim keys are the binding surface) +
+  the story-critical listing; the corpus price measured BOTH arms
+  first (the genesis events alone + the mechanical id shift — the
+  fingerprint pinned equal; the T1 fixture regenerated, the corpus
+  fixtures re-pinned, the murmur's release moved to the first quiet
+  beat as the pre-seed's designed price); the M5 run-start note (the
+  genesis prefix counts as non-PC); the D-116 additions — CONDUCTANCE
+  (the lint computes the genesis importances through `pack_importance`
+  against the tale gate — dead template lines are dead data),
+  REACHABILITY (L1: every claim names a live consumer — a template
+  line binding the slot or a director hook reading the pair), the
+  genesis×resume pins (double `open()` loud at the header guard, the
+  checkpoint flow, the entities/config drift guards), the reserved
+  claim-slot law; NO lint ceilings (D-116 held). Detail:
   tests/test_worldgen.py.
-- `depth-5b` · the worldgen ARMING — todo (EXTENDED per D-116, W0):
-  the committed pack's own `worldgen` block (the map + chronicle +
-  claims; the template line + the director hooks it may seed), the
-  corpus price measured BOTH arms first (the both-arms law, D-108's
-  precedent — the price is the genesis events alone by construction,
-  the canon fingerprint pinned); the M5 run-start note (the first
-  event of an armed run is the world_formed genesis, actor world —
-  metrics.py's v0.1 docstring re-pin rides here). The D-116 additions:
-  (1) CONDUCTANCE — the pack lists `world_formed` + the chronicle
-  event type in `importance.story_critical_events` (tune-1's law:
-  the rule owns the split), and the `_worldgen` lint refuses an armed
-  chronicle whose genesis types cannot clear the tale gate
-  (world_formed scores 0 / history 1 per_far_hook / gate medium 2 —
-  dead template lines = dead data); (2) REACHABILITY — every armed
-  claim names at least one LIVE consumer (a template line binding
-  the slot, a declared director hook; the scene-line joins the
-  consumer set at bridge-1) — the L1 law, lint-enforced;
-  (3) the genesis×resume test (double `open()` at fold/resume — the
-  double world_formed commit is unpinned today — + the config-drift
-  guard when the pack changes between fold and resume); (4) the T1
-  planned regen (the iter-15 precedent, same iteration — the arming
-  moves seed-42 output). NO lint ceilings (D-116: geo-1 is the wall's
-  answer, the queue order the guard).
 - `depth-6` · factions with goals — todo: small-formula dynamics
   (KeeperRL ratio+threshold; D-006 holds — axes are per-entity data).
 - `depth-7` · groups & simulation LOD — todo (design RATIFIED

@@ -247,7 +247,7 @@ def test_the_corpus_pins_the_echo_and_the_cause_actor(tmp_path: Path) -> None:
     assert len(panic_claims) == 1
     # suspectaxis-2 re-distill: the witnessed-arson reactions insert before
     # the fire chain — the panic event rides 4 ids later
-    assert panic_claims[0]["event_id"] == "ev_0008"
+    assert panic_claims[0]["event_id"] == "ev_0013"
     pc_fear = [
         c for c in claims
         if c.get("entity") == "pc_01" and c.get("prop") == "status.fear"

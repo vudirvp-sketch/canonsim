@@ -36,25 +36,30 @@ def test_world_creates_from_seed_and_first_event_writes(tmp_path: Path) -> None:
     sim = make_sim(tmp_path)
     assert sim.projection["pc_01"]["position"] == "loc_street"  # world exists
     result = sim.run_playscript(script([{"intent": "wait", "ticks": 5}]))
-    assert result.event_count == 1
+    assert result.event_count == 6  # 5 genesis world_history + the wait (depth-5b)
     header, events = read_log(tmp_path / "run_42.jsonl", SCHEMA)
     assert header["seed"] == 42
-    assert events[0].id == "ev_0000" and events[0].cause is None  # run-start event
+    # the run-start event is the world_formed genesis (depth-5b: actor world,
+    # cause null); the player's own first event chains to the last genesis
+    assert events[0].id == "ev_0000" and events[0].cause is None
+    assert events[0].type == "world_history" and events[0].actor == "world"
 
 
 def test_playscript_plays_end_to_end(tmp_path: Path) -> None:
     playscript = load_playscript(REPO / "tests" / "playscripts" / "plumbing_smoke.json")
     sim = make_sim(tmp_path)
     result = sim.run_playscript(playscript)
-    assert result.event_count == 6
+    assert result.event_count == 11  # 5 genesis world_history + 6 player events
     assert sim.projection["pc_01"]["position"] == "loc_market"  # the walk happened
     _, events = read_log(tmp_path / "run_42.jsonl", SCHEMA)
     # linear cause chain: run-start, then each event chains to its predecessor
     for previous, event in zip(events, events[1:], strict=False):
         assert event.cause == previous.id
-    # every provenance names the intent it resolves (§7)
-    assert [e.provenance["cause_intent"] for e in events] == [
-        f"intent_{i:04d}" for i in range(6)
+    # every provenance names the intent it resolves (§7) — the genesis
+    # events name the worldgen instead (no intent; depth-5b)
+    assert [e.provenance.get("cause_intent") for e in events] == [
+        *(None for _ in range(5)),
+        *(f"intent_{i:04d}" for i in range(6)),
     ]
     # move events carry the position delta; wait events change nothing
     moves = [e for e in events if e.type == "move"]
@@ -83,7 +88,7 @@ def test_teleport_stays_impossible(tmp_path: Path) -> None:
         {"intent": "move", "target": "loc_market"},
     ])
     result = sim.run_playscript(far)
-    assert result.event_count == 2
+    assert result.event_count == 7  # 5 genesis + the move + the rejection
     assert sim.projection["pc_01"]["position"] == "loc_tavern"
     _, events = read_log(tmp_path / "run_42.jsonl", SCHEMA)
     rejection = events[-1]
@@ -131,12 +136,15 @@ def test_script_must_match_seed_and_pack(tmp_path: Path) -> None:
         sim2.run_playscript(wrong_pack)
 
 
-def test_empty_playscript_writes_header_only(tmp_path: Path) -> None:
+def test_empty_playscript_writes_header_and_genesis_only(tmp_path: Path) -> None:
+    """An armed empty run writes the header + the genesis and NOTHING
+    else (depth-5b: the world forms even when the player never acts —
+    the PC walks into a running world)."""
     sim = make_sim(tmp_path)
     result = sim.run_playscript(script([]))
-    assert result.event_count == 0
+    assert result.event_count == 5  # the genesis alone
     lines = (tmp_path / "run_42.jsonl").read_text().splitlines()
-    assert len(lines) == 1 and json.loads(lines[0])["header"] is True
+    assert len(lines) == 6 and json.loads(lines[0])["header"] is True
 
 
 def test_event_types_stay_within_pack_vocabulary(tmp_path: Path) -> None:

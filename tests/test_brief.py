@@ -679,8 +679,8 @@ def test_scene_texture_window_and_line_shapes() -> None:
     from core.log import read_log
 
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(events[:2])
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    ledger = _texture_ledger(events[5:7])
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: cloak = muddy hem",  # newest first
         "- [t 32, active] candles = lit",
@@ -695,11 +695,11 @@ def test_scene_texture_pinned_first_ranking() -> None:
     from core.log import read_log
 
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(events[:2])
+    ledger = _texture_ledger(events[5:7])
     ledger.apply_delta(
-        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[:2], PACK
+        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[5:7], PACK
     )  # pin the OLDER entry
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, pinned] candles = lit",  # pinned outranks newer actives
         "- [t 32, active] npc_guard_01: cloak = muddy hem",
@@ -735,7 +735,7 @@ def test_scene_texture_stale_scene_scoped_entries_are_invisible() -> None:
                  "surface": "Tallow candles."}
             ],
         },
-        events[:2],
+        events[5:7],
         PACK,
     )  # established in tavern scene 0 (t=30); never synced again
     body = _blocks(render_brief(assemble_brief(events, PACK, ledger)))["scene_texture"]
@@ -749,8 +749,8 @@ def test_scene_texture_max_items_is_a_ranking_cap_not_a_drop() -> None:
         lambda rules: rules["brief"]["scene_texture"].update(max_items=1)
     )
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(events[:2])
-    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    ledger = _texture_ledger(events[5:7])
+    text = render_brief(assemble_brief(events[5:7], pack, ledger))
     body = _blocks(text)["scene_texture"]
     assert len(body) == 1  # the top-k survivor, newest-first
     assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
@@ -774,7 +774,7 @@ def test_scene_texture_tombstones_render_with_cause_and_cap() -> None:
                  "surface": "The shutters stood ajar."},
             ],
         },
-        events[:2],
+        events[5:7],
         PACK,
     )
     ledger.retire_contradicted(
@@ -793,7 +793,7 @@ def test_scene_texture_tombstones_render_with_cause_and_cap() -> None:
             ),
         )
     )
-    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    text = render_brief(assemble_brief(events[5:7], pack, ledger))
     body = _blocks(text)["scene_texture"]
     assert body == ["- [t 32, refuted] shutters (cause: ev_9001)"]  # newest tombstone only
 
@@ -802,9 +802,9 @@ def test_scene_texture_byte_identity_across_calls() -> None:
     from core.log import read_log
 
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(events[:2])
-    first = render_brief(assemble_brief(events[:2], PACK, ledger))
-    second = render_brief(assemble_brief(events[:2], PACK, ledger))
+    ledger = _texture_ledger(events[5:7])
+    first = render_brief(assemble_brief(events[5:7], PACK, ledger))
+    second = render_brief(assemble_brief(events[5:7], PACK, ledger))
     assert first == second  # same (log, ledger, pack) → same brief bytes (D-049)
 
 
@@ -815,12 +815,12 @@ def test_scene_texture_evicted_after_scene_delta_before_exemplars() -> None:
     from core.log import read_log
 
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(events[:2])
+    ledger = _texture_ledger(events[5:7])
 
     pack_free = _mutated_pack(
         lambda rules: rules["brief"].update(total_hard=10**9)
     )
-    base = assemble_brief(events[:2], pack_free, ledger)
+    base = assemble_brief(events[5:7], pack_free, ledger)
     base_total = sum(
         token_count(line) for block in base.blocks for line in block.render()
     )
@@ -837,7 +837,7 @@ def test_scene_texture_evicted_after_scene_delta_before_exemplars() -> None:
         freed("scheduled_lore") + freed("recalled_facts") + freed("scene_delta")
     )
     pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
-    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    text = render_brief(assemble_brief(events[5:7], pack, ledger))
     assert _blocks(text)["scene_texture"]  # survived
     assert _blocks(text)["voice_exemplars"]  # higher priority, obviously alive
 
@@ -847,7 +847,7 @@ def test_scene_texture_evicted_after_scene_delta_before_exemplars() -> None:
         + freed("scene_texture")
     )
     pack = _mutated_pack(lambda rules: rules["brief"].update(total_hard=total_hard))
-    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    text = render_brief(assemble_brief(events[5:7], pack, ledger))
     assert _blocks(text)["scene_texture"] == []  # evicted whole
     assert _blocks(text)["voice_exemplars"]  # scene_texture fell first
 
@@ -900,7 +900,7 @@ def test_scene_texture_identity_slot_outranks_newer_plain_texture() -> None:
     the tick, keeps long-session identity alive."""
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
          "surface": "He spoke in clipped halves."},
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
@@ -908,7 +908,7 @@ def test_scene_texture_identity_slot_outranks_newer_plain_texture() -> None:
         {"scope": "entity:npc_barkeep_01", "slot": "apron", "value": "stained",
          "surface": "A stained apron."},
     ])
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
         "- [t 32, active] npc_barkeep_01: apron = stained",  # newest plain
@@ -922,13 +922,13 @@ def test_scene_texture_identity_slot_is_a_slot_class_not_a_scope_condition() -> 
     in the tier too — one rule, no scope special case (L14)."""
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "scene:loc_tavern", "slot": "shadows", "value": "long",
          "surface": "Long shadows."},
         {"scope": "scene:loc_tavern", "slot": "look", "value": "smoky",
          "surface": "A smoky look."},
     ])
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] look = smoky",  # the identity slot ranks in the tier
         "- [t 32, active] shadows = long",
@@ -941,16 +941,16 @@ def test_scene_texture_pinned_outranks_identity_within_the_tier() -> None:
     within the tier pinned ranks first (the pre-tex-1 law's exact top)."""
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
          "surface": "Clipped halves."},
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
          "surface": "Tallow candles."},
     ])
     ledger.apply_delta(
-        {"source": "turn:2", "refs": [{"id": "tex_0001"}]}, events[:2], PACK
+        {"source": "turn:2", "refs": [{"id": "tex_0001"}]}, events[5:7], PACK
     )  # pin the scene entry
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, pinned] candles = lit",  # pinned within the tier
         "- [t 32, active] npc_guard_01: speech_pattern = clipped",
@@ -967,13 +967,13 @@ def test_scene_texture_identity_survives_max_items_pressure() -> None:
     )
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
          "surface": "Clipped halves."},
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
          "surface": "Tallow candles."},
     ])
-    text = render_brief(assemble_brief(events[:2], pack, ledger))
+    text = render_brief(assemble_brief(events[5:7], pack, ledger))
     body = _blocks(text)["scene_texture"]
     assert body == ["- [t 32, active] npc_guard_01: speech_pattern = clipped"]
     assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
@@ -987,7 +987,7 @@ def test_scene_texture_per_entity_quota_caps_a_chatty_entity() -> None:
     untouched (the quota frees the window for the room and the others)."""
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
          "surface": "Tallow candles."},
         {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
@@ -1001,7 +1001,7 @@ def test_scene_texture_per_entity_quota_caps_a_chatty_entity() -> None:
         {"scope": "entity:npc_barkeep_01", "slot": "apron", "value": "stained",
          "surface": "Stained."},
     ])
-    text = render_brief(assemble_brief(events[:2], PACK, ledger))
+    text = render_brief(assemble_brief(events[5:7], PACK, ledger))
     body = _blocks(text)["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
@@ -1019,7 +1019,7 @@ def test_scene_texture_quota_bounds_identity_too() -> None:
     cannot become a flooding channel."""
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
          "surface": "Clipped."},
         {"scope": "entity:npc_guard_01", "slot": "look", "value": "weathered",
@@ -1027,7 +1027,7 @@ def test_scene_texture_quota_bounds_identity_too() -> None:
         {"scope": "entity:npc_guard_01", "slot": "mannerism", "value": "thumb on belt",
          "surface": "Thumb."},
     ])
-    body = _blocks(render_brief(assemble_brief(events[:2], PACK, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: mannerism = thumb on belt",  # newest identity
         "- [t 32, active] npc_guard_01: look = weathered",  # the Kth identity
@@ -1043,7 +1043,7 @@ def test_scene_texture_quota_at_max_items_is_the_inert_state() -> None:
     )
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
          "surface": "Tallow candles."},
         {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
@@ -1053,7 +1053,7 @@ def test_scene_texture_quota_at_max_items_is_the_inert_state() -> None:
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
          "surface": "Clipped."},
     ])
-    body = _blocks(render_brief(assemble_brief(events[:2], pack, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], pack, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: speech_pattern = clipped",
         "- [t 32, active] npc_guard_01: scar = brow",
@@ -1074,7 +1074,7 @@ def test_scene_texture_tombstones_carry_no_quota() -> None:
     )
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "entity:npc_guard_01", "slot": "cloak", "value": "muddy hem",
          "surface": "Muddy."},
         {"scope": "entity:npc_guard_01", "slot": "scar", "value": "brow",
@@ -1098,7 +1098,7 @@ def test_scene_texture_tombstones_carry_no_quota() -> None:
             ),
         )
     )
-    body = _blocks(render_brief(assemble_brief(events[:2], pack, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], pack, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # K=1 live line
         "- [t 32, refuted] npc_guard_01: scar (cause: ev_9001)",  # tombs unquota'd
@@ -1116,7 +1116,7 @@ def test_scene_texture_empty_identity_slots_is_the_pinned_only_law() -> None:
     )
     _header, events = read_log(GOLDEN, SCHEMA)
     ledger = SceneLedger()
-    _establish(ledger, list(events[:2]), [
+    _establish(ledger, list(events[5:7]), [
         {"scope": "scene:loc_tavern", "slot": "candles", "value": "lit",
          "surface": "Tallow candles."},
         {"scope": "entity:npc_guard_01", "slot": "speech_pattern", "value": "clipped",
@@ -1125,9 +1125,9 @@ def test_scene_texture_empty_identity_slots_is_the_pinned_only_law() -> None:
          "surface": "Limping."},
     ])
     ledger.apply_delta(
-        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[:2], PACK
+        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[5:7], PACK
     )  # pin the scene entry
-    body = _blocks(render_brief(assemble_brief(events[:2], stripped, ledger)))["scene_texture"]
+    body = _blocks(render_brief(assemble_brief(events[5:7], stripped, ledger)))["scene_texture"]
     assert body == [
         "- [t 32, pinned] candles = lit",  # pinned first (the old law's top)
         "- [t 32, active] npc_guard_01: gait = limping",  # newest plain
@@ -1210,9 +1210,9 @@ def test_tex_1_corpus_price_is_zero(seed: int, tmp_path: Path) -> None:
     # the brief surface: the golden prefix with the texture fixture —
     # no identity slot, one entity line (under any K): identical bytes
     _header, events = read_log(GOLDEN, SCHEMA)
-    ledger = _texture_ledger(list(events[:2]))
-    assert render_brief(assemble_brief(events[:2], PACK, ledger)) == render_brief(
-        assemble_brief(events[:2], stripped, ledger)
+    ledger = _texture_ledger(list(events[5:7]))
+    assert render_brief(assemble_brief(events[5:7], PACK, ledger)) == render_brief(
+        assemble_brief(events[5:7], stripped, ledger)
     )
 
 
@@ -1221,7 +1221,9 @@ def test_tex_1_corpus_price_is_zero(seed: int, tmp_path: Path) -> None:
 
 def _golden_prefix(ticks: int = 2) -> list[EventRecord]:
     _header, events = read_log(GOLDEN, SCHEMA)
-    return list(events[:ticks])
+    # depth-5b: skip the fixture's 5-event genesis prefix — the player's
+    # own events start at index 5 (the worldgen arming's id shift)
+    return list(events[5 : 5 + ticks])
 
 
 def test_present_entities_cards_and_pair_tokens() -> None:

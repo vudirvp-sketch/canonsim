@@ -487,7 +487,7 @@ def test_the_corpus_pins_the_spend_and_the_pair_axes() -> None:
     assert len(coerce_claims) == 1
     # iter-70 (beliefwire-2): the seed-93 family's ids shifted +1 with
     # the relief guard's inserted scan — the re-distill ledger
-    assert coerce_claims[0]["event_id"] == "ev_0032"
+    assert coerce_claims[0]["event_id"] == "ev_0037"
     pair = {
         c["prop"]: c["value"] for c in claims
         if c.get("entity") == "pc_01" and c.get("prop", "").startswith(

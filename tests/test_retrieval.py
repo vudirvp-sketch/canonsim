@@ -193,7 +193,7 @@ def test_knower_filter_the_known_by_boundary(tmp_path: Path) -> None:
     index = built(tmp_path)
     guard_view = index.query("purse", knower=GUARD)
     assert {hit.ref for hit in guard_view} == {"figure_reaching_for_purse"}
-    assert {hit.source for hit in guard_view} == {"ev_0002", "ev_0015"}
+    assert {hit.source for hit in guard_view} == {"ev_0007", "ev_0020"}
     pc_view = index.query("purse", knower=PC)
     assert {hit.ref for hit in pc_view} == {"purse_01_present"}
     assert all(hit.knower == PC for hit in pc_view)
@@ -311,7 +311,7 @@ def test_recency_the_newer_record_first(tmp_path: Path) -> None:
     snapshot)."""
     index = built(tmp_path)
     hits = index.query("purse", knower=GUARD)
-    assert [hit.source for hit in hits] == ["ev_0015", "ev_0002"]
+    assert [hit.source for hit in hits] == ["ev_0020", "ev_0007"]
     assert hits[0].at == 12 and hits[1].at == 9
     index.close()
 
@@ -351,14 +351,14 @@ def test_coefficients_are_pack_data(tmp_path: Path) -> None:
     flat = RetrievalIndex.build(crafted_pack(tmp_path, zero_alpha), events)
     assert flat is not None
     assert [hit.source for hit in flat.query("purse", knower=GUARD)] == [
-        "ev_0002",
-        "ev_0015",
+        "ev_0007",
+        "ev_0020",
     ]
     flat.close()
     sharp = built(tmp_path)
     assert [hit.source for hit in sharp.query("purse", knower=GUARD)] == [
-        "ev_0015",
-        "ev_0002",
+        "ev_0020",
+        "ev_0007",
     ]
     sharp.close()
 
@@ -426,12 +426,12 @@ def test_stale_law_scavenged_store(tmp_path: Path) -> None:
     longer resolves. The stale record is excluded at build; the
     surviving source stays retrievable (the honest remainder)."""
     events = seed123_events(tmp_path)
-    scavenged = [e for e in events if e.id != "ev_0002"]
+    scavenged = [e for e in events if e.id != "ev_0007"]
     index = RetrievalIndex.build(PACK, scavenged)
     assert index is not None
     assert index.query("sneak", knower=GUARD) == ()  # stale — never served
     purse = index.query("purse", knower=GUARD)
-    assert [hit.source for hit in purse] == ["ev_0015"]  # the survivor
+    assert [hit.source for hit in purse] == ["ev_0020"]  # the survivor
     index.close()
 
 
@@ -448,14 +448,14 @@ def test_source_precedence_law_live(tmp_path: Path) -> None:
     index = built(tmp_path)
     hits = index.query("purse sneak", knower=GUARD)
     reflection = [hit for hit in hits if hit.ref == INSIGHT]
-    sources = [hit for hit in hits if hit.source in ("ev_0002", "ev_0015")]
+    sources = [hit for hit in hits if hit.source in ("ev_0007", "ev_0020")]
     assert len(reflection) == 1 and len(sources) == 2
     # the score alone would put the reflection FIRST (authority 1.0
     # over 0.5) — the law, not the score, orders the evidence first
     assert reflection[0].score > sources[0].score
     assert hits.index(reflection[0]) > hits.index(sources[0])
     assert hits.index(reflection[0]) > hits.index(sources[1])
-    assert [hit.source for hit in hits] == ["ev_0015", "ev_0002", "ev_0016"]
+    assert [hit.source for hit in hits] == ["ev_0020", "ev_0007", "ev_0021"]
     index.close()
 
 
@@ -466,7 +466,7 @@ def test_reflection_alone_ranks_by_score(tmp_path: Path) -> None:
     index = built(tmp_path)
     hits = index.query("sneak", knower=GUARD)
     assert [hit.ref for hit in hits] == [INSIGHT]
-    assert hits[0].source == "ev_0016"
+    assert hits[0].source == "ev_0021"
     index.close()
 
 

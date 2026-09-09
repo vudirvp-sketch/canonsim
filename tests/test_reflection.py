@@ -191,7 +191,7 @@ def test_the_mint_fires_at_the_threshold_crossing(tmp_path: Path) -> None:
     assert len(minted) == 1
     event = minted[0]
     assert event.actor == GUARD
-    assert event.cause == "ev_0015"  # the second pickpocket attempt
+    assert event.cause == "ev_0020"  # the second pickpocket attempt
     assert event.t == 12  # the second sighting's tick — the crossing
     # the cascade terminates: the reflection event's own reaction pass
     # mints nothing (no recursion — exactly one event in the log)
@@ -221,7 +221,7 @@ def test_the_committed_pack_arms_the_measured_recurrence(
     tmp_path: Path,
 ) -> None:
     """leg-3b live: the committed block's own mint — seed 123's second
-    theft attempt (ev_0015, the measured recurrence) mints the pack's
+    theft attempt (ev_0020, the measured recurrence) mints the pack's
     four conclusions: the targeted guard's `sneak_at_work_here` and
     the room trio's `trouble_by_the_bar`, each cause-chained to the
     attempt, in event order × declaration order (INV-2)."""
@@ -233,9 +233,9 @@ def test_the_committed_pack_arms_the_measured_recurrence(
         ("npc_drunk_01", "trouble_by_the_bar"),
         ("npc_maid_01", "trouble_by_the_bar"),
     ]
-    assert all(e.cause == "ev_0015" and e.t == 12 for e in minted)
+    assert all(e.cause == "ev_0020" and e.t == 12 for e in minted)
     guard = minted[0]
-    assert guard.outcome["provenance"] == ["ev_0002", "ev_0015"]
+    assert guard.outcome["provenance"] == ["ev_0007", "ev_0020"]
     assert guard.outcome["recurrence"] == 2
 
 
@@ -257,7 +257,7 @@ def test_the_told_conclusion_law_is_live(tmp_path: Path) -> None:
     assert len(told) == 1
     assert told[0].channel == "told"
     assert told[0].fidelity == "partial"
-    assert told[0].source == "ev_0021"  # the briefing event
+    assert told[0].source == "ev_0026"  # the briefing event
     minted = [e for e in events if e.type == COMMITTED_EVENT]
     assert not any(e.actor == "npc_guard_02" for e in minted)
 
@@ -325,7 +325,7 @@ def test_provenance_is_the_source_event_id_list(tmp_path: Path) -> None:
     events = run_crafted(tmp_path)
     event = next(e for e in events if e.type == REFLECTION_EVENT)
     provenance = event.outcome["provenance"]
-    assert provenance == ["ev_0002", "ev_0015"]
+    assert provenance == ["ev_0007", "ev_0020"]
     assert event.outcome["recurrence"] == 2
     by_id = {e.id: e for e in events}
     for source in provenance:
@@ -486,8 +486,8 @@ def test_stale_fires_after_scavenge(tmp_path: Path) -> None:
     consult before serving the entry."""
     events = run_crafted(tmp_path)
     pack = crafted_pack(tmp_path / "stale_pack2")
-    scavenged = [e for e in events if e.id != "ev_0002"]
-    assert stale_reflections(pack, scavenged) == frozenset({"ev_0016"})
+    scavenged = [e for e in events if e.id != "ev_0007"]
+    assert stale_reflections(pack, scavenged) == frozenset({"ev_0021"})
 
 
 def test_expansion_returns_every_family_record(tmp_path: Path) -> None:
@@ -501,7 +501,7 @@ def test_expansion_returns_every_family_record(tmp_path: Path) -> None:
     event = next(e for e in events if e.type == REFLECTION_EVENT)
     records = expand_reflection(pack, view, event)
     assert [r.knows for r in records] == [FAMILY[0], FAMILY[0]]
-    assert [r.source for r in records] == ["ev_0002", "ev_0015"]
+    assert [r.source for r in records] == ["ev_0007", "ev_0020"]
 
 
 def test_expansion_unknown_about_folds_empty(tmp_path: Path) -> None:

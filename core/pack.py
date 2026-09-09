@@ -41,9 +41,11 @@ from core.intent import (
     PRESENT_SITES,
     REJECTION_EVENT,
     TRAIT_TEST,
+    pack_importance,
 )
 from core.knowledge import DRIFT_SPEC_KEYS
 from core.leverage import SECRETS_BLOCK_KEYS, TOKEN_KEYS
+from core.log import IMPORTANCE_ORDER
 from core.onaction import (
     ACTOR_TARGET_KEYS,
     ENTRY_KEYS,
@@ -57,7 +59,12 @@ from core.resolvers import REGISTRY
 from core.retrieval import RETRIEVAL_BLOCK_KEYS
 from core.scheduler import ScheduleAmbiguityError, build, decls_from_rules
 from core.traits import TRAIT_BELIEF_KEYS, TRAIT_BLOCK_KEYS
-from core.worldgen import CLAIM_FIELDS, FIELD_MAX, WORLDGEN_BLOCK
+from core.worldgen import (
+    CLAIM_FIELDS,
+    FIELD_MAX,
+    RESERVED_CLAIM_SLOTS,
+    WORLDGEN_BLOCK,
+)
 
 __all__ = [
     "BRIEF_BLOCK_IDS",
@@ -134,6 +141,85 @@ WORLDGEN_MAP_KEYS: Final = (
     "height_octaves",
     "moisture_octaves",
 )
+
+#: The template-binding forms the reachability lint scans for (depth-5b,
+#: D-116 (2)): `{slot}` (the value substitution) and `{slot?…` (the
+#: conditional key — the missing-key else arm is the designed branch for
+#: outcome shapes that lack the slot). The `#ref#` grammar form is the
+#: symbols' surface, not the event-data binding surface.
+_BRACE_SLOT: Final = re.compile(r"\{([a-z][a-z0-9_]*)\}")
+_BRACE_COND: Final = re.compile(r"\{([a-z][a-z0-9_]*)\?")
+
+
+def _bound_template_slots(templates: Mapping[str, Any]) -> frozenset[str]:
+    """Every slot name the pack's template lines bind (depth-5b): the
+    `{slot}` / `{slot?…}` references across the events' lines, the
+    symbols' alternatives, and the day_header / scene_card / fallback
+    strings. The reachability law's template consumer — a claim whose
+    slot never appears here can never render (L1: dead data)."""
+    slots: set[str] = set()
+
+    def scan(value: Any) -> None:
+        if isinstance(value, str):
+            slots.update(_BRACE_SLOT.findall(value))
+            slots.update(_BRACE_COND.findall(value))
+        elif isinstance(value, list):
+            for item in value:
+                scan(item)
+
+    events = templates.get("events")
+    if isinstance(events, Mapping):
+        scan(list(events.values()))
+    symbols = templates.get("symbols")
+    if isinstance(symbols, Mapping):
+        scan(list(symbols.values()))
+    for key in ("day_header", "scene_card", "fallback"):
+        scan(templates.get(key))
+    return frozenset(slots)
+
+
+def _director_prop_reads(rules: Mapping[str, Any]) -> frozenset[tuple[str, str]]:
+    """Every `(entity, path)` pair a declared director hook reads
+    through a `prop` predicate leaf (depth-5b, the reachability law's
+    hook consumer): the hooks' triggers, their weight modifiers' `when`
+    clauses, and their options' trigger lists. The leaves are walked
+    wherever they sit in the compound tree — the shapes are linted
+    elsewhere; this scan only collects."""
+    reads: set[tuple[str, str]] = set()
+
+    def walk(spec: Any) -> None:
+        if isinstance(spec, list):
+            for item in spec:
+                walk(item)
+            return
+        if not isinstance(spec, Mapping):
+            return
+        if spec.get("kind") == "prop":
+            reads.add((str(spec.get("of")), str(spec.get("path"))))
+        for key in COMPOUND_KEYS:
+            if key in spec:
+                walk(spec[key])
+
+    hooks = rules.get("director", {})
+    if not isinstance(hooks, Mapping):
+        return frozenset(reads)
+    for spec in hooks.get("hooks", {}).values():
+        if not isinstance(spec, Mapping):
+            continue
+        walk(spec.get("trigger"))
+        weight = spec.get("weight")
+        if isinstance(weight, Mapping):
+            modifiers = weight.get("modifiers")
+            if isinstance(modifiers, list):
+                for modifier in modifiers:
+                    if isinstance(modifier, Mapping):
+                        walk(modifier.get("when"))
+        options = spec.get("options")
+        if isinstance(options, list):
+            for option in options:
+                if isinstance(option, Mapping):
+                    walk(option.get("trigger"))
+    return frozenset(reads)
 
 OPTION_KEYS: Final = ("trigger", "weight", "intent", "notes")
 """The closed option-block vocabulary (drama-2): the availability gate,
@@ -2604,9 +2690,17 @@ class _Lint:
         only slots canon does not model), never declared in
         scene_detail for the same location (the overlap refusal: the
         genesis claims at open time, before any observation, so the
-        scene's lazy draw could never fire — dead pack data), and the
-        (location, slot) pairs are unique within the block (a double
-        claim is the double-declaration refusal)."""
+        scene's lazy draw could never fire — dead pack data), never in
+        the reserved flat-key vocabulary (a colliding slot is clobbered
+        or shadowed, never bound), and the (location, slot) pairs are
+        unique within the block (a double claim is the
+        double-declaration refusal). The depth-5b laws (D-116):
+        CONDUCTANCE — the genesis event types must clear the tale gate
+        through the pack's own importance rule (dead template lines
+        are dead data); REACHABILITY (L1) — every armed claim names at
+        least one live consumer (a template line binding the slot, a
+        declared director hook reading the pair; the scene-line joins
+        the consumer set at bridge-1)."""
         rules = self._data["rules.json"]
         config = rules.get(WORLDGEN_BLOCK)
         if config is None:
@@ -2852,6 +2946,67 @@ class _Lint:
                 "wins decides runtime order, not pack duplication)",
             )
             seen_pairs.add(pair)
+            _require(
+                slot not in RESERVED_CLAIM_SLOTS,
+                f"{spot}.slot {slot!r} is reserved (the world_formed "
+                "outcome's fixed keys are CLOBBERED by the flat claim "
+                "key, the render context's derived slots SHADOW it — "
+                "a colliding claim can never bind; see "
+                "core/worldgen.py::RESERVED_CLAIM_SLOTS)",
+            )
+
+        # D-116 (2), CONDUCTANCE: dead template lines are dead data. The
+        # genesis event types must clear the tale gate THROUGH THE PACK'S
+        # OWN RULE (pack_importance — one rule for action events and
+        # world events, never a second scoring path). The shapes are the
+        # runtime's own: world_formed scores its DISTINCT claim
+        # locations (the committed claims' entities), a history event
+        # one far hook (its drawn tag). The trap is live and measured:
+        # without the story-critical listing world_formed reads 0 and a
+        # history event 1 per_far_hook against the medium gate's 2 —
+        # the genesis would commit and never render.
+        templates_all = self._data["templates.json"]
+        gate = templates_all.get("tale_gate", {}).get("min_importance", "low")
+        _require(
+            gate in IMPORTANCE_ORDER,
+            f"{where}: templates.json tale_gate.min_importance {gate!r} "
+            f"is not in {list(IMPORTANCE_ORDER)}",
+        )
+        claim_locations = {str(entry["location"]) for entry in claims}
+        formed = pack_importance(rules, claim_locations, 0, 0, event_type)
+        history = pack_importance(rules, set(), 0, 1, event_type)
+        _require(
+            IMPORTANCE_ORDER.index(formed) >= IMPORTANCE_ORDER.index(gate)
+            and IMPORTANCE_ORDER.index(history) >= IMPORTANCE_ORDER.index(gate),
+            f"{where}.chronicle: the genesis events cannot clear the "
+            f"tale gate ({gate!r}) — world_formed scores {formed!r}, a "
+            f"history event {history!r} (dead template lines = dead "
+            "data, D-116; list the chronicle event type in "
+            "importance.story_critical_events — tune-1's law: the rule "
+            "owns the split)",
+        )
+
+        # D-116 (2), REACHABILITY (L1): every armed claim names at least
+        # one LIVE consumer — a template line binding the slot (a
+        # `{slot}` / `{slot?…}` reference; the flat claim key is the
+        # binding surface) or a declared director hook reading the
+        # (location, slot) pair through a prop predicate. The
+        # scene-line joins the consumer set at bridge-1.
+        bound = _bound_template_slots(templates_all)
+        reads = _director_prop_reads(rules)
+        for index, entry in enumerate(claims):
+            slot = str(entry["slot"])
+            if slot in bound:
+                continue
+            if (str(entry["location"]), slot) in reads:
+                continue
+            raise PackError(
+                f"{where}.claims[{index}]: the slot {slot!r} names no "
+                "live consumer — no template line binds it and no "
+                "declared director hook reads "
+                f"({entry['location']}, {slot}) (dead pack data, the L1 "
+                "law; the scene-line joins the consumer set at bridge-1)"
+            )
 
     def _reflection(self) -> None:
         """The reflection & compaction contract (`core/reflection.py`

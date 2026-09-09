@@ -85,6 +85,10 @@ def _establish(
 
 
 def _golden_events() -> list[EventRecord]:
+    """The committed golden log's events — INCLUDING the depth-5b
+    genesis prefix (5 `world_history` events at the head: the worldgen
+    arming's paid price). Slices that mean "the player's first N events"
+    skip the prefix: `events[5:5 + N]`."""
     _header, events = read_log(GOLDEN, SCHEMA)
     return events
 
@@ -158,7 +162,7 @@ def test_present_entities_item_carried_by_absent_npc_is_absent() -> None:
 
 
 def test_establishment_stamps_t_from_the_log_never_the_delta() -> None:
-    events = _golden_events()[:2]  # last event t=32
+    events = _golden_events()[5:7]  # last event t=32
     ledger = SceneLedger()
     report = _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     assert [entry.t for entry in report.established] == [32]  # L3: derive-never-store
@@ -166,7 +170,7 @@ def test_establishment_stamps_t_from_the_log_never_the_delta() -> None:
 
 
 def test_ids_allocate_in_append_order_gap_free() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     _establish(ledger, events, "scene:loc_tavern", "hearth", "crackling", source="turn:2")
@@ -174,7 +178,7 @@ def test_ids_allocate_in_append_order_gap_free() -> None:
 
 
 def test_entity_scope_on_a_location_is_refused() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     report = _establish(ledger, events, "entity:loc_tavern", "shutters", "closed")
     assert report.refused
@@ -182,7 +186,7 @@ def test_entity_scope_on_a_location_is_refused() -> None:
 
 
 def test_malformed_scope_prefix_is_refused() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     report = _establish(ledger, events, "zone:loc_tavern", "shutters", "closed")
     assert report.refusals[0].reason == "scope_target"
@@ -201,7 +205,7 @@ def test_canon_slot_refusal_for_location_props() -> None:
 
 
 def test_canon_slot_refusal_for_item_props() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     report = _establish(ledger, events, "entity:purse_01", "carrier", "the guard")
     assert report.refusals[0].reason == "canon_slot"  # carrier is canon-modeled
@@ -211,7 +215,7 @@ def test_unique_slot_refusal_across_scopes() -> None:
     pack = _mutated_pack(
         lambda rules: rules["brief"]["scene_texture"].update(unique_slots=["cloak"])
     )
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     first = ledger.apply_delta(
         {
@@ -246,7 +250,7 @@ def test_unique_slot_allows_live_same_scope_rules() -> None:
     pack = _mutated_pack(
         lambda rules: rules["brief"]["scene_texture"].update(unique_slots=["cloak"])
     )
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     ledger.apply_delta(
         {
@@ -281,7 +285,7 @@ def test_unique_slot_promoted_entry_keeps_the_claim() -> None:
     pack = _mutated_pack(
         lambda rules: rules["brief"]["scene_texture"].update(unique_slots=["cloak"])
     )
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "cloak", "on a nail")
     ledger.mark_promoted("tex_0000", "ev_0001")
@@ -304,7 +308,7 @@ def test_canon_slot_refusal_for_pack_modeled_fields() -> None:
     """iter-11a, KI#41: canon overlap includes PACK-modeled fields, not
     just event-born projection props — texture occupies only slots canon
     does not model (blueprint §1), and `exits`/`name`/`mood` are canon."""
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     report = _establish(ledger, events, "scene:loc_tavern", "exits", "a new door")
     assert report.refusals[0].reason == "canon_slot"
@@ -312,7 +316,7 @@ def test_canon_slot_refusal_for_pack_modeled_fields() -> None:
 
 
 def test_laundering_refusal_for_contradicted_values() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     (contradicted,) = ledger.retire_contradicted(
@@ -327,7 +331,7 @@ def test_laundering_refusal_for_contradicted_values() -> None:
 
 
 def test_laundering_refusal_for_promoted_away_values() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     promoted = ledger.mark_promoted("tex_0000", "ev_0001")
@@ -337,7 +341,7 @@ def test_laundering_refusal_for_promoted_away_values() -> None:
 
 
 def test_new_value_after_contradiction_is_not_laundering() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     ledger.retire_contradicted(
@@ -351,7 +355,7 @@ def test_new_value_after_contradiction_is_not_laundering() -> None:
 
 
 def test_ref_to_terminal_entry_is_a_stale_refusal() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     ledger.retire_contradicted(
@@ -365,7 +369,7 @@ def test_ref_to_terminal_entry_is_a_stale_refusal() -> None:
 
 
 def test_retire_of_not_live_entry_is_an_idempotent_no_op() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     report = ledger.apply_delta(
@@ -378,7 +382,7 @@ def test_retire_of_not_live_entry_is_an_idempotent_no_op() -> None:
 
 
 def test_re_establishment_after_narrator_retirement_is_fresh() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     ledger.apply_delta(
@@ -389,7 +393,7 @@ def test_re_establishment_after_narrator_retirement_is_fresh() -> None:
 
 
 def test_refusal_lines_shape() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     report = _establish(ledger, events, "scene:loc_backyard", "bonfire", "smoldering")
     assert refusal_lines(report) == (
@@ -398,7 +402,7 @@ def test_refusal_lines_shape() -> None:
 
 
 def test_gateway_is_deterministic_given_its_inputs() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     delta = {
         "source": "turn:1",
         "established": [
@@ -416,7 +420,7 @@ def test_gateway_is_deterministic_given_its_inputs() -> None:
 
 
 def test_delta_shape_gates() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     scope = {"scope": "scene:loc_tavern", "slot": "candles"}
     bad_deltas = (
@@ -442,7 +446,7 @@ def test_delta_shape_gates() -> None:
 
 
 def test_retire_contradicted_first_break_wins_the_cause() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     _establish(ledger, events, "entity:npc_guard_01", "cloak", "muddy hem", source="turn:2")
@@ -465,7 +469,7 @@ def test_retire_contradicted_first_break_wins_the_cause() -> None:
 
 
 def test_retire_contradicted_touches_only_overlapping_props() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     untouched = ledger.retire_contradicted(
@@ -481,16 +485,16 @@ def test_retire_contradicted_touches_only_overlapping_props() -> None:
 def test_sync_scene_closes_and_retires_scene_scoped_texture() -> None:
     events = _golden_events()
     ledger = SceneLedger()
-    _establish(ledger, events[:2], "scene:loc_tavern", "candles", "lit")
-    _establish(ledger, events[:2], "entity:npc_guard_01", "cloak", "muddy hem", source="turn:2")
-    sync = ledger.sync_scene(events[:3], PACK)  # the PC moved to the backyard
+    _establish(ledger, events[5:7], "scene:loc_tavern", "candles", "lit")
+    _establish(ledger, events[5:7], "entity:npc_guard_01", "cloak", "muddy hem", source="turn:2")
+    sync = ledger.sync_scene(events[5:8], PACK)  # the PC moved to the backyard
     assert sync.closed is not None and sync.closed.location_id == "loc_tavern"
     assert [entry.id for entry in sync.retired] == ["tex_0000"]  # scene-scoped only
     assert ledger.entries[1].status == ACTIVE  # entity-scoped survives
 
 
 def test_sync_scene_is_idempotent_within_a_scene() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     first = ledger.sync_scene(events, PACK)  # adopts the tavern... no — the market
@@ -502,7 +506,7 @@ def test_sync_scene_is_idempotent_within_a_scene() -> None:
 def test_apply_delta_auto_syncs_so_a_close_cannot_be_forgotten() -> None:
     events = _golden_events()
     ledger = SceneLedger()
-    _establish(ledger, events[:2], "scene:loc_tavern", "candles", "lit")
+    _establish(ledger, events[5:7], "scene:loc_tavern", "candles", "lit")
     # no explicit sync — apply_delta at the full log must close the tavern
     _establish(ledger, events, "scene:loc_market", "stalls", "half packed up", source="turn:9")
     assert ledger.entries[0].status == RETIRED
@@ -515,7 +519,7 @@ def test_revisit_scene_starts_texture_empty() -> None:
     via the brief suite); a fresh establishment is a new entry."""
     events = _golden_events()
     ledger = SceneLedger()
-    _establish(ledger, events[:2], "scene:loc_tavern", "candles", "lit")
+    _establish(ledger, events[5:7], "scene:loc_tavern", "candles", "lit")
     ledger.sync_scene(events, PACK)  # PC now at the market (tavern scene closed)
     # a later prefix that revisits the street is still a different scene;
     # re-establishing the same slot+value after scene_close is FRESH
@@ -527,7 +531,7 @@ def test_revisit_scene_starts_texture_empty() -> None:
 
 
 def test_mark_promoted_loud_on_unknown_and_terminal() -> None:
-    events = _golden_events()[:2]
+    events = _golden_events()[5:7]
     ledger = SceneLedger()
     _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
     ledger.retire_contradicted(
@@ -545,8 +549,8 @@ def test_mark_promoted_loud_on_unknown_and_terminal() -> None:
 def test_withdrawals_mirror_pending_texture_intents() -> None:
     events = _golden_events()
     ledger = SceneLedger()
-    _establish(ledger, events[:2], "scene:loc_tavern", "candles", "lit")
-    _establish(ledger, events[:2], "entity:npc_guard_01", "cloak", "muddy hem", source="turn:2")
+    _establish(ledger, events[5:7], "scene:loc_tavern", "candles", "lit")
+    _establish(ledger, events[5:7], "entity:npc_guard_01", "cloak", "muddy hem", source="turn:2")
     ledger.sync_scene(events, PACK)  # candles retired by scene_close; cloak survives
     withdrawn = ledger.withdrawals(
         {"intent_a": "tex_0000", "intent_b": "tex_0001", "intent_c": "tex_9999"}
@@ -558,9 +562,9 @@ def test_withdrawals_mirror_pending_texture_intents() -> None:
 def test_pinned_entry_pins_to_a_terminal_state_or_scene_close() -> None:
     events = _golden_events()
     ledger = SceneLedger()
-    _establish(ledger, events[:2], "scene:loc_tavern", "candles", "lit")
+    _establish(ledger, events[5:7], "scene:loc_tavern", "candles", "lit")
     ledger.apply_delta(
-        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[:2], PACK
+        {"source": "turn:2", "refs": [{"id": "tex_0000"}]}, events[5:7], PACK
     )
     assert ledger.entries[0].status == PINNED
     ledger.sync_scene(events, PACK)  # the scene closes: even pinned texture retires

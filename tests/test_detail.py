@@ -617,12 +617,12 @@ def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
         assert armed_event["t"] == base_event["t"]
         assert armed_event["cause"] == base_event["cause"]
     scans = [event for event, _ in diffed]
-    assert scans[0]["id"] == "ev_0037"  # the first tavern scan materializes
+    assert scans[0]["id"] == "ev_0042"  # the first tavern scan materializes
     assert scans[0]["outcome"]["materialized"] == [
         {"slot": "under_bench", "value": "old_cloak"},
         {"slot": "behind_barrel", "value": "lost_ring"},
     ]
-    assert scans[1]["id"] == "ev_0055"  # the guardroom rotation scan
+    assert scans[1]["id"] == "ev_0060"  # the guardroom rotation scan
     assert scans[1]["outcome"]["materialized"] == [
         {"slot": "under_cot", "value": "empty"},
     ]

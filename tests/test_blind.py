@@ -609,7 +609,7 @@ def test_the_instrument_has_teeth() -> None:
 def test_the_instrument_flags_a_crossed_knower_live(tmp_path: Path) -> None:
     """The live-fire negative control (the pinned seed-125 divergence):
     the guard crystallizes `paranoid_about_thieves` with HIS sighting
-    provenance (ev_0002, ev_0017 — the iter-55 canonical pin); the same
+    provenance (ev_0007, ev_0022 — the iter-55 canonical pin, +5 under depth-5b); the same
     belief line checked against the relief's fold is a leak (his hearsay
     mint carries one source) — the instrument sees the provenance, not
     just the token. The guard's own brief stays leak-free."""
@@ -617,7 +617,7 @@ def test_the_instrument_flags_a_crossed_knower_live(tmp_path: Path) -> None:
     guard_brief = _blocks(render_brief(assemble_brief(events, PACK, knower=GUARD)))
     guard_line = guard_brief["recalled_facts"][0]
     assert guard_line == (
-        "- belief paranoid_about_thieves (t 360, sources: ev_0002, ev_0017)"
+        "- belief paranoid_about_thieves (t 360, sources: ev_0007, ev_0022)"
     )
     view = KnowledgeView.from_events(events)
     assert _belief_leaks(events, PACK, view, RELIEF, [guard_line]) != []

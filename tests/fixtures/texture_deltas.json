@@ -4,7 +4,7 @@
   "cases": [
     {
       "name": "establish_tavern_texture",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:1",
         "established": [
@@ -23,7 +23,7 @@
     },
     {
       "name": "duplicate_is_noop",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:2",
         "established": [
@@ -41,7 +41,7 @@
     },
     {
       "name": "slot_conflict_refused",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:3",
         "established": [
@@ -59,7 +59,7 @@
     },
     {
       "name": "update_pair_retire_establish",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:4",
         "retired": [{"scope": "scene:loc_tavern", "slot": "candles"}],
@@ -78,7 +78,7 @@
     },
     {
       "name": "ref_pins_entry",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:5",
         "refs": [{"scope": "entity:npc_guard_01", "slot": "cloak"}]
@@ -94,7 +94,7 @@
     },
     {
       "name": "item_texture_via_carrier",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:6",
         "established": [
@@ -112,7 +112,7 @@
     },
     {
       "name": "canon_slot_refused",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:7",
         "established": [
@@ -130,7 +130,7 @@
     },
     {
       "name": "absent_entity_refused",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:8",
         "established": [
@@ -148,7 +148,7 @@
     },
     {
       "name": "scene_mismatch_refused",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:9",
         "established": [
@@ -166,7 +166,7 @@
     },
     {
       "name": "unknown_scope_refused",
-      "event_seq": 2,
+      "event_seq": 7,
       "delta": {
         "source": "turn:10",
         "established": [
@@ -184,7 +184,7 @@
     },
     {
       "name": "market_turn_after_moves",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:11",
         "established": [
@@ -202,7 +202,7 @@
     },
     {
       "name": "stale_ref_refused",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:12",
         "refs": [{"id": "tex_0002"}]
@@ -218,7 +218,7 @@
     },
     {
       "name": "market_crowd_texture",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:13",
         "established": [
@@ -236,7 +236,7 @@
     },
     {
       "name": "market_hearth_established",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:14",
         "established": [
@@ -254,7 +254,7 @@
     },
     {
       "name": "second_hearth_across_scopes_refused",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:15",
         "established": [
@@ -272,9 +272,9 @@
     },
     {
       "name": "promoted_hearth_reassertion_refused",
-      "event_seq": 6,
+      "event_seq": 11,
       "ops": [
-        {"op": "mark_promoted", "entry": "tex_0006", "cause": "ev_0005"}
+        {"op": "mark_promoted", "entry": "tex_0006", "cause": "ev_0010"}
       ],
       "delta": {
         "source": "turn:16",
@@ -288,12 +288,12 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish scene:loc_market.hearth = newly lit (laundering)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0005"]]
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0010"]]
       }
     },
     {
       "name": "hearth_elsewhere_after_promotion_refused",
-      "event_seq": 6,
+      "event_seq": 11,
       "delta": {
         "source": "turn:17",
         "established": [
@@ -306,7 +306,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish entity:npc_market_crowd_01.hearth = their own fire (unique_slot)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0005"]]
+        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0010"]]
       }
     }
   ]

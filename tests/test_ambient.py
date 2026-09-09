@@ -115,24 +115,31 @@ def _variant_pack(
 
 def test_the_quiet_march_releases_the_murmur(tmp_path: Path) -> None:
     """A world walked into quiet (the D-066 protocol question, answered
-    by the row's own stage): the arrival, then idle time. The first wait
-    completes AFTER beat 360 — the tag enters the buffer behind the
-    beat it missed (the seeding is the wait event, its own completion
-    tick; nothing retro-seeds). Beat 720 is the first quiet window the
-    tag can see: STAGNATION (entropy 0 — no suspicion, no fire, no
-    other tension), the ambient channel's own floor the only gate left
-    (0 < 2). The murmur releases: director_0000, the drunkard's ramble
-    at t=725 (the intent enqueued at the beat, 3 ticks of rambling).
-    The room hears — the occupants minus the actor, the outgoing guard
-    honestly absent (the t=360 rotation moved him to the guardroom).
-    Beat 1080 stays silent: the tag burned (first_time_only)."""
+    by the row's own stage): the arrival, then idle time. depth-5b: the
+    genesis pre-seeds the murmur (D-005 — the world the PC walks into
+    already carries its history's hooks), so the FIRST quiet window
+    releases it: beat 360, STAGNATION (entropy 0 — no suspicion, no
+    fire, no other tension), the ambient channel's own floor the only
+    gate left (0 < 2). The murmur releases: director_0000, the
+    drunkard's ramble at t=365 (the intent enqueued at the beat, 3
+    ticks of rambling; the unarmed arm seeded at the wait's own
+    completion — t=725, the second beat — the pre-seed is the arming's
+    designed price on this stage). The room hears — the occupants
+    minus the actor, the outgoing guard honestly absent (the t=360
+    rotation moved him to the guardroom). Beat 1080 stays silent: the
+    tag burned (first_time_only)."""
     events, sim, _ = run_script(tmp_path, QUIET)
     waits = [e for e in events if e.type == "wait"]
     assert all(TAG in e.hooks for e in waits)
     assert [e.t for e in waits] == [362, 722, 1082]
     (ramble,) = rambles(events)
-    assert ramble.id == "ev_0016"
-    assert ramble.t == 725
+    # depth-5b: the genesis pre-seeds the murmur (D-005 — the PC walks
+    # into a world whose buffer already holds the room's murmur), so the
+    # FIRST quiet beat releases it: t=365, right after the first wait
+    # (the unarmed arm waited for the wait's own seed — t=725, the
+    # second beat)
+    assert ramble.id == "ev_0014"
+    assert ramble.t == 365
     assert ramble.actor == "npc_drunk_01"
     assert str(ramble.provenance["cause_intent"]) == "director_0000"
     # the murmur rides the door: the observe resolver, the pack's
@@ -220,17 +227,21 @@ def test_day1_full_stays_silent_the_all_peak_law(tmp_path: Path) -> None:
 
 def test_the_stripped_seeding_isolates_the_mechanism(tmp_path: Path) -> None:
     """The probe family (the iter-46/51 pattern — mechanism isolation):
-    the same pack with the wait action's success hooks emptied (the
-    seeding side removed, the hook declaration kept) never releases the
-    murmur on the quiet stage — the release is seeded by idle time, not
-    by the declaration alone (D-005: a complication from nowhere is a
-    bug; without the seed there is no consequence)."""
+    the same pack with BOTH murmur seeds removed — the wait action's
+    success hooks emptied AND the genesis chronicle hook stripped
+    (depth-5b: the world's own history is the murmur's second seed) —
+    never releases it on the quiet stage: the release is seeded, never
+    spontaneous (D-005: a complication from nowhere is a bug; without
+    a seed there is no consequence)."""
+    def mutate_rules(rules: dict[str, Any]) -> None:
+        rules["worldgen"]["chronicle"]["hooks"].remove(TAG)
+
     def mutate_actions(actions: dict[str, Any]) -> None:
         for item in actions["actions"]:
             if item["intent"] == "wait":
                 item["hooks"]["success"] = []
 
-    pack = _variant_pack(tmp_path, lambda rules: None, mutate_actions)
+    pack = _variant_pack(tmp_path, mutate_rules, mutate_actions)
     events, _, _ = run_script(tmp_path, QUIET, pack=pack, label="stripped")
     assert rambles(events) == []
     waits = [e for e in events if e.type == "wait"]
@@ -257,6 +268,9 @@ def test_the_weight_zero_footprint_the_fingerprint_identity(
     briefs nothing, the stripped arm's shape)."""
     def mutate_rules(rules: dict[str, Any]) -> None:
         rules["director"]["hooks"].pop(TAG)
+        # depth-5b: the genesis seeds the murmur too — stripping the hook
+        # strips its world-side seeding (the lint's declared-hook law)
+        rules["worldgen"]["chronicle"]["hooks"].remove(TAG)
 
     def mutate_actions(actions: dict[str, Any]) -> None:
         for item in actions["actions"]:
@@ -272,16 +286,18 @@ def test_the_weight_zero_footprint_the_fingerprint_identity(
     )
     assert live_result.fingerprint == stripped_result.fingerprint
     # the pre-murmur prefix is identical; the murmur lands mid-run
-    assert [e.id for e in live_events[:16]] == [e.id for e in stripped_events[:16]]
-    murmur = live_events[16]
-    assert murmur.type == "ramble" and murmur.t == 725
+    # (past the 5-event genesis prefix both arms share, right after the
+    # first wait — the genesis pre-seed admits it at the FIRST beat)
+    assert [e.id for e in live_events[:14]] == [e.id for e in stripped_events[:14]]
+    murmur = live_events[14]
+    assert murmur.type == "ramble" and murmur.t == 365
     # the tail is content-identical except ONE extra event: the heard
     # record crossing the watch change (guard_02's briefing)
-    live_tail = [(e.t, e.type, e.actor) for e in live_events[17:]]
-    stripped_tail = [(e.t, e.type, e.actor) for e in stripped_events[16:]]
-    assert live_tail[:1] == stripped_tail[:1]  # the watch change
-    assert live_tail[1] == (1080, "knowledge_transfer", "npc_guard_02")
-    assert live_tail[2:] == stripped_tail[1:]
+    live_tail = [(e.t, e.type, e.actor) for e in live_events[15:]]
+    stripped_tail = [(e.t, e.type, e.actor) for e in stripped_events[14:]]
+    assert live_tail[:8] == stripped_tail[:8]  # the second beat + the watch change
+    assert live_tail[8] == (1080, "knowledge_transfer", "npc_guard_02")
+    assert live_tail[9:] == stripped_tail[8:]
     assert len(live_events) == len(stripped_events) + 2
 
 

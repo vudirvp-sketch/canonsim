@@ -235,8 +235,11 @@ def m5_non_pc_share(
     Computed on the OFF-run log; the director-off gate measures the
     "world not player-centered" Kenshi/RimWorld lesson. `world` counts
     (fire, smoke, burnout are world-actor events that moved without the
-    PC's direct action); the run-start event has actor = player and is
-    not counted.
+    PC's direct action). The run-start note (depth-5b, D-116): the first
+    event of an ARMED run (the committed pack since depth-5b) is the
+    `world_formed` genesis, actor `world` — the whole genesis prefix
+    counts as non-PC, the run-start included; an unarmed run's first
+    event is the player's own and is not counted.
     """
     if not events:
         return 0.0

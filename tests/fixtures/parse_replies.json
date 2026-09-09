@@ -810,10 +810,10 @@
      },
      "expect": {
       "status": "intent",
-      "events": 14,
+      "events": 15,
       "pinned": [],
       "promoted": [],
-      "last_event": "wait",
+      "last_event": "ramble",
       "state": {
        "pc_01": {
         "status.fatigue": 20,

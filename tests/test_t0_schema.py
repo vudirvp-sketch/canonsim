@@ -141,7 +141,7 @@ def test_golden_fixture_log_validates_line_by_line() -> None:
     header, events = read_log(golden, SCHEMA)  # read_log validates every line (T0)
     assert header["seed"] == 42
     assert header["pack"] == "tavern_pack@0.1"
-    assert len(events) == 6
+    assert len(events) == 11  # 5 genesis world_history + 6 player events (depth-5b)
     assert all(event.id.startswith("ev_") for event in events)
 
 
@@ -156,4 +156,4 @@ def test_writer_output_validates_against_schema(tmp_path: Path) -> None:
     sim.run_playscript(script)
     header, events = read_log(tmp_path / "run.jsonl", SCHEMA)
     assert header["schema_version"] == SCHEMA["$id"].rsplit("/", 1)[-1]
-    assert len(events) == 6
+    assert len(events) == 11  # 5 genesis world_history + 6 player events (depth-5b)

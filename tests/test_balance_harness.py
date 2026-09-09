@@ -13,6 +13,7 @@ arm machinery, the stretch block in the table, and the D-065 record
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -172,7 +173,18 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     off_log = (
         tmp_path / "balance_125_on_nopacing.jsonl"
     ).read_text(encoding="utf-8").splitlines()
-    assert on_log[:-2] == off_log[:-2]
+    # depth-5b: the arms share the whole prefix through the backyard
+    # move (48 raw lines — the header + ev_0000..ev_0046, the genesis
+    # included); the clockless arm then admits the GENESIS-PRE-SEEDED
+    # murmur at the first quiet window (t=735: no clock, no PEAK
+    # suppression, the ambient floor the only gate left), inserting it
+    # right before the player's drop_break — the ON arm's all-peak law
+    # keeps the murmur silent the whole day (the D-066 finding, the
+    # ambient row's own containment pin)
+    assert on_log[:48] == off_log[:48]
+    assert json.loads(on_log[48])["type"] == "drop_break"
+    assert json.loads(off_log[48])["type"] == "ramble"
+    assert json.loads(off_log[48])["t"] == 735
     sweep = on_log[-2]
     assert '"type": "look_around"' in sweep
     assert '"cause_intent": "director_0001"' in sweep
@@ -182,11 +194,9 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     assert '"actor": "npc_guard_02"' in scan
     assert '"cause_intent": "urgency_0004"' in scan
     assert '"t": 1456' in scan
-    # the OFF arm's own scan copy (before the ramble — the story's closer)
-    off_scan = off_log[-2]
+    # the OFF arm's own scan copy is its LAST line (the murmur moved
+    # mid-run — the pre-seed's price on the clockless arm)
+    off_scan = off_log[-1]
     assert '"actor": "npc_guard_02"' in off_scan
     assert '"cause_intent": "urgency_0004"' in off_scan
-    ramble = off_log[-1]
-    assert '"type": "ramble"' in ramble
-    assert '"actor": "npc_drunk_01"' in ramble
-    assert '"t": 1458' in ramble
+    assert '"t": 1456' in off_scan

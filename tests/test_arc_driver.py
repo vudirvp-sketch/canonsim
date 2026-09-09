@@ -240,6 +240,9 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     def mutate_rules(rules: dict[str, Any]) -> None:
         rules["director"].pop("arcs")
         rules["director"]["hooks"].pop(SWEEP_TAG)
+        # depth-5b: the genesis seeds the sweep too — stripping the hook
+        # strips its world-side seeding (the lint's declared-hook law)
+        rules["worldgen"]["chronicle"]["hooks"].remove(SWEEP_TAG)
 
     def mutate_actions(actions: dict[str, Any]) -> None:
         for item in actions["actions"]:
@@ -257,23 +260,30 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     # is identical, the sweep rides after it and before the beliefwire
     # scan's own slot (the scan closes BOTH runs — HEAD's shape)
     assert [e.id for e in live_events[:-2]] == [e.id for e in stripped_events[:-1]]
-    assert live_events[-2].id == "ev_0054"  # the sweep, the inserted event
+    assert live_events[-2].id == "ev_0059"  # the sweep, the inserted event
     assert live_events[-1].actor == "npc_guard_02"
-    assert live_events[-1].id == "ev_0055"
+    assert live_events[-1].id == "ev_0060"
     assert stripped_events[-1].actor == "npc_guard_02"
-    assert stripped_events[-1].id == "ev_0054"
+    assert stripped_events[-1].id == "ev_0059"
 
 
 def test_the_quiet_seeds_stay_byte_identical(tmp_path: Path) -> None:
     """The day1 A/B's quiet arm, pinned on a representative quiet seed
     (7): the steals succeed there — no failure event, no hooks seeded,
     the successor never enters the buffer — so the committed pack and
-    the successor-stripped pack produce byte-IDENTICAL logs (not even
-    the seeding record diverges). The landing's whole day1 footprint is
-    the seed-125 geometry."""
+    the successor-stripped pack produce identical (id, t, type) rows
+    (depth-5b: the two arms' genesis prefix differs only in the drawn
+    hook fields — the strip narrows the chronicle's hook pool — while
+    the post-genesis stream is row-identical; the worldgen streams are
+    family-isolated, so even the differing genesis draws move no canon
+    byte). The landing's whole day1 footprint is the seed-125
+    geometry."""
     def mutate_rules(rules: dict[str, Any]) -> None:
         rules["director"].pop("arcs")
         rules["director"]["hooks"].pop(SWEEP_TAG)
+        # depth-5b: the genesis seeds the sweep too — the strip narrows
+        # the chronicle's hook pool (the lint's declared-hook law)
+        rules["worldgen"]["chronicle"]["hooks"].remove(SWEEP_TAG)
 
     def mutate_actions(actions: dict[str, Any]) -> None:
         for item in actions["actions"]:

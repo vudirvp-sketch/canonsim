@@ -464,6 +464,53 @@
     ],
     "notes": "P2d (KI#3): behaviour rules generate per-NPC expectations; a mismatch at check time emits an inferred-channel record cause-chained to the event that moved the item on the violated axis — the only legal route to suspicion-from-absence (an absence is knowable only as a violated expectation, never as 'not seen'). carried_by expectations check anywhere (their own pocket); at_location expectations additionally require the NPC on site. Checked at watch rotations (v0.1); rules must hold on the initial pack state (load-time lint). Landed iter-3"
   },
+  "worldgen": {
+    "map": {
+      "extent": 48,
+      "spacing": 8,
+      "jitter": 3,
+      "relax_rounds": 1,
+      "height_octaves": 3,
+      "moisture_octaves": 2
+    },
+    "biomes": {
+      "height_bands": [4000, 5000, 7000],
+      "moisture_bands": [2500, 5000, 7500]
+    },
+    "watershed": {
+      "neighbors": 4,
+      "river_flow": 6
+    },
+    "states": {
+      "capitals": 3
+    },
+    "chronicle": {
+      "years": 150,
+      "events_max": 5,
+      "event_type": "world_history",
+      "hooks": ["barkeep_wary_sweep", "ambient_drunkard_ramble"]
+    },
+    "claims": [
+      {
+        "location": "loc_tavern",
+        "slot": "terrain",
+        "field": "biome",
+        "site": 0
+      },
+      {
+        "location": "loc_tavern",
+        "slot": "world_region",
+        "field": "region",
+        "site": 0
+      },
+      {
+        "location": "loc_street",
+        "slot": "near_river",
+        "field": "river",
+        "site": 1
+      }
+    ]
+  },
   "urgencies": {
     "beat_ticks": [
       360,
@@ -936,7 +983,8 @@
       "leverage_gained",
       "coerce",
       "ramble",
-      "conclusion_drawn"
+      "conclusion_drawn",
+      "world_history"
     ],
     "thresholds": {
       "medium": 2,

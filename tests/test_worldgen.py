@@ -1,10 +1,12 @@
-"""iter-81 acceptance — depth-5, the ordered worldgen passes (phase 5's
-build-column headline, TASKS/phases.md §5 — the Azgaar + Red Blob donor
-discipline: ordered focused passes, integer geometry, per-pass streams).
-Mechanics only (iter-81, the depth-1/2/4 pattern): the committed pack is
-UNARMED (no `worldgen` block — the 68a pattern), so the unarmed arm of
-every A/B pin below is the committed pack itself; the armed arm is the
-crafted twin (the block + the `world_history` template line).
+"""iter-81/83 acceptance — depth-5/5b, the ordered worldgen passes +
+the ARMING (phase 5's build-column headline, TASKS/phases.md §5 — the
+Azgaar + Red Blob donor discipline: ordered focused passes, integer
+geometry, per-pass streams). iter-81 landed the mechanics (the 68a
+pattern — the committed pack unarmed); **iter-83/depth-5b lands the
+ARMING: the committed pack's own `worldgen` block + the `world_history`
+template line + the story-critical listing — every A/B pin's armed arm
+is the COMMITTED pack itself, the unarmed arm the crafted twin (the
+block removed).**
 
 The laws pinned here:
 
@@ -18,8 +20,8 @@ The laws pinned here:
   reverse).
 - **The unarmed law**: a pack without the block answers `(None, ())`
   BEFORE any stream touch — zero registrations, zero draws, zero
-  events; the committed run is v0.1 byte-identical (the corpus price
-  zero by construction, the depth-2 precedent).
+  events; the crafted unarmed twin runs the v0.1 shape (the committed
+  pack is armed since depth-5b).
 - **The integer discipline (the Azgaar float-drift refusal)**: every
   model value is a Python int, in its declared bounds — a float
   anywhere in the model is a bug of the highest severity.
@@ -46,22 +48,36 @@ The laws pinned here:
   vocabulary at every level, the range laws, the template closure, the
   declared-hook law, the claim double-claim laws (modeled slot /
   scene_detail overlap / duplicate pair / site bounds).
+- **The depth-5b arming laws (D-116)**: CONDUCTANCE — the genesis types
+  clear the tale gate through the pack's own importance rule (the
+  dead-arming lint refuses what the listing forgot); REACHABILITY (L1)
+  — every armed claim names a live consumer (a template line binding
+  the slot — the flat claim keys are the binding surface — or a
+  declared director hook reading the pair), plus the
+  reserved-vocabulary collision law; the corpus price measured both
+  arms (the genesis events + the mechanical id shift alone); the M5
+  run-start note (the genesis prefix counts as non-PC); the
+  genesis×resume pins (the double-open loudness, the checkpoint flow,
+  the config-drift guards).
 """
 
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from pathlib import Path
 from typing import Any
 
 import pytest
 
+from core.checkpoint import FoldCheckpoint, canonical_state_bytes, verify
 from core.detail import COMMIT, NO_OP, SLOT_CONFLICT
 from core.fold import fold, initial_projection
 from core.intent import pack_importance
-from core.log import EventRecord, StateChange, read_log
+from core.log import EventRecord, LogError, StateChange, read_log
 from core.loop import Simulator
+from core.metrics import m5_non_pc_share
 from core.pack import Pack, PackError, load_pack
 from core.rng import (
     COSMETIC,
@@ -75,12 +91,14 @@ from core.worldgen import (
     FIELD_MAX,
     HISTORY_KINDS,
     PASS_ORDER,
+    RESERVED_CLAIM_SLOTS,
     WORLDGEN_BLOCK,
     WorldgenError,
     generate_world,
     genesis,
     resolve_claims,
 )
+from render.chronicle import render_chronicle
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
@@ -88,10 +106,24 @@ SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding=
 
 PLAYER = "pc_01"
 EVENT_TYPE = "world_history"
-TEMPLATE_LINE = "{actor}: the world remembers ({kind}, year {year})."
+#: The committed template line (templates.json — the pack's own): the
+#: `{year?…}` conditional branches on the outcome shape (the history
+#: events carry `year`, world_formed does not — the missing-key else
+#: arm is the designed branch), and each claim slot rides its own
+#: optional clause — the L1 binding surface (the flat claim keys).
+TEMPLATE_LINE = (
+    "{year?{actor} remembers: {kind}, in the year {year}.|"
+    "{actor} takes shape: {sites} sites, {regions} regions, {years} years"
+    "{terrain?, {terrain} ground}{world_region?, {world_region} lands}"
+    "{near_river?, river near}.}"
+)
+#: The genesis count — the mechanical id shift every later event pays.
+GENESIS = 5
 
-#: The armed twin's block — bands calibrated so seed 42 spans the whole
-#: biome vocabulary (ocean + coast included, the coastal rule live).
+#: The committed arming's own block (rules.json — depth-5b; the crafted
+#: twins set the same value, so the A/B arms differ in the block's
+#: PRESENCE alone). Bands calibrated so seed 42 spans the whole biome
+#: vocabulary (ocean + coast included, the coastal rule live).
 WG: dict[str, Any] = {
     "map": {
         "extent": 48,
@@ -124,12 +156,16 @@ CLAIM_SLOTS = ("terrain", "world_region", "near_river")
 
 
 def crafted_pack(
-    tmp_path: Path, name: str, worldgen: Any, *, template: bool = True
+    tmp_path: Path, name: str, worldgen: Any, *, template: bool | str = True
 ) -> Pack:
     """A committed-pack copy with the `worldgen` block set (or REMOVED
-    when None — the v0.1 twin) and the `world_history` template line
-    added (the lint's template closure: the genesis event type is pack
-    vocabulary, EVENT_SCHEMA §11)."""
+    when None — the v0.1 twin; the committed pack is ARMED since
+    depth-5b, so the unarmed arm of every A/B pin is this copy) and the
+    `world_history` template line rewritten (True: the committed
+    TEMPLATE_LINE — a no-op rewrite; a string: that line, the
+    reachability probes' unbound variants; False: REMOVED — the
+    closure refusal probe; the lint's template closure: the genesis
+    event type is pack vocabulary, EVENT_SCHEMA §11)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -138,12 +174,16 @@ def crafted_pack(
     else:
         rules[WORLDGEN_BLOCK] = worldgen
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
-    if template:
-        templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
-        templates["events"][EVENT_TYPE] = TEMPLATE_LINE
-        (target / "templates.json").write_text(
-            json.dumps(templates, indent=2), encoding="utf-8"
+    templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
+    if template is False:
+        templates["events"].pop(EVENT_TYPE, None)
+    else:
+        templates["events"][EVENT_TYPE] = (
+            TEMPLATE_LINE if template is True else template
         )
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
     return load_pack(target)
 
 
@@ -234,7 +274,7 @@ def test_the_unarmed_law_answers_nothing_before_any_stream_touch() -> None:
     KeyError — the stream never existed), zero draws, fingerprint
     zero."""
     bank = RngBank(42)
-    model, drafts = genesis(bank, PACK.rules, [], 42)
+    model, drafts = genesis(bank, _rules_with(None), [], 42)
     assert model is None and drafts == ()
     for pass_name in PASS_ORDER:
         with pytest.raises(KeyError):
@@ -242,14 +282,35 @@ def test_the_unarmed_law_answers_nothing_before_any_stream_touch() -> None:
     assert bank.fingerprint == 0
 
 
-def test_the_committed_run_stays_v01(tmp_path: Path) -> None:
-    """The committed pack (unarmed) runs the v0.1 shape: no genesis
-    events (a wait script answers exactly its own event), `world` is
-    None — the corpus price zero by construction."""
-    log, sim = _run(tmp_path, PACK, 42, [{"intent": "wait", "ticks": 5}], "v01")
+def test_the_unarmed_twin_runs_the_v01_shape(tmp_path: Path) -> None:
+    """The v0.1 twin (the block removed — the committed pack is armed
+    since depth-5b): no genesis events (a wait script answers exactly
+    its own event), `world` is None — the unarmed arm every A/B pin
+    reads."""
+    log, sim = _run(
+        tmp_path, crafted_pack(tmp_path, "v01", None), 42,
+        [{"intent": "wait", "ticks": 5}], "v01",
+    )
     _header, events = read_log(log, SCHEMA)
     assert len(events) == 1 and events[0].actor == PLAYER
     assert sim.world is None
+
+
+def test_the_committed_pack_is_armed_and_conductive(tmp_path: Path) -> None:
+    """depth-5b's landing pin: the COMMITTED pack forms the world at
+    open time — the genesis prefix (world_formed + the drawn history)
+    commits before any player step, the genesis importances ride the
+    pack rule (the story-critical listing clears the medium gate — the
+    conductance law live), and the claims live in the projection."""
+    log, sim = _run(tmp_path, PACK, 42, [{"intent": "wait", "ticks": 5}], "armed")
+    _header, events = read_log(log, SCHEMA)
+    assert [e.type for e in events] == [EVENT_TYPE] * GENESIS + ["wait"]
+    assert all(e.actor == "world" and e.importance == "medium" for e in events[:GENESIS])
+    assert events[0].outcome["kind"] == "world_formed"
+    model = sim.world
+    assert model is not None and len(model.sites) == 36
+    assert sim.projection["loc_tavern"]["terrain"] == model.biomes[0]
+    assert sim.projection["loc_street"]["near_river"] == (1 in model.rivers)
 
 
 # -- the pass laws (determinism + shape + the integer discipline) ----------------
@@ -646,3 +707,353 @@ def test_the_lint_refuses_the_claim_double_claim_family(tmp_path: Path) -> None:
     assert "unknown location id" in _lint_error(tmp_path, unknown_location)
     empty_claims = {**WG, "claims": []}
     assert "dead data" in _lint_error(tmp_path, empty_claims)
+
+
+# -- the depth-5b arming laws (D-116: conductance + reachability) ----------------
+
+
+def test_the_lint_refuses_a_dead_arming_that_cannot_clear_the_tale_gate(
+    tmp_path: Path,
+) -> None:
+    """D-116 (2), the measured trap: without the story-critical listing
+    world_formed scores 1 (two claim locations, no far hooks, no
+    irreversibility) and a history event 1 (one far hook) against the
+    medium gate's 2 — the genesis would commit and its template line
+    would NEVER render. Dead template lines are dead data: the lint
+    computes both genesis shapes through the pack's own rule
+    (pack_importance — never a second scoring path) and refuses."""
+    target = tmp_path / "dead_arming"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["importance"]["story_critical_events"] = [
+        t for t in rules["importance"]["story_critical_events"] if t != EVENT_TYPE
+    ]
+    (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    with pytest.raises(PackError, match="cannot clear the tale gate"):
+        load_pack(target)
+
+
+def test_the_lint_refuses_when_the_gate_rises_above_the_genesis(
+    tmp_path: Path,
+) -> None:
+    """The conductance computation reads the GATE, not just the score:
+    with the tale gate at `high` (threshold 4) the committed listing's
+    +2 leaves world_formed at 3 — below the gate — and the arming is
+    refused even though the listing is present."""
+    target = tmp_path / "gate_high"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
+    templates["tale_gate"] = {"min_importance": "high"}
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
+    with pytest.raises(PackError, match="world_formed scores 'medium'"):
+        load_pack(target)
+
+
+def test_the_lint_refuses_a_claim_without_a_live_consumer(
+    tmp_path: Path,
+) -> None:
+    """D-116 (2), REACHABILITY (L1): every armed claim names at least one
+    LIVE consumer. A slot no template line binds (the crafted line drops
+    the {terrain} clause) and no director hook reads is dead pack data —
+    the flat key would ride the outcome and never surface anywhere."""
+    no_terrain = TEMPLATE_LINE.replace("{terrain?, {terrain} ground}", "")
+    assert "{terrain" not in no_terrain
+    with pytest.raises(PackError, match="names no live consumer"):
+        crafted_pack(tmp_path, "unbound", WG, template=no_terrain)
+
+
+def test_the_lint_accepts_a_director_hook_as_the_live_consumer(
+    tmp_path: Path,
+) -> None:
+    """The reachability law's second consumer arm: a claim no template
+    line binds is still LIVE when a declared director hook READS the
+    (location, slot) pair through a prop predicate — the buffer's own
+    trigger surface is a consumer."""
+    target = tmp_path / "hook_consumer"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    unbound = TEMPLATE_LINE.replace("{terrain?, {terrain} ground}", "")
+    rules["worldgen"]["claims"][0] = {
+        "location": "loc_tavern", "slot": "ocean_wind",
+        "field": "biome", "site": 0,
+    }
+    rules["director"]["hooks"]["storm_watcher"] = {
+        "weight": 1,
+        "release_threshold": 10,
+        "target_npc": "npc_drunk_01",
+        "intent": {"kind": "ramble"},
+        "channel": "ambient",
+        "trigger": {
+            "kind": "prop", "of": "loc_tavern", "path": "ocean_wind",
+            "value": "storm", "comparator": "equals",
+        },
+    }
+    (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
+    templates["events"][EVENT_TYPE] = unbound
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
+    pack = load_pack(target)  # no raise — the hook is the consumer
+    assert pack.rules["worldgen"]["claims"][0]["slot"] == "ocean_wind"
+
+
+def test_the_lint_refuses_a_reserved_claim_slot(tmp_path: Path) -> None:
+    """The flat claim keys write AFTER the outcome's fixed keys and are
+    shadowed by the render context's derived slots — a colliding slot
+    is clobbered or dead, never bound; the reserved vocabulary refuses
+    it at load."""
+    reserved = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "kind", "field": "biome", "site": 0}
+    ]}
+    assert "reserved" in _lint_error(tmp_path, reserved)
+    shadowed = {**WG, "claims": [
+        {"location": "loc_tavern", "slot": "actor", "field": "biome", "site": 0}
+    ]}
+    assert "reserved" in _lint_error(tmp_path, shadowed)
+    assert "kind" in RESERVED_CLAIM_SLOTS and "actor" in RESERVED_CLAIM_SLOTS
+
+
+def test_the_world_formed_outcome_binds_the_claim_slots_flat() -> None:
+    """The render surface (depth-5b): each committed claim's slot rides
+    the world_formed outcome as a FLAT key — the template line binds it
+    through `_event_context` (the D-116 (4) law) — while the `claims`
+    list stays the structured record (two jobs, two shapes)."""
+    model, drafts = genesis(RngBank(42), _rules_with(WG), [], 42)
+    assert model is not None
+    formed = drafts[0]
+    assert formed.outcome["terrain"] == model.biomes[0]
+    assert formed.outcome["world_region"] == model.regions[0]
+    assert formed.outcome["near_river"] == (1 in model.rivers)
+    assert formed.outcome["claims"] == [
+        {"slot": "terrain", "value": model.biomes[0]},
+        {"slot": "world_region", "value": model.regions[0]},
+        {"slot": "near_river", "value": 1 in model.rivers},
+    ]
+
+
+def test_the_template_line_renders_the_genesis_both_arms(tmp_path: Path) -> None:
+    """The live binding, end to end: the chronicle renders the armed
+    run's genesis — the world_formed line carries the claim slots (the
+    flat keys through `_event_context`, the conditional clauses), the
+    history lines the drawn years — both clear the medium tale gate (the
+    conductance), so the lines ride the tale. The day header groups them
+    at day 1; the unarmed twin renders no genesis block at all."""
+    log, _sim = _run(tmp_path, PACK, 42, [{"intent": "wait", "ticks": 5}], "tale")
+    _header, events = read_log(log, SCHEMA)
+    tale = render_chronicle(events, PACK, 42)
+    lines = tale.splitlines()
+    model = generate_world(RngBank(42), WG)
+    _m, drafts = genesis(RngBank(42), _rules_with(WG), [], 42)
+    expected_formed = (
+        "the world takes shape: 36 sites, 3 regions, 150 years"
+        + (f", {model.biomes[0]} ground" if "terrain" in drafts[0].outcome else "")
+        + (f", {model.regions[0]} lands" if "world_region" in drafts[0].outcome else "")
+        + (", river near" if model.rivers and 1 in model.rivers else "")
+        + "."
+    )
+    assert lines[0].startswith("— Day 1")
+    assert lines[1] == expected_formed
+    for line, draft in zip(lines[2 : GENESIS + 1], drafts[1:], strict=True):
+        assert line == (
+            f"the world remembers: {draft.outcome['kind']}, "
+            f"in the year {draft.outcome['year']}."
+        )
+    # the unarmed twin: no genesis block at all — the lone wait is
+    # low-importance, under the medium gate, so the tale renders empty
+    twin_log, _twin = _run(
+        tmp_path, crafted_pack(tmp_path, "tale_unarmed", None), 42,
+        [{"intent": "wait", "ticks": 5}], "tale_twin",
+    )
+    _h, twin_events = read_log(twin_log, SCHEMA)
+    assert render_chronicle(twin_events, PACK, 42) == ""
+
+
+# -- the depth-5b corpus price (measured both arms, D-108's law) ----------------
+
+
+def _shift_ids(line: str, delta: int) -> str:
+    """Remap every event-id reference in one serialized ARMED event line
+    into the unarmed twin's id space (delta = -GENESIS): the id, the
+    cause, knowledge[].source, and the reflection's outcome.provenance
+    — the mechanical id shift. A reference INTO the genesis prefix (the
+    first player event's cause, chained to the last genesis event) maps
+    to `null` — the unarmed run's own run-start shape; designed-
+    wrongness probes (>= 9000) stay put."""
+    def bump(match: re.Match[str]) -> str:
+        value = int(match.group(1))
+        if value >= 9000:
+            return match.group(0)
+        shifted = value + delta
+        if shifted < 0:
+            return "null"  # quoted token -> JSON null, quotes consumed
+        return f'"ev_{shifted:04d}"'
+
+    return re.sub(r'"ev_(\d{4})"', bump, line)
+
+
+def test_the_corpus_price_is_the_genesis_events_alone(tmp_path: Path) -> None:
+    """The D-108 both-arms law, measured on the committed pack vs the
+    unarmed twin (the smoke script, seed 42): the substantive
+    fingerprint is EQUAL (the worldgen streams never move a canon
+    draw), the stream grows by exactly the genesis count, and every
+    post-genesis event is the unarmed twin's own line with its event-id
+    REFERENCES remapped by +5 — no other byte moves."""
+    unarmed = crafted_pack(tmp_path, "price_unarmed", None)
+    steps = [{"intent": "wait", "ticks": 5}]
+    log_a, sim_a = _run(tmp_path, unarmed, 42, steps, "price_a")
+    log_b, sim_b = _run(tmp_path, PACK, 42, steps, "price_b")
+    assert sim_a._bank.fingerprint == sim_b._bank.fingerprint
+    base_lines = log_a.read_text(encoding="utf-8").splitlines()[1:]
+    armed_lines = log_b.read_text(encoding="utf-8").splitlines()[1:]
+    assert len(armed_lines) == len(base_lines) + GENESIS
+    assert armed_lines[:GENESIS] == [
+        line for line in armed_lines[:GENESIS]
+        if json.loads(line)["type"] == EVENT_TYPE
+    ]
+    remapped = [_shift_ids(line, -GENESIS) for line in armed_lines[GENESIS:]]
+    assert remapped == base_lines
+
+
+def test_the_day1_price_is_the_genesis_events_alone(tmp_path: Path) -> None:
+    """The same law on the day1 stage (seed 125, the corpus's own
+    geometry — the fire chain, the watch changes, the reflections): the
+    fingerprint equal, the delta exactly the genesis count, and the
+    post-genesis stream — ids remapped into the unarmed space —
+    byte-equal (the director's own hooks stay aligned: the genesis
+    seeds the two weight-0 hooks whose releases the unarmed arm seeds
+    at their own events)."""
+    unarmed = crafted_pack(tmp_path, "day1_unarmed", None)
+    day1 = json.loads(
+        (REPO / "tests" / "playscripts" / "day1_full.json").read_text(encoding="utf-8")
+    )
+    log_a, sim_a = _run(tmp_path, unarmed, 125, day1["steps"], "day1_a")
+    log_b, sim_b = _run(tmp_path, PACK, 125, day1["steps"], "day1_b")
+    assert sim_a._bank.fingerprint == sim_b._bank.fingerprint
+    base_lines = log_a.read_text(encoding="utf-8").splitlines()[1:]
+    armed_lines = log_b.read_text(encoding="utf-8").splitlines()[1:]
+    assert len(armed_lines) == len(base_lines) + GENESIS
+    remapped = [_shift_ids(line, -GENESIS) for line in armed_lines[GENESIS:]]
+    assert remapped == base_lines
+
+
+def test_the_m5_run_start_note_the_genesis_counts_as_non_pc(
+    tmp_path: Path,
+) -> None:
+    """metrics.py's docstring re-pin, executable: the armed run's first
+    event is the world_formed genesis, actor `world` — the M5 share
+    counts the whole genesis prefix as non-PC; the unarmed twin's first
+    event is the player's own and the share reads 0."""
+    steps = [{"intent": "wait", "ticks": 5}]
+    log_a, _ = _run(tmp_path, crafted_pack(tmp_path, "m5_un", None), 42, steps, "m5_a")
+    log_b, _ = _run(tmp_path, PACK, 42, steps, "m5_b")
+    _ha, unarmed_events = read_log(log_a, SCHEMA)
+    _hb, armed_events = read_log(log_b, SCHEMA)
+    assert m5_non_pc_share(unarmed_events, PLAYER) == 0.0
+    assert m5_non_pc_share(armed_events, PLAYER) == GENESIS / (GENESIS + 1)
+
+
+# -- the genesis×resume pins (D-116 (3): the double-open + drift guards) --------
+
+
+def test_double_open_is_loud_before_any_stream_touch(tmp_path: Path) -> None:
+    """The writer's header guard is the door: a second `open()` raises
+    LogError BEFORE the genesis can re-run — the double world_formed
+    commit is impossible by construction, and the log holds exactly one
+    header + one genesis (the future resume door needs its own entry,
+    never a second open)."""
+    armed = crafted_pack(tmp_path, "dbl", WG)
+    log = tmp_path / "dbl.jsonl"
+    sim = Simulator(armed, 42, log, SCHEMA, commit="0000000")
+    sim.open()
+    try:
+        with pytest.raises(LogError, match="header already written"):
+            sim.open()
+        _header, events = read_log(log, SCHEMA)
+        assert len(events) == GENESIS  # ONE genesis, not two
+    finally:
+        sim.close()
+
+
+def test_the_genesis_checkpoints_and_restores_clean(tmp_path: Path) -> None:
+    """The genesis×checkpoint flow (depth-4's law over a genesis-bearing
+    run): the claims fold INTO the snapshot (the checkpoint at an offset
+    past world_formed holds them), the re-fold verify stays clean, and
+    restore = snapshot + tail replays to exactly the full fold."""
+    armed = crafted_pack(tmp_path, "cp", WG)
+    log = tmp_path / "cp.jsonl"
+    sim = Simulator(armed, 42, log, SCHEMA, commit="0000000")
+    sim.run_playscript(
+        {"name": "cp", "seed": 42, "pack": "tavern_pack@0.1",
+         "steps": [{"intent": "wait", "ticks": 5}]}
+    )
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    initial = initial_projection(armed.entities)
+    snapshot = fold(events[: GENESIS + 1], initial)  # past world_formed
+    checkpoint = FoldCheckpoint.from_state(snapshot, offset=GENESIS + 1)
+    verify(checkpoint, events, initial)  # clean — no raise
+    restored = checkpoint.restore(events)
+    assert canonical_state_bytes(restored) == canonical_state_bytes(
+        fold(events, initial)
+    )
+    # the claims are IN the snapshot — the restored world carries them
+    model = generate_world(RngBank(42), WG)
+    assert restored["loc_tavern"]["terrain"] == model.biomes[0]
+    assert restored["loc_street"]["near_river"] == (1 in model.rivers)
+
+
+def test_the_config_drift_guards(tmp_path: Path) -> None:
+    """Two guards, pinned (D-116 (3)): (a) a pack whose ENTITIES drift
+    between fold and verify fails the re-fold law loudly (the snapshot
+    no longer matches the pack-shaped initial projection); (b) a
+    worldgen CONFIG drift is invisible to the fold (the claims ride
+    events — INV-1, the log is self-describing) and to the verify, so
+    the reconciliation falls to the MODEL side: a world regenerated
+    from the drifted config DISAGREES with the committed genesis claims
+    — the check the future resume door must run before trusting a
+    restored world. The unarmed drift (the block removed entirely)
+    folds clean too: canon never needs the worldgen to replay."""
+    armed = crafted_pack(tmp_path, "drift", WG)
+    log = tmp_path / "drift.jsonl"
+    sim = Simulator(armed, 42, log, SCHEMA, commit="0000000")
+    sim.run_playscript(
+        {"name": "drift", "seed": 42, "pack": "tavern_pack@0.1",
+         "steps": [{"intent": "wait", "ticks": 5}]}
+    )
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    formed = events[0]
+    checkpoint = FoldCheckpoint.from_state(
+        fold(events[: GENESIS + 1], initial_projection(armed.entities)),
+        offset=GENESIS + 1,
+    )
+    # (a) the entities drift: a relocated item moves the initial
+    # projection, and the re-fold no longer matches the snapshot
+    drifted_entities = json.loads(json.dumps(dict(armed.data)))
+    for record in drifted_entities["entities.json"]["items"]:
+        if record["id"] == "rope_01":
+            record["position"] = "loc_tavern"
+    drifted_pack = Pack(data=drifted_entities)
+    from core.checkpoint import CheckpointError
+
+    with pytest.raises(CheckpointError, match="does not match a re-fold"):
+        verify(checkpoint, events, initial_projection(drifted_pack.entities))
+
+    # (b) the worldgen config drift: bands collapsed to all-mountain
+    # under the same seed — the fold and the verify stay clean (the
+    # claims are event-borne), but the regenerated model's reads no
+    # longer match the committed genesis
+    mountain = {**WG, "biomes": {"height_bands": [100, 200, 300],
+                                 "moisture_bands": [2500, 5000, 7500]}}
+    drifted_model = generate_world(RngBank(42), mountain)
+    assert drifted_model.biomes[0] != formed.outcome["terrain"]
+    verify(checkpoint, events, initial_projection(armed.entities))  # still clean
+
+    # the unarmed drift: the log folds under a pack that no longer
+    # declares the world (the events are self-describing, INV-1)
+    unarmed = crafted_pack(tmp_path, "drift_unarmed", None)
+    refolded = fold(events, initial_projection(unarmed.entities))
+    assert refolded["loc_tavern"]["terrain"] == formed.outcome["terrain"]

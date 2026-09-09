@@ -13,6 +13,52 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-83 · 2026-09-09 · worldgen-arm — depth-5b, the worldgen ARMING,
+EXTENDED per D-116 (17 files — 2 code + 2 pack data + 4 fixture
+regen/re-pin + 10 suite re-pin + 5 doc sync: the arming + its lint
+laws + its pins + its paid price are one mechanism family, the
+iter-76/81 footprint; AGENTS §2.3: 17 > 5-6, the objective scope
+noted here)
+- core/worldgen.py: the flat claim keys — each committed claim's slot
+  rides the world_formed outcome as a render-surface key (D-116 (4):
+  the template binds them through `_event_context`; the `claims` list
+  stays the structured record) + RESERVED_CLAIM_SLOTS (the collision
+  law: outcome keys are clobbered, derived slots shadowed);
+  core/pack.py::_worldgen: CONDUCTANCE (the genesis importances
+  computed through `pack_importance` against the tale gate — the
+  dead-arming refusal; tune-1's law enforced by computation, never a
+  second scoring path) + REACHABILITY (L1: `_bound_template_slots`
+  scans the template braces, `_director_prop_reads` the hook prop
+  leaves — every armed claim names a live consumer) + the
+  reserved-slot refusal; core/metrics.py: the M5 run-start note
+  re-pinned (the genesis prefix counts as non-PC, actor world).
+- content/tavern_pack ARMED: rules.json the worldgen block (48/8 map,
+  jitter 3, relax 1, octaves 3/2, bands [4000,5000,7000]/
+  [2500,5000,7500], watershed 4/6, 3 capitals, chronicle 150y / 5
+  events / world_history / hooks [the sweep + the murmur], 3 claims:
+  terrain + world_region @ loc_tavern, near_river @ loc_street) +
+  world_history in importance.story_critical_events; templates.json
+  the world_history line (the {year?…} shape branch + the claim
+  clauses — the binding surface).
+- The price, measured BOTH arms first (the D-108 law, a Rule-9 probe
+  over the smoke + day1 ten + arson): the genesis events alone + the
+  mechanical id shift — fingerprint equal on every probe, the
+  post-genesis stream identical modulo id references. Paid: the T1
+  fixture regenerated (12 lines, the iter-15 precedent), the corpus
+  fixtures re-pinned (+5 ev ids / event_seqs / causes; the murmur's
+  release moved to the FIRST quiet beat — the pre-seed's designed
+  price, D-005: the genesis seeds the director's buffer), ~70 test
+  pins updated across 14 suites (the day1 scan ids, the golden-log
+  slices, the reflection/retrieval pins, the pacing A/B record).
+- +14 tests (tests/test_worldgen.py 26→40: conductance both arms,
+  reachability both consumer arms + the reserved law, the flat keys,
+  the live template render, the both-arms price law (smoke + day1
+  seed 125, ids remapped), the M5 note, double-open loud, the genesis
+  checkpoint/restore, the two drift guards) — 1378→1392+1 green, ruff
+  clean. D-117; TASKS depth-5b done; STATUS re-pinned (the queue:
+  bridge-1 next — inseparable, D-116); AGENT_NAVIGATION §1 the armed
+  rows. 10 entries held (9 + this, at cap).
+---
 iter-82 · 2026-09-09 · concept-land — doc-only, the generator-concept
 verdict set (D-116; 8 files — the verdict row + the routed plan are
 one family, the iter-77/78 footprint; AGENTS §2.3: 8 > 5-6, the

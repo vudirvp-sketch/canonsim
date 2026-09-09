@@ -373,9 +373,14 @@ def test_arson_rejected_without_a_fire_source(tmp_path: Path) -> None:
     # the pc in the street holds nothing that burns and the street has no spots
     events, sim = run(tmp_path, 42, [{"intent": "arson", "target": "loc_street"}],
                       name="no_source.jsonl")
-    assert [e.type for e in events] == ["intent_rejected"]
-    assert events[0].outcome["failed_test"] == "target.field_in"
-    assert not sim.projection["loc_street"]
+    # depth-5b: the genesis prefix rides every run (5 world_history events)
+    assert [e.type for e in events] == [
+        *("world_history" for _ in range(5)), "intent_rejected",
+    ]
+    assert events[-1].outcome["failed_test"] == "target.field_in"
+    # the street holds only the genesis claim (depth-5b); the rejected
+    # arson wrote nothing — no fire, no burnout surface
+    assert sim.projection["loc_street"] == {"near_river": False}
 
 
 def test_take_of_a_carried_item_is_rejected_not_steal(tmp_path: Path) -> None:
@@ -400,6 +405,7 @@ def test_day1_theft_and_arson_fixture(tmp_path: Path) -> None:
     _, events = read_log(tmp_path / "day1.jsonl", SCHEMA)
     types = [e.type for e in events]
     assert types == [
+        *("world_history" for _ in range(5)),
         "move", "steal", "take", "move", "drop_break", "fire_started",
         "fire_spread", "smoke_rising", "location_burned_out", "wait",
     ]
@@ -528,7 +534,9 @@ def test_resolver_desync_fails_before_the_log_write(
     with pytest.raises(ValueError, match="projection holds"):
         sim.run_playscript(script([{"intent": "wait", "ticks": 1}], 42))
     lines = (tmp_path / "desync.jsonl").read_text().splitlines()
-    assert len(lines) == 1  # header only — the bad draft never landed
+    # header + the genesis (depth-5b: the world forms before the bad
+    # draft ever lands) — the bad draft itself never landed
+    assert len(lines) == 6
 
 
 def test_steal_without_carries_flagged_precondition_is_loud(
