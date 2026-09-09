@@ -26,7 +26,7 @@ Per-axis rules (pack data, every number tunable):
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
@@ -97,12 +97,22 @@ def decay_drafts(
     projection: "Projection",
     last_change: Mapping[tuple[str, str], int],
     beat_tick: int,
+    locations: Collection[str] | None = None,
 ) -> tuple[EventDraft, ...]:
     """One decay beat: for each NPC with a `status.*` axis the pack
     declares a rate for, compute the delta since the last event that
     changed that axis (decay beat, use effect, rotation reset — or run
     start) and produce a draft. The first NPC with a non-zero delta
     anchors the event; an empty tuple means no decay this beat.
+
+    depth-3 (the scene LOD filter): `locations` scopes the walk to NPCs
+    positioned there — the ACTIVE zone at a beat, the WARM ring at a
+    macro crossing; None (the default) is the one-scene law, every NPC
+    (the unarmed world's per-beat behavior, the v0.1 bytes). The decay
+    law itself is interval-proportional (the delta covers the elapsed
+    since the axis's last change), so the coarser warm sampling lands
+    the same linear drift, floored per event — value-exact modulo the
+    floor, never a second scoring path (L13).
 
     `last_change` is the Simulator's derived index `(entity, prop) ->
     tick of the latest committed event that changed it`, maintained in
@@ -124,6 +134,8 @@ def decay_drafts(
         props = projection.get(npc_id)
         if props is None:
             continue
+        if locations is not None and props.get("position") not in locations:
+            continue  # the scene-LOD filter: this zone does not tick here
         if props.get("crime_status") == "caught":
             continue  # the caught do not tire
         changes: list[StateChange] = []

@@ -485,6 +485,13 @@ class _Lint:
         location_ids = _ids(locations)
         by_location = {loc["id"]: loc for loc in locations}
         for loc in locations:
+            # KI#83 (the KI#82 family, the pred-contract law): a MISSING
+            # `exits` key died with a raw KeyError — the missing-field
+            # loop names the location, never the host's exception.
+            _require(
+                isinstance(loc.get("exits"), list),
+                f"location {loc['id']}: missing or non-list exits",
+            )
             for exit_id in loc["exits"]:
                 _require(exit_id in location_ids, f"location {loc['id']}: orphan exit {exit_id}")
                 _require(

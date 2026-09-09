@@ -41,12 +41,18 @@ co-occurring tick (the year turns before the day's rotation, the
 rotation before the beat), each turn ONE event through the canon door
 (the calendar's increments are canon, INV-1 — `core/macro.py` owns the
 primitive).
+depth-3: the macro crossing is the scene LOD's WARM cadence — under
+an armed clock the turn carries the cold-background census (the D-112
+count on the aggregate surface), the warm ring's NPCs tick at the
+crossing (drift + goal rolls, `core/lod.py` owns the zones), and the
+beats scope to the ACTIVE scene alone; the unarmed law keeps the
+one-scene world (the whole simulation per-beat, the v0.1 bytes).
 """
 
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
@@ -80,6 +86,7 @@ from core.intent import (
 )
 from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
 from core.leverage import leverage_drafts, live_leverage, spendable_leverage
+from core.lod import COLD_COUNT_KEY, SceneZones, npc_population, scene_zones
 from core.log import EventDraft, EventLogWriter, EventRecord
 from core.macro import macro_turn_draft, next_macro_tick
 from core.onaction import on_action_drafts
@@ -348,7 +355,7 @@ class Simulator:
                         # equal-tick remaining candidates re-loop (the
                         # writer's tick-monotonicity allows equal ticks).
                         if crossing == self._next_macro:
-                            self._run_macro(crossing)
+                            self._run_macro(crossing, entry.tick)
                             self._next_macro = next_macro_tick(
                                 self._pack.rules["time"].get("macro"),
                                 crossing,
@@ -722,6 +729,17 @@ class Simulator:
 
     # -- the iter-4 beat cycle (decay / urgencies / director releases) --------
 
+    def _scene_zones(self) -> SceneZones | None:
+        """The zone partition under an ARMED macro clock (depth-3, the
+        scene LOD); None under the unarmed law — the one-scene world,
+        the whole simulation per-beat (the v0.1 behavior, zero corpus
+        price by construction — the 68a pattern). The partition is a
+        pure fold view recomputed at each tick it scopes: the PC moves,
+        the zones follow (the LOD tracks the reader)."""
+        if self._next_macro is None:
+            return None
+        return scene_zones(self._pack, self._projection)
+
     def _first_beat(self, rules: Mapping[str, Any]) -> int | None:
         """The first beat tick strictly after 0 (the run-start tick). Beat
         offsets are pack-declared intraday ticks repeated daily, like
@@ -774,9 +792,22 @@ class Simulator:
         the clock has already passed (regression). The intents thus
         fire at the entry's tick — conceptually "after the beat, at
         the moment the world resumes moving"."""
+        # depth-3 (the scene LOD): the beat's zone scoping — under an
+        # armed macro clock the ACTIVE scene alone ticks per-beat (the
+        # PC's location); the unarmed law keeps the whole world
+        # per-beat (the one-scene world, the v0.1 bytes — the filter
+        # is None). The DIRECTOR stays global either way: it is the
+        # story layer (pack-authored hooks, budget 1 per beat), not
+        # the ambient life the LOD throttles — its zone-scoping is
+        # never the clock's consumer business.
+        zones = self._scene_zones()
+        locations: Collection[str] | None = (
+            None if zones is None else (zones.active,)
+        )
         # 1) states decay — every NPC whose status.* deltas are non-zero
         for draft in decay_drafts(
-            self._pack, self._projection, self._last_change, beat_tick
+            self._pack, self._projection, self._last_change, beat_tick,
+            locations=locations,
         ):
             self._commit(replace(
                 draft, cause=self._writer.last_id,
@@ -796,6 +827,7 @@ class Simulator:
             facts=live_leverage(self._pack, self._events, beat_tick),
             echoes=beat_echoes,
             traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
+            locations=locations,
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1
@@ -824,20 +856,37 @@ class Simulator:
             kind="intent", payload=stamped,
         )
 
-    def _run_macro(self, tick: int) -> None:
-        """One macro-clock crossing (maclock-1, L4): the year turns —
-        ONE event through the canon door, cause-chained to the writer's
-        last id (the chronological-chain law, the rotation's scheduled-
-        beat precedent). The primitive's own event carries the counter
-        alone; the aggregate surface's counts (D-112's cardinality
-        shape) are the consumers' — depth-3/depth-7/st-6a/weather-1
-        land after the primitive and call `macro_turn_draft` with their
-        counts at this crossing. No knowledge (a world event), no state
-        changes (the year is derived, L3), no hooks (the director
-        boundary is the consumers' rows); importance rides the pack's
-        own rule (the story-critical listing decides tale visibility —
-        the tune-1 split)."""
-        draft = macro_turn_draft(self._pack.rules, tick)
+    def _run_macro(self, tick: int, entry_tick: int) -> None:
+        """One macro-clock crossing (maclock-1, L4; depth-3's consumer,
+        the scene LOD's warm ring): the year turns — ONE event through
+        the canon door, cause-chained to the writer's last id (the
+        chronological-chain law, the rotation's scheduled-beat
+        precedent) — and the turn now carries the COLD CENSUS (the
+        D-112 cardinality shape: the cold background's NPC population
+        as one flat count, its only representation in the log — counts
+        for populations, events for notables). The WARM RING ticks
+        here (the scheduler rule: the crossings are the warm cadence —
+        the active zone keeps the beats): the warm NPCs' decay drafts
+        commit at the crossing tick chained AFTER the turn (the clock's
+        own event opens its crossing; the consumer rides it), and
+        their urgency entries roll at the crossing tick (the gates'
+        fold reads at this tick — the beat's own law) enqueued at the
+        ENTRY tick (the queue discipline: never a tick the clock has
+        passed). No knowledge on the turn (a world event), no
+        state_changes (the year and the census are derived, L3), no
+        hooks (the director boundary is the consumers' own rows,
+        never the clock's); importance rides the pack's own rule (the
+        story-critical listing decides tale visibility — the tune-1
+        split)."""
+        zones = scene_zones(self._pack, self._projection)
+        draft = macro_turn_draft(
+            self._pack.rules, tick,
+            counts={
+                COLD_COUNT_KEY: npc_population(
+                    self._pack, self._projection, zones.cold
+                )
+            },
+        )
         self._commit(
             replace(
                 draft,
@@ -845,6 +894,29 @@ class Simulator:
                 provenance={"seed": self._seed},
             )
         )
+        # the warm ring's status drift, chained to the turn (the
+        # consumer rides the clock's own event)
+        for drift in decay_drafts(
+            self._pack, self._projection, self._last_change, tick,
+            locations=zones.warm,
+        ):
+            self._commit(
+                replace(
+                    drift, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+        # the warm ring's goal rolls — the gates read at the crossing
+        # tick (the beat's own law), the intents enqueue at the entry
+        # tick (the never-regress law)
+        for intent in urgency_intents(
+            self._pack, self._projection, self._bank,
+            facts=live_leverage(self._pack, self._events, tick),
+            echoes=echo_scores(self._pack, self._knowledge, tick),
+            traits=crystallized_traits(self._pack, self._knowledge, tick),
+            locations=zones.warm,
+        ):
+            self._enqueue_autonomous(intent, entry_tick)
 
     def _run_rotation(self, tick: int) -> None:
         """One watch rotation at a crossed tick (phase0 §3): the post swap

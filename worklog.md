@@ -13,6 +13,67 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-91 · 2026-09-10 · lod1 — depth-3, the scene LOD (D-116's W2
+consumer head, the macro clock's FIRST consumer; 16 files — 6 code
+(lod.py new, states, urgencies, loop, macro docstring, pack the
+KI#83 guard) + 3 test files (test_lod.py new, test_core the probe,
+test_macro the re-pin) + 7 doc sync: the zones + the filters + the
+loop integration + the pins are one family, the iter-86..90
+footprint; AGENTS §2.3: 16 > 5-6, the objective scope noted here)
+- core/lod.py (new): the zone family's single owner — `scene_zones`
+  (the pure partition over the exits graph + the PC's live position:
+  ACTIVE per-beat / WARM the exits in pack order / COLD the rest in
+  declaration order, self-exits + duplicates filtered, LodError the
+  pred-contract guards), `npc_population` the census read,
+  `COLD_COUNT_KEY = "cold_npcs"` the turn's flat count. THE ONE-GATE
+  LAW: the LOD engages exactly when the macro clock is armed (the
+  warm cadence IS the macro cadence — one clock, zero new pack
+  vocabulary); the unarmed law is the one-scene world.
+- core/loop.py: `_run_macro(tick, entry_tick)` — the turn FIRST
+  carrying the cold census, then the warm ring (the drift chained
+  after the turn at the crossing tick, the goal rolls at the
+  crossing tick enqueued at the entry tick — the beat machinery
+  minus the DIRECTOR, which stays global: the story layer, never
+  ambient life); `_run_beat` scopes to the ACTIVE zone under an
+  armed clock (`_scene_zones`, None unarmed). core/states.py +
+  core/urgencies.py: the `locations=None` LOD filter (None the
+  one-scene law; the walk cuts, never rescores — L13; the odds never
+  change, the roll cadence is the LOD's own cost). core/macro.py:
+  the docstring's consumer re-pin (depth-3 the surface's first
+  caller). core/pack.py: KI#83 — the entities lint's missing-`exits`
+  KeyError leak, the named-PackError guard (the KI#82 family).
+- +17 tests (tests/test_lod.py — the partition, the loud guards, the
+  census's npc-only law, the self-exit filter, the filter scopes with
+  the L13 no-rescore law + the draw-driven stream registry, the
+  integration: the warm ring at the crossings with the cause chain,
+  the active-per-beat vs warm-at-the-crossing split, the cold
+  silence + the census ride, the census following the PC across the
+  move, the unarmed twin's byte-identity over plumbing_smoke +
+  day1_full, determinism, the co-occurring family order, the
+  template's census binding; tests/test_core.py the KI#83 probe;
+  tests/test_macro.py the corpus pin re-measured) — 1442→1459+1
+  green, ruff clean (3.12.14, the env pin; seeds 42 + 0 + unset
+  spot-checked). Corpus price, measured BOTH arms: ZERO by
+  construction — the committed pack unarmed (the one-scene law), the
+  unarmed crafted twin byte-identical to the committed bytes over
+  the corpus scripts; the armed arm's delta the macro family alone
+  (seed 42: 18 vs 6 events — 2 turns + 10 warm drifts, the
+  substantive fingerprint EQUAL at 0, the rolls on the isolated
+  urgency streams); ZERO re-pins (git-verified: no fixture in the
+  diff, the T1 golden untouched).
+- docs: DECISIONS D-125, TASKS depth-3 done, phases.md §5 the
+  scene-LOD paragraph + the intake bullet's landing tag, NAV §1 the
+  lod row + the states/urgencies/loop extensions, README the
+  narrative sentence + the code-map line + the stale test count
+  synced (1323→1459 — the honest-count law), STATUS re-pinned (the
+  queue: depth-6 next, the W2 wave order) + KI#83 recorded + KI#82
+  deleted (closed iter-88, three iterations past — the deletion was
+  overdue at iter-90). iter-82 evicted here (verified against git in
+  this edit); 10 after. Caps: STATUS ~800 / TASKS 1044 / DECISIONS
+  91 lines (61 rows) / phases ~800 / README 681 — over-cap on
+  substance (§6.1, the D-095..D-125 precedent), trim at the
+  phase-5→6 gate.
+---
 iter-90 · 2026-09-10 · maclock1 — the macro-clock primitive (W2's
 head, D-116's wave order, FIRST among its consumers; 11 files — 3
 code + 1 new test + 7 doc sync: the primitive + the loop
@@ -361,41 +422,5 @@ footprint; AGENTS §2.3: 33 > 5-6, the objective scope noted here)
   bridge-1 next — inseparable, D-116); AGENT_NAVIGATION §1 the armed
   rows. 11 entries held after this edit (10 + this, the eviction
   missed — restored to 10 at iter-83a, KI#80).
----
-iter-82 · 2026-09-09 · concept-land — doc-only, the generator-concept
-verdict set (D-116; 8 files — the verdict row + the routed plan are
-one family, the iter-77/78 footprint; AGENTS §2.3: 8 > 5-6, the
-objective scope noted here). The suite re-verified green at HEAD
-`0d6a3bf` BEFORE the edits (1378+1, ruff clean, 3.12.14 — the env
-pin); no code touched.
-- docs/DECISIONS.md: D-116 — the 13 owner-questions resolved as
-  best-of-variants syntheses (the scene-line reads the folded
-  projection; conductance through the importance rule + the
-  dead-arming lint; ceilings REFUSED in favor of the geo-1 rework —
-  policy ≠ correctness; the calendar deferred to maclock-1 as the
-  macro-clock's counter; travel prices derived from the WorldModel
-  with pack-override; maclock-1 the dedicated primitive row; bounded
-  plane the topology of record; the LOD ladder as mode G's boundary;
-  renotation through the render layer; world-2 the phase-6 gate
-  instrument; the Azgaar donor split; res-1 the owner-gated resource
-  layer) + the 13 contradictions dissolved (native 3D = final
-  refusal, the spatial model pinned as phase law).
-- docs/TASKS.md: intake-5 the wave plan routed (bridge-1 / chron-2 /
-  place-1 / geo-1 / maclock-1 / name-1 + world-2 / res-1 / roads-1
-  owner-gated at phase 6); depth-5b EXTENDED (conductance +
-  reachability + genesis×resume + the T1 regen, NO ceilings); st-6a's
-  price law amended (derived + pack-override, the gate satisfied).
-  TASKS 971 — rides above 600 (substance rows: the plan; the pattern
-  documented here per §6.1).
-- docs/blueprint/phases.md §5: the spatial model pinned as phase law
-  (the graph of scales, attributive Z, vertical edges, bounded plane
-  of record, void filtering = pack-CI); docs/ROADMAP.md §4: the
-  Azgaar donor split; docs/REFERENCES.md §10: eight catalog rows (the
-  economics/culture donors) + Kenshi amended; docs/REFERENCES_DEEP.md
-  §1: ref-18/19/20 planned just-in-time at their consumers.
-- STATUS.md re-pinned (iter-82 header + the wave queue); worklog
-  iter-82 in / iter-72 out (verified in this edit); 10 after (the
-  log held 10 at HEAD — the cap law held, the count did not grow;
-  the 9s corrected iter-83a, KI#80).
 ---
 (end of log — cap 10; pre-trim history lives in git)

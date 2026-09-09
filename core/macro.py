@@ -27,11 +27,12 @@ count keys are the consumers' own future vocabulary (pack-side through
 their declarations), the surface is shape-only and refuses a key
 colliding with the counter's own (`year` — the branch-fake family:
 the chron-2 line's conditional branches on the outcome shape, a count
-named `year` would flip it). The primitive's own run-path event carries
-no counts — depth-3 (warm ring), depth-7 (group ticks), st-6a (travel)
-and weather-1 (ambient) land after, each calling the surface at the
-crossing (one primitive, one row, first — the scheduler blast-radius
-insurance, D-116 (6)).
+named `year` would flip it). depth-3 (the scene LOD, iter-91) is the
+surface's FIRST consumer: the run-path turn carries the cold
+background's census (`core/lod.py::COLD_COUNT_KEY` — the zones'
+owner); depth-7 (group ticks), st-6a (travel) and weather-1 (ambient)
+land after, each calling the surface at the crossing (one primitive,
+one row, first — the scheduler blast-radius insurance, D-116 (6)).
 """
 
 from __future__ import annotations

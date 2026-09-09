@@ -46,9 +46,12 @@
   collapsed iter-77)**: the pack's `scene_detail` block; the price
   measured both arms, paid fidelity-only; zero new knowledge tokens
   (D-108). Detail: tests/test_detail.py.
-- `depth-3` · scene LOD (three zones) — todo: the scheduler rule (INV-2
-  clean, never entropy) — needs the multi-scene layer, gate: after
-  depth-5's first passes.
+- `depth-3` · scene LOD (three zones) — **done (iter-91, D-125)**: the
+  zone family `core/lod.py` (the partition, the census) + the LOD
+  filters on the decay/urgency walks + the loop's warm ring at the
+  macro crossings (the one-gate law: the unarmed pack is the
+  one-scene world, the v0.1 bytes) — the macro clock's first
+  consumer, `cold_npcs` on the turn. Detail: tests/test_lod.py.
 - `depth-4` · fold checkpoints — **done (iter-80, D-114)**: the
   chronicler-family derived artifact (fold-checkpoint + event-index
   offset, `core/checkpoint.py`) + the sha256 index-anchor (intake-4);

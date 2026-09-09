@@ -400,6 +400,18 @@ def test_pack_lint_catches_orphan_exit(tmp_path: Path) -> None:
         load_pack(_broken_pack(tmp_path, mutate))
 
 
+def test_pack_lint_catches_missing_exits_loud(tmp_path: Path) -> None:
+    """KI#83 (the KI#82 family, iter-91): a location without its `exits`
+    key is a named PackError, never a raw KeyError leak at lint time."""
+    def mutate(target: Path) -> None:
+        entities = json.loads((target / "entities.json").read_text())
+        del entities["locations"][0]["exits"]
+        (target / "entities.json").write_text(json.dumps(entities))
+
+    with pytest.raises(PackError, match="missing or non-list exits"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
 def test_pack_lint_catches_carrier_mismatch(tmp_path: Path) -> None:
     def mutate(target: Path) -> None:
         entities = json.loads((target / "entities.json").read_text())

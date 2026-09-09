@@ -336,22 +336,27 @@ def test_the_unarmed_worldgen_twin_counts_from_zero(
 def test_the_corpus_price_is_the_macro_events_alone(
     tmp_path: Path,
 ) -> None:
-    """The both-arms measurement (D-108): the armed arm vs the unarmed
-    twin (the block's PRESENCE alone differs) — the substantive
-    fingerprint EQUAL (the macro path draws nothing; the armed arm
-    rides the worldgen streams' own draws verbatim), the event count
-    delta exactly the turns, and the unarmed arm of the COMMITTED pack
-    is the v0.1 bytes themselves (T1's golden pin — zero price by
-    construction)."""
+    """The both-arms measurement (D-108), re-pinned at iter-91 (depth-3,
+    the surface's FIRST consumer): the armed arm vs the unarmed twin
+    (the block's PRESENCE alone differs) — the substantive fingerprint
+    EQUAL (the clock draws nothing; the warm ring's rolls ride the
+    isolated urgency streams, no intent lands at this seed), the event
+    delta the macro family alone: the turns + the warm ring's drift
+    (the consumer's designed events — the LOD's price, paid only by
+    the armed arm). The unarmed arm of the COMMITTED pack is the v0.1
+    bytes themselves (T1's golden pin — zero price by construction)."""
     armed_pack = crafted_pack(tmp_path, "ab_armed", ARMED)
     unarmed_pack = crafted_pack(tmp_path, "ab_unarmed", None)
     log_a, result_a = _run(tmp_path, armed_pack, 42, WAIT_100, "ab_armed")
     log_u, result_u = _run(tmp_path, unarmed_pack, 42, WAIT_100, "ab_unarmed")
     _header, events_a = read_log(log_a, SCHEMA)
     _header, events_u = read_log(log_u, SCHEMA)
-    assert result_a.fingerprint == result_u.fingerprint  # zero draws on the macro path
+    assert result_a.fingerprint == result_u.fingerprint  # zero substantive draws on the macro path
     turns_a = [e for e in events_a if e.type == EVENT_TYPE]
-    assert len(events_a) == len(events_u) + len(turns_a) == len(events_u) + 2
+    # the warm ring's drift: the armed arm's status_decayed events (the
+    # 100-tick window holds no beat, so every decay event is the ring's)
+    drift_a = [e for e in events_a if e.type == "status_decayed"]
+    assert len(events_a) == len(events_u) + len(turns_a) + len(drift_a)
     # the committed pack (no time.macro block) is the unarmed arm's twin:
     # zero macro events in its golden fixture (T1) — the v0.1 bytes
     assert not any(e.type == EVENT_TYPE for e in events_u)

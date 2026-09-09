@@ -578,6 +578,28 @@ primitive, each calling the surface at the crossing (log growth
 O(consumers × macrobeats), never O(members × ticks); the count
 vocabulary is theirs, the surface shape-only).
 
+**The scene LOD (depth-3, iter-91/D-125): the three zones, live.**
+The partition (`core/lod.py::scene_zones`) is a pure function of the
+exits graph + the PC's live position — ACTIVE (the PC's location,
+per-beat), WARM (its exits, pack declaration order), COLD (the rest);
+recomputed at each tick it scopes, so the zones follow the reader.
+The ONE-GATE law: the LOD engages exactly when the macro clock is
+armed — the warm cadence IS the macro cadence (one clock, one
+cadence, no second pack declaration); the unarmed law is the
+one-scene world, the whole simulation per-beat, the v0.1 bytes (the
+68a pattern; the committed pack's arming rides with weather-1's row).
+At the crossing the warm ring ticks the beat machinery minus the
+director (the story layer stays global — pack-authored hooks,
+budget-bounded): drift chained after the turn (the consumer rides the
+clock's own event), goal rolls at the crossing tick enqueued at the
+entry tick — the roll cadence is the LOD's cost, the odds never
+change (L13). The cold background rides the turn alone: its NPC
+census as one flat count (`cold_npcs`, the D-112 cardinality shape —
+counts for populations, events for notables; L3 derived, INV-1
+recorded, never stored) — the cold NPCs never tick. Log growth
+O(active + warm/cadence + aggregates), the long-history fear bounded
+by construction.
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the
@@ -670,7 +692,10 @@ sketch (`SPECS_BACKLOG.md`).
   warm ring (adjacent scenes) ticks every Nth beat (a scheduler rule —
   INV-2 clean, never entropy), the cold background rides aggregate
   events only. Log growth stays O(active + warm/N + aggregates) — the
-  long-history fear bounded by construction.
+  long-history fear bounded by construction. **Landed iter-91 as
+  depth-3 (D-125): the zones read the macro clock's own cadence (one
+  gate, no second declaration), the cold background's ride is the
+  turn's census count — `core/lod.py` + the §5 paragraph above.**
 - **Perception depth — the acquisition side.** The intake's "knowledge
   is binary by presence" premise is FALSE today (channels
   saw/heard/told/inferred, birth fidelity exact/partial/vague,

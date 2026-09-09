@@ -28,7 +28,7 @@ intents use. The world's logic is one mechanism, not two — M5
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -107,6 +107,7 @@ def urgency_intents(
     facts: Sequence[Any] = (),
     echoes: Sequence[Any] = (),
     traits: Sequence[Any] = (),
+    locations: Collection[str] | None = None,
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -132,11 +133,28 @@ def urgency_intents(
     the belief actually crystallizes (the same law; a GATE, never a
     probability multiplier — the roll already fired on the entry's
     own stream, the belief only filters; the door re-validates with
-    its own read at the entry tick)."""
+    its own read at the entry tick).
+
+    depth-3 (the scene-LOD filter): `locations` scopes the entry walk
+    to NPCs positioned there (the active zone at a beat, the warm ring
+    at a macro crossing); None (the default) is the one-scene law —
+    every entry, the unarmed world's per-beat behavior."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
         if spec.npc not in projection:
+            continue
+        # depth-3 (the scene-LOD filter): only the ticking zone's
+        # entries roll — the ACTIVE zone at a beat, the WARM ring at a
+        # macro crossing; None is the one-scene law, every entry (the
+        # unarmed world's per-beat behavior). The roll cadence is the
+        # LOD's own cost: the warm ring rolls at the crossings alone —
+        # the odds stay the pack's number, never a second probability
+        # (L13 — fewer rolls, never different odds).
+        if (
+            locations is not None
+            and projection[spec.npc].get("position") not in locations
+        ):
             continue
         if projection[spec.npc].get("crime_status") == "caught":
             continue

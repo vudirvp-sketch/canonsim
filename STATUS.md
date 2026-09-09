@@ -1,71 +1,101 @@
 # STATUS — canonsim
 
-Iteration: iter-90 (`iter-90-maclock1` — the macro-clock
-primitive, D-116's W2 wave head, FIRST among its consumers: the
-SCHEDULER CADENCE RULE (`core/macro.py::next_macro_tick` — the
-crossings are the POSITIVE MULTIPLES of the pack-declared
-`time.macro.cadence_ticks`, pure tick arithmetic, never entropy;
-the loop's THIRD crossing cursor, fired COARSEST-FIRST at a
-co-occurring tick — the year turns before the day's rotation, the
-rotation before the beat, the pre-existing order unchanged), the
-MACRO-YEAR COUNTER + the CALENDAR BINDING (D-116 (4): `year =
-start + t // cadence` — derived, never stored, L3; the start
-BINDS to the worldgen chronicle horizon — the genesis years are
-the world's history before the run, ONE timeline — 0 for an
-unarmed pack; neither a global tick↔year constant nor
-forever-decorative years), and the AGGREGATE-EVENT EMISSION
-SURFACE (`macro_turn_draft`, the D-112 one-event-with-cardinality
-shape: the consumer's counts ride the outcome as flat integer
-keys beside `year` — the depth-3 warm ring, depth-7 group ticks,
-st-6a travel, weather-1 ambient read it; a count named `year` a
-refused branch fake; consumers land AFTER the primitive — one
-primitive, one row, first, the scheduler blast-radius
-insurance); the `time.macro` LINT (closed vocabulary, cadence ≥
-1, the event type in the template closure; the runtime
-raw-read guards raise MacroError, the pred-contract family); the
-committed pack UNARMED — the 68a pattern, the arming rides with
-the primitive's first consumer (weather-1 the natural first, its
-gate now satisfied); the corpus price ZERO by construction,
-measured both arms (the crafted armed arm vs the unarmed twin:
-the substantive fingerprint EQUAL — the macro path draws nothing
-— the event-count delta exactly the turns, zero re-pins,
-git-verified)) ·
+Iteration: iter-91 (`iter-91-lod1` — depth-3, the
+scene LOD, D-116's W2 consumer head, the macro clock's
+FIRST consumer calling D-124's surface at the crossing:
+the ZONE PARTITION (`core/lod.py::scene_zones` — the
+module is the zones' single owner; a pure function of the
+pack's exits graph + the PC's live position — ACTIVE the
+PC's location (per-beat), WARM its exits (the pack's own
+declaration order, self-exits and duplicates filtered),
+COLD the rest (declaration order); INV-2 by construction
+order, never a set; loud on an unreadable fold — LodError,
+the pred-contract family; a LIVE fold view recomputed at
+each tick it scopes — the PC moves, the zones follow), the
+ONE-GATE LAW (the LOD engages exactly when the macro clock
+is armed — the warm cadence IS the macro cadence, one
+clock with the calendar, "every Nth beat" the derived
+ratio, never a second declaration; the UNARMED law is the
+one-scene world — the whole simulation per-beat, the v0.1
+bytes; ZERO new pack vocabulary: the zones derive from
+exits + position, the cadence from time.macro, the census
+from the projection, L3 everywhere), the WARM RING at the
+crossings (`_run_macro` — the beat machinery minus the
+director: the turn event FIRST (the clock's own event
+opens its crossing), then the warm NPCs' decay drafts
+commit at the crossing tick chained AFTER the turn (the
+consumer rides the clock's event), then their urgency
+entries ROLL at the crossing tick (the gates' fold reads
+at this tick) enqueueing at the ENTRY tick (the
+never-regress law); the decay law stays
+interval-proportional — the coarser sampling lands the
+same linear drift floored per event, never a second
+scoring path; the roll CADENCE is the LOD's cost, the odds
+never change; the DIRECTOR stays global — the story layer,
+pack-authored hooks, budget-bounded, never ambient life),
+the COLD CENSUS (`COLD_COUNT_KEY = "cold_npcs"` on
+`macro_turn_draft`'s counts — the D-112 cardinality shape
+made real: counts for populations, events for notables;
+the cold zone's kind-npc population as ONE flat count
+beside `year`, its only representation in the log; the
+ambient groups never count — they never tick; L3 derived,
+INV-1 recorded, never stored; the template MAY bind it —
+the flat-keys family), the LOD FILTERS (`decay_drafts` /
+`urgency_intents` gain `locations=None` — None the
+one-scene law, a zone tuple the scoped walk), KI#83 (the
+entities lint's missing-`exits` KeyError leak — the KI#82
+family — found at the row's probe, fixed the same
+iteration with the named-PackError guard), the corpus
+price ZERO by construction (the committed pack unarmed,
+the one-scene law byte-identical; measured BOTH arms: the
+unarmed crafted twin runs plumbing_smoke + day1_full
+byte-identical to the committed pack, the armed arm's
+delta the macro family alone — seed 42: 18 vs 6 events,
+2 turns + 10 warm drifts, the substantive fingerprint
+EQUAL at 0, the warm rolls on the isolated urgency
+streams; ZERO re-pins, git-verified — no fixture in the
+diff; the iter-90 corpus pin in test_macro re-pinned to
+the consumer's price law)) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
-chron-2 + place-1 + geo-1 + maclock-1 LANDED,
-the queue: the W2 consumers — depth-3 scene LOD / depth-6
+chron-2 + place-1 + geo-1 + maclock-1 + depth-3 LANDED,
+the queue: the W2 consumers — depth-6
 factions / depth-7 + name-1 per D-116's wave order; st-6a a live
 candidate (its gate chain satisfied); weather-1's gate satisfied)
-· 1442
+· 1459
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
-42 + unset spot-checked).
+42 + 0 + unset spot-checked).
 ·
 Date: 2026-09-10 ·
-Scope: `core/macro.py` (new), `core/loop.py`, `core/pack.py`,
-`tests/test_macro.py` (new)
+Scope: `core/lod.py` (new), `core/states.py`, `core/urgencies.py`,
+`core/loop.py`, `core/macro.py` (the docstring's consumer re-pin),
+`core/pack.py` (the KI#83 guard), `tests/test_lod.py` (new),
+`tests/test_core.py` (the KI#83 probe), `tests/test_macro.py`
+(the corpus pin re-measured)
 + the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
-`docs/blueprint/phases.md` (§5 — the macro-clock paragraph, the
-phase's architecture owner), `docs/AGENT_NAVIGATION.md` (§1 — the
-core/ row, the structure sync), `README.md` (the narrative
-sentence + the code-map line),
-`worklog.md`, `STATUS.md` (this file) —
-11 files (git-verified: 9 modified + 2 new; the primitive + the
-loop integration + the lint + the pins + the doc sync are one
-family, the iter-86..89 footprint; AGENTS §2.3: 11 > 5-6, the
-objective scope noted in worklog): +18 tests (the cadence
-arithmetic — unarmed None, multiples, the broken-cadence
-refusals; the counter — the horizon binding, the derived law, the
-armed-only guard; the surface — the D-112 shape, the reserved-key
-and non-count refusals, the story-critical visibility split; the
-integration — the armed run's turns at the crossings with the
-cause chain, the unarmed-worldgen twin counting from 0, the A/B
-both-arms price, byte-identical determinism, the co-occurring
-tick's order, the session-boundary cursor, the render arms; the
-lint refusals),
-D-124, TASKS maclock-1 done, phases.md §5 the macro-clock
-paragraph, this header + the Next-step re-pin.
-· The prior iteration's record: iter-89 (geo-1, D-123 — the
-geometry rework). The detail lives in TASKS + worklog + git.
+`docs/blueprint/phases.md` (§5 — the scene-LOD paragraph + the
+intake bullet's landing tag), `docs/AGENT_NAVIGATION.md` (§1 — the
+`lod` module row, the states/urgencies/loop extensions),
+`README.md` (the narrative sentence + the code-map line + the test
+count synced), `worklog.md`, `STATUS.md` (this file) —
+16 files (git-verified: 7 modified + 2 new code/test + 7 doc;
+the zones + the filters + the loop integration + the pins are one
+family, the iter-86..90 footprint; AGENTS §2.3: 16 > 5-6, the
+objective scope noted in worklog): +17 tests (the partition — the
+committed pack's shape, the PC-follow, the loud guards, the
+census's npc-only law, the self-exit filter; the filters — the
+decay scope with the L13 no-rescore law, the urgency scope with
+the draw-driven stream registry, the surface's census key; the
+integration — the warm ring's crossings with the cause chain, the
+active-per-beat vs warm-at-the-crossing split, the cold zone's
+silence + the census ride, the census following the PC across the
+move, the unarmed twin's byte-identity over the corpus scripts,
+byte-identical determinism, the co-occurring tick's family order,
+the template's census binding),
+D-125, TASKS depth-3 done, phases.md §5 the scene-LOD paragraph,
+this header + the Next-step re-pin.
+· The prior iteration's record: iter-90 (maclock-1, D-124 — the
+macro-clock primitive). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -89,14 +119,18 @@ geometry rework). The detail lives in TASKS + worklog + git.
 
 ## Active KIs
 
-- KI#82 · the `_worldgen` pack lint leaked a raw KeyError on a
-  MISSING sub-block (only unknown extra keys were checked; a crafted
-  pack minus `map` died with `KeyError('map')`, not a named
-  PackError — the pred-contract family law) · opened 2026-09-10 ·
-  CLOSED iter-88 (the missing-block loop naming the block; tested
-  for all seven blocks).
+- KI#83 · the `_entities` pack lint leaked a raw KeyError on a
+  MISSING `exits` key (the loop read `loc["exits"]` directly; a
+  crafted pack's location minus the field died with
+  `KeyError('exits')`, not a named PackError — the pred-contract
+  family law, KI#82's twin) · opened 2026-09-10 ·
+  CLOSED iter-91 (the named-PackError guard; tested).
 
-- (KI#81 deleted at iter-87 per AGENTS §5 — closed iter-85, two
+- (KI#82 deleted at iter-91 per AGENTS §5 — closed iter-88, three
+  iterations past (iter-89/90/91 — the deletion was already overdue
+  at iter-90); the lesson lives in git + the FAQ's family law: the
+  pred-contract family's missing-field refusals. KI#81 deleted at
+  iter-87 per AGENTS §5 — closed iter-85, two
   iterations past (iter-86 + iter-87); the lesson lives in git + the
   KI#80 family law: the worklog's separator + eviction land in the
   SAME edit, git-verified. KI#80 deleted at iter-87 per AGENTS §5 —
@@ -612,10 +646,10 @@ gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
 ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
 the scene-line projection pipe + chron-2 the history bridge +
 place-1 the placement discipline + geo-1 the geometry rework +
-maclock-1 the macro-clock primitive LANDED
-(iter-73/74/75/76/80/81/83/86/87/88/89/90,
+maclock-1 the macro-clock primitive + depth-3 the scene LOD LANDED
+(iter-73/74/75/76/80/81/83/86/87/88/89/90/91,
 D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122/D-123/
-D-124;
+D-124/D-125;
 the corpus
 prices paid fidelity-only / zero-by-construction ×3 / the genesis
 events + the id shift — the murmur's pre-seed timing the one
@@ -624,7 +658,9 @@ the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green /
 lint-side + pack data alone — zero re-pins, 1422+1 green /
 byte-identical by exactness proof — zero re-pins, 1424+1 green /
 unarmed by the 68a pattern, the fingerprint equal both arms — zero
-re-pins, 1442+1 green) +
+re-pins, 1442+1 green / unarmed one-scene law, the unarmed twin
+byte-identical over the corpus scripts — zero re-pins, 1459+1
+green) +
 the iter-82 concept-land verdict set (D-116: the 13 questions resolved,
 the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
@@ -635,11 +671,13 @@ corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
 rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,
 D-124 — the primitive first among its consumers, the scheduler
-blast-radius insurance paid at zero corpus price; the committed
-pack's macro arming rides with the primitive's first consumer)
-→ `depth-3` scene LOD (its depth-5 gate is satisfied — the passes
-are landed; the macro cadence its warm-ring scheduler rule reads is
-`core/macro.py`'s), `depth-6` factions, `depth-7` groups &
+blast-radius insurance paid at zero corpus price) → `depth-3`
+LANDED (iter-91, D-125 — the macro clock's FIRST consumer: the
+three zones, the warm ring at the crossings, `cold_npcs` the cold
+census on the turn; the one-gate law — the LOD engages exactly when
+the macro clock is armed, the unarmed pack the one-scene world; the
+committed pack's macro ARMING still rides with weather-1's row) →
+`depth-6` factions, `depth-7` groups &
 simulation LOD
 (design ratified iter-79, D-112 — the iter-11b resolutions,
 phases.md §5/§7; the group macro-ticks ride the primitive) + `name-1`
@@ -704,11 +742,22 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    st-6a/weather-1 consumers call); the committed pack unarmed —
    the 68a pattern, the arming rides with the first consumer;
    corpus price zero — the fingerprint equal both arms, zero
-   re-pins);
+   re-pins); depth-3 LANDED (iter-91, D-125 — the scene LOD: the
+   zone family `core/lod.py` (the pure partition over the exits
+   graph + the PC's live position, the zones following the reader),
+   the one-gate law (the warm cadence IS the macro cadence — one
+   clock, no second declaration; the unarmed law the one-scene
+   world, the v0.1 bytes), the warm ring at the crossings (drift
+   chained after the turn + goal rolls at the crossing tick, the
+   director staying global — the story layer), the cold census
+   `cold_npcs` on the turn (the D-112 counts-for-populations shape,
+   the cold NPCs never ticking); the LOD filters on the decay and
+   urgency walks (None the one-scene law); KI#83 the entities-lint
+   KeyError leak found + fixed the same iteration; corpus price
+   zero — the unarmed twin byte-identical over the corpus scripts,
+   zero re-pins);
    the
-   queue: the W2 consumers — scene LOD
-   (its depth-5 gate is satisfied — the passes are landed; the
-   macro cadence its warm-ring scheduler rule reads is live),
+   queue: the W2 consumers —
    factions
    with goals, groups & simulation LOD + name-1 (design ratified
    iter-79, D-112 — the iter-11b resolutions, phases.md §5/§7; the
