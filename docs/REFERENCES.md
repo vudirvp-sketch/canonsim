@@ -214,6 +214,12 @@
 | Dune (D-119) | the single critical resource: a pack declares ONE resource binding economy, religion, and politics (scarcity's focal point) — res-1's pack-declaration shape, the closed cycle's pressure valve |
 | Warhammer 40k (D-119) | ideology as constraint grammar: what a faction CANNOT do — prohibitions as pack metadata, never bonuses — depth-6's faction dynamics + the PACK_SPEC prohibitions framing |
 | Outer Wilds (D-119) | anti-reference: knowledge-as-progression metagates — anything learned lands in `known_by` state, never in a gate (L6/EPIST-1 held; the anti-row for future progression talk) |
+| Morrowind (D-130) | cultural estrangement as data: unfamiliar naming, customs-as-rules, taboo vocabulary, structures — all pack-declarable, zero narrator prose; the distinctiveness lesson for the province's two-culture border (name-1 phonotactics + PACK_SPEC prohibitions/custom vocabulary) |
+| The Elder Scrolls (D-130) | anti-row — static lore: deep books and NPCs in a world that never changes under the player (the museum world); our claims are event-born (bridge-1), state = fold(log) — lore depth without change is the anti-shape for pack design |
+| Discworld (D-130) | tone lives in the narrator, not the mechanics: an economically/lawfully earnest world told funny — the canon/voice split confirmed (VISION §1); a pack may be mechanically grim and prose-comic; never encode jokes into event vocabularies |
+| Fallout: New Vegas (D-130) | triangular faction leverage: three powers with mutually exclusive victory conditions, each viable, the player's allegiance tips the province — depth-6's dramatic shape (the ratio grid); ours is the emergent form: dynamics tip, never script gates |
+| Pathologic (D-130) | scarcity as the dramatic register: the town that runs out, prices as narrative pressure — res-1's framing (the closed cycle is the story engine, not bookkeeping); minus: authored misery curves — ours simulates and the director plans consequences (D-005) |
+| Caves of Qud (D-130) | the hybrid confirmation: authored pillars (factions, customs, tone) over a generated surface (map, per-run history) — exactly the pack/worldgen split; identity is authored, texture is procedural |
 
 ## 11. Unverified / misattributed (anti-hallucination log)
 

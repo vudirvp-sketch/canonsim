@@ -13,6 +13,29 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-95 · 2026-09-11 · intake8 — research intake 8, the
+setting-direction verdict set routed (doc-only, the owner's chat
+call; D-130; 6 files — the iter-85/94 intake footprint family,
+AGENTS §2.3: 6 > 5-6, the one-family objective scope noted here)
+- verified BEFORE routing: the clone green (1516+1, ruff clean, HEAD
+  a78e2f1, Python 3.12.14)
+- D-130: the three-tier posture (the repo's 2nd setting is ORIGINAL
+  — the province sketch at phases.md §6, authored pillars over a
+  generated surface, riding world-2; the level-1 reskin instrument
+  is the open generic stack; a proprietary fan-pack is owner-local,
+  zero repo footprint); the minus ledger (ten catalogued minuses →
+  the standing laws, zero new machinery); REFERENCES §10 +6 rows
+  (Morrowind, TES anti-row, Discworld, FNV, Pathologic, Qud); NO new
+  backlog rows (the material rides the existing W4 rows, just-in-time
+  the D-096 precedent)
+- the doc-only streak (iter-94 + 95) surfaced in STATUS per AGENTS
+  §2.5 — both the owner's research calls, not an agent loop; the
+  queue untouched (name-1 pinned); iter-85 evicted here (verified
+  against git in this edit; 10 after); re-run post-edit: 1516+1
+  green, ruff clean. Caps: STATUS 827 / TASKS 1141 / phases 938 /
+  REFERENCES 311 / DECISIONS 96 lines (66 rows) — over-cap held on
+  substance (§6.1), trim at the phase-5→6 gate.
+---
 iter-94 · 2026-09-10 · intake7 — research intake 7, the Anthropic-2026
 agent corpus routed (doc-only, the owner's adoption call; D-128/D-129;
 7 files — the iter-85 intake footprint family, AGENTS §2.3: 7 > 5-6,
@@ -441,30 +464,6 @@ the pins are one family, the iter-75/83 footprint; AGENTS §2.3: 11 >
   held. Caps: STATUS 678 / TASKS 1005 / DECISIONS 85 lines (56 rows)
   — over-cap on substance (§6.1, the D-095..D-119 precedent), trim at
   the phase-5→6 gate.
----
-iter-85 · 2026-09-10 · intake6 — research intake 6, the
-consolidated-analysis residue cataloged (doc-only, 5 files:
-REFERENCES, DECISIONS, TASKS, this log, STATUS; the owner's
-variant-A call, the D-096/D-116 intake family; every claim verified
-against HEAD `cf8d06e` — ~80% of the text already landed/cataloged).
-- D-119: REFERENCES §10 +3 rows (Dune → res-1's pack-declaration
-  shape; Warhammer 40k → depth-6/PACK_SPEC prohibitions framing;
-  Outer Wilds anti-reference, knowledge-as-progression refuted); the
-  record-systems dictionary + ethos mutagenesis deferred to the
-  phase-6 opening on the existing owner-gated W4 rows (just-in-time);
-  Actor Model + CRDT refused — the pros already delivered by
-  SCHED-1/STATE-1/D-114/single-writer log, the minuses fatal to
-  INV-2/L4/T1. The queue untouched: bridge-1 stays pinned.
-- KI#81 opened + closed this edit: iter-84's worklog entry landed
-  without its closing separator AND without the owed eviction (11
-  entries held vs the claimed "10 held (9 + this one, git-verified)"
-  — the KI#80 family, second recurrence). Fixed here: separator
-  restored, iter-76 (the eviction iter-84 owed) + bg-8 (this
-  entry's own) evicted — 10 held, verified against git in this
-  edit. 1403+1 green, ruff clean (3.12.14; seeds 0/42/unset).
-  Caps: STATUS 668 / TASKS 1002 / REFERENCES 305 / DECISIONS 84
-  (55 rows) — over-cap held on substance (§6.1), trim at the
-  phase-5→6 gate.
 ---
 ---
 (end of log — cap 10; pre-trim history lives in git)

@@ -321,6 +321,10 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > (D-116), weather-1's row stands (intake-3 — its gate read as
 > bridge-1 + maclock-1 landed), directions are pack data over the
 > graph today (zero core — no row owed until a measured need).
+> intake-8's setting sketch rides world-2's level-2 half (D-130;
+> `docs/blueprint/phases.md` §6 — the province: authored pillars over
+> a generated surface; world-2's level-1 reskin instrument stays the
+> open generic stack).
 
 ### Research intake 6 (iter-85; the consolidated-analysis residue, cataloged)
 
@@ -370,6 +374,30 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > — confirmed already ours (INV-1/INV-5, the reading gradient); what
 > transferred is habits, not architecture. The external text itself
 > stays outside the repo (convenience-copy law).
+
+### Research intake 8 (iter-95; the setting-direction verdict set, routed)
+
+> The owner's 2026-09-11 chat call — where the tavern-polygon grows, a
+> setting survey (pluses/minuses of other projects & universes), the
+> own-vs-embedded world question, and the generator-leverage ask —
+> verified against HEAD `a78e2f1` before routing (the clone green:
+> 1516+1, ruff clean; the intake family's verify-first law). The
+> verdict set is D-130: the THREE-TIER setting posture (the repo's
+> public 2nd setting is ORIGINAL — the province sketch at
+> `docs/blueprint/phases.md` §6, authored pillars over a generated
+> surface, riding world-2's row; the level-1 T1 reskin instrument is
+> the OPEN generic stack, SRD 5.1/Open5e; a proprietary-universe
+> fan-pack is OWNER-LOCAL data outside the repo — the convenience-copy
+> law family, zero repo footprint, low priority), the MINUS LEDGER
+> (ten catalogued minuses → the standing laws that already cure them —
+> zero new machinery), the CATALOG additions (REFERENCES §10 +6
+> pattern rows: Morrowind, the TES anti-row, Discworld, FNV, Pathologic,
+> Caves of Qud). NO new backlog rows: the material rides the EXISTING
+> owner-gated W4/phase-6 rows (world-2's row carries the sketch
+> pointer; res-1 the focal-resource shape; roads-1 the artery; PACK_SPEC
+> the pillars/prohibitions surfaces) — just-in-time for the phase-6
+> opening, the D-096 precedent. The queue untouched (name-1 stays
+> pinned; TASKS owns composition, never order).
 
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 

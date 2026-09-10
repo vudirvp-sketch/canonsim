@@ -1,34 +1,30 @@
-Iteration: iter-94 (`iter-94-intake7` — research intake 7, the
-Anthropic-2026 agent corpus routed, doc-only: the owner's adoption
-call on the external analysis session's five proposals, the
-D-096/D-116/D-119 intake family; the clone verified BEFORE routing —
-1516 passed +1 skipped, ruff clean — and all six articles fetched
-live (Building Effective Agents Dec-2024 now carries the "see
-Managed Agents" update note; Scaling Managed Agents Apr-2026 the
-de-facto current guide; context engineering + writing tools + Agent
-SDK Sep-2025; the multi-agent research system Jun-2025); D-128 the
-verdict set — ADOPTED: (1) ROADMAP §5 step 6, the gate-review
-protocol-law staleness pass (the Apr-2026 lesson: rules written for
-one model generation rot silently, and the harness never self-cleans;
-AGENTS.md grew +190/−5 over 6 commits — only a gate pass prunes;
-TECH_NOTES §1/§2 own the model notes, the pass owns the RULES), (2)
-MVP_SCOPE §18, error text is actionable — the offending path/field +
-the fix direction (D-111 generalized past the predicate family; the
-KI#82/#83 lint leaks the paid-for evidence), (3) TASKS `mech-2`,
-default output caps on the introspection CLIs (the operator tools'
-stdout is the reading agent's attention budget; measured at HEAD:
-trace 188 lines / 12 KB on day1_full, O(ticks), filters opt-in),
-(4) the SPECS_BACKLOG SOW_INTEGRATION_SPEC sketch, the harness
-skeleton note (session-out-of-harness, resume-from-last-event, tool
-failures in words, the single-agent economics); REFUSED with cause:
-MCP/sandboxes/OAuth/TTFT (hosted-platform scale), multi-agent as
-default (the corpus's own 4×/15× + bg-4's Park ≥$2.5/agent/game-hour
-vs TECH_NOTES §2's $0.01–0.03/turn), semantic/embedding search (ref-
-territory), sleep-time compute (Letta's, the phase-4 catalog),
-LLM-as-judge (their own reliability caveat; the fixtures + the
-deviation corpus stronger where applicable); D-129 the standing
-effect-line habit for protocol-law D-rows; the queue untouched —
-name-1 stays pinned) ·
+Iteration: iter-95 (`iter-95-intake8` — research intake 8, the
+setting-direction verdict set routed, doc-only: the owner's 2026-09-11
+chat call — where the tavern-polygon grows, a setting survey across
+other projects & universes, the own-vs-embedded world question, the
+generator-leverage ask; the clone verified BEFORE routing (1516
+passed +1 skipped, ruff clean, Python 3.12.14 the env pin, HEAD
+`a78e2f1`); D-130 the verdict set — the THREE-TIER setting posture:
+the repo's public 2nd setting is ORIGINAL (the province sketch — a
+poor frontier province on a river trade artery, authored pillars
+over a generated surface, `docs/blueprint/phases.md` §6, riding
+world-2's level-2 half), the level-1 T1 reskin instrument is the
+OPEN generic stack (SRD 5.1/Open5e — REFERENCES §13's phase-6
+starter table, CREDITS sidecar), a proprietary-universe fan-pack is
+OWNER-LOCAL data outside the repo (the convenience-copy law family;
+the narrator renders the flavor from pillar tokens — zero repo
+footprint, low priority); the MINUS LEDGER — ten catalogued minuses
+mapped to the standing laws that already cure them (canonless
+drift→INV-1/INV-5; incident theater→D-005; static lore→bridge-1;
+knowledge metagates→L6; mono-resource→res-1's closed cycle; tone
+lock→D-030; unreadable depth→mode A/F + story-critical; fake
+causality→the cause TREE; generic mush→estrangement-as-data;
+player-centered world→the cold tiers + macro aggregates); the
+CATALOG additions — REFERENCES §10 +6 pattern rows (Morrowind, the
+TES anti-row, Discworld, FNV, Pathologic, Caves of Qud); NO new
+backlog rows (the material rides the existing W4/phase-6 rows —
+just-in-time, the D-096 precedent); the queue untouched — name-1
+stays pinned) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
@@ -39,22 +35,26 @@ candidate (its gate chain satisfied); weather-1's gate satisfied)
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
 42 + 0 + 125 spot-checked).
 ·
-Date: 2026-09-10 ·
-Scope: `docs/ROADMAP.md` (§5 — step 6), `docs/MVP_SCOPE.md` (§18 —
-the actionable-error bullet), `docs/TASKS.md` (the intake-7 section
-+ the `mech-2` infra row), `docs/DECISIONS.md` (D-128/D-129),
-`docs/SPECS_BACKLOG.md` (the SOW sketch extension), `worklog.md`,
-`STATUS.md` (this file) —
-7 files (git-verified: 7 modified, 0 new; doc-only, the
-iter-66a/82/85 intake footprint family; AGENTS §2.3: 7 > 5-6, the
+Date: 2026-09-11 ·
+Scope: `docs/REFERENCES.md` (§10 — six pattern rows),
+`docs/blueprint/phases.md` (§6 — the 2nd-setting design material),
+`docs/TASKS.md` (the intake-8 section + the world-2 pointer),
+`docs/DECISIONS.md` (D-130), `worklog.md`, `STATUS.md` (this file) —
+6 files (git-verified: 6 modified, 0 new; doc-only, the
+iter-85/94 intake footprint family; AGENTS §2.3: 6 > 5-6, the
 one-family objective scope noted in worklog): zero code, zero
-tests, zero pack/fixtures — the corpus price nothing to measure;
-the suite re-run post-edit green (1516+1, ruff clean). DECISIONS 65
-rows mid-phase — the D-034 collapse owed at the phase-5→6 gate
-(alongside the first §5 staleness pass, D-128's own effect line).
-· The prior iteration's record: iter-93 (depth-7, D-127 — groups &
-simulation LOD: the member_of door, the tiers, the condensation).
-The detail lives in TASKS + worklog + git.
+tests, zero pack/fixtures — the suite re-run post-edit green
+(1516+1, ruff clean). DOC-ONLY STREAK: iter-94 + iter-95 both
+doc-only — both the owner's explicit research calls (the intake
+family), NOT an agent documentation loop; AGENTS §2.5's alarm
+letter noted here on record; iter-96 should be functional (name-1
+the pinned row) or the streak surfaces for the owner's call.
+DECISIONS 66 rows mid-phase — the D-034 collapse owed at the
+phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
+effect line).
+· The prior iteration's record: iter-94 (intake-7, D-128/D-129 —
+the Anthropic-2026 agent corpus routed). The detail lives in TASKS +
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -628,7 +628,14 @@ prerogative; D-119's catalog rows + refusals; the queue itself
 untouched.) (iter-94 intake-7 landed doc-only after depth-7 — the
 owner's adoption call on the external Anthropic-2026 corpus
 analysis; D-128/D-129 the verdict set + the mech-2 infra row; the
-queue itself untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
+queue itself untouched.) (iter-95 intake-8 landed doc-only after
+intake-7 — the owner's setting-direction research call; D-130 the
+verdict set: the three-tier posture (the repo's 2nd setting
+ORIGINAL, the province sketch at `docs/blueprint/phases.md` §6
+riding world-2's level-2 half), the minus ledger, REFERENCES §10 +6
+rows; the queue itself untouched — name-1 stays pinned; the
+two-doc-only-iteration streak surfaced in the header per AGENTS
+§2.5.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
 rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,

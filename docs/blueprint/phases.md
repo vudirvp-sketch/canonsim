@@ -791,6 +791,84 @@ socially meaningful behavior. Mode G (worldbuilder) drafts packs offline
 through the same CI, never into the engine. Exit criterion: a new T1
 reskin without core edits, ≤1 day (`ROADMAP.md` §2).
 
+**The 2nd-setting design material** (intake-8, D-130 — the owner's
+2026-09-11 setting-direction call routed just-in-time for the phase-6
+opening, the D-096 precedent; the sketch rides world-2's two-level gate,
+res-1, roads-1, PACK_SPEC — never new machinery):
+
+The posture — three tiers, one direction. The repo's public 2nd setting
+is ORIGINAL (the sketch below; D-015 + REFERENCES §10: proprietary
+universes are pattern rows, never committed content). The level-1 T1
+reskin instrument is the OPEN generic stack (SRD 5.1 / Open5e, the §13
+starter table; CREDITS sidecar; speed over distinctiveness — the ≤1-day
+gate's own shape). A proprietary-universe fan-pack is owner-LOCAL data
+outside the repo (the convenience-copy law family): mechanically
+possible — a pack is data, INV-3 — but it buys the narrator flavor that
+mode A already renders from pillar tokens; zero repo footprint, low
+priority by verdict.
+
+The sketch — a poor frontier province on a river trade artery, authored
+pillars over a generated surface (the Qud split; the current v0.1 pack —
+tavern/street/backyard/guardroom/market — is the seed settlement the
+province grows around, the polygon's continuity):
+
+- **Scale**: 3–6 settlements on the travel lattice, a 200–600-site map
+  (the geo-1-measured cost — sub-second genesis); roads-1's generated
+  exits; place-1's claim↔exits consistency over the settlements' grounds.
+- **The artery**: the river road, the trade spine — st-6a's derived
+  travel prices make geography MECHANICAL (distance → convoy cost →
+  scarcity), never decorative; news rides the road (rumordrift, landed —
+  fidelity decays with distance).
+- **The focal resource** (the Dune shape, res-1's declaration): ONE
+  binding scarcity — hill-smelted iron on the river — tying the market
+  town's wealth, the garrison's supply, the old families' claim; the X4
+  cascade when it narrows (convoy loss → price shock → crime-pattern
+  shift — the Kenshi desperation economy over the landed theft/arson
+  families; the Pathologic register: the closed cycle is the story
+  engine, not bookkeeping).
+- **The triangle** (FNV shape, depth-6): trade guild / old families /
+  garrison — three ratio+threshold dynamics over members' live axes;
+  the player tips ratios, never script gates (the emergent "many roads").
+- **The cultures** (the Morrowind lesson: estrangement is data — naming,
+  customs, prohibitions): lowland traders vs hill folk; two name-1
+  phonotactic profiles, two custom vocabularies, two prohibition sets
+  (the guild's shelter law, the hills' wergeld memory — the WH40k
+  grammar); the province's own name minted from the profiles it declares
+  (dogfooding name-1).
+- **The history** (chron-2): the feud backstory as the cause TREE —
+  whose quarrel burned the old mill; the `world_history` template +
+  the story-critical claims seed the director's buffer (depth-5b's
+  listing).
+- **The population** (depth-7): road traffic as cold aggregates
+  (population counts on the macro crossings), condensing into named
+  travelers when the reader's zone warms — the inn's strangers ARE the
+  condensation; the unborn stay counts until approached (lazy depth,
+  VISION §3).
+- **The calendar** (maclock-1): market days, the fair, the river's
+  seasonal rise — cadence pack-declared; the seasons ride weather-1's
+  satisfied gate.
+- **The tone** (D-030): mid-grim asymmetric data — trust builds slow,
+  breaks fast; losses irreversible; the darkness dial pack-declared,
+  never a tone lock (the WH40k minus).
+- **Magic**: absent BY DESIGN at province scale (the core admission
+  test, VISION §5); a low-magic layer is future pack data with zero
+  engine change (INV-3's substance) — the slot is left empty on purpose.
+
+The minus ledger (the catalogued minuses → the standing laws that
+already cure them; the pack design consults this, never builds around
+it): canonless drift (AI Dungeon) → INV-1/INV-5; incident theater (the
+RimWorld storyteller) → D-005 (pressure from scarcity + factions, never
+scripted incidents); static lore (TES, the museum world) → bridge-1
+(claims are event-born, state = fold(log)); knowledge metagates (Outer
+Wilds) → L6; mono-resource flattening (Dune) → res-1's closed cycle
+(one focal point + ordinary flows + sinks); tone lock (WH40k) → the
+D-030 dial; unreadable depth (DF Legends) → the renderer is first-class
+(mode A/F, the brief's O(relevance), the story-critical listing); fake
+causality → the cause TREE + closed event vocabularies; generic mush
+(the reskin risk) → estrangement-as-data (prohibitions + phonotactics +
+custom vocabulary); the player-centered world → the cold tiers + macro
+aggregates (the phase-5 exit criterion's own shape).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
