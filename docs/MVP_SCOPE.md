@@ -396,5 +396,9 @@ Background: `bg-1..bg-4` run in parallel on foreign canon (`docs/TASKS.md`).
 - stdlib-only runtime deps; pytest + ruff as dev deps. Type hints on public
   functions. No `print` in committed code (CLI-class tools excepted — `cli/`
   and the operator scripts in `scripts/`, D-046) — log instead.
+- Error text is actionable (D-128, D-111 generalized past the predicate
+  family): a raised or refused message names the offending path/field and
+  the fix direction — never a bare `KeyError`/traceback leak (the
+  KI#82/#83 family lesson).
 - Core code never mentions domain words (INV-3); a grep stoplist test
   enforces it from iter-2.

@@ -13,6 +13,30 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-94 · 2026-09-10 · intake7 — research intake 7, the Anthropic-2026
+agent corpus routed (doc-only, the owner's adoption call; D-128/D-129;
+7 files — the iter-85 intake footprint family, AGENTS §2.3: 7 > 5-6,
+the one-family objective scope noted here)
+- verified BEFORE routing: the clone green (1516+1, ruff clean, HEAD
+  12f5a07) + all six articles fetched live (BEA carries the Managed
+  Agents update note; the Apr-2026 flagship's brain/hands split,
+  context anxiety, cattle — confirmed in the fetched bytes, not the
+  analysis text's word)
+- adopted: ROADMAP §5 step 6 (the protocol-law staleness pass — AGENTS
+  grew +190/−5 over 6 commits, only a gate pass prunes), MVP_SCOPE §18
+  the actionable-error bullet (D-111 generalized; KI#82/#83 the
+  evidence), TASKS mech-2 (default output caps on the introspection
+  CLIs — trace measured 188 lines/12 KB on day1_full, O(ticks)),
+  SPECS_BACKLOG the SOW harness-skeleton sketch; refused with cause:
+  platform plumbing (MCP/sandboxes/OAuth/TTFT), multi-agent default,
+  semantic search, sleep-time compute, LLM-as-judge
+- D-129: protocol-law D-rows carry expected observable effects,
+  checked within 1-2 iterations; the queue untouched (name-1 pinned);
+  iter-84 evicted here (verified against git in this edit; 10 after);
+  re-run post-edit: 1516+1 green, ruff clean. Caps: STATUS 820 / TASKS
+  1113 / ROADMAP 102 / MVP 404 / DECISIONS 95 lines (65 rows) —
+  over-cap held on substance (§6.1), trim at the phase-5→6 gate.
+---
 iter-93 · 2026-09-10 · gsim1 — depth-7, groups & simulation LOD
 (D-112's ratified resolutions executed — the write side of the LOD
 ladder at group scale, the W2 row after depth-6; 11 files — 3 code
@@ -441,34 +465,6 @@ against HEAD `cf8d06e` — ~80% of the text already landed/cataloged).
   Caps: STATUS 668 / TASKS 1002 / REFERENCES 305 / DECISIONS 84
   (55 rows) — over-cap held on substance (§6.1), trim at the
   phase-5→6 gate.
----
-iter-84 · 2026-09-10 · mech-1 — the mechanics introspection CLI (the
-owner's session call: an infra slot ahead of the queue's bridge-1, the
-ORDER owner's prerogative; 8 files — 1 tool + 1 suite + 6 doc sync
-(git-verified: 2 new + 6 modified), AGENTS §2.3 scope noted here).
-`scripts/mechanics.py` (D-046
-CLI-class, stdlib + core imports only, stdout-only): `matrix` (static
-wiring queries --event/--hook/--token/--prop + the unindexed-blocks
-fallback — a future layer is listed, never guessed), `trace` (the
-shadow replay: per-tick events + beat panels with entropy/pacing),
-`why --hook TAG` (the postmortem: seeded/armed/option-gate values),
-`blast` (the two-arm same-seed A/B — the corpus-price pattern, no
-resume door). D-118: the shadow-replay law — the tool replays the log
-through the public pipeline (fold/Director/predicates/entropy), INV-2
-makes it equal the runtime; the runtime is never instrumented.
-- tests/test_mechanics.py: 11 pins — the exactness pin (the shadow's
-  release ids == the log's director events on day1_full) + the STATUS
-  pins (the relief's check at t=734, the sweep last at t=1456) + the
-  future-layer law (an unknown rules block loads and lists). 1392→
-  1403+1, ruff clean (3.12.14, the env pin; seeds 0/42/unset all
-  green, verified in this iteration).
-- docs: TASKS the mech-1 row, AGENT_NAVIGATION §1 scripts row + §2
-  Normal + §5, DECISIONS D-118, README the scripts-map line, STATUS
-  header. The queue is untouched:
-  bridge-1 stays the pinned Next step. 10 entries held (9 + this one,
-  git-verified per the KI#80 law). Caps: STATUS 654 / TASKS 985 /
-  README 627 / DECISIONS 83 lines (54 rows) — over-cap on substance
-  (§6.1, the D-095..D-116 precedent), trim at the phase-5→6 gate.
 ---
 ---
 (end of log — cap 10; pre-trim history lives in git)

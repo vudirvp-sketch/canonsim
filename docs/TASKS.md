@@ -339,6 +339,38 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > pros already delivered by SCHED-1/STATE-1/D-114/single-writer log).
 > The text itself stays outside the repo (convenience-copy law).
 
+### Research intake 7 (iter-94; the Anthropic-2026 agent corpus, routed)
+
+> The owner's 2026-09-10 adoption call on the external analysis
+> session's five proposals (the D-096/D-116/D-119 intake family),
+> verified against HEAD `12f5a07` before routing — the clone green
+> (1516+1, ruff clean) and all six articles fetched live: Building
+> Effective Agents Dec-2024 now carries the "see Managed Agents"
+> update note; Scaling Managed Agents Apr-2026; context engineering +
+> writing tools + Agent SDK Sep-2025; the multi-agent research system
+> Jun-2025. The verdict set is D-128/D-129. ONE new backlog row:
+> `mech-2` (the introspection CLIs' default output caps). Adopted into
+> the standing docs: ROADMAP §5 step 6 (the gate-review protocol-law
+> staleness pass — the law only grows, nothing else prunes it),
+> MVP_SCOPE §18 (actionable error text — D-111 generalized past the
+> predicate family, the KI#82/#83 evidence), the SPECS_BACKLOG
+> SOW_INTEGRATION_SPEC sketch (the harness skeleton:
+> session-out-of-harness, resume-from-last-event, tool failures in
+> words, the single-agent economics vs bg-4's Park numbers). Refused
+> with cause: MCP/sandboxes/OAuth/TTFT (hosted-platform scale, not a
+> stdlib single-operator repo), multi-agent as default (the corpus's
+> own 4×/15× economics — coding parallelizes worse than research),
+> semantic/embedding search (ref- territory: sqlite_vec/fts5 cataloged
+> for the phase-scoped lore), sleep-time compute (Letta's; the phase-4
+> memory material already cataloged), LLM-as-judge (their own
+> reliability caveat; the deterministic fixtures + the deviation
+> corpus stronger where applicable). The corpus's three principles —
+> minimal model assumptions in the harness, durable state as an
+> append-only log outside the context, context as the scarce resource
+> — confirmed already ours (INV-1/INV-5, the reading gradient); what
+> transferred is habits, not architecture. The external text itself
+> stays outside the repo (convenience-copy law).
+
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 
 > The research review's confirmed holes, landed additively — one family
@@ -818,6 +850,15 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   11 pins in `tests/test_mechanics.py` (the exactness pin + the STATUS
   pins: the relief's check t=734, the sweep last t=1456); 1392→1403+1,
   ruff clean, seeds 0/42/unset.
+- `mech-2` · default output caps on the introspection CLIs — candidate
+  (D-128, the Anthropic-2026 attention-budget lesson; rides the next
+  `scripts/mechanics.py` touch, never its own iteration): `trace` prints
+  the full per-tick view unless the operator remembers `--tail`/`--ticks`
+  (measured at iter-94's HEAD: 188 lines / 12 KB on day1_full — O(ticks);
+  a long-session log would flood the reading agent's context); cap the
+  default (a last-N window + the "pass --<flag> for more" tail note),
+  expansion by flag only; `matrix` the same if pack growth ever pushes it
+  past a screen. `chronicle.py` writes files (Mode F) — out of scope.
 - `engine-2` · the urgency-roll stream split — **done (iter-50,
   D-079)**: the owner's "quality over speed" fork call. Per-entry
   streams `urgency:<npc>:<kind>` (content-addressed, pack-linted

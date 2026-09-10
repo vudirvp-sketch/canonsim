@@ -1,64 +1,34 @@
-Iteration: iter-93 (`iter-93-gsim1` — depth-7, groups & simulation
-LOD, the W2 row after depth-6, the WRITE side of the LOD ladder at
-group scale — D-112's ratified resolutions, phases.md §5 in the
-D-056-amended edition: THE MEMBER_OF STATE DOOR (D-020's
-pair-relation at group scale: the projection seeds NOTHING for it —
-absence IS None, the D-054 slot shape, fold.py's family; the
-condensation is the engine's writer, any pack event writes it
-through the same state_changes surface — a join None→group, a leave
-group→None (the member fades back into the population), a transfer
-group→other — and `apply_event` validates every from-value, INV-1
-made executable; the depth-6 faction walk keeps its pinned
-static-list read, the iter-92 law verbatim — "never this walk's"),
-THE POPULATION TIER (`core/groups.py::macro_tick_drafts`, D-112
-(2): a group anchored in the COLD zone emits ONE aggregate event
-per macro crossing — actor = the group id (one id, all tiers), the
-outcome ONE flat count under `population` (the engine's mechanical
-vocabulary, the cold_npcs family — the unborn population: the
-static members whose `member_of` is still None, a live fold read,
-L3); no knowledge, no state_changes, no hooks, DRAW-FREE — the
-stream registry never sees a tier event; log growth O(groups ×
-macrobeats), never O(members × ticks)), THE CONDENSATION ON
-CROSSING THE WARM TRANSITION (`condensation_drafts`, D-112
-(3)/D-116 (9): a group's anchor entering the WARM ring or the
-ACTIVE scene materializes it — ONE event per group carrying each
-un-born static member's canon birth (StateChange(member,
-`member_of`, None→group), the group's own member order — the D-054
-promotion shape at group scale: a member already holding a value is
-SKIPPED, never re-birthed; a member holding another group's id
-belongs to neither) plus the group's tombstone marker (`condensed`:
-None→True); detected at the zone recomputations — the beats AND the
-crossings, whichever sees the new partition first, the load state
-the origin (the PC walks into a materialized world, the DF
-precedence); the members' per-beat activity was already depth-3's
-zone scoping — what the event births is their canon MEMBERSHIP; the
-knowledge half stays the move event's own templates, INTENT_SCHEMA
-§7 — the D-056 arrival, already landed, a separate door), THE
-TOMBSTONE (the derived store, INV-5 untouched: after the
-condensation the aggregate is realized — `is_condensed` reads the
-marker from the fold and the macro-tick walk stays silent for good;
-the marker is write-once, and the aggregate events already in the
-log are never edited), THE PER-GROUP OPT-IN (the 68a pattern: the
-group record's `macro_event`/`condense_event` — the tier event
-types, both in the template closure, EVENT_SCHEMA §11; both refused
-on a memberless group — the vacuity law's dead-data arm, a
-population of nobody never carries a count and never births; a
-group without them is depth-6's intent-door actor alone, zero tier
-machinery, zero events — every depth-6 pinned behavior passes
-UNCHANGED), THE LOOP ORDER (the crossing: turn → condensations (the
-materialization precedes every warm tick the members then ride) →
-the cold aggregates → the warm drift → the rolls; the beat: the
-condensation pass FIRST, before the decay; both under an armed
-clock alone — the unarmed law keeps the one-scene world), THE
-CORPUS PRICE zero by construction (the committed pack declares no
-groups and no time.macro; measured BOTH arms per D-108: the INERT
-twin — the group with BOTH tier keys, no `time.macro` — runs the
-committed corpus scripts BYTE-IDENTICALLY, seeds 42/0/125, the
-fingerprints equal; the armed-vs-bare A/B: the substantive
-fingerprint EQUAL (the tier events draw nothing), the event delta
-the tier families ALONE — one condensation + the cold aggregates;
-ZERO re-pins, git-verified — no fixture in the diff, the T1 golden
-untouched, every depth-6 test untouched)) ·
+Iteration: iter-94 (`iter-94-intake7` — research intake 7, the
+Anthropic-2026 agent corpus routed, doc-only: the owner's adoption
+call on the external analysis session's five proposals, the
+D-096/D-116/D-119 intake family; the clone verified BEFORE routing —
+1516 passed +1 skipped, ruff clean — and all six articles fetched
+live (Building Effective Agents Dec-2024 now carries the "see
+Managed Agents" update note; Scaling Managed Agents Apr-2026 the
+de-facto current guide; context engineering + writing tools + Agent
+SDK Sep-2025; the multi-agent research system Jun-2025); D-128 the
+verdict set — ADOPTED: (1) ROADMAP §5 step 6, the gate-review
+protocol-law staleness pass (the Apr-2026 lesson: rules written for
+one model generation rot silently, and the harness never self-cleans;
+AGENTS.md grew +190/−5 over 6 commits — only a gate pass prunes;
+TECH_NOTES §1/§2 own the model notes, the pass owns the RULES), (2)
+MVP_SCOPE §18, error text is actionable — the offending path/field +
+the fix direction (D-111 generalized past the predicate family; the
+KI#82/#83 lint leaks the paid-for evidence), (3) TASKS `mech-2`,
+default output caps on the introspection CLIs (the operator tools'
+stdout is the reading agent's attention budget; measured at HEAD:
+trace 188 lines / 12 KB on day1_full, O(ticks), filters opt-in),
+(4) the SPECS_BACKLOG SOW_INTEGRATION_SPEC sketch, the harness
+skeleton note (session-out-of-harness, resume-from-last-event, tool
+failures in words, the single-agent economics); REFUSED with cause:
+MCP/sandboxes/OAuth/TTFT (hosted-platform scale), multi-agent as
+default (the corpus's own 4×/15× + bg-4's Park ≥$2.5/agent/game-hour
+vs TECH_NOTES §2's $0.01–0.03/turn), semantic/embedding search (ref-
+territory), sleep-time compute (Letta's, the phase-4 catalog),
+LLM-as-judge (their own reliability caveat; the fixtures + the
+deviation corpus stronger where applicable); D-129 the standing
+effect-line habit for protocol-law D-rows; the queue untouched —
+name-1 stays pinned) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
@@ -70,37 +40,21 @@ passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
 42 + 0 + 125 spot-checked).
 ·
 Date: 2026-09-10 ·
-Scope: `core/groups.py` (new), `core/pack.py` (the tier-vocabulary
-lint), `core/loop.py` (the condensation pass at both ride points +
-the cold aggregates at the crossings), `tests/test_groups.py` (new)
-+ the doc sync: `docs/TASKS.md`, `docs/DECISIONS.md`,
-`docs/blueprint/phases.md` (§5 — the write-side-LOD landing tag),
-`docs/AGENT_NAVIGATION.md` (§1 — the groups module row, the
-pack/loop extensions), `README.md` (the narrative + the code-map
-row + the test count synced), `worklog.md`,
+Scope: `docs/ROADMAP.md` (§5 — step 6), `docs/MVP_SCOPE.md` (§18 —
+the actionable-error bullet), `docs/TASKS.md` (the intake-7 section
++ the `mech-2` infra row), `docs/DECISIONS.md` (D-128/D-129),
+`docs/SPECS_BACKLOG.md` (the SOW sketch extension), `worklog.md`,
 `STATUS.md` (this file) —
-11 files (git-verified: 3 code + 1 new test file + 7 doc; the door +
-the tiers + the lint + the integration are one family, the
-iter-90..93 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
-noted in worklog): +23 tests (the units — the aggregate's shape, the
-tombstone gate, the zone filter, the population's live-fold read;
-the condensation — the births + the marker, the skip law, the
-write-once marker, the per-group opt-in; the door — the fold's
-join/leave/transfer validation, the stale birth failing loud; the
-lint — the closure + the dead-data refusals, parametrized; the
-integration — the cold aggregates with the cause chain, the
-warm/active condensations at the first crossing, the beat's
-detection arm, the tombstone story with the contrast twin,
-byte-identical determinism, the both-arms price with the
-fingerprint EQUAL + the delta the tier families alone, the inert
-twin's byte-identity over the corpus scripts, the tale's render
-lines),
-D-127, TASKS depth-7 done, phases.md §5 the write-side-LOD
-paragraph, this header + the Next-step re-pin + KI#83 deleted (closed
-iter-91, two iterations past — iter-92 + iter-93, the KI#81
-precedent; the lesson lives in git + the FAQ's family law).
-· The prior iteration's record: iter-92 (depth-6, D-126 — factions
-with goals). The detail lives in TASKS + worklog + git.
+7 files (git-verified: 7 modified, 0 new; doc-only, the
+iter-66a/82/85 intake footprint family; AGENTS §2.3: 7 > 5-6, the
+one-family objective scope noted in worklog): zero code, zero
+tests, zero pack/fixtures — the corpus price nothing to measure;
+the suite re-run post-edit green (1516+1, ruff clean). DECISIONS 65
+rows mid-phase — the D-034 collapse owed at the phase-5→6 gate
+(alongside the first §5 staleness pass, D-128's own effect line).
+· The prior iteration's record: iter-93 (depth-7, D-127 — groups &
+simulation LOD: the member_of door, the tiers, the condensation).
+The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -671,7 +625,10 @@ the wave plan routed, the spatial model pinned as phase law). Track
 A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
 bridge-1 — the owner's variant-A call, the ORDER owner's
 prerogative; D-119's catalog rows + refusals; the queue itself
-untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
+untouched.) (iter-94 intake-7 landed doc-only after depth-7 — the
+owner's adoption call on the external Anthropic-2026 corpus
+analysis; D-128/D-129 the verdict set + the mech-2 infra row; the
+queue itself untouched.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
 rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,

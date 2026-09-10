@@ -83,6 +83,13 @@ A gate is passed only on evidence:
 4. Human chronicle read (T7).
 5. Verdict recorded in `worklog.md` + `STATUS.md`. A kill-criteria hit stops
    feature work until the ontology is fixed.
+6. Protocol-law staleness pass (D-128, the Anthropic-2026 lesson: rules
+   written for one model generation rot silently, and the harness never
+   self-cleans): re-read `AGENTS.md` and the STATUS FAQ asking which rules
+   encode model/agent assumptions that no longer hold — the law only grows,
+   nothing else prunes it (`docs/TECH_NOTES.md` §1/§2 own the model notes
+   themselves, rot-by-design). Verdicts (keep / reword / drop) land in
+   `docs/DECISIONS.md`; a dropped rule's history lives in git.
 
 ## 6. Soul-of-Waifu horizon
 
