@@ -1,61 +1,49 @@
-Iteration: iter-96 (`iter-96-name1` — the name generator, the
-STATUS queue's W2 row after depth-7: D-116 (12) the Azgaar split —
-condensation's canon-birth events need names, `region_00`-style ids
-do not scale; the ref-19 dives owed at the row landed with it
-(`docs/ref/ck3.md` + `docs/ref/azgaar_names.md`); the clone verified
-BEFORE working — 1516+1, ruff clean, HEAD c0fa677, Python 3.12.14
-the env pin; +28 tests, 1516→1544+1 green, ruff clean, seed 42
-determinism pinned; D-131 the record — the D-079 family law's SIXTH
-member `name:<npc>` (per-declaration isolation, lazy registration,
-the scene-detail twin), the pack data `rules.json::names.profiles`
-(the culture-keyed phonotactic pools + bounds) + the npc
-`generated_name` declaration (mutual exclusion with the authored
-`name`, the reachability law — a condensing group membership),
-`core/names.py::materialize_name` the lazy door (ONE birth (npc,
-"name", None→drawn), first-commit-wins, the bounded collision walk
-against the entity namespace — the output-namespace law, the loud
-refusal), THE CONSUMER depth-7's condensation (the name births
-paired with the membership births, the outcome's `names` key —
-the line must branch), the read surface fold-first (the chronicle's
-running fold, the scene card + entity views, the brief's delta
-lines + entity cards); the committed pack unarmed — the 68a
-pattern, the inert twin byte-identical over the committed corpus
-scripts, the armed delta the name births + the `names` key alone,
-the fingerprint equal, zero re-pins) ·
+Iteration: iter-96a (`iter-96a-audit-fix` — the owner-requested
+re-verification of iter-96/name-1; the clone verified BEFORE
+working — 1544+1, ruff clean, HEAD d755d0d, Python 3.12.14 the env
+pin; verdict: the landing SOUND — the stream/lint/consumer laws
+re-read line by line, the armed + inert twins + the corpus prices
+re-run; KI#84 the read-surface PAIR fixed — the chronicle's OUTCOME
+slots (the rotation's `incoming`/`outgoing` carry npc ids) and the
+entity view's `carrier:` line resolved through the pack record
+instead of the fold — D-131 (7) declares fold-first for EVERY
+id-valued reference; `render/chronicle.py` the fix (the running
+fold threads the outcome mapping, the projection threads the
+carrier line), +2 tests (the rotation line, the carrier line); the
+README sync gap closed with it — iter-96's missing narrative
+sentence + `core/names.py` map row + the stale 1516 count; +2
+tests, 1544→1546+1 green, ruff clean, zero corpus re-pins by
+construction — the committed pack unarmed, authored displays
+identical (the test_ambient rotation pin re-run green)) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
 depth-7 + name-1 LANDED,
 the queue: st-6a the next live candidate (its gate chain
-satisfied); weather-1's gate satisfied) · 1544
+satisfied); weather-1's gate satisfied) · 1546
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
 42 pinned, the both-arms + inert-twin prices measured).
 ·
 Date: 2026-09-11 ·
-Scope: `core/names.py` (new), `core/rng.py` (the sixth family),
-`core/groups.py` (the condensation consumer), `core/pack.py` (the
-`_names` lint), `core/loop.py` (the bank ride),
-`render/chronicle.py` + `brief/assembler.py` (the born-name read),
-`tests/test_names.py` (new) + `tests/test_groups.py` (the signature
-ride), `docs/ref/ck3.md` + `docs/ref/azgaar_names.md` (new, the
-ref-19 dives), `docs/REFERENCES_DEEP.md`,
-`docs/blueprint/phases.md` (§5), `docs/EVENT_SCHEMA.md` (§4),
-`docs/AGENT_NAVIGATION.md` (§1), `docs/TASKS.md`,
-`docs/DECISIONS.md` (D-131), `worklog.md`, `STATUS.md` (this
-file) — 19 files (git-verified: 15 modified + 4 new; the
-one-family objective scope — the stream + the generator + the lint
-+ the condensation consumer + the read surface + the dives are one
-row; AGENTS §2.3: 18 > 5-6, noted in worklog): the doc-only streak
-(iter-94 + 95) BROKEN by a functional iteration — AGENTS §2.5's
-alarm resolved on record; zero pack/fixtures — the committed pack
-untouched (the 68a pattern; zero re-pins by construction, the
-corpus scripts byte-identical).
+Scope: `render/chronicle.py` (KI#84: the outcome slots + the
+carrier line — the fold-first reference surfaces), `tests/test_names.py`
+(+2, the read-surface pair), `README.md` (the iter-96 sync gap: the
+name-1 narrative sentence, the `core/names.py` map row, the count
+1546), `docs/AGENT_NAVIGATION.md` (§1 the render row),
+`docs/blueprint/phases.md` (§5 the read-surface sentence),
+`worklog.md`, `STATUS.md` (this file) — 7 files (the iter-83a
+audit-fix footprint — TASKS untouched, no backlog row flips, its
+own record; AGENTS §2.3: 7 > 5-6, the audit's objective scope
+noted in worklog); zero pack/fixtures — the committed pack
+untouched (zero re-pins by construction, the corpus scripts
+byte-identical).
 DECISIONS 67 rows mid-phase — the D-034 collapse owed at the
 phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
 effect line).
-· The prior iteration's record: iter-95 (intake-8, D-130 — the
-setting-direction verdict set routed). The detail lives in TASKS +
-worklog + git.
+· The prior iteration's record: iter-96 (name-1, D-131 — the name
+generator: the sixth stream family, the materialize door, the lint,
+the condensation consumer, the fold-first read surface, the ref-19
+dives). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -79,7 +67,12 @@ worklog + git.
 
 ## Active KIs
 
-- (None active. KI#83 deleted at iter-93 per AGENTS §5 — closed
+- (KI#84 · CLOSED iter-96a · 2026-09-11 — the iter-96 read-surface
+  pair: the chronicle's outcome slots + the entity view's `carrier:`
+  line resolved through the pack record, not the fold (D-131 (7)
+  declares fold-first for every id-valued reference); fixed the same
+  iteration, `render/chronicle.py` + 2 tests.)
+- (None else active. KI#83 deleted at iter-93 per AGENTS §5 — closed
   iter-91, two iterations past (iter-92 + iter-93, the KI#81
   precedent); the lesson lives in git + the FAQ's family law: the
   pred-contract family's missing-field refusals. KI#82 deleted at iter-91 per AGENTS §5 — closed iter-88, three

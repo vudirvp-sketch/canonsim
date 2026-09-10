@@ -636,8 +636,11 @@ an unknown slot). The tier half stays draw-free; the unborn
 population stays counts — the lazy-depth law: unnamed until the
 reader's zone warms (the phases §6 "inn's strangers ARE the
 condensation" shape). The READ surface is fold-first (canon
-outranks the pack record): the chronicle's running name fold, the
-scene card + entity views over the projection, the brief's delta
+outranks the pack record) on EVERY id-valued reference (iter-96a/
+KI#84): the chronicle's running name fold (the derived actor/
+target slots AND the outcome payload's ids — the rotation's
+incoming/outgoing), the scene card + entity views over the
+projection (the `carrier:` line included), the brief's delta
 lines + entity cards; an unborn generated name renders honestly as
 its dry id. The committed pack UNARMED (the 68a pattern — zero
 draws, the v0.1 bytes by construction; the arming rides with

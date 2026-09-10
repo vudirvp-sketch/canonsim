@@ -13,6 +13,35 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-96a · 2026-09-11 · audit-fix — the owner-requested re-verification
+of iter-96/name-1 (7 files — 1 code + 1 test + 5 doc sync: the fix
++ its tests + the sync gap are one family, the iter-83a footprint;
+AGENTS §2.3: 7 > 5-6, the audit's objective scope noted here)
+- verdict: the landing SOUND — the stream/lint/consumer laws re-read
+  line by line, the armed + inert twins + the corpus prices re-run
+  (1544+1 green, ruff clean at HEAD d755d0d BEFORE working); the
+double-membership + name-duplicate questions answered loud-by-design
+  (the commit gate's from_ check; the dives' documented stance)
+- KI#84 the read-surface pair: `render/chronicle.py` — the outcome
+  slots (`incoming`/`outgoing`) resolve through the RUNNING fold
+  (`_display_if_entity` threads `_Positions`), the entity view's
+  `carrier:` line through the projection (`_state_lines` threads
+  it); D-131 (7)'s own law — every id-valued reference fold-first
+- the README sync gap (iter-96's miss): the name-1 narrative
+  sentence + the `core/names.py` map row + the count 1546; +2 tests
+  (the rotation line, the carrier line — the committed pack's own
+  purse-on-guard initial condition), 1544→1546+1 green, ruff clean
+  (Python 3.12.14, the env pin); corpus price ZERO by construction
+  — the committed pack unarmed, the authored displays identical
+  (the test_ambient rotation pin re-run green)
+- docs: STATUS re-pinned (header iter-96a, KI#84 closed, the queue
+  untouched — st-6a the next live candidate), NAV §1 the render row,
+  phases.md §5 the read-surface sentence sharpened (TASKS untouched —
+  no backlog row flips, the iter-83a precedent); iter-87 evicted here
+  (verified in this edit, the cap 10 held). Caps: STATUS 837 /
+  phases 985 / README 742 — over-cap on substance (§6.1, the
+  D-095..D-131 precedent), trim at the phase-5→6 gate.
+---
 iter-96 · 2026-09-11 · name1 — the name generator (the queue's W2 row
 after depth-7, D-116 (12); D-131; 19 files — 5 code + 2 periphery + 2
 test + 2 ref dives + the index + 7 doc sync: the stream + the generator + the lint
@@ -413,55 +442,5 @@ noted here)
   1031 / DECISIONS 87 lines (58 rows) / phases 775 / README 651 —
   over-cap on substance (§6.1, the D-095..D-122 precedent), trim at
   the phase-5→6 gate.
----
-iter-87 · 2026-09-10 · chron2 — the history bridge (W1's second,
-D-116's wave order; 16 files — 4 code + 2 pack data + 3 test files
-(the T1 fixture re-pin among them) + 7 doc sync: the mechanism + the
-pack migration + the lint widening + the pins + the doc sync are one
-family, the iter-75/83/86 footprint; AGENTS §2.3: 16 > 5-6, the
-objective scope noted here)
-- core/worldgen.py: the DF legends shape — every history event's
-  outcome gains `participants` (two DISTINCT regions, the offset
-  pair draw) + `places` (one site per event); the walk (`_walk_-
-collections`, DRAW-FREE — a pure function of the year-sorted kinds +
-  the pack's `chronicle.collections` tier declaration) groups the
-  runs: the root-kind event anchors, the nested-kind events join at
-  their first matching tier under the member caps, anything else
-  closes + re-processes; the members INHERIT the anchor's pair (the
-  DF collection's role fields); the PARENT MAP (draft indices, -1 =
-  world_formed) — a member chains to its nearest lower-tier
-  predecessor, a top-level event to the previous top-level (the flat
-  form the linear chain); genesis() → (model, drafts, parents).
-- core/loop.py: open() resolves the parents through the WRITER'S
-  OWN ids at commit (the id law single-owner — the drafts predict
-  nothing). core/pack.py: the lint widening — the collections'
-  closed vocabulary (≥ 2 tiers, the root positional key set, the
-  kinds ⊆ HISTORY_KINDS, the types unique, the caps ≥ 1), capitals
-  ≥ 2 (the participants' two sides), the template closure at
-  ALTERNATIVE granularity (participants/places unconditional,
-  collection when declared), RESERVED_CLAIM_SLOTS += the history
-  outcome keys (`year` the branch fake). render/tracery.py:
-  `_render_value` — lists join `', '`, never the host repr (D-120's
-  law generalized to the chronicle side).
-- content: rules.json chronicle.collections = feud → quarrel (the
-  tavern-scale war→battle); templates.json the history arm's three
-  optional clauses. +11 tests (the DF shape, the pass-1 freeze, the
-  walk + the cap + the flat form, the cause tree in the committed
-  log + the fold replay, the tier render, the lint refusals, the
-  reserved family, the backstop arms, the tracery list-join) —
-  1406→1417+1 green, ruff clean (3.12.14, the env pin; seeds
-  0/42/unset spot-checked). Corpus price, measured: the pass-1
-  stream positions FROZEN (the years/kinds/hooks verbatim — the
-  murmur's pre-seed pins stable), the event count unchanged (no id
-  shift), zero corpus fixture re-pins; the T1 fixture the ONE re-pin
-  (4 outcome lines, git-verified).
-- docs: DECISIONS D-121, TASKS chron-2 done, phases.md §5 the
-  chronicle pass's chron-2 form, EVENT_SCHEMA §11 the single-parent
-  collection note, README the narrative sentence + the map line,
-  STATUS re-pinned (the queue: place-1 next, the W1 wave order) +
-  the KI#80/81 deletions (AGENTS §5). iter-78 evicted (verified
-  against git in this edit); 10 held. Caps: STATUS 690 / TASKS
-  1019 / DECISIONS 86 lines (57 rows) — over-cap on substance
-  (§6.1, the D-095..D-120 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

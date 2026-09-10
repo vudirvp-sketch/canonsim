@@ -33,9 +33,12 @@ The laws pinned here:
   draw-free; the unborn population stays counts (the lazy-depth law:
   unnamed until the reader's zone warms).
 - **The born-name read surface** (render + brief): the fold's born
-  name outranks the pack record (canon is the answer); an authored
-  name has no birth event; an unborn generated name renders honestly
-  as its dry id.
+  name outranks the pack record on EVERY entity reference (canon is
+  the answer) — the tale lines' derived actor/target slots AND the
+  outcome's id-valued slots (KI#84: the rotation's `incoming`/
+  `outgoing`), the entity view's header AND its `carrier:` line; an
+  authored name has no birth event; an unborn generated name renders
+  honestly as its dry id.
 - **The corpus price** (the 68a pattern + D-108's both-arms law): the
   committed pack unarmed — a crafted pack carrying the INERT
   vocabulary (the names block, the declarations, the group WITHOUT
@@ -668,3 +671,44 @@ def test_the_tale_and_views_render_the_born_names(tmp_path: Path) -> None:
         block for block in brief.blocks if block.block_id == "present_entities"
     )
     assert any(f"{MEMBERS[1]} ({name1})" in line for line in cards.lines)
+
+
+def test_the_outcome_slots_render_the_born_names(tmp_path: Path) -> None:
+    """KI#84's first half: the chronicle's OUTCOME slots — the watch
+    rotation's `incoming`/`outgoing` carry npc IDS (the same guards
+    the armed pack names); under an armed name-1 pack the ids map to
+    the BORN names through the running fold (every id-valued
+    reference resolves fold-first, not just the derived actor/target
+    slots — the rotation happens AFTER the t=40 condensation, so the
+    fold holds the names by then)."""
+    _dir, pack = armed(tmp_path, "outcome_names")
+    steps = [{"intent": "wait", "ticks": 400}]  # past the t=360 rotation
+    log, _result = _run(tmp_path, pack, 42, steps, "outcome_names")
+    events = _events(log)
+    rotation = next(e for e in events if e.type == "watch_change")
+    assert {rotation.outcome["incoming"], rotation.outcome["outgoing"]} == (
+        set(MEMBERS)
+    )
+    state = fold(events, initial_projection(pack.entities))
+    names = {member: state[member][NAME_PROP] for member in MEMBERS}
+    chronicle = render_chronicle(events, pack, 42)
+    outgoing = names[rotation.outcome["outgoing"]]
+    incoming = names[rotation.outcome["incoming"]]
+    assert f"{outgoing} hands the post to {incoming}." in chronicle
+
+
+def test_the_carrier_line_renders_the_born_name(tmp_path: Path) -> None:
+    """KI#84's second half: the entity view's `carrier:` line — the
+    committed pack's own initial condition carries the purse on the
+    guard (the very npc the armed pack names), so the item's view
+    must render the carrier's BORN name (the entity view reads the
+    projection fold-first, its reference surfaces included — not
+    just the header)."""
+    _dir, pack = armed(tmp_path, "carrier_names")
+    log, _result = _run(tmp_path, pack, 42, WAIT_100, "carrier_names")
+    events = _events(log)
+    state = fold(events, initial_projection(pack.entities))
+    assert state["purse_01"]["carrier"] == MEMBERS[0]  # the pack record
+    name0 = state[MEMBERS[0]][NAME_PROP]  # born at the t=40 condensation
+    view = render_entity_view(events, state, pack, "purse_01", 42)
+    assert f"  carrier: {name0}" in view

@@ -143,18 +143,24 @@ def _event_context(
         context["texture_slot"] = texture["slot"]
     for key, value in outcome.items():
         if key not in context:
-            context[key] = _display_if_entity(pack, value)
+            context[key] = _display_if_entity(pack, positions, value)
     return context
 
 
-def _display_if_entity(pack: Pack, value: Any) -> Any:
-    """Map a value to its display name when it IS a pack entity id."""
+def _display_if_entity(
+    pack: Pack, positions: _Positions, value: Any
+) -> Any:
+    """Map a value to its display name when it IS a pack entity id
+    (name-1, KI#84: fold-first — the running fold's born name
+    outranks the pack record on EVERY id-valued reference, the
+    outcome slots included, not just the derived actor/target; the
+    collision law keeps the drawn-name≠id mapping unambiguous)."""
     if (
         isinstance(value, str)
         and value != WORLD
         and pack.entity(value) is not None
     ):
-        return display_name(pack, value)
+        return positions.display(pack, value)
     return value
 
 
@@ -247,7 +253,7 @@ def render_entity_view(
     lines: list[str] = [
         f"{_born_or_pack(projection, pack, entity_id)} ({entity_id})"
     ]
-    lines.extend(_state_lines(projection.get(entity_id, {}), pack))
+    lines.extend(_state_lines(projection, projection.get(entity_id, {}), pack))
     lines.append("history:")
     wrote = False
     for event in events:
@@ -267,14 +273,24 @@ def render_entity_view(
     return "\n".join(lines) + "\n"
 
 
-def _state_lines(props: Mapping[str, Any], pack: Pack) -> list[str]:
-    """The entity's current projection state, dry and prop-path-labeled."""
+def _state_lines(
+    projection: Projection, props: Mapping[str, Any], pack: Pack
+) -> list[str]:
+    """The entity's current projection state, dry and prop-path-labeled.
+    name-1 (KI#84): the `carrier:` line is an npc-reference surface —
+    the carrier's display resolves fold-first (the born name outranks
+    the pack record); `at:` stays the authored location surface —
+    locations take no name births."""
     lines: list[str] = []
     for prop, value in props.items():
         if prop == _POSITION_PROP:
             lines.append(f"  at: {display_name(pack, value)}")
         elif prop == "carrier":
-            lines.append(f"  carrier: {display_name(pack, value) or '—'}")
+            carrier = (
+                _born_or_pack(projection, pack, value)
+                if value is not None else ""
+            )
+            lines.append(f"  carrier: {carrier or '—'}")
         elif isinstance(value, bool):
             lines.append(f"  {prop}: {'yes' if value else 'no'}")
         else:
