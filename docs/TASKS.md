@@ -771,15 +771,30 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   revisit-stability question: scene-scoped texture dies on
   `scene_close` by design, D-049, so important architecture must be
   canon from birth). (a) **`travel` as a separate action, NOT
-  weighted `move`** — move semantics, `adjacent_to`, and the T1
-  golden fixtures stay untouched; duration = pack-precomputed edge
-  cost OR derived from the WorldModel (D-116: a pure integer function
-  of distance + height/river modifiers at resolve time — generated
-  worlds never hand-author prices; the pack override wins per edge;
-  integer math, no runtime division in the resolver); mechanically legal today (`t + duration`, MVP_SCOPE §8;
-  the clock jumps ahead so day-scale durations are queue-cheap;
-  beats/rotations still fire mid-travel in tick order, D-038); macro
-  clocks (L4) enter only when regions/worldgen arrive. (b)
+  weighted `move` — done (iter-97, D-132)**: the movement TWIN with
+  an edge price — `ticks: "edge"` (the action vocabulary's fourth
+  value, movement-resolver-only by lint), the accept door prices at
+  resolve time through `core/travel.py` (`t + price`, L3
+  derive-never-store; day-scale durations queue-cheap, the
+  crossings fire mid-travel in tick order, D-038); the price law —
+  the pack override wins per edge (`travel.edges`, real undirected
+  exits edges only), else the DERIVED integer function of the
+  WorldModel (lattice cell steps * `step_ticks` + the height-band
+  spread * `climb_ticks` + river endpoints * `river_ticks`, the MIN
+  cross-pair read — no runtime division, draw-free); place-1's
+  claim↔exits consistency is what makes derived prices meaningful
+  (an edge-local price needs edge-local sites — both endpoints
+  claimed or an override; the COVERAGE lint: every exits edge
+  priceable when the verb is declared); move's semantics,
+  `adjacent_to`, and the T1 golden fixtures untouched (travel is a
+  separate pack action over the movement resolver); the committed
+  pack UNARMED (the 68a pattern — the arming rides with world-2's
+  province row); the macro consumer half (edge-state aggregates,
+  road-traffic counts) is the space pack's own future row (D-116's
+  "the space-pack return" — the cadence owner `core/macro.py` already
+  landed). +18 tests, 1546→1564+1 green, corpus price zero by
+  construction (no pack byte touched). Detail: tests/test_travel.py
+  + D-132. (b)
   **`layout` — LANDED iter-20 (D-057/KI#48)**: a top-level pack
   field on every location rendered canon-from-birth on the scene
   line via `brief.present_entities.scene_line_fields` — no
@@ -787,12 +802,7 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   canon_slot reads top-level pack fields only was WRONG: the check
   reads both prop sources, and a pack field was already guarded —
   the `exits` precedent, KI#41); the validator adjudicates claims on
-  it; mutable decor stays texture (the existing door). The gates for
-  (a): SATISFIED (depth-5 landed, D-115 — the phase-5 spatial layer
-  exists; D-116 amended the price law above; place-1 LANDED iter-88,
-  D-122 — the exits↔map consistency the prices read) — the row is a
-  live candidate (maclock-1 LANDED iter-90, D-124 — the macro
-  cadence the edge-state aggregates ride is `core/macro.py`'s).
+  it; mutable decor stays texture (the existing door).
 
 ### iter-6 · gate — done (phase-0 verdict: PASS)
 

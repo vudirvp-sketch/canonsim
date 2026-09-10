@@ -44,6 +44,7 @@ __all__ = [
     "AUDIENCES",
     "CheckResult",
     "ECHO_TEST",
+    "EDGE_TICKS",
     "IntentData",
     "KNOWLEDGE_SLOTS",
     "LEVERAGE_TEST",
@@ -74,6 +75,19 @@ __all__ = [
 ]
 
 REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
+
+#: The action `ticks` mode whose duration is the TRAVEL EDGE PRICE
+#: (st-6a, D-116 (5) — travel as a separate action, never a weighted
+#: move): an action declaring `ticks: "edge"` prices its completion
+#: through `core/travel.py::travel_ticks` at the accept door — the
+#: loop owns the branch (this module must not import core.travel:
+#: core.travel -> core.worldgen -> core.intent is a load cycle). The
+#: sentinel lives here because the `ticks` vocabulary is this module's
+#: (action_duration + the pack lint read it); the movement resolver
+#: family is the only legal consumer (the pack lint refuses the mode
+#: on any other resolver — an edge-priced check action is a future
+#: row's own mechanic, never this one's).
+EDGE_TICKS: Final = "edge"
 
 #: The intent door's first leverage test (social-1b, iter-45): the actor
 #: holds live leverage over `who`. The name is this module's vocabulary
@@ -280,8 +294,20 @@ def action_duration(
     action: Mapping[str, Any], bank: RngBank, intent: IntentData
 ) -> int:
     """Duration at accept time: fixed int, a drawn range, or the caller's
-    'ticks' field for the 'N' actions (MVP_SCOPE §7)."""
+    'ticks' field for the 'N' actions (MVP_SCOPE §7). The EDGE_TICKS mode
+    never reaches here — the loop's accept door prices it through
+    `core/travel.py::travel_ticks` (the edge price needs the rules, the
+    world model and the live projection, none of which are this helper's);
+    reaching this branch means a caller bypassed the door and gets the
+    loud refusal instead of a misleading 'positive integer ticks field'
+    error."""
     ticks = action["ticks"]
+    if ticks == EDGE_TICKS:
+        raise RunnerError(
+            f"{intent.kind}: the edge-priced ticks mode resolves through "
+            "core/travel.py::travel_ticks at the accept door (the loop's "
+            "branch), never action_duration"
+        )
     if isinstance(ticks, Mapping):
         return bank.randint(ticks["min"], ticks["max"])
     if isinstance(ticks, int):

@@ -80,6 +80,7 @@ from core.groups import condensation_drafts, macro_tick_drafts
 from core.ids import sequence_id
 from core.intent import (
     ECHO_TEST,
+    EDGE_TICKS,
     LEVERAGE_TEST,
     REJECTION_EVENT,
     TRAIT_TEST,
@@ -108,6 +109,7 @@ from core.scheduler import build, decls_from_rules
 from core.states import decay_drafts, rotation_resets
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
+from core.travel import edge_duration
 from core.urgencies import urgency_intents
 from core.worldgen import WorldModel, genesis
 
@@ -546,7 +548,25 @@ class Simulator:
                 cause_id=self._writer.last_id,
             )
             return False
-        duration = action_duration(action, self._bank, intent)
+        # st-6a (D-116 (5)): an edge-priced action — travel, the
+        # movement twin — prices its completion through the travel
+        # price law at THIS door (resolve time, L3: derive, never
+        # store): the pack override wins per edge, else the WorldModel
+        # derivation (integer math, no division, draw-free — the
+        # fingerprint never sees a price). The completion entry then
+        # rides the queue like any other: `t + price`, the clock jumps
+        # ahead (day-scale durations queue-cheap, MVP_SCOPE §8), and
+        # beats/rotations/macro crossings still fire mid-travel in tick
+        # order (D-038). A moved projection between accept and
+        # completion is the OCC re-check's own rejection — the price is
+        # committed to the entry here, never re-read at completion.
+        duration = (
+            edge_duration(
+                self._pack.rules, self._world, self._projection, intent
+            )
+            if action["ticks"] == EDGE_TICKS
+            else action_duration(action, self._bank, intent)
+        )
         self._queue.push(
             tick=entry.tick + duration, sub_order=SCHEDULED,
             actor_id=intent.actor, kind="completion",

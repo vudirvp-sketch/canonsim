@@ -647,6 +647,39 @@ draws, the v0.1 bytes by construction; the arming rides with
 world-2's cultures row, the phase-6 consumer — the province's two
 tongues, its own name dogfooding the profiles).
 
+**The travel price law (st-6a, iter-97/D-132 — travel as a separate
+action, never a weighted move):** the travel action is the movement
+TWIN with an edge price — `ticks: "edge"` (the action vocabulary's
+fourth value, movement-resolver-only by lint; the registry law held:
+no new resolver, the edge-priced DURATION is the new mechanic; move's
+semantics, `adjacent_to`, and the T1 golden fixtures untouched). The
+ACCEPT DOOR prices at resolve time (`core/travel.py::travel_ticks`,
+the loop's branch): the completion rides the queue at `t + price`
+(L3 derive-never-store; day-scale durations queue-cheap, MVP_SCOPE
+§8 — the clock jumps ahead), and the crossings fire MID-TRAVEL in
+tick order (D-038 — the beats/rotations/macro turns the queue pops
+between accept and completion). THE PRICE: the pack override wins
+per edge (`travel.edges`, one entry per undirected REAL exits edge);
+else the DERIVED integer function of the WorldModel — lattice cell
+steps * `step_ticks` + the height-band spread * `climb_ticks` +
+river endpoints * `river_ticks`, the MIN cross-pair read (the road
+takes the closest approach; place-1 bounds every cross-pair for
+correctness, the price reads the cheapest for cost) — integer
+add/multiply only, NO runtime division (bands, never raw-height
+ratios — the pack's `height_bands` is the same vocabulary the biome
+pass reads), draw-free (a pure function of pack data + the
+genesis-frozen model; the fingerprint never sees a price). place-1's
+claim↔exits consistency is what makes derived prices meaningful: an
+edge-local price needs edge-local sites — both endpoints claimed or
+an override, and the COVERAGE lint (with the verb declared, EVERY
+exits edge priceable — the travel verb never hard-fails mid-run).
+The committed pack UNARMED (the 68a pattern — the arming rides with
+world-2's province row; the v0.1 world's every edge is one lattice
+step). The macro consumer half (edge-state aggregate macro-events,
+road-traffic counts) is the space pack's own future row — D-116's
+"the space-pack return", the cadence owner (`core/macro.py`) already
+landed.
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the

@@ -13,6 +13,49 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-97 · 2026-09-11 · st6a — travel as a separate action (the
+STATUS queue's live row after name-1, D-116 (5)'s amended price law;
+7 files — 3 code + 1 test file + 3 doc sync + this worklog + STATUS:
+the price law + the accept-door branch + the lint are one family,
+the iter-90..93 footprint; AGENTS §2.3: 7 > 5-6, the objective scope
+noted here)
+- core/travel.py (new) + core/loop.py: the price law — the travel
+  action is the movement TWIN with an edge price (`ticks: "edge"`,
+  the fourth legal value; move's semantics + adjacent_to + the T1
+  fixtures untouched); the accept door schedules at `t + price`
+  (L3 derive-never-store; day-scale queue-cheap, the crossings fire
+  mid-travel in tick order, D-038); override wins per edge, else the
+  DERIVED integer function (lattice steps * step_ticks + height-band
+  spread * climb_ticks + river endpoints * river_ticks — no runtime
+  division, draw-free, the min cross-pair); no price -> loud
+  TravelError (the backstop family)
+- core/pack.py: the `_travel` lint (after _worldgen) — the pairing
+  law both ways (block ⇔ edge-priced action), the weights
+  (step ≥ 1, climb/river ≥ 0, omitted = policy), the overrides
+  (real undirected edges only, no duplicates, ticks ≥ 1), the
+  COVERAGE law (every exits edge priceable — the verb never
+  hard-fails mid-run); `ticks: 'edge'` movement-resolver-only
+- tests/test_travel.py (new, +18): the formula oracles (hand-built
+  WorldModel: step/climb/river/min-cross-pair/override-wins/
+  refusals), the lint probes (the crafted-twin pattern), the e2e
+  (the derived arm street↔tavern — the claimed pair, the override
+  arm, the non-adjacent rejection, mid-travel rotations, the armed
+  twin byte-identical double-run); the committed pack UNARMED (the
+  68a pattern — the arming rides with world-2's province row)
+- 1546→1564+1 green, ruff clean (3.12.14, the env pin). Corpus price
+  ZERO by construction — no pack byte touched, zero re-pins
+  (git-verified: only core/{intent,loop,pack,travel}.py +
+  tests/test_travel.py + docs). INV-3 caught twice by the stoplist
+  mid-iteration (a noun in fresh prose, the KI#79 lesson — fixed
+  before commit, no KI owed)
+- docs: DECISIONS D-132, TASKS st-6(a) done, phases.md §5 the travel
+  paragraph, NAV §1 the core row, STATUS re-pinned (the queue:
+  weather-1 the next live candidate — its gate satisfied, the macro
+  arming rides with its row). iter-88 evicted here (verified in this
+  edit, the cap 10 held). Caps: STATUS 863 / TASKS 1168 / DECISIONS
+  98 (68 rows) / phases 1018 — over-cap on substance (§6.1, the
+  D-095..D-131 precedent), trim at the phase-5→6 gate
+---
 iter-96a · 2026-09-11 · audit-fix — the owner-requested re-verification
 of iter-96/name-1 (7 files — 1 code + 1 test + 5 doc sync: the fix
 + its tests + the sync gap are one family, the iter-83a footprint;
@@ -400,47 +443,5 @@ footprint; AGENTS §2.3: 10 > 5-6, the objective scope noted here)
   after. Caps: STATUS 736 / TASKS 1038 / DECISIONS 88 lines (59
   rows) / TECH_NOTES 773 / README 651 — over-cap on substance
   (§6.1, the D-095..D-123 precedent), trim at the phase-5→6 gate.
----
-iter-88 · 2026-09-10 · place1 — the placement discipline (W1's
-third, D-116's wave order; 11 files — 2 code + 1 pack data + 1 test
-file + 7 doc sync incl. AGENT_NAVIGATION's worldgen/pack rows (the
-structure sync — the metric + the seventh sub-block): the lint + the
-metric + the pack declaration + the pins are one family, the
-iter-86/87 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
-noted here)
-- core/worldgen.py: `lattice_distance` — the row-major lattice as
-  the topology of record (Chebyshev cell steps, a pure function of
-  the indices + the map config, pre-draw load-time) + the module
-  docstring's place-1 paragraph + the `_SUB_BLOCKS` comment re-pinned
-  (the runtime backstop's set stays six-block — the passes never
-  read `place`).
-- core/pack.py: `WORLDGEN_SUB_BLOCKS` += `place` (the seventh
-  REQUIRED sub-block); the shape lint (the closed vocabulary
-  {max_edge_span}, 0..columns-2 — the VACUITY law: a span at the
-  lattice diameter accepts every pair, dead data, the single-tier
-  collection's twin, never a policy ceiling); the claim↔exits
-  consistency check — every exits edge joining two claimed
-  locations, ALL cross-pairs within the span (edges with an
-  unclaimed endpoint impose nothing); KI#82 FIXED (the
-  missing-sub-block KeyError leak — the named-PackError loop,
-  probed first on a crafted twin). rules.json: the committed
-  `place` block (max_edge_span 1 — the tavern↔street pair, sites 0
-  and 1).
-- +5 tests (the metric pins, the opposite-corner refusal + the
-  co-located/zero-span arms, the vacuity/range/missing family, the
-  all-seven-blocks KI#82 loop, the runtime split) — 1417→1422+1
-  green, ruff clean (3.12.14, the env pin; seeds 0/42/unset
-  spot-checked). Corpus price, measured: ZERO by construction —
-  lint-side + pack data alone, no runtime byte reads `place`; the
-  T1 + corpus fixtures byte-identical, zero re-pins (git-verified).
-  KI#82 opened + closed in the same iteration (AGENTS §5).
-- docs: DECISIONS D-122, TASKS place-1 done + the st-6a gate note
-  (maclock-1 alone now), phases.md §5 the placement-discipline
-  paragraph, README the narrative sentence, STATUS re-pinned (the
-  queue: geo-1 next, the W1 wave order). iter-79 evicted here
-  (verified in this edit); 10 after. Caps: STATUS 710 / TASKS
-  1031 / DECISIONS 87 lines (58 rows) / phases 775 / README 651 —
-  over-cap on substance (§6.1, the D-095..D-122 precedent), trim at
-  the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

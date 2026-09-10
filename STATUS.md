@@ -1,49 +1,55 @@
-Iteration: iter-96a (`iter-96a-audit-fix` — the owner-requested
-re-verification of iter-96/name-1; the clone verified BEFORE
-working — 1544+1, ruff clean, HEAD d755d0d, Python 3.12.14 the env
-pin; verdict: the landing SOUND — the stream/lint/consumer laws
-re-read line by line, the armed + inert twins + the corpus prices
-re-run; KI#84 the read-surface PAIR fixed — the chronicle's OUTCOME
-slots (the rotation's `incoming`/`outgoing` carry npc ids) and the
-entity view's `carrier:` line resolved through the pack record
-instead of the fold — D-131 (7) declares fold-first for EVERY
-id-valued reference; `render/chronicle.py` the fix (the running
-fold threads the outcome mapping, the projection threads the
-carrier line), +2 tests (the rotation line, the carrier line); the
-README sync gap closed with it — iter-96's missing narrative
-sentence + `core/names.py` map row + the stale 1516 count; +2
-tests, 1544→1546+1 green, ruff clean, zero corpus re-pins by
-construction — the committed pack unarmed, authored displays
-identical (the test_ambient rotation pin re-run green)) ·
+Iteration: iter-97 (`iter-97-st6a` — travel as a separate action, the
+STATUS queue's live row after name-1, D-116 (5)'s amended price law;
+the clone verified BEFORE working — 1546+1, ruff clean, HEAD 824be62,
+Python 3.12.14 the env pin; the movement TWIN with an edge price:
+`ticks: "edge"` the action vocabulary's fourth value,
+movement-resolver-only by lint; the accept door prices at resolve
+time through `core/travel.py` (`t + price`, L3 derive-never-store,
+the crossings fire mid-travel in tick order, D-038); the price law —
+the pack override wins per edge (`travel.edges`), else the DERIVED
+integer function of the WorldModel (lattice steps * `step_ticks` +
+the height-band spread * `climb_ticks` + river endpoints *
+`river_ticks`, the MIN cross-pair — no runtime division, draw-free);
+the `_travel` lint: the pairing law both ways, the coverage law
+(every exits edge priceable); the committed pack UNARMED (the 68a
+pattern — the arming rides with world-2's province row); the macro
+consumer half routed to the space pack's future row (D-116's "the
+space-pack return"); +18 tests, 1546→1564+1 green, ruff clean, zero
+corpus re-pins by construction — no pack byte touched, the INV-3
+stoplist caught two fresh-prose nouns mid-iteration and both were
+fixed before commit, no KI owed) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
-depth-7 + name-1 LANDED,
-the queue: st-6a the next live candidate (its gate chain
-satisfied); weather-1's gate satisfied) · 1546
+depth-7 + name-1 + st-6a LANDED,
+the queue: weather-1 the next live candidate (its gate satisfied —
+bridge-1 + maclock-1 landed; the committed pack's macro arming rides
+with its row, the primitive's first consumer)) · 1564
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
 42 pinned, the both-arms + inert-twin prices measured).
 ·
 Date: 2026-09-11 ·
-Scope: `render/chronicle.py` (KI#84: the outcome slots + the
-carrier line — the fold-first reference surfaces), `tests/test_names.py`
-(+2, the read-surface pair), `README.md` (the iter-96 sync gap: the
-name-1 narrative sentence, the `core/names.py` map row, the count
-1546), `docs/AGENT_NAVIGATION.md` (§1 the render row),
-`docs/blueprint/phases.md` (§5 the read-surface sentence),
-`worklog.md`, `STATUS.md` (this file) — 7 files (the iter-83a
-audit-fix footprint — TASKS untouched, no backlog row flips, its
-own record; AGENTS §2.3: 7 > 5-6, the audit's objective scope
+Scope: `core/travel.py` (new — the price law: `travel_ticks` +
+`edge_duration`), `core/loop.py` (the accept door's `EDGE_TICKS`
+branch), `core/intent.py` (`EDGE_TICKS` the sentinel + the
+`action_duration` loud guard), `core/pack.py` (the `_travel` lint +
+the ticks vocabulary's fourth value), `tests/test_travel.py` (new,
++18 — the formula oracles over a hand-built WorldModel, the lint
+probes, the e2e over the crafted twin), `docs/TASKS.md` (st-6(a)
+done), `docs/DECISIONS.md` (D-132), `docs/blueprint/phases.md` (§5
+the travel paragraph), `docs/AGENT_NAVIGATION.md` (§1 the core row),
+`worklog.md`, `STATUS.md` (this file) — 11 files (the price law +
+the accept-door branch + the lint + the tests are one family, the
+iter-90..93 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
 noted in worklog); zero pack/fixtures — the committed pack
 untouched (zero re-pins by construction, the corpus scripts
 byte-identical).
-DECISIONS 67 rows mid-phase — the D-034 collapse owed at the
+DECISIONS 68 rows mid-phase — the D-034 collapse owed at the
 phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
 effect line).
-· The prior iteration's record: iter-96 (name-1, D-131 — the name
-generator: the sixth stream family, the materialize door, the lint,
-the condensation consumer, the fold-first read surface, the ref-19
-dives). The detail lives in TASKS + worklog + git.
+· The prior iteration's record: iter-96a (audit-fix, KI#84 — the
+read-surface pair fold-first + the README sync gap). The detail
+lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -671,15 +677,25 @@ lines); the ref-19 dives landed with it (ck3.md — the culture-keyed
 data shape; azgaar_names.md — the generator half); the committed
 pack unarmed, the inert twin byte-identical, the armed delta the
 name births alone, the fingerprint equal — zero re-pins) →
-`st-6(a)` travel the NEXT candidate (a live one: its gate chain
-satisfied — depth-5 + place-1 + maclock-1 LANDED — the
-claim↔exits consistency the derived travel prices
-read; the price law amended — derived from the WorldModel, pack
-override wins). W3
+`st-6(a)` travel LANDED (iter-97, D-132 — the movement TWIN with an
+edge price: `ticks: "edge"` the fourth action-vocabulary value,
+movement-resolver-only; the accept door prices at resolve time
+through `core/travel.py` (`t + price`, day-scale queue-cheap, the
+crossings fire mid-travel, D-038); the price law — the pack override
+wins per edge, else the derived integer function of the WorldModel
+(lattice steps + the height-band spread + river endpoints, the MIN
+cross-pair, no runtime division, draw-free); the `_travel` lint —
+the pairing law + the coverage law (every exits edge priceable);
+the committed pack unarmed (the 68a pattern — the arming rides with
+world-2's province row); the macro consumer half routed to the
+space pack's future row; +18 tests, 1546→1564+1 green, zero
+re-pins) → `weather-1` the NEXT candidate (a live one: its gate
+satisfied — bridge-1 + maclock-1 LANDED, the ambient family rides
+`core/macro.py`'s cadence; the committed pack's macro ARMING rides
+with its row — the primitive's first consumer). W3
 closes without rows: the calendar binding LANDED as maclock-1's own
 (the macro-year the macro-clock's counter, the cadence
-pack-declared), weather-1's gate SATISFIED (bridge-1 + maclock-1
-landed — the ambient family rides `core/macro.py`'s cadence). The
+pack-declared). The
 phase-6 instruments pinned owner-gated:
 `world-2` (the two-level gate), `res-1` (the resource layer —
 scarcity gets its row owner), `roads-1` (the generated exits).**
@@ -779,10 +795,22 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    name-1 LANDED (iter-96, D-131 — the generator + the condensation
    consumer + the fold-first read surface, the ref-19 dives landed
    with it; +28 tests, the committed pack unarmed, zero re-pins);
+   st-6a LANDED (iter-97, D-132 — the movement TWIN with an edge
+   price: the `ticks: "edge"` mode (movement-resolver-only), the
+   price law `core/travel.py` (override wins per edge, else the
+   derived integer function — lattice steps + the height-band
+   spread + river endpoints, the MIN cross-pair, no division,
+   draw-free), the accept door's `t + price` branch (the crossings
+   fire mid-travel, D-038), the `_travel` lint (the pairing + the
+   coverage laws); the committed pack unarmed — the arming rides
+   with world-2's province row; the macro consumer half routed to
+   the space pack's future row; +18 tests, 1546→1564+1 green, zero
+   re-pins);
    the
-   queue: st-6(a) (the travel row, its gate chain satisfied — the
-   next live candidate per D-116's wave order, name-1 the last W2
-   row closed); the
+   queue: weather-1 (the ambient row, its gate satisfied — bridge-1
+   + maclock-1 LANDED; the committed pack's macro arming rides with
+   its row, the primitive's first consumer);
+   the
    exit
    criterion "an
    emergent chain of
@@ -793,11 +821,9 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    §4): Azgaar FMG (states + chronology + the name pools — the D-116
    split; cultures/religions/burgs re-gated to phase 6), Neighborly
    (the closest cousin's architecture reading). The phase-5 spatial
-   row `st-6(a)` (travel as a separate action) is the next live candidate
-   (its gate chain satisfied: depth-5 + place-1 + maclock-1 LANDED,
-   D-122/D-124 — the
-   claim↔exits consistency the derived travel prices read; D-116: the price law amended — derived
-   from the WorldModel, pack override wins); `st-3`/`st-5`
+   row `st-6(a)` (travel as a separate action) is LANDED (iter-97,
+   D-132 — the detail above, TASKS + phases.md §5 the owners);
+   `st-3`/`st-5`
    (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.
 2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +
    multi-intent), `engine-1` (the runtime inference engine decision
