@@ -121,8 +121,11 @@ def crafted_pack(
     if entries is not None:
         rules["factions"] = {"entries": entries}
     if macro is not False:
-        if macro is None:
+        if macro is None or macro == "v01":
+            # the v0.1 one-scene twin: both blocks dropped together
+            # (the pairing law; weather-1's arming re-pin)
             rules["time"].pop("macro", None)
+            rules.pop("weather", None)
         else:
             rules["time"]["macro"] = macro
     (target / "rules.json").write_text(
@@ -489,7 +492,7 @@ def test_the_goal_fires_through_the_door(tmp_path: Path) -> None:
     NPC_REACTION) -> the door -> the completion -> ONE canon event
     with actor = the group id, cause-chained to the previous event
     (the chronological-chain law), the faction handle in provenance."""
-    _dir, pack = armed(tmp_path, "door")
+    _dir, pack = armed(tmp_path, "door", macro="v01")
     log, _result = _run(tmp_path, pack, 42, WAIT_400, "door")
     _header, events = read_log(log, SCHEMA)
     musters = [e for e in events if e.type == EVENT_TYPE]
@@ -570,9 +573,9 @@ def test_the_corpus_price_is_the_faction_family_alone(
     faction stream; the fixed-tick no-check action draws nothing
     through the door), the event delta the muster family ALONE, the
     shared events byte-equal ids."""
-    _dir_a, armed_pack_v = armed(tmp_path, "price_armed")
+    _dir_a, armed_pack_v = armed(tmp_path, "price_armed", macro="v01")
     _dir_u, unarmed_pack_v = crafted_pack(
-        tmp_path, "price_unarmed", entries=None, fears=(80, 70)
+        tmp_path, "price_unarmed", entries=None, fears=(80, 70), macro="v01"
     )
     log_a, result_a = _run(tmp_path, armed_pack_v, 42, WAIT_400, "price_a")
     log_u, result_u = _run(tmp_path, unarmed_pack_v, 42, WAIT_400, "price_u")
@@ -620,7 +623,7 @@ def test_the_tale_renders_the_faction_line(tmp_path: Path) -> None:
     the position fold read it like any actor's; the pack's
     story-critical listing decides the muster's visibility, the tune-1
     split)."""
-    target, _pack = armed(tmp_path, "render")
+    target, _pack = armed(tmp_path, "render", macro="v01")
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     rules["importance"]["story_critical_events"].append(EVENT_TYPE)
     (target / "rules.json").write_text(

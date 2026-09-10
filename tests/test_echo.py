@@ -60,6 +60,25 @@ from core.urgencies import urgency_intents
 
 REPO = Path(__file__).resolve().parents[1]
 PACK = load_pack(REPO / "content" / "tavern_pack")
+
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat, the beat machinery full-world. The family's beat behavior
+    pins here in isolation; the armed pack's own price (the warm ring
+    waits for crossings no day-scale run reaches) is test_weather's
+    corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 
 # the corpus session-10 shape (the iter-44/45 precedent): enter, fail the
@@ -441,7 +460,9 @@ def test_the_jittery_watcher_beat_fires_and_fades(tmp_path: Path) -> None:
     the committed pack. Each scan takes the actor's CURRENT room in (the
     rotation moved him to the guardroom at 360) and mints the snapshot
     record; the silent-skip law holds (no rejection ever)."""
-    events, sim = run(tmp_path, PACK, 33, FADE_ARC, "jittery.jsonl")
+    events, sim = run(
+        tmp_path, v01_pack(tmp_path), 33, FADE_ARC, "jittery.jsonl"
+    )
     looks = [e for e in events if e.type == "look_around"]
     assert [(e.t, e.actor) for e in looks] == [
         (374, "npc_guard_01"), (774, "npc_guard_01"),
@@ -536,13 +557,18 @@ def _fingerprint(events: list[Any]) -> list[tuple[str, int, str]]:
 
 def test_the_declared_table_gates_the_driver_at_runtime(tmp_path: Path) -> None:
     """The iter-46 dormancy law retired (content-5, iter-51): the echo
-    block is LOAD-BEARING now — the same script on the committed pack
-    and a driver-stripped copy diverges by EXACTLY the guard's scan
-    events (the residue-driven behavior is the block's runtime cost;
-    everything else byte-stable — the engine-2 add-safety law, live)."""
+    block is LOAD-BEARING now — the same script on the v0.1 one-scene
+    twin (the committed pack minus the weather-1 macro arming — the
+    armed LOD silences the warm ring at the beats, the guard rides it;
+    the driver's beat behavior pins on the one-scene world) and its
+    driver-stripped copy diverges by EXACTLY the guard's scan events
+    (the residue-driven behavior is the block's runtime cost; everything
+    else byte-stable — the engine-2 add-safety law, live)."""
     target = tmp_path / "pack_stripped"
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)  # the pairing law: the v0.1 twin's shape
     rules["urgencies"]["entries"] = [
         e for e in rules["urgencies"]["entries"]
         if not any(c.get("test") == "echo_at_least"
@@ -551,7 +577,7 @@ def test_the_declared_table_gates_the_driver_at_runtime(tmp_path: Path) -> None:
     (target / "rules.json").write_text(json.dumps(rules, indent=2),
                                        encoding="utf-8")
     stripped = load_pack(target)
-    live = run(tmp_path, PACK, 33, FADE_ARC, "live.jsonl")[0]
+    live = run(tmp_path, v01_pack(tmp_path), 33, FADE_ARC, "live.jsonl")[0]
     plain = run(tmp_path, stripped, 33, FADE_ARC, "plain.jsonl")[0]
     assert [e.type for e in live if e.type == "look_around"] == [
         "look_around", "look_around",

@@ -137,12 +137,15 @@ def test_trace_pins_the_canonical_run(tmp_path: Path) -> None:
     out = mechanics.render_trace(
         PACK, events, source="day1", seed=125, tick_from=700
     )
-    assert "[t=734] ev_0044 document_check_failed" in out
+    # weather-1's arming price, re-pinned: the warm ring's beat events
+    # left the day (the check's id shifted with them, the verdict with
+    # the draw sequence); the sweep is the day's last event
+    assert "[t=734] ev_0043 document_check_failed" in out
     assert "director_0000 -> possible_document_check_relief" in out
     tail = mechanics.render_trace(
         PACK, events, source="day1", seed=125, tick_from=1447
     )
-    assert "[t=1456] ev_0060 look_around" in tail
+    assert "[t=1456] ev_0055 look_around" in tail
     assert "barkeep_wary_sweep" in tail
     hook_view = mechanics.render_trace(
         PACK, events, source="day1", seed=125, hook="possible_document_check_relief"
@@ -188,8 +191,10 @@ def test_blast_reports_the_insert_delta(tmp_path: Path) -> None:
     out = mechanics.run_blast(
         PACK, SCHEMA, script, step, 3, tmp_path / "blast"
     )
-    assert "arm A (base)     : 61 events" in out
-    assert "arm B (modified) : 62 events" in out
+    # weather-1's arming price: the warm ring's beat events left the
+    # day — the base arm carries 56 (was 61), the +distract arm 57
+    assert "arm A (base)     : 56 events" in out
+    assert "arm B (modified) : 57 events" in out
     assert "+distract x1" in out
     assert "npc_guard_01.status.attention: None -> 'distracted'" in out
     assert "DIVERGED" in out

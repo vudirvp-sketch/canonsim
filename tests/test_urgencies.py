@@ -18,6 +18,7 @@ the plain ungated rolls).
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +33,25 @@ from core.urgencies import urgency_intents
 REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 PACK = load_pack(REPO / "content" / "tavern_pack")
+
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat, the beat machinery full-world. The family's beat behavior
+    pins here in isolation; the armed pack's own price (the warm ring
+    waits for crossings no day-scale run reaches) is test_weather's
+    corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
 
 TAVERN = [{"intent": "move", "target": "loc_tavern"}]
 
@@ -180,8 +200,11 @@ def test_urgencies_fire_when_player_waits_long_enough(tmp_path: Path) -> None:
 def test_urgency_intent_goes_through_the_front_door(tmp_path: Path) -> None:
     """Urgency intents run the same PROPOSED → ACCEPTED | REJECTED
     pipeline as playscript intents — a rejected urgency is a no-op
-    intent_rejected event (the world noticed the attempt)."""
-    sim = make_sim(tmp_path, seed=1, name="run.jsonl")
+    intent_rejected event (the world noticed the attempt). Re-pinned at
+    the weather-1 arming onto the v0.1 one-scene twin (the maid rides
+    the warm ring under the armed LOD — her roll waits for crossings a
+    day-scale run never reaches)."""
+    sim = make_sim(tmp_path, seed=1, name="run.jsonl", pack=v01_pack(tmp_path))
     sim.run_playscript(script([{"intent": "wait", "ticks": 1100}], 1))
     _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
     # at least one non-PC event has cause_intent starting with 'urgency_'
@@ -201,7 +224,7 @@ def test_urgency_completion_never_advances_the_playscript(tmp_path: Path) -> Non
     engine-2 — the rolls draw on the urgency stream now, seed 2's maid
     roll misses): the maid's urgency fires while step 2 (a 50-tick wait)
     is in flight."""
-    sim = make_sim(tmp_path, seed=3, name="run.jsonl")
+    sim = make_sim(tmp_path, seed=3, name="run.jsonl", pack=v01_pack(tmp_path))
     sim.run_playscript(script([
         {"intent": "wait", "ticks": 700},
         {"intent": "wait", "ticks": 50},

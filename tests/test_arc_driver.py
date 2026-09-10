@@ -131,13 +131,17 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     assert sweep.t == 1456
     # the canon order IS the declared causality: the sweep after the check
     assert sweep.id > check.id
-    # the sweep is the day's last director event; the beliefwire-2 scan
-    # follows it at the same tick and closes the log — nothing after
-    assert events[-2].id == sweep.id
-    assert events[-1].type == "look_around"
-    assert events[-1].actor == "npc_guard_02"
+    # weather-1's arming price, re-pinned: the warm ring's beat events
+    # left the day (the LOD holds them for crossings no day-scale run
+    # reaches) — the beliefwire scan's urgency roll among them, AND the
+    # check's dice moved with the draw sequence (the verdict flips to
+    # the satisfying answer: the warm NPCs' intent draws left the
+    # sequence ahead of it). The sweep is the day's LAST event and its
+    # closing beat — the scan that followed it at iter-70 waits for a
+    # crossing now; the day's closer is the story's own.
+    assert check.type == "document_check_failed"
+    assert events[-1].id == sweep.id
     assert events[-1].t == 1456
-    assert str(events[-1].provenance["cause_intent"]).startswith("urgency_")
     # the arc marched: beat 1 (the check) -> beat 3 (the sweep, gap 2 held
     # beat 720) — the cursor now past the chain's end
     assert sim.director._arc_cursor == {"aftermath": 2}  # type: ignore[attr-defined]
@@ -256,15 +260,16 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     )
     assert live_result.fingerprint == stripped_result.fingerprint
     assert len(live_events) == len(stripped_events) + 1
-    # every shared event keeps its id: the prefix through the day's wait
-    # is identical, the sweep rides after it and before the beliefwire
-    # scan's own slot (the scan closes BOTH runs — HEAD's shape)
-    assert [e.id for e in live_events[:-2]] == [e.id for e in stripped_events[:-1]]
-    assert live_events[-2].id == "ev_0059"  # the sweep, the inserted event
-    assert live_events[-1].actor == "npc_guard_02"
-    assert live_events[-1].id == "ev_0060"
-    assert stripped_events[-1].actor == "npc_guard_02"
-    assert stripped_events[-1].id == "ev_0059"
+    # every shared event keeps its id: the whole prefix through the
+    # day's wait is identical, the sweep rides after it and CLOSES the
+    # live run (weather-1's arming price: the beliefwire scan that
+    # followed it at iter-70 rides the warm ring now — held for
+    # crossings no day-scale run reaches, both arms' shape)
+    assert [e.id for e in live_events[:-1]] == [e.id for e in stripped_events]
+    assert live_events[-1].actor == "npc_barkeep_01"  # the sweep
+    assert live_events[-1].id == "ev_0055"
+    assert stripped_events[-1].actor == "pc_01"  # the day's last wait
+    assert stripped_events[-1].id == "ev_0054"
 
 
 def test_the_quiet_seeds_stay_byte_identical(tmp_path: Path) -> None:

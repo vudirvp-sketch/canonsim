@@ -41,6 +41,11 @@ co-occurring tick (the year turns before the day's rotation, the
 rotation before the beat), each turn ONE event through the canon door
 (the calendar's increments are canon, INV-1 — `core/macro.py` owns the
 primitive).
+weather-1: the ambient family rides the same crossing — the weather
+chain rolls its next state AFTER the turn (`core/weather.py` owns the
+family; the event chained to the turn, the drift's precedent) and its
+SEEDED erosion follow-ups run as SCHEDULED entries (the fire
+shape, TIME-1).
 depth-3: the macro crossing is the scene LOD's WARM cadence — under
 an armed clock the turn carries the cold-background census (the D-112
 count on the aggregate surface), the warm ring's NPCs tick at the
@@ -111,6 +116,12 @@ from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
 from core.urgencies import urgency_intents
+from core.weather import (
+    current_weather,
+    erosion_drafts,
+    erosion_specs,
+    weather_turn_draft,
+)
 from core.worldgen import WorldModel, genesis
 
 __all__ = [
@@ -122,6 +133,7 @@ __all__ = [
     "RunResult",
     "RunnerError",
     "Simulator",
+    "WeatherPayload",
     "load_playscript",
 ]
 
@@ -154,6 +166,18 @@ class FollowUpPayload:
     layer: str
     location: str
     kind: str
+    cause_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class WeatherPayload:
+    """A SEEDED weather erosion follow-up at its trigger tick (the fire
+    follow-ups' shape over the ambient family's own rule): the rule's event
+    type IS the queue identity (unique per block by lint); the drafts
+    read the fold at fire time — the world's state then, never the
+    state it held at seed time."""
+
+    event_type: str
     cause_id: str
 
 
@@ -406,6 +430,8 @@ class Simulator:
                             self._feed_next(entry.tick, remaining)
                     elif entry.kind == "pass":
                         self._run_pass(entry)
+                    elif entry.kind == "weather":
+                        self._run_weather_follow_up(entry)
                     else:
                         self._run_follow_up(entry)
         return RunResult(
@@ -756,6 +782,22 @@ class Simulator:
         if draft is not None:
             self._commit(replace(draft, provenance={"seed": self._seed}))
 
+    def _run_weather_follow_up(self, entry: Any) -> None:
+        """A SEEDED weather erosion at its trigger tick (weather-1,
+        TIME-1 — the fire follow-ups' shape): the drafts read the fold
+        NOW (the state the world holds at fire time, never the state it
+        held at seed time — the interim may have told this story
+        already), one event per eroded entity, cause-chained to the
+        seeding weather event. No matches -> nothing commits (the
+        idempotence law: no no-op duplicates in the canon, KI#13's
+        family)."""
+        payload: WeatherPayload = entry.payload
+        for draft in erosion_drafts(
+            self._pack.rules, self._projection, entry.tick,
+            payload.event_type, payload.cause_id,
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+
     # -- the iter-4 beat cycle (decay / urgencies / director releases) --------
 
     def _scene_zones(self) -> SceneZones | None:
@@ -993,6 +1035,52 @@ class Simulator:
                 provenance={"seed": self._seed},
             )
         )
+        # weather-1: the ambient family rides the crossing — the chain
+        # rolls its next state from the fold's current weather, and a
+        # CHANGE commits ONE event chained to the turn (the drift's
+        # precedent: the consumer rides the clock's own event); the new
+        # state's erosion follow-ups seed HERE (the fire follow-ups'
+        # shape — SEEDED at event time, SCHEDULED on the queue, the
+        # drafts read the fold at fire time). The draw rides the
+        # family's own isolated stream (`weather:chain`, the D-079
+        # law's seventh member) — the substantive fingerprint never
+        # sees a weather roll. The unarmed law: no `weather` block, no
+        # branch (the macro clock may run without the family).
+        if self._pack.rules.get("weather") is not None:
+            weather_draft = weather_turn_draft(
+                self._pack.rules, self._bank, tick,
+                current_weather(self._pack.rules, self._events),
+            )
+            if weather_draft is not None:
+                weather_record = self._commit(
+                    replace(
+                        weather_draft,
+                        cause=self._writer.last_id,
+                        provenance={"seed": self._seed},
+                    )
+                )
+                for spec in erosion_specs(
+                    self._pack.rules,
+                    str(weather_record.outcome["weather"]),
+                ):
+                    # the never-regress law (the queue discipline the
+                    # warm ring's intents already ride): a crossing that
+                    # fires LATE — a batch of missed crossings before a
+                    # far entry — seeds its follow-ups no earlier than
+                    # the world's resumed tick (the clock jumps to the
+                    # entry's tick after the batch; a tick behind it
+                    # would be a clock regression at pop). The deferral
+                    # bends, the ORDER never does.
+                    self._queue.push(
+                        tick=max(tick + spec.at_tick, entry_tick),
+                        sub_order=SCHEDULED,
+                        actor_id=f"weather:{spec.event_type}",
+                        kind="weather",
+                        payload=WeatherPayload(
+                            event_type=spec.event_type,
+                            cause_id=weather_record.id,
+                        ),
+                    )
         # depth-7 (the write-side LOD): the tier transitions first —
         # the condensations ride the crossing's own event, before the
         # warm ring's machinery (the members materialize, then stir)

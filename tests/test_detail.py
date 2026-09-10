@@ -602,7 +602,11 @@ def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
         for a, b in zip(armed_lines, base_lines, strict=True)
         if a != b
     ]
-    assert len(diffed) == 2
+    # weather-1's arming price, re-pinned: ONE payload — the guardroom
+    # rotation scan (the 1456 warm-ring event) waits for crossings no
+    # day-scale run reaches now; the first tavern scan materializes the
+    # slots, the second reads canon (one draw per slot ever)
+    assert len(diffed) == 1
     for armed_event, base_event in diffed:
         assert armed_event["type"] == "look_around"
         assert armed_event["actor"] == "npc_guard_02"
@@ -617,14 +621,10 @@ def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
         assert armed_event["t"] == base_event["t"]
         assert armed_event["cause"] == base_event["cause"]
     scans = [event for event, _ in diffed]
-    assert scans[0]["id"] == "ev_0042"  # the first tavern scan materializes
+    assert scans[0]["id"] == "ev_0041"  # the first tavern scan materializes
     assert scans[0]["outcome"]["materialized"] == [
         {"slot": "under_bench", "value": "old_cloak"},
         {"slot": "behind_barrel", "value": "lost_ring"},
-    ]
-    assert scans[1]["id"] == "ev_0060"  # the guardroom rotation scan
-    assert scans[1]["outcome"]["materialized"] == [
-        {"slot": "under_cot", "value": "empty"},
     ]
 
 

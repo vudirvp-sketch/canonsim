@@ -1,55 +1,77 @@
-Iteration: iter-97 (`iter-97-st6a` — travel as a separate action, the
-STATUS queue's live row after name-1, D-116 (5)'s amended price law;
-the clone verified BEFORE working — 1546+1, ruff clean, HEAD 824be62,
-Python 3.12.14 the env pin; the movement TWIN with an edge price:
-`ticks: "edge"` the action vocabulary's fourth value,
-movement-resolver-only by lint; the accept door prices at resolve
-time through `core/travel.py` (`t + price`, L3 derive-never-store,
-the crossings fire mid-travel in tick order, D-038); the price law —
-the pack override wins per edge (`travel.edges`), else the DERIVED
-integer function of the WorldModel (lattice steps * `step_ticks` +
-the height-band spread * `climb_ticks` + river endpoints *
-`river_ticks`, the MIN cross-pair — no runtime division, draw-free);
-the `_travel` lint: the pairing law both ways, the coverage law
-(every exits edge priceable); the committed pack UNARMED (the 68a
-pattern — the arming rides with world-2's province row); the macro
-consumer half routed to the space pack's future row (D-116's "the
-space-pack return"); +18 tests, 1546→1564+1 green, ruff clean, zero
-corpus re-pins by construction — no pack byte touched, the INV-3
-stoplist caught two fresh-prose nouns mid-iteration and both were
-fixed before commit, no KI owed) ·
+Iteration: iter-98 (`iter-98-weather1` — the ambient weather family +
+canon erosion, the STATUS queue's live row after st-6a, TASKS' own
+letter + D-116 (7): "an ambient family over the existing doors — no
+physics engine"; the clone verified BEFORE working — 1564+1, ruff
+clean, HEAD 93d26df, Python 3.12.14 the env pin; the CHAIN rides the
+macro crossings: one roll per crossing on the isolated `weather:chain`
+stream (the D-079 family law's SEVENTH member, singleton — the
+substantive fingerprint never sees a weather roll), a self-roll
+suppresses the event (KI#13's discipline) while still advancing the
+stream; the current weather is the FOLD (L3: the last event's
+outcome key, the pack's `initial` before the first), no knowledge
+(the ambient law, the macro turn's shape), no state_changes; the
+SEEDED consequences (TIME-1): the storm's hook tag rides the
+director's buffer through the existing door (the D-082 pattern —
+weight 0, ambient channel, first_time_only); the EROSION (the fire
+follow-ups' shape): SEEDED follow-ups whose commits REVERT promoted
+canon flags — the rain washes the fire layer's smoke (an explicit
+counter-event, EVENT_SCHEMA §4), idempotent on state, the
+never-regress law flooring a late crossing's deferral at the entry
+tick (found live in the batch-crossing probe, fixed the same
+iteration); the `_weather` lint — the pairing law (weather without
+`time.macro` is dead data, one direction), the identity law (the
+event type ≠ the macro turn's), the weights/hooks/erosion closures,
+the reachability law; THE COMMITTED MACRO ARMING landed with the row
+(the primitive's first consumer): `time.macro` at the year-scale
+cadence 518400 + the weather block (clear/overcast/rain/storm) + the
+three template lines; +22 tests, 1564→1586+1 green, ruff clean; the
+corpus price measured both arms and paid: the T1 golden +
+day1_theft BYTE-IDENTICAL, day1_full pays the LOD's ONE-GATE
+engagement alone (depth-3's designed price, deferred since iter-91 —
+the warm ring's beat events wait for crossings no day-scale run
+reaches: 61→56 events, ~20 test files + the narrator corpus's 5
+cases + the parser corpus's 1 re-pinned; the weather block itself
+adds ZERO corpus events); the INV-3 stoplist caught three fresh-prose
+nouns mid-iteration (the fire follow-ups' naming) and all were fixed
+before commit, no KI owed) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
-depth-7 + name-1 + st-6a LANDED,
-the queue: weather-1 the next live candidate (its gate satisfied —
-bridge-1 + maclock-1 landed; the committed pack's macro arming rides
-with its row, the primitive's first consumer)) · 1564
-passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
-42 pinned, the both-arms + inert-twin prices measured).
+depth-7 + name-1 + st-6a + weather-1 LANDED,
+the queue: EMPTY of live candidates — the phase-5 exit review is the
+owner's call (the gate rows owed there: the D-034 DECISIONS collapse
++ the first phases.md §5 staleness pass, D-128's own effect lines)) ·
+1586 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
+42 pinned, the both-arms + weather-less-twin prices measured).
 ·
 Date: 2026-09-11 ·
-Scope: `core/travel.py` (new — the price law: `travel_ticks` +
-`edge_duration`), `core/loop.py` (the accept door's `EDGE_TICKS`
-branch), `core/intent.py` (`EDGE_TICKS` the sentinel + the
-`action_duration` loud guard), `core/pack.py` (the `_travel` lint +
-the ticks vocabulary's fourth value), `tests/test_travel.py` (new,
-+18 — the formula oracles over a hand-built WorldModel, the lint
-probes, the e2e over the crafted twin), `docs/TASKS.md` (st-6(a)
-done), `docs/DECISIONS.md` (D-132), `docs/blueprint/phases.md` (§5
-the travel paragraph), `docs/AGENT_NAVIGATION.md` (§1 the core row),
-`worklog.md`, `STATUS.md` (this file) — 11 files (the price law +
-the accept-door branch + the lint + the tests are one family, the
-iter-90..93 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
-noted in worklog); zero pack/fixtures — the committed pack
-untouched (zero re-pins by construction, the corpus scripts
-byte-identical).
-DECISIONS 68 rows mid-phase — the D-034 collapse owed at the
+Scope: `core/weather.py` (new — the family owner: `weather_turn_draft`
++ `current_weather` + the erosion specs/drafts), `core/rng.py` (the
+seventh family prefix + `weather_stream_name`), `core/loop.py` (the
+crossing's weather branch + the `weather` entry kind + the
+`WeatherPayload`), `core/pack.py` (the `_weather` lint +
+`_transition_flags`), `content/tavern_pack/rules.json` (the macro
+ARMING + the weather block + the storm hook row),
+`content/tavern_pack/templates.json` (the three lines),
+`tests/test_weather.py` (new, +22 — the unit laws, the crafted-pack
+integration, the corpus price both-arms), the day1-family re-pins
+(test_lod, test_macro, test_groups, test_factions, test_echo,
+test_panic, test_states, test_urgencies, test_ambient, test_arc_
+driver, test_balance_harness, test_beliefwire, test_checkpoint,
+test_detail, test_mechanics, test_mediator (the narrator corpus's 5
+cases), test_parser (1 case)), `docs/TASKS.md` (weather-1 done),
+`docs/DECISIONS.md` (D-133), `docs/blueprint/phases.md` (§5 the
+weather paragraph), `docs/AGENT_NAVIGATION.md` (§1 the core row),
+`README.md` (the st-6a + weather map rows, the status paragraphs, the
+macro-armed flip — the iter-96a sync-gap family closed in passing),
+`worklog.md`, `STATUS.md` (this file) — 27 files (the family + the
+arming + the corpus price are ONE row, the TASKS row's own three
+halves; AGENTS §2.3: 27 > 5-6, the objective scope noted in worklog).
+DECISIONS 44 rows mid-phase — the D-034 collapse owed at the
 phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
 effect line).
-· The prior iteration's record: iter-96a (audit-fix, KI#84 — the
-read-surface pair fold-first + the README sync gap). The detail
-lives in TASKS + worklog + git.
+· The prior iteration's record: iter-97 (st-6a — the travel twin
+with an edge price). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -645,7 +667,8 @@ LANDED (iter-91, D-125 — the macro clock's FIRST consumer: the
 three zones, the warm ring at the crossings, `cold_npcs` the cold
 census on the turn; the one-gate law — the LOD engages exactly when
 the macro clock is armed, the unarmed pack the one-scene world; the
-committed pack's macro ARMING still rides with weather-1's row) →
+committed pack's macro arming LANDED with weather-1's row
+   (iter-98, D-133 — the primitive's first consumer)) →
 `depth-6` factions LANDED (iter-92, D-126 — small-formula dynamics,
 the KeeperRL ratio+threshold over the members' live per-entity
 axes; the group entity kind acting through the intent door, the
@@ -689,13 +712,34 @@ the pairing law + the coverage law (every exits edge priceable);
 the committed pack unarmed (the 68a pattern — the arming rides with
 world-2's province row); the macro consumer half routed to the
 space pack's future row; +18 tests, 1546→1564+1 green, zero
-re-pins) → `weather-1` the NEXT candidate (a live one: its gate
-satisfied — bridge-1 + maclock-1 LANDED, the ambient family rides
-`core/macro.py`'s cadence; the committed pack's macro ARMING rides
-with its row — the primitive's first consumer). W3
+re-pins) → `weather-1` LANDED (iter-98, D-133 — the ambient family:
+the chain on the isolated `weather:chain` stream (the D-079 law's
+seventh member), the fold-read weather state, the seeded storm
+consequence (the ambient channel's quiet gate, the D-082 pattern),
+the EROSION (the fire follow-ups' shape — SEEDED follow-ups
+reverting promoted canon flags, the rain washes the fire layer's
+smoke, EVENT_SCHEMA §4's explicit counter-event; the never-regress
+law floors a late crossing's deferral at the entry tick); the
+`_weather` lint (the pairing law one direction, the identity law,
+the closures, the reachability); THE COMMITTED MACRO ARMING landed
+with the row (the primitive's first consumer): `time.macro` at the
+year-scale cadence 518400 + the weather block + the three template
+lines; +22 tests, 1564→1586+1 green; the corpus price: the T1
+golden + day1_theft byte-identical, day1_full pays the LOD's
+one-gate engagement alone (depth-3's designed price, deferred since
+iter-91 — the warm ring's beat events wait for crossings no
+day-scale run reaches, ~20 test files + the two corpus fixtures
+re-pinned; the weather block itself adds zero corpus events; the
+fingerprint equal both arms). W3
 closes without rows: the calendar binding LANDED as maclock-1's own
 (the macro-year the macro-clock's counter, the cadence
 pack-declared). The
+phase-5 queue is now EMPTY of live candidates — the phase-5 exit
+review (ROADMAP §2's chain criterion already reads 26 on the
+committed scenario; the exit review the owner's call, the iter-55/73
+gate precedent) is the Next step, the gate rows owed there: the
+D-034 DECISIONS collapse + the first phases.md §5 staleness pass
+(D-128's own effect lines). The
 phase-6 instruments pinned owner-gated:
 `world-2` (the two-level gate), `res-1` (the resource layer —
 scarcity gets its row owner), `roads-1` (the generated exits).**
@@ -743,10 +787,10 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    calendar binding to the worldgen chronicle horizon — one
    timeline), the aggregate emission surface (`macro_turn_draft`,
    the D-112 one-event-with-cardinality shape the depth-3/7 +
-   st-6a/weather-1 consumers call); the committed pack unarmed —
-   the 68a pattern, the arming rides with the first consumer;
-   corpus price zero — the fingerprint equal both arms, zero
-   re-pins); depth-3 LANDED (iter-91, D-125 — the scene LOD: the
+   st-6a/weather-1 consumers call); the committed pack's arming
+   LANDED with weather-1 (iter-98, D-133 — the primitive's first
+   consumer, the year-scale cadence; the maclock row's own zero
+   price held: the fingerprint equal both arms); depth-3 LANDED (iter-91, D-125 — the scene LOD: the
    zone family `core/lod.py` (the pure partition over the exits
    graph + the PC's live position, the zones following the reader),
    the one-gate law (the warm cadence IS the macro cadence — one
@@ -806,10 +850,10 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    with world-2's province row; the macro consumer half routed to
    the space pack's future row; +18 tests, 1546→1564+1 green, zero
    re-pins);
-   the
-   queue: weather-1 (the ambient row, its gate satisfied — bridge-1
-   + maclock-1 LANDED; the committed pack's macro arming rides with
-   its row, the primitive's first consumer);
+   weather-1 LANDED (iter-98, D-133 — the ambient family + the
+   erosion + the committed macro arming: the detail in the wave
+   order above; the queue now empty of live candidates — the exit
+   review the owner's call, the gate rows owed there);
    the
    exit
    criterion "an

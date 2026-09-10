@@ -181,22 +181,21 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     # right before the player's drop_break — the ON arm's all-peak law
     # keeps the murmur silent the whole day (the D-066 finding, the
     # ambient row's own containment pin)
-    assert on_log[:48] == off_log[:48]
-    assert json.loads(on_log[48])["type"] == "drop_break"
-    assert json.loads(off_log[48])["type"] == "ramble"
-    assert json.loads(off_log[48])["t"] == 735
-    sweep = on_log[-2]
+    # weather-1's arming price, re-pinned: the warm ring's beat events
+    # left the day (the LOD holds them for crossings no day-scale run
+    # reaches) — the 1456 paranoid scan among them (BOTH arms: the
+    # guardroom ride), and the beat count shift moves the arms' shared
+    # prefix by one line
+    assert on_log[:47] == off_log[:47]
+    assert json.loads(on_log[47])["type"] == "drop_break"
+    assert json.loads(off_log[47])["type"] == "ramble"
+    assert json.loads(off_log[47])["t"] == 735
+    sweep = on_log[-1]
     assert '"type": "look_around"' in sweep
     assert '"cause_intent": "director_0001"' in sweep
     assert '"t": 1456' in sweep
-    # the paranoid scan closes the ON arm's day (after the sweep, same tick)
-    scan = on_log[-1]
-    assert '"actor": "npc_guard_02"' in scan
-    assert '"cause_intent": "urgency_0004"' in scan
-    assert '"t": 1456' in scan
-    # the OFF arm's own scan copy is its LAST line (the murmur moved
-    # mid-run — the pre-seed's price on the clockless arm)
-    off_scan = off_log[-1]
-    assert '"actor": "npc_guard_02"' in off_scan
-    assert '"cause_intent": "urgency_0004"' in off_scan
-    assert '"t": 1456' in off_scan
+    # the sweep alone closes the ON arm's day (the paranoid scan that
+    # followed it rides the warm ring now); the OFF arm's closer is the
+    # day's last wait (the murmur moved mid-run — the pre-seed's price
+    # on the clockless arm)
+    assert '"type": "wait"' in off_log[-1]

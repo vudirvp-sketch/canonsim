@@ -36,6 +36,25 @@ REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 PACK = load_pack(REPO / "content" / "tavern_pack")
 
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat, the beat machinery full-world. The family's beat behavior
+    pins here in isolation; the armed pack's own price (the warm ring
+    waits for crossings no day-scale run reaches) is test_weather's
+    corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
+
 # the corpus alarm family's shape (seed 33): enter the busy taproom,
 # set the fire with the room occupied — the alarm's witnesses are the
 # four occupants plus the arsonist himself (his own shout reaches him)
@@ -140,7 +159,7 @@ def test_the_echo_never_resets_the_fear_decay_baseline(tmp_path: Path) -> None:
     pass runs FROM the alarm (354 ticks → −4), the occupants fall
     50 → 46 and the cause actor 10 → 6 — never a re-based double
     decay."""
-    events, sim = run(tmp_path, 33, FIRE_STEPS)
+    events, sim = run(tmp_path, 33, FIRE_STEPS, pack=v01_pack(tmp_path))
     decays = [
         c for e in by_type(events, "status_decayed")
         for c in e.state_changes if c.prop == "status.fear"

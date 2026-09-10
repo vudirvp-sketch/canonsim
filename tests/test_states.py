@@ -9,6 +9,7 @@ counter-event can change it — T4 holds).
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -21,6 +22,25 @@ from core.states import DECAY_EVENT, decay_drafts
 REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 PACK = load_pack(REPO / "content" / "tavern_pack")
+
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat, the beat machinery full-world. The decay family's beat
+    behavior pins here in isolation; the armed pack's own price (the
+    warm ring waits for crossings no day-scale run reaches) is
+    test_weather's corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
 
 
 def by_type(events: list[Any], event_type: str) -> list[Any]:
@@ -192,8 +212,13 @@ def test_decay_baseline_respects_the_rotation_reset(tmp_path: Path) -> None:
     changed the axis (any committer), so a guard whose fatigue was reset
     at the t=360 rotation gains NOTHING at that same-tick beat, and
     exactly one beat's worth (360 ticks → +10) at the t=720 beat — not
-    the +20 a run-start baseline would produce."""
-    sim = Simulator(PACK, 42, tmp_path / "run.jsonl", SCHEMA, commit="0000000")
+    the +20 a run-start baseline would produce. Re-pinned at the
+    weather-1 arming onto the v0.1 one-scene twin: the armed LOD scopes
+    the beat machinery to the ACTIVE scene alone (the guard rides the
+    warm ring there — his decay waits for crossings a day-scale run
+    never reaches); the baseline law itself is zone-free and pins on
+    the one-scene world where the pass is full-world."""
+    sim = Simulator(v01_pack(tmp_path), 42, tmp_path / "run.jsonl", SCHEMA, commit="0000000")
     sim.run_playscript({
         "name": "test", "seed": 42, "pack": "tavern_pack@0.1",
         "steps": [{"intent": "wait", "ticks": 730}],

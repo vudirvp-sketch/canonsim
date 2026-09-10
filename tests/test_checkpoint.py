@@ -435,9 +435,11 @@ def test_cli_every_cadence_offsets(tmp_path: Path) -> None:
     log = _run_day1(123, tmp_path)
     n = len(_events(log))
     assert checkpoint_cli.resolve_offsets(n, every=None, offsets=[]) == [n]
-    # depth-5b: the day1 run's event count grew by the 5-event genesis
-    assert checkpoint_cli.resolve_offsets(n, every=20, offsets=[]) == [0, 20, 40, 60]
-    assert checkpoint_cli.resolve_offsets(n, every=None, offsets=[60, 0, 20]) == [0, 20, 60]
+    # depth-5b grew the count by the 5-event genesis; weather-1's arming
+    # paid the warm ring back (the LOD's one-gate price: the beat events
+    # wait for crossings no day-scale run reaches) — 55 events
+    assert checkpoint_cli.resolve_offsets(n, every=20, offsets=[]) == [0, 20, 40, 55]
+    assert checkpoint_cli.resolve_offsets(n, every=None, offsets=[55, 0, 20]) == [0, 20, 55]
     assert checkpoint_cli.resolve_offsets(0, every=None, offsets=[]) == [0]
     assert checkpoint_cli.resolve_offsets(0, every=5, offsets=[]) == [0]
     with pytest.raises(CheckpointError, match="mutually exclusive"):
@@ -449,7 +451,7 @@ def test_cli_every_cadence_offsets(tmp_path: Path) -> None:
     rc = checkpoint_cli.main([str(log), "--every", "20", "--out", str(out)])
     assert rc == 0
     index = read_index(out)
-    assert [r.offset for r in index.records] == [0, 20, 40, 60]
+    assert [r.offset for r in index.records] == [0, 20, 40, 55]
     # every artifact restores to the same full fold (the tail-replay law)
     events = _events(log)
     for record in index.records:

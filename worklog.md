@@ -13,6 +13,60 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-98 · 2026-09-11 · weather1 — the ambient weather family + canon
+erosion (the queue's live row after st-6a, TASKS' own letter; 27
+files — 4 code + 2 content + 1 new test file + ~20 corpus re-pins +
+6 doc sync + this worklog + STATUS: the family + the arming + the
+corpus price are ONE row, the TASKS row's own three halves; AGENTS
+§2.3: 27 > 5-6, the objective scope noted here)
+- core/weather.py (new) + core/rng.py + core/loop.py: the chain —
+  one roll per macro crossing on the isolated `weather:chain` stream
+  (the D-079 family law's SEVENTH member, singleton; the
+  fingerprint never sees a weather roll), a self-roll suppresses the
+  event (KI#13) while still advancing the stream; the current
+  weather is the FOLD (L3), no knowledge (the ambient law), no
+  state_changes; the SEEDED storm consequence (the director's
+  buffer through the existing door, the D-082 pattern); the EROSION
+  (the fire follow-ups' shape): SEEDED follow-ups whose commits
+  revert promoted canon flags (the rain washes the fire layer's
+  smoke — an explicit counter-event, EVENT_SCHEMA §4; idempotent on
+  state; the never-regress law floors a late crossing's deferral at
+  the entry tick — the batch-crossing crash found live and fixed the
+  same iteration).
+- core/pack.py: the `_weather` lint — the pairing law (weather
+  without time.macro is dead data, one direction), the identity law
+  (the event type ≠ the macro turn's), the weights/hooks/erosion
+  closures (the prop must be a transition follow-up flag), the
+  reachability law; `_transition_flags` the closure's helper.
+- content/tavern_pack: THE COMMITTED MACRO ARMING (the primitive's
+  first consumer) — time.macro at the year-scale cadence 518400
+  (one year per crossing, the genesis horizon continued) + the
+  weather block (clear/overcast/rain/storm; rain's smoke wash; the
+  storm's drunk-murmur hook) + the three template lines.
+- tests/test_weather.py (new, +22 — the unit laws, the crafted-pack
+  integration, the corpus price both-arms) — 1564→1586+1 green,
+  ruff clean (3.12.14, the env pin; the armed twin double-run
+  byte-identical). Corpus price, measured both arms: the T1 golden
+  + day1_theft BYTE-IDENTICAL (the crossings beyond every script's
+  horizon); day1_full pays the LOD's ONE-GATE engagement alone
+  (depth-3's designed price, deferred since iter-91 — the warm
+  ring's beat events wait for crossings: 61→56 events, the check's
+  dice moved with the draw sequence, ~20 test files + narrator
+  corpus 5 cases + parser corpus 1 case re-pinned; the weather
+  block itself adds ZERO corpus events; the fingerprint EQUAL both
+  arms). The INV-3 stoplist caught three fresh-prose nouns (the
+  fire follow-ups' naming) — fixed before commit.
+- docs: DECISIONS D-133, TASKS weather-1 done, phases.md §5 the
+  weather paragraph, NAV §1 the core row, README (the st-6a + weather
+  map rows + the status paragraphs + the macro-armed flip — the
+  iter-96a sync-gap family closed in passing), STATUS re-pinned
+  (the queue: EMPTY of live candidates — the phase-5 exit review the
+  owner's call, the D-034 collapse + the §5 staleness pass owed at
+  the gate). iter-89 evicted here (verified against git in this
+  edit); 10 after. Caps: STATUS 907 / TASKS 1160 / DECISIONS 99 lines
+  (44 rows) / phases.md 1066 / README 786 — over-cap on substance
+  (§6.1, the standing precedent), trim at the phase-5→6 gate
+  (D-128's own rows).
 iter-97 · 2026-09-11 · st6a — travel as a separate action (the
 STATUS queue's live row after name-1, D-116 (5)'s amended price law;
 7 files — 3 code + 1 test file + 3 doc sync + this worklog + STATUS:
@@ -394,54 +448,5 @@ footprint; AGENTS §2.3: 11 > 5-6, the objective scope noted here)
   substance (§6.1, the D-095..D-124 precedent), trim at the
   phase-5→6 gate.
 ---
-iter-89 · 2026-09-10 · geo1 — the geometry rework (W1's fourth,
-D-116's wave order, BEFORE any big-world pack; 10 files — 1 code
-edit + 1 new tool + 1 test file + 7 doc sync: the mechanism + the
-measured instrument + the pins are one family, the iter-81/88
-footprint; AGENTS §2.3: 10 > 5-6, the objective scope noted here)
-- core/worldgen.py: `_neighbors` — the GRID-HASH walk (buckets at
-  spacing scale, expanding Chebyshev rings, the ring-floor exactness
-  law: a bucket at ring ≥ r+1 is farther than r·scale on one axis,
-  so the k-th best within (r·scale)² proves the unexplored rings out
-  of reach, ties included) — amortized O(N), byte-identical to the
-  full sort, computed ONCE in `generate_world` and shared by
-  watershed + biomes (the signatures take the cache; the second
-  computation was the free half of the old wall).
-- core/worldgen.py: `_pass_relax` — the PER-SITE BOUNDING-BOX WALK
-  (`_nearest_owner_walk`: each site sweeps its box, each point once
-  per covering site, O(extent²) at the lattice's constant; index
-  visit order IS the (d², index) tie law); the runtime EXACTNESS
-  CHECK (a best within radius² proves the true nearest's box covered
-  the point) + the deterministic doubling retry (the output never
-  depends on the radius), the WorldgenError at the covering radius
-  the unreachable backstop; the empty-site degenerate keeps the old
-  silent shape.
-- scripts/worldgen_profile.py (new, D-046 CLI-class): the perf-1
-  precedent on the map side — the ladder 36→10k sites over the
-  committed pack's own block (extent scaled alone), clean + cProfile
-  double-run with the fingerprints sha256-compared; the 36-site row
-  reproduces the corpus digest verbatim (the ladder's anchor).
-  TECH_NOTES §12 the numbers: the old walls measured on HEAD
-  795bb1b FIRST (relax 2.27/11.77/37.81 s at 400/900/1600, the
-  quadratic fit ~25 min at 10k; neighbors ×2), the new curve (10k
-  full door 1.19 s clean, sites/s ~8.4–10k, cost draw-linear — the
-  largest cProfile line rng.randint at 280k calls).
-- +2 tests (the brute-force oracles: the pre-geo-1 full scans
-  inlined as references — the grid-hash exact vs ties/duplicates/
-  k-beyond/single-site; the box-walk exact for rounds 0..3 + the
-  clustered retry path walked directly + the empty-world degenerate)
-  — 1422→1424+1 green, ruff clean (3.12.14, the env pin; seeds
-  0/42/125 + unset spot-checked). Corpus price, measured BOTH arms:
-  ZERO — the genesis fingerprints (seeds 0/42/125) byte-identical
-  before/after (cd85495945b7f09b / f55c3547230aea5b /
-  fca783da67c8020e), the T1 + corpus fixtures untouched, zero
-  re-pins (git-verified).
-- docs: DECISIONS D-123, TASKS geo-1 done, TECH_NOTES §12 (the
-  curve), AGENT_NAVIGATION §1 + README the scripts rows,
-  STATUS re-pinned (the queue: maclock-1 next, the W2 wave order).
-  iter-80 evicted here (verified against git in this edit); 10
-  after. Caps: STATUS 736 / TASKS 1038 / DECISIONS 88 lines (59
-  rows) / TECH_NOTES 773 / README 651 — over-cap on substance
-  (§6.1, the D-095..D-123 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

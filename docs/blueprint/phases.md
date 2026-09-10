@@ -680,6 +680,54 @@ road-traffic counts) is the space pack's own future row — D-116's
 "the space-pack return", the cadence owner (`core/macro.py`) already
 landed.
 
+**The ambient weather family (weather-1, iter-98/D-133 — TASKS'
+"ambient weather + canon erosion"; D-116 (7): an ambient family over
+the existing doors, no physics engine):** the family rides the MACRO
+CLOCK'S cadence — at each crossing, AFTER the turn, the weather CHAIN
+rolls its next state and a CHANGE commits ONE event chained to the
+turn (the drift's precedent: the consumer rides the clock's own
+event); a roll that lands on the current state suppresses the event
+(KI#13's no-op discipline) while still advancing the stream. THE
+CHAIN is pack data — `rules.json::weather` (the closed vocabulary:
+`event_type` + `initial` + `states`, each state's per-state WEIGHTS —
+a Markov chain in data, self-weights keep weather sticky; NO TTL, no
+turn counters, no decay timers, D-049's fence; the reachability law:
+every state reachable from `initial`, the vacuity family). THE
+STREAM: `weather:chain` — the D-079 family law's SEVENTH member,
+SINGLETON (the world's one weather; arming or re-tuning shifts
+neither a canon check draw nor any other family's rolls, the
+substantive fingerprint never sees a weather roll). THE STATE IS THE
+FOLD (L3): the current weather = the last weather event's outcome
+key, the pack's `initial` before the first; the event carries no
+knowledge (the ambient law — a world event, the macro turn's shape)
+and no state_changes. THE SEEDED CONSEQUENCES (TIME-1): the change
+event carries the new state's hook tags — the director's buffer seeds
+them at commit through the existing door (D-005); the storm's murmur
+rides the ambient channel's quiet gate (the D-082 pattern verbatim:
+weight 0, first_time_only). THE EROSION (the fire follow-ups' shape):
+promoted canon objects erode via `state_changes` in SEEDED
+follow-ups — the change event seeds one queue entry per pack-declared
+rule at the crossing + `after_ticks`; the entry's commit scans the
+fold for entities holding the rule's `from` value on the target
+`prop` (the transition layers' follow-up flags — the closure law) and
+emits ONE event per eroded entity (an explicit counter-event, the
+legal revert of a held flag, EVENT_SCHEMA §4; idempotent on state —
+KI#13). The never-regress law: a crossing that fires LATE (a batch
+before a far entry) seeds its follow-ups no earlier than the world's
+resumed tick — the deferral bends, the order never breaks. THE
+COMMITTED ARMING (the primitive's first consumer): `time.macro` at
+the year-scale cadence 518400 (360 days × 1440 — the calendar binding
+continuing the genesis horizon, one year per crossing) + the weather
+block (clear/overcast/rain/storm; rain's wash reverts the fire
+layer's smoke; the storm's drunk-murmur hook) + the three template
+lines. The crossings sit beyond every corpus script's horizon by
+construction: the T1 golden + day1_theft byte-identical, the corpus
+price the LOD's ONE-GATE engagement alone (depth-3's designed price,
+paid at the arming — the warm ring's beat events wait for crossings
+no day-scale run reaches: day1_full's status_decayed/urgency-scan
+counts drop, the day1-family pins re-measured; the weather block
+itself adds zero corpus events).
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the

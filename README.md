@@ -572,6 +572,36 @@ dives `docs/ref/ck3.md` + `docs/ref/azgaar_names.md`), the npc
 id-valued reference — the tale's actor/target + the outcome slots,
 the view's header + the carrier line); the committed pack unarmed
 (zero corpus price, zero re-pins).
+st-6a travel as a separate action landed iter-97 (D-132 — the
+movement twin with an edge price: `ticks: "edge"` the action
+vocabulary's fourth value, `core/travel.py` the price law — the
+pack override wins per edge, else the derived integer function of
+the WorldModel (lattice steps + height-band spread + river
+endpoints, the min cross-pair, no division, draw-free); the accept
+door's `t + price` branch, the crossings fire mid-travel; the
+`_travel` lint — the pairing + coverage laws; the committed pack
+unarmed, the arming rides with world-2's province row).
+weather-1 the ambient weather family landed iter-98 (D-133 — TASKS'
+"ambient weather + canon erosion", D-116 (7)'s "an ambient family
+over the existing doors — no physics engine"): `core/weather.py` the
+chain (the pack-declared states + per-state weights, a Markov chain
+in data — no TTL, no turn counters, D-049's fence), one roll per
+macro crossing on the isolated `weather:chain` stream (the D-079
+family law's seventh member — the substantive fingerprint never
+sees a weather roll), the current weather a fold read (L3), the
+seeded consequences (the storm's hook rides the ambient channel's
+quiet gate, the D-082 pattern), and the EROSION (the fire
+follow-ups' shape: SEEDED follow-ups whose commits revert promoted
+canon flags — the rain washes the fire layer's smoke, an explicit
+counter-event, EVENT_SCHEMA §4); the committed macro ARMING landed
+with it (the primitive's first consumer): the year-scale cadence
+518400 + the weather block + the three template lines — the
+crossings beyond every corpus script's horizon, the T1 golden
+byte-identical, the corpus price the LOD's one-gate engagement
+alone (depth-3's designed price, paid at the arming: the warm
+ring's beat events wait for crossings no day-scale run reaches —
+the day1-family pins re-measured, the weather block itself adds
+zero corpus events). 1586 tests green, ruff clean.
 Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus
@@ -579,7 +609,7 @@ F1–F6 through the REAL mode-C door, the world-answer law's first live
 numbers — coverage 34/34, honest 17/36, F3 the guess engine, F6 two
 injections EXECUTED; the heartbeat's first trend row; the transcripts
 re-distilled into `tests/fixtures/deviation_corpus.json` +
-`tests/test_deviation.py`). 1546 tests green, ruff clean.
+`tests/test_deviation.py`).
 Contract owner `core/traits.py` + BRIEF_SPEC §3.5 +
 `core/reflection.py` + LEGEND_SPEC.md + `core/retrieval.py` +
 phases.md §4 (the retrieval paragraph) + `brief/scene.py` +
@@ -678,8 +708,9 @@ layered-clock primitive: the `time.macro` pack-declared cadence fired
 at the loop's third crossing coarsest-first, the macro-year counter
 bound to the worldgen chronicle horizon, `macro_turn_draft` the D-112
 one-event-with-cardinality emission surface the depth-3/7 +
-st-6a/weather-1 consumers call; the committed pack unarmed — the 68a
-pattern); `core/lod.py` iter-91 (depth-3, D-125 — the scene LOD: the
+st-6a/weather-1 consumers call; the committed pack ARMED since
+weather-1/iter-98 — the year-scale cadence 518400, the arming the
+primitive's first consumer); `core/lod.py` iter-91 (depth-3, D-125 — the scene LOD: the
 three zones' owner, `scene_zones` the pure partition, the cold census
 `cold_npcs` on the macro turn, the one-gate law — armed clock or the
 one-scene world); `core/factions.py` iter-92 (depth-6, D-126 —
@@ -700,7 +731,20 @@ the bounded collision walk against the entity namespace; the
 profiles `rules.json::names.profiles` + the npc `generated_name`
 declaration (the `_names` lint: mutual exclusion, reachability);
 the consumer: depth-7's condensation births the names with the
-memberships; the committed pack unarmed — the 68a pattern); `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
+memberships; the committed pack unarmed — the 68a pattern);
+`core/travel.py` iter-97 (st-6a, D-132 — the travel price law: the
+pack override wins per edge, else the derived integer function of
+the WorldModel — lattice steps + height-band spread + river
+endpoints, the min cross-pair, no division, draw-free; the accept
+door schedules the completion at `t + price`, the crossings fire
+mid-travel); `core/weather.py` iter-98 (weather-1, D-133 — the
+ambient weather family: the chain roll at each macro crossing on
+the isolated `weather:chain` stream (the D-079 family's seventh
+member), the current weather a fold read, the SEEDED erosion
+follow-ups (the fire follow-ups' shape — the rain reverts the
+smoke), the storm's director hook; the committed pack ARMED — the
+macro clock at the year-scale cadence + the weather block, the
+corpus price the LOD's one-gate engagement alone); `brief/`: `assembler.py` iter-8 — the deterministic brief, `docs/BRIEF_SPEC.md` · `validator.py` iter-9 — the validation gate, `docs/VALIDATION_SPEC.md` · `ledger.py` iter-10 — the session scene ledger, `docs/BRIEF_SPEC.md` §3.3 · `mediator.py` iter-12 — the narrator boundary's document layer, D-055 · `parser.py` iter-31 — the phase-2 mode-C boundary, `docs/PARSER_SPEC.md`) |
 | `scripts/` | operator tooling (CLI-class, D-046): `balance_harness.py` iter-6 (the 1000-sim distribution harness, KI#4 close) · `df_survey.py` iter-8e (DF Legends XML empirical survey — the bg-1 sanitize+stream core; measured numbers in `docs/TECH_NOTES.md` §3.1) · `df_import.py` bg-1 (the SQLite sink — typed cores + EAV + participant index + generic JSON records; bg-2: the plus pass, sink v2; `docs/TECH_NOTES.md` §3.2, D-051/D-063) · `df_taxonomy.py` bg-2 (the event-taxonomy survey over the sink DB; `docs/TAXONOMY.md`) · `df_briefer.py` bg-3 (the POV mini-briefer + reverse validation over the sink; `docs/TECH_NOTES.md` §3.3) · `profile_harness.py` iter-30 · `chronicle.py` iter-64 (the mode-F offline chronicler — read_ndjson_auto intake behind the count gate, the parquet pair + the sqlite summary via the stdlib ladder, the content-derived manifest; `[chronicler]` extra, D-093, `docs/TEST_PLAN.md` §7) · `checkpoint.py` iter-80 (depth-4 fold checkpoints — the derived snapshot + event-index offset over one committed log: the pack↔header identity gate, the born-verified re-fold pass, `checkpoint_<offset>.json` + `index.json` the sha256 anchor records under `output/checkpoints/`; `core/checkpoint.py` the mechanism, D-114, `docs/TEST_PLAN.md` §7.1) · `mechanics.py` iter-84 (mech-1, D-118 — the mechanics introspection CLI: matrix/trace/why/blast; the shadow-replay law, INV-2-equal to the runtime; `tests/test_mechanics.py`) · `worldgen_profile.py` iter-89 (geo-1, D-123 — the worldgen timing profile: the site ladder 36→10k over the committed pack's own block, clean + cProfile double-run with the fingerprints compared; the measured numbers in `docs/TECH_NOTES.md` §12) |
 | `tests/`, `tests/playscripts/` | test suite + seed/intent fixtures |
 

@@ -28,6 +28,10 @@
         "to": 1440
       }
     ],
+    "macro": {
+      "cadence_ticks": 518400,
+      "event_type": "year_turns"
+    },
     "notes": "MVP_SCOPE §8: full day ≈ 1440 ticks; 1 hour ≈ 60 ticks; typical action 2–8 ticks (see actions.json)"
   },
   "position_visibility": {
@@ -518,6 +522,55 @@
       "max_edge_span": 1
     }
   },
+  "weather": {
+    "event_type": "weather_turns",
+    "initial": "clear",
+    "states": {
+      "clear": {
+        "weights": {
+          "clear": 5,
+          "overcast": 3,
+          "rain": 1
+        }
+      },
+      "overcast": {
+        "weights": {
+          "clear": 3,
+          "overcast": 3,
+          "rain": 3,
+          "storm": 1
+        }
+      },
+      "rain": {
+        "weights": {
+          "clear": 2,
+          "overcast": 3,
+          "rain": 4,
+          "storm": 1
+        },
+        "erosion": [
+          {
+            "event_type": "smoke_washed_away",
+            "after_ticks": 30,
+            "prop": "smoke",
+            "from": true,
+            "to": false,
+            "irreversible": false
+          }
+        ]
+      },
+      "storm": {
+        "weights": {
+          "clear": 1,
+          "overcast": 3,
+          "rain": 4,
+          "storm": 1
+        },
+        "hooks": ["storm_drunk_murmur"]
+      }
+    },
+    "notes": "weather-1 (iter-98, D-133 — TASKS 'ambient weather + canon erosion'; D-116 (7): an ambient family over the existing doors, no physics engine). The Markov chain in data — per-state weights, self-weights keep weather sticky, NO TTL/turn counters/decay timers (D-049's fence). The chain rides the macro clock's crossings (time.macro above — the pairing law); draws on the isolated weather:chain stream (the D-079 family's seventh member, zero substantive fingerprint). Erosion (the arson family's shape): rain's SEEDED follow-up reverts the fire layer's smoke flag on every location holding it — the explicit counter-event, EVENT_SCHEMA §4; the embers die when the rain sets in. The storm's hook (the director's seeded consequence, TIME-1 SEEDED): the drunk's agitated murmur rides the ambient channel's quiet gate (the D-082 pattern — weight 0, first_time_only). The event: no knowledge (the ambient law — a world event, the macro turn's shape), the state fold-derived (L3: the last weather event's 'weather' key, the initial before the first)."
+  },
   "urgencies": {
     "beat_ticks": [
       360,
@@ -809,6 +862,17 @@
         "channel": "ambient",
         "first_time_only": true,
         "notes": "the ambient driver (content-3, iter-53, D-082 — the DIR-4 declared-but-dormant dimension gains its live consumer, the L4D Music analog): the room's murmur. Trigger-less — the ambient channel's own quiet gate is the whole release path (the hook's weight 0 keeps the ambient entropy exactly 0, the inputless noise floor as declared; the clock stays the global gate: PEAK/REST suppress it like every channel, RAMP/STAGNATION admit it — the multi-channel win: the murmur can return while a threat channel burns). Seeded by idle time itself (the wait action's success hooks list, D-005). first_time_only: one murmur per run — the recurring variant is the recorded-not-built refinement (DIRECTOR_SPEC §11); release_threshold 10: in a mixed quiet buffer the murmur yields to the document checks (5) and ties with the guard's glance by seeding order behind it. The drunkard: the room's own noise source — his static placement the tune-3 law, the coerce urgency his loud half, this his quiet half."
+      },
+      "storm_drunk_murmur": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_drunk_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "weather-1's seeded consequence (iter-98, D-133 — the TASKS row's 'the director's seeded consequences, TIME-1'): the storm's own murmur. The weather_turns event carries the storm state's hook list (D-005 — seeded at event time, the only source of new complications); the release rides the SAME ambient quiet gate as the drunk's idle murmur (the D-082 pattern verbatim: weight 0, first_time_only — one storm murmur per run, the ambient entropy stays 0, no floor flips anywhere). Trigger-less — the weather IS the trigger: the ambient family's events are the hook's whole seeding path (the ramble twin: idle time seeds the one, the sky seeds the other). release_threshold 10: the storm yields to any live confrontation exactly as the idle murmur does. The corpus never crosses a macro year (the 518400 cadence), so this row stays quiet on every day-scale run — live the first time a long run turns the year into a storm."
       }
     },
     "arcs": {

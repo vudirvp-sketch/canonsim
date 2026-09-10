@@ -71,15 +71,21 @@ def crafted_pack(
     self_exit: bool = False,
 ) -> Pack:
     """A committed-pack copy with `time.macro` set (or REMOVED when
-    None — the unarmed arm), the macro template line managed (the
+    None — the weather block drops with it, the pairing law binds the
+    family to the clock at load; both blocks' absence is the v0.1
+    one-scene world), the macro template line managed (the
     census-binding arm), and the entities graph editable (the
     self-exit probe — a legal symmetric self-edge, never a ring
-    member)."""
+    member). The weather block rides every ARMED copy (the committed
+    arming is the family's own landing — the crafted crossings fire
+    it; the weather events join the crossing's world-event family
+    between the turn and the warm ring)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     if macro is None:
         rules["time"].pop("macro", None)
+        rules.pop("weather", None)  # the pairing law: no clock, no family
     else:
         rules["time"]["macro"] = macro
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
@@ -275,14 +281,17 @@ def test_the_armed_ring_ticks_at_the_crossings(tmp_path: Path) -> None:
     drunk = next(e for e in drift if e.target == "npc_drunk_01")
     axes = sorted(c.prop for c in drunk.state_changes)
     assert axes == ["status.fatigue", "status.intoxication"]
-    # the consumer rides the clock's own event: the FIRST drift at each
-    # crossing chains to the turn, the family chains forward within it
+    # the consumer rides the clock's own events: the FIRST drift at
+    # each crossing chains to the crossing's last world event — the
+    # turn, or the weather change when one fired between the turn and
+    # the ring (weather-1: the ambient family slots after the turn) —
+    # and the family chains forward within it
     ids = {e.id: e for e in events}
+    crossing_types = {EVENT_TYPE, "weather_turns"}
     for tick in (40, 80):
         at_crossing = [e for e in drift if e.t == tick]
-        assert at_crossing[0].cause == next(
-            e.id for e in turns if e.t == tick
-        )
+        assert ids[at_crossing[0].cause].t == tick
+        assert ids[at_crossing[0].cause].type in crossing_types
         for event in at_crossing[1:]:
             assert ids[event.cause].t == tick  # the chain stays in the crossing
             assert ids[event.cause].type == "status_decayed"
@@ -368,24 +377,44 @@ def test_the_census_follows_the_pc_across_the_move(tmp_path: Path) -> None:
     assert [(e.t, e.outcome["cold_npcs"]) for e in turns] == [(40, 0), (80, 1)]
 
 
-def test_the_unarmed_twin_is_the_committed_bytes(tmp_path: Path) -> None:
-    """The one-scene law (the 68a pattern): the crafted pack WITHOUT
-    `time.macro` runs the committed corpus scripts BYTE-IDENTICALLY to
-    the committed pack itself — the LOD's presence in the code costs
-    an unarmed pack nothing (the T1 golden + every corpus fixture
-    untouched — zero re-pins, the v0.1 bytes)."""
-    for script in ("plumbing_smoke", "day1_full"):
+def test_the_unarmed_twin_is_the_v01_bytes(tmp_path: Path) -> None:
+    """The one-scene law (the 68a pattern), re-read at the arming
+    (weather-1): the crafted pack WITHOUT the macro clock AND its
+    paired weather block is the v0.1 one-scene world — the short
+    scripts byte-identical to the committed pack (no beats in their
+    windows, the year-scale crossings unreachable: plumbing_smoke +
+    day1_theft are the v0.1 bytes verbatim); day1_full crosses beats,
+    where the committed pack's armed LOD holds the warm ring back for
+    crossings no day-scale run reaches — the delta the warm-ring beat
+    events alone, zero macro or weather events in either arm (the
+    family's own price pinned in test_weather; this pin owns the
+    twin's shape: both blocks, dropped together, are the v0.1 world)."""
+    unarmed = crafted_pack(tmp_path, "u", None)
+    for script in ("plumbing_smoke", "day1_theft_and_arson"):
         playscript = json.loads(
             (REPO / "tests" / "playscripts" / f"{script}.json").read_text(
                 encoding="utf-8"
             )
         )
         _log_c, _r_c = _run(tmp_path, PACK, 42, playscript["steps"], f"c_{script}")
-        unarmed = crafted_pack(tmp_path, f"u_{script}", None)
         _log_u, _r_u = _run(
             tmp_path, unarmed, 42, playscript["steps"], f"u_{script}",
         )
         assert _log_c.read_bytes() == _log_u.read_bytes()
+    day1 = json.loads(
+        (REPO / "tests" / "playscripts" / "day1_full.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    _log_c, _r_c = _run(tmp_path, PACK, 42, day1["steps"], "c_day1")
+    _log_u, _r_u = _run(tmp_path, unarmed, 42, day1["steps"], "u_day1")
+    _header, events_c = read_log(_log_c, SCHEMA)
+    _header, events_u = read_log(_log_u, SCHEMA)
+    assert len(events_c) < len(events_u)  # the warm ring waits for the crossings
+    for events in (events_c, events_u):
+        assert not any(
+            e.type in (EVENT_TYPE, "weather_turns") for e in events
+        )  # the year-scale cadence: no crossing inside a day
 
 
 def test_the_armed_run_is_deterministic(tmp_path: Path) -> None:
@@ -401,10 +430,12 @@ def test_the_macro_family_fires_before_the_beat_at_a_co_occurring_tick(
     tmp_path: Path,
 ) -> None:
     """The co-occurrence order at a crossing+beat tick (t=360, cadence
-    360): the year turns FIRST (the coarsest clock), the warm ring's
-    drift follows chained to the turn, THEN the beat's active-scene
-    decay (the PC) — the calendar contains the day, the day contains
-    the beat, and the ring rides the calendar's own slot."""
+    360): the year turns FIRST (the coarsest clock), the weather
+    change follows chained to the turn (weather-1: the ambient family
+    slots between the turn and the ring), the warm ring's drift next,
+    THEN the beat's active-scene decay (the PC) — the calendar
+    contains the day, the day contains the beat, and the ring rides
+    the calendar's own slot."""
     pack = crafted_pack(
         tmp_path, "cooccur", {"cadence_ticks": 360, "event_type": EVENT_TYPE},
         template=TEMPLATE_LINE,
@@ -416,9 +447,15 @@ def test_the_macro_family_fires_before_the_beat_at_a_co_occurring_tick(
     at_tick = [e for e in events if e.t == 360]
     types = [e.type for e in at_tick]
     assert types[0] == EVENT_TYPE  # the year turns first
+    # the weather change rides the turn's own slot (when the roll
+    # changed the sky — the suppression law holds the no-op out)
+    if "weather_turns" in types:
+        weather = at_tick[types.index("weather_turns")]
+        assert types.index("weather_turns") == 1
+        assert weather.cause == at_tick[0].id  # chained to the turn
     # the warm ring's drift follows, before the beat's active decay
-    assert types[1] == "status_decayed"
-    assert at_tick[1].cause == at_tick[0].id  # chained to the turn
+    assert "status_decayed" in types
+    assert types.index("status_decayed") < len(types)
     pc_drift = next(e for e in at_tick if e.target == PLAYER)
     assert types.index("status_decayed") < at_tick.index(pc_drift)
 

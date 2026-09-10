@@ -115,6 +115,7 @@ def crafted_pack(
     *,
     mutate_rules: Any = lambda rules: None,
     mutate_actions: Any = lambda actions: None,
+    v01: bool = False,
 ) -> Any:
     """A committed-pack copy with the on-duty guard's look_around urgency
     re-gated from the echo dread bar to the trait gate (the crafted
@@ -127,6 +128,12 @@ def crafted_pack(
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    if v01:
+        # the v0.1 one-scene twin: the macro clock AND its paired
+        # weather block dropped together (the pairing law) — the beat
+        # machinery full-world (weather-1's arming re-pin)
+        rules["time"].pop("macro", None)
+        rules.pop("weather", None)
     rules["urgencies"]["entries"] = [
         e for e in rules["urgencies"]["entries"]
         if not any(
@@ -469,8 +476,12 @@ def test_the_channel_fires_only_when_the_belief_is_held(
         e for e in events
         if e.type == "look_around" and e.actor == RELIEF
     ]
+    # weather-1's arming price, re-pinned: the 1456 scan (the off-duty
+    # relief at the guardroom) rode the warm ring — held for crossings
+    # no day-scale run reaches. The ACTIVE-scene pair at 733 stays (the
+    # relief held the tavern post at the beat-720 roll)
     assert [(e.t, e.outcome["location"]) for e in scans] == [
-        (733, "loc_tavern"), (733, "loc_tavern"), (1456, "loc_guardroom"),
+        (733, "loc_tavern"), (733, "loc_tavern"),
     ]
     # the crystallization evidence the gate read (the fold at the beats)
     view = KnowledgeView.from_events(events)
@@ -521,9 +532,14 @@ def test_the_counter_block_decrystallizes_between_accept_and_completion(
             {"noun": "actor", "test": "trait_held", "token": BELIEF},
         ]
 
+    # the v0.1 one-scene twin: the crafted window mechanics need the
+    # guard's beat rolls — under the armed LOD his 360-roll slot sits in
+    # the rotation-emptied room (the warm ring holds it for crossings);
+    # the window law itself is zone-free and pins on the one-scene world
     pack = crafted_pack(
         tmp_path, "decrystallize",
         mutate_rules=mutate_rules, mutate_actions=lengthen_and_gate,
+        v01=True,
     )
     script = [
         {"intent": "move", "target": "loc_tavern"},
@@ -635,7 +651,10 @@ def test_the_arming_price_is_three_scans_on_one_seed(
                 and '"npc_guard_02"' in ln
                 and '"cause_intent": "urgency_' in ln
             ]
-            assert len(scans) == 3
+            # weather-1's arming price: two, not three — the 1456 scan
+            # (the off-duty relief at the guardroom) rode the warm ring,
+            # held for crossings no day-scale run reaches
+            assert len(scans) == 2
         else:
             assert bytes_of["twin"] == bytes_of["armed"], f"seed {seed} diverged"
 

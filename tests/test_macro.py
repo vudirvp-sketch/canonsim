@@ -94,18 +94,21 @@ def crafted_pack(
     beat_ticks: list[int] | None = None,
 ) -> Pack:
     """A committed-pack copy with `time.macro` set (or REMOVED when
-    None — the unarmed arm), the worldgen block kept (True — the
-    calendar binding's armed end) or removed (False — the unarmed-
-    worldgen twin: the counter counts from 0), the macro template line
-    managed (True: the line; False: the closure-refusal arm removes it
-    from templates too), the story-critical listing managed (the tale
-    visibility arm), and the rotation/beat cadences overridable (the
-    co-occurrence probes)."""
+    None — the weather block drops with it, the pairing law binds the
+    family to the clock at load; iter-98's arming means the committed
+    pack's own weather block rides every copy), the worldgen block kept
+    (True — the calendar binding's armed end) or removed (False — the
+    unarmed-worldgen twin: the counter counts from 0), the macro
+    template line managed (True: the line; False: the closure-refusal
+    arm removes it from templates too), the story-critical listing
+    managed (the tale visibility arm), and the rotation/beat cadences
+    overridable (the co-occurrence probes)."""
     target = tmp_path / name
     shutil.copytree(REPO / "content" / "tavern_pack", target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     if macro is None:
         rules["time"].pop("macro", None)
+        rules.pop("weather", None)  # the pairing law: no clock, no family
     else:
         rules["time"]["macro"] = macro
     if not worldgen:
@@ -228,9 +231,15 @@ def test_the_year_is_derived_never_stored() -> None:
 
 def test_the_counter_reads_only_an_armed_clock() -> None:
     """`macro_year` on an unarmed pack is a caller bug — loud, never a
-    silent zero (the counter would otherwise read as a real year)."""
+    silent zero (the counter would otherwise read as a real year). The
+    unarmed probe pops the block from a COPY of the rules (the
+    committed pack has been ARMED since weather-1 — the arming rides
+    the ambient family's row, the primitive's first consumer)."""
+    unarmed = dict(PACK.rules)
+    unarmed["time"] = {**dict(PACK.rules["time"])}
+    unarmed["time"].pop("macro", None)
     with pytest.raises(MacroError, match="no time.macro"):
-        macro_year(dict(PACK.rules), 40)
+        macro_year(unarmed, 40)
 
 
 # -- the aggregate emission surface (unit) -------------------------------------
@@ -274,7 +283,10 @@ def test_the_refuses_the_counter_key_and_non_counts() -> None:
     with pytest.raises(MacroError, match="cardinality"):
         macro_turn_draft(_armed_rules(True), 40, {"caravans": "3"})
     with pytest.raises(MacroError, match="no time.macro"):
-        macro_turn_draft(dict(PACK.rules), 40)
+        unarmed = dict(PACK.rules)
+        unarmed["time"] = {**dict(PACK.rules["time"])}
+        unarmed["time"].pop("macro", None)
+        macro_turn_draft(unarmed, 40)
 
 
 def test_the_story_critical_listing_decides_tale_visibility() -> None:
@@ -336,30 +348,36 @@ def test_the_unarmed_worldgen_twin_counts_from_zero(
 def test_the_corpus_price_is_the_macro_events_alone(
     tmp_path: Path,
 ) -> None:
-    """The both-arms measurement (D-108), re-pinned at iter-91 (depth-3,
-    the surface's FIRST consumer): the armed arm vs the unarmed twin
-    (the block's PRESENCE alone differs) — the substantive fingerprint
-    EQUAL (the clock draws nothing; the warm ring's rolls ride the
-    isolated urgency streams, no intent lands at this seed), the event
-    delta the macro family alone: the turns + the warm ring's drift
-    (the consumer's designed events — the LOD's price, paid only by
-    the armed arm). The unarmed arm of the COMMITTED pack is the v0.1
-    bytes themselves (T1's golden pin — zero price by construction)."""
+    """The both-arms measurement (D-108), re-pinned at the arming
+    (weather-1, the ambient family — the primitive's first consumer):
+    the armed arm vs the unarmed twin (the macro AND weather blocks'
+    PRESENCE alone differs, the pairing law drops them together) — the
+    substantive fingerprint EQUAL (the clock draws nothing; the warm
+    ring's rolls ride the isolated urgency streams; the weather's
+    chain rolls ride its own family stream), the event delta the
+    crossing's world families alone: the turns + the weather changes +
+    the warm ring's drift (the consumers' designed events — the LOD's
+    price, paid only by the armed arm)."""
     armed_pack = crafted_pack(tmp_path, "ab_armed", ARMED)
     unarmed_pack = crafted_pack(tmp_path, "ab_unarmed", None)
     log_a, result_a = _run(tmp_path, armed_pack, 42, WAIT_100, "ab_armed")
     log_u, result_u = _run(tmp_path, unarmed_pack, 42, WAIT_100, "ab_unarmed")
     _header, events_a = read_log(log_a, SCHEMA)
     _header, events_u = read_log(log_u, SCHEMA)
-    assert result_a.fingerprint == result_u.fingerprint  # zero substantive draws on the macro path
+    # zero substantive draws on the macro/weather path (both isolated)
+    assert result_a.fingerprint == result_u.fingerprint
     turns_a = [e for e in events_a if e.type == EVENT_TYPE]
+    skies_a = [e for e in events_a if e.type == "weather_turns"]
     # the warm ring's drift: the armed arm's status_decayed events (the
     # 100-tick window holds no beat, so every decay event is the ring's)
     drift_a = [e for e in events_a if e.type == "status_decayed"]
-    assert len(events_a) == len(events_u) + len(turns_a) + len(drift_a)
-    # the committed pack (no time.macro block) is the unarmed arm's twin:
-    # zero macro events in its golden fixture (T1) — the v0.1 bytes
-    assert not any(e.type == EVENT_TYPE for e in events_u)
+    assert len(events_a) == len(events_u) + len(turns_a) + len(skies_a) + len(drift_a)
+    # the unarmed arm holds neither family: the year-scale committed
+    # arming leaves zero macro events in the day-scale corpus (T1's
+    # golden pin — the v0.1 bytes carry no crossings by construction)
+    assert not any(
+        e.type in (EVENT_TYPE, "weather_turns") for e in events_u
+    )
 
 
 def test_same_seed_renders_byte_identical_runs(tmp_path: Path) -> None:
@@ -453,8 +471,12 @@ def test_the_lint_refuses_the_broken_arming(tmp_path: Path) -> None:
             crafted_pack(tmp_path, f"lint_{index}", macro)
 
 
-def test_the_armed_packs_load_and_the_committed_pack_stays_unarmed() -> None:
-    """The committed pack declares no `time.macro` block (the 68a
-    pattern — the arming rides with the first consumer); the crafted
-    arming loads clean (the lint passes what the run path reads)."""
-    assert "macro" not in PACK.rules["time"]
+def test_the_armed_packs_load_and_the_committed_pack_is_armed() -> None:
+    """The committed pack's arming landed (weather-1's row, the
+    primitive's first consumer): the year-scale cadence — 360 days of
+    the pack's own day, one year per crossing, the calendar binding
+    continuing the genesis horizon (150); the crafted short arming
+    loads clean beside it (the lint passes what the run path reads)."""
+    assert PACK.rules["time"]["macro"] == {
+        "cadence_ticks": 518400, "event_type": EVENT_TYPE,
+    }

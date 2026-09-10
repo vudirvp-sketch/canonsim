@@ -39,6 +39,24 @@ from render.chronicle import render_chronicle
 REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 PACK = load_pack(REPO / "content" / "tavern_pack")
+
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat. The ambient driver's beat-ripple behavior pins here in
+    isolation; the armed pack's own price (the warm ring waits for
+    crossings no day-scale run reaches) is test_weather's corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
 DAY1 = json.loads((REPO / "tests" / "playscripts" / "day1_full.json").read_text())
 
 TAG = "ambient_drunkard_ramble"
@@ -267,6 +285,8 @@ def test_the_weight_zero_footprint_the_fingerprint_identity(
     mentions the drunkard's rambling; a guard with nothing novel
     briefs nothing, the stripped arm's shape)."""
     def mutate_rules(rules: dict[str, Any]) -> None:
+        rules["time"].pop("macro", None)
+        rules.pop("weather", None)  # the pairing law: the v0.1 twin's shape
         rules["director"]["hooks"].pop(TAG)
         # depth-5b: the genesis seeds the murmur too — stripping the hook
         # strips its world-side seeding (the lint's declared-hook law)
@@ -279,7 +299,7 @@ def test_the_weight_zero_footprint_the_fingerprint_identity(
 
     stripped = _variant_pack(tmp_path, mutate_rules, mutate_actions)
     live_events, _, live_result = run_script(
-        tmp_path, QUIET, pack=PACK, label="live"
+        tmp_path, QUIET, pack=v01_pack(tmp_path), label="live"
     )
     stripped_events, _, stripped_result = run_script(
         tmp_path, QUIET, pack=stripped, label="fp"

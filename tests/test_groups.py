@@ -447,7 +447,12 @@ def test_the_cold_group_aggregates_at_the_crossings(tmp_path: Path) -> None:
         assert aggregate.actor == GROUP
         assert aggregate.outcome == {POPULATION_KEY: 2}  # the group's own
         turn = next(e for e in events if e.type == MACRO_EVENT and e.t == aggregate.t)
-        assert aggregate.cause == turn.id
+        # weather-1: the ambient family's change (when the roll moved
+        # the sky) slots between the turn and the tier events — the
+        # chain target is the crossing's own last world event
+        cause_event = next(e for e in events if e.id == aggregate.cause)
+        assert cause_event.t == aggregate.t
+        assert cause_event.type in (MACRO_EVENT, "weather_turns")
         assert events.index(aggregate) > events.index(turn)
     assert not any(e.type == COND_EVENT for e in events)
     state = fold(events, initial_projection(pack.entities))
@@ -473,7 +478,12 @@ def test_the_warm_group_condenses_at_the_first_crossing(tmp_path: Path) -> None:
     assert condensation.actor == GROUP
     assert condensation.outcome == {MEMBERS_KEY: 2}
     turn = next(e for e in events if e.type == MACRO_EVENT and e.t == 40)
-    assert condensation.cause == turn.id
+    # weather-1: the ambient family's change slots between the turn and
+    # the tier events — the chain target is the crossing's own last
+    # world event (the turn or the sky's change)
+    cause_event = next(e for e in events if e.id == condensation.cause)
+    assert cause_event.t == 40
+    assert cause_event.type in (MACRO_EVENT, "weather_turns")
     assert events.index(condensation) > events.index(turn)
     assert not any(e.type == AGG_EVENT for e in events)
     state = fold(events, initial_projection(pack.entities))

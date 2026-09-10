@@ -502,17 +502,9 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > sequencing (prosefloor-2, then the phase-5 start signal) is STATUS
 > Next's.
 
-- `weather-1` · ambient weather + canon erosion — todo, owner-gated:
-  weather as ambient-channel events (the director's seeded
-  consequences, TIME-1) + erosion of promoted canon objects via
-  `state_changes` in seeded follow-ups (the arson family's shape);
-  all pack data over the existing doors (INV-3) — no TTL, no turn
-  counters, no decay timers (D-049); persistence is the promotion
-  door's (st-2). Gate: phase 5 (the ambient channel + macro clocks
-  — bridge-1 + maclock-1 both LANDED, the gate satisfied) or pack-1;
-  the macro cadence the ambient family rides is `core/macro.py`'s
-  (maclock-1, D-124 — the committed pack's arming rides here, the
-  primitive's first consumer).
+- `weather-1` · ambient weather + canon erosion — done (iter-98,
+  D-133): the chain + the erosion + the committed macro arming.
+  Detail: `core/weather.py` + tests/test_weather.py + phases.md §5.
 - `companion-1` · the companion/party role — todo, owner-gated: pack
   data over the existing doors, zero new core systems — follow-duty
   in the rotation/urgency grammar, mode B actors voice (scene-1),
