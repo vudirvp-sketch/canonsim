@@ -69,6 +69,7 @@ from core.groups import (
 from core.log import StateChange, read_log
 from core.loop import Simulator
 from core.pack import Pack, PackError, load_pack
+from core.rng import RngBank
 from render.chronicle import render_chronicle
 
 REPO = Path(__file__).resolve().parents[1]
@@ -299,7 +300,9 @@ def test_the_condensation_births_the_members(tmp_path: Path) -> None:
     marker LAST; the outcome carries the canon membership's size."""
     _dir, pack = tier_pack(tmp_path, "cond_unit")
     projection = initial_projection(pack.entities)
-    drafts = condensation_drafts(pack, projection, 40, locations=(ANCHOR,))
+    drafts = condensation_drafts(
+        RngBank(42), pack, projection, 40, locations=(ANCHOR,)
+    )
     assert len(drafts) == 1
     draft = drafts[0]
     assert draft.type == COND_EVENT
@@ -323,7 +326,9 @@ def test_the_skip_law_never_rebirths(tmp_path: Path) -> None:
     projection = initial_projection(pack.entities)
     projection[MEMBERS[0]][MEMBER_OF_PROP] = GROUP  # a runtime join
     projection[MEMBERS[1]][MEMBER_OF_PROP] = OTHER  # a transfer out
-    drafts = condensation_drafts(pack, projection, 40, locations=(ANCHOR,))
+    drafts = condensation_drafts(
+        RngBank(42), pack, projection, 40, locations=(ANCHOR,)
+    )
     assert len(drafts) == 1
     draft = drafts[0]
     assert draft.state_changes == (
@@ -338,11 +343,15 @@ def test_the_marker_is_write_once(tmp_path: Path) -> None:
     stays silent)."""
     _dir, pack = tier_pack(tmp_path, "once_unit")
     projection = initial_projection(pack.entities)
-    first = condensation_drafts(pack, projection, 40, locations=(ANCHOR,))
+    first = condensation_drafts(
+        RngBank(42), pack, projection, 40, locations=(ANCHOR,)
+    )
     assert len(first) == 1
     for change in first[0].state_changes:  # fold the event (T2 discipline)
         projection[change.entity][change.prop] = change.to_
-    assert condensation_drafts(pack, projection, 80, locations=(ANCHOR,)) == ()
+    assert condensation_drafts(
+        RngBank(42), pack, projection, 80, locations=(ANCHOR,)
+    ) == ()
 
 
 def test_the_opt_in_law_per_group(tmp_path: Path) -> None:
@@ -354,7 +363,9 @@ def test_the_opt_in_law_per_group(tmp_path: Path) -> None:
     )
     projection = initial_projection(pack.entities)
     assert macro_tick_drafts(pack, projection, 40, locations=(ANCHOR,)) == ()
-    assert condensation_drafts(pack, projection, 40, locations=(ANCHOR,)) == ()
+    assert condensation_drafts(
+        RngBank(42), pack, projection, 40, locations=(ANCHOR,)
+    ) == ()
 
 
 # -- the member_of door (D-020's pair-relation, fold-validated) ---------------

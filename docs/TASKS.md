@@ -281,15 +281,32 @@ header law — the detail lives in git + worklog + D-110..D-113)
   68a pattern — the arming rides with the primitive's first
   consumer), corpus price zero measured both arms. Detail:
   tests/test_macro.py + D-124.
-- `name-1` · the name generator (W2, beside depth-7) — todo:
-  pack-declared phonotactic profiles (culture-keyed n-gram pools —
-  the CK3/Azgaar donor shape; deep dive owed at the row: ref-19,
-  DEEP §1), pure functions over per-stream draws (the D-079 family
-  law; INV-2 deterministic, INV-3 clean — phonotactics are pack
-  data, the generator is pure functions); the consumers: depth-7's
-  condensation canon-birth events (region_00 does not scale) +
-  world-2's cultures. Output linted against the entity namespace
-  (no collision).
+- `name-1` · the name generator — **done (iter-96, D-131)**: the
+  D-079 family law's sixth member — `core/names.py::materialize_name`
+  the lazy per-npc materialization (the scene-detail twin: ONE birth
+  (member, "name", None -> drawn) on the npc's own `name:<npc>`
+  stream — per-declaration isolation, first-commit-wins, canon never
+  redraws), the profiles `rules.json::names.profiles` (the
+  culture-keyed syllable-component pools + count bounds — the Azgaar
+  nameBase shape, the CK3 culture keying + the id↔display split; the
+  ref-19 dives `docs/ref/ck3.md` + `docs/ref/azgaar_names.md`), the
+  npc `generated_name` declaration (the lint: the mutual exclusion
+  with the authored `name`, the reachability law — a declaring npc
+  must ride a condensing group's membership, the depth-5b family),
+  the output-namespace law (the bounded collision walk against every
+  declared entity id, the loud refusal — the render's id↔display
+  mapping stays injective); THE CONSUMER: depth-7's condensation
+  event carries each member's name birth paired with the membership
+  birth (one member, one block), the outcome's `names` key the
+  template surface (branching — a bare {names} on a nameless
+  condensation is an unknown slot); the read surface fold-first (the
+  chronicle's running fold, the scene card + entity views, the
+  brief's delta lines + entity cards); the committed pack unarmed
+  (the 68a pattern — the arming rides with world-2's cultures row).
+  +28 tests, 1516→1544+1 green, corpus price zero by construction
+  (the inert twin byte-identical over the committed scripts; the
+  armed delta the name births + the `names` key alone, the
+  fingerprint equal). Detail: tests/test_names.py + D-131.
 - `world-2` · the second world, the phase-6 gate's own instrument
   (W4, owner-gated — new name: pack-2 is the made iter-29
   door-check) — todo: the TWO-LEVEL gate — level 1 the T1 reskin

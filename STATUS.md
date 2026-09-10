@@ -1,59 +1,60 @@
-Iteration: iter-95 (`iter-95-intake8` — research intake 8, the
-setting-direction verdict set routed, doc-only: the owner's 2026-09-11
-chat call — where the tavern-polygon grows, a setting survey across
-other projects & universes, the own-vs-embedded world question, the
-generator-leverage ask; the clone verified BEFORE routing (1516
-passed +1 skipped, ruff clean, Python 3.12.14 the env pin, HEAD
-`a78e2f1`); D-130 the verdict set — the THREE-TIER setting posture:
-the repo's public 2nd setting is ORIGINAL (the province sketch — a
-poor frontier province on a river trade artery, authored pillars
-over a generated surface, `docs/blueprint/phases.md` §6, riding
-world-2's level-2 half), the level-1 T1 reskin instrument is the
-OPEN generic stack (SRD 5.1/Open5e — REFERENCES §13's phase-6
-starter table, CREDITS sidecar), a proprietary-universe fan-pack is
-OWNER-LOCAL data outside the repo (the convenience-copy law family;
-the narrator renders the flavor from pillar tokens — zero repo
-footprint, low priority); the MINUS LEDGER — ten catalogued minuses
-mapped to the standing laws that already cure them (canonless
-drift→INV-1/INV-5; incident theater→D-005; static lore→bridge-1;
-knowledge metagates→L6; mono-resource→res-1's closed cycle; tone
-lock→D-030; unreadable depth→mode A/F + story-critical; fake
-causality→the cause TREE; generic mush→estrangement-as-data;
-player-centered world→the cold tiers + macro aggregates); the
-CATALOG additions — REFERENCES §10 +6 pattern rows (Morrowind, the
-TES anti-row, Discworld, FNV, Pathologic, Caves of Qud); NO new
-backlog rows (the material rides the existing W4/phase-6 rows —
-just-in-time, the D-096 precedent); the queue untouched — name-1
-stays pinned) ·
+Iteration: iter-96 (`iter-96-name1` — the name generator, the
+STATUS queue's W2 row after depth-7: D-116 (12) the Azgaar split —
+condensation's canon-birth events need names, `region_00`-style ids
+do not scale; the ref-19 dives owed at the row landed with it
+(`docs/ref/ck3.md` + `docs/ref/azgaar_names.md`); the clone verified
+BEFORE working — 1516+1, ruff clean, HEAD c0fa677, Python 3.12.14
+the env pin; +28 tests, 1516→1544+1 green, ruff clean, seed 42
+determinism pinned; D-131 the record — the D-079 family law's SIXTH
+member `name:<npc>` (per-declaration isolation, lazy registration,
+the scene-detail twin), the pack data `rules.json::names.profiles`
+(the culture-keyed phonotactic pools + bounds) + the npc
+`generated_name` declaration (mutual exclusion with the authored
+`name`, the reachability law — a condensing group membership),
+`core/names.py::materialize_name` the lazy door (ONE birth (npc,
+"name", None→drawn), first-commit-wins, the bounded collision walk
+against the entity namespace — the output-namespace law, the loud
+refusal), THE CONSUMER depth-7's condensation (the name births
+paired with the membership births, the outcome's `names` key —
+the line must branch), the read surface fold-first (the chronicle's
+running fold, the scene card + entity views, the brief's delta
+lines + entity cards); the committed pack unarmed — the 68a
+pattern, the inert twin byte-identical over the committed corpus
+scripts, the armed delta the name births + the `names` key alone,
+the fingerprint equal, zero re-pins) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
-depth-7 LANDED,
-the queue: name-1 per D-116's wave order; st-6a a live
-candidate (its gate chain satisfied); weather-1's gate satisfied)
-· 1516
+depth-7 + name-1 LANDED,
+the queue: st-6a the next live candidate (its gate chain
+satisfied); weather-1's gate satisfied) · 1544
 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
-42 + 0 + 125 spot-checked).
+42 pinned, the both-arms + inert-twin prices measured).
 ·
 Date: 2026-09-11 ·
-Scope: `docs/REFERENCES.md` (§10 — six pattern rows),
-`docs/blueprint/phases.md` (§6 — the 2nd-setting design material),
-`docs/TASKS.md` (the intake-8 section + the world-2 pointer),
-`docs/DECISIONS.md` (D-130), `worklog.md`, `STATUS.md` (this file) —
-6 files (git-verified: 6 modified, 0 new; doc-only, the
-iter-85/94 intake footprint family; AGENTS §2.3: 6 > 5-6, the
-one-family objective scope noted in worklog): zero code, zero
-tests, zero pack/fixtures — the suite re-run post-edit green
-(1516+1, ruff clean). DOC-ONLY STREAK: iter-94 + iter-95 both
-doc-only — both the owner's explicit research calls (the intake
-family), NOT an agent documentation loop; AGENTS §2.5's alarm
-letter noted here on record; iter-96 should be functional (name-1
-the pinned row) or the streak surfaces for the owner's call.
-DECISIONS 66 rows mid-phase — the D-034 collapse owed at the
+Scope: `core/names.py` (new), `core/rng.py` (the sixth family),
+`core/groups.py` (the condensation consumer), `core/pack.py` (the
+`_names` lint), `core/loop.py` (the bank ride),
+`render/chronicle.py` + `brief/assembler.py` (the born-name read),
+`tests/test_names.py` (new) + `tests/test_groups.py` (the signature
+ride), `docs/ref/ck3.md` + `docs/ref/azgaar_names.md` (new, the
+ref-19 dives), `docs/REFERENCES_DEEP.md`,
+`docs/blueprint/phases.md` (§5), `docs/EVENT_SCHEMA.md` (§4),
+`docs/AGENT_NAVIGATION.md` (§1), `docs/TASKS.md`,
+`docs/DECISIONS.md` (D-131), `worklog.md`, `STATUS.md` (this
+file) — 19 files (git-verified: 15 modified + 4 new; the
+one-family objective scope — the stream + the generator + the lint
++ the condensation consumer + the read surface + the dives are one
+row; AGENTS §2.3: 18 > 5-6, noted in worklog): the doc-only streak
+(iter-94 + 95) BROKEN by a functional iteration — AGENTS §2.5's
+alarm resolved on record; zero pack/fixtures — the committed pack
+untouched (the 68a pattern; zero re-pins by construction, the
+corpus scripts byte-identical).
+DECISIONS 67 rows mid-phase — the D-034 collapse owed at the
 phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
 effect line).
-· The prior iteration's record: iter-94 (intake-7, D-128/D-129 —
-the Anthropic-2026 agent corpus routed). The detail lives in TASKS +
+· The prior iteration's record: iter-95 (intake-8, D-130 — the
+setting-direction verdict set routed). The detail lives in TASKS +
 worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -662,12 +663,24 @@ the condensation on crossing the warm transition (ONE event per
 group: the un-born members' canon births + the write-once
 tombstone; detected at the zone recomputations — beats AND
 crossings, the load state the origin); the per-group opt-in, the
-committed pack unarmed — zero re-pins) → `name-1`
-the name generator (D-116: the Azgaar
-split — condensation's canon-birth events need names). st-6(a)
-travel is a live candidate (its gate chain satisfied: depth-5 +
-place-1 + maclock-1 LANDED — the claim↔exits consistency the
-derived travel prices
+committed pack unarmed — zero re-pins) → `name-1` the name
+generator LANDED (iter-96, D-131 — the D-079 family law's sixth
+member `name:<npc>`, `core/names.py` the lazy materialize door (the
+scene-detail twin: one birth per declaring member, first-commit-wins,
+the bounded collision walk against the entity namespace), the
+profiles `rules.json::names.profiles` + the npc `generated_name`
+declaration (the lint: mutual exclusion, reachability — a condensing
+group membership), the consumer depth-7's condensation event (the
+name births paired with the membership births, the outcome's `names`
+key, the line must branch), the read surface fold-first (the
+chronicle, the scene card + entity views, the brief's cards + delta
+lines); the ref-19 dives landed with it (ck3.md — the culture-keyed
+data shape; azgaar_names.md — the generator half); the committed
+pack unarmed, the inert twin byte-identical, the armed delta the
+name births alone, the fingerprint equal — zero re-pins) →
+`st-6(a)` travel the NEXT candidate (a live one: its gate chain
+satisfied — depth-5 + place-1 + maclock-1 LANDED — the
+claim↔exits consistency the derived travel prices
 read; the price law amended — derived from the WorldModel, pack
 override wins). W3
 closes without rows: the calendar binding LANDED as maclock-1's own
@@ -770,9 +783,13 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    behaviors pass unchanged); corpus price zero — the inert twin
    byte-identical seeds 42/0/125, the armed arm's delta the tier
    families alone, the fingerprint equal);
+   name-1 LANDED (iter-96, D-131 — the generator + the condensation
+   consumer + the fold-first read surface, the ref-19 dives landed
+   with it; +28 tests, the committed pack unarmed, zero re-pins);
    the
-   queue: name-1 (D-116: the Azgaar split — condensation's
-   canon-birth events need names); the
+   queue: st-6(a) (the travel row, its gate chain satisfied — the
+   next live candidate per D-116's wave order, name-1 the last W2
+   row closed); the
    exit
    criterion "an
    emergent chain of
@@ -783,7 +800,7 @@ scarcity gets its row owner), `roads-1` (the generated exits).**
    §4): Azgaar FMG (states + chronology + the name pools — the D-116
    split; cultures/religions/burgs re-gated to phase 6), Neighborly
    (the closest cousin's architecture reading). The phase-5 spatial
-   row `st-6(a)` (travel as a separate action) is a live candidate
+   row `st-6(a)` (travel as a separate action) is the next live candidate
    (its gate chain satisfied: depth-5 + place-1 + maclock-1 LANDED,
    D-122/D-124 — the
    claim↔exits consistency the derived travel prices read; D-116: the price law amended — derived

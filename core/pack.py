@@ -444,6 +444,10 @@ class _Lint:
         # reads the entities' groups, the states axes, and the actions,
         # all validated before it.
         self._factions()
+        # name-1 (iter-96): after _factions — the sibling block reads
+        # the entities' npcs + groups (the members' reachability) and
+        # the rules' own names block, all validated before it.
+        self._names()
         self._director()
         self._on_action()
         self._secrets()
@@ -1720,6 +1724,129 @@ class _Lint:
                             f"{where}: precondition {param} {cond[param]!r} "
                             f"must be one of {list(_NOUNS)}",
                         )
+
+    # -- names (name-1, iter-96: the phonotactic profiles + the
+    # declarations' reachability) --------------------------------------------
+
+    def _names(self) -> None:
+        """The name generator's pack contract (name-1, TASKS; D-116
+        (12)): `rules.json::names` — the phonotactic PROFILES,
+        culture-keyed n-gram pools (the closed vocabulary: onsets |
+        nuclei | codas | syllables | notes; the pools' entries ASCII
+        letter fragments, the empty fragment legal in onsets/codas —
+        vowel initials and open syllables — never in nuclei, a
+        syllable needs its vowel; the bounds a 2-int [min, max] with
+        min >= 1 — a zero-syllable name is dead data, the vacuity
+        family; no upper ceiling, the bounds are pack tuning). The
+        npc record's `generated_name` key names a DECLARED profile,
+        mutually exclusive with an authored `name` (one name origin
+        per npc — `name` stays the pure string surface every reader
+        already knows). The REACHABILITY law (the depth-5b family:
+        an armed declaration names at least one LIVE consumer): a
+        generated_name npc must ride a group declaring
+        `condense_event` — the materialization door; a declaration
+        nothing can materialize is dead data, refused."""
+        rules = self._data["rules.json"]
+        entities = self._data["entities.json"]
+        config = rules.get("names")
+        profiles: Mapping[str, Any] = {}
+        if config is not None:
+            _require(
+                isinstance(config, Mapping),
+                "names must be an object",
+            )
+            unknown = sorted(set(config) - {"profiles", "notes"})
+            _require(
+                not unknown,
+                f"names: unknown keys {unknown} (the closed vocabulary: "
+                "profiles | notes)",
+            )
+            _require(
+                isinstance(config.get("profiles", {}), Mapping),
+                "names.profiles must be an object (profile id -> the "
+                "phonotactic record)",
+            )
+            profiles = config.get("profiles", {})
+        for profile_id, record in profiles.items():
+            where = f"names.profiles[{profile_id!r}]"
+            _require(
+                isinstance(profile_id, str) and profile_id.strip(),
+                f"{where}: profile ids must be non-empty strings",
+            )
+            _require(
+                isinstance(record, Mapping),
+                f"{where}: the profile must be an object, got {record!r}",
+            )
+            unknown = sorted(
+                set(record) - {"onsets", "nuclei", "codas", "syllables", "notes"}
+            )
+            _require(
+                not unknown,
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "onsets | nuclei | codas | syllables | notes)",
+            )
+            for key in ("onsets", "nuclei", "codas"):
+                pool = record.get(key)
+                _require(
+                    isinstance(pool, list) and bool(pool),
+                    f"{where}: {key} must be a non-empty list",
+                )
+                for entry in pool:
+                    # nuclei: non-empty ASCII letters (a syllable needs
+                    # its vowel); onsets/codas: the same, or the empty
+                    # fragment (vowel initials, open syllables)
+                    legal = (
+                        isinstance(entry, str)
+                        and (
+                            entry.isascii() and entry.isalpha()
+                            or (key != "nuclei" and entry == "")
+                        )
+                    )
+                    _require(
+                        legal,
+                        f"{where}: {key} entries must be ASCII letter "
+                        "fragments"
+                        + ("" if key == "nuclei" else " (the empty fragment legal)")
+                        + f", got {entry!r}",
+                    )
+            bounds = record.get("syllables")
+            _require(
+                isinstance(bounds, list) and len(bounds) == 2
+                and _is_int(bounds[0]) and _is_int(bounds[1])
+                and bounds[0] >= 1 and bounds[0] <= bounds[1],
+                f"{where}: syllables must be [min, max] integers with "
+                f"min >= 1 and min <= max (a zero-syllable name is dead "
+                f"data; no upper ceiling — the bounds are pack tuning), "
+                f"got {bounds!r}",
+            )
+        # the declarations: the npc walk (the only legal site — the
+        # members' reachability below reads the groups)
+        condensing: set[str] = set()
+        for group in entities.get("groups", ()):
+            if group.get("condense_event") is not None:
+                condensing.update(group.get("members", ()))
+        for npc in entities["npcs"]:
+            declaration = npc.get("generated_name")
+            if declaration is None:
+                continue
+            where = f"npc {npc['id']}"
+            _require(
+                isinstance(declaration, str) and declaration in profiles,
+                f"{where}: generated_name {declaration!r} is not a declared "
+                "profile (names.profiles owns the vocabulary)",
+            )
+            _require(
+                "name" not in npc,
+                f"{where}: authored name and generated_name are mutually "
+                "exclusive — one name origin per npc (name stays the pure "
+                "string surface)",
+            )
+            _require(
+                npc["id"] in condensing,
+                f"{where}: generated_name is dead data — the npc is not a "
+                "member of any group declaring condense_event (the "
+                "materialization door; the depth-5b reachability law)",
+            )
 
     # -- director (iter-4: consequence buffer + triggers + stagnation) --------
 

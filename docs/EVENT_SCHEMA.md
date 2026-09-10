@@ -120,6 +120,26 @@ the committed pack is ARMED — the tavern + the guardroom scenes, the
 knowledge surface of the detail staying the event's own payload
 (zero new knowledge tokens, the templates unchanged).
 
+The generated-name home (name-1, iter-96 — the same D-054 law at
+npc scale, the scene-detail twin): the npc record declares
+`generated_name: <profile>` (the `rules.json::names` phonotactic
+profile — the culture-keyed syllable pools; mutually exclusive with
+an authored `name`), and the CONDENSATION event materializes it as a
+birth on the MEMBER — one `StateChange(member, "name", None →
+drawn)` per unnamed declaring member, drawn from the member's own
+`name:<npc>` stream (first-commit-wins: a canon-held name is never
+redrawn; the projection seeds nothing for `name` — absence IS the
+unborn name). The event's outcome names them under `names` (the flat
+list, member order, present only when something materialized — the
+drifted_from law); a template line binding it must BRANCH on its
+presence (`{names?…|…}`) — a bare `{names}` on a nameless
+condensation is an unknown slot. The drawn name never collides with
+the entity namespace (the bounded collision walk — the id↔display
+mapping stays injective); the display read is fold-first (canon
+outranks the pack record; an unborn generated name renders as its
+dry id). The committed pack declares no profiles — unarmed (the
+68a pattern).
+
 ## 5. `hooks`
 
 Tags seeded at event time and consumed by the director's buffer. Each hook

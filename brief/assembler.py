@@ -49,9 +49,10 @@ from brief.ledger import (
     present_entities,
     split_scope,
 )
-from core.fold import fold, initial_projection, present_in_order
+from core.fold import Projection, fold, initial_projection, present_in_order
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
+from core.names import NAME_PROP
 from core.pack import BRIEF_BLOCK_IDS, Pack
 from core.retrieval import word_tokens
 from core.traits import Trait, crystallized_traits
@@ -193,6 +194,32 @@ def _fill(block_id: str, items: Sequence[str], budget: Mapping[str, Any]) -> Blo
     return Block(block_id, tuple(taken), dropped)
 
 
+def _born_names(events: Sequence[EventRecord]) -> dict[str, str]:
+    """The event-born names (name-1): one pass over the log, the LAST
+    write per entity wins (the fold's law). The dry display lines read
+    it BEFORE the pack record — canon outranks the authored surface;
+    an unborn generated name falls to the pack record / the dry id."""
+    names: dict[str, str] = {}
+    for event in events:
+        for change in event.state_changes:
+            if change.prop == NAME_PROP:
+                names[change.entity] = str(change.to_)
+    return names
+
+
+def _entity_display(
+    state: Projection, pack: Pack, entity_id: str
+) -> str:
+    """The fold-aware display name over the folded projection (the
+    entity cards — name-1's read surface, the `render/chronicle.py::
+    _born_or_pack` twin): the born name first, else the authored
+    `name`, else the dry id."""
+    born = state.get(entity_id, {}).get(NAME_PROP)
+    if born is not None:
+        return str(born)
+    return display_name(pack, entity_id)
+
+
 def _scene_delta_lines(
     events: Sequence[EventRecord], pack: Pack, *, knower: str
 ) -> list[str]:
@@ -202,6 +229,7 @@ def _scene_delta_lines(
     passes the player; mode B passes the actor (scene-1 — the same law,
     one knower, never a world dump)."""
     window_start = last_beat_tick(pack.rules, events[-1].t if events else 0)
+    born = _born_names(events)  # name-1: canon names outrank the record
     lines: list[str] = []
     for event in reversed(events):  # newest first — recency dominates
         if window_start is not None and event.t <= window_start:
@@ -211,9 +239,12 @@ def _scene_delta_lines(
         )
         if not perceived:
             continue
-        line = f"[t {event.t}] {event.type}: {display_name(pack, event.actor)}"
+        line = (
+            f"[t {event.t}] {event.type}: "
+            f"{born.get(event.actor) or display_name(pack, event.actor)}"
+        )
         if event.target is not None:
-            line += f" -> {display_name(pack, event.target)}"
+            line += f" -> {born.get(event.target) or display_name(pack, event.target)}"
         lines.append(line)
     return lines
 
@@ -568,7 +599,7 @@ def _present_entity_items(
         props = state[entity_id]
         if pack.kind_of(entity_id) == "item" and props.get("carrier") is not None:
             continue  # carried: the carrier's `carries=` segment renders it
-        segments = [f"- {entity_id} ({display_name(pack, entity_id)})"]
+        segments = [f"- {entity_id} ({_entity_display(state, pack, entity_id)})"]
         # tune-2: the marker table is PROP-PATH keyed with two row kinds —
         # threshold rows (numeric `min`) and value rows (string `value`),
         # so `relations.suspicion` and `crime_status` rows are expressible

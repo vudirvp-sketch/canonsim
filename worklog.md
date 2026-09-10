@@ -13,6 +13,48 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-96 · 2026-09-11 · name1 — the name generator (the queue's W2 row
+after depth-7, D-116 (12); D-131; 19 files — 5 code + 2 periphery + 2
+test + 2 ref dives + the index + 7 doc sync: the stream + the generator + the lint
++ the condensation consumer + the read surface + the dives are one
+family, the iter-90..93 footprint; AGENTS §2.3: 18 > 5-6, the
+objective scope noted here; the doc-only streak iter-94+95 BROKEN —
+AGENTS §2.5 resolved on record)
+- core/names.py (new) + core/rng.py: the D-079 family law's SIXTH
+  member `name:<npc>` (name_stream_name, lazy registration, the
+  assure-shadow law at six families); materialize_name the lazy
+  scene-detail twin — ONE birth (npc, "name", None->drawn), the
+  bounded collision walk against the entity namespace (WALK_MAX,
+  the loud NamesError), the unarmed law total (the stream never
+  registers)
+- core/groups.py + core/loop.py: the condensation consumer — the
+  name births paired with the membership births (one member, one
+  block; a runtime-joined member still named), the outcome's
+  `names` key (the line must branch — a bare {names} is an unknown
+  slot), the tier half draw-free; the bank rides _condense_groups
+- core/pack.py: the `_names` lint (after _factions) — the profiles'
+  shapes, the npc generated_name declarations (mutual exclusion with
+  the authored `name`), the REACHABILITY law (a declaring npc must
+  ride a condensing group's membership — the depth-5b family);
+  render/chronicle.py + brief/assembler.py: the born-name read
+  (fold-first — canon outranks the pack record; the unborn render as
+  their dry ids)
+- docs/ref/ck3.md + docs/ref/azgaar_names.md (new, the ref-19 dives
+  owed at the row) + REFERENCES_DEEP index; phases.md §5 the name-1
+  paragraph; EVENT_SCHEMA §4 the generated-name home; NAV §1; TASKS
+  name-1 done; DECISIONS D-131; STATUS re-pinned (the queue: st-6(a)
+  the next live candidate, name-1 the last W2 row closed)
+- +28 tests, 1516→1544+1 green, ruff clean (3.12.14, the env pin;
+  seed 42 pinned). Corpus price ZERO by construction, measured both
+  arms: the committed pack unarmed — the inert twin (the whole
+  vocabulary, no time.macro) byte-identical over plumbing_smoke +
+  day1_full; the armed delta the name births + the `names` key alone,
+  the (t,type,actor) sequence + the fingerprint EQUAL to the authored
+  twin. iter-86 evicted (verified against git in this edit); 10
+  held. Caps: STATUS 844 / TASKS 1158 / DECISIONS 97 lines (67 rows)
+  — over-cap on substance (§6.1, the D-095..D-130 precedent), trim at
+  the phase-5→6 gate.
+---
 iter-95 · 2026-09-11 · intake8 — research intake 8, the
 setting-direction verdict set routed (doc-only, the owner's chat
 call; D-130; 6 files — the iter-85/94 intake footprint family,
@@ -421,49 +463,5 @@ collections`, DRAW-FREE — a pure function of the year-sorted kinds +
   against git in this edit); 10 held. Caps: STATUS 690 / TASKS
   1019 / DECISIONS 86 lines (57 rows) — over-cap on substance
   (§6.1, the D-095..D-120 precedent), trim at the phase-5→6 gate.
----
-iter-86 · 2026-09-10 · bridge1 — the scene-line projection pipe (W1's
-head, D-116 (1) verbatim; 11 files — 2 code + 1 pack data + 2 test
-files + 6 doc sync: the pipe + the pack migration + the lint pair +
-the pins are one family, the iter-75/83 footprint; AGENTS §2.3: 11 >
-5-6, the objective scope noted here)
-- brief/assembler.py: the scene fields' VALUE SOURCE is the FOLDED
-  PROJECTION — a prop the scene location's fold holds renders its
-  canon value (the claims ride world_formed's state_changes), the pack
-  record the fallback for unclaimed fields, a field neither holds
-  renders nothing; the card law held (static first, event-born last —
-  the claims ARE event-born; then promoted props in log order);
-  `_token_value` renders booleans JSON-style (`near_river=false` — the
-  values are JSON-born canon, never the host language's caps).
-- content/tavern_pack/rules.json: scene_line_fields += terrain /
-  world_region / near_river (the arming's visible half — an armed
-  world invisible to the narrator is no longer half-armed) + the
-  bridge-1 note in the block's notes.
-- core/pack.py: `_brief`'s scene-line legal set = location record
-  fields ∪ armed claim slots (`_armed_claim_slots`, the defensive walk
-  — the worldgen shape lint runs last, the KI#77 order law);
-  `_worldgen`'s REACHABILITY gains the scene-line consumer arm (the
-  claims' first brief-side consumer, D-117's pinned future landed).
-- +3 tests (the pipe pin: the tavern scene line carries
-  terrain=coast + world_region=region_00 after the static layout; the
-  street arm near_river=false over the genesis-only log; the
-  determinism double-assembly; the lint negative — the unarmed twin's
-  dead claim fields refuse at load; the reachability scene-line arm
-  positive + the crafted_pack scene-line sync + the hook-consumer
-  test's slot sync) — 1403→1406+1 green, ruff clean (3.12.14, the env
-  pin; seeds 0/42/unset spot-checked). Corpus price ZERO by
-  construction, measured both arms: no runtime byte reads
-  scene_line_fields — the T1 + corpus fixtures byte-identical (zero
-  re-pins, git-verified); the price paid is the visible claim tokens
-  in genesis-bearing briefs (the pipe's purpose); the narrator
-  corpus's 4 call pins unaffected (loc_backyard carries no claims).
-- docs: BRIEF_SPEC §3.8/§6 + the example, DECISIONS D-120, TASKS
-  bridge-1 done, STATUS re-pinned (the queue: chron-2 next, D-116's
-  wave order), AGENT_NAVIGATION §1 the brief/core/content/tests rows.
-  D-120. iter-77 evicted (verified against git in this edit); 10
-  held. Caps: STATUS 678 / TASKS 1005 / DECISIONS 85 lines (56 rows)
-  — over-cap on substance (§6.1, the D-095..D-119 precedent), trim at
-  the phase-5→6 gate.
----
 ---
 (end of log — cap 10; pre-trim history lives in git)

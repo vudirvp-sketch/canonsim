@@ -795,13 +795,16 @@ class Simulator:
         tombstone marker (`core/groups.py` owns the drafts; the
         materialization precedes every tick the members then ride —
         the beat machinery below, the warm ring's crossing cadence).
-        Chained to the writer's last id (the chronological-chain law)
-        and committed through the canon door (INV-1). The load state
-        counts as the origin: a group warm/active at the FIRST
-        computation condenses immediately — the PC walks into a
-        materialized world (the DF precedent)."""
+        name-1: the members' generated names materialize on the same
+        event, drawn on their own `name:<npc>` family streams (the
+        bank rides here for that alone — the tier half stays
+        draw-free). Chained to the writer's last id (the
+        chronological-chain law) and committed through the canon door
+        (INV-1). The load state counts as the origin: a group
+        warm/active at the FIRST computation condenses immediately —
+        the PC walks into a materialized world (the DF precedent)."""
         for draft in condensation_drafts(
-            self._pack, self._projection, tick,
+            self._bank, self._pack, self._projection, tick,
             locations=(*zones.warm, zones.active),
         ):
             self._commit(replace(

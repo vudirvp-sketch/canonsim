@@ -43,6 +43,7 @@ __all__ = [
 ]
 
 _POSITION_PROP: Final = "position"
+_NAME_PROP: Final = "name"
 
 
 class RenderError(RuntimeError):
@@ -62,12 +63,15 @@ def display_name(pack: Pack, entity_id: str | None) -> str:
 
 
 class _Positions:
-    """A running position map while iterating events (the renderer's own
-    lightweight fold — enough to resolve `{location}` at each event's
-    tick without re-folding the whole projection per line)."""
+    """A running position + born-name map while iterating events (the
+    renderer's own lightweight fold — enough to resolve `{location}` at
+    each event's tick and the name-1 born names (`name` state changes,
+    the condensation's births) without re-folding the whole projection
+    per line)."""
 
     def __init__(self, pack: Pack) -> None:
         self._where: dict[str, str] = {}
+        self._names: dict[str, str] = {}
         for category in ("npcs", "ambient_entities", "items"):
             for record in pack.entities[category]:
                 self._where[record["id"]] = record["position"]
@@ -81,9 +85,28 @@ class _Positions:
         for change in event.state_changes:
             if change.prop == _POSITION_PROP:
                 self._where[change.entity] = change.to_
+            elif change.prop == _NAME_PROP:
+                self._names[change.entity] = str(change.to_)
 
     def location_of(self, entity_id: str) -> str:
         return self._where.get(entity_id, "")
+
+    def born_name(self, entity_id: str) -> str | None:
+        """The event-born name (name-1), or None — the fold outranks
+        the pack record (canon is the answer; an authored name has no
+        birth event, an unborn generated name answers None and the
+        caller falls to the pack/id)."""
+        return self._names.get(entity_id)
+
+    def display(self, pack: Pack, entity_id: str | None) -> str:
+        """The fold-aware display name: the born name first (canon),
+        else the pack's authored `name`, else the dry id."""
+        if entity_id is None:
+            return ""
+        born = self.born_name(entity_id)
+        if born is not None:
+            return born
+        return display_name(pack, entity_id)
 
 
 def _event_context(
@@ -94,12 +117,12 @@ def _event_context(
     kept raw for `{cond?...|...}` conditionals)."""
     outcome = dict(event.outcome)
     first_record = event.knowledge[0] if event.knowledge else None
-    target_name = display_name(pack, event.target) if event.target else ""
+    target_name = positions.display(pack, event.target) if event.target else ""
     location_id = outcome.get("location") or positions.location_of(event.actor)
     context: dict[str, Any] = {
         "t": event.t,
         "event_type": event.type,
-        "actor": display_name(pack, event.actor),
+        "actor": positions.display(pack, event.actor),
         "target": target_name,
         "target_location": target_name,
         "location": display_name(pack, location_id) if location_id else "",
@@ -133,6 +156,20 @@ def _display_if_entity(pack: Pack, value: Any) -> Any:
     ):
         return display_name(pack, value)
     return value
+
+
+def _born_or_pack(
+    projection: Projection, pack: Pack, entity_id: str
+) -> str:
+    """The fold-aware display name over a full projection (the scene
+    card + the entity view — name-1's read surface: the born name
+    first (canon outranks the pack record), else the authored `name`,
+    else the dry id — the unborn generated name renders honestly as
+    its id)."""
+    born = projection.get(entity_id, {}).get(_NAME_PROP)
+    if born is not None:
+        return str(born)
+    return display_name(pack, entity_id)
 
 
 def render_chronicle(
@@ -172,7 +209,7 @@ def render_scene_card(projection: Projection, pack: Pack, seed: int) -> str:
     player = pack.player_id()
     location = projection[player][_POSITION_PROP]
     present = [
-        display_name(pack, record["id"])
+        _born_or_pack(projection, pack, record["id"])
         for category in ("npcs", "ambient_entities")
         for record in pack.entities[category]
         if record["id"] != player
@@ -207,7 +244,9 @@ def render_entity_view(
     grammar = Grammar(pack.templates)
     engine = Engine(grammar, RngBank(seed))
     positions = _Positions(pack)
-    lines: list[str] = [f"{display_name(pack, entity_id)} ({entity_id})"]
+    lines: list[str] = [
+        f"{_born_or_pack(projection, pack, entity_id)} ({entity_id})"
+    ]
     lines.extend(_state_lines(projection.get(entity_id, {}), pack))
     lines.append("history:")
     wrote = False

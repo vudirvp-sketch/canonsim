@@ -600,6 +600,50 @@ recorded, never stored) — the cold NPCs never tick. Log growth
 O(active + warm/cadence + aggregates), the long-history fear bounded
 by construction.
 
+**The name generator (name-1, iter-96/D-131 — D-116 (12): the Azgaar
+split; condensation's canon-birth events need names, `region_00`-style
+ids do not scale to a story):** pack-declared PHONOTACTIC PROFILES,
+culture-keyed — `rules.json::names.profiles`, the id the pack's own
+vocabulary (the Azgaar nameBase shape: the syllable-component pools
+`onsets`/`nuclei`/`codas` — the empty fragment legal in onsets/codas —
+plus the `syllables` bounds; the CK3 culture keying and the
+id↔display split — `docs/ref/ck3.md` + `docs/ref/azgaar_names.md`).
+The npc record declares the origin: `generated_name: <profile>`
+(mutually exclusive with an authored `name` — one name origin per
+npc; `name` stays the pure string surface every reader already
+knows). `core/names.py::materialize_name` — the lazy scene-detail
+twin at npc scale (the D-054 law, never a second mechanism): ONE
+birth (npc, `name`, None -> drawn) on the npc's own content-addressed
+`name:<npc>` stream (the D-079 family law's SIXTH member —
+per-declaration isolation: an added or re-armed declaration shifts
+neither a canon check draw nor another npc's name; first-commit-wins:
+canon never redraws, a re-tuned profile pays only on the unborn).
+The OUTPUT-NAMESPACE law: a drawn name never collides with the
+entity namespace (every declared entity id) — the bounded collision
+walk redraws past colliding candidates, then the loud refusal (the
+render's id↔display mapping stays injective; a load-time lint cannot
+check a seed-dependent space, the walk is the law's single owner).
+The REACHABILITY law (the depth-5b family): a `generated_name`
+declaration must ride a condensing group's membership — a declaration
+nothing can materialize is dead data, refused by the lint. THE
+CONSUMER: depth-7's condensation — the event carries each member's
+name birth PAIRED with the membership birth (one member, one block;
+a runtime-joined member still gets the name it never had), the
+outcome's `names` key the flat template surface (present only when
+something materialized, the drifted_from law; the line must BRANCH —
+`{names?...|...}` — a bare `{names}` on a nameless condensation is
+an unknown slot). The tier half stays draw-free; the unborn
+population stays counts — the lazy-depth law: unnamed until the
+reader's zone warms (the phases §6 "inn's strangers ARE the
+condensation" shape). The READ surface is fold-first (canon
+outranks the pack record): the chronicle's running name fold, the
+scene card + entity views over the projection, the brief's delta
+lines + entity cards; an unborn generated name renders honestly as
+its dry id. The committed pack UNARMED (the 68a pattern — zero
+draws, the v0.1 bytes by construction; the arming rides with
+world-2's cultures row, the phase-6 consumer — the province's two
+tongues, its own name dogfooding the profiles).
+
 **The spatial model (D-116, the generator-concept verdict — phase
 law):** no native 3D — integer-only geometry and the event-simulator
 nature forbid it (heavy determinants, the int64/long-arith risk, the

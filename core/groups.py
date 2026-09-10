@@ -65,17 +65,26 @@ intent-door actor alone, zero tier machinery, zero events):
 
 Determinism (INV-2): pack declaration order everywhere — the groups
 walk in the pack's own order, the births in the group's own member
-order; never a set iteration. The drafts are pure functions of
-(pack, projection, t) — no entropy, no state mutation.
+order; never a set iteration. The population tier's drafts are pure
+functions of (pack, projection, t) — no entropy, no state mutation;
+the condensation's TIER half (the member_of births, the marker, the
+counts) stays draw-free with it. The NAME half (name-1, D-116 (12))
+draws — on each member's own `name:<npc>` stream (the D-079 family
+law's sixth member, `core/names.py::materialize_name`), so an added,
+removed, or re-armed declaration shifts neither a canon check draw
+nor another npc's name; the unborn population stays counts — the
+lazy-depth law: unnamed until the reader's zone warms.
 """
 
 from __future__ import annotations
 
 from collections.abc import Collection
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 from core.intent import pack_importance
 from core.log import EventDraft, StateChange
+from core.names import materialize_name
+from core.rng import RngBank
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
@@ -85,6 +94,7 @@ __all__ = [
     "MARKER_PROP",
     "MEMBER_OF_PROP",
     "MEMBERS_KEY",
+    "NAMES_KEY",
     "POPULATION_KEY",
     "condensation_drafts",
     "is_condensed",
@@ -111,6 +121,14 @@ POPULATION_KEY: Final = "population"
 #: The condensation outcome's cardinality key — the canon membership's
 #: size after the births (the notable tier's count).
 MEMBERS_KEY: Final = "members"
+
+#: The condensation outcome's generated-names key (name-1): the drawn
+#: names of the members materialized by THIS event, member order — the
+#: engine's mechanical vocabulary (the `population`/`members` family;
+#: INV-3 — a pack's template binds the list, the tracery rendering
+#: joins it). Present only when something materialized (the
+#: drifted_from law — a never-empty key never rides an unarmed event).
+NAMES_KEY: Final = "names"
 
 
 def is_condensed(projection: "Projection", group_id: str) -> bool:
@@ -193,6 +211,7 @@ def macro_tick_drafts(
 
 
 def condensation_drafts(
+    bank: RngBank,
     pack: "Pack",
     projection: "Projection",
     t: int,
@@ -211,7 +230,20 @@ def condensation_drafts(
     `MEMBERS_KEY`. No knowledge (the arrival snapshot is the move
     event's own templates, INTENT_SCHEMA §7 — a separate door, already
     landed), no hooks; importance rides the pack's own rule over the
-    touched set (the group + the birthed members).
+    touched set (every entity whose state the event changed).
+
+    name-1 (D-116 (12) — condensation's canon-birth events need
+    names): a member declaring a generated name materializes it on
+    THIS event — the birth (member, `NAME_PROP`, None -> drawn) paired
+    with the member's own block (the membership birth first, the name
+    beside it — one member, one block), drawn from the member's own
+    `name:<npc>` stream (`core/names.py::materialize_name` — the
+    unarmed/canon skips are its law; a runtime-joined member still
+    gets the name it never had), and the outcome's `NAMES_KEY` lists
+    the drawn names in member order (present only when something
+    materialized — the drifted_from law). The tier half (the births,
+    the marker, the counts) stays draw-free; an authored membership
+    draws nothing at all.
 
     The condensation is the WRITE-side record alone: the members'
     per-beat activity was already depth-3's zone scoping (their
@@ -231,6 +263,7 @@ def condensation_drafts(
             continue  # this zone does not condense here (the LOD filter)
         members = group.get("members", ())
         births: list[StateChange] = []
+        named: list[str] = []
         canon = 0
         for member in members:
             current = projection.get(member, {}).get(MEMBER_OF_PROP)
@@ -246,19 +279,26 @@ def condensation_drafts(
                 canon += 1
             elif current == group_id:
                 canon += 1  # a runtime join: already canon, not re-birthed
+            name_birth = materialize_name(bank, pack, projection, member)
+            if name_birth is not None:
+                births.append(name_birth)
+                named.append(str(name_birth.to_))
         changes = births + [
             StateChange(
                 entity=group_id, prop=MARKER_PROP, from_=None, to_=True,
             )
         ]
-        touched = {group_id} | {change.entity for change in births}
+        touched = {change.entity for change in changes}
+        outcome: dict[str, Any] = {MEMBERS_KEY: canon}
+        if named:
+            outcome[NAMES_KEY] = named
         drafts.append(
             EventDraft(
                 t=t,
                 type=event_type,
                 actor=group_id,
                 cause=None,  # the loop chains it to the writer's last id
-                outcome={MEMBERS_KEY: canon},
+                outcome=outcome,
                 knowledge=(),
                 state_changes=tuple(changes),
                 hooks=(),

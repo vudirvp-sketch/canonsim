@@ -3,32 +3,34 @@
 One master seed; named streams deterministically derived via
 `stable_hash(f"{seed}:{stream}")` — sha256-based, environment-independent
 (never relies on PYTHONHASHSEED). Registered streams: `substantive` (canon
-checks) and `cosmetic` (render-only); plus five CONTENT-ADDRESSED FAMILIES
+checks) and `cosmetic` (render-only); plus six CONTENT-ADDRESSED FAMILIES
 of lazily registered streams, whose names are built by the owning module
 and pack-linted before any draw — `urgency:<npc>:<kind>` (engine-2,
 D-079, `urgency_stream_name`), `drift:<family>` (rumordrift, A2''/
 D-099, `drift_stream_name`), `scene:<id>:detail` (lazy detail
 materialization, depth-2, `scene_detail_stream_name`),
 `worldgen:<pass>` (the ordered worldgen passes, depth-5,
-`worldgen_stream_name`), and `faction:<group>:<kind>` (the faction
-goal rolls, depth-6, `faction_stream_name`). All draws flow through the
+`worldgen_stream_name`), `faction:<group>:<kind>` (the faction
+goal rolls, depth-6, `faction_stream_name`), and `name:<npc>` (the
+generated names, name-1, `name_stream_name`). All draws flow through the
 bank, which counts them per stream; the substantive counter is the
 replay fingerprint T1 compares. Guards (donor discipline,
 `docs/blueprint/phase0.md` §1):
 
 - `assure(name)` — run a scope with `name` as the active stream (Brogue
   `assureCosmeticRNG`). Nesting a *different* stream inside an assured
-  scope raises immediately — EXCEPT the five content-addressed families:
-  an urgency-family, drift-family, scene-family, worldgen-family, or
-  faction-family stream may shadow the assured `substantive` run scope
+  scope raises immediately — EXCEPT the six content-addressed families:
+  an urgency-, drift-, scene-, worldgen-, faction-, or name-family
+  stream may shadow the assured `substantive` run scope
   (engine-2, rumordrift + lazy detail (depth-2), worldgen (depth-5),
-  factions (depth-6)): all are
+  factions (depth-6), names (name-1)): all are
   canon-relevant but stream-isolated per declared entry, so an added,
   removed, or re-armed pack entry shifts neither a later canon check
   draw nor another entry's roll — the single shared stream was measured
   and refused for urgencies (the entries
-  coupled by draw position; D-079); drift, scene detail, and the
-  worldgen passes inherit the same isolation law (D-095: "isolation is
+  coupled by draw position; D-079); drift, scene detail, the worldgen
+  passes, and the generated names inherit the same isolation law
+  (D-095: "isolation is
   law"; at pass granularity a re-tuned map config shifts neither a
   canon check draw nor another pass's draws). A wrong-stream draw is
   loud, never silent.
@@ -53,6 +55,7 @@ __all__ = [
     "DRIFT_PREFIX",
     "FACTION_PREFIX",
     "FAMILY_PREFIXES",
+    "NAME_PREFIX",
     "PHASE0_STREAMS",
     "SCENE_PREFIX",
     "SUBSTANTIVE",
@@ -62,6 +65,7 @@ __all__ = [
     "RngError",
     "drift_stream_name",
     "faction_stream_name",
+    "name_stream_name",
     "scene_detail_stream_name",
     "stable_hash",
     "urgency_stream_name",
@@ -75,18 +79,21 @@ DRIFT_PREFIX: Final = "drift:"
 SCENE_PREFIX: Final = "scene:"
 WORLDGEN_PREFIX: Final = "worldgen:"
 FACTION_PREFIX: Final = "faction:"
+NAME_PREFIX: Final = "name:"
 PHASE0_STREAMS: Final = (SUBSTANTIVE, COSMETIC)
 
-# The five lazily registered content-addressed families (D-079's law,
-# extended by drift, scene detail, the worldgen passes, and the faction
-# goal rolls): the name-building functions are the single owners of each
-# grammar, and the pack lint validates the ids inside before any draw.
+# The six lazily registered content-addressed families (D-079's law,
+# extended by drift, scene detail, the worldgen passes, the faction
+# goal rolls, and the generated names): the name-building functions are
+# the single owners of each grammar, and the pack lint validates the
+# ids inside before any draw.
 FAMILY_PREFIXES: Final = (
     URGENCY_PREFIX,
     DRIFT_PREFIX,
     SCENE_PREFIX,
     WORLDGEN_PREFIX,
     FACTION_PREFIX,
+    NAME_PREFIX,
 )
 
 
@@ -146,6 +153,19 @@ def faction_stream_name(group_id: str, intent_kind: str) -> str:
     return f"{FACTION_PREFIX}{group_id}:{intent_kind}"
 
 
+def name_stream_name(npc: str) -> str:
+    """The per-npc generated-name stream: content-addressed `name:<npc>`
+    (name-1, `phases.md` §5 — the D-079 family law's sixth member; the
+    scene-detail twin: a lazy per-entity materialization). One stream
+    per npc declaring a generated name — npc ids are entity-unique
+    across categories, so the name is injective; arming, adding, or
+    removing a declaration shifts neither a canon check draw nor
+    another npc's name (the isolation law at declaration granularity;
+    the birth is first-commit-wins, so a re-tuned profile pays its
+    corpus price only on the unborn — canon names are never redrawn)."""
+    return f"{NAME_PREFIX}{npc}"
+
+
 class RngError(RuntimeError):
     """INV-2 violation: wrong-stream draw or an audit-scope draw leak."""
 
@@ -187,13 +207,14 @@ class RngBank:
             if name.startswith(FAMILY_PREFIXES):
                 # engine-2 + rumordrift + lazy detail (depth-2) + the
                 # worldgen passes (depth-5) + the faction goal rolls
-                # (depth-6): the five content-addressed stream families
-                # register lazily — names built by `urgency_stream_name`
+                # (depth-6) + the generated names (name-1): the six
+                # content-addressed stream families register lazily —
+                # names built by `urgency_stream_name`
                 # / `drift_stream_name` / `scene_detail_stream_name` /
-                # `worldgen_stream_name` / `faction_stream_name`,
-                # pack-linted before any draw; the closed-set tripwire
-                # survives for every non-family name (a typo stays
-                # loud).
+                # `worldgen_stream_name` / `faction_stream_name` /
+                # `name_stream_name`, pack-linted before any draw; the
+                # closed-set tripwire survives for every non-family
+                # name (a typo stays loud).
                 self._register(name)
             else:
                 raise RngError(
@@ -214,9 +235,9 @@ class RngBank:
     def assure(self, name: str) -> Iterator[None]:
         """Scope with `name` active; nesting a foreign stream is an error
         unless the pairing is the content-addressed family law: an
-        urgency-, drift-, scene-, worldgen-, or faction-family stream may
-        shadow the assured substantive run scope — and nothing else may
-        nest anywhere."""
+        urgency-, drift-, scene-, worldgen-, faction-, or name-family
+        stream may shadow the assured substantive run scope — and
+        nothing else may nest anywhere."""
         self._rng(name)
         if (
             self._assured is not None
