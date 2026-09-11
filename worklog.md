@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-104 · 2026-09-12 · fork-resolve — the owner's chat call: the
+open questions and forks analyzed point-by-point, each worked into a
+final COMBINED variant (the owner's stated preference — gather the
+pros, neutralize the cons, no crutches); 3 files doc-only, zero
+code, zero corpus price (the iter-34/103 owner-call footprint
+family; AGENTS §2.3: the objective scope noted here)
+- verified BEFORE working (1589+1 green, ruff clean, HEAD 13c23c4,
+  Python 3.12.14 the env pin); the resolutions routed to the TASKS
+  rows: roads-1's READ-PATH fork → the derived L3 read sharpened
+  (the pass graph on the WorldModel, ONE shared exits read with the
+  pack-wins override, place-1's invariant relocated into the pass,
+  NO canon births — INV-1/L11 held, corpus price zero by
+  construction); world-2's toponym question → the same
+  override-else-derived law (authored wins, else the profile-minted
+  render-side name via a named cosmetic stream — the dogfooding
+  line held, the grammar untouched); since-1 → phase 6 (world-2's
+  condensing travelers the first real consumer, the tavern surface
+  too thin); cli-pack (the CLI --pack flag) PINNED iter-105 — the
+  code iteration breaking the doc-only streak (now 100..104, all
+  five the owner's own calls, D-022 each time)
+- the two standing owner questions (DIRECTOR_SPEC §11's L6
+  conflict, D-081's climax flag) NOT silently resolved — the
+  combined-variant proposals delivered in chat, the owner decides;
+  docs: TASKS (the cli-pack row + the three row resolutions + the
+  iter-104 section), STATUS (the header re-pin + the Next step
+  iter-105 pin), this file. iter-95 evicted here (verified against
+  git in this edit); 10 after; re-run post-edit: 1589+1 green,
+  ruff clean. Caps: STATUS 667 / TASKS 788 — over-cap held on
+  ledger substance (§6.1, the iter-102/103 precedent), trim at the
+  phase-6→7 gate.
+---
 iter-103 · 2026-09-12 · ph6-audit — the owner's chat call: the
 phase-6 plan + the project audited from the height of the landed
 solutions, heightened plan-detail attention (3 files doc-only, zero
@@ -374,28 +405,5 @@ AGENTS §2.5 resolved on record)
   held. Caps: STATUS 844 / TASKS 1158 / DECISIONS 97 lines (67 rows)
   — over-cap on substance (§6.1, the D-095..D-130 precedent), trim at
   the phase-5→6 gate.
----
-iter-95 · 2026-09-11 · intake8 — research intake 8, the
-setting-direction verdict set routed (doc-only, the owner's chat
-call; D-130; 6 files — the iter-85/94 intake footprint family,
-AGENTS §2.3: 6 > 5-6, the one-family objective scope noted here)
-- verified BEFORE routing: the clone green (1516+1, ruff clean, HEAD
-  a78e2f1, Python 3.12.14)
-- D-130: the three-tier posture (the repo's 2nd setting is ORIGINAL
-  — the province sketch at phases.md §6, authored pillars over a
-  generated surface, riding world-2; the level-1 reskin instrument
-  is the open generic stack; a proprietary fan-pack is owner-local,
-  zero repo footprint); the minus ledger (ten catalogued minuses →
-  the standing laws, zero new machinery); REFERENCES §10 +6 rows
-  (Morrowind, TES anti-row, Discworld, FNV, Pathologic, Qud); NO new
-  backlog rows (the material rides the existing W4 rows, just-in-time
-  the D-096 precedent)
-- the doc-only streak (iter-94 + 95) surfaced in STATUS per AGENTS
-  §2.5 — both the owner's research calls, not an agent loop; the
-  queue untouched (name-1 pinned); iter-85 evicted here (verified
-  against git in this edit; 10 after); re-run post-edit: 1516+1
-  green, ruff clean. Caps: STATUS 827 / TASKS 1141 / phases 938 /
-  REFERENCES 311 / DECISIONS 96 lines (66 rows) — over-cap held on
-  substance (§6.1), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

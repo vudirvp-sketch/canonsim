@@ -107,6 +107,18 @@ D-105..D-133 family row + phases.md §5)
 ### Phase-6 parked instruments (W4, owner-gated; the phase-6 backlog
 drafts from phases.md §6 at the opening iteration)
 
+- `cli-pack` · the CLI `--pack` flag — todo, **pinned iter-105** (the
+  owner's iter-104 chat direction: the code iteration that breaks the
+  doc-only streak, BEFORE the opening): periphery only (`cli/main.py`
+  + `tests/test_cli.py`) — the flag with the tavern default
+  (byte-identical for the committed pack), a loud refusal for a bad
+  path; the stoplist docstring's "the CLI takes the pack dir as
+  config" claim becomes TRUE (the drift dies at its root, not by
+  deleting the claim). Landing it pre-opening keeps world-2 level-1's
+  ≤1-day budget honest (the flag is the recorded prerequisite, not
+  part of the reskin day). The stoplist self-check extension to a new
+  pack's nouns stays with the reskin day itself (the second pack must
+  exist for its vocabulary).
 - `world-2` · the second world, the phase-6 gate's own instrument —
   todo, owner-gated: the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day
   (ROADMAP §2's phase-6 exit, measured on the open generic stack), level
@@ -115,18 +127,20 @@ drafts from phases.md §6 at the opening iteration)
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
   profiles arming ride this row's cultures half). The phase-5 exit
   needed NO second world (the emergent chain rode the armed committed
-  pack). iter-103 audit notes: level 1 needs the CLI `--pack` flag
-  first — `PACK_DIR` is hardcoded (`cli/main.py`; periphery, outside
-  the stoplist by design, but the stoplist test docstring's "the CLI
-  takes the pack dir as config" claim is drift — the flag never
-  existed, `git log -S` verified, the KI#22 doc-drift family) and the
-  stoplist self-check is tavern-tied today (the reskin day extends
-  the vocabulary to the new pack's nouns); the level-2 toponym
-  question — name-1's grammar is npc-only + condensation-gated, the
-  province-name dogfooding line (phases.md §6) needs either authored
-  toponyms (the pillars are authored anyway) or a small grammar
-  extension (a location-scoped minted name materializing at genesis)
-  — the opening decides.
+  pack). iter-103 audit notes, resolved iter-104 (the owner's
+  fork-analysis call): the CLI `--pack` prerequisite lands at iter-105
+  (`cli-pack` above); the stoplist self-check extension stays the
+  reskin day's own step; the toponym question resolved by the
+  OVERRIDE-ELSE-DERIVED law (the travel price's own family, D-132):
+  authored toponyms WIN (level 1 authors everything — speed is the
+  gate's own shape), else the name MINTS from the declared profiles
+  through a named cosmetic stream (INV-2's law: deterministic per
+  seed, never desyncs canon) at the render surfaces that need it —
+  the dogfooding line held (the province's name IS minted from its
+  profiles, phases.md §6), zero canon events, zero corpus price; no
+  genesis birth, no grammar-trigger extension (the npc-only +
+  condensation-gated grammar stays untouched — the mint is
+  render-side, never a canon materialization).
 - `res-1` · the resource/economy layer — todo, owner-gated (VISION §6's
   "scarcity" formula word gets its row owner): the closed scarcity cycle
   (source → flow → sink) as PACK DATA — the dependency graph, flows as
@@ -139,21 +153,46 @@ drafts from phases.md §6 at the opening iteration)
   6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
   a generated world's edges is impossible); an MST/k-nearest graph over
   the sites (the Red Blob family); a PASS_ORDER growth = a D-row when it
-  lands; authored packs keep manual exits (the pack wins). iter-103
-  audit note — the READ-PATH fork the opening must design: the exits
-  consumers read the PACK record today (the LOD warm ring, the intent
-  door's move validation, the place-1 lint); a generated world's exits
-  are seed-dependent — never static pack data — so "emit" is either
-  (a) canon births on `world_formed` + the consumers re-pointed to
-  the fold (the bridge-1 projection pipe extended to exits; place-1's
-  contract becomes a pass invariant) or (b) a derived L3 read from
-  the WorldModel (the travel price's own shape, no canon write — the
-  lint invariants move into the pass); the pack-wins override stays
-  authored either way.
+  lands; authored packs keep manual exits (the pack wins). iter-104
+  resolves the READ-PATH fork (the owner's combined-variant call):
+  the derived L3 read WINS, sharpened — the pass-computed graph lives
+  on the WorldModel (L11: derived, rebuildable, never truth; replay
+  rebuilds it from the header seed + pack, the pure function); the
+  consumers (the LOD warm ring, the intent door's move validation,
+  travel's edge lookup) re-point through ONE shared read with the
+  pack-wins override — `exits(location)` = the authored record if
+  declared, else the pass-derived edges mapped through the site
+  claims (deterministic order); place-1's claim↔exits invariant
+  RELOCATES into the pass for the generated half (asserted at emit,
+  where the data is born — relocated, never weakened; the load lint
+  unchanged for authored packs). NO canon births for exits:
+  seed-dependent derived data stays out of the log (INV-1 untouched —
+  the read is runtime L3, the fold never needs it; no event-id
+  shifts, no M3/M5 inflation, corpus price zero by construction; the
+  `world_formed` outcome block stays as-is).
 
 > W3 closed without new rows (the calendar binding is maclock-1's own,
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
+
+### iter-104 · owner-called fork analysis — done (doc-only)
+
+The owner's chat call: every open question and fork worked into a
+final COMBINED variant (the owner's stated preference — one variant
+gathering the pros, neutralizing the cons, no crutches). Verified
+BEFORE working (1589+1 green, ruff clean, HEAD 13c23c4, Python
+3.12.14). Routed into the rows above: `cli-pack` pinned iter-105
+(pre-opening, the streak-breaker), the roads-1 read-path fork and
+the world-2 toponym question both resolved under the ONE
+override-else-derived law family (the travel price's own, D-132 —
+pack-authored data wins, else the (seed, pack)-derived read),
+since-1 routed to phase 6 (world-2's condensing travelers the first
+real consumer). The two standing owner questions (DIRECTOR_SPEC
+§11's L6 conflict, D-081's climax flag) NOT silently resolved —
+combined-variant proposals delivered in chat, the owner decides.
+Zero new KIs. The doc-only streak surfaced per AGENTS §2.5: this is
+the fifth, the owner's own call again (D-022); iter-105 is pinned
+CODE.
 
 ### iter-103 · owner-called phase-6 plan audit — done (doc-only)
 
@@ -216,8 +255,14 @@ never touched by an intake)
   (macro ticks, urgencies, rotations); this row renders it on
   re-encounter. Zero canon writes, zero streams, zero corpus price by
   construction (read-side); the pack declares the line vocabulary. The
-  source text's pattern #16, its own single-highest-value pick. Detail:
-  D-135 + phases.md §6's encounter block.
+  source text's pattern #16, its own single-highest-value pick. iter-104
+  routing (the owner's fork-analysis call): the surface lands IN phase
+  6 — world-2's condensing travelers are the first real consumer (the
+  tavern pack's re-encounter surface is too thin to author the line
+  vocabulary against: the leave/return pair + static NPC placement,
+  the tune-3 finding); the fold deltas it reads all exist today, zero
+  pre-opening work owed. Detail: D-135 + phases.md §6's encounter
+  block.
 
 ### iter-77 · meta-analysis routed candidates — LANDED (iter-79, the
 owner's verdict call; the detail lives in git + worklog + D-110..D-113)
