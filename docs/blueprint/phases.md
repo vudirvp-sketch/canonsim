@@ -997,6 +997,61 @@ causality → the cause TREE + closed event vocabularies; generic mush
 custom vocabulary); the player-centered world → the cold tiers + macro
 aggregates (the phase-5 exit criterion's own shape).
 
+The cost & consequence laws (intake-9, D-134 — the owner's 2026-09-12
+cross-media analysis routed; the document's three declared contradictions
+resolved as PACK LAWS, zero engine change; a future pack consults these
+before inventing its own consequence shapes — the same consult posture as
+the minus ledger above):
+
+- **The cost law** (death/maiming — the Soul-Scars-vs-Hades conflict):
+  mechanics own the cost, narration owns the meaning. A consequence is
+  diegetic state (flags, claims, relations, knowledge records);
+  recovery is an explicit costed counter-event (the D-133 legal revert,
+  the weather-1 erosion family's own shape); never stat-debt math (the
+  cumulative-debt minus), never a price the optimizer pre-builds into
+  the sheet (the power-tax minus). The skill-gap minus is the
+  director's own job (the weight_multiplier + per-NPC targeting —
+  pressure adapts to the party); the narrative half (the scar as
+  story) rides the reflection folds + the tone dial. Punishment and
+  romanticization stop competing because they own different layers.
+- **The failure law** (fail-forward): standing law named for pack
+  designers — a failed action must change the world's answer, never
+  repeat the question (the KI#13 no-op discipline + the door-reject
+  state writes: failure is canon). The d20 host conflict is void:
+  checks are state-coupled door tests, not naked dice.
+- **The corruption law** (any power-with-a-price family): hard
+  pack-declared thresholds (lint-tested — the depth-6 law, Sekiro's
+  predictability), diegetic per-NPC consequences (specific relations
+  flip, specific NPCs refuse — the player sees consequences rendered,
+  never a scale: the thermometer minus), the table's softness kept as
+  pack data (the D-030 dial — per-table reproducible, never GM
+  discretion at runtime).
+- **The decay-branch law** (B4 / Darkest Dungeon): any degradation or
+  affliction family branches on the NPC's live axes (the player's
+  pattern of falls chooses the branch), never a linear depth-tied
+  track.
+- **The flashback law** (Blades in the Dark): retroactive facts are
+  NEW events through the validation door (consistency-gated — the
+  fact transaction + ExpectedVersion re-checks), never history edits
+  (INV-5 held); a pack wanting heist fiction costs them against a
+  stress-like resource (the leverage/expiry shape).
+- **The ambient law** (RotF/Auril): ambient pressure (weather,
+  seasons) never carries personal drama — it seeds human consequences
+  (the D-082 pattern: the storm seeds the murmur); the antagonist is
+  the triangle, the sky is context (weather-1's canon-but-not-tale
+  design, promoted to law).
+- **Parked pack patterns** (owner-gated, zero engine change — named
+  here so a future row finds them): the loop pack (Majora — the macro
+  clock re-fires its cadence, knowledge survives in `known_by` (L6:
+  knowledge is state, never a gate), world resets via counter-events);
+  the low-magic layer with its three lessons (magic as scarcity, never
+  infrastructure; mishaps as state-coupled seeds (D-082), never a
+  class tax; defiling as a res-1 sink — power's price is scarcity
+  somewhere); the soul-scar pattern riding any future combat-bearing
+  pack (combat outside every planned phase); belief-as-rules (the
+  phase-6 culture rows' per-NPC half — AP-8 behavior rules +
+  prohibitions, the Disco Elysium shape).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

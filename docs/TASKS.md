@@ -416,6 +416,32 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > opening, the D-096 precedent. The queue untouched (name-1 stays
 > pinned; TASKS owns composition, never order).
 
+### Research intake 9 (iter-100; the TTRPG cross-media analysis, routed)
+
+> The owner's 2026-09-12 chat call — the external consolidated analysis
+> of TTRPG settings (Eberron/Dark Sun/Planescape/Greyhawk/Ravenloft),
+> 5e/OSR modules, and mechanical injections (Soul Scars, Fail Forward,
+> Clocks & Flashbacks, Mishaps & Meta-Timers, Pushing Rolls,
+> Corruption) with synergy combos and three declared contradictions —
+> verified against HEAD `1bfcf41` before routing (the clone green:
+> 1589+1, ruff clean; the intake family's verify-first law). The
+> verdict set is D-134: ~70% CONFIRMED already landed or pinned (res-1
+> = the Dark Sun bookkeeping cure; depth-6 = the faction-mechanics
+> cure; lazy depth = the unused-content cure; the no-op discipline +
+> door-reject = the fail-forward cure; the balance harness = the
+> untested-statblock cure); the three contradictions REFINED into pack
+> laws (the cost / failure / corruption laws + the decay-branch,
+> flashback, and ambient laws — `docs/blueprint/phases.md` §6's new
+> block, PACK_SPEC material); DEFERRED owner-gated: the loop-pack,
+> low-magic, soul-scar, and belief-as-rules pack patterns (zero engine
+> change, riding world-2 / res-1 / PACK_SPEC); REFUSED with cause:
+> creature-ecology simulation, visible morality meters,
+> history-editing flashbacks, vehicle subsystems. NO new backlog rows
+> (the D-096 just-in-time law; the material rides the owner-gated
+> W4/phase-6 rows). The text itself stays outside the repo
+> (convenience-copy law). The queue untouched (the phase-5 exit
+> review stays the owner's call).
+
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 
 > The research review's confirmed holes, landed additively — one family

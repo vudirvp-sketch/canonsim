@@ -220,6 +220,14 @@
 | Fallout: New Vegas (D-130) | triangular faction leverage: three powers with mutually exclusive victory conditions, each viable, the player's allegiance tips the province — depth-6's dramatic shape (the ratio grid); ours is the emergent form: dynamics tip, never script gates |
 | Pathologic (D-130) | scarcity as the dramatic register: the town that runs out, prices as narrative pressure — res-1's framing (the closed cycle is the story engine, not bookkeeping); minus: authored misery curves — ours simulates and the director plans consequences (D-005) |
 | Caves of Qud (D-130) | the hybrid confirmation: authored pillars (factions, customs, tone) over a generated surface (map, per-run history) — exactly the pack/worldgen split; identity is authored, texture is procedural |
+| Darkest Dungeon (D-134) | abstraction law: manual bookkeeping → one readable pressure meter (res-1's read surface — integer truth below, one rendered line above); branching afflictions — the decay-branch law (degradation branches on NPC axes, never a linear track) |
+| Frostpunk (D-134) | scarcity as meters + laws-as-dials (res-1's read surface + the D-030 dial confirmation); minus: authored misery curves — ours simulates and the director plans consequences (D-005, the Pathologic minus family) |
+| Sekiro: Dragonrot (D-134) | named-NPC consequences at hard thresholds (the corruption law's firing shape: specific NPCs sicken, specific quests close — diegetic, predictable, pack-declared) |
+| Disco Elysium (D-134) | ideology as character mechanics: beliefs → behavior rules (PACK_SPEC AP-8; the phase-6 culture rows' per-NPC half); philosophy stops being flavor text |
+| Planescape: Torment (D-134) | philosophy affecting the character (the belief-as-state confirmation; the tabletop setting's "philosophy without mechanics" minus cured by depth-6 + PACK_SPEC rules) |
+| Majora's Mask (D-134) | the state-preserving loop: the clock re-fires its cadence, knowledge survives in `known_by` (L6 — knowledge is state, never a gate), the world resets via counter-events (D-133) — a loop pack on landed primitives, zero engine change |
+| Slay the Spire / Hades (D-134) | adaptive randomization: the run's state couples into the generator's weights (the weight_multiplier + the D-082 seeded pattern; the "uncalibrated seed" anti-row's cure — randomization decoupled from world state) |
+| Pathfinder: Kingmaker (D-134) | statecraft as cold aggregates (depth-3/7 confirmation: the kingdom runs off-screen, the player surface stays O(relevance)); minus: administration eats pacing — the macro LOD is the cure |
 
 ## 11. Unverified / misattributed (anti-hallucination log)
 

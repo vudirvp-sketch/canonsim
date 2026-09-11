@@ -13,6 +13,32 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-100 · 2026-09-12 · intake9 — the owner's chat call, the external
+TTRPG cross-media analysis routed (6 files doc-only, zero code, zero
+corpus price — the intake-8 six-file precedent; one family)
+- verified BEFORE working (1589+1 green, ruff clean, HEAD 1bfcf41);
+  the verdict set is D-134: ~70% confirmed landed/pinned (res-1 =
+  Dark Sun's bookkeeping cure, depth-6 = the faction-mechanics cure,
+  lazy depth = the unused-content cure, the no-op discipline =
+  fail-forward's cure, the balance harness = the untested-statblock
+  cure); the document's three declared contradictions refined into
+  pack laws — the cost law (mechanics own cost, narration owns
+  meaning), the failure law, the corruption law (+ decay-branch,
+  flashback, ambient) — phases.md §6's cost & consequence block
+- deferred owner-gated: the loop-pack / low-magic / soul-scar /
+  belief-as-rules pack patterns (zero engine change, riding
+  world-2/res-1/PACK_SPEC); refused: creature-ecology sim, visible
+  morality meters, history-editing flashbacks, vehicle subsystems
+- docs: DECISIONS D-134, TASKS the intake-9 section, phases.md §6
+  (+56 lines, substance), REFERENCES §10 (+8 pattern rows: DD,
+  Frostpunk, Sekiro, Disco Elysium, PST, Majora, StS/Hades,
+  Kingmaker), STATUS re-pinned, this file. iter-91 evicted here
+  (verified against git in this edit); 10 after. The queue untouched
+  — the phase-5 exit review stays the owner's call. Caps: STATUS
+  ~893 / TASKS 1189 / DECISIONS 100 lines (67 rows) / phases 1122 /
+  REFERENCES 319 — over-cap files ride the documented §6.1 substance
+  precedent (D-095..D-133), trim at the phase-5→6 gate.
+---
 iter-99 · 2026-09-11 · rev5 — the owner-requested pre-gate revision:
 phase-5 verification + the long-run probes + the test actualization
 (5 files — 1 new test + 4 doc sync: the revision + the test
@@ -383,65 +409,5 @@ noted here)
   TASKS 1055 / DECISIONS 92 lines (62 rows) / phases 841 / README
   701 — over-cap on substance (§6.1, the D-095..D-126 precedent),
   trim at the phase-5→6 gate.
-iter-91 · 2026-09-10 · lod1 — depth-3, the scene LOD (D-116's W2
-consumer head, the macro clock's FIRST consumer; 16 files — 6 code
-(lod.py new, states, urgencies, loop, macro docstring, pack the
-KI#83 guard) + 3 test files (test_lod.py new, test_core the probe,
-test_macro the re-pin) + 7 doc sync: the zones + the filters + the
-loop integration + the pins are one family, the iter-86..90
-footprint; AGENTS §2.3: 16 > 5-6, the objective scope noted here)
-- core/lod.py (new): the zone family's single owner — `scene_zones`
-  (the pure partition over the exits graph + the PC's live position:
-  ACTIVE per-beat / WARM the exits in pack order / COLD the rest in
-  declaration order, self-exits + duplicates filtered, LodError the
-  pred-contract guards), `npc_population` the census read,
-  `COLD_COUNT_KEY = "cold_npcs"` the turn's flat count. THE ONE-GATE
-  LAW: the LOD engages exactly when the macro clock is armed (the
-  warm cadence IS the macro cadence — one clock, zero new pack
-  vocabulary); the unarmed law is the one-scene world.
-- core/loop.py: `_run_macro(tick, entry_tick)` — the turn FIRST
-  carrying the cold census, then the warm ring (the drift chained
-  after the turn at the crossing tick, the goal rolls at the
-  crossing tick enqueued at the entry tick — the beat machinery
-  minus the DIRECTOR, which stays global: the story layer, never
-  ambient life); `_run_beat` scopes to the ACTIVE zone under an
-  armed clock (`_scene_zones`, None unarmed). core/states.py +
-  core/urgencies.py: the `locations=None` LOD filter (None the
-  one-scene law; the walk cuts, never rescores — L13; the odds never
-  change, the roll cadence is the LOD's own cost). core/macro.py:
-  the docstring's consumer re-pin (depth-3 the surface's first
-  caller). core/pack.py: KI#83 — the entities lint's missing-`exits`
-  KeyError leak, the named-PackError guard (the KI#82 family).
-- +17 tests (tests/test_lod.py — the partition, the loud guards, the
-  census's npc-only law, the self-exit filter, the filter scopes with
-  the L13 no-rescore law + the draw-driven stream registry, the
-  integration: the warm ring at the crossings with the cause chain,
-  the active-per-beat vs warm-at-the-crossing split, the cold
-  silence + the census ride, the census following the PC across the
-  move, the unarmed twin's byte-identity over plumbing_smoke +
-  day1_full, determinism, the co-occurring family order, the
-  template's census binding; tests/test_core.py the KI#83 probe;
-  tests/test_macro.py the corpus pin re-measured) — 1442→1459+1
-  green, ruff clean (3.12.14, the env pin; seeds 42 + 0 + unset
-  spot-checked). Corpus price, measured BOTH arms: ZERO by
-  construction — the committed pack unarmed (the one-scene law), the
-  unarmed crafted twin byte-identical to the committed bytes over
-  the corpus scripts; the armed arm's delta the macro family alone
-  (seed 42: 18 vs 6 events — 2 turns + 10 warm drifts, the
-  substantive fingerprint EQUAL at 0, the rolls on the isolated
-  urgency streams); ZERO re-pins (git-verified: no fixture in the
-  diff, the T1 golden untouched).
-- docs: DECISIONS D-125, TASKS depth-3 done, phases.md §5 the
-  scene-LOD paragraph + the intake bullet's landing tag, NAV §1 the
-  lod row + the states/urgencies/loop extensions, README the
-  narrative sentence + the code-map line + the stale test count
-  synced (1323→1459 — the honest-count law), STATUS re-pinned (the
-  queue: depth-6 next, the W2 wave order) + KI#83 recorded + KI#82
-  deleted (closed iter-88, three iterations past — the deletion was
-  overdue at iter-90). iter-82 evicted here (verified against git in
-  this edit); 10 after. Caps: STATUS ~800 / TASKS 1044 / DECISIONS
-  91 lines (61 rows) / phases ~800 / README 681 — over-cap on
-  substance (§6.1, the D-095..D-125 precedent), trim at the
-  phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

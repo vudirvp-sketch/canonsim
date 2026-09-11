@@ -1,34 +1,26 @@
-Iteration: iter-99 (`iter-99-rev5` — the owner-requested pre-gate
-revision: phase 5's build column verified end-to-end, the tests
-actualized for the long-run surfaces the suite never reached, the
-living-world question probed and answered with numbers; the clone
-verified BEFORE working — 1586+1 green, ruff clean, HEAD 0ada288,
-Python 3.12.14 the env pin; the probe battery OUTSIDE the repo
-(D-046, the operator's Rule 9): storyline exhaustion (seed 125 +
-a 60-turn wandering tail — the day-2+ steady state), year-scale
-(3 crossings, seed 42 — the weather chain + the census + the
-watch-loop), fresh sandbox (seed 7, no crime — the idle world
-still beats), determinism (the long logs byte-identical + T2 fold
-clean), the 16-action post-story reach catalog, the balance
-harness 60 seeds both arms (M5 p50 0.79, chains 15-24, the
-stretch table max 1 — consistent with the phase records); THE
-FINDINGS (the exit review's input): the director a FINITE
-MAGAZINE on the committed pack (all six hooks first_time_only —
-spent within ~2 days; new crimes re-seed the buffer but the burn
-law holds — nothing releases again), the day-2+ steady state =
-rotations + decay + the maid/relief quiet urgencies + the social
-mill (rumor_told decays to zero; leverage expires at 720 — the
-drunk's card dies with the story), the scripted scenario is
-CONSUMED (the purse gone, the lamp broken — day-2 steal/arson
-door-reject carries_flagged/flagged_accessible), year-scale =
-the weather chain + the cold census riding an otherwise
-watch-change loop (weather canon-but-not-tale by design —
-test_weather's own pin; NO read surface renders the sky yet), and
-the suite's longest committed run had been ~1500 ticks — the gap
-this iteration closes; a sandbox answer for the owner's doubt:
-a full year runs in 0.56 s / 2210 events, 3 years in 3.2 s — the
-20-30-50-turn horizon is trivially affordable, even
-year-scale sessions) ·
+Iteration: iter-100 (`iter-100-intake9` — the owner's chat call:
+the external TTRPG cross-media analysis — settings (Eberron/Dark
+Sun/Planescape/Greyhawk/Ravenloft), 5e/OSR modules, mechanical
+injections (Soul Scars / Fail Forward / Clocks & Flashbacks /
+Mishaps & Meta-Timers / Pushing Rolls / Corruption), synergy
+combos, three declared contradictions — routed as the intake
+family's ninth verdict set, the iter-94/95 precedent (doc-only
+between queue rows, the ORDER owner's call); the clone verified
+BEFORE working — 1589+1 green, ruff clean, HEAD 1bfcf41, Python
+3.12.14 the env pin; the verdict set is D-134: ~70% of the
+document's points confirmed already landed or pinned (res-1 =
+Dark Sun's bookkeeping cure; depth-6 = the faction-mechanics cure;
+lazy depth = the unused-content cure; the no-op discipline +
+door-reject = fail-forward's cure; the balance harness = the
+untested-statblock cure), the three contradictions REFINED into
+pack laws (the cost / failure / corruption laws + decay-branch +
+flashback + ambient — phases.md §6's new block, PACK_SPEC
+material), the loop-pack / low-magic / soul-scar / belief-as-rules
+patterns deferred owner-gated, creature-ecology / visible
+morality meters / history-editing / vehicle subsystems refused
+with cause; +8 REFERENCES §10 pattern rows; NO new backlog rows —
+the material rides the W4/phase-6 rows; the queue itself
+untouched) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
@@ -36,30 +28,28 @@ depth-7 + name-1 + st-6a + weather-1 LANDED,
 the queue: EMPTY of live candidates — the phase-5 exit review is the
 owner's call (the gate rows owed there: the D-034 DECISIONS collapse
 + the first phases.md §5 staleness pass, D-128's own effect lines;
-this revision's probes + tests are the review's evidence base, and
+rev5's probes + tests are the review's evidence base, and
 the NAV tests-row lag — the post-iter-86 suites unlisted — belongs
 to the same staleness pass)) ·
 1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-+3 the longrun suite, self-comparing, zero corpus price).
+doc-only iteration — the count unchanged, zero corpus price by
+construction).
 ·
-Date: 2026-09-11 ·
-Scope: `tests/test_longrun.py` (new, +3 — the committed pack's first
-past-a-day runs: the crossing laws at the committed cadence (the
-year turn's derived calendar + the cold census + the weather chain
-chained to the turn inside the closed vocabulary), the day-2 living
-floor past the scripted storyline, the idle world's beats; every
-test self-comparing — the T1 byte-identity double-run + the T2
-replay fold on the long logs, ZERO corpus price by construction —
-no committed fixture touched, no pack byte moved),
-`docs/AGENT_NAVIGATION.md` (§1 the tests row's longrun clause),
-`README.md` (the count sync), `worklog.md`, `STATUS.md` (this file)
-— 5 files (the revision + the test actualization are one family;
-AGENTS §2.3: within the 5-6 cap). TASKS/DECISIONS untouched (the
-iter-96a audit precedent — no backlog row flips; the verdict D-row
-is the exit review's own).
-· The prior iteration's record: iter-98 (weather-1 — the ambient
-weather family + canon erosion, the committed macro arming). The
-detail lives in TASKS + worklog + git.
+Date: 2026-09-12 ·
+Scope: `docs/DECISIONS.md` (D-134, the verdict set), 
+`docs/REFERENCES.md` (§10 +8 pattern rows: Darkest Dungeon,
+Frostpunk, Sekiro, Disco Elysium, PST, Majora's Mask, Slay the
+Spire/Hades, Kingmaker), `docs/blueprint/phases.md` (§6 the cost &
+consequence laws block, +56 lines substance), `docs/TASKS.md` (the
+intake-9 section), `worklog.md` (this iteration's entry; iter-91
+evicted per the cap), `STATUS.md` (this file) — 6 files doc-only
+(the intake-8 six-file precedent; AGENTS §2.3: one family — the
+verdict set + its doc syncs; noted in worklog). Zero code, zero
+corpus price; the external text stays outside the repo
+(convenience-copy law).
+· The prior iteration's record: iter-99 (rev5 — the pre-gate
+revision: the long-run probes, the test actualization, the exit
+review's evidence base). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -642,7 +632,12 @@ ORIGINAL, the province sketch at `docs/blueprint/phases.md` §6
 riding world-2's level-2 half), the minus ledger, REFERENCES §10 +6
 rows; the queue itself untouched — name-1 stays pinned; the
 two-doc-only-iteration streak surfaced in the header per AGENTS
-§2.5.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
+§2.5.) (iter-100 intake-9 landed doc-only after rev5 — the owner's
+cross-media analysis call on the external TTRPG text; D-134 the
+verdict set: the cost/failure/corruption pack laws + the parked
+loop/low-magic/soul-scar/belief-as-rules patterns (phases.md §6),
+REFERENCES §10 +8 rows; the queue itself untouched — iter-99 was
+functional, no doc-only streak.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
 rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,
