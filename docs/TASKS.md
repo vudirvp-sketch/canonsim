@@ -442,6 +442,60 @@ header law — the detail lives in git + worklog + D-110..D-113)
 > (convenience-copy law). The queue untouched (the phase-5 exit
 > review stays the owner's call).
 
+### Research intake 10 (iter-101; the encounter & event-generation design notes, routed)
+
+> The owner's 2026-09-12 chat call — the external consolidated design
+> notes on encounter & event generation (three layers —
+> EncounterTemplate / NPCLedger / Director; a 23-pattern catalog + a
+> 7-type event-source taxonomy; director anti-spam controls;
+> determinism notes; a donor list; a depth-per-cost priority; four
+> declared contradictions) — verified against HEAD `533a384` before
+> routing (the clone green: 1589+1, ruff clean; the intake family's
+> verify-first law). The verdict set is D-135: the substrate
+> CONFIRMED complete — of the 23 patterns, 21 are pack-level
+> discipline or read-side shapes over landed primitives (the
+> eight-family substrate mapping in phases.md §6's encounter block;
+> the NPCLedger IS the projection + knowledge view, zero new
+> ontology — the source's own verdict); the ONE genuine gap routed
+> below (`since-1` — the re-encounter delta, the source's own
+> single-highest-value pick); the four contradictions DISSOLVED
+> against standing law (phase-scoped non-goals; the seven stream
+> families; D-079's rejected-flat XOR alternative; D-022
+> just-in-time); the world-state law + the detour fence + the
+> anti-repetition composition + the selection law landed in
+> phases.md §6's encounter block. DEFERRED owner-gated: the Kenshi
+> arrival-side dive (the condensation consumer — joins
+> ref-20's/world-2's opening), the 5–8 hook-pattern + condition-pair
+> catalog over the committed tavern_pack (a content row with a real
+> corpus price, post-exit-review), the per-tag recurring cooldown
+> (the recurring-murmur placeholder, DIRECTOR_SPEC §11). REFUSED
+> with cause: the standalone EncounterSystem / quest graph /
+> procedural prose / complex planner family (the source's own §11,
+> D-018's no-new-canonical-layers, D-005's small-formula law), the
+> `docs/design/ENCOUNTERS.md` spec home (the single-owner chain:
+> phases.md §6 + TASKS + REFERENCES + PACK_SPEC at its trigger),
+> stored global world-state objects (STATE-1/D-006 — derived reads),
+> player-intent-inferring triggers (L6/EPIST-1). REFERENCES §10 +7
+> pattern rows (Skyrim, Fallout, Project Zomboid, STALKER A-Life,
+> Shadow of Mordor, Rain World, Wildermyth). The text itself stays
+> outside the repo (convenience-copy law). The queue untouched (the
+> phase-5 exit review stays the owner's call).
+
+- `since-1` · the re-encounter delta — the "what happened since last
+  meeting" surface — todo, owner-gated (read-side, v0.2-grade; gate:
+  the phase-5 exit review passed, or the owner's direct call): a
+  per-entity line family on the brief's entity cards (BRIEF_SPEC
+  §3.4's extension) + the scene card, derived at assemble time from
+  the fold (status-axis deltas, position/membership transfers,
+  relation flips since the last co-presence tick) and the knower's
+  own records (what they heard) — the world-simulated half already
+  runs (macro ticks, urgencies, rotations); this row renders it on
+  re-encounter. Zero canon writes, zero streams, zero corpus price
+  by construction (read-side); the pack declares the line
+  vocabulary. The source text's pattern #16, its own
+  single-highest-value pick. Detail: D-135 + phases.md §6's
+  encounter block.
+
 ### v0.2 refinement backlog (opened iter-66; the owner's post-gate quality pass)
 
 > The research review's confirmed holes, landed additively — one family

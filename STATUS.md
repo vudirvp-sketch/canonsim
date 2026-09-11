@@ -1,26 +1,31 @@
-Iteration: iter-100 (`iter-100-intake9` — the owner's chat call:
-the external TTRPG cross-media analysis — settings (Eberron/Dark
-Sun/Planescape/Greyhawk/Ravenloft), 5e/OSR modules, mechanical
-injections (Soul Scars / Fail Forward / Clocks & Flashbacks /
-Mishaps & Meta-Timers / Pushing Rolls / Corruption), synergy
-combos, three declared contradictions — routed as the intake
-family's ninth verdict set, the iter-94/95 precedent (doc-only
+Iteration: iter-101 (`iter-101-intake10` — the owner's chat call:
+the external encounter & event-generation design notes — three
+layers (EncounterTemplate / NPCLedger / Director), a 23-pattern
+catalog + a 7-type event-source taxonomy, director anti-spam
+controls, determinism notes, a donor list, a depth-per-cost
+priority, and four declared contradictions — routed as the intake
+family's tenth verdict set, the iter-94/95/100 precedent (doc-only
 between queue rows, the ORDER owner's call); the clone verified
-BEFORE working — 1589+1 green, ruff clean, HEAD 1bfcf41, Python
-3.12.14 the env pin; the verdict set is D-134: ~70% of the
-document's points confirmed already landed or pinned (res-1 =
-Dark Sun's bookkeeping cure; depth-6 = the faction-mechanics cure;
-lazy depth = the unused-content cure; the no-op discipline +
-door-reject = fail-forward's cure; the balance harness = the
-untested-statblock cure), the three contradictions REFINED into
-pack laws (the cost / failure / corruption laws + decay-branch +
-flashback + ambient — phases.md §6's new block, PACK_SPEC
-material), the loop-pack / low-magic / soul-scar / belief-as-rules
-patterns deferred owner-gated, creature-ecology / visible
-morality meters / history-editing / vehicle subsystems refused
-with cause; +8 REFERENCES §10 pattern rows; NO new backlog rows —
-the material rides the W4/phase-6 rows; the queue itself
-untouched) ·
+BEFORE working — 1589+1 green, ruff clean, HEAD 533a384, Python
+3.12.14 the env pin; the verdict set is D-135: the substrate
+CONFIRMED complete — of the document's 23 patterns, 21 are
+pack-level discipline or read-side shapes over landed primitives
+(the eight-family mapping, phases.md §6), the ONE genuine gap
+routed as `since-1` (the re-encounter delta — read-side,
+owner-gated, the document's own single-highest-value pick), one
+refined into the world-state law; the four contradictions DISSOLVED
+against standing law (the phase-scoped non-goals; the seven stream
+families; D-079's rejected-flat XOR alternative; D-022
+just-in-time); the world-state law + the detour fence + the
+anti-repetition composition + the selection law landed in
+phases.md §6's encounter block; the Kenshi arrival dive + the 5-8
+hook-pattern catalog + the per-tag recurring cooldown deferred
+owner-gated; the standalone EncounterSystem / quest graph /
+procedural prose / planner family (the document's own §11), the
+docs/design/ENCOUNTERS.md spec home, stored world-state objects,
+and intent-inferring triggers refused with cause; +7 REFERENCES
+§10 pattern rows; ONE new backlog row (since-1, owner-gated — the
+queue itself untouched)) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
@@ -33,23 +38,25 @@ the NAV tests-row lag — the post-iter-86 suites unlisted — belongs
 to the same staleness pass)) ·
 1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
 doc-only iteration — the count unchanged, zero corpus price by
-construction).
+construction; the doc-only streak iter-100 + iter-101 — both the
+owner's chat calls, the D-022 exception, surfaced per AGENTS §2.5
+the iter-95 precedent).
 ·
 Date: 2026-09-12 ·
-Scope: `docs/DECISIONS.md` (D-134, the verdict set), 
-`docs/REFERENCES.md` (§10 +8 pattern rows: Darkest Dungeon,
-Frostpunk, Sekiro, Disco Elysium, PST, Majora's Mask, Slay the
-Spire/Hades, Kingmaker), `docs/blueprint/phases.md` (§6 the cost &
-consequence laws block, +56 lines substance), `docs/TASKS.md` (the
-intake-9 section), `worklog.md` (this iteration's entry; iter-91
-evicted per the cap), `STATUS.md` (this file) — 6 files doc-only
-(the intake-8 six-file precedent; AGENTS §2.3: one family — the
-verdict set + its doc syncs; noted in worklog). Zero code, zero
-corpus price; the external text stays outside the repo
-(convenience-copy law).
-· The prior iteration's record: iter-99 (rev5 — the pre-gate
-revision: the long-run probes, the test actualization, the exit
-review's evidence base). The detail lives in TASKS + worklog + git.
+Scope: `docs/DECISIONS.md` (D-135, the verdict set),
+`docs/REFERENCES.md` (§10 +7 pattern rows: Skyrim, Fallout,
+Project Zomboid, STALKER A-Life, Shadow of Mordor, Rain World,
+Wildermyth), `docs/blueprint/phases.md` (§6 the encounter &
+event-generation pattern catalog, +~80 lines substance),
+`docs/TASKS.md` (the intake-10 section + the since-1 row),
+`worklog.md` (this iteration's entry; iter-92 evicted per the cap),
+`STATUS.md` (this file) — 6 files doc-only (the intake-8/9
+six-file precedent; AGENTS §2.3: one family — the verdict set +
+its doc syncs; noted in worklog). Zero code, zero corpus price;
+the external text stays outside the repo (convenience-copy law).
+· The prior iteration's record: iter-100 (intake-9 — the external
+TTRPG cross-media analysis, D-134). The detail lives in TASKS +
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -637,7 +644,14 @@ cross-media analysis call on the external TTRPG text; D-134 the
 verdict set: the cost/failure/corruption pack laws + the parked
 loop/low-magic/soul-scar/belief-as-rules patterns (phases.md §6),
 REFERENCES §10 +8 rows; the queue itself untouched — iter-99 was
-functional, no doc-only streak.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
+functional, no doc-only streak.) (iter-101 intake-10 landed
+doc-only after intake-9 — the owner's encounter-design notes call;
+D-135 the verdict set: phases.md §6's encounter block + the
+`since-1` read-side row (owner-gated, the one genuine gap — the
+re-encounter delta); the queue itself untouched — the exit review
+still the Next step; the two-doc-only-iteration streak surfaced in
+the header per AGENTS §2.5, both the owner's calls, the D-022
+exception.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
 corpus's first live numbers + the heartbeat baseline row; the
 {3–8B, GBNF} arm + the prose heartbeat families the standing gap
 rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,

@@ -1052,6 +1052,87 @@ the minus ledger above):
   phase-6 culture rows' per-NPC half — AP-8 behavior rules +
   prohibitions, the Disco Elysium shape).
 
+The encounter & event-generation pattern catalog (intake-10, D-135 —
+the owner's 2026-09-12 encounter-design notes routed; the same consult
+posture as the minus ledger and the cost laws: a future pack reads this
+before authoring encounter families — the patterns are pack data +
+read-side surfaces over landed primitives, zero new machinery):
+
+- **The substrate mapping** (the source's 23 patterns collapse into
+  eight families, each with a landed owner): *identity & recurrence*
+  (the same NPC met twice, escalating recognition) = INV-1's
+  persistent ids + the D-112 (3) tier law (the id never changes —
+  `known_by`, texture, old knowledge survive condensation) + the
+  echo/traits/reflection ladder (felt / believed / concluded — the
+  escalating-dialogue gates ride the intent door); *memory-debt*
+  (itemized per-NPC entries, never one relationship number) = the
+  knowledge records themselves (token / fidelity / channel /
+  acquisition) + the pair axes — the source argues itself to the
+  landed shape; *residue & promotion* (smoke → scar → "the known
+  thief") = `state_changes` + texture + the D-133 erosion (reversal
+  as an explicit counter-event) + the trait/reflection promotions;
+  *collision & combination* (rain + open fire; drunk + narrow pass +
+  cargo) = the on_action table + the erosion family + the `prop`
+  leaf's any-path projection reads + the weight modifiers;
+  *continuation & chains* = the hooks buffer (EVENT_SCHEMA §5, 10–50
+  turns out) + the arcs + the options + the cause tree (M3);
+  *off-screen life & absence* = the cold tiers' macro aggregates +
+  autonomous urgencies + rotations (D-021 — the world answers for
+  itself); *false coincidence* = pack-declared schedules (rotations,
+  travel) that the reader patterns into legends — the perception is
+  the player's, the machinery zero; *second-order stories* (the
+  reader infers the event from its residue) = the scene-line claims +
+  the fire-follow-up shapes. The source's NPCLedger IS the projection
+  + knowledge view (goals → urgencies/faction rolls, schedule →
+  rotations, route → travel, memory → knowledge/echo/traits, state →
+  status axes) — zero new ontology, the source's own verdict.
+- **The one gap — the re-encounter delta** (`since-1`, TASKS,
+  owner-gated): the rendered half of "what happened since last
+  meeting" — a read-side line family on the entity/scene cards (fold
+  deltas since the last co-presence tick + the knower's own heard
+  records), the source's single-highest-value pick; the world-side
+  half already runs on the macro cadences.
+- **The event-source taxonomy** (pack-design vocabulary, never code):
+  encounter (entity intersection) / interruption (crosses the
+  reader's route) / consequence (a past event reaches a new state) /
+  opportunity (world state opens a door) / discovery (arrival at a
+  running process — lazy detail + condensation) / recurrence (a known
+  entity again) / chain (a causal continuation). The doors and the
+  director's release paths already implement all seven; the taxonomy
+  names what a pack's families are.
+- **The world-state law** (the source's `world_state` object
+  refined): global pressure ("bandit_threat: low") is a DERIVED read
+  over the fold at its consuming surface (a predicate, a rendered
+  line — L3), never a stored mutable object (STATE-1/D-006); the
+  causal route to the same effect: the destroyed den shrinks the
+  faction's live member base and the ratio dynamics answer (depth-6),
+  the scarcity answers (res-1's derived spreads).
+- **The detour fence**: "off the obvious path" triggers are WORLD-SIDE
+  predicates (a place leaf on a declared location + the quiet gate —
+  pack data today), never player-intent inference (a "deviated" flag
+  is the Alien learns-the-player anti-pattern's edge case; L6/
+  EPIST-1 — the director reads the world, not the player's plan).
+- **The anti-repetition composition** (the anti-spam asks, answered
+  by standing layers): the per-NPC cooldown + the first_time_only
+  burn + the arc gaps + the world-coupled weights (different runs,
+  different winners) + the REST breathing room; a novelty-score
+  subsystem is REFUSED as duplicate bookkeeping — a multi-day pack
+  that repeats a family cures it with a weight modifier reading a
+  recent-release leaf (zero new machinery). Per-TAG recurring
+  cooldowns wait with the recurring murmur (DIRECTOR_SPEC §11, the
+  first-consumer law).
+- **The selection law** (the source's "weighted selection" refined):
+  the Paradox ai_chance lands as weight EVALUATION — the heaviest
+  effective option wins, ties by declaration order, zero RNG
+  (drama-2); the weighted draw stays excluded with MTTH (TIME-1).
+- **Parked, owner-gated**: the Kenshi arrival-side dive (squads
+  triggering events on arrival = the condensation consumer; joins
+  ref-20's/world-2's opening, just-in-time); the 5–8 hook-pattern +
+  condition-pair catalog over the committed tavern_pack (this block's
+  first consumer — a content row with a real corpus price,
+  post-exit-review); the radiant-template authoring shape (the
+  step-off-the-road micro-scenario as pack data — rides PACK_SPEC).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -228,6 +228,13 @@
 | Majora's Mask (D-134) | the state-preserving loop: the clock re-fires its cadence, knowledge survives in `known_by` (L6 — knowledge is state, never a gate), the world resets via counter-events (D-133) — a loop pack on landed primitives, zero engine change |
 | Slay the Spire / Hades (D-134) | adaptive randomization: the run's state couples into the generator's weights (the weight_multiplier + the D-082 seeded pattern; the "uncalibrated seed" anti-row's cure — randomization decoupled from world state) |
 | Pathfinder: Kingmaker (D-134) | statecraft as cold aggregates (depth-3/7 confirmation: the kingdom runs off-screen, the player surface stays O(relevance)); minus: administration eats pacing — the macro LOD is the cure |
+| Skyrim (D-135) | radiant micro-scenarios as TEMPLATES over the simulation layer (the authored-encounter shape — a pack's hook families with place/time gates, never a mechanic); minus: cells freeze when unloaded — ours: cold tiers keep ticking as macro aggregates |
+| Fallout (D-135) | the random-encounter TABLE decoupled from world state — the anti-row family (randomization must be state-coupled, D-005); faction reactivity = depth-6's emergent ratio grid (the FNV row's classic-encounters twin) |
+| Project Zomboid (D-135) | meta-events (noise → horde redirection) as the multi-channel quiet split + on_action extension pattern; environmental storytelling through residue — the state_changes/traces family confirmation |
+| STALKER A-Life (D-135) | the concept, not the shipped implementation: off-screen life as world-indifference — the cold tiers + condensation confirmation; the shipped minus (teleport spawns) is D-005's causeless surprise in the wild |
+| Shadow of Mordor (D-135) | the Nemesis shape = per-NPC memory-debt + repeated recognition over persistent identity — ours is the emergent form (knowledge/echo/traits + pair axes), never an authored nemesis graph; the procedural narrator layer is mode A's, never canon's |
+| Rain World (D-135) | the world exists independently of the player — the cold-tier confirmation at ecosystem scale; minus: opaque simulation — the cure is the brief's O(relevance) + the story-critical listing (readability stays first-class) |
+| Wildermyth (D-135) | relationship-driven events = pair-axes-gated template families (pack data over the pair map + trait gates); the comic-panel rendering is mode A territory (render, never invent) |
 
 ## 11. Unverified / misattributed (anti-hallucination log)
 

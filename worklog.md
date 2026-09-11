@@ -13,6 +13,47 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-101 · 2026-09-12 · intake10 — the owner's chat call, the
+external encounter & event-generation design notes routed
+(6 files doc-only, zero code, zero corpus price — the intake-8/9
+six-file precedent; one family)
+- verified BEFORE working (1589+1 green, ruff clean, HEAD 533a384);
+  the verdict set is D-135: the substrate CONFIRMED complete — 21
+  of the document's 23 patterns are pack-level discipline or
+  read-side shapes over landed primitives (the eight-family
+  mapping, phases.md §6; the NPCLedger IS the projection +
+  knowledge view); the ONE gap routed as `since-1` (the
+  re-encounter delta — read-side, BRIEF_SPEC §3.4's extension,
+  the document's own highest-value pick); the four declared
+  contradictions DISSOLVED against standing law (phase-scoping;
+  the seven stream families; D-079's rejected-flat XOR
+  alternative; D-022 just-in-time)
+- refined into phases.md §6's encounter block (~80 lines): the
+  substrate mapping + the event-source taxonomy + the world-state
+  law (derived reads, never a stored object) + the detour fence
+  (world-side predicates, never intent inference) + the
+  anti-repetition composition (a novelty subsystem refused as
+  duplicate bookkeeping) + the selection law (evaluation, never a
+  draw); deferred owner-gated: the Kenshi arrival dive (ref-20/
+  world-2), the 5-8 hook-pattern catalog (a content row, real
+  corpus price), the per-tag recurring cooldown (the murmur
+  placeholder); refused: the standalone EncounterSystem family
+  (the doc's own §11), docs/design/ENCOUNTERS.md (the
+  single-owner chain), stored world-state objects (STATE-1),
+  intent-inferring triggers (L6)
+- docs: DECISIONS D-135, TASKS the intake-10 section + since-1,
+  phases.md §6 the encounter block, REFERENCES §10 (+7 rows:
+  Skyrim, Fallout, Zomboid, STALKER A-Life, Shadow of Mordor,
+  Rain World, Wildermyth), STATUS re-pinned (the doc-only streak
+  iter-100+101 surfaced per AGENTS §2.5 — both the owner's
+  calls, the D-022 exception), this file. iter-92 evicted here
+  (verified against git in this edit); 10 after. The queue
+  untouched — the phase-5 exit review stays the owner's call.
+  Caps: STATUS 901 / TASKS 1240 / DECISIONS 101 (68 rows) /
+  phases 1202 / REFERENCES 326 — over-cap files ride the
+  documented §6.1 substance precedent (D-095..D-135), trim at
+  the phase-5→6 gate.
+---
 iter-100 · 2026-09-12 · intake9 — the owner's chat call, the external
 TTRPG cross-media analysis routed (6 files doc-only, zero code, zero
 corpus price — the intake-8 six-file precedent; one family)
@@ -352,62 +393,6 @@ noted here)
   here (verified in the same edit); 10 after. Caps: STATUS 863 /
   TASKS 1072 / DECISIONS 93 lines (63 rows) / phases 860 / README
   719 — over-cap on substance (§6.1, the D-095..D-127 precedent),
-  trim at the phase-5→6 gate.
----
-iter-92 · 2026-09-10 · fact1 — depth-6, factions with goals (D-116's
-W2 row after depth-3; 15 files — 6 code/render (factions.py new,
-rng, pack, fold, loop, chronicle) + 2 test (test_factions.py new,
-test_mechanics the future-layer placeholder rename) + 7 doc sync:
-the
-formula + the entity kind + the lint + the walk are one family, the
-iter-90..92 footprint; AGENTS §2.3: 9 > 5-6, the objective scope
-noted here)
-- core/factions.py (new): the factions' single owner —
-  `faction_probability` the KeeperRL small formula (the affected
-  fraction of the membership, per-cent floored, against the pack
-  threshold, ramping to `max_per_beat`; the deadband at-or-below the
-  bar, the vacuity law; pure integer arithmetic), `faction_intents`
-  the goal walk (each member's LIVE `status.<axis>` — D-006, never a
-  stored group score; d100 on the entry's OWN
-  `faction:<group>:<kind>` stream — the D-079 family's FIFTH member,
-  one draw per walk, bar 0 included (the cadence law); a hit rides
-  the front door, actor = the group id — D-112's one id; the
-  requires gates stay silent). core/rng.py: FACTION_PREFIX +
-  `faction_stream_name` (five families).
-- core/pack.py: the `groups` category (OPTIONAL, the 68a pattern —
-  anchor a declared location, members declared npcs, ids unique
-  across categories, closed vocabulary) + the `_factions` lint (after
-  `_urgencies`: axis ∈ rules.states, trigger ≥ 0, threshold 0..99 /
-  max 1..100 — dead data refused, the (group, kind) pair unique,
-  engine-2's twin). core/fold.py: the anchor seeds the projection (an
-  actor's read surface, never a scene body). core/loop.py: the
-  faction walk beside the urgencies at the beats AND the crossings
-  (the anchor scoping the zone — cold factions silent, their
-  population ride depth-7's aggregates). render/chronicle.py: the
-  position fold seeds the anchors ({location} renders for a group).
-- +34 tests (tests/test_factions.py — the formula's integer laws; the
-  lint refusals (groups + entries, parametrized); the walk: the
-  one-id intent, the isolated stream (draw-driven registry), the
-  cadence law at bar 0, the non-holder sit-out, the LOD scoping by
-  the anchor, the silent gates; the integration: the door + the cause
-  chain + `faction_0000` in provenance, byte-identical determinism,
-  the warm/active/cold arms under an armed clock, the tale line; the
-  both-arms price: the fingerprint EQUAL, the delta the muster family
-  ALONE; the inert twin byte-identical over plumbing_smoke +
-  day1_full) — 1459→1493+1 green, ruff clean (3.12.14, the env pin;
-  seeds 42 + 0 + unset spot-checked). ZERO re-pins (git-verified: no
-  fixture in the diff, the committed pack untouched — no groups, no
-  factions, zero draws). tests/test_mechanics.py: the future-layer
-  placeholder renamed factions→guilds — the placeholder WAS the
-  depth-6 block's own name (the law's own lifecycle, D-126).
-- docs: DECISIONS D-126, TASKS depth-6 done, phases.md §5 the P3b
-  landing tag, NAV §1 (the factions row + the rng five-family + the
-  loop/fold/render extensions), README (the narrative + the code-map
-  row + the count 1459→1493), STATUS re-pinned (the queue: depth-7 +
-  name-1 per D-116's wave order) + this file. iter-83 evicted here
-  (verified against git in this edit); 10 after. Caps: STATUS 861 /
-  TASKS 1055 / DECISIONS 92 lines (62 rows) / phases 841 / README
-  701 — over-cap on substance (§6.1, the D-095..D-126 precedent),
   trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)
