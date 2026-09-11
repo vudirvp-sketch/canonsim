@@ -13,6 +13,48 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-103 · 2026-09-12 · ph6-audit — the owner's chat call: the
+phase-6 plan + the project audited from the height of the landed
+solutions, heightened plan-detail attention (3 files doc-only, zero
+code, zero corpus price — the iter-34 owner-audit footprint family;
+AGENTS §2.3: the objective scope noted here)
+- verified BEFORE working (1589+1 green, ruff clean, HEAD e6c95ff,
+  Python 3.12.14 the env pin — the first bare-pytest probe failed on
+  the 3.13 interpreter, the FAQ's `python -m pytest` law held); the
+  verdict: COHERENT — world-2/res-1/roads-1 agree across TASKS /
+  phases.md §6 / ROADMAP §2; the D-134/D-135 consult material mapped
+  onto its landed owners (verified in code: on_action, the hooks
+  buffer, the arcs, the cause tree, the cold tiers, rotations, the
+  folds, the erosion family); res-1's dependencies all landed; no
+  TODO/FIXME residue; the owed items already recorded (PACK_SPEC
+  trigger, ref-18/ref-20 just-in-time); the two standing owner
+  questions (DIRECTOR_SPEC §11's L6 conflict, D-081's climax flag)
+  re-checked, unchanged
+- FOUR detail findings routed to the TASKS rows (zero new KIs —
+  plan-detail notes, not defects): st-5's "with phase 5" pointer
+  stale post-closure (re-pointed: unowned by a phase, the first
+  consumer decides); the CLI `--pack` flag absent — the stoplist
+  docstring's "the CLI takes the pack dir as config" claim is drift,
+  the flag never existed (git -S verified; world-2 level-1's own
+  prerequisite; the stoplist self-check is tavern-tied too); the
+  roads-1 exits READ-PATH fork (the exits consumers — LOD warm ring,
+  the intent door's move validation, the place-1 lint — read the
+  pack record today; a generated world's exits are seed-dependent,
+  never static pack data: canon births + fold-reading consumers vs a
+  derived L3 read, the opening designs it); the name-1 toponym
+  question (the grammar is npc-only + condensation-gated; the
+  province-name dogfooding line needs a world-2 design call)
+- docs: TASKS (the iter-103 section + the world-2/roads-1 row
+  enrichments + the st-5 re-point), STATUS (the header re-pin +
+  Next step: st-4/st-5 added to the owner-gated enumeration + the
+  audit verdict), this file. iter-94 evicted here (verified against
+  git in this edit); 10 after. The doc-only streak surfaced per
+  AGENTS §2.5 (iter-100..103, all the owner's own calls, the D-022
+  exception — the next iteration should be the phase-6 opening or
+  an explicit owner call). Caps: STATUS 657 / TASKS 743 — over-cap
+  held on ledger substance (§6.1, the iter-102 precedent), trim at
+  the phase-6→7 gate.
+---
 iter-102 · 2026-09-12 · gate — the phase-5 exit review, the owner's
 chat call (8 files doc-only, zero code, zero corpus price — the
 iter-54/65 gate footprint family; AGENTS §2.3: the objective scope
@@ -355,29 +397,5 @@ AGENTS §2.3: 6 > 5-6, the one-family objective scope noted here)
   green, ruff clean. Caps: STATUS 827 / TASKS 1141 / phases 938 /
   REFERENCES 311 / DECISIONS 96 lines (66 rows) — over-cap held on
   substance (§6.1), trim at the phase-5→6 gate.
----
-iter-94 · 2026-09-10 · intake7 — research intake 7, the Anthropic-2026
-agent corpus routed (doc-only, the owner's adoption call; D-128/D-129;
-7 files — the iter-85 intake footprint family, AGENTS §2.3: 7 > 5-6,
-the one-family objective scope noted here)
-- verified BEFORE routing: the clone green (1516+1, ruff clean, HEAD
-  12f5a07) + all six articles fetched live (BEA carries the Managed
-  Agents update note; the Apr-2026 flagship's brain/hands split,
-  context anxiety, cattle — confirmed in the fetched bytes, not the
-  analysis text's word)
-- adopted: ROADMAP §5 step 6 (the protocol-law staleness pass — AGENTS
-  grew +190/−5 over 6 commits, only a gate pass prunes), MVP_SCOPE §18
-  the actionable-error bullet (D-111 generalized; KI#82/#83 the
-  evidence), TASKS mech-2 (default output caps on the introspection
-  CLIs — trace measured 188 lines/12 KB on day1_full, O(ticks)),
-  SPECS_BACKLOG the SOW harness-skeleton sketch; refused with cause:
-  platform plumbing (MCP/sandboxes/OAuth/TTFT), multi-agent default,
-  semantic search, sleep-time compute, LLM-as-judge
-- D-129: protocol-law D-rows carry expected observable effects,
-  checked within 1-2 iterations; the queue untouched (name-1 pinned);
-  iter-84 evicted here (verified against git in this edit; 10 after);
-  re-run post-edit: 1516+1 green, ruff clean. Caps: STATUS 820 / TASKS
-  1113 / ROADMAP 102 / MVP 404 / DECISIONS 95 lines (65 rows) —
-  over-cap held on substance (§6.1), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

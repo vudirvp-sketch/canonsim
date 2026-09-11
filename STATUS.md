@@ -1,59 +1,58 @@
-Iteration: iter-102 (`iter-102-gate` — the owner's exit-review
-call: the phase-5 gate CLOSED, verdict PASS, the decision D-136; the
-queue had been empty of live candidates since weather-1, rev5
-(iter-99) the pre-gate evidence base; the clone verified BEFORE
-working — 1589+1 green, ruff clean, HEAD 5ecba27, Python 3.12.14 the
-env pin; the full ROADMAP §5 protocol re-run: the seed-125 gate pair
-ON M1=0.52/M2=0.2 (56 events — iter-98's DESIGNED day1_full price, the
-LOD's one-gate engagement; the iter-65 record 0.509/0.333/61) / OFF
-T8 24 chains — the exit criterion "an emergent chain of 3+ events
-without the player" MET in its worldgen-fed form (the ARMED committed
-pack: the depth-5b genesis + the year-scale macro arming + the weather
-chain; the 60-seed band 15–24, M5 p50 0.79, stretch max 1 — rev5's
-phase records hold; T7 the tale reads as a story, the worldgen genesis
-+ world_history lines opening the chronicle; the longrun pins — T1/T2
-on the year-scale log, the day-2 living floor, the idle world — green;
-no kill-criteria hit); the §5 step-6 staleness pass verdicts: KEEP the
-rest, REWORD three discharged-phase-0 clauses (AGENTS §1's phase
-frame; INV-4's "before the phase-0 gate passes" → the standing
-boundary; §8's LLM-guard condition → the engine-1 owner gate), DROP
-none; D-129's effect-line habit UNEXERCISED (zero protocol-law rows
-since D-128 — reported out loud per its own consequence line); the doc
-debts paid at the gate: DECISIONS collapsed 71→30 (D-034 — the
-phase-5 build column, the intake verdict sets, the testproto/protocol
-rows, the v0.2 lance folded into families), TASKS collapsed 1240→694
-(the phase-5 ledger + the intake sections + the phase-3 rows; the
-residue over the 600 cap is the closed-phase ledgers' substance,
-§6.1), the NAV tests-row lag fixed (the post-iter-86 suites), the
-README resynced, the FAQ chain baseline synced (26→24, the designed
-day1_full price)) ·
+Iteration: iter-103 (`iter-103-ph6-audit` — the owner's chat call: the
+phase-6 plan audited "from the height of the existing solutions", with
+heightened plan-detail attention — the parked instruments + the whole
+project re-checked against the landed code; the clone verified BEFORE
+working — 1589+1 green, ruff clean, HEAD e6c95ff, Python 3.12.14 the
+env pin; the verdict: COHERENT — the phase-6 opening stands on solid
+ground: world-2/res-1/roads-1 agree across TASKS / phases.md §6 /
+ROADMAP §2; the D-134/D-135 consult material verified against its
+landed owners (on_action, the hooks buffer, the arcs, the cause tree,
+the cold tiers, rotations, the folds, the erosion family); res-1's
+dependencies all landed (maclock cadence, the aggregate surface,
+derived read-side values, the ratio dynamics); no TODO/FIXME residue;
+the owed items already recorded (PACK_SPEC trigger, ref-18/ref-20
+just-in-time); FOUR detail findings routed to their rows (TASKS
+carries them): the st-5 deferral pointer stale post-phase-5
+(re-pointed — unowned by a phase, the first consumer decides), the
+CLI `--pack` flag absent (world-2 level-1's own prerequisite — the
+stoplist docstring's "the CLI takes the pack dir as config" claim is
+drift, the flag never existed, git -S verified, the KI#22 family),
+the roads-1 exits READ-PATH fork (canon births + fold-reading
+consumers vs a derived L3 read — the opening designs it; the exits
+consumers read the pack record today), the name-1 toponym question
+(the grammar is npc-only + condensation-gated; the province-name
+dogfooding line needs a world-2 design call); zero new KIs —
+plan-detail notes, not defects; the two standing owner questions
+(DIRECTOR_SPEC §11's L6 conflict, D-081's climax flag) re-checked,
+unchanged, not phase-6 blockers) ·
 Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
 iter-102, D-136 — the exit criterion met, the worldgen-fed form; the
 phase table ROADMAP §2 owns the state; phase 6 opens on the owner's
 call, the iter-55/73 opener precedent — the instruments already
-drafted: world-2/res-1/roads-1, TASKS' phase-6 section) ·
+drafted: world-2/res-1/roads-1, TASKS' phase-6 section + the
+iter-103 audit notes riding the rows) ·
 1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
 doc-only iteration — the count unchanged, zero corpus price by
-construction; the doc-only streak now iter-100+101+102, all three the
-owner's own calls (the intake-9/10 research calls + the exit review
-itself), the D-022 exception each time — a gate close is the queue's
-terminal row, not documentation-loop evidence; AGENTS §2.5 surfaced
-per the iter-95 precedent).
+construction; the doc-only streak now iter-100+101+102+103, all
+four the owner's own calls (the intake-9/10 research calls + the
+exit review + this audit), the D-022 exception each time — an
+owner-called audit is the ORDER owner's direct call, not
+documentation-loop evidence; AGENTS §2.5 surfaced per the iter-95
+precedent — the next iteration should be the phase-6 opening or an
+explicit owner call, not a fifth doc-only pass).
 ·
 Date: 2026-09-12 ·
-Scope: `docs/DECISIONS.md` (D-136 + the D-034 collapse, 71→30 rows),
-`docs/TASKS.md` (the iter-102 gate section + the phase-5 ledger
-collapse 1240→694 + the phase-6 instruments section),
-`docs/ROADMAP.md` (§2 phase-5 CLOSED), `docs/AGENT_NAVIGATION.md`
-(§1 the tests-row lag — the post-iter-86 suites), `README.md` (the
-phase-5 closed resync), `AGENTS.md` (the three staleness-pass rewords:
-§1/§4/§8), `worklog.md` (this iteration's entry; iter-93 evicted per
-the cap), `STATUS.md` (this file) — 8 files doc-only, the
-iter-54/65 gate footprint family (AGENTS §2.3: the objective scope
-noted in worklog). Zero code, zero corpus price; the external runner
-lives outside the repo (Rule 9). The prior iteration's record: iter-101
-(intake-10 — D-135). The detail lives in TASKS + worklog + git.
+Scope: `docs/TASKS.md` (the iter-103 audit section + the roads-1/
+world-2 row enrichments + the st-5 re-point), `STATUS.md` (this file
+— the header re-pin + the Next step's st-4/st-5 rows + the audit
+verdict), `worklog.md` (this iteration's entry; iter-94 evicted per
+the cap) — 3 files doc-only, the iter-34 owner-audit footprint
+family (AGENTS §2.3: the objective scope noted in worklog). Zero
+code, zero corpus price; no external runner needed (the audit read
+the repo; the one probe run was the committed suite). The prior
+iteration's record: iter-102 (gate — D-136). The detail lives in
+TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -613,7 +612,18 @@ What stands, for the phase-6 opening or the owner's direct calls
    scarcity cycle as pack data — never a second economy engine,
    D-116/D-119), `roads-1` (mode G emits exits for generated worlds —
    an MST/k-nearest pass, a D-row when it lands). Phase 6's own exit:
-   a new T1 reskin without core edits, ≤ 1 day.
+   a new T1 reskin without core edits, ≤ 1 day. The iter-103 plan
+   audit (the owner's call) found the section COHERENT; its four
+   detail notes now ride the rows: world-2 level-1 needs the CLI
+   `--pack` flag first (periphery; the stoplist docstring's config
+   claim was drift) + the stoplist self-check extends to the new
+   pack's nouns; the roads-1 exits READ-PATH fork (canon births +
+   fold-reading consumers vs a derived L3 read — the opening
+   designs it; the exits consumers read the pack record today); the
+   name-1 toponym question (npc-only grammar vs the province-name
+   dogfooding line); the opening also owes the PACK_SPEC write
+   (SPECS_BACKLOG's trigger) + the ref-18/ref-20 dives (already
+   recorded on res-1's row).
 2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
    them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
    runtime inference decision — llama.cpp + GBNF; the dev-time
@@ -627,7 +637,12 @@ What stands, for the phase-6 opening or the owner's direct calls
    party role — pack data over existing doors), `mech-2` (the
    introspection output caps — rides the next mechanics.py touch),
    `since-1` (the re-encounter delta — read-side, its gate now open:
-   the exit review passed). Still open for the owner: the Alien
+   the exit review passed), `st-4` (the call budget — the mediator
+   boundary's row, blueprint §1) and `st-5` (containers +
+   entity-birth promotion — the "with phase 5" pointer retired at
+   the iter-103 audit: phase 5 closed without it, unowned by a
+   phase now, the first real consumer decides). Still open for the
+   owner: the Alien
    unknown-axis L6 conflict (DIRECTOR_SPEC §11) + the arc driver's
    review question (the climax flag on a weight-0 closing beat,
    D-081's recorded tension).

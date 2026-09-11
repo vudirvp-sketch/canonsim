@@ -115,7 +115,18 @@ drafts from phases.md §6 at the opening iteration)
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
   profiles arming ride this row's cultures half). The phase-5 exit
   needed NO second world (the emergent chain rode the armed committed
-  pack).
+  pack). iter-103 audit notes: level 1 needs the CLI `--pack` flag
+  first — `PACK_DIR` is hardcoded (`cli/main.py`; periphery, outside
+  the stoplist by design, but the stoplist test docstring's "the CLI
+  takes the pack dir as config" claim is drift — the flag never
+  existed, `git log -S` verified, the KI#22 doc-drift family) and the
+  stoplist self-check is tavern-tied today (the reskin day extends
+  the vocabulary to the new pack's nouns); the level-2 toponym
+  question — name-1's grammar is npc-only + condensation-gated, the
+  province-name dogfooding line (phases.md §6) needs either authored
+  toponyms (the pillars are authored anyway) or a small grammar
+  extension (a location-scoped minted name materializing at genesis)
+  — the opening decides.
 - `res-1` · the resource/economy layer — todo, owner-gated (VISION §6's
   "scarcity" formula word gets its row owner): the closed scarcity cycle
   (source → flow → sink) as PACK DATA — the dependency graph, flows as
@@ -128,11 +139,43 @@ drafts from phases.md §6 at the opening iteration)
   6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
   a generated world's edges is impossible); an MST/k-nearest graph over
   the sites (the Red Blob family); a PASS_ORDER growth = a D-row when it
-  lands; authored packs keep manual exits (the pack wins).
+  lands; authored packs keep manual exits (the pack wins). iter-103
+  audit note — the READ-PATH fork the opening must design: the exits
+  consumers read the PACK record today (the LOD warm ring, the intent
+  door's move validation, the place-1 lint); a generated world's exits
+  are seed-dependent — never static pack data — so "emit" is either
+  (a) canon births on `world_formed` + the consumers re-pointed to
+  the fold (the bridge-1 projection pipe extended to exits; place-1's
+  contract becomes a pass invariant) or (b) a derived L3 read from
+  the WorldModel (the travel price's own shape, no canon write — the
+  lint invariants move into the pass); the pack-wins override stays
+  authored either way.
 
 > W3 closed without new rows (the calendar binding is maclock-1's own,
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
+
+### iter-103 · owner-called phase-6 plan audit — done (doc-only)
+
+The owner's chat call: phase 6 + the project re-checked from the
+height of the landed solutions, heightened plan-detail attention
+(nothing missed, no errors, no contested points needing rework).
+Verified BEFORE working: 1589+1 green, ruff clean, HEAD e6c95ff
+(Python 3.12.14, the env pin). Verdict: **COHERENT — the phase-6
+opening stands on solid ground.** The instruments agree across
+TASKS / phases.md §6 / ROADMAP §2; the D-134/D-135 consult material
+verified against its landed owners (on_action, hooks buffer, arcs,
+the cause tree, the cold tiers, rotations, the folds, the erosion
+family); res-1's dependencies all landed (the maclock cadence, the
+aggregate surface, derived read-side values, the ratio dynamics);
+no TODO/FIXME residue; the owed items already recorded (PACK_SPEC
+trigger, ref-18/ref-20 just-in-time). Four detail findings routed
+into the rows above: the st-5 stale pointer (re-pointed below),
+the CLI `--pack` flag (world-2 level-1's prerequisite; the
+stoplist docstring's config claim is drift), the roads-1 read-path
+fork, the name-1 toponym question. Zero new KIs — plan-detail
+notes, not defects. The doc-only streak surfaced per AGENTS §2.5
+(the owner's own call, the D-022 exception).
 
 ### Research intakes 4..10 — routed, collapsed at the phase-5→6 gate
 (the verdict-set detail lives in the D-rows + git; the external texts
@@ -410,7 +453,11 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   whitespace proxy under-charges Cyrillic; budget per script at the
   mediator, never in core.
 - `st-5` containers: the `in` relation + entity-birth promotion
-  (with `st-3`, phase 5; blueprint §7).
+  (blueprint §7 — "deferred with the depth phase"; phase 5 CLOSED
+  iter-102 without this row landing, the pointer retired at the
+  iter-103 audit: unowned by a phase now — the first real consumer
+  decides (a pack wanting portable objects, a res-1 sink shape),
+  never a speculative build).
 
 ### Spatial backlog (owner-gated; audited iter-19)
 
