@@ -1,52 +1,45 @@
-Iteration: iter-104 (`iter-104-fork-resolve` — the owner's chat call:
-the open questions and forks analyzed point-by-point, each worked
-into a final COMBINED variant per the owner's stated preference —
-one variant that gathers the pros and neutralizes the cons, no
-crutches; the clone verified BEFORE working — 1589+1 green, ruff
-clean, HEAD 13c23c4, Python 3.12.14 the env pin; the resolutions
-routed to the TASKS rows: the roads-1 READ-PATH fork resolved to
-the derived L3 read sharpened with the pack-wins override through
-ONE shared exits read (the graph on the WorldModel; place-1's
-invariant relocated into the pass; NO canon births — INV-1/L11
-held, corpus price zero by construction); the name-1 toponym
-question resolved under the SAME override-else-derived law family
-(authored toponyms win, else the profile-minted render-side name
-through a named cosmetic stream — the dogfooding line held, zero
-canon price, the grammar untouched); since-1 routed INTO phase 6
-(world-2's condensing travelers the first real consumer — the
-tavern surface too thin to author against); the CLI `--pack` flag
-PINNED as iter-105 `cli-pack` — the code iteration breaking the
-doc-only streak, landing BEFORE the opening so world-2 level-1's
-≤1-day budget stays honest; the two standing owner questions (the
-Alien unknown-axis L6 conflict, D-081's climax flag) NOT silently
-resolved — the combined-variant proposals delivered in chat, the
-owner decides) ·
+Iteration: iter-105 (`iter-105-cli-pack` — the pinned
+streak-breaker, the owner's «поехали» on the iter-104 pin: the CLI
+`--pack` flag, periphery only, landing BEFORE the phase-6 opening
+so world-2 level-1's ≤1-day budget stays honest; the clone verified
+BEFORE working — 1589+1 green, ruff clean, HEAD 08faec2, Python
+3.12.14 the env pin; the doc-only streak iter-100..104 ENDED by
+code, not waived — the AGENTS §2.5 alarm cleared; the two owner
+questions standing from iter-104's chat proposals VERDICTED this
+iteration at the owner's call, one DECISIONS line each: D-137 the
+Alien unknown-axis L6 conflict → the OBSERVABLE-answers law (pace
+against the world's observable answers to ignorance, never the
+private gap — the entropy fence untouched, §11 re-pointed), D-138
+the D-081 climax flag → the peak's END marker (the explicit-trigger
+alternative covers the non-boss aftermath)) ·
 Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
 iter-102, D-136 — the exit criterion met, the worldgen-fed form; the
 phase table ROADMAP §2 owns the state; phase 6 opens on the owner's
-call, the iter-55/73 opener precedent — the instruments already
-drafted: world-2/res-1/roads-1 + cli-pack, TASKS' phase-6 section
-carrying the iter-104 resolutions riding the rows) ·
-1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-doc-only iteration — the count unchanged, zero corpus price by
-construction; the doc-only streak now iter-100..104, all five the
-owner's own calls (the intake-9/10 research calls + the exit
-review + the plan audit + this fork analysis), the D-022 exception
-each time; AGENTS §2.5 surfaced per the iter-95 precedent — the
-streak ENDS at the pinned iter-105: cli-pack is CODE (periphery,
-zero corpus price), the sixth doc-only pass is not merely flagged
-but foreclosed by the pin).
+call, the iter-55/73 opener precedent — the instruments drafted:
+world-2/res-1/roads-1, TASKS' phase-6 section carrying the
+iter-104 resolutions riding the rows; cli-pack DONE this iteration —
+the recorded prerequisite no longer stands between the owner and
+the opening) ·
+1592 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
++3 tests, the count 1589→1592; corpus price ZERO by construction —
+the flag is periphery plumbing, zero draws, no fixture regen; the
+stoplist docstring's "the CLI takes the pack dir as config" claim
+TRUE from here — the drift dead at its root, not by deleting the
+claim).
 ·
 Date: 2026-09-12 ·
-Scope: `docs/TASKS.md` (the cli-pack row + the world-2/roads-1/since-1
-resolutions + the iter-104 section), `STATUS.md` (this file — the
-header re-pin + the Next step's iter-105 pin), `worklog.md` (this
-iteration's entry; iter-95 evicted per the cap) — 3 files doc-only,
-the iter-34/103 owner-call footprint family (AGENTS §2.3: the
-objective scope noted in worklog). Zero code, zero corpus price.
-The prior iteration's record: iter-103 (the plan audit). The detail
-lives in TASKS + worklog + git.
+Scope: `cli/main.py` + `tests/test_cli.py` (the flag + the loud
+refusals + the byte-identity pins), `docs/DECISIONS.md` (D-137 +
+D-138, one line each), `docs/DIRECTOR_SPEC.md` (§11's conflict
+bullet re-pointed to D-137), `docs/TASKS.md` (the cli-pack row
+flipped done + the iter-105 section + the iter-104 section's
+resolution note), `STATUS.md` (this file — the header re-pin + the
+Next step), `worklog.md` (this iteration's entry; iter-96 evicted
+per the cap) — 7 files, 2 code + 5 doc (the verdict set rides the
+same iteration per the owner's call; AGENTS §2.3: the objective
+scope noted in worklog). The prior iteration's record: iter-104
+(the fork analysis). The detail lives in TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -590,44 +583,49 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-105 is PINNED: `cli-pack` — the CLI `--pack` flag (the owner's
-iter-104 chat direction: the code iteration that breaks the doc-only
-streak, BEFORE the phase-6 opening).** Periphery only (`cli/main.py`
-+ `tests/test_cli.py`): the flag with the tavern default
-(byte-identical for the committed pack), a loud refusal for a bad
-path; the stoplist docstring's "the CLI takes the pack dir as
-config" claim becomes TRUE. The full row: TASKS' phase-6 parked
-section. After it, phase 6 (Packs & worldbuilder) still PARKED — the
-opening is the owner's call (the iter-55/73 opener precedent;
-ROADMAP §2's state column is the single owner of closed/open). The
-phase-5 epoch is closed clean: Track A debt-free, the queue empty,
-the exit criterion met on the armed committed pack, the
-DECISIONS/TASKS collapses paid at the gate. What stands, for the
-phase-6 opening or the owner's direct calls (owner-gated rows are
-NOT auto-candidates):
+**iter-105 DONE: `cli-pack` — the CLI `--pack` flag landed (the
+pinned streak-breaker, the owner's «поехали»).** Periphery only
+(`cli/main.py` + `tests/test_cli.py`): every pack-loading command
+and the session take `--pack <dir>` (top-level default
+`content/tavern_pack`, the subparsers SUPPRESS — the flag honors
+both orders, no clobber), a bad path refused loudly BEFORE any
+world opens, the explicit tavern pack byte-identical to the no-flag
+run (+3 tests, 1592+1 green); the stoplist docstring's "the CLI
+takes the pack dir as config" claim is TRUE. The two standing owner
+questions are VERDICTED (the owner's iter-105 call, one DECISIONS
+line each): D-137 the Alien L6 conflict — the OBSERVABLE-answers
+law; D-138 the D-081 climax flag — the peak's END marker. Phase 6
+(Packs & worldbuilder) still PARKED — the opening is the owner's
+call (the iter-55/73 opener precedent; ROADMAP §2's state column is
+the single owner of closed/open). The phase-5 epoch is closed clean:
+Track A debt-free, the queue empty, the exit criterion met on the
+armed committed pack, the DECISIONS/TASKS collapses paid at the
+gate. What stands, for the phase-6 opening or the owner's direct
+calls (owner-gated rows are NOT auto-candidates):
 
-1. **The phase-6 instruments (TASKS' parked section, drafted — the
-   iter-104 resolutions now riding the rows):** `cli-pack` (pinned
-   iter-105, pre-opening), `world-2` (the TWO-LEVEL gate — level 1
-   the T1 reskin ≤ 1 day on the open generic stack, level 2 the deep
-   original province, the D-130 sketch at phases.md §6 riding the
-   level-2 half; the st-6a/name-1 arming rides its cultures row; the
-   toponym question RESOLVED — the override-else-derived law:
-   authored wins, else the profile-minted render-side name via a
-   named cosmetic stream), `res-1` (the closed scarcity cycle as
-   pack data — never a second economy engine, D-116/D-119), `roads-1`
-   (mode G emits exits for generated worlds — an MST/k-nearest pass,
-   a D-row when it lands; the READ-PATH fork RESOLVED — the derived
-   L3 read, the pack-wins override through one shared exits read,
-   place-1's invariant relocated into the pass, zero canon births).
-   Phase 6's own exit: a new T1 reskin without core edits, ≤ 1 day.
-   The iter-103 plan audit found the section COHERENT; iter-104
-   resolved its four detail notes (the cli-pack pin, the roads-1
-   fork, the toponym question, the st-5 re-point standing since
-   iter-103); the opening still owes the PACK_SPEC write
-   (SPECS_BACKLOG's trigger) + the ref-18/ref-20 dives (already
-   recorded on res-1's row) + the stoplist self-check extension to
-   the reskin pack's nouns.
+1. **The phase-6 opening itself (nothing pinned stands between the
+   owner and the call — cli-pack was the last recorded
+   prerequisite):** the instruments are drafted (TASKS' parked
+   section, the iter-104 resolutions riding the rows): `world-2`
+   (the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day on the open
+   generic stack, level 2 the deep original province, the D-130
+   sketch at phases.md §6 riding the level-2 half; the st-6a/name-1
+   arming rides its cultures row; the toponym question RESOLVED —
+   the override-else-derived law: authored wins, else the
+   profile-minted render-side name via a named cosmetic stream),
+   `res-1` (the closed scarcity cycle as pack data — never a second
+   economy engine, D-116/D-119), `roads-1` (mode G emits exits for
+   generated worlds — an MST/k-nearest pass, a D-row when it lands;
+   the READ-PATH fork RESOLVED — the derived L3 read, the
+   pack-wins override through one shared exits read, place-1's
+   invariant relocated into the pass, zero canon births). Phase 6's
+   own exit: a new T1 reskin without core edits, ≤ 1 day. The
+   iter-103 plan audit found the section COHERENT; iter-104
+   resolved its four detail notes; the opening still owes the
+   PACK_SPEC write (SPECS_BACKLOG's trigger) + the ref-18/ref-20
+   dives (already recorded on res-1's row) + the stoplist
+   self-check extension to the reskin pack's nouns (the reskin
+   day's own step — the second pack must exist for its vocabulary).
 2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
    them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
    runtime inference decision — llama.cpp + GBNF; the dev-time
@@ -646,22 +644,16 @@ NOT auto-candidates):
    `st-4` (the call budget — the mediator boundary's row, blueprint
    §1) and `st-5` (containers + entity-birth promotion — unowned by
    a phase, the first real consumer decides: a pack wanting portable
-   objects, a res-1 sink shape). Still open for the owner (iter-104
-   delivered the combined-variant PROPOSALS in chat — not resolved,
-   the owner decides): the Alien unknown-axis L6 conflict
-   (DIRECTOR_SPEC §11 — the proposal: pace against the world's
-   OBSERVABLE answers to ignorance, never the private gap) + the arc
-   driver's review question (the climax flag on a weight-0 closing
-   beat, D-081's recorded tension — the proposal: the flag as the
-   peak's END marker, the explicit-trigger alternative already
-   covering the non-boss aftermath).
+   objects, a res-1 sink shape). The two questions iter-104 left
+   with the owner are closed (D-137/D-138, this iteration) — no
+   owner question stands open.
 3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
    heartbeat (rate-limit economics), the per-family latency
    distribution. New track-B ideas enter the backlog on the owner's
    call only.
-4. **Between the owner and the phase-6 call stands the pinned
-   cli-pack alone** (iter-105, the streak-breaker — the owner's own
-   direction). A further direct small call is equally legal after it
-   — the ORDER owner decides; TASKS owns composition, never order.
+4. **Nothing is pinned.** The natural next step is the phase-6
+   opening call — the owner's alone (the iter-55/73 opener
+   precedent). A further direct small call is equally legal — the
+   ORDER owner decides; TASKS owns composition, never order.

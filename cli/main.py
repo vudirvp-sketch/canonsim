@@ -3,12 +3,15 @@
 split — Python orchestration ON TOP of the JSONL log, never in the
 canon path (the Wesnoth escape-valve precedent).
 
-Batch subcommands (one process, one job):
+Batch subcommands (one process, one job) — every command that loads
+a pack takes `--pack <dir>` (the committed tavern pack the default,
+byte-identical; a bad path is refused loudly before any world opens):
 
     python -m cli play <playscript.json> [--seed N] [--directors on|off]
-    python -m cli chronicle <log.jsonl>
-    python -m cli state <entity> <log.jsonl>
-    python -m cli replay <log.jsonl>
+                                        [--pack <dir>]
+    python -m cli chronicle <log.jsonl> [--pack <dir>]
+    python -m cli state <entity> <log.jsonl> [--pack <dir>]
+    python -m cli replay <log.jsonl> [--pack <dir>]
 
 Interactive session (no subcommand) — `look` and `wait` are two of the
 16 actions driven as single-step intents through the same front door as
@@ -21,6 +24,9 @@ the repo stays LLM-free):
     look · wait N · play <script> · narrate [<reply.json> | dry] ·
     say <text> · say apply <reply.json> · chronicle · state <entity> ·
     replay <log> · directors on|off · seed [<n>] · help · quit
+
+The session takes the same flag at the top level
+(`python -m cli --pack <dir> ...`).
 
 The session is one opened Simulator (`core/loop.py`): every command
 feeds steps through `run_steps` and the world moves only through the
@@ -99,8 +105,12 @@ def _commit_id() -> str:
         return "unknown"
 
 
-def _load() -> tuple[Pack, dict]:
-    pack = load_pack(PACK_DIR)
+def _load(pack_dir: Path) -> tuple[Pack, dict]:
+    """Load the pack dir (the --pack value, the tavern default) — a path
+    that is not a directory refuses loudly BEFORE any world opens."""
+    if not pack_dir.is_dir():
+        raise PackError(f"pack dir not found: {pack_dir} (pass --pack <dir>)")
+    pack = load_pack(pack_dir)
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     return pack, schema
 
@@ -420,7 +430,7 @@ class Session:
 
 def cmd_play(args: argparse.Namespace) -> int:
     """Run a playscript end-to-end; print the chronicle + final scene."""
-    pack, schema = _load()
+    pack, schema = _load(args.pack)
     script = load_playscript(Path(args.script))
     if args.seed is not None:
         script = dict(script, seed=args.seed)
@@ -448,14 +458,14 @@ def cmd_play(args: argparse.Namespace) -> int:
 
 def cmd_chronicle(args: argparse.Namespace) -> int:
     """Render a log's chronicle (the seed comes from the log header)."""
-    pack, schema = _load()
+    pack, schema = _load(args.pack)
     print(chronicle_from_log(Path(args.log), pack, schema), end="")
     return 0
 
 
 def cmd_state(args: argparse.Namespace) -> int:
     """One entity's full history + current state from a log."""
-    pack, schema = _load()
+    pack, schema = _load(args.pack)
     header, events = read_log(Path(args.log), schema)
     projection = fold(events, initial_projection(pack.entities))
     print(
@@ -469,7 +479,7 @@ def cmd_state(args: argparse.Namespace) -> int:
 
 def cmd_replay(args: argparse.Namespace) -> int:
     """Validate + fold a log (T0/T2 in one pass); report."""
-    pack, schema = _load()
+    pack, schema = _load(args.pack)
     report, _ = replay_report(Path(args.log), pack, schema)
     print(report)
     return 0
@@ -477,7 +487,7 @@ def cmd_replay(args: argparse.Namespace) -> int:
 
 def run_session(args: argparse.Namespace) -> int:
     """The interactive session loop."""
-    pack, schema = _load()
+    pack, schema = _load(args.pack)
     session = Session(
         pack, schema, args.seed, Path(args.logs_dir), args.directors != "off"
     )
@@ -520,6 +530,10 @@ def _build_parser() -> argparse.ArgumentParser:
         help="director releases for the interactive session (default: on)",
     )
     parser.add_argument(
+        "--pack", type=Path, default=PACK_DIR,
+        help="pack directory (default: the repo's content/tavern_pack)",
+    )
+    parser.add_argument(
         "--logs-dir", default=str(LOGS_DIR),
         help="where run logs are written (default: the repo's logs/)",
     )
@@ -531,18 +545,26 @@ def _build_parser() -> argparse.ArgumentParser:
                       help="override the script's seed")
     play.add_argument("--directors", choices=("on", "off"), default="on",
                       help="director releases (default: on)")
+    play.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                      help="pack directory (default: content/tavern_pack)")
     play.add_argument("--logs-dir", default=str(LOGS_DIR))
     play.add_argument("--out-dir", default=str(OUTPUT_DIR))
 
     chronicle = sub.add_parser("chronicle", help="render a log's chronicle")
     chronicle.add_argument("log", type=Path)
+    chronicle.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                           help="pack directory (default: content/tavern_pack)")
 
     state = sub.add_parser("state", help="one entity's history + state")
     state.add_argument("entity", help="entity id (e.g. purse_01, npc_guard_01)")
     state.add_argument("log", type=Path)
+    state.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                       help="pack directory (default: content/tavern_pack)")
 
     replay = sub.add_parser("replay", help="validate + fold a log (T2)")
     replay.add_argument("log", type=Path)
+    replay.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                        help="pack directory (default: content/tavern_pack)")
     return parser
 
 

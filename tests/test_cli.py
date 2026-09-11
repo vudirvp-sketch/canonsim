@@ -8,6 +8,12 @@ front door as a playscript, one continuous deterministic log. The
 itself lands at iter-6); here it is proven live: a script that seeds
 and releases a hook produces a director intent with the flag on and
 none with it off, same seed, same steps.
+
+iter-105 (cli-pack): the `--pack` flag — every pack-loading command
+and the session take it; the tavern default runs byte-identically
+(explicit flag = no-flag run), a bad path refuses loudly before any
+world opens. The stoplist docstring's "the CLI takes the pack dir as
+config" claim is TRUE from here.
 """
 
 from __future__ import annotations
@@ -23,7 +29,8 @@ from core.log import read_log
 from core.pack import load_pack
 
 REPO = Path(__file__).resolve().parents[1]
-PACK = load_pack(REPO / "content" / "tavern_pack")
+TAVERN_DIR = REPO / "content" / "tavern_pack"
+PACK = load_pack(TAVERN_DIR)
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 
 # seed 32 + two failed steals stack Doren's suspicion past the
@@ -111,6 +118,73 @@ def test_play_missing_script_fails_loud(
 ) -> None:
     assert main(["play", str(tmp_path / "nope.json"),
                  "--logs-dir", str(tmp_path), "--out-dir", str(tmp_path)]) == 1
+    assert "error" in capsys.readouterr().err
+
+
+# -- the --pack flag (iter-105, cli-pack) ---------------------------------------
+
+
+def test_pack_flag_tavern_default_is_byte_identical(tmp_path: Path) -> None:
+    """`--pack` naming the committed tavern pack equals the no-flag run
+    byte-for-byte: the flag is periphery plumbing, the tavern default IS
+    the flag's default — zero canon price, no fixture regen."""
+    script = write_script(tmp_path, dict(AB_SCRIPT, steps=AB_SCRIPT["steps"][:2]))
+    logs, out = tmp_path / "logs", tmp_path / "out"
+    assert main(["play", str(script),
+                 "--logs-dir", str(logs), "--out-dir", str(out)]) == 0
+    assert main(["play", str(script), "--pack", str(TAVERN_DIR),
+                 "--logs-dir", str(logs), "--out-dir", str(out)]) == 0
+    first, second = sorted(logs.glob("run_32_*.jsonl"))
+    assert first.read_bytes() == second.read_bytes()
+
+
+def test_pack_flag_bad_path_refuses_loud(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A bad --pack path refuses loudly BEFORE any world opens — batch,
+    session, and the flag named BEFORE the subcommand (the subparser's
+    SUPPRESS does not clobber the top-level value) all exit 1 naming the
+    path; no log file is born."""
+    script = write_script(
+        tmp_path, dict(AB_SCRIPT, steps=[{"intent": "wait", "ticks": 3}])
+    )
+    bad = tmp_path / "no_such_pack"
+    assert main(["play", str(script), "--pack", str(bad),
+                 "--logs-dir", str(tmp_path), "--out-dir", str(tmp_path)]) == 1
+    err = capsys.readouterr().err
+    assert "pack dir not found" in err and str(bad) in err
+    assert not list(tmp_path.glob("run_*.jsonl"))  # nothing opened
+
+    assert main(["--pack", str(bad), "play", str(script),
+                 "--logs-dir", str(tmp_path), "--out-dir", str(tmp_path)]) == 1
+    assert "pack dir not found" in capsys.readouterr().err
+
+    assert main(["--pack", str(bad), "--seed", "42",
+                 "--logs-dir", str(tmp_path / "logs")]) == 1
+    assert "pack dir not found" in capsys.readouterr().err
+
+
+def test_pack_flag_on_the_read_side_subcommands(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The read-side subcommands take the flag too: `chronicle --pack`
+    renders exactly the renderer's output, `state --pack` answers — and
+    a directory that exists but is NOT a pack still refuses loudly
+    (load_pack's own lint, the same exit 1)."""
+    script = write_script(tmp_path, AB_SCRIPT)
+    logs = tmp_path / "logs"
+    main(["play", str(script), "--logs-dir", str(logs),
+          "--out-dir", str(tmp_path)])
+    capsys.readouterr()
+    log = sorted(logs.glob("run_32_*.jsonl"))[0]
+
+    assert main(["chronicle", str(log), "--pack", str(TAVERN_DIR)]) == 0
+    from render.chronicle import chronicle_from_log
+
+    assert capsys.readouterr().out == chronicle_from_log(log, PACK, SCHEMA)
+    assert main(["state", "npc_guard_01", str(log), "--pack", str(TAVERN_DIR)]) == 0
+    assert "Doren (npc_guard_01)" in capsys.readouterr().out
+    assert main(["replay", str(log), "--pack", str(tmp_path)]) == 1
     assert "error" in capsys.readouterr().err
 
 

@@ -107,18 +107,12 @@ D-105..D-133 family row + phases.md §5)
 ### Phase-6 parked instruments (W4, owner-gated; the phase-6 backlog
 drafts from phases.md §6 at the opening iteration)
 
-- `cli-pack` · the CLI `--pack` flag — todo, **pinned iter-105** (the
-  owner's iter-104 chat direction: the code iteration that breaks the
-  doc-only streak, BEFORE the opening): periphery only (`cli/main.py`
-  + `tests/test_cli.py`) — the flag with the tavern default
-  (byte-identical for the committed pack), a loud refusal for a bad
-  path; the stoplist docstring's "the CLI takes the pack dir as
-  config" claim becomes TRUE (the drift dies at its root, not by
-  deleting the claim). Landing it pre-opening keeps world-2 level-1's
-  ≤1-day budget honest (the flag is the recorded prerequisite, not
-  part of the reskin day). The stoplist self-check extension to a new
-  pack's nouns stays with the reskin day itself (the second pack must
-  exist for its vocabulary).
+- `cli-pack` · the CLI `--pack` flag — done (iter-105, the pinned
+  streak-breaker, D-137/D-138 riding the same call): every
+  pack-loading command + the session take the flag, the tavern
+  default byte-identical, a bad path refused loudly; the stoplist
+  docstring's config claim TRUE (the landing record: the iter-105
+  section below).
 - `world-2` · the second world, the phase-6 gate's own instrument —
   todo, owner-gated: the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day
   (ROADMAP §2's phase-6 exit, measured on the open generic stack), level
@@ -175,6 +169,35 @@ drafts from phases.md §6 at the opening iteration)
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
 
+### iter-105 · cli-pack — done
+
+The pinned streak-breaker (the owner's «поехали» on the iter-104
+pin): the CLI `--pack` flag, periphery only. Verified BEFORE
+working (1589+1 green, ruff clean, HEAD 08faec2, Python 3.12.14).
+`cli/main.py`: every pack-loading command (play/chronicle/state/
+replay) + the interactive session take `--pack <dir>` — the
+top-level default `content/tavern_pack`, the subparsers
+`argparse.SUPPRESS` (the flag honors both orders, before or after
+the subcommand — no default clobber); the loud refusal lives in
+`_load` (a path that is not a directory exits 1 naming it, BEFORE
+any world opens; a directory that is not a pack keeps load_pack's
+lint refusal). `tests/test_cli.py` +3: the explicit tavern pack
+byte-identical to the no-flag run; the bad-path refusal (batch,
+session, and the before-subcommand order — no log born); the
+read-side subcommands (chronicle/state render, replay refuses a
+non-pack dir). 1592+1 green, ruff clean; corpus price zero
+(periphery plumbing, zero draws, no fixture regen). The stoplist
+docstring's "the CLI takes the pack dir as config" claim TRUE —
+the drift dead at its root. The same owner call verdicted the two
+standing questions (one DECISIONS line each): D-137 the Alien
+unknown-axis L6 conflict (the OBSERVABLE-answers law, DIRECTOR_SPEC
+§11 re-pointed), D-138 the D-081 climax flag (the peak's END
+marker). 7 files — 2 code + 5 doc (the verdict set riding the
+iteration; AGENTS §2.3: the objective scope noted in worklog).
+Zero new KIs. The stoplist self-check extension to a new pack's
+nouns stays with the reskin day itself (the second pack must exist
+for its vocabulary).
+
 ### iter-104 · owner-called fork analysis — done (doc-only)
 
 The owner's chat call: every open question and fork worked into a
@@ -189,7 +212,9 @@ pack-authored data wins, else the (seed, pack)-derived read),
 since-1 routed to phase 6 (world-2's condensing travelers the first
 real consumer). The two standing owner questions (DIRECTOR_SPEC
 §11's L6 conflict, D-081's climax flag) NOT silently resolved —
-combined-variant proposals delivered in chat, the owner decides.
+combined-variant proposals delivered in chat, the owner decides —
+the verdicts landed at iter-105's call (D-137/D-138, one line
+each).
 Zero new KIs. The doc-only streak surfaced per AGENTS §2.5: this is
 the fifth, the owner's own call again (D-022); iter-105 is pinned
 CODE.

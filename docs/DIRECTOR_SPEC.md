@@ -578,15 +578,17 @@ suffices.
   content consumer asks for it.
 - The Alien three-axis `unknown` axis — pacing against the gap
   between actual state (log) and perceived state (knowledge records):
-  the sketch (phases.md §3) says the director MAY pace against the
+  the sketch (phases.md §3) said the director MAY pace against the
   gap; §4's entropy law says entropy reads observable state ONLY
   (L6/EPIST-1) and a knowledge-derived score is not observable state
   (the iter-46 FAQ pinned the same fence for the echo — an
-  invariant-grade violation if wired). These two records CONFLICT and
-  the conflict is the owner's to resolve: either the unknown axis
-  never feeds entropy (a separate pacing input with its own declared
-  fence), or the entropy law is amended by the owner with the L6
-  boundary redrawn explicitly. Not built, not silently resolved.
+  invariant-grade violation if wired). The conflict is RESOLVED
+  (D-137, the owner's iter-105 verdict on the iter-104 combined
+  proposal): the axis, whenever it lands, paces against the world's
+  OBSERVABLE answers to ignorance — logged refusals, failed checks,
+  no-knowledge events — never the private actual-vs-perceived gap;
+  the L6 fence stands untouched. Still not built (the
+  first-consumer law).
 
 Landed from this section over phase 3: the document_check action
 (iter-43, D-072), the alarm panic echo (iter-48, D-077), the ambient

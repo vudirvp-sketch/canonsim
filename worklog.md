@@ -13,6 +13,33 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-105 · 2026-09-12 · cli-pack — the pinned streak-breaker (the
+owner's «поехали» on the iter-104 pin): the CLI --pack flag; 7
+files — 2 code + 5 doc (the two owner verdicts riding the same
+call; AGENTS §2.3: the objective scope noted here)
+- cli/main.py: every pack-loading command + the session take
+  --pack (top-level default content/tavern_pack, the subparsers
+  SUPPRESS — both flag orders honored, no default clobber); the
+  loud refusal in _load (a bad path exits 1 naming it BEFORE any
+  world opens; a not-a-pack dir keeps load_pack's lint refusal);
+  tests/test_cli.py +3 — the explicit tavern pack byte-identical
+  to the no-flag run, the refusal (batch/session/
+  before-subcommand, no log born), the read-side flag
+- 1592+1 green (1589+3), ruff clean; corpus price zero (periphery
+  plumbing, zero draws, no fixture regen); the stoplist
+  docstring's "the CLI takes the pack dir as config" claim TRUE
+  (the drift dead at its root, not by deleting the claim)
+- the owner verdicts recorded, one DECISIONS line each: D-137 the
+  Alien L6 conflict (the OBSERVABLE-answers law, DIRECTOR_SPEC
+  §11 re-pointed), D-138 the D-081 climax flag (the peak's END
+  marker); DECISIONS 30→32 rows — over-cap on substance (§6.1,
+  the owner's own two verdicts; the collapse owed at the phase-6
+  gate, D-034)
+- iter-96 evicted (verified in this edit); 10 held. Caps: STATUS
+  659 / TASKS 813 / DIRECTOR_SPEC 599 / DECISIONS 62 lines (32
+  rows) — TASKS over-cap on substance (§6.1), trim at the
+  phase-6 gate
+---
 iter-104 · 2026-09-12 · fork-resolve — the owner's chat call: the
 open questions and forks analyzed point-by-point, each worked into a
 final COMBINED variant (the owner's stated preference — gather the
@@ -363,47 +390,5 @@ double-membership + name-duplicate questions answered loud-by-design
   (verified in this edit, the cap 10 held). Caps: STATUS 837 /
   phases 985 / README 742 — over-cap on substance (§6.1, the
   D-095..D-131 precedent), trim at the phase-5→6 gate.
----
-iter-96 · 2026-09-11 · name1 — the name generator (the queue's W2 row
-after depth-7, D-116 (12); D-131; 19 files — 5 code + 2 periphery + 2
-test + 2 ref dives + the index + 7 doc sync: the stream + the generator + the lint
-+ the condensation consumer + the read surface + the dives are one
-family, the iter-90..93 footprint; AGENTS §2.3: 18 > 5-6, the
-objective scope noted here; the doc-only streak iter-94+95 BROKEN —
-AGENTS §2.5 resolved on record)
-- core/names.py (new) + core/rng.py: the D-079 family law's SIXTH
-  member `name:<npc>` (name_stream_name, lazy registration, the
-  assure-shadow law at six families); materialize_name the lazy
-  scene-detail twin — ONE birth (npc, "name", None->drawn), the
-  bounded collision walk against the entity namespace (WALK_MAX,
-  the loud NamesError), the unarmed law total (the stream never
-  registers)
-- core/groups.py + core/loop.py: the condensation consumer — the
-  name births paired with the membership births (one member, one
-  block; a runtime-joined member still named), the outcome's
-  `names` key (the line must branch — a bare {names} is an unknown
-  slot), the tier half draw-free; the bank rides _condense_groups
-- core/pack.py: the `_names` lint (after _factions) — the profiles'
-  shapes, the npc generated_name declarations (mutual exclusion with
-  the authored `name`), the REACHABILITY law (a declaring npc must
-  ride a condensing group's membership — the depth-5b family);
-  render/chronicle.py + brief/assembler.py: the born-name read
-  (fold-first — canon outranks the pack record; the unborn render as
-  their dry ids)
-- docs/ref/ck3.md + docs/ref/azgaar_names.md (new, the ref-19 dives
-  owed at the row) + REFERENCES_DEEP index; phases.md §5 the name-1
-  paragraph; EVENT_SCHEMA §4 the generated-name home; NAV §1; TASKS
-  name-1 done; DECISIONS D-131; STATUS re-pinned (the queue: st-6(a)
-  the next live candidate, name-1 the last W2 row closed)
-- +28 tests, 1516→1544+1 green, ruff clean (3.12.14, the env pin;
-  seed 42 pinned). Corpus price ZERO by construction, measured both
-  arms: the committed pack unarmed — the inert twin (the whole
-  vocabulary, no time.macro) byte-identical over plumbing_smoke +
-  day1_full; the armed delta the name births + the `names` key alone,
-  the (t,type,actor) sequence + the fingerprint EQUAL to the authored
-  twin. iter-86 evicted (verified against git in this edit); 10
-  held. Caps: STATUS 844 / TASKS 1158 / DECISIONS 97 lines (67 rows)
-  — over-cap on substance (§6.1, the D-095..D-130 precedent), trim at
-  the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)
