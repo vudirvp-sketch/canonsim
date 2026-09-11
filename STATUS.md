@@ -1,62 +1,60 @@
-Iteration: iter-101 (`iter-101-intake10` — the owner's chat call:
-the external encounter & event-generation design notes — three
-layers (EncounterTemplate / NPCLedger / Director), a 23-pattern
-catalog + a 7-type event-source taxonomy, director anti-spam
-controls, determinism notes, a donor list, a depth-per-cost
-priority, and four declared contradictions — routed as the intake
-family's tenth verdict set, the iter-94/95/100 precedent (doc-only
-between queue rows, the ORDER owner's call); the clone verified
-BEFORE working — 1589+1 green, ruff clean, HEAD 533a384, Python
-3.12.14 the env pin; the verdict set is D-135: the substrate
-CONFIRMED complete — of the document's 23 patterns, 21 are
-pack-level discipline or read-side shapes over landed primitives
-(the eight-family mapping, phases.md §6), the ONE genuine gap
-routed as `since-1` (the re-encounter delta — read-side,
-owner-gated, the document's own single-highest-value pick), one
-refined into the world-state law; the four contradictions DISSOLVED
-against standing law (the phase-scoped non-goals; the seven stream
-families; D-079's rejected-flat XOR alternative; D-022
-just-in-time); the world-state law + the detour fence + the
-anti-repetition composition + the selection law landed in
-phases.md §6's encounter block; the Kenshi arrival dive + the 5-8
-hook-pattern catalog + the per-tag recurring cooldown deferred
-owner-gated; the standalone EncounterSystem / quest graph /
-procedural prose / planner family (the document's own §11), the
-docs/design/ENCOUNTERS.md spec home, stored world-state objects,
-and intent-inferring triggers refused with cause; +7 REFERENCES
-§10 pattern rows; ONE new backlog row (since-1, owner-gated — the
-queue itself untouched)) ·
-Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
-depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
-chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
-depth-7 + name-1 + st-6a + weather-1 LANDED,
-the queue: EMPTY of live candidates — the phase-5 exit review is the
-owner's call (the gate rows owed there: the D-034 DECISIONS collapse
-+ the first phases.md §5 staleness pass, D-128's own effect lines;
-rev5's probes + tests are the review's evidence base, and
-the NAV tests-row lag — the post-iter-86 suites unlisted — belongs
-to the same staleness pass)) ·
+Iteration: iter-102 (`iter-102-gate` — the owner's exit-review
+call: the phase-5 gate CLOSED, verdict PASS, the decision D-136; the
+queue had been empty of live candidates since weather-1, rev5
+(iter-99) the pre-gate evidence base; the clone verified BEFORE
+working — 1589+1 green, ruff clean, HEAD 5ecba27, Python 3.12.14 the
+env pin; the full ROADMAP §5 protocol re-run: the seed-125 gate pair
+ON M1=0.52/M2=0.2 (56 events — iter-98's DESIGNED day1_full price, the
+LOD's one-gate engagement; the iter-65 record 0.509/0.333/61) / OFF
+T8 24 chains — the exit criterion "an emergent chain of 3+ events
+without the player" MET in its worldgen-fed form (the ARMED committed
+pack: the depth-5b genesis + the year-scale macro arming + the weather
+chain; the 60-seed band 15–24, M5 p50 0.79, stretch max 1 — rev5's
+phase records hold; T7 the tale reads as a story, the worldgen genesis
++ world_history lines opening the chronicle; the longrun pins — T1/T2
+on the year-scale log, the day-2 living floor, the idle world — green;
+no kill-criteria hit); the §5 step-6 staleness pass verdicts: KEEP the
+rest, REWORD three discharged-phase-0 clauses (AGENTS §1's phase
+frame; INV-4's "before the phase-0 gate passes" → the standing
+boundary; §8's LLM-guard condition → the engine-1 owner gate), DROP
+none; D-129's effect-line habit UNEXERCISED (zero protocol-law rows
+since D-128 — reported out loud per its own consequence line); the doc
+debts paid at the gate: DECISIONS collapsed 71→30 (D-034 — the
+phase-5 build column, the intake verdict sets, the testproto/protocol
+rows, the v0.2 lance folded into families), TASKS collapsed 1240→694
+(the phase-5 ledger + the intake sections + the phase-3 rows; the
+residue over the 600 cap is the closed-phase ledgers' substance,
+§6.1), the NAV tests-row lag fixed (the post-iter-86 suites), the
+README resynced, the FAQ chain baseline synced (26→24, the designed
+day1_full price)) ·
+Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
+0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
+iter-102, D-136 — the exit criterion met, the worldgen-fed form; the
+phase table ROADMAP §2 owns the state; phase 6 opens on the owner's
+call, the iter-55/73 opener precedent — the instruments already
+drafted: world-2/res-1/roads-1, TASKS' phase-6 section) ·
 1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
 doc-only iteration — the count unchanged, zero corpus price by
-construction; the doc-only streak iter-100 + iter-101 — both the
-owner's chat calls, the D-022 exception, surfaced per AGENTS §2.5
-the iter-95 precedent).
+construction; the doc-only streak now iter-100+101+102, all three the
+owner's own calls (the intake-9/10 research calls + the exit review
+itself), the D-022 exception each time — a gate close is the queue's
+terminal row, not documentation-loop evidence; AGENTS §2.5 surfaced
+per the iter-95 precedent).
 ·
 Date: 2026-09-12 ·
-Scope: `docs/DECISIONS.md` (D-135, the verdict set),
-`docs/REFERENCES.md` (§10 +7 pattern rows: Skyrim, Fallout,
-Project Zomboid, STALKER A-Life, Shadow of Mordor, Rain World,
-Wildermyth), `docs/blueprint/phases.md` (§6 the encounter &
-event-generation pattern catalog, +~80 lines substance),
-`docs/TASKS.md` (the intake-10 section + the since-1 row),
-`worklog.md` (this iteration's entry; iter-92 evicted per the cap),
-`STATUS.md` (this file) — 6 files doc-only (the intake-8/9
-six-file precedent; AGENTS §2.3: one family — the verdict set +
-its doc syncs; noted in worklog). Zero code, zero corpus price;
-the external text stays outside the repo (convenience-copy law).
-· The prior iteration's record: iter-100 (intake-9 — the external
-TTRPG cross-media analysis, D-134). The detail lives in TASKS +
-worklog + git.
+Scope: `docs/DECISIONS.md` (D-136 + the D-034 collapse, 71→30 rows),
+`docs/TASKS.md` (the iter-102 gate section + the phase-5 ledger
+collapse 1240→694 + the phase-6 instruments section),
+`docs/ROADMAP.md` (§2 phase-5 CLOSED), `docs/AGENT_NAVIGATION.md`
+(§1 the tests-row lag — the post-iter-86 suites), `README.md` (the
+phase-5 closed resync), `AGENTS.md` (the three staleness-pass rewords:
+§1/§4/§8), `worklog.md` (this iteration's entry; iter-93 evicted per
+the cap), `STATUS.md` (this file) — 8 files doc-only, the
+iter-54/65 gate footprint family (AGENTS §2.3: the objective scope
+noted in worklog). Zero code, zero corpus price; the external runner
+lives outside the repo (Rule 9). The prior iteration's record: iter-101
+(intake-10 — D-135). The detail lives in TASKS + worklog + git.
+
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -586,7 +584,9 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 - **Gate mechanics + chain counting (iter-6/6a laws).** Same
   playscript/seed (125), only the director flag changes: ON fires
   `director_0000`; OFF keeps seeding (D-005) and produces ≥3 emergent
-  chains (baseline 26); the logs byte-differ. The harness is a script,
+  chains (baseline 24 — 26 through iter-65, the iter-98 designed
+day1_full price moved it; the gate verdict row D-136 owns the number);
+the logs byte-differ. The harness is a script,
   not a test (a 1000-sim sweep would dominate the suite); kill-criteria
   operationalize as M3 mean ≥2, M1 non-trivial, M2 non-zero. M3 counts
   per qualifying endpoint: each non-PC, non-director event whose maximal
@@ -597,305 +597,46 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
 
 ## Next step
 
-**Phase 5 (Depth) OPEN (iter-73, D-105 — the owner's start call,
-the iter-55/36 opener precedent; ROADMAP §2 flipped, the backlog
-drafted from `docs/blueprint/phases.md` §5) — depth-1 the
-acquisition gate + depth-1b the arming + depth-2 the lazy-detail
-gate + depth-2b the ARMING + depth-4 fold checkpoints + depth-5 the
-ordered worldgen passes + depth-5b the worldgen ARMING + bridge-1
-the scene-line projection pipe + chron-2 the history bridge +
-place-1 the placement discipline + geo-1 the geometry rework +
-maclock-1 the macro-clock primitive + depth-3 the scene LOD +
-depth-6 factions with goals + depth-7 groups & simulation LOD LANDED
-(iter-73/74/75/76/80/81/83/86/87/88/89/90/91/92/93,
-D-105/D-106/D-107/D-108/D-114/D-115/D-117/D-120/D-121/D-122/D-123/
-D-124/D-125/D-126/D-127;
-the corpus
-prices paid fidelity-only / zero-by-construction ×3 / the genesis
-events + the id shift — the murmur's pre-seed timing the one
-designed shift — / read-side zero / the pass-1 positions frozen —
-the T1 fixture the one re-pin, 4 outcome lines, 1417+1 green /
-lint-side + pack data alone — zero re-pins, 1422+1 green /
-byte-identical by exactness proof — zero re-pins, 1424+1 green /
-unarmed by the 68a pattern, the fingerprint equal both arms — zero
-re-pins, 1442+1 green / unarmed one-scene law, the unarmed twin
-byte-identical over the corpus scripts — zero re-pins, 1459+1
-green / unarmed by the inert-twin law, the fingerprint equal both
-arms — zero re-pins, 1493+1 green / per-group opt-in, the inert
-twin byte-identical seeds 42/0/125, the fingerprint equal — zero
-re-pins, 1516+1 green) +
-the iter-82 concept-land verdict set (D-116: the 13 questions resolved,
-the wave plan routed, the spatial model pinned as phase law). Track
-A is debt-free. (iter-85 intake-6 landed doc-only between mech-1 and
-bridge-1 — the owner's variant-A call, the ORDER owner's
-prerogative; D-119's catalog rows + refusals; the queue itself
-untouched.) (iter-94 intake-7 landed doc-only after depth-7 — the
-owner's adoption call on the external Anthropic-2026 corpus
-analysis; D-128/D-129 the verdict set + the mech-2 infra row; the
-queue itself untouched.) (iter-95 intake-8 landed doc-only after
-intake-7 — the owner's setting-direction research call; D-130 the
-verdict set: the three-tier posture (the repo's 2nd setting
-ORIGINAL, the province sketch at `docs/blueprint/phases.md` §6
-riding world-2's level-2 half), the minus ledger, REFERENCES §10 +6
-rows; the queue itself untouched — name-1 stays pinned; the
-two-doc-only-iteration streak surfaced in the header per AGENTS
-§2.5.) (iter-100 intake-9 landed doc-only after rev5 — the owner's
-cross-media analysis call on the external TTRPG text; D-134 the
-verdict set: the cost/failure/corruption pack laws + the parked
-loop/low-magic/soul-scar/belief-as-rules patterns (phases.md §6),
-REFERENCES §10 +8 rows; the queue itself untouched — iter-99 was
-functional, no doc-only streak.) (iter-101 intake-10 landed
-doc-only after intake-9 — the owner's encounter-design notes call;
-D-135 the verdict set: phases.md §6's encounter block + the
-`since-1` read-side row (owner-gated, the one genuine gap — the
-re-encounter delta); the queue itself untouched — the exit review
-still the Next step; the two-doc-only-iteration streak surfaced in
-the header per AGENTS §2.5, both the owner's calls, the D-022
-exception.) Track B: bg-8 LANDED (2026-09-09, D-109 — the deviation
-corpus's first live numbers + the heartbeat baseline row; the
-{3–8B, GBNF} arm + the prose heartbeat families the standing gap
-rows). The queue (D-116's wave order): `maclock-1` LANDED (iter-90,
-D-124 — the primitive first among its consumers, the scheduler
-blast-radius insurance paid at zero corpus price) → `depth-3`
-LANDED (iter-91, D-125 — the macro clock's FIRST consumer: the
-three zones, the warm ring at the crossings, `cold_npcs` the cold
-census on the turn; the one-gate law — the LOD engages exactly when
-the macro clock is armed, the unarmed pack the one-scene world; the
-committed pack's macro arming LANDED with weather-1's row
-   (iter-98, D-133 — the primitive's first consumer)) →
-`depth-6` factions LANDED (iter-92, D-126 — small-formula dynamics,
-the KeeperRL ratio+threshold over the members' live per-entity
-axes; the group entity kind acting through the intent door, the
-`faction:<group>:<kind>` roll stream the D-079 family's fifth
-member, the anchor-scoped LOD; the committed pack unarmed — the
-arming rides with a future content row) → `depth-7` groups &
-simulation LOD LANDED
-(iter-93, D-127 — the write side at group scale: the `member_of`
-state door (the D-054 slot shape — no fold seed, absence IS None;
-the fold validates every join/leave/transfer), the population
-tier's macro-tick aggregates (one per cold group per crossing,
-actor = the group id, the unborn population's count, draw-free),
-the condensation on crossing the warm transition (ONE event per
-group: the un-born members' canon births + the write-once
-tombstone; detected at the zone recomputations — beats AND
-crossings, the load state the origin); the per-group opt-in, the
-committed pack unarmed — zero re-pins) → `name-1` the name
-generator LANDED (iter-96, D-131 — the D-079 family law's sixth
-member `name:<npc>`, `core/names.py` the lazy materialize door (the
-scene-detail twin: one birth per declaring member, first-commit-wins,
-the bounded collision walk against the entity namespace), the
-profiles `rules.json::names.profiles` + the npc `generated_name`
-declaration (the lint: mutual exclusion, reachability — a condensing
-group membership), the consumer depth-7's condensation event (the
-name births paired with the membership births, the outcome's `names`
-key, the line must branch), the read surface fold-first (the
-chronicle, the scene card + entity views, the brief's cards + delta
-lines); the ref-19 dives landed with it (ck3.md — the culture-keyed
-data shape; azgaar_names.md — the generator half); the committed
-pack unarmed, the inert twin byte-identical, the armed delta the
-name births alone, the fingerprint equal — zero re-pins) →
-`st-6(a)` travel LANDED (iter-97, D-132 — the movement TWIN with an
-edge price: `ticks: "edge"` the fourth action-vocabulary value,
-movement-resolver-only; the accept door prices at resolve time
-through `core/travel.py` (`t + price`, day-scale queue-cheap, the
-crossings fire mid-travel, D-038); the price law — the pack override
-wins per edge, else the derived integer function of the WorldModel
-(lattice steps + the height-band spread + river endpoints, the MIN
-cross-pair, no runtime division, draw-free); the `_travel` lint —
-the pairing law + the coverage law (every exits edge priceable);
-the committed pack unarmed (the 68a pattern — the arming rides with
-world-2's province row); the macro consumer half routed to the
-space pack's future row; +18 tests, 1546→1564+1 green, zero
-re-pins) → `weather-1` LANDED (iter-98, D-133 — the ambient family:
-the chain on the isolated `weather:chain` stream (the D-079 law's
-seventh member), the fold-read weather state, the seeded storm
-consequence (the ambient channel's quiet gate, the D-082 pattern),
-the EROSION (the fire follow-ups' shape — SEEDED follow-ups
-reverting promoted canon flags, the rain washes the fire layer's
-smoke, EVENT_SCHEMA §4's explicit counter-event; the never-regress
-law floors a late crossing's deferral at the entry tick); the
-`_weather` lint (the pairing law one direction, the identity law,
-the closures, the reachability); THE COMMITTED MACRO ARMING landed
-with the row (the primitive's first consumer): `time.macro` at the
-year-scale cadence 518400 + the weather block + the three template
-lines; +22 tests, 1564→1586+1 green; the corpus price: the T1
-golden + day1_theft byte-identical, day1_full pays the LOD's
-one-gate engagement alone (depth-3's designed price, deferred since
-iter-91 — the warm ring's beat events wait for crossings no
-day-scale run reaches, ~20 test files + the two corpus fixtures
-re-pinned; the weather block itself adds zero corpus events; the
-fingerprint equal both arms). W3
-closes without rows: the calendar binding LANDED as maclock-1's own
-(the macro-year the macro-clock's counter, the cadence
-pack-declared). The
-phase-5 queue is now EMPTY of live candidates — the phase-5 exit
-review (ROADMAP §2's chain criterion already reads 26 on the
-committed scenario; the exit review the owner's call, the iter-55/73
-gate precedent) is the Next step, the gate rows owed there: the
-D-034 DECISIONS collapse + the first phases.md §5 staleness pass
-(D-128's own effect lines). The
-phase-6 instruments pinned owner-gated:
-`world-2` (the two-level gate), `res-1` (the resource layer —
-scarcity gets its row owner), `roads-1` (the generated exits).**
+**Phase 6 (Packs & worldbuilder) PARKED — the opening is the owner's
+call (the iter-55/73 opener precedent; ROADMAP §2's state column is
+the single owner of closed/open). The phase-5 epoch is closed clean:
+Track A debt-free, the queue empty, the exit criterion met on the
+armed committed pack, the DECISIONS/TASKS collapses paid at the gate.
+What stands, for the phase-6 opening or the owner's direct calls
+(owner-gated rows are NOT auto-candidates):**
 
-1. **Phase 5 (Depth) — the OPEN build column** (TASKS' depth-3..7
-   rows + intake-5's bridge rows; `docs/blueprint/phases.md` §5 the
-   architecture owner, the spatial model now phase law there):
-   depth-5b LANDED (iter-83, D-117 — the worldgen ARMING: the
-   committed pack's own block + the world_history template line + the
-   story-critical listing; the conductance + reachability lint laws;
-   the flat claim keys; the price paid — the genesis events + the id
-   shift, the murmur's pre-seed timing the one designed shift);
-   bridge-1 LANDED (iter-86, D-120 — the scene-line projection pipe:
-   the scene fields read the folded projection, the claims render in
-   the brief of the scene that claims them, the pack record the
-   fallback; the reachability lint's scene-line arm; read-side zero);
-   chron-2 LANDED (iter-87, D-121 — the history bridge: the DF
-   legends shape (participants/places), the pack-declared collection
-   vocabulary (feud → quarrel committed, the war→battle→episode
-   mechanism pinned on crafted tiers), the cause TREE (the parent
-   map resolved through the writer's ids); the corpus price — the
-   pass-1 positions frozen, zero corpus re-pins, the T1 fixture the
-   one re-pin); place-1 LANDED (iter-88, D-122 — the placement
-   discipline: the claim↔exits consistency lint — every exits edge
-   joining two claimed locations reads sites within the
-   pack-declared `place.max_edge_span` lattice steps; the metric the
-   engine's row-major Chebyshev lattice, the threshold the pack's
-   (INV-3); the vacuity law; KI#82 the missing-sub-block KeyError
-   leak opened + fixed the same iteration; corpus price zero —
-   lint-side + pack data alone, zero re-pins); geo-1 LANDED (iter-89,
-   D-123 — the geometry rework: the grid-hash neighbor walk (buckets
-   at spacing scale, expanding rings under the ring-floor exactness
-   law, amortized O(N)) computed ONCE and shared by watershed +
-   biomes, the per-site bounding-box relax walk (O(extent²), the
-   runtime exactness check + the deterministic doubling retry); the
-   measured profile `scripts/worldgen_profile.py` + TECH_NOTES §12
-   (the old walls measured on HEAD first, the 10k-site full genesis
-   door 1.19 s clean, the cost now draw-linear); corpus price zero —
-   byte-identical by exactness proof, the both-arms fingerprints
-   equal, zero re-pins); maclock-1 LANDED (iter-90, D-124 — the
-   macro-clock primitive: the scheduler cadence rule (the positive
-   multiples of the pack-declared `time.macro.cadence_ticks`, the
-   loop's third crossing, coarsest-first at a co-occurring tick),
-   the macro-year counter (derived `start + t // cadence`, the
-   calendar binding to the worldgen chronicle horizon — one
-   timeline), the aggregate emission surface (`macro_turn_draft`,
-   the D-112 one-event-with-cardinality shape the depth-3/7 +
-   st-6a/weather-1 consumers call); the committed pack's arming
-   LANDED with weather-1 (iter-98, D-133 — the primitive's first
-   consumer, the year-scale cadence; the maclock row's own zero
-   price held: the fingerprint equal both arms); depth-3 LANDED (iter-91, D-125 — the scene LOD: the
-   zone family `core/lod.py` (the pure partition over the exits
-   graph + the PC's live position, the zones following the reader),
-   the one-gate law (the warm cadence IS the macro cadence — one
-   clock, no second declaration; the unarmed law the one-scene
-   world, the v0.1 bytes), the warm ring at the crossings (drift
-   chained after the turn + goal rolls at the crossing tick, the
-   director staying global — the story layer), the cold census
-   `cold_npcs` on the turn (the D-112 counts-for-populations shape,
-   the cold NPCs never ticking); the LOD filters on the decay and
-   urgency walks (None the one-scene law); KI#83 the entities-lint
-   KeyError leak found + fixed the same iteration; corpus price
-   zero — the unarmed twin byte-identical over the corpus scripts,
-   zero re-pins); depth-6 LANDED (iter-92, D-126 — factions with
-   goals: the small-formula dynamics `core/factions.py` (the
-   KeeperRL ratio+threshold — the affected fraction of the
-   membership vs the pack-declared threshold, ramping to the pack's
-   ceiling; the deadband, the vacuity law; D-006 holds — the
-   members' LIVE per-entity axes, never a stored group score), the
-   group entity kind `entities.json::groups` (D-112's one id — the
-   faction acts through the intent door, actor = the entity id; the
-   anchor seeds the projection, presence views never list it), the
-   `faction:<group>:<kind>` roll stream (the D-079 family's fifth
-   member, engine-2's per-entry isolation), the walk at the beats +
-   the crossings (the anchor scoping the scene LOD's zones — cold
-   factions silent, their population ride depth-7's aggregates);
-   corpus price zero — the inert twin byte-identical over the corpus
-   scripts, the armed arm's delta the faction family alone, zero
-   re-pins);
-   depth-7 LANDED (iter-93, D-127 — the write side at group scale:
-   `core/groups.py` the `member_of` state door (the D-054 slot
-   shape — no fold seed, absence IS None; the fold validates every
-   join/leave/transfer; the depth-6 walk keeps its static-list
-   read, the iter-92 law), the population tier (one aggregate event
-   per cold group per macro crossing — actor = the group id, the
-   unborn population's count under `population`, draw-free), the
-   condensation on crossing the warm transition (ONE event per
-   group: the un-born members' canon births + the write-once
-   tombstone marker, detected at the zone recomputations — beats
-   AND crossings, the load state the origin), the per-group opt-in
-   (`macro_event`/`condense_event`, template-closure linted,
-   memberless refused — dead data; without them depth-6's
-   intent-door actor alone — zero re-pins, the depth-6 pinned
-   behaviors pass unchanged); corpus price zero — the inert twin
-   byte-identical seeds 42/0/125, the armed arm's delta the tier
-   families alone, the fingerprint equal);
-   name-1 LANDED (iter-96, D-131 — the generator + the condensation
-   consumer + the fold-first read surface, the ref-19 dives landed
-   with it; +28 tests, the committed pack unarmed, zero re-pins);
-   st-6a LANDED (iter-97, D-132 — the movement TWIN with an edge
-   price: the `ticks: "edge"` mode (movement-resolver-only), the
-   price law `core/travel.py` (override wins per edge, else the
-   derived integer function — lattice steps + the height-band
-   spread + river endpoints, the MIN cross-pair, no division,
-   draw-free), the accept door's `t + price` branch (the crossings
-   fire mid-travel, D-038), the `_travel` lint (the pairing + the
-   coverage laws); the committed pack unarmed — the arming rides
-   with world-2's province row; the macro consumer half routed to
-   the space pack's future row; +18 tests, 1546→1564+1 green, zero
-   re-pins);
-   weather-1 LANDED (iter-98, D-133 — the ambient family + the
-   erosion + the committed macro arming: the detail in the wave
-   order above; the queue now empty of live candidates — the exit
-   review the owner's call, the gate rows owed there);
-   the
-   exit
-   criterion "an
-   emergent chain of
-   3+ events without the player" (ROADMAP §2 — T8's OFF arm already
-   reads 26 chains on the committed scenario; the phase-5 target is
-   the worldgen-fed form of it — the armed committed pack is now the
-   instrument). The phase-5 donor material (ROADMAP
-   §4): Azgaar FMG (states + chronology + the name pools — the D-116
-   split; cultures/religions/burgs re-gated to phase 6), Neighborly
-   (the closest cousin's architecture reading). The phase-5 spatial
-   row `st-6(a)` (travel as a separate action) is LANDED (iter-97,
-   D-132 — the detail above, TASKS + phases.md §5 the owners);
-   `st-3`/`st-5`
-   (groups/LOD, containers) carry their GROUP_SPEC trigger = phase 5.
-2. **Owner-gated, unchanged from phase 1/2/4:** `parse-2` (buttons +
-   multi-intent), `engine-1` (the runtime inference engine decision
-   — llama.cpp + GBNF, TECH_NOTES §1; the dev-time external parser
-   carries mode C until then), tune-3 (the three-way NPC-movement
-   fork), st-2 (the identity promotion door — the read-path half
-   landed as tex-1, iter-62), the phase-1 corpus
-   consolidation pass, `bg-6` (SoW audit, D-055 deferral), `qa-1`
-   mypy + `ci-1` GitHub Actions, `scav-1` (offline compaction —
-   tombstones after the chronicler's rollups, TASKS' deferred row).
-   Still open for the owner: the Alien unknown-axis L6 conflict
-   (DIRECTOR_SPEC §11) + the arc driver's review question (the
-   climax flag on a weight-0 closing beat; D-081 records the
-   tension, the owner may veto). The leg-1 recorded questions (the
-   testimony-crystallization fidelity floor; the static-personality
-   half of the character-card question — PACK_SPEC territory at the
-   2nd-setting gate) carry unchanged. New from iter-77/78: the routed
-   meta-analysis candidates LANDED (iter-79, the owner's verdict
-   call — D-110..D-113: pred-failclosed + pred-contract in code, the
-   iter-11b ratification, the Rule-9 definition, the sequencing
-   split, the tn12 drop; verify-seed + archive-protocol execute in
-   the owner's bootstrap text, chat-side). The doc-only streak is
-   broken — iter-79 was functional.
-3. Track B: **bg-2 DONE, bg-3 DONE, bg-4 DONE, bg-7 DONE, bg-8 DONE**
-   (the five probes' first numbers + the deviation corpus's first live
-   numbers + the heartbeat baseline — TECH_NOTES §10/§11, TEST_PLAN
-   §8.5), bg-6 owner-deferred. The standing gap rows: the {3–8B,
-   GBNF} arm (owner hardware — engine-1's decision input), the bg-7
-   prose families skipped in the bg-8 heartbeat (rate-limit
-   economics), the per-family latency distribution. New track-B ideas
-   enter the `docs/TASKS.md` backlog on the owner's
-   call, never spontaneously. `pack-3` (Sci-Fi sketches) stays parked
-   until the 2nd-setting gate. `CORE_ONTOLOGY.md`'s SPECS_BACKLOG
-   trigger ("phase-0 gate passed") fired at iter-6, was never
-   scheduled, and the just-in-time reading keeps deferring it: write
-   specs FROM experiment results at need, not ahead — it stays
-   parked.
+1. **The phase-6 instruments (TASKS' parked section, drafted):**
+   `world-2` (the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day on
+   the open generic stack, level 2 the deep original province, the
+   D-130 sketch at phases.md §6 riding the level-2 half; the
+   st-6a/name-1 arming rides its cultures row), `res-1` (the closed
+   scarcity cycle as pack data — never a second economy engine,
+   D-116/D-119), `roads-1` (mode G emits exits for generated worlds —
+   an MST/k-nearest pass, a D-row when it lands). Phase 6's own exit:
+   a new T1 reskin without core edits, ≤ 1 day.
+2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
+   them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
+   runtime inference decision — llama.cpp + GBNF; the dev-time
+   external parser carries mode C until then), `tune-3` (the
+   NPC-movement fork), `st-2` (the identity promotion door — the
+   read-path half landed as tex-1), `scav-1` (offline compaction —
+   tombstones after the chronicler's rollups), `qa-1` mypy + `ci-1`
+   GitHub Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
+   (the grim pack — the PACK_SPEC trigger is phase 6 / the 2nd
+   setting; `pack-3` parked at the same trigger), `companion-1` (the
+   party role — pack data over existing doors), `mech-2` (the
+   introspection output caps — rides the next mechanics.py touch),
+   `since-1` (the re-encounter delta — read-side, its gate now open:
+   the exit review passed). Still open for the owner: the Alien
+   unknown-axis L6 conflict (DIRECTOR_SPEC §11) + the arc driver's
+   review question (the climax flag on a weight-0 closing beat,
+   D-081's recorded tension).
+3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
+   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
+   decision input), the bg-7 prose families skipped in the bg-8
+   heartbeat (rate-limit economics), the per-family latency
+   distribution. New track-B ideas enter the backlog on the owner's
+   call only.
+4. **No live queue row stands between the owner and the phase-6 call.**
+   A direct small call (since-1, mech-2, a resync) is equally legal —
+   the ORDER owner decides; TASKS owns composition, never order.

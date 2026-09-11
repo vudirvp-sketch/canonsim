@@ -8,8 +8,10 @@
 ## 1. What this repo is
 
 `canonsim` — a deterministic canonical simulation core (Python, stdlib-first).
-Phase 0 builds **TavernSim v0**: one tavern scenario (theft, arson, rumors) that
-runs and reads as a story **without any LLM**. North star: a simulation mode
+Phase 0 built **TavernSim v0**: one tavern scenario (theft, arson, rumors) that
+runs and reads as a story **without any LLM** — closed iter-6; phases 1–5
+closed since (ROADMAP §2 owns the state; phase 6, packs & worldbuilder,
+parked). North star: a simulation mode
 inside Soul-of-Waifu (`docs/VISION.md` §10).
 
 Two work tracks (`docs/ROADMAP.md` §1):
@@ -52,7 +54,7 @@ them.
 | INV-1 | **Event sourcing.** No state change outside an event. State = fold(log). The raw JSONL log is the only truth; SQLite is a rebuildable index. The log writer (`core/log.py`) is the only canon-write path; every other module emits through the queue (privilege separation, D-031). | T2 replay test; review |
 | INV-2 | **Determinism.** Single point of randomness control — one master seed; named streams deterministically derived from it via the `RngBank` authority (stable hash of `f"{seed}:{stream}"`); no wall-clock anywhere (including the log header); iteration only via `sorted()` or construction order; queue key `(tick, sub_order, actor_id)`; `PYTHONHASHSEED=0`. Cosmetic-stream draws can never desync canon replay. (D-028; supersedes the "one `random.Random(seed)` instance" wording — the donor sources themselves are multi-stream.) | T1 byte-identical test + RngBank fingerprint |
 | INV-3 | **Content/code split.** Core code contains no domain words ("guard", "purse", "tavern"). All setting data lives in `content/tavern_pack/*.json`. | grep stoplist test (from iter-2) |
-| INV-4 | **LLM boundary.** No LLM or network calls in track A before the phase-0 gate passes. | review; import check |
+| INV-4 | **LLM boundary.** No LLM or network calls in track A (the phase-0 gate condition is discharged — the boundary itself is the standing law; it lifts only on the owner's engine-1 call, D-055's file-contract frame). | review; import check |
 | INV-5 | **Log immutability.** Committed logs are never edited; corrections are new events. Runtime logs are never committed. | review; `.gitignore` |
 
 ## 5. Bug → doc → fix (KI lifecycle)
@@ -145,7 +147,8 @@ the worklog records why.
 - Adding any runtime dependency (core is stdlib-only) or bumping
   `requires-python`.
 - Touching CI workflow files.
-- Introducing any LLM/network call into track A (phase-0 gate must pass first).
+- Introducing any LLM/network call into track A (the engine-1 owner gate —
+  the phase-0 condition is discharged since iter-6).
 - Moving or renaming top-level directories.
 - Deleting or rewriting committed log or fixture files.
 

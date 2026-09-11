@@ -602,6 +602,26 @@ alone (depth-3's designed price, paid at the arming: the warm
 ring's beat events wait for crossings no day-scale run reaches —
 the day1-family pins re-measured, the weather block itself adds
 zero corpus events). 1589 tests green, ruff clean.
+**Phase 5 (Depth) CLOSED — gate PASS iter-102, D-136** (the owner's
+exit-review call; the queue empty since weather-1, rev5/iter-99 the
+pre-gate evidence base): the exit criterion "an emergent chain of 3+
+events without the player" MET in its worldgen-fed form — the ARMED
+committed pack (the depth-5b genesis + the year-scale macro arming +
+the weather chain): the seed-125 gate pair ON M1=0.52 / M2=0.2 /
+OFF T8 24 chains (the iter-65 record 26 — the delta is iter-98's
+DESIGNED day1_full price, the LOD's one-gate engagement); the
+60-seed band 15–24, M5 p50 0.79, stretch max 1; T7 the tale reads as
+a story — the worldgen genesis + world_history lines open the
+chronicle; the longrun pins (the committed pack's first past-a-day
+runs) green; no kill-criteria hit. The §5 step-6 staleness pass ran
+(KEEP the law, three discharged-phase-0 clauses reworded in AGENTS
+§1/§4/§8, DROP none). The doc debts paid at the gate: DECISIONS
+collapsed 71→30 (the D-034 families), TASKS 1240→694 (the phase-5
+ledger + the intake sections), the NAV tests-row lag fixed, STATUS
+re-pinned (the Next step: the phase-6 view). **Phase 6 (Packs &
+worldbuilder) PARKED** — opens on the owner's call; the instruments
+drafted: world-2 (the two-level 2nd-world gate), res-1 (the
+scarcity cycle as pack data), roads-1 (mode G emits exits).
 Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus

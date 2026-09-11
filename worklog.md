@@ -13,6 +13,52 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-102 · 2026-09-12 · gate — the phase-5 exit review, the owner's
+chat call (8 files doc-only, zero code, zero corpus price — the
+iter-54/65 gate footprint family; AGENTS §2.3: the objective scope
+noted here)
+- verified BEFORE working (1589+1 green, ruff clean, HEAD 5ecba27,
+  Python 3.12.14 the env pin); the full ROADMAP §5 protocol re-run:
+  the seed-125 pair ON M1=0.52/M2=0.2 (56 events — iter-98's DESIGNED
+  day1_full price; the iter-65 record 0.509/0.333/61 events) / OFF
+  T8 24 chains (the exit criterion ≥3 met in its worldgen-fed form —
+  the ARMED committed pack); the 60-seed band 15–24, M5 p50 0.79,
+  stretch max 1 (rev5's records hold); T7 the tale reads as a story —
+  the worldgen genesis + world_history lines OPEN the chronicle; the
+  longrun pins green; no kill-criteria hit. The verdict: PASS, D-136
+  (the gate-verdict family row)
+- the §5 step-6 staleness pass (D-128's adopted step, first
+  execution): KEEP the rest, REWORD three discharged-phase-0 clauses
+  (AGENTS §1's phase frame; INV-4's "before the phase-0 gate passes"
+  → the standing boundary + the engine-1 owner gate; §8's guard the
+  same), DROP none; D-129's effect-line habit UNEXERCISED — zero
+  protocol-law rows since D-128, reported out loud per its own
+  consequence line; D-128's own effect lines checked (mech-2 the one
+  still open, rides the next mechanics.py touch); the FAQ chain
+  baseline synced (26→24, the designed price)
+- the doc debts paid: DECISIONS collapsed 71→30 (D-034 — the phase-5
+  build column D-105..D-133 → the build-family row, the intakes
+  D-119/D-128/D-130/D-134/D-135 → the intake family, the
+  testproto/protocol rows D-098/D-109..D-113/D-118/D-129 → the
+  protocol family, the v0.2 lance D-095..D-104 → the phase-4 row, the
+  four phase-3 columns → one compound; compound IDs keep every
+  citation resolvable); TASKS collapsed 1240→694 (the phase-5 ledger
+  one-liners + the intake sections + the phase-3 rows + the Track B
+  one-liners + the phase-6 instruments section; the residue over the
+  600 cap is the closed-phase ledgers' substance, §6.1 — one-line
+  ledgers are the file's job, cutting them is the iter-0i mistake);
+  ROADMAP §2 phase-5 CLOSED; STATUS re-pinned (901→642, the Next step
+  → the phase-6 view); the NAV tests-row lag fixed (the post-iter-86
+  suites listed); README resynced
+- the external protocol runner outside the repo (Rule 9):
+  /home/z/my-project/scripts/gate_protocol_iter102.py + the committed
+  balance_harness arms (1-seed gate pair + the 60-seed refresh);
+  output/ artifacts gitignored, never staged. iter-93 evicted here
+  (verified against git in this edit); 10 after. Caps: TASKS 694 /
+  phases 1202 / DECISIONS 30 rows held — TASKS + phases over-cap on
+  ledger/architecture substance (§6.1, the iter-54 phases.md
+  precedent), the next trim point is the phase-6→7 gate.
+---
 iter-101 · 2026-09-12 · intake10 — the owner's chat call, the
 external encounter & event-generation design notes routed
 (6 files doc-only, zero code, zero corpus price — the intake-8/9
@@ -333,66 +379,5 @@ the one-family objective scope noted here)
   re-run post-edit: 1516+1 green, ruff clean. Caps: STATUS 820 / TASKS
   1113 / ROADMAP 102 / MVP 404 / DECISIONS 95 lines (65 rows) —
   over-cap held on substance (§6.1), trim at the phase-5→6 gate.
----
-iter-93 · 2026-09-10 · gsim1 — depth-7, groups & simulation LOD
-(D-112's ratified resolutions executed — the write side of the LOD
-ladder at group scale, the W2 row after depth-6; 11 files — 3 code
-(groups.py new, pack, loop) + 1 new test file + 7 doc sync: the
-door + the tiers + the lint + the integration are one family, the
-iter-90..93 footprint; AGENTS §2.3: 11 > 5-6, the objective scope
-noted here)
-- core/groups.py (new): the write-side LOD's single owner —
-  `macro_tick_drafts` the population tier (one aggregate event per
-  COLD group per macro crossing, actor = the group id — D-112's one
-  id, the unborn population's count under `population` — the static
-  members whose member_of is still None, a live fold read; no
-  knowledge/state_changes/hooks, DRAW-FREE), `condensation_drafts`
-  the tier transition on crossing the warm transition (ONE event
-  per group: the un-born members' canon births — the D-054
-  promotion shape, already-holders skipped — plus the write-once
-  tombstone marker `condensed`; the load state the origin),
-  `is_condensed` the marker read (the aggregate's gate). The
-  member_of door: NO fold seed (absence IS None, the slot shape);
-  the fold validates every join/leave/transfer; the depth-6 walk
-  keeps its static-list read (the iter-92 law, zero re-pins).
-- core/pack.py: the tier-vocabulary lint — the group record's
-  optional `macro_event`/`condense_event` (both in the template
-  closure, EVENT_SCHEMA §11; memberless refused — dead data, the
-  vacuity law's lint arm). core/loop.py: `_condense_groups` the
-  tier-transition pass FIRST at the beats AND the crossings (the
-  materialization precedes the machinery the members then ride);
-  `_run_macro`'s order — turn → condensations → cold aggregates →
-  warm drift → rolls; both under an armed clock alone (the unarmed
-  one-scene law, the v0.1 bytes).
-- +23 tests (tests/test_groups.py — the units: the aggregate's
-  shape, the tombstone gate, the zone filter, the population's
-  live-fold read; the condensation: the births + the marker, the
-  skip law, the write-once marker, the per-group opt-in; the door:
-  the fold's join/leave/transfer validation, the stale birth loud;
-  the lint refusals, parametrized; the integration: the cold
-  aggregates with the cause chain, the warm/active condensations at
-  the first crossing, the beat's detection arm (cadence beyond the
-  beat interval), the tombstone story with the contrast twin,
-  byte-identical determinism, the both-arms price — the fingerprint
-  EQUAL, the delta the tier families alone, the shared (t, type,
-  actor) sequence unchanged; the inert twin byte-identical over
-  plumbing_smoke + day1_full; the tale's render lines binding
-  {population}/{members}) — 1493→1516+1 green, ruff clean (3.12.14,
-  the env pin; seeds 42 + 0 + 125 spot-checked). Corpus price ZERO
-  by construction: the committed pack declares no groups and no
-  time.macro; the per-group opt-in keeps every depth-6 pinned test
-  UNTOUCHED (zero re-pins, git-verified: no fixture in the diff).
-- docs: DECISIONS D-127, TASKS depth-7 done, phases.md §5 the
-  write-side-LOD landing tag, NAV §1 (the groups module row + the
-  pack/loop extensions), README (the narrative + the code-map row +
-  the count 1493→1516), STATUS re-pinned (the queue: name-1 next,
-  per D-116's wave order) + KI#83 deleted (closed iter-91, two
-  iterations past, the KI#81 precedent) + this file (the order
-  normalized — iter-92 had been appended at the END, newest-first
-  restored; iter-87's missing separator restored). iter-83a evicted
-  here (verified in the same edit); 10 after. Caps: STATUS 863 /
-  TASKS 1072 / DECISIONS 93 lines (63 rows) / phases 860 / README
-  719 — over-cap on substance (§6.1, the D-095..D-127 precedent),
-  trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)
