@@ -1,77 +1,65 @@
-Iteration: iter-98 (`iter-98-weather1` — the ambient weather family +
-canon erosion, the STATUS queue's live row after st-6a, TASKS' own
-letter + D-116 (7): "an ambient family over the existing doors — no
-physics engine"; the clone verified BEFORE working — 1564+1, ruff
-clean, HEAD 93d26df, Python 3.12.14 the env pin; the CHAIN rides the
-macro crossings: one roll per crossing on the isolated `weather:chain`
-stream (the D-079 family law's SEVENTH member, singleton — the
-substantive fingerprint never sees a weather roll), a self-roll
-suppresses the event (KI#13's discipline) while still advancing the
-stream; the current weather is the FOLD (L3: the last event's
-outcome key, the pack's `initial` before the first), no knowledge
-(the ambient law, the macro turn's shape), no state_changes; the
-SEEDED consequences (TIME-1): the storm's hook tag rides the
-director's buffer through the existing door (the D-082 pattern —
-weight 0, ambient channel, first_time_only); the EROSION (the fire
-follow-ups' shape): SEEDED follow-ups whose commits REVERT promoted
-canon flags — the rain washes the fire layer's smoke (an explicit
-counter-event, EVENT_SCHEMA §4), idempotent on state, the
-never-regress law flooring a late crossing's deferral at the entry
-tick (found live in the batch-crossing probe, fixed the same
-iteration); the `_weather` lint — the pairing law (weather without
-`time.macro` is dead data, one direction), the identity law (the
-event type ≠ the macro turn's), the weights/hooks/erosion closures,
-the reachability law; THE COMMITTED MACRO ARMING landed with the row
-(the primitive's first consumer): `time.macro` at the year-scale
-cadence 518400 + the weather block (clear/overcast/rain/storm) + the
-three template lines; +22 tests, 1564→1586+1 green, ruff clean; the
-corpus price measured both arms and paid: the T1 golden +
-day1_theft BYTE-IDENTICAL, day1_full pays the LOD's ONE-GATE
-engagement alone (depth-3's designed price, deferred since iter-91 —
-the warm ring's beat events wait for crossings no day-scale run
-reaches: 61→56 events, ~20 test files + the narrator corpus's 5
-cases + the parser corpus's 1 re-pinned; the weather block itself
-adds ZERO corpus events); the INV-3 stoplist caught three fresh-prose
-nouns mid-iteration (the fire follow-ups' naming) and all were fixed
-before commit, no KI owed) ·
+Iteration: iter-99 (`iter-99-rev5` — the owner-requested pre-gate
+revision: phase 5's build column verified end-to-end, the tests
+actualized for the long-run surfaces the suite never reached, the
+living-world question probed and answered with numbers; the clone
+verified BEFORE working — 1586+1 green, ruff clean, HEAD 0ada288,
+Python 3.12.14 the env pin; the probe battery OUTSIDE the repo
+(D-046, the operator's Rule 9): storyline exhaustion (seed 125 +
+a 60-turn wandering tail — the day-2+ steady state), year-scale
+(3 crossings, seed 42 — the weather chain + the census + the
+watch-loop), fresh sandbox (seed 7, no crime — the idle world
+still beats), determinism (the long logs byte-identical + T2 fold
+clean), the 16-action post-story reach catalog, the balance
+harness 60 seeds both arms (M5 p50 0.79, chains 15-24, the
+stretch table max 1 — consistent with the phase records); THE
+FINDINGS (the exit review's input): the director a FINITE
+MAGAZINE on the committed pack (all six hooks first_time_only —
+spent within ~2 days; new crimes re-seed the buffer but the burn
+law holds — nothing releases again), the day-2+ steady state =
+rotations + decay + the maid/relief quiet urgencies + the social
+mill (rumor_told decays to zero; leverage expires at 720 — the
+drunk's card dies with the story), the scripted scenario is
+CONSUMED (the purse gone, the lamp broken — day-2 steal/arson
+door-reject carries_flagged/flagged_accessible), year-scale =
+the weather chain + the cold census riding an otherwise
+watch-change loop (weather canon-but-not-tale by design —
+test_weather's own pin; NO read surface renders the sky yet), and
+the suite's longest committed run had been ~1500 ticks — the gap
+this iteration closes; a sandbox answer for the owner's doubt:
+a full year runs in 0.56 s / 2210 events, 3 years in 3.2 s — the
+20-30-50-turn horizon is trivially affordable, even
+year-scale sessions) ·
 Phase: 5 (Depth) — OPEN (iter-73, D-105; depth-1 + depth-1b +
 depth-2 + depth-2b + depth-4 + depth-5 + depth-5b + bridge-1 +
 chron-2 + place-1 + geo-1 + maclock-1 + depth-3 + depth-6 +
 depth-7 + name-1 + st-6a + weather-1 LANDED,
 the queue: EMPTY of live candidates — the phase-5 exit review is the
 owner's call (the gate rows owed there: the D-034 DECISIONS collapse
-+ the first phases.md §5 staleness pass, D-128's own effect lines)) ·
-1586 passed +1 skipped, ruff clean (Python 3.12.14, the env pin; seed
-42 pinned, the both-arms + weather-less-twin prices measured).
++ the first phases.md §5 staleness pass, D-128's own effect lines;
+this revision's probes + tests are the review's evidence base, and
+the NAV tests-row lag — the post-iter-86 suites unlisted — belongs
+to the same staleness pass)) ·
+1589 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
++3 the longrun suite, self-comparing, zero corpus price).
 ·
 Date: 2026-09-11 ·
-Scope: `core/weather.py` (new — the family owner: `weather_turn_draft`
-+ `current_weather` + the erosion specs/drafts), `core/rng.py` (the
-seventh family prefix + `weather_stream_name`), `core/loop.py` (the
-crossing's weather branch + the `weather` entry kind + the
-`WeatherPayload`), `core/pack.py` (the `_weather` lint +
-`_transition_flags`), `content/tavern_pack/rules.json` (the macro
-ARMING + the weather block + the storm hook row),
-`content/tavern_pack/templates.json` (the three lines),
-`tests/test_weather.py` (new, +22 — the unit laws, the crafted-pack
-integration, the corpus price both-arms), the day1-family re-pins
-(test_lod, test_macro, test_groups, test_factions, test_echo,
-test_panic, test_states, test_urgencies, test_ambient, test_arc_
-driver, test_balance_harness, test_beliefwire, test_checkpoint,
-test_detail, test_mechanics, test_mediator (the narrator corpus's 5
-cases), test_parser (1 case)), `docs/TASKS.md` (weather-1 done),
-`docs/DECISIONS.md` (D-133), `docs/blueprint/phases.md` (§5 the
-weather paragraph), `docs/AGENT_NAVIGATION.md` (§1 the core row),
-`README.md` (the st-6a + weather map rows, the status paragraphs, the
-macro-armed flip — the iter-96a sync-gap family closed in passing),
-`worklog.md`, `STATUS.md` (this file) — 27 files (the family + the
-arming + the corpus price are ONE row, the TASKS row's own three
-halves; AGENTS §2.3: 27 > 5-6, the objective scope noted in worklog).
-DECISIONS 44 rows mid-phase — the D-034 collapse owed at the
-phase-5→6 gate (alongside the first §5 staleness pass, D-128's own
-effect line).
-· The prior iteration's record: iter-97 (st-6a — the travel twin
-with an edge price). The detail lives in TASKS + worklog + git.
+Scope: `tests/test_longrun.py` (new, +3 — the committed pack's first
+past-a-day runs: the crossing laws at the committed cadence (the
+year turn's derived calendar + the cold census + the weather chain
+chained to the turn inside the closed vocabulary), the day-2 living
+floor past the scripted storyline, the idle world's beats; every
+test self-comparing — the T1 byte-identity double-run + the T2
+replay fold on the long logs, ZERO corpus price by construction —
+no committed fixture touched, no pack byte moved),
+`docs/AGENT_NAVIGATION.md` (§1 the tests row's longrun clause),
+`README.md` (the count sync), `worklog.md`, `STATUS.md` (this file)
+— 5 files (the revision + the test actualization are one family;
+AGENTS §2.3: within the 5-6 cap). TASKS/DECISIONS untouched (the
+iter-96a audit precedent — no backlog row flips; the verdict D-row
+is the exit review's own).
+· The prior iteration's record: iter-98 (weather-1 — the ambient
+weather family + canon erosion, the committed macro arming). The
+detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -95,13 +83,10 @@ with an edge price). The detail lives in TASKS + worklog + git.
 
 ## Active KIs
 
-- (KI#84 · CLOSED iter-96a · 2026-09-11 — the iter-96 read-surface
-  pair: the chronicle's outcome slots + the entity view's `carrier:`
-  line resolved through the pack record, not the fold (D-131 (7)
-  declares fold-first for every id-valued reference); fixed the same
-  iteration, `render/chronicle.py` + 2 tests.)
-- (None else active. KI#83 deleted at iter-93 per AGENTS §5 — closed
-  iter-91, two iterations past (iter-92 + iter-93, the KI#81
+- (None else active. KI#84 deleted at iter-99 per AGENTS §5 — closed
+  iter-96a, two iterations past (iter-97 + iter-98, the KI#83
+  precedent); the lesson lives in git + the FAQ's family law: the
+  fold-first read for every id-valued reference (D-131 (7)). KI#83 deleted at iter-93 per AGENTS §5 — closed iter-91, two iterations past (iter-92 + iter-93, the KI#81
   precedent); the lesson lives in git + the FAQ's family law: the
   pred-contract family's missing-field refusals. KI#82 deleted at iter-91 per AGENTS §5 — closed iter-88, three
   iterations past (iter-89/90/91 — the deletion was already overdue

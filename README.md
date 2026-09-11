@@ -601,7 +601,7 @@ byte-identical, the corpus price the LOD's one-gate engagement
 alone (depth-3's designed price, paid at the arming: the warm
 ring's beat events wait for crossings no day-scale run reaches —
 the day1-family pins re-measured, the weather block itself adds
-zero corpus events). 1586 tests green, ruff clean.
+zero corpus events). 1589 tests green, ruff clean.
 Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus

@@ -13,6 +13,45 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-99 · 2026-09-11 · rev5 — the owner-requested pre-gate revision:
+phase-5 verification + the long-run probes + the test actualization
+(5 files — 1 new test + 4 doc sync: the revision + the test
+actualization are one family; AGENTS §2.3: within cap)
+- verified BEFORE working (1586+1 green, ruff clean, HEAD 0ada288);
+  the probe battery OUTSIDE the repo (D-046): storyline exhaustion
+  (seed 125 + a 60-turn tail), year-scale 3 crossings (seed 42),
+  fresh sandbox (seed 7), determinism byte-identical + T2 clean,
+  the 16-action reach catalog, the balance harness 60 seeds both
+  arms (M5 p50 0.79, chains 15-24, stretch max 1 — the phase
+  records hold)
+- findings for the exit review: the director a finite magazine
+  (all six hooks first_time_only, spent within ~2 days, the burn
+  law verified live — new crimes re-seed, nothing releases); the
+  day-2+ steady state = rotations + decay + the maid/relief quiet
+  urgencies + the social mill (rumors decay to zero, leverage
+  expires at 720); the scripted scenario CONSUMED (day-2
+  steal/arson door-reject); year-scale = the weather chain + the
+  census riding a watch-change loop; weather canon-but-not-tale
+  (test_weather's own pin) — no read surface renders the sky yet;
+  the suite's longest committed run had been ~1500 ticks
+- tests/test_longrun.py (new, +3 — the committed pack's first
+  past-a-day runs: the crossing laws at the committed cadence, the
+  day-2 living floor, the idle world's beats; self-comparing, zero
+  corpus price), 1586→1589+1 green, ruff clean (Python 3.12.14,
+  the env pin); a year runs in 0.56 s — the owner's sandbox doubt
+  answered with numbers
+- docs: STATUS re-pinned (header iter-99, KI#84 deleted per AGENTS §5 —
+  closed iter-96a, two iterations past, the mandatory cleanup riding
+  this iteration's STATUS touch; the queue untouched —
+  the exit review still the Next step, now carrying the revision's
+  numbers), NAV §1 the tests row's longrun clause (the row's
+  post-iter-86 lag noted for the gate's staleness pass, not
+  backfilled here — out of scope), README the count sync;
+  TASKS/DECISIONS untouched (the iter-96a audit precedent). iter-90
+  evicted here (verified in this edit, the cap 10 held). Caps:
+  STATUS 895 / TASKS 1160 / DECISIONS 99 — over-cap on substance
+  (§6.1, the D-095..D-133 precedent), trim at the phase-5→6 gate
+---
 iter-98 · 2026-09-11 · weather1 — the ambient weather family + canon
 erosion (the queue's live row after st-6a, TASKS' own letter; 27
 files — 4 code + 2 content + 1 new test file + ~20 corpus re-pins +
@@ -404,49 +443,5 @@ footprint; AGENTS §2.3: 16 > 5-6, the objective scope noted here)
   91 lines (61 rows) / phases ~800 / README 681 — over-cap on
   substance (§6.1, the D-095..D-125 precedent), trim at the
   phase-5→6 gate.
----
-iter-90 · 2026-09-10 · maclock1 — the macro-clock primitive (W2's
-head, D-116's wave order, FIRST among its consumers; 11 files — 3
-code + 1 new test + 7 doc sync: the primitive + the loop
-integration + the lint + the pins are one family, the iter-86..89
-footprint; AGENTS §2.3: 11 > 5-6, the objective scope noted here)
-- core/macro.py (new): the scheduler cadence rule (`next_macro_tick`
-  — the positive multiples of the pack-declared
-  `time.macro.cadence_ticks`, pure arithmetic, never entropy), the
-  macro-year counter (`macro_year = start + t // cadence`, derived
-  never stored; the start BINDS to the worldgen chronicle horizon —
-  the calendar binding, one timeline, 0 unarmed), the aggregate
-  emission surface (`macro_turn_draft` — the D-112
-  one-event-with-cardinality shape, the counts flat integer keys
-  beside `year`, a `year` count a refused branch fake; the future
-  consumers depth-3/depth-7/st-6a/weather-1 call it at the
-  crossing); the raw-read guards raise MacroError (D-111 family).
-- core/loop.py: the third crossing cursor `_next_macro` (session-
-  persistent like the rotation/beat cursors) fired COARSEST-FIRST at
-  a co-occurring tick (macro → rotation → beat); `_run_macro` — one
-  turn event through the commit door, cause = the writer's last id,
-  no knowledge/state_changes/hooks, importance via the pack's own
-  rule. core/pack.py: the `time.macro` lint (closed vocabulary,
-  cadence ≥ 1, the event type in the template closure).
-- +18 tests (tests/test_macro.py — the arithmetic, the binding, the
-  surface's refusals, the crafted-pack integration: the turns with
-  the cause chain, the co-occurrence order, the A/B both-arms price,
-  byte-identical determinism, the session cursor, the render arms,
-  the lint refusals) — 1424→1442+1 green, ruff clean (3.12.14, the
-  env pin; seed 42 + unset spot-checked). Corpus price ZERO by
-  construction: the committed pack declares no time.macro (the 68a
-  pattern — the arming rides with the primitive's first consumer,
-  weather-1 the natural first); measured both arms — the fingerprint
-  EQUAL, the event-count delta the turns alone, zero re-pins
-  (git-verified: no fixture in the diff).
-- docs: DECISIONS D-124, TASKS maclock-1 done (weather-1/st-6a gate
-  notes re-pinned), phases.md §5 the macro-clock paragraph, NAV §1
-  + README the core/macro rows, STATUS re-pinned (the queue: the W2
-  consumers). iter-81 evicted here (verified against git in this
-  edit); 10 after. Caps: STATUS 767 / TASKS 1041 / DECISIONS 90
-  lines (60 rows) / TECH_NOTES 773 / README 669 — over-cap on
-  substance (§6.1, the D-095..D-124 precedent), trim at the
-  phase-5→6 gate.
----
 ---
 (end of log — cap 10; pre-trim history lives in git)
