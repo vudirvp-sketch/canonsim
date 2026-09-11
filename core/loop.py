@@ -69,6 +69,13 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
+from core.checkpoint import (
+    INDEX_NAME,
+    CheckpointError,
+    load_checkpoint,
+    prefix_digest,
+    read_index,
+)
 from core.clock import Clock
 from core.crime import (
     arrest_resolution_draft,
@@ -77,10 +84,11 @@ from core.crime import (
     next_rotation_tick,
     rotation_plan,
 )
+from core.cursor import CursorError
 from core.director import Director, policy_from_rules
 from core.echo import echo_scores
 from core.factions import faction_intents
-from core.fold import Projection, apply_event, initial_projection
+from core.fold import Projection, apply_event, fold, initial_projection
 from core.groups import condensation_drafts, macro_tick_drafts
 from core.ids import sequence_id
 from core.intent import (
@@ -122,7 +130,12 @@ from core.weather import (
     erosion_specs,
     weather_turn_draft,
 )
-from core.worldgen import WorldModel, genesis
+from core.worldgen import (
+    WORLDGEN_BLOCK,
+    WorldModel,
+    generate_world,
+    genesis,
+)
 
 __all__ = [
     "CompletionPayload",
@@ -209,13 +222,23 @@ class Simulator:
         commit: str = "unknown",
         *,
         director_enabled: bool = True,
+        append_writer: EventLogWriter | None = None,
     ) -> None:
         self._pack = pack
         self._seed = int(seed)
         self._bank = RngBank(self._seed)
         self._clock = Clock.from_rules(dict(pack.rules["time"]))
         self._queue = EventQueue()
-        self._writer = EventLogWriter(log_path, event_schema)
+        # The resume door (iter-106/D-139): a pre-opened APPEND-mode
+        # writer rides in — positioned over an existing log (its own
+        # construction validated every line, T0). `log_path` is ignored
+        # in that case (the writer owns its path); fresh runs keep the
+        # write-mode writer and the header written by `open()`.
+        self._writer = (
+            EventLogWriter(log_path, event_schema)
+            if append_writer is None
+            else append_writer
+        )
         self._commit_id = commit
         self._projection = initial_projection(pack.entities)
         self._initial = initial_projection(pack.entities)
@@ -287,6 +310,16 @@ class Simulator:
     def director(self) -> Director:
         """The runtime director (T8 A/B uses director_enabled=False at construction)."""
         return self._director
+
+    @property
+    def drained(self) -> bool:
+        """Whether the run sits at a clean drain boundary: the queue is
+        empty — every scheduled completion, seeded follow-up and spread
+        pass has fired, the world is settled between player inputs. The
+        cursor's save law (`export_cursor`): a mid-drain state is not
+        resume-able (its pending queue entries are not log-derivable),
+        so the cursor is pinned only here (D-139)."""
+        return not len(self._queue)
 
     def open(self) -> None:
         """Write the run header — an incremental session starts here.
@@ -464,6 +497,207 @@ class Simulator:
             return self.run_steps(list(script["steps"]))
         finally:
             self.close()
+
+    # -- the resume door (iter-106, D-139: resume is invisible to the log)
+
+    def export_cursor(self, *, director_enabled: bool) -> dict[str, Any]:
+        """The run cursor payload (`core/cursor.py` owns the artifact):
+        the run's entropy-and-clock position, pinned at a CLEAN drain
+        boundary — mid-drain is refused loudly (the queue's pending
+        entries are not log-derivable; saving there would promise a
+        resume the artifact cannot honor). Everything the fold rebuilds
+        is deliberately absent: the projection, the knowledge index, the
+        last-change index, the seeded-hook buffer (exactly rebuildable
+        by `Director.seed` over the log), the WorldModel (a pure
+        function of seed + pack config, re-derived at resume). What
+        rides here is ONLY what silent draws and run cursors own: bank
+        positions, director run marks, the clock, the crossing cursors,
+        the intent counter. `director_enabled` is the caller's live
+        policy toggle (the session's own flag — a per-run knob, not
+        canon; the resumed run restores it, D-139)."""
+        if len(self._queue):
+            raise RunnerError(
+                f"the cursor is a drain-boundary artifact: the queue holds "
+                f"{len(self._queue)} pending entries — finish or abandon the "
+                "drain before pinning run state"
+            )
+        return {
+            "seed": self._seed,
+            "pack": self._pack.name_version,
+            "event_count": self._writer.event_count,
+            "prefix_sha256": prefix_digest(
+                self._writer.path, self._writer.event_count
+            ),
+            "tick": self._clock.tick,
+            "next_rotation": self._next_rotation,
+            "next_beat": self._next_beat,
+            "next_macro": self._next_macro,
+            "intent_seq": self._intent_seq,
+            "director_enabled": director_enabled,
+            "bank": self._bank.export_state(),
+            "director": self._director.export_run_state(),
+        }
+
+    @classmethod
+    def resume(
+        cls,
+        pack: Pack,
+        log_path: Path,
+        event_schema: Mapping[str, Any],
+        cursor: Mapping[str, Any],
+        *,
+        commit: str = "unknown",
+        checkpoints_dir: Path | None = None,
+    ) -> "Simulator":
+        """Open a live session over an existing log (the resume door,
+        `phases.md` §7 — owner-gated since iter-80, opened by the
+        owner's iter-106 call; D-139: **resume is invisible to the
+        log** — a session interrupted at a drain boundary and resumed
+        with the same remaining steps is byte-identical to the
+        uninterrupted run; interruption is not an input, only steps
+        are).
+
+        The binding chain, every link loud: the append-mode writer's
+        own read validates the whole log (T0) plus the schema-version
+        and env-pin laws; the cursor must name THIS run (seed, pack)
+        and THIS log exactly (`event_count` + `prefix_sha256` — a log
+        that moved past the cursor, e.g. a mid-drain crash, refuses:
+        the extra events' entropy is unrecoverable and guessing it
+        would be save-scumming, not determinism). The log-derivable
+        state rebuilds from the log — the projection through the
+        checkpoint fast-path when the operator's artifacts exist and
+        anchor cleanly (`_restore_projection`), the indexes and the
+        director buffer by one ordered pass — and the entropy position
+        restores from the cursor (bank positions, director run marks,
+        clock, crossing cursors, intent counter). The WorldModel
+        re-derives through `generate_world` (a pure function of seed +
+        pack config; the genesis commits are already in the log, and
+        the bank's worldgen streams were excluded from the cursor
+        exactly so this rebuild re-draws their original positions).
+
+        A resumed simulator feeds `run_steps` like any session; the
+        batch front (`run_playscript`) is a fresh-run door — its
+        `open()` refuses on an already-written header, loudly.
+        `checkpoints_dir` follows the operator convention
+        (`output/checkpoints/<log_stem>/`, `scripts/checkpoint.py`);
+        absent artifacts are normal operation (the plain fold answers).
+        """
+        writer = EventLogWriter(log_path, event_schema, append=True)
+        try:
+            appended = writer.appended
+            assert appended is not None  # append mode always populates it
+            header, events = appended
+            if cursor["seed"] != header["seed"]:
+                raise CursorError(
+                    f"cursor seed {cursor['seed']!r} != log header seed "
+                    f"{header['seed']!r} — the cursor belongs to another run"
+                )
+            if cursor["pack"] != header["pack"] or header["pack"] != pack.name_version:
+                raise CursorError(
+                    f"cursor pack {cursor['pack']!r} / log header "
+                    f"{header['pack']!r} != loaded pack {pack.name_version!r} "
+                    "— the initial projection would be a lie"
+                )
+            if writer.event_count != cursor["event_count"]:
+                raise CursorError(
+                    f"stale cursor: the log holds {writer.event_count} events, "
+                    f"the cursor pins {cursor['event_count']} — the run moved "
+                    "past the pin (a mid-drain crash or a manual append); the "
+                    "extra events' entropy state is unrecoverable"
+                )
+            digest = prefix_digest(log_path, int(cursor["event_count"]))
+            if digest != cursor["prefix_sha256"]:
+                raise CursorError(
+                    f"cursor prefix digest {cursor['prefix_sha256']!r} != this "
+                    f"log's {digest!r} at the pinned offset — the log or the "
+                    "cursor was edited; refusing to guess"
+                )
+            sim = cls(
+                pack, int(cursor["seed"]), log_path, event_schema,
+                commit=commit, director_enabled=bool(cursor["director_enabled"]),
+                append_writer=writer,
+            )
+            sim._events = list(events)
+            sim._projection = sim._restore_projection(events, checkpoints_dir)
+            for event in events:
+                sim._knowledge.add(event)
+                for change in event.state_changes:
+                    sim._last_change[(change.entity, change.prop)] = event.t
+                sim._director.seed(event)
+            sim._director.restore_run_state(cursor["director"])
+            sim._bank.restore_state(cursor["bank"])
+            if events and int(cursor["tick"]) < events[-1].t:
+                raise CursorError(
+                    f"cursor tick {cursor['tick']} sits behind the log's last "
+                    f"event at t={events[-1].t} — the cursor is a lie about "
+                    "its run"
+                )
+            sim._clock.advance_to(int(cursor["tick"]))
+            for key, attr in (
+                ("next_rotation", "_next_rotation"),
+                ("next_beat", "_next_beat"),
+                ("next_macro", "_next_macro"),
+            ):
+                value = cursor[key]
+                if value is not None and value <= sim._clock.tick:
+                    raise CursorError(
+                        f"cursor {key} = {value} does not sit strictly after "
+                        f"the pinned tick {sim._clock.tick} — the never-regress "
+                        "law is part of the run state"
+                    )
+                setattr(sim, attr, value)
+            sim._intent_seq = int(cursor["intent_seq"])
+            if pack.rules.get(WORLDGEN_BLOCK) is not None:
+                sim._world = generate_world(
+                    sim._bank, pack.rules[WORLDGEN_BLOCK]
+                )
+            return sim
+        except BaseException:
+            writer.close()
+            raise
+
+    def _restore_projection(
+        self,
+        events: Sequence[EventRecord],
+        checkpoints_dir: Path | None,
+    ) -> Projection:
+        """The resume projection: the checkpoint fast-path when the
+        operator's artifacts exist and anchor cleanly (snapshot + tail
+        replay, `phases.md` §5 — `core/checkpoint.py`'s first RUNTIME
+        consumer; the module was built for exactly this door), else the
+        plain fold over the pack-seeded initial projection. Both paths
+        answer the same state (the re-fold law); the checkpoint only
+        cuts the fold cost. Present-but-wrong is LOUD — the anchors
+        have teeth (a foreign index, a mismatched prefix digest, a
+        corrupted artifact); ABSENT is normal operation, never an
+        error."""
+        if checkpoints_dir is None or not (checkpoints_dir / INDEX_NAME).is_file():
+            return fold(events, self._initial)
+        index = read_index(checkpoints_dir)
+        if index.log != self._writer.path.name:
+            raise CheckpointError(
+                f"checkpoint index names log {index.log!r} != "
+                f"{self._writer.path.name!r} — the artifacts are foreign"
+            )
+        if index.pack != self._pack.name_version:
+            raise CheckpointError(
+                f"checkpoint index pack {index.pack!r} != loaded "
+                f"{self._pack.name_version!r} — the snapshots folded a "
+                "different initial projection"
+            )
+        record = index.records[-1]  # sorted by offset: the latest
+        if record.offset > len(events):
+            raise CheckpointError(
+                f"checkpoint offset {record.offset} exceeds the log's "
+                f"{len(events)} events — the artifacts are foreign"
+            )
+        if prefix_digest(self._writer.path, record.offset) != record.prefix_sha256:
+            raise CheckpointError(
+                f"checkpoint prefix digest at offset {record.offset} does not "
+                "match this log — the snapshot or the log drifted"
+            )
+        checkpoint = load_checkpoint(record, checkpoints_dir)
+        return checkpoint.restore(events)
 
     def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
         intent = self._intent_from_step(remaining.pop(0))

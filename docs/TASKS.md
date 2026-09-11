@@ -107,6 +107,14 @@ D-105..D-133 family row + phases.md §5)
 ### Phase-6 parked instruments (W4, owner-gated; the phase-6 backlog
 drafts from phases.md §6 at the opening iteration)
 
+- `resume-1` · the session resume door — done (iter-106, the owner's
+  «приступай к реализации» on the iter-105 chat's risk-analysis
+  priority list, the cli-pack direct-call precedent): `--resume <log>`
+  opens the session OVER an existing log (D-139 — resume is invisible
+  to the log); the run cursor (`core/cursor.py`, the entropy state no
+  fold recovers) + the checkpoint fast-path (the module's first
+  runtime consumer) + the append-mode writer; the landing record: the
+  iter-106 section below.
 - `cli-pack` · the CLI `--pack` flag — done (iter-105, the pinned
   streak-breaker, D-137/D-138 riding the same call): every
   pack-loading command + the session take the flag, the tavern
@@ -168,6 +176,54 @@ drafts from phases.md §6 at the opening iteration)
 > W3 closed without new rows (the calendar binding is maclock-1's own,
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
+
+### iter-106 · resume — done
+
+The owner's direct call («приступай к работе и реализации», the
+risk-synthesis priority list's #1 — the checkpoint-resume wiring;
+splitting across iterations licensed, quality first): the session
+resume door, the one phases.md §7 left owner-gated since iter-80.
+Verified BEFORE working (1592+1 green, ruff clean, HEAD c7508f5,
+Python 3.12.14). The law (D-139): **resume is invisible to the log**
+— interrupted at a clean drain boundary and resumed with the same
+remaining steps, the session is byte-identical to the uninterrupted
+run (T1 across process boundaries; pinned at every split point,
+directors on and off). The mechanism, two artifacts by nature:
+the CURSOR (`core/cursor.py` — new) carries the entropy-and-clock
+state no fold recovers (silent draws: urgency misses, weather
+self-rolls, faction failures consume stream positions without
+events; bank positions via `RngBank.export_state`/`restore_state`
+— worldgen streams excluded, `generate_world` re-derives them,
+its purity the enabling fact; director run marks via
+`export_run_state`/`restore_run_state`, the buffer itself rebuilt
+exactly by `seed()` over the log), bound to its log by `event_count`
++ `prefix_sha256` (a stale pin refuses loud — guessing entropy is
+save-scumming, not determinism); the CHECKPOINT fast-path
+(`Simulator.resume` → `core/checkpoint.py`'s first runtime consumer)
+restores the projection as snapshot + tail when the operator's
+`output/checkpoints/<stem>/` artifacts exist and anchor cleanly —
+absent is normal operation (the plain fold), present-but-wrong is
+loud. The writer's append mode (`core/log.py`) rides the same canon
+door: read_log validates every line before the file is touched,
+the schema-version + env-pin header laws refuse a foreign
+continuation, committed lines are never rewritten (INV-5). The
+session pins the cursor after every command and at close, only at
+a clean drain boundary (`Simulator.drained`; a mid-drain crash
+leaves the last clean pin — a later resume over the grown log
+refuses loudly). The scene ledger stays session-scoped (D-049):
+a resumed session opens a fresh ledger; live texture dies with its
+session, promoted texture rode events. `cli/main.py`: `--resume`,
+the resumed banner, the delta discipline (new chronicle lines
+only). `core/queue.py`: QueueKind gains `weather` (the iter-98
+Literal drift, one word). `tests/test_resume.py` +19: the law at
+splits 0/1/2/3 + the directors-off arm; the cursor/rng/director
+unit refusals; the CLI e2e + the missing/stale/foreign-pack/env-pin
+loud refusals; the fast-path + the corrupt-artifact anchor teeth.
+1611+1 green, ruff clean; corpus price zero (no fixture regen, the
+armed pack's genesis rides the split-0 arm itself). 12 files —
+6 core + 1 test + 5 doc (AGENTS §2.3: the objective scope — a
+genuine system feature, one coherent landing, noted in worklog).
+Zero new KIs.
 
 ### iter-105 · cli-pack — done
 

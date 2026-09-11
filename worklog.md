@@ -13,6 +13,35 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-106 · 2026-09-12 · resume — the session resume door, the owner's
+direct call on the risk-synthesis priority list (D-139: resume is
+invisible to the log)
+- core: `core/cursor.py` NEW (the run-cursor artifact — envelope,
+  save/load, the event_count + prefix-digest log binding);
+  `core/rng.py` export_state/restore_state (worldgen excluded —
+  generate_world re-derives); `core/director.py`
+  export_run_state/restore_run_state + PACING_STATES (the buffer
+  rebuilt exactly by seed() over the log); `core/log.py` the
+  append-mode writer (same canon door, env-pin + schema-version
+  laws); `core/loop.py` Simulator.resume + export_cursor + drained +
+  the checkpoint fast-path; `core/queue.py` QueueKind += weather
+  (the iter-98 Literal drift); `cli/main.py` --resume + the cursor
+  pin after every command and at close (clean drains only)
+- tests: `tests/test_resume.py` +19 — the law at splits 0/1/2/3 +
+  the directors-off arm; cursor/rng/director unit refusals; CLI e2e
+  + missing/stale/foreign-pack/env-pin loud refusals; the fast-path +
+  the corrupt-artifact teeth. 1611+1 green, ruff clean; corpus price
+  zero (no fixture regen — the armed pack's genesis rides the
+  split-0 arm)
+- docs: D-139; TASKS resume-1 + the iter-106 section; STATUS re-pin
+  + Next step + the FAQ clause riding the scene-ledger entry; NAV §1
+  (cursor entry + checkpoint/log/cli/tests rows); TEST_PLAN §7.1 the
+  runtime-consumer line; README the usage block. iter-96a evicted
+  here (verified in this edit, the cap 10 held). AGENTS §2.3 scope
+  note: 15 files, 7 code + 8 doc — a genuine system feature, one
+  coherent landing (the owner licensed splitting, quality kept it
+  whole)
+---
 iter-105 · 2026-09-12 · cli-pack — the pinned streak-breaker (the
 owner's «поехали» on the iter-104 pin): the CLI --pack flag; 7
 files — 2 code + 5 doc (the two owner verdicts riding the same
@@ -361,34 +390,5 @@ noted here)
   edit, the cap 10 held). Caps: STATUS 863 / TASKS 1168 / DECISIONS
   98 (68 rows) / phases 1018 — over-cap on substance (§6.1, the
   D-095..D-131 precedent), trim at the phase-5→6 gate
----
-iter-96a · 2026-09-11 · audit-fix — the owner-requested re-verification
-of iter-96/name-1 (7 files — 1 code + 1 test + 5 doc sync: the fix
-+ its tests + the sync gap are one family, the iter-83a footprint;
-AGENTS §2.3: 7 > 5-6, the audit's objective scope noted here)
-- verdict: the landing SOUND — the stream/lint/consumer laws re-read
-  line by line, the armed + inert twins + the corpus prices re-run
-  (1544+1 green, ruff clean at HEAD d755d0d BEFORE working); the
-double-membership + name-duplicate questions answered loud-by-design
-  (the commit gate's from_ check; the dives' documented stance)
-- KI#84 the read-surface pair: `render/chronicle.py` — the outcome
-  slots (`incoming`/`outgoing`) resolve through the RUNNING fold
-  (`_display_if_entity` threads `_Positions`), the entity view's
-  `carrier:` line through the projection (`_state_lines` threads
-  it); D-131 (7)'s own law — every id-valued reference fold-first
-- the README sync gap (iter-96's miss): the name-1 narrative
-  sentence + the `core/names.py` map row + the count 1546; +2 tests
-  (the rotation line, the carrier line — the committed pack's own
-  purse-on-guard initial condition), 1544→1546+1 green, ruff clean
-  (Python 3.12.14, the env pin); corpus price ZERO by construction
-  — the committed pack unarmed, the authored displays identical
-  (the test_ambient rotation pin re-run green)
-- docs: STATUS re-pinned (header iter-96a, KI#84 closed, the queue
-  untouched — st-6a the next live candidate), NAV §1 the render row,
-  phases.md §5 the read-surface sentence sharpened (TASKS untouched —
-  no backlog row flips, the iter-83a precedent); iter-87 evicted here
-  (verified in this edit, the cap 10 held). Caps: STATUS 837 /
-  phases 985 / README 742 — over-cap on substance (§6.1, the
-  D-095..D-131 precedent), trim at the phase-5→6 gate.
 ---
 (end of log — cap 10; pre-trim history lives in git)

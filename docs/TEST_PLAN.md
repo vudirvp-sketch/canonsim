@@ -560,6 +560,15 @@ sees):
 - **The builder CLI**: default = the single end checkpoint; the
   cadence law (0, N, 2N, … ∪ the end); pack mismatch and a malformed
   log exit 1 with nothing written (the count-gate spirit).
+- **The runtime consumer** (iter-106, D-139 — `Simulator.resume`'s
+  fast-path, wired from `tests/test_resume.py`): a resume over
+  artifacts that anchor cleanly restores the projection as snapshot +
+  tail and the resumed log stays byte-identical to the uninterrupted
+  run (the fold path and the checkpoint path answer the same state —
+  the re-fold law, at runtime); a foreign index, a mismatched prefix
+  digest, or a corrupted artifact is loud (exit/raise, nothing
+  guessed); ABSENT artifacts are normal operation — the plain fold,
+  never an error.
 
 ### 7.2 depth-5 worldgen acceptance (iter-81, D-115)
 

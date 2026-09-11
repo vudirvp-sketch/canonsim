@@ -327,6 +327,12 @@ CHANNEL_INPUTS: Final = ("suspicion", "physical_threats")
 world-sensing terms, decomposed per dimension. The channel's own
 unreleased hook weights always feed it — that input is not listable."""
 
+PACING_STATES: Final = ("RAMP", "PEAK", "REST", "STAGNATION", "PEAK_CLIMAX")
+"""The PacingClock's closed state vocabulary (DIR-1/DIR-3) — the resume
+door's `Director.restore_run_state` validates a cursor's clock state
+against it (a hand-built cursor naming an unknown band is loud, the
+closed-envelope family law)."""
+
 
 @dataclass(frozen=True, slots=True)
 class ChannelConfig:
@@ -1174,6 +1180,146 @@ class Director:
             if cursor < len(members) and members[cursor] == hook.tag:
                 self._arc_cursor[arc] = cursor + 1
                 self._arc_last_beat[arc] = self.beat_count
+
+    # -- the resume door (iter-106, D-139): the run marks ---------------
+
+    def export_run_state(self) -> dict[str, Any]:
+        """The director's per-run state (the resume door's director half):
+        every scalar, set and map the fold cannot rebuild. The
+        seeded-hook BUFFER is deliberately absent — it is exactly
+        rebuildable by `seed()` over the log's events in order (a hook
+        carves from its event, D-005), and the `_released` indices stay
+        valid against that rebuild. The pack tables (pacing config,
+        channels, arcs) are rules-derived and rebuilt in `__post_init__`.
+        Keys sorted where ordered: the same run state serializes to the
+        same bytes in any process (`core/cursor.py` owns the artifact
+        around this payload)."""
+        pacing: Mapping[str, Any] | None = None
+        if self._pacing is not None:
+            pacing = {
+                "state": self._pacing.state,
+                "beats_in_state": self._pacing.beats_in_state,
+            }
+        return {
+            "beat_count": self.beat_count,
+            "released": sorted(self._released),
+            "burned_tags": sorted(self._burned_tags),
+            "release_seq": self._release_seq,
+            "npc_last_release_beat": dict(sorted(self._npc_last_release_beat.items())),
+            "pacing": pacing,
+            "pacing_beat": self._pacing_beat,
+            "arc_cursor": dict(sorted(self._arc_cursor.items())),
+            "arc_last_beat": dict(sorted(self._arc_last_beat.items())),
+        }
+
+    def restore_run_state(self, mapping: Mapping[str, Any]) -> None:
+        """Restore the run marks (the resume door's director half —
+        `Simulator.resume` is the only caller, AFTER the buffer was
+        rebuilt by `seed()` over the log). Loud on any drift: a closed
+        key set, integer/mapping types, the pacing shape agreeing with
+        the pack's own declaration (pacing state without a pacing block,
+        or the reverse, is a cursor from a different pack family), arc
+        cursors without an arc table, and release indices the rebuilt
+        buffer cannot hold (a stale cursor lying about its run)."""
+        expected = {
+            "beat_count", "released", "burned_tags", "release_seq",
+            "npc_last_release_beat", "pacing", "pacing_beat",
+            "arc_cursor", "arc_last_beat",
+        }
+        if set(mapping) != expected:
+            raise ValueError(
+                f"director run-state keys must be {sorted(expected)}, got "
+                f"{sorted(mapping)}"
+            )
+        for key, floor in (
+            ("beat_count", 0), ("release_seq", 0), ("pacing_beat", -1),
+        ):
+            value = mapping[key]
+            if not isinstance(value, int) or isinstance(value, bool) or value < floor:
+                raise ValueError(
+                    f"director run-state {key!r} must be an int >= {floor}, "
+                    f"got {value!r}"
+                )
+        released = mapping["released"]
+        if not isinstance(released, list) or not all(
+            isinstance(idx, int) and not isinstance(idx, bool) for idx in released
+        ):
+            raise ValueError(
+                f"director run-state 'released' must be a list of ints, got "
+                f"{released!r}"
+            )
+        if released and max(released) >= len(self._hooks):
+            raise ValueError(
+                f"director run-state claims release index {max(released)} but "
+                f"the rebuilt buffer holds {len(self._hooks)} hooks — the "
+                "cursor is stale or foreign to this log"
+            )
+        burned = mapping["burned_tags"]
+        if not isinstance(burned, list) or not all(
+            isinstance(tag, str) for tag in burned
+        ):
+            raise ValueError(
+                f"director run-state 'burned_tags' must be a list of strings, "
+                f"got {burned!r}"
+            )
+        npc_beats = mapping["npc_last_release_beat"]
+        if not isinstance(npc_beats, Mapping) or not all(
+            isinstance(k, str) and isinstance(v, int) and not isinstance(v, bool)
+            for k, v in npc_beats.items()
+        ):
+            raise ValueError(
+                "director run-state 'npc_last_release_beat' must be a "
+                f"str -> int mapping, got {npc_beats!r}"
+            )
+        pacing = mapping["pacing"]
+        if (pacing is None) != (self._pacing is None):
+            raise ValueError(
+                "director run-state pacing disagrees with the pack's own "
+                "declaration — the cursor comes from a different pack "
+                f"family (cursor: {pacing!r}, pack pacing block: "
+                f"{self._pacing_config is not None})"
+            )
+        if pacing is not None:
+            if (
+                not isinstance(pacing, Mapping)
+                or set(pacing) != {"state", "beats_in_state"}
+                or pacing["state"] not in PACING_STATES
+                or not isinstance(pacing["beats_in_state"], int)
+                or isinstance(pacing["beats_in_state"], bool)
+                or pacing["beats_in_state"] < 0
+            ):
+                raise ValueError(
+                    f"director run-state pacing must be "
+                    f"{{state, beats_in_state}} over {list(PACING_STATES)}, "
+                    f"got {pacing!r}"
+                )
+            self._pacing = PacingClock(
+                state=str(pacing["state"]),
+                beats_in_state=int(pacing["beats_in_state"]),
+            )
+        for key in ("arc_cursor", "arc_last_beat"):
+            table = mapping[key]
+            if not isinstance(table, Mapping) or not all(
+                isinstance(k, str) and isinstance(v, int) and not isinstance(v, bool)
+                for k, v in table.items()
+            ):
+                raise ValueError(
+                    f"director run-state {key!r} must be a str -> int "
+                    f"mapping, got {table!r}"
+                )
+            if table and self._arcs is None:
+                raise ValueError(
+                    f"director run-state {key!r} is non-empty but the pack "
+                    "declares no arcs — the cursor is foreign to this pack"
+                )
+        self.beat_count = int(mapping["beat_count"])
+        self._released = set(released)
+        self._burned_tags = set(burned)
+        self._release_seq = int(mapping["release_seq"])
+        self._npc_last_release_beat = dict(npc_beats)
+        self._pacing_beat = int(mapping["pacing_beat"])
+        self._arc_cursor = dict(mapping["arc_cursor"])
+        self._arc_last_beat = dict(mapping["arc_last_beat"])
 
     # -- the arc laws (arc-1, iter-47) ---------------------------------------
 

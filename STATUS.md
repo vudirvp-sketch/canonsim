@@ -1,45 +1,50 @@
-Iteration: iter-105 (`iter-105-cli-pack` — the pinned
-streak-breaker, the owner's «поехали» on the iter-104 pin: the CLI
-`--pack` flag, periphery only, landing BEFORE the phase-6 opening
-so world-2 level-1's ≤1-day budget stays honest; the clone verified
-BEFORE working — 1589+1 green, ruff clean, HEAD 08faec2, Python
-3.12.14 the env pin; the doc-only streak iter-100..104 ENDED by
-code, not waived — the AGENTS §2.5 alarm cleared; the two owner
-questions standing from iter-104's chat proposals VERDICTED this
-iteration at the owner's call, one DECISIONS line each: D-137 the
-Alien unknown-axis L6 conflict → the OBSERVABLE-answers law (pace
-against the world's observable answers to ignorance, never the
-private gap — the entropy fence untouched, §11 re-pointed), D-138
-the D-081 climax flag → the peak's END marker (the explicit-trigger
-alternative covers the non-boss aftermath)) ·
+Iteration: iter-106 (`iter-106-resume` — the owner's direct call
+(«приступай к работе и реализации»): the session resume door, the
+risk-synthesis priority list's #1, the one phases.md §7 left
+owner-gated since iter-80 — `--resume <log>` opens the session OVER
+an existing log, D-139 the law: RESUME IS INVISIBLE TO THE LOG
+(byte-identical to the uninterrupted run at every drain-boundary
+split, T1 across process boundaries); the run cursor
+(`core/cursor.py` — the entropy state no fold recovers: silent
+draws) + the checkpoint fast-path (the module's first runtime
+consumer) + the append-mode writer (the same canon door, INV-5
+untouched); verified BEFORE working — 1592+1 green, ruff clean,
+HEAD c7508f5, Python 3.12.14 the env pin; 1611+1 green after) ·
 Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
 iter-102, D-136 — the exit criterion met, the worldgen-fed form; the
 phase table ROADMAP §2 owns the state; phase 6 opens on the owner's
 call, the iter-55/73 opener precedent — the instruments drafted:
 world-2/res-1/roads-1, TASKS' phase-6 section carrying the
-iter-104 resolutions riding the rows; cli-pack DONE this iteration —
-the recorded prerequisite no longer stands between the owner and
-the opening) ·
-1592 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-+3 tests, the count 1589→1592; corpus price ZERO by construction —
-the flag is periphery plumbing, zero draws, no fixture regen; the
-stoplist docstring's "the CLI takes the pack dir as config" claim
-TRUE from here — the drift dead at its root, not by deleting the
-claim).
-·
+iter-104 resolutions riding the rows; cli-pack DONE iter-105,
+resume-1 DONE iter-106 — neither recorded prerequisite stands
+between the owner and the opening) ·
+1611 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
++19 tests, the count 1592→1611 — tests/test_resume.py, the law
+pinned at every split point + the loud refusals; corpus price zero
+— no fixture regen, the armed pack's genesis rides the split-0
+arm itself) ·
 Date: 2026-09-12 ·
-Scope: `cli/main.py` + `tests/test_cli.py` (the flag + the loud
-refusals + the byte-identity pins), `docs/DECISIONS.md` (D-137 +
-D-138, one line each), `docs/DIRECTOR_SPEC.md` (§11's conflict
-bullet re-pointed to D-137), `docs/TASKS.md` (the cli-pack row
-flipped done + the iter-105 section + the iter-104 section's
-resolution note), `STATUS.md` (this file — the header re-pin + the
-Next step), `worklog.md` (this iteration's entry; iter-96 evicted
-per the cap) — 7 files, 2 code + 5 doc (the verdict set rides the
-same iteration per the owner's call; AGENTS §2.3: the objective
-scope noted in worklog). The prior iteration's record: iter-104
-(the fork analysis). The detail lives in TASKS + worklog + git.
+Scope: `core/cursor.py` (new — the run-cursor artifact: envelope,
+save/load, the log binding), `core/rng.py` (export_state/
+restore_state — the entropy positions, worldgen excluded),
+`core/director.py` (export_run_state/restore_run_state +
+PACING_STATES — the run marks, the buffer rebuilt by seed() over
+the log), `core/log.py` (the append-mode writer — same door, env
+pin + schema-version laws), `core/loop.py` (`Simulator.resume` +
+export_cursor + drained — the door itself, the checkpoint
+fast-path), `core/queue.py` (QueueKind + `weather`, the iter-98
+Literal drift), `cli/main.py` (--resume, the cursor pinning, the
+resumed banner), `tests/test_resume.py` (+19), `docs/TASKS.md`
+(the resume-1 row + the iter-106 section), `docs/DECISIONS.md`
+(D-139), `docs/AGENT_NAVIGATION.md` (§1: the cursor entry, the
+checkpoint/log/cli/tests rows), `docs/TEST_PLAN.md` (§7.1 the
+runtime-consumer line), `README.md` (the usage block), `STATUS.md`
+(this re-pin), `worklog.md` (this iteration's entry; iter-96a
+evicted per the cap) — 15 files, 7 code + 8 doc (AGENTS §2.3: the
+objective scope — a genuine system feature, one coherent landing,
+noted in worklog). The prior iteration's record: iter-105
+(cli-pack). The detail lives in TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -566,7 +571,10 @@ joined the gate-verdict family); next due at the phase-5→6 gate.
   and external (D-055: call/reply files under `output/mediator/`, the
   contract VALIDATION_SPEC §7.1) — a refused document never feeds
   intents (the beat regens whole); the L12 floor renders the beat's own
-  chronicle lines.
+  chronicle lines. iter-106/D-139: the ledger is session-scoped through
+  a RESUME too — `--resume` opens a fresh ledger (the law's own shape:
+  the ledger dies with its session; live texture never crosses the
+  process boundary, promoted texture rode events and stays canon).
 - **Gate mechanics + chain counting (iter-6/6a laws).** Same
   playscript/seed (125), only the director flag changes: ON fires
   `director_0000`; OFF keeps seeding (D-005) and produces ≥3 emergent
@@ -583,49 +591,52 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-105 DONE: `cli-pack` — the CLI `--pack` flag landed (the
-pinned streak-breaker, the owner's «поехали»).** Periphery only
-(`cli/main.py` + `tests/test_cli.py`): every pack-loading command
-and the session take `--pack <dir>` (top-level default
-`content/tavern_pack`, the subparsers SUPPRESS — the flag honors
-both orders, no clobber), a bad path refused loudly BEFORE any
-world opens, the explicit tavern pack byte-identical to the no-flag
-run (+3 tests, 1592+1 green); the stoplist docstring's "the CLI
-takes the pack dir as config" claim is TRUE. The two standing owner
-questions are VERDICTED (the owner's iter-105 call, one DECISIONS
-line each): D-137 the Alien L6 conflict — the OBSERVABLE-answers
-law; D-138 the D-081 climax flag — the peak's END marker. Phase 6
-(Packs & worldbuilder) still PARKED — the opening is the owner's
-call (the iter-55/73 opener precedent; ROADMAP §2's state column is
-the single owner of closed/open). The phase-5 epoch is closed clean:
-Track A debt-free, the queue empty, the exit criterion met on the
-armed committed pack, the DECISIONS/TASKS collapses paid at the
-gate. What stands, for the phase-6 opening or the owner's direct
-calls (owner-gated rows are NOT auto-candidates):
+**iter-106 DONE: `resume-1` — the session resume door landed (the
+owner's «приступай к работе и реализации» on the risk-synthesis
+priority list).** The law (D-139): resume is invisible to the log —
+`--resume <log>` opens the session over an existing log and the
+interrupted run continues byte-identically to the uninterrupted
+counterfactual (pinned at every split point, directors on and off).
+The mechanism: the run cursor (`core/cursor.py`, NEW — the entropy
+state no fold recovers: silent urgency/weather/faction draws; bank
+positions + director run marks + clock/crossing cursors, bound to
+the log by event_count + the prefix digest, pinned by the session at
+every clean drain boundary) + the checkpoint fast-path
+(`Simulator.resume` — `core/checkpoint.py`'s first runtime consumer;
+absent = the plain fold, present-but-wrong = loud) + the append-mode
+writer (`core/log.py` — the same canon door: read_log rides the
+construction, the env-pin + schema-version header laws, committed
+lines never rewritten, INV-5). 1611+1 green, ruff clean, corpus price
+zero. The scene ledger stays session-scoped through a resume (D-049
+— the FAQ's line below). Phase 6 (Packs & worldbuilder) still PARKED
+— the opening is the owner's call (the iter-55/73 opener precedent;
+ROADMAP §2's state column is the single owner of closed/open). What
+stands, for the phase-6 opening or the owner's direct calls
+(owner-gated rows are NOT auto-candidates):
 
 1. **The phase-6 opening itself (nothing pinned stands between the
-   owner and the call — cli-pack was the last recorded
-   prerequisite):** the instruments are drafted (TASKS' parked
-   section, the iter-104 resolutions riding the rows): `world-2`
-   (the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day on the open
-   generic stack, level 2 the deep original province, the D-130
-   sketch at phases.md §6 riding the level-2 half; the st-6a/name-1
-   arming rides its cultures row; the toponym question RESOLVED —
-   the override-else-derived law: authored wins, else the
+   owner and the call — cli-pack AND resume-1 both landed):** the
+   instruments are drafted (TASKS' parked section, the iter-104
+   resolutions riding the rows): `world-2` (the TWO-LEVEL gate —
+   level 1 the T1 reskin ≤ 1 day on the open generic stack, level 2
+   the deep original province, the D-130 sketch at phases.md §6
+   riding the level-2 half; the st-6a/name-1 arming rides its
+   cultures row; the toponym question RESOLVED — the
+   override-else-derived law: authored wins, else the
    profile-minted render-side name via a named cosmetic stream),
    `res-1` (the closed scarcity cycle as pack data — never a second
    economy engine, D-116/D-119), `roads-1` (mode G emits exits for
    generated worlds — an MST/k-nearest pass, a D-row when it lands;
-   the READ-PATH fork RESOLVED — the derived L3 read, the
-   pack-wins override through one shared exits read, place-1's
-   invariant relocated into the pass, zero canon births). Phase 6's
-   own exit: a new T1 reskin without core edits, ≤ 1 day. The
-   iter-103 plan audit found the section COHERENT; iter-104
-   resolved its four detail notes; the opening still owes the
-   PACK_SPEC write (SPECS_BACKLOG's trigger) + the ref-18/ref-20
-   dives (already recorded on res-1's row) + the stoplist
-   self-check extension to the reskin pack's nouns (the reskin
-   day's own step — the second pack must exist for its vocabulary).
+   the READ-PATH fork RESOLVED — the derived L3 read, the pack-wins
+   override through one shared exits read, place-1's invariant
+   relocated into the pass, zero canon births). Phase 6's own exit:
+   a new T1 reskin without core edits, ≤ 1 day. The iter-103 plan
+   audit found the section COHERENT; iter-104 resolved its four
+   detail notes; the opening still owes the PACK_SPEC write
+   (SPECS_BACKLOG's trigger) + the ref-18/ref-20 dives (already
+   recorded on res-1's row) + the stoplist self-check extension to
+   the reskin pack's nouns (the reskin day's own step — the second
+   pack must exist for its vocabulary).
 2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
    them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
    runtime inference decision — llama.cpp + GBNF; the dev-time
@@ -640,13 +651,22 @@ calls (owner-gated rows are NOT auto-candidates):
    introspection output caps — rides the next mechanics.py touch,
    NOT a standalone iteration), `since-1` (the re-encounter delta —
    read-side, its gate open; iter-104 routed it INTO phase 6:
-   world-2's condensing travelers the first real consumer),
-   `st-4` (the call budget — the mediator boundary's row, blueprint
-   §1) and `st-5` (containers + entity-birth promotion — unowned by
-   a phase, the first real consumer decides: a pack wanting portable
-   objects, a res-1 sink shape). The two questions iter-104 left
-   with the owner are closed (D-137/D-138, this iteration) — no
-   owner question stands open.
+   world-2's condensing travelers the first real consumer), `st-4`
+   (the call budget — the mediator boundary's row, blueprint §1) and
+   `st-5` (containers + entity-birth promotion — unowned by a phase,
+   the first real consumer decides: a pack wanting portable objects,
+   a res-1 sink shape). From the iter-105 chat's risk-synthesis
+   analysis, the remaining cheap riders (none owner-gated, none
+   pinned): the blast-radius drift test (scheduler decls ⇔ the
+   metrics prefix map — one CI strengthening), `pack-scaffold` +
+   `pack-doctor/--trace` (ride PACK_SPEC / the phase-6 opening),
+   payoff-latency + tension-variance + a `--systems-minus` ablation
+   arm in the balance harness (ride world-2 tuning), the
+   nearest-valid-intent re-ask menu (rides parse-2/engine-1), the
+   per-component latency columns in the heartbeat ledger (ride
+   bg-9+/engine-1). The two questions iter-104 left with the owner
+   are closed (D-137/D-138, iter-105) — no owner question stands
+   open.
 3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8

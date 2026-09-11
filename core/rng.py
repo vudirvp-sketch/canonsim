@@ -50,9 +50,9 @@ from __future__ import annotations
 
 import hashlib
 import random
-from collections.abc import Iterable, Iterator
+from collections.abc import Iterable, Iterator, Mapping
 from contextlib import contextmanager
-from typing import Final
+from typing import Any, Final
 
 __all__ = [
     "COSMETIC",
@@ -314,3 +314,83 @@ class RngBank:
         """Float draw from the active stream."""
         self._counts[self._active] += 1
         return self._streams[self._active].random()
+
+    # -- the resume door (iter-106, D-139): entropy positions ----------
+
+    def export_state(self) -> dict[str, Any]:
+        """The bank's full entropy position, JSON-ready: every registered
+        stream's `random.Random` state + draw count, EXCEPT the worldgen
+        family (their positions are genesis-scoped — `generate_world`
+        re-derives them from the fresh seed at resume, so a cursor must
+        never carry them). Sorted stream names; the same run state
+        serializes to the same bytes in any process (INV-2's spirit —
+        `core/cursor.py` owns the artifact around this payload)."""
+        streams: dict[str, list[Any]] = {}
+        counts: dict[str, int] = {}
+        for name in sorted(self._streams):
+            if name.startswith(WORLDGEN_PREFIX):
+                continue  # genesis-scoped: rebuilt, never restored
+            version, internal, gauss = self._streams[name].getstate()
+            streams[name] = [version, list(internal), gauss]
+            counts[name] = self._counts[name]
+        return {"streams": streams, "counts": counts}
+
+    def restore_state(self, mapping: Mapping[str, Any]) -> None:
+        """Restore stream positions + draw counts (the resume door's bank
+        half — `Simulator.resume` is the only caller). The worldgen family
+        is REFUSED loudly: a cursor carrying `worldgen:<pass>` positions
+        claims a state `generate_world` is about to re-derive differently
+        — the mismatch would be silent entropy drift. The always-registered
+        pair (`substantive`, `cosmetic`) must be present: an export without
+        the fingerprint's own stream is a lie about the run. Unknown
+        non-family stream names stay loud (the closed-set tripwire)."""
+        if set(mapping) != {"streams", "counts"}:
+            raise RngError(
+                f"bank state keys must be ['counts', 'streams'], got "
+                f"{sorted(mapping)}"
+            )
+        streams = mapping["streams"]
+        counts = mapping["counts"]
+        if not isinstance(streams, Mapping) or not isinstance(counts, Mapping):
+            raise RngError("bank 'streams' and 'counts' must be mappings")
+        if set(streams) != set(counts):
+            raise RngError(
+                f"bank streams and counts disagree: {sorted(streams)} vs "
+                f"{sorted(counts)}"
+            )
+        for name in streams:
+            if name.startswith(WORLDGEN_PREFIX):
+                raise RngError(
+                    f"bank state carries the genesis-scoped stream {name!r} — "
+                    "worldgen positions are re-derived at resume, never "
+                    "restored"
+                )
+        for required in PHASE0_STREAMS:
+            if required not in streams:
+                raise RngError(
+                    f"bank state lacks the always-registered stream "
+                    f"{required!r} — an export without it is a lie"
+                )
+        for name, raw in streams.items():
+            state = self._rng(name)  # registers family streams lazily; loud otherwise
+            if (
+                not isinstance(raw, (list, tuple)) or len(raw) != 3
+                or raw[0] != 3 or not isinstance(raw[1], (list, tuple))
+                or not all(isinstance(word, int) and not isinstance(word, bool) for word in raw[1])
+                or not (raw[2] is None or isinstance(raw[2], float))
+            ):
+                raise RngError(
+                    f"bank state for {name!r} is not a [version, words, "
+                    f"gauss] Mersenne Twister state, got {raw!r}"
+                )
+            try:
+                state.setstate((raw[0], tuple(raw[1]), raw[2]))
+            except ValueError as exc:
+                raise RngError(f"bank state for {name!r} rejected: {exc}") from exc
+            count = counts[name]
+            if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+                raise RngError(
+                    f"bank count for {name!r} must be a non-negative int, "
+                    f"got {count!r}"
+                )
+            self._counts[name] = count

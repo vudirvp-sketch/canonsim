@@ -259,18 +259,60 @@ class EventLogWriter:
     `schema` is the parsed `schemas/event.schema.json`; the header's
     `schema_version` is derived from its `$id` — the schema file is the
     single version owner (D-010).
+
+    Two open modes, one door (INV-1 — the resume path, iter-106/D-139):
+    `append=False` (the default) starts a fresh log (`"w"`, the header
+    written by `write_header`); `append=True` opens an EXISTING log for
+    continuation — the canonical read rides the same construction
+    (`core.log.read_log`: the header shape and every event line are
+    validated, T0, BEFORE the file is touched), the header must carry
+    the CURRENT schema version (a schema bump between runs is a
+    migration, never a silent append) and the writing interpreter's
+    Python (the env pin: byte-stability of the continuation is a
+    same-environment claim, T1's law), and the writer positions itself
+    from that read — id counter, tick floor, written-id set — so the
+    continuation chains causes onto the committed past exactly as an
+    uninterrupted run would. Committed lines are never rewritten
+    (INV-5): the file is opened for append only.
     """
 
-    def __init__(self, path: Path, schema: Mapping[str, Any]) -> None:
+    def __init__(
+        self, path: Path, schema: Mapping[str, Any], *, append: bool = False
+    ) -> None:
         self._schema = schema
         self._schema_version = self._extract_schema_version(schema)
         self._path = path
-        self._fh = path.open("w", encoding="utf-8")
-        self._header_written = False
-        self._count = 0
-        self._last_tick: int | None = None
-        self._written_ids: set[str] = set()
-        self._last_id: str | None = None
+        if append:
+            header, events = read_log(path, schema)
+            if header["schema_version"] != self._schema_version:
+                raise LogError(
+                    f"log header schema_version {header['schema_version']!r} != "
+                    f"the current schema's {self._schema_version!r} — a schema "
+                    "bump between runs is a migration, not an append"
+                )
+            if header["python"] != python_version():
+                raise LogError(
+                    f"log header python {header['python']!r} != this "
+                    f"interpreter {python_version()!r} — the byte-identical "
+                    "guarantee is same-environment only (the env pin)"
+                )
+            self._appended: tuple[dict[str, Any], list[EventRecord]] | None = (
+                (dict(header), list(events))
+            )
+            self._fh = path.open("a", encoding="utf-8")
+            self._header_written = True
+            self._count = len(events)
+            self._last_tick = events[-1].t if events else None
+            self._written_ids = {event.id for event in events}
+            self._last_id = events[-1].id if events else None
+        else:
+            self._appended = None
+            self._fh = path.open("w", encoding="utf-8")
+            self._header_written = False
+            self._count = 0
+            self._last_tick: int | None = None
+            self._written_ids: set[str] = set()
+            self._last_id: str | None = None
 
     @staticmethod
     def _extract_schema_version(schema: Mapping[str, Any]) -> str:
@@ -290,6 +332,17 @@ class EventLogWriter:
     @property
     def last_id(self) -> str | None:
         return self._last_id
+
+    @property
+    def appended(
+        self,
+    ) -> tuple[dict[str, Any], list[EventRecord]] | None:
+        """The append-mode read view: `(header, events)` as validated at
+        open; `None` in write mode. The resume door consumes it once —
+        the writer positions itself from the same read, so the log is
+        parsed exactly once per resume (the record objects are shared
+        with the caller's caches; no second parse, no drift)."""
+        return self._appended
 
     def __enter__(self) -> EventLogWriter:
         return self

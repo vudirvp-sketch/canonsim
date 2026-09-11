@@ -26,7 +26,11 @@ the repo stays LLM-free):
     replay <log> · directors on|off · seed [<n>] · help · quit
 
 The session takes the same flag at the top level
-(`python -m cli --pack <dir> ...`).
+(`python -m cli --pack <dir> ...`), and `--resume <log>` opens the
+session OVER an existing log instead of starting fresh (D-139: one
+continuous run, appended in place — the seed and pack come from the
+log's header, the entropy position from its cursor; interruption is
+not an input, only steps are).
 
 The session is one opened Simulator (`core/loop.py`): every command
 feeds steps through `run_steps` and the world moves only through the
@@ -49,11 +53,14 @@ from pathlib import Path
 
 from cli.mediator import BeatResult, Mediator, MediatorError
 from cli.parser import ParseError, ParserDoor, ParseResult
+from core.checkpoint import CheckpointError
+from core.cursor import CursorError, cursor_path, load_cursor, save_cursor
 from core.director import policy_from_rules
 from core.fold import fold, initial_projection
 from core.log import LogError, next_log_path, read_log
 from core.loop import RunnerError, Simulator, load_playscript
 from core.pack import Pack, PackError, load_pack
+from core.rng import RngError
 from render.chronicle import (
     RenderError,
     chronicle_from_log,
@@ -126,6 +133,17 @@ class Session:
     The seed is bound at open (the log header is fixed); `seed <n>`
     closes the current log and starts a fresh run — committed logs are
     never edited (INV-5), a restart is a new log file.
+
+    iter-106 (D-139): `--resume <log>` opens the session OVER an
+    existing log through `Simulator.resume` — one continuous run,
+    appended in place, byte-identical to the uninterrupted session
+    (resume is invisible to the log). The run cursor is pinned after
+    every command and at close (`_save_cursor` — the drain-boundary
+    law; a mid-drain state is skipped, never saved), so the next
+    `--resume` picks the world up exactly where this one left it. The
+    scene ledger stays session-scoped (D-049): a resumed session opens
+    a fresh one — live texture dies with its session, promoted texture
+    rode events.
     """
 
     def __init__(
@@ -135,6 +153,7 @@ class Session:
         seed: int,
         logs_dir: Path,
         director_enabled: bool,
+        resume_log: Path | None = None,
     ) -> None:
         self._pack = pack
         self._schema = schema
@@ -143,7 +162,11 @@ class Session:
         self._shown_lines = 0  # chronicle lines already printed
         self._mediator: Mediator | None = None
         self._parser: ParserDoor | None = None
-        self._start(seed)
+        self._resume_info: tuple[int, int] | None = None
+        if resume_log is None:
+            self._start(seed)
+        else:
+            self._resume(resume_log)
 
     def _start(self, seed: int) -> None:
         self._logs_dir.mkdir(parents=True, exist_ok=True)
@@ -166,8 +189,50 @@ class Session:
     def log_path(self) -> Path:
         return self._log_path
 
+    @property
+    def resumed(self) -> tuple[int, int] | None:
+        """`(event_count, tick)` at the resume point — None for fresh
+        runs (the banner's own data, D-139)."""
+        return self._resume_info
+
     def close(self) -> None:
+        self._save_cursor()
         self._sim.close()
+
+    def _resume(self, log_path: Path) -> None:
+        """Open the session over an existing log (D-139): the cursor
+        carries the run's entropy position, the checkpoint fast-path
+        (the operator's `output/checkpoints/<stem>/` artifacts) restores
+        the projection when present. The delta discipline: `shown_lines`
+        starts at the current chronicle's end — a resumed session
+        prints only NEW lines (`chronicle` reads the story back)."""
+        cursor = load_cursor(cursor_path(log_path))
+        self._sim = Simulator.resume(
+            self._pack, log_path, self._schema, cursor,
+            commit=_commit_id(),
+            checkpoints_dir=OUTPUT_DIR / "checkpoints" / log_path.stem,
+        )
+        self._seed = int(cursor["seed"])
+        self._directors_on = bool(cursor["director_enabled"])
+        self._log_path = log_path
+        self._mediator = None  # the ledger dies with its session (D-049)
+        self._parser = None
+        self._resume_info = (int(cursor["event_count"]), int(cursor["tick"]))
+        text = _session_log(self._pack, self._schema, self._log_path)
+        self._shown_lines = len(text.splitlines())
+
+    def _save_cursor(self) -> None:
+        """Pin the run cursor beside the log (only at a clean drain
+        boundary — `Simulator.export_cursor` owns the law and refuses
+        mid-drain; skipping here keeps the last clean pin standing, so
+        a later `--resume` over a log that moved past it refuses
+        loudly instead of guessing entropy)."""
+        if not self._sim.drained:
+            return
+        save_cursor(
+            cursor_path(self._log_path),
+            self._sim.export_cursor(director_enabled=self._directors_on),
+        )
 
     # -- command dispatch ----------------------------------------------------
 
@@ -197,10 +262,13 @@ class Session:
         except (
             RunnerError, LogError, RenderError, GrammarError,
             MediatorError, ParseError, ValueError,
+            CheckpointError, CursorError, RngError,
         ) as exc:
             print(f"error: {exc}")
         except FileNotFoundError as exc:
             print(f"error: {exc}")
+        else:
+            self._save_cursor()
 
     def _cmd_help(self, args: list[str]) -> None:
         print(_SESSION_HELP)
@@ -489,13 +557,23 @@ def run_session(args: argparse.Namespace) -> int:
     """The interactive session loop."""
     pack, schema = _load(args.pack)
     session = Session(
-        pack, schema, args.seed, Path(args.logs_dir), args.directors != "off"
+        pack, schema, args.seed, Path(args.logs_dir),
+        args.directors != "off", resume_log=args.resume,
     )
-    print(
-        f"canonsim — {pack.name_version} | seed {session.seed} | "
-        f"log {session.log_path}\n"
-        f"(the world moves when you act or wait — 'help' lists commands)"
-    )
+    if session.resumed is not None:
+        events, tick = session.resumed
+        print(
+            f"canonsim — {pack.name_version} | resumed seed {session.seed} | "
+            f"log {session.log_path} ({events} events, tick {tick})\n"
+            f"(the story continues — 'chronicle' reads it back, 'help' lists "
+            f"commands)"
+        )
+    else:
+        print(
+            f"canonsim — {pack.name_version} | seed {session.seed} | "
+            f"log {session.log_path}\n"
+            f"(the world moves when you act or wait — 'help' lists commands)"
+        )
     try:
         while True:
             try:
@@ -532,6 +610,12 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--pack", type=Path, default=PACK_DIR,
         help="pack directory (default: the repo's content/tavern_pack)",
+    )
+    parser.add_argument(
+        "--resume", type=Path, default=None,
+        help="continue an existing session log (the interactive session "
+             "only; the seed and pack come from the log's header + its "
+             "cursor — --seed and --directors are ignored on resume)",
     )
     parser.add_argument(
         "--logs-dir", default=str(LOGS_DIR),
@@ -571,6 +655,12 @@ def _build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     """CLI entry: subcommand dispatch, interactive session by default."""
     args = _build_parser().parse_args(argv)
+    if args.resume is not None and args.command is not None:
+        print(
+            "error: --resume is a session flag — pass it without a "
+            "subcommand", file=sys.stderr,
+        )
+        return 1
     try:
         if args.command == "play":
             return cmd_play(args)
@@ -583,7 +673,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_session(args)
     except (
         RunnerError, PackError, LogError, RenderError, GrammarError,
-        MediatorError, ValueError,
+        MediatorError, CheckpointError, CursorError, RngError, ValueError,
     ) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

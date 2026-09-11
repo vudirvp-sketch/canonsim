@@ -781,6 +781,7 @@ Play the slice (no LLM anywhere):
 ```
 python -m cli play tests/playscripts/day1_theft_and_arson.json
 python -m cli                      # interactive session ('help' lists commands)
+python -m cli --resume logs/run_42_0.jsonl   # continue that session's run (D-139)
 python -m cli chronicle logs/run_8_0.jsonl
 python -m cli state purse_01 logs/run_8_0.jsonl
 python -m cli replay logs/run_8_0.jsonl
@@ -793,7 +794,9 @@ log). Runtime logs land in `logs/` and rendered chronicles in
 `output/` (both gitignored).
 
 Fold checkpoints over a committed log (depth-4 — derived artifacts,
-never truth):
+never truth; the session resume consumes them as its fast-path —
+`--resume` restores the world as snapshot + tail replay, and the
+continued run is byte-identical to an uninterrupted session):
 
 ```
 python scripts/checkpoint.py logs/run_8_0.jsonl            # one end checkpoint
