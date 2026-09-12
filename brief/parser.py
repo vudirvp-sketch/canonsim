@@ -35,6 +35,15 @@ resolver validates against, so snapshot and door agree by construction),
 (texture reference XOR target) is enforced at the door, not here — one
 owner per law, `core/intent.py::validate_shape`.
 
+The refusal payload (iter-107, the risk-synthesis §4 rider) carries a
+NEAREST-VALID MENU: every off-grammar family (kind, target, field name,
+field value) appends up to three grammar tokens ranked by Levenshtein
+distance (case-folded, ties broken by declaration order — deterministic,
+INV-2) — the re-ask's fuel: a human operator fixes the reply faster, a
+future runtime re-ask ladder and an autonomous LLM author loop patch
+toward a NAMED alternative instead of rescanning the closed list. The
+menu never widens the grammar — it ranks it (PARSER_SPEC §4).
+
 No RNG, no wall-clock, no I/O, writes nothing (INV-1/2/4; same
 (log, ledger, pack) → same call bytes — the D-049 quarantine family).
 """
@@ -43,7 +52,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Final
 
 from brief.ledger import SceneLedger
 from core.fold import fold, initial_projection
@@ -76,7 +85,49 @@ class ParseError(RuntimeError):
     """The reply document's grammar violation, or parse-cycle misuse: the
     emitter (the external parser) is outside the codebase, so the boundary
     treats this family as off-grammar output — loud, caught by the session
-    BEFORE anything feeds the door; never a crash, never a silent drop."""
+    BEFORE anything feeds the door; never a crash, never a silent drop.
+    The message carries the nearest-valid menu (iter-107): up to three
+    grammar tokens ranked by edit distance — the re-ask's payload."""
+
+
+#: How many nearest candidates a refusal menu carries (iter-107).
+MENU_LIMIT: Final[int] = 3
+
+
+def _levenshtein(left: str, right: str) -> int:
+    """Classic edit distance (insert/delete/substitute), the DP row form.
+    Pure, O(len(left) * len(right)) — the closed grammar is small; the
+    refusal path is the cold path, the run path never calls this."""
+    a, b = left.casefold(), right.casefold()
+    if a == b:
+        return 0
+    if not a or not b:
+        return len(a) or len(b)
+    previous = list(range(len(b) + 1))
+    for i, char_a in enumerate(a, start=1):
+        current = [i]
+        for j, char_b in enumerate(b, start=1):
+            current.append(min(
+                previous[j] + 1,           # delete
+                current[j - 1] + 1,        # insert
+                previous[j - 1] + (char_a != char_b),  # substitute
+            ))
+        previous = current
+    return previous[-1]
+
+
+def _nearest_menu(word: str, candidates: Sequence[str]) -> str:
+    """The refusal menu's ranked tail: up to MENU_LIMIT candidates by
+    Levenshtein distance, ties broken by declaration order (the grammar
+    snapshot's own order — deterministic, INV-2). Empty when the grammar
+    carries no candidates at that position; the full closed list stays in
+    the message's own body — the menu ranks, it never replaces."""
+    ranked = sorted(
+        enumerate(candidates),
+        key=lambda pair: (_levenshtein(word, pair[1]), pair[0]),
+    )
+    picks = [candidate for _index, candidate in ranked[:MENU_LIMIT]]
+    return " — did you mean: " + " | ".join(picks) if picks else ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -340,17 +391,28 @@ def _parsed_intent(doc: Any, snapshot: GrammarSnapshot) -> ParsedIntent:
     kind = _non_empty_str(doc["kind"], "intent kind")
     verb = next((verb for verb in snapshot.verbs if verb.intent == kind), None)
     if verb is None:
+        # the menu ranks BOTH spellings: the kind token and the display
+        # label (a paraphrase is closer to the label; the reply still must
+        # carry the kind — the menu names it)
+        menu = _nearest_menu(
+            kind,
+            [token for verb in snapshot.verbs
+             for token in (verb.intent, verb.label)],
+        )
         raise ParseError(
             f"intent kind {kind!r} is not in the grammar "
-            f"(verbs: {[verb.intent for verb in snapshot.verbs]})"
+            f"(verbs: {[verb.intent for verb in snapshot.verbs]}){menu}"
         )
     target = doc.get("target")
     if target is not None:
         target = _non_empty_str(target, "intent target")
         if not any(noun.id == target for noun in snapshot.nouns):
+            menu = _nearest_menu(
+                target, [noun.id for noun in snapshot.nouns]
+            )
             raise ParseError(
                 f"intent target {target!r} is not an addressable noun — "
-                "take the disambiguation path instead of guessing"
+                f"take the disambiguation path instead of guessing{menu}"
             )
     fields = doc.get("fields", {})
     if not isinstance(fields, Mapping):
@@ -358,9 +420,10 @@ def _parsed_intent(doc: Any, snapshot: GrammarSnapshot) -> ParsedIntent:
     by_name = {constraint.name: constraint for constraint in verb.fields}
     extras = set(fields) - set(by_name)
     if extras:
+        menu = _nearest_menu(sorted(extras)[0], sorted(by_name))
         raise ParseError(
             f"{kind} takes no fields {sorted(extras)}; "
-            f"allowed: {sorted(by_name)}"
+            f"allowed: {sorted(by_name)}{menu}"
         )
     for name, constraint in by_name.items():
         if name not in fields:
@@ -375,9 +438,10 @@ def _parsed_intent(doc: Any, snapshot: GrammarSnapshot) -> ParsedIntent:
                 )
         elif constraint.values is not None:
             if value not in constraint.values:
+                menu = _nearest_menu(str(value), list(constraint.values))
                 raise ParseError(
                     f"{kind} field {name!r} must be one of "
-                    f"{list(constraint.values)}, got {value!r}"
+                    f"{list(constraint.values)}, got {value!r}{menu}"
                 )
         elif not isinstance(value, str) or not value:
             raise ParseError(

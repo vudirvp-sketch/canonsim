@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "canonsim/event/0.1",
-  "title": "canonsim event record v0.1",
+  "$id": "canonsim/event/0.2",
+  "title": "canonsim event record v0.2",
   "description": "One line of the append-only JSONL event log (line 2+; line 1 is the run header, validated as a separate shape). Paired with docs/EVENT_SCHEMA.md - 2-place sync, test-enforced.",
   "type": "object",
   "required": [
@@ -137,6 +137,10 @@
         "cause_intent": {
           "type": "string",
           "description": "Intent id, when this event resolves a player intent."
+        },
+        "cause_hook": {
+          "type": "string",
+          "description": "Deferred-consequence tag this event discharges, when a director release built the intent (iter-107, D-140). Pairs the release with its seeding event (payoff latency; the trace family)."
         }
       }
     }

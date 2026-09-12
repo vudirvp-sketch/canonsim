@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-107 · 2026-09-12 · riders — the risk-synthesis list's five
+remaining riders, the owner's direct call (D-140/D-141; the drama
+tuning becomes data, the authoring loop gets its first two rungs)
+- core: `core/intent.py` IntentData.origin_hook + `core/director.py`
+  stamps it + `core/loop.py` _provenance (both intent sites + the
+  autonomous-enqueue pass-through — the first draft lost it there);
+  `core/metrics.py` payoff_latencies (FIFO per tag, exact under the
+  pick law, attempts count, corrupt pairings loud) +
+  beat_tension_profile (the rhythm stat, the stretches' own window
+  axis); `schemas/event.schema.json` 0.2 (provenance.cause_hook,
+  additive — the T1 golden fixture regenerated in the same iteration,
+  the header's version line the whole corpus price)
+- scripts: `scripts/balance_harness.py` --systems-minus (block-scoped
+  68a; ABLATABLE measured: urgencies/weather/on_action/reflection/
+  secrets/factions; the systems-table rows refused loudly) + the
+  payoff/tension blocks; `scripts/pack_scaffold.py` NEW + 
+  `scripts/pack_doctor.py` NEW (the authoring loop: scaffold → edit →
+  doctor → patch; SCAFFOLD.md derived, no wall-clock)
+- brief: `brief/parser.py` the nearest-valid menu (_levenshtein +
+  _nearest_menu; four refusal families rank their tokens, kinds over
+  token+label; the grammar never widens)
+- tests: test_drift.py NEW (the systems⇔metrics four-direction
+  contract + the observed corpus vocabulary, the item-side registry),
+  test_pack_tools.py NEW, +9 metrics units, +6 menu families, +7
+  harness arm tests, test_smoke the $id pin; 1652+1 green, ruff clean
+- docs: D-140/D-141; EVENT_SCHEMA §1/§7, PARSER_SPEC §4, TEST_PLAN
+  §6/§8.5 (the per-component latency columns), TASKS iter-107, NAV §1,
+  STATUS re-pin; 25 files (4 core + 1 schema + 1 brief + 3 scripts + 6
+  test + 1 fixture + 8 doc + README — the owner's five-rider call, the objective scope); iter-97
+  evicted in this edit (cap 10 held, verified)
+---
 iter-106 · 2026-09-12 · resume — the session resume door, the owner's
 direct call on the risk-synthesis priority list (D-139: resume is
 invisible to the log)
@@ -348,47 +379,3 @@ corpus price are ONE row, the TASKS row's own three halves; AGENTS
   (44 rows) / phases.md 1066 / README 786 — over-cap on substance
   (§6.1, the standing precedent), trim at the phase-5→6 gate
   (D-128's own rows).
-iter-97 · 2026-09-11 · st6a — travel as a separate action (the
-STATUS queue's live row after name-1, D-116 (5)'s amended price law;
-7 files — 3 code + 1 test file + 3 doc sync + this worklog + STATUS:
-the price law + the accept-door branch + the lint are one family,
-the iter-90..93 footprint; AGENTS §2.3: 7 > 5-6, the objective scope
-noted here)
-- core/travel.py (new) + core/loop.py: the price law — the travel
-  action is the movement TWIN with an edge price (`ticks: "edge"`,
-  the fourth legal value; move's semantics + adjacent_to + the T1
-  fixtures untouched); the accept door schedules at `t + price`
-  (L3 derive-never-store; day-scale queue-cheap, the crossings fire
-  mid-travel in tick order, D-038); override wins per edge, else the
-  DERIVED integer function (lattice steps * step_ticks + height-band
-  spread * climb_ticks + river endpoints * river_ticks — no runtime
-  division, draw-free, the min cross-pair); no price -> loud
-  TravelError (the backstop family)
-- core/pack.py: the `_travel` lint (after _worldgen) — the pairing
-  law both ways (block ⇔ edge-priced action), the weights
-  (step ≥ 1, climb/river ≥ 0, omitted = policy), the overrides
-  (real undirected edges only, no duplicates, ticks ≥ 1), the
-  COVERAGE law (every exits edge priceable — the verb never
-  hard-fails mid-run); `ticks: 'edge'` movement-resolver-only
-- tests/test_travel.py (new, +18): the formula oracles (hand-built
-  WorldModel: step/climb/river/min-cross-pair/override-wins/
-  refusals), the lint probes (the crafted-twin pattern), the e2e
-  (the derived arm street↔tavern — the claimed pair, the override
-  arm, the non-adjacent rejection, mid-travel rotations, the armed
-  twin byte-identical double-run); the committed pack UNARMED (the
-  68a pattern — the arming rides with world-2's province row)
-- 1546→1564+1 green, ruff clean (3.12.14, the env pin). Corpus price
-  ZERO by construction — no pack byte touched, zero re-pins
-  (git-verified: only core/{intent,loop,pack,travel}.py +
-  tests/test_travel.py + docs). INV-3 caught twice by the stoplist
-  mid-iteration (a noun in fresh prose, the KI#79 lesson — fixed
-  before commit, no KI owed)
-- docs: DECISIONS D-132, TASKS st-6(a) done, phases.md §5 the travel
-  paragraph, NAV §1 the core row, STATUS re-pinned (the queue:
-  weather-1 the next live candidate — its gate satisfied, the macro
-  arming rides with its row). iter-88 evicted here (verified in this
-  edit, the cap 10 held). Caps: STATUS 863 / TASKS 1168 / DECISIONS
-  98 (68 rows) / phases 1018 — over-cap on substance (§6.1, the
-  D-095..D-131 precedent), trim at the phase-5→6 gate
----
-(end of log — cap 10; pre-trim history lives in git)

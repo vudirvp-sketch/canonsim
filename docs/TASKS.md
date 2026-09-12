@@ -177,6 +177,48 @@ drafts from phases.md §6 at the opening iteration)
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
 
+### iter-107 · riders — done
+
+The owner's direct call («доделывай остальное с прошлой итерации:
+осталось пункты 2–6») — the risk-synthesis priority list's cheap
+riders, the five that existed only in the iter-105 chat's context:
+the blast-radius drift test, pack-scaffold + pack-doctor,
+payoff-latency + tension-variance + the `--systems-minus` ablation,
+the nearest-valid-intent re-ask menu, the per-component heartbeat
+latency columns. Verified BEFORE working (1611+1 green, ruff clean,
+HEAD 8ee2060, Python 3.12.14). The landings: (1) the drift contract
+(`tests/test_drift.py` — the systems table ⇔ the metrics prefix map
+in four directions: phantom systems, claimed prefixes + the pinned
+aliases (pair, crime_status), declared-write coverage (time/knowledge
+side-band, follow-up flags derived), the observed corpus vocabulary
+with the item-side registry (carrier, condition) — the M1
+undercounting risk becomes a named, growing contract); (2) the
+authoring loop's first two rungs (`scripts/pack_scaffold.py` — a
+lint-clean tavern copy, identity renamed, SCAFFOLD.md the derived
+editing map; `scripts/pack_doctor.py` — the lint's fix-hint surface:
+file + block + rule + fix-family + doc, `--trace` the failing block's
+data, the green path the health inventory); (3) the drama tuning as
+data: `provenance.cause_hook` (D-140, additive — the schema 0.1→0.2
+bump, the T1 golden fixture regenerated per §3, the header line the
+whole corpus price) pairs every director release with its seed →
+`core.metrics.payoff_latencies` (FIFO per tag, exact under the pick
+law, attempts count); `core.metrics.beat_tension_profile` (the rhythm
+stat); the balance harness's `--systems-minus` ablation arm
+(block-scoped 68a, the removable set measured: urgencies, weather,
+on_action, reflection, secrets, factions — the systems-table rows
+interlocked and refused loudly; first pinned finding: the beat-driven
+release cadence dies with the urgencies block); (4) the re-ask menu
+(`brief/parser.py` — every off-grammar family ranks its nearest
+tokens by Levenshtein, kinds over token+label, deterministic; the
+refusal becomes the re-ask's fuel, the grammar never widens); (5) the
+heartbeat ledger's per-component p50/p95 columns (TEST_PLAN §8.5 —
+tick/fold/brief/parse/generate, first-class, the gap row until
+bg-9+/engine-1). 1652+1 green (+41), ruff clean. 25 files — 4 core +
+1 schema + 1 brief + 3 scripts (2 new) + 6 test files (+2 new, +41
+tests) + 1 fixture regen + 8 doc + README (AGENTS §2.3: the objective scope —
+the owner called five riders in one shot, one coherent landing,
+noted in worklog). Zero new KIs.
+
 ### iter-106 · resume — done
 
 The owner's direct call («приступай к работе и реализации», the

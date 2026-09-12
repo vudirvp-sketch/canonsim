@@ -199,3 +199,115 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     # day's last wait (the murmur moved mid-run — the pre-seed's price
     # on the clockless arm)
     assert '"type": "wait"' in off_log[-1]
+
+
+# -- the ablation arm + the payoff/tension blocks (iter-107) -------------------
+
+
+def test_ablatable_set_is_measured_not_guessed() -> None:
+    """The contract pin: the six removable blocks are exactly the ones
+    that lint and run clean standalone (the iter-107 probe); the
+    systems-table rows stay out — interlocked, not independently
+    removable."""
+    assert balance_harness.ABLATABLE == (
+        "urgencies", "weather", "on_action", "reflection", "secrets", "factions",
+    )
+
+
+def test_systems_minus_pack_drops_exactly_one_block(tmp_path: Path) -> None:
+    """The variant is the committed pack minus the ONE named block and
+    nothing else: every other rules key and the whole of the other
+    three files are deep-equal; the lint passes (the block is optional,
+    the 68a law)."""
+    variant = balance_harness._systems_minus_pack(
+        tmp_path, "urgencies", drop_pacing=False
+    )
+    expected = {k: v for k, v in dict(PACK.rules).items() if k != "urgencies"}
+    assert dict(variant.rules) == expected
+    for name in ("entities.json", "actions.json", "templates.json"):
+        assert dict(variant.data[name]) == dict(PACK.data[name])
+    # the materializer is idempotent — a second run rewrites cleanly
+    again = balance_harness._systems_minus_pack(
+        tmp_path, "urgencies", drop_pacing=False
+    )
+    assert dict(again.rules) == dict(variant.rules)
+
+
+def test_systems_minus_composes_with_pacing_off(tmp_path: Path) -> None:
+    """The composed variant drops BOTH the named block and
+    director.pacing — one materialization, one lint, never a stale
+    half."""
+    variant = balance_harness._systems_minus_pack(
+        tmp_path, "weather", drop_pacing=True
+    )
+    rules = dict(variant.rules)
+    assert "weather" not in rules
+    assert "pacing" not in rules["director"]
+    assert pacing_from_rules(variant.rules) is None
+
+
+def test_harness_refuses_unremovable_systems(tmp_path: Path) -> None:
+    """A systems-table row (fire — interlocked by preconditions and
+    resolvers) and the director (its own flag) refuse at the parser
+    with the honest reason, listing the removable set."""
+    for name in ("fire", "relations", "director", "crime_watch"):
+        with pytest.raises(SystemExit):
+            balance_harness.main(
+                [
+                    "--runs", "1", "--systems-minus", name,
+                    "--out-dir", str(tmp_path),
+                ]
+            )
+
+
+def test_harness_ablation_arm_runs_and_labels_itself(tmp_path: Path) -> None:
+    """The urgencies-minus arm runs (2 seeds), names itself in the
+    table header and the output file, and its degenerate rows are
+    honest: no beats declared → no tension profile; the beat-driven
+    release cadence dies with the urgencies block → no payoff
+    latency (the ablation's own first finding, pinned)."""
+    argv = [
+        "--runs", "2", "--seed-base", "300", "--directors", "on",
+        "--systems-minus", "urgencies", "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    table_path = tmp_path / "balance_2_seed300_on_minus_urgencies.txt"
+    table = table_path.read_text(encoding="utf-8")
+    assert "minus: urgencies (68a ablation)" in table
+    assert "beat tension (per-window pressure) — none: no beats declared" in table
+    assert "payoff latency (seeded→released ticks) — none: no run released" in table
+    # determinism: same seeds → the same table bytes
+    assert balance_harness.main(argv) == 0
+    assert table_path.read_text(encoding="utf-8") == table
+
+
+def test_harness_emits_the_payoff_and_tension_blocks(tmp_path: Path) -> None:
+    """The full arm (directors on, the committed pack): the payoff
+    latency block carries the D-140 pairing (p50 + the tick histogram
+    + the released-run share) and the tension block carries the rhythm
+    stats (mean + variance) — the tuning-data riders of iter-107."""
+    argv = [
+        "--runs", "3", "--seed-base", "100", "--directors", "on",
+        "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    table = (tmp_path / "balance_3_seed100_on.txt").read_text(encoding="utf-8")
+    assert "payoff latency (seeded→released ticks):" in table
+    assert "payoff histogram (ticks:count) —" in table
+    assert "runs released" in table
+    assert "beat tension (per-window pressure):" in table
+    assert "variance p50" in table
+
+
+def test_harness_off_arm_payoff_block_is_none(tmp_path: Path) -> None:
+    """The OFF baseline (T8): no releases → the payoff block states
+    none (the arm's own shape), the tension block still measures (the
+    world's rhythm is director-independent)."""
+    argv = [
+        "--runs", "2", "--seed-base", "300", "--directors", "off",
+        "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    table = (tmp_path / "balance_2_seed300_off.txt").read_text(encoding="utf-8")
+    assert "payoff latency (seeded→released ticks) — none" in table
+    assert "beat tension (per-window pressure):" in table

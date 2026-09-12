@@ -31,6 +31,7 @@ from core.log import IMPORTANCE_ORDER, EventRecord
 
 __all__ = [
     "MetricReport",
+    "beat_tension_profile",
     "emergent_chains",
     "eventless_beat_stretches",
     "metrics_report",
@@ -39,6 +40,7 @@ __all__ = [
     "m3_causal_chain_lengths",
     "m4_novelty_repetition",
     "m5_non_pc_share",
+    "payoff_latencies",
     "systems_touched",
 ]
 
@@ -380,7 +382,112 @@ def eventless_beat_stretches(
     return stretches
 
 
-# -- the one-shot report -----------------------------------------------------
+# -- payoff latency (iter-107, D-140 — the drama payoff clock) ---------------
+
+
+def payoff_latencies(events: Sequence[EventRecord]) -> list[int]:
+    """Ticks from each deferred consequence's SEEDING to its RELEASE.
+
+    The pairing is pure-log via `provenance.cause_hook` (D-140): every
+    director-released event — accepted or rejected, a released attempt is
+    a fact — names the hook tag it discharged. A release pairs with the
+    event that seeded that tag: the k-th release of a tag pairs with the
+    k-th event carrying the tag in `hooks`. FIFO-per-tag is EXACT under
+    the director's own pick law: candidates sort by
+    `(release_threshold, seeded_at_tick)` with a stable sort over buffer
+    order (the oldest-first law, MVP_SCOPE §5), and every instance of a
+    tag shares the threshold, the target NPC and every gate — so within
+    a tag the pick order is seeding order, always.
+
+    Returns the latencies in release order (ticks; a same-tick release
+    is 0 — consequence and payoff inside one beat). `[]` when nothing
+    released (the OFF arm by construction). A release naming a tag no
+    event ever seeded is a corrupt or foreign log — ValueError, loud,
+    never a guessed pairing.
+    """
+    seed_ticks: dict[str, list[int]] = {}
+    for event in events:
+        for tag in event.hooks:
+            seed_ticks.setdefault(tag, []).append(event.t)
+    cursors: dict[str, int] = {}
+    latencies: list[int] = []
+    for event in events:
+        tag = event.provenance.get("cause_hook")
+        if tag is None:
+            continue
+        if not isinstance(tag, str):
+            raise ValueError(
+                f"event {event.id}: provenance.cause_hook must be a string, "
+                f"got {tag!r}"
+            )
+        ticks = seed_ticks.get(tag)
+        k = cursors.get(tag, 0)
+        if ticks is None or k >= len(ticks):
+            raise ValueError(
+                f"event {event.id}: releases hook {tag!r} that no earlier "
+                "event seeded — the log is corrupt or foreign"
+            )
+        latencies.append(event.t - ticks[k])
+        if latencies[-1] < 0:
+            raise ValueError(
+                f"event {event.id}: releases hook {tag!r} at tick {event.t} "
+                f"before its {k + 1}. seeding at tick {ticks[k]} — the log "
+                "is corrupt or foreign"
+            )
+        cursors[tag] = k + 1
+    return latencies
+
+
+# -- the beat tension profile (iter-107 — the rhythm stat) --------------------
+
+
+def beat_tension_profile(
+    pack_rules: Mapping[str, Any],
+    events: Sequence[EventRecord],
+) -> list[int]:
+    """Per-beat-window tension: the importance-weighted event pressure.
+
+    One integer per beat window (the same axis
+    `eventless_beat_stretches` walks: the pack's `urgencies.beat_ticks`
+    intraday offsets repeated every `time.ticks_per_day`, windows
+    `(previous_beat, beat]`, the trailing partial window dropped). The
+    tension of a window is the sum of its events' importance weights
+    (`low` 1 / `medium` 2 / `high` 3) over ALL events — per-beat
+    bookkeeping breathes at weight 1, scene events weigh more; the
+    profile's spread across windows IS the drama rhythm (the flat
+    drumbeat vs the burst-and-quiet question the pacing clock shapes).
+
+    Pure function of the log + pack data; deterministic by construction
+    (INV-2). Returns the profile in beat order; `[]` when the pack
+    declares no beats or the log has no events.
+    """
+    offsets = sorted(
+        int(t) for t in pack_rules.get("urgencies", {}).get("beat_ticks", ())
+    )
+    if not offsets or not events:
+        return []
+    ticks_per_day = int(pack_rules["time"]["ticks_per_day"])
+    last_t = max(event.t for event in events)
+    beats = [
+        day_index * ticks_per_day + offset
+        for day_index in range(0, last_t // ticks_per_day + 1)
+        for offset in offsets
+        if 0 < day_index * ticks_per_day + offset <= last_t
+    ]
+    weight = {value: idx + 1 for idx, value in enumerate(IMPORTANCE_ORDER)}
+    # (tick, weight) pairs in log order, then a single ordered walk —
+    # INV-2: no sort key beyond the tick, ties keep log order
+    pressure = [(event.t, weight.get(event.importance, 1)) for event in events]
+    pressure.sort(key=lambda tw: tw[0])
+    profile: list[int] = []
+    ptr = 0
+    for beat in beats:
+        tension = 0
+        while ptr < len(pressure) and pressure[ptr][0] <= beat:
+            tension += pressure[ptr][1]  # events inside (prev_boundary, beat]
+            ptr += 1
+        profile.append(tension)
+    return profile
 
 
 def metrics_report(

@@ -123,6 +123,17 @@ feeds — the world never moves on a malformed parse):
 - the `texture` field must carry a live entry's `{entry, scope, slot,
   value}` **verbatim** — a fabricated or stale reference is off-grammar.
 
+Every off-grammar family's refusal payload carries the
+**nearest-valid menu** (iter-107, the risk-synthesis §4 rider): up to
+three grammar tokens ranked by Levenshtein distance (case-folded,
+ties by declaration order — deterministic), over both spellings for
+kinds (token + display label) and the closed candidate lists for
+targets, field names and field values. The menu ranks the grammar, it
+never widens it — the re-ask ladder itself stays §7's deferral; the
+menu is the fuel both the dev-time operator and the future runtime
+ladder patch toward (`brief/parser.py` owns the law;
+`tests/test_parser.py` the pins).
+
 The gate deliberately does NOT duplicate door-owned checks — one owner
 per law (`core/intent.py::validate_shape`): target-required, the
 one-path law (texture XOR target), preconditions, world legality. A

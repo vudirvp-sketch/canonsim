@@ -666,3 +666,104 @@ def test_phase2_parse_regression_set(
     for entity, props in expect.get("state", {}).items():
         for prop, value in props.items():
             assert state[entity].get(prop) == value
+
+
+# -- the nearest-valid menu (iter-107 — the refusal payload's ranking) --------
+
+
+def test_menu_ranks_nearest_kinds_over_verbs_and_labels(tmp_path: Path) -> None:
+    """The kind family's menu ranks by edit distance over BOTH spellings
+    (kind token and display label): a near-miss kind surfaces the real
+    verb first — the re-ask's fuel, never a grammar widening."""
+    sim, ledger, log = _session(tmp_path)
+    events = _events(log)
+    _establish(ledger, events)
+    snapshot = grammar_snapshot(events, PACK, ledger)
+    with pytest.raises(ParseError, match="not in the grammar") as caught:
+        parse_reply_from_mapping({"intent": {"kind": "waitt"}}, snapshot)
+    message = str(caught.value)
+    assert "did you mean:" in message
+    assert "wait" in message  # the distance-1 winner, ranked first
+    # the menu never widens: the refusal still fires
+    assert "waitt" in message
+
+
+def test_menu_ranks_paraphrase_kinds_by_label_distance(
+    tmp_path: Path,
+) -> None:
+    """A paraphrase is closer to the verb's LABEL ("set fire" for arson)
+    than to its kind token — the menu still names the KIND (the reply
+    must carry the kind, PARSER_SPEC §4)."""
+    sim, ledger, log = _session(tmp_path)
+    events = _events(log)
+    _establish(ledger, events)
+    snapshot = grammar_snapshot(events, PACK, ledger)
+    with pytest.raises(ParseError, match="not in the grammar") as caught:
+        parse_reply_from_mapping({"intent": {"kind": "set fier"}}, snapshot)
+    message = str(caught.value)
+    assert "arson" in message  # ranked via the "set fire" label
+
+
+def test_menu_ranks_nearest_addressable_nouns(tmp_path: Path) -> None:
+    """The ghost-noun family (bg-7's biggest refusal family): an
+    off-grammar target's menu ranks the addressable noun ids — the
+    operator patches toward a NAMED noun instead of guessing."""
+    sim, ledger, log = _session(tmp_path)
+    events = _events(log)
+    _establish(ledger, events)
+    snapshot = grammar_snapshot(events, PACK, ledger)
+    with pytest.raises(ParseError, match="not an addressable noun") as caught:
+        parse_reply_from_mapping(
+            {"intent": {"kind": "steal", "target": "npc_guard_1"}}, snapshot
+        )
+    message = str(caught.value)
+    assert "did you mean:" in message
+    assert "npc_guard_01" in message  # the distance-1 winner
+
+
+def test_menu_ranks_nearest_field_names(tmp_path: Path) -> None:
+    """The unknown-field family: a typo'd field name (`tiks`) surfaces
+    the declared one (`ticks`) — the extras message keeps its closed
+    allowed-list, the menu adds the ranking."""
+    sim, ledger, log = _session(tmp_path)
+    events = _events(log)
+    _establish(ledger, events)
+    snapshot = grammar_snapshot(events, PACK, ledger)
+    with pytest.raises(ParseError, match="takes no fields") as caught:
+        parse_reply_from_mapping(
+            {"intent": {"kind": "wait", "fields": {"tiks": 5}}}, snapshot
+        )
+    message = str(caught.value)
+    assert "did you mean: ticks" in message
+
+
+def test_menu_ranks_nearest_enum_values(tmp_path: Path) -> None:
+    """The enum family: an off-vocabulary method value ranks the
+    declared table keys beside the closed list."""
+    sim, ledger, log = _session(tmp_path)
+    events = _events(log)
+    _establish(ledger, events)
+    snapshot = grammar_snapshot(events, PACK, ledger)
+    with pytest.raises(ParseError, match="must be one of") as caught:
+        parse_reply_from_mapping(
+            {"intent": {"kind": "steal", "fields": {"method": "distractio"}}},
+            snapshot,
+        )
+    message = str(caught.value)
+    assert "did you mean: distraction" in message
+
+
+def test_menu_is_deterministic_and_case_folded() -> None:
+    """INV-2 hygiene on the refusal path: the same word → the same menu
+    bytes; case never changes the ranking (the distance folds)."""
+    from brief.parser import _nearest_menu
+
+    candidates = ["wait", "take", "talk", "arson"]
+    assert _nearest_menu("WAIT", candidates) == _nearest_menu("wait", candidates)
+    assert _nearest_menu("WAIT", candidates).startswith(" — did you mean: wait")
+    # ties break by declaration order (stable, deterministic): three
+    # candidates at equal distance keep the snapshot's own order
+    assert _nearest_menu("xx", ["aa", "bb", "cc"]) == (
+        " — did you mean: aa | bb | cc"
+    )
+    assert _nearest_menu("x", []) == ""

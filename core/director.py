@@ -1415,4 +1415,5 @@ class Director:
             target=target,
             fields=fields,
             based_on_event_seq=0,  # the loop stamps the current count at enqueue
+            origin_hook=hook.tag,  # D-140: the loop stamps provenance.cause_hook
         )

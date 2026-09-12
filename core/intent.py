@@ -147,7 +147,15 @@ class RunnerError(RuntimeError):
 
 @dataclass(frozen=True, slots=True)
 class IntentData:
-    """One playscript intent: a proposal, not yet an event (INTENT_SCHEMA §2)."""
+    """One playscript intent: a proposal, not yet an event (INTENT_SCHEMA §2).
+
+    `origin_hook` (iter-107, D-140): the deferred-consequence tag this
+    intent discharges, when the DIRECTOR built it — None for every
+    player-authored intent. The loop stamps it into the released event's
+    `provenance.cause_hook` (EVENT_SCHEMA §7), pairing each release with
+    its seeding event for the payoff-latency metric (`core/metrics.py`)
+    and the causal-provenance family (`scripts/mechanics.py trace/why`).
+    """
 
     id: str
     kind: str
@@ -155,6 +163,7 @@ class IntentData:
     target: str | None
     fields: Mapping[str, Any]
     based_on_event_seq: int = 0
+    origin_hook: str | None = None
 
 
 @dataclass(frozen=True, slots=True)

@@ -921,7 +921,7 @@ class Simulator:
                 hooks=len(resolution.hooks),
                 event_type=resolution.event_type,
             ),
-            provenance={"seed": self._seed, "cause_intent": intent.id},
+            provenance=self._provenance(intent),
         )
         record = self._commit(draft)
 
@@ -1211,6 +1211,7 @@ class Simulator:
             id=intent.id, kind=intent.kind, actor=intent.actor,
             target=intent.target, fields=dict(intent.fields),
             based_on_event_seq=self._writer.event_count,
+            origin_hook=intent.origin_hook,
         )
         self._queue.push(
             tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
@@ -1514,9 +1515,24 @@ class Simulator:
                 "action": intent.kind, "reason": reason, "failed_test": failed_test,
             },
             importance="low",
-            provenance={"seed": self._seed, "cause_intent": intent.id},
+            provenance=self._provenance(intent),
         )
         self._commit(draft)
+
+    def _provenance(self, intent: IntentData) -> dict[str, Any]:
+        """The intent-side provenance block: the run seed, the intent id,
+        and — for a director-built intent — the discharged hook's tag
+        (`cause_hook`, D-140): the release's causal provenance, pairing
+        the event with the seeding event for payoff latency and the
+        trace family. Rejections carry it too: a released attempt is a
+        fact (the hook discharged, the budget was spent)."""
+        provenance: dict[str, Any] = {
+            "seed": self._seed,
+            "cause_intent": intent.id,
+        }
+        if intent.origin_hook is not None:
+            provenance["cause_hook"] = intent.origin_hook
+        return provenance
 
     def _commit(self, draft: EventDraft) -> EventRecord:
         """The one door from a draft to the canon (D-035): validate the

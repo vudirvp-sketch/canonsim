@@ -15,9 +15,12 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from core.fold import fold, initial_projection
 from core.log import EventRecord, LoggedKnowledgeRecord, StateChange
 from core.metrics import (
+    beat_tension_profile,
     emergent_chains,
     eventless_beat_stretches,
     m1_cross_system_share,
@@ -26,6 +29,7 @@ from core.metrics import (
     m4_novelty_repetition,
     m5_non_pc_share,
     metrics_report,
+    payoff_latencies,
     render_report,
     systems_touched,
 )
@@ -43,10 +47,13 @@ def _ev(
     state_changes: tuple[StateChange, ...] = (),
     knowledge: tuple[LoggedKnowledgeRecord, ...] = (),
     importance: str = "low", cause_intent: str | None = None,
+    cause_hook: str | None = None,
 ) -> EventRecord:
     prov: dict[str, Any] = {"seed": 42}
     if cause_intent is not None:
         prov["cause_intent"] = cause_intent
+    if cause_hook is not None:
+        prov["cause_hook"] = cause_hook
     return EventRecord(
         id=eid, t=t, type=etype, actor=actor, cause=cause,
         outcome={}, knowledge=knowledge, state_changes=state_changes,
@@ -599,3 +606,227 @@ def test_day1_full_stretches_are_short() -> None:
     _, events = read_log(log, SCHEMA)
     stretches = eventless_beat_stretches(PACK.rules, events, gate="medium")
     assert max(stretches, default=0) <= 1
+
+
+# -- payoff latency (iter-107, D-140 — the drama payoff clock) -----------------
+
+
+def test_payoff_latencies_empty_when_nothing_released() -> None:
+    """No cause_hook anywhere (the OFF arm by construction) → no
+    latencies, no error."""
+    events = [
+        _ev("ev_0000", 0, "wait", PLAYER, None, hooks=("tag_x",)),
+        _ev("ev_0001", 5, "wait", PLAYER, "ev_0000"),
+    ]
+    assert payoff_latencies(events) == []
+    assert payoff_latencies([]) == []
+
+
+def test_payoff_latencies_fifo_per_tag() -> None:
+    """The pairing law: the k-th release of a tag pairs with the k-th
+    event that seeded the tag (the director's pick sorts
+    (threshold, seeded_at_tick) — within a tag the order IS seeding
+    order). Two instances, two releases, interleaved with another tag."""
+    events = [
+        _ev("ev_0000", 10, "steal", PLAYER, None, hooks=("hook_a",)),
+        _ev("ev_0001", 12, "steal", PLAYER, "ev_0000", hooks=("hook_b",)),
+        _ev("ev_0002", 20, "steal", PLAYER, "ev_0001", hooks=("hook_a",)),
+        _ev(
+            "ev_0003", 110, "document_check", "npc_guard_01", "ev_0002",
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+        _ev(
+            "ev_0004", 130, "look_around", "npc_barkeep_01", "ev_0003",
+            cause_intent="director_0001", cause_hook="hook_b",
+        ),
+        _ev(
+            "ev_0005", 200, "ramble", "npc_drunk_01", "ev_0004",
+            cause_intent="director_0002", cause_hook="hook_a",
+        ),
+    ]
+    # hook_a: seeds 10, 20; releases 110 (→100), 200 (→180);
+    # hook_b: seed 12; release 130 (→118)
+    assert payoff_latencies(events) == [100, 118, 180]
+
+
+def test_payoff_latencies_count_rejected_releases() -> None:
+    """A released attempt is a fact: an `intent_rejected` event carrying
+    cause_hook is a discharge (the hook burned, the budget was spent) —
+    its latency counts like an accepted release."""
+    events = [
+        _ev("ev_0000", 7, "steal", PLAYER, None, hooks=("hook_a",)),
+        _ev(
+            "ev_0001", 77, "intent_rejected", "npc_guard_01", "ev_0000",
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+    ]
+    assert payoff_latencies(events) == [70]
+
+
+def test_payoff_latencies_same_tick_release_is_zero() -> None:
+    """Consequence and payoff inside one beat: the latency is 0, never
+    negative (negative is the corrupt-log error below)."""
+    events = [
+        _ev("ev_0000", 42, "steal", PLAYER, None, hooks=("hook_a",)),
+        _ev(
+            "ev_0001", 42, "ramble", "npc_drunk_01", "ev_0000",
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+    ]
+    assert payoff_latencies(events) == [0]
+
+
+def test_payoff_latencies_refuse_unpaired_release() -> None:
+    """A release naming a tag no event ever seeded is a corrupt or
+    foreign log — loud, never a guessed pairing."""
+    events = [
+        _ev(
+            "ev_0000", 10, "ramble", "npc_drunk_01", None,
+            cause_intent="director_0000", cause_hook="ghost_hook",
+        ),
+    ]
+    with pytest.raises(ValueError, match="ghost_hook"):
+        payoff_latencies(events)
+
+
+def test_payoff_latencies_refuse_too_many_releases() -> None:
+    """More releases of a tag than seeds — the cursor runs past the
+    seed list: loud (the log lies about its own director)."""
+    events = [
+        _ev("ev_0000", 10, "steal", PLAYER, None, hooks=("hook_a",)),
+        _ev(
+            "ev_0001", 20, "ramble", "npc_drunk_01", "ev_0000",
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+        _ev(
+            "ev_0002", 30, "ramble", "npc_drunk_01", "ev_0001",
+            cause_intent="director_0001", cause_hook="hook_a",
+        ),
+    ]
+    with pytest.raises(ValueError, match="no earlier"):
+        payoff_latencies(events)
+
+
+def test_payoff_latencies_refuse_release_before_seed() -> None:
+    """A release whose k-th seed sits LATER in the log than the release
+    itself — the pairing is impossible, the log is corrupt."""
+    events = [
+        _ev(
+            "ev_0000", 100, "ramble", "npc_drunk_01", None,
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+        _ev("ev_0001", 200, "steal", PLAYER, "ev_0000", hooks=("hook_a",)),
+    ]
+    with pytest.raises(ValueError, match="before its 1. seeding"):
+        payoff_latencies(events)
+
+
+def test_payoff_latencies_undeclared_tags_never_pair() -> None:
+    """Seeds of tags the pack never declared are facts, not tension —
+    they sit in the seed table but never drain (no release names
+    them); the metric ignores them entirely."""
+    events = [
+        _ev("ev_0000", 10, "steal", PLAYER, None, hooks=("undeclared",)),
+        _ev(
+            "ev_0001", 50, "ramble", "npc_drunk_01", "ev_0000",
+            cause_intent="director_0000", cause_hook="hook_a",
+        ),
+    ]
+    with pytest.raises(ValueError, match="hook_a"):
+        payoff_latencies(events)  # hook_a was never seeded at all
+
+
+def test_payoff_latencies_on_the_committed_day1_run() -> None:
+    """The e2e pin: the committed pack's day1_full run carries
+    cause_hook on every director release (D-140), and the latencies
+    pair with real seeds (seed 100: the relief document check and the
+    barkeep sweep — both first_time_only, first-seed pairing)."""
+    from core.log import read_log
+    from core.loop import Simulator, load_playscript
+
+    script = load_playscript(REPO / "tests" / "playscripts" / "day1_full.json")
+    log = Path("/tmp/csm_metrics_payoff.jsonl")
+    if log.exists():
+        log.unlink()
+    sim = Simulator(
+        PACK, 100, log, SCHEMA, commit="0000000", director_enabled=True,
+    )
+    sim.run_playscript(dict(script, seed=100))
+    _, events = read_log(log, SCHEMA)
+    released = [
+        event for event in events
+        if str(event.provenance.get("cause_intent", "")).startswith("director_")
+    ]
+    assert released  # the day's director beats fired
+    assert all("cause_hook" in event.provenance for event in released)
+    latencies = payoff_latencies(events)
+    assert len(latencies) == len(released)
+    assert all(ticks >= 0 for ticks in latencies)
+
+
+# -- the beat tension profile (iter-107 — the rhythm stat) ----------------------
+
+
+def test_tension_profile_importance_weighted_windows() -> None:
+    """The core semantics: one integer per beat window, the sum of its
+    events' importance weights (low 1 / medium 2 / high 3) — ALL
+    events, the bookkeeping breathes at weight 1."""
+    events = [
+        _ev("ev_0000", 50, "take", PLAYER, None),  # low → 1 in (0,100]
+        _ev("ev_0001", 120, "take", PLAYER, "ev_0000", importance="medium"),
+        _ev("ev_0002", 150, "arson", PLAYER, "ev_0001", importance="high"),
+        _ev("ev_0003", 180, "wait", PLAYER, "ev_0002"),  # low → 1
+        _ev("ev_0004", 210, "wait", PLAYER, "ev_0003"),  # the log end
+    ]
+    # (0,100] → 1; (100,200] → 2+3+1 = 6; the 210 log end drops as the
+    # trailing partial window's own evidence
+    assert beat_tension_profile(_rules([100, 200]), events) == [1, 6]
+
+
+def test_tension_profile_drops_the_trailing_partial_window() -> None:
+    """The same axis law the stretches follow: the window after the
+    last beat is partial — its events carry no beat evidence and do
+    not count (the 250 event never lands in any window; the axis's
+    last full window (100,200] is eventless and scores 0)."""
+    events = [
+        _ev("ev_0000", 50, "take", PLAYER, None, importance="high"),
+        _ev("ev_0001", 250, "take", PLAYER, "ev_0000", importance="high"),
+    ]
+    assert beat_tension_profile(_rules([100, 200]), events) == [3, 0]
+
+
+def test_tension_profile_empty_degenerate_configs() -> None:
+    """No beats declared or no events → no profile (the urgencies-minus
+    ablation arm's own shape)."""
+    events = [_ev("ev_0000", 0, "wait", PLAYER, None)]
+    assert beat_tension_profile(_rules([]), events) == []
+    assert beat_tension_profile(
+        {"time": {"ticks_per_day": 1440}}, events
+    ) == []
+    assert beat_tension_profile(_rules([100]), []) == []
+
+
+def test_tension_profile_event_at_the_beat_tick_belongs_to_that_window() -> None:
+    """The boundary law shared with the stretches: an event AT a beat's
+    tick belongs to that beat's window (the log-end event extends the
+    axis so the second window exists; it lands in the trailing partial
+    window and is dropped — the axis law)."""
+    events = [
+        _ev("ev_0000", 100, "take", PLAYER, None, importance="medium"),
+        _ev("ev_0001", 210, "wait", PLAYER, "ev_0000"),  # the log end
+    ]
+    assert beat_tension_profile(_rules([100, 200]), events) == [2, 0]
+
+
+def test_tension_profile_day_wrapped_axis() -> None:
+    """The beat axis repeats every ticks_per_day: day 2's first window
+    chains onto day 1's last — a single ordered walk (the log-end
+    event at 1550 extends the axis to day 2's beat, then drops as the
+    trailing partial)."""
+    events = [
+        _ev("ev_0000", 50, "take", PLAYER, None),                 # day 1
+        _ev("ev_0001", 1440 + 50, "take", PLAYER, "ev_0000"),     # day 2
+        _ev("ev_0002", 1550, "wait", PLAYER, "ev_0001"),          # log end
+    ]
+    profile = beat_tension_profile(_rules([100], day=1440), events)
+    assert profile == [1, 1]

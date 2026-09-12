@@ -167,7 +167,7 @@ def test_templates_have_fallback_and_snake_case_types() -> None:
 
 def test_event_schema_shape_matches_event_schema_doc() -> None:
     schema = load(SCHEMA)
-    assert schema["$id"] == "canonsim/event/0.1"
+    assert schema["$id"] == "canonsim/event/0.2"
     assert set(schema["required"]) == {
         "id",
         "t",

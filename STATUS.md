@@ -1,51 +1,61 @@
-Iteration: iter-106 (`iter-106-resume` — the owner's direct call
-(«приступай к работе и реализации»): the session resume door, the
-risk-synthesis priority list's #1, the one phases.md §7 left
-owner-gated since iter-80 — `--resume <log>` opens the session OVER
-an existing log, D-139 the law: RESUME IS INVISIBLE TO THE LOG
-(byte-identical to the uninterrupted run at every drain-boundary
-split, T1 across process boundaries); the run cursor
-(`core/cursor.py` — the entropy state no fold recovers: silent
-draws) + the checkpoint fast-path (the module's first runtime
-consumer) + the append-mode writer (the same canon door, INV-5
-untouched); verified BEFORE working — 1592+1 green, ruff clean,
-HEAD c7508f5, Python 3.12.14 the env pin; 1611+1 green after) ·
+Iteration: iter-107 (`iter-107-riders` — the owner's direct call
+(«доделывай остальное с прошлой итерации: осталось пункты 2–6»): the
+risk-synthesis priority list's remaining cheap riders, the five that
+existed only in the iter-105 chat's context — the blast-radius drift
+test, pack-scaffold + pack-doctor, payoff-latency +
+tension-variance + the `--systems-minus` ablation, the
+nearest-valid-intent re-ask menu, the heartbeat ledger's
+per-component latency columns; verified BEFORE working — 1611+1
+green, ruff clean, HEAD 8ee2060, Python 3.12.14 the env pin; 1652+1
+green after) ·
 Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
-iter-102, D-136 — the exit criterion met, the worldgen-fed form; the
-phase table ROADMAP §2 owns the state; phase 6 opens on the owner's
-call, the iter-55/73 opener precedent — the instruments drafted:
-world-2/res-1/roads-1, TASKS' phase-6 section carrying the
-iter-104 resolutions riding the rows; cli-pack DONE iter-105,
-resume-1 DONE iter-106 — neither recorded prerequisite stands
-between the owner and the opening) ·
-1611 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-+19 tests, the count 1592→1611 — tests/test_resume.py, the law
-pinned at every split point + the loud refusals; corpus price zero
-— no fixture regen, the armed pack's genesis rides the split-0
-arm itself) ·
+iter-102, D-136; the phase table ROADMAP §2 owns the state; phase 6
+opens on the owner's call, the iter-55/73 opener precedent — the
+instruments drafted: world-2/res-1/roads-1, TASKS' phase-6 section
+carrying the iter-104 resolutions riding the rows; cli-pack DONE
+iter-105, resume-1 DONE iter-106, the riders DONE iter-107 — nothing
+recorded stands between the owner and the opening; the authoring
+loop's first rungs (scaffold + doctor) now stand READY for the
+reskin day, D-141) ·
+1652 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
++41 tests, the count 1611→1652 — tests/test_drift.py the four-
+direction systems⇔metrics contract, tests/test_pack_tools.py the
+scaffold + doctor laws, +14 payoff-latency/tension units, +6 menu
+families, +7 harness arm tests, +5 the drift direction pins; the schema 0.1→0.2 additive bump
+D-140 — the T1 golden fixture regenerated in the same iteration per
+TEST_PLAN §3, the header's version line the whole corpus price) ·
 Date: 2026-09-12 ·
-Scope: `core/cursor.py` (new — the run-cursor artifact: envelope,
-save/load, the log binding), `core/rng.py` (export_state/
-restore_state — the entropy positions, worldgen excluded),
-`core/director.py` (export_run_state/restore_run_state +
-PACING_STATES — the run marks, the buffer rebuilt by seed() over
-the log), `core/log.py` (the append-mode writer — same door, env
-pin + schema-version laws), `core/loop.py` (`Simulator.resume` +
-export_cursor + drained — the door itself, the checkpoint
-fast-path), `core/queue.py` (QueueKind + `weather`, the iter-98
-Literal drift), `cli/main.py` (--resume, the cursor pinning, the
-resumed banner), `tests/test_resume.py` (+19), `docs/TASKS.md`
-(the resume-1 row + the iter-106 section), `docs/DECISIONS.md`
-(D-139), `docs/AGENT_NAVIGATION.md` (§1: the cursor entry, the
-checkpoint/log/cli/tests rows), `docs/TEST_PLAN.md` (§7.1 the
-runtime-consumer line), `README.md` (the usage block), `STATUS.md`
-(this re-pin), `worklog.md` (this iteration's entry; iter-96a
-evicted per the cap) — 15 files, 7 code + 8 doc (AGENTS §2.3: the
-objective scope — a genuine system feature, one coherent landing,
-noted in worklog). The prior iteration's record: iter-105
-(cli-pack). The detail lives in TASKS + worklog + git.
-
+Scope: `core/intent.py` (IntentData.origin_hook — the discharged
+hook's tag rides the intent), `core/director.py` (_intent stamps it),
+`core/loop.py` (_provenance — cause_hook on released events, both
+intent sites + the autonomous-enqueue pass-through),
+`core/metrics.py` (payoff_latencies + beat_tension_profile, D-140/
+D-141), `schemas/event.schema.json` (0.2: provenance.cause_hook,
+additive), `brief/parser.py` (the nearest-valid menu — Levenshtein
+ranking over the refusal families), `scripts/balance_harness.py`
+(the payoff + tension blocks, the --systems-minus ablation arm,
+ABLATABLE the measured set), `scripts/pack_scaffold.py` (new — the
+authoring loop's first rung), `scripts/pack_doctor.py` (new — the
+lint's fix-hint surface),
+`tests/test_drift.py` (new, +5), `tests/test_pack_tools.py` (new,
++9), `tests/test_metrics.py` (+9), `tests/test_parser.py` (+6),
+`tests/test_balance_harness.py` (+7), `tests/test_smoke.py` (the
+$id pin 0.2), `tests/fixtures/plumbing_smoke_seed42.jsonl`
+(regenerated — the header's version line alone),
+`docs/EVENT_SCHEMA.md` (§1 example 0.2, §7 cause_hook),
+`docs/PARSER_SPEC.md` (§4 the menu law), `docs/TEST_PLAN.md` (§6 the
+three new measurement surfaces + §8.5 the per-component latency
+columns), `docs/TASKS.md` (the iter-107 section), `docs/DECISIONS.md`
+(D-140, D-141), `docs/AGENT_NAVIGATION.md` (§1: the two new tools,
+the tests rows, the metrics segment, the fixture regen note),
+`STATUS.md` (this re-pin), `worklog.md` (this iteration's entry;
+iter-97 evicted per the cap) — 25 files, 4 code + 1 schema + 1 brief +
+3 scripts + 6 test + 1 fixture + 9 doc (AGENTS §2.3: the objective
+scope — the owner
+called five riders in one shot; noted in worklog). The prior
+iteration's record: iter-106 (resume). The detail lives in TASKS +
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -656,15 +666,17 @@ stands, for the phase-6 opening or the owner's direct calls
    `st-5` (containers + entity-birth promotion — unowned by a phase,
    the first real consumer decides: a pack wanting portable objects,
    a res-1 sink shape). From the iter-105 chat's risk-synthesis
-   analysis, the remaining cheap riders (none owner-gated, none
-   pinned): the blast-radius drift test (scheduler decls ⇔ the
-   metrics prefix map — one CI strengthening), `pack-scaffold` +
-   `pack-doctor/--trace` (ride PACK_SPEC / the phase-6 opening),
-   payoff-latency + tension-variance + a `--systems-minus` ablation
-   arm in the balance harness (ride world-2 tuning), the
-   nearest-valid-intent re-ask menu (rides parse-2/engine-1), the
-   per-component latency columns in the heartbeat ledger (ride
-   bg-9+/engine-1). The two questions iter-104 left with the owner
+   analysis, the cheap riders ALL LANDED iter-107 (the owner's
+   direct call): the blast-radius drift test
+   (tests/test_drift.py), pack-scaffold + pack-doctor
+   (scripts/pack_scaffold.py + scripts/pack_doctor.py — the
+   authoring loop's first rungs, READY for the reskin day),
+   payoff-latency + tension-variance + the --systems-minus
+   ablation arm (core/metrics.py + the balance harness, D-140/
+   D-141 — the drama tuning is now data), the nearest-valid-intent
+   re-ask menu (brief/parser.py), the heartbeat ledger's
+   per-component latency columns (TEST_PLAN §8.5, the gap row
+   until bg-9+/engine-1). Nothing of the list remains. The two questions iter-104 left with the owner
    are closed (D-137/D-138, iter-105) — no owner question stands
    open.
 3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing

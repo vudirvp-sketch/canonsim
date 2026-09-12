@@ -482,6 +482,35 @@ mints, zero pin changes** — the zero-regen landing measured BEFORE
 the commit, pinned as the byte-identity witness
 (tests/test_reflection.py; D-087).
 
+Extended at iter-107 (the risk-synthesis riders — the drama tuning
+turned into data): the table gains three measurement surfaces. The
+**payoff latency** (D-140): `core.metrics.payoff_latencies(events)`
+pairs every director release with its seeding event via
+`provenance.cause_hook` (FIFO per tag — exact under the director's
+`(release_threshold, seeded_at_tick)` pick law; rejected releases
+count, an attempt is a fact), reporting p50/mean/max + the tick
+histogram + the released-run share; `[]` on the OFF arm by
+construction. The **beat tension**: `core.metrics.beat_tension_profile
+(pack_rules, events)` — the same beat-window axis the stretches walk,
+per window the sum of its events' importance weights (low 1 / medium
+2 / high 3, ALL events), the table reporting the per-run mean +
+variance across runs (the flat-drumbeat vs burst-and-quiet rhythm
+stat). The **ablation arm**: `--systems-minus <name>` runs the pack
+minus one mechanic's arming block — block-scoped by necessity (the
+68a law; the systems-table rows are interlocked, not independently
+removable), the removable set MEASURED (lint + 3-seed runs):
+urgencies, weather, on_action, reflection, secrets, factions; the
+director's ablation stays `--directors off`. First pinned finding:
+the urgencies-minus world has no beat axis at all — no tension
+profile, and the beat-driven release cadence dies with the block
+(the whole director loop hangs off `urgencies.beat_ticks`) — pinned
+in tests/test_balance_harness.py. The corpus price: the schema
+version line of the T1 golden fixture alone (the 0.1 → 0.2 additive
+bump, `provenance.cause_hook`), regenerated in the same iteration per
+§3. The blast-radius drift guard for the state vocabulary landed the
+same iteration (tests/test_drift.py — the systems table ⇔ the metrics
+prefix map, the observed corpus pinned).
+
 ## 7. leg-4 offline chronicler acceptance (iter-64, D-093)
 
 The mode-F chronicler suite (`tests/test_chronicle.py`; the tool:
@@ -717,15 +746,27 @@ One row per heartbeat run; a missed family records a gap row, the gate
 proceeds (§8.1 Layer 3's law). The metrics per row: engine_ok, raw gate
 validity → after one re-ask, alternative mix (intent/question/
 no_intent), full intent agreement vs the pins, the refusal-family
-census, the deviation coverage. Numbers' owner: TECH_NOTES; this table
-carries the trend pointers only.
+census, the deviation coverage, and the per-component latency
+(iter-107, the risk-synthesis §9 rider — FIRST-CLASS COLUMNS): one
+p50/p95 pair per pipeline component — **tick** (the loop's sim tick),
+**fold** (the log → projection fold), **brief** (the mediator call
+assembly), **parse** (the parser-door cycle, repo-side), **generate**
+(the external engine's call — the runner's own clock, Rule 9). The
+component cut is the latency BUDGET's owner: each future SoW engine
+decision reads which component eats the p95, never a single end-to-end
+number that hides it. Numbers' owner: TECH_NOTES; this table carries
+the trend pointers only. No live row carries the columns yet — the
+standing gap row below; the first bg-9+/engine-1 run populates them
+(the runner computes p50/p95 with `statistics.quantiles`, n≥4; a
+smaller n records the raw min/median/max with the gap noted).
 
-| Run | Date | Engine | Validity raw → 1 re-ask | Mix i/q/n | Agreement | Trend note |
-|---|---|---|---|---|---|---|
-| bg-7 | 2026-09-07 | glm-4-plus API | 79.5% → 88.6% | 29/9/6 | 16/30 full | the one-shot probes (TECH_NOTES §10) |
-| bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
+| Run | Date | Engine | Validity raw → 1 re-ask | Mix i/q/n | Agreement | Latency p50/p95 (tick/fold/brief/parse/generate) | Trend note |
+|---|---|---|---|---|---|---|---|
+| bg-7 | 2026-09-07 | glm-4-plus API | 79.5% → 88.6% | 29/9/6 | 16/30 full | — (gap: the one-shot probes carried no component clock) | the one-shot probes (TECH_NOTES §10) |
+| bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | — (gap: the end-to-end p50 1.1 s / p95 6.3 s recorded, components unmetered — §11) | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
 
 Gap rows standing: the {3–8B, GBNF} arm (all families, owner
 hardware); the bg-7 prose families (ii)–(v) skipped in the bg-8
-heartbeat (rate-limit economics); the per-family latency distribution.
+heartbeat (rate-limit economics); the per-family latency distribution;
+the per-component p50/p95 columns (no live row yet — bg-9+/engine-1).
 

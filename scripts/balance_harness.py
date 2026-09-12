@@ -3,10 +3,14 @@
 Runs the gate playscript (or a variant) N times across sampled seeds,
 folds each log through `core/metrics.py`, and emits a distribution
 table for: `suspicion` peak per NPC, `fire_spread` spot count at
-burnout, M1–M5, the emergent-chain count, and the eventless
+burnout, M1–M5, the emergent-chain count, the eventless
 beat-stretch distribution (DIR-2, phase 3 — the exit criterion's
-measurement). Validates that the `rules.json` thresholds are tuned,
-not guessed (D-019 — directionality first, numbers from data).
+measurement), the payoff-latency distribution (iter-107, D-140 —
+seeded→released ticks, `provenance.cause_hook` the pairing), and the
+beat-tension rhythm (iter-107 — per-window importance-weighted
+pressure, mean + variance). Validates that the `rules.json`
+thresholds are tuned, not guessed (D-019 — directionality first,
+numbers from data).
 
 The pacing A/B (DIR-2): `--pacing on` runs the committed pack as-is;
 `--pacing off` runs the same pack minus `director.pacing` — a pack
@@ -15,6 +19,18 @@ declaration is the gate, INV-3) — materialized once per invocation
 under the gitignored output dir and linted on load. Both arms keep the
 director enabled (the question is what the CLOCK changes; the
 director-off baseline stays `--directors off`).
+
+The ablation arm (iter-107, the risk-synthesis "remove half the
+mechanics" invariant): `--systems-minus <name>` runs the pack minus
+one mechanic's ARMING BLOCK — the 68a law (an absent optional block
+is the primitive silent, the v0.1-adjacent bytes). Block-scoped by
+necessity: the systems-table rows (fire, relations, knowledge,
+states, crime_watch) are interlocked by preconditions, resolvers and
+cross-lints — not independently removable; `director` has its own
+flag (`--directors off`). The cleanly removable set was measured, not
+guessed (lint + 3-seed runs, iter-107):
+
+    urgencies · weather · on_action · reflection · secrets · factions
 
 Output: `output/balance_<N>.txt` (gitignored runtime artifact — never
 committed; the harness itself is committed, the runs are reproducible
@@ -27,6 +43,8 @@ Usage:
         tests/playscripts/day1_full.json
     python -m scripts.balance_harness --runs 200 --directors on \
         --pacing off  # the DIR-2 A/B's clock-off arm
+    python -m scripts.balance_harness --runs 100 --systems-minus \
+        urgencies  # the ablation arm (block-scoped, 68a)
 """
 
 from __future__ import annotations
@@ -38,7 +56,7 @@ import statistics
 import sys
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, Final
 
 # Allow `python scripts/balance_harness.py` and `python -m scripts.balance_harness`
 REPO = Path(__file__).resolve().parents[1]
@@ -50,8 +68,10 @@ from core.log import read_log  # noqa: E402
 from core.loop import Simulator, load_playscript  # noqa: E402
 from core.metrics import (  # noqa: E402
     MetricReport,
+    beat_tension_profile,
     eventless_beat_stretches,
     metrics_report,
+    payoff_latencies,
 )
 from core.pack import Pack, load_pack  # noqa: E402
 from render.tracery import Grammar  # noqa: E402
@@ -59,6 +79,14 @@ from render.tracery import Grammar  # noqa: E402
 DEFAULT_SCRIPT = REPO / "tests" / "playscripts" / "day1_full.json"
 DEFAULT_OUT = REPO / "output"
 PACK_DIR = REPO / "content" / "tavern_pack"
+
+#: The ablation arm's cleanly removable blocks (iter-107 — measured, not
+#: guessed: each drops its own optional rules block, lints, and runs 3
+#: seeds clean; the systems-table rows are interlocked — preconditions,
+#: resolvers, worldgen cross-refs — and are NOT independently removable).
+ABLATABLE: Final[tuple[str, ...]] = (
+    "urgencies", "weather", "on_action", "reflection", "secrets", "factions",
+)
 
 
 def _load() -> tuple[Pack, dict[str, Any], dict[str, Any]]:
@@ -75,13 +103,37 @@ def _nopacing_pack(out_dir: Path) -> Pack:
     (a pack without the block runs the v0.1 minimal pair — the pack's own
 declaration is the gate, INV-3). Materialized once per invocation under
 the gitignored output dir; `load_pack` runs the full lint on it."""
-    variant_dir = out_dir / "pack_nopacing"
+    return _variant_pack(out_dir, "nopacing", (), drop_pacing=True)
+
+
+def _systems_minus_pack(out_dir: Path, name: str, *, drop_pacing: bool) -> Pack:
+    """The ablation arm's pack: the committed pack minus the named
+    mechanic's arming block (the 68a law — an absent optional block is
+    the primitive silent). Same materialization discipline as the pacing
+    arm: once per invocation, gitignored dir, full lint on load."""
+    suffix = "nopacing_" if drop_pacing else ""
+    return _variant_pack(out_dir, f"{suffix}minus_{name}", (name,),
+                         drop_pacing=drop_pacing)
+
+
+def _variant_pack(
+    out_dir: Path, arm: str, drop_keys: Sequence[str], *, drop_pacing: bool,
+) -> Pack:
+    """One pack-variant materializer for every arm: copy the four files,
+    drop the named top-level rules keys (and `director.pacing` when asked),
+    rewrite once per invocation under the gitignored output dir. `load_pack`
+    runs the full lint on the result — a variant the lint refuses never
+    runs (a loud PackError, never a silent behavior change)."""
+    variant_dir = out_dir / f"pack_{arm}"
     variant_dir.mkdir(parents=True, exist_ok=True)
     for name in sorted(p.name for p in PACK_DIR.glob("*.json")):
         source = PACK_DIR / name
         if name == "rules.json":
             rules = json.loads(source.read_text(encoding="utf-8"))
-            rules["director"].pop("pacing", None)
+            for key in drop_keys:
+                rules.pop(key, None)
+            if drop_pacing:
+                rules["director"].pop("pacing", None)
             (variant_dir / name).write_text(
                 json.dumps(rules, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8",
@@ -138,11 +190,12 @@ def _fire_destroyed_locations(
 def _run_one(
     pack: Pack, schema: dict[str, Any], script: dict[str, Any],
     seed: int, directors: bool, pacing: bool, gate: str, out_dir: Path,
-) -> tuple[MetricReport, dict[str, int], int, list[int]]:
+    arm: str,
+) -> tuple[MetricReport, dict[str, int], int, list[int], list[int], list[int]]:
     """One balance run: simulate → fold → metrics + peaks + burned spots
     + the eventless beat-stretch lengths (DIR-2, gate-read from the pack's
-    own tale gate — the same gate the chronicle renders by)."""
-    arm = f"{'on' if directors else 'off'}" + ("" if pacing else "_nopacing")
+    own tale gate — the same gate the chronicle renders by) + the payoff
+    latencies (D-140) + the beat-tension profile (iter-107)."""
     log = out_dir / f"balance_{seed}_{arm}.jsonl"
     if log.exists():
         log.unlink()
@@ -160,13 +213,17 @@ def _run_one(
     peaks = _suspicion_peaks(events, projection)
     burned = _fire_destroyed_locations(events, projection)
     stretches = eventless_beat_stretches(pack.rules, events, gate=gate)
-    return report, peaks, burned, stretches
+    latencies = payoff_latencies(events) if directors else []
+    tension = beat_tension_profile(pack.rules, events)
+    return report, peaks, burned, stretches, latencies, tension
 
 
 def _aggregate(reports: list[MetricReport],
                peaks_list: list[dict[str, int]],
                burned_list: list[int],
-               stretch_lists: list[list[int]]) -> dict[str, Any]:
+               stretch_lists: list[list[int]],
+               latency_lists: list[list[int]],
+               tension_lists: list[list[int]]) -> dict[str, Any]:
     """Aggregate per-metric stats across N runs."""
     def _stats(values: list[float]) -> dict[str, float]:
         return {
@@ -196,6 +253,25 @@ def _aggregate(reports: list[MetricReport],
         for length in stretches:
             histogram[length] = histogram.get(length, 0) + 1
     out["stretch_histogram"] = dict(sorted(histogram.items()))
+    # payoff latency (D-140): across-run stats over the per-run list + the
+    # pooled tick histogram (empty when nothing released — the OFF arm)
+    flat = [ticks for latencies in latency_lists for ticks in latencies]
+    out["payoff_latencies"] = _stats([float(v) for v in flat]) if flat else None
+    out["payoff_runs_with_release"] = sum(1 for ls in latency_lists if ls)
+    payoff_histogram: dict[int, int] = {}
+    for ticks in flat:
+        payoff_histogram[ticks] = payoff_histogram.get(ticks, 0) + 1
+    out["payoff_histogram"] = dict(sorted(payoff_histogram.items()))
+    # the beat-tension rhythm (iter-107): per-run mean + population variance
+    # of the importance-weighted profile, aggregated across runs
+    out["tension_mean"] = _stats(
+        [float(statistics.mean(profile)) for profile in tension_lists
+         if profile]
+    ) if any(tension_lists) else None
+    out["tension_variance"] = _stats(
+        [float(statistics.pvariance(profile)) for profile in tension_lists
+         if profile]
+    ) if any(tension_lists) else None
     # suspicion peaks: aggregate per NPC
     npc_ids = {npc for peaks in peaks_list for npc in peaks}
     peak_stats: dict[str, dict[str, float]] = {}
@@ -206,11 +282,15 @@ def _aggregate(reports: list[MetricReport],
     return out
 
 
-def _render_table(stats: dict[str, Any], *, gate: str, pacing: bool) -> str:
+def _render_table(
+    stats: dict[str, Any], *, gate: str, pacing: bool,
+    systems_minus: str | None,
+) -> str:
     """ASCII table of the aggregated stats (one block, worklog-friendly)."""
     lines: list[str] = []
     arm = "clock on" if pacing else "clock off (v0.1 minimal pair)"
-    lines.append(f"balance harness — {stats['runs']} runs — pacing: {arm}")
+    minus = f" — minus: {systems_minus} (68a ablation)" if systems_minus else ""
+    lines.append(f"balance harness — {stats['runs']} runs — pacing: {arm}{minus}")
     lines.append("-" * 60)
     lines.append(f"{'metric':<22}{'min':>10}{'p50':>10}{'mean':>10}{'max':>10}")
     for key in (
@@ -236,6 +316,29 @@ def _render_table(stats: dict[str, Any], *, gate: str, pacing: bool) -> str:
     else:
         lines.append("stretch histogram (length:count) — none: every window had a scene event")
     lines.append("-" * 60)
+    if stats["payoff_latencies"] is not None:
+        s = stats["payoff_latencies"]
+        lines.append(
+            f"payoff latency (seeded→released ticks): p50 {s['p50']:.0f} "
+            f"mean {s['mean']:.1f} max {s['max']:.0f} — "
+            f"{stats['payoff_runs_with_release']}/{stats['runs']} runs released"
+        )
+        cells = "  ".join(
+            f"{ticks}:{count}" for ticks, count in stats["payoff_histogram"].items()
+        )
+        lines.append(f"payoff histogram (ticks:count) — {cells}")
+    else:
+        lines.append("payoff latency (seeded→released ticks) — none: no run released")
+    if stats["tension_mean"] is not None:
+        m, v = stats["tension_mean"], stats["tension_variance"]
+        lines.append(
+            f"beat tension (per-window pressure): mean p50 {m['p50']:.1f} "
+            f"[{m['min']:.1f}..{m['max']:.1f}] | variance p50 {v['p50']:.1f} "
+            f"[{v['min']:.1f}..{v['max']:.1f}]"
+        )
+    else:
+        lines.append("beat tension (per-window pressure) — none: no beats declared")
+    lines.append("-" * 60)
     lines.append("suspicion peaks per NPC:")
     lines.append(f"{'npc':<22}{'min':>10}{'p50':>10}{'mean':>10}{'max':>10}")
     for npc, s in stats["suspicion_peaks"].items():
@@ -250,7 +353,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="balance_harness",
         description="1000-sim distribution harness for KI#4 (phase-0 gate) "
-                    "+ the DIR-2 pacing A/B (phase 3)",
+                    "+ the DIR-2 pacing A/B (phase 3) + the block-scoped "
+                    "ablation arm (iter-107)",
     )
     parser.add_argument("--runs", type=int, default=1000,
                         help="number of seed-varied runs (default: 1000)")
@@ -262,6 +366,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                         help="the pacing clock arm (default: on — the committed "
                              "pack; 'off' runs the pack minus director.pacing, "
                              "the v0.1 minimal pair — requires --directors on)")
+    parser.add_argument(
+        "--systems-minus", default=None, metavar="NAME",
+        help="the ablation arm: run the pack minus one mechanic's arming "
+             "block (68a). Removable: " + ", ".join(ABLATABLE) + ". The "
+             "systems-table rows (fire, relations, knowledge, states, "
+             "crime_watch) are interlocked — not independently removable; "
+             "the director has --directors off.",
+    )
     parser.add_argument("--script", type=Path, default=DEFAULT_SCRIPT,
                         help="playscript path (default: day1_full.json)")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT,
@@ -270,11 +382,21 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     directors = args.directors == "on"
     pacing = args.pacing == "on"
+    systems_minus = args.systems_minus
     if not pacing and not directors:
         parser.error(
             "--pacing off requires --directors on: a disabled director never "
             "consults the clock (the arm would measure nothing — the "
             "director-off baseline is --directors off --pacing on)"
+        )
+    if systems_minus is not None and systems_minus not in ABLATABLE:
+        parser.error(
+            f"--systems-minus {systems_minus!r} is not independently "
+            f"removable: the cleanly removable blocks are {list(ABLATABLE)} "
+            "(each is an optional rules block, 68a); the systems-table rows "
+            "(fire, relations, knowledge, states, crime_watch) are "
+            "interlocked by preconditions, resolvers and cross-lints; the "
+            "director's ablation is --directors off"
         )
 
     pack, schema, default_script = _load()
@@ -283,39 +405,63 @@ def main(argv: Sequence[str] | None = None) -> int:
         else default_script
     )
     args.out_dir.mkdir(parents=True, exist_ok=True)
-    if not pacing:
+    if systems_minus is not None:
+        pack = _systems_minus_pack(
+            args.out_dir, systems_minus, drop_pacing=not pacing
+        )
+    elif not pacing:
         pack = _nopacing_pack(args.out_dir)
     # the gate the chronicle renders by (the same reader, the same default —
     # the metric's scene definition IS the tale's)
     gate = Grammar(pack.templates).tale_gate
 
+    arm = f"{'on' if directors else 'off'}"
+    arm += "" if pacing else "_nopacing"
+    arm += "" if systems_minus is None else f"_minus_{systems_minus}"
     reports: list[MetricReport] = []
     peaks_list: list[dict[str, int]] = []
     burned_list: list[int] = []
     stretch_lists: list[list[int]] = []
+    latency_lists: list[list[int]] = []
+    tension_lists: list[list[int]] = []
     for offset in range(args.runs):
         seed = args.seed_base + offset
-        report, peaks, burned, stretches = _run_one(
-            pack, schema, script, seed, directors, pacing, gate, args.out_dir,
+        report, peaks, burned, stretches, latencies, tension = _run_one(
+            pack, schema, script, seed, directors, pacing, gate,
+            args.out_dir, arm,
         )
         reports.append(report)
         peaks_list.append(peaks)
         burned_list.append(burned)
         stretch_lists.append(stretches)
+        latency_lists.append(latencies)
+        tension_lists.append(tension)
 
-    stats = _aggregate(reports, peaks_list, burned_list, stretch_lists)
-    table = _render_table(stats, gate=gate, pacing=pacing)
+    stats = _aggregate(
+        reports, peaks_list, burned_list, stretch_lists,
+        latency_lists, tension_lists,
+    )
+    table = _render_table(
+        stats, gate=gate, pacing=pacing, systems_minus=systems_minus,
+    )
     suffix = "" if pacing else "_nopacing"
+    suffix += "" if systems_minus is None else f"_minus_{systems_minus}"
     out_path = args.out_dir / (
         f"balance_{args.runs}_seed{args.seed_base}_{args.directors}{suffix}.txt"
     )
     out_path.write_text(table, encoding="utf-8")
     print(table)
     print(f"[balance table saved: {out_path}]")
-    if directors and pacing:
+    if directors and pacing and systems_minus is None:
         print(
             "[DIR-2 A/B: re-run with --pacing off for the clock-off arm "
             "(same seed range) — the exit criterion's measurement]"
+        )
+    if systems_minus is None:
+        print(
+            "[ablation A/B: re-run with --systems-minus <name> (same seed "
+            "range) for the 'world without mechanic X' arm — "
+            f"removable: {', '.join(ABLATABLE)}]"
         )
     return 0
 
