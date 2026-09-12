@@ -26,6 +26,41 @@
 > second-setting shape pinned TRAVEL); the build column is drafted below
 > — world-2 L1 (the reskin day, the gate instrument) is the first row.
 
+### iter-111 · intake-12 presentation-consolidation routing — done (doc-only, the owner's call)
+
+The owner's chat call («глубоко проанализируй и подумай над документом
+brief-ir-vs-presentation-summary.md => по пунктам разреши противоречия
+и выдай вердикты предложениям с обоснованием» — a multi-audit
+consolidation of the Brief-IR-vs-presentation-layer question, the
+intakes-6..11 family precedent). Routed: every load-bearing repo
+citation verified against HEAD first (the convenience-copy law) —
+BRIEF_SPEC §7.1/§9, PACK_SPEC §6 (AP-8/AP-9), TECH_NOTES §1/§2/§10/§11,
+the bg-8 gap rows, engine-1/st-4, D-022/D-055 — plus two session
+fact-checks (Rule 9 runners, outside the repo): the live mode-A call
+dump (anchor/regen ride the model-facing bytes literally;
+query/retrieval are mode-B-only; 282 ws-tokens) and the day1_full
+truncation census (zero markers fire; 208–274 ws-tokens vs
+total_hard 800). The verdict set (8 rows, D-148): the "60–70% ready"
+frame refused (consumer-measured, sequenced-by-design); the protocol
+noise re-owned (dev-time operator signal, zero measured leakage at
+27B, fires at engine-1 where GBNF owns it); `[truncated:N]` stays
+(the anti-silent-drop invariant) with the A/B riding the weak arm;
+condensation confirmed as the fold pattern (belief lines ARE
+in-brief condensation — never tracery, the iter-43 flat-key law);
+Lost-in-the-Middle refused as a requirement driver (MECW owns the
+geometry); the presentation spec written at the engine-1 trigger FROM
+weak-arm results, absorbing st-4, as a thin mapping table over the 8
+blocks (the D-055 pattern's fourth instance); the behavioral layer
+answered by PACK_SPEC §6 (AP-8/AP-9, enforcement rides pack-ci); the
+weak-arm-vs-contract priority dichotomy dissolved (the run IS the
+requirements measurement). Landed: the `presentation-1` row above +
+phases.md §6's intake-12 block. The build queue untouched — world-2 L1
+stays pinned CODE on the owner's «приступай». Doc-only #3 rides the
+D-022 exception (the owner's fresh request; the intakes family is
+doc-only by construction). Verified BEFORE working: 1660+1 green,
+ruff clean, HEAD 2ebd122 (Python 3.12.14, the env pin); 1660+1 green
+after — zero runtime surface touched. Zero new KIs.
+
 ### iter-110 · intake-11 donor routing — done (doc-only, the owner's call)
 
 The owner's chat call (a donor blueprint — PRESSURE_LIMIT, a
@@ -721,7 +756,31 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   Tax clause (bg-5): non-Latin tail/prose costs ≈1.5–2× tokens on
   32K-vocab local models (guide part_07a §7A.5; ref-13) — the
   whitespace proxy under-charges Cyrillic; budget per script at the
-  mediator, never in core.
+  mediator, never in core. **Absorbed into `presentation-1` at that
+  row's write time (intake-12/D-148) — the sketch above is the input,
+  the future spec the single owner.**
+- `presentation-1` the LLM presentation contract — todo, owner-gated
+  (intake-12, D-148 — the multi-audit consolidation routed; the row is
+  **engine-1's decision-input child, never a sibling competitor**): the
+  model-facing serializer spec over the STABLE brief IR (BRIEF_SPEC §7
+  bytes + §7.1 protocol — the D-055 file-contract pattern's fourth
+  instance: VALIDATION_SPEC owns the reply, PARSER_SPEC owns mode C,
+  this spec owns the call's model-class wiring), written FROM the
+  {3–8B, GBNF} arm's results at the engine-1 owner call (D-022 — the
+  trigger; a contract without a consumer has unknown requirements).
+  Absorbs `st-4` at write time (the call budget + transcript-tail
+  contract — one owner, never two). The spec's shape when written: a
+  thin mapping table over the existing 8 blocks + `narrator_protocol`
+  (canon-facts vs control-metadata split, truncation semantics, MECW
+  small/medium/large profiles) — never a second re-labeling vocabulary
+  (D-024). Exit criterion: the weak-arm run on owner hardware (bg-7's
+  five families + the two intake-12 probes: the truncation-marker A/B,
+  the protocol-split A/B). Evidence base at HEAD (TECH_NOTES §10/§11):
+  the 27B input side clean (0/8 invented names, zero instruction
+  leakage), the failures reply-side (the brief-surface vs claim-id
+  mismatch IS the refusal engine — GBNF's own target), the cast_surface
+  A/B earned nothing and raised refusals (55 vs 45). The verdict set:
+  `docs/blueprint/phases.md` §6's intake-12 block.
 - `st-5` containers: the `in` relation + entity-birth promotion
   (blueprint §7 — "deferred with the depth phase"; phase 5 CLOSED
   iter-102 without this row landing, the pointer retired at the

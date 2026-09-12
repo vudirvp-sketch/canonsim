@@ -13,6 +13,57 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-111 · 2026-09-13 · intake12 — the owner's verdict call over the
+Brief-IR-vs-presentation consolidation (5 files doc-only, zero code,
+zero corpus price — the intakes-6..11 family precedent; one family)
+- verified BEFORE working (1660+1 green, ruff clean, HEAD 2ebd122,
+  Python 3.12.14 the env pin); every load-bearing citation checked
+  against HEAD — plus two session fact-checks (Rule 9 runners
+  outside the repo): the live mode-A call dump (anchor/regen ride
+  the model-facing bytes literally; query/retrieval mode-B-only;
+  282 ws-tokens) and the day1_full truncation census (zero markers
+  fire, 208–274 ws-tokens vs total_hard 800; the 105-case corpus
+  pins none); three micro-drifts + the missing bg-7/bg-8 evidence
+  base recorded in D-148 (the audits predate §10/§11)
+- the verdict set (8 rows, D-148 + phases.md §6's intake-12
+  block): the "60–70% ready" frame REFUSED (a contract without a
+  consumer has unknown requirements — the {3–8B, GBNF} run is the
+  metric's only honest form; sequenced-by-design, D-022/§9); the
+  protocol noise re-owned (the block is the operator's reply-
+  contract signal at dev-time — the anchor is what the reply
+  carries; zero measured leakage at 27B; the concern fires at
+  engine-1 where the GBNF grammar owns the output side and the
+  input split is a one-block serializer decision); [truncated:N]
+  STAYS (the anti-silent-drop invariant; the golden-set A/B rides
+  the weak arm — at 27B C3.5 is clean and the structural gates
+  hold); condensation = the fold pattern (the belief lines ARE
+  in-brief condensation, §3.5; never tracery — the iter-43
+  flat-key law; never the assembler, L2); LiM REFUSED as a
+  requirement driver (MECW + the landed live-char geometry own it;
+  the local instrument is the heartbeat trend line on the engine-1
+  arm); the presentation spec written at the engine-1 trigger FROM
+  weak-arm results, ABSORBING st-4, as a thin mapping table over
+  the 8 blocks (the D-055 file-contract pattern's fourth instance;
+  never a 7-layer re-labeling vocabulary, D-024); the behavioral
+  layer ANSWERED by PACK_SPEC §6 (AP-9 spine → AP-8 rule through
+  the intent door's gate family → the committed event → the
+  existing surfaces; the presentation-side alternative refused —
+  wrong layer, L2 violation, four duplicated homes); the priority
+  dichotomy DISSOLVED (the weak-arm run IS the requirements
+  measurement — one row, one gate)
+- docs: DECISIONS D-148, TASKS the presentation-1 row + the
+  iter-111 section + st-4's absorption pointer, phases.md §6 the
+  intake-12 block, STATUS re-pinned, this file. iter-101 evicted
+  here (verified against git in this edit); 10 after. The build
+  queue untouched — world-2 L1 stays pinned CODE on the owner's
+  «приступай»; doc-only #3 rides the D-022 exception (the owner's
+  fresh call; the intakes family is doc-only by construction).
+  Caps: STATUS 671 / TASKS 1073 / DECISIONS 73 (42 rows — the
+  over-cap debt collapses at the next phase gate, the D-034
+  family law) / phases 1409 — over-cap files ride the documented
+  §6.1 substance precedent (D-095..D-147), trim at the phase-6→7
+  gate.
+
 iter-110 · 2026-09-13 · intake11 — the owner's chat call, the
 pressure-city donor blueprint (PRESSURE_LIMIT) routed (5 files
 doc-only, zero code, zero corpus price — the intakes-6..10 family
@@ -305,44 +356,3 @@ noted here)
   phases 1202 / DECISIONS 30 rows held — TASKS + phases over-cap on
   ledger/architecture substance (§6.1, the iter-54 phases.md
   precedent), the next trim point is the phase-6→7 gate.
----
-iter-101 · 2026-09-12 · intake10 — the owner's chat call, the
-external encounter & event-generation design notes routed
-(6 files doc-only, zero code, zero corpus price — the intake-8/9
-six-file precedent; one family)
-- verified BEFORE working (1589+1 green, ruff clean, HEAD 533a384);
-  the verdict set is D-135: the substrate CONFIRMED complete — 21
-  of the document's 23 patterns are pack-level discipline or
-  read-side shapes over landed primitives (the eight-family
-  mapping, phases.md §6; the NPCLedger IS the projection +
-  knowledge view); the ONE gap routed as `since-1` (the
-  re-encounter delta — read-side, BRIEF_SPEC §3.4's extension,
-  the document's own highest-value pick); the four declared
-  contradictions DISSOLVED against standing law (phase-scoping;
-  the seven stream families; D-079's rejected-flat XOR
-  alternative; D-022 just-in-time)
-- refined into phases.md §6's encounter block (~80 lines): the
-  substrate mapping + the event-source taxonomy + the world-state
-  law (derived reads, never a stored object) + the detour fence
-  (world-side predicates, never intent inference) + the
-  anti-repetition composition (a novelty subsystem refused as
-  duplicate bookkeeping) + the selection law (evaluation, never a
-  draw); deferred owner-gated: the Kenshi arrival dive (ref-20/
-  world-2), the 5-8 hook-pattern catalog (a content row, real
-  corpus price), the per-tag recurring cooldown (the murmur
-  placeholder); refused: the standalone EncounterSystem family
-  (the doc's own §11), docs/design/ENCOUNTERS.md (the
-  single-owner chain), stored world-state objects (STATE-1),
-  intent-inferring triggers (L6)
-- docs: DECISIONS D-135, TASKS the intake-10 section + since-1,
-  phases.md §6 the encounter block, REFERENCES §10 (+7 rows:
-  Skyrim, Fallout, Zomboid, STALKER A-Life, Shadow of Mordor,
-  Rain World, Wildermyth), STATUS re-pinned (the doc-only streak
-  iter-100+101 surfaced per AGENTS §2.5 — both the owner's
-  calls, the D-022 exception), this file. iter-92 evicted here
-  (verified against git in this edit); 10 after. The queue
-  untouched — the phase-5 exit review stays the owner's call.
-  Caps: STATUS 901 / TASKS 1240 / DECISIONS 101 (68 rows) /
-  phases 1202 / REFERENCES 326 — over-cap files ride the
-  documented §6.1 substance precedent (D-095..D-135), trim at
-  the phase-5→6 gate.

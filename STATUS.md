@@ -1,23 +1,37 @@
-Iteration: iter-110 (`iter-110-intake11` — the owner's chat call (a
-donor blueprint — PRESSURE_LIMIT, a pressure-city setting concept:
-«подумай стоит ли чего перенимать и добавлять в референсы или типа
-того или нет и почему» + the biome/lost-city question): the donor
-routed per the intake family precedent — every load-bearing repo
-citation verified against HEAD first (the convenience-copy law; all
-green, two micro-drifts corrected in D-147 — the AP crosswalk rung
-specified-not-landed, no literal meta.json); the verdict ADOPTED as
-parked donor material: the displacement law (the concept's one
-word-for-word keeper), the Cooling Debt primitive resolution
-(weather-1's chain+erosion shape over maclock, never a second res-1),
-the gauge (res-1's one-meter read surface), legal exclusion (the
-D-134 state/flag + knowledge-record application), objective-function
-factions (depth-6), the lore hooks (templates + cause_hook, D-140) —
-landing in phases.md §6's intake-11 block + the TASKS pack-4 row; the
-biome question ANSWERED: a pressure city is authored pack data, never
-a worldgen biome — the lost-city fold the cheap form, the full
-concept the third pack slot; verified BEFORE working — 1660+1 green,
-ruff clean, HEAD 140bbcf, Python 3.12.14 the env pin; 1660+1 green
-after — zero runtime surface touched, doc-only) ·
+Iteration: iter-111 (`iter-111-intake12` — the owner's chat call
+(«глубоко проанализируй и подумай над документом
+brief-ir-vs-presentation-summary.md => по пунктам разреши противоречия
+и выдай вердикты предложениям с обоснованием» — a multi-audit
+consolidation of the Brief-IR-vs-presentation-layer question): routed
+per the intake family precedent — every load-bearing repo citation
+verified against HEAD first (the convenience-copy law; BRIEF_SPEC
+§7.1/§9, PACK_SPEC §6's AP crosswalk, TECH_NOTES §1/§2/§10/§11, the
+bg-8 gap rows, engine-1/st-4, D-022/D-055) plus two session
+fact-checks (Rule 9 runners outside the repo: the live mode-A call
+dump — anchor/regen ride the model-facing bytes literally, query/
+retrieval mode-B-only; the day1_full truncation census — zero markers
+fire, 208–274 ws-tokens vs total_hard 800); the verdict set (8 rows,
+D-148): the "60–70% ready" frame REFUSED (a contract without a
+consumer has unknown requirements — consumer-measured,
+sequenced-by-design), the narrator_protocol noise re-owned (the
+operator's reply-contract signal at dev-time, zero measured leakage
+at 27B, fires at engine-1 where GBNF owns it), [truncated:N] STAYS
+(the anti-silent-drop invariant; the A/B rides the weak arm),
+condensation confirmed as the fold pattern (the belief lines ARE
+in-brief condensation — never tracery, the iter-43 flat-key law),
+Lost-in-the-Middle refused as a requirement driver (MECW owns the
+geometry), the presentation spec written at the engine-1 trigger FROM
+weak-arm results absorbing st-4 as a thin mapping table over the 8
+blocks (the D-055 pattern's fourth instance), the behavioral layer
+ANSWERED by PACK_SPEC §6 (AP-8/AP-9, enforcement rides pack-ci), the
+weak-arm-vs-contract dichotomy DISSOLVED (the run IS the requirements
+measurement) — landing in the TASKS presentation-1 row (owner-gated,
+engine-1's decision-input child) + phases.md §6's intake-12 block;
+three micro-drifts corrected (the trait chain IS specified; the
+belief lines/card markers already condense; the anti-invention
+directives are pack data by INV-3's own law); verified BEFORE
+working — 1660+1 green, ruff clean, HEAD 2ebd122, Python 3.12.14 the
+env pin; 1660+1 green after — zero runtime surface touched, doc-only) ·
 Phase: 6 (Packs & worldbuilder) — OPENED (opened iter-109, the
 owner's call, D-146, the iter-55/73 opener precedent; phases 0..5
 all CLOSED: 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4
@@ -26,17 +40,17 @@ state; the build column drafted on TASKS — world-2 L1 the reskin
 day the first row, pinned CODE on the owner's «приступай»; res-1's
 owed dives landed at the opening; pack-ci the admission-lint rungs
 specified in PACK_SPEC §5/§6; since-1 rides world-2's condensing
-travelers; iter-110's intake touched no build row — the queue
-unchanged) ·
+travelers; iter-110's and iter-111's intakes touched no build row —
+the queue unchanged) ·
 1660 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
 zero corpus price — no runtime surface touched, doc-only) ·
 Date: 2026-09-13 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-11 donor block),
-`docs/TASKS.md` (the pack-4 candidate row + the iter-110 section),
-`docs/DECISIONS.md` (D-147, appended), `STATUS.md` (this re-pin),
-`worklog.md` (this iteration's entry; iter-100 evicted per the cap)
+Scope: `docs/blueprint/phases.md` (§6 the intake-12 verdict block),
+`docs/TASKS.md` (the presentation-1 row + the iter-111 section),
+`docs/DECISIONS.md` (D-148, appended), `STATUS.md` (this re-pin),
+`worklog.md` (this iteration's entry; iter-101 evicted per the cap)
 — 5 files, all doc (within AGENTS §2.3's soft limit). The prior
-iteration's record: iter-109 (phase6-open). The
+iteration's record: iter-110 (intake11). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -583,21 +597,27 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-110 DONE: intake-11 — the pressure-city donor routed (the
-owner's «стоит ли чего перенимать и добавлять в референсы?» call,
-D-147).** The donor blueprint (PRESSURE_LIMIT) verified against HEAD
-(every load-bearing citation green; two micro-drifts corrected);
-ADOPTED as parked donor material — the displacement law, the Cooling
-Debt (weather-1's chain+erosion shape, never a second res-1), the
-gauge (res-1's one-meter read surface), legal exclusion (D-134's
-family), objective-function factions (depth-6), the lore hooks
-(D-140) — phases.md §6's intake-11 block + the TASKS `pack-4` row;
-the biome question answered: authored pack data, never a worldgen
-biome (the lost-city fold the cheap form inside any pack, the full
-concept the third pack slot). The external document stays outside
-the repo (the convenience-copy law). The build queue untouched;
-doc-only #2 rides the D-022 exception — no third doc-only planned.
-What stands:
+**iter-111 DONE: intake-12 — the presentation-contract consolidation
+routed (the owner's verdict call over the multi-audit brief, D-148).**
+Every load-bearing citation verified against HEAD (BRIEF_SPEC
+§7.1/§9, PACK_SPEC §6, TECH_NOTES §10/§11, the bg-8 gap rows) plus
+two session fact-checks (the live mode-A call dump; the day1_full
+truncation census — zero markers, 208–274 ws-tokens vs total_hard
+800). The verdict set (8 rows, the detail in phases.md §6's
+intake-12 block): the "60–70% ready" frame refused (the consumer
+measures, D-022), the protocol noise re-owned (engine-1's question,
+GBNF's own surface), `[truncated:N]` stays (the invariant), the
+condensation = the fold pattern (never tracery), LiM refused (MECW
+owns the geometry), the presentation spec at the engine-1 trigger
+absorbing st-4 (the D-055 pattern's fourth instance), the behavioral
+layer answered (PACK_SPEC §6's AP-8/AP-9), the priority dichotomy
+dissolved (the weak-arm run IS the requirements measurement). Landed:
+the TASKS `presentation-1` row (owner-gated, engine-1's
+decision-input child). The external document stays outside the repo
+(the convenience-copy law). The build queue untouched; doc-only #3
+rides the D-022 exception (the owner's fresh call — the intakes
+family is doc-only by construction; the streak ends with the next
+CODE row). What stands:
 
 1. **world-2 L1 — the reskin day, the phase-6 gate's own
    instrument (pinned CODE, the next iteration):** the ≤1-day
@@ -620,19 +640,25 @@ What stands:
    `roads-1` (mode G's generated-exits pass), `pack-ci` (the
    PACK_SPEC §5/§6 admission-lint rungs — the reskin pack the
    first pack they run against), `since-1` (read-side, rides
-   world-2's condensing travelers), `parse-2`, `engine-1`,
-   `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
+   world-2's condensing travelers), `parse-2`, `engine-1`
+   (+ `presentation-1`, intake-12/D-148 — the presentation
+   contract as engine-1's decision-input child, written from the
+   weak-arm results, absorbing `st-4` at write time), `tune-3`,
+   `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
    Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
    (the grim pack) + `pack-3` (the sci-fi candidate) at the
    2nd-setting trigger — now UNBLOCKED by the opening (the
    trigger fired; the ORDER owner decides) + `pack-4` (the
    pressure-city candidate, intake-11/D-147 — the lost-city fold
    into world-2 L2 its cheap adoption), `companion-1`,
-   `mech-2` (rides the next mechanics.py touch), `st-4` and
-   `st-5` (the first real consumer decides: a pack wanting
+   `mech-2` (rides the next mechanics.py touch), `st-4` (the
+   call budget — rides into `presentation-1` at its write time,
+   D-148) and `st-5` (the
+   first real consumer decides: a pack wanting
    portable objects, a res-1 sink shape). No other owner
    question stands open — the two opening-day questions are
-   closed by D-146.
+   closed by D-146; intake-12's eight rows are all closed by
+   D-148.
 3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
    standing gap rows: the {3–8B, GBNF} arm (owner hardware —
    engine-1's decision input), the bg-7 prose families skipped

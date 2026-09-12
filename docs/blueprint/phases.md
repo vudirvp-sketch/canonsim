@@ -1195,6 +1195,151 @@ this before authoring; the external document stays outside the repo):
   not landed (rides `pack-ci`); tone/prohibition data rides the four
   files' blocks — there is no literal `meta.json`.
 
+The presentation-contract consolidation (intake-12, D-148 — the
+owner's 2026-09-13 verdict call over a multi-audit summary of the
+"does the Brief IR suffice as the final LLM representation, or is a
+separate presentation layer owed" question; the same consult posture
+as the intakes 6..11: the external document stays outside the repo,
+every load-bearing citation verified against HEAD first. A future
+engine-1 opening reads this before wiring the autonomous narrator):
+
+- **Verified at HEAD (the audit half — facts, not hypotheses).** The
+  model-facing bytes: `narrator_call` = the BRIEF_SPEC §7 brief bytes
+  + the `narrator_protocol` block appended — no separate
+  serialization layer exists (BRIEF_SPEC §7.1; the live mode-A call
+  dump: `anchor`/`regen` ride the bytes literally, the `query`/
+  `retrieval` lines are mode-B-only, the document ends `## narrator_
+  protocol`). The `[truncated:N]` marker: fires on budget drops
+  only (§5) — on day1_full (seed 125, 56 events) the brief runs
+  208–274 ws-tokens against `total_hard` 800 and NO marker ever
+  fires; the committed 105-case corpus pins none. The format is
+  compact ASCII (the "JSON brief" question — non-existent). The
+  consolidation's evidence base predates bg-7/bg-8 (TECH_NOTES
+  §10/§11), which RE-SIZE the gap: at 27B-class the input side is
+  clean (0/8 invented names, zero instruction leakage in 24 beat
+  replies), the measured failures live on the REPLY side — the
+  brief-surface vs claim-id vocabulary mismatch IS the refusal
+  engine (7/8 prose beats regen-exhausted), GBNF's own target —
+  and the one INPUT-side intervention A/B-tested (bg-7 (v),
+  cast_surface) earned nothing and RAISED refusals (55 vs 45):
+  richer surface is not free at this class.
+- **Micro-drifts corrected** (the consolidation vs HEAD): (a) "the
+  trait → tendency → consequence chain is not specified" — WRONG at
+  HEAD: PACK_SPEC §6 (iter-109) carries the AP crosswalk — AP-9
+  spine records (want/need tension + flaw rooted in a cause), AP-8
+  behavior rules CONSUMING each flaw (urgency entry, hook weight
+  modifier, on_action reaction, prohibition) — specified, pack data,
+  lint-checkable; enforcement rides `pack-ci`, the first consumer is
+  world-2. (b) "no semantic-condensation layer exists" — PARTIAL:
+  three mechanisms are landed — the traits fold → belief lines
+  (BRIEF_SPEC §3.5: N records → one belief token + provenance — the
+  exact atomic-facts→one-thought shape), `card_markers`
+  (state→word, §3.4), the chronicle's 46 per-event template
+  families. What is genuinely absent: pair-causality prose ("the
+  guard suspects the player BECAUSE X and Y"). (c) "no
+  don't-infer instruction" — true at spec level, misframed in
+  substance: the anti-invention directives are PACK data ("Narrate
+  only what the brief contains… Never invent events, names, or
+  outcomes") — and by INV-3's own law narrator-prompt text MUST be
+  pack data, never spec/code; the enforcement backstop is
+  structural (the validator's closed world + the prose floor +
+  L12), never promptual.
+- **The verdict set (the eight disputed rows):**
+  1. **The "60–70% ready" frame: REFUSED.** A contract without a
+     consumer has unknown requirements — the metric is
+     meaningless-by-construction, not merely contested; its only
+     honest form is the consumer measurement (the {3–8B, GBNF}
+     run). The gap is sequenced-by-design: D-022 + BRIEF_SPEC §9's
+     last row names the owner gate (engine-1, AGENTS §8).
+  2. **`narrator_protocol` as model noise: fact CONFIRMED, harm
+     re-owned.** The block rides the model-facing bytes with no
+     "not world facts" marking — true. But at dev-time it is the
+     operator's reply-contract signal (the anchor is what the reply
+     must carry — signal, not noise, for the D-055 external
+     narrator), and the measured leakage at 27B is zero. The
+     concern fires exactly at engine-1's opening — where the GBNF
+     grammar makes output-side protocol noise structurally
+     impossible and the input-side split (canon-facts vs
+     control-metadata) is a one-block serializer decision, not an
+     architectural gap.
+  3. **`[truncated:N]`: the marker STAYS; the A/B rides the weak
+     arm.** The marker is the anti-silent-drop invariant (§5:
+     hiding truncation is the named violation) — trading an
+     auditable invariant for an unmeasured prompt-theory benefit is
+     a crutch. The golden-set experiment (with/without marker) is
+     legitimate science but belongs to the {3–8B, GBNF} family
+     (bg-7's instrument), never a standalone iteration: at 27B the
+     adjacent C3.5 signal is clean (0/8 first-reply confabulations)
+     and the structural gates hold everywhere (L12 never blocked a
+     beat).
+  4. **Deterministic condensation: pattern CONFIRMED, instrument
+     corrected.** The landed pattern is fold → token → provenance
+     (LEGEND_SPEC family: the belief line IS condensation, inside
+     the brief since leg-2). Pair-causality condensation, if a
+     consumer ever demands it, rides the SAME fold pattern — never
+     tracery (flat-key conditionals, event-per-line: the iter-43
+     law puts nested causality out of its shape) and never the
+     assembler (L2: the brief renders dry tokens; prose is
+     downstream).
+  5. **Lost-in-the-Middle: REFUSED as a requirement driver.** The
+     repo owns the geometry law its own way — MECW (TECH_NOTES §2:
+     the MEASURED effective window 8–16k on local 27B, "budgets
+     against THIS number, never the nominal context size") + the
+     landed live-char geometry (voice exemplars near the context
+     end, recency-first scene_delta). Foreign LiM conclusions
+     measure other models and other documents; the local
+     instrument is the heartbeat trend line (TEST_PLAN §8.5) on
+     the engine-1 arm — measuring mapping honesty and refusals,
+     not positional recall. No bespoke LiM replication, no
+     author's-note placement requirements from foreign research.
+  6. **`LLM_PRESENTATION_SPEC` now vs by parts: NEITHER.** The
+     spec is written at the engine-1 trigger FROM the weak-arm
+     results (D-022 + SPECS_BACKLOG's own header: a spec before
+     its trigger is scope creep; a draft spec is a convenience
+     copy that rots). When written it is the D-055 file-contract
+     pattern's FOURTH instance (VALIDATION_SPEC owns the reply,
+     PARSER_SPEC owns mode C, this spec owns the call's
+     model-class wiring), ABSORBS `st-4` (the call budget +
+     transcript-tail contract — already the row's own sketch; one
+     owner, never two), and owns a THIN MAPPING table over the
+     existing 8 blocks + `narrator_protocol` (canon-facts vs
+     control-metadata, truncation semantics, MECW small/medium/
+     large profiles) — never a second re-labeling vocabulary for
+     the same blocks (D-024: link, never restate).
+  7. **The character/behavioral layer: ANSWERED by PACK_SPEC §6.**
+     The chain decomposes by design across existing homes: the
+     spine record (AP-9) → the behavior rule consuming the trait
+     (AP-8, through the intent door's gate family — the iter-46/55
+     fence: folds gate behavior through the door, never channel
+     inputs, never probability multipliers) → the committed event
+     (canon) → the existing presentation surfaces (card markers
+     for standing state, belief lines for derived views, voice
+     exemplars for style). A presentation-side behavioral layer
+     (richer voice/directives prose) is REFUSED — wrong layer: it
+     puts behavior where the engine cannot gate it, violates L2
+     voice isolation, and duplicates four homes.
+  8. **The priority dichotomy (bg-8's weak arm vs the presentation
+     contract): DISSOLVED.** One row, one gate: the {3–8B, GBNF}
+     run is not the alternative to the presentation contract — it
+     is the contract's requirements-generating measurement (what a
+     3–8B model misreads in the current format IS the requirement
+     set; what GBNF makes structurally impossible IS the
+     non-requirement set). Sequencing after the owner call: run →
+     requirements from results → the spec written (absorbing
+     st-4).
+- **Landed:** the TASKS `presentation-1` row (owner-gated,
+  engine-1's decision-input child; exit criterion the {3–8B, GBNF}
+  run — bg-7's five families + the two surviving intake-12 probes:
+  the truncation-marker A/B, the protocol-split A/B). The build
+  queue UNTOUCHED — world-2 L1 stays the pinned CODE row.
+- **Refused at the door:** the draft `LLM_PRESENTATION_SPEC.md`
+  now (the trigger law); the 7-layer ROLE/SCENE/EPISTEMIC/CAUSAL/
+  STYLE/TASK/OUTPUT vocabulary (a re-labeling of the 8 blocks);
+  any BRIEF_SPEC §7.1 byte change or pack directives edit today
+  (both corpus-priced; the protocol-block geometry is §7.1's owned
+  bytes); the bespoke LiM experiment; the presentation-side
+  behavioral layer.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
