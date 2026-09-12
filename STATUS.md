@@ -1,42 +1,42 @@
-Iteration: iter-109 (`iter-109-phase6-open` — the owner's chat call
-(«продолжай работу по планам, если ничего кроме гейта 6 не осталось,
-можем его начинать») — the iter-55/73 opener precedent firing,
-phase 6 (Packs & worldbuilder) OPENED: PACK_SPEC written (the
-trigger fired), the ref-18/ref-20 dives landed (8 files), the two
-opening-day questions ANSWERED at the owner's call (D-146: the
-gut-check verdict NO CUTS on the 20-seed ablation evidence + the
-named-consumer trace; the second-setting shape TRAVEL — the
-D-130 river-artery direction, level 1 the travel-loop reskin on
-the SRD 5.1 open generic stack); verified BEFORE working — 1660+1
-green, ruff clean, HEAD f3076b0, Python 3.12.14 the env pin; 1660+1
-green after — zero runtime surface touched, doc-only) ·
+Iteration: iter-110 (`iter-110-intake11` — the owner's chat call (a
+donor blueprint — PRESSURE_LIMIT, a pressure-city setting concept:
+«подумай стоит ли чего перенимать и добавлять в референсы или типа
+того или нет и почему» + the biome/lost-city question): the donor
+routed per the intake family precedent — every load-bearing repo
+citation verified against HEAD first (the convenience-copy law; all
+green, two micro-drifts corrected in D-147 — the AP crosswalk rung
+specified-not-landed, no literal meta.json); the verdict ADOPTED as
+parked donor material: the displacement law (the concept's one
+word-for-word keeper), the Cooling Debt primitive resolution
+(weather-1's chain+erosion shape over maclock, never a second res-1),
+the gauge (res-1's one-meter read surface), legal exclusion (the
+D-134 state/flag + knowledge-record application), objective-function
+factions (depth-6), the lore hooks (templates + cause_hook, D-140) —
+landing in phases.md §6's intake-11 block + the TASKS pack-4 row; the
+biome question ANSWERED: a pressure city is authored pack data, never
+a worldgen biome — the lost-city fold the cheap form, the full
+concept the third pack slot; verified BEFORE working — 1660+1 green,
+ruff clean, HEAD 140bbcf, Python 3.12.14 the env pin; 1660+1 green
+after — zero runtime surface touched, doc-only) ·
 Phase: 6 (Packs & worldbuilder) — OPENED (opened iter-109, the
 owner's call, D-146, the iter-55/73 opener precedent; phases 0..5
 all CLOSED: 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4
 iter-65 · 5 iter-102, D-136; the phase table ROADMAP §2 owns the
 state; the build column drafted on TASKS — world-2 L1 the reskin
-day the first row, pinned CODE; res-1's owed dives landed at the
-opening; pack-ci the admission-lint rungs specified in PACK_SPEC
-§5/§6; since-1 rides world-2's condensing travelers) ·
+day the first row, pinned CODE on the owner's «приступай»; res-1's
+owed dives landed at the opening; pack-ci the admission-lint rungs
+specified in PACK_SPEC §5/§6; since-1 rides world-2's condensing
+travelers; iter-110's intake touched no build row — the queue
+unchanged) ·
 1660 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-zero corpus price — no runtime surface touched, doc-only; the
-digest's own drift pin green through the re-pin: the shapes held) ·
+zero corpus price — no runtime surface touched, doc-only) ·
 Date: 2026-09-13 ·
-Scope: `docs/PACK_SPEC.md` (new — the pack module contract),
-`docs/ref/x4.md` + `stellaris_economy.md` + `distant_worlds.md` +
-`eve_online.md` + `path_of_exile.md` + `albion_online.md` +
-`shadows_of_doubt.md` + `kenshi.md` (new — the ref-18/ref-20
-dives), `docs/REFERENCES_DEEP.md` (§1 rows flipped to landed),
-`docs/SPECS_BACKLOG.md` (PACK_SPEC written), `docs/ROADMAP.md` (§2
-the state column flipped), `docs/TASKS.md` (the phase-6 backlog
-draft + the iter-109 section + the opening-day answers),
-`docs/DECISIONS.md` (D-146), `docs/AGENT_NAVIGATION.md` (§1:
-PACK_SPEC + the ref files), `README.md` (the repo-map row),
-`STATUS.md` (this re-pin), `worklog.md` (this iteration's entry;
-iter-99 evicted per the cap) — 14 files, 9 new + 5 edited, all
-doc (AGENTS §2.3: the objective scope — the opening checklist per
-the law's own list + the dives' one-file-per-source law, noted in
-worklog). The prior iteration's record: iter-108 (fixations). The
+Scope: `docs/blueprint/phases.md` (§6 the intake-11 donor block),
+`docs/TASKS.md` (the pack-4 candidate row + the iter-110 section),
+`docs/DECISIONS.md` (D-147, appended), `STATUS.md` (this re-pin),
+`worklog.md` (this iteration's entry; iter-100 evicted per the cap)
+— 5 files, all doc (within AGENTS §2.3's soft limit). The prior
+iteration's record: iter-109 (phase6-open). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -583,27 +583,21 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-109 DONE: the phase-6 OPENING (the owner's «продолжай работу
-по планам, если ничего кроме гейта 6 не осталось, можем его
-начинать» call — the iter-55/73 opener precedent).** ROADMAP §2's
-state column flipped (the single owner of closed/open); the
-opening's checklist all landed: `docs/PACK_SPEC.md` written (the
-trigger fired — the pack module contract: the admission law's
-enforcement half, the lint families, the rules-block inventory,
-the teleology gate, the AP crosswalk, the authoring loop, the
-growth rungs); the ref-18/ref-20 dives landed (8 files under
-`docs/ref/` — res-1's design backbone + the theft family's
-state-surface confirmation; REFERENCES_DEEP §1 rows flipped); the
-two opening-day questions ANSWERED at the owner's call (D-146):
-the gut-check verdict **NO CUTS** (the 20-seed ablation evidence
-+ the named-consumer trace — the law's cut condition met by none
-of the six; factions' deferred arming has its named consumer,
-world-2's triangle) and the second-setting shape **TRAVEL** (the
-river-artery class, D-130's direction — the universal-core claim
-is tested by the loop change, never the noun swap). The build
-column is drafted on TASKS (world-2 L1 the first row). The
-session's own stop per the owner's «только открытие» answer:
-the reskin starts fresh. What stands:
+**iter-110 DONE: intake-11 — the pressure-city donor routed (the
+owner's «стоит ли чего перенимать и добавлять в референсы?» call,
+D-147).** The donor blueprint (PRESSURE_LIMIT) verified against HEAD
+(every load-bearing citation green; two micro-drifts corrected);
+ADOPTED as parked donor material — the displacement law, the Cooling
+Debt (weather-1's chain+erosion shape, never a second res-1), the
+gauge (res-1's one-meter read surface), legal exclusion (D-134's
+family), objective-function factions (depth-6), the lore hooks
+(D-140) — phases.md §6's intake-11 block + the TASKS `pack-4` row;
+the biome question answered: authored pack data, never a worldgen
+biome (the lost-city fold the cheap form inside any pack, the full
+concept the third pack slot). The external document stays outside
+the repo (the convenience-copy law). The build queue untouched;
+doc-only #2 rides the D-022 exception — no third doc-only planned.
+What stands:
 
 1. **world-2 L1 — the reskin day, the phase-6 gate's own
    instrument (pinned CODE, the next iteration):** the ≤1-day
@@ -631,7 +625,9 @@ the reskin starts fresh. What stands:
    Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
    (the grim pack) + `pack-3` (the sci-fi candidate) at the
    2nd-setting trigger — now UNBLOCKED by the opening (the
-   trigger fired; the ORDER owner decides), `companion-1`,
+   trigger fired; the ORDER owner decides) + `pack-4` (the
+   pressure-city candidate, intake-11/D-147 — the lost-city fold
+   into world-2 L2 its cheap adoption), `companion-1`,
    `mech-2` (rides the next mechanics.py touch), `st-4` and
    `st-5` (the first real consumer decides: a pack wanting
    portable objects, a res-1 sink shape). No other owner

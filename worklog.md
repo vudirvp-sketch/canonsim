@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-110 · 2026-09-13 · intake11 — the owner's chat call, the
+pressure-city donor blueprint (PRESSURE_LIMIT) routed (5 files
+doc-only, zero code, zero corpus price — the intakes-6..10 family
+precedent; one family)
+- verified BEFORE working (1660+1 green, ruff clean, HEAD 140bbcf,
+  Python 3.12.14 the env pin); every load-bearing donor citation
+  checked against HEAD (the convenience-copy law) — all green
+  (D-130, res-1's one-meter read surface, the thermometer minus,
+  D-140, D-134, weather-1 chain+erosion, depth-6/7, name-1,
+  chron-2, retr-1, st-6a, roads-1, D-030); two micro-drifts
+  corrected in D-147 (AP crosswalk rung specified-not-landed; no
+  literal meta.json)
+- the verdict: ADOPTED as parked donor material — the displacement
+  law (the one word-for-word keeper), the Cooling Debt resolved to
+  weather-1's chain+erosion shape (never a second res-1), the gauge
+  = res-1's read surface, legal exclusion = the D-134 application,
+  objective-function factions = depth-6's shape, lore hooks ride
+  templates + cause_hook; the biome question answered (authored
+  pack data, never a worldgen biome; the lost-city fold the cheap
+  form; the full concept = pack-4's third slot)
+- docs: DECISIONS D-147, TASKS the pack-4 row + the iter-110
+  section, phases.md §6 the intake-11 block (+62 lines,
+  substance), STATUS re-pinned, this file. iter-100 evicted here
+  (verified against git in this edit); 10 after. The build queue
+  untouched — world-2 L1 stays pinned CODE on the owner's
+  «приступай». Doc-only #2 (the D-022 exception, the owner's fresh
+  request); no third planned. Caps: STATUS 645 / TASKS 1014 /
+  DECISIONS 72 (41 rows) / phases 1264 — over-cap files ride the
+  documented §6.1 substance precedent, trim at the next gate
+  collapse.
+---
 iter-109 · 2026-09-13 · phase6-open — the phase-6 opening, the
 owner's chat call («…можем его начинать», the iter-55/73 opener
 precedent, D-146): PACK_SPEC written, the ref-18/ref-20 dives, the
@@ -315,29 +346,3 @@ six-file precedent; one family)
   phases 1202 / REFERENCES 326 — over-cap files ride the
   documented §6.1 substance precedent (D-095..D-135), trim at
   the phase-5→6 gate.
----
-iter-100 · 2026-09-12 · intake9 — the owner's chat call, the external
-TTRPG cross-media analysis routed (6 files doc-only, zero code, zero
-corpus price — the intake-8 six-file precedent; one family)
-- verified BEFORE working (1589+1 green, ruff clean, HEAD 1bfcf41);
-  the verdict set is D-134: ~70% confirmed landed/pinned (res-1 =
-  Dark Sun's bookkeeping cure, depth-6 = the faction-mechanics cure,
-  lazy depth = the unused-content cure, the no-op discipline =
-  fail-forward's cure, the balance harness = the untested-statblock
-  cure); the document's three declared contradictions refined into
-  pack laws — the cost law (mechanics own cost, narration owns
-  meaning), the failure law, the corruption law (+ decay-branch,
-  flashback, ambient) — phases.md §6's cost & consequence block
-- deferred owner-gated: the loop-pack / low-magic / soul-scar /
-  belief-as-rules pack patterns (zero engine change, riding
-  world-2/res-1/PACK_SPEC); refused: creature-ecology sim, visible
-  morality meters, history-editing flashbacks, vehicle subsystems
-- docs: DECISIONS D-134, TASKS the intake-9 section, phases.md §6
-  (+56 lines, substance), REFERENCES §10 (+8 pattern rows: DD,
-  Frostpunk, Sekiro, Disco Elysium, PST, Majora, StS/Hades,
-  Kingmaker), STATUS re-pinned, this file. iter-91 evicted here
-  (verified against git in this edit); 10 after. The queue untouched
-  — the phase-5 exit review stays the owner's call. Caps: STATUS
-  ~893 / TASKS 1189 / DECISIONS 100 lines (67 rows) / phases 1122 /
-  REFERENCES 319 — over-cap files ride the documented §6.1 substance
-  precedent (D-095..D-133), trim at the phase-5→6 gate.

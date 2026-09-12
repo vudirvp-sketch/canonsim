@@ -1133,6 +1133,68 @@ read-side surfaces over landed primitives, zero new machinery):
   post-exit-review); the radiant-template authoring shape (the
   step-off-the-road micro-scenario as pack data — rides PACK_SPEC).
 
+The pressure-city donor (intake-11, D-147 — the owner's 2026-09-13
+donor-blueprint call routed; the same consult posture as the minus
+ledger, the cost laws and the encounter catalog: a future pack reads
+this before authoring; the external document stays outside the repo):
+
+- **The displacement law** (the concept's one word-for-word keeper):
+  stabilization is displacement — reducing pressure at one node raises
+  it at another, and part of the cost is never repaid in space, it is
+  deferred into time. The engine's three halves: res-1's closed cycle
+  carries the spatial half (the flows), the Cooling Debt carries the
+  temporal half, diegetic consequence rendering carries the moral half
+  (the thermometer minus — the moral cost never gets a meter).
+- **The Cooling Debt**: a monotonic, publicly-recorded, irreversible
+  aggregate that grows on major thermal events and surfaces as a
+  delayed public follow-up — weather-1's chain + erosion SHAPE over
+  the maclock cadence: time-triggered explicit counter-events, the
+  never-regress law, draw-free ratcheting (no new stream family); NOT
+  a second res-1 engine (D-116/D-119 held — res-1 keeps the actual
+  flows coal/water/metal, the Debt rides the ambient family).
+- **The gauge**: one legible local meter that systematically omits the
+  aggregate cost — exactly res-1's designed read surface (REFERENCES
+  §10 Darkest Dungeon/Frostpunk: integer truth below, one rendered
+  line above). One visible meter only; extending it into a corruption
+  or decay meter is the thermometer minus (consequence-rendered,
+  never scored).
+- **Legal exclusion** (the un-personed layer): districts struck from
+  the registry = the D-134 cost/failure family's application — a
+  state/flag axis (`legal_status: excluded`) + knowledge records
+  documenting the exclusion; a claim filed from an excluded district
+  is a logged, rejected attempt (failure is canon). "DORMANT" stays
+  reserved for the engine's declared-but-unarmed meaning.
+- **Objective-function factions**: the antagonist pair is two agents
+  optimizing different objectives over the same system (minimum
+  immediate deaths vs. minimum 20-year systemic damage) — depth-6's
+  own shape (each faction's dependency → goal → threshold → action →
+  downstream consequence over live member axes), never a scripted
+  thesis; internal splits stay emergent.
+- **The lore hooks** (pack-ready, templates + `provenance.cause_hook`,
+  D-140): the Wall of Disconnections (a recurring template + state
+  flip + cause_hook back to the exclusion event), the three-tap pipe
+  ritual (texture, zero mechanic cost), "he died in a working machine"
+  (a tone-dial phrase, D-030), the Regulator's Archive (a
+  knowledge/retrieval-ready artifact, retr-1).
+- **The biome verdict** (the owner's question): a pressure city is
+  authored pack data, never a worldgen biome — biomes are surface
+  texture over generated sites; the city's substance (rings, legal
+  exclusion, the Debt, the faction triangle) is the Qud split's
+  authored half. The lost-city form is the cheap fold: one
+  struck-from-the-registry location + hooks + un-personed residents
+  inside any pack (world-2 L2 the natural host); the full concept
+  needs the third pack slot (TASKS `pack-4`) — the minimal T1 slice:
+  one district, one boiler, one gauge, three factions, one
+  Cooling-Debt chain, zero core edits.
+- **Refused at the door** (the donor's own cut list, confirmed): the
+  pre-written ending set and the protagonist arc (D-005 — endings are
+  reads over accumulated state, never four authored texts); the
+  thermal-maneuver physics (the second-engine ban); the corruption
+  meter (the thermometer minus). Two micro-drifts in the donor's
+  mapping corrected: the AP crosswalk's enforcement rung is specified,
+  not landed (rides `pack-ci`); tone/prohibition data rides the four
+  files' blocks — there is no literal `meta.json`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

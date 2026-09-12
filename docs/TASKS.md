@@ -26,6 +26,33 @@
 > second-setting shape pinned TRAVEL); the build column is drafted below
 > — world-2 L1 (the reskin day, the gate instrument) is the first row.
 
+### iter-110 · intake-11 donor routing — done (doc-only, the owner's call)
+
+The owner's chat call (a donor blueprint — PRESSURE_LIMIT, a
+pressure-city setting concept: «подумай стоит ли чего перенимать и
+добавлять в референсы или типа того или нет и почему» + the biome /
+lost-city question). Routed per the intake family precedent
+(intakes 6..10): every load-bearing repo citation verified against
+HEAD first (the convenience-copy law) — all green (D-130's province
+pin, res-1's one-meter read surface, the thermometer minus, D-140
+cause_hook, D-134's cost/failure family, weather-1's chain+erosion,
+depth-6/7, name-1, chron-2, retr-1, st-6a, roads-1's gate, D-030's
+tone law); two micro-drifts corrected in the D-row (the AP crosswalk
+rung specified-not-landed; no literal `meta.json`). The verdict:
+ADOPTED as parked donor material — the displacement law + the Cooling
+Debt primitive resolution (weather-1's chain+erosion shape, never a
+second res-1) + the gauge (res-1's read surface) + the legal-exclusion
+application (D-134) + objective-function factions (depth-6) + the lore
+hooks (D-140) land in `docs/blueprint/phases.md` §6's intake-11 block
++ the `pack-4` row below (D-147); the biome question ANSWERED
+(pressure city = authored pack data, never a worldgen biome; the
+lost-city fold is the cheap form, the full concept the third pack
+slot). Verified BEFORE working: 1660+1 green, ruff clean, HEAD
+140bbcf (Python 3.12.14, the env pin). The build queue untouched —
+world-2 L1 stays pinned CODE on the owner's «приступай». Doc-only #2
+after iter-109 — the D-022 exception (the owner's fresh request); no
+third doc-only planned. Zero new KIs.
+
 ### iter-109 · phase-6 opening — done (doc-only, the owner's call)
 
 The owner's chat call («продолжай работу по планам, если ничего кроме
@@ -798,6 +825,7 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   fourth axis. The seed-41 corpus probe flipped with it (renamed
   `arson_on_a_destroyed_yard_is_door_rejected`).
 - `pack-3` Sci-Fi setting candidate (owner sketches; parked, not scheduled): the sketches map mechanic-for-mechanic onto what exists — zero core change by design (INV-3's substance: a second pack requires zero ENGINE changes); blocked until the 2nd-setting gate (phase 6, same trigger as `pack-1`, ROADMAP §6).
+- `pack-4` Pressure-city pack candidate (owner-supplied donor blueprint — PRESSURE_LIMIT, intake-11/D-147; parked, not scheduled): the displacement law ("stabilization is displacement; part of the cost is deferred into time") over landed primitives — the gauge = res-1's one-meter read surface, the Cooling Debt = weather-1's chain+erosion shape (never a second res-1), legal exclusion = the D-134 state/flag + knowledge-record family, factions = depth-6 objective-function pairs, cultures = name-1 profiles + prohibition sets, road traffic = depth-7 condensation, lore hooks = templates + cause_hook (D-140) — zero core change by design; the minimal T1 slice (one district, one boiler, one gauge, three factions, one Cooling-Debt chain) is the mapping's own test. Blocked until a pack slot opens (third pack, or the lost-city fold into world-2 L2 — the ORDER owner decides). The donor document stays outside the repo (the convenience-copy law); the routed distillation: `docs/blueprint/phases.md` §6's intake-11 block.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13
   items are done — status one-liners below; ref-16 (agent-memory-atlas,
