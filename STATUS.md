@@ -1,41 +1,43 @@
-Iteration: iter-108 (`iter-108-fixations` — the owner's direct call
-(«то, что принято и готово к исполнению, зафиксируй где нужно в
-документации или типа того, если итерация легкая — можешь прямо
-сейчас реализовать») on the research session's accepted list: the
-three law rows — the core/pack admission law, the intent_rejected
-health-rate, the per-component latency budget (D-142..D-144), the
-phase-6 opening-day questions pinned on TASKS' parked section, and
-the digest — `scripts/digest.py`, the derived one-pager (D-145);
-verified BEFORE working — 1652+1 green, ruff clean, HEAD 0592719,
-Python 3.12.14 the env pin; 1660+1 green after) ·
-Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
-0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
-iter-102, D-136; the phase table ROADMAP §2 owns the state; phase 6
-opens on the owner's call, the iter-55/73 opener precedent — the
-instruments drafted: world-2/res-1/roads-1 + the opening-day
-questions riding the parked section (D-145), TASKS' phase-6 section
-carrying the iter-104 resolutions riding the rows; cli-pack DONE
-iter-105, resume-1 DONE iter-106, the riders DONE iter-107, the
-fixations DONE iter-108 — nothing recorded stands between the owner
-and the opening; the authoring loop's first rungs (scaffold +
-doctor) stand READY for the reskin day, D-141) ·
+Iteration: iter-109 (`iter-109-phase6-open` — the owner's chat call
+(«продолжай работу по планам, если ничего кроме гейта 6 не осталось,
+можем его начинать») — the iter-55/73 opener precedent firing,
+phase 6 (Packs & worldbuilder) OPENED: PACK_SPEC written (the
+trigger fired), the ref-18/ref-20 dives landed (8 files), the two
+opening-day questions ANSWERED at the owner's call (D-146: the
+gut-check verdict NO CUTS on the 20-seed ablation evidence + the
+named-consumer trace; the second-setting shape TRAVEL — the
+D-130 river-artery direction, level 1 the travel-loop reskin on
+the SRD 5.1 open generic stack); verified BEFORE working — 1660+1
+green, ruff clean, HEAD f3076b0, Python 3.12.14 the env pin; 1660+1
+green after — zero runtime surface touched, doc-only) ·
+Phase: 6 (Packs & worldbuilder) — OPENED (opened iter-109, the
+owner's call, D-146, the iter-55/73 opener precedent; phases 0..5
+all CLOSED: 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4
+iter-65 · 5 iter-102, D-136; the phase table ROADMAP §2 owns the
+state; the build column drafted on TASKS — world-2 L1 the reskin
+day the first row, pinned CODE; res-1's owed dives landed at the
+opening; pack-ci the admission-lint rungs specified in PACK_SPEC
+§5/§6; since-1 rides world-2's condensing travelers) ·
 1660 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-+8 tests — tests/test_digest.py: the crafted-mini-repo value pins +
-the real-repo shape pins, the drift family's shape (a doc reshape
-that breaks the digest parser fails the suite in the same
-iteration); zero corpus price — no runtime surface touched) ·
+zero corpus price — no runtime surface touched, doc-only; the
+digest's own drift pin green through the re-pin: the shapes held) ·
 Date: 2026-09-13 ·
-Scope: `scripts/digest.py` (new — the derived one-pager),
-`tests/test_digest.py` (new, +8), `docs/DECISIONS.md` (D-142..D-145
-appended), `docs/TASKS.md` (the iter-108 section + the opening-day
-questions on the parked section), `docs/AGENT_NAVIGATION.md` (§1:
-the digest row, the tests row's iter-108 clause), `README.md` (the
-repo-map row + the Running digest block), `STATUS.md` (this
-re-pin), `worklog.md` (this iteration's entry; iter-98 evicted per
-the cap) — 8 files, 1 script + 1 test + 6 doc (AGENTS §2.3: the
-objective scope — one coherent fixation landing; noted in worklog).
-The prior iteration's record: iter-107 (riders). The detail lives
-in TASKS + worklog + git.
+Scope: `docs/PACK_SPEC.md` (new — the pack module contract),
+`docs/ref/x4.md` + `stellaris_economy.md` + `distant_worlds.md` +
+`eve_online.md` + `path_of_exile.md` + `albion_online.md` +
+`shadows_of_doubt.md` + `kenshi.md` (new — the ref-18/ref-20
+dives), `docs/REFERENCES_DEEP.md` (§1 rows flipped to landed),
+`docs/SPECS_BACKLOG.md` (PACK_SPEC written), `docs/ROADMAP.md` (§2
+the state column flipped), `docs/TASKS.md` (the phase-6 backlog
+draft + the iter-109 section + the opening-day answers),
+`docs/DECISIONS.md` (D-146), `docs/AGENT_NAVIGATION.md` (§1:
+PACK_SPEC + the ref files), `README.md` (the repo-map row),
+`STATUS.md` (this re-pin), `worklog.md` (this iteration's entry;
+iter-99 evicted per the cap) — 14 files, 9 new + 5 edited, all
+doc (AGENTS §2.3: the objective scope — the opening checklist per
+the law's own list + the dives' one-file-per-source law, noted in
+worklog). The prior iteration's record: iter-108 (fixations). The
+detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -581,95 +583,67 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-108 DONE: the fixations — the research session's accepted
-list is closed (the owner's «то, что принято и готово к исполнению,
-зафиксируй где нужно в документации или типа того, если итерация
-легкая — можешь прямо сейчас реализовать» call).** The three law
-rows stand (D-142 the core/pack admission law, D-143 the
-intent_rejected health-rate, D-144 the per-component latency
-budget), the opening-day questions ride TASKS' parked section (the
-"delete half the mechanics" gut-check + the second-setting shape,
-D-145), and the digest answers the one confirmed real gap
-(`scripts/digest.py` — the derived one-pager over
-STATUS/TASKS/DECISIONS; `python -m scripts.digest`; never a second
-source of truth, its shape pinned by `tests/test_digest.py`).
-Phase 6 (Packs & worldbuilder) still PARKED — the opening is the
-owner's call (the iter-55/73 opener precedent;
-ROADMAP §2's state column is the single owner of closed/open). What
-stands, for the phase-6 opening or the owner's direct calls
-(owner-gated rows are NOT auto-candidates):
+**iter-109 DONE: the phase-6 OPENING (the owner's «продолжай работу
+по планам, если ничего кроме гейта 6 не осталось, можем его
+начинать» call — the iter-55/73 opener precedent).** ROADMAP §2's
+state column flipped (the single owner of closed/open); the
+opening's checklist all landed: `docs/PACK_SPEC.md` written (the
+trigger fired — the pack module contract: the admission law's
+enforcement half, the lint families, the rules-block inventory,
+the teleology gate, the AP crosswalk, the authoring loop, the
+growth rungs); the ref-18/ref-20 dives landed (8 files under
+`docs/ref/` — res-1's design backbone + the theft family's
+state-surface confirmation; REFERENCES_DEEP §1 rows flipped); the
+two opening-day questions ANSWERED at the owner's call (D-146):
+the gut-check verdict **NO CUTS** (the 20-seed ablation evidence
++ the named-consumer trace — the law's cut condition met by none
+of the six; factions' deferred arming has its named consumer,
+world-2's triangle) and the second-setting shape **TRAVEL** (the
+river-artery class, D-130's direction — the universal-core claim
+is tested by the loop change, never the noun swap). The build
+column is drafted on TASKS (world-2 L1 the first row). The
+session's own stop per the owner's «только открытие» answer:
+the reskin starts fresh. What stands:
 
-1. **The phase-6 opening itself (nothing pinned stands between the
-   owner and the call — cli-pack AND resume-1 both landed):** the
-   instruments are drafted (TASKS' parked section, the iter-104
-   resolutions riding the rows): `world-2` (the TWO-LEVEL gate —
-   level 1 the T1 reskin ≤ 1 day on the open generic stack, level 2
-   the deep original province, the D-130 sketch at phases.md §6
-   riding the level-2 half; the st-6a/name-1 arming rides its
-   cultures row; the toponym question RESOLVED — the
-   override-else-derived law: authored wins, else the
-   profile-minted render-side name via a named cosmetic stream),
-   `res-1` (the closed scarcity cycle as pack data — never a second
-   economy engine, D-116/D-119), `roads-1` (mode G emits exits for
-   generated worlds — an MST/k-nearest pass, a D-row when it lands;
-   the READ-PATH fork RESOLVED — the derived L3 read, the pack-wins
-   override through one shared exits read, place-1's invariant
-   relocated into the pass, zero canon births). Phase 6's own exit:
-   a new T1 reskin without core edits, ≤ 1 day. The iter-103 plan
-   audit found the section COHERENT; iter-104 resolved its four
-   detail notes; the opening still owes the PACK_SPEC write
-   (SPECS_BACKLOG's trigger) + the ref-18/ref-20 dives (already
-   recorded on res-1's row) + the stoplist self-check extension to
-   the reskin pack's nouns (the reskin day's own step — the second
-   pack must exist for its vocabulary) + answers to the two
-   opening-day questions now riding the parked section (the
-   gut-check, the second-setting shape — D-145, the review's
-   formalization).
-2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
-   them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
-   runtime inference decision — llama.cpp + GBNF; the dev-time
-   external parser carries mode C until then), `tune-3` (the
-   NPC-movement fork), `st-2` (the identity promotion door — the
-   read-path half landed as tex-1), `scav-1` (offline compaction —
-   tombstones after the chronicler's rollups), `qa-1` mypy + `ci-1`
-   GitHub Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
-   (the grim pack — the PACK_SPEC trigger is phase 6 / the 2nd
-   setting; `pack-3` parked at the same trigger), `companion-1` (the
-   party role — pack data over existing doors), `mech-2` (the
-   introspection output caps — rides the next mechanics.py touch,
-   NOT a standalone iteration), `since-1` (the re-encounter delta —
-   read-side, its gate open; iter-104 routed it INTO phase 6:
-   world-2's condensing travelers the first real consumer), `st-4`
-   (the call budget — the mediator boundary's row, blueprint §1) and
-   `st-5` (containers + entity-birth promotion — unowned by a phase,
-   the first real consumer decides: a pack wanting portable objects,
-   a res-1 sink shape). From the iter-105 chat's risk-synthesis
-   analysis, the cheap riders ALL LANDED iter-107 (the owner's
-   direct call): the blast-radius drift test
-   (tests/test_drift.py), pack-scaffold + pack-doctor
-   (scripts/pack_scaffold.py + scripts/pack_doctor.py — the
-   authoring loop's first rungs, READY for the reskin day),
-   payoff-latency + tension-variance + the --systems-minus
-   ablation arm (core/metrics.py + the balance harness, D-140/
-   D-141 — the drama tuning is now data), the nearest-valid-intent
-   re-ask menu (brief/parser.py), the heartbeat ledger's
-   per-component latency columns (TEST_PLAN §8.5, the gap row
-   until bg-9+/engine-1). Nothing of the list remains. iter-108
-   closed the research session's remainder — the three law rows,
-   the digest, the opening-day questions (D-142..D-145): the
-   review's full list is routed, nothing of it stands unrecorded.
-   The two questions iter-104 left with the owner
-   are closed (D-137/D-138, iter-105); the two opening-day
-   questions now standing (the gut-check, the second-setting shape)
-   are the opening's own rungs, answered at the owner's call, not
-   before it — no other owner question stands open.
-3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
-   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
-   decision input), the bg-7 prose families skipped in the bg-8
-   heartbeat (rate-limit economics), the per-family latency
-   distribution. New track-B ideas enter the backlog on the owner's
-   call only.
-4. **Nothing is pinned.** The natural next step is the phase-6
-   opening call — the owner's alone (the iter-55/73 opener
-   precedent). A further direct small call is equally legal — the
-   ORDER owner decides; TASKS owns composition, never order.
+1. **world-2 L1 — the reskin day, the phase-6 gate's own
+   instrument (pinned CODE, the next iteration):** the ≤1-day
+   authoring budget measured on the open generic stack (SRD 5.1 /
+   Open5e, the §13 starter table, CREDITS sidecar, speed over
+   distinctiveness); a TRAVEL-loop pack (the player journeys
+   between N points, encounters ride the route, st-6a's derived
+   travel prices make geography mechanical; authored toponyms win
+   — the D-132 override-else-derived law); the reskin day's own
+   steps: the stoplist self-check extension to the reskin pack's
+   nouns (the second pack must exist for its vocabulary) + the
+   authoring loop's first live run (scaffold → edit → doctor, the
+   D-141(b) rungs, READY since iter-107) + the ≤1-day clock from
+   first scaffold to green T-suite. Exit: a new T1 reskin without
+   core edits (ROADMAP §2). The clock starts on the owner's
+   «приступай» — a clean measurement wants a fresh day.
+2. **The standing owner-gated rows (unchanged, the phase-6 epoch
+   leaves them live):** `res-1` (the dives landed — the design
+   backbone stands; the row itself opens on the owner's call),
+   `roads-1` (mode G's generated-exits pass), `pack-ci` (the
+   PACK_SPEC §5/§6 admission-lint rungs — the reskin pack the
+   first pack they run against), `since-1` (read-side, rides
+   world-2's condensing travelers), `parse-2`, `engine-1`,
+   `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
+   Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
+   (the grim pack) + `pack-3` (the sci-fi candidate) at the
+   2nd-setting trigger — now UNBLOCKED by the opening (the
+   trigger fired; the ORDER owner decides), `companion-1`,
+   `mech-2` (rides the next mechanics.py touch), `st-4` and
+   `st-5` (the first real consumer decides: a pack wanting
+   portable objects, a res-1 sink shape). No other owner
+   question stands open — the two opening-day questions are
+   closed by D-146.
+3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
+   standing gap rows: the {3–8B, GBNF} arm (owner hardware —
+   engine-1's decision input), the bg-7 prose families skipped
+   in the bg-8 heartbeat (rate-limit economics), the per-family
+   latency distribution. New track-B ideas enter the backlog on
+   the owner's call only.
+4. **Nothing is pinned.** The natural next step is world-2 L1
+   (the reskin day) on the owner's «приступай» — the gate's own
+   clock wants a fresh day. The ORDER owner decides; TASKS owns
+   composition, never order.

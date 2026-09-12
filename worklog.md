@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-109 · 2026-09-13 · phase6-open — the phase-6 opening, the
+owner's chat call («…можем его начинать», the iter-55/73 opener
+precedent, D-146): PACK_SPEC written, the ref-18/ref-20 dives, the
+gut-check verdict NO CUTS, the second-setting shape TRAVEL
+- docs: `docs/PACK_SPEC.md` NEW (the pack module contract — the
+  admission law D-142's enforcement half, the lint families live in
+  `core/pack.py`, the rules-block inventory, the teleology gate,
+  the AP crosswalk, the authoring loop, the growth rungs, §12 the
+  deferred list); SPECS_BACKLOG the row flipped to written
+- docs: 8 ref files NEW (ref-18: x4 + stellaris_economy +
+  distant_worlds — res-1's backbone; ref-20: eve_online +
+  path_of_exile + albion_online + shadows_of_doubt + kenshi — the
+  sink law, spend-consumes, risk premium, the theft state-surface,
+  the desperation loop); REFERENCES_DEEP §1 both rows flipped to
+  landed
+- docs: ROADMAP §2 the phase-6 state column flipped to OPENED
+  (iter-109, D-146); TASKS the phase-6 backlog draft (world-2 L1
+  the first build row, pinned CODE; pack-CI + since-1 riding the
+  rows) + the iter-109 section + the opening-day answers block;
+  DECISIONS D-146 (the opening record: the gut-check evidence
+  table — 20-seed ablation p50s + the named-consumer trace, the
+  no-cuts verdict; the travel shape pin); STATUS re-pin + Next
+  step; NAV §1 + README the PACK_SPEC/ref rows
+- verified BEFORE working 1660+1 green, ruff clean, HEAD f3076b0
+  (Python 3.12.14, the env pin); 1660+1 after, doc-only, zero
+  corpus price; the digest's drift pin green through the re-pin.
+  14 files (9 new + 5 edited, all doc — the opening checklist per
+  STATUS's own list + the dives' one-file-per-source law, the
+  objective scope per AGENTS §2.3); iter-99 evicted in this edit
+  (verified, cap 10 held)
+---
 iter-108 · 2026-09-13 · fixations — the research session's accepted
 list closed (the owner's «зафиксируй где нужно в документации… если
 итерация легкая — реализуй» call; D-142/D-143/D-144/D-145)
@@ -310,42 +341,3 @@ corpus price — the intake-8 six-file precedent; one family)
   ~893 / TASKS 1189 / DECISIONS 100 lines (67 rows) / phases 1122 /
   REFERENCES 319 — over-cap files ride the documented §6.1 substance
   precedent (D-095..D-133), trim at the phase-5→6 gate.
----
-iter-99 · 2026-09-11 · rev5 — the owner-requested pre-gate revision:
-phase-5 verification + the long-run probes + the test actualization
-(5 files — 1 new test + 4 doc sync: the revision + the test
-actualization are one family; AGENTS §2.3: within cap)
-- verified BEFORE working (1586+1 green, ruff clean, HEAD 0ada288);
-  the probe battery OUTSIDE the repo (D-046): storyline exhaustion
-  (seed 125 + a 60-turn tail), year-scale 3 crossings (seed 42),
-  fresh sandbox (seed 7), determinism byte-identical + T2 clean,
-  the 16-action reach catalog, the balance harness 60 seeds both
-  arms (M5 p50 0.79, chains 15-24, stretch max 1 — the phase
-  records hold)
-- findings for the exit review: the director a finite magazine
-  (all six hooks first_time_only, spent within ~2 days, the burn
-  law verified live — new crimes re-seed, nothing releases); the
-  day-2+ steady state = rotations + decay + the maid/relief quiet
-  urgencies + the social mill (rumors decay to zero, leverage
-  expires at 720); the scripted scenario CONSUMED (day-2
-  steal/arson door-reject); year-scale = the weather chain + the
-  census riding a watch-change loop; weather canon-but-not-tale
-  (test_weather's own pin) — no read surface renders the sky yet;
-  the suite's longest committed run had been ~1500 ticks
-- tests/test_longrun.py (new, +3 — the committed pack's first
-  past-a-day runs: the crossing laws at the committed cadence, the
-  day-2 living floor, the idle world's beats; self-comparing, zero
-  corpus price), 1586→1589+1 green, ruff clean (Python 3.12.14,
-  the env pin); a year runs in 0.56 s — the owner's sandbox doubt
-  answered with numbers
-- docs: STATUS re-pinned (header iter-99, KI#84 deleted per AGENTS §5 —
-  closed iter-96a, two iterations past, the mandatory cleanup riding
-  this iteration's STATUS touch; the queue untouched —
-  the exit review still the Next step, now carrying the revision's
-  numbers), NAV §1 the tests row's longrun clause (the row's
-  post-iter-86 lag noted for the gate's staleness pass, not
-  backfilled here — out of scope), README the count sync;
-  TASKS/DECISIONS untouched (the iter-96a audit precedent). iter-90
-  evicted here (verified in this edit, the cap 10 held). Caps:
-  STATUS 895 / TASKS 1160 / DECISIONS 99 — over-cap on substance
-  (§6.1, the D-095..D-133 precedent), trim at the phase-5→6 gate

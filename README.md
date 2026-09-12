@@ -619,9 +619,16 @@ runs) green; no kill-criteria hit. The §5 step-6 staleness pass ran
 collapsed 71→30 (the D-034 families), TASKS 1240→694 (the phase-5
 ledger + the intake sections), the NAV tests-row lag fixed, STATUS
 re-pinned (the Next step: the phase-6 view). **Phase 6 (Packs &
-worldbuilder) PARKED** — opens on the owner's call; the instruments
-drafted: world-2 (the two-level 2nd-world gate), res-1 (the
-scarcity cycle as pack data), roads-1 (mode G emits exits).
+worldbuilder) OPENED** — iter-109, the owner's call (D-146, the
+iter-55/73 opener precedent): `docs/PACK_SPEC.md` written (the pack
+module contract — the phase's law owner), the ref-18/ref-20 economy
+dives landed (`docs/ref/`, res-1's design backbone), the gut-check
+answered (NO CUTS — the 20-seed ablation evidence in D-146), the
+second-setting shape pinned (TRAVEL — the river-artery class, level
+1 the travel-loop reskin on the SRD 5.1 open generic stack); the
+build column: world-2 L1 the reskin day (the gate instrument, ≤1
+day, zero core edits), res-1 (the scarcity cycle as pack data),
+roads-1 (mode G emits exits), pack-ci (PACK_SPEC §5/§6 lint rungs).
 Track B
 alongside: bg-8 LANDED 2026-09-09 (D-109 —
 testproto's live half on the sandbox API engine: the deviation corpus

@@ -15,13 +15,37 @@
 > iter-27–29). Phase 2 closed (gate PASS, iter-35, D-064 — 35/35 boundary
 > validity over 51 combined utterances). Phase 3 (Director) CLOSED —
 > iter-54, D-083. Phase 4 (Knowledge & scene) CLOSED — iter-65, D-094.
-> Phase 5 (Depth) **CLOSED — gate PASS iter-102, D-136** (opened iter-73,
+> Phase 5 (Depth) CLOSED — gate PASS iter-102, D-136 (opened iter-73,
 > the owner's start call, D-105; the full build column landed
 > iter-73..98, every declared row live; the exit criterion "an emergent
 > chain of 3+ events without the player" MET in its worldgen-fed form —
 > the armed committed pack; ROADMAP §2 owns the state). Phase 6 (Packs &
-> worldbuilder) **PARKED — opens on the owner's call** (the iter-55/73
-> opener precedent); the instruments are drafted below.
+> worldbuilder) **OPENED — iter-109, the owner's call** («можем его
+> начинать», the iter-55/73 opener precedent, D-146: PACK_SPEC written,
+> the ref-18/ref-20 dives landed, the gut-check verdict NO CUTS, the
+> second-setting shape pinned TRAVEL); the build column is drafted below
+> — world-2 L1 (the reskin day, the gate instrument) is the first row.
+
+### iter-109 · phase-6 opening — done (doc-only, the owner's call)
+
+The owner's chat call («продолжай работу по планам, если ничего кроме
+гейта 6 не осталось, можем его начинать») — the iter-55/73 opener
+precedent firing: phase 6 (Packs & worldbuilder) OPENED. Verified
+BEFORE working: 1660+1 green, ruff clean, HEAD f3076b0 (Python
+3.12.14, the env pin). The opening checklist per STATUS's own list,
+all landed: (1) `docs/PACK_SPEC.md` written — the trigger fired
+(SPECS_BACKLOG row flipped to written); (2) the ref-18/ref-20 dives
+(8 files: x4, stellaris_economy, distant_worlds, eve_online,
+path_of_exile, albion_online, shadows_of_doubt, kenshi — res-1's
+design backbone + the theft family's state-surface confirmation);
+(3) the gut-check ANSWERED at the owner's call — NO CUTS, the
+evidence table (20-seed ablation arms + the consumer trace) in
+D-146; (4) the second-setting shape ANSWERED — TRAVEL (the D-130
+river-artery direction; level 1 = the travel-loop reskin on the
+SRD 5.1 open generic stack). ROADMAP §2 flipped (the state column,
+the single owner); the build column drafted below; the doc-only
+streak noted (one doc-only iteration, the owner's own call — the
+D-022 exception; world-2 L1 is pinned CODE). Zero new KIs.
 
 ### iter-102 · phase-5 gate — done (verdict: PASS, D-136)
 
@@ -104,53 +128,48 @@ D-105..D-133 family row + phases.md §5)
 > form). Detail: the D-105..D-133 family row + the per-row owners above +
 > worklog + git.
 
-### Phase-6 parked instruments (W4, owner-gated; the phase-6 backlog
-drafts from phases.md §6 at the opening iteration)
+### Phase-6 backlog (OPENED iter-109; drafted from phases.md §6 — the
+> parked rows below are the build column; owner-gated rows stay gated,
+> the ORDER owner decides)
 
-- `resume-1` · the session resume door — done (iter-106, the owner's
-  «приступай к реализации» on the iter-105 chat's risk-analysis
-  priority list, the cli-pack direct-call precedent): `--resume <log>`
-  opens the session OVER an existing log (D-139 — resume is invisible
-  to the log); the run cursor (`core/cursor.py`, the entropy state no
-  fold recovers) + the checkpoint fast-path (the module's first
-  runtime consumer) + the append-mode writer; the landing record: the
-  iter-106 section below.
-- `cli-pack` · the CLI `--pack` flag — done (iter-105, the pinned
-  streak-breaker, D-137/D-138 riding the same call): every
-  pack-loading command + the session take the flag, the tavern
-  default byte-identical, a bad path refused loudly; the stoplist
-  docstring's config claim TRUE (the landing record: the iter-105
-  section below).
 - `world-2` · the second world, the phase-6 gate's own instrument —
-  todo, owner-gated: the TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day
-  (ROADMAP §2's phase-6 exit, measured on the open generic stack), level
-  2 the deep second world (weeks — VISION §7's honest twin): a fantasy
+  **todo, the first build row (pinned CODE, the reskin day)**: the
+  TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day (ROADMAP §2's
+  phase-6 exit, measured on the open generic stack — SRD 5.1/
+  Open5e, CREDITS sidecar, speed over distinctiveness), level 2 the
+  deep second world (weeks — VISION §7's honest twin): a fantasy
   province at pack scale, authored pillars over a generated surface
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
-  profiles arming ride this row's cultures half). The phase-5 exit
-  needed NO second world (the emergent chain rode the armed committed
-  pack). iter-103 audit notes, resolved iter-104 (the owner's
-  fork-analysis call): the CLI `--pack` prerequisite lands at iter-105
-  (`cli-pack` above); the stoplist self-check extension stays the
-  reskin day's own step; the toponym question resolved by the
-  OVERRIDE-ELSE-DERIVED law (the travel price's own family, D-132):
-  authored toponyms WIN (level 1 authors everything — speed is the
-  gate's own shape), else the name MINTS from the declared profiles
-  through a named cosmetic stream (INV-2's law: deterministic per
-  seed, never desyncs canon) at the render surfaces that need it —
-  the dogfooding line held (the province's name IS minted from its
-  profiles, phases.md §6), zero canon events, zero corpus price; no
-  genesis birth, no grammar-trigger extension (the npc-only +
-  condensation-gated grammar stays untouched — the mint is
-  render-side, never a canon materialization).
+  profiles arming ride this row's cultures half). **iter-109's
+  opening answers ride the row (D-146): the second pack runs the
+  TRAVEL main loop** (the river-artery class, the D-130 direction —
+  a reskin twin of the tavern proves nothing; the loop change is
+  the universal-core test) — level 1 = a travel-loop pack on the
+  generic stack (the player journeys between N points, encounters
+  ride the route, st-6a's derived travel prices make geography
+  mechanical), authored toponyms WIN level 1 (the
+  OVERRIDE-ELSE-DERIVED law, D-132: authored toponyms, else the
+  name MINTS from the declared profiles through a named cosmetic
+  stream, INV-2's law). The reskin day's own steps: the stoplist
+  self-check extension to the reskin pack's nouns (the second pack
+  must exist for its vocabulary) + the authoring loop's first live
+  run (scaffold → edit → doctor, the D-141(b) rungs) + the ≤1-day
+  clock from first scaffold to green T-suite. The phase-5 exit
+  needed NO second world (the emergent chain rode the armed
+  committed pack). The st-5 containers door stays the first real
+  consumer's (a pack wanting portable objects, a res-1 sink shape).
 - `res-1` · the resource/economy layer — todo, owner-gated (VISION §6's
   "scarcity" formula word gets its row owner): the closed scarcity cycle
   (source → flow → sink) as PACK DATA — the dependency graph, flows as
   aggregate macro-events on maclock cadence, sinks via the irreversible
   item laws, price spreads as derived read-side values; never a second
   economy engine beside the canon door (D-116; Dune's critical-resource
-  binding the declaration shape, D-119). Deep dives owed at the phase-6
-  opening (ref-18/ref-20, DEEP §1).
+  binding the declaration shape, D-119). **The owed dives LANDED
+  iter-109** (ref-18/ref-20, the TASKS row's own record: the X4
+  dependency-graph backbone + the Stellaris aggregate edge + the DW
+  boundary law; the EVE sink law + the Albion risk premium + the PoE
+  spend-consumes + the SoD state surface + the Kenshi desperation loop
+  — `docs/ref/`, the REFERENCES_DEEP §1 rows flipped).
 - `roads-1` · the generated-exits pass — todo, owner-gated (phase
   6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
   a generated world's edges is impossible); an MST/k-nearest graph over
@@ -172,20 +191,30 @@ drafts from phases.md §6 at the opening iteration)
   the read is runtime L3, the fold never needs it; no event-id
   shifts, no M3/M5 inflation, corpus price zero by construction; the
   `world_formed` outcome block stays as-is).
+- `pack-ci` · the admission-lint rungs — todo, owner-gated (the
+  PACK_SPEC §5/§6 rows: the teleology checks — dead action types,
+  orphan entities, empty intersection-matrix cells,
+  declared-but-unused templates — + the live-char AP crosswalk rows
+  + the price-marker lint): the checks are specified in
+  `docs/PACK_SPEC.md`; the enforcement rung is the phase's own build,
+  landing with the reskin pack's CI day (the reskin pack is the
+  first pack the new rows run against). `qa-1`/`ci-1` (the runner)
+  stay the standing owner-gated rows.
+- `since-1` · the re-encounter delta — todo, owner-gated (read-side,
+  v0.2-grade; routed INTO phase 6 by iter-104): world-2's condensing
+  travelers the first real consumer (the detail lives in the
+  phase-5 tail section below).
 
-> Opening-day questions (iter-108, the risk-synthesis fixation,
-> D-145) — the phase-6 opening checklist's own rungs, riding the
-> parked section: (1) the GUT-CHECK — "delete half the mechanics":
-> every standing mechanic re-earns its row before the build column
-> opens, the ablation arm's measured removable set (urgencies,
-> weather, on_action, reflection, secrets, factions — D-141(c)) the
-> instrument; a mechanic nothing consumes and no arc reads is scope
-> creep — cut at the opening, not after the reskin. (2) The
-> SECOND-SETTING SHAPE — the phase-6 exit tests the "universal core"
-> claim: the second pack must run a DIFFERENT main loop
-> (travel/caravan/station class), not another social hub — a reskin
-> twin proves nothing the tavern did not. The choice itself stays
-> the owner's (the review's contradiction table, D-145).
+> Opening-day questions — ANSWERED iter-109 (D-146, the owner's
+> chat call): (1) the GUT-CHECK verdict is **NO CUTS** — every
+> standing mechanic re-earns its row (the ablation arm's 20-seed
+> evidence + the named-consumer trace in D-146; the law's cut
+> condition — "nothing consumes, no arc reads" — is met by NONE of
+> the six); (2) the SECOND-SETTING SHAPE is **TRAVEL** (the
+> travel/caravan-class river artery, D-130's direction; level 1 =
+> the travel-loop reskin). The questions are closed; the
+> second-setting choice question does not reopen — a future shape
+> change is a new owner call.
 
 > W3 closed without new rows (the calendar binding is maclock-1's own,
   D-116); directions are pack data over the graph today. intake-8's
@@ -415,10 +444,10 @@ never touched by an intake)
   design notes — the substrate CONFIRMED complete, `since-1` the one
   genuine gap, the four contradictions dissolved. Verdict set: D-135.
 
-- `since-1` · the re-encounter delta — the "what happened since last
-  meeting" surface — todo, owner-gated (read-side, v0.2-grade; gate: the
-  phase-5 exit review passed — the gate is now OPEN on the owner's
-  direct call): a per-entity line family on the brief's entity cards
+- `since-1` · the re-encounter delta — the row MOVED to the phase-6
+  backlog above (iter-104 routed it INTO phase 6: world-2's
+  condensing travelers the first real consumer); the standing
+  detail: a per-entity line family on the brief's entity cards
   (BRIEF_SPEC §3.4's extension) + the scene card, derived at assemble
   time from the fold (status-axis deltas, position/membership transfers,
   relation flips since the last co-presence tick) and the knower's own
@@ -426,11 +455,9 @@ never touched by an intake)
   (macro ticks, urgencies, rotations); this row renders it on
   re-encounter. Zero canon writes, zero streams, zero corpus price by
   construction (read-side); the pack declares the line vocabulary. The
-  source text's pattern #16, its own single-highest-value pick. iter-104
-  routing (the owner's fork-analysis call): the surface lands IN phase
-  6 — world-2's condensing travelers are the first real consumer (the
+  source text's pattern #16, its own single-highest-value pick; the
   tavern pack's re-encounter surface is too thin to author the line
-  vocabulary against: the leave/return pair + static NPC placement,
+  vocabulary against (the leave/return pair + static NPC placement,
   the tune-3 finding); the fold deltas it reads all exist today, zero
   pre-opening work owed. Detail: D-135 + phases.md §6's encounter
   block.
