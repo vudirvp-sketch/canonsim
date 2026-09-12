@@ -13,6 +13,31 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-108 · 2026-09-13 · fixations — the research session's accepted
+list closed (the owner's «зафиксируй где нужно в документации… если
+итерация легкая — реализуй» call; D-142/D-143/D-144/D-145)
+- scripts: `scripts/digest.py` NEW (the derived one-pager over
+  STATUS/TASKS/DECISIONS — quoted+truncated source text and counts
+  only, never a second source of truth; read-only, zero engine
+  imports, no wall-clock (STATUS's own Date line), unparsable shapes
+  degrade to (unparsed) never a crash — the doctor's law)
+- tests: `tests/test_digest.py` +8 — the crafted mini-repo's value
+  pins + the real repo's shape pins (the drift family's shape: a doc
+  reshape that breaks the parser fails the suite same-iteration) +
+  the no-wall-clock source scan + the missing-doc loud refusal;
+  1660+1 green, ruff clean
+- docs: D-142 the core/pack admission law (core iff WHAT mechanics
+  exist, pack iff HOW they behave — the three-layer fence named);
+  D-143 the intent_rejected health-rate (≥90% delivery, breach = a
+  KI before grammar tuning); D-144 the latency budget
+  (per-component, sim-side ≤ 10 ms p95 over measured margin,
+  generate 6.3 s/20.4 s); D-145 the family row (the digest's
+  derived-only law + the opening-day questions); TASKS the questions
+  on the parked section + the iter-108 section; NAV §1 + README the
+  digest rows; STATUS re-pin + Next step. 8 files (1 script + 1
+  test + 6 doc — one coherent fixation landing, the objective
+  scope); iter-98 evicted in this edit (verified, cap 10 held)
+---
 iter-107 · 2026-09-12 · riders — the risk-synthesis list's five
 remaining riders, the owner's direct call (D-140/D-141; the drama
 tuning becomes data, the authoring loop gets its first two rungs)
@@ -324,58 +349,3 @@ actualization are one family; AGENTS §2.3: within cap)
   evicted here (verified in this edit, the cap 10 held). Caps:
   STATUS 895 / TASKS 1160 / DECISIONS 99 — over-cap on substance
   (§6.1, the D-095..D-133 precedent), trim at the phase-5→6 gate
----
-iter-98 · 2026-09-11 · weather1 — the ambient weather family + canon
-erosion (the queue's live row after st-6a, TASKS' own letter; 27
-files — 4 code + 2 content + 1 new test file + ~20 corpus re-pins +
-6 doc sync + this worklog + STATUS: the family + the arming + the
-corpus price are ONE row, the TASKS row's own three halves; AGENTS
-§2.3: 27 > 5-6, the objective scope noted here)
-- core/weather.py (new) + core/rng.py + core/loop.py: the chain —
-  one roll per macro crossing on the isolated `weather:chain` stream
-  (the D-079 family law's SEVENTH member, singleton; the
-  fingerprint never sees a weather roll), a self-roll suppresses the
-  event (KI#13) while still advancing the stream; the current
-  weather is the FOLD (L3), no knowledge (the ambient law), no
-  state_changes; the SEEDED storm consequence (the director's
-  buffer through the existing door, the D-082 pattern); the EROSION
-  (the fire follow-ups' shape): SEEDED follow-ups whose commits
-  revert promoted canon flags (the rain washes the fire layer's
-  smoke — an explicit counter-event, EVENT_SCHEMA §4; idempotent on
-  state; the never-regress law floors a late crossing's deferral at
-  the entry tick — the batch-crossing crash found live and fixed the
-  same iteration).
-- core/pack.py: the `_weather` lint — the pairing law (weather
-  without time.macro is dead data, one direction), the identity law
-  (the event type ≠ the macro turn's), the weights/hooks/erosion
-  closures (the prop must be a transition follow-up flag), the
-  reachability law; `_transition_flags` the closure's helper.
-- content/tavern_pack: THE COMMITTED MACRO ARMING (the primitive's
-  first consumer) — time.macro at the year-scale cadence 518400
-  (one year per crossing, the genesis horizon continued) + the
-  weather block (clear/overcast/rain/storm; rain's smoke wash; the
-  storm's drunk-murmur hook) + the three template lines.
-- tests/test_weather.py (new, +22 — the unit laws, the crafted-pack
-  integration, the corpus price both-arms) — 1564→1586+1 green,
-  ruff clean (3.12.14, the env pin; the armed twin double-run
-  byte-identical). Corpus price, measured both arms: the T1 golden
-  + day1_theft BYTE-IDENTICAL (the crossings beyond every script's
-  horizon); day1_full pays the LOD's ONE-GATE engagement alone
-  (depth-3's designed price, deferred since iter-91 — the warm
-  ring's beat events wait for crossings: 61→56 events, the check's
-  dice moved with the draw sequence, ~20 test files + narrator
-  corpus 5 cases + parser corpus 1 case re-pinned; the weather
-  block itself adds ZERO corpus events; the fingerprint EQUAL both
-  arms). The INV-3 stoplist caught three fresh-prose nouns (the
-  fire follow-ups' naming) — fixed before commit.
-- docs: DECISIONS D-133, TASKS weather-1 done, phases.md §5 the
-  weather paragraph, NAV §1 the core row, README (the st-6a + weather
-  map rows + the status paragraphs + the macro-armed flip — the
-  iter-96a sync-gap family closed in passing), STATUS re-pinned
-  (the queue: EMPTY of live candidates — the phase-5 exit review the
-  owner's call, the D-034 collapse + the §5 staleness pass owed at
-  the gate). iter-89 evicted here (verified against git in this
-  edit); 10 after. Caps: STATUS 907 / TASKS 1160 / DECISIONS 99 lines
-  (44 rows) / phases.md 1066 / README 786 — over-cap on substance
-  (§6.1, the standing precedent), trim at the phase-5→6 gate
-  (D-128's own rows).

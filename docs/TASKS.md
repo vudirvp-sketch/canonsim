@@ -173,9 +173,57 @@ drafts from phases.md §6 at the opening iteration)
   shifts, no M3/M5 inflation, corpus price zero by construction; the
   `world_formed` outcome block stays as-is).
 
+> Opening-day questions (iter-108, the risk-synthesis fixation,
+> D-145) — the phase-6 opening checklist's own rungs, riding the
+> parked section: (1) the GUT-CHECK — "delete half the mechanics":
+> every standing mechanic re-earns its row before the build column
+> opens, the ablation arm's measured removable set (urgencies,
+> weather, on_action, reflection, secrets, factions — D-141(c)) the
+> instrument; a mechanic nothing consumes and no arc reads is scope
+> creep — cut at the opening, not after the reskin. (2) The
+> SECOND-SETTING SHAPE — the phase-6 exit tests the "universal core"
+> claim: the second pack must run a DIFFERENT main loop
+> (travel/caravan/station class), not another social hub — a reskin
+> twin proves nothing the tavern did not. The choice itself stays
+> the owner's (the review's contradiction table, D-145).
+
 > W3 closed without new rows (the calendar binding is maclock-1's own,
   D-116); directions are pack data over the graph today. intake-8's
   setting sketch rides world-2's level-2 half (D-130).
+
+### iter-108 · fixations — done
+
+The owner's direct call («то, что принято и готово к исполнению,
+зафиксируй где нужно в документации или типа того, если итерация
+легкая — можешь прямо сейчас реализовать») on the research
+session's accepted list — the uploaded review (written at
+iter-106) re-checked against the live repo: iter-107 had already
+landed ~80% of its priority list; the remainder was five real
+items, four of them doc fixations and one light build. The
+landings: (1) the three law rows D-142/D-143/D-144 — the core/pack
+admission law (priority action 1's missing half: the blast-radius
+drift test landed iter-107, the written law now stands with the
+existing three-layer fence as its named enforcement), the
+intent_rejected health-rate (action 5's first half: ≥90%
+delivery, the breach = a KI BEFORE grammar tuning, the heartbeat
+census the instrument), the per-component latency budget (action
+5's second half: §8.5's component cut gets its numbers — sim-side
+≤ 10 ms p95 envelopes over measured margin, generate 6.3 s p95 /
+20.4 s ceiling, the turn-based end-to-end 8 s; never a single
+end-to-end number); (2) the opening-day questions pinned on the
+parked section above (the review's general-risk formalization: the
+"delete half the mechanics" gut-check + the second-setting shape —
+the phase-6 opening and the setting choice stay the owner's
+calls); (3) the digest (`scripts/digest.py` +
+`tests/test_digest.py`, D-145) — the one confirmed real gap, built
+in the same call: the derived one-pager (STATUS/TASKS/DECISIONS →
+the human-readable summary), read-only, zero engine imports, no
+wall-clock, (unparsed)-degradation never a crash; the
+crafted-mini-repo + real-repo-shape test law (value pins for the
+fixture, shape pins for the repo — the digest of iter-109 must not
+fail iter-108's test). 1660+1 green (+8), ruff clean. 8 files —
+1 script + 1 test + 6 doc (AGENTS §2.3: the objective scope — one
+coherent fixation landing, noted in worklog). Zero new KIs.
 
 ### iter-107 · riders — done
 

@@ -1,61 +1,41 @@
-Iteration: iter-107 (`iter-107-riders` — the owner's direct call
-(«доделывай остальное с прошлой итерации: осталось пункты 2–6»): the
-risk-synthesis priority list's remaining cheap riders, the five that
-existed only in the iter-105 chat's context — the blast-radius drift
-test, pack-scaffold + pack-doctor, payoff-latency +
-tension-variance + the `--systems-minus` ablation, the
-nearest-valid-intent re-ask menu, the heartbeat ledger's
-per-component latency columns; verified BEFORE working — 1611+1
-green, ruff clean, HEAD 8ee2060, Python 3.12.14 the env pin; 1652+1
-green after) ·
+Iteration: iter-108 (`iter-108-fixations` — the owner's direct call
+(«то, что принято и готово к исполнению, зафиксируй где нужно в
+документации или типа того, если итерация легкая — можешь прямо
+сейчас реализовать») on the research session's accepted list: the
+three law rows — the core/pack admission law, the intent_rejected
+health-rate, the per-component latency budget (D-142..D-144), the
+phase-6 opening-day questions pinned on TASKS' parked section, and
+the digest — `scripts/digest.py`, the derived one-pager (D-145);
+verified BEFORE working — 1652+1 green, ruff clean, HEAD 0592719,
+Python 3.12.14 the env pin; 1660+1 green after) ·
 Phase: 6 (Packs & worldbuilder) — PARKED (phases 0..5 all CLOSED:
 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
 iter-102, D-136; the phase table ROADMAP §2 owns the state; phase 6
 opens on the owner's call, the iter-55/73 opener precedent — the
-instruments drafted: world-2/res-1/roads-1, TASKS' phase-6 section
+instruments drafted: world-2/res-1/roads-1 + the opening-day
+questions riding the parked section (D-145), TASKS' phase-6 section
 carrying the iter-104 resolutions riding the rows; cli-pack DONE
-iter-105, resume-1 DONE iter-106, the riders DONE iter-107 — nothing
-recorded stands between the owner and the opening; the authoring
-loop's first rungs (scaffold + doctor) now stand READY for the
-reskin day, D-141) ·
-1652 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-+41 tests, the count 1611→1652 — tests/test_drift.py the four-
-direction systems⇔metrics contract, tests/test_pack_tools.py the
-scaffold + doctor laws, +14 payoff-latency/tension units, +6 menu
-families, +7 harness arm tests, +5 the drift direction pins; the schema 0.1→0.2 additive bump
-D-140 — the T1 golden fixture regenerated in the same iteration per
-TEST_PLAN §3, the header's version line the whole corpus price) ·
-Date: 2026-09-12 ·
-Scope: `core/intent.py` (IntentData.origin_hook — the discharged
-hook's tag rides the intent), `core/director.py` (_intent stamps it),
-`core/loop.py` (_provenance — cause_hook on released events, both
-intent sites + the autonomous-enqueue pass-through),
-`core/metrics.py` (payoff_latencies + beat_tension_profile, D-140/
-D-141), `schemas/event.schema.json` (0.2: provenance.cause_hook,
-additive), `brief/parser.py` (the nearest-valid menu — Levenshtein
-ranking over the refusal families), `scripts/balance_harness.py`
-(the payoff + tension blocks, the --systems-minus ablation arm,
-ABLATABLE the measured set), `scripts/pack_scaffold.py` (new — the
-authoring loop's first rung), `scripts/pack_doctor.py` (new — the
-lint's fix-hint surface),
-`tests/test_drift.py` (new, +5), `tests/test_pack_tools.py` (new,
-+9), `tests/test_metrics.py` (+9), `tests/test_parser.py` (+6),
-`tests/test_balance_harness.py` (+7), `tests/test_smoke.py` (the
-$id pin 0.2), `tests/fixtures/plumbing_smoke_seed42.jsonl`
-(regenerated — the header's version line alone),
-`docs/EVENT_SCHEMA.md` (§1 example 0.2, §7 cause_hook),
-`docs/PARSER_SPEC.md` (§4 the menu law), `docs/TEST_PLAN.md` (§6 the
-three new measurement surfaces + §8.5 the per-component latency
-columns), `docs/TASKS.md` (the iter-107 section), `docs/DECISIONS.md`
-(D-140, D-141), `docs/AGENT_NAVIGATION.md` (§1: the two new tools,
-the tests rows, the metrics segment, the fixture regen note),
-`STATUS.md` (this re-pin), `worklog.md` (this iteration's entry;
-iter-97 evicted per the cap) — 25 files, 4 code + 1 schema + 1 brief +
-3 scripts + 6 test + 1 fixture + 9 doc (AGENTS §2.3: the objective
-scope — the owner
-called five riders in one shot; noted in worklog). The prior
-iteration's record: iter-106 (resume). The detail lives in TASKS +
-worklog + git.
+iter-105, resume-1 DONE iter-106, the riders DONE iter-107, the
+fixations DONE iter-108 — nothing recorded stands between the owner
+and the opening; the authoring loop's first rungs (scaffold +
+doctor) stand READY for the reskin day, D-141) ·
+1660 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
++8 tests — tests/test_digest.py: the crafted-mini-repo value pins +
+the real-repo shape pins, the drift family's shape (a doc reshape
+that breaks the digest parser fails the suite in the same
+iteration); zero corpus price — no runtime surface touched) ·
+Date: 2026-09-13 ·
+Scope: `scripts/digest.py` (new — the derived one-pager),
+`tests/test_digest.py` (new, +8), `docs/DECISIONS.md` (D-142..D-145
+appended), `docs/TASKS.md` (the iter-108 section + the opening-day
+questions on the parked section), `docs/AGENT_NAVIGATION.md` (§1:
+the digest row, the tests row's iter-108 clause), `README.md` (the
+repo-map row + the Running digest block), `STATUS.md` (this
+re-pin), `worklog.md` (this iteration's entry; iter-98 evicted per
+the cap) — 8 files, 1 script + 1 test + 6 doc (AGENTS §2.3: the
+objective scope — one coherent fixation landing; noted in worklog).
+The prior iteration's record: iter-107 (riders). The detail lives
+in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -601,25 +581,20 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-106 DONE: `resume-1` — the session resume door landed (the
-owner's «приступай к работе и реализации» on the risk-synthesis
-priority list).** The law (D-139): resume is invisible to the log —
-`--resume <log>` opens the session over an existing log and the
-interrupted run continues byte-identically to the uninterrupted
-counterfactual (pinned at every split point, directors on and off).
-The mechanism: the run cursor (`core/cursor.py`, NEW — the entropy
-state no fold recovers: silent urgency/weather/faction draws; bank
-positions + director run marks + clock/crossing cursors, bound to
-the log by event_count + the prefix digest, pinned by the session at
-every clean drain boundary) + the checkpoint fast-path
-(`Simulator.resume` — `core/checkpoint.py`'s first runtime consumer;
-absent = the plain fold, present-but-wrong = loud) + the append-mode
-writer (`core/log.py` — the same canon door: read_log rides the
-construction, the env-pin + schema-version header laws, committed
-lines never rewritten, INV-5). 1611+1 green, ruff clean, corpus price
-zero. The scene ledger stays session-scoped through a resume (D-049
-— the FAQ's line below). Phase 6 (Packs & worldbuilder) still PARKED
-— the opening is the owner's call (the iter-55/73 opener precedent;
+**iter-108 DONE: the fixations — the research session's accepted
+list is closed (the owner's «то, что принято и готово к исполнению,
+зафиксируй где нужно в документации или типа того, если итерация
+легкая — можешь прямо сейчас реализовать» call).** The three law
+rows stand (D-142 the core/pack admission law, D-143 the
+intent_rejected health-rate, D-144 the per-component latency
+budget), the opening-day questions ride TASKS' parked section (the
+"delete half the mechanics" gut-check + the second-setting shape,
+D-145), and the digest answers the one confirmed real gap
+(`scripts/digest.py` — the derived one-pager over
+STATUS/TASKS/DECISIONS; `python -m scripts.digest`; never a second
+source of truth, its shape pinned by `tests/test_digest.py`).
+Phase 6 (Packs & worldbuilder) still PARKED — the opening is the
+owner's call (the iter-55/73 opener precedent;
 ROADMAP §2's state column is the single owner of closed/open). What
 stands, for the phase-6 opening or the owner's direct calls
 (owner-gated rows are NOT auto-candidates):
@@ -646,7 +621,10 @@ stands, for the phase-6 opening or the owner's direct calls
    (SPECS_BACKLOG's trigger) + the ref-18/ref-20 dives (already
    recorded on res-1's row) + the stoplist self-check extension to
    the reskin pack's nouns (the reskin day's own step — the second
-   pack must exist for its vocabulary).
+   pack must exist for its vocabulary) + answers to the two
+   opening-day questions now riding the parked section (the
+   gut-check, the second-setting shape — D-145, the review's
+   formalization).
 2. **The standing owner-gated rows (unchanged, the phase-5 epoch left
    them live):** `parse-2` (buttons + multi-intent), `engine-1` (the
    runtime inference decision — llama.cpp + GBNF; the dev-time
@@ -676,9 +654,15 @@ stands, for the phase-6 opening or the owner's direct calls
    D-141 — the drama tuning is now data), the nearest-valid-intent
    re-ask menu (brief/parser.py), the heartbeat ledger's
    per-component latency columns (TEST_PLAN §8.5, the gap row
-   until bg-9+/engine-1). Nothing of the list remains. The two questions iter-104 left with the owner
-   are closed (D-137/D-138, iter-105) — no owner question stands
-   open.
+   until bg-9+/engine-1). Nothing of the list remains. iter-108
+   closed the research session's remainder — the three law rows,
+   the digest, the opening-day questions (D-142..D-145): the
+   review's full list is routed, nothing of it stands unrecorded.
+   The two questions iter-104 left with the owner
+   are closed (D-137/D-138, iter-105); the two opening-day
+   questions now standing (the gut-check, the second-setting shape)
+   are the opening's own rungs, answered at the owner's call, not
+   before it — no other owner question stands open.
 3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
