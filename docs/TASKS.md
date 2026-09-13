@@ -24,7 +24,54 @@
 > начинать», the iter-55/73 opener precedent, D-146: PACK_SPEC written,
 > the ref-18/ref-20 dives landed, the gut-check verdict NO CUTS, the
 > second-setting shape pinned TRAVEL); the build column is drafted below
-> — world-2 L1 (the reskin day, the gate instrument) is the first row.
+> — world-2 L1 (the reskin day, the gate instrument) LANDED iter-112
+> (D-149: the exit criterion's own form met by measurement — the clock
+> 14m24s, zero core edits; the gate verdict itself stays the owner's).
+
+### iter-112 · world-2 L1 — the reskin day — done (the owner's «приступай»)
+
+The owner's chat call («да приступай к работе уже» — the pinned CODE
+row's own start word, STATUS Next step's formula; the clock's start
+condition met). The landing, end to end: **`content/road_pack/`** — the
+TRAVEL-loop reskin of the tavern contract on the open generic stack
+(SRD 5.1 nouns, CC-BY-4.0, `CREDITS.md` the sidecar; ids stay per the
+scaffold law, surfaces renamed — the river road: the ferry inn / the
+stockade yard / the tollhouse / the ferry quay; Odo the tollman, the
+drunk boatman, the ferry girl; the storm lantern, the toll purse, the
+jug of mead, the cudgel, the mooring hawser; the quay throng); the
+loop change: `actions.json` move → `ticks: "edge"` (the travel twin),
+`rules.json::travel` the st-6a arming (step 150 / climb 60 / river 45,
+NO overrides — the derived law prices every road; all five locations
+claimed at the 6×6 lattice's row-2 sites 12–16, `place.max_edge_span`
+1→2; the measured prices 150/210/300/360); the `world_history`
+formed arm binds the five claim slots
+(terrain/near_river/ground/watch_height/far_region);
+`scene_line_fields` [layout, terrain, near_river, ground,
+far_region]. **The authoring loop's first live run** (the D-141(b)
+rungs): scaffold → edit → doctor → green — one lint refusal caught
+(the travel block's closed vocabulary carries no `notes` key) and
+fixed in the same edit; the doctor's fix-hint surface worked as
+designed. **The stoplist self-check extension** (PACK_SPEC §9's own
+step): ROAD_STOPLIST (20 nouns) joins the INV-3 audit vocabulary —
+zero engine collisions (pre-grepped), the self-check split per pack.
+**The T1 twin** (`tests/test_t1_reskin.py`, +7): byte-identity, the
+golden-regen guard + the schema pin (the tavern T1's exact shape over
+the second pack), the fingerprint-0 pin (edge-priced moves draw
+nothing — INV-2-clean by construction, measured), the derived-prices
+route pin (every move completion = accept-t + travel_ticks), the
+mid-travel encounters pin (the watch change + knowledge transfer at
+t=360 strictly inside the 180→540 leg — D-038), +
+`tests/playscripts/road_smoke.json` +
+`tests/fixtures/road_smoke_seed42.jsonl`. **The clock: 14 min 24 s**
+from the first scaffold (23:52:40 UTC) to the green T-suite (00:07:04
+UTC) — reading/design before the scaffold excluded (the clock's own
+definition); the ≤1-day budget met at ~1/60th. **Zero core edits**
+(git-verified: no byte under core/ sim/ brief/ render/ cli/ scripts/ —
+the universal-core claim measured in ROADMAP §2's exit form). 1660+8
+→ 1668+1 green, ruff clean, zero tavern corpus price (the road
+fixture is new canon, the tavern fixtures untouched). The phase-6
+gate verdict (the exit criterion now MET by measurement) stays the
+owner's call — D-149 records the instrument, not the gate.
 
 ### iter-111 · intake-12 presentation-consolidation routing — done (doc-only, the owner's call)
 
@@ -195,10 +242,15 @@ D-105..D-133 family row + phases.md §5)
 > the ORDER owner decides)
 
 - `world-2` · the second world, the phase-6 gate's own instrument —
-  **todo, the first build row (pinned CODE, the reskin day)**: the
-  TWO-LEVEL gate — level 1 the T1 reskin ≤ 1 day (ROADMAP §2's
-  phase-6 exit, measured on the open generic stack — SRD 5.1/
-  Open5e, CREDITS sidecar, speed over distinctiveness), level 2 the
+  **L1 done (iter-112, D-149 — the reskin day landed: `content/road_pack/`
+  the TRAVEL-loop reskin on the open generic stack (SRD 5.1 nouns,
+  CREDITS sidecar), the clock 14 min 24 s from first scaffold to green
+  T-suite, ZERO core edits — git-verified; the T1 twin
+  `tests/test_t1_reskin.py` + the golden fixture + the stoplist
+  extension (ROAD_STOPLIST); the phase-6 exit criterion "a new T1
+  reskin without core edits, ≤ 1 day" MET by measurement — the gate
+  verdict itself the owner's call, ROADMAP §5/AGENTS §8); L2 todo,
+  owner-gated** — the TWO-LEVEL gate, level 2 the
   deep second world (weeks — VISION §7's honest twin): a fantasy
   province at pack scale, authored pillars over a generated surface
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
@@ -206,17 +258,13 @@ D-105..D-133 family row + phases.md §5)
   opening answers ride the row (D-146): the second pack runs the
   TRAVEL main loop** (the river-artery class, the D-130 direction —
   a reskin twin of the tavern proves nothing; the loop change is
-  the universal-core test) — level 1 = a travel-loop pack on the
-  generic stack (the player journeys between N points, encounters
-  ride the route, st-6a's derived travel prices make geography
-  mechanical), authored toponyms WIN level 1 (the
-  OVERRIDE-ELSE-DERIVED law, D-132: authored toponyms, else the
-  name MINTS from the declared profiles through a named cosmetic
-  stream, INV-2's law). The reskin day's own steps: the stoplist
-  self-check extension to the reskin pack's nouns (the second pack
-  must exist for its vocabulary) + the authoring loop's first live
-  run (scaffold → edit → doctor, the D-141(b) rungs) + the ≤1-day
-  clock from first scaffold to green T-suite. The phase-5 exit
+  the universal-core test) — level 1 LANDED as the travel-loop pack
+  (the player journeys between the five waypoints, encounters ride
+  the route, st-6a's derived travel prices make geography
+  mechanical: 150/210/300/360 ticks over the four edges), authored
+  toponyms WIN level 1 (the OVERRIDE-ELSE-DERIVED law, D-132 — the
+  ferry inn / the tollhouse / the ferry quay, the Ashen). The
+  phase-5 exit
   needed NO second world (the emergent chain rode the armed
   committed pack). The st-5 containers door stays the first real
   consumer's (a pack wanting portable objects, a res-1 sink shape).

@@ -14,6 +14,12 @@ the generic action names of MVP_SCOPE §7) stay legal. Pack data
 the second test keeps the list tied to the pack's actual vocabulary so it
 cannot rot.
 
+iter-112 (world-2 L1, the reskin day): the stoplist's **self-check
+extension** — the second pack exists, so its nouns join the INV-3 audit
+vocabulary (PACK_SPEC §9's own step; the ROAD_STOPLIST below). The
+engine-side grep reads BOTH lists; the self-check splits per pack so
+each family stays tied to its own data.
+
 Periphery scope note (iter-6a audit, D-046): `render/`, `cli/` and
 `scripts/` are OUTSIDE the stoplist by design — they legitimately carry
 pack path strings (`content/tavern_pack`), CLI help-text examples and
@@ -21,6 +27,12 @@ docstring prose; INV-3's substance is the ENGINE (`core/` + `sim/` +
 `brief/` — the scope grew with the mediator circuit at iter-10a, KI#38)
 hardcoding setting data (a second pack must require zero engine changes —
 the renderer is template-driven, the CLI takes the pack dir as config).
+
+iter-112 (world-2 L1, the reskin day): the stoplist's **self-check
+extension** — the second pack exists, so its nouns join the INV-3 audit
+vocabulary (PACK_SPEC §9's own step; the ROAD_STOPLIST below). The
+engine-side grep reads BOTH lists; the self-check splits per pack so
+each family stays tied to its own data.
 """
 
 from __future__ import annotations
@@ -37,6 +49,17 @@ STOPLIST: tuple[str, ...] = (
     "guard", "purse", "tavern", "doren", "drunkard", "barkeep", "maid",
     "lamp", "ale", "mug", "club", "rope", "market", "street", "backyard",
     "guardroom", "crowd", "woodpile", "hearth", "arson",
+)
+
+# Setting nouns of road_pack (iter-112, the world-2 L1 reskin): the
+# second pack's own vocabulary — the generic-stack nouns (SRD 5.1,
+# CC-BY-4.0, content/road_pack/CREDITS.md) plus the authored toponyms.
+# Shared tavern words (rope, hearth) stay in the tavern list; this list
+# carries what is DISTINCTIVELY the road's.
+ROAD_STOPLIST: tuple[str, ...] = (
+    "ferry", "quay", "toll", "tollhouse", "inn", "innkeeper", "boatman",
+    "lantern", "cudgel", "hawser", "mead", "throng", "jetty", "stockade",
+    "timber", "cask", "odo", "ashen", "wayfarer", "gable",
 )
 
 
@@ -56,7 +79,10 @@ def source_files() -> list[Path]:
 
 
 def test_no_setting_words_in_engine_code() -> None:
-    patterns = [(word, _segment_pattern(word)) for word in STOPLIST]
+    patterns = [
+        (word, _segment_pattern(word))
+        for word in (*STOPLIST, *ROAD_STOPLIST)
+    ]
     violations: list[str] = []
     for path in source_files():
         text = path.read_text(encoding="utf-8")
@@ -81,3 +107,20 @@ def test_stoplist_words_actually_belong_to_the_pack() -> None:
         if not _segment_pattern(word).search(pack_text)
     ]
     assert not missing, f"stoplist words absent from the pack data: {missing}"
+
+
+def test_road_stoplist_words_actually_belong_to_the_road_pack() -> None:
+    """The self-check extension (iter-112): the road stoplist tracks the
+    SECOND pack's setting vocabulary — every word occurs in the road
+    pack's data as a full segment (ids included)."""
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted((REPO / "content" / "road_pack").glob("*.json"))
+    )
+    missing = [
+        word for word in ROAD_STOPLIST
+        if not _segment_pattern(word).search(pack_text)
+    ]
+    assert not missing, (
+        f"road stoplist words absent from the road pack data: {missing}"
+    )

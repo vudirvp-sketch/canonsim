@@ -1,56 +1,60 @@
-Iteration: iter-111 (`iter-111-intake12` — the owner's chat call
-(«глубоко проанализируй и подумай над документом
-brief-ir-vs-presentation-summary.md => по пунктам разреши противоречия
-и выдай вердикты предложениям с обоснованием» — a multi-audit
-consolidation of the Brief-IR-vs-presentation-layer question): routed
-per the intake family precedent — every load-bearing repo citation
-verified against HEAD first (the convenience-copy law; BRIEF_SPEC
-§7.1/§9, PACK_SPEC §6's AP crosswalk, TECH_NOTES §1/§2/§10/§11, the
-bg-8 gap rows, engine-1/st-4, D-022/D-055) plus two session
-fact-checks (Rule 9 runners outside the repo: the live mode-A call
-dump — anchor/regen ride the model-facing bytes literally, query/
-retrieval mode-B-only; the day1_full truncation census — zero markers
-fire, 208–274 ws-tokens vs total_hard 800); the verdict set (8 rows,
-D-148): the "60–70% ready" frame REFUSED (a contract without a
-consumer has unknown requirements — consumer-measured,
-sequenced-by-design), the narrator_protocol noise re-owned (the
-operator's reply-contract signal at dev-time, zero measured leakage
-at 27B, fires at engine-1 where GBNF owns it), [truncated:N] STAYS
-(the anti-silent-drop invariant; the A/B rides the weak arm),
-condensation confirmed as the fold pattern (the belief lines ARE
-in-brief condensation — never tracery, the iter-43 flat-key law),
-Lost-in-the-Middle refused as a requirement driver (MECW owns the
-geometry), the presentation spec written at the engine-1 trigger FROM
-weak-arm results absorbing st-4 as a thin mapping table over the 8
-blocks (the D-055 pattern's fourth instance), the behavioral layer
-ANSWERED by PACK_SPEC §6 (AP-8/AP-9, enforcement rides pack-ci), the
-weak-arm-vs-contract dichotomy DISSOLVED (the run IS the requirements
-measurement) — landing in the TASKS presentation-1 row (owner-gated,
-engine-1's decision-input child) + phases.md §6's intake-12 block;
-three micro-drifts corrected (the trait chain IS specified; the
-belief lines/card markers already condense; the anti-invention
-directives are pack data by INV-3's own law); verified BEFORE
-working — 1660+1 green, ruff clean, HEAD 2ebd122, Python 3.12.14 the
-env pin; 1660+1 green after — zero runtime surface touched, doc-only) ·
-Phase: 6 (Packs & worldbuilder) — OPENED (opened iter-109, the
-owner's call, D-146, the iter-55/73 opener precedent; phases 0..5
-all CLOSED: 0 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4
-iter-65 · 5 iter-102, D-136; the phase table ROADMAP §2 owns the
-state; the build column drafted on TASKS — world-2 L1 the reskin
-day the first row, pinned CODE on the owner's «приступай»; res-1's
-owed dives landed at the opening; pack-ci the admission-lint rungs
-specified in PACK_SPEC §5/§6; since-1 rides world-2's condensing
-travelers; iter-110's and iter-111's intakes touched no build row —
-the queue unchanged) ·
-1660 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-zero corpus price — no runtime surface touched, doc-only) ·
+Iteration: iter-112 (`iter-112-world2-l1` — the owner's «да приступай
+к работе уже», the pinned CODE row's own start word — the reskin day
+RUN, the first CODE iteration since iter-107): **world-2 L1 LANDED —
+`content/road_pack/`, the TRAVEL-loop reskin of the tavern contract on
+the open generic stack** (SRD 5.1 nouns, CC-BY-4.0, the CREDITS.md
+sidecar — PACK_SPEC §9's law; ids stay per the scaffold law, surfaces
+renamed: the river road — the ferry inn / the stockade yard / the
+tollhouse / the ferry quay; Odo the tollman, the drunk boatman, the
+ferry girl; the storm lantern, the toll purse, the jug of mead, the
+cudgel, the mooring hawser; the quay throng; the Ashen). The loop
+change (D-146's verdict — the universal-core claim tested by the LOOP,
+never the noun swap): `actions.json` move → `ticks: "edge"` (the
+travel twin), `rules.json::travel` the st-6a arming — the FIRST
+committed arming (step 150 / climb 60 / river 45, NO overrides: the
+derived law prices every road; all five locations claimed at the 6×6
+lattice's row-2 sites 12–16, `place.max_edge_span` 1→2; the measured
+prices 150/210/300/360 — geography mechanical); the `world_history`
+formed arm binds the five claim slots; the stoplist self-check
+extension (ROAD_STOPLIST, 20 nouns, zero engine collisions
+pre-grepped); the T1 twin `tests/test_t1_reskin.py` (+7: byte-identity,
+the golden-regen guard + the schema pin over
+`tests/fixtures/road_smoke_seed42.jsonl`, the fingerprint-0 law —
+edge-priced moves draw nothing, measured — the derived-prices route
+pin, the mid-travel encounters pin: the watch change + knowledge
+transfer at t=360 strictly inside the 180→540 leg, D-038) +
+`tests/playscripts/road_smoke.json`. **The clock: 14 min 24 s** from
+the first scaffold (23:52:40 UTC) to the green T-suite (00:07:04 UTC)
+— reading/design before the scaffold excluded (the clock's own
+definition); the ≤1-day budget met at ~1/60th. **Zero core edits**
+(git-verified — no byte under core/ sim/ brief/ render/ cli/ scripts/;
+the universal-core claim measured in ROADMAP §2's exit form). The
+authoring loop's first live run (scaffold → edit → doctor → green,
+one lint refusal caught and fixed same-edit). The phase-6 exit
+criterion is MET BY MEASUREMENT — the gate verdict itself stays the
+owner's call (D-149) ·
+Phase: 6 (Packs & worldbuilder) — OPENED (iter-109, D-146; the exit
+criterion's instrument now EXISTS and is green — the state column is
+ROADMAP §2's, the flip is the owner's; phases 0..5 all CLOSED: 0
+iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5 iter-102,
+D-136) ·
+1668 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
+1660+8 — the road pack's own T1 twin + the stoplist self-check; zero
+tavern corpus price: the road fixture is new canon, the tavern
+fixtures byte-untouched) ·
 Date: 2026-09-13 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-12 verdict block),
-`docs/TASKS.md` (the presentation-1 row + the iter-111 section),
-`docs/DECISIONS.md` (D-148, appended), `STATUS.md` (this re-pin),
-`worklog.md` (this iteration's entry; iter-101 evicted per the cap)
-— 5 files, all doc (within AGENTS §2.3's soft limit). The prior
-iteration's record: iter-110 (intake11). The
+Scope: `content/road_pack/` (5 files: the four JSON + CREDITS.md),
+`tests/test_t1_reskin.py` (NEW), `tests/playscripts/road_smoke.json`
+(NEW), `tests/fixtures/road_smoke_seed42.jsonl` (NEW),
+`tests/test_inv3_stoplist.py` (the ROAD_STOPLIST extension),
+`docs/DECISIONS.md` (D-149, appended), `docs/TASKS.md` (world-2 L1
+flip + the iter-112 section), `docs/AGENT_NAVIGATION.md` §1 (the
+road_pack + tests rows), `README.md` (the map row), `STATUS.md` (this
+re-pin), `worklog.md` (this iteration's entry; iter-102 evicted per
+the cap) — 12 files, one coherent landing (the reskin day's own
+checklist: the pack by PACK_SPEC §2's four-file law + the sidecar,
+the tests, the doc sync — AGENTS §2.3's objective scope noted). The
+prior iteration's record: iter-111 (intake12). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -597,75 +601,47 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-111 DONE: intake-12 — the presentation-contract consolidation
-routed (the owner's verdict call over the multi-audit brief, D-148).**
-Every load-bearing citation verified against HEAD (BRIEF_SPEC
-§7.1/§9, PACK_SPEC §6, TECH_NOTES §10/§11, the bg-8 gap rows) plus
-two session fact-checks (the live mode-A call dump; the day1_full
-truncation census — zero markers, 208–274 ws-tokens vs total_hard
-800). The verdict set (8 rows, the detail in phases.md §6's
-intake-12 block): the "60–70% ready" frame refused (the consumer
-measures, D-022), the protocol noise re-owned (engine-1's question,
-GBNF's own surface), `[truncated:N]` stays (the invariant), the
-condensation = the fold pattern (never tracery), LiM refused (MECW
-owns the geometry), the presentation spec at the engine-1 trigger
-absorbing st-4 (the D-055 pattern's fourth instance), the behavioral
-layer answered (PACK_SPEC §6's AP-8/AP-9), the priority dichotomy
-dissolved (the weak-arm run IS the requirements measurement). Landed:
-the TASKS `presentation-1` row (owner-gated, engine-1's
-decision-input child). The external document stays outside the repo
-(the convenience-copy law). The build queue untouched; doc-only #3
-rides the D-022 exception (the owner's fresh call — the intakes
-family is doc-only by construction; the streak ends with the next
-CODE row). What stands:
+**iter-112 DONE: world-2 L1 — the reskin day landed (D-149).** The
+second pack `content/road_pack/` runs the TRAVEL loop (move =
+`ticks: "edge"`, the derived price law's first committed arming —
+150/210/300/360 ticks over the four edges, all five locations claimed,
+no overrides); the T1 twin + the golden fixture + the stoplist
+extension landed; **the clock 14 min 24 s** from first scaffold to
+green T-suite; **zero core edits** (git-verified). The phase-6 exit
+criterion — "a new T1 reskin without core edits, ≤ 1 day" — is MET BY
+MEASUREMENT. What stands:
 
-1. **world-2 L1 — the reskin day, the phase-6 gate's own
-   instrument (pinned CODE, the next iteration):** the ≤1-day
-   authoring budget measured on the open generic stack (SRD 5.1 /
-   Open5e, the §13 starter table, CREDITS sidecar, speed over
-   distinctiveness); a TRAVEL-loop pack (the player journeys
-   between N points, encounters ride the route, st-6a's derived
-   travel prices make geography mechanical; authored toponyms win
-   — the D-132 override-else-derived law); the reskin day's own
-   steps: the stoplist self-check extension to the reskin pack's
-   nouns (the second pack must exist for its vocabulary) + the
-   authoring loop's first live run (scaffold → edit → doctor, the
-   D-141(b) rungs, READY since iter-107) + the ≤1-day clock from
-   first scaffold to green T-suite. Exit: a new T1 reskin without
-   core edits (ROADMAP §2). The clock starts on the owner's
-   «приступай» — a clean measurement wants a fresh day.
-2. **The standing owner-gated rows (unchanged, the phase-6 epoch
-   leaves them live):** `res-1` (the dives landed — the design
-   backbone stands; the row itself opens on the owner's call),
-   `roads-1` (mode G's generated-exits pass), `pack-ci` (the
-   PACK_SPEC §5/§6 admission-lint rungs — the reskin pack the
-   first pack they run against), `since-1` (read-side, rides
-   world-2's condensing travelers), `parse-2`, `engine-1`
-   (+ `presentation-1`, intake-12/D-148 — the presentation
-   contract as engine-1's decision-input child, written from the
-   weak-arm results, absorbing `st-4` at write time), `tune-3`,
-   `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
-   Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
+1. **The phase-6 gate review — the owner's call (ROADMAP §5's
+   protocol, never self-served):** the exit criterion's instrument is
+   green; the verdict (ROADMAP §2's state column flip to CLOSED) is
+   the owner's. The natural form: the owner reads the road chronicle
+   (T7 — `python -m cli chronicle <log> --pack content/road_pack`
+   over a road_smoke run) and calls the gate; the §5 protocol re-runs
+   the committed playscripts + M1/M2 + the T8 arm on the tavern side
+   (the road side's evidence is the T1 twin itself). The doc debts
+   ride the gate: DECISIONS 43 rows (the D-034 collapse), the
+   over-cap trims (STATUS/TASKS/phases), the FAQ resync.
+2. **The standing owner-gated rows (unchanged):** `res-1` (the dives
+   landed — the backbone stands), `roads-1` (mode G's
+   generated-exits pass), `pack-ci` (the PACK_SPEC §5/§6
+   admission-lint rungs — TWO packs now exist to run against: the
+   tavern + the road), `since-1` (read-side, rides world-2's
+   condensing travelers), `parse-2`, `engine-1` (+ `presentation-1`,
+   intake-12/D-148), `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1`
+   GitHub Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
    (the grim pack) + `pack-3` (the sci-fi candidate) at the
-   2nd-setting trigger — now UNBLOCKED by the opening (the
-   trigger fired; the ORDER owner decides) + `pack-4` (the
-   pressure-city candidate, intake-11/D-147 — the lost-city fold
-   into world-2 L2 its cheap adoption), `companion-1`,
-   `mech-2` (rides the next mechanics.py touch), `st-4` (the
-   call budget — rides into `presentation-1` at its write time,
-   D-148) and `st-5` (the
-   first real consumer decides: a pack wanting
-   portable objects, a res-1 sink shape). No other owner
-   question stands open — the two opening-day questions are
-   closed by D-146; intake-12's eight rows are all closed by
-   D-148.
-3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
-   standing gap rows: the {3–8B, GBNF} arm (owner hardware —
-   engine-1's decision input), the bg-7 prose families skipped
-   in the bg-8 heartbeat (rate-limit economics), the per-family
-   latency distribution. New track-B ideas enter the backlog on
-   the owner's call only.
-4. **Nothing is pinned.** The natural next step is world-2 L1
-   (the reskin day) on the owner's «приступай» — the gate's own
-   clock wants a fresh day. The ORDER owner decides; TASKS owns
+   2nd-setting trigger + `pack-4` (the pressure-city candidate,
+   intake-11/D-147 — the lost-city fold into world-2 L2 its cheap
+   adoption), `companion-1`, `mech-2` (rides the next mechanics.py
+   touch), `st-4` (rides into `presentation-1` at its write time,
+   D-148) and `st-5` (the first real consumer decides). No other
+   owner question stands open.
+3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
+   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
+   decision input), the bg-7 prose families skipped in the bg-8
+   heartbeat, the per-family latency distribution. New track-B ideas
+   enter the backlog on the owner's call only.
+4. **Nothing is pinned.** The natural next step is the owner's gate
+   call on phase 6; world-2 L2 (the province) and the remaining build
+   rows stay owner-gated. The ORDER owner decides; TASKS owns
    composition, never order.

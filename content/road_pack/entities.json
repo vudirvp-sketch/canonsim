@@ -1,0 +1,335 @@
+{
+  "meta": {
+    "pack": "road_pack",
+    "version": "0.1",
+    "display": "The River Road — travel-loop reskin v0.1",
+    "notes": "world-2 level 1 (iter-112, the reskin day): a TRAVEL-loop pack on the open generic stack (SRD 5.1 nouns — CC-BY-4.0, CREDITS.md sidecar), scaffolded from tavern_pack (ids stay, surfaces renamed — the scaffold law). The player journeys between the five waypoints of the river road; st-6a's derived travel prices make geography mechanical (rules.json travel block). Every value is pack data, never code (INV-3). Display names in English (D-009)."
+  },
+  "locations": [
+    {
+      "id": "loc_tavern",
+      "name": "the ferry inn",
+      "role": "main scene: common room, jetty door",
+      "layout": "timbered_hall",
+      "exits": [
+        "loc_street",
+        "loc_backyard"
+      ],
+      "flammability": "high",
+      "fire_spots": [
+        "hearth",
+        "benches",
+        "gable_end"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "notes": "timbered house on the river bank — the arson target; the storm lantern rides the journeys (MVP_SCOPE §3 shape)"
+    },
+    {
+      "id": "loc_street",
+      "name": "the river road",
+      "role": "the travel spine: journeys start and land here",
+      "layout": "open_road",
+      "exits": [
+        "loc_tavern",
+        "loc_backyard",
+        "loc_guardroom",
+        "loc_market"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "open ground along the bank: no sight lines into interiors"
+    },
+    {
+      "id": "loc_backyard",
+      "name": "the stockade yard",
+      "role": "fire source spot; origin of the 'figure at the jetty door' rumor",
+      "layout": "enclosed_yard",
+      "exits": [
+        "loc_tavern",
+        "loc_street"
+      ],
+      "flammability": "medium",
+      "fire_spots": [
+        "yard_wall",
+        "timber_pile"
+      ],
+      "notes": "behind the inn; the lantern is dropped here in the walkthrough"
+    },
+    {
+      "id": "loc_guardroom",
+      "name": "the tollhouse",
+      "role": "watch change → knowledge transfer between tollmen",
+      "layout": "single_room_post",
+      "exits": [
+        "loc_street"
+      ],
+      "flammability": "low",
+      "fire_spots": [
+        "hearth"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "notes": "off-duty post; knowledge transfer fires here at rotation ticks (rules.json); the hearth post — the other lit room"
+    },
+    {
+      "id": "loc_market",
+      "name": "the ferry quay",
+      "role": "the rumor scene (mandatory: this is where hearsay lives)",
+      "layout": "open_quay",
+      "exits": [
+        "loc_street"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "day-phase activity hub; the throng listener lives here"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the wayfarer",
+      "role": "courier down on his luck",
+      "position": "loc_street",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {},
+      "crime_status": "unknown",
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "deliver, collect, stay ahead of the toll",
+      "is_player": true,
+      "notes": "starts on the road and travels the loop; crime_status is the crime_watch convention (rules.json crime_watch.status_values)"
+    },
+    {
+      "id": "npc_guard_01",
+      "name": "Odo",
+      "role": "on-duty tollman",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_guard_02",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "alert",
+      "goal": "keep order",
+      "carries": [
+        "purse_01"
+      ],
+      "notes": "stands at the counter (walkthrough §3); pickpocket target; ev_0007 actor-side witness; expects the toll purse on himself (rules.expectations)"
+    },
+    {
+      "id": "npc_guard_02",
+      "name": "the relief tollman",
+      "role": "Odo's relief",
+      "position": "loc_guardroom",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_guard_01",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "resting",
+      "goal": "keep order",
+      "notes": "receives Odo's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020); the pair.pc_01.suspicion home (suspectaxis-2, D-102)"
+    },
+    {
+      "id": "npc_barkeep_01",
+      "name": "the innkeeper",
+      "role": "ferry inn owner",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "busy",
+      "goal": "protect the property",
+      "carries": [
+        "club_01"
+      ],
+      "notes": "heard-vague witness in ev_0007; cudgel is under the counter"
+    },
+    {
+      "id": "npc_drunk_01",
+      "name": "the drunk boatman",
+      "role": "witness by accident",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 50,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_guard_01",
+          "fear": 40
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "merry",
+      "goal": "get mead",
+      "notes": "intoxication 50 (v0.1 default): testimony vague by construction (§6 intersection matrix); tomorrow's rumor teller (ev_0031)"
+    },
+    {
+      "id": "npc_maid_01",
+      "name": "the ferry girl",
+      "role": "moves around, sees much",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_barkeep_01",
+          "trust": 70
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "tired",
+      "goal": "finish the crossing shift",
+      "notes": "moves between counter, benches and jetty door (same-location roaming)"
+    }
+  ],
+  "ambient_entities": [
+    {
+      "id": "npc_market_crowd_01",
+      "name": "the quay throng",
+      "kind": "ambient_group",
+      "position": "loc_market",
+      "knowledge": [],
+      "notes": "passive knowledge-holder and rumor listener (MVP_SCOPE §4.2): no goals, no relations, no movement — receives knowledge records only"
+    }
+  ],
+  "items": [
+    {
+      "id": "oil_lamp_01",
+      "name": "the storm lantern",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": true,
+      "breakable": true,
+      "flammability": "none",
+      "notes": "fire source; breakable — the drop_break target that starts the arson chain"
+    },
+    {
+      "id": "purse_01",
+      "name": "the toll purse",
+      "position": "loc_tavern",
+      "carrier": "npc_guard_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "owned by Odo; the steal target (ev_0007)"
+    },
+    {
+      "id": "ale_mug_01",
+      "name": "the jug of mead",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "none",
+      "use_effect": {
+        "status": "intoxication",
+        "delta": 20
+      },
+      "notes": "intoxication vector — feeds the boatman's witness quality"
+    },
+    {
+      "id": "club_01",
+      "name": "the cudgel",
+      "position": "loc_tavern",
+      "carrier": "npc_barkeep_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "notes": "innkeeper's, under the counter"
+    },
+    {
+      "id": "rope_01",
+      "name": "the mooring hawser",
+      "position": "loc_backyard",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "medium",
+      "notes": "utility, in the stockade yard"
+    }
+  ]
+}

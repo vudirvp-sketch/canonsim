@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "pack": "road_pack",
+    "version": "0.1",
+    "notes": "Chronicle templates for the road pack (world-2 L1, iter-112 — the tavern grammar reskinned; speed over distinctiveness, the loop change is the test). Syntax unchanged: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists = alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line (the importance rule owns the split, the gate follows). The world_history line's formed arm binds the five armed claim slots (terrain/near_river/ground/watch_height/far_region)."
+  },
+  "tale_gate": {
+    "min_importance": "medium"
+  },
+  "day_header": "— Day #day#, #phase.capitalize# —",
+  "scene_card": "{location_name}: {present_names}",
+  "fallback": "(t {t}) {event_type}: {actor} → {target}",
+  "symbols": {
+    "flame_take": [
+      "Flame takes to {location}.",
+      "Fire catches at {location}."
+    ],
+    "smoke_sign": [
+      "Smoke begins to rise.",
+      "The air grows bitter."
+    ]
+  },
+  "events": {
+    "look_around": "{actor} takes in {location}.",
+    "examine": "{actor} examines {target}.",
+    "examine_failed": "{actor} squints at {target}, unsure what to make of it.",
+    "move": "{actor} travels on to {target_location}.",
+    "talk": "{actor} talks with {target}.",
+    "talk_rebuffed": "{target} gives {actor} the cold shoulder.",
+    "wait": "{actor} waits.",
+    "rest": "{actor} rests.",
+    "take": "{target?{actor} takes {target}.|{actor} takes the {texture_slot}.}",
+    "take_failed": "{target?{actor} reaches for {target} — and is noticed.|{actor} reaches for the {texture_slot} — and is noticed.}",
+    "drop_break": "{target} breaks with a noise.",
+    "use": "{actor} uses {target}.",
+    "use_failed": "{actor} fumbles with {target}; nothing happens.",
+    "steal": "{actor} lifts {stolen} unseen.",
+    "pickpocket_failed": "{actor}'s hand drifts toward {target}'s purse — {target} notices the movement.",
+    "distract": "{actor} distracts {target}.",
+    "distract_ignored": "{target} ignores {actor}'s antics.",
+    "arson": "{actor} sets a fire in {location}.",
+    "flee": "{actor} runs.",
+    "flee_caught": "{actor} is caught.",
+    "intent_rejected": "{actor} tries to {action_label} — impossible here.",
+    "fire_started": "#flame_take# #smoke_sign#",
+    "fire_spread": [
+      "The fire spreads within {location}.",
+      "Flame reaches further into {location}.",
+      "The blaze gnaws deeper into {location}."
+    ],
+    "smoke_rising": "Smoke fills {location}; it is getting hard to see.",
+    "alarm_raised": "Someone shouts: fire!",
+    "crowd_wary": "The room watches {target} closely.",
+    "panic_ripple": "Panic ripples across {location}.",
+    "location_burned_out": "{location} burns out. Nothing will be the same here.",
+    "watch_change": "{outgoing?The watch changes: {outgoing} hands the post to {incoming}.|The watch changes: {incoming} takes the post.}",
+    "knowledge_transfer": "{actor} briefs {target}; knowledge passes ({fidelity}).",
+    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}",
+    "document_check": "{actor} demands papers from {target} — the papers do not satisfy.",
+    "document_check_failed": "{actor} demands papers from {target} — the answer satisfies.",
+    "arrest_attempt": "{actor} moves to arrest {target}.",
+    "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
+    "suspicion_changed": "{actor} grows warier of {target}.",
+    "leverage_gained": "{actor} now holds something over {target}.",
+    "expectation_violation": "{actor} checks on {target} — it is not where it should be.",
+    "status_decayed": [
+      "{target} drifts: {axes} changed.",
+      "The hours tell on {target}: {axes} changed."
+    ],
+    "coerce": "{actor} leans on {target} — the hold is spent.",
+    "ramble": "{actor} rambles to no one in particular.",
+    "conclusion_drawn": "{actor} had noticed it before, and named it: {knows}.",
+    "year_turns": "The year turns to {year}.",
+    "weather_turns": "The weather turns: {weather}.",
+    "smoke_washed_away": "The {weather} washes the smoke from {location}.",
+    "world_history": "{year?{actor} remembers: {kind}, in the year {year}{participants?, between {participants}}{places?, at site {places}}{collection?, in the {collection}}.|{actor} takes shape: {sites} sites, {regions} regions, {years} years{terrain?, {terrain} ground}{near_river?, river near}{ground?, {ground} yard}{watch_height?, the toll post {watch_height} paces above the water}{far_region?, {far_region} country}.}"
+  }
+}

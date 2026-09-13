@@ -13,6 +13,41 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-112 · 2026-09-13 · world2-l1 — the reskin day, the owner's «да
+приступай» (12 files: 5 pack + 4 test + 3 doc-sync beyond STATUS/worklog
+— the day's own checklist, AGENTS §2.3's objective scope noted)
+- the clock: 14m24s from the first scaffold (23:52:40 UTC) to the green
+  T-suite (00:07:04 UTC) — reading/design before the scaffold excluded
+  (the clock's own definition); the ≤1-day budget met at ~1/60th; ZERO
+  core edits (git-verified: no byte under core/ sim/ brief/ render/ cli/
+  scripts/ — the universal-core claim measured, ROADMAP §2's exit form)
+- content/road_pack/ (the TRAVEL-loop reskin, SRD 5.1 nouns, CREDITS.md
+  CC-BY sidecar): ids stay (the scaffold law), surfaces renamed; move =
+  ticks 'edge'; rules.json travel (150/60/45 — the derived prices, no
+  overrides, all five locations claimed at row-2 sites 12–16,
+  max_edge_span 2; the measured prices 150/210/300/360); the
+  world_history formed arm binds the five claim slots; the authoring
+  loop's first live run — one lint refusal caught (travel carries no
+  notes key) and fixed same-edit, the doctor's fix-hint surface worked
+- tests: test_t1_reskin.py +7 (the T1 twin: byte-identity, the golden
+  regen + schema pins, fingerprint 0 — edge-priced moves draw nothing,
+  the derived-prices route pin, the mid-travel encounters pin — the
+  watch change t=360 inside the 180→540 leg); ROAD_STOPLIST + the
+  per-pack self-check (+1); road_smoke.json + road_smoke_seed42.jsonl;
+  1660+8 → 1668+1 green, ruff clean, zero tavern corpus price
+- T7 (the road chronicle reads as a story): the world takes shape (36
+  sites, 150 years, coast ground, forest yard, the toll post 4352 paces
+  above the water) + the four history lines + the mid-route watch
+  change (Odo hands the post) + the boatman's ramble — the tale opens
+  on the genesis and lives on the road
+- docs: D-149 (the reskin-day record — the instrument, NOT the gate),
+  TASKS world-2 L1 flip + the iter-112 section, NAV §1 + README the
+  road_pack rows, STATUS re-pin (671→647); iter-102 evicted here
+  (verified against git in this edit); 10 after. Caps: STATUS 647 /
+  TASKS 1129 / DECISIONS 74 (43 rows — the collapse owed at the
+  phase-6 gate, D-034) / phases 1409 — the over-cap files ride the
+  documented §6.1 substance precedent, trim at the gate
+
 iter-111 · 2026-09-13 · intake12 — the owner's verdict call over the
 Brief-IR-vs-presentation consolidation (5 files doc-only, zero code,
 zero corpus price — the intakes-6..11 family precedent; one family)
@@ -311,48 +346,3 @@ AGENTS §2.3: the objective scope noted here)
   held on ledger substance (§6.1, the iter-102 precedent), trim at
   the phase-6→7 gate.
 ---
-iter-102 · 2026-09-12 · gate — the phase-5 exit review, the owner's
-chat call (8 files doc-only, zero code, zero corpus price — the
-iter-54/65 gate footprint family; AGENTS §2.3: the objective scope
-noted here)
-- verified BEFORE working (1589+1 green, ruff clean, HEAD 5ecba27,
-  Python 3.12.14 the env pin); the full ROADMAP §5 protocol re-run:
-  the seed-125 pair ON M1=0.52/M2=0.2 (56 events — iter-98's DESIGNED
-  day1_full price; the iter-65 record 0.509/0.333/61 events) / OFF
-  T8 24 chains (the exit criterion ≥3 met in its worldgen-fed form —
-  the ARMED committed pack); the 60-seed band 15–24, M5 p50 0.79,
-  stretch max 1 (rev5's records hold); T7 the tale reads as a story —
-  the worldgen genesis + world_history lines OPEN the chronicle; the
-  longrun pins green; no kill-criteria hit. The verdict: PASS, D-136
-  (the gate-verdict family row)
-- the §5 step-6 staleness pass (D-128's adopted step, first
-  execution): KEEP the rest, REWORD three discharged-phase-0 clauses
-  (AGENTS §1's phase frame; INV-4's "before the phase-0 gate passes"
-  → the standing boundary + the engine-1 owner gate; §8's guard the
-  same), DROP none; D-129's effect-line habit UNEXERCISED — zero
-  protocol-law rows since D-128, reported out loud per its own
-  consequence line; D-128's own effect lines checked (mech-2 the one
-  still open, rides the next mechanics.py touch); the FAQ chain
-  baseline synced (26→24, the designed price)
-- the doc debts paid: DECISIONS collapsed 71→30 (D-034 — the phase-5
-  build column D-105..D-133 → the build-family row, the intakes
-  D-119/D-128/D-130/D-134/D-135 → the intake family, the
-  testproto/protocol rows D-098/D-109..D-113/D-118/D-129 → the
-  protocol family, the v0.2 lance D-095..D-104 → the phase-4 row, the
-  four phase-3 columns → one compound; compound IDs keep every
-  citation resolvable); TASKS collapsed 1240→694 (the phase-5 ledger
-  one-liners + the intake sections + the phase-3 rows + the Track B
-  one-liners + the phase-6 instruments section; the residue over the
-  600 cap is the closed-phase ledgers' substance, §6.1 — one-line
-  ledgers are the file's job, cutting them is the iter-0i mistake);
-  ROADMAP §2 phase-5 CLOSED; STATUS re-pinned (901→642, the Next step
-  → the phase-6 view); the NAV tests-row lag fixed (the post-iter-86
-  suites listed); README resynced
-- the external protocol runner outside the repo (Rule 9):
-  /home/z/my-project/scripts/gate_protocol_iter102.py + the committed
-  balance_harness arms (1-seed gate pair + the 60-seed refresh);
-  output/ artifacts gitignored, never staged. iter-93 evicted here
-  (verified against git in this edit); 10 after. Caps: TASKS 694 /
-  phases 1202 / DECISIONS 30 rows held — TASKS + phases over-cap on
-  ledger/architecture substance (§6.1, the iter-54 phases.md
-  precedent), the next trim point is the phase-6→7 gate.
