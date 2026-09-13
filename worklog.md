@@ -13,6 +13,35 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-117 · 2026-09-13 · pack-ci — the admission-lint rungs LIVE (the
+owner's fresh call «начинай работу по планам… логичнее всего — то и
+делай»; STATUS Next step's own readiness pick — pack-ci the natural
+cheap candidate, D-152)
+- verified BEFORE working (1668+1 green, ruff clean, HEAD 274130c,
+  Python 3.12.14 the env pin); re-verified after — 1696+1 green
+  (+28, tests/test_packci.py), ruff clean; zero corpus price (the
+  lint is load-time only, the committed playscripts/fixtures
+  byte-untouched)
+- core: `core/pack.py` `_teleology` (dead actions — the effect
+  witnesses + STATE_MUTATING at `core/resolvers.py`'s own owner;
+  orphans — the reference walk + exits edges + audience reach + the
+  target-grammar matcher; empty matrix rows; unused templates — the
+  emission-witness collector + the story-critical dormancy witness)
+  + `_live_char` (AP-1/8/9/11/13/15 + the price-marker lint, the
+  ambient channel exempt) + the spine lint in `_entities` + the
+  atomicity law inside `_predicate_error`
+- the 68a twin-compliance pass (the law's own blast radius, 20 files
+  per AGENTS §2.3): a stripped block strips its emission vocabulary —
+  the weather family's template lines with the blocks (11 crafted
+  twin helpers) + the harness's `_DROP_DEAD_LINES` ablation map; the
+  factions muster rides a `system_of_type` attribution row (zero
+  canon bytes); the groups' tier lines ride their records
+- docs: PACK_SPEC §5/§6 the enforcement readings + the §12 flip,
+  DECISIONS D-152 (31 rows — over-cap on §6.1 substance until the
+  next gate collapse), TASKS the pack-ci flip + iter-117, STATUS
+  re-pin + Next step, this entry (iter-107 evicted, verified in this
+  edit; 10 held)
+
 iter-116 · 2026-09-13 · gate6 — the phase-6 gate review, the
 owner's convening gate call «давай уже свой гейт-колл 6 фазы или что
 там, приступай к работе и незакрытым задачам» (7 files doc-only, zero
@@ -307,36 +336,4 @@ list closed (the owner's «зафиксируй где нужно в докум�
   digest rows; STATUS re-pin + Next step. 8 files (1 script + 1
   test + 6 doc — one coherent fixation landing, the objective
   scope); iter-98 evicted in this edit (verified, cap 10 held)
----
-iter-107 · 2026-09-12 · riders — the risk-synthesis list's five
-remaining riders, the owner's direct call (D-140/D-141; the drama
-tuning becomes data, the authoring loop gets its first two rungs)
-- core: `core/intent.py` IntentData.origin_hook + `core/director.py`
-  stamps it + `core/loop.py` _provenance (both intent sites + the
-  autonomous-enqueue pass-through — the first draft lost it there);
-  `core/metrics.py` payoff_latencies (FIFO per tag, exact under the
-  pick law, attempts count, corrupt pairings loud) +
-  beat_tension_profile (the rhythm stat, the stretches' own window
-  axis); `schemas/event.schema.json` 0.2 (provenance.cause_hook,
-  additive — the T1 golden fixture regenerated in the same iteration,
-  the header's version line the whole corpus price)
-- scripts: `scripts/balance_harness.py` --systems-minus (block-scoped
-  68a; ABLATABLE measured: urgencies/weather/on_action/reflection/
-  secrets/factions; the systems-table rows refused loudly) + the
-  payoff/tension blocks; `scripts/pack_scaffold.py` NEW + 
-  `scripts/pack_doctor.py` NEW (the authoring loop: scaffold → edit →
-  doctor → patch; SCAFFOLD.md derived, no wall-clock)
-- brief: `brief/parser.py` the nearest-valid menu (_levenshtein +
-  _nearest_menu; four refusal families rank their tokens, kinds over
-  token+label; the grammar never widens)
-- tests: test_drift.py NEW (the systems⇔metrics four-direction
-  contract + the observed corpus vocabulary, the item-side registry),
-  test_pack_tools.py NEW, +9 metrics units, +6 menu families, +7
-  harness arm tests, test_smoke the $id pin; 1652+1 green, ruff clean
-- docs: D-140/D-141; EVENT_SCHEMA §1/§7, PARSER_SPEC §4, TEST_PLAN
-  §6/§8.5 (the per-component latency columns), TASKS iter-107, NAV §1,
-  STATUS re-pin; 25 files (4 core + 1 schema + 1 brief + 3 scripts + 6
-  test + 1 fixture + 8 doc + README — the owner's five-rider call, the objective scope); iter-97
-  evicted in this edit (cap 10 held, verified)
----
 ---

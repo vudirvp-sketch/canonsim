@@ -116,6 +116,17 @@ def _systems_minus_pack(out_dir: Path, name: str, *, drop_pacing: bool) -> Pack:
                          drop_pacing=drop_pacing)
 
 
+#: pack-ci (iter-117): the ablation map — a dropped block's emission
+#: vocabulary dies with it (PACK_SPEC §5: declared-but-unused templates
+#: are dead vocabulary), so the systems-minus variants strip the block's
+#: template lines too. The tavern family's own table (periphery pack
+#: knowledge, D-046); blocks whose vocabulary the story-critical listing
+#: already witnesses (on_action, reflection, secrets) need no entry.
+_DROP_DEAD_LINES: dict[str, tuple[str, ...]] = {
+    "weather": ("weather_turns", "smoke_washed_away"),
+}
+
+
 def _variant_pack(
     out_dir: Path, arm: str, drop_keys: Sequence[str], *, drop_pacing: bool,
 ) -> Pack:
@@ -126,6 +137,9 @@ def _variant_pack(
     runs (a loud PackError, never a silent behavior change)."""
     variant_dir = out_dir / f"pack_{arm}"
     variant_dir.mkdir(parents=True, exist_ok=True)
+    dead_lines = sorted(
+        line for key in drop_keys for line in _DROP_DEAD_LINES.get(key, ())
+    )
     for name in sorted(p.name for p in PACK_DIR.glob("*.json")):
         source = PACK_DIR / name
         if name == "rules.json":
@@ -136,6 +150,14 @@ def _variant_pack(
                 rules["director"].pop("pacing", None)
             (variant_dir / name).write_text(
                 json.dumps(rules, indent=2, ensure_ascii=False) + "\n",
+                encoding="utf-8",
+            )
+        elif name == "templates.json" and dead_lines:
+            templates = json.loads(source.read_text(encoding="utf-8"))
+            for line in dead_lines:
+                templates["events"].pop(line, None)
+            (variant_dir / name).write_text(
+                json.dumps(templates, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8",
             )
         else:

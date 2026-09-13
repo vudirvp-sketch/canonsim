@@ -104,6 +104,10 @@ blast-radius question (D-142). The lint families, all live in
   phantom systems, claimed prefixes, declared-write coverage, the
   observed corpus vocabulary. A new mechanic grows its drift row in the
   same iteration it lands (D-141(a)).
+- **The teleology gate + the live-char crosswalk** (iter-117, pack-ci,
+  §5/§6 below): dead action types, orphan entities, empty matrix rows,
+  declared-but-unused templates, the AP rows and the price-marker lint —
+  the cross-block admission families, running after every block lint.
 
 **Full JSON-Schemas per file are a phase-6 rung, deliberately not
 landed** (§12): the lint covers shape today; the event-contract enums
@@ -146,20 +150,51 @@ reflection, secrets, factions. The systems-table rows (fire, relations,
 knowledge, states, crime_watch) are interlocked — never independently
 removable.
 
-## 5. The teleology gate (admission lint, phase-6 design)
+## 5. The teleology gate (admission lint — LIVE since iter-117)
 
 From the UAP audit (`docs/ref/uap_audit.md`): **every event type must
-produce a state delta or a hook — dead content otherwise**. The
-deterministic checks, arriving with this phase as pack-ci rows:
+produce a state delta or a hook — dead content otherwise**. The four
+checks, enforced in `core/pack.py::_teleology` (after every block
+lint — they read the whole validated pack):
 
 - **Dead action types** — an action whose success/failure events carry
-  no state_changes, no knowledge, no seeds, no on_action entry.
+  no state_changes, no knowledge, no seeds, no on_action entry. The
+  state-change witnesses: the declared blocks (`status_effects`,
+  `balance`, `ignition`, any knowledge or hooks branch, the texture
+  sub-block), an `on_action` reaction to one of its event types, a
+  `metrics.system_of_type` row naming one (the pack's own attribution —
+  the goal-verb family's witness), or a resolver in
+  `core/resolvers.py::STATE_MUTATING` (the position/carrier/layer
+  mutators, declared at the registry's own owner).
 - **Orphan entities** — declared entities no event, position read, or
-  template ever touches.
+  template ever touches. Touched iff: name-referenced in the pack's
+  data (keys and values, `notes`/`_` prose excluded — the reference
+  walk), an edged location (the exits graph's position reads), a
+  knowledge-holder at an edged location in a pack declaring positional
+  audiences, an item the target grammar can address (some action's
+  target-noun conjunction passes for it, or its truthy flag is read by
+  an actor-side `flagged_accessible` / `ignition.item_flag`).
 - **Empty intersection-matrix cells** (`MVP_SCOPE.md` §6) — NPC ×
-  action pairs the setting never exercises.
+  action pairs the setting never exercises. The row check: every
+  non-player NPC must appear in ≥1 authored surface — an urgency entry
+  (the pair itself), a watch-rotation slot, an expectations rule, a
+  director hook target, a group membership, a pair relation (either
+  side), or a carrier/carries binding. An NPC the dynamic grammar
+  reaches but no authored surface wires is dead design space.
 - **Declared-but-unused templates** — template vocabulary entries no
-  event type renders.
+  event type renders. The emission witnesses: the action branch
+  events, `on_action` keys and reaction events, transition-layer
+  events, the `crime_watch` event set, `expectations.event`, the
+  `telling` pair, `secrets` events, `reflection.event`,
+  `time.macro.event_type`, `weather.event_type` + erosion rows, the
+  worldgen chronicle event, the group tier events, the core constants
+  (`intent_rejected` always; `status_decayed` iff any states axis
+  declares a drift rate), and `importance.story_critical_events` — the
+  authored-intent witness (a listed line is deliberately kept tale
+  vocabulary, the 68a twin's dormant lines, never dead-by-accident).
+  A new emission site that misses the collector fails the committed
+  packs loudly — the closure is pinned by the packs that pass it (the
+  drift-contract family).
 
 Thematic Law, pillars, and Author Prohibitions enter as **pack
 metadata** (INV-3: content, not code), enforced as log asserts at gate
@@ -167,28 +202,53 @@ review — never LLM-judged, never core systems. UAP's Grief Architecture
 likewise: pack metadata for packs that want it (the `pack-1` grim
 row's family).
 
-## 6. The live-char crosswalk (static character checks)
+## 6. The live-char crosswalk (static character checks — LIVE since iter-117)
 
 From `docs/ref/live_char_guide.md` (AP rows → deterministic lint
-checks over spine-shaped NPC records):
+checks over spine-shaped NPC records), enforced in
+`core/pack.py::_live_char` (+ the spine shape in `_entities`, the
+atomicity law inside `_predicate_error`):
 
 - **AP-9** — every named NPC carries a want/need tension and a flaw
   rooted in a cause (SPINE shape; the record fields, lint-checked).
+  The optional `spine` block on an npc record: `want | need | flaw |
+  cause` — all four non-empty strings when present, all-or-nothing (a
+  half-declared spine is a broken spine). Absent = silent (the 68a
+  pattern; world-2 L2 the crosswalk's first consumer, D-148).
 - **AP-8** — every flaw/deep trait carries ≥1 behavior rule that
-  consumes it (an urgency entry, a hook weight modifier, an on_action
-  reaction, a prohibition).
+  consumes it. The consuming surface today: the urgency entry's
+  optional `flaw` key (the owner's own rule); both directions linted —
+  an entry's flaw must name a declared spine flaw, and every declared
+  flaw must be consumed (GHOST without anchors = dead pack data).
+  Hook-weight modifiers, on_action reactions and prohibitions join on
+  their own triggers.
 - **AP-11** — no clone NPCs sharing trigger→action pairs (the
-  design-time twin of M4 novelty).
+  design-time twin of M4 novelty): two LIVE urgency entries
+  (`probability_per_beat` > 0 — a zero-weight slot is a stream
+  placeholder that never fires, not a behavior) from different NPCs
+  with identical `(intent, requires)` pairs are clones.
 - **AP-15** — rule atomicity: one condition per rule; compound
-  conditions split.
+  conditions split. In the predicate grammar: a compound's members
+  must be LEAVES — nested compounds are the conditional chains ("if X
+  and if Y before that, then Z") the crosswalk refuses. The evaluator
+  keeps its recursive grammar; the law is the authoring gate.
 - **AP-13** — no contradictory rules (two rules asserting the same
-  axis in opposite directions with no gate separating them).
+  axis in opposite directions with no gate separating them): two
+  ungated on_action reactions to the same event type asserting the
+  same `state.prop` with opposite `add` signs cancel out — separate
+  them with a gate.
 - **AP-1** — pack size budgets (counts of npcs/items/hooks/templates
   within declared bounds; the budget block is metadata the lint
-  reads).
+  reads). The optional `rules.json::budget` block:
+  `{npcs | items | hooks | templates}`, each `{min, max}` — both
+  required, `0 <= min <= max`; absent = silent.
 - **Price markers present** on every socially meaningful behavior: an
   immediate observable (a knowledge record or a perceivable state
-  token) alongside the deferred hooks — AP-2's design-time half.
+  token) alongside the deferred hooks — AP-2's design-time half. A
+  branch whose hooks seed non-`ambient`-channel deferred consequences
+  must carry a knowledge record on that branch or a declared state
+  token (`status_effects` / `balance` / `ignition`) — or the behavior
+  is socially invisible.
 
 ## 7. Tone = data (the darkness dial)
 
@@ -287,8 +347,11 @@ is a content decision (a real corpus price), owner-gated
   with the first multi-file or multi-source pack — the four `meta`
   blocks carry identity today.
 - **The teleology lint rows** (§5) and the **live-char crosswalk rows**
-  (§6): land with the reskin pack's CI day — the checks are specified,
-  the enforcement rung is the phase's own build.
+  (§6): LANDED (iter-117, pack-ci) — the enforcement rungs above; the
+  reskin pack was the first pack the rows ran against, the tavern and
+  the road both green. The 68a twins complete their ablations with the
+  stripped family's template lines (a stripped block leaves its
+  emission vocabulary dead — the v0.1 twin's own compliance shape).
 - **Pack CI runner** (qa-1 mypy / ci-1 GitHub Actions — the standing
   owner-gated rows): `load_pack` is the CI today; the runner automates
   it at the owner's call.

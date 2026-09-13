@@ -40,7 +40,7 @@ from core.transitions import Ignition
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
     from core.pack import Pack
 
-__all__ = ["REGISTRY", "ResolverFn"]
+__all__ = ["REGISTRY", "ResolverFn", "STATE_MUTATING"]
 
 ResolverFn = Callable[
     ["Pack", Mapping[str, Mapping[str, Any]], "RngBank", "IntentData",
@@ -49,6 +49,23 @@ ResolverFn = Callable[
 ]
 
 Projection = Mapping[str, Mapping[str, Any]]
+
+
+#: The resolvers whose events intrinsically carry state changes — the
+#: position/carrier/layer mutation family that emits StateChanges with NO
+#: action-declared block (movement walks, pickup/stealth_take/drop move the
+#: item, use_item applies the item's own use_effect, divert turns the
+#: target's attention, ignite arms the transition layer, flee moves the
+#: actor). The pack-ci dead-action lint (PACK_SPEC §5) reads this set as
+#: the "the events carry state_changes" witness: an action resolving
+#: through one of these is never dead regardless of its declared effects.
+#: The data-driven mutators are NOT here — recuperate reads status_effects
+#: and coerce reads balance, both action-declared blocks the same lint
+#: reads directly. Single owner: this module owns resolver semantics.
+STATE_MUTATING: Final[frozenset[str]] = frozenset({
+    "movement", "pickup", "drop", "use_item", "stealth_take",
+    "divert", "ignite", "flee",
+})
 
 
 def _ctx(intent: IntentData, projection: Projection) -> dict[str, Any]:

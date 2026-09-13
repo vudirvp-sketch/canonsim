@@ -56,6 +56,17 @@ def v01_pack(tmp_path: Path) -> Any:
     (target / "rules.json").write_text(
         json.dumps(rules, indent=2), encoding="utf-8"
     )
+    # pack-ci (iter-117): the twin's ablation is complete only with the
+    # family's template lines — a stripped block leaves its emission
+    # vocabulary dead (PACK_SPEC §5)
+    templates = json.loads(
+        (target / "templates.json").read_text(encoding="utf-8")
+    )
+    for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+        templates["events"].pop(dead_line, None)
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
     return load_pack(target)
 DAY1 = json.loads((REPO / "tests" / "playscripts" / "day1_full.json").read_text())
 
@@ -119,6 +130,21 @@ def _variant_pack(
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     mutate_rules(rules)
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    # pack-ci (iter-117): a mutation that strips the weather family
+    # strips its template lines too — a stripped block leaves its
+    # emission vocabulary dead (PACK_SPEC §5); derived here (the
+    # tavern's own family) so each mutating callable stays surgical
+    if "weather" not in rules:
+        templates = json.loads(
+            (target / "templates.json").read_text(encoding="utf-8")
+        )
+        for dead_line in ("weather_turns", "smoke_washed_away"):
+            templates["events"].pop(dead_line, None)
+        if not rules.get("time", {}).get("macro"):
+            templates["events"].pop("year_turns", None)
+        (target / "templates.json").write_text(
+            json.dumps(templates, indent=2), encoding="utf-8"
+        )
     if mutate_actions is not None:
         actions = json.loads((target / "actions.json").read_text(encoding="utf-8"))
         mutate_actions(actions)

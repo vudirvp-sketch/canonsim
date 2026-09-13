@@ -137,6 +137,20 @@ def crafted_pack(
     if story_critical is not None:
         rules["importance"]["story_critical_events"] = story_critical
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    # pack-ci (iter-117): the v0.1 twin's ablation is complete only with
+    # the family's template lines — a stripped block leaves its emission
+    # vocabulary dead (PACK_SPEC §5), so the twin pops them too
+    if macro is None or weather is None:
+        templates = json.loads(
+            (target / "templates.json").read_text(encoding="utf-8")
+        )
+        for dead_line in ("weather_turns", "smoke_washed_away"):
+            templates["events"].pop(dead_line, None)
+        if macro is None:
+            templates["events"].pop("year_turns", None)
+        (target / "templates.json").write_text(
+            json.dumps(templates, indent=2), encoding="utf-8"
+        )
     return load_pack(target)
 
 

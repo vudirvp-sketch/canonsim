@@ -1,50 +1,63 @@
-Iteration: iter-116 (`iter-116-gate6` — the phase-6 gate
-review, the owner's convening gate call «давай уже свой гейт-колл 6
-фазы или что там, приступай к работе и незакрытым задачам»; the full
-ROADMAP §5 protocol, doc-only — the gate session's own form; the
-D-022 exception, the owner's fresh call): **the phase-6 GATE VERDICT
-— PASS (D-151); the roadmap's phase ladder COMPLETE (phases 0..6 all
-closed).** The §5 evidence: the committed playscripts re-run on
-identical seeds — plumbing_smoke (42) + road_smoke (42, road_pack)
-byte-identical to their committed fixtures (the road side's evidence
-the T1 twin itself; the header's commit field the only delta —
-'0000000' pinned in fixtures per the T1 law); the seed-125 pair ON
-M1=0.518 / M2=0.200 (56 events — iter-102's numbers reproduced
-exactly) / OFF T8 24 chains ≥ 3, M5 0.849; T7 both chronicles read
-as stories (the road: the genesis + the four history lines + the
-mid-route watch change + the boatman's ramble; the tavern: the theft
-→ the rumor spread → the watch change → the papers → the arson day);
-no kill-criteria hit — the module contract (the core/pack split,
-D-142) proven right by the reskin day (D-149: 14m24s, zero core
-edits, git-verified). The §5 step-6 staleness pass: REWORD AGENTS
-§1's phase frame + the FAQ cap-laws entry, KEEP the rest, DROP none.
-The doc debts paid at the gate: DECISIONS collapsed 44→30 (D-034),
-the STATUS tombstone trim + the FAQ resync (639→567 pre-re-pin),
-TASKS 1251→892 (the iter-103..115 sections collapsed to one-liners),
-README 826→184 (the Status section collapsed to per-phase gate
-summaries); phases.md 1536 / TECH_NOTES 773 / TEST_PLAN 772 stay
-over the 600 cap on §6.1 substance — the cruft pass ran (the filler
-scan + the structural review: the per-phase architecture + the
-engine-1 consult blocks + the measured records are those files' own
-function), the rationale in worklog iter-116 ·
+Iteration: iter-117 (`iter-117-packci` — the admission-lint rungs,
+the owner's fresh call «начинай работу по планам, что осталось
+незакрытого и логичнее всего было бы начать сейчас то и делай» —
+STATUS Next step's own readiness pick after the phase-6 gate: pack-ci
+the natural cheap candidate, TWO packs now existing to run the rows
+against): **the PACK_SPEC §5/§6 checks are enforcement — LIVE in
+`core/pack.py` (`_teleology` + `_live_char`, D-152).** The teleology
+gate: dead action types (the declared-effect witnesses + the
+on_action/system_of_type attribution reads + STATE_MUTATING at the
+resolvers' own owner), orphan entities (the reference walk, the
+exits-edge position reads, the audience reach, the target-grammar
+matcher incl. actor-side flag reads), empty intersection-matrix rows
+(every non-player NPC in ≥1 authored surface), declared-but-unused
+templates (the emission-witness collector + the core constants + the
+story-critical dormancy witness). The live-char crosswalk: the AP
+rows (the optional `spine` block — world-2 L2 the first consumer;
+the urgency `flaw` consumption key; clone pairs with the probability-0
+exemption; predicate atomicity inside `_predicate_error`; ungated
+contradictory reactions; the optional `budget` block) + the
+price-marker lint (non-ambient deferred hooks demand an immediate
+observable; the ambient channel exempt). `tests/test_packci.py` +28:
+the crafted-twin refusals + the green pins — both committed packs,
+the scaffold, the COMPLETE v0.1 twin. The 68a twin-compliance pass:
+a stripped block strips its emission vocabulary (the weather family's
+template lines with the blocks — 11 crafted-twin helpers + the
+harness's `_DROP_DEAD_LINES` ablation map; the factions muster verb
+rides a `system_of_type` attribution row — metrics-side metadata,
+zero canon bytes) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-opened iter-109, D-146; the exit criterion MET BY MEASUREMENT
-iter-112, D-149; phases 0..6 ALL CLOSED — 0 iter-6 · 1 iter-26 · 2
-iter-35 · 3 iter-54 · 4 iter-65 · 5 iter-102 · 6 iter-116; the
-standing work: the owner-gated backlog + the SoW horizon, ROADMAP §6) ·
-1668 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD d4ec8dd and re-verified after —
-doc-only, zero runtime surface touched, zero corpus price) ·
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1696 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD 274130c and re-verified after —
+the lint is load-time only, zero runtime surface touched, zero
+corpus price: the committed playscripts and fixtures byte-untouched,
+the T1/T8 corpora unaffected by construction) ·
 Date: 2026-09-13 ·
-Scope: `docs/ROADMAP.md` (§2 the phase-6 state flip) +
-`docs/DECISIONS.md` (D-151 + the D-034 collapse 44→30) + `AGENTS.md`
-(§1 the staleness reword) + `docs/TASKS.md` (the iter-116 section +
-the collapse) + `STATUS.md` (this re-pin + the tombstone trim + the
-FAQ resync) + `README.md` (the Status collapse + the intro's SoW
-reword) + `worklog.md` (this iteration's entry; iter-106 evicted per
-the cap) — 7 files, doc-only (the gate session's own objective scope,
-AGENTS §2.3 + ROADMAP §5). The prior iteration's record: iter-115
-(intake13). The detail lives in TASKS + worklog + git.
+Scope: `core/pack.py` (the `_teleology` + `_live_char` families +
+their collectors, the spine lint in `_entities`, the atomicity law
+in `_predicate_error`) + `core/resolvers.py` (`STATE_MUTATING`, the
+mutation-family witness at the registry's own owner) +
+`tests/test_packci.py` NEW (+28) + the 68a twin-compliance updates
+(`tests/test_ambient.py`, `tests/test_beliefwire.py`,
+`tests/test_echo.py`, `tests/test_factions.py`, `tests/test_groups.py`,
+`tests/test_lod.py`, `tests/test_macro.py`, `tests/test_panic.py`,
+`tests/test_states.py`, `tests/test_urgencies.py`,
+`tests/test_weather.py` + `scripts/balance_harness.py` — the crafted
+twins complete their ablations with the stripped family's template
+lines, the muster's attribution row) + docs: `docs/PACK_SPEC.md`
+(§5/§6 the enforcement readings + the §3 family row + the §12 flip),
+`docs/DECISIONS.md` (D-152 — 31 rows, over the 30 cap on the §6.1
+substance precedent until the next gate collapse), `docs/TASKS.md`
+(the pack-ci flip + the iter-117 section), `STATUS.md` (this re-pin +
+Next step), `worklog.md` (this entry; iter-107 evicted per the cap) —
+20 files (the law's own blast radius over the crafted-twin corpus,
+the objective scope noted per AGENTS §2.3; the alternative — a
+weakened check — refused: the row names all four teleology checks).
+The prior iteration's record: iter-116 (gate6). The detail lives in
+TASKS + worklog + git.
+
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -518,29 +531,32 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-116 DONE: the phase-6 gate review — verdict PASS (D-151), the
-roadmap's phase ladder COMPLETE (phases 0..6 all closed).** The §5
-protocol ran in full on the owner's convening call; the evidence green
-end to end (the numbers in the header + D-151). What stands:
+**iter-117 DONE: the pack-ci admission-lint rungs LIVE (D-152) — the
+PACK_SPEC §5/§6 checks are enforcement in `core/pack.py`, both
+committed packs green, the crafted-twin corpus compliant (the 68a
+twins complete their ablations with the stripped family's template
+lines).** The backlog's cheapest readiness row is closed; the
+crosswalk's first real consumer is world-2 L2 (the spine/flaw
+grammar waits there). What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
-   readiness, `pack-ci` is the natural cheap candidate (the
-   PACK_SPEC §5/§6 admission-lint rungs — TWO packs now exist to run
-   against: the tavern + the road; the checks are specified, the
-   enforcement rung is the build) and `world-2` L2 the natural big
-   one (the province — phases.md §6 the architecture owner,
-   weeks-scale, the st-6a/travel + name-1 profile arming rides its
-   cultures half); then `roads-1` (mode G's generated exits — the
-   read-path fork resolved, iter-104), `res-1` (the dives landed, the
-   backbone stands), `since-1`, `parse-2`, `engine-1` (+
+   readiness, `world-2` L2 is now the natural next pick (the
+   province — phases.md §6 the architecture owner, weeks-scale, the
+   st-6a/travel + name-1 profile arming rides its cultures half; the
+   newly-landed AP crosswalk's spine/flaw/budget grammar rides its
+   authoring — the first pack to carry spine records gets them
+   lint-checked, D-148/D-152); then `roads-1` (mode G's generated
+   exits — the read-path fork resolved, iter-104), `res-1` (the dives
+   landed, the backbone stands), `since-1`, `parse-2`, `engine-1` (+
    `presentation-1`, its decision-input child), `tune-3`, `st-2`,
-   `scav-1`, `qa-1` mypy + `ci-1` GitHub Actions, `bg-6` (the SoW
-   audit, D-055 deferral), `pack-1` (the grim pack) + `pack-3` +
-   `pack-4`, `companion-1`, `mech-2` (rides the next mechanics.py
-   touch), `st-4` (rides presentation-1 at its write time, D-148) and
-   `st-5` (the first real consumer decides). No other owner question
-   stands open.
+   `scav-1`, `qa-1` mypy + `ci-1` GitHub Actions (the runner that
+   automates the now-landed admission lint), `bg-6` (the SoW audit,
+   D-055 deferral), `pack-1` (the grim pack — the first authored pack
+   to run the full crosswalk deliberately) + `pack-3` + `pack-4`,
+   `companion-1`, `mech-2` (rides the next mechanics.py touch), `st-4`
+   (rides presentation-1 at its write time, D-148) and `st-5` (the
+   first real consumer decides). No other owner question stands open.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
@@ -550,5 +566,5 @@ end to end (the numbers in the header + D-151). What stands:
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
-4. **Nothing is pinned.** The gate's doc debts are paid; the next
-   move is the owner's row pick (or a fresh call).
+4. **Nothing is pinned.** The next move is the owner's row pick (or a
+   fresh call).

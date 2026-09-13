@@ -78,6 +78,16 @@ def v01_pack(tmp_path: Path) -> Any:
     (target / "rules.json").write_text(
         json.dumps(rules, indent=2), encoding="utf-8"
     )
+    # pack-ci (iter-117): the twin's ablation is complete only with the
+    # family's template lines (PACK_SPEC §5 — dead vocabulary otherwise)
+    templates = json.loads(
+        (target / "templates.json").read_text(encoding="utf-8")
+    )
+    for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+        templates["events"].pop(dead_line, None)
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
     return load_pack(target)
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 
@@ -576,6 +586,16 @@ def test_the_declared_table_gates_the_driver_at_runtime(tmp_path: Path) -> None:
     ]
     (target / "rules.json").write_text(json.dumps(rules, indent=2),
                                        encoding="utf-8")
+    # pack-ci (iter-117): the twin's ablation is complete only with the
+    # family's template lines (PACK_SPEC §5 — dead vocabulary otherwise)
+    templates = json.loads(
+        (target / "templates.json").read_text(encoding="utf-8")
+    )
+    for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+        templates["events"].pop(dead_line, None)
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
     stripped = load_pack(target)
     live = run(tmp_path, v01_pack(tmp_path), 33, FADE_ARC, "live.jsonl")[0]
     plain = run(tmp_path, stripped, 33, FADE_ARC, "plain.jsonl")[0]

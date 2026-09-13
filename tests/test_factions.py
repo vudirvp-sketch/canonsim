@@ -120,12 +120,20 @@ def crafted_pack(
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
     if entries is not None:
         rules["factions"] = {"entries": entries}
+    # pack-ci (iter-117): the muster verb is the goal's bare story-beat
+    # expression — no declared effect of its own. The attribution row
+    # is the witness that keeps it alive (PACK_SPEC §5: a system reacts
+    # to the event type) without touching a single canon byte — the
+    # map is metrics-side metadata, never the log
+    rules["metrics"]["system_of_type"][EVENT_TYPE] = ["director"]
+    v01 = False
     if macro is not False:
         if macro is None or macro == "v01":
             # the v0.1 one-scene twin: both blocks dropped together
             # (the pairing law; weather-1's arming re-pin)
             rules["time"].pop("macro", None)
             rules.pop("weather", None)
+            v01 = True
         else:
             rules["time"]["macro"] = macro
     (target / "rules.json").write_text(
@@ -156,6 +164,12 @@ def crafted_pack(
     templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
     templates["events"][EVENT_TYPE] = TEMPLATE_LINE
     templates["events"][MACRO_EVENT] = MACRO_LINE
+    # pack-ci (iter-117): the v0.1 twin's ablation is complete only with
+    # the family's template lines — a stripped block leaves its emission
+    # vocabulary dead (PACK_SPEC §5), so the twin pops them too
+    if v01:
+        for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+            templates["events"].pop(dead_line, None)
     (target / "templates.json").write_text(
         json.dumps(templates, indent=2, ensure_ascii=False), encoding="utf-8"
     )

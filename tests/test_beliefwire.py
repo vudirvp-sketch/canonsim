@@ -152,6 +152,18 @@ def crafted_pack(
     )
     mutate_rules(rules)
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
+    # pack-ci (iter-117): the v0.1 twin's ablation is complete only with
+    # the family's template lines (PACK_SPEC §5 — dead vocabulary
+    # otherwise); derived here so the caller mutations stay surgical
+    if v01:
+        templates = json.loads(
+            (target / "templates.json").read_text(encoding="utf-8")
+        )
+        for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+            templates["events"].pop(dead_line, None)
+        (target / "templates.json").write_text(
+            json.dumps(templates, indent=2), encoding="utf-8"
+        )
     actions = json.loads((target / "actions.json").read_text(encoding="utf-8"))
     mutate_actions(actions)
     (target / "actions.json").write_text(

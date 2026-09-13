@@ -94,6 +94,11 @@ def crafted_pack(
         templates["events"].pop(EVENT_TYPE, None)
     else:
         templates["events"][EVENT_TYPE] = template
+    # pack-ci (iter-117): the macro-less twin strips the weather family's
+    # template lines too (PACK_SPEC §5 — dead vocabulary otherwise)
+    if macro is None:
+        for dead_line in ("weather_turns", "smoke_washed_away"):
+            templates["events"].pop(dead_line, None)
     (target / "templates.json").write_text(
         json.dumps(templates, indent=2), encoding="utf-8"
     )

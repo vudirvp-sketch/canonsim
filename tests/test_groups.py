@@ -146,8 +146,14 @@ def tier_pack(
     )
 
     templates = json.loads((target / "templates.json").read_text(encoding="utf-8"))
-    templates["events"][AGG_EVENT] = AGG_LINE
-    templates["events"][COND_EVENT] = COND_LINE
+    # pack-ci (iter-117): the tier template lines ride the records that
+    # declare them — an omitted tier key (the 68a opt-in) leaves its
+    # line dead (PACK_SPEC §5), so the helper adds exactly what the
+    # crafted groups carry
+    if any(group.get("macro_event") for group in entities["groups"]):
+        templates["events"][AGG_EVENT] = AGG_LINE
+    if any(group.get("condense_event") for group in entities["groups"]):
+        templates["events"][COND_EVENT] = COND_LINE
     templates["events"][MACRO_EVENT] = MACRO_LINE
     (target / "templates.json").write_text(
         json.dumps(templates, indent=2, ensure_ascii=False), encoding="utf-8"

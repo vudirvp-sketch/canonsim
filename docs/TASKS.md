@@ -26,6 +26,22 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-117 · pack-ci — done
+
+The admission-lint rungs LANDED (the owner's fresh call «начинай работу
+по планам… что осталось незакрытого и логичнее всего — то и делай» —
+STATUS Next step's own readiness pick): the PACK_SPEC §5/§6 rows as
+enforcement in `core/pack.py` (`_teleology` + `_live_char`, the spine
+shape in `_entities`, the atomicity law in `_predicate_error`,
+`STATE_MUTATING` at `core/resolvers.py`'s own owner) +
+`tests/test_packci.py` (28: the crafted-twin refusals + the green pins
+— both committed packs, the scaffold, the complete v0.1 twin) + the
+68a twins' compliance pass (the stripped weather family takes its
+template lines — 11 test helpers + the harness's `_DROP_DEAD_LINES`
+map + the factions muster's attribution row); 1696 passed + 1 skipped,
+ruff clean, zero corpus price (load-time only). Detail: worklog
+iter-117 + git.
+
 ### iter-116 · phase-6 gate — done (verdict: PASS, D-151)
 
 Full ROADMAP §5 protocol re-run on the owner's convening gate call
@@ -232,15 +248,12 @@ D-105..D-133 family row + phases.md §5)
   the read is runtime L3, the fold never needs it; no event-id
   shifts, no M3/M5 inflation, corpus price zero by construction; the
   `world_formed` outcome block stays as-is).
-- `pack-ci` · the admission-lint rungs — todo, owner-gated (the
-  PACK_SPEC §5/§6 rows: the teleology checks — dead action types,
-  orphan entities, empty intersection-matrix cells,
-  declared-but-unused templates — + the live-char AP crosswalk rows
-  + the price-marker lint): the checks are specified in
-  `docs/PACK_SPEC.md`; the enforcement rung is the phase's own build,
-  landing with the reskin pack's CI day (the reskin pack is the
-  first pack the new rows run against). `qa-1`/`ci-1` (the runner)
-  stay the standing owner-gated rows.
+- `pack-ci` · the admission-lint rungs — **done (iter-117, D-152)**:
+  the teleology gate + the live-char crosswalk + the price-marker lint
+  LIVE in `core/pack.py` (PACK_SPEC §5/§6 the single reading owner);
+  the checks' deterministic readings, the spine/flaw/budget grammar
+  and the 68a twin-compliance shape recorded there. `qa-1`/`ci-1` (the
+  runner) stay the standing owner-gated rows.
 - `since-1` · the re-encounter delta — todo, owner-gated (read-side,
   v0.2-grade; routed INTO phase 6 by iter-104): world-2's condensing
   travelers the first real consumer (the detail lives in the
