@@ -1162,7 +1162,8 @@
       "coerce",
       "ramble",
       "conclusion_drawn",
-      "world_history"
+      "world_history",
+      "road_musters"
     ],
     "thresholds": {
       "medium": 2,
@@ -1549,8 +1550,8 @@
   },
   "budget": {
     "npcs": {
-      "min": 6,
-      "max": 9
+      "min": 7,
+      "max": 12
     },
     "items": {
       "min": 4,
@@ -1564,6 +1565,64 @@
       "min": 40,
       "max": 55
     },
-    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds — the skeleton slice's own shape (7 npcs, 5 items, 6 hooks, 46 template families at the committed shape); the follow-up slices (the cultures, the factions triangle) grow the cast inside these bounds or re-declare them deliberately — the budget is the pack's own honesty about its scale."
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10 (the runner, the six settlement cast, the road traffic's three strangers), the tier template lines grow the families to 48. The factions triangle (slice 3) is expected to reuse the settlement cast — the growth headroom max 12 covers the deep-history rows."
+  },
+  "names": {
+    "profiles": {
+      "lowland_soft": {
+        "onsets": ["", "b", "d", "l", "m", "n", "r", "s", "v", "w", "y", "th", "sh"],
+        "nuclei": ["a", "e", "i", "o", "u", "ae", "ea"],
+        "codas": ["", "l", "m", "n", "r", "s", "th"],
+        "syllables": [2, 3],
+        "notes": "the river tongue (the cultures slice, D-130's sketch; name-1's first committed arming, D-131/D-153): the lowland traders' speech — sonorant onsets, open or nasal-final syllables, no stop codas, the digraph vowels of the market's drawl; names run two-to-three syllables, the flowing length of the bank towns. The drawn names never collide with the entity namespace (the bounded walk's law, core/names.py)."
+      },
+      "hill_hard": {
+        "onsets": ["", "b", "d", "g", "k", "t", "br", "dr", "gr", "kr", "sk", "st", "tr"],
+        "nuclei": ["a", "e", "i", "o", "u"],
+        "codas": ["", "d", "g", "k", "t", "nd", "rk", "sk", "st"],
+        "syllables": [1, 2],
+        "notes": "the croft tongue: the hill folk's speech — plosive and clustered onsets, stop codas, the plain five vowels of the smelt camps; names run one-to-two syllables, clipped hard against the lowland's flow. Two tongues over one artery — the estrangement the condensation travelers carry (the Morrowind lesson: naming is data)."
+      }
+    },
+    "notes": "name-1 (D-116 (12), core/names.py — the Azgaar split; phases.md §5): the culture-keyed phonotactic profiles, the pack's own vocabulary — profile ids are engine-opaque. The declarations ride the traveler records (generated_name, the mutual-exclusion law); the draws happen at the condensation (the recorded consumer, depth-7's road_musters) on each npc's own name stream — unborn until the reader's zone warms, canon after (first-commit-wins, never a redraw)."
+  },
+  "cultures": {
+    "lowland": {
+      "name_profile": "lowland_soft",
+      "custom_vocabulary": ["sarrow", "toll", "waybill", "weighbeam", "tally"],
+      "prohibitions": [
+        {
+          "law": "the guild's shelter law",
+          "flaw": "the scales tilt for old coin",
+          "notes": "the market's floor under its own flaw (AP-8's prohibition surface, the first committed arming — the culture's limit over a member's flaw, what the lowlands CANNOT do; the WH40k grammar, prohibitions as pack metadata never bonuses, REFERENCES §10): however the weighbeam tilts toward old coin, a paying stranger of the road is never turned from the crossing's shelter — the trade's own law, older than the market's ledgers. Maren's flaw is the flaw this law bounds (the tilt stays legal against coin, illegal against shelter); the gate-review log assert reads it against the run."
+        }
+      ],
+      "members": [
+        "npc_weirkeeper_01",
+        "npc_sergeant_01",
+        "npc_corporal_01",
+        "npc_marketmistress_01",
+        "npc_steward_01",
+        "npc_drover_01",
+        "npc_peddler_01"
+      ],
+      "notes": "the river folk (the cultures slice, D-130: lowland traders vs hill folk): the crossing, the market, the levy and the manor — the bank's cast, plus the road traffic's lowland strangers. The custom vocabulary is the trade's own counting words (the river's name, the crossing's fee, the audit's paper, the market's beam and staff); the CK3 culture keying — one profile per culture, the members' generated_name declarations name it."
+    },
+    "hill": {
+      "name_profile": "hill_hard",
+      "custom_vocabulary": ["bloom", "charcoal", "wergeld"],
+      "prohibitions": [
+        {
+          "law": "the hills' wergeld memory",
+          "flaw": "the iron hides when prices fall",
+          "notes": "the crofts' limit under their own flaw (the second arming of AP-8's prohibition surface): the bloom may hide from the market's prices, but never from a blood price's payment — a wergeld once named stays named until it is paid, the feud's living memory walking the road (the carrier's goal carries the word). What the hills CANNOT do: let a named man-price lapse, however the iron hides. Garrick's flaw is the flaw this law bounds; the deep feud history (slice 3's cause tree) is the law's own backlog."
+        }
+      ],
+      "members": [
+        "npc_smelter_01",
+        "npc_carrier_01"
+      ],
+      "notes": "the croft folk: the smelt camps behind the keep, the estranged half of the valley — the smelter-master and the road traffic's hill carrier. The custom vocabulary is the camps' own words (the smelted iron, the fuel, the blood price the hills never un-name); the clipped hard profile keys the culture's names. Two prohibition sets, two vocabularies, two profiles — the estrangement-as-data family complete (the Disco Elysium shape: belief as rules the culture cannot cross)."
+    }
   }
 }

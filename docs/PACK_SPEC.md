@@ -93,8 +93,8 @@ blast-radius question (D-142). The lint families, all live in
 - **on_action closed keys** (drama-3): the reaction table's
   scope/gate/event/state vocabularies; the one-hop law.
 - **Per-block shapes**: every optional block (`urgencies`, `weather`,
-  `on_action`, `secrets`, `reflection`, `factions`, `names`, `travel`,
-  `worldgen`, …) has its closed key vocabulary and cross-lints
+  `on_action`, `secrets`, `reflection`, `factions`, `names`,
+  `cultures`, `travel`, `worldgen`, …) has its closed key vocabulary and cross-lints
   (`_urgencies` … `_travel` in `core/pack.py`); an absent optional
   block is the primitive silent (the 68a law — the ablation arm's
   foundation, D-141(c)).
@@ -139,6 +139,7 @@ with setting data is pack work.
 | `travel` (roads, prices) | `core/travel.py` | `docs/blueprint/phases.md` §6 (st-6a) |
 | `weather` | `core/weather.py` | `docs/blueprint/phases.md` §5 (weather-1) |
 | `names` (phonotactic profiles) | `core/names.py` | `docs/blueprint/phases.md` §5 (name-1) |
+| `cultures` (the estrangement metadata: profile binding, custom vocabularies, prohibition sets) | `core/pack.py` (load-time lint — the `budget` precedent, zero runtime surface) | this spec §6 (the AP-8 prohibition row) |
 | `macro` (the macro clock cadences) | `core/macro.py` | `docs/blueprint/phases.md` §5 (maclock-1) |
 | `brief` | `brief/assembler.py` | `docs/BRIEF_SPEC.md` §6 |
 | `importance` / `metrics` / `expectations` / `checks` / `scene_detail` / `acquisition` | `core/intent.py`, `core/metrics.py`, `core/detail.py` | the named spec per module |
@@ -198,9 +199,12 @@ lint — they read the whole validated pack):
 
 Thematic Law, pillars, and Author Prohibitions enter as **pack
 metadata** (INV-3: content, not code), enforced as log asserts at gate
-review — never LLM-judged, never core systems. UAP's Grief Architecture
-likewise: pack metadata for packs that want it (the `pack-1` grim
-row's family).
+review — never LLM-judged, never core systems. The **`cultures` block
+(§4, iter-119) is the landed carrier** for the prohibition metadata:
+the culture record declares its laws, the lint owns the shape and the
+AP-8 bindings, the gate review owns the log asserts. UAP's Grief
+Architecture likewise: pack metadata for packs that want it (the
+`pack-1` grim row's family).
 
 ## 6. The live-char crosswalk (static character checks — LIVE since iter-117)
 
@@ -218,12 +222,24 @@ atomicity law inside `_predicate_error`):
   — the province pack carries five spines, every flaw consumed,
   D-148/D-153).
 - **AP-8** — every flaw/deep trait carries ≥1 behavior rule that
-  consumes it. The consuming surface today: the urgency entry's
-  optional `flaw` key (the owner's own rule); both directions linted —
-  an entry's flaw must name a declared spine flaw, and every declared
-  flaw must be consumed (GHOST without anchors = dead pack data).
-  Hook-weight modifiers, on_action reactions and prohibitions join on
-  their own triggers.
+  consumes it. The consuming surfaces today: the urgency entry's
+  optional `flaw` key (the owner's own rule), and — since iter-119,
+  world-2 L2 slice 2, the province the first consumer — the
+  **`cultures` block's prohibition entries** (`rules.json::cultures`,
+  one record per culture: `name_profile` — a declared
+  `names.profiles` id, the culture↔name keying, a member's
+  `generated_name` must name the culture's own profile;
+  `custom_vocabulary` — the culture's words, each occurring in the
+  pack data outside the block, the anti-rot walk; `prohibitions` —
+  `law` + the optional `flaw`, the culture's limit over a MEMBER's
+  flaw, what it CANNOT do, the WH40k grammar, prohibitions as pack
+  metadata never bonuses; `members` — declared npcs, one culture
+  each; all-or-nothing per record, the budget-block precedent —
+  load-time lint, zero runtime surface). Both directions linted — a
+  consuming rule's flaw must name a declared spine flaw, and every
+  declared flaw must be consumed by ≥1 surface (urgency or
+  prohibition — GHOST without anchors = dead pack data). Hook-weight
+  modifiers and on_action reactions join on their own triggers.
 - **AP-11** — no clone NPCs sharing trigger→action pairs (the
   design-time twin of M4 novelty): two LIVE urgency entries
   (`probability_per_beat` > 0 — a zero-weight slot is a stream

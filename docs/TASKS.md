@@ -26,6 +26,34 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-119 · world-2 L2 (slice 2: the cultures half) — done
+
+The wave plan's cultures slice, the owner's fresh call «начинай работу
+по планам, что осталось незакрытого и логичнее всего было бы начать
+сейчас то и делай» (the iter-117/118 precedent phrase — STATUS Next
+step's own readiness pick): the two name-1 phonotactic profiles
+(lowland_soft the river tongue vs hill_hard the croft tongue — name-1's
+FIRST committed arming, the posture made checkable: sonorant codas and
+no clusters vs stop codas and clustered onsets, 2-3 vs 1-2 syllables),
+the condensation travelers (`grp_road_traffic` anchored on the load
+road — the road-traffic group with three `generated_name` members, the
+reachability law riding `condense_event`, the population tier's
+`macro_event`; the FIRST beat materializes them: t=360, the drawn
+names Sathranthaem/Wathru/Drist, one hill tongue among the lowland
+pair), the custom vocabularies + prohibition sets — the `cultures`
+block (the budget-block precedent: load-time lint, zero runtime
+surface; the anti-rot vocabulary walk, the culture↔name keying, the
+AP-8 prohibition surface's first consumer — the guild's shelter law
+over Maren's flaw, the hills' wergeld memory over Garrick's, both
+doubly consumed) + `_cultures` in `core/pack.py` + the AP-8 consumed
+union. The T1 twin +4 (the first-beat condensation pin, the born-names
+tale pin, the tongue-posture pin, the committed-instance pin) +
+`tests/test_cultures.py` +15 (the refusals + the consumed-union green
+twin) + PROVINCE_STOPLIST +3; the golden fixture regenerated (the
+additive delta: +1 condensation, +6 traveler decays — 1726+1 green,
+ruff clean, zero corpus price outside the province). Detail: D-154 +
+worklog iter-119 + git.
+
 ### iter-118 · world-2 L2 (slice 1: the skeleton) — done
 
 The province pack's opening slice, the owner's fresh call «начинай
@@ -219,7 +247,8 @@ D-105..D-133 family row + phases.md §5)
   reskin without core edits, ≤ 1 day" MET by measurement — the gate
   verdict PASS iter-116, D-151, on the owner's convening call —
   ROADMAP §2 CLOSED); L2 OPENED iter-118, the wave plan below
-  (slice 1 done — the skeleton, D-153)** — the TWO-LEVEL gate, level 2
+  (slice 1 done — the skeleton, D-153; slice 2 done — the cultures
+  half, D-154)** — the TWO-LEVEL gate, level 2
   the deep second world (weeks — VISION §7's honest twin): a fantasy
   province at pack scale, authored pillars over a generated surface
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
@@ -228,13 +257,15 @@ D-105..D-133 family row + phases.md §5)
   row, the ORDER owner decides):** slice 1 (iter-118, DONE) the
   skeleton — the Sarrow Vale's 324-site surface, the settlements on
   the travel lattice, the spine records (the AP crosswalk's first
-  committed consumer), the T1 twin; slice 2 the cultures half — the
-  two name-1 phonotactic profiles (lowland soft vs hill hard), the
-  condensation travelers (the road-traffic group with
-  `generated_name` members — name-1's first committed arming, the
-  reachability law riding `condense_event`), the custom vocabularies
-  + prohibition sets (belief-as-rules data, the Disco Elysium shape);
-  slice 3 the triangle — the factions (the trade guild / the old
+  committed consumer), the T1 twin; slice 2 (iter-119, DONE) the
+  cultures half — the two name-1 phonotactic profiles (lowland soft
+  vs hill hard — name-1's first committed arming), the condensation
+  travelers (the road-traffic group with
+  `generated_name` members, the reachability law riding
+  `condense_event`), the custom vocabularies + prohibition sets
+  (the `cultures` block, belief-as-rules data, the Disco Elysium
+  shape — AP-8's third consuming surface); slice 3 the triangle —
+  the factions (the trade guild / the old
   families / the garrison, depth-6's ratio dynamics at province
   scale) + the deep feud history (the cause-tree render, the
   story-critical claims seeding the director's buffer); slice 4 the

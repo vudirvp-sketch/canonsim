@@ -2,7 +2,7 @@
   "meta": {
     "pack": "province_pack",
     "version": "0.1",
-    "notes": "Chronicle templates for the province pack (world-2 L2, slice 1 — the road grammar re-voiced: the tavern/road syntax unchanged, the province's own prose; the loop change was L1's test, the DEPTH is L2's). Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists = alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line. The world_history line's formed arm binds the six armed claim slots (weir_water/road_ground/keep_height/bank_ground/croft_hills/mill_bank — rules.json worldgen.claims)"
+    "notes": "Chronicle templates for the province pack (world-2 L2, slices 1-2 — the road grammar re-voiced: the tavern/road syntax unchanged, the province's own prose; the loop change was L1's test, the DEPTH is L2's). Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists = alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line. The world_history line's formed arm binds the six armed claim slots (weir_water/road_ground/keep_height/bank_ground/croft_hills/mill_bank — rules.json worldgen.claims). The cultures slice's tier pair (iter-119): road_counts the population tier's census at the macro crossings, road_musters the condensation — the {names?...|...} branch is the law (a bare {names} on a nameless condensation is an unknown slot, the drifted_from family); the drawn names list renders joined (render/tracery.py's sequence law)"
   },
   "tale_gate": {
     "min_importance": "medium"
@@ -73,6 +73,8 @@
     "year_turns": "The year turns to {year}.",
     "weather_turns": "The weather turns: {weather}.",
     "smoke_washed_away": "The {weather} washes the smoke from {location}.",
+    "road_counts": "On the year's turning, the road counts {population} souls still walking.",
+    "road_musters": "{names?The road takes shape around the runner — {names} walking the artery together.|{actor} musters {members} strong at {location}.}",
     "world_history": "{year?{actor} remembers: {kind}, in the year {year}{participants?, between {participants}}{places?, at site {places}}{collection?, in the {collection}}.|{actor} takes shape: {sites} sites, {regions} regions, {years} years{weir_water?, the Sarrow gathering at the weir stair}{road_ground?, {road_ground} road ground}{keep_height?, the half-pay keep {keep_height} paces above the water}{bank_ground?, Malby on {bank_ground} bank}{croft_hills?, the smelt crofts in {croft_hills} country}{mill_bank?, Thornmill on {mill_bank} ground}.}"
   }
 }

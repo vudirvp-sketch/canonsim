@@ -2,8 +2,8 @@
   "meta": {
     "pack": "province_pack",
     "version": "0.1",
-    "display": "The Sarrow Vale — the province pack v0.1 (world-2 L2, slice 1)",
-    "notes": "world-2 level 2, slice 1 (iter-118): a fantasy province at pack scale — authored pillars over a generated surface (phases.md §6, D-130's sketch; the Qud split). ORIGINAL nouns (the posture tier: the repo's public 2nd setting is original — D-015/REFERENCES §10; the level-1 reskin instrument was the OPEN generic stack, this is not). The skeleton slice: the 324-site map, the river-artery lattice, the settlements, the cast WITH spine records (the AP crosswalk's first consumer — D-148/D-152: the first pack to carry spine records gets them lint-checked), the T1 twin. The cultures (name-1 profiles, the condensation travelers), the factions triangle, the feud history and the calendar are the follow-up slices (the wave plan, TASKS world-2). Every value is pack data, never code (INV-3)."
+    "display": "The Sarrow Vale — the province pack v0.1 (world-2 L2, slices 1-2)",
+    "notes": "world-2 level 2 (iter-118/119): a fantasy province at pack scale — authored pillars over a generated surface (phases.md §6, D-130's sketch; the Qud split). ORIGINAL nouns (the posture tier: the repo's public 2nd setting is original — D-015/REFERENCES §10; the level-1 reskin instrument was the OPEN generic stack, this is not). The skeleton slice (iter-118): the 324-site map, the river-artery lattice, the settlements, the cast WITH spine records (the AP crosswalk's first consumer — D-148/D-152: the first pack to carry spine records gets them lint-checked), the T1 twin. The cultures slice (iter-119): the two name-1 phonotactic profiles (lowland soft vs hill hard — name-1's first committed arming, D-131/D-153), the condensation travelers (the road-traffic group with generated_name members, the reachability law riding condense_event), the custom vocabularies + prohibition sets (the cultures block, belief-as-rules data). The factions triangle, the deep feud history and the calendar are the follow-up slices (the wave plan, TASKS world-2). Every value is pack data, never code (INV-3)."
   },
   "locations": [
     {
@@ -350,6 +350,72 @@
       },
       "carries": [],
       "notes": "the old families' voice — the spine's flaw rides the ramble urgency entry (AP-8: the grief-ramble to no one in particular, the drunk's ambient shape re-voiced mid-grim); intoxication 30 — the grey-brew (the jug, items) feeds his witness quality (the §6 intersection matrix)"
+    },
+    {
+      "id": "npc_drover_01",
+      "role": "a lowland drover, the herd road to the bank market",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "road-weary",
+      "goal": "reach the bank market before the stalls close",
+      "generated_name": "lowland_soft",
+      "notes": "the condensation travelers (the cultures slice, D-153's wave plan): the road traffic's lowland arm — an UNBORN name on the artery, drawn from the lowland_soft profile at the condensation (name-1's first committed arming, D-131; the lazy-depth law: unnamed until the reader's zone warms). No spine, no urgency — the stranger is the population tier until the first beat materializes the group (depth-7, the inn's-strangers shape at province scale)"
+    },
+    {
+      "id": "npc_peddler_01",
+      "role": "a lowland peddler, the pack on the shoulder",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 15,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "walk the artery before the rains close it",
+      "generated_name": "lowland_soft",
+      "notes": "the road traffic's second lowland stranger — the traveling trade the guild's shelter law answers to (the cultures block's prohibition rides the lowland record); the unborn name rides the same condensation, its own name stream (the D-079 family law: one stream per declaration, no cross-talk)"
+    },
+    {
+      "id": "npc_carrier_01",
+      "role": "a hill carrier, the crofts' man on the artery",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "closed",
+      "goal": "walk the bloom to the bank; the wergeld stays named",
+      "generated_name": "hill_hard",
+      "notes": "the road traffic's hill arm — the crofts' own tongue on the artery (hill_hard, the clipped hard profile); the goal carries the wergeld word (the hills' prohibition made live on the road, the hill vocabulary's own token); the estranged half of the valley walking beside the lowland pair — one artery, two tongues"
     }
   ],
   "ambient_entities": [
@@ -417,6 +483,21 @@
       "breakable": false,
       "flammability": "medium",
       "notes": "the crofts' utility sack, by the stacks — the flammable prop at the camp (the road's hawser shape)"
+    }
+  ],
+  "groups": [
+    {
+      "id": "grp_road_traffic",
+      "name": "the road traffic",
+      "position": "loc_riverroad",
+      "members": [
+        "npc_drover_01",
+        "npc_peddler_01",
+        "npc_carrier_01"
+      ],
+      "macro_event": "road_counts",
+      "condense_event": "road_musters",
+      "notes": "the condensation travelers (depth-7's first committed arming, the cultures slice): the artery's traffic as ONE group entity — the population tier while cold (road_counts, the cardinality aggregate at the macro crossings), the named strangers when the reader's zone warms (road_musters, the members' canon member_of births + their drawn names). Anchored ON the road the runner starts at: the group is active at the first zone computation and condenses immediately — the PC walks into a materialized world (the DF precedent, the load-state origin law). The members: two lowland tongues and one hill tongue — name-1's profiles consumed by the condensation's own draw"
     }
   ]
 }

@@ -482,6 +482,12 @@ class _Lint:
         # the entities' npcs + groups (the members' reachability) and
         # the rules' own names block, all validated before it.
         self._names()
+        # world-2 L2 slice 2 (iter-119): after _names — the cultures
+        # block reads the declared profiles (the culture↔name keying),
+        # the npc records' spines and generated_name declarations, and
+        # the pack's own text (the vocabulary anti-rot walk), all
+        # validated before it.
+        self._cultures()
         self._director()
         self._on_action()
         self._secrets()
@@ -1946,6 +1952,215 @@ class _Lint:
                 "member of any group declaring condense_event (the "
                 "materialization door; the depth-5b reachability law)",
             )
+
+    # -- the cultures block (iter-119: the estrangement metadata) --------
+
+    def _pack_text_without(self, block: str) -> str:
+        """Every string the pack's data carries — keys, values and notes
+        prose (the raw-text family the stoplist self-check searches),
+        MINUS one rules block: the vocabulary check below must never
+        find its own declaration (the self-reference exclusion)."""
+        chunks: list[str] = []
+
+        def walk(node: Any) -> None:
+            if isinstance(node, Mapping):
+                for key, value in node.items():
+                    if isinstance(key, str):
+                        chunks.append(key)
+                    walk(value)
+            elif isinstance(node, list):
+                for item in node:
+                    walk(item)
+            elif isinstance(node, str):
+                chunks.append(node)
+
+        for name, data in self._data.items():
+            if name == "rules.json" and isinstance(data.get(block), Mapping):
+                data = {key: value for key, value in data.items() if key != block}
+            walk(data)
+        return "\n".join(chunks)
+
+    def _cultures(self) -> None:
+        """The cultures block's pack contract (world-2 L2 slice 2, the
+        cultures half — D-130's sketch, D-154): the ESTRANGEMENT
+        METADATA, the budget-block precedent — load-time lint, ZERO
+        runtime surface ("prohibitions as pack metadata, never bonuses",
+        REFERENCES §10; enforced as log asserts at gate review,
+        PACK_SPEC §5). One record per culture (the CK3 culture keying:
+        pillars + domain-token lists): `name_profile` — the profile the
+        culture's names draw from, must be a declared `names.profiles`
+        id; `custom_vocabulary` — the culture's own words, each must
+        occur in the pack data OUTSIDE this block as a full segment (the
+        anti-rot twin of the stoplist self-check — a word nothing in the
+        pack carries is dead vocabulary, the depth-5b reachability
+        family); `prohibitions` — the culture's laws (what it CANNOT
+        do, the WH40k grammar): each entry carries a non-empty `law`
+        and the OPTIONAL `flaw` — when present it must name a MEMBER's
+        declared spine flaw (AP-8's prohibition surface, the culture's
+        limit over the flaw; the consumption union lives in
+        `_live_char`); `members` — the declared-npc cast, one culture
+        each (a member of two cultures is an ambiguity), and a member
+        declaring a generated name must name THIS culture's profile
+        (the culture↔name keying made executable — the CK3
+        culture↔name-pool binding, `docs/ref/ck3.md`)."""
+        rules = self._data["rules.json"]
+        entities = self._data["entities.json"]
+        config = rules.get("cultures")
+        if config is None:
+            return  # the unarmed law (the 68a pattern — the other packs)
+        _require(
+            isinstance(config, Mapping),
+            "cultures must be an object (culture id -> the record)",
+        )
+        profiles = (
+            rules.get("names", {}).get("profiles", {})
+            if isinstance(rules.get("names"), Mapping) and
+            isinstance(rules.get("names", {}).get("profiles"), Mapping)
+            else {}
+        )
+        npc_records = {npc["id"]: npc for npc in entities["npcs"]}
+        spines = {
+            npc_id: record.get("spine", {}).get("flaw")
+            for npc_id, record in npc_records.items()
+            if isinstance(record.get("spine"), Mapping)
+        }
+        # the anti-rot corpus: the whole pack's strings, this block
+        # excluded (computed once — the walk below is the only reader)
+        pack_text = self._pack_text_without("cultures")
+        claimed: dict[str, str] = {}  # npc id -> the culture that claimed them
+        for culture_id, record in config.items():
+            if culture_id == "notes":
+                continue  # the block-level commentary field
+            where = f"cultures[{culture_id!r}]"
+            _require(
+                isinstance(culture_id, str) and culture_id.strip(),
+                f"{where}: culture ids must be non-empty strings",
+            )
+            _require(
+                isinstance(record, Mapping),
+                f"{where}: the culture must be an object, got {record!r}",
+            )
+            required = ("name_profile", "custom_vocabulary", "prohibitions", "members")
+            unknown = sorted(
+                set(record) - set(required) - {"notes"}
+            )
+            _require(
+                not unknown,
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "name_profile | custom_vocabulary | prohibitions | members "
+                "| notes)",
+            )
+            for key in required:
+                _require(
+                    key in record,
+                    f"{where}.{key} is required — a half-declared culture is "
+                    "a broken culture (all-or-nothing, the spine's own law)",
+                )
+            # the profile binding (the culture↔name keying)
+            profile = record["name_profile"]
+            _require(
+                isinstance(profile, str) and profile in profiles,
+                f"{where}.name_profile {profile!r} is not a declared "
+                "profile (rules.json names.profiles owns the vocabulary)",
+            )
+            # the custom vocabulary (the anti-rot walk)
+            vocabulary = record["custom_vocabulary"]
+            _require(
+                isinstance(vocabulary, list) and bool(vocabulary),
+                f"{where}.custom_vocabulary must be a non-empty list "
+                "(a culture with no words of its own is dead data)",
+            )
+            for word in vocabulary:
+                _require(
+                    isinstance(word, str) and bool(word.strip()),
+                    f"{where}.custom_vocabulary: words must be non-empty "
+                    f"strings, got {word!r}",
+                )
+                pattern = re.compile(
+                    rf"(?<![a-zA-Z0-9]){re.escape(word)}(?![a-zA-Z0-9])",
+                    re.IGNORECASE,
+                )
+                _require(
+                    pattern.search(pack_text) is not None,
+                    f"{where}.custom_vocabulary: {word!r} occurs nowhere in "
+                    "the pack data outside the cultures block (dead "
+                    "vocabulary — the word must belong to the pack, the "
+                    "reachability law)",
+                )
+            # the member cast (one culture each, the keying check) —
+            # validated BEFORE the prohibition set reads it (the
+            # member-flaw binding below walks the same list)
+            members = record["members"]
+            _require(
+                isinstance(members, list) and bool(members),
+                f"{where}.members must be a non-empty list (a culture of "
+                "nobody is dead data, the vacuity family)",
+            )
+            for member in members:
+                _require(
+                    member in npc_records,
+                    f"{where}.members: {member!r} is not a declared npc",
+                )
+                other = claimed.get(member)
+                _require(
+                    other is None,
+                    f"{where}.members: {member!r} already belongs to "
+                    f"{other!r} (one culture per npc — two is an "
+                    "ambiguity)",
+                )
+                claimed[member] = str(culture_id)
+                declaration = npc_records[member].get("generated_name")
+                if declaration is not None:
+                    _require(
+                        declaration == profile,
+                        f"{where}.members: {member!r} declares "
+                        f"generated_name {declaration!r} but the culture's "
+                        f"profile is {profile!r} (the culture↔name keying — "
+                        "a member's drawn name comes from the culture's own "
+                        "tongue)",
+                    )
+            # the prohibition set (the culture's laws)
+            prohibitions = record["prohibitions"]
+            _require(
+                isinstance(prohibitions, list) and bool(prohibitions),
+                f"{where}.prohibitions must be a non-empty list (a culture "
+                "with no law is dead data — two prohibition sets minimum "
+                "per the estrangement family)",
+            )
+            member_flaws = {
+                flaw
+                for flaw in (spines.get(member) for member in members)
+                if isinstance(flaw, str)
+            }
+            for entry in prohibitions:
+                entry_where = f"{where}.prohibitions"
+                _require(
+                    isinstance(entry, Mapping),
+                    f"{entry_where}: entries must be objects "
+                    "(law | flaw | notes), got {entry!r}",
+                )
+                unknown_entry = sorted(set(entry) - {"law", "flaw", "notes"})
+                _require(
+                    not unknown_entry,
+                    f"{entry_where}: unknown keys {unknown_entry} (the "
+                    "closed vocabulary: law | flaw | notes)",
+                )
+                _require(
+                    isinstance(entry.get("law"), str)
+                    and bool(entry["law"].strip()),
+                    f"{entry_where}.law is required and must be a non-empty "
+                    "string (the law names itself)",
+                )
+                flaw = entry.get("flaw")
+                if flaw is None:
+                    continue  # a pure culture law, no member flaw root
+                _require(
+                    isinstance(flaw, str) and flaw in member_flaws,
+                    f"{entry_where}: flaw {flaw!r} names no declared spine "
+                    f"flaw of a member of {culture_id!r} (AP-8: the "
+                    "prohibition is the culture's limit over a member's "
+                    "flaw — the law roots in the cast it bounds)",
+                )
 
     # -- director (iter-4: consequence buffer + triggers + stagnation) --------
 
@@ -5235,6 +5450,20 @@ class _Lint:
             if flaw not in spines.values():
                 unknown_flaws.append(flaw)
             consumed.add(flaw)
+        # the PROHIBITION surface (iter-119, world-2 L2 slice 2 — the
+        # cultures block's law entries): a prohibition's `flaw` joins
+        # the consumed set (AP-8's "prohibitions join on their own
+        # triggers" — the province is the trigger's first consumer);
+        # the shape and the member binding are _cultures' own, this
+        # walker owns the union — a flaw consumed by the culture's law
+        # alone (no urgency entry) is anchored, never GHOST
+        for culture in (rules.get("cultures") or {}).values():
+            if not isinstance(culture, Mapping):
+                continue
+            for entry in culture.get("prohibitions", ()):
+                if not isinstance(entry, Mapping) or not isinstance(entry.get("flaw"), str):
+                    continue
+                consumed.add(entry["flaw"])
         if unknown_flaws:
             raise PackError(
                 f"urgencies: flaw {unknown_flaws[0]!r} names no declared "

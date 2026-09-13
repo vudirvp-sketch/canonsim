@@ -79,16 +79,23 @@ ROAD_STOPLIST: tuple[str, ...] = (
     "timber", "cask", "odo", "ashen", "wayfarer", "gable",
 )
 
-# Setting nouns of province_pack (iter-118, world-2 L2 slice 1): the
-# third pack's own vocabulary — the ORIGINAL setting's toponyms, cast
-# names and prop nouns (the Sarrow Vale). Shared road/tavern words
-# (market, hearth, lamp, toll) stay in the older lists; this list
-# carries what is DISTINCTIVELY the province's.
+# Setting nouns of province_pack (iter-118, world-2 L2 slice 1; grown
+# iter-119, the cultures slice): the third pack's own vocabulary — the
+# ORIGINAL setting's toponyms, cast names, prop nouns and culture words
+# (the Sarrow Vale). Shared road/tavern words (market, hearth, lamp,
+# toll) stay in the older lists; this list carries what is
+# DISTINCTIVELY the province's. The cultures slice's additions
+# (iter-119): the travelers' nouns (drover, peddler) and the hill law
+# word (wergeld — the prohibition's own token, riding the carrier's
+# goal). "carrier" is deliberately absent — the acquisition family's
+# engine word (core/fold.py's item holder, the drift registry's own
+# UNCLASSIFIED entry); the id npc_carrier_01 never spells it as a
+# free-standing word in code.
 PROVINCE_STOPLIST: tuple[str, ...] = (
     "sarrow", "weir", "malby", "thornmill", "tithe", "crofts", "garrison",
     "sergeant", "corporal", "osgar", "ketta", "ferra", "garrick",
     "wilmot", "tallow", "punt", "tally", "waybill", "tin", "weighbeam",
-    "charcoal",
+    "charcoal", "drover", "peddler", "wergeld",
 )
 
 

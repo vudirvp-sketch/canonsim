@@ -1,67 +1,71 @@
-Iteration: iter-118 (`iter-118-world2l2` — the province skeleton, the
+Iteration: iter-119 (`iter-119-world2c` — the cultures half, the
 owner's fresh call «начинай работу по планам, что осталось незакрытого
-и логичнее всего было бы начать сейчас то и делай» — the iter-117
-precedent phrase, STATUS Next step's own readiness pick: world-2 L2
-the natural next pick): **the L2 row OPENED — `content/province_pack/`
-the Sarrow Vale, slice 1 the skeleton (D-153).** The generated surface
-at the province band: extent 144/spacing 8 = 324 sites (the 200–600
-row, phases.md §6 — the geo-1-measured cost, a 9× growth over the
-road's 36; sub-second genesis), the six settlements claimed at
-seed-realization sites (the iter-112 authoring-loop pick; the
-claim↔exits discipline at `place.max_edge_span` 4 — the artery's legs
-2–4 cells), the feud/quarrel chronicle over 150 years (the hooks
-arming Maren's feud sweep + Wilmot's grief murmur, the dormant
-weight-0 pair). The travel lattice: the road family's derived prices
-(150/60/45) over the province geometry — the legs 345–705 ticks,
-hours-to-a-day where the road walked in minutes (the L2 scale claim
-made mechanical, st-6a's law at province scale). The cast WITH spine
-records: five NPCs declare the want/need tension with a flaw rooted in
-a cause — **the AP crosswalk's first committed consumer (D-148/D-152:
-the first pack to carry spine records got them lint-checked), every
-flaw consumed by its urgency entry (AP-8)**; the `budget` block's
-first committed arming (AP-1). `tests/test_t1_province.py` +10: the
-T1 twin (byte-identity + the golden fixture
-`tests/fixtures/province_smoke_seed42.jsonl` + the regen guard +
-fingerprint 0) + the price pins + the mid-travel transfer pin (Osgar
-briefing Ferra at t=3240, strictly inside the Malby→Thornmill leg —
-the road T1's measured instance re-produced at province scale) + the
-spine/budget pins + the genesis-scale pin. The stoplist self-check
-extension (PROVINCE_STOPLIST — the third pack's nouns join the INV-3
-audit vocabulary same-day) + the packci committed-pin (the third pack
-joins the green pins) ·
+и логичнее всего было бы начать сейчас то и делай» — the iter-117/118
+precedent phrase, STATUS Next step's own readiness pick: slice 2 the
+natural next pick, D-153's wave plan): **the cultures slice LIVE —
+the estrangement-as-data family complete in `content/province_pack/`
+(D-154).** The two name-1 PHONOTACTIC PROFILES (`rules.json::names`
+— name-1's FIRST committed arming, D-131/D-116(12)): `lowland_soft`
+the river tongue (sonorant codas, no clusters, 2–3 syllables, the
+digraph vowels) vs `hill_hard` the croft tongue (stop codas,
+clustered onsets, 1–2 syllables) — the soft/hard POSTURE made
+checkable (the T1 posture pin). The CONDENSATION TRAVELERS
+(`entities.json::groups` — depth-7's first committed arming):
+`grp_road_traffic` anchored ON the runner's load road, three
+`generated_name` members (two lowland tongues, one hill), the
+reachability law riding `condense_event` + the population tier's
+`macro_event` — the load-state origin law fires at the FIRST beat
+(t=360): ONE event carrying each member's member_of birth PAIRED
+with the name birth + the tombstone, the drawn names
+Sathranthaem/Wathru/Drist, the tale line rendering them ("The road
+takes shape around the runner — …"). The custom vocabularies +
+prohibition sets — the `cultures` BLOCK (the budget-block precedent:
+load-time lint in `core/pack.py::_cultures`, ZERO runtime surface;
+the anti-rot vocabulary walk, the culture↔name keying, one culture
+per npc): **the AP-8 PROHIBITION SURFACE's first consumer — the
+crosswalk's THIRD consuming family** (the flaw joins the consumed
+set; the guild's shelter law over Maren's flaw, the hills' wergeld
+memory over Garrick's — both doubly consumed, the urgency behavior +
+the culture's limit over it). The budget RE-DECLARE (npcs 6–9 →
+7–12, the cast at 10 — AP-1's second arm exercised).
+`tests/test_cultures.py` NEW +15 (the refusals + the consumed-union
+green twin) + the T1 twin +4 + PROVINCE_STOPLIST +3 (drover, peddler,
+wergeld); the golden fixture REGENERATED (the additive delta: +1
+condensation, +6 traveler decays; 32→39 events, fingerprint 0) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
-1707 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD d6cffa8 — 1696+1 green, ruff clean —
-and re-verified after: +10 the T1 twin, +1 the stoplist self-check;
-zero corpus price: the third pack is a new directory, the tavern/road
-corpora and their fixtures byte-untouched by construction, the T1/T8
-corpora unaffected) ·
+1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD ebf464e — 1707+1 green, ruff clean —
+and re-verified after: +15 the cultures suite, +4 the T1 pins; zero
+corpus price outside the province: the tavern/road corpora and their
+fixtures byte-untouched by construction, the province's own golden
+fixture the slice's own object — the T1 twin re-pinned on the fresh
+bytes) ·
 Date: 2026-09-13 ·
-Scope: `content/province_pack/` NEW (entities — 6 locations, 7 npcs
-with the spine records, 1 ambient, 5 items; rules — the worldgen at
-the province band + the budget block + the province blocks re-voiced
-from the road family; actions — the road verb set with the province
-tokens/hook ids; templates — the province prose, the world_history
-formed arm binding the six claim slots) + `tests/playscripts/
-province_smoke.json` + `tests/fixtures/province_smoke_seed42.jsonl`
-NEW + `tests/test_t1_province.py` NEW (+10) +
-`tests/test_inv3_stoplist.py` (+PROVINCE_STOPLIST + the self-check)
-+ `tests/test_packci.py` (the third-pack pin) + docs: DECISIONS
-D-153 (32 rows — over the 30 cap on the §6.1 substance precedent
-until the next gate collapse, the D-152 landing's own record),
-TASKS (the world-2 L2 opening + the wave plan + the iter-118
-section), STATUS.md (this re-pin + Next step), worklog.md (this
-entry; iter-108 evicted per the cap), NAV §1 + README (the
-province_pack rows), PACK_SPEC §6 (the AP-9 first-consumer note —
-the crosswalk's consumer LANDED) — 16 files (re-counted against the
-worktree delta: 9 modified + 7 new; the pack iteration's own
-checklist, the iter-112 family's objective scope per AGENTS §2.3;
-the alternative — a shallower skeleton — refused: the row's own text
-names the surface + the spines as the L2 opening's substance).
-The prior iteration's record: iter-117 (pack-ci). The detail lives in
-TASKS + worklog + git.
+Scope: `content/province_pack/` (entities — +groups `grp_road_traffic`
++3 travelers with `generated_name`; rules — +`names` +`cultures`, the
+budget re-declare, story_critical += road_musters; templates — +the
+tier pair road_counts/road_musters, the {names?...|...} branch law) +
+`core/pack.py` (+`_cultures`, the AP-8 consumed union in `_live_char`)
++ `tests/test_cultures.py` NEW (+15) + `tests/test_t1_province.py`
+(+4) + `tests/test_inv3_stoplist.py` (+3 words) +
+`tests/fixtures/province_smoke_seed42.jsonl` (regenerated) + docs:
+DECISIONS D-154 (33 rows — over the 30 cap on the §6.1 substance
+precedent until the next gate collapse, the D-152/153 family's own
+record), TASKS (slice 2 flipped + the iter-119 section), STATUS.md
+(this re-pin + Next step), worklog.md (this entry; iter-109 evicted
+per the cap), NAV §1 + README (the province_pack rows re-pointed),
+PACK_SPEC (§3 the block list, §4 the cultures row, §5 the landed
+carrier note, §6 the AP-8 prohibition surface) — 14 files (re-counted
+against the worktree delta: 13 modified + 1 new; the pack+lint
+iteration's own checklist per AGENTS §2.3; the alternative — riding
+the prohibitions on urgency entries alone, no new block — refused:
+the wave plan's own text names the custom vocabularies + prohibition
+sets as DATA, and "tone/prohibition data rides the four files'
+blocks" is the standing D-147 pin — a block is the carrier).
+The prior iteration's record: iter-118 (the skeleton slice). The
+detail lives in TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -536,24 +540,25 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-118 DONE: the world-2 L2 row OPENED — the province skeleton
-LIVE (D-153): `content/province_pack/` the Sarrow Vale, the 324-site
-generated surface, the settlements on the travel lattice, the spine
-records (the AP crosswalk's first committed consumer), the T1 twin
-green.** The L2 wave plan (D-153, TASKS world-2) owns the remainder:
-slice 2 the cultures half, slice 3 the triangle, slice 4 the calendar
-+ the verdict call. What stands:
+**iter-119 DONE: the cultures slice LIVE (D-154) — the estrangement
+family complete in the province pack: the two phonotactic profiles
+(name-1's first committed arming), the condensation travelers (the
+first beat's materialized names), the `cultures` block (the AP-8
+prohibition surface's first consumer, the custom vocabularies, the
+anti-rot walk).** The L2 wave plan (D-153, TASKS world-2) owns the
+remainder: slice 3 the triangle, slice 4 the calendar + the verdict
+call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
-   readiness, world-2 L2 slice 2 (the cultures half) is the natural
-   next pick — the row's own wave plan, the two name-1 phonotactic
-   profiles (lowland soft vs hill hard — name-1's first committed
-   arming), the condensation travelers (the road-traffic group with
-   `generated_name` members, the reachability law riding
-   `condense_event`), the custom vocabularies + prohibition sets; then
-   slice 3 (the factions triangle + the deep feud history), slice 4
-   (the calendar + the T7 read + the verdict); then `roads-1` (mode
+   readiness, world-2 L2 slice 3 (the triangle) is the natural
+   next pick — the row's own wave plan, the factions (the trade
+   guild / the old families / the garrison, depth-6's ratio dynamics
+   at province scale over the settlement cast) + the deep feud
+   history (the cause-tree render, the story-critical claims seeding
+   the director's buffer — the wergeld's own backlog per D-154);
+   then slice 4 (the calendar + the T7 read + the verdict); then
+   `roads-1` (mode
    G's generated exits — the read-path fork resolved, iter-104),
    `res-1` (the dives landed, the backbone stands), `since-1`,
    `parse-2`, `engine-1` (+ `presentation-1`, its decision-input

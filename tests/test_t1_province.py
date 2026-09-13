@@ -1,7 +1,8 @@
-"""T1-province — determinism for the province pack (world-2 L2, slice 1,
-iter-118: the skeleton — the generated surface at province scale, the
-settlements on the travel lattice, the spine records, the AP crosswalk's
-first committed consumer).
+"""T1-province — determinism for the province pack (world-2 L2, slice 1
+iter-118 + slice 2 the cultures half iter-119: the generated surface at
+province scale, the settlements on the travel lattice, the spine
+records, the AP crosswalk's first committed consumer; the two name-1
+phonotactic profiles, the condensation travelers, the cultures block).
 
 Same seed + same playscript + same environment = byte-identical logs,
 measured against the committed golden fixture
@@ -24,16 +25,28 @@ The L2 spine pins (the AP crosswalk's first committed consumer,
 D-148/D-152): the province's NPCs carry spine records whose every
 flaw is consumed by an urgency entry — the pack-ci crosswalk's first
 non-crafted instance.
+
+The cultures pins (slice 2, iter-119): the road traffic condenses at
+the FIRST beat (the load-state origin law — the PC walks into a
+materialized world, the DF precedent), the members' names born on
+their own streams (the drawn names riding the golden bytes), the two
+tongues' posture (lowland soft vs hill hard, the phonotactic claim
+made checkable), the cultures block's committed instance (the AP-8
+prohibition surface's first consumer, the doubly-consumed flaws), and
+the budget re-declare the slice's own honesty.
 """
 
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
+from core.log import read_log
 from core.loop import Simulator, load_playscript
 from core.pack import load_pack
 from core.travel import travel_ticks
+from render.chronicle import render_chronicle
 
 REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
@@ -297,9 +310,11 @@ def test_spine_records_live_and_consumed() -> None:
 
 def test_the_budget_block_declares_the_skeleton_shape() -> None:
     """AP-1's first committed consumer: the budget block bounds the
-    skeleton slice's own shape (7 npcs, 5 items, 6 hooks, 46 template
-    families) — the pack's honesty about its scale, growth inside the
-    bounds or a deliberate re-declare."""
+    pack's own shape (the skeleton declared 6-9 npcs for its
+    seven-strong cast; the cultures slice RE-DECLARED deliberately —
+    10 npcs, 5 items, 6 hooks, 48 template families) — the pack's
+    honesty about its scale, growth inside the bounds or a deliberate
+    re-declare (the block's own law, iter-119's exercise of it)."""
     pack = load_pack(PACK_DIR)
     budget = pack.rules["budget"]
     assert budget["npcs"]["min"] <= len(pack.entities["npcs"]) <= budget["npcs"]["max"]
@@ -308,3 +323,154 @@ def test_the_budget_block_declares_the_skeleton_shape() -> None:
     assert budget["hooks"]["min"] <= hooks <= budget["hooks"]["max"]
     templates = len(pack.templates["events"])
     assert budget["templates"]["min"] <= templates <= budget["templates"]["max"]
+    # the cultures slice's own re-declare: the travelers grow the cast
+    # past the skeleton's max (9) — the honest re-declare, not a silent
+    # outgrowth (AP-1's second arm, exercised)
+    assert len(pack.entities["npcs"]) == 10
+    assert budget["npcs"] == {"min": 7, "max": 12}
+
+
+# -- the cultures pins (slice 2, iter-119 — D-153's wave plan) -----------------
+
+
+def test_the_road_traffic_condenses_at_the_first_beat() -> None:
+    """The load-state origin law at province scale: the road-traffic
+    group is anchored on the runner's load road, so the FIRST zone
+    computation (the first beat, t=360) materializes it — ONE event
+    carrying each member's canon membership birth PAIRED with the name
+    birth (one member, one block: member_of then the name, the D-054/
+    D-131 shape), the tombstone marker LAST, the outcome's `names` key
+    listing the drawn names in member order. The tombstone holds: no
+    second condensation ever fires (write-once)."""
+    events = _events(GOLDEN)
+    condensations = [e for e in events if e["type"] == "road_musters"]
+    assert len(condensations) == 1
+    event = condensations[0]
+    assert event["t"] == 360
+    assert event["actor"] == "grp_road_traffic"
+    members = ("npc_drover_01", "npc_peddler_01", "npc_carrier_01")
+    expected_props = [
+        prop
+        for member in members
+        for prop in ("member_of", "name")
+    ] + ["condensed"]
+    expected_entities = [
+        entity
+        for member in members
+        for entity in (member, member)
+    ] + ["grp_road_traffic"]
+    assert [c["prop"] for c in event["state_changes"]] == expected_props
+    assert [c["entity"] for c in event["state_changes"]] == expected_entities
+    assert all(
+        c["from"] is None for c in event["state_changes"]
+    )  # every birth is a first commit
+    assert event["outcome"]["members"] == 3
+    drawn = event["outcome"]["names"]
+    assert len(drawn) == 3 and all(drawn)
+    # the tombstone: the marker wrote True, and no later event touches
+    # the group's members again (write-once, never a redraw)
+    assert event["state_changes"][-1]["to"] is True
+
+
+def test_the_born_names_render_in_the_tale() -> None:
+    """The condensation line carries the drawn names into the tale
+    (the {names?...|...} branch — the road_musters event is
+    story-critical, the medium band): the reader SEES the strangers
+    materialize, the cultures slice's own tale beat."""
+    pack = load_pack(PACK_DIR)
+    _header, events = read_log(GOLDEN, SCHEMA)
+    tale = render_chronicle(events, pack, 42)
+    names = next(
+        e["outcome"]["names"] for e in _events(GOLDEN)
+        if e["type"] == "road_musters"
+    )
+    line = next(
+        text for text in tale.splitlines()
+        if all(name in text for name in names)
+    )
+    assert "artery" in line
+
+
+def test_the_two_tongues_split_their_postures() -> None:
+    """Lowland soft vs hill hard, the phonotactic claim made checkable:
+    the river tongue carries NO stop codas and no consonant clusters,
+    its names run 2-3 syllables (the flowing length); the croft tongue
+    carries stop codas and clustered onsets, its names run 1-2 (the
+    clipped length). The drawn names split accordingly — the two
+    lowland names are longer than the hill name (the corpus's own
+    visible tongue split, seed 42)."""
+    pack = load_pack(PACK_DIR)
+    profiles = pack.rules["names"]["profiles"]
+    lowland, hill = profiles["lowland_soft"], profiles["hill_hard"]
+    stops = {"p", "t", "k", "b", "d", "g"}
+    clusters = {"gr", "kr", "sk", "st", "tr", "br", "dr"}
+    assert not set(lowland["codas"]) & stops
+    assert set(hill["codas"]) & stops
+    assert not set(lowland["onsets"]) & clusters
+    assert set(hill["onsets"]) & clusters
+    assert lowland["syllables"] == [2, 3]
+    assert hill["syllables"] == [1, 2]
+    drawn = next(
+        e["outcome"]["names"] for e in _events(GOLDEN)
+        if e["type"] == "road_musters"
+    )
+    lowland_names, hill_name = drawn[:2], drawn[2]
+    assert all(len(name) > len(hill_name) for name in lowland_names)
+
+
+def test_the_cultures_block_is_the_committed_instance() -> None:
+    """The AP-8 prohibition surface's first committed consumer: two
+    cultures, each keying its own profile (the members' generated_name
+    declarations name it), each carrying its custom vocabulary (every
+    word occurring in the pack's own data), and each prohibition's
+    flaw rooted in a MEMBER's spine — the two flaws are DOUBLY
+    consumed (the urgency entry's behavior + the culture's law over
+    it), the richer arming the crosswalk's third surface lands with."""
+    pack = load_pack(PACK_DIR)
+    cultures = pack.rules["cultures"]
+    assert set(cultures) == {"lowland", "hill"}
+    spines = {
+        npc["id"]: npc["spine"]["flaw"]
+        for npc in pack.entities["npcs"] if "spine" in npc
+    }
+    by_flaw = {flaw: npc for npc, flaw in spines.items()}
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8") for path in sorted(PACK_DIR.glob("*.json"))
+    )
+    for _culture_id, record in cultures.items():
+        profile = record["name_profile"]
+        assert profile in pack.rules["names"]["profiles"]
+        for member in record["members"]:
+            declaration = next(
+                npc.get("generated_name") for npc in pack.entities["npcs"]
+                if npc["id"] == member
+            )
+            if declaration is not None:
+                assert declaration == profile
+        for word in record["custom_vocabulary"]:
+            pattern = re.compile(
+                rf"(?<![a-zA-Z0-9]){re.escape(word)}(?![a-zA-Z0-9])",
+                re.IGNORECASE,
+            )
+            assert pattern.search(pack_text), word
+        for entry in record["prohibitions"]:
+            flaw = entry["flaw"]
+            holder = by_flaw[flaw]
+            assert holder in record["members"]  # the law roots in the cast
+            # the doubly-consumed shape: the urgency entry consumes it
+            # too (the behavior), the prohibition bounds it (the limit)
+            assert any(
+                u.get("flaw") == flaw
+                for u in pack.rules["urgencies"]["entries"]
+            )
+    # the two laws are the sketch's own pair: the guild's shelter law
+    # (lowland) and the hills' wergeld memory (hill)
+    laws = {
+        culture_id: entry["law"]
+        for culture_id, record in cultures.items()
+        for entry in record["prohibitions"]
+    }
+    assert laws == {
+        "lowland": "the guild's shelter law",
+        "hill": "the hills' wergeld memory",
+    }

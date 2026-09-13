@@ -13,6 +13,46 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-119 · 2026-09-13 · world2c — the cultures half, the owner's fresh
+call «начинай работу по планам, что осталось незакрытого и логичнее
+всего было бы начать сейчас то и делай» (the iter-117/118 precedent
+phrase; STATUS Next step's own readiness pick — slice 2 the natural
+next pick, D-153's wave plan, D-154)
+- verified BEFORE working (1707+1 green, ruff clean, HEAD ebf464e,
+  Python 3.12.14 the env pin); re-verified after — 1726+1 green
+  (+15 tests/test_cultures.py, +4 the T1 province pins, +3 stoplist
+  words), ruff clean; zero corpus price outside the province (the
+  tavern/road corpora byte-untouched; the province's own golden
+  fixture regenerated — the additive delta: +1 condensation, +6
+  traveler decays, 32→39 events, fingerprint 0)
+- content: the two name-1 profiles (lowland_soft the river tongue vs
+  hill_hard the croft tongue — name-1's FIRST committed arming, the
+  posture made checkable), the condensation travelers (grp_road_traffic
+  anchored on the load road, three generated_name members, the first
+  beat materializing them at t=360 — the drawn names
+  Sathranthaem/Wathru/Drist), the cultures block (the budget-block
+  precedent: profile binding, custom vocabularies, the prohibition
+  sets, the members), the budget re-declare (npcs 7-12, the cast at
+  10), story_critical += road_musters, the tier template pair
+  (road_counts/road_musters, the {names?...} branch law)
+- core: `core/pack.py` _cultures (the shape, the anti-rot vocabulary
+  walk, the culture↔name keying, the one-culture law, the AP-8 member
+  binding) + the AP-8 consumed union in _live_char (the prohibition's
+  flaw joins the set — the crosswalk's THIRD consuming family, landed
+  on its own trigger); tests: test_cultures.py NEW (the refusals +
+  the consumed-union green twin — a crafted spine consumed by the
+  prohibition ALONE), the T1 pins (the first-beat condensation, the
+  born-names tale line, the tongue posture, the committed instance),
+  PROVINCE_STOPLIST +3 (drover, peddler, wergeld)
+- docs: DECISIONS D-154 (33 rows — over the 30 cap on the §6.1
+  substance precedent until the next gate collapse), TASKS (slice 2
+  flipped + the iter-119 section), STATUS re-pin + Next step (slice 3
+  the triangle the natural next pick), PACK_SPEC (§3/§4/§5/§6 the
+  cultures block + the AP-8 prohibition surface), NAV §1 + README (the
+  province_pack rows re-pointed), this entry (iter-109 evicted per the
+  cap, verified in this edit; 10 held); 14 files (13 modified + 1 new,
+  re-counted against the worktree delta)
+
 iter-118 · 2026-09-13 · world2l2 — the province skeleton, the owner's
 fresh call «начинай работу по планам… логичнее всего было бы начать
 сейчас то и делай» (the iter-117 precedent phrase; STATUS Next step's
@@ -322,35 +362,4 @@ precedent; one family)
   DECISIONS 72 (41 rows) / phases 1264 — over-cap files ride the
   documented §6.1 substance precedent, trim at the next gate
   collapse.
----
-iter-109 · 2026-09-13 · phase6-open — the phase-6 opening, the
-owner's chat call («…можем его начинать», the iter-55/73 opener
-precedent, D-146): PACK_SPEC written, the ref-18/ref-20 dives, the
-gut-check verdict NO CUTS, the second-setting shape TRAVEL
-- docs: `docs/PACK_SPEC.md` NEW (the pack module contract — the
-  admission law D-142's enforcement half, the lint families live in
-  `core/pack.py`, the rules-block inventory, the teleology gate,
-  the AP crosswalk, the authoring loop, the growth rungs, §12 the
-  deferred list); SPECS_BACKLOG the row flipped to written
-- docs: 8 ref files NEW (ref-18: x4 + stellaris_economy +
-  distant_worlds — res-1's backbone; ref-20: eve_online +
-  path_of_exile + albion_online + shadows_of_doubt + kenshi — the
-  sink law, spend-consumes, risk premium, the theft state-surface,
-  the desperation loop); REFERENCES_DEEP §1 both rows flipped to
-  landed
-- docs: ROADMAP §2 the phase-6 state column flipped to OPENED
-  (iter-109, D-146); TASKS the phase-6 backlog draft (world-2 L1
-  the first build row, pinned CODE; pack-CI + since-1 riding the
-  rows) + the iter-109 section + the opening-day answers block;
-  DECISIONS D-146 (the opening record: the gut-check evidence
-  table — 20-seed ablation p50s + the named-consumer trace, the
-  no-cuts verdict; the travel shape pin); STATUS re-pin + Next
-  step; NAV §1 + README the PACK_SPEC/ref rows
-- verified BEFORE working 1660+1 green, ruff clean, HEAD f3076b0
-  (Python 3.12.14, the env pin); 1660+1 after, doc-only, zero
-  corpus price; the digest's drift pin green through the re-pin.
-  14 files (9 new + 5 edited, all doc — the opening checklist per
-  STATUS's own list + the dives' one-file-per-source law, the
-  objective scope per AGENTS §2.3); iter-99 evicted in this edit
-  (verified, cap 10 held)
 ---
