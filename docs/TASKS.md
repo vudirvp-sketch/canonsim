@@ -19,260 +19,72 @@
 > the owner's start call, D-105; the full build column landed
 > iter-73..98, every declared row live; the exit criterion "an emergent
 > chain of 3+ events without the player" MET in its worldgen-fed form —
-> the armed committed pack; ROADMAP §2 owns the state). Phase 6 (Packs &
-> worldbuilder) **OPENED — iter-109, the owner's call** («можем его
-> начинать», the iter-55/73 opener precedent, D-146: PACK_SPEC written,
-> the ref-18/ref-20 dives landed, the gut-check verdict NO CUTS, the
-> second-setting shape pinned TRAVEL); the build column is drafted below
-> — world-2 L1 (the reskin day, the gate instrument) LANDED iter-112
-> (D-149: the exit criterion's own form met by measurement — the clock
-> 14m24s, zero core edits; the gate verdict itself stays the owner's).
+> the armed committed pack; ROADMAP §2 owns the state). Phase 6 (Packs & worldbuilder) **CLOSED — gate PASS iter-116, D-151**
+> (opened iter-109, the owner's call, D-146; world-2 L1 the reskin day
+> LANDED iter-112, D-149 — the exit criterion met by measurement; the
+> verdict recorded on the owner's convening gate call; ROADMAP §2 owns
+> the state — the roadmap's phase ladder COMPLETE, the standing work is
+> the owner-gated backlog + the SoW horizon).
+
+### iter-116 · phase-6 gate — done (verdict: PASS, D-151)
+
+Full ROADMAP §5 protocol re-run on the owner's convening gate call
+(«давай уже свой гейт-колл 6 фазы или что там, приступай к работе и
+незакрытым задачам»): 1668 passed + 1 skipped + ruff clean (Python
+3.12.14, the env pin; verified BEFORE working at HEAD d4ec8dd); the
+committed playscripts byte-green on identical seeds — plumbing_smoke
+(42) + road_smoke (42, road_pack) byte-identical to their committed
+fixtures (the road side's evidence the T1 twin itself; the header's
+commit field the only delta — '0000000' pinned in fixtures per the T1
+law); the seed-125 pair ON M1=0.518 / M2=0.200 (56 events — iter-102's
+numbers reproduced exactly) / OFF T8 24 chains ≥ 3, M5 0.849; T7 both
+chronicles read as stories (the road chronicle rendered for the
+owner's read — the genesis + the four history lines + the mid-route
+watch change + the boatman's ramble; the tavern: the theft → the rumor
+spread → the watch change → the papers → the arson day); no
+kill-criteria hit — the module contract (the core/pack split, D-142)
+proven right by the reskin day (D-149: 14m24s, zero core edits,
+git-verified). The §5 step-6 staleness pass: REWORD AGENTS §1's phase
+frame + the FAQ cap-laws entry, KEEP the rest, DROP none. The doc
+debts paid at the gate: DECISIONS collapsed 44→30 (the D-034
+families), the STATUS tombstone trim + the FAQ resync (639→567),
+TASKS collapsed (this pass — the iter-103..115 sections), README's
+Status section collapsed to per-phase summaries; phases.md /
+TECH_NOTES / TEST_PLAN stay over the 600 cap on §6.1 substance (the
+intake blocks are the engine-1 consult material; the measured numbers
+are those files' own function) — the rationale in worklog iter-116.
+ROADMAP §2 flipped CLOSED: the roadmap's phase ladder COMPLETE
+(0..6); the open build rows (roads-1, res-1, pack-ci, world-2 L2,
+since-1) stay owner-gated backlog rows. Detail: D-151 + worklog
+iter-116 + git.
 
 ### iter-115 · intake-13 — the open-ended actions & honest-simulation review routed — done (doc-only, the owner's research call)
 
-The owner's 2026-09-13 research call over the uploaded architectural
-review («проанализируй документ и реши что, где и когда стоит
-поменять/доработать» — the research-session mode; every load-bearing
-citation re-verified against HEAD 117a19f before routing; the
-external document stays outside the repo per the convenience-copy
-law). The routing: the review's doctrine half re-derives the standing
-law (VISION §1/§5, INV-1..5, D-031/D-142, EPIST-1) with near-zero
-drift — one stale pin corrected (phase 6's litmus test is MET BY
-MEASUREMENT since iter-112/D-149, the gate verdict the owner's); its
-proposal half routes four items, none build-grade now: (1) the
-compositional causal substrate → CONFIRMED as direction, decomposed
-onto D-096 (affordance derivation) + parse-2 (the multi-intent
-reply — the loop already executes intent chains causally, zero
-simulator change owed) + engine-1 (the GBNF grammar surface); a
-generic primitives layer REFUSED (no consumer, L13); (2) PARTIAL as
-an outcome status → DEFERRED to the first action with separable
-sub-effects (the `failure_total` branch precedent is the house
-shape); (3) UNDER_MODELLED / NO_MODELED_EFFECT → REFUSED as a
-standing runtime status (unreachable in closed-grammar worlds; the
-preferred cure for any future compositional action is the PACK-CI
-CLOSURE LAW — reaction tables close at authoring time, an
-unresolvable pair is an author error, never a runtime "I don't
-know"); (4) inventions-as-emergence-from-repetition → PARKED
-pattern (no row; rides res-1 + world-2 L2 for its real substrate).
-The build queue UNTOUCHED — nothing unpins, nothing reorders.
-Verdict set: D-150; the block: phases.md §6's intake-13. Zero new
-KIs. 1668+1 green, ruff clean (verified BEFORE working at HEAD
-117a19f and re-verified after — doc-only, zero runtime surface
-touched, zero corpus price).
+The routing verdict set — the doctrine half CONFIRMED as standing law, four proposals routed to existing owner-gated rows, zero build-grade items: D-150; the block: phases.md §6's intake-13. Detail: worklog iter-115 + git.
 
 ### iter-114 · doc-2 quarterly — the re-point + the license/URL re-verification — done (doc-only, the owner's call)
 
-The owner's chat call («продолжай работу по планам» — the stop-point
-plan's own pin: the phase-6 gate verdict stays the owner's, the
-re-point rides the nearest quarterly doc-2). Verified BEFORE working:
-1668+1 green, ruff clean, HEAD 68c1abf (Python 3.12.14, the env pin).
-**The re-point (the iter-113 routed finding, now landed):** the
-research layer's "lifted into" pointers cite the current-state owners
-— `core/runner.py`→`core/loop.py`, `core/store.py`/`sim/store.py`→
-`core/fold.py`, `core/storage.py`→`core/retrieval.py` +
-`scripts/chronicle.py`, `brief/recall.py`→`core/retrieval.py`,
-`brief/synthesise.py`→`core/reflection.py`, `brief/llm_client.py`→
-the INV-4/engine-1 gate (never in track A),
-`sim/systems/movement.py`→`core/resolvers.py`,
-`sim/systems/perception.py`→`core/knowledge.py`,
-`sim/systems/__init__.py`/organizer→`core/scheduler.py`,
-`sim/events.py`/`sim/systems/hooks.py`→`core/onaction.py`,
-`content/packs/`→`content/<pack>/` (the two live packs named). The
-row's 12-file list corrected: 5 more ref files carried the same
-family (red_blob_games, natural_earth, geonames, eventstore,
-neighborly) — 17 ref files + the REFERENCES_DEEP §2 verdict columns
-re-pointed; the mechanics + verdicts untouched (research record);
-the reserved-dir law cited where a bare `sim/systems/` claim needed
-the D-037 note. **The license/URL re-verification (the row's
-standing quarterly mandate):** 45 repo paths probed alive
-(`git ls-remote`, no API — quota) + LICENSE files read directly
-(raw.githubusercontent.com — the intake rule #1 form, not the README
-headline); licenses HELD except: `tegridydev/dnd-llm-game` → MIT
-(the IDCDW tag stale), `mcgillij/pyDF` → a CC BY-NC-SA template
-file now present, `tomasforsman/RACEngine` → a bare-copyright
-LICENSE.md (no grant); `a16z/ai-town` 404s (live repo
-`a16z-infra/ai-town` — re-pointed in the ref file); sites 8/10 up —
-`pcg.wikidot.com` + `open5e.com` down at the check date (health
-notes in the catalog; open5e's API answers 200 — the take-target);
-the deferred "verify" tags stay deferred (D-017). 22 files doc-only
-(the row's own objective scope, AGENTS §2.3), zero runtime surface,
-zero corpus price; 1668+1 green, ruff clean after. Detail: worklog
-iter-114 + git.
+17 ref files + the REFERENCES_DEEP §2 verdict columns re-pointed to the current-state owners; 45 repo paths probed alive, 3 license deltas, 2 site health notes, the a16z re-point. Detail: worklog iter-114 + git.
 
 ### iter-113 · documentation lossless audit — done (doc-only, the owner's call)
 
-The owner's chat call (a full documentation-system audit: restore the
-information architecture first, then remove duplication/historical
-noise ONLY where provably lossless — «не сделать документацию короче
-любой ценой; сначала доказать, что информация не будет потеряна;
-только затем сокращать»). Verified BEFORE working: 1668+1 green,
-ruff clean, HEAD 18f8b11 (Python 3.12.14, the env pin). The reading
-gradient re-walked end to end (AGENTS, NAV, STATUS, TASKS,
-DECISIONS, worklog, BLUEPRINT, CORE_DESIGN_RESEARCH,
-REFERENCES_DEEP, the ref layer, the owning specs); ownership
-verified against HEAD: every NAV §1 row path resolves on disk, the
-REFERENCES_DEEP §2 index matched `docs/ref/` 38/45 (the gap below),
-ledger row IDs land in their owners, phase states agree across
-ROADMAP/TASKS/STATUS, the 1668+1 test-count claim reproduced, no
-broken in-doc links (one apparent miss is the §0 format template's
-own back-link, by design). **Verdict: the architecture HOLDS — zero
-removals.** Every deletion candidate failed the "false duplicate"
-test: STATUS's invariant one-liners and FAQ citations, NAV §1's
-module inventories, README's phase summaries, the research layers'
-retained absorbed records (CORE_DESIGN_RESEARCH's absorption map,
-the per-ref verdicts, BLUEPRINT's ledger) are the declared
-link-never-restate / research-record pattern carrying each layer's
-own function — not restatements to cut; the scheduled doc debts
-(DECISIONS 43 rows — the D-034 collapse; the over-cap residue:
-STATUS/TASKS/phases + TECH_NOTES 773 / TEST_PLAN 772 / README 825;
-the FAQ resync) stay owed at the phase-6 gate per the §6.1
-substance precedent — deliberately NOT preempted (a zero-loss
-audit prefers zero diff over a risky diff; the gate collapse is the
-owner's call). **One sync defect REPAIRED:** REFERENCES_DEEP §2
-missed the file's own same-edit law at iter-109 — the 8
-ref-18/ref-20 dive files (x4, stellaris_economy, distant_worlds,
-eve_online, path_of_exile, albion_online, shadows_of_doubt, kenshi)
-were never indexed ("append to this table in the same iteration");
-the 8 rows added, one-line verdicts only (D-024 — the per-ref
-files stay the mechanics owners). **One drift family ROUTED, not
-fixed** (the iter-103 precedent, zero new KIs): the research
-layer's stale "lifted into" module paths (pre-iter-1/pre-D-037
-planned names — `core/runner.py`, `core/store.py`,
-`core/storage.py`, `brief/recall.py`, `brief/llm_client.py`,
-`sim/systems/*` — never-existing files; the current-state owners
-are NAV §1 + D-037/D-142, both correct) — the note rides the
-`doc-2` row below, the re-point rides its quarterly review.
-Doc-only #1 (the D-022 exception, the owner's fresh call); 4 files;
-zero runtime surface, zero corpus price; 1668+1 green, ruff clean
-after. Detail: worklog iter-113 + git.
+Verdict: the architecture HOLDS, ZERO removals (the cross-layer repetition is the declared link-never-restate pattern); one sync defect repaired (REFERENCES_DEEP §2 +8 rows); the doc debts routed to the phase-6 gate. Detail: worklog iter-113 + git.
 
 ### iter-112 · world-2 L1 — the reskin day — done (the owner's «приступай»)
 
-The owner's chat call («да приступай к работе уже» — the pinned CODE
-row's own start word, STATUS Next step's formula; the clock's start
-condition met). The landing, end to end: **`content/road_pack/`** — the
-TRAVEL-loop reskin of the tavern contract on the open generic stack
-(SRD 5.1 nouns, CC-BY-4.0, `CREDITS.md` the sidecar; ids stay per the
-scaffold law, surfaces renamed — the river road: the ferry inn / the
-stockade yard / the tollhouse / the ferry quay; Odo the tollman, the
-drunk boatman, the ferry girl; the storm lantern, the toll purse, the
-jug of mead, the cudgel, the mooring hawser; the quay throng); the
-loop change: `actions.json` move → `ticks: "edge"` (the travel twin),
-`rules.json::travel` the st-6a arming (step 150 / climb 60 / river 45,
-NO overrides — the derived law prices every road; all five locations
-claimed at the 6×6 lattice's row-2 sites 12–16, `place.max_edge_span`
-1→2; the measured prices 150/210/300/360); the `world_history`
-formed arm binds the five claim slots
-(terrain/near_river/ground/watch_height/far_region);
-`scene_line_fields` [layout, terrain, near_river, ground,
-far_region]. **The authoring loop's first live run** (the D-141(b)
-rungs): scaffold → edit → doctor → green — one lint refusal caught
-(the travel block's closed vocabulary carries no `notes` key) and
-fixed in the same edit; the doctor's fix-hint surface worked as
-designed. **The stoplist self-check extension** (PACK_SPEC §9's own
-step): ROAD_STOPLIST (20 nouns) joins the INV-3 audit vocabulary —
-zero engine collisions (pre-grepped), the self-check split per pack.
-**The T1 twin** (`tests/test_t1_reskin.py`, +7): byte-identity, the
-golden-regen guard + the schema pin (the tavern T1's exact shape over
-the second pack), the fingerprint-0 pin (edge-priced moves draw
-nothing — INV-2-clean by construction, measured), the derived-prices
-route pin (every move completion = accept-t + travel_ticks), the
-mid-travel encounters pin (the watch change + knowledge transfer at
-t=360 strictly inside the 180→540 leg — D-038), +
-`tests/playscripts/road_smoke.json` +
-`tests/fixtures/road_smoke_seed42.jsonl`. **The clock: 14 min 24 s**
-from the first scaffold (23:52:40 UTC) to the green T-suite (00:07:04
-UTC) — reading/design before the scaffold excluded (the clock's own
-definition); the ≤1-day budget met at ~1/60th. **Zero core edits**
-(git-verified: no byte under core/ sim/ brief/ render/ cli/ scripts/ —
-the universal-core claim measured in ROADMAP §2's exit form). 1660+8
-→ 1668+1 green, ruff clean, zero tavern corpus price (the road
-fixture is new canon, the tavern fixtures untouched). The phase-6
-gate verdict (the exit criterion now MET by measurement) stays the
-owner's call — D-149 records the instrument, not the gate.
+`content/road_pack/` the TRAVEL-loop reskin (SRD 5.1 nouns, CREDITS sidecar, the first committed travel-price arming 150/210/300/360); the clock 14m24s, ZERO core edits git-verified; the T1 twin +7 + ROAD_STOPLIST; 1660+8 → 1668+1 green. The exit criterion MET BY MEASUREMENT: D-149. Detail: worklog iter-112 + git.
 
 ### iter-111 · intake-12 presentation-consolidation routing — done (doc-only, the owner's call)
 
-The owner's chat call («глубоко проанализируй и подумай над документом
-brief-ir-vs-presentation-summary.md => по пунктам разреши противоречия
-и выдай вердикты предложениям с обоснованием» — a multi-audit
-consolidation of the Brief-IR-vs-presentation-layer question, the
-intakes-6..11 family precedent). Routed: every load-bearing repo
-citation verified against HEAD first (the convenience-copy law) —
-BRIEF_SPEC §7.1/§9, PACK_SPEC §6 (AP-8/AP-9), TECH_NOTES §1/§2/§10/§11,
-the bg-8 gap rows, engine-1/st-4, D-022/D-055 — plus two session
-fact-checks (Rule 9 runners, outside the repo): the live mode-A call
-dump (anchor/regen ride the model-facing bytes literally;
-query/retrieval are mode-B-only; 282 ws-tokens) and the day1_full
-truncation census (zero markers fire; 208–274 ws-tokens vs
-total_hard 800). The verdict set (8 rows, D-148): the "60–70% ready"
-frame refused (consumer-measured, sequenced-by-design); the protocol
-noise re-owned (dev-time operator signal, zero measured leakage at
-27B, fires at engine-1 where GBNF owns it); `[truncated:N]` stays
-(the anti-silent-drop invariant) with the A/B riding the weak arm;
-condensation confirmed as the fold pattern (belief lines ARE
-in-brief condensation — never tracery, the iter-43 flat-key law);
-Lost-in-the-Middle refused as a requirement driver (MECW owns the
-geometry); the presentation spec written at the engine-1 trigger FROM
-weak-arm results, absorbing st-4, as a thin mapping table over the 8
-blocks (the D-055 pattern's fourth instance); the behavioral layer
-answered by PACK_SPEC §6 (AP-8/AP-9, enforcement rides pack-ci); the
-weak-arm-vs-contract priority dichotomy dissolved (the run IS the
-requirements measurement). Landed: the `presentation-1` row above +
-phases.md §6's intake-12 block. The build queue untouched — world-2 L1
-stays pinned CODE on the owner's «приступай». Doc-only #3 rides the
-D-022 exception (the owner's fresh request; the intakes family is
-doc-only by construction). Verified BEFORE working: 1660+1 green,
-ruff clean, HEAD 2ebd122 (Python 3.12.14, the env pin); 1660+1 green
-after — zero runtime surface touched. Zero new KIs.
+The eight-row verdict set + the presentation-1 row (engine-1's decision-input child) + st-4's absorption pointer: D-148. Detail: worklog iter-111 + git.
 
 ### iter-110 · intake-11 donor routing — done (doc-only, the owner's call)
 
-The owner's chat call (a donor blueprint — PRESSURE_LIMIT, a
-pressure-city setting concept: «подумай стоит ли чего перенимать и
-добавлять в референсы или типа того или нет и почему» + the biome /
-lost-city question). Routed per the intake family precedent
-(intakes 6..10): every load-bearing repo citation verified against
-HEAD first (the convenience-copy law) — all green (D-130's province
-pin, res-1's one-meter read surface, the thermometer minus, D-140
-cause_hook, D-134's cost/failure family, weather-1's chain+erosion,
-depth-6/7, name-1, chron-2, retr-1, st-6a, roads-1's gate, D-030's
-tone law); two micro-drifts corrected in the D-row (the AP crosswalk
-rung specified-not-landed; no literal `meta.json`). The verdict:
-ADOPTED as parked donor material — the displacement law + the Cooling
-Debt primitive resolution (weather-1's chain+erosion shape, never a
-second res-1) + the gauge (res-1's read surface) + the legal-exclusion
-application (D-134) + objective-function factions (depth-6) + the lore
-hooks (D-140) land in `docs/blueprint/phases.md` §6's intake-11 block
-+ the `pack-4` row below (D-147); the biome question ANSWERED
-(pressure city = authored pack data, never a worldgen biome; the
-lost-city fold is the cheap form, the full concept the third pack
-slot). Verified BEFORE working: 1660+1 green, ruff clean, HEAD
-140bbcf (Python 3.12.14, the env pin). The build queue untouched —
-world-2 L1 stays pinned CODE on the owner's «приступай». Doc-only #2
-after iter-109 — the D-022 exception (the owner's fresh request); no
-third doc-only planned. Zero new KIs.
+The pressure-city donor blueprint ADOPTED as parked material + the pack-4 row (the lost-city fold world-2 L2's cheap adoption): D-147. Detail: worklog iter-110 + git.
 
 ### iter-109 · phase-6 opening — done (doc-only, the owner's call)
 
-The owner's chat call («продолжай работу по планам, если ничего кроме
-гейта 6 не осталось, можем его начинать») — the iter-55/73 opener
-precedent firing: phase 6 (Packs & worldbuilder) OPENED. Verified
-BEFORE working: 1660+1 green, ruff clean, HEAD f3076b0 (Python
-3.12.14, the env pin). The opening checklist per STATUS's own list,
-all landed: (1) `docs/PACK_SPEC.md` written — the trigger fired
-(SPECS_BACKLOG row flipped to written); (2) the ref-18/ref-20 dives
-(8 files: x4, stellaris_economy, distant_worlds, eve_online,
-path_of_exile, albion_online, shadows_of_doubt, kenshi — res-1's
-design backbone + the theft family's state-surface confirmation);
-(3) the gut-check ANSWERED at the owner's call — NO CUTS, the
-evidence table (20-seed ablation arms + the consumer trace) in
-D-146; (4) the second-setting shape ANSWERED — TRAVEL (the D-130
-river-artery direction; level 1 = the travel-loop reskin on the
-SRD 5.1 open generic stack). ROADMAP §2 flipped (the state column,
-the single owner); the build column drafted below; the doc-only
-streak noted (one doc-only iteration, the owner's own call — the
-D-022 exception; world-2 L1 is pinned CODE). Zero new KIs.
+PACK_SPEC written, the ref-18/ref-20 economy dives, the gut-check verdict NO CUTS, the second-setting shape pinned TRAVEL: D-146 + phases.md §6. Detail: worklog iter-109 + git.
 
 ### iter-102 · phase-5 gate — done (verdict: PASS, D-136)
 
@@ -355,9 +167,9 @@ D-105..D-133 family row + phases.md §5)
 > form). Detail: the D-105..D-133 family row + the per-row owners above +
 > worklog + git.
 
-### Phase-6 backlog (OPENED iter-109; drafted from phases.md §6 — the
-> parked rows below are the build column; owner-gated rows stay gated,
-> the ORDER owner decides)
+### Phase-6 backlog (OPENED iter-109, CLOSED iter-116 — gate PASS,
+> D-151; drafted from phases.md §6 — the parked rows below stay
+> owner-gated backlog rows, the ORDER owner decides)
 
 - `world-2` · the second world, the phase-6 gate's own instrument —
   **L1 done (iter-112, D-149 — the reskin day landed: `content/road_pack/`
@@ -367,7 +179,8 @@ D-105..D-133 family row + phases.md §5)
   `tests/test_t1_reskin.py` + the golden fixture + the stoplist
   extension (ROAD_STOPLIST); the phase-6 exit criterion "a new T1
   reskin without core edits, ≤ 1 day" MET by measurement — the gate
-  verdict itself the owner's call, ROADMAP §5/AGENTS §8); L2 todo,
+  verdict PASS iter-116, D-151, on the owner's convening call —
+  ROADMAP §2 CLOSED); L2 todo,
   owner-gated** — the TWO-LEVEL gate, level 2 the
   deep second world (weeks — VISION §7's honest twin): a fantasy
   province at pack scale, authored pillars over a generated surface
@@ -450,199 +263,27 @@ D-105..D-133 family row + phases.md §5)
 
 ### iter-108 · fixations — done
 
-The owner's direct call («то, что принято и готово к исполнению,
-зафиксируй где нужно в документации или типа того, если итерация
-легкая — можешь прямо сейчас реализовать») on the research
-session's accepted list — the uploaded review (written at
-iter-106) re-checked against the live repo: iter-107 had already
-landed ~80% of its priority list; the remainder was five real
-items, four of them doc fixations and one light build. The
-landings: (1) the three law rows D-142/D-143/D-144 — the core/pack
-admission law (priority action 1's missing half: the blast-radius
-drift test landed iter-107, the written law now stands with the
-existing three-layer fence as its named enforcement), the
-intent_rejected health-rate (action 5's first half: ≥90%
-delivery, the breach = a KI BEFORE grammar tuning, the heartbeat
-census the instrument), the per-component latency budget (action
-5's second half: §8.5's component cut gets its numbers — sim-side
-≤ 10 ms p95 envelopes over measured margin, generate 6.3 s p95 /
-20.4 s ceiling, the turn-based end-to-end 8 s; never a single
-end-to-end number); (2) the opening-day questions pinned on the
-parked section above (the review's general-risk formalization: the
-"delete half the mechanics" gut-check + the second-setting shape —
-the phase-6 opening and the setting choice stay the owner's
-calls); (3) the digest (`scripts/digest.py` +
-`tests/test_digest.py`, D-145) — the one confirmed real gap, built
-in the same call: the derived one-pager (STATUS/TASKS/DECISIONS →
-the human-readable summary), read-only, zero engine imports, no
-wall-clock, (unparsed)-degradation never a crash; the
-crafted-mini-repo + real-repo-shape test law (value pins for the
-fixture, shape pins for the repo — the digest of iter-109 must not
-fail iter-108's test). 1660+1 green (+8), ruff clean. 8 files —
-1 script + 1 test + 6 doc (AGENTS §2.3: the objective scope — one
-coherent fixation landing, noted in worklog). Zero new KIs.
+The three law rows D-142/D-143/D-144 (folded into the D-145 family row at the phase-6 gate) + the digest (`scripts/digest.py` + `tests/test_digest.py`, D-145); 1660+1 green (+8). Detail: worklog iter-108 + git.
 
 ### iter-107 · riders — done
 
-The owner's direct call («доделывай остальное с прошлой итерации:
-осталось пункты 2–6») — the risk-synthesis priority list's cheap
-riders, the five that existed only in the iter-105 chat's context:
-the blast-radius drift test, pack-scaffold + pack-doctor,
-payoff-latency + tension-variance + the `--systems-minus` ablation,
-the nearest-valid-intent re-ask menu, the per-component heartbeat
-latency columns. Verified BEFORE working (1611+1 green, ruff clean,
-HEAD 8ee2060, Python 3.12.14). The landings: (1) the drift contract
-(`tests/test_drift.py` — the systems table ⇔ the metrics prefix map
-in four directions: phantom systems, claimed prefixes + the pinned
-aliases (pair, crime_status), declared-write coverage (time/knowledge
-side-band, follow-up flags derived), the observed corpus vocabulary
-with the item-side registry (carrier, condition) — the M1
-undercounting risk becomes a named, growing contract); (2) the
-authoring loop's first two rungs (`scripts/pack_scaffold.py` — a
-lint-clean tavern copy, identity renamed, SCAFFOLD.md the derived
-editing map; `scripts/pack_doctor.py` — the lint's fix-hint surface:
-file + block + rule + fix-family + doc, `--trace` the failing block's
-data, the green path the health inventory); (3) the drama tuning as
-data: `provenance.cause_hook` (D-140, additive — the schema 0.1→0.2
-bump, the T1 golden fixture regenerated per §3, the header line the
-whole corpus price) pairs every director release with its seed →
-`core.metrics.payoff_latencies` (FIFO per tag, exact under the pick
-law, attempts count); `core.metrics.beat_tension_profile` (the rhythm
-stat); the balance harness's `--systems-minus` ablation arm
-(block-scoped 68a, the removable set measured: urgencies, weather,
-on_action, reflection, secrets, factions — the systems-table rows
-interlocked and refused loudly; first pinned finding: the beat-driven
-release cadence dies with the urgencies block); (4) the re-ask menu
-(`brief/parser.py` — every off-grammar family ranks its nearest
-tokens by Levenshtein, kinds over token+label, deterministic; the
-refusal becomes the re-ask's fuel, the grammar never widens); (5) the
-heartbeat ledger's per-component p50/p95 columns (TEST_PLAN §8.5 —
-tick/fold/brief/parse/generate, first-class, the gap row until
-bg-9+/engine-1). 1652+1 green (+41), ruff clean. 25 files — 4 core +
-1 schema + 1 brief + 3 scripts (2 new) + 6 test files (+2 new, +41
-tests) + 1 fixture regen + 8 doc + README (AGENTS §2.3: the objective scope —
-the owner called five riders in one shot, one coherent landing,
-noted in worklog). Zero new KIs.
+The five risk-synthesis riders: the blast-radius drift contract (test_drift.py), pack-scaffold + pack-doctor, cause_hook + payoff_latencies + beat_tension_profile + the --systems-minus ablation, the nearest-valid re-ask menu, §8.5's per-component latency columns (D-140/D-141); 1652+1 green (+41). Detail: worklog iter-107 + git.
 
 ### iter-106 · resume — done
 
-The owner's direct call («приступай к работе и реализации», the
-risk-synthesis priority list's #1 — the checkpoint-resume wiring;
-splitting across iterations licensed, quality first): the session
-resume door, the one phases.md §7 left owner-gated since iter-80.
-Verified BEFORE working (1592+1 green, ruff clean, HEAD c7508f5,
-Python 3.12.14). The law (D-139): **resume is invisible to the log**
-— interrupted at a clean drain boundary and resumed with the same
-remaining steps, the session is byte-identical to the uninterrupted
-run (T1 across process boundaries; pinned at every split point,
-directors on and off). The mechanism, two artifacts by nature:
-the CURSOR (`core/cursor.py` — new) carries the entropy-and-clock
-state no fold recovers (silent draws: urgency misses, weather
-self-rolls, faction failures consume stream positions without
-events; bank positions via `RngBank.export_state`/`restore_state`
-— worldgen streams excluded, `generate_world` re-derives them,
-its purity the enabling fact; director run marks via
-`export_run_state`/`restore_run_state`, the buffer itself rebuilt
-exactly by `seed()` over the log), bound to its log by `event_count`
-+ `prefix_sha256` (a stale pin refuses loud — guessing entropy is
-save-scumming, not determinism); the CHECKPOINT fast-path
-(`Simulator.resume` → `core/checkpoint.py`'s first runtime consumer)
-restores the projection as snapshot + tail when the operator's
-`output/checkpoints/<stem>/` artifacts exist and anchor cleanly —
-absent is normal operation (the plain fold), present-but-wrong is
-loud. The writer's append mode (`core/log.py`) rides the same canon
-door: read_log validates every line before the file is touched,
-the schema-version + env-pin header laws refuse a foreign
-continuation, committed lines are never rewritten (INV-5). The
-session pins the cursor after every command and at close, only at
-a clean drain boundary (`Simulator.drained`; a mid-drain crash
-leaves the last clean pin — a later resume over the grown log
-refuses loudly). The scene ledger stays session-scoped (D-049):
-a resumed session opens a fresh ledger; live texture dies with its
-session, promoted texture rode events. `cli/main.py`: `--resume`,
-the resumed banner, the delta discipline (new chronicle lines
-only). `core/queue.py`: QueueKind gains `weather` (the iter-98
-Literal drift, one word). `tests/test_resume.py` +19: the law at
-splits 0/1/2/3 + the directors-off arm; the cursor/rng/director
-unit refusals; the CLI e2e + the missing/stale/foreign-pack/env-pin
-loud refusals; the fast-path + the corrupt-artifact anchor teeth.
-1611+1 green, ruff clean; corpus price zero (no fixture regen, the
-armed pack's genesis rides the split-0 arm itself). 12 files —
-6 core + 1 test + 5 doc (AGENTS §2.3: the objective scope — a
-genuine system feature, one coherent landing, noted in worklog).
-Zero new KIs.
+The resume door — `core/cursor.py`, `Simulator.resume`, `--resume`, test_resume.py +19; the INVISIBLE-TO-THE-LOG law (T1 across process boundaries): D-139; 1611+1 green. Detail: worklog iter-106 + git.
 
 ### iter-105 · cli-pack — done
 
-The pinned streak-breaker (the owner's «поехали» on the iter-104
-pin): the CLI `--pack` flag, periphery only. Verified BEFORE
-working (1589+1 green, ruff clean, HEAD 08faec2, Python 3.12.14).
-`cli/main.py`: every pack-loading command (play/chronicle/state/
-replay) + the interactive session take `--pack <dir>` — the
-top-level default `content/tavern_pack`, the subparsers
-`argparse.SUPPRESS` (the flag honors both orders, before or after
-the subcommand — no default clobber); the loud refusal lives in
-`_load` (a path that is not a directory exits 1 naming it, BEFORE
-any world opens; a directory that is not a pack keeps load_pack's
-lint refusal). `tests/test_cli.py` +3: the explicit tavern pack
-byte-identical to the no-flag run; the bad-path refusal (batch,
-session, and the before-subcommand order — no log born); the
-read-side subcommands (chronicle/state render, replay refuses a
-non-pack dir). 1592+1 green, ruff clean; corpus price zero
-(periphery plumbing, zero draws, no fixture regen). The stoplist
-docstring's "the CLI takes the pack dir as config" claim TRUE —
-the drift dead at its root. The same owner call verdicted the two
-standing questions (one DECISIONS line each): D-137 the Alien
-unknown-axis L6 conflict (the OBSERVABLE-answers law, DIRECTOR_SPEC
-§11 re-pointed), D-138 the D-081 climax flag (the peak's END
-marker). 7 files — 2 code + 5 doc (the verdict set riding the
-iteration; AGENTS §2.3: the objective scope noted in worklog).
-Zero new KIs. The stoplist self-check extension to a new pack's
-nouns stays with the reskin day itself (the second pack must exist
-for its vocabulary).
+The CLI `--pack` flag (periphery only, test_cli.py +3) + the two verdict rows D-137/D-138; 1592+1 green. Detail: worklog iter-105 + git.
 
 ### iter-104 · owner-called fork analysis — done (doc-only)
 
-The owner's chat call: every open question and fork worked into a
-final COMBINED variant (the owner's stated preference — one variant
-gathering the pros, neutralizing the cons, no crutches). Verified
-BEFORE working (1589+1 green, ruff clean, HEAD 13c23c4, Python
-3.12.14). Routed into the rows above: `cli-pack` pinned iter-105
-(pre-opening, the streak-breaker), the roads-1 read-path fork and
-the world-2 toponym question both resolved under the ONE
-override-else-derived law family (the travel price's own, D-132 —
-pack-authored data wins, else the (seed, pack)-derived read),
-since-1 routed to phase 6 (world-2's condensing travelers the first
-real consumer). The two standing owner questions (DIRECTOR_SPEC
-§11's L6 conflict, D-081's climax flag) NOT silently resolved —
-combined-variant proposals delivered in chat, the owner decides —
-the verdicts landed at iter-105's call (D-137/D-138, one line
-each).
-Zero new KIs. The doc-only streak surfaced per AGENTS §2.5: this is
-the fifth, the owner's own call again (D-022); iter-105 is pinned
-CODE.
+The combined-variant routing: cli-pack pinned iter-105, the roads-1 read-path fork + the world-2 toponym question resolved under the ONE override-else-derived law family (D-132), since-1 routed to phase 6. Detail: worklog iter-104 + git.
 
 ### iter-103 · owner-called phase-6 plan audit — done (doc-only)
 
-The owner's chat call: phase 6 + the project re-checked from the
-height of the landed solutions, heightened plan-detail attention
-(nothing missed, no errors, no contested points needing rework).
-Verified BEFORE working: 1589+1 green, ruff clean, HEAD e6c95ff
-(Python 3.12.14, the env pin). Verdict: **COHERENT — the phase-6
-opening stands on solid ground.** The instruments agree across
-TASKS / phases.md §6 / ROADMAP §2; the D-134/D-135 consult material
-verified against its landed owners (on_action, hooks buffer, arcs,
-the cause tree, the cold tiers, rotations, the folds, the erosion
-family); res-1's dependencies all landed (the maclock cadence, the
-aggregate surface, derived read-side values, the ratio dynamics);
-no TODO/FIXME residue; the owed items already recorded (PACK_SPEC
-trigger, ref-18/ref-20 just-in-time). Four detail findings routed
-into the rows above: the st-5 stale pointer (re-pointed below),
-the CLI `--pack` flag (world-2 level-1's prerequisite; the
-stoplist docstring's config claim is drift), the roads-1 read-path
-fork, the name-1 toponym question. Zero new KIs — plan-detail
-notes, not defects. The doc-only streak surfaced per AGENTS §2.5
-(the owner's own call, the D-022 exception).
+Verdict: COHERENT — the phase-6 opening stands on solid ground; four detail findings routed (the st-5 pointer, the CLI --pack flag, the roads-1 fork, the name-1 toponym question). Detail: worklog iter-103 + git.
 
 ### Research intakes 4..10 — routed, collapsed at the phase-5→6 gate
 (the verdict-set detail lives in the D-rows + git; the external texts

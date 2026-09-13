@@ -9,9 +9,10 @@
 
 `canonsim` — a deterministic canonical simulation core (Python, stdlib-first).
 Phase 0 built **TavernSim v0**: one tavern scenario (theft, arson, rumors) that
-runs and reads as a story **without any LLM** — closed iter-6; phases 1–5
-closed since (ROADMAP §2 owns the state; phase 6, packs & worldbuilder,
-parked). North star: a simulation mode
+runs and reads as a story **without any LLM** — closed iter-6; the roadmap's
+phase ladder is COMPLETE — phases 0..6 all closed (ROADMAP §2 owns the state;
+the standing work: the owner-gated backlog rows + the Soul-of-Waifu horizon).
+North star: a simulation mode
 inside Soul-of-Waifu (`docs/VISION.md` §10).
 
 Two work tracks (`docs/ROADMAP.md` §1):

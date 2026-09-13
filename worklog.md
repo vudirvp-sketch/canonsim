@@ -13,6 +13,41 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-116 · 2026-09-13 · gate6 — the phase-6 gate review, the
+owner's convening gate call «давай уже свой гейт-колл 6 фазы или что
+там, приступай к работе и незакрытым задачам» (7 files doc-only, zero
+code, zero corpus price — the gate session's own form, ROADMAP §5 +
+the doc debts riding it)
+- verified BEFORE working (1668+1 green, ruff clean, HEAD d4ec8dd,
+  Python 3.12.14 the env pin); re-verified after — same numbers, zero
+  runtime surface touched. The §5 evidence: playscripts byte-green
+  (plumbing_smoke + road_smoke vs their committed fixtures — the road
+  side's T1 twin; the header commit field the only delta, '0000000'
+  per the T1 law); the seed-125 pair ON M1=0.518/M2=0.200 (56 events
+  — iter-102's numbers exact) / OFF T8 24 chains, M5 0.849; T7 both
+  chronicles read as stories; no kill hit — the module contract proven
+  right (D-149's zero core edits)
+- the verdict: PASS, D-151 — ROADMAP §2 flipped CLOSED, the ladder
+  complete (phases 0..6); the open build rows stay owner-gated; the
+  §5 step-6 staleness pass: REWORD AGENTS §1's phase frame + the FAQ
+  cap-laws entry, KEEP the rest, DROP none
+- the doc debts paid: DECISIONS 44→30 (D-034 — D-142/143/144 folded
+  into D-145, D-137/139/140/141 one row, D-138 into D-076/081, D-062
+  into D-054/055, D-079 into D-004/028, the intakes 11..13 + D-146/
+  149/151 into the families); STATUS tombstones trimmed + FAQ resync
+  (639→554); TASKS 1251→892 (iter-103..115 collapsed to one-liners);
+  README 826→184 (the Status section collapsed to per-phase gate
+  summaries)
+- phases.md 1536 / TECH_NOTES 773 / TEST_PLAN 772 stay over cap ON
+  SUBSTANCE (§6.1): the cruft pass ran (the filler scan: 2 hits, both
+  load-bearing measured-fact contrasts; the structural review — the
+  per-phase architecture, the engine-1 consult blocks, the measured
+  records are those files' own function); pre-trim history in git
+- docs: ROADMAP §2, DECISIONS D-151 + the collapse, AGENTS §1, TASKS
+  iter-116 + the collapse, STATUS re-pin, README, this entry (iter-106
+  evicted here, verified in this edit; 10 held); 1668+1 green, ruff
+  clean after
+
 iter-115 · 2026-09-13 · intake13 — the owner's research call over
 the uploaded «open-ended actions / content packs / honest
 simulation» review (5 files doc-only, zero code, zero corpus
@@ -304,32 +339,4 @@ tuning becomes data, the authoring loop gets its first two rungs)
   test + 1 fixture + 8 doc + README — the owner's five-rider call, the objective scope); iter-97
   evicted in this edit (cap 10 held, verified)
 ---
-iter-106 · 2026-09-12 · resume — the session resume door, the owner's
-direct call on the risk-synthesis priority list (D-139: resume is
-invisible to the log)
-- core: `core/cursor.py` NEW (the run-cursor artifact — envelope,
-  save/load, the event_count + prefix-digest log binding);
-  `core/rng.py` export_state/restore_state (worldgen excluded —
-  generate_world re-derives); `core/director.py`
-  export_run_state/restore_run_state + PACING_STATES (the buffer
-  rebuilt exactly by seed() over the log); `core/log.py` the
-  append-mode writer (same canon door, env-pin + schema-version
-  laws); `core/loop.py` Simulator.resume + export_cursor + drained +
-  the checkpoint fast-path; `core/queue.py` QueueKind += weather
-  (the iter-98 Literal drift); `cli/main.py` --resume + the cursor
-  pin after every command and at close (clean drains only)
-- tests: `tests/test_resume.py` +19 — the law at splits 0/1/2/3 +
-  the directors-off arm; cursor/rng/director unit refusals; CLI e2e
-  + missing/stale/foreign-pack/env-pin loud refusals; the fast-path +
-  the corrupt-artifact teeth. 1611+1 green, ruff clean; corpus price
-  zero (no fixture regen — the armed pack's genesis rides the
-  split-0 arm)
-- docs: D-139; TASKS resume-1 + the iter-106 section; STATUS re-pin
-  + Next step + the FAQ clause riding the scene-ledger entry; NAV §1
-  (cursor entry + checkpoint/log/cli/tests rows); TEST_PLAN §7.1 the
-  runtime-consumer line; README the usage block. iter-96a evicted
-  here (verified in this edit, the cap 10 held). AGENTS §2.3 scope
-  note: 15 files, 7 code + 8 doc — a genuine system feature, one
-  coherent landing (the owner licensed splitting, quality kept it
-  whole)
 ---

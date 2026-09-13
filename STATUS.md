@@ -1,44 +1,50 @@
-Iteration: iter-115 (`iter-115-intake13` — the owner's research
-call over the uploaded architectural review «open-ended действия,
-контент-паки и честная симуляция» («проанализируй документ и
-реши что, где и когда стоит поменять/доработать» — the
-research-session mode; the D-022 exception, doc-only): **the
-intake-13 review ROUTED — the doctrine half CONFIRMED as standing
-law, the proposal half routed to existing owner-gated rows, zero
-build-grade items.** The review's core contract re-derives VISION
-§1/§5 + INV-1..5 + EPIST-1 with near-zero drift (one stale pin
-corrected: phase 6's litmus test is MET BY MEASUREMENT since
-iter-112/D-149 — the gate verdict stays the owner's). The four
-proposals: the compositional causal substrate → CONFIRMED as
-direction, decomposed onto D-096 + parse-2 (the loop already
-executes intent chains causally — zero simulator change owed) +
-engine-1; a generic primitives layer REFUSED (no consumer, L13);
-PARTIAL as an outcome status → DEFERRED to the first action with
-separable sub-effects (the `failure_total` branch precedent);
-UNDER_MODELLED / NO_MODELED_EFFECT → REFUSED as a standing
-runtime status — the preferred cure for any future compositional
-action is the PACK-CI CLOSURE LAW (reaction tables close at
-authoring time; an unresolvable pair is an author error, never a
-runtime "I don't know"); inventions-as-emergence-from-repetition
-→ PARKED pattern (rides res-1 + world-2 L2 for the real
-substrate). The build queue untouched — nothing unpins, nothing
-reorders ·
-Phase: 6 (Packs & worldbuilder) — OPENED (iter-109, D-146; the
-exit criterion MET BY MEASUREMENT iter-112, D-149 — the gate
-verdict stays the owner's call; phases 0..5 all CLOSED: 0
-iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
-iter-102, D-136) ·
+Iteration: iter-116 (`iter-116-gate6` — the phase-6 gate
+review, the owner's convening gate call «давай уже свой гейт-колл 6
+фазы или что там, приступай к работе и незакрытым задачам»; the full
+ROADMAP §5 protocol, doc-only — the gate session's own form; the
+D-022 exception, the owner's fresh call): **the phase-6 GATE VERDICT
+— PASS (D-151); the roadmap's phase ladder COMPLETE (phases 0..6 all
+closed).** The §5 evidence: the committed playscripts re-run on
+identical seeds — plumbing_smoke (42) + road_smoke (42, road_pack)
+byte-identical to their committed fixtures (the road side's evidence
+the T1 twin itself; the header's commit field the only delta —
+'0000000' pinned in fixtures per the T1 law); the seed-125 pair ON
+M1=0.518 / M2=0.200 (56 events — iter-102's numbers reproduced
+exactly) / OFF T8 24 chains ≥ 3, M5 0.849; T7 both chronicles read
+as stories (the road: the genesis + the four history lines + the
+mid-route watch change + the boatman's ramble; the tavern: the theft
+→ the rumor spread → the watch change → the papers → the arson day);
+no kill-criteria hit — the module contract (the core/pack split,
+D-142) proven right by the reskin day (D-149: 14m24s, zero core
+edits, git-verified). The §5 step-6 staleness pass: REWORD AGENTS
+§1's phase frame + the FAQ cap-laws entry, KEEP the rest, DROP none.
+The doc debts paid at the gate: DECISIONS collapsed 44→30 (D-034),
+the STATUS tombstone trim + the FAQ resync (639→567 pre-re-pin),
+TASKS 1251→892 (the iter-103..115 sections collapsed to one-liners),
+README 826→184 (the Status section collapsed to per-phase gate
+summaries); phases.md 1536 / TECH_NOTES 773 / TEST_PLAN 772 stay
+over the 600 cap on §6.1 substance — the cruft pass ran (the filler
+scan + the structural review: the per-phase architecture + the
+engine-1 consult blocks + the measured records are those files' own
+function), the rationale in worklog iter-116 ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+opened iter-109, D-146; the exit criterion MET BY MEASUREMENT
+iter-112, D-149; phases 0..6 ALL CLOSED — 0 iter-6 · 1 iter-26 · 2
+iter-35 · 3 iter-54 · 4 iter-65 · 5 iter-102 · 6 iter-116; the
+standing work: the owner-gated backlog + the SoW horizon, ROADMAP §6) ·
 1668 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 117a19f and re-verified after —
+verified BEFORE working at HEAD d4ec8dd and re-verified after —
 doc-only, zero runtime surface touched, zero corpus price) ·
 Date: 2026-09-13 ·
-Scope: `docs/blueprint/phases.md` (§6's intake-13 block) +
-`docs/DECISIONS.md` (D-150) + `docs/TASKS.md` (the iter-115
-section) + `STATUS.md` (this re-pin) + `worklog.md` (this
-iteration's entry; iter-105 evicted per the cap) — 5 files,
-doc-only (the routing record's own objective scope, AGENTS
-§2.3). The prior iteration's record: iter-114 (doc2).
-The detail lives in TASKS + worklog + git.
+Scope: `docs/ROADMAP.md` (§2 the phase-6 state flip) +
+`docs/DECISIONS.md` (D-151 + the D-034 collapse 44→30) + `AGENTS.md`
+(§1 the staleness reword) + `docs/TASKS.md` (the iter-116 section +
+the collapse) + `STATUS.md` (this re-pin + the tombstone trim + the
+FAQ resync) + `README.md` (the Status collapse + the intro's SoW
+reword) + `worklog.md` (this iteration's entry; iter-106 evicted per
+the cap) — 7 files, doc-only (the gate session's own objective scope,
+AGENTS §2.3 + ROADMAP §5). The prior iteration's record: iter-115
+(intake13). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -62,87 +68,11 @@ The detail lives in TASKS + worklog + git.
 
 ## Active KIs
 
-- (None else active. KI#84 deleted at iter-99 per AGENTS §5 — closed
-  iter-96a, two iterations past (iter-97 + iter-98, the KI#83
-  precedent); the lesson lives in git + the FAQ's family law: the
-  fold-first read for every id-valued reference (D-131 (7)). KI#83 deleted at iter-93 per AGENTS §5 — closed iter-91, two iterations past (iter-92 + iter-93, the KI#81
-  precedent); the lesson lives in git + the FAQ's family law: the
-  pred-contract family's missing-field refusals. KI#82 deleted at iter-91 per AGENTS §5 — closed iter-88, three
-  iterations past (iter-89/90/91 — the deletion was already overdue
-  at iter-90); the lesson lives in git + the FAQ's family law: the
-  pred-contract family's missing-field refusals. KI#81 deleted at
-  iter-87 per AGENTS §5 — closed iter-85, two
-  iterations past (iter-86 + iter-87); the lesson lives in git + the
-  KI#80 family law: the worklog's separator + eviction land in the
-  SAME edit, git-verified. KI#80 deleted at iter-87 per AGENTS §5 —
-  closed iter-83a, four iterations past (iter-84, iter-85, iter-86,
-  iter-87); the lesson lives in git + the FAQ's law: landing counts
-  are git-verified, never asserted. No active KIs — ≤15 held with
-  room.)
-
-- (KI#79 deleted at bg-8 per AGENTS §5 — closed iter-75, two
-  iterations past (iter-76 + bg-8); the lesson lives in git + the
-  stoplist law: fresh mechanic prose stays noun-audited even in
-  comments. No active KIs — ≤15 held with room.)
-
-- (KI#78 deleted at iter-72 per AGENTS §5 — closed iter-70, two
-  iterations past (iter-71 + iter-72); the lesson lives in git + the
-  README lance sync law. KI#77 deleted at iter-72 per AGENTS §5 —
-  closed iter-70, two iterations past; the lesson lives in git + the
-  pack lint order (`core/pack.py`'s `_traits`-before-`_urgencies`)
-  + the pruning-law test chains. KI#76 deleted at iter-72 per AGENTS
-  §5 — closed iter-69b, three iterations past (iter-70, iter-71,
-  iter-72); the lesson lives in git + the D-101/KI#76 spec-sync
-  rows. No active KIs — ≤15 held with room.)
-
-- (KI#75 deleted at iter-70 per AGENTS §5 — closed iter-69, two
-  iterations past (iter-69b + iter-70 — the sub-iteration counts as
-  its own, the KI#74 precedent); the lesson lives in git + the
-  D-101/KI#76 sync rows. KI#74 deleted at iter-68a per AGENTS
-  §5 — closed iter-67, two iterations past (iter-68 + iter-68a; the
-  D-098 row's "iter-69" projection counted it inside 68); the lesson
-  lives in git + the pack notes fix. KI#73 deleted at iter-67 per
-  AGENTS §5 — closed iter-65, two iterations past, the KI#72
-  precedent; the lesson lives in git + the gate's §5 re-run record.
-  KI#72 deleted at iter-63 per AGENTS §5 — closed iter-61; the
-  lesson lives in git + the deferral-ledger rows it re-pointed: the
-  deferral table's "arrives with" must name the TASKS row's OWN
-  scope, never a projection past it.)
-
-- (KI#71 deleted at iter-62 per AGENTS §5 — closed iter-59, three
-  iterations past; the lesson lives in git + the REFERENCES/TECH_NOTES
-  license-verify lines.)
-
-- (KI#70 deleted at iter-58 per AGENTS §5 — closed iter-56, two
-  iterations past; the lesson lives in git + the BRIEF_SPEC header
-  that now reads the owning law, AGENTS §6/§6.1.)
-
-- (KI#69 deleted at iter-56 per AGENTS §5 — closed iter-54, two
-  iterations past; the lesson lives in git + the worklog's
-  line-cap header note.)
-
-- (KI#68 deleted at iter-51 per AGENTS §5 — closed iter-48, two
-  iterations past; the lesson lives in git + the worklog header's
-  re-trim note.)
-
-- (KI#67 deleted at iter-48 per AGENTS §5 — closed iter-46, two
-  iterations past; the lesson lives in git + the README sync law.)
-- (KI#66 deleted at iter-47 per AGENTS §5 — closed iter-45, two
-  iterations past; the lesson lives in git + the KI#67 family —
-  every count restated in a second place goes stale.)
-- (KI#65 deleted at iter-46 per AGENTS §5 — closed iter-44, two
-  iterations past; the lesson lives in git + the FAQ.)
-- (KI#64 deleted at iter-46 per AGENTS §5 — closed iter-44, two
-  iterations past; the FAQ trim it flagged owes at the phase-3→4 gate
-  alongside the DECISIONS collapse.)
-- (KI#63 deleted at iter-44 per AGENTS §5 — closed iter-39, five
-  iterations past; the lesson lives in git + the FAQ.)
-- (KI#61/KI#62 deleted at iter-39 per AGENTS §5 — closed iter-37,
-  two iterations past; the lessons live in git + the worklog.)
-- (KI#60 deleted at iter-38 per AGENTS §5 — closed iter-36, two
-  iterations past; the lesson lives in the FAQ + git.)
-- (KI#55–59 deleted at iter-36 per AGENTS §5 — closed iter-34, two
-  iterations past; the lessons live in the FAQ + git.)
+- (None active. The closed-KI tombstone notes — KI#55..KI#84, every one
+  deleted per AGENTS §5 at its own iteration, all far past the
+  two-iteration window — were trimmed at the phase-6 gate (iter-116):
+  the lessons live in git + the FAQ's family laws, the pre-trim record
+  in git history.)
 
 ## FAQ / Pitfalls
 
@@ -514,7 +444,11 @@ gate, 41→30 at the phase-1 gate (iter-26), 35→30 at the phase-2 gate
 (iter-35), 48→30 at the phase-3→4 gate (iter-54); 30 HELD at the
 phase-4→5 gate (iter-65 — no collapse owed: the phase-4 landings rode
 the single D-084..D-093 family row as they landed, the verdict D-094
-joined the gate-verdict family); next due at the phase-5→6 gate.
+joined the gate-verdict family); 71→30 at the phase-5→6 gate (iter-102
+— never resynced here until iter-116); 44→30 at the phase-6 gate
+(iter-116, the ladder complete — the phase-6-era rows folded into
+families, D-151 the record). The ≤30 cap stands; a future breach
+collapses at the owner's next gate call.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -584,56 +518,37 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-115 DONE: the intake-13 routing (the owner's research
-call over the uploaded «open-ended действия, контент-паки и
-честная симуляция» review — «проанализируй документ и реши
-что, где и когда стоит поменять/доработать»).** The doctrine
-half CONFIRMED as standing law (VISION §1/§5, INV-1..5,
-EPIST-1; one stale pin corrected — phase 6's litmus test is
-MET BY MEASUREMENT since iter-112/D-149); the proposal half
-routed, zero build-grade items: the compositional substrate →
-D-096 + parse-2 + engine-1 (the loop already executes intent
-chains causally); PARTIAL → the first separable-sub-effects
-consumer; UNDER_MODELLED → REFUSED, the PACK-CI CLOSURE LAW the
-preferred cure for any future compositional action;
-inventions-from-repetition → parked (res-1 + world-2 L2). The
-build queue untouched. The phase-6 exit criterion — "a new T1
-reskin without core edits, ≤ 1 day" — stands MET BY
-MEASUREMENT (iter-112, D-149: the clock 14m24s, zero core
-edits, git-verified). What stands:
+**iter-116 DONE: the phase-6 gate review — verdict PASS (D-151), the
+roadmap's phase ladder COMPLETE (phases 0..6 all closed).** The §5
+protocol ran in full on the owner's convening call; the evidence green
+end to end (the numbers in the header + D-151). What stands:
 
-1. **The phase-6 gate review — the owner's call (ROADMAP §5's
-   protocol, never self-served):** the exit criterion's instrument is
-   green; the verdict (ROADMAP §2's state column flip to CLOSED) is
-   the owner's. The natural form: the owner reads the road chronicle
-   (T7 — `python -m cli chronicle <log> --pack content/road_pack`
-   over a road_smoke run) and calls the gate; the §5 protocol re-runs
-   the committed playscripts + M1/M2 + the T8 arm on the tavern side
-   (the road side's evidence is the T1 twin itself). The doc debts
-   ride the gate: DECISIONS 44 rows (the D-034 collapse), the
-   over-cap trims (STATUS/TASKS/phases + TECH_NOTES/TEST_PLAN/README
-   — the full inventory in worklog iter-113), the FAQ resync.
-2. **The standing owner-gated rows (unchanged):** `res-1` (the dives
-   landed — the backbone stands), `roads-1` (mode G's
-   generated-exits pass), `pack-ci` (the PACK_SPEC §5/§6
-   admission-lint rungs — TWO packs now exist to run against: the
-   tavern + the road), `since-1` (read-side, rides world-2's
-   condensing travelers), `parse-2`, `engine-1` (+ `presentation-1`,
-   intake-12/D-148), `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1`
-   GitHub Actions, `bg-6` (the SoW audit, D-055 deferral), `pack-1`
-   (the grim pack) + `pack-3` (the sci-fi candidate) at the
-   2nd-setting trigger + `pack-4` (the pressure-city candidate,
-   intake-11/D-147 — the lost-city fold into world-2 L2 its cheap
-   adoption), `companion-1`, `mech-2` (rides the next mechanics.py
-   touch), `st-4` (rides into `presentation-1` at its write time,
-   D-148) and `st-5` (the first real consumer decides). No other
-   owner question stands open.
-3. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
+1. **The owner-gated backlog (the standing rows, unchanged — the
+   ORDER owner decides; TASKS owns composition, never order):** by
+   readiness, `pack-ci` is the natural cheap candidate (the
+   PACK_SPEC §5/§6 admission-lint rungs — TWO packs now exist to run
+   against: the tavern + the road; the checks are specified, the
+   enforcement rung is the build) and `world-2` L2 the natural big
+   one (the province — phases.md §6 the architecture owner,
+   weeks-scale, the st-6a/travel + name-1 profile arming rides its
+   cultures half); then `roads-1` (mode G's generated exits — the
+   read-path fork resolved, iter-104), `res-1` (the dives landed, the
+   backbone stands), `since-1`, `parse-2`, `engine-1` (+
+   `presentation-1`, its decision-input child), `tune-3`, `st-2`,
+   `scav-1`, `qa-1` mypy + `ci-1` GitHub Actions, `bg-6` (the SoW
+   audit, D-055 deferral), `pack-1` (the grim pack) + `pack-3` +
+   `pack-4`, `companion-1`, `mech-2` (rides the next mechanics.py
+   touch), `st-4` (rides presentation-1 at its write time, D-148) and
+   `st-5` (the first real consumer decides). No other owner question
+   stands open.
+2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
    heartbeat, the per-family latency distribution. New track-B ideas
    enter the backlog on the owner's call only.
-4. **Nothing is pinned.** The natural next step is the owner's gate
-   call on phase 6; world-2 L2 (the province) and the remaining build
-   rows stay owner-gated. The ORDER owner decides; TASKS owns
-   composition, never order.
+3. **The SoW horizon (ROADMAP §6) is the standing frame** now that
+   the ladder is complete: the mediator protocol specs (BRIEF_SPEC
+   and friends — SPECS_BACKLOG) + the dumb-terminal frontend
+   contract; the SoW audit itself stays owner-gated (bg-6).
+4. **Nothing is pinned.** The gate's doc debts are paid; the next
+   move is the owner's row pick (or a fresh call).
