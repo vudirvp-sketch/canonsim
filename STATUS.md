@@ -1,49 +1,43 @@
-Iteration: iter-114 (`iter-114-doc2` — the doc-2 quarterly
-review, the owner's «продолжай работу по планам» call riding the
-stop-point plan's own pin: the phase-6 gate verdict stays the
-owner's, the re-point rides the nearest quarterly doc-2; the
-D-022 exception, doc-only): **the research-layer re-point LANDED
-+ the license/URL re-verification RUN.** The iter-113 routed
-drift re-pointed end to end — 17 ref files + the
-REFERENCES_DEEP §2 verdict columns now cite the current-state
-owners (core/loop.py · core/fold.py · core/retrieval.py +
-scripts/chronicle.py · core/reflection.py · core/resolvers.py ·
-core/knowledge.py · core/scheduler.py · core/onaction.py ·
-core/worldgen.py · core/director.py · content/<pack>/; the
-`brief/llm_client.py` family re-points to the INV-4/engine-1
-gate — the client never lands in track A), the mechanics +
-verdicts untouched (research record); the row's 12-file list
-corrected — 5 more files carried the same family (red_blob_games,
-natural_earth, geonames, eventstore, neighborly). The quarterly
-license/URL pass: 45 repo paths probed alive (`git ls-remote`,
-no API) + LICENSE files read directly
-(raw.githubusercontent.com — the intake rule #1 form); licenses
-HELD except three deltas (`tegridydev/dnd-llm-game` → MIT, the
-IDCDW tag stale; `mcgillij/pyDF` → a CC BY-NC-SA template file
-now present; `tomasforsman/RACEngine` → a bare-copyright
-LICENSE.md, no grant), `a16z/ai-town` 404s (the live repo
-`a16z-infra/ai-town`, re-pointed in the ref file), and
-pcg.wikidot.com + open5e.com unreachable at the check date
-(health notes in the catalog — open5e's API answers 200, the
-take-target); the deferred "verify" tags stay deferred (D-017) ·
+Iteration: iter-115 (`iter-115-intake13` — the owner's research
+call over the uploaded architectural review «open-ended действия,
+контент-паки и честная симуляция» («проанализируй документ и
+реши что, где и когда стоит поменять/доработать» — the
+research-session mode; the D-022 exception, doc-only): **the
+intake-13 review ROUTED — the doctrine half CONFIRMED as standing
+law, the proposal half routed to existing owner-gated rows, zero
+build-grade items.** The review's core contract re-derives VISION
+§1/§5 + INV-1..5 + EPIST-1 with near-zero drift (one stale pin
+corrected: phase 6's litmus test is MET BY MEASUREMENT since
+iter-112/D-149 — the gate verdict stays the owner's). The four
+proposals: the compositional causal substrate → CONFIRMED as
+direction, decomposed onto D-096 + parse-2 (the loop already
+executes intent chains causally — zero simulator change owed) +
+engine-1; a generic primitives layer REFUSED (no consumer, L13);
+PARTIAL as an outcome status → DEFERRED to the first action with
+separable sub-effects (the `failure_total` branch precedent);
+UNDER_MODELLED / NO_MODELED_EFFECT → REFUSED as a standing
+runtime status — the preferred cure for any future compositional
+action is the PACK-CI CLOSURE LAW (reaction tables close at
+authoring time; an unresolvable pair is an author error, never a
+runtime "I don't know"); inventions-as-emergence-from-repetition
+→ PARKED pattern (rides res-1 + world-2 L2 for the real
+substrate). The build queue untouched — nothing unpins, nothing
+reorders ·
 Phase: 6 (Packs & worldbuilder) — OPENED (iter-109, D-146; the
 exit criterion MET BY MEASUREMENT iter-112, D-149 — the gate
 verdict stays the owner's call; phases 0..5 all CLOSED: 0
 iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
 iter-102, D-136) ·
 1668 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 68c1abf and re-verified after —
+verified BEFORE working at HEAD 117a19f and re-verified after —
 doc-only, zero runtime surface touched, zero corpus price) ·
 Date: 2026-09-13 ·
-Scope: 17 files under `docs/ref/` (the re-point; the row's
-12-file list + the 5-file correction) + `docs/REFERENCES_DEEP.md`
-(§2 verdict columns) + `docs/REFERENCES.md` (the quarterly pass
-record: the header note, 3 license deltas, 2 site health notes,
-the re-verified check-date tag) + `docs/TASKS.md` (the iter-114
-section + the doc-2 row's run record) + `STATUS.md` (this
-re-pin) + `worklog.md` (this iteration's entry; iter-104 evicted
-per the cap) — 22 files, doc-only (the row's own objective scope,
-AGENTS §2.3). The prior iteration's record: iter-113 (docaudit).
+Scope: `docs/blueprint/phases.md` (§6's intake-13 block) +
+`docs/DECISIONS.md` (D-150) + `docs/TASKS.md` (the iter-115
+section) + `STATUS.md` (this re-pin) + `worklog.md` (this
+iteration's entry; iter-105 evicted per the cap) — 5 files,
+doc-only (the routing record's own objective scope, AGENTS
+§2.3). The prior iteration's record: iter-114 (doc2).
 The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -590,22 +584,23 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-114 DONE: the doc-2 quarterly (the owner's «продолжай
-работу по планам» — the stop-point plan's own pin: the gate
-verdict stays the owner's, the re-point rides the nearest
-quarterly).** The re-point LANDED (the iter-113 routed drift:
-17 ref files + the REFERENCES_DEEP §2 verdict columns now cite
-the current-state owners — the row's 12-file list corrected by
-the 5-file family extension; mechanics + verdicts untouched,
-research record) + the license/URL pass RUN (45 repos probed
-alive, LICENSE files read direct; three deltas — dnd-llm-game →
-MIT, pyDF → CC BY-NC-SA now present, RACEngine → a bare stub;
-`a16z/ai-town` 404s — live `a16z-infra/ai-town`; two site health
-notes — pcg.wikidot + open5e down at the check date, open5e's
-API up). The phase-6 exit criterion — "a new T1 reskin without
-core edits, ≤ 1 day" — stands MET BY MEASUREMENT (iter-112,
-D-149: the clock 14m24s, zero core edits, git-verified). What
-stands:
+**iter-115 DONE: the intake-13 routing (the owner's research
+call over the uploaded «open-ended действия, контент-паки и
+честная симуляция» review — «проанализируй документ и реши
+что, где и когда стоит поменять/доработать»).** The doctrine
+half CONFIRMED as standing law (VISION §1/§5, INV-1..5,
+EPIST-1; one stale pin corrected — phase 6's litmus test is
+MET BY MEASUREMENT since iter-112/D-149); the proposal half
+routed, zero build-grade items: the compositional substrate →
+D-096 + parse-2 + engine-1 (the loop already executes intent
+chains causally); PARTIAL → the first separable-sub-effects
+consumer; UNDER_MODELLED → REFUSED, the PACK-CI CLOSURE LAW the
+preferred cure for any future compositional action;
+inventions-from-repetition → parked (res-1 + world-2 L2). The
+build queue untouched. The phase-6 exit criterion — "a new T1
+reskin without core edits, ≤ 1 day" — stands MET BY
+MEASUREMENT (iter-112, D-149: the clock 14m24s, zero core
+edits, git-verified). What stands:
 
 1. **The phase-6 gate review — the owner's call (ROADMAP §5's
    protocol, never self-served):** the exit criterion's instrument is
@@ -615,7 +610,7 @@ stands:
    over a road_smoke run) and calls the gate; the §5 protocol re-runs
    the committed playscripts + M1/M2 + the T8 arm on the tavern side
    (the road side's evidence is the T1 twin itself). The doc debts
-   ride the gate: DECISIONS 43 rows (the D-034 collapse), the
+   ride the gate: DECISIONS 44 rows (the D-034 collapse), the
    over-cap trims (STATUS/TASKS/phases + TECH_NOTES/TEST_PLAN/README
    — the full inventory in worklog iter-113), the FAQ resync.
 2. **The standing owner-gated rows (unchanged):** `res-1` (the dives

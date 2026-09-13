@@ -1340,6 +1340,133 @@ engine-1 opening reads this before wiring the autonomous narrator):
   bytes); the bespoke LiM experiment; the presentation-side
   behavioral layer.
 
+The open-ended actions & honest-simulation analysis (intake-13,
+D-150 — the owner's 2026-09-13 research call over the uploaded
+architectural review "open-ended действия, контент-паки и честная
+симуляция"; the same consult posture as the intakes 6..12: the
+external document stays outside the repo, every load-bearing
+citation verified against HEAD first. The review's doctrine half
+re-derives the standing law with near-zero factual drift; its
+proposal half carries four genuinely new items — all routed
+below, none build-grade now. A future parse-2/engine-1 opening
+reads this before widening any grammar):
+
+- **Verified at HEAD (the doctrine half — facts, not hypotheses).**
+  The review's core contract — simulator produces facts, mediator
+  resolves intents, LLM interprets, canon changes only via the
+  simulator — is VISION §1 verbatim-compatible; the sycophancy
+  cure ("rolls decide, never prompts") is VISION §5/§6 standing
+  law; the §13 may/cannot table is INV-4 + the mediator's closed
+  document (D-055) + the validator's closed world (an invented
+  entity is `contradicted`, an unmodeled prop `insufficient_data`
+  — canon never fabricates an opinion). The epistemology (§8:
+  claim ≠ fact, belief ≠ fact) is the landed knowledge model:
+  records carry `who/channel/fidelity/source`, never a truth
+  field; lies are crafted records (D-008); acceptance rolls from
+  the listener's own trust (EPIST-1); rumor drift is family-gated
+  (68a/68b). The four-case taxonomy (§6) maps onto the door's
+  actual layers: case A = the wired resolver computes (a declared
+  action always wires a resolver + lint-closed event types,
+  PACK_SPEC §3); case C = the off-grammar refusal at the parse
+  boundary (the grammar snapshot; the nearest-valid menu,
+  iter-107) — never a fake event; case D = the FAILURE branch
+  (check margin + the `failure_total` band); case B (an action
+  declared with no modeled effect) is structurally unreachable in
+  authored packs — the one half-case that exists (use on an item
+  without `use_effect`) is a door REJECTION via `has_field`, an
+  honest in-world refusal. The unsupported ≠ failure distinction
+  the review demands HOLDS at HEAD — at the boundary-vs-canon
+  layer split, not as canon-level statuses. The chain-execution
+  half of §7 is the loop's standing semantics (door check →
+  schedule → OCC re-check → check → resolver → ignitions; the
+  step-feeding law: step N+1 reads step N's real state, a
+  rejection is cause-chained, nothing pretends); only the NL
+  decomposition (one utterance → N intents) is owed — and it is
+  parse-2's own row (PARSER_SPEC §7, the live-session-evidence
+  trigger). The travel half of §12 is landed (st-6a price law,
+  D-112's three zones, macro aggregates, the road_pack L1 with
+  derived prices 150/210/300/360); roads-1 stays owner-gated.
+  The explainability ask (§17) is largely standing:
+  `scripts/mechanics.py` trace/why/blast (D-118),
+  `outcome.failed_test` on every rejection, OCC cause chains,
+  check summaries in outcomes, `provenance.cause_hook` +
+  payoff-latency; the known boundary is deliberate — autonomous
+  precondition failures stay silent (the noise floor, D-005).
+  The pack-sufficiency criterion (§1 — long explainable chains
+  without a scripted scenario) is the repo's own instrument: M3
+  mean ≥ 2, T8 OFF 24 chains seed 125 (15–24 over 60 seeds), and
+  the review's own example chain is live pack data (fire → smoke
+  → `smoke_penalty` −20 on perception → the acquisition fidelity
+  stepping down at smoking sites, D-106 → telling/drift →
+  relation effects).
+- **Micro-drifts (the review vs HEAD):** (a) "Phase 6 remains a
+  future litmus test" — stale by three days: the exit instrument
+  is MET BY MEASUREMENT (iter-112/D-149, the clock 14m24s, zero
+  core edits); the gate verdict stays the owner's. (b) The §4
+  primitive lists read as near-term machinery; the admission law
+  (D-142) splits them — the social half already exists as
+  resolvers (converse/coerce/divert/steal + the secrets/leverage
+  blocks), the physical half (combine/separate/transform) is
+  res-1-territory mechanic growth, each entry passing the
+  second-pack test on its own, never a batch import. (c) No
+  factual errors were found — the review was written against the
+  repo, and its §18 doctrine table restates the standing
+  invariants (intent ≠ execution, attempt ≠ success, description
+  ≠ outcome, LLM narration ≠ canon authority).
+- **The verdict set (the four proposals):**
+  1. **The compositional causal substrate (§4): CONFIRMED as
+     direction, ROUTED — never a new layer.** The buildable form
+     decomposes onto existing rows: D-096's affordance derivation
+     (action availability from entity props — pack-lint data,
+     never an open resolver), parse-2 (the multi-intent reply; the
+     loop needs ZERO simulator change to execute a chain — the
+     queue/door/OCC machinery already sequences intents
+     causally), and engine-1 (the GBNF grammar enumerating the
+     closed action set is where composition-in-grammar would be
+     decided). A generic "primitive operations" engine layer is
+     REFUSED as speculative — no consumer, and the abstraction
+     cost gate (L13) fails it today.
+  2. **PARTIAL as an outcome status (§15): DEFERRED to the first
+     real consumer.** Genuinely absent — the steal margin split
+     is a failure BAND, not part-success. The house shape exists
+     (the `failure_total` precedent: a pack-declared branch riding
+     the closed pattern); the admission question ("must a second
+     pack carry it for the mechanic to exist?") answers itself
+     only when an action with separable sub-effects is authored.
+     No core pre-work.
+  3. **UNDER_MODELLED / NO_MODELED_EFFECT (§16): REFUSED as a
+     standing runtime status; CONDITIONAL on composition.** In
+     closed-grammar worlds the class is unreachable — an action
+     exists only with a wired, lint-closed effect; the honest
+     limit is the grammar boundary itself, and a runtime "I
+     don't know" status would soften the closed-world discipline
+     (an authoring failure would become a playable outcome). The
+     preferred cure, if compositional actions ever land, is the
+     PACK-CI CLOSURE LAW: the lint refuses any declared
+     composition whose reachable pairs do not all resolve to
+     declared effects (the reaction table closes at authoring
+     time; an unresolvable pair is an author error, never a
+     runtime status). This gathers the review's honesty goal
+     (never hallucinate an effect) with the repo's closure
+     discipline (never unknown at runtime) and eliminates the
+     third status entirely.
+  4. **Inventions as emergence-from-repetition (§5): PARKED
+     pattern, no row.** Genuinely new — no standing row or
+     parked pattern covers
+     repeatable-combination → procedure → knowledge transfer.
+     The honest-recording chain (combine → state_change →
+     repeatable_result → knowledge_created) maps onto existing
+     grammar (events + knowledge records + hooks), so a future
+     pack system needs no core pre-work; its real substrate
+     arrives with res-1 (the closed scarcity cycle gives
+     combinations stakes) and world-2 L2 (the province gives
+     them a world). Parked here with the intake-9 parked-pattern
+     family.
+- **Landed:** D-150 (this verdict set) + this intake block. The
+  build queue UNTOUCHED — nothing unpins, nothing reorders; the
+  standing owner-gated rows own every build-grade item (parse-2,
+  engine-1, res-1, world-2 L2, roads-1, pack-ci).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

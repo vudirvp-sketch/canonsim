@@ -13,6 +13,29 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-115 · 2026-09-13 · intake13 — the owner's research call over
+the uploaded «open-ended actions / content packs / honest
+simulation» review (5 files doc-only, zero code, zero corpus
+price — the routing record's own scope, AGENTS §2.3)
+- verified BEFORE working (1668+1 green, ruff clean, HEAD
+  117a19f, Python 3.12.14 the env pin); re-verified after — same
+  numbers, zero runtime surface touched
+- the routing: the doctrine half CONFIRMED as standing law
+  (VISION §1/§5, INV-1..5, EPIST-1; one stale pin corrected —
+  phase 6's litmus test MET BY MEASUREMENT since iter-112);
+  four proposals routed: substrate → D-096 + parse-2 + engine-1
+  (the loop already executes intent chains causally, zero
+  simulator change owed; a generic primitives layer REFUSED —
+  L13, no consumer); PARTIAL → first separable-sub-effects
+  consumer; UNDER_MODELLED → REFUSED, the PACK-CI CLOSURE LAW
+  the preferred cure; inventions-from-repetition → parked
+  (res-1 + world-2 L2)
+- docs: phases.md §6's intake-13 block + DECISIONS D-150 +
+  TASKS iter-115 + STATUS re-pin + this entry (iter-105 evicted,
+  verified in this edit; 10 held). Caps: DECISIONS 75 lines
+  (44 rows) — over-cap on substance (§6.1), collapses at the
+  phase-6 gate per the D-034 family law
+---
 iter-114 · 2026-09-13 · doc2 — the quarterly review, the owner's
 «продолжай работу по планам» (22 files doc-only, zero code, zero
 corpus price — the row's own objective scope, AGENTS §2.3)
@@ -309,31 +332,4 @@ invisible to the log)
   note: 15 files, 7 code + 8 doc — a genuine system feature, one
   coherent landing (the owner licensed splitting, quality kept it
   whole)
----
-iter-105 · 2026-09-12 · cli-pack — the pinned streak-breaker (the
-owner's «поехали» on the iter-104 pin): the CLI --pack flag; 7
-files — 2 code + 5 doc (the two owner verdicts riding the same
-call; AGENTS §2.3: the objective scope noted here)
-- cli/main.py: every pack-loading command + the session take
-  --pack (top-level default content/tavern_pack, the subparsers
-  SUPPRESS — both flag orders honored, no default clobber); the
-  loud refusal in _load (a bad path exits 1 naming it BEFORE any
-  world opens; a not-a-pack dir keeps load_pack's lint refusal);
-  tests/test_cli.py +3 — the explicit tavern pack byte-identical
-  to the no-flag run, the refusal (batch/session/
-  before-subcommand, no log born), the read-side flag
-- 1592+1 green (1589+3), ruff clean; corpus price zero (periphery
-  plumbing, zero draws, no fixture regen); the stoplist
-  docstring's "the CLI takes the pack dir as config" claim TRUE
-  (the drift dead at its root, not by deleting the claim)
-- the owner verdicts recorded, one DECISIONS line each: D-137 the
-  Alien L6 conflict (the OBSERVABLE-answers law, DIRECTOR_SPEC
-  §11 re-pointed), D-138 the D-081 climax flag (the peak's END
-  marker); DECISIONS 30→32 rows — over-cap on substance (§6.1,
-  the owner's own two verdicts; the collapse owed at the phase-6
-  gate, D-034)
-- iter-96 evicted (verified in this edit); 10 held. Caps: STATUS
-  659 / TASKS 813 / DIRECTOR_SPEC 599 / DECISIONS 62 lines (32
-  rows) — TASKS over-cap on substance (§6.1), trim at the
-  phase-6 gate
 ---

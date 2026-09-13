@@ -28,6 +28,38 @@
 > (D-149: the exit criterion's own form met by measurement — the clock
 > 14m24s, zero core edits; the gate verdict itself stays the owner's).
 
+### iter-115 · intake-13 — the open-ended actions & honest-simulation review routed — done (doc-only, the owner's research call)
+
+The owner's 2026-09-13 research call over the uploaded architectural
+review («проанализируй документ и реши что, где и когда стоит
+поменять/доработать» — the research-session mode; every load-bearing
+citation re-verified against HEAD 117a19f before routing; the
+external document stays outside the repo per the convenience-copy
+law). The routing: the review's doctrine half re-derives the standing
+law (VISION §1/§5, INV-1..5, D-031/D-142, EPIST-1) with near-zero
+drift — one stale pin corrected (phase 6's litmus test is MET BY
+MEASUREMENT since iter-112/D-149, the gate verdict the owner's); its
+proposal half routes four items, none build-grade now: (1) the
+compositional causal substrate → CONFIRMED as direction, decomposed
+onto D-096 (affordance derivation) + parse-2 (the multi-intent
+reply — the loop already executes intent chains causally, zero
+simulator change owed) + engine-1 (the GBNF grammar surface); a
+generic primitives layer REFUSED (no consumer, L13); (2) PARTIAL as
+an outcome status → DEFERRED to the first action with separable
+sub-effects (the `failure_total` branch precedent is the house
+shape); (3) UNDER_MODELLED / NO_MODELED_EFFECT → REFUSED as a
+standing runtime status (unreachable in closed-grammar worlds; the
+preferred cure for any future compositional action is the PACK-CI
+CLOSURE LAW — reaction tables close at authoring time, an
+unresolvable pair is an author error, never a runtime "I don't
+know"); (4) inventions-as-emergence-from-repetition → PARKED
+pattern (no row; rides res-1 + world-2 L2 for its real substrate).
+The build queue UNTOUCHED — nothing unpins, nothing reorders.
+Verdict set: D-150; the block: phases.md §6's intake-13. Zero new
+KIs. 1668+1 green, ruff clean (verified BEFORE working at HEAD
+117a19f and re-verified after — doc-only, zero runtime surface
+touched, zero corpus price).
+
 ### iter-114 · doc-2 quarterly — the re-point + the license/URL re-verification — done (doc-only, the owner's call)
 
 The owner's chat call («продолжай работу по планам» — the stop-point
