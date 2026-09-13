@@ -1,60 +1,53 @@
-Iteration: iter-112 (`iter-112-world2-l1` — the owner's «да приступай
-к работе уже», the pinned CODE row's own start word — the reskin day
-RUN, the first CODE iteration since iter-107): **world-2 L1 LANDED —
-`content/road_pack/`, the TRAVEL-loop reskin of the tavern contract on
-the open generic stack** (SRD 5.1 nouns, CC-BY-4.0, the CREDITS.md
-sidecar — PACK_SPEC §9's law; ids stay per the scaffold law, surfaces
-renamed: the river road — the ferry inn / the stockade yard / the
-tollhouse / the ferry quay; Odo the tollman, the drunk boatman, the
-ferry girl; the storm lantern, the toll purse, the jug of mead, the
-cudgel, the mooring hawser; the quay throng; the Ashen). The loop
-change (D-146's verdict — the universal-core claim tested by the LOOP,
-never the noun swap): `actions.json` move → `ticks: "edge"` (the
-travel twin), `rules.json::travel` the st-6a arming — the FIRST
-committed arming (step 150 / climb 60 / river 45, NO overrides: the
-derived law prices every road; all five locations claimed at the 6×6
-lattice's row-2 sites 12–16, `place.max_edge_span` 1→2; the measured
-prices 150/210/300/360 — geography mechanical); the `world_history`
-formed arm binds the five claim slots; the stoplist self-check
-extension (ROAD_STOPLIST, 20 nouns, zero engine collisions
-pre-grepped); the T1 twin `tests/test_t1_reskin.py` (+7: byte-identity,
-the golden-regen guard + the schema pin over
-`tests/fixtures/road_smoke_seed42.jsonl`, the fingerprint-0 law —
-edge-priced moves draw nothing, measured — the derived-prices route
-pin, the mid-travel encounters pin: the watch change + knowledge
-transfer at t=360 strictly inside the 180→540 leg, D-038) +
-`tests/playscripts/road_smoke.json`. **The clock: 14 min 24 s** from
-the first scaffold (23:52:40 UTC) to the green T-suite (00:07:04 UTC)
-— reading/design before the scaffold excluded (the clock's own
-definition); the ≤1-day budget met at ~1/60th. **Zero core edits**
-(git-verified — no byte under core/ sim/ brief/ render/ cli/ scripts/;
-the universal-core claim measured in ROADMAP §2's exit form). The
-authoring loop's first live run (scaffold → edit → doctor → green,
-one lint refusal caught and fixed same-edit). The phase-6 exit
-criterion is MET BY MEASUREMENT — the gate verdict itself stays the
-owner's call (D-149) ·
-Phase: 6 (Packs & worldbuilder) — OPENED (iter-109, D-146; the exit
-criterion's instrument now EXISTS and is green — the state column is
-ROADMAP §2's, the flip is the owner's; phases 0..5 all CLOSED: 0
-iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5 iter-102,
-D-136) ·
+Iteration: iter-113 (`iter-113-docaudit` — the owner's lossless
+documentation-audit call: verify the information architecture end
+to end, remove duplication/historical noise ONLY where provably
+lossless; the D-022 exception, doc-only): **AUDIT VERDICT: the
+architecture HOLDS — zero removals justified.** The reading
+gradient re-walked against HEAD 18f8b11 (AGENTS, NAV, STATUS,
+TASKS, DECISIONS, worklog, BLUEPRINT, CORE_DESIGN_RESEARCH,
+REFERENCES_DEEP, the `docs/ref/` layer, the owning specs):
+the declared ownership map verified (every NAV §1 row path
+resolves; ledger row IDs land in their owners; phase states agree
+across ROADMAP/TASKS/STATUS; no broken in-doc links — the one
+apparent miss is REFERENCES_DEEP §0's format-template back-link,
+by design). Every deletion candidate failed the "false duplicate"
+test — the cross-layer repetition (the invariant one-liners here,
+NAV §1's module inventories, README's phase summaries, the
+research layers' retained absorbed records) is the declared
+link-never-restate / research-record pattern carrying each
+layer's own function; the scheduled doc debts (DECISIONS 43 rows
+— the D-034 collapse; the over-cap residue STATUS/TASKS/phases +
+TECH_NOTES 773 / TEST_PLAN 772 / README 825; the FAQ resync) stay
+OWED AT THE PHASE-6 GATE per the §6.1 substance precedent — not
+preempted (a zero-loss audit prefers zero diff over a risky
+diff). One sync defect REPAIRED: `docs/REFERENCES_DEEP.md` §2 —
+the per-ref index missed its own same-edit law at iter-109 (the
+8 ref-18/ref-20 dive files never appended); the 8 rows added
+(x4, stellaris_economy, distant_worlds, eve_online,
+path_of_exile, albion_online, shadows_of_doubt, kenshi —
+one-line verdicts, D-024; the per-ref files own the mechanics).
+One drift family ROUTED, not fixed (the iter-103 precedent, zero
+new KIs): the research layer's "lifted into" pointers cite
+pre-iter-1/pre-D-037 module names that never existed
+(`core/runner.py`, `core/store.py`, `core/storage.py`,
+`brief/recall.py`, `brief/llm_client.py`, `sim/systems/*`; the
+current-state owners NAV §1 + D-037/D-142 are correct) — the
+note rides the `doc-2` row, the re-point rides its quarterly
+review ·
+Phase: 6 (Packs & worldbuilder) — OPENED (iter-109, D-146; the
+exit criterion MET BY MEASUREMENT iter-112, D-149 — the gate
+verdict stays the owner's call; phases 0..5 all CLOSED: 0
+iter-6 · 1 iter-26 · 2 iter-35 · 3 iter-54 · 4 iter-65 · 5
+iter-102, D-136) ·
 1668 passed +1 skipped, ruff clean (Python 3.12.14, the env pin;
-1660+8 — the road pack's own T1 twin + the stoplist self-check; zero
-tavern corpus price: the road fixture is new canon, the tavern
-fixtures byte-untouched) ·
+verified BEFORE working at HEAD 18f8b11 and re-verified after —
+doc-only, zero runtime surface touched, zero corpus price) ·
 Date: 2026-09-13 ·
-Scope: `content/road_pack/` (5 files: the four JSON + CREDITS.md),
-`tests/test_t1_reskin.py` (NEW), `tests/playscripts/road_smoke.json`
-(NEW), `tests/fixtures/road_smoke_seed42.jsonl` (NEW),
-`tests/test_inv3_stoplist.py` (the ROAD_STOPLIST extension),
-`docs/DECISIONS.md` (D-149, appended), `docs/TASKS.md` (world-2 L1
-flip + the iter-112 section), `docs/AGENT_NAVIGATION.md` §1 (the
-road_pack + tests rows), `README.md` (the map row), `STATUS.md` (this
-re-pin), `worklog.md` (this iteration's entry; iter-102 evicted per
-the cap) — 12 files, one coherent landing (the reskin day's own
-checklist: the pack by PACK_SPEC §2's four-file law + the sidecar,
-the tests, the doc sync — AGENTS §2.3's objective scope noted). The
-prior iteration's record: iter-111 (intake12). The
+Scope: `docs/REFERENCES_DEEP.md` (§2 +8 index rows — the same-edit
+repair), `docs/TASKS.md` (the iter-113 section + the doc-2 row's
+routed drift note), `STATUS.md` (this re-pin), `worklog.md` (this
+iteration's entry; iter-103 evicted per the cap) — 4 files,
+doc-only. The prior iteration's record: iter-112 (world2-l1). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -601,15 +594,20 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-112 DONE: world-2 L1 — the reskin day landed (D-149).** The
-second pack `content/road_pack/` runs the TRAVEL loop (move =
-`ticks: "edge"`, the derived price law's first committed arming —
-150/210/300/360 ticks over the four edges, all five locations claimed,
-no overrides); the T1 twin + the golden fixture + the stoplist
-extension landed; **the clock 14 min 24 s** from first scaffold to
-green T-suite; **zero core edits** (git-verified). The phase-6 exit
-criterion — "a new T1 reskin without core edits, ≤ 1 day" — is MET BY
-MEASUREMENT. What stands:
+**iter-113 DONE: the lossless documentation audit (the owner's
+call).** Verdict: the ownership architecture HOLDS — zero removals;
+one same-edit repair (REFERENCES_DEEP §2's 8 missing ref-18/ref-20
+rows); the research-layer "lifted into" drift routed to `doc-2`
+(its quarterly review owns the re-point); the doc debts stay owed
+at the phase-6 gate. The prior step stands unchanged — world-2 L1
+landed (D-149): the second pack `content/road_pack/` runs the
+TRAVEL loop (move = `ticks: "edge"`, the derived price law's first
+committed arming — 150/210/300/360 ticks over the four edges, all
+five locations claimed, no overrides); the T1 twin + the golden
+fixture + the stoplist extension landed; **the clock 14 min 24 s**
+from first scaffold to green T-suite; **zero core edits**
+(git-verified). The phase-6 exit criterion — "a new T1 reskin
+without core edits, ≤ 1 day" — is MET BY MEASUREMENT. What stands:
 
 1. **The phase-6 gate review — the owner's call (ROADMAP §5's
    protocol, never self-served):** the exit criterion's instrument is
@@ -620,7 +618,8 @@ MEASUREMENT. What stands:
    the committed playscripts + M1/M2 + the T8 arm on the tavern side
    (the road side's evidence is the T1 twin itself). The doc debts
    ride the gate: DECISIONS 43 rows (the D-034 collapse), the
-   over-cap trims (STATUS/TASKS/phases), the FAQ resync.
+   over-cap trims (STATUS/TASKS/phases + TECH_NOTES/TEST_PLAN/README
+   — the full inventory in worklog iter-113), the FAQ resync.
 2. **The standing owner-gated rows (unchanged):** `res-1` (the dives
    landed — the backbone stands), `roads-1` (mode G's
    generated-exits pass), `pack-ci` (the PACK_SPEC §5/§6

@@ -28,6 +28,53 @@
 > (D-149: the exit criterion's own form met by measurement — the clock
 > 14m24s, zero core edits; the gate verdict itself stays the owner's).
 
+### iter-113 · documentation lossless audit — done (doc-only, the owner's call)
+
+The owner's chat call (a full documentation-system audit: restore the
+information architecture first, then remove duplication/historical
+noise ONLY where provably lossless — «не сделать документацию короче
+любой ценой; сначала доказать, что информация не будет потеряна;
+только затем сокращать»). Verified BEFORE working: 1668+1 green,
+ruff clean, HEAD 18f8b11 (Python 3.12.14, the env pin). The reading
+gradient re-walked end to end (AGENTS, NAV, STATUS, TASKS,
+DECISIONS, worklog, BLUEPRINT, CORE_DESIGN_RESEARCH,
+REFERENCES_DEEP, the ref layer, the owning specs); ownership
+verified against HEAD: every NAV §1 row path resolves on disk, the
+REFERENCES_DEEP §2 index matched `docs/ref/` 38/45 (the gap below),
+ledger row IDs land in their owners, phase states agree across
+ROADMAP/TASKS/STATUS, the 1668+1 test-count claim reproduced, no
+broken in-doc links (one apparent miss is the §0 format template's
+own back-link, by design). **Verdict: the architecture HOLDS — zero
+removals.** Every deletion candidate failed the "false duplicate"
+test: STATUS's invariant one-liners and FAQ citations, NAV §1's
+module inventories, README's phase summaries, the research layers'
+retained absorbed records (CORE_DESIGN_RESEARCH's absorption map,
+the per-ref verdicts, BLUEPRINT's ledger) are the declared
+link-never-restate / research-record pattern carrying each layer's
+own function — not restatements to cut; the scheduled doc debts
+(DECISIONS 43 rows — the D-034 collapse; the over-cap residue:
+STATUS/TASKS/phases + TECH_NOTES 773 / TEST_PLAN 772 / README 825;
+the FAQ resync) stay owed at the phase-6 gate per the §6.1
+substance precedent — deliberately NOT preempted (a zero-loss
+audit prefers zero diff over a risky diff; the gate collapse is the
+owner's call). **One sync defect REPAIRED:** REFERENCES_DEEP §2
+missed the file's own same-edit law at iter-109 — the 8
+ref-18/ref-20 dive files (x4, stellaris_economy, distant_worlds,
+eve_online, path_of_exile, albion_online, shadows_of_doubt, kenshi)
+were never indexed ("append to this table in the same iteration");
+the 8 rows added, one-line verdicts only (D-024 — the per-ref
+files stay the mechanics owners). **One drift family ROUTED, not
+fixed** (the iter-103 precedent, zero new KIs): the research
+layer's stale "lifted into" module paths (pre-iter-1/pre-D-037
+planned names — `core/runner.py`, `core/store.py`,
+`core/storage.py`, `brief/recall.py`, `brief/llm_client.py`,
+`sim/systems/*` — never-existing files; the current-state owners
+are NAV §1 + D-037/D-142, both correct) — the note rides the
+`doc-2` row below, the re-point rides its quarterly review.
+Doc-only #1 (the D-022 exception, the owner's fresh call); 4 files;
+zero runtime surface, zero corpus price; 1668+1 green, ruff clean
+after. Detail: worklog iter-113 + git.
+
 ### iter-112 · world-2 L1 — the reskin day — done (the owner's «приступай»)
 
 The owner's chat call («да приступай к работе уже» — the pinned CODE
@@ -911,7 +958,23 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 - `balance-1` 1000-headless-sim distribution harness — DONE iter-6: `scripts/balance_harness.py`; the baseline table reproducible from the seed range. KI#4 closed.
 - `doc-1` VISION freeze review — DONE iter-26 (the phase-1 gate's doc-actualization sweep).
 - `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
-  TECH_NOTES review).
+  TECH_NOTES review). Added iter-113 (the doc-audit's routed finding, the
+  iter-103 precedent — a drift note, zero new KIs): the research layer's
+  "lifted into" pointers still cite pre-iter-1/pre-D-037 planned module
+  names that never existed in git — `core/runner.py` (the loop landed
+  `core/loop.py`), `core/store.py` (the projection landed `core/fold.py`),
+  `core/storage.py` (the index ladder landed `core/retrieval.py` +
+  `scripts/chronicle.py`), `brief/recall.py` / `brief/llm_client.py` (the
+  recall ladder landed `core/retrieval.py` + `brief/assembler.py`; the LLM
+  client never lands in track A — INV-4, engine-1 owns the gate),
+  `sim/systems/movement.py` / `sim/systems/perception.py` / `sim/events.py`
+  (D-037/D-142: the systems live in `core/`, `sim/systems/` stays reserved)
+  — in `docs/ref/*.md` (rot_js, entt, bevy, sqlite_fts5, sqlite_vec,
+  generative_agents, ai_town, letta, libtcod, azgaar_fmg, mesa,
+  alien_isolation) + the REFERENCES_DEEP §2 verdict columns; NAV §1 is the
+  correct current-state owner (verified); the re-point of the stale
+  pointers alone rides this review (the refs' mechanics + verdicts stay
+  untouched — research record).
 - `pack-1` Grim tavern pack candidate (post-gate; `PACK_SPEC.md` trigger —
   phase 6 or a 2nd setting): the romance/intimacy/coercion line as **pure
   pack data** — relation axes (`attraction`/`intimacy`/`loyalty`), status

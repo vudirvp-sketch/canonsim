@@ -13,6 +13,35 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-113 · 2026-09-13 · docaudit — the owner's lossless
+documentation-audit call (4 files doc-only, zero code, zero corpus
+price — the iter-103 audit footprint family)
+- verified BEFORE working (1668+1 green, ruff clean, HEAD 18f8b11,
+  Python 3.12.14 the env pin); the reading gradient re-walked, the
+  declared ownership verified against HEAD (NAV §1 rows resolve,
+  REFERENCES_DEEP §2 matched docs/ref/ 38/45 — the gap below, ledger
+  terms land, phase states agree, the test-count claim reproduced)
+- verdict: the architecture HOLDS, ZERO removals — the cross-layer
+  repetition is the declared link-never-restate / research-record
+  pattern, not false duplicates; the doc debts stay owed at the
+  phase-6 gate (DECISIONS 43 rows + the over-cap residue:
+  STATUS/TASKS/phases + TECH_NOTES 773 / TEST_PLAN 772 / README 825
+  + the FAQ resync), deliberately not preempted
+- repaired: REFERENCES_DEEP §2 +8 rows — iter-109 missed the file's
+  own same-edit law (the ref-18/ref-20 dives never indexed); routed:
+  the research layer's stale "lifted into" module paths
+  (core/runner.py, core/store.py, core/storage.py, brief/recall.py,
+  brief/llm_client.py, sim/systems/* — never-existing pre-iter-1/
+  pre-D-037 names; NAV §1 + D-037/D-142 the correct owners) → the
+  doc-2 row's note (the iter-103 precedent, zero new KIs)
+- docs: REFERENCES_DEEP §2, TASKS (the iter-113 section + the doc-2
+  note), STATUS re-pin + Next step, this file; iter-103 evicted here
+  (verified against git in this edit); 10 after; 1668+1 green, ruff
+  clean after. Caps: STATUS 646 / TASKS 1184 / DECISIONS 74 (43 rows
+  — the collapse owed at the phase-6 gate, D-034) / phases 1409 /
+  TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
+  ride the documented §6.1 substance precedent, trim at the gate
+---
 iter-112 · 2026-09-13 · world2-l1 — the reskin day, the owner's «да
 приступай» (12 files: 5 pack + 4 test + 3 doc-sync beyond STATUS/worklog
 — the day's own checklist, AGENTS §2.3's objective scope noted)
@@ -303,46 +332,4 @@ family; AGENTS §2.3: the objective scope noted here)
   ruff clean. Caps: STATUS 667 / TASKS 788 — over-cap held on
   ledger substance (§6.1, the iter-102/103 precedent), trim at the
   phase-6→7 gate.
----
-iter-103 · 2026-09-12 · ph6-audit — the owner's chat call: the
-phase-6 plan + the project audited from the height of the landed
-solutions, heightened plan-detail attention (3 files doc-only, zero
-code, zero corpus price — the iter-34 owner-audit footprint family;
-AGENTS §2.3: the objective scope noted here)
-- verified BEFORE working (1589+1 green, ruff clean, HEAD e6c95ff,
-  Python 3.12.14 the env pin — the first bare-pytest probe failed on
-  the 3.13 interpreter, the FAQ's `python -m pytest` law held); the
-  verdict: COHERENT — world-2/res-1/roads-1 agree across TASKS /
-  phases.md §6 / ROADMAP §2; the D-134/D-135 consult material mapped
-  onto its landed owners (verified in code: on_action, the hooks
-  buffer, the arcs, the cause tree, the cold tiers, rotations, the
-  folds, the erosion family); res-1's dependencies all landed; no
-  TODO/FIXME residue; the owed items already recorded (PACK_SPEC
-  trigger, ref-18/ref-20 just-in-time); the two standing owner
-  questions (DIRECTOR_SPEC §11's L6 conflict, D-081's climax flag)
-  re-checked, unchanged
-- FOUR detail findings routed to the TASKS rows (zero new KIs —
-  plan-detail notes, not defects): st-5's "with phase 5" pointer
-  stale post-closure (re-pointed: unowned by a phase, the first
-  consumer decides); the CLI `--pack` flag absent — the stoplist
-  docstring's "the CLI takes the pack dir as config" claim is drift,
-  the flag never existed (git -S verified; world-2 level-1's own
-  prerequisite; the stoplist self-check is tavern-tied too); the
-  roads-1 exits READ-PATH fork (the exits consumers — LOD warm ring,
-  the intent door's move validation, the place-1 lint — read the
-  pack record today; a generated world's exits are seed-dependent,
-  never static pack data: canon births + fold-reading consumers vs a
-  derived L3 read, the opening designs it); the name-1 toponym
-  question (the grammar is npc-only + condensation-gated; the
-  province-name dogfooding line needs a world-2 design call)
-- docs: TASKS (the iter-103 section + the world-2/roads-1 row
-  enrichments + the st-5 re-point), STATUS (the header re-pin +
-  Next step: st-4/st-5 added to the owner-gated enumeration + the
-  audit verdict), this file. iter-94 evicted here (verified against
-  git in this edit); 10 after. The doc-only streak surfaced per
-  AGENTS §2.5 (iter-100..103, all the owner's own calls, the D-022
-  exception — the next iteration should be the phase-6 opening or
-  an explicit owner call). Caps: STATUS 657 / TASKS 743 — over-cap
-  held on ledger substance (§6.1, the iter-102 precedent), trim at
-  the phase-6→7 gate.
 ---
