@@ -1,0 +1,39 @@
+{
+  "name": "province_smoke",
+  "seed": 42,
+  "pack": "province_pack@0.1",
+  "steps": [
+    {
+      "intent": "move",
+      "target": "loc_weirstair"
+    },
+    {
+      "intent": "wait",
+      "ticks": 30
+    },
+    {
+      "intent": "move",
+      "target": "loc_riverroad"
+    },
+    {
+      "intent": "wait",
+      "ticks": 15
+    },
+    {
+      "intent": "move",
+      "target": "loc_keep"
+    },
+    {
+      "intent": "move",
+      "target": "loc_malby"
+    },
+    {
+      "intent": "wait",
+      "ticks": 600
+    },
+    {
+      "intent": "move",
+      "target": "loc_thornmill"
+    }
+  ]
+}

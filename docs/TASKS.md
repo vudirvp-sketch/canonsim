@@ -26,6 +26,28 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-118 · world-2 L2 (slice 1: the skeleton) — done
+
+The province pack's opening slice, the owner's fresh call «начинай
+работу по планам, что осталось незакрытого и логичнее всего было бы
+начать сейчас то и делай» (the iter-117 precedent phrase — STATUS
+Next step's own readiness pick: world-2 L2 the natural next pick):
+`content/province_pack/` — the Sarrow Vale, ORIGINAL nouns (D-130's
+posture tier; no CREDITS sidecar). The skeleton: the 324-site
+generated surface (extent 144, the 200–600 province band; the six
+settlements claimed, `max_edge_span` 4 — the artery's lattice), the
+travel legs derived 345–705 (hours-to-a-day, the L2 scale claim), the
+cast with SPINE records (the AP crosswalk's first committed consumer
+— five flaws, all consumed, AP-8; the `budget` block's first arming,
+AP-1), the feud/quarrel chronicle, the T1 twin (+10:
+`tests/test_t1_province.py` — byte-identity, the golden fixture, the
+price pins, the mid-travel transfer at t=3240 inside the Malby→
+Thornmill leg) + PROVINCE_STOPLIST + the packci third-pack pin;
+1707 passed + 1 skipped, ruff clean, zero corpus price (a new
+directory — the committed corpora byte-untouched). The wave plan (the
+cultures, the triangle, the deep history, the calendar) rides the
+world-2 row below. Detail: D-153 + worklog iter-118 + git.
+
 ### iter-117 · pack-ci — done
 
 The admission-lint rungs LANDED (the owner's fresh call «начинай работу
@@ -196,12 +218,30 @@ D-105..D-133 family row + phases.md §5)
   extension (ROAD_STOPLIST); the phase-6 exit criterion "a new T1
   reskin without core edits, ≤ 1 day" MET by measurement — the gate
   verdict PASS iter-116, D-151, on the owner's convening call —
-  ROADMAP §2 CLOSED); L2 todo,
-  owner-gated** — the TWO-LEVEL gate, level 2 the
-  deep second world (weeks — VISION §7's honest twin): a fantasy
+  ROADMAP §2 CLOSED); L2 OPENED iter-118, the wave plan below
+  (slice 1 done — the skeleton, D-153)** — the TWO-LEVEL gate, level 2
+  the deep second world (weeks — VISION §7's honest twin): a fantasy
   province at pack scale, authored pillars over a generated surface
   (phases.md §6 — D-130's province sketch; the st-6a/travel + name
-  profiles arming ride this row's cultures half). **iter-109's
+  profiles arming ride this row's cultures half).
+  **The L2 wave plan (D-153 — the weeks made explicit; each slice a
+  row, the ORDER owner decides):** slice 1 (iter-118, DONE) the
+  skeleton — the Sarrow Vale's 324-site surface, the settlements on
+  the travel lattice, the spine records (the AP crosswalk's first
+  committed consumer), the T1 twin; slice 2 the cultures half — the
+  two name-1 phonotactic profiles (lowland soft vs hill hard), the
+  condensation travelers (the road-traffic group with
+  `generated_name` members — name-1's first committed arming, the
+  reachability law riding `condense_event`), the custom vocabularies
+  + prohibition sets (belief-as-rules data, the Disco Elysium shape);
+  slice 3 the triangle — the factions (the trade guild / the old
+  families / the garrison, depth-6's ratio dynamics at province
+  scale) + the deep feud history (the cause-tree render, the
+  story-critical claims seeding the director's buffer); slice 4 the
+  calendar — the market days / the fair / the river's seasonal rise
+  (the macro cadences + weather-1's chain, the D-030 mid-grim dial's
+  asymmetric data) + the T7 read + the row's own verdict call (the
+  owner's). **iter-109's
   opening answers ride the row (D-146): the second pack runs the
   TRAVEL main loop** (the river-artery class, the D-130 direction —
   a reskin twin of the tavern proves nothing; the loop change is

@@ -1,61 +1,66 @@
-Iteration: iter-117 (`iter-117-packci` — the admission-lint rungs,
-the owner's fresh call «начинай работу по планам, что осталось
-незакрытого и логичнее всего было бы начать сейчас то и делай» —
-STATUS Next step's own readiness pick after the phase-6 gate: pack-ci
-the natural cheap candidate, TWO packs now existing to run the rows
-against): **the PACK_SPEC §5/§6 checks are enforcement — LIVE in
-`core/pack.py` (`_teleology` + `_live_char`, D-152).** The teleology
-gate: dead action types (the declared-effect witnesses + the
-on_action/system_of_type attribution reads + STATE_MUTATING at the
-resolvers' own owner), orphan entities (the reference walk, the
-exits-edge position reads, the audience reach, the target-grammar
-matcher incl. actor-side flag reads), empty intersection-matrix rows
-(every non-player NPC in ≥1 authored surface), declared-but-unused
-templates (the emission-witness collector + the core constants + the
-story-critical dormancy witness). The live-char crosswalk: the AP
-rows (the optional `spine` block — world-2 L2 the first consumer;
-the urgency `flaw` consumption key; clone pairs with the probability-0
-exemption; predicate atomicity inside `_predicate_error`; ungated
-contradictory reactions; the optional `budget` block) + the
-price-marker lint (non-ambient deferred hooks demand an immediate
-observable; the ambient channel exempt). `tests/test_packci.py` +28:
-the crafted-twin refusals + the green pins — both committed packs,
-the scaffold, the COMPLETE v0.1 twin. The 68a twin-compliance pass:
-a stripped block strips its emission vocabulary (the weather family's
-template lines with the blocks — 11 crafted-twin helpers + the
-harness's `_DROP_DEAD_LINES` ablation map; the factions muster verb
-rides a `system_of_type` attribution row — metrics-side metadata,
-zero canon bytes) ·
+Iteration: iter-118 (`iter-118-world2l2` — the province skeleton, the
+owner's fresh call «начинай работу по планам, что осталось незакрытого
+и логичнее всего было бы начать сейчас то и делай» — the iter-117
+precedent phrase, STATUS Next step's own readiness pick: world-2 L2
+the natural next pick): **the L2 row OPENED — `content/province_pack/`
+the Sarrow Vale, slice 1 the skeleton (D-153).** The generated surface
+at the province band: extent 144/spacing 8 = 324 sites (the 200–600
+row, phases.md §6 — the geo-1-measured cost, a 9× growth over the
+road's 36; sub-second genesis), the six settlements claimed at
+seed-realization sites (the iter-112 authoring-loop pick; the
+claim↔exits discipline at `place.max_edge_span` 4 — the artery's legs
+2–4 cells), the feud/quarrel chronicle over 150 years (the hooks
+arming Maren's feud sweep + Wilmot's grief murmur, the dormant
+weight-0 pair). The travel lattice: the road family's derived prices
+(150/60/45) over the province geometry — the legs 345–705 ticks,
+hours-to-a-day where the road walked in minutes (the L2 scale claim
+made mechanical, st-6a's law at province scale). The cast WITH spine
+records: five NPCs declare the want/need tension with a flaw rooted in
+a cause — **the AP crosswalk's first committed consumer (D-148/D-152:
+the first pack to carry spine records got them lint-checked), every
+flaw consumed by its urgency entry (AP-8)**; the `budget` block's
+first committed arming (AP-1). `tests/test_t1_province.py` +10: the
+T1 twin (byte-identity + the golden fixture
+`tests/fixtures/province_smoke_seed42.jsonl` + the regen guard +
+fingerprint 0) + the price pins + the mid-travel transfer pin (Osgar
+briefing Ferra at t=3240, strictly inside the Malby→Thornmill leg —
+the road T1's measured instance re-produced at province scale) + the
+spine/budget pins + the genesis-scale pin. The stoplist self-check
+extension (PROVINCE_STOPLIST — the third pack's nouns join the INV-3
+audit vocabulary same-day) + the packci committed-pin (the third pack
+joins the green pins) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
-1696 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 274130c and re-verified after —
-the lint is load-time only, zero runtime surface touched, zero
-corpus price: the committed playscripts and fixtures byte-untouched,
-the T1/T8 corpora unaffected by construction) ·
+1707 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD d6cffa8 — 1696+1 green, ruff clean —
+and re-verified after: +10 the T1 twin, +1 the stoplist self-check;
+zero corpus price: the third pack is a new directory, the tavern/road
+corpora and their fixtures byte-untouched by construction, the T1/T8
+corpora unaffected) ·
 Date: 2026-09-13 ·
-Scope: `core/pack.py` (the `_teleology` + `_live_char` families +
-their collectors, the spine lint in `_entities`, the atomicity law
-in `_predicate_error`) + `core/resolvers.py` (`STATE_MUTATING`, the
-mutation-family witness at the registry's own owner) +
-`tests/test_packci.py` NEW (+28) + the 68a twin-compliance updates
-(`tests/test_ambient.py`, `tests/test_beliefwire.py`,
-`tests/test_echo.py`, `tests/test_factions.py`, `tests/test_groups.py`,
-`tests/test_lod.py`, `tests/test_macro.py`, `tests/test_panic.py`,
-`tests/test_states.py`, `tests/test_urgencies.py`,
-`tests/test_weather.py` + `scripts/balance_harness.py` — the crafted
-twins complete their ablations with the stripped family's template
-lines, the muster's attribution row) + docs: `docs/PACK_SPEC.md`
-(§5/§6 the enforcement readings + the §3 family row + the §12 flip),
-`docs/DECISIONS.md` (D-152 — 31 rows, over the 30 cap on the §6.1
-substance precedent until the next gate collapse), `docs/TASKS.md`
-(the pack-ci flip + the iter-117 section), `STATUS.md` (this re-pin +
-Next step), `worklog.md` (this entry; iter-107 evicted per the cap) —
-20 files (the law's own blast radius over the crafted-twin corpus,
-the objective scope noted per AGENTS §2.3; the alternative — a
-weakened check — refused: the row names all four teleology checks).
-The prior iteration's record: iter-116 (gate6). The detail lives in
+Scope: `content/province_pack/` NEW (entities — 6 locations, 7 npcs
+with the spine records, 1 ambient, 5 items; rules — the worldgen at
+the province band + the budget block + the province blocks re-voiced
+from the road family; actions — the road verb set with the province
+tokens/hook ids; templates — the province prose, the world_history
+formed arm binding the six claim slots) + `tests/playscripts/
+province_smoke.json` + `tests/fixtures/province_smoke_seed42.jsonl`
+NEW + `tests/test_t1_province.py` NEW (+10) +
+`tests/test_inv3_stoplist.py` (+PROVINCE_STOPLIST + the self-check)
++ `tests/test_packci.py` (the third-pack pin) + docs: DECISIONS
+D-153 (32 rows — over the 30 cap on the §6.1 substance precedent
+until the next gate collapse, the D-152 landing's own record),
+TASKS (the world-2 L2 opening + the wave plan + the iter-118
+section), STATUS.md (this re-pin + Next step), worklog.md (this
+entry; iter-108 evicted per the cap), NAV §1 + README (the
+province_pack rows), PACK_SPEC §6 (the AP-9 first-consumer note —
+the crosswalk's consumer LANDED) — 16 files (re-counted against the
+worktree delta: 9 modified + 7 new; the pack iteration's own
+checklist, the iter-112 family's objective scope per AGENTS §2.3;
+the alternative — a shallower skeleton — refused: the row's own text
+names the surface + the spines as the L2 opening's substance).
+The prior iteration's record: iter-117 (pack-ci). The detail lives in
 TASKS + worklog + git.
 
 
@@ -531,32 +536,35 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-117 DONE: the pack-ci admission-lint rungs LIVE (D-152) — the
-PACK_SPEC §5/§6 checks are enforcement in `core/pack.py`, both
-committed packs green, the crafted-twin corpus compliant (the 68a
-twins complete their ablations with the stripped family's template
-lines).** The backlog's cheapest readiness row is closed; the
-crosswalk's first real consumer is world-2 L2 (the spine/flaw
-grammar waits there). What stands:
+**iter-118 DONE: the world-2 L2 row OPENED — the province skeleton
+LIVE (D-153): `content/province_pack/` the Sarrow Vale, the 324-site
+generated surface, the settlements on the travel lattice, the spine
+records (the AP crosswalk's first committed consumer), the T1 twin
+green.** The L2 wave plan (D-153, TASKS world-2) owns the remainder:
+slice 2 the cultures half, slice 3 the triangle, slice 4 the calendar
++ the verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
-   readiness, `world-2` L2 is now the natural next pick (the
-   province — phases.md §6 the architecture owner, weeks-scale, the
-   st-6a/travel + name-1 profile arming rides its cultures half; the
-   newly-landed AP crosswalk's spine/flaw/budget grammar rides its
-   authoring — the first pack to carry spine records gets them
-   lint-checked, D-148/D-152); then `roads-1` (mode G's generated
-   exits — the read-path fork resolved, iter-104), `res-1` (the dives
-   landed, the backbone stands), `since-1`, `parse-2`, `engine-1` (+
-   `presentation-1`, its decision-input child), `tune-3`, `st-2`,
-   `scav-1`, `qa-1` mypy + `ci-1` GitHub Actions (the runner that
-   automates the now-landed admission lint), `bg-6` (the SoW audit,
-   D-055 deferral), `pack-1` (the grim pack — the first authored pack
-   to run the full crosswalk deliberately) + `pack-3` + `pack-4`,
-   `companion-1`, `mech-2` (rides the next mechanics.py touch), `st-4`
-   (rides presentation-1 at its write time, D-148) and `st-5` (the
-   first real consumer decides). No other owner question stands open.
+   readiness, world-2 L2 slice 2 (the cultures half) is the natural
+   next pick — the row's own wave plan, the two name-1 phonotactic
+   profiles (lowland soft vs hill hard — name-1's first committed
+   arming), the condensation travelers (the road-traffic group with
+   `generated_name` members, the reachability law riding
+   `condense_event`), the custom vocabularies + prohibition sets; then
+   slice 3 (the factions triangle + the deep feud history), slice 4
+   (the calendar + the T7 read + the verdict); then `roads-1` (mode
+   G's generated exits — the read-path fork resolved, iter-104),
+   `res-1` (the dives landed, the backbone stands), `since-1`,
+   `parse-2`, `engine-1` (+ `presentation-1`, its decision-input
+   child), `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
+   Actions (the runner that automates the now-landed admission lint),
+   `bg-6` (the SoW audit, D-055 deferral), `pack-1` (the grim pack —
+   the first authored pack to run the full crosswalk deliberately) +
+   `pack-3` + `pack-4`, `companion-1`, `mech-2` (rides the next
+   mechanics.py touch), `st-4` (rides presentation-1 at its write
+   time, D-148) and `st-5` (the first real consumer decides). No
+   other owner question stands open.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8

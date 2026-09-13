@@ -1,0 +1,1569 @@
+{
+  "meta": {
+    "pack": "province_pack",
+    "version": "0.1",
+    "notes": "world-2 L2, slice 1 (iter-118): the province — authored pillars over a generated surface (phases.md §6, D-130's sketch). New blocks vs the road: budget (the AP-1 size bounds, pack-ci's crosswalk arming with the spine records). The worldgen grows to the province band (324 sites, the geo-1-measured cost); the claims cover all six settlements (the derived prices' coverage law); the spine records on five NPCs carry the AP crosswalk's first committed consumer (every flaw consumed by its urgency entry — the AP-8 law). The cultures (names), the factions triangle, the feud history and the calendar are the follow-up slices (the wave plan, TASKS world-2). The worldgen: the province band at 324 sites (extent 144/spacing 8, the geo-1-measured cost — the 9× growth over the road's 36), the claim↔exits discipline at max_edge_span 4 (the artery's legs: weir↔road 4, road↔keep 4, keep↔malby 2, keep↔crofts 3, malby↔thornmill 2 cells), the claims' six slots rendering in world_formed's formed arm and the brief's scene line; site indices are seed-realization reads at the smoke seed (42) — the authored pick per the iter-112 authoring loop. The travel keeps the road family's numbers (150/60/45) over the province's geometry — the derived legs 345–705 ticks, hours-to-a-day where the road walked in minutes (the L2 scale claim)."
+  },
+  "time": {
+    "ticks_per_day": 1440,
+    "phases": [
+      {
+        "id": "morning",
+        "from": 0,
+        "to": 360
+      },
+      {
+        "id": "afternoon",
+        "from": 360,
+        "to": 720
+      },
+      {
+        "id": "evening",
+        "from": 720,
+        "to": 1080
+      },
+      {
+        "id": "night",
+        "from": 1080,
+        "to": 1440
+      }
+    ],
+    "macro": {
+      "cadence_ticks": 518400,
+      "event_type": "year_turns"
+    },
+    "notes": "MVP_SCOPE §8: full day ≈ 1440 ticks; 1 hour ≈ 60 ticks; typical action 2–8 ticks (see actions.json)"
+  },
+  "position_visibility": {
+    "sight": {
+      "same_location": true,
+      "through_exits": false
+    },
+    "hearing": {
+      "same_location": "normal",
+      "adjacent_location": "vague_only"
+    },
+    "smoke_penalty": -20,
+    "acquisition": {
+      "saw": [
+        {
+          "when_flag": "smoke",
+          "is": true,
+          "steps": 1
+        },
+        {
+          "phase_in": [
+            "night"
+          ],
+          "unless_flag": "lit",
+          "steps": 1
+        }
+      ],
+      "heard": [
+        {
+          "when_flag": "smoke",
+          "is": true,
+          "steps": 1
+        }
+      ]
+    },
+    "notes": "node-based model: locations are graph nodes (entities.json exits); visibility input → knowledge output, never duplicate fields (MVP_SCOPE §9). The status modifiers on perception live with the perception skill (checks.skills.perception.status_modifiers — single owner); smoke_penalty feeds the perception system (iter-3). depth-1b (iter-74, D-106): the acquisition arming — birth fidelity steps down the chain (core/intent.py::acquisition_fidelity, the 68b pattern) when the EVENT SITE is smoking (the fire layer's raw follow-up flag, both ambient channels) or unlit at night (entities.json locations.flags carries the lit-room data: the half-pay keep and Malby's market square are lit, the road, the weir, the crofts and the burned mill are not — the drowned country after dark). pack data, no code — a pack without the block answers the base fidelity (v0.1 bytes)"
+  },
+  "systems": {
+    "time": {
+      "reads": [],
+      "writes": [
+        "time"
+      ],
+      "per_tick": false
+    },
+    "position_visibility": {
+      "reads": [
+        "position",
+        "status",
+        "smoke"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
+    "relations": {
+      "reads": [
+        "knowledge"
+      ],
+      "writes": [
+        "relations"
+      ],
+      "per_tick": false
+    },
+    "knowledge": {
+      "reads": [
+        "knowledge",
+        "position"
+      ],
+      "writes": [
+        "knowledge"
+      ],
+      "per_tick": false
+    },
+    "states": {
+      "reads": [
+        "time"
+      ],
+      "writes": [
+        "status"
+      ],
+      "per_tick": false
+    },
+    "fire": {
+      "reads": [
+        "fire",
+        "position"
+      ],
+      "writes": [
+        "fire",
+        "smoke",
+        "status"
+      ],
+      "per_tick": true
+    },
+    "crime_watch": {
+      "reads": [
+        "relations",
+        "knowledge"
+      ],
+      "writes": [
+        "relations",
+        "status"
+      ],
+      "per_tick": false,
+      "after": [
+        "relations"
+      ]
+    },
+    "director": {
+      "reads": [
+        "hooks",
+        "relations",
+        "fire"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
+    "notes": "SCHED-1: reads/writes annotations are data; the scheduler builds the per-tick pass order from the per_tick subset and fails loudly on write-write ambiguity without before/after hints (docs/blueprint/phase0.md §2). per_tick remains fire-only (iter-2): the iter-3 systems (knowledge transfer, crime reactions, watch rotation, expectations) are event-driven reactions dispatched from the commit door + clock-crossing rotations — not per-tick passes; states decay passes are deferred to iter-4 (task owner: docs/TASKS.md)"
+  },
+  "checks": {
+    "die": 20,
+    "tie": "defender",
+    "failure_margin": 10,
+    "skills": {
+      "stealth": {
+        "base": 40
+      },
+      "perception": {
+        "base": 50,
+        "status_modifiers": {
+          "intoxication": {
+            "per_10_points": -2
+          },
+          "fatigue": {
+            "per_10_points": -1
+          },
+          "injury": {
+            "flat": -10
+          },
+          "fear": {
+            "flat_at_least": 50,
+            "flat": -10
+          },
+          "attention": {
+            "flat_when": "distracted",
+            "flat": -15
+          }
+        }
+      },
+      "social": {
+        "base": 50
+      },
+      "pursuit": {
+        "base": 45
+      },
+      "evasion": {
+        "base": 45
+      },
+      "context": {
+        "base": 50
+      }
+    },
+    "kinds": {
+      "perception": {
+        "attack": "perception",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "social": {
+        "attack": "social",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "context": {
+        "attack": "context",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "stealth_vs_perception": {
+        "attack": "stealth",
+        "defend": "perception",
+        "defender_source": "target"
+      },
+      "stealth_vs_observers": {
+        "attack": "stealth",
+        "defend": "perception",
+        "defender_source": "best_in_location"
+      },
+      "evasion_vs_pursuit": {
+        "attack": "evasion",
+        "defend": "pursuit",
+        "defender_source": "best_in_location"
+      },
+      "perception_vs_social": {
+        "attack": "perception",
+        "defend": "social",
+        "defender_source": "target"
+      }
+    },
+    "methods": {
+      "distraction": {
+        "defender_modifier": -10
+      }
+    },
+    "notes": "Opposed check (INTENT_SCHEMA §5): attacker total = skill base + status modifiers + d20 vs defender total; defender = the named skill of the defender entity (target / best-in-location excluding the actor) or the flat difficulty (environment); tie → defender; defender wins by ≥ failure_margin → total failure where the action distinguishes it. Skill numbers are v0.1 defaults; the difficulty column of MVP_SCOPE §7 seeds the per-action values in actions.json"
+  },
+  "relations": {
+    "scale": [
+      0,
+      100
+    ],
+    "neutral": 50,
+    "axes": [
+      "reputation",
+      "suspicion",
+      "trust",
+      "fear"
+    ],
+    "suspicion_thresholds": {
+      "status_suspect_at": 25
+    },
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; the manifest-check band (50) lives with its two owners, the director.hooks.possible_manifest_check[_relief].trigger.value pair (iter-4a cleanup removed the doc's mirror — the band is now declared per watcher, iter-43; the pack's balance, not a doc number). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3; the verdict delta (+25, waybill_unsatisfactory) lives in suspicion_sources — the three numbers compose the ladder per watcher: band 50 + verdict 25 >= arrest 75. Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
+  },
+  "knowledge": {
+    "channels": [
+      "saw",
+      "heard",
+      "told",
+      "inferred"
+    ],
+    "fidelity_chain": [
+      "exact",
+      "partial",
+      "vague"
+    ],
+    "transfer_decay_steps": 1,
+    "salience": "importance_then_recency",
+    "rumor_acceptance": {
+      "base": 50,
+      "trust_axis": "trust",
+      "trust_weight": 0.2,
+      "teller_penalty_axis": "intoxication",
+      "teller_penalty_per_10": -1
+    },
+    "telling": {
+      "on_event": "talk",
+      "teller": "target",
+      "listener": "actor",
+      "event": "rumor_told",
+      "facts": 1
+    },
+    "drift": {
+      "road_deeds": {
+        "tokens": [
+          "figure_reaching_for_tin",
+          "figure_firing_the_barn"
+        ],
+        "ladder": {
+          "exact": 0,
+          "partial": 30,
+          "vague": 50
+        },
+        "notes": "the province's drift family (iter-68b's arming row, D-100 — the road twin re-voiced): the tin thief's figure and the barn-burner's figure drift into each other as rumors ride the artery — the theft blamed on the fire, the fire on the theft (the feud's living afterlife, the mid-grim register). The mutation rides the RECEIVED fidelity (the vaguer the record, the likelier the drift): exact never drifts, a partial retelling drifts 30, a vague one 50. The roll is uniform over the OTHER member; a miss keeps the token. Only the telling path consults the family — the watch briefing (D-006) stays verbatim. Corpus price zero by construction (the smoke walk runs no theft). The road_deeds stream: drift:road_deeds."
+      }
+    }
+  },
+  "states": {
+    "fatigue": {
+      "gain_per_360_ticks_awake": 10,
+      "reset_on_rotation": true
+    },
+    "intoxication": {
+      "decay_per_360_ticks": 10
+    },
+    "fear": {
+      "decay_per_360_ticks": 5
+    },
+    "injury": {
+      "auto_decay": 0
+    },
+    "attention": {
+      "decay_per_360_ticks": 0
+    },
+    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup). tune-1 (KI#4): fatigue's counter-play is the rest action — the delta lives in actions.json status_effects beside the action that applies it (the use_effect precedent: the number lives with the effect's owner)"
+  },
+  "transitions": {
+    "fire": {
+      "system": "fire",
+      "spot_field": "fire_spots",
+      "spot_state": "burning",
+      "halt_flag": "destroyed",
+      "ignition": {
+        "requires_item_flag": "is_fire_source",
+        "requires_flammability": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "chance_on_drop_break": 0.9
+      },
+      "spread": {
+        "chance_per_tick": 0.15,
+        "within": "location"
+      },
+      "follow_ups": [
+        {
+          "kind": "smoke",
+          "after_ticks": 10,
+          "flag": "smoke",
+          "value": true,
+          "irreversible": false,
+          "blocked_by": [
+            "destroyed"
+          ]
+        },
+        {
+          "kind": "burnout",
+          "after_ticks": 120,
+          "flag": "destroyed",
+          "value": true,
+          "irreversible": true,
+          "blocked_by": []
+        }
+      ],
+      "alarm": {
+        "when_occupants_present": true,
+        "fear_spike": 40
+      },
+      "events": {
+        "started": "fire_started",
+        "spread": "fire_spread",
+        "smoke": "smoke_rising",
+        "alarm": "alarm_raised",
+        "burnout": "location_burned_out"
+      },
+      "knowledge": {
+        "started": {
+          "who": "same_location",
+          "except": [
+            "cause_actor"
+          ],
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "fire_in_{location}"
+        },
+        "spread": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "fire_spreading_in_{location}"
+        },
+        "smoke": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "smoke_in_{location}"
+        },
+        "alarm": {
+          "who": "same_location",
+          "channel": "heard",
+          "fidelity": "exact",
+          "knows": "fire_alarm_in_{location}"
+        },
+        "alarm_adjacent": {
+          "who": "adjacent_locations",
+          "channel": "heard",
+          "fidelity": "vague",
+          "knows": "shouting_near_{location}"
+        },
+        "burnout": {
+          "who": "same_location",
+          "channel": "saw",
+          "fidelity": "exact",
+          "knows": "{location}_burned_down"
+        }
+      },
+      "notes": "the one transition primitive (phase0 §2, Brogue promoteTile donor): a pack-declared layer — flag-gated ignition, stochastic per-tick spread within the location, SEEDED follow-ups, alarm with fear spikes. rules.json fire section restructured into this generic layer at iter-2 (same v0.1 numbers); iter-20: the follow-up vocabulary (kinds, flags, values, the spreading spot_state, the spread halt_flag) moved from core code into the layer declaration — a second pack declares its own vocabulary, zero engine edits (D-057). position_visibility.smoke_penalty stays with the perception input it belongs to"
+    },
+    "notes": "generic transition engine (core/transitions.py) iterates pack-declared layers by name — core code carries no layer names and no follow-up kinds (INV-3; D-057: spot_state/halt_flag/follow_ups are layer data)"
+  },
+  "crime_watch": {
+    "watch_rotation_ticks": [
+      360,
+      1080
+    ],
+    "transfer_on_rotation": true,
+    "rotation": {
+      "duty_post": "loc_malby",
+      "rest_post": "loc_keep",
+      "participants": [
+        "npc_sergeant_01",
+        "npc_corporal_01"
+      ],
+      "watch_event": "watch_change",
+      "transfer_event": "knowledge_transfer"
+    },
+    "suspicion_axis": "suspicion",
+    "reaction_event": "suspicion_changed",
+    "status_values": [
+      "unknown",
+      "suspect",
+      "caught"
+    ],
+    "status_suspect_value": "suspect",
+    "suspicion_sources": {
+      "witnessed_steal_failure": 25,
+      "heard_noise": 10,
+      "rumor_about_figure": 5,
+      "inferred_tin_missing": 20,
+      "waybill_unsatisfactory": 25,
+      "witnessed_arson": 30
+    },
+    "suspicion_from_knowledge": {
+      "figure_reaching_for_tin": {
+        "source": "witnessed_steal_failure",
+        "figure": "pc_01"
+      },
+      "noise_at_the_stalls": {
+        "source": "heard_noise",
+        "figure": "pc_01"
+      },
+      "figure_at_the_mill_slip": {
+        "source": "rumor_about_figure",
+        "figure": "pc_01"
+      },
+      "tin_missing": {
+        "source": "inferred_tin_missing",
+        "figure": "pc_01"
+      },
+      "waybill_unsatisfactory": {
+        "source": "waybill_unsatisfactory",
+        "figure": "pc_01"
+      },
+      "figure_firing_the_barn": {
+        "source": "witnessed_arson",
+        "figure": "pc_01"
+      }
+    },
+    "arrest": {
+      "requires_suspicion": 75,
+      "requires_same_location": true,
+      "event": "arrest_attempt",
+      "resolution_check": "evasion_vs_pursuit",
+      "resolution_event": "arrest_resolved",
+      "caught_value": "caught",
+      "caught_irreversible": true
+    },
+    "notes": "the watch pair rides the artery: the duty post at Malby (the market town's watch — the seed settlement's guardroom continuity), the rest post at the keep (the garrison); rotations fire when the clock crosses a tick in watch_rotation_ticks — mid-travel on the long legs (D-038: the crossings ride the queue in tick order, the travel loop's own encounter law). The crime system reacts to KNOWLEDGE, not actions: a novel crime-mapped token moves the knower's suspicion axis by suspicion_sources delta; the crime-status flip (entities crime_status → suspect) rides the first crossing of relations.suspicion_thresholds.status_suspect_at — the ev_0007 shape. The verdict ladder per watcher: band 50 (the manifest-check trigger) + verdict 25 >= arrest 75. The pay-tin family maps the theft ladder (witnessed_steal_failure 25 + heard_noise 10 + inferred_tin_missing 20); the barn family maps the fire (witnessed_arson 30)."
+  },
+  "expectations": {
+    "check_at": "watch_rotation",
+    "event": "expectation_violation",
+    "rules": [
+      {
+        "npc": "npc_sergeant_01",
+        "item": "pay_tin_01",
+        "carried_by": "npc_sergeant_01",
+        "knows": "tin_missing"
+      }
+    ],
+    "notes": "P2d (KI#3): behaviour rules generate per-NPC expectations; a mismatch at check time emits an inferred-channel record cause-chained to the event that moved the item — the only legal route to suspicion-from-absence. Osgar expects his own pay tin (the duty holder at the market post — the pickpocket's target, the road's purse shape re-voiced); checked at watch rotations. Rules must hold on the initial pack state (load-time lint)."
+  },
+  "worldgen": {
+    "map": {
+      "extent": 144,
+      "spacing": 8,
+      "jitter": 3,
+      "relax_rounds": 1,
+      "height_octaves": 3,
+      "moisture_octaves": 2
+    },
+    "biomes": {
+      "height_bands": [
+        4000,
+        5000,
+        7000
+      ],
+      "moisture_bands": [
+        2500,
+        5000,
+        7500
+      ]
+    },
+    "watershed": {
+      "neighbors": 4,
+      "river_flow": 6
+    },
+    "states": {
+      "capitals": 3
+    },
+    "chronicle": {
+      "years": 150,
+      "events_max": 5,
+      "event_type": "world_history",
+      "hooks": [
+        "maren_feud_sweep",
+        "wilmot_grief_ramble"
+      ],
+      "collections": [
+        {
+          "type": "feud",
+          "kinds": [
+            "war_fought"
+          ]
+        },
+        {
+          "type": "quarrel",
+          "kinds": [
+            "pact_signed",
+            "lineage_ended"
+          ],
+          "members": 2
+        }
+      ]
+    },
+    "claims": [
+      {
+        "location": "loc_weirstair",
+        "slot": "weir_water",
+        "field": "river",
+        "site": 36
+      },
+      {
+        "location": "loc_riverroad",
+        "slot": "road_ground",
+        "field": "biome",
+        "site": 111
+      },
+      {
+        "location": "loc_keep",
+        "slot": "keep_height",
+        "field": "height",
+        "site": 185
+      },
+      {
+        "location": "loc_malby",
+        "slot": "bank_ground",
+        "field": "biome",
+        "site": 222
+      },
+      {
+        "location": "loc_crofts",
+        "slot": "croft_hills",
+        "field": "biome",
+        "site": 206
+      },
+      {
+        "location": "loc_thornmill",
+        "slot": "mill_bank",
+        "field": "biome",
+        "site": 260
+      }
+    ],
+    "place": {
+      "max_edge_span": 4
+    }
+  },
+  "weather": {
+    "event_type": "weather_turns",
+    "initial": "clear",
+    "states": {
+      "clear": {
+        "weights": {
+          "clear": 5,
+          "overcast": 3,
+          "rain": 1
+        }
+      },
+      "overcast": {
+        "weights": {
+          "clear": 3,
+          "overcast": 3,
+          "rain": 3,
+          "storm": 1
+        }
+      },
+      "rain": {
+        "weights": {
+          "clear": 2,
+          "overcast": 3,
+          "rain": 4,
+          "storm": 1
+        },
+        "erosion": [
+          {
+            "event_type": "smoke_washed_away",
+            "after_ticks": 30,
+            "prop": "smoke",
+            "from": true,
+            "to": false,
+            "irreversible": false
+          }
+        ]
+      },
+      "storm": {
+        "weights": {
+          "clear": 1,
+          "overcast": 3,
+          "rain": 4,
+          "storm": 1
+        },
+        "hooks": [
+          "storm_market_murmur"
+        ]
+      }
+    },
+    "notes": "weather-1 (iter-98, D-133) re-armed for the province: the Markov chain in data (per-state weights, self-weights keep weather sticky, NO TTL/decay timers — D-049's fence), riding the macro clock's crossings (time.macro below — the pairing law), draws on the isolated weather:chain stream. The erosion family unchanged (the rain's SEEDED follow-up reverts the fire layer's smoke flag — the explicit counter-event). The storm's hook: Maren's market murmur (the rain eating the stalls — the D-082 pattern, weight 0, first_time_only, ambient channel). The seasonal deepening (the river's rise, the fair calendar) is the calendar slice's own row."
+  },
+  "urgencies": {
+    "beat_ticks": [
+      360,
+      720,
+      1080
+    ],
+    "entries": [
+      {
+        "npc": "npc_weirkeeper_01",
+        "probability_per_beat": 25,
+        "intent": {
+          "kind": "coerce",
+          "target": "pc_01"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          },
+          {
+            "noun": "actor",
+            "test": "leverage_over",
+            "who": "target"
+          }
+        ],
+        "flaw": "the crossing answers the heaviest purse",
+        "notes": "Ketta's toll squeeze (the drunkard's coerce driver re-voiced, iter-49's shape): while she holds a live cluster over the stranger she leans on him (1-in-4 per beat; the beat gate reads the live fold, the door re-reads at its own tick — an expired card rejects as a fact). THE SPINE'S CONSUMING RULE (AP-8): the flaw token names her spine's flaw — the crossing answers the heaviest purse; the entry keeps its slot and weight so the per-beat draw COUNT is unchanged (the REPLACEMENT law, iter-49)."
+      },
+      {
+        "npc": "npc_sergeant_01",
+        "probability_per_beat": 20,
+        "intent": {
+          "kind": "document_check",
+          "target": "pc_01"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "flaw": "the levy bends for whoever feeds it",
+        "notes": "Osgar's manifest demand (AP-8's second consuming rule): the fed levy leans on strangers' papers — the half-pay garrison's own economics, the flaw's behavior. The door-side check (perception_vs_social) decides the verdict; the hooks family (possible_manifest_check) rides the director's release path — this entry is the autonomous arm (the urgency door, NPC_REACTION)."
+      },
+      {
+        "npc": "npc_sergeant_01",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "look_around"
+        },
+        "requires": [
+          {
+            "noun": "actor",
+            "test": "echo_at_least",
+            "axis": "dread",
+            "value": 15
+          }
+        ],
+        "notes": "Osgar's jittery watch (the road's guard_01 twin, the echo-gated scan — content-5's driver shape, iter-51): the dread residue over the road deeds drives the watcher's own looking."
+      },
+      {
+        "npc": "npc_corporal_01",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "look_around"
+        },
+        "requires": [
+          {
+            "noun": "actor",
+            "test": "trait_held",
+            "token": "wary_of_the_tin_drifter"
+          }
+        ],
+        "notes": "Ferra's trait-gated watch (the road's guard_02 twin): the crystallized belief (traits) drives the relief's own scanning — the fold gates behavior through the door, the iter-46/55 fence."
+      },
+      {
+        "npc": "npc_marketmistress_01",
+        "probability_per_beat": 25,
+        "intent": {
+          "kind": "talk",
+          "target": "pc_01"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "kind",
+            "is": "npc"
+          },
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          },
+          {
+            "noun": "target",
+            "test": "relation_at_least",
+            "axis": "trust",
+            "value": 20
+          }
+        ],
+        "flaw": "the scales tilt for old coin",
+        "notes": "Maren's weighbeam talk (the road's maid wait slot re-voiced, AP-8's third consuming rule): the well-reputed stranger earns her small talk — the scales tilt for old coin, the market's own economics. The talk's telling half spreads the most salient fact (the rumor door, §6)."
+      },
+      {
+        "npc": "npc_smelter_01",
+        "probability_per_beat": 30,
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 2
+          }
+        },
+        "requires": [],
+        "flaw": "the iron hides when prices fall",
+        "notes": "Garrick's linger (the road's maid wait shape, ticks 2 — the charcoal burn, AP-8's fourth consuming rule): the bloom held back when the price turns — the iron hides. The crofts' own economy in one behavior."
+      },
+      {
+        "npc": "npc_steward_01",
+        "probability_per_beat": 20,
+        "intent": {
+          "kind": "ramble"
+        },
+        "requires": [],
+        "flaw": "grief answers every question first",
+        "notes": "Wilmot's grief-ramble (the road's ambient murmur family, AP-8's fifth consuming rule): the steward talks to the burned mill — grief answers every question first. The ambient channel's quiet gate admits it; intoxication 30 (the grey-brew) keeps his testimony vague by construction (the §6 intersection matrix)."
+      }
+    ],
+    "notes": "the beat gates fire at 360/720/1080 (the day's phases); every non-player NPC rides ≥1 authored surface (the intersection-matrix law) and every declared spine flaw rides ≥1 entry (AP-8, pack-ci's crosswalk — the province is the first committed consumer). No two entries share a trigger→action pair (AP-11: the clone check — the intents and requires all differ)."
+  },
+  "director": {
+    "mode": "consequence_planner",
+    "triggers": [
+      "time",
+      "place",
+      "threshold",
+      "prop"
+    ],
+    "stagnation": {
+      "entropy_floor": 5,
+      "per_npc_cooldown_beats": 2
+    },
+    "pacing": {
+      "peak_floor": 25,
+      "min_peak_beats": 1,
+      "min_rest_beats": 1,
+      "climax_floor": 75
+    },
+    "channels": {
+      "threat": {
+        "entropy_floor": 3,
+        "inputs": [
+          "physical_threats"
+        ]
+      },
+      "social": {
+        "entropy_floor": 5,
+        "inputs": [
+          "suspicion"
+        ]
+      },
+      "ambient": {
+        "entropy_floor": 2,
+        "inputs": []
+      }
+    },
+    "hooks": {
+      "sergeant_wary_of_pc": {
+        "weight": {
+          "base": 2,
+          "modifiers": [
+            {
+              "add": 2,
+              "when": {
+                "kind": "prop",
+                "of": "npc_sergeant_01",
+                "path": "pair.pc_01.suspicion",
+                "value": 50,
+                "comparator": "at_least"
+              }
+            }
+          ]
+        },
+        "release_threshold": 10,
+        "target_npc": "npc_sergeant_01",
+        "intent": {
+          "kind": "wait",
+          "fields": {
+            "ticks": 1
+          }
+        },
+        "channel": "social",
+        "first_time_only": true,
+        "options": [
+          {
+            "weight": 1,
+            "intent": {
+              "fields": {
+                "ticks": 1
+              }
+            },
+            "notes": "the quiet glance — the v0.1 nudge payload, the tie-loser by declaration order"
+          },
+          {
+            "weight": {
+              "base": 1,
+              "modifiers": [
+                {
+                  "add": 2,
+                  "when": {
+                    "kind": "prop",
+                    "of": "npc_sergeant_01",
+                    "path": "pair.pc_01.suspicion",
+                    "value": 50,
+                    "comparator": "at_least"
+                  }
+                }
+              ]
+            },
+            "intent": {
+              "fields": {
+                "ticks": 2
+              }
+            },
+            "notes": "the fixed stare — the duty holder plants himself: the option's weight escalates in the manifest-check band (base 1 + 2 when suspicion at_least 50), so the release CHOICE hardens with the evidence (drama-2's option layer)"
+          }
+        ],
+        "notes": "the road's watcher-suspicion hook re-voiced (iter-4's shape, the weight modifier reading the live fold): Osgar's wariness compounds with the pair axis; the social channel's release path. Seeds on the steal-failure family with the manifest pair."
+      },
+      "possible_manifest_check": {
+        "weight": 3,
+        "release_threshold": 5,
+        "target_npc": "npc_sergeant_01",
+        "intent": {
+          "kind": "document_check",
+          "target": "pc_01"
+        },
+        "trigger": {
+          "kind": "prop",
+          "of": "npc_sergeant_01",
+          "path": "pair.pc_01.suspicion",
+          "value": 50,
+          "comparator": "at_least"
+        },
+        "channel": "threat",
+        "climax": true,
+        "first_time_only": true,
+        "options": [
+          {
+            "trigger": [
+              {
+                "kind": "place",
+                "target_npc": "npc_sergeant_01",
+                "location": "loc_malby"
+              },
+              {
+                "kind": "prop",
+                "of": "pc_01",
+                "path": "position",
+                "comparator": "equals",
+                "value": "loc_malby"
+              }
+            ],
+            "notes": "the confrontation gate (drama-2's deferred-release law): the duty holder demands the waybill only at the market post, both present — the threat lands where the town can see it"
+          }
+        ],
+        "notes": "the document-check family's duty arm (iter-43's content-1, re-voiced as the manifest demand): the half-pay levy's own paperwork — the runner's waybill under the sergeant's eye. The band (50) is the trigger; the verdict ladder (band 50 + waybill_unsatisfactory 25 >= arrest 75) is crime_watch's own composition."
+      },
+      "possible_manifest_check_relief": {
+        "weight": 3,
+        "release_threshold": 5,
+        "target_npc": "npc_corporal_01",
+        "intent": {
+          "kind": "document_check",
+          "target": "pc_01"
+        },
+        "trigger": {
+          "kind": "prop",
+          "of": "npc_corporal_01",
+          "path": "pair.pc_01.suspicion",
+          "value": 50,
+          "comparator": "at_least"
+        },
+        "channel": "threat",
+        "climax": true,
+        "first_time_only": true,
+        "options": [
+          {
+            "trigger": [
+              {
+                "kind": "place",
+                "target_npc": "npc_corporal_01",
+                "location": "loc_keep"
+              },
+              {
+                "kind": "prop",
+                "of": "pc_01",
+                "path": "position",
+                "comparator": "equals",
+                "value": "loc_keep"
+              }
+            ],
+            "notes": "the confrontation gate, the relief twin (the same deferred-release law): Ferra demands the waybill at the keep's gate"
+          }
+        ],
+        "notes": "the relief arm (the road's relief twin): the transfer event carries the suspicion tokens to Ferra at the watch change — the institution's memory compounds (D-006's watch briefing, the one fidelity step down)"
+      },
+      "maren_feud_sweep": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_marketmistress_01",
+        "intent": {
+          "kind": "look_around"
+        },
+        "channel": "social",
+        "climax": true,
+        "first_time_only": true,
+        "notes": "the arc driver (the road's barkeep sweep re-voiced, content-6/D-081's aftermath chain): the market's reckoning — Maren sweeps the stalls when the wariness lands (the steal-failure seeds, the chronicle's feud armings). Seeded on the same steal-failure hooks list as the sergeant pair, APPENDED LAST: the explicit scan's buffer order can never steal the relief's budget slot. The worldgen chronicle arms it too (world_history hooks — the feud's living afterlife)."
+      },
+      "wilmot_grief_ramble": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_steward_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "the ambient driver (the road's drunkard murmur re-voiced, content-3/D-082 — the L4D Music analog): Thornmill's murmur, the grief talking to the burned mill. Trigger-less — the ambient channel's own quiet gate is the whole release path (weight 0 keeps the ambient entropy exactly 0, the inputless noise floor as declared). Seeded by the worldgen chronicle (world_history hooks — the feud's memories arm the murmur)."
+      },
+      "storm_market_murmur": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_marketmistress_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "weather-1's seeded consequence (iter-98, D-133): the storm's own murmur — Maren watching the rain eat the stalls. The weather_turns event carries the storm state's hook list; the release rides the SAME ambient quiet gate as the steward's grief murmur (the D-082 pattern verbatim: weight 0, first_time_only — one storm murmur per run, the ambient entropy stays 0)."
+      }
+    },
+    "arcs": {
+      "aftermath": {
+        "members": [
+          "possible_manifest_check_relief",
+          "maren_feud_sweep"
+        ],
+        "min_gap_beats": 2,
+        "notes": "the aftermath chain (content-6/D-081 — the first LIVE arc, re-voiced): the day's institutional beats march — the relief's public confrontation first, the market's reckoning second. The relief is the FIRST member on purpose: it is the one hook live on the runs the driver targets, so the order law never holds the corpus-pinned release. The chain is BOTH halves of the layer: causality (the order law — the sweep is a candidate only after the confrontation) and anti-spam (the gap)."
+      }
+    },
+    "notes": "the consequence planner over the province's three channels (the road's balance verbatim — the pacing stack is pack-portable mechanics, D-067/D-068's layering; threat reads physical_threats, social reads suspicion, ambient reads nothing — the quiet gate). Six hooks: the watcher pair's suspicion compounding, the manifest-check confrontation pair (the climax arms), the market sweep (the arc driver), the two ambient murmurs (the grief and the storm)."
+  },
+  "on_action": {
+    "alarm_raised": [
+      {
+        "scope": "witnesses",
+        "event": "panic_ripple",
+        "state": {
+          "prop": "status.fear",
+          "add": 10
+        },
+        "notes": "the alarm panic echo (content-2/D-077): everyone who HEARD the shout grows more afraid — the through-the-walls law. The +10 is the CONTAGION half, a quarter of the direct spike; no gate — a shout of fire unsettles everyone who heard it. The reaction event carries no knowledge and no hooks — the one-hop law."
+      }
+    ],
+    "document_check": [
+      {
+        "scope": "witnesses",
+        "event": "crowd_wary",
+        "state": {
+          "prop": "pair.pc_01.suspicion",
+          "add": 5
+        },
+        "notes": "the crowd-witness reaction (drama-3/D-071): every NPC who witnessed the public waybill demand grows warier of the stranger it targeted — the crowd-reaction layer the token-keyed crime system does not cover. LIVE since iter-43 (D-072)."
+      }
+    ],
+    "document_check_failed": [
+      {
+        "scope": "witnesses",
+        "event": "crowd_wary",
+        "state": {
+          "prop": "pair.pc_01.suspicion",
+          "add": 5
+        },
+        "notes": "the talked-down branch's own key — the same crowd reaction (the public challenge happened; the answer satisfying the watcher does not un-see it)"
+      }
+    ],
+    "notes": "the reaction table (drama-3's dispatch layer): the alarm's panic echo + the manifest family's crowd reactions. The one-hop law throughout — reactions commit at the triggering event's own tick, no cascades beyond."
+  },
+  "secrets": {
+    "event": "leverage_gained",
+    "tokens": {
+      "figure_reaching_for_tin": {
+        "subject": "pc_01",
+        "type": "blackmail",
+        "expires_ticks": 720
+      }
+    },
+    "notes": "the leverage registry (social-1/P3a, phases.md §3 — the CK3 add_hook precedent): which knowledge tokens are SECRETS in this setting — the tin-theft sighting, held by a novel knower, mints one leverage_gained fact (the coercion economy's fuel: Ketta's flaw entry reads the live cluster). Expiry is a read-side window (live while t < expires_at — never an event, INV-1; live_leverage the single read owner)."
+  },
+  "echo": {
+    "scale": [
+      0,
+      100
+    ],
+    "fidelity_weight": {
+      "exact": 100,
+      "partial": 50,
+      "vague": 25
+    },
+    "tokens": {
+      "figure_reaching_for_tin": {
+        "fades_ticks": 720,
+        "axes": {
+          "dread": 25,
+          "wariness": 35
+        }
+      },
+      "figure_firing_the_barn": {
+        "fades_ticks": 1440,
+        "axes": {
+          "dread": 60,
+          "wariness": 30
+        }
+      },
+      "tin_missing": {
+        "fades_ticks": 720,
+        "axes": {
+          "wariness": 30
+        }
+      },
+      "noise_at_the_stalls": {
+        "fades_ticks": 360,
+        "axes": {
+          "wariness": 15
+        }
+      }
+    },
+    "notes": "the residue registry (social-2/P3e, core/echo.py): which knowledge tokens carry EMOTIONAL residue for whoever holds them, decaying linearly over fades_ticks and scaled by the record's fidelity percent. A READ MODEL, never canon. LIVE through the intent door: Osgar's urgency entry carries echo_at_least (the jittery-watcher beat, content-5/D-080) — the fold gates behavior through the door, never channel inputs (the iter-46/55 fence)."
+  },
+  "traits": {
+    "threshold": 3,
+    "beliefs": {
+      "wary_of_the_tin_drifter": {
+        "family": [
+          "figure_reaching_for_tin",
+          "noise_at_the_stalls",
+          "tin_missing"
+        ],
+        "counters": [
+          "figure_firing_the_barn",
+          "figure_fled_the_bank",
+          "waybill_unsatisfactory"
+        ],
+        "notes": "the watcher's belief (the road's thief-paranoia re-voiced, leg-1/D-084): one theft's whole evidence chain in one belief — seeing the reach, knowing the noise covered it, inferring the tin gone. The counter-family (beliefwire-2, D-103): the exoneration trio at the same breadth bar — the arson sighting, the fled sighting, the waybill verdict; a watcher who holds all three re-categorizes the threat, never erases it. Ferra's trait-gated watch entry consumes the belief (the AP-8 family's wider surface)."
+      }
+    },
+    "notes": "leg-1's registry (core/traits.py): which belief families crystallize at threshold 3 — the felt residue becoming the held belief. The fold feeds the brief's belief lines (§3.5) and the intent door's gates."
+  },
+  "reflection": {
+    "event": "conclusion_drawn",
+    "threshold": 2,
+    "reflections": {
+      "a_sneak_works_the_road": {
+        "family": [
+          "figure_reaching_for_tin"
+        ],
+        "notes": "the watcher's conclusion (leg-3b's arming, the road's twin): the same figure reaching for the same tin twice is not chance — a sneak works the artery. The watch-change briefing then TELLS the relief the conclusion with the evidence — the never-re-reflect law keeps the hearsay knower honest."
+      },
+      "trouble_at_the_stalls": {
+        "family": [
+          "noise_at_the_stalls"
+        ],
+        "notes": "the market's conclusion: the same noise from the same stall row twice means trouble keeps coming from there. One insight per axis of the theft's evidence: the figure is the watcher's business, the noise the market's (the echo/traits/reflection split: felt / believed / concluded)."
+      }
+    },
+    "notes": "leg-3's registry (core/reflection.py): recurrence crystallizes into the pack's insight pair — reflection-on-recurrence through the canon door."
+  },
+  "retrieval": {
+    "alpha": 1.0,
+    "beta": 1.0,
+    "gamma": 1.0,
+    "delta": 1.0,
+    "knn_k": 8,
+    "notes": "The retrieval ladder's v0.1 balance (retr-1, STORE-1): all four signals equal weight - the neutral default, tuned when the mediator's keyword query arrives (mode B, BRIEF_SPEC's deferral). No vectors ship in v0.1: the embedder is offline pack-authoring, never runtime (D-012); the vec rung engages only when a pack carries vectors, and the sqlite-vec extension itself stays probed-optional (its absence is normal operation, the pure-Python cosine scan answers). The block is declarative-only - nothing in the runtime queries it, so the corpus price is zero (the 10-seed A/B witness in tests/test_retrieval.py)."
+  },
+  "importance": {
+    "score": {
+      "entities_touched_at_least_2": 1,
+      "irreversible_state_change": 2,
+      "per_far_hook": 1,
+      "story_critical_event": 2
+    },
+    "story_critical_events": [
+      "take",
+      "steal",
+      "pickpocket_failed",
+      "drop_break",
+      "arson",
+      "fire_started",
+      "fire_spread",
+      "smoke_rising",
+      "location_burned_out",
+      "alarm_raised",
+      "crowd_wary",
+      "panic_ripple",
+      "watch_change",
+      "knowledge_transfer",
+      "expectation_violation",
+      "rumor_told",
+      "flee",
+      "flee_caught",
+      "arrest_attempt",
+      "arrest_resolved",
+      "document_check",
+      "document_check_failed",
+      "leverage_gained",
+      "coerce",
+      "ramble",
+      "conclusion_drawn",
+      "world_history"
+    ],
+    "thresholds": {
+      "medium": 2,
+      "high": 4
+    },
+    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1."
+  },
+  "metrics": {
+    "system_of_type": {
+      "wait": [
+        "time"
+      ],
+      "move": [
+        "position_visibility"
+      ],
+      "look_around": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "examine": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "examine_failed": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "talk": [
+        "relations",
+        "knowledge"
+      ],
+      "talk_rebuffed": [
+        "relations"
+      ],
+      "distract": [
+        "relations"
+      ],
+      "distract_ignored": [
+        "relations"
+      ],
+      "suspicion_changed": [
+        "relations",
+        "crime_watch"
+      ],
+      "steal": [
+        "crime_watch",
+        "position_visibility",
+        "knowledge"
+      ],
+      "pickpocket_failed": [
+        "crime_watch",
+        "relations",
+        "knowledge"
+      ],
+      "take": [
+        "crime_watch",
+        "position_visibility"
+      ],
+      "take_failed": [
+        "crime_watch",
+        "position_visibility"
+      ],
+      "drop_break": [
+        "fire",
+        "position_visibility"
+      ],
+      "arson": [
+        "fire",
+        "crime_watch"
+      ],
+      "fire_started": [
+        "fire"
+      ],
+      "fire_spread": [
+        "fire"
+      ],
+      "smoke_rising": [
+        "fire",
+        "position_visibility"
+      ],
+      "location_burned_out": [
+        "fire"
+      ],
+      "alarm_raised": [
+        "fire",
+        "crime_watch"
+      ],
+      "use": [
+        "fire",
+        "position_visibility"
+      ],
+      "use_failed": [
+        "fire",
+        "position_visibility"
+      ],
+      "knowledge_transfer": [
+        "knowledge"
+      ],
+      "rumor_told": [
+        "knowledge",
+        "relations"
+      ],
+      "expectation_violation": [
+        "knowledge",
+        "crime_watch"
+      ],
+      "watch_change": [
+        "crime_watch",
+        "knowledge"
+      ],
+      "status_decayed": [
+        "states"
+      ],
+      "rest": [
+        "states"
+      ],
+      "arrest_attempt": [
+        "crime_watch"
+      ],
+      "arrest_resolved": [
+        "crime_watch"
+      ],
+      "document_check": [
+        "director",
+        "crime_watch"
+      ],
+      "document_check_failed": [
+        "director",
+        "relations"
+      ],
+      "leverage_gained": [
+        "knowledge",
+        "relations"
+      ],
+      "intent_rejected": [],
+      "coerce": [
+        "relations"
+      ]
+    },
+    "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction. tune-1: rest joins as the states system's recovery action (single-system by design — the fatigue counter-play is not a cross-system event)."
+  },
+  "brief": {
+    "total_hard": 800,
+    "blocks": {
+      "directives": {
+        "soft": 60,
+        "hard": 80
+      },
+      "scene_delta": {
+        "soft": 150,
+        "hard": 200
+      },
+      "scene_texture": {
+        "soft": 100,
+        "hard": 140
+      },
+      "present_entities": {
+        "soft": 90,
+        "hard": 120
+      },
+      "recalled_facts": {
+        "soft": 180,
+        "hard": 240
+      },
+      "scheduled_lore": {
+        "soft": 90,
+        "hard": 120
+      },
+      "voice_exemplars": {
+        "soft": 90,
+        "hard": 120
+      },
+      "active_options": {
+        "soft": 90,
+        "hard": 120
+      }
+    },
+    "recalled_facts": {
+      "max_items": 12,
+      "recency_weight": 1.0,
+      "importance_weight": 1.0,
+      "relevance_weight": 1.0
+    },
+    "scene_texture": {
+      "max_items": 8,
+      "tombstone_max_items": 4,
+      "unique_slots": [
+        "hearth"
+      ],
+      "identity_slots": [
+        "speech_pattern",
+        "look",
+        "mannerism"
+      ],
+      "per_entity_max_items": 2,
+      "notes": "tex-1 / BRIEF_SPEC §3.3/§6: the identity-or-pinned tier (an entry whose slot is pack-declared identity ranks with pinned — voice, look, mannerisms survive a crowded window, never silently evicted by fresh texture) + the per-entity quota (at most 2 lines per entity scope — one chatty NPC cannot flood the window; a value >= max_items is the documented inert state). Declarative-only at v0.1: the committed corpora carry scene-scoped texture only, zero price by construction."
+    },
+    "present_entities": {
+      "max_entities": 8,
+      "max_pairs": 6,
+      "scene_line_fields": [
+        "layout",
+        "weir_water",
+        "road_ground",
+        "keep_height",
+        "bank_ground",
+        "croft_hills",
+        "mill_bank"
+      ],
+      "card_markers": [
+        {
+          "prop": "status.intoxication",
+          "min": 30,
+          "marker": "drunk"
+        },
+        {
+          "prop": "status.fatigue",
+          "min": 30,
+          "marker": "weary"
+        },
+        {
+          "prop": "status.fear",
+          "min": 30,
+          "marker": "afraid"
+        },
+        {
+          "prop": "status.injury",
+          "min": 1,
+          "marker": "hurt"
+        },
+        {
+          "prop": "pair.pc_01.suspicion",
+          "min": 25,
+          "marker": "wary"
+        },
+        {
+          "prop": "crime_status",
+          "value": "suspect",
+          "marker": "suspect"
+        },
+        {
+          "prop": "crime_status",
+          "value": "caught",
+          "marker": "caught"
+        }
+      ]
+    },
+    "directives": [
+      "Narrate only what the brief contains; the log is the canon.",
+      "Facts are immutable; prose is yours.",
+      "Never invent events, names, or outcomes."
+    ],
+    "lore": [
+      {
+        "id": "sarrow_toll",
+        "text": "The Sarrow road runs weir to bank: one crossing, one market, one garrison too poor to say no.",
+        "from_beat": 0,
+        "to_beat": 3
+      },
+      {
+        "id": "feud_charter",
+        "text": "The old families' quarrel burned the mill a generation back; the toll charter rose on the ashes.",
+        "from_beat": 1,
+        "to_beat": 6
+      },
+      {
+        "id": "bloom_price",
+        "text": "Hill iron comes down by the sack; the weighbeam decides what the season was worth.",
+        "from_beat": 2,
+        "to_beat": 8
+      }
+    ],
+    "voice_exemplars": [
+      "The Sarrow ran slow and brown, the way it does before the rains.",
+      "The market murmured over the weighbeam, low and wary of the toll."
+    ],
+    "chorus": {
+      "max_actor_calls": 2,
+      "notes": "scene-1 / BRIEF_SPEC §6: the per-beat actor-call budget (mode B, one NPC per call — the chorus is a queue, not a convention): the queue drains head-first in pack declaration order, the NPCs beyond the cap fall to the L12 template rung (their beats already render through the chronicle — never a blocked beat). v0.1 keeps the dev-time operator's cost at two actor utterances per beat. A pack without this block runs mode B off: the chorus is empty, every run byte-identical (the pack's own declaration is the gate, INV-3)."
+    },
+    "actors": {
+      "npc_weirkeeper_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "You keep the crossing: the toll is the law, the purse is the shame."
+        ],
+        "voice_exemplars": [
+          "\"Crossing's a penny. Heavy purse pays heavy.\"",
+          "\"The river took one boat already. Mind the stair.\""
+        ],
+        "notes": "the weir keeper — guarded, toll-worn (the spine's flaw)"
+      },
+      "npc_sergeant_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "You hold the market post: challenge what is out of place, never invent it."
+        ],
+        "voice_exemplars": [
+          "\"Papers, friend. The levy's the levy.\"",
+          "\"I count the tin twice before I trust it.\""
+        ],
+        "notes": "the duty sergeant — clipped, half-paid, watchful (the manifest family's duty arm)"
+      },
+      "npc_corporal_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "You are fresh off the gate; your partner's word carries weight."
+        ],
+        "voice_exemplars": [
+          "\"Anything I should know before you go?\"",
+          "\"First night quiet at the keep. Long may it hold.\""
+        ],
+        "notes": "the relief — steady, trusts the briefing (D-007 transfer)"
+      },
+      "npc_marketmistress_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The weighbeam is yours: coin on wood, the stalls behind it defended."
+        ],
+        "voice_exemplars": [
+          "\"Weigh it here, coin on the beam.\"",
+          "\"No credit this season. The feud saw to that.\""
+        ],
+        "notes": "the market mistress — curt, proprietary (the tally staff beside the beam)"
+      },
+      "npc_smelter_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The bloom is the camp's word: weight is weight, shaved is shaved."
+        ],
+        "voice_exemplars": [
+          "\"Weighed short twice. Never again.\"",
+          "\"The stacks burn hot and the prices run cold.\""
+        ],
+        "notes": "the smelter-master — wary, grudged (the guild factor's shave)"
+      },
+      "npc_steward_01": {
+        "directives": [
+          "Speak as yourself, one utterance; the log is the canon.",
+          "The mill is gone; the name is not. Answer from both."
+        ],
+        "voice_exemplars": [
+          "\"The mill stood there. My lord's heir stood with it.\"",
+          "\"Another season, another promise of timber.\""
+        ],
+        "notes": "the steward — grieving, precise (the grey-brew on the shelf)"
+      }
+    },
+    "notes": "iter-8/10/15/20 / BRIEF_SPEC §6: the phase-1 assembler's pack contract — budgets (soft fill target, hard ceiling, total_hard for whole-block eviction; scene_texture is the iter-10 7th block, position 3; present_entities is the st-1 8th block, position 4 — the entity cards + pairwise relation tokens, with the observable-marker table and the max_entities/max_pairs ranking caps; iter-20/D-057: scene_line_fields lists the pack-declared location fields the scene line renders canon-from-birth; bridge-1 (iter-86, D-116 (1)): the field source is the FOLDED PROJECTION — the armed claims' slots (terrain/world_region @ loc_tavern, near_river @ loc_street) render their canon values, the pack record the fallback for unclaimed fields (the card law: static first, event-born last — the claims ARE event-born); tune-2 (iter-28, D-060): the card_markers table is prop-path keyed with two row kinds — threshold rows (numeric min) and value rows (string value) — so the crime cascade's standing state renders on the cards (relations.suspicion wary at 25, aligned with the status_suspect_at flip; crime_status suspect/caught on the player's card; the render threshold is this table's own number by design) — the st-6 layout answer, no initial_projection seeding, gateway canon_slot already guards pack fields, KI#48), the two deterministic recall signals, the scene-texture ranking caps + unique-slot flags (iter-11: the hearth is one object — cross-scope re-establishment of it is a laundering-family refusal), and the static text blocks (directives = narrator mode roles; lore = beat-window-scheduled static facts; voice exemplars = the only place style lives, L2). Every number is v0.1 tunable pack data. The eviction ORDER is architecture and lives in brief/assembler.py, not here. templates.json stays the tracery grammar (chronicle prose) — mediator text lives here. scene-1 (iter-60): chorus = the per-beat actor-call budget; actors = mode B's per-NPC role text and voice (the knower-parameterized assembly's static half — the player never appears here, mode A owns its directives). scene-2 (iter-61): relevance_weight = the three-signal shape's third term (the mediator's keyword query, mode B only — mode A never queries, the term inert on the committed corpus). tex-1 (iter-62): identity_slots + per_entity_max_items = the scene_texture window's identity tier + per-entity quota (see the scene_texture block's notes)."
+  },
+  "scene_detail": {
+    "loc_malby": [
+      {
+        "slot": "under_stall_row",
+        "values": [
+          "empty",
+          "dropped_tally"
+        ]
+      }
+    ],
+    "loc_keep": [
+      {
+        "slot": "under_bunk",
+        "values": [
+          "empty",
+          "spare_boots"
+        ]
+      }
+    ],
+    "loc_thornmill": [
+      {
+        "slot": "behind_millstone",
+        "values": [
+          "empty",
+          "old_horseshoe"
+        ]
+      }
+    ]
+  },
+  "travel": {
+    "step_ticks": 150,
+    "climb_ticks": 60,
+    "river_ticks": 45
+  },
+  "budget": {
+    "npcs": {
+      "min": 6,
+      "max": 9
+    },
+    "items": {
+      "min": 4,
+      "max": 8
+    },
+    "hooks": {
+      "min": 5,
+      "max": 9
+    },
+    "templates": {
+      "min": 40,
+      "max": 55
+    },
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds — the skeleton slice's own shape (7 npcs, 5 items, 6 hooks, 46 template families at the committed shape); the follow-up slices (the cultures, the factions triangle) grow the cast inside these bounds or re-declare them deliberately — the budget is the pack's own honesty about its scale."
+  }
+}

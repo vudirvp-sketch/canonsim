@@ -86,6 +86,7 @@ padding.
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
 | `content/road_pack/` | the second pack: the travel-loop reskin (world-2 L1, iter-112 — `travel` armed, the derived prices; `CREDITS.md` the CC-BY sidecar) |
+| `content/province_pack/` | the third pack: the original province (world-2 L2 slice 1, iter-118 — the 324-site generated surface, the settlements on the travel lattice, the spine records; `tests/test_t1_province.py` the T1 twin) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `core/worldgen.py` iter-81/87 (depth-5/chron-2 — the ordered passes,
 the claim gate's first caller, the genesis + the DF legends history
 bridge: participants/places, the pack-declared collection vocabulary,

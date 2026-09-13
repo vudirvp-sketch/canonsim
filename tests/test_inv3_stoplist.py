@@ -20,6 +20,14 @@ vocabulary (PACK_SPEC §9's own step; the ROAD_STOPLIST below). The
 engine-side grep reads BOTH lists; the self-check splits per pack so
 each family stays tied to its own data.
 
+iter-118 (world-2 L2, slice 1): the THIRD pack's nouns join the same
+law (PROVINCE_STOPLIST below — the original-setting vocabulary; the
+province is authored original content, D-130's posture tier, no
+CREDITS sidecar). Shared words (market, hearth, lamp, toll) stay in
+the older lists; "keep" is deliberately absent — a common English
+verb the engine's prose legitimately carries; "garrison" and
+"sergeant" carry the watch nouns instead.
+
 Periphery scope note (iter-6a audit, D-046): `render/`, `cli/` and
 `scripts/` are OUTSIDE the stoplist by design — they legitimately carry
 pack path strings (`content/tavern_pack`), CLI help-text examples and
@@ -33,6 +41,15 @@ extension** — the second pack exists, so its nouns join the INV-3 audit
 vocabulary (PACK_SPEC §9's own step; the ROAD_STOPLIST below). The
 engine-side grep reads BOTH lists; the self-check splits per pack so
 each family stays tied to its own data.
+
+iter-118 (world-2 L2, slice 1): the THIRD pack's nouns join the same
+law (PROVINCE_STOPLIST below — the original-setting vocabulary, no
+CREDITS sidecar: the province is authored original content, D-130's
+posture tier). Shared words (market, hearth, lamp) stay in the older
+lists; this list carries what is DISTINCTIVELY the province's.
+"keep" is deliberately absent — a common English verb the engine's
+prose legitimately carries; "garrison"/"sergeant" carry the watch
+nouns instead.
 """
 
 from __future__ import annotations
@@ -62,6 +79,18 @@ ROAD_STOPLIST: tuple[str, ...] = (
     "timber", "cask", "odo", "ashen", "wayfarer", "gable",
 )
 
+# Setting nouns of province_pack (iter-118, world-2 L2 slice 1): the
+# third pack's own vocabulary — the ORIGINAL setting's toponyms, cast
+# names and prop nouns (the Sarrow Vale). Shared road/tavern words
+# (market, hearth, lamp, toll) stay in the older lists; this list
+# carries what is DISTINCTIVELY the province's.
+PROVINCE_STOPLIST: tuple[str, ...] = (
+    "sarrow", "weir", "malby", "thornmill", "tithe", "crofts", "garrison",
+    "sergeant", "corporal", "osgar", "ketta", "ferra", "garrick",
+    "wilmot", "tallow", "punt", "tally", "waybill", "tin", "weighbeam",
+    "charcoal",
+)
+
 
 def _segment_pattern(word: str) -> re.Pattern[str]:
     """The word as a full segment: delimited by non-alphanumerics on both
@@ -81,7 +110,7 @@ def source_files() -> list[Path]:
 def test_no_setting_words_in_engine_code() -> None:
     patterns = [
         (word, _segment_pattern(word))
-        for word in (*STOPLIST, *ROAD_STOPLIST)
+        for word in (*STOPLIST, *ROAD_STOPLIST, *PROVINCE_STOPLIST)
     ]
     violations: list[str] = []
     for path in source_files():
@@ -123,4 +152,22 @@ def test_road_stoplist_words_actually_belong_to_the_road_pack() -> None:
     ]
     assert not missing, (
         f"road stoplist words absent from the road pack data: {missing}"
+    )
+
+
+def test_province_stoplist_words_actually_belong_to_the_province_pack() -> None:
+    """The self-check extension, the third pack (iter-118): the province
+    stoplist tracks the L2 pack's setting vocabulary — every word occurs
+    in the province pack's data as a full segment (ids included)."""
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted((REPO / "content" / "province_pack").glob("*.json"))
+    )
+    missing = [
+        word for word in PROVINCE_STOPLIST
+        if not _segment_pattern(word).search(pack_text)
+    ]
+    assert not missing, (
+        f"province stoplist words absent from the province pack data: "
+        f"{missing}"
     )

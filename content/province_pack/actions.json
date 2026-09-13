@@ -1,0 +1,918 @@
+{
+  "meta": {
+    "pack": "province_pack",
+    "version": "0.1",
+    "notes": "the verb set (the tavern/road action contract — the same 16 intents, the engine's closed grammar; the province nouns live in the knowledge tokens and the hook ids below). The move action keeps the edge-priced travel (st-6a/D-116 (5) — the province runs the TRAVEL main loop, D-146's opening answer: the loop change is the universal-core test)"
+  },
+  "actions": [
+    {
+      "intent": "look_around",
+      "label": "look around",
+      "resolver": "observe",
+      "ticks": 1,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "look_around"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "scene_{location}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "cheap perception of the current location: who/what is present (scene detail deepens with the perception system, iter-3)"
+    },
+    {
+      "intent": "examine",
+      "label": "examine",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "vague info",
+      "events": {
+        "success": "examine",
+        "failure": "examine_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "details_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "vague_details_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "targeted inspection of one entity or spot present in the actor's location"
+    },
+    {
+      "intent": "move",
+      "label": "travel to",
+      "resolver": "movement",
+      "ticks": "edge",
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "move"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "adjacent_to",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_left_toward_{target}"
+          },
+          {
+            "who": "destination_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_arrived"
+          },
+          {
+            "who": "actor",
+            "present_at": "destination_location",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "{present}_present"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the travel twin (st-6a, D-116 (5)): movement along the location graph priced by the exits edge — the derived travel price at the accept door (resolve time, L3: derive, never store), the completion enqueued at t + price (beats, rotations and macro crossings still fire mid-travel in tick order, D-038); carried items move with the carrier; the arrival snapshot learns one exact presence token per entity at the destination (st-1). The province's legs are hours-to-a-day (rules.json travel) — the artery's own scale"
+    },
+    {
+      "intent": "talk",
+      "label": "talk",
+      "resolver": "converse",
+      "ticks": {
+        "min": 4,
+        "max": 8
+      },
+      "check": {
+        "kind": "social",
+        "difficulty": 20
+      },
+      "on_failure": "cold shoulder",
+      "events": {
+        "success": "talk",
+        "failure": "talk_rebuffed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "relation_at_least",
+          "axis": "trust",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "conversation_with_{target}"
+          },
+          {
+            "who": "target",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "conversation_with_{actor}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "told",
+            "fidelity": "vague",
+            "knows": "rebuffed_by_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "social exchange; the trust floor is the relations gate (phase0 §2, Prom Week donor); the seed of rumor transfer — trusted tellers spread faster (iter-3)"
+    },
+    {
+      "intent": "wait",
+      "label": "wait",
+      "resolver": "wait",
+      "ticks": "N",
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "wait"
+      },
+      "requires": [],
+      "fields": [
+        "ticks"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [
+          "wilmot_grief_ramble"
+        ],
+        "failure": []
+      },
+      "notes": "advance N ticks; the world moves while the player stands still. content-3 (iter-53, D-082): every committed wait seeds the ambient tag — idle time is the noise floor's domain (D-005: the murmur is seeded at event time, never improvised; the tag is weight 0, so the seeding shifts no entropy anywhere)"
+    },
+    {
+      "intent": "take",
+      "label": "take",
+      "resolver": "pickup",
+      "ticks": 2,
+      "check": {
+        "kind": "stealth_vs_observers",
+        "difficulty": 40
+      },
+      "on_failure": "noticed",
+      "events": {
+        "success": "take",
+        "failure": "take_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "uncarried"
+        }
+      ],
+      "fields": [
+        "texture"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_reaching_for_{target}"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "texture": {
+        "requires": [
+          {
+            "noun": "texture",
+            "test": "texture_noun"
+          },
+          {
+            "noun": "texture",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "knowledge": {
+          "success": [
+            {
+              "who": "actor",
+              "channel": "saw",
+              "fidelity": "exact",
+              "knows": "{actor}_holds_the_{texture_slot}"
+            }
+          ],
+          "failure": [
+            {
+              "who": "same_location",
+              "except": [
+                "actor"
+              ],
+              "channel": "saw",
+              "fidelity": "partial",
+              "knows": "{actor}_reaching_for_the_{texture_slot}"
+            },
+            {
+              "who": "actor",
+              "channel": "saw",
+              "fidelity": "partial",
+              "knows": "{actor}_fumbled_the_{texture_slot}"
+            }
+          ]
+        }
+      },
+      "notes": "picking up an uncarried item present in the location; the stealth check applies only with other entities present (MVP_SCOPE §7 'stealth if owner near'); taking a carried item is steal's job. iter-11: texture-capable (blueprint §1 promotion) — a step carrying the mediator-resolved 'texture' reference takes the texture path: the pack's texture.requires replace the canon ones and a success is the slot's canon birth on the scope target"
+    },
+    {
+      "intent": "drop_break",
+      "label": "drop / break",
+      "resolver": "drop",
+      "ticks": {
+        "min": 1,
+        "max": 2
+      },
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "drop_break"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "carried_by",
+          "who": "actor"
+        }
+      ],
+      "fields": [
+        "near"
+      ],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "ignition": {
+        "layer": "fire",
+        "item_flag": "is_fire_source"
+      },
+      "notes": "noise on break; a dropped fire source at a flammable spot may ignite (rules.json transitions.fire, chance_on_drop_break — the §3 walkthrough's lamp)"
+    },
+    {
+      "intent": "use",
+      "label": "use",
+      "resolver": "use_item",
+      "ticks": {
+        "min": 2,
+        "max": 6
+      },
+      "check": {
+        "kind": "context",
+        "difficulty": 20
+      },
+      "on_failure": "no effect",
+      "events": {
+        "success": "use",
+        "failure": "use_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "carried_by",
+          "who": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "has_field",
+          "field": "use_effect"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_used_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "{actor}_fumbled_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "context-dependent effect from the item's pack use_effect (ale → intoxication); observers see the use"
+    },
+    {
+      "intent": "steal",
+      "label": "steal",
+      "resolver": "stealth_take",
+      "ticks": 3,
+      "check": {
+        "kind": "stealth_vs_perception",
+        "difficulty": 50
+      },
+      "on_failure": "partial or total failure",
+      "events": {
+        "success": "steal",
+        "failure": "pickpocket_failed",
+        "failure_total": "pickpocket_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "carries_flagged",
+          "flag": "steal_target"
+        }
+      ],
+      "fields": [
+        "method"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_reaching_for_tin"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor",
+              "target"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_at_the_stalls"
+          }
+        ],
+        "failure_total": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_reaching_for_tin"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_at_the_stalls"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": [
+          "sergeant_wary_of_pc",
+          "possible_manifest_check",
+          "possible_manifest_check_relief",
+          "maren_feud_sweep"
+        ]
+      },
+      "notes": "pickpocket: opposed stealth vs the target's perception; the target must carry a steal_target item (the pay tin on the duty sergeant — the province's theft family); failure mints the sighting + the noise tokens (the drift family's members, the suspicion ladder's anchors) and seeds the watcher hooks"
+    },
+    {
+      "intent": "distract",
+      "label": "distract",
+      "resolver": "divert",
+      "ticks": 3,
+      "check": {
+        "kind": "social",
+        "difficulty": 40
+      },
+      "on_failure": "ignored",
+      "events": {
+        "success": "distract",
+        "failure": "distract_ignored"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "antics_by_{actor}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "antics_by_{actor}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "shifts target attention (status.attention → distracted, a perception modifier via rules.checks.skills.perception); the 'method: distraction' modifier on steal is the separate in-attempt gambit"
+    },
+    {
+      "intent": "arson",
+      "label": "set fire",
+      "resolver": "ignite",
+      "ticks": 4,
+      "check": null,
+      "on_failure": "abort",
+      "events": {
+        "success": "arson"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "location_of",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "flammability",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "field_nonempty",
+          "field": "fire_spots"
+        },
+        {
+          "noun": "target",
+          "test": "spot_available",
+          "layer": "fire"
+        },
+        {
+          "noun": "actor",
+          "test": "flagged_accessible",
+          "flag": "is_fire_source"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_firing_the_barn"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_fled_the_bank"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "ignition": {
+        "layer": "fire",
+        "item_flag": "is_fire_source"
+      },
+      "notes": "impossible without a usable fire source at a flammable target (T5): the tallow lamp at the tithe barn / the charcoal stacks — the province's arson exposure (the manor's barn the designed target, the crofts' stacks the standing hazard); witnesses mint the sighting pair"
+    },
+    {
+      "intent": "rest",
+      "label": "rest",
+      "resolver": "recuperate",
+      "ticks": 60,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "rest"
+      },
+      "requires": [],
+      "fields": [],
+      "status_effects": [
+        {
+          "status": "fatigue",
+          "delta": -30
+        }
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the fatigue counter-play (tune-1, KI#4: player fatigue was monotonic over long waits — nothing in v0.1 could bring it down). One hour of rest clears 30 fatigue (the 720-tick waits of the canonical day gain 20); resting at fatigue 0 is a legal quiet beat (no state change). The delta lives here beside its action (use_effect precedent); the axis and its gain rate live in rules.json states"
+    },
+    {
+      "intent": "document_check",
+      "label": "demand papers",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception_vs_social",
+        "difficulty": 50
+      },
+      "on_failure": "talked down",
+      "events": {
+        "success": "document_check",
+        "failure": "document_check_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "waybill_unsatisfactory"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "waybill_demanded_of_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "waybill_demanded_of_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the manifest demand (the document-check family, iter-43's content-1 — the road's toll papers re-voiced as the half-pay levy's waybill check): perception reads the traveler, social answers for him; the verdict mints the suspicion ladder's papers rung (band 50 + 25 >= arrest 75)"
+    },
+    {
+      "intent": "coerce",
+      "label": "lean on",
+      "resolver": "coerce",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "coerce"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "leverage_over",
+          "who": "target"
+        }
+      ],
+      "fields": [],
+      "balance": [
+        {
+          "axis": "trust",
+          "delta": -25
+        },
+        {
+          "axis": "fear",
+          "delta": 25
+        }
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the leverage spend (social-1b, iter-45, D-074 — the fact cluster's first runtime consumer): the holder plays the card. The door is the leverage test itself (actor.leverage_over — the intent door's first fold-reading precondition; a holder with no live cluster is rejected, a spent or expired cluster likewise — the fold is the only truth); the spend is a NEW EVENT naming the cluster's id in outcome.cluster (never a mutation — the fold kills the cluster at the spend's tick, INV-1), the loop stamping cluster/secret/type from the live fold at commit. The balance (what the cluster buys): the subject's directed pair axes toward the holder shift — trust breaks fast (−25, D-030's darkness-as-data law) and fear spikes (+25) — the v0.1 buy is the relation shift itself; a status/urgency nudge stays recorded-not-built (the first-consumer law). No check: the leverage IS the power (the reveal happens; a resisting subject is the option layer's future, the drama-2 grammar). No knowledge records: the corner is quiet — the room sees nothing, the reaction cascade terminates exactly as leverage_gained's does (the one-hop law's sibling). The compliance (the subject DOING what the holder wants) is P3e psychological-echo territory — never this action. DORMANT in the committed content set: no urgency/director driver carries it (the iter-38 climax-flag pattern — landing one shifts the RNG stream and re-distills the whole corpus; content-4 owns the live call). The subject must be an npc (kind test — pc_01 is one); the actor is whoever holds a live cluster over them"
+    },
+    {
+      "intent": "flee",
+      "label": "flee",
+      "resolver": "flee",
+      "ticks": {
+        "min": 2,
+        "max": 4
+      },
+      "check": {
+        "kind": "evasion_vs_pursuit",
+        "difficulty": 45
+      },
+      "on_failure": "caught",
+      "events": {
+        "success": "flee",
+        "failure": "flee_caught"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "adjacent_to",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_fled_toward_{target}"
+          },
+          {
+            "who": "destination_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_arrived_fleeing"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "{actor}_caught_fleeing"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "exit under pursuit: opposed evasion vs the best pursuit skill present; no potential pursuer → automatic; guards' chase knowledge deepens with the crime system (iter-3): pursuers at the destination see exactly where the runner went"
+    },
+    {
+      "intent": "ramble",
+      "label": "ramble",
+      "resolver": "observe",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "ramble"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "rambling_by_{actor}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the 16th action (content-3, iter-53, D-082 — DIR-4's ambient channel gains its live consumer): an idle audible beat — the actor rambles, the room hears (vague, heard). No check (noise is not communication), no state change, no consequence hooks of its own. The observe resolver is the mechanic (an in-location perception event whose knowledge templates are this pack data); the director's ambient hook is the driver, the parse grammar gains a legal idle verb beside wait/look_around."
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "meta": {
+    "pack": "province_pack",
+    "version": "0.1",
+    "display": "The Sarrow Vale — the province pack v0.1 (world-2 L2, slice 1)",
+    "notes": "world-2 level 2, slice 1 (iter-118): a fantasy province at pack scale — authored pillars over a generated surface (phases.md §6, D-130's sketch; the Qud split). ORIGINAL nouns (the posture tier: the repo's public 2nd setting is original — D-015/REFERENCES §10; the level-1 reskin instrument was the OPEN generic stack, this is not). The skeleton slice: the 324-site map, the river-artery lattice, the settlements, the cast WITH spine records (the AP crosswalk's first consumer — D-148/D-152: the first pack to carry spine records gets them lint-checked), the T1 twin. The cultures (name-1 profiles, the condensation travelers), the factions triangle, the feud history and the calendar are the follow-up slices (the wave plan, TASKS world-2). Every value is pack data, never code (INV-3)."
+  },
+  "locations": [
+    {
+      "id": "loc_riverroad",
+      "name": "the Sarrow road",
+      "role": "the travel spine: journeys start and land here",
+      "layout": "open_road",
+      "exits": [
+        "loc_weirstair",
+        "loc_keep"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "the valley road between the weir stair and the half-pay keep — the artery's own spine (the road_pack's loc_street shape, the hub the player starts on); open ground, no sight lines into interiors"
+    },
+    {
+      "id": "loc_weirstair",
+      "name": "the weir stair",
+      "role": "the crossing: the Sarrow leaves the hills here, the toll is taken",
+      "layout": "stone_stair",
+      "exits": [
+        "loc_riverroad"
+      ],
+      "flammability": "medium",
+      "fire_spots": [
+        "punt_boathouse"
+      ],
+      "notes": "Ketta's weir — the road crosses the Sarrow by the stair; the boathouse timbers the only burnable thing on the bank (the flood took the rest)"
+    },
+    {
+      "id": "loc_keep",
+      "name": "the half-pay keep",
+      "role": "the garrison post: the levy road passes the gate; the relief's rest post",
+      "layout": "watch_keep",
+      "exits": [
+        "loc_riverroad",
+        "loc_malby",
+        "loc_crofts"
+      ],
+      "flammability": "low",
+      "fire_spots": [
+        "hearth"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "notes": "the under-paid garrison on the shoulder above Malby — the watch pair swaps between this rest post and the market duty post (crime_watch.rotation); the hearth the only lit fire in the province's interiors"
+    },
+    {
+      "id": "loc_malby",
+      "name": "Malby, the market town",
+      "role": "the wealth node: the weighbeam, the stalls, the rumor scene (mandatory: this is where hearsay lives)",
+      "layout": "market_square",
+      "exits": [
+        "loc_keep",
+        "loc_thornmill"
+      ],
+      "flammability": "medium",
+      "fire_spots": [
+        "stall_row",
+        "weigh_shed"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "notes": "the bank market on the navigable Sarrow — the seed settlement's continuity (the v0.1 tavern/street/market cluster grown into a town, D-130's polygon); the duty post of the watch pair, the crowd listener lives here; the stall row the market's fire exposure"
+    },
+    {
+      "id": "loc_crofts",
+      "name": "the smelt crofts",
+      "role": "the iron: the hill folk's bloom fires behind the keep",
+      "layout": "hillcroft_row",
+      "exits": [
+        "loc_keep"
+      ],
+      "flammability": "high",
+      "fire_spots": [
+        "charcoal_stack",
+        "bloom_heap"
+      ],
+      "notes": "Garrick's camp — the charcoal stacks are the province's worst fire trap (the smelting camp is a standing hazard by design, mid-grim); the estranged half of the province (the cultures row's hill folk — name-1 profiles ride the follow-up slice)"
+    },
+    {
+      "id": "loc_thornmill",
+      "name": "Thornmill, the tithe manor",
+      "role": "the old families' seat: the burned mill, the grief, the tithe barn (the arson target)",
+      "layout": "manor_yard",
+      "exits": [
+        "loc_malby"
+      ],
+      "flammability": "high",
+      "fire_spots": [
+        "tithe_barn",
+        "mill_race_timbers"
+      ],
+      "notes": "the old family's seat — the feud's fire took the mill a generation back (the worldgen chronicle owns the story, the collections: feud/quarrel); the tithe barn the present arson target; unlit — the burned mill stays dark (the acquisition's night-fidelity step, the road's unlit-open-ground law)"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the factor's runner",
+      "role": "a downstream trading house's errand-audit up-country",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "audit the convoy debts, be home before the rains",
+      "is_player": true,
+      "notes": "starts on the artery and walks the province (the smoke script's own walk); crime_status is the crime_watch convention (rules.json crime_watch.status_values); carries the house waybill book (the manifest-check family's target — the document_check demand reads it)"
+    },
+    {
+      "id": "npc_weirkeeper_01",
+      "name": "Ketta",
+      "role": "the weir keeper, toll-taker of the crossing",
+      "position": "loc_weirstair",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_sergeant_01",
+          "trust": 40
+        }
+      ],
+      "knowledge": [],
+      "mood": "guarded",
+      "goal": "keep the crossing honest",
+      "spine": {
+        "want": "the crossing kept honest",
+        "need": "the flood debt cleared",
+        "flaw": "the crossing answers the heaviest purse",
+        "cause": "the flood year drowned the family punt and the savings with it"
+      },
+      "carries": [],
+      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items)"
+    },
+    {
+      "id": "npc_sergeant_01",
+      "name": "Osgar",
+      "role": "the half-pay watch sergeant, duty post at Malby",
+      "position": "loc_malby",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_corporal_01",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "alert",
+      "goal": "hold the keep's order",
+      "spine": {
+        "want": "the keep's order held",
+        "need": "the back pay found",
+        "flaw": "the levy bends for whoever feeds it",
+        "cause": "the crown's quartermaster shorted the garrison two winters running"
+      },
+      "carries": [
+        "pay_tin_01"
+      ],
+      "notes": "the duty holder at the market post (the rotation's outgoing; pickpocket target — the pay tin is thin this season, the expectations rule's item); the spine's flaw rides the manifest-demand urgency entry (AP-8: the fed levy leans on strangers' papers)"
+    },
+    {
+      "id": "npc_corporal_01",
+      "name": "Ferra",
+      "role": "Osgar's relief, the keep's gate",
+      "position": "loc_keep",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_sergeant_01",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "resting",
+      "goal": "hold the keep's order",
+      "notes": "receives Osgar's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020); the pair.pc_01.suspicion home (suspectaxis-2, D-102); the manifest-check relief hook's target (the document-check family's second arm)"
+    },
+    {
+      "id": "npc_marketmistress_01",
+      "name": "Maren",
+      "role": "Malby's market mistress, keeper of the weighbeam",
+      "position": "loc_malby",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_sergeant_01",
+          "trust": 60
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "busy",
+      "goal": "keep the market thriving",
+      "spine": {
+        "want": "Malby's market thriving",
+        "need": "her son's bond covered",
+        "flaw": "the scales tilt for old coin",
+        "cause": "the feud burned her mother's stall and the family credit never recovered"
+      },
+      "carries": [
+        "tally_staff_01"
+      ],
+      "notes": "the wealth node's voice — the spine's flaw rides the talk urgency entry (AP-8: the well-reputed stranger gets her small talk, the scales tilt for old coin); the storm murmur hook's target (weather-1's seeded consequence, the market watching the rain eat the stalls)"
+    },
+    {
+      "id": "npc_smelter_01",
+      "name": "Garrick",
+      "role": "the smelter-master of the crofts",
+      "position": "loc_crofts",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_marketmistress_01",
+          "trust": 35
+        }
+      ],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "keep the bloom moving",
+      "spine": {
+        "want": "the bloom-iron respected",
+        "need": "the charcoal debt repaid",
+        "flaw": "the iron hides when prices fall",
+        "cause": "the guild factor shaved the weight two seasons back and the camp starved"
+      },
+      "carries": [],
+      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items)"
+    },
+    {
+      "id": "npc_steward_01",
+      "name": "Wilmot",
+      "role": "Thornmill's steward, keeper of a burned name",
+      "position": "loc_thornmill",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 30,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_marketmistress_01",
+          "trust": 30
+        }
+      ],
+      "knowledge": [],
+      "mood": "grieving",
+      "goal": "see the mill rebuilt",
+      "spine": {
+        "want": "the family name restored",
+        "need": "the mill rebuilt",
+        "flaw": "grief answers every question first",
+        "cause": "the feud's fire took the mill and the young heir together"
+      },
+      "carries": [],
+      "notes": "the old families' voice — the spine's flaw rides the ramble urgency entry (AP-8: the grief-ramble to no one in particular, the drunk's ambient shape re-voiced mid-grim); intoxication 30 — the grey-brew (the jug, items) feeds his witness quality (the §6 intersection matrix)"
+    }
+  ],
+  "ambient_entities": [
+    {
+      "id": "npc_malby_crowd_01",
+      "name": "the market queue",
+      "kind": "ambient_group",
+      "position": "loc_malby",
+      "knowledge": [],
+      "notes": "passive knowledge-holder and rumor listener (MVP_SCOPE §4.2): the bank crowd at the weighbeam — no goals, no relations, no movement — receives knowledge records only"
+    }
+  ],
+  "items": [
+    {
+      "id": "tallow_lamp_01",
+      "name": "the tallow lamp",
+      "position": "loc_riverroad",
+      "carrier": null,
+      "is_fire_source": true,
+      "breakable": true,
+      "flammability": "none",
+      "notes": "fire source; breakable — the drop_break target that starts the arson chain on the road (the runner's own lamp, the §3 walkthrough shape)"
+    },
+    {
+      "id": "pay_tin_01",
+      "name": "the garrison pay tin",
+      "position": "loc_malby",
+      "carrier": "npc_sergeant_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "Osgar's levy tin, thin this season — the steal target; the expectations rule's item (the inferred-tin-missing ladder's anchor)"
+    },
+    {
+      "id": "brew_jug_01",
+      "name": "the jug of grey-brew",
+      "position": "loc_thornmill",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "none",
+      "use_effect": {
+        "status": "intoxication",
+        "delta": 20
+      },
+      "notes": "the steward's grief-brew — the intoxication vector feeding Wilmot's witness quality (the road's mead-jug shape, re-voiced)"
+    },
+    {
+      "id": "tally_staff_01",
+      "name": "the tally staff",
+      "position": "loc_malby",
+      "carrier": "npc_marketmistress_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "notes": "Maren's market staff, beside the weighbeam (the cudgel analog — the keep-peace of the market town)"
+    },
+    {
+      "id": "charcoal_sack_01",
+      "name": "the charcoal sack",
+      "position": "loc_crofts",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "medium",
+      "notes": "the crofts' utility sack, by the stacks — the flammable prop at the camp (the road's hawser shape)"
+    }
+  ]
+}

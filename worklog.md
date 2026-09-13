@@ -13,6 +13,48 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-118 · 2026-09-13 · world2l2 — the province skeleton, the owner's
+fresh call «начинай работу по планам… логичнее всего было бы начать
+сейчас то и делай» (the iter-117 precedent phrase; STATUS Next step's
+own readiness pick — world-2 L2 the natural next pick, D-153)
+- verified BEFORE working (1696+1 green, ruff clean, HEAD d6cffa8,
+  Python 3.12.14 the env pin); re-verified after — 1707+1 green
+  (+10 tests/test_t1_province.py, +1 the stoplist self-check, the
+  packci third-pack pin re-pointed), ruff clean; zero corpus price
+  (the third pack is a new directory, the committed corpora and
+  fixtures byte-untouched by construction)
+- content: `content/province_pack/` NEW (the Sarrow Vale, ORIGINAL
+  nouns per D-130's posture tier, no CREDITS sidecar): the worldgen
+  at the province band (324 sites, extent 144; six settlements
+  claimed, max_edge_span 4; the feud/quarrel chronicle arming the
+  dormant hook pair) + travel (the road family's 150/60/45 over the
+  province lattice — the derived legs 345-705) + the SPINE records
+  (the AP crosswalk's first committed consumer: five flaws, all
+  consumed by urgency entries, AP-8) + the budget block (AP-1's
+  first arming); the actions/templates re-voiced from the road family
+  (the tokens, the hook ids, the world_history formed arm binding the
+  six claim slots)
+- tests: the T1 twin +10 (byte-identity + the golden fixture
+  province_smoke_seed42.jsonl + the regen guard + the price pins +
+  the mid-travel knowledge-transfer pin at t=3240 inside the
+  Malby->Thornmill leg + the spine/budget/genesis-scale pins);
+  PROVINCE_STOPLIST + the per-pack self-check; the packci
+  committed-pin grows the third pack
+- docs: DECISIONS D-153 (32 rows — over the 30 cap on the §6.1
+  substance precedent until the next gate collapse, the D-152
+  landing's own record), TASKS (the world-2 L2 opening + the wave
+  plan: slice 2 the cultures, slice 3 the triangle, slice 4 the
+  calendar), STATUS re-pin + Next step, NAV §1 + README the
+  province_pack rows, PACK_SPEC §6 the AP-9 first-consumer note, this
+  entry (iter-108 evicted per the cap, verified in this edit; 10
+  held); 16 files (re-counted against the worktree delta: 9 modified
+  + 7 new) — the pack iteration's own checklist (the iter-112
+  family's objective scope, AGENTS §2.3). Caps: STATUS 578 / TASKS
+  945 / DECISIONS 63 (32 rows — over the 30 cap on the §6.1
+  substance precedent until the next gate collapse, the D-152
+  record) / worklog 10 entries held — the over-cap files ride the
+  documented §6.1 substance precedent, trim at the next gate
+
 iter-117 · 2026-09-13 · pack-ci — the admission-lint rungs LIVE (the
 owner's fresh call «начинай работу по планам… логичнее всего — то и
 делай»; STATUS Next step's own readiness pick — pack-ci the natural
@@ -311,29 +353,4 @@ gut-check verdict NO CUTS, the second-setting shape TRAVEL
   STATUS's own list + the dives' one-file-per-source law, the
   objective scope per AGENTS §2.3); iter-99 evicted in this edit
   (verified, cap 10 held)
----
-iter-108 · 2026-09-13 · fixations — the research session's accepted
-list closed (the owner's «зафиксируй где нужно в документации… если
-итерация легкая — реализуй» call; D-142/D-143/D-144/D-145)
-- scripts: `scripts/digest.py` NEW (the derived one-pager over
-  STATUS/TASKS/DECISIONS — quoted+truncated source text and counts
-  only, never a second source of truth; read-only, zero engine
-  imports, no wall-clock (STATUS's own Date line), unparsable shapes
-  degrade to (unparsed) never a crash — the doctor's law)
-- tests: `tests/test_digest.py` +8 — the crafted mini-repo's value
-  pins + the real repo's shape pins (the drift family's shape: a doc
-  reshape that breaks the parser fails the suite same-iteration) +
-  the no-wall-clock source scan + the missing-doc loud refusal;
-  1660+1 green, ruff clean
-- docs: D-142 the core/pack admission law (core iff WHAT mechanics
-  exist, pack iff HOW they behave — the three-layer fence named);
-  D-143 the intent_rejected health-rate (≥90% delivery, breach = a
-  KI before grammar tuning); D-144 the latency budget
-  (per-component, sim-side ≤ 10 ms p95 over measured margin,
-  generate 6.3 s/20.4 s); D-145 the family row (the digest's
-  derived-only law + the opening-day questions); TASKS the questions
-  on the parked section + the iter-108 section; NAV §1 + README the
-  digest rows; STATUS re-pin + Next step. 8 files (1 script + 1
-  test + 6 doc — one coherent fixation landing, the objective
-  scope); iter-98 evicted in this edit (verified, cap 10 held)
 ---

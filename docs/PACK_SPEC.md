@@ -214,7 +214,9 @@ atomicity law inside `_predicate_error`):
   The optional `spine` block on an npc record: `want | need | flaw |
   cause` — all four non-empty strings when present, all-or-nothing (a
   half-declared spine is a broken spine). Absent = silent (the 68a
-  pattern; world-2 L2 the crosswalk's first consumer, D-148).
+  pattern; the crosswalk's first committed consumer LANDED iter-118
+  — the province pack carries five spines, every flaw consumed,
+  D-148/D-153).
 - **AP-8** — every flaw/deep trait carries ≥1 behavior rule that
   consumes it. The consuming surface today: the urgency entry's
   optional `flaw` key (the owner's own rule); both directions linted —
