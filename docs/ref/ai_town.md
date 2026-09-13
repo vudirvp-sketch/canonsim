@@ -11,8 +11,8 @@
 > (Convex backend integration, agent loop structure, the "world
 > state on the server" pattern) into our phase-1+ design notes,
 > never the TypeScript / React syntax. Reference repo:
-> `a16z/ai-town` (the original) — the `a16z-infra/ai-town`
-> organisation is the same project under the org move. Corpus
+> `a16z-infra/ai-town` (the `a16z/ai-town` original path 404s since
+> the org move — re-verified 2026-09-13). Corpus
 > inspected: `convex/` (server functions: `engine.ts`,
 > `agents.ts`, `index.ts`, `world.ts`, `tables.ts`), `src/`
 > (React + pixi.js frontend), `prompts/` (LLM prompt templates
@@ -119,7 +119,7 @@ design.
   messages retained as fallback**. This is the Generative
   Agents reflection pattern (`generative_agents.md`) with
   a database table instead of a memory stream. Our
-  phase-4 `brief/synthesise.py` inherits the shape —
+  phase-4 `core/reflection.py` inherits the shape —
   compaction = new events on the log (INV-1 compatible,
   not separate archive table).
 - **`world.ts` — the tile grid.** The world is a 2D
@@ -198,7 +198,7 @@ design.
   Phase-1+ `talk` action brief inherits the shape; the
   LLM-as-participant model does not.
 - **The `memories` table schema with `agentId` + `description`
-  + `createdAt` + `importance`.** Phase-4 `brief/recall.py`
+  + `createdAt` + `importance`.** Phase-4 `core/retrieval.py`
   inherits the field shape; we use the global JSONL log as
   the source of truth, not a per-agent table.
 

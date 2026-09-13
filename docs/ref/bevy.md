@@ -62,9 +62,9 @@ stdlib with INV-1 inversion.
   (314). The pattern: **one mutable root owning all state —
   entities, components, resources, archetypes, observers, a
   deferred command queue, and change-tracking ticks**.
-  Lifted into `core/store.py` as the central `Store` — but
-  INV-1 inversion: the `Store` is *derived* from the JSONL log,
-  not the mutable truth.
+  Lifted into `core/fold.py` (the projection) as the central
+  store — but INV-1 inversion: the store is *derived* from the
+  JSONL log, not the mutable truth.
 - **`Component` trait + storage layout** (`crates/bevy_ecs/
   src/component/mod.rs:530`) — `pub trait Component: Send +
   Sync + 'static { const STORAGE_TYPE: StorageType; type
@@ -89,7 +89,7 @@ stdlib with INV-1 inversion.
   + `indices: Vec<I>` + `sparse: SparseArray<I, NonMaxUsize>`.
   The pattern: **per-component storage layout chosen at
   `#[derive(Component)]` registration via `#[component(storage
-  = "SparseSet")]`**. Lifted into `sim/store.py` — negative
+  = "SparseSet")]`**. Lifted into `core/fold.py` — negative
   for canonsim: the `SparseSet`/`Table` cache-line rationale
   doesn't survive Python's `dict` overhead; storage collapses
   to `dict[EntityId, dict[ComponentName, dict]]`.
@@ -129,8 +129,8 @@ stdlib with INV-1 inversion.
   registers a `FilteredAccessSet` per system, and the
   `Schedule` builder cross-checks every pair to flag
   ambiguous (conflicting-access-but-unordered) systems at
-  *build* time**. Lifted into `sim/systems/*.py` query helper
-  — same shape (typed view, filtered by With/Without/Added/
+  *build* time**. Lifted into `core/knowledge.py` (`KnowledgeView`)
+  query helper — same shape (typed view, filtered by With/Without/Added/
   Changed), drop the lifetime tracking (Python has no borrow
   checker).
 - **`Schedule` + `SystemSet` + `ScheduleLabel`** (`crates/
@@ -152,7 +152,7 @@ stdlib with INV-1 inversion.
   users write `#[derive(SystemSet)] struct PhysicsSystems;`
   or `#[derive(ScheduleLabel)] struct Update;`. The pattern:
   **declarative dependency graph + automatic build-time
-  conflict detection**. Lifted into `sim/systems/__init__.py`
+  conflict detection**. Lifted into `core/scheduler.py`
   — systems declare ordering with the same combinator shape;
   `SystemParam::init_access` + `ScheduleGraph::ambiguous_with`
   build-time conflict check is the access-conflict detection
@@ -265,8 +265,8 @@ stdlib with INV-1 inversion.
   The pattern: **builder-pattern app, pluggable `Plugin::build`,
   and a deferred FSM where state changes are *queued* in
   `NextState<S>` and applied at a known schedule point — never
-  mutated mid-system**. Lifted into `sim/systems/` phase
-  control (Phase 0 = `tavern`, etc.) — the deferred `set`-then-
+  mutated mid-system**. Lifted into `core/director.py` (the pacing
+  states) phase control (Phase 0 = `tavern`, etc.) — the deferred `set`-then-
   apply-at-schedule-point shape is the correct way for an
   event-sourced sim to switch scenarios mid-fold.
 - **`Entity`** (`crates/bevy_ecs/src/entity/mod.rs:424`) —
@@ -292,7 +292,7 @@ stdlib with INV-1 inversion.
   exclusive write) is exactly what makes a fold deterministic.
 - The `Schedule` + `SystemSet` + `before/after/chain/in_set` +
   `ambiguous_with` graph (schedule.rs:391, 757) is the
-  precedent for `sim/systems/__init__.py` — systems declare
+  precedent for `core/scheduler.py` — systems declare
   ordering with the same combinator shape; `SystemParam::
   init_access` registering a `FilteredAccessSet` and the
   `ScheduleGraph::ambiguous_with` build-time conflict check
@@ -449,9 +449,9 @@ stdlib with INV-1 inversion.
 primary pattern source for canonsim's Phase 5 ECS layer —
 specifically its `Messages<M>` double-buffer (→ `core/queue.py`),
 its `Schedule`+`SystemSet`+`ambiguous_with` declarative ordering
-(→ `sim/systems/`), its `Resource`/`Local` per-system-state
+(→ `core/scheduler.py`), its `Resource`/`Local` per-system-state
 fusion (→ `core/` per-system scratch), and its `States` deferred
-FSM (→ `sim/systems/` phase control) — adapted by replacing
+FSM (→ `core/director.py` phase control) — adapted by replacing
 `&mut World` mutation with append-only-event-log folding (INV-1)
 and Rust derive-macro type-safety with Python dataclasses +
 JSON Schema under D-012/D-015. Dual `MIT OR Apache-2.0` license
@@ -461,7 +461,7 @@ write-half from the read-half" lesson (`Messages<M>` asymmetry)
 is the inspiration: the JSONL log IS the write-half, the fold
 IS the read-half. The "declarative ordering beats imperative
 calls" lesson (`Schedule` graph + `ambiguous_with` build-time
-conflict detection) shapes `sim/systems/__init__.py` system
+conflict detection) shapes `core/scheduler.py` system
 registration.
 
 ---

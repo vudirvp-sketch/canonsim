@@ -10,7 +10,15 @@
 > rev-v2 additions carry license "verify" — the check is deferred to phase-4
 > intake (D-017). Rot by design: licenses, URLs
 > and project health age — re-verify at intake; review quarterly together with
-> `docs/TECH_NOTES.md`.
+> `docs/TECH_NOTES.md`. Quarterly pass 2026-09-13 (doc-2, iter-114): 45 repo
+> paths probed alive via `git ls-remote` + LICENSE files read directly
+> (raw.githubusercontent.com — no API); licenses HELD except the deltas
+> recorded inline (§9 dnd-llm-game → MIT; §11 pyDF → CC BY-NC-SA template
+> now present; §11 RACEngine → bare-copyright LICENSE.md, no grant); the
+> `a16z/ai-town` path 404s (the live repo is `a16z-infra/ai-town` —
+> re-pointed in `docs/ref/ai_town.md`); sites: 8 of 10 up, `pcg.wikidot.com`
+> and `open5e.com` unreachable at the check date (§8/§1 notes); the deferred
+> "verify" tags (D-017) stay deferred to their intake phases.
 >
 > Tags: **[D]** data donor · **[P]** pattern / design reference ·
 > **[C]** code donor. Our runtime is Python stdlib-only (D-012), so almost all
@@ -43,7 +51,7 @@
 
 ## 1. Ready data donors [D]
 
-| Source | License (2026-08-25) | Take | Phase |
+| Source | License (2026-08-25; re-verified 2026-09-13) | Take | Phase |
 |---|---|---|---|
 | C:DDA `data/json/` | CC-BY-SA 3.0 (code + data) | content ontology: items, monsters, recipes, missions, factions | 3 |
 | DCSS `dat/`, vaults | GPL-2.0+ | monster/item descriptions, vault grammar | pattern |
@@ -51,7 +59,7 @@
 | T-Engine / ToME `data/` | engine GPL-3.0; **assets not redistributable** | Lua zone / quest / talent layout | pattern |
 | Endless Sky `data/` | code GPL-3.0; assets mixed (some CC-BY-2.0) | mission DSL, factions, world state | 3+ pattern |
 | Wesnoth WML `data/` | GPL-2.0+ | event → condition → effect grammar | 3+ pattern |
-| Open5e API | data: SRD 5.1 CC-BY-4.0 + third-party OGL; site license custom — verify | REST JSON: monsters, spells, items | 6 |
+| Open5e API | data: SRD 5.1 CC-BY-4.0 + third-party OGL; site license custom — verify | REST JSON: monsters, spells, items | 6. Health 2026-09-13: the site is down (Cloudflare 530) but `api.open5e.com` answers 200 — the API is the take-target; the site-license "verify" rides the phase-6 intake |
 | D&D SRD 5.1 / 5.2 | CC-BY-4.0 | monsters, spells, conditions | 6 |
 | Fate Core SRD | CC-BY 3.0 (Evil Hat) | aspects / consequences / stunts as narrative states | pattern |
 | Dungeon World SRD | CC-BY 3.0 | moves, tags | pattern |
@@ -170,7 +178,7 @@
 |---|---|
 | Red Blob Games (redblobgames.com) | hex / grid math, A*, FOV, polygon maps — the algorithms course |
 | RogueBasin (roguebasin.com) | the roguelike knowledge base: FOV, dungeon gen, turn systems |
-| PCG Wiki (pcg.wikidot.com) | procedural generation patterns: maps, quests, names |
+| PCG Wiki (pcg.wikidot.com) | procedural generation patterns: maps, quests, names. Health 2026-09-13: host unreachable (wikidot.com itself 000 — platform-wide, not page-specific) |
 | Game Programming Patterns (gameprogrammingpatterns.com) | Event Queue, Component, Command, State — core vocabulary |
 | Gaffer on Games (gafferongames.com) | determinism, state replication, serialization |
 | r/roguelikedev + roguelikedev.reddit FAQ | community architecture discussions |
@@ -183,7 +191,7 @@
 | SillyTavern | AGPL-3.0 | UX reference for cards / lorebooks; our frontend is a dumb terminal — take ideas, not code |
 | dpasca/roguellm | none — reference only | experimental LLM-enhanced roguelike prototype |
 | aceangel3k/rogue-isek-ai | none — reference only | LLM-generated-everything dungeon crawler experiment |
-| tegridydev/dnd-llm-game | IDCDW (permissive) | local DM model + small rules/state-extraction model — mode C kin |
+| tegridydev/dnd-llm-game | MIT (LICENSE read 2026-09-13 — the survey's "IDCDW" tag stale) | local DM model + small rules/state-extraction model — mode C kin |
 | ctavolazzi/AI-DnD | MIT | autonomous AI-driven D&D campaign simulator |
 | kngwyu/rogue-gym | Apache-2.0 / MIT | roguelike with APIs for training AI agents |
 | mcp-tool-shop-org/ai-rpg-engine | MIT | TS toolkit for deterministic RPG simulation (state, events, RNG) — architectural kin |
@@ -251,13 +259,15 @@
 | Astray as a "Lua maze library" | misattributed — wwwtyro/Astray is a JS/Three.js WebGL maze demo (Unlicense); not Lua, not a library |
 
 Verified to exist but small / hobby-scale (kept out of the main tables):
-Osnowa (azsdaja/Osnowa, MIT), indiv0/colonize (GPL-3.0), mcgillij/pyDF (no
-license — reference only), Edgar-Unity (MIT core + paid PRO),
+Osnowa (azsdaja/Osnowa, MIT), indiv0/colonize (GPL-3.0), mcgillij/pyDF
+(CC BY-NC-SA template LICENSE now present — checked 2026-09-13;
+noncommercial: reference only), Edgar-Unity (MIT core + paid PRO),
 Rakaneth/python-tcod-template-2024 (no license — tcod + tcod-ecs starter),
 nidomika/procedural-generation-algorithm (BSP-based, Python, no license),
-tomasforsman/RACEngine (C#, no description or license — ECS claim
-unconfirmed), GearHead story-fragment notes (§2). Value is precedent, not
-donor code.
+tomasforsman/RACEngine (C#; a bare-copyright LICENSE.md appeared by
+2026-09-13 — a copyright line with no grant, still reference-only; the
+ECS claim stays unconfirmed), GearHead story-fragment notes (§2). Value
+is precedent, not donor code.
 
 ## 12. GitHub search topics
 

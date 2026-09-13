@@ -74,7 +74,7 @@ our INV-4 forbids in track A.
   hyperparameters**. The repository uses default weights
   `{recency: 1, importance: 1, relevance: 1}` — the paper
   reports these as tunable. The shape is the precedent for
-  our `brief/recall.py` (phase 4) — recency = tick delta,
+  our `core/retrieval.py` (phase 4) — recency = tick delta,
   importance = the event's `weight` field (`EVENT_SCHEMA.md`),
   relevance = embedding cosine over the brief query. Same
   shape, different scoring inputs (we have a tick integer
@@ -92,7 +92,7 @@ our INV-4 forbids in track A.
   retrieval alongside raw observations. The pattern: **a
   periodic compaction pass over the log that produces
   higher-level entries that are themselves log entries**.
-  This is the precedent for our future `brief/synthesise.py`
+  This is the precedent for our `core/reflection.py`
   — compaction by recurrence, not by truncation. INV-1
   forbids truncation (the log is append-only); reflection
   is the pattern that compacts without losing data — the
@@ -196,7 +196,7 @@ our INV-4 forbids in track A.
   Exactly our per-NPC knowledge records in `MVP_SCOPE.md` §10.
   Same fold structure (per-actor projection of the global log).
 - **The retrieval function shape — `recency * w_r + importance
-  * w_i + relevance * w_rel` top-k.** Phase-4 `brief/recall.py`
+  * w_i + relevance * w_rel` top-k.** Phase-4 `core/retrieval.py`
   inherits this. We replace the LLM embedding with a
   stdlib-embedder cosine (REFERENCES §14 row, phase 4), the
   LLM-scored importance with the event `weight` field
@@ -204,7 +204,7 @@ our INV-4 forbids in track A.
   integer tick delta. Same shape, deterministic inputs.
 - **The reflection pattern — periodic compaction that emits
   higher-level entries that are themselves log entries.**
-  Phase-4 `brief/synthesise.py` inherits this. INV-1
+  Phase-4 `core/reflection.py` inherits this. INV-1
   compatible (compaction = new events, not edits).
 - **The persona / scratchpad split — static data JSON +
   runtime projection JSON passed to the LLM.** Phase-1+
@@ -338,7 +338,7 @@ importance signal.
 entirely positive on the **memory stream shape** (one-to-one
 mapping to our per-NPC knowledge records in `MVP_SCOPE.md`
 §10), the **retrieval function shape** (`recency + importance
-+ relevance` top-k, lifted into `brief/recall.py`), the
++ relevance` top-k, lifted into `core/retrieval.py`), the
 **reflection pattern** (INV-1-compatible compaction by
 recurrence), and the **persona / scratchpad split** (static
 profile JSON + runtime projection JSON, lifted into

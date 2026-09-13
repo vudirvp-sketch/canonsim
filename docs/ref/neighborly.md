@@ -40,8 +40,8 @@ produce emergent narrative summaries.
   `CORE_DESIGN_RESEARCH.md` §6): "sparse pair-keyed relation map" for
   NPC↔NPC relations in iter-3. Neighborly confirms the data structure.
 - The "system-per-verb" decomposition — `SocialSystem`, `RoutineSystem`
-  as separate ticked scopes. Our `sim/systems/` 8-system layout
-  (`MVP_SCOPE.md` §5) is the same discipline; Neighborly proves "social"
+  as separate ticked scopes. Our `core/` system-module layout
+  (per `MVP_SCOPE.md` §5, D-037) is the same discipline; Neighborly proves "social"
   deserves its own system, not a method on `NPC`.
 
 **What we adapt.**

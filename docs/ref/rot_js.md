@@ -12,7 +12,9 @@
 > (D-012), rot.js is TypeScript/JS; we lift the **algorithm
 > shapes** (event queue with min-heap, scheduler family,
   map-generator family, FOV/PreciseShadowcasting, RNG/Alea)
-> into our `core/queue.py` + `sim/systems/` + `core/rng.py`,
+> into our `core/queue.py` + `core/` system modules +
+> `core/rng.py` (D-037: the systems live in `core/`,
+> `sim/systems/` stays reserved),
 > never the TypeScript code. Reference repo:
 > `ondras/rot.js` (active). Catalog §3 row reads "rot.js |
 > BSD-3-Clause | JS toolkit: scheduler, FOV, map generators —
@@ -35,8 +37,8 @@ permitted without license friction; the TypeScript/JS code is
 not useful as a runtime dependency for our Python stdlib-only
 core (D-012), but the algorithm shapes (event queue with
 min-heap, scheduler family, map generator family) are direct
-precedents for `core/queue.py` (iter-1) and `sim/systems/`
-(iter-2+). rot.js is the "sibling" of libtcod (`libtcod.md`)
+precedents for `core/queue.py` (iter-1) and the `core/` system
+modules (iter-2+; D-037 — `sim/systems/` stays reserved). rot.js is the "sibling" of libtcod (`libtcod.md`)
 in JavaScript — the same conceptual family, different
 language. The pattern: a small focused toolkit with clear
 module boundaries.
@@ -62,9 +64,9 @@ module boundaries.
   abstract, `rogue.ts`, `uniform.ts`, `index.ts`). The
   pattern: **per-feature directory + abstract base class +
   concrete subclasses** — the feature is the directory
-  boundary; variants are subclasses. Our `sim/systems/`
-  inherits the shape (per-system file; if a system has
-  variants, they're subclasses).
+  boundary; variants are subclasses. Our `core/` system
+  modules inherit the shape (per-system file; if a system has
+  variants, they're subclasses; D-037).
 - **`EventQueue` — the min-heap core.** `src/eventqueue.ts`
   declares `export default class EventQueue<T = any> {
   _time: number; _events: MinHeap<T>; constructor() {
@@ -130,8 +132,8 @@ module boundaries.
 
   The pattern: **a closed family of FOV algorithms extending
   one abstract base, each implementing `compute(x, y, R,
-  callback)`**. Our `sim/systems/perception.py` (iter-3)
-  inherits the shape (closed enum at config time; the
+  callback)`**. Our `core/knowledge.py` (iter-3) inherits the
+  shape (closed enum at config time; the
   interface is the same — viewer position + radius +
   per-tile callback).
 - **Path family — A* and Dijkstra.** `src/path/` has:
@@ -144,8 +146,8 @@ module boundaries.
     paths to all reachable tiles).
 
   The pattern: **two algorithms extending one abstract base,
-  same interface**. Our `sim/systems/movement.py` (iter-2)
-  inherits the shape (closed enum at config time; the
+  same interface**. Our `core/resolvers.py` (iter-2) inherits
+  the shape (closed enum at config time; the
   interface is `compute(start, goal, callback)`).
 - **Map family — 11 procedural map generators.** `src/map/`
   has: `arena.ts` (full rectangular room), `cellular.ts`
@@ -183,8 +185,8 @@ module boundaries.
   { result.then(() => this._loop()); return; } }`. The
   pattern: **a single-threaded loop that pulls actors from
   the scheduler, calls `act()`, and repeats** — the canonical
-  roguelike turn loop. Our `core/runner.py` (iter-1) inherits
-  the shape (the canonsim runner pulls the next event from
+  roguelike turn loop. Our `core/loop.py` (iter-1) inherits
+  the shape (the canonsim loop pulls the next event from
   the queue, applies the action, emits the event, repeats).
   Note: rot.js's loop supports async `result.then` — for
   browser-side promise-based actions. Our core is sync; the
@@ -214,19 +216,19 @@ module boundaries.
   needed.
 - The FOV family pattern (abstract base + concrete
   subclasses for Discrete/Precise/Recursive Shadowcasting)
-  is the precedent for our `sim/systems/perception.py`
+  is the precedent for our `core/knowledge.py`
   (iter-3) — closed enum at config time; the interface is
   `compute(viewer_x, viewer_y, radius, callback)`.
 - The path family pattern (A* and Dijkstra extending one
-  abstract base) is the precedent for our `sim/systems/
-  movement.py` (iter-2).
+  abstract base) is the precedent for our `core/resolvers.py`
+  (iter-2).
 - The single-class seeded RNG (Alea with `_s0`/`_s1`/`_s2` +
   carry) is the precedent for our `core/rng.py` (iter-1) —
   Python's `random.Random(seed)` is the equivalent (INV-2:
   one instance, no wall-clock).
 - The per-feature directory + abstract base + concrete
-  subclasses shape is the precedent for our `sim/systems/`
-  file layout.
+  subclasses shape is the precedent for the `core/`
+  per-system module layout (D-037).
 
 **What we adapt.**
 
@@ -255,7 +257,8 @@ module boundaries.
   welcomed." The lesson: a focused toolkit reaches
   feature-completeness in its domain and stops growing;
   the test of stability is not new features but bugfixes +
-  documentation. Our `sim/systems/` (8 systems in phase 0)
+  documentation. Our systems scope — the `core/` system
+  modules + `rules.json` `systems` (8 systems in phase 0)
   is a similar scope — focused, complete, stops growing
   after iter-6 phase gate.
 - The scheduler family (simple/speed/action) is the lesson
@@ -338,7 +341,8 @@ BSD-3-Clause license (verified 2026-08-26 from `package.json`
 `license` field) is the most permissive that still requires
 attribution — no license friction at intake. The "feature-
 complete focused toolkit" lesson is the inspiration: our
-`sim/systems/` (8 systems) is a similar scope, stops growing
+systems scope — the `core/` system modules + `rules.json`
+`systems` (8 systems) — is a similar scope, stops growing
 after iter-6 phase gate. The scheduler family pattern (3
 disciplines for different game types) is the precedent for
 our queue-key discipline — iter-3+ may add a speed-based

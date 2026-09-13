@@ -13,6 +13,41 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-114 · 2026-09-13 · doc2 — the quarterly review, the owner's
+«продолжай работу по планам» (22 files doc-only, zero code, zero
+corpus price — the row's own objective scope, AGENTS §2.3)
+- verified BEFORE working (1668+1 green, ruff clean, HEAD 68c1abf,
+  Python 3.12.14 the env pin); re-verified after — same numbers,
+  zero runtime surface touched
+- the re-point (the iter-113 routed finding): 17 ref files + the
+  REFERENCES_DEEP §2 verdict columns — the never-existing planned
+  names now cite the current-state owners (loop / fold / retrieval
+  + chronicle / reflection / resolvers / knowledge / scheduler /
+  onaction / worldgen / director / content-<pack>; the llm_client
+  family → the INV-4/engine-1 gate, never in track A); mechanics +
+  verdicts untouched; the row's 12-file list corrected (+red_blob_
+  games, natural_earth, geonames, eventstore, neighborly — the
+  family was bigger than the iter-113 grep)
+- the license/URL pass: 45 repo paths probed (`git ls-remote`, no
+  API) + LICENSE files read direct (raw.githubusercontent.com —
+  the intake rule #1 form); three deltas (dnd-llm-game → MIT, the
+  IDCDW tag stale; pyDF → a CC BY-NC-SA template file now present;
+  RACEngine → a bare-copyright stub, no grant), `a16z/ai-town`
+  404s (live `a16z-infra/ai-town` — the ref citation re-pointed),
+  pcg.wikidot.com + open5e.com down at the check date (health
+  notes; open5e's API answers 200); deferred "verify" tags stay
+  deferred (D-017)
+- docs: 17 ref files, REFERENCES_DEEP §2, REFERENCES (the pass
+  record + deltas + health notes + the check-date tag), TASKS (the
+  iter-114 section + the doc-2 row's run record), STATUS re-pin +
+  Next step, this file; iter-104 evicted here (verified against
+  git in this edit); 10 after; 1668+1 green, ruff clean after.
+  Caps: STATUS 644 / TASKS 1219 / DECISIONS 74 (43 rows — the
+  collapse owed at the phase-6 gate, D-034) / phases 1409 /
+  TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
+  ride the documented §6.1 substance precedent, trim at the gate
+---
+---
 iter-113 · 2026-09-13 · docaudit — the owner's lossless
 documentation-audit call (4 files doc-only, zero code, zero corpus
 price — the iter-103 audit footprint family)
@@ -301,35 +336,4 @@ call; AGENTS §2.3: the objective scope noted here)
   659 / TASKS 813 / DIRECTOR_SPEC 599 / DECISIONS 62 lines (32
   rows) — TASKS over-cap on substance (§6.1), trim at the
   phase-6 gate
----
-iter-104 · 2026-09-12 · fork-resolve — the owner's chat call: the
-open questions and forks analyzed point-by-point, each worked into a
-final COMBINED variant (the owner's stated preference — gather the
-pros, neutralize the cons, no crutches); 3 files doc-only, zero
-code, zero corpus price (the iter-34/103 owner-call footprint
-family; AGENTS §2.3: the objective scope noted here)
-- verified BEFORE working (1589+1 green, ruff clean, HEAD 13c23c4,
-  Python 3.12.14 the env pin); the resolutions routed to the TASKS
-  rows: roads-1's READ-PATH fork → the derived L3 read sharpened
-  (the pass graph on the WorldModel, ONE shared exits read with the
-  pack-wins override, place-1's invariant relocated into the pass,
-  NO canon births — INV-1/L11 held, corpus price zero by
-  construction); world-2's toponym question → the same
-  override-else-derived law (authored wins, else the profile-minted
-  render-side name via a named cosmetic stream — the dogfooding
-  line held, the grammar untouched); since-1 → phase 6 (world-2's
-  condensing travelers the first real consumer, the tavern surface
-  too thin); cli-pack (the CLI --pack flag) PINNED iter-105 — the
-  code iteration breaking the doc-only streak (now 100..104, all
-  five the owner's own calls, D-022 each time)
-- the two standing owner questions (DIRECTOR_SPEC §11's L6
-  conflict, D-081's climax flag) NOT silently resolved — the
-  combined-variant proposals delivered in chat, the owner decides;
-  docs: TASKS (the cli-pack row + the three row resolutions + the
-  iter-104 section), STATUS (the header re-pin + the Next step
-  iter-105 pin), this file. iter-95 evicted here (verified against
-  git in this edit); 10 after; re-run post-edit: 1589+1 green,
-  ruff clean. Caps: STATUS 667 / TASKS 788 — over-cap held on
-  ledger substance (§6.1, the iter-102/103 precedent), trim at the
-  phase-6→7 gate.
 ---

@@ -48,7 +48,8 @@ language match to our stdlib-only core.
 - **Model / Scheduler / Agent vocabulary.** Our `core/` ≈ Model
   (clock + rng + queue + writer); our `heapq` queue keyed
   `(tick, sub_order, actor_id)` ≈ Scheduler (with a stricter ordering
-  policy); our `sim/systems/*` ≈ per-system Agent.step() pieces.
+  policy); our `core/` system modules ≈ per-system
+  Agent.step() pieces (D-037: the systems live in `core/`).
 - **DataCollector precedent.** Mesa's `agent_reporters` /
   `model_reporters` is the same idea as our M1–M5 metrics
   (`CORE_DESIGN_RESEARCH.md` §6 P1b–d, D-019): computed from the run,

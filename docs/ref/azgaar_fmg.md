@@ -12,7 +12,8 @@
 > tightly coupled to d3 + Voronoi + SVG/WebGL rendering; we lift the
 > **architecture** (data/generators/editors/renderers split + the
 > ordered-generator pipeline + the chronology-as-diplomacy-history
-> shape) into our `content/packs/` + `core/` plumbing + `sim/systems/`,
+> shape) into our `content/<pack>/` data + `core/` plumbing
+> (the systems' home, D-037 — `sim/systems/` stays reserved),
 > never the rendering. Reference repo:
 > `Azgaar/Fantasy-Map-Generator` (the
 > `azgaar.github.io/Fantasy-Map-Generator` web app). Catalog §2 row
@@ -53,8 +54,8 @@ re-entrant edits on top of an append-only event log).
   passive; generators and editors are mutations on state; the
   renderer is a projection**. This is a clean cut of the
   command/event-sourcing trichotomy — INV-1 inherits this shape
-  directly: the canon log is the world data; `sim/systems/` are
-  the generators; `cli/` are the editors (validation front-door);
+  directly: the canon log is the world data; `core/worldgen.py`
+  is the generator ladder; `cli/` are the editors (validation front-door);
   `render/` is the renderer.
 - **Ordered generator pipeline.** `src/generators/index.ts`
   declares the canonical order of generator invocations as a
@@ -129,7 +130,7 @@ re-entrant edits on top of an append-only event log).
   for one state). The pattern: **a generator is a pure-ish
   function `(state, params) → state'`**; the editor calls it on a
   subset. Our `Intent` → `Event` validation front-door (iter-3+
-  `cli/` + `sim/systems/`) inherits this shape: a player intent
+  `cli/` + the `core/` resolvers) inherits this shape: a player intent
   is a controlled mutation, the simulator validates and emits
   the event, the canon log records the diff.
 - **`.map` save file — the state snapshot.** The map is saved as
@@ -148,22 +149,24 @@ re-entrant edits on top of an append-only event log).
   graph from `voronoi`, produces a list of rivers). The
   generator file is the system boundary; cross-system calls go
   through the shared world-data layer, not direct imports. The
-  pattern: **system = file = one responsibility** — iter-2
-  `sim/systems/` inherits this shape (8 systems, one file each,
-  per `MVP_SCOPE.md` §5).
+  pattern: **system = file = one responsibility** — the `core/`
+  system modules inherit this shape (one module each,
+  per `MVP_SCOPE.md` §5 + D-037).
 
 **What we take.**
 
 - The four-layer architecture (world data / generators /
   editors / renderers) is the cleanest precedent for INV-1's
   state/log/simulator/renderer trichotomy. Lifted into the
-  canonsim layout (`core/` = plumbing, `sim/systems/` =
-  generators, `cli/` = editors, `render/` = renderer) — the
+  canonsim layout (`core/` = plumbing + the systems' home,
+  `core/worldgen.py` = the generator ladder, `cli/` =
+  editors, `render/` = renderer; D-037) — the
   shape is direct.
 - The `State` interface shape (per-entity record with foreign
   keys + cached adjacency + embedded sub-records) is the
-  precedent for `content/packs/<pack>/entities.json` records
-  in phase 3+ content packs.
+  precedent for `content/<pack>/entities.json` records
+  in the content packs (`content/tavern_pack/`,
+  `content/road_pack/` — PACK_SPEC §1).
 - The `Campaign` interface shape (`name`/`start`/`end`/
   `attacker`/`defender`) is the precedent for the chronology
   event shape in `EVENT_SCHEMA.md` §2 — typed records with
@@ -269,8 +272,8 @@ seed-handle + snapshot distinction in production; the canonsim
 adaptation is the JSONL log + SQLite index split. The "small
 alphabet, deep composition" lesson (heightmap → drainage →
 biomes → cultures → states, each a focused pass) is the
-design principle for iter-2+ `sim/systems/` (8 systems, one
-file each, ordered pipeline). The catalog row reads "chronology
+design principle for the `core/` system modules (one
+file each, ordered pipeline; D-037). The catalog row reads "chronology
 generator" but the chronology lives in `states-generator.ts`;
 this per-ref file is the long version that fixes the short-
 hand.

@@ -58,7 +58,8 @@ is given.
   <type>, ...)`. Real example from the README: `create virtual
   table vec_examples using vec0(sample_embedding float[8]);`.
   Lifted into the canonical "vector index over facts" pattern
-  for `core/storage.py` — `CREATE VIRTUAL TABLE lore_vec USING
+  for `core/retrieval.py` (the vec probe/scan/floor ladder,
+  iter-59) — `CREATE VIRTUAL TABLE lore_vec USING
   vec0(embedding float[D], +fact_text text, scenario_id integer
   partition key)` gives canonsim's phase-4 retrieval layer the
   same ergonomics as its FTS5 keyword index: `WHERE embedding
@@ -211,8 +212,8 @@ is given.
   `struct.pack("%sf" % len(v), *v)` serializer. This is the
   *exact* pattern canonsim's fallback needs: vectors over the
   wire are just `struct.pack`-ed `float32` BLOBs, no extension
-  required to *produce* them. Lifted into `core/storage.py`
-  pure-Python fallback — same BLOB format, same
+  required to *produce* them. Lifted into `core/retrieval.py`
+  pure-Python scan (the floor rung) — same BLOB format, same
   `cosine_sim(a: bytes, b: bytes) -> float` signature as
   `vec_distance_cosine`.
 

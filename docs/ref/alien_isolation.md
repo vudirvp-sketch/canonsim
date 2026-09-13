@@ -158,8 +158,8 @@ articles are the public surface — design-notes only.
 **What we take.**
 
 - **Two-AI architecture: actor vs director.** Our phase-0 sim
-  already separates the two: the `core/` queue + `sim/systems/*`
-  is the actor layer; the director (`MVP_SCOPE.md` §5) is the
+  already separates the two: the `core/` queue + the `core/`
+  system modules (D-037) is the actor layer; the director (`MVP_SCOPE.md` §5) is the
   directive layer. The Xenomorph-vs-Director precedent is
   explicit: **the director emits directives, the actor
   executes**. We have the architecture already; Alien is the
@@ -235,7 +235,8 @@ articles are the public surface — design-notes only.
 lesson — the actor perceives and executes, the director paces and
 emits directives, and neither knows the other's internals. Our
 architecture already follows this (the Intent/Event split, the
-`core/` queue vs `sim/systems/*` separation); Alien: Isolation is
+`core/` queue vs the `core/` system modules separation);
+Alien: Isolation is
 the existence proof that the split scales to a single-antagonist
 narrative at production quality. The second lesson is the **three-axis
 anxiety model** — pacing against perceived / actual / unknown — which

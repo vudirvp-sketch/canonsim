@@ -55,7 +55,8 @@ at intake.
   10m_admin_0_scale_rank, 10m_lakes_europe, 10m_lakes_north_america),
   **raster** (in the sibling repo). The pattern: **per-theme
   file split** — each theme is a separate file with a clear
-  scope. Our phase-3+ content packs (`content/packs/<pack>/`)
+  scope. Our content packs (`content/<pack>/` — the two live
+  instances `content/tavern_pack/`, `content/road_pack/`)
   inherit this shape (one file per category: `entities.json`,
   `actions.json`, `rules.json`, `templates.json`).
 - **`featurecla` — the closed feature-class enum.** Every
@@ -154,7 +155,7 @@ at intake.
   §3 migration rule.
 - The per-theme file split (one file per domain: physical,
   cultural, populated_places, urban_areas, ...) is the
-  precedent for `content/packs/<pack>/` per-category file
+  precedent for the `content/<pack>/` per-category file
   split (`entities.json`, `actions.json`, `rules.json`,
   `templates.json`).
 - The localized-name field family (`NAME_<lang>`) is the

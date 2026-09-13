@@ -71,7 +71,7 @@ sigh-based listeners attached to storage mixin.
   iteration over `packed`. The pattern: **a sparse array (id →
   packed index) + a packed array (packed index → entity) for
   O(1) membership + linear iteration** — the canonical sparse-
-  set layout. Lifted into `core/store.py` (or `sim/store.py`)
+  set layout. Lifted into `core/fold.py` (the projection)
   as `dict[actor_id → int]` sparse + `list[actor_id]` packed;
   Python drops the page optimization (a plain dict beats paged
   4096-pointer arrays in CPython) but preserves the dual-array
@@ -114,9 +114,9 @@ sigh-based listeners attached to storage mixin.
   ()` and binds it to the registry via `cpool->bind(*this)`.
   The pattern: **a registry IS-A sparse_set of entity ids +
   a dense map of typed component pools + a context map for
-  untyped singletons**. Lifted into `core/store.py` as the
-  store owner — every component type gets a `Storage` keyed
-  by string name (from `content/packs/*.json`), not by C++
+  untyped singletons**. Lifted into `core/fold.py` (the
+  projection) as the state owner — component data keyed
+  by string name (from `content/<pack>/*.json`), not by C++
   `type_hash`.
 - **`basic_view<get_t<Get...>, exclude_t<Exclude...>>`**
   (`entity/view.hpp:410`) — inherits `basic_common_view`
@@ -130,7 +130,8 @@ sigh-based listeners attached to storage mixin.
   entt)`. The pattern: **a zero-allocation view over N pools
   with a smallest-pool-leads optimization for multi-component
   queries** — iterate the smallest pool, filter membership in
-  the others. Lifted into `sim/systems/*.py` query helper:
+  the others. Lifted into `core/knowledge.py` (`KnowledgeView`)
+  as the view helper:
   `View(lead: Storage, included: tuple[Storage,...], excluded:
   tuple[Storage,...])` with `__iter__` filtering by membership.
 - **`basic_group<owned_t<Owned...>, get_t<Get...>, exclude_t
@@ -163,8 +164,8 @@ sigh-based listeners attached to storage mixin.
   `ro`/`rw` lists; `sync_point` flag is set when a parameter is
   `Registry&` itself. The pattern: **a static task graph
   builder that topologically orders systems by declared read/
-  write component sets**. Lifted into `sim/systems/__init__.py`
-  (or `core/scheduler.py`): register each system with declared
+  write component sets**. Lifted into `core/scheduler.py`:
+  register each system with declared
   `reads`/`writes` component sets, build a DAG, topologically
   order so writers of component C run after readers.
 - **`sigh<Ret(Args...)>` + `sink` + `connection`** (`signal/
@@ -180,8 +181,8 @@ sigh-based listeners attached to storage mixin.
   `try_emplace`, `pop`, `pop_all`. The pattern: **a single-
   target type-erased callable list + RAII builder + scoped
   connections + a storage mixin that auto-publishes lifecycle
-  hooks**. Lifted into `sim/events.py` (or `sim/systems/hooks.
-  py`): the *shape* (subscribe to a category, get a release
+  hooks**. Lifted into `core/onaction.py` (the commit-door
+  dispatch): the *shape* (subscribe to a category, get a release
   handle) is preserved, but the source of truth inverts — the
   JSONL event log *is* the signal stream, and a system
   subscribes to event types it cares about (event types, not
@@ -197,7 +198,7 @@ sigh-based listeners attached to storage mixin.
   separately-built symbol table over C++ types, so JSON/script
   code can drive entity/component mutation at runtime**.
   Registration is opt-in and keyed by `id_type`. Lifted into
-  `content/packs/*.py` loader: register component schemas
+  `core/pack.py` (the pack loader): register component schemas
   (fields + types) at startup from JSON packs, then materialize
   typed dataclasses. Negative for canonsim: do NOT port `meta`
   verbatim — `dataclasses` + `getattr`/`setattr` is more
@@ -206,13 +207,13 @@ sigh-based listeners attached to storage mixin.
 **What we take.**
 
 - The sparse-set two-array layout (`sparse` + `packed`,
-  sparse_set.hpp:142-143) is the precedent for `core/store.py`
+  sparse_set.hpp:142-143) is the precedent for `core/fold.py`
   — a `dict[actor_id → int]` sparse + a `list[actor_id]`
   packed gives O(1) membership/iteration. Python drops the
   page optimization but preserves the dual-array shape.
 - The view-based query (`basic_view`'s smallest-pool-leads +
   `all_of`/`none_of` filter, view.hpp:410, 221-231, 68) is the
-  precedent for `sim/systems/*.py` query helper — `View(lead:
+  precedent for the `core/knowledge.py` `KnowledgeView` — `View(lead:
   Storage, included: tuple[Storage,...], excluded: tuple[
   Storage,...])` with `__iter__` filtering by membership.
 - The `organizer` DAG (`vertex_data{ro_count, rw_count,
@@ -224,7 +225,7 @@ sigh-based listeners attached to storage mixin.
   readers.
 - The `sigh` + `sink` + `connection` + `basic_sigh_mixin`
   pattern (sigh.hpp:54, mixin.hpp:60-119) is the precedent for
-  `sim/events.py` / `sim/systems/hooks.py` — subscribe to a
+  `core/onaction.py` — subscribe to a
   category, get a release handle; INV-1 inversion: the JSONL
   event log is the signal stream, not the in-place mutation
   callbacks.
@@ -234,8 +235,8 @@ sigh-based listeners attached to storage mixin.
   generation)` so recycled actor handles are distinguishable
   in the queue key.
 - The `meta_factory<T>` registration shape (meta/meta.hpp:1026,
-  factory.hpp) is the precedent for `content/packs/*.py` loader
-  — register component schemas (fields + types) at startup
+  factory.hpp) is the precedent for `core/pack.py` (the pack
+  loader) — register component schemas (fields + types) at startup
   from JSON packs, then materialize typed dataclasses.
 
 **What we adapt.**
@@ -352,7 +353,7 @@ lesson is the inspiration: canonsim keeps per-component stores
 as the only stateful objects, systems receive ephemeral query
 objects. The `organizer` DAG pattern (topologically order
 systems by declared `ro`/`rw` access sets) is the precedent for
-`sim/systems/__init__.py` system registration.
+`core/scheduler.py` system registration.
 
 ---
 

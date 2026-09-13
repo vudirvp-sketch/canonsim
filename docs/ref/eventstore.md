@@ -219,7 +219,7 @@ explicit total order for deterministic single-process simulation.
   stream that emits derived events (or link-to references)
   into output streams; the projection engine maintains its
   own `CheckpointTag` so it is restartable**. Adapted into
-  `sim/systems/` Python folds (and the `render/` fold) —
+  `core/` Python folds (and the `render/` fold) —
   each "projection" is a `def fold(state, event) -> state`
   Python callable, and "emit" is just `yield` or a
   returned list of derived events. The conceptual shape —
@@ -366,7 +366,7 @@ explicit total order for deterministic single-process simulation.
 **What we adapt.**
 
 - JS projection engine (Jint + `emit`/`linkTo`/`state` globals)
-  → Python fold functions in `sim/systems/` (and the `render/`
+  → Python fold functions in `core/` (and the `render/`
   fold). EventStoreDB's `JintProjectionStateHandler` runs user-
   supplied JavaScript with `init`/`state` callbacks and four
   global side-effecting functions (`emit`, `linkTo`, `linkStream-
@@ -456,8 +456,8 @@ explicit total order for deterministic single-process simulation.
   `$`-prefix-as-namespace + `$$`-prefix-as-metastream
   convention is a clean way to separate system data from user
   data and per-stream metadata from per-stream events. canonsim's
-  content/code split (content in `content/packs/`, code in
-  `sim/`) can reuse the same idea: a reserved namespace prefix
+  content/code split (content in `content/<pack>/`, code in
+  `core/`) can reuse the same idea: a reserved namespace prefix
   for system events vs scenario events.
 
 **Weaknesses.**

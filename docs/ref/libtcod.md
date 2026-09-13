@@ -10,8 +10,9 @@
 > is permitted but not useful — our runtime is Python stdlib
 > (D-012), libtcod is C/C++; we lift the **algorithm shapes**
 > (FOV enum, A* pseudo-code, BSP dungeon pattern, heightmap
-> pipeline) into our `sim/systems/` + `render/`, never the C
-> code. Reference repo: `libtcod/libtcod` (active fork by
+> pipeline) into our `core/` system modules + `render/`, never
+> the C code (D-037: the systems live in `core/`, `sim/systems/`
+> stays reserved). Reference repo: `libtcod/libtcod` (active fork by
 > `HexDecimal`). Catalog §3 row reads "libtcod | BSD-3-Clause |
 > the classic: FOV, pathfinding, RNG, noise"; index §2 row had
 > "BSD" shorthand — standing pre-flip check (KI#6-class) caught
@@ -32,9 +33,11 @@ math, lex/parser (data-driven config), txtfield (text fields),
 tree, list. BSD-3-Clause — pattern lifting is permitted without
 license friction; the C/C++ code is not useful as a runtime
 dependency for our Python stdlib-only core (D-012), but the
-algorithm shapes are direct precedents for `sim/systems/`
-(perception system FOV, movement system A*) and `core/` (RNG
-discipline, heightmap pipeline).
+algorithm shapes are direct precedents for the `core/` system
+modules (perception's knowledge view, the movement resolver)
+and `core/` (RNG
+discipline, heightmap pipeline) — D-037: the systems live in
+`core/`, `sim/systems/` stays reserved.
 
 **Concrete mechanics.**
 
@@ -65,8 +68,9 @@ discipline, heightmap pipeline).
   `console_printing.hpp`, `console_rexpaint.h`/`console_rexpaint.hpp`,
   `console_types.h`/`console_types.hpp`. The pattern:
   **one file per feature, .h for C and .hpp for C++** — the
-  feature is the file boundary. Our `sim/systems/` inherits
-  the shape (8 systems in `MVP_SCOPE.md` §5, one file each).
+  feature is the file boundary. Our `core/` system modules
+  inherit the shape (one module per system, per
+  `MVP_SCOPE.md` §5 — D-037; `sim/systems/` stays reserved).
 - **FOV algorithm enum — the closed choice of algorithms.**
   `src/libtcod/fov_types.h` declares `typedef enum {
   FOV_BASIC, FOV_DIAMOND, FOV_SHADOW, FOV_PERMISSIVE_0,
@@ -79,7 +83,8 @@ discipline, heightmap pipeline).
   FOV_SYMMETRIC_SHADOWCAST) plus `NB_FOV_ALGORITHMS` as the
   sentinel count. The pattern: **a closed enum of available
   algorithms** — the consumer picks one at the API call. Our
-  `sim/systems/perception.py` (iter-3) inherits the shape:
+  `core/knowledge.py` (iter-3, the perception system's owner)
+  inherits the shape:
   the perception system picks an FOV algorithm from a closed
   enum at config time; the algorithm choice is part of the
   determinism contract (one algorithm per simulation run).
@@ -93,7 +98,7 @@ discipline, heightmap pipeline).
   __restrict cells; }` — a flat array of cells indexed by
   `y * width + x`. The pattern: **per-tile state with input
   + output flags**, computed by the FOV algorithm. Our
-  `sim/systems/perception.py` inherits the shape: per-tile
+  `core/knowledge.py` inherits the shape: per-tile
   visibility is a derived projection from the canon log
   (the log records "what is there", the perception system
   projects "what can be seen" given the viewer's position +
@@ -154,7 +159,7 @@ discipline, heightmap pipeline).
 **What we take.**
 
 - The FOV algorithm closed enum (14 algorithms) is the
-  precedent for our `sim/systems/perception.py` perception
+  precedent for our `core/knowledge.py` perception
   system (iter-3): the algorithm choice is a config-time
   decision, recorded in the determinism contract.
 - The per-tile `TCOD_MapCell` shape (`transparent` + `walkable`
@@ -164,15 +169,16 @@ discipline, heightmap pipeline).
   state = fold(log), the projection is derived).
 - The A* + Dijkstra pathfinder interface (graph-search with
   per-tile cost function + priority queue) is the precedent
-  for our `sim/systems/movement.py` (iter-2) — using Python's
-  `heapq` for the priority queue, no external dependency.
+  for our `core/resolvers.py` (iter-2, the movement resolver) —
+  Python's `heapq` (in `core/queue.py`) for the priority queue,
+  no external dependency.
 - The single-instance seeded RNG (Mersenne Twister) is the
   precedent for our `core/rng.py` (iter-1) — Python's
   `random.Random(seed)` is the Mersenne Twister; INV-2
   requires one instance, no wall-clock.
 - The per-feature file split (one .h/.hpp pair per
-  feature) is the precedent for our `sim/systems/` file
-  layout (one file per system, per `MVP_SCOPE.md` §5).
+  feature) is the precedent for the `core/` per-system module
+  layout (one file per system, per `MVP_SCOPE.md` §5; D-037).
 
 **What we adapt.**
 
@@ -236,7 +242,7 @@ discipline, heightmap pipeline).
 - The library is **broad but shallow** — many features
   (console, mouse, image, tileset rendering) are not
   relevant to a CLI simulation. We lift only the parts that
-  apply to `sim/systems/` + `core/` + `render/`.
+  apply to the `core/` system modules + `core/` + `render/`.
 - The library has **no event sourcing** — the pathfinder
   result is a list of waypoints, not a stream of events.
   INV-1 inverts: every movement is an event in the canon
@@ -261,7 +267,7 @@ per-feature file split are all direct inheritances), explicitly
 negative on C/C++ implementation (D-012 fix: port shapes to
 Python stdlib) + breadth-irrelevant-to-CLI (console, mouse,
 image, tileset are not relevant to a CLI simulation; lift only
-`sim/systems/` + `core/` + `render/` parts) + no event
+the `core/` systems + `render/` parts) + no event
 sourcing (INV-1 fix: every movement is a canon event) + no
 determinism contract (INV-2 fix: one RNG instance, no
 wall-clock, sorted iteration, queue key) + no content/code

@@ -214,7 +214,7 @@ hierarchies, multilingual place names, admin divisions. CC-BY
   `cities1000.zip` (> 1000 or PPLA3), `cities5000.zip` (>
   5000 or PPLA), `cities15000.zip` (> 15000 or capitals). The
   pattern: **subsets by population threshold**. Our
-  `content/packs/<pack>/entities.json` inherits the shape:
+  `content/<pack>/entities.json` inherits the shape:
   the full dataset is the source of truth; subsets are
   convenience cuts (the simulation loads only what it needs).
 

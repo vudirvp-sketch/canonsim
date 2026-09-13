@@ -46,7 +46,9 @@ is the entire integration. Verified live against sqlite version
   Tokenizer chosen at create time via `tokenize=`. SQL example:
   `CREATE VIRTUAL TABLE email USING fts5(sender, title, body);
   INSERT INTO email(rowid, sender, title, body) VALUES(14, ...);`.
-  Lifted into `core/storage.py` SQLite index — every projected
+  Lifted into `core/retrieval.py` (the in-memory FTS5 index,
+  iter-59) + `scripts/chronicle.py` (the offline chronicler,
+  iter-64) — every projected
   fact row gets a row in an FTS5 virtual table; queries go
   through `MATCH`. The `facts` table name in `TECH_NOTES.md`
   is the literal table name FTS5 was always pointing at.

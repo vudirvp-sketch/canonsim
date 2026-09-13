@@ -28,6 +28,45 @@
 > (D-149: the exit criterion's own form met by measurement — the clock
 > 14m24s, zero core edits; the gate verdict itself stays the owner's).
 
+### iter-114 · doc-2 quarterly — the re-point + the license/URL re-verification — done (doc-only, the owner's call)
+
+The owner's chat call («продолжай работу по планам» — the stop-point
+plan's own pin: the phase-6 gate verdict stays the owner's, the
+re-point rides the nearest quarterly doc-2). Verified BEFORE working:
+1668+1 green, ruff clean, HEAD 68c1abf (Python 3.12.14, the env pin).
+**The re-point (the iter-113 routed finding, now landed):** the
+research layer's "lifted into" pointers cite the current-state owners
+— `core/runner.py`→`core/loop.py`, `core/store.py`/`sim/store.py`→
+`core/fold.py`, `core/storage.py`→`core/retrieval.py` +
+`scripts/chronicle.py`, `brief/recall.py`→`core/retrieval.py`,
+`brief/synthesise.py`→`core/reflection.py`, `brief/llm_client.py`→
+the INV-4/engine-1 gate (never in track A),
+`sim/systems/movement.py`→`core/resolvers.py`,
+`sim/systems/perception.py`→`core/knowledge.py`,
+`sim/systems/__init__.py`/organizer→`core/scheduler.py`,
+`sim/events.py`/`sim/systems/hooks.py`→`core/onaction.py`,
+`content/packs/`→`content/<pack>/` (the two live packs named). The
+row's 12-file list corrected: 5 more ref files carried the same
+family (red_blob_games, natural_earth, geonames, eventstore,
+neighborly) — 17 ref files + the REFERENCES_DEEP §2 verdict columns
+re-pointed; the mechanics + verdicts untouched (research record);
+the reserved-dir law cited where a bare `sim/systems/` claim needed
+the D-037 note. **The license/URL re-verification (the row's
+standing quarterly mandate):** 45 repo paths probed alive
+(`git ls-remote`, no API — quota) + LICENSE files read directly
+(raw.githubusercontent.com — the intake rule #1 form, not the README
+headline); licenses HELD except: `tegridydev/dnd-llm-game` → MIT
+(the IDCDW tag stale), `mcgillij/pyDF` → a CC BY-NC-SA template
+file now present, `tomasforsman/RACEngine` → a bare-copyright
+LICENSE.md (no grant); `a16z/ai-town` 404s (live repo
+`a16z-infra/ai-town` — re-pointed in the ref file); sites 8/10 up —
+`pcg.wikidot.com` + `open5e.com` down at the check date (health
+notes in the catalog; open5e's API answers 200 — the take-target);
+the deferred "verify" tags stay deferred (D-017). 22 files doc-only
+(the row's own objective scope, AGENTS §2.3), zero runtime surface,
+zero corpus price; 1668+1 green, ruff clean after. Detail: worklog
+iter-114 + git.
+
 ### iter-113 · documentation lossless audit — done (doc-only, the owner's call)
 
 The owner's chat call (a full documentation-system audit: restore the
@@ -957,24 +996,20 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
 - `perf-1` 10k-tick timing profile — DONE iter-30: ~9.8k events/s write-side, event-linear; the numbers owner TECH_NOTES §8.
 - `balance-1` 1000-headless-sim distribution harness — DONE iter-6: `scripts/balance_harness.py`; the baseline table reproducible from the seed range. KI#4 closed.
 - `doc-1` VISION freeze review — DONE iter-26 (the phase-1 gate's doc-actualization sweep).
-- `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside the
-  TECH_NOTES review). Added iter-113 (the doc-audit's routed finding, the
-  iter-103 precedent — a drift note, zero new KIs): the research layer's
-  "lifted into" pointers still cite pre-iter-1/pre-D-037 planned module
-  names that never existed in git — `core/runner.py` (the loop landed
-  `core/loop.py`), `core/store.py` (the projection landed `core/fold.py`),
-  `core/storage.py` (the index ladder landed `core/retrieval.py` +
-  `scripts/chronicle.py`), `brief/recall.py` / `brief/llm_client.py` (the
-  recall ladder landed `core/retrieval.py` + `brief/assembler.py`; the LLM
-  client never lands in track A — INV-4, engine-1 owns the gate),
-  `sim/systems/movement.py` / `sim/systems/perception.py` / `sim/events.py`
-  (D-037/D-142: the systems live in `core/`, `sim/systems/` stays reserved)
-  — in `docs/ref/*.md` (rot_js, entt, bevy, sqlite_fts5, sqlite_vec,
-  generative_agents, ai_town, letta, libtcod, azgaar_fmg, mesa,
-  alien_isolation) + the REFERENCES_DEEP §2 verdict columns; NAV §1 is the
-  correct current-state owner (verified); the re-point of the stale
-  pointers alone rides this review (the refs' mechanics + verdicts stay
-  untouched — research record).
+- `doc-2` REFERENCES.md license/URL re-verification, quarterly (alongside
+  the TECH_NOTES review). RUN 2026-09-13 (iter-114, the owner's call): the
+  iter-113 routed drift RE-POINTED (17 ref files + the REFERENCES_DEEP §2
+  verdict columns — the never-existing pre-iter-1/pre-D-037 module names
+  re-pointed to the current-state owners per the row's own mapping: the
+  mechanics + verdicts untouched, research record; the row's 12-file list
+  was non-exhaustive — 5 more files carried the family) + the
+  license/URL pass (45 repos alive via ls-remote + LICENSE files read
+  direct; deltas: dnd-llm-game → MIT, pyDF → CC BY-NC-SA file now
+  present, RACEngine → bare-copyright stub; `a16z/ai-town` 404s — live:
+  `a16z-infra/ai-town`; pcg.wikidot.com + open5e.com down at the check
+  date — health notes in the catalog). Next run: the next quarterly
+  (owner-called per D-022), or at a phase-6 pack intake (whichever
+  comes first — Open5e's site-license "verify" rides that intake).
 - `pack-1` Grim tavern pack candidate (post-gate; `PACK_SPEC.md` trigger —
   phase 6 or a 2nd setting): the romance/intimacy/coercion line as **pure
   pack data** — relation axes (`attraction`/`intimacy`/`loyalty`), status

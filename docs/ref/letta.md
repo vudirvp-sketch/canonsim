@@ -44,7 +44,7 @@ call to page memory in / out (`core_memory_append`,
 **phase-4 brief memory patterns** and **bg-4 cost notes** —
 the architecture is the most explicit public reference for
 "context window as a managed resource" and the closest
-existing system to our `brief/recall.py` + `brief/synthesise.py`
+existing system to our `core/retrieval.py` + `core/reflection.py`
 design.
 
 **Concrete mechanics.**
@@ -108,7 +108,7 @@ design.
   `generative_agents.md` retrieval, but without the
   three-signal weighting (recency + importance + relevance) —
   letta's `conversation_search` is relevance-only. For canonsim
-  phase-4 `brief/recall.py` inherits the three-signal shape from
+  phase-4 `core/retrieval.py` inherits the three-signal shape from
   `generative_agents.md` (richer); letta's `conversation_search`
   is the simpler shape, useful as the comparison.
 - **`conversation_search_date` — date-range filter over
@@ -135,7 +135,7 @@ design.
   summarised message via an LLM call, the originals are dropped
   from the queue (still in `recall_memory`). The pattern:
   **compaction by summarisation on overflow**. For canonsim
-  phase-4 this is the precedent for `brief/synthesise.py` — but
+  phase-4 this is the precedent for `core/reflection.py` — but
   INV-1 forbids dropping originals; the canonsim shape is
   reflection-on-recurrence (from `generative_agents.md`):
   compaction = new events on the log, originals never dropped.
@@ -158,7 +158,8 @@ design.
   base with `chat_completion` and `embedding` methods. The
   pattern: **pluggable LLM client with provider-agnostic
   interface**. For canonsim phase-1+ this is the precedent for
-  our `brief/llm_client.py` — one abstract interface, one
+  the engine-1 LLM client (never in track A — INV-4; the
+  `engine-1` row owns the gate) — one abstract interface, one
   local implementation (llama.cpp / Outlines per
   `TECH_NOTES.md` §1). The provider set is smaller (we use
   local only; no OpenAI / Anthropic / Google / vLLM); the
@@ -196,12 +197,13 @@ design.
   projection (working set, analogue of core but derived via
   `fold`, not mutated via tools) + brief output cache (analogue
   of archival for compaction entries).
-- **The pluggable-LLM-client abstract interface.** Phase-1+
-  `brief/llm_client.py` inherits this; one local implementation
+- **The pluggable-LLM-client abstract interface.** The
+  engine-1 LLM client (never in track A — INV-4) inherits this;
+  one local implementation
   (llama.cpp / Outlines), same `chat_completion` and `embedding`
   methods.
 - **The `conversation_search_date` shape — temporal retrieval
-  by date-range filter.** Phase-4 `brief/recall.py` inherits
+  by date-range filter.** Phase-4 `core/retrieval.py` inherits
   this shape on the tick integer field instead of a date.
 
 **What we adapt.**
@@ -266,7 +268,8 @@ LLM's Intent is a proposal that the simulator validates.
   + brief cache is the canonsim version.
 - The pluggable-LLM-client abstract interface is small and
   explicit — the `LLMClient` abstract base + per-provider
-  concrete classes is the right shape for `brief/llm_client.py`.
+  concrete classes is the right shape for the engine-1 LLM client
+  (outside track A — INV-4, engine-1 owns the gate).
 - The `conversation_search_date` shape is the precedent
   for tick-range retrieval on the canon log.
 - The paper (arXiv:2310.08560) is the only public reference
@@ -319,10 +322,10 @@ positive on the **block-manager context-window partition shape**
 per-block token budgets, not one prompt string), the **three-tier
 memory hierarchy** (lifted into canon log + per-NPC projection
 + brief cache — same hierarchy shape, different storage substrate),
-the **pluggable-LLM-client abstract interface** (lifted into
-`brief/llm_client.py` — local llama.cpp / Outlines only, same
-abstract shape), and the **`conversation_search_date` shape**
-(lifted into `brief/recall.py` tick-range retrieval on the
+the **pluggable-LLM-client abstract interface** (the engine-1
+LLM client's shape — never in track A, INV-4; local llama.cpp /
+Outlines only, same abstract shape), and the **`conversation_search_date` shape**
+(lifted into `core/retrieval.py` tick-range retrieval on the
 integer tick field). Explicitly negative on the **LLM in the
 hot loop** (INV-4 forbids in track A; the LLM moves to the
 phase-1+ `brief/` layer behind the phase-0 gate), the

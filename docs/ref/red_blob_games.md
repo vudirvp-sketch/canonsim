@@ -110,7 +110,7 @@ above the libtcod/rot.js implementations.
 
   The pattern: **A* is a graph-search algorithm with a
   priority queue + a heuristic; the choice of heuristic
-  determines the variant**. Our `sim/systems/movement.py`
+  determines the variant**. Our `core/resolvers.py`
   (iter-2) inherits the shape directly; the libtcod (`libtcod.md`)
   and rot.js (`rot_js.md`) implementations are concrete
   instances of the same algorithm.
@@ -171,7 +171,7 @@ above the libtcod/rot.js implementations.
   shortest paths (Dijkstra); `/pathfinding/all-pairs/`
   covers Floyd-Warshall for pre-computing all-pairs
   shortest paths (useful when the map is small and
-  queries are frequent). Our `sim/systems/movement.py`
+  queries are frequent). Our `core/resolvers.py`
   (iter-2) inherits the choice: Dijkstra for one-off
   paths, Floyd-Warshall for pre-computed small maps.
 
@@ -183,7 +183,7 @@ above the libtcod/rot.js implementations.
   layer (if hex-based). The formulas are direct.
 - The A* pseudo-code (open set + closed set + g/h/f +
   priority queue + tiebreaking) is the precedent for our
-  `sim/systems/movement.py` (iter-2). The shape is direct.
+  `core/resolvers.py` (iter-2). The shape is direct.
 - The polygon map generation pipeline (Voronoi + Lloyd's
   relaxation + Perlin noise + watershed + biome assignment
   + noisy edges) is the precedent for our phase-5+ worldgen
@@ -217,7 +217,7 @@ above the libtcod/rot.js implementations.
 - The "BFS / Dijkstra / A* are a family with different
   heuristics" framing is the lesson that **algorithm
   variants are not separate algorithms but parameterized
-  instances of one algorithm**. Our `sim/systems/movement.py`
+  instances of one algorithm**. Our `core/resolvers.py`
   (iter-2) inherits the framing: one algorithm with a
   config-time choice of heuristic.
 - The polygon map generation pipeline is the lesson that
