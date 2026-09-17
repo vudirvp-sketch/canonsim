@@ -1467,6 +1467,166 @@ reads this before widening any grammar):
   standing owner-gated rows own every build-grade item (parse-2,
   engine-1, res-1, world-2 L2, roads-1, pack-ci).
 
+The causal-architecture research bootstrap (intake-14, D-155 — the
+owner's 2026-09-18 research call over the uploaded bootstrap document
+(`canonsim_causal_architecture_research_bootstrap`); the same consult
+posture as the intakes 6..13: the external document stays outside the
+repo, every load-bearing claim verified against HEAD first. The
+bootstrap frames one objective — a single canonical world in which NL
+intent compiles to a constrained causal representation, deterministic
+core logic validates and resolves it, accepted consequences become
+ordinary canonical events/state, dynamically created entities behave
+exactly like generated state, existing mechanisms consume them
+normally, special-case mechanics do not grow combinatorially,
+simulation scales coexist without second authoritative worlds, and
+recurring secondary outcomes derive from more fundamental causes.
+The doctrine half is intake-13's own confirmed ground; the genuinely
+new material is five architecture questions. A future
+res-1/st-5/parse-2/engine-1 opening reads this before promising any
+of the eight properties):
+
+- **Verified at HEAD (the standing half — facts, not hypotheses).**
+  The bootstrap's foundational boundary, canonical-vs-interpretation
+  split, LLM may/may-not lists, prevention list, and
+  persistence-without-the-conversation requirement re-derive
+  intake-13's confirmed doctrine (VISION §1/§5; INV-1..5; D-055's
+  file contract; D-052's closed world — an invented entity
+  `contradicted`, an unmodeled prop `insufficient_data`; D-095's
+  prose floor; D-139's resume law — promoted texture rode events and
+  stays canon, live texture dies with its session, so the
+  originating LLM conversation is never required for persistence).
+  Its §16 question list decomposes onto the intake-13 routing
+  (substrate → D-096/parse-2/engine-1; PARTIAL deferred;
+  UNDER_MODELLED refused; inventions parked) — zero factual drift
+  found beyond intake-13's own record.
+- **The five questions (the bootstrap's new material):**
+  1. **Causal compression (§5/§6/§10): CONFIRMED as standing
+     practice, never as one law sentence.** The bootstrap's
+     principle — a result is either an explicit canonical fact or a
+     deterministic consequence of more fundamental causes — is L3
+     ("derive, never store") plus the authored-facts-win boundary,
+     with the strongest landed instances: the travel price law
+     (st-6a — the DERIVED integer function of the WorldModel:
+     lattice steps * `step_ticks` + height-band spread *
+     `climb_ticks` + river endpoints * `river_ticks`, integer math,
+     draw-free, the pack override winning per edge; armed twice —
+     the road's 150/210/300/360, the province's 345–705), the
+     faction small formula (the affected fraction of the
+     membership, per-cent floored, pure integer arithmetic), the
+     macro-year counter, the weather state as fold, the cold
+     census, the echo/traits read folds, and intake-10's
+     world-state law (global pressure a derived read at its
+     consuming surface, never a stored object). The bootstrap's
+     two failure modes are both fenced: outcome-table explosion by
+     L9/L13 (the affordance clause rides PACK_SPEC §8,
+     AFFORD_SPEC trigger-gated — pack-lint table data, never an
+     open resolver), universal-model explosion by the
+     authored-facts-win law (`travel.edges`, D-030's tone dial,
+     the spine records, the names profiles — authored world
+     knowledge stays canonical without derivation). The
+     damage-as-derived question (§10) is the future combat-bearing
+     pack's own (the soul-scar parked family; combat outside every
+     planned phase) — no pre-work owed.
+  2. **Simulation levels (§7): CONFIRMED — one world, resolution
+     strategies, never second engines.** The bootstrap's "one
+     canonical world, one event/state truth, one causal substrate,
+     multiple domains and resolutions" is the landed shape: the LOD
+     one-gate law (depth-3), maclock-1's layered clocks under L4,
+     the D-112 one-event-with-cardinality surface (counts for
+     populations, events for notables), the condensation tier
+     transition, and the id-never-changes law (known_by, texture,
+     old knowledge survive the tier shift). The separate-engine
+     alternative (NPC engine / battle engine / economy engine /
+     weather engine) was never built and is the named anti-pattern
+     family ("no physics engine", D-116 (7); "never a second
+     economy engine beside the canon door", D-116; "never a second
+     res-1", D-147). The bootstrap's domain list maps onto the
+     resolvers registry + the closed mechanic set — domains are
+     PACK vocabulary over one door, not engine seams (D-142's
+     admission law owns the boundary).
+  3. **Large-scale aggregation (§8): UNRESOLVED — the substrate
+     landed, the claim unmeasured, correctly.** The bootstrap's
+     1k–10k-actor battle/siege question has no repo evidence, and
+     the bootstrap's own discipline ("do not promise a scale
+     target until benchmark evidence exists"; "do not infer
+     10k-actor feasibility from architecture alone") is the repo's
+     measured-numbers law (TECH_NOTES owns numbers, never prose).
+     What landed: the aggregate machinery the question would ride
+     (macro aggregates with cardinality, O(groups × macrobeats)
+     log growth, the group as intent-door actor — depth-6's one-id
+     law, condensation with first-commit-wins, the cold census),
+     and the only 10k-scale measurement that exists (worldgen
+     genesis: 10,000 sites in 1.19 s, draw-linear — TECH_NOTES
+     §12). What does not: combat itself, any battle benchmark, any
+     measured aggregate→individual mid-event refinement. PARKED
+     with the intake-9 family: the first combat-bearing pack
+     decides whether a benchmark row opens (the st-5
+     first-consumer law's own shape); no row created now.
+  4. **Stealth as a causal chain (§9): PARTIAL — the epistemic
+     half landed, the physical half authored.** The bootstrap's
+     chain decomposes at HEAD as: movement (landed — the sighting
+     records, visual only, same-location never through exits) →
+     emission (PARTIAL — noise is authored per-action knowledge
+     resolution: `drop_break`'s noise, the alarm's through-walls
+     heard channel; no surface/load/equipment-dependent sound
+     model) → propagation (authored adjacency — `alarm_adjacent`
+     — never derived attenuation) → perception (landed — the
+     acquisition conditions, depth-1: smoke steps birth fidelity
+     down at the event site, the fire chain's own measured
+     modifier) → knowledge (landed — channels, birth fidelity,
+     `known_by`) → reaction (landed — panic contagion, wariness,
+     suspicion, the beliefwire gates). Whether the
+     emission/propagation half ever generalizes is a
+     first-consumer question (a pack wanting stealth as a mechanic
+     decides, per D-142 — a derived noise substrate alters WHAT
+     mechanics exist); no pre-work owed, no row created.
+  5. **Dynamic entities / materialization generalization (§4):
+     CONFIRMED at the law level — one shape, four instances, zero
+     generic engine, by design.** The bootstrap asks whether
+     texture promotion is a special case of a more general
+     materialization mechanism; at HEAD the relationship is the
+     inverse of a special-case: the D-054 slot shape
+     (`StateChange(entity, prop, None -> value)`, absence IS the
+     unborn state, first-commit-wins, canon never redraws) is the
+     PARENT LAW, and the landed family are its instances —
+     texture promotion (iter-11, the object's canon birth on a
+     take), scene detail (depth-2, `scene:<id>:detail`), names
+     (name-1, `name:<npc>`), member_of (depth-7's condensation) —
+     each docstring-declared "never a second mechanism".
+     Entity-birth promotion (the bootstrap's portable figurine —
+     carried, stored, stolen, burned) is designed as the same
+     door with pack grammar (blueprint §7's containers law) and
+     deferred to st-5's first consumer (a pack wanting portable
+     objects, a res-1 sink shape — never a speculative build).
+     The integration half is landed law: materialized state is
+     ordinary fold state (the erosion commit scans the fold for
+     the rule's `from` holders — one counter-event per entity;
+     the fire layer's follow-ups; knowledge and texture survive
+     condensation by the id law).
+- **Micro-drifts (the bootstrap vs HEAD):** (a) the bootstrap's §4
+  framing ("texture promotion as a special case of a more general
+  materialization mechanism") inverts the repo's law — D-096's own
+  record: the D-054 texture-promotion door is the ONLY
+  materialization mechanism, phase 5 extends it, never builds
+  beside it; the generalization exists as the shared SLOT SHAPE,
+  never as a generic engine, and L13 holds that line deliberately.
+  (b) The bootstrap's §12 outcome-class vocabulary
+  (RESOLVED_PARTIAL, INSUFFICIENT_INFORMATION,
+  UNSUPPORTED_NOVELTY) re-proposes intake-13's refused and
+  deferred rows — D-150's verdicts stand unchanged (PARTIAL
+  deferred to the first separable-sub-effects action;
+  UNDER_MODELLED refused under the pack-CI closure law; the honest
+  boundary is the grammar edge, never a runtime status). No
+  factual errors found in the bootstrap's repo-facing claims.
+- **Landed:** D-155 (this verdict set) + this intake block. The
+  build queue UNTOUCHED — nothing unpins, nothing reorders; the
+  standing owner-gated rows own every build-grade item the
+  bootstrap touches (res-1, st-5 via its consumers, parse-2,
+  engine-1, world-2 L2, roads-1), and the three parked patterns
+  (the scale benchmark, the stealth emission substrate,
+  damage-as-derived) join the intake-9 parked family — named here
+  so a future row finds them.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

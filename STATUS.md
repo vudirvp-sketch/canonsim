@@ -1,71 +1,55 @@
-Iteration: iter-119 (`iter-119-world2c` — the cultures half, the
-owner's fresh call «начинай работу по планам, что осталось незакрытого
-и логичнее всего было бы начать сейчас то и делай» — the iter-117/118
-precedent phrase, STATUS Next step's own readiness pick: slice 2 the
-natural next pick, D-153's wave plan): **the cultures slice LIVE —
-the estrangement-as-data family complete in `content/province_pack/`
-(D-154).** The two name-1 PHONOTACTIC PROFILES (`rules.json::names`
-— name-1's FIRST committed arming, D-131/D-116(12)): `lowland_soft`
-the river tongue (sonorant codas, no clusters, 2–3 syllables, the
-digraph vowels) vs `hill_hard` the croft tongue (stop codas,
-clustered onsets, 1–2 syllables) — the soft/hard POSTURE made
-checkable (the T1 posture pin). The CONDENSATION TRAVELERS
-(`entities.json::groups` — depth-7's first committed arming):
-`grp_road_traffic` anchored ON the runner's load road, three
-`generated_name` members (two lowland tongues, one hill), the
-reachability law riding `condense_event` + the population tier's
-`macro_event` — the load-state origin law fires at the FIRST beat
-(t=360): ONE event carrying each member's member_of birth PAIRED
-with the name birth + the tombstone, the drawn names
-Sathranthaem/Wathru/Drist, the tale line rendering them ("The road
-takes shape around the runner — …"). The custom vocabularies +
-prohibition sets — the `cultures` BLOCK (the budget-block precedent:
-load-time lint in `core/pack.py::_cultures`, ZERO runtime surface;
-the anti-rot vocabulary walk, the culture↔name keying, one culture
-per npc): **the AP-8 PROHIBITION SURFACE's first consumer — the
-crosswalk's THIRD consuming family** (the flaw joins the consumed
-set; the guild's shelter law over Maren's flaw, the hills' wergeld
-memory over Garrick's — both doubly consumed, the urgency behavior +
-the culture's limit over it). The budget RE-DECLARE (npcs 6–9 →
-7–12, the cast at 10 — AP-1's second arm exercised).
-`tests/test_cultures.py` NEW +15 (the refusals + the consumed-union
-green twin) + the T1 twin +4 + PROVINCE_STOPLIST +3 (drover, peddler,
-wergeld); the golden fixture REGENERATED (the additive delta: +1
-condensation, +6 traveler decays; 32→39 events, fingerprint 0) ·
+Iteration: iter-120 (`iter-120-intake14` — the causal-architecture
+research bootstrap routed, the owner's research call «начни работу с
+документом» over the uploaded bootstrap document — the D-150 intake
+precedent, doc-only): **the intake-14 verdict set — the doctrine half
+re-derives intake-13's confirmed standing law (zero factual drift found
+beyond its own record); five architecture questions routed, zero
+build-grade items (D-155).** Causal compression CONFIRMED as standing
+practice (the bootstrap's "explicit fact OR deterministic consequence of
+more fundamental causes" is L3 + the authored-facts-win boundary; the
+travel price law the strongest landed instance — the derived integer
+function of the WorldModel, armed twice: the road's 150/210/300/360, the
+province's 345–705; both explosion modes fenced — outcome tables by
+L9/L13 + PACK_SPEC §8's trigger-gated affordance clause, universal
+models by authored-facts-win; damage-as-derived rides the future
+combat-bearing pack, no pre-work owed). Simulation levels CONFIRMED (one
+world, resolution strategies: the LOD one-gate law, maclock-1 under L4,
+the D-112 cardinality surface, condensation, the id-never-changes law;
+separate engines the named anti-pattern family; domains are pack
+vocabulary over one door, D-142). Large-scale aggregation UNRESOLVED (the
+aggregate substrate landed — macro aggregates, O(groups × macrobeats),
+the group as intent-door actor, condensation, the cold census; worldgen's
+10k sites/1.19 s the only 10k-scale measurement; the 1k–10k battle claim
+unmeasured and correctly un-promised — parked with the intake-9 family,
+the first combat-bearing pack decides). Stealth PARTIAL (the epistemic
+half landed — the acquisition conditions stepping birth fidelity,
+channels, `known_by`, panic contagion, the beliefwire gates; the
+emission/propagation half authored per-action pack data — `drop_break`
+noise, `alarm_adjacent` through-walls, movement sightings visual-only;
+generalization a first-consumer question per D-142). Materialization
+CONFIRMED at the law level (the D-054 slot shape the PARENT LAW with
+four landed instances — texture promotion, scene detail, names,
+member_of, each "never a second mechanism"; entity-birth promotion =
+st-5's first consumer, the same door with pack grammar; the integration
+half landed — the erosion fold scan, the id-survival law); the
+bootstrap's §4 framing corrected (texture promotion IS the general law
+already extended, never a special case awaiting one) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD ebf464e — 1707+1 green, ruff clean —
-and re-verified after: +15 the cultures suite, +4 the T1 pins; zero
-corpus price outside the province: the tavern/road corpora and their
-fixtures byte-untouched by construction, the province's own golden
-fixture the slice's own object — the T1 twin re-pinned on the fresh
-bytes) ·
-Date: 2026-09-13 ·
-Scope: `content/province_pack/` (entities — +groups `grp_road_traffic`
-+3 travelers with `generated_name`; rules — +`names` +`cultures`, the
-budget re-declare, story_critical += road_musters; templates — +the
-tier pair road_counts/road_musters, the {names?...|...} branch law) +
-`core/pack.py` (+`_cultures`, the AP-8 consumed union in `_live_char`)
-+ `tests/test_cultures.py` NEW (+15) + `tests/test_t1_province.py`
-(+4) + `tests/test_inv3_stoplist.py` (+3 words) +
-`tests/fixtures/province_smoke_seed42.jsonl` (regenerated) + docs:
-DECISIONS D-154 (33 rows — over the 30 cap on the §6.1 substance
-precedent until the next gate collapse, the D-152/153 family's own
-record), TASKS (slice 2 flipped + the iter-119 section), STATUS.md
-(this re-pin + Next step), worklog.md (this entry; iter-109 evicted
-per the cap), NAV §1 + README (the province_pack rows re-pointed),
-PACK_SPEC (§3 the block list, §4 the cultures row, §5 the landed
-carrier note, §6 the AP-8 prohibition surface) — 14 files (re-counted
-against the worktree delta: 13 modified + 1 new; the pack+lint
-iteration's own checklist per AGENTS §2.3; the alternative — riding
-the prohibitions on urgency entries alone, no new block — refused:
-the wave plan's own text names the custom vocabularies + prohibition
-sets as DATA, and "tone/prohibition data rides the four files'
-blocks" is the standing D-147 pin — a block is the carrier).
-The prior iteration's record: iter-118 (the skeleton slice). The
-detail lives in TASKS + worklog + git.
+verified BEFORE working at HEAD 864307d — 1726+1 green, ruff clean —
+and re-verified after: doc-only, zero runtime files touched, the
+corpora untouched by construction) ·
+Date: 2026-09-18 ·
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-14
+block), `docs/DECISIONS.md` (D-155 — 34 rows, over the 30 cap on the
+§6.1 substance precedent until the next gate collapse, the
+D-152/153/154 family's own record), `docs/TASKS.md` (the iter-120
+section), `STATUS.md` (this re-pin + Next step), `worklog.md` (this
+entry; iter-110 evicted per the cap) — 5 files. The prior iteration's
+record: iter-119 (the cultures slice). The detail lives in TASKS +
+worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -540,14 +524,13 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-119 DONE: the cultures slice LIVE (D-154) — the estrangement
-family complete in the province pack: the two phonotactic profiles
-(name-1's first committed arming), the condensation travelers (the
-first beat's materialized names), the `cultures` block (the AP-8
-prohibition surface's first consumer, the custom vocabularies, the
-anti-rot walk).** The L2 wave plan (D-153, TASKS world-2) owns the
-remainder: slice 3 the triangle, slice 4 the calendar + the verdict
-call. What stands:
+**iter-120 DONE: the causal-architecture research bootstrap routed
+(intake-14, D-155 — doc-only, the build queue untouched: nothing
+unpins, nothing reorders; the five verdicts and the three parked
+patterns — the scale benchmark, the stealth emission substrate,
+damage-as-derived — live in phases.md §6's intake-14 block).** The L2
+wave plan (D-153, TASKS world-2) owns the remainder: slice 3 the
+triangle, slice 4 the calendar + the verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by

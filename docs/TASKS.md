@@ -26,6 +26,24 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-120 · intake-14 — the causal-architecture research bootstrap routed — done (doc-only, the owner's research call)
+
+The routing verdict set — the doctrine half confirmed (intake-13's own
+ground, zero factual drift), five architecture questions routed with zero
+build-grade items: causal compression CONFIRMED as standing practice (L3 +
+the authored-facts-win boundary, the travel price law the strongest landed
+instance); simulation levels CONFIRMED (one world, resolution strategies,
+never second engines); large-scale aggregation UNRESOLVED (the substrate
+landed, the 1k–10k battle claim unmeasured — parked, the first
+combat-bearing pack decides); stealth PARTIAL (the epistemic half landed,
+the emission/propagation half authored per-action data — generalization a
+first-consumer question); materialization CONFIRMED at the law level (the
+D-054 slot shape the parent law, four landed instances; entity-birth
+promotion deferred to st-5's first consumer). The bootstrap's §4 framing
+corrected (texture promotion IS the general law already extended); its §12
+outcome vocabulary re-routes to D-150's standing verdicts. D-155; the
+block: phases.md §6's intake-14. Detail: worklog iter-120 + git.
+
 ### iter-119 · world-2 L2 (slice 2: the cultures half) — done
 
 The wave plan's cultures slice, the owner's fresh call «начинай работу

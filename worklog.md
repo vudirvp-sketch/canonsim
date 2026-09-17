@@ -13,6 +13,45 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-120 · 2026-09-18 · intake14 — the owner's research call «начни
+работу с документом» over the uploaded causal-architecture research
+bootstrap (5 files doc-only, zero code, zero corpus price — the
+D-150 intake precedent, one family)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 864307d,
+  Python 3.12.14 the env pin); every load-bearing bootstrap claim
+  checked against HEAD (the convenience-copy law) — the doctrine half
+  re-derives intake-13's confirmed record with zero new drift; the
+  code-level checks: core/travel.py (the derived price + the override
+  law), core/detail.py + core/names.py + core/groups.py (the D-054
+  family docstrings — "never a second mechanism"), core/intent.py
+  (the closed test set + IntentData), core/weather.py (the erosion
+  fold scan), tavern actions.json (move's visual-only sightings),
+  TECH_NOTES §12 (the 10k-site curve)
+- the routing (D-155): causal compression CONFIRMED as standing
+  practice (L3 + authored-facts-win; the travel law the strongest
+  instance; both explosion modes fenced — L9/L13 + PACK_SPEC §8,
+  authored-facts-win); simulation levels CONFIRMED (one world,
+  resolution strategies — LOD/maclock/D-112 cardinality/condensation/
+  the id law; second engines the named anti-pattern); large-scale
+  aggregation UNRESOLVED (substrate landed, the 1k–10k battle claim
+  unmeasured — parked with the intake-9 family, the first
+  combat-bearing pack decides); stealth PARTIAL (the epistemic half
+  landed; emission/propagation authored per-action — generalization
+  a first-consumer question per D-142); materialization CONFIRMED at
+  the law level (the D-054 slot shape the parent law, four instances;
+  entity-birth = st-5's first consumer); the bootstrap's §4 framing
+  corrected (texture promotion IS the general law already extended);
+  its §12 vocabulary re-routes to D-150's verdicts
+- docs: phases.md §6 the intake-14 block, DECISIONS D-155 (34 rows,
+  over-cap on §6.1 substance until the next gate collapse), TASKS the
+  iter-120 section, STATUS re-pin + Next step, this entry (iter-110
+  evicted here, verified against git in this edit; 10 after). The
+  build queue untouched — nothing unpins, nothing reorders. Doc-only
+  (the D-022 exception, the owner's fresh request). Caps: TASKS 994 /
+  DECISIONS 65 (34 rows) / phases 1696 — over-cap files ride the
+  documented §6.1 substance precedent (the intake blocks are the
+  engine-1 consult material), trim at the next gate collapse
+---
 iter-119 · 2026-09-13 · world2c — the cultures half, the owner's fresh
 call «начинай работу по планам, что осталось незакрытого и логичнее
 всего было бы начать сейчас то и делай» (the iter-117/118 precedent
@@ -331,35 +370,4 @@ zero corpus price — the intakes-6..11 family precedent; one family)
   family law) / phases 1409 — over-cap files ride the documented
   §6.1 substance precedent (D-095..D-147), trim at the phase-6→7
   gate.
-
-iter-110 · 2026-09-13 · intake11 — the owner's chat call, the
-pressure-city donor blueprint (PRESSURE_LIMIT) routed (5 files
-doc-only, zero code, zero corpus price — the intakes-6..10 family
-precedent; one family)
-- verified BEFORE working (1660+1 green, ruff clean, HEAD 140bbcf,
-  Python 3.12.14 the env pin); every load-bearing donor citation
-  checked against HEAD (the convenience-copy law) — all green
-  (D-130, res-1's one-meter read surface, the thermometer minus,
-  D-140, D-134, weather-1 chain+erosion, depth-6/7, name-1,
-  chron-2, retr-1, st-6a, roads-1, D-030); two micro-drifts
-  corrected in D-147 (AP crosswalk rung specified-not-landed; no
-  literal meta.json)
-- the verdict: ADOPTED as parked donor material — the displacement
-  law (the one word-for-word keeper), the Cooling Debt resolved to
-  weather-1's chain+erosion shape (never a second res-1), the gauge
-  = res-1's read surface, legal exclusion = the D-134 application,
-  objective-function factions = depth-6's shape, lore hooks ride
-  templates + cause_hook; the biome question answered (authored
-  pack data, never a worldgen biome; the lost-city fold the cheap
-  form; the full concept = pack-4's third slot)
-- docs: DECISIONS D-147, TASKS the pack-4 row + the iter-110
-  section, phases.md §6 the intake-11 block (+62 lines,
-  substance), STATUS re-pinned, this file. iter-100 evicted here
-  (verified against git in this edit); 10 after. The build queue
-  untouched — world-2 L1 stays pinned CODE on the owner's
-  «приступай». Doc-only #2 (the D-022 exception, the owner's fresh
-  request); no third planned. Caps: STATUS 645 / TASKS 1014 /
-  DECISIONS 72 (41 rows) / phases 1264 — over-cap files ride the
-  documented §6.1 substance precedent, trim at the next gate
-  collapse.
 ---
