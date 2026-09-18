@@ -14,6 +14,49 @@
 > since iter-5).
 ---
 
+iter-137 · 2026-09-19 · world-2 L2 (the depth audit) — the
+owner's research call over the uploaded research_method_v5 task
+(the three lens documents — Cadwell / Ingold / Haggis — external
+per the convenience-copy law; doc-only, verdict material for the
+standing owner call, never the call itself)
+- the converged unit: depth = the changed NEXT-DECISION landscape
+  per ordinary verb (Haggis's complexification + Cadwell's
+  commitment + Ingold's robustness), operationalized as the F3
+  four-read-surfaces form + three read-only arms (the Rule-9
+  runners + logs outside the repo, zero corpus price)
+- the measurements: the door-surface census seed 53 (the burn =
+  +15 events / 13 props over six entities / knowledge +4/+9;
+  exactly ONE of six probed door answers changes — the re-ignition
+  closed; the two other rejections arm-independent facts); the
+  reorder arm seed 53 (the grief-wake identical, the deadband
+  holds, the council fires, one lawful NPC talk refusal at
+  same_location, 76 vs 64 events — richer, never breaks); the
+  calendar ablation seed 42 (the stripped layers' own 57 events +
+  52 tale lines; ONE second-order path beyond them — the storm
+  roll → the murmur hook → the quiet gate → the ramble → knowledge
+  → the rumor told back; the 48 market/fair turns zero consumers)
+- the A–H ledger (A/C/D/H confirmed, E at the measured band, B/F/G
+  partial — the concentration finding at the triangle's vertex),
+  the counterexamples searched (the 48 turns the one found; the
+  reverse confirmed), the critical separation (NONE of the seven
+  backlog rows a prerequisite), the verdict PARTIALLY CONFIRMED —
+  material, the L2 call the owner's; disposition NO ACTION, the
+  depth battery joins the F3 form (F4's consult card), zero
+  build-grade items
+- docs: phases.md §6 the depth-audit block (the A–H ledger + the
+  twelve-row principles table), DECISIONS D-170 (49 rows), TASKS
+  the iter-137 section + the world-2 row's materials line, STATUS
+  the re-pin (iter-135's record evicted per the two-record
+  convention) + the Next step materials line, this entry (iter-127
+  evicted, verified in this edit; 10 held); 1754+1 green, ruff
+  clean, verified before (HEAD 4be2a17) and after; doc-only, the
+  corpora byte-untouched
+- Caps: STATUS 679 / TASKS 1691 / DECISIONS 81 (49 rows — over the
+  30 cap on the §6.1 substance precedent until the next gate
+  collapse) / phases 3634 / worklog 10 entries (iter-127 evicted
+  here, verified in this edit) — the over-cap files ride the
+  documented §6.1 substance precedent
+
 iter-136 · 2026-09-19 · world-2 L2 slice 4 (the calendar) — the
 owner's «продолжай работу по планам» call (the iter-135 precedent
 phrase's continuation; STATUS Next step's own readiness pick: slice 4
@@ -399,41 +442,4 @@ itself external per the convenience-copy law)
   this entry (iter-118 evicted, verified in this edit; 10 held)
 - phases.md 2530→2624 lines, TASKS 1242→1305, DECISIONS 72→73,
   STATUS 597→593 — the doc family's growth rides the standing
-  §6.1 substance precedent, documented here
-
-iter-127 · 2026-09-18 · intake20 — the owner's «используя
-research_method_v5.md => разберись что перенять можно, дополнить
-или улучшить… долгосрок важен и качество» research call over the
-uploaded content-archetype / pack-strategy / capability-audit
-FRAMEWORK document (5 files doc-only, zero code, zero corpus
-price — the D-150..D-160 intake precedent; the method file
-itself external per the convenience-copy law)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 362f167,
-  Python 3.12.14 the env pin); capability side verified at HEAD:
-  all three committed packs load-green through the full admission
-  lint, resources grep-verified absent from core (res-1's row),
-  the mechanism families reconciled against their standing owners
-  (no fresh runtime probe owed — the intakes 16..19 measurements +
-  the phase gates already own the capability evidence)
-- the reconciliation over the framework's own §36 list (26 items,
-  9 families, the method's four questions each): ~four fifths
-  OWNED (D-146/L9/VISION §7 = the core thesis; the 16..19 intake
-  verdict discipline = the capability ladder; the topology
-  dimensions, loop/signature/counterfactual, admission test and
-  order relationship all re-derive standing law); ONE sharpening
-  adopted (LANDED-BUT-UNDER-TESTED names the province-only
-  single-consumer surfaces + the cross-context promotion
-  condition); ONE new residue parked (portfolio orthogonality +
-  behavioral yield — the pack-slot SELECTION question); the
-  heavyweight artifacts REJECTED (parallel truth D-024, the
-  framework's own §34 empirical-first law, the
-  speculative-worldbuilding ban)
-- docs: phases.md §6 the intake-20 block (the capability truth
-  table + the §36 verdict table + the PARKED pack-candidate
-  consult card, 9 lines), DECISIONS D-161 (40 rows — over-cap on
-  §6.1 substance until the next gate collapse), TASKS iter-127,
-  STATUS re-pin + Next step, this entry (iter-117 evicted,
-  verified in this edit; 10 held)
-- phases.md 2404→2530 lines, TASKS 1193→1242, DECISIONS 71→72,
-  STATUS 599→597 — the doc family's growth rides the standing
   §6.1 substance precedent, documented here

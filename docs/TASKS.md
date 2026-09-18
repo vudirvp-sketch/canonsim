@@ -26,6 +26,67 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-137 · world-2 L2 (the depth audit) — the verdict material: the three lens documents taken as claims (Cadwell / Ingold / Haggis), the converged depth unit, the fresh measurements (the door-surface census seed 53 / the reorder arm seed 53 / the calendar ablation seed 42), the A–H ledger, the critical separation — done (doc-only, the owner's research call over the uploaded research_method_v5 task)
+
+The method's question — is world-2 L2 a genuinely deep second world,
+not a larger collection of independent features or a decorated
+reskin — evaluated as ONE composed world over the four landed
+slices, the three lens documents treated as claims and repository
+evidence authoritative. The converged unit (none of the three
+sources supplies it alone): depth = the changed NEXT-DECISION
+landscape per ordinary verb — Haggis's complexification (the
+decision's structure, never the event volume) + Cadwell's strategic
+commitment (actions close futures) + Ingold's encounter robustness
+(the validity condition). Operationalized as the F3
+four-read-surfaces experiment extended with three read-only arms
+(the Rule-9 runners outside the repo, the logs outside the repo,
+zero corpus price):
+
+- the DOOR-SURFACE CENSUS (province_feud, seed 53, BURN vs CALM —
+  the arson alone removed): +15 events / 13 types, 13 projection
+  properties over six entities (the market destroyed, three
+  watchers' suspicion 0→30, the steward's grief 35→55, the runner
+  SUSPECT), knowledge +4/+9; the six-probe battery — EXACTLY ONE
+  door answer changes (the re-ignition closed by
+  `target.spot_available`), the other five identical, the two
+  rejections arm-independent state facts (the sergeant's pay tin,
+  the unflagged mistress);
+- the REORDER ARM (seed 53, Thornmill-first): the grief-wake
+  IDENTICAL (route-independent), the vigil deadband holds, the
+  council fires, the twin byte-identical, the tale coherent; the
+  one lawful difference an NPC's own talk refused at
+  `target.same_location` (the door's uniform law); the longer
+  route grows MORE autonomous texture (76 vs 64 events);
+- the CALENDAR ABLATION (the year run, seed 42, time.calendar +
+  weather.seasonal stripped; the macro clock untouched): the
+  stripped layers' own 57 events + 52 tale lines; the leverage
+  beyond them EXACTLY ONE second-order path (the rise's storm
+  roll → the storm-murmur hook, D-133 → the ambient quiet gate →
+  Maren's ramble at the emptied stall row — the one ablated
+  projection property → three hearers' knowledge → one rumor told
+  back); the 48 market/fair turns ZERO consumers, measured.
+
+The A–H ledger: A/C/D/H CONFIRMED, E CONFIRMED at the measured
+band (the entry-order corpus since-1/qa-1's), B/F/G PARTIAL — the
+option surface narrow (1 of 6), the calendar the spine + one
+path, the composition concentrated at the triangle's vertex. The
+strong counterexamples searched each answered (the 48 turns the
+one found-and-named; the reverse — simple mechanisms, many
+futures — CONFIRMED). The critical separation: NONE of res-1 /
+roads-1 / since-1 / pack-1 / pack-4 / engine-1 / presentation-1 a
+prerequisite for the depth claim — no future completeness
+smuggled into the definition. The verdict: PARTIALLY CONFIRMED
+(the anti-collection and anti-reskin halves measured; the depth's
+distribution the honest residue) — verdict MATERIAL, the L2
+verdict call itself the OWNER's, never self-called. Disposition:
+NO ACTION on the queue; the depth battery joins the F3 form as
+the standing pack-gate evaluation discipline (F4's consult card
+carries it); zero build-grade items. 1754 passed + 1 skipped,
+ruff clean (Python 3.12.14; verified BEFORE working at HEAD
+4be2a17 — the numbers identical — and re-verified after;
+doc-only, the corpora byte-untouched). Detail: worklog iter-137 +
+D-170 + git.
+
 ### iter-136 · world-2 L2 (slice 4: the calendar) — the market days / the fair / the river's seasonal ride + the weather's seasonal layer + the composed year experiment — done (the owner's «продолжай работу по планам» call — the iter-135 precedent phrase's continuation; STATUS Next step's own readiness pick: slice 4 the wave plan's remainder)
 
 The sub-year cadence family (maclock-1's middle granularities, L4
@@ -918,9 +979,14 @@ D-105..D-133 family row + phases.md §5)
   14400 / the fairs 43200 / the seasons 129600 + the four-phase cycle)
   + the weather's seasonal layer (the ride + the D-030 asymmetric
   weights — the rise's storm bias measured at the year run) + the
-  composed YEAR experiment (province_calendar.json, the T7 read); the
-  row's own verdict call stands open for the owner (the L2 wave plan
-  complete — the verdict the wave's own question, never self-called).
+  composed YEAR experiment (province_calendar.json, the T7 read);
+  **iter-137's depth audit the fresh verdict material (the
+  three-lens depth battery — the door-surface census, the reorder
+  arm, the calendar ablation; the A–H ledger: A/C/D/E/H confirmed,
+  B/F/G partial — the concentration finding honestly recorded)**;
+  the row's own verdict call stands open for the owner (the L2
+  wave plan complete — the verdict the wave's own question, never
+  self-called).
   **iter-109's
   opening answers ride the row (D-146): the second pack runs the
   TRAVEL main loop** (the river-artery class, the D-130 direction —

@@ -3382,6 +3382,189 @@ the watch/talk texture the noise floor at the year scale (the
 tale gate's day-scale tuning the honest finding, the tune row's
 own question — never this slice's edit).
 
+The world-2 L2 depth audit (iter-137, D-170 — the owner's
+research call over the uploaded depth-audit method file; the
+three lens documents — the Cadwell roguelike principles, the
+Ingold Narrative-Sorcery discipline, the Haggis scene-change
+material — external per the convenience-copy law, repository
+evidence authoritative; doc-only, zero code, zero corpus price,
+the Rule-9 runners' logs outside the repo; verified BEFORE
+working at HEAD 4be2a17 — 1754+1 green, ruff clean, Python
+3.12.14 the env pin). The method's question: is world-2 L2 a
+genuinely deep second world — not a larger collection of
+independent features, not a decorated reskin — evaluated as ONE
+composed world over the four landed slices, never as four
+checklists? The verdict call itself stays the OWNER's (the
+two-level gate's level-2 question); this audit the material.
+
+**The converged unit.** The three lenses, taken as claims and
+tested, converge on ONE falsifiable definition none supplies
+alone: depth = the changed NEXT-DECISION landscape per ordinary
+verb. Haggis supplies the unit — complexification is a structural
+change in the next decision (knowledge / options / constraints /
+costs / risks), never event-volume growth; Cadwell supplies the
+stake — strategic commitment means actions close futures, "not
+merely add positive progress"; Ingold supplies the validity
+condition — encounter-first robustness: a depth reading that
+survives only the authored happy path is not a depth reading.
+The operational form is the F3 four-read-surfaces experiment
+EXTENDED with three read-only arms: the door-surface battery
+(the door's own answers as the decision-landscape read), the
+reorder arm, the calendar ablation — zero new instruments, the
+standing experiment's own shape sharpened.
+
+**The fresh measurements** (seeds 53/53/42, all read-only):
+
+- EXP-A, the door-surface census (province_feud, seed 53, BURN
+  vs CALM — the arson step alone removed): the burn's marginal
+  product = +15 events over 13 types (the fire chain ×4, the
+  alarm, the panic ripple, the grief-wake, the council, the
+  knowledge transfer, the look, the decay, suspicion ×3) and
+  EXACTLY 13 projection properties over six entities (the
+  market destroyed irreversibly + the stall-row detail; three
+  watchers' pair suspicion 0→30 + fear 39/39/9; the steward's
+  grievance 35→55; the runner's crime status SUSPECT), knowledge
+  +4 (the runner — the fire family) / +9 (each watch member — the
+  figure-who-fired family). The battery: six fresh-run probes per
+  arm, each reading the door's own answer — EXACTLY ONE of six
+  door answers changes (the re-ignition: REJECT
+  `target.spot_available` in BURN, ACCEPT in CALM — the burned
+  spot is gone); the other five identical, the two rejections
+  arm-independent state facts (the sergeant carries the pay tin
+  at the keep; no flagged steal target on the mistress). First
+  stream divergence: index 35, tick 2421.
+- EXP-B, the reorder arm (seed 53, Thornmill-first — the runner
+  meets the steward BEFORE the arson): the grief-wake IDENTICAL
+  (the steward 35→55 — route-independent), the vigil deadband
+  HOLDS (the smelter at 30, one elder short by the deliberate
+  design), the council still fires, the tale coherent, the twin
+  byte-identical. The one lawful difference: an NPC's own
+  autonomous talk rejected at `target.same_location` — the market
+  mistress seeking the departed runner, the intent door's
+  uniform law (NPC intents refused exactly like player ones).
+  The longer route (two added waits) grows MORE autonomous
+  texture (76 vs 64 events): the world composes richer under a
+  different entry order, never breaks.
+- EXP-C, the calendar ablation (the year run, seed 42, the armed
+  pack vs `time.calendar` + `weather.seasonal` stripped — the
+  macro year clock stays in both arms): the stripped layers' own
+  product = 57 events (36 market days, 12 fairs, 4 season turns,
+  3 extra weather rolls, 1 ramble, 1 rumor) + 52 tale lines; the
+  mechanical leverage BEYOND their own events = EXACTLY ONE
+  second-order path — the rise's storm roll at t129600 (the
+  D-030 asymmetric read) arms the storm-market murmur hook
+  (weather-1's seeded consequence, D-133), the ambient quiet
+  gate releases it at t520068 (Maren's ramble at the emptied
+  stall row — the one ablated projection property, the
+  scene-detail slot), the knowledge lands on three hearers (the
+  runner, the sergeant, the crowd), one rumor told back to the
+  source. The 48 market/fair turns: ZERO consumers, measured —
+  no state, no knowledge, no door answer rides them.
+
+**The A–H ledger** (the method's world-2 test, each half
+measured, never asserted):
+
+| Test | Verdict | The measured ground |
+|---|---|---|
+| A causal composition | CONFIRMED | one ordinary verb → the fire cascade + the panic ripple + the crime chain (suspicion ×3, SUSPECT) + the feud's grief (35→55) + the guild's ratio (the council) — three systems, one door |
+| B decision-landscape change | PARTIAL | knowledge, risks, status: yes; options narrow — exactly 1 of 6 probed door answers; costs: no property in the delta (the lattice prices static) |
+| C strategic commitment | CONFIRMED | the market burns irreversibly (the re-ignition door closed); the SUSPECT status persists; the deadband one fire from the vigil |
+| D world-away-from-player | CONFIRMED | the Thornmill grief-wake while the runner stands at Malby (iter-135's F answer); route-independent in EXP-B |
+| E encounter robustness | CONFIRMED at the measured band | one full reordering coherent; the corpus of entry states is since-1/qa-1 territory — the honest boundary |
+| F temporal composition | PARTIAL | the tale spine + ONE second-order path (the murmur chain); the cadences' decision half (opportunity/cost/co-presence at the market days) unowned — the promotion/pack-slot question |
+| G cross-pillar interaction | PARTIAL | rich at the triangle's vertex (weather × crime × factions × history per verb); the cultures/calendar pillars contribute spine + texture + one measured path |
+| H counterfactual divergence | CONFIRMED | the same-seed fork: fingerprints 0x0/0x7, +16 events zero drops, the door answers changed (iter-135) + the BURN/CALM fork's 13-property delta |
+
+**The principles, the five questions each** (the method's
+mandatory analysis — principle / form / quality / transfer /
+combined design, compressed to the table; form-match alone
+insufficient, every row carries its measured quality):
+
+| The principle (source) | The mechanism, source-free | The standing form | Quality, measured | Transfer / combined |
+|---|---|---|---|---|
+| strategic commitment (Cadwell) | actions close futures; the stake is the closed branch | the irreversible event family + the door's state tests | the burn closes the re-ignition, arms SUSPECT, the deadband holds | the vigil's deadband — commitment's own escalation surface (owned) |
+| make-do under imperfect tools (Cadwell) | no dominant strategy without the world's friction | the door's requires/tests + the epistemic limits | the verbs compose with knowledge; the "no ideal tool" tension is authoring-side | the pack slots' authoring question (routed) |
+| curated variety / vectors of mastery (Cadwell) | multiple independent understanding axes beat raw RNG | the pillar families + the read surfaces | the vectors exist (knowledge / relations / factions / history); the aha-measurement is compellingness — INV-4-fenced | presentation-1's half (fenced) |
+| high contrast (Cadwell) | expected failure and earned success must read differently | the outcome grammar + the fear/grief/suspicion spikes | the spikes measured (39/55/30) | the ceremony half is render-side — presentation-1's |
+| encounter-first robustness (Ingold) | scenes survive entry order | the door's uniform law + deterministic replay | EXP-B: one full reordering coherent, one lawful NPC rejection | the corpus of orders — since-1 + qa-1's (routed) |
+| defensive validation (Ingold) | validity for ALL reachable states, not the happy path | the commit gate + the preconditions + the admission lints | the same_location / carries / uncarried rejections measured live in both arms | owned; the lints' own family |
+| multi-source knowledge (Ingold) | critical knowledge via independent routes or deterministic recovery | the channels/fidelity ladder + the rumor chain | the murmur chain is a measured second route; the recovery question open | since-1's recovery half (routed) |
+| path traversal + semantic checks (Ingold) | automated dead-end / contradiction search | blast + the first-divergence read | the fork read exists; the contradiction corpus is qa-1's | no new instrument (should-not-add) |
+| objective → conflict → outcome → change (Haggis) | the beat's four-part shape | intent door → outcome → state_changes/knowledge → the fold | the standing event grammar IS the shape — no new entity owed | owned as substrate |
+| complexification = decision-structure change (Haggis) | escalation changes the next decision, not the volume | the door-surface battery (this audit's unit) | EXP-A: 1 of 6 answers + 13 properties + the risk surface | THIS audit — the unit operationalized |
+| consequential success (Haggis) | success can worsen the future | the failure-law family + irreversibility | the burn succeeds AND closes — measured | owned |
+| motivation needs a runtime consumer (Haggis) | inert want/need is lore, not force | the consumer discipline (the census law) | want/need authoring facts confirmed; the calendar's 48 turns the fresh instance | owned as law, applied |
+
+**The strong counterexamples searched** (the method's mandate,
+each answered by measurement): many-events-unchanged-decision —
+FOUND and named: the 48 market/fair turns, zero consumers (the
+honest F residue); calendar-output-without-behavior-change —
+found: one second-order path, not a landscape;
+systems-firing-independently — the murmur chain is a measured
+composition (calendar × weather × knowledge × rumor), the
+cadences themselves do not compose yet; knowledge-that-never-
+changes-action — NOT found at this band (the fire-family
+knowledge rides the trust/suspicion gates that own the
+talk/coerce surfaces); history-inert — NOT found (the wergeld
+claims seed the director's buffer, the grief-wake consumes the
+feud); success-leaves-the-future-unchanged — NOT found (the
+burn closes and distorts); robustness-only-happy-path — NOT
+found at the band (EXP-B). The reverse — simple mechanisms,
+many futures — CONFIRMED: one verb + three systems + the
+deadband; composition, not machinery, is the generator.
+
+**The critical separation** (the method's mandate — no future
+completeness smuggled into the depth definition): NONE of
+res-1 / roads-1 / since-1 / pack-1 / pack-4 / engine-1 /
+presentation-1 is a prerequisite for the world-2 depth claim.
+res-1: useful, non-essential — the scarcity pillar is absent,
+the claim does not rest on it. roads-1: a separate engine
+capability — the lattice + the authored toponyms already
+deliver the geography pillar (L1's own measurement). since-1:
+the robustness corpus's future — E is measured at the band,
+the corpus sharpens, never gates. pack-1 / pack-4: the
+cross-context promotion, F4's own content-side question.
+engine-1 / presentation-1: the SoW / presentation fence (INV-4
+— compellingness undecidable in track A). The claim is
+decidable on the current evidence; the rows sharpen future
+depth, never the verdict's inputs.
+
+**The verdict**: PARTIALLY CONFIRMED. The anti-collection half
+is MEASURED — one ordinary verb composes through three systems
+into irreversible, divergent, route-stable state; the
+anti-reskin half is MEASURED — the L1 reskin day + the travel
+main loop, the standing records. The "deep" qualifier's
+DISTRIBUTION is the honest residue: the composition
+concentrates at the triangle's vertex while the cultures and
+calendar pillars contribute spine + texture + one second-order
+path — "the weeks made explicit" bought the spine and one
+vertex, not yet the distributed landscape. What the synthesis
+revealed that no document alone did: the converged unit + the
+battery protocol — none of the three sources supplied the
+measurement form; the combination did, and it is the standing
+experiment's own shape extended, never a new instrument.
+
+Remaining uncertainty: compellingness (INV-4-fenced,
+unchanged); the robustness band (one reordering measured — a
+corpus is since-1 + qa-1's); the cadences' future consumers
+(F4's promotion question, the owner's). Practical consequence:
+NO ACTION on the queue — nothing unpins, nothing reorders; the
+depth battery (the door-surface battery + the reorder arm +
+the ablation) joins the F3 four-read-surfaces form as the
+standing evaluation discipline for the future pack gates
+(F4's consult card carries it — zero new rows); the runners
+stay outside the repo (Rule 9). The smallest next verification
+step: NONE owed for the verdict call itself — the materials are
+complete in the measured band; if the owner weighs the
+calendar's decision half first, the smallest step is arming
+ONE consumer on a market/fair cadence (co-presence, travel
+exposure, or a price read) — a BUILD question (the promotion
+events), never a verification one.
+
+Landed: D-170 + this block. The build queue UNTOUCHED; zero
+build-grade items (the three probes read-only, their logs
+outside the repo).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
