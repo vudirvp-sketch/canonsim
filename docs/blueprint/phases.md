@@ -2991,6 +2991,127 @@ the document's repo-facing claims. Landed: D-165 + this block.
 The build queue UNTOUCHED — nothing unpins, nothing reorders;
 zero build-grade items.
 
+The re-verification consolidation pack routed (intake-25, D-166 —
+the owner's 2026-09-18 «проанализируй глубоко документ и оцени,
+присмотрись, убедись и так далее => что можно перенять и почему,
+что можно взять но с переработкой и адаптацией, какой потенциал
+есть? какие плюсы имеет и какие минусы (подводные камни)? есть
+ли ультимативное решение, которое нивелирует минусы и
+приумножит плюсы? а придумать такое возможно?» research call —
+the same question family as intake-24, aimed at a different
+artifact: the uploaded three-document CONSOLIDATION pack
+(00_INDEX + the causal-substrate, procgen/interface and
+narrative/agency/territory consolidations) that re-frames the
+prior intakes 13..19's own seven sources as three reading
+surfaces carrying anti-conservatism re-check tables («prior
+routing is evidence to test; form-matching is not enough»),
+plus the research_method_v5 method file (already internalized,
+D-163's own record); the D-150..D-165 intake precedent, the
+consult posture — the external pack stays outside the repo,
+every load-bearing claim verified against HEAD 90c04fb — 1726+1
+green, ruff clean, Python 3.12.14 the env pin. Where intake-24
+compressed the routed records into principles, this pack
+re-asks them as quality questions still open; TWO fresh
+read-only probes through the public API (the sandbox driver
+outside the repo, Rule 9) executed the pack's own two
+smallest-verification steps over the committed packs):
+
+- **Probe A (doc 1 §15.1 — the mid-chain failure semantics):
+  MEASURED — the chain stops cleanly.** day1_full seed 125
+  re-run: each of the 8 player steps answered by the door or
+  the resolver on real state — the lost steal commits
+  `pickpocket_failed` (the failure BAND branch, never a fake
+  success), later independent steps answer on their own merits,
+  56 events total (intake-18's census number unchanged). The
+  broken-dependency variant (the `take` step removed): the
+  dependent `drop_break` REJECTED at the door — reason
+  `precondition`, failed_test `target.carried_by`, cause
+  `ev_0024` (the breaking event's id — the OCC attribution
+  family); the second `steal` REJECTED with
+  `target.carries_flagged` cause `ev_0006` (the first steal's
+  own commit — step N+1 reads step N's real state, the
+  step-feeding law measured directly); zero fake-success
+  events; the twin run event/outcome-equal (INV-2). The
+  utterance-level half (one NL utterance → N intents) stays
+  parse-2's own deferred row (PARSER_SPEC §7) — the simulator
+  needs ZERO change to execute a decomposed chain (intake-13's
+  claim, now measured at the intent level).
+- **Probe B (doc 1 §15.2 — the status census): MEASURED — five
+  of the six conceptual statuses are first-class at their
+  proper layer; PARTIAL is honestly absent; NO_MODELED_EFFECT
+  is structurally unreachable.** The census over all three
+  committed packs (16 actions each, 8 check-backed): every
+  action declares exactly one resolution branch pair (a
+  success event type + a failure event type + an `on_failure`
+  content band) — 0/48 action declarations carry separable
+  sub-effects (PARTIAL's deferral honest: no first consumer
+  exists); the door emits `intent_rejected` no-op events
+  carrying `reason` + the NAMED `failed_test` + the breaking
+  event's id; the parse layer's closed alternatives (question /
+  no_intent / ParseError + the nearest-valid menu, PARSER_SPEC
+  §4) own PARSE_FAILURE/UNSUPPORTED; the resolver branch events
+  own FAILURE/SUCCESS; the teleology rung (D-152, test-pinned
+  `action lurk: dead action type`) closes the NO_MODELED_EFFECT
+  class at LOAD time — the honest boundary is the grammar edge,
+  never a runtime status (D-150 v3's verdict, now measured).
+
+The verdict set (the pack's three anti-conservatism tables —
+doc 1 §11, doc 2 §8, doc 3 §6 — row by row):
+
+| The pack's open quality row | Measured / standing form | Disposition |
+|---|---|---|
+| Doc 1: outcome classes beyond binary | probe B (above): the boundary-vs-canon layer split holds; the refusal payloads already carry the legibility — the named failed_test + the cause event id | CONFIRMED — D-150's verdicts stand with fresh measured support; the player-facing RENDER of the same payloads is presentation-1's row, never a schema change |
+| Doc 1: causal compression | L3 + the authored-facts-win boundary; the strongest instances landed (st-6a, the faction formula, the folds); the stress domains parked (intake-14 (3)) | CONFIRMED as standing practice — D-155 v1 unchanged |
+| Doc 1: multi-step execution | probe A (above): the chain-stop semantics measured; the utterance half rides parse-2 | CONFIRMED — the quality question closed by evidence |
+| Doc 1: dynamic materialization parity | D-155 v5: the D-054 slot shape is the PARENT LAW, four landed instances, never a generic engine | CONFIRMED — unchanged |
+| Doc 1: scale/LOD benchmark | parked with intake-14 (3); the D-112 bounds + worldgen 10k/1.19s the only measurements | UNRESOLVED — correctly; the first combat-bearing pack decides (the st-5 first-consumer law) |
+| Doc 2: MotifEngine / runtime fit | D-158's table: PROVEN at genesis (60/60 + 54/60, the probes), MISSING-as-runtime where res-1 owns it | PARTIAL — unchanged; the re-open condition stays res-1/world-2's own measurements showing pack-static insufficiency |
+| Doc 2: interface state load-bearing | the pair homes + the derived edge prices + the macro aggregates carry relation facts through the one door | PARTIAL — dynamic route state rides res-1 + the space-pack return (D-116) |
+| Doc 3: narrative laws satisfied vs possible | the 18 laws = the L-family re-derivations (D-156); the quality half rides presentation-1/SoW; automated testing = T7 + testproto (bg-8/engine-1) | PARTIAL — unchanged; compellingness fenced to the SoW horizon (intake-18's own record) |
+| Doc 3: decision-loop stress | intake-18's census + removal test measured; the stress forms = world-2 slice 3's outcome-divergence experiment | PARTIAL — the standing rows unchanged |
+| Doc 3: living settlement loop | D-160's M0–M7 probe; the gaps own rows (st-5 entity birth, companion-1 membership verbs, res-1 material life, slice 3 claims) | PARTIAL — unchanged |
+
+The answer to the pack's central challenge («was the prior
+routing form-matching?»): NO — the routed record itself carried
+the quality-open rows; every SHOULD-NOT-ADD verdict in the
+family cites its re-open condition (res-1's measurements, the
+first consumer, the slice-3 experiment, D-152's load-time
+closure), and the two rows the pack marks quality-suspicious
+are now MEASURED closed (probes A/B). The anti-conservatism
+discipline the pack institutionalizes is not new law — it is
+research_method_v5's four questions, already internalized
+(D-163: intakes 14..23 the evidence; D-165's mandatory checks
+the same list). The pack's own verdict frames (PARTIALLY
+CONFIRMED ×3) match the routed dispositions exactly; its
+00_INDEX BASE_COMMIT (37bcf6b) and its «no repository files
+were modified» claim both check out; its content is the routed
+record restructured, zero factual drift found. The pack's
+remaining smallest-verification steps (doc 1 §15.3, doc 2
+§12.1/§12.3, doc 3 §10.1–§10.3) all decompose onto the
+standing rows' own evaluation disciplines — res-1's vertical
+measurement, world-2 slice 3/4's divergence experiments, the
+corpus + T7 family — the ORDER owner decides.
+
+Refused at the door (the pack's own cut list + repo law): the
+consolidation documents as repo reading surfaces (the
+convenience-copy law, D-024 — the repo form is the routed
+blocks, this one included; the pack stays the owner's external
+index, exactly the intake-24 posture); re-opening
+UNDER_MODELLED / NO_MODELED_EFFECT as runtime statuses (probe B
++ D-152: the class is closed at load; a runtime «I don't know»
+would soften the closed-world discipline — an authoring
+failure must never become a playable outcome); PARTIAL as a
+standing status (0/48 consumers — the deferral's own law: the
+first separable-sub-effects action decides); any new consult
+card (the residue decomposes onto existing owners — the census
+mapping is this block's one-pass form, D-150's translation the
+standing record; the principle index card already carries the
+P1–P6 lens family).
+
+Landed: D-166 + this block. The build queue UNTOUCHED — nothing
+unpins, nothing reorders; zero build-grade items (the two
+probes are read-only, their logs outside the repo).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

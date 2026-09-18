@@ -40,7 +40,49 @@ block + the principle index card), `docs/DECISIONS.md` (D-165),
 `docs/TASKS.md` (the iter-132 section), `STATUS.md` (this re-pin +
 Next step), `worklog.md` (this entry; iter-122 evicted per the cap)
 — 5 files.
-The prior iteration's record: iter-131 (intake-11 re-entry). The
+Iteration: iter-133 (`iter-133-intake25` — the re-verification
+consolidation pack routed, the owner's research call
+«проанализируй глубоко документ и оцени, присмотрись, убедись
+и так далее => что можно перенять и почему, что можно взять но
+с переработкой и адаптацией, какой потенциал есть? какие плюсы
+и какие минусы (подводные камни)? есть ли ультимативное
+решение…» over the uploaded three-document consolidation of
+the prior intakes 13..19's own sources + the research_method_v5
+method file (already internalized, D-163): the pack re-asks the
+routed records as quality-open rows — its anti-conservatism
+(«form-matching is not enough») answered WITH MEASUREMENT:
+two fresh read-only probes through the public API executed the
+pack's own two smallest-verification steps (probe A the
+mid-chain failure semantics — the dependent step rejects
+cause-chained, failed_test + the breaking event's id, zero
+fake-success events, the twin run equal, the quality row
+MEASURED CLOSED, the utterance half parse-2's deferred row,
+zero simulator change owed; probe B the status census — five
+of six conceptual statuses first-class at their proper layer,
+PARTIAL honestly absent (0/48 separable-sub-effects
+declarations), NO_MODELED_EFFECT structurally unreachable via
+the D-152 load-time teleology rung, D-150 v3 now measured).
+The ten quality-open rows hold their standing dispositions
+with re-open conditions intact; the deltas refused at the
+door: the pack as a repo reading surface (the convenience-copy
+law, D-024), UNDER_MODELLED/NO_MODELED_EFFECT as runtime
+statuses (load-closed), PARTIAL as a standing status (no
+consumer), any new card (the residue decomposes onto existing
+owners). Zero build-grade items; the queue untouched ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD 90c04fb — 1726+1 green, ruff clean —
+and re-verified after: doc-only, zero runtime files touched, the
+corpora untouched by construction) ·
+Date: 2026-09-18 ·
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-25
+block: the two probes + the ten-row verdict table),
+`docs/DECISIONS.md` (D-166), `docs/TASKS.md` (the iter-133
+section), `STATUS.md` (this re-pin + Next step), `worklog.md`
+(this entry; iter-123 evicted per the cap) — 5 files.
+The prior iteration's record: iter-132 (intake-24). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -515,21 +557,30 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-132 DONE: the cross-domain principle-transplantation
-synthesis routed (intake-24 — the intake-22 meta-result
-precedent, doc-only, the build queue untouched: nothing unpins,
-nothing reorders; the six named principles P1–P6 content-matched
-claim-by-claim against the routed records — ALL OWNED in
-operational form, zero factual errors; the deltas refused at the
-door: P2's universal MUST form (a pack design law
-over-generalized into an engine law), the four extra P2
-applications (no substrate, no demonstrated problem), slice 2
-knowledge-closure-as-displacement (no uncertainty object —
-expressible as pack data today), the names as repo law
-(label-matching, D-024); the residue parked as the principle
-index card, 6 owner-citing lines).**
-The intake family's standing record: twenty-one routed intakes
-(4..24, plus the iter-122 intake-13 and iter-131 intake-11
+**iter-133 DONE: the re-verification consolidation pack routed
+(intake-25 — the same consult posture, doc-only, the build
+queue untouched: nothing unpins, nothing reorders; the pack
+content-matched claim-by-claim against the routed records it
+re-asks — zero factual drift, its BASE_COMMIT and
+no-files-modified claim check out; its anti-conservatism
+challenge («form-matching is not enough») answered WITH
+MEASUREMENT — probe A the mid-chain failure semantics (the
+dependent drop_break REJECTED cause-chained, failed_test
+`target.carried_by` + cause `ev_0024`; the second steal
+rejected on `carries_flagged` cause `ev_0006`; zero
+fake-success events; the twin run event/outcome-equal) and
+probe B the status census (five of six conceptual statuses
+first-class at their proper layer; PARTIAL honestly absent —
+0/48 separable-sub-effects declarations; NO_MODELED_EFFECT
+structurally unreachable, the D-152 load-time closure) — the
+two quality rows the pack marks suspicious are MEASURED
+CLOSED; the ten re-check rows hold their standing dispositions
+with re-open conditions intact; refused at the door: the pack
+as a repo reading surface (D-024), UNDER_MODELLED/
+NO_MODELED_EFFECT as runtime statuses, PARTIAL as a standing
+status, any new card).**
+The intake family's standing record: twenty-two routed intakes
+(4..25, plus the iter-122 intake-13 and iter-131 intake-11
 re-entries), every queue-relevant verdict already owned by a
 row.
 
@@ -555,7 +606,8 @@ calendar + the verdict call. What stands:
    then slice 4 (the calendar + the T7 read + the verdict); then
    `roads-1` (mode
    G's generated exits — the read-path fork resolved, iter-104),
-   `res-1` (the dives landed, the backbone stands), `since-1`,
+   `res-1` (the dives landed, the backbone stands),
+   `since-1`,
    `parse-2`, `engine-1` (+ `presentation-1`, its decision-input
    child — now also the owner of the player-facing compellingness
    question intake-18 fenced to the SoW horizon), `tune-3`,

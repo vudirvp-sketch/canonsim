@@ -26,6 +26,47 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-133 · intake-25 — the re-verification consolidation pack routed: the prior intakes 13..19 re-asked as quality-open rows, the two smallest-verification steps MEASURED (the mid-chain stop + the status census), the dispositions stand — done (doc-only, the owner's research call)
+
+The owner's «проанализируй глубоко документ и оцени, присмотрись,
+убедись и так далее => что можно перенять и почему, что можно
+взять но с переработкой и адаптацией, какой потенциал есть?
+какие плюсы имеет и какие минусы (подводные камни)? есть ли
+ультимативное решение, которое нивелирует минусы и приумножит
+плюсы? а придумать такое возможно?» call over the uploaded
+three-document consolidation pack (00_INDEX + the
+causal-substrate / procgen-interface /
+narrative-agency-territory consolidations — the prior intakes
+13..19's own seven sources re-framed with anti-conservatism
+re-check tables) + the research_method_v5 method file (already
+internalized, D-163). Content-matched claim-by-claim against
+the routed records at HEAD 90c04fb — zero factual drift; the
+pack's BASE_COMMIT and no-files-modified claim check out. TWO
+fresh read-only probes (the sandbox driver outside the repo,
+Rule 9) executed the pack's own two smallest-verification
+steps: probe A the mid-chain failure semantics (the dependent
+drop_break rejects cause-chained — failed_test
+target.carried_by, cause ev_0024; the second steal rejects on
+carries_flagged, cause ev_0006; zero fake-success events; the
+twin run event/outcome-equal — the quality row MEASURED
+CLOSED, the utterance-level half parse-2's own deferred row,
+zero simulator change owed); probe B the status census (five
+of six conceptual statuses first-class at their proper layer;
+PARTIAL honestly absent — 0/48 action declarations carry
+separable sub-effects; NO_MODELED_EFFECT structurally
+unreachable — the D-152 teleology rung closes the class at
+load — D-150 v3's verdict now measured). The ten quality-open
+rows of the pack's re-check tables all hold their standing
+dispositions with their re-open conditions intact. Refused at
+the door: the pack as a repo reading surface (the
+convenience-copy law, D-024); UNDER_MODELLED/NO_MODELED_EFFECT
+as runtime statuses (load-closed; an authoring failure never
+a playable outcome); PARTIAL as a standing status (no
+consumer); any new card (the residue decomposes onto existing
+owners). Zero build-grade items; the queue untouched. The
+addendum: phases.md §6's intake-25 block. Detail: worklog
+iter-133 + git.
+
 ### iter-132 · intake-24 — the cross-domain principle-transplantation synthesis routed: the six named principles content-matched against the routed records (all OWNED), the P2 universalization + knowledge-closure slice refused at the door, the residue parked as the principle index card — done (doc-only, the owner's research call)
 
 The owner's «проанализируй глубоко документ и оцени… что можно

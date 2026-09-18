@@ -13,6 +13,43 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-133 · 2026-09-18 · intake25 — the owner's «проанализируй
+глубоко документ и оцени, присмотрись, убедись и так далее =>
+что можно перенять и почему, что можно взять но с
+переработкой и адаптацией, какой потенциал есть? какие плюсы
+и какие минусы (подводные камни)? есть ли ультимативное
+решение…» research call over the uploaded three-document
+re-verification consolidation pack (5 files doc-only, zero
+code, zero corpus price — the intakes 13..19 sources
+re-asked as quality-open rows, the same family)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD
+  90c04fb, Python 3.12.14 the env pin); the pack content-matched
+  claim-by-claim against the routed records — zero factual
+  drift; TWO fresh read-only probes (the driver outside the
+  repo, Rule 9) executed the pack's own two smallest
+  verification steps: probe A the mid-chain failure semantics
+  (drop_break rejects cause-chained — failed_test
+  target.carried_by, cause ev_0024; the second steal rejects on
+  carries_flagged, cause ev_0006; zero fake-success events;
+  the twin run equal — the quality row MEASURED CLOSED, the
+  utterance half parse-2's row, zero simulator change owed),
+  probe B the status census (five of six statuses first-class
+  at their proper layer; PARTIAL absent — 0/48 separable-
+  sub-effects declarations; NO_MODELED_EFFECT load-closed per
+  D-152 — D-150 v3 now measured)
+- the ten re-check rows hold their standing dispositions; the
+  deltas refused at the door (the pack as a repo reading
+  surface per D-024; UNDER_MODELLED/NO_MODELED_EFFECT as
+  runtime statuses; PARTIAL as a standing status; any new
+  card); zero build-grade items, the queue untouched
+- docs: phases.md §6 the intake-25 block, DECISIONS D-166, TASKS
+  the iter-133 section, STATUS re-pin + Next step, this entry
+  (iter-123 evicted here, verified in this edit; 10 held);
+  1726+1 green, ruff clean after. Caps: STATUS 639 / TASKS 1461 /
+  DECISIONS 45 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse) / phases 3181 — the
+  over-cap files ride the documented §6.1 substance precedent,
+  trim at the next gate collapse
 iter-132 · 2026-09-18 · intake24 — the owner's «проанализируй
 глубоко документ и оцени… что можно перенять и почему, что можно
 взять но с переработкой и адаптацией, какой потенциал есть?
@@ -434,43 +471,3 @@ D-150/D-155/D-156/D-157 intake precedent)
   over-cap files ride the documented §6.1 substance precedent,
   trim at the next gate collapse
 
-iter-123 · 2026-09-18 · intake16 — the owner's «отработай по
-второму файлу» research call over the uploaded
-procedural-generation research record (the methodology document's
-§10 example in its grounded later form — the §13 spike rides the
-province nouns; 5 files doc-only, zero code, zero corpus price —
-the D-150/D-155/D-156 intake precedent)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD b48ab18,
-  Python 3.12.14 the env pin); every load-bearing claim verified
-  against HEAD: the pack's worldgen block (extent 144/spacing 8 →
-  324 sites; the chronicle 150y/events_max 5), the §13 spike's
-  province nouns (loc_crofts/bloom_heap, the Sarrow crossing,
-  Malby + the half-pay keep — entities.json), the res-1 row (todo,
-  owner-gated, the donor list matching the landed dives), the
-  faction formula, the TECH_NOTES §12 ladder (the research's
-  0.03/0.23/1.0–1.2 its own external numbers — intake-15's
-  micro-drift (c) family, TECH_NOTES the single owner)
-- the three measurement claims RE-DERIVED by a read-only probe
-  through the public API (the sandbox driver outside the repo,
-  the operator's Rule 9): 200 seeds → 200/200 distinct topology
-  signatures at the six claimed anchors (the height dimension
-  alone 200/200); 60 seeds → 60/60 distinct history signatures;
-  the 3-member faction collapse 8 raw states → 3 outcomes — the
-  small formula's floor measured, not asserted
-- the verdict set: topology CONFIRMED (standing practice),
-  history CONFIRMED (the sparse-anchors cap already authored),
-  social PARTIALLY CONFIRMED (the outcome-divergence experiment
-  an evaluation discipline — world-2 L2 slice 3 the natural first
-  consumer, the ORDER owner decides), resources PROVISIONALLY
-  HIGH-VALUE (the grounded spike 729→55/21/73 recorded
-  MISSING-as-runtime; the one-knob causal-output-density metric
-  for res-1's own row); zero build-grade items, the queue
-  untouched
-- docs: phases.md §6 the intake-16 block, DECISIONS D-157, TASKS
-  the iter-123 section, STATUS re-pin + Next step, this entry
-  (iter-113 evicted here, verified against git in this edit; 10
-  held); 1726+1 green, ruff clean after. Caps: STATUS 556 /
-  TASKS 1064 / DECISIONS 67 (36 rows — over the 30 cap on the
-  §6.1 substance precedent until the next gate collapse) /
-  phases 2078 — the over-cap files ride the documented §6.1
-  substance precedent, trim at the next gate collapse
