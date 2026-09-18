@@ -13,6 +13,54 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-124 · 2026-09-18 · intake17 — the owner's «отработай по
+второму файлу» research call over the uploaded interface-oriented
+procedural composition research task (the methodology document's
+§6.1 first-named file — the owner call that intake-16's tail note
+awaited; 5 files doc-only, zero code, zero corpus price — the
+D-150/D-155/D-156/D-157 intake precedent)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD b748923,
+  Python 3.12.14 the env pin); every load-bearing claim verified
+  against HEAD: st-6a's edge-local price law (core/travel.py —
+  derive-never-store, the pack override wins), the pair homes
+  (core/fold.py P2a + the iter-69 per-target suspicion home), the
+  macro aggregate surface (core/macro.py — the D-112 cardinality
+  shape), the arcs ORDER/GAP laws + drama-2's RNG-free options
+  (core/director.py), the erosion follow-up family (core/weather.py),
+  the chronicle collections + parent-map cause chains
+  (core/worldgen.py), the province pack's surface (6 locations, 5
+  exits edges, the feud/quarrel vocabulary, factions unarmed —
+  slice 3 pending), the TASKS rows (res-1's declared shape, world-2
+  L2's wave plan, roads-1's L11 read), the D-142 admission law
+  (motifs are pack data)
+- two fresh measurements RE-DERIVED by a read-only probe through
+  the public API (the sandbox driver outside the repo, the
+  operator's Rule 9): 60 seeds → 60/60 distinct motif-binding sets
+  (the authored feud/quarrel vocabulary fixed, the participant
+  pairs/places/years per-seed — 6 region pairs over 3 regions);
+  the derived edge prices 54/60 distinct vectors over the 5 exits
+  edges, per-edge 6–7 distinct values, spreads 300–825 ticks
+- the verdict set: interface state PARTIAL (static PROVEN, dynamic
+  MISSING-as-runtime — the space-pack return + res-1 its owners,
+  a generic InterfaceState SHOULD-NOT-ADD per L13), secondary
+  topology REJECTED-as-subsystem, constraint propagation NO ACTION
+  (WFC stays out), causal motif fitting PARTIAL (PROVEN at
+  genesis, the runtime form res-1's own shape, cross-pack reuse
+  pack-side per D-142), multi-node motifs PROVEN-as-primitives;
+  the Townscaper transfer real but already owned by the standing
+  architecture; zero build-grade items, the queue untouched; the
+  §6.1 cross-synthesis with RESEARCH_PLAYER_DECISION_MECHANICS
+  stays owner-call-gated
+- docs: phases.md §6 the intake-17 block (the §24 evidence table
+  the research's own required form), DECISIONS D-158, TASKS the
+  iter-124 section, STATUS re-pin + Next step, this entry (iter-114
+  evicted here, verified against git in this edit; 10 held);
+  1726+1 green, ruff clean after. Caps: STATUS 568 / TASKS 1093 /
+  DECISIONS 68 (37 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse) / phases 2160 — the
+  over-cap files ride the documented §6.1 substance precedent,
+  trim at the next gate collapse
+
 iter-123 · 2026-09-18 · intake16 — the owner's «отработай по
 второму файлу» research call over the uploaded
 procedural-generation research record (the methodology document's
@@ -339,37 +387,3 @@ price — the routing record's own scope, AGENTS §2.3)
   verified in this edit; 10 held). Caps: DECISIONS 75 lines
   (44 rows) — over-cap on substance (§6.1), collapses at the
   phase-6 gate per the D-034 family law
----
-iter-114 · 2026-09-13 · doc2 — the quarterly review, the owner's
-«продолжай работу по планам» (22 files doc-only, zero code, zero
-corpus price — the row's own objective scope, AGENTS §2.3)
-- verified BEFORE working (1668+1 green, ruff clean, HEAD 68c1abf,
-  Python 3.12.14 the env pin); re-verified after — same numbers,
-  zero runtime surface touched
-- the re-point (the iter-113 routed finding): 17 ref files + the
-  REFERENCES_DEEP §2 verdict columns — the never-existing planned
-  names now cite the current-state owners (loop / fold / retrieval
-  + chronicle / reflection / resolvers / knowledge / scheduler /
-  onaction / worldgen / director / content-<pack>; the llm_client
-  family → the INV-4/engine-1 gate, never in track A); mechanics +
-  verdicts untouched; the row's 12-file list corrected (+red_blob_
-  games, natural_earth, geonames, eventstore, neighborly — the
-  family was bigger than the iter-113 grep)
-- the license/URL pass: 45 repo paths probed (`git ls-remote`, no
-  API) + LICENSE files read direct (raw.githubusercontent.com —
-  the intake rule #1 form); three deltas (dnd-llm-game → MIT, the
-  IDCDW tag stale; pyDF → a CC BY-NC-SA template file now present;
-  RACEngine → a bare-copyright stub, no grant), `a16z/ai-town`
-  404s (live `a16z-infra/ai-town` — the ref citation re-pointed),
-  pcg.wikidot.com + open5e.com down at the check date (health
-  notes; open5e's API answers 200); deferred "verify" tags stay
-  deferred (D-017)
-- docs: 17 ref files, REFERENCES_DEEP §2, REFERENCES (the pass
-  record + deltas + health notes + the check-date tag), TASKS (the
-  iter-114 section + the doc-2 row's run record), STATUS re-pin +
-  Next step, this file; iter-104 evicted here (verified against
-  git in this edit); 10 after; 1668+1 green, ruff clean after.
-  Caps: STATUS 644 / TASKS 1219 / DECISIONS 74 (43 rows — the
-  collapse owed at the phase-6 gate, D-034) / phases 1409 /
-  TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
-  ride the documented §6.1 substance precedent, trim at the gate

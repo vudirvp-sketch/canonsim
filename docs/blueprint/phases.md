@@ -2009,6 +2009,88 @@ two §6.1-named research files (interface-oriented composition,
 player decision mechanics) remain outside the repo — they join a
 synthesis only on the owner's call.
 
+The interface-oriented procedural composition research routed
+(intake-17, D-158 — the owner's «отработай по второму файлу»
+research call over the uploaded
+`CANONSIM_INTERFACE_ORIENTED_PROCEDURAL_COMPOSITION_RESEARCH.md`,
+the methodology document's §6.1 FIRST-named file — the owner call
+that intake-16's tail note awaited; the D-150/D-155/D-156/D-157
+intake precedent, the consult posture: the external text stays
+outside the repo, every load-bearing claim verified against HEAD).
+The research asked whether a small authored causal vocabulary can
+produce materially different causal situations by fitting
+reusable motifs to different worlds/relations/interfaces — without
+a second simulator, weakened determinism, or abstraction ahead of
+value. Two fresh measurements RE-DERIVED by a read-only probe over
+the committed province pack through the public API (the sandbox
+driver outside the repo, Rule 9): 60 seeds → **60/60 distinct
+motif-binding sets** (the authored chronicle vocabulary fixed —
+feud `war_fought` + quarrel `pact_signed`/`lineage_ended`, two
+hooks; the participant pairs, places, years per-seed — the
+collection motif's topology binding moves with the seed, 6
+distinct region pairs over 3 regions), and the derived edge
+prices → **54/60 distinct vectors, per-edge 6–7 distinct values**
+(the five exits edges of the province graph, spreads 300–825
+ticks — interface-local friction IS per-seed relation-local; the
+collisions are the price's coarser projection, the same collapse
+discipline intake-16 measured on the faction formula). The five
+candidate verdicts (the research's own §24 table, the
+PROVEN/PARTIAL/MISSING/REJECTED/DEFERRED/SHOULD-NOT-ADD axis):
+
+| Candidate | Existing primitive | Evidence | Causal leverage | Abstraction cost | Disposition | Timing |
+|---|---|---|---|---|---|---|
+| Interface state | st-6a derived edge prices (L3); the `pair.<figure>.<axis>` homes; the macro aggregate surface; the erosion follow-ups | static interface facts PROVEN (the probe); dynamic route state (blockage/obstruction over time) MISSING-as-runtime | high where a consumer exists (travel legs, the planned flows) | a generic `InterfaceState` = SHOULD-NOT-ADD (L13: the pair-home + aggregate + follow-up families already carry relation facts through the one canon door) | PARTIAL | res-1 + the space-pack return (D-116) — both standing, owner-gated |
+| Secondary topology | ONE canonical exits graph + L3 derived projections (the LOD zones, roads-1's L11 pass graph) + pack-data overlays (res-1's dependency graph) | the standing shape; distinct propagation rules already live in separate owners (macro cadence vs beat vs knowledge fold) | UNKNOWN for a second runtime graph — no false-coupling case demonstrated | high (a second authoritative world representation, INV-1) | REJECTED-as-subsystem | never, absent an owner-demonstrated coupling failure |
+| Constraint propagation | drama-2 options (gate + weight, heaviest wins, declaration order, RNG-free); the arcs ORDER/GAP laws; the weighted weather chain; the ordered worldgen passes | every selection surface is a deterministic small mechanism | no propagation need in evidence | high (a solver family the corpus never asked for) | NO ACTION; WFC stays out (the research's own fence, the D-116 spatial family) | — |
+| Causal motif fitting | the chronicle collections (authored motif + per-seed bindings, hooks → the director's buffer); res-1's declared shape (source→flow→sink as PACK DATA + aggregate macro-events + irreversible sinks) | PROVEN at genesis (60/60, the probe; intake-16's history twin); the runtime TRADE_BLOCK form is res-1's own row | high (the research's §8 thesis, confirmed in its genesis form) | a `MotifEngine` = SHOULD-NOT-ADD; cross-pack motif reuse is PACK-SIDE authoring under D-142's admission law | PARTIAL (PROVEN at genesis; MISSING-as-runtime where res-1 owns it) | res-1 + world-2 L2 slice 3/4 — the standing rows |
+| Multi-node motifs | the collections' parent-map cause chains (L7); the director arcs; the commit-door reaction cascades; res-1's dependency graph | PROVEN as primitives in three separate owners | real but domain-owned | a unifying motif runtime would duplicate all three | NO ACTION (each domain owns its composition mechanism) | — |
+
+The key reconciliation: the Townscaper transfer the research
+proposes — authored primitives, compatibility constraints, fit to
+current topology, canonical events, cross-system consequences —
+is REAL in canonsim and ALREADY OWNED by the standing
+architecture: the compact authored pack (INV-3) + the
+deterministic generated substrate (worldgen, L11 derived) + the
+per-seed bindings (the chronicle, the claims, the derived prices)
++ the one canon door (INV-1) + the commit-door consequences. The
+research's own §22 scope guard (no `MotifEngine`, no
+`ConstraintEngine`, no `InterfaceState`, no WFC, no schema/queue
+change) holds verbatim at HEAD — each named anti-candidate is
+fenced by standing law (L13's Rule-of-Three, D-116's
+never-a-second-engine family, INV-1/INV-2, D-142's
+core-ends/pack-begins line). The §12 alternatives comparison
+resolves to the standing order: existing primitives + res-1's
+pack-data shape (the smallest explanation that survives — the
+probe shows the pattern already yielding distinct canonical
+chains); more-authored-scenarios is the pack-side route (D-142);
+full-procedural and LLM-generated were both rejected by the
+standing verdicts (D-157; INV-4/D-052/D-095). The §13
+counterexamples all fence: combinations-collapse (measured twice
+now — intake-16's 8→3 and the probe's 54/60), prose-only
+variation (the LLM boundary), private-knowledge leakage (L6/
+EPIST-1 — the observer-opportunity machinery, the acquisition
+gate and presence reads, never writes knowledge), pack-intent
+violations (the pack-wins law: the derived price fires only where
+the pack declares no override, D-132's
+override-else-derived), nondeterministic ordering (the isolated
+stream families + construction order, INV-2), debuggability (the
+log IS the inspection surface — a generic motif runtime would
+obscure exactly what the small mechanisms keep visible). The two
+priority test cases route to their standing rows unchanged: res-1
+(§14 — its declared shape already answers the research's flow/
+route/shortage questions as pack data + existing doors; the
+one-motif-many-bindings question is res-1's own evaluation
+discipline when it lands) and world-2 (§15 — slice 3 the
+triangle: faction pressure + the deep feud; slice 4 the calendar
++ the verdict call; the Sarrow Vale's river-crossing/
+trade-junction structures already the committed surface). Zero
+build-grade items: no engine, no subsystem, no schema change, no
+queue reorder, nothing unpins. The methodology's §6.1
+cross-synthesis with `RESEARCH_PLAYER_DECISION_MECHANICS` stays
+OPEN — that file remains outside the repo, joining only on the
+owner's call (the intake-16 tail note's second half, still
+standing).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

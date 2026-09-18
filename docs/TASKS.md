@@ -26,6 +26,35 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-124 · intake-17 — the interface-oriented procedural composition research routed: the five candidate principles verified, two measurements re-derived at HEAD — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`CANONSIM_INTERFACE_ORIENTED_PROCEDURAL_COMPOSITION_RESEARCH.md`
+(the methodology document's §6.1 first-named file — the owner call
+that intake-16's tail note awaited; the external text stays outside
+the repo, the convenience-copy law). Every load-bearing claim
+verified at HEAD b748923; two fresh measurements RE-DERIVED by a
+read-only probe through the public API (60 seeds → 60/60 distinct
+motif-binding sets — the authored feud/quarrel vocabulary fixed,
+the bindings per-seed; the derived edge prices 54/60 distinct
+vectors, per-edge 6–7 values). The verdict set: interface state
+PARTIAL (static PROVEN, dynamic MISSING-as-runtime — the
+space-pack return + res-1 its owners, a generic InterfaceState
+SHOULD-NOT-ADD), secondary topology REJECTED-as-subsystem (the
+one-graph + derived-projections + pack-overlay shape IS the
+standing answer), constraint propagation NO ACTION (the selection
+surfaces are deterministic small mechanisms; WFC stays out),
+causal motif fitting PARTIAL (PROVEN at genesis — the chronicle
+collections; the runtime TRADE_BLOCK form is res-1's own declared
+shape; cross-pack reuse is pack-side authoring under D-142),
+multi-node motifs PROVEN-as-primitives (collections/arcs/cascades
+— domain-owned). Zero build-grade items; the queue untouched;
+res-1 + world-2 L2 slice 3/4 stay the priority test cases on
+their standing rows. The §6.1 cross-synthesis with
+RESEARCH_PLAYER_DECISION_MECHANICS stays OPEN (owner-call-gated).
+Landed: D-158 + phases.md §6's intake-17 block + STATUS/worklog
+rows. Detail: D-158 + worklog iter-124 + git.
+
 ### iter-123 · intake-16 — the procedural-generation research routed: the four domain verdicts re-verified, three measurements re-derived at HEAD — done (doc-only, the owner's research call)
 
 The owner's «отработай по второму файлу» call over the uploaded
