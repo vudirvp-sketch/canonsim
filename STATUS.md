@@ -1,70 +1,65 @@
-Iteration: iter-127 (`iter-127-intake20` — the content-archetype /
-pack-strategy framework research routed, the owner's research call
-«используя research_method_v5.md => разберись что перенять можно,
-дополнить или улучшить… долгосрок важен и качество» over the
-uploaded `canonsim — Content Archetype, Pack Strategy &
-Capability Audit.md`; the D-150..D-160 intake precedent, doc-only):
-**a FRAMEWORK document (a durable method for choosing, classifying
-and admitting future content), unlike the mechanism researches of
-intakes 16..19 — the reconciliation therefore ran over the
-framework's own §36 "what should become permanent" list (26 items,
-9 families), each checked per the method's four questions
-(principle / form / quality / transfer), the capability truth
-table verified at HEAD 362f167 (1726+1 green, ruff clean, all
-three committed packs load-green through the admission lint;
-resources grep-verified absent from core — res-1's own row; no
-fresh runtime probe owed — the capability side is owned by the
-intakes 16..19 measurements + the phase gates). The verdict set:
-~four fifths OWNED outright — the core thesis (compositional
-breadth of a domain-blind causal core; surface vs causal
-archetype; proof value; novelty types) is D-146's loop-change
-law + L9 + VISION §7 in measured form; the capability discipline
-is the intake verdict discipline of 16..19; the topology
-framework (7 dimensions + decision friction + canon/knowledge)
-is owned dimension-by-dimension (travel/knowledge/factions+
-urgencies/crime+leverage/secrets; institutions EMERGENT per
-intake-19); the loop/signature/counterfactual family is TEST-1 +
-T8 + the `--systems-minus` arms + intake-18's literally-executed
-removal test; the admission test is PACK_SPEC's real rules
-(the framework's own §31 orders exactly that — verified
-sufficient, no replacement caps); the order relationship is the
-nothing-unpins discipline. ONE genuine sharpening adopted:
-"LANDED BUT UNDER-TESTED" names the province-only single-consumer
-surfaces (the cultures block, spines, condensation travelers,
-price overrides) — a mechanism's ARCHITECTURAL proof completes
-only when a SECOND materially different pack arms it (the AP-9
-precedent's own ladder). The genuine NEW residue: portfolio
-orthogonality + behavioral yield per authored complexity — the
-SELECTION question (the floor was enforced by AP-1/the teleology
-gate/the reskin clock; the ceiling question owned no row). The
-heavyweight artifacts (the 22-column standing matrix, a standing
-truth-table document, the 17-candidate catalogue) REJECTED —
-parallel truth (D-024), premature per the framework's OWN §34
-empirical-first law, the speculative-worldbuilding ban. The
-combined design: ONE parked pack-candidate consult card (9
-lines — proof-value proposition / causal-archetype litmus /
-topology read / anchor read / novelty type / portfolio
-orthogonality / behavioral yield / evidence ladder / verdict
-vocabulary), consumed at the next pack-slot opening or pack
-intake, recalibrated by the first independent multi-pack
-authoring experiment; the §37 follow-up iteration NOT warranted
-(this intake is the routing; the card's validation is bound to
-world-2 L2 slice 3's experiment + the first pack slot). Zero
-build-grade items; the queue untouched ·
+Iteration: iter-128 (`iter-128-intake21` — the unified-observatory
+/ worldbuilder / agent-gateway research routed, the owner's
+research call «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» over the uploaded `Architecture Research Task —
+Unified Simulation Observatory / Worldbuilder / Agent
+Gateway.md`; the D-150..D-161 intake precedent, doc-only):
+**an ARCHITECTURE-RESEARCH AGENDA — where intake-14 asked the
+substrate questions (causal compression, simulation levels,
+aggregation, stealth, materialization), this document asks the
+OBSERVER-SIDE ones: how the one world is inspected, explained,
+balanced, forked, authored, and safely operated by both a human
+developer and an AI agent. Every load-bearing claim verified
+against HEAD 4459500 (1726+1 green, ruff clean; the capability
+side verified at HEAD: mechanics matrix/trace/why/blast, the
+balance harness + its arms, the checkpoints, the provenance
+family, chron-2's cause tree, the blind suite, the admission
+lint, mode G, testproto — no fresh runtime probe owed, the
+phase gates + the intakes 16..19 measurements own the
+capability evidence). The verdict set: the doctrine half
+(§1..§4 — one world / one canon / deterministic ordering /
+LOD-as-resolution / knowledge-not-canon) CONFIRMED with zero
+drift; the §9 four-question observability frame (STATE /
+CAUSALITY / KNOWLEDGE / COUNTERFACTUAL) ADOPTED as the parked
+consult card — each question cites its proven instruments, and
+the God Tool + standing truth-table documents REFUSED (D-024 +
+the document's own §12.C); the counterfactual half PARTIAL —
+blast's two-arm same-seed fingerprint divergence the proven
+primitive, the first-divergence read routed to world-2 L2
+slice 3's outcome-divergence experiment (already carrying
+intake-18's next-decision census), branch-from-checkpoint
+riding the owner-gated resume door; the single-event
+postmortem (trace_event's shape — the log already carries all
+four quadrants) riding mech-2's next mechanics.py touch; the
+§6 three-class balance taxonomy OWNED one-to-one by the
+standing instruments (T-suite + lint / balance-1 / T8 + corpus
++ heartbeat), the bug-vs-imbalance-vs-emergence routing joining
+the card; the §8 worldbuilder claim OWNED (the litmus met by
+measurement, the UI deferred to bg-6/presentation-1); the §10
+agent-gateway principle CONFIRMED as standing law (the doors +
+the D-055 file contract + testproto + AGENTS.md itself the
+dev-time gateway; the SoW surface rides engine-1/presentation-
+1); the §11 detector family PARKED (first-consumer law); the
+§12.D concepts: 4 already named, 3 correctly deferred; the
+dedicated formalization iteration REJECTED — every build-grade
+item owns a carrier or standing row. Zero build-grade items;
+the queue untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 362f167 — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 4459500 — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-20
-block incl. both tables + the parked consult card), `docs/DECISIONS.md`
-(the D-161 row), `docs/TASKS.md` (the iter-127 section), `STATUS.md`
-(this re-pin + Next step), `worklog.md` (this entry; iter-117 evicted
-per the cap) — 5 files.
-The prior iteration's record: iter-126 (intake-19). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-21
+block incl. the capability map + the verdict table + the parked
+observability consult card), `docs/DECISIONS.md` (the D-162 row),
+`docs/TASKS.md` (the iter-128 section), `STATUS.md` (this re-pin +
+Next step), `worklog.md` (this entry; iter-118 evicted per the cap)
+— 5 files.
+The prior iteration's record: iter-127 (intake-20). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -539,27 +534,27 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-127 DONE: the content-archetype / pack-strategy
-framework research routed (intake-20 — D-161 + phases.md §6's
-intake-20 block incl. the capability truth table, the §36
-reconciliation and the PARKED pack-candidate consult card,
+**iter-128 DONE: the unified-observatory / worldbuilder /
+agent-gateway research routed (intake-21 — D-162 + phases.md
+§6's intake-21 block incl. the §9 four-question capability map,
+the verdict table and the PARKED observability consult card,
 doc-only, the build queue untouched: nothing unpins, nothing
-reorders; ~four fifths of the framework already standing law in
-measured form, ONE sharpening adopted — "LANDED BUT
-UNDER-TESTED" names the province-only single-consumer surfaces
-with the cross-context promotion condition — and ONE new residue
-parked — portfolio orthogonality + behavioral yield as the
-pack-slot selection discipline; the heavyweight artifacts
-rejected as premature/parallel-truth per the framework's own
-§34; zero build-grade items).**
-The intake family's standing record: seventeen routed intakes
-(4..20), every queue-relevant verdict already owned by a row.
+reorders; the doctrine half CONFIRMED with zero drift, the
+observer-side half decomposed — the four-question frame adopted
+as the consult card, the first-divergence read routed to slice
+3's outcome-divergence experiment, the single-event postmortem
+routed to mech-2's ride, the detector family parked on the
+first-consumer law, the God Tool + the formalization iteration
+refused; zero build-grade items).**
+The intake family's standing record: eighteen routed intakes
+(4..21), every queue-relevant verdict already owned by a row.
 The L2 wave plan (D-153, TASKS world-2) owns
 the remainder: slice 3 the triangle (its outcome-divergence
 experiment now carries intake-18's next-decision form — count
 divergent NEXT-DECISION surfaces, not only divergent event
-paths, the ORDER owner decides), slice 4 the calendar + the
-verdict call. What stands:
+paths — AND intake-21's first-divergence read: name the first
+divergent event + the amplifying chain; the ORDER owner
+decides), slice 4 the calendar + the verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
@@ -581,8 +576,9 @@ verdict call. What stands:
    `bg-6` (the SoW audit, D-055 deferral), `pack-1` (the grim pack —
    the first authored pack to run the full crosswalk deliberately) +
    `pack-3` + `pack-4`, `companion-1`, `mech-2` (rides the next
-   mechanics.py touch), `st-4` (rides presentation-1 at its write
-   time, D-148) and `st-5` (the first real consumer decides). No
+   mechanics.py touch — now also carrying intake-21's
+   single-event postmortem form), `st-4` (rides presentation-1 at its
+   write time, D-148) and `st-5` (the first real consumer decides). No
    other owner question stands open.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's

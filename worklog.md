@@ -13,6 +13,55 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-128 · 2026-09-18 · intake21 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» research call over the
+uploaded unified-observatory / worldbuilder / agent-gateway
+architecture-research task (5 files doc-only, zero code, zero
+corpus price — the D-150..D-161 intake precedent; the method file
+itself external per the convenience-copy law)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 4459500,
+  Python 3.12.14 the env pin); the observer-side capability claims
+  verified at HEAD: scripts/mechanics.py (matrix/trace/why/blast —
+  the shadow-replay law, the two-arm same-seed blast with the
+  fingerprint EQUAL/DIVERGED read, both arms replay from t=0 by
+  design), scripts/balance_harness.py (the arms: --pacing/
+  --directors/--systems-minus + M1–M5 + payoff latency + beat
+  tension), core/checkpoint.py + scripts/checkpoint.py
+  (verify-by-refold), core/metrics.py (m1..m5, emergent_chains,
+  eventless stretches, payoff_latencies, beat_tension), the
+  provenance family in EVENT_SCHEMA §7 (cause + cause_intent +
+  cause_hook), chron-2's genesis cause tree in core/worldgen.py,
+  core/knowledge.py + the blind suite + L6/EPIST-1 (the FAQ law),
+  the admission lint (D-152), mode G (VISION §4 — offline, through
+  pack CI), testproto's three layers (TEST_PLAN §8)
+- the verdict set (the method's four questions + combined design
+  per finding): the doctrine half CONFIRMED zero-drift; the §9
+  four-question frame (STATE/CAUSALITY/KNOWLEDGE/COUNTERFACTUAL)
+  ADOPTED as the parked observability consult card; the
+  counterfactual half PARTIAL (blast proven; the first-divergence
+  read → world-2 L2 slice 3's experiment; branch-from-checkpoint →
+  the owner-gated resume door); the single-event postmortem →
+  mech-2's ride; the three-class balance taxonomy OWNED one-to-one
+  (T-suite+lint / balance-1 / T8+corpus+heartbeat); worldbuilder
+  OWNED (litmus met by measurement; the UI → bg-6/presentation-1);
+  the agent-gateway principle CONFIRMED as standing law (the SoW
+  surface → engine-1/presentation-1); the detector family PARKED
+  (first-consumer law); 4 concepts already named, 3 deferred; the
+  formalization iteration REJECTED — the God Tool, standing
+  truth-table docs, new label sets all refused (D-024 + the
+  document's own §12.C)
+- docs: phases.md §6 the intake-21 block (the capability map +
+  the verdict table + the observability consult card, 6 lines),
+  DECISIONS D-162 (41 rows — over-cap on §6.1 substance until
+  the next gate collapse), TASKS iter-128, STATUS re-pin + Next
+  step (slice 3's experiment now also carrying the
+  first-divergence read; mech-2 carrying the postmortem form),
+  this entry (iter-118 evicted, verified in this edit; 10 held)
+- phases.md 2530→2624 lines, TASKS 1242→1305, DECISIONS 72→73,
+  STATUS 597→593 — the doc family's growth rides the standing
+  §6.1 substance precedent, documented here
+
 iter-127 · 2026-09-18 · intake20 — the owner's «используя
 research_method_v5.md => разберись что перенять можно, дополнить
 или улучшить… долгосрок важен и качество» research call over the
@@ -413,44 +462,3 @@ next pick, D-153's wave plan, D-154)
   cap, verified in this edit; 10 held); 14 files (13 modified + 1 new,
   re-counted against the worktree delta)
 
-iter-118 · 2026-09-13 · world2l2 — the province skeleton, the owner's
-fresh call «начинай работу по планам… логичнее всего было бы начать
-сейчас то и делай» (the iter-117 precedent phrase; STATUS Next step's
-own readiness pick — world-2 L2 the natural next pick, D-153)
-- verified BEFORE working (1696+1 green, ruff clean, HEAD d6cffa8,
-  Python 3.12.14 the env pin); re-verified after — 1707+1 green
-  (+10 tests/test_t1_province.py, +1 the stoplist self-check, the
-  packci third-pack pin re-pointed), ruff clean; zero corpus price
-  (the third pack is a new directory, the committed corpora and
-  fixtures byte-untouched by construction)
-- content: `content/province_pack/` NEW (the Sarrow Vale, ORIGINAL
-  nouns per D-130's posture tier, no CREDITS sidecar): the worldgen
-  at the province band (324 sites, extent 144; six settlements
-  claimed, max_edge_span 4; the feud/quarrel chronicle arming the
-  dormant hook pair) + travel (the road family's 150/60/45 over the
-  province lattice — the derived legs 345-705) + the SPINE records
-  (the AP crosswalk's first committed consumer: five flaws, all
-  consumed by urgency entries, AP-8) + the budget block (AP-1's
-  first arming); the actions/templates re-voiced from the road family
-  (the tokens, the hook ids, the world_history formed arm binding the
-  six claim slots)
-- tests: the T1 twin +10 (byte-identity + the golden fixture
-  province_smoke_seed42.jsonl + the regen guard + the price pins +
-  the mid-travel knowledge-transfer pin at t=3240 inside the
-  Malby->Thornmill leg + the spine/budget/genesis-scale pins);
-  PROVINCE_STOPLIST + the per-pack self-check; the packci
-  committed-pin grows the third pack
-- docs: DECISIONS D-153 (32 rows — over the 30 cap on the §6.1
-  substance precedent until the next gate collapse, the D-152
-  landing's own record), TASKS (the world-2 L2 opening + the wave
-  plan: slice 2 the cultures, slice 3 the triangle, slice 4 the
-  calendar), STATUS re-pin + Next step, NAV §1 + README the
-  province_pack rows, PACK_SPEC §6 the AP-9 first-consumer note, this
-  entry (iter-108 evicted per the cap, verified in this edit; 10
-  held); 16 files (re-counted against the worktree delta: 9 modified
-  + 7 new) — the pack iteration's own checklist (the iter-112
-  family's objective scope, AGENTS §2.3). Caps: STATUS 578 / TASKS
-  945 / DECISIONS 63 (32 rows — over the 30 cap on the §6.1
-  substance precedent until the next gate collapse, the D-152
-  record) / worklog 10 entries held — the over-cap files ride the
-  documented §6.1 substance precedent, trim at the next gate

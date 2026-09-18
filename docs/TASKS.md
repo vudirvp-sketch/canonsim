@@ -26,6 +26,45 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-128 · intake-21 — the unified-observatory / worldbuilder / agent-gateway research routed: the four-question observability frame adopted as the consult card, the counterfactual + postmortem sharpenings routed to their standing carriers — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `Architecture Research Task —
+Unified Simulation Observatory / Worldbuilder / Agent
+Gateway.md` (an ARCHITECTURE-RESEARCH AGENDA — where intake-14
+asked the substrate questions, this document asks the
+observer-side ones: how the one world is inspected, explained,
+balanced, forked, authored, and safely operated by humans and
+agents; the external text and the method file stay outside the
+repo, the convenience-copy law). Every load-bearing claim
+verified against HEAD 4459500 (1726+1 green, ruff clean; the
+capability side verified at HEAD — mechanics matrix/trace/why/
+blast, the balance harness + its arms, checkpoints, the
+provenance family, chron-2's cause tree, the blind suite, the
+admission lint, mode G, testproto; no fresh runtime probe owed:
+the phase gates + the intakes 16..19 measurements own the
+capability evidence). The verdict set: the doctrine half
+CONFIRMED with zero drift; the §9 four-question frame ADOPTED as
+the parked observability consult card (STATE/CAUSALITY/
+KNOWLEDGE/COUNTERFACTUAL, each citing its proven instruments);
+the counterfactual half PARTIAL (blast the proven primitive; the
+first-divergence read routes to slice 3's outcome-divergence
+experiment; branch-from-checkpoint rides the owner-gated resume
+door); the single-event postmortem rides mech-2's next
+mechanics.py touch; the three-class balance taxonomy OWNED
+one-to-one by the standing instruments; the worldbuilder claim
+OWNED (litmus met by measurement; the UI deferred to bg-6/
+presentation-1); the agent-gateway principle CONFIRMED as
+standing law (the SoW surface rides engine-1/presentation-1);
+the detector family PARKED (first-consumer law); concept
+canonization: 4 already named, 3 correctly deferred; the
+dedicated formalization iteration REJECTED (every build-grade
+item owns a carrier or standing row). Zero build-grade items;
+the queue untouched. Landed: D-162 + phases.md §6's intake-21
+block (the capability map + the verdict table + the card) +
+STATUS/worklog rows. Detail: D-162 + worklog iter-128 + git.
+
 ### iter-127 · intake-20 — the content-archetype / pack-strategy framework research routed: the 26-item reconciliation, the capability truth table at HEAD, the selection residue parked as the pack-candidate consult card — done (doc-only, the owner's research call)
 
 The owner's «используя research_method_v5.md => разберись что перенять

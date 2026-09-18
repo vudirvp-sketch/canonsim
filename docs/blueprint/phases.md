@@ -2461,6 +2461,125 @@ intake-18's next-decision census) and the first pack-slot opening
 deliberately). Zero build-grade items; nothing unpins, nothing
 reorders.
 
+The unified-observatory / worldbuilder / agent-gateway research
+routed (intake-21, D-162 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» call over the uploaded
+`Architecture Research Task — Unified Simulation Observatory /
+Worldbuilder / Agent Gateway.md`; the D-150..D-161 intake
+precedent, the consult posture: the external text and the method
+file stay outside the repo, every load-bearing claim verified
+against HEAD 4459500 — 1726+1 green, ruff clean). Where intake-14
+asked the SUBSTRATE questions (causal compression, simulation
+levels, aggregation, stealth, materialization), this document
+asks the OBSERVER-SIDE questions: how the one world is inspected,
+explained, balanced, forked, authored, and safely operated by
+both a human developer and an AI agent. The capability map (the
+document's §12.A, its §9 four-question frame as the organizer,
+verified at HEAD):
+
+| The document's §9 question | Verified state at HEAD | Classification |
+|---|---|---|
+| STATE — what exists right now | the fold/projection (the runtime truth), `mechanics.py matrix` (the static wiring), the chronicler's `state_current`/`facts_summary` (offline), `digest.py` (the doc viewport) | PROVEN |
+| CAUSALITY — why did this happen | the provenance family (`cause` + `cause_intent` + `cause_hook` — EVENT_SCHEMA §7: "enough to re-derive why"), M3 chain lengths, chron-2's genesis cause tree (parent maps + collections), `mechanics.py trace` (the shadow: fold deltas + knowledge mints + hook seeds + the director's beat decisions) + `why` (the hook postmortem), payoff latency | PROVEN per component — the document's `trace_event` unified view is a read-side convenience, not a principle gap: all four quadrants (causes / event / knowledge / effects) are log data already |
+| KNOWLEDGE — why does this agent know / not know | knowledge records (who/channel/fidelity/at/source — the why-KNOWN and why-NOT answers are the record set plus its absence), the blind-NPC leak suite (0 leaks, D-094), L6/EPIST-1 + the STATUS FAQ law (the director reads observable state only; the folds never entropy inputs), `chronicle.py knowledge_summary` | PROVEN |
+| COUNTERFACTUAL — what changes if X is altered | `mechanics.py blast` (two-arm same-seed: fingerprint EQUAL/DIVERGED + type/hook/director counter diffs), the harness arms (`--pacing`/`--directors`/`--systems-minus`), fold checkpoints (verify-by-refold, depth-4), T1/T2 replay, seed-range distributions | PARTIAL — the primitive exists; the first-divergence-event read and the branch-from-checkpoint form are the residues (below) |
+
+The §6 three-class balance taxonomy maps one-to-one onto standing
+instruments: mechanical correctness = the T-suite (door outcomes,
+invariants, the stoplist) + the admission lint; statistical = the
+balance-1 harness (1000-seed distributions, M1–M5, thresholds from
+data D-019, payoff latency, beat tension); emergent = T8 chain
+counts + the corpus reads + the heartbeat Layer-3 trend. The §9
+18-surface list: 13 surfaces exist as named instruments, resources
+waits on res-1's row, forks and emergent-pattern analysis are the
+partial/parked items below. The §14 scenario walks: S3 (knowledge
+asymmetry) PROVEN end-to-end (the fidelity ladder, drift families,
+the settlement probe's visibility chain, the t=3240 mid-leg
+transfer); S5 (LOD transition) PROVEN (condensation + member_of
+births + the tombstone + the census + the id law); S4
+(counterfactual) = blast plus the divergence-read residue; S1's
+pieces proven separately (the crime chain, move with visual-only
+sightings, the mid-build-departure precedent t=59) but never
+authored as one pack — a composition question, not an
+architecture gap; S2's economy half is res-1's own row (the
+document's §15 law applies: the row owns the finding).
+
+The verdict set (the method's four questions + the combined
+design, the FACT/INFERENCE axis kept separate from disposition):
+
+| The document's proposal | Repo form (principle → form → quality/transfer) | Disposition |
+|---|---|---|
+| §1–§4 the one-world doctrine (shared canon, deterministic ordering, LOD-as-resolution, knowledge-not-canon) | INV-1/INV-2 + the queue/door laws (D-037/38/39: bands, coarsest-first co-occurring ticks, OCC cause chains, tick-monotonicity) + the one-gate law/tiers/id law + L6/EPIST-1/channels/fidelity/decay — the collision cases resolve by standing law, never narrator-side; re-derives intake-14's confirmed record with zero drift | OWNED — CONFIRMED |
+| §5 `trace_event` (the unified causal explorer) | principle: the log already carries the full causal graph, the explorer is a VIEW; form: provenance + the shadow trace/why; quality: release-equality pinned | PARTIAL — the single-event postmortem form (one command over one event id: its cause chain, its knowledge records, its cascade children) joins mech-2's ride (the standing mechanics.py-touch row), never a new row |
+| §6 the three balance classes + the bug/imbalance/emergence verdict routing | the instruments proven (above); the routing is the reading discipline — T-suite first, then the harness distributions, then the corpus/T8/heartbeat | OWNED as instruments; the routing line joins the card |
+| §7 true fork / divergence analysis | principle: same-prefix logs + deterministic ids ⇒ divergence is a READ; form: blast deliberately replays both arms from t=0 (no state fork — the resume door stays owner-gated); the checkpoint substrate landed (depth-4) | PARTIAL — the first-divergence read (first differing event, then the amplifying chain) routes to world-2 L2 slice 3's outcome-divergence experiment (its natural first consumer, already carrying intake-18's next-decision census form); branch-from-mid-run rides the owner-gated resume door (§7's own record) |
+| §8 Worldbuilder as interface over the pack layer | the Phase-6 litmus PROVEN by measurement (D-149 reskin day 14m24s zero core edits; the province pack at pack scale); scaffold/doctor/lint + the admission rungs (D-152); mode G drafts offline through pack CI (VISION §4, PACK_SPEC); the impossible-authoring list = the admission lint + INV-3 + the author prohibitions | OWNED (the data-driven claim) / the UI DEFERRED to the SoW horizon (bg-6/presentation-1 — the document's own schema/data/tools/runtime split re-derives the repo's law) |
+| §9 the Observatory convergence | principle: convergence at the CONCEPT level (four questions), never the tool level; form: each question owns proven instruments; transfer: engine-1's validation asks exactly these four — the frame joins the engine-1 consult material (the intake-20 card posture) | ADOPT-AS-CONSULT-CARD (below); the God Tool and any standing truth-table document REJECTED — parallel truth (D-024), and the document's own §12.C guard re-derives the refusal |
+| §10 the Agent Gateway | principle: the agent uses the same authoritative interfaces, no bypass, owner gates on mutation; form: the doors + the D-055 file-contract family (A narrator, C parser, presentation-1 the fourth instance) + testproto's three layers (D-098) + the closed write path (INV-1: the log writer the only canon path) + "prose is never proof" (TEST-1) + AGENTS.md's iteration protocol (the dev-time gateway IS the standing law); the candidate capability list maps: inspect/query/trace/explain → mechanics, query_knowledge → the records, simulate/replay/checkpoint → the Simulator/T2/scripts, fork/compare → blast + arms, measure → metrics/harness, validate_pack/lint → the admission lint, propose_patch → the iteration protocol | OWNED at the law level — CONFIRMED; the SoW-facing formal surface rides engine-1/presentation-1/bg-6 (owner-gated, testproto the standing protocol); nothing to formalize now |
+| §11 the emergent-behavior detector family | principle: surface behavior worth human inspection, never judge it; form: the teleology gate (dead event types = the "never happens" detector, at admission), the harness distributions ("too often"), the corpus growth law (measured failure, never imagination); the too-early/too-late/narrow-seed/runaway detectors have no consumer yet | PARKED — the first consumers are the standing verdict producers (slice 3/4's calls, the phase-gate heartbeat); the first-consumer law (st-5's shape); no row created |
+| §12.D concept canonization | World/Canon, Simulation-Resolution/LOD, Knowledge State, the trace family: already named (INV-1/D-052, the one-gate law, L6/EPIST-1, the provenance family); Observatory, Counterfactual Branch, Agent Capability Gateway: the umbrella names wait for their SoW carriers | 4 already-solved; 3 correctly DEFERRED — canonizing now would be label-matching (the method's own law, D-024) |
+| §13/§16 the standing deliverable documents + a dedicated formalization iteration | every build-grade item owns a standing row or carrier; the ladder is complete, new work is owner-gated rows | REJECTED as a new row/phase — this block is the one-pass mapping, the card the durable form (the intake-20 precedent) |
+
+**The observability consult card** (the crystallized residue —
+PARKED; the engine-1/presentation-1 spec writes and the world-2 L2
+slice 3/4 experiments read this BEFORE promising observability;
+the intake-20 card posture — each line cites its owner, nothing
+restates):
+
+1. **The four questions** route every observability ask: STATE →
+   the fold/projection + `matrix` + the chronicler's summaries;
+   CAUSALITY → `trace`/`why` + the provenance family + M3;
+   KNOWLEDGE → the records + the blind suite + L6/EPIST-1;
+   COUNTERFACTUAL → `blast` + the harness arms + checkpoints.
+2. **The verdict routing** for a surprising outcome: T-suite
+   first (bug) → the balance-1 distributions (imbalance) → the
+   corpus/T8/heartbeat (emergence); prose is never proof (TEST-1).
+3. **The single-event postmortem** (trace_event's shape) rides
+   mech-2's next mechanics.py touch — one event id in, the cause
+   chain + knowledge records + cascade children out.
+4. **The first-divergence read** rides slice 3's
+   outcome-divergence experiment: count divergent NEXT-DECISION
+   surfaces (intake-18's form) AND name the first divergent event
+   + the amplifying chain.
+5. **The agent-operates-the-same-interfaces principle**: dev-time
+   = AGENTS.md itself; SoW-time = the D-055 file-contract family +
+   testproto; worldbuilder-mode agents draft packs through pack
+   CI, never the engine (mode G).
+6. **The detector family** waits for its first consumer; the
+   corpus grows from measured failure (§8.2's law), never
+   imagination.
+
+Refused at the door (the document's own cut list, confirmed
+against repo law): no God Tool or unified observability UI now
+(the SoW horizon owns surfaces; the dumb-terminal law); no
+standing capability-truth-table document (this block is the
+one-pass form, the card the durable form); no new
+formalization phase or row (every item owns a carrier or a
+standing row — slice 3/4, mech-2, engine-1, presentation-1,
+bg-6, res-1, the resume door); no runtime instrumentation (the
+D-118 shadow-replay law — the runtime is never instrumented);
+no second engine, no unrestricted LLM mutation, no
+UI-driven architecture (INV-4, the D-116/D-147 anti-pattern
+family, the document's §12.C); no new label set over the four
+already-named concepts (D-024).
+
+Micro-drifts (the document vs HEAD): (a) its §2 assumes LOD is
+always-on ("is the NPC active/warm/cold during the interval") —
+the one-gate law holds the one-scene world while the macro clock
+is unarmed (the tavern pack), LOD is live only in the armed packs
+(road/province); the pack DECLARES the resolution, the engine
+never assumes it. (b) Its §7 "true simulation fork" — both blast
+arms replay from t=0 by design; branch-from-checkpoint is not a
+surfaced operation (the resume door, owner-gated). (c) Its §9
+"should eventually expose" list reads as a TODO; at HEAD 13 of 18
+surfaces exist as named instruments, and the document's own §12.C
+guard would refuse building the missing five as standing
+artifacts before their consumers exist. No factual errors found
+in the document's repo-facing claims. Landed: D-162 + this
+block. The build queue UNTOUCHED — nothing unpins, nothing
+reorders; zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
