@@ -26,6 +26,33 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-131 · intake-11 re-entry — the pressure-city donor blueprint re-uploaded & re-verified: D-147 stands, zero new findings — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the re-uploaded `PRESSURE_LIMIT_donor_blueprint
+.md` — intake-11's own source document (section-by-section content
+match against phases.md §6's intake-11 block + the `pack-4` row;
+the external text stays outside the repo, the convenience-copy law;
+byte-identity unverifiable, content identity established at every
+load-bearing citation; the iter-122 intake13re re-entry precedent).
+Re-verified at HEAD e7147df: the displacement law, the Cooling
+Debt's weather-1 resolution, the gauge, legal exclusion, the
+objective-function factions, the lore hooks and the T1 slice all
+hold unchanged — the citations green (REFERENCES §10's DD/FP
+read-surface law; D-134's thermometer minus; depth-6/depth-7/
+name-1/chron-2/retr-1/st-6a landed; roads-1/res-1 owner-gated;
+D-140's cause_hook pairing; `tavern_pack`'s on_action). One drift
+self-resolved: D-147's micro-drift (a) — the AP crosswalk
+enforcement rung is now LIVE (pack-ci, D-152; the province pack's
+spine records the first committed consumer, D-153), so the donor's
+"landed" claim is true at HEAD; micro-drift (b) stands (no literal
+`meta.json` — the data rides the four files' blocks). The uncited
+lore halves (§2/§5/§7 + the faction details) are donor lore — pack
+data when a slot opens, never repo content. Verdict: NO ACTION —
+already routed; nothing re-routed, no new D-row. The addendum:
+phases.md §6's intake-11 block. Detail: worklog iter-131 + git.
+
 ### iter-130 · intake-23 — the world-execution / spatial-topology / social-information architecture research routed: the §3.1 six engine questions answered by a fresh province-pack probe, the §2 intent-lifecycle answer set closed, the F/G scenario questions routed onto slice 3, the residue parked as the world-structure consult card — done (doc-only, the owner's research call)
 
 The owner's «используя research_method_v5.md => разберись что

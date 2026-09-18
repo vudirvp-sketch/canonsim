@@ -13,6 +13,38 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-131 · 2026-09-18 · intake11re — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» research call over the
+re-uploaded pressure-city donor blueprint (PRESSURE_LIMIT) —
+intake-11's own source (4 files doc-only, zero code, zero corpus
+price — the iter-122 intake13re re-entry precedent, one family)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD e7147df,
+  Python 3.12.14 the env pin); the re-upload content-matched
+  section-by-section against the intake-11 block + the pack-4 row
+  (§1/§3/§4/§6/§8/§10/§11/§12/§13 exact; §2/§5/§7 + the faction
+  details the lore halves, staying outside the repo per the
+  convenience-copy law) — the re-entry verdict: D-147's set holds
+  at HEAD, zero new findings, NO ACTION
+- the code-level re-verification: core/pack.py (the AP-9 spine +
+  AP-8 flaw-consumption rungs live, D-152 — micro-drift (a)
+  self-resolved, the donor's "landed" claim now true),
+  content/province_pack (the five spine records' first committed
+  consumer, D-153; rules.json::meta/cultures — no literal
+  meta.json, micro-drift (b) stands), REFERENCES §10 (the DD/FP
+  read-surface law), core/retrieval.py + core/lod.py + names.py +
+  factions.py + weather.py (retr-1/depth-7/name-1/depth-6/
+  weather-1 landed), TASKS (pack-4 parked, roads-1/res-1
+  owner-gated, the lost-city fold's host at world-2 L2 slices
+  1-2; intake-20's portfolio law owns the diversification slot)
+- docs: phases.md §6 the intake-11 re-entry addendum, TASKS the
+  iter-131 section, STATUS re-pin + Next step, this file. iter-121
+  evicted here (verified against git in this edit); 10 after;
+  1726+1 green, ruff clean after. Caps: STATUS 579 / TASKS 1371 /
+  DECISIONS 75 (43 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse) / phases 2950 — the
+  over-cap files ride the documented §6.1 substance precedent
+
 iter-130 · 2026-09-18 · intake23 — the owner's «используя
 research_method_v5.md => разберись что перенять можно, дополнить
 или улучшить… долгосрок важен и качество» research call over the
@@ -437,48 +469,3 @@ precedent, one family)
   precedent until the next gate collapse) / phases 1987 — the
   over-cap files ride the documented §6.1 substance precedent
 
-iter-121 · 2026-09-18 · intake15 — the owner's research call «начни
-работу с документом» over the uploaded narrative-design research
-dossier (7 GDC sources) + the research-workflow methodology document
-(6 files doc-only, zero code, zero corpus price — the D-150/D-155
-intake precedent, one family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD c699c4f,
-  Python 3.12.14 the env pin); every load-bearing dossier claim
-  checked against HEAD (the convenience-copy law) — the code-level
-  checks: core/metrics.py (m1..m5 + systems_touched + payoff_latencies
-  + emergent_chains/beat_tension/eventless_stretches), scripts/
-  mechanics.py (matrix/trace/why/blast — the IT-5 stale pin found),
-  docs/BRIEF_SPEC.md §3/§5 (the eight blocks = LAW 18's five layers;
-  the eviction contract = LAW 17 verbatim-compatible), docs/
-  DIRECTOR_SPEC.md §1/§2 (D-005's consequence-planner law = LAW 05/11),
-  PACK_SPEC §6 (the AP crosswalk — the AP-01..AP-10 collision found),
-  tests/test_blind.py + test_beliefwire.py + test_suspectaxis.py (the
-  NQ-04 residue), TECH_NOTES §12 (the methodology doc's worldgen
-  numbers slightly off the owned rows), TEST_PLAN §8 (IT-11 standing)
-- the routing (D-156): the doctrine half CONFIRMED (the 18 laws
-  re-derive L1–L14/EPIST-1/D-005/the brief contract/the knowledge
-  model, zero factual drift); the 7 gaps decompose — five PROVEN as
-  landed instruments (A/B/C/D/F + G by construction), E PARTIAL
-  (breadcrumb recovery = since-1's standing row); the NQ vocabulary +
-  NLAW-* refused as second label sets (D-024); the AP-01..AP-10
-  anti-pattern numbering COLLIDES with the live-char crosswalk's AP
-  family (the genuine new finding — the anti-patterns route as the
-  block's verdicts, never a second AP numbering); the 12-iteration
-  program decomposes onto standing instruments + owner-gated rows (the
-  standalone audit docs refused); the 8 fixtures map onto the
-  committed corpus (F8 = since-1); the five uncovered sources enter
-  REFERENCES §10 (the intake-8/9/10 precedent); the methodology
-  document confirmed as a re-derivation of the standing intake
-  discipline (its §6.1's two named research files stay outside — not
-  uploaded this session, recorded in the block)
-- docs: phases.md §6 the intake-15 block, DECISIONS D-156 (35 rows,
-  over-cap on §6.1 substance until the next gate collapse),
-  REFERENCES §10 the five source rows, TASKS the iter-121 section,
-  STATUS re-pin + Next step, this entry (iter-111 evicted here,
-  verified against git in this edit; 10 after). The build queue
-  untouched — nothing unpins, nothing reorders. Doc-only (the D-022
-  exception, the owner's fresh request). Caps: TASKS 1016 / STATUS 564
-  / DECISIONS 66 (35 rows — the over-cap debt collapses at the next
-  gate, the D-034 family law) / phases 1959 / REFERENCES 341 — the
-  over-cap files ride the documented §6.1 substance precedent, trim
-  at the gate

@@ -1194,6 +1194,39 @@ this before authoring; the external document stays outside the repo):
   mapping corrected: the AP crosswalk's enforcement rung is specified,
   not landed (rides `pack-ci`); tone/prohibition data rides the four
   files' blocks — there is no literal `meta.json`.
+- **Re-entry (iter-131, the owner's 2026-09-18 «используя
+  research_method_v5.md => разберись что перенять можно, дополнить
+  или улучшить… долгосрок важен и качество» call over the re-uploaded
+  donor blueprint — the same source, content-matched
+  section-by-section against this block's record and the TASKS
+  `pack-4` row; re-verified at HEAD e7147df): D-147's verdict set
+  holds, zero new findings, NO ACTION.** The cited halves match
+  exactly (§1 the displacement law; §3 the gauge + the
+  thermometer-minus cap; §4 the DORMANT correction + legal exclusion;
+  §6 the objective-function factions; §8 the four lore hooks; §10 the
+  mapping table row-for-row onto the `pack-4` row; §11's six blind
+  spots; §12 the cut list; §13 the T1 slice); the uncited halves (§2
+  the root trauma, §5 the three questions, the faction table's
+  details, §7 the protagonist template) are donor lore — pack data,
+  staying outside the repo (the convenience-copy law). The citations
+  re-verified at HEAD: REFERENCES §10's DD/FP read-surface law;
+  D-134's corruption law (the thermometer minus); depth-6/depth-7/
+  name-1/chron-2/retr-1/st-6a landed; roads-1 and res-1 owner-gated;
+  D-140's `provenance.cause_hook` the release-pairing law;
+  `tavern_pack`'s on_action. One pin strengthened since D-147 was
+  written: micro-drift (a) has SELF-RESOLVED — the AP crosswalk's
+  enforcement rung is now live (pack-ci iter-117/D-152: the AP-9
+  spine lint + the AP-8 flaw-consumption rung in `core/pack.py`, the
+  province pack's five spine records D-153 the first committed
+  consumer), so the donor's §10 "landed" claim is now TRUE at HEAD.
+  Micro-drift (b) stands (no literal `meta.json` — the
+  tone/prohibition data rides the four files' blocks; the province
+  pack's `rules.json::meta`/`cultures` the committed instance). The
+  lost-city fold's host advanced since (world-2 L2 slices 1-2,
+  D-153/D-154 — slice 3 the readiness pick), and intake-20's
+  portfolio law already owns the pressure-city's diversification
+  slot (the displacement law's behavioral coverage). Nothing
+  re-routed; no new D-row; the queue untouched.
 
 The presentation-contract consolidation (intake-12, D-148 — the
 owner's 2026-09-13 verdict call over a multi-audit summary of the

@@ -1,56 +1,39 @@
-Iteration: iter-130 (`iter-130-intake23` — the world-execution /
-spatial-topology / social-information architecture research
-routed, the owner's research call «используя
-research_method_v5.md => разберись что перенять можно,
-дополнить или улучшить… долгосрок важен и качество» over the
-uploaded `ARCHITECTURE RESEARCH TASK — Unified World Execution,
-Spatial Topology, Social Information, Observability,
-Counterfactuals & Agent Gateway.md`; the D-155..D-163 intake
-precedent, doc-only):
-**the WORLD-STRUCTURE half of the uploaded task routed — where
-intake-14 asked the substrate questions and intake-21 the
-observer-side questions, this document expands intake-21's own
-agenda with the execution model, the spatial topology and the
-social-information ladder; its observer-side sections re-derive
-intake-21's routed record zero-drift (not restated). Every
-load-bearing claim verified against HEAD 131c477 (181 commits,
-1726+1 green, ruff clean, Python 3.12.14 the env pin; the
-probe read-only through the public API, zero corpus contact).
-The fresh evidence: ONE probe answered the document's §3.1 six
-engine questions mechanically over the committed province pack
-(exits = the authored graph; between = claimed lattice sites +
-the derived prices 660/300/510/600; region = the typed claim
-reads; adjacent = the exits list; reachable = the graph walk
-6/6; outside = the lattice IS the pack-declared extent — 324
-sites, mechanically closed; the same-seed regeneration equal)
-— the document's own key invariant (no mechanically-meaningful
-empty space between anchors) CONFIRMED as already met by the
-lattice + place-1 + st-6a. The §2 intent-lifecycle answer set
-closed mechanically (OCC/`projection_moved`/the windowed
-re-run/the noise floor/the beat re-roll/the queue key +
-`spot_available`) — the formal conflict taxonomy REJECTED as
-label-matching (the document's own "do not invent" clause,
-D-024); the §8 fact→knowledge→belief→goal→intent→action ladder
-verified transition-by-transition; scenarios F/G routed onto
-slice 3's consult material (composition questions — never a
-politics/city subsystem), B's economy half stays res-1's row.
-The residue parked as the world-structure consult card (6
-lines). Zero build-grade items; the queue untouched ·
+Iteration: iter-131 (`iter-131-intake11re` — the pressure-city
+donor blueprint re-uploaded & re-verified, the owner's research
+call «используя research_method_v5.md => разберись что перенять
+можно, дополнить или улучшить… долгосрок важен и качество» over
+the re-uploaded `PRESSURE_LIMIT_donor_blueprint.md`; the
+iter-122 intake13re re-entry precedent, doc-only):
+**the re-upload content-matched section-by-section against the
+intake-11 routed record (phases.md §6's block + the TASKS
+pack-4 row — the displacement law, the Cooling Debt's weather-1
+resolution, the gauge + the thermometer-minus cap, the DORMANT
+correction, legal exclusion, the objective-function factions,
+the lore hooks, the six blind spots, the cut list, the T1
+slice — ZERO new findings; the uncited lore halves (§2/§5/§7)
+stay outside the repo, the convenience-copy law). Every
+load-bearing citation re-verified against HEAD e7147df (the
+DD/FP read-surface law, D-134, D-140's cause_hook pairing,
+depth-6/7, name-1, chron-2, retr-1, st-6a, roads-1/res-1 gated,
+tavern_pack's on_action — all green). One drift SELF-RESOLVED:
+D-147's micro-drift (a) — the AP crosswalk's enforcement rung
+now LIVE (pack-ci iter-117/D-152 + the province pack's five
+spine records, D-153), so the donor's "landed" claim is true at
+HEAD; micro-drift (b) stands (no literal meta.json). NO ACTION
+— already routed; the queue untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 131c477 — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD e7147df — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-23
-block incl. the probe table + the verification map + the verdict
-table + the parked world-structure consult card), `docs/DECISIONS.md`
-(the D-164 row), `docs/TASKS.md` (the iter-130 section), `STATUS.md`
-(this re-pin + Next step), `worklog.md` (this entry; iter-120 evicted
-per the cap) — 5 files.
-The prior iteration's record: iter-129 (intake-22). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-11
+re-entry addendum), `docs/TASKS.md` (the iter-131 section),
+`STATUS.md` (this re-pin + Next step), `worklog.md` (this entry;
+iter-121 evicted per the cap) — 4 files.
+The prior iteration's record: iter-130 (intake-23). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -525,24 +508,23 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-130 DONE: the world-execution / spatial-topology /
-social-information architecture research routed (intake-23 —
-D-164 + phases.md §6's intake-23 block incl. the probe table,
-the verification map, the verdict table and the PARKED
-world-structure consult card, doc-only, the build queue
-untouched: nothing unpins, nothing reorders; the document's
-observer-side half re-derived intake-21's record zero-drift;
-the world-structure half routed: the six §3.1 engine questions
-answered by a fresh province-pack probe (the document's own
-between-anchors invariant CONFIRMED as met by the lattice +
-place-1 + st-6a), the §2 intent-lifecycle answer set closed
-mechanically (the formal conflict taxonomy rejected as
-label-matching), the §8 social-information ladder verified
-transition-by-transition, scenarios F/G routed onto slice 3's
-consult material, the streets/districts/formalization-iteration
-asks all refused at the door; zero build-grade items).**
+**iter-131 DONE: the pressure-city donor blueprint re-uploaded &
+re-verified (intake-11 re-entry — the iter-122 intake13re
+precedent, doc-only, the build queue untouched: nothing unpins,
+nothing reorders; the re-upload content-matched the intake-11
+routed record section-by-section — phases.md §6's block + the
+TASKS pack-4 row — ZERO new findings; every load-bearing
+citation re-verified at HEAD e7147df all green; D-147's
+AP-crosswalk micro-drift SELF-RESOLVED (pack-ci iter-117/D-152
++ the province spine records D-153 — the donor's "landed" claim
+now true), micro-drift (b) stands (no literal meta.json); NO
+ACTION — already routed, the pack-4 row the parked owner, no
+new D-row).**
 The intake family's standing record: twenty routed intakes
-(4..23), every queue-relevant verdict already owned by a row.
+(4..23, plus the iter-122 intake-13 and iter-131 intake-11
+re-entries), every queue-relevant verdict already owned by a
+row.
+
 The L2 wave plan (D-153, TASKS world-2) owns
 the remainder: slice 3 the triangle (its outcome-divergence
 experiment now carries intake-18's next-decision form — count
