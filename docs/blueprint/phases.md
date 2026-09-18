@@ -1627,6 +1627,269 @@ of the eight properties):
   damage-as-derived) join the intake-9 parked family — named here
   so a future row finds them.
 
+The narrative-design research dossier (intake-15, D-156 — the
+owner's 2026-09-18 research call «начни работу с документом» over
+the uploaded seven-source GDC synthesis
+(`CANONSIM_NARRATIVE_DESIGN_RESEARCH`: RimWorld/Sylvester, Slime
+Rancher/Popovich, Sims/M. Brown, Shrouded Isle/Kim, Heaven's
+Vault/Ingold, Procedural Narrative Generation/Cardona-Rivera &
+Martens, the PAX-2015 DF panel) + the research-workflow methodology
+document (v2 supplemented — the process half); the same consult
+posture as the intakes 6..14: the external documents stay outside
+the repo, every load-bearing claim verified against HEAD first. The
+dossier proposes 18 design laws, 7 gaps, 10 narrative-quality
+metrics, 4 diagnostic surfaces, 5 documentation rules, a
+12-iteration research-to-code program, 10 anti-patterns, and 8
+reference fixtures. A future brief/director/metrics/pack opening
+reads this before proposing any narrative-quality instrument):
+
+- **Verified at HEAD (the doctrine half — facts, not hypotheses).**
+  The dossier's boundary quote is VISION §1 verbatim (simulator
+  produces facts, LLM produces meaning, log stores canon, mediator
+  holds the boundary); its repo inventory (§1/§11.1 — director
+  pacing/channels/hooks/release chains, knowledge + blind-NPC
+  tests, deterministic scene briefs, scene texture as a separate
+  narrator-created layer, worldgen history, factions with goals,
+  travel + weather, packs, deterministic replay + narrative
+  regression machinery) is all standing surface, checked one row
+  one owner. Its named risk — "mechanics becoming technically
+  correct but narratively inert" — is the M-metric targets' own
+  text (MVP_SCOPE §15: M1 non-trivial and rising, M3 mean ≥ 2, M4
+  novelty rising, M5 non-zero at director-off), so the risk is not
+  an uncovered alarm but a restatement of the standing instruments'
+  reason to exist. The seven source dossiers' mechanisms decompose
+  onto landed shapes: RimWorld's elastic failure = the door's
+  FAILURE branch (a cause-chained rejection is a fact; the
+  crime ladder rides a steal FAILURE to its boss beat);
+  Slime Rancher's needs-as-engines = the AP-9 spine
+  (want/need/flaw/cause, lint-live since iter-117, five spines in
+  the province pack); the Sims' promise trees = the hook buffer
+  (seeded at event time), inverse autonomy = panic/wariness gates +
+  the urgency weight modifiers, fear trees = the suspicion pair
+  axes escalating by family; Shrouded Isle's
+  tragedy-from-locally-rational-decisions = D-005's own law (harm
+  emerges from state, never director whim); Heaven's Vault's
+  authored/procedural coexistence = the pack/worldgen split; the
+  PNG drama-management triad = D-005 + DIR-4 (the consequence
+  planner IS the "sits between them" answer); the DF panel's
+  history-as-consequence-graph = the worldgen history bridge (the
+  DF Legends donor family, `docs/ref/df_design.md`).
+- **The 18 laws: CONFIRMED as re-derivations of standing law —
+  zero new law text owed, the L-family owns the namespace.** The
+  mapping (each law → its standing owner): 01→L9+L1+the M targets;
+  02→L9/L13/L14; 03→L9's own formula (depth = O(intersections)) +
+  M1 + `mechanics.py matrix`; 04→L8 (consequence pairing: same-
+  scene Price + deferred hooks) + EPIST-1's price + the
+  price-marker admission lint (PACK_SPEC §6, D-152); 05→D-005's
+  seeding law (complications seeded at event time, never invented
+  later) + M2; 06→M2 + `payoff_latencies` (D-140) + L8's deferred
+  half; 07→the failure branch (the `failure_total` band, the
+  step-feeding law — intake-13's confirmed set); 08→AP-9 spine +
+  urgency entries + EPIST-1 (the pressures-vs-biographies split is
+  the spine's own shape — traits are derived folds, never authored
+  biography fields); 09→the landed knowledge model (records carry
+  who/channel/fidelity/source, never a truth field; lies are
+  crafted records D-008; EPIST-1; L6); 10→the epistemic laws +
+  D-055's narrator file contract (implication is the narrator's
+  licensed read, canon claims need canon basis — the refuted-entry
+  ledger law); 11→D-005 (consequence planner, never an
+  improviser; entropy reads observables only, L6) + the T8
+  director-off A/B; 12→the authored/procedural split (packs buy
+  guarantees, worldgen buys variation, PACK_SPEC + D-142's
+  admission law); 13→the knowledge-channel substrate (PARTIAL —
+  the recovery half is since-1's standing row); 14→L7 (causality
+  is recorded, not reconstructed) + `provenance.cause_hook` +
+  mechanics `why`; 15→the T-family graph discipline (T8 A/B, the
+  arc-driver tests, the corpus pins — TEST_PLAN §6); 16→
+  `emergent_chains` + `beat_tension_profile` + the chronicle's
+  tale importance gates; 17→BRIEF_SPEC §5's eviction contract
+  (verbatim-compatible: beyond-cap items render nothing, never a
+  budget drop; whole-block eviction in ascending priority order);
+  18→BRIEF_SPEC §3's eight blocks — fact=`scene_delta`,
+  state=`present_entities`, epistemics=`recalled_facts` (the
+  belief line + the knowledge line, already two distinct item
+  shapes), texture=`scene_texture`, affordance=`active_options`.
+- **The 7 gaps: five PROVEN as landed instruments, one PARTIAL
+  (standing row), one re-labeling refused.** GAP A (narrative
+  leverage) — the M-family + `systems_touched` + `payoff_latencies`
+  are the landed instruments and the balance harness runs them
+  across 1000 seed-varied runs; the composite
+  `narrative_leverage(event)` formula is REFUSED as a second
+  metric vocabulary (D-024/L13: no consumer, the components are
+  already measured and reported). GAP B (consequence half-life) —
+  `payoff_latencies` (D-140) measures exactly
+  seeding→release in ticks; "half-life" is a re-labeling of the
+  same measurement, refused as duplicate vocabulary. GAP C
+  (action-loop pressure) — M4 novelty/repetition +
+  `eventless_beat_stretches`, landed iter-6. GAP D (retrospective
+  explainability) — `scripts/mechanics.py` trace/why/blast
+  (D-118) + L7 cause chains + OCC cause attribution + outcome
+  check summaries — the dossier's ITERATION-5 `why EVENT_ID`
+  proposal predates D-118 (a stale pin, the intake-13 litmus
+  drift's own family); the hook-centric `why` + the tick-centric
+  `trace` + the two-arm `blast` cover the ask. GAP E (breadcrumb
+  density) — PARTIAL: the substrate landed (knowledge records,
+  channels, sighting/witness/rumor/telling spread, the leverage
+  clusters, the drift family); no density metric exists and none
+  is owed pre-consumer; the recovery half (alternate evidence
+  routes when a clue is missed) is since-1's own standing
+  owner-gated row — no new row. GAP F (character pressure
+  surfaces) — the AP-9 spine IS the pressure card (lint-enforced
+  want/need/flaw/cause per named NPC; the echo/traits folds the
+  derived residue; `mechanics.py matrix` the static view); a
+  dedicated projection surface is REFUSED (L13: the existing
+  reads own the need). GAP G (director anti-authoriality) —
+  PROVEN by construction: the director releases only seeded hooks
+  through the intent door (D-005 — it cannot write canon, it
+  cannot invent an action, a release rides the actor's own intent
+  machinery); the "forced action" class is structurally
+  unreachable; T8 director-off is the standing A/B; the entropy
+  mirror + the burn law fence un-dischargeable tension.
+- **The NQ-01..10 metric vocabulary: REFUSED as a second label set
+  (D-024) — the T/M families own the metric namespace.** The
+  mapping: NQ-01→L7 (cause on every event); NQ-02→the door's gate
+  family + the urgency/beliefwire channel law; NQ-03→M2 +
+  payoff_latencies; NQ-04→T3 blind-NPC (LIVE, the phase-4
+  extension iter-63) + beliefwire counters (the de-crystallization
+  path — belief divergence IS landed, a belief held at T can be
+  absent at T' > T) + suspectaxis per-target figures + the drift
+  twins; NQ-05→GAP E/since-1; NQ-06→mechanics `why`/L7; NQ-07→the
+  failure branch; NQ-08→`emergent_chains`/`beat_tension_profile`;
+  NQ-09→M4; NQ-10→T7 (the manual retell) + TEST_PLAN §8's
+  testproto Layer-1 contract tests + the golden-set A/B (D-148's
+  weak arm) + the deviation corpus (the owner's 2026-09-07
+  clarification). Recorded here so a future row finds the
+  translation, never as adopted names.
+- **The 4 diagnostic surfaces: why/blast LANDED, the ledger and
+  the card are standing shapes.** §14.1/§14.2 (`why`/`blast`) are
+  D-118's own instruments. §14.3 (story-material ledger: open
+  threads, unresolved tensions, active suspicions) IS the director
+  buffer + the folds — hooks are tension facts folded from the log
+  (rebuildable, L11; un-dischargeable tension counts toward
+  entropy), the crystallized beliefs are the standing suspicions;
+  a second ledger would violate L3/L11. §14.4 (character pressure
+  card) — the spine + the present_entities/pair reads +
+  `mechanics.py matrix`; a dedicated card surface is REFUSED (L13,
+  same as GAP F).
+- **The documentation rules D1–D5: four standing, one refused.**
+  D1 (architecture changes update the owning spec), D3 (every new
+  mechanism gets fixtures — the corpus's own landing shape), D4
+  (narrative bug → KI — AGENTS §5 verbatim-compatible), D5 (avoid
+  duplicate truth — D-024 verbatim-compatible) are standing law.
+  D2's NLAW-* ID family is REFUSED: the law namespace is owned
+  (L1–L14, EPIST-*, DIR-*, drama-*, AP-*, INV-*, M-*, T-*, the
+  D-rows); the dossier's 18 laws re-derive the L-family, so a
+  parallel NLAW numbering would be duplicate truth — the ID
+  discipline itself is already standing practice.
+- **The 12-iteration program: decomposes onto standing
+  instruments and owner-gated rows — zero build-grade items.**
+  IT-1 (the law audit) is THIS intake's verdict set; the standalone
+  `NARRATIVE_LAW_AUDIT.md`/`NARRATIVE_INTERACTION_MATRIX.md`/
+  `CONSEQUENCE_AUDIT.md`/`EPISTEMIC_NARRATIVE_AUDIT.md` documents
+  are REFUSED under D-024 (parallel owners for audits the block
+  and TEST_PLAN already carry). IT-2 = `mechanics.py matrix` + M1;
+  IT-3 = the door gates + the urgency/beliefwire tests; IT-4 = the
+  metrics + payoff_latencies + `blast`; IT-5 = landed (D-118);
+  IT-6 = the T3 extension + beliefwire/suspectaxis/drift; IT-7 =
+  since-1's row (PARTIAL); IT-8 = D-005 + T8 (structurally
+  answered); IT-9 = the M-family (iter-6); IT-10 = the committed
+  corpus (the 105-case narrator corpus + the playscripts +
+  `emergent_chains`) with the labeled-for-LLM-eval half owned by
+  the testproto corpus discipline (TEST_PLAN §8.2 — live
+  transcripts re-distilled, the anti-trap law); IT-11 = TEST_PLAN
+  §8 testproto (D-098) + the deviation corpus — standing, rides
+  bg-8/engine-1; IT-12 (promote the laws into governance) is this
+  routing itself — the repo's governance already carries the laws.
+- **The 10 anti-patterns: all standing law, and the AP numbering
+  COLLIDES — the genuine new finding of this intake.** The
+  anti-patterns restate: 01→D-005 (the RimWorld storyteller IS the
+  repo's founding named anti-pattern, from the same source);
+  02→the crystallized-belief design (traits are derived folds,
+  never added personality fields; the beliefwire gate law);
+  03→the noise floor (D-005's silent autonomous precondition
+  failures) + M4; 04→O(relevance) never O(history) (BRIEF_SPEC
+  §1/VISION §5); 05→D-005's causality law + the state-coupled
+  randomization law (the Fallout anti-row, D-135); 06→the
+  epistemic laws (mystery = real canon + observer uncertainty,
+  L6/D-008); 07→L1 observability + the GHOST-without-anchors lint
+  (dead pack data); 08→D-005 + the intent door (structurally
+  unreachable); 09→since-1's family; 10→L7. But the dossier's
+  AP-01..AP-10 prefix is TAKEN: the live-char crosswalk owns the
+  AP family with different semantics (PACK_SPEC §6 — AP-1 pack
+  budgets, AP-2 price markers, AP-8 flaw-consuming rules, AP-9
+  the spine, AP-11 clone NPCs, AP-13 contradictions, AP-15
+  atomicity). The anti-patterns route as THIS block's verdicts,
+  never as a second AP numbering — a future doc citing "AP-8"
+  must mean the crosswalk row.
+- **The 8 fixtures: the corpus already carries the family; F8 is
+  since-1's own row.** F1 (the theft that keeps living) =
+  day1_theft_and_arson + the crime ladder (theft → partial
+  witness → rumor → suspicion → the confrontation boss beat —
+  the committed pack's own spine); F2 (failure redirects) = the
+  steal-FAILURE path (crowd_wary, the band opens, the
+  document_check ladder — seed 19/93/2/125's own probe set);
+  F3 (missing witness) = the rotation/transfer family (the relief
+  rotation moves the token; Doren's half waits all run — the door
+  never sees a world-impossible attempt); F4 (false belief) =
+  beliefwire counters + suspectaxis figures + the drift twins;
+  F5 (cascading local need) = the fire chain (ignition → smoke →
+  the perception penalty → telling/drift — intake-13's own
+  example); F6 (retrospective tragedy) = mechanics `why` + the
+  chronicle's cause-chained rendering (partial — the chains are
+  pinned, no labeled tragedy fixture); F7 (director pressure
+  without puppeteering) = the document_check boss beat (pack data
+  over standing machinery, the option-gated confrontation) + T8;
+  F8 (breadcrumb recovery) = since-1's standing row. New fixtures
+  are born with the mechanics they pin (the D-098 anti-trap law —
+  the corpus grows from live transcripts too), never
+  batch-authored ahead of consumers.
+- **Micro-drifts (the dossier vs HEAD):** (a) IT-5's `why` and
+  §14.1/§14.2 propose what D-118 landed — a stale pin (the
+  dossier was written against a pre-iter-84 HEAD), the
+  intake-13 litmus drift's own family; (b) NQ-04's "extend
+  blind-NPC from leak detection into belief divergence" is
+  largely landed since iter-63/67/70 (the leak suite checks
+  belief lines against the knower's fold; the counters
+  de-crystallize; the figures diverge per-target) — the residue
+  is the multi-POV rendering check, which is testproto
+  Layer-1/2 territory (the golden-set A/B), not a track-A gap;
+  (c) the methodology document's worldgen numbers (400→~0.03 s,
+  2500→~0.23 s) are the external procedural-generation research's
+  own measurements, slightly off TECH_NOTES §12's owned rows
+  (400→0.04, 2500→0.28, 10000→1.19) — TECH_NOTES stays the
+  single owner of numbers, the external figures never enter the
+  repo; (d) no factual errors found in the dossier's repo-facing
+  claims (§1/§11.1/§17's BRIEF_SPEC citations all verified).
+- **The methodology document (the upload's second file):
+  CONFIRMED as a re-derivation of the standing intake discipline
+  — the repo's own protocol IS the methodology.** Its routing
+  model (distill → classify → reconcile → route to the existing
+  owner → smallest verification) is the D-150/D-155 intake
+  precedent; its ownership map and reading gradient re-derive
+  AGENT_NAVIGATION §2/§3; its anti-parallel-source laws re-derive
+  D-024; its two-axis classification vocabulary
+  (FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN ×
+  PROVEN/PARTIAL/MISSING/REJECTED/DEFERRED/SHOULD-NOT-ADD) is
+  compatible with the intake verdict sets — adopted as this
+  block's working vocabulary, never as repo law. Its §6.1 names
+  two further research files
+  (`CANONSIM_INTERFACE_ORIENTED_PROCEDURAL_COMPOSITION_RESEARCH`,
+  `RESEARCH_PLAYER_DECISION_MECHANICS`) that were NOT uploaded
+  this session — they stay outside the repo; recorded here so a
+  future session knows they exist in the owner's corpus and join
+  a synthesis only on the owner's call.
+- **Landed:** D-156 (this verdict set) + this intake block + the
+  five new source rows in REFERENCES §10 (the intake-8/9/10
+  precedent: The Sims, Slime Rancher, Shrouded Isle, Heaven's
+  Vault, Procedural Narrative Generation — RimWorld and the DF
+  family already carry their rows). The build queue UNTOUCHED —
+  nothing unpins, nothing reorders; the one genuine residue
+  (alternate evidence routes / breadcrumb recovery) already owns
+  its standing row (since-1, owner-gated), and every other
+  build-grade-adjacent item routes to the standing owner-gated
+  rows (bg-8/engine-1 for the LLM-eval half, res-1/world-2 for
+  the future consumers).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

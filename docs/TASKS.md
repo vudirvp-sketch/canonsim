@@ -26,6 +26,28 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-121 · intake-15 — the narrative-design research dossier routed — done (doc-only, the owner's research call)
+
+The routing verdict set — the doctrine half confirmed (the 18 proposed
+design laws re-derive the standing law families, L1–L14/EPIST-1/D-005/
+the brief contract/the knowledge model, zero factual drift), the
+instrument half routed with zero build-grade items: the 7 gaps decompose
+(five PROVEN as landed instruments — the M-family, `payoff_latencies`,
+M4, mechanics trace/why/blast, the AP-9 spine, the director's
+door-construction; one PARTIAL — breadcrumb density's recovery half is
+since-1's own standing row); the NQ vocabulary and the NLAW-* family
+refused as second label sets (D-024); the AP-01..AP-10 anti-pattern
+numbering collides with the standing live-char crosswalk AP family —
+the genuine new finding, the anti-patterns route as the block's
+verdicts; the 12-iteration program decomposes onto standing instruments
+and owner-gated rows (the standalone audit docs refused); the 8
+fixtures map onto the committed corpus (F8 = since-1). The five
+uncovered GDC sources enter REFERENCES §10 (the intake-8/9/10
+precedent). The methodology document confirmed as a re-derivation of
+the standing intake discipline; its two named research files stay
+outside (not uploaded this session). D-156; the block: phases.md §6's
+intake-15. Detail: worklog iter-121 + git.
+
 ### iter-120 · intake-14 — the causal-architecture research bootstrap routed — done (doc-only, the owner's research call)
 
 The routing verdict set — the doctrine half confirmed (intake-13's own
