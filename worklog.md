@@ -13,6 +13,57 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-129 · 2026-09-18 · intake22 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» research call over the
+uploaded ComfyUI/modularity consolidated report (5 files doc-only,
+zero code, zero corpus price — the D-155..D-162 intake precedent;
+the method file itself external per the convenience-copy law)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 309aa17,
+  Python 3.12.14 the env pin) — from a REAL clone (BASE_COMMIT
+  309aa17, 180 commits: the report's own access record notes most
+  consolidated sessions DNS-failed; its disputed BASE_COMMIT item
+  resolves here); the repo-facing claims verified claim-by-claim:
+  3 packs, 38 core/ modules + sim/systems reserved,
+  test_architecture's boundary, mechanics matrix/trace/why/blast
+  (no viz subcommand — the report's tooling-gap claim accurate),
+  pack_doctor/balance_harness, PACK_SPEC's zero-engine-change
+  criterion + the copy-from/abstract DSL, D-149's 14m24s reskin,
+  engine-1/presentation-1/roads-1/pack-3/pack-4 standing, L13/L11,
+  the dumb-terminal law, the D-055 file protocol
+- the sharpened finding: rules.json's systems reads/writes DAG
+  covers the NINE original passes (time/position_visibility/
+  relations/knowledge/states/fire/crime_watch/director/notes) —
+  the newer families (weather/travel/echo/traits/cultures/names/
+  budget + macro/lod/factions wiring) declare heterogeneous
+  top-level blocks + per-family lint + code-owned wiring: the
+  report's "mechanics modularity" gap CONFIRMED at the form level
+- the verdict set (the method's four questions + combined design):
+  node-graph-as-runtime rejection CONFIRMED (INV-1/2 + VISION §7 +
+  the no-second-engine law); the replaceability formula OWNED
+  zero-drift (D-055 family + dumb-terminal + L11); code/authoring
+  modularity OWNED; the minimal system contract HYPOTHESIS (parked
+  on the modularity consult card — the 3..5 system decomposition
+  the named verification, engine-1/presentation-1 the consumers,
+  no new row); the viz rides mech-2; the ComfyUI lesson
+  principle-level CONFIRMED (explicit attachment points +
+  contracts-before-perimeter = the doors + the admission lint), no
+  donor registration; the v5 method file FULLY INTERNALIZED
+  (intakes 14..21 the evidence) — nothing left to adopt from it;
+  the report's six disputed items resolved (the block's
+  micro-drifts)
+- docs: phases.md §6 the intake-22 block (the verification map +
+  the verdict table + the modularity consult card), DECISIONS
+  D-163 (42 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse), TASKS the iter-129
+  section, STATUS re-pin + Next step (mech-2 now also carrying
+  intake-22's viz-export form), this entry (iter-119 evicted per
+  the cap, verified in this edit; 10 held). The build queue
+  untouched — nothing unpins, nothing reorders. Doc-only. Caps:
+  DECISIONS 42 rows / phases ~2740 — over-cap files ride the
+  documented §6.1 substance precedent (the intake blocks are the
+  engine-1 consult material), trim at the next gate collapse
+---
 iter-128 · 2026-09-18 · intake21 — the owner's «используя
 research_method_v5.md => разберись что перенять можно, дополнить
 или улучшить… долгосрок важен и качество» research call over the
@@ -421,44 +472,4 @@ D-150 intake precedent, one family)
   DECISIONS 65 (34 rows) / phases 1696 — over-cap files ride the
   documented §6.1 substance precedent (the intake blocks are the
   engine-1 consult material), trim at the next gate collapse
----
-iter-119 · 2026-09-13 · world2c — the cultures half, the owner's fresh
-call «начинай работу по планам, что осталось незакрытого и логичнее
-всего было бы начать сейчас то и делай» (the iter-117/118 precedent
-phrase; STATUS Next step's own readiness pick — slice 2 the natural
-next pick, D-153's wave plan, D-154)
-- verified BEFORE working (1707+1 green, ruff clean, HEAD ebf464e,
-  Python 3.12.14 the env pin); re-verified after — 1726+1 green
-  (+15 tests/test_cultures.py, +4 the T1 province pins, +3 stoplist
-  words), ruff clean; zero corpus price outside the province (the
-  tavern/road corpora byte-untouched; the province's own golden
-  fixture regenerated — the additive delta: +1 condensation, +6
-  traveler decays, 32→39 events, fingerprint 0)
-- content: the two name-1 profiles (lowland_soft the river tongue vs
-  hill_hard the croft tongue — name-1's FIRST committed arming, the
-  posture made checkable), the condensation travelers (grp_road_traffic
-  anchored on the load road, three generated_name members, the first
-  beat materializing them at t=360 — the drawn names
-  Sathranthaem/Wathru/Drist), the cultures block (the budget-block
-  precedent: profile binding, custom vocabularies, the prohibition
-  sets, the members), the budget re-declare (npcs 7-12, the cast at
-  10), story_critical += road_musters, the tier template pair
-  (road_counts/road_musters, the {names?...} branch law)
-- core: `core/pack.py` _cultures (the shape, the anti-rot vocabulary
-  walk, the culture↔name keying, the one-culture law, the AP-8 member
-  binding) + the AP-8 consumed union in _live_char (the prohibition's
-  flaw joins the set — the crosswalk's THIRD consuming family, landed
-  on its own trigger); tests: test_cultures.py NEW (the refusals +
-  the consumed-union green twin — a crafted spine consumed by the
-  prohibition ALONE), the T1 pins (the first-beat condensation, the
-  born-names tale line, the tongue posture, the committed instance),
-  PROVINCE_STOPLIST +3 (drover, peddler, wergeld)
-- docs: DECISIONS D-154 (33 rows — over the 30 cap on the §6.1
-  substance precedent until the next gate collapse), TASKS (slice 2
-  flipped + the iter-119 section), STATUS re-pin + Next step (slice 3
-  the triangle the natural next pick), PACK_SPEC (§3/§4/§5/§6 the
-  cultures block + the AP-8 prohibition surface), NAV §1 + README (the
-  province_pack rows re-pointed), this entry (iter-109 evicted per the
-  cap, verified in this edit; 10 held); 14 files (13 modified + 1 new,
-  re-counted against the worktree delta)
 

@@ -26,6 +26,38 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-129 · intake-22 — the ComfyUI/modularity consolidation research routed: the report's verdict set re-verified at a real clone, the six disputed items resolved, the mechanics-modularity residue parked as the modularity consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `canonsim_модульная_архитектура.md`
+(a CONSOLIDATED META-RESULT: several sessions' verdicts over the
+ComfyUI/node-graph question, most of which DNS-failed at clone —
+this session verified from a real clone, BASE_COMMIT 309aa17,
+180 commits; the external text and the method file stay outside
+the repo, the convenience-copy law). Every load-bearing claim
+verified at HEAD (the verification map in the block): the
+repo-facts half zero-error; the DAG claim's scope SHARPENED —
+`rules.json::systems` reads/writes covers the nine original
+passes, the newer families (weather/travel/echo/traits/cultures/
+names/budget) declare heterogeneous blocks. The verdict set:
+node-graph-as-runtime CONFIRMED-rejected (standing law
+re-derived); the replaceability formula OWNED zero-drift (the
+D-055 family + the dumb-terminal law); the three-senses frame:
+code/authoring OWNED, mechanics PARTIAL; the minimal system
+contract + the agent-speedup claim HYPOTHESIS (the 3..5 system
+decomposition the named next verification — parked on the
+modularity consult card, engine-1/presentation-1 the consumers,
+NO new row per the first-consumer law); the DAG viz rides
+mech-2's next touch; the ComfyUI lesson principle-level
+CONFIRMED, no donor registration; the v5 method file fully
+internalized (intakes 14..21 the evidence — nothing left to
+adopt). The report's six disputed items resolved (the block's
+micro-drifts). Zero build-grade items; the queue untouched.
+Landed: D-163 + phases.md §6's intake-22 block (the verification
+map + the verdict table + the card) + STATUS/worklog rows.
+Detail: D-163 + worklog iter-129 + git.
+
 ### iter-128 · intake-21 — the unified-observatory / worldbuilder / agent-gateway research routed: the four-question observability frame adopted as the consult card, the counterfactual + postmortem sharpenings routed to their standing carriers — done (doc-only, the owner's research call)
 
 The owner's «используя research_method_v5.md => разберись что

@@ -2580,6 +2580,121 @@ in the document's repo-facing claims. Landed: D-162 + this
 block. The build queue UNTOUCHED — nothing unpins, nothing
 reorders; zero build-grade items.
 
+The ComfyUI / modular-architecture consolidation research
+routed (intake-22, D-163 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» call over the uploaded
+`canonsim_модульная_архитектура.md` — the CONSOLIDATED
+multi-session report over the ComfyUI/node-graph question; the
+D-155..D-162 intake precedent, the consult posture: the external
+text and the method file stay outside the repo, every
+load-bearing claim verified against HEAD 309aa17 — 1726+1 green,
+ruff clean; where the report's own access record states most of
+its consolidated sessions DNS-failed at clone, THIS session
+verified from a real clone, BASE_COMMIT 309aa17, 180 commits on
+`main`). Where intakes 14..21 each routed one fresh agenda, this
+one routes a META-RESULT: the report is itself a reconciled
+verdict set — the session's value is the verification against a
+real HEAD, the sharpening of its one open claim, the resolution
+of its six disputed items, and the routing of the surviving
+residue. The verification map (the report's repo-facing facts,
+claim by claim):
+
+| The report's repo-facing fact | Verified at HEAD 309aa17 |
+|---|---|
+| Deterministic event-sourced core (fold(log), the one canon-write path, the queue key, the named RngBank streams) | INV-1/INV-2 law + the T1/T2 suite; 1726+1 green |
+| Content fully modular (three packs; the second-pack criterion; modding measured) | `content/{tavern,road,province}_pack/`; PACK_SPEC's "second pack requires zero ENGINE changes" (§ the pack-3 mapping note); the reskin day D-149 — 14m24s, zero core edits, git-verified at iter-112 |
+| Core split into single-owner modules; `sim/systems/` reserved; the core↛sim boundary | 38 `core/` modules; `sim/systems/__init__.py` the empty reservation; `tests/test_architecture.py` the boundary test (D-031/D-037) |
+| The Systems DAG as data (reads/writes in rules.json, ambiguity fails at load) | TRUE with a SHARPENED SCOPE — `rules.json::systems` carries reads/writes for the NINE original passes (time, position_visibility, relations, knowledge, states, fire, crime_watch, director, notes); the newer families (weather, travel, echo, traits, cultures, names, budget + the macro/lod/factions wiring) declare heterogeneous top-level pack blocks + per-family lint + code-owned wiring — the uniform form does NOT cover them |
+| CLI observability (matrix/trace/why/blast; pack_doctor; balance_harness) | verified — the four subcommands at `scripts/mechanics.py`; NO viz subcommand exists (the report's tooling gap accurate at HEAD) |
+| Kernel↔periphery split (stdlib-only, ports, the abstraction gate; frontend-agnostic, dumb terminal; the file protocol) | BLUEPRINT L13/L11; VISION the dumb-terminal law + §7's overrated theses; the D-054/D-055/D-062 file-contract family |
+| Presentation in the backlog, owner-gated | `engine-1` + `presentation-1` (TASKS), `roads-1`/`res-1`/`pack-3`/`pack-4` standing — the rows live in TASKS.md, STATUS's Next step pins the ORDER (the report's "STATUS.md among the rows" is the drift, below) |
+| The pack-DSL growth paths (abstract + copy-from, per-category split, append-composition) | PACK_SPEC's inheritance sections (the D-142 guard family) |
+
+The verdict set (the method's four questions + the combined
+design, the FACT/INFERENCE axis kept separate from disposition):
+
+| The report's finding | Repo form (principle → form → quality/transfer) | Disposition |
+|---|---|---|
+| Node-graph as RUNTIME — rejected | principle: a graph runtime either breaks `state = fold(log)` or wraps resolvers in nodes (graph for graph's sake); the execution-order contract lives in DATA (the queue key + the pack-side DAG lint) — a UI-side duplicate is a second truth; form: INV-1/INV-2 + the queue laws + VISION §7's "engine fits any world" row + the no-second-engine law (the D-116/D-147 family); transfer: none wanted | CONFIRMED — the report's rejection re-derived from standing law, zero drift |
+| The replaceability reframe (canonical engine → explicit contracts → projections/protocols → interchangeable editors/debuggers/frontends/agents) | principle: the ComfyUI effect worth keeping is ARCHITECTURAL REPLACEABILITY, not visual execution; form: the D-055 file-contract family (A narrator, C parser, presentation-1 the fourth instance) + the dumb-terminal law + L11 everything-rebuildable + the BLUEPRINT ports; quality: the file protocol carried phases 1..2 to their gates; transfer: the SoW frontends, the agent gateway (intake-21 §10 CONFIRMED), mode G's pack drafting | CONFIRMED — OWNED (the report's target formula restates the standing shape) |
+| Three senses of modularity (A code / B mechanics / C authoring) | A: owned — single-owner modules, the stoplist, the boundary test; an `AbstractSystem`/plugin layer is L13's textbook violation (the report's own Do-not list re-derives it); C: owned-as-direction — presentation-1/bg-6/the SoW horizon; B: the genuine open question — the asymmetry verified above | A/C OWNED; B PARTIAL — the residue carrier (the card below) |
+| The minimal system contract (identity + inputs/outputs + events in/out + RNG streams + pack surface + validation + diagnostics) | principle: a contract shrinks an agent's reasoning space by DECLARING the module's blast radius; form: the pieces exist per family — the DAG half (`systems` reads/writes), the RNG half (the RngBank stream families), the events half (the provenance family + the closed event vocabulary), the validation half (the admission lint + per-family lint), the diagnostics half (mechanics matrix/trace/why) — the UNIFORM per-system expression does not; quality: UNMEASURED — 128 iterations green without it, and the dev-time gateway (AGENTS.md + the reading gradient + mechanics.py + the stoplist) is the standing restrictor (intake-21 §10); transfer: the engine-1/presentation-1 spec writes, any future mechanic family; combined design: the report's own minimal shape (never manifest/lifecycle/plugin ABI) + the decomposition BEFORE any formalization | HYPOTHESIS — the 3..5 system decomposition (the report's list: weather/travel/factions/worldgen/knowledge) is the named next verification; parked on the card; NO new row (the first-consumer law) |
+| The DAG visualizer (`mechanics.py viz` — Graphviz/Mermaid over rules.json) | principle: the graph is a PROJECTION of the pack, never a runtime; form: `matrix` already renders the wiring as a table; quality: no consumer named at HEAD; transfer: the engine-1 consult material; combined: rides mech-2's touch alongside intake-21's postmortem | REJECTED as a now-build — rides mech-2 IF a consumer names it; zero build-grade |
+| Continue pack-ci/qa-1; wait on engine-1/presentation-1; never self-open a phase/gate | owned: D-152's admission rungs live; qa-1/ci-1 standing; the rows owner-gated | CONFIRMED — OWNED |
+| The ComfyUI lesson (registration-based extension layer; the late subgraph/scope boundary debt) | principle: modules attach at EXPLICIT declared points, never core patches — and contracts must exist BEFORE the perimeter grows; form: the doors + the admission lint + hooks-as-data already practice it (the 2-place schema sync, load-time lint, per-family lint at landing time); quality: derived independently here — the lesson CONFIRMS the practice and adds the caution; transfer: the contract-formalization question (the card); ComfyUI is NOT a registered donor (REFERENCES = the owner's survey catalog) | CONFIRMED at the principle level — no donor registration (the owner's catalog policy; a deep-dive would restate owned law) |
+| The method file itself (research_method_v5.md — what to adopt into the repo) | the v5 checks (the four questions + combined design, the FACT-vs-disposition axes, the reconciliation routing, the evaluation order, the hard limits) ARE the standing intake practice — intakes 14..21 the evidence (the verdict-table shape, the consult cards, the zero-build + queue-untouched laws); §6.1's two co-read files were routed (intake-17/18, the cross-synthesis CLOSED note) | CONFIRMED — OWNED, fully internalized; the file stays external (the convenience-copy law); nothing left to adopt from it |
+
+**The modularity consult card** (the crystallized residue —
+PARKED; the engine-1/presentation-1 spec writes and any future
+contract/plugin question read this BEFORE proposing a layer;
+each line cites its owner, nothing restates):
+
+1. **The three senses stay separate**: code modularity is DONE
+   (single-owner modules; `AbstractSystem`/`PluginManager`/
+   lifecycle/DI is L13's textbook violation); authoring
+   modularity is the SoW rows' own (presentation-1/bg-6,
+   owner-gated); mechanics modularity is the only open third.
+2. **The verified asymmetry**: the `systems` reads/writes DAG
+   covers the nine original passes; weather/travel/echo/traits/
+   cultures/names/budget declare their own top-level blocks +
+   per-family lint. A decomposition COUNTERS what is already
+   declarative per family before proposing any unification.
+3. **The minimal contract shape** if the decomposition ever
+   runs: identity + reads/writes + events in/out + RNG streams +
+   pack surface + lint + diagnostics — never lifecycle, never a
+   plugin ABI, never hidden callbacks (the report's Do-not list
+   = L13 + the D-116/D-147 family verbatim; a module never
+   creates RNG, writes the log directly, mutates others'
+   projections, or changes execution order — the P0 surface).
+4. **The agent-speedup claim is a HYPOTHESIS** with a named
+   experiment (3..5 systems); the standing restrictor is the
+   dev-time gateway itself (AGENTS.md + the gradient +
+   mechanics.py + the stoplist); a contract layer must BEAT it
+   by measurement, never by plausibility (the method's
+   form-only ≠ PROVEN law).
+5. **The ComfyUI caution**: contracts BEFORE the perimeter
+   grows — the repo's own form is the landing-time lint (every
+   new mechanic family lands its pack-block lint with it, the
+   cultures/budget precedent), never a retrofit.
+6. **The graph is a projection** (rules.json → the DAG → any
+   view); the viz export rides mech-2's next touch if a
+   consumer names it — never a runtime, never a second truth.
+
+Refused at the door (the report's own cut list, confirmed
+against repo law): no PluginManager/ModuleBase/AbstractSystem/
+lifecycle framework/DI/100-field manifest (L13); no node-graph
+runtime, no second engine (INV-1/INV-2, the D-116/D-147
+family); no module-side RNG creation, direct log writes,
+cross-projection mutation, hidden callbacks, order changes (the
+P0 surface); no new viz row or build (the first-consumer law;
+research does not build); no ComfyUI donor registration without
+the owner's survey call; no queue reordering, no phase/gate
+opening.
+
+Micro-drifts (the report vs HEAD 309aa17): (a) its 171-commit
+count was an earlier-HEAD snapshot — 180 at BASE (its own
+disputed item #6, resolved as drift, not error); (b) the
+owner-gated rows live in TASKS.md with STATUS's Next step
+pinning the ORDER (the report's "STATUS.md among the rows"
+wording); (c) its weather example (`reads: [macro_tick,
+pack.weather]`…) is the PROPOSED contract form, not a HEAD form
+— the actual shape is the pack's `weather` block
+(event_type/initial/states) + `core/weather.py`'s own constants
++ the one-gate law; (d) its DAG claim's scope sharpened to the
+nine original passes (above). No factual errors found in the
+document's repo-facing claims. The report's six disputed items
+resolved: the verdict-formulation split (1) by the table form
+(per-finding dispositions, no single-word verdict); BASE_COMMIT
+(2) by this session's real clone; the viz disagreement (3) by
+the research-does-not-build law + the mech-2 ride; the
+authoring-modularity centrality (4) — the reframe re-derives
+standing law, the center of gravity stays the owner-gated SoW
+rows; the contract-benefit confidence (5) stays HYPOTHESIS (the
+honest label, the report's own admission); the commit count (6)
+drift. Landed: D-163 + this block. The build queue UNTOUCHED —
+nothing unpins, nothing reorders; zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
