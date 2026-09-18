@@ -13,6 +13,63 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-126 · 2026-09-18 · intake19 — the owner's «отработай по
+второму файлу» research call over the uploaded persistent-groups
+/ settlement-development research task (5 files doc-only, zero
+code, zero corpus price — the D-150/D-155/D-156/D-157/D-158/D-159
+intake precedent)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 2b168e9,
+  Python 3.12.14 the env pin); every load-bearing brief claim
+  verified against HEAD: the groups module (the member_of door,
+  the tiers, the tombstone — core/groups.py), the factions walk
+  (the ratio formula reading the LIVE fold — core/factions.py),
+  the transitions engine (the generic layer machinery —
+  core/transitions.py), the weather erosion family
+  (core/weather.py), the knowledge system (channels/fidelity/
+  salience/transfer decay — core/knowledge.py), the on_action
+  dispatch (core/onaction.py), the intent door + the resolvers
+  (core/intent.py, core/resolvers.py — the ignite resolver's
+  layer-blind ignition), the LOD zones + the macro clock
+  (core/lod.py, core/macro.py), the resume door + the cursor
+  (core/loop.py, core/cursor.py), the fold's entity law
+  (apply_event rejects unknown ids — the st-5 boundary)
+- ONE fresh probe RE-DERIVED by a read-only sandbox driver
+  outside the repo (Rule 9): a tavern_pack copy carrying the
+  settlement vocabulary as PACK DATA (a second transitions layer
+  `build`, a tier-armed group, a faction goal, an on_action
+  witness reaction, an erosion rule, a buildable location + tool
+  + witness NPC, a `raise_timber` action over the EXISTING ignite
+  resolver) — passed the FULL pack-ci admission lint, zero core
+  edits, seed 7 twice byte-identical; the measurements: the
+  construction chain incl. the MID-BUILD DEPARTURE (the whole
+  chain firing after the PC left at t=59), the group tiers (the
+  cold aggregate, the condensation's member_of births + the
+  tombstone, the census), the group as actor through the one
+  door, the visibility chain (the lone witness / the blind NPC
+  at zero records / the one-hop reaction / the telling at
+  fidelity vague), the erosion counter-event (usable reverted,
+  the irreversible camp_finished survived), the resume door
+  byte-identical at a clean drain boundary (the edge finding:
+  a split inside an autonomous silent tail shifts the session's
+  next feed tick), the scale twin (50 groups / 100 unborn / 5
+  crossings = 250 aggregate lines, 3 per-member events)
+- the verdict set: the scaffold PROVEN (group/party/construction/
+  visibility/pack-independence/determinism/scale), group
+  dimensions mostly over-modeling, disagreements REJECTED as
+  first-class mechanics, claims/legitimacy UNKNOWN-DEFERRED;
+  the genuine gaps ALL own standing rows (st-5, res-1, world-2
+  L2 slice 3/4, the membership writer / companion-1); zero
+  build-grade items, the queue untouched
+- docs: phases.md §6 the intake-19 block (the §1–§18 verdict
+  table the research's own required form), DECISIONS D-160, TASKS
+  the iter-126 section, STATUS re-pin + Next step, this entry
+  (iter-116 evicted here, verified against git in this edit;
+  10 held); 1726+1 green, ruff clean after. Caps: STATUS 599 /
+  TASKS 1193 / DECISIONS 71 (39 rows — over the 30 cap on the
+  §6.1 substance precedent until the next gate collapse) /
+  phases 2404 — the over-cap files ride the documented §6.1
+  substance precedent, trim at the next gate collapse
+
 iter-125 · 2026-09-18 · intake18 — the owner's «отработай по
 второму файлу» research call over the uploaded player-decision
 mechanics research brief (the methodology document's §6.1
@@ -388,38 +445,3 @@ cheap candidate, D-152)
   next gate collapse), TASKS the pack-ci flip + iter-117, STATUS
   re-pin + Next step, this entry (iter-107 evicted, verified in this
   edit; 10 held)
-
-iter-116 · 2026-09-13 · gate6 — the phase-6 gate review, the
-owner's convening gate call «давай уже свой гейт-колл 6 фазы или что
-там, приступай к работе и незакрытым задачам» (7 files doc-only, zero
-code, zero corpus price — the gate session's own form, ROADMAP §5 +
-the doc debts riding it)
-- verified BEFORE working (1668+1 green, ruff clean, HEAD d4ec8dd,
-  Python 3.12.14 the env pin); re-verified after — same numbers, zero
-  runtime surface touched. The §5 evidence: playscripts byte-green
-  (plumbing_smoke + road_smoke vs their committed fixtures — the road
-  side's T1 twin; the header commit field the only delta, '0000000'
-  per the T1 law); the seed-125 pair ON M1=0.518/M2=0.200 (56 events
-  — iter-102's numbers exact) / OFF T8 24 chains, M5 0.849; T7 both
-  chronicles read as stories; no kill hit — the module contract proven
-  right (D-149's zero core edits)
-- the verdict: PASS, D-151 — ROADMAP §2 flipped CLOSED, the ladder
-  complete (phases 0..6); the open build rows stay owner-gated; the
-  §5 step-6 staleness pass: REWORD AGENTS §1's phase frame + the FAQ
-  cap-laws entry, KEEP the rest, DROP none
-- the doc debts paid: DECISIONS 44→30 (D-034 — D-142/143/144 folded
-  into D-145, D-137/139/140/141 one row, D-138 into D-076/081, D-062
-  into D-054/055, D-079 into D-004/028, the intakes 11..13 + D-146/
-  149/151 into the families); STATUS tombstones trimmed + FAQ resync
-  (639→554); TASKS 1251→892 (iter-103..115 collapsed to one-liners);
-  README 826→184 (the Status section collapsed to per-phase gate
-  summaries)
-- phases.md 1536 / TECH_NOTES 773 / TEST_PLAN 772 stay over cap ON
-  SUBSTANCE (§6.1): the cruft pass ran (the filler scan: 2 hits, both
-  load-bearing measured-fact contrasts; the structural review — the
-  per-phase architecture, the engine-1 consult blocks, the measured
-  records are those files' own function); pre-trim history in git
-- docs: ROADMAP §2, DECISIONS D-151 + the collapse, AGENTS §1, TASKS
-  iter-116 + the collapse, STATUS re-pin, README, this entry (iter-106
-  evicted here, verified in this edit; 10 held); 1668+1 green, ruff
-  clean after

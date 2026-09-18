@@ -2214,6 +2214,127 @@ routes to the world-2 row's own evaluation half, the ORDER owner
 decides. Zero build-grade items: no engine, no subsystem, no
 schema change, no queue reorder, nothing unpins.
 
+The persistent-groups / settlement-development research routed
+(intake-19, D-160 — the owner's «отработай по второму файлу»
+research call over the uploaded `Research task — Persistent
+Groups, Camps, Settlements and Emergent Territorial
+Development.md`; the D-150/D-155/D-156/D-157/D-158/D-159 intake
+precedent, the consult posture: the external text stays outside
+the repo, every load-bearing claim verified against HEAD 2b168e9).
+The research asked whether persistent player-created groups and
+player-driven territorial/settlement development are a natural
+extension of the causal/event-driven architecture — not a set of
+special subsystems — and what minimal universal substrate they
+actually need. ONE fresh probe RE-DERIVED the whole surface
+through the public API (the sandbox driver outside the repo, Rule
+9): a tavern_pack copy carrying the settlement vocabulary as PACK
+DATA — a second transitions layer `build`, a group with the tier
+keys, a faction goal, an on_action witness reaction, an erosion
+rule, a new buildable location + tool item + witness NPC, a
+`raise_timber` action over the EXISTING ignite resolver — passed
+the full pack-ci admission lint (M0: the settlement surface is
+legal pack data, zero core edits) and ran seed 7 twice
+byte-identically. The measurements:
+
+- **M1 — construction as causal state (the fire chain re-declared
+  as a second layer):** `timber_raised` (the player verb,
+  cause-chained) → `build_started` (the spot birth
+  `build.palisade: None → under_construction`, irreversible) →
+  `build_spread` ×2 (the stochastic per-tick promotion — partial
+  completion) → `structure_raised` (the SEEDED `usable` follow-up
+  at t+15) → `camp_completed` (the halt flag at t+30,
+  irreversible). The PC DEPARTED at t=59 mid-build; the entire
+  chain (spread, usable, completed) fired after the departure —
+  construction continues on world rules, never player presence.
+- **M2 — the group tiers:** the cold aggregate `company_counts`
+  (population 2, actor = the group id) at the crossing while the
+  PC stood two steps away; the condensation `company_musters` at
+  the warm-ring crossing (BOTH members' `member_of` births + the
+  write-once tombstone); ZERO aggregates after the tombstone; the
+  cold census `[1, 4, 4, 4, 4]` riding the year turns.
+- **M3 — the group as actor:** five events with actor =
+  `grp_company` — the two tier events plus three faction-goal
+  `wait`s through the front door (`cause_intent: faction_0000`),
+  fired at crossings while the PC was elsewhere. Group-level
+  intent and member-level intent (the urgencies) ride the SAME
+  door — one mechanism, never two.
+- **M4 — visibility:** the build's knowers = the witness NPC
+  alone (`same_location` minus the cause actor); the drunk two
+  rooms away holds ZERO records (the blind-NPC law live at
+  settlement scale); the `on_action` witness reaction fired
+  (fear 0→5, one hop); the telling chain delivered the fact to
+  the returning PC at fidelity `vague` (partial → decayed one
+  step, channel `told`).
+- **M5 — decay:** the rain crossing seeded the erosion; the
+  counter-event at t+20 reverted `usable: True → False` (the
+  works weathered while the PC was away) while the irreversible
+  `camp_finished` survived — EVENT_SCHEMA §4's revert law live.
+  The final fold: the camp's derived state = three spot props +
+  `usable: False` + `camp_finished: True`; the watchman's
+  `member_of`; the tombstone — settlement state IS the fold.
+- **M6 — determinism + the resume door:** two whole runs
+  byte-identical; the split run (interrupted after the arrival,
+  before the build, at a clean drain boundary) byte-identical to
+  the whole. One honest edge finding: a split taken INSIDE an
+  autonomous silent tail shifts the next step's feed tick (the
+  pipelined batch feeds at the step's own completion tick; the
+  session feeds at the drain-end clock) — the resume law's
+  equivalence class is the clean drain boundary, D-139's own
+  record; a live-session semantic, not a determinism breach.
+- **M7 — scale (a second probe):** 50 cold groups / 100 unborn
+  members over 5 crossings = 250 aggregate lines (one per group
+  per crossing), 3 per-member events total (their own warm-zone
+  urgencies, never the group machinery), 294 log lines for the
+  200-tick run — the D-112 cardinality law measured at
+  settlement count: O(groups × macrobeats), never
+  O(members × ticks).
+
+The verdict set (the brief's own §1–§18 domains; the
+FACT/INFERENCE axis kept separate from the disposition):
+
+| Domain | Existing primitive | Probe evidence | Disposition |
+|---|---|---|---|
+| Persistent group / party | the group entity (one id, all tiers — D-112); the `member_of` door (join/leave/transfer, fold-validated, test-pinned); the tiers; the faction goal walk; per-member urgencies | M2 + M3 end to end | PROVEN as scaffold (pack-declared group + runtime membership); the player-FOUNDED entity MISSING — `apply_event` rejects unknown entities, the mint is st-5's entity-birth row; the membership VERBS (recruit/dismiss) missing — the door is open, no resolver writes it, one mechanic away (companion-1 / the first consumer) |
+| Party→caravan→…→settlement population on ONE primitive | the anchor + members + tiers + the door — no specialization surface anywhere | the same group record served aggregate, condensation and door actor | CONFIRMED — a `PartyEngine` = SHOULD-NOT-ADD (L13; the named anti-candidate family) |
+| Group dimensions (risk/greed/mobility/…) | per-entity status axes (D-006) + pair relations (P2a) + derived reads (L3) | the faction formula read the LIVE fold | MOSTLY over-modeling — each candidate must name its observable (L1); mobility is the anchor position (derived); the KeeperRL small formula is the anti-psychology-engine precedent |
+| Group disagreements as first-class mechanics | goals/resources/relations consequences | — | REJECTED — stay ordinary consequences (the brief's own minimal-model preference; the crime chain is the measured instance) |
+| Construction lifecycle | the transitions engine (spot births, spread, follow-ups, halt, blocked_by) + counter-events + the erosion family | M1 + M5: the full chain incl. mid-build departure | PROVEN — the fire chain IS the construction state machine; `planned`= `spot_available`, `usable`/`completed` = follow-ups, `damaged`/`abandoned` = counter-events/erosion |
+| Settlement as derived state (no level ladder) | L3 folds; locations.flags; claims; the census | the final camp fold | CONFIRMED — `castle` = a derived classification, never an entity type |
+| Settlement dimensions (food/trade/defense/…) | res-1's declared shape (source→flow→sink); the alarm/on_action; pair axes; the knowledge system | the probe's security/visibility/reputation halves | PARTIAL — the economic half rides res-1 (owner-gated, unchanged); every proposed meter owes the causal-justification test (L1) |
+| Externalities | the reaction cascade + knowledge propagation + res-1's flows | the one-hop gossip + the telling | PARTIAL — the propagation machinery is universal; the price/scarcity half is res-1's own row |
+| Visibility / information propagation | the knowledge system (channels, fidelity, salience, transfer decay, drift, expectations) | M4: blind/witness/told, fidelity decay | PROVEN as substrate — a `SettlementDiscoverySystem` = SHOULD-NOT-ADD (the per-knower index is the universal form) |
+| Claims / ownership / control / legitimacy | position + presence (physical); pair relations + pack events (contested claims as relations) | — | UNKNOWN / DEFERRED — no canonical claim state, none demonstrated needed; L3 favours derived control; world-2 L2 slice 3 (the triangle's overlapping loyalties) is the natural first consumer, the ORDER owner decides |
+| Conflict escalation ladder | the door + the cascade + leverage + the crime chain (arrest) + the director | intake-18's census (the same surfaces) | PROVEN as the standing shape — each rung is a pack-declared reaction/goal, never a scene graph; the anti-magnet law is L1 + D-005 |
+| NPC-driven development | urgencies + factions through the door (an NPC goal whose verb IS the build action — expressible today); the erosion | the faction actor + the autonomous chain | PARTIAL — autonomous construction is pack authoring over landed mechanics; the "return to a changed place" beat measured in miniature (the works completed + weathered + told) |
+| Decay / abandonment / succession | the erosion family (SEEDED counter-events); irreversibility; the id-survival law; append-mode logs + checkpoints | M5 + M6b | PARTIAL — decay PROVEN; succession/inheritance = pack event vocabulary over the pair/member doors, no new mechanic named |
+| Content-pack independence | INV-3 + the admission lint | M0: the settlement passed pack-ci whole | PROVEN by construction — the named engines (Settlement/Party/Castle/Companion/BanditCamp) all = SHOULD-NOT-ADD |
+| Determinism / replay | INV-1/INV-2; draw-free tiers; SEEDED follow-ups; the cursor | M6a/M6b byte-identity | PROVEN |
+| Performance / scale | the cold tier + the census + the aggregates; the one-gate LOD | M7: 50 groups = 250 lines | PROVEN at the measured band — the distant settlement exists causally as counts, exactly the brief's requirement |
+
+The final architectural question — can the group, the camp and
+the fortress be manifestations of the same causal primitives —
+answers YES on the standing substrate: `group + place + the
+state-door + relations + knowledge + intents + events + the
+macro cadence` are all landed, `structure` IS the transitions
+layer (a mechanic, armed as data — M1), and the genuine gaps all
+own standing rows already: **st-5** (entity birth — the
+player-founded group/place), **res-1** (the material life of a
+settlement), **world-2 L2 slice 3** (the claim/legitimacy first
+consumer) + **slice 4** (the calendar), and the one
+mechanic-scale verb gap (the membership writer — a resolver
+family, companion-1's natural shape). The brief's §20 vertical
+slice is exactly the probe's chain extended by those rows:
+player forms a group (st-5) → divergent goals (factions +
+urgencies, landed) → group acts without player (landed) → camp
+(structures, landed) → another actor learns (landed) → external
+response (landed) → deterministic/replayable (landed) → no
+scripted scene (the standing law). Nothing in the finding
+rewrites that slice's order; its validation target status holds.
+Zero build-grade items: no engine, no subsystem, no schema
+change, no queue reorder, nothing unpins — the research confirms
+the architecture and routes its residue to the standing
+owner-gated rows.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

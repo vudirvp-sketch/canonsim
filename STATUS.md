@@ -1,62 +1,76 @@
-Iteration: iter-125 (`iter-125-intake18` — the player-decision
-mechanics research routed, the owner's research call
-«отработай по второму файлу» over the uploaded
-`RESEARCH_PLAYER_DECISION_MECHANICS.md`
-— the methodology document's §6.1 SECOND-named file, the owner
-call that intake-17's tail note awaited, closing the §6.1 pair;
-the D-150/D-155/D-156/D-157/D-158 intake precedent, doc-only):
-**the brief's seven candidate domains (time/timing, knowledge,
-social/suspicion, travel, resources, irreversibility,
-experimentation) verified at HEAD 29b931b, three fresh
-measurements RE-DERIVED by a read-only probe through the public
-API (day1_full seed 125 — the decision-loop census: 56 events
-over 8 player steps, 13 PC knowledge records, 15 suspicion
-deltas, 5 leverage mints, the epistemic loop end to end incl.
-the drunk's coerce rejected at the same door for leverage; the
-removal test executed literally — minus steal 56→31 events,
-ALL social-risk deltas vanishing while the arson chain
-survives; minus the final wait, the ending loses the t=1080
-watch handover — waiting never empty; province_smoke seed 42 —
-the derived legs 705/660/405/345, 14/14 PC records born on the
-five waypoint arrivals, the t=3240 transfer mid-leg). The
-verdict set: knowledge PROVEN as substrate (the "most
-distinctive layer" hypothesis INFERENCE + PARTIAL —
-compellingness not decidable in track A, presentation-1 the
-SoW-horizon owner), social/suspicion PROVEN (the v0 crime
-chain; the faction half awaits world-2 L2 slice 3),
-travel/geography PROVEN (the L1 instrument + the province
-surface; dynamic route state the space-pack return + res-1 per
-intake-17), irreversibility PROVEN as law + live stakes,
-time/timing PARTIAL (the pressure half measured; the informed
-half rides slice 4's calendar), experimentation PARTIAL (the
-dev instrument PROVEN, the player-facing feedback half
-presentation-1's), resources DEFERRED (res-1 owner-gated,
-unchanged). The brief's core model re-derives the standing
-architecture layer by layer (the intent door, the OCC anchor,
-the canon event, the per-knower records, the reaction cascade,
-the brief's scene_delta, the state-gated action surface); its
-Do-not list is L13/INV-3/the measured-collapse discipline
-verbatim. The §6.1 cross-synthesis with intake-17 CLOSED: ONE
-shared primitive (the door + the log + the brief), the states
-change actions/risks/costs/information at the mechanism level
-(measured), no new owner warranted. Zero build-grade items; the
-one genuine residue — the brief's next-decision test as an
-evaluation discipline for world-2 L2 slice 3's
-outcome-divergence experiment — routes to the world-2 row's
-own evaluation half, the ORDER owner decides ·
+Iteration: iter-126 (`iter-126-intake19` — the persistent-groups /
+settlement-development research routed, the owner's research call
+«отработай по второму файлу» over the uploaded `Research task —
+Persistent Groups, Camps, Settlements and Emergent Territorial
+Development.md`; the D-150/D-155/D-156/D-157/D-158/D-159 intake
+precedent, doc-only): **the brief's §1–§18 domains verified at
+HEAD 2b168e9, ONE fresh probe RE-DERIVED through the public API
+(a tavern_pack copy carrying the settlement vocabulary as PACK
+DATA — a second transitions layer `build`, a tier-armed group,
+a faction goal, an on_action witness reaction, an erosion rule,
+a buildable location, a `raise_timber` action over the EXISTING
+ignite resolver; zero core edits, the full pack-ci lint green,
+seed 7 twice byte-identical): the construction chain measured
+end to end incl. the MID-BUILD DEPARTURE (started → spread ×2
+→ usable → completed all firing after the PC left at t=59 —
+construction runs on world rules, never player presence); the
+group tiers (the cold aggregate while two steps away, the
+condensation's member_of births + the write-once tombstone,
+zero aggregates after, the census on the year turns); the group
+as actor through the one door (tier events + faction-goal
+waits, cause_intent faction_0000); visibility (the lone
+witness, the blind drunk at ZERO records, the on_action
+one-hop reaction, the telling at fidelity vague — partial
+decayed); decay (the rain's erosion counter-event reverting
+`usable` while the irreversible `camp_finished` survived —
+EVENT_SCHEMA §4 live); the resume door byte-identical at a
+clean drain boundary (the edge finding: a split inside an
+autonomous silent tail shifts the session's next feed tick — a
+live-session semantic, never a determinism breach); the scale
+twin (50 cold groups / 100 unborn members / 5 crossings = 250
+aggregate lines, 3 per-member events — the D-112 cardinality
+law at settlement count). The verdict set: the group/party
+scaffold PROVEN (one id all tiers; the member_of door
+join/leave/transfer; group-level and member-level intents
+through the SAME door; a `PartyEngine` SHOULD-NOT-ADD),
+construction lifecycle PROVEN (the fire chain IS the
+construction state machine — planned=`spot_available`,
+usable/completed=follow-ups, damaged/abandoned=
+counter-events/erosion; `castle` a derived classification),
+visibility PROVEN as substrate (a `SettlementDiscoverySystem`
+SHOULD-NOT-ADD), content-pack independence PROVEN by
+construction (the named Settlement/Party/Castle/Companion/
+BanditCamp engines all SHOULD-NOT-ADD), determinism/scale
+PROVEN; group dimensions mostly over-modeling (per-entity
+axes + pair relations + derived reads), group disagreements
+REJECTED as first-class mechanics (ordinary consequences —
+the brief's own minimal-model preference); claims/ownership/
+legitimacy UNKNOWN/DEFERRED (no canonical state demonstrated
+needed; world-2 L2 slice 3 the natural first consumer). The
+genuine gaps ALL own standing rows — st-5 entity birth (the
+player-FOUNDED entity: `apply_event` rejects unknown ids), res-1
+(the material life), world-2 L2 slice 3 + slice 4 (the claim
+consumer + the calendar), the membership writer (a resolver
+family, companion-1's natural shape). The final architectural
+question answered YES on the standing substrate (group + place
++ state-door + relations + knowledge + intents + events + macro
+cadence all landed; `structure` IS the transitions layer armed
+as data); the brief's §20 vertical slice is the probe's chain
+extended by those rows, its validation-target status holds.
+Zero build-grade items; the queue untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 29b931b — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 2b168e9 — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-18
-block), `docs/DECISIONS.md` (the D-159 row), `docs/TASKS.md` (the
-iter-125 section), `STATUS.md` (this re-pin + Next step),
-`worklog.md` (this entry; iter-115 evicted per the cap) — 5 files.
-The prior iteration's record: iter-124 (intake-17). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-19
+block), `docs/DECISIONS.md` (the D-160 row), `docs/TASKS.md` (the
+iter-126 section), `STATUS.md` (this re-pin + Next step),
+`worklog.md` (this entry; iter-116 evicted per the cap) — 5 files.
+The prior iteration's record: iter-125 (intake-18). The
 detail lives in TASKS + worklog + git.
 
 
@@ -532,13 +546,17 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-125 DONE: the player-decision-mechanics research routed
-(intake-18 — D-159 + phases.md §6's intake-18 block, doc-only,
-the build queue untouched: nothing unpins, nothing reorders;
-three fresh measurements re-derived at HEAD, zero build-grade
-items; the §6.1 cross-synthesis with intake-17 CLOSED — both
-§6.1-named files now routed, the methodology document's intake
-loop complete).** The L2 wave plan (D-153, TASKS world-2) owns
+**iter-126 DONE: the persistent-groups /
+settlement-development research routed (intake-19 — D-160 +
+phases.md §6's intake-19 block, doc-only, the build queue
+untouched: nothing unpins, nothing reorders; ONE fresh probe
+re-derived the whole surface at HEAD through the public API —
+a zero-core-edit settlement pack, the full pack-ci lint green,
+byte-identical determinism; zero build-grade items; the
+research's genuine gaps ALL own standing rows — st-5, res-1,
+world-2 L2 slice 3/4, the membership writer / companion-1).**
+The intake family's standing record: sixteen routed intakes
+(4..19), every queue-relevant verdict already owned by a row. The L2 wave plan (D-153, TASKS world-2) owns
 the remainder: slice 3 the triangle (its outcome-divergence
 experiment now carries intake-18's next-decision form — count
 divergent NEXT-DECISION surfaces, not only divergent event

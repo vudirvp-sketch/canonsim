@@ -26,6 +26,65 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-126 · intake-19 — the persistent-groups / settlement-development research routed: the substrate confirmed by a zero-core-edit settlement probe, the gaps routed to standing rows — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`Research task — Persistent Groups, Camps, Settlements and
+Emergent Territorial Development.md` (the external text stays
+outside the repo, the convenience-copy law). Every load-bearing
+claim verified at HEAD 2b168e9; ONE fresh probe RE-DERIVED the
+whole surface through the public API (the sandbox driver outside
+the repo, Rule 9): a tavern_pack copy carrying the settlement
+vocabulary as PACK DATA — a second transitions layer `build`, a
+tier-armed group, a faction goal, an on_action witness reaction,
+an erosion rule, a buildable location, a `raise_timber` action
+over the EXISTING ignite resolver — passed the full pack-ci
+admission lint (zero core edits) and ran seed 7 twice
+byte-identically. The measurements: the construction chain end
+to end incl. the MID-BUILD DEPARTURE (started → spread ×2 →
+usable → completed, all firing after the PC left — construction
+runs on world rules); the group tiers (the cold aggregate, the
+condensation's member_of births + the write-once tombstone, the
+census on the year turns); the group as actor through the one
+door (tier events + faction-goal waits); visibility (the lone
+witness, the blind NPC at ZERO records, the one-hop reaction,
+the telling at fidelity vague); decay (the erosion counter-event
+reverting `usable` while the irreversible `camp_finished`
+survived); the resume door byte-identical at a clean drain
+boundary (plus the edge finding: a split inside an autonomous
+silent tail shifts the session's next feed tick — a live-session
+semantic, never a determinism breach); the scale twin (50 cold
+groups / 100 unborn members / 5 crossings = 250 aggregate lines,
+3 per-member events — the D-112 cardinality law at settlement
+count). The verdict set over the brief's §1–§18 domains: the
+group/party scaffold PROVEN (one id all tiers; the member_of
+door; group-level and member-level intents through the SAME
+door; a `PartyEngine` SHOULD-NOT-ADD), construction lifecycle
+PROVEN (the fire chain IS the construction state machine;
+`castle` a derived classification), visibility PROVEN as
+substrate (a `SettlementDiscoverySystem` SHOULD-NOT-ADD),
+content-pack independence PROVEN by construction (the named
+Settlement/Party/Castle/Companion/BanditCamp engines all
+SHOULD-NOT-ADD), determinism/scale PROVEN; group dimensions
+mostly over-modeling, group disagreements REJECTED as
+first-class mechanics (ordinary consequences — the brief's own
+minimal-model preference); claims/ownership/legitimacy
+UNKNOWN/DEFERRED (no canonical state demonstrated needed;
+world-2 L2 slice 3 the natural first consumer). The genuine
+gaps ALL own standing rows: st-5 entity birth (the
+player-FOUNDED entity — `apply_event` rejects unknown ids), res-1
+(the material life), world-2 L2 slice 3 + slice 4 (the claim
+consumer + the calendar), and the membership writer (a resolver
+family, companion-1's natural shape). The final architectural
+question answered YES on the standing substrate — group + place
++ state-door + relations + knowledge + intents + events + macro
+cadence all landed, `structure` IS the transitions layer armed
+as data; the brief's §20 vertical slice is the probe's chain
+extended by those rows, its validation-target status holds.
+Zero build-grade items; the queue untouched. Landed: D-160 +
+phases.md §6's intake-19 block + STATUS/worklog rows. Detail:
+D-160 + worklog iter-126 + git.
+
 ### iter-125 · intake-18 — the player-decision-mechanics research routed: the A–G candidate verdicts verified, three measurements re-derived at HEAD, the §6.1 cross-synthesis closed — done (doc-only, the owner's research call)
 
 The owner's «отработай по второму файлу» call over the uploaded
