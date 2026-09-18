@@ -2335,6 +2335,132 @@ change, no queue reorder, nothing unpins — the research confirms
 the architecture and routes its residue to the standing
 owner-gated rows.
 
+The content-archetype / pack-strategy framework research routed
+(intake-20, D-161 — the owner's «используя research_method_v5.md =>
+разберись что перенять можно, дополнить или улучшить… долгосрок
+важен и качество» call over the uploaded `canonsim — Content
+Archetype, Pack Strategy & Capability Audit.md`; the
+D-150/D-155/D-156/D-157/D-158/D-159/D-160 intake precedent, the
+consult posture: the external text AND the method file stay outside
+the repo, every load-bearing claim verified against HEAD 362f167 —
+1726+1 green, ruff clean, all three committed packs load-green
+through the full admission lint). Unlike intakes 16..19 (mechanism
+researches), this document is a FRAMEWORK: it proposes a durable
+method for choosing, classifying and admitting future content —
+"which candidates provide new architectural evidence, which are
+reusable patterns or skins, what do they require, and which stay
+deferred." The reconciliation therefore runs over the framework's
+own §36 "what should become permanent" list (26 items), each
+checked per the method's four questions (principle / existing
+form / quality / transfer), with the combined-design question
+answered by ONE parked consult card (below). The capability truth
+table the document's §39.A asks for, verified at HEAD:
+
+| Mechanism family | Verified state | Classification |
+|---|---|---|
+| The v0..phase-5 columns: determinism (INV-2/T1), event sourcing (INV-1/T2), knowledge/known_by, relations, states/transitions, crime/watch, urgencies, director, traits, factions/objectives, weather chain+erosion, worldgen, names, macro clock, reflection, retrieval, importance/metrics/brief | the phase gates' own measurements (ROADMAP §2) | PROVEN |
+| The phase-6 pack surfaces: travel pricing (the road pack's main loop), pack CI/scaffold/doctor (all three packs green today), the AP-8/AP-9 crosswalk, authored-vs-derived toponyms (D-132's override-else-derived law) | iter-112/D-149 (the reskin day, 14m24s zero core edits); iter-117/D-152 | PROVEN |
+| The scene/texture family: scene_detail, scene_texture + promotion, the session scene ledger, tombstones, echo | phase-4 gate (the 0-leak suite) + D-048/D-049; intake-19's decay measurement | PROVEN |
+| Groups/LOD: the group entity + tiers + `member_of`, condensation, cold aggregates, mobility | intake-19's probe (D-160); the province pack the committed consumer | PROVEN |
+| Single-committed-consumer surfaces: the `cultures` block, spine records, the condensation travelers, the price overrides | province-only today (slice 2, D-154) | LANDED BUT UNDER-TESTED — the document's own term, and a genuine sharpening: a mechanism's ARCHITECTURAL proof completes only when a second materially different pack arms it (the AP-9 precedent: "first committed consumer" is rung one, not the summit) |
+| The pending family: resources/scarcity (absent from core — grep-verified), entity birth (st-5), membership verbs (companion-1), generated exits (roads-1), claims/legitimacy (world-2 L2 slice 3), the calendar (slice 4), the narrator half (engine-1/presentation-1), qa-1/ci-1 | every gap owns a standing owner-gated row | PENDING / OWNER-GATED — nothing is ACTUALLY-ABSENT-without-a-row (the queue discipline guarantees it); no LIKELY-NEW-PRIMITIVE is claimed, and the document's own guard ("not merely because authoring is inconvenient") holds — every 2026 intake's named-engine SHOULD-NOT-ADD verdicts are the counterweight record |
+
+The verdict set over the framework's §36 items, grouped (the
+FACT/INFERENCE axis kept separate from the disposition):
+
+| Framework family (§36 items) | Repo owner / state | Disposition |
+|---|---|---|
+| The core thesis — "demonstrated compositional breadth of a domain-blind causal core"; surface vs causal archetype; proof value; novelty types (1, 20, 21) | D-146 (the loop-change law: a reskin twin proves nothing — the universal-core claim is tested by the loop change); L9; VISION §7's "T1 reskin only" row; the minus ledger's generic-mush row | OWNED — the substance is standing law, often stronger (measured, not classified); the falsifiable-proposition FORM and the litmus join the card |
+| The capability discipline — proven/expressible/pending; implemented ≠ demonstrated generic; the evidence ladder (3, 25) | the intake verdict discipline (intakes 16..19: FACT/INFERENCE kept separate from disposition, measurements re-derived at HEAD, never trusted from text); TEST-1 | OWNED — the L0..L5 ladder vocabulary + the cross-context promotion condition join the card |
+| The topology framework — spatial/social/information/incentive/conflict/power/institutional; decision friction; canon-vs-knowledge (8–15) | each dimension's standing system: travel graph + derived prices; groups + pair relations; channels/fidelity/salience/distance decay ("news rides the road"); factions + urgencies + expectations; crime + leverage + feuds; secrets + the leverage registry; institutions EMERGENT (intake-19's verdict — no institution system); decision friction = intake-18's measured next-decision loop (the removal test: minus steal, all suspicion/leverage deltas vanish) | OWNED — the seven-dimension consult read joins the card as a COMPOSITION checklist citing owners, never a subsystem proposal (the document's own §9.7/§12/§13 test-first guards re-derive the standing law) |
+| The anchor ontology — mobility × persistence; absence as state (5–7, 16) | groups (mobile anchors), the write-once tombstone (destroyed-but-remembered), the worldgen chronicle (historical-only), erosion (decaying), since-1 (the return delta, parked) | PARTIAL — the anchor vocabulary joins the card; since-1 owns the read half |
+| The loop/signature/counterfactual family (17–19) | the phase-5 exit criterion (3+ emergent chains); M3; TEST-1 (metrics from the log only, never LLM-judged); T8 director-off A/B; the `--systems-minus` arms; intake-18's literally-executed removal test | OWNED — and the transfer point is recorded: engine-1's validation inherits "prose is never proof" (the narrative-vs-behavioral signature split is TEST-1's own shape) |
+| The portfolio family — orthogonality; behavioral yield per authored complexity (22, 23) | the floor is enforced (AP-1 budgets, the teleology gate, the reskin-day clock, the corpus-price discipline); the SELECTION question (which candidate diversifies the portfolio) owns no row | ADOPT-AS-PARKED — the genuine new residue; the card's portfolio read (below) |
+| The admission test (24) | PACK_SPEC §3/§5/§6 + the ≤1-day budget — the document's own §31 orders using the repo's real rules, and they suffice (verified: no replacement caps needed) | OWNED |
+| The order relationship (26) | the ORDER owner law; the nothing-unpins discipline | OWNED (the document's own §34 current-order protection re-derives it) |
+| The heavyweight artifacts — the 22-column standing matrix, a standing capability-truth-table document, the 17-candidate catalogue (§22, §25, §39.C/F) | — | REJECTED as standing artifacts: parallel truth (D-024), premature per the document's OWN §34 ("do not prematurely commit to a large future portfolio before empirical evidence exists"), and the speculative-worldbuilding ban (§38, the D-022 law's shape). This block's tables are the one-pass form; the card is the durable form |
+
+**The pack-candidate consult card** (the framework's crystallized
+residue — PARKED; a future pack-slot opening or pack intake reads
+this BEFORE a row opens; recalibrated by the first independent
+multi-pack authoring experiment, the document's own §34 law; the
+same consult posture as the minus ledger, the cost laws and the
+encounter catalog — each line cites its owner, nothing restates):
+
+1. **The proof-value proposition** (falsifiable, stated first): "this
+   pack tests whether X emerges from A+B+C without D." A candidate
+   that cannot state one is a reskin twin — the named zero-value
+   shape (D-146). The discharged precedent: the travel-loop question
+   ("a second setting authored within the contract and budget, zero
+   core edits" — met by measurement, D-149).
+2. **The causal-archetype litmus**: strip proper nouns, lore, visual
+   style and franchise references — the candidate keeps its value
+   iff a distinct combination of interacting primitives plus a
+   distinct class of persistent consequences survives. Else it is a
+   SKIN (presentation-level variation) or a MODULE (a reusable
+   causal configuration enriching multiple packs — the
+   radiant-template family, PACK_SPEC §11).
+3. **The topology read** (each dimension cites its standing owner;
+   the read is a composition checklist, never a subsystem
+   proposal): spatial (the travel graph + derived prices); social
+   (groups + pair relations); information (channels, fidelity,
+   distance decay); incentive (factions + urgencies + expectations);
+   conflict (the crime chain + leverage + feuds); power (secrets +
+   the leverage registry); institutional (EMERGENT from groups +
+   relations + factions — intake-19). Decision friction — the gap
+   between preferring an action and executing it before the world
+   changes — is the timing/access/information lens over the same
+   owners (intake-18's measured next-decision surface; slice 3's
+   experiment carries the census).
+4. **The anchor read**: mobility (static / mobile / ephemeral) ×
+   persistence (living / decaying / destroyed-but-remembered — the
+   tombstone / historical-only — the worldgen chronicle). Absence is
+   causally meaningful iff downstream behavior reads it (since-1's
+   delta; the erosion counter-event — intake-19 M5).
+5. **The novelty type**: primitive / composition / scale /
+   topological / consequence — composition and consequence carry
+   the value (L9); vocabulary novelty is the reskin minus.
+6. **Portfolio orthogonality**: the standing behavioral coverage —
+   the tavern (the social-crime loop, MICRO scale), the road pack
+   (the travel loop, the settlement-to-region band), the province
+   (worldgen + factions + cultures at REGION scale), the parked rows
+   (grim: the intimacy/coercion line; sci-fi: the mapping class;
+   pressure-city: the displacement law) — a candidate must diversify
+   BEHAVIORAL coverage, never art direction; five packs differing by
+   aesthetics is the named failure (the document's §29).
+7. **Behavioral yield per authored complexity**: more distinct
+   behavior from fewer authored primitives — the SELECTION metric
+   (AP-1, the teleology gate and the reskin clock enforce the floor;
+   this question is the ceiling).
+8. **The evidence ladder** for every claim: vocabulary → declaration
+   → execution → causal loop → persistence → cross-context. High
+   proof value requires ≥ the loop rung; the cross-context rung
+   completes when a SECOND materially different pack arms the
+   mechanism. Prose is never proof (TEST-1; engine-1's validation
+   inherits this law).
+9. **The verdict vocabulary**: PACK / MODULE / SKIN / DEFERRED /
+   NEW-PRIMITIVE-CANDIDATE — the last evidence-based and rare (the
+   SHOULD-NOT-ADD family is the default counterweight; the burden
+   of proof rides the proposer, never the status quo).
+
+Refused at the door (the document's own cut list, confirmed against
+repo law): no candidate evaluation NOW (the 17-archetype catalogue
+stays unevaluated — speculative worldbuilding is banned, and the
+parked rows already own the standing candidates); no new
+matrix/truth-table document (this block is the one-pass form); no
+runtime change, no phase opening, no gate bypass, no queue reorder;
+no "politics/belief/maritime/group-as-location" systems (the §38
+non-actions re-derive the intake-17/18/19 SHOULD-NOT-ADD records);
+no replacement admission caps (the real ones suffice). The §37
+follow-up iteration is NOT warranted as a separate row: this intake
+is the routing, and the card's validation is bound to the standing
+evidence producers — world-2 L2 slice 3's outcome-divergence
+experiment (the next behavioral-evidence producer, already carrying
+intake-18's next-decision census) and the first pack-slot opening
+(pack-1 the first authored pack to run the full crosswalk
+deliberately). Zero build-grade items; nothing unpins, nothing
+reorders.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -13,6 +13,44 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-127 · 2026-09-18 · intake20 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» research call over the
+uploaded content-archetype / pack-strategy / capability-audit
+FRAMEWORK document (5 files doc-only, zero code, zero corpus
+price — the D-150..D-160 intake precedent; the method file
+itself external per the convenience-copy law)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 362f167,
+  Python 3.12.14 the env pin); capability side verified at HEAD:
+  all three committed packs load-green through the full admission
+  lint, resources grep-verified absent from core (res-1's row),
+  the mechanism families reconciled against their standing owners
+  (no fresh runtime probe owed — the intakes 16..19 measurements +
+  the phase gates already own the capability evidence)
+- the reconciliation over the framework's own §36 list (26 items,
+  9 families, the method's four questions each): ~four fifths
+  OWNED (D-146/L9/VISION §7 = the core thesis; the 16..19 intake
+  verdict discipline = the capability ladder; the topology
+  dimensions, loop/signature/counterfactual, admission test and
+  order relationship all re-derive standing law); ONE sharpening
+  adopted (LANDED-BUT-UNDER-TESTED names the province-only
+  single-consumer surfaces + the cross-context promotion
+  condition); ONE new residue parked (portfolio orthogonality +
+  behavioral yield — the pack-slot SELECTION question); the
+  heavyweight artifacts REJECTED (parallel truth D-024, the
+  framework's own §34 empirical-first law, the
+  speculative-worldbuilding ban)
+- docs: phases.md §6 the intake-20 block (the capability truth
+  table + the §36 verdict table + the PARKED pack-candidate
+  consult card, 9 lines), DECISIONS D-161 (40 rows — over-cap on
+  §6.1 substance until the next gate collapse), TASKS iter-127,
+  STATUS re-pin + Next step, this entry (iter-117 evicted,
+  verified in this edit; 10 held)
+- phases.md 2404→2530 lines, TASKS 1193→1242, DECISIONS 71→72,
+  STATUS 599→597 — the doc family's growth rides the standing
+  §6.1 substance precedent, documented here
+
+
 iter-126 · 2026-09-18 · intake19 — the owner's «отработай по
 второму файлу» research call over the uploaded persistent-groups
 / settlement-development research task (5 files doc-only, zero
@@ -416,32 +454,3 @@ own readiness pick — world-2 L2 the natural next pick, D-153)
   substance precedent until the next gate collapse, the D-152
   record) / worklog 10 entries held — the over-cap files ride the
   documented §6.1 substance precedent, trim at the next gate
-
-iter-117 · 2026-09-13 · pack-ci — the admission-lint rungs LIVE (the
-owner's fresh call «начинай работу по планам… логичнее всего — то и
-делай»; STATUS Next step's own readiness pick — pack-ci the natural
-cheap candidate, D-152)
-- verified BEFORE working (1668+1 green, ruff clean, HEAD 274130c,
-  Python 3.12.14 the env pin); re-verified after — 1696+1 green
-  (+28, tests/test_packci.py), ruff clean; zero corpus price (the
-  lint is load-time only, the committed playscripts/fixtures
-  byte-untouched)
-- core: `core/pack.py` `_teleology` (dead actions — the effect
-  witnesses + STATE_MUTATING at `core/resolvers.py`'s own owner;
-  orphans — the reference walk + exits edges + audience reach + the
-  target-grammar matcher; empty matrix rows; unused templates — the
-  emission-witness collector + the story-critical dormancy witness)
-  + `_live_char` (AP-1/8/9/11/13/15 + the price-marker lint, the
-  ambient channel exempt) + the spine lint in `_entities` + the
-  atomicity law inside `_predicate_error`
-- the 68a twin-compliance pass (the law's own blast radius, 20 files
-  per AGENTS §2.3): a stripped block strips its emission vocabulary —
-  the weather family's template lines with the blocks (11 crafted
-  twin helpers) + the harness's `_DROP_DEAD_LINES` ablation map; the
-  factions muster rides a `system_of_type` attribution row (zero
-  canon bytes); the groups' tier lines ride their records
-- docs: PACK_SPEC §5/§6 the enforcement readings + the §12 flip,
-  DECISIONS D-152 (31 rows — over-cap on §6.1 substance until the
-  next gate collapse), TASKS the pack-ci flip + iter-117, STATUS
-  re-pin + Next step, this entry (iter-107 evicted, verified in this
-  edit; 10 held)

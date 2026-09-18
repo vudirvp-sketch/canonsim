@@ -26,6 +26,55 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-127 · intake-20 — the content-archetype / pack-strategy framework research routed: the 26-item reconciliation, the capability truth table at HEAD, the selection residue parked as the pack-candidate consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что перенять
+можно, дополнить или улучшить… долгосрок важен и качество» call over
+the uploaded `canonsim — Content Archetype, Pack Strategy &
+Capability Audit.md` (a FRAMEWORK document — a durable method for
+choosing, classifying and admitting future content — unlike the
+mechanism researches of intakes 16..19; the external text and the
+method file stay outside the repo, the convenience-copy law). Every
+load-bearing claim verified against HEAD 362f167 (1726+1 green,
+ruff clean, all three committed packs load-green through the full
+admission lint; resources grep-verified absent from core — res-1's
+own row; no fresh runtime probe owed: the capability side is owned
+by the intakes 16..19 measurements + the phase gates). The
+reconciliation ran over the framework's own §36 "what should become
+permanent" list (26 items, grouped into 9 families), each checked
+per the method's four questions (principle / form / quality /
+transfer): ~four fifths OWNED outright — the core thesis is
+D-146's loop-change law + L9 + VISION §7 in measured form; the
+capability discipline is the intake verdict discipline of 16..19;
+the topology dimensions, the loop/signature/counterfactual family
+(TEST-1, T8, `--systems-minus`, intake-18's executed removal
+test), the admission test (the framework's own §31 orders using
+the repo's real rules — verified sufficient) and the order
+relationship all re-derive standing law. ONE genuine sharpening
+adopted: "LANDED BUT UNDER-TESTED" names the province-only
+single-consumer surfaces (the cultures block, spines, condensation
+travelers, price overrides) — a mechanism's architectural proof
+completes only when a SECOND materially different pack arms it
+(the AP-9 precedent's own ladder). The genuine NEW residue:
+portfolio orthogonality + behavioral yield per authored complexity
+(the SELECTION question — the floor was enforced, the ceiling
+question owned no row). The heavyweight artifacts (the 22-column
+standing matrix, a standing truth-table document, the
+17-candidate catalogue) REJECTED — parallel truth (D-024),
+premature per the framework's OWN §34 empirical-first law, the
+speculative-worldbuilding ban. The combined design: ONE parked
+pack-candidate consult card (9 lines — proof-value proposition /
+causal-archetype litmus / topology read / anchor read / novelty
+type / portfolio orthogonality / behavioral yield / evidence
+ladder / verdict vocabulary), consumed at the next pack-slot
+opening or pack intake, recalibrated by the first independent
+multi-pack authoring experiment; the §37 follow-up iteration NOT
+warranted (this intake is the routing; the card's validation is
+bound to world-2 L2 slice 3's experiment + the first pack slot).
+Zero build-grade items; the queue untouched. Landed: D-161 +
+phases.md §6's intake-20 block (both tables + the card) +
+STATUS/worklog rows. Detail: D-161 + worklog iter-127 + git.
+
 ### iter-126 · intake-19 — the persistent-groups / settlement-development research routed: the substrate confirmed by a zero-core-edit settlement probe, the gaps routed to standing rows — done (doc-only, the owner's research call)
 
 The owner's «отработай по второму файлу» call over the uploaded
