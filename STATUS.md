@@ -1,46 +1,46 @@
-Iteration: iter-122 (`iter-122-intake13re` — the intake-13
-source re-uploaded & re-verified, the owner's research call
-«отработай по файлу» over the uploaded architecture review + the
-research-workflow methodology document v2 — the D-150/D-155/D-156
-intake precedent, doc-only): **the re-entry verdict — the uploaded
-review IS intake-13's own source document (title +
-section-by-section content match against phases.md §6's intake-13
-block; byte-identity unverifiable, content identity established at
-every load-bearing citation); D-150's verdict set holds at HEAD,
-zero new findings, NO ACTION.** The re-verification's code-level
-anchors: `core/loop.py`'s door/OCC/chain semantics + the st-6a price
-law (verdict 1's zero-simulator-change claim re-confirmed),
-`core/pack.py`'s teleology rung (verdict 3's preferred cure now LIVE
-enforcement — the dead-action-type lint, D-152), PARSER_SPEC's
-grammar snapshot + the nearest-valid menu (case C), mechanics
-trace/why/blast (§17), the knowledge model's who/channel/fidelity
-records (§8), and the parked rows res-1/roads-1/since-1/parse-2/
-engine-1 all standing owner-gated. The uncited sections (§2/§3/§9/
-§10/§11/§14) decompose onto the block's own principles
-(cast_fireball = case C; the politics/manipulation/dragon sections
-ride §8's claim≠fact over the landed knowledge/relations model; the
-RNG section is the check margin + EPIST-1's acceptance rolls under
-INV-2). Two pins strengthened since D-150 was written: the file's §1
-phase-6 litmus staleness (already the block's micro-drift (a)) now
-carries the gate verdict itself (D-151 PASS, the ladder complete) +
-a second measured instance (the province pack D-153/154 — original
-content, its one core touch a load-time lint rung, never runtime);
-PARTIAL stays deferred (no separable-sub-effects action authored
-yet). The re-uploaded v2 methodology document re-derives intake-15's
-own confirmed record with no new drift ·
+Iteration: iter-123 (`iter-123-intake16` — the procedural-generation
+research routed, the owner's research call «отработай по второму
+файлу» over the uploaded `PROCEDURAL_GENERATION_RESEARCH.md` — the
+methodology document's own §10 example in its grounded later form
+(the §13 spike rides the province nouns of D-153); the
+D-150/D-155/D-156 intake precedent, doc-only): **the four domain
+verdicts re-verified at HEAD b48ab18, the three measurement claims
+RE-DERIVED by a read-only probe through the public API (200 seeds →
+200/200 distinct topology probe signatures at the pack's six claimed
+anchor sites, the height dimension alone 200/200; 60 seeds → 60/60
+distinct history signatures; the 3-member faction collapse 8 raw
+membership states → 3 probability outcomes — the small formula's
+per-cent floor measured, not asserted). Topology CONFIRMED (standing
+practice — the compact authored block, TECH_NOTES §12 the numbers'
+single owner, st-6a the landed consumer, roads-1 the parked one);
+history CONFIRMED for causal anchors (the 150y/events_max-5
+chronicle shape IS the sparse-anchors cap; anti-volume = D-140's
+payoff-latency family); social PARTIALLY CONFIRMED (the machinery
+all landed; the combinatorial collapse measured; the
+outcome-divergence experiment an evaluation discipline — world-2 L2
+slice 3 the natural first consumer, the ORDER owner decides;
+downstream story divergence stays UNKNOWN); resources PROVISIONALLY
+HIGH-VALUE, still inference (res-1 owner-gated unchanged; the
+grounded spike's 729→55/21/73 offline evidence recorded
+MISSING-as-runtime; the one-knob finding = rank authored knobs by
+causal-output density, res-1's own row the consumer). The boundary
+law re-derives INV-4/D-095/D-150/D-052; the five failure modes
+fenced by standing law; the allocation table a working map, never a
+new owner. Zero build-grade items; the queue untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 1a9efaf — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD b48ab18 — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-13
-re-entry addendum), `docs/TASKS.md` (the iter-122 section),
-`STATUS.md` (this re-pin + Next step), `worklog.md` (this entry;
-iter-112 evicted per the cap) — 4 files. The prior iteration's
-record: iter-121 (intake-15). The detail lives in TASKS + worklog + git.
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-16
+block), `docs/DECISIONS.md` (the D-157 row), `docs/TASKS.md` (the
+iter-123 section), `STATUS.md` (this re-pin + Next step),
+`worklog.md` (this entry; iter-113 evicted per the cap) — 5 files.
+The prior iteration's record: iter-122 (intake-13 re-entry). The
+detail lives in TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -515,13 +515,12 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-122 DONE: the intake-13 source re-uploaded & re-verified
-(the re-entry addendum in phases.md §6's intake-13 block — doc-only,
-the build queue untouched: nothing unpins, nothing reorders; D-150's
-verdict set re-confirmed at HEAD 1a9efaf, zero new findings, NO
-ACTION).** The L2 wave plan (D-153, TASKS world-2) owns the
-remainder: slice 3 the triangle, slice 4 the calendar + the verdict
-call. What stands:
+**iter-123 DONE: the procedural-generation research routed (intake-16
+— D-157 + phases.md §6's intake-16 block, doc-only, the build queue
+untouched: nothing unpins, nothing reorders; the three measurement
+claims re-derived at HEAD, zero build-grade items).** The L2 wave
+plan (D-153, TASKS world-2) owns the remainder: slice 3 the
+triangle, slice 4 the calendar + the verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by

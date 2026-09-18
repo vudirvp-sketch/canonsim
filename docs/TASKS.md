@@ -26,6 +26,31 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-123 · intake-16 — the procedural-generation research routed: the four domain verdicts re-verified, three measurements re-derived at HEAD — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`PROCEDURAL_GENERATION_RESEARCH.md` (the methodology document's §10
+example, now in its grounded later form — the §13 spike rides the
+province nouns; the external text stays outside the repo, the
+convenience-copy law). Every load-bearing claim verified at HEAD
+b48ab18; the three measurement claims RE-DERIVED by a read-only
+probe through the public API (200 seeds → 200/200 distinct topology
+probe signatures at the pack's six claimed anchors, the height
+dimension alone 200/200; 60 seeds → 60/60 distinct history
+signatures; the 3-member faction collapse 8 raw states → 3
+outcomes — the small formula's floor measured). The verdict set:
+topology CONFIRMED (standing practice; TECH_NOTES §12 owns the
+numbers), history CONFIRMED (the sparse-anchors cap already
+authored — the 150y/5 chronicle shape), social PARTIALLY CONFIRMED
+(the machinery landed; the outcome-divergence experiment an
+evaluation discipline, world-2 L2 slice 3 the natural consumer, the
+ORDER owner decides), resources PROVISIONALLY HIGH-VALUE (res-1
+owner-gated; the grounded spike's 729→55/21/73 offline evidence +
+the one-knob causal-output-density metric recorded, MISSING-as-
+runtime). Zero build-grade items; the queue untouched. Landed: D-157
++ phases.md §6's intake-16 block + STATUS/worklog rows. Detail:
+D-157 + worklog iter-123 + git.
+
 ### iter-122 · intake-13 re-entry — the open-ended actions review re-uploaded & re-verified: D-150 stands, zero new findings — done (doc-only, the owner's research call)
 
 The owner's «отработай по файлу» call over the re-uploaded

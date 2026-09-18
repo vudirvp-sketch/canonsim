@@ -1918,6 +1918,97 @@ reads this before proposing any narrative-quality instrument):
   rows (bg-8/engine-1 for the LLM-eval half, res-1/world-2 for
   the future consumers).
 
+The procedural-generation research routed (intake-16, D-157 — the
+owner's «отработай по второму файлу» research call over the
+uploaded `PROCEDURAL_GENERATION_RESEARCH.md`, the methodology
+document's own §10 example now uploaded in its grounded later form
+(the §13 spike rides the province nouns that landed with D-153);
+the consult posture of the intakes 6..15: the external document
+stays outside the repo, every load-bearing claim verified against
+HEAD, and the three measurement claims RE-DERIVED by a read-only
+probe over the committed province pack through the public API at
+HEAD b48ab18 (the probe script an outside-the-repo sandbox driver,
+the operator's Rule 9): 200 seeds → 200/200 distinct topology
+probe signatures at the pack's own six claimed anchor sites, the
+height dimension alone 200/200 distinct (the research's own probe
+read 200/200 + 193/200 on its anchor set — same order,
+at-least-as-strong on the committed anchors); 60 seeds → 60/60
+distinct history signatures (kind/year/participants/places/hooks);
+the 3-member faction probe 8 raw membership states → 3 distinct
+probability outcomes across three parameter bands — the small
+formula's per-cent floor measured, not asserted). The four domain
+verdicts:
+
+- **Topology — CONFIRMED, already standing practice.** The
+  authored surface is compact by construction (the pack's own
+  `worldgen` block: extent 144 / spacing 8 → 324 sites, six
+  claims, capitals 3); the cost claim re-derives TECH_NOTES §12's
+  owned ladder (400→0.04, 2500→0.28, 10000→1.19 — the research's
+  0.03/0.23/1.0–1.2 its own external measurements, intake-15's
+  micro-drift (c) family; TECH_NOTES stays the single owner of
+  numbers); the downstream consumer is landed (st-6a's derived
+  prices, the province legs 345–705), roads-1 the parked one —
+  the research's own §12 admits the dependency. PROVEN — nothing
+  to build; the research confirms the standing shape.
+- **History — CONFIRMED for causal anchors, the cap already
+  authored.** The province chronicle's own shape (years 150,
+  events_max 5 — event 0 world_formed, four history draws, the
+  feud/quarrel collections) IS the sparse-consequential-anchors
+  law; the anti-volume proposal re-derives the payoff-latency
+  family (D-140: lore hooks ride templates + cause_hook, never
+  bulk chronicle). PROVEN.
+- **Social structure — PARTIALLY CONFIRMED, the research's own
+  verdict.** The machinery inventory all landed (macro
+  aggregation, group membership, the ratio formula, relations/
+  pressure, the one-gate LOD, deterministic name streams — the
+  condensation travelers the committed arming, D-154); the
+  raw-combinatorics collapse now measured at HEAD (8 → 3
+  outcomes); the structure/texture split is the standing LLM
+  boundary (D-095's prose floor + D-150's doctrine). The one
+  genuinely new item: the outcome-divergence experiment (vary one
+  social edge, count divergent downstream event paths) — an
+  evaluation discipline, not a mechanic; its natural first
+  consumer is world-2 L2 slice 3 (the triangle), the ORDER owner
+  decides. UNKNOWN kept honest: downstream story divergence is
+  unmeasured in the real engine.
+- **Resources — PROVISIONALLY HIGH-VALUE, still inference at
+  HEAD.** res-1 todo owner-gated; the donor list matches the
+  landed dives exactly (Kenshi/EVE/Albion/PoE/DW/Stellaris, the
+  TASKS row's own record); the §13 spike is grounded on the
+  actual province nouns (loc_crofts/bloom_heap, the Sarrow
+  crossing, Malby + the half-pay keep — verified in
+  entities.json) and its declared boundary matches the TASKS
+  row's shape (source→flow→sink as pack data, aggregate macro
+  cadence, irreversible consumption, derived price spreads —
+  never a second economy engine). The spike's numbers (729
+  authored configs → 55 event-path signatures / 21 compact player
+  trajectories / 73 player-relevant transitions) are the
+  research's own offline measurements — no code committed, by
+  design; recorded here as external evidence, MISSING as runtime.
+  The one-knob finding (source_yield/route_capacity/route_risk
+  move the player signature; town_demand/garrison_demand/
+  sink_priority do not in the compact band) is the spike's real
+  contribution: rank authored knobs by causal-output density, not
+  count — the gut-check family's metric form, res-1's own row
+  the consumer. UNKNOWN kept: whether the leverage survives the
+  real canonical event machinery.
+
+The boundary law (§8/§11 — procedural fills causal gaps, LLM fills
+representational gaps) re-derives the standing doctrine (INV-4 +
+D-095 + D-150's may/may-not lists; the LLM-invents-a-road example
+is D-052's closed world). The five failure modes (§9) are all
+fenced by standing law (L9/L13 named consumers; the measured
+collapse; INV-2 streams; the UNKNOWN discipline; the one-gate
+LOD). The allocation table (§10) is a working map compatible with
+standing law — never a new information owner (the methodology's
+own §7 law). Zero build-grade items: no engine, no subsystem, no
+queue change — the governing question "what should be
+proceduralized" was already answered by the standing shape; the
+research independently re-derives it with measured support. The
+two §6.1-named research files (interface-oriented composition,
+player decision mechanics) remain outside the repo — they join a
+synthesis only on the owner's call.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

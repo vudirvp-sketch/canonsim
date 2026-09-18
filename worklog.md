@@ -13,6 +13,47 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-123 · 2026-09-18 · intake16 — the owner's «отработай по
+второму файлу» research call over the uploaded
+procedural-generation research record (the methodology document's
+§10 example in its grounded later form — the §13 spike rides the
+province nouns; 5 files doc-only, zero code, zero corpus price —
+the D-150/D-155/D-156 intake precedent)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD b48ab18,
+  Python 3.12.14 the env pin); every load-bearing claim verified
+  against HEAD: the pack's worldgen block (extent 144/spacing 8 →
+  324 sites; the chronicle 150y/events_max 5), the §13 spike's
+  province nouns (loc_crofts/bloom_heap, the Sarrow crossing,
+  Malby + the half-pay keep — entities.json), the res-1 row (todo,
+  owner-gated, the donor list matching the landed dives), the
+  faction formula, the TECH_NOTES §12 ladder (the research's
+  0.03/0.23/1.0–1.2 its own external numbers — intake-15's
+  micro-drift (c) family, TECH_NOTES the single owner)
+- the three measurement claims RE-DERIVED by a read-only probe
+  through the public API (the sandbox driver outside the repo,
+  the operator's Rule 9): 200 seeds → 200/200 distinct topology
+  signatures at the six claimed anchors (the height dimension
+  alone 200/200); 60 seeds → 60/60 distinct history signatures;
+  the 3-member faction collapse 8 raw states → 3 outcomes — the
+  small formula's floor measured, not asserted
+- the verdict set: topology CONFIRMED (standing practice),
+  history CONFIRMED (the sparse-anchors cap already authored),
+  social PARTIALLY CONFIRMED (the outcome-divergence experiment
+  an evaluation discipline — world-2 L2 slice 3 the natural first
+  consumer, the ORDER owner decides), resources PROVISIONALLY
+  HIGH-VALUE (the grounded spike 729→55/21/73 recorded
+  MISSING-as-runtime; the one-knob causal-output-density metric
+  for res-1's own row); zero build-grade items, the queue
+  untouched
+- docs: phases.md §6 the intake-16 block, DECISIONS D-157, TASKS
+  the iter-123 section, STATUS re-pin + Next step, this entry
+  (iter-113 evicted here, verified against git in this edit; 10
+  held); 1726+1 green, ruff clean after. Caps: STATUS 556 /
+  TASKS 1064 / DECISIONS 67 (36 rows — over the 30 cap on the
+  §6.1 substance precedent until the next gate collapse) /
+  phases 2078 — the over-cap files ride the documented §6.1
+  substance precedent, trim at the next gate collapse
+
 iter-122 · 2026-09-18 · intake13re — the owner's «отработай по
 файлу» research call over the re-uploaded architecture review (the
 intake-13 source) + the v2 methodology document (4 files doc-only,
@@ -330,35 +371,5 @@ corpus price — the row's own objective scope, AGENTS §2.3)
   git in this edit); 10 after; 1668+1 green, ruff clean after.
   Caps: STATUS 644 / TASKS 1219 / DECISIONS 74 (43 rows — the
   collapse owed at the phase-6 gate, D-034) / phases 1409 /
-  TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
-  ride the documented §6.1 substance precedent, trim at the gate
----
----
-iter-113 · 2026-09-13 · docaudit — the owner's lossless
-documentation-audit call (4 files doc-only, zero code, zero corpus
-price — the iter-103 audit footprint family)
-- verified BEFORE working (1668+1 green, ruff clean, HEAD 18f8b11,
-  Python 3.12.14 the env pin); the reading gradient re-walked, the
-  declared ownership verified against HEAD (NAV §1 rows resolve,
-  REFERENCES_DEEP §2 matched docs/ref/ 38/45 — the gap below, ledger
-  terms land, phase states agree, the test-count claim reproduced)
-- verdict: the architecture HOLDS, ZERO removals — the cross-layer
-  repetition is the declared link-never-restate / research-record
-  pattern, not false duplicates; the doc debts stay owed at the
-  phase-6 gate (DECISIONS 43 rows + the over-cap residue:
-  STATUS/TASKS/phases + TECH_NOTES 773 / TEST_PLAN 772 / README 825
-  + the FAQ resync), deliberately not preempted
-- repaired: REFERENCES_DEEP §2 +8 rows — iter-109 missed the file's
-  own same-edit law (the ref-18/ref-20 dives never indexed); routed:
-  the research layer's stale "lifted into" module paths
-  (core/runner.py, core/store.py, core/storage.py, brief/recall.py,
-  brief/llm_client.py, sim/systems/* — never-existing pre-iter-1/
-  pre-D-037 names; NAV §1 + D-037/D-142 the correct owners) → the
-  doc-2 row's note (the iter-103 precedent, zero new KIs)
-- docs: REFERENCES_DEEP §2, TASKS (the iter-113 section + the doc-2
-  note), STATUS re-pin + Next step, this file; iter-103 evicted here
-  (verified against git in this edit); 10 after; 1668+1 green, ruff
-  clean after. Caps: STATUS 646 / TASKS 1184 / DECISIONS 74 (43 rows
-  — the collapse owed at the phase-6 gate, D-034) / phases 1409 /
   TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
   ride the documented §6.1 substance precedent, trim at the gate
