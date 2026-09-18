@@ -1,39 +1,46 @@
-Iteration: iter-131 (`iter-131-intake11re` — the pressure-city
-donor blueprint re-uploaded & re-verified, the owner's research
-call «используя research_method_v5.md => разберись что перенять
-можно, дополнить или улучшить… долгосрок важен и качество» over
-the re-uploaded `PRESSURE_LIMIT_donor_blueprint.md`; the
-iter-122 intake13re re-entry precedent, doc-only):
-**the re-upload content-matched section-by-section against the
-intake-11 routed record (phases.md §6's block + the TASKS
-pack-4 row — the displacement law, the Cooling Debt's weather-1
-resolution, the gauge + the thermometer-minus cap, the DORMANT
-correction, legal exclusion, the objective-function factions,
-the lore hooks, the six blind spots, the cut list, the T1
-slice — ZERO new findings; the uncited lore halves (§2/§5/§7)
-stay outside the repo, the convenience-copy law). Every
-load-bearing citation re-verified against HEAD e7147df (the
-DD/FP read-surface law, D-134, D-140's cause_hook pairing,
-depth-6/7, name-1, chron-2, retr-1, st-6a, roads-1/res-1 gated,
-tavern_pack's on_action — all green). One drift SELF-RESOLVED:
-D-147's micro-drift (a) — the AP crosswalk's enforcement rung
-now LIVE (pack-ci iter-117/D-152 + the province pack's five
-spine records, D-153), so the donor's "landed" claim is true at
-HEAD; micro-drift (b) stands (no literal meta.json). NO ACTION
-— already routed; the queue untouched ·
+Iteration: iter-132 (`iter-132-intake24` — the cross-domain
+principle-transplantation synthesis routed, the owner's research
+call «проанализируй глубоко документ и оцени… что можно перенять
+и почему, что можно взять но с переработкой и адаптацией, какой
+потенциал есть? какие плюсы и какие минусы (подводные камни)?
+есть ли ультимативное решение…» over the uploaded
+`CROSS_DOMAIN_PRINCIPLE_TRANSPLANTATION.md` — a cross-intake
+synthesis compressing the routed records into six named
+principles + a unified metric + four slices; the intake-22
+meta-result precedent, doc-only):
+**the six principles (P1 dual projection, P2 displacement+debt,
+P3 causal motif, P4 group-as-entity, P5 gauge law, P6 controlled
+irregularity) content-matched claim-by-claim against the routed
+records at HEAD 37bcf6b — ALL OWNED in operational form (P1 →
+L3/L11/L6 + the brief's never-invent law; P2 → D-147's law +
+res-1/weather-1/the thermometer minus; P3 → D-158's verdicts;
+P4 → D-160's PROVEN scaffold; P5 → the DD/FP read-surface law;
+P6 → worldgen's PASS_ORDER incl. the relax pass + place-1's
+consistency law); §4's metric = the standing discipline correctly
+composed; §5's constraints = standing law verbatim; slices 1/3/4
+route to the standing rows unchanged. The deltas refused at the
+door: P2's universal MUST form (over-generalizes the pack-4
+design law), the four extra P2 applications (no substrate, no
+demonstrated problem), slice 2 knowledge-closure-as-displacement
+(no uncertainty object exists — the authoring pattern expressible
+today as ordinary events), the P1–P6 names as repo law
+(label-matching, D-024). The residue: the PRINCIPLE INDEX CARD
+(6 owner-citing lines). Zero build-grade items; the queue
+untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD e7147df — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 37bcf6b — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-11
-re-entry addendum), `docs/TASKS.md` (the iter-131 section),
-`STATUS.md` (this re-pin + Next step), `worklog.md` (this entry;
-iter-121 evicted per the cap) — 4 files.
-The prior iteration's record: iter-130 (intake-23). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-24
+block + the principle index card), `docs/DECISIONS.md` (D-165),
+`docs/TASKS.md` (the iter-132 section), `STATUS.md` (this re-pin +
+Next step), `worklog.md` (this entry; iter-122 evicted per the cap)
+— 5 files.
+The prior iteration's record: iter-131 (intake-11 re-entry). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -508,20 +515,21 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-131 DONE: the pressure-city donor blueprint re-uploaded &
-re-verified (intake-11 re-entry — the iter-122 intake13re
+**iter-132 DONE: the cross-domain principle-transplantation
+synthesis routed (intake-24 — the intake-22 meta-result
 precedent, doc-only, the build queue untouched: nothing unpins,
-nothing reorders; the re-upload content-matched the intake-11
-routed record section-by-section — phases.md §6's block + the
-TASKS pack-4 row — ZERO new findings; every load-bearing
-citation re-verified at HEAD e7147df all green; D-147's
-AP-crosswalk micro-drift SELF-RESOLVED (pack-ci iter-117/D-152
-+ the province spine records D-153 — the donor's "landed" claim
-now true), micro-drift (b) stands (no literal meta.json); NO
-ACTION — already routed, the pack-4 row the parked owner, no
-new D-row).**
-The intake family's standing record: twenty routed intakes
-(4..23, plus the iter-122 intake-13 and iter-131 intake-11
+nothing reorders; the six named principles P1–P6 content-matched
+claim-by-claim against the routed records — ALL OWNED in
+operational form, zero factual errors; the deltas refused at the
+door: P2's universal MUST form (a pack design law
+over-generalized into an engine law), the four extra P2
+applications (no substrate, no demonstrated problem), slice 2
+knowledge-closure-as-displacement (no uncertainty object —
+expressible as pack data today), the names as repo law
+(label-matching, D-024); the residue parked as the principle
+index card, 6 owner-citing lines).**
+The intake family's standing record: twenty-one routed intakes
+(4..24, plus the iter-122 intake-13 and iter-131 intake-11
 re-entries), every queue-relevant verdict already owned by a
 row.
 

@@ -2881,6 +2881,116 @@ document's repo-facing claims. Landed: D-164 + this block. The
 build queue UNTOUCHED — nothing unpins, nothing reorders; zero
 build-grade items.
 
+The cross-domain principle-transplantation synthesis routed
+(intake-24, D-165 — the owner's «проанализируй глубоко документ
+и оцени… что можно перенять и почему, что можно взять но с
+переработкой и адаптацией, какой потенциал есть? какие плюсы
+имеет и какие минусы (подводные камни)? есть ли ультимативное
+решение…» research call over the uploaded
+`CROSS_DOMAIN_PRINCIPLE_TRANSPLANTATION.md`; the D-155..D-164
+intake precedent, the consult posture — the external text stays
+outside the repo, every load-bearing claim verified against HEAD
+37bcf6b — 1726+1 green, ruff clean, Python 3.12.14 the env pin).
+Where intakes 11/16/17/19 each routed one fresh agenda and
+intake-22 a consolidated meta-result, this document is a
+CROSS-INTAKE SYNTHESIS: it compresses the routed records
+(PRESSURE_LIMIT → intake-11/D-147; procedural generation →
+intake-16/D-157; interface-oriented composition / Townscaper →
+intake-17/D-158; persistent groups / settlements → intake-19/
+D-160; the read-surface family → D-134 / REFERENCES §10) into six
+named candidate principles (P1 dual projection, P2
+stabilization-is-displacement + temporal debt, P3 causal motif,
+P4 group-as-causal-entity, P5 honest-but-incomplete read surface,
+P6 controlled irregularity), a unified causal-leverage metric,
+and four smallest verification slices. No fresh probe was run —
+the document claims no measurements; its claims are MAPPINGS onto
+the repo, and the mappings are exactly what was verified (against
+the routed blocks + the standing law text).
+
+**The verification map** (principle by principle; the FACT axis is
+the document's content-accuracy, the disposition is what the repo
+does with it):
+
+| The document's principle | Repo form (the single owner) | Disposition |
+|---|---|---|
+| §0 the transplantation protocol (extract the mechanism, never the surface; express through existing primitives; causal depth or bust) | the standing intake practice itself — research_method_v5's checks ARE it (D-163's method-file row: CONFIRMED — OWNED, fully internalized; intakes 14..23 the evidence) | CONFIRMED — OWNED, zero drift |
+| P1 dual projection (primary canon + recomputed projections; may omit, never invent) | L3 derive-never-store + L11 the rebuildable model + L6 player-blind + the brief's never-invent law (BRIEF_SPEC §1) + the lawful-blindness family (D-059/D-060); the named projections all landed: the brief, the KnowledgeView, the LOD zones, `known_by`; the extension candidates are standing shapes: leverage = the `live_leverage` read fold, pressure = depth-6's ratio over live member axes, the local gauge = res-1's declared read surface, sparse causal anchors = chron-2 + D-140's hooks-never-bulk law | CONFIRMED — OWNED; the candidates add nothing (they restate the standing rows' own declared shapes) |
+| P2 stabilization-is-displacement + temporal debt | D-147's displacement law (the one word-for-word keeper) + the Cooling Debt = weather-1's chain + erosion shape + res-1's closed cycle + the thermometer minus (D-134) | CONFIRMED as the parked pack-4 design law; the document's universal MUST form ("ANY operation… MUST raise pressure elsewhere and leave a non-zero irreversible residue") REJECTED as engine law — D-147's law is the pressure-city pack's own design constraint, never a law over all operations (movement, observation, name materialization reduce local tension with no displacement owed); the four extra applications (knowledge closure, conflict resolution, group policy adoption, director tension release) UNVERIFIED — no substrate, no demonstrated problem (the adjacent proposals already REJECTED by D-160's verdicts; D-005's audit laws own the director) |
+| P3 causal motif (requires/forbidden/bindings/effects; deterministic fit, never random spawn) | D-158's verdict set: PROVEN at genesis (the chronicle collections, 60/60 per-seed bindings), the runtime TRADE_BLOCK form = res-1's declared shape, `MotifEngine` = SHOULD-NOT-ADD (L13), cross-pack reuse = pack-side authoring (D-142) | CONFIRMED — OWNED, zero drift (the document's own §5 fences the anti-candidates verbatim) |
+| P4 group-as-causal-entity (participates in events, owns relations, splits/merges/leaves residue, no group AI) | D-160: PROVEN as scaffold (the group entity + the `member_of` door + the tiers, M2/M3 end-to-end; group and member intent ride the SAME door); Party/SettlementEngine = SHOULD-NOT-ADD; split/succession = pack event vocabulary over the pair/member doors — EXPRESSIBLE, not proven (PARTIAL); "internal tension accumulation" rides the over-modeling fence (D-160: group dimensions MOSTLY over-modeling, each candidate names its observable, L1) | CONFIRMED — OWNED with the granularity restored: the document states as standing capability what the record holds as expressible-but-unmeasured |
+| P5 honest-but-incomplete read surface (one visible gauge per closed cycle) | REFERENCES §10's DD/FP law (integer truth below, one rendered line above) + D-134's thermometer minus + D-147's gauge verdict + L6 + the card/delta split (D-059/D-060) | CONFIRMED — OWNED, zero drift |
+| P6 controlled irregularity (hierarchical seed, controlled breaks, relaxation, connectivity preservation) | worldgen's `PASS_ORDER` (sites/relax/height/moisture/watershed/biomes/states/chronicle — the relax pass IS the relaxation step, ref-9-c's Voronoi→relax→… pipeline, TECH_NOTES §12) + place-1's claim↔exits consistency law (`max_edge_span`) + the exits symmetric lint + the reachability walk (intake-23's probe) + intake-16's no-volume-without-connectivity verdict | CONFIRMED — OWNED — the synthesis's one pleasant surprise: "restore global consistency via relaxation" names the worldgen's own relax pass, not a new mechanism |
+| §4 the causal-leverage metric (authored DF → distinct event paths → player-visible situations → cross-system consequences → later divergence) | the distributed standing discipline: MVP_SCOPE §15's causal-density checklist + L1's observable test + the gut-check family (D-146's ablation, intake-16's one-knob ranking) + TEST-1 (log-only metrics) + the outcome-divergence experiment (world-2 slice 3: divergent event paths + intake-18's next-decision surfaces + intake-21's first-divergence read) | CONFIRMED — OWNED as the composition of standing forms; a correct unification, never a new instrument |
+| §5 the six hard constraints | each is standing law verbatim: no second simulator (D-116/D-147 family), no generic Motif/Constraint/Interface engines (L13 + D-158's anti-candidates), no LLM canon writes (INV-4/D-052), no stored derived state (L3/INV-1), no visible aggregate meter (D-134), debt as ordinary events + folds (INV-1) | CONFIRMED — the fences ARE the law |
+| §6 slices 1/3/4 (the TRADE_BLOCK paper-motif; group split/succession; one closed cycle + one gauge + one debt) | res-1's own evaluation discipline when it lands (D-158's tail) / world-2 L2 slice 3 the natural first consumer (D-160) / pack-4's minimal T1 slice (one district, one boiler, one gauge, three factions, one Cooling-Debt chain) + res-1 | ROUTED — the standing rows unchanged |
+| §6 slice 2 (knowledge-closure as displacement: closing one uncertainty creates a measurable blind-spot or debt event) | NO SUBSTRATE: the knowledge system is a positive-record lattice (channels/fidelity/salience/decay/expectations/drift) — no "uncertainty" object exists to close; a closure-debt law would be meter-adjacent (the thermometer minus fences it); the AUTHORING pattern (learning X degrades Y) is expressible TODAY as ordinary events — a mint plus a counter-event, pack data, zero mechanics | REJECTED as law; expressible-as-pack-data — no gap, no row (the document's own §5 necessity clause refuses it) |
+
+**The verdict on the whole**: the six principles ARE the standing
+architecture, each already owned in operational form — the
+synthesis is content-accurate at every load-bearing claim (zero
+factual errors found). Its genuine deltas all die at the door or
+park: the P2 universalization over-generalizes a pack design law
+into an engine law (the one real quality flaw — compression
+converted "verified in one domain" into "applies uniformly to
+five"); the four extra P2 applications have no substrate or
+demonstrated problem; slice 2 has no substrate; and the P1–P6
+NAMES as repo law would be label-matching (D-024 — intake-23's
+§2-taxonomy precedent: labels add no leverage, the answer set is
+the residue). The document's own §7 self-disclaimer (research
+synthesis; no gates, no schemas; concrete adoption needs the
+owner's call) holds verbatim at HEAD.
+
+**The principle index card** (the crystallized residue — PARKED;
+the future intakes' pattern-matching step ("Form: does an
+existing primitive express the same shape?") and the res-1/
+pack-4/world-2-slice-3 evaluation disciplines read this; each
+line names the owner, nothing restates):
+
+1. **Dual projection** → L3/L11/L6 + the brief's never-invent
+   law; the landed projections: brief / KnowledgeView / LOD /
+   `known_by` / `live_leverage` / the derived prices. Fence:
+   stored dual state that drifts (L3).
+2. **Displacement + debt** → D-147's law (pack-4's design
+   constraint), res-1's cycle, weather-1's erosion, the
+   thermometer minus (D-134). Fence: universalized MUST forms;
+   second meters.
+3. **Causal motif** → D-158's table: the chronicle collections
+   (genesis, PROVEN), res-1's runtime shape, pack-side reuse
+   (D-142). Fence: `MotifEngine` (L13).
+4. **Group-as-entity** → D-160's table: the group entity + the
+   `member_of` door + the tiers. Fence: group dimensions without
+   an observable (L1); scripted group AI.
+5. **Gauge law** → REFERENCES §10's DD/FP law + D-134/D-147 +
+   the card/delta split. Fence: aggregate meters.
+6. **Controlled irregularity** → worldgen's `PASS_ORDER` (the
+   relax pass) + place-1's consistency law + the reachability
+   walk. Fence: volume without connectivity (intake-16).
+
+Refused at the door (the document's own cut list + repo law): no
+new named-principles document (parallel truth, D-024 — the
+convenience-copy law keeps the synthesis outside the repo; this
+block + the card are its repo form); no P2 universalization
+(above); no knowledge-closure mechanic (no substrate); no
+relaxation/tension subsystem (the relax pass exists; a generic
+one is L13's textbook violation); no standing principle-index
+document beyond this card (the one-pass form, the intake-20..23
+precedent).
+
+Micro-drifts (the document vs HEAD 37bcf6b): (a) P1's "brief
+cache" — the landed law is assemble-fresh-every-beat (the purity
+pair, D-042/D-043/D-044); the cached form is the parked D-050
+read-side pattern (the session-held tail), never a landed cache;
+(b) P4 states split/merge/succession and tension accumulation as
+standing capability — the record holds them
+expressible-but-unmeasured (PARTIAL) and over-modeling-fenced
+respectively; (c) §3's "Existing support: medium" for groups
+understates D-160's PROVEN scaffold — the real gaps (the
+player-founded mint st-5, the membership verbs) are the documented
+MISSING halves, not the scaffold's. No factual errors found in
+the document's repo-facing claims. Landed: D-165 + this block.
+The build queue UNTOUCHED — nothing unpins, nothing reorders;
+zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

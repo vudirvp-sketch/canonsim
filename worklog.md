@@ -13,6 +13,44 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-132 · 2026-09-18 · intake24 — the owner's «проанализируй
+глубоко документ и оцени… что можно перенять и почему, что можно
+взять но с переработкой и адаптацией, какой потенциал есть?
+какие плюсы и какие минусы? есть ли ультимативное решение…»
+research call over the uploaded cross-domain principle-
+transplantation synthesis (5 files doc-only, zero code, zero
+corpus price — the intake-22 meta-result precedent, one family)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD
+  37bcf6b, Python 3.12.14 the env pin); the synthesis
+  content-matched claim-by-claim against the routed records it
+  compresses (intake-11/D-147, intake-16/D-157, intake-17/D-158,
+  intake-19/D-160, D-134/REFERENCES §10) — the six principles
+  P1-P6 ALL OWNED in operational form, zero factual errors; no
+  fresh probe (the document claims no measurements, its claims
+  are mappings — the mappings were verified)
+- the deltas refused at the door: P2's universal MUST form (a
+  pack-4 design law over-generalized into an engine law — the
+  one real quality flaw), the four extra P2 applications
+  (knowledge closure/conflict resolution/group policy/director
+  tension — no substrate, no demonstrated problem), slice 2
+  knowledge-closure-as-displacement (no uncertainty object
+  exists; the authoring pattern expressible today as ordinary
+  events), the P1-P6 names as repo law (label-matching, D-024);
+  the pleasant surprise recorded: the synthesis's "relaxation"
+  names worldgen's own relax pass (PASS_ORDER), not a new
+  mechanism; three micro-drifts recorded (the "brief cache" vs
+  the assemble-fresh law; P4's capability-vs-expressible
+  overstatement; §3's "medium" vs D-160's PROVEN scaffold)
+- docs: phases.md §6 the intake-24 block (the verification map +
+  the principle index card, 6 owner-citing lines), DECISIONS
+  D-165, TASKS the iter-132 section, STATUS re-pin + Next step,
+  this file. iter-122 evicted here (verified against git in
+  this edit); 10 after; 1726+1 green, ruff clean after. Caps:
+  STATUS 587 / TASKS 1420 / DECISIONS 76 (44 rows — over the 30
+  cap on the §6.1 substance precedent until the next gate
+  collapse) / phases 3060 — the over-cap files ride the
+  documented §6.1 substance precedent
+
 iter-131 · 2026-09-18 · intake11re — the owner's «используя
 research_method_v5.md => разберись что перенять можно, дополнить
 или улучшить… долгосрок важен и качество» research call over the
@@ -436,36 +474,3 @@ the D-150/D-155/D-156 intake precedent)
   §6.1 substance precedent until the next gate collapse) /
   phases 2078 — the over-cap files ride the documented §6.1
   substance precedent, trim at the next gate collapse
-
-iter-122 · 2026-09-18 · intake13re — the owner's «отработай по
-файлу» research call over the re-uploaded architecture review (the
-intake-13 source) + the v2 methodology document (4 files doc-only,
-zero code, zero corpus price — the D-150/D-155/D-156 intake
-precedent, one family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 1a9efaf,
-  Python 3.12.14 the env pin); the uploaded review content-matched
-  section-by-section against the intake-13 block's citations
-  (§1/§4/§5/§6/§7/§8/§12/§13/§15/§16/§17/§18 exact; §2/§3/§9/§10/
-  §11/§14 decompose onto the block's own principles) — the re-entry
-  verdict: D-150's set holds at HEAD, zero new findings, NO ACTION
-- the code-level re-verification: core/loop.py (the door/OCC/chain
-  semantics + st-6a), core/pack.py (the teleology rung — verdict 3's
-  cure now live enforcement, D-152), PARSER_SPEC §2 (the grammar
-  snapshot + the nearest-valid menu), scripts/mechanics.py
-  (trace/why/blast), EVENT_SCHEMA §knowledge (who/channel/fidelity),
-  TASKS (res-1/roads-1/since-1/parse-2/engine-1 all standing
-  owner-gated); two pins strengthened (the D-151 gate verdict + the
-  province pack D-153/154 as the second litmus instance; PARTIAL
-  stays deferred — no separable-sub-effects action authored)
-- the v2 methodology document: content-matched against intake-15's
-  record (the routing model, the two-axis vocabulary, §6.1's two
-  named files still outside) — no new drift; the session ran under
-  it as process instruction, never as repo law
-- docs: phases.md §6 the intake-13 re-entry addendum, TASKS the
-  iter-122 section, STATUS re-pin + Next step, this file; iter-112
-  evicted here (verified against git in this edit); 10 after;
-  1726+1 green, ruff clean after. Caps: STATUS 557 / TASKS 1039 /
-  DECISIONS 66 (35 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse) / phases 1987 — the
-  over-cap files ride the documented §6.1 substance precedent
-

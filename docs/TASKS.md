@@ -26,6 +26,55 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-132 · intake-24 — the cross-domain principle-transplantation synthesis routed: the six named principles content-matched against the routed records (all OWNED), the P2 universalization + knowledge-closure slice refused at the door, the residue parked as the principle index card — done (doc-only, the owner's research call)
+
+The owner's «проанализируй глубоко документ и оцени… что можно
+перенять и почему, что можно взять но с переработкой и адаптацией,
+какой потенциал есть? какие плюсы имеет и какие минусы (подводные
+камни)? есть ли ультимативное решение, которое нивелирует минусы
+и приумножит плюсы?» call over the uploaded
+`CROSS_DOMAIN_PRINCIPLE_TRANSPLANTATION.md` — a CROSS-INTAKE
+SYNTHESIS (not a fresh agenda like intakes 16..19, not a
+consolidated meta-report like intake-22): it compresses the
+routed records (PRESSURE_LIMIT → intake-11/D-147; procedural
+generation → intake-16/D-157; interface-oriented composition /
+Townscaper → intake-17/D-158; persistent groups/settlements →
+intake-19/D-160; the read-surface family → D-134/REFERENCES §10)
+into six named principles (P1 dual projection, P2
+stabilization-is-displacement + temporal debt, P3 causal motif,
+P4 group-as-causal-entity, P5 honest-but-incomplete read surface,
+P6 controlled irregularity) + a unified causal-leverage metric +
+four smallest verification slices. No fresh probe (the document
+claims no measurements — its claims are mappings onto the repo,
+and the mappings were verified against HEAD 37bcf6b, the routed
+blocks + the standing law text). The verdict set: the six
+principles ARE the standing architecture, each owned in
+operational form (P1 → L3/L11/L6 + the brief's never-invent law;
+P2 → D-147's law with res-1/weather-1/the thermometer minus as
+owners; P3 → D-158's verdicts verbatim; P4 → D-160's PROVEN
+scaffold; P5 → the DD/FP read-surface law; P6 → worldgen's
+`PASS_ORDER` incl. the relax pass + place-1's consistency law +
+intake-16's connectivity verdict); §4's metric = the correct
+composition of the standing discipline; §5's constraints =
+standing law verbatim; slices 1/3/4 route to res-1 / world-2 L2
+slice 3 / pack-4's T1 slice unchanged. The genuine deltas all die
+at the door or park: P2's universal MUST form REJECTED as engine
+law (over-generalizes the pressure-city pack's design constraint
+— compression converted "verified in one domain" into "applies
+uniformly to five"); the four extra P2 applications UNVERIFIED
+(no substrate, no demonstrated problem); slice 2
+(knowledge-closure-as-displacement) REJECTED as law (the
+knowledge system is a positive-record lattice — no "uncertainty"
+object to close; the authoring pattern expressible today as
+ordinary events); the P1–P6 names as repo law = label-matching
+(D-024). The residue crystallized as the PRINCIPLE INDEX CARD (6
+lines, each naming the owner + the over-application fence). Three
+micro-drifts recorded (the "brief cache" vs the assemble-fresh
+law; P4's capability-vs-expressible overstatement; §3's "medium"
+vs the PROVEN scaffold). Zero build-grade items; the queue
+untouched. The addendum: phases.md §6's intake-24 block. Detail:
+worklog iter-132 + git.
+
 ### iter-131 · intake-11 re-entry — the pressure-city donor blueprint re-uploaded & re-verified: D-147 stands, zero new findings — done (doc-only, the owner's research call)
 
 The owner's «используя research_method_v5.md => разберись что
