@@ -13,6 +13,51 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-134 · 2026-09-19 · cumulative1 — the owner's «согласно
+CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
+second-stage cumulative method file: the intake corpus (4..25,
+the D-155..D-166 family) taken as ONE body of evidence — the
+closure form the method's own trigger condition awaited (5 files
+doc-only, zero code, zero corpus price)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD
+  ed23c52, Python 3.12.14 the env pin); the corpus re-read via
+  the gradient (phases.md §6's intake blocks 14..25 + the D-rows
+  + STATUS/TASKS); ONE fresh read-only measurement, the ARMING
+  CENSUS over the three committed packs (the public API + the
+  pack files): factions depth-6 0 committed consumers (DORMANT,
+  intake-23's claim now measured), names/cultures/spines/groups+
+  condensation 1 (the province-only family, intake-20's
+  LANDED-BUT-UNDER-TESTED list confirmed whole), travel 2,
+  weather + the nine core families 3 (promoted)
+- the five cumulative findings: F1 composition-limited frontier
+  (never implementation-limited), F2 corpus saturation (intakes
+  11..25, 15 documents + 2 re-entries, the last 14 iterations
+  all owner-called doc-only routing, every one zero build-grade;
+  the marginal research value now lives in the open rows' own
+  evaluation disciplines), F3 the convergence — world-2 L2
+  slice 3 the highest-leverage proof (six intakes' residues the
+  consumers; the composed experiment one two-arm run, four read
+  surfaces; the zero-consumer factions arming; a live probe of
+  the minimal-system-contract hypothesis), F4 the promotion
+  ladder (same-pack arming ≠ cross-context promotion; the pack
+  slots the promotion events), F5 the SoW fence holds
+- cross-pollination: intake-21's four-question card = slice-3's
+  experiment design review; intake-24's principle index card =
+  slice-3's authoring checklist; refused at the door: fresh
+  research capacity pre-slice-3, a factions spike, a
+  capability-truth-table document, res-1 pre-work, any queue
+  reorder; verdict CONFIRMED, disposition NO ACTION — slice 3's
+  standing implementation-readiness CONFIRMED and sharpened, the
+  owner's row pick the gate
+- docs: phases.md §6 the cumulative block (the census table +
+  the five findings), DECISIONS D-167, TASKS the iter-134
+  section, STATUS re-pin + Next step, this entry (iter-124
+  evicted here, verified against git in this edit; 10 held);
+  1726+1 green, ruff clean after. Caps: STATUS 661 / TASKS 1497 /
+  DECISIONS 78 lines (46 rows — over the 30 cap on the §6.1
+  substance precedent until the next gate collapse) / phases 3316
+  — the over-cap files ride the documented §6.1 substance
+  precedent, trim at the next gate collapse
 iter-133 · 2026-09-18 · intake25 — the owner's «проанализируй
 глубоко документ и оцени, присмотрись, убедись и так далее =>
 что можно перенять и почему, что можно взять но с
@@ -422,52 +467,3 @@ precedent)
   §6.1 substance precedent until the next gate collapse) /
   phases 2283 — the over-cap files ride the documented §6.1
   substance precedent, trim at the next gate collapse
-
-iter-124 · 2026-09-18 · intake17 — the owner's «отработай по
-второму файлу» research call over the uploaded interface-oriented
-procedural composition research task (the methodology document's
-§6.1 first-named file — the owner call that intake-16's tail note
-awaited; 5 files doc-only, zero code, zero corpus price — the
-D-150/D-155/D-156/D-157 intake precedent)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD b748923,
-  Python 3.12.14 the env pin); every load-bearing claim verified
-  against HEAD: st-6a's edge-local price law (core/travel.py —
-  derive-never-store, the pack override wins), the pair homes
-  (core/fold.py P2a + the iter-69 per-target suspicion home), the
-  macro aggregate surface (core/macro.py — the D-112 cardinality
-  shape), the arcs ORDER/GAP laws + drama-2's RNG-free options
-  (core/director.py), the erosion follow-up family (core/weather.py),
-  the chronicle collections + parent-map cause chains
-  (core/worldgen.py), the province pack's surface (6 locations, 5
-  exits edges, the feud/quarrel vocabulary, factions unarmed —
-  slice 3 pending), the TASKS rows (res-1's declared shape, world-2
-  L2's wave plan, roads-1's L11 read), the D-142 admission law
-  (motifs are pack data)
-- two fresh measurements RE-DERIVED by a read-only probe through
-  the public API (the sandbox driver outside the repo, the
-  operator's Rule 9): 60 seeds → 60/60 distinct motif-binding sets
-  (the authored feud/quarrel vocabulary fixed, the participant
-  pairs/places/years per-seed — 6 region pairs over 3 regions);
-  the derived edge prices 54/60 distinct vectors over the 5 exits
-  edges, per-edge 6–7 distinct values, spreads 300–825 ticks
-- the verdict set: interface state PARTIAL (static PROVEN, dynamic
-  MISSING-as-runtime — the space-pack return + res-1 its owners,
-  a generic InterfaceState SHOULD-NOT-ADD per L13), secondary
-  topology REJECTED-as-subsystem, constraint propagation NO ACTION
-  (WFC stays out), causal motif fitting PARTIAL (PROVEN at
-  genesis, the runtime form res-1's own shape, cross-pack reuse
-  pack-side per D-142), multi-node motifs PROVEN-as-primitives;
-  the Townscaper transfer real but already owned by the standing
-  architecture; zero build-grade items, the queue untouched; the
-  §6.1 cross-synthesis with RESEARCH_PLAYER_DECISION_MECHANICS
-  stays owner-call-gated
-- docs: phases.md §6 the intake-17 block (the §24 evidence table
-  the research's own required form), DECISIONS D-158, TASKS the
-  iter-124 section, STATUS re-pin + Next step, this entry (iter-114
-  evicted here, verified against git in this edit; 10 held);
-  1726+1 green, ruff clean after. Caps: STATUS 568 / TASKS 1093 /
-  DECISIONS 68 (37 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse) / phases 2160 — the
-  over-cap files ride the documented §6.1 substance precedent,
-  trim at the next gate collapse
-

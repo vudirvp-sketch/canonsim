@@ -1,45 +1,3 @@
-Iteration: iter-132 (`iter-132-intake24` — the cross-domain
-principle-transplantation synthesis routed, the owner's research
-call «проанализируй глубоко документ и оцени… что можно перенять
-и почему, что можно взять но с переработкой и адаптацией, какой
-потенциал есть? какие плюсы и какие минусы (подводные камни)?
-есть ли ультимативное решение…» over the uploaded
-`CROSS_DOMAIN_PRINCIPLE_TRANSPLANTATION.md` — a cross-intake
-synthesis compressing the routed records into six named
-principles + a unified metric + four slices; the intake-22
-meta-result precedent, doc-only):
-**the six principles (P1 dual projection, P2 displacement+debt,
-P3 causal motif, P4 group-as-entity, P5 gauge law, P6 controlled
-irregularity) content-matched claim-by-claim against the routed
-records at HEAD 37bcf6b — ALL OWNED in operational form (P1 →
-L3/L11/L6 + the brief's never-invent law; P2 → D-147's law +
-res-1/weather-1/the thermometer minus; P3 → D-158's verdicts;
-P4 → D-160's PROVEN scaffold; P5 → the DD/FP read-surface law;
-P6 → worldgen's PASS_ORDER incl. the relax pass + place-1's
-consistency law); §4's metric = the standing discipline correctly
-composed; §5's constraints = standing law verbatim; slices 1/3/4
-route to the standing rows unchanged. The deltas refused at the
-door: P2's universal MUST form (over-generalizes the pack-4
-design law), the four extra P2 applications (no substrate, no
-demonstrated problem), slice 2 knowledge-closure-as-displacement
-(no uncertainty object exists — the authoring pattern expressible
-today as ordinary events), the P1–P6 names as repo law
-(label-matching, D-024). The residue: the PRINCIPLE INDEX CARD
-(6 owner-citing lines). Zero build-grade items; the queue
-untouched ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 37bcf6b — 1726+1 green, ruff clean —
-and re-verified after: doc-only, zero runtime files touched, the
-corpora untouched by construction) ·
-Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-24
-block + the principle index card), `docs/DECISIONS.md` (D-165),
-`docs/TASKS.md` (the iter-132 section), `STATUS.md` (this re-pin +
-Next step), `worklog.md` (this entry; iter-122 evicted per the cap)
-— 5 files.
 Iteration: iter-133 (`iter-133-intake25` — the re-verification
 consolidation pack routed, the owner's research call
 «проанализируй глубоко документ и оцени, присмотрись, убедись
@@ -82,7 +40,63 @@ block: the two probes + the ten-row verdict table),
 `docs/DECISIONS.md` (D-166), `docs/TASKS.md` (the iter-133
 section), `STATUS.md` (this re-pin + Next step), `worklog.md`
 (this entry; iter-123 evicted per the cap) — 5 files.
-The prior iteration's record: iter-132 (intake-24). The
+Iteration: iter-134 (`iter-134-cumulative-1` — the cumulative
+research reconciliation routed, the owner's «согласно
+CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
+second-stage cumulative method file — the closure form the
+method's own trigger condition awaited: the intake family 4..25
+closed by its own last two members, the ladder 0..6 complete,
+nothing pinned; doc-only):
+**the corpus taken as ONE body of evidence — ONE fresh read-only
+measurement, the ARMING CENSUS over the three committed packs
+(factions depth-6: 0 committed consumers, DORMANT — intake-23's
+claim now measured; names/cultures/spines/groups+condensation:
+1 consumer, the province-only family — intake-20's
+LANDED-BUT-UNDER-TESTED list confirmed whole; travel 2; weather
++ the nine core families 3, promoted) — and five cumulative
+findings: F1 the frontier is composition-limited, never
+implementation-limited (the residue is arming/promotion/content,
+never machinery); F2 the corpus is saturated (intakes 11..25,
+15 documents + 2 re-entries, the last 14 iterations all
+owner-called doc-only routing, every one zero build-grade; the
+marginal research value now lives in the open rows' own
+evaluation disciplines — re-open condition: a fresh question
+aimed at an open row's evaluation form); F3 the convergence —
+world-2 L2 slice 3 the highest-leverage proof (six intakes'
+residues consume the one row: the composed outcome-divergence
+experiment — one two-arm run, four read surfaces, the blast
+shape — + the claim/legitimacy first consumer + the card
+recalibration + the zero-consumer factions arming; also a live
+probe of the minimal-system-contract hypothesis, zero core edits
+expected); F4 the promotion ladder the content-side frontier
+(slice 3 arms factions 0→1 same-pack; the promotion events for
+the four province-only families are the future pack slots,
+never more province arming); F5 the SoW fence holds
+(compellingness INV-4-fenced behind engine-1/presentation-1 +
+the {3–8B, GBNF} hardware arm). Cross-pollination: intake-21's
+four-question card = slice-3's experiment design review;
+intake-24's principle index card = slice-3's authoring checklist.
+Refused at the door: fresh research capacity pre-slice-3, a
+factions spike separate from the slice, a capability-truth-table
+document, res-1 pre-work, any queue reorder (the standing
+readiness order IS the cumulative work order). Verdict CONFIRMED;
+disposition NO ACTION — nothing unpins, nothing reorders; slice
+3's standing implementation-readiness CONFIRMED and sharpened,
+the owner's row pick the gate. Zero build-grade items ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD ed23c52 — 1726+1 green, ruff clean —
+and re-verified after: doc-only, zero runtime files touched, the
+corpora untouched by construction) ·
+Date: 2026-09-19 ·
+Scope: docs only — `docs/blueprint/phases.md` (§6 the cumulative
+block: the census table + the five findings), `docs/DECISIONS.md`
+(D-167), `docs/TASKS.md` (the iter-134 section), `STATUS.md`
+(this re-pin + Next step), `worklog.md` (this entry; iter-124
+evicted per the cap) — 5 files.
+The prior iteration's record: iter-133 (intake-25). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -557,32 +571,40 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-133 DONE: the re-verification consolidation pack routed
-(intake-25 — the same consult posture, doc-only, the build
-queue untouched: nothing unpins, nothing reorders; the pack
-content-matched claim-by-claim against the routed records it
-re-asks — zero factual drift, its BASE_COMMIT and
-no-files-modified claim check out; its anti-conservatism
-challenge («form-matching is not enough») answered WITH
-MEASUREMENT — probe A the mid-chain failure semantics (the
-dependent drop_break REJECTED cause-chained, failed_test
-`target.carried_by` + cause `ev_0024`; the second steal
-rejected on `carries_flagged` cause `ev_0006`; zero
-fake-success events; the twin run event/outcome-equal) and
-probe B the status census (five of six conceptual statuses
-first-class at their proper layer; PARTIAL honestly absent —
-0/48 separable-sub-effects declarations; NO_MODELED_EFFECT
-structurally unreachable, the D-152 load-time closure) — the
-two quality rows the pack marks suspicious are MEASURED
-CLOSED; the ten re-check rows hold their standing dispositions
-with re-open conditions intact; refused at the door: the pack
-as a repo reading surface (D-024), UNDER_MODELLED/
-NO_MODELED_EFFECT as runtime statuses, PARTIAL as a standing
-status, any new card).**
+**iter-134 DONE: the cumulative research reconciliation routed
+(cumulative-1, the second-stage pass over the whole intake
+corpus — the closure form the method's own trigger condition
+awaited; doc-only, the build queue untouched: nothing unpins,
+nothing reorders; ONE fresh read-only measurement, the ARMING
+CENSUS over the three committed packs — factions depth-6: 0
+committed consumers, DORMANT; names/cultures/spines/groups+
+condensation: 1 consumer, the province-only family; travel 2;
+weather + the nine core families 3, promoted — and five
+cumulative findings: F1 the frontier is composition-limited,
+never implementation-limited; F2 the corpus is saturated (the
+marginal research value now lives in the open rows' own
+evaluation disciplines, re-open condition: a fresh question
+aimed at an open row's evaluation form); F3 the convergence —
+world-2 L2 slice 3 the highest-leverage proof (six intakes'
+residues consume the one row; the composed experiment = one
+two-arm run, four read surfaces; the zero-consumer factions
+arming rides it; a live probe of the minimal-system-contract
+hypothesis); F4 the promotion ladder the content-side frontier
+(same-pack arming ≠ cross-context promotion; the future pack
+slots are the promotion events); F5 the SoW fence holds.
+Cross-pollination: intake-21's four-question card = slice-3's
+experiment design review; intake-24's principle index card =
+slice-3's authoring checklist. Refused at the door: fresh
+research capacity pre-slice-3, a factions spike separate from
+the slice, a capability-truth-table document, res-1 pre-work,
+any queue reorder. Verdict CONFIRMED; disposition NO ACTION —
+slice 3's standing implementation-readiness CONFIRMED and
+sharpened, the owner's row pick the gate.)**
 The intake family's standing record: twenty-two routed intakes
 (4..25, plus the iter-122 intake-13 and iter-131 intake-11
 re-entries), every queue-relevant verdict already owned by a
-row.
+row — and now cumulatively closed (iter-134's saturation
+finding: the corpus discovered NO rowless gap).
 
 The L2 wave plan (D-153, TASKS world-2) owns
 the remainder: slice 3 the triangle (its outcome-divergence

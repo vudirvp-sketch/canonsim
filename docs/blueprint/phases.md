@@ -3112,6 +3112,141 @@ Landed: D-166 + this block. The build queue UNTOUCHED — nothing
 unpins, nothing reorders; zero build-grade items (the two
 probes are read-only, their logs outside the repo).
 
+The cumulative research reconciliation (iter-134, D-167 — the
+owner's 2026-09-19 «согласно CUMULATIVE_RESEARCH_v2 (1).md
+работай» call over the uploaded second-stage cumulative method
+file; the D-155..D-166 intake family the corpus under
+reconciliation, the method file itself external per the
+convenience-copy law; verified BEFORE working at HEAD ed23c52 —
+1726+1 green, ruff clean, Python 3.12.14 the env pin). Where
+intakes 24/25 were themselves cross-intake syntheses (the
+compression into principles, then the anti-conservatism
+re-verification), this pass is the CLOSURE FORM the method's own
+trigger condition awaited — the natural boundary, now real: the
+intake family 4..25 closed by its own last two members (24
+compressed, 25 re-verified), the phase ladder 0..6 complete,
+STATUS holding no pinned row. The central question, per the
+method: what does the corpus taken as ONE body of evidence
+imply about the capability frontier and the highest-leverage
+evidence-backed path toward further capability?
+
+**The fresh measurement — the arming census** (read-only, the
+public API + the pack files; the frontier MEASURED, never
+asserted — intake-20's own law: implemented ≠ demonstrated, the
+proof completes when a materially different pack arms it):
+
+| The landed, isolation-tested family | tavern | road | province | committed consumers |
+|---|---|---|---|---|
+| factions (depth-6, iter-92; 24 test pins) | — | — | — | **0 — DORMANT** (intake-23's claim, now measured) |
+| names (name-1) · cultures (slice-2) · npc spines (AP-9, 5/10 cast) · groups + condensation (depth-7, the road-traffic group) | — | — | ARMED | 1 — the province-only family (intake-20's LANDED-BUT-UNDER-TESTED list, confirmed whole) |
+| travel derived prices (st-6a) | — | ARMED | ARMED | 2 |
+| weather (weather-1) | ARMED | ARMED | ARMED | 3 — promoted |
+| the core families (worldgen, reflection, traits, retrieval, secrets/leverage, urgencies, on_action, echo, expectations) | ARMED | ARMED | ARMED | 3 — promoted |
+
+**The cumulative findings** (established only by combination):
+
+- **F1 — the frontier is composition-limited, never
+  implementation-limited.** Every mechanism question the corpus
+  asked (intakes 14..24) is answered by a landed,
+  isolation-tested family; the census shows the residue is
+  ARMING (factions, 0 consumers), PROMOTION (four families at
+  one), and CONTENT (the pack slots) — never missing machinery.
+  The strongest single proof stays D-160's settlement probe:
+  the corpus's most demanding composition question answered with
+  zero core edits.
+- **F2 — the corpus is saturated.** The intake family 11..25
+  (15 distinct documents + 2 re-entries; the last 14 iterations
+  all doc-only research routing, each the owner's explicit call
+  — the documentation-loop alarm never applies to owner-called
+  sessions) closed with zero build-grade items every time; the
+  last two members closed the loop themselves (24: ALL OWNED;
+  25: the dispositions stand, two quality rows measured closed).
+  The marginal research value now lives in the OPEN ROWS' own
+  evaluation disciplines, not in fresh external documents.
+  Re-open condition: a fresh question aimed at an open row's
+  evaluation form (the slice-3 experiment design is the standing
+  example of the productive form).
+- **F3 — the convergence: world-2 L2 slice 3 is the
+  highest-leverage proof.** Six intakes' genuine residues
+  consume ONE standing row: the composed outcome-divergence
+  experiment (intake-16's divergent event paths + intake-18's
+  next-decision census + intake-21's first-divergence read +
+  intake-23's F/G stress prompts — ONE two-arm run, four read
+  surfaces, the blast shape; the composition already pinned in
+  STATUS), intake-19's claim/legitimacy first consumer,
+  intake-20's card-recalibration input, intake-24's slice
+  routing. AND the slice arms the census's only zero-consumer
+  family (depth-6's factions at province scale over the
+  settlement cast). No other candidate tests as many unresolved
+  assumptions per unit of complexity. The expected shape stays
+  pack-data-only (the D-160 probe pattern) — making slice 3
+  also a live probe of intake-22's minimal-system-contract
+  hypothesis: zero core edits expected; a forced core edit
+  would sharpen the modularity question (the named 3..5 system
+  decomposition).
+- **F4 — the promotion ladder is the content-side frontier.**
+  The census's 0→1→2→3 rungs give intake-20's cross-context
+  promotion condition its measured base. The precise
+  distinction the combination adds: slice 3 arms factions
+  0→1 SAME-PACK (province); the promotion events for names,
+  cultures, spines and condensation are the FUTURE PACK SLOTS
+  (pack-1/pack-4) — never more province arming. The
+  pack-candidate consult card is the selection discipline at
+  those openings; slice 3's experiment its recalibration input.
+- **F5 — the SoW fence holds.** The corpus's one genuinely
+  undecided question — player-facing compellingness — is
+  INV-4-fenced (intake-18/25's own verdicts); its owners are
+  engine-1/presentation-1 behind the owner's call + the {3–8B,
+  GBNF} hardware arm (track B's standing gap). No research pass
+  can move it; nothing here tries.
+
+**Cross-pollination recorded** (the method's mandatory §6.5,
+both directions): the four-question observability frame
+(intake-21's card) is slice-3's experiment DESIGN REVIEW — the
+composed experiment already reads STATE (divergent paths),
+CAUSALITY (first-divergence + the amplifying chain), KNOWLEDGE
+(divergent next-decision surfaces), COUNTERFACTUAL (the two-arm
+shape); checking the run's artifacts against the card costs
+nothing. The principle index card (intake-24) is slice-3's
+AUTHORING checklist — P4 the factions as group entities through
+the one door, P2 the feud as temporal debt, P5 the DD/FP read
+surface for faction pressure, P6 the feud cause-tree over the
+generated surface. The census method itself is the observability
+posture demonstrated once more: derived reads over pack data,
+never a standing truth-table (D-024 refuses that artifact; this
+block is the one-pass form, the intake-20/23 precedent).
+
+**Should-not-add** (work the combination makes unnecessary): no
+fresh research capacity before slice 3 (F2 — the cards + rows
+carry everything); no factions arming spike separate from slice
+3 (the slice IS the arming; a spike duplicates it); no
+capability-truth-table document (D-024; the census is one-pass);
+no res-1 pre-work (the dives landed, the shape declared; its
+evaluation discipline sharpens AFTER slice 3's numbers); no
+queue reorder (the standing readiness order IS the cumulative
+work order: slice 3 → slice 4 → the owner's picks — D-153's
+wave plan confirmed, nothing re-planned).
+
+**The verdict on the whole**: CONFIRMED — the combined evidence
+establishes the frontier (F1, measured by the census) and the
+path (F3/F4, dependency-ordered); no contradiction survives
+combination (the pressure points resolve into precise
+distinctions: same-pack arming ≠ cross-context promotion; the
+experiment's four forms are one run's read surfaces, never four
+experiments; the doc-only streak is owner-called research, never
+loop drift). The genuine gaps all own standing rows (res-1,
+st-5, companion-1, the dynamic route state, the SoW half, the
+hardware arm) — the corpus discovered NO rowless gap, which is
+F2's own strongest evidence. Remaining uncertainty: the
+experiment's outcome (its point), the promotion events' timing
+(the owner's), compellingness (the fence). Practical
+disposition: NO ACTION on the queue — nothing unpins, nothing
+reorders; slice 3's standing implementation-readiness is
+CONFIRMED and sharpened (the census + the composed experiment),
+the owner's row pick the gate. Zero build-grade items; this
+block + D-167 the repo form; the census table and the saturation
+finding the durable residues.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

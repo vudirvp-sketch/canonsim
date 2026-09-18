@@ -26,6 +26,42 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-134 · cumulative-1 — the cumulative research reconciliation routed: the intake family 4..25 taken as ONE body of evidence, the arming census measured (factions 0 consumers, four families province-only), five cumulative findings, the convergence onto slice 3 as the highest-leverage proof — done (doc-only, the owner's research call)
+
+The owner's «согласно CUMULATIVE_RESEARCH_v2 (1).md работай» call
+over the uploaded second-stage cumulative method file (the closure
+form the method's own trigger condition awaited — the natural
+boundary: the intake family 4..25 closed by its own last two
+members, the phase ladder 0..6 complete, STATUS holding no pinned
+row). ONE fresh read-only measurement — the ARMING CENSUS over the
+three committed packs: factions (depth-6) 0 committed consumers
+(DORMANT — intake-23's claim now measured); names, cultures, npc
+spines, groups+condensation 1 consumer (the province-only family —
+intake-20's LANDED-BUT-UNDER-TESTED list confirmed whole); travel
+2; weather + the nine core families 3 (promoted). Five cumulative
+findings: F1 the frontier is composition-limited, never
+implementation-limited; F2 the corpus is saturated (intakes 11..25
+all zero build-grade; the marginal research value now lives in the
+open rows' own evaluation disciplines); F3 world-2 L2 slice 3 is
+the highest-leverage proof (six intakes' residues consume the one
+row — the composed outcome-divergence experiment, the
+claim/legitimacy first consumer, the card recalibration, the
+zero-consumer factions arming; also a live probe of the
+minimal-system-contract hypothesis); F4 the promotion ladder is
+the content-side frontier (same-pack arming ≠ cross-context
+promotion; the future pack slots are the promotion events); F5 the
+SoW fence holds (compellingness INV-4-fenced behind engine-1/
+presentation-1 + the hardware arm). Cross-pollination: intake-21's
+four-question card = slice-3's experiment design review; intake-24's
+principle index card = slice-3's authoring checklist. Should-not-
+add: no fresh research capacity pre-slice-3, no factions spike
+separate from the slice, no capability-truth-table document, no
+res-1 pre-work, no queue reorder. Verdict CONFIRMED; disposition
+NO ACTION — nothing unpins, nothing reorders; slice 3's standing
+implementation-readiness CONFIRMED and sharpened, the owner's row
+pick the gate. The addendum: phases.md §6's cumulative block.
+Detail: worklog iter-134 + git.
+
 ### iter-133 · intake-25 — the re-verification consolidation pack routed: the prior intakes 13..19 re-asked as quality-open rows, the two smallest-verification steps MEASURED (the mid-chain stop + the status census), the dispositions stand — done (doc-only, the owner's research call)
 
 The owner's «проанализируй глубоко документ и оцени, присмотрись,
