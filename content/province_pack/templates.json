@@ -75,6 +75,10 @@
     "smoke_washed_away": "The {weather} washes the smoke from {location}.",
     "road_counts": "On the year's turning, the road counts {population} souls still walking.",
     "road_musters": "{names?The road takes shape around the runner — {names} walking the artery together.|{actor} musters {members} strong at {location}.}",
-    "world_history": "{year?{actor} remembers: {kind}, in the year {year}{participants?, between {participants}}{places?, at site {places}}{collection?, in the {collection}}.|{actor} takes shape: {sites} sites, {regions} regions, {years} years{weir_water?, the Sarrow gathering at the weir stair}{road_ground?, {road_ground} road ground}{keep_height?, the half-pay keep {keep_height} paces above the water}{bank_ground?, Malby on {bank_ground} bank}{croft_hills?, the smelt crofts in {croft_hills} country}{mill_bank?, Thornmill on {mill_bank} ground}.}"
+    "world_history": "{year?{actor} remembers: {kind}, in the year {year}{participants?, between {participants}}{places?, at site {places}}{collection?, in the {collection}}.|{actor} takes shape: {sites} sites, {regions} regions, {years} years{weir_water?, the Sarrow gathering at the weir stair}{road_ground?, {road_ground} road ground}{keep_height?, the half-pay keep {keep_height} paces above the water}{bank_ground?, Malby on {bank_ground} bank}{croft_hills?, the smelt crofts in {croft_hills} country}{mill_bank?, Thornmill on {mill_bank} ground}.}",
+    "guild_councils": "{actor} bars the stalls and puts its heads together at {location}.",
+    "wergeld_vigil": "{actor} holds the wergeld vigil at {location} — the blood price spoken aloud again.",
+    "garrison_patrols": "{actor} walks its round with a hard eye at {location}.",
+    "grief_wakes": "The old grief wakes in {location} — the blood price remembered again."
   }
 }

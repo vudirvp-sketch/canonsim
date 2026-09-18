@@ -315,7 +315,11 @@
     "attention": {
       "decay_per_360_ticks": 0
     },
-    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup). tune-1 (KI#4): fatigue's counter-play is the rest action — the delta lives in actions.json status_effects beside the action that applies it (the use_effect precedent: the number lives with the effect's owner)"
+    "notes": "modifiers feed perception (checks.skills.perception.status_modifiers) and behavior; no group reputation in v0 (D-006). Attention is the distract action's target state; decay passes fire at clock-crossing beats (iter-4); reset_on_rotation axes reset to 0 for the watch participants (iter-4a); the fear alarm spike number lives with the transition layer (transitions.fire.alarm.fear_spike — single owner, iter-4a cleanup). tune-1 (KI#4): fatigue's counter-play is the rest action — the delta lives in actions.json status_effects beside the action that applies it (the use_effect precedent: the number lives with the effect's owner)",
+    "grievance": {
+      "decay_per_360_ticks": 0,
+      "notes": "the feud's own axis (slice 3): the old grief holds — decay 0, the wergeld law's mechanical form (a man-price once named stays named until it is paid, the hills' prohibition walking the numbers). Seeded on the two elders alone (Wilmot 35, Garrick 30 — the simmer below the bar); the numeric-home law keeps every other entity out of the ratio and out of the grief-wake reaction. Raised by the alarm family's grief reaction, never by decay — the counter-event discipline."
+    }
   },
   "transitions": {
     "fire": {
@@ -524,24 +528,32 @@
     },
     "chronicle": {
       "years": 150,
-      "events_max": 5,
+      "events_max": 9,
       "event_type": "world_history",
       "hooks": [
         "maren_feud_sweep",
-        "wilmot_grief_ramble"
+        "wilmot_grief_ramble",
+        "garrick_wergeld_count"
       ],
       "collections": [
         {
           "type": "feud",
           "kinds": [
-            "war_fought"
+            "war_fought",
+            "lineage_ended"
           ]
         },
         {
           "type": "quarrel",
           "kinds": [
-            "pact_signed",
-            "lineage_ended"
+            "pact_signed"
+          ],
+          "members": 3
+        },
+        {
+          "type": "exodus",
+          "kinds": [
+            "settlement_founded"
           ],
           "members": 2
         }
@@ -981,6 +993,17 @@
         "channel": "ambient",
         "first_time_only": true,
         "notes": "weather-1's seeded consequence (iter-98, D-133): the storm's own murmur — Maren watching the rain eat the stalls. The weather_turns event carries the storm state's hook list; the release rides the SAME ambient quiet gate as the steward's grief murmur (the D-082 pattern verbatim: weight 0, first_time_only — one storm murmur per run, the ambient entropy stays 0)."
+      },
+      "garrick_wergeld_count": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_smelter_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "the feud's hill half (slice 3 — the story-critical claims grow to three, one per arm of the triangle): Garrick counts the unpaid blood price aloud at the charcoal stacks — the wergeld claim, the crofts' own living memory (the prohibition's carrier speaking it). Trigger-less like the murmur — the ambient channel's quiet gate is the whole release path (weight 0, the D-082 pattern). Seeded by the worldgen chronicle (world_history hooks — the deep feud's afterlife)."
       }
     },
     "arcs": {
@@ -1005,6 +1028,15 @@
           "add": 10
         },
         "notes": "the alarm panic echo (content-2/D-077): everyone who HEARD the shout grows more afraid — the through-the-walls law. The +10 is the CONTAGION half, a quarter of the direct spike; no gate — a shout of fire unsettles everyone who heard it. The reaction event carries no knowledge and no hooks — the one-hop law."
+      },
+      {
+        "scope": "witnesses",
+        "event": "grief_wakes",
+        "state": {
+          "prop": "status.grievance",
+          "add": 20
+        },
+        "notes": "the feud's fire memory (slice 3's composition law): everyone who HEARD the alarm and carries the old grief gains 20 of it — the mill burned once before, and the shout of fire re-opens the wound. The numeric-home law is the filter: only the seeded elders hold a grievance value, so the crowd and the runner never wake it — the grief belongs to the houses. One hop, cause-chained to the alarm (the one-hop law)."
       }
     ],
     "document_check": [
@@ -1163,7 +1195,11 @@
       "ramble",
       "conclusion_drawn",
       "world_history",
-      "road_musters"
+      "road_musters",
+      "guild_councils",
+      "wergeld_vigil",
+      "garrison_patrols",
+      "grief_wakes"
     ],
     "thresholds": {
       "medium": 2,
@@ -1301,6 +1337,15 @@
       "intent_rejected": [],
       "coerce": [
         "relations"
+      ],
+      "guild_councils": [
+        "director"
+      ],
+      "wergeld_vigil": [
+        "director"
+      ],
+      "garrison_patrols": [
+        "director"
       ]
     },
     "notes": "iter-6: event type → systems touched (M1 cross-system share). Pack data (INV-3 — system names are MVP_SCOPE §5 mechanic words, not setting nouns; FAQ note in STATUS.md). The state_change prop-prefix → system map lives in core/metrics.py (closed set of mechanic prefixes: position / relations / status / fire / pair / crime_status). intent_rejected is the front-door no-op event — no system touched by construction. tune-1: rest joins as the states system's recovery action (single-system by design — the fatigue counter-play is not a cross-system event)."
@@ -1565,22 +1610,88 @@
       "min": 40,
       "max": 55
     },
-    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10 (the runner, the six settlement cast, the road traffic's three strangers), the tier template lines grow the families to 48. The factions triangle (slice 3) is expected to reuse the settlement cast — the growth headroom max 12 covers the deep-history rows."
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9) — the headroom holds, no re-declare owed."
   },
   "names": {
     "profiles": {
       "lowland_soft": {
-        "onsets": ["", "b", "d", "l", "m", "n", "r", "s", "v", "w", "y", "th", "sh"],
-        "nuclei": ["a", "e", "i", "o", "u", "ae", "ea"],
-        "codas": ["", "l", "m", "n", "r", "s", "th"],
-        "syllables": [2, 3],
+        "onsets": [
+          "",
+          "b",
+          "d",
+          "l",
+          "m",
+          "n",
+          "r",
+          "s",
+          "v",
+          "w",
+          "y",
+          "th",
+          "sh"
+        ],
+        "nuclei": [
+          "a",
+          "e",
+          "i",
+          "o",
+          "u",
+          "ae",
+          "ea"
+        ],
+        "codas": [
+          "",
+          "l",
+          "m",
+          "n",
+          "r",
+          "s",
+          "th"
+        ],
+        "syllables": [
+          2,
+          3
+        ],
         "notes": "the river tongue (the cultures slice, D-130's sketch; name-1's first committed arming, D-131/D-153): the lowland traders' speech — sonorant onsets, open or nasal-final syllables, no stop codas, the digraph vowels of the market's drawl; names run two-to-three syllables, the flowing length of the bank towns. The drawn names never collide with the entity namespace (the bounded walk's law, core/names.py)."
       },
       "hill_hard": {
-        "onsets": ["", "b", "d", "g", "k", "t", "br", "dr", "gr", "kr", "sk", "st", "tr"],
-        "nuclei": ["a", "e", "i", "o", "u"],
-        "codas": ["", "d", "g", "k", "t", "nd", "rk", "sk", "st"],
-        "syllables": [1, 2],
+        "onsets": [
+          "",
+          "b",
+          "d",
+          "g",
+          "k",
+          "t",
+          "br",
+          "dr",
+          "gr",
+          "kr",
+          "sk",
+          "st",
+          "tr"
+        ],
+        "nuclei": [
+          "a",
+          "e",
+          "i",
+          "o",
+          "u"
+        ],
+        "codas": [
+          "",
+          "d",
+          "g",
+          "k",
+          "t",
+          "nd",
+          "rk",
+          "sk",
+          "st"
+        ],
+        "syllables": [
+          1,
+          2
+        ],
         "notes": "the croft tongue: the hill folk's speech — plosive and clustered onsets, stop codas, the plain five vowels of the smelt camps; names run one-to-two syllables, clipped hard against the lowland's flow. Two tongues over one artery — the estrangement the condensation travelers carry (the Morrowind lesson: naming is data)."
       }
     },
@@ -1589,7 +1700,13 @@
   "cultures": {
     "lowland": {
       "name_profile": "lowland_soft",
-      "custom_vocabulary": ["sarrow", "toll", "waybill", "weighbeam", "tally"],
+      "custom_vocabulary": [
+        "sarrow",
+        "toll",
+        "waybill",
+        "weighbeam",
+        "tally"
+      ],
       "prohibitions": [
         {
           "law": "the guild's shelter law",
@@ -1610,7 +1727,11 @@
     },
     "hill": {
       "name_profile": "hill_hard",
-      "custom_vocabulary": ["bloom", "charcoal", "wergeld"],
+      "custom_vocabulary": [
+        "bloom",
+        "charcoal",
+        "wergeld"
+      ],
       "prohibitions": [
         {
           "law": "the hills' wergeld memory",
@@ -1624,5 +1745,43 @@
       ],
       "notes": "the croft folk: the smelt camps behind the keep, the estranged half of the valley — the smelter-master and the road traffic's hill carrier. The custom vocabulary is the camps' own words (the smelted iron, the fuel, the blood price the hills never un-name); the clipped hard profile keys the culture's names. Two prohibition sets, two vocabularies, two profiles — the estrangement-as-data family complete (the Disco Elysium shape: belief as rules the culture cannot cross)."
     }
+  },
+  "factions": {
+    "entries": [
+      {
+        "group": "grp_river_guild",
+        "axis": "fear",
+        "trigger_value": 30,
+        "threshold": 0,
+        "max_per_beat": 40,
+        "intent": {
+          "kind": "council"
+        },
+        "notes": "the guild's flinch (the triangle's present-side arm): when the trade's posts hold fear past 30, the guild councils — the stalls bar, the heads come together. One spooked post reads fraction 50 (bar 20, 1-in-5 per beat); both posts read the full 40. The player tips it with the fire family — the alarm's spike and ripple are the levers, never a script gate."
+      },
+      {
+        "group": "grp_old_families",
+        "axis": "grievance",
+        "trigger_value": 40,
+        "threshold": 50,
+        "max_per_beat": 60,
+        "intent": {
+          "kind": "hold_vigil"
+        },
+        "notes": "the families' vigil (the triangle's deep-history arm): the grievance ratio over the two houses — threshold 50 means BOTH elders must cross the 40-bar before the vigil can fire (one woken house reads fraction 50, the deadband; both woken read bar 60). The wergeld wakes slowly and together, by design."
+      },
+      {
+        "group": "grp_garrison",
+        "axis": "fear",
+        "trigger_value": 40,
+        "threshold": 0,
+        "max_per_beat": 30,
+        "intent": {
+          "kind": "patrol"
+        },
+        "notes": "the watch's round (the triangle's escalation arm): the same fear axis as the guild, read at the trained bar — the merchants council at 30, the watch patrols at 40 (the bar the fear's own decay still leaves reachable a beat or two past the spike). The ladder between the two thresholds is the FNV cascade: rising danger moves the trade first, the crown's answer second."
+      }
+    ],
+    "notes": "the triangle (slice 3, D-130's FNV shape — depth-6's first committed arming): three ratio+threshold dynamics over the settlement cast's live axes; the player tips ratios through the ordinary verbs (the fire family's alarm spikes fear; the grief reaction wakes grievance), never script gates — the emergent many roads."
   }
 }

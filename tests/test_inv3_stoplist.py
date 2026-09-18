@@ -90,12 +90,17 @@ ROAD_STOPLIST: tuple[str, ...] = (
 # goal). "carrier" is deliberately absent — the acquisition family's
 # engine word (core/fold.py's item holder, the drift registry's own
 # UNCLASSIFIED entry); the id npc_carrier_01 never spells it as a
-# free-standing word in code.
+# free-standing word in code. The triangle slice's additions
+# (iter-135): the faction nouns (guild, council, vigil, patrol — the
+# goal verbs and their tale lines), the chronicle's third tier
+# (exodus), and the feud's own axis (grievance — the wergeld's
+# pressure surface).
 PROVINCE_STOPLIST: tuple[str, ...] = (
     "sarrow", "weir", "malby", "thornmill", "tithe", "crofts", "garrison",
     "sergeant", "corporal", "osgar", "ketta", "ferra", "garrick",
     "wilmot", "tallow", "punt", "tally", "waybill", "tin", "weighbeam",
-    "charcoal", "drover", "peddler", "wergeld",
+    "charcoal", "drover", "peddler", "wergeld", "guild", "council",
+    "vigil", "patrol", "exodus", "grievance",
 )
 
 

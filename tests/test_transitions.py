@@ -52,6 +52,27 @@ def test_ignite_with_occupants_plans_the_alarm() -> None:
     assert alarm.state_changes[0].prop == "status.fear"
 
 
+def test_the_alarm_spike_skips_the_no_home_occupant() -> None:
+    """KI#85 (iter-135): the fear spike applies the on_action ripple's
+    numeric-home law — an occupant with NO status.fear home (the
+    ambient knowledge-holder) still counts for the alarm's occupancy
+    gate and its knowledge records, but takes no fear write (the
+    commit gate D-035 rejects a from=0 write onto an absent value; the
+    province's market crowd at a burning location first exercised the
+    shape — the tavern corpus never burned a crowded room)."""
+    state = projection()
+    # the market crowd stands in the burning room (no status block)
+    state["npc_market_crowd_01"]["position"] = "loc_tavern"
+    plan = ignite(PACK, state, 10, Ignition("fire", "loc_tavern", "bar"),
+                  "pc_01")
+    assert [d.type for d in plan.drafts] == ["fire_started", "alarm_raised"]
+    alarm = plan.drafts[1]
+    spiked = {change.entity for change in alarm.state_changes}
+    assert "npc_market_crowd_01" not in spiked
+    # the crowd still heard: it rides the alarm's knowledge records
+    assert any(k.who == "npc_market_crowd_01" for k in alarm.knowledge)
+
+
 def test_reigniting_a_burning_spot_is_a_noop_plan() -> None:
     state = projection()
     state["loc_tavern"]["fire.bar"] = "burning"

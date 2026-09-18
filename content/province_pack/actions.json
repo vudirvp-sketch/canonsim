@@ -913,6 +913,72 @@
         "failure": []
       },
       "notes": "the 16th action (content-3, iter-53, D-082 — DIR-4's ambient channel gains its live consumer): an idle audible beat — the actor rambles, the room hears (vague, heard). No check (noise is not communication), no state change, no consequence hooks of its own. The observe resolver is the mechanic (an in-location perception event whose knowledge templates are this pack data); the director's ambient hook is the driver, the parse grammar gains a legal idle verb beside wait/look_around."
+    },
+    {
+      "intent": "council",
+      "label": "council",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "guild_councils"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the guild's goal verb (the triangle, slice 3): the trade's flinch made public — the stalls bar, the heads come together. A bare story-beat expression (no declared effect of its own; the attribution row is the witness that keeps it alive, PACK_SPEC §5)."
+    },
+    {
+      "intent": "hold_vigil",
+      "label": "hold vigil",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "wergeld_vigil"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the families' goal verb (the triangle, slice 3): the old blood's public act — the wergeld vigil, the blood price spoken aloud again. Bare story beat, the D-160 muster pattern at province scale."
+    },
+    {
+      "intent": "patrol",
+      "label": "patrol",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "garrison_patrols"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the garrison's goal verb (the triangle, slice 3): the half-pay watch walks its frightened round. Bare story beat, the escalation arm's public answer."
     }
   ]
 }

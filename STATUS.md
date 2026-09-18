@@ -1,45 +1,3 @@
-Iteration: iter-133 (`iter-133-intake25` — the re-verification
-consolidation pack routed, the owner's research call
-«проанализируй глубоко документ и оцени, присмотрись, убедись
-и так далее => что можно перенять и почему, что можно взять но
-с переработкой и адаптацией, какой потенциал есть? какие плюсы
-и какие минусы (подводные камни)? есть ли ультимативное
-решение…» over the uploaded three-document consolidation of
-the prior intakes 13..19's own sources + the research_method_v5
-method file (already internalized, D-163): the pack re-asks the
-routed records as quality-open rows — its anti-conservatism
-(«form-matching is not enough») answered WITH MEASUREMENT:
-two fresh read-only probes through the public API executed the
-pack's own two smallest-verification steps (probe A the
-mid-chain failure semantics — the dependent step rejects
-cause-chained, failed_test + the breaking event's id, zero
-fake-success events, the twin run equal, the quality row
-MEASURED CLOSED, the utterance half parse-2's deferred row,
-zero simulator change owed; probe B the status census — five
-of six conceptual statuses first-class at their proper layer,
-PARTIAL honestly absent (0/48 separable-sub-effects
-declarations), NO_MODELED_EFFECT structurally unreachable via
-the D-152 load-time teleology rung, D-150 v3 now measured).
-The ten quality-open rows hold their standing dispositions
-with re-open conditions intact; the deltas refused at the
-door: the pack as a repo reading surface (the convenience-copy
-law, D-024), UNDER_MODELLED/NO_MODELED_EFFECT as runtime
-statuses (load-closed), PARTIAL as a standing status (no
-consumer), any new card (the residue decomposes onto existing
-owners). Zero build-grade items; the queue untouched ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 90c04fb — 1726+1 green, ruff clean —
-and re-verified after: doc-only, zero runtime files touched, the
-corpora untouched by construction) ·
-Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-25
-block: the two probes + the ten-row verdict table),
-`docs/DECISIONS.md` (D-166), `docs/TASKS.md` (the iter-133
-section), `STATUS.md` (this re-pin + Next step), `worklog.md`
-(this entry; iter-123 evicted per the cap) — 5 files.
 Iteration: iter-134 (`iter-134-cumulative-1` — the cumulative
 research reconciliation routed, the owner's «согласно
 CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
@@ -99,6 +57,65 @@ evicted per the cap) — 5 files.
 The prior iteration's record: iter-133 (intake-25). The
 detail lives in TASKS + worklog + git.
 
+Iteration: iter-135 (`iter-135-triangle` — world-2 L2 slice 3,
+the triangle: the factions arming + the deep feud history + the
+composed outcome-divergence experiment; the owner's «мы провели
+кучу исследовательских итераций, теперь настала пора приступать
+к работе по планам» call — the iter-118/119 precedent phrase,
+iter-134's F3 convergence consumed: the plans verified complete
+by the cumulative reconciliation itself, slice 3 the standing
+readiness pick):
+**the census's only zero-consumer family ARMED 0→1** (depth-6's
+first committed arming — pack data over the settlement cast, the
+budget block's own prediction): the river guild / the old
+families / the half-pay garrison, three group entities + three
+`factions` entries — the escalation LADDER (the guild reads fear
+at trigger 30, the garrison at 40 — the same axis, two
+thresholds, the FNV cascade) + the deep-history ARM (the new
+`grievance` axis, decay 0 — the wergeld law — at the deliberate
+deadband: threshold 50 means both elders must grieve) + the
+grief-wake reaction (alarm witnesses → grievance +20, the
+numeric-home law filtering to the seeded elders) — ONE verb,
+MANY ROADS: burn the market → the guild councils + Wilmot wakes;
+burn the keep → the garrison patrols + Garrick wakes; both fires
+→ the families hold the vigil (intake-19's claim/legitimacy
+FIRST CONSUMER). The deep feud history: the chronicle 5→9 events,
+the collection vocabulary re-cut (feud roots = war_fought +
+lineage_ended, quarrel, exodus), the wergeld claim joins the
+buffer-seeding hooks. The composed outcome-divergence experiment
+(F3's four read surfaces, seed 53, the sandbox driver): +16
+events zero drops, the first divergence at the take, the
+knowledge +4/−1, the watch's suspicion 0→30 (the runner
+SUSPECT), the market burned irreversibly; intake-23's F prompt
+answered (the world moves where the player is not) + the G
+cascade named. ONE forced core edit — KI#85 (the alarm spike's
+numeric-home law; the malby crowd first exercised the latent
+D-035 mismatch — F3's predicted modularity sharpening). The
+golden fixture regenerated 39→44, fingerprint 0; the calm vale
+byte-identical without the entries (the D-108 law) ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1738 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD 9cc3ee3 — 1726+1 green, ruff clean —
+and re-verified after; the tavern/road corpora byte-untouched, the
+province golden regenerated by design) ·
+Date: 2026-09-19 ·
+Scope: `content/province_pack/{entities,rules,actions,templates}.json`
+(the triangle + the deep feud), `core/transitions.py` (KI#85),
+`tests/test_triangle.py` (+11), `tests/test_transitions.py` (+1),
+`tests/test_t1_province.py` (the history-count re-pin),
+`tests/test_inv3_stoplist.py` (PROVINCE_STOPLIST +6),
+`tests/playscripts/province_feud.json`,
+`tests/fixtures/province_smoke_seed42.jsonl` (regenerated),
+`docs/TASKS.md` (the iter-135 section + the world-2 row),
+`docs/DECISIONS.md` (D-168), `docs/blueprint/phases.md` (§6 the
+slice-3 block + the census row), `docs/AGENT_NAVIGATION.md` (§1 the
+fixtures/playscripts lines), `STATUS.md` (this re-pin + KI#85),
+`worklog.md` (this entry; iter-125 evicted per the cap) — 14 files.
+The prior iteration's record: iter-134 (cumulative-1). The
+detail lives in TASKS + worklog + git.
+
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -121,7 +138,14 @@ detail lives in TASKS + worklog + git.
 
 ## Active KIs
 
-- (None active. The closed-KI tombstone notes — KI#55..KI#84, every one
+- KI#85 · the alarm fear spike wrote `status.fear` on occupants with no
+  numeric home (the ambient crowd) — the commit gate (D-035) rejected
+  the from=0-on-absent write; the spike now applies the ripple's
+  numeric-home law (hear the shout, take no fear write) · opened+fixed
+  iter-135 (core/transitions.py; the province's malby arson first
+  exercised it — the tavern/road corpora never burned a crowded room).
+
+- (The closed-KI tombstone notes — KI#55..KI#84, every one
   deleted per AGENTS §5 at its own iteration, all far past the
   two-iteration window — were trimmed at the phase-6 gate (iter-116):
   the lessons live in git + the FAQ's family laws, the pre-trim record
@@ -571,62 +595,33 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-134 DONE: the cumulative research reconciliation routed
-(cumulative-1, the second-stage pass over the whole intake
-corpus — the closure form the method's own trigger condition
-awaited; doc-only, the build queue untouched: nothing unpins,
-nothing reorders; ONE fresh read-only measurement, the ARMING
-CENSUS over the three committed packs — factions depth-6: 0
-committed consumers, DORMANT; names/cultures/spines/groups+
-condensation: 1 consumer, the province-only family; travel 2;
-weather + the nine core families 3, promoted — and five
-cumulative findings: F1 the frontier is composition-limited,
-never implementation-limited; F2 the corpus is saturated (the
-marginal research value now lives in the open rows' own
-evaluation disciplines, re-open condition: a fresh question
-aimed at an open row's evaluation form); F3 the convergence —
-world-2 L2 slice 3 the highest-leverage proof (six intakes'
-residues consume the one row; the composed experiment = one
-two-arm run, four read surfaces; the zero-consumer factions
-arming rides it; a live probe of the minimal-system-contract
-hypothesis); F4 the promotion ladder the content-side frontier
-(same-pack arming ≠ cross-context promotion; the future pack
-slots are the promotion events); F5 the SoW fence holds.
-Cross-pollination: intake-21's four-question card = slice-3's
-experiment design review; intake-24's principle index card =
-slice-3's authoring checklist. Refused at the door: fresh
-research capacity pre-slice-3, a factions spike separate from
-the slice, a capability-truth-table document, res-1 pre-work,
-any queue reorder. Verdict CONFIRMED; disposition NO ACTION —
-slice 3's standing implementation-readiness CONFIRMED and
-sharpened, the owner's row pick the gate.)**
-The intake family's standing record: twenty-two routed intakes
-(4..25, plus the iter-122 intake-13 and iter-131 intake-11
-re-entries), every queue-relevant verdict already owned by a
-row — and now cumulatively closed (iter-134's saturation
-finding: the corpus discovered NO rowless gap).
+**iter-135 DONE: world-2 L2 slice 3 — the triangle (the factions
+ARMED 0→1, depth-6's first committed arming; the deep feud
+history — the cause-tree chronicle re-cut + the wergeld claims
+seeding the director's buffer; the composed outcome-divergence
+experiment — F3's four read surfaces measured live: +16 events
+zero drops, the first divergence at the take + the amplifying
+chain, the knowledge +4/−1 + the runner SUSPECT, the same-seed
+fork; intake-23's F/G prompts answered; intake-19's
+claim/legitimacy first consumer landed as the vigil's deadband;
+ONE forced core edit — KI#85, the modularity probe's sharpening
+finding, exactly F3's predicted shape).**
+The census recalibration: factions 0→1 ARMED same-pack (intake-20's
+card input); the promotion events for the four province-only
+families stay the future pack slots (F4 unchanged).
 
-The L2 wave plan (D-153, TASKS world-2) owns
-the remainder: slice 3 the triangle (its outcome-divergence
-experiment now carries intake-18's next-decision form — count
-divergent NEXT-DECISION surfaces, not only divergent event
-paths — AND intake-21's first-divergence read: name the first
-divergent event + the amplifying chain — AND intake-23's F/G
-verification prompts: the exists/simulated-at-resolution/
-observable distinction + the riot-while-elsewhere and
-cascade stress forms; the ORDER owner decides), slice 4 the
-calendar + the verdict call. What stands:
+The L2 wave plan (D-153, TASKS world-2) owns the remainder:
+slice 4 the calendar — the market days / the fair / the river's
+seasonal rise (the macro cadences + weather-1's chain, the D-030
+mid-grim dial's asymmetric data) + the T7 read + the row's own
+verdict call (the owner's). What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
-   readiness, world-2 L2 slice 3 (the triangle) is the natural
-   next pick — the row's own wave plan, the factions (the trade
-   guild / the old families / the garrison, depth-6's ratio dynamics
-   at province scale over the settlement cast) + the deep feud
-   history (the cause-tree render, the story-critical claims seeding
-   the director's buffer — the wergeld's own backlog per D-154);
-   then slice 4 (the calendar + the T7 read + the verdict); then
-   `roads-1` (mode
+   readiness, world-2 L2 slice 4 (the calendar + the T7 read + the
+   verdict call) is the natural next pick — the wave plan's own
+   remainder, the triangle's ratio dynamics gaining their seasonal
+   cadence; then `roads-1` (mode
    G's generated exits — the read-path fork resolved, iter-104),
    `res-1` (the dives landed, the backbone stands),
    `since-1`,

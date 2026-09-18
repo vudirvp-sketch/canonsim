@@ -284,7 +284,8 @@
         "fatigue": 10,
         "intoxication": 0,
         "fear": 0,
-        "injury": 0
+        "injury": 0,
+        "grievance": 30
       },
       "relations": {
         "reputation": 50,
@@ -322,7 +323,8 @@
         "fatigue": 10,
         "intoxication": 30,
         "fear": 0,
-        "injury": 0
+        "injury": 0,
+        "grievance": 35
       },
       "relations": {
         "reputation": 50,
@@ -498,6 +500,36 @@
       "macro_event": "road_counts",
       "condense_event": "road_musters",
       "notes": "the condensation travelers (depth-7's first committed arming, the cultures slice): the artery's traffic as ONE group entity — the population tier while cold (road_counts, the cardinality aggregate at the macro crossings), the named strangers when the reader's zone warms (road_musters, the members' canon member_of births + their drawn names). Anchored ON the road the runner starts at: the group is active at the first zone computation and condenses immediately — the PC walks into a materialized world (the DF precedent, the load-state origin law). The members: two lowland tongues and one hill tongue — name-1's profiles consumed by the condensation's own draw"
+    },
+    {
+      "id": "grp_river_guild",
+      "name": "the river guild",
+      "position": "loc_malby",
+      "members": [
+        "npc_marketmistress_01",
+        "npc_weirkeeper_01"
+      ],
+      "notes": "the trade's twin posts (slice 3, the triangle's first arm): the market mistress and the crossing keeper — the weighbeam and the weir, the river trade acting as ONE group entity through the intent door (depth-6's first committed arming, D-112's one-id law). The guild's pressure axis is fear: the trade flinches at danger sooner than any power in the vale (trigger 30, the lowest bar). The cultures block's shelter law is this guild's own declared limit (slice 2, D-154)."
+    },
+    {
+      "id": "grp_old_families",
+      "name": "the old families",
+      "position": "loc_thornmill",
+      "members": [
+        "npc_steward_01",
+        "npc_smelter_01"
+      ],
+      "notes": "the feud's two houses (the triangle's second arm): the manor's steward and the crofts' smelter-master — the mill that burned and the bloom that never forgot the blood price. Their pressure axis is grievance, the wergeld's own axis (decay 0 — a man-price once named stays named until paid, the hills' prohibition law). The threshold is 50: with two members, the old blood moves only when BOTH houses grieve — the families' deliberate deadband."
+    },
+    {
+      "id": "grp_garrison",
+      "name": "the half-pay garrison",
+      "position": "loc_keep",
+      "members": [
+        "npc_sergeant_01",
+        "npc_corporal_01"
+      ],
+      "notes": "the crown's shorted watch (the triangle's third arm): the market-post sergeant and the keep's corporal — the rotation pair (crime_watch's own participants), reading the same fear axis as the guild at the trained bar (trigger 50): the merchants flinch first, the watch holds longer, and the escalation ladder between the two thresholds IS the triangle's present-side cascade."
     }
   ]
 }

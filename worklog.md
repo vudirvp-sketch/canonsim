@@ -13,6 +13,33 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-135 · 2026-09-19 · world-2 L2 slice 3 (the triangle) — the owner's
+«теперь настала пора приступать к работе по планам» call (the
+iter-118/119 precedent phrase; iter-134's F3 convergence consumed:
+the plans verified complete, slice 3 the readiness pick)
+- the factions ARMED 0→1 (depth-6's first committed arming, pack
+  data over the settlement cast): the river guild / the old
+  families / the half-pay garrison — fear at two thresholds (the
+  escalation ladder) + the new grievance axis (decay 0, the
+  wergeld law) at the deliberate deadband; the grief-wake
+  reaction (alarm witnesses → grievance +20, the numeric-home
+  filter); ONE verb MANY ROADS (market → the guild + Wilmot; keep
+  → the garrison + Garrick; both → the vigil — intake-19's
+  claim/legitimacy first consumer)
+- the deep feud history: the chronicle 5→9 events, the collection
+  vocabulary re-cut (feud roots = war+lineage, quarrel, exodus),
+  the wergeld claim joins the buffer-seeding hooks; the composed
+  outcome-divergence experiment run (seed 53, the four read
+  surfaces: +16 events / the first divergence + the chain / the
+  knowledge + crime-status deltas / the same-seed fork)
+- ONE forced core edit — KI#85 (the alarm spike's numeric-home
+  law, the ripple's discipline; the malby crowd first exercised
+  it — F3's predicted modularity sharpening); tests/test_triangle
+  +11, the KI#85 pin, the T1 re-pin, PROVINCE_STOPLIST +6, the
+  playscript province_feud.json; the golden 39→44, fingerprint 0;
+  1738+1 green, ruff clean (12 files: 4 pack + 4 tests/fixtures +
+  4 docs)
+
 iter-134 · 2026-09-19 · cumulative1 — the owner's «согласно
 CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
 second-stage cumulative method file: the intake corpus (4..25,
@@ -407,63 +434,4 @@ intake precedent)
   TASKS 1193 / DECISIONS 71 (39 rows — over the 30 cap on the
   §6.1 substance precedent until the next gate collapse) /
   phases 2404 — the over-cap files ride the documented §6.1
-  substance precedent, trim at the next gate collapse
-
-iter-125 · 2026-09-18 · intake18 — the owner's «отработай по
-второму файлу» research call over the uploaded player-decision
-mechanics research brief (the methodology document's §6.1
-second-named file — the owner call that intake-17's tail note
-awaited, closing the §6.1 pair; 5 files doc-only, zero code,
-zero corpus price — the D-150/D-155/D-156/D-157/D-158 intake
-precedent)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 29b931b,
-  Python 3.12.14 the env pin); every load-bearing brief claim
-  verified against HEAD: the intent door + OCC (core/intent.py —
-  the stale-view anchor, the closed precondition set), the
-  knowledge system (core/knowledge.py — fidelity/channels/
-  salience/drift/expectations), leverage (core/leverage.py —
-  the spend-consumes cluster), travel (core/travel.py — st-6a's
-  derived price law), factions (core/factions.py — the ratio
-  formula), the director (core/director.py — hooks/pacing), the
-  macro clock (core/macro.py), the brief (BRIEF_SPEC's eight
-  blocks), the packs' action vocabularies (tavern + province
-  actions.json — the trust/leverage/kind gates), VISION §6/§7
-  ("interesting simulator: goal, not property" verbatim), the
-  TASKS rows (res-1/world-2 L2/presentation-1 owner-gated)
-- three fresh measurements RE-DERIVED by a read-only probe
-  through the public API (the sandbox driver outside the repo,
-  the operator's Rule 9): day1_full seed 125 — the decision-loop
-  census (56 events / 8 player steps / 13 PC knowledge records /
-  15 suspicion deltas / 5 leverage mints; the epistemic loop end
-  to end: the failed steal → 4 witnesses, the violated
-  expectation → the INFERRED purse_missing, the failed papers
-  check → the PC learns, the drunk's coerce rejected at the same
-  door for leverage); the removal test executed literally (minus
-  steal 56→31 events — ALL social-risk deltas vanish, the arson
-  chain survives; minus the final wait the ending loses the
-  t=1080 watch handover); province_smoke seed 42 — the derived
-  legs 705/660/405/345, 14/14 PC records born on the five
-  waypoint arrivals, the t=3240 transfer mid-leg
-- the verdict set over the brief's A–G domains: knowledge PROVEN
-  as substrate (the "most distinctive layer" hypothesis INFERENCE
-  + PARTIAL — compellingness not decidable in track A,
-  presentation-1 the owner), social/suspicion PROVEN,
-  travel/geography PROVEN, irreversibility PROVEN as law + live
-  stakes, time/timing PARTIAL, experimentation PARTIAL, resources
-  DEFERRED (res-1 owner-gated, unchanged); the brief's core model
-  re-derives the standing architecture layer by layer; the §6.1
-  cross-synthesis with intake-17 CLOSED (one shared primitive —
-  the door + the log + the brief; no new owner warranted); the
-  one genuine residue: the next-decision test as an evaluation
-  discipline for world-2 L2 slice 3's outcome-divergence
-  experiment, the ORDER owner decides; zero build-grade items,
-  the queue untouched
-- docs: phases.md §6 the intake-18 block (the A–G evidence table
-  the research's own required form), DECISIONS D-159, TASKS the
-  iter-125 section, STATUS re-pin + Next step, this entry
-  (iter-115 evicted here, verified against git in this edit;
-  10 held); 1726+1 green, ruff clean after. Caps: STATUS 581 /
-  TASKS 1134 / DECISIONS 70 (38 rows — over the 30 cap on the
-  §6.1 substance precedent until the next gate collapse) /
-  phases 2283 — the over-cap files ride the documented §6.1
   substance precedent, trim at the next gate collapse

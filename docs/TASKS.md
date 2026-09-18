@@ -26,6 +26,54 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-135 · world-2 L2 (slice 3: the triangle) — the factions arming + the deep feud history + the composed outcome-divergence experiment — done (the owner's «теперь настала пора приступать к работе по планам…» call — the iter-118/119 precedent phrase; STATUS Next step's own readiness pick: slice 3 the natural next pick, iter-134's F3 convergence)
+
+The census's only zero-consumer family ARMED 0→1 (depth-6's first
+committed arming, pack data over the settlement cast — the budget
+block's own prediction): three group entities (the river guild at
+Malby, the old families at Thornmill, the half-pay garrison at the
+keep) + three `factions` entries — the escalation ladder (the guild
+reads fear at trigger 30, the garrison at 40, the same axis two
+thresholds) + the deep-history arm (the families read the NEW
+`grievance` axis, decay 0 — the wergeld law — at the deliberate
+deadband: threshold 50 means both elders must grieve) + three goal
+verbs (council / hold_vigil / patrol, bare story beats, the D-160
+muster pattern) + the tale lines + the story-critical listing + the
+attribution rows. The deep feud history: the chronicle deepens 5→9
+events over the same 150 years, the collection vocabulary re-cut
+(feud roots = war_fought + lineage_ended — the blood endings open
+feuds; quarrel = the pacts; exodus = the foundings), and the wergeld
+claim joins the story-critical hooks (garrick_wergeld_count — the
+feud's hill half, the third buffer-seeding claim). The grief-wake
+reaction (on_action, alarm_raised witnesses → grievance +20, the
+numeric-home law filtering to the seeded elders): ONE verb, many
+roads — burning the market tips the guild + wakes Wilmot; burning
+the keep tips the garrison + wakes Garrick; both fires open the
+deadband and the families hold the vigil (the claim/legitimacy first
+consumer — intake-19's routing). The composed outcome-divergence
+experiment (the sandbox driver, Rule 9 — F3's four read surfaces):
+seed 53, the two arms from t=0 — +16 events (the fire chain, the
+grief, the council, suspicion ×3, zero drops), the first divergence
+at the take, the PC's knowledge +4/−1, the watch's suspicion 0→30
+(the runner SUSPECT), the market burned irreversibly; intake-23's F
+prompt answered (the world moves where the player is not — Wilmot's
+grief wakes at Thornmill while the runner stands at Malby) and the G
+cascade named (arson → alarm → fear/grief → the ratio + the crime
+chain — three systems answering one verb). ONE forced core edit —
+KI#85 (the alarm spike's numeric-home law, the ripple's discipline:
+the province's market crowd at a burning location first exercised
+the latent mismatch — the modularity probe's sharpening finding,
+exactly F3's predicted shape). `tests/test_triangle.py` +11 (the
+committed instance, the bars, the three roads, the tale, the deep
+tree, the corpus price — the calm vale byte-identical without the
+entries, the D-108 law) + the KI#85 pin in test_transitions.py + the
+T1 twin's history-count re-pin + PROVINCE_STOPLIST +6 (guild,
+council, vigil, patrol, exodus, grievance). The golden fixture
+regenerated: 39→44 events (+4 deep-history, +1 ramble — the wergeld
+count), fingerprint 0. 1738 passed + 1 skipped, ruff clean, zero
+corpus price outside the province (the tavern/road corpora
+byte-untouched). Detail: worklog iter-135 + D-168 + git.
+
 ### iter-134 · cumulative-1 — the cumulative research reconciliation routed: the intake family 4..25 taken as ONE body of evidence, the arming census measured (factions 0 consumers, four families province-only), five cumulative findings, the convergence onto slice 3 as the highest-leverage proof — done (doc-only, the owner's research call)
 
 The owner's «согласно CUMULATIVE_RESEARCH_v2 (1).md работай» call
@@ -785,12 +833,15 @@ D-105..D-133 family row + phases.md §5)
   `generated_name` members, the reachability law riding
   `condense_event`), the custom vocabularies + prohibition sets
   (the `cultures` block, belief-as-rules data, the Disco Elysium
-  shape — AP-8's third consuming surface); slice 3 the triangle —
-  the factions (the trade guild / the old
-  families / the garrison, depth-6's ratio dynamics at province
-  scale) + the deep feud history (the cause-tree render, the
-  story-critical claims seeding the director's buffer); slice 4 the
-  calendar — the market days / the fair / the river's seasonal rise
+  shape — AP-8's third consuming surface); slice 3 (iter-135, DONE —
+  D-168) the triangle — the factions (the river guild / the old
+  families / the garrison, depth-6's first committed arming over the
+  settlement cast) + the deep feud history (the cause-tree chronicle
+  re-cut — feud/quarrel/exodus — + the wergeld claims seeding the
+  director's buffer) + the composed outcome-divergence experiment
+  (F3's four read surfaces, seed 53 — the claim/legitimacy first
+  consumer riding the vigil's deadband); slice 4 the calendar — the
+  market days / the fair / the river's seasonal rise
   (the macro cadences + weather-1's chain, the D-030 mid-grim dial's
   asymmetric data) + the T7 read + the row's own verdict call (the
   owner's). **iter-109's

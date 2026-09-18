@@ -3137,7 +3137,7 @@ proof completes when a materially different pack arms it):
 
 | The landed, isolation-tested family | tavern | road | province | committed consumers |
 |---|---|---|---|---|
-| factions (depth-6, iter-92; 24 test pins) | — | — | — | **0 — DORMANT** (intake-23's claim, now measured) |
+| factions (depth-6, iter-92; 24 test pins) | — | — | ARMED (iter-135, D-168 — the triangle) | 1 (the census's zero-consumer family, armed same-pack) |
 | names (name-1) · cultures (slice-2) · npc spines (AP-9, 5/10 cast) · groups + condensation (depth-7, the road-traffic group) | — | — | ARMED | 1 — the province-only family (intake-20's LANDED-BUT-UNDER-TESTED list, confirmed whole) |
 | travel derived prices (st-6a) | — | ARMED | ARMED | 2 |
 | weather (weather-1) | ARMED | ARMED | ARMED | 3 — promoted |
@@ -3246,6 +3246,75 @@ CONFIRMED and sharpened (the census + the composed experiment),
 the owner's row pick the gate. Zero build-grade items; this
 block + D-167 the repo form; the census table and the saturation
 finding the durable residues.
+
+**The triangle slice landed (iter-135, D-168 — the owner's
+«теперь настала пора приступать к работе по планам» call, the
+iter-118/119 precedent phrase; the census's only zero-consumer
+family ARMED 0→1, F3's convergence consumed).** The factions
+(the river guild / the old families / the half-pay garrison,
+three group entities over the settlement cast — the budget
+block's own prediction) read two axes at two thresholds: the
+escalation ladder (fear at trigger 30 for the trade, 40 for the
+trained watch — the same axis, the FNV cascade) and the
+deep-history arm (the NEW `grievance` axis, decay 0 — the
+wergeld law, injury's counter-event family — at the deliberate
+deadband: threshold 50 over two members means BOTH elders must
+grieve). The player's levers are the ordinary verbs, never
+script gates: the fire family spikes fear (the alarm), and the
+grief-wake reaction (`on_action.alarm_raised` → witnesses'
+grievance +20, "the mill burned once before" — the numeric-home
+law filtering to the seeded elders alone) wakes the feud. ONE
+verb, MANY ROADS, each mechanically distinct: burning the
+market tips the guild (Maren's fear, fraction 50, bar 20) and
+wakes Wilmot (the alarm heard at Thornmill — the
+riot-while-elsewhere form, intake-23's F prompt); burning the
+keep tips the garrison (the anchor active while the runner
+lingers) and wakes Garrick (the keep heard at the crofts); both
+fires open the deadband and the families hold the vigil
+(intake-19's claim/legitimacy FIRST CONSUMER — the contested
+wergeld as ratio dynamics over live per-entity axes, never a
+canonical claim state, exactly the L3-favours-derived-control
+verdict). The deep feud history: the chronicle deepens 5→9
+events over the same 150 years with the collection vocabulary
+RE-CUT — feud roots = war_fought + lineage_ended (the blood
+endings open feuds), quarrel = the pacts under them, exodus =
+the foundings at the leaves — and the wergeld claim joins the
+story-critical hooks (the sweep, the murmur, the count: the
+feud's three living claims seeding the director's buffer). The
+cause TREE lands in the log (the members chain to their nearest
+lower tier, the roots to the previous top-level — the sagas
+chain) and renders through the tier clauses + the year chain.
+
+The composed outcome-divergence experiment (F3's evaluation
+discipline, the sandbox driver per Rule 9 — seed 53, both arms
+from t=0, the fork = take the lamp + burn the row): STATE +16
+events, zero drops (the fire chain ×6, the grief, the council,
+suspicion ×3, the take, a transfer, a look, a decay); CAUSALITY
+the first divergence at the take (t=2) with the amplifying chain
+rooted through the fork — the guild councils at t=3443 riding
+`faction_0000` through the front door; KNOWLEDGE the runner's
+records +4/−1 (the fire family learned, the lamp's presence
+unlearned) and the next-decision surfaces diverged — the watch's
+suspicion 0→30 (witnessed_arson), the runner's crime status
+SUSPECT, the door's answers changed; COUNTERFACTUAL the
+same-seed fork itself (fingerprints 0x0 vs 0x7). Intake-23's G
+cascade named: arson → alarm → (fear | grief) → (the ratio | the
+crime chain) — three systems answering one verb, the composition
+the intake predicted measured live. The census recalibration
+(intake-20's card input): factions 0→1 ARMED same-pack; the
+promotion events for the four province-only families stay the
+future pack slots (F4 unchanged). ONE forced core edit — KI#85
+(the alarm fear spike now applies the ripple's numeric-home law:
+an ambient knowledge-holder hears the shout but takes no fear
+write; the province's market crowd at a burning location first
+exercised the latent D-035 mismatch — the modularity probe's
+sharpening finding, exactly F3's predicted shape; pack-data-only
+held everywhere else). The both-arms corpus price: the calm vale
+byte-identical without the entries (the D-108 law — the rolls
+ride the isolated faction streams, the deadband the designed
+rest state); the golden fixture regenerated 39→44 (+4 deep
+history, +1 ramble — the wergeld count), fingerprint 0, the
+tavern/road corpora byte-untouched.
 
 ## 7. Cross-cutting (the questions that span phases)
 

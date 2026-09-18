@@ -267,12 +267,13 @@ def test_the_genesis_renders_the_province_scale() -> None:
         "weir_water", "road_ground", "keep_height", "bank_ground",
         "croft_hills", "mill_bank",
     }
-    # the history lines: events_max - 1 = 4 remembered beats
+    # the history lines: events_max - 1 = 8 remembered beats (slice 3's
+    # deep feud: 5 -> 9, the cause tree over the same 150 years)
     history = [
         e for e in events
         if e["type"] == "world_history" and "year" in e["outcome"]
     ]
-    assert len(history) == 4
+    assert len(history) == 8
 
 
 # -- the AP crosswalk's first committed consumer (D-148/D-152) ----------------

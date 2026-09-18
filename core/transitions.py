@@ -185,14 +185,27 @@ def ignite(
             pack, projection, ctx, tick,
         )
         scale_max = pack.rules["relations"]["scale"][1]
+        # KI#85 (the numeric-home law, the on_action ripple's own
+        # discipline): the spike writes only on occupants HOLDING an
+        # integer fear home — an ambient knowledge-holder (no status
+        # block) hears the shout (the alarm's occupancy gate and its
+        # knowledge records still count it) but takes no fear write;
+        # the commit gate (D-035) rejects a from=0 write onto an
+        # absent value, and the ripple already skips the same shape.
+        spikeable = [
+            who for who in occupants
+            if isinstance(projection[who].get("status.fear"), int)
+            and not isinstance(projection[who].get("status.fear"), bool)
+        ]
         fear_changes = tuple(
             StateChange(
                 entity=who,
                 prop="status.fear",
-                from_=projection[who].get("status.fear", 0),
-                to_=min(scale_max, projection[who].get("status.fear", 0) + fear_spike),
+                from_=projection[who]["status.fear"],
+                to_=min(scale_max,
+                        projection[who]["status.fear"] + fear_spike),
             )
-            for who in occupants
+            for who in spikeable
         )
         alarm = EventDraft(
             t=tick,
