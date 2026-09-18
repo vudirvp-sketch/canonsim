@@ -1,55 +1,62 @@
-Iteration: iter-124 (`iter-124-intake17` — the interface-oriented
-procedural composition research routed, the owner's research call
+Iteration: iter-125 (`iter-125-intake18` — the player-decision
+mechanics research routed, the owner's research call
 «отработай по второму файлу» over the uploaded
-`CANONSIM_INTERFACE_ORIENTED_PROCEDURAL_COMPOSITION_RESEARCH.md`
-— the methodology document's §6.1 FIRST-named file, the owner call
-that intake-16's tail note awaited; the D-150/D-155/D-156/D-157
-intake precedent, doc-only): **the five candidate principles
-verified at HEAD b748923, two fresh measurements RE-DERIVED by a
-read-only probe through the public API (60 seeds → 60/60 distinct
-motif-binding sets — the authored feud/quarrel collection
-vocabulary fixed, the participant pairs/places/years per-seed;
-the derived edge prices 54/60 distinct vectors, per-edge 6–7
-values — interface-local friction IS per-seed relation-local, the
-collisions the price's coarser projection). Interface state
-PARTIAL (static PROVEN — st-6a's derived prices, the
-pair.<figure>.<axis> homes; dynamic route state MISSING-as-
-runtime, its owners the space-pack return (D-116) + res-1's
-flow-as-macro-events; a generic InterfaceState SHOULD-NOT-ADD,
-L13 — the pair-home + aggregate + erosion follow-up families
-already carry relation facts through the one canon door);
-secondary topology REJECTED-as-subsystem (one canonical graph +
-L3 derived projections + pack-data overlays IS the standing
-anti-coupling answer; a second runtime topology = a second
-authoritative representation, INV-1); constraint propagation NO
-ACTION (every selection surface a deterministic small mechanism —
-drama-2's RNG-free options, the arcs ORDER/GAP laws, the weighted
-weather chain; WFC stays out); causal motif fitting PARTIAL
-(PROVEN at genesis — the chronicle collections are authored
-motifs whose bindings move per seed, the hooks seeding the
-director's buffer = cross-system consequences; the runtime
-TRADE_BLOCK form IS res-1's declared shape as pack data +
-existing doors; cross-pack motif reuse is pack-side authoring
-under D-142, never a MotifEngine); multi-node motifs PROVEN-as-
-primitives (the collections' parent-map cause chains, the
-director arcs, the commit-door cascades — each domain owns its
-composition mechanism). The Townscaper transfer is real but
-already owned by the standing architecture; the research's own
-§22 scope guard holds verbatim at HEAD. Zero build-grade items;
-the queue untouched ·
+`RESEARCH_PLAYER_DECISION_MECHANICS.md`
+— the methodology document's §6.1 SECOND-named file, the owner
+call that intake-17's tail note awaited, closing the §6.1 pair;
+the D-150/D-155/D-156/D-157/D-158 intake precedent, doc-only):
+**the brief's seven candidate domains (time/timing, knowledge,
+social/suspicion, travel, resources, irreversibility,
+experimentation) verified at HEAD 29b931b, three fresh
+measurements RE-DERIVED by a read-only probe through the public
+API (day1_full seed 125 — the decision-loop census: 56 events
+over 8 player steps, 13 PC knowledge records, 15 suspicion
+deltas, 5 leverage mints, the epistemic loop end to end incl.
+the drunk's coerce rejected at the same door for leverage; the
+removal test executed literally — minus steal 56→31 events,
+ALL social-risk deltas vanishing while the arson chain
+survives; minus the final wait, the ending loses the t=1080
+watch handover — waiting never empty; province_smoke seed 42 —
+the derived legs 705/660/405/345, 14/14 PC records born on the
+five waypoint arrivals, the t=3240 transfer mid-leg). The
+verdict set: knowledge PROVEN as substrate (the "most
+distinctive layer" hypothesis INFERENCE + PARTIAL —
+compellingness not decidable in track A, presentation-1 the
+SoW-horizon owner), social/suspicion PROVEN (the v0 crime
+chain; the faction half awaits world-2 L2 slice 3),
+travel/geography PROVEN (the L1 instrument + the province
+surface; dynamic route state the space-pack return + res-1 per
+intake-17), irreversibility PROVEN as law + live stakes,
+time/timing PARTIAL (the pressure half measured; the informed
+half rides slice 4's calendar), experimentation PARTIAL (the
+dev instrument PROVEN, the player-facing feedback half
+presentation-1's), resources DEFERRED (res-1 owner-gated,
+unchanged). The brief's core model re-derives the standing
+architecture layer by layer (the intent door, the OCC anchor,
+the canon event, the per-knower records, the reaction cascade,
+the brief's scene_delta, the state-gated action surface); its
+Do-not list is L13/INV-3/the measured-collapse discipline
+verbatim. The §6.1 cross-synthesis with intake-17 CLOSED: ONE
+shared primitive (the door + the log + the brief), the states
+change actions/risks/costs/information at the mechanism level
+(measured), no new owner warranted. Zero build-grade items; the
+one genuine residue — the brief's next-decision test as an
+evaluation discipline for world-2 L2 slice 3's
+outcome-divergence experiment — routes to the world-2 row's
+own evaluation half, the ORDER owner decides ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD b748923 — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 29b931b — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-17
-block), `docs/DECISIONS.md` (the D-158 row), `docs/TASKS.md` (the
-iter-124 section), `STATUS.md` (this re-pin + Next step),
-`worklog.md` (this entry; iter-114 evicted per the cap) — 5 files.
-The prior iteration's record: iter-123 (intake-16). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-18
+block), `docs/DECISIONS.md` (the D-159 row), `docs/TASKS.md` (the
+iter-125 section), `STATUS.md` (this re-pin + Next step),
+`worklog.md` (this entry; iter-115 evicted per the cap) — 5 files.
+The prior iteration's record: iter-124 (intake-17). The
 detail lives in TASKS + worklog + git.
 
 
@@ -525,14 +532,18 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-124 DONE: the interface-oriented procedural composition
-research routed (intake-17 — D-158 + phases.md §6's intake-17
-block, doc-only, the build queue untouched: nothing unpins,
-nothing reorders; two fresh measurements re-derived at HEAD, zero
-build-grade items; the §6.1 cross-synthesis with
-RESEARCH_PLAYER_DECISION_MECHANICS stays owner-call-gated).** The
-L2 wave plan (D-153, TASKS world-2) owns the remainder: slice 3 the
-triangle, slice 4 the calendar + the verdict call. What stands:
+**iter-125 DONE: the player-decision-mechanics research routed
+(intake-18 — D-159 + phases.md §6's intake-18 block, doc-only,
+the build queue untouched: nothing unpins, nothing reorders;
+three fresh measurements re-derived at HEAD, zero build-grade
+items; the §6.1 cross-synthesis with intake-17 CLOSED — both
+§6.1-named files now routed, the methodology document's intake
+loop complete).** The L2 wave plan (D-153, TASKS world-2) owns
+the remainder: slice 3 the triangle (its outcome-divergence
+experiment now carries intake-18's next-decision form — count
+divergent NEXT-DECISION surfaces, not only divergent event
+paths, the ORDER owner decides), slice 4 the calendar + the
+verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
@@ -547,7 +558,9 @@ triangle, slice 4 the calendar + the verdict call. What stands:
    G's generated exits — the read-path fork resolved, iter-104),
    `res-1` (the dives landed, the backbone stands), `since-1`,
    `parse-2`, `engine-1` (+ `presentation-1`, its decision-input
-   child), `tune-3`, `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
+   child — now also the owner of the player-facing compellingness
+   question intake-18 fenced to the SoW horizon), `tune-3`,
+   `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
    Actions (the runner that automates the now-landed admission lint),
    `bg-6` (the SoW audit, D-055 deferral), `pack-1` (the grim pack —
    the first authored pack to run the full crosswalk deliberately) +

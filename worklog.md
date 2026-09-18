@@ -13,6 +13,65 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-125 · 2026-09-18 · intake18 — the owner's «отработай по
+второму файлу» research call over the uploaded player-decision
+mechanics research brief (the methodology document's §6.1
+second-named file — the owner call that intake-17's tail note
+awaited, closing the §6.1 pair; 5 files doc-only, zero code,
+zero corpus price — the D-150/D-155/D-156/D-157/D-158 intake
+precedent)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 29b931b,
+  Python 3.12.14 the env pin); every load-bearing brief claim
+  verified against HEAD: the intent door + OCC (core/intent.py —
+  the stale-view anchor, the closed precondition set), the
+  knowledge system (core/knowledge.py — fidelity/channels/
+  salience/drift/expectations), leverage (core/leverage.py —
+  the spend-consumes cluster), travel (core/travel.py — st-6a's
+  derived price law), factions (core/factions.py — the ratio
+  formula), the director (core/director.py — hooks/pacing), the
+  macro clock (core/macro.py), the brief (BRIEF_SPEC's eight
+  blocks), the packs' action vocabularies (tavern + province
+  actions.json — the trust/leverage/kind gates), VISION §6/§7
+  ("interesting simulator: goal, not property" verbatim), the
+  TASKS rows (res-1/world-2 L2/presentation-1 owner-gated)
+- three fresh measurements RE-DERIVED by a read-only probe
+  through the public API (the sandbox driver outside the repo,
+  the operator's Rule 9): day1_full seed 125 — the decision-loop
+  census (56 events / 8 player steps / 13 PC knowledge records /
+  15 suspicion deltas / 5 leverage mints; the epistemic loop end
+  to end: the failed steal → 4 witnesses, the violated
+  expectation → the INFERRED purse_missing, the failed papers
+  check → the PC learns, the drunk's coerce rejected at the same
+  door for leverage); the removal test executed literally (minus
+  steal 56→31 events — ALL social-risk deltas vanish, the arson
+  chain survives; minus the final wait the ending loses the
+  t=1080 watch handover); province_smoke seed 42 — the derived
+  legs 705/660/405/345, 14/14 PC records born on the five
+  waypoint arrivals, the t=3240 transfer mid-leg
+- the verdict set over the brief's A–G domains: knowledge PROVEN
+  as substrate (the "most distinctive layer" hypothesis INFERENCE
+  + PARTIAL — compellingness not decidable in track A,
+  presentation-1 the owner), social/suspicion PROVEN,
+  travel/geography PROVEN, irreversibility PROVEN as law + live
+  stakes, time/timing PARTIAL, experimentation PARTIAL, resources
+  DEFERRED (res-1 owner-gated, unchanged); the brief's core model
+  re-derives the standing architecture layer by layer; the §6.1
+  cross-synthesis with intake-17 CLOSED (one shared primitive —
+  the door + the log + the brief; no new owner warranted); the
+  one genuine residue: the next-decision test as an evaluation
+  discipline for world-2 L2 slice 3's outcome-divergence
+  experiment, the ORDER owner decides; zero build-grade items,
+  the queue untouched
+- docs: phases.md §6 the intake-18 block (the A–G evidence table
+  the research's own required form), DECISIONS D-159, TASKS the
+  iter-125 section, STATUS re-pin + Next step, this entry
+  (iter-115 evicted here, verified against git in this edit;
+  10 held); 1726+1 green, ruff clean after. Caps: STATUS 581 /
+  TASKS 1134 / DECISIONS 70 (38 rows — over the 30 cap on the
+  §6.1 substance precedent until the next gate collapse) /
+  phases 2283 — the over-cap files ride the documented §6.1
+  substance precedent, trim at the next gate collapse
+
 iter-124 · 2026-09-18 · intake17 — the owner's «отработай по
 второму файлу» research call over the uploaded interface-oriented
 procedural composition research task (the methodology document's
@@ -364,26 +423,3 @@ the doc debts riding it)
   iter-116 + the collapse, STATUS re-pin, README, this entry (iter-106
   evicted here, verified in this edit; 10 held); 1668+1 green, ruff
   clean after
-
-iter-115 · 2026-09-13 · intake13 — the owner's research call over
-the uploaded «open-ended actions / content packs / honest
-simulation» review (5 files doc-only, zero code, zero corpus
-price — the routing record's own scope, AGENTS §2.3)
-- verified BEFORE working (1668+1 green, ruff clean, HEAD
-  117a19f, Python 3.12.14 the env pin); re-verified after — same
-  numbers, zero runtime surface touched
-- the routing: the doctrine half CONFIRMED as standing law
-  (VISION §1/§5, INV-1..5, EPIST-1; one stale pin corrected —
-  phase 6's litmus test MET BY MEASUREMENT since iter-112);
-  four proposals routed: substrate → D-096 + parse-2 + engine-1
-  (the loop already executes intent chains causally, zero
-  simulator change owed; a generic primitives layer REFUSED —
-  L13, no consumer); PARTIAL → first separable-sub-effects
-  consumer; UNDER_MODELLED → REFUSED, the PACK-CI CLOSURE LAW
-  the preferred cure; inventions-from-repetition → parked
-  (res-1 + world-2 L2)
-- docs: phases.md §6's intake-13 block + DECISIONS D-150 +
-  TASKS iter-115 + STATUS re-pin + this entry (iter-105 evicted,
-  verified in this edit; 10 held). Caps: DECISIONS 75 lines
-  (44 rows) — over-cap on substance (§6.1), collapses at the
-  phase-6 gate per the D-034 family law

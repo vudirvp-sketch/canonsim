@@ -26,6 +26,47 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-125 · intake-18 — the player-decision-mechanics research routed: the A–G candidate verdicts verified, three measurements re-derived at HEAD, the §6.1 cross-synthesis closed — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`RESEARCH_PLAYER_DECISION_MECHANICS.md` (the methodology
+document's §6.1 second-named file — the owner call that
+intake-17's tail note awaited, closing the §6.1 pair; the
+external text stays outside the repo, the convenience-copy law).
+Every load-bearing claim verified at HEAD 29b931b; three fresh
+measurements RE-DERIVED by a read-only probe through the public
+API (day1_full seed 125: the decision-loop census — 56 events /
+8 player steps / 13 PC knowledge records / 15 suspicion deltas /
+5 leverage mints, the epistemic loop end to end incl. the
+symmetric door rejection; the removal test executed literally —
+minus steal 56→31 events with ALL social-risk deltas vanishing
+while the arson chain survives, minus the final wait the ending
+loses the t=1080 watch handover; province_smoke seed 42: the
+derived legs 705/660/405/345, 14/14 PC records born on the five
+waypoint arrivals, the t=3240 transfer mid-leg). The verdict set
+over the brief's own A–G domains: time/timing PARTIAL (the
+informed half rides world-2 L2 slice 4's calendar),
+information/knowledge PROVEN as substrate (the "most distinctive
+layer" hypothesis INFERENCE + PARTIAL — compellingness not
+decidable in track A, presentation-1 the owner),
+social/suspicion PROVEN (the faction half awaits slice 3),
+travel/geography PROVEN, resources DEFERRED (res-1 owner-gated,
+unchanged), irreversibility PROVEN as law + live stakes,
+experimentation PARTIAL (the player-facing feedback half
+presentation-1's). The brief's core model re-derives the
+standing architecture layer by layer; its Do-not list is
+L13/INV-3/the measured-collapse discipline verbatim. The §6.1
+cross-synthesis with intake-17 CLOSED: one shared primitive
+(the door + the log + the brief), the states change
+actions/risks/costs/information at the mechanism level
+(measured), no new owner warranted; the one genuine residue is
+the brief's next-decision test as an evaluation discipline for
+world-2 L2 slice 3's outcome-divergence experiment (count
+divergent NEXT-DECISION surfaces, not only divergent event
+paths; the ORDER owner decides). Zero build-grade items; the
+queue untouched. Landed: D-159 + phases.md §6's intake-18 block
++ STATUS/worklog rows. Detail: D-159 + worklog iter-125 + git.
+
 ### iter-124 · intake-17 — the interface-oriented procedural composition research routed: the five candidate principles verified, two measurements re-derived at HEAD — done (doc-only, the owner's research call)
 
 The owner's «отработай по второму файлу» call over the uploaded

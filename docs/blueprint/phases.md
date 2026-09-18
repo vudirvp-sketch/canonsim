@@ -2091,6 +2091,129 @@ OPEN — that file remains outside the repo, joining only on the
 owner's call (the intake-16 tail note's second half, still
 standing).
 
+The player-decision-mechanics research routed (intake-18, D-159 —
+the owner's «отработай по второму файлу» research call over the
+uploaded `RESEARCH_PLAYER_DECISION_MECHANICS.md`, the methodology
+document's §6.1 SECOND-named file — the owner call that intake-17's
+tail note awaited, closing the §6.1 pair; the D-150/D-155/D-156/
+D-157/D-158 intake precedent, the consult posture: the external
+text stays outside the repo, every load-bearing claim verified
+against HEAD 29b931b). The research asked whether the existing
+deterministic simulation produces a compelling recurring player
+decision loop (action → context → rules → world delta → knowledge
+delta → system reactions → new information → next decision) or
+only rich simulation state — VISION §6/§7's own "interesting
+simulator: goal, not property" line, verified verbatim. Three
+fresh measurements RE-DERIVED by a read-only probe over the
+committed packs and playscripts through the public API (the
+sandbox driver outside the repo, Rule 9):
+
+- **The decision-loop census (day1_full, tavern, seed 125, director
+  on): 56 events over 8 player steps — 13 PC knowledge records, 15
+  suspicion deltas, 5 leverage mints, 1 expectation violation, 1
+  rejected intent, the full fire chain (fire_started → fire_spread
+  → smoke_rising → location_burned_out).** The loop's epistemic
+  half runs end to end in the committed corpus: the failed steal
+  (pickpocket_failed, the d100 check lost by margin 13) leaves FOUR
+  witnesses holding `figure_reaching_for_purse`; the guard's
+  violated expectation (purse expected carried, observed on the PC)
+  mints the INFERRED `purse_missing` record — suspicion-from-
+  absence, the P2d law; the watch's document check (failed by
+  margin 1) teaches the PC `papers_demanded_of_pc_01`; the crowd's
+  suspicion rises 35→40 on the pair axes. The drunk's coerce
+  against the PC is REJECTED at the same door for
+  `actor.leverage_over` — the action space is epistemically gated
+  for every actor through the one mechanism, never two.
+- **The removal test (the brief's own Test 6, executed literally):
+  minus the steal steps, 56→31 events — ALL 15 suspicion deltas,
+  ALL 5 leverage mints, the pickpocket risk, the crowd wariness,
+  the document check and the expectation violation vanish; the
+  arson chain survives untouched.** The social-risk half of the
+  loop hangs on ONE verb; the loop decomposes into independent
+  causal chains (the gut-check family's own shape). Minus the
+  final wait, the burned-out ending loses 4 system events
+  including the t=1080 watch handover (the crime_watch briefing
+  transfer) — the timing window is load-bearing for the
+  information half: waiting is never empty (rotations, decay and
+  transfers keep firing, the D-038 mid-travel law's twin).
+- **The travel-loop probe (province_smoke, seed 42): the derived
+  legs 705/660/405/345 ticks; 14/14 PC knowledge records born on
+  the five waypoint arrivals (the presence reads — who and what is
+  where, the raw material for the next talk/steal/examine
+  decision); the t=3240 NPC-to-NPC transfer fires mid-leg inside
+  the Malby→Thornmill travel (the T1 pin).** Travel converts space
+  into time cost AND an arrival-gated information harvest — the
+  route choice is already a time/exposure/information trade, not a
+  movement service.
+
+The candidate verdicts (the brief's own A–G domains; the
+FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN axis kept separate from
+the PROVEN/PARTIAL/MISSING/REJECTED/DEFERRED/SHOULD-NOT-ADD
+disposition):
+
+| Candidate | Existing primitive | Measured evidence | Decision created | Disposition |
+|---|---|---|---|---|
+| A. Time/Timing | beats/day phases/rotations; maclock-1 year cadence; st-6a prices; the director pacing clock | the wait window's handover + the mid-leg transfer | wait-vs-act changes rotations, decay, transfers, arrivals | PARTIAL — the pressure half PROVEN; the INFORMED half (enough information to time rather than gamble) rides world-2 L2 slice 4's calendar + the brief |
+| B. Information/Knowledge | the knowledge system (fidelity/channels/salience/drift, EPIST-1); the brief; echo/traits; leverage; the OCC stale-view | every census delta is epistemic (4 witnesses, the inferred record, the papers lesson) | conceal vs disclose; coerce timing; act-on-stale-view (OCC) | PROVEN as substrate (FACT); the "most distinctive layer" hypothesis INFERENCE + PARTIAL — compellingness not decidable in track A |
+| C. Social/Suspicion | pair axes + suspectaxis; trust-gated talk (≥20); leverage-gated coerce; factions' ratio dynamics | 15 deltas, 5 mints, the symmetric door rejection | spend-or-hold leverage; appease vs flee; the status-flip stakes | PROVEN — the crime chain is the v0 core; the faction-pressure half awaits world-2 L2 slice 3 |
+| D. Travel/Geography | st-6a derived prices; the road pack's TRAVEL main loop; the province surface | the legs, the arrival harvest, the mid-leg transfer | route = time/exposure/information choice | PROVEN — the L1 instrument + the province surface; the dynamic route state rides the space-pack return + res-1 (intake-17's own verdict) |
+| E. Resources/Scarcity | res-1's declared shape (pack data, macro aggregates, irreversible sinks, derived spreads) | none at runtime (the offline spike's 729→55/21/73 stays external) | not yet | DEFERRED — res-1 owner-gated, unchanged |
+| F. Irreversibility | INV-1/INV-5; the leverage spend-consumes; drop_break; the fire chain | the fire chain's terminal location_burned_out; the spent cluster dies at its spend tick | spend-or-hold, break-or-keep, burn-or-not | PROVEN as law + live stakes |
+| G. Experimentation | the log as inspection surface (mechanics.py, the dev side); belief tracking (records/echo/traits); the observe verbs | act-to-learn measured (the papers check buys the PC a fact at risk) | probe actions that buy information | PARTIAL — the dev instrument PROVEN; the player-facing feedback half UNKNOWN (presentation-1's) |
+
+The key reconciliation: the brief's own core model IS the standing
+architecture, layer by layer — PLAYER ACTION the intent door
+(INTENT_SCHEMA), CONTEXT/RULES the pack preconditions against the
+live projection (the OCC anchor), WORLD DELTA the canon event
+(EVENT_SCHEMA), KNOWLEDGE DELTA the per-knower records (EPIST-1),
+SYSTEM REACTIONS the cascade + urgencies + director hooks, NEW
+INFORMATION the brief's scene_delta/recalled_facts (BRIEF_SPEC),
+NEXT DECISION the state-gated action surface (actions.json through
+the one door). The four-layer separation the brief demands (engine
+mechanism / player-facing mechanic / systemic consequence /
+presentation) re-derives the standing fences (L2/L6, D-095's prose
+floor, INV-4) — "engine complexity is not gameplay depth" is
+already the law's shape. The decision heuristic (REAL PROBLEM →
+EXISTING PRIMITIVE → MEANINGFUL DECISION → MULTI-SYSTEM
+CONSEQUENCE → NEW INFO → NEXT DECISION) re-derives D-142's
+admission test + the gut-check family; the Do-not list (no UI,
+meters, currencies, flags or verbs without a demonstrated decision
+function; never state-space size as depth evidence) is L13/INV-3/
+the measured-collapse discipline verbatim. The player-decision
+inventory (the brief's research-order item 1) lives in the packs'
+actions.json (INV-3), surfaced per-beat by the brief's
+active_options block — no new owner.
+
+The §6.1 cross-synthesis CLOSED (both files now routed; the
+methodology's four questions): (1) the causal substrate yields
+materially different states without a new generic runtime — PROVEN
+(intake-17's 60/60 motif bindings + 54/60 price vectors);
+(2) those states change the player's actions, risks, costs,
+information and next choice — YES at the mechanism level, measured
+here (the state-gated action space, the per-seed price vectors,
+the route-dependent arrival harvest, the suspicion risk surface);
+the EXPERIENCE-level verdict ("does it compel") is not decidable in
+track A — the narrator/presentation circuit owns it
+(presentation-1, engine-1's decision-input child; the SoW horizon);
+(3) the two researches share ONE existing primitive — the intent
+door + the log + the brief as the read-side bridge — not merely
+similar vocabulary; (4) no new owner is warranted: every candidate
+routes to standing rows (world-2 L2 slice 3 the faction triangle,
+slice 4 the calendar; res-1 the scarcity half; presentation-1 the
+compellingness half; since-1 the re-encounter information
+surface). The two documents confirming one underlying need —
+composition, content and presentation over new machinery — is
+evidence FOR the existing primitives, never for a DecisionEngine,
+GameplayLayer or new information owner (L13; the brief's own
+fence). The one genuine residue: the brief's next-decision test
+(Test 5) as an EVALUATION DISCIPLINE — when world-2 L2 slice 3
+runs its outcome-divergence experiment (intake-16's residue),
+count divergent NEXT-DECISION surfaces (the state-gated action
+sets + the PC knowledge deltas), not only divergent event paths;
+routes to the world-2 row's own evaluation half, the ORDER owner
+decides. Zero build-grade items: no engine, no subsystem, no
+schema change, no queue reorder, nothing unpins.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
