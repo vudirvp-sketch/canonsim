@@ -1466,6 +1466,34 @@ reads this before widening any grammar):
   build queue UNTOUCHED — nothing unpins, nothing reorders; the
   standing owner-gated rows own every build-grade item (parse-2,
   engine-1, res-1, world-2 L2, roads-1, pack-ci).
+- **Re-entry (iter-122, the owner's 2026-09-18 «отработай по
+  файлу» call over the re-uploaded review — the same source,
+  content-matched section-by-section against this block's
+  citations; re-verified at HEAD 1a9efaf): D-150's verdict set
+  holds, zero new findings, NO ACTION.** The cited sections
+  (§1/§4/§5/§6/§7/§8/§12/§13/§15/§16/§17/§18) match this block's
+  record exactly; the uncited §2/§3/§9/§10/§11/§14 decompose onto
+  its own principles — cast_fireball is case C, the politics/
+  manipulation/dragon sections ride §8's claim≠fact over the
+  landed knowledge/relations model, §14's factor-list-then-RNG is
+  the check margin + EPIST-1's acceptance rolls under INV-2. The
+  code anchors re-verified: `core/loop.py`'s door→schedule→OCC→
+  check→resolver chain + the st-6a price law (verdict 1's
+  zero-simulator-change claim), PARSER_SPEC's grammar snapshot +
+  nearest-valid menu (case C), mechanics trace/why/blast (§17),
+  the who/channel/fidelity records (§8), and the parked rows
+  (res-1, roads-1, since-1, parse-2, engine-1) all standing. Two
+  pins strengthened since this block was written: micro-drift
+  (a)'s correction now carries the gate verdict itself (D-151
+  PASS, the ladder complete) plus a second measured instance (the
+  province pack D-153/154 — original content, its one core touch
+  a load-time lint rung, never runtime); and verdict 3's preferred
+  cure is now live enforcement (D-152's teleology rung refuses a
+  declared action without declared effects at load). PARTIAL stays
+  deferred — no separable-sub-effects action authored yet. The
+  re-uploaded v2 methodology document re-derives intake-15's own
+  confirmed record with no new drift. Nothing re-routed; no new
+  D-row; the queue untouched.
 
 The causal-architecture research bootstrap (intake-14, D-155 — the
 owner's 2026-09-18 research call over the uploaded bootstrap document

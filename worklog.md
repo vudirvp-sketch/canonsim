@@ -13,6 +13,38 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-122 · 2026-09-18 · intake13re — the owner's «отработай по
+файлу» research call over the re-uploaded architecture review (the
+intake-13 source) + the v2 methodology document (4 files doc-only,
+zero code, zero corpus price — the D-150/D-155/D-156 intake
+precedent, one family)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 1a9efaf,
+  Python 3.12.14 the env pin); the uploaded review content-matched
+  section-by-section against the intake-13 block's citations
+  (§1/§4/§5/§6/§7/§8/§12/§13/§15/§16/§17/§18 exact; §2/§3/§9/§10/
+  §11/§14 decompose onto the block's own principles) — the re-entry
+  verdict: D-150's set holds at HEAD, zero new findings, NO ACTION
+- the code-level re-verification: core/loop.py (the door/OCC/chain
+  semantics + st-6a), core/pack.py (the teleology rung — verdict 3's
+  cure now live enforcement, D-152), PARSER_SPEC §2 (the grammar
+  snapshot + the nearest-valid menu), scripts/mechanics.py
+  (trace/why/blast), EVENT_SCHEMA §knowledge (who/channel/fidelity),
+  TASKS (res-1/roads-1/since-1/parse-2/engine-1 all standing
+  owner-gated); two pins strengthened (the D-151 gate verdict + the
+  province pack D-153/154 as the second litmus instance; PARTIAL
+  stays deferred — no separable-sub-effects action authored)
+- the v2 methodology document: content-matched against intake-15's
+  record (the routing model, the two-axis vocabulary, §6.1's two
+  named files still outside) — no new drift; the session ran under
+  it as process instruction, never as repo law
+- docs: phases.md §6 the intake-13 re-entry addendum, TASKS the
+  iter-122 section, STATUS re-pin + Next step, this file; iter-112
+  evicted here (verified against git in this edit); 10 after;
+  1726+1 green, ruff clean after. Caps: STATUS 557 / TASKS 1039 /
+  DECISIONS 66 (35 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse) / phases 1987 — the
+  over-cap files ride the documented §6.1 substance precedent
+
 iter-121 · 2026-09-18 · intake15 — the owner's research call «начни
 работу с документом» over the uploaded narrative-design research
 dossier (7 GDC sources) + the research-workflow methodology document
@@ -330,38 +362,3 @@ price — the iter-103 audit footprint family)
   — the collapse owed at the phase-6 gate, D-034) / phases 1409 /
   TECH_NOTES 773 / TEST_PLAN 772 / README 825 — the over-cap files
   ride the documented §6.1 substance precedent, trim at the gate
----
-iter-112 · 2026-09-13 · world2-l1 — the reskin day, the owner's «да
-приступай» (12 files: 5 pack + 4 test + 3 doc-sync beyond STATUS/worklog
-— the day's own checklist, AGENTS §2.3's objective scope noted)
-- the clock: 14m24s from the first scaffold (23:52:40 UTC) to the green
-  T-suite (00:07:04 UTC) — reading/design before the scaffold excluded
-  (the clock's own definition); the ≤1-day budget met at ~1/60th; ZERO
-  core edits (git-verified: no byte under core/ sim/ brief/ render/ cli/
-  scripts/ — the universal-core claim measured, ROADMAP §2's exit form)
-- content/road_pack/ (the TRAVEL-loop reskin, SRD 5.1 nouns, CREDITS.md
-  CC-BY sidecar): ids stay (the scaffold law), surfaces renamed; move =
-  ticks 'edge'; rules.json travel (150/60/45 — the derived prices, no
-  overrides, all five locations claimed at row-2 sites 12–16,
-  max_edge_span 2; the measured prices 150/210/300/360); the
-  world_history formed arm binds the five claim slots; the authoring
-  loop's first live run — one lint refusal caught (travel carries no
-  notes key) and fixed same-edit, the doctor's fix-hint surface worked
-- tests: test_t1_reskin.py +7 (the T1 twin: byte-identity, the golden
-  regen + schema pins, fingerprint 0 — edge-priced moves draw nothing,
-  the derived-prices route pin, the mid-travel encounters pin — the
-  watch change t=360 inside the 180→540 leg); ROAD_STOPLIST + the
-  per-pack self-check (+1); road_smoke.json + road_smoke_seed42.jsonl;
-  1660+8 → 1668+1 green, ruff clean, zero tavern corpus price
-- T7 (the road chronicle reads as a story): the world takes shape (36
-  sites, 150 years, coast ground, forest yard, the toll post 4352 paces
-  above the water) + the four history lines + the mid-route watch
-  change (Odo hands the post) + the boatman's ramble — the tale opens
-  on the genesis and lives on the road
-- docs: D-149 (the reskin-day record — the instrument, NOT the gate),
-  TASKS world-2 L1 flip + the iter-112 section, NAV §1 + README the
-  road_pack rows, STATUS re-pin (671→647); iter-102 evicted here
-  (verified against git in this edit); 10 after. Caps: STATUS 647 /
-  TASKS 1129 / DECISIONS 74 (43 rows — the collapse owed at the
-  phase-6 gate, D-034) / phases 1409 — the over-cap files ride the
-  documented §6.1 substance precedent, trim at the gate

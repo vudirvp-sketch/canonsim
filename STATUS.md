@@ -1,54 +1,46 @@
-Iteration: iter-121 (`iter-121-intake15` — the narrative-design
-research dossier routed, the owner's research call «начни работу с
-документом» over the uploaded seven-source GDC synthesis + the
-research-workflow methodology document — the D-150/D-155 intake
-precedent, doc-only): **the intake-15 verdict set — the doctrine half
-confirmed (the dossier's 18 proposed design laws re-derive the
-standing law families with zero factual drift); the instrument half
-routed, zero build-grade items (D-156).** The 18 laws map
-one-to-one onto standing owners (04→L8 + the price-marker lint;
-05→D-005's seeding law; 08→the AP-9
-spine; 11→D-005 + T8; 17→BRIEF_SPEC §5's eviction contract
-verbatim-compatible; 18→the eight blocks). The 7 gaps: five PROVEN as
-landed instruments (A→the M-family + `systems_touched`, the composite
-formula refused D-024/L13; B→`payoff_latencies` D-140, "half-life" a
-re-labeling refused; C→M4; D→mechanics trace/why/blast D-118 — the
-dossier's IT-5 `why` proposal predates the landing, a stale pin; F→the
-spine crosswalk; G→by construction, the director releases only seeded
-hooks through the intent door), one PARTIAL (E breadcrumb density —
-the substrate landed, the recovery half is since-1's own standing
-row). The NQ-01..10 vocabulary and the NLAW-* family refused as
-second label sets (D-024 — the T/M families and the law namespace are
-owned; the translations recorded in the block). The AP-01..AP-10
-anti-pattern numbering COLLIDES with the standing live-char crosswalk
-AP family (PACK_SPEC §6 — the genuine new finding: the anti-patterns
-themselves are all standing law, but the prefix is taken; they route
-as the block's verdicts, never as a second AP numbering). The
-12-iteration program decomposes onto standing instruments and
-owner-gated rows (the standalone audit docs refused under D-024; IT-11
-is TEST_PLAN §8's testproto). The 8 fixtures map onto the committed
-corpus (F8 = since-1's row). The five uncovered GDC sources enter
-REFERENCES §10 (the intake-8/9/10 precedent). The methodology document
-confirmed as a re-derivation of the standing intake discipline — its
-§6.1's two named research files stay outside (not uploaded this
-session, recorded in the block for a future session) ·
+Iteration: iter-122 (`iter-122-intake13re` — the intake-13
+source re-uploaded & re-verified, the owner's research call
+«отработай по файлу» over the uploaded architecture review + the
+research-workflow methodology document v2 — the D-150/D-155/D-156
+intake precedent, doc-only): **the re-entry verdict — the uploaded
+review IS intake-13's own source document (title +
+section-by-section content match against phases.md §6's intake-13
+block; byte-identity unverifiable, content identity established at
+every load-bearing citation); D-150's verdict set holds at HEAD,
+zero new findings, NO ACTION.** The re-verification's code-level
+anchors: `core/loop.py`'s door/OCC/chain semantics + the st-6a price
+law (verdict 1's zero-simulator-change claim re-confirmed),
+`core/pack.py`'s teleology rung (verdict 3's preferred cure now LIVE
+enforcement — the dead-action-type lint, D-152), PARSER_SPEC's
+grammar snapshot + the nearest-valid menu (case C), mechanics
+trace/why/blast (§17), the knowledge model's who/channel/fidelity
+records (§8), and the parked rows res-1/roads-1/since-1/parse-2/
+engine-1 all standing owner-gated. The uncited sections (§2/§3/§9/
+§10/§11/§14) decompose onto the block's own principles
+(cast_fireball = case C; the politics/manipulation/dragon sections
+ride §8's claim≠fact over the landed knowledge/relations model; the
+RNG section is the check margin + EPIST-1's acceptance rolls under
+INV-2). Two pins strengthened since D-150 was written: the file's §1
+phase-6 litmus staleness (already the block's micro-drift (a)) now
+carries the gate verdict itself (D-151 PASS, the ladder complete) +
+a second measured instance (the province pack D-153/154 — original
+content, its one core touch a load-time lint rung, never runtime);
+PARTIAL stays deferred (no separable-sub-effects action authored
+yet). The re-uploaded v2 methodology document re-derives intake-15's
+own confirmed record with no new drift ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD c699c4f — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 1a9efaf — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-15
-block), `docs/DECISIONS.md` (D-156 — 35 rows, over the 30 cap on the
-§6.1 substance precedent until the next gate collapse, the family's
-own record), `docs/REFERENCES.md` (§10 the five new source rows),
-`docs/TASKS.md` (the iter-121 section), `STATUS.md` (this re-pin +
-Next step), `worklog.md` (this entry; iter-111 evicted per the cap) —
-6 files (REFERENCES joins the intake-8/9/10 precedent shape). The
-prior iteration's record: iter-120 (intake-14). The detail lives in
-TASKS + worklog + git.
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-13
+re-entry addendum), `docs/TASKS.md` (the iter-122 section),
+`STATUS.md` (this re-pin + Next step), `worklog.md` (this entry;
+iter-112 evicted per the cap) — 4 files. The prior iteration's
+record: iter-121 (intake-15). The detail lives in TASKS + worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -523,13 +515,13 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-121 DONE: the narrative-design research dossier routed
-(intake-15, D-156 — doc-only, the build queue untouched: nothing
-unpins, nothing reorders; the verdict set, the law/gap/NQ/program
-mappings, the AP-numbering collision, and the five new source rows
-live in phases.md §6's intake-15 block + REFERENCES §10).** The L2
-wave plan (D-153, TASKS world-2) owns the remainder: slice 3 the
-triangle, slice 4 the calendar + the verdict call. What stands:
+**iter-122 DONE: the intake-13 source re-uploaded & re-verified
+(the re-entry addendum in phases.md §6's intake-13 block — doc-only,
+the build queue untouched: nothing unpins, nothing reorders; D-150's
+verdict set re-confirmed at HEAD 1a9efaf, zero new findings, NO
+ACTION).** The L2 wave plan (D-153, TASKS world-2) owns the
+remainder: slice 3 the triangle, slice 4 the calendar + the verdict
+call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by

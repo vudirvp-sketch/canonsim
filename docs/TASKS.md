@@ -26,6 +26,29 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-122 · intake-13 re-entry — the open-ended actions review re-uploaded & re-verified: D-150 stands, zero new findings — done (doc-only, the owner's research call)
+
+The owner's «отработай по файлу» call over the re-uploaded
+architecture review — intake-13's own source document (title +
+section-by-section content match against phases.md §6's intake-13
+block; the external text stays outside the repo, the convenience-copy
+law; byte-identity unverifiable, content identity established at
+every load-bearing citation). Re-verified at HEAD 1a9efaf: the
+doctrine half and all four routed verdicts hold unchanged — the
+code-level anchors (core/loop.py's door/OCC/chain semantics + the
+st-6a price law; core/pack.py's teleology rung; PARSER_SPEC's grammar
+snapshot + nearest-valid menu; mechanics trace/why/blast; the
+knowledge model's who/channel/fidelity records; the parked rows
+res-1/roads-1/since-1/parse-2/engine-1 all standing owner-gated).
+Two pins strengthened since D-150 was written: the §1 phase-6 litmus
+now carries the gate verdict itself (D-151 PASS) + a second measured
+instance (the province pack D-153/154); the closure law's preferred
+cure is now live enforcement (D-152's dead-action-type rung). The
+re-uploaded v2 methodology document re-derives intake-15's record
+with no new drift. Verdict: NO ACTION — already routed; nothing
+re-routed, no new D-row. The addendum: phases.md §6's intake-13
+block. Detail: worklog iter-122 + git.
+
 ### iter-121 · intake-15 — the narrative-design research dossier routed — done (doc-only, the owner's research call)
 
 The routing verdict set — the doctrine half confirmed (the 18 proposed
