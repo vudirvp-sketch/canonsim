@@ -2,7 +2,7 @@
   "meta": {
     "pack": "province_pack",
     "version": "0.1",
-    "notes": "Chronicle templates for the province pack (world-2 L2, slices 1-2 — the road grammar re-voiced: the tavern/road syntax unchanged, the province's own prose; the loop change was L1's test, the DEPTH is L2's). Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists = alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line. The world_history line's formed arm binds the six armed claim slots (weir_water/road_ground/keep_height/bank_ground/croft_hills/mill_bank — rules.json worldgen.claims). The cultures slice's tier pair (iter-119): road_counts the population tier's census at the macro crossings, road_musters the condensation — the {names?...|...} branch is the law (a bare {names} on a nameless condensation is an unknown slot, the drifted_from family); the drawn names list renders joined (render/tracery.py's sequence law)"
+    "notes": "Chronicle templates for the province pack (world-2 L2, slices 1-2 — the road grammar re-voiced: the tavern/road syntax unchanged, the province's own prose; the loop change was L1's test, the DEPTH is L2's). Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists = alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a chronicle line. The world_history line's formed arm binds the six armed claim slots (weir_water/road_ground/keep_height/bank_ground/croft_hills/mill_bank — rules.json worldgen.claims). The cultures slice's tier pair (iter-119): road_counts the population tier's census at the macro crossings, road_musters the condensation — the {names?...|...} branch is the law (a bare {names} on a nameless condensation is an unknown slot, the drifted_from family); the drawn names list renders joined (render/tracery.py's sequence law). The calendar slice (slice 4): the market day's and the fair's lines plus the four seasons' own phase lines — each season's turn its own tale line (the cycle pairs' event types, never a shared template keyed on a raw id), the day coordinate riding the outcome beside the phase"
   },
   "tale_gate": {
     "min_importance": "medium"
@@ -79,6 +79,12 @@
     "guild_councils": "{actor} bars the stalls and puts its heads together at {location}.",
     "wergeld_vigil": "{actor} holds the wergeld vigil at {location} — the blood price spoken aloud again.",
     "garrison_patrols": "{actor} walks its round with a hard eye at {location}.",
-    "grief_wakes": "The old grief wakes in {location} — the blood price remembered again."
+    "grief_wakes": "The old grief wakes in {location} — the blood price remembered again.",
+    "market_opens": "Day {day}: the river market opens at Malby — the stalls from the weir stair to the bank, the road traffic thick on the artery.",
+    "fair_opens": "Day {day}: the month's fair at Malby — the guild's weighing, the season's trade told on the beam.",
+    "thaw_turns": "Day {day}: the thaw — the weir runs loud with meltwater, the road soft to the ford.",
+    "high_water_rises": "Day {day}: the river rises — the lower fords drown, the punt men charge double.",
+    "long_light_turns": "Day {day}: the long light — the crofts green to the moor's edge, the road dry and fast.",
+    "first_frost_turns": "Day {day}: first frost on the weir stair — the road hardens, the trade slows."
   }
 }

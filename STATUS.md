@@ -1,62 +1,3 @@
-Iteration: iter-134 (`iter-134-cumulative-1` — the cumulative
-research reconciliation routed, the owner's «согласно
-CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
-second-stage cumulative method file — the closure form the
-method's own trigger condition awaited: the intake family 4..25
-closed by its own last two members, the ladder 0..6 complete,
-nothing pinned; doc-only):
-**the corpus taken as ONE body of evidence — ONE fresh read-only
-measurement, the ARMING CENSUS over the three committed packs
-(factions depth-6: 0 committed consumers, DORMANT — intake-23's
-claim now measured; names/cultures/spines/groups+condensation:
-1 consumer, the province-only family — intake-20's
-LANDED-BUT-UNDER-TESTED list confirmed whole; travel 2; weather
-+ the nine core families 3, promoted) — and five cumulative
-findings: F1 the frontier is composition-limited, never
-implementation-limited (the residue is arming/promotion/content,
-never machinery); F2 the corpus is saturated (intakes 11..25,
-15 documents + 2 re-entries, the last 14 iterations all
-owner-called doc-only routing, every one zero build-grade; the
-marginal research value now lives in the open rows' own
-evaluation disciplines — re-open condition: a fresh question
-aimed at an open row's evaluation form); F3 the convergence —
-world-2 L2 slice 3 the highest-leverage proof (six intakes'
-residues consume the one row: the composed outcome-divergence
-experiment — one two-arm run, four read surfaces, the blast
-shape — + the claim/legitimacy first consumer + the card
-recalibration + the zero-consumer factions arming; also a live
-probe of the minimal-system-contract hypothesis, zero core edits
-expected); F4 the promotion ladder the content-side frontier
-(slice 3 arms factions 0→1 same-pack; the promotion events for
-the four province-only families are the future pack slots,
-never more province arming); F5 the SoW fence holds
-(compellingness INV-4-fenced behind engine-1/presentation-1 +
-the {3–8B, GBNF} hardware arm). Cross-pollination: intake-21's
-four-question card = slice-3's experiment design review;
-intake-24's principle index card = slice-3's authoring checklist.
-Refused at the door: fresh research capacity pre-slice-3, a
-factions spike separate from the slice, a capability-truth-table
-document, res-1 pre-work, any queue reorder (the standing
-readiness order IS the cumulative work order). Verdict CONFIRMED;
-disposition NO ACTION — nothing unpins, nothing reorders; slice
-3's standing implementation-readiness CONFIRMED and sharpened,
-the owner's row pick the gate. Zero build-grade items ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD ed23c52 — 1726+1 green, ruff clean —
-and re-verified after: doc-only, zero runtime files touched, the
-corpora untouched by construction) ·
-Date: 2026-09-19 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the cumulative
-block: the census table + the five findings), `docs/DECISIONS.md`
-(D-167), `docs/TASKS.md` (the iter-134 section), `STATUS.md`
-(this re-pin + Next step), `worklog.md` (this entry; iter-124
-evicted per the cap) — 5 files.
-The prior iteration's record: iter-133 (intake-25). The
-detail lives in TASKS + worklog + git.
-
 Iteration: iter-135 (`iter-135-triangle` — world-2 L2 slice 3,
 the triangle: the factions arming + the deep feud history + the
 composed outcome-divergence experiment; the owner's «мы провели
@@ -116,6 +57,70 @@ fixtures/playscripts lines), `STATUS.md` (this re-pin + KI#85),
 The prior iteration's record: iter-134 (cumulative-1). The
 detail lives in TASKS + worklog + git.
 
+Iteration: iter-136 (`iter-136-calendar` — world-2 L2 slice 4, the
+calendar; the owner's «продолжай работу по планам» call — the
+iter-135 precedent phrase's continuation, STATUS Next step's own
+readiness pick: slice 4 the wave plan's remainder):
+**maclock-1's middle granularities LANDED** (`core/calendar.py` +
+`rules.json::time.calendar` — L4 grown to three tiers: micro-time,
+the SUB-YEAR cadences, macro-time, one authority): named entries
+`{every_ticks, event_type}` or `{every_ticks, cycle}` — the cycle
+the phase pairs `{phase, event_type}` rotating by pure arithmetic
+(`cycle[k % len]`, the run OPENS at cycle[0], the wrap's phase
+turning with the year), each season's turn its OWN tale line; the
+crossings the positive multiples fired COARSEST-FIRST at
+co-occurring ticks (the year → the season → the fair → the market
+day → the rotation, the deterministic order `every_ticks` DESC then
+id), each turn ONE canon event (actor world, the outcome
+`{calendar, day, phase?}`, no knowledge/state_changes/hooks). The
+committed ARMING: the market days 14400 (`market_opens`), the fairs
+43200 (`fair_opens`), the seasons 129600 + [thaw, high_water,
+long_light, first_frost] — the crossings beyond every day-scale
+corpus script's horizon BY CONSTRUCTION (the golden bytes untouched,
+the corpus price ZERO). The weather's SEASONAL layer
+(`weather.seasonal` — the ride names the seasons cadence, one roll
+cadence per family; the per-phase weight overrides the D-030
+ASYMMETRIC data: the rise storm-heavy from any state, the long
+light unbiased — the calm rebuilds slow). The composed YEAR
+experiment (province_calendar.json, seed 42, the F3 four read
+surfaces): 36 markets, 12 fairs, the four seasons, the year's turn
+(151), four weather rolls (the rise draws STORM — the D-030 read
+measured), the co-occurrence order pinned, the twin byte-identical;
+the T7 playtest read in worklog (the year's chronicle a town's
+almanac — the calendar the spine, the watch/talk texture the year-
+scale noise floor, honestly recorded). ONE forced core edit — KI#86
+(the erosion's seed-time gate: the seasonal ride at test scale
+exposed the latent unbounded queue feed; `erosion_due` gates the
+seed on the fold, the fire-time read unchanged).
+tests/test_calendar.py +16, PROVINCE_STOPLIST +2 (thaw, frost), the
+budget's second honest re-declare (the templates 52→58, the ceiling
+55→60), the brief's lore the INFORMED half ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD e8f34af — 1738+1 green, ruff clean —
+and re-verified after; the tavern/road corpora byte-untouched, the
+province golden untouched by construction — zero crossings in the
+smoke horizon) ·
+Date: 2026-09-19 ·
+Scope: `core/calendar.py` (NEW — the family), `core/weather.py` (the
+seasonal layer + KI#86's gate), `core/loop.py` (the crossings + the
+cursor + the resume door), `core/cursor.py` (the envelope), 
+`core/pack.py` (the lints + the witnesses),
+`content/province_pack/{rules,templates}.json` (the calendar + the
+seasonal + the tale lines + the lore + the budget re-declare),
+`tests/test_calendar.py` (+16), `tests/test_inv3_stoplist.py`
+(PROVINCE_STOPLIST +2), `tests/playscripts/province_calendar.json`,
+`docs/TASKS.md` (the iter-136 section + the world-2 row), 
+`docs/DECISIONS.md` (D-169), `docs/blueprint/phases.md` (§6 the
+slice-4 block), `docs/AGENT_NAVIGATION.md` (§1 the
+calendar/weather/loop/cursor/playscript lines), `STATUS.md` (this
+re-pin + KI#86), `worklog.md` (this entry; iter-126 evicted per the
+cap) — 16 files.
+The prior iteration's record: iter-135 (triangle). The
+detail lives in TASKS + worklog + git.
+
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -144,6 +149,14 @@ detail lives in TASKS + worklog + git.
   numeric-home law (hear the shout, take no fear write) · opened+fixed
   iter-135 (core/transitions.py; the province's malby arson first
   exercised it — the tavern/road corpora never burned a crowded room).
+- KI#86 · the weather erosion seeded a queue entry per changing roll
+  even when NO entity held the rule's `from` value — a dead entry is
+  pure feed: with the roll cadence below the rule's `after_ticks` the
+  queue chases the crossings forever (the seasonal ride at test scale
+  hung); `erosion_due` gates the seed on the fold, the fire-time read
+  unchanged (the rain washes the smoke that was there when it rained)
+  · opened+fixed iter-136 (core/weather.py; KI#85's sharpening twin —
+  the calendar slice's own forced edit).
 
 - (The closed-KI tombstone notes — KI#55..KI#84, every one
   deleted per AGENTS §5 at its own iteration, all far past the
@@ -595,62 +608,63 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-135 DONE: world-2 L2 slice 3 — the triangle (the factions
-ARMED 0→1, depth-6's first committed arming; the deep feud
-history — the cause-tree chronicle re-cut + the wergeld claims
-seeding the director's buffer; the composed outcome-divergence
-experiment — F3's four read surfaces measured live: +16 events
-zero drops, the first divergence at the take + the amplifying
-chain, the knowledge +4/−1 + the runner SUSPECT, the same-seed
-fork; intake-23's F/G prompts answered; intake-19's
-claim/legitimacy first consumer landed as the vigil's deadband;
-ONE forced core edit — KI#85, the modularity probe's sharpening
-finding, exactly F3's predicted shape).**
-The census recalibration: factions 0→1 ARMED same-pack (intake-20's
-card input); the promotion events for the four province-only
-families stay the future pack slots (F4 unchanged).
+**iter-136 DONE: world-2 L2 slice 4 — the calendar (maclock-1's
+middle granularities landed: the sub-year cadence family — the
+market days / the fairs / the seasons' four-phase cycle, each
+season's turn its own tale line; the weather's seasonal layer — the
+ride + the D-030 asymmetric weights, the rise's storm bias measured
+at the year run; the composed YEAR experiment — province_calendar
+seed 42, the T7 playtest read in worklog; ONE forced core edit —
+KI#86, the erosion's seed-time gate).**
 
-The L2 wave plan (D-153, TASKS world-2) owns the remainder:
-slice 4 the calendar — the market days / the fair / the river's
-seasonal rise (the macro cadences + weather-1's chain, the D-030
-mid-grim dial's asymmetric data) + the T7 read + the row's own
-verdict call (the owner's). What stands:
+**THE L2 WAVE PLAN IS COMPLETE** (D-153/D-154/D-168/D-169: the
+skeleton, the cultures, the triangle, the calendar — four slices,
+four done). The world-2 row's own VERDICT CALL now stands open,
+and it is the OWNER's (never self-called): the two-level gate's
+level-2 question — is the deep second world's honest scope
+delivered (VISION §7's twin: "a deep unique world takes weeks; the
+slices are the weeks made explicit" — the weeks are now spent)?
+The verdict materials: the four slices' committed records (TASKS
+world-2 + the D-rows), the composed experiments (the
+outcome-divergence fork seed 53, the year run seed 42), the T7
+playtest reads (worklog iter-135/136 — the triangle's tale and the
+year's almanac, the watch/talk texture the year-scale noise finding
+honestly recorded), the census (iter-134: one province-only family
+LANDED-BUT-UNDER-TESTED, the promotion events the future pack
+slots). The natural companions the owner may weigh with the
+verdict: `pack-1` (the grim pack — the first authored pack to run
+the full crosswalk deliberately, the D-030 dial's own consumer) or
+the standing readiness order's next row.
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
-   readiness, world-2 L2 slice 4 (the calendar + the T7 read + the
-   verdict call) is the natural next pick — the wave plan's own
-   remainder, the triangle's ratio dynamics gaining their seasonal
-   cadence; then `roads-1` (mode
-   G's generated exits — the read-path fork resolved, iter-104),
-   `res-1` (the dives landed, the backbone stands),
-   `since-1`,
-   `parse-2`, `engine-1` (+ `presentation-1`, its decision-input
-   child — now also the owner of the player-facing compellingness
-   question intake-18 fenced to the SoW horizon), `tune-3`,
-   `st-2`, `scav-1`, `qa-1` mypy + `ci-1` GitHub
-   Actions (the runner that automates the now-landed admission lint),
-   `bg-6` (the SoW audit, D-055 deferral), `pack-1` (the grim pack —
-   the first authored pack to run the full crosswalk deliberately) +
-   `pack-3` + `pack-4`, `companion-1`, `mech-2` (rides the next
-   mechanics.py touch — now also carrying intake-21's
-   single-event postmortem form + intake-22's viz-export form),
-   `st-4` (rides presentation-1 at its
-   write time, D-148) and `st-5` (the first real consumer decides). No
-   other owner question stands open. The consult material for
-   the engine-1/presentation-1 spec writes and any future
-   contract/plugin question: the intake-22 modularity card, the
-   intake-23 world-structure card, and the intake-21 observability
-   card (the system-contract decomposition research call is the
-   owner's, never self-opened).
-2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
-   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
-   decision input), the bg-7 prose families skipped in the bg-8
-   heartbeat, the per-family latency distribution. New track-B ideas
-   enter the backlog on the owner's call only.
+   readiness, `roads-1` (mode G's generated exits — the read-path
+   fork resolved, iter-104), `res-1` (the dives landed, the
+   backbone stands), `since-1`, `parse-2`, `engine-1`
+   (+ `presentation-1`, its decision-input child — now also the
+   owner of the player-facing compellingness question intake-18
+   fenced to the SoW horizon), `tune-3`, `st-2`, `scav-1`, `qa-1`
+   mypy + `ci-1` GitHub Actions (the runner that automates the
+   now-landed admission lint), `bg-6` (the SoW audit, D-055
+   deferral), `pack-1` (the grim pack) + `pack-3` + `pack-4`,
+   `companion-1`, `mech-2` (rides the next mechanics.py touch —
+   now also carrying intake-21's single-event postmortem form +
+   intake-22's viz-export form), `st-4` (rides presentation-1 at
+   its write time, D-148) and `st-5` (the first real consumer
+   decides). No other owner question stands open. The consult
+   material for the engine-1/presentation-1 spec writes and any
+   future contract/plugin question: the intake-22 modularity
+   card, the intake-23 world-structure card, and the intake-21
+   observability card (the system-contract decomposition research
+   call is the owner's, never self-opened).
+2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
+   standing gap rows: the {3–8B, GBNF} arm (owner hardware —
+   engine-1's decision input), the bg-7 prose families skipped in
+   the bg-8 heartbeat, the per-family latency distribution. New
+   track-B ideas enter the backlog on the owner's call only.
 3. **The SoW horizon (ROADMAP §6) is the standing frame** now that
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
-4. **Nothing is pinned.** The next move is the owner's row pick (or a
-   fresh call).
+4. **Nothing is pinned.** The next move is the owner's: the
+   world-2 verdict call, a row pick, or a fresh call.

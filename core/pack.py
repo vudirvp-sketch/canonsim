@@ -66,6 +66,9 @@ from core.weather import (
     EROSION_KEYS as WEATHER_EROSION_KEYS,
 )
 from core.weather import (
+    SEASONAL_KEYS as WEATHER_SEASONAL_KEYS,
+)
+from core.weather import (
     STATE_KEYS as WEATHER_STATE_KEYS,
 )
 from core.weather import (
@@ -513,6 +516,12 @@ class _Lint:
         # law reads the claims' declared sites (validated by _worldgen)
         # and the entities' exits graph, all validated before it.
         self._travel()
+        # the calendar family (the calendar slice): after _travel and
+        # before _weather — the sub-year cadences read the macro clock
+        # (validated by _time_rules) and the template closure, and the
+        # weather block's seasonal layer reads the calendar entries
+        # (the ride binding), all validated before it.
+        self._calendar()
         # weather-1 (iter-98): LAST among the block lints — the ambient
         # family's block reads the macro clock (validated by _time_rules),
         # the template closure, the director hook table (the seeded
@@ -4096,6 +4105,188 @@ class _Lint:
                     flags.add(spec["flag"])
         return flags
 
+    def _calendar(self) -> None:
+        """The sub-year cadence family's pack half (maclock-1's middle
+        granularities, the calendar slice — `core/calendar.py` the
+        engine twin). Runs after `_time_rules` (the pairing reads the
+        macro block) and before `_weather` (the seasonal layer's ride
+        binding reads the entries validated here).
+
+        THE PAIRING LAW (the L4 one-authority family): a calendar
+        without the macro clock is dead data — the middle
+        granularities hang from the same authority's head block (a
+        sub-year clock in a pack that declares no year clock has no
+        calendar to sit inside). The other direction is legal: the
+        clock may run calendar-less (the year granularity alone, the
+        68a pattern — the committed pack's arming rides with the
+        slice's own content).
+
+        THE SUB-YEAR LAW: every entry's `every_ticks` is an integer
+        in [1, macro.cadence_ticks) — the year clock owns the year
+        turns, a second year-scale clock is a duplicate declaration
+        ("one clock, one cadence"; the calendar never re-declares
+        what the macro block already owns).
+
+        THE IDENTITY LAW: the entries' event types are unique across
+        the block (a cycled entry's phases included) and differ from
+        the macro turn's and the weather change's — the fold scans by
+        event type; a shared type would mix two families' outcome
+        shapes (the weather lint's own law, extended to the whole
+        clock family).
+
+        THE CYCLE LAW (the vacuity family): a declared `cycle` is a
+        list of at least TWO phase pairs `{phase, event_type}` — the
+        phases unique non-empty strings, the event types in the
+        template closure under the same identity laws; one phase is
+        a constant, never a cycle (dead data). A cycled entry
+        declares NO `event_type` of its own and a plain one MUST —
+        the both-or-neither refusal (an ambiguous emission surface
+        is a drift the fold cannot diagnose). The phases are the
+        entry's own vocabulary, consumed by the weather family's
+        seasonal weights (the ride's binding law)."""
+        time_rules = self._data["rules.json"]["time"]
+        calendar = time_rules.get("calendar")
+        if calendar is None:
+            return  # the unarmed law: no block, no family, zero crossings
+        where = "time.calendar"
+        _require(
+            isinstance(calendar, Mapping) and calendar,
+            f"{where}: must be a non-empty object (a mapping of named "
+            "sub-year cadence entries)",
+        )
+        macro = time_rules.get("macro")
+        if macro is None:
+            raise PackError(
+                f"{where}: the sub-year cadences hang from the same "
+                "authority's head block — declare time.macro (a calendar "
+                "without the year clock is dead data: the middle "
+                "granularities have no calendar to sit inside; the "
+                "pairing law — the other direction is legal, the clock "
+                "may run calendar-less)"
+            )
+        cadence = macro["cadence_ticks"]
+        templates = self._data["templates.json"]["events"]
+        weather = self._data["rules.json"].get("weather")
+        weather_event = (
+            weather.get("event_type")
+            if isinstance(weather, Mapping) else None
+        )
+        seen_types: set[str] = set()
+
+        def _check_event_type(
+            entry_where: str, event_type: object,
+        ) -> None:
+            """One emission surface's identity checks (the shared law:
+            the template closure, the macro/weather identities, the
+            block-unique types — the clock family's own names)."""
+            if not (isinstance(event_type, str) and event_type in templates):
+                raise PackError(
+                    f"{entry_where} {event_type!r} is not in the template "
+                    "vocabulary (EVENT_SCHEMA §11 — closed per pack)"
+                )
+            if event_type == macro.get("event_type"):
+                raise PackError(
+                    f"{entry_where} {event_type!r} is the macro turn's own "
+                    "event type — two families, two identities (the fold "
+                    "scans by event type; a shared type would mix the "
+                    "year's counter with the calendar's day)"
+                )
+            if event_type == weather_event:
+                raise PackError(
+                    f"{entry_where} {event_type!r} is the weather change's "
+                    "own event type — two families, two identities (the "
+                    "fold scans by event type; a shared type would mix "
+                    "the sky's state with the calendar's day)"
+                )
+            if event_type in seen_types:
+                raise PackError(
+                    f"{entry_where} {event_type!r} is already declared "
+                    "by another calendar emission — one entry, one "
+                    "identity (the fold scans by event type)"
+                )
+            seen_types.add(str(event_type))
+
+        for entry_id, entry in calendar.items():
+            entry_where = f"{where}[{entry_id!r}]"
+            _require(
+                isinstance(entry, Mapping),
+                f"{entry_where}: must be an object",
+            )
+            unknown = sorted(set(entry) - {"every_ticks", "event_type",
+                                          "cycle", "notes"})
+            if unknown:
+                raise PackError(
+                    f"{entry_where}: unknown keys {unknown} (the closed "
+                    "vocabulary: every_ticks | event_type | cycle | notes)"
+                )
+            every = entry.get("every_ticks")
+            if not (_is_int(every) and 1 <= every < cadence):
+                raise PackError(
+                    f"{entry_where}.every_ticks must be an integer in "
+                    f"[1, {cadence}) — the sub-year law: the year clock "
+                    f"(time.macro.cadence_ticks = {cadence}) owns the "
+                    "year turns; a second year-scale clock is a duplicate "
+                    "declaration, never a calendar"
+                )
+            cycle = entry.get("cycle")
+            has_own_type = "event_type" in entry
+            if has_own_type == (cycle is not None):
+                raise PackError(
+                    f"{entry_where}: exactly one of event_type or cycle — "
+                    "a plain entry declares its own turn's type, a cycled "
+                    "entry's phases own the types (an ambiguous emission "
+                    "surface is a drift the fold cannot diagnose)"
+                )
+            if has_own_type:
+                _check_event_type(
+                    f"{entry_where}.event_type", entry.get("event_type")
+                )
+            else:
+                if (
+                    not isinstance(cycle, list)
+                    or len(cycle) < 2
+                    or not all(isinstance(pair, Mapping) for pair in cycle)
+                ):
+                    raise PackError(
+                        f"{entry_where}.cycle must be a list of at least "
+                        "two phase pairs {{phase, event_type}} (one phase "
+                        "is a constant, never a cycle — the vacuity "
+                        f"family; got {cycle!r})"
+                    )
+                phases: list[str] = []
+                for pair in cycle:
+                    pair_where = f"{entry_where}.cycle[{pair.get('phase')!r}]"
+                    unknown = sorted(set(pair) - {"phase", "event_type"})
+                    if unknown:
+                        raise PackError(
+                            f"{pair_where}: unknown keys {unknown} (the "
+                            "closed vocabulary: phase | event_type)"
+                        )
+                    phase = pair.get("phase")
+                    if not isinstance(phase, str) or not phase:
+                        raise PackError(
+                            f"{pair_where}.phase must be a non-empty "
+                            "string (the phase is the entry's own "
+                            "vocabulary — the weather family's seasonal "
+                            "weights key on it)"
+                        )
+                    if phase in phases:
+                        raise PackError(
+                            f"{pair_where}: the phase {phase!r} repeats — "
+                            "the cycle's phases are unique (a repeated "
+                            "phase is a clock that cannot tell its own "
+                            "position)"
+                        )
+                    phases.append(phase)
+                    _check_event_type(
+                        f"{pair_where}.event_type", pair.get("event_type")
+                    )
+            if "notes" in entry and not isinstance(entry["notes"], str):
+                raise PackError(
+                    f"{entry_where}.notes must be a string (the pack's "
+                    "commentary convention)"
+                )
+
     def _weather(self) -> None:
         """The ambient weather family's pack half (weather-1; runs LAST —
         the block reads the macro clock (`_time_rules`), the template
@@ -4329,6 +4520,111 @@ class _Lint:
                 "state the chain can never roll is dead data (the "
                 "reachability law, the depth-5b precedent)"
             )
+        # -- the seasonal layer (the calendar slice) ---------------------
+        # `ride` names a DECLARED, CYCLED time.calendar entry: the
+        # chain's rolls move to that sub-year clock's crossings (the
+        # reference, never a declaration — "one clock, one cadence"),
+        # and the phases the weights key on come from that entry's own
+        # cycle (an uncycled ride has no phases to bias — dead data,
+        # the vacuity family). Each `weights[phase][state]` map is the
+        # FULL replacement for that state's roll during that phase:
+        # the same shape the base states' own weights lint enforces
+        # (non-empty, keys ⊆ the declared states, integers >= 1).
+        seasonal = weather.get("seasonal")
+        if seasonal is not None:
+            seasonal_where = f"{where}.seasonal"
+            if not isinstance(seasonal, Mapping):
+                raise PackError(
+                    f"{seasonal_where}: must be an object (ride | weights | "
+                    "notes)"
+                )
+            unknown = sorted(set(seasonal) - set(WEATHER_SEASONAL_KEYS))
+            if unknown:
+                raise PackError(
+                    f"{seasonal_where}: unknown keys {unknown} (the "
+                    f"closed vocabulary: {' | '.join(WEATHER_SEASONAL_KEYS)})"
+                )
+            if "notes" in seasonal and not isinstance(
+                seasonal["notes"], str
+            ):
+                raise PackError(
+                    f"{seasonal_where}.notes must be a string (the pack's "
+                    "commentary convention)"
+                )
+            ride = seasonal.get("ride")
+            calendar = rules.get("time", {}).get("calendar") or {}
+            ride_entry = calendar.get(ride) if isinstance(ride, str) else None
+            if not (
+                isinstance(ride, str)
+                and isinstance(ride_entry, Mapping)
+                and isinstance(ride_entry.get("cycle"), list)
+            ):
+                raise PackError(
+                    f"{seasonal_where}.ride {ride!r} must name a DECLARED "
+                    "time.calendar entry carrying a cycle (the binding "
+                    "law: the rolls move to that sub-year clock's "
+                    "crossings and the phases come from its cycle — an "
+                    "uncycled or absent ride is dead data, the vacuity "
+                    "family)"
+                )
+            phases = {
+                pair.get("phase")
+                for pair in ride_entry["cycle"]
+                if isinstance(pair, Mapping)
+            }
+            phase_weights = seasonal.get("weights")
+            if phase_weights is None:
+                raise PackError(
+                    f"{seasonal_where}.weights must be present — a "
+                    "seasonal layer that biases nothing is dead data "
+                    "(the vacuity family; move the rolls without the "
+                    "bias through the ride alone is not a layer)"
+                )
+            if not isinstance(phase_weights, Mapping):
+                raise PackError(
+                    f"{seasonal_where}.weights must be an object keyed by "
+                    "the ride's cycle phases, each the per-state weight "
+                    "maps"
+                )
+            for phase, overrides in phase_weights.items():
+                phase_where = f"{seasonal_where}.weights[{phase!r}]"
+                if phase not in phases:
+                    raise PackError(
+                        f"{phase_where}: not a phase of the ride's cycle "
+                        f"{sorted(phases)} (the binding law)"
+                    )
+                if not isinstance(overrides, Mapping) or not overrides:
+                    raise PackError(
+                        f"{phase_where}: must be a non-empty object keyed "
+                        "by the current state whose roll it overrides"
+                    )
+                for state, weights in overrides.items():
+                    state_where = f"{phase_where}[{state!r}]"
+                    if state not in states:
+                        raise PackError(
+                            f"{state_where}: not a declared weather "
+                            "state (the chain's vocabulary is closed)"
+                        )
+                    if not (isinstance(weights, Mapping) and weights):
+                        raise PackError(
+                            f"{state_where}: must be a non-empty weight "
+                            "map (the full replacement for that state's "
+                            "roll during the phase)"
+                        )
+                    for target, weight in weights.items():
+                        if target not in states:
+                            raise PackError(
+                                f"{state_where}: {target!r} is not a "
+                                "declared state (the chain's vocabulary "
+                                "is closed)"
+                            )
+                        if not (_is_int(weight) and weight >= 1):
+                            raise PackError(
+                                f"{state_where}[{target!r}] must be an "
+                                f"integer >= 1, got {weight!r} (zero or "
+                                "negative is not a weight — omit the "
+                                "key instead)"
+                            )
 
     def _reflection(self) -> None:
         """The reflection & compaction contract (`core/reflection.py`
@@ -5027,6 +5323,20 @@ class _Lint:
         ):
             if isinstance(event_type, str):
                 used.add(event_type)
+        # the calendar entries (the sub-year cadences, the calendar
+        # slice) — the crossing events are emission sites exactly as
+        # the macro turn's own: a plain entry's own type, every cycle
+        # pair's phase type
+        for entry in ((rules.get("time") or {}).get("calendar") or {}).values():
+            if not isinstance(entry, Mapping):
+                continue
+            if isinstance(entry.get("event_type"), str):
+                used.add(entry["event_type"])
+            for pair in entry.get("cycle") or ():
+                if isinstance(pair, Mapping) and isinstance(
+                    pair.get("event_type"), str
+                ):
+                    used.add(pair["event_type"])
         # weather erosion rows
         for state in ((rules.get("weather") or {}).get("states") or {}).values():
             if not isinstance(state, Mapping):

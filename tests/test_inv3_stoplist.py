@@ -94,13 +94,17 @@ ROAD_STOPLIST: tuple[str, ...] = (
 # (iter-135): the faction nouns (guild, council, vigil, patrol — the
 # goal verbs and their tale lines), the chronicle's third tier
 # (exodus), and the feud's own axis (grievance — the wergeld's
-# pressure surface).
+# pressure surface). The calendar slice's additions (iter-136): the
+# seasons' distinctive nouns (thaw, frost — the cycle phases' own
+# words, riding the season tale lines); "market" stays in the older
+# tavern list, "fair" and "season" are deliberately absent — common
+# English words the engine's prose legitimately carries.
 PROVINCE_STOPLIST: tuple[str, ...] = (
     "sarrow", "weir", "malby", "thornmill", "tithe", "crofts", "garrison",
     "sergeant", "corporal", "osgar", "ketta", "ferra", "garrick",
     "wilmot", "tallow", "punt", "tally", "waybill", "tin", "weighbeam",
     "charcoal", "drover", "peddler", "wergeld", "guild", "council",
-    "vigil", "patrol", "exodus", "grievance",
+    "vigil", "patrol", "exodus", "grievance", "thaw", "frost",
 )
 
 

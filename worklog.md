@@ -13,6 +13,66 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+
+iter-136 · 2026-09-19 · world-2 L2 slice 4 (the calendar) — the
+owner's «продолжай работу по планам» call (the iter-135 precedent
+phrase's continuation; STATUS Next step's own readiness pick: slice 4
+the wave plan's remainder, the triangle's ratio dynamics gaining
+their seasonal cadence)
+- maclock-1's middle granularities LANDED (core/calendar.py +
+  time.calendar — L4's three tiers): the sub-year cadences (the
+  market days 14400 / the fairs 43200 / the seasons 129600 + the
+  four-phase cycle [thaw, high_water, long_light, first_frost],
+  each season's turn its own tale line) fired coarsest-first at
+  co-occurring ticks; the weather's seasonal layer (the ride +
+  the D-030 asymmetric weights: the rise storm-heavy from any
+  state, the long light unbiased — the calm rebuilds slow); the
+  crossings beyond every day-scale corpus horizon by construction
+  (the golden untouched, the corpus price zero)
+- the composed YEAR experiment (province_calendar.json, seed 42,
+  the F3 four read surfaces): 36 markets, 12 fairs, the four
+  seasons, the year's turn (151 — the chronicle binding), four
+  weather rolls (the rise draws STORM — the D-030 read measured),
+  the co-occurrence order pinned at day 90 (the rise → its roll →
+  the fair → the market), the twin byte-identical; ONE forced core
+  edit — KI#86 (the erosion's seed-time gate: the seasonal ride
+  at test scale exposed the latent unbounded queue feed — dead
+  entries chasing the crossings; `erosion_due` gates the seed on
+  the fold, the fire-time read unchanged)
+- THE T7 PLAYTEST READ (the year's chronicle, seed 42, 2284
+  events / 1274 tale lines): the runner comes to Malby and stays
+  the year — the tale reads as a town's almanac. The watch turns
+  twice a day (Osgar and Ferra handing the post, ~720 lines) and
+  the talk runs on the toll and the feud (~265 talk lines, the
+  weirkeeper's waybill checks the garrison-colored texture); the
+  calendar is the SPINE — the market opens on every tenth day
+  (36 times, each line carrying its day), the guild weighs the
+  month on every thirtieth (12 fairs), the river RISES on day 90
+  (the fords drown, the punt men charge double — the D-030 price
+  marker in the tale's own words, the sky turning to storm with
+  it), the long light greens the crofts at 180, the first frost
+  hardens the road at 270, and the year turns at 360 with the
+  thaw's meltwater as the market opens again exactly as it did on
+  day 10. SIGNAL VS NOISE: the calendar's ~52 lines are uniformly
+  readable, each landing exactly on its day, the day headers
+  segmenting the year cleanly; the noise floor at the year scale
+  is the watch/talk texture (~85% of the lines) — the tale gate's
+  day-scale tuning showing at the year scale, the tune row's own
+  question (honestly recorded, never this slice's edit); the
+  ambient weather stays canon-without-a-line (the committed form)
+- tests/test_calendar.py +16 (the arithmetic, the lints, the
+  unarmed both-arms byte-identity + the stream delta, the seasonal
+  ride + the forced-bias pins, the default ride, the resume door
+  across crossings, the corpus horizon, the committed year run);
+  PROVINCE_STOPLIST +2 (thaw, frost); the budget's second honest
+  re-declare (templates 52→58, ceiling 55→60); the brief's lore
+  the INFORMED half; 1754+1 green, ruff clean (16 files: 5 core +
+  2 pack + 3 tests + 6 docs). Caps: STATUS 670 / TASKS 1625 /
+  DECISIONS 80 (48 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse) / phases 3451 / worklog
+  10 entries (iter-126 evicted here, verified in this edit) — the
+  over-cap files ride the documented §6.1 substance precedent
+
 iter-135 · 2026-09-19 · world-2 L2 slice 3 (the triangle) — the owner's
 «теперь настала пора приступать к работе по планам» call (the
 iter-118/119 precedent phrase; iter-134's F3 convergence consumed:
@@ -377,61 +437,3 @@ itself external per the convenience-copy law)
 - phases.md 2404→2530 lines, TASKS 1193→1242, DECISIONS 71→72,
   STATUS 599→597 — the doc family's growth rides the standing
   §6.1 substance precedent, documented here
-
-
-iter-126 · 2026-09-18 · intake19 — the owner's «отработай по
-второму файлу» research call over the uploaded persistent-groups
-/ settlement-development research task (5 files doc-only, zero
-code, zero corpus price — the D-150/D-155/D-156/D-157/D-158/D-159
-intake precedent)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 2b168e9,
-  Python 3.12.14 the env pin); every load-bearing brief claim
-  verified against HEAD: the groups module (the member_of door,
-  the tiers, the tombstone — core/groups.py), the factions walk
-  (the ratio formula reading the LIVE fold — core/factions.py),
-  the transitions engine (the generic layer machinery —
-  core/transitions.py), the weather erosion family
-  (core/weather.py), the knowledge system (channels/fidelity/
-  salience/transfer decay — core/knowledge.py), the on_action
-  dispatch (core/onaction.py), the intent door + the resolvers
-  (core/intent.py, core/resolvers.py — the ignite resolver's
-  layer-blind ignition), the LOD zones + the macro clock
-  (core/lod.py, core/macro.py), the resume door + the cursor
-  (core/loop.py, core/cursor.py), the fold's entity law
-  (apply_event rejects unknown ids — the st-5 boundary)
-- ONE fresh probe RE-DERIVED by a read-only sandbox driver
-  outside the repo (Rule 9): a tavern_pack copy carrying the
-  settlement vocabulary as PACK DATA (a second transitions layer
-  `build`, a tier-armed group, a faction goal, an on_action
-  witness reaction, an erosion rule, a buildable location + tool
-  + witness NPC, a `raise_timber` action over the EXISTING ignite
-  resolver) — passed the FULL pack-ci admission lint, zero core
-  edits, seed 7 twice byte-identical; the measurements: the
-  construction chain incl. the MID-BUILD DEPARTURE (the whole
-  chain firing after the PC left at t=59), the group tiers (the
-  cold aggregate, the condensation's member_of births + the
-  tombstone, the census), the group as actor through the one
-  door, the visibility chain (the lone witness / the blind NPC
-  at zero records / the one-hop reaction / the telling at
-  fidelity vague), the erosion counter-event (usable reverted,
-  the irreversible camp_finished survived), the resume door
-  byte-identical at a clean drain boundary (the edge finding:
-  a split inside an autonomous silent tail shifts the session's
-  next feed tick), the scale twin (50 groups / 100 unborn / 5
-  crossings = 250 aggregate lines, 3 per-member events)
-- the verdict set: the scaffold PROVEN (group/party/construction/
-  visibility/pack-independence/determinism/scale), group
-  dimensions mostly over-modeling, disagreements REJECTED as
-  first-class mechanics, claims/legitimacy UNKNOWN-DEFERRED;
-  the genuine gaps ALL own standing rows (st-5, res-1, world-2
-  L2 slice 3/4, the membership writer / companion-1); zero
-  build-grade items, the queue untouched
-- docs: phases.md §6 the intake-19 block (the §1–§18 verdict
-  table the research's own required form), DECISIONS D-160, TASKS
-  the iter-126 section, STATUS re-pin + Next step, this entry
-  (iter-116 evicted here, verified against git in this edit;
-  10 held); 1726+1 green, ruff clean after. Caps: STATUS 599 /
-  TASKS 1193 / DECISIONS 71 (39 rows — over the 30 cap on the
-  §6.1 substance precedent until the next gate collapse) /
-  phases 2404 — the over-cap files ride the documented §6.1
-  substance precedent, trim at the next gate collapse

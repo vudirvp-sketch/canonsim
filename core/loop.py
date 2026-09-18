@@ -69,6 +69,12 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
+from core.calendar import (
+    calendar_entries,
+    calendar_order,
+    calendar_turn_draft,
+    next_calendar_tick,
+)
 from core.checkpoint import (
     INDEX_NAME,
     CheckpointError,
@@ -127,7 +133,8 @@ from core.urgencies import urgency_intents
 from core.weather import (
     current_weather,
     erosion_drafts,
-    erosion_specs,
+    erosion_due,
+    seasonal_ride,
     weather_turn_draft,
 )
 from core.worldgen import (
@@ -274,6 +281,16 @@ class Simulator:
         self._next_macro = next_macro_tick(
             pack.rules["time"].get("macro"), 0
         )
+        # the calendar family (maclock-1's middle granularities, the
+        # calendar slice): the sub-year cadences' next crossings, one
+        # cursor per declared entry — an EMPTY dict for an unarmed
+        # pack (no `time.calendar` block; zero crossings, zero events,
+        # the 68a pattern). The same session law: the cursors persist
+        # across `run_steps` calls.
+        self._next_calendar: dict[str, int] = {
+            entry_id: next_calendar_tick(entry, 0)
+            for entry_id, entry in calendar_entries(pack.rules).items()
+        }
         # iter-4: the director + the beat cycle (decay / urgencies /
         # entropy). The beat fires at clock crossings (phase boundaries
         # by default; pack-tunable via `urgencies.beat_ticks` —
@@ -411,23 +428,35 @@ class Simulator:
                             and self._next_macro <= entry.tick
                         ):
                             candidates.append(self._next_macro)
+                        # the calendar family's due crossings join the
+                        # same candidate pool (the sub-year cadences)
+                        candidates.extend(
+                            tick
+                            for tick in self._next_calendar.values()
+                            if tick <= entry.tick
+                        )
                         if not candidates:
                             break
                         crossing = min(candidates)
                         self._clock.advance_to(crossing)
                         # maclock-1: at a co-occurring tick the COARSEST
                         # clock fires first (the year turns before the
-                        # day's rotation, the rotation before the beat —
-                        # the calendar contains the day, the day contains
-                        # the beat); one crossing kind per iteration, the
-                        # equal-tick remaining candidates re-loop (the
-                        # writer's tick-monotonicity allows equal ticks).
+                        # season, the season before the fair, the fair
+                        # before the week's turn, the week's turn before
+                        # the day's rotation, the rotation before the
+                        # beat — the calendar contains the year, the year contains the day,
+                        # the day contains the beat); one crossing kind
+                        # per iteration, the equal-tick remaining
+                        # candidates re-loop (the writer's
+                        # tick-monotonicity allows equal ticks).
                         if crossing == self._next_macro:
                             self._run_macro(crossing, entry.tick)
                             self._next_macro = next_macro_tick(
                                 self._pack.rules["time"].get("macro"),
                                 crossing,
                             )
+                        elif crossing in self._next_calendar.values():
+                            self._run_calendar(crossing, entry.tick)
                         elif crossing == self._next_rotation:
                             self._run_rotation(crossing)
                             self._next_rotation = next_rotation_tick(
@@ -532,6 +561,7 @@ class Simulator:
             "next_rotation": self._next_rotation,
             "next_beat": self._next_beat,
             "next_macro": self._next_macro,
+            "next_calendar": dict(self._next_calendar),
             "intent_seq": self._intent_seq,
             "director_enabled": director_enabled,
             "bank": self._bank.export_state(),
@@ -646,6 +676,30 @@ class Simulator:
                         "law is part of the run state"
                     )
                 setattr(sim, attr, value)
+            # the calendar cursors (the calendar slice): the run's own
+            # pinned state when present, with the same never-regress
+            # law; a cursor pinned BEFORE the family's arming (no key)
+            # RECOMPUTES from the pinned tick instead — the cursors are
+            # pure arithmetic (the positive multiples of the declared
+            # periods), so the recompute IS the uninterrupted run's
+            # own value (the D-139 resume-invisible law), never a drift
+            sim._next_calendar = {}
+            for entry_id, value in (
+                cursor.get("next_calendar") or {}
+            ).items():
+                value = int(value)
+                if value <= sim._clock.tick:
+                    raise CursorError(
+                        f"cursor next_calendar[{entry_id!r}] = {value} does "
+                        "not sit strictly after the pinned tick "
+                        f"{sim._clock.tick} — the never-regress law is part "
+                        "of the run state"
+                    )
+                sim._next_calendar[str(entry_id)] = value
+            for entry_id, entry in calendar_entries(pack.rules).items():
+                sim._next_calendar.setdefault(
+                    entry_id, next_calendar_tick(entry, sim._clock.tick)
+                )
             sim._intent_seq = int(cursor["intent_seq"])
             if pack.rules.get(WORLDGEN_BLOCK) is not None:
                 sim._world = generate_world(
@@ -1273,49 +1327,18 @@ class Simulator:
         # weather-1: the ambient family rides the crossing — the chain
         # rolls its next state from the fold's current weather, and a
         # CHANGE commits ONE event chained to the turn (the drift's
-        # precedent: the consumer rides the clock's own event); the new
-        # state's erosion follow-ups seed HERE (the fire follow-ups'
-        # shape — SEEDED at event time, SCHEDULED on the queue, the
-        # drafts read the fold at fire time). The draw rides the
-        # family's own isolated stream (`weather:chain`, the D-079
-        # law's seventh member) — the substantive fingerprint never
-        # sees a weather roll. The unarmed law: no `weather` block, no
+        # precedent: the consumer rides the clock's own event). The
+        # DEFAULT RIDE is the macro year itself: a block declaring no
+        # `seasonal` layer rolls HERE (a block declaring one rolls at
+        # its named sub-year clock's crossings instead —
+        # `_run_calendar`, one roll cadence per family, the pairing
+        # law's substance). The unarmed law: no `weather` block, no
         # branch (the macro clock may run without the family).
-        if self._pack.rules.get("weather") is not None:
-            weather_draft = weather_turn_draft(
-                self._pack.rules, self._bank, tick,
-                current_weather(self._pack.rules, self._events),
-            )
-            if weather_draft is not None:
-                weather_record = self._commit(
-                    replace(
-                        weather_draft,
-                        cause=self._writer.last_id,
-                        provenance={"seed": self._seed},
-                    )
-                )
-                for spec in erosion_specs(
-                    self._pack.rules,
-                    str(weather_record.outcome["weather"]),
-                ):
-                    # the never-regress law (the queue discipline the
-                    # warm ring's intents already ride): a crossing that
-                    # fires LATE — a batch of missed crossings before a
-                    # far entry — seeds its follow-ups no earlier than
-                    # the world's resumed tick (the clock jumps to the
-                    # entry's tick after the batch; a tick behind it
-                    # would be a clock regression at pop). The deferral
-                    # bends, the ORDER never does.
-                    self._queue.push(
-                        tick=max(tick + spec.at_tick, entry_tick),
-                        sub_order=SCHEDULED,
-                        actor_id=f"weather:{spec.event_type}",
-                        kind="weather",
-                        payload=WeatherPayload(
-                            event_type=spec.event_type,
-                            cause_id=weather_record.id,
-                        ),
-                    )
+        if (
+            self._pack.rules.get("weather") is not None
+            and seasonal_ride(self._pack.rules) is None
+        ):
+            self._roll_weather(tick, entry_tick)
         # depth-7 (the write-side LOD): the tier transitions first —
         # the condensations ride the crossing's own event, before the
         # warm ring's machinery (the members materialize, then stir)
@@ -1370,6 +1393,90 @@ class Simulator:
             locations=zones.warm,
         ):
             self._enqueue_autonomous(intent, entry_tick)
+
+    def _run_calendar(self, tick: int, entry_tick: int) -> None:
+        """The sub-year calendar crossings due at `tick` (maclock-1's
+        middle granularities, the calendar slice): ONE canon event per
+        due entry in the DETERMINISTIC order (`calendar_order` —
+        every_ticks DESC then id, the coarsest clock first), each
+        chained to the previous canon id (the chronological-chain law,
+        the macro turn's precedent). No knowledge, no state_changes,
+        no hooks (the clock family's own shape — the year and the day
+        and the phase are derived, L3; the director boundary is the
+        consumers' rows, never the clock's).
+
+        The weather family's SEASONAL RIDE consumes here: when the
+        block's `seasonal.ride` names a due entry, the chain rolls
+        AFTER that entry's own turn (the consumer rides the clock's
+        own event — the drift's precedent, the macro crossing's
+        weather half's twin; the phase-biased weights read the phase
+        the turn just entered — `core/weather.py` owns the roll)."""
+        rules = self._pack.rules
+        entries = calendar_entries(rules)
+        for entry_id in calendar_order(rules):
+            if self._next_calendar.get(entry_id) != tick:
+                continue
+            self._commit(
+                replace(
+                    calendar_turn_draft(rules, entry_id, tick),
+                    cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+            self._next_calendar[entry_id] = next_calendar_tick(
+                entries[entry_id], tick
+            )
+            if seasonal_ride(rules) == entry_id:
+                self._roll_weather(tick, entry_tick)
+
+    def _roll_weather(self, tick: int, entry_tick: int) -> None:
+        """The ambient family's one roll at a crossing it rides (the
+        macro year's by default, a `seasonal.ride` entry's when
+        declared — one roll cadence per family): the chain rolls its
+        next state from the fold's current weather, and a CHANGE
+        commits ONE event chained to the crossing's own turn (the
+        drift's precedent: the consumer rides the clock's own event);
+        the new state's erosion follow-ups seed HERE (the fire
+        follow-ups' shape — SEEDED at event time, SCHEDULED on the
+        queue, the drafts read the fold at fire time). The draw rides
+        the family's own isolated stream (`weather:chain`, the D-079
+        law's seventh member) — the substantive fingerprint never sees
+        a weather roll."""
+        weather_draft = weather_turn_draft(
+            self._pack.rules, self._bank, tick,
+            current_weather(self._pack.rules, self._events),
+        )
+        if weather_draft is None:
+            return
+        weather_record = self._commit(
+            replace(
+                weather_draft,
+                cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            )
+        )
+        for spec in erosion_due(
+            self._pack.rules,
+            self._projection,
+            str(weather_record.outcome["weather"]),
+        ):
+            # the never-regress law (the queue discipline the warm
+            # ring's intents already ride): a crossing that fires LATE
+            # — a batch of missed crossings before a far entry — seeds
+            # its follow-ups no earlier than the world's resumed tick
+            # (the clock jumps to the entry's tick after the batch; a
+            # tick behind it would be a clock regression at pop). The
+            # deferral bends, the ORDER never does.
+            self._queue.push(
+                tick=max(tick + spec.at_tick, entry_tick),
+                sub_order=SCHEDULED,
+                actor_id=f"weather:{spec.event_type}",
+                kind="weather",
+                payload=WeatherPayload(
+                    event_type=spec.event_type,
+                    cause_id=weather_record.id,
+                ),
+            )
 
     def _run_rotation(self, tick: int) -> None:
         """One watch rotation at a crossed tick (phase0 §3): the post swap

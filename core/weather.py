@@ -12,6 +12,18 @@ the existing doors — no physics engine"):
   (L3: the current weather is the fold over weather events — the last
   event's state, the pack's `initial` before the first; derive, never
   store).
+- THE SEASONAL LAYER (the calendar slice, maclock-1's middle
+  granularities): the block's optional `seasonal` half — the chain's
+  rolls move from the macro year's crossings to a DECLARED sub-year
+  clock's (`ride` names a `time.calendar` entry; the weather never
+  declares a number of its own — "one clock, one cadence", the
+  pairing law's substance held by reference, never by declaration),
+  and each phase of that clock's cycle may OVERRIDE the weights of
+  the states it biases (per-phase, per-current-state — the D-030
+  asymmetric data: the rise season's storm bias, the world's danger
+  as a pack-declared dial, never a tone lock). The phase at the roll
+  is pure tick arithmetic over the ride's cycle (L3 — `calendar_phase`,
+  derived, never stored), so the roll never scans the fold.
 - THE CHAIN: pack-declared states with per-state transition weights
   (a Markov chain in data — the weather persists through self-weights,
   no TTL, no turn counters, no decay timers, D-049's fence held). The
@@ -49,6 +61,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any, Final
 
+from core.calendar import calendar_phase
 from core.intent import pack_importance
 from core.log import EventDraft, StateChange
 from core.rng import RngBank, weather_stream_name
@@ -56,6 +69,7 @@ from core.transitions import WORLD
 
 __all__ = [
     "EROSION_KEYS",
+    "SEASONAL_KEYS",
     "STATE_KEYS",
     "WEATHER_BLOCK",
     "WEATHER_KEYS",
@@ -63,7 +77,9 @@ __all__ = [
     "WeatherError",
     "current_weather",
     "erosion_drafts",
+    "erosion_due",
     "erosion_specs",
+    "seasonal_ride",
     "weather_turn_draft",
 ]
 
@@ -76,8 +92,23 @@ WEATHER_BLOCK: Final = "weather"
 #: load-time contract; this is the engine-side mirror the docs cite —
 #: one owner per shape, the lint the authority). `notes` is the pack's
 #: commentary convention (an optional string — every committed block
-#: carries its author note).
-WEATHER_KEYS: Final = ("event_type", "initial", "states", "notes")
+#: carries its author note); `seasonal` is the calendar slice's own
+#: layer (the chain's seasonal bias — see SEASONAL_KEYS).
+WEATHER_KEYS: Final = (
+    "event_type", "initial", "states", "seasonal", "notes",
+)
+
+#: The closed vocabulary of the `seasonal` sub-block (the seasons
+#: riding weather-1's chain — phases.md §6's law: the seasons ride the
+#: SATISFIED gate, i.e. the seasonal layer is the weather family's own
+#: form, legal because the pairing already holds). `ride` names a
+#: `time.calendar` entry — the sub-year clock whose crossings fire the
+#: chain's rolls (the default ride is the macro year itself: a block
+#: without `seasonal` rolls at the macro crossings, the standing
+#: law); `weights` is the per-phase, per-current-state weight override
+#: (the D-030 asymmetric data — the rise season's storm bias, the
+#: world's danger as a pack-declared dial, never a tone lock).
+SEASONAL_KEYS: Final = ("ride", "weights", "notes")
 
 #: The closed vocabulary of one state's declaration.
 STATE_KEYS: Final = ("weights", "hooks", "erosion")
@@ -138,6 +169,27 @@ def current_weather(
     return str(initial)
 
 
+def seasonal_ride(rules: Mapping[str, Any]) -> str | None:
+    """The declared seasonal ride — the `time.calendar` entry whose
+    crossings fire the chain's rolls, or None when the weather block
+    declares no `seasonal` layer (the default ride: the macro year,
+    the standing law — the family rides the clock family's head
+    block). The ride REFERENCES a declared clock, never declares a
+    number of its own ("one clock, one cadence" — the pairing law's
+    substance: the weather never owns time)."""
+    seasonal = _weather(rules).get("seasonal")
+    if seasonal is None:
+        return None
+    ride = seasonal.get("ride")
+    if not isinstance(ride, str) or not ride:
+        raise WeatherError(
+            "weather.seasonal.ride must name a declared time.calendar "
+            "entry (the lint guarantees the binding; this is the "
+            "runtime backstop)"
+        )
+    return ride
+
+
 def _draw_state(
     bank: RngBank, weights: Mapping[str, int]
 ) -> str:
@@ -185,6 +237,22 @@ def weather_turn_draft(
         )
     spec = states[prev]
     weights = spec.get("weights", {})
+    # the seasonal layer (the calendar slice): the phase's override —
+    # the D-030 asymmetric data read at roll time. The phase is PURE
+    # ARITHMETIC over the ride entry's cycle (L3 — derived, never
+    # stored; `core/calendar.py::calendar_phase` owns the one rule),
+    # so the roll never scans the fold and a pack without the layer
+    # pays nothing (the unborn-stay-counts law). A phase may override
+    # SOME states only — the unlisted keep the base weights (the
+    # override is per-current-state, never a wholesale replacement).
+    seasonal = _weather(rules).get("seasonal")
+    if isinstance(seasonal, Mapping):
+        weights_block = seasonal.get("weights")
+        if isinstance(weights_block, Mapping) and weights_block:
+            phase = calendar_phase(rules, seasonal_ride(rules), tick)
+            override = weights_block.get(phase, {})
+            if isinstance(override, Mapping) and override:
+                weights = override.get(prev, weights)
     if not isinstance(weights, Mapping) or not weights:
         raise WeatherError(
             f"weather.states[{prev!r}].weights must be a non-empty "
@@ -235,6 +303,47 @@ def erosion_specs(
         )
         for rule in states[state].get("erosion", ())
     )
+
+
+def erosion_due(
+    rules: Mapping[str, Any],
+    projection: Mapping[str, Mapping[str, Any]],
+    state: str,
+) -> tuple[ErosionSpec, ...]:
+    """The state's erosion rules GATED by the fold (KI#86, the
+    calendar slice): a rule whose `from` value NO entity currently
+    holds on the target `prop` seeds NO queue entry — a dead entry is
+    pure feed (each changing roll pushes one, the queue chases the
+    crossings, the drain never completes when the ride's cadence sits
+    below the rule's `after_ticks`). The gate reads the fold at SEED
+    time for the EXISTENCE question only; the set that fires stays
+    the fold's truth at FIRE time (the seeded law's own discipline —
+    the rain washes the smoke that was there when it rained; smoke
+    born after waits for the next rain). Sorted id order (INV-2's
+    construction-order discipline), any-match semantics."""
+    weather = _weather(rules)
+    states = weather["states"]
+    if state not in states:
+        raise WeatherError(
+            f"erosion_due read the state {state!r} — a state the "
+            "block does not declare"
+        )
+    due: list[ErosionSpec] = []
+    for rule in states[state].get("erosion", ()):
+        prop = str(rule["prop"])
+        from_value = rule["from"]
+        held = any(
+            projection[entity_id].get(prop) == from_value
+            for entity_id in sorted(projection)
+        )
+        if held:
+            due.append(
+                ErosionSpec(
+                    event_type=str(rule["event_type"]),
+                    at_tick=int(rule["after_ticks"]),
+                )
+            )
+    return tuple(due)
 
 
 def erosion_drafts(

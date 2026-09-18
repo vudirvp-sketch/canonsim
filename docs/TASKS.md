@@ -26,6 +26,79 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-136 · world-2 L2 (slice 4: the calendar) — the market days / the fair / the river's seasonal ride + the weather's seasonal layer + the composed year experiment — done (the owner's «продолжай работу по планам» call — the iter-135 precedent phrase's continuation; STATUS Next step's own readiness pick: slice 4 the wave plan's remainder)
+
+The sub-year cadence family (maclock-1's middle granularities, L4
+grown to three tiers — `core/calendar.py` + `rules.json::time.calendar`):
+named entries `{every_ticks, event_type}` or `{every_ticks, cycle}` —
+the cycle the phase pairs `{phase, event_type}` rotating by pure
+arithmetic (`cycle[k % len]`, the run OPENS at cycle[0] — the snowmelt
+comes when it comes, never a draw). The crossing law: the positive
+multiples, fired coarsest-first at co-occurring ticks (the year before
+the season, the season before the fair, the fair before the market
+day, the market day before the rotation) — the deterministic order
+`every_ticks` DESC then id; the turn ONE canon event through the door
+(actor world, the outcome `{calendar, day, phase?}`, no
+knowledge/state_changes/hooks — the clock family's own shape). The
+lint: the pairing law (the calendar requires the macro clock), the
+sub-year law (every_ticks < cadence_ticks — the year clock owns the
+year turns), the identity laws (the types unique across the block, ≠
+the macro's and the weather's), the both-or-neither cycle refusal, the
+seed-time emission witnesses. The committed ARMING: the market days
+14400 (`market_opens` — the decan rhythm), the fairs 43200
+(`fair_opens` — the month's weighing), the seasons 129600 + the cycle
+[thaw, high_water, long_light, first_frost] — the run opens in the
+thaw, the RISE is the first crossing (day 90), the wrap's thaw turns
+with the year (day 360); the crossings beyond every day-scale corpus
+script's horizon by construction (the weather-1 arming's own law —
+the golden bytes untouched, the corpus price ZERO, the T1 pin green).
+
+The weather's SEASONAL layer (weather-1's chain riding the seasons —
+phases.md §6's law, the SATISFIED gate): `weather.seasonal` — `ride`
+names a declared calendar entry (the chain's rolls MOVE to that
+cadence's crossings; one roll cadence per family; the reference never
+a declaration — "one clock, one cadence"'s substance held) +
+`weights` the per-phase per-current-state overrides, the D-030
+ASYMMETRIC data: the rise's storm-heavy maps from ANY state (the
+meltwater sky breaks fast), the thaw's wet-no-storm, the frost's dry
+cold — and the long light carries NO override (the calm rebuilds slow
+through the base weights, the dial never snaps back). The phase at
+the roll is pure tick arithmetic (L3 — `calendar_phase`, the fold
+never scanned).
+
+ONE forced core edit — KI#86 (the erosion's seed-time gate): the
+seasonal ride exposed a latent unbounded queue feed (a rule whose
+`from` no entity holds still seeded an entry per changing roll; with
+the ride cadence below the rule's `after_ticks` the queue chases the
+crossings forever — the crafted forced-alternation test hung);
+`erosion_due` gates the seed on the fold (a rule with no live target
+seeds nothing), the fire-time read unchanged (the rain washes the
+smoke that was there when it rained).
+
+The composed YEAR experiment (province_calendar.json, seed 42 — the
+F3 four-read-surfaces form): the runner walks to Malby and waits
+through the year — 36 markets, 12 fairs, the four seasons in cycle
+order, the year's turn (151 — the chronicle binding 150 + 1), four
+weather rolls (one per season crossing, the rise's draws STORM — the
+D-030 read measured); the co-occurrence at day 90: the rise, its
+weather roll, the fair, the market — the coarsest-first discipline
+over the whole family; the twin run byte-identical; the tale renders
+the calendar's own lines (the story-critical listing, the tune-1
+split) while the ambient weather stays canon-without-a-line.
+`tests/test_calendar.py` +16 (the crossing arithmetic, the phase
+arithmetic, the lint refusals, the unarmed law — the both-arms
+byte-identity + the stream delta, the seasonal ride + the forced-bias
+pins, the default ride, the resume door across crossings, the corpus
+horizon, the committed year run). PROVINCE_STOPLIST +2 (thaw, frost).
+The budget's second honest re-declare: the template families 52 → 58
+(the ceiling 55 → 60 — the phase lines are the slice's own
+readability surface). The brief's lore grows the calendar knowledge
+(the INFORMED half: the market cycle + the river's seasons — the
+timing information the player times by). 1754 passed + 1 skipped,
+ruff clean, zero corpus price outside the year-scale experiment (the
+tavern/road corpora byte-untouched; the province golden untouched by
+construction). Detail: worklog iter-136 + D-169 + git.
+
 ### iter-135 · world-2 L2 (slice 3: the triangle) — the factions arming + the deep feud history + the composed outcome-divergence experiment — done (the owner's «теперь настала пора приступать к работе по планам…» call — the iter-118/119 precedent phrase; STATUS Next step's own readiness pick: slice 3 the natural next pick, iter-134's F3 convergence)
 
 The census's only zero-consumer family ARMED 0→1 (depth-6's first
@@ -840,11 +913,15 @@ D-105..D-133 family row + phases.md §5)
   re-cut — feud/quarrel/exodus — + the wergeld claims seeding the
   director's buffer) + the composed outcome-divergence experiment
   (F3's four read surfaces, seed 53 — the claim/legitimacy first
-  consumer riding the vigil's deadband); slice 4 the calendar — the
-  market days / the fair / the river's seasonal rise
-  (the macro cadences + weather-1's chain, the D-030 mid-grim dial's
-  asymmetric data) + the T7 read + the row's own verdict call (the
-  owner's). **iter-109's
+  consumer riding the vigil's deadband); slice 4 (iter-136, DONE —
+  D-169) the calendar — the sub-year cadence family (the market days
+  14400 / the fairs 43200 / the seasons 129600 + the four-phase cycle)
+  + the weather's seasonal layer (the ride + the D-030 asymmetric
+  weights — the rise's storm bias measured at the year run) + the
+  composed YEAR experiment (province_calendar.json, the T7 read); the
+  row's own verdict call stands open for the owner (the L2 wave plan
+  complete — the verdict the wave's own question, never self-called).
+  **iter-109's
   opening answers ride the row (D-146): the second pack runs the
   TRAVEL main loop** (the river-artery class, the D-130 direction —
   a reskin twin of the tavern proves nothing; the loop change is

@@ -1,0 +1,19 @@
+{
+    "name": "province_calendar",
+    "seed": 42,
+    "pack": "province_pack@0.1",
+    "steps": [
+        {
+            "intent": "move",
+            "target": "loc_keep"
+        },
+        {
+            "intent": "move",
+            "target": "loc_malby"
+        },
+        {
+            "intent": "wait",
+            "ticks": 519000
+        }
+    ]
+}

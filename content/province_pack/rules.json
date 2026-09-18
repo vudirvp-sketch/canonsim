@@ -32,6 +32,40 @@
       "cadence_ticks": 518400,
       "event_type": "year_turns"
     },
+    "calendar": {
+      "market_days": {
+        "every_ticks": 14400,
+        "event_type": "market_opens",
+        "notes": "the calendar slice (maclock-1's middle granularities): the decan rhythm — the river market opens at Malby on every tenth day. The crossing sits beyond every day-scale corpus script's horizon by construction (the same law as the weather-1 arming: the committed bytes untouched, zero corpus price), the timing information the brief's lore half carries."
+      },
+      "fairs": {
+        "every_ticks": 43200,
+        "event_type": "fair_opens",
+        "notes": "the month's fair — the guild's weighing day, the season's trade told on the beam. The trade's trust builds at the fairs (the relations' slow half); the crowd swells the theft's stage (the D-030 dial's price marker)."
+      },
+      "seasons": {
+        "every_ticks": 129600,
+        "cycle": [
+          {
+            "phase": "thaw",
+            "event_type": "thaw_turns"
+          },
+          {
+            "phase": "high_water",
+            "event_type": "high_water_rises"
+          },
+          {
+            "phase": "long_light",
+            "event_type": "long_light_turns"
+          },
+          {
+            "phase": "first_frost",
+            "event_type": "first_frost_turns"
+          }
+        ],
+        "notes": "the vale's four seasons over the 360-day year (90 days each — the cycle arithmetic, never a draw: the snowmelt comes when it comes). The river's seasonal rise IS the high_water phase — the lower fords drown, the punt men charge double (the tale's own price marker). The weather chain's seasonal ride reads these phases (weather.seasonal below — the D-030 asymmetric data: the rise breaks the sky toward storm fast, the calm rebuilds slow through the base weights)."
+      }
+    },
     "notes": "MVP_SCOPE §8: full day ≈ 1440 ticks; 1 hour ≈ 60 ticks; typical action 2–8 ticks (see actions.json)"
   },
   "position_visibility": {
@@ -650,7 +684,65 @@
         ]
       }
     },
-    "notes": "weather-1 (iter-98, D-133) re-armed for the province: the Markov chain in data (per-state weights, self-weights keep weather sticky, NO TTL/decay timers — D-049's fence), riding the macro clock's crossings (time.macro below — the pairing law), draws on the isolated weather:chain stream. The erosion family unchanged (the rain's SEEDED follow-up reverts the fire layer's smoke flag — the explicit counter-event). The storm's hook: Maren's market murmur (the rain eating the stalls — the D-082 pattern, weight 0, first_time_only, ambient channel). The seasonal deepening (the river's rise, the fair calendar) is the calendar slice's own row."
+    "seasonal": {
+      "ride": "seasons",
+      "weights": {
+        "thaw": {
+          "clear": {
+            "clear": 2,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 1
+          },
+          "overcast": {
+            "clear": 2,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 1
+          }
+        },
+        "high_water": {
+          "clear": {
+            "clear": 1,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 2
+          },
+          "overcast": {
+            "clear": 1,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 2
+          },
+          "rain": {
+            "clear": 1,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 2
+          },
+          "storm": {
+            "clear": 1,
+            "overcast": 3,
+            "rain": 4,
+            "storm": 2
+          }
+        },
+        "first_frost": {
+          "clear": {
+            "clear": 4,
+            "overcast": 3,
+            "rain": 1
+          },
+          "overcast": {
+            "clear": 3,
+            "overcast": 4,
+            "rain": 1
+          }
+        }
+      },
+      "notes": "the calendar slice's seasonal layer (weather-1's chain riding the seasons — phases.md §6's law, the SATISFIED gate): the chain's rolls move from the macro year's crossings to the seasons cadence's (time.calendar.seasons — the ride references a declared clock, never declares a number of its own), and each phase biases the states it overrides (per-phase, per-current-state, the FULL replacement — the unlisted states keep the base weights). The D-030 asymmetric data: the RISE breaks the sky toward storm fast (from ANY state the storm-heavy map takes over — the meltwater weather), the thaw runs wet without storms, the first frost dries cold — and the LONG LIGHT carries no override: the calm rebuilds slow through the base weights, the dial never snaps back. The phases absent from the map keep the base weights (long_light); a phase may override SOME states only (thaw and first_frost override the settled skies, the rain and storm states keep their own rain)."
+    },
+    "notes": "weather-1 (iter-98, D-133) re-armed for the province: the Markov chain in data (per-state weights, self-weights keep weather sticky, NO TTL/decay timers — D-049's fence), riding the clock family's crossings (the seasonal layer below names the seasons cadence — one clock, one cadence, the reference never a declaration), draws on the isolated weather:chain stream. The erosion family unchanged (the rain's SEEDED follow-up reverts the fire layer's smoke flag — the explicit counter-event). The storm's hook: Maren's market murmur (the rain eating the stalls — the D-082 pattern, weight 0, first_time_only, ambient channel). The seasonal layer (the calendar slice): the chain's rolls at the seasons' crossings, the phases biasing the sky — the river's rise weather-armed."
   },
   "urgencies": {
     "beat_ticks": [
@@ -1199,7 +1291,13 @@
       "guild_councils",
       "wergeld_vigil",
       "garrison_patrols",
-      "grief_wakes"
+      "grief_wakes",
+      "market_opens",
+      "fair_opens",
+      "thaw_turns",
+      "high_water_rises",
+      "long_light_turns",
+      "first_frost_turns"
     ],
     "thresholds": {
       "medium": 2,
@@ -1479,6 +1577,18 @@
         "text": "Hill iron comes down by the sack; the weighbeam decides what the season was worth.",
         "from_beat": 2,
         "to_beat": 8
+      },
+      {
+        "id": "market_cycle",
+        "text": "The river market opens at Malby on every tenth day; the month's fair — the guild's weighing — on every thirtieth.",
+        "from_beat": 0,
+        "to_beat": 5
+      },
+      {
+        "id": "river_seasons",
+        "text": "The river rises with the thaw and the long rains: the fords drown and the punt men charge double until the long light.",
+        "from_beat": 1,
+        "to_beat": 7
       }
     ],
     "voice_exemplars": [
@@ -1608,9 +1718,9 @@
     },
     "templates": {
       "min": 40,
-      "max": 55
+      "max": 60
     },
-    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9) — the headroom holds, no re-declare owed."
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9). The calendar slice (slice 4) RE-DECLARES the template ceiling deliberately: the market day's and the fair's lines plus the four seasons' own phase lines grow the families to 58 (the second honest re-declare, 55 to 60 — the phase lines are the slice's own readability surface, each season's turn its own tale line)."
   },
   "names": {
     "profiles": {

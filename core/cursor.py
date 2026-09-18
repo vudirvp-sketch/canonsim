@@ -77,6 +77,7 @@ CURSOR_KEYS: Final = frozenset({
     "next_rotation",
     "next_beat",
     "next_macro",
+    "next_calendar",
     "intent_seq",
     "director_enabled",
     "bank",
@@ -157,6 +158,23 @@ def _validate(cursor: Mapping[str, Any]) -> None:
         ):
             raise CursorError(
                 f"cursor {key!r} must be a non-negative int or null, got {value!r}"
+            )
+    calendar = cursor["next_calendar"]
+    if not isinstance(calendar, Mapping):
+        raise CursorError(
+            f"cursor 'next_calendar' must be a mapping of entry id to "
+            f"next crossing tick, got {calendar!r}"
+        )
+    for entry_id, value in calendar.items():
+        if (
+            not isinstance(entry_id, str)
+            or not isinstance(value, int)
+            or isinstance(value, bool)
+            or value < 0
+        ):
+            raise CursorError(
+                f"cursor next_calendar[{entry_id!r}] must be a "
+                f"non-negative int, got {value!r}"
             )
     bank = cursor["bank"]
     if not isinstance(bank, Mapping) or set(bank) != _BANK_KEYS:

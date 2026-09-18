@@ -3316,6 +3316,72 @@ rest state); the golden fixture regenerated 39→44 (+4 deep
 history, +1 ramble — the wergeld count), fingerprint 0, the
 tavern/road corpora byte-untouched.
 
+**The calendar slice landed (iter-136, D-169 — the owner's
+«продолжай работу по планам» call, the iter-135 precedent
+phrase's continuation; the L2 wave plan's remainder, the
+triangle's ratio dynamics gaining their seasonal cadence).**
+Maclock-1's middle granularities: L4's layered clocks grown to
+three tiers (micro-time, the SUB-YEAR calendar cadences,
+macro-time — one authority). `rules.json::time.calendar`: named
+entries `{every_ticks, event_type}` or `{every_ticks, cycle}`,
+the cycle the phase pairs `{phase, event_type}` — each season's
+turn renders its OWN tale line (the tale's readability surface,
+never a shared template keyed on a raw id), the phases rotating
+by pure arithmetic (`cycle[k % len]`, the run OPENS at cycle[0] —
+the weather `initial`'s own law, the thaw the vale's opening
+season, the wrap's thaw turning with the year). The crossing
+law: the positive multiples (the scheduler rule, INV-2-clean),
+fired coarsest-first at co-occurring ticks — the year before the
+season, the season before the fair, the fair before the market
+day, the market day before the rotation — within the calendar
+the deterministic order `every_ticks` DESC then id. The lints:
+the pairing law (the middle granularities hang from the head
+block — a calendar without time.macro is dead data), the sub-year
+law (every_ticks strictly below the cadence — the year clock
+owns the year turns), the identity laws (the types unique, ≠ the
+macro's and the weather's), the both-or-neither cycle refusal,
+the emission witnesses (the teleology gate's reverse walk reads
+the phase types). The weather's SEASONAL layer rides the
+satisfied gate (this section's own law): `weather.seasonal.ride`
+names a declared calendar entry — the chain's rolls MOVE to
+that cadence's crossings (ONE roll cadence per family, the
+reference never a declaration — "one clock, one cadence"'s
+substance held by reference), and the per-phase
+per-current-state weight overrides carry the D-030 asymmetric
+data: the RISE breaks the sky toward storm from ANY state (the
+meltwater weather), the long light carries NO override (the calm
+rebuilds slow through the base weights — the dial never snaps
+back). The phase at the roll is pure tick arithmetic (L3 —
+`calendar_phase`, the fold never scanned).
+
+The committed arming (the province): the market days 14400 (the
+decan rhythm), the fairs 43200 (the month's weighing), the
+seasons 129600 + [thaw, high_water, long_light, first_frost] —
+every crossing beyond the day-scale corpus scripts' horizon BY
+CONSTRUCTION (the weather-1 arming's own law: the golden bytes
+untouched, the corpus price zero, the T1 pin green). The
+composed YEAR experiment (province_calendar.json, seed 42, the
+F3 four-read-surfaces form): 36 markets, 12 fairs, the four
+seasons in cycle order, the year's turn (151 — the chronicle
+binding), four weather rolls (the rise draws STORM — the D-030
+read measured), the co-occurrence order pinned at day 90 (the
+rise → its weather roll → the fair → the market — the
+coarsest-first discipline over the whole family), the twin run
+byte-identical, the tale rendering the calendar's lines while
+the ambient weather stays canon-without-a-line. ONE forced core
+edit — KI#86 (the erosion's seed-time gate): the seasonal ride
+exposed a latent unbounded queue feed (a rule whose `from` no
+entity holds still seeded an entry per changing roll; with the
+ride cadence below the rule's `after_ticks` the queue chases the
+crossings forever — the crafted forced-alternation test hung);
+`erosion_due` gates the seed on the fold, the fire-time read
+unchanged (the rain washes the smoke that was there when it
+rained). The T7 playtest read (worklog iter-136): the year's
+chronicle reads as a town's almanac — the calendar the spine,
+the watch/talk texture the noise floor at the year scale (the
+tale gate's day-scale tuning the honest finding, the tune row's
+own question — never this slice's edit).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
