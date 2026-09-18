@@ -2695,6 +2695,159 @@ honest label, the report's own admission); the commit count (6)
 drift. Landed: D-163 + this block. The build queue UNTOUCHED —
 nothing unpins, nothing reorders; zero build-grade items.
 
+The world-execution / spatial-topology / social-information
+architecture research routed (intake-23, D-164 — the owner's
+«используя research_method_v5.md => разберись что перенять можно,
+дополнить или улучшить… долгосрок важен и качество» call over the
+uploaded `ARCHITECTURE RESEARCH TASK — Unified World Execution,
+Spatial Topology, Social Information, Observability,
+Counterfactuals & Agent Gateway.md`; the D-155..D-163 intake
+precedent, the consult posture — the external text and the method
+file stay outside the repo, every load-bearing claim verified
+against HEAD 131c477 — 181 commits, 1726+1 green, ruff clean,
+Python 3.12.14 the env pin). Where intake-14 asked the SUBSTRATE
+questions and intake-21 the OBSERVER-side questions, this document
+expands intake-21's own agenda with the WORLD-STRUCTURE side:
+the execution model (intent lifecycle, conflict, re-planning),
+the spatial topology (ontology, authored-vs-derived, extent and
+boundaries), and the social-information ladder. Its observer-side
+sections (§10..§19 observatory/gateway/counterfactual/balance/
+emergence/worldbuilder) re-derive intake-21's routed record with
+zero drift — not restated here; the world-structure half is the
+fresh material below.
+
+**The fresh spatial probe** (read-only, the public API, the
+committed province pack, seed 20260918 — the intake-16..19 probe
+posture; the document's §3.1 "the engine must answer mechanically"
+list, answered):
+
+| §3.1 engine question | The mechanical answer (measured) |
+|---|---|
+| Where can this entity go from here? | `exits(loc_riverroad)` = `[loc_weirstair, loc_keep]` — the AUTHORED exits graph (`entities.json::locations.exits`, linted symmetric) |
+| What lies between these two locations? | the claimed lattice sites + the DERIVED price: riverroad↔weirstair sites 111→36 (4 cell steps) = 660 ticks; keep↔malby 300; crofts↔keep 510; riverroad↔keep 600 — `lattice_steps × step_ticks(150) + band_spread × climb_ticks(60) + river_endpoints × river_ticks(45)`, integer-only, draw-free (`core/travel.py`) |
+| What region contains this location? | the typed claim read (`WorldModel.claim_value`, the closed field set biome/height/region/river): riverroad→hills, malby→forest, crofts→coast, keep height→6028 — region membership is a per-site MODEL field, projected into canon only through the claim births |
+| What is adjacent? | the exits list (the pack's own declaration order — the WARM ring's derivation input, `core/lod.py`) |
+| Is this destination reachable? | the exits-graph walk: 6/6 locations reachable from riverroad (province); the traversal topology of record is the graph, the price reads the lattice |
+| What is immediately outside? | the lattice IS the extent: 324 sites = (extent 144 / spacing 8)² = 18×18 cells; no site exists outside it — the world's boundary is the pack-declared map config, mechanically closed (no undefined "outside the scene") |
+| Determinism | regeneration from the same seed → equal sites/height/moisture = True (L11: the model is derived, rebuildable, never truth; replay rebuilds from the header seed + pack) |
+
+The probe CONFIRMS the document's own key invariant — "if space
+between authored anchors is mechanically relevant, it must have an
+authoritative or deterministically reconstructable representation"
+— is met by the repo's standing form: the lattice + place-1's
+claim↔exits consistency law (`max_edge_span` 4, the pack's edge
+contract) + the derived prices. No streets/districts exist and
+none are owed (no consumer; the six-location province scale +
+the group census + the cultures block carry the current world).
+
+**The verification map** (the world-structure half, claim by
+claim):
+
+| The document's claim set | Verified at HEAD 131c477 |
+|---|---|
+| §1 one fact one authoritative owner; canon/derived/projection split | INV-1 + D-031 privilege separation (the log writer the only canon path) + single-owner modules + L3/L11 — zero drift |
+| §2 intent lifecycle (assumed state, staleness, revalidation, rejection, re-planning, conflict, deterministic resolution) | CLOSED mechanically: proposal carries `based_on_event_seq` (the event count); OCC re-check at completion → `projection_moved` rejection with the breaking event's id as cause (`occ_breaking_cause` folds forward — attribution only); the windowed family (`leverage_over`/`echo_at_least`/`trait_held`) re-runs unconditionally (fold-read truths the event-count guard misses); player rejections = `intent_rejected` no-op events, never silent; autonomous failures = the noise floor (`core/urgencies.py`); re-planning = the goal ticker's next beat (p=100 compulsion the content-5 form); conflict resolution = the queue key `(tick, sub_order, actor_id, seq)` + first-commit-wins + `spot_available` (arson-on-ashes refused, pack-2) — INTENT_SCHEMA §4 owns the prose |
+| §3.2 authored anchors vs derived structure; generated-space identity/replay | authored: locations, exits, claims, per-edge price overrides; derived: the lattice (seed+pack, deterministic, stable identity via the claim births, replay-stable); roads-1 owns the generated-exits half (iter-104's resolved read-path fork: the derived L3 read, no canon births) |
+| §3.3 extent/boundary senses | the six proposed senses collapse to the repo's two authored forms + two derived reads: authored extent (map config) + reachable extent (the exits graph); simulated extent = the LOD zones (derived, the one-gate law); observable extent = position_visibility/acquisition; geometry NEVER assumed (integer topology; presentation never enters the engine) |
+| §5 LOD + combinatorial growth sources | the one-gate law + zones + the D-112 aggregate law (log growth O(active + warm/cadence + aggregates) by construction); the complexity-audit residue stays parked with intake-14's (3) family |
+| §6 time hierarchy + the no-silent-skip law | L4 layered clocks (maclock-1: tick / phases / beats / macro-year, one authority); crossings coarsest-first at co-occurring ticks (D-039); the macro aggregates + condensation answer the skip question at group scale (S5 PROVEN, intake-21) |
+| §7 cross-system composition through explicit interfaces | the systems reads/writes DAG (the nine-pass scope, intake-22's sharpened asymmetry) + the commit door + event-driven reactions (D-037) + typed events + hooks-as-data — the document's "compose through authoritative interfaces" IS the standing shape |
+| §8 the fact→knowledge→belief→goal→intent→action ladder | every transition owns a mechanical owner: channels saw/heard/told/inferred + fidelity exact/partial/vague (the decay ladder; lies = crafted records, D-008) → traits crystallization + counters (beliefwire) + reflection mint → urgency/faction goal entries → the door's gates (`trait_held`/`echo_at_least`/`leverage_over`) → the resolver. "Knows but not believes" = below trait threshold; "believes but not acts" = an unarmed gate; omniscience fenced by the blind-NPC leak suite (D-094, 0 leaks) + known_by + L6/EPIST-1; faction knowledge is NEVER group state (the ratio reads members' LIVE axes, D-006) |
+| §13 metamorphic guarantees | T1 byte-identical + T2 replay + checkpoint verify-by-refold + the D-079 add-safety law (an added/removed entry shifts neither a later draw nor another's) + the sort laws |
+| §20 dependency graph / blast radius | `matrix` (static wiring off the pack's own data) + `blast` (the runtime A/B) — the instruments exist; no separate graph abstraction owed |
+
+The verdict set (the method's four questions + the combined
+design, the FACT/INFERENCE axis kept separate from disposition):
+
+| The document's proposal | Repo form (principle → form → quality/transfer) | Disposition |
+|---|---|---|
+| §1 authority map; no second simulation authority | INV-1/D-031/the fold — the anti-God-manager family (D-116/D-147) | OWNED — CONFIRMED, zero drift |
+| §2 the formal intent-conflict taxonomy (independent/compatible/resource/state conflict, exclusive target, stale/invalidated intent) | principle: the taxonomy's WORK is already done by named mechanics (OCC, the queue key, spot_available, the noise floor); form: INTENT_SCHEMA §4 + the queue law name them; quality: the taxonomy adds labels, not leverage; transfer: the document's own "do not invent unless the repository demonstrates the need" clause refuses it | REJECTED as new law — label-matching (D-024); the ANSWER SET (each §2 question answerable by a named mechanism) is the residue, one card line |
+| §3.1 spatial ontology as first-class concern | principle: topology-of-record + derived-prices-over-it; form: exits graph + lattice + claims + place-1; quality: MEASURED by the probe (six questions answered); transfer: roads-1's generated-exits half, slice 3/4's province scale | CONFIRMED — OWNED (the probe the fresh evidence) |
+| §3.2 derived/generated spatial structure | the lattice + derived prices + roads-1's planned pass; deterministic, stable, replay-safe | OWNED; the streets/districts/traversal-regions vocabulary REJECTED — no consumer (the document's own §24 law: a gap is real only when the repo cannot answer) |
+| §3.3 the six extent/boundary senses | the mechanical answers exist (authored extent, reachable extent, the zones, the visibility reads) | OWNED; the six-sense vocabulary REJECTED as new law — label-matching |
+| §4 scenarios A–G | A: pieces proven separately (intake-21 S1); B: weather→travel PROVEN (weather-1 erosion + st-6a prices), the economy half res-1's own row; C/E PROVEN (intake-21 S3/S5); D: blast + the first-divergence read → slice 3 (intake-21's routing); F (urban topology) + G (political cascade): the primitives land (factions depth-6 DORMANT awaiting slice 3, leverage/secrets, the knowledge ladder, the census) — the cascades are COMPOSITION questions | ROUTED — F/G's stress-test QUESTIONS join slice 3's consult material (its factions + feud + outcome-divergence experiment the natural carrier); zero new rows (the document's own §15 law: the row owns the finding) |
+| §5 LOD as execution concern | the one-gate law + zones + D-112 | OWNED (intake-14's confirmed record) |
+| §6 the temporal-fidelity question | maclock-1 + the crossing discipline + the aggregates/condensation | OWNED — CONFIRMED |
+| §7 compose through explicit interfaces, never hidden sync | the DAG + the door + event-driven reactions | OWNED — CONFIRMED |
+| §8 knowledge/belief/goal/action separation; political asymmetry as stress test | the ladder verified transition-by-transition (above); the political cascade = slice 3's material | OWNED as law; the stress test ROUTED to slice 3 |
+| §9 state-ownership matrix | INV-1 + single-owner modules | OWNED |
+| §10..§19 observer-side (causality, validation, balance, counterfactual, emergence, worldbuilder, observatory, gateway) | intake-21's routed record — re-verified, zero drift: trace_event rides mech-2, the four-question card, blast/slice-3, the parked detectors, D-149/D-152, the doors + D-055 + testproto | OWNED/PARTIAL/PARKED exactly per intake-21 — not restated |
+| §20 a dependency-graph abstraction | matrix + blast already answer reads/writes + the empirical half; a new graph = parallel truth | REJECTED (D-024) |
+| §22 the scalability audit | intake-14's (3) parked family + the D-112 bounds + the measured curves (worldgen 10k/1.19s) | PARKED with intake-14 (unchanged) |
+| §23 the standing capability matrix | the one-pass form is THIS block + intake-21's map (no standing truth-table document — D-024) | ROUTED into this block |
+| §25 the 29-question decision set | 25 answered by standing law/probe in this block's tables; 4 ride standing carriers (conflict/re-planning detail → INTENT_SCHEMA §4; the fork → slice 3 + the resume door; emergence → the parked family; agent development → the engine-1 family) | ANSWERED |
+| §26/§27 a dedicated formalization iteration | the ladder complete; the L2 wave plan (D-153) owns the remainder; every build-grade item owns a row or carrier | REJECTED as a new phase/row — the owner-gated L2 wave is the carrier |
+| §28 the standing deliverable documents | this block + the card (the intake-20/21 one-pass precedent) | ROUTED |
+| §29 the final principle (one canonical world → structure → execution law → mechanics → observability → gateway) | re-derives INV-1/2 + the one-gate law + L6 + the doors + the dumb-terminal family | CONFIRMED — zero drift |
+
+**The world-structure consult card** (the crystallized residue —
+PARKED; slice 3/4's experiments and the engine-1/presentation-1
+spec writes read this BEFORE promising world-structure
+capabilities; the intake-20/21/22 card posture — each line cites
+its owner, nothing restates):
+
+1. **The six engine questions are answered and answerable**: exits
+   (authored graph) / between (claimed sites + derived price) /
+   region (typed claim reads) / adjacent (the exits list) /
+   reachable (the graph walk) / outside (the lattice IS the extent).
+   Any future topology claim first names which answer it extends.
+2. **The three-way existence distinction** the document's F
+   scenario demands — exists / currently simulated at resolution /
+   currently observable — is already mechanically separated:
+   entities+canon (existence), the one-gate zones (resolution),
+   position_visibility/acquisition (observability). Slice 3/4's
+   experiments use it as the verification prompt (the
+   riot-while-elsewhere form).
+3. **The §2 answer set**: every intent-lifecycle question
+   (staleness, revalidation, rejection, re-planning, conflict)
+   resolves to a named mechanism — OCC + `projection_moved` + the
+   queue key + `spot_available` + the noise floor + the beat
+   re-roll (INTENT_SCHEMA §4 the prose owner). A new conflict
+   taxonomy must demonstrate a case these cannot express.
+4. **The social-information ladder is closed end-to-end**: fact →
+   channel/fidelity record → trait crystallization (+counters) /
+   reflection → goal entry → door gate → action. The political
+   cascade (scenario G) composes these — never a politics
+   subsystem; slice 3's triangle is the first full arming.
+5. **Scenario F/G as verification prompts** ride slice 3: the
+   factions' ratio dynamics + the census + knowledge propagation
+   (F); secrets/leverage + the fidelity ladder + faction goal
+   intents at province scale (G) — the outcome-divergence
+   experiment already carries intake-18/21's forms.
+6. **No mechanically-meaningful empty space**: the lattice + place-1
+   own the between-anchors law; roads-1 extends it to generated
+   exits; a new spatial vocabulary (streets/districts/boundary
+   senses) waits for a consumer that cannot be expressed today.
+
+Refused at the door (the document's own cut list + repo law): no
+new phase or formalization iteration (the ladder complete, the L2
+wave plan the owner-gated carrier); no intent-conflict taxonomy as
+law (label-matching, D-024); no streets/district/settlement
+hierarchy or six-sense extent vocabulary (no consumer — the
+document's own §24 "a gap is real only when the repo cannot
+answer" law); no dedicated politics/city subsystem (the primitives
+land, the composition rides slice 3); no dependency-graph
+abstraction beside matrix/blast (D-024); no standing
+capability-truth-table document (this block is the one-pass form);
+no runtime instrumentation (D-118); no second engine / unrestricted
+LLM mutation / UI-driven architecture (INV-4, the D-116/D-147
+family — the document's §21 re-derives them all).
+
+Micro-drifts (the document vs HEAD 131c477): (a) its §3.2 derived
+structure list (streets, connecting edges, district topology,
+traversal regions) reads as a proposal — the repo's actual derived
+structure is the lattice + the derived edge prices + roads-1's
+planned pass; (b) its §2 pipeline sketch names an "arbitration"
+stage — the repo's form is the queue key + first-commit-wins, no
+separate stage; (c) its §23 matrix row "Population" — the census +
+condensation (D-112's counts-for-populations) carry the current
+form; (d) its "Economy" row — res-1's own standing row (the dives
+landed, the backbone stands). No factual errors found in the
+document's repo-facing claims. Landed: D-164 + this block. The
+build queue UNTOUCHED — nothing unpins, nothing reorders; zero
+build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

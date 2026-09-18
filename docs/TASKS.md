@@ -26,6 +26,37 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-130 · intake-23 — the world-execution / spatial-topology / social-information architecture research routed: the §3.1 six engine questions answered by a fresh province-pack probe, the §2 intent-lifecycle answer set closed, the F/G scenario questions routed onto slice 3, the residue parked as the world-structure consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `ARCHITECTURE RESEARCH TASK —
+Unified World Execution, Spatial Topology, Social Information,
+Observability, Counterfactuals & Agent Gateway.md` (intake-21's
+own agenda expanded with the world-structure side; the external
+text and the method file stay outside the repo, the
+convenience-copy law). Verified at HEAD 131c477 (181 commits,
+1726+1 green, ruff clean, Python 3.12.14 the env pin). One fresh
+read-only probe through the public API answered the document's
+six §3.1 engine questions over the committed province pack
+(exits/between/region/adjacent/reachable/outside + the
+regeneration determinism check — the block's probe table);
+the document's own key invariant (no mechanically-meaningful
+empty space between authored anchors) CONFIRMED as already met
+by the lattice + place-1 + st-6a's derived prices. The §2
+intent-lifecycle question set closed mechanically (OCC/
+`projection_moved`/the windowed re-run/the noise floor/the
+beat re-roll/the queue key + `spot_available`) — the formal
+conflict taxonomy REJECTED as label-matching (the document's
+own "do not invent" clause). The §8 social-information ladder
+verified transition-by-transition. Scenarios F/G routed onto
+slice 3's consult material (the composition questions, never
+a politics/city subsystem); B's economy half stays res-1's
+row. The world-structure consult card parked (6 lines). Zero
+build-grade items; the queue untouched. Landed: D-164 +
+phases.md §6's intake-23 block + STATUS/worklog rows.
+Detail: D-164 + worklog iter-130 + git.
+
 ### iter-129 · intake-22 — the ComfyUI/modularity consolidation research routed: the report's verdict set re-verified at a real clone, the six disputed items resolved, the mechanics-modularity residue parked as the modularity consult card — done (doc-only, the owner's research call)
 
 The owner's «используя research_method_v5.md => разберись что

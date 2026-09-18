@@ -1,57 +1,56 @@
-Iteration: iter-129 (`iter-129-intake22` — the ComfyUI/modularity
-consolidation research routed, the owner's research call
-«используя research_method_v5.md => разберись что перенять можно,
+Iteration: iter-130 (`iter-130-intake23` — the world-execution /
+spatial-topology / social-information architecture research
+routed, the owner's research call «используя
+research_method_v5.md => разберись что перенять можно,
 дополнить или улучшить… долгосрок важен и качество» over the
-uploaded `canonsim_модульная_архитектура.md`; the D-155..D-162
-intake precedent, doc-only):
-**a CONSOLIDATED META-RESULT ROUTED — where intakes 14..21 each
-routed one fresh agenda, this document is itself a reconciled
-verdict set over the ComfyUI/node-graph question (several
-sessions, most of which DNS-failed at clone): this session
-re-verified every load-bearing repo claim from a REAL clone
-(BASE_COMMIT 309aa17, 180 commits — resolving the report's own
-disputed BASE_COMMIT item), sharpened its one open claim,
-resolved its six disputed items, and routed the surviving
-residue. Every load-bearing claim verified against HEAD 309aa17
-(1726+1 green, ruff clean; the repo-facts half zero-error:
-INV-1/2 law, 3 packs, 38 single-owner core modules, matrix/
-trace/why/blast + pack_doctor + balance_harness, L13/L11 + the
-dumb-terminal law + D-055, engine-1/presentation-1/roads-1/
-pack-3/pack-4 standing, D-149's 14m24s reskin, the D-142 DSL
-paths). The verdict set: the node-graph-as-runtime rejection
-CONFIRMED (re-derived from standing law — INV-1/2, VISION §7,
-the no-second-engine family); the replaceability formula
-(canonical engine → contracts → projections → interchangeable
-clients) OWNED zero-drift (the D-055 file-contract family + the
-dumb-terminal law); the three-senses frame: code/authoring
-OWNED, mechanics PARTIAL — the SHARPENED asymmetry: rules.json's
-systems reads/writes DAG covers the nine original passes while
-the newer families (weather/travel/echo/traits/cultures/names/
-budget) declare heterogeneous blocks + per-family lint; the
-minimal system contract + the agent-speedup claim stay
-HYPOTHESIS (the 3..5 system decomposition the named next
-verification, parked on the modularity consult card —
-engine-1/presentation-1 the consumers, no new row); the DAG viz
-rides mech-2 (first-consumer law); the ComfyUI lesson CONFIRMED
-at the principle level, no donor registration; the v5 method
-file itself FULLY INTERNALIZED (intakes 14..21 the evidence —
-nothing left to adopt from it). Zero build-grade items; the
-queue untouched ·
+uploaded `ARCHITECTURE RESEARCH TASK — Unified World Execution,
+Spatial Topology, Social Information, Observability,
+Counterfactuals & Agent Gateway.md`; the D-155..D-163 intake
+precedent, doc-only):
+**the WORLD-STRUCTURE half of the uploaded task routed — where
+intake-14 asked the substrate questions and intake-21 the
+observer-side questions, this document expands intake-21's own
+agenda with the execution model, the spatial topology and the
+social-information ladder; its observer-side sections re-derive
+intake-21's routed record zero-drift (not restated). Every
+load-bearing claim verified against HEAD 131c477 (181 commits,
+1726+1 green, ruff clean, Python 3.12.14 the env pin; the
+probe read-only through the public API, zero corpus contact).
+The fresh evidence: ONE probe answered the document's §3.1 six
+engine questions mechanically over the committed province pack
+(exits = the authored graph; between = claimed lattice sites +
+the derived prices 660/300/510/600; region = the typed claim
+reads; adjacent = the exits list; reachable = the graph walk
+6/6; outside = the lattice IS the pack-declared extent — 324
+sites, mechanically closed; the same-seed regeneration equal)
+— the document's own key invariant (no mechanically-meaningful
+empty space between anchors) CONFIRMED as already met by the
+lattice + place-1 + st-6a. The §2 intent-lifecycle answer set
+closed mechanically (OCC/`projection_moved`/the windowed
+re-run/the noise floor/the beat re-roll/the queue key +
+`spot_available`) — the formal conflict taxonomy REJECTED as
+label-matching (the document's own "do not invent" clause,
+D-024); the §8 fact→knowledge→belief→goal→intent→action ladder
+verified transition-by-transition; scenarios F/G routed onto
+slice 3's consult material (composition questions — never a
+politics/city subsystem), B's economy half stays res-1's row.
+The residue parked as the world-structure consult card (6
+lines). Zero build-grade items; the queue untouched ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1726 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 309aa17 — 1726+1 green, ruff clean —
+verified BEFORE working at HEAD 131c477 — 1726+1 green, ruff clean —
 and re-verified after: doc-only, zero runtime files touched, the
 corpora untouched by construction) ·
 Date: 2026-09-18 ·
-Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-22
-block incl. the verification map + the verdict table + the parked
-modularity consult card), `docs/DECISIONS.md` (the D-163 row),
-`docs/TASKS.md` (the iter-129 section), `STATUS.md` (this re-pin +
-Next step), `worklog.md` (this entry; iter-119 evicted per the cap)
-— 5 files.
-The prior iteration's record: iter-128 (intake-21). The
+Scope: docs only — `docs/blueprint/phases.md` (§6 the intake-23
+block incl. the probe table + the verification map + the verdict
+table + the parked world-structure consult card), `docs/DECISIONS.md`
+(the D-164 row), `docs/TASKS.md` (the iter-130 section), `STATUS.md`
+(this re-pin + Next step), `worklog.md` (this entry; iter-120 evicted
+per the cap) — 5 files.
+The prior iteration's record: iter-129 (intake-22). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -526,30 +525,34 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-129 DONE: the ComfyUI/modularity consolidation research
-routed (intake-22 — D-163 + phases.md §6's intake-22 block
-incl. the verification map, the verdict table and the PARKED
-modularity consult card, doc-only, the build queue untouched:
-nothing unpins, nothing reorders; the consolidated report
-re-verified from a real clone (BASE 309aa17, 180 commits — its
-disputed BASE_COMMIT item resolved), the repo-facts half
-CONFIRMED zero-error, the node-graph rejection re-derived, the
-replaceability formula OWNED zero-drift, the mechanics-
-modularity asymmetry sharpened (the nine-pass DAG vs the
-heterogeneous newer families), the system-contract + the
-agent-speedup claims parked as HYPOTHESIS on the card with the
-3..5 system decomposition as the named verification, the viz
-riding mech-2, the v5 method file confirmed fully internalized;
-zero build-grade items).**
-The intake family's standing record: nineteen routed intakes
-(4..22), every queue-relevant verdict already owned by a row.
+**iter-130 DONE: the world-execution / spatial-topology /
+social-information architecture research routed (intake-23 —
+D-164 + phases.md §6's intake-23 block incl. the probe table,
+the verification map, the verdict table and the PARKED
+world-structure consult card, doc-only, the build queue
+untouched: nothing unpins, nothing reorders; the document's
+observer-side half re-derived intake-21's record zero-drift;
+the world-structure half routed: the six §3.1 engine questions
+answered by a fresh province-pack probe (the document's own
+between-anchors invariant CONFIRMED as met by the lattice +
+place-1 + st-6a), the §2 intent-lifecycle answer set closed
+mechanically (the formal conflict taxonomy rejected as
+label-matching), the §8 social-information ladder verified
+transition-by-transition, scenarios F/G routed onto slice 3's
+consult material, the streets/districts/formalization-iteration
+asks all refused at the door; zero build-grade items).**
+The intake family's standing record: twenty routed intakes
+(4..23), every queue-relevant verdict already owned by a row.
 The L2 wave plan (D-153, TASKS world-2) owns
 the remainder: slice 3 the triangle (its outcome-divergence
 experiment now carries intake-18's next-decision form — count
 divergent NEXT-DECISION surfaces, not only divergent event
 paths — AND intake-21's first-divergence read: name the first
-divergent event + the amplifying chain; the ORDER owner
-decides), slice 4 the calendar + the verdict call. What stands:
+divergent event + the amplifying chain — AND intake-23's F/G
+verification prompts: the exists/simulated-at-resolution/
+observable distinction + the riot-while-elsewhere and
+cascade stress forms; the ORDER owner decides), slice 4 the
+calendar + the verdict call. What stands:
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order):** by
@@ -575,10 +578,12 @@ decides), slice 4 the calendar + the verdict call. What stands:
    single-event postmortem form + intake-22's viz-export form),
    `st-4` (rides presentation-1 at its
    write time, D-148) and `st-5` (the first real consumer decides). No
-   other owner question stands open. The intake-22 modularity card is
-   the consult material for the engine-1/presentation-1 spec writes
-   and any future contract/plugin question (the system-contract
-   decomposition research call is the owner's, never self-opened).
+   other owner question stands open. The consult material for
+   the engine-1/presentation-1 spec writes and any future
+   contract/plugin question: the intake-22 modularity card, the
+   intake-23 world-structure card, and the intake-21 observability
+   card (the system-contract decomposition research call is the
+   owner's, never self-opened).
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8

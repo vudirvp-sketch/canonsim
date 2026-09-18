@@ -13,6 +13,55 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-130 · 2026-09-18 · intake23 — the owner's «используя
+research_method_v5.md => разберись что перенять можно, дополнить
+или улучшить… долгосрок важен и качество» research call over the
+uploaded world-execution / spatial-topology / social-information
+architecture-research task (5 files doc-only, zero code, zero
+corpus price — the D-155..D-163 intake precedent; the method file
+itself external per the convenience-copy law)
+- verified BEFORE working (1726+1 green, ruff clean, HEAD 131c477,
+  181 commits, Python 3.12.14 the env pin) — from a real clone
+  (BASE_COMMIT 131c477); the document's observer-side sections
+  re-derive intake-21's routed record zero-drift (not restated);
+  the world-structure half verified claim-by-claim: the §3.1 six
+  engine questions answered by ONE fresh read-only probe through
+  the public API over the committed province pack (exits graph /
+  claimed sites + derived prices 660/300/510/600 / typed claim
+  reads / reachability 6/6 / the lattice-as-extent 324 sites /
+  same-seed regeneration equal — the probe table in the block),
+  the §2 intent lifecycle closed mechanically (OCC +
+  projection_moved + the windowed re-run + intent_rejected +
+  the noise floor + the queue key + spot_available), the §8
+  ladder transition-by-transition (channels/fidelity, traits +
+  counters, reflection, the door gates, the blind suite, D-006)
+- the routing (D-164): the between-anchors invariant CONFIRMED
+  as met by the standing form (lattice + place-1 + st-6a); the
+  formal intent-conflict taxonomy REJECTED as label-matching
+  (the document's own "do not invent" clause, D-024) — the
+  answer set joins the card; scenarios F/G routed onto slice 3's
+  consult material (composition questions, never a politics/city
+  subsystem); the streets/districts/six-sense-extent vocabulary,
+  the dependency-graph abstraction, the standing
+  capability-truth-table, the dedicated formalization iteration
+  all REJECTED (no consumer / D-024 / the L2 wave plan D-153 the
+  owner-gated carrier); the residue parked as the world-structure
+  consult card (6 lines)
+- docs: phases.md §6 the intake-23 block (the probe table + the
+  verification map + the verdict table + the card), DECISIONS
+  D-164 (43 rows — over the 30 cap on the §6.1 substance
+  precedent until the next gate collapse), TASKS the iter-130
+  section, STATUS re-pin + Next step (slice 3's experiment now
+  also carrying intake-23's F/G verification prompts; the
+  consult material now the three cards), this entry (iter-120
+  evicted per the cap, verified in this edit; 10 held). The
+  build queue untouched — nothing unpins, nothing reorders.
+  Doc-only (the D-022 exception, the owner's fresh request).
+  Caps: DECISIONS 43 rows / phases 2917 — over-cap files ride
+  the documented §6.1 substance precedent (the intake blocks
+  are the engine-1 consult material), trim at the next gate
+  collapse
+---
 iter-129 · 2026-09-18 · intake22 — the owner's «используя
 research_method_v5.md => разберись что перенять можно, дополнить
 или улучшить… долгосрок важен и качество» research call over the
@@ -433,43 +482,3 @@ intake precedent, one family)
   gate, the D-034 family law) / phases 1959 / REFERENCES 341 — the
   over-cap files ride the documented §6.1 substance precedent, trim
   at the gate
-
-iter-120 · 2026-09-18 · intake14 — the owner's research call «начни
-работу с документом» over the uploaded causal-architecture research
-bootstrap (5 files doc-only, zero code, zero corpus price — the
-D-150 intake precedent, one family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 864307d,
-  Python 3.12.14 the env pin); every load-bearing bootstrap claim
-  checked against HEAD (the convenience-copy law) — the doctrine half
-  re-derives intake-13's confirmed record with zero new drift; the
-  code-level checks: core/travel.py (the derived price + the override
-  law), core/detail.py + core/names.py + core/groups.py (the D-054
-  family docstrings — "never a second mechanism"), core/intent.py
-  (the closed test set + IntentData), core/weather.py (the erosion
-  fold scan), tavern actions.json (move's visual-only sightings),
-  TECH_NOTES §12 (the 10k-site curve)
-- the routing (D-155): causal compression CONFIRMED as standing
-  practice (L3 + authored-facts-win; the travel law the strongest
-  instance; both explosion modes fenced — L9/L13 + PACK_SPEC §8,
-  authored-facts-win); simulation levels CONFIRMED (one world,
-  resolution strategies — LOD/maclock/D-112 cardinality/condensation/
-  the id law; second engines the named anti-pattern); large-scale
-  aggregation UNRESOLVED (substrate landed, the 1k–10k battle claim
-  unmeasured — parked with the intake-9 family, the first
-  combat-bearing pack decides); stealth PARTIAL (the epistemic half
-  landed; emission/propagation authored per-action — generalization
-  a first-consumer question per D-142); materialization CONFIRMED at
-  the law level (the D-054 slot shape the parent law, four instances;
-  entity-birth = st-5's first consumer); the bootstrap's §4 framing
-  corrected (texture promotion IS the general law already extended);
-  its §12 vocabulary re-routes to D-150's verdicts
-- docs: phases.md §6 the intake-14 block, DECISIONS D-155 (34 rows,
-  over-cap on §6.1 substance until the next gate collapse), TASKS the
-  iter-120 section, STATUS re-pin + Next step, this entry (iter-110
-  evicted here, verified against git in this edit; 10 after). The
-  build queue untouched — nothing unpins, nothing reorders. Doc-only
-  (the D-022 exception, the owner's fresh request). Caps: TASKS 994 /
-  DECISIONS 65 (34 rows) / phases 1696 — over-cap files ride the
-  documented §6.1 substance precedent (the intake blocks are the
-  engine-1 consult material), trim at the next gate collapse
-
