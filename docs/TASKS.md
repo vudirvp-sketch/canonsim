@@ -26,6 +26,115 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-149 · pack-4 — the pressure-city pack LANDED (T1) — done
+
+The owner's «продолжай работу с места где прервался» resumption call
+over the interrupted pack-4 session (the prior context lost to the
+channel's limit — the base re-verified at BASE_COMMIT a5a3012
+BEFORE working, the law of every iteration held through the
+interruption). THE PACK: `content/pressure_pack/` (the FIFTH
+committed pack, the FIRST authored non-scaffold pack — no tavern
+copy underneath, the city its own cast): THE T1 SLICE exactly as
+the row pinned it — one district (the Ashtread tenements + the
+boiler house + the coal yard + the registry, four rooms around one
+machine), one boiler (the firehole's stocks: coal 8, pressure 40 —
+res-1's accounts on a location), one gauge (the scene line's
+`account.pressure` anchor field: the record's birth bytes declare
+the readside legality, the renderer's fold-outranks-record law
+renders the LIVE stock — the DD/FP law's one meter), three
+factions (the objective-function triangle over the same system),
+one Cooling-Debt chain (the `thermal_shock` layer: three seams,
+each hard burn shocking the FIRST WHOLE seam — deterministic
+pack-order selection, draw-free, irreversible; the knocking +600 /
+the collection +4320 — the SEEDED follow-ups, idempotent, the
+erosion shape over its own origin family; the `creep_halted` birth
+flag pinning the halt — the spread pass dies at its first tick
+with ZERO rolls, no new stream family anywhere in the debt's
+path). THE DISPLACEMENT'S THREE HALVES: the SPATIAL — res-1's
+SECOND CONSUMER ARMING (the flows: the fire eats 3 coal, the gauge
+holds its NET +1 — the FOLDED cycle (gross climb 6 less the grid's
+draw 5), the fold forced by a genuine engine limit DISCOVERED by
+the crafted twin: co-due same-account flows desync at the commit
+gate (flow_drafts builds every draft against the crossing's single
+snapshot; the grim arming never exercised the shape — its flows
+sit beyond every corpus horizon); the price formula with a REAL
+direction (base 30 / per_unit −1, grim's identity read
+superseded); the player-scaled arms: haul_coal (the source mint at
+the yard), feed_the_fire (the transfer through ANY shared wall —
+the adjacency is the mechanism: the yard's chute, the tenements'
+hatch, the registry's side door), ration_the_coal (the bench's
+measured 4 — one short of a full feed, the 20-year objective's own
+arithmetic), stoke_hard (the ignite — no coal, no check: the cost
+not paid in space at all, DEFERRED INTO TIME)); the TEMPORAL — the
+debt as ordinary events + folds (INV-1: the fold over the shocked
+seams IS the aggregate, no meter anywhere, the thermometer minus
+structural — no marker, no scene field, no template line ever
+speaks a seam count; the collection's cold +10 the felt
+collection); the MORAL — the world's replies (the scream +5 dread
+on the hearers INCLUDING the burner; the knock +10 — double the
+scream, the decay-surviving margin; the warmth −2 a feed, the
+feeler included; BOTH pressure axes CHRONIC auto_decay 0 — the
+felt costs as folds over replies, never clock-shed; the cold
+ratchets: five feeds to pay one burst back, and the seams do not
+un-shock). THE TRIANGLE (depth-6's second committed arming, the
+objective-function pair's first): the STOKERS' CIRCLE (cold 35/30
+seeds, trigger 30/threshold 50 — honestly hot at open, the T1
+opens mid-crisis; the goal the MECHANICAL stoke_hard, actor = the
+group through the one-id door; the spot_available gate the honest
+end — the spent machine is not stoked again); the REGULATORS'
+BENCH (dread 25/25 seeds, quiet at open; the knocking's +10 the
+writer; the goal the convening BARE-BEAT (the province's council
+precedent) + the KEEPER's urgency the mechanical arm — the
+echo-gated ration (the knocking's residue ≥ 10 releases the
+ledger, the grim guard's jittery-watcher precedent), the reserve
+24 on the KEEPER's own npc account); the TENANTS' WATCH (cold
+40/45/40, trigger 35/threshold 34; the goal the plea bare-beat +
+the WIDOW's urgency the mechanical arm — the scuttle 6, the same
+feed_the_fire verb the player's cart rides); the antagonist pair
+never negotiates in data — the objectives diverge over ONE system,
+the axes are the world's replies, the coal is finite; THE SPIRAL
+closes EMERGENT on the golden run: burst → the district's cold
++10 → the watch pleads → the widow feeds → the warmth — never
+scripted. THE FINDINGS (the mapping's own test doing its job —
+each recorded in the pack's own notes, never patched in a
+zero-core slice): (1) the entities lint's GROUP vocabulary carries
+no `accounts` (economy.py's docstring names npc/location/group; the
+fold seeds all five categories; the lint's closed vocabulary misses
+the key — the reserves ride the keepers' own npc accounts); (2)
+the co-due same-account flow limit (above); (3) a group can SPEND
+nothing through the door (the verbs are actor-keyed — the ignite
+is the only stockless mechanical group goal; the stock-spending
+arms ride the keepers' urgencies). THE EVIDENCE (TEST_PLAN §9's
+claim packet, the driver outside the repo): the golden corpus
+(pressure_smoke, seed 42 — 29 events, fingerprint 15: the burn →
+the seam → the haul → the chute feed + the warmth → the second
+burn → the knocking (idempotent — the second seed silenced) → the
+collection (idempotent) → the cold +10 → the plea → the widow's
+feed 6→1 → the warmth −2, with the empty-cart rejection and the
+widow's second-feed OCC rejection both logged as facts); the
+crafted twins: the short-cadence flows (the arithmetic exact: coal
+8→5, pressure 40→41), the stokers' group burn (the faction's own
+hand saturating ALL THREE seams, then silent on the spent
+machine), the bench's convening + the keeper's ration on the knock
+(seed 43), the deadband quiet (the seeds below the bar never fire
+across a full day of rolled beats); the read surface (the firehole
+scene line `account.pressure=40`, the aftermath markers
+`shivering` — and NO debt token anywhere in the rendered brief);
+the T1 universality (the same-seed twin byte-identical, the golden
+fixture pinned, a different seed diverges). Falsifiers NOT tripped
+— CONFIRMED at the measured band. Honest residues: the mapping's
+post-T1 rows (the legal exclusion D-134, the cultures name-1, the
+road traffic depth-7, the lore hooks D-140 — future slices, the
+full concept beyond the T1); the folded cycle's third flow (the
+engine's per-flow re-draft row); the group-stock lint gap (a
+one-line vocabulary fix, the owner's call); the weather chain
+armed but riding beyond every corpus horizon (the cold chain's
+rolls measured only by the crafted twin — the zero-corpus-price
+law's own shape). 1842 passed + 1 skipped, ruff clean (Python
+3.12.14; verified BEFORE working at BASE_COMMIT a5a3012 — 1826+1
+identical — and re-verified after). Detail: D-182 + worklog
+iter-149 + the pack's own four-file notes (the design record).
+
 ### iter-148 · pack-1 — the grim tavern pack LANDED — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -2015,7 +2124,7 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   fourth axis. The seed-41 corpus probe flipped with it (renamed
   `arson_on_a_destroyed_yard_is_door_rejected`).
 - `pack-3` Sci-Fi setting candidate (owner sketches; parked, not scheduled): the sketches map mechanic-for-mechanic onto what exists — zero core change by design (INV-3's substance: a second pack requires zero ENGINE changes); blocked until the 2nd-setting gate (phase 6, same trigger as `pack-1`, ROADMAP §6).
-- `pack-4` Pressure-city pack candidate (owner-supplied donor blueprint — PRESSURE_LIMIT, intake-11/D-147; parked, not scheduled): the displacement law ("stabilization is displacement; part of the cost is deferred into time") over landed primitives — the gauge = res-1's one-meter read surface, the Cooling Debt = weather-1's chain+erosion shape (never a second res-1), legal exclusion = the D-134 state/flag + knowledge-record family, factions = depth-6 objective-function pairs, cultures = name-1 profiles + prohibition sets, road traffic = depth-7 condensation, lore hooks = templates + cause_hook (D-140) — zero core change by design; the minimal T1 slice (one district, one boiler, one gauge, three factions, one Cooling-Debt chain) is the mapping's own test. Blocked until a pack slot opens (third pack, or the lost-city fold into world-2 L2 — the ORDER owner decides). The donor document stays outside the repo (the convenience-copy law); the routed distillation: `docs/blueprint/phases.md` §6's intake-11 block.
+- `pack-4` Pressure-city pack — **done (iter-149, D-182 — the T1 slice)**: the displacement law over the landed primitives, ZERO CORE CHANGE held exactly (the row's own law): the gauge = res-1's one-meter read surface (the scene line's live anchor field), the Cooling Debt = the thermal_shock layer (the seams' never-regress fold + the seeded follow-ups — the erosion shape over its origin family), the factions = depth-6's objective-function triangle (the stokers' mechanical group burn, the bench's echo-gated ration, the watch's scuttle), the closed cycle = res-1's second consumer arming (the folded net flow — the co-due same-account limit discovered), the price formula with a real direction. The mapping's post-T1 rows (legal exclusion D-134, cultures name-1, road traffic depth-7, lore hooks D-140) are the future slices' material; the engine findings (the group-stock lint gap, the per-flow re-draft) recorded in D-182. Detail: the iter-149 section above + D-182 + worklog iter-149 + the pack's own notes.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13
   items are done — status one-liners below; ref-16 (agent-memory-atlas,

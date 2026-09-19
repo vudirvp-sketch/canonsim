@@ -1,0 +1,535 @@
+{
+  "meta": {
+    "pack": "pressure_pack",
+    "version": "0.1",
+    "notes": "pack-4's rules (the T1 slice): the displacement law as PACK DATA over the landed primitives. The three halves: the SPATIAL (economy.flows — the closed cycle: coal drains at the firehole while the pressure climbs and the grid bleeds it to the rooms); the TEMPORAL (transitions.thermal_shock — the Cooling-Debt chain: the seams the hard burns shock, the knocking and the collection the SEEDED follow-ups, weather-1's erosion shape over its own origin family); the MORAL (on_action — the world's replies: the dread through the walls, the warmth of a fed fire, the cold a burst collects; the thermometer minus held: NO meter ever renders the debt, the gauge is the only visible number). The crime_watch key is present but empty (the block is a required key, an empty object its legal minimum — this slice carries no crime line; the institutional half rides the registry's ration ledger instead). The optional families (echo, traits, reflection, secrets, retrieval, scene_detail, expectations, director, worldgen, names, cultures) stay UNARMED — the honest residues the TASKS row records; the arming law (the 68a pattern) owns each.",
+    "display": "Ashtread — the pressure city"
+  },
+  "time": {
+    "ticks_per_day": 1440,
+    "phases": [
+      {"id": "morning", "from": 0, "to": 360},
+      {"id": "afternoon", "from": 360, "to": 720},
+      {"id": "evening", "from": 720, "to": 1080},
+      {"id": "night", "from": 1080, "to": 1440}
+    ],
+    "macro": {
+      "cadence_ticks": 518400,
+      "event_type": "year_turns"
+    },
+    "notes": "MVP_SCOPE §8's day; the macro year at 360 days (the heating year — the counter's name the engine's, the cadence the pack's own, D-116 (4)). The flows and the weather chain ride the year's crossings, beyond every day-scale corpus script's horizon by construction — the arming's zero corpus price (the grim precedent)."
+  },
+  "states": {
+    "cold": {
+      "auto_decay": 0
+    },
+    "dread": {
+      "auto_decay": 0
+    },
+    "notes": "the pressure axes — BOTH CHRONIC (auto_decay 0, the injury precedent's shape): the rooms' misery and the machine people's fear move ONLY on the thermal events themselves (the warmth reply −2 a feed; the scream +5; the knocking +10; the collection +10 a burst) — both axes are folds over the world's own replies, never passing moods the clock sheds for free. The winter does not warm on schedule (the weather chain owns the sky, the cold owns the rooms); the Harrowgate ghosts do not settle between knocks (the dread is another debt — never repaid, never metered: the thermometer minus's twin law, the felt costs as folds over replies). No DEBT axis exists at all: the debt is the fold over the shocked seams, never a status value — D-134's corruption law made structural."
+  },
+  "relations": {
+    "scale": [0, 100],
+    "neutral": 50,
+    "axes": ["trust", "suspicion"],
+    "notes": "two axes, deliberately minimal: TRUST is the night's whole social surface (the talk gate reads it; the pair home toward the player carries the elder stoker's long shift-side bond). SUSPICION is the dormant crime scaffold's own home — the engine's reaction door reads the axis unconditionally when the block is armed, and this slice's crime line is empty (no sources, no mapping, no rotations): the axis stands for the machinery's shape, unwritten and unread until a future slice arms a crime family (the honest dormancy, the 68a pattern's spirit at the axis level)."
+  },
+  "checks": {
+    "die": 20,
+    "tie": "defender",
+    "failure_margin": 10,
+    "skills": {
+      "perception": {"base": 50},
+      "social": {"base": 50},
+      "pursuit": {"base": 45},
+      "evasion": {"base": 45}
+    },
+    "kinds": {
+      "perception": {"attack": "perception", "defend": null, "defender_source": "environment"},
+      "social": {"attack": "social", "defend": null, "defender_source": "environment"},
+      "evasion_vs_pursuit": {"attack": "evasion", "defend": "pursuit", "defender_source": "best_in_location"}
+    },
+    "notes": "the minimal check surface: no action in this slice rolls (the levers are deterministic by design — the burn, the feed, the haul are labor, not contests; the world's answers are gated replies, never dice — the consent-split precedent's spirit). The perception/social environment kinds stand for the texture paths' future arming."
+  },
+  "knowledge": {
+    "channels": ["saw", "heard", "told", "inferred"],
+    "fidelity_chain": ["exact", "partial", "vague"],
+    "transfer_decay_steps": 1,
+    "salience": "importance_then_recency",
+    "rumor_acceptance": {
+      "base": 50,
+      "trust_axis": "trust",
+      "trust_weight": 0.2,
+      "teller_penalty_axis": "cold",
+      "teller_penalty_per_10": -1
+    },
+    "telling": {
+      "on_event": "talk",
+      "teller": "target",
+      "listener": "actor",
+      "event": "rumor_told",
+      "facts": 1
+    },
+    "notes": "EVENT_SCHEMA §3's family, pressure-tuned: the teller penalty reads COLD (the shivering teller mumbles — a frozen district retells its own history badly, the intoxication precedent's thermal twin); the rest is the standing shape. The district's oral memory is the displacement's witness stand: what the walls heard, the stairs repeat."
+  },
+  "crime_watch": {
+    "suspicion_axis": "suspicion",
+    "reaction_event": "suspicion_changed",
+    "status_values": ["unknown", "suspect", "caught"],
+    "status_suspect_value": "suspect",
+    "suspicion_sources": {},
+    "suspicion_from_knowledge": {},
+    "watch_rotation_ticks": [],
+    "arrest": {
+      "requires_suspicion": 75,
+      "requires_same_location": true,
+      "event": "arrest_attempt",
+      "resolution_check": "evasion_vs_pursuit",
+      "resolution_event": "arrest_resolved",
+      "caught_value": "caught",
+      "caught_irreversible": true
+    },
+    "notes": "the DORMANT SCAFFOLD (the engine's hard requirements, honestly declared): the reaction door reads the arrest block unconditionally and the policy the stagnation floor — this slice carries no crime line at all (the empty mapping returns before any suspicion move; no rotations; no sources), so nothing here ever fires. The institutional weight the watch would carry in a tavern pack rides the registry's ration ledger instead (the tally keeper's account, the bench's convening) — the pressure city's order is a ledger, not a patrol."
+  },
+  "position_visibility": {
+    "sight": {
+      "same_location": true,
+      "through_exits": false
+    },
+    "hearing": {
+      "same_location": "normal",
+      "adjacent_location": "vague_only"
+    },
+    "smoke_penalty": -20,
+    "notes": "the node model, unchanged: the ADJACENT hearing half is this pack's load-bearing surface — the knocking and the machine's scream carry through the shared walls (the boiler house borders all three other rooms), the warmth and the burst with them."
+  },
+  "systems": {
+    "time": {"reads": [], "writes": ["time"], "per_tick": false},
+    "position_visibility": {"reads": ["position", "status"], "writes": [], "per_tick": false},
+    "relations": {"reads": ["knowledge"], "writes": ["relations"], "per_tick": false},
+    "knowledge": {"reads": ["knowledge", "position"], "writes": ["knowledge"], "per_tick": false},
+    "states": {"reads": ["time"], "writes": ["status"], "per_tick": false},
+    "heat": {"reads": ["position"], "writes": ["status"], "per_tick": true},
+    "notes": "the pass DAG, pressure-shaped: the fire system's slot becomes HEAT (the thermal layer's own per-tick system — the transition engine's discipline, one system per layer family); the reads/writes are the mechanic words (INV-3)."
+  },
+  "metrics": {
+    "system_of_type": {
+      "look_around": ["position_visibility", "knowledge"],
+      "move": ["position_visibility"],
+      "talk": ["relations", "knowledge"],
+      "wait": ["time"],
+      "boiler_run_hard": ["heat"],
+      "seam_shocked": ["heat"],
+      "pipes_knock": ["heat"],
+      "debt_collects": ["heat", "states"],
+      "dread_rises": ["states"],
+      "warmth_felt": ["states"],
+      "the_cold_collects": ["states"],
+      "the_bench_convenes": ["relations"],
+      "the_watch_pleads": ["relations"],
+      "suspicion_changed": ["relations"],
+      "arrest_attempt": ["crime_watch"],
+      "arrest_resolved": ["crime_watch"],
+      "account_sourced": ["heat"],
+      "account_transferred": ["heat"],
+      "account_consumed": ["heat"],
+      "year_turns": ["time"],
+      "weather_turns": ["time"],
+      "rumor_told": ["knowledge", "relations"],
+      "intent_rejected": []
+    },
+    "notes": "M1's cross-system share, pressure-shaped: the HEAT column is this pack's own contribution — the closed cycle (the verb events), the debt chain (the layer family), and the collection's cold reply all touch the one system, the displacement's M1 signature (a feed, a burn, and a burst are all HEAT events; the difference is which ledger they move). No status_decayed row exists: both pressure axes are CHRONIC (auto_decay 0) — nothing ever decays in this pack, the felt costs never shed by the clock (the states block's twin law)."
+  },
+  "importance": {
+    "score": {
+      "entities_touched_at_least_2": 1,
+      "irreversible_state_change": 2,
+      "per_far_hook": 1,
+      "story_critical_event": 2
+    },
+    "story_critical_events": [
+      "boiler_run_hard",
+      "seam_shocked",
+      "pipes_knock",
+      "debt_collects",
+      "warmth_felt",
+      "dread_rises",
+      "the_cold_collects",
+      "the_bench_convenes",
+      "the_watch_pleads",
+      "rumor_told"
+    ],
+    "thresholds": {
+      "medium": 2,
+      "high": 4
+    },
+    "notes": "the tale's beats: the levers and their world-replies render as the chronicle's medium lines (the burn, the shock, the knocking, the collection, the warmth, the dread, the cold a burst collects); the axis bookkeeping (status_decayed) and the world texture (wait/move/look/talk) stay low — the rule owns the split (tune-1's law)."
+  },
+  "economy": {
+    "accounts": ["coal", "pressure"],
+    "flows": [
+      {
+        "id": "the_fire_eats",
+        "verb": "consume",
+        "kind": "coal",
+        "amount": 3,
+        "every": 1,
+        "from": "loc_boilerhouse"
+      },
+      {
+        "id": "the_gauge_holds",
+        "verb": "source",
+        "kind": "pressure",
+        "amount": 1,
+        "every": 1,
+        "to": "loc_boilerhouse"
+      }
+    ],
+    "prices": {
+      "coal": {
+        "base": 30,
+        "per_unit": -1
+      }
+    },
+    "notes": "res-1's SECOND CONSUMER ARMING (the grim tavern the first) and the displacement's SPATIAL HALF: the closed cycle over two accounts on the boiler house — the fire EATS three coal a macrobeat and the gauge HOLDS its net one degree (the FOLDED cycle: the gross climb six less the grid's draw five — the three-node arithmetic folded into the net flow, the notes its only mirror). The cost moves through space by construction: warmth in the rooms is coal gone from the face, pressure banked in the glass — the ledger and the machine pay for the same degrees. THE FOLD IS THE ENGINE'S OWN LAW, discovered by this slice's crafted twin: two CO-DUE flows on one account desync at the commit gate (flow_drafts builds every draft against the crossing's single snapshot — the second flow's from_ is the pre-first-write level, and the gate refuses it loud); the grim arming never exercised the shape (its two coin flows sit beyond every corpus horizon). A pack needing the three-node cycle as three flows awaits the engine's per-flow re-draft — the recorded residue, never patched in a zero-core-change slice. The PLAYER-SCALED arms ride the actions (haul_coal's source mint at the yard, feed_the_fire's and ration_the_coal's transfers); the yard's own stock is deliberately un-modeled — the scarce surface is the LEDGER (the keeper's reserve 24, the widow's scuttle 6, the firehole's store 8), not the yard (the honest residue: an unbounded mint is the supply's own statement that the coal is not what runs out — the seams are). The PRICE formula carries a REAL direction (grim's identity read superseded): base 30, per_unit −1 — the yard's asking for the next scuttle read against the firehole's store, the deeper the store the cheaper the next load (the scarcity dial, D-119's Dune binding; a derived read, never stored, never a transaction). The flows sit beyond every day-scale script's horizon (the macro year, the zero-corpus-price law); the T1 test's crafted twin demonstrates the arithmetic at a short cadence."
+  },
+  "transitions": {
+    "thermal_shock": {
+      "system": "heat",
+      "spot_field": "seams",
+      "spot_state": "shocked",
+      "halt_flag": "creep_halted",
+      "ignition": {
+        "requires_item_flag": "is_stoking_iron",
+        "requires_flammability": [],
+        "chance_on_drop_break": 0.0
+      },
+      "spread": {
+        "chance_per_tick": 0.0,
+        "within": "location"
+      },
+      "follow_ups": [
+        {
+          "kind": "the_knocking",
+          "after_ticks": 600,
+          "flag": "pipes_knock",
+          "value": true,
+          "irreversible": true,
+          "blocked_by": []
+        },
+        {
+          "kind": "the_debt_collects",
+          "after_ticks": 4320,
+          "flag": "debt_collected",
+          "value": true,
+          "irreversible": true,
+          "blocked_by": []
+        }
+      ],
+      "alarm": {
+        "when_occupants_present": false,
+        "fear_spike": 0
+      },
+      "events": {
+        "started": "seam_shocked",
+        "the_knocking": "pipes_knock",
+        "the_debt_collects": "debt_collects"
+      },
+      "knowledge": {
+        "started": {
+          "who": "same_location",
+          "channel": "heard",
+          "fidelity": "exact",
+          "knows": "a_seam_shocked_at_the_firehole"
+        },
+        "the_knocking": {
+          "who": "adjacent_locations",
+          "channel": "heard",
+          "fidelity": "vague",
+          "knows": "knocking_in_the_walls"
+        },
+        "the_debt_collects": {
+          "who": "adjacent_locations",
+          "channel": "heard",
+          "fidelity": "exact",
+          "knows": "the_machine_burst"
+        }
+      },
+      "notes": "THE COOLING-DEBT CHAIN (the displacement's TEMPORAL HALF, D-147's word-for-word keeper made mechanical): the layer's spot field is the boiler house's three SEAMS — the machine's fatigue is the FOLD over the shocked spots (each hard burn shocks the FIRST UNSHOCKED seam in pack order: the ratchet is deterministic, draw-free, and event-driven — nothing else in the pack writes a seam, nothing ever writes one back: the never-regress law by construction, the debt as ordinary events + folds, INV-1). The GROWTH event is seam_shocked (irreversible, heard exactly at the firehole — the machine's scream); the SURFACING is the two SEEDED follow-ups (the fire family's own shape, which the weather erosion family itself names its origin): the KNOCKING at +600 (the early symptom, heard vague through the shared walls — the bench's dread axis's writer) and the COLLECTION at +4320 (the burst: three days deferred, the cost never repaid in space arriving in time, heard exact through every wall in the district). Idempotent on state by the engine's own law: later burns re-seed, the fired flags silence the duplicates — the first knock says the line, the first burst ends the machine's decade. The creep_halted birth flag (entities.json) pins the halt: the shock never SPREADS seam-to-seam on its own (the spread chance 0 is the declared belt, the halted pass the braces — the pass dies at its first tick with zero rolls: the debt's every step is deterministic, no new stream family anywhere in the chain). NO alarm (the scream's human cost rides the on_action dread reply, one reply mechanism, not two)."
+    },
+    "notes": "the generic transition engine, pressure-armed: one layer, zero engine edits (D-057's law held — the second committed layer after the tavern's fire, the vocabulary entirely this pack's own)."
+  },
+  "weather": {
+    "event_type": "weather_turns",
+    "initial": "grey_mild",
+    "states": {
+      "grey_mild": {
+        "weights": {
+          "grey_mild": 5,
+          "hard_frost": 3
+        }
+      },
+      "hard_frost": {
+        "weights": {
+          "grey_mild": 2,
+          "hard_frost": 4,
+          "deep_freeze": 1
+        }
+      },
+      "deep_freeze": {
+        "weights": {
+          "grey_mild": 1,
+          "hard_frost": 3,
+          "deep_freeze": 4
+        }
+      }
+    },
+    "notes": "the ambient family, pressure-skinned: THE COLD is this city's weather — a three-state chain (grey mild / hard frost / deep freeze), sticky and winter-biased (the deep states hold; the sky MAY relent — the weather regresses, the DEBT never does: the two families' split is the displacement's own). Rolls on the family's own isolated stream (weather:chain, the seventh member) at the macro year's crossings — beyond the day-scale horizon, zero corpus price. NO erosion rules: the closure law's targets are transition follow-up flags, and the debt's flags are NEVER-regress by this pack's own law — the only committed pack whose weather carries no erosion (the honest shape: the cold collects here, it does not wash anything away). The ambient law held: the sky is context, never the antagonist — the triangle is."
+  },
+  "director": {
+    "stagnation": {
+      "entropy_floor": 5,
+      "per_npc_cooldown_beats": 2
+    },
+    "notes": "the minimal armed shape: the stagnation floor stands (the loop's policy reads it unconditionally — the engine's own law), and nothing else is declared — no hooks are seeded anywhere in this slice (no action hooks, no weather hooks, no arcs), so the director holds an empty buffer by construction and releases nothing: the world's pressure is the triangle's own, never the planner's (D-005's causality-not-pacing law, held by emptiness). A future slice arms the murmur family (the cold's quiet channel) when the corpus price is paid."
+  },
+  "echo": {
+    "scale": [0, 100],
+    "fidelity_weight": {"exact": 100, "partial": 50, "vague": 25},
+    "tokens": {
+      "the_machine_screamed": {
+        "fades_ticks": 1440,
+        "axes": {"dread": 30}
+      },
+      "knocking_in_the_walls": {
+        "fades_ticks": 1440,
+        "axes": {"dread": 60}
+      }
+    },
+    "notes": "the machine's echo (the pressure pack's first echo arming beyond the tavern family): the two tokens the walls carried — the scream heard at the firehole and the knocking heard through every shared wall — leave DREAD in whoever holds the record, fading over a day (the renewal law: hearing it again re-sums, the residue never stored — a read model over the knowledge the world already minted). THE KEEPER'S GATE (the grim guard's jittery-watcher precedent, made the 20-year objective's writer): the tally keeper's ration urgency reads the echo's dread axis — the knocking's raw residue is 60, a vague through-the-walls hearing carries a quarter of it (15 at birth, 10 until half a day past the knock), and the gate's bar is 10: any beat within 720 ticks of a knock releases the ledger. The scream's token (exact at the firehole, 30) is the stokers' own residue — the burner hears his own burn."
+  },
+  "on_action": {
+    "seam_shocked": [
+      {
+        "scope": "witnesses",
+        "event": "dread_rises",
+        "state": {
+          "prop": "status.dread",
+          "add": 5
+        },
+        "notes": "the scream's human cost (the displacement's MORAL HALF, diegetic consequence rendering): everyone who heard the machine scream grows quieter — the machine people most of all (the home law selects; the burner hears his own burn, the cost lands on him too). No gate: the dread home IS the selector (the rooms' people carry the axis as the machine's far fear, the stokers as the near one)."
+      }
+    ],
+    "pipes_knock": [
+      {
+        "scope": "witnesses",
+        "event": "dread_rises",
+        "state": {
+          "prop": "status.dread",
+          "add": 10
+        },
+        "notes": "the early symptom's reply — THE BENCH'S WAKE-UP CALL: the knocking through the shared walls feeds the dread of everyone who heard it, TEN degrees (double the scream's five — the fire's effort frightens, the machine's BONES terrify: the knocking is the debt's own voice). The +10 is the decay-surviving margin by design: the dread settles a degree a beat, so one knock holds the keepers past their trigger for five beats — long enough for the ratio to read the world's reply and the bench to convene; the keeper's echo gate (the residue) releases the ration on the same knock. The antagonist pair's other half answering the circle's burn through the world's own arithmetic."
+      }
+    ],
+    "debt_collects": [
+      {
+        "scope": "witnesses",
+        "event": "the_cold_collects",
+        "state": {
+          "prop": "status.cold",
+          "add": 10
+        },
+        "notes": "the collection's reply — THE SPIRAL'S CLOSE: the burst kills the grid, and everyone who heard it through the walls grows colder by ten (the chronic axis: this cold does not decay; only a fed fire's warmth reply sheds it, two degrees at a time — five feeds to pay one burst back, and the seams do not un-shock). The feedback loop the emergent tragedy rides: burst → cold → the circle's ratio climbs → the burns → the knocking → the bench's dread → the rationed feeds → the coal ledger drains → the burns. Never scripted; always the world's own replies."
+      }
+    ],
+    "account_transferred": [
+      {
+        "scope": "witnesses",
+        "event": "warmth_felt",
+        "state": {
+          "prop": "status.cold",
+          "add": -2
+        },
+        "notes": "the fed fire's reply (the grim buy_round precedent — the warmth is the world's answer to generosity): every coal that lands in the firehole warms the district two degrees for everyone who saw the feed or heard the fire catch (the transfer's own knowledge carries both audiences — the feed action's records). The bench's ration warms the same as the player's cart-load or the tenants' scuttle: the door is one, the reply is one, the roads are many."
+      }
+    ],
+    "notes": "the world's replies (the displacement's moral half, consequence-rendered): the dread family (the scream, the knocking) and the cold family (the warmth a feed buys, the cold a burst collects). One hop each, no knowledge of their own — the cascade terminates by construction; the tale lines render the replies (the importance listing), the meters never do (the thermometer minus: no reply ever moves a GAUGE, and no reply ever renders AS one)."
+  },
+  "factions": {
+    "entries": [
+      {
+        "group": "grp_stokers",
+        "axis": "cold",
+        "trigger_value": 30,
+        "threshold": 50,
+        "max_per_beat": 40,
+        "intent": {
+          "kind": "stoke_hard",
+          "target": "loc_boilerhouse"
+        },
+        "requires": [
+          {"noun": "target", "test": "spot_available", "layer": "thermal_shock"}
+        ],
+        "notes": "THE FIRE ARM (the antagonist pair's first half — minimum immediate cold): when the circle's own shivering crosses the bar they run the machine hard, actor = the group through the front door (D-112's one id). The spot_available gate is the honest end: when every seam is shocked the goal stays silent — a dead machine is not stoked again. The cold seed puts the ratio past the bar at open (the T1 opens mid-crisis): p 40 at a fully shivering circle, the desperate lever hot."
+      },
+      {
+        "group": "grp_regulators",
+        "axis": "dread",
+        "trigger_value": 30,
+        "threshold": 50,
+        "max_per_beat": 30,
+        "intent": {
+          "kind": "convene_the_bench",
+          "target": "loc_registry"
+        },
+        "requires": [],
+        "notes": "THE LEDGER ARM (the antagonist pair's second half — minimum 20-year systemic damage): when both keepers' dread crosses the bar (the knocking's reply is the writer; the seeds sit quiet under it) the bench CONVENES — the public order (the province's bare-beat precedent: the ratio crossing the bar IS the convening, the attribution row the witness). The mechanical arm rides the tally keeper's urgency (the echo-gated ration — his own entry below): the order and the release are two surfaces of one objective, the world's replies feeding both."
+      },
+      {
+        "group": "grp_tenants",
+        "axis": "cold",
+        "trigger_value": 35,
+        "threshold": 34,
+        "max_per_beat": 25,
+        "intent": {
+          "kind": "plead_for_coal",
+          "target": "loc_ashtread"
+        },
+        "requires": [],
+        "notes": "THE ROOMS' ARM (the pair's frame made a body — the heat itself): when the tenements' shivering crosses a third of the watch, the watch PLEADS — the public voice at the firehole door (the bare-beat precedent again). The mechanical arm rides the widow's urgency (the scuttle's feed — her own entry below): the plea and the feed are two surfaces of one cold."
+      }
+    ],
+    "notes": "depth-6's second committed arming (the province triangle the first) and the objective-function pair's first: THREE goals over ONE system (the boiler house's stocks), each a dependency → threshold → action → downstream consequence over live member axes — the circle reads COLD and burns the machine's bones (the MECHANICAL goal: the group ignites through the front door); the bench reads DREAD and convenes (the public order — the province's bare-beat precedent, the mechanical ration riding the keeper's urgency); the watch reads COLD and pleads (the mechanical feed riding the widow's). The bare-beat/mechanical split is the group-stock finding's honest answer: the entities lint's group vocabulary carries no accounts (the economy and fold modules support them — a recorded lint gap, never patched in a zero-core-change slice), so a group can SPEND nothing — the igniting verb (no stock) is the only mechanical group goal expressible today; the stock-spending arms ride the keepers' own accounts through the same door. Never a scripted thesis: the pair never negotiates in data, the axes are the world's own replies, and the coal is finite."
+  },
+  "urgencies": {
+    "beat_ticks": [360, 720, 1080],
+    "entries": [
+      {
+        "npc": "npc_stoker_01",
+        "probability_per_beat": 15,
+        "intent": {
+          "kind": "look_around"
+        },
+        "requires": [],
+        "flaw": "would burn the machine's own bones to warm a room",
+        "notes": "the elder's seam-watch (AP-8's consuming surface for his spine flaw): the man who would burn the bones is the man who cannot stop checking them — the flaw's own shape, the compulsion the cause carved."
+      },
+      {
+        "npc": "npc_regulator_01",
+        "probability_per_beat": 15,
+        "intent": {
+          "kind": "talk",
+          "target": "npc_regulator_02"
+        },
+        "requires": [
+          {"noun": "target", "test": "same_location", "with": "actor"}
+        ],
+        "flaw": "hears the debt in every knock",
+        "notes": "the chief's counsel with the keeper (AP-8's consuming surface): the man who hears the debt in every knock is the man who keeps the ledger open — the Harrowgate report's living penance, read one column at a time with the only other soul who reads the same book. AP-11's law honored: the circle's watch reads the SEAMS (look_around), the bench's reads the BOOKS (talk) — the two compulsions are different verbs because they are different griefs."
+      },
+      {
+        "npc": "npc_regulator_02",
+        "probability_per_beat": 30,
+        "intent": {
+          "kind": "ration_the_coal",
+          "target": "loc_boilerhouse"
+        },
+        "requires": [
+          {"noun": "actor", "test": "echo_at_least", "axis": "dread", "value": 10}
+        ],
+        "notes": "THE BENCH'S MECHANICAL ARM (the 20-year objective's hand): the tally keeper releases the measured ration — four coal from the reserve (his own account, the ledger's key), deliberately short of a full feed, because the bench optimizes the decade, not tonight. The gate is the ECHO dread (the grim guard's jittery-watcher precedent): the knocking's residue — what HE heard through the wall — releases the ledger's hold; the world's reply is the objective's writer. The solvency pre-gate is the reserve's own truth: a spent ledger is a silent keeper."
+      },
+      {
+        "npc": "npc_tenant_01",
+        "probability_per_beat": 20,
+        "intent": {
+          "kind": "feed_the_fire",
+          "target": "loc_boilerhouse"
+        },
+        "requires": [
+          {"noun": "actor", "test": "account_at_least", "kind": "coal", "value": 5}
+        ],
+        "notes": "THE WATCH'S MECHANICAL ARM (the heat-itself objective's hand): the widow carries the scuttle down to the machine's hatch — the same feed_the_fire verb the player's cart rides (one door, many roads). The solvency gate is the hoard's own truth: the scuttle holds one feed."
+      },
+      {
+        "npc": "npc_tenant_01",
+        "probability_per_beat": 20,
+        "intent": {
+          "kind": "talk",
+          "target": "npc_tenant_02"
+        },
+        "requires": [
+          {"noun": "target", "test": "same_location", "with": "actor"}
+        ],
+        "notes": "the widow's stairwell parliament (the third floor's memory): the block's oral history rides her rounds — the telling pair carries what the walls heard down the stairs (the knowledge system's pressure surface, the rumor axis the displacement's witness stand)."
+      }
+    ],
+    "notes": "P2b's small formula, pressure-tuned: five individual drives beside the triangle's group goals — the two flaw-consumed watches (the leaders' compulsions, the spines' AP-8 surface), the bench's mechanical arm (the echo-gated ration — the knocking's residue releasing the ledger), the watch's mechanical arm (the widow's scuttle), and the district's memory (the telling pair). The player is exempt (the walkthrough's own actor)."
+  },
+  "brief": {
+    "total_hard": 800,
+    "blocks": {
+      "directives": {"soft": 60, "hard": 80},
+      "scene_delta": {"soft": 150, "hard": 200},
+      "scene_texture": {"soft": 100, "hard": 140},
+      "present_entities": {"soft": 90, "hard": 120},
+      "recalled_facts": {"soft": 180, "hard": 240},
+      "scheduled_lore": {"soft": 90, "hard": 120},
+      "voice_exemplars": {"soft": 90, "hard": 120},
+      "active_options": {"soft": 90, "hard": 120}
+    },
+    "recalled_facts": {
+      "max_items": 12,
+      "recency_weight": 1.0,
+      "importance_weight": 1.0,
+      "relevance_weight": 1.0
+    },
+    "scene_texture": {
+      "max_items": 8,
+      "tombstone_max_items": 4,
+      "unique_slots": [],
+      "identity_slots": ["speech_pattern", "look", "mannerism"],
+      "per_entity_max_items": 2
+    },
+    "present_entities": {
+      "max_entities": 8,
+      "max_pairs": 6,
+      "scene_line_fields": ["layout", "account.pressure"],
+      "card_markers": [
+        {"prop": "status.cold", "min": 35, "marker": "shivering"},
+        {"prop": "status.dread", "min": 30, "marker": "uneasy"}
+      ],
+      "notes": "THE GAUGE'S ONE RENDERED LINE (the T1's read surface): the scene line's account.pressure field — the boiler house's record declares the birth-bytes anchor (the lint's legality), the renderer's fold-outranks-record law renders the LIVE stock: one legible local meter, integer truth below (REFERENCES §10's DD/FP law, res-1's designed read surface). The scene reads it only standing at the firehole — the meter is LOCAL, the district knows the machine by its symptoms. THE THERMOMETER MINUS, structural: the markers carry cold and dread only — NO debt marker exists anywhere in the pack's read surface; the debt renders as consequences (the knocking, the burst — the tale lines), never as a number."
+    },
+    "directives": [
+      "Narrate only what the brief contains; the log is the canon.",
+      "Facts are immutable; prose is yours.",
+      "Never invent events, names, or outcomes."
+    ],
+    "lore": [
+      {
+        "id": "the_great_freeze",
+        "text": "Ashtread is a cold-city: the grid holds back a winter that has not broken in living memory, and the machine at the firehole is the only wall between the tenements and it.",
+        "from_beat": 0,
+        "to_beat": 6
+      },
+      {
+        "id": "the_registry_law",
+        "text": "The registry's law is older than the bench: every seam shocked is a name entered, and a name entered is a debt the machine will one day collect.",
+        "from_beat": 1,
+        "to_beat": 8
+      },
+      {
+        "id": "the_harrowgate_report",
+        "text": "They still talk about Harrowgate: a boiler the books said was sound, and two days later a block of rooms with no wall left to hold the heat in.",
+        "from_beat": 2,
+        "to_beat": 9
+      }
+    ],
+    "voice_exemplars": [
+      "The radiators ticked, patient as a debt being counted.",
+      "Frost climbed the stairwell glass the slow way, like it had all winter. It did."
+    ],
+    "notes": "BRIEF_SPEC §6's standing shape, pressure-filled: the lore carries the displacement's three truths (the unbroken winter, the registry's law, Harrowgate — the chief regulator's cause told as the district's own memory); the voice is the cold city's patient accounting. The options block stays armed-empty (no director options in this slice)."
+  }
+}

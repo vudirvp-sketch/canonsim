@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "pack": "pressure_pack",
+    "version": "0.1",
+    "notes": "pack-4's chronicle templates (the T1 slice's tale lines). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test (T7) runs on exactly this output. The displacement's rendering law: the LEVERS and their world-replies render as the tale's medium lines (the burn, the shock, the knocking, the collection, the warmth, the dread, the cold a burst collects); THE DEBT ITSELF never renders as a number — no template ever speaks a seam count (the thermometer minus, consequence-rendered). Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists are alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a line (tune-1's split: the rule owns the signal/noise boundary)."
+  },
+  "tale_gate": {
+    "min_importance": "medium"
+  },
+  "day_header": "— Day #day#, #phase.capitalize# —",
+  "scene_card": "{location_name}: {present_names}",
+  "fallback": "(t {t}) {event_type}: {actor} → {target}",
+  "symbols": {
+    "cold_sign": [
+      "Frost climbs the stairwell glass.",
+      "The radiators tick, patient as a counted debt."
+    ],
+    "fire_sign": [
+      "The fire at the firehole breathes steady.",
+      "Coal settles in the grate with a soft knock."
+    ]
+  },
+  "events": {
+    "look_around": "{actor} takes in {location}.",
+    "move": "{actor} heads to {target_location}.",
+    "talk": "{actor} talks with {target}.",
+    "talk_rebuffed": "{target} gives {actor} the cold shoulder.",
+    "wait": "{actor} waits.",
+    "intent_rejected": "{actor} tries to {action_label} — impossible here.",
+    "account_sourced": "{actor} comes by {amount} {kind}.",
+    "account_transferred": "{actor} feeds {amount} {kind} to the fire.",
+    "account_consumed": "{amount} {kind} leaves {actor} for good.",
+    "boiler_run_hard": "{actor} runs the machine hard — the iron past the red line.",
+    "seam_shocked": "A seam lets go at {location}: the machine takes the shock.",
+    "pipes_knock": "The pipes begin to knock at {location} — the walls carry it.",
+    "debt_collects": "The debt collects: a seam bursts at {location}, and the heat dies with it.",
+    "dread_rises": "The dread rises through the walls of {location}.",
+    "warmth_felt": "Warmth spreads from the firehole through {location}.",
+    "the_cold_collects": "The cold collects at {location}.",
+    "the_bench_convenes": "The bench convenes behind the registry door — the machine's books opened again.",
+    "the_watch_pleads": "The tenants' watch stands at the firehole door: the rooms are cold, and they say so.",
+    "suspicion_changed": "{actor} grows warier of {target}.",
+    "arrest_attempt": "{actor} moves to arrest {target}.",
+    "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
+    "year_turns": "The year turns to {year}.",
+    "weather_turns": "The weather turns: {weather}.",
+    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}"
+  }
+}

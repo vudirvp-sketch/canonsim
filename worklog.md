@@ -13,6 +13,47 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-149 · 2026-09-20 · pressure1 — the owner's «продолжай работу
+с места где прервался» resumption call over the interrupted pack-4
+session (the T1 slice: one district, one boiler, one gauge, three
+factions, one Cooling-Debt chain — the displacement law as pure
+pack data, ZERO CORE CHANGE held exactly; the fifth committed pack,
+the first authored non-scaffold one)
+- verified BEFORE working (1826+1 green, ruff clean, Python
+  3.12.14, HEAD a5a3012 — the BASE_COMMIT captured before any
+  change, the law held through the channel interruption); the T1
+  built over the landed primitives: the gauge = res-1's account +
+  the scene line's live anchor field, the closed cycle = the two
+  macro flows (the FOLDED net — the co-due same-account desync
+  DISCOVERED by the crafted twin, recorded in the economy notes),
+  the debt = the thermal_shock layer (the seams' never-regress
+  fold, the knocking +600 / the collection +4320, the halted spread
+  pass with zero rolls), the triangle = depth-6 (the stokers'
+  MECHANICAL group burn, the bench's convening + the keeper's
+  ECHO-gated ration, the watch's plea + the widow's scuttle), the
+  moral half = the chronic axes + the world's replies (the
+  thermometer minus structural); the spiral closes emergent on the
+  golden run (burst → cold → plea → the widow's feed → the warmth)
+- the findings recorded, never patched in-core (the zero-core
+  law): the group-stock lint gap (the entities vocabulary vs the
+  economy/fold modules — the reserves ride the keepers' own
+  accounts), the co-due same-account flow limit (the snapshot
+  from_ — the per-flow re-draft a future row), the bare-beat/
+  mechanical split for stock-spending group goals
+- docs: TASKS the iter-149 section + the pack-4 row flip, DECISIONS
+  D-182, STATUS re-pin (iter-147's name evicted per the
+  two-record convention) + the Next step (engine-1 +
+  presentation-1 the recommended head; the post-T1 residues named),
+  AGENT_NAVIGATION §1 (the fifth pack), this entry (iter-139
+  evicted, verified in this edit); 1842+1 green, ruff clean after
+  (+16 = 16 pressure tests; the economy unarmed law's
+  second-consumer amendment)
+- Caps: STATUS 619 / TASKS 2314 / DECISIONS 96 lines (61 rows —
+  over the 30 cap on the §6.1 substance precedent, the standing
+  post-ladder record) / worklog 10 entries (iter-139 evicted here,
+  verified in this edit) — the over-cap files ride the documented
+  §6.1 substance precedent
+
 iter-148 · 2026-09-19 · grim1 — the owner's «продолжай работы по
 планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick from the plan's own recorded recommendation
@@ -380,41 +421,3 @@ transplantation posture)
   post-ladder record) / phases 3944 / worklog 10 entries
   (iter-130 evicted here, verified in this edit) — the over-cap
   files ride the documented §6.1 substance precedent
-
-iter-139 · 2026-09-19 · world-2 L2 (the verdict) — the
-owner's convening call «я решил что следует world 2 закончить,
-вердикты вынести» (the session's second half, after intake-26's
-adoption pass; doc-only, zero code, zero corpus price)
-- the two-level gate's level-2 question ANSWERED: the honest scope
-  DELIVERED at the measured band — the anti-collection half
-  MEASURED (one ordinary verb → three systems → irreversible,
-  divergent, route-stable state: the A/C/D/H ledger), the
-  anti-reskin half MEASURED (L1's 14m24s reskin day vs the
-  weeks-authored province: the spine + the vertex + the year-run
-  almanac), the depth's DISTRIBUTION the recorded residue (B/F/G
-  partial — the concentration at the triangle's vertex, the
-  option surface 1-of-6, the 48 turns the one found-and-named
-  counterexample); the verdict's law: the gate asks the honest
-  scope, never uniform distribution — deferring until B/F/G close
-  would be the completeness-smuggling the audit refused (no open
-  row a verdict input)
-- the residue's routing: the future depth consumers the
-  content-side rows (F4's promotion events — pack-1/pack-4; the
-  cadences' decision half a BUILD question) — world-2 never
-  reopens for slices; the two-level gate COMPLETE (L1 PASS
-  iter-116 D-151; L2 DELIVERED iter-139 D-172); KI#86 deleted
-  per AGENTS §5 (closed iter-136, past the window)
-- docs: DECISIONS D-172, TASKS the world-2 row done (the wave
-  plan + iter-109's answers compressed to their pointers — the
-  detail in the iter sections + phases.md §6 + the D-rows) + the
-  iter-139 section, phases.md §6 the verdict block, STATUS re-pin
-  (iter-137's record evicted per the two-record convention) + the
-  Next step, this entry (iter-129 evicted, verified in this
-  edit); 1754+1 green, ruff clean after; doc-only, the corpora
-  byte-untouched
-- Caps: STATUS 606 / TASKS 1733 / DECISIONS 85 lines (51 rows —
-  over the 30 cap on the §6.1 substance precedent until the next
-  gate collapse) / phases 3786 / worklog 10 entries (iter-129
-  evicted here, verified in this edit) — the over-cap files ride
-  the documented §6.1 substance precedent
-

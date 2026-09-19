@@ -1,0 +1,19 @@
+{
+  "name": "pressure_smoke",
+  "seed": 42,
+  "pack": "pressure_pack@0.1",
+  "steps": [
+    {"intent": "move", "target": "loc_boilerhouse"},
+    {"intent": "look_around"},
+    {"intent": "stoke_hard", "target": "loc_boilerhouse"},
+    {"intent": "move", "target": "loc_coalyard"},
+    {"intent": "haul_coal", "target": "loc_coalyard"},
+    {"intent": "feed_the_fire", "target": "loc_boilerhouse"},
+    {"intent": "move", "target": "loc_boilerhouse"},
+    {"intent": "stoke_hard", "target": "loc_boilerhouse"},
+    {"intent": "move", "target": "loc_ashtread"},
+    {"intent": "wait", "ticks": 700},
+    {"intent": "wait", "ticks": 3800},
+    {"intent": "look_around"}
+  ]
+}

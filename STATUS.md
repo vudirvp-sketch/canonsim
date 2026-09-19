@@ -1,99 +1,89 @@
-Iteration: iter-148 (`iter-148-grim1` — the grim tavern pack;
-the owner's «продолжай работы по планам, решай сам что сейчас
-логичнее начать/открыть и прочее» delegation call — the pick NOT
-invented: the plan's own recorded recommendation taken, pack-1 the
-pack consumers' readiness head after since-1's consumption): THE
-FOURTH PACK LANDED — `content/grim_pack/` (the dark line as PURE
-PACK DATA on the tavern loop, the scaffold's copy deepened; the
-engine diff is the LINT ONLY — core/pack.py +5 the orchestrator
-call, admission.py +92 the new lint, everything else pack data +
-tests): the relation axes attraction/intimacy/loyalty (the FLAT
-toward-the-player form, the suspicion precedent's v0.1 mode) + the
-status axes shame/anger (decay 5/10, both feeding the social
-skill's status modifiers — the grim feedback loop); the
-FLIRT→PROPOSITION LADDER — the contested delivery (the room's
-heard record), the UNCONTESTED ask whose ANSWER is the world's own
-on_action reaction gated on her attraction home (at_least 60 →
-consent_given + intimacy +20 — the CANONICAL consented fact;
-at_most 59 → consent_refused + anger +10 — CONSENT IS NEVER A
-ROLL); THE CONSENT SPLIT (D-175 (5)) made structural — the
-canonical half IS the event (proposition_coerced/consent_given/
-consent_refused), the belief half the crafted record
-(believes_coerced, the D-008 pattern), and the NEW CROSS-BLOCK
-LINT (`_fact_belief_split`: the event-type vocabulary ∩ the
-knowledge-token vocabulary — the literals + the templated fills
-expanded over the entity ids — = ∅; one token never means
-fact+belief+rumor at once; rumor IS a transferred belief, no third
-set); THE COERCED BRANCH: proposition_coerce over the coerce
-resolver (the pack's ONE spend door — the generic coerce dropped:
-the single-spend_event law's consequence), the balance trust −25/
-fear +25 from neutral (D-030's break-fast); THE HINGE:
-read_ticket — the maid's pawn ticket (her secret made physical,
-steal_target-flagged, carried) whose literal token
-scraps_pawned_by_maid mints the reader's leverage (the
-templated-token ineligibility law honored): the player's DARK
-CHOICE — court her, corner her, or abstain; THE CONSEQUENCES: the
-jealousy both gated arms (the barkeep's bond-gated +10, the
-drunk's desire-gated +15 — the gates read each candidate's OWN
-pair home), the stain (the ask's public cost on HER reputation,
-either answer), the shame settling, the deferred hooks
-(affair_brewing the anger-weight-modified escalation;
-regret_smoldering the reckoning); the drunk's urgency re-pointed
-at the pc (the purse-leverage path — the world corners the player
-back); RES-1's FIRST CONSUMER ARMING (the coin accounts pc 6 +
-the till 30, buy_round the account transfer through the canon door
-+ the solvency gate's soft arm, the two macro flows beyond every
-day-scale corpus horizon, the identity price formula armed +
-measured); SINCE-1's FIRST ARMING (the since_lines vocabulary:
-shame/anger/intimacy + the position + heard families; the dark
-card markers ashamed/furious/smitten/tender); the spines on the
-two flaw-driven drives (both consumed by their urgency flaw keys,
-AP-8; the maid's honestly absent — no consuming surface, a GHOST
-anchor refused). THE EVIDENCE (§9's claim packet, the driver
-outside the repo per Rule 9): L1 UNIVERSALITY CONFIRMED (the
-engine diff is the lint only); L2 the smoke corpus
-(grim_smoke.json seed 42, the golden grim_smoke_seed42.jsonl,
-fingerprint 8) tells the full dark arc in 26 events — 17
-dark-line: the flirts 45→55, the round +3, the ask at 58 (TWO
-POINTS SHORT) refused + the stain 45→40, the ticket read, the
-leverage mint, the coerced fact (trust 25 / fear 75 from neutral)
-+ the belief record + the shame 10→20; the one-knob arm pinned as
-a re-runnable test (attraction 70 twin → consent_given; the
-committed 45 → refused — the answer follows the seed); L3 the
-coin oracle exact (6−2 / 30+2), the same-seed twin
-byte-identical, the no-leverage door answers precondition/
-actor.leverage_over; falsifiers NOT tripped — CONFIRMED at the
-measured band. Honest residues: no in-loop price consumer (the
-amounts declared, a price-fed door a future row) · the
-drunk-line aftermath hook's static target_npc · the maid's
-out-of-active-zone decay (the LOD law — the since test crafted
-per the fold's contract) · loyalty a read-side surface with no
-writer yet ·
+Iteration: iter-149 (`iter-149-pressure1` — the pressure-city
+pack; the owner's «продолжай работу с места где прервался»
+resumption call over the interrupted pack-4 session — the pick the
+plan's own recorded recommendation, pack-4 the readiness head after
+pack-1's consumption): THE FIFTH PACK LANDED —
+`content/pressure_pack/` (the displacement law as PURE PACK DATA,
+ZERO CORE CHANGE — the row's own law held exactly: no engine file
+touched; the pack + the tests + the doc sync only): the T1 SLICE —
+one district (the Ashtread tenements), one boiler (the firehole
+machine), one gauge (the boiler house's pressure account — res-1's
+one-meter read surface: the scene line's anchor field renders the
+LIVE stock, integer truth below, one rendered line above), three
+factions (the objective-function triangle), one Cooling-Debt chain
+(the thermal_shock layer). THE THREE HALVES: the SPATIAL — res-1's
+SECOND CONSUMER ARMING (the coal/pressure accounts on the boiler
+house, the player's cart, the keeper's reserve 24, the widow's
+scuttle 6; the two macro flows — the fire eats 3 coal, the gauge
+holds its NET +1 (the folded cycle: gross climb 6 less the grid's
+draw 5); the REAL-direction price formula base 30 / per_unit −1,
+grim's identity read superseded); the TEMPORAL — the SEAMS (each
+hard burn shocks the FIRST WHOLE seam in pack order: deterministic,
+draw-free, irreversible; nothing in the pack ever writes a seam
+back — the never-regress law by construction), the KNOCKING +600
+and the COLLECTION +4320 (the seeded follow-ups, idempotent on the
+fired flags — the erosion shape over its own origin family, the
+fire follow-ups); the MORAL — the thermometer minus held STRUCTURAL
+(no meter, marker, or scene field renders the debt anywhere; both
+pressure axes CHRONIC auto_decay 0 — the felt costs are folds over
+the world's replies: the scream +5 dread / the knock +10 / the
+warmth −2 a feed / the burst's cold +10, never clock-shed). THE
+TRIANGLE: the stokers (cold → the group's own stoke_hard — the
+MECHANICAL group goal through the one-id door, the seams saturating
+and the goal going silent on the spent machine); the bench (dread →
+the convening bare-beat + the KEEPER's echo-gated ration — the
+reserve on his npc account, the grim guard's jittery-watcher
+precedent); the watch (cold → the plea + the widow's scuttle feed —
+the same verb the player's cart rides); the antagonist pair
+diverging over ONE system, the SPIRAL closing emergent on the
+golden run (burst → the district's cold +10 → the plea → the
+widow's feed → the warmth). THE FINDINGS (the mapping's own test
+doing its job — recorded, never patched in a zero-core slice): the
+entities lint's GROUP vocabulary carries no `accounts` (the
+economy/fold modules support group stocks — the reserves ride the
+keepers' own npc accounts); CO-DUE same-account flows desync at the
+commit gate (flow_drafts builds every draft against the crossing's
+single snapshot — the grim arming never exercised the shape; the
+cycle folded to the net, the per-flow re-draft a future row); a
+group can SPEND nothing through the door (the actor-keyed verbs —
+the ignite is the only stockless mechanical group goal, the
+stock-spending arms ride the keepers' urgencies). THE EVIDENCE
+(TEST_PLAN §9's claim packet): the golden corpus (pressure_smoke,
+seed 42 — 29 events, fingerprint 15: burn → seam → haul → the chute
+feed + the warmth → the second burn → the knocking → the collection
+→ the cold → the plea → the widow's feed), the crafted twins (the
+short-cadence flows' arithmetic exact; the stokers' group burn
+saturating all three seams by the faction's own hand; the bench's
+convening + the ration on the knock, seed 43; the deadband quiet),
+the T1 universality (the same-seed twin byte-identical, the golden
+fixture pinned, a different seed diverges). Falsifiers NOT tripped
+— CONFIRMED at the measured band. Honest residues: the mapping's
+post-T1 rows (the legal exclusion D-134, the cultures name-1, the
+road traffic depth-7, the lore hooks D-140 — future slices) · the
+folded cycle's third flow (the engine's per-flow re-draft) · the
+group-stock lint gap.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
-1826 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 156ec8f — 1811 passed +
-1 skipped — and re-verified after; the +15 = 14 in
-tests/test_grim_pack.py + 1 stoplist self-check; the economy
-unarmed law amended to its first-consumer form) ·
-Date: 2026-09-19 ·
-Scope: `content/grim_pack/` (new, 4 files), `core/packlint/admission.py`
-(+92 the split lint), `core/pack.py` (+5 the orchestrator call),
-`tests/test_grim_pack.py` (new, +14), `tests/playscripts/grim_smoke.json`
-(new), `tests/fixtures/grim_smoke_seed42.jsonl` (new),
-`tests/test_inv3_stoplist.py` (GRIM_STOPLIST + the self-check),
-`tests/test_packci.py` (the four-pack loop), `tests/test_economy.py`
-(the unarmed law's first-consumer amendment), `docs/PACK_SPEC.md`
-(§5 the split's lint row), `docs/TASKS.md` (the iter-148 section +
-the pack-1 flip), `docs/DECISIONS.md` (D-181),
-`docs/AGENT_NAVIGATION.md` (§1: the fourth pack + the fixture +
-the playscript), `STATUS.md` (this re-pin + the Next step),
-`worklog.md` (this entry; iter-138 evicted per the cap) — 15 files:
-the semantic core is 7 (the pack's 4 + the lint + the tests + the
-fixture), the rest test/doc sync; the soft limit's own clause
+1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at BASE_COMMIT a5a3012 — 1826 passed +
+1 skipped — and re-verified after; the +16 = 16 in
+tests/test_pressure_pack.py; the economy unarmed law amended to its
+second-consumer form) ·
+Date: 2026-09-20 ·
+Scope: `content/pressure_pack/` (new, 4 files),
+`tests/test_pressure_pack.py` (new, +16),
+`tests/playscripts/pressure_smoke.json` (new),
+`tests/fixtures/pressure_smoke_seed42.jsonl` (new),
+`tests/test_economy.py` (the unarmed law's second-consumer
+amendment), `docs/TASKS.md` (the iter-149 section + the pack-4
+flip), `docs/DECISIONS.md` (D-182), `docs/AGENT_NAVIGATION.md` (§1:
+the fifth pack + the fixture + the playscript), `STATUS.md` (this
+re-pin + the Next step), `worklog.md` (this entry; iter-139 evicted
+per the cap) — 10 files: the semantic core is 5 (the pack's 4 +
+the test file), the rest test/doc sync; the soft limit's own clause
 noted (a pack IS its four files). The prior iteration's record:
-iter-147 (since1). The detail lives in TASKS + worklog + git.
+iter-148 (pack1). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -568,46 +558,51 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-148 DONE: the pack-1 grim tavern pack LANDED (the dark line
-as pure pack data on the fourth committed pack — the axes, the
-ladder with the world's reply, the consent split + its new
-fact/belief lint, the pawn-ticket hinge, the consequences, res-1's
-and since-1's first consumer armings; the §9 claim packet CONFIRMED
-at the measured band; D-181).
-iter-147: since-1; iter-146: res-1; iter-145: roads-1; iter-144:
-the three contract writes; iter-143: ci-1 (verified LIVE green on
-main at 156ec8f — the iter-143 arm's own check; the
-branch-protection recipe stays the owner's settings step).**
+**iter-149 DONE: the pack-4 pressure-city pack LANDED — the T1
+slice (one district, one boiler, one gauge, three factions, one
+Cooling-Debt chain) as pure pack data, ZERO CORE CHANGE (the
+displacement law's three halves — the closed cycle's flows, the
+seams' never-regress chain, the thermometer minus held structural;
+the objective-function triangle with the stokers' mechanical group
+burn and the spiral closing emergent on the golden run; the §9
+claim packet CONFIRMED at the measured band; D-182).
+iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-145:
+roads-1; iter-143: ci-1 (verified LIVE green on main at 156ec8f —
+the iter-143 arm's own check; the branch-protection recipe stays
+the owner's settings step).**
 
 1. **The owner-gated backlog (the standing rows — the ORDER owner
    decides, TASKS owns composition, never order; each build row's
    verification plan rides TEST_PLAN §9's claim packet):** with
-   ci-1/roads-1/res-1/since-1/pack-1 consumed, the session's
+   ci-1/roads-1/res-1/since-1/pack-1/pack-4 consumed, the session's
    RECOMMENDED next call (intake-29's readiness order, never the
-   pick) is `pack-4` (the pressure-city pack — the displacement
-   law over the landed primitives; the natural mode G consumer:
-   the roads-1 adjacent_locations registry threading + the
-   worldbuilder-side authoring answer ride it; res-1's gauge
-   surface + the factions/cultures armings its mapping's own
-   test), then `engine-1` (+ `presentation-1`) last. The remaining
-   standing rows unchanged: `parse-2`, `tune-3`, `st-2`, `scav-1`,
-   `qa-1` mypy, `bg-6` (the SoW audit, D-055 deferral), `pack-3`,
-   `companion-1`, `mech-2` (rides the next mechanics.py touch —
-   now also carrying intake-21's single-event postmortem form +
-   intake-22's viz-export form), `st-4` (rides presentation-1 at
-   its write time, D-148) and `st-5` (the first real consumer
-   decides). The consult material for the engine-1/
-   presentation-1 spec writes: the intake-22 modularity card, the
-   intake-23 world-structure card, and the intake-21 observability
-   card; for the SoW promise debates the intake-27 sacrifice
-   protocol (D-173) and the intake-28 combination fence (D-174).
-   The research posture (intake-29's admission rule, D-175): a new
-   external intake convenes only with a named open build
-   row/standing debate it feeds + a potential falsifier stated up
-   front — new knowledge now comes from building and measuring.
-   pack-1's own honest residues (the future riders' material): no
-   in-loop price consumer; the drunk-line aftermath hook's static
-   target_npc; loyalty a read-side surface with no writer.
+   pick) is `engine-1` (+ `presentation-1` its natural pair — the
+   SoW horizon's own head: the mediator specs are written, the
+   consult material named (the intake-22 modularity card, the
+   intake-23 world-structure card, the intake-21 observability
+   card), the LLM boundary lifts only on this call, INV-4/D-055).
+   The remaining standing rows unchanged: `parse-2`, `tune-3`,
+   `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the SoW audit, D-055
+   deferral), `pack-3`, `companion-1`, `mech-2` (rides the next
+   mechanics.py touch — now also carrying intake-21's single-event
+   postmortem form + intake-22's viz-export form), `st-4` (rides
+   presentation-1 at its write time, D-148) and `st-5` (the first
+   real consumer decides). For the SoW promise debates the intake-27
+   sacrifice protocol (D-173) and the intake-28 combination fence
+   (D-174). The research posture (intake-29's admission rule,
+   D-175): a new external intake convenes only with a named open
+   build row/standing debate it feeds + a potential falsifier
+   stated up front — new knowledge now comes from building and
+   measuring. pack-4's own honest residues (the future riders'
+   material — the mapping's post-T1 rows): the legal exclusion
+   (D-134's state/flag + knowledge-record family), the cultures
+   (name-1 profiles + prohibition sets), the road traffic (depth-7
+   condensation), the lore hooks (D-140's templates + cause_hook);
+   the ENGINE findings the future rows' material: the group-stock
+   lint gap (the entities vocabulary vs the economy/fold modules),
+   the co-due same-account flow limit (the snapshot from_ — the
+   per-flow re-draft), both recorded in the pack's own notes +
+   D-182.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
@@ -618,7 +613,6 @@ branch-protection recipe stays the owner's settings step).**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (pack-4 now that pack-1 is
-   consumed) or a fresh call (this round's delegation — «продолжай
-   работы по планам, решай сам» — consumed by the pack-1 build,
-   D-181).
+   recommended remainder of the sequence (engine-1 + presentation-1
+   now that pack-4 is consumed) or a fresh call (the standing
+   delegation consumed by the pack-4 build, D-182).
