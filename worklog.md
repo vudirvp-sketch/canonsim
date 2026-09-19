@@ -13,6 +13,36 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-150 · 2026-09-20 · revalid1 — the owner's two-part session call
+(«лицензирование поменять на AGPLv3» + «аудит всех standing backlog
+rows… и если да => составь план и пересмотри» over the owner-supplied
+prior-agent analysis); doc-only, zero code, zero corpus price
+- verified BEFORE working (1842+1 green, ruff clean, Python 3.12.14,
+  HEAD 5891cfe — the BASE_COMMIT captured before any change); PART 1:
+  LICENSE (the canonical AGPL-3.0 text, the verbatim SPDX copy) + the
+  README License section (TBD → AGPL-3.0-only, D-183; ROADMAP §4's
+  donor stance untouched by design, pyproject untouched); PART 2: all
+  thirteen standing rows revalidated with the four questions (D-184) —
+  pack-3 rewritten (the 2nd-setting blocker dead: phase 6 CLOSED, five
+  packs live), tune-3 re-aimed (engine movement exists, no pack arms
+  it — the HEAD urgency census; a pack-arming choice, consumer-first),
+  st-2/scav-1 sharpened, companion-1/mech-2/st-5/parse-2 synced (the
+  mech-2 riders absorbed INTO the row per D-113 — they had lived in
+  the intake sections + STATUS only), the other five audited-current;
+  the prior-agent verdict set verified: right on pack-3/tune-3,
+  already-law on five, one unnamed gap found (the mech-2 riders)
+- docs: TASKS the iter-150 section (the verdict table) + eight
+  revalidated rows, DECISIONS D-183/D-184, STATUS re-pin (iter-148's
+  name evicted per the two-record convention) + the Next step (the
+  recommendation unchanged: engine-1 + presentation-1),
+  AGENT_NAVIGATION §1 (the LICENSE row), this entry (iter-140 evicted,
+  verified in this edit); 1842+1 green, ruff clean after
+- Caps: STATUS 601 / TASKS 2422 / DECISIONS 97 lines (63 rows — over
+  the 30 cap on the §6.1 substance precedent, the standing
+  post-ladder record) / worklog 10 entries (iter-140 evicted here,
+  verified in this edit) — the over-cap files ride the documented
+  §6.1 substance precedent
+
 iter-149 · 2026-09-20 · pressure1 — the owner's «продолжай работу
 с места где прервался» resumption call over the interrupted pack-4
 session (the T1 slice: one district, one boiler, one gauge, three
@@ -379,45 +409,3 @@ precedent, re-verified at a REAL clone)
   substance precedent, the standing post-ladder record) / phases
   4068 — the over-cap files ride the documented §6.1 substance
   precedent
-
-iter-140 · 2026-09-19 · intake27 — the owner's «проанализируй
-документ и определи что из него можно полезного перенять в проект
-и почему» research call over the uploaded level-design
-consolidation (twelve GDC/Konsoll/LDL talks; doc-only, zero code,
-zero corpus price — the D-155..D-171 intake precedent, the file
-external per the convenience-copy law, the intake-24
-transplantation posture)
-- verified BEFORE working (1754+1 green, ruff clean, Python
-  3.12.14, HEAD 1b7666a); the doctrine PARTIALLY CONFIRMED —
-  overwhelmingly owned as the strongest cross-domain confirmation
-  family since intake-16 (figure–ground = budgets/eviction/
-  pruning/§6.1; vistas = cold tiers + lazy detail; space reuse =
-  fold(log); PCG-is-design ×4 = INV-3/PACK-1/D-082/D-134; Control
-  = L12/LOD-1/INV-3; the lint family = the data-quality law
-  verbatim; Qud = the pass ladder + the chronicle horizon, L7
-  stricter at runtime)
-- the residue: FIVE instruments (the READER LAW — zero read
-  surfaces = functionally dead, name the reader, F4 + the
-  cadences' decision half; the PRICED-OPTION question —
-  differently-priced never labeled, the B row's form, res-1 the
-  dynamic owner; the TOP-LOD READABILITY question — the critical
-  path survives the coarsest blur; the REALIZATION TABLE —
-  why/layer/linked/understood + the removal test, PARKED
-  pack-1/3/4; the SACRIFICE PROTOCOL — promise pair →
-  both-promises test → Barrier/Gate/Carrot/S'more, PARKED the SoW
-  debates) + the PROPOSAL (topology-aware hook distribution over
-  the site graph's degree classes — the cadences' decision half /
-  roads-1 / F4, never law until armed)
-- docs: phases.md §6 the intake-27 block + the consult card's
-  item 10, REFERENCES §10 +9 source rows, DECISIONS D-173 (52
-  rows — over the 30 cap on the §6.1 substance precedent), TASKS
-  the iter-140 section, STATUS re-pin (iter-138 evicted per the
-  two-record convention) + the Next step (the sacrifice protocol
-  joins the consult material), this entry (iter-130 evicted,
-  verified in this edit); 1754+1 green, ruff clean after;
-  doc-only, the corpora byte-untouched
-- Caps: STATUS 626 / TASKS 1785 / DECISIONS 86 lines (52 rows —
-  over the 30 cap on the §6.1 substance precedent, the standing
-  post-ladder record) / phases 3944 / worklog 10 entries
-  (iter-130 evicted here, verified in this edit) — the over-cap
-  files ride the documented §6.1 substance precedent

@@ -1,89 +1,57 @@
-Iteration: iter-149 (`iter-149-pressure1` — the pressure-city
-pack; the owner's «продолжай работу с места где прервался»
-resumption call over the interrupted pack-4 session — the pick the
-plan's own recorded recommendation, pack-4 the readiness head after
-pack-1's consumption): THE FIFTH PACK LANDED —
-`content/pressure_pack/` (the displacement law as PURE PACK DATA,
-ZERO CORE CHANGE — the row's own law held exactly: no engine file
-touched; the pack + the tests + the doc sync only): the T1 SLICE —
-one district (the Ashtread tenements), one boiler (the firehole
-machine), one gauge (the boiler house's pressure account — res-1's
-one-meter read surface: the scene line's anchor field renders the
-LIVE stock, integer truth below, one rendered line above), three
-factions (the objective-function triangle), one Cooling-Debt chain
-(the thermal_shock layer). THE THREE HALVES: the SPATIAL — res-1's
-SECOND CONSUMER ARMING (the coal/pressure accounts on the boiler
-house, the player's cart, the keeper's reserve 24, the widow's
-scuttle 6; the two macro flows — the fire eats 3 coal, the gauge
-holds its NET +1 (the folded cycle: gross climb 6 less the grid's
-draw 5); the REAL-direction price formula base 30 / per_unit −1,
-grim's identity read superseded); the TEMPORAL — the SEAMS (each
-hard burn shocks the FIRST WHOLE seam in pack order: deterministic,
-draw-free, irreversible; nothing in the pack ever writes a seam
-back — the never-regress law by construction), the KNOCKING +600
-and the COLLECTION +4320 (the seeded follow-ups, idempotent on the
-fired flags — the erosion shape over its own origin family, the
-fire follow-ups); the MORAL — the thermometer minus held STRUCTURAL
-(no meter, marker, or scene field renders the debt anywhere; both
-pressure axes CHRONIC auto_decay 0 — the felt costs are folds over
-the world's replies: the scream +5 dread / the knock +10 / the
-warmth −2 a feed / the burst's cold +10, never clock-shed). THE
-TRIANGLE: the stokers (cold → the group's own stoke_hard — the
-MECHANICAL group goal through the one-id door, the seams saturating
-and the goal going silent on the spent machine); the bench (dread →
-the convening bare-beat + the KEEPER's echo-gated ration — the
-reserve on his npc account, the grim guard's jittery-watcher
-precedent); the watch (cold → the plea + the widow's scuttle feed —
-the same verb the player's cart rides); the antagonist pair
-diverging over ONE system, the SPIRAL closing emergent on the
-golden run (burst → the district's cold +10 → the plea → the
-widow's feed → the warmth). THE FINDINGS (the mapping's own test
-doing its job — recorded, never patched in a zero-core slice): the
-entities lint's GROUP vocabulary carries no `accounts` (the
-economy/fold modules support group stocks — the reserves ride the
-keepers' own npc accounts); CO-DUE same-account flows desync at the
-commit gate (flow_drafts builds every draft against the crossing's
-single snapshot — the grim arming never exercised the shape; the
-cycle folded to the net, the per-flow re-draft a future row); a
-group can SPEND nothing through the door (the actor-keyed verbs —
-the ignite is the only stockless mechanical group goal, the
-stock-spending arms ride the keepers' urgencies). THE EVIDENCE
-(TEST_PLAN §9's claim packet): the golden corpus (pressure_smoke,
-seed 42 — 29 events, fingerprint 15: burn → seam → haul → the chute
-feed + the warmth → the second burn → the knocking → the collection
-→ the cold → the plea → the widow's feed), the crafted twins (the
-short-cadence flows' arithmetic exact; the stokers' group burn
-saturating all three seams by the faction's own hand; the bench's
-convening + the ration on the knock, seed 43; the deadband quiet),
-the T1 universality (the same-seed twin byte-identical, the golden
-fixture pinned, a different seed diverges). Falsifiers NOT tripped
-— CONFIRMED at the measured band. Honest residues: the mapping's
-post-T1 rows (the legal exclusion D-134, the cultures name-1, the
-road traffic depth-7, the lore hooks D-140 — future slices) · the
-folded cycle's third flow (the engine's per-flow re-draft) · the
-group-stock lint gap.
+Iteration: iter-150 (`iter-150-revalid1` — the AGPLv3 relicense +
+the standing-backlog revalidation; the owner's two-part session
+call: «я хочу лицензирование поменять на AGPLv3 в реадме укажи и
+файл лицензии составь под репозиторий» + «проведи аудит всех
+standing backlog rows => нужно ли их пересматривать с учетом новой
+документации, принципов и research/intake или нет. и если да =>
+то составь план и пересмотри», the second half over the
+owner-supplied prior-agent backlog analysis — its verdict set
+verified at a real clone before adoption, adopted where true,
+corrected where it restated standing law as new): PART 1 — THE
+RELICENSE (D-183): `LICENSE` at the root (the canonical AGPL-3.0
+text, the verbatim SPDX license-list copy — §0..§17 + the
+how-to-apply notice, no holder line invented into the license
+text) + the README's License section re-pointed (TBD → AGPL-3.0,
+SPDX `AGPL-3.0-only`); the donor stance (ROADMAP §4 / D-015)
+untouched by design — it governs what the repo TAKES, a separate
+question from what it PUBLISHES under; pyproject carries no
+license field before or after (the owner's call if wanted).
+PART 2 — THE REVALIDATION (D-184): all THIRTEEN standing rows
+audited with the four questions (does the problem exist now / is
+there a real consumer / does an existing mechanism already cover
+it / what small probe would decide) — the intake-29 admission rule
+(D-175) turned onto the queue itself; the verdict set (TASKS
+iter-150's table): pack-3 REWRITTEN (the stale 2nd-setting blocker
+dead — phase 6 CLOSED D-151, five packs committed; now one
+candidate for the next authored slot), tune-3 RE-AIMED (the v0.1
+sub-premises half-rotated — engine movement exists since
+st-6a/roads-1 but no committed pack arms an NPC movement source,
+the HEAD urgency census reading no move/travel intent kinds: a
+PACK-ARMING choice now, consumer-first, not an engine gap), st-2 +
+scav-1 SHARPENED (consumer-first / measurement-before-mechanism),
+companion-1 + mech-2 + st-5 + parse-2 SYNCED (the dep ledger —
+tune-3 the one open dep, a following companion its own movement
+consumer; the intake-21/22 riders absorbed into the mech-2 row per
+D-113; res-1's sink shape concrete; the two halves' gates
+explicit), engine-1 + presentation-1 + qa-1 + bg-6 + st-4
+audited-current-unchanged. No rows deleted, none added, no order
+changed (D-113).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT a5a3012 — 1826 passed +
-1 skipped — and re-verified after; the +16 = 16 in
-tests/test_pressure_pack.py; the economy unarmed law amended to its
-second-consumer form) ·
+verified BEFORE working at BASE_COMMIT 5891cfe — identical — and
+re-verified after; doc-only, zero code, zero corpus price) ·
 Date: 2026-09-20 ·
-Scope: `content/pressure_pack/` (new, 4 files),
-`tests/test_pressure_pack.py` (new, +16),
-`tests/playscripts/pressure_smoke.json` (new),
-`tests/fixtures/pressure_smoke_seed42.jsonl` (new),
-`tests/test_economy.py` (the unarmed law's second-consumer
-amendment), `docs/TASKS.md` (the iter-149 section + the pack-4
-flip), `docs/DECISIONS.md` (D-182), `docs/AGENT_NAVIGATION.md` (§1:
-the fifth pack + the fixture + the playscript), `STATUS.md` (this
-re-pin + the Next step), `worklog.md` (this entry; iter-139 evicted
-per the cap) — 10 files: the semantic core is 5 (the pack's 4 +
-the test file), the rest test/doc sync; the soft limit's own clause
-noted (a pack IS its four files). The prior iteration's record:
-iter-148 (pack1). The detail lives in TASKS + worklog + git.
+Scope: `LICENSE` (new), `README.md` (the License section),
+`docs/TASKS.md` (the iter-150 section + eight revalidated rows),
+`docs/DECISIONS.md` (D-183/D-184), `docs/AGENT_NAVIGATION.md` (§1:
+the LICENSE row), `STATUS.md` (this re-pin + the Next step),
+`worklog.md` (this entry; iter-140 evicted per the cap) — 7 files,
+doc-only both halves; the soft limit's own clause noted (the
+license's two files + the revalidation's doc set + the
+every-iteration records). The prior iteration's record: iter-149
+(pack-4). The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -558,16 +526,17 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-149 DONE: the pack-4 pressure-city pack LANDED — the T1
-slice (one district, one boiler, one gauge, three factions, one
-Cooling-Debt chain) as pure pack data, ZERO CORE CHANGE (the
-displacement law's three halves — the closed cycle's flows, the
-seams' never-regress chain, the thermometer minus held structural;
-the objective-function triangle with the stokers' mechanical group
-burn and the spiral closing emergent on the golden run; the §9
-claim packet CONFIRMED at the measured band; D-182).
-iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-145:
-roads-1; iter-143: ci-1 (verified LIVE green on main at 156ec8f —
+**iter-150 DONE: the AGPLv3 relicense (`LICENSE` + the README's
+License section, D-183) + the standing-backlog REVALIDATION (all
+thirteen rows audited against the current architecture — the four
+questions per row, the intake-29 admission rule turned onto the
+queue; the verdict table in TASKS iter-150, D-184: pack-3
+rewritten, tune-3 re-aimed, st-2/scav-1 sharpened,
+companion-1/mech-2/st-5/parse-2 synced,
+engine-1/presentation-1/qa-1/bg-6/st-4 audited-current; no rows
+deleted, none added, no order changed). iter-149: pack-4;
+iter-148: pack-1; iter-147: since-1; iter-146: res-1;
+iter-143: ci-1 (verified LIVE green on main at 156ec8f —
 the iter-143 arm's own check; the branch-protection recipe stays
 the owner's settings step).**
 
@@ -581,28 +550,42 @@ the owner's settings step).**
    consult material named (the intake-22 modularity card, the
    intake-23 world-structure card, the intake-21 observability
    card), the LLM boundary lifts only on this call, INV-4/D-055).
-   The remaining standing rows unchanged: `parse-2`, `tune-3`,
-   `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the SoW audit, D-055
-   deferral), `pack-3`, `companion-1`, `mech-2` (rides the next
-   mechanics.py touch — now also carrying intake-21's single-event
-   postmortem form + intake-22's viz-export form), `st-4` (rides
-   presentation-1 at its write time, D-148) and `st-5` (the first
-   real consumer decides). For the SoW promise debates the intake-27
-   sacrifice protocol (D-173) and the intake-28 combination fence
-   (D-174). The research posture (intake-29's admission rule,
-   D-175): a new external intake convenes only with a named open
-   build row/standing debate it feeds + a potential falsifier
-   stated up front — new knowledge now comes from building and
-   measuring. pack-4's own honest residues (the future riders'
-   material — the mapping's post-T1 rows): the legal exclusion
-   (D-134's state/flag + knowledge-record family), the cultures
-   (name-1 profiles + prohibition sets), the road traffic (depth-7
-   condensation), the lore hooks (D-140's templates + cause_hook);
-   the ENGINE findings the future rows' material: the group-stock
-   lint gap (the entities vocabulary vs the economy/fold modules),
-   the co-due same-account flow limit (the snapshot from_ — the
-   per-flow re-draft), both recorded in the pack's own notes +
-   D-182.
+   The remaining standing rows — REVALIDATED iter-150 (D-184; the
+   per-row REVALIDATED blocks in TASKS carry the evidence):
+   `parse-2` (buttons wait on a frontend consumer, multi-intent on
+   live-session evidence — neither is "improve the parser"),
+   `tune-3` (a pack-arming choice now, consumer-first: engine
+   movement exists, no committed pack arms it — the HEAD census),
+   `st-2` (consumer-first, parked — no pack has wanted the
+   promotion door), `scav-1` (measurement before mechanism, parked
+   — no derived-state size problem on record), `qa-1` mypy
+   (owner-approval-gated dev tooling, correctly framed since
+   D-031), `bg-6` (the SoW audit, D-055 deferral), `pack-3` (one
+   candidate for the next authored pack slot — the 2nd-setting
+   blocker gone with phase 6 CLOSED), `companion-1` (deps synced:
+   st-6a/resume DONE, tune-3 the one open dep — a following
+   companion IS its NPC-movement consumer; the no-teleport law
+   rides the contract at write time), `mech-2` (rides the next
+   mechanics.py touch — the caps core + intake-21's single-event
+   postmortem form + intake-22's viz-export form, the riders now
+   IN the row per D-113), `st-4` (rides presentation-1 at its
+   write time, D-148) and `st-5` (the first real consumer decides
+   — the res-1 sink shape now concrete). For the SoW promise
+   debates the intake-27 sacrifice protocol (D-173) and the
+   intake-28 combination fence (D-174). The research posture
+   (intake-29's admission rule, D-175): a new external intake
+   convenes only with a named open build row/standing debate it
+   feeds + a potential falsifier stated up front — new knowledge
+   now comes from building and measuring. pack-4's own honest
+   residues (the future riders' material — the mapping's post-T1
+   rows): the legal exclusion (D-134's state/flag + knowledge-record
+   family), the cultures (name-1 profiles + prohibition sets), the
+   road traffic (depth-7 condensation), the lore hooks (D-140's
+   templates + cause_hook); the ENGINE findings the future rows'
+   material: the group-stock lint gap (the entities vocabulary vs
+   the economy/fold modules), the co-due same-account flow limit
+   (the snapshot from_ — the per-flow re-draft), both recorded in
+   the pack's own notes + D-182.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
@@ -613,6 +596,6 @@ the owner's settings step).**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (engine-1 + presentation-1
-   now that pack-4 is consumed) or a fresh call (the standing
-   delegation consumed by the pack-4 build, D-182).
+   recommended remainder of the sequence (engine-1 + presentation-1)
+   or a fresh call (the license's `pyproject.toml` field a one-line
+   option if wanted — D-183's recorded follow-up).

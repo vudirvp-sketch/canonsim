@@ -26,6 +26,58 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-150 · revalid-1 — the AGPLv3 relicense + the standing-backlog revalidation — done (doc-only)
+
+The owner's two-part session call: «я хочу лицензирование поменять
+на AGPLv3 в реадме укажи и файл лицензии составь под репозиторий» +
+«проведи аудит всех standing backlog rows => нужно ли их пересматривать
+с учетом новой документации, принципов и research/intake или нет. и
+если да => то составь план и пересмотри» — the second half over the
+owner-supplied prior-agent backlog analysis (its verdict set verified
+against the repo at BASE_COMMIT 5891cfe before adoption: its pack-3
+and tune-3 findings exactly right, its st-4/companion-1/qa-1/st-5
+verdicts already the repo's own standing law — the companion-1
+no-teleport clause it presented as new was adopted at intake-29/D-175
+and already rides the row; one real gap it did not name: the mech-2
+riders lived in the intake sections + STATUS only, not in the row).
+
+THE LICENSE (part 1): `LICENSE` (the canonical AGPL-3.0 text — the
+verbatim SPDX license-list copy, §0..§17 + the how-to-apply notice)
++ the README's License section re-pointed (TBD → AGPL-3.0, SPDX
+`AGPL-3.0-only`); the donor stance (ROADMAP §4 / D-015) untouched by
+design — it governs what the repo TAKES, a separate question from
+what it PUBLISHES under; `pyproject.toml` carries no license field
+before or after (the packaging metadata the owner's call if wanted).
+
+THE REVALIDATION (part 2): all THIRTEEN standing rows audited as one
+body against the current architecture — the four questions per row
+(does the problem exist now, is there a real consumer, does an
+existing mechanism already cover it, what small probe would decide),
+the intake-29 admission rule (D-175) turned onto the queue itself:
+
+| Row | Verdict | The one-line why |
+|---|---|---|
+| `engine-1` | current, unchanged | the recommended next call (STATUS Next step) — the SoW head; INV-4 lifts only on this call |
+| `presentation-1` | current, unchanged | engine-1's decision-input child (D-148), absorbs st-4 at write time |
+| `parse-2` | sharpened | the two halves' gates made explicit (buttons → a frontend consumer; multi-intent → live-session evidence); neither is "improve the parser" |
+| `tune-3` | re-aimed | the v0.1 sub-premises half-rotated: engine movement exists (st-6a/roads-1), no pack arms it (the HEAD urgency census) — a pack-arming choice now, consumer-first, not an engine gap |
+| `st-2` | sharpened | consumer-first explicit — pack-1/pack-4 built without the door; parked until a pack names the beat |
+| `scav-1` | sharpened | measurement before mechanism — chronicler + checkpoints landed, no size problem on record; premature until a census says otherwise |
+| `qa-1` | current, unchanged | owner-gated dev tooling, correctly framed since D-031 |
+| `bg-6` | current, unchanged | owner-deferred "until unavoidable" (D-055) — the SoW horizon's own gate |
+| `pack-3` | rewritten | the stale "blocked until the 2nd-setting gate" gone — phase 6 CLOSED (D-151), five packs committed; now one candidate for the next authored slot |
+| `companion-1` | synced | deps synced (st-6a/resume DONE; tune-3 the one open dep — a following companion IS tune-3's NPC-movement consumer); no-teleport already in (D-175) |
+| `mech-2` | synced | the two riders absorbed into the row (intake-21 postmortem + intake-22 viz-export) — TASKS owns composition (D-113); the caps stay the core |
+| `st-4` | current, unchanged | already absorbed into presentation-1 (D-148) — the sketch is that row's input material, no separate unit exists |
+| `st-5` | synced | res-1 landed — the sink-shape consumer concrete; the consumer gate itself unchanged (the iter-103 law) |
+
+No rows deleted, none added, no order changed (D-113: the ORDER owner
+decides; the recommendation stays engine-1 + presentation-1, STATUS
+Next step). 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the
+env pin; verified BEFORE working at BASE_COMMIT 5891cfe — identical —
+and re-verified after; doc-only, zero code, zero corpus price).
+Detail: D-183/D-184 + worklog iter-150 + git.
+
 ### iter-149 · pack-4 — the pressure-city pack LANDED (T1) — done
 
 The owner's «продолжай работу с места где прервался» resumption call
@@ -1801,7 +1853,13 @@ per-row detail lives in git + worklog + the D-095..D-104 compound)
   D-031's privilege separation already forbids the hidden write
   path); lag is a legal world state; a follow cadence, if ever
   wanted, is a measured mechanic through the rotation/urgency
-  grammar, never hidden synchronization.
+  grammar, never hidden synchronization. REVALIDATED iter-150: the
+  dependency ledger synced — st-6a (travel) DONE iter-97/D-132, the
+  resume door DONE iter-106/D-139; only tune-3 remains open, and by
+  the no-teleport law tune-3's revalidation is companion's own
+  movement question (a following companion IS the NPC-movement
+  consumer tune-3 waits for — the two rows arm together or not at
+  all); the row current as written otherwise.
 
 ### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
@@ -1840,6 +1898,14 @@ per-row detail lives in git + worklog + the D-095..D-104 compound)
   drop with tombstones AFTER the chronicler's rollups make them
   rebuildable; committed logs never edited (INV-5). Out of leg-4's
   named scope by the scope-creep law — deferred here, not forced.
+  REVALIDATED iter-150: measurement before mechanism — the
+  chronicler (leg-4, iter-64) and the fold checkpoints (depth-4,
+  iter-80) both landed, and no derived-state size problem is on
+  record (the resume door rides the checkpoints as its fast path;
+  no session has hit a wall); the row stays parked until a real
+  long-session cost is measured (a derived-store size census at a
+  named horizon) — until then it is premature optimization, the
+  intake-29 admission rule (D-175) applied to our own queue.
 
 > Phase 4 (Knowledge & scene) landing ledger, condensed: the folds
 > iter-55..58 (D-084..D-087 — traits, the brief's belief read,
@@ -1924,8 +1990,14 @@ worklog iter-54 + D-083.
 ### Phase-2 parser backlog
 
 - `parse-2` (owner-gated) disambiguation buttons + multi-intent
-  utterances — deferred with a frontend consumer / live-session
-  evidence (PARSER_SPEC §7).
+  utterances — deferred, each half behind its own gate (PARSER_SPEC
+  §7, the gates revalidated iter-150): BUTTONS wait on a frontend
+  consumer (mode C live play — a UI affordance, never a parser
+  change); MULTI-INTENT waits on live-session evidence that real
+  utterances carry N intents (one classification per document
+  today); neither half is "improve the parser" — the phase-2
+  grammar is gate-PASSED (D-064) and the boundary stays closed
+  until a named consumer opens it.
 - `engine-1` (owner-gated) the runtime inference engine decision
   (llama.cpp + GBNF; TECH_NOTES §1) — unlocked by the phase-1 gate,
   waits on the owner; the dev-time external parser carried phase 2 to
@@ -1950,11 +2022,27 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   (iter-23) pinned the same family live on the §3 rumor leg: the
   market crowd holds no `figure_at_back_door_last_night` — the
   drunkard never leaves the tavern (the refusal is corpus-pinned,
-  the boundary probed, not forced). Owner's
-  call: a v0.2 pack NPC-movement source (e.g. a transit route
-  through the street), leave as declared-but-dormant layer
-  vocabulary (a second pack may exercise it), or phase-5 spatial
-  material.
+  the boundary probed, not forced). REVALIDATED iter-150 (the
+  four-question audit): the v0.1 sub-premises HALF-ROTATED — the
+  engine-side half is gone (movement exists since st-6a/iter-97
+  `travel`, roads-1/iter-145 exits, and the urgency grammar carries
+  any door intent kind), but the pack-side arming never came: the
+  HEAD census reads no committed pack arming an NPC movement source
+  (the urgency intent kinds across all five: coerce / wait /
+  look_around / talk / ramble / document_check / feed_the_fire /
+  ration_the_coal — no move/travel), so `alarm_adjacent` rides
+  declared-but-dormant in four packs (tavern/road/province/grim —
+  the tavern note's own words, "dormant until NPC movement exists";
+  the movement now exists, unexercised) and the market-leg sibling
+  with it. The unreachability is thus a PACK-ARMING choice now, not
+  an engine gap — the row's standing form is consumer-first: a pack
+  whose design wants the adjacent-shout beat (or the
+  drunkard-walks leg) arms its own movement source as pure pack
+  data (the deciding probe: one crafted twin with a traveling
+  knower); until such a consumer the vocabulary stays dormant, and
+  the original option list (a v0.2 movement source / dormant /
+  phase-5 spatial material) collapses into that one question — the
+  third option dead with phase 5 CLOSED.
 
 (tune-1 done iter-27, tune-2 done iter-28 — see Done.)
 
@@ -1967,7 +2055,13 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   second trigger (bg-5): repetition-counted promotion — N repeats of
   a priced pattern via a counted fold (the ref-13 GHOST-layers
   counter pattern); owner's call: alongside or instead of the
-  pack-grammar door.
+  pack-grammar door. REVALIDATED iter-150: the first-consumer law
+  now leads the row — no committed pack has wanted promotion beyond
+  `take` (pack-1/pack-4 built without the door: the pawn-ticket
+  hinge and the seams ride ordinary events + folds, nothing
+  promoted), so the door (and the bg-5 alternative trigger with it)
+  stays parked until a pack's design names the beat it needs —
+  never a speculative build.
 - `st-3` groups & simulation LOD: one id across tiers, aggregate
   macro-clock events with cardinality, condensation on crossing
   (GROUP_SPEC trigger = phase 5 or owner request; blueprint §5).
@@ -2007,7 +2101,13 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   iter-102 without this row landing, the pointer retired at the
   iter-103 audit: unowned by a phase now — the first real consumer
   decides (a pack wanting portable objects, a res-1 sink shape),
-  never a speculative build).
+  never a speculative build). REVALIDATED iter-150: res-1 LANDED
+  (iter-146, D-179) — the "sink shape" consumer is now concrete (an
+  account that drains into a portable object), and group-scale
+  entity birth already exists for populations (depth-7's
+  condensation, iter-93/D-127); the consumer gate itself unchanged
+  — a pack wanting portable objects arms it, never a speculative
+  build.
 
 ### Spatial backlog (owner-gated; audited iter-19)
 
@@ -2073,6 +2173,15 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   default (a last-N window + the "pass --<flag> for more" tail note),
   expansion by flag only; `matrix` the same if pack growth ever pushes it
   past a screen. `chronicle.py` writes files (Mode F) — out of scope.
+  REVALIDATED iter-150 (composition sync — TASKS owns the riders,
+  D-113): the row now carries its two standing riders explicitly —
+  intake-21's single-event postmortem form (the `why` surface's
+  one-event read, routed iter-128/D-162) and intake-22's DAG
+  viz-export form (the systems' read/write graph rendered from the
+  `matrix` data, routed iter-129/D-163) — both ride the next
+  mechanics.py touch per their own routing, never their own
+  iterations; the caps remain the row's core, the observability
+  frame (the reading agent's attention budget) the shared why.
 - `engine-2` · the urgency-roll stream split — done (iter-50, D-079): per-entry streams `urgency:<npc>:<kind>`, the coupling measured and refused. Detail: D-079.
 - `ci-1` GitHub Actions: pytest + ruff on push — DONE (iter-143,
   D-176): `.github/workflows/ci.yml` (push + PR to `main`;
@@ -2123,7 +2232,7 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   that pretended the world changed; the door-outcome vocabulary's
   fourth axis. The seed-41 corpus probe flipped with it (renamed
   `arson_on_a_destroyed_yard_is_door_rejected`).
-- `pack-3` Sci-Fi setting candidate (owner sketches; parked, not scheduled): the sketches map mechanic-for-mechanic onto what exists — zero core change by design (INV-3's substance: a second pack requires zero ENGINE changes); blocked until the 2nd-setting gate (phase 6, same trigger as `pack-1`, ROADMAP §6).
+- `pack-3` Sci-Fi setting candidate (owner sketches; parked, not scheduled): the sketches map mechanic-for-mechanic onto what exists — zero core change by design (INV-3's substance: a new pack requires zero ENGINE changes). REVALIDATED iter-150: the row's old blocker ("blocked until the 2nd-setting gate") is GONE — phase 6 CLOSED (gate PASS iter-116, D-151), the second-setting shape answered (TRAVEL, D-146) and consumed (road/province/grim/pressure committed; pack-1/pack-4 built inside the closed phase); the row now stands as ONE candidate for the next authored pack slot — the owner's call when a slot opens, against the pressure pack's post-T1 rows (the legal exclusion D-134, the cultures name-1, the road traffic depth-7, the lore hooks D-140) and the intake-20 pack-candidate consult card; a genre-portability experiment (the engine's universality claim, INV-3's substance) is its natural verification framing if picked.
 - `pack-4` Pressure-city pack — **done (iter-149, D-182 — the T1 slice)**: the displacement law over the landed primitives, ZERO CORE CHANGE held exactly (the row's own law): the gauge = res-1's one-meter read surface (the scene line's live anchor field), the Cooling Debt = the thermal_shock layer (the seams' never-regress fold + the seeded follow-ups — the erosion shape over its origin family), the factions = depth-6's objective-function triangle (the stokers' mechanical group burn, the bench's echo-gated ration, the watch's scuttle), the closed cycle = res-1's second consumer arming (the folded net flow — the co-due same-account limit discovered), the price formula with a real direction. The mapping's post-T1 rows (legal exclusion D-134, cultures name-1, road traffic depth-7, lore hooks D-140) are the future slices' material; the engine findings (the group-stock lint gap, the per-flow re-draft) recorded in D-182. Detail: the iter-149 section above + D-182 + worklog iter-149 + the pack's own notes.
 - `ref-N` Reference deep dives — the plan table and the per-file index live
   in `docs/REFERENCES_DEEP.md` §1/§2 (single owner). All ref-1..ref-13

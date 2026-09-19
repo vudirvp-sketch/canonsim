@@ -181,5 +181,8 @@ python -m scripts.digest
 
 ## License
 
-TBD — no monetization planned. Donor code/data policy and licensing stance:
-`docs/ROADMAP.md` §4. Full verified source catalog: `docs/REFERENCES.md`.
+AGPL-3.0 — the GNU Affero General Public License v3.0; the full text
+lives in `LICENSE` (SPDX: `AGPL-3.0-only`). Donor code/data policy and
+licensing stance (what this repo takes in — a separate question from
+what it publishes under): `docs/ROADMAP.md` §4. Full verified source
+catalog: `docs/REFERENCES.md`.
