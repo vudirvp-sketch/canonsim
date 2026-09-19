@@ -26,6 +26,73 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-146 · res-1 — the economy substrate LANDED — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (STATUS Next step after
+roads-1: res-1 the readiness head; CONTRACTS §2 the boundary, the
+spec absorbing it by reference). THE SUBSTRATE:
+`core/economy.py` (new) — the ACCOUNT primitive (a named
+non-negative integer stock on a canon entity id, any category — the
+owner-agnostic form; `account.<kind>` props seeded by
+`core/fold.py` from entity-declared `accounts` mappings), the THREE
+VERBS through the canon door (`account_sourced` /
+`account_transferred` / `account_consumed` — the build's naming
+pass, INV-3-clean by the stoplist self-check test), the FLOWS as
+aggregate macro-events on the maclock cadence (one event per due
+flow per crossing, the `every` divisor pure tick arithmetic, the
+D-112 cardinality outcome `{flow, kind, amount}` — log growth
+O(declared flows × macrobeats)), and the DERIVED PRICES
+(`price_of`: `base + per_unit × level` over pack-declared integer
+weights, add/multiply only — the travel law; the pack owns the
+direction, a negative per_unit prices scarcity). THE FLOOR (D3):
+the soft arm at the front door — the `account_at_least`
+precondition (`core/intent.py`, the closed test set's newest name;
+a missing stock IS a failed gate); the loud arm at the `_commit`
+gate (`core/loop.py` — `is_account_prop` the predicate; no code
+path ever writes a negative stock). THE DISCRETE ARM: the
+`account` resolver (`core/resolvers.py`, STATE_MUTATING) — the
+action-declared `{verb, kind, amount}` block, the stock reads live
+at completion (KI#13), the emitted type the verb's engine constant
+with the pack's `events.success` restating it as the load-time
+cross-check. THE DECAY SEPARATION (I5): the pass iterates
+`status.*` axes only; pinned by test (a long-horizon run's stock
+unchanged without economic events). THE UNARMED LANDING (D4): no
+committed pack declares the block — zero events, the golden T1
+fixtures and the corpora byte-untouched (1763+1 at BASE_COMMIT,
+1781+1 after — the +18 all in `tests/test_economy.py`). THE LINT:
+`core/packlint/economy.py` (new; the block shape EARLY before
+`_entities` — the vocabulary the entity `accounts` cross-check
+reads — and the flow-endpoint cross-checks LATE after `_weather`,
+the worldgen lint's phase law), the account-action block + the
+solvency-gate requirement (a transfer/consume without an
+`account_at_least` gate covering the amount is refused at load —
+the KI#15 family), the `lint_account_cond` shared helper (the
+echo/trait cond family's newest member, wired at the four `requires`
+lint sites), the flow verb types joining the admission emission
+witnesses. THE EVIDENCE (§9's claim packet, the sandbox driver
+per Rule 9): the crafted armed tavern variant (cadence 40, all
+three flow verbs, the player-scaled actions) — F3 the
+player-decision effect MEASURED (the same-seed fork: the drained
+arm's 4-coin spend answered `intent_rejected`/precondition at 2
+coin, the fresh arm's accepted at 10; pc levels 2 vs 6), F4 the
+one-knob ablation CLEAN (grain_delivery 2 → 3: the tavern's grain
+10 → 13, the 7 verb events' outcomes moved, every non-verb event
+byte-identical, the RNG fingerprints equal — the flows draw
+nothing), F1 the conservation oracle over the armed log (every
+account write a verb event, none negative, the folded balances
+exact: barkeep 5+8−2=11, tavern coin 2 / grain 12, drunk 26, pc
+2); falsifiers NOT tripped — CONFIRMED at the measured band. The
+spec absorbs its contract by reference: `docs/CONTRACTS.md` §2
+(collapsed to a pointer). Honest residues: no consumer yet — the
+urgency/faction `account_at_least` gates and the price surface
+(`price_of`) are armed but unconsumed (the first consumer pack —
+pack-1/pack-4 family or a world-2 rider — pays the template lines
+and authors the gates; the compound exchange — pay coin AND
+receive goods in one action — is deliberately NOT a substrate
+concern: one action, one verb, two steps compose it).
+
 ### iter-145 · roads-1 — the generated-exits pass LANDED — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -1286,45 +1353,21 @@ D-105..D-133 family row + phases.md §5)
   first real consumer's (a pack wanting portable objects, a res-1
   sink shape). Detail: phases.md §6 (the slice blocks + the verdict
   block) + D-149/D-151/D-170/D-172 + worklog + git.**
-- `res-1` · the resource/economy layer — todo, owner-gated (VISION §6's
-  "scarcity" formula word gets its row owner): the closed scarcity cycle
-  (source → flow → sink) as PACK DATA — the dependency graph, flows as
-  aggregate macro-events on maclock cadence, sinks via the irreversible
-  item laws, price spreads as derived read-side values; never a second
-  economy engine beside the canon door (D-116; Dune's critical-resource
-  binding the declaration shape, D-119). **The owed dives LANDED
-  iter-109** (ref-18/ref-20, the TASKS row's own record: the X4
-  dependency-graph backbone + the Stellaris aggregate edge + the DW
-  boundary law; the EVE sink law + the Albion risk premium + the PoE
-  spend-consumes + the SoD state surface + the Kenshi desperation loop
-  — `docs/ref/`, the REFERENCES_DEEP §1 rows flipped).
-  **The pre-implementation contract (intake-29's sharpening, D-175 —
-  written BEFORE the row starts): the MECHANISM SPLIT — the quantity
-  substrate is a new WHAT per PACK_SPEC §1's test question (a second
-  pack must carry it for the mechanic to exist — yes): a minimal
-  domain-blind account/transfer/consume primitive lands in core, NAMED
-  (integer-only arithmetic per the travel law; through the canon door;
-  INV-3-clean vocabulary — no resource nouns), while the economy (the
-  resource graph, sources/flows/sinks, price formulas, thresholds,
-  faction coupling) stays pack data — a pack-only reading of this row
-  would grow the hidden mechanism the row itself forbids ("never a
-  second economy engine"). The IRREVERSIBILITY SPLIT: event
-  immutability ≠ stock immutability — a sink's consumed unit never
-  un-consumes, but a stock regrows legally via new source events
-  (`7 → 12` by a source event is an ordinary event, never a
-  "revert"); the `irreversible` state_change flag (the decay family's
-  law) is the wrong instrument for stock props. The verification plan
-  rides TEST_PLAN §9's claim packet: the conservation oracle (nothing
-  appears/disappears outside declared sources/sinks), the
-  no-negative-stock floor, the player-decision-effect arm, the
-  one-knob ablation — the priced-option question (intake-27) the
-  counting form.**
-  **The pre-implementation contract WRITTEN (iter-144, D-177):
-  `docs/CONTRACTS.md` §2 — the substrate shape (the account
-  primitive + the three verbs + integer-only arithmetic + prices
-  derived L3), the irreversibility split, the underflow floor,
-  the unarmed landing, the invariant set, the four-proof claim
-  packet, the minimal test set.**
+- `res-1` · the resource/economy layer — **done (iter-146, D-179)**:
+  the substrate landed per its contract (`docs/CONTRACTS.md` §2,
+  collapsed to a pointer) — `core/economy.py` (the account primitive
+  + the three verbs `account_sourced`/`account_transferred`/
+  `account_consumed` + the flows on the maclock cadence + the
+  derived prices `base + per_unit × level`), the `account_at_least`
+  door test (the underflow floor's soft arm), the `account` resolver
+  (the discrete arm), the `_commit` gate's loud floor, the lint
+  (`core/packlint/economy.py` early-shape/late-cross + the
+  actions/entities cross-checks), UNARMED on the committed packs
+  (zero corpus price, the T1s green at landing). The §9 claim packet
+  CONFIRMED at the measured band (the conservation oracle, the F3
+  decision-effect fork, the F4 one-knob ablation — TASKS iter-146
+  section above). The first consumer pack pays the arming corpus
+  price (the template lines + the gates).
 - `roads-1` · the generated-exits pass — **done (iter-145, D-178)**: the
   roads pass (the MST backbone + the pack-declared mutual k-nearest
   overlay over the claimed locations) live in `core/worldgen.py::

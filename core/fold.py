@@ -82,6 +82,19 @@ def initial_projection(entities: Mapping[str, Any]) -> Projection:
     # condensation/arrival visibility is depth-7's row).
     for group in entities.get("groups", ()):
         _put(group["id"], "position", group["position"])
+    # res-1 (the economy substrate): the ACCOUNT stocks — a
+    # pack-declared `accounts` mapping on any entity category seeds
+    # `account.<kind>` props (the `status.`/`relations.` family's own
+    # seeding shape; the prefix is `core/economy.py`'s writer-side
+    # vocabulary, restated inline here at the seeding floor — the
+    # import would cycle economy -> intent -> fold). Non-negative
+    # integers by the lint; the levels ride state_changes from here.
+    for category in (
+        "locations", "npcs", "ambient_entities", "items", "groups",
+    ):
+        for record in entities.get(category, ()):
+            for kind, level in (record.get("accounts") or {}).items():
+                _put(record["id"], f"account.{kind}", level)
     return state
 
 

@@ -185,3 +185,30 @@ def lint_trait_cond(
         "declared traits.beliefs belief (the fold answers only the "
         "declared vocabulary — anything else is dead data)",
     )
+
+
+def lint_account_cond(
+    data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], where: str
+) -> None:
+    """The account_at_least precondition contract (res-1, the economy
+    substrate), shared by the action, urgency, faction and texture
+    `requires` lints: `kind` must name a declared economy.accounts kind
+    and `value` a non-negative integer — the door reads only declared
+    stocks, a kind outside the vocabulary is a dead gate (the
+    echo_at_least axis family: dead vocabulary is refused at load,
+    never silently always-False)."""
+    economy = data["rules.json"].get("economy")
+    vocabulary = (
+        economy.get("accounts") if isinstance(economy, Mapping) else None
+    )
+    _require(
+        isinstance(vocabulary, list) and cond.get("kind") in vocabulary,
+        f"{where}: precondition account_at_least requires 'kind' naming "
+        "a declared economy.accounts kind (the door reads only the "
+        "declared stocks — anything else is dead data)",
+    )
+    _require(
+        _is_int(cond.get("value")) and cond["value"] >= 0,
+        f"{where}: precondition account_at_least value must be a "
+        "non-negative integer",
+    )

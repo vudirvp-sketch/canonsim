@@ -93,6 +93,7 @@ from core.crime import (
 from core.cursor import CursorError
 from core.director import Director, policy_from_rules
 from core.echo import echo_scores
+from core.economy import flow_drafts, is_account_prop
 from core.factions import faction_intents
 from core.fold import Projection, apply_event, fold, initial_projection
 from core.groups import condensation_drafts, macro_tick_drafts
@@ -1358,6 +1359,23 @@ class Simulator:
                     provenance={"seed": self._seed},
                 )
             )
+        # res-1: the economy's aggregate flows ride the crossing — one
+        # event per due flow (the D-112 cardinality surface: the amount
+        # the flat count, log growth O(declared flows x macrobeats),
+        # never O(members x ticks)), chained to the turn like every
+        # consumer, draw-free pure stock reads (INV-2-clean — the
+        # fingerprint never sees an economy event). An unarmed economy
+        # block answers () (the 68a pattern). The underflow floor's
+        # loud arm lives at the _commit gate: a flow beyond its stock
+        # refuses the write and the run fails loud — the pack's
+        # declared graph is broken, never silently skipped.
+        for flow_draft in flow_drafts(self._pack.rules, self._projection, tick):
+            self._commit(
+                replace(
+                    flow_draft, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
         # the warm ring's status drift, chained to the turn (the
         # consumer rides the clock's own event)
         for drift in decay_drafts(
@@ -1661,6 +1679,27 @@ class Simulator:
                 raise ValueError(
                     f"{draft.type}: state_change {change.entity}.{change.prop} "
                     f"expected from {change.from_!r} but projection holds {held!r}"
+                )
+            # res-1 (the underflow floor's LOUD arm, CONTRACTS §2 D3):
+            # an account stock never goes below zero — the write refuses
+            # HERE, before the log ever sees it. The player-scaled arm
+            # dies soft at the front door (account_at_least —
+            # intent_rejected, attempts are facts); the aggregate flows
+            # and every other write path (resolvers, hand-built drafts)
+            # fail loud at THIS gate — no code path ever writes a
+            # negative stock.
+            if is_account_prop(change.prop) and (
+                not isinstance(change.to_, int)
+                or isinstance(change.to_, bool)
+                or change.to_ < 0
+            ):
+                raise ValueError(
+                    f"{draft.type}: the account stock "
+                    f"{change.entity}.{change.prop} would write "
+                    f"{change.to_!r} — a stock never goes below zero "
+                    "(the underflow floor, CONTRACTS §2 D3; the "
+                    "player-scaled arm dies soft at the door, the "
+                    "aggregate and every other path fail loud here)"
                 )
             pending[key] = change.to_
         record = self._writer.append(draft)

@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from core.packlint.helpers import _ids, _require
+from core.packlint.helpers import _ids, _is_int, _require
 
 
 class EntitiesLint:
@@ -24,6 +24,44 @@ class EntitiesLint:
             f"pack meta disagrees across files: {names} / {versions}",
         )
 
+
+    def _entity_accounts(self, record: Mapping[str, Any], kind: str) -> None:
+        """res-1 (the economy substrate): the optional `accounts`
+        mapping — the entity's declared account stocks, seeding
+        `account.<kind>` props (`core/fold.py`). Uniform across every
+        category (the owner-agnostic form: the substrate binds to a
+        canon entity id, the PACK decides which kind holds it — npc,
+        location, group the expected homes). The pairing law: entity
+        accounts require the economy block (the kinds must be its
+        vocabulary — dead data otherwise); every level a non-negative
+        integer (the floor is the substrate's own law, D3)."""
+        accounts = record.get("accounts")
+        if accounts is None:
+            return
+        where = f"{kind} {record['id']}: accounts"
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        _require(
+            isinstance(vocabulary, list),
+            f"{where}: the economy block is not declared — entity "
+            "accounts without an economy.accounts vocabulary are dead "
+            "data (the pairing law: declare the block)",
+        )
+        _require(isinstance(accounts, Mapping), f"{where} must be an object")
+        for kind_name, level in accounts.items():
+            _require(
+                kind_name in vocabulary,
+                f"{where}: unknown account kind {kind_name!r} (the "
+                "economy.accounts vocabulary)",
+            )
+            _require(
+                _is_int(level) and level >= 0,
+                f"{where}.{kind_name} must be a non-negative integer "
+                "(the floor is the substrate's own law — no stock "
+                "starts below zero)",
+            )
 
     def _entities(self) -> None:
         entities = self._data["entities.json"]
@@ -84,6 +122,7 @@ class EntitiesLint:
                         "scalar (str | int | bool) — comparable values "
                         "only, never nested objects",
                     )
+            self._entity_accounts(loc, "location")
 
         status_axes = set(rules["states"])
         relation_axes = set(rules["relations"]["axes"])
@@ -145,6 +184,7 @@ class EntitiesLint:
                     "data — the population tier needs a membership (the "
                     "vacuity law, the threshold-100 family)",
                 )
+            self._entity_accounts(group, "group")
             unknown = sorted(
                 set(group)
                 - {
@@ -224,6 +264,7 @@ class EntitiesLint:
                         f"npc {npc['id']}: pair axis {axis!r} must be an integer "
                         f"inside {relation_scale}, got {value!r}",
                     )
+            self._entity_accounts(npc, "npc")
 
         players = [npc["id"] for npc in npcs if npc.get("is_player", False)]
         _require(len(players) == 1, f"exactly one is_player npc required, got {players}")
@@ -233,9 +274,11 @@ class EntitiesLint:
                 ambient["position"] in location_ids,
                 f"ambient {ambient['id']}: unknown position",
             )
+            self._entity_accounts(ambient, "ambient")
 
         for item in items:
             _require(item["position"] in location_ids, f"item {item['id']}: unknown position")
+            self._entity_accounts(item, "item")
             effect = item.get("use_effect")
             if effect is not None:
                 _require(

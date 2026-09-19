@@ -21,6 +21,11 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, Callable, Final
 
 from core.detail import materialize_scene_detail, materialized_fields
+from core.economy import (
+    CONSUME_EVENT,
+    SOURCE_EVENT,
+    TRANSFER_EVENT,
+)
 from core.intent import (
     CheckResult,
     IntentData,
@@ -64,7 +69,7 @@ Projection = Mapping[str, Mapping[str, Any]]
 #: reads directly. Single owner: this module owns resolver semantics.
 STATE_MUTATING: Final[frozenset[str]] = frozenset({
     "movement", "pickup", "drop", "use_item", "stealth_take",
-    "divert", "ignite", "flee",
+    "divert", "ignite", "flee", "account",
 })
 
 
@@ -615,6 +620,121 @@ def _coerce(
     )
 
 
+def _stock_or_loud(
+    projection: Projection, entity: str, kind: str
+) -> int:
+    """The account resolver's stock read: the declared level, LOUD
+    (RunnerError — the author-bug family) when the entity declares no
+    account of the kind. The pack lint requires every flow endpoint to
+    declare its account; the discrete path's endpoints are the
+    actor/target nouns, which the lint cannot pin per-entity — the
+    door's `account_at_least` gate is the designed instrument (a
+    missing stock fails SOFT there), so reaching this raise means the
+    pack authored an ungated account action (the steal family's
+    "unreachable by construction: loud, not silent")."""
+    level = projection[entity].get(f"account.{kind}")
+    if not isinstance(level, int) or isinstance(level, bool):
+        raise RunnerError(
+            f"the account action's {entity!r} declares no account of "
+            f"kind {kind!r} (projection holds {level!r}) — author the "
+            "account_at_least gate or declare the stock"
+        )
+    return level
+
+
+def _account(
+    pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
+    action: Mapping[str, Any], check: CheckResult | None, tick: int,
+) -> Resolution:
+    """The account resolver (res-1): the action-declared `account`
+    block names the verb, the kind and the amount — the player-scaled
+    arm of the economy's three verbs through the canon door. The event
+    TYPE is the verb's engine constant (the build's naming pass,
+    INV-3-clean); the pack's `events.success` restates it as the
+    load-time cross-check (the lint refuses a mismatch — the template
+    closure then covers the verb line, the arming corpus price). A
+    failed opposed check rides the pack's own failure type (no state
+    change — the attempt is a fact, the stock untouched). The stock
+    reads are LIVE at completion (KI#13: `from` is never hardcoded);
+    an underflow here is unreachable by construction — the
+    `account_at_least` precondition (required by the lint for
+    transfer/consume, re-run by the OCC re-check when the projection
+    moved) rejects the insolvent attempt at the door, and the
+    `_commit` gate's floor is the net (D3's loud arm)."""
+    config = action["account"]
+    verb = config["verb"]
+    kind = config["kind"]
+    amount = config["amount"]
+    prop = f"account.{kind}"
+    branch = _branch(check, action)
+    if branch != "success":
+        return Resolution(
+            event_type=action["events"][branch],
+            outcome={"check": _check_outcome(check)},
+            knowledge=_knowledge(action, branch, pack, projection, intent, tick),
+            hooks=_hooks(action, branch),
+        )
+    outcome: dict[str, Any] = {
+        "check": _check_outcome(check), "kind": kind, "amount": amount,
+    }
+    if verb == "source":
+        # the world mints to the actor (a found coin, a harvest) — a
+        # source can never underflow, no solvency gate exists
+        level = _stock_or_loud(projection, intent.actor, kind)
+        return Resolution(
+            event_type=SOURCE_EVENT,
+            outcome=outcome,
+            knowledge=_knowledge(
+                action, "success", pack, projection, intent, tick
+            ),
+            state_changes=(
+                StateChange(
+                    entity=intent.actor, prop=prop,
+                    from_=level, to_=level + amount,
+                ),
+            ),
+        )
+    if verb == "transfer":
+        if intent.target is None:
+            raise RunnerError(
+                f"{intent.kind}: the account transfer requires a target"
+            )
+        from_level = _stock_or_loud(projection, intent.actor, kind)
+        to_level = _stock_or_loud(projection, intent.target, kind)
+        return Resolution(
+            event_type=TRANSFER_EVENT,
+            outcome=outcome,
+            knowledge=_knowledge(
+                action, "success", pack, projection, intent, tick
+            ),
+            state_changes=(
+                StateChange(
+                    entity=intent.actor, prop=prop,
+                    from_=from_level, to_=from_level - amount,
+                ),
+                StateChange(
+                    entity=intent.target, prop=prop,
+                    from_=to_level, to_=to_level + amount,
+                ),
+            ),
+        )
+    # consume — the lint closes the verb vocabulary
+    level = _stock_or_loud(projection, intent.actor, kind)
+    return Resolution(
+        event_type=CONSUME_EVENT,
+        outcome=outcome,
+        knowledge=_knowledge(
+            action, "success", pack, projection, intent, tick
+        ),
+        state_changes=(
+            StateChange(
+                entity=intent.actor, prop=prop,
+                from_=level, to_=level - amount,
+            ),
+        ),
+    )
+
+
 REGISTRY: Final[dict[str, ResolverFn]] = {
     "observe": _observe,
     "inspect": _inspect,
@@ -630,4 +750,5 @@ REGISTRY: Final[dict[str, ResolverFn]] = {
     "flee": _flee,
     "recuperate": _recuperate,
     "coerce": _coerce,
+    "account": _account,
 }

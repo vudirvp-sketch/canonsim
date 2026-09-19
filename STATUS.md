@@ -1,117 +1,73 @@
-Iteration: iter-145 (`iter-145-roads1` — the generated-exits
-pass; the owner's «продолжай работы по планам, решай сам что сейчас
+Iteration: iter-146 (`iter-146-res1` — the economy substrate;
+the owner's «продолжай работы по планам, решай сам что сейчас
 логичнее начать/открыть и прочее» delegation call — the pick NOT
-invented: the plan's own recorded recommendation taken, the BUILD
-ROWS of intake-29/D-175's order, roads-1 the readiness head, its
-CONTRACTS §1 boundary the starting material): the roads pass LANDED
-— a new PURE pass (`core/worldgen.py::_pass_roads`, PASS_ORDER grew
-`roads`) building the exit graph over the CLAIMED locations: the MST
-backbone (Kruskal under the I5 order) + the pack-declared MUTUAL
-k-nearest overlay (`worldgen.roads.k`; the mutual form is I3+D2's
-pin — per-node overlay degree <= k, <= n*k/2 edges; the
-union-of-picks reading breaks both, the star counterexample), the
-output on `WorldModel.roads` (L11); I4's span law RELOCATED to the
-emit (the loud WorldgenError conflict rule; the runtime backstop's
-set grew `place`+`roads`). The ONE shared read `core/roads.py::exits`
-(authored non-empty wins — the pack wins; an EMPTY list the
-generated-world marker; else derived; else ()): the named consumers
-re-pointed — the LOD warm ring, the intent door's move validation
-(world= keyword threaded at every loop door: accept, OCC re-check,
-the beat/macro autonomy gates). The lint: `worldgen.roads` required,
-k 0..claimed-2 (the vacuity refusal); the committed packs armed
-k=0 — zero corpus price (authored exits win everywhere; the claimed
-sets connect within their spans: 1<=1, 1<=2, 4<=4). THE RIDER: the
-pack.py SPLIT (D-175 — roads-1 the first pack.py-growing row):
-`core/packlint/` — helpers + shared + twelve domain classes under the
-one `_Lint` orchestrator (the pinned order + the KI#77 comments
-verbatim; load_pack the single gate; no DSL/base classes; pyproject
-gains core.packlint — the fresh-venv CI path verified). THE EVIDENCE
-(§9's claim packet, the sandbox driver per Rule 9): the province's
-MIXED mode G variant at the smoke seed, the same-seed fork k=0 vs
-k=2 — MEASURED on all three surfaces: the door (8 -> 12 accepted
-pairs), WHO simulates (the crossing's warm ring 5 -> 7 NPCs), route
-metrics (5 -> 8 edges, 0 -> 3 cycles, 10 -> 20 pairs); falsifier NOT
-tripped — CONFIRMED at the measured band. Honest residues: the mode
-G authoring burden (the orphan law couples grammar reachability to
-AUTHORED edges — entities re-referenced or relocated when exits
-empty), the authored playscript breaks under the derived topology
-(the weight-14 tie resolved differently — a measured difference),
-the adjacent_locations knowledge audience stays authored-only (not a
-named consumer; the first mode G pack's rider) ·
+invented: the plan's own recorded recommendation taken, res-1 the
+readiness head after roads-1, its CONTRACTS §2 boundary the starting
+material): the SUBSTRATE LANDED — `core/economy.py` (new): the
+ACCOUNT primitive (a named non-negative integer stock on a canon
+entity id, any category — the owner-agnostic form; `account.<kind>`
+props seeded by `core/fold.py` from entity-declared `accounts`
+mappings), the THREE VERBS through the canon door
+(`account_sourced`/`account_transferred`/`account_consumed` — the
+build's naming pass, INV-3-clean by a dedicated stoplist self-check
+test), the FLOWS as aggregate macro-events on the maclock cadence
+(one event per due flow per crossing, the `every` divisor pure tick
+arithmetic, the D-112 cardinality outcome `{flow, kind, amount}`);
+the DERIVED PRICES (`price_of`: `base + per_unit × level`, integer
+add/multiply only — the travel law; the pack owns the direction).
+THE FLOOR (D3's two arms): the SOFT arm at the front door (the
+`account_at_least` precondition — the closed test set's 19th name;
+a missing stock IS a failed gate) and the LOUD arm at the `_commit`
+gate (`is_account_prop` the predicate — no code path ever writes a
+negative stock). THE DISCRETE ARM: the `account` resolver (REGISTRY
++ STATE_MUTATING) — the action-declared `{verb, kind, amount}`
+block, the stock reads live at completion (KI#13), the emitted type
+the verb's engine constant with the pack's `events.success`
+restating it as the load-time cross-check. THE UNARMED LANDING
+(D4): no committed pack declares the block — zero events, the
+golden T1 fixtures and the corpora byte-untouched. THE LINT:
+`core/packlint/economy.py` (the block shape EARLY before
+`_entities`, the flow-endpoint cross-checks LATE after `_weather`
+— the KI#77 order law), the account-action block + the
+solvency-gate requirement (the KI#15 family), `lint_account_cond`
+at the four `requires` lint sites, the flow verb types joining the
+admission emission witnesses. THE EVIDENCE (§9's claim packet, the
+sandbox driver per Rule 9): the crafted armed tavern variant (all
+three flow verbs + the player-scaled actions) — F3 MEASURED (the
+same-seed fork: the drained arm's 4-coin spend answered
+`intent_rejected`/precondition at 2 coin, the fresh arm's accepted
+at 10; pc levels 2 vs 6), F4 CLEAN (grain_delivery 2 → 3: the
+tavern's grain 10 → 13, every non-verb event byte-identical, the
+RNG fingerprints equal — the flows draw nothing), F1 the
+conservation oracle (every account write a verb event, none
+negative, the folded balances exact); falsifiers NOT tripped —
+CONFIRMED at the measured band. Honest residues: no consumer yet
+(the urgency/faction account gates and `price_of` armed but
+unconsumed — the first consumer pack pays the template lines and
+authors the gates); the compound exchange deliberately NOT a
+substrate concern (one action, one verb — two steps compose a buy) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
-1763 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 091b004 and re-verified
-after; the fresh-venv install path for core.packlint verified — the
-CI runner's own path) ·
+1781 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at BASE_COMMIT 89cb177 — 1763 passed +
+1 skipped — and re-verified after; the +18 all in
+tests/test_economy.py) ·
 Date: 2026-09-19 ·
-Scope: `core/roads.py` (new), `core/worldgen.py` (the pass + the
-model field + the backstop), `core/lod.py`, `core/intent.py`,
-`core/urgencies.py`, `core/factions.py`, `core/loop.py` (the world
-threading), `core/pack.py` + `core/packlint/` (the split rider, 15
-files), `pyproject.toml`, the three `content/*/rules.json` (roads.k=0),
-`tests/test_roads.py` (new, +9), `tests/test_lod.py`,
-`tests/test_worldgen.py` (the WG fixture + the relocation-successor
-test), `docs/TASKS.md`, `docs/DECISIONS.md` (D-178),
-`docs/CONTRACTS.md` (§1 collapsed), `docs/ROADMAP.md` (the row list),
-`docs/AGENT_NAVIGATION.md` (§1), `STATUS.md` (this re-pin + the Next
-step), `worklog.md` (this entry; iter-135 evicted per the cap) — the
-soft limit's own clause (the rider's mechanical moves, noted).
-The prior iteration's record: iter-144 (contracts). The
-detail lives in TASKS + worklog + git.
-
-Iteration: iter-143 (`iter-143-ci1` — the GitHub Actions runner
-landed; the owner's «продолжай работы по планам, решай сам что
-сейчас логичнее начать/открыть и прочее» delegation call — the pick
-NOT invented: the plan's own recorded first recommendation taken
-(intake-29/D-175: ci-1 FIRST, «the cheapest risk reduction on the
-board»; AGENTS §8's CI-files gate satisfied by the owner's fresh
-delegation, recorded as such — the D-154 precedent-phrase family)):
-**the runner LANDED** — `.github/workflows/ci.yml`: pytest + ruff
-on push to `main` (the `pull_request` trigger rides along — the
-row's own "protect main after" clause needs check runs on PR heads
-once required status checks exist; the owner's direct-push rhythm
-keeps firing the push trigger — the PR arm additive, never
-load-bearing). `PYTHONHASHSEED=0` at the job level (INV-2); Python
-`3.12.14` pinned EXACT — the env-pin law: the golden T1 fixture
-byte-compares a fresh run against the committed bytes (TEST_PLAN
-§1.1) and the log header records the interpreter (`core/log.py`),
-so a version bump rides with a fixture regen in the same iteration,
-never alone. The plain install (the runner python is not PEP-668
-fenced); `permissions: contents: read`; `timeout-minutes: 15`.
-Verified: the suite green at BASE_COMMIT 15e568d BEFORE working
-(1754 passed + 1 skipped, ruff clean, Python 3.12.14) and
-re-verified after (doc-only beyond the workflow file; the corpora
-byte-untouched); the exact runner path SIMULATED in a clean venv
-(fresh `pip install -e ".[dev]"` → `python -m ruff check .` →
-`PYTHONHASHSEED=0 python -m pytest -q`: the same 1754+1, ruff
-clean — the skip the chronicler module's duckdb import, by design
-outside `[dev]`); the actions' majors (checkout@v7,
-setup-python@v7) + the 3.12.14 availability in python-versions
-live-checked 2026-09-19 (ls-remote — no guessed versions in the
-file). The deferred-verification surface named honestly: the
-runner's first LIVE execution fires on the owner's push of this
-iteration — a sandbox cannot run GitHub's runners; everything the
-repo side owns is verified. Zero corpus price, zero runtime-code
-touch, INV-4 untouched (dev-side only, the same class as pytest
-itself). Branch protection ("protect main after") stays the owner's
-GitHub-settings step — the recipe in the stop-point report ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 15e568d and re-verified
-after; the runner path additionally simulated in a clean venv — the
-same numbers) ·
-Date: 2026-09-19 ·
-Scope: `.github/workflows/ci.yml` (new), `docs/AGENT_NAVIGATION.md`
-(§1 the `.github/` row), `README.md` (the repo-map row),
-`docs/TASKS.md` (the iter-143 section + the ci-1 flip),
-`docs/DECISIONS.md` (D-176), `STATUS.md` (this re-pin + the Next
-step), `worklog.md` (this entry; iter-133 evicted per the cap) —
-7 files.
-The prior iteration's record: iter-142 (intake-29). The
+Scope: `core/economy.py` (new), `core/packlint/economy.py` (new),
+`tests/test_economy.py` (new, +18), `core/fold.py`,
+`core/intent.py`, `core/resolvers.py`, `core/loop.py` (the commit
+gate + the crossing), `core/pack.py`, `core/packlint/actions.py`,
+`core/packlint/actors.py`, `core/packlint/entities.py`,
+`core/packlint/shared.py`, `core/packlint/admission.py`,
+`docs/EVENT_SCHEMA.md` (§4 the account home), `docs/TASKS.md` (the
+iter-146 section + the res-1 flip), `docs/DECISIONS.md` (D-179),
+`docs/CONTRACTS.md` (§2 collapsed), `docs/AGENT_NAVIGATION.md` (§1),
+`STATUS.md` (this re-pin + the Next step), `worklog.md` (this entry;
+iter-136 evicted per the cap) — 20 files: the semantic core is 12
+(the substrate + its lint + its tests + the five integration
+points), the rest doc sync; the soft limit's own clause noted.
+The prior iteration's record: iter-145 (roads1). The
 detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -587,10 +543,11 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-145 DONE: the roads-1 pass LANDED (the claimed-set topology —
-the MST backbone + the mutual k-nearest overlay; the ONE shared exits
-read; the pack.py split rider; the §9 claim packet CONFIRMED at the
-measured band; D-178). iter-144: the three contract writes; iter-143:
+**iter-146 DONE: the res-1 economy substrate LANDED (the account
+primitive, the three verbs, the flows on the macro cadence, the
+derived prices; the underflow floor's two arms; the unarmed landing;
+the §9 claim packet CONFIRMED at the measured band; D-179).
+iter-145: roads-1; iter-144: the three contract writes; iter-143:
 ci-1 (the first LIVE run fires on the owner's push; branch protection
 the owner's settings step). iter-139: world-2 L2 the verdict
 DELIVERED (D-172) — the two-level gate COMPLETE.**
@@ -598,19 +555,19 @@ DELIVERED (D-172) — the two-level gate COMPLETE.**
 1. **The owner-gated backlog (the standing rows — the ORDER owner
    decides, TASKS owns composition, never order; each build row's
    verification plan rides TEST_PLAN §9's claim packet):** with
-   roads-1 consumed, the session's RECOMMENDED next call
-   (intake-29's readiness order, never the pick) is `res-1` (its
-   contract `docs/CONTRACTS.md` §2 — the substrate contract: the
-   account primitive, the three verbs through the canon door, the
-   irreversibility split, the underflow floor, the unarmed landing;
-   its lint growth lands in the SPLIT's `core/packlint/` home, the
-   rider ALREADY PAID), then `since-1` (§3), the pack consumers
-   (`pack-1` the natural depth companion, `pack-4`) as the
+   res-1 consumed, the session's RECOMMENDED next call
+   (intake-29's readiness order, never the pick) is `since-1` (its
+   contract `docs/CONTRACTS.md` §3 — the baseline sense named (the
+   per-entity encounter epoch), the scene_delta separation, the
+   blind-NPC inheritance, the zero-canon-writes law), then the pack
+   consumers (`pack-1` the natural depth companion, `pack-4`) as the
    primitives' universality proofs when the slots open — now also
-   the natural first MODE G consumers (the roads-1 residues their
-   riders: the adjacent_locations audience threading, the mode G
-   authoring burden's worldbuilder-side answer), `engine-1` (+
-   `presentation-1`) last. The remaining standing rows unchanged:
+   the natural first consumers of BOTH landed primitives (roads-1's
+   residues their riders: the adjacent_locations audience threading,
+   the mode G authoring burden's worldbuilder-side answer; res-1's
+   arming: the template lines + the account gates + the first
+   price/urgency consumers), `engine-1` (+ `presentation-1`) last.
+   The remaining standing rows unchanged:
    `parse-2`, `tune-3`, `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the
    SoW audit, D-055 deferral), `pack-3`, `companion-1`, `mech-2`
    (rides the next mechanics.py touch — now also carrying
@@ -636,10 +593,10 @@ DELIVERED (D-172) — the two-level gate COMPLETE.**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (res-1 the readiness head
-   now that roads-1 is consumed) or a fresh call (this round's
+   recommended remainder of the sequence (since-1 the readiness head
+   now that res-1 is consumed) or a fresh call (this round's
    delegation — «продолжай работы по планам, решай сам» — consumed
-   by the roads-1 build, D-178). After the push: verify the CI
+   by the res-1 build, D-179). After the push: verify the CI
    runner's first live run green on `main` (the iter-143 arm), then
    apply the branch-protection recipe (the iter-143 stop-point
    report).

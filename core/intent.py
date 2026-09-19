@@ -42,6 +42,7 @@ if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pac
     from core.worldgen import WorldModel
 
 __all__ = [
+    "ACCOUNT_TEST",
     "ACQUISITION_CHANNELS",
     "AUDIENCES",
     "CheckResult",
@@ -117,6 +118,18 @@ ECHO_TEST: Final = "echo_at_least"
 #: who/token pair); this module never imports `core.traits` (the
 #: import direction stays one-way; the owning module owns the type).
 TRAIT_TEST: Final = "trait_held"
+
+#: The intent door's account test (res-1, the economy substrate): the
+#: noun entity's account of `kind` holds at least `value` units — the
+#: underflow floor's SOFT arm (CONTRACTS §2 D3: a player-scaled
+#: spend/transfer beyond the stock dies at the front door as an
+#: `intent_rejected` no-op — attempts are facts, the loud/soft line).
+#: The stock read is the projection's `account.<kind>` prop (the
+#: seeding family's inline prefix — `core/economy.py` owns the
+#: writer-side vocabulary; the import would cycle economy -> intent
+#: -> fold). A missing stock IS a failed gate (the honest answer,
+#: never an error — you cannot spend what does not exist).
+ACCOUNT_TEST: Final = "account_at_least"
 
 #: The tick-windowed precondition family — tests whose truth reads a
 #: DERIVED FOLD at the caller's own tick (the leverage liveness window,
@@ -526,6 +539,21 @@ def _test_trait_held(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     )
 
 
+def _test_account_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's account test (res-1): the noun entity's
+    `account.<kind>` stock is at least `value` — a projection read at
+    the caller's own tick (the door at entry, the OCC re-check at
+    completion — a spent-down stock between accept and completion is
+    the re-check's own soft rejection). A missing stock fails the
+    gate (an entity that declares no account of the kind holds
+    nothing of it — never an error, the `relation_at_least` family's
+    own shape)."""
+    level = ctx.projection[ctx.entity(cond["noun"])].get(
+        f"account.{cond['kind']}"
+    )
+    return isinstance(level, int) and not isinstance(level, bool) and level >= cond["value"]
+
+
 def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     """pack-2 (iter-29, D-061): the noun (a location) holds at least one
     spot of the pack-declared transition layer that is NOT in the layer's
@@ -564,6 +592,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
     "leverage_over": _test_leverage_over,
     "echo_at_least": _test_echo_at_least,
     "trait_held": _test_trait_held,
+    "account_at_least": _test_account_at_least,
 }
 
 

@@ -7,9 +7,14 @@ import re
 from collections.abc import Mapping
 from typing import Any
 
-from core.intent import ECHO_TEST, PRECONDITION_TESTS, TRAIT_TEST
+from core.intent import (
+    ACCOUNT_TEST,
+    ECHO_TEST,
+    PRECONDITION_TESTS,
+    TRAIT_TEST,
+)
 from core.packlint.helpers import _NOUNS, PackError, _ids, _is_int, _require
-from core.packlint.shared import lint_echo_cond, lint_trait_cond
+from core.packlint.shared import lint_account_cond, lint_echo_cond, lint_trait_cond
 
 
 class ActorsLint:
@@ -85,6 +90,8 @@ class ActorsLint:
                     lint_echo_cond(self._data, cond, where)
                 if cond.get("test") == TRAIT_TEST:
                     lint_trait_cond(self._data, cond, where)
+                if cond.get("test") == ACCOUNT_TEST:
+                    lint_account_cond(self._data, cond, where)
                 for param in ("noun", "with", "who"):
                     if param in cond:
                         _require(
@@ -211,6 +218,8 @@ class ActorsLint:
                     lint_echo_cond(self._data, cond, where)
                 if cond.get("test") == TRAIT_TEST:
                     lint_trait_cond(self._data, cond, where)
+                if cond.get("test") == ACCOUNT_TEST:
+                    lint_account_cond(self._data, cond, where)
                 for param in ("noun", "with", "who"):
                     if param in cond:
                         _require(

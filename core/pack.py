@@ -36,6 +36,7 @@ from core.packlint.actions import ActionsLint
 from core.packlint.actors import ActorsLint
 from core.packlint.admission import AdmissionLint
 from core.packlint.calendar import CalendarLint
+from core.packlint.economy import EconomyLint
 from core.packlint.entities import EntitiesLint
 from core.packlint.epistemic import EpistemicLint
 from core.packlint.helpers import (  # noqa: F401 -- PackError is the compat re-export
@@ -89,8 +90,18 @@ class _Lint:
         travellint = TravelLint(self._data)
         calendarlint = CalendarLint(self._data)
         weatherlint = WeatherLint(self._data)
+        economylint = EconomyLint(self._data)
         admissionlint = AdmissionLint(self._data)
         entitieslint._meta()
+        # res-1 (the economy substrate): the block's own shape EARLY —
+        # before _entities, whose `accounts` cross-check reads the
+        # account-kind vocabulary this validates, and before _actions,
+        # whose account-block and account_at_least lints read the same
+        # vocabulary (the KI#77 order law: a crafted variant with a
+        # malformed economy block must hit _economy's clean PackError,
+        # never a KeyError downstream). The entity cross-checks live in
+        # the LATE phase (_economy_cross, after _weather).
+        economylint._economy()
         entitieslint._entities()
         actionslint._actions()
         actionslint._templates()
@@ -162,6 +173,12 @@ class _Lint:
         # flags (the erosion targets — the promoted canon objects), all
         # validated before it.
         weatherlint._weather()
+        # res-1: the economy's flow-endpoint cross-checks — after every
+        # block lint and AFTER _entities validated the records (the
+        # worldgen lint's own late-phase law: the from/to reads walk
+        # entity records, so a malformed entities.json must hit
+        # _entities' clean PackError first, never a crash here).
+        economylint._economy_cross()
         # pack-ci (iter-117): the cross-block admission families run after
         # EVERY block lint — the teleology gate and the live-char crosswalk
         # read the emission inventory (actions, on_action, transitions,

@@ -8,6 +8,7 @@ import json
 from collections.abc import Mapping
 from typing import Any
 
+from core.economy import VERB_EVENT_TYPES
 from core.intent import REJECTION_EVENT
 from core.packlint.helpers import PackError, _require
 from core.resolvers import STATE_MUTATING
@@ -631,6 +632,16 @@ class AdmissionLint:
             for tier_key in ("macro_event", "condense_event"):
                 if isinstance(group.get(tier_key), str):
                     used.add(group[tier_key])
+        # the economy's flows (res-1): each declared flow's verb type is
+        # an emission site exactly as the macro turn's own — the flow
+        # events fire at the macro crossings (the verb constants are
+        # the account actions' events.success restatements too, already
+        # collected by the actions loop above)
+        economy = rules.get("economy")
+        if isinstance(economy, Mapping):
+            for flow in economy.get("flows", ()):
+                if isinstance(flow, Mapping) and flow.get("verb") in VERB_EVENT_TYPES:
+                    used.add(VERB_EVENT_TYPES[flow["verb"]])
         # the core-constant witnesses: the front door's rejection line is
         # mandatory everywhere (_templates); the decay line is owed iff
         # any states axis declares a drift rate (the decay pass emits it)

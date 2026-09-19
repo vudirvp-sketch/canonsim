@@ -13,6 +13,45 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-146 · 2026-09-19 · res1 — the owner's «продолжай работы по
+планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick from the plan's own recorded recommendation
+(STATUS Next step's readiness head after roads-1, CONTRACTS §2 the
+boundary)
+- verified BEFORE working at BASE_COMMIT 89cb177 (1763 passed +
+  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
+  1781 passed + 1 skipped (+18 in tests/test_economy.py), ruff
+  clean; the committed packs' corpora byte-untouched (the unarmed
+  landing — the T1s green both ends)
+- the substrate: `core/economy.py` — the account primitive
+  (`account.<kind>` props, `core/fold.py` seeding), the three verbs
+  (`account_sourced`/`account_transferred`/`account_consumed`),
+  `flow_drafts` (the aggregate flows at macro crossings, the `every`
+  divisor), `price_of` (base + per_unit × level, integer-only); the
+  floor: `account_at_least` soft at the door (`core/intent.py`), the
+  `is_account_prop` floor loud at the `_commit` gate (`core/loop.py`);
+  the discrete arm: the `account` resolver (`core/resolvers.py`,
+  STATE_MUTATING)
+- the lint: `core/packlint/economy.py` (early shape + late cross, the
+  KI#77 order law), the account-action block + the solvency-gate
+  requirement (`packlint/actions.py`), the entity `accounts` pairing
+  (`packlint/entities.py`), `lint_account_cond` (`packlint/shared.py`
+  at the four requires sites), the flow verb witnesses
+  (`packlint/admission.py`)
+- the §9 claim packet (the sandbox driver, Rule 9): F3 MEASURED (the
+  drained arm's 4-coin spend rejected at 2 coin, the fresh arm's
+  accepted at 10 — pc 2 vs 6), F4 CLEAN (grain 10 -> 13, non-verb
+  bytes identical, fingerprints equal), F1 the conservation oracle
+  exact; falsifiers NOT tripped (CONFIRMED at the measured band);
+  honest residues: no consumer yet (the gates + price_of armed but
+  unconsumed), the compound exchange NOT a substrate concern
+- docs: TASKS (the iter-146 section + the res-1 flip), DECISIONS
+  D-179, CONTRACTS §2 collapsed to a pointer, EVENT_SCHEMA §4 (the
+  account home), AGENT_NAVIGATION §1 (economy + the six touched
+  entries + the tests row), STATUS re-pin + Next step (since-1 the
+  new recommendation); this entry (iter-136 evicted per the cap,
+  verified in this edit; 10 held)
+
 iter-145 · 2026-09-19 · roads1 — the owner's «продолжай работы по
 планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick from the plan's own recorded recommendation
@@ -374,89 +413,3 @@ standing owner call, never the call itself)
   collapse) / phases 3634 / worklog 10 entries (iter-127 evicted
   here, verified in this edit) — the over-cap files ride the
   documented §6.1 substance precedent
-
-iter-136 · 2026-09-19 · world-2 L2 slice 4 (the calendar) — the
-owner's «продолжай работу по планам» call (the iter-135 precedent
-phrase's continuation; STATUS Next step's own readiness pick: slice 4
-the wave plan's remainder, the triangle's ratio dynamics gaining
-their seasonal cadence)
-- maclock-1's middle granularities LANDED (core/calendar.py +
-  time.calendar — L4's three tiers): the sub-year cadences (the
-  market days 14400 / the fairs 43200 / the seasons 129600 + the
-  four-phase cycle [thaw, high_water, long_light, first_frost],
-  each season's turn its own tale line) fired coarsest-first at
-  co-occurring ticks; the weather's seasonal layer (the ride +
-  the D-030 asymmetric weights: the rise storm-heavy from any
-  state, the long light unbiased — the calm rebuilds slow); the
-  crossings beyond every day-scale corpus horizon by construction
-  (the golden untouched, the corpus price zero)
-- the composed YEAR experiment (province_calendar.json, seed 42,
-  the F3 four read surfaces): 36 markets, 12 fairs, the four
-  seasons, the year's turn (151 — the chronicle binding), four
-  weather rolls (the rise draws STORM — the D-030 read measured),
-  the co-occurrence order pinned at day 90 (the rise → its roll →
-  the fair → the market), the twin byte-identical; ONE forced core
-  edit — KI#86 (the erosion's seed-time gate: the seasonal ride
-  at test scale exposed the latent unbounded queue feed — dead
-  entries chasing the crossings; `erosion_due` gates the seed on
-  the fold, the fire-time read unchanged)
-- THE T7 PLAYTEST READ (the year's chronicle, seed 42, 2284
-  events / 1274 tale lines): the runner comes to Malby and stays
-  the year — the tale reads as a town's almanac. The watch turns
-  twice a day (Osgar and Ferra handing the post, ~720 lines) and
-  the talk runs on the toll and the feud (~265 talk lines, the
-  weirkeeper's waybill checks the garrison-colored texture); the
-  calendar is the SPINE — the market opens on every tenth day
-  (36 times, each line carrying its day), the guild weighs the
-  month on every thirtieth (12 fairs), the river RISES on day 90
-  (the fords drown, the punt men charge double — the D-030 price
-  marker in the tale's own words, the sky turning to storm with
-  it), the long light greens the crofts at 180, the first frost
-  hardens the road at 270, and the year turns at 360 with the
-  thaw's meltwater as the market opens again exactly as it did on
-  day 10. SIGNAL VS NOISE: the calendar's ~52 lines are uniformly
-  readable, each landing exactly on its day, the day headers
-  segmenting the year cleanly; the noise floor at the year scale
-  is the watch/talk texture (~85% of the lines) — the tale gate's
-  day-scale tuning showing at the year scale, the tune row's own
-  question (honestly recorded, never this slice's edit); the
-  ambient weather stays canon-without-a-line (the committed form)
-- tests/test_calendar.py +16 (the arithmetic, the lints, the
-  unarmed both-arms byte-identity + the stream delta, the seasonal
-  ride + the forced-bias pins, the default ride, the resume door
-  across crossings, the corpus horizon, the committed year run);
-  PROVINCE_STOPLIST +2 (thaw, frost); the budget's second honest
-  re-declare (templates 52→58, ceiling 55→60); the brief's lore
-  the INFORMED half; 1754+1 green, ruff clean (16 files: 5 core +
-  2 pack + 3 tests + 6 docs). Caps: STATUS 670 / TASKS 1625 /
-  DECISIONS 80 (48 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse) / phases 3451 / worklog
-  10 entries (iter-126 evicted here, verified in this edit) — the
-  over-cap files ride the documented §6.1 substance precedent
-
-iter-118/119 precedent phrase; iter-134's F3 convergence consumed:
-the plans verified complete, slice 3 the readiness pick)
-- the factions ARMED 0→1 (depth-6's first committed arming, pack
-  data over the settlement cast): the river guild / the old
-  families / the half-pay garrison — fear at two thresholds (the
-  escalation ladder) + the new grievance axis (decay 0, the
-  wergeld law) at the deliberate deadband; the grief-wake
-  reaction (alarm witnesses → grievance +20, the numeric-home
-  filter); ONE verb MANY ROADS (market → the guild + Wilmot; keep
-  → the garrison + Garrick; both → the vigil — intake-19's
-  claim/legitimacy first consumer)
-- the deep feud history: the chronicle 5→9 events, the collection
-  vocabulary re-cut (feud roots = war+lineage, quarrel, exodus),
-  the wergeld claim joins the buffer-seeding hooks; the composed
-  outcome-divergence experiment run (seed 53, the four read
-  surfaces: +16 events / the first divergence + the chain / the
-  knowledge + crime-status deltas / the same-seed fork)
-- ONE forced core edit — KI#85 (the alarm spike's numeric-home
-  law, the ripple's discipline; the malby crowd first exercised
-  it — F3's predicted modularity sharpening); tests/test_triangle
-  +11, the KI#85 pin, the T1 re-pin, PROVINCE_STOPLIST +6, the
-  playscript province_feud.json; the golden 39→44, fingerprint 0;
-  1738+1 green, ruff clean (12 files: 4 pack + 4 tests/fixtures +
-  4 docs)
-
----

@@ -7,7 +7,9 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
+from core.economy import VERB_EVENT_TYPES
 from core.intent import (
+    ACCOUNT_TEST,
     ECHO_TEST,
     EDGE_TICKS,
     LEVERAGE_TEST,
@@ -15,8 +17,13 @@ from core.intent import (
     REJECTION_EVENT,
     TRAIT_TEST,
 )
-from core.packlint.helpers import _NOUNS, _SLOT, _SNAKE_CASE, PackError, _require
-from core.packlint.shared import knowledge_entry, lint_echo_cond, lint_trait_cond
+from core.packlint.helpers import _NOUNS, _SLOT, _SNAKE_CASE, PackError, _is_int, _require
+from core.packlint.shared import (
+    knowledge_entry,
+    lint_account_cond,
+    lint_echo_cond,
+    lint_trait_cond,
+)
 from core.resolvers import REGISTRY
 
 
@@ -63,6 +70,12 @@ class ActionsLint:
                 cond.get("test") in PRECONDITION_TESTS,
                 f"{where}: unknown precondition test {cond.get('test')!r}",
             )
+            if cond.get("test") == ECHO_TEST:
+                lint_echo_cond(self._data, cond, where)
+            if cond.get("test") == TRAIT_TEST:
+                lint_trait_cond(self._data, cond, where)
+            if cond.get("test") == ACCOUNT_TEST:
+                lint_account_cond(self._data, cond, where)
             for param in ("noun", "with", "who"):
                 if param in cond:
                     _require(
@@ -183,6 +196,11 @@ class ActionsLint:
                 # dead gate, refused at load (the echo axis family)
                 if cond.get("test") == TRAIT_TEST:
                     lint_trait_cond(self._data, cond, f"action {intent}")
+                # res-1 (the economy substrate): the account gate's kind
+                # must name a declared economy account — a kind outside
+                # the vocabulary is a dead gate (the echo axis family)
+                if cond.get("test") == ACCOUNT_TEST:
+                    lint_account_cond(self._data, cond, f"action {intent}")
                 # pack-2 (iter-29): the spot_available test's layer param
                 # must name a declared transition layer — a typo would
                 # KeyError mid-run (the KI#15 dead-data family, refused
@@ -265,6 +283,7 @@ class ActionsLint:
                 )
             self._status_effects(intent, action)
             self._balance(intent, action)
+            self._account_block(intent, action)
 
 
     def _balance(self, intent: str, action: Mapping[str, Any]) -> None:
@@ -307,6 +326,98 @@ class ActionsLint:
             _require(
                 isinstance(delta, int) and not isinstance(delta, bool) and delta != 0,
                 f"{where}: axis {axis!r} delta must be a non-zero integer",
+            )
+
+
+    def _account_block(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional account block (res-1, the economy substrate):
+        the action-declared verb/kind/amount the `account` resolver
+        executes — the player-scaled arm of the three verbs through the
+        canon door. The status_effects/balance precedent owns the shape
+        law: the block lives beside its action, only its resolver
+        consumes it. TWO cross-checks beyond the shape: the pack's
+        `events.success` must RESTATE the verb's engine constant (the
+        emitted type is the engine's — the build's naming pass; the
+        restatement is the load-time cross-check, and the template
+        closure above then covers the verb's line, the arming corpus
+        price), and a transfer/consume must declare the
+        `account_at_least` solvency gate on the actor for the same
+        kind with value >= amount (the underflow floor's soft arm, D3:
+        without the gate an insolvent attempt reaches the resolver and
+        crashes loud at the commit gate mid-run — the KI#15 family,
+        refuse at load what would crash at completion)."""
+        block = action.get("account")
+        if block is None:
+            return
+        where = f"action {intent!r} account"
+        _require(
+            action.get("resolver") == "account",
+            f"{where}: only the 'account' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(
+            isinstance(block, Mapping),
+            f"{where}: must be an object (verb | kind | amount)",
+        )
+        verb = block.get("verb")
+        _require(
+            verb in VERB_EVENT_TYPES,
+            f"{where}.verb {verb!r} is not in the closed vocabulary "
+            f"{sorted(VERB_EVENT_TYPES)}",
+        )
+        unknown = sorted(set(block) - {"verb", "kind", "amount"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "verb | kind | amount — a source mints to the actor and a "
+                "transfer lands on the intent target by construction)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        _require(
+            isinstance(vocabulary, list) and block.get("kind") in vocabulary,
+            f"{where}.kind {block.get('kind')!r} is not in the "
+            "economy.accounts vocabulary (the substrate moves only "
+            "declared stocks — the pairing law)",
+        )
+        _require(
+            _is_int(block.get("amount")) and block["amount"] >= 1,
+            f"{where}.amount must be an integer >= 1 (a zero amount is "
+            "dead data — the vacuity law)",
+        )
+        _require(
+            action.get("events", {}).get("success") == VERB_EVENT_TYPES[verb],
+            f"{where}: events.success must restate the {verb} verb's "
+            f"engine constant {VERB_EVENT_TYPES[verb]!r} (the emitted "
+            "type is the engine's, the naming pass; the restatement is "
+            "the cross-check and carries the template closure)",
+        )
+        if verb in ("transfer", "consume"):
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("noun") == "actor"
+                    and cond.get("kind") == block["kind"]
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{where}: the {verb} declares no account_at_least "
+                f"solvency gate on the actor for kind {block['kind']!r} — "
+                "an ungated spend would underflow at the commit gate "
+                "(author the precondition: the door rejects insolvent "
+                "attempts softly, attempts are facts)",
+            )
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= block["amount"],
+                f"{where}: the solvency gate's value must cover the "
+                f"amount (>= {block['amount']}) — a lower gate passes "
+                "insolvent attempts to the commit gate's loud refusal",
             )
 
 

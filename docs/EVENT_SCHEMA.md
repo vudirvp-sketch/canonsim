@@ -140,6 +140,31 @@ outranks the pack record; an unborn generated name renders as its
 dry id). The committed pack declares no profiles — unarmed (the
 68a pattern).
 
+The account home (res-1, iter-146 — the economy substrate,
+`docs/CONTRACTS.md` §2): an entity-declared `accounts` mapping seeds
+`account.<kind>` props (non-negative integers; the `status.`/
+`relations.` family's own seeding shape), and every level change
+rides a `state_changes` entry of ONE of the three verb event types —
+`account_sourced` (declared units enter; actor `world` on the
+aggregate flow path, the acting player on the discrete path),
+`account_transferred` (units move between two accounts; two changes,
+one loss + one gain of the same declared amount),
+`account_consumed` (units leave to a declared sink; one loss). The
+verbs are the ONLY write path (the conservation oracle's law: no
+other event type ever touches an account prop); the flows fire at
+macro crossings — one event per due flow, the D-112 cardinality
+outcome `{flow, kind, amount}`; the levels never carry the
+`irreversible` flag (the irreversibility split: event immutability ≠
+stock immutability — a stock regrowing via a new source event is an
+ordinary event, never a "revert"); the decay pass never touches
+them; and no code path ever writes a negative stock (the `_commit`
+gate's floor — a player-scaled underflow dies soft at the door as
+`intent_rejected`, an aggregate flow underflow fails loud before the
+write). Prices are derived read-side values (`base + per_unit ×
+level` over pack-declared integer weights — never stored, never an
+event). The committed packs declare no economy block — unarmed (the
+68a pattern; the first consumer pack pays the template lines).
+
 ## 5. `hooks`
 
 Tags seeded at event time and consumed by the director's buffer. Each hook

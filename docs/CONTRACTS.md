@@ -27,112 +27,18 @@
 > The contract's own pinned decisions, verbatim, in git history at
 > the iter-144 commit.
 
-## 2. res-1 — the substrate contract (the resource/economy layer)
+## 2. res-1 — LANDED (iter-146, D-179)
 
-Row: `docs/TASKS.md` `res-1` (the closed scarcity cycle). Starting
-material: the intake-29 sharpening (D-175 (1)) — the mechanism split,
-the irreversibility split, the verification form.
-
-### 2.1 The pinned decisions
-
-**D1 — the MECHANISM SPLIT (PACK_SPEC §1's WHAT/HOW test): the
-quantity substrate is a new WHAT in core, NAMED.** The audit's fact
-pattern holds: no quantity primitive exists (the resolver registry
-`core/resolvers.py::REGISTRY` is a closed mechanic vocabulary; items
-are discrete `{position, carrier}` records; statuses are per-NPC
-decay axes; the population cardinality is a derived unborn-count; the
-macro surface emits aggregate outcomes, never declarative stock
-deltas) — a pack-only implementation would grow the hidden mechanism
-the row itself forbids ("never a second economy engine"). The
-substrate's minimal domain-blind shape:
-
-- **account** — a named non-negative INTEGER stock bound to a canon
-  entity id (any kind the pack declares it on: npc, location, group
-  — the owner-agnostic form); the account KIND is pack-declared
-  vocabulary (the `states` axes' own law: pack names, engine
-  mechanics); the level rides `state_changes` (the existing channel —
-  `{entity, prop, from, to}` with integer from/to, the position
-  family's own shape).
-- **three event verbs through the canon door** — source (declared
-  units enter an account), transfer (units move between two
-  accounts), consume (units leave to a declared sink); the exact type
-  names are the build's naming pass, INV-3-clean by the stoplist
-  self-check (account/source/transfer/consume are mechanic words).
-- **integer-only arithmetic** (the travel law): add/multiply only, no
-  division anywhere in the substrate; prices are DERIVED read-side
-  values (pure functions of pack formulas + stock reads, L3 — never
-  stored, never an event).
-- **flows as aggregate macro-events** on the maclock cadence ride the
-  D-112 one-event-with-cardinality surface (`core/macro.py::
-  macro_turn_draft` the precedent) — log growth O(declared flows ×
-  macrobeats), never O(members × ticks).
-- **the economy stays PACK DATA** (the row's own law): the resource
-  graph — which accounts exist, source/sink declarations, flow
-  amounts and cadences, thresholds, price formulas, faction coupling
-  — lives in a new rules block; the lint grows its shape checks (the
-  pack.py-split rider rule rides whichever pack.py-growing row starts
-  first — roads-1 is the readiness head).
-
-**D2 — the IRREVERSIBILITY SPLIT: event immutability ≠ stock
-immutability.** A consume event never un-fires (INV-5's log law); a
-stock's LEVEL is an ordinary mutable value — `7 → 12` by a source
-event is a legal new event, never a "revert". The `irreversible`
-state_change flag (EVENT_SCHEMA: "never reverts without an explicit
-counter-event" — the decay family's spontaneous-reversion law) is
-NEVER set on stock props: the wrong instrument. A stock prop is not
-a decay axis either — the decay pass never touches account props.
-
-**D3 — the underflow floor: refused, never a negative write.** A
-transfer/consume that would drive an account below zero is
-world-impossible: a player-scaled attempt dies soft at the front door
-(`intent_rejected` — attempts are facts, the loud/soft line); an
-aggregate flow that would underflow fails LOUD at the commit gate
-(D-035 — the write never lands). No code path ever writes a negative
-stock.
-
-**D4 — the arming law (the 68a pattern): the substrate lands
-UNARMED.** No committed pack declares the economy block at landing →
-zero events, the golden T1 fixtures and the corpora byte-untouched;
-the first consumer pack (the pack-1/pack-4 family or world-2's own
-row — the ORDER owner's call) arms it and pays its own corpus price.
-
-### 2.2 The invariant set
-
-- I1 all stock changes through the canon door: the three verbs are
-  the ONLY write path (INV-1; the log writer's privilege separation,
-  D-031); every level change rides a `state_changes` entry.
-- I2 CONSERVATION: every account's folded balance == Σ sources −
-  Σ consumes ± net transfers; nothing appears or disappears outside
-  declared sources/sinks (the oracle below is its test form).
-- I3 the non-negative floor (D3).
-- I4 integer-only, prices derived (D1).
-- I5 the decay separation (D2): account props never appear in the
-  decay pass's axis set.
-- I6 the unarmed landing (D4): zero events on the committed packs.
-
-### 2.3 The falsifier + the minimal test set (TEST_PLAN §9, build-time)
-
-The row's "four proofs" = §9's rows instantiated. **F1 conservation
-oracle** — computed by INDEPENDENT re-derivation (a test-side ledger
-replay over the raw event list, never the runtime's own fold — §9's
-oracle law). **F2 the no-negative floor** — every account ≥ 0 at
-every fold point; both refusal arms pinned. **F3 the
-player-decision-effect arm** — the priced-option question (intake-27)
-the counting form: remove the player's spend/consume options (a
-`--systems-minus`-style arm) → the world's answers measurably differ.
-**F4 the one-knob ablation** — one declared source/sink/flow knob
-perturbed → the expected surface moves and no unrelated run perturbed
-(the same-seed fork the follow-up).
-
-The tests: (1) the conservation oracle over a fixture pack's economy
-log (aggregate and discrete events both); (2) the underflow refusals
-— the soft door (`intent_rejected`, no state write) and the loud
-gate (the aggregate case); (3) the decay separation (a long-horizon
-run's stock unchanged without economic events); (4) integer
-determinism + the unarmed law: the committed packs' corpora
-byte-identical at landing; (5) INV-3: the stoplist self-check over
-the new names; (6) price derivation purity: same inputs → same
-derived price bytes, never stored, never logged.
+> The build's spec absorbed this contract by reference (never
+> restated, D-024): `docs/TASKS.md` iter-146 + D-179 + worklog
+> iter-146 own the landing record — the substrate
+> (`core/economy.py`: the account primitive, the three verbs, the
+> flows on the macro cadence, the derived prices), the door's soft
+> arm (`account_at_least`), the resolver (`account`), the commit
+> gate's loud floor, the lint (`core/packlint/economy.py` + the
+> actions/entities cross-checks), the §9 claim-packet evidence. The
+> contract's own pinned decisions, verbatim, in git history at the
+> iter-144 commit.
 
 ## 3. since-1 — the baseline contract (the re-encounter delta)
 
