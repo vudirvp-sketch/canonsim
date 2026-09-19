@@ -26,6 +26,37 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-144 · contracts — the three pre-implementation contract writes — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (intake-29/D-175's
+order: ci-1 → the three contract writes → the build rows; ci-1
+consumed iter-143): `docs/CONTRACTS.md` — roads-1 / res-1 / since-1
+turned from row wordings into compact pre-implementation contracts
+(pinned decisions, invariant sets, §9 claim-packet falsifiers,
+minimal test sets — the audit's own closing proposal, the intake-29
+sharpenings the starting material). The headline pins: roads-1 —
+the node question ANSWERED (claimed locations only — every named
+consumer reads location-to-location edges and the derived price
+requires claimed endpoints, D-122), the algorithm NAMED (MST
+backbone + pack-declared k-nearest overlay, the D-174 fence's three
+questions answered inline, the one-knob ablation the overlay's
+kill arm); res-1 — the mechanism split's substrate shape (the
+account primitive: non-negative integer stocks on canon entities,
+three verbs through the canon door, prices derived L3) + the
+irreversibility split + the underflow floor + the unarmed landing;
+since-1 — the baseline sense NAMED (last physical co-presence, the
+per-entity encounter epoch; the other four senses rejected with
+cause) + the scene_delta surface separation + the blind-NPC
+inheritance. Doc-only, zero code, zero corpus price (the suite
+green at BASE_COMMIT 7e6c83f before working and re-verified after:
+1754 passed + 1 skipped, ruff clean). The doc-loop alarm answered:
+the D-022 fresh-owner-request exception (this session's delegation)
++ the recorded recommendation consumed; the next step in the
+sequence is BUILD work (roads-1 the readiness head), not more docs.
+Detail: D-177 + worklog iter-144 + `docs/CONTRACTS.md`.
+
 ### iter-143 · ci-1 — the GitHub Actions runner LANDED — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -1220,6 +1251,12 @@ D-105..D-133 family row + phases.md §5)
   no-negative-stock floor, the player-decision-effect arm, the
   one-knob ablation — the priced-option question (intake-27) the
   counting form.**
+  **The pre-implementation contract WRITTEN (iter-144, D-177):
+  `docs/CONTRACTS.md` §2 — the substrate shape (the account
+  primitive + the three verbs + integer-only arithmetic + prices
+  derived L3), the irreversibility split, the underflow floor,
+  the unarmed landing, the invariant set, the four-proof claim
+  packet, the minimal test set.**
 - `roads-1` · the generated-exits pass — todo, owner-gated (phase
   6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
   a generated world's edges is impossible); an MST/k-nearest graph over
@@ -1258,6 +1295,12 @@ D-105..D-133 family row + phases.md §5)
   differences MEASURED (the warm ring is this row's own named
   consumer — the topology must show in WHO simulates, not only in
   route existence; rides TEST_PLAN §9).**
+  **The pre-implementation contract WRITTEN (iter-144, D-177):
+  `docs/CONTRACTS.md` §1 — the node question pinned (claimed
+  locations only), the algorithm named (MST backbone +
+  pack-declared k-nearest overlay, the D-174 fence's three
+  questions answered, the one-knob kill arm), the invariant set,
+  the §9 claim packet, the minimal test set.**
 - `pack-ci` · the admission-lint rungs — **done (iter-117, D-152)**:
   the teleology gate + the live-char crosswalk + the price-marker lint
   LIVE in `core/pack.py` (PACK_SPEC §5/§6 the single reading owner);
@@ -1281,6 +1324,12 @@ D-105..D-133 family row + phases.md §5)
   (BRIEF_SPEC §3.2), since-1 = "what changed in this entity since we
   last met" — different blocks, never merged; the blind-NPC laws
   (TEST_PLAN §1.3) inherit to the new lines.**
+  **The pre-implementation contract WRITTEN (iter-144, D-177):
+  `docs/CONTRACTS.md` §3 — the baseline sense named (last
+  physical co-presence, the per-entity encounter epoch; the
+  other four senses rejected with cause), the scene_delta
+  surface separation, the blind-NPC inheritance, the invariant
+  set, the claim packet, the minimal test set.**
 
 > Opening-day questions — ANSWERED iter-109 (D-146, the owner's
 > chat call): (1) the GUT-CHECK verdict is **NO CUTS** — every

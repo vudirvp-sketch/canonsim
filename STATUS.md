@@ -1,3 +1,48 @@
+Iteration: iter-144 (`iter-144-contracts` — the three
+pre-implementation contract writes; the owner's «продолжай работы
+по планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call — the pick NOT invented: the plan's own recorded
+next recommendation taken (intake-29/D-175's order ci-1 → the
+three contract writes → the build rows; ci-1 consumed iter-143)):
+`docs/CONTRACTS.md` — roads-1 / res-1 / since-1 turned from row
+wordings into compact pre-implementation contracts (pinned
+decisions, invariant sets, TEST_PLAN §9 claim-packet falsifiers,
+minimal test sets — the audit's own closing proposal, the
+intake-29 sharpenings the starting material). The headline pins:
+roads-1's NODE question ANSWERED (claimed locations only — every
+named consumer reads location-to-location edges, the derived
+travel price requires claimed endpoints, D-122) + the ALGORITHM
+NAMED (MST backbone + pack-declared k-nearest overlay, the D-174
+fence's three questions answered inline, the one-knob ablation the
+overlay's kill arm, k=0 legal); res-1's substrate SHAPE (the
+account primitive — non-negative integer stocks on canon entities,
+source/transfer/consume through the canon door, integer-only,
+prices derived L3) + the irreversibility split + the underflow
+floor + the unarmed landing (the 68a pattern); since-1's baseline
+SENSE NAMED (last physical co-presence, the per-entity encounter
+epoch; the other four senses rejected with cause) + the
+scene_delta surface separation + the blind-NPC inheritance. A
+contract is NOT the row's spec — the spec still fires just-in-time
+at the row's start (SPECS_BACKLOG's law); the contract is the
+pre-implementation boundary. Doc-only, zero code, zero corpus
+price. The doc-loop alarm answered (the D-022 fresh-owner-request
+exception; the sequence's next step is BUILD work — roads-1 the
+readiness head — not more docs) ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at BASE_COMMIT 7e6c83f and re-verified
+after; doc-only, the corpora byte-untouched) ·
+Date: 2026-09-19 ·
+Scope: `docs/CONTRACTS.md` (new), `docs/TASKS.md` (the iter-144
+section + the three row pointers), `docs/DECISIONS.md` (D-177),
+`STATUS.md` (this re-pin + the Next step), `worklog.md` (this
+entry; iter-134 evicted per the cap), `docs/AGENT_NAVIGATION.md`
+(§1 the CONTRACTS.md row) — 6 files.
+The prior iteration's record: iter-143 (ci-1). The
+detail lives in TASKS + worklog + git.
+
 Iteration: iter-143 (`iter-143-ci1` — the GitHub Actions runner
 landed; the owner's «продолжай работы по планам, решай сам что
 сейчас логичнее начать/открыть и прочее» delegation call — the pick
@@ -51,90 +96,6 @@ step), `worklog.md` (this entry; iter-133 evicted per the cap) —
 The prior iteration's record: iter-142 (intake-29). The
 detail lives in TASKS + worklog + git.
 
-Iteration: iter-142 (`iter-142-intake29` — the external-audit /
-roadmap-review output routed; the owner's «проанализируй текст
-далее и его предложения, если согласен => нужно будет заложить
-в планы работу и соответственно пересмотреть оный или типа
-того. по пунктам разбери что надо что не надо и почему»
-research call over the uploaded audit text — itself a prior
-session's output over `main` 8f4fbd4e, DNS-less (its own
-caveat: a deep static audit, no pytest run); the D-163
-clone-less-session precedent, re-verified this round at a REAL
-clone one commit ahead at aa1097f [the delta: iter-141's
-doc-only intake-28 — no audited surface moved] AND with the
-live suite the audit could not run: **1754 passed + 1 skipped,
-ruff clean** (Python 3.12.14, the env pin; verified BEFORE
-working and re-verified after; doc-only, the corpora
-byte-untouched)): **the audit CONFIRMED on the facts (every
-load-bearing repo-facing claim verified — the sizes, the `_Lint`
-structure, the missing CI, the unprotected branch, the row
-wordings, the sites-vs-locations split, the undefined
-co-presence baseline; two framings corrected, none fatal), the
-foundation SUPPORTED (no reopening of INV-1..5, event sourcing,
-the RNG bank, pack/core split, LOD, canon/voice, JIT-specs, the
-closed phases, world-2), and SIX contract sharpenings ADOPTED
-into the rows (the queue's composition changed; its order never
-— D-113)**: (1) res-1 — the mechanism split (a minimal
-domain-blind account/transfer/consume primitive = a new WHAT in
-core, NAMED — integer-only, through the canon door, INV-3-clean;
-the economy stays pack data; a pack-only reading would grow the
-hidden mechanism the row itself forbids) + the irreversibility
-split (event immutability ≠ stock immutability; a stock regrows
-via new source events, never a "revert"; the `irreversible`
-flag the wrong instrument for stock props) + §9's claim packet
-the verification form (the conservation oracle, the
-no-negative floor, the decision-effect arm, the one-knob
-ablation); (2) roads-1 — the topology contract owed first (the
-NODE question pinned — all sites vs claimed/settlement nodes;
-the bare "MST/k-nearest" RETIRED; the invariant set: connected
-/ no self-loop / symmetric / bounded degree / deterministic
-tie-breaking + edge order / pathological-edge bound / cycle
-policy; the behavioral falsifier: same world, different
-topology → the expected LOD/autonomy differences measured — the
-warm ring the row's own named consumer); (3) since-1 — the
-encounter baseline owed first ("the last co-presence tick" has
-no standing formal definition; the per-entity encounter epoch
-the leading candidate — read-side, zero canon writes; the
-scene_delta surface separation explicit); (4) companion-1 — the
-no-teleport law (INV-1's consequence made explicit; lag legal;
-a follow cadence a measured mechanic, never implicit sync); (5)
-pack-1 — the consent split (the canonical event outcome vs the
-crafted belief records + the mutually-exclusive lint); (6) ci-1 —
-the session's RECOMMENDATION as the first owner pick (main
-unprotected, checks off, verified live; the runner the cheapest
-risk reduction on the board; the pick stays the owner's —
-AGENTS §8). Two rider rules adopted: the pack.py split rides
-the FIRST pack.py-growing row (never a standalone refactor —
-"split the implementation of the ownership, never the
-ownership"; `load_pack` stays the single admission gate) and the
-INTAKE ADMISSION rule (a new external intake convenes only with
-a named open build row/standing debate it feeds + a potential
-falsifier stated up front; the owner's explicit fresh question
-always overrides, recorded as such). REFUSED with cause: the
-"internal contradiction" framing for res-1 (the row is SILENT
-on the mechanism's location — pack-1/3/4 say "zero core change
-by design", res-1 does not; the action identical either way);
-the front-loaded presentation-1 stabilization (already owned
-piece by piece: truncation markers, the canon/control split,
-the call budget, the failure semantics, the parser contract —
-and the "versioned brief envelope" contradicts BRIEF_SPEC §8's
-derived-read-side discipline + §9's JIT law); any M3/T8 law
-change (owned since iter-138 — §9 the standing depth form);
-the standalone pack.py refactor now (L13 / AGENTS §2.4). ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD aa1097f and re-verified after;
-doc-only, the corpora byte-untouched) ·
-Date: 2026-09-19 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-29 block),
-`docs/DECISIONS.md` (D-175), `docs/TASKS.md` (the six row
-sharpenings + the iter-142 section), `STATUS.md` (this re-pin +
-the Next step), `worklog.md` (this entry; iter-132 evicted per
-the cap) — 5 files.
-The prior iteration's record: iter-141 (intake-28). The
-detail lives in TASKS + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -608,31 +569,30 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-143 DONE: ci-1 LANDED — the GitHub Actions runner armed
-(`.github/workflows/ci.yml`: pytest + ruff on push to `main`,
-PYTHONHASHSEED=0, Python 3.12.14 the env pin; the runner path
-sandbox-simulated 1754+1 / ruff clean; the first LIVE run fires
-on the owner's push of this iteration; branch protection the
-owner's settings step — the recipe in the iter-143 stop-point
-report; D-176). iter-142: intake-29 routed (six contract
-sharpenings, two rider rules, D-175); iter-141: intake-28 (the
-combination fence, D-174); iter-139: world-2 L2 the verdict
-DELIVERED (D-172) — the two-level gate COMPLETE.**
+**iter-144 DONE: the three pre-implementation contract writes
+LANDED (`docs/CONTRACTS.md` — roads-1's node question answered +
+algorithm named; res-1's substrate shape + the irreversibility
+split + the underflow floor; since-1's baseline sense named + the
+surface separation; D-177). iter-143: ci-1 LANDED (the GitHub
+Actions runner armed; the first LIVE run fires on the owner's
+push; branch protection the owner's settings step — the recipe in
+the iter-143 stop-point report; D-176). iter-142: intake-29
+routed (D-175); iter-139: world-2 L2 the verdict DELIVERED
+(D-172) — the two-level gate COMPLETE.**
 
 1. **The owner-gated backlog (the standing rows — the
-   sharpened contracts now ride the rows; the ORDER owner
-   decides, TASKS owns composition, never order; the next
-   build row's verification plan rides TEST_PLAN §9's claim
-   packet — intake-26's standing measurement):** with ci-1
-   landed, the session's RECOMMENDED next call (intake-29,
-   never the pick) is the three CONTRACT WRITES —
-   `roads-1` / `res-1` / `since-1` turned from row wordings
-   into compact
-   pre-implementation contracts with invariants, falsifiers
-   and the minimal test set (the intake-29 sharpenings their
-   starting material; the audit's own closing proposal),
-   then the build rows in the standing readiness order
-   (`roads-1` the readiness head), the pack consumers
+   contracts now written, the builds start from a pinned
+   boundary; the ORDER owner
+   decides, TASKS owns composition, never order; each build
+   row's verification plan rides TEST_PLAN §9's claim
+   packet — intake-26's standing measurement):** with the
+   three contract writes landed, the session's RECOMMENDED
+   next call (intake-29's order, never the pick) is the BUILD
+   ROWS in the standing readiness order — `roads-1` the
+   readiness head (its contract `docs/CONTRACTS.md` §1; the
+   pack.py-split rider rule rides its build if it starts
+   first), then `res-1` (§2), then `since-1` (§3), the pack
+   consumers
    (`pack-1` the natural depth companion, `pack-4`) as the
    primitives' universality proofs when the slots open,
    `engine-1` (+ `presentation-1`, its decision-input child —
@@ -676,9 +636,10 @@ DELIVERED (D-172) — the two-level gate COMPLETE.**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (the three contract
-   writes → the build rows) or a fresh call (this round's
+   recommended remainder of the sequence (the build rows —
+   roads-1 the readiness head) or a fresh call (this round's
    delegation — «продолжай работы по планам, решай сам» —
-   consumed by ci-1, D-176). After the push: verify the first
+   consumed by the contract writes, D-177). After the push:
+   verify the first
    live CI run green on `main`, then apply the branch-protection
    recipe (the iter-143 stop-point report).

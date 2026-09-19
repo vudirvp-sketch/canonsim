@@ -13,6 +13,46 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-144 · 2026-09-19 · contracts — the owner's «продолжай работы
+по планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick from the plan's own recorded next
+recommendation (D-175's order: ci-1 → the three contract writes →
+the build rows; ci-1 consumed iter-143)
+- verified BEFORE working at BASE_COMMIT 7e6c83f (1754 passed +
+  1 skipped, ruff clean, Python 3.12.14 the env pin) and
+  re-verified after — doc-only, the corpora byte-untouched
+- `docs/CONTRACTS.md` (new): roads-1 — the node question pinned
+  (claimed locations only, the consumer grounding: the warm ring,
+  the move door, travel's derived price needs claimed endpoints
+  D-122; node geometry = the claimed site set, the shared
+  min-cross-pair metric), the algorithm named (MST backbone +
+  pack-declared k-nearest overlay, the D-174 fence's three
+  questions answered inline, the one-knob kill arm, k=0 legal),
+  the invariant set I1–I6 (the max_edge_span conflict rule: the
+  loud WorldgenError, connectivity never bought by breaking the
+  span); res-1 — the substrate shape (the account primitive,
+  three verbs through the canon door, integer-only, prices
+  derived L3, flows on the D-112 aggregate surface), the
+  irreversibility split, the underflow floor (soft door / loud
+  gate), the unarmed landing; since-1 — the baseline sense named
+  (last physical co-presence, the per-entity encounter epoch, the
+  four other senses rejected with cause), the scene_delta
+  separation, the blind-NPC inheritance, the pack-owned line
+  vocabulary; every contract: the §9 claim packet + the minimal
+  test set; the form's law in the header (a contract is NOT the
+  spec — SPECS_BACKLOG's JIT law untouched)
+- docs: TASKS (the iter-144 section + the three row pointers),
+  DECISIONS D-177, STATUS re-pin + Next step (the recommendation
+  now the build rows, roads-1 the readiness head),
+  AGENT_NAVIGATION §1 the CONTRACTS.md row; this entry (iter-134
+  evicted per the cap, verified in this edit; 10 held)
+- the doc-loop alarm answered: the D-022 fresh-owner-request
+  exception + the sequence's next step is BUILD work; caps after:
+  STATUS 645 / TASKS 1998 / DECISIONS 90 lines (56 rows — over the
+  30 cap on the §6.1 substance precedent, the standing post-ladder
+  record) / CONTRACTS 340 — the over-cap files ride the documented
+  §6.1 substance precedent (STATUS down from 684: the iter-142
+  record retired per the two-record pattern)
 iter-143 · 2026-09-19 · ci1 — the owner's «продолжай работы по
 планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick taken from the plan's own recorded first
@@ -368,49 +408,4 @@ the plans verified complete, slice 3 the readiness pick)
   1738+1 green, ruff clean (12 files: 4 pack + 4 tests/fixtures +
   4 docs)
 
-iter-134 · 2026-09-19 · cumulative1 — the owner's «согласно
-CUMULATIVE_RESEARCH_v2 (1).md работай» call over the uploaded
-second-stage cumulative method file: the intake corpus (4..25,
-the D-155..D-166 family) taken as ONE body of evidence — the
-closure form the method's own trigger condition awaited (5 files
-doc-only, zero code, zero corpus price)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD
-  ed23c52, Python 3.12.14 the env pin); the corpus re-read via
-  the gradient (phases.md §6's intake blocks 14..25 + the D-rows
-  + STATUS/TASKS); ONE fresh read-only measurement, the ARMING
-  CENSUS over the three committed packs (the public API + the
-  pack files): factions depth-6 0 committed consumers (DORMANT,
-  intake-23's claim now measured), names/cultures/spines/groups+
-  condensation 1 (the province-only family, intake-20's
-  LANDED-BUT-UNDER-TESTED list confirmed whole), travel 2,
-  weather + the nine core families 3 (promoted)
-- the five cumulative findings: F1 composition-limited frontier
-  (never implementation-limited), F2 corpus saturation (intakes
-  11..25, 15 documents + 2 re-entries, the last 14 iterations
-  all owner-called doc-only routing, every one zero build-grade;
-  the marginal research value now lives in the open rows' own
-  evaluation disciplines), F3 the convergence — world-2 L2
-  slice 3 the highest-leverage proof (six intakes' residues the
-  consumers; the composed experiment one two-arm run, four read
-  surfaces; the zero-consumer factions arming; a live probe of
-  the minimal-system-contract hypothesis), F4 the promotion
-  ladder (same-pack arming ≠ cross-context promotion; the pack
-  slots the promotion events), F5 the SoW fence holds
-- cross-pollination: intake-21's four-question card = slice-3's
-  experiment design review; intake-24's principle index card =
-  slice-3's authoring checklist; refused at the door: fresh
-  research capacity pre-slice-3, a factions spike, a
-  capability-truth-table document, res-1 pre-work, any queue
-  reorder; verdict CONFIRMED, disposition NO ACTION — slice 3's
-  standing implementation-readiness CONFIRMED and sharpened, the
-  owner's row pick the gate
-- docs: phases.md §6 the cumulative block (the census table +
-  the five findings), DECISIONS D-167, TASKS the iter-134
-  section, STATUS re-pin + Next step, this entry (iter-124
-  evicted here, verified against git in this edit; 10 held);
-  1726+1 green, ruff clean after. Caps: STATUS 661 / TASKS 1497 /
-  DECISIONS 78 lines (46 rows — over the 30 cap on the §6.1
-  substance precedent until the next gate collapse) / phases 3316
-  — the over-cap files ride the documented §6.1 substance
-  precedent, trim at the next gate collapse
 ---

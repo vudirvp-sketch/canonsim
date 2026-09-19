@@ -18,6 +18,7 @@
 | `docs/INTENT_SCHEMA.md` | intent contract (the proposal side of the door; trigger-gated, written iter-2) | active |
 | `docs/ROADMAP.md` | phases, gates, tracks, donors | active |
 | `docs/TASKS.md` | backlog + iteration statuses (done iterations collapse to one-liners per the header law; the phase-6-era ledger the iter-140 precedent) | active |
+| `docs/CONTRACTS.md` | the pre-implementation contracts for the owner-gated build rows (roads-1/res-1/since-1 written iter-144, D-177: pinned decisions, invariant sets, §9 claim-packet falsifiers, minimal test sets; a contract is the pre-implementation boundary, never the row's spec — the spec still fires just-in-time per SPECS_BACKLOG; sections collapse to pointers when their rows' builds land) | active |
 | `docs/TEST_PLAN.md` | phase-0 verification stack: T0–T8 + M1–M5 + gate protocol + UAP crosswalk + the schema-bump migration procedure (the iter-6 trigger-fired spec); §8 the testproto LLM-integration protocol (iter-68, D-098) + §8.5 the heartbeat ledger + §9 the claim → instrument selection grammar (intake-26, iter-138, D-171 — research-derived, a routing aid, never a gate) | active (bg-8) |
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions (≤30 compound-ID family rows; collapses fire on the owner's explicit call — D-034/D-173) | append-only |
