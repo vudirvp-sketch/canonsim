@@ -13,6 +13,53 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-148 · 2026-09-19 · grim1 — the owner's «продолжай работы по
+планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick from the plan's own recorded recommendation
+(STATUS Next step's readiness head: the pack consumers, pack-1 the
+natural depth companion)
+- verified BEFORE working at BASE_COMMIT 156ec8f (1811 passed +
+  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
+  1826 passed + 1 skipped (+14 in tests/test_grim_pack.py, +1 the
+  grim stoplist self-check), ruff clean; the three older packs'
+  corpora byte-untouched (the economy unarmed law's
+  first-consumer amendment the only test-side touch)
+- the pack: `content/grim_pack/` (the FOURTH committed pack) — the
+  dark axes (attraction/intimacy/loyalty flat pc-ward + shame/anger
+  status, both feeding the social modifiers), the flirt→proposition
+  ladder (the contested delivery; the UNCONTESTED ask whose answer
+  is the world's on_action reaction on her attraction home — never
+  a roll), the consent split structural (the canonical event vs the
+  crafted belief record), the coerced branch (the pack's ONE spend
+  door — generic coerce dropped, the single-spend_event law), the
+  read_ticket hinge (the pawn ticket mints the reader's leverage —
+  the player's dark choice), the jealousy both gated arms, the
+  stain, the shame, the two deferred hooks, the drunk's urgency
+  re-pointed at the pc
+- the lint: `core/packlint/admission.py::_fact_belief_split` (+92;
+  the orchestrator call +5 in core/pack.py) — the event-type
+  vocabulary ∩ the knowledge-token vocabulary (literals + templated
+  fills over the entity ids) = ∅, D-175 (5)'s consent split as the
+  generic law; the collision twin refused loudly, all four packs
+  green
+- the armings: res-1's first consumer (coin accounts pc 6 + till
+  30, buy_round's transfer + the solvency soft arm, the two macro
+  flows, the identity price formula measured) + since-1's first
+  (the since_lines vocabulary + the dark card markers)
+- the §9 claim packet (the driver outside the repo): universality
+  CONFIRMED (the engine diff is the lint only); the smoke corpus
+  (seed 42, the golden fixture, fingerprint 8) tells the full dark
+  arc — the ask at 58 refused (two points short), the stain, the
+  ticket, the coerced fact (trust 25/fear 75 from neutral), the
+  shame; the one-knob arm pinned (attraction 70 → consent_given);
+  the coin oracle exact; the twin byte-identical; falsifiers not
+  tripped — CONFIRMED at the measured band
+- docs: TASKS (the iter-148 section + the pack-1 flip), DECISIONS
+  D-181, PACK_SPEC §5 (the split's lint row), AGENT_NAVIGATION §1
+  (the fourth pack + the fixture + the playscript), STATUS re-pin +
+  Next step (pack-4 the new recommendation); this entry (iter-138
+  evicted per the cap, verified in this edit; 10 held)
+
 iter-147 · 2026-09-19 · since1 — the owner's «продолжай работы по
 планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick from the plan's own recorded recommendation
@@ -371,46 +418,3 @@ adoption pass; doc-only, zero code, zero corpus price)
   evicted here, verified in this edit) — the over-cap files ride
   the documented §6.1 substance precedent
 
-iter-138 · 2026-09-19 · intake26 — the owner's «перед этим
-вероятно стоит рассмотреть дополнительно идеи с файла
-VERIFICATION_LENSES_RESEARCH.md» call (the world-2-verdict session's
-first half; doc-only, zero code, zero corpus price — the D-155..D-170
-intake precedent, the research file external per the convenience-copy
-law)
-- verified BEFORE working (1754+1 green, ruff clean, HEAD 8dc5436,
-  Python 3.12.14 the env pin); the document's FACT rows content-matched
-  at HEAD (TEST_PLAN's separation; mechanics.py matrix/trace/why/blast;
-  metrics.py M1–M5 + the four families; the five named test files;
-  intake-21's card; intake-24's six principles; the res-1 offline
-  one-knob spike's record) — zero factual drift; the doc's own verdict
-  PARTIALLY CONFIRMED verified: the mechanisms all owned, the gap the
-  compact selection grammar (iter-137's from-scratch re-derivation the
-  confirming instance)
-- ADOPTED (the long-term quality call): TEST_PLAN §9 — the claim
-  packet (oracle + falsifier mandatory; the disposition vocabulary the
-  repo family, never a numeric score) + the claim-shape → instrument
-  selection table (self-describing names, standing instruments only) +
-  the independent-re-derivation oracle law + the order-probe contract
-  law; research-derived, a routing aid, never a gate; the full
-  ten-lens/nine-prism catalog held in the intake-26 block (the
-  one-pass record, D-024); the stale-at-HEAD corrections recorded (the
-  door battery = the next-decision census iter-137; the
-  first-divergence read consumed iter-135; the A–H ledger the packet's
-  standing instance)
-- refused at the door: the lens/prism names as law (label-matching,
-  the intake-24 precedent), any executable helper / registry / score /
-  runtime form (the doc's §10 reject list = standing law),
-  REFERENCES.md as the surface (the external-source catalog); the
-  measurement obligation standing: the next owner-gated build row's
-  verification plan = ONE claim packet (≤3 lenses, ≤2 prisms); KI#85
-  deleted per AGENTS §5 (closed iter-135, past the window)
-- docs: phases.md §6 the intake-26 block, TEST_PLAN §9,
-  AGENT_NAVIGATION §1, DECISIONS D-171, TASKS the iter-138 section,
-  STATUS re-pin (iter-136's record evicted per the two-record
-  convention), this entry (iter-128 evicted, verified in this edit);
-  1754+1 green, ruff clean after; doc-only, the corpora byte-untouched
-- Caps: STATUS 652 / TASKS 1726 / DECISIONS 83 lines (50 rows — over
-  the 30 cap on the §6.1 substance precedent until the next gate
-  collapse) / phases 3752 / TEST_PLAN 837 / worklog 10 entries
-  (iter-128 evicted here, verified in this edit) — the over-cap files
-  ride the documented §6.1 substance precedent

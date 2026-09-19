@@ -155,8 +155,22 @@ removable.
 
 From the UAP audit (`docs/ref/uap_audit.md`): **every event type must
 produce a state delta or a hook — dead content otherwise**. The four
-checks, enforced in `core/pack.py::_teleology` (after every block
-lint — they read the whole validated pack):
+teleology checks, enforced in `core/pack.py::_teleology` (after every
+block lint — they read the whole validated pack), plus the fact/belief
+vocabulary split beside them in the same cross-block admission pass:
+
+- **The fact/belief vocabulary split** (pack-1, iter-148,
+  `core/packlint/admission.py::_fact_belief_split` — D-175 (5)'s consent
+  split as the generic law): the pack's EVENT-TYPE vocabulary (every
+  emission site — the canonical fact surface: what the world DID) and
+  its KNOWLEDGE-TOKEN vocabulary (every mintable `knows` literal plus
+  the templated fills expanded over the entity ids — the belief
+  surface: what someone BELIEVES, possibly a lie, possibly decayed)
+  are DISJOINT. A token naming both means fact+belief at once — the
+  conflation the split forbids (a record is a belief, D-008, and
+  beliefs are never the fact they name); the crafted half re-words
+  (`believes_*`, `saw_*`). Rumor needs no third set: a rumor IS a
+  transferred belief, the token vocabulary covers it.
 
 - **Dead action types** — an action whose success/failure events carry
   no state_changes, no knowledge, no seeds, no on_action entry. The

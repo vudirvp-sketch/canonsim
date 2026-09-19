@@ -11,6 +11,7 @@ from typing import Any
 from core.economy import VERB_EVENT_TYPES
 from core.intent import REJECTION_EVENT
 from core.packlint.helpers import PackError, _require
+from core.packlint.shared import literal_knows_tokens
 from core.resolvers import STATE_MUTATING
 from core.states import DECAY_EVENT
 
@@ -134,6 +135,97 @@ class AdmissionLint:
                 f"emission site, core constant or story-critical listing "
                 f"renders it (PACK_SPEC §5; dead vocabulary)",
             )
+
+    # -- pack-1 (iter-148): the fact/belief vocabulary split ----------------
+
+    def _fact_belief_split(self) -> None:
+        """pack-1's consent split (D-175 (5)) as the generic cross-block
+        law: the pack's EVENT-TYPE vocabulary (every emission site — the
+        canonical fact surface: what the world DID) and its KNOWLEDGE-
+        TOKEN vocabulary (every mintable `knows` literal and templated
+        fill — the belief surface: what someone BELIEVES, possibly a
+        lie, possibly decayed) must be DISJOINT. A token naming both
+        means fact+belief at once — the conflation the split forbids:
+        a knowledge record is a belief (D-008: legal data, possibly
+        distorted), and beliefs are never the fact they name; the
+        crafted half re-words (believes_*, saw_*, the D-008 family).
+        Rumor needs no third set — a rumor IS a transferred belief
+        (the fidelity chain), so the token vocabulary covers it; one
+        token never means fact+belief+rumor at once. Runs after
+        _teleology (the same emission inventory, validated there
+        first — the KI#77 order law)."""
+        emission = self._emission_witnesses()
+        beliefs = literal_knows_tokens(self._data)
+        # the templated tokens' FILLED forms: {actor}/{target} resolve to
+        # any entity id, {location} to a location id only (the resolution
+        # grammar, INTENT_SCHEMA §7) — the expansion is exactly the set
+        # the runtime can mint, so an event type a template could produce
+        # is caught, not just the authored literals
+        entities = self._data["entities.json"]
+        entity_ids = [
+            record["id"]
+            for category in (
+                "locations", "npcs", "ambient_entities", "items", "groups",
+            )
+            for record in entities.get(category, ())
+        ]
+        location_ids = [record["id"] for record in entities.get("locations", ())]
+        for template in self._templated_knows_tokens():
+            prefix, _, rest = template.partition("{")
+            slot, _, suffix = rest.partition("}")
+            pool = (
+                location_ids
+                if slot == "location"
+                else entity_ids
+            )
+            for entity_id in pool:
+                beliefs.add(f"{prefix}{entity_id}{suffix}")
+        collisions = sorted(emission & beliefs)
+        _require(
+            not collisions,
+            f"the fact/belief vocabulary split (pack-1's consent law, "
+            f"D-175 (5)): the token(s) {collisions} name BOTH an event "
+            f"type (the canonical fact surface — what the world did) and "
+            f"a knowledge token (the belief surface — what someone "
+            f"believes, possibly distorted); re-word the belief half "
+            f"(the D-008 crafted-record family: believes_*, saw_*), "
+            f"never the same token for both",
+        )
+
+    def _templated_knows_tokens(self) -> set[str]:
+        """The `knows` values that carry slot braces (the templated
+        birth tokens — literal_knows_tokens' excluded half): collected
+        from the same three birth sites (actions, expectations,
+        transition layers) for the fill expansion above."""
+        tokens: set[str] = set()
+
+        def _take(entry: Any) -> None:
+            knows = entry.get("knows") if isinstance(entry, Mapping) else None
+            if isinstance(knows, str) and "{" in knows:
+                tokens.add(knows)
+
+        for action in self._data["actions.json"]["actions"]:
+            knowledge = action.get("knowledge", {})
+            if isinstance(knowledge, Mapping):
+                for branch in knowledge.values():
+                    if isinstance(branch, list):
+                        for entry in branch:
+                            _take(entry)
+            texture = action.get("texture", {})
+            if isinstance(texture, Mapping):
+                for branch in texture.get("knowledge", {}).values():
+                    if isinstance(branch, list):
+                        for entry in branch:
+                            _take(entry)
+        rules = self._data["rules.json"]
+        for rule in rules.get("expectations", {}).get("rules", ()):
+            if isinstance(rule, Mapping):
+                _take(rule)
+        for config in rules.get("transitions", {}).values():
+            if isinstance(config, Mapping):
+                for entry in config.get("knowledge", {}).values():
+                    _take(entry)
+        return tokens
 
     # -- pack-ci (iter-117): the live-char crosswalk (PACK_SPEC §6) --------
 

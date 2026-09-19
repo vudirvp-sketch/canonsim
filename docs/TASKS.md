@@ -26,6 +26,88 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-148 · pack-1 — the grim tavern pack LANDED — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (STATUS Next step after
+since-1: the pack consumers, pack-1 the natural depth companion).
+THE PACK: `content/grim_pack/` (the FOURTH committed pack, the
+scaffold's tavern copy deepened): the relation axes
+attraction/intimacy/loyalty (the FLAT form toward-the-player, the
+suspicion precedent's v0.1 mode) + the status axes shame/anger (the
+slow heal 5 / the faster cool 10, both feeding the social skill's
+status modifiers — the grim feedback loop); the FLIRT→PROPOSITION
+LADDER (`flirt` — the contested delivery, the room's heard record;
+`proposition` — the UNCONTESTED ask, the world's reply via the
+on_action pair gated on her attraction home: at_least 60 →
+`consent_given` + intimacy +20 (the CANONICAL consented fact),
+at_most 59 → `consent_refused` + anger +10 — consent is never a
+roll); THE CONSENT SPLIT (D-175 (5)) made structural: the canonical
+half IS the event (proposition_coerced/consent_given/refused — the
+world fact), the belief half the crafted record (believes_coerced,
+the D-008 pattern, exact/told) — and the new cross-block LINT
+(`core/packlint/admission.py::_fact_belief_split`): the event-type
+vocabulary ∩ the knowledge-token vocabulary (literals + the
+templated fills expanded over the entity ids) = ∅, one token never
+means fact+belief+rumor at once; THE COERCED BRANCH:
+`proposition_coerce` over the coerce resolver (the pack's ONE spend
+door — the generic coerce dropped: one pack one spend, the
+single-spend_event law's consequence), the balance trust −25/fear
++25 from neutral (D-030's break-fast); THE HINGE:
+`read_ticket` — the maid's pawn ticket (her secret made physical,
+steal_target-flagged, carried) whose literal token
+scraps_pawned_by_maid mints the reader's leverage (the secrets
+registry; the templated-token ineligibility law honored): the
+player's DARK CHOICE — court her, corner her, or abstain; THE
+CONSEQUENCES: the jealousy both gated arms (the barkeep's
+bond-gated anger +10, the drunk's desire-gated +15), the stain
+(the ask's public cost on HER reputation, either answer), the shame
+settling, the deferred hooks (affair_brewing — the jealousy
+escalation, anger-weight-modified; regret_smoldering — the
+reckoning); the drunk's urgency re-pointed at the pc
+(proposition_coerce, the purse-leverage path — the world corners
+the player back); RES-1's FIRST CONSUMER ARMING: the coin accounts
+(pc 6, the till 30), `buy_round` (the account transfer through the
+canon door, the solvency gate's soft arm, the verb's template
+lines), the two macro flows (the till's settling + the license
+fee, zero corpus price), the identity price formula (the armed
+read surface, price_of measured; the semantic consumer residue);
+SINCE-1's FIRST ARMING: the since_lines vocabulary (shame/anger/
+intimacy props + the position + heard families, max_segments 4) +
+the dark card markers (ashamed/furious/smitten/tender). THE
+EVIDENCE (TEST_PLAN §9's claim packet, the driver outside the
+repo): L1 UNIVERSALITY CONFIRMED — the engine diff is the LINT
+ONLY (core/pack.py +5 the orchestrator call, admission.py +92 the
+lint; everything else pack data + tests); L2 DEPTH: the smoke
+corpus (grim_smoke.json, seed 42, the golden fixture
+grim_smoke_seed42.jsonl) tells the full arc — 26 events, 17
+dark-line (2 flirts → the receptions 45→55 → the round +3 → the
+ask at 58 → REFUSED (two points short) + the stain 45→40 → the
+ticket read → the leverage mint → the coerced fact (trust 25,
+fear 75 from neutral) + the belief record + the shame 10→20), the
+one-knob arm pinned (attraction 70 twin → consent_given, the
+committed 45 → refused — the answer follows the seed, never a
+roll); L3 CONSERVATION/DETERMINISM: the coin oracle exact (6−2/30
++2), the same-seed twin byte-identical, the T1 golden pinned
+(fingerprint 8), the no-leverage door answers precondition/
+actor.leverage_over. Falsifiers NOT tripped — CONFIRMED at the
+measured band. Honest residues: the price formula has no in-loop
+consumer (the amounts are declared, a price-fed door a future
+row); the drunk-cornering-the-pc aftermath hook aims at the
+authored pair (the static target_npc, the maid — the talk's own
+door answers); the maid out of the active zone never decays while
+the pc is away (the LOD law, the since test crafted per the fold's
+contract); loyalty is a read-side surface with no writer yet.
+1826 passed + 1 skipped, ruff clean (Python 3.12.14; verified
+BEFORE working at BASE_COMMIT 156ec8f — 1811+1 identical — and
+re-verified after). Detail: D-181 + worklog iter-148 +
+`tests/test_grim_pack.py` (the consent split's positive/negative,
+the ladder's knob, the stain, the jealousy, the leverage chain,
+the solvency, the since arming, the T1 family) + the stoplist's
+GRIM_STOPLIST (pawn/counterfoil/maudlin) + the packci four-pack
+loop + the economy unarmed law's first-consumer amendment.
+
 ### iter-147 · since-1 — the re-encounter delta LANDED — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -1913,24 +1995,17 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   date — health notes in the catalog). Next run: the next quarterly
   (owner-called per D-022), or at a phase-6 pack intake (whichever
   comes first — Open5e's site-license "verify" rides that intake).
-- `pack-1` Grim tavern pack candidate (post-gate; `PACK_SPEC.md` trigger —
-  phase 6 or a 2nd setting): the romance/intimacy/coercion line as **pure
-  pack data** — relation axes (`attraction`/`intimacy`/`loyalty`), status
-  axes (`shame`/`anger`), a flirt→proposition action ladder,
-  `consented`/`coerced` crafted knowledge records (D-008 pattern), seeded
-  consequence hooks (jealousy, exposure, regret), dark templates, item
-  extensions. Darkness levers per D-030; zero core change (axis-blind core;
-  event vocabulary per pack, EVENT_SCHEMA §11). Distillation source:
-  D-030 + the PACK_SPEC sketch row. Gate: the PACK_SPEC trigger
-  (phase 6 / 2nd setting; the when-one-liner's owner is the STATUS
-  FAQ, D-024 — the stale "phase-0 gate" clause removed iter-71).
-  Intake-29 (D-175): the CONSENT SPLIT rides the row's authoring —
-  the CANONICAL event outcome (`consented`/`coerced` as world fact
-  in the outcome/state_changes) separated from the crafted knowledge
-  records (`X believes consented/coerced`, the D-008 pattern's belief
-  half); the pack lint adds the mutually-exclusive consistency check
-  between the canonical states/events (the PACK_SPEC §5/§6 lint
-  family) — one token never means fact+belief+rumor at once.
+- `pack-1` Grim tavern pack — **done (iter-148, D-181)**: the dark line
+  LANDED as pure pack data on the fourth committed pack
+  (`content/grim_pack/`) — the axes, the flirt→proposition ladder with
+  the world's reply (never a roll), the consent split made structural
+  (the canonical event vs the crafted belief record + the new
+  fact/belief vocabulary-split lint, D-175 (5)), the coerced branch
+  (the pack's one spend door), the pawn-ticket hinge (the player's
+  dark choice), the jealousy/exposure/regret consequences, the res-1
+  and since-1 first-consumer armings, the §9 claim packet's three
+  lenses CONFIRMED at the measured band. Detail: the iter-148 section
+  above + D-181 + worklog iter-148.
 - `pack-2` Arson-on-ashes guard (iter-2a audit note) — DONE iter-29
   (D-061): the `spot_available` door check (the closed precondition
   set's 15th test, layer-param lint-checked) — arson on a destroyed or

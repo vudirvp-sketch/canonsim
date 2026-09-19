@@ -33,6 +33,7 @@ from core.pack import PackError, load_pack  # noqa: E402
 TAVERN = REPO / "content" / "tavern_pack"
 ROAD = REPO / "content" / "road_pack"
 PROVINCE = REPO / "content" / "province_pack"
+GRIM = REPO / "content" / "grim_pack"
 PACK_FILES = ("entities.json", "actions.json", "rules.json", "templates.json")
 
 # the weather family's template lines — the v0.1 twin's ablation strips
@@ -108,13 +109,14 @@ def _action(intent: str, resolver: str, event_type: str) -> dict[str, Any]:
 
 
 def test_the_committed_packs_pass_every_new_row() -> None:
-    """The admission gate stays green on the three committed packs — the
+    """The admission gate stays green on the four committed packs — the
     tavern, the road (the reskin pack is the first pack the new rows
-    run against, PACK_SPEC §12) and the province (iter-118: the first
+    run against, PACK_SPEC §12), the province (iter-118: the first
     pack to CARRY spine records — the AP crosswalk's first committed
-    consumer): zero dead actions, zero orphans, zero
-    empty rows, zero unused templates across 16 verbs and 46 lines."""
-    for pack_dir in (TAVERN, ROAD, PROVINCE):
+    consumer) and the grim (iter-148, pack-1: the dark line — the
+    fact/belief split's first committed consumer): zero dead actions,
+    zero orphans, zero empty rows, zero unused templates."""
+    for pack_dir in (TAVERN, ROAD, PROVINCE, GRIM):
         pack = load_pack(pack_dir)
         assert pack.templates["events"]
 

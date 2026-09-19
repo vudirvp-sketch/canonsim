@@ -187,6 +187,11 @@ class _Lint:
         # urgencies table, the hook channels and the spine records, all
         # validated before them (the KI#77 order law, cross-block edition).
         admissionlint._teleology()
+        # pack-1 (iter-148): the fact/belief vocabulary split — after
+        # _teleology (the same emission inventory, validated there
+        # first; the KI#77 order law, cross-block edition: D-175 (5)'s
+        # consent split as the generic disjointness law).
+        admissionlint._fact_belief_split()
         admissionlint._live_char()
 
 

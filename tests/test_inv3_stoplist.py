@@ -107,6 +107,21 @@ PROVINCE_STOPLIST: tuple[str, ...] = (
     "vigil", "patrol", "exodus", "grievance", "thaw", "frost",
 )
 
+# Setting nouns of grim_pack (iter-148, pack-1 — the dark line): the
+# FOURTH pack's own vocabulary. The grim line re-uses the tavern's
+# cast and rooms (the depth companion over the same loop), so this
+# list carries only what is DISTINCTIVELY the grim pack's: the pawn
+# ticket's nouns (the maid's secret made physical — the id
+# pawn_ticket_01 and the counterfoil prose) and the drunkard's
+# maudlin turn of phrase. The dark line's mechanic words (flirt,
+# proposition, consent, coercion, shame, anger, attraction, intimacy,
+# loyalty) are deliberately absent — action names and axis names are
+# mechanic vocabulary (the stoplist docstring's own law: take, move,
+# fire, stealth stay legal), INV-3's scope is SETTING nouns.
+GRIM_STOPLIST: tuple[str, ...] = (
+    "pawn", "counterfoil", "maudlin",
+)
+
 
 def _segment_pattern(word: str) -> re.Pattern[str]:
     """The word as a full segment: delimited by non-alphanumerics on both
@@ -126,7 +141,9 @@ def source_files() -> list[Path]:
 def test_no_setting_words_in_engine_code() -> None:
     patterns = [
         (word, _segment_pattern(word))
-        for word in (*STOPLIST, *ROAD_STOPLIST, *PROVINCE_STOPLIST)
+        for word in (
+            *STOPLIST, *ROAD_STOPLIST, *PROVINCE_STOPLIST, *GRIM_STOPLIST
+        )
     ]
     violations: list[str] = []
     for path in source_files():
@@ -186,4 +203,22 @@ def test_province_stoplist_words_actually_belong_to_the_province_pack() -> None:
     assert not missing, (
         f"province stoplist words absent from the province pack data: "
         f"{missing}"
+    )
+
+
+def test_grim_stoplist_words_actually_belong_to_the_grim_pack() -> None:
+    """The self-check extension, the fourth pack (iter-148, pack-1): the
+    grim stoplist tracks the dark-line pack's setting vocabulary — every
+    word occurs in the grim pack's data as a full segment (ids
+    included)."""
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted((REPO / "content" / "grim_pack").glob("*.json"))
+    )
+    missing = [
+        word for word in GRIM_STOPLIST
+        if not _segment_pattern(word).search(pack_text)
+    ]
+    assert not missing, (
+        f"grim stoplist words absent from the grim pack data: {missing}"
     )
