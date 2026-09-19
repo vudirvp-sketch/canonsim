@@ -14,6 +14,42 @@
 > since iter-5).
 ---
 
+iter-140 · 2026-09-19 · memgc — the owner's research-only IA
+call «я думаю стоит провести ревизию, уборку и приведение репозитория
+в порядок» + the memory-layers audit brief (doc-only, zero code,
+zero corpus price; the D-022 fresh-owner-request exception to the
+doc-loop alarm)
+- the audit's verdict: the intake family's consumers closed at
+  iter-139 (world-2 delivered); the caps' rhythm was phase-gate-tied
+  while the ladder is complete — the «until the next gate collapse»
+  promises undeliverable; the load-bearing knowledge mapped: the
+  blueprint ledger rows + L-laws cited from code/tests (RNG-1 ×7,
+  TIME-1 ×13, L-laws ×177, D-rows ×375), the intake family's
+  consumption = the iter-134..139 chain (the census → slice 3 → the
+  audit → the verdict), the four consult cards the deferred
+  mechanism (STATUS Next step pins the pointers)
+- the GC: phases.md §6 closed intake blocks → finding → consequence
+  → consumer stubs (3786 → 2559; the cards + the intakes 9..13
+  consults + the slices/audit/verdict INTACT; the §6 head gains the
+  research-archive law); TASKS re-collapsed per the iter-102
+  precedent (1733 → 950; the phase-6-era ledger; st-3 flipped done —
+  depth-7 covered it); DECISIONS 51 → 30 (the family pattern:
+  D-155..D-167/D-171 the intake family, D-170/D-172 the gate-verdict
+  family, the world-2 build row, D-015/D-052 merged; D-173 the
+  post-ladder collapse trigger); SPECS_BACKLOG GROUP_SPEC → depth-7,
+  CORE_ONTOLOGY → PACK_SPEC (fired-and-absorbed re-points)
+- docs: NAV §1 resync + §2 the research-residue reading row, STATUS
+  re-pin (iter-138 evicted per the two-record convention) + the FAQ
+  cap-law line, this entry (iter-130 evicted, verified in this
+  edit); 1754+1 green, ruff clean after; doc-only, the corpora
+  byte-untouched
+- Caps: STATUS 603 / TASKS 950 / DECISIONS 66 lines (30 rows — the
+  cap MET) / phases 2559 (the over-600 residue = the §6 substance
+  per the archive law + §1..§5/§7 architecture; the §6.1 substance
+  filter applied, the pre-GC text in git at BASE_COMMIT 1b7666a) /
+  worklog 10 entries (iter-130 evicted here, verified in this edit)
+
+
 iter-139 · 2026-09-19 · world-2 L2 (the verdict) — the
 owner's convening call «я решил что следует world 2 закончить,
 вердикты вынести» (the session's second half, after intake-26's
@@ -375,53 +411,3 @@ price — the iter-122 intake13re re-entry precedent, one family)
   DECISIONS 75 (43 rows — over the 30 cap on the §6.1 substance
   precedent until the next gate collapse) / phases 2950 — the
   over-cap files ride the documented §6.1 substance precedent
-
-iter-130 · 2026-09-18 · intake23 — the owner's «используя
-research_method_v5.md => разберись что перенять можно, дополнить
-или улучшить… долгосрок важен и качество» research call over the
-uploaded world-execution / spatial-topology / social-information
-architecture-research task (5 files doc-only, zero code, zero
-corpus price — the D-155..D-163 intake precedent; the method file
-itself external per the convenience-copy law)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 131c477,
-  181 commits, Python 3.12.14 the env pin) — from a real clone
-  (BASE_COMMIT 131c477); the document's observer-side sections
-  re-derive intake-21's routed record zero-drift (not restated);
-  the world-structure half verified claim-by-claim: the §3.1 six
-  engine questions answered by ONE fresh read-only probe through
-  the public API over the committed province pack (exits graph /
-  claimed sites + derived prices 660/300/510/600 / typed claim
-  reads / reachability 6/6 / the lattice-as-extent 324 sites /
-  same-seed regeneration equal — the probe table in the block),
-  the §2 intent lifecycle closed mechanically (OCC +
-  projection_moved + the windowed re-run + intent_rejected +
-  the noise floor + the queue key + spot_available), the §8
-  ladder transition-by-transition (channels/fidelity, traits +
-  counters, reflection, the door gates, the blind suite, D-006)
-- the routing (D-164): the between-anchors invariant CONFIRMED
-  as met by the standing form (lattice + place-1 + st-6a); the
-  formal intent-conflict taxonomy REJECTED as label-matching
-  (the document's own "do not invent" clause, D-024) — the
-  answer set joins the card; scenarios F/G routed onto slice 3's
-  consult material (composition questions, never a politics/city
-  subsystem); the streets/districts/six-sense-extent vocabulary,
-  the dependency-graph abstraction, the standing
-  capability-truth-table, the dedicated formalization iteration
-  all REJECTED (no consumer / D-024 / the L2 wave plan D-153 the
-  owner-gated carrier); the residue parked as the world-structure
-  consult card (6 lines)
-- docs: phases.md §6 the intake-23 block (the probe table + the
-  verification map + the verdict table + the card), DECISIONS
-  D-164 (43 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse), TASKS the iter-130
-  section, STATUS re-pin + Next step (slice 3's experiment now
-  also carrying intake-23's F/G verification prompts; the
-  consult material now the three cards), this entry (iter-120
-  evicted per the cap, verified in this edit; 10 held). The
-  build queue untouched — nothing unpins, nothing reorders.
-  Doc-only (the D-022 exception, the owner's fresh request).
-  Caps: DECISIONS 43 rows / phases 2917 — over-cap files ride
-  the documented §6.1 substance precedent (the intake blocks
-  are the engine-1 consult material), trim at the next gate
-  collapse
----

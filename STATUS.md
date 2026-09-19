@@ -1,47 +1,3 @@
-Iteration: iter-138 (`iter-138-intake26` — the verification-lenses
-research routed; the owner's «перед этим вероятно стоит рассмотреть
-дополнительно идеи с файла VERIFICATION_LENSES_RESEARCH.md» call — the
-world-2-verdict session's first half, the D-155..D-170 intake precedent;
-the research file external per the convenience-copy law):
-**the selection grammar ADOPTED in the compact form** — the document's
-own verdict PARTIALLY CONFIRMED verified at HEAD (the mechanisms all
-owned: the FACT rows content-matched one by one; the missing piece the
-compact claim → instrument grammar — iter-137's audit re-derived its
-form from scratch, the diagnosis confirmed by the repo's own history).
-The adoption: `docs/TEST_PLAN.md` §9 — the CLAIM PACKET (oracle +
-falsifier mandatory; the disposition vocabulary the repo family, never
-a numeric score), the claim-shape → instrument selection TABLE
-(self-describing names, standing instruments only), the
-independent-re-derivation oracle law (a checker sharing the
-implementation's mistake is not an oracle), the order-probe contract
-law (where order is semantic, invariance is NOT the oracle) —
-research-derived, a routing aid, never a gate. The full ten-lens/
-nine-prism catalog held in the intake-26 block (phases.md §6, the
-one-pass record — D-024); the stale-at-HEAD corrections recorded (the
-door-surface battery = the next-decision census landed iter-137; the
-first-divergence read consumed iter-135; the A–H ledger the packet's
-standing instance); refused at the door: the names as law
-(label-matching, the intake-24 precedent), any executable helper /
-registry / score / runtime form, REFERENCES.md as the surface. The
-measurement obligation standing: the next owner-gated build row's
-verification plan = ONE claim packet (≤3 lenses, ≤2 prisms) — that run
-decides any executable helper ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 8dc5436 — the numbers identical —
-and re-verified after; doc-only, the corpora byte-untouched) ·
-Date: 2026-09-19 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-26 block),
-`docs/TEST_PLAN.md` (§9 NEW — the selection grammar),
-`docs/AGENT_NAVIGATION.md` (§1 the TEST_PLAN line), `docs/DECISIONS.md`
-(D-171), `docs/TASKS.md` (the iter-138 section), `STATUS.md` (this
-re-pin + KI#85's deletion per AGENTS §5), `worklog.md` (this entry;
-iter-128 evicted per the cap) — 7 files.
-The prior iteration's record: iter-137 (the depth audit). The
-detail lives in TASKS + worklog + git.
-
 Iteration: iter-139 (`iter-139-world2-verdict` — the two-level
 gate's level-2 verdict on the owner's convening call «я решил что
 следует world 2 закончить, вердикты вынести» — the session's second
@@ -81,6 +37,45 @@ evicted per the cap) — 5 files.
 The prior iteration's record: iter-138 (intake-26). The
 detail lives in TASKS + worklog + git.
 
+Iteration: iter-140 (`iter-140-memgc` — the owner's research-only
+information-architecture call «я думаю стоит провести ревизию,
+уборку и приведение репозитория в порядок» + the memory-layers
+audit brief; doc-only, zero code, zero corpus price):
+**the memory-GC LANDED (D-173)** — the audit's verdict: the intake
+family's consumers closed at iter-139 (world-2 L2 delivered), and
+the caps' enforcement rhythm was phase-gate-tied while the ladder
+is complete — the «until the next gate collapse» promises had
+become undeliverable. The changes: `docs/blueprint/phases.md` §6's
+closed intake blocks compressed to finding → consequence → consumer
+stubs (3786 → 2559; the consult cards, the pack-design consults of
+intakes 9/10, the slice blocks, the depth audit and the verdict
+INTACT; §6's head gains the research-archive law); `docs/TASKS.md`
+re-collapsed per the iter-102 precedent (1733 → 950; the
+phase-6-era iteration ledger; `st-3` flipped done — depth-7/D-127
+covered it); `docs/DECISIONS.md` re-collapsed 51 → 30 rows per the
+phase-gate family pattern (D-155..D-167/D-171 into the intake
+family, D-170/D-172 into the gate-verdict family, the world-2
+build family row D-152/D-153/D-154/D-168/D-169, D-015 and D-052
+merged into their families, D-173 appended);
+`docs/SPECS_BACKLOG.md`'s fired-and-absorbed triggers re-pointed
+(GROUP_SPEC → depth-7, CORE_ONTOLOGY → PACK_SPEC);
+`docs/AGENT_NAVIGATION.md` §1 resynced + §2 gained the
+research-residue reading row. The build queue UNTOUCHED — nothing
+unpins, nothing reorders; the ORDER owner's rows unchanged ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
+D-151; the ladder complete 0..6 — the standing work: the
+owner-gated backlog + the SoW horizon, ROADMAP §6) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD 1b7666a — the numbers identical —
+and re-verified after; doc-only, the corpora byte-untouched) ·
+Date: 2026-09-19 ·
+Scope: `docs/blueprint/phases.md`, `docs/TASKS.md`,
+`docs/DECISIONS.md`, `docs/SPECS_BACKLOG.md`,
+`docs/AGENT_NAVIGATION.md`, `STATUS.md` (this re-pin + the FAQ
+cap-law line), `worklog.md` (this entry; iter-130 evicted per the
+cap) — 7 files.
+The prior iteration's record: iter-139 (the world-2 verdict). The
+detail lives in TASKS + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -483,8 +478,10 @@ the single D-084..D-093 family row as they landed, the verdict D-094
 joined the gate-verdict family); 71→30 at the phase-5→6 gate (iter-102
 — never resynced here until iter-116); 44→30 at the phase-6 gate
 (iter-116, the ladder complete — the phase-6-era rows folded into
-families, D-151 the record). The ≤30 cap stands; a future breach
-collapses at the owner's next gate call.
+families, D-151 the record). The ≤30 cap stands; a breach collapses
+at the owner's explicit call (the post-ladder precedent: the iter-140
+memory-GC, D-173 — the phase-gate rhythm retired with the completed
+ladder).
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a

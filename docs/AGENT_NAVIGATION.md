@@ -16,14 +16,14 @@
 | `docs/EVENT_SCHEMA.md` | event contract | active |
 | `docs/INTENT_SCHEMA.md` | intent contract (the proposal side of the door; trigger-gated, written iter-2) | active |
 | `docs/ROADMAP.md` | phases, gates, tracks, donors | active |
-| `docs/TASKS.md` | backlog + iteration statuses | active |
+| `docs/TASKS.md` | backlog + iteration statuses (done iterations collapse to one-liners per the header law; the phase-6-era ledger the iter-140 precedent) | active |
 | `docs/TEST_PLAN.md` | phase-0 verification stack: T0–T8 + M1–M5 + gate protocol + UAP crosswalk + the schema-bump migration procedure (the iter-6 trigger-fired spec); §8 the testproto LLM-integration protocol (iter-68, D-098) + §8.5 the heartbeat ledger + §9 the claim → instrument selection grammar (intake-26, iter-138, D-171 — research-derived, a routing aid, never a gate) | active (bg-8) |
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike | live |
-| `docs/DECISIONS.md` | ADR-lite, stable decisions | append-only |
+| `docs/DECISIONS.md` | ADR-lite, stable decisions (≤30 compound-ID family rows; collapses fire on the owner's explicit call — D-034/D-173) | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
 | `docs/CORE_DESIGN_RESEARCH.md` | depth-first core design: reference synthesis, gaps, proposals | absorbed (D-029; P2c accepted — D-033); retired at the phase-0 gate review (`doc-1`) |
 | `docs/BLUEPRINT.md` | reference distillation: resolution ledger (12 mechanisms) + cross-cutting laws + build index; entry to `docs/blueprint/` | active (iter-0u); maintained at deep-dive time |
-| `docs/blueprint/` | per-part applied synthesis: `phase0.md` (iter-1..6 combined donor designs), `phases.md` (phases 1–6 architecture + cross-cutting) | active; read before the matching iteration/phase |
+| `docs/blueprint/` | per-part applied synthesis: `phase0.md` (iter-1..6 combined donor designs), `phases.md` (phases 1–6 architecture + cross-cutting; §6 carries the research archive per its own archive law — the consult cards + the intake stubs + the world-2 records; the full one-pass records in git, D-173) | active; read before the matching iteration/phase; open a §6 card only when the task/row names it |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
 | `docs/REFERENCES_DEEP.md` | index + format template + iteration plan for per-ref deep dives; the deep-dive content lives in `docs/ref/` (D-026) | active (rots — quarterly review alongside `doc-2`) |
 | `docs/ref/` | per-reference deep dives (one file per source: `neighborly.md`, `mesa.md`, `df_legends_xml.md`, `df_worldgen.md`, `cdda_data_json.md`, `paradox_scripting.md`, `rimworld.md`, `l4d_director.md`, `alien_isolation.md`, `wesnoth_wml.md`, `endless_sky_dsl.md`, `ink.md`, `tracery.md`, `brogue.md`, `dcss.md`, `keeperrl.md`, `generative_agents.md`, `ai_town.md`, `letta.md`, `azgaar_fmg.md`, `natural_earth.md`, `geonames.md`, `libtcod.md`, `rot_js.md`, `red_blob_games.md`, `entt.md`, `bevy.md`, `eventstore.md`, `sqlite_fts5.md`, `duckdb.md`, `sqlite_vec.md`, `agent_memory_atlas.md`, …); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review alongside `doc-2`) |
@@ -56,6 +56,7 @@
 | Normal — bugfix, small feature, one system | this file → `STATUS.md` → `worklog.md`; mechanics-level questions (who consumes an event, why a hook waits) → `scripts/mechanics.py` (§5) |
 | Deep — new system, schema/queue/director touch | + `AGENTS.md` → `docs/BLUEPRINT.md` (ledger rows for the component) → `docs/MVP_SCOPE.md` → `docs/EVENT_SCHEMA.md` |
 | Huge — phase gate, architecture, restructure | + `docs/ROADMAP.md` → `docs/VISION.md` → `docs/DECISIONS.md` |
+| Research residue / consult card (a task row or STATUS names an intake/card) | `docs/blueprint/phases.md` §6 — the named card block only (the archive law at §6's head pins what is durable); the full one-pass records: git at the D-row's commit |
 | LLM-track (`bg-*`) | + `docs/TECH_NOTES.md` → `docs/SPECS_BACKLOG.md` |
 
 ## 3. Information ownership (anti-drift map)
