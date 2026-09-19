@@ -3875,6 +3875,130 @@ Landed: D-173 + this block + the consult card's item 10 +
 REFERENCES §10's nine rows. The build queue UNTOUCHED — nothing
 unpins, nothing reorders; zero build-grade items.
 
+The Stålberg-conspectus / transplantation-method output routed
+(intake-28, D-174 — the owner's «разбери 1231.md => что стоит
+перенять и почему, зачем, как использовать и где это улучшит
+проект» research call over the uploaded `1231.md`; the
+D-155..D-173 intake precedent, the consult posture — the file
+external per the convenience-copy law). The document is itself a
+PRIOR SESSION'S OUTPUT, not a source conspectus: a research
+conclusion over an external Stålberg/Townscaper conspectus plus
+the owner's competing-solutions preference, written against this
+same `main` (8f4fbd4e) by a session that DNS-failed its clone —
+the D-163 precedent (consolidated outputs of clone-less sessions
+re-verified at a real clone before routing). Verified at HEAD
+8f4fbd4e BEFORE working: 1754+1 green, ruff clean, Python 3.12.14
+the env pin. The session's question, in repo terms: which of its
+claims and proposals are already standing law, and what survives
+the transplantation test (form exists ≠ adopted —
+quality/transfer/combined demanded, D-173).
+
+**The verification map** (the document's repo-facing claims →
+the standing forms at HEAD; the FACT axis is content-accuracy —
+this time verified at a REAL clone, closing the prior session's
+own access caveat):
+
+| The document's claim | The standing form at HEAD | Verdict |
+|---|---|---|
+| D-173 fixes the transplantation test (form insufficient; quality + transfer + combined demanded) | D-173's why column verbatim | FACT |
+| BLUEPRINT carries tension detection → resolution → sequencing | §0 Method steps 2–4 | FACT |
+| L13/L14: an abstraction names the future change it cheapens; complexity carries its justification; one rule instead of N exceptions | L13/L14 verbatim | FACT |
+| the owner preference (combine advantages, neutralize disadvantages) already held | D-165's owner-call quote + D-173's why ("honored both ways — no minimal-change conservatism, no restructuring on elegance alone") | FACT |
+| the combination mechanism "already effectively present" | D-163: the v5 checks (the four questions + combined design) ARE the standing intake practice — intakes 14..27 the running evidence | FACT (operational form; the method file external) |
+| the cited mechanisms (event schema, intent door, causality, RngBank, knowledge boundary, LOD, tiers, projections, cosmetic streams, stable identity, texture boundary) | INV-1..INV-3, L5/L6, LOD-1, the scaffold law, the promotion door — all standing | FACT |
+| "Canonical Visual Memory + LLM Narrative Texture остаётся продуктовой идеей" (an "already received research verdict") | NO REPO RECORD — the referent is session-external; presentation-1 the standing row for the player-facing surface (INV-4-fenced, the SoW horizon) | NOT OWN — the one provenance caveat |
+| Stålberg's figures (dual grid, 2⁴=16, 15→6, quadrilateral mesh, jitter, WFC) | the source conspectus external — second-hand claims | UNVERIFIABLE (the KI#51 family; the verdicts assigned to them are consistent with standing law) |
+
+**The Stålberg half** (the cross-domain confirmation family's
+next member — intake-16/17/24/27 the line, the Townscaper
+reconciliation itself intake-17's): every "already owned"
+verdict in the document's transfer table holds at HEAD —
+small-alphabet + procedural composition = L9/PACK-1;
+constraints-enable-quality = INV-3/PACK-1/the doors;
+variation-inside-invariants = the road-pack scaffold law (ids
+stay, surfaces renamed — the L1 reskin's own discipline) + the
+cosmetic stream families + the texture promotion door;
+representation switching = L12/LOD-1 (intake-27's #12, Control's
+twin); the FORM rejections (dual grid, mesh, WFC, jitter
+machinery) = intake-17's §22 scope guard + L13 — agreed in
+advance. Nothing new owed: the confirmation raises confidence,
+never machinery (D-173's law).
+
+**The residue — ONE instrument adopted: the COMBINATION FENCE**
+(the fifth check's operational sharpening; the smallest form
+surviving counterexamples; the consumer named):
+
+> A combined design carries NO presumption of advantage — it is
+> itself a separate hypothesis entering the same
+> PROVEN/PARTIAL/REJECTED ladder as any transplant.
+
+Its three questions, applied when options compete:
+1. the mechanism-of-advantage decomposition — which mechanism
+   earns each option's plus (a plus without its mechanism cannot
+   be carried into the combination);
+2. the combination-price question — what cost exists ONLY
+   because of the combination, in neither option alone;
+3. the Frankenstein test — more mechanisms but not more quality
+   → reject (L13/L14's cost gate holds the answer form).
+
+Why it survives where a "grand synthesis principle" does not:
+the fifth check asked "is there a combined design that keeps
+most advantages and neutralizes the main disadvantages?" — the
+question, never the fence. The failure mode is real and
+repo-caught: D-165's P2 (compression converted "verified in one
+domain" into "applies uniformly to five" — a combination
+accepted on presumption, refused at the door). Consumers: the
+standing design forks — the engine-1/presentation-1 spec
+debates (the SoW consult material, where intake-27's sacrifice
+protocol already parks) and res-1's evaluation discipline. A
+research-move fence, never a gate, never a spec.
+
+**Routed, never a row** — the "local canonical pattern →
+higher-order consequence" HYPOTHESIS (the document's own gate
+holds: does the standing event grammar already cover it?):
+intake-17's multi-node motifs are PROVEN in three separate
+owners (the chronicle collections' parent-map chains, the
+director arcs, the commit-door cascades), res-1's aggregate
+macro-events + the cadences' decision half the standing
+consumers — the question rides their existing evaluations, no
+new row (scope creep otherwise).
+
+**The two recognition handles** (block-only, each naming its
+standing owner — the intake-24 card precedent; no card line
+owed, these are architecture recognitions, already law):
+- "change the representation, shrink the case space" — PACK-1's
+  closed enums, the parser grammar snapshot (ghost
+  interactivity structurally impossible), INV-3's
+  zero-engine-change claim: the invalid becomes unrepresentable
+  instead of checked.
+- "vary the representation, preserve the invariant substrate" —
+  the road-pack scaffold law (ids stay, surfaces renamed) + the
+  cosmetic streams + the texture promotion door: variation never
+  silently becomes canon.
+
+**Refused at the door**: a grand-synthesis law/DECISION (the
+document itself refuses — and D-024 label-matching agrees);
+named-principles documents (D-024); methodology codification
+into AGENTS/BLUEPRINT (D-163: the method file CONFIRMED-OWNED,
+external, nothing left to adopt — the session-prompt refinements
+age as convenience copies, the FAQ's law); Stålberg-form
+features (no renderer; intake-17's fence); local-pattern
+machinery now (HYPOTHESIS); a Canonical-Visual-Memory row (not a
+repo record; presentation-1 owns the surface question).
+
+**Micro-drifts / provenance caveats**: (a) the "Canonical Visual
+Memory" verdict is session-external, never repo law (the map's
+NOT-OWN row) — citing it as a repo verdict would be drift;
+(b) the Stålberg figures are second-hand (the KI#51 family) —
+claims, never facts; (c) the prior session's "sandbox clone
+failed / no archive" note is operational, not repo-facing —
+this session's real-clone verification closes the access
+caveat. No factual errors found in the document's load-bearing
+repo-facing claims.
+
+Landed: D-174 + this block. The build queue UNTOUCHED — nothing
+unpins, nothing reorders; zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

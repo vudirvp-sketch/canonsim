@@ -14,6 +14,50 @@
 > since iter-5).
 ---
 
+iter-141 · 2026-09-19 · intake28 — the owner's «разбери 1231.md =>
+что стоит перенять и почему, зачем, как использовать и где это
+улучшит проект» research call over the uploaded `1231.md`, itself a
+prior session's output (an external Stålberg/Townscaper conspectus +
+the owner's competing-solutions preference; that session verified
+against the same main 8f4fbd4e but DNS-failed its clone — 5 files
+doc-only, zero code, zero corpus price, the D-163 clone-less-session
+precedent, re-verified at a REAL clone)
+- verified BEFORE working (1754+1 green, ruff clean, Python
+  3.12.14, HEAD 8f4fbd4e); the verdict PARTIALLY CONFIRMED — the
+  content overwhelmingly OWNED, zero factual errors in the
+  load-bearing repo-facing claims (D-173's test wording, BLUEPRINT
+  §0, L13/L14, the owner-preference record D-165/D-173 all hold;
+  the Stålberg half the cross-domain confirmation family's next
+  member [intake-16/17/24/27], the Townscaper reconciliation
+  itself intake-17's)
+- the residue: ONE instrument ADOPTED (the COMBINATION FENCE — the
+  fifth check's operational sharpening: a combined design carries
+  NO presumption of advantage, itself a separate hypothesis; the
+  mechanism-of-advantage decomposition + the combination-price
+  question + the Frankenstein test; consumers the
+  engine-1/presentation-1 debates + res-1's evaluation); the
+  local-pattern→higher-order HYPOTHESIS routed to res-1's
+  aggregate macro-events + the cadences' decision half (never a
+  row); two recognition handles block-only (representation-shrink →
+  PACK-1/grammar snapshot/INV-3; vary-representation-preserve-
+  substrate → the scaffold law/cosmetic streams/promotion door);
+  refused: a grand-synthesis law (the document itself refuses,
+  D-024 agrees), methodology codification (D-163 — the method file
+  external, nothing left to adopt), Stålberg-form features
+  (intake-17's fence), a Canonical-Visual-Memory row (NOT a repo
+  record — session-external; presentation-1 owns the surface,
+  INV-4-fenced; the one provenance caveat; Stålberg figures
+  second-hand per the KI#51 family)
+- docs: phases.md §6 the intake-28 block, DECISIONS D-174, TASKS
+  the iter-141 section, STATUS re-pin + Next step (iter-139's
+  record evicted per the two-record convention), this file.
+  iter-131 evicted here (verified against git in this edit); 10
+  after; 1754+1 green, ruff clean after. Caps: STATUS 646 / TASKS
+  1846 / DECISIONS 87 (53 rows — over the 30 cap on the §6.1
+  substance precedent, the standing post-ladder record) / phases
+  4068 — the over-cap files ride the documented §6.1 substance
+  precedent
+
 iter-140 · 2026-09-19 · intake27 — the owner's «проанализируй
 документ и определи что из него можно полезного перенять в проект
 и почему» research call over the uploaded level-design
@@ -385,36 +429,4 @@ corpus price — the intake-22 meta-result precedent, one family)
   cap on the §6.1 substance precedent until the next gate
   collapse) / phases 3060 — the over-cap files ride the
   documented §6.1 substance precedent
-
-iter-131 · 2026-09-18 · intake11re — the owner's «используя
-research_method_v5.md => разберись что перенять можно, дополнить
-или улучшить… долгосрок важен и качество» research call over the
-re-uploaded pressure-city donor blueprint (PRESSURE_LIMIT) —
-intake-11's own source (4 files doc-only, zero code, zero corpus
-price — the iter-122 intake13re re-entry precedent, one family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD e7147df,
-  Python 3.12.14 the env pin); the re-upload content-matched
-  section-by-section against the intake-11 block + the pack-4 row
-  (§1/§3/§4/§6/§8/§10/§11/§12/§13 exact; §2/§5/§7 + the faction
-  details the lore halves, staying outside the repo per the
-  convenience-copy law) — the re-entry verdict: D-147's set holds
-  at HEAD, zero new findings, NO ACTION
-- the code-level re-verification: core/pack.py (the AP-9 spine +
-  AP-8 flaw-consumption rungs live, D-152 — micro-drift (a)
-  self-resolved, the donor's "landed" claim now true),
-  content/province_pack (the five spine records' first committed
-  consumer, D-153; rules.json::meta/cultures — no literal
-  meta.json, micro-drift (b) stands), REFERENCES §10 (the DD/FP
-  read-surface law), core/retrieval.py + core/lod.py + names.py +
-  factions.py + weather.py (retr-1/depth-7/name-1/depth-6/
-  weather-1 landed), TASKS (pack-4 parked, roads-1/res-1
-  owner-gated, the lost-city fold's host at world-2 L2 slices
-  1-2; intake-20's portfolio law owns the diversification slot)
-- docs: phases.md §6 the intake-11 re-entry addendum, TASKS the
-  iter-131 section, STATUS re-pin + Next step, this file. iter-121
-  evicted here (verified against git in this edit); 10 after;
-  1726+1 green, ruff clean after. Caps: STATUS 579 / TASKS 1371 /
-  DECISIONS 75 (43 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse) / phases 2950 — the
-  over-cap files ride the documented §6.1 substance precedent
 ---

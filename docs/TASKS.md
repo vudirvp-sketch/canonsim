@@ -26,6 +26,67 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-141 · intake-28 — the Stålberg-conspectus / transplantation-method output routed: the content overwhelmingly owned (the cross-domain confirmation family's next member; the Townscaper reconciliation itself intake-17's), ONE compact instrument adopted (the combination fence — the fifth check's operational sharpening: a combined design carries no presumption of advantage; the mechanism-of-advantage decomposition, the combination-price question, the Frankenstein test), the local-pattern→higher-order hypothesis routed to the standing consumers — done (doc-only, the owner's «разбери 1231.md => что стоит перенять и почему, зачем, как использовать и где это улучшит проект» research call over the uploaded prior-session output; that session's clone-less verification re-done at a real clone, zero factual errors)
+
+The question — what from `1231.md` (a prior research session's
+output over an external Stålberg/Townscaper conspectus + the
+owner's competing-solutions preference, written against this
+same `main` by a session that DNS-failed its clone) is worth
+adopting, why, how to use, and where it improves the project —
+investigated under the intake-24 posture (the mechanism
+source-free, never the form; the file external per the
+convenience-copy law; every repo-facing claim re-verified at a
+REAL clone, HEAD 8f4fbd4e, BEFORE working: 1754+1 green, ruff
+clean, Python 3.12.14 the env pin — the D-163 clone-less-session
+precedent). The verdict: PARTIALLY CONFIRMED — the content
+overwhelmingly OWNED, zero factual errors in the load-bearing
+repo-facing claims (D-173's transplantation-test wording,
+BLUEPRINT §0's tension→resolution→sequencing, L13/L14, the
+owner-preference record D-165/D-173 — all hold verbatim). The
+Stålberg half joins the cross-domain confirmation family
+(intake-16/17/24/27 the line): small-alphabet+composition =
+L9/PACK-1; constraints-enable-quality = INV-3/schema/doors;
+variation-inside-invariants = the road-pack scaffold law + the
+cosmetic streams + the texture promotion door; representation
+switching = L12/LOD-1; dual grid / mesh / WFC / jitter as FORMS
+= intake-17's §22 scope guard + L13 — REJECTED in agreement.
+
+The residue — ONE instrument, routed, zero build-grade: the
+COMBINATION FENCE (the fifth check's operational sharpening): a
+combined design carries NO presumption of advantage — it is
+itself a separate hypothesis entering the same
+PROVEN/PARTIAL/REJECTED ladder; its three questions: the
+mechanism-of-advantage decomposition (which mechanism earns
+each option's plus), the combination-price question (what cost
+exists ONLY because of the combination), the Frankenstein test
+(more mechanisms but not more quality → reject). Consumers: the
+engine-1/presentation-1 spec debates + res-1's evaluation
+discipline (the same parking family as intake-27's sacrifice
+protocol). Routed, never a row: the "local canonical pattern →
+higher-order consequence" HYPOTHESIS (res-1's aggregate
+macro-events + the cadences' decision half the standing
+consumers). Two recognition handles block-only (each naming its
+owner): "change the representation, shrink the case space" →
+PACK-1 closed enums + the parser grammar snapshot + INV-3;
+"vary the representation, preserve the invariant substrate" →
+the scaffold law + the cosmetic streams + the promotion door.
+Refused at the door: a grand-synthesis law/DECISION (the
+document itself refuses — D-024 agrees), named-principles
+documents (D-024), methodology codification into
+AGENTS/BLUEPRINT (D-163 — the method file external,
+CONFIRMED-OWNED), Stålberg-form features (no renderer;
+intake-17's fence), local-pattern machinery now, a
+Canonical-Visual-Memory row (NOT a repo record — the referent
+session-external; presentation-1 owns the player-facing surface,
+INV-4-fenced). Provenance caveats recorded: the Stålberg figures
+second-hand (KI#51 family); the "Canonical Visual Memory"
+verdict session-external, never repo law. The build queue
+UNTOUCHED — nothing unpins, nothing reorders. 1754 passed + 1
+skipped, ruff clean (Python 3.12.14; verified BEFORE working at
+HEAD 8f4fbd4e — the numbers identical — and re-verified after;
+doc-only, the corpora byte-untouched). Detail: D-174 + the
+intake-28 block (phases.md §6) + worklog iter-141.
+
 ### iter-140 · intake-27 — the level-design & worldbuilding consolidation routed: the doctrine confirmed as the strongest cross-domain confirmation family (budgets / LOD / authored-over-generated / data-driven — all owned), five compact instruments adopted (the reader law, the priced-option question, the top-LOD readability question, the realization table, the sacrifice protocol), the topology-aware hook distribution parked as the proposal — done (doc-only, the owner's «проанализируй документ и определи что из него можно полезного перенять в проект и почему» research call over the uploaded level-design conspectus)
 
 The question — what from a twelve-talk level-design / worldbuilding

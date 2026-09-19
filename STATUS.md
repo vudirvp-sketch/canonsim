@@ -1,40 +1,53 @@
-Iteration: iter-139 (`iter-139-world2-verdict` — the two-level
-gate's level-2 verdict on the owner's convening call «я решил что
-следует world 2 закончить, вердикты вынести» — the session's second
-half; the verdict material iter-137's depth audit + the four slices +
-the census + the composed experiments + the T7 reads — COMPLETE in
-the measured band, iter-137's own law):
-**the deep second world's HONEST SCOPE DELIVERED at the measured
-band** — the anti-collection half MEASURED (one ordinary verb →
-three systems → irreversible, divergent, route-stable state: the
-A/C/D/H ledger), the anti-reskin half MEASURED (L1's 14m24s reskin
-day vs the weeks-authored province: the spine + the vertex + the
-year-run almanac), the depth's DISTRIBUTION the recorded residue
-(B/F/G partial — the concentration at the triangle's vertex, the
-option surface 1-of-6 at the probed band, the 48 market/fair turns
-zero consumers — the one found-and-named counterexample). The
-verdict's law: the gate asks the honest scope, never uniform
-distribution; deferring until B/F/G close would be the
-completeness-smuggling the audit refused (no open row a verdict
-input). The residue's routing: the future depth consumers the
-content-side rows (F4's promotion events — pack-1/pack-4; the
-cadences' decision half a BUILD question) — world-2 never reopens
-for slices. The two-level gate COMPLETE: L1 PASS iter-116 (D-151),
-L2 DELIVERED iter-139 (D-172); the world-2 TASKS row done (the
-wave plan compressed to its pointers) ·
+Iteration: iter-141 (`iter-141-intake28` — the Stålberg-conspectus /
+transplantation-method output routed; the owner's «разбери 1231.md =>
+что стоит перенять и почему, зачем, как использовать и где это
+улучшит проект» research call over the uploaded `1231.md`, itself a
+prior session's output over an external Stålberg/Townscaper conspectus
++ the owner's competing-solutions preference; that session verified
+against the same `main` 8f4fbd4e but DNS-failed its clone — the D-163
+clone-less-session precedent, re-verified this round at a REAL clone):
+**the content PARTIALLY CONFIRMED — overwhelmingly owned, zero
+factual errors in the load-bearing repo-facing claims** (D-173's
+transplantation-test wording, BLUEPRINT §0's
+tension→resolution→sequencing, L13/L14, the owner-preference record
+D-165/D-173 — all hold verbatim; the Stålberg half the cross-domain
+confirmation family's next member [intake-16/17/24/27 the line]:
+small-alphabet+composition = L9/PACK-1; constraints-enable-quality =
+INV-3/schema/doors; variation-inside-invariants = the road-pack
+scaffold law + the cosmetic streams + the texture promotion door;
+representation switching = L12/LOD-1; the form rejections [dual grid /
+mesh / WFC / jitter] = intake-17's §22 scope guard, agreed in
+advance). **The residue — ONE compact instrument + one routed
+hypothesis, zero build-grade**: the COMBINATION FENCE (the fifth
+check's operational sharpening: a combined design carries NO
+presumption of advantage — itself a separate hypothesis on the same
+PROVEN/PARTIAL/REJECTED ladder; the three questions: the
+mechanism-of-advantage decomposition, the combination-price question,
+the Frankenstein test; consumers the engine-1/presentation-1 spec
+debates + res-1's evaluation — the same parking family as intake-27's
+sacrifice protocol), the "local canonical pattern → higher-order
+consequence" HYPOTHESIS routed to res-1's aggregate macro-events + the
+cadences' decision half (never a row; intake-17's multi-node motifs
+PROVEN in three owners the substrate), two recognition handles
+block-only ("change the representation, shrink the case space" →
+PACK-1's closed enums + the parser grammar snapshot + INV-3; "vary the
+representation, preserve the invariant substrate" → the scaffold law +
+the cosmetic streams + the promotion door). Provenance caveats: the
+Stålberg figures second-hand (the KI#51 family); the "Canonical Visual
+Memory" verdict session-external — NOT a repo record (presentation-1
+owns the player-facing surface, INV-4-fenced) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 8dc5436 — the numbers identical —
+verified BEFORE working at HEAD 8f4fbd4e — the numbers identical —
 and re-verified after; doc-only, the corpora byte-untouched) ·
 Date: 2026-09-19 ·
-Scope: `docs/DECISIONS.md` (D-172), `docs/TASKS.md` (the world-2 row
-done + the iter-139 section), `docs/blueprint/phases.md` (§6 the
-verdict block), `STATUS.md` (this re-pin + KI#86's deletion per
-AGENTS §5 + the Next step), `worklog.md` (this entry; iter-129
-evicted per the cap) — 5 files.
-The prior iteration's record: iter-138 (intake-26). The
+Scope: `docs/blueprint/phases.md` (§6 the intake-28 block),
+`docs/DECISIONS.md` (D-174), `docs/TASKS.md` (the iter-141 section),
+`STATUS.md` (this re-pin + the Next step), `worklog.md` (this entry;
+iter-131 evicted per the cap) — 5 files.
+The prior iteration's record: iter-140 (intake-27). The
 detail lives in TASKS + worklog + git.
 
 Iteration: iter-140 (`iter-140-intake27` — the level-design &
@@ -572,18 +585,20 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-140 DONE: intake-27 routed — the level-design & worldbuilding
-consolidation: the doctrine PARTIALLY CONFIRMED (the strongest
-cross-domain confirmation family — budgets / LOD /
-authored-over-generated / data-driven all owned; D-173), five
-instruments adopted (the reader law / the priced-option question /
-the top-LOD readability question — the depth battery's sharpenings
-on the consult card's item 10; the realization table + the
-sacrifice protocol PARKED for the pack slots and the SoW debates),
-the topology-aware hook distribution the recorded proposal (never
-law until a pack arms it). iter-139: world-2 L2 the verdict
-DELIVERED (D-172) — the two-level gate COMPLETE; iter-138:
-intake-26 routed — TEST_PLAN §9 the selection grammar (D-171).**
+**iter-141 DONE: intake-28 routed — the Stålberg-conspectus /
+transplantation-method output: PARTIALLY CONFIRMED, the content
+overwhelmingly owned (the cross-domain confirmation family's next
+member; zero factual errors in the load-bearing repo-facing claims,
+re-verified at a real clone), ONE instrument adopted (the COMBINATION
+FENCE — a combined design carries no presumption of advantage: the
+mechanism-of-advantage decomposition, the combination-price question,
+the Frankenstein test; consumers the engine-1/presentation-1 debates
++ res-1's evaluation, D-174), the local-pattern→higher-order
+hypothesis routed to the standing consumers, two recognition handles
+recorded block-only — zero build-grade, the queue untouched. iter-140:
+intake-27 routed (five instruments + the topology proposal, D-173);
+iter-139: world-2 L2 the verdict DELIVERED (D-172) — the two-level
+gate COMPLETE.**
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order; the next
@@ -610,7 +625,12 @@ intake-26 routed — TEST_PLAN §9 the selection grammar (D-171).**
    call is the owner's, never self-opened); for the SoW promise
    debates the intake-27 sacrifice protocol (the promise pair →
    the both-promises test → Barrier/Gate/Carrot/S'more with the
-   price named — phases.md §6's intake-27 block, D-173).
+   price named — phases.md §6's intake-27 block, D-173) and the
+   intake-28 combination fence (a combined design carries no
+   presumption of advantage — itself a separate hypothesis: the
+   mechanism-of-advantage decomposition, the combination-price
+   question, the Frankenstein test; phases.md §6's intake-28
+   block, D-174).
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
    standing gap rows: the {3–8B, GBNF} arm (owner hardware —
    engine-1's decision input), the bg-7 prose families skipped in
