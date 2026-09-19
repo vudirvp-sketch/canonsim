@@ -5,7 +5,7 @@
 > the economy loop half of the Kenshi row; the emergent-chain half is
 > already absorbed in the phase-5 records). Anti-drift (D-026):
 > catalog/license/URL/phase gating in `docs/REFERENCES.md`; one-line
-> synthesis in `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
 > here. Source is proprietary — Chris Hunt's public dev interviews and
 > the game itself (modding scene documents the data shapes). No code,
 > no assets, no 1:1 rewrites (`REFERENCES.md` §0.5).

@@ -3,409 +3,98 @@
 > Cap: 10 entries, one in / one out. 3–5 lines per entry: what changed, why,
 > files touched. No diffs, no command output, no reasoning traces. Long-term
 > rationale belongs in `docs/DECISIONS.md`.
-> Trimmed to cap at iter-0v (KI#7); pre-trim history lives in git history.
-> Entries re-trimmed to the line cap at iter-10a (KI#37; the drift ran
-> iter-8b→10) — pre-trim detail lives in git history.
-> Re-trimmed 39→10 at iter-48 (KI#68: the cap had drifted silently —
-> the iter-43..47 "evicted per the cap" claims never executed; the
-> eviction is now verified in the same edit, not claimed). Pre-trim
-> history lives in git.
-> Order: newest first (normalized at iter-8c — the order had drifted
-> since iter-5).
+> Re-trimmed at iter-151 (the entries had drifted to ~40 lines each; the
+> compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
+> demands); pre-trim history lives in git.
 ---
-iter-150 · 2026-09-20 · revalid1 — the owner's two-part session call
-(«лицензирование поменять на AGPLv3» + «аудит всех standing backlog
-rows… и если да => составь план и пересмотри» over the owner-supplied
-prior-agent analysis); doc-only, zero code, zero corpus price
-- verified BEFORE working (1842+1 green, ruff clean, Python 3.12.14,
-  HEAD 5891cfe — the BASE_COMMIT captured before any change); PART 1:
-  LICENSE (the canonical AGPL-3.0 text, the verbatim SPDX copy) + the
-  README License section (TBD → AGPL-3.0-only, D-183; ROADMAP §4's
-  donor stance untouched by design, pyproject untouched); PART 2: all
-  thirteen standing rows revalidated with the four questions (D-184) —
-  pack-3 rewritten (the 2nd-setting blocker dead: phase 6 CLOSED, five
-  packs live), tune-3 re-aimed (engine movement exists, no pack arms
-  it — the HEAD urgency census; a pack-arming choice, consumer-first),
-  st-2/scav-1 sharpened, companion-1/mech-2/st-5/parse-2 synced (the
-  mech-2 riders absorbed INTO the row per D-113 — they had lived in
-  the intake sections + STATUS only), the other five audited-current;
-  the prior-agent verdict set verified: right on pack-3/tune-3,
-  already-law on five, one unnamed gap found (the mech-2 riders)
-- docs: TASKS the iter-150 section (the verdict table) + eight
-  revalidated rows, DECISIONS D-183/D-184, STATUS re-pin (iter-148's
-  name evicted per the two-record convention) + the Next step (the
-  recommendation unchanged: engine-1 + presentation-1),
-  AGENT_NAVIGATION §1 (the LICENSE row), this entry (iter-140 evicted,
-  verified in this edit); 1842+1 green, ruff clean after
-- Caps: STATUS 601 / TASKS 2422 / DECISIONS 97 lines (63 rows — over
-  the 30 cap on the §6.1 substance precedent, the standing
-  post-ladder record) / worklog 10 entries (iter-140 evicted here,
-  verified in this edit) — the over-cap files ride the documented
-  §6.1 substance precedent
+iter-151 · 2026-09-20 · docscomp1 — the owner's matrix session + the «вперед
+приступай к работе» call: the semantic documentation compaction pass — the
+iter-140-memgc GC restored and extended (D-185; the memgc had been clobbered
+by iter-140-intake27's stale-base archive apply, found this session)
+- DECISIONS 63→30 rows / 231→48KB (D-185 restored, the intake family absorbs
+  D-173..D-175/D-184, the fixation families merged, the landings family
+  D-176..D-182, the fat rows slimmed to decision + pointer); TASKS 2422→914
+  (the phase-6-era ledger extended to iter-150, the 13 standing rows
+  extracted to the live queue head); phases.md §6 restored compact + the
+  intake-27/28/29 blocks (4305→2650); NAV 88→14KB; TEST_PLAN retitled the
+  Verification Stack (837→588); REFERENCES_DEEP 63→31KB; SPECS_BACKLOG
+  re-points restored; TAXONOMY/BLUEPRINT/PARSER/BRIEF re-points; ref/* (34
+  files); DIRECTOR_SPEC header; AGENTS §6 one line; CORE_DESIGN_RESEARCH
+  structural inbound → zero (deletion the owner's next call); STATUS re-pin
+- verified BEFORE working at BASE_COMMIT 5d88bd0 (1842+1 green, ruff clean —
+  the prior session's baseline re-confirmed) and re-verified after: 1842+1
+  green, ruff clean; doc-only, zero code, zero corpus price; 16 paths (over
+  the 3–5 soft limit, all mandated by the pass's own scope, per AGENTS §2.3)
+- Caps after: DECISIONS 73 lines (30 rows, at cap) / TASKS 914 / NAV 140 /
+  TEST_PLAN 588 / phases 2650 + DIRECTOR_SPEC 585 + BRIEF_SPEC 656 over the
+  600/300 signals — substance (the intact cards/slices/audit/verdict + the
+  runtime contracts), the §6.1 precedent, recorded here as the law demands
 
-iter-149 · 2026-09-20 · pressure1 — the owner's «продолжай работу
-с места где прервался» resumption call over the interrupted pack-4
-session (the T1 slice: one district, one boiler, one gauge, three
-factions, one Cooling-Debt chain — the displacement law as pure
-pack data, ZERO CORE CHANGE held exactly; the fifth committed pack,
-the first authored non-scaffold one)
-- verified BEFORE working (1826+1 green, ruff clean, Python
-  3.12.14, HEAD a5a3012 — the BASE_COMMIT captured before any
-  change, the law held through the channel interruption); the T1
-  built over the landed primitives: the gauge = res-1's account +
-  the scene line's live anchor field, the closed cycle = the two
-  macro flows (the FOLDED net — the co-due same-account desync
-  DISCOVERED by the crafted twin, recorded in the economy notes),
-  the debt = the thermal_shock layer (the seams' never-regress
-  fold, the knocking +600 / the collection +4320, the halted spread
-  pass with zero rolls), the triangle = depth-6 (the stokers'
-  MECHANICAL group burn, the bench's convening + the keeper's
-  ECHO-gated ration, the watch's plea + the widow's scuttle), the
-  moral half = the chronic axes + the world's replies (the
-  thermometer minus structural); the spiral closes emergent on the
-  golden run (burst → cold → plea → the widow's feed → the warmth)
-- the findings recorded, never patched in-core (the zero-core
-  law): the group-stock lint gap (the entities vocabulary vs the
-  economy/fold modules — the reserves ride the keepers' own
-  accounts), the co-due same-account flow limit (the snapshot
-  from_ — the per-flow re-draft a future row), the bare-beat/
-  mechanical split for stock-spending group goals
-- docs: TASKS the iter-149 section + the pack-4 row flip, DECISIONS
-  D-182, STATUS re-pin (iter-147's name evicted per the
-  two-record convention) + the Next step (engine-1 +
-  presentation-1 the recommended head; the post-T1 residues named),
-  AGENT_NAVIGATION §1 (the fifth pack), this entry (iter-139
-  evicted, verified in this edit); 1842+1 green, ruff clean after
-  (+16 = 16 pressure tests; the economy unarmed law's
-  second-consumer amendment)
-- Caps: STATUS 619 / TASKS 2314 / DECISIONS 96 lines (61 rows —
-  over the 30 cap on the §6.1 substance precedent, the standing
-  post-ladder record) / worklog 10 entries (iter-139 evicted here,
-  verified in this edit) — the over-cap files ride the documented
-  §6.1 substance precedent
+iter-150 · 2026-09-20 · revalid1 — the owner's two-part call: the AGPLv3
+relicense (LICENSE + the README License section, D-183) + the 13-row
+standing-backlog revalidation (D-184; 8 rows revised, no rows added/deleted)
+- docs: TASKS (the iter-150 section + eight revalidated rows), DECISIONS
+  D-183/D-184, STATUS re-pin + Next step, NAV §1 (the LICENSE row);
+  doc-only, 1842+1 green both ends, iter-140 evicted per the cap
 
-iter-148 · 2026-09-19 · grim1 — the owner's «продолжай работы по
-планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick from the plan's own recorded recommendation
-(STATUS Next step's readiness head: the pack consumers, pack-1 the
-natural depth companion)
-- verified BEFORE working at BASE_COMMIT 156ec8f (1811 passed +
-  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
-  1826 passed + 1 skipped (+14 in tests/test_grim_pack.py, +1 the
-  grim stoplist self-check), ruff clean; the three older packs'
-  corpora byte-untouched (the economy unarmed law's
-  first-consumer amendment the only test-side touch)
-- the pack: `content/grim_pack/` (the FOURTH committed pack) — the
-  dark axes (attraction/intimacy/loyalty flat pc-ward + shame/anger
-  status, both feeding the social modifiers), the flirt→proposition
-  ladder (the contested delivery; the UNCONTESTED ask whose answer
-  is the world's on_action reaction on her attraction home — never
-  a roll), the consent split structural (the canonical event vs the
-  crafted belief record), the coerced branch (the pack's ONE spend
-  door — generic coerce dropped, the single-spend_event law), the
-  read_ticket hinge (the pawn ticket mints the reader's leverage —
-  the player's dark choice), the jealousy both gated arms, the
-  stain, the shame, the two deferred hooks, the drunk's urgency
-  re-pointed at the pc
-- the lint: `core/packlint/admission.py::_fact_belief_split` (+92;
-  the orchestrator call +5 in core/pack.py) — the event-type
-  vocabulary ∩ the knowledge-token vocabulary (literals + templated
-  fills over the entity ids) = ∅, D-175 (5)'s consent split as the
-  generic law; the collision twin refused loudly, all four packs
-  green
-- the armings: res-1's first consumer (coin accounts pc 6 + till
-  30, buy_round's transfer + the solvency soft arm, the two macro
-  flows, the identity price formula measured) + since-1's first
-  (the since_lines vocabulary + the dark card markers)
-- the §9 claim packet (the driver outside the repo): universality
-  CONFIRMED (the engine diff is the lint only); the smoke corpus
-  (seed 42, the golden fixture, fingerprint 8) tells the full dark
-  arc — the ask at 58 refused (two points short), the stain, the
-  ticket, the coerced fact (trust 25/fear 75 from neutral), the
-  shame; the one-knob arm pinned (attraction 70 → consent_given);
-  the coin oracle exact; the twin byte-identical; falsifiers not
-  tripped — CONFIRMED at the measured band
-- docs: TASKS (the iter-148 section + the pack-1 flip), DECISIONS
-  D-181, PACK_SPEC §5 (the split's lint row), AGENT_NAVIGATION §1
-  (the fourth pack + the fixture + the playscript), STATUS re-pin +
-  Next step (pack-4 the new recommendation); this entry (iter-138
-  evicted per the cap, verified in this edit; 10 held)
+iter-149 · 2026-09-20 · pressure1 — pack-4 the pressure city (T1), the
+owner's resumption call: the displacement law as pure pack data, ZERO CORE
+CHANGE held exactly; res-1's second consumer arming; the first authored
+non-scaffold pack; +16 pressure tests
+- docs: TASKS (the section + the flip), DECISIONS D-182, STATUS re-pin, NAV
+  §1 (the fifth pack); the engine findings (the group-stock lint gap, the
+  co-due same-account limit) recorded in D-182, never patched in-core
 
-iter-147 · 2026-09-19 · since1 — the owner's «продолжай работы по
-планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick from the plan's own recorded recommendation
-(STATUS Next step's readiness head after res-1, CONTRACTS §3 the
-boundary — the section collapsed to a pointer in the same iteration)
-- verified BEFORE working at BASE_COMMIT 0bd860d (1781 passed +
-  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
-  1811 passed + 1 skipped (+30 in tests/test_since.py), ruff clean;
-  the committed packs' corpora byte-untouched (the unarmed landing —
-  no pack declares since_lines, the fold never built)
-- the fold: `brief/since.py` (new) — the per-(reader, entity)
-  encounter epochs (presence per present_entities + the carried-item
-  closure; a location's co-presence the reader positioned at it),
-  the reunion delta (the apart-window prop endpoints, both values
-  known or silent; the position transfer; the reader's apart-born
-  records naming the entity, the boundary events' own sightings
-  excluded); event-indexed, zero streams, read-side only
-- the render: `brief/assembler.py` — one trailing `since=` segment
-  per entity card + the scene line, atomic with the card (the fill
-  law whole-line, no dangling tails), knower-threaded (§3.9's
-  amendment: the cards' structural lines stay shared, the segments
-  are the knower's own); `max_segments` the D-047 ranking cap
-- the lint: `core/packlint/readside.py::_since_lines` (the closed
-  key set + the per-family placeholder sets, constant templates and
-  dead vocabularies refused, the props/template pairing, position
-  never a prop row)
-- the §9 claim packet (the sandbox driver, Rule 9): the crafted
-  condensation corpus (the watch-rotation revisit — the corporal's
-  fatigue reset + position transfer while apart): D1 determinism,
-  D2 the document arm (armed 1 since-line vs unarmed 0 —
-  `since=last seen at loc_keep; fatigue 30->0`), D3 zero-price (the
-  same-seed logs byte-identical); the committed smoke corpus
-  honestly zero reunions (the tune-3 finding extended); the DECISION
-  arm DEFERRED to the first consumer (the narrator is the owner-
-  gated LLM boundary; world-2's travelers a future row) — falsifiers
-  not tripped at the measured band
-- docs: TASKS (the iter-147 section + the since-1 flip), DECISIONS
-  D-180, CONTRACTS §3 collapsed, BRIEF_SPEC §3.4's extension +
-  §3.9's amendment + §6's since_lines contract (653 lines > the 600
-  cap — all substance, the §6.1 precedent, kept), AGENT_NAVIGATION
-  §1 (brief/since.py + the tests row), STATUS re-pin + Next step
-  (the pack consumers the new recommendation); this entry (iter-137
-  evicted per the cap, verified in this edit; 10 held)
+iter-148 · 2026-09-19 · grim1 — pack-1 the grim tavern, the owner's
+delegation call: the dark line as pure pack data (the axes, the
+flirt→proposition ladder with the world's reply, the consent split + its
+fact/belief lint `core/packlint/admission.py`, the pawn-ticket hinge);
+res-1/since-1 first consumer armings; +14+1 tests
+- docs: TASKS, DECISIONS D-181, PACK_SPEC §5 (the lint row), STATUS re-pin,
+  NAV §1 (the fourth pack); the §9 claim packet CONFIRMED at the band
 
-iter-146 · 2026-09-19 · res1 — the owner's «продолжай работы по
-планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick from the plan's own recorded recommendation
-(STATUS Next step's readiness head after roads-1, CONTRACTS §2 the
-boundary)
-- verified BEFORE working at BASE_COMMIT 89cb177 (1763 passed +
-  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
-  1781 passed + 1 skipped (+18 in tests/test_economy.py), ruff
-  clean; the committed packs' corpora byte-untouched (the unarmed
-  landing — the T1s green both ends)
-- the substrate: `core/economy.py` — the account primitive
-  (`account.<kind>` props, `core/fold.py` seeding), the three verbs
-  (`account_sourced`/`account_transferred`/`account_consumed`),
-  `flow_drafts` (the aggregate flows at macro crossings, the `every`
-  divisor), `price_of` (base + per_unit × level, integer-only); the
-  floor: `account_at_least` soft at the door (`core/intent.py`), the
-  `is_account_prop` floor loud at the `_commit` gate (`core/loop.py`);
-  the discrete arm: the `account` resolver (`core/resolvers.py`,
-  STATE_MUTATING)
-- the lint: `core/packlint/economy.py` (early shape + late cross, the
-  KI#77 order law), the account-action block + the solvency-gate
-  requirement (`packlint/actions.py`), the entity `accounts` pairing
-  (`packlint/entities.py`), `lint_account_cond` (`packlint/shared.py`
-  at the four requires sites), the flow verb witnesses
-  (`packlint/admission.py`)
-- the §9 claim packet (the sandbox driver, Rule 9): F3 MEASURED (the
-  drained arm's 4-coin spend rejected at 2 coin, the fresh arm's
-  accepted at 10 — pc 2 vs 6), F4 CLEAN (grain 10 -> 13, non-verb
-  bytes identical, fingerprints equal), F1 the conservation oracle
-  exact; falsifiers NOT tripped (CONFIRMED at the measured band);
-  honest residues: no consumer yet (the gates + price_of armed but
-  unconsumed), the compound exchange NOT a substrate concern
-- docs: TASKS (the iter-146 section + the res-1 flip), DECISIONS
-  D-179, CONTRACTS §2 collapsed to a pointer, EVENT_SCHEMA §4 (the
-  account home), AGENT_NAVIGATION §1 (economy + the six touched
-  entries + the tests row), STATUS re-pin + Next step (since-1 the
-  new recommendation); this entry (iter-136 evicted per the cap,
-  verified in this edit; 10 held)
+iter-147 · 2026-09-19 · since1 — since-1 the re-encounter delta: `brief/
+since.py` (the per-entity encounter-epoch fold, read-side only, zero
+streams), the cards' since-segments, the packlint readside lint; the
+unarmed landing, +30 tests, the committed corpora byte-untouched
+- docs: TASKS, DECISIONS D-180, CONTRACTS §3 collapsed, BRIEF_SPEC
+  §3.4/§3.9/§6, STATUS re-pin, NAV §1
 
-iter-145 · 2026-09-19 · roads1 — the owner's «продолжай работы по
-планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick from the plan's own recorded recommendation
-(D-175's build-rows order, roads-1 the readiness head, CONTRACTS §1
-the boundary)
-- verified BEFORE working at BASE_COMMIT 091b004 (1754 passed +
-  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
-  1763 passed + 1 skipped (+9 in tests/test_roads.py), ruff clean;
-  the fresh-venv install path verified for core.packlint (the CI
-  runner's own path)
-- the pass: `core/worldgen.py::_pass_roads` (PASS_ORDER grew roads;
-  pure, draw-free) — the MST backbone + the pack-declared MUTUAL
-  k-nearest overlay over the CLAIMED locations (the mutual form is
-  I3+D2's pin: per-node overlay degree <= k, <= n*k/2 edges — the
-  union reading breaks both on the star); `WorldModel.roads`;
-  I4's span law relocated to the emit (the loud WorldgenError
-  conflict rule; the runtime backstop grew place+roads — the
-  lint-side-alone place pin superseded by its relocation successor
-  test)
-- the ONE read: `core/roads.py::exits(pack, world, location)` —
-  authored non-empty wins, else derived, else (); the consumers
-  re-pointed (lod.scene_zones grew the world param;
-  first_failing/occ_breaking_cause gained world=None, threaded at
-  every loop door — the F-run's probe caught the accept door missing
-  its world before the fix); the lint: worldgen.roads required,
-  k 0..claimed-2; the committed packs armed k=0 (zero corpus price —
-  the authored exits win everywhere; the claimed sets connect within
-  their spans: 1<=1, 1<=2, 4<=4)
-- the RIDER: the pack.py split (D-175) — core/packlint/ (helpers +
-  shared + twelve domain classes under the one _Lint orchestrator;
-  load_pack the single gate; no DSL/base classes; the compat
-  re-exports keep every importer green; pyproject gains
-  core.packlint)
-- the §9 claim packet (the sandbox driver, Rule 9): the province's
-  MIXED mode G variant at the smoke seed, k=0 vs k=2 — MEASURED:
-  the door 8 -> 12 accepted pairs, WHO simulates 5 -> 7 NPCs in the
-  crossing's warm ring at keep, routes 5 -> 8 edges / 0 -> 3 cycles
-  / 10 -> 20 two-hop pairs; falsifier NOT tripped (CONFIRMED at the
-  measured band); the honest residues: the mode G authoring burden
-  (the orphan law couples grammar reachability to authored edges),
-  the authored playscript breaks under the derived topology (the
-  weight-14 tie resolved differently), the adjacent_locations
-  audience stays authored-only (not a named consumer — the first
-  mode G pack's rider)
-- docs: TASKS (the iter-145 section + the row flip), DECISIONS
-  D-178, CONTRACTS §1 collapsed to a pointer, ROADMAP's row list,
-  AGENT_NAVIGATION §1 (core/roads.py + the packlint row + the pass
-  list), STATUS re-pin + Next step (res-1 the new recommendation);
-  this entry (iter-135 evicted per the cap, verified in this edit;
-  10 held)
+iter-146 · 2026-09-19 · res1 — res-1 the economy substrate: `core/economy.py`
+(the account primitive, the three verbs through the canon door, the flow
+drafts, `price_of`), the door/gate underflow floors, the discrete arm, the
+packlint economy family; the unarmed landing, +18 tests
+- docs: TASKS, DECISIONS D-179, CONTRACTS §2 collapsed, EVENT_SCHEMA §4,
+  STATUS re-pin, NAV §1; the §9 claim packet CONFIRMED (F3/F4 + the oracle)
 
+iter-145 · 2026-09-19 · roads1 — roads-1 the generated-exits pass: the MST
+backbone + the mutual k-nearest overlay over the claimed locations
+(`_pass_roads`), the ONE shared read `core/roads.py::exits` (authored wins),
+the worldgen lint; the pack.py split rider (`core/packlint/`); armed k=0,
++9 tests
+- docs: TASKS, DECISIONS D-178, CONTRACTS §1 collapsed, ROADMAP's row list,
+  STATUS re-pin, NAV §1; the measured fork evidence in the iter-145 record
 
+iter-144 · 2026-09-19 · contracts — `docs/CONTRACTS.md` (new): the three
+pre-implementation contracts (roads-1/res-1/since-1 — pinned decisions,
+invariant sets, §9 claim packets, minimal test sets); doc-only
+- docs: TASKS (the section + the row pointers), DECISIONS D-177, STATUS
+  re-pin + Next step, NAV §1 (the CONTRACTS row); the doc-loop alarm
+  answered (the D-022 exception + the next step BUILD work)
 
-iter-144 · 2026-09-19 · contracts — the owner's «продолжай работы
-по планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick from the plan's own recorded next
-recommendation (D-175's order: ci-1 → the three contract writes →
-the build rows; ci-1 consumed iter-143)
-- verified BEFORE working at BASE_COMMIT 7e6c83f (1754 passed +
-  1 skipped, ruff clean, Python 3.12.14 the env pin) and
-  re-verified after — doc-only, the corpora byte-untouched
-- `docs/CONTRACTS.md` (new): roads-1 — the node question pinned
-  (claimed locations only, the consumer grounding: the warm ring,
-  the move door, travel's derived price needs claimed endpoints
-  D-122; node geometry = the claimed site set, the shared
-  min-cross-pair metric), the algorithm named (MST backbone +
-  pack-declared k-nearest overlay, the D-174 fence's three
-  questions answered inline, the one-knob kill arm, k=0 legal),
-  the invariant set I1–I6 (the max_edge_span conflict rule: the
-  loud WorldgenError, connectivity never bought by breaking the
-  span); res-1 — the substrate shape (the account primitive,
-  three verbs through the canon door, integer-only, prices
-  derived L3, flows on the D-112 aggregate surface), the
-  irreversibility split, the underflow floor (soft door / loud
-  gate), the unarmed landing; since-1 — the baseline sense named
-  (last physical co-presence, the per-entity encounter epoch, the
-  four other senses rejected with cause), the scene_delta
-  separation, the blind-NPC inheritance, the pack-owned line
-  vocabulary; every contract: the §9 claim packet + the minimal
-  test set; the form's law in the header (a contract is NOT the
-  spec — SPECS_BACKLOG's JIT law untouched)
-- docs: TASKS (the iter-144 section + the three row pointers),
-  DECISIONS D-177, STATUS re-pin + Next step (the recommendation
-  now the build rows, roads-1 the readiness head),
-  AGENT_NAVIGATION §1 the CONTRACTS.md row; this entry (iter-134
-  evicted per the cap, verified in this edit; 10 held)
-- the doc-loop alarm answered: the D-022 fresh-owner-request
-  exception + the sequence's next step is BUILD work; caps after:
-  STATUS 645 / TASKS 1998 / DECISIONS 90 lines (56 rows — over the
-  30 cap on the §6.1 substance precedent, the standing post-ladder
-  record) / CONTRACTS 340 — the over-cap files ride the documented
-  §6.1 substance precedent (STATUS down from 684: the iter-142
-  record retired per the two-record pattern)
-iter-143 · 2026-09-19 · ci1 — the owner's «продолжай работы по
-планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call; the pick taken from the plan's own recorded first
-recommendation (intake-29/D-175: ci-1 FIRST — AGENTS §8's CI-files
-gate satisfied by the fresh delegation, recorded as such)
-- the runner LANDED: `.github/workflows/ci.yml` — pytest + ruff on
-  push to `main` (+ the PR trigger riding along: the row's own
-  "protect main after" needs check runs on PR heads; the owner's
-  direct-push rhythm the primary path); PYTHONHASHSEED=0 job-level
-  (INV-2), Python 3.12.14 pinned EXACT (the env pin — the golden
-  T1 fixture byte-compare, TEST_PLAN §1.1; a bump rides a fixture
-  regen, never alone), the plain install (runners carry no PEP-668
-  fence), contents:read, timeout 15
-- verified BEFORE working at BASE_COMMIT 15e568d (1754+1 green,
-  ruff clean, Python 3.12.14) and re-verified after (doc-only
-  beyond the workflow file); the runner path simulated in a clean
-  venv (fresh install → ruff → pytest: the same 1754+1, the skip
-  the chronicler module's duckdb import by design);
-  checkout@v7 / setup-python@v7 / 3.12.14-in-python-versions
-  live-checked 2026-09-19; the first LIVE run fires on the owner's
-  push (named honestly — a sandbox cannot run GitHub's runners);
-  7 files (the workflow + the doc quintet + README's repo-map row;
-  over the 3–5 soft limit, all mandated: the quintet by AGENTS §6,
-  the map row by NAV §3's short-map duty); branch protection the
-  owner's settings step (the recipe in the stop-point report)
-- caps: STATUS 684 / TASKS 1949 / DECISIONS 89 lines (55 rows —
-  over the 30 cap on the §6.1 substance precedent until the next
-  gate collapse) / phases 4305 — the over-cap files ride the
-  documented §6.1 substance precedent, trim at the next gate
-  collapse; iter-133 evicted here, verified in this edit; 10 held
+iter-143 · 2026-09-19 · ci1 — ci-1 the GitHub Actions runner:
+`.github/workflows/ci.yml` (pytest + ruff on push/PR to `main`,
+PYTHONHASHSEED=0, Python 3.12.14 the env pin); the runner path simulated in
+a clean venv (1754+1, ruff clean); branch protection the owner's settings
+step (the recipe in the stop-point report)
+- doc-only beyond the workflow file; the first LIVE run fires on the owner's
+  push; 7 files (over the soft limit, all mandated — the doc quintet by
+  AGENTS §6, the map row by NAV §3's short-map duty)
 
-
-iter-142 · 2026-09-19 · intake29 — the owner's «проанализируй
-текст далее и его предложения, если согласен => нужно будет
-заложить в планы работу и соответственно пересмотреть оный
-или типа того. по пунктам разбери что надо что не надо и
-почему» research call over the uploaded external audit (a
-prior DNS-less session's static roadmap review of main
-8f4fbd4e; 5 files doc-only, zero code, zero corpus price)
-- verified BEFORE working (1754+1 green LIVE, ruff clean,
-  Python 3.12.14, HEAD aa1097f — one commit past the audit's;
-  the audit's own numbers confirmed by the run it could not
-  make); every load-bearing claim verified (sizes / _Lint
-  structure / no CI / the branch API / the row wordings /
-  324-sites-vs-6-locations / the undefined co-presence
-  baseline); two framings corrected (res-1 "contradiction" →
-  an unwritten contract point; M3/T8 "needs demotion" →
-  owned since iter-138)
-- the residue routed into the rows (D-175): res-1's mechanism
-  split + irreversibility split; roads-1's topology contract
-  (the node question, the algorithm naming, the invariant set,
-  the LOD/autonomy falsifier); since-1's encounter baseline;
-  companion-1's no-teleport; pack-1's consent split; ci-1 the
-  recommended first pick; the pack.py split the rider rule
-  (never a standalone refactor); the intake admission rule
-  (a named consumer row + a falsifier up front) — the queue's
-  composition sharpened, its order never touched
-
-
-iter-141 · 2026-09-19 · intake28 — the owner's «разбери 1231.md =>
-что стоит перенять и почему, зачем, как использовать и где это
-улучшит проект» research call over the uploaded `1231.md`, itself a
-prior session's output (an external Stålberg/Townscaper conspectus +
-the owner's competing-solutions preference; that session verified
-against the same main 8f4fbd4e but DNS-failed its clone — 5 files
-doc-only, zero code, zero corpus price, the D-163 clone-less-session
-precedent, re-verified at a REAL clone)
-- verified BEFORE working (1754+1 green, ruff clean, Python
-  3.12.14, HEAD 8f4fbd4e); the verdict PARTIALLY CONFIRMED — the
-  content overwhelmingly OWNED, zero factual errors in the
-  load-bearing repo-facing claims (D-173's test wording, BLUEPRINT
-  §0, L13/L14, the owner-preference record D-165/D-173 all hold;
-  the Stålberg half the cross-domain confirmation family's next
-  member [intake-16/17/24/27], the Townscaper reconciliation
-  itself intake-17's)
-- the residue: ONE instrument ADOPTED (the COMBINATION FENCE — the
-  fifth check's operational sharpening: a combined design carries
-  NO presumption of advantage, itself a separate hypothesis; the
-  mechanism-of-advantage decomposition + the combination-price
-  question + the Frankenstein test; consumers the
-  engine-1/presentation-1 debates + res-1's evaluation); the
-  local-pattern→higher-order HYPOTHESIS routed to res-1's
-  aggregate macro-events + the cadences' decision half (never a
-  row); two recognition handles block-only (representation-shrink →
-  PACK-1/grammar snapshot/INV-3; vary-representation-preserve-
-  substrate → the scaffold law/cosmetic streams/promotion door);
-  refused: a grand-synthesis law (the document itself refuses,
-  D-024 agrees), methodology codification (D-163 — the method file
-  external, nothing left to adopt), Stålberg-form features
-  (intake-17's fence), a Canonical-Visual-Memory row (NOT a repo
-  record — session-external; presentation-1 owns the surface,
-  INV-4-fenced; the one provenance caveat; Stålberg figures
-  second-hand per the KI#51 family)
-- docs: phases.md §6 the intake-28 block, DECISIONS D-174, TASKS
-  the iter-141 section, STATUS re-pin + Next step (iter-139's
-  record evicted per the two-record convention), this file.
-  iter-131 evicted here (verified against git in this edit); 10
-  after; 1754+1 green, ruff clean after. Caps: STATUS 646 / TASKS
-  1846 / DECISIONS 87 (53 rows — over the 30 cap on the §6.1
-  substance precedent, the standing post-ladder record) / phases
-  4068 — the over-cap files ride the documented §6.1 substance
-  precedent
+iter-142 · 2026-09-19 · intake29 — the external-audit / roadmap-review
+output routed (D-175): the audit CONFIRMED (live-verified at a real clone +
+the suite the audit could not run); six contract sharpenings adopted into
+the rows + two rider rules (the pack.py split rider; the intake admission
+rule); the ORDER recommendation recorded, never enforced (D-113)
+- docs: phases.md §6 the intake-29 block, TASKS, STATUS re-pin; iter-131
+  evicted per the cap; doc-only, 1754+1 green

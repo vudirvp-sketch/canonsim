@@ -1,9 +1,13 @@
-# TEST_PLAN.md — Phase-0 Verification Stack
+# TEST_PLAN.md — Verification Stack
 
 > Spec written at the iter-6 trigger (`SPECS_BACKLOG.md` row). Formalizes
 > the T0–T8 suite + the M1–M5 metric definitions + the gate protocol.
-> Source of truth for what counts as "the gate passed." Scope: phase 0
-> only. The T-suite is the invariants made executable (D-031): every
+> Source of truth for what counts as "the gate passed." Scope: the
+> whole repo's verification vocabulary — the T-suite + metrics + gate
+> protocol (the phase-0 origin), the offline acceptance suites
+> (§6–§7.2), the testproto LLM-integration protocol (§8) + the
+> heartbeat ledger (§8.5), the claim → instrument selection grammar
+> (§9). The T-suite is the invariants made executable (D-031): every
 > INV has at least one test that fails loudly on its violation.
 
 ## 1. T-suite (the gate tests — `MVP_SCOPE.md` §14, `phase0.md` §6)
@@ -224,263 +228,11 @@ maximal run of consecutive eventless windows; the table reports
 length histogram — the numbers the phase-3 exit criterion ("a
 scene without an event < N beats", ROADMAP §2) reads at its gate.
 
-Measured (iter-37, 1000 seeds 100–1099, day1_full, director on):
-**both arms identical, per-seed byte-identical (10 probed) — max
-stretch 1, one stretch per run (the (360,720] phase-boundary window
-between the theft ladder and the fire chain), quiet 1000/1000.**
-The clock's measurable delta on this pack+script is exactly zero:
-every run ends in PEAK (the double-steal suspicion holds entropy ≥
-peak_floor 25 through the last beat; the stagnation path never
-fires, so REST never gates anything — the D-065 "un-tuned numbers"
-note gets its answer). A measurable delta needs a script/pack that
-walks the world into quiet — a phase-3 gate-protocol script-set
-question, recorded in D-066, not forced here.
-
-Re-measured at iter-38 (DIR-3, the climax layer landed): 10 seeds,
-both arms byte-identical, stretch blocks equal — the climax layer is
-likewise inert without a climax-flagged hook (the pack declares
-`climax_floor` 75, no hook carries the flag; D-067).
-
-Re-measured at iter-39 (DIR-4, the multi-channel split landed): 10
-seeds, the committed pack (channels declared, both hooks tagged) vs a
-channels-stripped linted variant — per-seed byte-identical logs
-10/10. The channel split only gates the quiet path, and the quiet
-path never fires on day1_full (every run ends in PEAK, the D-066
-finding) — the split is unit-pinned instead
-(tests/test_director.py: the quiet-channel-while-another-burns law,
-the escalation self-block, the global clock gate; D-068).
-
-Re-measured at iter-40 (drama-1, the event grammar's predicate +
-weight layer landed): 10 seeds (125 + the nine corpus-session seeds),
-the committed pack (the vigil hook carries the weight_multiplier
-object + first_time_only) vs a grammar-stripped linted variant
-(`output/pack_nogrammar/`) — per-seed byte-identical logs 10/10. The
-mechanism: the multiplier only ADDS tension on these runs (the
-escalation arm needs suspicion ≥ 50, which already puts every quiet
-gate over its floor) and the vigil never releases there (the quiet
-path never fires; the hook is trigger-less) — so no release decision
-can flip. The escalation, the truncation order, and the burn law are
-unit-pinned instead (tests/test_predicates.py +
-tests/test_director.py; D-069).
-
-Re-measured at iter-41 (drama-2, the option layer landed): the same
-10 seeds, the committed pack (the vigil hook carries the glance/stare
-option pair) vs an options-stripped linted variant
-(`output/pack_nooptions/`, a runner outside the repo per Rule 9) —
-per-seed byte-identical logs 10/10. The mechanism: the option choice
-resolves only at release, and neither tavern hook can release on
-these runs through a changed path — the vigil is quiet-path-only (the
-D-066 all-PEAK window) and the document-check carries no options (its
-causal release runs the implicit base option, the exact v0.1 payload
-path). The pick laws — the tie by declaration order, the escalation
-flip at the band, the zero-out, the deferred release, the closed-boss
-no-mark law — are unit-pinned instead (tests/test_director.py;
-D-070; DIRECTOR_SPEC §3b the contract owner).
-
-Re-measured at iter-42 (drama-3, the on_action dispatch landed): the
-same 10 seeds, the committed pack (the then-dormant
-`document_check` → `crowd_wary` entry) vs an on_action-stripped
-linted variant — per-seed byte-identical logs 10/10 (the entry keyed
-on an event no action emitted).
-
-Re-measured at iter-43 (the document_check action landed — D-072,
-the owner's content call): the entry is LIVE, so the A/B measures its
-real delta. The same 10 seeds on day1_full, the committed pack vs the
-on_action-stripped variant (a runner outside the repo per Rule 9):
-the check fires on 1/10 (seed 125 — the only seed whose day1_full
-steal geometry opens a watcher's band with the confrontation world
-open; the `take` shifts each seed's stream), that seed diverges by
-exactly the `crowd_wary` reaction events, the other 9 stay
-byte-identical (no check, no entry — the corpus's own seed-93 script
-fires instead: 4 corpus cases re-distilled in the same iteration, the
-iter-15 regen precedent). The dispatch's live behavior — the ladder
-(verdict → arrest → caught), the talked-down branch, the deferred
-release, the climax-path release, the crowd reaction on both branch
-types — is pinned directly (tests/test_doccheck.py; D-072;
-DIRECTOR_SPEC §3c/§11). The alarm panic echo stays the
-recorded-not-landed row (DIRECTOR_SPEC §11) — the next content row,
-with its own corpus regen.
-
-Re-measured at iter-48 (content-2, the alarm panic echo landed —
-D-077, the §11 row closing): the entry is LIVE, so the A/B measures
-its real delta — but the day1_full stage never gives it one: the
-same 10 seeds, the committed pack vs the alarm-entry-stripped
-linted variant (a runner outside the repo per Rule 9) — 10/10
-byte-identical, zero `alarm_raised` events in any log (the
-empty-backyard law: the gate script's arson burns the yard the PC
-stands alone in, `when_occupants_present` raises no alarm, no event
-for the entry to key on — the iter-42 dormant-arm shape, now for a
-LIVE entry). The echo's live divergence lives in the corpus's own
-occupied-room scripts: the 7 fire-family cases (seeds 33 and 93)
-re-distilled in the same iteration (the occupants' fear claims
-40→50, the post-alarm event ids +1, the alarm case gaining the
-panic event claim + the cause actor's fear — the iter-43 regen
-precedent, the fixed-point runner outside the repo). The live
-behavior — the compounding (spike + contagion), the cause actor's
-own-shout fear, the decay baseline (the echo commits at the alarm's
-tick, the beat-360 decay reads 50→46 / 10→6), the chronicle line
-directly after the shout, the one-hop termination, the stripped-
-entry byte-identity on alarm-free runs — is pinned directly
-(tests/test_panic.py; D-077; DIRECTOR_SPEC §3c).
-
-Re-measured at iter-49 (content-4, the coerce driver landed —
-D-078, social-1b's live content set): the entry is LIVE, so the A/B
-measures its real delta — 2/10 byte-identical (seeds 15, 85: the
-drunkard's roll misses at every crossed beat), the 8 diverging seeds
-change by exactly the drunkard's idle waits disappearing (event-id
-shifts, ZERO outcome flips — the replacement law keeps the per-beat
-draw count, so every check keeps its draw position) plus seed 125's
-two `intent_rejected` (failed_test `actor.leverage_over`: the theft
-failure mints the room's clusters at t=9 expiring at 729, the
-beat-720 gate passes on the live fold, the door's own re-read at the
-entry tick finds the card expired — the tick-window law live on
-day1_full, the world's honest record of a stale reach). No coerce
-commits on day1_full: the gate script's theft succeeds on 9 seeds
-(no mint, no card to play), and the one minting seed's card expires
-before the door. The live behavior — the spend's outcome.cluster
-naming the drunkard's mint, the pair axes 25/75, one-secret-one-
-play, the expired-card rejection, the chronicle line — is pinned
-directly on the COMMITTED pack (tests/test_coerce.py; D-078). The
-corpus re-distill (the fixed-point runner, identity-proved first —
-105/105 zero-change on the unshifted stream): 2 id re-pins + the
-silent_second tail re-pin (crowd_wary → coerce) + the deliberate
-spend claims on outgoing_guard beat0, zero ladder flips; 4 seed-93
-corpus cases see the coercion.
-
-Re-measured at iter-50 (engine-2, D-079 — the urgency-roll stream
-split): two arms. The FLIP arm (HEAD vs the split, the one-time
-migration's honest measure): 0/10 byte-identical — every seed
-diverges at the beat-720 region, the checks shift by the removed
-draws (fingerprints 15→6 / 17→10 / 20→14 / 38→11 / 35→13: the
-urgency draws left the substantive stream and the flipped ladders
-changed the downstream draw counts); seed 125's doccheck ladder
-flips (intent_rejected → document_check_failed — the confrontation
-now passes its check). The ADD-SAFETY arm (the iter-49 refused
-scenario rehabilitated: an ADDED p=40 entry, silent by gate): 10/10
-byte-identical — the per-entry streams decouple the rolls from the
-checks AND from each other. The single shared urgency stream was
-measured FIRST and refused: 4/10 byte-identical (the added entry
-shifts the later beats' roll positions — the maid's urgency stops
-firing; the entries couple by draw position). The corpus
-migration: 2 narrator cases (the flee-pursuit check flipped; one
-case migrates to the refusal family — its caught-fleeing knowledge
-claims die with the vanished flee_caught event) + 1 parse pin (the
-s7 wait-720 batch 15→14) + 2 unit seed re-probes, through the
-identity-proved fixed-point runner (105/105 zero-change on the
-unshifted stream, the runner rebuilt per the FAQ laws).
-
-Re-measured at iter-51 (content-5, the echo driver landed — D-080,
-social-2's live content set): the entry is LIVE, so the A/B measures
-its real delta — the same 10 seeds, the committed pack vs a
-driver-stripped linted variant (a runner outside the repo per Rule
-9): **10/10 byte-identical** (the dread-silent law: day1_full's
-residue channels all sit below the dread-15 bar — the reach family's
-partial sighting reads 6, the purse family's inference is
-wariness-only; the empty-backyard fire never mints a sighting). The
-live divergence is corpus-script-only: **1/105 cases** — the
-watch-change case (seed 33, the fire family) diverges by exactly the
-guard's scan (ev_0020, t=374, the guardroom), the trailing wait's id
-+1, ZERO ladder flips and ZERO broken pins — the corpus regen is the
-deliberate pins alone (the scan claim by id + the scene snapshot
-knowledge, the case's beat needle 10→12; the iter-48/49 deliberate-
-pin law with no forced re-distill behind it — engine-2's add-safety
-delivered at the corpus level: the landing's events ride after the
-case's claimed ids). The refused design arm (the wariness gate over
-the purse residue): 34/105 cases + 10/10 day1_full seeds would fire,
-the document-check release case's arson beat starves on the
-anchor-shifted event ids (the stream count moves the reply gate —
-the fixed-point runner would own it, but the designed ladder's
-survival becomes re-pin luck), and the rotation briefings renew the
-purse residue every 720 — the jitteriness would never fade on
-multi-day runs; refused and recorded in D-080. The live behavior —
-the two scans (beats 360/720) then the fade silence (beat 1080,
-dread 7 < 15), the scan's snapshot mint, the silent-skip law, the
-driver-stripped fingerprint identity — is pinned directly
-(tests/test_echo.py; D-080).
-
-Re-measured at iter-52 (content-6, the arc driver landed — D-081,
-arc-1's live content set): the chain is LIVE, so the A/B measures its
-real delta — the same 10 seeds on day1_full, the committed pack (the
-aftermath arc `[possible_document_check_relief, barkeep_wary_sweep]`
-gap 2) vs the arcs-stripped linted variant (a runner outside the repo
-per Rule 9): **9/10 byte-identical** (the quiet seeds' steals succeed
-— no failure event, no seeding, the successor never enters the
-buffer; not even the hooks field diverges), **seed 125 diverges by
-exactly ONE appended event** (ev_0052, t=1456, the barkeep's
-look_around via director_0001 — after everything HEAD held, zero id
-shifts; the release march: the relief at beat 1, the sweep at beat 3,
-the gap law holding beat 720). The STRIPPED arm's shape is the
-driver's proof: the sweep releases at beat 720 instead — both
-intents ride the same entry tick (t=732) and the queue's actor_id
-tiebreak pops the barkeep BEFORE the relief guard, so the sweep's
-event lands at t=733, BEFORE the check's own event at t=734 — a
-second beat landing before its predecessor is a causality lie in the
-canon, and the gap law is what prevents it (the arc load-bearing,
-not decorative: removing it changes WHERE the beat lands and what
-the canon order says). The corpus: **105/105 pin-green, ZERO
-re-distill** — the first content landing with none (the 14
-theft-failure cases diverge by exactly the seeding event's own
-`hooks` field, the birth record; no new corpus event — the runs the
-driver targets end before a second beat scan, and the unchained arm
-fires zero sweeps there too). The successor's weight 0 keeps the
-entropy footprint exactly zero on every run (the +W gate-flip class
-dead by construction); the fingerprint identity (the sweep adds no
-draws) and the quiet-seed byte-identity are pinned directly
-(tests/test_arc_driver.py; D-081). The nopacing arm (DIR-2's A/B)
-now differs by exactly the sweep: the trigger-less climax-flagged
-successor dies without the climax layer — the D-065
-"both arms identical" record superseded in part (the clock's
-PEAK/REST bands still gate nothing; the closing beat rides the
-climax path), re-pinned in tests/test_balance_harness.py.
-
-Re-measured at iter-53 (content-3, the ambient driver landed — D-082,
-DIR-4's declared-but-dormant dimension gains its live consumer): the
-hook is LIVE but day1_full never opens its gate — the same 10 seeds,
-the committed pack vs the landing-stripped linted variant (a runner
-outside the repo per Rule 9): **10/10 diverge by EXACTLY the wait
-events' `hooks` field** (2-5 lines per seed, the ambient tag's birth
-record — the iter-52 zero-regen shape) and **zero appended events on
-every seed** (the all-PEAK law: the quiet path is suppressed at every
-beat; seed 125's closing sweep stays the last event). The T1 fixture
-regenerated in the same commit (the plumbing waits' birth record —
-two `hooks` fields, byte-diff verified as exactly those two lines,
-TEST_PLAN §3 procedure). The corpus: **105/105 pin-green, ONE
-deliberate divergence** — the quiet-beat case (seed 7) gains the
-ramble at t=733, its LAST event; the case's own claims grown to pin
-the murmur by id+type + the barkeep's heard record (the iter-51
-deliberate-pin pattern, no re-distill behind it). The live behavior
-— the quiet march (the wait-seeded tag, the beat-720 release through
-the ambient channel's own floor with the rotated guard honestly
-absent from the listeners), the chronicle line in log order, the
-burn, the directors-off arm, the seeding-stripped isolation, the
-fingerprint identity (the ramble draws nothing; its one honest
-downstream — the heard record crossing the t=1080 watch change as
-the evening guard's briefing) — is pinned directly
-(tests/test_ambient.py; D-082). The nopacing arm of THIS test's
-D-065 record re-pinned: without the pacing clock no PEAK suppression
-remains, so the ambient channel's own floor gates the last beat —
-the nopacing arm now closes on the ramble (t=1458) where the ON arm
-closes on the sweep (t=1456); both arms share their 52-line prefix
-(the clock's presence swaps WHICH director beat closes the day —
-tests/test_balance_harness.py).
-
-Re-measured at iter-58 (leg-3b, the reflection arming — D-087, the
-content column's phase-4 row): the same 10 day1_full seeds, the
-committed ARMED pack vs the block-stripped twin (a runner outside the
-repo per Rule 9): **8/10 byte-identical** (the recurrence lives only
-on 123/128 — the PC retries the theft), **exactly 123/128 diverge,
-+4 `conclusion_drawn` events each** (the targeted guard's
-`sneak_at_work_here` + the room trio's `trouble_by_the_bar`, all
-cause-chained to the second `pickpocket_failed`, minted in the
-reaction cascade — later ids shift by 4, everything before the
-crossing untouched); the watch-change briefing then TELLS the relief
-guard the insight (told/partial) and the never-re-reflect gate holds
-his own mint off (zero extra events). The narrator corpus (105
-cases), the parse corpus (10 cases), and the T1 golden fixture
-replayed through the real mediator/parser cycles: **zero reflection
-mints, zero pin changes** — the zero-regen landing measured BEFORE
-the commit, pinned as the byte-identity witness
-(tests/test_reflection.py; D-087).
+> The per-landing re-measurement records (iter-37..58 — every phase-3/4
+> landing's pacing / grammar / content A/B, each naming its pinned unit
+> tests + its D-row) live in git + the D-065..D-093 family rows + TASKS'
+> phase-3/phase-4 backlogs — the single owners. The instrument
+> definitions above and below are the reusable half.
 
 Extended at iter-107 (the risk-synthesis riders — the drama tuning
 turned into data): the table gains three measurement surfaces. The
@@ -519,8 +271,7 @@ The mode-F chronicler suite (`tests/test_chronicle.py`; the tool:
 `docs/ref/duckdb.md`). NOT a gate test — an offline tool's acceptance
 suite, the balance-harness §6 precedent. Runs only with the
 `[chronicler]` extra installed (`pytest.importorskip` — the pure-dev
-env stays green: 1168 passed + 1 module skip; the chronicler env runs
-all: 1178 passed).
+env stays green, the module skipped by design).
 
 The laws under test, each by an independent stdlib fold of the same
 log via `core.log.read_log` (the blind-1 instrument law — never the

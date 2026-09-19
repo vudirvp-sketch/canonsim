@@ -653,4 +653,4 @@ bytes = a spec edit in the same commit as the code change.
 | Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9) | blueprint §1 |
 | Relevance signal (query keyword match) | **landed iter-61** (scene-2: `assemble_brief(query=...)` the third signal + `recall_query` the derivation + the ladder's first runtime query — §3.5/§7.1) | BRIEF_SPEC §3.5 |
 | Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder); **queried by the runtime since iter-61** (the actor calls' `retrieval:` lines — §7.1) | STORE-1 |
-| The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (`SOW_INTEGRATION_SPEC` trigger, ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |
+| The runtime inference engine (llama.cpp + GBNF local inference, SoW wiring) | the phase-1 gate (the future `SOW_INTEGRATION_SPEC` sketch's trigger — bg-6-gated, SPECS_BACKLOG; ROADMAP §6; the dev-time narrator is the external agent door, D-055) | AGENTS §8 |

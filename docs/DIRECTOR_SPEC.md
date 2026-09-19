@@ -4,24 +4,10 @@
 > of the director's runtime contract; the blueprint `docs/blueprint/
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
-> ≤300 lines. Phase-3 landings: the pacing clock DIR-1 (iter-36,
-> D-065), the climax layer DIR-3 (iter-38, D-067), the multi-channel
-> split DIR-4 (iter-39, D-068), the event grammar's predicate + weight
-> layer drama-1 (iter-40, D-069), the grammar's option layer drama-2
-> (iter-41, D-070 — §3b), the grammar's on_action dispatch drama-3
-> (iter-42, D-071 — §3c), the document_check content landing (iter-43,
-> D-072 — §11's first pre-iter-43 row closed), the alarm panic echo
-> (iter-48, content-2, D-077 — §3c's second live entry, the 7-case
-> corpus re-distill); the phase-3 refinements
-> still recorded-not-built live in §11. Measured impact (the grammar
-> layers were byte-identical on day1_full at landing — the D-066
-> all-PEAK window; the document_check landing is the first DELIBERATE
-> divergence: the check fires on the runs that reach the confrontation,
-> with the corpus regen it implied): `docs/TEST_PLAN.md` §6. arc-1
-> (iter-47, D-076): the release-chain layer (§3d) — landed dormant, the
-> 10-seed A/B byte-identical, zero corpus regen. The arc driver
-> (iter-52, content-6, D-081): the aftermath chain LIVE, the gap law
-> load-bearing, zero corpus re-distill (§3d + TEST_PLAN §6).
+> ≤300 lines. The phase-3 landing ledger (iter-36..53, the pacing /
+> climax / channel / grammar / content columns — the D-065..D-082 family
+> row) + the measured-impact records: TASKS' phase-3 backlog + TEST_PLAN
+> §6 + git — never restated here.
 
 ## 1. What the director is
 

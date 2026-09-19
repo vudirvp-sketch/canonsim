@@ -5,7 +5,7 @@
 > economy half of the Paradox wikis row — the event-grammar half is
 > `paradox_scripting.md`, ref-3). Anti-drift (D-026):
 > catalog/license/URL/phase gating in `docs/REFERENCES.md`; one-line
-> synthesis in `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
 > here. Source is proprietary — public Paradox wikis and dev diaries
 > only. No code, no assets, no 1:1 rewrites (`REFERENCES.md` §0.5).
 

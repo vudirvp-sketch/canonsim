@@ -1,58 +1,46 @@
-Iteration: iter-150 (`iter-150-revalid1` — the AGPLv3 relicense +
-the standing-backlog revalidation; the owner's two-part session
-call: «я хочу лицензирование поменять на AGPLv3 в реадме укажи и
-файл лицензии составь под репозиторий» + «проведи аудит всех
-standing backlog rows => нужно ли их пересматривать с учетом новой
-документации, принципов и research/intake или нет. и если да =>
-то составь план и пересмотри», the second half over the
-owner-supplied prior-agent backlog analysis — its verdict set
-verified at a real clone before adoption, adopted where true,
-corrected where it restated standing law as new): PART 1 — THE
-RELICENSE (D-183): `LICENSE` at the root (the canonical AGPL-3.0
-text, the verbatim SPDX license-list copy — §0..§17 + the
-how-to-apply notice, no holder line invented into the license
-text) + the README's License section re-pointed (TBD → AGPL-3.0,
-SPDX `AGPL-3.0-only`); the donor stance (ROADMAP §4 / D-015)
-untouched by design — it governs what the repo TAKES, a separate
-question from what it PUBLISHES under; pyproject carries no
-license field before or after (the owner's call if wanted).
-PART 2 — THE REVALIDATION (D-184): all THIRTEEN standing rows
-audited with the four questions (does the problem exist now / is
-there a real consumer / does an existing mechanism already cover
-it / what small probe would decide) — the intake-29 admission rule
-(D-175) turned onto the queue itself; the verdict set (TASKS
-iter-150's table): pack-3 REWRITTEN (the stale 2nd-setting blocker
-dead — phase 6 CLOSED D-151, five packs committed; now one
-candidate for the next authored slot), tune-3 RE-AIMED (the v0.1
-sub-premises half-rotated — engine movement exists since
-st-6a/roads-1 but no committed pack arms an NPC movement source,
-the HEAD urgency census reading no move/travel intent kinds: a
-PACK-ARMING choice now, consumer-first, not an engine gap), st-2 +
-scav-1 SHARPENED (consumer-first / measurement-before-mechanism),
-companion-1 + mech-2 + st-5 + parse-2 SYNCED (the dep ledger —
-tune-3 the one open dep, a following companion its own movement
-consumer; the intake-21/22 riders absorbed into the mech-2 row per
-D-113; res-1's sink shape concrete; the two halves' gates
-explicit), engine-1 + presentation-1 + qa-1 + bg-6 + st-4
-audited-current-unchanged. No rows deleted, none added, no order
-changed (D-113).
+Iteration: iter-151 (`iter-151-docscomp1` — the semantic documentation
+compaction pass, the owner's ownership-matrix session + the «вперед
+приступай к работе» call over its two-pass plan; doc-only, zero code,
+zero corpus price): the iter-140-memgc memory-GC RESTORED and extended —
+the memgc (c6d9532) had been silently clobbered by iter-140-intake27's
+stale-base archive apply (the files re-expanded wholesale, the GC's D-173
+number reused by intake-27; found and recorded this session, D-185).
+PASS 1: DECISIONS 63→30 family rows / 231→48KB (D-185 restored under a
+collision-free ID; the intake family absorbs D-173..D-175 + D-184; the
+fixation families merged; the landings family D-176..D-182; the fat
+build-column rows slimmed to decision + pointer); TASKS 2422→914 (the
+phase-6-era ledger extended iter-140..150; the THIRTEEN standing rows
+extracted to the live queue head; the closed backlogs collapsed);
+phases.md §6 restored to the compact-block form + the intake-27/28/29
+compact blocks + the card amendment ported (4305→2650);
+AGENT_NAVIGATION restored to a state map (88→14KB). PASS 2: the
+SPECS_BACKLOG absorbed triggers re-pointed (restored); TEST_PLAN
+retitled the Verification Stack — the per-landing acceptance records →
+the owning records, the instrument definitions kept (837→588);
+REFERENCES_DEEP's verdict column trimmed to one-line purposes (63→31KB);
+TAXONOMY/BLUEPRINT/PARSER_SPEC/BRIEF_SPEC re-points; the ref/* template
+lines re-pointed (34 files); DIRECTOR_SPEC's header chronicle collapsed;
+AGENTS §6 one-line sync (the collapse rhythm); CORE_DESIGN_RESEARCH's
+structural inbound → ZERO (the file's deletion the owner's next call;
+the 27 evidence-class citations in ref/* + phase0.md sweep with it).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 5891cfe — identical — and
+verified BEFORE working at BASE_COMMIT 5d88bd0 — identical — and
 re-verified after; doc-only, zero code, zero corpus price) ·
 Date: 2026-09-20 ·
-Scope: `LICENSE` (new), `README.md` (the License section),
-`docs/TASKS.md` (the iter-150 section + eight revalidated rows),
-`docs/DECISIONS.md` (D-183/D-184), `docs/AGENT_NAVIGATION.md` (§1:
-the LICENSE row), `STATUS.md` (this re-pin + the Next step),
-`worklog.md` (this entry; iter-140 evicted per the cap) — 7 files,
-doc-only both halves; the soft limit's own clause noted (the
-license's two files + the revalidation's doc set + the
-every-iteration records). The prior iteration's record: iter-149
-(pack-4). The detail lives in TASKS + worklog + git.
-
+Scope: `docs/DECISIONS.md`, `docs/TASKS.md`,
+`docs/blueprint/phases.md`, `docs/AGENT_NAVIGATION.md`,
+`docs/SPECS_BACKLOG.md`, `docs/TEST_PLAN.md`,
+`docs/REFERENCES_DEEP.md`, `docs/TAXONOMY.md`, `docs/BLUEPRINT.md`,
+`docs/DIRECTOR_SPEC.md`, `docs/BRIEF_SPEC.md`, `docs/PARSER_SPEC.md`,
+`docs/ref/` (34 template lines), `AGENTS.md` (§6 one line),
+`STATUS.md` (this re-pin + the Next step pointers), `worklog.md`
+(this entry + the re-trim to the line cap) — 16 paths, doc-only; over
+the 3–5 soft limit, all mandated by the pass's own scope (the owner's
+matrix), noted per AGENTS §2.3. The prior iteration's record: iter-150
+(revalid-1). The detail lives in D-185 + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -526,11 +514,16 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-150 DONE: the AGPLv3 relicense (`LICENSE` + the README's
-License section, D-183) + the standing-backlog REVALIDATION (all
-thirteen rows audited against the current architecture — the four
-questions per row, the intake-29 admission rule turned onto the
-queue; the verdict table in TASKS iter-150, D-184: pack-3
+**iter-151 DONE: the semantic documentation compaction pass (D-185 —
+the iter-140-memgc GC restored after the stale-apply clobber;
+DECISIONS 63→30, TASKS 2422→914 with the standing rows extracted,
+phases.md 4305→2650, NAV 88→14KB, TEST_PLAN/REFERENCES_DEEP/spec
+re-roles; the docs corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
+relicense (`LICENSE` + the README's License section, D-183) + the
+standing-backlog REVALIDATION (all thirteen rows audited against the
+current architecture — the four questions per row, the intake-29
+admission rule turned onto the queue; the verdict set in D-184:
+pack-3
 rewritten, tune-3 re-aimed, st-2/scav-1 sharpened,
 companion-1/mech-2/st-5/parse-2 synced,
 engine-1/presentation-1/qa-1/bg-6/st-4 audited-current; no rows
@@ -551,7 +544,7 @@ the owner's settings step).**
    intake-23 world-structure card, the intake-21 observability
    card), the LLM boundary lifts only on this call, INV-4/D-055).
    The remaining standing rows — REVALIDATED iter-150 (D-184; the
-   per-row REVALIDATED blocks in TASKS carry the evidence):
+   per-row state lives in TASKS' Standing rows):
    `parse-2` (buttons wait on a frontend consumer, multi-intent on
    live-session evidence — neither is "improve the parser"),
    `tune-3` (a pack-arming choice now, consumer-first: engine

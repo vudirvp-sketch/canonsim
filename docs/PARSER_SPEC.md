@@ -189,7 +189,7 @@ never engine work (INV-3).
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| The runtime inference engine (llama.cpp + GBNF) + the C-parser wiring — grammar-constrained decoding makes off-grammar output structurally impossible at the source | the owner-gated engine decision (TECH_NOTES §1; `SOW_INTEGRATION_SPEC` trigger) | AGENTS §8 |
+| The runtime inference engine (llama.cpp + GBNF) + the C-parser wiring — grammar-constrained decoding makes off-grammar output structurally impossible at the source | the owner-gated engine decision (TECH_NOTES §1; the future `SOW_INTEGRATION_SPEC` sketch's trigger — bg-6-gated, SPECS_BACKLOG) | AGENTS §8 |
 | The runtime re-ask ladder (a bounded retry budget for malformed replies; dev-time is manual re-apply) | the runtime engine | blueprint §2 |
 | Disambiguation **buttons** (the grammar enumerates the alternatives; today the question is free text) | a frontend consumer (mode C live play) | ROADMAP §2 |
 | Multi-intent utterances (one reply carries N intents — today one classification per document) | live-session evidence it is needed | this spec §4 |

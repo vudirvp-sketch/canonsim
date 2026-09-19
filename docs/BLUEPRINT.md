@@ -6,10 +6,9 @@
 > **Organized by what we build, not by
 > source.** This file owns the RESOLUTIONS and COMBINATIONS (new facts,
 > created by cross-referencing); every mechanic cited stays owned by its
-> per-ref file — linked, never restated. Anti-drift map extended to a fourth
-> place: catalog (`REFERENCES.md`) ↔ one-line synthesis
-> (`CORE_DESIGN_RESEARCH.md` §2) ↔ deep dives (`docs/ref/`) ↔ **this
-> blueprint** (`BLUEPRINT.md` + `docs/blueprint/`).
+> per-ref file — linked, never restated. Anti-drift map: catalog
+> (`REFERENCES.md`) ↔ deep dives (`docs/ref/`) ↔ **this blueprint**
+> (`BLUEPRINT.md` + `docs/blueprint/`).
 >
 > Law hierarchy is unchanged: `AGENTS.md` §4 invariants beat every donor
 > pattern. Where a donor and an invariant conflict, the invariant wins and

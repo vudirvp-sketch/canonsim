@@ -3,7 +3,7 @@
 > Per-reference deep dive. Format template: `docs/REFERENCES_DEEP.md`
 > §0. Iteration plan: `docs/REFERENCES_DEEP.md` §1. Anti-drift
 > (D-026): catalog/license/URL/phase gating in `docs/REFERENCES.md`;
-> one-line synthesis in `docs/CORE_DESIGN_RESEARCH.md` §2; concrete
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete
 > mechanics here. License filter and "patterns not content" rule:
 > `REFERENCES.md` §0.7 (D-015). Source is **MIT** (verified 2026-
 > 08-26 from the repo `LICENSE` file: "Copyright 2018-2026

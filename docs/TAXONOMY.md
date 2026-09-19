@@ -58,7 +58,7 @@ records nothing; our schema is the richer side.
 | betrayal | `hfs formed intrigue relationship` (+ `assume identity`) | 5,209 / 9,977 | R | corruptor/target/method/action/successful → `outcome`; ours: phase-4 crafted lies (EVENT_SCHEMA §3 "a lie is a crafted record") |
 | artifact creation | `artifact created` | 26,846 with creator+site | E | creator/artifact/site → `outcome`; custody chain = follow-ups (stored/given/lost) |
 | site destruction | `destroyed site` (+ `hf destroyed site`, `razed structure`) | 250 / 275 / 870 | E | attacker/defender civs → entity slots; our fire layer + `spot_state` (D-057) is the micro analog |
-| war | `war` collections → battles → events | 990 wars · 11,849 battles | E (grouping) | single-parent collection tree → our linear `cause` chain; multi-parent groupings defer to phase 3+ (EVENT_SCHEMA §11); casualties = cardinality events (GROUP_SPEC, phase 5) |
+| war | `war` collections → battles → events | 990 wars · 11,849 battles | E (grouping) | single-parent collection tree → our linear `cause` chain; multi-parent groupings defer to phase 3+ (EVENT_SCHEMA §11); casualties = cardinality events (group cardinality — phases.md §5 + core/groups.py) |
 | journey | `hf travel` (+ `journey` collections) | 3,086 site-bearing of 6,218 | E | traveler/site/return-flag → `outcome`; collections group the legs |
 | captivity | `hf abducted` (+ `hf enslaved`, `hf ransomed`) | 4,991 / 23 / 12 | E | snatcher/victim roles; abduction collections group the episode |
 | escape | `hf ransomed` (+ `change hf state` reason `flight`) | 12 | near-GAP | no escape event type; ours: the flee action exists (phase 0); DF flight is a state-change reason |
@@ -66,7 +66,7 @@ records nothing; our schema is the richer side.
 | item loss | `artifact lost` (+ `artifact destroyed`, `artifact given`) | 2,774 / 682 / 3,354 | E | artifact/site → `outcome`; mostly terminal (measured §4.6) |
 | madness | `change hf state` `mood` | 179 | E | mood enum (fey/secretive/possessed/insane/melancholy/macabre/berserk/fell) → `state_changes` on a status axis; `failed mood` reason is the counter-event |
 | transformation | `changed creature type` | 1,356 | E | changee/changer/old→new race; `state_changes` race, `irreversible` (night-creature conversions) |
-| catastrophe | `beast attack` collections (+ `creature devoured`) | 13,289 / 16,413 | E+ | eater/victim/race from the plus pass; the beast is an actor entity; attacks are macro collections (GROUP_SPEC cardinality) |
+| catastrophe | `beast attack` collections (+ `creature devoured`) | 13,289 / 16,413 | E+ | eater/victim/race from the plus pass; the beast is an actor entity; attacks are macro collections (group cardinality — core/groups.py) |
 
 ## 3. The 120 entries
 
