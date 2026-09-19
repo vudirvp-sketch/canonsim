@@ -1,7 +1,9 @@
 """The scene LOD (depth-3, phases.md §5 — three zones): the simulation's
 relevance discipline, the D-112 write-side law at scene scale. The zone
-partition is a PURE function of (pack, projection) — the pack's location
-graph (the `exits` adjacency, linted symmetric) and the PC's live
+partition is a PURE function of (pack, world, projection) — the exits
+graph read through the ONE shared door (`core/roads.py::exits`, roads-1:
+the authored record when non-empty — the pack wins; else the roads
+pass's derived edges over the claimed locations) and the PC's live
 position:
 
 - **ACTIVE** — the PC's location: its NPCs tick per-beat (the beat
@@ -39,9 +41,11 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Final
 
 from core.fold import Projection
+from core.roads import exits as exits_of
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle
     from core.pack import Pack
+    from core.worldgen import WorldModel
 
 __all__ = [
     "COLD_COUNT_KEY",
@@ -76,10 +80,14 @@ class SceneZones:
     cold: tuple[str, ...]
 
 
-def scene_zones(pack: "Pack", projection: Projection) -> SceneZones:
-    """The zone partition (a pure function of the pack's exits graph +
-    the PC's live position). The warm ring is the ACTIVE location's
-    exits — the pack's own order, self-exits and duplicates filtered
+def scene_zones(
+    pack: "Pack", world: "WorldModel | None", projection: Projection
+) -> SceneZones:
+    """The zone partition (a pure function of the exits graph + the
+    PC's live position). The warm ring is the ACTIVE location's exits —
+    the ONE shared read (`core/roads.py::exits`: the authored record
+    when non-empty — the pack wins; else the roads pass's derived
+    edges; roads-1), self-exits and duplicates filtered
     (belt-and-braces: the lint guarantees declared, symmetric targets);
     the cold background is the remaining locations in declaration
     order (INV-2: construction order, never a set)."""
@@ -100,7 +108,7 @@ def scene_zones(pack: "Pack", projection: Projection) -> SceneZones:
             "graph (the pred-contract family, D-111)"
         )
     warm: list[str] = []
-    for exit_id in record.get("exits", ()):
+    for exit_id in exits_of(pack, world, active):
         if exit_id == active or exit_id in warm:
             continue  # a self-exit or a duplicate: never ring members
         warm.append(exit_id)

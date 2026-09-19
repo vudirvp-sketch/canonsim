@@ -35,9 +35,11 @@ from core.clock import phase_of_tick
 from core.fold import Projection, apply_event, fold, present_in_order
 from core.log import EventRecord, KnowledgeRecord, StateChange
 from core.rng import RngBank
+from core.roads import exits as exits_of
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
     from core.pack import Pack
+    from core.worldgen import WorldModel
 
 __all__ = [
     "ACQUISITION_CHANNELS",
@@ -335,8 +337,11 @@ def action_duration(
 class _Ctx:
     """Evaluation context: pack + projection + the intent's nouns + the
     live leverage facts (iter-45), echo scores (iter-46), and the
-    crystallized traits (beliefwire, iter-67). All three are the
-    caller's reads of the derived folds AT THE CALLER'S OWN TICK —
+    crystallized traits (beliefwire, iter-67) + the generated world
+    (roads-1: the adjacent_to read goes through the ONE shared exits
+    read — the derived half needs the WorldModel; None is the unarmed
+    law, correct wherever the authored half alone is asked). All the
+    fold reads are the caller's own AT THE CALLER'S OWN TICK —
     the door at the entry tick, the urgency gate at the beat, the OCC
     re-check at completion: a tick-windowed precondition must be re-read
     at every evaluation, never cached. All duck-typed (holder/subject,
@@ -352,6 +357,7 @@ class _Ctx:
         facts: Sequence[Any] = (),
         echoes: Sequence[Any] = (),
         traits: Sequence[Any] = (),
+        world: "WorldModel | None" = None,
     ) -> None:
         self.pack = pack
         self.projection = projection
@@ -359,6 +365,7 @@ class _Ctx:
         self.facts = facts
         self.echoes = echoes
         self.traits = traits
+        self.world = world
 
     def entity(self, noun: str) -> str:
         if noun == "actor":
@@ -394,7 +401,10 @@ def _test_same_location(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
 def _test_adjacent_to(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     noun_location = location_of(ctx.pack, ctx.projection, ctx.entity(cond["noun"]))
     base = location_of(ctx.pack, ctx.projection, ctx.entity(cond["with"]))
-    return noun_location in ctx.pack.entity(base)["exits"]
+    # roads-1: the ONE shared exits read — the authored record when
+    # non-empty (the pack wins), else the roads pass's derived edges
+    # (the move door's validation is the contract's named consumer).
+    return noun_location in exits_of(ctx.pack, ctx.world, base)
 
 
 def _test_location_of(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
@@ -565,6 +575,7 @@ def first_failing(
     facts: Sequence[Any] = (),
     echoes: Sequence[Any] = (),
     traits: Sequence[Any] = (),
+    world: "WorldModel | None" = None,
 ) -> str | None:
     """The first failing condition as '<noun>.<test>', or None when the
     intent is executable. Soft: callers record a no-op rejection event.
@@ -573,8 +584,14 @@ def first_failing(
     (`WINDOWED_TESTS`), the matching fold read at the caller's own tick
     (the leverage facts, the echo scores, and/or the crystallized
     traits — the window law: a tick-driven precondition is never
-    evaluated on stale reads)."""
-    ctx = _Ctx(pack, projection, intent, facts, echoes, traits)
+    evaluated on stale reads). roads-1: `world` threads the generated
+    model for the adjacent_to read (the ONE shared exits read); None is
+    the unarmed default — correct wherever the authored half alone
+    is asked (the committed packs author non-empty exits everywhere,
+    so the derived half never changes their answers)."""
+    ctx = _Ctx(
+        pack, projection, intent, facts, echoes, traits, world
+    )
     for cond in preconditions:
         test = PRECONDITION_TESTS.get(cond["test"])
         if test is None:
@@ -729,6 +746,7 @@ def occ_breaking_cause(
     based_on_event_seq: int,
     intent: IntentData,
     initial: Projection,
+    world: "WorldModel | None" = None,
 ) -> str | None:
     """The event id whose application first broke a precondition after the
     intent was proposed; None when nothing broke it. One forward fold from
@@ -752,7 +770,9 @@ def occ_breaking_cause(
     state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
         apply_event(state, events[idx])
-        if first_failing(pack, state, intent, attributable) is not None:
+        if first_failing(
+            pack, state, intent, attributable, world=world
+        ) is not None:
             return events[idx].id
     return None
 

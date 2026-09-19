@@ -26,6 +26,74 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-145 · roads-1 — the generated-exits pass LANDED — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (intake-29/D-175's order:
+the BUILD ROWS, roads-1 the readiness head). THE PASS: a new pure
+pass in `PASS_ORDER` (after states, before chronicle — draws nothing,
+INV-2-clean by construction) building the exit graph over the CLAIMED
+locations: an MST BACKBONE (Kruskal under the I5 order — weight, the
+canonical cross-pair, the location-id pair) plus the pack-declared
+MUTUAL k-NEAREST OVERLAY (`worldgen.roads.k`, the watershed.neighbors
+precedent; k=0 legal — the tree-only world; the mutual form is what
+I3+D2 pin: per-node overlay degree <= k, <= n*k/2 overlay edges — the
+union-of-picks reading would break both, the star counterexample);
+the output rides `WorldModel.roads` (L11 — derived, rebuildable,
+never truth); I4's span law RELOCATED to the emit (the loud
+`WorldgenError` conflict rule: connectivity is never bought by
+breaking `place.max_edge_span` — the runtime backstop's set grew
+`place`+`roads`, the lint-side one unchanged for the authored half).
+THE ONE READ: `core/roads.py::exits(pack, world, location)` — the
+authored record when NON-EMPTY wins (the pack wins; an EMPTY list is
+the generated-world marker — the entities lint law unchanged), else
+the derived edges, else () (unarmed/unclaimed); the consumers
+re-pointed: the LOD warm ring (`scene_zones` grew the world param),
+the intent door's move validation (`first_failing`/`occ_breaking_cause`
+gained `world=None` keywords — threaded at every loop door: the
+accept door, the OCC re-check, the beat/macro urgency and faction
+gates). THE LINT: `worldgen.roads` a required sub-block — k an
+explicit integer 0..claimed-2 (the vacuity refusal, the dead-data
+family); the three committed packs grow `roads.k=0` (pack data alone —
+zero log-byte price, the authored exits win everywhere; verified:
+every committed pack's claimed set connects within its declared span
+— tavern 1<=1, road 1<=2, province 4<=4). THE RIDER: the pack.py SPLIT
+(D-175's standing rule — roads-1 the first pack.py-growing row):
+`core/packlint/` — helpers + shared (the four cross-family lints as
+functions) + twelve domain classes under the one `_Lint` orchestrator
+in `core/pack.py` (the pinned run order + the KI#77 order-law comments
+verbatim; `load_pack` stays the single admission gate; no DSL, no base
+classes; pyproject gains `core.packlint`). THE EVIDENCE (TEST_PLAN §9's
+claim packet, the sandbox driver outside the repo): the province's
+MIXED mode G variant (the four wild claimed locations read derived,
+malby<->thornmill the authored control pair) at the smoke seed, the
+same-seed fork k=0 vs k=2 — MEASURED DIFFERENCES on all three oracle
+surfaces: the DOOR (8 -> 12 accepted move pairs — crofts+thornmill
+become reachable from keep), WHO SIMULATES (the first macro crossing's
+warm ring at keep: {malby, riverroad}/5 NPCs -> +{crofts, thornmill}/7
+NPCs — two more souls simulate at the year's turn), ROUTE METRICS
+(5 -> 8 edges, 0 -> 3 cycle rank, 10 -> 20 two-hop pairs); the events
+themselves differ (2059 vs 2062 — the warm NPCs' crossing entries).
+Falsifier NOT tripped: the overlay's mechanism claim CONFIRMED at the
+measured band. The honest residues, recorded: (a) the mode G authoring
+burden — the orphan law's grammar reachability couples to AUTHORED
+edges, so a fully-emptied pack must re-reference or relocate its
+unreferenced entities (the crowd at malby, the uncarried unflagged
+items — the driver's mixed variant the lint-legal shape); (b) the
+AUTHORED playscript breaks under the derived topology (province_smoke's
+first move rejected: the derived MST resolves the authored artery's
+weight-14 tie differently — the door-surface difference measured, not a
+bug); (c) `resolve_knowledge`'s adjacent_locations audience stays
+authored-only — NOT among the row's named consumers (the registry
+threading is the first mode G consumer's rider, the pack-1/pack-4
+family). 1763 passed + 1 skipped, ruff clean (Python 3.12.14; the
+fresh-venv install path verified for `core.packlint`). Detail: D-178 +
+worklog iter-145 + `tests/test_roads.py` (the minimal test set:
+I1–I6 over the province block + the k>0 fixture, the loud span
+failure, determinism, the pack-wins override, the crafted mode G
+mini-pack's ring+door, zero canon births, the k lint refusals).
+
 ### iter-144 · contracts — the three pre-implementation contract writes — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -1257,50 +1325,23 @@ D-105..D-133 family row + phases.md §5)
   derived L3), the irreversibility split, the underflow floor,
   the unarmed landing, the invariant set, the four-proof claim
   packet, the minimal test set.**
-- `roads-1` · the generated-exits pass — todo, owner-gated (phase
-  6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
-  a generated world's edges is impossible); an MST/k-nearest graph over
-  the sites (the Red Blob family); a PASS_ORDER growth = a D-row when it
-  lands; authored packs keep manual exits (the pack wins). iter-104
-  resolves the READ-PATH fork (the owner's combined-variant call):
-  the derived L3 read WINS, sharpened — the pass-computed graph lives
-  on the WorldModel (L11: derived, rebuildable, never truth; replay
-  rebuilds it from the header seed + pack, the pure function); the
-  consumers (the LOD warm ring, the intent door's move validation,
-  travel's edge lookup) re-point through ONE shared read with the
-  pack-wins override — `exits(location)` = the authored record if
-  declared, else the pass-derived edges mapped through the site
-  claims (deterministic order); place-1's claim↔exits invariant
-  RELOCATES into the pass for the generated half (asserted at emit,
-  where the data is born — relocated, never weakened; the load lint
-  unchanged for authored packs). NO canon births for exits:
-  seed-dependent derived data stays out of the log (INV-1 untouched —
-  the read is runtime L3, the fold never needs it; no event-id
-  shifts, no M3/M5 inflation, corpus price zero by construction; the
-  `world_formed` outcome block stays as-is).
-  **The topology contract owed BEFORE implementation (intake-29's
-  sharpening, D-175): (1) the NODE question pinned first — the graph
-  spans all lattice sites (the read maps through the claims) or
-  claimed/settlement nodes only: undecided here, and the exit surface
-  depends entirely on it (3–6 claimed settlements on a 200–600-site
-  lattice — k-nearest over all sites mostly hits unclaimed sites);
-  (2) the bare "MST/k-nearest" wording RETIRED — the algorithm named
-  precisely (a tree and a bounded-degree graph are different
-  behavioral surfaces; a combination carries the fence's three
-  questions, D-174); (3) the invariant set: connected, no self-loop,
-  symmetric, bounded degree, deterministic tie-breaking + edge
-  ordering (INV-2 anyway), a pathological-edge upper bound, an
-  explicit cycle policy; (4) the behavioral falsifier beyond graph
-  shape: same world, different topology → the expected LOD/autonomy
-  differences MEASURED (the warm ring is this row's own named
-  consumer — the topology must show in WHO simulates, not only in
-  route existence; rides TEST_PLAN §9).**
-  **The pre-implementation contract WRITTEN (iter-144, D-177):
-  `docs/CONTRACTS.md` §1 — the node question pinned (claimed
-  locations only), the algorithm named (MST backbone +
-  pack-declared k-nearest overlay, the D-174 fence's three
-  questions answered, the one-knob kill arm), the invariant set,
-  the §9 claim packet, the minimal test set.**
+- `roads-1` · the generated-exits pass — **done (iter-145, D-178)**: the
+  roads pass (the MST backbone + the pack-declared mutual k-nearest
+  overlay over the claimed locations) live in `core/worldgen.py::
+  _pass_roads` (`WorldModel.roads`, PASS_ORDER grew `roads`); the ONE
+  shared read `core/roads.py::exits` (authored-wins override — an
+  empty authored list the generated-world marker) with the named
+  consumers re-pointed (the LOD warm ring, the intent door's move
+  validation, the beat/macro autonomy gates); the `worldgen.roads`
+  sub-block lint (k 0..claimed-2, the vacuity refusal); I4's span law
+  relocated to the emit with the loud conflict rule; the committed
+  packs armed k=0 (zero corpus price); the pack.py split rider landed
+  with it (`core/packlint/`, D-175). The §9 claim packet run — the
+  measured fork evidence (the door surface, WHO simulates at the
+  crossing, the route metrics; the honest residues incl. the mode G
+  authoring burden and the adjacent_locations audience gap) — lives in
+  the iter-145 section above. The spec absorbs its contract by
+  reference: `docs/CONTRACTS.md` §1 (collapsed to a pointer).
 - `pack-ci` · the admission-lint rungs — **done (iter-117, D-152)**:
   the teleology gate + the live-char crosswalk + the price-marker lint
   LIVE in `core/pack.py` (PACK_SPEC §5/§6 the single reading owner);

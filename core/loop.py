@@ -855,6 +855,7 @@ class Simulator:
         failing = first_failing(
             self._pack, self._projection, intent, preconditions,
             facts=facts, echoes=echoes, traits=traits,
+            world=self._world,
         )
         if failing is not None:
             self._emit_rejection(
@@ -921,11 +922,12 @@ class Simulator:
             failing = first_failing(
                 self._pack, self._projection, intent, preconditions,
                 facts=facts, echoes=echoes, traits=traits,
+                world=self._world,
             )
             if failing is not None:
                 cause = occ_breaking_cause(
                     self._pack, self._events, payload.based_on_event_seq,
-                    intent, self._initial,
+                    intent, self._initial, world=self._world,
                 )
                 self._emit_rejection(
                     intent, entry.tick, reason="projection_moved",
@@ -1097,7 +1099,7 @@ class Simulator:
         the zones follow (the LOD tracks the reader)."""
         if self._next_macro is None:
             return None
-        return scene_zones(self._pack, self._projection)
+        return scene_zones(self._pack, self._world, self._projection)
 
     def _first_beat(self, rules: Mapping[str, Any]) -> int | None:
         """The first beat tick strictly after 0 (the run-start tick). Beat
@@ -1226,7 +1228,7 @@ class Simulator:
             facts=live_leverage(self._pack, self._events, beat_tick),
             echoes=beat_echoes,
             traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
-            locations=locations,
+            locations=locations, world=self._world,
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 2b) faction goals (depth-6) — the small-formula dynamics at
@@ -1242,7 +1244,7 @@ class Simulator:
             facts=live_leverage(self._pack, self._events, beat_tick),
             echoes=beat_echoes,
             traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
-            locations=locations,
+            locations=locations, world=self._world,
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1
@@ -1308,7 +1310,7 @@ class Simulator:
         the tombstone silences a condensed group's ticks for good);
         both draw-free (the counts and the births are pure fold
         reads, the fingerprint never sees a tier event)."""
-        zones = scene_zones(self._pack, self._projection)
+        zones = scene_zones(self._pack, self._world, self._projection)
         draft = macro_turn_draft(
             self._pack.rules, tick,
             counts={
@@ -1376,7 +1378,7 @@ class Simulator:
             facts=live_leverage(self._pack, self._events, tick),
             echoes=echo_scores(self._pack, self._knowledge, tick),
             traits=crystallized_traits(self._pack, self._knowledge, tick),
-            locations=zones.warm,
+            locations=zones.warm, world=self._world,
         ):
             self._enqueue_autonomous(intent, entry_tick)
         # the warm ring's FACTION goals (depth-6) — the same clock's
@@ -1390,7 +1392,7 @@ class Simulator:
             facts=live_leverage(self._pack, self._events, tick),
             echoes=echo_scores(self._pack, self._knowledge, tick),
             traits=crystallized_traits(self._pack, self._knowledge, tick),
-            locations=zones.warm,
+            locations=zones.warm, world=self._world,
         ):
             self._enqueue_autonomous(intent, entry_tick)
 

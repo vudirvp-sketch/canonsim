@@ -7,8 +7,9 @@ shapes, not donor bytes: sites (a jittered integer lattice), Lloyd
 relaxation (integer centroids), value-noise height/moisture (integer
 octaves, fixed-point interpolation that divides out), downhill flow
 (the watershed), the biome band table (+ the coastal refinement),
-capitals + growth (the states), the chronicle (pre-PC history — DF
-"history without a player").
+capitals + growth (the states), the roads (the claimed-set topology —
+the MST backbone + the k-nearest overlay, roads-1), the chronicle
+(pre-PC history — DF "history without a player").
 
 **The geometry discipline (the named cause: Azgaar's cross-engine float
 drift; Brogue's fixed-point is the precedent):** the canonical path is
@@ -33,7 +34,8 @@ order is the enforcement, the measured curve the evidence
 **The stream law (D-079's family law's fourth member,**
 `core/rng.py::worldgen_stream_name`): every DRAWING pass owns one
 content-addressed `worldgen:<pass>` stream; the pure passes (relax,
-watershed, biomes) draw nothing — their determinism is by construction.
+watershed, biomes, roads) draw nothing — their determinism is by
+construction.
 Arming, re-tuning, adding, or removing a pass shifts neither a canon
 check draw nor another pass's draws: the corpus price of worldgen is
 the genesis events alone (the isolation law at pass granularity).
@@ -78,9 +80,13 @@ steps, a pure function of the indices + the map config, computable
 pre-draw at load time); the RELATION is the PACK's
 (`worldgen.place.max_edge_span`, the exits graph's edge contract —
 INV-3: the engine measures, the pack decides, never engine geography
-knowledge). The lint lives in `core/pack.py::_worldgen`; the passes
-never read the `place` block (the runtime backstop's set stays
-six-block — placement is a load-time law alone).
+knowledge). The AUTHORED half's lint lives in
+`core/pack.py::_worldgen`; the GENERATED half's law lives in the roads
+pass (roads-1, `docs/CONTRACTS.md` §1): the span is asserted AT EMIT
+against the pass's own edges, and if the claimed set cannot be connected
+within it the pass fails LOUD — the law relocated to where the data is
+born, never weakened (the runtime backstop's set gained `place` and
+`roads` with the pass).
 
 **The genesis (pre-PC history, chron-2's DF legends shape):** `WorldModel`
 is DERIVED data (a pure function of seed + pack config, rebuildable,
@@ -168,8 +174,8 @@ WORLDGEN_BLOCK: Final = "worldgen"
 
 #: The ordered pass pipeline (the Azgaar/Red Blob shapes). The DRAWING
 #: passes (sites, height, moisture, states, chronicle) each own one
-#: `worldgen:<pass>` stream; the pure passes (relax, watershed,
-#: biomes) draw nothing.
+#: `worldgen:<pass>` stream; the pure passes (relax, watershed, biomes,
+#: roads) draw nothing — their determinism is by construction.
 PASS_ORDER: Final = (
     "sites",
     "relax",
@@ -178,6 +184,7 @@ PASS_ORDER: Final = (
     "watershed",
     "biomes",
     "states",
+    "roads",
     "chronicle",
 )
 
@@ -275,10 +282,15 @@ _BEYOND: Final = 1 << 62
 
 #: The sub-blocks the RUNTIME reads (the raw-read backstop's required
 #: set, `_require_config`; the LINT's full closed key set lives in
-#: `core/pack.py::WORLDGEN_SUB_BLOCKS`). place-1: `place` is lint-side
-#: alone — the passes never read it, so it sits in the lint's set, not
-#: here (the backstop owns what runtime touches, the lint the contract).
-_SUB_BLOCKS: Final = ("map", "biomes", "watershed", "states", "chronicle", "claims")
+#: `core/pack.py::WORLDGEN_SUB_BLOCKS`). place-1: `place` joined the
+#: runtime set with roads-1 — the pass asserts the emitted edges against
+#: `place.max_edge_span` (I4, the law RELOCATED to where the data is
+#: born; before roads-1 the passes never read it and it sat in the
+#: lint's set alone).
+_SUB_BLOCKS: Final = (
+    "map", "biomes", "watershed", "states", "chronicle", "claims",
+    "place", "roads",
+)
 
 #: The required ints of each sub-block (the runtime raw-read backstop;
 #: the lint owns the full contract at load).
@@ -289,6 +301,8 @@ _REQUIRED: Final[dict[str, tuple[str, ...]]] = {
     "watershed": ("neighbors", "river_flow"),
     "states": ("capitals",),
     "chronicle": ("years", "events_max", "event_type", "hooks"),
+    "place": ("max_edge_span",),
+    "roads": ("k",),
 }
 
 
@@ -370,6 +384,13 @@ class WorldModel:
     regions: tuple[str, ...]
     capitals: frozenset[int]
     years: int
+    #: The roads pass's derived graph (roads-1): one `(location,
+    #: derived_exits)` entry per CLAIMED location, sorted by location id,
+    #: each exits tuple in the I5 deterministic edge order. Derived,
+    #: rebuildable, never truth (L11); read-side only — no canon births
+    #: (INV-1). The default empty tuple is the hand-built-model law (the
+    #: travel price's exact-number oracles construct models without it).
+    roads: tuple[tuple[str, tuple[str, ...]], ...] = ()
 
     def claim_value(self, field: str, site: int) -> Any:
         """One claim's model read (the closed CLAIM_FIELDS set; the
@@ -799,6 +820,188 @@ def _pass_states(
     return tuple(regions), frozenset(chosen)
 
 
+def _pass_roads(
+    config: Mapping[str, Any],
+) -> tuple[tuple[str, tuple[str, ...]], ...]:
+    """The roads pass (roads-1, `docs/CONTRACTS.md` §1): the generated
+    world's exit graph over the CLAIMED locations — an MST BACKBONE (the
+    one connectivity guarantee) plus a pack-declared k-NEAREST OVERLAY
+    (route choice + ring depth; k=0 is the tree-only world). Pure — no
+    stream, no draw (INV-2-clean by construction: the same seed + pack
+    answers the same graph; the WorldModel rebuild law).
+
+    NODES (D1): the locations carrying at least one `worldgen.claims`
+    entry — unclaimed lattice sites are never nodes (every named consumer
+    reads location-to-location edges; the derived travel price requires
+    claimed endpoints, D-122). Node geometry = the location's claimed
+    site SET (a location may hold several claims); the weight of a
+    location pair = the MINIMAL Chebyshev cross-pair lattice distance
+    (`lattice_distance` — one metric, two readers: the price reads the
+    cheapest cross-pair for COST, the topology for LENGTH).
+
+    EDGE ORDER (I5): candidate edges are ordered by (weight, site-index
+    pair, location-id pair) — the canonical cross-pair is the first
+    minimal one in sorted site order from the lower-id location; each
+    location's derived exits list renders in that order (the warm tuple
+    follows the exits list's own order — `core/lod.py`).
+
+    THE BACKBONE: Kruskal over the claimed node set under that order.
+    THE CONFLICT RULE (I4, place-1's law relocated to where the data is
+    born): if the claimed set cannot be connected within the declared
+    `place.max_edge_span`, the pass fails LOUD (`WorldgenError`) —
+    connectivity is never bought by breaking the span; the pack author
+    fixes placements or raises the span.
+
+    THE OVERLAY (the mutual k-nearest law, I3+D2's own pin): each node
+    picks its k nearest OTHER nodes among the span-legal candidates it
+    is not already tree-joined to, under the same (weight, tie-break)
+    order; an overlay edge LANDS only when the pick is MUTUAL (each
+    endpoint picks the other). The mutual form is what the contract's
+    bound pins: a node's overlay degree never exceeds k (I3: at most
+    (n-1) backbone edges plus k overlay edges per node) and the union
+    carries at most n*k/2 overlay edges (D2's combination price) — a
+    union-of-picks reading would break both (a popular hub would absorb
+    every other node's picks). k = `roads.k`, pack data (the
+    watershed.neighbors precedent).
+
+    CYCLES (I6): legal — the overlay's purpose; the backbone alone is
+    acyclic; no multi-edges, no self-loops (I2: an undirected edge lands
+    in both endpoints' derived lists)."""
+    span = int(config["place"]["max_edge_span"])
+    k = int(config["roads"]["k"])
+    extent = int(config["map"]["extent"])
+    spacing = int(config["map"]["spacing"])
+    # the node set: claimed locations, sorted by id (construction order)
+    sites: dict[str, set[int]] = {}
+    for entry in config["claims"]:
+        sites.setdefault(str(entry["location"]), set()).add(int(entry["site"]))
+    nodes = sorted(sites)
+    n = len(nodes)
+
+    def pair_geometry(left: str, right: str) -> tuple[int, int, int]:
+        """(weight, site_a, site_b): the minimal cross-pair distance and
+        its canonical representative — the first minimal pair in sorted
+        site order (left's sites outer, right's inner; every call site
+        passes the ids in ascending order)."""
+        best: tuple[int, int, int] | None = None
+        for site_a in sorted(sites[left]):
+            for site_b in sorted(sites[right]):
+                weight = lattice_distance(site_a, site_b, extent, spacing)
+                if best is None or weight < best[0]:
+                    best = (weight, site_a, site_b)
+        assert best is not None  # both site sets are non-empty (claimed)
+        return best
+
+    # the candidate edges: every node pair, in the I5 order
+    candidates: list[tuple[int, int, int, str, str]] = []
+    for i, left in enumerate(nodes):
+        for right in nodes[i + 1:]:
+            weight, site_a, site_b = pair_geometry(left, right)
+            candidates.append((weight, site_a, site_b, left, right))
+    candidates.sort()
+    edge_key: dict[tuple[str, str], tuple[int, int, int, str, str]] = {
+        (key[3], key[4]): key for key in candidates
+    }
+
+    # the backbone: Kruskal under the I5 order; the loud span conflict
+    parent = list(range(n))
+    index = {node: i for i, node in enumerate(nodes)}
+
+    def find(x: int) -> int:
+        while parent[x] != x:
+            x = parent[x]
+        return x
+
+    adjacency: dict[str, list[str]] = {node: [] for node in nodes}
+    tree: set[tuple[str, str]] = set()
+    taken = 0
+    for weight, _site_a, _site_b, left, right in candidates:
+        ra, rb = find(index[left]), find(index[right])
+        if ra == rb:
+            continue
+        if weight > span:
+            raise WorldgenError(
+                f"worldgen.place: the claimed set cannot be connected "
+                f"within max_edge_span {span} — the backbone edge "
+                f"{left} <-> {right} reads {weight} lattice steps "
+                f"(connectivity is never bought by breaking the span; "
+                "fix the placements or raise the span)"
+            )
+        parent[ra] = rb
+        adjacency[left].append(right)
+        adjacency[right].append(left)
+        tree.add((left, right))
+        taken += 1
+        if taken == n - 1:
+            break
+    assert taken == n - 1 or n <= 1  # I1: one component (the MST law)
+
+    # the overlay: each node's k nearest span-legal non-tree candidates;
+    # an edge lands only on the MUTUAL pick (I3 + D2's bound — the law
+    # above)
+    if k:
+        picks: dict[str, set[str]] = {}
+        for node in nodes:
+            near = [
+                right if node == left else left
+                for weight, _sa, _sb, left, right in candidates
+                if (node == left or node == right)
+                and weight <= span
+                and (left, right) not in tree
+            ]
+            picks[node] = set(near[:k])
+        for _weight, _sa, _sb, left, right in candidates:
+            if (left, right) in tree:
+                continue
+            if right in picks[left] and left in picks[right]:
+                adjacency[left].append(right)
+                adjacency[right].append(left)
+                tree.add((left, right))
+
+    # the emission order (I5): each exits list in the edge-key order
+    def by_key(left: str, right: str) -> tuple[int, int, int, str, str]:
+        return edge_key[
+            (left, right) if (left, right) in edge_key else (right, left)
+        ]
+
+    result = tuple(
+        (
+            node,
+            tuple(sorted(adjacency[node], key=lambda other: by_key(node, other))),
+        )
+        for node in nodes
+    )
+
+    # the emit-time invariant set (belt-and-braces: the construction
+    # guarantees each; the asserts catch regressions loud in tests)
+    by_node = dict(result)
+    seen: set[frozenset[str]] = set()
+    degrees: dict[str, int] = {node: 0 for node in nodes}
+    for node, derived in result:
+        assert len(set(derived)) == len(derived)  # I6: no multi-edges
+        for other in derived:
+            edge = frozenset((node, other))
+            assert len(edge) == 2  # I2: no self-loop
+            seen.add(edge)
+            degrees[node] += 1
+        assert degrees[node] <= (n - 1) + k  # I3: the degree bound
+    for edge in seen:
+        left, right = sorted(edge)
+        weight, _sa, _sb, _l, _r = edge_key[(left, right)]
+        assert weight <= span  # I4: the pathological-edge bound
+        assert left in by_node[right] and right in by_node[left]  # I2
+    if n > 1:  # I1: exactly one component over the claimed nodes
+        reach = {nodes[0]}
+        frontier = [nodes[0]]
+        while frontier:
+            for other in by_node[frontier.pop()]:
+                if other not in reach:
+                    reach.add(other)
+                    frontier.append(other)
+        assert len(reach) == n
+    return result
+
+
 def _walk_collections(
     kinds: Sequence[str],
     tiers: Sequence[Mapping[str, Any]] | None,
@@ -1032,6 +1235,7 @@ def generate_world(bank: RngBank, config: Mapping[str, Any]) -> WorldModel:
         config, sites, height, moisture, neighbor_sets
     )
     regions, capitals = _pass_states(bank, config["states"], sites)
+    roads = _pass_roads(config)
     return WorldModel(
         extent=int(config["map"]["extent"]),
         sites=sites,
@@ -1043,6 +1247,7 @@ def generate_world(bank: RngBank, config: Mapping[str, Any]) -> WorldModel:
         regions=regions,
         capitals=capitals,
         years=int(config["chronicle"]["years"]),
+        roads=roads,
     )
 
 

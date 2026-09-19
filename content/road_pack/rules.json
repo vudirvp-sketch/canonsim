@@ -582,6 +582,9 @@
     ],
     "place": {
       "max_edge_span": 2
+    },
+    "roads": {
+      "k": 0
     }
   },
   "weather": {

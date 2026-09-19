@@ -1,46 +1,64 @@
-Iteration: iter-144 (`iter-144-contracts` — the three
-pre-implementation contract writes; the owner's «продолжай работы
-по планам, решай сам что сейчас логичнее начать/открыть и прочее»
-delegation call — the pick NOT invented: the plan's own recorded
-next recommendation taken (intake-29/D-175's order ci-1 → the
-three contract writes → the build rows; ci-1 consumed iter-143)):
-`docs/CONTRACTS.md` — roads-1 / res-1 / since-1 turned from row
-wordings into compact pre-implementation contracts (pinned
-decisions, invariant sets, TEST_PLAN §9 claim-packet falsifiers,
-minimal test sets — the audit's own closing proposal, the
-intake-29 sharpenings the starting material). The headline pins:
-roads-1's NODE question ANSWERED (claimed locations only — every
-named consumer reads location-to-location edges, the derived
-travel price requires claimed endpoints, D-122) + the ALGORITHM
-NAMED (MST backbone + pack-declared k-nearest overlay, the D-174
-fence's three questions answered inline, the one-knob ablation the
-overlay's kill arm, k=0 legal); res-1's substrate SHAPE (the
-account primitive — non-negative integer stocks on canon entities,
-source/transfer/consume through the canon door, integer-only,
-prices derived L3) + the irreversibility split + the underflow
-floor + the unarmed landing (the 68a pattern); since-1's baseline
-SENSE NAMED (last physical co-presence, the per-entity encounter
-epoch; the other four senses rejected with cause) + the
-scene_delta surface separation + the blind-NPC inheritance. A
-contract is NOT the row's spec — the spec still fires just-in-time
-at the row's start (SPECS_BACKLOG's law); the contract is the
-pre-implementation boundary. Doc-only, zero code, zero corpus
-price. The doc-loop alarm answered (the D-022 fresh-owner-request
-exception; the sequence's next step is BUILD work — roads-1 the
-readiness head — not more docs) ·
+Iteration: iter-145 (`iter-145-roads1` — the generated-exits
+pass; the owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick NOT
+invented: the plan's own recorded recommendation taken, the BUILD
+ROWS of intake-29/D-175's order, roads-1 the readiness head, its
+CONTRACTS §1 boundary the starting material): the roads pass LANDED
+— a new PURE pass (`core/worldgen.py::_pass_roads`, PASS_ORDER grew
+`roads`) building the exit graph over the CLAIMED locations: the MST
+backbone (Kruskal under the I5 order) + the pack-declared MUTUAL
+k-nearest overlay (`worldgen.roads.k`; the mutual form is I3+D2's
+pin — per-node overlay degree <= k, <= n*k/2 edges; the
+union-of-picks reading breaks both, the star counterexample), the
+output on `WorldModel.roads` (L11); I4's span law RELOCATED to the
+emit (the loud WorldgenError conflict rule; the runtime backstop's
+set grew `place`+`roads`). The ONE shared read `core/roads.py::exits`
+(authored non-empty wins — the pack wins; an EMPTY list the
+generated-world marker; else derived; else ()): the named consumers
+re-pointed — the LOD warm ring, the intent door's move validation
+(world= keyword threaded at every loop door: accept, OCC re-check,
+the beat/macro autonomy gates). The lint: `worldgen.roads` required,
+k 0..claimed-2 (the vacuity refusal); the committed packs armed
+k=0 — zero corpus price (authored exits win everywhere; the claimed
+sets connect within their spans: 1<=1, 1<=2, 4<=4). THE RIDER: the
+pack.py SPLIT (D-175 — roads-1 the first pack.py-growing row):
+`core/packlint/` — helpers + shared + twelve domain classes under the
+one `_Lint` orchestrator (the pinned order + the KI#77 comments
+verbatim; load_pack the single gate; no DSL/base classes; pyproject
+gains core.packlint — the fresh-venv CI path verified). THE EVIDENCE
+(§9's claim packet, the sandbox driver per Rule 9): the province's
+MIXED mode G variant at the smoke seed, the same-seed fork k=0 vs
+k=2 — MEASURED on all three surfaces: the door (8 -> 12 accepted
+pairs), WHO simulates (the crossing's warm ring 5 -> 7 NPCs), route
+metrics (5 -> 8 edges, 0 -> 3 cycles, 10 -> 20 pairs); falsifier NOT
+tripped — CONFIRMED at the measured band. Honest residues: the mode
+G authoring burden (the orphan law couples grammar reachability to
+AUTHORED edges — entities re-referenced or relocated when exits
+empty), the authored playscript breaks under the derived topology
+(the weight-14 tie resolved differently — a measured difference),
+the adjacent_locations knowledge audience stays authored-only (not a
+named consumer; the first mode G pack's rider) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 7e6c83f and re-verified
-after; doc-only, the corpora byte-untouched) ·
+1763 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at BASE_COMMIT 091b004 and re-verified
+after; the fresh-venv install path for core.packlint verified — the
+CI runner's own path) ·
 Date: 2026-09-19 ·
-Scope: `docs/CONTRACTS.md` (new), `docs/TASKS.md` (the iter-144
-section + the three row pointers), `docs/DECISIONS.md` (D-177),
-`STATUS.md` (this re-pin + the Next step), `worklog.md` (this
-entry; iter-134 evicted per the cap), `docs/AGENT_NAVIGATION.md`
-(§1 the CONTRACTS.md row) — 6 files.
-The prior iteration's record: iter-143 (ci-1). The
+Scope: `core/roads.py` (new), `core/worldgen.py` (the pass + the
+model field + the backstop), `core/lod.py`, `core/intent.py`,
+`core/urgencies.py`, `core/factions.py`, `core/loop.py` (the world
+threading), `core/pack.py` + `core/packlint/` (the split rider, 15
+files), `pyproject.toml`, the three `content/*/rules.json` (roads.k=0),
+`tests/test_roads.py` (new, +9), `tests/test_lod.py`,
+`tests/test_worldgen.py` (the WG fixture + the relocation-successor
+test), `docs/TASKS.md`, `docs/DECISIONS.md` (D-178),
+`docs/CONTRACTS.md` (§1 collapsed), `docs/ROADMAP.md` (the row list),
+`docs/AGENT_NAVIGATION.md` (§1), `STATUS.md` (this re-pin + the Next
+step), `worklog.md` (this entry; iter-135 evicted per the cap) — the
+soft limit's own clause (the rider's mechanical moves, noted).
+The prior iteration's record: iter-144 (contracts). The
 detail lives in TASKS + worklog + git.
 
 Iteration: iter-143 (`iter-143-ci1` — the GitHub Actions runner
@@ -569,77 +587,59 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-144 DONE: the three pre-implementation contract writes
-LANDED (`docs/CONTRACTS.md` — roads-1's node question answered +
-algorithm named; res-1's substrate shape + the irreversibility
-split + the underflow floor; since-1's baseline sense named + the
-surface separation; D-177). iter-143: ci-1 LANDED (the GitHub
-Actions runner armed; the first LIVE run fires on the owner's
-push; branch protection the owner's settings step — the recipe in
-the iter-143 stop-point report; D-176). iter-142: intake-29
-routed (D-175); iter-139: world-2 L2 the verdict DELIVERED
-(D-172) — the two-level gate COMPLETE.**
+**iter-145 DONE: the roads-1 pass LANDED (the claimed-set topology —
+the MST backbone + the mutual k-nearest overlay; the ONE shared exits
+read; the pack.py split rider; the §9 claim packet CONFIRMED at the
+measured band; D-178). iter-144: the three contract writes; iter-143:
+ci-1 (the first LIVE run fires on the owner's push; branch protection
+the owner's settings step). iter-139: world-2 L2 the verdict
+DELIVERED (D-172) — the two-level gate COMPLETE.**
 
-1. **The owner-gated backlog (the standing rows — the
-   contracts now written, the builds start from a pinned
-   boundary; the ORDER owner
-   decides, TASKS owns composition, never order; each build
-   row's verification plan rides TEST_PLAN §9's claim
-   packet — intake-26's standing measurement):** with the
-   three contract writes landed, the session's RECOMMENDED
-   next call (intake-29's order, never the pick) is the BUILD
-   ROWS in the standing readiness order — `roads-1` the
-   readiness head (its contract `docs/CONTRACTS.md` §1; the
-   pack.py-split rider rule rides its build if it starts
-   first), then `res-1` (§2), then `since-1` (§3), the pack
-   consumers
+1. **The owner-gated backlog (the standing rows — the ORDER owner
+   decides, TASKS owns composition, never order; each build row's
+   verification plan rides TEST_PLAN §9's claim packet):** with
+   roads-1 consumed, the session's RECOMMENDED next call
+   (intake-29's readiness order, never the pick) is `res-1` (its
+   contract `docs/CONTRACTS.md` §2 — the substrate contract: the
+   account primitive, the three verbs through the canon door, the
+   irreversibility split, the underflow floor, the unarmed landing;
+   its lint growth lands in the SPLIT's `core/packlint/` home, the
+   rider ALREADY PAID), then `since-1` (§3), the pack consumers
    (`pack-1` the natural depth companion, `pack-4`) as the
-   primitives' universality proofs when the slots open,
-   `engine-1` (+ `presentation-1`, its decision-input child —
-   now also the owner of the player-facing compellingness
-   question intake-18 fenced to the SoW horizon) last. The
-   remaining standing rows unchanged: `since-1`, `parse-2`,
-   `tune-3`, `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the SoW
-   audit, D-055 deferral), `pack-3`, `companion-1`, `mech-2`
+   primitives' universality proofs when the slots open — now also
+   the natural first MODE G consumers (the roads-1 residues their
+   riders: the adjacent_locations audience threading, the mode G
+   authoring burden's worldbuilder-side answer), `engine-1` (+
+   `presentation-1`) last. The remaining standing rows unchanged:
+   `parse-2`, `tune-3`, `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the
+   SoW audit, D-055 deferral), `pack-3`, `companion-1`, `mech-2`
    (rides the next mechanics.py touch — now also carrying
    intake-21's single-event postmortem form + intake-22's
-   viz-export form), `st-4` (rides presentation-1 at its
-   write time, D-148) and `st-5` (the first real consumer
-   decides). The consult material for the engine-1/
-   presentation-1 spec writes and any future contract/plugin
-   question: the intake-22 modularity card, the intake-23
-   world-structure card, and the intake-21 observability card
-   (the system-contract decomposition research call is the
-   owner's, never self-opened); for the SoW promise debates
-   the intake-27 sacrifice protocol (the promise pair → the
-   both-promises test → Barrier/Gate/Carrot/S'more with the
-   price named — phases.md §6's intake-27 block, D-173) and
-   the intake-28 combination fence (a combined design carries
-   no presumption of advantage — itself a separate
-   hypothesis: the mechanism-of-advantage decomposition, the
-   combination-price question, the Frankenstein test;
-   phases.md §6's intake-28 block, D-174). The research
-   posture (intake-29's admission rule, D-175): a new external
-   intake convenes only with a named open build row/standing
-   debate it feeds + a potential falsifier stated up front
-   (the owner's fresh question always overrides, recorded as
-   such) — new knowledge now comes from building and
-   measuring; promotion of the rule into AGENTS.md is the
-   owner's call.
-2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
-   standing gap rows: the {3–8B, GBNF} arm (owner hardware —
-   engine-1's decision input), the bg-7 prose families skipped
-   in the bg-8 heartbeat, the per-family latency distribution.
-   New track-B ideas enter the backlog on the owner's call only.
+   viz-export form), `st-4` (rides presentation-1 at its write time,
+   D-148) and `st-5` (the first real consumer decides). The consult
+   material for the engine-1/presentation-1 spec writes: the
+   intake-22 modularity card, the intake-23 world-structure card,
+   and the intake-21 observability card; for the SoW promise debates
+   the intake-27 sacrifice protocol (D-173) and the intake-28
+   combination fence (D-174). The research posture (intake-29's
+   admission rule, D-175): a new external intake convenes only with
+   a named open build row/standing debate it feeds + a potential
+   falsifier stated up front — new knowledge now comes from building
+   and measuring.
+2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
+   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
+   decision input), the bg-7 prose families skipped in the bg-8
+   heartbeat, the per-family latency distribution. New track-B ideas
+   enter the backlog on the owner's call only.
 3. **The SoW horizon (ROADMAP §6) is the standing frame** now that
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (the build rows —
-   roads-1 the readiness head) or a fresh call (this round's
-   delegation — «продолжай работы по планам, решай сам» —
-   consumed by the contract writes, D-177). After the push:
-   verify the first
-   live CI run green on `main`, then apply the branch-protection
-   recipe (the iter-143 stop-point report).
+   recommended remainder of the sequence (res-1 the readiness head
+   now that roads-1 is consumed) or a fresh call (this round's
+   delegation — «продолжай работы по планам, решай сам» — consumed
+   by the roads-1 build, D-178). After the push: verify the CI
+   runner's first live run green on `main` (the iter-143 arm), then
+   apply the branch-protection recipe (the iter-143 stop-point
+   report).

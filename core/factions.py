@@ -74,6 +74,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
     from core.pack import Pack
     from core.rng import RngBank
+    from core.worldgen import WorldModel
 
 __all__ = [
     "FACTION_PREFIX",
@@ -211,6 +212,7 @@ def faction_intents(
     echoes: Sequence[Any] = (),
     traits: Sequence[Any] = (),
     locations: Collection[str] | None = None,
+    world: "WorldModel | None" = None,
 ) -> list[IntentData]:
     """One walk's worth of faction goal intents (depth-6): for each
     pack-declared faction — compute the small formula's probability
@@ -238,7 +240,9 @@ def faction_intents(
     `facts` / `echoes` / `traits`: the caller's derived-fold reads at
     the walk's own tick, for `requires` gates that read them — the
     same duck-typed discipline as `urgency_intents` (this module never
-    imports the fold owners; the import direction stays one-way)."""
+    imports the fold owners; the import direction stays one-way).
+    roads-1: `world` threads the generated model for the adjacent_to
+    gate (the ONE shared exits read); None is the unarmed default."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         props = projection.get(spec.group)
@@ -264,7 +268,7 @@ def faction_intents(
         if spec.requires:
             failing = first_failing(
                 pack, projection, intent, list(spec.requires),
-                facts=facts, echoes=echoes, traits=traits,
+                facts=facts, echoes=echoes, traits=traits, world=world,
             )
             if failing is not None:
                 continue  # the world said no — silent, no rejection event

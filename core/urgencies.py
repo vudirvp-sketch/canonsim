@@ -40,6 +40,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
     from core.pack import Pack
     from core.rng import RngBank
+    from core.worldgen import WorldModel
 
 __all__ = ["URGENCY_PREFIX", "urgency_intents"]
 
@@ -108,6 +109,7 @@ def urgency_intents(
     echoes: Sequence[Any] = (),
     traits: Sequence[Any] = (),
     locations: Collection[str] | None = None,
+    world: "WorldModel | None" = None,
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -138,7 +140,10 @@ def urgency_intents(
     depth-3 (the scene-LOD filter): `locations` scopes the entry walk
     to NPCs positioned there (the active zone at a beat, the warm ring
     at a macro crossing); None (the default) is the one-scene law —
-    every entry, the unarmed world's per-beat behavior."""
+    every entry, the unarmed world's per-beat behavior. roads-1:
+    `world` threads the generated model for the adjacent_to gate (the
+    ONE shared exits read — an autonomous move along a derived edge
+    passes the gate); None is the unarmed default."""
     out: list[IntentData] = []
     for seq, spec in enumerate(_specs(pack)):
         # skip actors absent from the projection (arrested, fled, removed)
@@ -175,7 +180,7 @@ def urgency_intents(
         if spec.requires:
             failing = first_failing(
                 pack, projection, intent, list(spec.requires),
-                facts=facts, echoes=echoes, traits=traits,
+                facts=facts, echoes=echoes, traits=traits, world=world,
             )
             if failing is not None:
                 continue  # the world said no — silent, no rejection event

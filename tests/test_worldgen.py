@@ -207,6 +207,7 @@ WG: dict[str, Any] = {
         {"location": "loc_street", "slot": "near_river", "field": "river", "site": 1},
     ],
     "place": {"max_edge_span": 1},
+    "roads": {"k": 0},
 }
 
 CLAIM_SLOTS = ("terrain", "world_region", "near_river")
@@ -1175,28 +1176,28 @@ def test_a_missing_sub_block_is_a_loud_packerror_never_keyerror(
     checked; a MISSING block leaked KeyError('map') straight through
     `load_pack` (probed on a crafted twin)."""
     for block in ("map", "biomes", "watershed", "states", "chronicle",
-                  "claims", "place"):
+                  "claims", "place", "roads"):
         broken = {k: v for k, v in WG.items() if k != block}
         assert f"is missing the {block!r} sub-block" in _lint_error(
             tmp_path, broken
         )
 
 
-def test_the_place_block_is_lint_side_alone_the_backstop_ignores_it() -> None:
-    """The runtime split: the passes never read `place`, so the
-    raw-read backstop's required set stays six-block — a hand-built
-    config WITHOUT `place` generates a world and answers the genesis
-    fine (placement is a load-time law; the pack lint owns the
-    contract, the backstop owns what runtime touches). The LINT
-    refuses the same config — the two sets diverge by design."""
-    stripped = {k: v for k, v in WG.items() if k != "place"}
-    model, drafts, _parents = genesis(
-        RngBank(42), _rules_with(stripped), [], 42
-    )
-    assert model is not None and len(drafts) == WG["chronicle"]["events_max"]
-    assert generate_world(RngBank(42), stripped).sites == generate_world(
-        RngBank(42), WG
-    ).sites  # the block changes no draw, no model value
+def test_place_and_roads_are_runtime_reads_now_the_backstop_demands_them() -> None:
+    """The roads-1 relocation successor: the passes READ `place` (the
+    span asserted at emit against the pass's own edges) and `roads`
+    (the overlay knob), so the raw-read backstop's required set GREW to
+    eight blocks — a hand-built config WITHOUT either fails loud with
+    the block NAMED (the pred-contract family), where before roads-1
+    `place` was lint-side alone (the test this one replaces). The LINT
+    refuses the same configs for the same named reason — the two sets
+    now agree on these two blocks."""
+    for block in ("place", "roads"):
+        stripped = {k: v for k, v in WG.items() if k != block}
+        with pytest.raises(
+            WorldgenError, match=f"missing the {block!r} block"
+        ):
+            generate_world(RngBank(42), stripped)
 
 
 # -- the depth-5b arming laws (D-116: conductance + reachability) ----------------

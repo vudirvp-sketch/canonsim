@@ -13,6 +13,59 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-145 · 2026-09-19 · roads1 — the owner's «продолжай работы по
+планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick from the plan's own recorded recommendation
+(D-175's build-rows order, roads-1 the readiness head, CONTRACTS §1
+the boundary)
+- verified BEFORE working at BASE_COMMIT 091b004 (1754 passed +
+  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
+  1763 passed + 1 skipped (+9 in tests/test_roads.py), ruff clean;
+  the fresh-venv install path verified for core.packlint (the CI
+  runner's own path)
+- the pass: `core/worldgen.py::_pass_roads` (PASS_ORDER grew roads;
+  pure, draw-free) — the MST backbone + the pack-declared MUTUAL
+  k-nearest overlay over the CLAIMED locations (the mutual form is
+  I3+D2's pin: per-node overlay degree <= k, <= n*k/2 edges — the
+  union reading breaks both on the star); `WorldModel.roads`;
+  I4's span law relocated to the emit (the loud WorldgenError
+  conflict rule; the runtime backstop grew place+roads — the
+  lint-side-alone place pin superseded by its relocation successor
+  test)
+- the ONE read: `core/roads.py::exits(pack, world, location)` —
+  authored non-empty wins, else derived, else (); the consumers
+  re-pointed (lod.scene_zones grew the world param;
+  first_failing/occ_breaking_cause gained world=None, threaded at
+  every loop door — the F-run's probe caught the accept door missing
+  its world before the fix); the lint: worldgen.roads required,
+  k 0..claimed-2; the committed packs armed k=0 (zero corpus price —
+  the authored exits win everywhere; the claimed sets connect within
+  their spans: 1<=1, 1<=2, 4<=4)
+- the RIDER: the pack.py split (D-175) — core/packlint/ (helpers +
+  shared + twelve domain classes under the one _Lint orchestrator;
+  load_pack the single gate; no DSL/base classes; the compat
+  re-exports keep every importer green; pyproject gains
+  core.packlint)
+- the §9 claim packet (the sandbox driver, Rule 9): the province's
+  MIXED mode G variant at the smoke seed, k=0 vs k=2 — MEASURED:
+  the door 8 -> 12 accepted pairs, WHO simulates 5 -> 7 NPCs in the
+  crossing's warm ring at keep, routes 5 -> 8 edges / 0 -> 3 cycles
+  / 10 -> 20 two-hop pairs; falsifier NOT tripped (CONFIRMED at the
+  measured band); the honest residues: the mode G authoring burden
+  (the orphan law couples grammar reachability to authored edges),
+  the authored playscript breaks under the derived topology (the
+  weight-14 tie resolved differently), the adjacent_locations
+  audience stays authored-only (not a named consumer — the first
+  mode G pack's rider)
+- docs: TASKS (the iter-145 section + the row flip), DECISIONS
+  D-178, CONTRACTS §1 collapsed to a pointer, ROADMAP's row list,
+  AGENT_NAVIGATION §1 (core/roads.py + the packlint row + the pass
+  list), STATUS re-pin + Next step (res-1 the new recommendation);
+  this entry (iter-135 evicted per the cap, verified in this edit;
+  10 held)
+
+
+
 iter-144 · 2026-09-19 · contracts — the owner's «продолжай работы
 по планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick from the plan's own recorded next
@@ -381,8 +434,6 @@ their seasonal cadence)
   10 entries (iter-126 evicted here, verified in this edit) — the
   over-cap files ride the documented §6.1 substance precedent
 
-iter-135 · 2026-09-19 · world-2 L2 slice 3 (the triangle) — the owner's
-«теперь настала пора приступать к работе по планам» call (the
 iter-118/119 precedent phrase; iter-134's F3 convergence consumed:
 the plans verified complete, slice 3 the readiness pick)
 - the factions ARMED 0→1 (depth-6's first committed arming, pack

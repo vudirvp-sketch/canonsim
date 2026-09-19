@@ -85,7 +85,7 @@ padding.
 | `.github/workflows/ci.yml` | CI runner: pytest + ruff on push to `main` (ci-1, iter-143 — Python 3.12.14 the env pin, `PYTHONHASHSEED=0`) |
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
-| `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
+| `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py` — the admission gate; the lint bodies in `core/packlint/`, the D-175 split) |
 | `content/road_pack/` | the second pack: the travel-loop reskin (world-2 L1, iter-112 — `travel` armed, the derived prices; `CREDITS.md` the CC-BY sidecar) |
 | `content/province_pack/` | the third pack: the original province (world-2 L2, slices 1-2, iter-118/119 — the 324-site generated surface, the settlements on the travel lattice, the spine records, the two name-1 phonotactic profiles + the condensation travelers + the cultures block; `tests/test_t1_province.py` the T1 twin, `tests/test_cultures.py` the block lint) |
 | `core/`, `sim/systems/`, `render/`, `brief/`, `cli/` | code (core iter-1..4; the iter-3/4 systems live in `core/` per D-037 — `sim/systems/` stays reserved for periphery; render + cli landed iter-5; `core/metrics.py` landed iter-6; `core/worldgen.py` iter-81/87 (depth-5/chron-2 — the ordered passes,

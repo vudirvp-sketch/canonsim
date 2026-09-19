@@ -147,7 +147,7 @@ def test_the_zones_partition_by_the_pc_position() -> None:
     the remaining locations in declaration order (INV-2: construction
     order, never a set). The street's ring covers the whole five-room
     world: the cold background is empty."""
-    zones = scene_zones(PACK, _projection(PACK, None))
+    zones = scene_zones(PACK, None, _projection(PACK, None))
     assert zones.active == "loc_street"
     assert zones.warm == (
         "loc_tavern", "loc_backyard", "loc_guardroom", "loc_market",
@@ -159,7 +159,7 @@ def test_the_zones_follow_the_pc() -> None:
     """The partition is a live fold view: the PC at the tavern — the
     ring is the tavern's own exits, the cold background the guardroom
     and the market (declaration order)."""
-    zones = scene_zones(PACK, _projection(PACK, "loc_tavern"))
+    zones = scene_zones(PACK, None, _projection(PACK, "loc_tavern"))
     assert zones.active == "loc_tavern"
     assert zones.warm == ("loc_street", "loc_backyard")
     assert zones.cold == ("loc_guardroom", "loc_market")
@@ -170,9 +170,9 @@ def test_the_partition_is_loud_on_an_unreadable_fold() -> None:
     or standing at an undeclared location, is a LOUD LodError — never
     a KeyError, never a silent pass."""
     with pytest.raises(LodError, match="absent from the projection"):
-        scene_zones(PACK, {})
+        scene_zones(PACK, None, {})
     with pytest.raises(LodError, match="not a declared location"):
-        scene_zones(PACK, _projection(PACK, "loc_nope"))
+        scene_zones(PACK, None, _projection(PACK, "loc_nope"))
 
 
 def test_the_census_counts_npcs_alone() -> None:
@@ -181,7 +181,7 @@ def test_the_census_counts_npcs_alone() -> None:
     a ticking soul (the LOD silences nothing of theirs); items are
     not souls either."""
     state = _projection(PACK, "loc_tavern")
-    zones = scene_zones(PACK, state)
+    zones = scene_zones(PACK, None, state)
     assert zones.cold == ("loc_guardroom", "loc_market")
     assert npc_population(PACK, state, zones.cold) == 1  # the relief guard
     assert npc_population(PACK, state, zones.warm) == 0  # empty rooms
@@ -195,7 +195,7 @@ def test_the_self_exit_never_joins_the_ring(tmp_path: Path) -> None:
     belt-and-braces law — the zone is a partition, the active scene
     ticks per-beat once)."""
     pack = crafted_pack(tmp_path, "selfexit", None, self_exit=True)
-    zones = scene_zones(pack, _projection(pack, None))
+    zones = scene_zones(pack, None, _projection(pack, None))
     assert zones.active == "loc_street"
     assert "loc_street" not in zones.warm
     assert len(zones.warm) == len(set(zones.warm))  # duplicates filtered

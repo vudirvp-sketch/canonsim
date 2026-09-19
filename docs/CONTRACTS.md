@@ -17,126 +17,15 @@
 > pointer. Cap-law: `docs/*.md` ≤600 lines, substance-filtered
 > (AGENTS §6.1).
 
-## 1. roads-1 — the topology contract (the generated-exits pass)
+## 1. roads-1 — LANDED (iter-145, D-178)
 
-Row: `docs/TASKS.md` `roads-1` (mode G must EMIT exits for generated
-worlds). Starting material: the intake-29 sharpening (D-175 (2)) plus
-the iter-104 read-path resolution the row already carries.
-
-### 1.1 The pinned decisions
-
-**D1 — the NODE question: the graph spans CLAIMED LOCATIONS only.**
-The node set = the locations carrying at least one `worldgen.claims`
-entry; unclaimed lattice sites are never graph nodes. Grounding:
-every named consumer reads location-to-location edges — the warm ring
-(`core/lod.py::scene_zones` reads the active location's `exits`), the
-intent door's move validation (targets are location ids), the travel
-edge lookup — and the derived price (`core/travel.py::travel_ticks`)
-prices an edge only when BOTH endpoints are claimed locations (D-122's
-map-graph coherence: an edge-local price needs edge-local sites). A
-pass over all sites would emit edges no consumer can read: on a
-200–600-site lattice with 3–6 claims, k-nearest over all sites mostly
-hits unclaimed sites (the audit's measured fact), and an unclaimed
-endpoint maps to nothing through the claims. Node geometry = the
-location's claimed site SET (a location may hold several claims —
-`core/travel.py::_claimed_sites` the precedent read); the distance
-between two nodes = the MINIMAL Chebyshev cross-pair lattice distance
-(`core/worldgen.py::lattice_distance`) — one metric, two readers (the
-price reads the cheapest cross-pair for COST, the topology for
-LENGTH).
-
-**D2 — the algorithm NAMED: an MST backbone plus a bounded-degree
-nearest overlay (the union graph), pack-parameterized.** The bare
-"MST/k-nearest" wording is retired (a tree and a bounded-degree graph
-are different behavioral surfaces). The combination carries the
-fence's three questions (D-174), answered here:
-
-- *Mechanism-of-advantage decomposition:* the MST (Kruskal over the
-  claimed-node set, weight = D1's metric, tie-breaking per invariant
-  I5) earns CONNECTIVITY — the one property it guarantees by
-  construction; the nearest overlay (each node's k nearest nodes,
-  k pack-declared, edges not already in the tree) earns ROUTE CHOICE
-  (competing priced edges — a travel decision, not a pathfinding
-  feature) and RING DEPTH (who simulates at macro cadence). Neither
-  plus is carried without its named earner.
-- *Combination price:* edge count n−1 plus up to n·k/2 deduplicated —
-  longer exits lists (the brief/render surface) and larger warm rings
-  exist ONLY because of the union; the determinism surface doubles
-  (two tie-breaking disciplines to pin).
-- *Frankenstein test:* operationalized as the build's own kill arm
-  (§1.3 F5): overlay on vs off on the same world; if the measured
-  LOD/autonomy/travel-decision surface shows no difference beyond
-  edge count, the overlay is REJECTED for the committed pack (k=0)
-  and the tree stands — the fence's reject arm pinned BEFORE the
-  build, never after.
-- k is PACK DATA in the new `worldgen.roads` sub-block (the
-  `worldgen.watershed.neighbors` precedent: a pass's shape parameter
-  is declared, not engine-constant); k=0 is legal (the tree-only
-  world — the province's authored artery IS a tree). The sub-block's
-  closed vocabulary is the build's lint edit; `core/pack.py` grows,
-  so the pack.py-split rider rule (D-175) rides this row's build if
-  it is the first pack.py-growing row to start (roads-1 is the
-  readiness head).
-
-**D3 — the read path (iter-104's law, unchanged by this contract):**
-ONE shared read `exits(location)` — the authored record wins when
-declared (the pack wins), else the pass-derived edges; the graph
-lives on the WorldModel (L11: derived, rebuildable, never truth — a
-pure function of the header seed + pack); NO canon births (INV-1
-untouched: seed-dependent derived data stays out of the log; the
-`world_formed` outcome block stays as-is). The consumers re-point
-through the one read.
-
-### 1.2 The invariant set (asserted at emit — the pass's own law)
-
-- I1 CONNECTED: exactly one component over the claimed nodes.
-- I2 NO SELF-LOOP; SYMMETRIC (an undirected edge lands in both
-  endpoints' derived exits lists).
-- I3 BOUNDED DEGREE: at most (n−1) backbone edges plus k overlay
-  edges per node; asserted at emit (the authored precedents run
-  degree 1–4: road max 4, province max 3).
-- I4 PATHOLOGICAL-EDGE BOUND: every edge ≤ `worldgen.place.max_edge_span`
-  lattice steps (place-1's law RELOCATED into the pass, asserted at
-  emit where the data is born — relocated, never weakened). CONFLICT
-  RULE: if the claimed set cannot be connected within the declared
-  span, the pass fails LOUD (`WorldgenError`, the pred-contract
-  family D-111) — connectivity is never bought by breaking the span;
-  the pack author fixes placements or raises the span. Authored
-  packs keep the load-time lint unchanged.
-- I5 DETERMINISTIC TIE-BREAKING + EDGE ORDER (INV-2): candidate edges
-  ordered by (weight, site-index pair, location-id pair); each
-  location's derived exits list renders in that order (the warm tuple
-  follows the exits list's own order — `core/lod.py`).
-- I6 CYCLE POLICY: cycles are LEGAL and are the overlay's purpose
-  (the road pack's authored triangle is the precedent shape); the
-  backbone alone is acyclic; no multi-edges.
-
-### 1.3 The falsifier + the minimal test set (TEST_PLAN §9, build-time)
-
-**F — the claim packet.** Claim: "the generated topology is a
-behavioral mechanic, not a pathfinding feature." Lens: the
-changed-next-decision unit (the §9 depth family). Prism: the
-same-seed fork (same world, k=0 vs k=2) plus the one-knob perturb.
-Oracle: MEASURED differences in WHO simulates (the warm-ring
-composition per active location across a run), the travel decision
-surface (competing priced routes offered at the door), and route
-metrics — never route existence alone. Falsifier: no measurable
-LOD/autonomy difference between the arms → the overlay's mechanism
-claim REJECTED (D2's kill arm). Scenario: the province geometry (324
-sites, 6 claims, span 4) at the smoke seed, the corpus playscripts'
-fork family. Counterexamples: the star topology (one hub, degree
-n−1 — legal, the bound holds), the two-cluster span violation (the
-loud failure, I4).
-
-The tests: (1) the topology invariants I1–I6 at emit over the
-committed province block and a fixture pack with k>0 — every
-invariant an assertion, the loud span failure its own case; (2)
-determinism: same seed + pack → the identical derived graph (the
-WorldModel rebuild law); (3) the pack-wins override: an authored
-`exits` record never reads the pass; (4) zero corpus price: the
-golden T1 byte-compare and the corpus pins unchanged (no canon
-births); (5) the claim packet F run — the build's own evidence,
-recorded in the row's TASKS detail at landing.
+> The build's spec absorbed this contract by reference (never
+> restated, D-024): `docs/TASKS.md` iter-145 + D-178 + worklog
+> iter-145 own the landing record — the pass
+> (`core/worldgen.py::_pass_roads`), the one shared read
+> (`core/roads.py::exits`), the lint, the §9 claim-packet evidence.
+> The contract's own pinned decisions, verbatim, in git history at
+> the iter-144 commit.
 
 ## 2. res-1 — the substrate contract (the resource/economy layer)
 
