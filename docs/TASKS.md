@@ -26,6 +26,35 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-143 · ci-1 — the GitHub Actions runner LANDED — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (intake-29: ci-1 FIRST,
+the cheapest risk reduction on the board; AGENTS §8's CI-files gate
+satisfied by the owner's fresh delegation, recorded as such):
+`.github/workflows/ci.yml` — pytest + ruff on push to `main` (the
+PR trigger rides along: the row's own "protect main after" clause
+needs check runs on PR heads once required status checks exist).
+`PYTHONHASHSEED=0` at the job level (INV-2); Python `3.12.14` — the
+env pin, exact: the golden T1 fixture byte-compares a fresh run
+against the committed bytes (TEST_PLAN §1.1) and the log header
+records the interpreter (`core/log.py`), so a version bump needs a
+fixture regen in the same iteration. The runner python is not
+PEP-668-fenced — the plain install, no `--break-system-packages`.
+Verified in the sandbox BEFORE working at BASE_COMMIT 15e568d
+(1754 passed + 1 skipped, ruff clean, Python 3.12.14) and the exact
+runner path simulated in a clean venv (fresh `pip install -e ".[dev]"`
+→ `python -m ruff check .` → `PYTHONHASHSEED=0 python -m pytest -q`:
+the same 1754+1, ruff clean — the skip is the chronicler module's
+duckdb import, by design outside `[dev]`); the actions' majors
+(checkout@v7, setup-python@v7) and the 3.12.14 availability in
+python-versions live-checked 2026-09-19. Zero corpus price, zero
+runtime-code touch, INV-4 untouched (the runner is dev-side only).
+Branch protection ("protect main after") is the owner's GitHub
+settings step — the stop-point report carries the recipe. Detail:
+D-176 + worklog iter-143 + git.
+
 ### iter-142 · intake-29 — the external-audit / roadmap-review output routed: the audit CONFIRMED on the facts (live-verified — including the pytest run the DNS-less audit could not make), the foundation SUPPORTED (no reopening of INV-1..5 / the closed phases / world-2), SIX contract sharpenings adopted into the rows (res-1's mechanism split + irreversibility split; roads-1's topology contract — the node question, the algorithm naming, the invariant set, the LOD/autonomy falsifier; since-1's encounter baseline — the epoch semantics + the scene_delta separation; companion-1's no-teleport; pack-1's consent split; ci-1 the recommended first owner pick), two rider rules adopted (the pack.py split rides the first pack.py-growing row, never a standalone refactor; the intake admission rule — a named consumer row + a potential falsifier up front) — done (doc-only, the owner's «проанализируй текст далее и его предложения, если согласен => нужно будет заложить в планы работу и соответственно пересмотреть оный или типа того. по пунктам разбери что надо что не надо и почему» research call over the uploaded prior-session audit; that session's clone-less static verification re-done at a real clone + the live suite; the ORDER recommendation recorded, never enforced — D-113). Detail: D-175 + phases.md §6's intake-29 block + worklog iter-142 + git.
 
 ### iter-141 · intake-28 — the Stålberg-conspectus / transplantation-method output routed: the content overwhelmingly owned (the cross-domain confirmation family's next member; the Townscaper reconciliation itself intake-17's), ONE compact instrument adopted (the combination fence — the fifth check's operational sharpening: a combined design carries no presumption of advantage; the mechanism-of-advantage decomposition, the combination-price question, the Frankenstein test), the local-pattern→higher-order hypothesis routed to the standing consumers — done (doc-only, the owner's «разбери 1231.md => что стоит перенять и почему, зачем, как использовать и где это улучшит проект» research call over the uploaded prior-session output; that session's clone-less verification re-done at a real clone, zero factual errors)
@@ -1674,15 +1703,15 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   expansion by flag only; `matrix` the same if pack growth ever pushes it
   past a screen. `chronicle.py` writes files (Mode F) — out of scope.
 - `engine-2` · the urgency-roll stream split — done (iter-50, D-079): per-entry streams `urgency:<npc>:<kind>`, the coupling measured and refused. Detail: D-079.
-- `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
-  Python). Intake-29's recommendation (D-175): the FIRST owner pick —
-  main is unprotected with required status checks off (verified live
-  at HEAD aa1097f; no `.github/` in the tree), the 1754+1/ruff green
-  currently a local discipline; the runner is the cheapest risk
-  reduction on the board (zero corpus price, dev-side only, INV-4
-  untouched) and automates the landed admission lint's discipline;
-  protect main after. AGENTS §8 keeps the CI files owner-gated — the
-  pick is the owner's call.
+- `ci-1` GitHub Actions: pytest + ruff on push — DONE (iter-143,
+  D-176): `.github/workflows/ci.yml` (push + PR to `main`;
+  `PYTHONHASHSEED=0`, Python 3.12.14 the env pin — the golden-fixture
+  byte-compare law; the runner path sandbox-simulated in a clean venv,
+  1754+1 / ruff clean on the pinned interpreter). The owner's pick
+  via the «продолжай работы по планам, решай сам» delegation — the
+  plan's recorded first recommendation taken. Branch protection
+  ("protect main after") handed to the owner: the settings recipe in
+  the iter-143 stop-point report.
 - `qa-1` mypy --strict on `core/` (owner-approval-gated: dev tooling is
   capped at pytest + ruff — AGENTS §8/§10; D-031 parks the candidate here.
   The type-discipline values are law from iter-1 via

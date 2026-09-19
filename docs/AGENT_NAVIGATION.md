@@ -11,6 +11,7 @@
 | `AGENTS.md` | operating law for agents | stable |
 | `STATUS.md` | iteration state, KIs, FAQ | every iteration |
 | `worklog.md` | capped short-term memory | every iteration |
+| `.github/workflows/ci.yml` | the ci-1 runner: pytest + ruff on push/PR to `main` (`PYTHONHASHSEED=0`, Python 3.12.14 the env pin — the golden-fixture byte-compare law, TEST_PLAN §1.1) | live (iter-143, D-176) |
 | `docs/VISION.md` | frozen why + honest limits | frozen |
 | `docs/MVP_SCOPE.md` | phase-0 tech spec (TavernSim v0) | active |
 | `docs/EVENT_SCHEMA.md` | event contract | active |

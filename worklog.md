@@ -13,6 +13,37 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-143 · 2026-09-19 · ci1 — the owner's «продолжай работы по
+планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick taken from the plan's own recorded first
+recommendation (intake-29/D-175: ci-1 FIRST — AGENTS §8's CI-files
+gate satisfied by the fresh delegation, recorded as such)
+- the runner LANDED: `.github/workflows/ci.yml` — pytest + ruff on
+  push to `main` (+ the PR trigger riding along: the row's own
+  "protect main after" needs check runs on PR heads; the owner's
+  direct-push rhythm the primary path); PYTHONHASHSEED=0 job-level
+  (INV-2), Python 3.12.14 pinned EXACT (the env pin — the golden
+  T1 fixture byte-compare, TEST_PLAN §1.1; a bump rides a fixture
+  regen, never alone), the plain install (runners carry no PEP-668
+  fence), contents:read, timeout 15
+- verified BEFORE working at BASE_COMMIT 15e568d (1754+1 green,
+  ruff clean, Python 3.12.14) and re-verified after (doc-only
+  beyond the workflow file); the runner path simulated in a clean
+  venv (fresh install → ruff → pytest: the same 1754+1, the skip
+  the chronicler module's duckdb import by design);
+  checkout@v7 / setup-python@v7 / 3.12.14-in-python-versions
+  live-checked 2026-09-19; the first LIVE run fires on the owner's
+  push (named honestly — a sandbox cannot run GitHub's runners);
+  7 files (the workflow + the doc quintet + README's repo-map row;
+  over the 3–5 soft limit, all mandated: the quintet by AGENTS §6,
+  the map row by NAV §3's short-map duty); branch protection the
+  owner's settings step (the recipe in the stop-point report)
+- caps: STATUS 684 / TASKS 1949 / DECISIONS 89 lines (55 rows —
+  over the 30 cap on the §6.1 substance precedent until the next
+  gate collapse) / phases 4305 — the over-cap files ride the
+  documented §6.1 substance precedent, trim at the next gate
+  collapse; iter-133 evicted here, verified in this edit; 10 held
+
 
 iter-142 · 2026-09-19 · intake29 — the owner's «проанализируй
 текст далее и его предложения, если согласен => нужно будет
@@ -382,41 +413,4 @@ doc-only, zero code, zero corpus price)
   substance precedent until the next gate collapse) / phases 3316
   — the over-cap files ride the documented §6.1 substance
   precedent, trim at the next gate collapse
-iter-133 · 2026-09-18 · intake25 — the owner's «проанализируй
-глубоко документ и оцени, присмотрись, убедись и так далее =>
-что можно перенять и почему, что можно взять но с
-переработкой и адаптацией, какой потенциал есть? какие плюсы
-и какие минусы (подводные камни)? есть ли ультимативное
-решение…» research call over the uploaded three-document
-re-verification consolidation pack (5 files doc-only, zero
-code, zero corpus price — the intakes 13..19 sources
-re-asked as quality-open rows, the same family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD
-  90c04fb, Python 3.12.14 the env pin); the pack content-matched
-  claim-by-claim against the routed records — zero factual
-  drift; TWO fresh read-only probes (the driver outside the
-  repo, Rule 9) executed the pack's own two smallest
-  verification steps: probe A the mid-chain failure semantics
-  (drop_break rejects cause-chained — failed_test
-  target.carried_by, cause ev_0024; the second steal rejects on
-  carries_flagged, cause ev_0006; zero fake-success events;
-  the twin run equal — the quality row MEASURED CLOSED, the
-  utterance half parse-2's row, zero simulator change owed),
-  probe B the status census (five of six statuses first-class
-  at their proper layer; PARTIAL absent — 0/48 separable-
-  sub-effects declarations; NO_MODELED_EFFECT load-closed per
-  D-152 — D-150 v3 now measured)
-- the ten re-check rows hold their standing dispositions; the
-  deltas refused at the door (the pack as a repo reading
-  surface per D-024; UNDER_MODELLED/NO_MODELED_EFFECT as
-  runtime statuses; PARTIAL as a standing status; any new
-  card); zero build-grade items, the queue untouched
-- docs: phases.md §6 the intake-25 block, DECISIONS D-166, TASKS
-  the iter-133 section, STATUS re-pin + Next step, this entry
-  (iter-123 evicted here, verified in this edit; 10 held);
-  1726+1 green, ruff clean after. Caps: STATUS 639 / TASKS 1461 /
-  DECISIONS 45 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse) / phases 3181 — the
-  over-cap files ride the documented §6.1 substance precedent,
-  trim at the next gate collapse
 ---

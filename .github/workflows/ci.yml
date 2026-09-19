@@ -1,0 +1,37 @@
+# ci-1 (iter-143, D-176): pytest + ruff on push — the local green
+# discipline (AGENTS.md §10) automated for `main`. The interpreter is
+# the env pin, not a convenience: the golden T1 fixture byte-compares a
+# fresh run against the committed bytes (TEST_PLAN.md §1.1), and the log
+# header records the interpreter (core/log.py — byte-identical replay is
+# same-environment only). Bump the Python version ONLY together with a
+# fixture regen in the same iteration (TEST_PLAN.md §3).
+# The runner python is not PEP-668 fenced — unlike the local sandbox
+# recipe, the install needs no --break-system-packages.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONHASHSEED: "0" # INV-2 (AGENTS.md §4): fixed hash seed
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12.14" # the env pin (STATUS.md header)
+      - name: install dev deps
+        run: python -m pip install -e ".[dev]"
+      - name: ruff
+        run: python -m ruff check .
+      - name: pytest
+        run: python -m pytest -q

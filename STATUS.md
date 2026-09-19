@@ -1,3 +1,56 @@
+Iteration: iter-143 (`iter-143-ci1` — the GitHub Actions runner
+landed; the owner's «продолжай работы по планам, решай сам что
+сейчас логичнее начать/открыть и прочее» delegation call — the pick
+NOT invented: the plan's own recorded first recommendation taken
+(intake-29/D-175: ci-1 FIRST, «the cheapest risk reduction on the
+board»; AGENTS §8's CI-files gate satisfied by the owner's fresh
+delegation, recorded as such — the D-154 precedent-phrase family)):
+**the runner LANDED** — `.github/workflows/ci.yml`: pytest + ruff
+on push to `main` (the `pull_request` trigger rides along — the
+row's own "protect main after" clause needs check runs on PR heads
+once required status checks exist; the owner's direct-push rhythm
+keeps firing the push trigger — the PR arm additive, never
+load-bearing). `PYTHONHASHSEED=0` at the job level (INV-2); Python
+`3.12.14` pinned EXACT — the env-pin law: the golden T1 fixture
+byte-compares a fresh run against the committed bytes (TEST_PLAN
+§1.1) and the log header records the interpreter (`core/log.py`),
+so a version bump rides with a fixture regen in the same iteration,
+never alone. The plain install (the runner python is not PEP-668
+fenced); `permissions: contents: read`; `timeout-minutes: 15`.
+Verified: the suite green at BASE_COMMIT 15e568d BEFORE working
+(1754 passed + 1 skipped, ruff clean, Python 3.12.14) and
+re-verified after (doc-only beyond the workflow file; the corpora
+byte-untouched); the exact runner path SIMULATED in a clean venv
+(fresh `pip install -e ".[dev]"` → `python -m ruff check .` →
+`PYTHONHASHSEED=0 python -m pytest -q`: the same 1754+1, ruff
+clean — the skip the chronicler module's duckdb import, by design
+outside `[dev]`); the actions' majors (checkout@v7,
+setup-python@v7) + the 3.12.14 availability in python-versions
+live-checked 2026-09-19 (ls-remote — no guessed versions in the
+file). The deferred-verification surface named honestly: the
+runner's first LIVE execution fires on the owner's push of this
+iteration — a sandbox cannot run GitHub's runners; everything the
+repo side owns is verified. Zero corpus price, zero runtime-code
+touch, INV-4 untouched (dev-side only, the same class as pytest
+itself). Branch protection ("protect main after") stays the owner's
+GitHub-settings step — the recipe in the stop-point report ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at BASE_COMMIT 15e568d and re-verified
+after; the runner path additionally simulated in a clean venv — the
+same numbers) ·
+Date: 2026-09-19 ·
+Scope: `.github/workflows/ci.yml` (new), `docs/AGENT_NAVIGATION.md`
+(§1 the `.github/` row), `README.md` (the repo-map row),
+`docs/TASKS.md` (the iter-143 section + the ci-1 flip),
+`docs/DECISIONS.md` (D-176), `STATUS.md` (this re-pin + the Next
+step), `worklog.md` (this entry; iter-133 evicted per the cap) —
+7 files.
+The prior iteration's record: iter-142 (intake-29). The
+detail lives in TASKS + worklog + git.
+
 Iteration: iter-142 (`iter-142-intake29` — the external-audit /
 roadmap-review output routed; the owner's «проанализируй текст
 далее и его предложения, если согласен => нужно будет заложить
@@ -82,59 +135,6 @@ the Next step), `worklog.md` (this entry; iter-132 evicted per
 the cap) — 5 files.
 The prior iteration's record: iter-141 (intake-28). The
 detail lives in TASKS + worklog + git.
-
-Iteration: iter-141 (`iter-141-intake28` — the Stålberg-conspectus /
-transplantation-method output routed; the owner's «разбери 1231.md =>
-что стоит перенять и почему, зачем, как использовать и где это
-улучшит проект» research call over the uploaded `1231.md`, itself a
-prior session's output over an external Stålberg/Townscaper conspectus
-+ the owner's competing-solutions preference; that session verified
-against the same `main` 8f4fbd4e but DNS-failed its clone — the D-163
-clone-less-session precedent, re-verified this round at a REAL clone):
-**the content PARTIALLY CONFIRMED — overwhelmingly owned, zero
-factual errors in the load-bearing repo-facing claims** (D-173's
-transplantation-test wording, BLUEPRINT §0's
-tension→resolution→sequencing, L13/L14, the owner-preference record
-D-165/D-173 — all hold verbatim; the Stålberg half the cross-domain
-confirmation family's next member [intake-16/17/24/27 the line]:
-small-alphabet+composition = L9/PACK-1; constraints-enable-quality =
-INV-3/schema/doors; variation-inside-invariants = the road-pack
-scaffold law + the cosmetic streams + the texture promotion door;
-representation switching = L12/LOD-1; the form rejections [dual grid /
-mesh / WFC / jitter] = intake-17's §22 scope guard, agreed in
-advance). **The residue — ONE compact instrument + one routed
-hypothesis, zero build-grade**: the COMBINATION FENCE (the fifth
-check's operational sharpening: a combined design carries NO
-presumption of advantage — itself a separate hypothesis on the same
-PROVEN/PARTIAL/REJECTED ladder; the three questions: the
-mechanism-of-advantage decomposition, the combination-price question,
-the Frankenstein test; consumers the engine-1/presentation-1 spec
-debates + res-1's evaluation — the same parking family as intake-27's
-sacrifice protocol), the "local canonical pattern → higher-order
-consequence" HYPOTHESIS routed to res-1's aggregate macro-events + the
-cadences' decision half (never a row; intake-17's multi-node motifs
-PROVEN in three owners the substrate), two recognition handles
-block-only ("change the representation, shrink the case space" →
-PACK-1's closed enums + the parser grammar snapshot + INV-3; "vary the
-representation, preserve the invariant substrate" → the scaffold law +
-the cosmetic streams + the promotion door). Provenance caveats: the
-Stålberg figures second-hand (the KI#51 family); the "Canonical Visual
-Memory" verdict session-external — NOT a repo record (presentation-1
-owns the player-facing surface, INV-4-fenced) ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 8f4fbd4e — the numbers identical —
-and re-verified after; doc-only, the corpora byte-untouched) ·
-Date: 2026-09-19 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-28 block),
-`docs/DECISIONS.md` (D-174), `docs/TASKS.md` (the iter-141 section),
-`STATUS.md` (this re-pin + the Next step), `worklog.md` (this entry;
-iter-131 evicted per the cap) — 5 files.
-The prior iteration's record: iter-140 (intake-27). The
-detail lives in TASKS + worklog + git.
-
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -608,31 +608,26 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-142 DONE: intake-29 routed — the external-audit /
-roadmap-review output: the audit CONFIRMED on the facts
-(live-verified, including the pytest run the DNS-less audit
-could not make), the foundation SUPPORTED (no reopening), SIX
-contract sharpenings ADOPTED into the rows (res-1's
-mechanism+irreversibility splits; roads-1's topology contract;
-since-1's encounter baseline; companion-1's no-teleport;
-pack-1's consent split; ci-1 the recommended first pick), two
-rider rules adopted (the pack.py split rides the first
-pack.py-growing row; the intake admission rule — a named
-consumer row + a potential falsifier up front). iter-141:
-intake-28 routed (the combination fence, D-174); iter-140:
-intake-27 (five instruments, D-173); iter-139: world-2 L2 the
-verdict DELIVERED (D-172) — the two-level gate COMPLETE.**
+**iter-143 DONE: ci-1 LANDED — the GitHub Actions runner armed
+(`.github/workflows/ci.yml`: pytest + ruff on push to `main`,
+PYTHONHASHSEED=0, Python 3.12.14 the env pin; the runner path
+sandbox-simulated 1754+1 / ruff clean; the first LIVE run fires
+on the owner's push of this iteration; branch protection the
+owner's settings step — the recipe in the iter-143 stop-point
+report; D-176). iter-142: intake-29 routed (six contract
+sharpenings, two rider rules, D-175); iter-141: intake-28 (the
+combination fence, D-174); iter-139: world-2 L2 the verdict
+DELIVERED (D-172) — the two-level gate COMPLETE.**
 
 1. **The owner-gated backlog (the standing rows — the
    sharpened contracts now ride the rows; the ORDER owner
    decides, TASKS owns composition, never order; the next
    build row's verification plan rides TEST_PLAN §9's claim
-   packet — intake-26's standing measurement):** the
-   session's RECOMMENDED sequence (intake-29, never the
-   pick): `ci-1` FIRST (the unprotected-main hygiene — the
-   cheapest item on the board), then the three CONTRACT
-   WRITES as the natural next call — `roads-1` / `res-1` /
-   `since-1` turned from row wordings into compact
+   packet — intake-26's standing measurement):** with ci-1
+   landed, the session's RECOMMENDED next call (intake-29,
+   never the pick) is the three CONTRACT WRITES —
+   `roads-1` / `res-1` / `since-1` turned from row wordings
+   into compact
    pre-implementation contracts with invariants, falsifiers
    and the minimal test set (the intake-29 sharpenings their
    starting material; the audit's own closing proposal),
@@ -681,5 +676,9 @@ verdict DELIVERED (D-172) — the two-level gate COMPLETE.**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended sequence (ci-1 → the three contract writes → the
-   build rows) or a fresh call.
+   recommended remainder of the sequence (the three contract
+   writes → the build rows) or a fresh call (this round's
+   delegation — «продолжай работы по планам, решай сам» —
+   consumed by ci-1, D-176). After the push: verify the first
+   live CI run green on `main`, then apply the branch-protection
+   recipe (the iter-143 stop-point report).

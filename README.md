@@ -82,6 +82,7 @@ padding.
 | `AGENTS.md` | operating conventions for AI agents (law) |
 | `STATUS.md` | iteration state, KIs, pitfalls (read every task) |
 | `worklog.md` | capped short-term memory (≤10 entries) |
+| `.github/workflows/ci.yml` | CI runner: pytest + ruff on push to `main` (ci-1, iter-143 — Python 3.12.14 the env pin, `PYTHONHASHSEED=0`) |
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py`) |
