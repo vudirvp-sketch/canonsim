@@ -26,6 +26,67 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-147 · since-1 — the re-encounter delta LANDED — done
+
+The owner's «продолжай работы по планам, решай сам что сейчас
+логичнее начать/открыть и прочее» delegation call — the pick taken
+from the plan's own recorded recommendation (STATUS Next step after
+res-1: since-1 the readiness head; CONTRACTS §3 the boundary, the
+spec absorbing it by reference — the section collapsed to a
+pointer). THE FOLD: `brief/since.py` (new) — the per-(reader,
+entity) ENCOUNTER EPOCHS (the contract D1's named baseline sense:
+LAST PHYSICAL CO-PRESENCE; presence per
+`core/fold.py::present_entities` — the shared location or the
+carried-item closure; a location's co-presence the reader positioned
+at it, the scenes() twin; either arrival direction opens, the break
+closes; event-indexed — same-tick events resolve in log order,
+INV-2) and the REUNION DELTA: the apart-window prop endpoints (both
+values known or silent — a born-while-apart prop never renders, D3's
+never-raw-state law), during-co-presence changes never re-surfaced
+(scene_delta's territory), intermediate position hops invisible (the
+endpoint comparison only), and the READER's apart-born records naming
+the entity (the break/reunion events' own sightings excluded — the
+beat window's territory; only the reader's records, the knower
+boundary). THE SLOT (the contract's «the exact slot is the build's
+BRIEF_SPEC edit»): the lines ride the ENTITY CARDS as one trailing
+`since=` segment per card + the scene line's own (the location rides
+the same fold) — atomic with the card (the fill law counts the whole
+line, no dangling tails; the drop carries the truncation marker);
+§3.9's amendment: the cards' structural lines stay shared, the
+since-segments are the knower's own (a parameterized half-block
+riding a shared one). THE VOCABULARY (D4):
+`rules.json::brief.present_entities.since_lines` — `props`
+prop/label rows (the closed marker surface + the location
+fields/armed claim slots), per-family `templates` (the closed
+placeholder sets), `max_segments` (the D-047 ranking cap); a
+MISSING section is the unarmed landing — the fold is never built,
+zero segments, the committed packs and their corpora byte-untouched
+(1781+1 at BASE_COMMIT 0bd860d, 1811+1 after — the +30 all in
+`tests/test_since.py`: the contract's minimal set (1)–(5) + the
+closure/carrier/boundary-records edges + the lint refusal family).
+THE LINT: `core/packlint/readside.py::_since_lines` (the closed key
+set, the closed placeholder sets per family, constant templates
+refused, dead vocabularies refused, the props/template pairing law,
+the position family never a row). THE EVIDENCE (§9's claim packet,
+the sandbox driver per Rule 9): the crafted condensation corpus over
+the real engine (the watch-rotation revisit — the corporal's fatigue
+reset by the rotation's own law + her position transferred while
+apart) — D1 determinism, D2 the document arm (armed 1 since-line
+`since=last seen at loc_keep; fatigue 30->0` vs unarmed 0), D3 the
+zero-price arm (the same-seed logs byte-identical); the committed
+province_smoke corpus measured honestly: ZERO non-empty reunions (the
+smoke path visits each location once — the re-encounter surface
+empty, the tune-3 finding extended; the pack's authoring problem,
+not the fold's); the DECISION arm (the reader's subsequent
+intents/answers) DEFERRED — the brief's only in-loop consumer is the
+narrator call, an owner-gated LLM boundary (INV-4), world-2's
+condensing travelers (the row's named first consumer) a future row;
+falsifiers NOT tripped at the measured band — PARTIALLY CONFIRMED
+(the decision arm deferred with the instrument ready: the same-seed
+vocabulary on/off fork). Honest residues: no armed pack yet (the
+first consumer pack — world-2's travelers family or a pack-1/pack-4
+rider — pays the vocabulary lines and authors the props).
+
 ### iter-146 · res-1 — the economy substrate LANDED — done
 
 The owner's «продолжай работы по планам, решай сам что сейчас
@@ -1391,29 +1452,15 @@ D-105..D-133 family row + phases.md §5)
   the checks' deterministic readings, the spine/flaw/budget grammar
   and the 68a twin-compliance shape recorded there. `qa-1`/`ci-1` (the
   runner) stay the standing owner-gated rows.
-- `since-1` · the re-encounter delta — todo, owner-gated (read-side,
-  v0.2-grade; routed INTO phase 6 by iter-104): world-2's condensing
-  travelers the first real consumer (the detail lives in the
-  phase-5 tail section below). **The encounter baseline owed BEFORE
-  implementation (intake-29's sharpening, D-175): "the last
-  co-presence tick" has no standing formal definition — the contract
-  pins the epoch semantics first (the leading candidate: the
-  per-entity encounter epoch — each new physical co-presence opens
-  an epoch, the delta reads end-of-previous-epoch → start-of-current;
-  read-side, zero canon writes — the row's own law); the five
-  baseline senses (last physical co-presence / last scene / last
-  brief observation / last known fact / last entity re-entry) are
-  distinct and the spec names which one this row reads. The surface
-  separation explicit: `scene_delta` = "what do I perceive now"
-  (BRIEF_SPEC §3.2), since-1 = "what changed in this entity since we
-  last met" — different blocks, never merged; the blind-NPC laws
-  (TEST_PLAN §1.3) inherit to the new lines.**
-  **The pre-implementation contract WRITTEN (iter-144, D-177):
-  `docs/CONTRACTS.md` §3 — the baseline sense named (last
-  physical co-presence, the per-entity encounter epoch; the
-  other four senses rejected with cause), the scene_delta
-  surface separation, the blind-NPC inheritance, the invariant
-  set, the claim packet, the minimal test set.**
+- `since-1` · the re-encounter delta — **done (iter-147, D-180)**: the
+  per-entity encounter-epoch fold + the cards' since-segments landed
+  read-side (zero canon writes, zero streams, the unarmed landing —
+  no committed pack declares the vocabulary); the spec absorbed its
+  contract by reference (`docs/CONTRACTS.md` §3 collapsed to a
+  pointer); the honest residues (the decision-arm deferral to the
+  first consumer, no armed pack yet) live in the iter-147 section
+  above. The standing rows `pack-1`/`pack-4` remain the natural
+  first arming candidates when their slots open.
 
 > Opening-day questions — ANSWERED iter-109 (D-146, the owner's
 > chat call): (1) the GUT-CHECK verdict is **NO CUTS** — every

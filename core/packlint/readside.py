@@ -3,6 +3,7 @@ D-175 split's readside family)."""
 
 from __future__ import annotations
 
+import re
 from collections.abc import Mapping
 from typing import Any, Final
 
@@ -297,6 +298,16 @@ class ReadsideLint:
             f"(a field neither the pack models nor a claim claims "
             "renders nothing — dead data)",
         )
+        # since-1 (D-180): the re-encounter vocabulary — the cards' own
+        # optional section (BRIEF_SPEC §3.4's extension). A missing
+        # section is the unarmed landing (zero since-segments, the
+        # committed bytes); a present section must be fully alive (the
+        # closed key set, the closed placeholder sets, the prop
+        # surface, at least one renderable family — a vocabulary that
+        # renders nothing is dead data).
+        since = present.get("since_lines")
+        if since is not None:
+            self._since_lines(since, where, legal_fields)
         # scene-1 (iter-60): the chorus budget + the mode-B actor table
         # (BRIEF_SPEC §3.9/§6 — one NPC per call, the pack's own
         # declaration the gate; mode A's static text stays the block's
@@ -395,6 +406,163 @@ class ReadsideLint:
                         isinstance(entry["notes"], str),
                         f"{spot}: notes must be a string (prose)",
                     )
+
+    # -- since-1 (D-180): the re-encounter vocabulary -------------------------
+
+    # The closed placeholder sets per template family (the assembler's
+    # `_since_template` binds exactly these; unknown placeholders are
+    # dead braces — the segment renders them verbatim).
+    _SINCE_SLOTS = {
+        "prop": {"label", "from", "to"},
+        "position": {"from", "to"},
+        "heard": {"token", "channel", "fidelity", "t"},
+    }
+
+    def _since_lines(
+        self, since: Mapping[str, Any], where: str, legal_fields: set[str]
+    ) -> None:
+        """`rules.json::brief.present_entities.since_lines` — the cards'
+        optional re-encounter vocabulary (BRIEF_SPEC §3.4's extension,
+        D-180): `props` (prop/label rows — the pack-listed observable
+        surface whose apart-window deltas render), `templates` (the
+        per-family line shapes — D4: the pack owns the line shapes, the
+        slot vocabulary is architecture), `max_segments` (the ranking
+        cap, the D-047 law). A present section must be fully alive —
+        the pack's own declaration is the arming, INV-3."""
+        spot = f"{where}.present_entities.since_lines"
+        _require(isinstance(since, Mapping), f"{spot}: must be an object")
+        unknown = sorted(set(since) - {"props", "templates", "max_segments", "notes"})
+        _require(
+            not unknown,
+            f"{spot}: unknown keys {unknown} (the closed vocabulary: "
+            "props | templates | max_segments | notes)",
+        )
+        if "notes" in since:
+            _require(
+                isinstance(since["notes"], str),
+                f"{spot}: notes must be a string (prose)",
+            )
+        cap = since.get("max_segments")
+        _require(
+            isinstance(cap, int) and not isinstance(cap, bool) and cap >= 1,
+            f"{spot}: max_segments must be an integer >= 1 (a zero cap is "
+            "an unarmed pack — declare nothing instead)",
+        )
+        entries = since.get("props", [])
+        _require(
+            isinstance(entries, list)
+            and all(isinstance(entry, Mapping) for entry in entries),
+            f"{spot}: props must be a list of objects",
+        )
+        seen_props: set[str] = set()
+        for entry in entries:
+            prop = entry.get("prop")
+            _require(
+                isinstance(prop, str) and prop.strip() and prop != "position",
+                f"{spot}.props[{prop!r}]: prop must be a non-empty string "
+                "(position is its own template family, never a row)",
+            )
+            where_prop = f"{spot}.props[{prop!r}]"
+            # the closed surface: the card_markers family (status /
+            # relations / pair.<npc>.<axis> / crime_status — the npc
+            # card's observable surface) or a legal location field (the
+            # scene card's surface — the same legality scene_line_fields
+            # already owns). A prop outside both is dead data.
+            state_axes = set(self._data["rules.json"].get("states", {})) - {"notes"}
+            relation_axes = set(
+                self._data["rules.json"].get("relations", {}).get("axes", ())
+            )
+            npc_ids = _ids(self._data["entities.json"]["npcs"])
+            if prop.startswith("status."):
+                _require(
+                    prop[len("status."):] in state_axes,
+                    f"{where_prop}: status axis {prop[len('status.'):]!r} "
+                    f"is not one of the pack's states axes "
+                    f"{sorted(state_axes)}",
+                )
+            elif prop.startswith("relations."):
+                _require(
+                    prop[len("relations."):] in relation_axes,
+                    f"{where_prop}: relations axis "
+                    f"{prop[len('relations.'):]!r} is not one of the "
+                    f"pack's relations axes {sorted(relation_axes)}",
+                )
+            elif prop.startswith("pair."):
+                parts = prop.split(".")
+                _require(
+                    len(parts) == 3 and parts[1] in npc_ids
+                    and parts[2] in relation_axes,
+                    f"{where_prop}: pair path must be pair.<npc>.<axis> "
+                    f"— the npc one of {sorted(npc_ids)}, the axis one "
+                    f"of {sorted(relation_axes)} (the row fires on the "
+                    "HOLDER of the pair record)",
+                )
+            else:
+                _require(
+                    prop == "crime_status" or prop in legal_fields,
+                    f"{where_prop}: prop must be status.<axis>, "
+                    "relations.<axis>, pair.<npc>.<axis>, crime_status, "
+                    "or a location field / armed claim slot (the scene "
+                    "card's surface — the scene_line_fields legality)",
+                )
+            _require(
+                prop not in seen_props,
+                f"{where_prop}: duplicate prop row",
+            )
+            seen_props.add(prop)
+            _require(
+                isinstance(entry.get("label"), str) and entry["label"].strip(),
+                f"{where_prop}: label must be a non-empty string (the "
+                "template's {label} — the pack's word for the axis)",
+            )
+            unknown_row = sorted(set(entry) - {"prop", "label"})
+            _require(
+                not unknown_row,
+                f"{where_prop}: unknown keys {unknown_row} (the closed "
+                "row shape: prop | label)",
+            )
+        templates = since.get("templates", {})
+        _require(
+            isinstance(templates, Mapping),
+            f"{spot}: templates must be an object",
+        )
+        unknown_tpl = sorted(set(templates) - set(self._SINCE_SLOTS))
+        _require(
+            not unknown_tpl,
+            f"{spot}.templates: unknown families {unknown_tpl} (the "
+            "closed set: prop | position | heard)",
+        )
+        for family, template in templates.items():
+            _require(
+                isinstance(template, str) and template.strip(),
+                f"{spot}.templates[{family!r}]: must be a non-empty "
+                "string",
+            )
+            slots = set(re.findall(r"\{([A-Za-z_]+)\}", template))
+            illegal = sorted(slots - self._SINCE_SLOTS[family])
+            _require(
+                not illegal,
+                f"{spot}.templates[{family!r}]: unknown placeholders "
+                f"{illegal} (the closed set: "
+                f"{sorted(self._SINCE_SLOTS[family])})",
+            )
+            _require(
+                slots,
+                f"{spot}.templates[{family!r}]: a template with no "
+                "placeholder renders a constant — dead data",
+            )
+        _require(
+            bool(entries) == ("prop" in templates),
+            f"{spot}: props and the prop template arm together (props "
+            "without the template are dead data; the template without "
+            "props renders nothing)",
+        )
+        _require(
+            bool(entries) or "position" in templates or "heard" in templates,
+            f"{spot}: the vocabulary renders nothing (at least one of "
+            "props / the position template / the heard template is "
+            "required — declare nothing instead)",
+        )
 
     # -- pack-ci (iter-117): the teleology gate (PACK_SPEC §5) -----------------
 

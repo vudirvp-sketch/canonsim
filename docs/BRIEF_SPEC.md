@@ -192,7 +192,9 @@ per-present expansion).
   (canon-born scene texture would otherwise vanish from the brief
   post-promotion — the scene_texture window renders live entries only).
   A pack that declares no `scene_line_fields` renders the line only
-  when the scene location holds promoted props (the pre-iter-20 law).
+  when the scene location holds promoted props, or — since-1 — carries
+  a since-segment (the re-encounter with the place IS content; the
+  unarmed pack never reaches the arm).
 - **Pair lines**: one line per DIRECTED (holder, other) present pair
   carrying pair-map axes (`pair.<other>.<axis>`), projection order —
   A-fears-B and B-trusts-A are different facts; BOTH parties must be
@@ -200,6 +202,36 @@ per-present expansion).
 - **Caps**: `max_entities`/`max_pairs` are ranking caps (the D-047
   law — beyond-cap items render nothing, never a budget drop); the
   scene line is structural (≤1, never capped).
+- **Since-segments (since-1, D-180 — the re-encounter delta):** one
+  trailing `since=` segment on the scene line and on each entity card —
+  "what changed in this entity since the reader last met it". The
+  encounter baseline is the per-entity encounter epoch
+  (`brief/since.py::ReunionFold`, the contract's D1): a maximal
+  co-presence interval per (reader, entity) — presence per
+  `core/fold.py::present_entities` (position at the shared location,
+  or the carried-item closure; a location's co-presence is the reader
+  positioned at it), opened by either party's arrival, closed by the
+  break. The delta window is the apart stretch between the previous
+  epoch's end view (the projection immediately before the break event)
+  and the current epoch's start view (immediately after the opening
+  event): apart-window prop changes surface (the pack-listed props,
+  both endpoints known — a prop born while apart stays silent, D3's
+  never-raw-state law), during-co-presence changes never re-surface
+  (scene_delta's own territory), intermediate position hops never
+  render (the endpoint comparison only). The heard family: the
+  READER's records born on events that happened entirely while apart
+  (the break/reunion events' own sightings excluded — the beat
+  window's territory), rendering on the entity the token names. The
+  pack owns the line vocabulary (D4 — `brief.present_entities.
+  since_lines`: `props` prop/label rows, per-family `templates`
+  (`prop` {label}/{from}/{to}, `position` {from}/{to}, `heard`
+  {token}/{channel}/{fidelity}/{t}), `max_segments`); a missing
+  section is the unarmed landing (zero segments, the committed bytes).
+  Segment order: position, then props in pack order, then heard
+  newest-first; `max_segments` is a ranking cap (the D-047 law);
+  the segment rides the card line atomically (the fill law counts the
+  whole card, the truncation marker marks the drop, never a dangling
+  since-only line). KNOWER-PARAMETERIZED (§3.9's amendment).
 
 ### 3.5 Recalled facts (the derived-trait read + the three-signal shape)
 
@@ -279,7 +311,10 @@ The blocks are PC-parameterized by default. `assemble_brief` takes
 byte-identical by construction: an explicit player id renders the same
 bytes) or `knower=<npc>` (mode B — one NPC per call, the chorus served
 head-first through `brief/scene.py::speaking_queue`). Mode B runs the
-SAME pipeline with three parameterized halves and four shared ones:
+SAME pipeline with three parameterized halves and four shared ones
+(the since-segments, since-1/D-180, are a parameterized HALF-BLOCK:
+they ride the shared cards as the knower's own — see the shared list
+below):
 
 - **scene_delta** reads the knower's own perception — the blind-NPC
   law (§3.2) parameterized: the knower is the event's actor or holds
@@ -297,7 +332,12 @@ SAME pipeline with three parameterized halves and four shared ones:
 - **Shared, never parameterized**: `scene_texture` (one ledger per
   scene — the chorus reads the same texture block, D-049),
   `present_entities` (the cards are observables, L6 — the room's
-  structural answer is the same for every present party),
+  STRUCTURAL answer is the same for every present party; since-1's
+  amendment, D-180: the cards' since-segments are the knower's own —
+  the reader's epochs and the reader's apart-born records ride the
+  shared card lines as a fourth parameterized half, never a fifth
+  shared one — the segments are memory-vs-observables, recalled_facts'
+  own law, not the room's structural answer),
   `scheduled_lore` (pack-declared shared background), and
   `active_options` (the door's grammar, not the knower's).
 
@@ -445,7 +485,14 @@ brief's static text is mediator data, not chronicle grammar.
                           {"prop": "status.injury", "min": 1, "marker": "hurt"},
                           {"prop": "pair.pc_01.suspicion", "min": 25, "marker": "wary"},
                           {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
-                          {"prop": "crime_status", "value": "caught", "marker": "caught"}]},
+                          {"prop": "crime_status", "value": "caught", "marker": "caught"}],
+                        "since_lines": {
+                          "props": [{"prop": "status.fear", "label": "fear"}],
+                          "templates": {
+                            "prop": "{label} {from}->{to}",
+                            "position": "last seen at {from}",
+                            "heard": "heard {token} ({channel}, {fidelity})"},
+                          "max_segments": 4}},
   "directives": ["...", "..."],
   "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
   "voice_exemplars": ["..."],
@@ -486,7 +533,23 @@ pack vocabulary, INV-3); `scene_line_fields` (iter-20) unique non-empty strings,
 a field of at least one location record or an ARMED claim's slot (bridge-1:
 the pipe's render surface — a typo'd field, or a claim slot without its
 worldgen block, fails at load time; the defensive claims walk runs before
-the worldgen block's own shape lint, the order law). The mode-B pair (scene-1, §3.9): `chorus` is optional with a
+the worldgen block's own shape lint, the order law). since-1 (D-180):
+`since_lines` is OPTIONAL (a missing section is the unarmed landing —
+zero segments, the committed bytes; the pack's own declaration is the
+arming, INV-3) with a closed key set (`props` / `templates` /
+`max_segments` / `notes`): `max_segments` an integer >= 1 (a zero cap
+is an unarmed pack — declare nothing instead); `props` a list of
+unique `{prop, label}` rows — the prop one of the closed marker
+surface (`status.<axis>`, `relations.<axis>`, `pair.<npc>.<axis>`,
+`crime_status`), a location field, or an armed claim slot (the scene
+card's surface), never `position` (its own template family) — with
+`label` a non-empty string; `templates` a closed family set
+(`prop` / `position` / `heard`), each a non-empty string over its
+closed placeholder set (`prop`: {label}/{from}/{to}; `position`:
+{from}/{to}; `heard`: {token}/{channel}/{fidelity}/{t} — a template
+with no placeholder is a constant, dead data); `props` and the `prop`
+template arm together, and at least one renderable family is
+required (a vocabulary that renders nothing is dead data). The mode-B pair (scene-1, §3.9): `chorus` is optional with a
 closed key set (`max_actor_calls` an integer >= 1 — a zero cap is a
 block-less pack, declare nothing instead; `notes` prose); `actors` is
 optional, non-empty, keyed by pack NPC id — never the player (mode A

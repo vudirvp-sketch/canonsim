@@ -13,6 +13,50 @@
 > Order: newest first (normalized at iter-8c — the order had drifted
 > since iter-5).
 ---
+iter-147 · 2026-09-19 · since1 — the owner's «продолжай работы по
+планам, решай сам что сейчас логичнее начать/открыть и прочее»
+delegation call; the pick from the plan's own recorded recommendation
+(STATUS Next step's readiness head after res-1, CONTRACTS §3 the
+boundary — the section collapsed to a pointer in the same iteration)
+- verified BEFORE working at BASE_COMMIT 0bd860d (1781 passed +
+  1 skipped, ruff clean, Python 3.12.14) and re-verified after:
+  1811 passed + 1 skipped (+30 in tests/test_since.py), ruff clean;
+  the committed packs' corpora byte-untouched (the unarmed landing —
+  no pack declares since_lines, the fold never built)
+- the fold: `brief/since.py` (new) — the per-(reader, entity)
+  encounter epochs (presence per present_entities + the carried-item
+  closure; a location's co-presence the reader positioned at it),
+  the reunion delta (the apart-window prop endpoints, both values
+  known or silent; the position transfer; the reader's apart-born
+  records naming the entity, the boundary events' own sightings
+  excluded); event-indexed, zero streams, read-side only
+- the render: `brief/assembler.py` — one trailing `since=` segment
+  per entity card + the scene line, atomic with the card (the fill
+  law whole-line, no dangling tails), knower-threaded (§3.9's
+  amendment: the cards' structural lines stay shared, the segments
+  are the knower's own); `max_segments` the D-047 ranking cap
+- the lint: `core/packlint/readside.py::_since_lines` (the closed
+  key set + the per-family placeholder sets, constant templates and
+  dead vocabularies refused, the props/template pairing, position
+  never a prop row)
+- the §9 claim packet (the sandbox driver, Rule 9): the crafted
+  condensation corpus (the watch-rotation revisit — the corporal's
+  fatigue reset + position transfer while apart): D1 determinism,
+  D2 the document arm (armed 1 since-line vs unarmed 0 —
+  `since=last seen at loc_keep; fatigue 30->0`), D3 zero-price (the
+  same-seed logs byte-identical); the committed smoke corpus
+  honestly zero reunions (the tune-3 finding extended); the DECISION
+  arm DEFERRED to the first consumer (the narrator is the owner-
+  gated LLM boundary; world-2's travelers a future row) — falsifiers
+  not tripped at the measured band
+- docs: TASKS (the iter-147 section + the since-1 flip), DECISIONS
+  D-180, CONTRACTS §3 collapsed, BRIEF_SPEC §3.4's extension +
+  §3.9's amendment + §6's since_lines contract (653 lines > the 600
+  cap — all substance, the §6.1 precedent, kept), AGENT_NAVIGATION
+  §1 (brief/since.py + the tests row), STATUS re-pin + Next step
+  (the pack consumers the new recommendation); this entry (iter-137
+  evicted per the cap, verified in this edit; 10 held)
+
 iter-146 · 2026-09-19 · res1 — the owner's «продолжай работы по
 планам, решай сам что сейчас логичнее начать/открыть и прочее»
 delegation call; the pick from the plan's own recorded recommendation
@@ -370,46 +414,3 @@ law)
   collapse) / phases 3752 / TEST_PLAN 837 / worklog 10 entries
   (iter-128 evicted here, verified in this edit) — the over-cap files
   ride the documented §6.1 substance precedent
-
-iter-137 · 2026-09-19 · world-2 L2 (the depth audit) — the
-owner's research call over the uploaded research_method_v5 task
-(the three lens documents — Cadwell / Ingold / Haggis — external
-per the convenience-copy law; doc-only, verdict material for the
-standing owner call, never the call itself)
-- the converged unit: depth = the changed NEXT-DECISION landscape
-  per ordinary verb (Haggis's complexification + Cadwell's
-  commitment + Ingold's robustness), operationalized as the F3
-  four-read-surfaces form + three read-only arms (the Rule-9
-  runners + logs outside the repo, zero corpus price)
-- the measurements: the door-surface census seed 53 (the burn =
-  +15 events / 13 props over six entities / knowledge +4/+9;
-  exactly ONE of six probed door answers changes — the re-ignition
-  closed; the two other rejections arm-independent facts); the
-  reorder arm seed 53 (the grief-wake identical, the deadband
-  holds, the council fires, one lawful NPC talk refusal at
-  same_location, 76 vs 64 events — richer, never breaks); the
-  calendar ablation seed 42 (the stripped layers' own 57 events +
-  52 tale lines; ONE second-order path beyond them — the storm
-  roll → the murmur hook → the quiet gate → the ramble → knowledge
-  → the rumor told back; the 48 market/fair turns zero consumers)
-- the A–H ledger (A/C/D/H confirmed, E at the measured band, B/F/G
-  partial — the concentration finding at the triangle's vertex),
-  the counterexamples searched (the 48 turns the one found; the
-  reverse confirmed), the critical separation (NONE of the seven
-  backlog rows a prerequisite), the verdict PARTIALLY CONFIRMED —
-  material, the L2 call the owner's; disposition NO ACTION, the
-  depth battery joins the F3 form (F4's consult card), zero
-  build-grade items
-- docs: phases.md §6 the depth-audit block (the A–H ledger + the
-  twelve-row principles table), DECISIONS D-170 (49 rows), TASKS
-  the iter-137 section + the world-2 row's materials line, STATUS
-  the re-pin (iter-135's record evicted per the two-record
-  convention) + the Next step materials line, this entry (iter-127
-  evicted, verified in this edit; 10 held); 1754+1 green, ruff
-  clean, verified before (HEAD 4be2a17) and after; doc-only, the
-  corpora byte-untouched
-- Caps: STATUS 679 / TASKS 1691 / DECISIONS 81 (49 rows — over the
-  30 cap on the §6.1 substance precedent until the next gate
-  collapse) / phases 3634 / worklog 10 entries (iter-127 evicted
-  here, verified in this edit) — the over-cap files ride the
-  documented §6.1 substance precedent

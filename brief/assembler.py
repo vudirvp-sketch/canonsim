@@ -49,6 +49,7 @@ from brief.ledger import (
     present_entities,
     split_scope,
 )
+from brief.since import Reunion, ReunionFold, since_config
 from core.fold import Projection, fold, initial_projection, present_in_order
 from core.knowledge import KnowledgeView
 from core.log import EventRecord, read_log
@@ -538,8 +539,83 @@ def _token_value(value: Any) -> str:
     return str(value)
 
 
+# -- the since-segments (since-1, D-180 — BRIEF_SPEC §3.4's extension) ------
+
+
+def _since_template(
+    template: str, slots: Mapping[str, str]
+) -> str:
+    """Bind one pack template with its slot values — the pack owns the
+    line shape (D4), the slot vocabulary is architecture (L2: dry
+    tokens, the {slot} grammar templates.json already owns)."""
+    out = template
+    for slot, value in slots.items():
+        out = out.replace("{" + slot + "}", value)
+    return out
+
+
+def _since_segments(
+    fold: ReunionFold,
+    entity_id: str,
+    config: Mapping[str, Any],
+) -> str | None:
+    """One entity's since= payload — the pack-templated render of its
+    re-encounter delta (BRIEF_SPEC §3.4): position first, then the prop
+    deltas in pack order, then the heard records newest-first, capped
+    by `max_segments` (the D-047 ranking-cap law: beyond-cap segments
+    render nothing, never a budget drop). None when there is nothing
+    to say (a first meeting, or an apart window that changed nothing
+    the reader could perceive)."""
+    reunion: Reunion | None = fold.reunion(entity_id)
+    if reunion is None:
+        return None
+    templates = config.get("templates", {})
+    labels = {
+        str(entry["prop"]): str(entry["label"])
+        for entry in config.get("props", ())
+    }
+    segments: list[str] = []
+    if reunion.position is not None and "position" in templates:
+        segments.append(
+            _since_template(
+                str(templates["position"]),
+                {
+                    "from": _token_value(reunion.position[0]),
+                    "to": _token_value(reunion.position[1]),
+                },
+            )
+        )
+    if "prop" in templates:
+        for delta in reunion.props:
+            segments.append(
+                _since_template(
+                    str(templates["prop"]),
+                    {
+                        "label": labels[delta.prop],
+                        "from": _token_value(delta.from_),
+                        "to": _token_value(delta.to_),
+                    },
+                )
+            )
+    if "heard" in templates:
+        for record in reunion.heard:
+            segments.append(
+                _since_template(
+                    str(templates["heard"]),
+                    {
+                        "token": record.token,
+                        "channel": record.channel,
+                        "fidelity": record.fidelity,
+                        "t": str(record.at),
+                    },
+                )
+            )
+    capped = segments[: int(config["max_segments"])]
+    return "; ".join(capped) if capped else None
+
+
 def _present_entity_items(
-    events: Sequence[EventRecord], pack: Pack
+    events: Sequence[EventRecord], pack: Pack, *, knower: str
 ) -> list[str]:
     """The 8th block's item lines (BRIEF_SPEC §3.8 — st-1, the entity
     cards): the room's structural answer to "who is here". A read-side
@@ -550,12 +626,35 @@ def _present_entity_items(
     line of their own — they are the carrier's surface, not room
     fixtures), then the pair lines. `max_entities`/`max_pairs` are
     ranking caps (D-047 law — beyond-cap items render nothing, never a
-    budget drop)."""
+    budget drop).
+
+    since-1 (D-180): the cards' since-segments — "what changed in
+    this entity since the reader last met it" (§3.4's extension) —
+    render as one trailing `since=` segment on the scene line and on
+    each entity card, the re-encounter fold's structured deltas through
+    the pack's templates. KNOWER-PARAMETERIZED (the §3.9 amendment: the
+    cards' structural lines stay shared, the since-segments are the
+    knower's own — the reader's epochs and the reader's records). A
+    pack without `since_lines` never builds the fold — zero segments,
+    the unarmed landing, the committed corpus bytes untouched."""
     config = pack.rules["brief"]["present_entities"]
     scene = current_scene(events, pack)
     state = fold(events, initial_projection(pack.entities))
     present = present_in_order(pack, state, scene.location_id)
     promoted = _promoted_props(events)
+    since_cfg = since_config(pack)
+    since_fold = (
+        ReunionFold(
+            events,
+            pack,
+            knower,
+            props=[
+                str(entry["prop"]) for entry in since_cfg.get("props", ())
+            ],
+        )
+        if since_cfg is not None
+        else None
+    )
     lines: list[str] = []
 
     # bridge-1 (D-116 (1), the scene-line projection pipe): the scene
@@ -582,14 +681,31 @@ def _present_entity_items(
     scene_props = (
         *static_fields, *born_fields, *promoted.get(scene.location_id, ())
     )
-    if scene_props:
+    # since-1: the scene card's own since-segment — "what changed in
+    # this place since the reader last stood here" (the location's
+    # reunion rides the same fold: its epochs are the reader's own
+    # intervals at it). The pre-iter-20 law extends one arm: a scene
+    # with a since-payload renders the line even without pack-declared
+    # fields or promoted props (the re-encounter with the place IS the
+    # content); unarmed packs never reach here — the payload is None.
+    since_scene = (
+        _since_segments(since_fold, scene.location_id, since_cfg)
+        if since_fold is not None
+        else None
+    )
+    if scene_props or since_scene is not None:
         rendered = " ".join(
             f"{prop}={_token_value(value)}" for prop, value in scene_props
         )
-        lines.append(
+        scene_line = (
             f"- scene {scene.location_id} "
-            f"({display_name(pack, scene.location_id)}) {rendered}"
+            f"({display_name(pack, scene.location_id)})"
         )
+        if rendered:
+            scene_line += f" {rendered}"
+        if since_scene is not None:
+            scene_line += f" since={since_scene}"
+        lines.append(scene_line)
 
     marker_specs = [
         (str(spec["prop"]), spec, str(spec["marker"]))
@@ -630,6 +746,14 @@ def _present_entity_items(
         segments.extend(
             f"{prop}={value}" for prop, value in promoted.get(entity_id, ())
         )
+        # since-1: the card's trailing since= segment — the atomic
+        # re-encounter context (one line per entity, the fill law treats
+        # the whole card as one item; the segments beyond max_segments
+        # render nothing — the D-047 ranking-cap law)
+        if since_fold is not None:
+            payload = _since_segments(since_fold, entity_id, since_cfg)
+            if payload is not None:
+                segments.append(f"since={payload}")
         lines.append(" ".join(segments))
 
     lines.extend(_pair_axis_lines(pack, state, present)[: int(config["max_pairs"])])
@@ -732,7 +856,9 @@ def assemble_brief(
         "directives": directive_lines,
         "scene_delta": _scene_delta_lines(events, pack, knower=knower),
         "scene_texture": _scene_texture_items(events, pack, texture_ledger),
-        "present_entities": _present_entity_items(events, pack),
+        "present_entities": _present_entity_items(
+            events, pack, knower=knower
+        ),
         "recalled_facts": _recalled_fact_lines(
             events, pack, knower=knower, query=query
         ),
