@@ -14,41 +14,47 @@
 > since iter-5).
 ---
 
-iter-140 · 2026-09-19 · memgc — the owner's research-only IA
-call «я думаю стоит провести ревизию, уборку и приведение репозитория
-в порядок» + the memory-layers audit brief (doc-only, zero code,
-zero corpus price; the D-022 fresh-owner-request exception to the
-doc-loop alarm)
-- the audit's verdict: the intake family's consumers closed at
-  iter-139 (world-2 delivered); the caps' rhythm was phase-gate-tied
-  while the ladder is complete — the «until the next gate collapse»
-  promises undeliverable; the load-bearing knowledge mapped: the
-  blueprint ledger rows + L-laws cited from code/tests (RNG-1 ×7,
-  TIME-1 ×13, L-laws ×177, D-rows ×375), the intake family's
-  consumption = the iter-134..139 chain (the census → slice 3 → the
-  audit → the verdict), the four consult cards the deferred
-  mechanism (STATUS Next step pins the pointers)
-- the GC: phases.md §6 closed intake blocks → finding → consequence
-  → consumer stubs (3786 → 2559; the cards + the intakes 9..13
-  consults + the slices/audit/verdict INTACT; the §6 head gains the
-  research-archive law); TASKS re-collapsed per the iter-102
-  precedent (1733 → 950; the phase-6-era ledger; st-3 flipped done —
-  depth-7 covered it); DECISIONS 51 → 30 (the family pattern:
-  D-155..D-167/D-171 the intake family, D-170/D-172 the gate-verdict
-  family, the world-2 build row, D-015/D-052 merged; D-173 the
-  post-ladder collapse trigger); SPECS_BACKLOG GROUP_SPEC → depth-7,
-  CORE_ONTOLOGY → PACK_SPEC (fired-and-absorbed re-points)
-- docs: NAV §1 resync + §2 the research-residue reading row, STATUS
-  re-pin (iter-138 evicted per the two-record convention) + the FAQ
-  cap-law line, this entry (iter-130 evicted, verified in this
-  edit); 1754+1 green, ruff clean after; doc-only, the corpora
-  byte-untouched
-- Caps: STATUS 603 / TASKS 950 / DECISIONS 66 lines (30 rows — the
-  cap MET) / phases 2559 (the over-600 residue = the §6 substance
-  per the archive law + §1..§5/§7 architecture; the §6.1 substance
-  filter applied, the pre-GC text in git at BASE_COMMIT 1b7666a) /
-  worklog 10 entries (iter-130 evicted here, verified in this edit)
-
+iter-140 · 2026-09-19 · intake27 — the owner's «проанализируй
+документ и определи что из него можно полезного перенять в проект
+и почему» research call over the uploaded level-design
+consolidation (twelve GDC/Konsoll/LDL talks; doc-only, zero code,
+zero corpus price — the D-155..D-171 intake precedent, the file
+external per the convenience-copy law, the intake-24
+transplantation posture)
+- verified BEFORE working (1754+1 green, ruff clean, Python
+  3.12.14, HEAD 1b7666a); the doctrine PARTIALLY CONFIRMED —
+  overwhelmingly owned as the strongest cross-domain confirmation
+  family since intake-16 (figure–ground = budgets/eviction/
+  pruning/§6.1; vistas = cold tiers + lazy detail; space reuse =
+  fold(log); PCG-is-design ×4 = INV-3/PACK-1/D-082/D-134; Control
+  = L12/LOD-1/INV-3; the lint family = the data-quality law
+  verbatim; Qud = the pass ladder + the chronicle horizon, L7
+  stricter at runtime)
+- the residue: FIVE instruments (the READER LAW — zero read
+  surfaces = functionally dead, name the reader, F4 + the
+  cadences' decision half; the PRICED-OPTION question —
+  differently-priced never labeled, the B row's form, res-1 the
+  dynamic owner; the TOP-LOD READABILITY question — the critical
+  path survives the coarsest blur; the REALIZATION TABLE —
+  why/layer/linked/understood + the removal test, PARKED
+  pack-1/3/4; the SACRIFICE PROTOCOL — promise pair →
+  both-promises test → Barrier/Gate/Carrot/S'more, PARKED the SoW
+  debates) + the PROPOSAL (topology-aware hook distribution over
+  the site graph's degree classes — the cadences' decision half /
+  roads-1 / F4, never law until armed)
+- docs: phases.md §6 the intake-27 block + the consult card's
+  item 10, REFERENCES §10 +9 source rows, DECISIONS D-173 (52
+  rows — over the 30 cap on the §6.1 substance precedent), TASKS
+  the iter-140 section, STATUS re-pin (iter-138 evicted per the
+  two-record convention) + the Next step (the sacrifice protocol
+  joins the consult material), this entry (iter-130 evicted,
+  verified in this edit); 1754+1 green, ruff clean after;
+  doc-only, the corpora byte-untouched
+- Caps: STATUS 626 / TASKS 1785 / DECISIONS 86 lines (52 rows —
+  over the 30 cap on the §6.1 substance precedent, the standing
+  post-ladder record) / phases 3944 / worklog 10 entries
+  (iter-130 evicted here, verified in this edit) — the over-cap
+  files ride the documented §6.1 substance precedent
 
 iter-139 · 2026-09-19 · world-2 L2 (the verdict) — the
 owner's convening call «я решил что следует world 2 закончить,
@@ -411,3 +417,4 @@ price — the iter-122 intake13re re-entry precedent, one family)
   DECISIONS 75 (43 rows — over the 30 cap on the §6.1 substance
   precedent until the next gate collapse) / phases 2950 — the
   over-cap files ride the documented §6.1 substance precedent
+---

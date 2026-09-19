@@ -37,45 +37,68 @@ evicted per the cap) — 5 files.
 The prior iteration's record: iter-138 (intake-26). The
 detail lives in TASKS + worklog + git.
 
-Iteration: iter-140 (`iter-140-memgc` — the owner's research-only
-information-architecture call «я думаю стоит провести ревизию,
-уборку и приведение репозитория в порядок» + the memory-layers
-audit brief; doc-only, zero code, zero corpus price):
-**the memory-GC LANDED (D-173)** — the audit's verdict: the intake
-family's consumers closed at iter-139 (world-2 L2 delivered), and
-the caps' enforcement rhythm was phase-gate-tied while the ladder
-is complete — the «until the next gate collapse» promises had
-become undeliverable. The changes: `docs/blueprint/phases.md` §6's
-closed intake blocks compressed to finding → consequence → consumer
-stubs (3786 → 2559; the consult cards, the pack-design consults of
-intakes 9/10, the slice blocks, the depth audit and the verdict
-INTACT; §6's head gains the research-archive law); `docs/TASKS.md`
-re-collapsed per the iter-102 precedent (1733 → 950; the
-phase-6-era iteration ledger; `st-3` flipped done — depth-7/D-127
-covered it); `docs/DECISIONS.md` re-collapsed 51 → 30 rows per the
-phase-gate family pattern (D-155..D-167/D-171 into the intake
-family, D-170/D-172 into the gate-verdict family, the world-2
-build family row D-152/D-153/D-154/D-168/D-169, D-015 and D-052
-merged into their families, D-173 appended);
-`docs/SPECS_BACKLOG.md`'s fired-and-absorbed triggers re-pointed
-(GROUP_SPEC → depth-7, CORE_ONTOLOGY → PACK_SPEC);
-`docs/AGENT_NAVIGATION.md` §1 resynced + §2 gained the
-research-residue reading row. The build queue UNTOUCHED — nothing
-unpins, nothing reorders; the ORDER owner's rows unchanged ·
+Iteration: iter-140 (`iter-140-intake27` — the level-design &
+worldbuilding consolidation routed; the owner's «проанализируй
+документ и определи что из него можно полезного перенять в проект
+и почему... где прокатит междоменная трансплантация принципов»
+research call over the uploaded `level-design-consolidated.md` —
+a conspectus of twelve GDC/Konsoll/LDL talks; the file external
+per the convenience-copy law, the intake-24 transplantation
+posture — the mechanism source-free, never the form):
+**the doctrine PARTIALLY CONFIRMED — overwhelmingly owned as the
+strongest cross-domain confirmation family since intake-16**
+(figure–ground = the brief's budgets/eviction + the chronicle's
+pruning + §6.1's substance filter; vistas = the cold tiers +
+lazy detail; space reuse = fold(log); PCG-is-design × 4 talks =
+INV-3/PACK-1/D-082/D-134; Control's representation switching =
+L12/LOD-1/INV-3 — a destruction pipeline and a narrative sim
+sharing one law; the data-quality law = the pack-lint family
+verbatim; Qud's abstraction mountain = the pass ladder + the
+chronicle horizon, L7 stricter at runtime); **the residue FIVE
+instruments + one proposal, all routed, zero build-grade**: the
+READER LAW (an emitted event with zero read surfaces is
+functionally dead — name the reader of every new event type; F4's
+promotion events + the cadences' decision half the consumers),
+the PRICED-OPTION question (count differently-priced options,
+never labels — the A–H B row's form; res-1 the dynamic owner),
+the TOP-LOD READABILITY question (the critical path survives the
+coarsest-LOD blur — the depth battery's read-surface arm), the
+REALIZATION TABLE (why exists / which layer / linked to what /
+what the reader understands + the removal test — the admission
+lint's authoring half; PARKED for pack-1/pack-3/pack-4, the
+motivation scope question riding it, INV-4-fenced), the SACRIFICE
+PROTOCOL (promise pair → the both-promises test → Barrier/Gate/
+Carrot/S'more with the price named — the repo's resolved cases
+its precedents; PARKED for the SoW debates — bg-6/engine-1/
+presentation-1/companion-1; a debate form, never a gate); the
+PROPOSAL (topology-aware hook distribution over the site graph's
+junction/through/dead-end classes — the cadences' decision half +
+roads-1 + F4 the consumers, never law until a pack arms it).
+Carriers: the pack-candidate consult card's item 10 + REFERENCES
+§10's nine source rows + the intake-27 block; refused at the
+door: spatial-composition machinery (renderer-side,
+presentation-1's), motivation-model law (INV-4),
+named-principles documents (D-024), cursed-problem
+runtime/spec/check, topology arming now — Kirill's methods +
+Totten's documentation culture fully-owned confirmations, zero
+residue ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
 D-151; the ladder complete 0..6 — the standing work: the
 owner-gated backlog + the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at HEAD 1b7666a — the numbers identical —
-and re-verified after; doc-only, the corpora byte-untouched) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env
+pin; verified BEFORE working at HEAD 1b7666a — the numbers
+identical — and re-verified after; doc-only, the corpora
+byte-untouched) ·
 Date: 2026-09-19 ·
-Scope: `docs/blueprint/phases.md`, `docs/TASKS.md`,
-`docs/DECISIONS.md`, `docs/SPECS_BACKLOG.md`,
-`docs/AGENT_NAVIGATION.md`, `STATUS.md` (this re-pin + the FAQ
-cap-law line), `worklog.md` (this entry; iter-130 evicted per the
-cap) — 7 files.
-The prior iteration's record: iter-139 (the world-2 verdict). The
-detail lives in TASKS + worklog + git.
+Scope: `docs/blueprint/phases.md` (§6 the intake-27 block + the
+consult card's item 10), `docs/REFERENCES.md` (§10 the nine
+source rows), `docs/DECISIONS.md` (D-173), `docs/TASKS.md` (the
+iter-140 section), `STATUS.md` (this re-pin; iter-138's record
+evicted per the two-record convention), `worklog.md` (this entry;
+iter-130 evicted per the cap) — 6 files.
+The prior iteration's record: iter-139 (the world-2 verdict).
+The detail lives in TASKS + worklog + git.
+
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -478,10 +501,8 @@ the single D-084..D-093 family row as they landed, the verdict D-094
 joined the gate-verdict family); 71→30 at the phase-5→6 gate (iter-102
 — never resynced here until iter-116); 44→30 at the phase-6 gate
 (iter-116, the ladder complete — the phase-6-era rows folded into
-families, D-151 the record). The ≤30 cap stands; a breach collapses
-at the owner's explicit call (the post-ladder precedent: the iter-140
-memory-GC, D-173 — the phase-gate rhythm retired with the completed
-ladder).
+families, D-151 the record). The ≤30 cap stands; a future breach
+collapses at the owner's next gate call.
 - **The read-side layers are pure functions of their inputs (iter-5/6/8/10
   laws).** Every render entry point builds a fresh `RngBank` from the log
   HEADER seed — same log → same bytes in any process/`PYTHONHASHSEED`; a
@@ -551,19 +572,18 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-139 DONE: world-2 L2 — THE VERDICT DELIVERED on the owner's
-convening call (D-172): the two-level gate's level-2 question
-answered — the honest scope DELIVERED at the measured band (the
-anti-collection and anti-reskin halves MEASURED; the depth's
-DISTRIBUTION the recorded residue — the concentration at the
-triangle's vertex, the option surface 1-of-6, the 48 turns zero
-consumers), the residue routed to the content-side rows (the pack
-slots' promotion events F4 — pack-1/pack-4; the cadences' decision
-half a build question) — world-2 closed, never reopening for
-slices. The two-level gate COMPLETE: L1 the reskin day (PASS
-iter-116, D-151), L2 the deep second world (DELIVERED iter-139,
-D-172). iter-138: intake-26 routed — TEST_PLAN §9 the selection
-grammar (D-171).**
+**iter-140 DONE: intake-27 routed — the level-design & worldbuilding
+consolidation: the doctrine PARTIALLY CONFIRMED (the strongest
+cross-domain confirmation family — budgets / LOD /
+authored-over-generated / data-driven all owned; D-173), five
+instruments adopted (the reader law / the priced-option question /
+the top-LOD readability question — the depth battery's sharpenings
+on the consult card's item 10; the realization table + the
+sacrifice protocol PARKED for the pack slots and the SoW debates),
+the topology-aware hook distribution the recorded proposal (never
+law until a pack arms it). iter-139: world-2 L2 the verdict
+DELIVERED (D-172) — the two-level gate COMPLETE; iter-138:
+intake-26 routed — TEST_PLAN §9 the selection grammar (D-171).**
 
 1. **The owner-gated backlog (the standing rows, unchanged — the
    ORDER owner decides; TASKS owns composition, never order; the next
@@ -587,7 +607,10 @@ grammar (D-171).**
    future contract/plugin question: the intake-22 modularity
    card, the intake-23 world-structure card, and the intake-21
    observability card (the system-contract decomposition research
-   call is the owner's, never self-opened).
+   call is the owner's, never self-opened); for the SoW promise
+   debates the intake-27 sacrifice protocol (the promise pair →
+   the both-promises test → Barrier/Gate/Carrot/S'more with the
+   price named — phases.md §6's intake-27 block, D-173).
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
    standing gap rows: the {3–8B, GBNF} arm (owner hardware —
    engine-1's decision input), the bg-7 prose families skipped in

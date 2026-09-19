@@ -26,90 +26,927 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
-### Phase-6-era iteration ledger (iter-116..139 — the detailed sections
-collapsed at the owner's memory-GC call, iter-140; the iter-102 collapse
-precedent; per-iteration detail: the D-rows + phases.md §6's blocks +
-worklog at the time + git — never restated here, the header's own law)
+### iter-140 · intake-27 — the level-design & worldbuilding consolidation routed: the doctrine confirmed as the strongest cross-domain confirmation family (budgets / LOD / authored-over-generated / data-driven — all owned), five compact instruments adopted (the reader law, the priced-option question, the top-LOD readability question, the realization table, the sacrifice protocol), the topology-aware hook distribution parked as the proposal — done (doc-only, the owner's «проанализируй документ и определи что из него можно полезного перенять в проект и почему» research call over the uploaded level-design conspectus)
 
-- iter-139 · 2026-09-19 · world-2 L2 (the verdict) — the two-level
-  gate's level-2 question ANSWERED on the owner's convening call: the
-  honest scope DELIVERED at the measured band, the depth's distribution
-  the recorded residue, the row closed — D-172 (doc-only).
-- iter-138 · 2026-09-19 · intake-26 — the verification-lenses research
-  routed: the selection grammar ADOPTED in the compact form (TEST_PLAN
-  §9 — the claim packet + the selection table), the full catalog held
-  in the intake block, the measurement bound to the next build row —
-  D-171 (doc-only).
-- iter-137 · 2026-09-19 · world-2 L2 (the depth audit) — the three lens
-  documents taken as claims, the converged depth unit, the three
-  measured arms, the A–H ledger, the critical separation — D-170
-  (doc-only; verdict material, the L2 call the owner's).
-- iter-136 · 2026-09-19 · world-2 L2 (slice 4: the calendar) — the
-  market days / the fairs / the river's seasonal ride + the weather's
-  seasonal layer + the composed YEAR experiment; KI#86; +16 tests —
-  D-169.
-- iter-135 · 2026-09-19 · world-2 L2 (slice 3: the triangle) — the
-  factions armed 0→1 + the deep feud history + the composed
-  outcome-divergence experiment; KI#85; +11 tests, the golden regen —
-  D-168.
-- iter-134 · 2026-09-19 · cumulative-1 — the intake family 4..25 taken
-  as ONE body: the arming census, the five cumulative findings, the
-  convergence onto slice 3 — D-167 (doc-only).
-- iter-133 · 2026-09-18 · intake-25 — the re-verification consolidation
-  pack routed: the two measured probes, the dispositions stand — D-166
-  (doc-only).
-- iter-132 · 2026-09-18 · intake-24 — the cross-domain
-  principle-transplantation synthesis routed: the P1–P6 map all OWNED,
-  the principle index card — D-165 (doc-only).
-- iter-131 · 2026-09-18 · intake-11 re-entry — the pressure-city donor
-  re-uploaded & re-verified: D-147 stands, zero new findings (doc-only).
-- iter-130 · 2026-09-18 · intake-23 — the world-execution /
-  spatial-topology / social-information research routed: the six engine
-  questions probed, the world-structure consult card — D-164 (doc-only).
-- iter-129 · 2026-09-18 · intake-22 — the ComfyUI/modularity
-  consolidation routed: the verdict set re-verified at a real clone, the
-  modularity consult card — D-163 (doc-only).
-- iter-128 · 2026-09-18 · intake-21 — the unified-observatory /
-  worldbuilder / agent-gateway research routed: the four-question
-  observability card — D-162 (doc-only).
-- iter-127 · 2026-09-18 · intake-20 — the content-archetype /
-  pack-strategy framework research routed: the 26-item reconciliation,
-  the capability truth table, the pack-candidate consult card — D-161
-  (doc-only).
-- iter-126 · 2026-09-18 · intake-19 — the persistent-groups /
-  settlement-development research routed: the zero-core-edit settlement
-  probe, the gaps routed to standing rows — D-160 (doc-only).
-- iter-125 · 2026-09-18 · intake-18 — the player-decision-mechanics
-  research routed: the A–G candidate verdicts, three measurements
-  re-derived, compellingness fenced to the SoW horizon — D-159
-  (doc-only).
-- iter-124 · 2026-09-18 · intake-17 — the interface-oriented procedural
-  composition research routed: the five candidate principles verified,
-  two measurements re-derived — D-158 (doc-only).
-- iter-123 · 2026-09-18 · intake-16 — the procedural-generation research
-  routed: the four domain verdicts, three measurements re-derived —
-  D-157 (doc-only).
-- iter-122 · 2026-09-18 · intake-13 re-entry — the open-ended actions
-  review re-uploaded & re-verified: D-150 stands, zero new findings
-  (doc-only).
-- iter-121 · 2026-09-18 · intake-15 — the narrative-design research
-  dossier routed: the 18 laws re-derive the standing families, since-1
-  the one genuine residue — D-156 (doc-only).
-- iter-120 · 2026-09-18 · intake-14 — the causal-architecture research
-  bootstrap routed: five architecture questions resolved against
-  standing owners — D-155 (doc-only).
-- iter-119 · 2026-09-13 · world-2 L2 (slice 2: the cultures half) — the
-  two name-1 phonotactic profiles, the condensation travelers, the
-  cultures block — D-154.
-- iter-118 · 2026-09-13 · world-2 L2 (slice 1: the skeleton) — the
-  province pack's 324-site generated surface, the settlements on the
-  travel lattice, the spine records, the T1 twin — D-153.
-- iter-117 · 2026-09-13 · pack-ci — the admission-lint rungs LIVE (the
-  teleology gate + the live-char crosswalk + the price-marker lint in
-  `core/pack.py`) — D-152.
-- iter-116 · 2026-09-13 · phase-6 gate — done (verdict: PASS, D-151);
-  ROADMAP §2 CLOSED, the ladder complete; the doc debts paid (DECISIONS
-  44→30, NAV resync, README resync).
+The question — what from a twelve-talk level-design / worldbuilding
+conspectus (GDC / Konsoll / LDL: Taylor, Brown, Pears, Pittman,
+Serr, Richter, Deck, Edwards, Qud, Jaffe, + Kirill / Totten)
+transplants into a deterministic text simulation with no camera
+and no renderer — investigated under the intake-24 posture (the
+mechanism source-free, never the form; the file external per the
+convenience-copy law; every claim verified at HEAD 1b7666a BEFORE
+working). The verdict: PARTIALLY CONFIRMED — the doctrine
+overwhelmingly OWNED (the strongest cross-domain confirmation
+family since intake-16: figure–ground = the brief's budgets +
+eviction + the chronicle's pruning + §6.1's substance filter;
+vistas = the cold tiers + lazy detail; space reuse = fold(log);
+PCG-is-design × 4 = INV-3/PACK-1/D-082/D-134; Control's
+representation switching = L12/LOD-1/INV-3; the data-quality law
+= the pack-lint family verbatim; Qud's abstraction mountain = the
+pass ladder + the chronicle horizon, L7 stricter at runtime).
+
+The residue — five instruments + one proposal, every one routed,
+zero build-grade: (1) the READER LAW (an emitted event with zero
+read surfaces is functionally dead — name the reader of every new
+event type; F4's promotion events + the cadences' decision half
+the consumers); (2) the PRICED-OPTION question (count
+differently-priced options, never labeled — the A–H B row's
+measurement form; res-1 the dynamic owner); (3) the TOP-LOD
+READABILITY question (the critical path survives the coarsest-LOD
+blur — the depth battery's read-surface arm); (4) the REALIZATION
+TABLE (why exists / which layer / linked to what / what the
+reader understands + the removal test — the admission lint's
+authoring half; PARKED for pack-1/pack-3/pack-4, the motivation
+scope question riding it, INV-4-fenced); (5) the SACRIFICE
+PROTOCOL (promise pair → the both-promises test → Barrier / Gate /
+Carrot / S'more with the price named — the repo's resolved cases
+its precedents; PARKED for the SoW debates: bg-6 / engine-1 /
+presentation-1 / companion-1 — a debate form, never a gate); the
+PROPOSAL (topology-aware hook distribution over the site graph's
+junction/through/dead-end classes — the cadences' decision half +
+roads-1 + F4 the consumers, never law until a pack arms it).
+Carriers: the pack-candidate consult card's item 10 + REFERENCES
+§10's nine source rows + the intake-27 block (the one-pass verdict
+table). Refused at the door: spatial-composition machinery
+(renderer-side, presentation-1's), motivation-model law (INV-4),
+named-principles documents (D-024), cursed-problem runtime/spec,
+topology arming now; Kirill's methods + Totten's documentation
+culture fully-owned confirmations, zero residue. The build queue
+UNTOUCHED — nothing unpins, nothing reorders. 1754 passed + 1
+skipped, ruff clean (Python 3.12.14; verified BEFORE working at
+HEAD 1b7666a — the numbers identical — and re-verified after;
+doc-only, the corpora byte-untouched). Detail: D-173 + the
+intake-27 block (phases.md §6) + worklog iter-140.
+
+### iter-139 · world-2 L2 (the verdict) — the two-level gate's level-2 question ANSWERED on the owner's convening call: the honest scope DELIVERED at the measured band, the depth's distribution the recorded residue, the row closed — done (doc-only, the owner's «я решил что следует world 2 закончить, вердикты вынести» directive — the session's second half, after intake-26's adoption pass)
+
+The gate question (STATUS iter-137's own pin): is the deep second
+world's honest scope delivered — VISION §7's twin, "a deep unique
+world takes weeks; the slices are the weeks made explicit" — the
+weeks now spent? ANSWERED: **DELIVERED at the measured band.** The
+verdict's ground, all cited to the standing owners (never restated —
+D-024): the anti-collection half MEASURED (the depth audit's A/C/D/H
+ledger — one ordinary verb composes through three systems into
+irreversible, divergent, route-stable state); the anti-reskin half
+MEASURED (L1's 14m24s reskin day vs the weeks-authored province —
+the spine, the vertex composition, the year-run almanac, the T7
+reads); the depth's DISTRIBUTION the recorded residue (B/F/G partial
+— the concentration at the triangle's vertex, the option surface
+1-of-6 at the probed band, the 48 market/fair turns the one
+found-and-named counterexample). The verdict's law: the gate asks
+the HONEST scope, never uniform distribution — VISION §7's own
+reality row separates the reskin day from the weeks, and the audit
+measured exactly that separation; deferring until B/F/G close would
+be the completeness-smuggling the audit refused (the critical
+separation: no open row a verdict input). The residue's routing:
+the future depth consumers the content-side rows — the pack slots'
+promotion events (F4: pack-1/pack-4), the cadences' decision half a
+BUILD question (arming one consumer on a market/fair cadence) —
+world-2 never reopens for slices. The two-level gate COMPLETE (L1
+PASS iter-116, D-151; L2 DELIVERED iter-139, D-172); the world-2
+row flips done (the wave plan + the iter-109 answers compressed to
+their pointers — the detail lives in the iter sections + phases.md
+§6 + the D-rows). KI#86 deleted per AGENTS §5 (closed iter-136, past
+the two-iteration window). 1754 passed + 1 skipped, ruff clean
+(Python 3.12.14; verified before working at HEAD 8dc5436 and
+re-verified after; doc-only, the corpora byte-untouched). Detail:
+D-172 + the phases.md §6 verdict block + worklog iter-139.
+
+### iter-138 · intake26 — the verification-lenses research routed: the selection grammar adopted in the compact form (TEST_PLAN §9 — the claim packet + the claim-shape → instrument table), the full catalog held in the intake block, the measurement bound to the next build row — done (doc-only, the owner's «перед этим вероятно стоит рассмотреть дополнительно идеи с файла VERIFICATION_LENSES_RESEARCH.md» call — the world-2-verdict session's first half)
+
+The document's question, narrower than research_method_v5's
+investigation lifecycle: what reusable verification vocabulary and
+experiment shapes should future research use AFTER the implementation
+claim has been made? Its own verdict — PARTIALLY CONFIRMED — verified
+at HEAD: the mechanisms ALL owned (the FACT rows content-matched one by
+one), the missing piece the compact selection grammar — which existing
+instrument falsifies which claim; the repo's own history the confirming
+instance (iter-137's audit re-derived its verification form from
+scratch; the intake family's verdict tables each re-derived the
+instrument mapping). The adoption: `docs/TEST_PLAN.md` §9 — the CLAIM
+PACKET (oracle + falsifier mandatory; the disposition vocabulary the
+repo family, never a numeric score), the selection TABLE (self-describing
+names, standing instruments only), the independent-re-derivation oracle
+law (a checker sharing the implementation's mistake is not an oracle),
+the order-probe contract law (where order is semantic, invariance is NOT
+the oracle) — research-derived, a routing aid, never a gate. The full
+ten-lens/nine-prism catalog held in the intake-26 block (phases.md §6,
+the one-pass record — D-024); the stale-at-HEAD corrections recorded
+(the door-surface battery = the next-decision census landed iter-137;
+the first-divergence read consumed iter-135; the A–H ledger the
+packet's standing instance). Refused at the door: the names as law
+(label-matching, the intake-24 precedent), any executable helper /
+registry / score / runtime form (the document's own §10 reject list =
+standing law), REFERENCES.md as the surface. The measurement obligation
+standing: the next owner-gated build row (res-1/pack-1 the natural
+candidates) writes its verification plan as ONE claim packet (≤3
+lenses, ≤2 prisms) — that run decides any executable helper. KI#85
+deleted per AGENTS §5 (closed iter-135, past the two-iteration window).
+1754 passed + 1 skipped, ruff clean (Python 3.12.14; verified BEFORE
+working at HEAD 8dc5436 — the numbers identical — and re-verified
+after; doc-only, the corpora byte-untouched). Detail: D-171 + the
+intake-26 block + TEST_PLAN §9 + worklog iter-138.
+
+### iter-137 · world-2 L2 (the depth audit) — the verdict material: the three lens documents taken as claims (Cadwell / Ingold / Haggis), the converged depth unit, the fresh measurements (the door-surface census seed 53 / the reorder arm seed 53 / the calendar ablation seed 42), the A–H ledger, the critical separation — done (doc-only, the owner's research call over the uploaded research_method_v5 task)
+
+The method's question — is world-2 L2 a genuinely deep second world,
+not a larger collection of independent features or a decorated
+reskin — evaluated as ONE composed world over the four landed
+slices, the three lens documents treated as claims and repository
+evidence authoritative. The converged unit (none of the three
+sources supplies it alone): depth = the changed NEXT-DECISION
+landscape per ordinary verb — Haggis's complexification (the
+decision's structure, never the event volume) + Cadwell's strategic
+commitment (actions close futures) + Ingold's encounter robustness
+(the validity condition). Operationalized as the F3
+four-read-surfaces experiment extended with three read-only arms
+(the Rule-9 runners outside the repo, the logs outside the repo,
+zero corpus price):
+
+- the DOOR-SURFACE CENSUS (province_feud, seed 53, BURN vs CALM —
+  the arson alone removed): +15 events / 13 types, 13 projection
+  properties over six entities (the market destroyed, three
+  watchers' suspicion 0→30, the steward's grief 35→55, the runner
+  SUSPECT), knowledge +4/+9; the six-probe battery — EXACTLY ONE
+  door answer changes (the re-ignition closed by
+  `target.spot_available`), the other five identical, the two
+  rejections arm-independent state facts (the sergeant's pay tin,
+  the unflagged mistress);
+- the REORDER ARM (seed 53, Thornmill-first): the grief-wake
+  IDENTICAL (route-independent), the vigil deadband holds, the
+  council fires, the twin byte-identical, the tale coherent; the
+  one lawful difference an NPC's own talk refused at
+  `target.same_location` (the door's uniform law); the longer
+  route grows MORE autonomous texture (76 vs 64 events);
+- the CALENDAR ABLATION (the year run, seed 42, time.calendar +
+  weather.seasonal stripped; the macro clock untouched): the
+  stripped layers' own 57 events + 52 tale lines; the leverage
+  beyond them EXACTLY ONE second-order path (the rise's storm
+  roll → the storm-murmur hook, D-133 → the ambient quiet gate →
+  Maren's ramble at the emptied stall row — the one ablated
+  projection property → three hearers' knowledge → one rumor told
+  back); the 48 market/fair turns ZERO consumers, measured.
+
+The A–H ledger: A/C/D/H CONFIRMED, E CONFIRMED at the measured
+band (the entry-order corpus since-1/qa-1's), B/F/G PARTIAL — the
+option surface narrow (1 of 6), the calendar the spine + one
+path, the composition concentrated at the triangle's vertex. The
+strong counterexamples searched each answered (the 48 turns the
+one found-and-named; the reverse — simple mechanisms, many
+futures — CONFIRMED). The critical separation: NONE of res-1 /
+roads-1 / since-1 / pack-1 / pack-4 / engine-1 / presentation-1 a
+prerequisite for the depth claim — no future completeness
+smuggled into the definition. The verdict: PARTIALLY CONFIRMED
+(the anti-collection and anti-reskin halves measured; the depth's
+distribution the honest residue) — verdict MATERIAL, the L2
+verdict call itself the OWNER's, never self-called. Disposition:
+NO ACTION on the queue; the depth battery joins the F3 form as
+the standing pack-gate evaluation discipline (F4's consult card
+carries it); zero build-grade items. 1754 passed + 1 skipped,
+ruff clean (Python 3.12.14; verified BEFORE working at HEAD
+4be2a17 — the numbers identical — and re-verified after;
+doc-only, the corpora byte-untouched). Detail: worklog iter-137 +
+D-170 + git.
+
+### iter-136 · world-2 L2 (slice 4: the calendar) — the market days / the fair / the river's seasonal ride + the weather's seasonal layer + the composed year experiment — done (the owner's «продолжай работу по планам» call — the iter-135 precedent phrase's continuation; STATUS Next step's own readiness pick: slice 4 the wave plan's remainder)
+
+The sub-year cadence family (maclock-1's middle granularities, L4
+grown to three tiers — `core/calendar.py` + `rules.json::time.calendar`):
+named entries `{every_ticks, event_type}` or `{every_ticks, cycle}` —
+the cycle the phase pairs `{phase, event_type}` rotating by pure
+arithmetic (`cycle[k % len]`, the run OPENS at cycle[0] — the snowmelt
+comes when it comes, never a draw). The crossing law: the positive
+multiples, fired coarsest-first at co-occurring ticks (the year before
+the season, the season before the fair, the fair before the market
+day, the market day before the rotation) — the deterministic order
+`every_ticks` DESC then id; the turn ONE canon event through the door
+(actor world, the outcome `{calendar, day, phase?}`, no
+knowledge/state_changes/hooks — the clock family's own shape). The
+lint: the pairing law (the calendar requires the macro clock), the
+sub-year law (every_ticks < cadence_ticks — the year clock owns the
+year turns), the identity laws (the types unique across the block, ≠
+the macro's and the weather's), the both-or-neither cycle refusal, the
+seed-time emission witnesses. The committed ARMING: the market days
+14400 (`market_opens` — the decan rhythm), the fairs 43200
+(`fair_opens` — the month's weighing), the seasons 129600 + the cycle
+[thaw, high_water, long_light, first_frost] — the run opens in the
+thaw, the RISE is the first crossing (day 90), the wrap's thaw turns
+with the year (day 360); the crossings beyond every day-scale corpus
+script's horizon by construction (the weather-1 arming's own law —
+the golden bytes untouched, the corpus price ZERO, the T1 pin green).
+
+The weather's SEASONAL layer (weather-1's chain riding the seasons —
+phases.md §6's law, the SATISFIED gate): `weather.seasonal` — `ride`
+names a declared calendar entry (the chain's rolls MOVE to that
+cadence's crossings; one roll cadence per family; the reference never
+a declaration — "one clock, one cadence"'s substance held) +
+`weights` the per-phase per-current-state overrides, the D-030
+ASYMMETRIC data: the rise's storm-heavy maps from ANY state (the
+meltwater sky breaks fast), the thaw's wet-no-storm, the frost's dry
+cold — and the long light carries NO override (the calm rebuilds slow
+through the base weights, the dial never snaps back). The phase at
+the roll is pure tick arithmetic (L3 — `calendar_phase`, the fold
+never scanned).
+
+ONE forced core edit — KI#86 (the erosion's seed-time gate): the
+seasonal ride exposed a latent unbounded queue feed (a rule whose
+`from` no entity holds still seeded an entry per changing roll; with
+the ride cadence below the rule's `after_ticks` the queue chases the
+crossings forever — the crafted forced-alternation test hung);
+`erosion_due` gates the seed on the fold (a rule with no live target
+seeds nothing), the fire-time read unchanged (the rain washes the
+smoke that was there when it rained).
+
+The composed YEAR experiment (province_calendar.json, seed 42 — the
+F3 four-read-surfaces form): the runner walks to Malby and waits
+through the year — 36 markets, 12 fairs, the four seasons in cycle
+order, the year's turn (151 — the chronicle binding 150 + 1), four
+weather rolls (one per season crossing, the rise's draws STORM — the
+D-030 read measured); the co-occurrence at day 90: the rise, its
+weather roll, the fair, the market — the coarsest-first discipline
+over the whole family; the twin run byte-identical; the tale renders
+the calendar's own lines (the story-critical listing, the tune-1
+split) while the ambient weather stays canon-without-a-line.
+`tests/test_calendar.py` +16 (the crossing arithmetic, the phase
+arithmetic, the lint refusals, the unarmed law — the both-arms
+byte-identity + the stream delta, the seasonal ride + the forced-bias
+pins, the default ride, the resume door across crossings, the corpus
+horizon, the committed year run). PROVINCE_STOPLIST +2 (thaw, frost).
+The budget's second honest re-declare: the template families 52 → 58
+(the ceiling 55 → 60 — the phase lines are the slice's own
+readability surface). The brief's lore grows the calendar knowledge
+(the INFORMED half: the market cycle + the river's seasons — the
+timing information the player times by). 1754 passed + 1 skipped,
+ruff clean, zero corpus price outside the year-scale experiment (the
+tavern/road corpora byte-untouched; the province golden untouched by
+construction). Detail: worklog iter-136 + D-169 + git.
+
+### iter-135 · world-2 L2 (slice 3: the triangle) — the factions arming + the deep feud history + the composed outcome-divergence experiment — done (the owner's «теперь настала пора приступать к работе по планам…» call — the iter-118/119 precedent phrase; STATUS Next step's own readiness pick: slice 3 the natural next pick, iter-134's F3 convergence)
+
+The census's only zero-consumer family ARMED 0→1 (depth-6's first
+committed arming, pack data over the settlement cast — the budget
+block's own prediction): three group entities (the river guild at
+Malby, the old families at Thornmill, the half-pay garrison at the
+keep) + three `factions` entries — the escalation ladder (the guild
+reads fear at trigger 30, the garrison at 40, the same axis two
+thresholds) + the deep-history arm (the families read the NEW
+`grievance` axis, decay 0 — the wergeld law — at the deliberate
+deadband: threshold 50 means both elders must grieve) + three goal
+verbs (council / hold_vigil / patrol, bare story beats, the D-160
+muster pattern) + the tale lines + the story-critical listing + the
+attribution rows. The deep feud history: the chronicle deepens 5→9
+events over the same 150 years, the collection vocabulary re-cut
+(feud roots = war_fought + lineage_ended — the blood endings open
+feuds; quarrel = the pacts; exodus = the foundings), and the wergeld
+claim joins the story-critical hooks (garrick_wergeld_count — the
+feud's hill half, the third buffer-seeding claim). The grief-wake
+reaction (on_action, alarm_raised witnesses → grievance +20, the
+numeric-home law filtering to the seeded elders): ONE verb, many
+roads — burning the market tips the guild + wakes Wilmot; burning
+the keep tips the garrison + wakes Garrick; both fires open the
+deadband and the families hold the vigil (the claim/legitimacy first
+consumer — intake-19's routing). The composed outcome-divergence
+experiment (the sandbox driver, Rule 9 — F3's four read surfaces):
+seed 53, the two arms from t=0 — +16 events (the fire chain, the
+grief, the council, suspicion ×3, zero drops), the first divergence
+at the take, the PC's knowledge +4/−1, the watch's suspicion 0→30
+(the runner SUSPECT), the market burned irreversibly; intake-23's F
+prompt answered (the world moves where the player is not — Wilmot's
+grief wakes at Thornmill while the runner stands at Malby) and the G
+cascade named (arson → alarm → fear/grief → the ratio + the crime
+chain — three systems answering one verb). ONE forced core edit —
+KI#85 (the alarm spike's numeric-home law, the ripple's discipline:
+the province's market crowd at a burning location first exercised
+the latent mismatch — the modularity probe's sharpening finding,
+exactly F3's predicted shape). `tests/test_triangle.py` +11 (the
+committed instance, the bars, the three roads, the tale, the deep
+tree, the corpus price — the calm vale byte-identical without the
+entries, the D-108 law) + the KI#85 pin in test_transitions.py + the
+T1 twin's history-count re-pin + PROVINCE_STOPLIST +6 (guild,
+council, vigil, patrol, exodus, grievance). The golden fixture
+regenerated: 39→44 events (+4 deep-history, +1 ramble — the wergeld
+count), fingerprint 0. 1738 passed + 1 skipped, ruff clean, zero
+corpus price outside the province (the tavern/road corpora
+byte-untouched). Detail: worklog iter-135 + D-168 + git.
+
+### iter-134 · cumulative-1 — the cumulative research reconciliation routed: the intake family 4..25 taken as ONE body of evidence, the arming census measured (factions 0 consumers, four families province-only), five cumulative findings, the convergence onto slice 3 as the highest-leverage proof — done (doc-only, the owner's research call)
+
+The owner's «согласно CUMULATIVE_RESEARCH_v2 (1).md работай» call
+over the uploaded second-stage cumulative method file (the closure
+form the method's own trigger condition awaited — the natural
+boundary: the intake family 4..25 closed by its own last two
+members, the phase ladder 0..6 complete, STATUS holding no pinned
+row). ONE fresh read-only measurement — the ARMING CENSUS over the
+three committed packs: factions (depth-6) 0 committed consumers
+(DORMANT — intake-23's claim now measured); names, cultures, npc
+spines, groups+condensation 1 consumer (the province-only family —
+intake-20's LANDED-BUT-UNDER-TESTED list confirmed whole); travel
+2; weather + the nine core families 3 (promoted). Five cumulative
+findings: F1 the frontier is composition-limited, never
+implementation-limited; F2 the corpus is saturated (intakes 11..25
+all zero build-grade; the marginal research value now lives in the
+open rows' own evaluation disciplines); F3 world-2 L2 slice 3 is
+the highest-leverage proof (six intakes' residues consume the one
+row — the composed outcome-divergence experiment, the
+claim/legitimacy first consumer, the card recalibration, the
+zero-consumer factions arming; also a live probe of the
+minimal-system-contract hypothesis); F4 the promotion ladder is
+the content-side frontier (same-pack arming ≠ cross-context
+promotion; the future pack slots are the promotion events); F5 the
+SoW fence holds (compellingness INV-4-fenced behind engine-1/
+presentation-1 + the hardware arm). Cross-pollination: intake-21's
+four-question card = slice-3's experiment design review; intake-24's
+principle index card = slice-3's authoring checklist. Should-not-
+add: no fresh research capacity pre-slice-3, no factions spike
+separate from the slice, no capability-truth-table document, no
+res-1 pre-work, no queue reorder. Verdict CONFIRMED; disposition
+NO ACTION — nothing unpins, nothing reorders; slice 3's standing
+implementation-readiness CONFIRMED and sharpened, the owner's row
+pick the gate. The addendum: phases.md §6's cumulative block.
+Detail: worklog iter-134 + git.
+
+### iter-133 · intake-25 — the re-verification consolidation pack routed: the prior intakes 13..19 re-asked as quality-open rows, the two smallest-verification steps MEASURED (the mid-chain stop + the status census), the dispositions stand — done (doc-only, the owner's research call)
+
+The owner's «проанализируй глубоко документ и оцени, присмотрись,
+убедись и так далее => что можно перенять и почему, что можно
+взять но с переработкой и адаптацией, какой потенциал есть?
+какие плюсы имеет и какие минусы (подводные камни)? есть ли
+ультимативное решение, которое нивелирует минусы и приумножит
+плюсы? а придумать такое возможно?» call over the uploaded
+three-document consolidation pack (00_INDEX + the
+causal-substrate / procgen-interface /
+narrative-agency-territory consolidations — the prior intakes
+13..19's own seven sources re-framed with anti-conservatism
+re-check tables) + the research_method_v5 method file (already
+internalized, D-163). Content-matched claim-by-claim against
+the routed records at HEAD 90c04fb — zero factual drift; the
+pack's BASE_COMMIT and no-files-modified claim check out. TWO
+fresh read-only probes (the sandbox driver outside the repo,
+Rule 9) executed the pack's own two smallest-verification
+steps: probe A the mid-chain failure semantics (the dependent
+drop_break rejects cause-chained — failed_test
+target.carried_by, cause ev_0024; the second steal rejects on
+carries_flagged, cause ev_0006; zero fake-success events; the
+twin run event/outcome-equal — the quality row MEASURED
+CLOSED, the utterance-level half parse-2's own deferred row,
+zero simulator change owed); probe B the status census (five
+of six conceptual statuses first-class at their proper layer;
+PARTIAL honestly absent — 0/48 action declarations carry
+separable sub-effects; NO_MODELED_EFFECT structurally
+unreachable — the D-152 teleology rung closes the class at
+load — D-150 v3's verdict now measured). The ten quality-open
+rows of the pack's re-check tables all hold their standing
+dispositions with their re-open conditions intact. Refused at
+the door: the pack as a repo reading surface (the
+convenience-copy law, D-024); UNDER_MODELLED/NO_MODELED_EFFECT
+as runtime statuses (load-closed; an authoring failure never
+a playable outcome); PARTIAL as a standing status (no
+consumer); any new card (the residue decomposes onto existing
+owners). Zero build-grade items; the queue untouched. The
+addendum: phases.md §6's intake-25 block. Detail: worklog
+iter-133 + git.
+
+### iter-132 · intake-24 — the cross-domain principle-transplantation synthesis routed: the six named principles content-matched against the routed records (all OWNED), the P2 universalization + knowledge-closure slice refused at the door, the residue parked as the principle index card — done (doc-only, the owner's research call)
+
+The owner's «проанализируй глубоко документ и оцени… что можно
+перенять и почему, что можно взять но с переработкой и адаптацией,
+какой потенциал есть? какие плюсы имеет и какие минусы (подводные
+камни)? есть ли ультимативное решение, которое нивелирует минусы
+и приумножит плюсы?» call over the uploaded
+`CROSS_DOMAIN_PRINCIPLE_TRANSPLANTATION.md` — a CROSS-INTAKE
+SYNTHESIS (not a fresh agenda like intakes 16..19, not a
+consolidated meta-report like intake-22): it compresses the
+routed records (PRESSURE_LIMIT → intake-11/D-147; procedural
+generation → intake-16/D-157; interface-oriented composition /
+Townscaper → intake-17/D-158; persistent groups/settlements →
+intake-19/D-160; the read-surface family → D-134/REFERENCES §10)
+into six named principles (P1 dual projection, P2
+stabilization-is-displacement + temporal debt, P3 causal motif,
+P4 group-as-causal-entity, P5 honest-but-incomplete read surface,
+P6 controlled irregularity) + a unified causal-leverage metric +
+four smallest verification slices. No fresh probe (the document
+claims no measurements — its claims are mappings onto the repo,
+and the mappings were verified against HEAD 37bcf6b, the routed
+blocks + the standing law text). The verdict set: the six
+principles ARE the standing architecture, each owned in
+operational form (P1 → L3/L11/L6 + the brief's never-invent law;
+P2 → D-147's law with res-1/weather-1/the thermometer minus as
+owners; P3 → D-158's verdicts verbatim; P4 → D-160's PROVEN
+scaffold; P5 → the DD/FP read-surface law; P6 → worldgen's
+`PASS_ORDER` incl. the relax pass + place-1's consistency law +
+intake-16's connectivity verdict); §4's metric = the correct
+composition of the standing discipline; §5's constraints =
+standing law verbatim; slices 1/3/4 route to res-1 / world-2 L2
+slice 3 / pack-4's T1 slice unchanged. The genuine deltas all die
+at the door or park: P2's universal MUST form REJECTED as engine
+law (over-generalizes the pressure-city pack's design constraint
+— compression converted "verified in one domain" into "applies
+uniformly to five"); the four extra P2 applications UNVERIFIED
+(no substrate, no demonstrated problem); slice 2
+(knowledge-closure-as-displacement) REJECTED as law (the
+knowledge system is a positive-record lattice — no "uncertainty"
+object to close; the authoring pattern expressible today as
+ordinary events); the P1–P6 names as repo law = label-matching
+(D-024). The residue crystallized as the PRINCIPLE INDEX CARD (6
+lines, each naming the owner + the over-application fence). Three
+micro-drifts recorded (the "brief cache" vs the assemble-fresh
+law; P4's capability-vs-expressible overstatement; §3's "medium"
+vs the PROVEN scaffold). Zero build-grade items; the queue
+untouched. The addendum: phases.md §6's intake-24 block. Detail:
+worklog iter-132 + git.
+
+### iter-131 · intake-11 re-entry — the pressure-city donor blueprint re-uploaded & re-verified: D-147 stands, zero new findings — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the re-uploaded `PRESSURE_LIMIT_donor_blueprint
+.md` — intake-11's own source document (section-by-section content
+match against phases.md §6's intake-11 block + the `pack-4` row;
+the external text stays outside the repo, the convenience-copy law;
+byte-identity unverifiable, content identity established at every
+load-bearing citation; the iter-122 intake13re re-entry precedent).
+Re-verified at HEAD e7147df: the displacement law, the Cooling
+Debt's weather-1 resolution, the gauge, legal exclusion, the
+objective-function factions, the lore hooks and the T1 slice all
+hold unchanged — the citations green (REFERENCES §10's DD/FP
+read-surface law; D-134's thermometer minus; depth-6/depth-7/
+name-1/chron-2/retr-1/st-6a landed; roads-1/res-1 owner-gated;
+D-140's cause_hook pairing; `tavern_pack`'s on_action). One drift
+self-resolved: D-147's micro-drift (a) — the AP crosswalk
+enforcement rung is now LIVE (pack-ci, D-152; the province pack's
+spine records the first committed consumer, D-153), so the donor's
+"landed" claim is true at HEAD; micro-drift (b) stands (no literal
+`meta.json` — the data rides the four files' blocks). The uncited
+lore halves (§2/§5/§7 + the faction details) are donor lore — pack
+data when a slot opens, never repo content. Verdict: NO ACTION —
+already routed; nothing re-routed, no new D-row. The addendum:
+phases.md §6's intake-11 block. Detail: worklog iter-131 + git.
+
+### iter-130 · intake-23 — the world-execution / spatial-topology / social-information architecture research routed: the §3.1 six engine questions answered by a fresh province-pack probe, the §2 intent-lifecycle answer set closed, the F/G scenario questions routed onto slice 3, the residue parked as the world-structure consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `ARCHITECTURE RESEARCH TASK —
+Unified World Execution, Spatial Topology, Social Information,
+Observability, Counterfactuals & Agent Gateway.md` (intake-21's
+own agenda expanded with the world-structure side; the external
+text and the method file stay outside the repo, the
+convenience-copy law). Verified at HEAD 131c477 (181 commits,
+1726+1 green, ruff clean, Python 3.12.14 the env pin). One fresh
+read-only probe through the public API answered the document's
+six §3.1 engine questions over the committed province pack
+(exits/between/region/adjacent/reachable/outside + the
+regeneration determinism check — the block's probe table);
+the document's own key invariant (no mechanically-meaningful
+empty space between authored anchors) CONFIRMED as already met
+by the lattice + place-1 + st-6a's derived prices. The §2
+intent-lifecycle question set closed mechanically (OCC/
+`projection_moved`/the windowed re-run/the noise floor/the
+beat re-roll/the queue key + `spot_available`) — the formal
+conflict taxonomy REJECTED as label-matching (the document's
+own "do not invent" clause). The §8 social-information ladder
+verified transition-by-transition. Scenarios F/G routed onto
+slice 3's consult material (the composition questions, never
+a politics/city subsystem); B's economy half stays res-1's
+row. The world-structure consult card parked (6 lines). Zero
+build-grade items; the queue untouched. Landed: D-164 +
+phases.md §6's intake-23 block + STATUS/worklog rows.
+Detail: D-164 + worklog iter-130 + git.
+
+### iter-129 · intake-22 — the ComfyUI/modularity consolidation research routed: the report's verdict set re-verified at a real clone, the six disputed items resolved, the mechanics-modularity residue parked as the modularity consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `canonsim_модульная_архитектура.md`
+(a CONSOLIDATED META-RESULT: several sessions' verdicts over the
+ComfyUI/node-graph question, most of which DNS-failed at clone —
+this session verified from a real clone, BASE_COMMIT 309aa17,
+180 commits; the external text and the method file stay outside
+the repo, the convenience-copy law). Every load-bearing claim
+verified at HEAD (the verification map in the block): the
+repo-facts half zero-error; the DAG claim's scope SHARPENED —
+`rules.json::systems` reads/writes covers the nine original
+passes, the newer families (weather/travel/echo/traits/cultures/
+names/budget) declare heterogeneous blocks. The verdict set:
+node-graph-as-runtime CONFIRMED-rejected (standing law
+re-derived); the replaceability formula OWNED zero-drift (the
+D-055 family + the dumb-terminal law); the three-senses frame:
+code/authoring OWNED, mechanics PARTIAL; the minimal system
+contract + the agent-speedup claim HYPOTHESIS (the 3..5 system
+decomposition the named next verification — parked on the
+modularity consult card, engine-1/presentation-1 the consumers,
+NO new row per the first-consumer law); the DAG viz rides
+mech-2's next touch; the ComfyUI lesson principle-level
+CONFIRMED, no donor registration; the v5 method file fully
+internalized (intakes 14..21 the evidence — nothing left to
+adopt). The report's six disputed items resolved (the block's
+micro-drifts). Zero build-grade items; the queue untouched.
+Landed: D-163 + phases.md §6's intake-22 block (the verification
+map + the verdict table + the card) + STATUS/worklog rows.
+Detail: D-163 + worklog iter-129 + git.
+
+### iter-128 · intake-21 — the unified-observatory / worldbuilder / agent-gateway research routed: the four-question observability frame adopted as the consult card, the counterfactual + postmortem sharpenings routed to their standing carriers — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что
+перенять можно, дополнить или улучшить… долгосрок важен и
+качество» call over the uploaded `Architecture Research Task —
+Unified Simulation Observatory / Worldbuilder / Agent
+Gateway.md` (an ARCHITECTURE-RESEARCH AGENDA — where intake-14
+asked the substrate questions, this document asks the
+observer-side ones: how the one world is inspected, explained,
+balanced, forked, authored, and safely operated by humans and
+agents; the external text and the method file stay outside the
+repo, the convenience-copy law). Every load-bearing claim
+verified against HEAD 4459500 (1726+1 green, ruff clean; the
+capability side verified at HEAD — mechanics matrix/trace/why/
+blast, the balance harness + its arms, checkpoints, the
+provenance family, chron-2's cause tree, the blind suite, the
+admission lint, mode G, testproto; no fresh runtime probe owed:
+the phase gates + the intakes 16..19 measurements own the
+capability evidence). The verdict set: the doctrine half
+CONFIRMED with zero drift; the §9 four-question frame ADOPTED as
+the parked observability consult card (STATE/CAUSALITY/
+KNOWLEDGE/COUNTERFACTUAL, each citing its proven instruments);
+the counterfactual half PARTIAL (blast the proven primitive; the
+first-divergence read routes to slice 3's outcome-divergence
+experiment; branch-from-checkpoint rides the owner-gated resume
+door); the single-event postmortem rides mech-2's next
+mechanics.py touch; the three-class balance taxonomy OWNED
+one-to-one by the standing instruments; the worldbuilder claim
+OWNED (litmus met by measurement; the UI deferred to bg-6/
+presentation-1); the agent-gateway principle CONFIRMED as
+standing law (the SoW surface rides engine-1/presentation-1);
+the detector family PARKED (first-consumer law); concept
+canonization: 4 already named, 3 correctly deferred; the
+dedicated formalization iteration REJECTED (every build-grade
+item owns a carrier or standing row). Zero build-grade items;
+the queue untouched. Landed: D-162 + phases.md §6's intake-21
+block (the capability map + the verdict table + the card) +
+STATUS/worklog rows. Detail: D-162 + worklog iter-128 + git.
+
+### iter-127 · intake-20 — the content-archetype / pack-strategy framework research routed: the 26-item reconciliation, the capability truth table at HEAD, the selection residue parked as the pack-candidate consult card — done (doc-only, the owner's research call)
+
+The owner's «используя research_method_v5.md => разберись что перенять
+можно, дополнить или улучшить… долгосрок важен и качество» call over
+the uploaded `canonsim — Content Archetype, Pack Strategy &
+Capability Audit.md` (a FRAMEWORK document — a durable method for
+choosing, classifying and admitting future content — unlike the
+mechanism researches of intakes 16..19; the external text and the
+method file stay outside the repo, the convenience-copy law). Every
+load-bearing claim verified against HEAD 362f167 (1726+1 green,
+ruff clean, all three committed packs load-green through the full
+admission lint; resources grep-verified absent from core — res-1's
+own row; no fresh runtime probe owed: the capability side is owned
+by the intakes 16..19 measurements + the phase gates). The
+reconciliation ran over the framework's own §36 "what should become
+permanent" list (26 items, grouped into 9 families), each checked
+per the method's four questions (principle / form / quality /
+transfer): ~four fifths OWNED outright — the core thesis is
+D-146's loop-change law + L9 + VISION §7 in measured form; the
+capability discipline is the intake verdict discipline of 16..19;
+the topology dimensions, the loop/signature/counterfactual family
+(TEST-1, T8, `--systems-minus`, intake-18's executed removal
+test), the admission test (the framework's own §31 orders using
+the repo's real rules — verified sufficient) and the order
+relationship all re-derive standing law. ONE genuine sharpening
+adopted: "LANDED BUT UNDER-TESTED" names the province-only
+single-consumer surfaces (the cultures block, spines, condensation
+travelers, price overrides) — a mechanism's architectural proof
+completes only when a SECOND materially different pack arms it
+(the AP-9 precedent's own ladder). The genuine NEW residue:
+portfolio orthogonality + behavioral yield per authored complexity
+(the SELECTION question — the floor was enforced, the ceiling
+question owned no row). The heavyweight artifacts (the 22-column
+standing matrix, a standing truth-table document, the
+17-candidate catalogue) REJECTED — parallel truth (D-024),
+premature per the framework's OWN §34 empirical-first law, the
+speculative-worldbuilding ban. The combined design: ONE parked
+pack-candidate consult card (9 lines — proof-value proposition /
+causal-archetype litmus / topology read / anchor read / novelty
+type / portfolio orthogonality / behavioral yield / evidence
+ladder / verdict vocabulary), consumed at the next pack-slot
+opening or pack intake, recalibrated by the first independent
+multi-pack authoring experiment; the §37 follow-up iteration NOT
+warranted (this intake is the routing; the card's validation is
+bound to world-2 L2 slice 3's experiment + the first pack slot).
+Zero build-grade items; the queue untouched. Landed: D-161 +
+phases.md §6's intake-20 block (both tables + the card) +
+STATUS/worklog rows. Detail: D-161 + worklog iter-127 + git.
+
+### iter-126 · intake-19 — the persistent-groups / settlement-development research routed: the substrate confirmed by a zero-core-edit settlement probe, the gaps routed to standing rows — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`Research task — Persistent Groups, Camps, Settlements and
+Emergent Territorial Development.md` (the external text stays
+outside the repo, the convenience-copy law). Every load-bearing
+claim verified at HEAD 2b168e9; ONE fresh probe RE-DERIVED the
+whole surface through the public API (the sandbox driver outside
+the repo, Rule 9): a tavern_pack copy carrying the settlement
+vocabulary as PACK DATA — a second transitions layer `build`, a
+tier-armed group, a faction goal, an on_action witness reaction,
+an erosion rule, a buildable location, a `raise_timber` action
+over the EXISTING ignite resolver — passed the full pack-ci
+admission lint (zero core edits) and ran seed 7 twice
+byte-identically. The measurements: the construction chain end
+to end incl. the MID-BUILD DEPARTURE (started → spread ×2 →
+usable → completed, all firing after the PC left — construction
+runs on world rules); the group tiers (the cold aggregate, the
+condensation's member_of births + the write-once tombstone, the
+census on the year turns); the group as actor through the one
+door (tier events + faction-goal waits); visibility (the lone
+witness, the blind NPC at ZERO records, the one-hop reaction,
+the telling at fidelity vague); decay (the erosion counter-event
+reverting `usable` while the irreversible `camp_finished`
+survived); the resume door byte-identical at a clean drain
+boundary (plus the edge finding: a split inside an autonomous
+silent tail shifts the session's next feed tick — a live-session
+semantic, never a determinism breach); the scale twin (50 cold
+groups / 100 unborn members / 5 crossings = 250 aggregate lines,
+3 per-member events — the D-112 cardinality law at settlement
+count). The verdict set over the brief's §1–§18 domains: the
+group/party scaffold PROVEN (one id all tiers; the member_of
+door; group-level and member-level intents through the SAME
+door; a `PartyEngine` SHOULD-NOT-ADD), construction lifecycle
+PROVEN (the fire chain IS the construction state machine;
+`castle` a derived classification), visibility PROVEN as
+substrate (a `SettlementDiscoverySystem` SHOULD-NOT-ADD),
+content-pack independence PROVEN by construction (the named
+Settlement/Party/Castle/Companion/BanditCamp engines all
+SHOULD-NOT-ADD), determinism/scale PROVEN; group dimensions
+mostly over-modeling, group disagreements REJECTED as
+first-class mechanics (ordinary consequences — the brief's own
+minimal-model preference); claims/ownership/legitimacy
+UNKNOWN/DEFERRED (no canonical state demonstrated needed;
+world-2 L2 slice 3 the natural first consumer). The genuine
+gaps ALL own standing rows: st-5 entity birth (the
+player-FOUNDED entity — `apply_event` rejects unknown ids), res-1
+(the material life), world-2 L2 slice 3 + slice 4 (the claim
+consumer + the calendar), and the membership writer (a resolver
+family, companion-1's natural shape). The final architectural
+question answered YES on the standing substrate — group + place
++ state-door + relations + knowledge + intents + events + macro
+cadence all landed, `structure` IS the transitions layer armed
+as data; the brief's §20 vertical slice is the probe's chain
+extended by those rows, its validation-target status holds.
+Zero build-grade items; the queue untouched. Landed: D-160 +
+phases.md §6's intake-19 block + STATUS/worklog rows. Detail:
+D-160 + worklog iter-126 + git.
+
+### iter-125 · intake-18 — the player-decision-mechanics research routed: the A–G candidate verdicts verified, three measurements re-derived at HEAD, the §6.1 cross-synthesis closed — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`RESEARCH_PLAYER_DECISION_MECHANICS.md` (the methodology
+document's §6.1 second-named file — the owner call that
+intake-17's tail note awaited, closing the §6.1 pair; the
+external text stays outside the repo, the convenience-copy law).
+Every load-bearing claim verified at HEAD 29b931b; three fresh
+measurements RE-DERIVED by a read-only probe through the public
+API (day1_full seed 125: the decision-loop census — 56 events /
+8 player steps / 13 PC knowledge records / 15 suspicion deltas /
+5 leverage mints, the epistemic loop end to end incl. the
+symmetric door rejection; the removal test executed literally —
+minus steal 56→31 events with ALL social-risk deltas vanishing
+while the arson chain survives, minus the final wait the ending
+loses the t=1080 watch handover; province_smoke seed 42: the
+derived legs 705/660/405/345, 14/14 PC records born on the five
+waypoint arrivals, the t=3240 transfer mid-leg). The verdict set
+over the brief's own A–G domains: time/timing PARTIAL (the
+informed half rides world-2 L2 slice 4's calendar),
+information/knowledge PROVEN as substrate (the "most distinctive
+layer" hypothesis INFERENCE + PARTIAL — compellingness not
+decidable in track A, presentation-1 the owner),
+social/suspicion PROVEN (the faction half awaits slice 3),
+travel/geography PROVEN, resources DEFERRED (res-1 owner-gated,
+unchanged), irreversibility PROVEN as law + live stakes,
+experimentation PARTIAL (the player-facing feedback half
+presentation-1's). The brief's core model re-derives the
+standing architecture layer by layer; its Do-not list is
+L13/INV-3/the measured-collapse discipline verbatim. The §6.1
+cross-synthesis with intake-17 CLOSED: one shared primitive
+(the door + the log + the brief), the states change
+actions/risks/costs/information at the mechanism level
+(measured), no new owner warranted; the one genuine residue is
+the brief's next-decision test as an evaluation discipline for
+world-2 L2 slice 3's outcome-divergence experiment (count
+divergent NEXT-DECISION surfaces, not only divergent event
+paths; the ORDER owner decides). Zero build-grade items; the
+queue untouched. Landed: D-159 + phases.md §6's intake-18 block
++ STATUS/worklog rows. Detail: D-159 + worklog iter-125 + git.
+
+### iter-124 · intake-17 — the interface-oriented procedural composition research routed: the five candidate principles verified, two measurements re-derived at HEAD — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`CANONSIM_INTERFACE_ORIENTED_PROCEDURAL_COMPOSITION_RESEARCH.md`
+(the methodology document's §6.1 first-named file — the owner call
+that intake-16's tail note awaited; the external text stays outside
+the repo, the convenience-copy law). Every load-bearing claim
+verified at HEAD b748923; two fresh measurements RE-DERIVED by a
+read-only probe through the public API (60 seeds → 60/60 distinct
+motif-binding sets — the authored feud/quarrel vocabulary fixed,
+the bindings per-seed; the derived edge prices 54/60 distinct
+vectors, per-edge 6–7 values). The verdict set: interface state
+PARTIAL (static PROVEN, dynamic MISSING-as-runtime — the
+space-pack return + res-1 its owners, a generic InterfaceState
+SHOULD-NOT-ADD), secondary topology REJECTED-as-subsystem (the
+one-graph + derived-projections + pack-overlay shape IS the
+standing answer), constraint propagation NO ACTION (the selection
+surfaces are deterministic small mechanisms; WFC stays out),
+causal motif fitting PARTIAL (PROVEN at genesis — the chronicle
+collections; the runtime TRADE_BLOCK form is res-1's own declared
+shape; cross-pack reuse is pack-side authoring under D-142),
+multi-node motifs PROVEN-as-primitives (collections/arcs/cascades
+— domain-owned). Zero build-grade items; the queue untouched;
+res-1 + world-2 L2 slice 3/4 stay the priority test cases on
+their standing rows. The §6.1 cross-synthesis with
+RESEARCH_PLAYER_DECISION_MECHANICS stays OPEN (owner-call-gated).
+Landed: D-158 + phases.md §6's intake-17 block + STATUS/worklog
+rows. Detail: D-158 + worklog iter-124 + git.
+
+### iter-123 · intake-16 — the procedural-generation research routed: the four domain verdicts re-verified, three measurements re-derived at HEAD — done (doc-only, the owner's research call)
+
+The owner's «отработай по второму файлу» call over the uploaded
+`PROCEDURAL_GENERATION_RESEARCH.md` (the methodology document's §10
+example, now in its grounded later form — the §13 spike rides the
+province nouns; the external text stays outside the repo, the
+convenience-copy law). Every load-bearing claim verified at HEAD
+b48ab18; the three measurement claims RE-DERIVED by a read-only
+probe through the public API (200 seeds → 200/200 distinct topology
+probe signatures at the pack's six claimed anchors, the height
+dimension alone 200/200; 60 seeds → 60/60 distinct history
+signatures; the 3-member faction collapse 8 raw states → 3
+outcomes — the small formula's floor measured). The verdict set:
+topology CONFIRMED (standing practice; TECH_NOTES §12 owns the
+numbers), history CONFIRMED (the sparse-anchors cap already
+authored — the 150y/5 chronicle shape), social PARTIALLY CONFIRMED
+(the machinery landed; the outcome-divergence experiment an
+evaluation discipline, world-2 L2 slice 3 the natural consumer, the
+ORDER owner decides), resources PROVISIONALLY HIGH-VALUE (res-1
+owner-gated; the grounded spike's 729→55/21/73 offline evidence +
+the one-knob causal-output-density metric recorded, MISSING-as-
+runtime). Zero build-grade items; the queue untouched. Landed: D-157
++ phases.md §6's intake-16 block + STATUS/worklog rows. Detail:
+D-157 + worklog iter-123 + git.
+
+### iter-122 · intake-13 re-entry — the open-ended actions review re-uploaded & re-verified: D-150 stands, zero new findings — done (doc-only, the owner's research call)
+
+The owner's «отработай по файлу» call over the re-uploaded
+architecture review — intake-13's own source document (title +
+section-by-section content match against phases.md §6's intake-13
+block; the external text stays outside the repo, the convenience-copy
+law; byte-identity unverifiable, content identity established at
+every load-bearing citation). Re-verified at HEAD 1a9efaf: the
+doctrine half and all four routed verdicts hold unchanged — the
+code-level anchors (core/loop.py's door/OCC/chain semantics + the
+st-6a price law; core/pack.py's teleology rung; PARSER_SPEC's grammar
+snapshot + nearest-valid menu; mechanics trace/why/blast; the
+knowledge model's who/channel/fidelity records; the parked rows
+res-1/roads-1/since-1/parse-2/engine-1 all standing owner-gated).
+Two pins strengthened since D-150 was written: the §1 phase-6 litmus
+now carries the gate verdict itself (D-151 PASS) + a second measured
+instance (the province pack D-153/154); the closure law's preferred
+cure is now live enforcement (D-152's dead-action-type rung). The
+re-uploaded v2 methodology document re-derives intake-15's record
+with no new drift. Verdict: NO ACTION — already routed; nothing
+re-routed, no new D-row. The addendum: phases.md §6's intake-13
+block. Detail: worklog iter-122 + git.
+
+### iter-121 · intake-15 — the narrative-design research dossier routed — done (doc-only, the owner's research call)
+
+The routing verdict set — the doctrine half confirmed (the 18 proposed
+design laws re-derive the standing law families, L1–L14/EPIST-1/D-005/
+the brief contract/the knowledge model, zero factual drift), the
+instrument half routed with zero build-grade items: the 7 gaps decompose
+(five PROVEN as landed instruments — the M-family, `payoff_latencies`,
+M4, mechanics trace/why/blast, the AP-9 spine, the director's
+door-construction; one PARTIAL — breadcrumb density's recovery half is
+since-1's own standing row); the NQ vocabulary and the NLAW-* family
+refused as second label sets (D-024); the AP-01..AP-10 anti-pattern
+numbering collides with the standing live-char crosswalk AP family —
+the genuine new finding, the anti-patterns route as the block's
+verdicts; the 12-iteration program decomposes onto standing instruments
+and owner-gated rows (the standalone audit docs refused); the 8
+fixtures map onto the committed corpus (F8 = since-1). The five
+uncovered GDC sources enter REFERENCES §10 (the intake-8/9/10
+precedent). The methodology document confirmed as a re-derivation of
+the standing intake discipline; its two named research files stay
+outside (not uploaded this session). D-156; the block: phases.md §6's
+intake-15. Detail: worklog iter-121 + git.
+
+### iter-120 · intake-14 — the causal-architecture research bootstrap routed — done (doc-only, the owner's research call)
+
+The routing verdict set — the doctrine half confirmed (intake-13's own
+ground, zero factual drift), five architecture questions routed with zero
+build-grade items: causal compression CONFIRMED as standing practice (L3 +
+the authored-facts-win boundary, the travel price law the strongest landed
+instance); simulation levels CONFIRMED (one world, resolution strategies,
+never second engines); large-scale aggregation UNRESOLVED (the substrate
+landed, the 1k–10k battle claim unmeasured — parked, the first
+combat-bearing pack decides); stealth PARTIAL (the epistemic half landed,
+the emission/propagation half authored per-action data — generalization a
+first-consumer question); materialization CONFIRMED at the law level (the
+D-054 slot shape the parent law, four landed instances; entity-birth
+promotion deferred to st-5's first consumer). The bootstrap's §4 framing
+corrected (texture promotion IS the general law already extended); its §12
+outcome vocabulary re-routes to D-150's standing verdicts. D-155; the
+block: phases.md §6's intake-14. Detail: worklog iter-120 + git.
+
+### iter-119 · world-2 L2 (slice 2: the cultures half) — done
+
+The wave plan's cultures slice, the owner's fresh call «начинай работу
+по планам, что осталось незакрытого и логичнее всего было бы начать
+сейчас то и делай» (the iter-117/118 precedent phrase — STATUS Next
+step's own readiness pick): the two name-1 phonotactic profiles
+(lowland_soft the river tongue vs hill_hard the croft tongue — name-1's
+FIRST committed arming, the posture made checkable: sonorant codas and
+no clusters vs stop codas and clustered onsets, 2-3 vs 1-2 syllables),
+the condensation travelers (`grp_road_traffic` anchored on the load
+road — the road-traffic group with three `generated_name` members, the
+reachability law riding `condense_event`, the population tier's
+`macro_event`; the FIRST beat materializes them: t=360, the drawn
+names Sathranthaem/Wathru/Drist, one hill tongue among the lowland
+pair), the custom vocabularies + prohibition sets — the `cultures`
+block (the budget-block precedent: load-time lint, zero runtime
+surface; the anti-rot vocabulary walk, the culture↔name keying, the
+AP-8 prohibition surface's first consumer — the guild's shelter law
+over Maren's flaw, the hills' wergeld memory over Garrick's, both
+doubly consumed) + `_cultures` in `core/pack.py` + the AP-8 consumed
+union. The T1 twin +4 (the first-beat condensation pin, the born-names
+tale pin, the tongue-posture pin, the committed-instance pin) +
+`tests/test_cultures.py` +15 (the refusals + the consumed-union green
+twin) + PROVINCE_STOPLIST +3; the golden fixture regenerated (the
+additive delta: +1 condensation, +6 traveler decays — 1726+1 green,
+ruff clean, zero corpus price outside the province). Detail: D-154 +
+worklog iter-119 + git.
+
+### iter-118 · world-2 L2 (slice 1: the skeleton) — done
+
+The province pack's opening slice, the owner's fresh call «начинай
+работу по планам, что осталось незакрытого и логичнее всего было бы
+начать сейчас то и делай» (the iter-117 precedent phrase — STATUS
+Next step's own readiness pick: world-2 L2 the natural next pick):
+`content/province_pack/` — the Sarrow Vale, ORIGINAL nouns (D-130's
+posture tier; no CREDITS sidecar). The skeleton: the 324-site
+generated surface (extent 144, the 200–600 province band; the six
+settlements claimed, `max_edge_span` 4 — the artery's lattice), the
+travel legs derived 345–705 (hours-to-a-day, the L2 scale claim), the
+cast with SPINE records (the AP crosswalk's first committed consumer
+— five flaws, all consumed, AP-8; the `budget` block's first arming,
+AP-1), the feud/quarrel chronicle, the T1 twin (+10:
+`tests/test_t1_province.py` — byte-identity, the golden fixture, the
+price pins, the mid-travel transfer at t=3240 inside the Malby→
+Thornmill leg) + PROVINCE_STOPLIST + the packci third-pack pin;
+1707 passed + 1 skipped, ruff clean, zero corpus price (a new
+directory — the committed corpora byte-untouched). The wave plan (the
+cultures, the triangle, the deep history, the calendar) rides the
+world-2 row below. Detail: D-153 + worklog iter-118 + git.
+
+### iter-117 · pack-ci — done
+
+The admission-lint rungs LANDED (the owner's fresh call «начинай работу
+по планам… что осталось незакрытого и логичнее всего — то и делай» —
+STATUS Next step's own readiness pick): the PACK_SPEC §5/§6 rows as
+enforcement in `core/pack.py` (`_teleology` + `_live_char`, the spine
+shape in `_entities`, the atomicity law in `_predicate_error`,
+`STATE_MUTATING` at `core/resolvers.py`'s own owner) +
+`tests/test_packci.py` (28: the crafted-twin refusals + the green pins
+— both committed packs, the scaffold, the complete v0.1 twin) + the
+68a twins' compliance pass (the stripped weather family takes its
+template lines — 11 test helpers + the harness's `_DROP_DEAD_LINES`
+map + the factions muster's attribution row); 1696 passed + 1 skipped,
+ruff clean, zero corpus price (load-time only). Detail: worklog
+iter-117 + git.
+
+### iter-116 · phase-6 gate — done (verdict: PASS, D-151)
+
+Full ROADMAP §5 protocol re-run on the owner's convening gate call
+(«давай уже свой гейт-колл 6 фазы или что там, приступай к работе и
+незакрытым задачам»): 1668 passed + 1 skipped + ruff clean (Python
+3.12.14, the env pin; verified BEFORE working at HEAD d4ec8dd); the
+committed playscripts byte-green on identical seeds — plumbing_smoke
+(42) + road_smoke (42, road_pack) byte-identical to their committed
+fixtures (the road side's evidence the T1 twin itself; the header's
+commit field the only delta — '0000000' pinned in fixtures per the T1
+law); the seed-125 pair ON M1=0.518 / M2=0.200 (56 events — iter-102's
+numbers reproduced exactly) / OFF T8 24 chains ≥ 3, M5 0.849; T7 both
+chronicles read as stories (the road chronicle rendered for the
+owner's read — the genesis + the four history lines + the mid-route
+watch change + the boatman's ramble; the tavern: the theft → the rumor
+spread → the watch change → the papers → the arson day); no
+kill-criteria hit — the module contract (the core/pack split, D-142)
+proven right by the reskin day (D-149: 14m24s, zero core edits,
+git-verified). The §5 step-6 staleness pass: REWORD AGENTS §1's phase
+frame + the FAQ cap-laws entry, KEEP the rest, DROP none. The doc
+debts paid at the gate: DECISIONS collapsed 44→30 (the D-034
+families), the STATUS tombstone trim + the FAQ resync (639→567),
+TASKS collapsed (this pass — the iter-103..115 sections), README's
+Status section collapsed to per-phase summaries; phases.md /
+TECH_NOTES / TEST_PLAN stay over the 600 cap on §6.1 substance (the
+intake blocks are the engine-1 consult material; the measured numbers
+are those files' own function) — the rationale in worklog iter-116.
+ROADMAP §2 flipped CLOSED: the roadmap's phase ladder COMPLETE
+(0..6); the open build rows (roads-1, res-1, pack-ci, world-2 L2,
+since-1) stay owner-gated backlog rows. Detail: D-151 + worklog
+iter-116 + git.
 
 ### iter-115 · intake-13 — the open-ended actions & honest-simulation review routed — done (doc-only, the owner's research call)
 
@@ -610,11 +1447,9 @@ phase 2 unlocked. Detail: worklog iter-26 + `docs/DECISIONS.md` D-058.
   a priced pattern via a counted fold (the ref-13 GHOST-layers
   counter pattern); owner's call: alongside or instead of the
   pack-grammar door.
-- `st-3` groups & simulation LOD — done (phase 5, as `depth-7`: the
-  group entity + tiers + `member_of`, condensation, cold aggregates,
-  mobility — iter-93, D-127; the GROUP_SPEC sketch absorbed: the
-  mechanism owners `docs/blueprint/phases.md` §5 + `core/groups.py`
-  + tests/test_groups.py. Detail: the phase-5 ledger below.
+- `st-3` groups & simulation LOD: one id across tiers, aggregate
+  macro-clock events with cardinality, condensation on crossing
+  (GROUP_SPEC trigger = phase 5 or owner request; blueprint §5).
 - `st-4` the call budget (head + brief + tail + thinking + output ≤
   MECW target) + the transcript-tail contract + thinking-as-ephemeral-
   texture (the narrator-boundary iteration; blueprint §1) + the Script
