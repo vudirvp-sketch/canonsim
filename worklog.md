@@ -14,6 +14,87 @@
 > since iter-5).
 ---
 
+iter-139 · 2026-09-19 · world-2 L2 (the verdict) — the
+owner's convening call «я решил что следует world 2 закончить,
+вердикты вынести» (the session's second half, after intake-26's
+adoption pass; doc-only, zero code, zero corpus price)
+- the two-level gate's level-2 question ANSWERED: the honest scope
+  DELIVERED at the measured band — the anti-collection half
+  MEASURED (one ordinary verb → three systems → irreversible,
+  divergent, route-stable state: the A/C/D/H ledger), the
+  anti-reskin half MEASURED (L1's 14m24s reskin day vs the
+  weeks-authored province: the spine + the vertex + the year-run
+  almanac), the depth's DISTRIBUTION the recorded residue (B/F/G
+  partial — the concentration at the triangle's vertex, the
+  option surface 1-of-6, the 48 turns the one found-and-named
+  counterexample); the verdict's law: the gate asks the honest
+  scope, never uniform distribution — deferring until B/F/G close
+  would be the completeness-smuggling the audit refused (no open
+  row a verdict input)
+- the residue's routing: the future depth consumers the
+  content-side rows (F4's promotion events — pack-1/pack-4; the
+  cadences' decision half a BUILD question) — world-2 never
+  reopens for slices; the two-level gate COMPLETE (L1 PASS
+  iter-116 D-151; L2 DELIVERED iter-139 D-172); KI#86 deleted
+  per AGENTS §5 (closed iter-136, past the window)
+- docs: DECISIONS D-172, TASKS the world-2 row done (the wave
+  plan + iter-109's answers compressed to their pointers — the
+  detail in the iter sections + phases.md §6 + the D-rows) + the
+  iter-139 section, phases.md §6 the verdict block, STATUS re-pin
+  (iter-137's record evicted per the two-record convention) + the
+  Next step, this entry (iter-129 evicted, verified in this
+  edit); 1754+1 green, ruff clean after; doc-only, the corpora
+  byte-untouched
+- Caps: STATUS 606 / TASKS 1733 / DECISIONS 85 lines (51 rows —
+  over the 30 cap on the §6.1 substance precedent until the next
+  gate collapse) / phases 3786 / worklog 10 entries (iter-129
+  evicted here, verified in this edit) — the over-cap files ride
+  the documented §6.1 substance precedent
+
+iter-138 · 2026-09-19 · intake26 — the owner's «перед этим
+вероятно стоит рассмотреть дополнительно идеи с файла
+VERIFICATION_LENSES_RESEARCH.md» call (the world-2-verdict session's
+first half; doc-only, zero code, zero corpus price — the D-155..D-170
+intake precedent, the research file external per the convenience-copy
+law)
+- verified BEFORE working (1754+1 green, ruff clean, HEAD 8dc5436,
+  Python 3.12.14 the env pin); the document's FACT rows content-matched
+  at HEAD (TEST_PLAN's separation; mechanics.py matrix/trace/why/blast;
+  metrics.py M1–M5 + the four families; the five named test files;
+  intake-21's card; intake-24's six principles; the res-1 offline
+  one-knob spike's record) — zero factual drift; the doc's own verdict
+  PARTIALLY CONFIRMED verified: the mechanisms all owned, the gap the
+  compact selection grammar (iter-137's from-scratch re-derivation the
+  confirming instance)
+- ADOPTED (the long-term quality call): TEST_PLAN §9 — the claim
+  packet (oracle + falsifier mandatory; the disposition vocabulary the
+  repo family, never a numeric score) + the claim-shape → instrument
+  selection table (self-describing names, standing instruments only) +
+  the independent-re-derivation oracle law + the order-probe contract
+  law; research-derived, a routing aid, never a gate; the full
+  ten-lens/nine-prism catalog held in the intake-26 block (the
+  one-pass record, D-024); the stale-at-HEAD corrections recorded (the
+  door battery = the next-decision census iter-137; the
+  first-divergence read consumed iter-135; the A–H ledger the packet's
+  standing instance)
+- refused at the door: the lens/prism names as law (label-matching,
+  the intake-24 precedent), any executable helper / registry / score /
+  runtime form (the doc's §10 reject list = standing law),
+  REFERENCES.md as the surface (the external-source catalog); the
+  measurement obligation standing: the next owner-gated build row's
+  verification plan = ONE claim packet (≤3 lenses, ≤2 prisms); KI#85
+  deleted per AGENTS §5 (closed iter-135, past the window)
+- docs: phases.md §6 the intake-26 block, TEST_PLAN §9,
+  AGENT_NAVIGATION §1, DECISIONS D-171, TASKS the iter-138 section,
+  STATUS re-pin (iter-136's record evicted per the two-record
+  convention), this entry (iter-128 evicted, verified in this edit);
+  1754+1 green, ruff clean after; doc-only, the corpora byte-untouched
+- Caps: STATUS 652 / TASKS 1726 / DECISIONS 83 lines (50 rows — over
+  the 30 cap on the §6.1 substance precedent until the next gate
+  collapse) / phases 3752 / TEST_PLAN 837 / worklog 10 entries
+  (iter-128 evicted here, verified in this edit) — the over-cap files
+  ride the documented §6.1 substance precedent
+
 iter-137 · 2026-09-19 · world-2 L2 (the depth audit) — the
 owner's research call over the uploaded research_method_v5 task
 (the three lens documents — Cadwell / Ingold / Haggis — external
@@ -344,102 +425,3 @@ itself external per the convenience-copy law)
   are the engine-1 consult material), trim at the next gate
   collapse
 ---
-iter-129 · 2026-09-18 · intake22 — the owner's «используя
-research_method_v5.md => разберись что перенять можно, дополнить
-или улучшить… долгосрок важен и качество» research call over the
-uploaded ComfyUI/modularity consolidated report (5 files doc-only,
-zero code, zero corpus price — the D-155..D-162 intake precedent;
-the method file itself external per the convenience-copy law)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 309aa17,
-  Python 3.12.14 the env pin) — from a REAL clone (BASE_COMMIT
-  309aa17, 180 commits: the report's own access record notes most
-  consolidated sessions DNS-failed; its disputed BASE_COMMIT item
-  resolves here); the repo-facing claims verified claim-by-claim:
-  3 packs, 38 core/ modules + sim/systems reserved,
-  test_architecture's boundary, mechanics matrix/trace/why/blast
-  (no viz subcommand — the report's tooling-gap claim accurate),
-  pack_doctor/balance_harness, PACK_SPEC's zero-engine-change
-  criterion + the copy-from/abstract DSL, D-149's 14m24s reskin,
-  engine-1/presentation-1/roads-1/pack-3/pack-4 standing, L13/L11,
-  the dumb-terminal law, the D-055 file protocol
-- the sharpened finding: rules.json's systems reads/writes DAG
-  covers the NINE original passes (time/position_visibility/
-  relations/knowledge/states/fire/crime_watch/director/notes) —
-  the newer families (weather/travel/echo/traits/cultures/names/
-  budget + macro/lod/factions wiring) declare heterogeneous
-  top-level blocks + per-family lint + code-owned wiring: the
-  report's "mechanics modularity" gap CONFIRMED at the form level
-- the verdict set (the method's four questions + combined design):
-  node-graph-as-runtime rejection CONFIRMED (INV-1/2 + VISION §7 +
-  the no-second-engine law); the replaceability formula OWNED
-  zero-drift (D-055 family + dumb-terminal + L11); code/authoring
-  modularity OWNED; the minimal system contract HYPOTHESIS (parked
-  on the modularity consult card — the 3..5 system decomposition
-  the named verification, engine-1/presentation-1 the consumers,
-  no new row); the viz rides mech-2; the ComfyUI lesson
-  principle-level CONFIRMED (explicit attachment points +
-  contracts-before-perimeter = the doors + the admission lint), no
-  donor registration; the v5 method file FULLY INTERNALIZED
-  (intakes 14..21 the evidence) — nothing left to adopt from it;
-  the report's six disputed items resolved (the block's
-  micro-drifts)
-- docs: phases.md §6 the intake-22 block (the verification map +
-  the verdict table + the modularity consult card), DECISIONS
-  D-163 (42 rows — over the 30 cap on the §6.1 substance
-  precedent until the next gate collapse), TASKS the iter-129
-  section, STATUS re-pin + Next step (mech-2 now also carrying
-  intake-22's viz-export form), this entry (iter-119 evicted per
-  the cap, verified in this edit; 10 held). The build queue
-  untouched — nothing unpins, nothing reorders. Doc-only. Caps:
-  DECISIONS 42 rows / phases ~2740 — over-cap files ride the
-  documented §6.1 substance precedent (the intake blocks are the
-  engine-1 consult material), trim at the next gate collapse
----
-iter-128 · 2026-09-18 · intake21 — the owner's «используя
-research_method_v5.md => разберись что перенять можно, дополнить
-или улучшить… долгосрок важен и качество» research call over the
-uploaded unified-observatory / worldbuilder / agent-gateway
-architecture-research task (5 files doc-only, zero code, zero
-corpus price — the D-150..D-161 intake precedent; the method file
-itself external per the convenience-copy law)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD 4459500,
-  Python 3.12.14 the env pin); the observer-side capability claims
-  verified at HEAD: scripts/mechanics.py (matrix/trace/why/blast —
-  the shadow-replay law, the two-arm same-seed blast with the
-  fingerprint EQUAL/DIVERGED read, both arms replay from t=0 by
-  design), scripts/balance_harness.py (the arms: --pacing/
-  --directors/--systems-minus + M1–M5 + payoff latency + beat
-  tension), core/checkpoint.py + scripts/checkpoint.py
-  (verify-by-refold), core/metrics.py (m1..m5, emergent_chains,
-  eventless stretches, payoff_latencies, beat_tension), the
-  provenance family in EVENT_SCHEMA §7 (cause + cause_intent +
-  cause_hook), chron-2's genesis cause tree in core/worldgen.py,
-  core/knowledge.py + the blind suite + L6/EPIST-1 (the FAQ law),
-  the admission lint (D-152), mode G (VISION §4 — offline, through
-  pack CI), testproto's three layers (TEST_PLAN §8)
-- the verdict set (the method's four questions + combined design
-  per finding): the doctrine half CONFIRMED zero-drift; the §9
-  four-question frame (STATE/CAUSALITY/KNOWLEDGE/COUNTERFACTUAL)
-  ADOPTED as the parked observability consult card; the
-  counterfactual half PARTIAL (blast proven; the first-divergence
-  read → world-2 L2 slice 3's experiment; branch-from-checkpoint →
-  the owner-gated resume door); the single-event postmortem →
-  mech-2's ride; the three-class balance taxonomy OWNED one-to-one
-  (T-suite+lint / balance-1 / T8+corpus+heartbeat); worldbuilder
-  OWNED (litmus met by measurement; the UI → bg-6/presentation-1);
-  the agent-gateway principle CONFIRMED as standing law (the SoW
-  surface → engine-1/presentation-1); the detector family PARKED
-  (first-consumer law); 4 concepts already named, 3 deferred; the
-  formalization iteration REJECTED — the God Tool, standing
-  truth-table docs, new label sets all refused (D-024 + the
-  document's own §12.C)
-- docs: phases.md §6 the intake-21 block (the capability map +
-  the verdict table + the observability consult card, 6 lines),
-  DECISIONS D-162 (41 rows — over-cap on §6.1 substance until
-  the next gate collapse), TASKS iter-128, STATUS re-pin + Next
-  step (slice 3's experiment now also carrying the
-  first-divergence read; mech-2 carrying the postmortem form),
-  this entry (iter-118 evicted, verified in this edit; 10 held)
-- phases.md 2530→2624 lines, TASKS 1242→1305, DECISIONS 72→73,
-  STATUS 597→593 — the doc family's growth rides the standing
-  §6.1 substance precedent, documented here

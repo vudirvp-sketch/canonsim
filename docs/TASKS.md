@@ -26,6 +26,75 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-139 · world-2 L2 (the verdict) — the two-level gate's level-2 question ANSWERED on the owner's convening call: the honest scope DELIVERED at the measured band, the depth's distribution the recorded residue, the row closed — done (doc-only, the owner's «я решил что следует world 2 закончить, вердикты вынести» directive — the session's second half, after intake-26's adoption pass)
+
+The gate question (STATUS iter-137's own pin): is the deep second
+world's honest scope delivered — VISION §7's twin, "a deep unique
+world takes weeks; the slices are the weeks made explicit" — the
+weeks now spent? ANSWERED: **DELIVERED at the measured band.** The
+verdict's ground, all cited to the standing owners (never restated —
+D-024): the anti-collection half MEASURED (the depth audit's A/C/D/H
+ledger — one ordinary verb composes through three systems into
+irreversible, divergent, route-stable state); the anti-reskin half
+MEASURED (L1's 14m24s reskin day vs the weeks-authored province —
+the spine, the vertex composition, the year-run almanac, the T7
+reads); the depth's DISTRIBUTION the recorded residue (B/F/G partial
+— the concentration at the triangle's vertex, the option surface
+1-of-6 at the probed band, the 48 market/fair turns the one
+found-and-named counterexample). The verdict's law: the gate asks
+the HONEST scope, never uniform distribution — VISION §7's own
+reality row separates the reskin day from the weeks, and the audit
+measured exactly that separation; deferring until B/F/G close would
+be the completeness-smuggling the audit refused (the critical
+separation: no open row a verdict input). The residue's routing:
+the future depth consumers the content-side rows — the pack slots'
+promotion events (F4: pack-1/pack-4), the cadences' decision half a
+BUILD question (arming one consumer on a market/fair cadence) —
+world-2 never reopens for slices. The two-level gate COMPLETE (L1
+PASS iter-116, D-151; L2 DELIVERED iter-139, D-172); the world-2
+row flips done (the wave plan + the iter-109 answers compressed to
+their pointers — the detail lives in the iter sections + phases.md
+§6 + the D-rows). KI#86 deleted per AGENTS §5 (closed iter-136, past
+the two-iteration window). 1754 passed + 1 skipped, ruff clean
+(Python 3.12.14; verified before working at HEAD 8dc5436 and
+re-verified after; doc-only, the corpora byte-untouched). Detail:
+D-172 + the phases.md §6 verdict block + worklog iter-139.
+
+### iter-138 · intake26 — the verification-lenses research routed: the selection grammar adopted in the compact form (TEST_PLAN §9 — the claim packet + the claim-shape → instrument table), the full catalog held in the intake block, the measurement bound to the next build row — done (doc-only, the owner's «перед этим вероятно стоит рассмотреть дополнительно идеи с файла VERIFICATION_LENSES_RESEARCH.md» call — the world-2-verdict session's first half)
+
+The document's question, narrower than research_method_v5's
+investigation lifecycle: what reusable verification vocabulary and
+experiment shapes should future research use AFTER the implementation
+claim has been made? Its own verdict — PARTIALLY CONFIRMED — verified
+at HEAD: the mechanisms ALL owned (the FACT rows content-matched one by
+one), the missing piece the compact selection grammar — which existing
+instrument falsifies which claim; the repo's own history the confirming
+instance (iter-137's audit re-derived its verification form from
+scratch; the intake family's verdict tables each re-derived the
+instrument mapping). The adoption: `docs/TEST_PLAN.md` §9 — the CLAIM
+PACKET (oracle + falsifier mandatory; the disposition vocabulary the
+repo family, never a numeric score), the selection TABLE (self-describing
+names, standing instruments only), the independent-re-derivation oracle
+law (a checker sharing the implementation's mistake is not an oracle),
+the order-probe contract law (where order is semantic, invariance is NOT
+the oracle) — research-derived, a routing aid, never a gate. The full
+ten-lens/nine-prism catalog held in the intake-26 block (phases.md §6,
+the one-pass record — D-024); the stale-at-HEAD corrections recorded
+(the door-surface battery = the next-decision census landed iter-137;
+the first-divergence read consumed iter-135; the A–H ledger the
+packet's standing instance). Refused at the door: the names as law
+(label-matching, the intake-24 precedent), any executable helper /
+registry / score / runtime form (the document's own §10 reject list =
+standing law), REFERENCES.md as the surface. The measurement obligation
+standing: the next owner-gated build row (res-1/pack-1 the natural
+candidates) writes its verification plan as ONE claim packet (≤3
+lenses, ≤2 prisms) — that run decides any executable helper. KI#85
+deleted per AGENTS §5 (closed iter-135, past the two-iteration window).
+1754 passed + 1 skipped, ruff clean (Python 3.12.14; verified BEFORE
+working at HEAD 8dc5436 — the numbers identical — and re-verified
+after; doc-only, the corpora byte-untouched). Detail: D-171 + the
+intake-26 block + TEST_PLAN §9 + worklog iter-138.
+
 ### iter-137 · world-2 L2 (the depth audit) — the verdict material: the three lens documents taken as claims (Cadwell / Ingold / Haggis), the converged depth unit, the fresh measurements (the door-surface census seed 53 / the reorder arm seed 53 / the calendar ablation seed 42), the A–H ledger, the critical separation — done (doc-only, the owner's research call over the uploaded research_method_v5 task)
 
 The method's question — is world-2 L2 a genuinely deep second world,
@@ -941,66 +1010,39 @@ D-105..D-133 family row + phases.md §5)
 > owner-gated backlog rows, the ORDER owner decides)
 
 - `world-2` · the second world, the phase-6 gate's own instrument —
-  **L1 done (iter-112, D-149 — the reskin day landed: `content/road_pack/`
-  the TRAVEL-loop reskin on the open generic stack (SRD 5.1 nouns,
-  CREDITS sidecar), the clock 14 min 24 s from first scaffold to green
-  T-suite, ZERO core edits — git-verified; the T1 twin
-  `tests/test_t1_reskin.py` + the golden fixture + the stoplist
-  extension (ROAD_STOPLIST); the phase-6 exit criterion "a new T1
-  reskin without core edits, ≤ 1 day" MET by measurement — the gate
-  verdict PASS iter-116, D-151, on the owner's convening call —
-  ROADMAP §2 CLOSED); L2 OPENED iter-118, the wave plan below
-  (slice 1 done — the skeleton, D-153; slice 2 done — the cultures
-  half, D-154)** — the TWO-LEVEL gate, level 2
-  the deep second world (weeks — VISION §7's honest twin): a fantasy
-  province at pack scale, authored pillars over a generated surface
-  (phases.md §6 — D-130's province sketch; the st-6a/travel + name
-  profiles arming ride this row's cultures half).
-  **The L2 wave plan (D-153 — the weeks made explicit; each slice a
-  row, the ORDER owner decides):** slice 1 (iter-118, DONE) the
-  skeleton — the Sarrow Vale's 324-site surface, the settlements on
-  the travel lattice, the spine records (the AP crosswalk's first
-  committed consumer), the T1 twin; slice 2 (iter-119, DONE) the
-  cultures half — the two name-1 phonotactic profiles (lowland soft
-  vs hill hard — name-1's first committed arming), the condensation
-  travelers (the road-traffic group with
-  `generated_name` members, the reachability law riding
-  `condense_event`), the custom vocabularies + prohibition sets
-  (the `cultures` block, belief-as-rules data, the Disco Elysium
-  shape — AP-8's third consuming surface); slice 3 (iter-135, DONE —
-  D-168) the triangle — the factions (the river guild / the old
-  families / the garrison, depth-6's first committed arming over the
-  settlement cast) + the deep feud history (the cause-tree chronicle
-  re-cut — feud/quarrel/exodus — + the wergeld claims seeding the
-  director's buffer) + the composed outcome-divergence experiment
-  (F3's four read surfaces, seed 53 — the claim/legitimacy first
-  consumer riding the vigil's deadband); slice 4 (iter-136, DONE —
-  D-169) the calendar — the sub-year cadence family (the market days
-  14400 / the fairs 43200 / the seasons 129600 + the four-phase cycle)
-  + the weather's seasonal layer (the ride + the D-030 asymmetric
-  weights — the rise's storm bias measured at the year run) + the
-  composed YEAR experiment (province_calendar.json, the T7 read);
-  **iter-137's depth audit the fresh verdict material (the
-  three-lens depth battery — the door-surface census, the reorder
-  arm, the calendar ablation; the A–H ledger: A/C/D/E/H confirmed,
-  B/F/G partial — the concentration finding honestly recorded)**;
-  the row's own verdict call stands open for the owner (the L2
-  wave plan complete — the verdict the wave's own question, never
-  self-called).
-  **iter-109's
-  opening answers ride the row (D-146): the second pack runs the
-  TRAVEL main loop** (the river-artery class, the D-130 direction —
-  a reskin twin of the tavern proves nothing; the loop change is
-  the universal-core test) — level 1 LANDED as the travel-loop pack
-  (the player journeys between the five waypoints, encounters ride
-  the route, st-6a's derived travel prices make geography
-  mechanical: 150/210/300/360 ticks over the four edges), authored
-  toponyms WIN level 1 (the OVERRIDE-ELSE-DERIVED law, D-132 — the
-  ferry inn / the tollhouse / the ferry quay, the Ashen). The
-  phase-5 exit
-  needed NO second world (the emergent chain rode the armed
-  committed pack). The st-5 containers door stays the first real
-  consumer's (a pack wanting portable objects, a res-1 sink shape).
+  **DONE: the two-level gate COMPLETE. L1 the reskin day (iter-112,
+  D-149 — `content/road_pack/` the TRAVEL-loop reskin on the open
+  generic stack, 14m24s, ZERO core edits, the T1 twin
+  `tests/test_t1_reskin.py`; the phase-6 exit criterion MET by
+  measurement — gate PASS iter-116, D-151, on the owner's convening
+  call, ROADMAP §2 CLOSED). L2 the deep second world — DELIVERED at
+  the measured band (iter-139, D-172, on the owner's convening call
+  «world 2 закончить, вердикты вынести»; the material iter-137's
+  depth audit, D-170): the honest scope delivered — the
+  anti-collection half MEASURED (one ordinary verb composes through
+  three systems into irreversible, divergent, route-stable state),
+  the anti-reskin half MEASURED (the reskin day vs the
+  weeks-authored province: the spine + the vertex composition + the
+  year-run almanac), the depth's DISTRIBUTION the recorded residue
+  (B/F/G partial — the concentration at the triangle's vertex, the
+  option surface 1-of-6 at the probed band, the 48 market/fair turns
+  zero consumers). The residue's routing: the future depth
+  consumers the content-side rows — the pack slots' promotion
+  events (F4: pack-1/pack-4), the cadences' decision half a BUILD
+  question (arming one consumer on a market/fair cadence) — world-2
+  NEVER reopens for slices. The L2 wave plan (D-153 — the weeks
+  made explicit): slice 1 the skeleton (iter-118, D-153), slice 2
+  the cultures half (iter-119, D-154), slice 3 the triangle
+  (iter-135, D-168), slice 4 the calendar (iter-136, D-169) — all
+  four DONE; the census (iter-134) + the depth audit (iter-137) the
+  verdict materials. iter-109's opening answers rode the row
+  (D-146): the second pack runs the TRAVEL main loop (the
+  universal-core test — a reskin twin proves nothing); authored
+  toponyms WIN level 1 (OVERRIDE-ELSE-DERIVED, D-132). The phase-5
+  exit needed NO second world. The st-5 containers door stays the
+  first real consumer's (a pack wanting portable objects, a res-1
+  sink shape). Detail: phases.md §6 (the slice blocks + the verdict
+  block) + D-149/D-151/D-170/D-172 + worklog + git.**
 - `res-1` · the resource/economy layer — todo, owner-gated (VISION §6's
   "scarcity" formula word gets its row owner): the closed scarcity cycle
   (source → flow → sink) as PACK DATA — the dependency graph, flows as

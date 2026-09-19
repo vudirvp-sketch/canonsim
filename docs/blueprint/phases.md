@@ -3565,6 +3565,158 @@ Landed: D-170 + this block. The build queue UNTOUCHED; zero
 build-grade items (the three probes read-only, their logs
 outside the repo).
 
+**The verification-lenses research routed (intake-26, iter-138, D-171
+— the owner's «перед этим вероятно стоит рассмотреть дополнительно идеи
+с файла VERIFICATION_LENSES_RESEARCH.md» call, the world-2-verdict
+session's first half: what to adopt for future diagnostics /
+verification / tests; doc-only, zero code, zero corpus price — the
+D-155..D-170 intake precedent; the research file itself external per
+the convenience-copy law).** The document's question, narrower than
+research_method_v5's investigation lifecycle: what reusable
+verification vocabulary and experiment shapes should future research
+use AFTER the implementation claim has been made — without a second
+simulator, a generic Verifier/Observatory runtime, or a second source
+of truth? Its own verdict — PARTIALLY CONFIRMED — verified at HEAD:
+the MECHANISMS are all owned (the FACT rows content-matched one by
+one: TEST_PLAN's gate/metrics/A-B/corpus/offline separation;
+`scripts/mechanics.py`'s four read-side questions — matrix/trace/why/
+blast; `core/metrics.py`'s M1–M5 + emergent chains + eventless
+stretches + payoff latency + beat tension; the checkpoint/blind/
+deviation/drift/longrun families; intake-21's parked observability
+card; intake-24's six principle cards); the missing piece is the
+compact SELECTION GRAMMAR — which existing instrument falsifies which
+claim — and the repo's own history confirms the diagnosis (iter-137's
+audit re-derived its verification form from scratch; the intake
+family's verdict tables each re-derived the instrument mapping).
+
+**The lens/prism catalog** (the document's first durable residue, held
+HERE as the one-pass record — never a second standing document, D-024).
+Ten LENSES — what property is judged: canon/authority (one canonical
+truth; every claimed result derivable from it — the second-ledger and
+stored-derived-state failures); reachability/liveness (the behavior
+occurs under ordinary valid inputs, live across a corpus); causal
+leverage (a small change → materially different downstream canonical
+behavior); decision/agency leverage (the changed NEXT-DECISION
+landscape); epistemic closure (each actor knows only what its evidence
+path permits — available ≠ understood ≠ communicable ≠ actionable ≠
+actionable-in-time); stability/invariance (what must remain unchanged
+under equivalent executions and irrelevant perturbations);
+persistence/displacement (a meaningful consequence alters future state;
+reduced pressure is displaced, never merely erased);
+population/emergent behavior (over seeds and long horizons: never/
+rare/common × early/on-time/late × broad/narrow × stable/oscillating/
+runaway × local/distributed — never "the golden seed looks right");
+attribution/explainability (causal trace backward — why did this
+happen? — kept separate from dependency/blast forward — what could
+this change affect?); boundary/boundedness (the mechanism stays inside
+its declared authority, vocabulary, resource, and temporal limits
+under stress — broader than error handling: locally valid but
+architecturally unbounded is the target). Nine PRISMS — the controlled
+experiment: remove (P1); one-knob perturb (P2); same-seed fork (P3);
+horizon extension (P4); knowledge restriction (P5); composition
+crossing (P6); order/permutation probe (P7 — contract-bound: where
+order is semantic, invariance is NOT the oracle); stress corpus (P8 —
+adversarial, edge, malformed, repeated, low-information,
+simultaneous-reaction, refuses-the-subsystem cases); independent
+re-derivation (P9 — a checker that shares the implementation's
+mistake is not an oracle). Every lens and prism maps to standing
+carriers (the document's own map, verified: INV-1/INV-5, fold/
+checkpoint, pack lint, the blind suite, T1/T2, the RNG fingerprint,
+the balance harness, longrun, mechanics trace/why/blast, the deviation
+corpus, cap/floor tests, the F3 form + the depth battery's three
+arms). The intake-21 four-question surface map (STATE / CAUSALITY /
+KNOWLEDGE / COUNTERFACTUAL) stays complementary: it identifies WHERE
+to look; the lenses identify WHAT property to judge; the prisms HOW
+to perturb or compare it.
+
+**The claim packet** — the document's second durable residue, ADOPTED
+into `docs/TEST_PLAN.md` §9 in the compact form (the verification
+owner's surface; the document's own §15 routing: verification rules
+belong to TEST_PLAN and the owning test file): Claim / Problem /
+Lens(es) / Prism / Scenario + corpus / Oracle / Falsifier /
+Counterexamples / Expected / Observed / Epistemic class / Disposition —
+the oracle an observable condition tied to the canonical substrate,
+the falsifier explicit ("a plausible description without either is
+not evidence"); the disposition vocabulary the repo family, never a
+numeric quality score. The §9 selection table (claim shape → first
+prism → strong follow-up → standing instruments) is the selection
+grammar itself; TEST_PLAN §1..§8.5 remain the instrument owners.
+
+**Stale-at-HEAD corrections** (the document's snapshot predates
+iter-135..137; the routing reflects HEAD): its "no generic
+next-decision census" — the door-surface battery (iter-137) IS the
+next-decision census form, landed as the standing depth-battery arm
+(read-side, runner-held; the RUNTIME census stays zero-consumer —
+mech-2's parked family); its "first-divergence reporting missing as a
+reusable operator" — CONSUMED by iter-135's composed experiment (the
+first-divergence read at the take, t=2), the operator form still
+parked on mech-2 (intake-21's ride); its "no common claim → oracle →
+falsifier record" — iter-137's A–H ledger is the form's standing
+instance (retroactive recognition: the depth audit ran the packet's
+shape without the name). The persistence/displacement analysis surface
+stays PARTIAL with zero consumers (no row owed until a consumer names
+it — the first-consumer law).
+
+**Refused at the door** (the document's own reject list + repo law —
+every item restates standing fences, zero new law needed): the generic
+Verifier class, the runtime observer hook for tests, the second stored
+truth table, the single universal quality score, LLM pass/fail
+judgments for canonical behavior, the simulation engine hidden in
+tooling, mandatory full-universe test runs (INV-1, INV-4, D-024, the
+no-second-engine family); the lens/prism NAMES as repo law
+(label-matching — the intake-24 precedent that refused P1–P6 as law;
+the names ride this block and TEST_PLAN §9's self-describing table);
+the catalog as a standing document (D-024 — this block is the
+one-pass record); REFERENCES.md as the surface (it catalogs external
+sources; internal research synthesis lives in the intake blocks — the
+standing precedent); any executable lens helper (zero consumers).
+
+**The measurement obligation** (the document's own §14, now standing):
+the next owner-gated build row (res-1 / pack-1 the natural candidates)
+writes its verification plan as ONE claim packet — three lenses max,
+two prisms max — and that run decides whether any executable lens
+helper is ever warranted. The five-question re-check for any future
+lens (principle / form / quality / transfer / combined design) is the
+standing research discipline already (D-163/D-165 — the method file
+internalized); intake-26 adds nothing there.
+
+Landed: D-171 + this block + TEST_PLAN §9. The build queue UNTOUCHED —
+nothing unpins, nothing reorders; zero build-grade items.
+
+**The world-2 L2 verdict (iter-139, D-172 — the owner's convening
+call, the session's second half; the verdict material COMPLETE in the
+measured band — iter-137's own law: "NONE owed for the verdict call
+itself" — the call now made).** The two-level gate's level-2 question
+— is the deep second world's honest scope delivered (VISION §7's
+twin: "deep unique worlds take weeks; the slices are the weeks made
+explicit" — the weeks now spent)? — **ANSWERED: DELIVERED at the
+measured band.** The verdict's ground, cited to the standing owners
+(never restated — D-024): the anti-collection half MEASURED (the
+depth audit's A/C/D/H ledger — one ordinary verb composes through
+three systems into irreversible, divergent, route-stable state); the
+anti-reskin half MEASURED (L1's 14m24s reskin day vs the
+weeks-authored province — the spine, the vertex composition, the
+year-run almanac, the T7 reads); the depth's DISTRIBUTION the
+recorded residue (B/F/G partial — the concentration at the triangle's
+vertex, the option surface 1-of-6 at the probed band, the 48
+market/fair turns the one found-and-named counterexample). The
+verdict's law: the gate asks the HONEST scope, never uniform
+distribution — VISION §7's own reality row separates the reskin day
+from the weeks, and the audit measured exactly that separation;
+deferring until B/F/G close would be the completeness-smuggling the
+audit refused (the critical separation: no open row a verdict input —
+the claim decidable on the current evidence). The residue's routing:
+the future depth consumers are the content-side rows — the pack
+slots' promotion events (F4: pack-1 / pack-4), the cadences' decision
+half a BUILD question (arming one consumer on a market/fair cadence —
+co-presence, travel exposure, or a price read); world-2 NEVER
+reopens for slices. The two-level gate COMPLETE: L1 the reskin day
+(PASS iter-116, D-151), L2 the deep second world (DELIVERED iter-139,
+D-172); the world-2 TASKS row done.
+
+Landed: D-172 + this block + the TASKS row's done flip. The build
+queue UNTOUCHED — nothing unpins, nothing reorders.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

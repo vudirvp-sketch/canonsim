@@ -770,3 +770,68 @@ hardware); the bg-7 prose families (ii)–(v) skipped in the bg-8
 heartbeat (rate-limit economics); the per-family latency distribution;
 the per-component p50/p95 columns (no live row yet — bg-9+/engine-1).
 
+## 9. Claim → instrument selection grammar (intake-26, iter-138 — research-derived, a routing aid, never a gate)
+
+> Source: the intake-26 block (`docs/blueprint/phases.md` §6 — the routed
+> record and the full lens/prism catalog; D-171). The compact form is
+> adopted here; the catalog is never duplicated (D-024). What this section
+> answers: the repo does not lack verification instruments — it lacked a
+> compact answer to "which existing instrument falsifies THIS claim"
+> (iter-137's audit re-derived its verification form from scratch; the
+> intake family's verdict tables each re-derived the instrument mapping).
+> A **lens** names what property is judged (the question); a **prism**
+> names the controlled perturbation or comparison that reveals it (the
+> experiment). One instrument serves many lenses; one lens may need
+> several prisms. Select the smallest pair that can falsify the claim —
+> never run every test for every change.
+
+**The claim packet** — the reusable verification record for a substantive
+claim; a build row's verification plan rides this form (iter-137's A–H
+ledger is the standing instance of the packet's shape):
+
+```text
+Claim / Problem / Lens(es) / Prism / Scenario + corpus /
+Oracle / Falsifier / Counterexamples /
+Expected evidence / Observed evidence / Epistemic class / Disposition
+```
+
+The **oracle** must be an observable condition tied to the canonical
+substrate (door answers, RNG fingerprints, projection properties — never
+prose). The **falsifier** must state what would make the claim false. A
+plausible description without either is not evidence. The disposition
+vocabulary stays the repo family (CONFIRMED / PARTIALLY CONFIRMED /
+REJECTED / UNRESOLVED / DEFERRED); no numeric quality score — a scalar
+erases the diagnosis the lenses preserve.
+
+| Claim shape | First prism | Strong follow-up | Standing instruments (the oracle owners) |
+|---|---|---|---|
+| "this creates new depth" | one-knob perturb | composition crossing | balance A/B (§6), M1/M3, the depth battery (the F3 form + the three arms, `phases.md` §6) |
+| "this is a meaningful player decision" | remove | knowledge restriction / same-seed fork | `--systems-minus`, the door-surface battery, the blind suite (§1.3) |
+| "actors only know permitted facts" | knowledge restriction | stress corpus | blind-NPC suite (§1.3), the deviation corpus (§8.2), `knower` boundaries |
+| "this does not perturb unrelated runs" | same-seed fork | one-knob | T1/T2, `mechanics.py blast`, the RNG fingerprint |
+| "the consequence remains meaningful later" | horizon extension | composition crossing | longrun, eventless stretches, payoff latency (§2) |
+| "this system is not dead / not overactive" | horizon extension | same-seed fork / one-knob | pack lint, the balance harness (§6), M1–M5 (§2), the corpus |
+| "this outcome is explainable" | same-seed fork | composition crossing | `mechanics.py trace/why`, the provenance family, drift tables |
+| "this cannot escape its boundary" | stress corpus | independent re-derivation | the validator golden set, pack lint, cap/floor tests, stoplists |
+| "this parameter earns its complexity" | one-knob | remove | the ablation family, the offline one-knob ranking (intake-16's spike record) |
+
+Two standing oracle laws the table carries:
+
+- **Independent re-derivation.** A checker that shares the
+  implementation's mistake is not an oracle. Compute the claimed result
+  by a path that does not share the validated path: runtime projection vs
+  fold/checkpoint refold; live loop vs shadow replay; committed fixture
+  vs re-generated run (the checkpoint/blind/mechanics families' shared
+  lesson — the strongest transferable rule of the corpus).
+- **Order probes are contract-bound.** Perturb an ordering only where the
+  owning spec declares the operations commutative; where order is
+  semantic, the expected result is NOT invariance — derive the oracle
+  from the owning contract first (the D-039 crossing law is the standing
+  instance: co-occurring ticks fire coarsest-first by design).
+
+The lenses' own quality bar (intake-26 §12 — the research method's five
+questions applied to any future lens): principle / form / quality /
+transfer / combined design. A matching name is not proof; a useful form
+with unproven quality stays PARTIAL. A new lens or prism enters this
+table only after one claim packet used it (the first-consumer law).
+

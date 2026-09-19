@@ -17,7 +17,7 @@
 | `docs/INTENT_SCHEMA.md` | intent contract (the proposal side of the door; trigger-gated, written iter-2) | active |
 | `docs/ROADMAP.md` | phases, gates, tracks, donors | active |
 | `docs/TASKS.md` | backlog + iteration statuses | active |
-| `docs/TEST_PLAN.md` | phase-0 verification stack: T0–T8 + M1–M5 + gate protocol + UAP crosswalk + the schema-bump migration procedure (the iter-6 trigger-fired spec); §8 the testproto LLM-integration protocol (iter-68, D-098) + §8.5 the heartbeat ledger | active (bg-8) |
+| `docs/TEST_PLAN.md` | phase-0 verification stack: T0–T8 + M1–M5 + gate protocol + UAP crosswalk + the schema-bump migration procedure (the iter-6 trigger-fired spec); §8 the testproto LLM-integration protocol (iter-68, D-098) + §8.5 the heartbeat ledger + §9 the claim → instrument selection grammar (intake-26, iter-138, D-171 — research-derived, a routing aid, never a gate) | active (bg-8) |
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue | active |
