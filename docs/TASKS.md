@@ -26,6 +26,8 @@
 > the state — the roadmap's phase ladder COMPLETE, the standing work is
 > the owner-gated backlog + the SoW horizon).
 
+### iter-142 · intake-29 — the external-audit / roadmap-review output routed: the audit CONFIRMED on the facts (live-verified — including the pytest run the DNS-less audit could not make), the foundation SUPPORTED (no reopening of INV-1..5 / the closed phases / world-2), SIX contract sharpenings adopted into the rows (res-1's mechanism split + irreversibility split; roads-1's topology contract — the node question, the algorithm naming, the invariant set, the LOD/autonomy falsifier; since-1's encounter baseline — the epoch semantics + the scene_delta separation; companion-1's no-teleport; pack-1's consent split; ci-1 the recommended first owner pick), two rider rules adopted (the pack.py split rides the first pack.py-growing row, never a standalone refactor; the intake admission rule — a named consumer row + a potential falsifier up front) — done (doc-only, the owner's «проанализируй текст далее и его предложения, если согласен => нужно будет заложить в планы работу и соответственно пересмотреть оный или типа того. по пунктам разбери что надо что не надо и почему» research call over the uploaded prior-session audit; that session's clone-less static verification re-done at a real clone + the live suite; the ORDER recommendation recorded, never enforced — D-113). Detail: D-175 + phases.md §6's intake-29 block + worklog iter-142 + git.
+
 ### iter-141 · intake-28 — the Stålberg-conspectus / transplantation-method output routed: the content overwhelmingly owned (the cross-domain confirmation family's next member; the Townscaper reconciliation itself intake-17's), ONE compact instrument adopted (the combination fence — the fifth check's operational sharpening: a combined design carries no presumption of advantage; the mechanism-of-advantage decomposition, the combination-price question, the Frankenstein test), the local-pattern→higher-order hypothesis routed to the standing consumers — done (doc-only, the owner's «разбери 1231.md => что стоит перенять и почему, зачем, как использовать и где это улучшит проект» research call over the uploaded prior-session output; that session's clone-less verification re-done at a real clone, zero factual errors)
 
 The question — what from `1231.md` (a prior research session's
@@ -1168,6 +1170,27 @@ D-105..D-133 family row + phases.md §5)
   boundary law; the EVE sink law + the Albion risk premium + the PoE
   spend-consumes + the SoD state surface + the Kenshi desperation loop
   — `docs/ref/`, the REFERENCES_DEEP §1 rows flipped).
+  **The pre-implementation contract (intake-29's sharpening, D-175 —
+  written BEFORE the row starts): the MECHANISM SPLIT — the quantity
+  substrate is a new WHAT per PACK_SPEC §1's test question (a second
+  pack must carry it for the mechanic to exist — yes): a minimal
+  domain-blind account/transfer/consume primitive lands in core, NAMED
+  (integer-only arithmetic per the travel law; through the canon door;
+  INV-3-clean vocabulary — no resource nouns), while the economy (the
+  resource graph, sources/flows/sinks, price formulas, thresholds,
+  faction coupling) stays pack data — a pack-only reading of this row
+  would grow the hidden mechanism the row itself forbids ("never a
+  second economy engine"). The IRREVERSIBILITY SPLIT: event
+  immutability ≠ stock immutability — a sink's consumed unit never
+  un-consumes, but a stock regrows legally via new source events
+  (`7 → 12` by a source event is an ordinary event, never a
+  "revert"); the `irreversible` state_change flag (the decay family's
+  law) is the wrong instrument for stock props. The verification plan
+  rides TEST_PLAN §9's claim packet: the conservation oracle (nothing
+  appears/disappears outside declared sources/sinks), the
+  no-negative-stock floor, the player-decision-effect arm, the
+  one-knob ablation — the priced-option question (intake-27) the
+  counting form.**
 - `roads-1` · the generated-exits pass — todo, owner-gated (phase
   6/mode G): mode G must EMIT exits for generated worlds (hand-authoring
   a generated world's edges is impossible); an MST/k-nearest graph over
@@ -1189,6 +1212,23 @@ D-105..D-133 family row + phases.md §5)
   the read is runtime L3, the fold never needs it; no event-id
   shifts, no M3/M5 inflation, corpus price zero by construction; the
   `world_formed` outcome block stays as-is).
+  **The topology contract owed BEFORE implementation (intake-29's
+  sharpening, D-175): (1) the NODE question pinned first — the graph
+  spans all lattice sites (the read maps through the claims) or
+  claimed/settlement nodes only: undecided here, and the exit surface
+  depends entirely on it (3–6 claimed settlements on a 200–600-site
+  lattice — k-nearest over all sites mostly hits unclaimed sites);
+  (2) the bare "MST/k-nearest" wording RETIRED — the algorithm named
+  precisely (a tree and a bounded-degree graph are different
+  behavioral surfaces; a combination carries the fence's three
+  questions, D-174); (3) the invariant set: connected, no self-loop,
+  symmetric, bounded degree, deterministic tie-breaking + edge
+  ordering (INV-2 anyway), a pathological-edge upper bound, an
+  explicit cycle policy; (4) the behavioral falsifier beyond graph
+  shape: same world, different topology → the expected LOD/autonomy
+  differences MEASURED (the warm ring is this row's own named
+  consumer — the topology must show in WHO simulates, not only in
+  route existence; rides TEST_PLAN §9).**
 - `pack-ci` · the admission-lint rungs — **done (iter-117, D-152)**:
   the teleology gate + the live-char crosswalk + the price-marker lint
   LIVE in `core/pack.py` (PACK_SPEC §5/§6 the single reading owner);
@@ -1198,7 +1238,20 @@ D-105..D-133 family row + phases.md §5)
 - `since-1` · the re-encounter delta — todo, owner-gated (read-side,
   v0.2-grade; routed INTO phase 6 by iter-104): world-2's condensing
   travelers the first real consumer (the detail lives in the
-  phase-5 tail section below).
+  phase-5 tail section below). **The encounter baseline owed BEFORE
+  implementation (intake-29's sharpening, D-175): "the last
+  co-presence tick" has no standing formal definition — the contract
+  pins the epoch semantics first (the leading candidate: the
+  per-entity encounter epoch — each new physical co-presence opens
+  an epoch, the delta reads end-of-previous-epoch → start-of-current;
+  read-side, zero canon writes — the row's own law); the five
+  baseline senses (last physical co-presence / last scene / last
+  brief observation / last known fact / last entity re-entry) are
+  distinct and the spec names which one this row reads. The surface
+  separation explicit: `scene_delta` = "what do I perceive now"
+  (BRIEF_SPEC §3.2), since-1 = "what changed in this entity since we
+  last met" — different blocks, never merged; the blind-NPC laws
+  (TEST_PLAN §1.3) inherit to the new lines.**
 
 > Opening-day questions — ANSWERED iter-109 (D-146, the owner's
 > chat call): (1) the GUT-CHECK verdict is **NO CUTS** — every
@@ -1341,7 +1394,14 @@ per-row detail lives in git + worklog + the D-095..D-104 compound)
   knowledge records (iter-15/D-056 — what §5 still owns is the
   group-scale form). Dependencies BY REFERENCE: tune-3, st-6a, the
   resume door (phases.md §7). Gate: phase 5 closed — the owner's call
-  whenever.
+  whenever. Intake-29 (D-175): the NO-TELEPORT law rides the
+  contract at write time — a companion moves ONLY through ordinary
+  movement/travel intents through the door (INV-1's consequence made
+  explicit; no "PC moved ⇒ companion follows" implicit sync —
+  D-031's privilege separation already forbids the hidden write
+  path); lag is a legal world state; a follow cadence, if ever
+  wanted, is a measured mechanic through the rotation/urgency
+  grammar, never hidden synchronization.
 
 ### Phase-4 backlog (opened iter-55; CLOSED iter-65)
 
@@ -1615,7 +1675,14 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   past a screen. `chronicle.py` writes files (Mode F) — out of scope.
 - `engine-2` · the urgency-roll stream split — done (iter-50, D-079): per-entry streams `urgency:<npc>:<kind>`, the coupling measured and refused. Detail: D-079.
 - `ci-1` GitHub Actions: pytest + ruff on push (`PYTHONHASHSEED=0`, pinned
-  Python).
+  Python). Intake-29's recommendation (D-175): the FIRST owner pick —
+  main is unprotected with required status checks off (verified live
+  at HEAD aa1097f; no `.github/` in the tree), the 1754+1/ruff green
+  currently a local discipline; the runner is the cheapest risk
+  reduction on the board (zero corpus price, dev-side only, INV-4
+  untouched) and automates the landed admission lint's discipline;
+  protect main after. AGENTS §8 keeps the CI files owner-gated — the
+  pick is the owner's call.
 - `qa-1` mypy --strict on `core/` (owner-approval-gated: dev tooling is
   capped at pytest + ruff — AGENTS §8/§10; D-031 parks the candidate here.
   The type-discipline values are law from iter-1 via
@@ -1648,6 +1715,13 @@ phase 1 (narrator over the log) opened per `docs/ROADMAP.md` §2.
   D-030 + the PACK_SPEC sketch row. Gate: the PACK_SPEC trigger
   (phase 6 / 2nd setting; the when-one-liner's owner is the STATUS
   FAQ, D-024 — the stale "phase-0 gate" clause removed iter-71).
+  Intake-29 (D-175): the CONSENT SPLIT rides the row's authoring —
+  the CANONICAL event outcome (`consented`/`coerced` as world fact
+  in the outcome/state_changes) separated from the crafted knowledge
+  records (`X believes consented/coerced`, the D-008 pattern's belief
+  half); the pack lint adds the mutually-exclusive consistency check
+  between the canonical states/events (the PACK_SPEC §5/§6 lint
+  family) — one token never means fact+belief+rumor at once.
 - `pack-2` Arson-on-ashes guard (iter-2a audit note) — DONE iter-29
   (D-061): the `spot_available` door check (the closed precondition
   set's 15th test, layer-param lint-checked) — arson on a destroyed or

@@ -1,3 +1,88 @@
+Iteration: iter-142 (`iter-142-intake29` — the external-audit /
+roadmap-review output routed; the owner's «проанализируй текст
+далее и его предложения, если согласен => нужно будет заложить
+в планы работу и соответственно пересмотреть оный или типа
+того. по пунктам разбери что надо что не надо и почему»
+research call over the uploaded audit text — itself a prior
+session's output over `main` 8f4fbd4e, DNS-less (its own
+caveat: a deep static audit, no pytest run); the D-163
+clone-less-session precedent, re-verified this round at a REAL
+clone one commit ahead at aa1097f [the delta: iter-141's
+doc-only intake-28 — no audited surface moved] AND with the
+live suite the audit could not run: **1754 passed + 1 skipped,
+ruff clean** (Python 3.12.14, the env pin; verified BEFORE
+working and re-verified after; doc-only, the corpora
+byte-untouched)): **the audit CONFIRMED on the facts (every
+load-bearing repo-facing claim verified — the sizes, the `_Lint`
+structure, the missing CI, the unprotected branch, the row
+wordings, the sites-vs-locations split, the undefined
+co-presence baseline; two framings corrected, none fatal), the
+foundation SUPPORTED (no reopening of INV-1..5, event sourcing,
+the RNG bank, pack/core split, LOD, canon/voice, JIT-specs, the
+closed phases, world-2), and SIX contract sharpenings ADOPTED
+into the rows (the queue's composition changed; its order never
+— D-113)**: (1) res-1 — the mechanism split (a minimal
+domain-blind account/transfer/consume primitive = a new WHAT in
+core, NAMED — integer-only, through the canon door, INV-3-clean;
+the economy stays pack data; a pack-only reading would grow the
+hidden mechanism the row itself forbids) + the irreversibility
+split (event immutability ≠ stock immutability; a stock regrows
+via new source events, never a "revert"; the `irreversible`
+flag the wrong instrument for stock props) + §9's claim packet
+the verification form (the conservation oracle, the
+no-negative floor, the decision-effect arm, the one-knob
+ablation); (2) roads-1 — the topology contract owed first (the
+NODE question pinned — all sites vs claimed/settlement nodes;
+the bare "MST/k-nearest" RETIRED; the invariant set: connected
+/ no self-loop / symmetric / bounded degree / deterministic
+tie-breaking + edge order / pathological-edge bound / cycle
+policy; the behavioral falsifier: same world, different
+topology → the expected LOD/autonomy differences measured — the
+warm ring the row's own named consumer); (3) since-1 — the
+encounter baseline owed first ("the last co-presence tick" has
+no standing formal definition; the per-entity encounter epoch
+the leading candidate — read-side, zero canon writes; the
+scene_delta surface separation explicit); (4) companion-1 — the
+no-teleport law (INV-1's consequence made explicit; lag legal;
+a follow cadence a measured mechanic, never implicit sync); (5)
+pack-1 — the consent split (the canonical event outcome vs the
+crafted belief records + the mutually-exclusive lint); (6) ci-1 —
+the session's RECOMMENDATION as the first owner pick (main
+unprotected, checks off, verified live; the runner the cheapest
+risk reduction on the board; the pick stays the owner's —
+AGENTS §8). Two rider rules adopted: the pack.py split rides
+the FIRST pack.py-growing row (never a standalone refactor —
+"split the implementation of the ownership, never the
+ownership"; `load_pack` stays the single admission gate) and the
+INTAKE ADMISSION rule (a new external intake convenes only with
+a named open build row/standing debate it feeds + a potential
+falsifier stated up front; the owner's explicit fresh question
+always overrides, recorded as such). REFUSED with cause: the
+"internal contradiction" framing for res-1 (the row is SILENT
+on the mechanism's location — pack-1/3/4 say "zero core change
+by design", res-1 does not; the action identical either way);
+the front-loaded presentation-1 stabilization (already owned
+piece by piece: truncation markers, the canon/control split,
+the call budget, the failure semantics, the parser contract —
+and the "versioned brief envelope" contradicts BRIEF_SPEC §8's
+derived-read-side discipline + §9's JIT law); any M3/T8 law
+change (owned since iter-138 — §9 the standing depth form);
+the standalone pack.py refactor now (L13 / AGENTS §2.4). ·
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
+the ladder complete 0..6 — the standing work: the owner-gated backlog
++ the SoW horizon, ROADMAP §6) ·
+1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified BEFORE working at HEAD aa1097f and re-verified after;
+doc-only, the corpora byte-untouched) ·
+Date: 2026-09-19 ·
+Scope: `docs/blueprint/phases.md` (§6 the intake-29 block),
+`docs/DECISIONS.md` (D-175), `docs/TASKS.md` (the six row
+sharpenings + the iter-142 section), `STATUS.md` (this re-pin +
+the Next step), `worklog.md` (this entry; iter-132 evicted per
+the cap) — 5 files.
+The prior iteration's record: iter-141 (intake-28). The
+detail lives in TASKS + worklog + git.
+
 Iteration: iter-141 (`iter-141-intake28` — the Stålberg-conspectus /
 transplantation-method output routed; the owner's «разбери 1231.md =>
 что стоит перенять и почему, зачем, как использовать и где это
@@ -49,68 +134,6 @@ Scope: `docs/blueprint/phases.md` (§6 the intake-28 block),
 iter-131 evicted per the cap) — 5 files.
 The prior iteration's record: iter-140 (intake-27). The
 detail lives in TASKS + worklog + git.
-
-Iteration: iter-140 (`iter-140-intake27` — the level-design &
-worldbuilding consolidation routed; the owner's «проанализируй
-документ и определи что из него можно полезного перенять в проект
-и почему... где прокатит междоменная трансплантация принципов»
-research call over the uploaded `level-design-consolidated.md` —
-a conspectus of twelve GDC/Konsoll/LDL talks; the file external
-per the convenience-copy law, the intake-24 transplantation
-posture — the mechanism source-free, never the form):
-**the doctrine PARTIALLY CONFIRMED — overwhelmingly owned as the
-strongest cross-domain confirmation family since intake-16**
-(figure–ground = the brief's budgets/eviction + the chronicle's
-pruning + §6.1's substance filter; vistas = the cold tiers +
-lazy detail; space reuse = fold(log); PCG-is-design × 4 talks =
-INV-3/PACK-1/D-082/D-134; Control's representation switching =
-L12/LOD-1/INV-3 — a destruction pipeline and a narrative sim
-sharing one law; the data-quality law = the pack-lint family
-verbatim; Qud's abstraction mountain = the pass ladder + the
-chronicle horizon, L7 stricter at runtime); **the residue FIVE
-instruments + one proposal, all routed, zero build-grade**: the
-READER LAW (an emitted event with zero read surfaces is
-functionally dead — name the reader of every new event type; F4's
-promotion events + the cadences' decision half the consumers),
-the PRICED-OPTION question (count differently-priced options,
-never labels — the A–H B row's form; res-1 the dynamic owner),
-the TOP-LOD READABILITY question (the critical path survives the
-coarsest-LOD blur — the depth battery's read-surface arm), the
-REALIZATION TABLE (why exists / which layer / linked to what /
-what the reader understands + the removal test — the admission
-lint's authoring half; PARKED for pack-1/pack-3/pack-4, the
-motivation scope question riding it, INV-4-fenced), the SACRIFICE
-PROTOCOL (promise pair → the both-promises test → Barrier/Gate/
-Carrot/S'more with the price named — the repo's resolved cases
-its precedents; PARKED for the SoW debates — bg-6/engine-1/
-presentation-1/companion-1; a debate form, never a gate); the
-PROPOSAL (topology-aware hook distribution over the site graph's
-junction/through/dead-end classes — the cadences' decision half +
-roads-1 + F4 the consumers, never law until a pack arms it).
-Carriers: the pack-candidate consult card's item 10 + REFERENCES
-§10's nine source rows + the intake-27 block; refused at the
-door: spatial-composition machinery (renderer-side,
-presentation-1's), motivation-model law (INV-4),
-named-principles documents (D-024), cursed-problem
-runtime/spec/check, topology arming now — Kirill's methods +
-Totten's documentation culture fully-owned confirmations, zero
-residue ·
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
-D-151; the ladder complete 0..6 — the standing work: the
-owner-gated backlog + the SoW horizon, ROADMAP §6) ·
-1754 passed + 1 skipped, ruff clean (Python 3.12.14, the env
-pin; verified BEFORE working at HEAD 1b7666a — the numbers
-identical — and re-verified after; doc-only, the corpora
-byte-untouched) ·
-Date: 2026-09-19 ·
-Scope: `docs/blueprint/phases.md` (§6 the intake-27 block + the
-consult card's item 10), `docs/REFERENCES.md` (§10 the nine
-source rows), `docs/DECISIONS.md` (D-173), `docs/TASKS.md` (the
-iter-140 section), `STATUS.md` (this re-pin; iter-138's record
-evicted per the two-record convention), `worklog.md` (this entry;
-iter-130 evicted per the cap) — 6 files.
-The prior iteration's record: iter-139 (the world-2 verdict).
-The detail lives in TASKS + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -585,62 +608,78 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-141 DONE: intake-28 routed — the Stålberg-conspectus /
-transplantation-method output: PARTIALLY CONFIRMED, the content
-overwhelmingly owned (the cross-domain confirmation family's next
-member; zero factual errors in the load-bearing repo-facing claims,
-re-verified at a real clone), ONE instrument adopted (the COMBINATION
-FENCE — a combined design carries no presumption of advantage: the
-mechanism-of-advantage decomposition, the combination-price question,
-the Frankenstein test; consumers the engine-1/presentation-1 debates
-+ res-1's evaluation, D-174), the local-pattern→higher-order
-hypothesis routed to the standing consumers, two recognition handles
-recorded block-only — zero build-grade, the queue untouched. iter-140:
-intake-27 routed (five instruments + the topology proposal, D-173);
-iter-139: world-2 L2 the verdict DELIVERED (D-172) — the two-level
-gate COMPLETE.**
+**iter-142 DONE: intake-29 routed — the external-audit /
+roadmap-review output: the audit CONFIRMED on the facts
+(live-verified, including the pytest run the DNS-less audit
+could not make), the foundation SUPPORTED (no reopening), SIX
+contract sharpenings ADOPTED into the rows (res-1's
+mechanism+irreversibility splits; roads-1's topology contract;
+since-1's encounter baseline; companion-1's no-teleport;
+pack-1's consent split; ci-1 the recommended first pick), two
+rider rules adopted (the pack.py split rides the first
+pack.py-growing row; the intake admission rule — a named
+consumer row + a potential falsifier up front). iter-141:
+intake-28 routed (the combination fence, D-174); iter-140:
+intake-27 (five instruments, D-173); iter-139: world-2 L2 the
+verdict DELIVERED (D-172) — the two-level gate COMPLETE.**
 
-1. **The owner-gated backlog (the standing rows, unchanged — the
-   ORDER owner decides; TASKS owns composition, never order; the next
-   build row's verification plan rides TEST_PLAN §9's claim packet —
-   intake-26's standing measurement):** by
-   readiness, `roads-1` (mode G's generated exits — the read-path
-   fork resolved, iter-104), `res-1` (the dives landed, the
-   backbone stands), `since-1`, `parse-2`, `engine-1`
-   (+ `presentation-1`, its decision-input child — now also the
-   owner of the player-facing compellingness question intake-18
-   fenced to the SoW horizon), `tune-3`, `st-2`, `scav-1`, `qa-1`
-   mypy + `ci-1` GitHub Actions (the runner that automates the
-   now-landed admission lint), `bg-6` (the SoW audit, D-055
-   deferral), `pack-1` (the grim pack) + `pack-3` + `pack-4`,
-   `companion-1`, `mech-2` (rides the next mechanics.py touch —
-   now also carrying intake-21's single-event postmortem form +
-   intake-22's viz-export form), `st-4` (rides presentation-1 at
-   its write time, D-148) and `st-5` (the first real consumer
-   decides). No other owner question stands open. The consult
-   material for the engine-1/presentation-1 spec writes and any
-   future contract/plugin question: the intake-22 modularity
-   card, the intake-23 world-structure card, and the intake-21
-   observability card (the system-contract decomposition research
-   call is the owner's, never self-opened); for the SoW promise
-   debates the intake-27 sacrifice protocol (the promise pair →
-   the both-promises test → Barrier/Gate/Carrot/S'more with the
-   price named — phases.md §6's intake-27 block, D-173) and the
-   intake-28 combination fence (a combined design carries no
-   presumption of advantage — itself a separate hypothesis: the
-   mechanism-of-advantage decomposition, the combination-price
-   question, the Frankenstein test; phases.md §6's intake-28
-   block, D-174).
+1. **The owner-gated backlog (the standing rows — the
+   sharpened contracts now ride the rows; the ORDER owner
+   decides, TASKS owns composition, never order; the next
+   build row's verification plan rides TEST_PLAN §9's claim
+   packet — intake-26's standing measurement):** the
+   session's RECOMMENDED sequence (intake-29, never the
+   pick): `ci-1` FIRST (the unprotected-main hygiene — the
+   cheapest item on the board), then the three CONTRACT
+   WRITES as the natural next call — `roads-1` / `res-1` /
+   `since-1` turned from row wordings into compact
+   pre-implementation contracts with invariants, falsifiers
+   and the minimal test set (the intake-29 sharpenings their
+   starting material; the audit's own closing proposal),
+   then the build rows in the standing readiness order
+   (`roads-1` the readiness head), the pack consumers
+   (`pack-1` the natural depth companion, `pack-4`) as the
+   primitives' universality proofs when the slots open,
+   `engine-1` (+ `presentation-1`, its decision-input child —
+   now also the owner of the player-facing compellingness
+   question intake-18 fenced to the SoW horizon) last. The
+   remaining standing rows unchanged: `since-1`, `parse-2`,
+   `tune-3`, `st-2`, `scav-1`, `qa-1` mypy, `bg-6` (the SoW
+   audit, D-055 deferral), `pack-3`, `companion-1`, `mech-2`
+   (rides the next mechanics.py touch — now also carrying
+   intake-21's single-event postmortem form + intake-22's
+   viz-export form), `st-4` (rides presentation-1 at its
+   write time, D-148) and `st-5` (the first real consumer
+   decides). The consult material for the engine-1/
+   presentation-1 spec writes and any future contract/plugin
+   question: the intake-22 modularity card, the intake-23
+   world-structure card, and the intake-21 observability card
+   (the system-contract decomposition research call is the
+   owner's, never self-opened); for the SoW promise debates
+   the intake-27 sacrifice protocol (the promise pair → the
+   both-promises test → Barrier/Gate/Carrot/S'more with the
+   price named — phases.md §6's intake-27 block, D-173) and
+   the intake-28 combination fence (a combined design carries
+   no presumption of advantage — itself a separate
+   hypothesis: the mechanism-of-advantage decomposition, the
+   combination-price question, the Frankenstein test;
+   phases.md §6's intake-28 block, D-174). The research
+   posture (intake-29's admission rule, D-175): a new external
+   intake convenes only with a named open build row/standing
+   debate it feeds + a potential falsifier stated up front
+   (the owner's fresh question always overrides, recorded as
+   such) — new knowledge now comes from building and
+   measuring; promotion of the rule into AGENTS.md is the
+   owner's call.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The
    standing gap rows: the {3–8B, GBNF} arm (owner hardware —
-   engine-1's decision input), the bg-7 prose families skipped in
-   the bg-8 heartbeat, the per-family latency distribution. New
-   track-B ideas enter the backlog on the owner's call only.
+   engine-1's decision input), the bg-7 prose families skipped
+   in the bg-8 heartbeat, the per-family latency distribution.
+   New track-B ideas enter the backlog on the owner's call only.
 3. **The SoW horizon (ROADMAP §6) is the standing frame** now that
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6).
-4. **Nothing is pinned.** The next move is the owner's: a row
-   pick (roads-1 the readiness head; pack-1 the natural depth
-   companion — the D-030 dial's own consumer, the first
-   promotion-events slot), or a fresh call.
+4. **Nothing is pinned.** The next move is the owner's: the
+   recommended sequence (ci-1 → the three contract writes → the
+   build rows) or a fresh call.

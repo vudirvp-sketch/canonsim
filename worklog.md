@@ -14,6 +14,33 @@
 > since iter-5).
 ---
 
+iter-142 · 2026-09-19 · intake29 — the owner's «проанализируй
+текст далее и его предложения, если согласен => нужно будет
+заложить в планы работу и соответственно пересмотреть оный
+или типа того. по пунктам разбери что надо что не надо и
+почему» research call over the uploaded external audit (a
+prior DNS-less session's static roadmap review of main
+8f4fbd4e; 5 files doc-only, zero code, zero corpus price)
+- verified BEFORE working (1754+1 green LIVE, ruff clean,
+  Python 3.12.14, HEAD aa1097f — one commit past the audit's;
+  the audit's own numbers confirmed by the run it could not
+  make); every load-bearing claim verified (sizes / _Lint
+  structure / no CI / the branch API / the row wordings /
+  324-sites-vs-6-locations / the undefined co-presence
+  baseline); two framings corrected (res-1 "contradiction" →
+  an unwritten contract point; M3/T8 "needs demotion" →
+  owned since iter-138)
+- the residue routed into the rows (D-175): res-1's mechanism
+  split + irreversibility split; roads-1's topology contract
+  (the node question, the algorithm naming, the invariant set,
+  the LOD/autonomy falsifier); since-1's encounter baseline;
+  companion-1's no-teleport; pack-1's consent split; ci-1 the
+  recommended first pick; the pack.py split the rider rule
+  (never a standalone refactor); the intake admission rule
+  (a named consumer row + a falsifier up front) — the queue's
+  composition sharpened, its order never touched
+
+
 iter-141 · 2026-09-19 · intake28 — the owner's «разбери 1231.md =>
 что стоит перенять и почему, зачем, как использовать и где это
 улучшит проект» research call over the uploaded `1231.md`, itself a
@@ -392,41 +419,4 @@ re-asked as quality-open rows, the same family)
   precedent until the next gate collapse) / phases 3181 — the
   over-cap files ride the documented §6.1 substance precedent,
   trim at the next gate collapse
-iter-132 · 2026-09-18 · intake24 — the owner's «проанализируй
-глубоко документ и оцени… что можно перенять и почему, что можно
-взять но с переработкой и адаптацией, какой потенциал есть?
-какие плюсы и какие минусы? есть ли ультимативное решение…»
-research call over the uploaded cross-domain principle-
-transplantation synthesis (5 files doc-only, zero code, zero
-corpus price — the intake-22 meta-result precedent, one family)
-- verified BEFORE working (1726+1 green, ruff clean, HEAD
-  37bcf6b, Python 3.12.14 the env pin); the synthesis
-  content-matched claim-by-claim against the routed records it
-  compresses (intake-11/D-147, intake-16/D-157, intake-17/D-158,
-  intake-19/D-160, D-134/REFERENCES §10) — the six principles
-  P1-P6 ALL OWNED in operational form, zero factual errors; no
-  fresh probe (the document claims no measurements, its claims
-  are mappings — the mappings were verified)
-- the deltas refused at the door: P2's universal MUST form (a
-  pack-4 design law over-generalized into an engine law — the
-  one real quality flaw), the four extra P2 applications
-  (knowledge closure/conflict resolution/group policy/director
-  tension — no substrate, no demonstrated problem), slice 2
-  knowledge-closure-as-displacement (no uncertainty object
-  exists; the authoring pattern expressible today as ordinary
-  events), the P1-P6 names as repo law (label-matching, D-024);
-  the pleasant surprise recorded: the synthesis's "relaxation"
-  names worldgen's own relax pass (PASS_ORDER), not a new
-  mechanism; three micro-drifts recorded (the "brief cache" vs
-  the assemble-fresh law; P4's capability-vs-expressible
-  overstatement; §3's "medium" vs D-160's PROVEN scaffold)
-- docs: phases.md §6 the intake-24 block (the verification map +
-  the principle index card, 6 owner-citing lines), DECISIONS
-  D-165, TASKS the iter-132 section, STATUS re-pin + Next step,
-  this file. iter-122 evicted here (verified against git in
-  this edit); 10 after; 1726+1 green, ruff clean after. Caps:
-  STATUS 587 / TASKS 1420 / DECISIONS 76 (44 rows — over the 30
-  cap on the §6.1 substance precedent until the next gate
-  collapse) / phases 3060 — the over-cap files ride the
-  documented §6.1 substance precedent
 ---

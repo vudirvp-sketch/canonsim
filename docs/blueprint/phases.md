@@ -3999,6 +3999,243 @@ repo-facing claims.
 Landed: D-174 + this block. The build queue UNTOUCHED — nothing
 unpins, nothing reorders; zero build-grade items.
 
+**The external-audit / roadmap-review output routed** (intake-29,
+D-175 — the owner's «проанализируй текст далее и его предложения,
+если согласен => нужно будет заложить в планы работу и
+соответственно пересмотреть оный или типа того. по пунктам
+разбери что надо что не надо и почему» research call over the
+uploaded audit text; the document a PRIOR SESSION'S OUTPUT — a
+deep static roadmap audit of `main` at 8f4fbd4e whose container
+had no network DNS (its own caveat: static analysis + history
+and test-contract reading, no pytest run); the D-163 precedent
+for clone-less sessions, re-verified this round at a REAL clone
+one commit ahead at aa1097f [the delta: iter-141's doc-only
+intake-28 — no audited surface moved] AND with the live suite
+the audit could not run: 1754 passed + 1 skipped, ruff clean,
+Python 3.12.14 the env pin, verified BEFORE working). The
+session's question, in repo terms: which of the audit's ten
+proposals are already standing law, which survive the
+transplantation test (D-173), and which enter the rows as
+contract sharpenings — the owner pre-delegating the «если
+согласен => заложить в планы» half.
+
+**The verification map** (the document's load-bearing
+repo-facing claims → the standing forms at HEAD aa1097f):
+
+| The audit's claim | The standing form at HEAD | Verdict |
+|---|---|---|
+| 1754+1 green, ruff clean | LIVE run this session (the audit DNS-less could not) | FACT (live) |
+| `core/pack.py` ~5972 lines / ~283 KB; `core/loop.py` ~1670 / ~80 KB; the `_Lint` admission layer carries `_worldgen/_travel/_weather/_calendar/_factions/_live_char/_teleology/_brief/_reflection/_retrieval` | 5971 lines / 282,976 B; 1671 / 80,277 B; the method set verified (load-time lint, `run()` orchestration) | FACT |
+| no `.github/workflows`; main unprotected, no required status checks | no `.github/` in the tree; the branch API at session time: `protected: false`, checks off | FACT (live API) |
+| the log writer is the one canon-write path; `fold()` the reversible projection; `state_change.from` checked; the RNG stream separation; derived ≠ truth | INV-1/D-031, STATE-1/D-023, D-035, INV-2/D-028, L11 — standing | FACT |
+| roads-1's "MST/k-nearest graph over the sites"; WorldModel 200–600+ sites vs separate runtime locations; LOD reads active → adjacent (the exits) → cold | the row verbatim; the province at HEAD: (144//8)² = 324 sites vs 6 claimed locations; `core/lod.py` WARM = the active location's exits | FACT |
+| res-1's row: source → flow → sink as pack data, flows as aggregate macro-events, sinks via the irreversible item laws, derived prices, "never a second economy engine" | the TASKS row verbatim; `irreversible` = the state_change flag "never reverts without an explicit counter-event" (EVENT_SCHEMA — the decay family's law, never a stock semantics) | FACT (framing corrected below) |
+| since-1 reads "since the last co-presence tick"; scene = the PC-location interval | the row verbatim; `brief/ledger.py::scenes` owns the interval; "co-presence" has NO standing formal definition (grep: the row + the intake-10 block only) | FACT (the gap real) |
+| the last intakes: doctrine confirmed → owned → zero build-grade rows | iter-138..141 all doc-only; intakes 27/28 zero build-grade by their own records | FACT |
+| M3/T8 insufficient as the depth evidence for new mechanics | TEST_PLAN §9 (iter-138) already routes depth claims to one-knob + composition crossing + the depth battery; iter-137's changed-next-decision unit the standing form | ALREADY OWNED |
+
+**The point-by-point verdicts** (the document's ten sections;
+ADOPT = enters the rows this iteration; ALREADY OWNED = nothing
+owed; REFUSED = with cause):
+
+1. **res-1 — the mechanism split ADOPTED; the "contradiction"
+   framing corrected.** The document reads the row's "as PACK
+   DATA" as contradicting PACK_SPEC's WHAT/HOW admission law. The
+   fact pattern holds: no quantity primitive exists at HEAD (the
+   resolver registry is a closed mechanic vocabulary; items are
+   discrete `{position, carrier}` records; statuses are per-NPC
+   decay axes; the population cardinality is a derived
+   unborn-count; the macro surface emits aggregate outcomes,
+   never declarative stock deltas) — so a pack-only
+   implementation would inevitably grow the hidden mechanism the
+   row itself forbids ("never a second economy engine"). The
+   correction: the row never CLAIMS zero core change (unlike
+   pack-1/3/4's explicit "zero core change by design") — it is
+   SILENT on the mechanism's location; the honest reading is an
+   unwritten contract point, not a contradiction. The action is
+   the same either way. ADOPTED into the row: (a) the split — a
+   minimal domain-blind account/transfer/consume primitive is a
+   new WHAT (PACK_SPEC §1's test question answers yes: must a
+   second pack carry it for the mechanic to exist at all?) and
+   lands in core, NAMED — integer-only (the travel law's
+   arithmetic), through the canon door, INV-3-clean vocabulary —
+   while the economy (the resource graph, sources/flows/sinks,
+   price formulas, thresholds, faction coupling) stays pack
+   data; (b) the irreversibility split — event immutability ≠
+   stock immutability: a sink's consumed unit never
+   un-consumes, but a stock regrows legally via new source
+   events (`7 → 12` by a source event is an ordinary event,
+   never a "revert"); the `irreversible` flag is the wrong
+   instrument for stock props (it governs spontaneous reversion
+   — the decay family's law); (c) the verification plan rides
+   TEST_PLAN §9's claim packet — the conservation oracle
+   (nothing appears/disappears outside declared sources/sinks),
+   the no-negative-stock floor, the player-decision-effect arm,
+   the one-knob ablation (the audit's "four proofs" = §9's rows
+   instantiated; the priced-option question [intake-27] the
+   counting form — the audit's own citation holds).
+2. **roads-1 — the topology contract ADOPTED.** The node question
+   is real and undecided: 3–6 claimed settlements on a 200–600-site
+   lattice — a k-nearest graph over ALL sites mostly hits
+   unclaimed sites, so the exit surface (`exits(location)` mapped
+   through the claims, iter-104's read) depends entirely on
+   whether the graph spans all sites or claimed/settlement nodes;
+   the row fixes neither. ADOPTED into the row: the node question
+   pinned FIRST; the bare "MST/k-nearest" wording RETIRED (a tree
+   and a bounded-degree graph are different behavioral surfaces —
+   name the algorithm; if both are combined, the combination
+   fence's three questions apply, D-174); the invariant set
+   (connected, no self-loop, symmetric, bounded degree,
+   deterministic tie-breaking + edge ordering [INV-2 anyway], a
+   pathological-edge upper bound, an explicit cycle policy); the
+   behavioral falsifier beyond graph shape — same world,
+   different topology → the expected LOD/autonomy differences
+   MEASURED (the warm ring is the row's own named consumer; the
+   topology must show in WHO simulates, not only in route
+   existence — rides §9). The document's "roads are a behavioral
+   mechanic, not a pathfinding feature" = the row's own consumer
+   list made a test obligation.
+3. **since-1 — the encounter baseline ADOPTED.** "The last
+   co-presence tick" has no standing definition (verified); the
+   document's five senses — last physical co-presence / last
+   scene / last brief observation / last known fact / last entity
+   re-entry — are genuinely different baselines and the row picks
+   none. ADOPTED into the row: the contract pins the epoch
+   semantics first (the leading candidate: the per-entity
+   encounter epoch — each new physical co-presence opens an
+   epoch, the delta reads end-of-previous-epoch →
+   start-of-current; a read-side construction, zero canon
+   writes — the row's own law); the surface separation made
+   explicit: `scene_delta` answers "what do I perceive now"
+   (BRIEF_SPEC §3.2's beat window), since-1 answers "what changed
+   in this entity since we last met" — different blocks, never
+   merged; the blind-NPC laws (TEST_PLAN §1.3) inherit to the new
+   lines (the document's "only what the PC should see" — the
+   standing discipline, referenced never restated).
+4. **companion-1 — the no-teleport law ADOPTED as a row clause.**
+   The document's rule is INV-1's consequence made explicit: a
+   companion moves ONLY through ordinary movement/travel intents
+   through the door (`movement_changes` the single position
+   writer; the rotation/urgency grammar the vehicle — the row's
+   own shape); "PC moved ⇒ companion follows" implicit sync would
+   be a hidden write path, already illegal (D-031's privilege
+   separation). Lag is a legal world state; a follow cadence, if
+   ever wanted, is a measured mechanic through the declared
+   grammar — never hidden synchronization. The owner-gated status
+   unchanged (the document agrees).
+5. **engine-1/presentation-1 — the deferral SUPPORTED; the
+   stabilization list REFUSED as a delta (already owned).** The
+   dependency (the child, never a sibling competitor) is standing
+   law (D-148). The document's "model-independent" list is
+   already owned piece by piece: truncation markers (BRIEF_SPEC
+   §7's `[truncated:N items dropped]`), the canon/control split
+   (§7.1 `narrator_protocol`), the call budget (st-4, absorbed at
+   presentation-1's write time), failure semantics
+   (VALIDATION_SPEC §4–5 + the regen counter), the
+   parser/serializer (PARSER_SPEC owns mode C). The "versioned
+   brief envelope" CONTRADICTS BRIEF_SPEC §8 (the brief is
+   derived read-side — no `schema_version` exists to bump; a
+   rendered-bytes change rides the same commit as the spec edit);
+   front-loading the rest tensions §9's own JIT header ("writing
+   these early = scope creep", D-022's frame: a contract without
+   a consumer has unknown requirements). The standing vehicle for
+   exercising these surfaces before engine-1 is the bg-8
+   heartbeat, unchanged.
+6. **ci-1 — the priority ADOPTED (the recommendation; the pick
+   stays the owner's — D-113).** The facts verified live at HEAD:
+   no `.github/`, main unprotected, required checks off — the
+   1754+1/ruff green is currently a local discipline (the
+   stop-point ritual + the env pin). The runner (pytest + ruff on
+   push, `PYTHONHASHSEED=0`, the pinned Python — the T1
+   byte-identity law's environment clause, TECH_NOTES §4) is the
+   cheapest risk reduction on the board: zero corpus price,
+   dev-side only (INV-4 untouched), and it automates the landed
+   admission lint's discipline. Recorded in the row: the session's
+   recommendation as the FIRST owner pick, then protect main.
+   AGENTS §8 keeps the CI files owner-gated.
+7. **The pack.py split — the rider rule ADOPTED, the standalone
+   refactor REFUSED.** "Never split the ownership, split the
+   implementation of the ownership" is the right shape and
+   L13-legal once tied to the named future change (roads-1/res-1
+   lint growth). The standing rule: the `_Lint` domain split
+   (worldgen/travel/weather/calendar/… classes under the one
+   orchestration layer; no DSL, no base-class framework) rides
+   the FIRST pack.py-growing row — `load_pack` stays the single
+   admission gate, the T1/T2 byte-identity twin verifies the move
+   at zero corpus price. A standalone refactor iteration NOW would
+   be scope creep (no task ID requires it — the document's own
+   "не рефакторинг ради красоты" caveat honored).
+8. **The research-intake admission rule ADOPTED (softened to the
+   repo's grammar).** The fact pattern holds: iter-138..141 all
+   doc-only, intakes 27/28 zero build-grade — though
+   instrument-grade output continues (§9 itself was intake-26's
+   product), so the honest reading is the return shifting from
+   instruments to build evidence, not research becoming
+   worthless. The formal anti-loop (AGENTS §2.5) never trips
+   because each intake is a distinct owner-called topic (the
+   document's observation — correct). ADOPTED (the D-row): a new
+   external intake convenes only with (a) a named open build row
+   or standing debate it feeds, and (b) a potential falsifier
+   stated up front; the owner's explicit fresh question always
+   overrides, recorded as such. The freeze-exception list
+   (roads-1/res-1/since-1/engine-1-feeding research) rides (a)
+   naturally. Promotion into AGENTS.md is the owner's call (the
+   session's Next-step note).
+9. **M3/T8 — ALREADY OWNED, no change.** The document's demotion
+   is standing law since iter-138: §9 routes "this creates new
+   depth" to one-knob perturbation + composition crossing + the
+   depth battery (iter-137's changed-next-decision unit); M3/T8
+   remain the gate/regression signals (ROADMAP §5's protocol —
+   the phases all closed). The document itself concedes the repo
+   "already partly realized" this; this record confirms it as
+   fully owned. No TEST_PLAN edit (D-024 — never restate the
+   owner).
+10. **pack-1 — the consent split ADOPTED as a row clause.** The
+    row's current "`consented`/`coerced` crafted knowledge
+    records" names only the belief half; the canonical fact
+    belongs in the event's outcome (the standing
+    canon-outcome vs per-knower-record discipline — the crime
+    family's own shape), the crafted records carry what NPCs
+    believe (the D-008 pattern's lie half). The pack lint adds
+    the mutually-exclusive consistency check between the
+    canonical states/events (the PACK_SPEC §5/§6 lint family) —
+    one token never means fact+belief+rumor at once. The parked
+    row carries the note until its slot opens.
+
+**The operational order — the session's RECOMMENDATION, never
+the pick (D-113: ORDER = the owner's; TASKS owns composition):**
+ci-1 first (the hygiene the audit names — the cheapest item on
+the board), then the three CONTRACT WRITES (roads-1 / res-1 /
+since-1 turned from row wordings into compact pre-implementation
+contracts with invariants, falsifiers and the minimal test set —
+the audit's own closing proposal, the intake-29 sharpenings
+their starting material), then the build rows in the standing
+readiness order (roads-1 the readiness head), the pack consumers
+(pack-1/pack-4) as the primitives' universality proofs when the
+slots open, engine-1 → presentation-1 last (the SoW consult
+material meanwhile parked: the sacrifice protocol + the
+combination fence). The foundation untouched (INV-1..5, event
+sourcing, the RNG bank, pack/core split, LOD, canon/voice
+separation, JIT-spec discipline — the audit's and this session's
+shared verdict: no reopening, no closed phase reopened).
+
+**Refused at the door**: the "internal contradiction" framing as
+a record (the row is silent, not contradictory — the action
+identical); the front-loaded presentation-1 stabilization
+(point 5, cause above); the standalone pack.py refactor (point
+7, L13/AGENTS §2.4); any M3/T8 law change (point 9, already
+owned); the "versioned brief envelope" (BRIEF_SPEC §8 contra).
+Zero build-grade items — the row sharpenings ARE the build
+queue's preparation: the queue's composition changed, its order
+never.
+
+Landed: D-175 + this block + the six TASKS row sharpenings (the
+res-1 mechanism/irreversibility splits, the roads-1 topology
+contract, the since-1 encounter baseline, the companion-1
+no-teleport clause, the pack-1 consent split, the ci-1
+recommendation note) + the two rider rules (the pack.py split
+ride-along; the intake admission pre-registration).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
