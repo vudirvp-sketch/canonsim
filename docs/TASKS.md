@@ -93,18 +93,6 @@ claim packet)
   objects, a res-1 sink shape — CONCRETE since res-1 landed iter-146/D-179;
   group-scale entity birth already exists, depth-7's condensation,
   iter-93/D-127). Never a speculative build.
-- `mech-2` — default output caps on the introspection CLIs (D-128; rides
-  the next `scripts/mechanics.py` touch, never its own iteration): `trace`
-  prints the full per-tick view unless the operator remembers
-  `--tail`/`--ticks` (measured at iter-94's HEAD: 188 lines / 12KB on
-  day1_full — O(ticks)); cap the default (a last-N window + the "pass
-  --<flag> for more" tail note), expansion by flag only; `matrix` the same
-  if pack growth ever pushes it past a screen. Rides WITH it (synced
-  iter-150 per D-113): intake-21's single-event postmortem form (the `why`
-  surface's one-event read) + intake-22's DAG viz-export form (the systems'
-  read/write graph from the `matrix` data) — never their own iterations;
-  the caps stay the core, the observability frame (the reading agent's
-  attention budget) the shared why.
 - `qa-1` — mypy --strict on `core/`: owner-approval-gated dev tooling (dev
   tooling capped at pytest + ruff — AGENTS §8/§10; D-031 parks the
   candidate). The type-discipline values are law from iter-1 via
@@ -135,7 +123,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..162 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..163 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -143,6 +131,22 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-163 · 2026-09-20 · mech-2 — the introspection CLI's attention budget
+  (the standing row's build, the owner's «mech 2 давай сделаем» call; the
+  caps core + the two riders in one mechanism): DEFAULTS bounded, nothing
+  dropped silently, every expansion an explicit flag (D-128's effect line
+  + D-148's [truncated:N] law applied to CLI defaults) — `trace`'s
+  unqualified default capped to the last 720 ticks (measured 27/43 lines
+  on the canonical runs vs 175/277 full) with the tail note naming the
+  flags; `matrix`'s default the compact query-vocabulary inventory (the
+  row's "past a screen" conditional now fact: 300+ lines on the grown
+  packs), `--full` the whole listing; `why --event ID` the single-event
+  postmortem (intake-21: the cause chain + the knowledge-wiring join +
+  the cascade, counts re-derived, detail capped with named walk-back
+  queries); `matrix --dag` the systems read/write graph as Mermaid
+  (intake-22: the projection of rules.json::systems via the scheduler's
+  public parse, never a runtime); tests/test_mechanics.py +6 (the §9
+  claim packet: recount oracles for chain/children/edges).
 - iter-162 · 2026-09-20 · debt-1 — the crossing household's flood debt economy
   arm (the standing row's build, the owner's «продолжай работу, где логично»
   continuation call over the iter-161 routing): the province pack's `economy`

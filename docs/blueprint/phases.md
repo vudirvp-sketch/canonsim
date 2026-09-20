@@ -1798,9 +1798,9 @@ restates):
 2. **The verdict routing** for a surprising outcome: T-suite
    first (bug) → the balance-1 distributions (imbalance) → the
    corpus/T8/heartbeat (emergence); prose is never proof (TEST-1).
-3. **The single-event postmortem** (trace_event's shape) rides
-   mech-2's next mechanics.py touch — one event id in, the cause
-   chain + knowledge records + cascade children out.
+3. **The single-event postmortem** (trace_event's shape) LANDED
+   iter-163 as `why --event ID` (mech-2's build): one event id in,
+   the cause chain + knowledge records + cascade children out.
 4. **The first-divergence read** rides slice 3's
    outcome-divergence experiment: count divergent NEXT-DECISION
    surfaces (intake-18's form) AND name the first divergent event
@@ -1872,16 +1872,17 @@ each line cites its owner, nothing restates):
    new mechanic family lands its pack-block lint with it, the
    cultures/budget precedent), never a retrofit.
 6. **The graph is a projection** (rules.json → the DAG → any
-   view); the viz export rides mech-2's next touch if a
-   consumer names it — never a runtime, never a second truth.
+   view); the viz export LANDED iter-163 as `matrix --dag` (the
+   rules.json::systems Mermaid projection, mech-2's build) — never
+   a runtime, never a second truth.
 
 Refused at the door: no PluginManager/ModuleBase/AbstractSystem/
 lifecycle framework/DI (L13); no node-graph runtime, no second engine
 (INV-1/INV-2, the D-116/D-147 family); no module-side RNG creation,
 direct log writes, cross-projection mutation, hidden callbacks, order
-changes; no new viz row or build (the first-consumer law; the viz
-export rides mech-2's next touch); no ComfyUI donor registration
-without the owner's survey call.
+changes; no new viz row or build (the first-consumer law held —
+the export landed as mech-2's own build, never a new row); no ComfyUI
+donor registration without the owner's survey call.
 
 Landed: D-163 + this block. The build queue UNTOUCHED — nothing
 unpins, nothing reorders; zero build-grade items.
@@ -2446,9 +2447,11 @@ HOW to perturb or compare it.
 iter-135..137): its "no generic next-decision census" — the door-surface
 battery (iter-137) IS the next-decision census form, landed as the
 standing depth-battery arm (the RUNTIME census stays zero-consumer —
-mech-2's parked family); its "first-divergence reporting missing as a
-reusable operator" — CONSUMED by iter-135's composed experiment, the
-operator form still parked on mech-2; its "no common claim → oracle →
+never a mech-2 rider, the first-consumer law); its "first-divergence
+reporting missing as a reusable operator" — CONSUMED by iter-135's
+composed experiment, the operator form still parked (zero consumers;
+the synced mech-2 row never carried it — TASKS owns composition,
+D-113); its "no common claim → oracle →
 falsifier record" — iter-137's A–H ledger is the form's standing
 instance. The persistence/displacement analysis surface stays PARTIAL
 with zero consumers (no row owed until a consumer names it — the

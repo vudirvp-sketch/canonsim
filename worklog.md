@@ -7,6 +7,27 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-163 · 2026-09-20 · mech-2 — the introspection CLI's attention budget
+(the standing row's build, the owner's «mech 2 давай сделаем» call): the
+caps core + intake-21's postmortem + intake-22's DAG export as ONE
+mechanism — defaults bounded, nothing dropped silently, expansion by flag
+- mechanics.py: trace's unqualified default = the last 720 ticks + the
+  naming tail note (27/43 lines on the canonical runs vs 175/277 full);
+  matrix's default = the compact query-vocabulary inventory (--full the
+  whole, the row's "past a screen" conditional now fact: 300+ lines on
+  grim/province); why --event ID (the cause chain + the knowledge-wiring
+  join + the cascade, capped with walk-back-naming truncation lines);
+  matrix --dag (rules.json::systems as Mermaid via the scheduler's public
+  parse); the law in the tool docstring, D-128/D-148 cited, no new D-row
+- tests/test_mechanics.py +6 (the §9 claim packet — recount oracles for
+  chain/children/edge counts, window policy, compact/full, honest edges);
+  docs: NAV §5, TASKS (row collapse + ledger), phases.md §6 (the two
+  cards' rider lines), STATUS re-pin; 7 paths (the iter-160 precedent)
+- verified at BASE_COMMIT ee09105 (1872+1 green, ruff clean — the pin
+  re-confirmed) and re-verified after: 1878+1 green, ruff clean;
+  not-built residues (impact-query, first-divergence operator) stay
+  zero-consumer per the first-consumer law; iter-153 evicted per the cap
+---
 iter-162 · 2026-09-20 · debt-1 — the standing row's build (the owner's
 «продолжай работу, где логично» continuation call over the iter-161
 routing): the flood debt's economy arm landed in province_pack as PURE
@@ -189,17 +210,3 @@ worldbuild, stale pre-iter-145)
   TASKS presentation-1, STATUS re-pin; iter-144 evicted per the cap;
   1842+1 green + ruff clean both ends at BASE 16c3e4f
 
-iter-153 · 2026-09-20 · worldbuild1 — the owner's archive-intake call: the
-cleaned worldbuilding corpus landed as `docs/worldbuild/` (10 files, the
-README the index + the terminology fence), every file read, the repo-fact
-claims verified against HEAD (the anchor's province_pack evidence list +
-the world-2 L1/L2 verdict language — all check out)
-- the wiring: NAV §1/§2/§3 (the row, the world-setting reading-gradient row,
-  the authored-setting-model ownership row), the repo README map row, TASKS'
-  standing-rows preamble the separate-track pointer (WORLD_WORKPLAN the world
-  track's own plan, never a second queue), D-186 (the D-018-family compound
-  merge — DECISIONS stays at 30), STATUS re-pin; the terminology fence:
-  worldbuild canon/Echo ≠ INV-1's log canon / `core/echo.py`'s read model
-- 1842+1 green + ruff clean both ends at BASE f660364 (env pin 3.12.14);
-  16 paths doc-only (over the soft limit — the payload IS the directory +
-  the doc quintet, per AGENTS §2.3); iter-143 evicted per the cap

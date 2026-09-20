@@ -1,12 +1,14 @@
-"""The mechanics introspection CLI (mech-1, iter-84; D-046 operator tooling).
+"""The mechanics introspection CLI (mech-1, iter-84; mech-2, iter-163;
+D-046 operator tooling).
 
 Four read-only instruments over the committed pack and committed (or freshly
 run) logs, for the per-instance questions the prose specs answer only
 generally: "who consumes event type X", "why has hook Y not released by tick
-T", "what changes if step Z is inserted here". Everything here is DERIVED,
-rebuildable, never truth (the checkpoint.py law): the pack JSON and the
-engine's public functions are the only sources. Output is stdout; the blast
-arms write their logs under the gitignored output/mech/ dir.
+T", "why did event E happen", "what changes if step Z is inserted here".
+Everything here is DERIVED, rebuildable, never truth (the checkpoint.py
+law): the pack JSON and the engine's public functions are the only sources.
+Output is stdout; the blast arms write their logs under the gitignored
+output/mech/ dir.
 
 The shadow-replay principle (D-118): the runtime is never instrumented — no
 observer hooks, no core edits, no reimplementation of fold logic. `trace` and
@@ -36,13 +38,23 @@ crime_watch, urgencies, echo, traits, actions) and lists every other rules
 block generically as unindexed — a new layer is visible the iteration it
 lands and joins the wiring matrix when its shape rule is added.
 
+The attention budget (mech-2, D-128's effect line): DEFAULTS are bounded
+to what a reading agent scans in one screen, and nothing bounded is
+dropped silently — every capped view names what was cut and the flag that
+shows it (D-148's [truncated:N] law applied to CLI defaults). An
+unqualified `trace` shows the last DEFAULT_TRACE_WINDOW_TICKS ticks; an
+unqualified `matrix` shows the compact name inventory (`--full` for the
+whole); the event postmortem caps its chain/children detail at named
+constants. Every explicit flag is the operator's own window or question —
+answered in full, never second-guessed.
+
 Usage:
     python scripts/mechanics.py matrix [--pack DIR] [--event TYPE]
-        [--hook TAG] [--token TOKEN] [--prop PATH]
+        [--hook TAG] [--token TOKEN] [--prop PATH] [--full] [--dag]
     python scripts/mechanics.py trace (--log PATH | --script PATH) [--pack DIR]
         [--ticks A:B] [--tail N] [--entity ID] [--hook TAG] [--event TYPE]
-    python scripts/mechanics.py why --hook TAG (--log PATH | --script PATH)
-        [--at-tick N] [--pack DIR]
+    python scripts/mechanics.py why (--hook TAG | --event ID)
+        (--log PATH | --script PATH) [--at-tick N] [--pack DIR]
     python scripts/mechanics.py blast --script PATH [--step-json JSON]
         [--at N] [--pack DIR] [--out DIR]
 
@@ -80,6 +92,7 @@ from core.log import EventRecord, read_log  # noqa: E402
 from core.loop import Simulator, load_playscript  # noqa: E402
 from core.pack import Pack, load_pack  # noqa: E402
 from core.predicates import evaluate  # noqa: E402
+from core.scheduler import decls_from_rules  # noqa: E402
 from core.states import DECAY_EVENT  # noqa: E402
 
 PACK_DIR = REPO / "content" / "tavern_pack"
@@ -92,6 +105,15 @@ INDEXED_BLOCKS: Final = (
 _COMPARATORS: Final = {
     "at_least": ">=", "at_most": "<=", "equals": "==", "not_equals": "!=",
 }
+# mech-2 caps (the attention budget, D-128): named constants, one home.
+# Measured on the canonical runs at iter-163's HEAD: the last 720 ticks
+# render 27 lines (day1_full) / 43 (province_feud) — a screenful of recent
+# history, never the O(events) dump (175/277 lines at full width).
+DEFAULT_TRACE_WINDOW_TICKS: Final = 720
+# The single-event postmortem's detail caps: nearest links/descendants
+# shown, the rest counted on the truncation line (anti-silent-drop).
+CHAIN_DETAIL_LINKS: Final = 8
+CHILD_DETAIL_LINES: Final = 12
 
 
 # -- loading ------------------------------------------------------------------
@@ -637,6 +659,74 @@ def _render_matrix_prop(pack: Pack, prop: str) -> list[str]:
     return lines
 
 
+def _matrix_name_inventory(pack: Pack) -> dict[str, list[str]]:
+    """The queryable name spaces as sorted lists: hook tags, event types,
+    knowledge tokens (the matrix query vocabulary — the compact default
+    lists them so the operator never reads rules.json just to ask)."""
+    hooks = sorted(pack.rules.get("director", {}).get("hooks", {}))
+    events: set[str] = set()
+    for action in _action_rows(pack):
+        for event_type in (action.get("events") or {}).values():
+            if isinstance(event_type, str):
+                events.add(event_type)
+    events.update(pack.rules.get("on_action", {}))
+    tokens = sorted({
+        token
+        for entries in _event_knowledge_tokens(pack).values()
+        for token in entries
+    })
+    return {"hooks": hooks, "events": sorted(events), "tokens": tokens}
+
+
+def _render_matrix_compact(pack: Pack) -> list[str]:
+    """The bounded default: one (wrapped) line per name space, the read-side
+    folds, the unindexed blocks, and the query note. Every fact here is a
+    NAME the four narrow flags accept — the wiring itself stays in --full
+    or the per-object views."""
+    names = _matrix_name_inventory(pack)
+    out: list[str] = []
+    for label, key in (("hooks", "hooks"), ("events", "events"),
+                       ("tokens", "tokens")):
+        items = names[key]
+        out.append(
+            f"{label} ({len(items)}): "
+            + (", ".join(items) if items else "-")
+        )
+    arcs = pack.rules.get("director", {}).get("arcs", {})
+    if arcs:
+        out.append(
+            "arcs: "
+            + ", ".join(
+                f"{name}[{' > '.join(str(m) for m in arc.get('members', ()))}]"
+                if isinstance(arc, Mapping)
+                else f"{name}[?]"
+                for name, arc in sorted(arcs.items())
+            )
+        )
+    echo = pack.rules.get("echo", {})
+    traits = pack.rules.get("traits", {})
+    out.append(
+        f"read-side folds: echo {len(echo.get('tokens', {}))} valence tokens · "
+        f"scale {json.dumps(echo.get('scale'))} · traits threshold "
+        f"{traits.get('threshold')} · "
+        f"{len(traits.get('beliefs', {}))} belief families (crystallized)"
+    )
+    unindexed = sorted(
+        key
+        for key in pack.rules
+        if key not in INDEXED_BLOCKS and key != "notes"
+    )
+    out.append(
+        "unindexed rules blocks (shape rules join here, never a rewrite): "
+        + (", ".join(unindexed) if unindexed else "-")
+    )
+    out.append(
+        "query: --hook TAG · --event TYPE · --token TOKEN · --prop PATH · "
+        "--dag (the systems graph) · --full (the whole inventory)"
+    )
+    return out
+
+
 def render_matrix(
     pack: Pack,
     *,
@@ -644,12 +734,18 @@ def render_matrix(
     hook: str | None = None,
     token: str | None = None,
     prop: str | None = None,
+    full_inventory: bool = True,
 ) -> str:
     """The static wiring matrix: pack-declared producers/consumers/hooks.
-    Query flags narrow to one object; without flags the full (compact)
-    inventory prints. Unknown rules blocks are listed generically — the
-    future-layer fallback (visible immediately, indexed when shaped)."""
-    out: list[str] = [f"== MATRIX {pack.name_version} — static wiring =="]
+    Query flags narrow to one object; without flags the compact name
+    inventory prints by default (mech-2's attention budget) and --full
+    restores the whole listing. Unknown rules blocks are listed generically
+    — the future-layer fallback (visible immediately, indexed when shaped)."""
+    narrow = bool(hook or event or token or prop)
+    header = "static wiring"
+    if not narrow and not full_inventory:
+        header += " (compact — the default view)"
+    out: list[str] = [f"== MATRIX {pack.name_version} — {header} =="]
     if hook:
         out.extend(_render_matrix_hook(pack, hook))
     if event:
@@ -658,6 +754,10 @@ def render_matrix(
         out.extend(_render_matrix_token(pack, token))
     if prop:
         out.extend(_render_matrix_prop(pack, prop))
+    if not narrow and not full_inventory:
+        out.append("")
+        out.extend(_render_matrix_compact(pack))
+        return "\n".join(out) + "\n"
     if not (hook or event or token or prop):
         out.append("")
         out.append("-- hooks (director.hooks) --")
@@ -749,6 +849,38 @@ def _render_event(
     return lines
 
 
+def trace_window(
+    events: Sequence[EventRecord],
+    *,
+    ticks: str | None = None,
+    tail: int | None = None,
+    entity: str | None = None,
+    hook: str | None = None,
+    event_type: str | None = None,
+) -> tuple[int | None, int | None, str | None]:
+    """The trace window policy (mech-2's cap, D-128): an unqualified trace
+    defaults to the last DEFAULT_TRACE_WINDOW_TICKS ticks; every explicit
+    flag is the operator's own window or filter — answered in full. Returns
+    (lo, hi, note); the note names what was cut and the expansion flags
+    (the anti-silent-drop law) and is None whenever nothing was cut."""
+    last = events[-1].t if events else 0
+    if tail is not None or ticks is not None or entity or hook or event_type:
+        if tail is not None:
+            return max(0, last - tail + 1), last, None
+        lo, hi = _parse_ticks(ticks) if ticks else (None, None)
+        return lo, hi, None
+    lo = max(0, last - DEFAULT_TRACE_WINDOW_TICKS + 1)
+    if lo == 0:
+        return None, None, None
+    note = (
+        f"-- default window: the last {DEFAULT_TRACE_WINDOW_TICKS} of "
+        f"{last} ticks (the attention budget); pass --ticks 0: for the "
+        "whole run, --tail N for the last N ticks, --ticks A:B for a "
+        "window, or --entity/--hook/--event to narrow"
+    )
+    return lo, last, note
+
+
 def render_trace(
     pack: Pack,
     events: Sequence[EventRecord],
@@ -760,6 +892,7 @@ def render_trace(
     entity: str | None = None,
     hook: str | None = None,
     event_type: str | None = None,
+    window_note: str | None = None,
 ) -> str:
     """The dynamic half: a per-tick execution view of one log — events with
     their fold deltas, knowledge mints, hook seeds, and the director's beat
@@ -830,6 +963,8 @@ def render_trace(
             f" · released at beat(s) "
             f"{', '.join(str(t) for t in released_beats) or 'never'}"
         )
+    if window_note is not None:
+        out.append(window_note)
     return "\n".join(out) + "\n"
 
 
@@ -983,6 +1118,201 @@ def render_why(
     return "\n".join(out) + "\n"
 
 
+# -- why --event: the single-event postmortem (intake-21, mech-2) -------------
+
+
+def render_why_event(
+    pack: Pack,
+    events: Sequence[EventRecord],
+    *,
+    event_id: str,
+    source: str = "-",
+) -> str:
+    """The one-event read (intake-21's form): one event id in — the event's
+    own record, the backward cause chain (the log's own `cause` links, one
+    parent each), the knowledge it minted joined to the pack's static
+    wiring (what those tokens feed), and the forward cascade of
+    descendants. Values are log facts; the director attribution is the
+    shadow's (D-118); the wiring joins are pack declarations (D-024)."""
+    out = [f"== WHY — event {event_id} · {source} =="]
+    by_id = {event.id: event for event in events}
+    event = by_id.get(event_id)
+    if event is None:
+        last_id = events[-1].id if events else "ev_0000"
+        out.append(
+            f"no such event id in this log (ids run ev_0000..{last_id})"
+        )
+        return "\n".join(out) + "\n"
+    replay = shadow_replay(pack, events)
+    out.append("event")
+    out.extend(_render_event(event, replay.intent_tags))
+
+    # -- the backward chain: exactly one parent per event (the writer's law)
+    chain: list[EventRecord] = []
+    cursor: str | None = event.cause
+    while cursor is not None and cursor in by_id:
+        parent = by_id[cursor]
+        chain.append(parent)
+        cursor = parent.cause
+    if cursor is not None:
+        out.append(
+            f"cause chain  stops at {cursor!r} — a cause naming no event in "
+            "this log (cross-log continuation?)"
+        )
+    elif not chain:
+        out.append("cause chain  none — the run-start event (cause null)")
+    else:
+        root = chain[-1]
+        shown = chain[:CHAIN_DETAIL_LINKS]
+        out.append(
+            f"cause chain  {len(chain)} link(s) back to {root.id} "
+            f"({root.type} @ t={root.t})"
+        )
+        for link in shown:
+            out.append(
+                f"  [t={link.t}] {link.id} {link.type} · actor={link.actor}"
+            )
+        hidden = len(chain) - len(shown)
+        if hidden > 0:
+            out.append(
+                f"  (+{hidden} earlier links; walk back with "
+                f"why --event {shown[-1].id})"
+            )
+
+    # -- the knowledge section: minted tokens joined to their static wiring
+    if event.knowledge:
+        tokens = sorted({record.knows for record in event.knowledge})
+        out.append(
+            f"knowledge    {len(event.knowledge)} record(s) minted · "
+            f"{len(tokens)} distinct token(s)"
+        )
+        crime_map = _crime_map(pack)
+        echo_tokens = pack.rules.get("echo", {}).get("tokens", {})
+        families = pack.rules.get("traits", {}).get("beliefs", {})
+        for token in tokens:
+            parts = []
+            crime = crime_map.get(token)
+            if crime:
+                parts.append(f"crime {crime[0]} +{crime[1]}")
+            valence = echo_tokens.get(token)
+            if valence:
+                parts.append(f"echo {json.dumps(valence, sort_keys=True)}")
+            fed = sorted(
+                name
+                for name, family in families.items()
+                if isinstance(family, Mapping)
+                and token in json.dumps(family.get("tokens", family))
+            )
+            if fed:
+                parts.append(f"traits {', '.join(fed)}")
+            out.append(
+                f"  {token}  ->  "
+                + (" · ".join(parts) if parts else "no declared consumer")
+            )
+    else:
+        out.append("knowledge    none minted")
+
+    # -- the forward cascade: every descendant citing this event (BFS)
+    children: dict[str, list[EventRecord]] = {}
+    for e in events:
+        if e.cause is not None:
+            children.setdefault(e.cause, []).append(e)
+    direct = children.get(event.id, [])
+    total = 0
+    detail: list[tuple[int, EventRecord]] = []
+    frontier: list[EventRecord] = list(direct)
+    depth = 1
+    while frontier:
+        total += len(frontier)
+        for child in frontier:
+            if len(detail) < CHILD_DETAIL_LINES:
+                detail.append((depth, child))
+        frontier = [
+            child for parent in frontier for child in children.get(parent.id, ())
+        ]
+        depth += 1
+    if total == 0:
+        out.append("children     none — no event cites this one as its cause")
+    else:
+        out.append(
+            f"children     {len(direct)} direct · {total} descendant(s) "
+            "total (the downstream cascade)"
+        )
+        for child_depth, child in detail:
+            out.append(
+                f"  {'  ' * (child_depth - 1)}[t={child.t}] {child.id} "
+                f"{child.type} · actor={child.actor}"
+            )
+        hidden = total - len(detail)
+        if hidden > 0:
+            out.append(
+                f"  (+{hidden} more descendants; zoom with "
+                "why --event <id>)"
+            )
+    out.append(
+        "note        the chain and children are the log's own cause links "
+        "(EVENT_SCHEMA); the wiring joins are pack declarations; the "
+        "release law is DIRECTOR_SPEC's (D-024)"
+    )
+    return "\n".join(out) + "\n"
+
+
+# -- matrix --dag: the systems graph export (intake-22, mech-2) ---------------
+
+
+def render_dag(pack: Pack) -> str:
+    """The systems read/write graph as a Mermaid flowchart — the PROJECTION
+    of rules.json::systems (intake-22's form): never a runtime, never a
+    second truth (D-163). The parse rides the scheduler's own public
+    decls (D-118 — display over the real pipeline, never a re-parse).
+    Reads are dotted, writes solid, before/after hints thick (a runs
+    before b), per_tick systems bold; the per-family blocks (weather,
+    travel, economy, ...) declare their own wiring outside this graph —
+    the verified asymmetry, stated in the header so the picture never
+    overclaims coverage."""
+    decls = decls_from_rules(pack.rules)
+    out = [
+        f"%% MERMAID flowchart — the SCHED-1 systems graph of "
+        f"{pack.name_version}",
+        "%% derived from rules.json::systems (the projection law — D-163;",
+        "%% never truth: the pack JSON is the source, this view rebuilds)",
+        "%% the per-family blocks (weather/travel/economy/...) declare their",
+        "%% own wiring outside this graph (the verified asymmetry)",
+        "flowchart LR",
+    ]
+    if not decls:
+        out.append("  %% no systems declared in this pack")
+    namespaces = sorted({
+        name
+        for decl in decls.values()
+        for name in (*decl.reads, *decl.writes)
+    })
+    for name in sorted(decls):
+        marker = ":::per_tick" if decls[name].per_tick else ""
+        out.append(f'  sys_{name}["{name}"]{marker}')
+    for ns in namespaces:
+        out.append(f'  ns_{ns}("{ns}")')
+    for name in sorted(decls):
+        decl = decls[name]
+        for ns in decl.reads:
+            out.append(f"  sys_{name} -.-> ns_{ns}")
+        for ns in decl.writes:
+            out.append(f"  sys_{name} --> ns_{ns}")
+    hints: set[tuple[str, str]] = set()
+    for decl in decls.values():
+        for other in decl.before:
+            hints.add((decl.name, other))
+        for other in decl.after:
+            hints.add((other, decl.name))
+    for a, b in sorted(hints):
+        out.append(f"  sys_{a} ==>|before| sys_{b}")
+    out.append("  classDef per_tick stroke-width:3px")
+    out.append(
+        "  %% reads -.-> · writes --> · ordering hint ==> (a runs before b)"
+    )
+    return "\n".join(out) + "\n"
+
+
 # -- blast --------------------------------------------------------------------
 
 
@@ -1112,6 +1442,16 @@ def _build_parser() -> argparse.ArgumentParser:
     m.add_argument("--hook", help="narrow to one director hook tag")
     m.add_argument("--token", help="narrow to one knowledge token")
     m.add_argument("--prop", help="narrow to one projection prop path")
+    m.add_argument(
+        "--full",
+        action="store_true",
+        help="the whole inventory (the default view is the compact one)",
+    )
+    m.add_argument(
+        "--dag",
+        action="store_true",
+        help="the systems read/write graph as Mermaid (rules.json::systems)",
+    )
 
     t = sub.add_parser("trace", help="per-tick execution view of a log")
     t.add_argument("--log", type=Path, help="a committed log to replay")
@@ -1123,8 +1463,15 @@ def _build_parser() -> argparse.ArgumentParser:
     t.add_argument("--hook", help="only this hook's seeds/releases")
     t.add_argument("--event", help="only events of this type")
 
-    w = sub.add_parser("why", help="postmortem: why a hook did/didn't release")
-    w.add_argument("--hook", required=True)
+    w = sub.add_parser(
+        "why", help="postmortem: why a hook did/didn't release, or one "
+        "event's cause chain + knowledge + cascade"
+    )
+    target = w.add_mutually_exclusive_group(required=True)
+    target.add_argument("--hook", help="the hook postmortem")
+    target.add_argument(
+        "--event", help="the single-event postmortem: one event id in"
+    )
     w.add_argument("--log", type=Path)
     w.add_argument("--script", type=Path)
     w.add_argument("--at-tick", type=int, default=None)
@@ -1147,6 +1494,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     pack, schema = _load(args.pack)
     if args.command == "matrix":
+        if args.dag and (args.full or args.event or args.hook
+                         or args.token or args.prop):
+            raise SystemExit(
+                "error: --dag cannot be combined with --full/--event/"
+                "--hook/--token/--prop (it is its own view)"
+            )
+        if args.dag:
+            print(render_dag(pack), end="")
+            return 0
         print(
             render_matrix(
                 pack,
@@ -1154,6 +1510,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 hook=args.hook,
                 token=args.token,
                 prop=args.prop,
+                full_inventory=args.full,
             ),
             end="",
         )
@@ -1162,10 +1519,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         source, events, header = _events_from_source(
             pack, schema, args.log, args.script
         )
-        lo, hi = _parse_ticks(args.ticks) if args.ticks else (None, None)
-        if args.tail is not None:
-            last = events[-1].t if events else 0
-            lo, hi = max(0, last - args.tail + 1), last
+        lo, hi, note = trace_window(
+            events,
+            ticks=args.ticks,
+            tail=args.tail,
+            entity=args.entity,
+            hook=args.hook,
+            event_type=args.event,
+        )
         print(
             render_trace(
                 pack,
@@ -1177,6 +1538,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 entity=args.entity,
                 hook=args.hook,
                 event_type=args.event,
+                window_note=note,
             ),
             end="",
         )
@@ -1185,6 +1547,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         source, events, header = _events_from_source(
             pack, schema, args.log, args.script
         )
+        if args.event is not None:
+            if args.at_tick is not None:
+                raise SystemExit(
+                    "error: --at-tick applies to --hook only "
+                    "(the event pins its own tick)"
+                )
+            print(
+                render_why_event(
+                    pack, events, event_id=args.event, source=source
+                ),
+                end="",
+            )
+            return 0
         print(
             render_why(
                 pack, events, tag=args.hook, at_tick=args.at_tick, source=source

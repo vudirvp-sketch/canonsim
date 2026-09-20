@@ -1,57 +1,48 @@
-Iteration: iter-162 (`iter-162-debt1` — the standing row's build, the
-owner's «продолжай работу, где логично и правильно сейчас это делать»
-continuation call over the iter-161 routing): the crossing household's
-flood debt economy arm LANDED in province_pack as PURE PACK DATA over
-the res-1 substrate, zero core (the third consumer arming — grim first,
-pressure second) — (a) THE ACCOUNTS: the toll-taker's thin surplus
-(coin 2, itself the punt fund's climb toward the authored twelve) and
-the guild's chest at the weighbeam (loc_malby, coin 40 — the grim
-till's location form; the GROUP entity takes no stock: the entity
-lint's closed group vocabulary carries no accounts key, the economy
-lint's owner-agnostic form having anticipated group stocks the entity
-lint never opened — the substrate finding recorded in the block's
-notes, never patched in a zero-core slice); (b) THE TOLL-SURPLUS FLOW
-(the net source +2) + THE GUILD'S COLLECTION (the take +4), both
-SOURCES on the macro year — THE FOLD answering D-182's named co-due
-limit by construction (the toll-surplus flow and the collection would
-be co-due on the toll-taker's coin at every year crossing; the gross
-six's split the notes' only mirror — pack-4's own precedent); (c) the
-paper twenty / punt twelve / five-honest-years authored arithmetic in
-the notes — ONE COIN, TWO CLAIMS as live account state (the guild's
-claim outweighing the family's two-to-one); the reckoning a story beat
-(account_sourced listed, the tale carrying the year's lines under the
-Day 360 header); the budget's honest re-declare (60→65). Honest
-residues recorded: the flow vocabulary has no terminus and no
-amortization — the paper's fall, the clearance lump and the punt's
-purchase are DISCRETE events beyond the flows (no player-scaled door
-armed in this row, a future row's own call). Test-pinned
-(tests/test_debt1.py, +9 — the §9 claim packet) + the unarmed law's
-third-consumer update (test_economy); zero corpus price (the golden T1
-byte-untouched, pinned; the committed year run — the calendar
-experiment — sees the flows by its own year-scale design, its own laws
-held green).
+Iteration: iter-163 (`iter-163-mech-2` — the standing row's build, the
+owner's «mech 2 давай сделаем» call): the introspection CLI's ATTENTION
+BUDGET landed as one mechanism over the caps core + the two riders —
+the law: DEFAULTS are bounded to what a reading agent scans in one
+screen, nothing bounded is dropped silently, every expansion is an
+explicit flag (D-128's effect line discharged + D-148's [truncated:N]
+anti-silent-drop applied to CLI defaults). (a) THE CAPS CORE: `trace`'s
+unqualified default now the last 720 ticks (measured at HEAD: 27/43
+lines on day1_full/province_feud vs 175/277 at full width) with the
+tail note naming --ticks/--tail/--entity/--hook/--event; `matrix`'s
+default the COMPACT query-vocabulary inventory (hooks/events/tokens
+names, the folds, the unindexed law line, the query note — the row's
+"past a screen" conditional now FACT: 300+ lines on grim/province),
+`--full` restoring the whole listing; every explicit flag answered in
+full, never second-guessed. (b) INTAKE-21's SINGLE-EVENT POSTMORTEM:
+`why --event ID` — the event's own record, the backward cause chain
+(the log's own cause links), the knowledge-wiring join (each minted
+token -> its crime/echo/traits consumers), the forward cascade (BFS
+generations); detail capped at named constants with truncation lines
+that name the walk-back query (ids as links). (c) INTAKE-22's DAG
+EXPORT: `matrix --dag` — the systems read/write graph as a Mermaid
+flowchart, the PROJECTION of rules.json::systems through the
+scheduler's own public parse (reads dotted, writes solid, before/after
+hints thick, per_tick bold; the per-family asymmetry stated in the
+header so the picture never overclaims). The why surface is now the
+postmortem family (--hook XOR --event); D-118's shadow-replay law
+untouched (the release-equality pin green).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1872 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 2ea09ac BEFORE working — 1863+1, identical to
-the iter-161 pin — and re-verified after with the diff in place: 1872+1,
+1878 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT ee09105 BEFORE working — 1872+1, identical to
+the iter-162 pin — and re-verified after with the diff in place: 1878+1,
 the delta exactly the new claim packet) ·
 Date: 2026-09-20 ·
-Scope: `content/province_pack/entities.json` (the toll-taker's + the
-weighbeam town's accounts, the notes), `content/province_pack/rules.json`
-(the economy block + the story listing + the budget re-declare),
-`content/province_pack/templates.json` (the reckoning line),
-`tests/test_debt1.py` (the claim packet, +9), `tests/test_economy.py`
-(the unarmed law's third-consumer update), `docs/TASKS.md` (the row
-collapse + the iter-162 ledger line), `docs/worldbuild/ANCHOR_REGION.md`
-(§6.1's embodiment line), `docs/worldbuild/WORLD_WORKPLAN.md` (§2 + §6's
-candidate-1 arm), `docs/worldbuild/WORLD_TESTS.md` (§9's debt lines),
-`STATUS.md` (this re-pin), `worklog.md` (this entry) — 11 paths (over
-the 3–5 soft limit: the pack trio + the claim packet + the worldbuild
-owners + the doc quintet, the iter-157/161 pack-landing precedent). The
-prior iteration's record: iter-161 (poleseed). The detail lives in the
-pack notes + the worldbuild owners + the worklog + git.
+Scope: `scripts/mechanics.py` (the caps + the two riders + the CLI
+surface), `tests/test_mechanics.py` (the §9 claim packet, +6 — recount
+oracles for chain/children/edge counts), `docs/AGENT_NAVIGATION.md` (§5
+the CLI sketch), `docs/TASKS.md` (the row collapse + the iter-163 ledger
+line), `docs/blueprint/phases.md` (§6 the two cards' rider lines),
+`STATUS.md` (this re-pin), `worklog.md` (this entry) — 7 paths (over the
+3–5 soft limit: the build + its claim packet + the doc quintet, the
+iter-160 precedent). The prior iteration's record: iter-162 (debt-1).
+The detail lives in the tool's own docstring (the law carrier) + the
+claim packet + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -526,17 +517,22 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-162 DONE: the debt-1 standing row's build (the owner's «продолжай
-работу, где логично и правильно сейчас это делать» continuation call over
-the iter-161 routing): the flood debt's economy arm LANDED in province_pack
-as pure pack data over the res-1 substrate, zero core — the third consumer
-arming: the accounts (the toll-taker's thin surplus + the guild's chest at
-the weighbeam, the group-stock lint gap the recorded finding), the
-toll-surplus flow + the guild's collection (the FOLD answering D-182's
-named co-due limit by construction), the paper/punt arithmetic authored in
-the notes (one coin, two claims as live account state), the reckoning a
-story beat; tests/test_debt1.py +9, the unarmed law's third-consumer
-update, 1872+1 green both ends; zero corpus price, the golden T1
+**iter-163 DONE: mech-2 (the owner's «mech 2 давай сделаем» call — the
+row's own build): the introspection CLI's attention budget landed as one
+mechanism — the caps core (trace's default = the last 720 ticks + the
+naming tail note; matrix's default = the compact query-vocabulary
+inventory, --full the whole listing; the row's "past a screen"
+conditional now fact on the grown packs) + intake-21's single-event
+postmortem (`why --event ID`: cause chain + knowledge-wiring join +
+cascade, recount-oracle-pinned) + intake-22's DAG export (`matrix --dag`:
+the rules.json::systems projection as Mermaid, never a runtime);
+tests/test_mechanics.py +6, 1878+1 green both ends; the release-equality
+pin green (D-118 untouched). iter-162 DONE: the debt-1 standing row's
+build (the flood debt's economy arm landed in province_pack as pure pack
+data over the res-1 substrate, zero core — the third consumer arming:
+the accounts, the toll-surplus flow + the guild's collection, the FOLD
+answering D-182's named co-due limit by construction; tests/test_debt1.py
++9, 1872+1 green both ends; zero corpus price, the golden T1
 byte-untouched). iter-161 DONE: the pole's embodiment seeds (the
 flood-story recognition token + the steal_target flag, pure pack data,
 zero core; the lever chain + the player-facing ablation test-pinned,
@@ -592,12 +588,15 @@ the branch-protection recipe stays the owner's settings step).**
    (owner-approval-gated dev tooling, correctly framed since
    D-031), `bg-6` (the SoW audit, D-055 deferral), `pack-3` (one
    candidate for the next authored pack slot — the 2nd-setting
-   blocker gone with phase 6 CLOSED), `mech-2` (rides the next
-   mechanics.py touch — the caps core + intake-21's single-event
-   postmortem form + intake-22's viz-export form, the riders now
-   IN the row per D-113), `st-4` (rides presentation-1 at its
-   write time, D-148), `st-5` (the first real consumer decides
-   — the res-1 sink shape now concrete). debt-1 CONSUMED iter-162
+   blocker gone with phase 6 CLOSED), `st-4` (rides presentation-1
+   at its write time, D-148), `st-5` (the first real consumer
+   decides — the res-1 sink shape now concrete). mech-2 CONSUMED
+   iter-163 (the caps core + the intake-21 single-event postmortem
+   + the intake-22 DAG export, one mechanism — DEFAULTS bounded,
+   nothing dropped silently, expansion by flag; its not-built
+   residues — the impact-query surface, the first-divergence
+   operator — stay zero-consumer, the first-consumer law). debt-1
+   CONSUMED iter-162
    (the flood debt's economy arm landed in province_pack; its
    discrete-event residues — the paper's fall, the clearance lump,
    the punt's purchase, the player-scaled doors — a future row's

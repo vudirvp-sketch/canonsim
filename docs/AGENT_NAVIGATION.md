@@ -101,8 +101,13 @@ Runtime logs live in `logs/` (gitignored). Never open one whole: use
 chronicles go to `output/` (gitignored).
 
 For causal questions prefer the introspection CLI over raw filters:
-`scripts/mechanics.py trace --log <log> [--ticks|--entity|--hook]`,
-`why --hook TAG --at-tick N` (the postmortem), `matrix` (static wiring),
-`blast` (the two-arm A/B). Derived, never truth (D-118); the tool
-re-derives answers through the engine's public API, so its output is
-INV-2-equal to what the runtime itself decided.
+`scripts/mechanics.py trace --log <log> [--ticks|--tail|--entity|--hook]`
+(the unqualified default is capped to the last 720 ticks and the tail note
+names the expansion flags — the attention budget), `why --hook TAG
+[--at-tick N]` (the hook postmortem) or `why --event ID` (the one-event
+postmortem: cause chain + the knowledge wiring join + the cascade), `matrix`
+(static wiring; the compact default lists the query vocabulary — `--full`
+the whole inventory, `--dag` the systems read/write graph), `blast` (the
+two-arm A/B). Derived, never truth (D-118); the tool re-derives answers
+through the engine's public API, so its output is INV-2-equal to what the
+runtime itself decided.
