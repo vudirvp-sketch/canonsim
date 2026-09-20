@@ -165,6 +165,47 @@
       "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items)"
     },
     {
+      "id": "npc_secondhand_01",
+      "name": "Dellan",
+      "role": "the crossing's second hand, the rope side of the pole",
+      "position": "loc_weirstair",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_weirkeeper_01",
+          "trust": 80
+        },
+        {
+          "with": "pc_01",
+          "trust": 45,
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "steady",
+      "goal": "walk the crossing's road side; the paper that prices it watched for the family",
+      "spine": {
+        "want": "the crossing worked — one on the water, one on the rope",
+        "need": "the punt bought back before the next flood year",
+        "flaw": "the rope side answered the road, not the stair",
+        "cause": "the flood year drowned the family punt and the savings with it"
+      },
+      "carries": [
+        "punt_pole_01"
+      ],
+      "notes": "the crossing household's grown second hand — ANCHOR_REGION §6.1's first meso unit, the pack embodiment §9 names the engineering side's own (companion-1 + tune-3's arming, iter-157): the pole is two-handed work, one on the water (Ketta's stair), one on the rope (this hand's road leg — the road-side urgency entry IS the rope side's beat). The pair map: kin trust with the toll-taker, a working acquaintance with the runner (the crossing vouches for the road). The spine shares the household's flood cause; the flaw is the road-leg beat's own bend (AP-8: the entry's flaw key consumes it). The no-teleport law: every leg an ordinary move intent through the door — the autonomous road-leg hop when co-located, the paired mode B steps beyond it; lag is a legal world state."
+    },
+    {
       "id": "npc_sergeant_01",
       "name": "Osgar",
       "role": "the half-pay watch sergeant, duty post at Malby",
@@ -485,6 +526,16 @@
       "breakable": false,
       "flammability": "medium",
       "notes": "the crofts' utility sack, by the stacks — the flammable prop at the camp (the road's hawser shape)"
+    },
+    {
+      "id": "punt_pole_01",
+      "name": "the punt pole",
+      "position": "loc_weirstair",
+      "carrier": "npc_secondhand_01",
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "low",
+      "notes": "the family's last tool (KI#87's fix: the weirkeeper's note cited it, the items never carried it — committed with the household's second hand, the pack's next engineering touch): the pole is two-handed work — the second hand walks the rope side with it, and the punt it once pushed drowned the flood year (ANCHOR_REGION §6.1's assets: the boathouse, the pole, the custom). Carried: the position contract rides every leg the second hand walks (movement_changes, KI#46's law)"
     }
   ],
   "groups": [

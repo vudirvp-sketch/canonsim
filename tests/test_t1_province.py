@@ -176,10 +176,13 @@ def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
         expected.append((clock, destination))
         if index in WAITS:
             clock += WAITS[index]
+    # iter-157: the companion's own legs ride the same log — the route
+    # pin scopes to the RUNNER's moves (the escort's legs carry their
+    # own price law, pinned in tests/test_companion.py)
     moves = [
         (event["t"], event["target"])
         for event in _events(tmp_path / "prices.jsonl")
-        if event["type"] == "move"
+        if event["type"] == "move" and event["actor"] == "pc_01"
     ]
     assert moves == expected
 
@@ -197,10 +200,11 @@ def test_encounters_fire_mid_travel(tmp_path: Path) -> None:
     )
     sim.run_playscript(SCRIPT)
     events = _events(tmp_path / "mid.jsonl")
+    # iter-157: the runner's own legs (the companion rides his own)
     legs = [
         (event["t"], event["target"])
         for event in events
-        if event["type"] == "move"
+        if event["type"] == "move" and event["actor"] == "pc_01"
     ]
     assert len(legs) == len(LEGS)
     windows: list[tuple[int, int]] = []
@@ -281,17 +285,20 @@ def test_the_genesis_renders_the_province_scale() -> None:
 
 def test_spine_records_live_and_consumed() -> None:
     """The province is the first committed pack to carry spine records
-    (PACK_SPEC §6, AP-9): five NPCs declare the want/need tension with
+    (PACK_SPEC §6, AP-9): the cast declares the want/need tension with
     a flaw rooted in a cause, and every flaw is consumed by an urgency
     entry's flaw key (AP-8) — the crosswalk's first non-crafted
-    instance, the row the lint (iter-117) was built for."""
+    instance, the row the lint (iter-117) was built for. iter-157: the
+    crossing household's second hand joins the five (companion-1's
+    arming — the household's first meso unit embodied, ANCHOR_REGION
+    §6.1)."""
     pack = load_pack(PACK_DIR)
     spines = {
         npc["id"]: npc["spine"]
         for npc in pack.entities["npcs"]
         if "spine" in npc
     }
-    assert len(spines) == 5, spines
+    assert len(spines) == 6, spines
     flaws = {spine["flaw"] for spine in spines.values()}
     consumed = {
         entry["flaw"]
@@ -326,8 +333,9 @@ def test_the_budget_block_declares_the_skeleton_shape() -> None:
     assert budget["templates"]["min"] <= templates <= budget["templates"]["max"]
     # the cultures slice's own re-declare: the travelers grow the cast
     # past the skeleton's max (9) — the honest re-declare, not a silent
-    # outgrowth (AP-1's second arm, exercised)
-    assert len(pack.entities["npcs"]) == 10
+    # outgrowth (AP-1's second arm, exercised); iter-157 grows the cast
+    # again INSIDE the bounds (the companion, 10 -> 11 <= 12)
+    assert len(pack.entities["npcs"]) == 11
     assert budget["npcs"] == {"min": 7, "max": 12}
 
 

@@ -1,29 +1,41 @@
-Iteration: iter-156 (`iter-156-mesh1` — the world track's causal mesh audit
-(W3), the owner's «начинай работу по планам» call again delegating the pick
-to the plans' own head: the engineering queue's recommended head (engine-1 +
-presentation-1) stays owner-hardware-gated (the {3–8B, GBNF} arm's standing
-gap row — engine-1's decision input), so the executable frontier is the world
-plan's own W3: five loops pass the disable test and the shared-stage rule —
-fire→institutions, feud→politics, season→weather→social,
-route→condensation→culture (four COMMITTED, per-loop tests green) + the
-credit loop (AUTHORED, §6.1's unit); the anti-double-count ruling applied
-once (the theft/suspicion/document-check circuit = the fire loop's mechanism
-family, counted in A); four interlock edges named (the alarm wakes fear and
-grief, the rain erases the smoke, the condensation materializes the feud's
-carrier, the rise prices the toll); doc-only, zero code, zero corpus price.
+Iteration: iter-157 (`iter-157-companion1` — the companion arming, the
+owner's «довести до ума сам генератор» call: engine-1 + presentation-1
+POSTPONED by the owner's own directive (the llama.cpp work waits for the
+call), the standing queue's only build-ready generator row picked per the
+plans' own law — companion-1 + tune-3 arm together or not at all): the
+crossing household's second hand embodied in province_pack as PURE PACK
+DATA, zero core change (Dellan — ANCHOR_REGION §6.1's first meso unit, the
+pack embodiment §9 names the engineering side; the spine sharing the
+household's flood cause, the kin/runner pair axes, the punt pole committed
+— KI#87 CLOSED); the FIRST committed NPC movement source (the road-leg
+urgency beat, kind=move — the HEAD census flip, tune-3's own gap); the
+deciding probe CONFIRMED per the row's own shape (the crafted twin with a
+traveling knower: alarm_adjacent heard+vague on the MOVER one leg out, the
+panic echo +10 reaching him, the telling carrying the shout to the
+player); the escort halves over the existing doors (the mode B actor-step
+voice, the paired move legs — the no-teleport law's letter); the
+scene-LOD law shapes the design (the beat fires co-located, the warm ring
+waits for the reader — the depth-3 cost law respected, never fought).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT dc2ab38 BEFORE working — identical — and
-re-verified after with the diff in place) ·
+1852 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT a4cfe48 BEFORE working — 1842+1, identical to
+the pin — and re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/worldbuild/ANCHOR_REGION.md` (§5 the mesh + the verdict),
-`docs/worldbuild/WORLD_TESTS.md` (§9 the mesh entry),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2/§3/§5), `STATUS.md` (this re-pin),
-`worklog.md` (this entry) — 5 paths, doc-only, inside the soft limit. The
-prior iteration's record: iter-155 (anchor1). The detail lives in the
-worldbuild docs + worklog + git.
+Scope: `content/province_pack/entities.json` (the second hand + the
+pole), `content/province_pack/rules.json` (the road-leg beat),
+`tests/playscripts/province_companion.json` (the escort script),
+`tests/test_companion.py` (the claim packet, +10),
+`tests/test_t1_province.py` (the pins re-scoped),
+`tests/fixtures/province_smoke_seed42.jsonl` (the golden regen — the
+delta exactly the companion's events), `docs/TASKS.md` (the two rows
+collapsed + the ledger), `docs/DECISIONS.md` (D-188 in the landings
+family), `STATUS.md` (this re-pin), `worklog.md` (this entry) — 10
+paths (over the 3–5 soft limit: the pack arming + its verification
+stack + the doc quintet, the iter-148/149 pack-landing precedent). The
+prior iteration's record: iter-156 (mesh1). The detail lives in the
+pack's own notes + the test docstrings + D-188 + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,13 +59,12 @@ worldbuild docs + worklog + git.
 
 ## Active KIs
 
-- KI#87 · province_pack: Ketta's note cites a punt-pole item never committed
-  to items.json; fix rides the pack's next engineering touch · opened 2026-09-20.
-- (The closed-KI tombstone notes — KI#55..KI#84, every one
-  deleted per AGENTS §5 at its own iteration, all far past the
-  two-iteration window — were trimmed at the phase-6 gate (iter-116):
-  the lessons live in git + the FAQ's family laws, the pre-trim record
-  in git history.)
+- (None open. KI#87 — the phantom punt pole — CLOSED iter-157: the pole
+  commits with the household's second hand, the carrier binding live.
+  The closed-KI tombstone notes — KI#55..KI#86, every one deleted per
+  AGENTS §5 at its own iteration — were trimmed at the phase-6 gate
+  (iter-116): the lessons live in git + the FAQ's family laws, the
+  pre-trim record in git history.)
 
 ## FAQ / Pitfalls
 
@@ -499,51 +510,47 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-156 DONE: the world track's causal mesh audit (W3 — five independent
-loops: fire→institutions, feud→politics, season→weather→social,
-route→condensation→culture committed + the credit loop authored; the
-anti-double-count ruling applied to the theft/suspicion circuit; four
-interlock edges named; doc-only, 1842+1 green both ends). iter-155: the
-first anchor pass (A1/A2/A3 — the crossing household as the first meso unit,
-the causal map's eight answered rows, the high-water double-toll meaning
-slice; WORLD_TESTS' three OPEN tests → PARTIALLY CONFIRMED; KI#87 opened).
-iter-154: the agent-dense v3 hybrid pack routed (D-187). iter-153: the
-worldbuild archive intake (D-186 — `docs/worldbuild/` landed, 10 files).
-iter-152: the CORE_DESIGN_RESEARCH deletion + the evidence-class citation
-sweep (D-185's recorded next step). iter-151: the semantic documentation
-compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914). iter-150: the
-AGPLv3 relicense + the standing-backlog revalidation (D-183/D-184).
-iter-149: pack-4; iter-148: pack-1; iter-147: since-1; iter-146: res-1;
-iter-143: ci-1 (verified LIVE green on main at 156ec8f —
-the iter-143 arm's own check; the branch-protection recipe stays
-the owner's settings step).**
+**iter-157 DONE: the companion arming (companion-1 + tune-3, together —
+the crossing household's second hand embodied as pure pack data, the
+first committed NPC movement source, the traveling-knower probe
+CONFIRMED on the crafted twin, the punt pole committed (KI#87 CLOSED);
+zero core change, 1852+1 green both ends). iter-156: the world track's
+causal mesh audit (W3 — five loops, four committed + the credit loop
+authored; doc-only). iter-155: the first anchor pass (A1/A2/A3 — the
+crossing household as the first meso unit; WORLD_TESTS' three OPEN
+tests → PARTIALLY CONFIRMED; KI#87 opened, closed iter-157). iter-154:
+the agent-dense v3 hybrid pack routed (D-187). iter-153: the worldbuild
+archive intake (D-186 — `docs/worldbuild/` landed, 10 files). iter-152:
+the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep.
+iter-151: the semantic documentation compaction pass (D-185 — DECISIONS
+63→30, TASKS 2422→914). iter-150: the AGPLv3 relicense + the
+standing-backlog revalidation (D-183/D-184). iter-149: pack-4;
+iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1
+(verified LIVE green on main at 156ec8f — the iter-143 arm's own check;
+the branch-protection recipe stays the owner's settings step).**
 
 1. **The owner-gated backlog (the standing rows — the ORDER owner
    decides, TASKS owns composition, never order; each build row's
    verification plan rides TEST_PLAN §9's claim packet):** with
-   ci-1/roads-1/res-1/since-1/pack-1/pack-4 consumed, the session's
-   RECOMMENDED next call (intake-29's readiness order, never the
-   pick) is `engine-1` (+ `presentation-1` its natural pair — the
-   SoW horizon's own head: the mediator specs are written, the
-   consult material named (the intake-22 modularity card, the
-   intake-23 world-structure card, the intake-21 observability
-   card), the LLM boundary lifts only on this call, INV-4/D-055).
-   The remaining standing rows — REVALIDATED iter-150 (D-184; the
-   per-row state lives in TASKS' Standing rows):
+   ci-1/roads-1/res-1/since-1/pack-1/pack-4/companion-1+tune-3
+   consumed, the session's RECOMMENDED next call (intake-29's readiness
+   order, never the pick) is `engine-1` (+ `presentation-1` its natural
+   pair — the SoW horizon's own head: the mediator specs are written,
+   the consult material named (the intake-22 modularity card, the
+   intake-23 world-structure card, the intake-21 observability card),
+   the LLM boundary lifts only on this call, INV-4/D-055) — POSTPONED
+   by the owner's iter-157 directive until called. The remaining
+   standing rows — REVALIDATED iter-150 (D-184; the per-row state lives
+   in TASKS' Standing rows):
    `parse-2` (buttons wait on a frontend consumer, multi-intent on
    live-session evidence — neither is "improve the parser"),
-   `tune-3` (a pack-arming choice now, consumer-first: engine
-   movement exists, no committed pack arms it — the HEAD census),
    `st-2` (consumer-first, parked — no pack has wanted the
    promotion door), `scav-1` (measurement before mechanism, parked
    — no derived-state size problem on record), `qa-1` mypy
    (owner-approval-gated dev tooling, correctly framed since
    D-031), `bg-6` (the SoW audit, D-055 deferral), `pack-3` (one
    candidate for the next authored pack slot — the 2nd-setting
-   blocker gone with phase 6 CLOSED), `companion-1` (deps synced:
-   st-6a/resume DONE, tune-3 the one open dep — a following
-   companion IS its NPC-movement consumer; the no-teleport law
-   rides the contract at write time), `mech-2` (rides the next
+   blocker gone with phase 6 CLOSED), `mech-2` (rides the next
    mechanics.py touch — the caps core + intake-21's single-event
    postmortem form + intake-22's viz-export form, the riders now
    IN the row per D-113), `st-4` (rides presentation-1 at its
@@ -563,7 +570,17 @@ the owner's settings step).**
    material: the group-stock lint gap (the entities vocabulary vs
    the economy/fold modules), the co-due same-account flow limit
    (the snapshot from_ — the per-flow re-draft), both recorded in
-   the pack's own notes + D-182.
+   the pack's own notes + D-182. companion-1's own honest residues
+   (the future riders' material): the autonomous follow is
+   LOD-bounded by design (the warm ring waits for the reader — a
+   trailing follower at beat cadence is architecturally impossible
+   under the armed macro clock, the paired mode B legs carry the
+   escort; a never-stranding gradient follower would need a grammar
+   extension — a negated co-location test or a dynamic target — its
+   own consumer's row, never specced here); the beat-carry
+   duplicates (the mid-travel stale position re-passing the gate)
+   die at the door/OCC as bounded intent_rejected no-ops — attempts
+   are facts.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
    decision input), the bg-7 prose families skipped in the bg-8
@@ -579,11 +596,13 @@ the owner's settings step).**
    addition must create a new causal coupling, `WORLD_WORKPLAN.md`
    §6, never this file's queue; W3 the causal mesh done iter-156 —
    five independent loops, `ANCHOR_REGION.md` §5; A1/A2/A3 done
-   iter-155, the first meso unit authored — ANCHOR_REGION §6.1).
+   iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
+   its pack embodiment LANDED iter-157: the second hand walks the
+   artery).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
-   — the {3–8B, GBNF} arm on owner hardware the decision input), a
-   world-track call (W4 the meso expansion — the setting's own
-   frontier), or a fresh call (the license's `pyproject.toml` field
-   a one-line option if wanted — D-183's recorded follow-up; KI#87's
-   punt-pole fix rides the pack's next engineering touch).
+   — the {3–8B, GBNF} arm on owner hardware the decision input —
+   postponed until the owner's call), a world-track call (W4 the
+   meso expansion — the setting's own frontier), or a fresh call
+   (the license's `pyproject.toml` field a one-line option if
+   wanted — D-183's recorded follow-up).

@@ -1,0 +1,15 @@
+{
+  "name": "province_companion",
+  "seed": 42,
+  "pack": "province_pack@0.1",
+  "steps": [
+    {"intent": "move", "target": "loc_weirstair"},
+    {"intent": "wait", "ticks": 360},
+    {"intent": "wait", "ticks": 900},
+    {"intent": "move", "target": "loc_riverroad"},
+    {"intent": "talk", "target": "npc_secondhand_01"},
+    {"intent": "talk", "actor": "npc_secondhand_01", "target": "pc_01"},
+    {"intent": "move", "target": "loc_keep"},
+    {"intent": "move", "actor": "npc_secondhand_01", "target": "loc_keep"}
+  ]
+}

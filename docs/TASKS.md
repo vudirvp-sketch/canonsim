@@ -66,16 +66,6 @@ claim packet)
   carry N intents (one classification per document today); neither half is
   "improve the parser" — the phase-2 grammar is gate-PASSED (D-064) and the
   boundary stays closed until a named consumer opens it.
-- `tune-3` — alarm-adjacent reachability, RE-AIMED iter-150: the v0.1
-  sub-premises half-rotated — the engine-side half is GONE (movement exists
-  since st-6a/iter-97 `travel`, roads-1's exits, the urgency grammar
-  carries any door intent kind) but no committed pack arms an NPC movement
-  source (the HEAD urgency census reads no move/travel intent kind), so
-  `alarm_adjacent` rides declared-but-dormant in four packs. A
-  PACK-ARMING choice now, consumer-first: a pack whose design wants the
-  adjacent-shout beat arms its own movement source as pure pack data (the
-  deciding probe: one crafted twin with a traveling knower); until such a
-  consumer the vocabulary stays dormant.
 - `st-2` — the identity promotion door (pack grammar beyond `take`, the
   D-054 machine; the read-path half landed as tex-1, iter-62/D-091):
   consumer-first, PARKED — no committed pack has wanted promotion beyond
@@ -91,17 +81,6 @@ claim packet)
   until a real long-session cost is measured (a derived-store size census
   at a named horizon) — the intake-29 admission rule applied to our own
   queue.
-- `companion-1` — the companion/party role: pack data over the existing
-  doors, zero new core systems — follow-duty in the rotation/urgency
-  grammar, mode B actors voice, pair-axis relations, presence
-  re-verification, the arrival-snapshot knowledge records. The NO-TELEPORT
-  law rides the contract at write time (intake-29/D-175): a companion moves
-  ONLY through ordinary movement/travel intents through the door — no
-  hidden "PC moved ⇒ companion follows" sync (D-031's privilege separation
-  already forbids the hidden write path); lag is a legal world state.
-  Dependencies synced iter-150: st-6a DONE (D-132), the resume door DONE
-  (D-139); only tune-3 remains open — and a following companion IS tune-3's
-  NPC-movement consumer (the two rows arm together or not at all).
 - `st-5` — containers: the `in` relation + entity-birth promotion
   (blueprint §7): the first real consumer decides (a pack wanting portable
   objects, a res-1 sink shape — CONCRETE since res-1 landed iter-146/D-179;
@@ -156,6 +135,17 @@ stale-base archive apply had clobbered it — D-185; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-157 · 2026-09-20 · companion1 — the companion arming (companion-1 +
+  tune-3, together as the row's own law; the owner's «довести до ума сам
+  генератор» call): the crossing household's second hand embodied in
+  province_pack (Dellan — ANCHOR_REGION §6.1's first meso unit, the pack
+  embodiment §9 names the engineering side), the FIRST committed NPC
+  movement source (the road-leg urgency beat, kind=move — the census flip),
+  the traveling-knower probe CONFIRMED (the crafted twin: alarm_adjacent
+  heard+vague on the MOVER, the panic echo +10, the telling carried the
+  shout to the player), the mode B voice + the paired escort leg + the
+  arrival snapshots pinned, the punt pole committed (KI#87 CLOSED); zero
+  core change — D-188.
 - iter-150 · 2026-09-20 · revalid-1 — the AGPLv3 relicense (LICENSE + the
   README's License section, D-183) + the standing-backlog revalidation (all
   13 rows audited, 8 revised — D-184) — doc-only.

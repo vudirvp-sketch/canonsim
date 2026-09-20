@@ -874,6 +874,23 @@
         "requires": [],
         "flaw": "grief answers every question first",
         "notes": "Wilmot's grief-ramble (the road's ambient murmur family, AP-8's fifth consuming rule): the steward talks to the burned mill — grief answers every question first. The ambient channel's quiet gate admits it; intoxication 30 (the grey-brew) keeps his testimony vague by construction (the §6 intersection matrix)."
+      },
+      {
+        "npc": "npc_secondhand_01",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "move",
+          "target": "loc_riverroad"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "adjacent_to",
+            "with": "actor"
+          }
+        ],
+        "flaw": "the rope side answered the road, not the stair",
+        "notes": "Dellan's road-leg beat (companion-1 + tune-3, iter-157 — the FIRST committed NPC movement source: the HEAD urgency census reads a move kind at last, tune-3's own gap closed): when the second hand stands with the runner and the artery is one leg away, he walks it — the rope side's own errand, the pole traveling with him (the carried-item position contract on the autonomous mover, KI#46's law). The scene-LOD law shapes the beat (depth-3): only the active scene rolls per-beat, so the beat fires CO-LOCATED and the hop leaves the scene — the warm ring waits for the reader; the companion's legs beyond the hop ride the mode B door (the paired actor steps, the no-teleport law's letter: every leg an ordinary move intent through the door, lag a legal world state). tune-3's deciding half: the second hand one leg out on the road IS the traveling knower — the stair's shout reaches him through the walls (alarm_adjacent, channel heard, fidelity vague — the province_companion twin pins the beat live, the first committed instance). APPEND-ONLY discipline (D-079): this entry rides the shared per-(npc, kind) stream's own name; a future entry for this NPC names a different kind, never a second move. The flaw key consumes the spine's flaw (AP-8, the singly-consumed shape — the cultures prohibitions stay the doubly-consumed pair's own)."
       }
     ],
     "notes": "the beat gates fire at 360/720/1080 (the day's phases); every non-player NPC rides ≥1 authored surface (the intersection-matrix law) and every declared spine flaw rides ≥1 entry (AP-8, pack-ci's crosswalk — the province is the first committed consumer). No two entries share a trigger→action pair (AP-11: the clone check — the intents and requires all differ)."
