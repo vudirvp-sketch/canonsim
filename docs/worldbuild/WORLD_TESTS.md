@@ -252,15 +252,47 @@ A2's residue, Loop E's band, this run) — owner-routed per the
 separate-track law, BUILT iter-162 (debt-1: the accounts + the fold's
 flows landed in the province pack). Band: the authored chain over committed beats; no live session.
 
+### PARTIALLY CONFIRMED — The second meso unit: the step bench (2026-09-20, iter-164)
+
+The W4 water candidate (`WORLD_WORKPLAN.md` §6's candidate 3) walked through
+the operator stack at the authored band over committed substrate only (the
+stair, the race's timbers, the bank market, the seasons — the record:
+`ANCHOR_REGION.md` §6.2). The function-loss arbiter PASSED: the step law
+performs the allocation function — one shared head ordered among three
+standing uses by the users' own reading, enforced at the water — that neither
+the guild's paper (deferred claims) nor the crossing's custom (one use's own
+price) performs; the council-duplication check passed by mechanism (no axis,
+no threshold, no institutional door — the immediacy is what keeps the guild
+out, the perturbation test's own edge). The assembly probe PASSED (three
+hands, three doors, three bounded knowledge maps — the keeper's timbers, the
+steward's hatch, the beam's talk are different causal levers with different
+local consequences). The crisis probe (the dry long_light, the hatch found
+open at dawn) walks its response chain on committed surfaces with three named
+first-exposure gaps — the water level, the setting verb, the hatch gate —
+recorded, not routed (the separate-track law). The humor probe's first
+authored answer: the step's position-dependent joke (mock the river's
+stinginess at the beam — "Four steps on the stair, and the vale falls out over
+the middle two"; the same words at Thornmill read as the vale's mockery of the
+claim; the pact's terms and the flood dead never joked). The perturbation test
+PASSED per transition (the rule's removal → the strongest hand's water; the
+enforcement's removal → the guild's capture path; the memory's removal → the
+drift). Partial: the authored band, no live session — the meaning
+distribution's own unfinished band; the mesh carries the sixth loop AUTHORED
+(`ANCHOR_REGION.md` §5's F row, the disable test and the shared-stage rule
+re-applied).
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
 Great Fracture without adding special exceptions for each civilization?
 
-### OPEN — Cultural humor and heartbreak
+### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live band open)
 
 Do Sarrow Vale's own vocabulary, institutions and history support world-specific
-humor and loss rather than generic genre scenes?
+humor and loss rather than generic genre scenes? The first authored answer:
+the step's position-dependent joke (the step-bench entry above) — the categories
+shared, the positions bounded, the same words re-priced by their audience. The
+live-session band stays open.
 
 ## 10. Test result vocabulary
 

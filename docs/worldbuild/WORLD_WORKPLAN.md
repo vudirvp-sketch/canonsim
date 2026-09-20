@@ -36,13 +36,15 @@ owner instead of overlapping foundation documents.
 The current repository's Sarrow Vale province is the strongest concrete
 implementation witness. The broader worldbuilding goal is not closed yet because
 the meso and human-meaning layers are still thinner than the mechanical layer —
-the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155) and embodied
-at the single-NPC + companion band (the second hand and the pole, iter-157;
-the pole's social half — the recognition read, the lever, the theft gate —
-iter-161); the debt's flow is armed (`debt-1` built iter-162 — the accounts
-+ the fold's two flows, the paper's standing still authored) and further
-meso units are not yet embodied. The causal mesh is
-audited — five independent loops, four committed (W3 done, iter-156,
+the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155) and
+embodied at the single-NPC + companion band (the second hand and the pole,
+iter-157; the pole's social half — the recognition read, the lever, the theft
+gate — iter-161); the debt's flow is armed (`debt-1` built iter-162 — the
+accounts + the fold's two flows, the paper's standing still authored) and the
+second meso unit is authored (the step bench — the practitioner
+water-governance node, `ANCHOR_REGION.md` §6.2, iter-164; candidate 3
+CONFIRMED at the authored band, the mesh's sixth loop). The causal mesh is
+audited — six loops, four committed (W3 done iter-156 + the W4 addition F,
 `ANCHOR_REGION.md` §5).
 
 The active deliverable is `ANCHOR_REGION.md`.
@@ -213,6 +215,17 @@ stack).
    only if it performs a function the guild's paper and the crossing's custom
    do not — the function-loss probe is the arbiter; the guild council must not
    be duplicated.
+   TESTED (iter-164, water1): CONFIRMED at the authored band — the step bench
+   (`ANCHOR_REGION.md` §6.2): the function-loss arbiter PASSED (the allocation
+   order among uses — one shared head ordered by the users' own reading,
+   enforced at the water — is a function neither the guild's paper nor the
+   crossing's custom performs), the anti-council check passed by mechanism
+   (no axis, no threshold, no institutional door: the immediacy is what keeps
+   the guild out — the perturbation test's own edge); three first-exposure
+   substrate gaps recorded, not routed (the water level, the setting verb, the
+   hatch gate — the separate-track law); the mechanism kept as the step-law
+   authoring/test pattern; the embodiment options stay the owner's call class
+   (the pole's iter-161 precedent).
 4. **A constructed kinship edge.** Care/bodily relation → socially recognized
    kin edge → obligation → inheritance/protection/exclusion (the milk-kinship
    MECHANISM, never the practice; the documented donor is the Hindu Kush

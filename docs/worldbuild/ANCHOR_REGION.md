@@ -87,21 +87,21 @@ economic and social experience.
 | Layer | Sarrow Vale surface | Open question / first answers |
 |---|---|---|
 | Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
-| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet) |
+| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet; the water's ALLOCATION answered at the authored band, §6.2 — the step law, order before price) |
 | Trade | road traffic, market, toll, waybill, guild | answered (§6.1): the crossing household carries the flood season's cost; the croft camp carries the shaved weights — the two named cost-carriers of a disrupted route |
-| Institutions | guild, garrison, old families, watch rotation | answered for the crossing (§6.1): the ferry family under the guild-held flood debt — the first named meso mediator; the camp's meso half (the charcoal debt) named, not yet authored |
+| Institutions | guild, garrison, old families, watch rotation | answered twice: the crossing under the guild's paper (§6.1, the first named meso mediator) and the water under the practitioners' step (§6.2 — the step bench, the second meso unit); the camp's meso half (the charcoal debt) named, not yet authored |
 | Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one |
 | Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the camp's family life open |
-| History | feud / burned mill / generated historical events | two events, two institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt (§6.1); the rest of the 150-year chronicle open |
+| History | feud / burned mill / generated historical events | three events, three institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt (§6.1); the quarrel's pact → the step law (§6.2); the rest of the 150-year chronicle open |
 | Knowledge | witnessed events, rumors, watch suspicion, road knowledge | answered in the meaning slice (§7.1): the four-position asymmetry map over one toll |
 | Weather/calendar | markets, fairs, seasons, storm chain | answered (§6.1): the high_water rise → the punt men's double toll — the custom as persistent social adaptation; the household's four-phase year |
 | Read-side meaning | cards, chronicle, lore, named travelers, scene markers | answered (§6.1): the flood-debt lever set — whoever learns the flood story holds a different lever at the stair; the wergeld duty already live on the road |
 
-## 5. The causal mesh (W3 — audited iter-156)
+## 5. The causal mesh (W3 — audited iter-156; the W4 addition F — iter-164)
 
-Five loops, each a circuit that returns to its own driver changed. The audit's
+Six loops, each a circuit that returns to its own driver changed. The audit's
 two laws: the **disable test** — remove one loop's unique driver, and the other
-four must still run — and the **shared-stage rule** — two circuits sharing
+five must still run — and the **shared-stage rule** — two circuits sharing
 driver AND mediator are one mechanism counted once; sharing the response stage
 alone is an interlock, never a collapse.
 
@@ -186,6 +186,30 @@ flows on the macro year — the paper's fall still authored, the flow
 vocabulary carrying no terminus). The C⇄E edge: the rise prices the toll —
 the season modulates the debt's collection.
 
+### Loop F — the step bench: the band → the step → the allocation (AUTHORED — §6.2's unit, iter-164)
+
+`the recurring band (the late long_light's low water at the stair — the
+seasons' flow consequence, an accumulated head state, never the calendar's
+pulse itself) → the step rule (the practitioners' reading: the head named by
+the stair's wet step) → the allocation (one use served, two priced — the
+timbers, the hatch, the beam) → the users' own acts (the setting, the wattle,
+the talk) → the head's state again — the acts change the very water the next
+reading reads`.
+
+Closing edge: state-closing at the authored band — the allocation changes the
+head, the head changes the next allocation. Band honesty: the gauge is
+committed (the stone stair), the phases are committed (the calendar), and the
+rise's own line is committed (the drowned fords + the double toll — the fourth
+step's text); the allocation order, the reading at the turn and the enforcement
+doors are authored (§6.2). Substrate: the weir, the race's timbers, the bank
+market + the beam's talk (the committed rumor channel), the seasons. The
+distinction from C (the mesh's own E-precedent class): the calendar feeds both,
+but C's mediator is the weather bias + the hook and F's is the step rule + the
+reading — the sky and the water are different stages, as the one-off flood (E)
+is distinct from the recurring phase. The distinction from Loop A's family:
+the enforcement has no axis, no threshold, no institutional door — the users'
+physical act at the water is the council mechanism's negative image.
+
 ### The verdict
 
 | Loop | Driver | Mediator | Response | Residue | Closure | Band |
@@ -194,15 +218,23 @@ the season modulates the debt's collection.
 | B | generated feud history | grievance + prohibition | the vigil | new memory | state | committed |
 | C | the calendar clock | weather bias + hook | the murmur | market texture | clock | committed |
 | D | the travel graph | condensation + names | born strangers | visible culture | reader | committed |
-| E | the flood year | the debt's paper | the double toll | reputation + standing | state | authored |
+| E | the flood year | the debt's paper | the double toll | reputation + standing | state | committed beats, authored paper; the flow armed iter-162 |
+| F | the recurring band | the step rule + the reading | the allocation's acts | legitimacy / resentment + the tally's record | state | authored (§6.2) |
 
-Five loops pass the disable test — no two share a driver, and the one shared
+Six loops pass the disable test — no two share a driver, and the one shared
 stage (the triangle's threshold dynamics feeding the intent door) carries two
-different axes (fear, grievance) without making the loops one mechanism. Four
-named interlock edges: the alarm wakes both fear and grief (A⇄B), the rain
-erases the smoke (C→A), the condensation materializes the feud's carrier
-(B⇄D), the rise prices the toll (C⇄E). Independent loops, interlocked edges —
-not one engine wearing five masks.
+different axes (fear, grievance) without making the loops one mechanism. The
+band split is honest: A–D committed, E committed at its beats with the paper
+authored and the flow armed (iter-162), F authored over committed gauges
+(iter-164). Seven named interlock edges: the alarm wakes both fear and grief
+(A⇄B), the rain erases the smoke (C→A), the condensation materializes the
+feud's carrier (B⇄D), the rise prices the toll (C⇄E), the season forces the
+step (C⇄F — the rise turns the fourth, the dry band presses the second), the
+paper prices the pool (E⇄F — the take rides the toll the step protects; the
+keeper's timbers double-bound), and the feud residue prices the race's claim
+(B⇄F — the protection read as theft; the timber law died in the feud's fire,
+the water law lives in stone). Independent loops, interlocked edges —
+not one engine wearing six masks.
 
 ## 6. Meso frontier
 
@@ -320,6 +352,151 @@ paper twenty, the punt twelve — the arming's notes their mirror); the
 flow's movement armed iter-162 (debt-1: the accounts + the two folded
 flows, `tests/test_debt1.py`).
 
+### 6.2 The step bench (WORKING — the second authored meso unit, iter-164)
+
+The weir stair's water bench: the vale's three hands over one head, authored
+over the committed substrate (the stair, the race's timbers, the bank market,
+the seasons, the tally) — no new entity classes, no new institution beyond the
+practitioners' own custom: the irrigation-tribunal MECHANISM, never the
+institution (`WORLD_AUTHORING.md` §19 — a practice at the water, not a court
+with officers; the bench is literal stone steps, the reading a habit, not an
+office).
+
+**Composition.** Three hands over one head of water, each a committed role
+read at its own door: the weir keeper — the pool's hand (Ketta, committed: the
+timbers hers to set daily; the toll's substrate is the pool she holds); the
+steward of the burned name — the draw's hand (Wilmot, committed: Thornmill's
+race, the `mill_race_timbers` fire spot; the grief-ramble the claim's own
+voice walking); the market mistress — the run's hand (Maren, committed: the
+weighbeam and the tally staff; the bank market rides the navigable Sarrow the
+weir spills). The gateless present: the guild's factor (the paper prices the
+pool's produce — the weighing day reads the trade the step rations; the guild
+holds no water writ) and the watch (the writ runs on the road's fear, never
+the river). The assembly probe's answer: the bench is not a committee — the
+three hands meet only at the reading, and each leaves by a different door with
+a different consequence (the timbers, the hatch, the beam's talk); the unit
+cannot be honestly played as one homogeneous actor.
+
+**The steps** (the law's own text — stone, four rungs):
+
+| Step | The head it names | The standing allocation |
+|---|---|---|
+| first | the drought floor | the pool at the punt's grounding band — the crossing wades, the race shut, the run at the weir's drip; never set but by a drought the vale survives, and never unnotched |
+| second | the low band's standing | the pool held for the crossing, the race at its trickle (the claim's wet proof, no more), the run light — the barges lighten or wait for the weighing day |
+| third | the working head | the pool full, the race running whole, the run deep — the long_light default, the fat season's law |
+| fourth | the rise | all claims flooded together: the race shut against the flood, the fords drowned, the crossing at double toll — the committed high_water line IS the fourth step's own text |
+
+**The chain (the doctrine's ladder, walked once):**
+
+| Rung | The step bench |
+|---|---|
+| CAUSE | the water quarrel — three claims on one head, settled once by the stair pact (the chronicle's quarrel collection: `pact_signed`, three members — the committed slot themed; the terms authored) |
+| POSSIBILITY | the stair itself: the Sarrow leaves the hills at one step — the head nameable in stone, settable by one hand, shared by three uses |
+| PRESSURE | the recurring band: the rise floods all claims at once (no scarcity), the late long_light starves all three together — every season's turn forces the re-reading |
+| ACTORS | the keeper, the steward, the beam; the factor and the watch present but gateless |
+| INSTITUTION | the step law: the head named by the stair's wet step, held by the practitioners' reading at the season's turn, enforced at the water by the users themselves — the pact's descendant, older than the guild's ledgers (the shelter law's own age class) |
+| KNOWLEDGE | the keeper knows the water's present (the steps, the rise arithmetic) and the debt's size; the steward knows the pact's terms and the mill's name; the beam knows the trade's weight and the dry years' cost; the road knows only the rate — each map bounded and legitimate (the stranger reads a stingy ferryman, never the order: the books show the toll, not the step) |
+| CONSEQUENCE | the timbers set: one use served, two priced; the dry band's second-step argument is the vale's standing quarrel made arithmetic |
+| RESIDUE | the tally's notches (the dry years' sequence in wood); the race kept wet (a dry race rots — the claim's living proof); the resentment (the protection read as theft: all the manor got was a wet channel); the beam's memory (the grounding year weighs light) |
+| NEW OPTION | the mill rebuilt (the claim made whole — the option the step law holds open); the guild's capture (the paper reaching for the steps — the failure mode); the navigation deepened (the bank's engineering, constrained by the standing step) |
+
+**The bench's year** (the step over the committed phases — the allocation as
+lived): thaw — the melt runs loud, the head high, no scarcity: the setting
+loose, the spill takes the melt (the bench idle, the road soft, the toll
+thin); high_water — the fourth step: the race shut, the fords drowned, the
+crossing doubled (the committed beat — the rise's own law); long_light — the
+third step falling: the fat season's working head, the dry weeks pressing
+toward the second — the bench's standing argument (the race's trickle against
+the pool's hold against the run's lightness); first_frost — the second step:
+the still water, the stores counted, the steward's hatch watched through the
+thin months.
+
+**The enforcement (the mechanism's own door — the anti-council core).** A
+breach of the standing step answers at the water, by the users, immediately —
+no axis, no threshold, no institutional door (Loop A's family negative
+image): the race's breach (the hatch opened against the step) finds the hatch
+wattled — a hurdle thrown in the race's mouth, the physical act, reversible
+and proportionate: the breach stilled, the next setting re-argues; the pool's
+breach (the timbers set to the household's own book — the keeper's two
+masters meeting in her one hand, the purse-read bend's water-side twin) is
+read at the next weighing day against the tally's notch — the vale can count,
+and the keeper knows it can; the run's claim rides the beam's talk (the
+committed rumor channel — hearsay lives at Malby): the breaker's barges
+weighed last, gossiped first. The function the immediacy performs: keeping the
+guild out — a law unenforced at the water becomes the council's business at
+the next dry band (the capture path, the perturbation test's own edge).
+
+**The step law's residue lifecycle (the §8 trace, run iter-164):**
+
+| Rung | The step law's lifecycle |
+|---|---|
+| EVENT | the water quarrel settled by the stair pact (the chronicle's quarrel collection — three members, three claims) |
+| RESIDUE | the step custom; the tally's notches; the resentment; the beam's dry-year memory |
+| CARRIER | the stair's stone (the law's own text, unburnable — the feud's material lesson: the timber law died in the mill's fire, the water law lives in stone); the tally staff (committed, Maren's — the market's keep-peace stick that also keeps the count); the race's wet timbers; the pole's haft tallies (committed — the family's payment count: one vale, one notch-keeping habit, a people that signs with a blade, not a pen) |
+| HOLDER | the three hands jointly — deliberately not one holder (the assembly's own form) |
+| TRANSFORMATION | each season's re-setting; each dry band's re-argument; the flood year's re-cut (the fourth step added after the flood — the law amended by catastrophe, the rise's committed line re-named) |
+| TRANSFER | the arithmetic passes hand to hand — the drowned generation's steps now the toll-taker's, the second hand learning the reading (Dellan's own inheritance) |
+| CLEARANCE / INHERITANCE | the pact's terms lapse only by a new pact; the custom inherits down the practitioners' lines |
+| NEW OPTIONS | the mill rebuilt; the guild's capture; the navigation deepened |
+
+The trace's explanatory gain at the authored band: the bench makes the vale's
+water legible as ONE arithmetic shared by three doors — the steward's grief,
+the keeper's double bind and the market's dry-year talk were three separate
+committed textures; the step law is the one order they all price. The
+perturbation test passes per transition: the rule's removal gives the vale the
+strongest hand's water (the claim lapses, the mill-rebuilt option dies); the
+enforcement's removal opens the capture path (the council enters the water
+question at the next dry band); the memory's removal drifts the setting (the
+grievance out-argues the arithmetic, the feud re-opens). Each removal changes
+reachable futures, not prose.
+
+**The crisis probe (the biography form, WORLD_TESTS §3).** The dry long_light
+pressing the second step, the race found running whole at dawn — the hatch
+open against the standing step — with the weighing day a week out and the
+guild's take landing on a thin season. The chain walks on committed surfaces
+(the seasons' phases, the toll's custom, the beam's weighing day, the rumor
+channel): the required decisions are the keeper's timbers (tighten past the
+second step and punish the whole run for the race's breach, or hold and wattle
+the hatch), the wattle question (who throws it — the users' own law executed
+at the water), and the beam's reckoning (the dry year's notch cut at the
+weighing day). The consequences diverge per door: the hatch wattled deepens
+the resentment (even the claim's own hand may not draw); the timbers tightened
+grounds the fair's barges and buys the beam's grudge; the setting held pinches
+the paper's payment through the toll's thin season. The residue: the notch,
+the road's word, the steward's grief read as the feud's second theft. The
+probe's missing links — three first-exposure substrate gaps, recorded, not
+routed (the separate-track law): the water level (no runtime flow state — the
+phases carry no head), the setting verb (the reading at the stair has no
+committed action — a future embodiment's own class, the `read_pole`
+precedent), and the hatch gate (the wattle is prose — the verb-gate
+boundary's honest answer, `WORLD_AUTHORING.md` §8).
+
+**The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
+joke, market day at the beam in a dry band: "Four steps on the stair, and the
+vale falls out over the middle two" — the stair the fool, no hand named, every
+hearer owning the argument. The same words at Thornmill's gate read as the
+vale's mockery of the claim (the middle two ARE the manor's trickle — the
+steward hears his channel measured). Never joked: the pact's terms aloud (the
+feud's wound) and the flood year's dead (the shelter law's other edge). The
+joke's position-dependence is the shared-categories proof — the step is a
+category the whole vale owns, and the beam's laughter re-prices the dry band's
+grumbling into shared standing while the manor's gate holds its silence.
+
+**Embodiment (committed vs authored).** Committed: the stair (the steps as
+gauge — the stone), the race (`mill_race_timbers`, the fire spot), the bank
+market (the navigable Sarrow, the weighbeam, the tally staff, the rumor
+channel), the seasons (the four phases; the rise's drowned fords + double
+toll — the fourth step's own line), the toll's custom, the grief-ramble (the
+claim's voice), the chronicle's quarrel collection (the pact, three members),
+the pole's haft tallies. Authored here (WORKING): the step law itself (the
+four-rung allocation), the stair pact's theming (the water quarrel), the
+reading at the season's turn, the enforcement doors (the hatch's wattle, the
+beam's grudge, the keeper's book-setting breach), the tally's notch record.
+The unit's embodiment options — the step's close read, the notch record's
+arming, the hatch — stay the owner's call class (the pole's iter-161
+precedent); the live-session question stands (a real dry band, a real reader:
+the meaning distribution's own unfinished band, §7.1's form).
+
 ## 7. Meaning frontier
 
 The current region is already strong at mechanical composition. The next depth
@@ -358,9 +535,11 @@ fair toll — two justices, the risk-priced against the load-priced; the insulti
 price — the purse-read itself, not the sum; the lowland trader's shelter-law
 shame — "we shelter by law and charge by ledger": the law is older than the
 guild's paper, and the paper now prices what the law gives; the inherited duty —
-twice, the pole at the crossing and the wergeld word on the road. Still open:
-the Thornmill family obligation — the vigil is faction-level; which household
-carries the mill fire's debt is unanswered.
+twice, the pole at the crossing and the wergeld word on the road. The Thornmill
+family obligation, open since this slice, is ANSWERED iter-164 (§6.2): the
+manor's own household carries the mill fire's debt as the race's keeping — the
+claim held wet at the price of its own tending (the vigil stays faction-level;
+the obligation is the steward's household's own).
 
 ## 8. Current limitations
 
@@ -394,8 +573,12 @@ each link.
 year, the high_water rise) followed through the whole chain without a new
 document per link — is MET once at the authored band (§6.1's ladder; the social
 response rides the road's word and the market's rumor channel, both committed
-surfaces). The implementation witness carries the chain at the single-NPC +
-companion band (iter-157: the second hand, the pole — KI#87 closed; iter-161:
+surfaces), and a second time over the water's band (§6.2's step bench,
+iter-164: the dry band walked the same chain — place/resource → the step law →
+the setting → the breach → the bounded maps → the wattle and the beam's talk →
+the notch and the resentment → the changed options). The implementation witness
+carries the chain at the single-NPC + companion band (iter-157: the second
+hand, the pole — KI#87 closed; iter-161:
 the pole's social half — the recognition read, the lever chain, the theft
 gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow
 landed iter-162 (the `debt-1` row's build: the accounts + the fold's two

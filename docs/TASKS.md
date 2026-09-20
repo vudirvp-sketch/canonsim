@@ -131,6 +131,35 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-164 · 2026-09-20 · water1 — the world track's second meso unit (the
+  owner's «продолжай работу с world track» call, the W4 candidates' next):
+  the practitioner water-governance node (candidate 3) authored as THE STEP
+  BENCH, doc-only, over committed substrate only — the weir stair's three
+  hands over one head (Ketta's pool, Wilmot's race, Maren's run), the head
+  named by the stair's wet step (four rungs; the committed high_water line
+  the fourth's own text), held by the practitioners' reading at the season's
+  turn, enforced at the water by the users themselves (the hatch wattled,
+  the beam's talk over the committed rumor channel, the keeper's
+  book-setting read against the tally's notch); the candidate's own
+  falsifier PASSED (the function-loss arbiter: the allocation order among
+  uses is a function neither the guild's paper nor the crossing's custom
+  performs; the anti-council check by mechanism — no axis, no threshold,
+  no institutional door, Loop A's family negative image); the mesh's sixth
+  loop F AUTHORED (ANCHOR_REGION §5: the recurring band → the step rule →
+  the allocation's acts → the head again, state-closing; the disable test
+  + the shared-stage rule re-applied) + three interlock edges (C⇄F, E⇄F,
+  B⇄F — the timber law died in the feud's fire, the water law lives in
+  stone); the chronicle's un-themed quarrel collection (pact_signed, three
+  members) themed as the stair pact; §7.1's Thornmill household obligation
+  ANSWERED (the race's keeping); the crisis probe (the dry long_light, the
+  hatch found open) + the humor probe (the step's position-dependent joke,
+  WORLD_TESTS' humor row upgraded to the authored band) run at the authored
+  band; three first-exposure substrate gaps recorded, NOT routed (the
+  water level, the setting verb, the hatch gate — the separate-track law);
+  the embodiment options stay the owner's call class (the pole's iter-161
+  precedent); 1878+1 green + ruff clean both ends at BASE 815476a (doc-only,
+  zero test change); 6 paths
+
 - iter-163 · 2026-09-20 · mech-2 — the introspection CLI's attention budget
   (the standing row's build, the owner's «mech 2 давай сделаем» call; the
   caps core + the two riders in one mechanism): DEFAULTS bounded, nothing

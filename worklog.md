@@ -7,6 +7,31 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-164 · 2026-09-20 · water1 — the world track's second meso unit (the
+owner's «продолжай работу с world track» call, the W4 candidates' next):
+the practitioner water-governance node (candidate 3) authored as the STEP
+BENCH over committed substrate only (the stair, the race's timbers, the
+bank market, the seasons, the tally staff, the quarrel collection)
+- doc-only (6 paths, over the soft limit per AGENTS §2.3 — the worldbuild
+  trio + STATUS/TASKS/worklog, the iter-155/156/160 doc-only precedent):
+  ANCHOR_REGION carries the unit (§6.2 — the ladder, the four steps, the
+  year, the enforcement's three doors, the lifecycle table, the crisis +
+  humor probes, the band split) + the mesh's F row (§5, sixth loop
+  AUTHORED, three new interlock edges C⇄F/E⇄F/B⇄F, the disable test
+  re-applied) + §7.1's Thornmill obligation ANSWERED; the candidate's
+  own falsifier PASSED (the function-loss arbiter; the anti-council
+  check by mechanism); §5's E band cell synced to the loop's own text
+  (the iter-162 arming, a one-cell consistency fix inside the edited
+  table); WORKPLAN §2/§6 the TESTED verdict; WORLD_TESTS §9 the run
+  record + the humor row's authored-band upgrade
+- honest residues: three first-exposure substrate gaps recorded, NOT
+  routed (the water level, the setting verb, the hatch gate — the
+  separate-track law); the embodiment options named, never committed
+  (the pole's iter-161 precedent class); the live-session question stands
+- verified BEFORE working at BASE_COMMIT 815476a (1878+1 green, ruff
+  clean — the pin re-confirmed) and re-verified after: 1878+1 green,
+  ruff clean (doc-only, zero test change); iter-154 evicted per the cap
+---
 iter-163 · 2026-09-20 · mech-2 — the introspection CLI's attention budget
 (the standing row's build, the owner's «mech 2 давай сделаем» call): the
 caps core + intake-21's postmortem + intake-22's DAG export as ONE
@@ -196,17 +221,3 @@ double-toll meaning slice (§7.1 — four bounded maps, the meaning distributed)
   scope); iter-145 evicted per the cap
 - 1842+1 green + ruff clean both ends at BASE c282fea (env pin 3.12.14);
   5 paths doc-only, inside the soft limit
-
-iter-154 · 2026-09-20 · intake30 — the owner's archive-intake call over
-the uploaded agent-dense v3 hybrid pack: every active file read, the
-corpus map built (all eleven units = the already-routed intake family +
-worldbuild, stale pre-iter-145)
-- verdicts: the pack's self-declared canonical agent/ layer REFUSED
-  (parallel authority, D-024 + D-018/D-186 content-class law; no
-  docs/agent/); the visual-system research the ONE un-routed domain →
-  the intake-30 consult card (phases.md §6), presentation-1 the wired
-  consumer; the UNIFIED GDC KB not admitted (D-175 + F2)
-- docs: phases.md §6, DECISIONS D-187 (compound merge, stays at 30),
-  TASKS presentation-1, STATUS re-pin; iter-144 evicted per the cap;
-  1842+1 green + ruff clean both ends at BASE 16c3e4f
-

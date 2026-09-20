@@ -1,48 +1,51 @@
-Iteration: iter-163 (`iter-163-mech-2` — the standing row's build, the
-owner's «mech 2 давай сделаем» call): the introspection CLI's ATTENTION
-BUDGET landed as one mechanism over the caps core + the two riders —
-the law: DEFAULTS are bounded to what a reading agent scans in one
-screen, nothing bounded is dropped silently, every expansion is an
-explicit flag (D-128's effect line discharged + D-148's [truncated:N]
-anti-silent-drop applied to CLI defaults). (a) THE CAPS CORE: `trace`'s
-unqualified default now the last 720 ticks (measured at HEAD: 27/43
-lines on day1_full/province_feud vs 175/277 at full width) with the
-tail note naming --ticks/--tail/--entity/--hook/--event; `matrix`'s
-default the COMPACT query-vocabulary inventory (hooks/events/tokens
-names, the folds, the unindexed law line, the query note — the row's
-"past a screen" conditional now FACT: 300+ lines on grim/province),
-`--full` restoring the whole listing; every explicit flag answered in
-full, never second-guessed. (b) INTAKE-21's SINGLE-EVENT POSTMORTEM:
-`why --event ID` — the event's own record, the backward cause chain
-(the log's own cause links), the knowledge-wiring join (each minted
-token -> its crime/echo/traits consumers), the forward cascade (BFS
-generations); detail capped at named constants with truncation lines
-that name the walk-back query (ids as links). (c) INTAKE-22's DAG
-EXPORT: `matrix --dag` — the systems read/write graph as a Mermaid
-flowchart, the PROJECTION of rules.json::systems through the
-scheduler's own public parse (reads dotted, writes solid, before/after
-hints thick, per_tick bold; the per-family asymmetry stated in the
-header so the picture never overclaims). The why surface is now the
-postmortem family (--hook XOR --event); D-118's shadow-replay law
-untouched (the release-equality pin green).
+Iteration: iter-164 (`iter-164-water1` — the world track's second meso
+unit, the owner's «продолжай работу с world track» call over the W4
+candidates): the practitioner water-governance node (candidate 3) authored
+as THE STEP BENCH (`ANCHOR_REGION.md` §6.2) — the weir stair's three hands
+over one head (the weir keeper's pool, the steward of the burned name's
+race, the market beam's run), the irrigation-tribunal MECHANISM never the
+institution: the head named by the stair's wet step (four rungs, the
+committed high_water line the fourth's own text), held by the
+practitioners' reading at the season's turn, enforced at the water by the
+users themselves (the hatch wattled, the beam's talk, the keeper's
+book-setting read against the tally's notch). THE CANDIDATE'S OWN FALSIFIER
+PASSED — the function-loss arbiter: the allocation order among uses is a
+function neither the guild's paper (deferred claims) nor the crossing's
+custom (one use's own price) performs, and the enforcement's immediacy is
+the anti-council distinction (no axis, no threshold, no institutional door
+— Loop A's family negative image; the perturbation edge: a law unenforced
+at the water becomes the council's business). The mesh's SIXTH LOOP (F,
+AUTHORED: the recurring band → the step rule → the allocation's acts →
+the head's state again, state-closing; the disable test + the shared-stage
+rule re-applied) + three new interlock edges (C⇄F the season forces the
+step, E⇄F the paper prices the pool, B⇄F the feud residue prices the race's
+claim — the timber law died in the feud's fire, the water law lives in
+stone); the chronicle's un-themed quarrel collection (`pact_signed`, three
+members) themed as the stair pact — the unit's cause rung; §7.1's open
+item (the Thornmill household obligation) ANSWERED (the race's keeping);
+three first-exposure substrate gaps recorded, NOT routed (the water level,
+the setting verb, the hatch gate — the separate-track law); doc-only, the
+worldbuild trio + the state triplet.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1878 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT ee09105 BEFORE working — 1872+1, identical to
-the iter-162 pin — and re-verified after with the diff in place: 1878+1,
-the delta exactly the new claim packet) ·
+verified at BASE_COMMIT 815476a BEFORE working — 1878+1, identical to
+the iter-163 pin — and re-verified after with the diff in place: 1878+1,
+identical, doc-only, zero test change) ·
 Date: 2026-09-20 ·
-Scope: `scripts/mechanics.py` (the caps + the two riders + the CLI
-surface), `tests/test_mechanics.py` (the §9 claim packet, +6 — recount
-oracles for chain/children/edge counts), `docs/AGENT_NAVIGATION.md` (§5
-the CLI sketch), `docs/TASKS.md` (the row collapse + the iter-163 ledger
-line), `docs/blueprint/phases.md` (§6 the two cards' rider lines),
-`STATUS.md` (this re-pin), `worklog.md` (this entry) — 7 paths (over the
-3–5 soft limit: the build + its claim packet + the doc quintet, the
-iter-160 precedent). The prior iteration's record: iter-162 (debt-1).
-The detail lives in the tool's own docstring (the law carrier) + the
-claim packet + git.
+Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4 three rows, §5 the F loop +
+the verdict table + the seven edges, §6.2 the step bench — the ladder,
+the steps, the year, the enforcement, the lifecycle, the two probes, the
+band split, §7.1 the open item answered, §9 the second chain),
+`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 3's
+TESTED verdict), `docs/worldbuild/WORLD_TESTS.md` (§9 the step-bench
+entry + the humor row's authored-band upgrade), `STATUS.md` (this
+re-pin), `worklog.md` (this entry), `docs/TASKS.md` (the iter-164 ledger
+line) — 6 paths doc-only (over the 3–5 soft limit: the worldbuild
+quartet + the state triplet, the iter-155/156/160 doc-only precedent).
+The prior iteration's record: iter-163 (mech-2). The detail lives in
+§6.2's own tables + the WORLD_TESTS §9 entry + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -517,7 +520,22 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-163 DONE: mech-2 (the owner's «mech 2 давай сделаем» call — the
+**iter-164 DONE: water1 — the world track's second meso unit (the owner's
+«продолжай работу с world track» call, the W4 candidates' next): the
+practitioner water-governance node (candidate 3) authored as the STEP BENCH
+(ANCHOR_REGION §6.2) — the weir stair's three hands over one head (the
+keeper's pool, the steward's race, the beam's run), the head named by the
+stair's wet step (four rungs, the committed high_water line the fourth's
+own text), held by the practitioners' reading, enforced at the water by the
+users themselves; the candidate's falsifier PASSED (the function-loss
+arbiter: the allocation order is a function neither the guild's paper nor
+the crossing's custom performs; the anti-council check: no axis, no
+threshold, no institutional door); the mesh's sixth loop F (AUTHORED) +
+three interlock edges (C⇄F, E⇄F, B⇄F); the chronicle's quarrel collection
+themed as the stair pact; §7.1's Thornmill obligation ANSWERED; three
+first-exposure substrate gaps recorded, not routed (the water level, the
+setting verb, the hatch gate); doc-only, 1878+1 green both ends (zero test
+change). iter-163 DONE: mech-2 (the owner's «mech 2 давай сделаем» call — the
 row's own build): the introspection CLI's attention budget landed as one
 mechanism — the caps core (trace's default = the last 720 ticks + the
 naming tail note; matrix's default = the compact query-vocabulary
@@ -563,9 +581,7 @@ iter-152: the CORE_DESIGN_RESEARCH deletion + the evidence-class citation
 sweep. iter-151: the semantic documentation compaction pass (D-185 —
 DECISIONS 63→30, TASKS 2422→914). iter-150: the AGPLv3 relicense + the
 standing-backlog revalidation (D-183/D-184). iter-149: pack-4;
-iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1
-(verified LIVE green on main at 156ec8f — the iter-143 arm's own check;
-the branch-protection recipe stays the owner's settings step).**
+iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
 
 1. **The owner-gated backlog (the standing rows — the ORDER owner
    decides, TASKS owns composition, never order; each build row's
@@ -638,27 +654,27 @@ the branch-protection recipe stays the owner's settings step).**
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6); the
    world track's active frontier is its own plan's W4 — the meso
-   expansion (families, workshops, guild substructures — each
-   addition must create a new causal coupling, `WORLD_WORKPLAN.md`
-   §6, never this file's queue; W3 the causal mesh done iter-156 —
-   five independent loops, `ANCHOR_REGION.md` §5; A1/A2/A3 done
-   iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
-   its pack embodiment LANDED iter-157: the second hand walks the
-   artery; W4's first move RUN iter-160 — the bounded experiment
-   CONFIRMED at the split band, the transfer KEPT; the embodiment
-   options LANDED iter-161 — the pole's recognition token + theft
-   flag, the lever chain test-pinned; the debt's economy arm LANDED
-   iter-162 (debt-1 — the accounts + the fold's two flows + the
-   reckoning story beat, the crossing household's arithmetic live at
-   the year band); the next world-track call: the next meso unit —
-   candidates 3/4 (the practitioner water-governance node, the
-   constructed kinship edge), each carrying its named falsifier).
+   expansion (each addition must create a new causal coupling,
+   `WORLD_WORKPLAN.md` §6, never this file's queue; W3 the causal mesh
+   done iter-156, widened iter-164 — six loops, the W4 addition F;
+   A1/A2/A3 done iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
+   its pack embodiment LANDED iter-157/161/162: the second hand, the pole's
+   two halves, the debt's economy arm; the W4 bounded experiment RUN
+   iter-160 — CONFIRMED, the transfer kept; the SECOND meso unit AUTHORED
+   iter-164 — the step bench, candidate 3 CONFIRMED at the authored band:
+   the water's allocation order, the mesh's F loop + three interlock edges);
+   the next world-track call: the step bench's embodiment options (the
+   step's close read, the notch record's arming, the hatch — the owner's
+   call class, the pole's iter-161 precedent) or candidate 4 (the
+   constructed kinship edge — the remaining candidate, its Sarrow need
+   still to be demonstrated), each carrying its named falsifier).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input —
-   postponed until the owner's call), a world-track call (W4 the
-   meso expansion — the setting's own frontier: the next meso unit
-   from candidates 3/4, water governance or constructed kinship),
+   postponed until the owner's call), a world-track call (the step
+   bench's embodiment options — the owner's call class, the pole's
+   iter-161 precedent — or candidate 4, the constructed kinship
+   edge, the remaining W4 candidate),
    the debt-1 residues (the discrete-event doors the arming left
    un-armed — the paper's fall, the clearance lump, the punt's
    purchase — each a future row's own call), or a fresh call
