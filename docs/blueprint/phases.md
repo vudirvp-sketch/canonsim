@@ -2657,6 +2657,46 @@ Landed: D-187 + this block + the presentation-1 consult-material wiring.
 The build queue UNTOUCHED — nothing unpins, nothing reorders; zero
 build-grade items.
 
+**The Kurvitz consolidated research routed (intake-31, iter-158, D-189 — the
+owner's «обработай … реши что перенять, адаптировать или привнести в мой
+проект и зачем» call over the uploaded prior-session research residue on the
+Kurvitz worldbuilding corpus; the research input itself verified against HEAD —
+its snapshot pin 2e64ae28 identical to the working BASE; the full one-pass
+record: the upload + git at this row's commit).** The verdict: PARTIALLY
+CONFIRMED — the corpus mined as a GENERATOR LIBRARY, never a worldbuilding
+layer (the uploaded research's own verdict, re-confirmed independently at
+HEAD): the strongest principles already owned by the worldbuild surface
+(prohibition, negative space, residue-first, meso bridge, knowledge asymmetry
+— the doctrine half), the fresh value OPERATIONAL (the generator/probe forms).
+Adopted: the W4 operator set (the function-loss probe → WORLD_AUTHORING §5;
+the meso assembly probe → §7; the residue lifecycle trace → §8; the
+natural-pattern transfer rule + the third-order synthesis → §19) + the test
+operationalizations (the biography crisis probe + the humor generator →
+WORLD_TESTS §3) + the W4 working set (the bounded crossing-household
+experiment with its three-way decision rule + four falsifier-carrying
+candidates → WORLD_WORKPLAN §6) + the source mechanics record
+(`docs/ref/kurvitz.md`, ref-21 + the REFERENCES/REFERENCES_DEEP/NAV wiring —
+the owner's «создать новую в референсах» option taken for the SOURCE layer).
+Refused: a Kurvitz document inside `docs/worldbuild/` (D-024 — every domain
+it carries has an owner; the uploaded research's own Alternative C upheld); a
+generic residue subsystem (SHOULD-NOT-ADD until the bounded experiment proves
+a substrate gap); the canon import list (races, name catalogues, humor
+tables, life-goal tables, exact thresholds, one-to-one institutions,
+contested relativity claims — binding, recorded in the ref file); the two
+cross-domain donors admitted as institutions (mechanism-only — the
+irrigation-tribunal and milk-kinship mechanisms ride WORLD_WORKPLAN §6's
+candidates with named falsifiers, never as imports). The admission rule
+(D-175) satisfied: the named open consumer is the world track's W4 frontier
+(STATUS Next step's own standing frame); the falsifier is the bounded
+experiment's decision rule. Same-iteration syncs (doc drift caught and fixed
+in the touched owners): the TASKS ledger's iter-151..156 one-liner hole
+backfilled + the ledger header re-scoped (the practice lapsed after the
+iter-151 compaction; verified against git); the worldbuild embodiment lines
+re-synced to iter-157's landing (the second hand + the pole committed, KI#87
+closed — ANCHOR_REGION §6.1/§9, WORLD_TESTS §9, WORLD_WORKPLAN §2/§3 read
+stale at HEAD). Landed: D-189 + this block. The build queue UNTOUCHED —
+nothing unpins, nothing reorders; zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

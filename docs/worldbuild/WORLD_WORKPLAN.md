@@ -36,9 +36,11 @@ owner instead of overlapping foundation documents.
 The current repository's Sarrow Vale province is the strongest concrete
 implementation witness. The broader worldbuilding goal is not closed yet because
 the meso and human-meaning layers are still thinner than the mechanical layer —
-the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155), not yet
-pack-embodied beyond the single-NPC band. The causal mesh is audited — five
-independent loops, four committed (W3 done, iter-156, `ANCHOR_REGION.md` §5).
+the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155) and embodied
+at the single-NPC + companion band (the second hand and the pole, iter-157);
+the debt's flow and further meso units are not yet embodied. The causal mesh is
+audited — five independent loops, four committed (W3 done, iter-156,
+`ANCHOR_REGION.md` §5).
 
 The active deliverable is `ANCHOR_REGION.md`.
 
@@ -58,9 +60,10 @@ family — `ANCHOR_REGION.md` §6.1), connecting macro pressure (the seasonal ri
 the guild-held flood debt) to ordinary life through durable constraints (the
 debt, the shelter law's edge), choices (the high_water rate, the purse-read
 bend, the pole-or-road question) and consequences (the debt standing, the
-reputation residue, the inherited pole). The unit's pack embodiment stays an
-engineering-side question (the separate-track law; KI#87 the punt pole's item
-gap).
+reputation residue, the inherited pole). The unit's pack embodiment landed at
+the companion band (iter-157: the second hand walks the artery, the pole
+committed, KI#87 closed); the debt's economy flow stays the open engineering-side
+question (the separate-track law).
 
 ### A3 — Meaning test — DONE (iter-155)
 
@@ -120,6 +123,56 @@ Only after the causal mesh is stable, add a small number of additional meso unit
 - crews/caravans.
 
 Each addition must create a new causal coupling, not just more names.
+
+### The W4 working set (intake-31, D-189 — the operator-armed frontier)
+
+The meso additions above are authored through the operator set
+(`WORLD_AUTHORING.md` §5/§7/§8/§19 — the function-loss probe, the meso assembly
+probe, the residue lifecycle trace, the natural-pattern transfer rule) and
+verified through the probe forms (`WORLD_TESTS.md` §3 — the biography crisis
+probe, the humor generator). The operators exist to find the coupling, not to
+add volume; the source mechanics live in `docs/ref/kurvitz.md` (ref-21).
+
+**The bounded experiment — the next world-track call's first move:** run the
+crossing household once through the full stack on existing substrate only:
+
+`flood / debt → function lost or constrained → replacement carrier / institution → heterogeneous household roles → biography crisis → residue lifecycle → one perturbation / ablation → reachable-state difference`.
+
+Decision rule:
+
+- a new causal capability from existing primitives → keep the mechanism as an
+  authoring/test pattern;
+- a repeatedly exposed substrate limitation → record it and route to the
+  engineering side (a TASKS standing row on the owner's call, never from this
+  track);
+- richer prose or more names only → reject the transfer as decorative
+  complexity.
+
+**Candidates (PROPOSAL — hypotheses, not canon; each carries its falsifier):**
+
+1. **The flood debt as a lifecycle.** Does the debt become materially more
+   explanatory when its holder, transfer/renegotiation, partial repayment,
+   inheritance, and social interpretation are explicitly traced? Do not build
+   an economy system first — test the lifecycle on existing substrate.
+2. **One social carrier.** The punt pole (committed, iter-157), the waybill, or
+   the toll record: material function + social meaning + holder + recognized
+   claim + transfer = a new meso coupling? The carrier must alter at least one
+   relationship, obligation, or future option, or it is decoration.
+3. **A practitioner water-governance node.** Scarce resource → recurring
+   allocation conflict → practitioner rule → immediate enforcement →
+   legitimacy/resentment → memory (the irrigation-tribunal MECHANISM, never the
+   institution; the real-world donor is documented in the source research —
+   UNESCO, irrigators' tribunals of the Spanish Mediterranean coast). Survives
+   only if it performs a function the guild's paper and the crossing's custom
+   do not — the function-loss probe is the arbiter; the guild council must not
+   be duplicated.
+4. **A constructed kinship edge.** Care/bodily relation → socially recognized
+   kin edge → obligation → inheritance/protection/exclusion (the milk-kinship
+   MECHANISM, never the practice; the documented donor is the Hindu Kush
+   foster-relations research). A future-region donor unless a concrete Sarrow
+   need appears — the shelter law's fed-through-winter strangers are the native
+   generator candidate. The edge must be expensive (priced by the residue
+   lifecycle) or it inflates into noise.
 
 ## 7. W5 — Human tests
 

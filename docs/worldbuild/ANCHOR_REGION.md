@@ -268,11 +268,12 @@ reader, no new mechanics required (the small-alphabet law, authoring doctrine
 **Embodiment (committed vs authored).** Committed: the spine (want/need/flaw/
 cause), the coerce urgency entry (the purse-read double-toll beat), the shelter
 law (the lowland prohibition set), the high_water lines (the drowned fords, the
-punt men's double), the boathouse fire spot, the auditor's errand. Authored here
-(WORKING): the debt's guild-holder, the second hand, the credit winter, the
-household's year. The punt pole — "the family's last tool" per the committed
-note — is not in the pack's items family (KI#87): the world model carries the
-tool; the pack does not yet.
+punt men's double), the boathouse fire spot, the auditor's errand — and, since
+iter-157, the second hand himself (Dellan: the kin/runner pair axes, the
+road-leg urgency beat, the paired escort legs) and the punt pole (the item
+committed; KI#87 closed iter-157). Authored here (WORKING): the debt's
+guild-holder, the credit winter, the household's year, and the debt's flow
+(not economy-armed — the open engineering-side question).
 
 ## 7. Meaning frontier
 
@@ -348,7 +349,7 @@ each link.
 year, the high_water rise) followed through the whole chain without a new
 document per link — is MET once at the authored band (§6.1's ladder; the social
 response rides the road's word and the market's rumor channel, both committed
-surfaces). The implementation witness still carries the chain at the
-single-NPC band; the meso unit's pack embodiment (the second hand, the debt's
-flow) is an engineering-side question the world track does not open by itself —
-the pack is not economy-armed, and the punt pole's item gap is KI#87.
+surfaces). The implementation witness carries the chain at the single-NPC +
+companion band (iter-157: the second hand, the pole — KI#87 closed); the debt's
+economy flow remains the engineering-side question the world track does not
+open by itself — the pack is not economy-armed.

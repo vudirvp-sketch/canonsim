@@ -7,6 +7,32 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-158 · 2026-09-20 · intake31 — the Kurvitz consolidated research routed
+(the owner's «обработай … реши что перенять, адаптировать или привнести»
+call over the uploaded prior-session research residue; D-175's admission
+rule satisfied — the W4 frontier the named consumer, the bounded
+experiment's decision rule the falsifier): PARTIALLY CONFIRMED — mined as
+a GENERATOR LIBRARY, never a worldbuilding layer
+- adopted: the W4 operator set (function-loss / meso assembly / residue
+  lifecycle / natural-pattern transfer + the third-order synthesis →
+  WORLD_AUTHORING §5/§7/§8/§19), the test operationalizations (biography
+  crisis probe + humor generator → WORLD_TESTS §3), the W4 working set
+  (the bounded crossing-household experiment + four falsifier-carrying
+  candidates → WORLD_WORKPLAN §6), the source record docs/ref/kurvitz.md
+  (ref-21 + REFERENCES/REFERENCES_DEEP/NAV wiring); refused: a
+  docs/worldbuild/KURVITZ.md (D-024), a generic residue subsystem
+  (SHOULD-NOT-ADD until the experiment proves a gap), the canon import
+  list, the cross-domain donors as institutions (mechanism-only)
+- syncs riding: the TASKS ledger iter-151..156 one-liners backfilled +
+  the header re-scoped (the practice lapsed post-compaction, verified
+  against git); the worldbuild embodiment lines re-synced to iter-157
+  (the second hand + the pole committed, KI#87 closed — ANCHOR_REGION
+  §6.1/§9, WORLD_TESTS §9, WORLD_WORKPLAN §2/§3); D-189 compound-merged
+  (DECISIONS stays at 30); 1852+1 green + ruff clean both ends at BASE
+  2e64ae2 (env pin 3.12.14); 13 paths doc-only (the intake routing + the
+  worldbuild owners + the references wiring + the doc quintet, the
+  iter-153 precedent); iter-148 evicted per the cap
+
 iter-157 · 2026-09-20 · companion1 — the companion arming (companion-1 +
 tune-3, together; the owner's «довести до ума сам генератор» call,
 engine-1/presentation-1 postponed by the owner): the crossing household's
@@ -142,11 +168,3 @@ non-scaffold pack; +16 pressure tests
 - docs: TASKS (the section + the flip), DECISIONS D-182, STATUS re-pin, NAV
   §1 (the fifth pack); the engine findings (the group-stock lint gap, the
   co-due same-account limit) recorded in D-182, never patched in-core
-
-iter-148 · 2026-09-19 · grim1 — pack-1 the grim tavern, the owner's
-delegation call: the dark line as pure pack data (the axes, the
-flirt→proposition ladder with the world's reply, the consent split + its
-fact/belief lint `core/packlint/admission.py`, the pawn-ticket hinge);
-res-1/since-1 first consumer armings; +14+1 tests
-- docs: TASKS, DECISIONS D-181, PACK_SPEC §5 (the lint row), STATUS re-pin,
-  NAV §1 (the fourth pack); the §9 claim packet CONFIRMED at the band

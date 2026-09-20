@@ -68,6 +68,16 @@ Negative space questions:
 - Which problem has it learned to ignore?
 - What cannot be done here without importing another system?
 
+The operational form — the **function-loss probe** (D-189): negative space is a
+causal diagnostic, not a descriptive trait. When a capability is absent, ask what
+function must still be performed and what carries it now:
+
+`REMOVED FUNCTION → REQUIRED REPLACEMENT → NEW CARRIER / INSTITUTION → NEW COST → NEW FAILURE MODE → NEW ORDINARY BEHAVIOR`.
+
+Success: the replacement creates a real new causal coupling. Failure: the world
+is merely less convenient without producing a meaningful social structure. Use
+the probe only when the answer can change a future decision (the §14 law).
+
 ## 6. Causal authoring pipeline
 
 The reusable pipeline is:
@@ -99,6 +109,12 @@ the meso layer:
 Macro pressure becomes believable when one of these units must decide how to
 respond.
 
+The **meso assembly probe** (D-189): build a meso unit as a heterogeneous
+assembly, not a single actor — internally distinct roles, bounded knowledge per
+role, different incentives, partial coordination, different local consequences.
+The unit passes when it cannot be honestly represented as one homogeneous actor
+without losing causal behavior.
+
 ## 8. Residue-first authoring
 
 For important historical events, author the modern residue before expanding the
@@ -109,6 +125,17 @@ Ask:
 `What changed materially? Who remembers? Who benefits? Which institution exists because of it? Which prohibition survived? What can no longer be done?`
 
 This prevents history from becoming a museum catalogue.
+
+The **residue lifecycle trace** (D-189): an important residue is more than a
+changed state — name its carrier, its holder, who can alter or transfer it, and
+its clearance or inheritance path:
+
+`EVENT → RESIDUE → CARRIER → HOLDER → TRANSFORMATION → TRANSFER → CLEARANCE / INHERITANCE → NEW OPTIONS`.
+
+Perturbation test: removing one transition must change reachable future states,
+not just the prose. A residue held by two independent records (the debtor's
+memory and the creditor's paper) creates reconciliation leverage when the two
+records meet.
 
 ## 9. Knowledge asymmetry
 
@@ -223,7 +250,24 @@ A proposed world element is ready when it can be described as:
 A missing link is not automatically a rejection. It is a named uncertainty to be
 resolved or intentionally left mysterious.
 
-## 19. Operational maxim
+## 19. Natural-pattern transfer and the combined mechanism
+
+A natural or biological pattern (eusociality, mycorrhizal exchange,
+cleaner-fish mutualism, succession, mimicry) may donate an interaction mechanism
+only as a social constraint or institutional pattern — never as a race, organism
+culture, or lore element (D-189):
+
+`BIOLOGICAL PATTERN → SOCIAL MECHANISM → CONSTRAINT → OBSERVABLE CONSEQUENCE`.
+
+The strongest combined authoring mechanism — the third-order synthesis of
+negative space, residue, meso heterogeneity, and knowledge asymmetry:
+
+`REMOVE / RESTRICT AFFORDANCE → SOCIETY MUST PRESERVE A FUNCTION → REPLACEMENT CARRIER OR MESO INSTITUTION EMERGES → CARRIER ACCUMULATES RESIDUE → RESIDUE MOVES THROUGH HETEROGENEOUS ACTORS → KNOWLEDGE ASYMMETRY CHANGES ITS MEANING → FUTURE OPTION SPACE CHANGES`.
+
+The combined chain is the W4 working set's engine (`WORLD_WORKPLAN.md` §6);
+the operator library's source mechanics live in `docs/ref/kurvitz.md` (ref-21).
+
+## 20. Operational maxim
 
 > **Do not invent more things. Invent more consequences.**
 

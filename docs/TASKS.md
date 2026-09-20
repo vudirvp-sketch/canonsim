@@ -128,13 +128,21 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Phase-6-era iteration ledger (iter-116..150 — the detailed sections
-collapsed at the owner's memory-GC calls, iter-140 + iter-151, the iter-102
-precedent; the iter-151 pass restored the iter-140 collapse after a
-stale-base archive apply had clobbered it — D-185; per-iteration detail: the
+### Iteration ledger (iter-116..158 — the detailed sections collapsed at the
+owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
+iter-151 pass restored the iter-140 collapse after a stale-base archive apply
+had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
+— the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-158 · 2026-09-20 · intake-31 — the Kurvitz consolidated research routed
+  (D-189, the owner's routing call over the uploaded prior-session research
+  residue): PARTIALLY CONFIRMED — mined as a generator library, never a
+  worldbuilding layer; the W4 operator set + the test operationalizations +
+  the bounded crossing-household experiment adopted into the worldbuild owners,
+  the source mechanics recorded at docs/ref/kurvitz.md (ref-21); the TASKS
+  ledger backfill + the worldbuild embodiment sync riding — doc-only.
 - iter-157 · 2026-09-20 · companion1 — the companion arming (companion-1 +
   tune-3, together as the row's own law; the owner's «довести до ума сам
   генератор» call): the crossing household's second hand embodied in
@@ -146,6 +154,30 @@ here, the header's own law)
   shout to the player), the mode B voice + the paired escort leg + the
   arrival snapshots pinned, the punt pole committed (KI#87 CLOSED); zero
   core change — D-188.
+- iter-156 · 2026-09-20 · mesh1 — the world track's W3 causal mesh audit
+  (doc-only): five loops pass the disable test + the shared-stage rule (four
+  COMMITTED + the credit loop AUTHORED), the anti-double-count ruling applied
+  once, four interlock edges named — ANCHOR_REGION §5, WORLD_TESTS §9.
+- iter-155 · 2026-09-20 · anchor1 — the world track's first anchor pass
+  (doc-only): A1 the causal map's unsupported links deepened, A2 the crossing
+  household authored as the first meso unit (ANCHOR_REGION §6.1), A3 the
+  high-water double-toll meaning slice (§7.1); KI#87 opened (the punt pole's
+  item gap).
+- iter-154 · 2026-09-20 · intake-30 — the agent-dense v3 hybrid pack routed
+  (D-187): the corpus map (nine units already owned), the agent/ layer refused
+  (no docs/agent/), the visual consult card parked behind the SoW fence with
+  presentation-1 wired, the UNIFIED GDC KB not admitted.
+- iter-153 · 2026-09-20 · worldbuild1 — the worldbuild archive intake (D-186):
+  the active worldbuilding surface landed as docs/worldbuild/ (10 files, the
+  README index + the terminology fence) + the agent-path wiring (NAV §1/§2/§3,
+  the README map, the separate-track pointer).
+- iter-152 · 2026-09-20 · docgc2 — the CORE_DESIGN_RESEARCH deletion + the
+  evidence-class citation sweep (27 paths re-pointed to their live owners;
+  D-185's recorded next step executed).
+- iter-151 · 2026-09-20 · docscomp1 — the semantic documentation compaction pass
+  (D-185): DECISIONS 63→30 rows, TASKS 2422→914 + the thirteen standing rows
+  extracted, phases.md §6 restored compact, NAV/TEST_PLAN/REFERENCES_DEEP
+  re-compacted, the re-points restored.
 - iter-150 · 2026-09-20 · revalid-1 — the AGPLv3 relicense (LICENSE + the
   README's License section, D-183) + the standing-backlog revalidation (all
   13 rows audited, 8 revised — D-184) — doc-only.
