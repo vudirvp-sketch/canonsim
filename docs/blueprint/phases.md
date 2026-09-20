@@ -2581,6 +2581,82 @@ and measuring). The ORDER recommendation recorded, never enforced (D-113).
 Landed: D-175 + this block + the six TASKS row sharpenings. The build queue
 UNTOUCHED — nothing unpins, nothing reorders. Detail: git at 15e568d.
 
+**The agent-dense v3 hybrid pack routed (intake-30, iter-154, D-187 — the
+owner's archive-intake call over the uploaded `Canonsim_Agent_Dense_v3_hybrid`
+package: an external three-layer re-consolidation of the already-routed
+research corpus; the consult posture, the pack itself external per the
+convenience-copy law; every active file read). The corpus map — nine of the pack's eleven
+content units re-derive OWNED material, each already routed through
+its intake (the pack is a sibling compression of the same sources, not new
+evidence): `agent/00` (method + lenses/prisms + transplant filters) = the
+intake-26 catalog above + TEST_PLAN §9 (D-171) + D-024/D-175; `agent/01`
+(the findings ledger) = the iter-134 cumulative body (D-167) + the iter-137
+three lens documents (D-170) + intake-24 (D-165); `agent/02` (architecture)
+= intakes 13/14/17/19/21/22/23 (D-150/155/158/160/162/163/164); `agent/03`
+(design/content) = intakes 15/16/18/20/27 (D-156/157/159/161/173);
+`agent/05` (donors) = intake-11 (D-147) + the Kurvitz residue (D-186);
+`agent/06` (worldbuilding constitution) = `docs/worldbuild/`
+(`WORLD_AUTHORING.md` the repo's own compression of the same source — the
+two are near-isomorphic, the repo surface wired and law-fenced, D-186);
+`agent/07` + the manifests = package metadata, never repo material.
+Stale-at-HEAD: the pack snapshot predates iter-145..147 (its donor mapping
+marks res-1/roads-1/since-1 un-landed — all three landed). The structure
+verdict: the pack's `agent/` layer — which declares itself the canonical
+documentation layer for the corpus — REFUSED as a parallel authority
+(D-024's single owner; the D-018/D-186 content-class law: engineering
+concepts land surgically in existing owners, the D-186 directory exception
+reserved for an owned domain model with NO existing owner — every domain
+this pack carries has one; the iter-140/151/152 compactions would be
+reversed); no `docs/agent/`; the pack's own manifest discipline (one active
+owner per durable concept, sources preserved separately) acknowledged as
+the same law NAV §3 and D-011/D-024 already own. The TWO fresh units: (1)
+the visual-system research (the pack's `agent/04`, source
+`canonsim-визуализация-final`) — the ONE domain the intake family never
+routed; its verdict + consult card below; (2) the
+`UNIFIED_GAME_DESIGN_KNOWLEDGE_BASE` (a 52 KB three-collection GDC corpus:
+level design, narrative/choice/social, quest theory/PCG/balance) — NOT
+ADMITTED: no named open row it feeds (D-175's admission rule), the
+saturated-corpus finding applies (F2 — its §9 transfer invariants re-derive
+the standing families: the information gradient = the brief tiers, the
+cascades+callbacks = the hook/cause_hook family, the pair-axis reactivity,
+the DCP task shape = the pack purpose laws); the re-open condition stays
+F2's own — a fresh question aimed at an open row's evaluation form.
+
+**The visual-system consult card** (intake-30's durable residue, PARKED
+behind the SoW fence; the consumers: the presentation-1 write + the SoW
+frontend debates; each line cites its owner, nothing restates):
+
+1. **The verdict**: PARTIALLY CONFIRMED — the constitution half re-derives
+   standing law whole (the canon → derived-projection → presentation
+   ladder = INV-1 + D-118's derived-never-truth; the determinism clauses =
+   INV-2/D-028; visual vocabulary as pack data = INV-3; offline-AI-as-
+   authoring-aid-only = INV-4; rebuildability = the fold/checkpoint family;
+   the degradation ladder = the render ladder's own shape) — the
+   cross-domain confirmation family's next member, zero new law.
+2. **The development-order law**: prove the semantic read surface FIRST —
+   a static, inspectable representation over a golden province run; the
+   first objective is "meaning survives visualization" (a read-surface
+   falsifier, never a renderer commitment); the stack (semantic projection
+   → audience filter → topology/fields → composition/grammar) only after;
+   never begin by committing a renderer stack.
+3. **The fidelity target**: "the world should look the way it does BECAUSE
+   the simulated world is the way it is" — visual form as a readable
+   compression of history/topology/relationships/state; every important
+   visual difference means something (the visual-side L3 — the
+   anti-decoration law).
+4. **The rejection table**: universal WFC (a local composer only —
+   intake-16/17's own fence); asset-heavy sprite strategy as primary
+   (poor leverage per authored-unit); full-scene AI image generation as
+   truth (a second physical interpretation — INV-4's shape).
+5. **The fence**: presentation-1 owns the visual surface (D-174's recorded
+   refusal of a separate visual row); a contract without a consumer has
+   unknown requirements (D-148); player-facing compellingness INV-4-fenced
+   (F5); the first falsifier is the read-surface spike itself (line 2).
+
+Landed: D-187 + this block + the presentation-1 consult-material wiring.
+The build queue UNTOUCHED — nothing unpins, nothing reorders; zero
+build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

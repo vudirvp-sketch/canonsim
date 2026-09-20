@@ -7,6 +7,19 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-154 · 2026-09-20 · intake30 — the owner's archive-intake call over
+the uploaded agent-dense v3 hybrid pack: every active file read, the
+corpus map built (all eleven units = the already-routed intake family +
+worldbuild, stale pre-iter-145)
+- verdicts: the pack's self-declared canonical agent/ layer REFUSED
+  (parallel authority, D-024 + D-018/D-186 content-class law; no
+  docs/agent/); the visual-system research the ONE un-routed domain →
+  the intake-30 consult card (phases.md §6), presentation-1 the wired
+  consumer; the UNIFIED GDC KB not admitted (D-175 + F2)
+- docs: phases.md §6, DECISIONS D-187 (compound merge, stays at 30),
+  TASKS presentation-1, STATUS re-pin; iter-144 evicted per the cap;
+  1842+1 green + ruff clean both ends at BASE 16c3e4f
+
 iter-153 · 2026-09-20 · worldbuild1 — the owner's archive-intake call: the
 cleaned worldbuilding corpus landed as `docs/worldbuild/` (10 files, the
 README the index + the terminology fence), every file read, the repo-fact
@@ -103,10 +116,3 @@ the worldgen lint; the pack.py split rider (`core/packlint/`); armed k=0,
 +9 tests
 - docs: TASKS, DECISIONS D-178, CONTRACTS §1 collapsed, ROADMAP's row list,
   STATUS re-pin, NAV §1; the measured fork evidence in the iter-145 record
-
-iter-144 · 2026-09-19 · contracts — `docs/CONTRACTS.md` (new): the three
-pre-implementation contracts (roads-1/res-1/since-1 — pinned decisions,
-invariant sets, §9 claim packets, minimal test sets); doc-only
-- docs: TASKS (the section + the row pointers), DECISIONS D-177, STATUS
-  re-pin + Next step, NAV §1 (the CONTRACTS row); the doc-loop alarm
-  answered (the D-022 exception + the next step BUILD work)

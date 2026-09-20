@@ -55,7 +55,10 @@ claim packet)
   owner, never two). The spec's shape when written: a thin mapping table
   over the existing 8 blocks + `narrator_protocol` — never a second
   re-labeling vocabulary (D-024). Exit criterion: the weak-arm run on owner
-  hardware. Evidence base: TECH_NOTES §10/§11.
+  hardware. Evidence base: TECH_NOTES §10/§11; consult material at write
+  time: the intake-30 visual-system card (phases.md §6 — the visual
+  surface's parked residue: the development-order law, the fidelity
+  target, the rejection table; D-187/D-174's surface ownership).
 - `parse-2` — disambiguation buttons + multi-intent utterances, each half
   behind its own gate (PARSER_SPEC §7; sharpened iter-150): BUTTONS wait on
   a frontend consumer (mode C live play — a UI affordance, never a parser

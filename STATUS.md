@@ -1,34 +1,36 @@
-Iteration: iter-153 (`iter-153-worldbuild1` — the worldbuild archive
-intake, the owner's session call: the cleaned corpus's ACTIVE surface
-landed as `docs/worldbuild/` — 10 files, the README the index + the
-terminology fence; every file read + the repo-fact claims verified
-against HEAD (the anchor's province_pack evidence list — the 324-site
-surface, the six locations, the named actors, the 150-year feud/
-quarrel/exodus chronicle, the calendar/weather/travel/cultures/
-factions blocks — and the world-2 L1/L2 verdict language all check
-out); the agent-path wiring so the surface never hangs as dead
-weight: NAV §1 the row + §2 the world-setting reading-gradient row +
-§3 the authored-setting-model ownership row, the repo README's map
-row, TASKS' standing-rows preamble the separate-track pointer
-(`WORLD_WORKPLAN.md` the world track's own plan — never a second
-queue), D-186 the D-018-family exception row (DECISIONS stays at 30
-via the compound merge); doc-only, zero code, zero corpus price; the
-doc-loop alarm answered by the fresh owner call itself (the D-018
-exception law).
+Iteration: iter-154 (`iter-154-intake30` — the agent-dense v3 hybrid pack
+routed, the owner's archive-intake research call over the uploaded
+`Canonsim_Agent_Dense_v3_hybrid` package: an external three-layer
+re-consolidation of the already-routed research corpus — every active file
+read, every unit mapped to its existing owner (the corpus map: agent/00 =
+TEST_PLAN §9 + the intake-26 catalog, agent/01 = D-167/D-170/D-165,
+agent/02 = intakes 13/14/17/19/21/22/23, agent/03 = intakes 15/16/18/20/27,
+agent/05 = D-147 + D-186, agent/06 = `docs/worldbuild/` — the sibling
+compression of the same source, stale-at-HEAD pre-iter-145); the verdicts:
+the pack's self-declared canonical `agent/` layer REFUSED as a parallel
+authority (D-024 + the D-018/D-186 content-class law — engineering
+concepts land surgically, every domain the pack carries has an owner; no
+`docs/agent/`); the visual-system research the ONE un-routed domain → the
+intake-30 visual consult card (the development-order law, the fidelity
+target, the rejection table) parked behind the SoW fence, presentation-1
+the wired consumer (the TASKS row — never dead weight); the UNIFIED GDC
+knowledge base NOT admitted (D-175's rule + F2 saturation); D-187 the
+compound-row merge (DECISIONS stays at 30); doc-only, zero code, zero
+corpus price; the doc-loop alarm answered by the fresh owner call itself
+(the D-018 exception law).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT f660364 BEFORE working — identical — and
+verified at BASE_COMMIT 16c3e4f BEFORE working — identical — and
 re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/worldbuild/` (10 new files), `docs/AGENT_NAVIGATION.md`,
-`README.md`, `docs/TASKS.md`, `docs/DECISIONS.md` (the D-186 compound
-merge), `STATUS.md` (this re-pin), `worklog.md` (this entry) — 16
-paths, doc-only; over the 3–5 soft limit — the payload IS the
-directory + the doc quintet the law mandates, noted per AGENTS §2.3.
-The prior iteration's record: iter-152 (docgc2). The detail lives in
-D-186 + worklog + git.
+Scope: `docs/blueprint/phases.md` (§6: the intake-30 block + the
+visual-system consult card), `docs/DECISIONS.md` (the D-187 compound-row
+merge), `docs/TASKS.md` (the presentation-1 consult-material wiring),
+`STATUS.md` (this re-pin), `worklog.md` (this entry) — 5 paths, doc-only,
+inside the soft limit. The prior iteration's record: iter-153
+(worldbuild1). The detail lives in D-187 + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -502,11 +504,17 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-153 DONE: the worldbuild archive intake (D-186 — the cleaned
-corpus's active surface landed as `docs/worldbuild/`, 10 files, every
-repo-fact claim verified against HEAD; the agent-path wiring: NAV
-§1/§2/§3 + the README map + TASKS' separate-track pointer + the
-README's terminology fence — worldbuild canon/Echo ≠ INV-1's log
+**iter-154 DONE: the agent-dense v3 hybrid pack routed (D-187 — the
+external re-consolidation corpus-mapped to its existing owners whole,
+stale pre-iter-145; the pack's parallel `agent/` layer refused, no
+`docs/agent/`; the visual-system research the one un-routed domain →
+the intake-30 consult card parked behind the SoW fence, presentation-1
+the wired consumer; the UNIFIED GDC KB not admitted; doc-only, 1842+1
+green both ends). iter-153: the worldbuild archive intake (D-186 —
+the cleaned corpus's active surface landed as `docs/worldbuild/`, 10
+files, every repo-fact claim verified against HEAD; the agent-path
+wiring: NAV §1/§2/§3 + the README map + TASKS' separate-track pointer
++ the README's terminology fence — worldbuild canon/Echo ≠ INV-1's log
 canon / `core/echo.py`; doc-only, 1842+1 green both ends). iter-152:
 the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep
 + DIRECTOR_SPEC's cap re-pin + the two v0.2 rows closed absorbed
