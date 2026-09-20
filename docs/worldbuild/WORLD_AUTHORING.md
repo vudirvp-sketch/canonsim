@@ -137,6 +137,23 @@ not just the prose. A residue held by two independent records (the debtor's
 memory and the creditor's paper) creates reconciliation leverage when the two
 records meet.
 
+Two run-derived laws (the W4 experiment, iter-160 — the crossing household,
+the record in `WORLD_TESTS.md` §9):
+
+- **The carrier-availability law.** A meso unit's tool, committed as an
+  ordinary item carried by a role, makes the unit's function availability a
+  lawful world state: the tool travels with the role that wields it, and the
+  function degrades through ordinary movement — never a scripted flag. The
+  crossing's pole is the committed instance: the road-leg beat carries it, and
+  the crossing stands pole-less while the second hand walks (the no-teleport
+  law's own lag doing causal work).
+- **The carrier's verb-gate boundary.** A carried carrier inherits the verb
+  surface only through the verbs' own gates: carried ⇒ untakeable (the
+  `uncarried` test), unstealable unless the pack flags it (`steal_target`),
+  breakable only by its carrier. Authoring a carrier's loss means naming the
+  gate it rides — an unflagged carrier is functionally immortal in play,
+  whatever the prose says.
+
 ## 9. Knowledge asymmetry
 
 A strong world need not hide information randomly. Instead give different actors

@@ -133,12 +133,15 @@ verified through the probe forms (`WORLD_TESTS.md` §3 — the biography crisis
 probe, the humor generator). The operators exist to find the coupling, not to
 add volume; the source mechanics live in `docs/ref/kurvitz.md` (ref-21).
 
-**The bounded experiment — the next world-track call's first move:** run the
-crossing household once through the full stack on existing substrate only:
+**The bounded experiment — RUN (iter-160, w4exp1): CONFIRMED at the split
+band, the transfer KEPT.** The crossing household walked once through the
+full stack on existing substrate only (the evidence record: `WORLD_TESTS.md`
+§9; the household's authored residue: `ANCHOR_REGION.md` §6.1's lifecycle
+table):
 
 `flood / debt → function lost or constrained → replacement carrier / institution → heterogeneous household roles → biography crisis → residue lifecycle → one perturbation / ablation → reachable-state difference`.
 
-Decision rule:
+Decision rule (the standing law, D-189 — the applied verdict below):
 
 - a new causal capability from existing primitives → keep the mechanism as an
   authoring/test pattern;
@@ -148,16 +151,47 @@ Decision rule:
 - richer prose or more names only → reject the transfer as decorative
   complexity.
 
+Applied (iter-160):
+
+- kept as authoring/test patterns — the carrier-availability law + the
+  verb-gate boundary (`WORLD_AUTHORING.md` §8) and the carrier-ablation
+  probe (`WORLD_TESTS.md` §7): a new causal capability composed from
+  existing primitives (the movement beat + the carried-item position
+  contract make the household's tool availability a lawful world state —
+  test-pinned, `tests/test_companion.py`);
+- the one repeatedly exposed substrate limitation (the debt's arithmetic —
+  no account state; the third recorded exposure: A2's residue, Loop E's
+  band, this run) stays owner-routed per the separate-track law; the
+  lifecycle proved explanatory without the economy arm (one coin, two
+  claims — the debt cleared vs the punt bought back);
+- zero decorative residue — nothing added, nothing renamed; every tested
+  transition's removal changes reachable futures (the perturbation test
+  passed per transition).
+
+Two first-exposure findings recorded, not routed (the crisis probe's honest
+residue): the vigil never wakes for the stair (the elders out of earshot —
+the crossing is not a feud location) and the reputation axis has no runtime
+writer (D-006's own record; the breach response rides the knowledge/rumor
+stack).
+
 **Candidates (PROPOSAL — hypotheses, not canon; each carries its falsifier):**
 
 1. **The flood debt as a lifecycle.** Does the debt become materially more
    explanatory when its holder, transfer/renegotiation, partial repayment,
    inheritance, and social interpretation are explicitly traced? Do not build
    an economy system first — test the lifecycle on existing substrate.
+   TESTED (iter-160): the trace passes the perturbation test at the authored
+   band (`ANCHOR_REGION.md` §6.1's table); the economy arm stays the
+   owner-routed question.
 2. **One social carrier.** The punt pole (committed, iter-157), the waybill, or
    the toll record: material function + social meaning + holder + recognized
    claim + transfer = a new meso coupling? The carrier must alter at least one
    relationship, obligation, or future option, or it is decoration.
+   TESTED (iter-160) for the pole: the material half passes at the committed
+   band (the position-modulation causal, test-pinned); the social-recognition
+   half and the player-facing ablation are each one pack-data seed away (the
+   recognition token, the `steal_target` flag — the owner's embodiment call,
+   the KI#87 precedent class).
 3. **A practitioner water-governance node.** Scarce resource → recurring
    allocation conflict → practitioner rule → immediate enforcement →
    legitimacy/resentment → memory (the irrigation-tribunal MECHANISM, never the

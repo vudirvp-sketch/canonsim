@@ -135,7 +135,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..159 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..160 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -143,6 +143,15 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-160 · 2026-09-20 · w4exp1 — the world track's W4 bounded experiment
+  (the owner's «продолжай работу по world track» call — the working set's
+  own first move): the crossing household walked once through the full
+  operator stack on existing substrate; CONFIRMED at the split band, the
+  transfer KEPT (the carrier-availability law + the verb-gate boundary +
+  the carrier-ablation probe; the debt's lifecycle table authored; the
+  candidates 1/2 informed); the debt's arithmetic the third recorded
+  exposure, owner-routed; the vigil-null + reputation-writer findings
+  recorded, not routed; doc-only.
 - iter-159 · 2026-09-20 · intake-32 — the Vantiel research handoff routed
   (D-190, the owner's routing call over the uploaded prior-session handoff,
   the handoff's substrate map re-verified claim-by-claim at HEAD):

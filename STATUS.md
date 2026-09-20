@@ -1,50 +1,47 @@
-Iteration: iter-159 (`iter-159-intake32` — the Vantiel research handoff
-routed, D-190 — the owner's «обработай … реши что перенять, адаптировать
-или привнести в мой проект и зачем … куда определить … или создать новую
-в референсах … подключи междоменную трансплантацию» call over the uploaded
-`Vantiel_Canonsim_Research_Handoff_v2.md`): PARTIALLY CONFIRMED —
-Vantiel as a SEPARATIONS donor, never a subsystem donor (the uploaded
-handoff's own verdict, re-confirmed independently at HEAD; its substrate
-map verified claim-by-claim at 44151f1 — every named mechanism present).
-Adopted (D-190): the source record `docs/ref/vantiel.md` (ref-22 + the
-REFERENCES/REFERENCES_DEEP/NAV wiring — the owner's «создать новую в
-референсах» option taken for the SOURCE layer) + the presentation-1
-consult-material wiring (the RE-EXPANSION LAW — a bounded model-facing
-context bundle keeps stable event/entity handles and re-expands
-deterministically from canon, never a second truth — + the
-STAGED-INTERPRETATION sketch, both parked behind the owner gate, the
-intake-30 visual-card precedent). Refused: every subsystem donor (the
-handoff's own reject list — affinity meters, flag catalogs, cognition
-multipliers, difficulty percentages, mutable threads, free-form Architect
-edits, journal-as-state — binding in the ref file); a Vantiel document
-inside `docs/worldbuild/` (no authored-model change demonstrated); the
-generic knowledge-propagation graph (PROPOSAL/UNRESOLVED, its falsifier
-named); the hysteresis proposal (the D-105 deadband family the superior
-own-form — chatter prevented by construction, one less knob); the
-worldbuild ripple-audit question (parked with its falsifier). The
-admission rule (D-175) satisfied: the named open row is presentation-1
-(engine-1's decision-input child); the falsifier is the real consumer vs
-the current brief/retrieval stack on context cost, traceability,
-re-expansion correctness.
+Iteration: iter-160 (`iter-160-w4exp1` — the world track's W4 bounded
+experiment, the owner's «продолжай работу по world track» call — the working
+set's own first move, `WORLD_WORKPLAN.md` §6): CONFIRMED at the split band,
+the transfer KEPT — the crossing household walked once through the full
+operator stack on existing substrate only (flood/debt → function lost →
+replacement carrier → heterogeneous roles → biography crisis → residue
+lifecycle → one ablation → reachable-state difference). Kept as
+authoring/test patterns: the carrier-availability law + the carrier's
+verb-gate boundary (`WORLD_AUTHORING.md` §8 — the tool travels with the
+role that wields it; carried ⇒ untakeable, unstealable-unless-flagged,
+breakable only by its carrier) and the carrier-ablation probe
+(`WORLD_TESTS.md` §7) — the new causal capability composed from existing
+primitives (the movement beat + the carried-item position contract, the
+tool's availability a lawful world state — test-pinned,
+`tests/test_companion.py`). The debt's lifecycle trace authored
+(`ANCHOR_REGION.md` §6.1's table — one coin, two claims: the debt cleared
+vs the punt bought back); the crisis probe run on the boathouse fire (the
+committed fire spot): the response chain committed end-to-end, with two
+first-exposure findings recorded, not routed — the vigil never wakes for
+the stair (the elders out of earshot, the numeric-home law) and the
+reputation axis has no runtime writer (D-006; the breach response rides the
+knowledge/rumor stack). The one repeatedly exposed substrate limitation
+(the debt's arithmetic, the third recorded exposure) stays owner-routed per
+the separate-track law — the lifecycle proved explanatory without the
+economy arm. Candidates 1/2 informed (`WORLD_WORKPLAN.md` §6); candidates
+3/4 untouched.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1852 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 44151f1 BEFORE working — 1852+1, identical to
+verified at BASE_COMMIT abc4f93 BEFORE working — 1852+1, identical to
 the pin — and re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/ref/vantiel.md` (ref-22, new — the separations record),
-`docs/REFERENCES.md` (the §10 catalog row), `docs/REFERENCES_DEEP.md`
-(the §1/§2 rows), `docs/AGENT_NAVIGATION.md` (§1 the ref count),
-`docs/blueprint/phases.md` (§6 the intake-32 block),
-`docs/DECISIONS.md` (D-190 the compound merge, stays at 30),
-`docs/TASKS.md` (the presentation-1 consult wiring + the iter-159
-ledger line + the header re-scope), `STATUS.md` (this re-pin),
-`worklog.md` (this entry) — 9 paths (over the 3–5 soft limit: the
-intake routing + the references wiring + the doc quintet, the
-iter-158 intake precedent). The prior iteration's record: iter-158
-(intake-31). The detail lives in the intake-32 block + the ref file +
-D-190 + git.
+Scope: `docs/worldbuild/WORLD_WORKPLAN.md` (§6 the experiment's RUN
+verdict + the candidates 1/2 informed), `docs/worldbuild/WORLD_TESTS.md`
+(§7 the carrier-ablation probe + §9 the run record),
+`docs/worldbuild/WORLD_AUTHORING.md` (§8 the two run-derived laws),
+`docs/worldbuild/ANCHOR_REGION.md` (§6.1 the debt's lifecycle table + the
+embodiment line), `docs/TASKS.md` (the iter-160 ledger line), `STATUS.md`
+(this re-pin), `worklog.md` (this entry) — 7 paths (over the 3–5 soft
+limit: the four worldbuild owners + the repo trio, the iter-155
+world-track precedent). The prior iteration's record: iter-159
+(intake-32). The detail lives in the worldbuild owners + the worklog
++ git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -519,7 +516,12 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-159 DONE: the Vantiel research handoff routed (intake-32, D-190 —
+**iter-160 DONE: the W4 bounded experiment — the crossing household through
+the full operator stack on existing substrate (the working set's own first
+move; CONFIRMED at the split band, the transfer KEPT — the carrier-availability
+law + the verb-gate boundary + the carrier-ablation probe, the debt's
+lifecycle table authored, candidates 1/2 informed; doc-only, 1852+1 green both
+ends). iter-159 DONE: the Vantiel research handoff routed (intake-32, D-190 —
 the separations record docs/ref/vantiel.md ref-22 + the presentation-1
 consult material parked behind the owner gate; doc-only, 1852+1 green both
 ends). iter-158 DONE: the Kurvitz consolidated research routed (intake-31, D-189 —
@@ -613,9 +615,14 @@ the branch-protection recipe stays the owner's settings step).**
    five independent loops, `ANCHOR_REGION.md` §5; A1/A2/A3 done
    iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
    its pack embodiment LANDED iter-157: the second hand walks the
-   artery; W4 operator-armed iter-158 — intake-31, D-189: the W4
-   working set's bounded crossing-household experiment is the next
-   world-track call's first move).
+   artery; W4's first move RUN iter-160 — the bounded experiment
+   CONFIRMED at the split band, the transfer KEPT (the two carrier
+   laws + the ablation probe), candidates 1/2 informed, the debt's
+   arithmetic the third recorded exposure — owner-routed; the next
+   world-track call: the embodiment options (the pole's two
+   pack-data seeds — the recognition token, the `steal_target`
+   flag), the debt's economy arm, or the next meso unit — the
+   working set's remaining candidates).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input —

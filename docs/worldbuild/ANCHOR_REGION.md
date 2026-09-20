@@ -265,6 +265,31 @@ debt-auditor by his own errand — a debtor's toll squeeze meeting a creditor's
 reader, no new mechanics required (the small-alphabet law, authoring doctrine
 §10).
 
+**The debt's lifecycle (the residue lifecycle trace, run iter-160 — the W4
+experiment, `WORLD_WORKPLAN.md` §6):**
+
+| Rung | The flood debt's lifecycle |
+|---|---|
+| EVENT | the flood year — committed as both spines' cause field |
+| RESIDUE | the debt standing; the bend's reputation; the pole inherited |
+| CARRIER | the guild's paper (authored); the pole (committed, carried); the weighing day's beam (committed — the guild already reads the trade) |
+| HOLDER | the guild's factor; Ketta the debtor; Dellan the pole |
+| TRANSFORMATION | partial repayment (a fat season's toll surplus); the bend hardening into custom |
+| TRANSFER | the pole to the second hand (committed, iter-157); the debt's inheritance — the drowned generation's open question |
+| CLEARANCE | a strong honest season outruns the paper |
+| NEW OPTIONS | the debt clearable or the bend custom; the lever at the stair |
+
+The trace's explanatory gain at the authored band: the household's internal
+tension is one coin's two claims — Ketta's need (the debt cleared) and
+Dellan's need (the punt bought back) draw on the same thin toll surplus; the
+lifecycle makes the competition legible without any account state. The pole's
+runtime gates (the verb-gate boundary, `WORLD_AUTHORING.md` §8): carried ⇒
+untakeable, unstealable (no `steal_target` flag), breakable only by its
+carrier — the player-facing ablation and the flood-story recognition token
+(the lever's knowledge seed) are each one pack-data seed away, zero core:
+embodiment options the engineering side owns, alongside the debt's economy
+flow (§9's recorded open question).
+
 **Embodiment (committed vs authored).** Committed: the spine (want/need/flaw/
 cause), the coerce urgency entry (the purse-read double-toll beat), the shelter
 law (the lowland prohibition set), the high_water lines (the drowned fords, the
@@ -272,7 +297,8 @@ punt men's double), the boathouse fire spot, the auditor's errand — and, since
 iter-157, the second hand himself (Dellan: the kin/runner pair axes, the
 road-leg urgency beat, the paired escort legs) and the punt pole (the item
 committed; KI#87 closed iter-157). Authored here (WORKING): the debt's
-guild-holder, the credit winter, the household's year, and the debt's flow
+guild-holder, the credit winter, the household's year, the debt's lifecycle
+(the iter-160 trace above), and the debt's flow
 (not economy-armed — the open engineering-side question).
 
 ## 7. Meaning frontier

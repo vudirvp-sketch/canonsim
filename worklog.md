@@ -7,6 +7,26 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-160 · 2026-09-20 · w4exp1 — the world track's W4 bounded experiment
+(the owner's «продолжай работу по world track» call — the working set's own
+first move, WORLD_WORKPLAN §6): the crossing household walked once through
+the full operator stack on existing substrate only
+- doc-only (7 paths, over the soft limit per AGENTS §2.3 — the four
+  worldbuild owners + STATUS/TASKS/worklog, the iter-155 precedent): the
+  verdict CONFIRMED at the split band, the transfer KEPT — two run-derived
+  laws into WORLD_AUTHORING §8 (the carrier-availability law, the
+  verb-gate boundary) + the ablation probe into WORLD_TESTS §7 + the run
+  record §9 + the debt's lifecycle table into ANCHOR_REGION §6.1 + the
+  candidates 1/2 informed in WORKPLAN §6
+- honest residue: the debt's arithmetic the THIRD recorded exposure
+  (owner-routed per the separate-track law); the vigil-null (the elders
+  out of earshot) and the reputation-writer gap (D-006) first exposures,
+  recorded, not routed; the pole's two embodiment seeds (the recognition
+  token, the steal_target flag) named, never committed
+- verified BEFORE working at BASE_COMMIT abc4f93 (1852+1 green, ruff clean —
+  the pin re-confirmed) and re-verified after: 1852+1 green, ruff clean;
+  zero code, zero corpus price; iter-150 evicted per the cap
+---
 iter-159 · 2026-09-20 · intake32 — the Vantiel research handoff routed
 (the owner's «обработай … реши что перенять, адаптировать или привнести …
 куда определить … или создать новую в референсах … подключи междоменную
@@ -176,10 +196,3 @@ by iter-140-intake27's stale-base archive apply, found this session)
   TEST_PLAN 588 / phases 2650 + DIRECTOR_SPEC 585 + BRIEF_SPEC 656 over the
   600/300 signals — substance (the intact cards/slices/audit/verdict + the
   runtime contracts), the §6.1 precedent, recorded here as the law demands
-
-iter-150 · 2026-09-20 · revalid1 — the owner's two-part call: the AGPLv3
-relicense (LICENSE + the README License section, D-183) + the 13-row
-standing-backlog revalidation (D-184; 8 rows revised, no rows added/deleted)
-- docs: TASKS (the iter-150 section + eight revalidated rows), DECISIONS
-  D-183/D-184, STATUS re-pin + Next step, NAV §1 (the LICENSE row);
-  doc-only, 1842+1 green both ends, iter-140 evicted per the cap

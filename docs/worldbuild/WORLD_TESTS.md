@@ -135,6 +135,17 @@ Remove an element and ask:
 
 If nothing meaningful changes, the element is a candidate for removal or merger.
 
+### Carrier-ablation probe (the runtime half — run-derived, iter-160)
+
+The design-time question above asks which contour disappears when an element
+is removed from the design. The runtime form asks it of the running world:
+ablate a social carrier in play, then walk the reachable-state difference. The
+probe must name the gate the ablation rides (the verb-gate boundary,
+`WORLD_AUTHORING.md` §8): the carrier's own drop, a flagged theft, a fire. A
+pass: the reachable futures genuinely differ — the crossing without the pole
+loses both branches of its future option (the debt's clearance and the punt's
+return). A fail: only the prose changes — the element was decorative.
+
 ## 8. Current repository evidence
 
 The repository's world-2 work provides concrete measurements for the anchor
@@ -198,6 +209,38 @@ suspicion → document-check → arrest circuit merged into the fire loop's
 mechanism family. Partial: the four interlock edges are verified per-edge at
 their own tests, a single run with all loops interlocked is not on record
 (a live-session question), and the credit loop's flow is not pack-live.
+
+### CONFIRMED — The W4 bounded experiment: the crossing household through the full stack (2026-09-20, iter-160)
+
+`flood/debt → function lost → replacement carrier → heterogeneous roles →
+biography crisis → residue lifecycle → one ablation → reachable-state
+difference`, walked once over existing substrate only (the working set's own
+first move, `WORLD_WORKPLAN.md` §6). The driver splits by band: the flood
+cause is committed (both spines' cause field), the debt's paper authored. The
+function-loss probe passes on committed substrate: the punt lost → the pole
+the replacement carrier → the double toll the priced cost → the purse-read
+bend the failure mode → the road's word the ordinary behavior. The assembly
+probe passes: the two hands' needs compete for one thin toll surplus (the
+debt cleared vs the punt bought back). The crisis probe — the boathouse
+fire, the committed fire spot — runs its response chain on committed
+machinery end-to-end (the arson verb → the alarm's fear +40 → the trade
+group's ratio → the guild council; `location_burned_out` irreversible; the
+burned-down fact riding the rumor channel), with two honest findings: the
+vigil never wakes (the elders two-plus legs out of earshot, the
+numeric-home law — the crossing is not a feud location; the stair burns
+outside the feud's memory), and the shelter-law breach response rides the
+knowledge/rumor stack with the reputation axis a read-only projection (no
+runtime writer — D-006's own record; first exposure, recorded, not routed).
+The lifecycle trace passes the perturbation test: each named transition's
+removal changes reachable futures (the pole's loss kills both branches of
+the household's future option; the road leg's loss kills the traveling
+knower; the bend's loss kills the road's word). Kept: the
+carrier-availability law + the verb-gate boundary (`WORLD_AUTHORING.md` §8)
+and the carrier-ablation probe (§7 here). The one re-exposed limitation:
+the debt's arithmetic (no account state; the third recorded exposure —
+A2's residue, Loop E's band, this run) — owner-routed per the
+separate-track law; the lifecycle proved explanatory without the economy
+arm. Band: the authored chain over committed beats; no live session.
 
 ### OPEN — Ancient Network back-propagation
 
