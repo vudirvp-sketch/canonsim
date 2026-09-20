@@ -281,6 +281,40 @@ distribution's own unfinished band; the mesh carries the sixth loop AUTHORED
 (`ANCHOR_REGION.md` §5's F row, the disable test and the shared-stage rule
 re-applied).
 
+### CONFIRMED — The fourth W4 addition: the winter kin (2026-09-20, iter-165)
+
+The constructed-kinship candidate (`WORLD_WORKPLAN.md` §6's candidate 4 —
+the working set's last) walked through the operator stack at the authored
+band over committed substrate only (the shelter law, the flood year, the
+notch habit, the road's word — the record: `ANCHOR_REGION.md` §6.3). The
+Sarrow need demonstrated — the native generator confirmed: the stranded
+season's care (the stores eight of the paper twenty — the debt's own
+authored arithmetic) is currently carried one way (household → debt → the
+bend: the next stranger pays for the last one's winter — the committed
+symptom, the spine's own flaw); the function-loss arbiter PASSED (the
+reciprocal function — binding care's recipient to its bearer — performed
+by no existing mechanism: the paper prices money, the word records, the law
+deliberately gives, the wergeld prices wrong, blood inherits by birth).
+The anti-noise check passed (the mint flood-year rare, never the night's
+board; the barred purse the host's own cost; the edge priced by the
+lifecycle — the perturbation test per transition: the mint's removal
+returns the vale to the bend's single path; the carrier's reduction leaves
+hearsay kin; the exclusion rung's removal turns the edge into a discount —
+the inflation path made a test; the transfer's removal kills the edge at
+the drowned generation — the dead mark). The crisis probe (the return: the
+flood-year guest's son at the stair in the thin months) walks its chain on
+committed surfaces with three named first-exposure gaps — the relation form,
+the proof's read, the mourning surface — recorded, not routed (the
+separate-track law). The humor probe's authored answer: the notch's
+position-dependent joke (the pole-counting joke at the beam; the same words
+at the guild's weighing day an evasion; the dead mark and the betrayed edge
+never joked). The mesh: the seventh loop G AUTHORED (the notch → the
+recognition → the obligations → the recognition again, state-closing; the
+disable test + the shared-stage rule re-applied, the E-sibling note — one
+catastrophe, two circuits) + three interlock edges (E⇄G, B⇄G, D⇄G —
+`ANCHOR_REGION.md` §5). Partial: the authored band, no live session — a
+real return, a real reader (the meaning distribution's unfinished band).
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
@@ -291,7 +325,12 @@ Great Fracture without adding special exceptions for each civilization?
 Do Sarrow Vale's own vocabulary, institutions and history support world-specific
 humor and loss rather than generic genre scenes? The first authored answer:
 the step's position-dependent joke (the step-bench entry above) — the categories
-shared, the positions bounded, the same words re-priced by their audience. The
+shared, the positions bounded, the same words re-priced by their audience.
+iter-165 adds the humor's second family (the notch's position-dependent joke:
+the pole-counting at the beam, the evasion at the guild's table, the dead mark
+and the betrayed edge never joked) and the heartbreak's first authored half
+(the winter kin's mourning rung: the flood year's dead kept by name outside
+the bloodline, the return the loss made durable — the §9 entry above). The
 live-session band stays open.
 
 ## 10. Test result vocabulary

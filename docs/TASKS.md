@@ -123,7 +123,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..163 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..164 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -131,6 +131,39 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-165 · 2026-09-20 · kin1 — the world track's fourth W4 candidate (the
+  owner's «продолжай работу с world track» call, the working set's last): the
+  constructed kinship edge (candidate 4) tested at the authored band over
+  committed substrate only and CONFIRMED as THE WINTER KIN, doc-only — care
+  performed under the shelter law through one full stranded season mints a
+  socially recognized kin edge (the milk-kinship MECHANISM, never the
+  practice; the Hindu Kush foster-relations donor, ref-21's named pair):
+  the winter's board through a stranded season, never the night's board (the
+  rarity gate); the edge binding both ways (the guest's line owing
+  protection + the mourning of the house's dead; the host's house owing the
+  barred purse — the purse-read bend's own boundary, the exclusion rung);
+  the edge passing down both lines (the drowned generation's notch now the
+  toll-taker's — never unnotched, the recognition living); the candidate's
+  own falsifier PASSED (the Sarrow need demonstrated — the native generator
+  confirmed, the stranded season's stores eight of the paper twenty, the
+  care currently carried one way: household → debt → the bend, the committed
+  symptom; the function-loss arbiter — the reciprocal function no existing
+  mechanism performs; the anti-noise check — the mint flood-year rare, the
+  edge priced by the lifecycle); the mesh's seventh loop G AUTHORED
+  (ANCHOR_REGION §5: the notch → the recognition → the obligations → the
+  recognition again, state-closing; the disable test + the shared-stage
+  rule re-applied, the E-sibling note — one catastrophe, two circuits) +
+  three interlock edges (E⇄G one winter two prices, B⇄G the feud's
+  arithmetic meeting the notch at the door, D⇄G the road materializing the
+  return); the crisis probe (the return: the guest's son at the stair in
+  the thin months) + the humor probe (the pole-counting joke,
+  position-dependent) + the heartbreak row's first authored half (the
+  mourning rung — the flood's dead kept by name outside blood); three
+  first-exposure substrate gaps recorded, NOT routed (the relation form, the
+  proof's read, the mourning surface — the separate-track law); the
+  embodiment options stay the owner's call class (the pole's iter-161
+  precedent); the W4 working set COMPLETE; 1878+1 green + ruff clean both
+  ends at BASE 6d22a33 (doc-only, zero test change); 6 paths
 - iter-164 · 2026-09-20 · water1 — the world track's second meso unit (the
   owner's «продолжай работу с world track» call, the W4 candidates' next):
   the practitioner water-governance node (candidate 3) authored as THE STEP

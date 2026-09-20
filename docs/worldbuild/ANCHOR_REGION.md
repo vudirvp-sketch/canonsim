@@ -89,19 +89,19 @@ economic and social experience.
 | Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
 | Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet; the water's ALLOCATION answered at the authored band, §6.2 — the step law, order before price) |
 | Trade | road traffic, market, toll, waybill, guild | answered (§6.1): the crossing household carries the flood season's cost; the croft camp carries the shaved weights — the two named cost-carriers of a disrupted route |
-| Institutions | guild, garrison, old families, watch rotation | answered twice: the crossing under the guild's paper (§6.1, the first named meso mediator) and the water under the practitioners' step (§6.2 — the step bench, the second meso unit); the camp's meso half (the charcoal debt) named, not yet authored |
+| Institutions | guild, garrison, old families, watch rotation | answered three times: the crossing under the guild's paper (§6.1, the first named meso mediator), the water under the practitioners' step (§6.2 — the step bench, the second meso unit) and the care under the winter kin's recognition (§6.3 — the constructed kinship edge, the third W4 addition: no office, no court, the road's word the holder); the camp's meso half (the charcoal debt) named, not yet authored |
 | Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one |
-| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the camp's family life open |
-| History | feud / burned mill / generated historical events | three events, three institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt (§6.1); the quarrel's pact → the step law (§6.2); the rest of the 150-year chronicle open |
+| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the law's own other half authored (§6.3): the care held as the notch, the mourning widened past blood; the camp's family life open |
+| History | feud / burned mill / generated historical events | three events, four institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt and the winter kin (§6.1, §6.3 — one catastrophe, two circuits); the quarrel's pact → the step law (§6.2); the rest of the 150-year chronicle open |
 | Knowledge | witnessed events, rumors, watch suspicion, road knowledge | answered in the meaning slice (§7.1): the four-position asymmetry map over one toll |
 | Weather/calendar | markets, fairs, seasons, storm chain | answered (§6.1): the high_water rise → the punt men's double toll — the custom as persistent social adaptation; the household's four-phase year |
 | Read-side meaning | cards, chronicle, lore, named travelers, scene markers | answered (§6.1): the flood-debt lever set — whoever learns the flood story holds a different lever at the stair; the wergeld duty already live on the road |
 
-## 5. The causal mesh (W3 — audited iter-156; the W4 addition F — iter-164)
+## 5. The causal mesh (W3 — audited iter-156; the W4 additions F — iter-164, G — iter-165)
 
-Six loops, each a circuit that returns to its own driver changed. The audit's
+Seven loops, each a circuit that returns to its own driver changed. The audit's
 two laws: the **disable test** — remove one loop's unique driver, and the other
-five must still run — and the **shared-stage rule** — two circuits sharing
+six must still run — and the **shared-stage rule** — two circuits sharing
 driver AND mediator are one mechanism counted once; sharing the response stage
 alone is an interlock, never a collapse.
 
@@ -210,6 +210,34 @@ is distinct from the recurring phase. The distinction from Loop A's family:
 the enforcement has no axis, no threshold, no institutional door — the users'
 physical act at the water is the council mechanism's negative image.
 
+### Loop G — the winter kin: the notch → the recognition → the obligations (AUTHORED — §6.3's edge, iter-165)
+
+`the minted notch (the stranded season's mark, seeded once — the winter
+after the flood year's rise) → the recognition (the road's word: who
+wintered where, who answered whom) → the obligations performed (the
+protection, the barred purse, the mourning kept) → the recognition changed
+— the standing deepened or starved, the betrayal inverted → the next
+claim's standing`.
+
+Closing edge: state-closing at the authored band — the recognition is the
+circuit's own living state; each performance re-prices the next claim's
+reading. Band honesty: the gauge surfaces are committed (the haft's tallies,
+the road's word, the shelter law), the mint's terms and the obligations are
+authored (§6.3). The distinction from E (the one-winter kinship): one
+catastrophe, two circuits — the paper carries the winter's coin (money,
+deferred, collectable), the notch the winter's care (obligation, bilateral,
+durable); different mediators, different responses (the double toll vs the
+obligations), different residues (standing vs recognition) — the disable
+test passes both ways (remove the paper, the notch's duties stand; remove
+the notch, the debt still collects). The distinction from B (the
+seeded-residue driver class): B's driver is the grievance, G's the
+recognition — the feud's negative pole and the care's positive pole of the
+same seeded-history family; different mediators (the wergeld law's numeric
+home vs the road's word), different responses (the vigil, faction-level, vs
+the obligations, household-bilateral). The B⇄G edge: the betrayal inversion
+— a winter kin turned enemy is the feud's next material, and the exclusion
+rung is the door they meet at.
+
 ### The verdict
 
 | Loop | Driver | Mediator | Response | Residue | Closure | Band |
@@ -220,21 +248,29 @@ physical act at the water is the council mechanism's negative image.
 | D | the travel graph | condensation + names | born strangers | visible culture | reader | committed |
 | E | the flood year | the debt's paper | the double toll | reputation + standing | state | committed beats, authored paper; the flow armed iter-162 |
 | F | the recurring band | the step rule + the reading | the allocation's acts | legitimacy / resentment + the tally's record | state | authored (§6.2) |
+| G | the minted notch | the road's word + the notch's proof | the obligations performed | the living recognition (or the inverted grievance) | state | authored (§6.3) |
 
-Six loops pass the disable test — no two share a driver, and the one shared
+Seven loops pass the disable test — no two share a driver, and the one shared
 stage (the triangle's threshold dynamics feeding the intent door) carries two
 different axes (fear, grievance) without making the loops one mechanism. The
 band split is honest: A–D committed, E committed at its beats with the paper
 authored and the flow armed (iter-162), F authored over committed gauges
-(iter-164). Seven named interlock edges: the alarm wakes both fear and grief
+(iter-164), G authored over the committed notch habit and the road's word
+(iter-165). Ten named interlock edges: the alarm wakes both fear and grief
 (A⇄B), the rain erases the smoke (C→A), the condensation materializes the
 feud's carrier (B⇄D), the rise prices the toll (C⇄E), the season forces the
 step (C⇄F — the rise turns the fourth, the dry band presses the second), the
 paper prices the pool (E⇄F — the take rides the toll the step protects; the
 keeper's timbers double-bound), and the feud residue prices the race's claim
 (B⇄F — the protection read as theft; the timber law died in the feud's fire,
-the water law lives in stone). Independent loops, interlocked edges —
-not one engine wearing six masks.
+the water law lives in stone); one winter, two prices (E⇄G — the stranded
+season's stores priced in coin by the paper and in duty by the notch; the
+return lands in the stores-counting month, the debt's own reckoning season);
+the feud's arithmetic meets the notch at the door (B⇄G — the exclusion rung
+against the wergeld word; the betrayal the inversion path); and the road
+materializes the return (D⇄G — the winter kin's claimant a named stranger,
+the condensation's committed surface the carrier). Independent loops,
+interlocked edges — not one engine wearing seven masks.
 
 ## 6. Meso frontier
 
@@ -497,6 +533,139 @@ arming, the hatch — stay the owner's call class (the pole's iter-161
 precedent); the live-session question stands (a real dry band, a real reader:
 the meaning distribution's own unfinished band, §7.1's form).
 
+### 6.3 The winter kin (WORKING — the constructed kinship edge, the third W4 addition, iter-165)
+
+The constructed kinship edge: care performed under the shelter law through one
+full stranded season mints a socially recognized kin edge — the milk-kinship
+MECHANISM, never the practice (`WORLD_AUTHORING.md` §19's transfer law; the
+documented donor: the Hindu Kush foster-relations research — `docs/ref/kurvitz.md`
+ref-21's named pair with the irrigation tribunal). An edge, not a unit: the
+mechanism binds the existing units, it adds no standing body. Authored over
+committed substrate only — the shelter law (the lowland prohibition set), the
+flood year (both spines' cause), the notch-keeping habit (the pole's haft
+tallies — a people that signs with a blade, not a pen), the road's word (the
+committed rumor channel), the condensation's named-stranger surface.
+
+**The mint (the mechanism's own terms, three rungs).** RECOGNITION: the
+winter's board through one full stranded season mints the edge — never the
+night's board (the rarity gate: the stranded season is flood-year class, once
+a generation; the ordinary meal prices nothing — the shelter law's gift stays
+unpriced, a law, never a trade). OBLIGATION: the edge binds both ways — the
+guest's line owes the host's house its standing duties (protection on the
+road, the memory of the house's dead, the open door), the host's house owes
+the barred purse (the purse-read bend's own boundary: kin-at-the-table are
+never read for coin) — the exclusion rung. INHERITANCE: the edge passes down
+both lines — the drowned generation's notch now the toll-taker's holding, the
+guests' children carrying the same duties; the notch is never unnotched (the
+first step's own vocabulary), but the recognition is living memory — the
+road's word carries who answered whom (an unperformed duty starves the
+standing; a betrayed edge inverts into the feud's next grievance — Loop B's
+own material).
+
+**The chain (the doctrine's ladder, walked once):**
+
+| Rung | The winter kin |
+|---|---|
+| CAUSE | the stranded season — the winter after the flood year's rise, the fords drowned a full season, strangers under the crossing's roof (committed: the flood year, both spines' cause; authored: the winter — §6.1's credit winter, the borrowed punt twelve + the stranded season's stores eight = the paper twenty) |
+| POSSIBILITY | the shelter law compels the care; the vale's notch habit gives the mint its form — the winter's guests cut into the host's own count, the same blade, the same staff |
+| PRESSURE | the care's cost is real and by the law's own design one-sided: the stores eaten (eight coin of the eventual paper), the winter's care flowing to the debt — the law gives, the paper prices (§7.1's own shame) |
+| ACTORS | the host household; the stranded guests (road strangers — the condensation's class); the road as witness; the guild absent by vocabulary (the paper has no row for a notch) |
+| INSTITUTION | the recognition itself: held by the road's word and the haft's notch, never an office, never a court (the step bench's own gateless class — a practice at the table, not a tribunal) |
+| KNOWLEDGE | the host knows the notch's names; the guest knows the door; the road knows the word (who wintered where, who answered whom); the guild knows nothing — each map bounded and legitimate |
+| CONSEQUENCE | the edge performed: the protection rendered, the mourning kept, the purse barred — the flaw's income forgone at its own boundary; the edge starved: the standing thins; the edge betrayed: the grievance inverted |
+| RESIDUE | the notch on the haft (permanent, never unnotched); the road's word (the living standing); the mourning line widened — the flood year's dead kept by name outside the bloodline |
+| NEW OPTION | the winter kin's return (a named stranger at the stair claiming the notch — the option no other mechanism expresses); the drowned generation's mourning answered; the feud's arithmetic met at the crossing's own door |
+
+**The edge's lifecycle (the §8 trace, run iter-165):**
+
+| Rung | The winter kin's lifecycle |
+|---|---|
+| EVENT | the stranded season (the winter after the flood year's rise — the shelter law held at real cost) |
+| RESIDUE | the winter kin edge — a recognized obligation, bilateral, inheritable |
+| CARRIER | the host's own notch surface (the pole's haft — the payment tallies' own staff, the winter's guests cut into the family's count) + the road's word (the witness carrier) |
+| HOLDER | both lines jointly — deliberately bilateral (the assembly probe's own form: the two sides hold different duties, the care flowed one way and the duties flow back, and neither side may honestly play the whole edge) |
+| TRANSFORMATION | the standing rides performance and memory: the notch unchanged, the recognition living (the road's word carries who answered whom) |
+| TRANSFER | down both lines (the drowned generation's notch now the toll-taker's; the guests' children inherit the duties) |
+| CLEARANCE / INHERITANCE | the notch never unnotched — the edge outlives its minters; clearance only by mutual reckoning (a new pact's own class) or the holders' dying-out; the betrayal path inverts the edge into grievance (Loop B's next material) |
+| NEW OPTIONS | the return; the widened mourning line; the feud's collision at the door |
+
+The trace's explanatory gain at the authored band: the flood year's cost is
+TWO carriers' work — the paper carries the winter's coin (Loop E: the debt,
+the double toll, the standing), the notch carries the winter's care (the
+obligations, the recognition). Without the edge the vale has one answer to
+the stranded season's cost: the debt, and after it the bend — the one who ate
+the winter's stores owing nothing, the next stranger paying for them (the
+committed symptom: the spine's own flaw, "the crossing answers the heaviest
+purse"). The perturbation test passes per transition: the mint's removal
+returns the vale to the bend's single path; the carrier's reduction (the
+notch unread) leaves the edge hearsay — contestable at the stair, the proof
+gone; the exclusion rung's removal turns the edge into a discount — kin read
+for coin after all, the inflation path the candidate's own warning made a
+test; the transfer's removal kills the edge at the drowned generation — the
+notch a dead mark (the read hinge's vague-unread failure surface's own
+family). Each removal changes reachable futures, not prose.
+
+**The crisis probe (the biography form, WORLD_TESTS §3).** The return: a
+named hill-side stranger at the stair in the thin months (first_frost — the
+stores-counting season), claiming the notch — the flood-year guest's son, the
+crofts' tongue (feud-adjacent: the smelt line's own half of the vale). The
+required decisions, all on committed surfaces: the purse question (Ketta's
+flaw meeting the notch — the committed purse-read beat's own boundary case:
+the exclusion rung bars the read against kin, the flaw's income forgone);
+the protection question (the feud's word riding the guest — the wergeld
+word is the hills' own prohibition walking the road, and the crossing's
+roof is not a feud location: the vigil's arithmetic meets the notch at the
+door, the B⇄G collision); the mourning question (the guest keeps the
+drowned generation's names — his father's winter's debt: the flood year's
+dead mourned at the crossing's table by the man whose father ate there).
+The consequences diverge per door: the purse barred — the road re-reads the
+crossing (the flaw's fork: the reputation's own event, an exception named
+where the word had none); the protection rendered — the feud's word defied
+at the door (the road carrying both words now, the elders' grudge the
+price); the mourning kept — the grief given its second holder (the names
+said aloud by a stranger, the tale's own surface). The debt stays untouched
+— the honest boundary: the notch prices care, never coin (the paper's fall
+and the punt's purchase stay the debt row's own future calls). The probe's
+missing links — three first-exposure substrate gaps, recorded, not routed
+(the separate-track law): the relation form (no committed non-blood kin
+edge in the pair vocabulary — blood kin is a trust axis value; a recognized
+standing would need its own form), the proof's read (the notch has no
+committed action — the `read_pole` hinge reads the flood story, not the
+guest count; the return's claim would need its own hinge family), and the
+mourning surface (no non-blood grief registration — the grief_wakes
+numeric-home law; the constructed kin's mourning would need a seeded entry,
+the `the_flood_story` precedent's family).
+
+**The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
+joke, market day at the beam: "Ask the crossing how many kin she keeps —
+she'll count her pole" — the notch habit made comedy (a family that counts
+its kin on its tool), no name named, every hearer owning the habit. The same
+words at the guild's weighing day read as evasion — the collector hears a
+toll dodge dressed as kinship (the paper has no row for a notch; kin a toll
+category the guild cannot price). Never joked: the dead mark (a notch whose
+names are gone — the drowned generation's unreadable count) and the betrayed
+edge (kin turned enemy — the feud's next wound). The joke's
+position-dependence is the shared-categories proof — the notch is a category
+the whole vale owns, and the beam's laughter prices the habit into shared
+standing while the guild's table holds its ledger silence.
+
+**Embodiment (committed vs authored).** Committed: the shelter law (the
+lowland prohibition set), the flood year (both spines' cause; the debt's own
+authored arithmetic carrying the stranded season's stores eight), the
+notch-keeping habit (the pole's haft tallies, the `read_pole` hinge's own
+vocabulary), the road's word (the rumor channel), the seasons (first_frost's
+stores-counting month), the condensation's named-stranger surface (the
+return's carrier class), the grief's numeric-home law (the boundary the
+mourning rung meets). Authored here (WORKING): the winter kin itself (the
+mint's three rungs), the kin notch's meaning (the haft's payment tallies
+re-read as the guest count — the same staff, a new mark's class), the
+obligations (the protection, the barred purse, the mourning), the return
+claim, the exclusion rung. The unit's embodiment options — the relation
+form, the notch's read hinge, the mourning registration — stay the owner's
+call class (the pole's iter-161 precedent); the live-session question stands
+(a real return, a real reader: the meaning distribution's own unfinished
+band, §7.1's form).
+
 ## 7. Meaning frontier
 
 The current region is already strong at mechanical composition. The next depth
@@ -535,8 +704,10 @@ fair toll — two justices, the risk-priced against the load-priced; the insulti
 price — the purse-read itself, not the sum; the lowland trader's shelter-law
 shame — "we shelter by law and charge by ledger": the law is older than the
 guild's paper, and the paper now prices what the law gives; the inherited duty —
-twice, the pole at the crossing and the wergeld word on the road. The Thornmill
-family obligation, open since this slice, is ANSWERED iter-164 (§6.2): the
+three times: the pole at the crossing, the wergeld word on the road, and the
+winter kin's notch (the care inherited as duty down both lines, the flood's
+dead kept by name outside blood, §6.3). The Thornmill family obligation,
+open since this slice, is ANSWERED iter-164 (§6.2): the
 manor's own household carries the mill fire's debt as the race's keeping — the
 claim held wet at the price of its own tending (the vigil stays faction-level;
 the obligation is the steward's household's own).
@@ -573,11 +744,15 @@ each link.
 year, the high_water rise) followed through the whole chain without a new
 document per link — is MET once at the authored band (§6.1's ladder; the social
 response rides the road's word and the market's rumor channel, both committed
-surfaces), and a second time over the water's band (§6.2's step bench,
+surfaces), a second time over the water's band (§6.2's step bench,
 iter-164: the dry band walked the same chain — place/resource → the step law →
 the setting → the breach → the bounded maps → the wattle and the beam's talk →
-the notch and the resentment → the changed options). The implementation witness
-carries the chain at the single-NPC + companion band (iter-157: the second
+the notch and the resentment → the changed options) and a third time over the
+care's band (§6.3's winter kin, iter-165: the stranded season walked the same
+chain — the winter after the flood → the shelter law held → the notch minted → the
+bounded maps → the road's word → the living recognition → the return's
+standing option). The implementation witness carries the chain at the
+single-NPC + companion band (iter-157: the second
 hand, the pole — KI#87 closed; iter-161:
 the pole's social half — the recognition read, the lever chain, the theft
 gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow

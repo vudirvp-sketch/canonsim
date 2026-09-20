@@ -7,6 +7,38 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-165 · 2026-09-20 · kin1 — the world track's fourth W4 candidate (the
+owner's «продолжай работу с world track» call, the working set's last): the
+constructed kinship edge (candidate 4) tested at the authored band over
+committed substrate only (the shelter law, the flood year, the notch habit,
+the road's word) and CONFIRMED as THE WINTER KIN (ANCHOR_REGION §6.3)
+- doc-only (6 paths, over the soft limit per AGENTS §2.3 — the worldbuild
+  trio + STATUS/TASKS/worklog, the iter-164 doc-only precedent; the second
+  consecutive doc-only iteration under the session's fresh owner request,
+  the D-022 exception — the next authored-band move needs a fresh call):
+  ANCHOR_REGION carries the edge (§6.3 — the mint's three rungs, the ladder,
+  the lifecycle, the crisis + humor probes, the band split) + the mesh's G
+  row (§5, seventh loop AUTHORED, three new interlock edges E⇄G/B⇄G/D⇄G,
+  the disable test re-applied, the E-sibling note — one catastrophe, two
+  circuits) + §4's three rows + §7.1's inherited-duty probe's third answer
+  + §9's third chain walk; WORKPLAN §2/§6 the TESTED verdict (the W4
+  working set COMPLETE); WORLD_TESTS §9 the run record + the
+  humor/heartbreak row's extension
+- the candidate's own falsifier PASSED (the Sarrow need demonstrated — the
+  native generator confirmed: the stranded season's stores eight of the
+  paper twenty, the care currently carried one way into the debt and the
+  bend; the function-loss arbiter — the reciprocal function no existing
+  mechanism performs); three first-exposure substrate gaps recorded, NOT
+  routed (the relation form, the proof's read, the mourning surface); the
+  embodiment options the owner's call class (the pole's iter-161 precedent)
+- ANCHOR_REGION over the 600-line docs cap after the landing (762): the
+  §6.1 substance law (AGENTS §6.1 — the unit's rungs/tables are substance,
+  no cruft found in the pass; the cap is a signal, not a wall); kept, this
+  entry the rationale
+- verified BEFORE working at BASE_COMMIT 6d22a33 (1878+1 green, ruff
+  clean — the pin re-confirmed) and re-verified after: 1878+1 green, ruff
+  clean (doc-only, zero test change); iter-155 evicted per the cap
+---
 iter-164 · 2026-09-20 · water1 — the world track's second meso unit (the
 owner's «продолжай работу с world track» call, the W4 candidates' next):
 the practitioner water-governance node (candidate 3) authored as the STEP
@@ -203,21 +235,4 @@ carrier, rise→toll)
   mesh entry, PARTIALLY CONFIRMED), WORLD_WORKPLAN §2/§3/§5 (W3 DONE, the
   frontier → W4), STATUS re-pin; iter-146 evicted per the cap
 - 1842+1 green + ruff clean both ends at BASE dc2ab38 (env pin 3.12.14);
-  5 paths doc-only, inside the soft limit
-
-iter-155 · 2026-09-20 · anchor1 — the world track's first anchor pass (the
-owner's «начинай работу по планам» call; engine-1 stays owner-hardware-gated,
-the {3–8B, GBNF} gap row the decision input — the world plan the executable
-frontier): A2 the crossing household authored as the first meso unit
-(ANCHOR_REGION §6.1 — the doctrine's ladder over the committed substrate:
-Ketta's spine, the shelter law, the high_water custom, the coerce beat; the
-guild-held flood debt the durable constraint), A1 the causal map's eight
-answered rows (§4; Geography/Resource honestly open), A3 the high-water
-double-toll meaning slice (§7.1 — four bounded maps, the meaning distributed)
-- docs: WORLD_TESTS §9 (three OPEN → PARTIALLY CONFIRMED), WORLD_WORKPLAN
-  §2/§3/§5 (A1/A2/A3 DONE, W3 the next frontier), STATUS re-pin + KI#87 (the
-  phantom punt pole — entities.json's forward reference to a never-committed
-  item; fix routed to the pack's next engineering touch, not world-track
-  scope); iter-145 evicted per the cap
-- 1842+1 green + ruff clean both ends at BASE c282fea (env pin 3.12.14);
   5 paths doc-only, inside the soft limit

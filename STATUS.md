@@ -1,51 +1,62 @@
-Iteration: iter-164 (`iter-164-water1` — the world track's second meso
-unit, the owner's «продолжай работу с world track» call over the W4
-candidates): the practitioner water-governance node (candidate 3) authored
-as THE STEP BENCH (`ANCHOR_REGION.md` §6.2) — the weir stair's three hands
-over one head (the weir keeper's pool, the steward of the burned name's
-race, the market beam's run), the irrigation-tribunal MECHANISM never the
-institution: the head named by the stair's wet step (four rungs, the
-committed high_water line the fourth's own text), held by the
-practitioners' reading at the season's turn, enforced at the water by the
-users themselves (the hatch wattled, the beam's talk, the keeper's
-book-setting read against the tally's notch). THE CANDIDATE'S OWN FALSIFIER
-PASSED — the function-loss arbiter: the allocation order among uses is a
-function neither the guild's paper (deferred claims) nor the crossing's
-custom (one use's own price) performs, and the enforcement's immediacy is
-the anti-council distinction (no axis, no threshold, no institutional door
-— Loop A's family negative image; the perturbation edge: a law unenforced
-at the water becomes the council's business). The mesh's SIXTH LOOP (F,
-AUTHORED: the recurring band → the step rule → the allocation's acts →
-the head's state again, state-closing; the disable test + the shared-stage
-rule re-applied) + three new interlock edges (C⇄F the season forces the
-step, E⇄F the paper prices the pool, B⇄F the feud residue prices the race's
-claim — the timber law died in the feud's fire, the water law lives in
-stone); the chronicle's un-themed quarrel collection (`pact_signed`, three
-members) themed as the stair pact — the unit's cause rung; §7.1's open
-item (the Thornmill household obligation) ANSWERED (the race's keeping);
-three first-exposure substrate gaps recorded, NOT routed (the water level,
-the setting verb, the hatch gate — the separate-track law); doc-only, the
-worldbuild trio + the state triplet.
+Iteration: iter-165 (`iter-165-kin1` — the world track's fourth W4
+candidate, the owner's «продолжай работу с world track» call): the
+constructed kinship edge (candidate 4, the working set's last) tested at
+the authored band and CONFIRMED as THE WINTER KIN (`ANCHOR_REGION.md` §6.3)
+— care performed under the shelter law through one full stranded season
+mints a socially recognized kin edge (the milk-kinship MECHANISM, never the
+practice): the winter's board through a stranded season, never the night's
+board (the rarity gate); the edge binding both ways (the guest's line owing
+protection + the mourning of the house's dead, the host's house owing the
+barred purse — the purse-read bend's own boundary, the exclusion rung); the
+edge passing down both lines (the drowned generation's notch now the
+toll-taker's — never unnotched, the recognition living). THE CANDIDATE'S OWN
+FALSIFIER PASSED — the Sarrow need demonstrated (the native generator
+confirmed: the stranded season's stores eight of the paper twenty, the
+care's cost already priced in the debt's own authored arithmetic and
+currently carried one way — household → debt → the bend: the committed
+symptom, the next stranger paying for the last one's winter); the
+function-loss arbiter (binding care's recipient to its bearer — the
+reciprocal function no existing mechanism performs: the paper prices money,
+the word records, the law deliberately gives, the wergeld prices wrong,
+blood inherits by birth); the anti-noise check (the mint flood-year rare;
+the edge priced by the lifecycle, each transition's removal changing
+reachable futures). The mesh's SEVENTH LOOP G (AUTHORED: the notch → the
+recognition → the obligations → the recognition again, state-closing; the
+disable test + the shared-stage rule re-applied — the E-sibling note: one
+catastrophe, two circuits, the paper's coin and the notch's care) + three
+new interlock edges (E⇄G one winter two prices, B⇄G the feud's arithmetic
+meeting the notch at the door, D⇄G the road materializing the return); the
+crisis probe (the return: the guest's son at the stair in the thin
+months) + the humor probe (the pole-counting joke, position-dependent) +
+the heartbreak row's first authored half (the mourning rung — the flood's
+dead kept by name outside blood); three first-exposure substrate gaps
+recorded, NOT routed (the relation form, the proof's read, the mourning
+surface — the separate-track law); doc-only, the worldbuild trio + the
+state triplet — the W4 working set COMPLETE (all four candidates tested).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1878 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 815476a BEFORE working — 1878+1, identical to
-the iter-163 pin — and re-verified after with the diff in place: 1878+1,
+verified at BASE_COMMIT 6d22a33 BEFORE working — 1878+1, identical to
+the iter-164 pin — and re-verified after with the diff in place: 1878+1,
 identical, doc-only, zero test change) ·
 Date: 2026-09-20 ·
-Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4 three rows, §5 the F loop +
-the verdict table + the seven edges, §6.2 the step bench — the ladder,
-the steps, the year, the enforcement, the lifecycle, the two probes, the
-band split, §7.1 the open item answered, §9 the second chain),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 3's
-TESTED verdict), `docs/worldbuild/WORLD_TESTS.md` (§9 the step-bench
-entry + the humor row's authored-band upgrade), `STATUS.md` (this
-re-pin), `worklog.md` (this entry), `docs/TASKS.md` (the iter-164 ledger
-line) — 6 paths doc-only (over the 3–5 soft limit: the worldbuild
-quartet + the state triplet, the iter-155/156/160 doc-only precedent).
-The prior iteration's record: iter-163 (mech-2). The detail lives in
-§6.2's own tables + the WORLD_TESTS §9 entry + git.
+Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4 three rows, §5 the G loop +
+the verdict table's seventh row + the ten edges, §6.3 the winter kin — the
+mint, the ladder, the lifecycle, the crisis + humor probes, the band split,
+§7.1 the inherited-duty probe's third answer, §9 the third chain walk),
+`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 4's TESTED
+verdict — the working set complete), `docs/worldbuild/WORLD_TESTS.md` (§9
+the winter-kin entry + the humor/heartbreak row's extension), `STATUS.md`
+(this re-pin), `worklog.md` (this entry), `docs/TASKS.md` (the iter-165
+ledger line + the ledger header's range sync) — 6 paths doc-only (over the
+3–5 soft limit: the worldbuild trio + the state triplet, the
+iter-155/156/160/164 doc-only precedent); the second consecutive doc-only
+iteration under the session's fresh owner request (the D-022 exception —
+the next authored-band move needs a fresh call; the recommended breaker: an
+embodiment call, code-band, the pole's iter-161 precedent). The prior
+iteration's record: iter-164 (water1). The detail lives in §6.3's own
+tables + the WORLD_TESTS §9 entry + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -520,9 +531,25 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-164 DONE: water1 — the world track's second meso unit (the owner's
-«продолжай работу с world track» call, the W4 candidates' next): the
-practitioner water-governance node (candidate 3) authored as the STEP BENCH
+**iter-165 DONE: kin1 — the world track's fourth W4 candidate, the working
+set's last (the owner's «продолжай работу с world track» call): the
+constructed kinship edge (candidate 4) tested at the authored band over
+committed substrate only and CONFIRMED as THE WINTER KIN (ANCHOR_REGION
+§6.3) — care under the shelter law through one full stranded season mints a
+socially recognized kin edge (the milk-kinship MECHANISM, never the
+practice): the winter's board never the night's (the rarity gate), the
+edge binding both ways (protection + mourning owed, the barred purse the
+bend's own boundary), passing down both lines (never unnotched, the
+recognition living); the falsifier PASSED (the Sarrow need demonstrated —
+the stores eight of the paper twenty carried one way to the debt and the
+bend; the function-loss arbiter; the anti-noise check); the mesh's seventh
+loop G + three interlock edges (E⇄G, B⇄G, D⇄G); the crisis + humor probes
+run, the heartbreak row's first authored half; three first-exposure
+substrate gaps recorded, not routed (the relation form, the proof's read,
+the mourning surface); doc-only, 1878+1 green both ends (zero test change)
+— THE W4 WORKING SET COMPLETE. iter-164 DONE: water1 — the world track's
+second meso unit (the owner's «продолжай работу с world track» call over the W4
+candidates' next): the practitioner water-governance node (candidate 3) authored as the STEP BENCH
 (ANCHOR_REGION §6.2) — the weir stair's three hands over one head (the
 keeper's pool, the steward's race, the beam's run), the head named by the
 stair's wet step (four rungs, the committed high_water line the fourth's
@@ -653,30 +680,42 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6); the
-   world track's active frontier is its own plan's W4 — the meso
-   expansion (each addition must create a new causal coupling,
+   world track's active frontier is its own plan — the W4 meso
+   expansion COMPLETE (each addition created its new causal coupling,
    `WORLD_WORKPLAN.md` §6, never this file's queue; W3 the causal mesh
-   done iter-156, widened iter-164 — six loops, the W4 addition F;
-   A1/A2/A3 done iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
+   done iter-156, widened iter-164/165 — seven loops; A1/A2/A3 done
+   iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
    its pack embodiment LANDED iter-157/161/162: the second hand, the pole's
    two halves, the debt's economy arm; the W4 bounded experiment RUN
    iter-160 — CONFIRMED, the transfer kept; the SECOND meso unit AUTHORED
    iter-164 — the step bench, candidate 3 CONFIRMED at the authored band:
-   the water's allocation order, the mesh's F loop + three interlock edges);
-   the next world-track call: the step bench's embodiment options (the
-   step's close read, the notch record's arming, the hatch — the owner's
-   call class, the pole's iter-161 precedent) or candidate 4 (the
-   constructed kinship edge — the remaining candidate, its Sarrow need
-   still to be demonstrated), each carrying its named falsifier).
+   the water's allocation order, the mesh's F loop + three interlock edges;
+   the constructed kinship edge TESTED iter-165 — the winter kin,
+   candidate 4 CONFIRMED at the authored band: the care's reciprocal
+   binding, the mesh's G loop + three interlock edges — the working
+   set's four candidates all answered); the next world-track call: the
+   embodiment options — the step bench's three (the step's close read,
+   the notch record's arming, the hatch) and the winter kin's three
+   gaps' class (the relation form, the proof's read, the mourning
+   registration) — the owner's call class, the pole's iter-161
+   precedent; W5's live band (the human tests — biography / humor /
+   heartbreak, the authored halves on record, the live-session band
+   open); or the camp's meso half (the charcoal debt — the causal
+   map's named-not-authored row).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input —
-   postponed until the owner's call), a world-track call (the step
-   bench's embodiment options — the owner's call class, the pole's
-   iter-161 precedent — or candidate 4, the constructed kinship
-   edge, the remaining W4 candidate),
+   postponed until the owner's call), a world-track call (the
+   embodiment options of either authored addition — the step
+   bench's or the winter kin's — the owner's call class, the pole's
+   iter-161 precedent, and the natural doc-streak breaker; or W5's
+   live band, or the camp's meso half),
    the debt-1 residues (the discrete-event doors the arming left
    un-armed — the paper's fall, the clearance lump, the punt's
    purchase — each a future row's own call), or a fresh call
    (the license's `pyproject.toml` field a one-line option if
-   wanted — D-183's recorded follow-up).
+   wanted — D-183's recorded follow-up). Two consecutive doc-only
+   world-track iterations stand (iter-164/165, the D-022 exception
+   consumed by this session's fresh request): the next authored-band
+   move needs a fresh owner call — an embodiment call is the
+   code-band breaker.

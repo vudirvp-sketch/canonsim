@@ -43,9 +43,13 @@ gate — iter-161); the debt's flow is armed (`debt-1` built iter-162 — the
 accounts + the fold's two flows, the paper's standing still authored) and the
 second meso unit is authored (the step bench — the practitioner
 water-governance node, `ANCHOR_REGION.md` §6.2, iter-164; candidate 3
-CONFIRMED at the authored band, the mesh's sixth loop). The causal mesh is
-audited — six loops, four committed (W3 done iter-156 + the W4 addition F,
-`ANCHOR_REGION.md` §5).
+CONFIRMED at the authored band, the mesh's sixth loop). The fourth candidate
+is TESTED (the constructed kinship edge — the winter kin,
+`ANCHOR_REGION.md` §6.3, iter-165: the Sarrow need demonstrated at the
+authored band, the mesh's seventh loop G + three interlock edges — the W4
+working set complete). The causal mesh is
+audited — seven loops, four committed (W3 done iter-156 + the W4 additions
+F and G, `ANCHOR_REGION.md` §5).
 
 The active deliverable is `ANCHOR_REGION.md`.
 
@@ -233,6 +237,23 @@ stack).
    need appears — the shelter law's fed-through-winter strangers are the native
    generator candidate. The edge must be expensive (priced by the residue
    lifecycle) or it inflates into noise.
+   TESTED (iter-165, kin1): the Sarrow need DEMONSTRATED at the authored band
+   — the winter kin (`ANCHOR_REGION.md` §6.3): the native generator confirmed
+   (the shelter law's fed-through-winter strangers — the stranded season's
+   stores eight of the paper twenty, the care's cost already priced in the
+   debt's own authored arithmetic, currently carried one way: household →
+   debt → the bend); the function-loss arbiter PASSED (the reciprocal
+   function — binding care's recipient to its bearer — performed by no
+   existing mechanism: the paper prices money, the word records, the law
+   deliberately gives, the wergeld prices wrong, blood inherits by birth);
+   the anti-noise check passed by construction (the mint flood-year rare,
+   never the night's board; the edge binding both ways — the barred purse the
+   host's own cost; the perturbation test per transition); three
+   first-exposure substrate gaps recorded, not routed (the relation form,
+   the proof's read, the mourning surface — the separate-track law); the
+   mesh's seventh loop G AUTHORED + three interlock edges (E⇄G, B⇄G, D⇄G);
+   the embodiment options stay the owner's call class (the pole's iter-161
+   precedent). The W4 working set is COMPLETE — all four candidates tested.
 
 ## 7. W5 — Human tests
 
