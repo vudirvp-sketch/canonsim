@@ -284,11 +284,18 @@ tension is one coin's two claims — Ketta's need (the debt cleared) and
 Dellan's need (the punt bought back) draw on the same thin toll surplus; the
 lifecycle makes the competition legible without any account state. The pole's
 runtime gates (the verb-gate boundary, `WORLD_AUTHORING.md` §8): carried ⇒
-untakeable, unstealable (no `steal_target` flag), breakable only by its
-carrier — the player-facing ablation and the flood-story recognition token
-(the lever's knowledge seed) are each one pack-data seed away, zero core:
-embodiment options the engineering side owns, alongside the debt's economy
-flow (§9's recorded open question).
+untakeable, unstealable unless flagged (the `steal_target` flag committed
+iter-161), breakable only by its carrier. Both embodiment options LANDED
+(iter-161, pure pack data, zero core — the KI#87 precedent class): the
+flood-story recognition token (the `read_pole` hinge minting
+`the_flood_story`, registered in the secrets table over the toll-taker —
+whoever learns the story holds a live lever at the stair, the coerce door
+open; the story steps down to partial read by dark on the unlit stair) and
+the player-facing ablation (the pole liftable unseen from the second hand; a
+successful lift flips the carrier binding and the road-leg beat then walks
+the second hand pole-less — test-pinned, `tests/test_poleseed.py`). The
+debt's economy flow is the engineering side's own `debt-1` standing row
+(opened on the owner's routing call, iter-161 — TASKS' live queue).
 
 **Embodiment (committed vs authored).** Committed: the spine (want/need/flaw/
 cause), the coerce urgency entry (the purse-read double-toll beat), the shelter
@@ -296,10 +303,14 @@ law (the lowland prohibition set), the high_water lines (the drowned fords, the
 punt men's double), the boathouse fire spot, the auditor's errand — and, since
 iter-157, the second hand himself (Dellan: the kin/runner pair axes, the
 road-leg urgency beat, the paired escort legs) and the punt pole (the item
-committed; KI#87 closed iter-157). Authored here (WORKING): the debt's
+committed; KI#87 closed iter-157); since iter-161 the pole's social half
+(the flood-story recognition read `read_pole` + the secrets registration over
+the toll-taker — the lever at the stair) and its theft gate (the
+`steal_target` flag, the player-facing ablation; the lift and the pole-less
+hop test-pinned, `tests/test_poleseed.py`). Authored here (WORKING): the debt's
 guild-holder, the credit winter, the household's year, the debt's lifecycle
 (the iter-160 trace above), and the debt's flow
-(not economy-armed — the open engineering-side question).
+(not economy-armed — the open `debt-1` standing row on the engineering side).
 
 ## 7. Meaning frontier
 
@@ -376,6 +387,8 @@ year, the high_water rise) followed through the whole chain without a new
 document per link — is MET once at the authored band (§6.1's ladder; the social
 response rides the road's word and the market's rumor channel, both committed
 surfaces). The implementation witness carries the chain at the single-NPC +
-companion band (iter-157: the second hand, the pole — KI#87 closed); the debt's
-economy flow remains the engineering-side question the world track does not
-open by itself — the pack is not economy-armed.
+companion band (iter-157: the second hand, the pole — KI#87 closed; iter-161:
+the pole's social half — the recognition read, the lever chain, the theft
+gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow is
+the engineering side's own `debt-1` standing row (opened on the owner's
+routing call, iter-161) — the pack is not economy-armed.

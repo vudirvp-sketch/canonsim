@@ -37,8 +37,10 @@ The current repository's Sarrow Vale province is the strongest concrete
 implementation witness. The broader worldbuilding goal is not closed yet because
 the meso and human-meaning layers are still thinner than the mechanical layer —
 the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155) and embodied
-at the single-NPC + companion band (the second hand and the pole, iter-157);
-the debt's flow and further meso units are not yet embodied. The causal mesh is
+at the single-NPC + companion band (the second hand and the pole, iter-157;
+the pole's social half — the recognition read, the lever, the theft gate —
+iter-161); the debt's flow is routed to the engineering side (`debt-1`, the
+owner's call) and further meso units are not yet embodied. The causal mesh is
 audited — five independent loops, four committed (W3 done, iter-156,
 `ANCHOR_REGION.md` §5).
 
@@ -181,17 +183,25 @@ stack).
    inheritance, and social interpretation are explicitly traced? Do not build
    an economy system first — test the lifecycle on existing substrate.
    TESTED (iter-160): the trace passes the perturbation test at the authored
-   band (`ANCHOR_REGION.md` §6.1's table); the economy arm stays the
-   owner-routed question.
+   band (`ANCHOR_REGION.md` §6.1's table); the economy arm is ROUTED (iter-161,
+   the owner's call) — the engineering side's `debt-1` standing row (TASKS'
+   live queue), its evidence base the third exposure plus the lifecycle proof.
 2. **One social carrier.** The punt pole (committed, iter-157), the waybill, or
    the toll record: material function + social meaning + holder + recognized
    claim + transfer = a new meso coupling? The carrier must alter at least one
    relationship, obligation, or future option, or it is decoration.
    TESTED (iter-160) for the pole: the material half passes at the committed
    band (the position-modulation causal, test-pinned); the social-recognition
-   half and the player-facing ablation are each one pack-data seed away (the
-   recognition token, the `steal_target` flag — the owner's embodiment call,
-   the KI#87 precedent class).
+   half and the player-facing ablation LANDED (iter-161, the owner's
+   embodiment call — pure pack data, zero core, the KI#87 precedent class):
+   the recognition token (the `read_pole` hinge minting `the_flood_story`,
+   registered over the toll-taker — the lever at the stair, the coerce door
+   open, the story partial by dark on the unlit stair) and the `steal_target`
+   flag (the lift flips the carrier binding; the road-leg beat then walks the
+   second hand pole-less), both test-pinned (`tests/test_poleseed.py`). The
+   carrier formula's PUBLIC RECOGNITION, TRANSFER and RELATIONSHIP CHANGE
+   rungs are embodied at the pack band — the candidate's residue is the
+   live-session question (a real reader, a real thief).
 3. **A practitioner water-governance node.** Scarce resource → recurring
    allocation conflict → practitioner rule → immediate enforcement →
    legitimacy/resentment → memory (the irrigation-tribunal MECHANISM, never the

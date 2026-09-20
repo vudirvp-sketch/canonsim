@@ -535,7 +535,8 @@
       "is_fire_source": false,
       "breakable": true,
       "flammability": "low",
-      "notes": "the family's last tool (KI#87's fix: the weirkeeper's note cited it, the items never carried it — committed with the household's second hand, the pack's next engineering touch): the pole is two-handed work — the second hand walks the rope side with it, and the punt it once pushed drowned the flood year (ANCHOR_REGION §6.1's assets: the boathouse, the pole, the custom). Carried: the position contract rides every leg the second hand walks (movement_changes, KI#46's law)"
+      "steal_target": true,
+      "notes": "the family's last tool (KI#87's fix: the weirkeeper's note cited it, the items never carried it — committed with the household's second hand, the pack's next engineering touch): the pole is two-handed work — the second hand walks the rope side with it, and the punt it once pushed drowned the flood year (ANCHOR_REGION §6.1's assets: the boathouse, the pole, the custom). Carried: the position contract rides every leg the second hand walks (movement_changes, KI#46's law). iter-161 (the pole's embodiment seeds): the steal_target flag is the verb-gate boundary's unless-arm (WORLD_AUTHORING §8 — carried ⇒ unstealable UNLESS the pack flags it): the pole is liftable unseen from the second hand's shoulder, the player-facing ablation's own gate (the carrier-ablation probe's flagged-theft arm, WORLD_TESTS §7). The flag opens exactly one gate — take stays uncarried-gated, drop_break stays the carrier's own; a successful lift flips the carrier binding to the thief and the road-leg beat then walks the second hand pole-less (the tool's availability a lawful world state)."
     }
   ],
   "groups": [

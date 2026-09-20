@@ -2,7 +2,7 @@
   "meta": {
     "pack": "province_pack",
     "version": "0.1",
-    "notes": "the verb set (the tavern/road action contract — the same 16 intents, the engine's closed grammar; the province nouns live in the knowledge tokens and the hook ids below). The move action keeps the edge-priced travel (st-6a/D-116 (5) — the province runs the TRAVEL main loop, D-146's opening answer: the loop change is the universal-core test)"
+    "notes": "the verb set (the tavern/road action contract — the base sixteen plus the province's own: council, hold_vigil, patrol, and since iter-161 the flood-story read read_pole; the engine's closed grammar, every verb pack data; the province nouns live in the knowledge tokens and the hook ids below). The move action keeps the edge-priced travel (st-6a/D-116 (5) — the province runs the TRAVEL main loop, D-146's opening answer: the loop change is the universal-core test)"
   },
   "actions": [
     {
@@ -78,6 +78,65 @@
         "failure": []
       },
       "notes": "targeted inspection of one entity or spot present in the actor's location"
+    },
+    {
+      "intent": "read_pole",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the marks stay marks",
+      "events": {
+        "success": "pole_read",
+        "failure": "pole_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_flood_story"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_marks_on_the_pole"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the flood-story recognition read (the pole's embodiment seed, iter-161 — the social-recognition half of WORLD_WORKPLAN §6's candidate 2, the owner's call): the pole is the flood story made physical — the high-water stain, the repair splice, the season tallies on the haft (each fat season's payment notched, a debt's count kept in wood by a family that signs with a blade, not a pen). The close read mints the literal token the_flood_story — the secrets registry's key (the templated-token ineligibility law: a secret's subject is fixed, the literal vocabulary the only legal surface — the grim read_ticket precedent's second instance, the pawn-ticket hinge's shape). The reader who learns the flood story holds the lever at the stair (ANCHOR_REGION §6.1's NEW OPTION rung): the debt named aloud where the road can hear. The field_in read pins the target to the pole (studying any other stave mints nothing). The perception gate is the honest failure surface: a failed read mints only the vague unread marks — wear seen, meaning missed; the acquisition conditions ride the saw channel besides (the unlit stair at night steps the story down to partial — half the tale legible by dark)."
     },
     {
       "intent": "move",
@@ -540,7 +599,7 @@
           "maren_feud_sweep"
         ]
       },
-      "notes": "pickpocket: opposed stealth vs the target's perception; the target must carry a steal_target item (the pay tin on the duty sergeant — the province's theft family); failure mints the sighting + the noise tokens (the drift family's members, the suspicion ladder's anchors) and seeds the watcher hooks"
+      "notes": "pickpocket: opposed stealth vs the target's perception; the target must carry a steal_target item (the pay tin on the duty sergeant — the province's theft family — and since iter-161 the punt pole on the second hand, the verb-gate boundary's unless-arm); failure mints the sighting + the noise tokens (the drift family's members, the suspicion ladder's anchors) and seeds the watcher hooks"
     },
     {
       "intent": "distract",

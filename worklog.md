@@ -7,6 +7,27 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-161 · 2026-09-20 · poleseed — the pole's embodiment seeds (the owner's
+«надо решить что начали в прошлой итерации» call, the W4 options list):
+the flood-story recognition token + the steal_target flag landed in
+province_pack, PURE PACK DATA, zero core (the KI#87 precedent class)
+- pack: entities.json (the pole's flag), actions.json (the read_pole hinge —
+  the grim read_ticket pattern's second instance; the meta/steal notes sync),
+  rules.json (the_flood_story over the toll-taker: type debt, a season's
+  window), templates.json (the two read lines + the item-neutral pickpocket
+  line); tests: test_poleseed.py (+11 — the lever chain read → mint →
+  corner, the night partial, the lift + the pole-less hop, the total-failure
+  arm, determinism)
+- the debt-1 standing row OPENED (the economy arm routed on the owner's
+  call); docs: ANCHOR_REGION §6.1/§9, WORLD_WORKPLAN §2/§6, WORLD_TESTS
+  §7/§9, TASKS, STATUS; zero corpus price (no committed script reads the
+  pole or lifts it); 11 paths (the iter-157 pack-landing precedent); honest
+  residue: the family's own read/telling mints the cluster (dormant, no
+  driver) — recorded in the secrets notes
+- verified at BASE_COMMIT 26d57f7 (1852+1 green, ruff clean — the pin
+  re-confirmed) and re-verified after: 1863+1 green, ruff clean; iter-151
+  evicted per the cap
+---
 iter-160 · 2026-09-20 · w4exp1 — the world track's W4 bounded experiment
 (the owner's «продолжай работу по world track» call — the working set's own
 first move, WORLD_WORKPLAN §6): the crossing household walked once through
@@ -174,25 +195,3 @@ deletion (D-185's recorded next step; absorbed D-029/D-033) + the citation sweep
   run's system-3.13.5 shebang trip = the TEST_PLAN §1.1 env-pin law, not a
   defect); worldbuild.zip stays deleted (the owner's call)
 
-iter-151 · 2026-09-20 · docscomp1 — the owner's matrix session + the «вперед
-приступай к работе» call: the semantic documentation compaction pass — the
-iter-140-memgc GC restored and extended (D-185; the memgc had been clobbered
-by iter-140-intake27's stale-base archive apply, found this session)
-- DECISIONS 63→30 rows / 231→48KB (D-185 restored, the intake family absorbs
-  D-173..D-175/D-184, the fixation families merged, the landings family
-  D-176..D-182, the fat rows slimmed to decision + pointer); TASKS 2422→914
-  (the phase-6-era ledger extended to iter-150, the 13 standing rows
-  extracted to the live queue head); phases.md §6 restored compact + the
-  intake-27/28/29 blocks (4305→2650); NAV 88→14KB; TEST_PLAN retitled the
-  Verification Stack (837→588); REFERENCES_DEEP 63→31KB; SPECS_BACKLOG
-  re-points restored; TAXONOMY/BLUEPRINT/PARSER/BRIEF re-points; ref/* (34
-  files); DIRECTOR_SPEC header; AGENTS §6 one line; CORE_DESIGN_RESEARCH
-  structural inbound → zero (deletion the owner's next call); STATUS re-pin
-- verified BEFORE working at BASE_COMMIT 5d88bd0 (1842+1 green, ruff clean —
-  the prior session's baseline re-confirmed) and re-verified after: 1842+1
-  green, ruff clean; doc-only, zero code, zero corpus price; 16 paths (over
-  the 3–5 soft limit, all mandated by the pass's own scope, per AGENTS §2.3)
-- Caps after: DECISIONS 73 lines (30 rows, at cap) / TASKS 914 / NAV 140 /
-  TEST_PLAN 588 / phases 2650 + DIRECTOR_SPEC 585 + BRIEF_SPEC 656 over the
-  600/300 signals — substance (the intact cards/slices/audit/verdict + the
-  runtime contracts), the §6.1 precedent, recorded here as the law demands

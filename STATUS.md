@@ -1,47 +1,49 @@
-Iteration: iter-160 (`iter-160-w4exp1` — the world track's W4 bounded
-experiment, the owner's «продолжай работу по world track» call — the working
-set's own first move, `WORLD_WORKPLAN.md` §6): CONFIRMED at the split band,
-the transfer KEPT — the crossing household walked once through the full
-operator stack on existing substrate only (flood/debt → function lost →
-replacement carrier → heterogeneous roles → biography crisis → residue
-lifecycle → one ablation → reachable-state difference). Kept as
-authoring/test patterns: the carrier-availability law + the carrier's
-verb-gate boundary (`WORLD_AUTHORING.md` §8 — the tool travels with the
-role that wields it; carried ⇒ untakeable, unstealable-unless-flagged,
-breakable only by its carrier) and the carrier-ablation probe
-(`WORLD_TESTS.md` §7) — the new causal capability composed from existing
-primitives (the movement beat + the carried-item position contract, the
-tool's availability a lawful world state — test-pinned,
-`tests/test_companion.py`). The debt's lifecycle trace authored
-(`ANCHOR_REGION.md` §6.1's table — one coin, two claims: the debt cleared
-vs the punt bought back); the crisis probe run on the boathouse fire (the
-committed fire spot): the response chain committed end-to-end, with two
-first-exposure findings recorded, not routed — the vigil never wakes for
-the stair (the elders out of earshot, the numeric-home law) and the
-reputation axis has no runtime writer (D-006; the breach response rides the
-knowledge/rumor stack). The one repeatedly exposed substrate limitation
-(the debt's arithmetic, the third recorded exposure) stays owner-routed per
-the separate-track law — the lifecycle proved explanatory without the
-economy arm. Candidates 1/2 informed (`WORLD_WORKPLAN.md` §6); candidates
-3/4 untouched.
+Iteration: iter-161 (`iter-161-poleseed` — the pole's embodiment seeds, the
+owner's «надо решить что начали в прошлой итерации» call over the W4 working
+set's remaining options): both named seeds LANDED in province_pack as PURE
+PACK DATA, zero core change (the KI#87 precedent class, iter-157) — (a) the
+flood-story recognition token: the `read_pole` hinge (the grim read_ticket
+pattern's second instance — field_in-pinned to the pole, perception-gated)
+minting the literal `the_flood_story`, the secrets registry's second key over
+the toll-taker (type `debt`, a season's liveness window; the carrier
+formula's PUBLIC RECOGNITION rung) — the lever chain live end-to-end
+(read → leverage_gained → the coerce corner: trust 25 / fear 75 from
+neutral), the story stepping down to partial read by dark on the unlit stair
+(the acquisition arm riding the new verb); (b) the `steal_target` flag: the
+verb-gate boundary's unless-arm — the pole liftable unseen from the second
+hand, the lift flipping the carrier binding and the road-leg beat then
+walking the second hand pole-less (the player-facing ablation armed, the
+carrier-ablation probe's flagged-theft gate live; the TRANSFER rung). Both
+rungs test-pinned (`tests/test_poleseed.py`, +11); (c) the debt's economy arm
+ROUTED on the owner's call — the `debt-1` standing row OPENED (the third
+exposure + the lifecycle proof its evidence base, the res-1 substrate its
+mechanism, D-182's co-due residue its named constraint). Zero corpus price
+(no committed script reads the pole or lifts it — the golden fixtures and
+the corpora byte-untouched). The candidates 3/4 (water governance,
+constructed kinship) untouched — the next meso unit the world track's next
+call.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1852 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT abc4f93 BEFORE working — 1852+1, identical to
-the pin — and re-verified after with the diff in place) ·
+1863 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 26d57f7 BEFORE working — 1852+1, identical to
+the pin — and re-verified after with the diff in place: 1863+1, the
+delta exactly the new claim packet) ·
 Date: 2026-09-20 ·
-Scope: `docs/worldbuild/WORLD_WORKPLAN.md` (§6 the experiment's RUN
-verdict + the candidates 1/2 informed), `docs/worldbuild/WORLD_TESTS.md`
-(§7 the carrier-ablation probe + §9 the run record),
-`docs/worldbuild/WORLD_AUTHORING.md` (§8 the two run-derived laws),
-`docs/worldbuild/ANCHOR_REGION.md` (§6.1 the debt's lifecycle table + the
-embodiment line), `docs/TASKS.md` (the iter-160 ledger line), `STATUS.md`
-(this re-pin), `worklog.md` (this entry) — 7 paths (over the 3–5 soft
-limit: the four worldbuild owners + the repo trio, the iter-155
-world-track precedent). The prior iteration's record: iter-159
-(intake-32). The detail lives in the worldbuild owners + the worklog
-+ git.
+Scope: `content/province_pack/entities.json` (the pole's flag + notes),
+`content/province_pack/actions.json` (the read_pole action + the meta/steal
+notes sync), `content/province_pack/rules.json` (the secrets registration),
+`content/province_pack/templates.json` (the two read lines + the
+item-neutral pickpocket line), `tests/test_poleseed.py` (the claim packet,
++11), `docs/TASKS.md` (the debt-1 row + the iter-161 ledger line),
+`docs/worldbuild/ANCHOR_REGION.md` (§6.1's gates/embodiment lines + §9's
+status), `docs/worldbuild/WORLD_WORKPLAN.md` (§2 + §6's candidates 1/2),
+`docs/worldbuild/WORLD_TESTS.md` (§7's armed gates + §9's band lines),
+`STATUS.md` (this re-pin), `worklog.md` (this entry) — 11 paths (over
+the 3–5 soft limit: the pack quartet + the claim packet + the worldbuild
+owners + the doc quintet, the iter-157 pack-landing precedent). The prior
+iteration's record: iter-160 (w4exp1). The detail lives in the pack notes
++ the worldbuild owners + the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -516,31 +518,36 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-160 DONE: the W4 bounded experiment — the crossing household through
-the full operator stack on existing substrate (the working set's own first
-move; CONFIRMED at the split band, the transfer KEPT — the carrier-availability
-law + the verb-gate boundary + the carrier-ablation probe, the debt's
-lifecycle table authored, candidates 1/2 informed; doc-only, 1852+1 green both
-ends). iter-159 DONE: the Vantiel research handoff routed (intake-32, D-190 —
-the separations record docs/ref/vantiel.md ref-22 + the presentation-1
-consult material parked behind the owner gate; doc-only, 1852+1 green both
-ends). iter-158 DONE: the Kurvitz consolidated research routed (intake-31, D-189 —
-the W4 operator set + the test operationalizations + the bounded
-crossing-household experiment + docs/ref/kurvitz.md ref-21; doc-only, 1852+1
-green both ends). iter-157 DONE: the companion arming (companion-1 + tune-3,
-together — the crossing household's second hand embodied as pure pack data, the
-first committed NPC movement source, the traveling-knower probe
-CONFIRMED on the crafted twin, the punt pole committed (KI#87 CLOSED);
-zero core change, 1852+1 green both ends). iter-156: the world track's
-causal mesh audit (W3 — five loops, four committed + the credit loop
-authored; doc-only). iter-155: the first anchor pass (A1/A2/A3 — the
-crossing household as the first meso unit; WORLD_TESTS' three OPEN
-tests → PARTIALLY CONFIRMED; KI#87 opened, closed iter-157). iter-154:
-the agent-dense v3 hybrid pack routed (D-187). iter-153: the worldbuild
-archive intake (D-186 — `docs/worldbuild/` landed, 10 files). iter-152:
-the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep.
-iter-151: the semantic documentation compaction pass (D-185 — DECISIONS
-63→30, TASKS 2422→914). iter-150: the AGPLv3 relicense + the
+**iter-161 DONE: the pole's embodiment seeds (the owner's «надо решить что
+начали в прошлой итерации» call — the flood-story recognition token + the
+steal_target flag, pure pack data, zero core, the KI#87 precedent class; the
+lever chain + the player-facing ablation test-pinned, tests/test_poleseed.py
++11, 1863+1 green both ends; the debt-1 standing row OPENED on the owner's
+call — the economy arm routed). iter-160 DONE: the W4 bounded experiment —
+the crossing household through the full operator stack on existing substrate
+(the working set's own first move; CONFIRMED at the split band, the transfer
+KEPT — the carrier-availability law + the verb-gate boundary + the
+carrier-ablation probe, the debt's lifecycle table authored, candidates 1/2
+informed; doc-only, 1852+1 green both ends). iter-159 DONE: the Vantiel
+research handoff routed (intake-32, D-190 — the separations record
+docs/ref/vantiel.md ref-22 + the presentation-1 consult material parked
+behind the owner gate; doc-only, 1852+1 green both ends). iter-158 DONE: the
+Kurvitz consolidated research routed (intake-31, D-189 — the W4 operator set
++ the test operationalizations + the bounded crossing-household experiment +
+docs/ref/kurvitz.md ref-21; doc-only, 1852+1 green both ends). iter-157 DONE:
+the companion arming (companion-1 + tune-3, together — the crossing
+household's second hand embodied as pure pack data, the first committed NPC
+movement source, the traveling-knower probe CONFIRMED on the crafted twin,
+the punt pole committed (KI#87 CLOSED); zero core change, 1852+1 green both
+ends). iter-156: the world track's causal mesh audit (W3 — five loops, four
+committed + the credit loop authored; doc-only). iter-155: the first anchor
+pass (A1/A2/A3 — the crossing household as the first meso unit; WORLD_TESTS'
+three OPEN tests → PARTIALLY CONFIRMED; KI#87 opened, closed iter-157).
+iter-154: the agent-dense v3 hybrid pack routed (D-187). iter-153: the
+worldbuild archive intake (D-186 — `docs/worldbuild/` landed, 10 files).
+iter-152: the CORE_DESIGN_RESEARCH deletion + the evidence-class citation
+sweep. iter-151: the semantic documentation compaction pass (D-185 —
+DECISIONS 63→30, TASKS 2422→914). iter-150: the AGPLv3 relicense + the
 standing-backlog revalidation (D-183/D-184). iter-149: pack-4;
 iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1
 (verified LIVE green on main at 156ec8f — the iter-143 arm's own check;
@@ -571,8 +578,12 @@ the branch-protection recipe stays the owner's settings step).**
    mechanics.py touch — the caps core + intake-21's single-event
    postmortem form + intake-22's viz-export form, the riders now
    IN the row per D-113), `st-4` (rides presentation-1 at its
-   write time, D-148) and `st-5` (the first real consumer decides
-   — the res-1 sink shape now concrete). For the SoW promise
+   write time, D-148), `st-5` (the first real consumer decides
+   — the res-1 sink shape now concrete) and `debt-1` (the flood
+   debt's economy arm over the res-1 substrate — OPENED iter-161
+   on the owner's routing call, the third exposure + the lifecycle
+   proof its evidence base; its §9 claim packet at build time).
+   For the SoW promise
    debates the intake-27 sacrifice protocol (D-173) and the
    intake-28 combination fence (D-174). The research posture
    (intake-29's admission rule, D-175): a new external intake
@@ -616,17 +627,20 @@ the branch-protection recipe stays the owner's settings step).**
    iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
    its pack embodiment LANDED iter-157: the second hand walks the
    artery; W4's first move RUN iter-160 — the bounded experiment
-   CONFIRMED at the split band, the transfer KEPT (the two carrier
-   laws + the ablation probe), candidates 1/2 informed, the debt's
-   arithmetic the third recorded exposure — owner-routed; the next
-   world-track call: the embodiment options (the pole's two
-   pack-data seeds — the recognition token, the `steal_target`
-   flag), the debt's economy arm, or the next meso unit — the
-   working set's remaining candidates).
+   CONFIRMED at the split band, the transfer KEPT; the embodiment
+   options LANDED iter-161 — the pole's recognition token + theft
+   flag, the lever chain test-pinned; the debt's economy arm ROUTED
+   (debt-1, the owner's call); the next world-track call: the next
+   meso unit — candidates 3/4 (the practitioner water-governance
+   node, the constructed kinship edge), each carrying its named
+   falsifier).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input —
    postponed until the owner's call), a world-track call (W4 the
-   meso expansion — the setting's own frontier), or a fresh call
+   meso expansion — the setting's own frontier: the next meso unit
+   from candidates 3/4, water governance or constructed kinship),
+   the fresh `debt-1` row (the flood debt's economy arm — opened,
+   awaiting the owner's build pick), or a fresh call
    (the license's `pyproject.toml` field a one-line option if
    wanted — D-183's recorded follow-up).

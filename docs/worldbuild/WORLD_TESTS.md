@@ -144,7 +144,12 @@ probe must name the gate the ablation rides (the verb-gate boundary,
 `WORLD_AUTHORING.md` §8): the carrier's own drop, a flagged theft, a fire. A
 pass: the reachable futures genuinely differ — the crossing without the pole
 loses both branches of its future option (the debt's clearance and the punt's
-return). A fail: only the prose changes — the element was decorative.
+return). A fail: only the prose changes — the element was decorative. All
+three named gates are ARMED in the committed pack since iter-161 (the carrier's
+own `drop_break`, the flagged theft — the pole's `steal_target`, the boathouse
+fire spot): the player-facing ablation is one steal away, the lift flipping
+the carrier binding and the road-leg beat walking the second hand pole-less
+(test-pinned, `tests/test_poleseed.py`).
 
 ## 8. Current repository evidence
 
@@ -164,7 +169,7 @@ the entire broader world is complete.
 
 ## 9. Current open tests
 
-### PARTIALLY CONFIRMED — Anchor causal map (2026-09-20, iter-155; band widened iter-157)
+### PARTIALLY CONFIRMED — Anchor causal map (2026-09-20, iter-155; band widened iter-157/161)
 
 The full chain is authored once end-to-end over the committed substrate — the
 crossing household's ladder (`ANCHOR_REGION.md` §6.1, §9's status): the flood
@@ -172,10 +177,11 @@ year followed through place/resource → meso institution → actor choice → e
 → knowledge asymmetry → social response → residue → new option, with no new
 worldbuilding document per link. Partial: authored band with a live witness at
 the single-NPC + companion band (the second hand and the pole committed
-iter-157), and the debt carries no economy flow (the pack is not
-economy-armed).
+iter-157; the pole's recognition-and-theft half committed iter-161), and the
+debt carries no economy flow (the pack is not economy-armed — the `debt-1`
+row).
 
-### PARTIALLY CONFIRMED — Meso test (2026-09-20, iter-155; band widened iter-157)
+### PARTIALLY CONFIRMED — Meso test (2026-09-20, iter-155; band widened iter-157/161)
 
 One meso unit authored: the crossing household — macro pressure (the river's
 seasonal rise, the guild's paper) translated into ordinary choices (the
@@ -183,7 +189,9 @@ high_water rate, the purse-read bend, the pole-or-road question) with persistent
 consequences (the debt standing, the reputation residue, the inherited pole).
 Partial: the pack embodies the unit at the single-NPC + companion band (the
 spine, the coerce beat, the shelter law; the second hand and the pole committed
-iter-157); the debt's flow is authored, not implemented.
+iter-157; the pole's social half — the recognition read, the lever chain, the
+theft gate — committed iter-161, `tests/test_poleseed.py`); the debt's flow is
+authored, not implemented (the `debt-1` standing row).
 
 ### PARTIALLY CONFIRMED — Meaning distribution (2026-09-20, iter-155)
 
