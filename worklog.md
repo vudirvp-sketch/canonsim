@@ -7,6 +7,23 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-155 · 2026-09-20 · anchor1 — the world track's first anchor pass (the
+owner's «начинай работу по планам» call; engine-1 stays owner-hardware-gated,
+the {3–8B, GBNF} gap row the decision input — the world plan the executable
+frontier): A2 the crossing household authored as the first meso unit
+(ANCHOR_REGION §6.1 — the doctrine's ladder over the committed substrate:
+Ketta's spine, the shelter law, the high_water custom, the coerce beat; the
+guild-held flood debt the durable constraint), A1 the causal map's eight
+answered rows (§4; Geography/Resource honestly open), A3 the high-water
+double-toll meaning slice (§7.1 — four bounded maps, the meaning distributed)
+- docs: WORLD_TESTS §9 (three OPEN → PARTIALLY CONFIRMED), WORLD_WORKPLAN
+  §2/§3/§5 (A1/A2/A3 DONE, W3 the next frontier), STATUS re-pin + KI#87 (the
+  phantom punt pole — entities.json's forward reference to a never-committed
+  item; fix routed to the pack's next engineering touch, not world-track
+  scope); iter-145 evicted per the cap
+- 1842+1 green + ruff clean both ends at BASE c282fea (env pin 3.12.14);
+  5 paths doc-only, inside the soft limit
+
 iter-154 · 2026-09-20 · intake30 — the owner's archive-intake call over
 the uploaded agent-dense v3 hybrid pack: every active file read, the
 corpus map built (all eleven units = the already-routed intake family +
@@ -109,10 +126,3 @@ packlint economy family; the unarmed landing, +18 tests
 - docs: TASKS, DECISIONS D-179, CONTRACTS §2 collapsed, EVENT_SCHEMA §4,
   STATUS re-pin, NAV §1; the §9 claim packet CONFIRMED (F3/F4 + the oracle)
 
-iter-145 · 2026-09-19 · roads1 — roads-1 the generated-exits pass: the MST
-backbone + the mutual k-nearest overlay over the claimed locations
-(`_pass_roads`), the ONE shared read `core/roads.py::exits` (authored wins),
-the worldgen lint; the pack.py split rider (`core/packlint/`); armed k=0,
-+9 tests
-- docs: TASKS, DECISIONS D-178, CONTRACTS §1 collapsed, ROADMAP's row list,
-  STATUS re-pin, NAV §1; the measured fork evidence in the iter-145 record

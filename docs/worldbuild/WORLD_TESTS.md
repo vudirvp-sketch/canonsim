@@ -129,20 +129,34 @@ the entire broader world is complete.
 
 ## 9. Current open tests
 
-### OPEN — Anchor causal map
+### PARTIALLY CONFIRMED — Anchor causal map (2026-09-20, iter-155)
 
-Can one local disruption produce the complete causal chain without narrative
-scaffolding?
+The full chain is authored once end-to-end over the committed substrate — the
+crossing household's ladder (`ANCHOR_REGION.md` §6.1, §9's status): the flood
+year followed through place/resource → meso institution → actor choice → event
+→ knowledge asymmetry → social response → residue → new option, with no new
+worldbuilding document per link. Partial: authored band, not pack-live — the
+witness carries the chain at the single-NPC band, and the debt carries no
+economy flow (the pack is not economy-armed).
 
-### OPEN — Meso test
+### PARTIALLY CONFIRMED — Meso test (2026-09-20, iter-155)
 
-Can one household/workshop/merchant unit translate region-scale pressure into an
-ordinary choice with persistent consequences?
+One meso unit authored: the crossing household — macro pressure (the river's
+seasonal rise, the guild's paper) translated into ordinary choices (the
+high_water rate, the purse-read bend, the pole-or-road question) with persistent
+consequences (the debt standing, the reputation residue, the inherited pole).
+Partial: the pack embodies the unit only at the single-NPC band (the spine, the
+coerce beat, the shelter law); the household's second hand and the debt's flow
+are authored, not implemented.
 
-### OPEN — Meaning distribution
+### PARTIALLY CONFIRMED — Meaning distribution (2026-09-20, iter-155)
 
-Are consequences distributed across several human relationships, or do they
-mostly accumulate around one dramatic faction vertex?
+The first meaning slice (the high-water double toll, `ANCHOR_REGION.md` §7.1):
+the same mechanical event carries four different meanings — household survival,
+labor skimmed, the road's misread, the institution's interest — distributed
+across positions, not accumulated on one dramatic faction vertex. Partial: the
+slice is authored over committed knowledge positions; the distribution is not
+yet measured on a live session.
 
 ### OPEN — Ancient Network back-propagation
 

@@ -83,18 +83,18 @@ economic and social experience.
 
 ## 4. Current causal map
 
-| Layer | Sarrow Vale surface | Question still open |
+| Layer | Sarrow Vale surface | Open question / first answers |
 |---|---|---|
-| Geography | river, travel lattice, weir, keep, market, crofts, manor | how much of the wider region is economically connected? |
-| Resource | bloom/iron vocabulary, charcoal, river trade | how does scarcity become a measured price/flow cycle? |
-| Trade | road traffic, market, toll, waybill, guild | what households/shops carry the cost of a disrupted trade route? |
-| Institutions | guild, garrison, old families, watch rotation | which meso institution mediates household-level consequences? |
-| Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | who bears the hidden cost of the current arrangement? |
-| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | how are these rules felt in ordinary family life? |
-| History | feud / burned mill / generated historical events | which exact old event created which current institution? |
-| Knowledge | witnessed events, rumors, watch suspicion, road knowledge | which actors hold materially different maps of the same situation? |
-| Weather/calendar | markets, fairs, seasons, storm chain | which seasonal pressure becomes a persistent social adaptation? |
-| Read-side meaning | cards, chronicle, lore, named travelers, scene markers | what new decision becomes possible because the player learns a residue? |
+| Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
+| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the pack is not economy-armed) |
+| Trade | road traffic, market, toll, waybill, guild | answered (§6.1): the crossing household carries the flood season's cost; the croft camp carries the shaved weights — the two named cost-carriers of a disrupted route |
+| Institutions | guild, garrison, old families, watch rotation | answered for the crossing (§6.1): the ferry family under the guild-held flood debt — the first named meso mediator; the camp's meso half (the charcoal debt) named, not yet authored |
+| Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one |
+| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the camp's family life open |
+| History | feud / burned mill / generated historical events | two events, two institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt (§6.1); the rest of the 150-year chronicle open |
+| Knowledge | witnessed events, rumors, watch suspicion, road knowledge | answered in the meaning slice (§7.1): the four-position asymmetry map over one toll |
+| Weather/calendar | markets, fairs, seasons, storm chain | answered (§6.1): the high_water rise → the punt men's double toll — the custom as persistent social adaptation; the household's four-phase year |
+| Read-side meaning | cards, chronicle, lore, named travelers, scene markers | answered (§6.1): the flood-debt lever set — whoever learns the flood story holds a different lever at the stair; the wergeld duty already live on the road |
 
 ## 5. Cross-system loops already demonstrated or strongly indicated
 
@@ -147,6 +147,58 @@ The next question is:
 The answer should affect money, labor, relationships, status, knowledge or
 obligation and should be capable of producing at least one durable consequence.
 
+The first unit is authored: the crossing household (§6.1).
+
+### 6.1 The crossing household (WORKING — the first authored meso unit)
+
+The weir stair's ferry family, authored over the committed substrate (the spine,
+the shelter law, the high_water custom, the boathouse) — no new entity classes, no
+new institutions beyond the guild's existing paper.
+
+**Composition.** The toll-taker (the committed spine's holder), one grown second
+hand — the pole is two-handed work: one on the water, one on the rope — and the
+drowned generation's memory. Assets: the boathouse (the bank's one burnable
+thing), the punt pole (the family's last tool), the crossing's custom itself.
+Losses: the punt and the savings, drowned the flood year.
+
+**The chain (the doctrine's ladder, walked once):**
+
+| Rung | The crossing household |
+|---|---|
+| CAUSE | the flood year — the rise drowned the family punt and the savings with it |
+| POSSIBILITY | the crossing is the artery's gate: the river runs quicker than the road, the fords drown in high_water and the stair does not |
+| PRESSURE | the flood debt — guild-held since the winter after: the borrowed punt, the stores eaten keeping the shelter law through the stranded season |
+| ACTORS | the toll-taker, the second hand, the guild's factor (the paper), the road's strangers |
+| INSTITUTION | the crossing's custom: the high_water double toll (the season's risk priced) under the shelter law — a paying stranger is never turned from the crossing's shelter, the trade's own law, older than the guild's ledgers |
+| KNOWLEDGE | the toll-taker knows the debt's size and the season; the road knows only the rate; the guild knows the paper — each map bounded and legitimate (the four-position table: §7.1) |
+| CONSEQUENCE | the purse-read bend past custom on the rich-seeming stranger — the flaw, live as the committed double-toll beat; the law's edge holds it: coin may bend, shelter never |
+| RESIDUE | the road's word ("the crossing answers the heaviest purse" — the flaw's reputation is itself residue); the debt standing; the pole inherited |
+| NEW OPTION | the debt is clearable (a strong honest season) or the bend hardens into custom (the next crossing answers purses by default); on the read side, whoever learns the flood story holds a different lever at the stair |
+
+**The household's year** (the seasonal cycle as lived, not as weather): thaw —
+the weir runs loud, the road soft, the toll thin; high_water — the fords drown,
+the custom doubles, the poler's risk is real (the family paid it once in punt and
+savings); long_light — the road dry and fast, the fat season, the payment season;
+first_frost — the trade slows, the stores counted against the debt.
+
+**The guild's hold.** The debt ties the household into the institution triangle's
+trade arm without inventing a new institution: the guild lent against the toll,
+the guild's weighing day prices the trade the toll feeds, the guild's council
+watches the trade's fear. The collision already staged in the committed
+substrate: the first stranger through the rise with a waybill book is a
+debt-auditor by his own errand — a debtor's toll squeeze meeting a creditor's
+reader, no new mechanics required (the small-alphabet law, authoring doctrine
+§10).
+
+**Embodiment (committed vs authored).** Committed: the spine (want/need/flaw/
+cause), the coerce urgency entry (the purse-read double-toll beat), the shelter
+law (the lowland prohibition set), the high_water lines (the drowned fords, the
+punt men's double), the boathouse fire spot, the auditor's errand. Authored here
+(WORKING): the debt's guild-holder, the second hand, the credit winter, the
+household's year. The punt pole — "the family's last tool" per the committed
+note — is not in the pack's items family (KI#87): the world model carries the
+tool; the pack does not yet.
+
 ## 7. Meaning frontier
 
 The current region is already strong at mechanical composition. The next depth
@@ -161,6 +213,33 @@ Useful concrete probes:
 - Which memory is inherited as a duty rather than a story?
 
 These are authoring probes, not current canon answers.
+
+### 7.1 The first meaning slice (run 2026-09-20, iter-155): the high-water double toll
+
+The event: a rich-seeming stranger crosses at the stair in the rise; the toll is
+doubled — the committed purse-read beat riding the season's custom. The same
+mechanical event, four maps (WORKING — authored over the committed substrate):
+
+| Position | The same toll means | The bounded map |
+|---|---|---|
+| the toll-taker | the debt's next payment; the custom's justice — the risk priced, the poler's risk real, the family paid it once | knows the debt's size and the season; does not know the stranger audits debts for a living |
+| the hill carrier | the artery's skim on his labor: priced on who crosses, not what crosses — the insult is the reading, not the sum | knows the custom and the camp's charcoal debt; does not know the crossing's paper |
+| the stranger (the auditor) | the road's friction — a greedy ferryman | knows the convoy books; does not know the flood story — the books show the toll, not the debt |
+| the guild | the debt's interest: the toll kept up while the paper stands | knows the paper; does not weigh what either bank of the river carries for it |
+
+**The distribution finding:** the meaning lands on four positions — household
+survival, labor skimmed, the road's misread, the institution's interest — not on
+one dramatic faction vertex. PARTIALLY CONFIRMED at the authored band
+(`WORLD_TESTS.md` §9).
+
+**The probes after the slice** (WORKING answers, this section): the ferryman's
+fair toll — two justices, the risk-priced against the load-priced; the insulting
+price — the purse-read itself, not the sum; the lowland trader's shelter-law
+shame — "we shelter by law and charge by ledger": the law is older than the
+guild's paper, and the paper now prices what the law gives; the inherited duty —
+twice, the pole at the crossing and the wergeld word on the road. Still open:
+the Thornmill family obligation — the vigil is faction-level; which household
+carries the mill fire's debt is unanswered.
 
 ## 8. Current limitations
 
@@ -189,3 +268,12 @@ local disruption can be followed through:
 
 The chain must be understandable without adding a new worldbuilding document for
 each link.
+
+**Status (2026-09-20):** the criterion's own test — one disruption (the flood
+year, the high_water rise) followed through the whole chain without a new
+document per link — is MET once at the authored band (§6.1's ladder; the social
+response rides the road's word and the market's rumor channel, both committed
+surfaces). The implementation witness still carries the chain at the
+single-NPC band; the meso unit's pack embodiment (the second hand, the debt's
+flow) is an engineering-side question the world track does not open by itself —
+the pack is not economy-armed, and the punt pole's item gap is KI#87.

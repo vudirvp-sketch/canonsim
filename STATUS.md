@@ -1,36 +1,36 @@
-Iteration: iter-154 (`iter-154-intake30` — the agent-dense v3 hybrid pack
-routed, the owner's archive-intake research call over the uploaded
-`Canonsim_Agent_Dense_v3_hybrid` package: an external three-layer
-re-consolidation of the already-routed research corpus — every active file
-read, every unit mapped to its existing owner (the corpus map: agent/00 =
-TEST_PLAN §9 + the intake-26 catalog, agent/01 = D-167/D-170/D-165,
-agent/02 = intakes 13/14/17/19/21/22/23, agent/03 = intakes 15/16/18/20/27,
-agent/05 = D-147 + D-186, agent/06 = `docs/worldbuild/` — the sibling
-compression of the same source, stale-at-HEAD pre-iter-145); the verdicts:
-the pack's self-declared canonical `agent/` layer REFUSED as a parallel
-authority (D-024 + the D-018/D-186 content-class law — engineering
-concepts land surgically, every domain the pack carries has an owner; no
-`docs/agent/`); the visual-system research the ONE un-routed domain → the
-intake-30 visual consult card (the development-order law, the fidelity
-target, the rejection table) parked behind the SoW fence, presentation-1
-the wired consumer (the TASKS row — never dead weight); the UNIFIED GDC
-knowledge base NOT admitted (D-175's rule + F2 saturation); D-187 the
-compound-row merge (DECISIONS stays at 30); doc-only, zero code, zero
-corpus price; the doc-loop alarm answered by the fresh owner call itself
-(the D-018 exception law).
+Iteration: iter-155 (`iter-155-anchor1` — the world track's first anchor pass
+over Sarrow Vale, the owner's «начинай работу по планам» call delegating the
+pick to the plans' own head: the engineering queue's recommended head
+(engine-1 + presentation-1) stays owner-hardware-gated (the {3–8B, GBNF}
+arm's standing gap row — engine-1's decision input), so the executable
+frontier is the world track's own plan (WORLD_WORKPLAN §3): A2 the crossing
+household authored (the first meso unit — the weir stair's ferry family
+through the doctrine's full ladder, riding the committed substrate: Ketta's
+spine, the shelter law, the high_water custom, the coerce beat; the
+guild-held flood debt the unit's durable constraint; the collision with the
+committed debt-auditor errand staged, no new mechanics); A1 the causal map's
+unsupported links deepened (eight rows answered at the authored band,
+Geography/Resource honestly open — the pack is not economy-armed); A3 the
+first meaning slice run (the high-water double toll through four bounded
+maps — the meaning distributed, not faction-concentrated); WORLD_TESTS'
+three OPEN tests → PARTIALLY CONFIRMED; the anchor exit criterion's own
+test MET once at the authored band; KI#87 opened (the phantom punt pole —
+iter-118's forward reference, fix routed to the pack's next engineering
+touch); doc-only, zero code, zero corpus price.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 16c3e4f BEFORE working — identical — and
+verified at BASE_COMMIT c282fea BEFORE working — identical — and
 re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/blueprint/phases.md` (§6: the intake-30 block + the
-visual-system consult card), `docs/DECISIONS.md` (the D-187 compound-row
-merge), `docs/TASKS.md` (the presentation-1 consult-material wiring),
-`STATUS.md` (this re-pin), `worklog.md` (this entry) — 5 paths, doc-only,
-inside the soft limit. The prior iteration's record: iter-153
-(worldbuild1). The detail lives in D-187 + worklog + git.
+Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4/§6.1/§7.1/§9),
+`docs/worldbuild/WORLD_TESTS.md` (§9's three results),
+`docs/worldbuild/WORLD_WORKPLAN.md` (§2/§3/§5), `STATUS.md` (this re-pin
++ KI#87), `worklog.md` (this entry) — 5 paths, doc-only, inside the soft
+limit. The prior iteration's record: iter-154 (intake30). The detail
+lives in the worldbuild docs + worklog + git.
+
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -53,7 +53,8 @@ inside the soft limit. The prior iteration's record: iter-153
 
 ## Active KIs
 
-
+- KI#87 · province_pack: Ketta's note cites a punt-pole item never committed
+  to items.json; fix rides the pack's next engineering touch · opened 2026-09-20.
 - (The closed-KI tombstone notes — KI#55..KI#84, every one
   deleted per AGENTS §5 at its own iteration, all far past the
   two-iteration window — were trimmed at the phase-6 gate (iter-116):
@@ -504,13 +505,17 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-154 DONE: the agent-dense v3 hybrid pack routed (D-187 — the
-external re-consolidation corpus-mapped to its existing owners whole,
-stale pre-iter-145; the pack's parallel `agent/` layer refused, no
-`docs/agent/`; the visual-system research the one un-routed domain →
-the intake-30 consult card parked behind the SoW fence, presentation-1
-the wired consumer; the UNIFIED GDC KB not admitted; doc-only, 1842+1
-green both ends). iter-153: the worldbuild archive intake (D-186 —
+**iter-155 DONE: the world track's first anchor pass (A1/A2/A3 — the
+crossing household authored as the first meso unit, the causal map's
+unsupported links deepened at the authored band, the high-water double-toll
+meaning slice run; WORLD_TESTS' three OPEN tests → PARTIALLY CONFIRMED;
+KI#87 opened; doc-only, 1842+1 green both ends). iter-154: the agent-dense
+v3 hybrid pack routed (D-187 — the external re-consolidation corpus-mapped
+to its existing owners whole, stale pre-iter-145; the pack's parallel
+`agent/` layer refused, no `docs/agent/`; the visual-system research the one
+un-routed domain → the intake-30 consult card parked behind the SoW fence,
+presentation-1 the wired consumer; the UNIFIED GDC KB not admitted; doc-only,
+1842+1 green both ends). iter-153: the worldbuild archive intake (D-186 —
 the cleaned corpus's active surface landed as `docs/worldbuild/`, 10
 files, every repo-fact claim verified against HEAD; the agent-path
 wiring: NAV §1/§2/§3 + the README map + TASKS' separate-track pointer
@@ -521,10 +526,8 @@ the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep
 (D-185's recorded next step). iter-151: the semantic documentation
 compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914, the docs
 corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
-relicense (`LICENSE` + the README's License section, D-183) + the
-standing-backlog REVALIDATION (the verdict set in D-184; no rows
-deleted, none added, no order changed). iter-149: pack-4;
-iter-148: pack-1; iter-147: since-1; iter-146: res-1;
+relicense + the standing-backlog revalidation (D-183/D-184).
+iter-149: pack-4; iter-148: pack-1; iter-147: since-1; iter-146: res-1;
 iter-143: ci-1 (verified LIVE green on main at 156ec8f —
 the iter-143 arm's own check; the branch-protection recipe stays
 the owner's settings step).**
@@ -585,11 +588,14 @@ the owner's settings step).**
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6); the
-   world track's active frontier is its own plan's A1/A2/A3 (the
-   anchor causal map, ONE meso unit, ONE meaning slice —
-   `WORLD_WORKPLAN.md` §3, never this file's queue).
+   world track's active frontier is its own plan's W3 — the causal
+   mesh (the 3–5 genuinely independent loops, `WORLD_WORKPLAN.md` §5,
+   never this file's queue; A1/A2/A3 done iter-155, the first meso
+   unit authored — ANCHOR_REGION §6.1).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (engine-1 + presentation-1),
-   a world-track call (A1/A2/A3 — the setting's own frontier), or a
-   fresh call (the license's `pyproject.toml` field a one-line
-   option if wanted — D-183's recorded follow-up).
+   recommended remainder of the sequence (engine-1 + presentation-1
+   — the {3–8B, GBNF} arm on owner hardware the decision input), a
+   world-track call (W3 the causal mesh — the setting's own
+   frontier), or a fresh call (the license's `pyproject.toml` field
+   a one-line option if wanted — D-183's recorded follow-up; KI#87's
+   punt-pole fix rides the pack's next engineering touch).

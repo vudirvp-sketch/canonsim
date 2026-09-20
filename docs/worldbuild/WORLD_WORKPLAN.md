@@ -35,35 +35,39 @@ owner instead of overlapping foundation documents.
 
 The current repository's Sarrow Vale province is the strongest concrete
 implementation witness. The broader worldbuilding goal is not closed yet because
-the meso and human-meaning layers are still thinner than the mechanical layer.
+the meso and human-meaning layers are still thinner than the mechanical layer —
+the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155), not yet
+pack-embodied beyond the single-NPC band.
 
 The active deliverable is `ANCHOR_REGION.md`.
 
 ## 3. Immediate work
 
-### A1 — Anchor Causal Map
+### A1 — Anchor Causal Map — DONE (iter-155)
 
-Complete the one-region chain:
+The first pass existed in `ANCHOR_REGION.md`; the unsupported links deepened
+through the crossing household: the Trade/Institutions/Actors/Culture/History/
+Knowledge/Weather/Read-side rows answered at the authored band (§4's map);
+Geography and Resource stay open (§4). The chain walked once end-to-end (§6.1).
 
-`geography → resource → trade → institution → actor → behavior → event → knowledge → social response → residue → new option`.
+### A2 — Meso unit — DONE (iter-155)
 
-The first pass already exists in `ANCHOR_REGION.md`; deepen only the links that
-are currently unsupported.
+One ordinary meso unit authored: the crossing household (the weir stair's ferry
+family — `ANCHOR_REGION.md` §6.1), connecting macro pressure (the seasonal rise,
+the guild-held flood debt) to ordinary life through durable constraints (the
+debt, the shelter law's edge), choices (the high_water rate, the purse-read
+bend, the pole-or-road question) and consequences (the debt standing, the
+reputation residue, the inherited pole). The unit's pack embodiment stays an
+engineering-side question (the separate-track law; KI#87 the punt pole's item
+gap).
 
-### A2 — Meso unit
+### A3 — Meaning test — DONE (iter-155)
 
-Author **one** ordinary meso unit inside Sarrow Vale:
-
-`household OR workshop OR merchant house OR ferry family OR local office`.
-
-It must connect macro pressure to ordinary life through at least one durable
-constraint, choice and consequence.
-
-### A3 — Meaning test
-
-Run one concrete human-life slice over the existing region rather than adding a
-new region. The slice should expose what the same mechanical event means to two
-people with different incentives or cultural assumptions.
+One concrete human-life slice run over the existing region — the high-water
+double toll (`ANCHOR_REGION.md` §7.1): the same mechanical event through four
+positions (the toll-taker, the hill carrier, the auditor, the guild), each with
+a bounded map. Four of the five meaning probes answered at the authored band;
+the Thornmill family obligation stays open. The next frontier is W3 (§5).
 
 ## 4. Next research only if needed
 
@@ -85,9 +89,9 @@ of these pieces.
 Do not add new powers. Extend the Resonance model only when an anchor or later
 region requires a capability not already bounded by `RESONANCE.md`.
 
-## 5. W3 — Causal mesh
+## 5. W3 — Causal mesh — THE NEXT FRONTIER (A1/A2/A3 done, iter-155)
 
-After A1/A2/A3, identify **3–5** cross-system loops in the anchor that are genuinely
+Identify **3–5** cross-system loops in the anchor that are genuinely
 independent.
 
 Do not count repeated outputs of one mechanism as separate loops.
