@@ -7,6 +7,41 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-167 · 2026-09-21 · stepread — the step bench's first embodiment (the
+owner's «продолжай работы, что логичнее всего сейчас начать» continuation
+call over STATUS's embodiment routing, the natural doc-streak breaker after
+three doc-only iterations): the step's close read — the unit's setting verb
+(the §6.2 gap text's own "a future embodiment's own class, the read_pole
+precedent") — landed as pure pack data, zero core
+- pack: actions.json (the read_stair hinge — the read family's third
+  instance, its first location-kind target: the stair IS the carrier; the
+  perception gate 30, the field_in pin + the co-location gate),
+  templates.json (the stair_read + stair_read_failed lines — 63 templates,
+  inside the 65 budget); the literal token the_step_law minted to the
+  reader: the ORDER the road never learns from the books (§7.1's stranger
+  row — the road's misread correctable in play, the brief's recalled facts
+  the read surface); the token deliberately PLAIN knowledge — no secrets
+  entry, no cluster, the registry stays two keys (the pole's debt-lever
+  class not duplicated)
+- tests: test_stepread.py (+7, the §9 claim packet — the census + the
+  plain-knowledge boundary; the day chain exact at three probed seeds; the
+  brief's recalled-facts line; the night chain partial — the unlit weir;
+  the off-site/far rejection arms; the determinism twin); docs: the
+  worldbuild trio (ANCHOR_REGION §6.2, WORKPLAN §2/§6, WORLD_TESTS §9) +
+  TASKS + STATUS; 9 paths (the iter-161/162 pack-landing precedent); zero
+  corpus price (no committed script reads the stair — the golden T1
+  byte-untouched)
+- honest residues: the read mints the LAW, never the PRESENT (the water
+  level's gap stays owner-routed, the separate-track law); no NPC driver
+  reads the stair (the player-facing verb, the pole's dormant-family
+  class); the remaining embodiment options (the notch record's arming, the
+  hatch — and the winter kin's three) stay the owner's call class
+- ANCHOR_REGION stays over the 600-line docs cap (771 after the +9): the
+  pre-existing substance-law state, the iter-165 rationale standing (the
+  unit's rungs/tables are substance, no cruft found in the pass)
+- verified BEFORE working at BASE_COMMIT a317db3 (1878+1 green, ruff clean
+  — the pin re-confirmed) and re-verified after: 1885+1 green, ruff clean
+  (the +7 the claim packet); iter-157 evicted per the cap
 iter-166 · 2026-09-21 · intake33 — the game-design practitioner
 talks corpus routed (the owner's research call over the uploaded
 five-source knowledge base: Sawyer/Meier/Battle Mode/Johnson/Wolverson):
@@ -228,27 +263,3 @@ a GENERATOR LIBRARY, never a worldbuilding layer
   2e64ae2 (env pin 3.12.14); 13 paths doc-only (the intake routing + the
   worldbuild owners + the references wiring + the doc quintet, the
   iter-153 precedent); iter-148 evicted per the cap
-
-iter-157 · 2026-09-20 · companion1 — the companion arming (companion-1 +
-tune-3, together; the owner's «довести до ума сам генератор» call,
-engine-1/presentation-1 postponed by the owner): the crossing household's
-second hand (Dellan) embodied in province_pack as PURE PACK DATA, zero
-core change — the road-leg urgency beat (kind=move, the HEAD census flip,
-tune-3's gap), the traveling-knower probe CONFIRMED on the crafted twin
-(alarm_adjacent heard+vague on the MOVER, the panic echo +10, the telling
-carries the shout to the player), the mode B voice + the paired escort
-leg + the arrival snapshots pinned, the punt pole committed (KI#87 CLOSED)
-- pack: entities.json (Dellan + punt_pole_01 + the pair axes), rules.json
-  (the beat, append-only per D-079); tests: test_companion.py (+10, the §9
-  claim packet), test_t1_province.py (the pins re-scoped to the runner),
-  playscripts/province_companion.json; the golden regen — the delta
-  exactly the companion's events (1 move + 1 reject + 3 decays, zero
-  shifts elsewhere); docs: TASKS (two rows collapsed + the ledger),
-  DECISIONS D-188 (the landings family compound merge, stays at 30),
-  STATUS re-pin; iter-147 evicted per the cap
-- the LOD law shaped the design (depth-3): the beat fires co-located, the
-  warm ring waits for the reader — the escort's legs beyond the hop ride
-  the mode B door; the mid-travel beat-carry duplicates die at the door
-  as bounded no-ops (attempts are facts); 1852+1 green + ruff clean both
-  ends at BASE a4cfe48 (env pin 3.12.14); 10 paths (the pack + the
-  verification stack + the doc quintet, the pack-landing precedent)

@@ -41,9 +41,12 @@ embodied at the single-NPC + companion band (the second hand and the pole,
 iter-157; the pole's social half — the recognition read, the lever, the theft
 gate — iter-161); the debt's flow is armed (`debt-1` built iter-162 — the
 accounts + the fold's two flows, the paper's standing still authored) and the
-second meso unit is authored (the step bench — the practitioner
-water-governance node, `ANCHOR_REGION.md` §6.2, iter-164; candidate 3
-CONFIRMED at the authored band, the mesh's sixth loop). The fourth candidate
+second meso unit is authored with its setting verb embodied (the step
+bench — the practitioner water-governance node, `ANCHOR_REGION.md` §6.2,
+iter-164; candidate 3 CONFIRMED at the authored band, the mesh's sixth
+loop; the step's close read COMMITTED iter-167 — the `read_stair` hinge
+minting `the_step_law`, the meaning slice's misread-correcting half widened
+to the committed band). The fourth candidate
 is TESTED (the constructed kinship edge — the winter kin,
 `ANCHOR_REGION.md` §6.3, iter-165: the Sarrow need demonstrated at the
 authored band, the mesh's seventh loop G + three interlock edges — the W4
@@ -227,9 +230,14 @@ stack).
    (no axis, no threshold, no institutional door: the immediacy is what keeps
    the guild out — the perturbation test's own edge); three first-exposure
    substrate gaps recorded, not routed (the water level, the setting verb, the
-   hatch gate — the separate-track law); the mechanism kept as the step-law
-   authoring/test pattern; the embodiment options stay the owner's call class
-   (the pole's iter-161 precedent).
+   hatch gate — the separate-track law; the setting verb's own gap ANSWERED
+   at the pack band iter-167, stepread: the `read_stair` hinge minting
+   `the_step_law`, the pole's `read_pole` precedent's third instance — pure
+   pack data, zero core, the owner's continuation call; the water level's
+   half stays owner-routed — the read mints the LAW, never the PRESENT);
+   the mechanism kept as the step-law authoring/test pattern; the remaining
+   embodiment options (the notch record's arming, the hatch) stay the
+   owner's call class (the pole's iter-161 precedent).
 4. **A constructed kinship edge.** Care/bodily relation → socially recognized
    kin edge → obligation → inheritance/protection/exclusion (the milk-kinship
    MECHANISM, never the practice; the documented donor is the Hindu Kush

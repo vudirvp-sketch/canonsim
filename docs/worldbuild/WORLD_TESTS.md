@@ -279,7 +279,18 @@ enforcement's removal → the guild's capture path; the memory's removal → the
 drift). Partial: the authored band, no live session — the meaning
 distribution's own unfinished band; the mesh carries the sixth loop AUTHORED
 (`ANCHOR_REGION.md` §5's F row, the disable test and the shared-stage rule
-re-applied).
+re-applied). iter-167 (stepread) widens the committed band: the setting
+verb's own gap ANSWERED as pure pack data — the `read_stair` hinge over the
+stair (the pole's `read_pole` precedent's third instance, the hinge family's
+first location-kind target) minting the literal token `the_step_law` to the
+reader: the ORDER the road never learns from the books, the meaning slice's
+stranger row (§7.1 — the road's misread) correctable in play, the reader's
+brief carrying the order (`tests/test_stepread.py` the §9 claim packet: the
+day chain exact, the night chain partial — the unlit weir's acquisition arm,
+the field_in pin and the co-location gate, plain knowledge never a secret —
+no cluster, the registry stays two keys; zero core, zero corpus price). The
+water level's half stays owner-routed (the read mints the LAW, never the
+PRESENT).
 
 ### CONFIRMED — The fourth W4 addition: the winter kin (2026-09-20, iter-165)
 

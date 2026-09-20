@@ -502,9 +502,11 @@ the paper's payment through the toll's thin season. The residue: the notch,
 the road's word, the steward's grief read as the feud's second theft. The
 probe's missing links — three first-exposure substrate gaps, recorded, not
 routed (the separate-track law): the water level (no runtime flow state — the
-phases carry no head), the setting verb (the reading at the stair has no
-committed action — a future embodiment's own class, the `read_pole`
-precedent), and the hatch gate (the wattle is prose — the verb-gate
+phases carry no head; the setting verb's landed read mints the LAW, never
+the PRESENT — `read_stair`, iter-167), the setting verb (the reading at the
+stair COMMITTED iter-167 — the `read_stair` hinge minting `the_step_law`,
+the `read_pole` precedent's third instance; the wet step's current standing
+stays authored), and the hatch gate (the wattle is prose — the verb-gate
 boundary's honest answer, `WORLD_AUTHORING.md` §8).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
@@ -524,11 +526,18 @@ market (the navigable Sarrow, the weighbeam, the tally staff, the rumor
 channel), the seasons (the four phases; the rise's drowned fords + double
 toll — the fourth step's own line), the toll's custom, the grief-ramble (the
 claim's voice), the chronicle's quarrel collection (the pact, three members),
-the pole's haft tallies. Authored here (WORKING): the step law itself (the
-four-rung allocation), the stair pact's theming (the water quarrel), the
-reading at the season's turn, the enforcement doors (the hatch's wattle, the
-beam's grudge, the keeper's book-setting breach), the tally's notch record.
-The unit's embodiment options — the step's close read, the notch record's
+the pole's haft tallies, the step's close read (iter-167, stepread: the
+`read_stair` hinge — the pole's `read_pole` precedent's third instance, the
+hinge family's first location-kind target — minting the literal token
+`the_step_law` to the reader, plain knowledge never a secret: the step law
+is the vale's own category, no lever; the brief's recalled facts the read
+surface — §7.1's stranger row, the road's misread, correctable in play;
+the unlit weir steps the night read down to partial; `tests/test_stepread.py`
+the claim packet). Authored here (WORKING): the step law's PRESENT (the
+four-rung allocation's current standing — the phases carry no head), the
+stair pact's theming (the water quarrel), the enforcement doors (the hatch's
+wattle, the beam's grudge, the keeper's book-setting breach), the tally's
+notch record. The unit's remaining embodiment options — the notch record's
 arming, the hatch — stay the owner's call class (the pole's iter-161
 precedent); the live-session question stands (a real dry band, a real reader:
 the meaning distribution's own unfinished band, §7.1's form).

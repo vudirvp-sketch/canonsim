@@ -1,62 +1,60 @@
-Iteration: iter-165 (`iter-165-kin1` — the world track's fourth W4
-candidate, the owner's «продолжай работу с world track» call): the
-constructed kinship edge (candidate 4, the working set's last) tested at
-the authored band and CONFIRMED as THE WINTER KIN (`ANCHOR_REGION.md` §6.3)
-— care performed under the shelter law through one full stranded season
-mints a socially recognized kin edge (the milk-kinship MECHANISM, never the
-practice): the winter's board through a stranded season, never the night's
-board (the rarity gate); the edge binding both ways (the guest's line owing
-protection + the mourning of the house's dead, the host's house owing the
-barred purse — the purse-read bend's own boundary, the exclusion rung); the
-edge passing down both lines (the drowned generation's notch now the
-toll-taker's — never unnotched, the recognition living). THE CANDIDATE'S OWN
-FALSIFIER PASSED — the Sarrow need demonstrated (the native generator
-confirmed: the stranded season's stores eight of the paper twenty, the
-care's cost already priced in the debt's own authored arithmetic and
-currently carried one way — household → debt → the bend: the committed
-symptom, the next stranger paying for the last one's winter); the
-function-loss arbiter (binding care's recipient to its bearer — the
-reciprocal function no existing mechanism performs: the paper prices money,
-the word records, the law deliberately gives, the wergeld prices wrong,
-blood inherits by birth); the anti-noise check (the mint flood-year rare;
-the edge priced by the lifecycle, each transition's removal changing
-reachable futures). The mesh's SEVENTH LOOP G (AUTHORED: the notch → the
-recognition → the obligations → the recognition again, state-closing; the
-disable test + the shared-stage rule re-applied — the E-sibling note: one
-catastrophe, two circuits, the paper's coin and the notch's care) + three
-new interlock edges (E⇄G one winter two prices, B⇄G the feud's arithmetic
-meeting the notch at the door, D⇄G the road materializing the return); the
-crisis probe (the return: the guest's son at the stair in the thin
-months) + the humor probe (the pole-counting joke, position-dependent) +
-the heartbreak row's first authored half (the mourning rung — the flood's
-dead kept by name outside blood); three first-exposure substrate gaps
-recorded, NOT routed (the relation form, the proof's read, the mourning
-surface — the separate-track law); doc-only, the worldbuild trio + the
-state triplet — the W4 working set COMPLETE (all four candidates tested).
+Iteration: iter-167 (`iter-167-stepread` — the step bench's first
+embodiment, the owner's «продолжай работы, что логичнее всего сейчас
+начать» continuation call over STATUS's embodiment routing — the natural
+doc-streak breaker after three doc-only iterations): the step's close
+read, the unit's SETTING VERB (the §6.2 gap text's own "a future
+embodiment's own class, the read_pole precedent") — landed in
+province_pack as PURE PACK DATA, zero core change (the pole's iter-161
+precedent class): the `read_stair` hinge (the read hinge's third
+instance — the grim read_ticket first, the pole second; the family's
+first location-kind target: the stair IS the carrier, not a thing at
+the stair), perception-gated (difficulty 30 — the honest failure
+surface, the vague unread steps), minting the literal token
+`the_step_law` to the reader: the ORDER the road never learns from the
+books (§6.2's knowledge asymmetry: the stranger reads a stingy
+ferryman, never the order — the books show the toll, not the step;
+§7.1's stranger row — the road's misread CORRECTABLE IN PLAY, the
+meaning slice's misread-correcting half widened to the committed band;
+the brief's recalled facts the read surface). THE TOKEN DELIBERATELY
+PLAIN KNOWLEDGE, never a secret (the step law is the vale's own
+category — public custom held by the practitioners' reading, the humor
+probe's shared-categories proof; no lever over any subject: no secrets
+entry, no cluster, the registry stays two keys — the pole's debt-lever
+class NOT duplicated). The acquisition arm rides the new verb unchanged
+(the unlit weir at night steps the order down to partial — half the
+rungs legible by dark); the field_in pin + the co-location gate die at
+the door as named rejections (attempts are facts); zero corpus price
+(no committed script reads the stair — the golden T1 byte-untouched).
+The honest boundary: the read mints the LAW, never the PRESENT — the
+phases carry no head (the water level's gap stays owner-routed, the
+separate-track law); no NPC driver reads the stair (the player-facing
+verb, the pole's own dormant-family class). tests/test_stepread.py +7
+(the §9 claim packet: the census + the plain-knowledge boundary; the
+day chain exact at three probed seeds + no cluster; the brief's
+recalled-facts line; the night chain partial; the off-site/far
+rejection arms; the determinism twin).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1878 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 6d22a33 BEFORE working — 1878+1, identical to
-the iter-164 pin — and re-verified after with the diff in place: 1878+1,
-identical, doc-only, zero test change) ·
-Date: 2026-09-20 ·
-Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4 three rows, §5 the G loop +
-the verdict table's seventh row + the ten edges, §6.3 the winter kin — the
-mint, the ladder, the lifecycle, the crisis + humor probes, the band split,
-§7.1 the inherited-duty probe's third answer, §9 the third chain walk),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 4's TESTED
-verdict — the working set complete), `docs/worldbuild/WORLD_TESTS.md` (§9
-the winter-kin entry + the humor/heartbreak row's extension), `STATUS.md`
-(this re-pin), `worklog.md` (this entry), `docs/TASKS.md` (the iter-165
-ledger line + the ledger header's range sync) — 6 paths doc-only (over the
-3–5 soft limit: the worldbuild trio + the state triplet, the
-iter-155/156/160/164 doc-only precedent); the second consecutive doc-only
-iteration under the session's fresh owner request (the D-022 exception —
-the next authored-band move needs a fresh call; the recommended breaker: an
-embodiment call, code-band, the pole's iter-161 precedent). The prior
-iteration's record: iter-164 (water1). The detail lives in §6.3's own
-tables + the WORLD_TESTS §9 entry + git.
+1885 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT a317db3 BEFORE working — 1878+1 green,
+identical to the iter-166 pin — and re-verified after with the diff in
+place: 1885+1, the +7 the new claim packet, zero failures) ·
+Date: 2026-09-21 ·
+Scope: `content/province_pack/actions.json` (the read_stair action +
+the meta verb note), `content/province_pack/templates.json` (the
+stair_read + stair_read_failed lines — 63 templates, inside the 65
+budget), `tests/test_stepread.py` (NEW, +7 — the §9 claim packet),
+`docs/worldbuild/ANCHOR_REGION.md` (§6.2 the gap line answered + the
+embodiment paragraph's committed band),
+`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 3's
+setting-verb answer), `docs/worldbuild/WORLD_TESTS.md` (§9 the
+step-bench entry's committed-band widening), `docs/TASKS.md` (the
+iter-167 ledger line + the ledger header's range sync), `STATUS.md`
+(this re-pin), `worklog.md` (this entry) — 9 paths (the iter-161/162
+pack-landing precedent); zero core, zero corpus price. The prior
+iteration's record: iter-166 (intake33). The detail lives in the
+pack's own notes + WORLD_TESTS §9 + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -531,6 +529,30 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
+**iter-167 DONE: stepread — the step bench's first embodiment (the
+owner's «продолжай работы, что логичнее всего сейчас начать»
+continuation call over STATUS's embodiment routing — the natural
+doc-streak breaker after three doc-only iterations, D-022's own
+recommendation): the step's close read, the unit's setting verb (the
+§6.2 gap text's own "a future embodiment's own class, the read_pole
+precedent"), landed in province_pack as PURE PACK DATA, zero core —
+the read_stair hinge (the read hinge's third instance: the grim
+read_ticket first, the pole second; the family's first location-kind
+target — the stair IS the carrier) minting the literal token
+the_step_law to the reader: the ORDER the road never learns from the
+books (§6.2's knowledge asymmetry; §7.1's stranger row — the road's
+misread correctable in play, the meaning slice's misread-correcting
+half widened to the committed band; the brief's recalled facts the read
+surface); the token deliberately PLAIN KNOWLEDGE, never a secret (the
+vale's own category, no lever — the registry stays two keys); the
+unlit weir steps the night read down to partial; the field_in pin +
+the co-location gate die at the door as named rejections; zero corpus
+price (no committed script reads the stair); tests/test_stepread.py +7
+(the §9 claim packet); the remaining embodiment options (the notch
+record's arming, the hatch — and the winter kin's three) stay the
+owner's call class; the water level's half stays owner-routed (the
+read mints the LAW, never the PRESENT); 1885+1 green both ends (the
++7 the claim packet).
 **iter-166 DONE: intake33 — the game-design practitioner talks corpus
 routed (the owner's «изучи gamedesign_knowledge_base.md и определи что
 можно перенять, адаптировать или чем вдохновиться… распределить по
@@ -730,10 +752,12 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    the constructed kinship edge TESTED iter-165 — the winter kin,
    candidate 4 CONFIRMED at the authored band: the care's reciprocal
    binding, the mesh's G loop + three interlock edges — the working
-   set's four candidates all answered); the next world-track call: the
-   embodiment options — the step bench's three (the step's close read,
-   the notch record's arming, the hatch) and the winter kin's three
-   gaps' class (the relation form, the proof's read, the mourning
+   set's four candidates all answered; the step bench's setting verb
+   COMMITTED iter-167 — the read_stair hinge minting the_step_law, the
+   second meso unit's committed band opened); the next world-track
+   call: the embodiment options — the step bench's remaining two (the
+   notch record's arming, the hatch) and the winter kin's three gaps'
+   class (the relation form, the proof's read, the mourning
    registration) — the owner's call class, the pole's iter-161
    precedent; W5's live band (the human tests — biography / humor /
    heartbreak, the authored halves on record, the live-session band
@@ -744,15 +768,18 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    — the {3–8B, GBNF} arm on owner hardware the decision input —
    postponed until the owner's call), a world-track call (the
    embodiment options of either authored addition — the step
-   bench's or the winter kin's — the owner's call class, the pole's
-   iter-161 precedent, and the natural doc-streak breaker; or W5's
+   bench's remaining two or the winter kin's three — the owner's
+   call class, the pole's iter-161 precedent; or W5's
    live band, or the camp's meso half),
    the debt-1 residues (the discrete-event doors the arming left
    un-armed — the paper's fall, the clearance lump, the punt's
    purchase — each a future row's own call), or a fresh call
    (the license's `pyproject.toml` field a one-line option if
-   wanted — D-183's recorded follow-up). Three consecutive doc-only
-   iterations stand (iter-164/165 world-track + iter-166 intake33,
-   each under its own fresh owner request — the D-022 exception
-   consumed per session): the next authored-band move needs a fresh
-   owner call — an embodiment call is the code-band breaker.
+   wanted — D-183's recorded follow-up). The three-iteration doc
+   streak (iter-164/165 world-track + iter-166 intake33) is BROKEN:
+   iter-167 landed the embodiment call on this session's fresh owner
+   continuation (the read_stair hinge, code-band, the pole's iter-161
+   precedent) — the next authored-band move still needs a fresh owner
+   call; the embodiment options (the step bench's remaining two, the
+   winter kin's three) remain the natural next calls of the same
+   class.

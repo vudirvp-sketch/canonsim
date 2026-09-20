@@ -130,7 +130,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..166 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..167 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -138,6 +138,27 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-167 · 2026-09-21 · stepread — the step bench's first embodiment (the
+  owner's «продолжай работы, что логичнее всего сейчас начать» continuation
+  call over STATUS's embodiment routing — the natural doc-streak breaker
+  after three doc-only iterations): the step's close read, the unit's setting
+  verb (the §6.2 gap text's own "a future embodiment's own class, the
+  read_pole precedent"), landed in province_pack as PURE PACK DATA, zero
+  core change — the read_stair hinge (the read hinge's third instance: the
+  grim read_ticket first, the pole second; the family's first location-kind
+  target — the stair IS the carrier) minting the literal token the_step_law
+  to the reader: the ORDER the road never learns from the books (§6.2's
+  knowledge asymmetry; §7.1's stranger row — the road's misread correctable
+  in play, the meaning slice's misread-correcting half widened to the
+  committed band; the brief's recalled facts the read surface); the token
+  deliberately PLAIN KNOWLEDGE, never a secret (the vale's own category, no
+  lever — no secrets entry, no cluster, the registry stays two keys); the
+  unlit weir steps the night read down to partial; the field_in pin + the
+  co-location gate die at the door as named rejections; zero corpus price
+  (no committed script reads the stair); tests/test_stepread.py +7 (the §9
+  claim packet); the remaining embodiment options (the notch record's arming,
+  the hatch) stay the owner's call class; the water level's half stays
+  owner-routed (the read mints the LAW, never the PRESENT).
 - iter-166 · 2026-09-21 · intake33 — the game-design practitioner talks
   corpus routed (the owner's «изучи gamedesign_knowledge_base.md и
   определи что можно перенять, адаптировать или чем вдохновиться…

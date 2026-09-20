@@ -38,6 +38,8 @@
     "pickpocket_failed": "{actor}'s hand drifts toward what {target} carries — {target} notices the movement.",
     "pole_read": "{actor} reads {target} — the flood line, the season tallies, the family's last tool.",
     "pole_read_failed": "{actor} studies {target}, but the marks stay marks.",
+    "stair_read": "{actor} reads {target} — the wet step's line, four rungs, one head shared by three hands.",
+    "stair_read_failed": "{actor} studies {target}, but the steps stay steps.",
     "distract": "{actor} distracts {target}.",
     "distract_ignored": "{target} ignores {actor}'s antics.",
     "arson": "{actor} sets a fire in {location}.",
