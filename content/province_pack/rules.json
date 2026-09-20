@@ -1191,6 +1191,30 @@
     },
     "notes": "the leverage registry (social-1/P3a, phases.md §3 — the CK3 add_hook precedent): which knowledge tokens are SECRETS in this setting — the tin-theft sighting, held by a novel knower, mints one leverage_gained fact (the coercion economy's fuel: Ketta's flaw entry reads the live cluster). Expiry is a read-side window (live while t < expires_at — never an event, INV-1; live_leverage the single read owner). The second key (iter-161, the pole's embodiment seeds): the_flood_story — the flood year's chain read off the punt pole (the read_pole hinge, the grim read_ticket pattern's second instance); the subject the toll-taker herself (the debtor — knowing the debt's size and its guild holder is the lever at the stair, ANCHOR_REGION §6.1's NEW OPTION rung: the debt named aloud where the road can hear); type 'debt' (a claim over the debtor, distinguished from blackmail's witnessed transgression — v0.1 vocabulary, no consumer yet); the expiry one full season (129600 — the debt's own reckoning unit, the lever living through the season's collection; the KNOWLEDGE never expires, only the cluster's liveness window does — and a re-read after expiry mints no fresh cluster, the knower already holds the token: the novelty law's own consequence). Honest residue: the family's own read or telling of the story mints the cluster too (the lived knowledge is not event-recorded — INV-1's law, the first pack whose secret's subject has kin); dormant in the committed set (no driver reads the pole to the family), a family-reading beat a future authored design."
   },
+  "economy": {
+    "accounts": [
+      "coin"
+    ],
+    "flows": [
+      {
+        "id": "the_toll_nets",
+        "verb": "source",
+        "kind": "coin",
+        "to": "npc_weirkeeper_01",
+        "amount": 2,
+        "every": 1
+      },
+      {
+        "id": "the_guild_collects",
+        "verb": "source",
+        "kind": "coin",
+        "to": "loc_malby",
+        "amount": 4,
+        "every": 1
+      }
+    ],
+    "notes": "debt-1 (iter-162, the owner's iter-161 routing call over the debt's economy arm): the crossing household's flood-debt arithmetic over the res-1 substrate — the THIRD consumer arming (the grim tavern first, the pressure city second), pure pack data, zero core. THE FOLD IS THE ENGINE'S OWN LAW (pack-4's discovered precedent, D-182's recorded residue): the toll-surplus flow and the guild's collection would be CO-DUE on the toll-taker's coin at every year crossing — flow_drafts builds every draft against the crossing's single snapshot, the second flow's from_ desyncing at the commit gate — so the year's arithmetic is FOLDED: the gross toll SIX coin splits as the net surplus TWO (the toll-taker's source, the household's thin stock) and the guild's standing take FOUR (the chest's source at loc_malby — the grim till's location form; the GROUP entity takes no stock: the entity lint's closed group vocabulary carries no accounts key, the economy lint's owner-agnostic form having anticipated group stocks the entity lint never opened — a substrate finding recorded here, never patched in a zero-core slice), the transfer's household-side half folded away, the gross split carried here as the notes' only mirror. The flows ride the macro year (every 1 — each year's reckoning, the first_frost stores-counting made arithmetic), beyond every day-scale corpus script's horizon by construction (the zero-corpus-price law; the committed year run — the calendar experiment — sees them by its own year-scale design, the tale carrying the reckoning lines through the story listing). The debt's own arithmetic stays AUTHORED (ANCHOR_REGION §6.1's unit, the iter-160 lifecycle table its proof): the paper TWENTY coin (the borrowed punt twelve + the stranded season's stores eight); the take four a year — five honest years to clear if amortized; the punt's buy-back TWELVE — six thin years of the net surplus; ONE COIN, TWO CLAIMS as live account state (the guild's chest at Malby outweighing the family's thin stock two-to-one, the surplus itself the punt fund's climb — Ketta's need and Dellan's need reading the same coin). Honest residues: the flow vocabulary has no terminus and no amortization — the paper's fall, the clearance lump and the punt's purchase are DISCRETE events beyond the flows (the substrate's account resolver carries the verbs; no player-scaled door armed in this row — a future row's own call), and the flows are sources by the fold — the coin mints at the vale's edge (the trade's toll entering the world, the grim till precedent), never a same-account transfer over the toll-taker's stock; the story_critical listing carries account_sourced (tune-1's law: the reckoning is a story beat of this pack — the debt's weight visible at the year's turn, where the weather stays canon without a line)."
+  },
   "echo": {
     "scale": [
       0,
@@ -1322,13 +1346,14 @@
       "thaw_turns",
       "high_water_rises",
       "long_light_turns",
-      "first_frost_turns"
+      "first_frost_turns",
+      "account_sourced"
     ],
     "thresholds": {
       "medium": 2,
       "high": 4
     },
-    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1."
+    "notes": "MVP_SCOPE §9: computed from entities touched + irreversibility + far hooks + the story-critical hook (tune-1, D-045(b)/D-059) → low/medium/high; never by feel. The story-critical list is the T7 noise-floor fix: routine drift (status_decayed, suspicion_changed — per-beat axis bookkeeping) and world texture (wait/move/look/examine/talk/use/distract/rest) stay low while the tale's beats (the theft ladder, the fire chain, the watch handover, the arrest) climb to medium+ — the RULE owns the signal/noise split, the tale_gate render follows. A gate raise alone (the rejected knob) would have cut clean steals and watch changes: story events the raw score reads as low. Thresholds stay v0.1. debt-1 (iter-162): account_sourced joins the list — the year's reckoning (the toll netting, the take landing) is a story beat of THIS pack, the debt's weight visible at the year's turn; the weather stays canon without a line (the ambient family's own law, the committed form held)."
   },
   "metrics": {
     "system_of_type": {
@@ -1743,9 +1768,9 @@
     },
     "templates": {
       "min": 40,
-      "max": 60
+      "max": 65
     },
-    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9). The calendar slice (slice 4) RE-DECLARES the template ceiling deliberately: the market day's and the fair's lines plus the four seasons' own phase lines grow the families to 58 (the second honest re-declare, 55 to 60 — the phase lines are the slice's own readability surface, each season's turn its own tale line)."
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9). The calendar slice (slice 4) RE-DECLARES the template ceiling deliberately: the market day's and the fair's lines plus the four seasons' own phase lines grow the families to 58 (the second honest re-declare, 55 to 60 — the phase lines are the slice's own readability surface, each season's turn its own tale line). debt-1 (iter-162) re-declares the ceiling again (60 to 65): the economy arming's verb line grows the families to 61 — the reckoning's tale line the arming's own readability surface (the third honest re-declare, the same law)."
   },
   "names": {
     "profiles": {

@@ -119,7 +119,6 @@ claim packet)
   D-140) and the intake-20 pack-candidate consult card; a
   genre-portability experiment (the engine's universality claim, INV-3's
   substance) its natural verification framing if picked.
-- `debt-1` — the crossing household's flood debt economy arm (OPENED by the owner's iter-161 routing call — D-189's decision rule executed: the repeatedly exposed substrate limitation becomes a row): arming the province pack's `economy` block over the res-1 substrate (the accounts, the toll-surplus flow, the guild's collection — the debt's arithmetic as pack data, zero core). Evidence base: the THIRD recorded exposure (A2's residue, Loop E's band, the w4exp1 run) plus the lifecycle proof of usefulness (iter-160's table — one coin, two claims, the debt clearable vs the punt bought back: the lifecycle proved explanatory without the arm and named exactly what the arm adds). Design owner: `ANCHOR_REGION.md` §6.1's unit; the substrate's own recorded residue applies (the co-due same-account flow limit, D-182's pack-4 finding — the per-flow re-draft if the debt's collection and the toll's surplus draw on one account at one crossing). Verification plan: TEST_PLAN §9's claim packet at its build time.
 - `bg-6` — the SoW integration audit, owner-deferred "until unavoidable"
   (D-055): a read-only pass over Soul-of-Waifu — extension points for a
   separate simulation chat mode, where llama.cpp sits, what the frontend
@@ -136,7 +135,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..161 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..162 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -144,6 +143,25 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-162 · 2026-09-20 · debt-1 — the crossing household's flood debt economy
+  arm (the standing row's build, the owner's «продолжай работу, где логично»
+  continuation call over the iter-161 routing): the province pack's `economy`
+  block armed over the res-1 substrate as PURE PACK DATA, zero core — the
+  THIRD consumer arming (grim first, pressure second): the accounts (the
+  toll-taker's thin surplus coin 2; the guild's chest at the weighbeam
+  loc_malby coin 40 — the grim till's location form, the group taking no
+  stock: the entity lint's closed group vocabulary, the finding recorded),
+  the toll-surplus flow (the net source +2) + the guild's collection (the
+  take +4) — the FOLD answering D-182's named co-due limit by construction
+  (both sources, the gross six's split the notes' only mirror); the paper
+  twenty / punt twelve / five-years-to-clear authored arithmetic in the
+  notes (ONE COIN, TWO CLAIMS as live account state); the reckoning a story
+  beat (account_sourced listed, the tale carrying the year's lines); the
+  budget's honest re-declare (60→65); tests/test_debt1.py +9 (the §9 claim
+  packet: census, the committed year band, the tale, the golden
+  byte-identity, the fold, the legible arithmetic, the fingerprint
+  both-arms, determinism) + the unarmed law's third-consumer update
+  (test_economy); zero corpus price (the golden T1 byte-untouched, pinned).
 - iter-161 · 2026-09-20 · poleseed — the pole's embodiment seeds (the owner's
   «надо решить что начали в прошлой итерации» call): the flood-story
   recognition token + the steal_target flag landed in province_pack as PURE

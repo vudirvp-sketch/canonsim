@@ -7,6 +7,29 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-162 · 2026-09-20 · debt-1 — the standing row's build (the owner's
+«продолжай работу, где логично» continuation call over the iter-161
+routing): the flood debt's economy arm landed in province_pack as PURE
+PACK DATA over res-1, zero core — the THIRD consumer arming
+- pack: entities.json (the toll-taker's thin surplus coin 2 + the
+  weighbeam chest coin 40 — the grim till's location form, the group
+  taking no stock: the entity-lint closed vocabulary, the finding
+  recorded), rules.json (the economy block: the net source +2 + the
+  take +4, both sources — THE FOLD answering D-182's co-due limit by
+  construction; the story listing + the budget re-declare 60→65),
+  templates.json (the reckoning line); tests: test_debt1.py (+9, the §9
+  claim packet), test_economy.py (the unarmed law's third consumer)
+- docs: TASKS (row collapse + ledger), STATUS re-pin, the three
+  worldbuild owners (ANCHOR_REGION §6.1, WORLD_WORKPLAN §2/§6,
+  WORLD_TESTS §9); 11 paths (the iter-157/161 pack-landing precedent);
+  zero corpus price (the golden T1 byte-untouched, pinned; the
+  committed year run sees the flows by its own year-scale design)
+- verified at BASE_COMMIT 2ea09ac (1863+1 green, ruff clean — the pin
+  re-confirmed) and re-verified after: 1872+1 green, ruff clean;
+  honest residues: no terminus/amortization in the flow vocabulary —
+  the clearance lump + the punt purchase are discrete events, no
+  player-scaled door armed; iter-152 evicted per the cap
+---
 iter-161 · 2026-09-20 · poleseed — the pole's embodiment seeds (the owner's
 «надо решить что начали в прошлой итерации» call, the W4 options list):
 the flood-story recognition token + the steal_target flag landed in
@@ -180,18 +203,3 @@ the world-2 L1/L2 verdict language — all check out)
 - 1842+1 green + ruff clean both ends at BASE f660364 (env pin 3.12.14);
   16 paths doc-only (over the soft limit — the payload IS the directory +
   the doc quintet, per AGENTS §2.3); iter-143 evicted per the cap
-
-iter-152 · 2026-09-20 · docgc2 — the owner's doc-pass call: the CORE_DESIGN_RESEARCH
-deletion (D-185's recorded next step; absorbed D-029/D-033) + the citation sweep
-- docs (27 paths, over the soft limit per AGENTS §2.3 — the sweep IS the scope):
-  the file DELETED; ref/ ×18 (9 template headers → the BLUEPRINT form, the
-  iter-151 34-file precedent; the in-body citations → their live owners:
-  D-019/D-020/D-005, phases.md §3/§5, BLUEPRINT §2 L9, core/echo.py, kenshi.md);
-  phase0 ×2; REFERENCES_DEEP (ownership + §0 template + the iter-0h rationale);
-  NAV §1 row; FAQ four→three; DIRECTOR_SPEC ≤300 → ≤600 (the BRIEF_SPEC
-  precedent); TASKS' two v0.2 rows closed absorbed (no consumer: PACK_SPEC
-  §8/§10 + the event-level story-critical law); D-185's execution note
-- 1842+1 green + ruff clean both ends at BASE accfd72d (env pin 3.12.14; the first
-  run's system-3.13.5 shebang trip = the TEST_PLAN §1.1 env-pin law, not a
-  defect); worldbuild.zip stays deleted (the owner's call)
-

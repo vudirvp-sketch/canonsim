@@ -178,8 +178,9 @@ year followed through place/resource → meso institution → actor choice → e
 worldbuilding document per link. Partial: authored band with a live witness at
 the single-NPC + companion band (the second hand and the pole committed
 iter-157; the pole's recognition-and-theft half committed iter-161), and the
-debt carries no economy flow (the pack is not economy-armed — the `debt-1`
-row).
+debt's flow arithmetic armed iter-162 (`debt-1` built: the accounts + the
+fold's two flows, `tests/test_debt1.py` — the paper's standing still
+authored, the flow vocabulary carrying no terminus).
 
 ### PARTIALLY CONFIRMED — Meso test (2026-09-20, iter-155; band widened iter-157/161)
 
@@ -190,8 +191,9 @@ consequences (the debt standing, the reputation residue, the inherited pole).
 Partial: the pack embodies the unit at the single-NPC + companion band (the
 spine, the coerce beat, the shelter law; the second hand and the pole committed
 iter-157; the pole's social half — the recognition read, the lever chain, the
-theft gate — committed iter-161, `tests/test_poleseed.py`); the debt's flow is
-authored, not implemented (the `debt-1` standing row).
+theft gate — committed iter-161, `tests/test_poleseed.py`; the debt's flow
+arithmetic committed iter-162 — the accounts + the fold's two flows,
+`tests/test_debt1.py`).
 
 ### PARTIALLY CONFIRMED — Meaning distribution (2026-09-20, iter-155)
 
@@ -247,8 +249,8 @@ carrier-availability law + the verb-gate boundary (`WORLD_AUTHORING.md` §8)
 and the carrier-ablation probe (§7 here). The one re-exposed limitation:
 the debt's arithmetic (no account state; the third recorded exposure —
 A2's residue, Loop E's band, this run) — owner-routed per the
-separate-track law; the lifecycle proved explanatory without the economy
-arm. Band: the authored chain over committed beats; no live session.
+separate-track law, BUILT iter-162 (debt-1: the accounts + the fold's
+flows landed in the province pack). Band: the authored chain over committed beats; no live session.
 
 ### OPEN — Ancient Network back-propagation
 

@@ -411,21 +411,24 @@ def test_the_price_law_purity_and_arithmetic() -> None:
 
 
 def test_the_committed_packs_land_unarmed() -> None:
-    """D4 (the arming law, the 68a pattern): the tavern, the road and
-    the province declare no economy block and no entity accounts —
-    their golden T1 fixtures and corpora byte-untouched (the T1 suites'
-    own green run is the byte-identity pin; this test pins the unarmed
-    precondition itself). iter-148 (pack-1): the GRIM pack is the armed
-    FIRST CONSUMER; iter-149 (pack-4): the PRESSURE pack the second —
-    each declaration IS the arming (the corpus price its own: the verb
-    template lines + its own T1 fixture), so the unarmed law now reads
-    "every pack before the first consumer", never "every pack
-    forever"."""
+    """D4 (the arming law, the 68a pattern): the tavern and the road
+    declare no economy block and no entity accounts — their golden T1
+    fixtures and corpora byte-untouched (the T1 suites' own green run
+    is the byte-identity pin; this test pins the unarmed precondition
+    itself). iter-148 (pack-1): the GRIM pack is the armed FIRST
+    CONSUMER; iter-149 (pack-4): the PRESSURE pack the second; iter-162
+    (debt-1): the PROVINCE the third — the crossing household's flood
+    debt (each declaration IS the arming, the corpus price its own: the
+    verb template lines; the province's flows ride the macro year,
+    beyond its day-scale golden corpus by construction), so the unarmed
+    law now reads "every pack before the first consumer", never "every
+    pack forever"."""
     for pack_dir in sorted((REPO / "content").iterdir()):
         if not pack_dir.is_dir():
             continue
-        if pack_dir.name in ("grim_pack", "pressure_pack"):  # the armed
-            # consumers (the first and the second)
+        if pack_dir.name in (
+            "grim_pack", "pressure_pack", "province_pack",  # the armed
+        ):  # consumers (the first, the second, the third)
             rules = json.loads(
                 (pack_dir / "rules.json").read_text(encoding="utf-8")
             )

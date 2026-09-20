@@ -57,8 +57,9 @@ The worldbuilding source uses hill-smelted iron as a focal scarcity tying the
 crofts, market, guild and surrounding institutions together.
 
 **Status:** WORKING worldbuilding pillar. The current province pack carries the
-iron vocabulary and actors, but its full resource/economy cycle is not yet the
-same as an economy-armed pack.
+iron vocabulary and actors, and — since iter-162 (debt-1) — one armed economy
+slice (the flood debt's accounts + flows); the full resource cycle (bloom,
+iron, charcoal as measured scarcity) is not yet armed.
 
 ### Feud residue
 
@@ -86,7 +87,7 @@ economic and social experience.
 | Layer | Sarrow Vale surface | Open question / first answers |
 |---|---|---|
 | Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
-| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the pack is not economy-armed) |
+| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet) |
 | Trade | road traffic, market, toll, waybill, guild | answered (§6.1): the crossing household carries the flood season's cost; the croft camp carries the shaved weights — the two named cost-carriers of a disrupted route |
 | Institutions | guild, garrison, old families, watch rotation | answered for the crossing (§6.1): the ferry family under the guild-held flood debt — the first named meso mediator; the camp's meso half (the charcoal debt) named, not yet authored |
 | Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one |
@@ -179,9 +180,11 @@ cleared by a strong honest season, or the bend hardened into custom`.
 Closing edge: state-closing at the authored band — the residue (reputation,
 debt standing) changes the next season's options. Band honesty: the beats are
 committed (the spine, the coerce double-toll, the shelter law, the
-storm-armed rise), the mediation is authored (the debt's paper), and the flow
-is not economy-armed. The C⇄E edge: the rise prices the toll — the season
-modulates the debt's collection.
+storm-armed rise), the mediation is authored (the debt's paper), and the
+flow's arithmetic is armed (iter-162, debt-1: the accounts + the fold's two
+flows on the macro year — the paper's fall still authored, the flow
+vocabulary carrying no terminus). The C⇄E edge: the rise prices the toll —
+the season modulates the debt's collection.
 
 ### The verdict
 
@@ -294,8 +297,11 @@ open; the story steps down to partial read by dark on the unlit stair) and
 the player-facing ablation (the pole liftable unseen from the second hand; a
 successful lift flips the carrier binding and the road-leg beat then walks
 the second hand pole-less — test-pinned, `tests/test_poleseed.py`). The
-debt's economy flow is the engineering side's own `debt-1` standing row
-(opened on the owner's routing call, iter-161 — TASKS' live queue).
+debt's economy flow LANDED (iter-162, the `debt-1` row's build — pure
+pack data over the res-1 substrate: the toll-taker's thin surplus + the
+guild's chest at the weighbeam, the net-surplus flow + the collection flow
+folded per the co-due limit, the reckoning a story beat; the paper's fall
+and the clearance still authored — the flow vocabulary has no terminus).
 
 **Embodiment (committed vs authored).** Committed: the spine (want/need/flaw/
 cause), the coerce urgency entry (the purse-read double-toll beat), the shelter
@@ -309,8 +315,10 @@ the toll-taker — the lever at the stair) and its theft gate (the
 `steal_target` flag, the player-facing ablation; the lift and the pole-less
 hop test-pinned, `tests/test_poleseed.py`). Authored here (WORKING): the debt's
 guild-holder, the credit winter, the household's year, the debt's lifecycle
-(the iter-160 trace above), and the debt's flow
-(not economy-armed — the open `debt-1` standing row on the engineering side).
+(the iter-160 trace above), and the debt's own standing arithmetic (the
+paper twenty, the punt twelve — the arming's notes their mirror); the
+flow's movement armed iter-162 (debt-1: the accounts + the two folded
+flows, `tests/test_debt1.py`).
 
 ## 7. Meaning frontier
 
@@ -389,6 +397,8 @@ response rides the road's word and the market's rumor channel, both committed
 surfaces). The implementation witness carries the chain at the single-NPC +
 companion band (iter-157: the second hand, the pole — KI#87 closed; iter-161:
 the pole's social half — the recognition read, the lever chain, the theft
-gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow is
-the engineering side's own `debt-1` standing row (opened on the owner's
-routing call, iter-161) — the pack is not economy-armed.
+gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow
+landed iter-162 (the `debt-1` row's build: the accounts + the fold's two
+flows, the reckoning a story beat — `tests/test_debt1.py`; the paper's fall
+and the punt's purchase stay authored, the flow vocabulary carrying no
+terminus).

@@ -39,8 +39,9 @@ the meso and human-meaning layers are still thinner than the mechanical layer �
 the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155) and embodied
 at the single-NPC + companion band (the second hand and the pole, iter-157;
 the pole's social half — the recognition read, the lever, the theft gate —
-iter-161); the debt's flow is routed to the engineering side (`debt-1`, the
-owner's call) and further meso units are not yet embodied. The causal mesh is
+iter-161); the debt's flow is armed (`debt-1` built iter-162 — the accounts
++ the fold's two flows, the paper's standing still authored) and further
+meso units are not yet embodied. The causal mesh is
 audited — five independent loops, four committed (W3 done, iter-156,
 `ANCHOR_REGION.md` §5).
 
@@ -64,8 +65,9 @@ debt, the shelter law's edge), choices (the high_water rate, the purse-read
 bend, the pole-or-road question) and consequences (the debt standing, the
 reputation residue, the inherited pole). The unit's pack embodiment landed at
 the companion band (iter-157: the second hand walks the artery, the pole
-committed, KI#87 closed); the debt's economy flow stays the open engineering-side
-question (the separate-track law).
+committed, KI#87 closed); the debt's economy flow landed iter-162 (debt-1
+built: the accounts + the fold's two flows over the res-1 substrate; the
+separate-track law held — the row rode the engineering queue).
 
 ### A3 — Meaning test — DONE (iter-155)
 
@@ -183,9 +185,10 @@ stack).
    inheritance, and social interpretation are explicitly traced? Do not build
    an economy system first — test the lifecycle on existing substrate.
    TESTED (iter-160): the trace passes the perturbation test at the authored
-   band (`ANCHOR_REGION.md` §6.1's table); the economy arm is ROUTED (iter-161,
-   the owner's call) — the engineering side's `debt-1` standing row (TASKS'
-   live queue), its evidence base the third exposure plus the lifecycle proof.
+   band (`ANCHOR_REGION.md` §6.1's table); the economy arm BUILT (iter-162,
+   the `debt-1` row consumed: the accounts + the fold's two flows as pure
+   pack data, the paper's standing + the clearance + the punt's purchase
+   staying authored — `tests/test_debt1.py`).
 2. **One social carrier.** The punt pole (committed, iter-157), the waybill, or
    the toll record: material function + social meaning + holder + recognized
    claim + transfer = a new meso coupling? The carrier must alter at least one

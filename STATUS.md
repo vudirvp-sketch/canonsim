@@ -1,49 +1,57 @@
-Iteration: iter-161 (`iter-161-poleseed` — the pole's embodiment seeds, the
-owner's «надо решить что начали в прошлой итерации» call over the W4 working
-set's remaining options): both named seeds LANDED in province_pack as PURE
-PACK DATA, zero core change (the KI#87 precedent class, iter-157) — (a) the
-flood-story recognition token: the `read_pole` hinge (the grim read_ticket
-pattern's second instance — field_in-pinned to the pole, perception-gated)
-minting the literal `the_flood_story`, the secrets registry's second key over
-the toll-taker (type `debt`, a season's liveness window; the carrier
-formula's PUBLIC RECOGNITION rung) — the lever chain live end-to-end
-(read → leverage_gained → the coerce corner: trust 25 / fear 75 from
-neutral), the story stepping down to partial read by dark on the unlit stair
-(the acquisition arm riding the new verb); (b) the `steal_target` flag: the
-verb-gate boundary's unless-arm — the pole liftable unseen from the second
-hand, the lift flipping the carrier binding and the road-leg beat then
-walking the second hand pole-less (the player-facing ablation armed, the
-carrier-ablation probe's flagged-theft gate live; the TRANSFER rung). Both
-rungs test-pinned (`tests/test_poleseed.py`, +11); (c) the debt's economy arm
-ROUTED on the owner's call — the `debt-1` standing row OPENED (the third
-exposure + the lifecycle proof its evidence base, the res-1 substrate its
-mechanism, D-182's co-due residue its named constraint). Zero corpus price
-(no committed script reads the pole or lifts it — the golden fixtures and
-the corpora byte-untouched). The candidates 3/4 (water governance,
-constructed kinship) untouched — the next meso unit the world track's next
-call.
+Iteration: iter-162 (`iter-162-debt1` — the standing row's build, the
+owner's «продолжай работу, где логично и правильно сейчас это делать»
+continuation call over the iter-161 routing): the crossing household's
+flood debt economy arm LANDED in province_pack as PURE PACK DATA over
+the res-1 substrate, zero core (the third consumer arming — grim first,
+pressure second) — (a) THE ACCOUNTS: the toll-taker's thin surplus
+(coin 2, itself the punt fund's climb toward the authored twelve) and
+the guild's chest at the weighbeam (loc_malby, coin 40 — the grim
+till's location form; the GROUP entity takes no stock: the entity
+lint's closed group vocabulary carries no accounts key, the economy
+lint's owner-agnostic form having anticipated group stocks the entity
+lint never opened — the substrate finding recorded in the block's
+notes, never patched in a zero-core slice); (b) THE TOLL-SURPLUS FLOW
+(the net source +2) + THE GUILD'S COLLECTION (the take +4), both
+SOURCES on the macro year — THE FOLD answering D-182's named co-due
+limit by construction (the toll-surplus flow and the collection would
+be co-due on the toll-taker's coin at every year crossing; the gross
+six's split the notes' only mirror — pack-4's own precedent); (c) the
+paper twenty / punt twelve / five-honest-years authored arithmetic in
+the notes — ONE COIN, TWO CLAIMS as live account state (the guild's
+claim outweighing the family's two-to-one); the reckoning a story beat
+(account_sourced listed, the tale carrying the year's lines under the
+Day 360 header); the budget's honest re-declare (60→65). Honest
+residues recorded: the flow vocabulary has no terminus and no
+amortization — the paper's fall, the clearance lump and the punt's
+purchase are DISCRETE events beyond the flows (no player-scaled door
+armed in this row, a future row's own call). Test-pinned
+(tests/test_debt1.py, +9 — the §9 claim packet) + the unarmed law's
+third-consumer update (test_economy); zero corpus price (the golden T1
+byte-untouched, pinned; the committed year run — the calendar
+experiment — sees the flows by its own year-scale design, its own laws
+held green).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1863 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 26d57f7 BEFORE working — 1852+1, identical to
-the pin — and re-verified after with the diff in place: 1863+1, the
-delta exactly the new claim packet) ·
+1872 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 2ea09ac BEFORE working — 1863+1, identical to
+the iter-161 pin — and re-verified after with the diff in place: 1872+1,
+the delta exactly the new claim packet) ·
 Date: 2026-09-20 ·
-Scope: `content/province_pack/entities.json` (the pole's flag + notes),
-`content/province_pack/actions.json` (the read_pole action + the meta/steal
-notes sync), `content/province_pack/rules.json` (the secrets registration),
-`content/province_pack/templates.json` (the two read lines + the
-item-neutral pickpocket line), `tests/test_poleseed.py` (the claim packet,
-+11), `docs/TASKS.md` (the debt-1 row + the iter-161 ledger line),
-`docs/worldbuild/ANCHOR_REGION.md` (§6.1's gates/embodiment lines + §9's
-status), `docs/worldbuild/WORLD_WORKPLAN.md` (§2 + §6's candidates 1/2),
-`docs/worldbuild/WORLD_TESTS.md` (§7's armed gates + §9's band lines),
+Scope: `content/province_pack/entities.json` (the toll-taker's + the
+weighbeam town's accounts, the notes), `content/province_pack/rules.json`
+(the economy block + the story listing + the budget re-declare),
+`content/province_pack/templates.json` (the reckoning line),
+`tests/test_debt1.py` (the claim packet, +9), `tests/test_economy.py`
+(the unarmed law's third-consumer update), `docs/TASKS.md` (the row
+collapse + the iter-162 ledger line), `docs/worldbuild/ANCHOR_REGION.md`
+(§6.1's embodiment line), `docs/worldbuild/WORLD_WORKPLAN.md` (§2 + §6's
+candidate-1 arm), `docs/worldbuild/WORLD_TESTS.md` (§9's debt lines),
 `STATUS.md` (this re-pin), `worklog.md` (this entry) — 11 paths (over
-the 3–5 soft limit: the pack quartet + the claim packet + the worldbuild
-owners + the doc quintet, the iter-157 pack-landing precedent). The prior
-iteration's record: iter-160 (w4exp1). The detail lives in the pack notes
-+ the worldbuild owners + the worklog + git.
+the 3–5 soft limit: the pack trio + the claim packet + the worldbuild
+owners + the doc quintet, the iter-157/161 pack-landing precedent). The
+prior iteration's record: iter-161 (poleseed). The detail lives in the
+pack notes + the worldbuild owners + the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -518,12 +526,22 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-161 DONE: the pole's embodiment seeds (the owner's «надо решить что
-начали в прошлой итерации» call — the flood-story recognition token + the
-steal_target flag, pure pack data, zero core, the KI#87 precedent class; the
-lever chain + the player-facing ablation test-pinned, tests/test_poleseed.py
-+11, 1863+1 green both ends; the debt-1 standing row OPENED on the owner's
-call — the economy arm routed). iter-160 DONE: the W4 bounded experiment —
+**iter-162 DONE: the debt-1 standing row's build (the owner's «продолжай
+работу, где логично и правильно сейчас это делать» continuation call over
+the iter-161 routing): the flood debt's economy arm LANDED in province_pack
+as pure pack data over the res-1 substrate, zero core — the third consumer
+arming: the accounts (the toll-taker's thin surplus + the guild's chest at
+the weighbeam, the group-stock lint gap the recorded finding), the
+toll-surplus flow + the guild's collection (the FOLD answering D-182's
+named co-due limit by construction), the paper/punt arithmetic authored in
+the notes (one coin, two claims as live account state), the reckoning a
+story beat; tests/test_debt1.py +9, the unarmed law's third-consumer
+update, 1872+1 green both ends; zero corpus price, the golden T1
+byte-untouched). iter-161 DONE: the pole's embodiment seeds (the
+flood-story recognition token + the steal_target flag, pure pack data,
+zero core; the lever chain + the player-facing ablation test-pinned,
+tests/test_poleseed.py +11, 1863+1 green both ends; the debt-1 standing
+row OPENED — consumed iter-162). iter-160 DONE: the W4 bounded experiment —
 the crossing household through the full operator stack on existing substrate
 (the working set's own first move; CONFIRMED at the split band, the transfer
 KEPT — the carrier-availability law + the verb-gate boundary + the
@@ -579,10 +597,11 @@ the branch-protection recipe stays the owner's settings step).**
    postmortem form + intake-22's viz-export form, the riders now
    IN the row per D-113), `st-4` (rides presentation-1 at its
    write time, D-148), `st-5` (the first real consumer decides
-   — the res-1 sink shape now concrete) and `debt-1` (the flood
-   debt's economy arm over the res-1 substrate — OPENED iter-161
-   on the owner's routing call, the third exposure + the lifecycle
-   proof its evidence base; its §9 claim packet at build time).
+   — the res-1 sink shape now concrete). debt-1 CONSUMED iter-162
+   (the flood debt's economy arm landed in province_pack; its
+   discrete-event residues — the paper's fall, the clearance lump,
+   the punt's purchase, the player-scaled doors — a future row's
+   own call, never auto-candidates).
    For the SoW promise
    debates the intake-27 sacrifice protocol (D-173) and the
    intake-28 combination fence (D-174). The research posture
@@ -629,18 +648,20 @@ the branch-protection recipe stays the owner's settings step).**
    artery; W4's first move RUN iter-160 — the bounded experiment
    CONFIRMED at the split band, the transfer KEPT; the embodiment
    options LANDED iter-161 — the pole's recognition token + theft
-   flag, the lever chain test-pinned; the debt's economy arm ROUTED
-   (debt-1, the owner's call); the next world-track call: the next
-   meso unit — candidates 3/4 (the practitioner water-governance
-   node, the constructed kinship edge), each carrying its named
-   falsifier).
+   flag, the lever chain test-pinned; the debt's economy arm LANDED
+   iter-162 (debt-1 — the accounts + the fold's two flows + the
+   reckoning story beat, the crossing household's arithmetic live at
+   the year band); the next world-track call: the next meso unit —
+   candidates 3/4 (the practitioner water-governance node, the
+   constructed kinship edge), each carrying its named falsifier).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input —
    postponed until the owner's call), a world-track call (W4 the
    meso expansion — the setting's own frontier: the next meso unit
    from candidates 3/4, water governance or constructed kinship),
-   the fresh `debt-1` row (the flood debt's economy arm — opened,
-   awaiting the owner's build pick), or a fresh call
+   the debt-1 residues (the discrete-event doors the arming left
+   un-armed — the paper's fall, the clearance lump, the punt's
+   purchase — each a future row's own call), or a fresh call
    (the license's `pyproject.toml` field a one-line option if
    wanted — D-183's recorded follow-up).

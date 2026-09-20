@@ -87,6 +87,7 @@
     "thaw_turns": "Day {day}: the thaw — the weir runs loud with meltwater, the road soft to the ford.",
     "high_water_rises": "Day {day}: the river rises — the lower fords drown, the punt men charge double.",
     "long_light_turns": "Day {day}: the long light — the crofts green to the moor's edge, the road dry and fast.",
-    "first_frost_turns": "Day {day}: first frost on the weir stair — the road hardens, the trade slows."
+    "first_frost_turns": "Day {day}: first frost on the weir stair — the road hardens, the trade slows.",
+    "account_sourced": "{target} comes by {amount} {kind} at the year's reckoning."
   }
 }
