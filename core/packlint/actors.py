@@ -14,7 +14,12 @@ from core.intent import (
     TRAIT_TEST,
 )
 from core.packlint.helpers import _NOUNS, PackError, _ids, _is_int, _require
-from core.packlint.shared import lint_account_cond, lint_echo_cond, lint_trait_cond
+from core.packlint.shared import (
+    lint_account_cond,
+    lint_direct_keys,
+    lint_echo_cond,
+    lint_trait_cond,
+)
 
 
 class ActorsLint:
@@ -86,6 +91,10 @@ class ActorsLint:
                     cond.get("test") in PRECONDITION_TESTS,
                     f"{where}: unknown precondition test {cond.get('test')!r}",
                 )
+                # KI#89 (closed iter-169): the directly-indexed key rows,
+                # the shared lint's beat-gate site — the same cond shape
+                # refused identically wherever it is declared.
+                lint_direct_keys(cond, where)
                 if cond.get("test") == ECHO_TEST:
                     lint_echo_cond(self._data, cond, where)
                 if cond.get("test") == TRAIT_TEST:
@@ -214,6 +223,9 @@ class ActorsLint:
                     cond.get("test") in PRECONDITION_TESTS,
                     f"{where}: unknown precondition test {cond.get('test')!r}",
                 )
+                # KI#89 (closed iter-169): the directly-indexed key rows,
+                # the shared lint's faction-gate site.
+                lint_direct_keys(cond, where)
                 if cond.get("test") == ECHO_TEST:
                     lint_echo_cond(self._data, cond, where)
                 if cond.get("test") == TRAIT_TEST:

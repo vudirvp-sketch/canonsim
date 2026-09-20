@@ -192,7 +192,8 @@ silent ignore):
 | `gate` | a non-empty list of `{prop, comparator, value}` (optional) | the quantified predicate — per-entity conditions evaluated with the CANDIDATE as the argument (the spec carries NO entity field; `comparator` is the predicates.py vocabulary; a missing prop answers False under every comparator — §3's blanket fail-closed, no gate-level negation so `not_equals` means present AND ≠ X; a null value is lint-refused; a bool never equals a number) |
 | `event` | a templates event type (required) | the reaction event |
 | `state` | `{prop, add}` — add a non-zero int (required) | the scoped state change: one clamped numeric delta per passing candidate (`relations.scale`, the one numeric scale — the alarm precedent); a candidate without a numeric home is dropped (the suspicion law); a clamped no-op is dropped (KI#13) |
-| `actor` / `target` | `world` \| `source_actor` \| `source_target` (optional; defaults actor `world`, target `source_target`) | the closed one-hop resolution vocabulary — the donor's this/from chain collapsed to three names |
+| `actor` | `world` \| `source_actor` (optional; default `world`) | the actor-side declaration vocabulary — narrower than the resolution triple: the reaction event's actor is a schema-required string (EVENT_SCHEMA), so `source_target` (which resolves to None on a targetless source) is lint-refused, KI#88 closed iter-169 |
+| `target` | `world` \| `source_actor` \| `source_target` (optional; default `source_target`) | the closed one-hop resolution vocabulary — the donor's this/from chain collapsed to three names; the optional target field takes the targetless None honestly |
 | `notes` | prose (optional) | pack documentation |
 
 The reaction body is the **alarm shape**: ONE event per entry, t =

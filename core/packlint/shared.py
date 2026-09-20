@@ -7,7 +7,7 @@ family, hoisted here as plain functions over the loaded pack data."""
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, Final
 
 from core.intent import AUDIENCES, KNOWLEDGE_SLOTS, PRESENT_SITES
 from core.packlint.helpers import _EXCEPT_TOKENS, _SLOT, _is_int, _require
@@ -213,3 +213,52 @@ def lint_account_cond(
         f"{where}: precondition account_at_least value must be a "
         "non-negative integer",
     )
+
+
+_DIRECT_INDEXED_KEYS: Final[Mapping[str, Mapping[str, str]]] = {
+    "carries_flagged": {"flag": "string"},
+    "flagged_accessible": {"flag": "string"},
+    "field_in": {"field": "string", "values": "list"},
+    "field_nonempty": {"field": "string"},
+    "has_field": {"field": "string"},
+}
+"""The directly-indexed cond keys (KI#89, closed iter-169): the five
+record-reading tests whose parameters the door subscripts (`cond[key]`,
+never `.get`) — the key is a lint-required parameter, presence plus the
+type the door consumes. The lint family's single table: the same cond
+shape is refused identically wherever a `requires` list is declared."""
+
+
+def lint_direct_keys(cond: Mapping[str, Any], where: str) -> None:
+    """The directly-indexed key rows (KI#89, closed iter-169), shared by
+    the action, urgency, faction and texture `requires` lints (the
+    lint_echo_cond family): the five record-reading tests read their
+    named parameters by subscript — a cond that loads without one
+    KeyErrors mid-run at the door or the beat gate (the iter-45
+    leverage `who` family: refuse at load what would crash at
+    completion). Non-emptiness rides the same row: an empty flag or
+    field name, or an empty `values` set, is dead vocabulary (the gate
+    can never pass — the echo bounds family's own law)."""
+    test = cond.get("test")
+    if not isinstance(test, str):
+        return  # the caller's unknown-test row owns the refusal
+    spec = _DIRECT_INDEXED_KEYS.get(test)
+    if spec is None:
+        return
+    for key, kind in spec.items():
+        value = cond.get(key)
+        if kind == "string":
+            _require(
+                isinstance(value, str) and value,
+                f"{where}: precondition {test} requires '{key}' — a "
+                f"non-empty string the door indexes directly (a missing "
+                f"or empty key is a load-time refusal, never a mid-run "
+                f"KeyError)",
+            )
+        else:
+            _require(
+                isinstance(value, list) and value,
+                f"{where}: precondition {test} requires '{key}' — a "
+                f"non-empty list (an empty one is dead vocabulary: the "
+                f"gate can never pass)",
+            )

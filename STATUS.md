@@ -1,43 +1,48 @@
-Iteration: iter-168 (`iter-168-qa1` — the type-discipline audit, the
-owner's «там еще была задача qy 1 что ли, связанная с проверкой кода»
-chat call naming the standing row over STATUS's Next step): mypy
---strict on `core/` taken 207 → 0 across 36 files at ZERO runtime
-behavior change — the root-fix audit, never annotation churn: the
-`_require(condition: object)` contract; the `Importance`/`Fidelity`
-Literal funnels (pack_importance/_importance, decay/acquisition_
-fidelity — ~24 sites through two funnels); the RetrievalIndex slot
-annotations; the Mapping read-only widening (11 intent.py params +
-fold/resolvers unified under fold's dict `Projection`, the write
-owner); `_is_int`/`_is_number` → TypeGuard (the lint predicates'
-narrowing contract); the Iterable record bridges in `Pack.entity`/
-`action`; the assert-after-require narrowings across the packlint
-family (the loud refusals stay the load-time contract, the asserts the
-visible narrowing); the shadowing kills (metrics tag/hook, echo
-spec/token_spec, admission key/pair, worldgen bound/bound_slots);
-log.py's first-branch slot annotations. TWO REAL HOLES found and made
-loud (the audit's yield beyond typing): KI#88 (the source_target
-actor null into a schema-required string + the target-sourced
-defender's silent roll — asserts landed, the lint-side vocabulary
-closure the open residue) and KI#89 (the door's directly-indexed
-cond keys `flag`/`field`/`values` not load-linted — the iter-45
-leverage `who` family, the fix routed to the backlog). The tool
-stays OPTIONAL (D-031's framing unchanged — mypy in no dev deps and
-no CI row; enforcement is the owner's call class).
+Iteration: iter-169 (`iter-169-qa2` — the KI#88/#89 lint-side
+closures, the owner's «проработай открытые в прошлой итерации ki и все
+связанное, нужно доделать все с технической частью» call over the two
+holes qa-1 opened and routed): BOTH KIs CLOSED at load, zero runtime
+behavior change on well-formed packs. KI#89 — ONE shared lint row
+(`lint_direct_keys` in packlint/shared.py, the lint_echo_cond family)
+serving every `requires` declaration site (the action canon, the
+texture block, the urgency beat gate, the faction gate): the five
+record-reading tests' directly-indexed keys (flag/field/values on
+carries_flagged, flagged_accessible, field_in, field_nonempty,
+has_field) refused at load for presence + type + non-emptiness — the
+iter-45 leverage `who` precedent generalized to its whole family; a
+malformed pack KeyErrors mid-run no more. KI#88's first arm — the
+on_action ACTOR-side vocabulary split (ACTOR_KEYS = world |
+source_actor, owned by core/onaction.py beside the resolver; the
+reaction event's actor is a schema-required string, `source_target`
+drafts None on a targetless source — refused with the rationale, the
+runtime assert stays the programmatic backstop). KI#88's second arm —
+the target-sourced check row: the action must pin the intent's target
+with a target-noun precondition, the row reading the door's OWN
+`needs_target` predicate (extracted from validate_shape into
+core/intent.py — one source, two readers: the door and the lint agree
+by construction, never by restatement; the texture-block twin stays
+the stricter row). The `flag` test itself (unused by every committed
+pack) stays outside the row set exactly as the KI scoped it — its
+twin hole is the owner's call, recorded not routed.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1885 passed + 1 skipped, ruff clean, mypy --strict `core/` 0 errors
-(Python 3.12.14, the env pin; verified at BASE_COMMIT c82c7ca BEFORE
-working — 1885+1 green, ruff clean, identical to the iter-167 pin —
-and re-verified after with the diff in place: 1885+1, ruff clean, the
-golden fixtures byte-untouched, zero failures) ·
+1900 passed + 1 skipped, ruff clean, mypy --strict `core/` 0 errors
+(Python 3.12.14, the env pin; verified at BASE_COMMIT e15a091 BEFORE
+working — 1885+1 green, ruff clean, the iter-168 pin re-confirmed —
+and re-verified after with the diff in place: 1900+1, ruff clean,
+mypy 0, the golden fixtures byte-untouched, the five committed packs
+loading) ·
 Date: 2026-09-21 ·
-Scope: 29 `core/` files (the annotation audit — over the §2.3 soft
-limit, a repo-wide strict pass objectively requires it, noted per the
-protocol) + `STATUS.md` (this re-pin + the two KIs) + `docs/TASKS.md`
-(the qa-1 row collapse + the ledger line) + `worklog.md` (this
-entry). The prior iteration's record: iter-167 (stepread). The detail
-lives in the worklog + git.
+Scope: 6 core files (shared.py the lint row + its four-site wiring in
+actions/actors, onaction.py the vocabulary split, intent.py the
+needs_target extraction, actions.py the check row + the wiring,
+story.py the actor row) + tests/test_qa2.py (+15, the §9 claim
+packet) + docs/DIRECTOR_SPEC.md §3c + docs/INTENT_SCHEMA.md §3/§5
+(the contract owners synced) + `STATUS.md` (this re-pin + the KI
+closures + the KI#87 tombstone's mandatory cleanup) + `docs/TASKS.md`
+(the ledger line) + `worklog.md` (this entry). The prior iteration's
+record: iter-168 (qa1). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -61,14 +66,8 @@ lives in the worklog + git.
 
 ## Active KIs
 
-- KI#88 · `actor: source_target` can draft a null actor into the schema-required string field, and a target-sourced defender rolls silently against the base skill — loud asserts landed with qa-1 (iter-168); the lint-side vocabulary closure is the open residue · opened 2026-09-21.
-- KI#89 · the door's directly-indexed cond keys (`flag`/`field`/`values` on carries_flagged, flagged_accessible, field_in, field_nonempty, has_field) are not load-linted for presence — a malformed pack loads and KeyErrors mid-run (the iter-45 leverage `who` family); fix routed, not applied in qa-1's scope · opened 2026-09-21.
-  (KI#87 — the phantom punt pole — CLOSED iter-157: the pole commits
-  with the household's second hand, the carrier binding live. The
-  closed-KI tombstone notes — KI#55..KI#86, every one deleted per
-  AGENTS §5 at its own iteration — were trimmed at the phase-6 gate
-  (iter-116): the lessons live in git + the FAQ's family laws, the
-  pre-trim record in git history.)
+- KI#88 · CLOSED iter-169 (qa2): the lint-side closure landed — the on_action actor vocabulary narrowed to `world | source_actor` (ACTOR_KEYS, owned by core/onaction.py; the reaction event's actor is a schema-required string), and the target-sourced check row pins the intent's target via the door's own `needs_target` predicate; the runtime asserts stay the programmatic backstops.
+- KI#89 · CLOSED iter-169 (qa2): the shared `lint_direct_keys` row (the lint_echo_cond family) refuses the five record-reading tests' directly-indexed keys at every `requires` declaration site — presence + type + non-emptiness; a malformed pack KeyErrors mid-run no more.
 
 ## FAQ / Pitfalls
 
@@ -514,6 +513,36 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
+**iter-169 DONE: qa2 — the KI#88/#89 lint-side closures (the owner's
+«проработай открытые в прошлой итерации ki и все связанное, нужно
+доделать все с технической частью» call over the two holes qa-1 opened
+and routed): BOTH KIs closed at LOAD, zero runtime behavior change on
+well-formed packs (1900+1 green both ends — the +15 the §9 claim
+packet; the golden fixtures byte-untouched, the five committed packs
+loading; ruff clean, mypy --strict core/ 0). KI#89: the shared
+`lint_direct_keys` row (packlint/shared.py, the lint_echo_cond family)
+refusing the five record-reading tests' directly-indexed keys —
+flag/field/values on carries_flagged, flagged_accessible, field_in,
+field_nonempty, has_field — for presence + type + non-emptiness, wired
+into every `requires` declaration site (the action canon, the texture
+block, the urgency beat gate, the faction gate; the iter-45 leverage
+`who` precedent generalized to its whole family). KI#88's first arm:
+the on_action actor vocabulary split (ACTOR_KEYS = world |
+source_actor, owned beside the resolver in core/onaction.py — the
+reaction event's actor is a schema-required string, `source_target`
+drafts None on a targetless source; the dedicated lint row carries the
+rationale, the runtime assert stays the programmatic backstop). KI#88's
+second arm: the target-sourced check row — the action must pin the
+intent's target with a target-noun precondition, the lint reading the
+door's OWN `needs_target` predicate (extracted from validate_shape —
+one source, two readers, agreement by construction); the texture-block
+twin stays the stricter row. The `flag` test itself (unused by every
+committed pack) stays outside the row set exactly as the KI scoped it
+— its twin hole (and kind's `is`, the `with`/`axis`/`value` presence)
+is the owner's call class, recorded not routed. The natural next moves
+stay the owner's: engine-1 (the TASKS standing row's own
+recommendation — the SoW horizon's head), the world track's embodiment
+options, or another backlog row.**
 **iter-168 DONE: qa1 — the type-discipline audit (the owner's «там
 еще была задача qy 1 что ли, связанная с проверкой кода» chat call
 naming the standing row): mypy --strict on `core/` taken 207 → 0

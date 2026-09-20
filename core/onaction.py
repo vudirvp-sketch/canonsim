@@ -48,6 +48,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.pack import Pack
 
 __all__ = [
+    "ACTOR_KEYS",
     "ACTOR_TARGET_KEYS",
     "ENTRY_KEYS",
     "GATE_KEYS",
@@ -64,10 +65,20 @@ deduped, in event order (the Paradox event scope minus the implicit-
 inherited). New selectors land with their first consumer."""
 
 ACTOR_TARGET_KEYS: Final = ("world", "source_actor", "source_target")
-"""The closed actor/target resolution vocabulary: the reaction event's
-actor and target resolve from the SOURCE event (one hop, never a
-`fromfrom` chain) or to the world-event actor. Defaults: actor
-`world`, target `source_target`."""
+"""The closed actor/target RESOLUTION vocabulary (what `_resolve`
+answers): the reaction event's actor and target resolve from the SOURCE
+event (one hop, never a `fromfrom` chain) or to the world-event actor.
+Defaults: actor `world`, target `source_target`. The target side accepts
+the whole vocabulary — the target field is optional, `source_target`
+may honestly resolve to None on a targetless source."""
+
+ACTOR_KEYS: Final = ("world", "source_actor")
+"""The ACTOR-side DECLARATION vocabulary, narrower than the resolution
+vocabulary (KI#88, closed iter-169): the reaction event's actor is a
+schema-required string (EVENT_SCHEMA), so `source_target` — which
+resolves to None on a targetless source — is refused at load by the
+pack lint; the drafted-actor assert in `_reaction_draft` stays the
+runtime backstop for programmatic callers."""
 
 ENTRY_KEYS: Final = ("scope", "gate", "event", "state", "actor", "target", "notes")
 """The closed reaction-entry key set (an unknown key is a lint error,
@@ -149,11 +160,11 @@ def _reaction_draft(
     entities = set(reacting) | {WORLD}
     if target is not None:
         entities.add(target)
-    # Loud over the schema hole (KI#88's first arm): `actor: source_target`
-    # is pack-legal vocabulary, and a targetless source would draft a null
-    # actor into a schema-required string field. The loud refusal happens
-    # HERE, before the write; the lint-side closure (the actor vocabulary
-    # minus source_target) is the recorded residue.
+    # Loud over the schema hole (KI#88's first arm, closed iter-169):
+    # `actor: source_target` is refused at load (ACTOR_KEYS — the actor
+    # field is a schema-required string, and a targetless source would
+    # draft None here). The assert stays the runtime backstop for
+    # programmatic callers that bypass the pack lint.
     assert actor is not None
     return EventDraft(
         t=record.t,

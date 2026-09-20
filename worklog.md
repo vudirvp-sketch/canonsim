@@ -7,6 +7,33 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures (the
+owner's «проработай открытые в прошлой итерации ki и все связанное,
+нужно доделать все с технической частью» call): both holes qa-1 opened
+closed at LOAD, zero runtime change on well-formed packs
+- KI#89: shared `lint_direct_keys` (packlint/shared.py, the
+  lint_echo_cond family) — presence + type + non-emptiness for the five
+  record-reading tests' directly-indexed keys, wired into ALL FOUR
+  `requires` lint sites (action canon, texture block, urgencies,
+  factions; the iter-45 `who` precedent generalized to its family)
+- KI#88 arm 1: ACTOR_KEYS split in core/onaction.py (world |
+  source_actor; the reaction actor is schema-required) + the dedicated
+  story.py row refusing `actor: source_target` with the rationale;
+  arm 2: the target-sourced check row in actions.py reading the door's
+  OWN `needs_target` predicate (extracted from validate_shape into
+  core/intent.py — one source, two readers); the runtime asserts stay
+  the backstops
+- tests/test_qa2.py +15 (the §9 claim packet: the five presence rows
+  parametrized, the type/dead arms, the three site arms, both KI#88
+  arms + the negative load arm); docs: DIRECTOR_SPEC §3c (the actor
+  row split), INTENT_SCHEMA §3/§5 (the presence row + the check row);
+  12 paths, over the §2.3 soft limit (the two-KI closure + its packet)
+- verified BEFORE at BASE_COMMIT e15a091 (1885+1 green, ruff clean,
+  the iter-168 pin re-confirmed) and re-verified after: 1900+1 green,
+  ruff clean, mypy --strict core/ 0, goldens byte-untouched, the five
+  committed packs loading; the `flag` test's twin hole recorded, not
+  routed (the owner's call class); iter-159 evicted per the cap
+---
 iter-168 · 2026-09-21 · qa1 — the owner-called type-discipline audit
 (the owner's «там еще была задача qy 1 что ли, связанная с проверкой
 кода» chat call naming the standing row over STATUS's Next step):
@@ -240,26 +267,3 @@ the full operator stack on existing substrate only
 - verified BEFORE working at BASE_COMMIT abc4f93 (1852+1 green, ruff clean —
   the pin re-confirmed) and re-verified after: 1852+1 green, ruff clean;
   zero code, zero corpus price; iter-150 evicted per the cap
----
-iter-159 · 2026-09-20 · intake32 — the Vantiel research handoff routed
-(the owner's «обработай … реши что перенять, адаптировать или привнести …
-куда определить … или создать новую в референсах … подключи междоменную
-трансплантацию» call over the uploaded `Vantiel_Canonsim_Research_Handoff_v2.md`;
-D-175's admission rule satisfied — presentation-1 the named open row, the
-real-consumer-vs-brief/retrieval comparison the falsifier): PARTIALLY
-CONFIRMED — a SEPARATIONS donor, never subsystems (the handoff's substrate
-map re-verified claim-by-claim at HEAD 44151f1)
-- adopted: the source record docs/ref/vantiel.md (ref-22 + the
-  REFERENCES/REFERENCES_DEEP/NAV wiring) + the presentation-1 consult
-  material (the re-expansion law + the staged-interpretation sketch,
-  parked behind the owner gate, the intake-30 visual-card precedent);
-  cross-domain notes in the ref file: the D-105 deadband family the
-  superior own-form of Vantiel's relationship inertia, magnitude-dependent
-  emotional persistence already emergent in the echo's linear form
-- refused: every subsystem donor (the handoff's reject list, binding), a
-  docs/worldbuild/ document, the generic propagation graph, the hysteresis
-  proposal, the ripple-audit question (each with its named falsifier);
-  D-190 compound-merged (DECISIONS stays at 30); 1852+1 green + ruff clean
-  both ends at BASE 44151f1 (env pin 3.12.14); 9 paths doc-only (the
-  intake routing + the references wiring + the doc quintet, the iter-158
-  precedent); iter-149 evicted per the cap

@@ -10,7 +10,7 @@ from core.director import ARC_KEYS, CHANNEL_INPUTS
 from core.echo import ECHO_BLOCK_KEYS, ECHO_TOKEN_KEYS
 from core.intent import LEVERAGE_TEST
 from core.leverage import SECRETS_BLOCK_KEYS, TOKEN_KEYS
-from core.onaction import ACTOR_TARGET_KEYS, ENTRY_KEYS, GATE_KEYS, SCOPES, STATE_KEYS
+from core.onaction import ACTOR_KEYS, ACTOR_TARGET_KEYS, ENTRY_KEYS, GATE_KEYS, SCOPES, STATE_KEYS
 from core.packlint.helpers import (
     PackError,
     _ids,
@@ -507,10 +507,23 @@ class StoryLint:
                         "absence is the world's answer (False, "
                         "DIRECTOR_SPEC §3), never a pack value"
                     )
-        for key in ("actor", "target"):
-            if key in entry and entry[key] not in ACTOR_TARGET_KEYS:
+        # KI#88's first arm (closed iter-169): the reaction event's actor
+        # is a schema-required string, so the targetless `source_target`
+        # branch is refused at load — the dedicated row ahead of the
+        # vocabulary loop so the pack author gets the WHY, not just the
+        # narrowed list.
+        if entry.get("actor") == "source_target":
+            return (
+                f"{where}.actor may not be 'source_target' — the reaction "
+                "event's actor is a schema-required string and a "
+                "targetless source drafts None (KI#88); use 'world' or "
+                "'source_actor', or leave the key unset (the world "
+                "default)"
+            )
+        for key, vocabulary in (("actor", ACTOR_KEYS), ("target", ACTOR_TARGET_KEYS)):
+            if key in entry and entry[key] not in vocabulary:
                 return (
-                    f"{where}.{key} must be one of {list(ACTOR_TARGET_KEYS)} "
+                    f"{where}.{key} must be one of {list(vocabulary)} "
                     "(the source-event resolution vocabulary)"
                 )
         if "notes" in entry and not isinstance(entry.get("notes"), str):

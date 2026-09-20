@@ -16,11 +16,13 @@ from core.intent import (
     PRECONDITION_TESTS,
     REJECTION_EVENT,
     TRAIT_TEST,
+    needs_target,
 )
 from core.packlint.helpers import _NOUNS, _SLOT, _SNAKE_CASE, PackError, _is_int, _require
 from core.packlint.shared import (
     knowledge_entry,
     lint_account_cond,
+    lint_direct_keys,
     lint_echo_cond,
     lint_trait_cond,
 )
@@ -70,6 +72,7 @@ class ActionsLint:
                 cond.get("test") in PRECONDITION_TESTS,
                 f"{where}: unknown precondition test {cond.get('test')!r}",
             )
+            lint_direct_keys(cond, where)
             if cond.get("test") == ECHO_TEST:
                 lint_echo_cond(self._data, cond, where)
             if cond.get("test") == TRAIT_TEST:
@@ -172,11 +175,38 @@ class ActionsLint:
                     isinstance(check.get("difficulty"), int),
                     f"action {intent}: check difficulty must be an integer",
                 )
+                # KI#88's second arm (closed iter-169): a target-sourced
+                # defender builds its total from the intent's target — the
+                # door demands one only when a precondition references
+                # the noun (needs_target, the door's own predicate). A
+                # targetless intent would reach the check and roll
+                # against the base skill (the silent nonsense roll);
+                # refuse at load what the assert would refuse mid-run.
+                # The texture-block row is the stricter twin: the texture
+                # path replaces the canon requires and carries no target
+                # at all, so it refuses the combination outright.
+                if checks["kinds"][check["kind"]].get(
+                    "defender_source"
+                ) == "target":
+                    _require(
+                        needs_target(action),
+                        f"action {intent}: check kind {check['kind']!r} "
+                        "defends from the target — the action must pin "
+                        "the intent's target with a target-noun "
+                        "precondition (the door demands a target only "
+                        "then; without the pin a targetless intent would "
+                        "roll against the base skill, KI#88)",
+                    )
             for cond in action.get("requires", ()):
                 _require(
                     cond.get("test") in PRECONDITION_TESTS,
                     f"action {intent}: unknown precondition test {cond.get('test')!r}",
                 )
+                # KI#89 (closed iter-169): the directly-indexed key rows —
+                # the five record-reading tests subscript their named
+                # parameters, so a missing key is refused HERE, at load
+                # (the iter-45 leverage `who` family's shared twin).
+                lint_direct_keys(cond, f"action {intent}")
                 # iter-45 (social-1b): the leverage test's `who` is
                 # mandatory — a missing key would KeyError mid-run at the
                 # door (the carried_by family, refused at load instead).

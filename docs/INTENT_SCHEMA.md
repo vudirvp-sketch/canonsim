@@ -50,7 +50,12 @@ effect until then.
 `actions.json` `requires`: a list of structured conditions, all of which
 must hold. **No string expression language** (L10) — a closed test set,
 each with named parameters; the pack lint fails at load on an unknown
-test. A failing condition rejects the intent with
+test, and on the record-reading family (`carries_flagged`,
+`flagged_accessible`, `field_in`, `field_nonempty`, `has_field`) missing
+its named `flag`/`field`/`values` parameters — the directly-indexed keys
+the door subscripts, refused wherever a `requires` list is declared (the
+canon actions, the texture block, the urgency/faction beat gates; KI#89
+closed iter-169). A failing condition rejects the intent with
 `outcome.failed_test = "<noun>.<test>"`.
 
 | Test | Parameters | Holds when |
@@ -139,7 +144,12 @@ the substantive stream, after the OCC re-check:
   `per_10_points`, `flat` (non-zero numeric status), `flat_at_least` +
   `flat`, `flat_when` + `flat` (string statuses, e.g. attention).
 - **Defender total**: `environment` — the action's flat `difficulty` +
-  die; `target` — the target entity's defend skill + die;
+  die; `target` — the target entity's defend skill + die (an action
+  declaring a target-sourced check must pin the intent's target with a
+  target-noun precondition — the lint row reads the door's own
+  `needs_target` predicate, so a targetless intent can never reach the
+  roll; KI#88 closed iter-169; the texture-block twin refuses the
+  combination outright, the texture path carries no canon target);
   `best_in_location` — the strongest opposing npc/ambient at the actor's
   location (pack order breaks ties); **no** opponent present → the check
   is skipped (unopposed).

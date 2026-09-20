@@ -139,6 +139,27 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures (the
+  owner's «проработай открытые в прошлой итерации ki и все связанное,
+  нужно доделать все с технической частью» call over the two holes
+  qa-1 opened and routed): BOTH KIs closed at LOAD, zero runtime
+  behavior change on well-formed packs — KI#89 via the shared
+  `lint_direct_keys` row (packlint/shared.py, the lint_echo_cond
+  family; presence + type + non-emptiness for the five record-reading
+  tests' directly-indexed keys) wired into every `requires` declaration
+  site (action canon, texture block, urgency beat gate, faction gate —
+  the iter-45 leverage `who` precedent generalized to its family);
+  KI#88's first arm via the on_action actor vocabulary split (ACTOR_KEYS
+  = world | source_actor, owned in core/onaction.py; the reaction
+  event's actor is a schema-required string — `source_target` refused
+  with the rationale, the assert the backstop); KI#88's second arm via
+  the target-sourced check row reading the door's OWN `needs_target`
+  predicate (extracted from validate_shape — one source, two readers,
+  agreement by construction); tests/test_qa2.py +15 (the §9 claim
+  packet), 1900+1 green both ends, goldens byte-untouched, ruff clean,
+  mypy --strict core/ 0; the `flag` test's own twin hole (and kind's
+  `is`, the `with`/`axis`/`value` presence) recorded, not routed — the
+  owner's call class.
 - iter-168 · 2026-09-21 · qa1 — the type-discipline audit (the owner's
   «там еще была задача qy 1 что ли, связанная с проверкой кода» chat
   call naming the standing row): mypy --strict on `core/` taken 207 → 0

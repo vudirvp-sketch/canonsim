@@ -72,6 +72,7 @@ __all__ = [
     "find_flagged_carried",
     "knowers_at",
     "location_of",
+    "needs_target",
     "occ_breaking_cause",
     "pack_importance",
     "requires_for",
@@ -288,6 +289,21 @@ def requires_for(
     return list(action.get("requires", ()))
 
 
+def needs_target(action: Mapping[str, Any]) -> bool:
+    """Whether the action's canon `requires` reference the noun `target`
+    (any condition value — noun | with | who): the door then demands the
+    intent carry one (INTENT_SCHEMA §2). The single source of the
+    predicate: `validate_shape` reads it at the door, and the pack lint's
+    target-sourced check row reads it at load (KI#88's second arm, closed
+    iter-169) — the door and the lint agree by construction, never by
+    restatement."""
+    return any(
+        value == "target"
+        for cond in action.get("requires", ())
+        for value in cond.values()
+    )
+
+
 def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
     """Author errors are loud: unknown fields, missing target where the
     preconditions need one, a texture reference on a non-texture action or
@@ -313,10 +329,7 @@ def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
                 f"path, never both"
             )
         return  # the texture block's requires reference no canon target
-    needs_target = any(
-        value == "target" for cond in action.get("requires", ()) for value in cond.values()
-    )
-    if needs_target and intent.target is None:
+    if needs_target(action) and intent.target is None:
         raise RunnerError(f"{intent.kind} requires a target")
 
 
@@ -759,11 +772,12 @@ def run_check(
     source = kind["defender_source"]
     if source == "target":
         defender_id = intent.target
-        # Loud over the silent nonsense roll: a target-sourced check on a
-        # targetless intent would roll against the base skill (KI#88's
-        # second arm). The door raises first on every committed path (the
-        # target-referencing preconditions); the lint-side closure is the
-        # recorded residue.
+        # Loud over the silent nonsense roll (KI#88's second arm, closed
+        # iter-169): a target-sourced check on a targetless intent would
+        # roll against the base skill. The lint now requires the action
+        # to pin the target with a target-noun precondition (needs_target
+        # — the door's own predicate), so the door raises first on every
+        # committed path; the assert stays the runtime backstop.
         assert defender_id is not None
         defender = skill_total(pack, projection, defender_id, kind["defend"])
     elif source == "best_in_location":
