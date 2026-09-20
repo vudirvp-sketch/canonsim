@@ -1,48 +1,49 @@
-Iteration: iter-169 (`iter-169-qa2` — the KI#88/#89 lint-side
-closures, the owner's «проработай открытые в прошлой итерации ki и все
-связанное, нужно доделать все с технической частью» call over the two
-holes qa-1 opened and routed): BOTH KIs CLOSED at load, zero runtime
-behavior change on well-formed packs. KI#89 — ONE shared lint row
-(`lint_direct_keys` in packlint/shared.py, the lint_echo_cond family)
-serving every `requires` declaration site (the action canon, the
-texture block, the urgency beat gate, the faction gate): the five
-record-reading tests' directly-indexed keys (flag/field/values on
-carries_flagged, flagged_accessible, field_in, field_nonempty,
-has_field) refused at load for presence + type + non-emptiness — the
-iter-45 leverage `who` precedent generalized to its whole family; a
-malformed pack KeyErrors mid-run no more. KI#88's first arm — the
-on_action ACTOR-side vocabulary split (ACTOR_KEYS = world |
-source_actor, owned by core/onaction.py beside the resolver; the
-reaction event's actor is a schema-required string, `source_target`
-drafts None on a targetless source — refused with the rationale, the
-runtime assert stays the programmatic backstop). KI#88's second arm —
-the target-sourced check row: the action must pin the intent's target
-with a target-noun precondition, the row reading the door's OWN
-`needs_target` predicate (extracted from validate_shape into
-core/intent.py — one source, two readers: the door and the lint agree
-by construction, never by restatement; the texture-block twin stays
-the stricter row). The `flag` test itself (unused by every committed
-pack) stays outside the row set exactly as the KI scoped it — its
-twin hole is the owner's call, recorded not routed.
+Iteration: iter-170 (`iter-170-engine1` — the runtime inference engine
+DECIDED, the owner's real-backend convening call: llama.cpp installed
++ the RTX 3080 Ti station + the three-model set (E4B / 9B / 27B
+Q4_K_M) + the real `llama-server` test evidence, the disposition and
+the session research both riding the call): llama-server behind an
+EXPLICIT ADAPTER + GBNF — D-192 the decision row, CONTRACTS §4 the
+build contract (the D-177 pattern, the acceptance-boundary revision
+the disposition itself routes: semantic typed policies never raw
+llama.cpp flags — the `-ngl 99` fit-refusal and the `-np`-halved
+per-slot context the measured reasons; the three reproducibility
+tiers; reasoning an engine/request concern — the thinking-consumes-
+`max_tokens` fact; structured output ≠ validation — the doors' gates
+stay; the client's home pinned — the runner outside the repo, repo-
+side engine code periphery-only, INV-4 lifting only at the build's own
+iteration; the non-goals — framework inflation refused), TECH_NOTES
+§2 refreshed to the measured station + §13 the evidence record (every
+cited fact verified against the owner's raw logs: ~113–126 tok/s at
+the E4B band, 94.5 at 9B, the 27B hybrid 12.95/4.51 with placement
+not exposed; the schema-constrained JSON holding over a contradictory
+prompt with thinking off; streaming + terminal truncation signals;
+operational cancellation + slot release; the observation surface
+/health /props /slots; model warnings as diagnostics; the deployment
+defaults never engine semantics). The remaining measurement is the
+experiment's — the `{3–8B, GBNF}` arm + the four new arms (one-vs-
+two-model economics, seeded-local determinism, the GBNF latency
+penalty, mode-A prose at the weak arm), owner-convened; presentation-
+1's evidence base gains §13. Doc-only: zero engine code, INV-4
+UNCHANGED.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1900 passed + 1 skipped, ruff clean, mypy --strict `core/` 0 errors
-(Python 3.12.14, the env pin; verified at BASE_COMMIT e15a091 BEFORE
-working — 1885+1 green, ruff clean, the iter-168 pin re-confirmed —
-and re-verified after with the diff in place: 1900+1, ruff clean,
-mypy 0, the golden fixtures byte-untouched, the five committed packs
-loading) ·
+1900 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 7618714 BEFORE working — 1900+1 green, ruff
+clean, the iter-169 pin re-confirmed — and re-verified after with the
+diff in place: 1900+1, ruff clean, doc-only, zero test change, the
+golden fixtures byte-untouched) ·
 Date: 2026-09-21 ·
-Scope: 6 core files (shared.py the lint row + its four-site wiring in
-actions/actors, onaction.py the vocabulary split, intent.py the
-needs_target extraction, actions.py the check row + the wiring,
-story.py the actor row) + tests/test_qa2.py (+15, the §9 claim
-packet) + docs/DIRECTOR_SPEC.md §3c + docs/INTENT_SCHEMA.md §3/§5
-(the contract owners synced) + `STATUS.md` (this re-pin + the KI
-closures + the KI#87 tombstone's mandatory cleanup) + `docs/TASKS.md`
-(the ledger line) + `worklog.md` (this entry). The prior iteration's
-record: iter-168 (qa1). The detail lives in the worklog + git.
+Scope: docs/DECISIONS.md (D-192; 31 rows — one over the ≤30 cap,
+collapses at the owner's next gate call) + docs/CONTRACTS.md (§4 the
+engine-1 build contract) + docs/TECH_NOTES.md (§2 the measured-station
+refresh + §13 the evidence record; 854 lines — over the 600 docs cap,
+the pre-existing state + pure measured substance, the §6.1 law) +
+docs/TASKS.md (the engine-1 row DECIDED + presentation-1's evidence
+base + the ledger line) + `STATUS.md` (this re-pin) + `worklog.md`
+(this entry). The prior iteration's record: iter-169 (qa2). The detail
+lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -513,6 +514,38 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
+**iter-170 DONE: engine-1 — the runtime inference engine DECIDED (the
+owner's real-backend convening call: llama.cpp installed + the RTX
+3080 Ti station + the three-model set E4B/9B/27B Q4_K_M + the real
+`llama-server` test evidence — the disposition
+`engine-1_real_backend_evidence_and_disposition.md` and the session
+research both riding the call, both outside the repo per the
+Vantiel-handoff precedent): llama-server behind an EXPLICIT ADAPTER +
+GBNF, the file-contract frame (D-055) the insertion point — the
+doors' gates run on the reply document, engine-agnostic by
+construction. D-192 the decision; CONTRACTS §4 the build contract
+(the D-177 pattern — the acceptance-boundary revision the disposition
+itself routes: semantic typed policies never raw flags, the three
+reproducibility tiers, reasoning an engine/request concern, structured
+output ≠ validation, the client's home + the INV-4 lift pinned to the
+build's own iteration, the non-goals — framework inflation refused);
+TECH_NOTES §2 refreshed to the measured station + §13 the evidence
+record, every cited fact verified against the owner's raw logs
+(~113–126 tok/s at the E4B band; 94.5 at 9B; the 27B hybrid
+12.95/4.51 with placement not exposed; the `-ngl 99` fit-refusal;
+the schema-constrained JSON holding over a contradictory prompt with
+thinking off; the `-np`-halved per-slot context; streaming + terminal
+truncation; operational cancellation; /health /props /slots; the
+warnings + the deployment defaults). The remaining measurement is the
+experiment's — the `{3–8B, GBNF}` arm + the four new arms (one-vs-
+two-model economics, seeded-local determinism, the GBNF latency
+penalty, mode-A prose at the weak arm), owner-convened, results
+feeding presentation-1 (its evidence base gains §13) and the
+heartbeat's first local row. Doc-only: 1900+1 green both ends, ruff
+clean, zero engine code, INV-4 UNCHANGED — the natural next moves the
+owner's: the experiment's convening call (the decision's remaining
+measurement), the build landing (the GBNF mapping + the door wiring,
+INV-4 lifting there), or another row.**
 **iter-169 DONE: qa2 — the KI#88/#89 lint-side closures (the owner's
 «проработай открытые в прошлой итерации ki и все связанное, нужно
 доделать все с технической частью» call over the two holes qa-1 opened
@@ -708,13 +741,15 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    decides, TASKS owns composition, never order; each build row's
    verification plan rides TEST_PLAN §9's claim packet):** with
    ci-1/roads-1/res-1/since-1/pack-1/pack-4/companion-1+tune-3
-   consumed, the session's RECOMMENDED next call (intake-29's readiness
-   order, never the pick) is `engine-1` (+ `presentation-1` its natural
-   pair — the SoW horizon's own head: the mediator specs are written,
-   the consult material named (the intake-22 modularity card, the
-   intake-23 world-structure card, the intake-21 observability card),
-   the LLM boundary lifts only on this call, INV-4/D-055) — POSTPONED
-   by the owner's iter-157 directive until called. The remaining
+   consumed and `engine-1` DECIDED (iter-170, D-192 — the build
+   boundary CONTRACTS §4), the session's RECOMMENDED next call
+   (intake-29's readiness order, never the pick) is the `{3–8B,
+   GBNF}` experiment's convening (the decision's remaining
+   measurement — TEST_PLAN §8/§8.5's gap rows + the contract's four
+   new arms, the Rule-9 runner outside the repo) or the build
+   landing itself (the GBNF mapping + the door wiring; INV-4 lifts
+   there) — `presentation-1` follows from the experiment's results
+   (D-022/D-148). The remaining
    standing rows — REVALIDATED iter-150 (D-184; the per-row state lives
    in TASKS' Standing rows):
    `parse-2` (buttons wait on a frontend consumer, multi-intent on
@@ -765,9 +800,10 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    are facts.
 2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
    gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
-   decision input), the bg-7 prose families skipped in the bg-8
-   heartbeat, the per-family latency distribution. New track-B ideas
-   enter the backlog on the owner's call only.
+   remaining measurement, the experiment convened at the owner's call;
+   the four new arms pinned CONTRACTS §4.3), the bg-7 prose families
+   skipped in the bg-8 heartbeat, the per-family latency distribution.
+   New track-B ideas enter the backlog on the owner's call only.
 3. **The SoW horizon (ROADMAP §6) and the world track
    (`docs/worldbuild/`, D-186) are the standing frames** now that
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
@@ -798,9 +834,9 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    open); or the camp's meso half (the charcoal debt — the causal
    map's named-not-authored row).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (engine-1 + presentation-1
-   — the {3–8B, GBNF} arm on owner hardware the decision input —
-   postponed until the owner's call), a world-track call (the
+   recommended remainder of the sequence (the `{3–8B, GBNF}`
+   experiment — engine-1's remaining measurement, then the build
+   landing + presentation-1 from its results), a world-track call (the
    embodiment options of either authored addition — the step
    bench's remaining two or the winter kin's three — the owner's
    call class, the pole's iter-161 precedent; or W5's
@@ -813,7 +849,6 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    streak (iter-164/165 world-track + iter-166 intake33) is BROKEN:
    iter-167 landed the embodiment call on this session's fresh owner
    continuation (the read_stair hinge, code-band, the pole's iter-161
-   precedent) — the next authored-band move still needs a fresh owner
-   call; the embodiment options (the step bench's remaining two, the
-   winter kin's three) remain the natural next calls of the same
-   class.
+   precedent); iter-170 is doc-only BY ITS OWN NATURE (the decision +
+   the contract + the evidence rows — the code band returns at the
+   experiment/build calls).

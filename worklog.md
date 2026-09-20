@@ -7,6 +7,39 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-170 · 2026-09-21 · engine-1 — the runtime inference engine
+DECIDED (the owner's real-backend convening call: llama.cpp + the RTX
+3080 Ti station + the three-model set + the real `llama-server` test
+evidence; the disposition + the session research both riding the call)
+- D-192 (DECISIONS): llama-server behind an explicit adapter + GBNF,
+  the file-contract frame (D-055) the insertion point; CONTRACTS §4
+  the build contract (the D-177 pattern): D1–D8 the pinned decisions
+  (semantic policies never raw flags; the reproducibility tiers;
+  reasoning engine-side; structured output ≠ validation; the client's
+  home + the INV-4 lift pinned to the build's own iteration; the
+  non-equivalences; the non-goals), I1–I6 the invariants, §4.3 the
+  falsifier (zero gate edits + the honesty floor) + the experiment
+  design (the {3–8B, GBNF} gap rows + the FOUR new arms: one-vs-two-
+  model, seeded-local determinism, the GBNF latency penalty, mode-A
+  at the weak arm)
+- TECH_NOTES §2 refreshed to the measured station + §13 the evidence
+  record — every cited fact verified against the owner's raw logs
+  (113–126 tok/s E4B, 94.5 9B, 27B hybrid 12.95/4.51, the -ngl
+  fit-refusal, the thinking-consumed budget, the -np ctx halving,
+  streaming/truncation, cancellation, /health /props /slots,
+  warnings, deployment defaults); TASKS: the engine-1 row DECIDED +
+  presentation-1's evidence base §10/§11/§13 + the ledger line;
+  STATUS re-pin; 6 paths, doc-only — over the §2.3 soft limit (the
+  decision + contract + evidence rows, the intake-31/32 precedent)
+- caps: DECISIONS 31 rows (one over ≤30, collapses at the owner's
+  next gate call, D-034/D-185); TECH_NOTES 854 lines (over the 600
+  docs cap — the pre-existing 773 + pure measured substance, §6.1);
+  TASKS 1205 (the pre-existing over-cap 1180 + the law-required
+  ledger line + the row rewrite, §6.1's standing state); verified
+  BEFORE at BASE_COMMIT 7618714 (1900+1 green, ruff clean —
+  the iter-169 pin re-confirmed) and re-verified after: 1900+1 green,
+  ruff clean, zero test change; iter-160 evicted per the cap
+---
 iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures (the
 owner's «проработай открытые в прошлой итерации ki и все связанное,
 нужно доделать все с технической частью» call): both holes qa-1 opened
@@ -247,23 +280,4 @@ province_pack, PURE PACK DATA, zero core (the KI#87 precedent class)
 - verified at BASE_COMMIT 26d57f7 (1852+1 green, ruff clean — the pin
   re-confirmed) and re-verified after: 1863+1 green, ruff clean; iter-151
   evicted per the cap
----
-iter-160 · 2026-09-20 · w4exp1 — the world track's W4 bounded experiment
-(the owner's «продолжай работу по world track» call — the working set's own
-first move, WORLD_WORKPLAN §6): the crossing household walked once through
-the full operator stack on existing substrate only
-- doc-only (7 paths, over the soft limit per AGENTS §2.3 — the four
-  worldbuild owners + STATUS/TASKS/worklog, the iter-155 precedent): the
-  verdict CONFIRMED at the split band, the transfer KEPT — two run-derived
-  laws into WORLD_AUTHORING §8 (the carrier-availability law, the
-  verb-gate boundary) + the ablation probe into WORLD_TESTS §7 + the run
-  record §9 + the debt's lifecycle table into ANCHOR_REGION §6.1 + the
-  candidates 1/2 informed in WORKPLAN §6
-- honest residue: the debt's arithmetic the THIRD recorded exposure
-  (owner-routed per the separate-track law); the vigil-null (the elders
-  out of earshot) and the reputation-writer gap (D-006) first exposures,
-  recorded, not routed; the pole's two embodiment seeds (the recognition
-  token, the steal_target flag) named, never committed
-- verified BEFORE working at BASE_COMMIT abc4f93 (1852+1 green, ruff clean —
-  the pin re-confirmed) and re-verified after: 1852+1 green, ruff clean;
-  zero code, zero corpus price; iter-150 evicted per the cap
+

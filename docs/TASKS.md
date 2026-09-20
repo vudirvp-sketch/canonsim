@@ -36,14 +36,22 @@ claim packet)
 > a second queue; a world-authoring need for engine capability lands
 > HERE as a standing row on the owner's call.
 
-- `engine-1` — the runtime inference engine decision (llama.cpp + GBNF;
-  TECH_NOTES §1): the recommended next call (STATUS Next step; intake-29's
-  readiness order, never the pick) — the SoW horizon's own head: the
-  mediator specs written, the consult material named (the intake-22
-  modularity card, the intake-23 world-structure card, the intake-21
-  observability card), the LLM boundary (INV-4/D-055) lifts only on this
-  call. Unlocked by the phase-1 gate; the dev-time external parser carried
-  phase 2 to its gate PASS (iter-35) and carries mode C until then.
+- `engine-1` — DECIDED (iter-170, D-192, the owner's real-backend
+  convening call — llama.cpp installed, the RTX 3080 Ti station, the
+  three-model set, the real `llama-server` tests; TECH_NOTES §13 the
+  evidence record): llama-server behind an EXPLICIT ADAPTER + GBNF, the
+  file-contract frame (D-055) the insertion point, semantic typed
+  policies never raw flags. The landing's boundary: CONTRACTS §4 (the
+  D-177 pattern — the acceptance boundary, the non-goals, the
+  experiment design incl. the four new arms). Remaining moves, both
+  owner-gated: (a) the `{3–8B, GBNF}` experiment (TEST_PLAN §8/§8.5's
+  gap rows + CONTRACTS §4.3's arms; the Rule-9 runner outside the
+  repo) — its results feed presentation-1 and the heartbeat's first
+  local row; (b) the build landing (the GBNF mapping + the door wiring
+  + the failure→ladder mapping) — INV-4 lifts there, the AGENTS §4/§8
+  edits riding it. Unlocked by the phase-1 gate; the dev-time external
+  parser carried phase 2 to its gate PASS (iter-35) and carries mode C
+  until the landing.
 - `presentation-1` — the LLM presentation contract, engine-1's
   decision-input child, never a sibling competitor (intake-12, D-148): the
   model-facing serializer spec over the STABLE brief IR (BRIEF_SPEC §7
@@ -55,7 +63,8 @@ claim packet)
   owner, never two). The spec's shape when written: a thin mapping table
   over the existing 8 blocks + `narrator_protocol` — never a second
   re-labeling vocabulary (D-024). Exit criterion: the weak-arm run on owner
-  hardware. Evidence base: TECH_NOTES §10/§11; consult material at write
+  hardware. Evidence base: TECH_NOTES §10/§11/§13 (§13 the real-backend
+  record); consult material at write
   time: the intake-30 visual-system card (phases.md §6 — the visual
   surface's parked residue: the development-order law, the fidelity
   target, the rejection table; D-187/D-174's surface ownership) + the
@@ -131,13 +140,29 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..168 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..170 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 — the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
+
+- iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED
+  (the owner's real-backend convening call: llama.cpp + the RTX 3080 Ti
+  station + the three-model set + the real test evidence, the disposition
+  and the session research both riding the call): llama-server behind an
+  explicit adapter + GBNF, the file-contract frame the insertion point —
+  D-192 the decision, CONTRACTS §4 the build contract (the D-177 pattern:
+  semantic policies never raw flags, the reproducibility tiers, the
+  non-equivalences, the non-goals, the experiment design incl. the four
+  new arms — one-vs-two-model, seeded-local determinism, the GBNF
+  latency penalty, mode-A-at-the-weak-arm), TECH_NOTES §2 refreshed +
+  §13 the evidence record (the measured facts, verified against the
+  owner's raw logs); presentation-1's evidence base gains §13; INV-4
+  UNCHANGED (lifts at the build's own iteration, CONTRACTS §4.1 D6);
+  doc-only, 1900+1 green both ends, ruff clean; the experiment + the
+  build the owner's next calls.
 
 - iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures (the
   owner's «проработай открытые в прошлой итерации ki и все связанное,

@@ -24,9 +24,17 @@ variance and cost); Go/Rust cost more tokens and vary more — supports the
 D-031 stack freeze (stdlib-only Python through phase 2; any revisit is
 gated by `perf-1` data).
 
-## 2. Hardware reality (the ~25 GB RAM scenario)
+## 2. Hardware reality (the owner's station measured 2026-09-21; §13 the evidence)
 
-- 27B Q4_K_M + Q8 KV-cache @ 8K context ≈ 22–24 GB → one model only; the
+- The owner's station (§13): RTX 3080 Ti, 12287 MiB VRAM (11100 free at
+  listing) + 32 GB RAM (owner-reported), Windows, CUDA0. The E4B/9B
+  classes fit VRAM; the 27B Q4_K_M runs hybrid — the auto-fit path loads
+  and infers (12.95 tok/s prompt / 4.51 tok/s generation on the smoke;
+  exact placement not exposed in the logs) while a forced `-ngl 99` is
+  refused by the fit logic. The one-vs-two-model economics on THIS
+  station = the experiment's arm (CONTRACTS §4.3), never a guess.
+- The 2026-08 RAM-only scenario (the no-GPU fallback, rot-flagged): 27B
+  Q4_K_M + Q8 KV-cache @ 8K context ≈ 22–24 GB → one model only; the
   parser runs on the same model through a grammar. A second model = swap =
   a dead session (turn latency 10 s → 2–3 min).
 - 14B Q6_K/Q8 ≈ 10–14 GB — the comfortable fallback for long campaigns; with
@@ -771,3 +779,76 @@ prices in seconds. The next structural surface, only if a pack ever
 needs it (measured here, not yet a decision): the noise node grids'
 (extent/step)² draws — O(extent²) at the deepest octave — and the
 states pass's O(N·capitals) join, both visible in the flat rows above.
+
+## 13. engine-1: the real-backend evidence (2026-09-21, the owner's tests)
+
+> The decision-input record for D-192; the build boundary: CONTRACTS §4.
+> Local observations on one station, not portable benchmarks; rot by
+> design (llama.cpp 0.4.1-dev moves fast — re-verify the surface before
+> the build lands). Raw logs: the owner's records, outside the repo.
+
+Environment: Windows; RTX 3080 Ti (12287 MiB VRAM, 11100 free at
+listing; 32 GB RAM owner-reported); CUDA0. llama.cpp `0.4.1-dev`
+build `11064`, commit `a894dae93`, Clang 20.1.8; `llama-server` on
+`127.0.0.1:8080`. Models: `Gemma-4-E4B-…-Q4_K_M` (the 3–8B band),
+`Qwen3.5-9B-Q4_K_M` (the band's edge — the undeclared gap between C
+3–8B and B 12–27B), `Qwen3.8-27B-…-Q4_K_M` (the §1 sweet spot).
+
+Measured:
+
+- Gemma E4B, single slot (`-c 4096`): `n_slots 1`, `n_ctx_slot 4096`,
+  `kv_unified false`; generation ~113–126 tok/s across the recorded
+  runs (the `-np 2` arm: 113.58 / 115.28 tok/s on 300-token
+  generations, both slots live concurrently).
+- `-np 2` halves the per-slot context (`n_ctx_slot 2048` at `-c 4096`):
+  the requested total context is NOT per-execution context under
+  parallelism — a concurrency×context tradeoff the adapter must own.
+- Qwen3.5-9B, single slot: ~94.5 tok/s generation (the 7-token smoke) —
+  the boundary is not Gemma-specific.
+- Qwen 27B, no forced `-ngl`: loads and infers; the smoke measured
+  12.95 tok/s prompt / 4.51 tok/s generation (hybrid placement; the
+  exact GPU/CPU split is NOT exposed in the logs — never claim
+  "fully GPU-resident" or a specific offload count).
+- Qwen 27B with `-ngl 99`: `failed to fit params to free device
+  memory: n_gpu_layers already set by user to 99` — a forced layer
+  count defeats the automatic fitting; `gpu_layers` is never a generic
+  config surface (ResourcePolicy: automatic | explicit).
+- Structured output (JSON schema, `additionalProperties false`,
+  temperature 0, seed 42) on Gemma E4B: with default thinking the
+  `reasoning_content` consumed `max_tokens 64` → `finish_reason
+  length`, content empty; with `chat_template_kwargs.
+  enable_thinking=false` → schema-valid JSON, `finish_reason stop`
+  (25 completion tokens). The negative arm (a prompt demanding a
+  string `age` against the integer schema) returned the schema's type
+  — the constraint held over the contradictory prompt. Reasoning is an
+  engine/request concern, not a presentation flag. Cross-model (Qwen)
+  structured output: UNTESTED (the experiment's arm).
+- Streaming: SSE `delta.content` chunks + `[DONE]`; a long generation
+  hit the slot's 4096 context → terminal `finish_reason length`,
+  `truncated 1`, `n_tokens 4095` — the terminal signals are observable.
+- Client disconnect (Ctrl+C on a stream): the server logged the task
+  stop + slot release; `/slots` then showed `is_processing false` —
+  operational cancellation only; an application-level ack protocol is
+  NOT established (REQUESTED→ACKNOWLEDGED→COMPLETED unproven).
+- Observation surface: `/health` `{"status":"ok"}`; `/props` carries
+  model identity/path, quant, `n_ctx`, default sampling params, the
+  chat template + capability caps, modalities, build id, endpoint
+  availability; `/slots` carries per-slot identity, context, processing
+  state, task id, prompt/cache counts, request params. Slot selection
+  rides LCP similarity with cache counts (prompt cache = runtime
+  optimization, never config, never canon).
+- Model warnings are diagnostics, not noise: Gemma — the BOS-token
+  override, control-looking special tokens, an outdated-gemma4-template
+  compatibility workaround; Qwen 27B — unused `blk.64.*` tensors, and
+  the chat template's reasoning-preserve default (a token cost, off
+  via `--no-reasoning-preserve`). Loaded ≠ loaded clean.
+- Deployment defaults, never engine semantics: no API key, CORS all
+  origins, port 8080 (upstream notice: the default moves to `:9931` in
+  a future release — pin the endpoint, never assume it).
+
+Not established (the experiment/build rows, CONTRACTS §4.3):
+API-level cancellation vs a connected second client; parameter-specific
+LIVE/RELOAD/RESTART semantics; per-setting effective-state observation;
+atomic model replacement mid-runtime; the 27B auto-fit placement (only
+if a consumer must expose it); cross-model structured output; the
+minimum reproducibility manifest; seeded-local determinism.
