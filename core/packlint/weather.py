@@ -300,9 +300,10 @@ class WeatherLint:
                     "family)"
                 )
             phases = {
-                pair.get("phase")
+                pair["phase"]
                 for pair in ride_entry["cycle"]
                 if isinstance(pair, Mapping)
+                and isinstance(pair.get("phase"), str)
             }
             phase_weights = seasonal.get("weights")
             if phase_weights is None:

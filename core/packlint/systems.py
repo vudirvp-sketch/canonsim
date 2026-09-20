@@ -127,6 +127,7 @@ class SystemsLint:
                 isinstance(follow_ups, list) and follow_ups,
                 f"{where}: follow_ups must be a non-empty list",
             )
+            assert isinstance(follow_ups, list)  # the require above
             kinds: set[str] = set()
             for spec in follow_ups:
                 _require(
@@ -569,6 +570,7 @@ class SystemsLint:
             "reflection.reflections must be a non-empty object keyed by "
             "insight token",
         )
+        assert isinstance(insights, Mapping)  # the require above
         mintable = literal_knows_tokens(self._data)
         seen_members: dict[str, str] = {}  # token -> owning insight
         for insight, spec in insights.items():

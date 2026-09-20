@@ -56,7 +56,7 @@ class Clock:
             raise ValueError(f"phases cover {cursor} ticks, day is {ticks_per_day}")
 
     @classmethod
-    def from_rules(cls, time_rules: dict) -> Clock:
+    def from_rules(cls, time_rules: dict[str, Any]) -> Clock:
         """Build from the pack's `rules.json` `time` section."""
         phases = tuple(
             Phase(id=p["id"], from_tick=p["from"], to_tick=p["to"])

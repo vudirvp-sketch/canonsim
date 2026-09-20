@@ -215,7 +215,8 @@ class RunResult:
 def load_playscript(path: Path) -> dict[str, Any]:
     """Load a playscript fixture (seed + ordered intents, MVP_SCOPE §13)."""
     with path.open(encoding="utf-8") as fh:
-        return json.load(fh)
+        script: dict[str, Any] = json.load(fh)
+        return script
 
 
 class Simulator:
@@ -1046,6 +1047,7 @@ class Simulator:
         )
         for draft in result.drafts:
             location = draft.target
+            assert location is not None  # the spread emitter targets the location
             record = self._commit(
                 replace(
                     draft, cause=causes.get(location),
@@ -1107,7 +1109,7 @@ class Simulator:
         offsets are pack-declared intraday ticks repeated daily, like
         watch rotations. None when the pack declares no beats (the
         urgencies/states/director stay silent — a degenerate config)."""
-        offsets = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        offsets: list[int] = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
         if not offsets:
             return None
         day = self._clock.ticks_per_day
@@ -1123,7 +1125,7 @@ class Simulator:
         generalised — except the first beat may precede the first
         rotation (a tick-0 beat belongs to day 1)."""
         rules = self._pack.rules
-        offsets = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        offsets: list[int] = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
         if not offsets:
             return None
         day = self._clock.ticks_per_day

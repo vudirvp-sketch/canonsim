@@ -204,6 +204,7 @@ class EpistemicLint:
                 f"{where}.{key} must be a non-negative number (the "
                 "re-ranker coefficient — pack data, never a code default)",
             )
+            assert _is_number(value)  # the require above
             coefficients.append(float(value))
         _require(
             any(value > 0 for value in coefficients),

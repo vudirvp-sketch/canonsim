@@ -33,7 +33,13 @@ from typing import TYPE_CHECKING, Any, Final
 
 from core.clock import phase_of_tick
 from core.fold import Projection, apply_event, fold, present_in_order
-from core.log import EventRecord, KnowledgeRecord, StateChange
+from core.log import (
+    EventRecord,
+    Fidelity,
+    Importance,
+    KnowledgeRecord,
+    StateChange,
+)
 from core.rng import RngBank
 from core.roads import exits as exits_of
 
@@ -365,7 +371,7 @@ class _Ctx:
     def __init__(
         self,
         pack: Pack,
-        projection: Projection,
+        projection: Mapping[str, Mapping[str, Any]],
         intent: IntentData,
         facts: Sequence[Any] = (),
         echoes: Sequence[Any] = (),
@@ -393,16 +399,26 @@ class _Ctx:
             return texture_scope_target(self.pack, self.intent)
         raise RunnerError(f"unknown noun {noun!r} (actor | target | texture)")
 
+    def record(self, noun: str) -> Mapping[str, Any]:
+        """The pack record of a resolved noun — never None (the pack's
+        orphan-reference lint at load is the protection)."""
+        record = self.pack.entity(self.entity(noun))
+        assert record is not None  # the pack's orphan-reference lint (load)
+        return record
 
-def location_of(pack: Pack, projection: Projection, entity_id: str) -> str:
+
+def location_of(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str
+) -> str:
     """The location an entity is at; a location is at itself."""
     if pack.kind_of(entity_id) == "location":
         return entity_id
-    return projection[entity_id]["position"]
+    position: str = projection[entity_id]["position"]
+    return position
 
 
 def _test_kind(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    return ctx.pack.kind_of(ctx.entity(cond["noun"])) == cond["is"]
+    return bool(ctx.pack.kind_of(ctx.entity(cond["noun"])) == cond["is"])
 
 
 def _test_same_location(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
@@ -428,18 +444,15 @@ def _test_location_of(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
 
 
 def _test_flag(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    record = ctx.pack.entity(ctx.entity(cond["noun"]))
-    return bool(record.get(cond["flag"]))
+    return bool(ctx.record(cond["noun"]).get(cond["flag"]))
 
 
 def _test_field_in(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    record = ctx.pack.entity(ctx.entity(cond["noun"]))
-    return record.get(cond["field"]) in cond["values"]
+    return ctx.record(cond["noun"]).get(cond["field"]) in cond["values"]
 
 
 def _test_field_nonempty(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    record = ctx.pack.entity(ctx.entity(cond["noun"]))
-    value = record.get(cond["field"])
+    value = ctx.record(cond["noun"]).get(cond["field"])
     return isinstance(value, list) and len(value) > 0
 
 
@@ -476,7 +489,7 @@ def _test_uncarried(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
 
 
 def _test_has_field(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    return cond["field"] in ctx.pack.entity(ctx.entity(cond["noun"]))
+    return cond["field"] in ctx.record(cond["noun"])
 
 
 def _test_texture_noun(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
@@ -565,7 +578,7 @@ def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
     data — core stays layer-blind (INV-3)."""
     layer_cfg = ctx.pack.rules["transitions"][cond["layer"]]
     location = ctx.entity(cond["noun"])
-    spots = ctx.pack.entity(location).get(layer_cfg["spot_field"], [])
+    spots = ctx.record(cond["noun"]).get(layer_cfg["spot_field"], [])
     props = ctx.projection[location]
     prefix = f"{cond['layer']}."
     return any(
@@ -598,7 +611,7 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
 
 def first_failing(
     pack: Pack,
-    projection: Projection,
+    projection: Mapping[str, Mapping[str, Any]],
     intent: IntentData,
     preconditions: list[Mapping[str, Any]],
     facts: Sequence[Any] = (),
@@ -634,18 +647,20 @@ def first_failing(
 
 
 def find_flagged_carried(
-    pack: Pack, projection: Projection, holder: str, flag: str
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], holder: str, flag: str
 ) -> str | None:
     """The first item (pack order) carried by `holder` whose pack record
     carries `flag` — the steal target lookup."""
     for item in pack.entities["items"]:
         if projection[item["id"]].get("carrier") == holder and item.get(flag):
-            return item["id"]
+            item_id: str = item["id"]
+            return item_id
     return None
 
 
 def find_flagged_accessible(
-    pack: Pack, projection: Projection, entity_id: str, flag: str
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str,
+    flag: str,
 ) -> str | None:
     """The first flagged item the entity carries or that lies in its
     location — the fire-source availability lookup."""
@@ -654,9 +669,11 @@ def find_flagged_accessible(
         if not item.get(flag):
             continue
         if projection[item["id"]].get("carrier") == entity_id:
-            return item["id"]
+            found: str = item["id"]
+            return found
         if projection[item["id"]]["position"] == location:
-            return item["id"]
+            found = item["id"]
+            return found
     return None
 
 
@@ -667,18 +684,23 @@ def _modifier_value(mod: Mapping[str, Any], value: Any) -> int:
     """One status-modifier entry (rules.checks.skills.<skill>.status_modifiers):
     per_10_points | flat (nonzero numeric) | flat_at_least+flat | flat_when+flat."""
     if "per_10_points" in mod and isinstance(value, (int, float)):
-        return (value // 10) * mod["per_10_points"]
+        per_10: int = mod["per_10_points"]
+        return int(value // 10) * per_10
     if "flat_when" in mod:
-        return mod["flat"] if value == mod["flat_when"] else 0
+        when_bonus: int = mod["flat"]
+        return when_bonus if value == mod["flat_when"] else 0
     if "flat_at_least" in mod and isinstance(value, (int, float)):
-        return mod["flat"] if value >= mod["flat_at_least"] else 0
+        at_least_bonus: int = mod["flat"]
+        return at_least_bonus if value >= mod["flat_at_least"] else 0
     if "flat" in mod and isinstance(value, (int, float)) and value != 0:
-        return mod["flat"]
+        flat: int = mod["flat"]
+        return flat
     return 0
 
 
 def skill_total(
-    pack: Pack, projection: Projection, entity_id: str, skill: str
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str,
+    skill: str,
 ) -> int:
     """Skill base plus status modifiers — system 5 feeding checks (EPIST-1:
     modifiers ride the perceiver's own status, never another entity's)."""
@@ -693,7 +715,8 @@ def skill_total(
 
 
 def _best_in_location(
-    pack: Pack, projection: Projection, actor: str, skill: str
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], actor: str,
+    skill: str,
 ) -> str | None:
     """The strongest opposing entity (npc or ambient group, never an item)
     at the actor's location, excluding the actor; ties break by pack order."""
@@ -713,7 +736,7 @@ def _best_in_location(
 
 def run_check(
     pack: Pack,
-    projection: Projection,
+    projection: Mapping[str, Mapping[str, Any]],
     bank: RngBank,
     intent: IntentData,
     action: Mapping[str, Any],
@@ -736,6 +759,12 @@ def run_check(
     source = kind["defender_source"]
     if source == "target":
         defender_id = intent.target
+        # Loud over the silent nonsense roll: a target-sourced check on a
+        # targetless intent would roll against the base skill (KI#88's
+        # second arm). The door raises first on every committed path (the
+        # target-referencing preconditions); the lint-side closure is the
+        # recorded residue.
+        assert defender_id is not None
         defender = skill_total(pack, projection, defender_id, kind["defend"])
     elif source == "best_in_location":
         defender_id = _best_in_location(
@@ -815,7 +844,7 @@ def pack_importance(
     irreversible: int,
     hooks: int,
     event_type: str,
-) -> str:
+) -> Importance:
     """Score = entities-touched + irreversibility + far hooks + the
     story-critical hook, mapped through the pack's thresholds. One rule
     for action events and world events. The story-critical hook (tune-1,
@@ -862,7 +891,9 @@ KNOWLEDGE_SLOTS: Final = (
 PRESENT_SITES: Final = ("location", "destination_location")
 
 
-def knowers_at(pack: Pack, projection: Projection, location: str) -> list[str]:
+def knowers_at(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], location: str
+) -> list[str]:
     """Knowledge-holders at a location: npcs and ambient groups (pack order);
     items never know."""
     knowers: list[str] = []
@@ -900,9 +931,9 @@ ACQUISITION_CHANNELS: Final = ("saw", "heard")
 
 
 def acquisition_fidelity(
-    pack: Pack, projection: Projection, channel: str, site: str,
-    tick: int, fidelity: str,
-) -> str:
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], channel: str, site: str,
+    tick: int, fidelity: Fidelity,
+) -> Fidelity:
     """Birth fidelity after the pack's acquisition conditions (depth-1,
     D-105; `phases.md` §5 the design owner — the D-096 gap: continuous
     acquisition CONDITIONS feeding birth fidelity, pack data in
@@ -935,14 +966,14 @@ def acquisition_fidelity(
                     steps += int(condition["steps"])
     if not steps:
         return fidelity
-    chain = pack.rules["knowledge"]["fidelity_chain"]
+    chain: Sequence[Fidelity] = pack.rules["knowledge"]["fidelity_chain"]
     return chain[min(chain.index(fidelity) + steps, len(chain) - 1)]
 
 
 def resolve_knowledge(
     records: list[Mapping[str, Any]],
     pack: Pack,
-    projection: Projection,
+    projection: Mapping[str, Mapping[str, Any]],
     ctx: Mapping[str, Any],
     tick: int,
 ) -> tuple[KnowledgeRecord, ...]:
@@ -986,7 +1017,9 @@ def resolve_knowledge(
             who_ids = knowers_at(pack, projection, ctx["location"])
         elif audience == "adjacent_locations":
             who_ids = []
-            exits = pack.entity(ctx["location"])["exits"]
+            location_record = pack.entity(ctx["location"])
+            assert location_record is not None  # a linted location id (the site noun)
+            exits = location_record["exits"]
             for adjacent in exits:  # pack exit order — deterministic
                 who_ids.extend(knowers_at(pack, projection, adjacent))
         elif audience == "destination_location":

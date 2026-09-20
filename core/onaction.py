@@ -149,6 +149,12 @@ def _reaction_draft(
     entities = set(reacting) | {WORLD}
     if target is not None:
         entities.add(target)
+    # Loud over the schema hole (KI#88's first arm): `actor: source_target`
+    # is pack-legal vocabulary, and a targetless source would draft a null
+    # actor into a schema-required string field. The loud refusal happens
+    # HERE, before the write; the lint-side closure (the actor vocabulary
+    # minus source_target) is the recorded residue.
+    assert actor is not None
     return EventDraft(
         t=record.t,
         type=entry["event"],

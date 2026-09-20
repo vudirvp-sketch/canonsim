@@ -302,17 +302,17 @@ class EventLogWriter:
             self._fh = path.open("a", encoding="utf-8")
             self._header_written = True
             self._count = len(events)
-            self._last_tick = events[-1].t if events else None
-            self._written_ids = {event.id for event in events}
-            self._last_id = events[-1].id if events else None
+            self._last_tick: int | None = events[-1].t if events else None
+            self._written_ids: set[str] = {event.id for event in events}
+            self._last_id: str | None = events[-1].id if events else None
         else:
             self._appended = None
             self._fh = path.open("w", encoding="utf-8")
             self._header_written = False
             self._count = 0
-            self._last_tick: int | None = None
-            self._written_ids: set[str] = set()
-            self._last_id: str | None = None
+            self._last_tick = None
+            self._written_ids = set()
+            self._last_id = None
 
     @staticmethod
     def _extract_schema_version(schema: Mapping[str, Any]) -> str:

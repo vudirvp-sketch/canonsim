@@ -50,6 +50,7 @@ from core.intent import pack_importance
 from core.log import (
     EventDraft,
     EventRecord,
+    Fidelity,
     KnowledgeRecord,
     LoggedKnowledgeRecord,
 )
@@ -173,7 +174,7 @@ class KnowledgeView:
 # -- transfer (one-step fidelity decay, D-007) --------------------------------
 
 
-def decay_fidelity(fidelity: str, chain: Sequence[str], steps: int = 1) -> str:
+def decay_fidelity(fidelity: Fidelity, chain: Sequence[Fidelity], steps: int = 1) -> Fidelity:
     """`steps` down the pack's fidelity chain; the chain floor sticks."""
     if fidelity not in chain:
         raise ValueError(f"unknown fidelity {fidelity!r} (chain: {list(chain)})")
@@ -351,8 +352,8 @@ def telling_reaction(
             records.append(
                 KnowledgeRecord(
                     who=listener,
-                    channel=TOLD,  # type: ignore[arg-type]
-                    fidelity=received,  # type: ignore[arg-type]
+                    channel=TOLD,
+                    fidelity=received,
                     knows=knows,
                     at=record.t,
                 )
@@ -392,8 +393,8 @@ def _rule_holds(
 ) -> bool:
     item = projection[rule["item"]]
     if "carried_by" in rule:
-        return item.get("carrier") == rule["carried_by"]
-    return item.get("position") == rule["at_location"]
+        return bool(item.get("carrier") == rule["carried_by"])
+    return bool(item.get("position") == rule["at_location"])
 
 
 def _last_moving_event(
@@ -460,7 +461,7 @@ def expectation_drafts(
                 knowledge=(
                     KnowledgeRecord(
                         who=npc,
-                        channel=INFERRED,  # type: ignore[arg-type]
+                        channel=INFERRED,
                         fidelity="exact",
                         knows=rule["knows"],
                         at=tick,

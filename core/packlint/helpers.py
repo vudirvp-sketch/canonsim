@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Mapping
-from typing import Any, Final
+from typing import Any, Final, TypeGuard
 
 from core.predicates import COMPARATORS, COMPOUND_KEYS, LEAF_KINDS
 from core.worldgen import WORLDGEN_BLOCK
@@ -17,7 +17,10 @@ class PackError(RuntimeError):
     """Load-time lint failure — the pack never reaches the simulation."""
 
 
-def _require(condition: bool, message: str) -> None:
+def _require(condition: object, message: str) -> None:
+    """The condition is any truthy value — callers pass the shape
+    expression itself (`node.get(...)` or its boolean combination), and
+    the truthiness test is the whole contract."""
     if not condition:
         raise PackError(message)
 
@@ -26,12 +29,12 @@ def _ids(records: list[Mapping[str, Any]]) -> set[str]:
     return {record["id"] for record in records}
 
 
-def _is_int(value: Any) -> bool:
+def _is_int(value: Any) -> TypeGuard[int]:
     """A JSON integer (bool excluded — a flag is never a count)."""
     return isinstance(value, int) and not isinstance(value, bool)
 
 
-def _is_number(value: Any) -> bool:
+def _is_number(value: Any) -> TypeGuard[int | float]:
     """A JSON number (int or float, bool excluded)."""
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 

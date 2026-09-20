@@ -107,6 +107,7 @@ def scene_zones(
             "declared location; the zone partition reads the exits "
             "graph (the pred-contract family, D-111)"
         )
+    assert isinstance(active, str)  # the record gate above implies the str
     warm: list[str] = []
     for exit_id in exits_of(pack, world, active):
         if exit_id == active or exit_id in warm:

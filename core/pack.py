@@ -27,7 +27,7 @@ domain class per family (never a DSL, never a base-class framework).
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Final
@@ -203,11 +203,11 @@ class Pack:
 
     @property
     def name(self) -> str:
-        return self.data["entities.json"]["meta"]["pack"]
+        return str(self.data["entities.json"]["meta"]["pack"])
 
     @property
     def version(self) -> str:
-        return self.data["entities.json"]["meta"]["version"]
+        return str(self.data["entities.json"]["meta"]["version"])
 
     @property
     def name_version(self) -> str:
@@ -230,7 +230,10 @@ class Pack:
         for category in (
             "locations", "npcs", "ambient_entities", "items", "groups",
         ):
-            for record in self.entities.get(category, ()):
+            records: Iterable[Mapping[str, Any]] = self.entities.get(
+                category, ()
+            )
+            for record in records:
                 if record["id"] == entity_id:
                     return record
         return None
@@ -252,7 +255,8 @@ class Pack:
 
     def action(self, intent: str) -> Mapping[str, Any] | None:
         """The action record for an intent type, or None."""
-        for action in self.data["actions.json"]["actions"]:
+        actions: Iterable[Mapping[str, Any]] = self.data["actions.json"]["actions"]
+        for action in actions:
             if action["intent"] == intent:
                 return action
         return None
@@ -266,7 +270,7 @@ class Pack:
         """The single is_player entity id."""
         for npc in self.entities["npcs"]:
             if npc.get("is_player", False):
-                return npc["id"]
+                return str(npc["id"])
         raise PackError("no is_player npc in pack")
 
 

@@ -127,7 +127,9 @@ def fold(events: Iterable[EventRecord], initial: Projection) -> Projection:
 # -- structural presence (st-1 — the single owner of the presence set) --------
 
 
-def present_entities(state: Projection, location: str, pack: Any) -> frozenset[str]:
+def present_entities(
+    state: Mapping[str, Mapping[str, Any]], location: str, pack: Any
+) -> frozenset[str]:
     """Every entity structurally present at `location` in the projection:
     positioned there, or an item carried by a present non-item (items
     keep their spawn `position` — carriers travel, the closure follows).
@@ -149,7 +151,9 @@ def present_entities(state: Projection, location: str, pack: Any) -> frozenset[s
     return frozenset(present)
 
 
-def present_in_order(pack: Any, state: Projection, location: str) -> tuple[str, ...]:
+def present_in_order(
+    pack: Any, state: Mapping[str, Mapping[str, Any]], location: str
+) -> tuple[str, ...]:
     """The present set as an ordered tuple — pack declaration order (npcs,
     then ambient groups, then items; INV-2 construction order). Output
     paths (the entity-card block, the per-present-target `knows`

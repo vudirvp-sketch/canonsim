@@ -344,6 +344,24 @@ class RetrievalIndex:
         "_closed",
     )
 
+    # PEP 526 bare annotations beside __slots__: the single declaration of
+    # the slot types (build() is the only writer — `__init__` refuses, the
+    # derived store is never hand-assembled).
+    _alpha: float
+    _beta: float
+    _gamma: float
+    _delta: float
+    _knn_k: int
+    _rows: tuple[_Row, ...]
+    _db: sqlite3.Connection
+    _fts_ok: bool
+    _vectors: dict[int, tuple[float, ...]]
+    _vec_sql: bool
+    _provenance: dict[str, tuple[str, ...]]
+    _authority: dict[str, float]
+    _tick: int
+    _closed: bool
+
     def __init__(self) -> None:
         raise NotImplementedError(
             "use RetrievalIndex.build(pack, events) — the index is a "

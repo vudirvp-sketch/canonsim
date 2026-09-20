@@ -100,10 +100,11 @@ claim packet)
   objects, a res-1 sink shape — CONCRETE since res-1 landed iter-146/D-179;
   group-scale entity birth already exists, depth-7's condensation,
   iter-93/D-127). Never a speculative build.
-- `qa-1` — mypy --strict on `core/`: owner-approval-gated dev tooling (dev
-  tooling capped at pytest + ruff — AGENTS §8/§10; D-031 parks the
-  candidate). The type-discipline values are law from iter-1 via
-  `docs/blueprint/phase0.md` §1; the tool is optional.
+- `qa-1` — DONE (iter-168, the owner's chat call over the row): mypy
+  --strict on `core/` 207 → 0 at zero runtime change (1885+1 green both
+  ends, goldens byte-untouched); the tool stays optional per D-031 (no
+  dev-dep, no CI row — enforcement the owner's call); KI#88/#89 the
+  found holes (the lint-side closures routed).
 - `pack-3` — the Sci-Fi setting candidate (owner sketches; REWRITTEN
   iter-150): the stale "blocked until the 2nd-setting gate" is GONE —
   phase 6 CLOSED (D-151), the second-setting shape answered (TRAVEL,
@@ -130,7 +131,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..167 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..168 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -138,6 +139,21 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-168 · 2026-09-21 · qa1 — the type-discipline audit (the owner's
+  «там еще была задача qy 1 что ли, связанная с проверкой кода» chat
+  call naming the standing row): mypy --strict on `core/` taken 207 → 0
+  across 36 files at ZERO runtime behavior change (1885+1 green both
+  ends, the goldens byte-untouched, ruff clean) — the root-fix shape:
+  `_require(condition: object)`, the `Importance`/`Fidelity` Literal
+  funnels, the RetrievalIndex slot annotations, the Mapping read-only
+  widening (fold's dict `Projection` the owner), the TypeGuard
+  `_is_int`/`_is_number`, the Iterable bridges in `Pack.entity`/
+  `action`, the assert-after-require narrowings across packlint, the
+  shadowing kills, log.py's first-branch annotations; 29 core files
+  (the §2.3 soft limit noted — a repo-wide strict pass); two holes
+  made loud: KI#88 (asserts landed, the lint-side closure the residue)
+  + KI#89 (the iter-45 `who` family, fix routed); the tool stays
+  optional (D-031 unchanged — no dev-dep, no CI row).
 - iter-167 · 2026-09-21 · stepread — the step bench's first embodiment (the
   owner's «продолжай работы, что логичнее всего сейчас начать» continuation
   call over STATUS's embodiment routing — the natural doc-streak breaker

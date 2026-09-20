@@ -342,7 +342,7 @@ class AdmissionLint:
         # placeholder that never fires, not a behavior) from different
         # NPCs with identical (intent, requires) pairs are clones — the
         # design-time twin of M4 novelty
-        pairs: dict[tuple[Any, Any], str] = {}
+        pairs: dict[tuple[str, str], str | None] = {}
         for entry in (rules.get("urgencies") or {}).get("entries", ()):
             if not isinstance(entry, Mapping):
                 continue
@@ -353,11 +353,11 @@ class AdmissionLint:
                 or probability <= 0
             ):
                 continue
-            key = (
+            pair = (
                 json.dumps(entry.get("intent", {}), sort_keys=True),
                 json.dumps(entry.get("requires", ()), sort_keys=True),
             )
-            other = pairs.get(key)
+            other = pairs.get(pair)
             if other is not None and other != entry.get("npc"):
                 _require(
                     False,
@@ -365,7 +365,7 @@ class AdmissionLint:
                     f"share the trigger→action pair {entry.get('intent', {}).get('kind')!r} "
                     f"(AP-11: the design-time twin of M4 novelty)",
                 )
-            pairs[key] = entry.get("npc")
+            pairs[pair] = entry.get("npc")
         # -- AP-13: no contradictory on_action rules ----------------------
         # two ungated reactions to the same event type asserting the same
         # prop in opposite directions cancel out — a design error the
@@ -575,13 +575,18 @@ class AdmissionLint:
         if test == "carried_by":
             return carried
         if test == "carries_flagged":
-            return bool(item.get(cond.get("flag")))
+            flag = cond.get("flag")
+            return isinstance(flag, str) and bool(item.get(flag))
         if test == "field_in":
-            return cond.get("field") in item and item.get(cond.get("field")) in (
-                cond.get("values") or ()
+            field = cond.get("field")
+            return (
+                isinstance(field, str)
+                and field in item
+                and item.get(field) in (cond.get("values") or ())
             )
         if test == "field_nonempty":
-            value = item.get(cond.get("field"))
+            field = cond.get("field")
+            value = item.get(field) if isinstance(field, str) else None
             return isinstance(value, (list, str, tuple)) and len(value) > 0
         if test == "has_field":
             return cond.get("field") in item

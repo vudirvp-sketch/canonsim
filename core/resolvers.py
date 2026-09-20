@@ -56,6 +56,14 @@ ResolverFn = Callable[
 Projection = Mapping[str, Mapping[str, Any]]
 
 
+def _record(pack: "Pack", entity_id: str) -> Mapping[str, Any]:
+    """The pack record for a declared entity id — never None (the pack's
+    orphan-reference lint at load is the protection)."""
+    record = pack.entity(entity_id)
+    assert record is not None  # the pack's orphan-reference lint (load)
+    return record
+
+
 #: The resolvers whose events intrinsically carry state changes — the
 #: position/carrier/layer mutation family that emits StateChanges with NO
 #: action-declared block (movement walks, pickup/stealth_take/drop move the
@@ -345,7 +353,7 @@ def _drop(
     roll the pack ignition chance when a fire source lands at a spot."""
     if intent.target is None:
         raise RunnerError("drop_break requires a target item")
-    item = pack.entity(intent.target)
+    item = _record(pack, intent.target)
     location = projection[intent.actor]["position"]
     changes = [
         StateChange(
@@ -367,13 +375,13 @@ def _drop(
     near = intent.fields.get("near")
     if config is not None and near is not None:
         layer_cfg = pack.rules["transitions"][config["layer"]]
-        spots = pack.entity(location).get(layer_cfg["spot_field"], [])
+        spots = _record(pack, location).get(layer_cfg["spot_field"], [])
         if near not in spots:
             raise RunnerError(
                 f"drop_break 'near' must be a {location!r} spot of the pack, "
                 f"got {near!r} (spots: {spots})"
             )
-        flammable = pack.entity(location).get("flammability")
+        flammable = _record(pack, location).get("flammability")
         if (
             item.get(config["item_flag"])
             and flammable in layer_cfg["ignition"]["requires_flammability"]
@@ -398,7 +406,7 @@ def _use_item(
     branch = _branch(check, action)
     changes: tuple[StateChange, ...] = ()
     if branch == "success" and intent.target is not None:
-        effect = pack.entity(intent.target)["use_effect"]
+        effect = _record(pack, intent.target)["use_effect"]
         prop = f"status.{effect['status']}"
         current = projection[intent.actor].get(prop, 0)
         scale_max = pack.rules["relations"]["scale"][1]
@@ -503,7 +511,7 @@ def _ignite_action(
     source = find_flagged_accessible(
         pack, projection, intent.actor, config["item_flag"]
     )
-    spots = pack.entity(actor_location).get(layer_cfg["spot_field"], [])
+    spots = _record(pack, actor_location).get(layer_cfg["spot_field"], [])
     spot = next(
         (s for s in spots if projection[actor_location].get(f"{config['layer']}.{s}")
          != layer_cfg["spot_state"]),

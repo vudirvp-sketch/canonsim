@@ -145,7 +145,7 @@ def reflection_drafts(
                 knowledge=(
                     KnowledgeRecord(
                         who=knowledge.who,
-                        channel="inferred",  # type: ignore[arg-type]
+                        channel="inferred",
                         fidelity="exact",
                         knows=insight,
                         at=record.t,

@@ -249,7 +249,9 @@ def weather_turn_draft(
     if isinstance(seasonal, Mapping):
         weights_block = seasonal.get("weights")
         if isinstance(weights_block, Mapping) and weights_block:
-            phase = calendar_phase(rules, seasonal_ride(rules), tick)
+            ride = seasonal_ride(rules)
+            assert ride is not None  # the seasonal block is present (gate above)
+            phase = calendar_phase(rules, ride, tick)
             override = weights_block.get(phase, {})
             if isinstance(override, Mapping) and override:
                 weights = override.get(prev, weights)

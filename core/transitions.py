@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any
 
 from core.intent import knowers_at, pack_importance, resolve_knowledge
-from core.log import EventDraft, StateChange
+from core.log import EventDraft, Importance, StateChange
 from core.rng import RngBank
 
 if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
@@ -78,7 +78,9 @@ class SpreadResult:
 
 
 def _layer(pack: Pack, layer: str) -> Mapping[str, Any]:
-    transitions = pack.rules.get("transitions", {})
+    transitions: Mapping[str, Mapping[str, Any]] = pack.rules.get(
+        "transitions", {}
+    )
     if layer not in transitions:
         raise ValueError(f"unknown transition layer {layer!r}")
     return transitions[layer]
@@ -86,14 +88,17 @@ def _layer(pack: Pack, layer: str) -> Mapping[str, Any]:
 
 def _follow_up_spec(layer_cfg: Mapping[str, Any], kind: str) -> Mapping[str, Any]:
     """The pack-declared spec for one follow-up kind (loud when absent)."""
-    for spec in layer_cfg["follow_ups"]:
+    follow_ups: list[Mapping[str, Any]] = layer_cfg["follow_ups"]
+    for spec in follow_ups:
         if spec["kind"] == kind:
             return spec
     raise ValueError(f"unknown follow-up kind {kind!r}")
 
 
 def _spots(pack: Pack, layer_cfg: Mapping[str, Any], location: str) -> list[str]:
-    return list(pack.entity(location).get(layer_cfg["spot_field"], ()))
+    entity = pack.entity(location)
+    assert entity is not None  # the pack's orphan-reference lint (load)
+    return list(entity.get(layer_cfg["spot_field"], ()))
 
 
 def _active_spots(
@@ -117,7 +122,7 @@ def _importance(
     location: str,
     state_changes: tuple[StateChange, ...],
     event_type: str,
-) -> str:
+) -> Importance:
     return pack_importance(
         pack.rules,
         entities={WORLD, location} | {change.entity for change in state_changes},

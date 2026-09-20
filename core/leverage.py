@@ -191,6 +191,7 @@ def live_leverage(
         expires_at = int(event.outcome["expires_at"])
         if at_tick >= expires_at:
             continue
+        assert event.target is not None  # the emitter's spec["subject"], pack-linted
         facts.append(
             LeverageFact(
                 holder=event.actor,

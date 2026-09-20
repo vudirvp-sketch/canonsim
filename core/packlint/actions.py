@@ -413,6 +413,7 @@ class ActionsLint:
                 "(author the precondition: the door rejects insolvent "
                 "attempts softly, attempts are facts)",
             )
+            assert gate is not None  # the require above
             _require(
                 _is_int(gate.get("value")) and gate["value"] >= block["amount"],
                 f"{where}: the solvency gate's value must cover the "

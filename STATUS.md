@@ -1,60 +1,43 @@
-Iteration: iter-167 (`iter-167-stepread` — the step bench's first
-embodiment, the owner's «продолжай работы, что логичнее всего сейчас
-начать» continuation call over STATUS's embodiment routing — the natural
-doc-streak breaker after three doc-only iterations): the step's close
-read, the unit's SETTING VERB (the §6.2 gap text's own "a future
-embodiment's own class, the read_pole precedent") — landed in
-province_pack as PURE PACK DATA, zero core change (the pole's iter-161
-precedent class): the `read_stair` hinge (the read hinge's third
-instance — the grim read_ticket first, the pole second; the family's
-first location-kind target: the stair IS the carrier, not a thing at
-the stair), perception-gated (difficulty 30 — the honest failure
-surface, the vague unread steps), minting the literal token
-`the_step_law` to the reader: the ORDER the road never learns from the
-books (§6.2's knowledge asymmetry: the stranger reads a stingy
-ferryman, never the order — the books show the toll, not the step;
-§7.1's stranger row — the road's misread CORRECTABLE IN PLAY, the
-meaning slice's misread-correcting half widened to the committed band;
-the brief's recalled facts the read surface). THE TOKEN DELIBERATELY
-PLAIN KNOWLEDGE, never a secret (the step law is the vale's own
-category — public custom held by the practitioners' reading, the humor
-probe's shared-categories proof; no lever over any subject: no secrets
-entry, no cluster, the registry stays two keys — the pole's debt-lever
-class NOT duplicated). The acquisition arm rides the new verb unchanged
-(the unlit weir at night steps the order down to partial — half the
-rungs legible by dark); the field_in pin + the co-location gate die at
-the door as named rejections (attempts are facts); zero corpus price
-(no committed script reads the stair — the golden T1 byte-untouched).
-The honest boundary: the read mints the LAW, never the PRESENT — the
-phases carry no head (the water level's gap stays owner-routed, the
-separate-track law); no NPC driver reads the stair (the player-facing
-verb, the pole's own dormant-family class). tests/test_stepread.py +7
-(the §9 claim packet: the census + the plain-knowledge boundary; the
-day chain exact at three probed seeds + no cluster; the brief's
-recalled-facts line; the night chain partial; the off-site/far
-rejection arms; the determinism twin).
+Iteration: iter-168 (`iter-168-qa1` — the type-discipline audit, the
+owner's «там еще была задача qy 1 что ли, связанная с проверкой кода»
+chat call naming the standing row over STATUS's Next step): mypy
+--strict on `core/` taken 207 → 0 across 36 files at ZERO runtime
+behavior change — the root-fix audit, never annotation churn: the
+`_require(condition: object)` contract; the `Importance`/`Fidelity`
+Literal funnels (pack_importance/_importance, decay/acquisition_
+fidelity — ~24 sites through two funnels); the RetrievalIndex slot
+annotations; the Mapping read-only widening (11 intent.py params +
+fold/resolvers unified under fold's dict `Projection`, the write
+owner); `_is_int`/`_is_number` → TypeGuard (the lint predicates'
+narrowing contract); the Iterable record bridges in `Pack.entity`/
+`action`; the assert-after-require narrowings across the packlint
+family (the loud refusals stay the load-time contract, the asserts the
+visible narrowing); the shadowing kills (metrics tag/hook, echo
+spec/token_spec, admission key/pair, worldgen bound/bound_slots);
+log.py's first-branch slot annotations. TWO REAL HOLES found and made
+loud (the audit's yield beyond typing): KI#88 (the source_target
+actor null into a schema-required string + the target-sourced
+defender's silent roll — asserts landed, the lint-side vocabulary
+closure the open residue) and KI#89 (the door's directly-indexed
+cond keys `flag`/`field`/`values` not load-linted — the iter-45
+leverage `who` family, the fix routed to the backlog). The tool
+stays OPTIONAL (D-031's framing unchanged — mypy in no dev deps and
+no CI row; enforcement is the owner's call class).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1885 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT a317db3 BEFORE working — 1878+1 green,
-identical to the iter-166 pin — and re-verified after with the diff in
-place: 1885+1, the +7 the new claim packet, zero failures) ·
+1885 passed + 1 skipped, ruff clean, mypy --strict `core/` 0 errors
+(Python 3.12.14, the env pin; verified at BASE_COMMIT c82c7ca BEFORE
+working — 1885+1 green, ruff clean, identical to the iter-167 pin —
+and re-verified after with the diff in place: 1885+1, ruff clean, the
+golden fixtures byte-untouched, zero failures) ·
 Date: 2026-09-21 ·
-Scope: `content/province_pack/actions.json` (the read_stair action +
-the meta verb note), `content/province_pack/templates.json` (the
-stair_read + stair_read_failed lines — 63 templates, inside the 65
-budget), `tests/test_stepread.py` (NEW, +7 — the §9 claim packet),
-`docs/worldbuild/ANCHOR_REGION.md` (§6.2 the gap line answered + the
-embodiment paragraph's committed band),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2 the status, §6 candidate 3's
-setting-verb answer), `docs/worldbuild/WORLD_TESTS.md` (§9 the
-step-bench entry's committed-band widening), `docs/TASKS.md` (the
-iter-167 ledger line + the ledger header's range sync), `STATUS.md`
-(this re-pin), `worklog.md` (this entry) — 9 paths (the iter-161/162
-pack-landing precedent); zero core, zero corpus price. The prior
-iteration's record: iter-166 (intake33). The detail lives in the
-pack's own notes + WORLD_TESTS §9 + git.
+Scope: 29 `core/` files (the annotation audit — over the §2.3 soft
+limit, a repo-wide strict pass objectively requires it, noted per the
+protocol) + `STATUS.md` (this re-pin + the two KIs) + `docs/TASKS.md`
+(the qa-1 row collapse + the ledger line) + `worklog.md` (this
+entry). The prior iteration's record: iter-167 (stepread). The detail
+lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -78,9 +61,11 @@ pack's own notes + WORLD_TESTS §9 + git.
 
 ## Active KIs
 
-- (None open. KI#87 — the phantom punt pole — CLOSED iter-157: the pole
-  commits with the household's second hand, the carrier binding live.
-  The closed-KI tombstone notes — KI#55..KI#86, every one deleted per
+- KI#88 · `actor: source_target` can draft a null actor into the schema-required string field, and a target-sourced defender rolls silently against the base skill — loud asserts landed with qa-1 (iter-168); the lint-side vocabulary closure is the open residue · opened 2026-09-21.
+- KI#89 · the door's directly-indexed cond keys (`flag`/`field`/`values` on carries_flagged, flagged_accessible, field_in, field_nonempty, has_field) are not load-linted for presence — a malformed pack loads and KeyErrors mid-run (the iter-45 leverage `who` family); fix routed, not applied in qa-1's scope · opened 2026-09-21.
+  (KI#87 — the phantom punt pole — CLOSED iter-157: the pole commits
+  with the household's second hand, the carrier binding live. The
+  closed-KI tombstone notes — KI#55..KI#86, every one deleted per
   AGENTS §5 at its own iteration — were trimmed at the phase-6 gate
   (iter-116): the lessons live in git + the FAQ's family laws, the
   pre-trim record in git history.)
@@ -529,6 +514,27 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
+**iter-168 DONE: qa1 — the type-discipline audit (the owner's «там
+еще была задача qy 1 что ли, связанная с проверкой кода» chat call
+naming the standing row): mypy --strict on `core/` taken 207 → 0
+across 36 files at ZERO runtime behavior change — 1885+1 green both
+ends, the golden fixtures byte-untouched, ruff clean. The root-fix
+audit: `_require(condition: object)`, the `Importance`/`Fidelity`
+Literal funnels, the RetrievalIndex slot annotations, the Mapping
+read-only widening under fold's dict `Projection`, the TypeGuard
+`_is_int`/`_is_number`, the Iterable bridges in `Pack.entity`/
+`action`, the assert-after-require narrowings across the packlint
+family, the shadowing kills, log.py's first-branch annotations — 29
+core files (the §2.3 soft limit noted: a repo-wide strict pass).
+Two real holes made loud: KI#88 (the source_target actor null + the
+target-sourced defender — asserts landed, the lint-side closure the
+residue) and KI#89 (the door's directly-indexed cond keys not
+load-linted — the iter-45 `who` family, the fix routed). The tool
+stays OPTIONAL (D-031 unchanged — mypy in no dev deps, no CI row;
+enforcement is the owner's call class). The natural next moves stay
+the owner's: KI#89's lint rows (small, the iter-45 precedent), KI#88's
+lint-side closure, or the embodiment options the world track still
+holds.**
 **iter-167 DONE: stepread — the step bench's first embodiment (the
 owner's «продолжай работы, что логичнее всего сейчас начать»
 continuation call over STATUS's embodiment routing — the natural
@@ -686,9 +692,8 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    live-session evidence — neither is "improve the parser"),
    `st-2` (consumer-first, parked — no pack has wanted the
    promotion door), `scav-1` (measurement before mechanism, parked
-   — no derived-state size problem on record), `qa-1` mypy
-   (owner-approval-gated dev tooling, correctly framed since
-   D-031), `bg-6` (the SoW audit, D-055 deferral), `pack-3` (one
+   — no derived-state size problem on record), `bg-6` (the SoW audit,
+   D-055 deferral), `pack-3` (one
    candidate for the next authored pack slot — the 2nd-setting
    blocker gone with phase 6 CLOSED), `st-4` (rides presentation-1
    at its write time, D-148), `st-5` (the first real consumer

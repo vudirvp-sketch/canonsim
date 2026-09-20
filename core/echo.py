@@ -104,8 +104,8 @@ def echo_scores(
     percents: Mapping[str, int] = config["fidelity_weight"]
     axes: list[str] = []  # declared order, deduped
     declared: set[str] = set()
-    for spec in tokens.values():
-        for axis in spec["axes"]:
+    for token_spec in tokens.values():
+        for axis in token_spec["axes"]:
             if axis not in declared:
                 declared.add(axis)
                 axes.append(axis)

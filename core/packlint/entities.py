@@ -49,6 +49,7 @@ class EntitiesLint:
             "accounts without an economy.accounts vocabulary are dead "
             "data (the pairing law: declare the block)",
         )
+        assert isinstance(vocabulary, list)  # the require above
         _require(isinstance(accounts, Mapping), f"{where} must be an object")
         for kind_name, level in accounts.items():
             _require(

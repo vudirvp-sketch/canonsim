@@ -83,6 +83,7 @@ class EconomyLint:
             "(WHICH accounts exist is the block's own declaration — the "
             "states axes' law)",
         )
+        assert isinstance(accounts, list)  # the require above
         seen: set[str] = set()
         for kind in accounts:
             _require(
@@ -270,6 +271,7 @@ class EconomyLint:
                     f"economy.flows.{flow.get('id')!r}: {endpoint} "
                     f"{entity_id!r} is not a declared entity",
                 )
+                assert holds is not None  # the require above
                 _require(
                     kind in holds,
                     f"economy.flows.{flow.get('id')!r}: {endpoint} "

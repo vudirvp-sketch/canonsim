@@ -250,7 +250,7 @@ def arrest_resolution_draft(
     caught = pursuit_total >= evasion_total  # tie -> pursuer (pack rule)
     margin = pursuit_total - evasion_total
     if caught:
-        changes = (
+        changes: tuple[StateChange, ...] = (
             StateChange(
                 entity=suspect,
                 prop=CRIME_STATUS_PROP,
@@ -317,7 +317,7 @@ def next_rotation_tick(
 ) -> int | None:
     """The smallest rotation tick strictly after `after` (intraday offsets
     repeated daily); None when the pack declares no rotations."""
-    offsets = sorted(rules["crime_watch"].get("watch_rotation_ticks", ()))
+    offsets: list[int] = sorted(rules["crime_watch"].get("watch_rotation_ticks", ()))
     if not offsets:
         return None
     day = after // ticks_per_day
@@ -390,7 +390,7 @@ def briefing_draft(
         records.append(
             KnowledgeRecord(
                 who=incoming,
-                channel=TOLD,  # type: ignore[arg-type]
+                channel=TOLD,
                 fidelity=decay_fidelity(record.fidelity, chain),
                 knows=record.knows,
                 at=tick,

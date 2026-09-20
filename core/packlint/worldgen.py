@@ -453,6 +453,7 @@ class WorldgenLint:
                 f"{spot}.location {location!r}: unknown location id "
                 "(entities.json locations is the single owner)",
             )
+            assert record is not None  # the require above
             slot = entry.get("slot")
             _require(
                 isinstance(slot, str) and slot.strip(),
@@ -623,7 +624,7 @@ class WorldgenLint:
         # LINE declaring the slot (bridge-1, D-116 (1) — the claims'
         # first brief-side consumer: the pipe reads the slot from the
         # folded projection into the scene line).
-        bound = _bound_template_slots(templates_all)
+        bound_slots = _bound_template_slots(templates_all)
         reads = _director_prop_reads(rules)
         scene_fields = frozenset(
             rules.get("brief", {})
@@ -632,7 +633,7 @@ class WorldgenLint:
         )
         for index, entry in enumerate(claims):
             slot = str(entry["slot"])
-            if slot in bound:
+            if slot in bound_slots:
                 continue
             if (str(entry["location"]), slot) in reads:
                 continue

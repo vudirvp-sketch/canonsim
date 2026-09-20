@@ -619,6 +619,7 @@ class StoryLint:
             "secrets.tokens must be a non-empty object keyed by knowledge "
             "token",
         )
+        assert isinstance(tokens, Mapping)  # the require above
         mintable = literal_knows_tokens(self._data)
         for token, spec in tokens.items():
             where = f"secrets.tokens[{token!r}]"
@@ -718,6 +719,7 @@ class StoryLint:
             "echo.tokens must be a non-empty object keyed by knowledge "
             "token",
         )
+        assert isinstance(tokens, Mapping)  # the require above
         mintable = literal_knows_tokens(self._data)
         for token, spec in tokens.items():
             where = f"echo.tokens[{token!r}]"
@@ -787,6 +789,7 @@ class StoryLint:
             "traits.threshold must be an integer >= 2 (a single record "
             "is a fact, not a crystallized belief — the LEGEND_SPEC floor)",
         )
+        assert _is_int(threshold)  # the require above
         if "notes" in config:
             _require(
                 isinstance(config["notes"], str),
@@ -798,6 +801,7 @@ class StoryLint:
             "traits.beliefs must be a non-empty object keyed by belief "
             "token",
         )
+        assert isinstance(beliefs, Mapping)  # the require above
         mintable = literal_knows_tokens(self._data)
         seen_members: dict[str, str] = {}  # token -> owning belief
         for belief, spec in beliefs.items():

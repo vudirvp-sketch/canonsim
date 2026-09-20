@@ -98,7 +98,7 @@ def knowledge_entry(
         )
 
 
-def literal_knows_tokens(data) -> set[str]:
+def literal_knows_tokens(data: Mapping[str, Mapping[str, Any]]) -> set[str]:
     """Every knowledge token the pack can mint as a literal string:
     the `knows` values declared without slot braces across the three
     birth sites — action knowledge templates (all branches + the
@@ -158,6 +158,7 @@ def lint_echo_cond(data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], 
         "a declared echo axis (the fold scores only the declared "
         "vocabulary — anything else is dead data)",
     )
+    assert isinstance(echo_cfg, Mapping)  # non-empty axes imply the block
     lo, hi = echo_cfg["scale"]
     _require(
         _is_int(cond.get("value")) and lo < cond["value"] <= hi,

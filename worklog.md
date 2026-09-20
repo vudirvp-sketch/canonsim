@@ -7,6 +7,32 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-168 · 2026-09-21 · qa1 — the owner-called type-discipline audit
+(the owner's «там еще была задача qy 1 что ли, связанная с проверкой
+кода» chat call naming the standing row over STATUS's Next step):
+mypy --strict on `core/` taken 207 → 0 across 36 files at ZERO runtime
+behavior change (the suite + the golden fixtures byte-identical both
+ends)
+- root fixes: `_require(condition: object)`; the `Importance`/`Fidelity`
+  Literal funnels (pack_importance/_importance, decay/acquisition);
+  the RetrievalIndex slot annotations; the Mapping read-only widening
+  (fold's dict `Projection` the write owner, resolvers' own alias
+  retired); `_is_int`/`_is_number` → TypeGuard; `Pack.entity/action`
+  Iterable bridges; assert-after-require narrowings across packlint
+  (the lint's loud refusals stay the contract); the shadowing kills
+  (metrics/echo/admission/worldgen); log.py's first-branch annotations;
+  29 core files (over the §2.3 soft limit — a repo-wide strict pass)
+- two real holes made loud: KI#88 (the source_target actor null + the
+  target-sourced defender — asserts landed, the lint-side closure the
+  residue); KI#89 (the door's directly-indexed cond keys `flag`/
+  `field`/`values` not load-linted — the iter-45 `who` family, fix
+  routed); the tool stays optional (D-031 unchanged — no dev-dep, no
+  CI row, enforcement the owner's call class)
+- verified BEFORE at BASE_COMMIT c82c7ca (1885+1 green, ruff clean —
+  the iter-167 pin re-confirmed) and re-verified after: 1885+1 green,
+  ruff clean, mypy --strict core/ 0 errors, goldens byte-untouched;
+  iter-158 evicted per the cap
+---
 iter-167 · 2026-09-21 · stepread — the step bench's first embodiment (the
 owner's «продолжай работы, что логичнее всего сейчас начать» continuation
 call over STATUS's embodiment routing, the natural doc-streak breaker after
@@ -237,29 +263,3 @@ map re-verified claim-by-claim at HEAD 44151f1)
   both ends at BASE 44151f1 (env pin 3.12.14); 9 paths doc-only (the
   intake routing + the references wiring + the doc quintet, the iter-158
   precedent); iter-149 evicted per the cap
-
-iter-158 · 2026-09-20 · intake31 — the Kurvitz consolidated research routed
-(the owner's «обработай … реши что перенять, адаптировать или привнести»
-call over the uploaded prior-session research residue; D-175's admission
-rule satisfied — the W4 frontier the named consumer, the bounded
-experiment's decision rule the falsifier): PARTIALLY CONFIRMED — mined as
-a GENERATOR LIBRARY, never a worldbuilding layer
-- adopted: the W4 operator set (function-loss / meso assembly / residue
-  lifecycle / natural-pattern transfer + the third-order synthesis →
-  WORLD_AUTHORING §5/§7/§8/§19), the test operationalizations (biography
-  crisis probe + humor generator → WORLD_TESTS §3), the W4 working set
-  (the bounded crossing-household experiment + four falsifier-carrying
-  candidates → WORLD_WORKPLAN §6), the source record docs/ref/kurvitz.md
-  (ref-21 + REFERENCES/REFERENCES_DEEP/NAV wiring); refused: a
-  docs/worldbuild/KURVITZ.md (D-024), a generic residue subsystem
-  (SHOULD-NOT-ADD until the experiment proves a gap), the canon import
-  list, the cross-domain donors as institutions (mechanism-only)
-- syncs riding: the TASKS ledger iter-151..156 one-liners backfilled +
-  the header re-scoped (the practice lapsed post-compaction, verified
-  against git); the worldbuild embodiment lines re-synced to iter-157
-  (the second hand + the pole committed, KI#87 closed — ANCHOR_REGION
-  §6.1/§9, WORLD_TESTS §9, WORLD_WORKPLAN §2/§3); D-189 compound-merged
-  (DECISIONS stays at 30); 1852+1 green + ruff clean both ends at BASE
-  2e64ae2 (env pin 3.12.14); 13 paths doc-only (the intake routing + the
-  worldbuild owners + the references wiring + the doc quintet, the
-  iter-153 precedent); iter-148 evicted per the cap

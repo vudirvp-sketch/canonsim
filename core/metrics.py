@@ -407,8 +407,8 @@ def payoff_latencies(events: Sequence[EventRecord]) -> list[int]:
     """
     seed_ticks: dict[str, list[int]] = {}
     for event in events:
-        for tag in event.hooks:
-            seed_ticks.setdefault(tag, []).append(event.t)
+        for hook in event.hooks:
+            seed_ticks.setdefault(hook, []).append(event.t)
     cursors: dict[str, int] = {}
     latencies: list[int] = []
     for event in events:
