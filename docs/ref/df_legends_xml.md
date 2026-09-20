@@ -127,7 +127,7 @@ SQLite when that spike lands).
   19–24% of events sit in any collection at all (numbers:
   `TECH_NOTES.md` §3). Multi-parent arc grouping (a battle under both a
   war and a journey) remains a hypothetical future extension (P3c,
-  `CORE_DESIGN_RESEARCH.md` §6) — now recorded as our own design
+  the arc family at `phases.md` §3) — now recorded as our own design
   idea, not a DF-export property.
 - **Figure-with-affiliation-history pattern.** Our `entity` records
   (knowledge records, `known_by`, etc.) will need the same "track who
@@ -136,8 +136,8 @@ SQLite when that spike lands).
   for `LEGEND_SPEC` (phase 4).
 - **Population vs notables LOD.** DF keeps `entity_populations` as
   aggregate counts and `historical_figures` as full records — exactly
-  the LOD ladder (`CORE_DESIGN_RESEARCH.md` §2 row "DF worldgen", §6
-  P3d). Our `npc_market_crowd_01` ambient entity (`MVP_SCOPE.md` §4.2)
+  the LOD ladder (the LOD-1 law, `phases.md` §5). Our
+  `npc_market_crowd_01` ambient entity (`MVP_SCOPE.md` §4.2)
   is the seed of this same ladder.
 
 **What we adapt.**
@@ -159,8 +159,8 @@ SQLite when that spike lands).
 
 - **"History ticks abstractly."** DF worldgen advances the clock year by
   year; populations get statistics, notables get events — the LOD
-  principle (`CORE_DESIGN_RESEARCH.md` §2 row "DF worldgen") confirmed
-  at the source; our `entity LOD ladder` (P3d, phase 5) follows.
+  principle (`phases.md` §5's LOD-1) confirmed
+  at the source; our entity LOD ladder follows.
 - **"History without a player."** DF generates 1000 years before the
   player arrives; the player walks into a live world. Our phase-0
   tavern is the analog: events have already been happening; the PC

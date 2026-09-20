@@ -248,7 +248,7 @@ ignites a gas cloud which burns the grass which spreads to
 the bridge which collapses under the player. No social
 layer, no AI planner, no LLM. The lesson for us: depth is
 O(intersections between primitives), not O(content volume)
-(CORE_DESIGN_RESEARCH §3). The fire/gas/water/light
+(`BLUEPRINT.md` §2 L9). The fire/gas/water/light
 quartet is the precedent for our phase-5 `fire_spread`
 metric baseline (KI#4) — the same four-rule alphabet,
 ported to JSON + stdlib Python.
@@ -284,7 +284,7 @@ ported to JSON + stdlib Python.
   environmental. Our 8 systems × intersection matrix
   (`MVP_SCOPE.md` §6) adds the social/epistemic axis
   Brogue lacks; the cross-axis intersections are where
-  our depth lives (`CORE_DESIGN_RESEARCH.md` §3).
+  our depth lives (`BLUEPRINT.md` §2 L9).
 - No event log — runtime state lives in the `pmap` array
   (in-memory). Our INV-1 (state = fold(log)) is the
   inverse; the in-memory `pmap` is the amnesia anti-pattern

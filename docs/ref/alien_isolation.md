@@ -102,7 +102,7 @@ articles are the public surface — design-notes only.
   Our `VISION.md` §6 forbids the simulation from adapting to the
   player's psychology; the LLM briefer may adapt its prose to
   perceived player psychology (the `psychological_echo` proposal
-  P3e in `CORE_DESIGN_RESEARCH.md` §6), but the **canon**
+  P3e — landed iter-46, `core/echo.py`), but the **canon**
   (the JSONL log, the seeded hooks, the director's releases) is
   player-blind. Alien: Isolation's "Director learns the player"
   is the **named anti-pattern** for our P3e scope.

@@ -520,10 +520,17 @@ per-row detail lives in git + worklog + the D-095..D-104 compound)
   TEST_PLAN §8.
 - `prosefloor-2` · done (iter-72, D-104). Detail: VALIDATION_SPEC §2.1 +
   tests/test_scan.py.
-- `packtaxonomy` · material-derived props — owner-gated (phase-6
-  PACK_SPEC: the `copy-from` chain; phases.md §6).
-- `story-critical objects` · the pack flag + a release path — owner-gated
-  (phase-5+; DIRECTOR_SPEC — events already carry the arc/hook family).
+- `packtaxonomy` · material-derived props — absorbed (iter-152 audit,
+  the owner's call; no consumer): the five packs author props directly,
+  the closed read grammar is PACK_SPEC §8 (live), the inheritance chain
+  a pre-placed growth rung (PACK_SPEC §10 — its own trigger, never
+  armed). Detail: PACK_SPEC §8/§10.
+- `story-critical objects` · the pack flag + a release path — absorbed
+  (iter-152 audit, the owner's call; no consumer): the landed law is
+  event-level (`importance.story_critical_events`, tune-1, D-045(b)/
+  D-059 — `core/intent.py`); object importance rides the event/hook
+  family (the pawn-ticket precedent). Detail: `core/intent.py` + the
+  packs' `rules.json`.
 
 ### Research intakes 2/3 — routed, collapsed at the phase-5→6 gate
 

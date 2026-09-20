@@ -4,7 +4,8 @@
 > of the director's runtime contract; the blueprint `docs/blueprint/
 > phase0.md` §4 owns the donor design, `core/director.py` owns the
 > mechanics. Cited by ledger rows DIR-*; this file never restates them.
-> ≤300 lines. The phase-3 landing ledger (iter-36..53, the pacing /
+> ≤600 lines, substance-filtered (`AGENTS.md` §6/§6.1). The phase-3
+> landing ledger (iter-36..53, the pacing /
 > climax / channel / grammar / content columns — the D-065..D-082 family
 > row) + the measured-impact records: TASKS' phase-3 backlog + TEST_PLAN
 > §6 + git — never restated here.

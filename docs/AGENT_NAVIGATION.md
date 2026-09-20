@@ -24,7 +24,6 @@
 | `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike, measurements | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions (≤30 compound-ID family rows; collapses fire on the owner's explicit call — D-034/D-185) | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue (fired-and-absorbed triggers re-pointed) | active |
-| `docs/CORE_DESIGN_RESEARCH.md` | retired at the phase-0 gate review (`doc-1`; absorbed — D-029/D-033); the inbound collapsed iter-151; the file's deletion the owner's next call after a zero-inbound check | retired |
 | `docs/BLUEPRINT.md` | reference distillation: the resolution ledger + cross-cutting laws + build index; entry to `docs/blueprint/` | active |
 | `docs/blueprint/` | per-part applied synthesis: `phase0.md` (the phase-0 donor designs + the §1 type-discipline law), `phases.md` (phases 1–6 architecture + §6 the research archive per its own law — the consult cards + the intake compact blocks + the world-2 records, D-185) | active; read before the matching iteration |
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |

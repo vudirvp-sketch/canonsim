@@ -15,8 +15,8 @@
 >
 > Anti-drift (AGENTS §3, `AGENT_NAVIGATION.md` §3): the catalog stays
 > the source for **license / URL / phase gating / intake rules** — never
-> restated in `docs/ref/`. `CORE_DESIGN_RESEARCH.md` §2 stays the source
-> for the one-line **depth primitive + failure mode** synthesis — never
+> restated in `docs/ref/`. `docs/BLUEPRINT.md` (the ledger + the
+> cross-cutting laws) owns the cross-reference synthesis — never
 > restated in `docs/ref/`. Per-ref files are the **concrete mechanics**
 > layer: named systems, real data structures, pseudo-code where it earns
 > its keep, honest strengths and weaknesses, a per-source verdict.
@@ -38,8 +38,9 @@
 
 > Per-reference deep dive. Format template: this file §0. Iteration
 > plan: this file §1. Anti-drift (D-026): catalog/license/URL/phase
-> gating in `docs/REFERENCES.md`; one-line synthesis in
-> `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics here. License
+> gating in `docs/REFERENCES.md`; one-line
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
+> here. License
 > filter and "patterns not content" rule: `REFERENCES.md` §0.7 (D-015).
 
 **What it is.** One sentence: what the project IS, mechanically.
@@ -49,8 +50,8 @@
 **What we adapt.** Specific, named — and *how* we change it.
 **What inspires us.** The design lesson (one clause, not a paragraph).
 **Strengths.** Concrete virtues we cannot get cheaper elsewhere.
-**Weaknesses.** Concrete defects — `CORE_DESIGN_RESEARCH.md` §2
-  one-liners expanded here.
+**Weaknesses.** Concrete defects — the source's failure
+  modes, expanded here.
 **Verdict.** One line: what role this source plays in our work.
 
 [body]
@@ -74,7 +75,7 @@ without re-judging.
 
 | ID | References | Solo / Batch | Rationale |
 |---|---|---|---|
-| iter-0h | Neighborly + Mesa + DF Legends XML (export schema only) | 3-batch | framework setup + the three cousins already half-documented in `CORE_DESIGN_RESEARCH.md` §2 |
+| iter-0h | Neighborly + Mesa + DF Legends XML (export schema only) | 3-batch | framework setup + the three cousins |
 | ref-1 | DF worldgen + history layer (the half not covered in iter-0h) | solo | 5+ subsystems: history ticks, populations vs notables LOD, age/civ dynamics, artifact anchors, reputation as event |
 | ref-2 | C:DDA `data/json/` schema | solo | the reference for content-as-JSON at scale — items, monsters, recipes, missions, factions; CC-BY-SA lets us lift |
 | ref-3 | Paradox event scripting (CK3 + EU4 + Stellaris) | solo | three wikis, complex grammar (trigger / weight / mtth / effect / option / scope); phase-3 design backbone |

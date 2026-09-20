@@ -156,8 +156,8 @@ six pillars. One-liners; the cited refs own the mechanics.
   ruins, relics that name the dead) — the player excavates P2
   directly. Price: an RPG — history is setting, not a running
   simulation.
-- **King of Dragon Pass / Six Ages** (`CORE_DESIGN_RESEARCH.md` §2
-  row) — F1/F3 by construction: hundreds of hand-authored,
+- **King of Dragon Pass / Six Ages** — F1/F3 by
+  construction: hundreds of hand-authored,
   state-gated scenes fire off the clan simulation; the selection
   layer IS the product. Price: finite authored content; the sim
   underneath is shallow — DF's trade inverted.
@@ -298,16 +298,16 @@ make canonical what DF only offers as an export mode.
 - Two decades of proof that emergent depth outlives authored content;
   the community story corpus (Boatmurdered, the cats) is permanent
   marketing — the stories ARE the product, the property the owner's
-  goal function encodes (`CORE_DESIGN_RESEARCH.md` §0: depth and
-  connectivity, never volume).
+  goal encodes (depth and connectivity, never volume — `BLUEPRINT.md`
+  §2 L9).
 - Legends export exists at all — the only irreplaceable external
   resource (`ROADMAP.md` §4).
 - "Losing is fun" — the founding precedent for
   irreversibility-as-content (T4, L8).
 
 **Weaknesses.** (one-liners; the §F rows above are the owners — this
-expands the `CORE_DESIGN_RESEARCH.md` §2 row "micro-empty; dry prose;
-causality reconstructed")
+expands the "micro-empty; dry prose; causality reconstructed"
+one-liner)
 
 - F1 no salience layer; F2 no pacing layer; F3 no audience
   epistemology; F4 fidelity cliffs; F5 monolithic fidelity (FPS

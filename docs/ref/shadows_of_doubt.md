@@ -3,8 +3,9 @@
 > Per-reference deep dive. Format template: `docs/REFERENCES_DEEP.md` §0.
 > Iteration plan: `docs/REFERENCES_DEEP.md` §1 (ref-20, 4-batch + the
 > Kenshi economy loop). Anti-drift (D-026): catalog/license/URL/phase
-> gating in `docs/REFERENCES.md`; one-line synthesis in
-> `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics here. Source is
+> gating in `docs/REFERENCES.md`; one-line
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
+> here. Source is
 > proprietary — public dev-logs (ColePow Games / Fireshine) and press
 > coverage only. No code, no assets, no 1:1 rewrites (`REFERENCES.md`
 > §0.5).

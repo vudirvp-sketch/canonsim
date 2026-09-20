@@ -208,10 +208,10 @@ discipline; C:DDA proves it grows.
 
 **Weaknesses.**
 
-- **No event log / no event sourcing** (`CORE_DESIGN_RESEARCH.md` §2
-  row "C:DDA"): C:DDA is state-mutating at runtime; the save file is a
-  snapshot, not a fold-replayable log. Same amnesia as Mesa
-  (see `mesa.md`). Our JSONL log + `state_changes` (INV-1) is the fix.
+- **No event log / no event sourcing**: C:DDA is state-mutating at
+  runtime; the save file is a snapshot, not a fold-replayable log. Same
+  amnesia as Mesa (see `mesa.md`). Our JSONL log + `state_changes`
+  (INV-1) is the fix.
 - **Inline `dialogue` blocks bloat mission definitions**: the full
   conversation template is inlined in the `mission_definition` object —
   `missiondef.json` is 55k+ lines; cross-referencing by id impossible;

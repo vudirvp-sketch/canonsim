@@ -4,8 +4,9 @@
 > Iteration plan: `docs/REFERENCES_DEEP.md` §1 (ref-16 — owner-requested
 > fresh source, the D-022 doc-pass exception; absorbed inside iter-8a,
 > no solo iteration). Anti-drift (D-026): catalog/license/URL/phase
-> gating in `docs/REFERENCES.md`; one-line synthesis in
-> `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics here. License
+> gating in `docs/REFERENCES.md`; one-line
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
+> here. License
 > filter and "patterns not content" rule: `REFERENCES.md` §0.7 (D-015).
 > Source: `neoneye/agent-memory-atlas` (MIT, license checked via the
 > GitHub API 2026-08-28), content pinned 2026-08-06. Corpus: 151 OSS

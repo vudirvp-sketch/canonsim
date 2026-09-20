@@ -2,8 +2,9 @@
 
 > Per-reference deep dive. Format template: `REFERENCES_DEEP.md` §0. Iteration
 > plan: `REFERENCES_DEEP.md` §1. Anti-drift (D-026): catalog/license/URL/phase
-> gating in `docs/REFERENCES.md`; one-line synthesis in
-> `docs/CORE_DESIGN_RESEARCH.md` §2; concrete mechanics here. License filter
+> gating in `docs/REFERENCES.md`; one-line
+> the cross-reference synthesis in `docs/BLUEPRINT.md`; concrete mechanics
+> here. License filter
 > and "patterns not content" rule: `REFERENCES.md` §0.7 (D-015).
 > Source: `github.com/vudirvp-sketch/live-char-guide` — the owner's own
 > project; guide v9.2.6, MIT LICENSE file read in full (2026-08-27). Read in

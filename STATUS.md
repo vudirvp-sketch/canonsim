@@ -1,46 +1,45 @@
-Iteration: iter-151 (`iter-151-docscomp1` — the semantic documentation
-compaction pass, the owner's ownership-matrix session + the «вперед
-приступай к работе» call over its two-pass plan; doc-only, zero code,
-zero corpus price): the iter-140-memgc memory-GC RESTORED and extended —
-the memgc (c6d9532) had been silently clobbered by iter-140-intake27's
-stale-base archive apply (the files re-expanded wholesale, the GC's D-173
-number reused by intake-27; found and recorded this session, D-185).
-PASS 1: DECISIONS 63→30 family rows / 231→48KB (D-185 restored under a
-collision-free ID; the intake family absorbs D-173..D-175 + D-184; the
-fixation families merged; the landings family D-176..D-182; the fat
-build-column rows slimmed to decision + pointer); TASKS 2422→914 (the
-phase-6-era ledger extended iter-140..150; the THIRTEEN standing rows
-extracted to the live queue head; the closed backlogs collapsed);
-phases.md §6 restored to the compact-block form + the intake-27/28/29
-compact blocks + the card amendment ported (4305→2650);
-AGENT_NAVIGATION restored to a state map (88→14KB). PASS 2: the
-SPECS_BACKLOG absorbed triggers re-pointed (restored); TEST_PLAN
-retitled the Verification Stack — the per-landing acceptance records →
-the owning records, the instrument definitions kept (837→588);
-REFERENCES_DEEP's verdict column trimmed to one-line purposes (63→31KB);
-TAXONOMY/BLUEPRINT/PARSER_SPEC/BRIEF_SPEC re-points; the ref/* template
-lines re-pointed (34 files); DIRECTOR_SPEC's header chronicle collapsed;
-AGENTS §6 one-line sync (the collapse rhythm); CORE_DESIGN_RESEARCH's
-structural inbound → ZERO (the file's deletion the owner's next call;
-the 27 evidence-class citations in ref/* + phase0.md sweep with it).
+Iteration: iter-152 (`iter-152-docgc2` — the CORE_DESIGN_RESEARCH
+deletion + citation sweep, the owner's doc-pass call over the D-185
+remainder + the DIRECTOR_SPEC re-pin + the two v0.2 rows' consumer
+audit; doc-only, zero code, zero corpus price): the retired synthesis
+file DELETED (absorbed D-029/D-033; the deletion D-185's recorded next
+step, the owner's call now made) with the actual-at-HEAD citation
+sweep: the 27 `docs/ref/*` occurrences (9 template headers re-pointed
+to the BLUEPRINT form, the iter-151 34-file precedent; 18 in-body
+citations re-pointed to their live owners — D-019/D-020/D-005,
+`phases.md` §3/§5, `BLUEPRINT.md` §2 L9, `core/echo.py`, `kenshi.md` —
+or dropped where the ref file itself carries the content) + the 2
+`phase0.md` donor-stack clauses (the synthesis-only rationale stays
+in-line); `REFERENCES_DEEP`'s ownership statement + §0 template
+re-pointed (BLUEPRINT owns the cross-reference synthesis), the iter-0h
+rationale clause trimmed; the FAQ four-places → three; the NAV §1 row
+removed. Same pass: DIRECTOR_SPEC's stale self-cap re-pinned ≤300 →
+≤600 substance-filtered (`AGENTS.md` §6/§6.1 — the BRIEF_SPEC/
+PACK_SPEC precedent); the two v0.2 owner-gated rows CLOSED as absorbed
+(the consumer audit: `packtaxonomy` — PACK_SPEC §8's closed read
+grammar + §10's never-armed copy-from growth rung own it;
+`story-critical objects` — the event-level
+`importance.story_critical_events` law landed tune-1/D-045(b)/D-059,
+object flags ride the event/hook family); D-185's execution note.
+worldbuild.zip stays deleted (the owner's call).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified BEFORE working at BASE_COMMIT 5d88bd0 — identical — and
-re-verified after; doc-only, zero code, zero corpus price) ·
+verified at BASE_COMMIT accfd72d BEFORE working — identical — and
+re-verified after with the diff in place; the sandbox's first pytest
+invocation ran the system 3.13.5 via the ~/.local/bin shebang and
+tripped the known env-pin law — TEST_PLAN §1.1, re-run on the venv
+3.12.14: identical) ·
 Date: 2026-09-20 ·
-Scope: `docs/DECISIONS.md`, `docs/TASKS.md`,
-`docs/blueprint/phases.md`, `docs/AGENT_NAVIGATION.md`,
-`docs/SPECS_BACKLOG.md`, `docs/TEST_PLAN.md`,
-`docs/REFERENCES_DEEP.md`, `docs/TAXONOMY.md`, `docs/BLUEPRINT.md`,
-`docs/DIRECTOR_SPEC.md`, `docs/BRIEF_SPEC.md`, `docs/PARSER_SPEC.md`,
-`docs/ref/` (34 template lines), `AGENTS.md` (§6 one line),
-`STATUS.md` (this re-pin + the Next step pointers), `worklog.md`
-(this entry + the re-trim to the line cap) — 16 paths, doc-only; over
-the 3–5 soft limit, all mandated by the pass's own scope (the owner's
-matrix), noted per AGENTS §2.3. The prior iteration's record: iter-150
-(revalid-1). The detail lives in D-185 + worklog + git.
+Scope: `docs/CORE_DESIGN_RESEARCH.md` (DELETED), `docs/ref/` (18
+files), `docs/blueprint/phase0.md`, `docs/REFERENCES_DEEP.md`,
+`docs/AGENT_NAVIGATION.md`, `docs/DIRECTOR_SPEC.md`, `docs/TASKS.md`,
+`docs/DECISIONS.md` (the D-185 note), `STATUS.md` (this re-pin),
+`worklog.md` (this entry) — 27 paths, doc-only; over the 3–5 soft
+limit, all mandated by the sweep's own scope (the citation sweep IS
+the task), noted per AGENTS §2.3. The prior iteration's record:
+iter-151 (docscomp1). The detail lives in D-185 + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -193,9 +192,9 @@ matrix), noted per AGENTS §2.3. The prior iteration's record: iter-150
   KI#51: external-paper figures are drift until fetched; KI#80:
   landing counts — files, entries, suites — are re-counted against
   `git show --stat` before the stop-point report, a count asserted
-  from the plan is drift at write time). Four
-  places, four jobs: `REFERENCES.md` catalogs;
-  `CORE_DESIGN_RESEARCH.md` §2 synthesizes; `docs/ref/<source>.md`
+  from the plan is drift at write time). Three
+  places, three jobs: `REFERENCES.md` catalogs;
+  `docs/ref/<source>.md`
   carries mechanics; `BLUEPRINT.md` + `docs/blueprint/` carry
   resolutions. Link, never restate; cite ledger row IDs (e.g. "per
   RNG-1"). The audit method: grep a sample of ledger terms across
@@ -514,19 +513,19 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-151 DONE: the semantic documentation compaction pass (D-185 —
-the iter-140-memgc GC restored after the stale-apply clobber;
-DECISIONS 63→30, TASKS 2422→914 with the standing rows extracted,
-phases.md 4305→2650, NAV 88→14KB, TEST_PLAN/REFERENCES_DEEP/spec
-re-roles; the docs corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
+**iter-152 DONE: the CORE_DESIGN_RESEARCH deletion + the evidence-class
+citation sweep (the file retired D-029/D-033, deleted per D-185's
+recorded next step — the owner's call; the 27 ref/* + 2 phase0
+citations re-pointed to their live owners, REFERENCES_DEEP/NAV/FAQ
+synced) + DIRECTOR_SPEC's stale self-cap re-pinned ≤300 → ≤600
+(AGENTS §6/§6.1) + the two v0.2 rows closed as absorbed (the consumer
+audit — no consumer for either; TASKS owns the pointers); doc-only,
+1842+1 green both ends. iter-151: the semantic documentation
+compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914 with the
+standing rows extracted, phases.md 4305→2650, NAV 88→14KB, the docs
+corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
 relicense (`LICENSE` + the README's License section, D-183) + the
-standing-backlog REVALIDATION (all thirteen rows audited against the
-current architecture — the four questions per row, the intake-29
-admission rule turned onto the queue; the verdict set in D-184:
-pack-3
-rewritten, tune-3 re-aimed, st-2/scav-1 sharpened,
-companion-1/mech-2/st-5/parse-2 synced,
-engine-1/presentation-1/qa-1/bg-6/st-4 audited-current; no rows
+standing-backlog REVALIDATION (the verdict set in D-184; no rows
 deleted, none added, no order changed). iter-149: pack-4;
 iter-148: pack-1; iter-147: since-1; iter-146: res-1;
 iter-143: ci-1 (verified LIVE green on main at 156ec8f —

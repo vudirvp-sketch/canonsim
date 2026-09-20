@@ -446,8 +446,8 @@ by construction).
   `every/random/any` trinity is the cleanest possible abstraction for
   "do this to all / one-random / test-if-any of these related things."
 - **The `add_opinion` / `add_hook` family** — *secrets and leverage
-  as first-class facts* (P3a, `CORE_DESIGN_RESEARCH.md` §2 row for
-  CK3). A hook *is an event in the log*, with a target, a type, an
+  as first-class facts* (P3a, the CK3 row — landed,
+  `phases.md` §3). A hook *is an event in the log*, with a target, a type, an
   expiry tick, and a cause — not mutable state. Precedent for our
   `knowledge_record` and `leverage_record` event kinds.
 - **The on_action dispatch table**: `on_action = { events = { ... }
@@ -481,7 +481,7 @@ by construction).
   is the explicit rejection of the MTTH anti-pattern: consequences
   seeded at event time (D-005), never invented from nothing, never
   wall-clock-sampled. "MTTH is anti-deterministic by construction" is
-  the named anti-pattern in `CORE_DESIGN_RESEARCH.md` §2 — INV-2 is
+  the named anti-pattern — INV-2 is
   the discipline that rejects it.
 - **Triggers → pure predicates over projected state** (per D-023:
   runtime state = incremental projection over the log). No

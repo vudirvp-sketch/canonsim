@@ -52,8 +52,8 @@ language match to our stdlib-only core.
   Agent.step() pieces (D-037: the systems live in `core/`).
 - **DataCollector precedent.** Mesa's `agent_reporters` /
   `model_reporters` is the same idea as our M1–M5 metrics
-  (`CORE_DESIGN_RESEARCH.md` §6 P1b–d, D-019): computed from the run,
-  not by feel. We compute M1–M5 by folding the JSONL log, not by
+  (D-019): computed from the run, not by feel. We compute M1–M5 by
+  folding the JSONL log, not by
   collecting at runtime — but the *notion* of "named, callable,
   replay-derived" metrics is Mesa's.
 
@@ -91,9 +91,8 @@ is the same lesson as our queue key: ordering is the design lever.
 
 **Weaknesses.**
 
-- **Pure ABM = episodic amnesia** (Mesa / Sims problem,
-  `CORE_DESIGN_RESEARCH.md` §2 row "Mesa"). `step()` mutates state; no
-  event log; replay = re-run, not fold. Our JSONL log + `state_changes`
+- **Pure ABM = episodic amnesia** (the Mesa / Sims problem).
+  `step()` mutates state; no event log; replay = re-run, not fold. Our JSONL log + `state_changes`
   is the amnesia fix — the lesson ported from The Sims via Mesa.
 - No causal chain — `agent.step()` is opaque; the "why" lives in agent
   code, not the framework. Our `cause` (P1a) records this at the event.

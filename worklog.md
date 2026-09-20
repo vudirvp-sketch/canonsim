@@ -7,6 +7,20 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-152 · 2026-09-20 · docgc2 — the owner's doc-pass call: the CORE_DESIGN_RESEARCH
+deletion (D-185's recorded next step; absorbed D-029/D-033) + the citation sweep
+- docs (27 paths, over the soft limit per AGENTS §2.3 — the sweep IS the scope):
+  the file DELETED; ref/ ×18 (9 template headers → the BLUEPRINT form, the
+  iter-151 34-file precedent; the in-body citations → their live owners:
+  D-019/D-020/D-005, phases.md §3/§5, BLUEPRINT §2 L9, core/echo.py, kenshi.md);
+  phase0 ×2; REFERENCES_DEEP (ownership + §0 template + the iter-0h rationale);
+  NAV §1 row; FAQ four→three; DIRECTOR_SPEC ≤300 → ≤600 (the BRIEF_SPEC
+  precedent); TASKS' two v0.2 rows closed absorbed (no consumer: PACK_SPEC
+  §8/§10 + the event-level story-critical law); D-185's execution note
+- 1842+1 green + ruff clean both ends at BASE accfd72d (env pin 3.12.14; the first
+  run's system-3.13.5 shebang trip = the TEST_PLAN §1.1 env-pin law, not a
+  defect); worldbuild.zip stays deleted (the owner's call)
+
 iter-151 · 2026-09-20 · docscomp1 — the owner's matrix session + the «вперед
 приступай к работе» call: the semantic documentation compaction pass — the
 iter-140-memgc GC restored and extended (D-185; the memgc had been clobbered
@@ -90,11 +104,3 @@ step (the recipe in the stop-point report)
 - doc-only beyond the workflow file; the first LIVE run fires on the owner's
   push; 7 files (over the soft limit, all mandated — the doc quintet by
   AGENTS §6, the map row by NAV §3's short-map duty)
-
-iter-142 · 2026-09-19 · intake29 — the external-audit / roadmap-review
-output routed (D-175): the audit CONFIRMED (live-verified at a real clone +
-the suite the audit could not run); six contract sharpenings adopted into
-the rows + two rider rules (the pack.py split rider; the intake admission
-rule); the ORDER recommendation recorded, never enforced (D-113)
-- docs: phases.md §6 the intake-29 block, TASKS, STATUS re-pin; iter-131
-  evicted per the cap; doc-only, 1754+1 green

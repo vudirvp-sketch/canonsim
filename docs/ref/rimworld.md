@@ -224,8 +224,7 @@ the queue-and-weight pattern is what we keep from all three.
   from play, not from code). The exact `desiredThreatScore`
   curve is undocumented; our adaptation copies the shape, not
   the numbers.
-- **Randy's from-nothing anti-pattern** (D-005) — explicitly
-  named in our `CORE_DESIGN_RESEARCH.md` §2 row. Our `P2e`
+- **Randy's from-nothing anti-pattern** (D-005). Our `P2e`
   refuses this: no new threats from the queue, only releases
   of the lowest-threshold seeded hook when entropy drops.
 - **No causal chain.** RimWorld Tales are records, not graphs;

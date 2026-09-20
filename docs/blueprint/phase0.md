@@ -206,8 +206,7 @@ phase-0 answer to "let it crash" (D-031).
   `sim/` fails CI.
 
 **Donor stack.** Prom Week (social physics — synthesis-only: academic
-  paper + GDC talk, no code repo; no deep dive planned, per
-  `CORE_DESIGN_RESEARCH.md` §2) · live-char (Trigger→Action→Price;
+  paper + GDC talk, no code repo; no deep dive planned) · live-char (Trigger→Action→Price;
   observability law L1) · Brogue
   (`promoteTile`, extinguishing priority, stochastic promotion) · C:DDA (flat
   effect vocabulary; itemgroup `collection`/`distribution` for placement) ·
@@ -262,8 +261,7 @@ dice roll keyed through the RngBank (L5) — a bare `random.` import in
   salient known fact of the teller — knowledge *used*, not just stored.
 
 **Donor stack.** The Sims (gossip propagation — synthesis-only:
-proprietary, patterns-from-papers per D-015; no deep dive possible, per
-`CORE_DESIGN_RESEARCH.md` §2) · Prom
+proprietary, patterns-from-papers per D-015; no deep dive possible) · Prom
 Week (relations gate actions — synthesis-only, as above) · Neighborly
 (pair-keyed map shape) · C:DDA (pair-keyed faction booleans) · CK3/Paradox
 (relation axes; secrets arrive phase 3+) · DF Legends (`hf_reputation_change`

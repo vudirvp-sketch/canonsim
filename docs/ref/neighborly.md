@@ -36,8 +36,8 @@ produce emergent narrative summaries.
 **What we take.**
 
 - The **pair-keyed relationship map** shape — `Dictionary<(int, int), …>`
-  with a sorted tuple as canonical key. This is exactly P2a (D-020,
-  `CORE_DESIGN_RESEARCH.md` §6): "sparse pair-keyed relation map" for
+  with a sorted tuple as canonical key. This is exactly P2a (D-020):
+  "sparse pair-keyed relation map" for
   NPC↔NPC relations in iter-3. Neighborly confirms the data structure.
 - The "system-per-verb" decomposition — `SocialSystem`, `RoutineSystem`
   as separate ticked scopes. Our `core/` system-module layout
@@ -63,7 +63,7 @@ produce emergent narrative summaries.
   §1). INV-1 preserved; relations are a view, not a store.
 
 **What inspires us.** The "settlement simulates itself without a player"
-posture — confirms Kenshi's lesson (`CORE_DESIGN_RESEARCH.md` §3 row 4)
+posture — confirms Kenshi's lesson (`kenshi.md`)
 that the world must run for its own sake, not for the PC. Neighborly is
 the proof-of-existence that agent goals + interactions produce emergent
 narrative *at all* — we don't invent the genre, we harden its epistemology.
@@ -78,8 +78,8 @@ narrative *at all* — we don't invent the genre, we harden its epistemology.
 
 **Weaknesses.**
 
-- Weak epistemology (`CORE_DESIGN_RESEARCH.md` §2 row "Neighborly"):
-  agents act but don't accumulate structured knowledge — no `known_by`,
+- Weak epistemology: agents act but don't accumulate structured
+  knowledge — no `known_by`,
   no fidelity, no rumor-distortion channel. This is the gap our
   `knowledge` records (MVP_SCOPE §10, EVENT_SCHEMA §3) are designed to
   fill; Neighborly confirms it is a real gap, not our invention.
