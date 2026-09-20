@@ -158,6 +158,22 @@ across positions, not accumulated on one dramatic faction vertex. Partial: the
 slice is authored over committed knowledge positions; the distribution is not
 yet measured on a live session.
 
+### PARTIALLY CONFIRMED — Causal mesh independence (2026-09-20, iter-156)
+
+W3's test: 3–5 cross-system loops genuinely independent, with no repeated
+output of one mechanism counted twice. Result: five loops pass the disable
+test and the shared-stage rule (`ANCHOR_REGION.md` §5) — four at the
+committed band, each with its own driver, mediator and residue and each
+demonstrated by its own green test (fire→institutions and feud→politics in
+`tests/test_triangle.py`, season→weather→social in `tests/test_calendar.py`,
+route→condensation→culture in `tests/test_t1_province.py`); the fifth (the
+credit loop, the crossing household's debt) at the authored band over
+committed beats. The anti-double-count ruling applied once: the theft →
+suspicion → document-check → arrest circuit merged into the fire loop's
+mechanism family. Partial: the four interlock edges are verified per-edge at
+their own tests, a single run with all loops interlocked is not on record
+(a live-session question), and the credit loop's flow is not pack-live.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

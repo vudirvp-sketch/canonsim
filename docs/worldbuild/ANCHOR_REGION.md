@@ -96,35 +96,110 @@ economic and social experience.
 | Weather/calendar | markets, fairs, seasons, storm chain | answered (§6.1): the high_water rise → the punt men's double toll — the custom as persistent social adaptation; the household's four-phase year |
 | Read-side meaning | cards, chronicle, lore, named travelers, scene markers | answered (§6.1): the flood-debt lever set — whoever learns the flood story holds a different lever at the stair; the wergeld duty already live on the road |
 
-## 5. Cross-system loops already demonstrated or strongly indicated
+## 5. The causal mesh (W3 — audited iter-156)
 
-### Loop A — fire → institutions
+Five loops, each a circuit that returns to its own driver changed. The audit's
+two laws: the **disable test** — remove one loop's unique driver, and the other
+four must still run — and the **shared-stage rule** — two circuits sharing
+driver AND mediator are one mechanism counted once; sharing the response stage
+alone is an interlock, never a collapse.
 
-`fire event → fear/grievance → faction threshold → council/patrol/vigil → new world state`.
+### Loop A — fire → institutional response (COMMITTED)
 
-This is the strongest current evidence that one ordinary event can cross multiple
-systems without becoming a scripted chain.
+`fire_started over a location's fire_spots → alarm_raised (fear +40 direct,
+panic_ripple +10 through the walls) → the triangle's fear arms — the guild
+councils at 30, the garrison patrols at 40 (the FNV cascade: trade first,
+crown second) → the changed world state (barred stalls, the watch on the
+road) → the fear's own decay re-arms the bars`.
 
-### Loop B — history → present politics
+Closing edge: state-closing — the response changes the world the next fire
+meets. Substrate: `transitions.fire`, the alarm's reactions, the guild and
+garrison faction arms. Demonstrated: the market fire tips the guild, the keep
+fire the garrison (`tests/test_triangle.py`). The anti-double-count ruling:
+the theft → suspicion → document-check → arrest circuit is the SAME mechanism
+family — an ordinary verb's axis ripple crossing the institutional door — one
+mechanism, two armed verb families (fire/fear, theft/suspicion); counted once,
+here, never a sixth loop.
 
-`old mill fire → grievance/wergeld memory → faction composition → modern response`.
+### Loop B — feud residue → present politics (COMMITTED)
 
-The point is not the old story itself. The point is that the old event remains an
-active input to current decisions.
+`the 150-year chronicle's feud collection (seeded once at worldgen) → the
+houses' composition + the wergeld prohibition + the elders' seeded grievance
+(35/30, under the vigil's 40-bar) → grief_wakes on a heard alarm (+20, the
+numeric-home law: only the seeded holders wake) → both houses over the bar →
+the wergeld vigil → the vigil itself a present political fact, rendered in
+the tale`.
 
-### Loop C — season → weather → social signal
+Closing edge: state-closing — the response is itself new residue. Substrate:
+the chronicle collections, the old-families faction arm, the wergeld law, the
+grief reaction. Demonstrated: each fire wakes exactly one elder — Thornmill
+hears the market, the crofts hear the keep — and the vigil needs both
+(`tests/test_triangle.py`). The honest interlock: the alarm is the only
+committed grievance writer, so B's waking edge is fire-fed — A and B
+interlock at the alarm; neither loop alone produces the vigil.
 
-`seasonal phase → weather bias → storm/rain consequence → market texture / local response`.
+### Loop C — season → weather → social signal (COMMITTED)
 
-The current repository measures a second-order path from the seasonal/weather
-slice into a market-facing narrative response.
+`the seasons' cycle arithmetic (never a draw — the snowmelt comes when it
+comes) → the weather ride's per-phase bias (the rise storm-heavy from any
+state, the calm rebuilding slow) → storm → the murmur hook → Maren's ramble
+— the market watching the rain eat the stalls`.
 
-### Loop D — route → condensation → culture
+Closing edge: clock-closing — the year's return re-runs the bias; no state
+feeds back. The honest grade: a pulse, the mesh's clock, not a feedback
+circuit — and still cross-system (calendar → weather → director hook → market
+NPC). Substrate: the calendar's seasons, the seasonal weather ride, the storm
+hook. Demonstrated: the weather rides the seasons with the phase bias
+(`tests/test_calendar.py`). The C→A edge: the rain washes the smoke away
+(`smoke_washed_away`) — the sky erases the fire's sign.
 
-`travel graph → cold road population → warm-zone condensation → generated names → visible cultural difference`.
+### Loop D — route → condensation → culture (COMMITTED)
 
-This connects topology to identity without adding a special "culture system"
-whose only job is to describe culture.
+`the travel lattice + the artery's claims → the road traffic as ONE group
+entity (road_counts, the cardinality aggregate while cold) → the reader's
+warm zone → road_musters (the members' canon births, names drawn from the
+cultures' profiles) → two lowland tongues and one hill tongue visible in the
+tale`.
+
+Closing edge: reader-closing — the condensation materializes who the road IS;
+legibility, not state feedback. Substrate: the travel rules, the group's
+macro/condense pair, the name profiles. Demonstrated: the traffic condenses
+at the first beat, the born names render, the two tongues split their
+postures (`tests/test_t1_province.py`). The B⇄D edge: the condensation
+materializes the hill carrier — the wergeld word's walker is himself a born
+stranger; the feud's memory rides the road's traffic.
+
+### Loop E — the credit loop (AUTHORED — §6.1's unit)
+
+`the flood year (one historical catastrophe, not the recurring phase) → the
+guild-held flood debt → the high_water double toll under the shelter law →
+the road's word ("the crossing answers the heaviest purse") → the debt
+cleared by a strong honest season, or the bend hardened into custom`.
+
+Closing edge: state-closing at the authored band — the residue (reputation,
+debt standing) changes the next season's options. Band honesty: the beats are
+committed (the spine, the coerce double-toll, the shelter law, the
+storm-armed rise), the mediation is authored (the debt's paper), and the flow
+is not economy-armed. The C⇄E edge: the rise prices the toll — the season
+modulates the debt's collection.
+
+### The verdict
+
+| Loop | Driver | Mediator | Response | Residue | Closure | Band |
+|---|---|---|---|---|---|---|
+| A | live fire event | fear axis + thresholds | council / patrol | changed world | state | committed |
+| B | generated feud history | grievance + prohibition | the vigil | new memory | state | committed |
+| C | the calendar clock | weather bias + hook | the murmur | market texture | clock | committed |
+| D | the travel graph | condensation + names | born strangers | visible culture | reader | committed |
+| E | the flood year | the debt's paper | the double toll | reputation + standing | state | authored |
+
+Five loops pass the disable test — no two share a driver, and the one shared
+stage (the triangle's threshold dynamics feeding the intent door) carries two
+different axes (fear, grievance) without making the loops one mechanism. Four
+named interlock edges: the alarm wakes both fear and grief (A⇄B), the rain
+erases the smoke (C→A), the condensation materializes the feud's carrier
+(B⇄D), the rise prices the toll (C⇄E). Independent loops, interlocked edges —
+not one engine wearing five masks.
 
 ## 6. Meso frontier
 

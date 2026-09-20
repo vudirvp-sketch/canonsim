@@ -7,6 +7,21 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-156 · 2026-09-20 · mesh1 — the world track's W3 causal mesh audit (the
+owner's «начинай работу по планам» call; engine-1 stays owner-hardware-gated,
+the world plan the executable frontier): five loops pass the disable test +
+the shared-stage rule — A fire→institutions, B feud→politics, C season→
+weather→social, D route→condensation→culture (four COMMITTED, per-loop tests
+green) + E the credit loop (AUTHORED, §6.1's unit); the anti-double-count
+ruling (the theft/suspicion/document-check circuit = A's mechanism family);
+four interlock edges named (alarm→fear+grief, rain→smoke, condensation→
+carrier, rise→toll)
+- docs: ANCHOR_REGION §5 (the mesh + the verdict table), WORLD_TESTS §9 (the
+  mesh entry, PARTIALLY CONFIRMED), WORLD_WORKPLAN §2/§3/§5 (W3 DONE, the
+  frontier → W4), STATUS re-pin; iter-146 evicted per the cap
+- 1842+1 green + ruff clean both ends at BASE dc2ab38 (env pin 3.12.14);
+  5 paths doc-only, inside the soft limit
+
 iter-155 · 2026-09-20 · anchor1 — the world track's first anchor pass (the
 owner's «начинай работу по планам» call; engine-1 stays owner-hardware-gated,
 the {3–8B, GBNF} gap row the decision input — the world plan the executable
@@ -118,11 +133,4 @@ streams), the cards' since-segments, the packlint readside lint; the
 unarmed landing, +30 tests, the committed corpora byte-untouched
 - docs: TASKS, DECISIONS D-180, CONTRACTS §3 collapsed, BRIEF_SPEC
   §3.4/§3.9/§6, STATUS re-pin, NAV §1
-
-iter-146 · 2026-09-19 · res1 — res-1 the economy substrate: `core/economy.py`
-(the account primitive, the three verbs through the canon door, the flow
-drafts, `price_of`), the door/gate underflow floors, the discrete arm, the
-packlint economy family; the unarmed landing, +18 tests
-- docs: TASKS, DECISIONS D-179, CONTRACTS §2 collapsed, EVENT_SCHEMA §4,
-  STATUS re-pin, NAV §1; the §9 claim packet CONFIRMED (F3/F4 + the oracle)
 

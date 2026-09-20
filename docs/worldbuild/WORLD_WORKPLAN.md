@@ -37,7 +37,8 @@ The current repository's Sarrow Vale province is the strongest concrete
 implementation witness. The broader worldbuilding goal is not closed yet because
 the meso and human-meaning layers are still thinner than the mechanical layer —
 the first meso unit is authored (`ANCHOR_REGION.md` §6.1, iter-155), not yet
-pack-embodied beyond the single-NPC band.
+pack-embodied beyond the single-NPC band. The causal mesh is audited — five
+independent loops, four committed (W3 done, iter-156, `ANCHOR_REGION.md` §5).
 
 The active deliverable is `ANCHOR_REGION.md`.
 
@@ -67,7 +68,7 @@ One concrete human-life slice run over the existing region — the high-water
 double toll (`ANCHOR_REGION.md` §7.1): the same mechanical event through four
 positions (the toll-taker, the hill carrier, the auditor, the guild), each with
 a bounded map. Four of the five meaning probes answered at the authored band;
-the Thornmill family obligation stays open. The next frontier is W3 (§5).
+the Thornmill family obligation stays open. The next frontier is W4 (§6).
 
 ## 4. Next research only if needed
 
@@ -89,19 +90,22 @@ of these pieces.
 Do not add new powers. Extend the Resonance model only when an anchor or later
 region requires a capability not already bounded by `RESONANCE.md`.
 
-## 5. W3 — Causal mesh — THE NEXT FRONTIER (A1/A2/A3 done, iter-155)
+## 5. W3 — Causal mesh — DONE (iter-156)
 
-Identify **3–5** cross-system loops in the anchor that are genuinely
-independent.
-
-Do not count repeated outputs of one mechanism as separate loops.
-
-The strongest candidates already visible are:
-
-- fire → institutional response;
-- feud residue → present politics;
-- season → weather → social response;
-- route → traveler condensation → cultural legibility.
+The audit's two laws: the **disable test** (remove one loop's unique driver;
+the others must still run) and the **shared-stage rule** (two circuits sharing
+driver AND mediator are one mechanism counted once). Result: five loops pass —
+fire → institutional response, feud residue → present politics, season →
+weather → social signal, route → condensation → culture (all four COMMITTED,
+per-loop tests green) + the credit loop (AUTHORED — `ANCHOR_REGION.md` §6.1's
+unit; the debt's flow not economy-armed). The anti-double-count ruling applied
+once: the theft → suspicion → document-check → arrest circuit is the fire
+loop's mechanism family on another verb — counted in A, never a sixth loop.
+Four named interlock edges: the alarm wakes both fear and grief (A⇄B), the
+rain erases the smoke (C→A), the condensation materializes the feud's carrier
+(B⇄D), the rise prices the toll (C⇄E). The mesh's map and verdict live in
+`ANCHOR_REGION.md` §5; the test record in `WORLD_TESTS.md` §9. The next
+frontier is W4 (§6).
 
 ## 6. W4 — Meso expansion
 

@@ -1,35 +1,29 @@
-Iteration: iter-155 (`iter-155-anchor1` — the world track's first anchor pass
-over Sarrow Vale, the owner's «начинай работу по планам» call delegating the
-pick to the plans' own head: the engineering queue's recommended head
-(engine-1 + presentation-1) stays owner-hardware-gated (the {3–8B, GBNF}
-arm's standing gap row — engine-1's decision input), so the executable
-frontier is the world track's own plan (WORLD_WORKPLAN §3): A2 the crossing
-household authored (the first meso unit — the weir stair's ferry family
-through the doctrine's full ladder, riding the committed substrate: Ketta's
-spine, the shelter law, the high_water custom, the coerce beat; the
-guild-held flood debt the unit's durable constraint; the collision with the
-committed debt-auditor errand staged, no new mechanics); A1 the causal map's
-unsupported links deepened (eight rows answered at the authored band,
-Geography/Resource honestly open — the pack is not economy-armed); A3 the
-first meaning slice run (the high-water double toll through four bounded
-maps — the meaning distributed, not faction-concentrated); WORLD_TESTS'
-three OPEN tests → PARTIALLY CONFIRMED; the anchor exit criterion's own
-test MET once at the authored band; KI#87 opened (the phantom punt pole —
-iter-118's forward reference, fix routed to the pack's next engineering
-touch); doc-only, zero code, zero corpus price.
+Iteration: iter-156 (`iter-156-mesh1` — the world track's causal mesh audit
+(W3), the owner's «начинай работу по планам» call again delegating the pick
+to the plans' own head: the engineering queue's recommended head (engine-1 +
+presentation-1) stays owner-hardware-gated (the {3–8B, GBNF} arm's standing
+gap row — engine-1's decision input), so the executable frontier is the world
+plan's own W3: five loops pass the disable test and the shared-stage rule —
+fire→institutions, feud→politics, season→weather→social,
+route→condensation→culture (four COMMITTED, per-loop tests green) + the
+credit loop (AUTHORED, §6.1's unit); the anti-double-count ruling applied
+once (the theft/suspicion/document-check circuit = the fire loop's mechanism
+family, counted in A); four interlock edges named (the alarm wakes fear and
+grief, the rain erases the smoke, the condensation materializes the feud's
+carrier, the rise prices the toll); doc-only, zero code, zero corpus price.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT c282fea BEFORE working — identical — and
+verified at BASE_COMMIT dc2ab38 BEFORE working — identical — and
 re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/worldbuild/ANCHOR_REGION.md` (§4/§6.1/§7.1/§9),
-`docs/worldbuild/WORLD_TESTS.md` (§9's three results),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2/§3/§5), `STATUS.md` (this re-pin
-+ KI#87), `worklog.md` (this entry) — 5 paths, doc-only, inside the soft
-limit. The prior iteration's record: iter-154 (intake30). The detail
-lives in the worldbuild docs + worklog + git.
+Scope: `docs/worldbuild/ANCHOR_REGION.md` (§5 the mesh + the verdict),
+`docs/worldbuild/WORLD_TESTS.md` (§9 the mesh entry),
+`docs/worldbuild/WORLD_WORKPLAN.md` (§2/§3/§5), `STATUS.md` (this re-pin),
+`worklog.md` (this entry) — 5 paths, doc-only, inside the soft limit. The
+prior iteration's record: iter-155 (anchor1). The detail lives in the
+worldbuild docs + worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -505,28 +499,20 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-155 DONE: the world track's first anchor pass (A1/A2/A3 — the
-crossing household authored as the first meso unit, the causal map's
-unsupported links deepened at the authored band, the high-water double-toll
-meaning slice run; WORLD_TESTS' three OPEN tests → PARTIALLY CONFIRMED;
-KI#87 opened; doc-only, 1842+1 green both ends). iter-154: the agent-dense
-v3 hybrid pack routed (D-187 — the external re-consolidation corpus-mapped
-to its existing owners whole, stale pre-iter-145; the pack's parallel
-`agent/` layer refused, no `docs/agent/`; the visual-system research the one
-un-routed domain → the intake-30 consult card parked behind the SoW fence,
-presentation-1 the wired consumer; the UNIFIED GDC KB not admitted; doc-only,
-1842+1 green both ends). iter-153: the worldbuild archive intake (D-186 —
-the cleaned corpus's active surface landed as `docs/worldbuild/`, 10
-files, every repo-fact claim verified against HEAD; the agent-path
-wiring: NAV §1/§2/§3 + the README map + TASKS' separate-track pointer
-+ the README's terminology fence — worldbuild canon/Echo ≠ INV-1's log
-canon / `core/echo.py`; doc-only, 1842+1 green both ends). iter-152:
-the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep
-+ DIRECTOR_SPEC's cap re-pin + the two v0.2 rows closed absorbed
-(D-185's recorded next step). iter-151: the semantic documentation
-compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914, the docs
-corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
-relicense + the standing-backlog revalidation (D-183/D-184).
+**iter-156 DONE: the world track's causal mesh audit (W3 — five independent
+loops: fire→institutions, feud→politics, season→weather→social,
+route→condensation→culture committed + the credit loop authored; the
+anti-double-count ruling applied to the theft/suspicion circuit; four
+interlock edges named; doc-only, 1842+1 green both ends). iter-155: the
+first anchor pass (A1/A2/A3 — the crossing household as the first meso unit,
+the causal map's eight answered rows, the high-water double-toll meaning
+slice; WORLD_TESTS' three OPEN tests → PARTIALLY CONFIRMED; KI#87 opened).
+iter-154: the agent-dense v3 hybrid pack routed (D-187). iter-153: the
+worldbuild archive intake (D-186 — `docs/worldbuild/` landed, 10 files).
+iter-152: the CORE_DESIGN_RESEARCH deletion + the evidence-class citation
+sweep (D-185's recorded next step). iter-151: the semantic documentation
+compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914). iter-150: the
+AGPLv3 relicense + the standing-backlog revalidation (D-183/D-184).
 iter-149: pack-4; iter-148: pack-1; iter-147: since-1; iter-146: res-1;
 iter-143: ci-1 (verified LIVE green on main at 156ec8f —
 the iter-143 arm's own check; the branch-protection recipe stays
@@ -588,14 +574,16 @@ the owner's settings step).**
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
    contract; the SoW audit itself stays owner-gated (bg-6); the
-   world track's active frontier is its own plan's W3 — the causal
-   mesh (the 3–5 genuinely independent loops, `WORLD_WORKPLAN.md` §5,
-   never this file's queue; A1/A2/A3 done iter-155, the first meso
-   unit authored — ANCHOR_REGION §6.1).
+   world track's active frontier is its own plan's W4 — the meso
+   expansion (families, workshops, guild substructures — each
+   addition must create a new causal coupling, `WORLD_WORKPLAN.md`
+   §6, never this file's queue; W3 the causal mesh done iter-156 —
+   five independent loops, `ANCHOR_REGION.md` §5; A1/A2/A3 done
+   iter-155, the first meso unit authored — ANCHOR_REGION §6.1).
 4. **Nothing is pinned.** The next move is the owner's: the
    recommended remainder of the sequence (engine-1 + presentation-1
    — the {3–8B, GBNF} arm on owner hardware the decision input), a
-   world-track call (W3 the causal mesh — the setting's own
+   world-track call (W4 the meso expansion — the setting's own
    frontier), or a fresh call (the license's `pyproject.toml` field
    a one-line option if wanted — D-183's recorded follow-up; KI#87's
    punt-pole fix rides the pack's next engineering touch).
