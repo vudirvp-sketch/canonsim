@@ -7,6 +7,29 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-159 · 2026-09-20 · intake32 — the Vantiel research handoff routed
+(the owner's «обработай … реши что перенять, адаптировать или привнести …
+куда определить … или создать новую в референсах … подключи междоменную
+трансплантацию» call over the uploaded `Vantiel_Canonsim_Research_Handoff_v2.md`;
+D-175's admission rule satisfied — presentation-1 the named open row, the
+real-consumer-vs-brief/retrieval comparison the falsifier): PARTIALLY
+CONFIRMED — a SEPARATIONS donor, never subsystems (the handoff's substrate
+map re-verified claim-by-claim at HEAD 44151f1)
+- adopted: the source record docs/ref/vantiel.md (ref-22 + the
+  REFERENCES/REFERENCES_DEEP/NAV wiring) + the presentation-1 consult
+  material (the re-expansion law + the staged-interpretation sketch,
+  parked behind the owner gate, the intake-30 visual-card precedent);
+  cross-domain notes in the ref file: the D-105 deadband family the
+  superior own-form of Vantiel's relationship inertia, magnitude-dependent
+  emotional persistence already emergent in the echo's linear form
+- refused: every subsystem donor (the handoff's reject list, binding), a
+  docs/worldbuild/ document, the generic propagation graph, the hysteresis
+  proposal, the ripple-audit question (each with its named falsifier);
+  D-190 compound-merged (DECISIONS stays at 30); 1852+1 green + ruff clean
+  both ends at BASE 44151f1 (env pin 3.12.14); 9 paths doc-only (the
+  intake routing + the references wiring + the doc quintet, the iter-158
+  precedent); iter-149 evicted per the cap
+
 iter-158 · 2026-09-20 · intake31 — the Kurvitz consolidated research routed
 (the owner's «обработай … реши что перенять, адаптировать или привнести»
 call over the uploaded prior-session research residue; D-175's admission
@@ -160,11 +183,3 @@ standing-backlog revalidation (D-184; 8 rows revised, no rows added/deleted)
 - docs: TASKS (the iter-150 section + eight revalidated rows), DECISIONS
   D-183/D-184, STATUS re-pin + Next step, NAV §1 (the LICENSE row);
   doc-only, 1842+1 green both ends, iter-140 evicted per the cap
-
-iter-149 · 2026-09-20 · pressure1 — pack-4 the pressure city (T1), the
-owner's resumption call: the displacement law as pure pack data, ZERO CORE
-CHANGE held exactly; res-1's second consumer arming; the first authored
-non-scaffold pack; +16 pressure tests
-- docs: TASKS (the section + the flip), DECISIONS D-182, STATUS re-pin, NAV
-  §1 (the fifth pack); the engine findings (the group-stock lint gap, the
-  co-due same-account limit) recorded in D-182, never patched in-core

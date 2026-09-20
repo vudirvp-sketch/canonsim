@@ -58,7 +58,14 @@ claim packet)
   hardware. Evidence base: TECH_NOTES §10/§11; consult material at write
   time: the intake-30 visual-system card (phases.md §6 — the visual
   surface's parked residue: the development-order law, the fidelity
-  target, the rejection table; D-187/D-174's surface ownership).
+  target, the rejection table; D-187/D-174's surface ownership) + the
+  intake-32 Vantiel card (`docs/ref/vantiel.md` — the model boundary's
+  parked residue: the re-expansion law — a bounded context bundle keeps
+  stable event/entity handles and re-expands deterministically from canon,
+  never a second truth — + the staged-interpretation sketch input →
+  interpretation → context → model proposal → validation → prose; D-190,
+  the falsifier: the real consumer vs the current brief/retrieval stack on
+  context cost, traceability, re-expansion correctness).
 - `parse-2` — disambiguation buttons + multi-intent utterances, each half
   behind its own gate (PARSER_SPEC §7; sharpened iter-150): BUTTONS wait on
   a frontend consumer (mode C live play — a UI affordance, never a parser
@@ -128,7 +135,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..158 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..159 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -136,6 +143,14 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-159 · 2026-09-20 · intake-32 — the Vantiel research handoff routed
+  (D-190, the owner's routing call over the uploaded prior-session handoff,
+  the handoff's substrate map re-verified claim-by-claim at HEAD):
+  PARTIALLY CONFIRMED — a SEPARATIONS donor, never subsystems (all ten
+  distinctions substrate-owned); the source record docs/ref/vantiel.md
+  (ref-22 + the REFERENCES/REFERENCES_DEEP/NAV wiring) + the presentation-1
+  consult material (the re-expansion law + the staged-interpretation sketch,
+  parked behind the owner gate); the reject list binding; doc-only.
 - iter-158 · 2026-09-20 · intake-31 — the Kurvitz consolidated research routed
   (D-189, the owner's routing call over the uploaded prior-session research
   residue): PARTIALLY CONFIRMED — mined as a generator library, never a

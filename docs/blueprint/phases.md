@@ -2697,6 +2697,60 @@ closed — ANCHOR_REGION §6.1/§9, WORLD_TESTS §9, WORLD_WORKPLAN §2/§3 read
 stale at HEAD). Landed: D-189 + this block. The build queue UNTOUCHED —
 nothing unpins, nothing reorders; zero build-grade items.
 
+**The Vantiel research handoff routed (intake-32, iter-159, D-190 — the
+owner's «обработай … реши что перенять, адаптировать или привнести в мой
+проект и зачем» + «куда определить … по документации или создать новую в
+референсах» + «подключи междоменную трансплантацию» call over the
+uploaded `Vantiel_Canonsim_Research_Handoff_v2.md`; the handoff's
+substrate map re-verified claim-by-claim at HEAD `44151f1` — every named
+mechanism confirmed present; the full one-pass record: the upload + git
+at this row's commit).** The verdict: PARTIALLY CONFIRMED — Vantiel as a
+source of SEPARATIONS, never subsystems: all ten distinctions (truth
+retention ≠ recall salience; fact ≠ interpretation; emotion ≠ factual
+memory; relationship magnitude ≠ history; failure ≠ punishment; recovery
+≠ undo; knowledge ≠ accessibility; context bundle ≠ memory truth;
+journal ≠ canon; world intervention ≠ narrative override) map to owned
+substrate (log+knowledge+retrieval / knowledge+traits+reflection /
+knowledge+echo / pair axes+events / intent_rejected+predicates / the
+append-only log / known_by+transfer / retrieval+brief+since-1 /
+render+chronicle / the intent-OCC-event door) — the cross-domain
+confirmation family's next member, zero new law. Adopted: the source
+record `docs/ref/vantiel.md` (ref-22 + the REFERENCES/REFERENCES_DEEP/NAV
+wiring — the owner's «создать новую в референсах» option taken for the
+SOURCE layer) + the presentation-1 consult-material wiring: the
+RE-EXPANSION LAW (a bounded model-facing context bundle may be disposable
+only if its compact claims retain stable event/entity handles and
+re-expand deterministically from canonical evidence — never a second
+truth, never a mutation of knowledge) and the STAGED-INTERPRETATION
+SKETCH (input → interpretation/intent proposal → bounded context → model
+decision proposal → repository validation → prose; the exact contract
+derived from the real engine-1 consumer, D-022/D-055) — both parked
+behind the owner gate, the intake-30 visual-card precedent. Cross-domain
+notes recorded in the ref file: the D-105 deadband family is the
+SUPERIOR own-form of Vantiel's relationship inertia (chatter prevented by
+construction — no enter/exit threshold pair to tune; the transplant test
+ran both directions and the existing form won); magnitude-dependent
+emotional persistence already emergent in the echo's linear form
+(valence × decay ⇒ larger shocks outlast any fixed threshold). Refused:
+every subsystem donor (affinity meters, flag catalogs, universal
+cognition multipliers, difficulty percentages, mutable memory threads,
+free-form Architect edits, journal-as-state, classes/combat/inventory) —
+the handoff's own reject list, binding in the ref file; a Vantiel
+document inside `docs/worldbuild/` (no authored-model change
+demonstrated — the handoff's own fence); the generic knowledge-propagation
+graph (PROPOSAL/UNRESOLVED — falsifier: two independent propagation
+consumers requiring shared edge-selection semantics beyond
+known_by+trust+locality+drift); the hysteresis proposal (UNKNOWN until a
+measured oscillation problem the deadbands do not already prevent); the
+worldbuild ripple-audit question (parked — falsifier: a recurring
+authored-change failure an explicit impact set would have prevented).
+The admission rule (D-175) satisfied: the named open row is
+presentation-1 (engine-1's decision-input child, the postponed standing
+row); the falsifier is the handoff's own — a real presentation consumer
+compared against the current brief/retrieval stack on context cost,
+traceability, re-expansion correctness. The build queue UNTOUCHED —
+nothing unpins, nothing reorders; zero build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

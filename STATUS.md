@@ -1,52 +1,50 @@
-Iteration: iter-158 (`iter-158-intake31` — the Kurvitz consolidated
-research routed, the owner's «обработай … реши что перенять, адаптировать
-или привнести в мой проект и зачем» call over the uploaded prior-session
-research residue): PARTIALLY CONFIRMED — the corpus mined as a GENERATOR
-LIBRARY, never a worldbuilding layer (the uploaded research's own verdict,
-re-confirmed independently at HEAD; its snapshot pin 2e64ae28 identical to
-the working BASE). Adopted (D-189): the W4 operator set (the function-loss
-probe, the meso assembly probe, the residue lifecycle trace, the
-natural-pattern transfer rule + the third-order synthesis — WORLD_AUTHORING
-§5/§7/§8/§19) + the test operationalizations (the biography crisis probe +
-the humor generator — WORLD_TESTS §3) + the W4 working set (the bounded
-crossing-household experiment with its three-way decision rule + four
-falsifier-carrying candidates — WORLD_WORKPLAN §6) + the source mechanics
-record (`docs/ref/kurvitz.md`, ref-21 + the REFERENCES/REFERENCES_DEEP/NAV
-wiring — the owner's «создать новую в референсах» option taken for the
-SOURCE layer). Refused: a Kurvitz document inside `docs/worldbuild/`
-(D-024 — every domain has an owner); a generic residue subsystem
-(SHOULD-NOT-ADD until the bounded experiment proves a substrate gap); the
-canon import list (races, catalogues, humor tables, thresholds — binding);
-the two cross-domain donors as institutions (mechanism-only with named
-falsifiers). The admission rule (D-175) satisfied: the consumer is the
-world track's W4 frontier; the falsifier is the bounded experiment's
-decision rule. Same-iteration syncs: the TASKS ledger's iter-151..156
-one-liners backfilled + the header re-scoped (the practice lapsed after
-the iter-151 compaction; verified against git); the worldbuild embodiment
-lines re-synced to iter-157's landing (the second hand + the pole
-committed, KI#87 closed).
+Iteration: iter-159 (`iter-159-intake32` — the Vantiel research handoff
+routed, D-190 — the owner's «обработай … реши что перенять, адаптировать
+или привнести в мой проект и зачем … куда определить … или создать новую
+в референсах … подключи междоменную трансплантацию» call over the uploaded
+`Vantiel_Canonsim_Research_Handoff_v2.md`): PARTIALLY CONFIRMED —
+Vantiel as a SEPARATIONS donor, never a subsystem donor (the uploaded
+handoff's own verdict, re-confirmed independently at HEAD; its substrate
+map verified claim-by-claim at 44151f1 — every named mechanism present).
+Adopted (D-190): the source record `docs/ref/vantiel.md` (ref-22 + the
+REFERENCES/REFERENCES_DEEP/NAV wiring — the owner's «создать новую в
+референсах» option taken for the SOURCE layer) + the presentation-1
+consult-material wiring (the RE-EXPANSION LAW — a bounded model-facing
+context bundle keeps stable event/entity handles and re-expands
+deterministically from canon, never a second truth — + the
+STAGED-INTERPRETATION sketch, both parked behind the owner gate, the
+intake-30 visual-card precedent). Refused: every subsystem donor (the
+handoff's own reject list — affinity meters, flag catalogs, cognition
+multipliers, difficulty percentages, mutable threads, free-form Architect
+edits, journal-as-state — binding in the ref file); a Vantiel document
+inside `docs/worldbuild/` (no authored-model change demonstrated); the
+generic knowledge-propagation graph (PROPOSAL/UNRESOLVED, its falsifier
+named); the hysteresis proposal (the D-105 deadband family the superior
+own-form — chatter prevented by construction, one less knob); the
+worldbuild ripple-audit question (parked with its falsifier). The
+admission rule (D-175) satisfied: the named open row is presentation-1
+(engine-1's decision-input child); the falsifier is the real consumer vs
+the current brief/retrieval stack on context cost, traceability,
+re-expansion correctness.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1852 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 2e64ae2 BEFORE working — 1852+1, identical to
+verified at BASE_COMMIT 44151f1 BEFORE working — 1852+1, identical to
 the pin — and re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/ref/kurvitz.md` (ref-21, new — the generator-library record),
-`docs/REFERENCES.md` (the §10 catalog row), `docs/REFERENCES_DEEP.md` (the
-§1/§2 rows), `docs/AGENT_NAVIGATION.md` (§1 the ref count), 
-`docs/worldbuild/WORLD_AUTHORING.md` (§5/§7/§8 + the new §19),
-`docs/worldbuild/WORLD_TESTS.md` (§3 the probes + the §9 band sync),
-`docs/worldbuild/WORLD_WORKPLAN.md` (§2/§3 the embodiment sync + §6 the W4
-working set), `docs/worldbuild/ANCHOR_REGION.md` (§6.1/§9 the embodiment
-sync), `docs/blueprint/phases.md` (§6 the intake-31 block),
-`docs/DECISIONS.md` (D-189 the compound merge, stays at 30),
-`docs/TASKS.md` (the ledger backfill + the iter-158 line), `STATUS.md`
-(this re-pin), `worklog.md` (this entry) — 13 paths (over the 3–5 soft
-limit: the intake routing + the worldbuild owners + the references wiring
-+ the doc quintet, the iter-153 intake precedent). The prior iteration's
-record: iter-157 (companion1). The detail lives in the intake-31 block +
-the ref file + D-189 + git.
+Scope: `docs/ref/vantiel.md` (ref-22, new — the separations record),
+`docs/REFERENCES.md` (the §10 catalog row), `docs/REFERENCES_DEEP.md`
+(the §1/§2 rows), `docs/AGENT_NAVIGATION.md` (§1 the ref count),
+`docs/blueprint/phases.md` (§6 the intake-32 block),
+`docs/DECISIONS.md` (D-190 the compound merge, stays at 30),
+`docs/TASKS.md` (the presentation-1 consult wiring + the iter-159
+ledger line + the header re-scope), `STATUS.md` (this re-pin),
+`worklog.md` (this entry) — 9 paths (over the 3–5 soft limit: the
+intake routing + the references wiring + the doc quintet, the
+iter-158 intake precedent). The prior iteration's record: iter-158
+(intake-31). The detail lives in the intake-32 block + the ref file +
+D-190 + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -521,7 +519,10 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-158 DONE: the Kurvitz consolidated research routed (intake-31, D-189 —
+**iter-159 DONE: the Vantiel research handoff routed (intake-32, D-190 —
+the separations record docs/ref/vantiel.md ref-22 + the presentation-1
+consult material parked behind the owner gate; doc-only, 1852+1 green both
+ends). iter-158 DONE: the Kurvitz consolidated research routed (intake-31, D-189 —
 the W4 operator set + the test operationalizations + the bounded
 crossing-household experiment + docs/ref/kurvitz.md ref-21; doc-only, 1852+1
 green both ends). iter-157 DONE: the companion arming (companion-1 + tune-3,
