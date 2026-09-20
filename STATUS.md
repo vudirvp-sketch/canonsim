@@ -531,7 +531,44 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-165 DONE: kin1 — the world track's fourth W4 candidate, the working
+**iter-166 DONE: intake33 — the game-design practitioner talks corpus
+routed (the owner's «изучи gamedesign_knowledge_base.md и определи что
+можно перенять, адаптировать или чем вдохновиться… распределить по
+документации» research call over the uploaded consolidated five-source
+knowledge base: Sawyer PoE attributes / Meier psychology / Battle Mode
+micromanagement / Johnson Old World / Wolverson procgen): PARTIALLY
+CONFIRMED — a perception + economy-craft donor, never a systems donor,
+differentiated from the refused UNIFIED GDC base (intake-30's F2) by
+the one domain no prior family owns — outcome-perception psychology.
+Adopted: the OUTCOME-PERCEPTION LAWS CARD (the layered legibility
+ladder — truth never bends / failure carries cause + avoidance path /
+odds as expectation bands / transparency opt-in by flag / outcomes
+legible through residue / stakes irreversible; the combined form of
+the five competing presentation solutions, each minus neutralized by
+another layer) → presentation-1's consult material (the third parked
+card, the visual/Vantiel precedent) + the ANTI-ARBITRAGE SPREAD
+(exchange lossy by construction — the Resource open question's donor;
+falsifier: the water's function-loss arbiter) + the TURNOVER QUESTION
+(the ECS cure = the function-loss probe aimed at holder mortality —
+the anti-freeze law, WORLD_AUTHORING §5; consumers: the camp's meso
+half, W5's biography arc) + two parked notes (the Hot-Path placement
+pair beside the intake-27 topology proposal — the road-traffic
+rider's material; the weak-coupling authoring law — pack-3's event
+families); the largest cross-domain confirmation batch since
+intake-27 (seed-in-save = INV-2/T2; no-cheats AI = the one-id door;
+infinite tooltips = mechanics.py; automation-red-flag inverted =
+mech-2's nothing-dropped-silently; direct-and-verify = the worldgen's
+MST-by-construction superior own form); refused binding (all
+dice-bending — perceived fairness only at the render layer, never the
+roll layer; the 3:1/2× constants — threshold leakage; tech-deck /
+order-system / no-counterattack — no substrate, no consumer); the
+source record docs/ref/game_design_talks.md (ref-23) + the five §10
+catalog rows + the DEEP index + the phases.md §6 stub + D-191; doc-only,
+1878+1 green both ends (zero test change); the third consecutive
+doc-only iteration — the D-022 exception consumed by THIS session's
+fresh owner research call; the next authored-band move needs a fresh
+owner call (an embodiment call remains the code-band breaker).
+iter-165 DONE: kin1 — the world track's fourth W4 candidate, the working
 set's last (the owner's «продолжай работу с world track» call): the
 constructed kinship edge (candidate 4) tested at the authored band over
 committed substrate only and CONFIRMED as THE WINTER KIN (ANCHOR_REGION
@@ -714,8 +751,8 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    un-armed — the paper's fall, the clearance lump, the punt's
    purchase — each a future row's own call), or a fresh call
    (the license's `pyproject.toml` field a one-line option if
-   wanted — D-183's recorded follow-up). Two consecutive doc-only
-   world-track iterations stand (iter-164/165, the D-022 exception
-   consumed by this session's fresh request): the next authored-band
-   move needs a fresh owner call — an embodiment call is the
-   code-band breaker.
+   wanted — D-183's recorded follow-up). Three consecutive doc-only
+   iterations stand (iter-164/165 world-track + iter-166 intake33,
+   each under its own fresh owner request — the D-022 exception
+   consumed per session): the next authored-band move needs a fresh
+   owner call — an embodiment call is the code-band breaker.

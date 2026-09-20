@@ -7,6 +7,37 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-166 · 2026-09-21 · intake33 — the game-design practitioner
+talks corpus routed (the owner's research call over the uploaded
+five-source knowledge base: Sawyer/Meier/Battle Mode/Johnson/Wolverson):
+PARTIALLY CONFIRMED — a perception + economy-craft donor, never a
+systems donor
+- adopted: the OUTCOME-PERCEPTION LAWS CARD (the layered legibility
+  ladder — the combined form of the five competing presentation
+  solutions) → presentation-1's consult material (the third parked
+  card, the visual/Vantiel precedent); the ANTI-ARBITRAGE SPREAD →
+  the Resource open question's donor (ANCHOR_REGION's price/flow row);
+  the TURNOVER QUESTION → WORLD_AUTHORING §5 (the ECS cure = the
+  function-loss probe aimed at holder mortality, the anti-freeze law);
+  two parked notes: the Hot-Path placement pair (the road-traffic
+  rider's material, beside the intake-27 topology proposal) + the
+  weak-coupling authoring law (pack-3's event families)
+- the largest cross-domain confirmation batch since intake-27
+  (seed-in-save = INV-2/T2; no-cheats AI = the one-id door; infinite
+  tooltips = mechanics.py; automation-red-flag = mech-2; direct-and-
+  verify = the worldgen's MST-by-construction own form); refused
+  binding: all dice-bending, the 3:1/2× constants, tech-deck/order/
+  no-counterattack mechanics, Voronoi/two-layer-noise, the K-table
+  as repo taxonomy (the do-not-import list in the ref file)
+- doc-only (10 paths, over the soft limit per AGENTS §2.3 — the
+  intake-31/32 precedent: ref/game_design_talks.md + the five §10
+  rows + DEEP + phases.md §6 + DECISIONS + TASKS + WORLD_AUTHORING +
+  NAV + STATUS + worklog; the third consecutive doc-only iteration,
+  the D-022 exception consumed by this session's fresh call)
+- verified BEFORE working at BASE_COMMIT 319e3e9 (1878+1 green; ruff
+  not runnable in the sandbox — zero Python files touched) and
+  re-verified after: 1878+1 green (doc-only, zero test change);
+  iter-156 evicted per the cap
 iter-165 · 2026-09-20 · kin1 — the world track's fourth W4 candidate (the
 owner's «продолжай работу с world track» call, the working set's last): the
 constructed kinship edge (candidate 4) tested at the authored band over
@@ -221,18 +252,3 @@ leg + the arrival snapshots pinned, the punt pole committed (KI#87 CLOSED)
   as bounded no-ops (attempts are facts); 1852+1 green + ruff clean both
   ends at BASE a4cfe48 (env pin 3.12.14); 10 paths (the pack + the
   verification stack + the doc quintet, the pack-landing precedent)
-
-iter-156 · 2026-09-20 · mesh1 — the world track's W3 causal mesh audit (the
-owner's «начинай работу по планам» call; engine-1 stays owner-hardware-gated,
-the world plan the executable frontier): five loops pass the disable test +
-the shared-stage rule — A fire→institutions, B feud→politics, C season→
-weather→social, D route→condensation→culture (four COMMITTED, per-loop tests
-green) + E the credit loop (AUTHORED, §6.1's unit); the anti-double-count
-ruling (the theft/suspicion/document-check circuit = A's mechanism family);
-four interlock edges named (alarm→fear+grief, rain→smoke, condensation→
-carrier, rise→toll)
-- docs: ANCHOR_REGION §5 (the mesh + the verdict table), WORLD_TESTS §9 (the
-  mesh entry, PARTIALLY CONFIRMED), WORLD_WORKPLAN §2/§3/§5 (W3 DONE, the
-  frontier → W4), STATUS re-pin; iter-146 evicted per the cap
-- 1842+1 green + ruff clean both ends at BASE dc2ab38 (env pin 3.12.14);
-  5 paths doc-only, inside the soft limit

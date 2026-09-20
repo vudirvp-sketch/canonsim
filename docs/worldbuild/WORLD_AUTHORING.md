@@ -78,6 +78,13 @@ Success: the replacement creates a real new causal coupling. Failure: the world
 is merely less convenient without producing a meaningful social structure. Use
 the probe only when the answer can change a future decision (the §14 law).
 
+The probe's **turnover application** (D-191, the anti-freeze law — buildings
+and records never die, holders do): every durable authored force names what
+carries its function when the holder dies or leaves — an unanswered succession
+question is a frozen force, and a world of frozen forces stagnates no matter
+how rich its residue. The winter kin's notch passing down both lines is the
+committed instance; the camp's charcoal debt is the open one.
+
 ## 6. Causal authoring pipeline
 
 The reusable pipeline is:

@@ -65,7 +65,14 @@ claim packet)
   never a second truth — + the staged-interpretation sketch input →
   interpretation → context → model proposal → validation → prose; D-190,
   the falsifier: the real consumer vs the current brief/retrieval stack on
-  context cost, traceability, re-expansion correctness).
+  context cost, traceability, re-expansion correctness) + the intake-33
+  outcome-perception card (`docs/ref/game_design_talks.md` §"What we
+  take" — the layered legibility ladder: truth never bends / failure
+  carries cause + avoidance path / odds as expectation bands, never naked
+  percentages / transparency opt-in by flag, nothing dropped silently /
+  outcomes legible through residue / stakes irreversible; D-191, the
+  falsifier: at the write, each layer either changes the narrator
+  document's shape or dissolves as already-satisfied).
 - `parse-2` — disambiguation buttons + multi-intent utterances, each half
   behind its own gate (PARSER_SPEC §7; sharpened iter-150): BUTTONS wait on
   a frontend consumer (mode C live play — a UI affordance, never a parser
@@ -123,7 +130,7 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..164 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..166 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
@@ -131,6 +138,47 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
 
+- iter-166 · 2026-09-21 · intake33 — the game-design practitioner talks
+  corpus routed (the owner's «изучи gamedesign_knowledge_base.md и
+  определи что можно перенять, адаптировать или чем вдохновиться…
+  распределить по документации» research call over the uploaded
+  consolidated five-source knowledge base: Sawyer PoE attributes /
+  Meier psychology / Battle Mode micromanagement / Johnson Old World /
+  Wolverson procgen): PARTIALLY CONFIRMED — a perception +
+  economy-craft donor, never a systems donor, differentiated from the
+  refused UNIFIED GDC base (intake-30's F2) by the one domain no prior
+  family owns — outcome-perception psychology. Adopted: the
+  OUTCOME-PERCEPTION LAWS CARD (the layered legibility ladder, the
+  combined form of the five competing presentation solutions — each
+  minus neutralized by another layer) → presentation-1's consult
+  material (the third parked card, the visual/Vantiel precedent) + the
+  ANTI-ARBITRAGE SPREAD (exchange lossy by construction — the Resource
+  open question's donor: ANCHOR_REGION's "how does scarcity become a
+  measured price/flow cycle?"; falsifier: the water's function-loss
+  arbiter) + the TURNOVER QUESTION (the ECS cure = the function-loss
+  probe aimed at holder mortality — the anti-freeze law →
+  WORLD_AUTHORING §5; consumers: the camp's meso half, W5's biography
+  arc) + two parked notes (the Hot-Path placement pair beside the
+  intake-27 topology proposal — the road-traffic rider's material; the
+  weak-coupling authoring law — pack-3's event families); the largest
+  cross-domain confirmation batch since intake-27 (seed-in-save =
+  INV-2/T2; no-cheats AI = the one-id door; infinite tooltips =
+  mechanics.py; automation-red-flag inverted = mech-2's
+  nothing-dropped-silently; direct-and-verify = the worldgen's
+  MST-by-construction superior own form); refused binding (all
+  dice-bending — perceived fairness only at the render layer, never the
+  roll layer; the 3:1/2× constants — threshold leakage; tech-deck /
+  order-system / no-counterattack — no substrate, no consumer;
+  Voronoi/two-layer-noise — saturated by ref-8/ref-9 + the LOD ladder;
+  the K-table as repo taxonomy); doc-only (10 paths, over the soft
+  limit per AGENTS §2.3 — the intake-31/32 precedent: the source record
+  ref/game_design_talks.md + the five §10 catalog rows + the DEEP index
+  + the phases.md §6 stub + DECISIONS + TASKS + WORLD_AUTHORING §5 +
+  NAV + STATUS + worklog; the third consecutive doc-only iteration,
+  the D-022 exception consumed by THIS session's fresh owner research
+  call — the next authored-band move needs a fresh call); 1878+1 green
+  both ends at BASE 319e3e9 (doc-only, zero test change; ruff not
+  runnable in the sandbox — zero Python files touched)
 - iter-165 · 2026-09-20 · kin1 — the world track's fourth W4 candidate (the
   owner's «продолжай работу с world track» call, the working set's last): the
   constructed kinship edge (candidate 4) tested at the authored band over

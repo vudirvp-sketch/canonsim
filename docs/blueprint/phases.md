@@ -2754,6 +2754,70 @@ compared against the current brief/retrieval stack on context cost,
 traceability, re-expansion correctness. The build queue UNTOUCHED —
 nothing unpins, nothing reorders; zero build-grade items.
 
+**The game-design practitioner talks corpus routed (intake-33, iter-166,
+D-191 — the owner's «изучи gamedesign_knowledge_base.md и определи что
+можно перенять, адаптировать или чем вдохновиться… куда определить
+полученные знания, вердикты и данные и распределить по документации»
+research call over the uploaded consolidated five-source knowledge base
+(Sawyer / Meier / Battle Mode / Johnson / Wolverson; the transplantation
+method itself already standing law — intake-24's D-165 card, applied
+here, never re-imported); the corpus map verified against HEAD before
+routing; the full one-pass record: the upload + git at this row's
+commit).** The verdict: PARTIALLY CONFIRMED — a PERCEPTION +
+ECONOMY-CRAFT donor, never a systems donor. Differentiated from the
+refused UNIFIED GDC knowledge base (intake-30's F2 finding): that
+corpus re-derived the standing families (level design / narrative /
+quest theory); this one carries a domain no prior GDC family owns —
+outcome-perception psychology (S2: expectation bands, the
+invisible-roll paranoia law, cause + avoidance path on every failure)
+plus the economy-craft pair (S4: the anti-arbitrage spread, the
+mortality-as-force-change ECS cure). Adopted: the OUTCOME-PERCEPTION
+LAWS CARD (the layered legibility ladder — truth never bends / failure
+carries cause / odds as expectation bands / transparency opt-in by
+flag / outcomes legible through residue / stakes irreversible; the
+combined form of the five competing presentation solutions, each
+minus neutralized by another layer) → presentation-1's consult
+material (the third parked card, joining the intake-30 visual card and
+the intake-32 Vantiel card) + THE ANTI-ARBITRAGE SPREAD (exchange
+between stocks lossy by construction — the mechanism, never the 2×
+number; the Resource open question's donor: ANCHOR_REGION's "how does
+scarcity become a measured price/flow cycle?"; falsifier: the water's
+own function-loss arbiter) + THE TURNOVER QUESTION (the ECS cure as
+the function-loss probe aimed at holder mortality — the anti-freeze
+law, WORLD_AUTHORING §5; consumers: the camp's meso half, W5's
+biography arc) + TWO parked notes (the Hot-Path placement pair beside
+the intake-27 topology proposal — the road-traffic rider's material;
+the weak-coupling authoring law — pack-3's event-family material).
+The confirmation batch (the largest since intake-27): seed-in-save =
+INV-2/T2; undo-because-deterministic = the same family; no-cheats
+asymmetric AI = the one-id intent door; infinite tooltips =
+mechanics.py; automation-red-flag inverted for observability = mech-2's
+nothing-dropped-silently; direct-and-verify randomness = the worldgen's
+superior own form (MST connectivity by construction + the
+reachability/dead-arming lints); the Covert Action center-of-gravity =
+the brief's bounded blocks; the imagination economy = L6/mode A; the
+known-denominator thresholds = the world track's store budgets;
+events-offer-not-negotiate = the door's attempts-are-facts. Refused
+(the binding do-not-import list, in the ref file): all dice-bending
+(the source's own anti-streak mechanism — the invariant is perceived
+fairness, bought only at the render layer, never the roll layer); the
+3:1/2×/N-levels constants as law (threshold leakage); the tech-deck,
+order-system, no-counterattack mechanics (no substrate, no consumer);
+the difficulty taxonomy; the Voronoi/two-layer-noise worldgen
+additions (saturated by ref-8/ref-9 + the LOD ladder); the K-table
+typography as repo law (the per-finding verdict discipline already
+owns it — noted as the source's own synthesis strength). The admission
+rule (D-175) satisfied: the named consumers — presentation-1 (the
+standing row), the world track's Resource open question + the camp/W5
+frontier (STATUS Next step's own standing frame), the road-traffic
+rider (the pressure pack's post-T1 rows); the falsifiers stated per
+adoption above. Landed: D-191 + this block + the source record
+(`docs/ref/game_design_talks.md`, ref-23 + the REFERENCES/
+REFERENCES_DEEP/NAV wiring) + the five catalog rows + the presentation-1
+consult-material pointer + the WORLD_AUTHORING §5 turnover line. The
+build queue UNTOUCHED — nothing unpins, nothing reorders; zero
+build-grade items.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
