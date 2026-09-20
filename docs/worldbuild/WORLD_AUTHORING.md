@@ -1,0 +1,233 @@
+# World Authoring Doctrine
+
+**Status:** active authoring doctrine derived from the prior theory + source
+analysis. This is methodology, not world canon.
+
+## 1. World = causal possibility space
+
+A Canonsim world is not an encyclopedia of named things. It is a bounded space of
+possible actions and consequences shaped by constraints.
+
+A useful formula is:
+
+`WORLD = PLACE × TIME × PRESSURE × ACTORS × CULTURE × KNOWLEDGE × CONSEQUENCE × MEANING`.
+
+The number of named objects matters less than the number of meaningful
+relationships between them.
+
+## 2. Mechanics / Meaning / Voice
+
+Use three authoring levels:
+
+### A — Mechanics
+
+What can happen?
+
+### B — Meaning
+
+Why does it matter here, to these people, with this history?
+
+### C — Voice
+
+How does the world express or interpret it?
+
+Canonsim's simulation is strongest at A. The next worldbuilding frontier is B.
+Voice is downstream expression: the system should constrain it through cultural
+vocabulary and observed consequences rather than asking narration to invent the
+world.
+
+## 3. Affordance + constraint model
+
+For every important world element ask five questions:
+
+`AFFORDANCE → CONSTRAINT → COST → CONSEQUENCE → INTERPRETATION`.
+
+A capability without a constraint tends to become a universal cheat.
+A constraint without a consequence is usually only flavor.
+A consequence without a human interpretation remains mechanically thin.
+
+## 4. Pillars
+
+Each region should select a small number of **world pillars**.
+
+A pillar is a pressure/vocabulary/constraint that makes many different outcomes
+possible. It is not a plot track.
+
+A good pillar creates a probability landscape; it does not prescribe a sequence.
+
+## 5. Negative space
+
+Identity is shaped by what a society refuses, cannot afford, has forgotten, or has
+chosen not to preserve.
+
+Negative space questions:
+
+- Why does this society not use an available capability?
+- What does it consider shameful or dangerous?
+- What technology did it deliberately abandon?
+- Which problem has it learned to ignore?
+- What cannot be done here without importing another system?
+
+## 6. Causal authoring pipeline
+
+The reusable pipeline is:
+
+`PILLARS → ABSENCES → PHYSICAL SUBSTRATE → HISTORICAL RESIDUE → ACTORS → CULTURES → PRESSURES → MESO INSTITUTIONS → COUPLINGS → READERS → TESTS`.
+
+The pipeline is not a rigid production checklist. It is a way to find missing
+causal links before adding volume.
+
+## 7. Meso is the bridge
+
+The most important bridge between macro worldbuilding and lived experience is
+the meso layer:
+
+- household;
+- family;
+- workshop;
+- market;
+- guild;
+- school;
+- shrine;
+- ferry;
+- warehouse;
+- inn;
+- neighborhood;
+- professional community;
+- crew or caravan.
+
+Macro pressure becomes believable when one of these units must decide how to
+respond.
+
+## 8. Residue-first authoring
+
+For important historical events, author the modern residue before expanding the
+historical scene description.
+
+Ask:
+
+`What changed materially? Who remembers? Who benefits? Which institution exists because of it? Which prohibition survived? What can no longer be done?`
+
+This prevents history from becoming a museum catalogue.
+
+## 9. Knowledge asymmetry
+
+A strong world need not hide information randomly. Instead give different actors
+legitimate, bounded epistemic positions.
+
+For each important fact consider:
+
+`TRUTH / WITNESS / KNOWLEDGE / BELIEF / INTERPRETATION / NARRATION`.
+
+False beliefs are useful when they change decisions and institutions rather than
+when they merely create mystery text.
+
+## 10. Small alphabet, deep composition
+
+Prefer a small set of reusable primitives that interact strongly.
+
+A second-order story should often come from ordinary systems colliding:
+
+`weather + route + debt + institution + memory`
+
+rather than from an authored "special event".
+
+This is why focal resources, factions, old grudges and weather can work without
+hundreds of independent mechanics.
+
+## 11. Human-scale meaning
+
+The main question is not:
+
+> How much lore has been written?
+
+It is:
+
+> How many different human situations can honestly emerge from the same world?
+
+The world should support ordinary work, family, embarrassment, humor, grief,
+ambition, rivalry, romance, boredom and compromise without leaving its own causal
+logic.
+
+## 12. Humor and heartbreak
+
+### Humor test
+
+World-specific humor should arise from shared local concepts, institutions,
+terminology and contradictions — not just generic jokes dropped into fantasy.
+
+### Heartbreak test
+
+Loss should be possible, consequential, socially perceived, and persistent. A
+loss that changes no relation, institution, resource, memory or future option is
+mostly prose rather than world structure.
+
+## 13. Genre capacity
+
+A mature region should support multiple genres from one substrate:
+
+`adventure / mystery / political conflict / relationship drama / tragedy / comedy / biography`.
+
+The test is the same underlying world state, not separate genre-specific
+sub-settings.
+
+## 14. Counterfactual discipline
+
+For any major capability or institution:
+
+- Why is it possible?
+- Why is it not universal?
+- What did it replace?
+- What did it make harder?
+- Who profits?
+- Who resists?
+- Who remembers the transition?
+- What happens if it disappears?
+
+This is a design test, not filler questionnaire. Use only the questions that can
+change a future decision.
+
+## 15. Compression test
+
+A large element earns its place when removing it destroys a causal contour.
+
+Ask:
+
+> What future option disappears if this element is removed?
+
+The goal is not minimalism by itself. The goal is **causal density**.
+
+## 16. Expansion rule
+
+Do not add another continent, lineage, magic branch or civilization merely because
+space remains on the map.
+
+Add it when it introduces a new causal coupling that the current world genuinely
+cannot express.
+
+## 17. Back-propagation rule
+
+Worldbuilding is allowed to revise upstream assumptions when a downstream system
+exposes a contradiction.
+
+`civilization → environment requirement → history requirement → foundation update`
+
+The revision must be explicit. It should not silently rewrite an earlier canon.
+
+## 18. Authoring quality bar
+
+A proposed world element is ready when it can be described as:
+
+`CAUSE → POSSIBILITY → PRESSURE → ACTORS → INSTITUTION → KNOWLEDGE → CONSEQUENCE → RESIDUE → NEW OPTIONS`.
+
+A missing link is not automatically a rejection. It is a named uncertainty to be
+resolved or intentionally left mysterious.
+
+## 19. Operational maxim
+
+> **Do not invent more things. Invent more consequences.**
+
+And for culture:
+
+> **Do not only describe what people are. Define what is possible, impossible,
+sacred, funny, shameful, costly and remembered for them.**

@@ -84,6 +84,7 @@ padding.
 | `worklog.md` | capped short-term memory (≤10 entries) |
 | `.github/workflows/ci.yml` | CI runner: pytest + ruff on push to `main` (ci-1, iter-143 — Python 3.12.14 the env pin, `PYTHONHASHSEED=0`) |
 | `docs/` | all specs & plans (see `docs/AGENT_NAVIGATION.md` §1) |
+| `docs/worldbuild/` | the active worldbuilding surface: the authored-setting model (world kernel, Resonance, life/personhood, peoples, cultures, the Sarrow Vale anchor, authoring doctrine, world tests, the world track's plan — `README.md` the index; D-186) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/tavern_pack/` | setting as data (v0.1; loaded + linted by `core/pack.py` — the admission gate; the lint bodies in `core/packlint/`, the D-175 split) |
 | `content/road_pack/` | the second pack: the travel-loop reskin (world-2 L1, iter-112 — `travel` armed, the derived prices; `CREDITS.md` the CC-BY sidecar) |

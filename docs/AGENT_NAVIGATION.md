@@ -51,6 +51,7 @@
 | `docs/PACK_SPEC.md` | the pack module contract (the four-file directory, the admission law's enforcement half, the lint families, the authoring loop, the growth rungs) | active |
 | `docs/TAXONOMY.md` | the bg-2 DF event taxonomy: the 16-target type map + the 120-entry corpus + the measured findings | written bg-2 (D-063) |
 | `docs/LEGEND_SPEC.md` | the reflection & compaction contract (reflection-on-recurrence, the reflection event shape, the provenance/stale laws, the pack contract) | active |
+| `docs/worldbuild/` | the active worldbuilding surface — the authored-setting model (10 files: `README.md` the index + the terminology fence, `WORLD_KERNEL.md` the world-law owner, the domain owners `RESONANCE.md`/`LIFE_PERSONHOOD.md`/`PEOPLES.md`/`CULTURES_CIVILIZATION.md`, `ANCHOR_REGION.md` the Sarrow Vale laboratory, `WORLD_AUTHORING.md` the doctrine, `WORLD_TESTS.md` the evidence, `WORLD_WORKPLAN.md` the world track's plan; D-186 — a separate track from the engineering backlog, never runtime contracts/pack schemas/build order; the legacy source archive stays outside the repo) | active (the world track) |
 
 ## 2. Reading gradient (what to read before working)
 
@@ -61,6 +62,7 @@
 | Deep — new system, schema/queue/director touch | + `AGENTS.md` → `docs/BLUEPRINT.md` (ledger rows for the component) → `docs/MVP_SCOPE.md` → `docs/EVENT_SCHEMA.md` |
 | Huge — phase gate, architecture, restructure | + `docs/ROADMAP.md` → `docs/VISION.md` → `docs/DECISIONS.md` |
 | Research residue / consult card (a task row or STATUS names an intake/card) | `docs/blueprint/phases.md` §6 — the named card/block only (the archive law at §6's head pins what is durable); the full one-pass records: git at the D-row's commit |
+| World-setting authoring (world canon, a region's authored depth, the anchor) | `docs/worldbuild/README.md` (the index + the ownership table + the terminology fence) → the ONE named domain owner, never the whole set; `WORLD_AUTHORING.md` the method, `WORLD_TESTS.md` the tests, `WORLD_WORKPLAN.md` the frontier (A1/A2/A3); the engine side of any claim: the owning spec, never this surface |
 | LLM-track (`bg-*`) | + `docs/TECH_NOTES.md` → `docs/SPECS_BACKLOG.md` |
 
 ## 3. Information ownership (anti-drift map)
@@ -74,6 +76,7 @@
 | Why it all exists, honest limits | `docs/VISION.md` | link |
 | Stable design decisions | `docs/DECISIONS.md` | link |
 | Research residue (intake verdicts, consult cards) | `docs/blueprint/phases.md` §6 (the archive law, D-185); the adoptions live in DECISIONS/TASKS | link; open a card only when a row names it |
+| The authored-setting model (world identity/laws, Resonance ontology, lineages, cultures, the anchor's world-level design, the authoring doctrine) | `docs/worldbuild/` (the README's ownership table the sub-map; `WORLD_KERNEL.md` the world-law owner; D-186) | link, never restate; setting facts ride packs as data (INV-3), never prose duplication in specs; world-track asks for engine capability route to `docs/TASKS.md` standing rows; "canon"/"Echo" on that side never mean INV-1's log canon / `core/echo.py`'s read model (the README's terminology fence) |
 | Cross-reference resolutions & donor combinations per build component | `docs/BLUEPRINT.md` (ledger + laws) + `docs/blueprint/<part>.md` (application) | link, never restate; cite ledger row IDs (e.g. "per RNG-1") |
 | Verification definitions (T-suite, metrics, gate protocol, acceptance laws) | `docs/TEST_PLAN.md` | link; cite §N |
 | Volatile: model stack, hardware, DF pitfalls | `docs/TECH_NOTES.md` | link, expect rot |

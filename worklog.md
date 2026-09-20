@@ -7,6 +7,21 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-153 · 2026-09-20 · worldbuild1 — the owner's archive-intake call: the
+cleaned worldbuilding corpus landed as `docs/worldbuild/` (10 files, the
+README the index + the terminology fence), every file read, the repo-fact
+claims verified against HEAD (the anchor's province_pack evidence list +
+the world-2 L1/L2 verdict language — all check out)
+- the wiring: NAV §1/§2/§3 (the row, the world-setting reading-gradient row,
+  the authored-setting-model ownership row), the repo README map row, TASKS'
+  standing-rows preamble the separate-track pointer (WORLD_WORKPLAN the world
+  track's own plan, never a second queue), D-186 (the D-018-family compound
+  merge — DECISIONS stays at 30), STATUS re-pin; the terminology fence:
+  worldbuild canon/Echo ≠ INV-1's log canon / `core/echo.py`'s read model
+- 1842+1 green + ruff clean both ends at BASE f660364 (env pin 3.12.14);
+  16 paths doc-only (over the soft limit — the payload IS the directory +
+  the doc quintet, per AGENTS §2.3); iter-143 evicted per the cap
+
 iter-152 · 2026-09-20 · docgc2 — the owner's doc-pass call: the CORE_DESIGN_RESEARCH
 deletion (D-185's recorded next step; absorbed D-029/D-033) + the citation sweep
 - docs (27 paths, over the soft limit per AGENTS §2.3 — the sweep IS the scope):
@@ -95,12 +110,3 @@ invariant sets, §9 claim packets, minimal test sets); doc-only
 - docs: TASKS (the section + the row pointers), DECISIONS D-177, STATUS
   re-pin + Next step, NAV §1 (the CONTRACTS row); the doc-loop alarm
   answered (the D-022 exception + the next step BUILD work)
-
-iter-143 · 2026-09-19 · ci1 — ci-1 the GitHub Actions runner:
-`.github/workflows/ci.yml` (pytest + ruff on push/PR to `main`,
-PYTHONHASHSEED=0, Python 3.12.14 the env pin); the runner path simulated in
-a clean venv (1754+1, ruff clean); branch protection the owner's settings
-step (the recipe in the stop-point report)
-- doc-only beyond the workflow file; the first LIVE run fires on the owner's
-  push; 7 files (over the soft limit, all mandated — the doc quintet by
-  AGENTS §6, the map row by NAV §3's short-map duty)

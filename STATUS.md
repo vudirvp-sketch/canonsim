@@ -1,45 +1,34 @@
-Iteration: iter-152 (`iter-152-docgc2` — the CORE_DESIGN_RESEARCH
-deletion + citation sweep, the owner's doc-pass call over the D-185
-remainder + the DIRECTOR_SPEC re-pin + the two v0.2 rows' consumer
-audit; doc-only, zero code, zero corpus price): the retired synthesis
-file DELETED (absorbed D-029/D-033; the deletion D-185's recorded next
-step, the owner's call now made) with the actual-at-HEAD citation
-sweep: the 27 `docs/ref/*` occurrences (9 template headers re-pointed
-to the BLUEPRINT form, the iter-151 34-file precedent; 18 in-body
-citations re-pointed to their live owners — D-019/D-020/D-005,
-`phases.md` §3/§5, `BLUEPRINT.md` §2 L9, `core/echo.py`, `kenshi.md` —
-or dropped where the ref file itself carries the content) + the 2
-`phase0.md` donor-stack clauses (the synthesis-only rationale stays
-in-line); `REFERENCES_DEEP`'s ownership statement + §0 template
-re-pointed (BLUEPRINT owns the cross-reference synthesis), the iter-0h
-rationale clause trimmed; the FAQ four-places → three; the NAV §1 row
-removed. Same pass: DIRECTOR_SPEC's stale self-cap re-pinned ≤300 →
-≤600 substance-filtered (`AGENTS.md` §6/§6.1 — the BRIEF_SPEC/
-PACK_SPEC precedent); the two v0.2 owner-gated rows CLOSED as absorbed
-(the consumer audit: `packtaxonomy` — PACK_SPEC §8's closed read
-grammar + §10's never-armed copy-from growth rung own it;
-`story-critical objects` — the event-level
-`importance.story_critical_events` law landed tune-1/D-045(b)/D-059,
-object flags ride the event/hook family); D-185's execution note.
-worldbuild.zip stays deleted (the owner's call).
+Iteration: iter-153 (`iter-153-worldbuild1` — the worldbuild archive
+intake, the owner's session call: the cleaned corpus's ACTIVE surface
+landed as `docs/worldbuild/` — 10 files, the README the index + the
+terminology fence; every file read + the repo-fact claims verified
+against HEAD (the anchor's province_pack evidence list — the 324-site
+surface, the six locations, the named actors, the 150-year feud/
+quarrel/exodus chronicle, the calendar/weather/travel/cultures/
+factions blocks — and the world-2 L1/L2 verdict language all check
+out); the agent-path wiring so the surface never hangs as dead
+weight: NAV §1 the row + §2 the world-setting reading-gradient row +
+§3 the authored-setting-model ownership row, the repo README's map
+row, TASKS' standing-rows preamble the separate-track pointer
+(`WORLD_WORKPLAN.md` the world track's own plan — never a second
+queue), D-186 the D-018-family exception row (DECISIONS stays at 30
+via the compound merge); doc-only, zero code, zero corpus price; the
+doc-loop alarm answered by the fresh owner call itself (the D-018
+exception law).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the SoW horizon, ROADMAP §6) ·
++ the world track + the SoW horizon, ROADMAP §6) ·
 1842 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT accfd72d BEFORE working — identical — and
-re-verified after with the diff in place; the sandbox's first pytest
-invocation ran the system 3.13.5 via the ~/.local/bin shebang and
-tripped the known env-pin law — TEST_PLAN §1.1, re-run on the venv
-3.12.14: identical) ·
+verified at BASE_COMMIT f660364 BEFORE working — identical — and
+re-verified after with the diff in place) ·
 Date: 2026-09-20 ·
-Scope: `docs/CORE_DESIGN_RESEARCH.md` (DELETED), `docs/ref/` (18
-files), `docs/blueprint/phase0.md`, `docs/REFERENCES_DEEP.md`,
-`docs/AGENT_NAVIGATION.md`, `docs/DIRECTOR_SPEC.md`, `docs/TASKS.md`,
-`docs/DECISIONS.md` (the D-185 note), `STATUS.md` (this re-pin),
-`worklog.md` (this entry) — 27 paths, doc-only; over the 3–5 soft
-limit, all mandated by the sweep's own scope (the citation sweep IS
-the task), noted per AGENTS §2.3. The prior iteration's record:
-iter-151 (docscomp1). The detail lives in D-185 + worklog + git.
+Scope: `docs/worldbuild/` (10 new files), `docs/AGENT_NAVIGATION.md`,
+`README.md`, `docs/TASKS.md`, `docs/DECISIONS.md` (the D-186 compound
+merge), `STATUS.md` (this re-pin), `worklog.md` (this entry) — 16
+paths, doc-only; over the 3–5 soft limit — the payload IS the
+directory + the doc quintet the law mandates, noted per AGENTS §2.3.
+The prior iteration's record: iter-152 (docgc2). The detail lives in
+D-186 + worklog + git.
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -513,16 +502,16 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-152 DONE: the CORE_DESIGN_RESEARCH deletion + the evidence-class
-citation sweep (the file retired D-029/D-033, deleted per D-185's
-recorded next step — the owner's call; the 27 ref/* + 2 phase0
-citations re-pointed to their live owners, REFERENCES_DEEP/NAV/FAQ
-synced) + DIRECTOR_SPEC's stale self-cap re-pinned ≤300 → ≤600
-(AGENTS §6/§6.1) + the two v0.2 rows closed as absorbed (the consumer
-audit — no consumer for either; TASKS owns the pointers); doc-only,
-1842+1 green both ends. iter-151: the semantic documentation
-compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914 with the
-standing rows extracted, phases.md 4305→2650, NAV 88→14KB, the docs
+**iter-153 DONE: the worldbuild archive intake (D-186 — the cleaned
+corpus's active surface landed as `docs/worldbuild/`, 10 files, every
+repo-fact claim verified against HEAD; the agent-path wiring: NAV
+§1/§2/§3 + the README map + TASKS' separate-track pointer + the
+README's terminology fence — worldbuild canon/Echo ≠ INV-1's log
+canon / `core/echo.py`; doc-only, 1842+1 green both ends). iter-152:
+the CORE_DESIGN_RESEARCH deletion + the evidence-class citation sweep
++ DIRECTOR_SPEC's cap re-pin + the two v0.2 rows closed absorbed
+(D-185's recorded next step). iter-151: the semantic documentation
+compaction pass (D-185 — DECISIONS 63→30, TASKS 2422→914, the docs
 corpus 13,894→10,444 lines / 1.32→0.76MB). iter-150: the AGPLv3
 relicense (`LICENSE` + the README's License section, D-183) + the
 standing-backlog REVALIDATION (the verdict set in D-184; no rows
@@ -583,11 +572,16 @@ the owner's settings step).**
    decision input), the bg-7 prose families skipped in the bg-8
    heartbeat, the per-family latency distribution. New track-B ideas
    enter the backlog on the owner's call only.
-3. **The SoW horizon (ROADMAP §6) is the standing frame** now that
+3. **The SoW horizon (ROADMAP §6) and the world track
+   (`docs/worldbuild/`, D-186) are the standing frames** now that
    the ladder is complete: the mediator protocol specs (BRIEF_SPEC
    and friends — SPECS_BACKLOG) + the dumb-terminal frontend
-   contract; the SoW audit itself stays owner-gated (bg-6).
+   contract; the SoW audit itself stays owner-gated (bg-6); the
+   world track's active frontier is its own plan's A1/A2/A3 (the
+   anchor causal map, ONE meso unit, ONE meaning slice —
+   `WORLD_WORKPLAN.md` §3, never this file's queue).
 4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (engine-1 + presentation-1)
-   or a fresh call (the license's `pyproject.toml` field a one-line
+   recommended remainder of the sequence (engine-1 + presentation-1),
+   a world-track call (A1/A2/A3 — the setting's own frontier), or a
+   fresh call (the license's `pyproject.toml` field a one-line
    option if wanted — D-183's recorded follow-up).

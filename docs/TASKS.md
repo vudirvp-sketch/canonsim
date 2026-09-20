@@ -30,6 +30,12 @@ this file owns composition, never order — D-113; every row REVALIDATED
 iter-150, D-184; each build row's verification plan rides TEST_PLAN §9's
 claim packet)
 
+> The world-authoring track is NOT this queue: the setting's own plan
+> (the anchor's A1/A2/A3 + the W-ladder) lives in
+> `docs/worldbuild/WORLD_WORKPLAN.md` (D-186) — a separate track, never
+> a second queue; a world-authoring need for engine capability lands
+> HERE as a standing row on the owner's call.
+
 - `engine-1` — the runtime inference engine decision (llama.cpp + GBNF;
   TECH_NOTES §1): the recommended next call (STATUS Next step; intake-29's
   readiness order, never the pick) — the SoW horizon's own head: the
