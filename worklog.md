@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` bundle
+triaged: the compile check verified through the landed wiring (§8.5
+discharged); the narrator prose class exposed KI#90 (MediatorError before
+the gates — the beat blocked), FIXED (JSON → the MALFORMED regen) + 2
+pins; 8 paths; 1962+1 after (1960+1 BEFORE), ruff clean; iter-169 evicted
+
+---
 iter-176 · 2026-09-21 · doc3 — the owner-declared build: the state-layer reassembly
 (FAQ one-liners, recipes → TECH_NOTES §14/§15, the three TASKS ledgers dead,
 DECISIONS 31→30, README/worklog to their functions) + the cap guard + the digest
@@ -66,11 +73,5 @@ snapshot→GBNF, the door's shape laws at the source, the golden fixture) + cli/
 (the ONE network module, INV-4 lifted — AGENTS §4/§8 riding) + the --engine wiring,
 the ladders + the manifest; the stub-server adapter tests + the regex-oracle pins; 22
 paths; 1926+1 BEFORE, 1960+1 after, ruff clean, zero gate edits; iter-167 evicted
----
-iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures: the shared
-lint_direct_keys row wired into all four requires sites; the ACTOR_KEYS split + the
-needs_target predicate extraction; tests/test_qa2.py +15; 12 paths (over the §2.3 soft
-limit — the two-KI closure + its packet); 1900+1 green, mypy --strict core/ 0, goldens
-byte-untouched at e15a091; iter-159 evicted per the cap
 
 

@@ -293,6 +293,39 @@ def test_malformed_reply_is_degradation_not_crash(tmp_path: Path) -> None:
     assert "MALFORMED" in result.call_path.read_text(encoding="utf-8")
 
 
+def test_a_non_json_reply_is_the_ladder_s_class_never_an_operator_error(
+    tmp_path: Path,
+) -> None:
+    """KI#90 (round 5's live session): the reply file's bytes ARE the
+    reply document, whoever wrote them (D-055 — the runtime engine is
+    just another operator): prose instead of JSON is the malformed
+    class (VALIDATION_SPEC §7.1 — the ladder's problem, a regen with a
+    MALFORMED note, exhaustion → the L12 floor), never the MediatorError
+    escape that left the engine cycle's beat blocked. A file that
+    cannot be read at all (a missing path) stays the operator error —
+    and spends no budget."""
+    _sim, mediator = _session(tmp_path)
+    mediator.emit_call()
+    with pytest.raises(MediatorError, match="cannot read reply"):
+        mediator.apply_reply(tmp_path / "missing.json")  # not a reply at all
+    prose = tmp_path / "prose.json"
+    prose.write_text(
+        "[11:00] wait: the player\nThe street is empty, the rain sets in.",
+        encoding="utf-8",
+    )
+    first = mediator.apply_reply(prose)
+    assert first.status == "regen" and first.regens_used == 1
+    assert first.notes[0].startswith("MALFORMED reply not valid JSON")
+    assert "MALFORMED reply not valid JSON" in (
+        first.call_path.read_text(encoding="utf-8")
+    )  # the note rides the re-invocation — the operator's repair fuel
+    second = mediator.apply_reply(prose)
+    assert second.status == "regen" and second.regens_used == 2
+    third = mediator.apply_reply(prose)
+    assert third.status == "dry" and not mediator.beat_open  # the L12 floor
+    assert third.prose  # template prose — never a blocked beat
+
+
 # -- the invented-entity prose floor (iter-66) ----------------------------------
 
 

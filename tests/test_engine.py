@@ -476,6 +476,41 @@ def test_narrate_engine_unavailable_falls_to_the_template_rung(
     assert "[dry beat — the L12 floor" in out
 
 
+def test_narrate_non_json_replies_exhaust_to_the_template_rung(
+    stub: _StubLlamaServer, tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Round 5's live defect (KI#90), replayed: a model that answers the
+    narrator call with PROSE instead of the reply document (the E4B
+    class, measured again at a 12B — one truncated at the 512 budget,
+    finish_reason length) must run the mediator's regen ladder — the
+    MALFORMED note riding each re-invocation as repair fuel — and
+    exhaust to the template rung with the beat CLOSED: never the
+    MediatorError escape that blocked the beat."""
+    monkeypatch.setattr("cli.main.OUTPUT_DIR", tmp_path)
+    stub.replies.clear()
+    stub.replies.extend([
+        ("[11:00] wait: the player\nThe street is empty, the rain", "length"),
+        "The player does nothing, waiting for something to happen.",
+        "Rain started against the shutters, patient and unhurried — prose.",
+    ])
+    _feed(monkeypatch, ["narrate", "quit"])
+    assert main(_session_argv(stub.url, tmp_path / "logs")) == 0
+    out = capsys.readouterr().out
+    assert "[finish_reason: length]" in out  # I6: the budget breach is loud
+    assert "refused — regen 1/2" in out
+    assert "refused — regen 2/2" in out
+    assert "[dry beat — the L12 floor" in out  # exhaustion: beat closed
+    assert "error: cannot read reply" not in out  # the KI#90 escape is gone
+    assert len(stub.requests) == 3  # the call + the two regens, nothing more
+    assert "MALFORMED reply not valid JSON" in (
+        stub.requests[1]["messages"][-1]["content"]
+    )
+    assert "MALFORMED reply not valid JSON" in (
+        stub.requests[2]["messages"][-1]["content"]
+    )  # the note rode every re-invocation
+
+
 def test_the_door_runner_error_class_is_terminal(
     stub: _StubLlamaServer, tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str],

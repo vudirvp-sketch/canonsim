@@ -36,8 +36,10 @@ claim packet)
   (PARSER_SPEC §5's re-ask + D7's rungs), the provenance manifest; the
   contract absorbed (CONTRACTS §4 the pointer); the serializer contract
   PRESENTATION_SPEC's (iter-178). Station remainder: the 27B GBNF arm +
-  the live compile check — TEST_PLAN §8.5's gap rows. Evidence:
-  TECH_NOTES §13/§13.1, TEST_PLAN §8.5, the engine-1 test packets.
+  the one-model-constrained A/B — TEST_PLAN §8.5's gap rows (the live
+  compile check discharged iter-179, round 5's first live session;
+  KI#90 closed with it). Evidence: TECH_NOTES §13/§13.1, TEST_PLAN
+  §8.5, the engine-1 test packets.
 - `presentation-1` — DONE (iter-178, the owner's write call on the met
   exit criterion): `docs/PRESENTATION_SPEC.md` — the model-facing
   serializer contract over the stable brief IR (the D-055 pattern's
@@ -109,6 +111,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` session triaged: the compile check discharged, KI#90 (the blocked-beat hole) fixed
 - iter-178 · 2026-09-21 · presentation-1 — the LLM presentation contract written from the measured results (st-4 absorbed)
 - iter-177 · 2026-09-21 · engine-1 (b) — the build landing: the GBNF mapping + the adapter + the door wiring + the ladders, INV-4 lifted (D-193)
 - iter-176 · 2026-09-21 · doc3 — the state-layer reassembly landed (doc-3 DONE) + the mechanical cap guard live
@@ -118,7 +121,6 @@ claim packet)
 - iter-172 · 2026-09-21 · engine-1 round 2 — the runner v2 delivered; the `--arm all` crash triaged runner-side
 - iter-171 · 2026-09-21 · engine-1 round 1 — the {3–8B, GBNF} experiment convened; the Rule-9 runner delivered
 - iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED (D-192)
-- iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures landed
 
 ## Track B — background (evenings, foreign canon)
 

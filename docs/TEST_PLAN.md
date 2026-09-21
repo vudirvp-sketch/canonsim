@@ -521,15 +521,17 @@ smaller n records the raw min/median/max with the gap noted).
 Gap rows standing: the 27B GBNF parse arm + the one-model-constrained
 A/B (CONTRACTS §4.3 arm a — the owner's next station run, now through
 the LANDED surface: the `--engine` session + the repo-side grammar,
-iter-177/D-193); the grammar's live-backend compile check (the same
-run); the brief/parse component split (the battery's emit_call measures
-the door's one repo-side call — the landed session's engine cycle is
-the surface that owns the split, its numbers the next heartbeat's);
-the API-side prose families (ii)–(v) (rate-limit economics at bg-8 — the
-LOCAL band measured them: E4B all-dry, Q9B 6/8, §13.1). Discharged by
-the engine-1 run: the {3–8B, GBNF} arm (both rows), the per-component
-p50/p95 columns (both rows), the per-family latency distribution (§13.1
-— no Cyrillic latency penalty at this band).
+iter-177/D-193); the brief/parse component split (the battery's
+emit_call measures the door's one repo-side call — the landed session's
+engine cycle is the surface that owns the split, its numbers the next
+heartbeat's); the API-side prose families (ii)–(v) (rate-limit
+economics at bg-8 — the LOCAL band measured them: E4B all-dry, Q9B
+6/8, §13.1). Discharged by the engine-1 runs: the {3–8B, GBNF} arm
+(both rows), the per-component p50/p95 columns (both rows), the
+per-family latency distribution (§13.1 — no Cyrillic latency penalty at
+this band), the grammar's live-backend compile check (round 5's live
+`--engine` session at an off-plan 12B: grammar accepted + enforced
+through the landed wiring — §13.1).
 
 ## 9. Claim → instrument selection grammar (intake-26, iter-138 — research-derived, a routing aid, never a gate)
 

@@ -86,8 +86,11 @@ __all__ = ["BeatResult", "Mediator", "MediatorError"]
 
 
 class MediatorError(RuntimeError):
-    """Session-loop misuse (no open beat, unreadable reply): an operator
-    error — the session prints it and lives on, never a crash."""
+    """Session-loop misuse (no open beat, a reply FILE that cannot be
+    read at all — a missing path is not a reply): an operator error —
+    the session prints it and lives on, never a crash. A present but
+    malformed reply (not JSON, wrong shape) is the LADDER's class,
+    never this one (KI#90)."""
 
 
 @dataclass(slots=True)
@@ -204,13 +207,26 @@ class Mediator:
         Malformed output and refusals never crash — they spend the
         exchange's regen budget; exhaustion falls to the ladder's floor
         (the player's exchange dies with the beat; an actor falls to the
-        template rung and the drain advances)."""
+        template rung and the drain advances). The gate family starts
+        at the bytes (KI#90): a reply file that exists but is not JSON
+        is the malformed class — the ladder's problem exactly as for a
+        wrong-shape document, whoever wrote the bytes (D-055: the
+        runtime engine is just another operator); only a file that
+        cannot be read at all is the operator error."""
         if not self._beat_open:
             raise MediatorError("no open narrator beat — emit a call first")
         try:
-            doc = json.loads(reply_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
+            text = reply_path.read_text(encoding="utf-8")
+        except OSError as exc:
             raise MediatorError(f"cannot read reply {reply_path}: {exc}") from exc
+        try:
+            doc = json.loads(text)
+        except json.JSONDecodeError as exc:
+            # KI#90 (round 5's live session): the file's bytes ARE the
+            # reply document — not-JSON is the malformed class, the
+            # ladder's (VALIDATION_SPEC §7.1); the MediatorError escape
+            # left the engine cycle's beat blocked (D7's mapping hole).
+            return self._regen_or_dry((f"MALFORMED reply not valid JSON: {exc}",))
         try:
             response = narrator_response_from_mapping(doc)
         except (NarratorError, DeltaError, ProposalError) as exc:

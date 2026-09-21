@@ -1129,6 +1129,43 @@ TEST_PLAN §8.5. The build landing (b) and presentation-1's write both
 landed with them (iter-177/178, TASKS engine-1/presentation-1 DONE;
 D-193; the serializer contract docs/PRESENTATION_SPEC.md).
 
+- **The round-5 record (iter-179, the owner's first LIVE `--engine`
+  session — the landed surface's station verification, on an off-plan
+  model)**: Prototype-X-12b.i1-Q4_K_M (a new, reasoning-capable 12B —
+  the owner's substitution; unstable per the owner, the reasoning mode
+  the suspect), llama-server b11064-a894dae93 (the same build as the
+  sandbox + round 4), `-c 4096` / 4 slots / `-fa on` / q4_0 KV /
+  `--no-reasoning-preserve`; seed 42, the pinned default endpoint.
+  VERIFIED: the GBNF grammar's live compile + enforcement at the real
+  backend THROUGH the landed session wiring — the parse call (~606
+  model tokens, the ~617 anchor's shape) answered grammar-valid (a
+  14-token `{"question": ...}`, natural stop) — TEST_PLAN §8.5's
+  compile-check gap row discharged; the provenance manifest end-to-end
+  (build + model path + params + seed + `parse_grammar_id
+  9fa7e9f4359a9201`; `model_sha256` null — the server's RELATIVE model
+  path does not resolve client-side, the graceful-by-design null; the
+  hash wants an absolute server-side path); the parse door's whole
+  vocabulary across the bundle's five sessions — intents fed (the
+  world's honest `intent_rejected` answers on move → target.kind:
+  attempts are facts) and a clarification question. FAILED (the
+  narrator door): 2/2 narrate calls replied PROSE, not the reply
+  document (natural stop, then `finish_reason: length` at the 512
+  prose budget) — the E4B class at a nominal 12B: the reply-document
+  convention is model ability, never parameter count (PRESENTATION_SPEC
+  §7's band is per-model; one datum, a 12B-class point below the
+  convention). The failure exposed KI#90: a non-JSON narrator reply
+  raised MediatorError BEFORE the gate family — the engine cycle died
+  with the beat open (D7's mapping hole; round 4's runner-side
+  json-retry ladder had masked the class — the E4B beats reached dry
+  there). FIXED iter-179: the JSON class routes to the MALFORMED regen
+  (the note riding each re-invocation), exhaustion to the template
+  rung; the unreadable-FILE class (a missing path) stays the operator
+  error; the pins in test_mediator + the stub-server round-5 replay
+  (test_engine). Residuals: the 27B GBNF parse arm + the
+  one-model-constrained A/B stand (§8.5); the brief/parse component
+  split stands (the session carries no component clock — the runner
+  battery owns it).
+
 ## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
 
 Two doors, one ledger (D-049); `python -m cli` opens the interactive
