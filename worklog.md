@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-187 · 2026-09-22 · freightvol — the camp's freight volume (the owner's embodiment-options
+call, the second row): the withhold's volume surface as pure pack data — the crofts' bloom heap
+(4 loads, the tally's PRESENT as account state) + the_withhold_banks (+2/yr, the linger beat's
+aggregate; the heap's level the artery's thinning, E⇄H's edge); test_freightvol.py +8,
+campaccount/debt1 pins widened; 11 paths; 1996+1 + ruff + docguard clean; iter-178 evicted
+
+---
 iter-186 · 2026-09-22 · campaccount — the camp's account (the owner's embodiment-options
 call, each row its own): the charcoal debt's arithmetic as pure pack data — the master's
 thin stock (coin 3) + the_bloom_nets (+3/yr) + the fold (the service six minting no stock,
@@ -69,9 +76,4 @@ discharged); the narrator prose class exposed KI#90 (MediatorError before
 the gates — the beat blocked), FIXED (JSON → the MALFORMED regen) + 2
 pins; 8 paths; 1962+1 after (1960+1 BEFORE), ruff clean; iter-169 evicted
 
----
-iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:
-docs/PRESENTATION_SPEC.md (the serializer mapping table + the narrator band; st-4
-absorbed — the call budget, the no-tail resolution, thinking-ephemeral, the Script
-Tax); the three consult cards integrated (no shape changed); 6 paths, doc-only;
-1960+1 green + ruff clean at the iter-177 diff; iter-168 evicted per the cap
+

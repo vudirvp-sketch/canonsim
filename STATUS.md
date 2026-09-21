@@ -1,48 +1,50 @@
-Iteration: iter-186 (`iter-186-campaccount` — the world track, the camp's
-account; the owner's embodiment-options call over STATUS's standing
-frames — «оставшиеся embodiment-опции лагеря (счёт, объём — каждый
-свой ряд)», the account the first of the two called rows): the
-charcoal debt's arithmetic ANSWERED at the pack band as pure pack data
-over the res-1 substrate (the debt-1 residue class's newest row) — the
-master's THIN STOCK (npc_smelter_01, coin 3: the camp's unspent year,
-the withhold's own savings, the debt fund's climb toward the charcoal
-paper sixteen — the account riding the paper's named holder, the
-seat's own purse) + the `the_bloom_nets` net flow (+3 each macro year,
-the weighing season's reckoning: the bloom walked to the beam at the
-year's turn nets the camp three) + THE FOLD one level deeper (the
-gross bloom sale NINE splits as the camp's net THREE and the charcoal
-row's standing service SIX — the service minting NO stock, the chest's
-one-flow law: a second every-year source into loc_malby's coin would
-co-due with the_guild_collects, the D-182 constraint; the notes the
-arithmetic's only mirror — ONE SALE, TWO CLAIMS, the guild's claim
-double the camp's, the tilted beam's justice uniform across the vale's
-papers); the paper SIXTEEN with NO amortization path (the service the
-weight, never its fall — the debt outlives the man unless the strong
-honest season outruns it; the fund crossing the row's size at the
-fifth reckoning; the paper's fall a discrete event beyond the flows —
-debt-1's own residue law). The tale carries the THIRD reckoning line
-(the vale's year in three lines — the coupled liabilities at one
-turn); zero core, the golden corpus byte-untouched (the zero-price
-law), the source template reused.
+Iteration: iter-187 (`iter-187-freightvol` — the world track, the
+camp's freight volume; the owner's embodiment-options call, the second
+of the two called rows — «объём»): the withhold's VOLUME SURFACE
+ANSWERED at the pack band as pure pack data over the same res-1
+substrate — the crofts' HEAP (a second account kind `bloom` on
+loc_crofts, four loads at the genesis: two seasons of the standing
+withhold, the shave's aftermath priced in held loads — the tally's
+PRESENT COUNT now carried as account state, the read mints the WORD,
+the ledger carries the volume, the read_stair LAW-never-PRESENT
+boundary held) + the `the_withhold_banks` margin flow (+2 each macro
+year: the linger beat's ANNUAL AGGREGATE, the D-112 law — the
+marginal yield held back while the price stays fallen, banked at the
+crofts where the tally's notches record it). The arithmetic (the
+notes' only mirror): the burn's rhythm FIVE loads — the honest sale
+THREE walking to the beam (the gross nine, campaccount's own arming)
+plus the withheld TWO banked; the heap's level the artery's thinning
+made legible (E⇄H's material edge: two loads a year of the toll's own
+freight kept off the artery while the heap climbs — the coupled
+liabilities as live state at one turn, the tale's FOURTH reckoning
+line). Honest residues: the flow carries the STANDING withhold's
+margin (the price's recovery would end the banking — no conditional
+cadence in the D-112 aggregate); the heap's drain (the re-weigh's
+sale) rides the un-armed player-scaled door (debt-1's standing
+residue, a future row's own call); no price formula for bloom (the
+beam's price is the shave's own authored tilt, never a derived
+function). The camp's own embodiment gaps all ANSWERED (the tally's
+read iter-185, the account iter-186, the volume iter-187); zero core,
+the golden corpus byte-untouched.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-1988 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+1996 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
 verified at BASE_COMMIT fd9c475 BEFORE working — 1979+1 green, ruff
-clean, docguard clean — and re-verified after with the full diff in
-place) ·
+clean, docguard clean — and re-verified after each iteration's diff:
+1988+1 at iter-186, 1996+1 at iter-187) ·
 Date: 2026-09-22 ·
 Scope: content/province_pack/rules.json + entities.json +
-tests/test_campaccount.py + tests/test_debt1.py (the census/year-run/
-climb pins widened to the flow-id filter — the third flow's corpus
-price) + docs/worldbuild/ANCHOR_REGION.md + docs/worldbuild/WORLD_
-TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md + STATUS.md + worklog.md
-+ docs/TASKS.md — 10 paths (the embodiment form — iter-185's own
-eleven-path shape less the tally's committed item, the account landing
-inside the existing entities; over the 3–5 soft limit, noted per
-AGENTS §2.3). Track A and track B untouched this session — the world
-track a separate track (D-186, never a second queue). The prior
-iterations' record: iter-185 (tallyread), iter-184 (charcoal1), bg-9
+tests/test_freightvol.py + tests/test_campaccount.py (the census/
+year-run/fold/climb pins widened to the kind filter — the fourth
+flow's corpus price) + tests/test_debt1.py (the accounts-vocabulary
+pin widened) + docs/worldbuild/ANCHOR_REGION.md + docs/worldbuild/
+WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md + STATUS.md +
+worklog.md + docs/TASKS.md — 11 paths (the embodiment form — iter-185's
+own shape; over the 3–5 soft limit, noted per AGENTS §2.3). Track A
+and track B untouched this session — the world track a separate track
+(D-186, never a second queue). The prior iterations' record: iter-186
+(campaccount), iter-185 (tallyread), iter-184 (charcoal1), bg-9
 (apiprose), iter-183 (residues34), iter-182 (intake-35), iter-181
 (intake-34), iter-180 (round 6), iter-179 (round 5), iter-177/178
 (engine-1 (b) + presentation-1). The detail lives in the worklog + git.
@@ -101,10 +103,12 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-186 DONE: the camp's account — the charcoal debt's arithmetic
-(the master's thin stock + the `the_bloom_nets` net flow + the fold's
-service carried in the notes, ONE SALE TWO CLAIMS — ANCHOR_REGION
-§6.4, WORLD_TESTS §9's record, `tests/test_campaccount.py`).**
+**iter-187 DONE: the camp's freight volume — the withhold's surface
+(the crofts' `bloom` heap + the `the_withhold_banks` margin flow, the
+tally's PRESENT as account state, the heap's level the artery's
+thinning — ANCHOR_REGION §6.4, WORLD_TESTS §9's record,
+`tests/test_freightvol.py`). The camp's own embodiment gaps all
+ANSWERED (185/186/187).**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -118,15 +122,14 @@ service carried in the notes, ONE SALE TWO CLAIMS — ANCHOR_REGION
    (the live band: the meaning distribution's unfinished half, a real
    reader — the reader's materials prepared over the committed
    surfaces this session, the owner's reading the missing half) and
-   the embodiment options (the owner's called row remaining: the
-   camp's freight volume — the withhold's volume surface, the debt-1
-   residue class; the older units' — the step's notch record/hatch,
-   the kin's own — each a future row's own call), the debt-1 residues
-   (each a future row's own call — the player-scaled door the class's
-   standing member), the SoW horizon (bg-6, owner-deferred —
-   long-parked per the owner's 2026-09-21 call). Track B's gap rows
-   all closed (round 4 + bg-9). New rows enter on the owner's call
-   only.
+   the embodiment options (the older units' rows — the step's notch
+   record/hatch, the kin's own — each a future row's own call), the
+   debt-1 residues (each a future row's own call — the player-scaled
+   door the class's standing member, the camp's account and volume
+   rows the class's two newest landings), the SoW horizon (bg-6,
+   owner-deferred — long-parked per the owner's 2026-09-21 call).
+   Track B's gap rows all closed (round 4 + bg-9). New rows enter on
+   the owner's call only.
 3. The intake-34/35 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog mechanism family (the per-card pass done at

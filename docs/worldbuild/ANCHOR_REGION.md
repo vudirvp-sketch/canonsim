@@ -835,15 +835,24 @@ row's standing service six, the service minting no stock — the chest's
 one-flow law, the notes the arithmetic's only mirror; the paper sixteen,
 the fund crossing it at the fifth reckoning, the paper's fall itself a
 discrete event beyond the flows — debt-1's own residue law,
-`tests/test_campaccount.py`), the freight's volume (the road's
-road_counts aggregate carries the road's cardinality, never the camp's bloom
-— the withhold's volume effect has no committed surface), and the tally's
+`tests/test_campaccount.py`), the freight's volume (ANSWERED iter-187,
+freightvol — the withhold's volume surface landed as pure pack data:
+the crofts' HEAP (`bloom` account, four loads at the genesis — two
+seasons of the standing withhold) + the `the_withhold_banks` margin
+flow (+2 each macro year, the linger beat's annual aggregate); the
+tally's PRESENT COUNT now carried as account state — the read mints
+the WORD, the ledger carries the volume — and the heap's level the
+artery's thinning made legible (E⇄H's material edge, two loads a year
+of the toll's own freight kept off the artery; the heap's drain — the
+re-weigh's sale — the un-armed player-scaled door, debt-1's standing
+residue, `tests/test_freightvol.py`), and the tally's
 read (ANSWERED iter-185, tallyread — the `read_tally` hinge landed as pure
 pack data: the count's law readable at the stacks, the re-weigh's proof
 minted as `the_camps_word` and registered over the master — the pole's
 iter-161 precedent's fourth instance, `tests/test_tallyread.py`; the read
-mints the WORD, never the PRESENT count — the freight's volume stays
-owner-routed, the read_stair precedent's own boundary).
+mints the WORD, never the PRESENT count — the PRESENT carried by the
+heap's own ledger since iter-187, the read_stair precedent's
+LAW-never-PRESENT boundary held: the two surfaces never conflated).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
 joke, market day at the beam: "Ask the crofts what the bloom weighs —
@@ -885,16 +894,24 @@ flow (+3 each macro year); the gross sale nine folded as the net three +
 the row's standing service six, the service minting no stock — the
 chest's one-flow law; the paper sixteen with no amortization path, the
 fund crossing it at the fifth reckoning, the paper's fall a discrete
-event beyond the flows — `tests/test_campaccount.py` the claim packet).
+event beyond the flows — `tests/test_campaccount.py` the claim packet),
+the freight's volume (iter-187, freightvol: the crofts' HEAP — a
+`bloom` account, four loads at the genesis, the withhold's held
+margin — + the `the_withhold_banks` margin flow (+2 each macro year,
+the linger beat's annual aggregate); the tally's PRESENT COUNT as
+account state, the heap's level the artery's thinning (E⇄H's material
+edge); the heap's drain the un-armed player-scaled door —
+`tests/test_freightvol.py` the claim packet).
 Authored here (WORKING): the paper's fall itself (the clearance lump —
-the strong honest season's authored surplus, beyond the flows), the camp's
-tally's PRESENT (the current count — the read mints the WORD, never the
-volume; the freight's surface the other gap's own row), the seat's succession
+the strong honest season's authored surplus, beyond the flows), the
+re-weigh's sale (the heap's drain — the un-armed door's own beat), the
+seat's succession
 (the third form), the coupled liabilities (the estrangement's engine),
-the belief's mechanism, the crews' roles. The unit's remaining embodiment
-option — the freight's volume surface — stays the owner's call class
-(the debt-1 residue class, a future row's own call); the live-session
-question stands (a real re-weigh, a real reader:
+the belief's mechanism, the crews' roles. The camp's own embodiment
+gaps are ANSWERED (the tally's read, the account, the volume — the
+older units' options, the step's notch record/hatch and the kin's own,
+stay the owner's call class, each a future row's own call); the
+live-session question stands (a real re-weigh, a real reader:
 the meaning distribution's own unfinished band, §7.1's form).
 
 ## 7. Meaning frontier
@@ -996,7 +1013,11 @@ close read — the `read_stair` hinge minting `the_step_law`,
 `tests/test_stepread.py`; iter-185: the camp's first embodiment — the
 tally's read, the `read_tally` hinge + the tally-stick + the secrets
 registration over the master, the re-weigh's proof,
-`tests/test_tallyread.py`); the debt's economy flow
+`tests/test_tallyread.py`; iter-186: the camp's account — the debt's
+arithmetic (the master's thin stock + the `the_bloom_nets` net flow +
+the fold), `tests/test_campaccount.py`; iter-187: the freight's volume
+— the withhold's heap (the `bloom` ledger + the margin flow, the
+tally's PRESENT as account state), `tests/test_freightvol.py`); the debt's economy flow
 landed iter-162 (the `debt-1` row's build: the accounts + the fold's two
 flows, the reckoning a story beat — `tests/test_debt1.py`; the paper's fall
 and the punt's purchase stay authored, the flow vocabulary carrying no

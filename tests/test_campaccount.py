@@ -192,9 +192,10 @@ def test_the_armed_census() -> None:
     already carrying the verb (tune-1's law, debt-1's own listing)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin"]
+    assert economy["accounts"] == ["coin", "bloom"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
-            for f in economy["flows"]] == [
+            for f in economy["flows"]
+            if f["kind"] == "coin"] == [
         ("the_toll_nets", "source", KETTA, 2, 1),
         ("the_guild_collects", "source", CHEST, 4, 1),
         ("the_bloom_nets", "source", MASTER, 3, 1),
@@ -215,17 +216,21 @@ def test_the_armed_census() -> None:
 
 def test_the_bloom_nets_at_the_years_reckoning(tmp_path: Path) -> None:
     """The committed year run (the calendar experiment's own script):
-    the year crossing fires the turn, then the three flows chained to
-    it in declaration order — the camp's third, the shapes exact
+    the year crossing fires the turn, then the three coin flows chained
+    to it in declaration order — the camp's third, the shapes exact
     (actor WORLD, the target the master, the outcome carrying the flow
     id + kind + amount, the state_changes the fund's climb 3→6, no
     knowledge, no hooks, importance medium — the story listing), the
-    chain's root the year turn (the consumer-rides-the-clock law)."""
+    chain's root the year turn (the consumer-rides-the-clock law);
+    iter-187 (freightvol) adds the withhold's bloom flow at the same
+    crossing — the coin flows filtered to their own kind here (the
+    heap's walk lives in its own packet)."""
     events, _pack = _run_script(
         tmp_path, "year.jsonl", 42,
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
-    flows = [e for e in events if e.type == SOURCE_EVENT]
+    flows = [e for e in events if e.type == SOURCE_EVENT
+             and e.outcome["kind"] == "coin"]
     assert len(flows) == 3
     assert all(e.t == 518400 for e in flows)  # the first macro crossing
     assert [(e.outcome["flow"], e.target) for e in flows] == [
@@ -258,7 +263,10 @@ def test_the_service_mints_no_stock_the_fold_holds(tmp_path: Path) -> None:
     with the notes its only mirror. The camp's fund climbs by its net
     three ALONE — the gross sale nine never a live state (the same
     honesty debt-1's fold carried: the gross six is the notes' own
-    arithmetic, never an event)."""
+    arithmetic, never an event). iter-187 (freightvol) adds the
+    withhold's bloom flow at the same crossing — exactly ONE chest
+    write among all the year's flows stays the fold's own proof (the
+    coin claims' entity set unchanged by the heap's arrival)."""
     events, _pack = _run_script(
         tmp_path, "year.jsonl", 42,
         REPO / "tests" / "playscripts" / "province_calendar.json",
@@ -267,9 +275,13 @@ def test_the_service_mints_no_stock_the_fold_holds(tmp_path: Path) -> None:
     by_flow = {e.outcome["flow"]: e for e in flows}
     assert by_flow["the_guild_collects"].state_changes[0].to_ == 44
     assert by_flow["the_bloom_nets"].state_changes[0].to_ == 6
-    # no fourth flow, no second chest write — the fold by construction
-    assert len(flows) == 3
-    assert {c.entity for f in flows for c in f.state_changes} == {
+    # exactly ONE chest write among all the year's flows — the service
+    # never a second chest-ward write, the fold by construction
+    chest_writes = [e for e in flows
+                    if any(c.entity == CHEST for c in e.state_changes)]
+    assert len(chest_writes) == 1
+    coin_kinds = [e for e in flows if e.outcome["kind"] == "coin"]
+    assert {c.entity for f in coin_kinds for c in f.state_changes} == {
         KETTA, CHEST, MASTER,
     }
 
@@ -316,12 +328,14 @@ def test_the_golden_corpus_stays_byte_untouched(tmp_path: Path) -> None:
 
 
 def test_the_twin_climbs_the_three_funds(tmp_path: Path) -> None:
-    """The twin walks the first three crossings: the three levels climb
-    exactly, the events in declaration order (the crossing's net, the
-    chest's take, the camp's net — one reckoning, three claims), the
-    accounts independent (three flows, three accounts, no co-due by
-    construction — the one-flow-per-account law held at the camp's own
-    arming)."""
+    """The twin walks the first three crossings: the three COIN levels
+    climb exactly, the events in declaration order (the crossing's net,
+    the chest's take, the camp's net — one reckoning, three claims),
+    the accounts independent (three coin flows, three coin accounts, no
+    co-due by construction — the one-flow-per-account law held at the
+    camp's own arming; iter-187's bloom flow rides beside on its own
+    account, filtered to the coin kind here — the heap's walk in its
+    own packet)."""
     events, _ = _run_pack(
         _twin(tmp_path, "armed"), tmp_path, "armed.jsonl", 42,
         [{"intent": "wait", "ticks": 1500}],
@@ -330,6 +344,7 @@ def test_the_twin_climbs_the_three_funds(tmp_path: Path) -> None:
         (e.t, e.outcome["flow"], e.state_changes[0].entity,
          e.state_changes[0].from_, e.state_changes[0].to_)
         for e in events if e.type == SOURCE_EVENT
+        and e.outcome["kind"] == "coin"
     ][:9] == list(EXPECTED_CLIMB)
 
 

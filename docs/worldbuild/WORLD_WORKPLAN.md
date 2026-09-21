@@ -61,8 +61,13 @@ COMMITTED iter-185, tallyread — the `read_tally` hinge minting
 instance; the camp's account COMMITTED iter-186, campaccount — the
 debt's arithmetic over the res-1 substrate (the master's thin stock +
 the `the_bloom_nets` net flow, the gross sale's fold, the paper
-sixteen's own law); the remaining option — the freight's volume — the
-owner's call class, the debt-1 residue class). The causal mesh is
+sixteen's own law); the freight's volume COMMITTED iter-187, freightvol
+— the withhold's volume surface (the crofts' `bloom` heap + the
+`the_withhold_banks` margin flow, the tally's PRESENT as account
+state, the heap's level the artery's thinning); the camp's own
+embodiment gaps all ANSWERED — the older units' options (the step's
+notch record/hatch, the kin's own) the owner's call class, each a
+future row's own call). The causal mesh is
 audited — eight loops, four committed (W3 done iter-156 + the W4 additions
 F and G + the camp's H, `ANCHOR_REGION.md` §5).
 

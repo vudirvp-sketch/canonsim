@@ -348,8 +348,9 @@ the counterfactual the perturbation test makes). The crisis probe (the
 re-weigh: the factor's runner at the crofts in a price-fall season) walks its
 chain on committed surfaces with three named first-exposure gaps — the camp's
 account, the freight's volume, the tally's read — recorded, not routed (the
-separate-track law); two since ANSWERED at the pack band (the tally's read
-iter-185, the account iter-186 — the entry's tail). The humor probe's authored answer: the withhold's
+separate-track law); all three since ANSWERED at the pack band (the
+tally's read iter-185, the account iter-186, the volume iter-187 —
+the entry's tail). The humor probe's authored answer: the withhold's
 position-dependent joke (the bloom that asks the price before the beam; the
 same words at the guild's table the evasion's confession; the starved winter
 and the shave never joked). The mesh: the eighth loop H AUTHORED (the shave →
@@ -392,6 +393,26 @@ the claim packet: the year run's third reckoning chained to the turn,
 the tale's three lines — the vale's year in three reckonings, the
 coupled liabilities at one turn; the twin's three-fund climb; the
 fingerprint both-arms; the golden corpus byte-untouched; zero core).
+iter-187 (freightvol) answers the volume gap at the pack band: the
+withhold's VOLUME SURFACE as pure pack data over the same substrate —
+the crofts' HEAP (a second account kind `bloom`, four loads at the
+genesis: two seasons of the standing withhold) + the
+`the_withhold_banks` margin flow (+2 each macro year, the linger
+beat's ANNUAL AGGREGATE — the D-112 law); the tally's PRESENT COUNT
+now carried as account state (the read mints the WORD, the ledger
+carries the volume — the read_stair LAW-never-PRESENT boundary held,
+the two surfaces never conflated); the heap's level the artery's
+thinning made legible (E⇄H's material edge: the burn's rhythm five
+loads — the honest sale three walking (the gross nine, campaccount's
+arming) plus the withheld two banked, two loads a year of the toll's
+own freight kept off the artery while the heap climbs) — the coupled
+liabilities as live state at one turn, the tale's fourth reckoning
+line (`tests/test_freightvol.py` the claim packet: the year run's
+fourth flow chained to the turn; the twin's heap climb 4→6→8→10 with
+the coin funds unchanged; the fingerprint both-arms; the drain door
+deliberately un-armed — the re-weigh's sale the player-scaled
+residue, debt-1's standing row; the golden corpus byte-untouched;
+zero core).
 Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).

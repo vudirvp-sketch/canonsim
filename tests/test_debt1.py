@@ -188,7 +188,9 @@ def test_the_armed_census() -> None:
     tests/test_campaccount.py, the row's own packet)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin"]
+    # iter-187 (freightvol) widens the kind vocabulary (bloom joins) —
+    # the crossing's coin claims still pinned by their own kind
+    assert economy["accounts"] == ["coin", "bloom"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
