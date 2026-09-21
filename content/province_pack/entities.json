@@ -354,8 +354,10 @@
         "flaw": "the iron hides when prices fall",
         "cause": "the guild factor shaved the weight two seasons back and the camp starved"
       },
-      "carries": [],
-      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items)"
+      "carries": [
+        "camp_tally_01"
+      ],
+      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4)"
     },
     {
       "id": "npc_steward_01",
@@ -539,6 +541,16 @@
       "flammability": "low",
       "steal_target": true,
       "notes": "the family's last tool (KI#87's fix: the weirkeeper's note cited it, the items never carried it — committed with the household's second hand, the pack's next engineering touch): the pole is two-handed work — the second hand walks the rope side with it, and the punt it once pushed drowned the flood year (ANCHOR_REGION §6.1's assets: the boathouse, the pole, the custom). Carried: the position contract rides every leg the second hand walks (movement_changes, KI#46's law). iter-161 (the pole's embodiment seeds): the steal_target flag is the verb-gate boundary's unless-arm (WORLD_AUTHORING §8 — carried ⇒ unstealable UNLESS the pack flags it): the pole is liftable unseen from the second hand's shoulder, the player-facing ablation's own gate (the carrier-ablation probe's flagged-theft arm, WORLD_TESTS §7). The flag opens exactly one gate — take stays uncarried-gated, drop_break stays the carrier's own; a successful lift flips the carrier binding to the thief and the road-leg beat then walks the second hand pole-less (the tool's availability a lawful world state)."
+    },
+    {
+      "id": "camp_tally_01",
+      "name": "the tally-stick",
+      "position": "loc_crofts",
+      "carrier": "npc_smelter_01",
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "low",
+      "notes": "the camp's own record (iter-185, tallyread — the charcoal camp's first embodiment, ANCHOR_REGION §6.4's tally gap answered at the pack band): the notch habit's own class, a people that signs with a blade — the count cut in wood at the stacks, the anti-shave discipline made physical (weight is weight, shaved is shaved, the brief's own directive). The CARRIER/HOLDER rungs' authored shape: the paper names the master, the camp reads the seat — the tally rides whoever holds the burn (the seat's succession, the handing-over its mint; carried by the master now). The read_tally hinge mints the camp's word to the reader (the re-weigh's proof: the two records meeting). The verb-gate boundary (WORLD_AUTHORING §8): carried and UNFLAGGED — the tally is untakeable and unstealable (the pole's steal_target flag deliberately NOT duplicated: the re-weigh's proof is not pocketable, the count's carrier rides the seat alone); breakable stays the carrier's own (the master's hand the only one that can spend the word entire — the succession's dark option left lawful, never scripted). The present count itself is authored, never runtime (the freight's volume gap stays owner-routed, the separate-track law — the read mints the WORD, never the PRESENT, the read_stair precedent's own boundary)."
     }
   ],
   "groups": [

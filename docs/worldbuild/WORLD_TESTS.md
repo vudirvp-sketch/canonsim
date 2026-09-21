@@ -347,7 +347,8 @@ own instrument; the frozen-force path — the guild's book naming a dead man —
 the counterfactual the perturbation test makes). The crisis probe (the
 re-weigh: the factor's runner at the crofts in a price-fall season) walks its
 chain on committed surfaces with three named first-exposure gaps — the camp's
-account, the freight's volume, the tally's read — recorded, not routed (the
+account, the freight's volume, the tally's read (the last ANSWERED iter-185
+at the pack band, the entry's tail) — recorded, not routed (the
 separate-track law). The humor probe's authored answer: the withhold's
 position-dependent joke (the bloom that asks the price before the beam; the
 same words at the guild's table the evasion's confession; the starved winter
@@ -355,7 +356,25 @@ and the shave never joked). The mesh: the eighth loop H AUTHORED (the shave →
 the debt → the withhold → the estrangement's engine, state-closing; the
 disable test + the shared-stage rule re-applied — one chest, two debtor
 behaviors, the paper the shared stage, the alarm's own interlock pattern) +
-three interlock edges (E⇄H, B⇄H, A⇄H — `ANCHOR_REGION.md` §5). Partial: the
+three interlock edges (E⇄H, B⇄H, A⇄H — `ANCHOR_REGION.md` §5). iter-185
+(tallyread) answers the tally's read gap at the pack band: the `read_tally`
+hinge over the tally-stick (the pole's `read_pole` precedent's fourth
+instance, the family's second item-kind — the tally-stick itself committed
+with it, the seat's badge carried by the master) minting the literal token
+`the_camps_word` to the reader and registering it over the master — the
+re-weigh's proof, the pole's lever class (NOT the stair's plain-knowledge
+boundary: the count is the crews' bounded knowledge, not a vale-wide
+category; the registry's third key, the first pack with two debt-type
+subjects): the count public, the withhold harder to keep, the count prices
+trust never coin — the crisis probe's tally leg walks on a committed
+surface (`tests/test_tallyread.py` the §9 claim packet: the day chain
+exact — the crofts a day's walk up-country, the read on the morning after,
+the family's own day/night order inverted by the honest geography; the
+night chain partial — the unlit crofts; the corner over the master; the
+field_in pin and the co-location gate; zero core, zero corpus price). The
+read mints the WORD, never the PRESENT count (the freight's volume stays
+owner-routed; the read_stair precedent's LAW-never-PRESENT boundary).
+Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 

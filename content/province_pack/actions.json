@@ -198,6 +198,65 @@
       "notes": "the step bench's setting verb (stepread, iter-167 — the step's close read, the unit's first embodiment, the owner's continuation call over the embodiment options: WORLD_WORKPLAN §6 candidate 3; the read hinge's third instance — the grim read_ticket first, the pole second): the stair IS the law's own text — the water law lives in stone (the feud's material lesson: the timber law died in the mill's fire), four rungs, the head each names, one shared by three hands (the step law, ANCHOR_REGION §6.2). The close read mints the literal token the_step_law — the ORDER the road never learns from the books (§6.2's knowledge asymmetry: the stranger reads a stingy ferryman, never the order — the books show the toll, not the step; §7.1's stranger row — the road's misread correctable in play, the meaning slice's committed-band widening). The token is deliberately NOT a secret: the step law is the vale's own category (the humor probe's shared-categories proof — the step a category the whole vale owns), public custom held by the practitioners' reading, no lever over any subject — plain knowledge, the brief's recalled facts the read surface (the pole's debt-lever class NOT duplicated: no secrets entry, no cluster, the registry stays two keys). The location-kind target is the hinge family's first non-item read (the stair is the carrier itself, not a thing at the stair — the field_in read pins the target to the weirstair; studying any other stone mints nothing). The perception gate is the honest failure surface: a failed read mints only the vague unread steps — steps seen, order missed. The acquisition conditions ride the saw channel (the unlit weir after dark steps the order down to partial — half the rungs legible by dark). Honest boundary (the substrate gaps stay owner-routed, the separate-track law): the read mints the LAW, never the PRESENT — the phases carry no head (the water level), so the wet step's current standing is authored, not runtime; the stone says what the rungs mean, not what the river does today."
     },
     {
+      "intent": "read_tally",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the notches stay notches",
+      "events": {
+        "success": "tally_read",
+        "failure": "tally_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "camp_tally_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_camps_word"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_notches_on_the_tally"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the charcoal camp's close read (tallyread, iter-185 — the camp's first embodiment, the owner's continuation call over STATUS's embodiment routing: ANCHOR_REGION §6.4's tally gap, the pole's iter-161 precedent's class; the read hinge's fourth instance — the grim read_ticket first, the pole second, the stair third, the family's second item-kind): the tally-stick is the camp's word made physical — the notch habit's own class, the count cut in wood at the stacks, weight is weight, shaved is shaved (the brief's own directive, the anti-shave discipline's own text). The close read mints the literal token the_camps_word — the re-weigh's proof: the counter-record the guild's book never carried (§6.4's knowledge asymmetry — the crews' count, the crews' alone until the read crosses the boundary; the count public, the withhold harder to keep, the camp's word spent). The token IS a secret — the pole's lever class (NOT the stair's plain-custom boundary): the count is the crews' bounded knowledge, not a category the whole vale owns; the reader who gains it holds the re-weigh's leverage over the master (the debt's named holder, the withhold's keeper), type 'debt' (a claim over the debtor — the counter-record's claim in the debt's reconciliation, the two records meeting), the expiry one full season (129600 — the weighing season's own window, the lever living through the re-weigh; the count prices trust, never coin — the debt's arithmetic untouched, §6.4's own boundary). The field_in read pins the target to the tally-stick (studying any other stave mints nothing); the item-kind target is the pole's own shape (the stair the family's location-kind instance). The perception gate is the honest failure surface: a failed read mints only the vague unread notches — cuts seen, count missed. The acquisition conditions ride the saw channel (the unlit crofts after dark steps the word down to partial — half the notches legible by dark, the drowned country's own light). Honest boundary (the substrate gaps stay owner-routed, the separate-track law): the read mints the WORD, never the PRESENT — the current count is authored, not runtime (the freight's volume surface the other gap's own row), the stick says what the notches mean, not how much sits on the stacks today."
+    },
+    {
       "intent": "move",
       "label": "travel to",
       "resolver": "movement",

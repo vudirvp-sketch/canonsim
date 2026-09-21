@@ -1,39 +1,46 @@
-Iteration: iter-184 (`iter-184-charcoal1` — the world track, the camp's
-meso half; the owner's «делай что можешь по планам» standing-frames
-call): the estranged half's own meso unit authored at the authored band
-over committed substrate only — the charcoal debt's lifecycle (the
-residue trace + the perturbation test per transition), the coupled
-liabilities (the estrangement's material engine: the withhold starving
-the toll's repayment, the double toll taxing the freight's cost — the
-belief's mechanism at last), and the seat's succession (D-191's open
-turnover question ANSWERED — the third form: the family line, the
-bilateral notch, now the craft's seat; the frozen-force path the
-counterfactual the test names). The mesh's eighth loop H + three
-interlock edges (E⇄H, B⇄H, A⇄H); the crisis probe (the re-weigh — the
-factor's runner at the crofts, the PC's own committed errand) + the
-humor probe (the withhold's position-dependent joke); three
-first-exposure substrate gaps recorded, not routed (the camp's
-account — the debt-1 residue class; the freight's volume; the tally's
-read hinge).
+Iteration: iter-185 (`iter-185-tallyread` — the world track, the camp's
+first embodiment; the owner's «можешь продолжать мир трек»
+continuation call over STATUS's embodiment routing — the natural
+doc-streak breaker after two doc-only iterations, the iter-167
+precedent's own reading): the tally's read gap ANSWERED at the pack
+band as pure pack data, zero core — the `read_tally` hinge (the read
+hinge family's fourth instance, the pole's item-kind class: the grim
+read_ticket, the pole, the stair, now the tally) + the tally-stick
+itself (`camp_tally_01`, the notch habit's own class, the seat's
+badge carried by the master — the paper names the master, the camp
+reads the seat) + the secrets registration (`the_camps_word` over
+the master, type debt, the weighing season's window — the registry's
+third key, the first pack with two debt-type subjects): the
+re-weigh's proof, the crisis probe's tally leg now on a committed
+surface (the count public, the withhold harder to keep — the count
+prices trust, never coin). The WORD minted, never the PRESENT count
+(the read_stair precedent's LAW-never-PRESENT boundary; the freight's
+volume stays owner-routed); the camp's own read mints nothing (the
+crews' lived knowledge not event-recorded, INV-1; the holder !=
+subject guard); the tally unflagged (the pole's steal_target
+boundary deliberately NOT duplicated — the proof is not pocketable).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-1969 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 6d05469 BEFORE working — 1969+1 green, ruff
+1979 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 5b44f78 BEFORE working — 1969+1 green, ruff
 clean, docguard clean — and re-verified after with the full diff in
 place) ·
-Date: 2026-09-21 ·
-Scope: docs/worldbuild/ANCHOR_REGION.md + docs/worldbuild/WORLD_TESTS.md +
-docs/worldbuild/WORLD_AUTHORING.md + docs/worldbuild/WORLD_WORKPLAN.md +
-STATUS.md + worklog.md + docs/TASKS.md — 7 paths (the authored unit §6.4 +
-the mesh's Loop H + the test record + the state docs; over the 3–5 soft
-limit, the unit's form requiring the anchor + the test record in the same
-iteration — noted per AGENTS §2.3). Track A and track B untouched this
-session — the world track a separate track (D-186, never a second queue).
-The prior iterations' record: bg-9 (apiprose), iter-183 (residues34),
-iter-182 (intake-35), iter-181 (intake-34), iter-180 (round 6), iter-179
-(round 5), iter-177/178 (engine-1 (b) + presentation-1). The detail
-lives in the worklog + git.
+Date: 2026-09-22 ·
+Scope: content/province_pack/actions.json + entities.json +
+templates.json + rules.json + tests/test_tallyread.py +
+docs/worldbuild/ANCHOR_REGION.md + docs/worldbuild/WORLD_TESTS.md +
+docs/worldbuild/WORLD_WORKPLAN.md + STATUS.md + worklog.md +
+docs/TASKS.md — 11 paths (the family's embodiment form — iter-167's
+own nine-path shape plus entities.json (the tally-stick committed
+with the hinge) and the three worldbuild state docs the unit's
+record owns; over the 3–5 soft limit, noted per AGENTS §2.3). Track
+A and track B untouched this session — the world track a separate
+track (D-186, never a second queue). The prior iterations' record:
+iter-184 (charcoal1), bg-9 (apiprose), iter-183 (residues34),
+iter-182 (intake-35), iter-181 (intake-34), iter-180 (round 6),
+iter-179 (round 5), iter-177/178 (engine-1 (b) + presentation-1).
+The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -89,10 +96,10 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-184 DONE: the camp's meso half — the charcoal debt authored
-(the coupled liabilities + the seat's succession, D-191's turnover
-answer; Loop H + three interlock edges — ANCHOR_REGION §6.4, WORLD_TESTS
-§9's record).**
+**iter-185 DONE: the camp's first embodiment — the tally's read (the
+`read_tally` hinge + the tally-stick + the secrets registration over
+the master, the re-weigh's proof — ANCHOR_REGION §6.4, WORLD_TESTS
+§9's record, `tests/test_tallyread.py`).**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -105,8 +112,9 @@ answer; Loop H + three interlock edges — ANCHOR_REGION §6.4, WORLD_TESTS
 2. The standing frames: the world track's frontier — W5's human tests
    (the live band: the meaning distribution's unfinished half, a real
    reader) and the embodiment options (the owner's call class: the
-   pole's iter-161 precedent family, now joined by the camp's three
-   gaps — the account, the freight volume, the tally's read), the
+   camp's two remaining gaps — the account, the freight volume, the
+   debt-1 residue class each a future row's own call; the older
+   units' — the step's notch record/hatch, the kin's own), the
    debt-1 residues (each a future row's own call — the camp's account
    the class's newest member), the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). Track B's gap rows

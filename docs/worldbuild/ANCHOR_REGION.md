@@ -831,8 +831,12 @@ debt-1 armed the crossing's only; the camp's row would be its own future
 row, the debt-1 residue class), the freight's volume (the road's
 road_counts aggregate carries the road's cardinality, never the camp's bloom
 — the withhold's volume effect has no committed surface), and the tally's
-read (the count has no read hinge — the `read_pole` family; the re-weigh's
-proof would need its own hinge, the pole's iter-161 precedent's class).
+read (ANSWERED iter-185, tallyread — the `read_tally` hinge landed as pure
+pack data: the count's law readable at the stacks, the re-weigh's proof
+minted as `the_camps_word` and registered over the master — the pole's
+iter-161 precedent's fourth instance, `tests/test_tallyread.py`; the read
+mints the WORD, never the PRESENT count — the freight's volume stays
+owner-routed, the read_stair precedent's own boundary).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
 joke, market day at the beam: "Ask the crofts what the bloom weighs —
@@ -859,14 +863,24 @@ stacks), the old-families group (the master the feud's hill head, grievance
 30), the road traffic (the hill carrier the crofts' man on the artery), the
 weighbeam (the pricing surface, Maren's flaw its tilt), the charcoal sack
 (the flammable prop), the PC's errand (the audit's carrier), the seasons
-(the four phases' year). Authored here (WORKING): the debt's own arithmetic
+(the four phases' year), the tally's read (iter-185, tallyread: the
+`read_tally` hinge — the pole's `read_pole` precedent's fourth instance,
+the family's second item-kind — plus the tally-stick itself
+(`camp_tally_01`, the seat's badge, carried by the master) and the secrets
+registration over him (`the_camps_word`, type debt, the re-weigh's
+leverage: the count public, the withhold harder to keep — the count prices
+trust, never coin); the brief's recalled facts the read surface, the corner
+over the master the lever's spend, the unlit crofts stepping the night
+read down to partial — `tests/test_tallyread.py` the claim packet).
+Authored here (WORKING): the debt's own arithmetic
 (the starved winter's borrowing — the paper's charcoal row), the camp's
-tally (the count's carrier, the notch habit's class), the seat's succession
+tally's PRESENT (the current count — the read mints the WORD, never the
+volume; the freight's surface the other gap's own row), the seat's succession
 (the third form), the coupled liabilities (the estrangement's engine), the
-belief's mechanism, the crews' roles. The unit's embodiment options — the
-camp's account, the freight's volume surface, the tally's read hinge — stay
-the owner's call class (the pole's iter-161 precedent, the debt-1 residue
-class); the live-session question stands (a real re-weigh, a real reader:
+belief's mechanism, the crews' roles. The unit's remaining embodiment
+options — the camp's account, the freight's volume surface — stay
+the owner's call class (the debt-1 residue class, each a future row's own
+call); the live-session question stands (a real re-weigh, a real reader:
 the meaning distribution's own unfinished band, §7.1's form).
 
 ## 7. Meaning frontier
@@ -963,7 +977,12 @@ implementation witness carries the chain at the
 single-NPC + companion band (iter-157: the second
 hand, the pole — KI#87 closed; iter-161:
 the pole's social half — the recognition read, the lever chain, the theft
-gate, all test-pinned in `tests/test_poleseed.py`); the debt's economy flow
+gate, all test-pinned in `tests/test_poleseed.py`; iter-167: the step's
+close read — the `read_stair` hinge minting `the_step_law`,
+`tests/test_stepread.py`; iter-185: the camp's first embodiment — the
+tally's read, the `read_tally` hinge + the tally-stick + the secrets
+registration over the master, the re-weigh's proof,
+`tests/test_tallyread.py`); the debt's economy flow
 landed iter-162 (the `debt-1` row's build: the accounts + the fold's two
 flows, the reckoning a story beat — `tests/test_debt1.py`; the paper's fall
 and the punt's purchase stay authored, the flow vocabulary carrying no

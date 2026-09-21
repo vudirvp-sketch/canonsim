@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-185 · 2026-09-22 · tallyread — the camp's first embodiment (the owner's «можешь продолжать
+мир трек» continuation call, the iter-167 doc-streak-breaker reading): the tally's read as pure
+pack data — the read_tally hinge (the family's fourth instance) + the tally-stick (the seat's
+badge, the master's) + the secrets registration (the_camps_word, type debt — the re-weigh's
+proof, the WORD never the PRESENT); 11 paths; 1979+1 + ruff + docguard clean both ends; iter-175 evicted
+
+---
 iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the owner's standing-frames
 call): the charcoal debt's lifecycle + the coupled liabilities (E⇄H) + the seat's succession
 (D-191 answered — the third form); Loop H + 3 interlock edges + the re-weigh crisis + the humor
@@ -61,13 +68,6 @@ iter-176 · 2026-09-21 · doc3 — the owner-declared build: the state-layer rea
 DECISIONS 31→30, README/worklog to their functions) + the cap guard + the digest
 landings adaptation; 10 paths, doc + tooling; 1916+1 BEFORE at 2687465, 1926+1
 after (+10 the guard's packet) + ruff clean; iter-166 evicted per the cap
-
----
-iter-175 · 2026-09-21 · docrev1 — the owner-called state-layer audit: doc-3 OPENED
-(the reassembly row + the cap guard, the recurrence fix); STATUS re-pinned (the
-DONE-block protocol restored, seven stale blocks → git); verdict: the queue healthy,
-the mass duplicated history; 3 paths, doc-only; 1916+1 green + ruff clean at efedd89;
-iter-165 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

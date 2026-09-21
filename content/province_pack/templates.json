@@ -40,6 +40,8 @@
     "pole_read_failed": "{actor} studies {target}, but the marks stay marks.",
     "stair_read": "{actor} reads {target} — the wet step's line, four rungs, one head shared by three hands.",
     "stair_read_failed": "{actor} studies {target}, but the steps stay steps.",
+    "tally_read": "{actor} reads {target} — the notches' meaning: weight is weight, shaved is shaved.",
+    "tally_read_failed": "{actor} studies {target}, but the notches stay notches.",
     "distract": "{actor} distracts {target}.",
     "distract_ignored": "{target} ignores {actor}'s antics.",
     "arson": "{actor} sets a fire in {location}.",

@@ -51,10 +51,16 @@ is TESTED (the constructed kinship edge — the winter kin,
 `ANCHOR_REGION.md` §6.3, iter-165: the Sarrow need demonstrated at the
 authored band, the mesh's seventh loop G + three interlock edges — the W4
 working set complete). The camp's meso half — the estranged half's own
-unit, the anchor §4's named row — is authored (the charcoal debt,
+unit, the anchor §4's named row — is authored with its tally's read
+embodied (the charcoal debt,
 `ANCHOR_REGION.md` §6.4, iter-184: the coupled liabilities + the seat's
 succession — the D-191 turnover's open question answered; the mesh's
-eighth loop H + three interlock edges). The causal mesh is
+eighth loop H + three interlock edges; the camp's first embodiment
+COMMITTED iter-185, tallyread — the `read_tally` hinge minting
+`the_camps_word`, the re-weigh's proof, the pole's precedent's fourth
+instance; the remaining options — the camp's account, the freight's
+volume — the owner's call class, the debt-1 residue class). The causal
+mesh is
 audited — eight loops, four committed (W3 done iter-156 + the W4 additions
 F and G + the camp's H, `ANCHOR_REGION.md` §5).
 
