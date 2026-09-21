@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-186 · 2026-09-22 · campaccount — the camp's account: the charcoal debt's arithmetic (the master's thin stock + the_bloom_nets + the fold — ONE SALE, TWO CLAIMS; the paper sixteen, no amortization path)
 - iter-185 · 2026-09-22 · tallyread — the camp's first embodiment: the tally's read (the read_tally hinge + the tally-stick + the secrets registration over the master — the re-weigh's proof, the pole's precedent's fourth instance)
 - iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the charcoal debt, the coupled liabilities, the seat's succession — Loop H + three interlock edges)
 - iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
@@ -122,7 +123,6 @@ claim packet)
 - iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` session triaged: the compile check discharged, KI#90 (the blocked-beat hole) fixed
 - iter-178 · 2026-09-21 · presentation-1 — the LLM presentation contract written from the measured results (st-4 absorbed)
 - iter-177 · 2026-09-21 · engine-1 (b) — the build landing: the GBNF mapping + the adapter + the door wiring + the ladders, INV-4 lifted (D-193)
-- iter-176 · 2026-09-21 · doc3 — the state-layer reassembly landed (doc-3 DONE) + the mechanical cap guard live
 
 ## Track B — background (evenings, foreign canon)
 

@@ -357,7 +357,10 @@
       "carries": [
         "camp_tally_01"
       ],
-      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4)"
+      "accounts": {
+        "coin": 3
+      },
+      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4); campaccount (iter-186): the coin account is the camp's THIN SURPLUS — the withhold's own savings, the debt fund's climb toward the charcoal paper sixteen (economy.notes owns the fold's arithmetic; the gross bloom sale nine splitting as the camp's net three and the row's standing service six, the service folded away by the chest's one-flow law — the paper's fall a discrete event beyond the flows)"
     },
     {
       "id": "npc_steward_01",

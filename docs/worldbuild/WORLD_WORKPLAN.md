@@ -58,9 +58,11 @@ succession — the D-191 turnover's open question answered; the mesh's
 eighth loop H + three interlock edges; the camp's first embodiment
 COMMITTED iter-185, tallyread — the `read_tally` hinge minting
 `the_camps_word`, the re-weigh's proof, the pole's precedent's fourth
-instance; the remaining options — the camp's account, the freight's
-volume — the owner's call class, the debt-1 residue class). The causal
-mesh is
+instance; the camp's account COMMITTED iter-186, campaccount — the
+debt's arithmetic over the res-1 substrate (the master's thin stock +
+the `the_bloom_nets` net flow, the gross sale's fold, the paper
+sixteen's own law); the remaining option — the freight's volume — the
+owner's call class, the debt-1 residue class). The causal mesh is
 audited — eight loops, four committed (W3 done iter-156 + the W4 additions
 F and G + the camp's H, `ANCHOR_REGION.md` §5).
 

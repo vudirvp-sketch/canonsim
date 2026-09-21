@@ -347,9 +347,9 @@ own instrument; the frozen-force path — the guild's book naming a dead man —
 the counterfactual the perturbation test makes). The crisis probe (the
 re-weigh: the factor's runner at the crofts in a price-fall season) walks its
 chain on committed surfaces with three named first-exposure gaps — the camp's
-account, the freight's volume, the tally's read (the last ANSWERED iter-185
-at the pack band, the entry's tail) — recorded, not routed (the
-separate-track law). The humor probe's authored answer: the withhold's
+account, the freight's volume, the tally's read — recorded, not routed (the
+separate-track law); two since ANSWERED at the pack band (the tally's read
+iter-185, the account iter-186 — the entry's tail). The humor probe's authored answer: the withhold's
 position-dependent joke (the bloom that asks the price before the beam; the
 same words at the guild's table the evasion's confession; the starved winter
 and the shave never joked). The mesh: the eighth loop H AUTHORED (the shave →
@@ -374,6 +374,24 @@ night chain partial — the unlit crofts; the corner over the master; the
 field_in pin and the co-location gate; zero core, zero corpus price). The
 read mints the WORD, never the PRESENT count (the freight's volume stays
 owner-routed; the read_stair precedent's LAW-never-PRESENT boundary).
+iter-186 (campaccount) answers the account gap at the pack band: the
+debt's arithmetic as pure pack data over the res-1 substrate — the
+master's thin stock (coin 3, the debt fund's climb toward the paper
+sixteen) + the `the_bloom_nets` net flow (+3 each macro year, the
+weighing season's reckoning); the gross bloom sale nine folded as the
+camp's net three and the charcoal row's standing service six, the
+service minting no stock (the chest's one-flow law — the D-182 co-due
+constraint one level deeper, the notes the arithmetic's only mirror:
+ONE SALE, TWO CLAIMS, the guild's claim double the camp's, the tilted
+beam's justice uniform across the vale's papers); the paper sixteen
+with no amortization path (the service the weight, never the fall —
+the debt outlives the man unless the strong honest season outruns it),
+the fund crossing the row's size at the fifth reckoning, the paper's
+fall a discrete event beyond the flows (`tests/test_campaccount.py`
+the claim packet: the year run's third reckoning chained to the turn,
+the tale's three lines — the vale's year in three reckonings, the
+coupled liabilities at one turn; the twin's three-fund climb; the
+fingerprint both-arms; the golden corpus byte-untouched; zero core).
 Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).

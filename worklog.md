@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-186 · 2026-09-22 · campaccount — the camp's account (the owner's embodiment-options
+call, each row its own): the charcoal debt's arithmetic as pure pack data — the master's
+thin stock (coin 3) + the_bloom_nets (+3/yr) + the fold (the service six minting no stock,
+the chest's one-flow law; the paper sixteen, no amortization path); test_campaccount.py
++9 + debt1's pins widened; 10 paths; 1988+1 + ruff + docguard clean; iter-176 evicted
+
+---
 iter-185 · 2026-09-22 · tallyread — the camp's first embodiment (the owner's «можешь продолжать
 мир трек» continuation call, the iter-167 doc-streak-breaker reading): the tally's read as pure
 pack data — the read_tally hinge (the family's fourth instance) + the tally-stick (the seat's
@@ -61,13 +68,6 @@ triaged: the compile check verified through the landed wiring (§8.5
 discharged); the narrator prose class exposed KI#90 (MediatorError before
 the gates — the beat blocked), FIXED (JSON → the MALFORMED regen) + 2
 pins; 8 paths; 1962+1 after (1960+1 BEFORE), ruff clean; iter-169 evicted
-
----
-iter-176 · 2026-09-21 · doc3 — the owner-declared build: the state-layer reassembly
-(FAQ one-liners, recipes → TECH_NOTES §14/§15, the three TASKS ledgers dead,
-DECISIONS 31→30, README/worklog to their functions) + the cap guard + the digest
-landings adaptation; 10 paths, doc + tooling; 1916+1 BEFORE at 2687465, 1926+1
-after (+10 the guard's packet) + ruff clean; iter-166 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

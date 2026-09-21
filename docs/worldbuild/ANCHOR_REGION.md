@@ -826,9 +826,16 @@ public, the withhold harder to keep). The debt stays untouched by the tally's
 honesty — the boundary: the count prices trust, never coin (the paper's fall
 and the withhold's custom stay future calls). The probe's missing links —
 three first-exposure substrate gaps, recorded, not routed (the
-separate-track law): the camp's account (no committed account state —
-debt-1 armed the crossing's only; the camp's row would be its own future
-row, the debt-1 residue class), the freight's volume (the road's
+separate-track law): the camp's account (ANSWERED iter-186, campaccount —
+the debt's arithmetic landed as pure pack data over the res-1 substrate:
+the master's thin stock (coin 3, the debt fund's climb) + the
+`the_bloom_nets` net flow (+3 each macro year, the weighing season's
+reckoning); the gross sale nine folded as the camp's net three + the
+row's standing service six, the service minting no stock — the chest's
+one-flow law, the notes the arithmetic's only mirror; the paper sixteen,
+the fund crossing it at the fifth reckoning, the paper's fall itself a
+discrete event beyond the flows — debt-1's own residue law,
+`tests/test_campaccount.py`), the freight's volume (the road's
 road_counts aggregate carries the road's cardinality, never the camp's bloom
 — the withhold's volume effect has no committed surface), and the tally's
 read (ANSWERED iter-185, tallyread — the `read_tally` hinge landed as pure
@@ -871,16 +878,23 @@ registration over him (`the_camps_word`, type debt, the re-weigh's
 leverage: the count public, the withhold harder to keep — the count prices
 trust, never coin); the brief's recalled facts the read surface, the corner
 over the master the lever's spend, the unlit crofts stepping the night
-read down to partial — `tests/test_tallyread.py` the claim packet).
-Authored here (WORKING): the debt's own arithmetic
-(the starved winter's borrowing — the paper's charcoal row), the camp's
+read down to partial — `tests/test_tallyread.py` the claim packet), the
+camp's account (iter-186, campaccount: the debt's arithmetic — the
+master's thin stock (coin 3, the debt fund) + the `the_bloom_nets` net
+flow (+3 each macro year); the gross sale nine folded as the net three +
+the row's standing service six, the service minting no stock — the
+chest's one-flow law; the paper sixteen with no amortization path, the
+fund crossing it at the fifth reckoning, the paper's fall a discrete
+event beyond the flows — `tests/test_campaccount.py` the claim packet).
+Authored here (WORKING): the paper's fall itself (the clearance lump —
+the strong honest season's authored surplus, beyond the flows), the camp's
 tally's PRESENT (the current count — the read mints the WORD, never the
 volume; the freight's surface the other gap's own row), the seat's succession
-(the third form), the coupled liabilities (the estrangement's engine), the
-belief's mechanism, the crews' roles. The unit's remaining embodiment
-options — the camp's account, the freight's volume surface — stay
-the owner's call class (the debt-1 residue class, each a future row's own
-call); the live-session question stands (a real re-weigh, a real reader:
+(the third form), the coupled liabilities (the estrangement's engine),
+the belief's mechanism, the crews' roles. The unit's remaining embodiment
+option — the freight's volume surface — stays the owner's call class
+(the debt-1 residue class, a future row's own call); the live-session
+question stands (a real re-weigh, a real reader:
 the meaning distribution's own unfinished band, §7.1's form).
 
 ## 7. Meaning frontier

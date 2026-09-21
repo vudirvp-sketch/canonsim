@@ -182,12 +182,16 @@ def test_the_armed_census() -> None:
     weighbeam — the grim till's location form, the group taking no
     stock), the two flows (both SOURCES, the fold), the verb line in
     the template vocabulary (the arming's corpus price), the story
-    listing (the reckoning a story beat of this pack)."""
+    listing (the reckoning a story beat of this pack). iter-186
+    (campaccount) adds the camp's own third flow beside these — the
+    crossing's census here keeps its two (the camp's claims live in
+    tests/test_campaccount.py, the row's own packet)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
     assert economy["accounts"] == ["coin"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
-            for f in economy["flows"]] == [
+            for f in economy["flows"]
+            if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
         ("the_toll_nets", "source", KETTA, 2, 1),
         ("the_guild_collects", "source", CHEST, 4, 1),
     ]
@@ -226,12 +230,17 @@ def test_the_flows_fire_at_the_years_reckoning(tmp_path: Path) -> None:
     the target the account's entity, the outcome carrying the flow id +
     kind + amount (the D-112 cardinality surface), the state_changes
     the levels' climb, no knowledge, no hooks, importance medium (the
-    story listing — the reckoning renders)."""
+    story listing — the reckoning renders). iter-186 (campaccount)
+    adds the camp's third flow at the same crossing — the crossing's
+    two pinned here by their own ids (the camp's walk lives in its own
+    packet)."""
     events, _pack = _run_script(
         tmp_path, "year.jsonl", 42,
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
-    flows = [e for e in events if e.type == SOURCE_EVENT]
+    flows = [e for e in events if e.type == SOURCE_EVENT
+             and e.outcome["flow"] in ("the_toll_nets",
+                                       "the_guild_collects")]
     assert len(flows) == 2
     assert all(e.t == 518400 for e in flows)  # the first macro crossing
     assert [(e.outcome["flow"], e.target) for e in flows] == [
@@ -304,7 +313,10 @@ def test_the_fold_holds_the_co_due_limit(tmp_path: Path) -> None:
     (both sources — the fold), so no crossing desyncs at the commit
     gate. The twin walks the first three crossings: the levels climb
     exactly, the events in declaration order, the take outweighing the
-    net two-to-one — ONE COIN, TWO CLAIMS as live account state."""
+    net two-to-one — ONE COIN, TWO CLAIMS as live account state.
+    iter-186's camp flow rides the same crossings on its own account —
+    the crossing's two filtered to their own ids here (the camp's climb
+    pinned in tests/test_campaccount.py)."""
     events, _ = _run_pack(
         _twin(tmp_path, "armed"), tmp_path, "armed.jsonl", 42,
         [{"intent": "wait", "ticks": 1500}],
@@ -313,6 +325,7 @@ def test_the_fold_holds_the_co_due_limit(tmp_path: Path) -> None:
         (e.t, e.outcome["flow"], e.state_changes[0].entity,
          e.state_changes[0].from_, e.state_changes[0].to_)
         for e in events if e.type == SOURCE_EVENT
+        and e.outcome["flow"] in ("the_toll_nets", "the_guild_collects")
     ][:6] == list(EXPECTED_CLIMB)
 
 
