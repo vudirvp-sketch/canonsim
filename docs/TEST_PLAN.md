@@ -263,6 +263,33 @@ bump, `provenance.cause_hook`), regenerated in the same iteration per
 same iteration (tests/test_drift.py — the systems table ⇔ the metrics
 prefix map, the observed corpus pinned).
 
+**The R1 paired-Δ arm (iter-183 — the owner's methodology call over
+the intake-35 M3 argument, D-195; the corpus's CRN verdict CONFIRMED as
+research methodology): `--paired-delta`.** The reporting change alone,
+no new protocol: the flag runs the invocation's arm AND the base arm
+(directors on, pacing on, the committed pack) over the SAME seed range
+in one invocation — the seeds pair by construction (common random
+numbers), so the per-seed Δ cancels the world variance the two marginal
+tables carry. The appended block reports, per scalar metric and per-NPC
+suspicion peak: the paired-Δ distribution (min/p50/mean/max), the agree
+share (the seeds signing with the mean Δ), the effect size d =
+mean(Δ)/s_Δ, and the CRN read — the pair-variance ratio
+s²_Δ/(s²_base + s²_variant) with the arm correlation ρ. The base arm
+itself refuses the flag (nothing to pair against); list-valued metrics
+(the stretch histogram, payoff latency, the tension profile) stay
+marginal — per-run they are distributions, not scalars. The paired
+artifact is `…_<arm>_paired.txt`, separate from the marginal file; the
+two-invocation marginal protocol stays the standing default. Our own
+measured example (the pacing A/B, 40 seeds, base seed 100, iter-183):
+the count/share family sits at 0.010–0.029 (events 0.015, M1 0.015, the
+room's suspicion peaks 0.010) while the causal-chain and repetition
+metrics form the noisy tail (M3_mean 0.171 with ρ 0.833, M4_repetition
+0.228) — pairing buys ~30–100× where the marginal table is structural
+and ~4–6× where it is noisiest: the M3 argument's shape on our own runs
+(the corpus's measured ratios: 0.011–0.039, M3 0.338). Pinned in
+tests/test_balance_harness.py (the refusal, the block's determinism, the
+D-065 single-seed structure-zero form, the M3-noisy-tail ordering).
+
 ## 7. leg-4 offline chronicler acceptance (iter-64, D-093)
 
 The mode-F chronicler suite (`tests/test_chronicle.py`; the tool:

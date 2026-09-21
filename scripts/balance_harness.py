@@ -32,6 +32,21 @@ guessed (lint + 3-seed runs, iter-107):
 
     urgencies · weather · on_action · reflection · secrets · factions
 
+The paired-Δ arm (R1, iter-183 — the owner's methodology call over the
+intake-35 M3 argument, D-195; the corpus's CRN verdict CONFIRMED as
+research methodology): `--paired-delta` runs the invocation's arm AND
+the base arm (directors on, pacing on, the committed pack) over the
+SAME seed range in one invocation — the seeds pair by construction
+(common random numbers), so the per-seed Δ cancels the world variance
+the marginal tables carry. The appended block reports, per scalar
+metric and per-NPC suspicion peak: the paired-Δ distribution
+(min/p50/mean/max), the agree share (seeds signing with the mean Δ),
+the effect size d = mean(Δ)/s_Δ, and the CRN read — the pair-variance
+ratio s²_Δ/(s²_base + s²_variant) with the arm correlation ρ. The
+base arm itself refuses the flag (nothing to pair against); list-valued
+metrics (the stretch histogram, payoff latency, the tension profile)
+stay marginal — their per-run shape is a distribution, not a scalar.
+
 Output: `output/balance_<N>.txt` (gitignored runtime artifact — never
 committed; the harness itself is committed, the runs are reproducible
 from the seed range).
@@ -45,6 +60,8 @@ Usage:
         --pacing off  # the DIR-2 A/B's clock-off arm
     python -m scripts.balance_harness --runs 100 --systems-minus \
         urgencies  # the ablation arm (block-scoped, 68a)
+    python -m scripts.balance_harness --runs 200 --directors on \
+        --pacing off --paired-delta  # the R1 read: both arms, per-seed Δ
 """
 
 from __future__ import annotations
@@ -240,6 +257,126 @@ def _run_one(
     return report, peaks, burned, stretches, latencies, tension
 
 
+#: The paired block's scalar metric keys, in table order (R1, iter-183):
+#: the ten marginal rows the Δ rides; the list-valued blocks (stretch
+#: histogram, payoff latency, tension) stay marginal — per-run they are
+#: distributions, not scalars.
+PAIRED_SCALARS: Final[tuple[str, ...]] = (
+    "events", "M1", "M3_mean", "M3_median",
+    "M4_repetition", "M4_distinct_knows", "M5",
+    "emergent_chains", "destroyed_locations", "eventless_max_stretch",
+)
+
+
+def _scalar_row(
+    report: MetricReport, peaks: dict[str, int], burned: int,
+    stretches: list[int],
+) -> dict[str, float]:
+    """One run's paired-scope scalars: the ten marginal rows plus the
+    per-NPC suspicion peaks (keyed `susp.<npc>`)."""
+    return {
+        "events": float(report.events),
+        "M1": report.m1_cross_system_share,
+        "M3_mean": report.m3_mean,
+        "M3_median": report.m3_median,
+        "M4_repetition": report.m4_repetition_rate,
+        "M4_distinct_knows": report.m4_distinct_knows_share,
+        "M5": report.m5_non_pc_share,
+        "emergent_chains": float(report.emergent_chains),
+        "destroyed_locations": float(burned),
+        "eventless_max_stretch": float(max(stretches)) if stretches else 0.0,
+        **{f"susp.{npc}": float(value) for npc, value in sorted(peaks.items())},
+    }
+
+
+def _sd(values: Sequence[float]) -> float:
+    """Sample sd that stays defined at N=1 and on constant input (0.0 —
+    the degenerate-but-honest single-seed pair, the D-065 shape)."""
+    if len(values) < 2:
+        return 0.0
+    return statistics.stdev(values)
+
+
+def _paired_stats(
+    base_rows: list[dict[str, float]], variant_rows: list[dict[str, float]],
+) -> dict[str, dict[str, Any]]:
+    """The R1 paired-Δ table: per metric, over per-seed pairs (Δ =
+    variant − base, seeds aligned by construction), the Δ distribution,
+    the agree share (seeds signing with the mean Δ; zero-mean rows report
+    the zero share), the effect size d = mean(Δ)/s_Δ, and the CRN read —
+    the pair-variance ratio s²_Δ/(s²_base + s²_variant) plus the arm
+    correlation ρ (`None` renders as n/a: a degenerate or one-seed pair
+    carries no ratio to read)."""
+    out: dict[str, dict[str, Any]] = {}
+    keys = list(base_rows[0])
+    assert [list(row) for row in variant_rows] == [keys] * len(variant_rows)
+    for key in keys:
+        base = [row[key] for row in base_rows]
+        variant = [row[key] for row in variant_rows]
+        deltas = [v - b for b, v in zip(base, variant, strict=True)]
+        mean_d = statistics.mean(deltas)
+        if mean_d > 0:
+            agree = sum(1 for d in deltas if d > 0) / len(deltas)
+        elif mean_d < 0:
+            agree = sum(1 for d in deltas if d < 0) / len(deltas)
+        else:
+            agree = sum(1 for d in deltas if d == 0) / len(deltas)
+        s_d = _sd(deltas)
+        s_b = _sd(base)
+        s_v = _sd(variant)
+        if s_d > 0:
+            effect = mean_d / s_d
+        else:
+            effect = 0.0 if mean_d == 0 else float("inf")
+        denom = s_b * s_b + s_v * s_v
+        ratio = (s_d * s_d / denom) if denom > 0 else None
+        try:
+            rho = (
+                statistics.correlation(base, variant)
+                if s_b > 0 and s_v > 0 else None
+            )
+        except statistics.StatisticsError:
+            rho = None
+        out[key] = {
+            "delta_min": min(deltas), "delta_p50": statistics.median(deltas),
+            "delta_mean": mean_d, "delta_max": max(deltas),
+            "agree": agree, "effect": effect, "ratio": ratio, "rho": rho,
+        }
+    return out
+
+
+def _render_paired_block(paired: dict[str, dict[str, Any]], pairs: int) -> str:
+    """The paired-Δ section of the table (worklog-friendly ASCII)."""
+    lines = [
+        "-" * 60,
+        f"paired Δ vs base (directors on, pacing on, the committed "
+        f"pack) — {pairs} seed pairs",
+        f"{'metric':<21}{'Δmin':>7}{'Δp50':>7}{'Δmean':>7}{'Δmax':>7}"
+        f"{'agree':>6}{'d':>7}{'ratio':>7}{'ρ':>7}",
+    ]
+
+    def _row(label: str, s: dict[str, Any]) -> str:
+        ratio = f"{'n/a':>7}" if s["ratio"] is None else f"{s['ratio']:7.3f}"
+        rho = f"{'n/a':>7}" if s["rho"] is None else f"{s['rho']:7.3f}"
+        return (
+            f"{label:<21}{s['delta_min']:>7.2f}{s['delta_p50']:>7.2f}"
+            f"{s['delta_mean']:>7.2f}{s['delta_max']:>7.2f}"
+            f"{s['agree']:>6.2f}{s['effect']:>7.2f}{ratio}{rho}"
+        )
+
+    for key in PAIRED_SCALARS:
+        lines.append(_row(key, paired[key]))
+    lines.append("suspicion peaks per NPC (paired Δ):")
+    for key in paired:
+        if key.startswith("susp."):
+            lines.append(_row(key[len("susp."):], paired[key]))
+    lines.append(
+        "(list metrics — stretch histogram, payoff latency, tension — "
+        "stay marginal)"
+    )
+    return "\n".join(lines) + "\n"
+
+
 def _aggregate(reports: list[MetricReport],
                peaks_list: list[dict[str, int]],
                burned_list: list[int],
@@ -376,7 +513,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         prog="balance_harness",
         description="1000-sim distribution harness for KI#4 (phase-0 gate) "
                     "+ the DIR-2 pacing A/B (phase 3) + the block-scoped "
-                    "ablation arm (iter-107)",
+                    "ablation arm (iter-107) + the paired-Δ arm (R1, "
+                    "iter-183)",
     )
     parser.add_argument("--runs", type=int, default=1000,
                         help="number of seed-varied runs (default: 1000)")
@@ -395,6 +533,14 @@ def main(argv: Sequence[str] | None = None) -> int:
              "systems-table rows (fire, relations, knowledge, states, "
              "crime_watch) are interlocked — not independently removable; "
              "the director has --directors off.",
+    )
+    parser.add_argument(
+        "--paired-delta", action="store_true",
+        help="R1 (iter-183): also run the base arm (directors on, pacing on, "
+             "the committed pack) over the same seed range in this "
+             "invocation and append the paired-Δ block — the seeds pair by "
+             "construction (common random numbers). Requires a variant "
+             "flag (--directors off / --pacing off / --systems-minus).",
     )
     parser.add_argument("--script", type=Path, default=DEFAULT_SCRIPT,
                         help="playscript path (default: day1_full.json)")
@@ -420,13 +566,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             "interlocked by preconditions, resolvers and cross-lints; the "
             "director's ablation is --directors off"
         )
+    if args.paired_delta and directors and pacing and systems_minus is None:
+        parser.error(
+            "--paired-delta needs a variant to pair: this invocation IS the "
+            "base arm (directors on, pacing on, the committed pack) — pair "
+            "it with --directors off, --pacing off, or --systems-minus NAME "
+            "(the paired table lands as …_<arm>_paired.txt)"
+        )
 
-    pack, schema, default_script = _load()
+    base_pack, schema, default_script = _load()
     script = (
         load_playscript(args.script) if args.script != DEFAULT_SCRIPT
         else default_script
     )
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    pack = base_pack
     if systems_minus is not None:
         pack = _systems_minus_pack(
             args.out_dir, systems_minus, drop_pacing=not pacing
@@ -434,8 +588,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif not pacing:
         pack = _nopacing_pack(args.out_dir)
     # the gate the chronicle renders by (the same reader, the same default —
-    # the metric's scene definition IS the tale's)
+    # the metric's scene definition IS the tale's); each arm reads its OWN
+    # pack's gate (a variant may drop template lines)
     gate = Grammar(pack.templates).tale_gate
+    base_gate = gate if pack is base_pack else Grammar(
+        base_pack.templates
+    ).tale_gate
 
     arm = f"{'on' if directors else 'off'}"
     arm += "" if pacing else "_nopacing"
@@ -446,8 +604,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     stretch_lists: list[list[int]] = []
     latency_lists: list[list[int]] = []
     tension_lists: list[list[int]] = []
+    base_rows: list[dict[str, float]] = []
+    variant_rows: list[dict[str, float]] = []
     for offset in range(args.runs):
         seed = args.seed_base + offset
+        if args.paired_delta:
+            # the base arm first, then the variant — one seed, one pair;
+            # the arms' logs carry their own arm suffixes, never colliding
+            base_out = _run_one(
+                base_pack, schema, script, seed, True, True, base_gate,
+                args.out_dir, "on",
+            )
+            base_rows.append(_scalar_row(*base_out[:4]))
         report, peaks, burned, stretches, latencies, tension = _run_one(
             pack, schema, script, seed, directors, pacing, gate,
             args.out_dir, arm,
@@ -458,6 +626,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         stretch_lists.append(stretches)
         latency_lists.append(latencies)
         tension_lists.append(tension)
+        if args.paired_delta:
+            variant_rows.append(
+                _scalar_row(report, peaks, burned, stretches)
+            )
 
     stats = _aggregate(
         reports, peaks_list, burned_list, stretch_lists,
@@ -466,20 +638,31 @@ def main(argv: Sequence[str] | None = None) -> int:
     table = _render_table(
         stats, gate=gate, pacing=pacing, systems_minus=systems_minus,
     )
+    if args.paired_delta:
+        table += _render_paired_block(
+            _paired_stats(base_rows, variant_rows), len(variant_rows)
+        )
     suffix = "" if pacing else "_nopacing"
     suffix += "" if systems_minus is None else f"_minus_{systems_minus}"
+    suffix += "_paired" if args.paired_delta else ""
     out_path = args.out_dir / (
         f"balance_{args.runs}_seed{args.seed_base}_{args.directors}{suffix}.txt"
     )
     out_path.write_text(table, encoding="utf-8")
     print(table)
     print(f"[balance table saved: {out_path}]")
-    if directors and pacing and systems_minus is None:
+    if args.paired_delta:
+        print(
+            "[R1 paired-Δ: the base arm ran in this invocation over the same "
+            "seed range — the marginal protocol (two invocations, same "
+            "seeds) stays the standing default]"
+        )
+    elif directors and pacing and systems_minus is None:
         print(
             "[DIR-2 A/B: re-run with --pacing off for the clock-off arm "
             "(same seed range) — the exit criterion's measurement]"
         )
-    if systems_minus is None:
+    if systems_minus is None and not args.paired_delta:
         print(
             "[ablation A/B: re-run with --systems-minus <name> (same seed "
             "range) for the 'world without mechanic X' arm — "

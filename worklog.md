@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (exp0_week.json +
+test_exp0.py; the verdict: no live deficit at v0.1, the card stays parked, no
+row per D-175) + R1 landed (--paired-delta + TEST_PLAN §6 + the tests; the
+TEST_PLAN cap note rides the over-state, substance per §6.1); 9 paths (over
+the soft limit); 1969+1 + ruff + docguard clean; iter-173 evicted
+
+---
 iter-182 · 2026-09-21 · intake-35 — the corpus's second pass (D-195, the owner's
 call firing the deferred trigger): the 44-card families re-confirmed at HEAD,
 zero new consumers, the ref-file record still deferred; the four precisions
@@ -52,13 +59,6 @@ the full corpus landed at E4B/Q9B, the §4.3 arms measured (the seeded-local tie
 holds, the GBNF penalty, mode-A's floor), the transcripts re-distilled (the deviation
 corpus + 16 Layer-1 tests, zero replay divergence); 7 paths; 1916+1 green + ruff clean
 at 1f4f20d; iter-164 evicted per the cap
-
----
-iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the v2 smoke bundle triaged (the
-s6 crash runner-side, the double_apply_probe fixture kind, + two v2 defects: the
-manifest's build half, the S7 -np 2 argv); the runner v3 delivered outside the repo,
-sandbox-validated by the stub-client full-corpus walk; TECH_NOTES §13.1 the round-3
-record; 4 paths, doc-only; 1900+1 green at 69db4f4; iter-163 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

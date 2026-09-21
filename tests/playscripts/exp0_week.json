@@ -1,0 +1,254 @@
+{
+ "name": "exp0_week",
+ "seed": 32,
+ "pack": "tavern_pack@0.1",
+ "steps": [
+  {
+   "intent": "move",
+   "target": "loc_tavern"
+  },
+  {
+   "intent": "steal",
+   "target": "npc_guard_01",
+   "method": "distraction"
+  },
+  {
+   "intent": "steal",
+   "target": "npc_guard_01",
+   "method": "distraction"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "wait",
+   "ticks": 1430
+  },
+  {
+   "intent": "steal",
+   "target": "npc_guard_01",
+   "method": "distraction"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "rest"
+  },
+  {
+   "intent": "wait",
+   "ticks": 1330
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "rest"
+  },
+  {
+   "intent": "wait",
+   "ticks": 1330
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "rest"
+  },
+  {
+   "intent": "wait",
+   "ticks": 1330
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "take",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "drop_break",
+   "target": "ale_mug_01"
+  },
+  {
+   "intent": "rest"
+  }
+ ]
+}

@@ -311,3 +311,104 @@ def test_harness_off_arm_payoff_block_is_none(tmp_path: Path) -> None:
     table = (tmp_path / "balance_2_seed300_off.txt").read_text(encoding="utf-8")
     assert "payoff latency (seeded→released ticks) — none" in table
     assert "beat tension (per-window pressure):" in table
+
+
+# -- the R1 paired-Δ arm (iter-183, the owner's methodology call) ------------
+
+
+def _paired_row(table: str, label: str) -> list[str]:
+    """One row of the paired block, whitespace-split: [label, Δmin, Δp50,
+    Δmean, Δmax, agree, d, ratio, ρ]. Searches only inside the paired
+    section — the marginal table above it carries its own M5/events rows
+    with a different column count."""
+    head = "paired Δ vs base ("
+    tail = table[table.index(head):]
+    line = next(ln for ln in tail.splitlines() if ln.startswith(label))
+    return line.split()
+
+
+def test_paired_refuses_the_base_arm(tmp_path: Path) -> None:
+    """The base arm (directors on, pacing on, the committed pack) pairs
+    with nothing — the honest parser error naming the variant flags."""
+    with pytest.raises(SystemExit):
+        balance_harness.main(
+            [
+                "--runs", "1", "--directors", "on", "--paired-delta",
+                "--out-dir", str(tmp_path),
+            ]
+        )
+
+
+def test_paired_pacing_ab_emits_the_block(tmp_path: Path) -> None:
+    """The R1 read: one invocation runs BOTH arms over the same seed
+    range — the paired block lands in its own `_paired` file (the
+    marginal artifact never collides), names the base arm, carries the
+    nine columns, and the same seeds reproduce the same table bytes
+    (T1 determinism extends to the pair)."""
+    argv = [
+        "--runs", "2", "--seed-base", "300", "--directors", "on",
+        "--pacing", "off", "--paired-delta", "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    paired_path = tmp_path / "balance_2_seed300_on_nopacing_paired.txt"
+    table = paired_path.read_text(encoding="utf-8")
+    assert (
+        "paired Δ vs base (directors on, pacing on, the committed "
+        "pack) — 2 seed pairs" in table
+    )
+    assert "(list metrics — stretch histogram, payoff latency, tension" in table
+    # both arms' per-seed logs exist side by side (the pair's substrate)
+    assert (tmp_path / "balance_300_on.jsonl").exists()
+    assert (tmp_path / "balance_300_on_nopacing.jsonl").exists()
+    # determinism: same seeds → the same paired bytes
+    assert balance_harness.main(argv) == 0
+    assert paired_path.read_text(encoding="utf-8") == table
+    # the marginal file of the same arm is a separate artifact, unchanged
+    assert (tmp_path / "balance_2_seed300_on_nopacing.txt").exists() is False
+
+
+def test_paired_seed125_structure_rows_are_zero(tmp_path: Path) -> None:
+    """The D-065 record in its paired form: at seed 125 the pacing arms
+    share their whole prefix — the structure rows (M5, chains, the
+    destroyed world, the stretches, the peaks, M3_median) pair to
+    exactly zero; the clock's own closer swap moves M1 alone (the
+    sweep vs the murmur)."""
+    argv = [
+        "--runs", "1", "--seed-base", "125", "--directors", "on",
+        "--pacing", "off", "--paired-delta", "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    table = (
+        tmp_path / "balance_1_seed125_on_nopacing_paired.txt"
+    ).read_text(encoding="utf-8")
+    for label in (
+        "M5", "emergent_chains", "destroyed_locations",
+        "eventless_max_stretch", "M3_median", "M4_repetition",
+        "npc_barkeep_01", "npc_drunk_01", "npc_guard_01", "npc_guard_02",
+        "npc_maid_01",
+    ):
+        row = _paired_row(table, label)
+        assert float(row[3]) == 0.0, label  # Δmean exactly zero
+    m1 = _paired_row(table, "M1")
+    assert float(m1[3]) < 0  # the clock's own structure delta, pinned
+
+
+def test_paired_crn_buys_most_on_the_structural_rows(tmp_path: Path) -> None:
+    """The M3 argument's live form (intake-35's sharpest R1 case): on our
+    own runs the pair-variance ratio sits at hundredths on the
+    structural rows (events, M1 — the CRN win) while the causal-chain
+    metric stays the noisy tail — pairing buys the most exactly where
+    marginal reporting is noisiest."""
+    argv = [
+        "--runs", "8", "--seed-base", "100", "--directors", "on",
+        "--pacing", "off", "--paired-delta", "--out-dir", str(tmp_path),
+    ]
+    assert balance_harness.main(argv) == 0
+    table = (
+        tmp_path / "balance_8_seed100_on_nopacing_paired.txt"
+    ).read_text(encoding="utf-8")
+    events_ratio = float(_paired_row(table, "events")[7])
+    m1_ratio = float(_paired_row(table, "M1")[7])
+    m3_ratio = float(_paired_row(table, "M3_mean")[7])
+    assert events_ratio < 0.05 and m1_ratio < 0.05
+    assert m3_ratio > 5 * max(events_ratio, m1_ratio)

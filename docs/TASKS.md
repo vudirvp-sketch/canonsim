@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
 - iter-182 · 2026-09-21 · intake-35 — the corpus's second pass: the 44-card families re-confirmed at HEAD, the four precisions riding the intake block, D-195
 - iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed: the drop-in tree refused, the capability/progression + math-mechanism cards parked, D-194
 - iter-180 · 2026-09-21 · engine-1 round 6 — the second live `--engine` session triaged: KI#90's fix live-verified, the 9B live-narrate datum (n=1)
@@ -122,7 +123,6 @@ claim packet)
 - iter-176 · 2026-09-21 · doc3 — the state-layer reassembly landed (doc-3 DONE) + the mechanical cap guard live
 - iter-175 · 2026-09-21 · docrev1 — the state-layer audit routed, doc-3 OPENED (the owner's doc-revision call)
 - iter-174 · 2026-09-21 · engine-1 round 4 — the full corpus landed at E4B/Q9B, move (a) CLOSED
-- iter-173 · 2026-09-21 · engine-1 round 3 — the runner v3 delivered; the s6 crash triaged runner-side
 
 ## Track B — background (evenings, foreign canon)
 

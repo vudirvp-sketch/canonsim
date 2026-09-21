@@ -1,26 +1,33 @@
-Iteration: iter-182 (`iter-182-intake35`, the owner's research call
-over the same uploaded corpus — the second pass, intake-34's deferred
-trigger fired: the external-corpus inspiration & transfer analysis):
-the 44-card family dispositions + the two parked cards' FACT tables
-independently re-confirmed at HEAD (the verification anchors in the
-intake block), zero new build-grade items, zero new consumers, the
-ref-file deep record still deferred behind a named-family row, the
-four precisions riding `docs/blueprint/phases.md` §6's intake-35
-block (D-195).
+Iteration: iter-183 (`iter-183-residues`, the owner's «residues
+intake-34/35» call): Experiment 0 EXECUTED — the parked capability
+card's falsifier (the apprentice-thief week,
+tests/playscripts/exp0_week.json + tests/test_exp0.py; seed 32 the
+canonical arc, the sweeps pinned): the world-side growth runs on the
+landed folds (leverage, the expectation violation, the transfers, the
+trait + the paranoid scans, the arrest race), the actor-side resolution
+stays the day-one flat coin after 159 events of practice — no LIVE
+deficit at v0.1, the card stays parked behind its named consumers, no
+row (D-175; the record: phases.md §6); R1 LANDED — the harness's
+paired-Δ arm (`--paired-delta`, TEST_PLAN §6 + the test packet; our own
+ratios confirm the M3-noisy-tail shape); the ref-file deep record still
+deferred behind a named-family row.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-1962 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 1ddc728 BEFORE working — 1962+1 green, ruff
-clean, docguard clean — and re-verified after with the doc-only diff
-in place: the numbers unchanged) ·
+1969 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT b9224ed BEFORE working — 1962+1 green, ruff
+clean, docguard clean — and re-verified after with the full diff in
+place) ·
 Date: 2026-09-21 ·
-Scope: docs/blueprint/phases.md + docs/DECISIONS.md + docs/TASKS.md +
-`STATUS.md` + worklog.md — 5 paths (the intake-35 record + the state
-docs; doc-only). The prior iterations' record: iter-181 (intake-34),
+Scope: scripts/balance_harness.py + tests/test_balance_harness.py +
+tests/playscripts/exp0_week.json + tests/test_exp0.py +
+docs/TEST_PLAN.md + docs/blueprint/phases.md + docs/TASKS.md +
+STATUS.md + worklog.md — 9 paths (the two residues' landings + the
+state docs; over the 3–5 soft limit, noted in worklog). The prior
+iterations' record: iter-182 (intake-35), iter-181 (intake-34),
 iter-180 (round 6), iter-179 (round 5), iter-177/178 (engine-1 (b) +
-presentation-1), iter-176 (doc-3). The
-detail lives in the worklog + git.
+presentation-1), iter-176 (doc-3). The detail lives in the worklog +
+git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -46,8 +53,8 @@ detail lives in the worklog + git.
 
 ## Active KIs
 
-- KI#90 · a non-JSON narrator reply blocked the beat (round 5) ·
-  opened+CLOSED iter-179 (JSON → the MALFORMED regen; live-verified round 6, §13.1).
+(none — KI#90 deleted per AGENTS §5: closed iter-179, more than two
+iterations elapsed at this STATUS touch)
 
 ## FAQ / Pitfalls
 
@@ -76,11 +83,11 @@ detail lives in the worklog + git.
 
 ## Next step
 
-**iter-182 DONE: intake-35 — the corpus's second pass (the owner's
-call firing the deferred trigger): the 44-card family dispositions
-re-confirmed at HEAD, zero new build-grade items, zero new consumers,
-the four precisions riding the intake-35 block (D-195); the ref-file
-deep record still deferred behind a named-family row.**
+**iter-183 DONE: residues34 — Experiment 0 executed (the falsifier's
+verdict: no live deficit at v0.1, the card stays parked behind its named
+consumers — the record rides phases.md §6) + R1 landed (the harness's
+paired-Δ arm, TEST_PLAN §6); the ref-file deep record the one remaining
+intake-34/35 residue, still deferred behind a named-family row.**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -97,10 +104,8 @@ deep record still deferred behind a named-family row.**
    call), the SoW horizon (bg-6, owner-deferred). New rows enter on
    the owner's call only.
 3. The intake-34/35 residues (each behind its own trigger, never a
-   default): Experiment 0 (the capability/progression falsifier — a
-   long-scenario evidence run on the owner's call; intake-35's
-   landed-folds reframe rides the intake block); the math catalog's
-   ref-file deep record (a named mechanism consumer — the per-card
-   pass done at intake-35, the families re-confirmed at HEAD); the R1
-   paired-Δ reporting change to `balance_harness` (an owner call on
-   the methodology; intake-35's M3 precision rides the intake block).
+   default): the ref-file deep record — a named row consuming a
+   specific math-catalog mechanism family (the per-card pass done at
+   intake-35, the families re-confirmed at HEAD; Experiment 0's
+   verdict + R1's landing close the other two residues — phases.md
+   §6).

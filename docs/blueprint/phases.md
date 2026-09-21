@@ -2998,13 +2998,16 @@ consumer):
    on the landed folds», never «no growth»; the discriminating scenario
    is procedural skill (the musket stress case: knowledge records +
    traits exist, no per-actor resolution modifier). No card edit — the
-   card's own decision rule carries it.
+   card's own decision rule carries it. EXECUTED iter-183 (the record
+   below).
 2. **R1's sharpest argument** (the owner's pending methodology call —
    INFERENCE over the corpus's MEASURED ratios): M3, the gate-read
    causal-chain metric, is the noisiest under marginal reporting (0.338
    vs 0.011–0.039); the seed ranges pair by construction across arms,
    but the harness computes no paired Δ — the report is the marginal
-   table (code-verified); R1 is the reporting change alone.
+   table (code-verified); R1 is the reporting change alone. LANDED
+   iter-183 (TEST_PLAN §6 + tests/test_balance_harness.py — our own
+   ratios confirm the shape).
 3. **The deletion criterion** (TEST_PLAN §9's claim packet — the
    corpus's six-question doctrine's one unnamed half: the Falsifier
    guards admission, the deletion criterion guards retention; the repo
@@ -3021,6 +3024,41 @@ consumer):
 Landed: D-195 (the D-119 family row's extension) + this block + the
 state docs. The build queue UNTOUCHED — nothing unpins, nothing
 reorders; zero build-grade items; zero production behaviour change.
+
+**Experiment 0 executed — the parked capability card's falsifier
+(iter-183, the owner's «residues intake-34/35» call; zero
+implementation by the card's own law — the instruments are the
+committed `tests/playscripts/exp0_week.json` + `tests/test_exp0.py`:
+the apprentice thief's five days — the purse gambit (the crime-mapped
+escalation race) + 25 lift attempts on the ale mug (the procedural
+coin), the world's rotations/beats/transfers running through; seed 32
+the canonical arc, seeds 2000..2007 the pinned sweep, seeds 1000..1039
+the recorded sweep). The reframe's null half CONFIRMED — growth runs
+on the landed folds for every arc the scenario reaches for: the day-one
+botch seeds four leverage holders plus the transferred fifth; the purse
+lift fires the expectation violation; the document challenge is
+answered; the trait crystallizes on both guards and the trait-gated
+scans fire all week (the permanent paranoia); the suspicion axes persist
+below the arrest line at seed 32 while 4/40 sweep runs end arrested (the
+world's memory has teeth); the knowledge fold dedups the practice loop's
+repeated tokens after first sight — the corpus's own evidence law
+(«identical repetition: rapidly diminishing»), landed. The falsifier's
+flat half: the thief's effective resolution inputs are EXACTLY the
+day-one values after 159 canonical events of practice (skill_total =
+the pack base at the horizon; every take-check attacker total =
+base + d20; the sweep's attacker means flat across the week's windows
+50.31/50.34/50.76/49.95) — the only lawful difficulty mover is the world's
+own status drift (the on-duty guard's fatigue moves the lift rate from
+the fresh 0.1125 to the measured 0.152: the status dimension, live and
+working). THE VERDICT, per the card's decision rule: no live deficit at
+v0.1 → no progression layer, no row (D-175); the procedural-competence
+gap is real-but-latent — structurally unexpressible (the read-side
+folds can never feed resolution, L6/EPIST-1), unconsumed (no beat, hook,
+urgency or chronicle line in the scenario asks for «better») — the card
+STAYS PARKED behind its named consumers (the SoW player-visible
+growth, the world track's W5 biography arc, a combat-bearing pack): the
+first to go live flips the latent gap to a live deficit and fires the
+leading candidate (event-derived evidence-weighted mastery, never XP).**
 
 ## 7. Cross-cutting (the questions that span phases)
 
