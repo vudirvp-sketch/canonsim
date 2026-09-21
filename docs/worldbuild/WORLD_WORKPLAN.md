@@ -64,8 +64,14 @@ the `the_bloom_nets` net flow, the gross sale's fold, the paper
 sixteen's own law); the freight's volume COMMITTED iter-187, freightvol
 — the withhold's volume surface (the crofts' `bloom` heap + the
 `the_withhold_banks` margin flow, the tally's PRESENT as account
-state, the heap's level the artery's thinning); the camp's own
-embodiment gaps all ANSWERED — the older units' options (the step's
+state, the heap's level the artery's thinning); the STANDING STATE
+COMMITTED iter-189, charcoalpaper — the owner's W5-decomposition
+call: the outstanding principal as live account state (the `paper`
+kind on the master — the stock's entity the seat) + the lifecycle
+doors (the fall's covered-fund gate, the collection's geography gate,
+the succession's receiving-stock gate — the account resolver's
+player-scaled arm armed for the first time in this pack); the camp's
+own embodiment gaps all ANSWERED — the older units' options (the step's
 notch record/hatch, the kin's own) the owner's call class, each a
 future row's own call). The causal mesh is
 audited — eight loops, four committed (W3 done iter-156 + the W4 additions
@@ -289,6 +295,24 @@ Run:
 - heartbreak.
 
 Use existing region state wherever possible.
+
+**The form and the gate (the owner's decomposition call, 2026-09-22,
+iter-188/189 — the record in `WORLD_TESTS.md` §9's W5 entry):** three
+BOUNDED PROBES, never the annual tale as the human-meaning experiment
+(the tale is a long-horizon chronicler STRESS TEST — its routine flood
+measured and parked, TECH_NOTES §16 / chron-2). Biography: one
+ordinary crisis with its aftermath. Humor: the reader extracts a
+locally natural joke themselves, no presented answer. Heartbreak: a
+loss that changes relation / resource / status / obligation / memory /
+future option. The blind-pass isolation law: the reader material
+carries ONLY committed reader-visible surface — never ANCHOR_REGION,
+authorial interpretations, or intended answers; the author audit and
+the independent reader reading stay separate artifacts. The gate:
+NO new worldbuilding candidates until one clean biography probe runs
+on Garrick / the re-weigh over the canonical standing debt (iter-189's
+charcoalpaper — the outstanding as account state + the lifecycle
+doors); a repeated failure is classified by boundary (canonical fact /
+discovery path / rendering), never "improve the prose".
 
 ## 8. W6 — Genre tests
 

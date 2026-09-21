@@ -117,9 +117,10 @@ def _twin(
     """The crafted short-cadence twin: the committed pack with the macro
     year shrunk to 480 ticks and the calendar scaled inside the sub-year
     law (market 40, fair 120, seasons 120 — every entry < the year). The
-    ablated twin is the COMPLETE ablation: the economy block AND all
-    four entity stocks go together (entity accounts without the block
-    are dead data, the lint's own refusal)."""
+    ablated twin is the COMPLETE ablation: the economy block, the entity
+    stocks AND the account-block actions go together (entity accounts or
+    account actions without the block are dead data, the lint's own
+    refusal; the doors widened at charcoalpaper, iter-189)."""
     target = tmp_path / name
     shutil.copytree(PACK_DIR, target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -142,6 +143,15 @@ def _twin(
                 record.pop("accounts", None)
         (target / "entities.json").write_text(
             json.dumps(entities, indent=2), encoding="utf-8"
+        )
+        actions = json.loads(
+            (target / "actions.json").read_text(encoding="utf-8")
+        )
+        actions["actions"] = [
+            a for a in actions["actions"] if "account" not in a
+        ]
+        (target / "actions.json").write_text(
+            json.dumps(actions, indent=2), encoding="utf-8"
         )
     return target
 
@@ -190,7 +200,9 @@ def test_the_armed_census() -> None:
     residue)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin", "bloom"]
+    # iter-189 (charcoalpaper) widens the vocabulary again (paper — the
+    # outstanding's own kind, the standing state's row)
+    assert economy["accounts"] == ["coin", "bloom", "paper"]
     assert [(f["id"], f["verb"], f["kind"], f["to"], f["amount"],
              f["every"]) for f in economy["flows"]
             if f["kind"] == "bloom"] == [
@@ -200,9 +212,13 @@ def test_the_armed_census() -> None:
         loc for loc in pack.entities["locations"] if loc["id"] == CROFTS
     )
     assert crofts["accounts"] == {"bloom": 4}
-    # the drain door un-armed — no player-scaled account verb exists
+    # the DRAIN door still un-armed — no player-scaled verb moves the
+    # bloom heap (the paper's lifecycle doors exist since iter-189,
+    # charcoalpaper — but the re-weigh's SALE, the held loads walked to
+    # the beam, remains a future row's own call: the withhold's drain)
     assert not [
-        a for a in pack.data["actions.json"]["actions"] if "account" in a
+        a for a in pack.data["actions.json"]["actions"]
+        if "account" in a and a["account"]["kind"] == "bloom"
     ]
     # the template reused, the story listing already carries the verb
     assert pack.templates["events"][SOURCE_EVENT] == (

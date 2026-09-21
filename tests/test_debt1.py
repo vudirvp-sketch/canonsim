@@ -115,9 +115,11 @@ def _twin(
     """The crafted short-cadence twin: the committed pack with the macro
     year shrunk to 480 ticks and the calendar scaled inside the sub-year
     law (market 40, fair 120, seasons 120 — every entry < the year). The
-    unarmed twin is the COMPLETE ablation: the economy block AND the
-    entity stocks go together (the pairing law's both halves — entity
-    accounts without the block are dead data, the lint's own refusal)."""
+    unarmed twin is the COMPLETE ablation: the economy block, the
+    entity stocks AND the account-block actions go together (the
+    pairing law's three halves — entity accounts or account actions
+    without the block are dead data, the lint's own refusal; the doors
+    widened at charcoalpaper, iter-189)."""
     target = tmp_path / name
     shutil.copytree(PACK_DIR, target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -140,6 +142,15 @@ def _twin(
                 record.pop("accounts", None)
         (target / "entities.json").write_text(
             json.dumps(entities, indent=2), encoding="utf-8"
+        )
+        actions = json.loads(
+            (target / "actions.json").read_text(encoding="utf-8")
+        )
+        actions["actions"] = [
+            a for a in actions["actions"] if "account" not in a
+        ]
+        (target / "actions.json").write_text(
+            json.dumps(actions, indent=2), encoding="utf-8"
         )
     return target
 
@@ -188,9 +199,10 @@ def test_the_armed_census() -> None:
     tests/test_campaccount.py, the row's own packet)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    # iter-187 (freightvol) widens the kind vocabulary (bloom joins) —
-    # the crossing's coin claims still pinned by their own kind
-    assert economy["accounts"] == ["coin", "bloom"]
+    # iter-187 (freightvol) widens the kind vocabulary (bloom joins),
+    # iter-189 (charcoalpaper) again (paper — the outstanding's own
+    # kind) — the crossing's coin claims still pinned by their own kind
+    assert economy["accounts"] == ["coin", "bloom", "paper"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
@@ -215,11 +227,13 @@ def test_the_armed_census() -> None:
 def test_the_budget_redeclares_the_template_ceiling() -> None:
     """AP-1's own law: growth inside the bounds or an honest re-declare
     — the verb line grows the template families past the declared 60,
-    and the budget carries the re-declared ceiling (65) with its note."""
+    and the budget carries the re-declared ceiling with its note (65 at
+    debt-1; 70 at charcoalpaper, iter-189 — the lifecycle doors' two
+    verb lines)."""
     pack = load_pack(PACK_DIR)
     budget = pack.rules["budget"]["templates"]
     assert budget["min"] <= len(pack.templates["events"]) <= budget["max"]
-    assert budget["max"] == 65
+    assert budget["max"] == 70
 
 
 # -- the committed year band (the real cadence) ----------------------------------

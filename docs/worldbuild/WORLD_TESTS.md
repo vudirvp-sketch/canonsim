@@ -413,9 +413,94 @@ the coin funds unchanged; the fingerprint both-arms; the drain door
 deliberately un-armed — the re-weigh's sale the player-scaled
 residue, debt-1's standing row; the golden corpus byte-untouched;
 zero core).
+iter-189 (charcoalpaper) closes the STANDING STATE itself — the
+owner's decomposition call (the W5 entry below, finding 2: the
+standing debt an upstream world gap, never a renderer issue): the
+outstanding principal as live account state (a third kind `paper`,
+the paper SIXTEEN stocked on the master — the stock's entity IS the
+seat, the debt riding whoever masters the burn, the unlapseable
+reading made arithmetic: the accounts never decay) + the lifecycle
+doors through the account resolver's player-scaled arm, the
+province pack's FIRST arming (pure pack data, zero core):
+`reckon_paper` the FALL (consume paper 16, the covered-fund gate —
+the paper only falls against a fund that covers it), `render_fund`
+the COLLECTION (transfer coin 16 to the chest at Malby, the
+geography gate), `pass_the_seat` the SUCCESSION (transfer paper to
+the successor, the receiving-stock gate — the stockless target
+refused softly). The holder/carrier/seat bindings one read: the
+chest the coin's destination, the tally-stick the badge on the same
+hand, the secret the counter-record. The no-amortization law
+structural (no flow touches the paper — the service the weight,
+never the fall; the fund 3→18 crossing the paper at the fifth
+reckoning, the fall then a lawful event, no longer an authored lump).
+Honest residues: the renegotiation stays authored (the guild's
+re-pricing — the factor gateless, no committed surface); the tally's
+handing-over un-armed (the crews' recognition — the badge follows
+the camp's word, never the door; the crafted-successor proof the
+test's own mint); the over-payment state reachable (the reversed
+door order — the substrate's no-transaction law, recorded);
+the re-weigh's SALE still un-armed (the heap's bloom drain, the
+withhold's own future row) (`tests/test_charcoalpaper.py` the
+claim packet: the census + the bindings; the twin's paper unchanged
+through the crossings; the fall refused at 15, landed at 18 with
+the market's witnesses; the collection walked to the chest; the
+succession walked to the successor with the badge staying; the
+golden corpus byte-untouched; deterministic).
 Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
+
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition (2026-09-22, iter-188/189; the evidence band named)
+
+`W5 — PARTIALLY CONFIRMED; evidence is author-side diagnostic, not an
+independent reader measurement.` The owner's reading of the anchor's
+reader surface (the annual tale + the committed briefs, 2026-09-22)
+found the mechanical substrate rich — W4's verdict unchanged: the
+causal composition CONFIRMED — but the reader-side reconstruction
+thin: the Garrick chain (shave → starvation → debt → withhold →
+artery flow → coupled liabilities → re-weigh → succession) exists
+world-side; the reader-side surface of the annual tale carries only
+"Garrick comes by 3 coin at the year's reckoning". The reading's
+epistemic class is AUTHOR-SIDE DIAGNOSTIC (the reader knew the
+authorial maps — no blind pass), never an independent reader
+measurement; the live band stays open.
+
+The five findings, split by owner (the decomposition law — a reader
+gap is classified by boundary BEFORE any fix; a found gap is never
+automatically a renderer feature):
+
+| Finding | Owner | Disposition |
+|---|---|---|
+| the standing debt authored (the paper sixteen in notes, not canonical state) | world/content canonicalization | BUILT iter-189 (charcoalpaper: the outstanding as account state + the lifecycle doors, §6.4's tail) |
+| raw machine ids in the reader surface (`npc_*`, `pay_*`, `tally_*` — the told-fact tokens) | engineering presentation bug | FIXED iter-188 (rs-1: the knows-gloss boundary, the regression + census green) |
+| the annual watch/document-check flood (722 + 88 of 916 tale lines, seed 42) | chronicler legibility experiment | recorded (TECH_NOTES §16); the invariant saved (repeated routine events must not displace causal-change events); the bounded aggregation experiment PARKED (chron-2) until after W5 |
+| the narrator's performance on the annual tale | separate brief→narrator test | the PRESENTATION_SPEC band; never W5's instrument |
+| packet contamination (the reader material pre-showing the answers) | test methodology | the isolation law below |
+
+The W5 form (the owner's call — the annual tale is a long-horizon
+chronicler STRESS TEST, never the human-meaning experiment): THREE
+BOUNDED PROBES over the existing region state —
+
+- **biography**: one ordinary crisis with its aftermath;
+- **humor**: the reader extracts a locally natural joke themselves,
+  no presented answer;
+- **heartbreak**: a loss that changes relation / resource / status /
+  obligation / memory / future option.
+
+The blind-pass isolation law: the reader material contains ONLY
+committed reader-visible surface (the tale, the cards, the briefs) —
+never `ANCHOR_REGION`, authorial interpretations, or intended
+answers; the author audit and the independent reader reading stay
+separate artifacts, prepared separately.
+
+The gate (the owner's order): NO new worldbuilding candidates until
+one clean BIOGRAPHY PROBE runs on Garrick / the re-weigh over the
+canonical standing debt — does the reader independently reconstruct
+the persistent obligation? A repeated failure is classified by
+boundary — the fact missing from canonical state / the lawful
+discovery path missing / the fact poorly rendered — never "improve
+the prose" (the trap the authoring doctrine already names: mechanics
+gap → add lore → add rendering text → surface richness).
 
 ### OPEN — Ancient Network back-propagation
 

@@ -69,7 +69,9 @@
       "flags": {
         "lit": true
       },
-      "accounts": {"coin": 40},
+      "accounts": {
+        "coin": 40
+      },
       "notes": "the bank market on the navigable Sarrow — the seed settlement's continuity (the v0.1 tavern/street/market cluster grown into a town, D-130's polygon); the duty post of the watch pair, the crowd listener lives here; the stall row the market's fire exposure. debt-1 (iter-162): the coin account is the GUILD'S CHEST at the weighbeam — the flood paper's take landing here each year (the grim till's location form; the group entity takes no stock, the finding recorded here and in economy.notes; economy.notes owns the fold's arithmetic)"
     },
     {
@@ -166,7 +168,9 @@
         "cause": "the flood year drowned the family punt and the savings with it"
       },
       "carries": [],
-      "accounts": {"coin": 2},
+      "accounts": {
+        "coin": 2
+      },
       "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin)"
     },
     {
@@ -361,9 +365,10 @@
         "camp_tally_01"
       ],
       "accounts": {
-        "coin": 3
+        "coin": 3,
+        "paper": 16
       },
-      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4); campaccount (iter-186): the coin account is the camp's THIN SURPLUS — the withhold's own savings, the debt fund's climb toward the charcoal paper sixteen (economy.notes owns the fold's arithmetic; the gross bloom sale nine splitting as the camp's net three and the row's standing service six, the service folded away by the chest's one-flow law — the paper's fall a discrete event beyond the flows)"
+      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4); campaccount (iter-186): the coin account is the camp's THIN SURPLUS — the withhold's own savings, the debt fund's climb toward the charcoal paper sixteen (economy.notes owns the fold's arithmetic; the gross bloom sale nine splitting as the camp's net three and the row's standing service six, the service folded away by the chest's one-flow law — the paper's fall a discrete event beyond the flows) charcoalpaper (iter-189): the paper stock is the OUTSTANDING PRINCIPAL — the paper sixteen, the starved winter's stores (the guild-held debt against the burn's future, the spine's need made live state; economy.notes owns the arithmetic). The stock rides the SEAT, never the blood: whoever masters the burn masters the debt (the succession door pass_the_seat walks the stock; the tally-stick the badge on the same hand). The fund (coin 3, +3 a year) climbs toward the paper — the fall's own gate (reckon_paper: the paper only falls against a covered fund)."
     },
     {
       "id": "npc_steward_01",

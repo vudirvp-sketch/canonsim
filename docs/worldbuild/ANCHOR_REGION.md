@@ -902,17 +902,34 @@ the linger beat's annual aggregate); the tally's PRESENT COUNT as
 account state, the heap's level the artery's thinning (E⇄H's material
 edge); the heap's drain the un-armed player-scaled door —
 `tests/test_freightvol.py` the claim packet).
-Authored here (WORKING): the paper's fall itself (the clearance lump —
-the strong honest season's authored surplus, beyond the flows), the
-re-weigh's sale (the heap's drain — the un-armed door's own beat), the
-seat's succession
-(the third form), the coupled liabilities (the estrangement's engine),
-the belief's mechanism, the crews' roles. The camp's own embodiment
+Authored here (WORKING): the renegotiation (the guild's re-pricing
+of the paper — the factor's own beat, gateless, no committed
+surface), the re-weigh's sale (the heap's drain — the un-armed
+door's own beat), the coupled liabilities (the estrangement's engine),
+the belief's mechanism, the crews' roles. CANONICAL since iter-189
+(charcoalpaper — the owner's W5-decomposition call, finding 2: the
+standing debt an upstream world gap): the outstanding principal
+itself (the third account kind `paper`, sixteen on the master — the
+stock's entity IS the seat, the unlapseable reading made arithmetic),
+the paper's fall (the `reckon_paper` door — consume paper, the
+covered-fund gate: the fall only against a fund that covers it, the
+strong honest season's own law), the collection (`render_fund` —
+16 coin to the chest at Malby, the geography gate), the succession
+(`pass_the_seat` — the paper walking to the successor's declared
+receiving stock, the stockless target refused softly; the
+frozen-force counterfactual the door's own removal) — the account
+resolver's player-scaled arm, the province pack's first arming,
+pure pack data, zero core (`tests/test_charcoalpaper.py` the claim
+packet; the tally's handing-over stays un-armed — the crews'
+recognition, the badge following the camp's word, never the door).
+The camp's own embodiment
 gaps are ANSWERED (the tally's read, the account, the volume — the
 older units' options, the step's notch record/hatch and the kin's own,
 stay the owner's call class, each a future row's own call); the
 live-session question stands (a real re-weigh, a real reader:
-the meaning distribution's own unfinished band, §7.1's form).
+the meaning distribution's own unfinished band, §7.1's form — the
+W5 gate: one clean biography probe over the canonical standing debt
+before any new candidate, `WORLD_TESTS.md` §9's W5 entry).
 
 ## 7. Meaning frontier
 

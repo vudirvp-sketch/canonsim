@@ -1401,3 +1401,30 @@ The laws the runners taught:
    closes the ladder: measure BOTH arms first, and when the only
    divergence is the seeding field + appended events, the landing ships
    with pin updates alone (the iter-52/content-6 zero-regen form).
+
+## 16. rs-1/chron-2: the long-horizon tale's routine flood (measured 2026-09-22, iter-188)
+
+The owner's W5 diagnostic reading exposed the annual tale's legibility
+failure — the routine circuits displacing the causal beats. Measured
+on the committed calendar run (province pack, seed 42, 518400 ticks =
+one macro year): **2288 events total — 1098 `status_decayed` (48.0%,
+mostly sub-gate) + 722 `watch_change` (31.6%, ALL tale-gated)**; the
+rendered tale carries 916 event lines of which **watch_change 722
+(78.8%) + document_check/document_check_failed 88 (9.6%)** — the watch
+pair's twice-daily rotation and the road's paper checks are
+`story_critical_events`, so the gate passes them all while the year's
+actual causal beats (the four reckoning flows, 14 rumors, the world
+history, the road's muster) hold under ~6% of the lines. The day-scale
+corpus never sees this (the rotation is visible but the horizon is
+short); the annual horizon is where the flood compounds.
+
+The recorded disposition (the owner's decomposition call, 2026-09-22):
+a **chronicler/long-horizon legibility finding**, NOT a renderer
+rebuild and NOT a global importance change. The standing invariant any
+future work must hold: **repeated routine events must not displace
+causal-change events in the tale** — an aggregation that collapses the
+rotation into a cadence line (or drops it past a novelty horizon)
+while keeping each causal-change event's own line. The bounded
+deterministic-aggregation experiment rides `chron-2` (TASKS), PARKED
+until after the W5 probes — the tale is a long-horizon chronicler
+stress test, never the human-meaning instrument itself.

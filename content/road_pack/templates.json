@@ -74,5 +74,28 @@
     "weather_turns": "The weather turns: {weather}.",
     "smoke_washed_away": "The {weather} washes the smoke from {location}.",
     "world_history": "{year?{actor} remembers: {kind}, in the year {year}{participants?, between {participants}}{places?, at site {places}}{collection?, in the {collection}}.|{actor} takes shape: {sites} sites, {regions} regions, {years} years{terrain?, {terrain} ground}{near_river?, river near}{ground?, {ground} yard}{watch_height?, the toll post {watch_height} paces above the water}{far_region?, {far_region} country}.}"
+  },
+  "knows": {
+    "scene_{location}": "the lay of {location}",
+    "details_{target}": "the details of {target}",
+    "vague_details_{target}": "a vague impression of {target}",
+    "{actor}_left_toward_{target}": "{actor} left toward {target}",
+    "{actor}_arrived": "{actor} arrived",
+    "{present}_present": "{present} is there",
+    "conversation_with_{target}": "a conversation with {target}",
+    "rebuffed_by_{target}": "a rebuff from {target}",
+    "{actor}_reaching_for_{target}": "{actor} reaching for {target}",
+    "noise_in_{location}": "noise in {location}",
+    "{actor}_holds_the_{texture_slot}": "{actor} holds the {texture_slot}",
+    "{actor}_reaching_for_the_{texture_slot}": "{actor} reaching for the {texture_slot}",
+    "{actor}_fumbled_the_{texture_slot}": "{actor} fumbled the {texture_slot}",
+    "{actor}_used_{target}": "{actor} used {target}",
+    "{actor}_fumbled_{target}": "{actor} fumbled {target}",
+    "antics_by_{actor}": "antics by {actor}",
+    "{actor}_fled_toward_{target}": "{actor} fled toward {target}",
+    "{actor}_arrived_fleeing": "{actor} arrived fleeing",
+    "{actor}_caught_fleeing": "{actor} was caught fleeing",
+    "rambling_by_{actor}": "rambling from {actor}",
+    "papers_demanded_of_{target}": "papers demanded of {target}"
   }
 }

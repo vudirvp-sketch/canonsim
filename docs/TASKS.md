@@ -113,6 +113,8 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the paper sixteen as account state riding the seat + the three lifecycle doors; the W5 record with the owner's decomposition — WORLD_TESTS §9's W5 entry)
+- iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (rs-1: the `knows` tables in all five packs + the renderer's matcher; the routine-flood finding → TECH_NOTES §16, chron-2 parked)
 - iter-187 · 2026-09-22 · freightvol — the camp's freight volume: the withhold's
   surface (the crofts' bloom heap + the_withhold_banks, the tally's PRESENT as
   account state — the heap's level the artery's thinning, E⇄H's edge)
@@ -122,9 +124,6 @@ claim packet)
 - iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
 - iter-182 · 2026-09-21 · intake-35 — the corpus's second pass: the 44-card families re-confirmed at HEAD, the four precisions riding the intake block, D-195
 - iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed: the drop-in tree refused, the capability/progression + math-mechanism cards parked, D-194
-- iter-180 · 2026-09-21 · engine-1 round 6 — the second live `--engine` session triaged: KI#90's fix live-verified, the 9B live-narrate datum (n=1)
-- iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` session triaged: the compile check discharged, KI#90 (the blocked-beat hole) fixed
-- iter-178 · 2026-09-21 · presentation-1 — the LLM presentation contract written from the measured results (st-4 absorbed)
 
 ## Track B — background (evenings, foreign canon)
 
@@ -170,6 +169,8 @@ claim packet)
 ## Infra backlog (pick by need)
 
 - `mech-1` · the mechanics introspection CLI — done (iter-84, D-118): `scripts/mechanics.py` matrix/trace/why/blast (the shadow-replay law: the PUBLIC pipeline only); 11 pins in tests/test_mechanics.py. Detail: D-118.
+- `rs-1` · the told-fact gloss boundary — done (iter-188, the owner's W5-decomposition call, finding 3): raw machine ids (`npc_*`, `pay_*`, `tally_*` — the composite knowledge tokens) left the reader surface through `rumor_told`'s `{knows}` slot; FIXED at the boundary/mapping only — the pack-declared `knows` gloss table (templates.json, all five packs) + the renderer's fold-aware matcher (`render/chronicle.py::gloss_knows`, the dry fallback for unmatched tokens) + the regression + coverage census (`tests/test_knowsgloss.py`); the LOG untouched (zero corpus price). Honest residue: LITERAL fact tokens (the read-hinge secrets, `purse_missing`-class names) render dry as-is — no entity ids, their rendering quality the W5 probe's boundary to name, never a preemptive renderer feature. Detail: the test packet's claim block + TECH_NOTES §16's context.
+- `chron-2` · the chronicler long-horizon legibility experiment — parked until after the W5 probes (the owner's call): the annual tale's routine flood measured (watch_change 722 + document_check 88 of 916 event lines, seed 42 — TECH_NOTES §16); the standing INVARIANT any future work must hold: repeated routine events must not displace causal-change events in the tale. The bounded experiment: deterministic aggregation of the repeated circuits (a cadence line for the rotation, each causal-change event keeping its own line) — never a renderer rebuild, never a global importance change; opens on the owner's call only.
 - `engine-2` · the urgency-roll stream split — done (iter-50, D-079).
   Detail: D-079.
 - `ci-1` GitHub Actions — done (iter-143, D-176): pytest + ruff on

@@ -20,6 +20,7 @@ because a query view is not a tale.
 
 from __future__ import annotations
 
+import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any, Final
@@ -36,6 +37,8 @@ from render.tracery import Engine, Grammar
 __all__ = [
     "RenderError",
     "chronicle_from_log",
+    "compile_glosses",
+    "gloss_knows",
     "render_chronicle",
     "render_entity_view",
     "render_scene_card",
@@ -44,6 +47,19 @@ __all__ = [
 
 _POSITION_PROP: Final = "position"
 _NAME_PROP: Final = "name"
+
+#: The templates.json block that owns the told-fact glosses (rs-1, the
+#: reader-surface boundary): a mapping from the knowledge mint's TOKEN
+#: PATTERN to its reader prose. The pattern restates the mint site's
+#: `knows` shape (`{present}_present`, `conversation_with_{target}`);
+#: the gloss re-uses the same slot names, expanded with DISPLAY NAMES
+#: at render time. A pattern with no slots is an exact-match literal.
+#: The boundary law: the pack owns the words, the renderer owns the
+#: mapping — a token with no table entry renders dry and honest (the
+#: foreign-log fallback, `display_name`'s own family).
+GLOSS_BLOCK: Final = "knows"
+
+_GLOSS_SLOT: Final = re.compile(r"\{([a-z_]+)\}")
 
 
 class RenderError(RuntimeError):
@@ -110,15 +126,25 @@ class _Positions:
 
 
 def _event_context(
-    event: EventRecord, pack: Pack, positions: _Positions
+    event: EventRecord,
+    pack: Pack,
+    positions: _Positions,
+    glosses: Sequence[tuple[tuple[str, ...], tuple[str, ...], str]] = (),
 ) -> dict[str, Any]:
     """The slot vocabulary for one event line: derived slots first, then
     the outcome payload (entity ids mapped to display names, booleans
-    kept raw for `{cond?...|...}` conditionals)."""
+    kept raw for `{cond?...|...}` conditionals). The `knows` slot rides
+    the gloss boundary (rs-1): a told machine token maps to the pack's
+    reader prose before any template sees it — both the outcome's own
+    `knows` (the telling path) and the first knowledge record's (the
+    witness path) — one boundary, every consumer."""
     outcome = dict(event.outcome)
     first_record = event.knowledge[0] if event.knowledge else None
     target_name = positions.display(pack, event.target) if event.target else ""
     location_id = outcome.get("location") or positions.location_of(event.actor)
+    knows = outcome.get(
+        "knows", first_record.knows if first_record else ""
+    )
     context: dict[str, Any] = {
         "t": event.t,
         "event_type": event.type,
@@ -127,9 +153,7 @@ def _event_context(
         "target_location": target_name,
         "location": display_name(pack, location_id) if location_id else "",
         "action_label": outcome.get("action", event.type),
-        "knows": outcome.get(
-            "knows", first_record.knows if first_record else ""
-        ),
+        "knows": gloss_knows(glosses, pack, positions, knows),
         "fidelity": outcome.get(
             "fidelity", first_record.fidelity if first_record else ""
         ),
@@ -164,6 +188,105 @@ def _display_if_entity(
     return value
 
 
+def compile_glosses(
+    templates: Mapping[str, Any],
+) -> tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...]:
+    """The knows-gloss table compiled to matchable form (rs-1): each
+    entry becomes (anchors, slots, gloss) — the literal anchors between
+    the pattern's slots, the slot names in order, and the reader prose.
+    A slot-free pattern compiles to a single exact-match anchor. The
+    table's own declaration order is the match order (deterministic,
+    INV-2's spirit — the pack's own priority)."""
+    table = templates.get(GLOSS_BLOCK, {})
+    if not isinstance(table, Mapping):
+        return ()
+    compiled: list[tuple[tuple[str, ...], tuple[str, ...], str]] = []
+    for pattern, gloss in table.items():
+        if not isinstance(pattern, str) or not isinstance(gloss, str):
+            continue  # a malformed row is inert data, never a crash
+        parts = _GLOSS_SLOT.split(pattern)
+        anchors = tuple(parts[0::2])
+        slots = tuple(parts[1::2])
+        compiled.append((anchors, slots, gloss))
+    return tuple(compiled)
+
+
+def _match_gloss(
+    anchors: tuple[str, ...], slots: tuple[str, ...], token: str
+) -> tuple[str, ...] | None:
+    """Decompose `token` against one compiled pattern: the anchors must
+    appear in order (the first a prefix, the last a suffix when
+    non-empty) and the between-anchor segments are the slot values.
+    First-occurrence matching per inner anchor, left to right —
+    deterministic. An empty slot value or a missing anchor is no match;
+    adjacent slots (an empty inner anchor) cannot resolve and never
+    match (no mint site declares them)."""
+    if not slots:
+        return () if token == anchors[0] else None
+    if any(anchor == "" for anchor in anchors[1:-1]):
+        return None  # adjacent slots — unresolvable by construction
+    rest = token
+    if anchors[0]:
+        if not rest.startswith(anchors[0]):
+            return None
+        rest = rest[len(anchors[0]):]
+    values: list[str] = []
+    for anchor in anchors[1:-1]:
+        index = rest.find(anchor)
+        if index < 0:
+            return None
+        values.append(rest[:index])
+        rest = rest[index + len(anchor):]
+    last = anchors[-1]
+    if last:
+        if not rest.endswith(last):
+            return None
+        final = rest[: len(rest) - len(last)]
+    else:
+        final = rest
+    values.append(final)
+    if any(value == "" for value in values):
+        return None
+    return tuple(values)
+
+
+def _expand_gloss(gloss: str, context: Mapping[str, str]) -> str:
+    """Fill the gloss's `{slot}` markers from the matched values — the
+    pattern-side twin of the matcher, one closure per call (never a
+    loop-bound lambda — B023's own law)."""
+    return _GLOSS_SLOT.sub(
+        lambda match: str(context.get(match.group(1), match.group(0))),
+        gloss,
+    )
+
+
+def gloss_knows(
+    glosses: Sequence[tuple[tuple[str, ...], tuple[str, ...], str]],
+    pack: Pack,
+    positions: _Positions,
+    token: Any,
+) -> Any:
+    """The told-fact boundary (rs-1): map one knowledge token to its
+    reader prose through the pack's gloss table — the slot values
+    re-displayed fold-first (`_display_if_entity`: an entity id becomes
+    its display name, a non-entity value like a texture noun stays
+    raw). A token with no matching entry returns UNCHANGED — the dry
+    honest fallback for foreign logs and unglossed literals, never an
+    error mid-render."""
+    if not isinstance(token, str) or not token:
+        return token
+    for anchors, slots, gloss in glosses:
+        values = _match_gloss(anchors, slots, token)
+        if values is None:
+            continue
+        context = {
+            slot: str(_display_if_entity(pack, positions, value))
+            for slot, value in zip(slots, values, strict=True)
+        }
+        return _expand_gloss(gloss, context)
+    return token
+
+
 def _born_or_pack(
     projection: Projection, pack: Pack, entity_id: str
 ) -> str:
@@ -186,6 +309,7 @@ def render_chronicle(
     grammar = Grammar(pack.templates)
     engine = Engine(grammar, RngBank(seed))
     gate = _IMPORTANCE_ORDER.index(grammar.tale_gate)
+    glosses = compile_glosses(pack.templates)
     lines: list[str] = []
     positions = _Positions(pack)
     last_day: int | None = None
@@ -204,7 +328,7 @@ def render_chronicle(
         lines.append(
             engine.expand_symbol(
                 _line_symbol(grammar, event.type),
-                _event_context(event, pack, positions),
+                _event_context(event, pack, positions, glosses),
             )
         )
     return "\n".join(lines) + ("\n" if lines else "")
@@ -249,6 +373,7 @@ def render_entity_view(
         raise RenderError(f"unknown entity {entity_id!r}")
     grammar = Grammar(pack.templates)
     engine = Engine(grammar, RngBank(seed))
+    glosses = compile_glosses(pack.templates)
     positions = _Positions(pack)
     lines: list[str] = [
         f"{_born_or_pack(projection, pack, entity_id)} ({entity_id})"
@@ -265,7 +390,7 @@ def render_entity_view(
             f"[t {event.t}] "
             + engine.expand_symbol(
                 _line_symbol(grammar, event.type),
-                _event_context(event, pack, positions),
+                _event_context(event, pack, positions, glosses),
             )
         )
     if not wrote:

@@ -1156,6 +1156,162 @@
         "failure": []
       },
       "notes": "the garrison's goal verb (the triangle, slice 3): the half-pay watch walks its frightened round. Bare story beat, the escalation arm's public answer."
+    },
+    {
+      "intent": "reckon_paper",
+      "label": "reckon",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "paper",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_fell"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the charcoal paper's FALL (charcoalpaper, iter-189 — the clearance door, the account resolver's player-scaled arm armed for the first time in this pack): the reckoning at the beam — the strong honest season's fund covering the paper, the paper consumed at the weighing (the row's discharge, the guild's book closing against the burn). THE COVERED-FUND GATE is the fall's own law: the second account_at_least (coin 16 on the actor) means the paper only falls against a fund that covers it — an uncovered fall would be the escape-by-grief path the hills' unlapseable reading forbids, refused softly at the door (attempts are facts). The witnesses (same_location, the market's own people at the weighing) learn the_paper_fell — the vale's word, the debt's fall public as its standing was. The event is story-critical (the tale's line) and the collection follows (render_fund — the scene's lawful order: the fall, then the walk)."
+    },
+    {
+      "intent": "render_fund",
+      "label": "render",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the fund's COLLECTION (charcoalpaper, iter-189 — the clearance's second half): the fund renders to the chest — the master's covered coin walking to the guild's home at Malby (the weighbeam's town, the factor's book's own street). The geography gate (same_location at loc_malby, the field_in pin) holds the honest walk: the fund travels with the master to the chest. No knowledge block — the guild's own books need no witness (the tale's line and the chest's stock the surface); the fall's beat (reckon_paper) carried the word. The two-beat reckoning is the substrate's honest no-transaction form (the small-alphabet law: one verb, one event) — the reversed order leaves the over-payment state (the fund walked, the paper standing), lawful, never scripted."
+    },
+    {
+      "intent": "pass_the_seat",
+      "label": "hand over",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "paper",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_seat_passed"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the seat's SUCCESSION (charcoalpaper, iter-189 — the transfer door, D-191's turnover application made lawful): the paper walks to the successor — the camp's own reading of the debt (the seat, never the blood; the hills' unlapseable reading turned on the guild's instrument: whoever the camp holds at the burn masters the debt). The receiving-stock gate (account_at_least paper 0 on the target — the value-0 form is the stock's EXISTENCE gate) refuses a target that declares no paper stock SOFTLY (the door's own shape, the KI#15 family); no committed entity declares one — the lived succession waits on the successor's mint (the crews' recognition, no committed surface — the honest residue, a future row's own call). The tally-stick does NOT ride this door (the verb-gate boundary: carried and unflagged, untakeable — the badge's handing-over is the recognition's own mint, iter-185's law); the paper walks, the badge follows when the camp speaks. The witnesses learn the_seat_passed. The frozen-force counterfactual (the guild's book reading a man's name — the debt dying with the master) is the door's own removal: the perturbation arm, ANCHOR_REGION §6.4's record."
     }
   ]
 }

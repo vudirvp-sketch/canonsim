@@ -14,6 +14,20 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the owner's W5-decomposition
+call, finding 2): the paper sixteen as account state riding the seat + the three lifecycle doors (the fall's
+covered-fund gate, the collection's, the succession's — the player-scaled arm's first arming) + the W5 record
+with the decomposition; test_charcoalpaper.py +8, three test files' pins widened; 13 paths; 2011+1 + ruff +
+docguard clean; iter-180 evicted
+
+---
+iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (the owner's W5-decomposition
+call, finding 3): the composite knowledge tokens no longer render raw in the tale — the pack-declared
+`knows` tables (all five packs) + `render/chronicle.py::gloss_knows` (the fold-aware matcher, the dry
+fallback) + the regression/census (test_knowsgloss.py +7); the routine-flood finding measured (TECH_NOTES
+§16; chron-2 parked with the invariant); 11 paths; 2003+1 + ruff + docguard clean; iter-179 evicted
+
+---
 iter-187 · 2026-09-22 · freightvol — the camp's freight volume (the owner's embodiment-options
 call, the second row): the withhold's volume surface as pure pack data — the crofts' bloom heap
 (4 loads, the tally's PRESENT as account state) + the_withhold_banks (+2/yr, the linger beat's
@@ -61,19 +75,4 @@ map (the block FRESH; the Dense hybrid already intake-30; the doctrine the stand
 discipline's live form), the drop-in REFUSED (parallel layer), the capability +
 math-mechanism cards parked (Experiment 0), the empty-ablation rule + the allowlist
 entry; 7 paths, doc-only; 1962+1 + ruff + docguard clean both ends; iter-171 evicted
-
----
-iter-180 · 2026-09-21 · engine-1 round 6 — the owner's second live `--engine`
-bundle (Q9B) triaged: KI#90's fix live-verified (the prose class to the dry
-beat, the session clean); the manifest's sha256 first live population; the 9B
-live-narrate datum n=1 (§13.1; PRESENTATION_SPEC §7 qualified); 5 paths,
-doc-only; 1962+1 + ruff + docguard clean both ends; iter-170 evicted
-
----
-iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` bundle
-triaged: the compile check verified through the landed wiring (§8.5
-discharged); the narrator prose class exposed KI#90 (MediatorError before
-the gates — the beat blocked), FIXED (JSON → the MALFORMED regen) + 2
-pins; 8 paths; 1962+1 after (1960+1 BEFORE), ruff clean; iter-169 evicted
-
 

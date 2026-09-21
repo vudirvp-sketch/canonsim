@@ -121,9 +121,10 @@ def _twin(
     """The crafted short-cadence twin: the committed pack with the macro
     year shrunk to 480 ticks and the calendar scaled inside the sub-year
     law (market 40, fair 120, seasons 120 — every entry < the year). The
-    ablated twin is the COMPLETE ablation: the economy block AND all
-    three entity stocks go together (entity accounts without the block
-    are dead data, the lint's own refusal)."""
+    ablated twin is the COMPLETE ablation: the economy block, the entity
+    stocks AND the account-block actions go together (entity accounts or
+    account actions without the block are dead data, the lint's own
+    refusal; the doors widened at charcoalpaper, iter-189)."""
     target = tmp_path / name
     shutil.copytree(PACK_DIR, target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -146,6 +147,15 @@ def _twin(
                 record.pop("accounts", None)
         (target / "entities.json").write_text(
             json.dumps(entities, indent=2), encoding="utf-8"
+        )
+        actions = json.loads(
+            (target / "actions.json").read_text(encoding="utf-8")
+        )
+        actions["actions"] = [
+            a for a in actions["actions"] if "account" not in a
+        ]
+        (target / "actions.json").write_text(
+            json.dumps(actions, indent=2), encoding="utf-8"
         )
     return target
 
@@ -192,7 +202,10 @@ def test_the_armed_census() -> None:
     already carrying the verb (tune-1's law, debt-1's own listing)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin", "bloom"]
+    # iter-189 (charcoalpaper) widens the vocabulary again (paper — the
+    # outstanding's own kind, the standing state's row — tests/
+    # test_charcoalpaper.py the row's own packet)
+    assert economy["accounts"] == ["coin", "bloom", "paper"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["kind"] == "coin"] == [
@@ -201,7 +214,9 @@ def test_the_armed_census() -> None:
         ("the_bloom_nets", "source", MASTER, 3, 1),
     ]
     master = next(n for n in pack.entities["npcs"] if n["id"] == MASTER)
-    assert master["accounts"] == {"coin": 3}
+    # iter-189 (charcoalpaper) adds the paper stock beside the fund —
+    # the outstanding and its climb one read (the fall's own gate)
+    assert master["accounts"] == {"coin": 3, "paper": 16}
     # the seat's own reading: the account rides the paper's named holder
     assert "camp_tally_01" in master["carries"]
     # the template reused — no new line shape, the zero-template price
