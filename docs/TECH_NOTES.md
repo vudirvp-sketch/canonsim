@@ -952,10 +952,62 @@ remain the owner's run:
   accepted + pinned. The remaining class is the honest
   guess-within-grammar: wrong kind, wrong target among canon nouns,
   wrong field value.
+- **The v3 handoff (iter-173, the owner's round-3 report — the v2
+  smoke bundle + the `--arm all` console crash + the two config
+  questions)**: the v2 smoke cut completed every arm WITH SIGNAL —
+  the agreement census live (kind_mismatch/full/not_intent), the
+  station determinism mini green both models (greedy + seeded
+  byte-identical, n=2), the heartbeat rows populating, the latency
+  A/B raw direction (the grammar penalty real at E4B: 43–62 tok/s
+  vs ~121–122 at json_schema/none; Q9B 66–82 vs ~101–104; n=2 raw —
+  the full run owns the numbers). The full corpus crashed at s6 —
+  `KeyError: 'say'`: the battery's cycle loop knew only
+  `narrator`/`say`, the fixture's third kind `double_apply_probe`
+  (s6c9 — PARSER_SPEC §5's stale-second-apply refusal; the repo's
+  own test replays it and expects the door's ParseError) walked into
+  it — runner-side, the repo clean. Two more runner defects found in
+  the bundle: the D3 manifest's build half read key names this build
+  never serves (the /props payload carries `build_info`
+  "b<build>-<commit>" — the v2 manifests carried nulls), and the S7
+  `-np 2` restart accepted the `extra` argument but never appended it
+  to the argv — the bundle's `np2_slots` row (4 slots × 4096)
+  measured the AUTO shape, not `-np 2` (the halving law above stands
+  — the direct sandbox measurement). v3: the probe replayed through
+  the door + tallied (`double_apply_probes`/`double_apply_refused`
+  in results_corpus_*: `refused` the designed outcome after a
+  consumed cycle; `absorbed` only after off_grammar_final or an
+  engine failure — the call still open, the probe's no_intent its
+  legal reply, nothing feeds), the manifest reads `build_info`, S7
+  passes `-np 2`. Sandbox-validated WITHOUT llama.cpp (the owner's
+  «не мучайся с 1.7b» call honored): a stub-client full-corpus walk
+  through the REAL doors — 10 sessions, 51 say-cycles, the probe
+  REFUSED, `door_shape_errors=2` (exactly the fixture's two
+  `door_error` pins), an always-off-grammar walk ends absorbed and
+  completes, and the owner's v2 battery replayed in the same harness
+  crashes at exactly s6; ruff: zero new findings in the changed
+  code. The owner's config questions, answered from the specs + the
+  measured bundle: (a) the parse arms run DOCUMENT-ONLY by design —
+  PARSER_SPEC §1/§3's call document IS the prompt (D1's
+  file-contract frame: the runtime engine is "the operator"); no
+  parser-side system role is specified (BRIEF_SPEC §3.1's
+  directives-seed-system-prompt note is the NARRATOR side), and
+  GBNF owns the reply's shape — a parser-side system role is an
+  adapter/presentation-1 choice, owner-gated, never a mid-experiment
+  change (it would shift every agreement number's request identity,
+  D3); (b) the context IS configured — `ctx 4096` → `-c 4096` on
+  the server, the surface probe measured `n_ctx_slot 4096`, parse
+  prompts ~617 tok + ≤160 completion (no truncation pressure; the
+  27B prose arm's bigger briefs the one to watch — the terminal
+  `finish_reason length` signals are recorded); (c) POST /props at
+  the owner's station REFUSES with 501 ("does not support changing
+  global properties") where the sandbox's single server returned
+  the silent 200 — both collapse to the no-op verdict, per-request
+  params remain the only live surface.
 
-Station-bound remainder (the owner's one re-run, the v2 handoff in
-place of the v1 files): the corpus/deviation/prose numbers at
+Station-bound remainder (the owner's one re-run, the v3 handoff in
+place of the v2 files — battery + runner + runbook; grammar and
+config unchanged): the corpus/deviation/prose numbers at
 E4B/9B/27B, the four §4.3 arms' economics, the
 heartbeat's first local row, the 27B restart/swap costs, the
 cross-model schema at the real models, the seeded-local probe at
-VRAM/batch shapes.
+VRAM/batch shapes, the S7 `-np 2` row re-measured for real.

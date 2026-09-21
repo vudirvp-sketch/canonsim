@@ -60,8 +60,20 @@ claim packet)
   outside the repo (the grammar encodes the door's shape laws per
   verb — canon/texture variants, canon-only targets, required
   drawn-N ticks; the `door_error` tally, never fatal; the census
-  unwrapped), sandbox-checked against the real doors. Remaining:
-  the owner's one RE-RUN with the v2 handoff (the bundle back —
+  unwrapped), sandbox-checked against the real doors. Round 3
+  (iter-173, the owner's v2 smoke bundle + the round-3 console crash):
+  the smoke cut all-green with the census live + the determinism mini
+  green (n=2); the full corpus crashed at s6 — the fixture's third
+  cycle kind `double_apply_probe` (PARSER_SPEC §5) the battery did
+  not know; two more runner defects found in the bundle (the D3
+  manifest's build half null — /props serves `build_info`, not the
+  read keys; the S7 `-np 2` never reached the argv — the np2 row
+  measured the AUTO shape); the runner v3 delivered outside the repo
+  (the probe replayed + tallied, never fatal; the manifest reads
+  `build_info`; the `-np 2` argv wiring), sandbox-validated by a
+  stub-client full-corpus walk through the real doors (51 cycles, the
+  probe refused, v2 reproduced crashing at exactly s6). Remaining:
+  the owner's one RE-RUN with the v3 handoff (the bundle back —
   transcripts re-distilled per §8.2 source 3; the heartbeat's first
   local row; presentation-1's local evidence), then (b) the build
   landing (the GBNF mapping + the door wiring + the failure→ladder
@@ -164,6 +176,23 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 — the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
+
+- iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the owner's v2
+  smoke bundle triaged (the census live at last, the determinism mini
+  green at n=2, the heartbeat rows populating, the latency A/B raw
+  direction) + the s6 `KeyError: 'say'` crash fixed runner-side (the
+  fixture's `double_apply_probe` cycle kind, PARSER_SPEC §5 — the repo
+  clean); two more runner defects found in the bundle (the D3
+  manifest's build half null — /props serves `build_info`; the S7
+  `-np 2` never reaching the argv — the np2 row measured the AUTO
+  shape); the runner v3 delivered outside the repo (the probe replayed
+  + tallied, never fatal; `build_info` read; the argv wiring),
+  sandbox-validated by the stub-client full-corpus walk through the
+  real doors WITHOUT llama.cpp (51 cycles, the probe refused,
+  door_shape_errors=2, v2 reproduced crashing at exactly s6); the
+  owner's config questions answered from the specs (document-only
+  parse arms by design; ctx configured + measured); TECH_NOTES §13.1
+  the round-3 record; doc-only, 1900+1 green, ruff clean.
 
 - iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
   battery bundle back + the `--arm all` crash triaged (the «ты просил

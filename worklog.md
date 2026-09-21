@@ -7,6 +7,39 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the owner's v2
+smoke bundle back + the s6 `--arm all` crash triaged; the runner v3
+delivered outside the repo (the «продолжай работу… вот ошибочки»
+report + the two config questions)
+- triage: the crash is runner-side — the battery's cycle vocabulary
+  knew only narrator/say; the fixture's third kind
+  `double_apply_probe` (s6c9, PARSER_SPEC §5's stale-second-apply
+  refusal — the repo's own test replays it) crashed it; the repo
+  clean, INV-4 unchanged. Two more v2 defects found in the bundle:
+  the D3 manifest's build half null (/props serves `build_info`,
+  not the read keys) and the S7 `-np 2` never reaching the argv (the
+  np2 row measured the AUTO shape)
+- v3 handoff: the probe replayed + tallied
+  (`double_apply_probes`/`double_apply_refused`; refused after a
+  consumed cycle, absorbed only after off_grammar_final/engine
+  failure — never fatal) + the manifest's `build_info` read + the
+  start_single extra-argv wiring; grammar + config unchanged
+- sandbox validation WITHOUT llama.cpp (the owner's «не мучайся с
+  1.7b» call): a stub-client full-corpus walk through the REAL doors
+  (10 sessions, 51 say-cycles, the probe refused,
+  door_shape_errors=2 = the fixture's own door_error pins; an
+  off-grammar walk absorbed + completing; the v2 battery replayed
+  crashes at exactly s6); ruff: zero new findings; the owner's
+  questions answered from the specs (document-only parse arms per
+  PARSER_SPEC/D1; ctx configured + measured)
+- docs: TECH_NOTES §13.1 (the round-3 record — 1013 lines, the §6.1
+  standing over-cap, pure measured substance), TASKS (the engine-1
+  row's round-3 state + the ledger line), STATUS re-pin; 4 paths,
+  doc-only, zero engine code in the repo; verified BEFORE at
+  BASE_COMMIT 69db4f4 (1900+1 green, ruff clean — the iter-172 pin
+  re-confirmed) and re-verified after: 1900+1 green, ruff clean;
+  iter-163 evicted per the worklog cap
+---
 iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
 bundle back + the `--arm all` crash triaged; the runner v2
 delivered outside the repo (the «ты просил бангл прислать с тестов,
@@ -274,25 +307,4 @@ bank market, the seasons, the tally staff, the quarrel collection)
 - verified BEFORE working at BASE_COMMIT 815476a (1878+1 green, ruff
   clean — the pin re-confirmed) and re-verified after: 1878+1 green,
   ruff clean (doc-only, zero test change); iter-154 evicted per the cap
----
-iter-163 · 2026-09-20 · mech-2 — the introspection CLI's attention budget
-(the standing row's build, the owner's «mech 2 давай сделаем» call): the
-caps core + intake-21's postmortem + intake-22's DAG export as ONE
-mechanism — defaults bounded, nothing dropped silently, expansion by flag
-- mechanics.py: trace's unqualified default = the last 720 ticks + the
-  naming tail note (27/43 lines on the canonical runs vs 175/277 full);
-  matrix's default = the compact query-vocabulary inventory (--full the
-  whole, the row's "past a screen" conditional now fact: 300+ lines on
-  grim/province); why --event ID (the cause chain + the knowledge-wiring
-  join + the cascade, capped with walk-back-naming truncation lines);
-  matrix --dag (rules.json::systems as Mermaid via the scheduler's public
-  parse); the law in the tool docstring, D-128/D-148 cited, no new D-row
-- tests/test_mechanics.py +6 (the §9 claim packet — recount oracles for
-  chain/children/edge counts, window policy, compact/full, honest edges);
-  docs: NAV §5, TASKS (row collapse + ledger), phases.md §6 (the two
-  cards' rider lines), STATUS re-pin; 7 paths (the iter-160 precedent)
-- verified at BASE_COMMIT ee09105 (1872+1 green, ruff clean — the pin
-  re-confirmed) and re-verified after: 1878+1 green, ruff clean;
-  not-built residues (impact-query, first-divergence operator) stay
-  zero-consumer per the first-consumer law; iter-153 evicted per the cap
 

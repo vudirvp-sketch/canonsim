@@ -1,50 +1,62 @@
-Iteration: iter-172 (`iter-172-engine1b` — the owner's battery bundle
-back + the `--arm all` console-crash triage, the «ты просил бангл
-прислать с тестов, но там еще и ошибки в консоли вылезли» report):
-the smoke cut completed every arm (validity 100% at n=2, the
-per-component raw columns populated), the full corpus crashed at
-s2c1 — E4B's reply `take` + `target:"tex_0000"` + the texture
-reference, the one-path combo the v1 GBNF permitted; the door's
-loud RunnerError is PARSER_SPEC §4's DESIGNED refusal (the gate
-deliberately leaves the one-path/target-required/drawn-N-ticks laws
-to `core/intent.py::validate_shape`; the interactive session prints
-it — cli/main.py's catch) — the REPO side clean, zero code change,
-INV-4 UNCHANGED. Both fatal defects runner-side (Rule-9, outside
-the repo): the grammar did not encode the door's shape laws, and
-the battery caught only the gate's ParseError; a third defect
-found in validation: the agreement census compared the model's
-intent object against the pin's reply wrapper (every comparison
-read kind_mismatch, `full` unreachable — the smoke bundle's
-agreement rows carry no signal). The v2 handoff DELIVERED (the
-Vantiel pattern, never committed): per-verb canon/texture path
-variants (one path, never both; the target enum canon-nouns-only;
-the drawn-N ticks field required; the JSON-schema twin the same
-laws) + the `door_error` tally (terminal for the cycle, the reply
-kept for the census, `door_shape_errors` in the metrics, never
-fatal) + the census unwrap. Sandbox-validated against the REAL
-doors at the s2 snapshot (tex_0000 live): v1's enumerated language
-contains exactly the crashing form; v2's 2109 documents (2057
-bare) pass the shape laws AND the boundary gate on every document;
-the exact crash reply replayed through the fixed parse_cycle →
-tallied, the harness reusable, the gold reply on the next cycle
-accepted + pinned. The owner's move: the one re-run with the v2
-handoff (same folder, same config, same commands — smoke first
-`--arm smoke --limit 2`, then `--arm all`), the bundle back.
+Iteration: iter-173 (`iter-173-engine1c` — the owner's round-3 report:
+the v2 smoke bundle back + the `--arm all` console crash + the two
+config questions, the «продолжай работу. я тебе прислал логи и всякое
+такое» session): the v2 smoke cut completed every arm WITH SIGNAL —
+the agreement census live (kind_mismatch/full/not_intent — the unwrap
+fix proven at the station), the determinism mini green both models
+(greedy + seeded byte-identical, n=2), the heartbeat rows populating,
+the latency A/B raw (the grammar penalty real at E4B: 43–62 tok/s vs
+~121–122 at json_schema/none; Q9B 66–82 vs ~101–104; n=2 raw, the
+full run owns the numbers). The full corpus crashed at s6 —
+`KeyError: 'say'`: the battery's cycle loop knew only
+`narrator`/`say`, the fixture's third kind `double_apply_probe`
+(s6c9, PARSER_SPEC §5's stale-second-apply refusal) walked into it —
+RUNNER-side, the repo clean (the repo's own test replays that probe
+and expects the door's ParseError); two more runner defects found in
+the bundle: the D3 manifest's build half read key names this build
+never serves (the /props payload carries `build_info`
+"b<build>-<commit>" — the v2 manifests carried nulls), and the S7
+`-np 2` restart never passed the flag (`extra` accepted, never
+appended to the argv — the np2_slots row measured the AUTO shape
+4×4096; the §13 halving law itself stands, the direct sandbox
+measurement). The v3 handoff DELIVERED (the Vantiel pattern, never
+committed): the probe replayed through the door + tallied
+(`double_apply_probes`/`double_apply_refused` in results_corpus_* —
+`refused` the designed outcome after a consumed cycle, `absorbed`
+only after off_grammar_final/engine-failure, the open call taking
+the probe's no_intent as its legal reply; never fatal), the manifest
+reads `build_info`, the S7 argv wiring; grammar + config unchanged.
+Sandbox-validated WITHOUT llama.cpp (the owner's «можешь уже не
+мучаться с 1.7b» call honored — a stub-client full-corpus walk
+through the REAL doors): all 10 sessions, 51 say-cycles, the probe
+REFUSED, door_shape_errors=2 (the fixture's two door_error pins), an
+always-off-grammar walk ends absorbed + completes, the owner's v2
+battery replayed in the same harness crashes at exactly s6 — the
+harness reproduces the reported crash class; ruff: zero new findings.
+The owner's questions answered from the specs + the measured bundle:
+the parse arms run document-only BY DESIGN (PARSER_SPEC §1/§3 — the
+call document is the prompt, D1's file-contract frame; no
+parser-side system role is specified — BRIEF_SPEC §3.1's
+directives-seed note is the NARRATOR side; a parser-side system role
+= the adapter/presentation-1 choice, owner-gated, never a
+mid-experiment change); the context IS configured (ctx 4096 → `-c
+4096` on the server, n_ctx_slot 4096 measured, parse prompts ~617 tok
++ ≤160 completion — no truncation pressure; POST /props at the
+station refuses 501, the no-op conclusion unchanged).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1900 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT dcba648 BEFORE working — 1900+1 green, ruff
-clean, the iter-171 pin re-confirmed — and re-verified after with the
+verified at BASE_COMMIT 69db4f4 BEFORE working — 1900+1 green, ruff
+clean, the iter-172 pin re-confirmed — and re-verified after with the
 diff in place: 1900+1, ruff clean, doc-only, zero test change, the
 golden fixtures byte-untouched) ·
 Date: 2026-09-21 ·
-Scope: docs/TECH_NOTES.md (§13.1 the falsified claim corrected + the
-v2 record — measured substance only) + docs/TASKS.md (the engine-1
-row's round-2 state + the ledger line) + `STATUS.md` (this re-pin +
-the KI#88/#89 deletion, AGENTS §5's 2-iteration cleanup law) +
-`worklog.md` (this entry). The prior iteration's record: iter-171
-(engine-1 move (a)). The detail lives in the worklog + git.
+Scope: docs/TECH_NOTES.md (§13.1 the round-3 record — measured
+substance only) + docs/TASKS.md (the engine-1 row's round-3 state +
+the ledger line) + `STATUS.md` (this re-pin) + `worklog.md` (this
+entry). The prior iteration's record: iter-172 (engine-1 move (a),
+round 2). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -515,6 +527,60 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
+**iter-173 DONE: engine-1 (move a, round 3) — the v2 smoke bundle
+triaged + the s6 `--arm all` crash fixed runner-side (the owner's
+round-3 report, the «продолжай работу… вот ошибочки» session): the
+v2 smoke cut all-green WITH SIGNAL — the agreement census live
+(kind_mismatch/full/not_intent at last), the determinism mini green
+both models (greedy + seeded byte-identical, n=2), the heartbeat
+rows populating, the latency A/B raw direction (the grammar penalty
+real at E4B: 43–62 tok/s vs ~121–122 at json_schema/none; Q9B
+66–82 vs ~101–104 — n=2 raw, the full run owns the numbers). The
+full corpus crashed at s6 — `KeyError: 'say'`: the battery's cycle
+vocabulary knew only `narrator`/`say`, the fixture's third kind
+`double_apply_probe` (s6c9, PARSER_SPEC §5's stale-second-apply
+refusal) walked into it — runner-side, the repo clean (the repo's
+own test replays the probe and expects the door's ParseError). Two
+more runner defects found in the round-3 bundle: the D3 manifest's
+build half read key names this build never serves (/props carries
+`build_info` "b<build>-<commit>" — the v2 manifests carried nulls),
+and the S7 `-np 2` restart never passed the flag (`extra` accepted,
+never appended to the argv — the np2_slots row measured the AUTO
+shape 4×4096; the §13 halving law stands, the direct sandbox
+measurement). The v3 handoff (the Vantiel pattern, never committed):
+the probe replayed through the door + tallied
+(`double_apply_probes`/`double_apply_refused` in results_corpus_* —
+`refused` the designed outcome after a consumed cycle, `absorbed`
+only after off_grammar_final/engine-failure, never fatal), the
+manifest reads `build_info`, the S7 argv wiring; the grammar + the
+config unchanged. Sandbox-validated WITHOUT llama.cpp (the owner's
+«можешь уже не мучаться с 1.7b» call — a stub-client full-corpus
+walk through the REAL doors): 10 sessions, 51 say-cycles, the probe
+REFUSED, door_shape_errors=2 (the fixture's two door_error pins),
+an always-off-grammar walk absorbed + completing, the v2 battery
+replayed in the same harness crashing at exactly s6; ruff: zero new
+findings. The owner's questions answered from the specs + the
+bundle: the parse arms are document-only BY DESIGN (PARSER_SPEC
+§1/§3, D1's file-contract frame — no parser-side system role
+specified, BRIEF_SPEC §3.1's note is the narrator side; a
+parser-side system role is the adapter/presentation-1 choice,
+owner-gated), and the context IS configured (`ctx 4096` → `-c 4096`,
+n_ctx_slot 4096 measured, parse prompts ~617 tok — no truncation
+pressure). TECH_NOTES §13.1 the round-3 record; TASKS the engine-1
+row re-pinned; doc-only, 1900+1 green, ruff clean. **The owner's
+move: the one re-run — the v3 handoff's three files in place of the
+v2 ones (engine1_battery.py + engine1_runner.py + engine1_runbook.md
+replaced; engine1_grammar.py + engine1_config.json unchanged; same
+folder, same commands: `PYTHONHASHSEED=0 python engine1_battery.py
+--config engine1_config.json --arm smoke --limit 2` first, then
+`--arm all`), a FRESH out_dir (or delete engine1_out/state.json) so
+the checkpoints don't skip arms, send back
+engine1_out/engine1_bundle.zip. The natural next moves after the
+re-run's bundle: unchanged — the re-distillation + the heartbeat's
+first local row + presentation-1's local evidence (the transcripts'
+own iteration), or the build landing (b) — the GBNF mapping + the
+door wiring, INV-4 lifting there, both owner-gated.**
+
 **iter-172 DONE: engine-1 (move a, the bundle round 2) — the first
 `--arm all` crash triaged, the runner v2 delivered (the owner's
 bundle + console-error report): the smoke cut completed all arms
@@ -673,43 +739,6 @@ record's arming, the hatch — and the winter kin's three) stay the
 owner's call class; the water level's half stays owner-routed (the
 read mints the LAW, never the PRESENT); 1885+1 green both ends (the
 +7 the claim packet).
-**iter-166 DONE: intake33 — the game-design practitioner talks corpus
-routed (the owner's «изучи gamedesign_knowledge_base.md и определи что
-можно перенять, адаптировать или чем вдохновиться… распределить по
-документации» research call over the uploaded consolidated five-source
-knowledge base: Sawyer PoE attributes / Meier psychology / Battle Mode
-micromanagement / Johnson Old World / Wolverson procgen): PARTIALLY
-CONFIRMED — a perception + economy-craft donor, never a systems donor,
-differentiated from the refused UNIFIED GDC base (intake-30's F2) by
-the one domain no prior family owns — outcome-perception psychology.
-Adopted: the OUTCOME-PERCEPTION LAWS CARD (the layered legibility
-ladder — truth never bends / failure carries cause + avoidance path /
-odds as expectation bands / transparency opt-in by flag / outcomes
-legible through residue / stakes irreversible; the combined form of
-the five competing presentation solutions, each minus neutralized by
-another layer) → presentation-1's consult material (the third parked
-card, the visual/Vantiel precedent) + the ANTI-ARBITRAGE SPREAD
-(exchange lossy by construction — the Resource open question's donor;
-falsifier: the water's function-loss arbiter) + the TURNOVER QUESTION
-(the ECS cure = the function-loss probe aimed at holder mortality —
-the anti-freeze law, WORLD_AUTHORING §5; consumers: the camp's meso
-half, W5's biography arc) + two parked notes (the Hot-Path placement
-pair beside the intake-27 topology proposal — the road-traffic
-rider's material; the weak-coupling authoring law — pack-3's event
-families); the largest cross-domain confirmation batch since
-intake-27 (seed-in-save = INV-2/T2; no-cheats AI = the one-id door;
-infinite tooltips = mechanics.py; automation-red-flag inverted =
-mech-2's nothing-dropped-silently; direct-and-verify = the worldgen's
-MST-by-construction superior own form); refused binding (all
-dice-bending — perceived fairness only at the render layer, never the
-roll layer; the 3:1/2× constants — threshold leakage; tech-deck /
-order-system / no-counterattack — no substrate, no consumer); the
-source record docs/ref/game_design_talks.md (ref-23) + the five §10
-catalog rows + the DEEP index + the phases.md §6 stub + D-191; doc-only,
-1878+1 green both ends (zero test change); the third consecutive
-doc-only iteration — the D-022 exception consumed by THIS session's
-fresh owner research call; the next authored-band move needs a fresh
-owner call (an embodiment call remains the code-band breaker).
 iter-165 DONE: kin1 — the world track's fourth W4 candidate, the working
 set's last (the owner's «продолжай работу с world track» call): the
 constructed kinship edge (candidate 4) tested at the authored band over
@@ -901,6 +930,7 @@ iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
    streak (iter-164/165 world-track + iter-166 intake33) is BROKEN:
    iter-167 landed the embodiment call on this session's fresh owner
    continuation (the read_stair hinge, code-band, the pole's iter-161
-   precedent); iter-170 is doc-only BY ITS OWN NATURE (the decision +
-   the contract + the evidence rows — the code band returns at the
-   experiment/build calls).
+   precedent); iter-170..173 are doc-only BY THEIR OWN NATURE (the
+   engine-1 convening rounds — the decision, the contract, the evidence
+   rows, the runner handoffs: the runner lives outside the repo, Rule 9;
+   the code band returns at the build's own iteration).
