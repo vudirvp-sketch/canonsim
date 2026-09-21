@@ -183,14 +183,47 @@ claim packet)
   `a16z-infra/ai-town`; pcg.wikidot + open5e health notes in the catalog).
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
+- `doc-3` — the state-layer reassembly (OPENED iter-175 on the owner's
+  doc-revision call; the audit landed, the build the owner's declared
+  next iteration): the post-ladder state docs rebuilt to their declared
+  functions — STATUS (the FAQ essays → one-liner + owner link per NAV
+  §3's own law; the unique operational recipes → TECH_NOTES), TASKS
+  (the three history ledgers die — git owns them, this file's own
+  header law; the standing rows de-historized: the engine-1 rounds →
+  one closure clause + pointers; the duplicated mech-1 row), worklog
+  (the 3–5-line entry law held), README (the phase-ladder block →
+  one-liners per ROADMAP §2's own law; the repo-map cells → function
+  level), DECISIONS (the owner-gated D-034/D-185 collapse fires:
+  31 → ≤30; the D-119 compound row's 8.4k-char intake restatement →
+  pointer to phases.md §6, its declared owner), TECH_NOTES (§6.1 prose
+  pass only — §13/§13.1 measured substance stays). Plus the recurrence
+  fix both GC passes (iter-140/151) lacked: a mechanical cap guard —
+  a lint script + test over the AGENTS §6 table, the FAQ/KI counts,
+  the Next-step DONE-block count, the worklog entry cap, the TASKS
+  ledger tail (the L1 law applied to the state layer: lint = CI,
+  never taste; the over-cap allowlist documented in the guard itself).
+  Constraints: digest.py's shape pins (test_digest's real-repo test)
+  held or adapted in the same iteration; §6.1 governs every cut.
+  Verification: post-build counts recorded + pytest/ruff green + the
+  digest clean. Evidence: the iter-175 session report + git.
 
-### Iteration ledger (iter-116..171 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..175 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 — the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
+
+- iter-175 · 2026-09-21 · docrev1 — the state-layer audit routed (the
+  owner's doc-revision call): doc-3 OPENED (the reassembly row + the
+  mechanical cap guard — the recurrence fix the iter-140/151 GC passes
+  lacked); STATUS's Next-step DONE-block protocol restored (one rolling
+  block, seven stale blocks returned to git); the verdict: the standing
+  queue healthy (D-184 held), the mass is duplicated history — the
+  iter-174 record verbatim in six live docs, the growth curves at
+  iter-120..174: git; the dispositions: the doc-3 row; doc-only, 1916+1
+  green, ruff clean.
 
 - iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the owner's v2
   smoke bundle triaged (the census live at last, the determinism mini

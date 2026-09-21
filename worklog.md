@@ -7,6 +7,14 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-175 · 2026-09-21 · docrev1 — the owner-called state-layer audit:
+doc-3 OPENED (the reassembly row + the cap guard, the recurrence fix
+the iter-140/151 GC passes lacked), STATUS re-pinned (the DONE-block
+protocol restored, seven stale blocks → git); verdict: the queue
+healthy, the mass duplicated history (evidence: the doc-3 row); 3
+paths (TASKS+STATUS+worklog), 1916+1 green + ruff clean at efedd89
+both ends; iter-165 evicted per the cap
+---
 iter-174 · 2026-09-21 · engine-1 (move a, round 4 — move (a) CLOSED) —
 the owner's v3 re-run bundle triaged + the transcripts re-distilled
 (the «продолжай работу. я тебе прислал логи и всякое такое» session)
@@ -282,34 +290,3 @@ systems donor
   not runnable in the sandbox — zero Python files touched) and
   re-verified after: 1878+1 green (doc-only, zero test change);
   iter-156 evicted per the cap
-iter-165 · 2026-09-20 · kin1 — the world track's fourth W4 candidate (the
-owner's «продолжай работу с world track» call, the working set's last): the
-constructed kinship edge (candidate 4) tested at the authored band over
-committed substrate only (the shelter law, the flood year, the notch habit,
-the road's word) and CONFIRMED as THE WINTER KIN (ANCHOR_REGION §6.3)
-- doc-only (6 paths, over the soft limit per AGENTS §2.3 — the worldbuild
-  trio + STATUS/TASKS/worklog, the iter-164 doc-only precedent; the second
-  consecutive doc-only iteration under the session's fresh owner request,
-  the D-022 exception — the next authored-band move needs a fresh call):
-  ANCHOR_REGION carries the edge (§6.3 — the mint's three rungs, the ladder,
-  the lifecycle, the crisis + humor probes, the band split) + the mesh's G
-  row (§5, seventh loop AUTHORED, three new interlock edges E⇄G/B⇄G/D⇄G,
-  the disable test re-applied, the E-sibling note — one catastrophe, two
-  circuits) + §4's three rows + §7.1's inherited-duty probe's third answer
-  + §9's third chain walk; WORKPLAN §2/§6 the TESTED verdict (the W4
-  working set COMPLETE); WORLD_TESTS §9 the run record + the
-  humor/heartbreak row's extension
-- the candidate's own falsifier PASSED (the Sarrow need demonstrated — the
-  native generator confirmed: the stranded season's stores eight of the
-  paper twenty, the care currently carried one way into the debt and the
-  bend; the function-loss arbiter — the reciprocal function no existing
-  mechanism performs); three first-exposure substrate gaps recorded, NOT
-  routed (the relation form, the proof's read, the mourning surface); the
-  embodiment options the owner's call class (the pole's iter-161 precedent)
-- ANCHOR_REGION over the 600-line docs cap after the landing (762): the
-  §6.1 substance law (AGENTS §6.1 — the unit's rungs/tables are substance,
-  no cruft found in the pass; the cap is a signal, not a wall); kept, this
-  entry the rationale
-- verified BEFORE working at BASE_COMMIT 6d22a33 (1878+1 green, ruff
-  clean — the pin re-confirmed) and re-verified after: 1878+1 green, ruff
-  clean (doc-only, zero test change); iter-155 evicted per the cap

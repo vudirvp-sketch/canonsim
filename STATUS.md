@@ -1,55 +1,31 @@
-Iteration: iter-174 (`iter-174-engine1d` — the owner's round-4 report:
-the v3 re-run bundle + the clean console log, the «продолжай работу.
-я тебе прислал логи и всякое такое» session): move (a) CLOSED — the
-full corpus LANDED at E4B/Q9B with the three v3 fixes proven at the
-station (the probe refused 1/1 both models; the D3 manifests
-populated — build_info + sha256 + params + grammar id; the np2 row
-n_slots 2 / n_ctx_slot 2048, the explicit shape). The §4.3 arms
-measured: the seeded-local determinism tier HOLDS both models (greedy
-+ seeded byte-identical, n=5 — weak-arm replies pinnable, D3's
-consequence recorded in practice), the GBNF latency penalty ~2.0× at
-E4B (59.91 vs 121.38 tok/s p50) / ~1.3× at Q9B (80.0 vs 105.18),
-mode-A prose at the weak arm: E4B parser-only (every beat dry — the
-narrator replies not valid JSON, the retry ladder exhausted), Q9B
-narrates 6/8 per ladder — the narrator floor between 4B and 9B,
-presentation-1's exit criterion MET. The transcripts RE-DISTILLED per
-§8.2 source 3 (the bg-8 precedent's form):
-`tests/fixtures/engine1_deviation_corpus.json` (the F1–F6 documents
-verbatim from both models, family_verdict re-judged per reply — the
-semantic owner; the runner's own honest/guess split rode the bg-8
-baseline labels) + `tests/test_engine1_deviation.py` (16 Layer-1
-tests; the build replay cross-checked every door outcome against the
-station's own records — ZERO divergence, the INV-2 equality); the new
-measured shapes pinned: the FIRST local world-answer leak (e4b f1b,
-the degenerate empty no_intent, 33/34 coverage where the API baseline
-was 34/34) and the q9b protocol-template echo landing GATE-VALID (the
-bg-8 ParseError shape evolved). The heartbeat's first local rows live
-in TEST_PLAN §8.5 (three gap rows discharged; the remaining gaps
-re-pointed to the build's own A/B). Five runner residuals recorded
-(the SUMMARY embedder's empty sections, the duplicate zip entry, the
-onetwo manifest nulls, the coverage event-label bug, the
-baseline-label honest/guess split — all runner-side, v4 candidates,
-never repo).
+Iteration: iter-175 (`iter-175-docrev1` — the owner's
+doc-revision call over the accumulated state docs: the audit landed,
+the reassembly routed): the state-layer revision — TASKS `doc-3`
+OPENED (the reassembly row: STATUS/TASKS/worklog/README to their
+declared functions, the DECISIONS collapse's evidence base, the
+TECH_NOTES §6.1 prose pass, the mechanical cap guard — the recurrence
+fix both GC passes lacked); STATUS re-pinned with the Next-step
+DONE-block protocol restored (one rolling block — the discipline had
+lapsed at iter-165+; seven stale blocks returned to git, their
+substance owned there); worklog re-trimmed to the entry cap. The
+audit's verdict: the standing queue healthy (the D-184 revalidation
+held; the debt-1 lifecycle clean), the mass is duplicated history —
+the iter-174 record verbatim in six live docs, the phase ladder in
+five, the FAQ essays restating their named owners. The evidence
+tables (the growth curves, the duplication map, the per-file
+dispositions): the doc-3 row + the session report.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1916 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 1f4f20d BEFORE working — 1900+1 green, ruff
-clean, the iter-173 pin re-confirmed — and re-verified after with the
-diff in place: 1916+1, the +16 the re-distillation's Layer-1 packet,
-ruff clean, the golden fixtures byte-untouched) ·
+verified at BASE_COMMIT efedd89 BEFORE working — 1916+1 green, ruff
+clean, the iter-174 pin re-confirmed — and re-verified after with the
+diff in place: 1916+1, doc-only, ruff clean) ·
 Date: 2026-09-21 ·
-Scope: docs/TECH_NOTES.md (§13.1 the round-4 record) +
-docs/TEST_PLAN.md (§8.5 the two local rows + the gap-row updates) +
-docs/TASKS.md (the engine-1 row's round-4 closure + presentation-1's
-evidence note + the ledger line) +
-tests/fixtures/engine1_deviation_corpus.json +
-tests/test_engine1_deviation.py + `STATUS.md` (this re-pin) +
-`worklog.md` (this entry) — 7 paths, over the §2.3 soft limit (the
-re-distillation's fixture+test pair is the named move's own
-deliverable, the bg-8 precedent's form). The prior iteration's
-record: iter-173 (engine-1 move (a), round 3). The detail lives in
-the worklog + git.
+Scope: docs/TASKS.md (the doc-3 row + the iter-175 ledger line) +
+`STATUS.md` (this re-pin) + `worklog.md` (this entry) — 3 paths,
+doc-only. The prior iteration's record: iter-174 (engine-1 move (a),
+round 4 — CLOSED). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -520,436 +496,39 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-174 DONE: engine-1 (move a, round 4) — the owner's v3 re-run
-bundle triaged, move (a) CLOSED** (the «продолжай работу. я тебе
-прислал логи и всякое такое» session): the full corpus landed at
-E4B/Q9B (validity 98.0% / 96.1% → 100% after one re-ask; the three v3
-fixes proven — the probe refused, the manifests populated, the np2 row
-explicit), the §4.3 arms measured (the seeded-local tier HOLDS both
-models n=5 — weak-arm replies pinnable; the GBNF penalty ~2.0×/~1.3×;
-mode-A prose: E4B parser-only, Q9B narrates 6/8 — the narrator floor
-between 4B and 9B), the transcripts re-distilled per §8.2 source 3
-(`engine1_deviation_corpus.json` + `test_engine1_deviation.py`, 16
-Layer-1 tests, the replay cross-check zero divergence; the first local
-world-answer leak 33/34 + the gate-valid protocol echo pinned), the
-heartbeat's first local rows live (TEST_PLAN §8.5), five runner
-residuals recorded (v4 candidates, runner-side only); 1916+1 green,
-ruff clean. **The owner's move: the call between (b) the build
-landing — the GBNF mapping repo-side (the INV-3-clean pure function
-over the grammar snapshot) + the door wiring + the failure→ladder
-mapping, INV-4 lifting there with the AGENTS §4/§8 edits riding it
-(CONTRACTS §4 the boundary; §4.3's claim packet F the build's own
-evidence; the adapter contract tests fire at the build) — and
-presentation-1's write (the exit criterion MET — the spec fires from
-the measured results per D-022's just-in-time law: the mode-A bound,
-the script-tax twins, the regen ladder's behavior, the JSON-envelope
-failure mode at E4B). The runner v4 residuals are cosmetic —
-fix-or-hold, they block neither move.**
+**iter-175 DONE: docrev1 — the state-layer audit routed, doc-3 OPENED
+(the owner's doc-revision call): the standing queue healthy (the
+D-184 revalidation held; the debt-1 lifecycle clean), the bloat is
+duplicated history, not unique substance** — the evidence: STATUS 955
+lines (the FAQ 441 = twenty 22-line essays restating their named
+owners; the Next step 435 = seven DONE blocks, the one-block protocol
+lapsed at iter-165+), TASKS 1320 (12% live queue; three history
+ledgers; the mech-1 row duplicated verbatim), worklog 315 (entries
+~35 lines vs the 3–5 cap — the third drift: iter-0v, iter-10a,
+iter-151), README's phase block and DECISIONS's D-119 compound row
+(8.4k chars) over their own laws; the unique substance (TECH_NOTES
+§13.1, phases.md §6) stays by design. The dispositions + the
+mechanical cap guard (the recurrence fix): the doc-3 row. **The
+owner's move: the doc-3 build — the cleanup iteration this audit
+routes to (the owner's own next-iteration declaration); the standing
+alternatives unchanged.**
 
-**iter-173 DONE: engine-1 (move a, round 3) — the v2 smoke bundle
-triaged + the s6 `--arm all` crash fixed runner-side (the owner's
-round-3 report, the «продолжай работу… вот ошибочки» session): the
-v2 smoke cut all-green WITH SIGNAL — the agreement census live
-(kind_mismatch/full/not_intent at last), the determinism mini green
-both models (greedy + seeded byte-identical, n=2), the heartbeat
-rows populating, the latency A/B raw direction (the grammar penalty
-real at E4B: 43–62 tok/s vs ~121–122 at json_schema/none; Q9B
-66–82 vs ~101–104 — n=2 raw, the full run owns the numbers). The
-full corpus crashed at s6 — `KeyError: 'say'`: the battery's cycle
-vocabulary knew only `narrator`/`say`, the fixture's third kind
-`double_apply_probe` (s6c9, PARSER_SPEC §5's stale-second-apply
-refusal) walked into it — runner-side, the repo clean (the repo's
-own test replays the probe and expects the door's ParseError). Two
-more runner defects found in the round-3 bundle: the D3 manifest's
-build half read key names this build never serves (/props carries
-`build_info` "b<build>-<commit>" — the v2 manifests carried nulls),
-and the S7 `-np 2` restart never passed the flag (`extra` accepted,
-never appended to the argv — the np2_slots row measured the AUTO
-shape 4×4096; the §13 halving law stands, the direct sandbox
-measurement). The v3 handoff (the Vantiel pattern, never committed):
-the probe replayed through the door + tallied
-(`double_apply_probes`/`double_apply_refused` in results_corpus_* —
-`refused` the designed outcome after a consumed cycle, `absorbed`
-only after off_grammar_final/engine-failure, never fatal), the
-manifest reads `build_info`, the S7 argv wiring; the grammar + the
-config unchanged. Sandbox-validated WITHOUT llama.cpp (the owner's
-«можешь уже не мучаться с 1.7b» call — a stub-client full-corpus
-walk through the REAL doors): 10 sessions, 51 say-cycles, the probe
-REFUSED, door_shape_errors=2 (the fixture's two door_error pins),
-an always-off-grammar walk absorbed + completing, the v2 battery
-replayed in the same harness crashing at exactly s6; ruff: zero new
-findings. The owner's questions answered from the specs + the
-bundle: the parse arms are document-only BY DESIGN (PARSER_SPEC
-§1/§3, D1's file-contract frame — no parser-side system role
-specified, BRIEF_SPEC §3.1's note is the narrator side; a
-parser-side system role is the adapter/presentation-1 choice,
-owner-gated), and the context IS configured (`ctx 4096` → `-c 4096`,
-n_ctx_slot 4096 measured, parse prompts ~617 tok — no truncation
-pressure). TECH_NOTES §13.1 the round-3 record; TASKS the engine-1
-row re-pinned; doc-only, 1900+1 green, ruff clean. **The owner's
-move: the one re-run — the v3 handoff's three files in place of the
-v2 ones (engine1_battery.py + engine1_runner.py + engine1_runbook.md
-replaced; engine1_grammar.py + engine1_config.json unchanged; same
-folder, same commands: `PYTHONHASHSEED=0 python engine1_battery.py
---config engine1_config.json --arm smoke --limit 2` first, then
-`--arm all`), a FRESH out_dir (or delete engine1_out/state.json) so
-the checkpoints don't skip arms, send back
-engine1_out/engine1_bundle.zip. The natural next moves after the
-re-run's bundle: unchanged — the re-distillation + the heartbeat's
-first local row + presentation-1's local evidence (the transcripts'
-own iteration), or the build landing (b) — the GBNF mapping + the
-door wiring, INV-4 lifting there, both owner-gated.**
-
-**iter-172 DONE: engine-1 (move a, the bundle round 2) — the first
-`--arm all` crash triaged, the runner v2 delivered (the owner's
-bundle + console-error report): the smoke cut completed all arms
-(validity 100% at n=2, the per-component raw columns, the
-determinism mini 5/5 both models, the latency A/B raw rows), the
-full corpus crashed at s2c1 — E4B's `take` paired
-`target:"tex_0000"` with the texture reference; the door's
-RunnerError is per PARSER_SPEC §4 the designed refusal (the
-repo clean, INV-4 unchanged, zero code change), the CRASH was the
-battery's ParseError-only catch meeting the v1 grammar's un-encoded
-shape laws. The v2 handoff (the Vantiel pattern, never committed)
-fixes all three runner defects: (1) the grammar encodes the door's
-shape laws per verb — the canon and texture paths as separate
-variants (one path, never both), the target enum canon-nouns-only
-(texture ids are word-matching nouns, never targets), the drawn-N
-ticks field required, the JSON-schema twin the same laws; (2) the
-battery's `_apply_parse_reply` catches the door's RunnerError →
-the `door_error` family — terminal for the cycle (the reply was
-consumed, no re-ask), the reply kept for the census,
-`door_shape_errors` in the metrics, never fatal; (3) the agreement
-census unwrapped — v1 compared the intent object against the pin's
-reply wrapper (every comparison kind_mismatch, `full` unreachable;
-the smoke bundle's agreement rows carry no signal). Sandbox-checked
-against the REAL doors at the s2 snapshot: v1's enumerated language
-contains exactly the crashing form; v2's 2109 documents (2057 bare)
-pass the shape laws AND the boundary gate on every document; the
-exact crash reply replayed through the fixed parse_cycle → tallied,
-the harness reusable, the gold reply on the next cycle accepted +
-pinned; ruff on the runner: zero findings in the changed code.
-TECH_NOTES §13.1 the falsified claim corrected + the v2 record;
-TASKS the engine-1 row re-pinned; doc-only, 1900+1 green, ruff
-clean. **The owner's move: the one re-run — the v2 handoff's three
-files in place of the v1 ones (engine1_grammar.py +
-engine1_battery.py replaced, engine1_runbook.md the note added;
-same folder, same config, same commands: `PYTHONHASHSEED=0 python
-engine1_battery.py --config engine1_config.json --arm smoke --limit
-2` first, then `--arm all`), send back engine1_out/engine1_bundle.zip
-— a fresh out_dir (or delete engine1_out/state.json) so the smoke
-checkpoint doesn't skip the corpus arm. The natural next moves
-after the re-run's bundle: unchanged — the re-distillation + the
-heartbeat's first local row + presentation-1's local evidence (the
-transcripts' own iteration), or the build landing (b) — the GBNF
-mapping + the door wiring, INV-4 lifting there, both
-owner-gated.**
-
-**iter-171 DONE: engine-1 move (a) — the {3–8B, GBNF} experiment
-CONVENED and the llama.cpp surface mapped (the owner's «за 1 раз как
-можно больше тестов… лучше вообще выяснить все про llama.cpp и дальше
-уже разбирайся на своих мощностях, а на моем железе только в крайнем
-случае» call): the Rule-9 runner DELIVERED outside the repo (the
-Vantiel-handoff pattern: engine1_runner.py + engine1_grammar.py +
-engine1_battery.py + the runbook + the config template — never
-committed, never staged) — ONE batched owner session covering
-TEST_PLAN §8.5's gap rows (the 51-utterance corpus raw → one re-ask,
-the deviation F1–F6 with the guess-within-grammar tally, the bg-7
-prose families (ii)–(v), the per-component p50/p95 columns) + all
-four CONTRACTS §4.3 arms + the §13 surface probes at the owner's
-build. Validated end-to-end FIRST on the owner's exact build b11064
-(commit a894dae93) CPU-side: TECH_NOTES §13.1 the sandbox surface
-record — the ROUTER (model swap = autoload/eviction, never a
-restart; children inherit the serving args; /slots?model=), POST
-/props the measured silent no-op (write 200, effect never lands —
-per-request is the only live surface), the -np context split
-(explicit np halves per-slot; auto = 4 slots kv-unified), GBNF on
-the chat route as a top-level grammar param (response_format
-"grammar" refused), the GBNF dialect facts (underscore rule names
-rejected — parse failure; [ ] is a char class, the optional group is
-( )?; \" escapes in literals), cross-model thinking×schema mechanics
-on the Qwen side, the determinism mini 5/5 greedy AND seeded, the
-cancellation-vs-second-client row closed, restart timing — every
-software-bound §13 "not established" item closed at the owner's
-commit; the runner's GBNF mapping is the build's repo-side function
-previewed (per-verb precise, subset-enumerated fields). Zero engine
-code in the repo, INV-4 UNCHANGED, doc-only, 1900+1 green, ruff
-clean. **The owner's move: the one run — `PYTHONHASHSEED=0 python
-engine1_battery.py --config engine1_config.json --arm all`, send
-back engine1_out/engine1_bundle.zip; smoke first with `--arm smoke
---limit 2`. The natural next moves after the bundle: the re-
-distillation + the heartbeat's first local row + presentation-1's
-local evidence (the transcripts' own iteration), or the build
-landing (b) — the GBNF mapping + the door wiring, INV-4 lifting
-there, both owner-gated.**
-
-**iter-169 DONE: qa2 — the KI#88/#89 lint-side closures (the owner's
-«проработай открытые в прошлой итерации ki и все связанное, нужно
-доделать все с технической частью» call over the two holes qa-1 opened
-and routed): BOTH KIs closed at LOAD, zero runtime behavior change on
-well-formed packs (1900+1 green both ends — the +15 the §9 claim
-packet; the golden fixtures byte-untouched, the five committed packs
-loading; ruff clean, mypy --strict core/ 0). KI#89: the shared
-`lint_direct_keys` row (packlint/shared.py, the lint_echo_cond family)
-refusing the five record-reading tests' directly-indexed keys —
-flag/field/values on carries_flagged, flagged_accessible, field_in,
-field_nonempty, has_field — for presence + type + non-emptiness, wired
-into every `requires` declaration site (the action canon, the texture
-block, the urgency beat gate, the faction gate; the iter-45 leverage
-`who` precedent generalized to its whole family). KI#88's first arm:
-the on_action actor vocabulary split (ACTOR_KEYS = world |
-source_actor, owned beside the resolver in core/onaction.py — the
-reaction event's actor is a schema-required string, `source_target`
-drafts None on a targetless source; the dedicated lint row carries the
-rationale, the runtime assert stays the programmatic backstop). KI#88's
-second arm: the target-sourced check row — the action must pin the
-intent's target with a target-noun precondition, the lint reading the
-door's OWN `needs_target` predicate (extracted from validate_shape —
-one source, two readers, agreement by construction); the texture-block
-twin stays the stricter row. The `flag` test itself (unused by every
-committed pack) stays outside the row set exactly as the KI scoped it
-— its twin hole (and kind's `is`, the `with`/`axis`/`value` presence)
-is the owner's call class, recorded not routed. The natural next moves
-stay the owner's: engine-1 (the TASKS standing row's own
-recommendation — the SoW horizon's head), the world track's embodiment
-options, or another backlog row.**
-**iter-168 DONE: qa1 — the type-discipline audit (the owner's «там
-еще была задача qy 1 что ли, связанная с проверкой кода» chat call
-naming the standing row): mypy --strict on `core/` taken 207 → 0
-across 36 files at ZERO runtime behavior change — 1885+1 green both
-ends, the golden fixtures byte-untouched, ruff clean. The root-fix
-audit: `_require(condition: object)`, the `Importance`/`Fidelity`
-Literal funnels, the RetrievalIndex slot annotations, the Mapping
-read-only widening under fold's dict `Projection`, the TypeGuard
-`_is_int`/`_is_number`, the Iterable bridges in `Pack.entity`/
-`action`, the assert-after-require narrowings across the packlint
-family, the shadowing kills, log.py's first-branch annotations — 29
-core files (the §2.3 soft limit noted: a repo-wide strict pass).
-Two real holes made loud: KI#88 (the source_target actor null + the
-target-sourced defender — asserts landed, the lint-side closure the
-residue) and KI#89 (the door's directly-indexed cond keys not
-load-linted — the iter-45 `who` family, the fix routed). The tool
-stays OPTIONAL (D-031 unchanged — mypy in no dev deps, no CI row;
-enforcement is the owner's call class). The natural next moves stay
-the owner's: KI#89's lint rows (small, the iter-45 precedent), KI#88's
-lint-side closure, or the embodiment options the world track still
-holds.**
-**iter-167 DONE: stepread — the step bench's first embodiment (the
-owner's «продолжай работы, что логичнее всего сейчас начать»
-continuation call over STATUS's embodiment routing — the natural
-doc-streak breaker after three doc-only iterations, D-022's own
-recommendation): the step's close read, the unit's setting verb (the
-§6.2 gap text's own "a future embodiment's own class, the read_pole
-precedent"), landed in province_pack as PURE PACK DATA, zero core —
-the read_stair hinge (the read hinge's third instance: the grim
-read_ticket first, the pole second; the family's first location-kind
-target — the stair IS the carrier) minting the literal token
-the_step_law to the reader: the ORDER the road never learns from the
-books (§6.2's knowledge asymmetry; §7.1's stranger row — the road's
-misread correctable in play, the meaning slice's misread-correcting
-half widened to the committed band; the brief's recalled facts the read
-surface); the token deliberately PLAIN KNOWLEDGE, never a secret (the
-vale's own category, no lever — the registry stays two keys); the
-unlit weir steps the night read down to partial; the field_in pin +
-the co-location gate die at the door as named rejections; zero corpus
-price (no committed script reads the stair); tests/test_stepread.py +7
-(the §9 claim packet); the remaining embodiment options (the notch
-record's arming, the hatch — and the winter kin's three) stay the
-owner's call class; the water level's half stays owner-routed (the
-read mints the LAW, never the PRESENT); 1885+1 green both ends (the
-+7 the claim packet).
-iter-165 DONE: kin1 — the world track's fourth W4 candidate, the working
-set's last (the owner's «продолжай работу с world track» call): the
-constructed kinship edge (candidate 4) tested at the authored band over
-committed substrate only and CONFIRMED as THE WINTER KIN (ANCHOR_REGION
-§6.3) — care under the shelter law through one full stranded season mints a
-socially recognized kin edge (the milk-kinship MECHANISM, never the
-practice): the winter's board never the night's (the rarity gate), the
-edge binding both ways (protection + mourning owed, the barred purse the
-bend's own boundary), passing down both lines (never unnotched, the
-recognition living); the falsifier PASSED (the Sarrow need demonstrated —
-the stores eight of the paper twenty carried one way to the debt and the
-bend; the function-loss arbiter; the anti-noise check); the mesh's seventh
-loop G + three interlock edges (E⇄G, B⇄G, D⇄G); the crisis + humor probes
-run, the heartbreak row's first authored half; three first-exposure
-substrate gaps recorded, not routed (the relation form, the proof's read,
-the mourning surface); doc-only, 1878+1 green both ends (zero test change)
-— THE W4 WORKING SET COMPLETE. iter-164 DONE: water1 — the world track's
-second meso unit (the owner's «продолжай работу с world track» call over the W4
-candidates' next): the practitioner water-governance node (candidate 3) authored as the STEP BENCH
-(ANCHOR_REGION §6.2) — the weir stair's three hands over one head (the
-keeper's pool, the steward's race, the beam's run), the head named by the
-stair's wet step (four rungs, the committed high_water line the fourth's
-own text), held by the practitioners' reading, enforced at the water by the
-users themselves; the candidate's falsifier PASSED (the function-loss
-arbiter: the allocation order is a function neither the guild's paper nor
-the crossing's custom performs; the anti-council check: no axis, no
-threshold, no institutional door); the mesh's sixth loop F (AUTHORED) +
-three interlock edges (C⇄F, E⇄F, B⇄F); the chronicle's quarrel collection
-themed as the stair pact; §7.1's Thornmill obligation ANSWERED; three
-first-exposure substrate gaps recorded, not routed (the water level, the
-setting verb, the hatch gate); doc-only, 1878+1 green both ends (zero test
-change). iter-163 DONE: mech-2 (the owner's «mech 2 давай сделаем» call — the
-row's own build): the introspection CLI's attention budget landed as one
-mechanism — the caps core (trace's default = the last 720 ticks + the
-naming tail note; matrix's default = the compact query-vocabulary
-inventory, --full the whole listing; the row's "past a screen"
-conditional now fact on the grown packs) + intake-21's single-event
-postmortem (`why --event ID`: cause chain + knowledge-wiring join +
-cascade, recount-oracle-pinned) + intake-22's DAG export (`matrix --dag`:
-the rules.json::systems projection as Mermaid, never a runtime);
-tests/test_mechanics.py +6, 1878+1 green both ends; the release-equality
-pin green (D-118 untouched). iter-162 DONE: the debt-1 standing row's
-build (the flood debt's economy arm landed in province_pack as pure pack
-data over the res-1 substrate, zero core — the third consumer arming:
-the accounts, the toll-surplus flow + the guild's collection, the FOLD
-answering D-182's named co-due limit by construction; tests/test_debt1.py
-+9, 1872+1 green both ends; zero corpus price, the golden T1
-byte-untouched). iter-161 DONE: the pole's embodiment seeds (the
-flood-story recognition token + the steal_target flag, pure pack data,
-zero core; the lever chain + the player-facing ablation test-pinned,
-tests/test_poleseed.py +11, 1863+1 green both ends; the debt-1 standing
-row OPENED — consumed iter-162). iter-160 DONE: the W4 bounded experiment —
-the crossing household through the full operator stack on existing substrate
-(the working set's own first move; CONFIRMED at the split band, the transfer
-KEPT — the carrier-availability law + the verb-gate boundary + the
-carrier-ablation probe, the debt's lifecycle table authored, candidates 1/2
-informed; doc-only, 1852+1 green both ends). iter-159 DONE: the Vantiel
-research handoff routed (intake-32, D-190 — the separations record
-docs/ref/vantiel.md ref-22 + the presentation-1 consult material parked
-behind the owner gate; doc-only, 1852+1 green both ends). iter-158 DONE: the
-Kurvitz consolidated research routed (intake-31, D-189 — the W4 operator set
-+ the test operationalizations + the bounded crossing-household experiment +
-docs/ref/kurvitz.md ref-21; doc-only, 1852+1 green both ends). iter-157 DONE:
-the companion arming (companion-1 + tune-3, together — the crossing
-household's second hand embodied as pure pack data, the first committed NPC
-movement source, the traveling-knower probe CONFIRMED on the crafted twin,
-the punt pole committed (KI#87 CLOSED); zero core change, 1852+1 green both
-ends). iter-156: the world track's causal mesh audit (W3 — five loops, four
-committed + the credit loop authored; doc-only). iter-155: the first anchor
-pass (A1/A2/A3 — the crossing household as the first meso unit; WORLD_TESTS'
-three OPEN tests → PARTIALLY CONFIRMED; KI#87 opened, closed iter-157).
-iter-154: the agent-dense v3 hybrid pack routed (D-187). iter-153: the
-worldbuild archive intake (D-186 — `docs/worldbuild/` landed, 10 files).
-iter-152: the CORE_DESIGN_RESEARCH deletion + the evidence-class citation
-sweep. iter-151: the semantic documentation compaction pass (D-185 —
-DECISIONS 63→30, TASKS 2422→914). iter-150: the AGPLv3 relicense + the
-standing-backlog revalidation (D-183/D-184). iter-149: pack-4;
-iter-148: pack-1; iter-147: since-1; iter-146: res-1; iter-143: ci-1.**
-
-1. **The owner-gated backlog (the standing rows — the ORDER owner
-   decides, TASKS owns composition, never order; each build row's
-   verification plan rides TEST_PLAN §9's claim packet):** with
-   ci-1/roads-1/res-1/since-1/pack-1/pack-4/companion-1+tune-3
-   consumed and `engine-1` DECIDED (iter-170, D-192 — the build
-   boundary CONTRACTS §4), the session's RECOMMENDED next call
-   (intake-29's readiness order, never the pick) is the `{3–8B,
-   GBNF}` experiment's convening (the decision's remaining
-   measurement — TEST_PLAN §8/§8.5's gap rows + the contract's four
-   new arms, the Rule-9 runner outside the repo) or the build
-   landing itself (the GBNF mapping + the door wiring; INV-4 lifts
-   there) — `presentation-1` follows from the experiment's results
-   (D-022/D-148). The remaining
-   standing rows — REVALIDATED iter-150 (D-184; the per-row state lives
-   in TASKS' Standing rows):
-   `parse-2` (buttons wait on a frontend consumer, multi-intent on
-   live-session evidence — neither is "improve the parser"),
-   `st-2` (consumer-first, parked — no pack has wanted the
-   promotion door), `scav-1` (measurement before mechanism, parked
-   — no derived-state size problem on record), `bg-6` (the SoW audit,
-   D-055 deferral), `pack-3` (one
-   candidate for the next authored pack slot — the 2nd-setting
-   blocker gone with phase 6 CLOSED), `st-4` (rides presentation-1
-   at its write time, D-148), `st-5` (the first real consumer
-   decides — the res-1 sink shape now concrete). mech-2 CONSUMED
-   iter-163 (the caps core + the intake-21 single-event postmortem
-   + the intake-22 DAG export, one mechanism — DEFAULTS bounded,
-   nothing dropped silently, expansion by flag; its not-built
-   residues — the impact-query surface, the first-divergence
-   operator — stay zero-consumer, the first-consumer law). debt-1
-   CONSUMED iter-162
-   (the flood debt's economy arm landed in province_pack; its
-   discrete-event residues — the paper's fall, the clearance lump,
-   the punt's purchase, the player-scaled doors — a future row's
-   own call, never auto-candidates).
-   For the SoW promise
-   debates the intake-27 sacrifice protocol (D-173) and the
-   intake-28 combination fence (D-174). The research posture
-   (intake-29's admission rule, D-175): a new external intake
-   convenes only with a named open build row/standing debate it
-   feeds + a potential falsifier stated up front — new knowledge
-   now comes from building and measuring. pack-4's own honest
-   residues (the future riders' material — the mapping's post-T1
-   rows): the legal exclusion (D-134's state/flag + knowledge-record
-   family), the cultures (name-1 profiles + prohibition sets), the
-   road traffic (depth-7 condensation), the lore hooks (D-140's
-   templates + cause_hook); the ENGINE findings the future rows'
-   material: the group-stock lint gap (the entities vocabulary vs
-   the economy/fold modules), the co-due same-account flow limit
-   (the snapshot from_ — the per-flow re-draft), both recorded in
-   the pack's own notes + D-182. companion-1's own honest residues
-   (the future riders' material): the autonomous follow is
-   LOD-bounded by design (the warm ring waits for the reader — a
-   trailing follower at beat cadence is architecturally impossible
-   under the armed macro clock, the paired mode B legs carry the
-   escort; a never-stranding gradient follower would need a grammar
-   extension — a negated co-location test or a dynamic target — its
-   own consumer's row, never specced here); the beat-carry
-   duplicates (the mid-travel stale position re-passing the gate)
-   die at the door/OCC as bounded intent_rejected no-ops — attempts
-   are facts.
-2. **Track B:** bg-2/3/4/7/8 DONE, bg-6 owner-deferred. The standing
-   gap rows: the {3–8B, GBNF} arm (owner hardware — engine-1's
-   remaining measurement, the experiment convened at the owner's call;
-   the four new arms pinned CONTRACTS §4.3), the bg-7 prose families
-   skipped in the bg-8 heartbeat, the per-family latency distribution.
-   New track-B ideas enter the backlog on the owner's call only.
-3. **The SoW horizon (ROADMAP §6) and the world track
-   (`docs/worldbuild/`, D-186) are the standing frames** now that
-   the ladder is complete: the mediator protocol specs (BRIEF_SPEC
-   and friends — SPECS_BACKLOG) + the dumb-terminal frontend
-   contract; the SoW audit itself stays owner-gated (bg-6); the
-   world track's active frontier is its own plan — the W4 meso
-   expansion COMPLETE (each addition created its new causal coupling,
-   `WORLD_WORKPLAN.md` §6, never this file's queue; W3 the causal mesh
-   done iter-156, widened iter-164/165 — seven loops; A1/A2/A3 done
-   iter-155, the first meso unit authored — ANCHOR_REGION §6.1,
-   its pack embodiment LANDED iter-157/161/162: the second hand, the pole's
-   two halves, the debt's economy arm; the W4 bounded experiment RUN
-   iter-160 — CONFIRMED, the transfer kept; the SECOND meso unit AUTHORED
-   iter-164 — the step bench, candidate 3 CONFIRMED at the authored band:
-   the water's allocation order, the mesh's F loop + three interlock edges;
-   the constructed kinship edge TESTED iter-165 — the winter kin,
-   candidate 4 CONFIRMED at the authored band: the care's reciprocal
-   binding, the mesh's G loop + three interlock edges — the working
-   set's four candidates all answered; the step bench's setting verb
-   COMMITTED iter-167 — the read_stair hinge minting the_step_law, the
-   second meso unit's committed band opened); the next world-track
-   call: the embodiment options — the step bench's remaining two (the
-   notch record's arming, the hatch) and the winter kin's three gaps'
-   class (the relation form, the proof's read, the mourning
-   registration) — the owner's call class, the pole's iter-161
-   precedent; W5's live band (the human tests — biography / humor /
-   heartbreak, the authored halves on record, the live-session band
-   open); or the camp's meso half (the charcoal debt — the causal
-   map's named-not-authored row).
-4. **Nothing is pinned.** The next move is the owner's: the
-   recommended remainder of the sequence (the `{3–8B, GBNF}`
-   experiment — engine-1's remaining measurement, then the build
-   landing + presentation-1 from its results), a world-track call (the
-   embodiment options of either authored addition — the step
-   bench's remaining two or the winter kin's three — the owner's
-   call class, the pole's iter-161 precedent; or W5's
-   live band, or the camp's meso half),
-   the debt-1 residues (the discrete-event doors the arming left
-   un-armed — the paper's fall, the clearance lump, the punt's
-   purchase — each a future row's own call), or a fresh call
-   (the license's `pyproject.toml` field a one-line option if
-   wanted — D-183's recorded follow-up). The three-iteration doc
-   streak (iter-164/165 world-track + iter-166 intake33) is BROKEN:
-   iter-167 landed the embodiment call on this session's fresh owner
-   continuation (the read_stair hinge, code-band, the pole's iter-161
-   precedent); iter-170..173 are doc-only BY THEIR OWN NATURE (the
-   engine-1 convening rounds — the decision, the contract, the evidence
-   rows, the runner handoffs: the runner lives outside the repo, Rule 9;
-   the code band returns at the build's own iteration).
+1. **The doc-3 build** (TASKS standing rows): the state-layer
+   reassembly per the row — STATUS/TASKS/worklog/README to their
+   declared functions, the DECISIONS collapse (D-034/D-185 fires on
+   this call), the TECH_NOTES §6.1 prose pass, the cap guard.
+2. **engine-1 (b)**: the build landing — the GBNF mapping repo-side +
+   the door wiring + the failure→ladder mapping, INV-4 lifting there
+   with the AGENTS §4/§8 edits riding it (CONTRACTS §4 the boundary;
+   §4.3's claim packet F the build's evidence; the adapter contract
+   tests fire at the build).
+3. **presentation-1's write**: the exit criterion MET (iter-174 — the
+   narrator floor measured between E4B and Q9B); the spec fires from
+   the measured results per D-022 (TECH_NOTES §13.1 the material; the
+   three consult cards: intake-30/32/33).
+4. The standing frames: Track B's gap rows (the bg-7 prose families,
+   the per-family latency distribution), the world track's frontier
+   (WORLD_WORKPLAN §6 — the embodiment options, W5's live band, the
+   camp's meso half), the debt-1 residues (each a future row's own
+   call), the SoW horizon (bg-6, owner-deferred). New rows enter on
+   the owner's call only.
