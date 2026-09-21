@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the owner's standing-frames
+call): the charcoal debt's lifecycle + the coupled liabilities (E⇄H) + the seat's succession
+(D-191 answered — the third form); Loop H + 3 interlock edges + the re-weigh crisis + the humor
+probe; 3 gaps recorded, not routed; 7 paths, doc-only (the world track, D-186); 1969+1 + ruff +
+docguard clean both ends; iter-177 evicted per the cap
+
+---
 iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (exp0_week.json +
 test_exp0.py; the verdict: no live deficit at v0.1, the card stays parked, no
 row per D-175) + R1 landed (--paired-delta + TEST_PLAN §6 + the tests; the
@@ -68,11 +75,3 @@ docs/PRESENTATION_SPEC.md (the serializer mapping table + the narrator band; st-
 absorbed — the call budget, the no-tail resolution, thinking-ephemeral, the Script
 Tax); the three consult cards integrated (no shape changed); 6 paths, doc-only;
 1960+1 green + ruff clean at the iter-177 diff; iter-168 evicted per the cap
-
----
-iter-177 · 2026-09-21 · engine-1 (b) — the build landing (D-193): brief/gbnf.py (the
-snapshot→GBNF, the door's shape laws at the source, the golden fixture) + cli/engine.py
-(the ONE network module, INV-4 lifted — AGENTS §4/§8 riding) + the --engine wiring,
-the ladders + the manifest; the stub-server adapter tests + the regex-oracle pins; 22
-paths; 1926+1 BEFORE, 1960+1 after, ruff clean, zero gate edits; iter-167 evicted
-

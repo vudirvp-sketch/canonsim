@@ -50,9 +50,13 @@ to the committed band). The fourth candidate
 is TESTED (the constructed kinship edge — the winter kin,
 `ANCHOR_REGION.md` §6.3, iter-165: the Sarrow need demonstrated at the
 authored band, the mesh's seventh loop G + three interlock edges — the W4
-working set complete). The causal mesh is
-audited — seven loops, four committed (W3 done iter-156 + the W4 additions
-F and G, `ANCHOR_REGION.md` §5).
+working set complete). The camp's meso half — the estranged half's own
+unit, the anchor §4's named row — is authored (the charcoal debt,
+`ANCHOR_REGION.md` §6.4, iter-184: the coupled liabilities + the seat's
+succession — the D-191 turnover's open question answered; the mesh's
+eighth loop H + three interlock edges). The causal mesh is
+audited — eight loops, four committed (W3 done iter-156 + the W4 additions
+F and G + the camp's H, `ANCHOR_REGION.md` §5).
 
 The active deliverable is `ANCHOR_REGION.md`.
 

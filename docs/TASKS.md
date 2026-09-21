@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the charcoal debt, the coupled liabilities, the seat's succession — Loop H + three interlock edges)
 - iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
 - iter-182 · 2026-09-21 · intake-35 — the corpus's second pass: the 44-card families re-confirmed at HEAD, the four precisions riding the intake block, D-195
 - iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed: the drop-in tree refused, the capability/progression + math-mechanism cards parked, D-194
@@ -122,7 +123,6 @@ claim packet)
 - iter-177 · 2026-09-21 · engine-1 (b) — the build landing: the GBNF mapping + the adapter + the door wiring + the ladders, INV-4 lifted (D-193)
 - iter-176 · 2026-09-21 · doc3 — the state-layer reassembly landed (doc-3 DONE) + the mechanical cap guard live
 - iter-175 · 2026-09-21 · docrev1 — the state-layer audit routed, doc-3 OPENED (the owner's doc-revision call)
-- iter-174 · 2026-09-21 · engine-1 round 4 — the full corpus landed at E4B/Q9B, move (a) CLOSED
 
 ## Track B — background (evenings, foreign canon)
 

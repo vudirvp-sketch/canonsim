@@ -326,6 +326,39 @@ catastrophe, two circuits) + three interlock edges (E⇄G, B⇄G, D⇄G —
 `ANCHOR_REGION.md` §5). Partial: the authored band, no live session — a
 real return, a real reader (the meaning distribution's unfinished band).
 
+### PARTIALLY CONFIRMED — The camp's meso half: the charcoal debt (2026-09-21, iter-184)
+
+The camp's named half (the anchor §4's "named, not yet authored" row — STATUS
+Next step's standing frame) walked through the operator stack at the authored
+band over committed substrate only (Garrick's spine, the crofts' stacks, the
+linger beat, the hill prohibition, the carrier's leg, the weighbeam — the
+record: `ANCHOR_REGION.md` §6.4). The function-loss arbiter PASSED: the
+coupled-liabilities function — the two debts' repayment capacities tied
+through the shared artery (the withhold starving the toll, the double toll
+taxing the freight) — is performed by no existing mechanism (the paper prices
+each debt separately, the step law orders water, the notch prices care). The
+assembly probe PASSED (the master, the crews, the carriers — three roles,
+three bounded maps; the withhold the master's rule, the crews' count and the
+carriers' legs what make it bite). The turnover application (D-191) ANSWERED
+— the unit's own named open question: the seat's succession, the third form
+(the family line, the bilateral notch, now the craft's seat — the debt riding
+whoever rules the burn, the hills' unlapseable reading turned on the guild's
+own instrument; the frozen-force path — the guild's book naming a dead man —
+the counterfactual the perturbation test makes). The crisis probe (the
+re-weigh: the factor's runner at the crofts in a price-fall season) walks its
+chain on committed surfaces with three named first-exposure gaps — the camp's
+account, the freight's volume, the tally's read — recorded, not routed (the
+separate-track law). The humor probe's authored answer: the withhold's
+position-dependent joke (the bloom that asks the price before the beam; the
+same words at the guild's table the evasion's confession; the starved winter
+and the shave never joked). The mesh: the eighth loop H AUTHORED (the shave →
+the debt → the withhold → the estrangement's engine, state-closing; the
+disable test + the shared-stage rule re-applied — one chest, two debtor
+behaviors, the paper the shared stage, the alarm's own interlock pattern) +
+three interlock edges (E⇄H, B⇄H, A⇄H — `ANCHOR_REGION.md` §5). Partial: the
+authored band, no live session — a real re-weigh, a real reader (the meaning
+distribution's unfinished band).
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
@@ -341,8 +374,11 @@ iter-165 adds the humor's second family (the notch's position-dependent joke:
 the pole-counting at the beam, the evasion at the guild's table, the dead mark
 and the betrayed edge never joked) and the heartbreak's first authored half
 (the winter kin's mourning rung: the flood year's dead kept by name outside
-the bloodline, the return the loss made durable — the §9 entry above). The
-live-session band stays open.
+the bloodline, the return the loss made durable — the §9 entry above).
+iter-184 adds the humor's third family (the withhold's position-dependent
+joke: the price-question at the beam, the evasion's confession at the guild's
+table, the starved winter and the shave itself never joked — the §9 entry
+above). The live-session band stays open.
 
 ## 10. Test result vocabulary
 

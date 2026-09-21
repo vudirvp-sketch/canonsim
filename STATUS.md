@@ -1,43 +1,39 @@
-Iteration: bg-9 (`bg-9-apiprose` — track B, the API-side prose
-families re-run; the owner's «делай что сможешь сделать сам»
-standing-frames call): bg-7's standing API-side gap row CLOSED at
-the sandbox API engine (glm-4-plus via the z-ai CLI, paced — the
-429 window recovers in ~minutes, the bg-8 deferral economics
-beaten): (ii) the prose floor re-run — 8 beats, 3 accepted / 5 dry,
-175 claims → 25 unknown_event + 8 unknown_entity + 4 prose
-invented_entity + 1 malformed, the claims channel still the
-beat-killer, the NEW event-id mint-from-ticks refusal family, the
-generic-capital floor family now on FIRST replies in the clean arm,
-FP=0 held, the sentence-initial gap 0, the lowercase surface's
-first API-side datum (2 unmodeled, 0 grounded); (iv) the degraded
-arm's state-refusals ROSE 8 → 23 (surface-mirroring extended); (v)
-the cast surface still earns nothing; (iii) the Cyrillic twins —
-validity 7/7 BOTH scripts, the script tax moved into mapping
-quality (en 5/7 alternative, 1/5 full; ru 4/7, 2/5), the
-purse-target confusion reproduced en-side, "барменша" → talk
-npc_barkeep_01 reproduced, the F2 disambiguation question never
-fired. The instrument's honesty notes (the reply-format addendum in
-the system role, the interleaved beats, the re-crafted twins) ride
-TECH_NOTES §10's re-run block.
+Iteration: iter-184 (`iter-184-charcoal1` — the world track, the camp's
+meso half; the owner's «делай что можешь по планам» standing-frames
+call): the estranged half's own meso unit authored at the authored band
+over committed substrate only — the charcoal debt's lifecycle (the
+residue trace + the perturbation test per transition), the coupled
+liabilities (the estrangement's material engine: the withhold starving
+the toll's repayment, the double toll taxing the freight's cost — the
+belief's mechanism at last), and the seat's succession (D-191's open
+turnover question ANSWERED — the third form: the family line, the
+bilateral notch, now the craft's seat; the frozen-force path the
+counterfactual the test names). The mesh's eighth loop H + three
+interlock edges (E⇄H, B⇄H, A⇄H); the crisis probe (the re-weigh — the
+factor's runner at the crofts, the PC's own committed errand) + the
+humor probe (the withhold's position-dependent joke); three
+first-exposure substrate gaps recorded, not routed (the camp's
+account — the debt-1 residue class; the freight's volume; the tally's
+read hinge).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 1969 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT acd7041 BEFORE working — 1969+1 green, ruff
+verified at BASE_COMMIT 6d05469 BEFORE working — 1969+1 green, ruff
 clean, docguard clean — and re-verified after with the full diff in
 place) ·
 Date: 2026-09-21 ·
-Scope: docs/TECH_NOTES.md + docs/TEST_PLAN.md + docs/TASKS.md +
-STATUS.md + worklog.md + tests/test_digest.py — 6 paths (the
-numbers' distillation + the state docs + the digest drift pin's
-same-iteration widening to Track B's bg-N STATUS form, the test's own
-law; the runner + transcripts outside the repo per Rule 9 —
-`git status` verified clean through the run). Track A untouched this
-session — track B never blocks it (ROADMAP §1). The prior
-iterations' record: iter-183 (residues34), iter-182 (intake-35),
-iter-181 (intake-34), iter-180 (round 6), iter-179 (round 5),
-iter-177/178 (engine-1 (b) + presentation-1), iter-176 (doc-3). The
-detail lives in the worklog + git.
+Scope: docs/worldbuild/ANCHOR_REGION.md + docs/worldbuild/WORLD_TESTS.md +
+docs/worldbuild/WORLD_AUTHORING.md + docs/worldbuild/WORLD_WORKPLAN.md +
+STATUS.md + worklog.md + docs/TASKS.md — 7 paths (the authored unit §6.4 +
+the mesh's Loop H + the test record + the state docs; over the 3–5 soft
+limit, the unit's form requiring the anchor + the test record in the same
+iteration — noted per AGENTS §2.3). Track A and track B untouched this
+session — the world track a separate track (D-186, never a second queue).
+The prior iterations' record: bg-9 (apiprose), iter-183 (residues34),
+iter-182 (intake-35), iter-181 (intake-34), iter-180 (round 6), iter-179
+(round 5), iter-177/178 (engine-1 (b) + presentation-1). The detail
+lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -93,12 +89,10 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**bg-9 DONE: the API-side prose families (ii)–(v) re-run — bg-7's
-standing API-side gap row closed (the second API-side datum; the
-refusal families drift — the event-id mint, the generic-capital
-family into the clean arm, the script tax into mapping quality —
-while the claims-channel dominance + the floor's FP=0 hold;
-TEST_PLAN §8.5 + TECH_NOTES §10's re-run block).**
+**iter-184 DONE: the camp's meso half — the charcoal debt authored
+(the coupled liabilities + the seat's succession, D-191's turnover
+answer; Loop H + three interlock edges — ANCHOR_REGION §6.4, WORLD_TESTS
+§9's record).**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -108,12 +102,16 @@ TEST_PLAN §8.5 + TECH_NOTES §10's re-run block).**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-2. The standing frames: the world track's frontier (WORLD_WORKPLAN
-   §6 — the embodiment options, W5's live band, the camp's meso
-   half), the debt-1 residues (each a future row's own call), the
-   SoW horizon (bg-6, owner-deferred — long-parked per the owner's
-   2026-09-21 call). Track B's gap rows all closed (round 4 + bg-9).
-   New rows enter on the owner's call only.
+2. The standing frames: the world track's frontier — W5's human tests
+   (the live band: the meaning distribution's unfinished half, a real
+   reader) and the embodiment options (the owner's call class: the
+   pole's iter-161 precedent family, now joined by the camp's three
+   gaps — the account, the freight volume, the tally's read), the
+   debt-1 residues (each a future row's own call — the camp's account
+   the class's newest member), the SoW horizon (bg-6, owner-deferred —
+   long-parked per the owner's 2026-09-21 call). Track B's gap rows
+   all closed (round 4 + bg-9). New rows enter on the owner's call
+   only.
 3. The intake-34/35 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog mechanism family (the per-card pass done at

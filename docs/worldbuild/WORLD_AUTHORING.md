@@ -82,8 +82,11 @@ The probe's **turnover application** (D-191, the anti-freeze law — buildings
 and records never die, holders do): every durable authored force names what
 carries its function when the holder dies or leaves — an unanswered succession
 question is a frozen force, and a world of frozen forces stagnates no matter
-how rich its residue. The winter kin's notch passing down both lines is the
-committed instance; the camp's charcoal debt is the open one.
+how rich its residue. The winter kin's notch passing down both lines (§6.3)
+and the charcoal debt's seat-succession (§6.4 — the debt riding the craft's
+seat, never the blood) are the answered instances; the guild's own chest —
+who carries the paper's function when the factor's book closes — is the
+open one.
 
 ## 6. Causal authoring pipeline
 

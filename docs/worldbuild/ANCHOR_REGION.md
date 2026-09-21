@@ -87,21 +87,21 @@ economic and social experience.
 | Layer | Sarrow Vale surface | Open question / first answers |
 |---|---|---|
 | Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
-| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet; the water's ALLOCATION answered at the authored band, §6.2 — the step law, order before price) |
-| Trade | road traffic, market, toll, waybill, guild | answered (§6.1): the crossing household carries the flood season's cost; the croft camp carries the shaved weights — the two named cost-carriers of a disrupted route |
-| Institutions | guild, garrison, old families, watch rotation | answered three times: the crossing under the guild's paper (§6.1, the first named meso mediator), the water under the practitioners' step (§6.2 — the step bench, the second meso unit) and the care under the winter kin's recognition (§6.3 — the constructed kinship edge, the third W4 addition: no office, no court, the road's word the holder); the camp's meso half (the charcoal debt) named, not yet authored |
-| Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one |
-| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the law's own other half authored (§6.3): the care held as the notch, the mourning widened past blood; the camp's family life open |
-| History | feud / burned mill / generated historical events | three events, four institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt and the winter kin (§6.1, §6.3 — one catastrophe, two circuits); the quarrel's pact → the step law (§6.2); the rest of the 150-year chronicle open |
+| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet; the water's ALLOCATION answered at the authored band, §6.2 — the step law, order before price; the charcoal's half authored §6.4 — the withhold: the supply held before the price, the scarcity's answer at a tilted beam) |
+| Trade | road traffic, market, toll, waybill, guild | answered (§6.1, §6.4): the crossing household carries the flood season's cost, the croft camp the shaved weights — the two named cost-carriers now one coupled system (both papers, one chest: the estrangement's engine) |
+| Institutions | guild, garrison, old families, watch rotation | answered three times: the crossing under the guild's paper (§6.1, the first named meso mediator), the water under the practitioners' step (§6.2 — the step bench, the second meso unit) and the care under the winter kin's recognition (§6.3 — the constructed kinship edge, the third W4 addition: no office, no court, the road's word the holder); the camp's meso half authored (§6.4 — the charcoal debt under the camp's own word, the seat's succession) |
+| Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1, §6.4): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one (§6.4: the belief's mechanism — the coupled liabilities the belief misreads) |
+| Culture | lowland/hill names, vocabulary, shelter law, wergeld memory | answered at the crossing (§6.1): the law held as the family's name, the debt as the table's silence, the pole-or-road question as the heir's inheritance; the law's own other half authored (§6.3): the care held as the notch, the mourning widened past blood; the camp's own law authored (§6.4 — the word and the tally: the camp answers the family-life question with a craft, the seat never the blood) |
+| History | feud / burned mill / generated historical events | three events, four institutions named: the feud's fire → the vigil (Loop B); the flood year → the crossing's debt and the winter kin (§6.1, §6.3 — one catastrophe, two circuits); the quarrel's pact → the step law (§6.2); the shave → the charcoal debt (§6.4 — living memory, two seasons back: spine-committed, never the chronicle's row); the rest of the 150-year chronicle open |
 | Knowledge | witnessed events, rumors, watch suspicion, road knowledge | answered in the meaning slice (§7.1): the four-position asymmetry map over one toll |
 | Weather/calendar | markets, fairs, seasons, storm chain | answered (§6.1): the high_water rise → the punt men's double toll — the custom as persistent social adaptation; the household's four-phase year |
 | Read-side meaning | cards, chronicle, lore, named travelers, scene markers | answered (§6.1): the flood-debt lever set — whoever learns the flood story holds a different lever at the stair; the wergeld duty already live on the road |
 
-## 5. The causal mesh (W3 — audited iter-156; the W4 additions F — iter-164, G — iter-165)
+## 5. The causal mesh (W3 — audited iter-156; the W4 additions F — iter-164, G — iter-165; H — iter-184)
 
-Seven loops, each a circuit that returns to its own driver changed. The audit's
+Eight loops, each a circuit that returns to its own driver changed. The audit's
 two laws: the **disable test** — remove one loop's unique driver, and the other
-six must still run — and the **shared-stage rule** — two circuits sharing
+seven must still run — and the **shared-stage rule** — two circuits sharing
 driver AND mediator are one mechanism counted once; sharing the response stage
 alone is an interlock, never a collapse.
 
@@ -238,6 +238,30 @@ the obligations, household-bilateral). The B⇄G edge: the betrayal inversion
 — a winter kin turned enemy is the feud's next material, and the exclusion
 rung is the door they meet at.
 
+### Loop H — the charcoal camp: the shave → the debt → the withhold → the estrangement's engine (AUTHORED — §6.4's unit, iter-184)
+
+`the shave (the guild factor's beam short the camp's bloom, two seasons back — a one-off institutional betrayal, living memory, never the chronicle's row) → the charcoal debt (guild paper against the burn's future) → the withhold (the bloom held back when the price turns — the camp's production posture, AP-8's fourth) → the beam's thin iron and the artery's thinning freight → both papers squeezed at the one chest (the guild's collection, the co-due limit) → the estrangement's belief reinforced (each half reading the other the favored one) → the next price-turn's withhold deeper`.
+
+Closing edge: state-closing at the authored band — the belief is the
+circuit's own living state; each price-turn re-prices the withhold and the
+belief together. Band honesty: the withhold's beat is committed (the linger,
+AP-8's fourth; the brief's directive the word's own text), the shave is
+committed (the spine's cause field), and the debt's paper + the coupling are
+authored (§6.4); the camp's account has no committed surface (the debt-1
+residue class). The distinction from E (the sibling paper): one chest, two
+debtor circuits — the crossing's mediator is the toll's custom (the price
+bent: the double toll), the camp's is the burn's discipline (the supply
+held: the withhold); the paper is the shared stage they interlock at, the
+alarm's own pattern (A⇄B) — an interlock, never a collapse; different
+residues (the road's word vs the camp's word + the belief), different
+failure paths (the bend hardening into custom vs the withhold hardening into
+the estrangement's arithmetic). The disable test passes both ways (remove
+the flood, the charcoal debt still collects; remove the shave, the flood
+debt still collects). The distinction from B (the grievance family): the
+shave is the market's betrayal (the beam's arithmetic), never the feud's
+fire — the grievance axis carries it (the master's 30, the old-families
+row) but the circuit's response is economic, never the vigil.
+
 ### The verdict
 
 | Loop | Driver | Mediator | Response | Residue | Closure | Band |
@@ -249,14 +273,18 @@ rung is the door they meet at.
 | E | the flood year | the debt's paper | the double toll | reputation + standing | state | committed beats, authored paper; the flow armed iter-162 |
 | F | the recurring band | the step rule + the reading | the allocation's acts | legitimacy / resentment + the tally's record | state | authored (§6.2) |
 | G | the minted notch | the road's word + the notch's proof | the obligations performed | the living recognition (or the inverted grievance) | state | authored (§6.3) |
+| H | the shave (the beam's short reading) | the withhold (the burn's discipline) | the thin iron + both papers squeezed | the camp's word + the estrangement's belief | state | authored (§6.4) |
 
-Seven loops pass the disable test — no two share a driver, and the one shared
-stage (the triangle's threshold dynamics feeding the intent door) carries two
-different axes (fear, grievance) without making the loops one mechanism. The
-band split is honest: A–D committed, E committed at its beats with the paper
-authored and the flow armed (iter-162), F authored over committed gauges
-(iter-164), G authored over the committed notch habit and the road's word
-(iter-165). Ten named interlock edges: the alarm wakes both fear and grief
+Eight loops pass the disable test — no two share a driver, and the shared
+stages carry different axes without making the loops one mechanism: the
+triangle's thresholds (fear, grievance) and the guild's one chest (two
+papers, two debtor behaviors — the response stage shared, E⇄H an
+interlock, never a collapse). The band split is honest: A–D committed, E
+committed at its beats with the paper authored and the flow armed
+(iter-162), F authored over committed gauges (iter-164), G authored over
+the committed notch habit and the road's word (iter-165), H authored over
+the committed spine, linger and prohibition (iter-184). Thirteen named
+interlock edges: the alarm wakes both fear and grief
 (A⇄B), the rain erases the smoke (C→A), the condensation materializes the
 feud's carrier (B⇄D), the rise prices the toll (C⇄E), the season forces the
 step (C⇄F — the rise turns the fourth, the dry band presses the second), the
@@ -269,8 +297,15 @@ return lands in the stores-counting month, the debt's own reckoning season);
 the feud's arithmetic meets the notch at the door (B⇄G — the exclusion rung
 against the wergeld word; the betrayal the inversion path); and the road
 materializes the return (D⇄G — the winter kin's claimant a named stranger,
-the condensation's committed surface the carrier). Independent loops,
-interlocked edges — not one engine wearing seven masks.
+the condensation's committed surface the carrier); both papers, one chest
+(E⇄H — the withhold starves the toll's repayment, the double toll taxes the
+freight's cost: the estrangement's material engine, the belief its
+misreading); the law bounds the flaw (B⇄H — the withhold never hides a blood
+price, the hill prohibition's own line; and the master wears the feud's hill
+head, the shave's grievance riding the axis the vigil reads); and the worst
+fire trap is the debt's own collateral (A⇄H — a stack fire burns the
+repayment itself, the fire loop hitting the paper's stock). Independent
+loops, interlocked edges — not one engine wearing eight masks.
 
 ## 6. Meso frontier
 
@@ -675,6 +710,165 @@ call class (the pole's iter-161 precedent); the live-session question stands
 (a real return, a real reader: the meaning distribution's own unfinished
 band, §7.1's form).
 
+### 6.4 The charcoal camp (WORKING — the camp's meso half, the fourth authored unit, iter-184)
+
+The crofts' smelting camp: the estranged half's own meso unit — the charcoal
+debt's lifecycle, the withhold's discipline and the seat's succession —
+authored over the committed substrate (Garrick's spine, the crofts' stacks,
+the linger beat, the hill prohibition, the carrier's leg, the weighbeam) —
+no new entity classes, no new institution beyond the camp's own word: the
+craft's discipline, the step bench's gateless class (a count kept at the
+stacks, never a court with officers).
+
+**Composition.** The assembly probe's answer: the camp is not its master.
+Three roles, each bounded at its own door: the master (Garrick, committed —
+the burn's rule, the paper's named holder; the spine's flaw is the
+withhold's own behavior); the burn crews (the stacks' labor — the camp's
+own count, the tally's hands); the hill carriers (the crofts' men on the
+artery, committed — the road traffic's hill arm, the freight's leg, the
+wergeld word's walkers). The guild's factor is present but gateless (the
+paper's other half lives at the beam — the crofts never see the book); the
+watch absent by vocabulary (the keep's gate, never the crofts' rows). The
+unit cannot be honestly played as one homogeneous actor: the withhold is
+the master's rule, but the crews' count is what makes it provable and the
+carriers' legs are what make it bite — the master alone is a mood, the camp
+together is a posture.
+
+**The chain (the doctrine's ladder, walked once):**
+
+| Rung | The charcoal camp |
+|---|---|
+| CAUSE | the shave — the guild factor's beam shorted the camp's bloom two seasons back (committed: the spine's cause field; "weighed short twice" the master's own voice) and the camp starved that winter |
+| POSSIBILITY | the crofts' position: the iron is the artery's freight (the bloom must walk the road to the bank market), and the burn is the camp's own craft — the stacks and the heap are the camp's to fill or to hold |
+| PRESSURE | the charcoal debt — guild paper: the starved winter's borrowing against the burn's future, the stores bought on the guild's coin |
+| ACTORS | the master (the paper's name); the burn crews (the count's hands); the hill carriers (the freight's leg); the guild's factor (the paper's other half, at the beam); the road's strangers (the freight's witnesses) |
+| INSTITUTION | the camp's own word — "weight is weight, shaved is shaved" (committed: the brief's directive): the anti-shave discipline, the count kept honest at the stacks, the tally cut in wood; no office, no court — the craft's law |
+| KNOWLEDGE | the master knows the debt's size and the shave's arithmetic; the crews know the burn's state and the stacks' count; the carriers know the toll and the road; the guild knows the paper (both rows) and the beam's price; the crossing knows the toll's thinning, never its cause — each map bounded and legitimate |
+| CONSEQUENCE | the withhold: the bloom held back when the price turns (committed: the linger beat, AP-8's fourth) — the camp's answer to a tilted beam is to be unweighable at it; the honest boundary: the wergeld's payment never hides (the hill prohibition, the flaw this law bounds), the market's price always may |
+| RESIDUE | the debt standing; the camp's word (the honest count as the road's own knowledge); the estrangement's belief — each half reading the other the guild's favorite, both wrong, both committed to it |
+| NEW OPTION | the debt clearable (a strong honest burn season — the full stacks honestly weighed, the repayment outrunning the paper); or the withhold hardening into the camp's custom (the iron that never sits on a tilted beam); the seat's succession tested (the master gone, the paper naming a dead man — the guild's reading against the camp's); the re-weigh (the two records meeting: the factor's book against the camp's tally) |
+
+**The camp's year** (the burn as lived, over the committed phases): thaw —
+the stacks' tail burns first (the winter's heat bought on borrowed coin),
+the road soft, the freight light; high_water — the fords drown, the
+carriers wait, the bloom pools at the crofts (the artery's own hold — the
+freight's forced storage); long_light — the cut and the burn: the fat
+season's stacks built, the carriers walking heavy, the payment season;
+first_frost — the weighing season: the bloom walked to the beam, the stores
+counted against the debt (the stores-counting month, §6.3's own reckoning
+season).
+
+**The debt's lifecycle (the §8 trace, run iter-184):**
+
+| Rung | The charcoal debt's lifecycle |
+|---|---|
+| EVENT | the shave (two seasons back — the beam's reading short, the camp starved) |
+| RESIDUE | the debt standing (guild paper); the camp's word (the honest count); the estrangement's belief |
+| CARRIER | the guild's paper (the factor's book) + the camp's tally (the notch habit's own class — a people that signs with a blade: the count cut in the tally-stick at the stacks) + the road's word (the freight's witnesses) |
+| HOLDER | the paper names the master; the camp reads the seat — two theories of one debt, deliberately both held |
+| TRANSFORMATION | partial repayment (a fat burn season's surplus); the withhold deepening (the price falling, more hidden) |
+| TRANSFER | the seat's succession: the master's seat passes to whoever the camp can hold at the burn (the crews' recognition), the tally-stick with it — the debt attached |
+| CLEARANCE / INHERITANCE | the strong honest season outruns the paper; or the debt outlives the man — the hills' unlapseable reading (the wergeld law's own arithmetic applied to the guild's instrument: once named, stays named); the family inheritance refused (the camp has a craft, not a bloodline — the crossing's form deliberately not repeated) |
+| NEW OPTIONS | the re-weigh; the succession's test; the withhold's custom |
+
+The trace's explanatory gain at the authored band: the estrangement gains its
+material engine — the two debts are coupled liabilities. The camp's withhold
+starves the crossing's repayment (the artery's freight is the toll's own
+freight: fewer bloom loads walking, thinner toll), and the crossing's double
+toll taxes the freight's cost (the camp's carriers paying the skim on their
+own bloom). Each half's debt-answer damages the other's capacity; the belief
+— the other side the favored one — is the misreading of a coupling the paper
+itself creates. Without the unit the estrangement is vocabulary; with it,
+arithmetic.
+
+**The succession (the turnover application, D-191 — the unit's own named
+question, answered).** The anti-freeze law: who carries the debt's function
+when the holder dies or leaves? The crossing's answer: the family line (the
+drowned generation's debt the toll-taker's now, the second hand's after).
+The winter kin's: both lines (the notch bilateral). The camp's — the third
+form: the seat. The debt rides the craft's succession, never the blood: the
+seat passes to whoever the camp can hold at the burn, the tally-stick's
+handing-over its mint, and the paper's obligation travels with the seat —
+the hills' unlapseable reading turned on the guild's own instrument. Two
+theories of one debt meet at the succession: the guild's book reads a man's
+name (the factor's row dies with its debtor — the frozen-force path, the
+paper uncollectable, the camp escaped by grief); the camp's tally reads the
+seat (the count continues — whoever masters the burn masters the debt). The
+perturbation test passes per transition: the tally's removal leaves the debt
+one-sided (the guild's book the only record — the re-weigh's leverage gone,
+the camp's word unprovable); the seat-reading's removal kills the debt with
+the master (the frozen-force path — the anti-freeze law's own warning made a
+test); the withhold's removal returns the camp to the shave's repetition
+(the bloom sits on the tilted beam — the camp starved by its own passivity,
+the belief's engine gone); the belief's removal leaves the coupling
+uninterpreted (the toll still thins when the iron hides, but no one asks
+whose paper the thinning serves — the reconciliation question unasked). Each
+removal changes reachable futures, not prose.
+
+**The crisis probe (the biography form, WORLD_TESTS §3).** The re-weigh: the
+factor's runner at the crofts in a price-fall season — the audit's own
+errand (committed: the PC's role, a downstream trading house's
+errand-audit up-country) meeting the withhold (the linger beat live, the
+bloom held back). The required decisions, all on committed surfaces: the
+weighing question (the master brings the bloom to the beam at the fallen
+price, or holds — the flaw's own beat, AP-8's fourth); the count question
+(the runner reads the tally — the camp's word against the factor's book,
+"weight is weight, shaved is shaved": the two records meeting); the freight
+question (the carriers walk or wait — the toll's cost against the price's
+turn, the coupled liabilities at their own door). The consequences diverge
+per door: the bloom weighed — the paper paid down and the shave's arithmetic
+repeated (the camp's word spent for the debt's standing); the bloom held —
+the artery thins, the crossing's toll starves (E⇄H biting at the runner's
+own errand), the guild's squeeze landing on both papers; the tally read —
+the runner's book gains a second column (the camp's count in the guild's own
+record: the reconciliation's first row, or the camp's word spent — the count
+public, the withhold harder to keep). The debt stays untouched by the tally's
+honesty — the boundary: the count prices trust, never coin (the paper's fall
+and the withhold's custom stay future calls). The probe's missing links —
+three first-exposure substrate gaps, recorded, not routed (the
+separate-track law): the camp's account (no committed account state —
+debt-1 armed the crossing's only; the camp's row would be its own future
+row, the debt-1 residue class), the freight's volume (the road's
+road_counts aggregate carries the road's cardinality, never the camp's bloom
+— the withhold's volume effect has no committed surface), and the tally's
+read (the count has no read hinge — the `read_pole` family; the re-weigh's
+proof would need its own hinge, the pole's iter-161 precedent's class).
+
+**The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
+joke, market day at the beam: "Ask the crofts what the bloom weighs —
+they'll ask the price first" — the withhold made comedy (iron that will not
+sit on the scale until it knows what it is worth), no name named, every
+hearer owning the rule. The same words at the guild's weighing day read as
+the evasion's confession (the collector hears the debt dodged in the price's
+question — the paper has no row for a held bloom). Never joked: the starved
+winter (the camp that ate on the guild's coin and remembers the price) and
+the shave itself (the beam's theft — never funny at either table, the feud's
+own class). The joke's position-dependence is the shared-categories proof —
+the withhold is a category the whole vale owns, and the beam's laughter
+prices the camp's rule into shared standing while the guild's table holds
+its ledger silence.
+
+**Embodiment (committed vs authored).** Committed: the crofts (the camp, the
+stacks, the bloom heap — the province's worst fire trap, the fire spots),
+Garrick's spine (the want/need/flaw/cause — the withhold's own behavior),
+the linger beat (AP-8's fourth: the bloom held back when the price turns),
+the hill prohibition (the wergeld memory — the withhold's boundary), the
+brief's directive + the voice exemplars ("Weighed short twice. Never
+again."), the wergeld count hook (the blood price counted aloud at the
+stacks), the old-families group (the master the feud's hill head, grievance
+30), the road traffic (the hill carrier the crofts' man on the artery), the
+weighbeam (the pricing surface, Maren's flaw its tilt), the charcoal sack
+(the flammable prop), the PC's errand (the audit's carrier), the seasons
+(the four phases' year). Authored here (WORKING): the debt's own arithmetic
+(the starved winter's borrowing — the paper's charcoal row), the camp's
+tally (the count's carrier, the notch habit's class), the seat's succession
+(the third form), the coupled liabilities (the estrangement's engine), the
+belief's mechanism, the crews' roles. The unit's embodiment options — the
+camp's account, the freight's volume surface, the tally's read hinge — stay
+the owner's call class (the pole's iter-161 precedent, the debt-1 residue
+class); the live-session question stands (a real re-weigh, a real reader:
+the meaning distribution's own unfinished band, §7.1's form).
+
 ## 7. Meaning frontier
 
 The current region is already strong at mechanical composition. The next depth
@@ -760,7 +954,12 @@ the notch and the resentment → the changed options) and a third time over the
 care's band (§6.3's winter kin, iter-165: the stranded season walked the same
 chain — the winter after the flood → the shelter law held → the notch minted → the
 bounded maps → the road's word → the living recognition → the return's
-standing option). The implementation witness carries the chain at the
+standing option), and a fourth time over the estrangement's band (§6.4's
+charcoal camp, iter-184: the shave walked the same chain — the beam's short
+reading → the charcoal debt under the camp's word → the withhold → the
+coupled liabilities → the bounded maps → the road's word → the belief as
+residue → the re-weigh and the succession's test as changed options). The
+implementation witness carries the chain at the
 single-NPC + companion band (iter-157: the second
 hand, the pole — KI#87 closed; iter-161:
 the pole's social half — the recognition read, the lever chain, the theft
