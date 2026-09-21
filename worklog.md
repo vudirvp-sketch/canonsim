@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-182 · 2026-09-21 · intake-35 — the corpus's second pass (D-195, the owner's
+call firing the deferred trigger): the 44-card families re-confirmed at HEAD,
+zero new consumers, the ref-file record still deferred; the four precisions
+riding the intake block; 5 paths, doc-only; 1962+1 + ruff + docguard clean
+both ends; iter-172 evicted
+
+---
 iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed (D-194): the
 map (the block FRESH; the Dense hybrid already intake-30; the doctrine the standing
 discipline's live form), the drop-in REFUSED (parallel layer), the capability +
@@ -54,14 +61,6 @@ sandbox-validated by the stub-client full-corpus walk; TECH_NOTES §13.1 the rou
 record; 4 paths, doc-only; 1900+1 green at 69db4f4; iter-163 evicted per the cap
 
 ---
-iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the `--arm all` crash triaged
-(both defects runner-side: the v1 grammar's un-encoded shape laws + the battery's
-ParseError-only catch; the census unwrap bug found in validation); the runner v2
-delivered outside the repo, validated against the REAL doors (2109 docs pass the laws
-+ the gate); 4 paths, doc-only; 1900+1 green at dcba648; iter-162 evicted per the cap
-
-
----
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:
 docs/PRESENTATION_SPEC.md (the serializer mapping table + the narrator band; st-4
 absorbed — the call budget, the no-tail resolution, thinking-ephemeral, the Script
@@ -74,5 +73,4 @@ snapshot→GBNF, the door's shape laws at the source, the golden fixture) + cli/
 (the ONE network module, INV-4 lifted — AGENTS §4/§8 riding) + the --engine wiring,
 the ladders + the manifest; the stub-server adapter tests + the regex-oracle pins; 22
 paths; 1926+1 BEFORE, 1960+1 after, ruff clean, zero gate edits; iter-167 evicted
-
 

@@ -2958,6 +2958,70 @@ per-card math verification + the ref-file deep record) DEFERRED behind
 its own trigger: a named row asking for a mechanism family, or the
 owner's explicit call.
 
+**The ultimate research corpus — the second pass (intake-35, iter-182,
+D-195 — the owner's «продолжай и прочую работу с архивом, я хочу чтобы
+ты извлек пользу по максимуму из идей, механизмов и предложений внутри!
+мне главное качество в долгосрок» call firing intake-34's deferred
+trigger; the inspiration & transfer analysis posture: underlying
+principles and mechanisms, never surface labels or ready dictionaries;
+the corpus stays outside the repo, the convenience-copy law; every
+disposition re-verified against HEAD — the full one-pass table: the
+upload + git at this row's commit).** The verdict — the 44-card family
+dispositions and the two parked cards' FACT tables independently
+RE-CONFIRMED at HEAD (the anchors: `core/rng.py`'s seven
+content-addressed stream families — the semantic-addressing principle
+already the repo's stream-level form, the draw-level half correctly
+deferred behind the lazy-chunk consumer; `mechanics.py why`'s
+single-parent chains covering the current causal consumers;
+`balance_harness`'s marginal-only reporting — R1's substrate fact,
+code-verified; M4's internal-diversity form vs the corpus's
+JSD-vs-baseline — a distinct question, parked with R7); zero new
+build-grade items; zero new consumers found; the ref-file deep record
+REMAINS deferred — its trigger is a named row consuming a specific
+mechanism family, never an inspiration pass. The confirmation family
+(the corpus's strongest principles re-derive standing law, nothing to
+land): materialized causal residue = INV-1's own point; heterogeneous
+agency = depth-6's faction chains; the peripheral observer probe = the
+brief's O(relevance) + the knower boundaries; the promotion rule's
+eight gates = L13 + D-175 + the first-consumer law, distributed; the
+identity algebra = the landed id family (intent/event ids,
+`prefix_sha256`, `grammar_fingerprint`, the manifest sha256); the
+two-baselines and environment caveats = the env-pin law (TEST_PLAN
+§1.1). Four precisions (each rides this block, one pointer from its
+consumer):
+
+1. **Experiment 0's reframe** (the parked capability card's falsifier,
+   sharpened — INFERENCE): the landed folds already implement
+   differential evidence weighting (knowledge = fidelity-weighted,
+   echo/traits = recurrence-weighted, reflection =
+   contradiction/staleness-weighted) — the null outcome is «growth runs
+   on the landed folds», never «no growth»; the discriminating scenario
+   is procedural skill (the musket stress case: knowledge records +
+   traits exist, no per-actor resolution modifier). No card edit — the
+   card's own decision rule carries it.
+2. **R1's sharpest argument** (the owner's pending methodology call —
+   INFERENCE over the corpus's MEASURED ratios): M3, the gate-read
+   causal-chain metric, is the noisiest under marginal reporting (0.338
+   vs 0.011–0.039); the seed ranges pair by construction across arms,
+   but the harness computes no paired Δ — the report is the marginal
+   table (code-verified); R1 is the reporting change alone.
+3. **The deletion criterion** (TEST_PLAN §9's claim packet — the
+   corpus's six-question doctrine's one unnamed half: the Falsifier
+   guards admission, the deletion criterion guards retention; the repo
+   practices it distributed — the KI cleanup, the doc collapses, the
+   deferred rows' re-trigger clauses): PROPOSAL / UNRESOLVED, the
+   owner's call; the first-consumer law holds — the §9 field waits for
+   a claim packet that actually needs it.
+4. **The generalized-controls hypothesis** (the empty-ablation rule is
+   the sham-control principle's first landed instance; the general form
+   — every intervention experiment names its positive/negative/sham
+   arms — waits for a second instance in a different protocol):
+   HYPOTHESIS / DEFERRED.
+
+Landed: D-195 (the D-119 family row's extension) + this block + the
+state docs. The build queue UNTOUCHED — nothing unpins, nothing
+reorders; zero build-grade items; zero production behaviour change.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
