@@ -7,6 +7,41 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
+bundle back + the `--arm all` crash triaged; the runner v2
+delivered outside the repo (the «ты просил бангл прислать с тестов,
+но там еще и ошибки в консоли вылезли» report)
+- triage: the crash is runner-side, BOTH fatal defects — the v1 GBNF
+  did not encode the door's shape laws (E4B at s2c1: take +
+  target tex_0000 + texture — the one-path combo; the door's
+  RunnerError per PARSER_SPEC §4, the repo clean, INV-4 unchanged)
+  and the battery's `_apply_parse_reply` caught only ParseError; a
+  third defect found in sandbox validation: the agreement census
+  compared the intent object against the pin's reply wrapper (every
+  comparison kind_mismatch — the smoke bundle's agreement rows carry
+  no signal)
+- v2 handoff: per-verb canon/texture path variants (one path never
+  both; the target enum canon-nouns-only; the drawn-N ticks field
+  required; the JSON-schema twin the same laws) + the door_error
+  tally (terminal for the cycle, door_shape_errors in the metrics,
+  never fatal) + the census unwrap; sandbox-validated against the
+  REAL doors at the s2 snapshot: v1's enumerated language contains
+  exactly the crashing form, v2's 2109-doc language (2057 bare)
+  passes the shape laws + the boundary gate on every document, the
+  exact crash reply replayed → tallied + the harness reusable + the
+  next gold cycle accepted+pinned; ruff on the runner: zero findings
+  in the changed code (20 pre-existing ≤ v1's 21, untouched)
+- docs: TECH_NOTES §13.1 (the falsified "shape errors structurally
+  impossible" corrected + the v2 record; 961 lines — the §6.1
+  standing over-cap, pure measured substance), TASKS (the engine-1
+  row's round-2 state + the ledger line), STATUS re-pin + the
+  KI#88/#89 deletion (closed iter-169, the AGENTS §5 2-iteration
+  cleanup law — the iter-167 empty-section precedent form); 4 paths,
+  doc-only, zero engine code in the repo; verified BEFORE at
+  BASE_COMMIT dcba648 (1900+1 green, ruff clean — the iter-171 pin
+  re-confirmed) and re-verified after: 1900+1 green, ruff clean;
+  iter-162 evicted per the worklog cap
+---
 iter-171 · 2026-09-21 · engine-1 (move a) — the {3–8B, GBNF} experiment
 convened (the owner's «за 1 раз как можно больше тестов… разбирайся на
 своих мощностях» call): the Rule-9 runner delivered outside the repo
@@ -260,26 +295,4 @@ mechanism — defaults bounded, nothing dropped silently, expansion by flag
   re-confirmed) and re-verified after: 1878+1 green, ruff clean;
   not-built residues (impact-query, first-divergence operator) stay
   zero-consumer per the first-consumer law; iter-153 evicted per the cap
----
-iter-162 · 2026-09-20 · debt-1 — the standing row's build (the owner's
-«продолжай работу, где логично» continuation call over the iter-161
-routing): the flood debt's economy arm landed in province_pack as PURE
-PACK DATA over res-1, zero core — the THIRD consumer arming
-- pack: entities.json (the toll-taker's thin surplus coin 2 + the
-  weighbeam chest coin 40 — the grim till's location form, the group
-  taking no stock: the entity-lint closed vocabulary, the finding
-  recorded), rules.json (the economy block: the net source +2 + the
-  take +4, both sources — THE FOLD answering D-182's co-due limit by
-  construction; the story listing + the budget re-declare 60→65),
-  templates.json (the reckoning line); tests: test_debt1.py (+9, the §9
-  claim packet), test_economy.py (the unarmed law's third consumer)
-- docs: TASKS (row collapse + ledger), STATUS re-pin, the three
-  worldbuild owners (ANCHOR_REGION §6.1, WORLD_WORKPLAN §2/§6,
-  WORLD_TESTS §9); 11 paths (the iter-157/161 pack-landing precedent);
-  zero corpus price (the golden T1 byte-untouched, pinned; the
-  committed year run sees the flows by its own year-scale design)
-- verified at BASE_COMMIT 2ea09ac (1863+1 green, ruff clean — the pin
-  re-confirmed) and re-verified after: 1872+1 green, ruff clean;
-  honest residues: no terminus/amortization in the flow vocabulary —
-  the clearance lump + the punt purchase are discrete events, no
-  player-scaled door armed; iter-152 evicted per the cap
+

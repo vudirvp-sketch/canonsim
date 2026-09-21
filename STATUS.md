@@ -1,50 +1,50 @@
-Iteration: iter-171 (`iter-171-engine1a` — the {3–8B, GBNF} experiment
-CONVENED, the owner's «за 1 раз как можно больше тестов… лучше вообще
-выяснить все про llama.cpp и дальше уже разбирайся на своих
-мощностях» call): the Rule-9 runner DELIVERED outside the repo (the
-Vantiel-handoff pattern — engine1_runner/grammar/battery + the
-runbook, never committed) — ONE batched owner session covering the
-TEST_PLAN §8.5 gap rows (the 51-utterance corpus raw → one re-ask,
-the deviation families F1–F6 with the guess-within-grammar tally,
-the bg-7 prose families (ii)–(v), the per-component p50/p95 columns
-tick/fold/brief/parse/generate) + CONTRACTS §4.3's four arms (one-vs-
-two-model, seeded-local determinism, the GBNF latency penalty, mode-A
-prose at the weak arm) + the §13 surface probes at the owner's build.
-Sandbox-validated END-TO-END FIRST on the owner's exact llama.cpp
-build (b11064, commit a894dae93, CPU-side): every arm smoke-run
-through the REAL doors — raw GBNF gate validity 100% at the smoke cut
-(shape errors structurally impossible; the honest guess-within-
-grammar class remains), the mediator prose ladder + the C3.5
-degraded-knows probe live, the per-component latency columns
-populated. TECH_NOTES §13.1 the sandbox surface block: the router
-(model swap = autoload/eviction, never a restart), POST /props the
-measured silent no-op, the -np context split at b11064, GBNF on the
-chat route (top-level grammar param), the GBNF dialect facts
-(underscore rule names rejected; [ ] is a char class), cross-model
-thinking×schema mechanics, the determinism mini 5/5, cancellation vs
-a second client, restart timing — every software-bound §13 "not
-established" item closed; the station-bound list narrowed to the
-owner's run. The owner's move: the one run (`--arm all`), the bundle
-back — then the transcripts re-distill (§8.2 source 3), the
-heartbeat's first local row, presentation-1's local evidence, and the
-build landing (b) stays the next owner gate. Zero engine code in the
-repo; INV-4 UNCHANGED.
+Iteration: iter-172 (`iter-172-engine1b` — the owner's battery bundle
+back + the `--arm all` console-crash triage, the «ты просил бангл
+прислать с тестов, но там еще и ошибки в консоли вылезли» report):
+the smoke cut completed every arm (validity 100% at n=2, the
+per-component raw columns populated), the full corpus crashed at
+s2c1 — E4B's reply `take` + `target:"tex_0000"` + the texture
+reference, the one-path combo the v1 GBNF permitted; the door's
+loud RunnerError is PARSER_SPEC §4's DESIGNED refusal (the gate
+deliberately leaves the one-path/target-required/drawn-N-ticks laws
+to `core/intent.py::validate_shape`; the interactive session prints
+it — cli/main.py's catch) — the REPO side clean, zero code change,
+INV-4 UNCHANGED. Both fatal defects runner-side (Rule-9, outside
+the repo): the grammar did not encode the door's shape laws, and
+the battery caught only the gate's ParseError; a third defect
+found in validation: the agreement census compared the model's
+intent object against the pin's reply wrapper (every comparison
+read kind_mismatch, `full` unreachable — the smoke bundle's
+agreement rows carry no signal). The v2 handoff DELIVERED (the
+Vantiel pattern, never committed): per-verb canon/texture path
+variants (one path, never both; the target enum canon-nouns-only;
+the drawn-N ticks field required; the JSON-schema twin the same
+laws) + the `door_error` tally (terminal for the cycle, the reply
+kept for the census, `door_shape_errors` in the metrics, never
+fatal) + the census unwrap. Sandbox-validated against the REAL
+doors at the s2 snapshot (tex_0000 live): v1's enumerated language
+contains exactly the crashing form; v2's 2109 documents (2057
+bare) pass the shape laws AND the boundary gate on every document;
+the exact crash reply replayed through the fixed parse_cycle →
+tallied, the harness reusable, the gold reply on the next cycle
+accepted + pinned. The owner's move: the one re-run with the v2
+handoff (same folder, same config, same commands — smoke first
+`--arm smoke --limit 2`, then `--arm all`), the bundle back.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1900 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 04c8a5f BEFORE working — 1900+1 green, ruff
-clean, the iter-170 pin re-confirmed — and re-verified after with the
+verified at BASE_COMMIT dcba648 BEFORE working — 1900+1 green, ruff
+clean, the iter-171 pin re-confirmed — and re-verified after with the
 diff in place: 1900+1, ruff clean, doc-only, zero test change, the
 golden fixtures byte-untouched) ·
 Date: 2026-09-21 ·
-Scope: docs/TASKS.md (the engine-1 row's move (a) CONVENED + the
-ledger line) + docs/TECH_NOTES.md (§13.1 the sandbox surface block —
-measured substance only; 938 lines — over the 600 docs cap, the
-pre-existing 854 + pure measured evidence, the §6.1 law) +
-`STATUS.md` (this re-pin) + `worklog.md` (this entry). The prior
-iteration's record: iter-170 (engine-1). The detail lives in the
-worklog + git.
+Scope: docs/TECH_NOTES.md (§13.1 the falsified claim corrected + the
+v2 record — measured substance only) + docs/TASKS.md (the engine-1
+row's round-2 state + the ledger line) + `STATUS.md` (this re-pin +
+the KI#88/#89 deletion, AGENTS §5's 2-iteration cleanup law) +
+`worklog.md` (this entry). The prior iteration's record: iter-171
+(engine-1 move (a)). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -68,8 +68,8 @@ worklog + git.
 
 ## Active KIs
 
-- KI#88 · CLOSED iter-169 (qa2): the lint-side closure landed — the on_action actor vocabulary narrowed to `world | source_actor` (ACTOR_KEYS, owned by core/onaction.py; the reaction event's actor is a schema-required string), and the target-sourced check row pins the intent's target via the door's own `needs_target` predicate; the runtime asserts stay the programmatic backstops.
-- KI#89 · CLOSED iter-169 (qa2): the shared `lint_direct_keys` row (the lint_echo_cond family) refuses the five record-reading tests' directly-indexed keys at every `requires` declaration site — presence + type + non-emptiness; a malformed pack KeyErrors mid-run no more.
+- (None open. KI#88/#89 — qa-1's holes — CLOSED iter-169 at load-lint;
+  deleted iter-172 per AGENTS §5's 2-iteration cleanup law.)
 
 ## FAQ / Pitfalls
 
@@ -514,6 +514,51 @@ the logs byte-differ. The harness is a script,
   composition, not totals).
 
 ## Next step
+
+**iter-172 DONE: engine-1 (move a, the bundle round 2) — the first
+`--arm all` crash triaged, the runner v2 delivered (the owner's
+bundle + console-error report): the smoke cut completed all arms
+(validity 100% at n=2, the per-component raw columns, the
+determinism mini 5/5 both models, the latency A/B raw rows), the
+full corpus crashed at s2c1 — E4B's `take` paired
+`target:"tex_0000"` with the texture reference; the door's
+RunnerError is per PARSER_SPEC §4 the designed refusal (the
+repo clean, INV-4 unchanged, zero code change), the CRASH was the
+battery's ParseError-only catch meeting the v1 grammar's un-encoded
+shape laws. The v2 handoff (the Vantiel pattern, never committed)
+fixes all three runner defects: (1) the grammar encodes the door's
+shape laws per verb — the canon and texture paths as separate
+variants (one path, never both), the target enum canon-nouns-only
+(texture ids are word-matching nouns, never targets), the drawn-N
+ticks field required, the JSON-schema twin the same laws; (2) the
+battery's `_apply_parse_reply` catches the door's RunnerError →
+the `door_error` family — terminal for the cycle (the reply was
+consumed, no re-ask), the reply kept for the census,
+`door_shape_errors` in the metrics, never fatal; (3) the agreement
+census unwrapped — v1 compared the intent object against the pin's
+reply wrapper (every comparison kind_mismatch, `full` unreachable;
+the smoke bundle's agreement rows carry no signal). Sandbox-checked
+against the REAL doors at the s2 snapshot: v1's enumerated language
+contains exactly the crashing form; v2's 2109 documents (2057 bare)
+pass the shape laws AND the boundary gate on every document; the
+exact crash reply replayed through the fixed parse_cycle → tallied,
+the harness reusable, the gold reply on the next cycle accepted +
+pinned; ruff on the runner: zero findings in the changed code.
+TECH_NOTES §13.1 the falsified claim corrected + the v2 record;
+TASKS the engine-1 row re-pinned; doc-only, 1900+1 green, ruff
+clean. **The owner's move: the one re-run — the v2 handoff's three
+files in place of the v1 ones (engine1_grammar.py +
+engine1_battery.py replaced, engine1_runbook.md the note added;
+same folder, same config, same commands: `PYTHONHASHSEED=0 python
+engine1_battery.py --config engine1_config.json --arm smoke --limit
+2` first, then `--arm all`), send back engine1_out/engine1_bundle.zip
+— a fresh out_dir (or delete engine1_out/state.json) so the smoke
+checkpoint doesn't skip the corpus arm. The natural next moves
+after the re-run's bundle: unchanged — the re-distillation + the
+heartbeat's first local row + presentation-1's local evidence (the
+transcripts' own iteration), or the build landing (b) — the GBNF
+mapping + the door wiring, INV-4 lifting there, both
+owner-gated.**
 
 **iter-171 DONE: engine-1 move (a) — the {3–8B, GBNF} experiment
 CONVENED and the llama.cpp surface mapped (the owner's «за 1 раз как

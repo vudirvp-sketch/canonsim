@@ -50,14 +50,25 @@ claim packet)
   session covering the §8.5 gap rows + §4.3's four arms + the §13
   surface probes, sandbox-validated end-to-end at the owner's exact
   build b11064 (§13's sandbox block the surface record); the battery's
-  GBNF mapping is the build's repo-side function previewed. Remaining:
-  the owner's one run (the bundle back — transcripts re-distilled per
-  §8.2 source 3; the heartbeat's first local row; presentation-1's
-  local evidence), then (b) the build landing (the GBNF mapping + the
-  door wiring + the failure→ladder mapping) — INV-4 lifts there, the
-  AGENTS §4/§8 edits riding it. Unlocked by the phase-1 gate; the
-  dev-time external parser carried phase 2 to its gate PASS (iter-35)
-  and carries mode C until the landing.
+  GBNF mapping is the build's repo-side function previewed. Round 2
+  (iter-172, the owner's bundle + crash report): the first `--arm all`
+  crashed at s2c1 — the v1 grammar's un-encoded shape laws (E4B's
+  `take` + `target:"tex_0000"` + texture; the door's RunnerError per
+  PARSER_SPEC §4, the repo clean) + the battery's ParseError-only
+  catch, plus the agreement census's reply-wrapper bug (the smoke
+  bundle's agreement rows carry no signal); the runner v2 delivered
+  outside the repo (the grammar encodes the door's shape laws per
+  verb — canon/texture variants, canon-only targets, required
+  drawn-N ticks; the `door_error` tally, never fatal; the census
+  unwrapped), sandbox-checked against the real doors. Remaining:
+  the owner's one RE-RUN with the v2 handoff (the bundle back —
+  transcripts re-distilled per §8.2 source 3; the heartbeat's first
+  local row; presentation-1's local evidence), then (b) the build
+  landing (the GBNF mapping + the door wiring + the failure→ladder
+  mapping) — INV-4 lifts there, the AGENTS §4/§8 edits riding it.
+  Unlocked by the phase-1 gate; the dev-time external parser carried
+  phase 2 to its gate PASS (iter-35) and carries mode C until the
+  landing.
 - `presentation-1` — the LLM presentation contract, engine-1's
   decision-input child, never a sibling competitor (intake-12, D-148): the
   model-facing serializer spec over the STABLE brief IR (BRIEF_SPEC §7
@@ -146,13 +157,32 @@ claim packet)
   Next run: the next quarterly (owner-called per D-022) or at a phase-6
   pack intake, whichever comes first.
 
-### Iteration ledger (iter-116..170 — the detailed sections collapsed at the
+### Iteration ledger (iter-116..171 — the detailed sections collapsed at the
 owner's memory-GC calls, iter-140 + iter-151, the iter-102 precedent; the
 iter-151 pass restored the iter-140 collapse after a stale-base archive apply
 had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 — the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
+
+- iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
+  battery bundle back + the `--arm all` crash triaged (the «ты просил
+  бангл прислать с тестов, но там еще и ошибки в консоли вылезли»
+  report): the smoke cut green on every arm, the full corpus crashed
+  at s2c1 (E4B's one-path combo through the v1 grammar; the door's
+  RunnerError per PARSER_SPEC §4 — the repo clean, zero code change,
+  INV-4 unchanged); THREE runner defects fixed in the v2 handoff
+  (never committed): the grammar now encodes the door's shape laws
+  per verb (canon/texture path variants, canon-nouns-only targets,
+  required drawn-N ticks; the JSON-schema twin the same), the
+  `door_error` tally (terminal, `door_shape_errors`, never fatal),
+  and the agreement census unwrap (v1: intent-vs-reply-wrapper, every
+  comparison kind_mismatch — the smoke bundle's agreement rows carry
+  no signal); sandbox-validated against the REAL doors (v1's language
+  contains exactly the crashing form; v2's 2109 docs pass the laws +
+  the gate; the crash reply replayed → tallied, harness reusable);
+  TECH_NOTES §13.1 corrected + the v2 record; doc-only, 1900+1 green,
+  ruff clean.
 
 - iter-171 · 2026-09-21 · engine-1 (move a) — the experiment CONVENED (the
   owner's «давай за 1 раз как можно больше тестов… лучше вообще выяснить

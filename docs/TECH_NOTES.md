@@ -923,15 +923,39 @@ remain the owner's run:
   restart-class, recorded).
 - The runner battery is validated end-to-end at this scale: the
   51-utterance corpus through the REAL ParserDoor with per-request
-  GBNF → **raw gate validity 100% at the smoke cut** (the grammar
-  makes shape errors structurally impossible — the remaining class
-  is the honest guess-within-grammar: wrong kind/target), the
-  mediator prose ladder + the C3.5 degraded-knows probe live, the
+  GBNF → **raw gate validity 100% at the smoke cut**, the mediator
+  prose ladder + the C3.5 degraded-knows probe live, the
   per-component latency columns populated (emit/generate/apply +
-  the fold probe).
+  the fold probe). Iter-171's "shape errors structurally
+  impossible" parenthetical was FALSIFIED at the owner's full run
+  (s2c1, E4B: `take` pairing `target:"tex_0000"` with the texture
+  reference — the one-path combo the v1 grammar permitted; the
+  door's loud RunnerError is per PARSER_SPEC §4 the designed
+  refusal — the battery's ParseError-only catch made it fatal).
+  The v2 handoff (iter-172): the grammar encodes the door's own
+  shape laws per verb (the canon and texture paths as separate
+  variants — one path, never both; the target enum canon-nouns-only,
+  texture ids are word-matching nouns never targets; the drawn-`N`
+  `ticks` field required; the JSON-schema twin carries the same
+  laws), the battery tallies the door's RunnerError family as
+  `door_error` (terminal for the cycle — the reply was consumed;
+  `door_shape_errors` in the corpus metrics; never fatal), and the
+  agreement census is unwrapped (v1 compared the model's intent
+  object against the pin's reply wrapper — every comparison read
+  kind_mismatch, `full` unreachable; the smoke bundle's agreement
+  rows carry no signal). Sandbox-checked against the real doors at
+  the s2 snapshot: v1's enumerated language contains exactly the
+  crashing form; v2's (2109 documents, 2057 at the bare snapshot)
+  passes the shape laws AND the boundary gate on every document;
+  the exact crash reply replayed through the fixed parse_cycle →
+  tallied, the harness reusable, the gold reply on the next cycle
+  accepted + pinned. The remaining class is the honest
+  guess-within-grammar: wrong kind, wrong target among canon nouns,
+  wrong field value.
 
-Station-bound remainder (the owner's one run): the corpus/deviation/
-prose numbers at E4B/9B/27B, the four §4.3 arms' economics, the
+Station-bound remainder (the owner's one re-run, the v2 handoff in
+place of the v1 files): the corpus/deviation/prose numbers at
+E4B/9B/27B, the four §4.3 arms' economics, the
 heartbeat's first local row, the 27B restart/swap costs, the
 cross-model schema at the real models, the seeded-local probe at
 VRAM/batch shapes.
