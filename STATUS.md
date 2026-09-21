@@ -1,35 +1,30 @@
-Iteration: iter-179 (`iter-179-engine1-round5`, the owner's bundle —
-the first LIVE `--engine` session, the landed surface's station
-verification at an off-plan model): round 5 triaged — the GBNF
-grammar's live compile + enforcement VERIFIED through the landed
-wiring (TEST_PLAN §8.5's compile-check gap row discharged), the
-provenance manifest end-to-end (model_sha256 null — the server's
-relative path), the parse door's whole vocabulary exercised (intents
-fed + the world's honest `intent_rejected` answers + a clarification
-question); the narrator door FAILED 2/2 (prose, not the reply document
-— the E4B class at a nominal 12B, one datum) and exposed KI#90:
-`cli/mediator.py::apply_reply` raised MediatorError on a non-JSON
-reply BEFORE the gate family — the engine cycle died with the beat
-open (D7's mapping hole; round 4's runner-side json-retry ladder had
-masked the class). FIXED: the JSON class routes to the MALFORMED regen
-ladder (the note riding each re-invocation, exhaustion to the template
-rung — never a blocked beat), the unreadable-FILE class stays the
-operator error; the pins in test_mediator + the stub-server round-5
-replay (test_engine). TECH_NOTES §13.1 the round-5 record.
+Iteration: iter-180 (`iter-180-engine1-round6`, the owner's bundle —
+the second LIVE `--engine` session, the round-4 narrator candidate
+at the landed surface): round 6 triaged — KI#90's fix VERIFIED LIVE
+(the Q9B narrator's 3/3 prose replies each routed to the MALFORMED
+regen ladder, the notes riding the re-invocations, exhaustion 2/2
+to the dry beat, the session surviving clean — chronicle + quit, the
+log 7 events, nothing fed); the manifest's `model_sha256` populated
+at the live surface for the first time (the owner's absolute model
+path — round 5's null was the relative-path config); the parse door
+6/6 gate-valid `no_intent` (honest declines at off-vocabulary
+utterances, the injection probe refused inside the no_intent
+string); the narrator-convention datum: the 9B-live floor
+UNCONFIRMED (n=1, the failure tail — PRESENTATION_SPEC §7
+qualified, §13.1 the record).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 1962 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT cf6b6fd BEFORE working — 1960+1 green, ruff
-clean — and re-verified after with the diff in place: 1962+1 green
-(the +2 KI#90's pins), ruff clean, docguard clean) ·
+verified at BASE_COMMIT 37a0bad BEFORE working — 1962+1 green, ruff
+clean, docguard clean — and re-verified after with the doc-only
+diff in place: the numbers unchanged) ·
 Date: 2026-09-21 ·
-Scope: cli/mediator.py + tests/test_mediator.py + tests/test_engine.py
-+ docs/TECH_NOTES.md + docs/TEST_PLAN.md + docs/TASKS.md + `STATUS.md`
-+ worklog.md — 8 paths (the KI fix + its pins + the round record + the
-state docs, over the §2.3 soft limit). The prior iterations' record:
-iter-177/178 (engine-1 (b) + presentation-1), iter-176 (doc-3). The
-detail lives in the worklog + git.
+Scope: docs/TECH_NOTES.md + docs/PRESENTATION_SPEC.md + docs/TASKS.md
++ `STATUS.md` + worklog.md — 5 paths (the round-6 record + the band
+qualification + the state docs). The prior iterations' record:
+iter-179 (round 5), iter-177/178 (engine-1 (b) + presentation-1),
+iter-176 (doc-3). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -56,7 +51,7 @@ detail lives in the worklog + git.
 ## Active KIs
 
 - KI#90 · a non-JSON narrator reply blocked the beat (round 5) ·
-  opened+CLOSED iter-179 (JSON → the MALFORMED regen; the file class unchanged).
+  opened+CLOSED iter-179 (JSON → the MALFORMED regen; live-verified round 6, §13.1).
 
 ## FAQ / Pitfalls
 
@@ -85,17 +80,20 @@ detail lives in the worklog + git.
 
 ## Next step
 
-**iter-179 DONE: round 5 triaged — the first live `--engine` session
-(the landed surface's station verification at an off-plan 12B): the
-compile check discharged, KI#90 (the blocked-beat mapping hole) found
-+ fixed.**
+**iter-180 DONE: round 6 triaged — the second live `--engine` session
+(Q9B, the narrator-convention candidate): KI#90's fix live-verified,
+the manifest's sha256 first live population, the parse door's honest
+declines; the 9B live-narrate floor unconfirmed (n=1, the failure
+tail).**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
-   component split; a narrator-convention model for live narrate play
-   is the same run's choice (round 5's 12B datum: prose, not the reply
-   document — §13.1).
+   component split; the narrator-convention call for live narrate
+   play is two-sided now — more live beats at Q9B (size the tail) or
+   the 27B as the one-model candidate (the §1 sweet spot, both
+   doors) — the owner's choice (round 5's 12B + round 6's 9B data:
+   §13.1).
 2. The standing frames: Track B's gap rows (the bg-7 prose families,
    the per-family latency distribution), the world track's frontier
    (WORLD_WORKPLAN §6 — the embodiment options, W5's live band, the

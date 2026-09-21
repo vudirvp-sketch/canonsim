@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-180 · 2026-09-21 · engine-1 round 6 — the owner's second live `--engine`
+bundle (Q9B) triaged: KI#90's fix live-verified (the prose class to the dry
+beat, the session clean); the manifest's sha256 first live population; the 9B
+live-narrate datum n=1 (§13.1; PRESENTATION_SPEC §7 qualified); 5 paths,
+doc-only; 1962+1 + ruff + docguard clean both ends; iter-170 evicted
+
+---
 iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` bundle
 triaged: the compile check verified through the landed wiring (§8.5
 discharged); the narrator prose class exposed KI#90 (MediatorError before
@@ -52,13 +59,6 @@ convened (the owner's batched-test call): the Rule-9 runner delivered outside th
 (the Vantiel-handoff pattern), sandbox-validated end-to-end at the owner's exact build
 b11064 CPU; TECH_NOTES §13 gains the sandbox surface block; 4 paths, doc-only; 1900+1
 green; iter-161 evicted per the cap
-
----
-iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED (the owner's
-real-backend convening call): llama-server behind an explicit adapter + GBNF, the
-file-contract frame the insertion point — D-192 the decision, CONTRACTS §4 the build
-contract, TECH_NOTES §2/§13 the evidence (verified against the owner's raw logs); 6
-paths, doc-only; 1900+1 green both ends at 7618714; iter-160 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

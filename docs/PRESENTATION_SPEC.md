@@ -108,13 +108,19 @@ presentation contract refuses every script-specific branch.
 Mode-A prose at the weak arm: the 4B class is **parser-only** at this
 call shape (every beat dry across all three ladders — the narrator
 replies are not valid JSON, the bounded json-retry ladder exhausted);
-the 9B class **narrates** (6/8 accepted per ladder, the regen ladder
-working). The narrator floor sits BETWEEN 4B and 9B: the contract's
-consumer requirement — the narrator door needs a ≥9B-class model at
-this station shape; the 3–8B band serves the parse door
-(GBNF-constrained). The 12–27B band stays the §1 sweet spot; the
-one-model-constrained A/B (27B GBNF parse) is TEST_PLAN §8.5's standing
-gap row, the owner's next station run.
+the 9B class **narrates** in the battery (6/8 accepted per ladder,
+the regen ladder working) — the LIVE surface unconfirmed at 9B
+(round 6's first live Q9B beat fell in the failure tail: 3/3 prose,
+the MALFORMED ladder exhausted to the dry beat; n=1 — §13.1; the
+convention is model ability, round 5's verdict — the battery's
+ladder is never a live-surface guarantee). The narrator floor sits
+BETWEEN 4B and 9B: the contract's consumer requirement — the narrator
+door needs a ≥9B-class model at this station shape, its live-surface
+confirmation the owner's next station run (more live beats, or the
+27B); the 3–8B band serves the parse door (GBNF-constrained). The
+12–27B band stays the §1 sweet spot; the one-model-constrained A/B
+(27B GBNF parse) is TEST_PLAN §8.5's standing gap row, the owner's
+next station run.
 
 ## 8. The re-expansion law + the staged interpretation (intake-32's card, mapped)
 

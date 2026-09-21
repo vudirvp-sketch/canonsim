@@ -36,9 +36,11 @@ claim packet)
   (PARSER_SPEC §5's re-ask + D7's rungs), the provenance manifest; the
   contract absorbed (CONTRACTS §4 the pointer); the serializer contract
   PRESENTATION_SPEC's (iter-178). Station remainder: the 27B GBNF arm +
-  the one-model-constrained A/B — TEST_PLAN §8.5's gap rows (the live
-  compile check discharged iter-179, round 5's first live session;
-  KI#90 closed with it). Evidence: TECH_NOTES §13/§13.1, TEST_PLAN
+  the one-model-constrained A/B + the live-narrate model call —
+  TEST_PLAN §8.5's gap rows + PRESENTATION_SPEC §7's band (round 5:
+  the live compile check discharged, KI#90 closed with it; round 6:
+  the fix live-verified at Q9B + the manifest's sha256 + the 9B
+  live-narrate datum n=1). Evidence: TECH_NOTES §13/§13.1, TEST_PLAN
   §8.5, the engine-1 test packets.
 - `presentation-1` — DONE (iter-178, the owner's write call on the met
   exit criterion): `docs/PRESENTATION_SPEC.md` — the model-facing
@@ -111,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-180 · 2026-09-21 · engine-1 round 6 — the second live `--engine` session triaged: KI#90's fix live-verified, the 9B live-narrate datum (n=1)
 - iter-179 · 2026-09-21 · engine-1 round 5 — the first live `--engine` session triaged: the compile check discharged, KI#90 (the blocked-beat hole) fixed
 - iter-178 · 2026-09-21 · presentation-1 — the LLM presentation contract written from the measured results (st-4 absorbed)
 - iter-177 · 2026-09-21 · engine-1 (b) — the build landing: the GBNF mapping + the adapter + the door wiring + the ladders, INV-4 lifted (D-193)
@@ -120,7 +123,6 @@ claim packet)
 - iter-173 · 2026-09-21 · engine-1 round 3 — the runner v3 delivered; the s6 crash triaged runner-side
 - iter-172 · 2026-09-21 · engine-1 round 2 — the runner v2 delivered; the `--arm all` crash triaged runner-side
 - iter-171 · 2026-09-21 · engine-1 round 1 — the {3–8B, GBNF} experiment convened; the Rule-9 runner delivered
-- iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED (D-192)
 
 ## Track B — background (evenings, foreign canon)
 
