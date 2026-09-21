@@ -1011,3 +1011,125 @@ E4B/9B/27B, the four §4.3 arms' economics, the
 heartbeat's first local row, the 27B restart/swap costs, the
 cross-model schema at the real models, the seeded-local probe at
 VRAM/batch shapes, the S7 `-np 2` row re-measured for real.
+
+- **The round-4 record (iter-174, the owner's v3 re-run — the bundle +
+  the clean console log, both arms `smoke` and `--arm all` completing):
+  the full-corpus run LANDED at E4B/Q9B** (grammar `e1a28f700052acca`,
+  parse temp 0 / prose 0.8, thinking off, seed-root 20260921, ctx 4096;
+  the 27B present in the router arm only — the parse arms stayed
+  e4b/q9b). The three v3 fixes all PROVEN at the station: the probe
+  refused 1/1 both models (`double_apply_refused` — PARSER_SPEC §5's
+  designed outcome), the manifests carry `build_info`
+  "b11064-a894dae93" + model sha256 + params + grammar id (the D3
+  inference tier populated), and the np2 row reads `n_slots 2` /
+  `n_ctx_slot 2048` (the explicit shape at last, not AUTO 4×4096).
+- **Corpus (51 cycles + the probe, both models):** E4B raw gate validity
+  98.04% → 98.04% (the one malformed = f1b, the designed off-grammar
+  pin; zero re-ask rescues), mix 50/0/0, full intent agreement 15/51,
+  census full 15 / no_pin 14 / target_mismatch 9 / kind_mismatch 7 /
+  fields_mismatch 5 / not_intent 1, door_shape_errors 0,
+  engine_failures 0. Q9B 96.08% → **100% after one re-ask** (2 rescued),
+  mix 21/1/29, full agreement 6/51, census not_intent 30 / no_pin 3 /
+  target_mismatch 7 / kind_mismatch 3 / fields_mismatch 2 / full 6.
+  D5 confirmed in both directions: the grammar fixed validity (both
+  above the API rows' 79.5/84.4 raw) and could not touch honesty —
+  E4B answers EVERYTHING as intent (the aggressive mapper), Q9B
+  declines 29/51 (the cautious assistant). Generate p50/p95: E4B
+  537/706 ms, Q9B 470/714 ms; the repo-side components stay ~1–3 ms
+  (emit 1.1/1.0, apply 2.3/1.5, fold probe 0.7/0.6 p50) — generate owns
+  ~99% of the cycle (§8.5's component cut measured).
+- **Determinism (D3, n=5 both models):** greedy t0 byte-identical 5/5
+  AND seeded t0.8 byte-identical 5/5 — the seeded-local tier HOLDS at
+  the station on both models (Q9B's greedy and seeded arms differ in
+  content from each other; each arm is internally identical — the tier
+  is reproducibility, never cross-arm equality). The D3 consequence is
+  now RECORDED IN PRACTICE: weak-arm replies are pinnable fixtures —
+  the re-distilled deviation corpus below is the first instance.
+- **The GBNF latency penalty (n=7 per cell, the full-run numbers the
+  round-3 raw owned):** E4B grammar 59.91 tok/s p50 (p95 64.19) vs
+  json_schema 122.57 vs none 121.38 — **~2.0×**; Q9B 80.0 (p95 90.95)
+  vs 105.06/105.18 — **~1.3×**. Grammar-constrained prompt processing
+  is itself slower (E4B prompt p50 140.7 ms vs 43.7 unconstrained;
+  Q9B 200.8 vs 44.0) and GBNF completions are more compact (E4B p50
+  23 tok vs json_schema's 44 — the subset-enumerated fields at work).
+  Wall p50: E4B 528.6 ms grammar vs 272.9 none; Q9B 461.1 vs 292.2.
+- **The per-family latency distribution (the deviation arm, generate p50
+  per family, n=6 each):** E4B f1 632.5 / f2 649.8 / f3 607.5 / f4 590.6
+  / f5 586.0 / f6 610.4 ms — a flat 586–650 band; Q9B f1 596.5 / f2
+  514.9 / f3 520.9 / f4 560.8 / f5 550.2 / f6 682.0 ms — 515–682, the
+  injection family the slowest (the payload-bearing prompts). NO
+  Cyrillic latency penalty at either model (f5 sits mid-band) — the
+  Script Tax's latency half is a non-issue at this band; the tax lives
+  in the validity/mix side (Q9B's ru twins needed the one re-ask).
+- **Mode-A prose at the weak arm (the presentation-1 bound, §4.3 arm
+  d):** E4B does NOT narrate at this call shape — every beat dry across
+  all three ladders (ii floor 8/8, iv C3.5 8/8, v cast-surface 8/8;
+  the cause measured: the narrator replies are not valid JSON, the
+  bounded json-retry ladder exhausted — `Expecting value: line 1
+  column 1`, json_retries 3; the grammar rides the PARSE door only, the
+  narrator side is unconstrained by design). Q9B narrates: 6/8 accepted
+  per ladder (2 dry), the regen ladder working (e.g. a floor beat
+  accepted after 2 regens with real prose). The Cyrillic script-tax
+  twins parse cleanly at BOTH models (ru 7/7 and en 7/7 valid at E4B;
+  Q9B ru 85.71% → 100% after one re-ask, en 100%) — the script tax is
+  a parse-side non-issue at this band; the narrator floor sits BETWEEN
+  4B and 9B: E4B is parser-only, Q9B narrates.
+- **The router (onetwo):** 3 models resident, startup-to-health 0.53 s;
+  first touch e4b 3.03 s / q9b 3.24 s / q27b 59.42 s (the 27B autoload
+  cost), steady 0.07/2.67/1.42 s; two models concurrent 3.35 + 4.97 s;
+  the eviction switch sequence 5.24 → 5.52 → 29.1 s; single-server
+  restart 6.55/7.09/20.18 s, warm requests 0.1/0.1/1.35 s. The §4.3
+  arm (a) economics measured router-side; the 27B GBNF PARSE arm
+  itself was not in this battery (parser_arms e4b/q9b) — the
+  one-model-constrained comparison stays open for the build's own A/B.
+- **The re-distillation (§8.2 source 3, the bg-8 precedent's form):**
+  `tests/fixtures/engine1_deviation_corpus.json` + the Layer-1 suite
+  `tests/test_engine1_deviation.py` — the F1–F6 documents VERBATIM from
+  both models, family_verdict re-judged per reply (the semantic owner).
+  The build replay cross-checked EVERY door outcome against the
+  station's own transcript records — zero divergence (the INV-2
+  equality: the runner's harness doors reproduce the repo's doors).
+  Re-distilled tallies: E4B honest 18 / failures 18, answers 35 event /
+  0 question / 0 no_intent / 1 unanswered — **the first measured
+  world-answer leak at a local engine** (f1b: the degenerate
+  `{"no_intent": ""}` twice, off-grammar-final, 33/34 coverage where
+  the API baseline was 34/34); Q9B honest 15 / failures 21, answers
+  10/3/23/0 — **34/34 coverage, zero leaks** (the declines are
+  answers). The engines' profiles: E4B maps every ghost noun (F3
+  6/6 guessed — Marlbor→guard, Eleonora→maid, кузнец→barkeep) and
+  beats the API baseline on F6's legitimate heads (the injections
+  ignored, the heads mapped) but executes the f6a payload and mints an
+  intent from the f6f echo demand; Q9B is honest where both glm and
+  E4B guessed (F3 5/6 — the disambiguation questions asked), refuses
+  every injection payload except f6c (the steal committed as a fact),
+  but loses 4 legitimate heads to assistant-register refusals
+  (surface_lost) and confabulates wildly twice (flip-table→arson,
+  hug→coerce). The new measured shapes pinned: the e4b world-answer
+  leak (leak_unanswered on a world-touching cycle) and the q9b
+  protocol-template echo landing GATE-VALID as no_intent (the bg-8
+  ParseError shape evolved — `echo_leak`, inert data).
+- **Runner residuals found in the round-4 bundle (all runner-side,
+  Rule 9 — v4 candidates, none touching the repo or the data):** (1)
+  the SUMMARY.md embedder writes sections only for results carrying
+  `metrics`/`summary` keys — the determinism/prose/onetwo/surface
+  sections render empty (the data complete in the individual files);
+  (2) the duplicate SUMMARY.md zip entry (a stale prior-run SUMMARY.md
+  rglob'd, then the fresh one re-appended — the zipfile UserWarning,
+  identical bytes, extraction correct); (3) the onetwo manifest and
+  router_footprint halves read null (the per-model/router props keys
+  this build never serves — the same class as the v2 D3 defect, the v3
+  fix covered only the single-server manifest path); (4) the deviation
+  metrics' answer_coverage never counts door status "intent" as
+  "event" — coverage_pct systematically understated (E4B's true 33/34
+  read 0.0%, Q9B's 34/34 read 76.5%); (5) the honest/guess split rides
+  the bg-8 baseline verdict labels (the re-distilled fixture is the
+  corrected semantic owner — the runner's 17/7 and 17/8 read 18/18 and
+  15/21 after re-judgment).
+
+The move-(a) record closes here: the experiment's station numbers are
+landed and re-distilled, the heartbeat's first local rows live in
+TEST_PLAN §8.5. The remainder is the build landing (b) — the GBNF
+mapping repo-side + the door wiring + the failure→ladder mapping, INV-4
+lifting there — owner-gated (TASKS `engine-1`), plus presentation-1's
+write call (the exit criterion met: the weak-arm run on owner hardware,
+the narrator floor measured between E4B and Q9B).

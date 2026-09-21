@@ -72,12 +72,22 @@ claim packet)
   (the probe replayed + tallied, never fatal; the manifest reads
   `build_info`; the `-np 2` argv wiring), sandbox-validated by a
   stub-client full-corpus walk through the real doors (51 cycles, the
-  probe refused, v2 reproduced crashing at exactly s6). Remaining:
-  the owner's one RE-RUN with the v3 handoff (the bundle back —
-  transcripts re-distilled per §8.2 source 3; the heartbeat's first
-  local row; presentation-1's local evidence), then (b) the build
-  landing (the GBNF mapping + the door wiring + the failure→ladder
-  mapping) — INV-4 lifts there, the AGENTS §4/§8 edits riding it.
+  probe refused, v2 reproduced crashing at exactly s6). Round 4
+  (iter-174, the owner's re-run bundle — move (a) CLOSED): the full
+  corpus landed at E4B/Q9B with the three v3 fixes proven; the §4.3
+  arms measured (the seeded-local tier HOLDS both models — weak-arm
+  replies pinnable; the GBNF penalty ~2.0×/~1.3×; mode-A prose: E4B
+  parser-only, Q9B narrates 6/8); the transcripts re-distilled per
+  §8.2 source 3 (`tests/fixtures/engine1_deviation_corpus.json` +
+  `tests/test_engine1_deviation.py` — the replay cross-check zero
+  divergence, the first local world-answer leak and the gate-valid
+  protocol echo pinned); the heartbeat's first local rows live
+  (TEST_PLAN §8.5); five runner residuals recorded runner-side (v4
+  candidates). Remaining: (b) the build landing (the GBNF mapping +
+  the door wiring + the failure→ladder mapping) — INV-4 lifts there,
+  the AGENTS §4/§8 edits riding it, owner-gated; plus presentation-1's
+  write call (its exit criterion now MET — the weak-arm run on owner
+  hardware, the narrator floor measured between E4B and Q9B).
   Unlocked by the phase-1 gate; the dev-time external parser carried
   phase 2 to its gate PASS (iter-35) and carries mode C until the
   landing.
@@ -92,8 +102,13 @@ claim packet)
   owner, never two). The spec's shape when written: a thin mapping table
   over the existing 8 blocks + `narrator_protocol` — never a second
   re-labeling vocabulary (D-024). Exit criterion: the weak-arm run on owner
-  hardware. Evidence base: TECH_NOTES §10/§11/§13 (§13 the real-backend
-  record); consult material at write
+  hardware — MET (iter-174, engine-1 round 4: the mode-A bound measured —
+  E4B parser-only at this call shape, Q9B narrates 6/8 per ladder, the
+  narrator floor between 4B and 9B; the local transcripts' own call/reply
+  documents are the spec's material). Evidence base: TECH_NOTES
+  §10/§11/§13 (§13.1 the round-4 record — the mode-A arm, the script-tax
+  twins, the regen ladder's measured behavior, the JSON-envelope failure
+  mode at E4B); consult material at write
   time: the intake-30 visual-system card (phases.md §6 — the visual
   surface's parked residue: the development-order law, the fidelity
   target, the rejection table; D-187/D-174's surface ownership) + the
@@ -193,6 +208,22 @@ here, the header's own law)
   owner's config questions answered from the specs (document-only
   parse arms by design; ctx configured + measured); TECH_NOTES §13.1
   the round-3 record; doc-only, 1900+1 green, ruff clean.
+
+- iter-174 · 2026-09-21 · engine-1 (move a, round 4 — move (a) CLOSED) —
+  the owner's v3 re-run bundle triaged: the full corpus LANDED at
+  E4B/Q9B (validity 98.0% / 96.1%→100% after one re-ask; the three v3
+  fixes proven — the probe refused, the manifests populated, the np2
+  row explicit), the §4.3 arms measured (the seeded-local tier HOLDS
+  both models n=5 — weak-arm replies pinnable; the GBNF penalty ~2.0×/
+  ~1.3×; mode-A prose: E4B parser-only, Q9B narrates 6/8 — the narrator
+  floor between 4B and 9B); the transcripts RE-DISTILLED per §8.2
+  source 3 (the bg-8 precedent's form): `engine1_deviation_corpus.json`
+  + `test_engine1_deviation.py` (16 Layer-1 tests, the replay
+  cross-check ZERO divergence vs the station's door records; the first
+  local world-answer leak pinned — e4b f1b 33/34; the gate-valid
+  protocol echo — q9b f6f); the heartbeat's first local rows live in
+  TEST_PLAN §8.5; five runner residuals recorded (v4 candidates,
+  runner-side only); 1916+1 green, ruff clean.
 
 - iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
   battery bundle back + the `--arm all` crash triaged (the «ты просил

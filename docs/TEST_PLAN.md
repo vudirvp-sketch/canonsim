@@ -515,11 +515,18 @@ smaller n records the raw min/median/max with the gap noted).
 |---|---|---|---|---|---|---|---|
 | bg-7 | 2026-09-07 | glm-4-plus API | 79.5% → 88.6% | 29/9/6 | 16/30 full | — (gap: the one-shot probes carried no component clock) | the one-shot probes (TECH_NOTES §10) |
 | bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | — (gap: the end-to-end p50 1.1 s / p95 6.3 s recorded, components unmetered — §11) | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
+| engine1-e4b | 2026-09-21 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF) | 98.0% → 98.0% | 50/0/0 | 15/51 full | tick 2.3/3.2 · fold 0.7/1.1 · brief+parse 1.1/1.6 (one measured column — the door's emit_call; the split the gap) · generate 537/706 ms | the grammar lifts raw validity above both API rows; the mix collapses to all-intent (the aggressive mapper — TECH_NOTES §13.1); the deviation re-distillation: honest 18/36, the first local world-answer leak 33/34 |
+| engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
 
-Gap rows standing: the {3–8B, GBNF} arm (all families, owner
-hardware); the bg-7 prose families (ii)–(v) skipped in the bg-8
-heartbeat (rate-limit economics); the per-family latency distribution;
-the per-component p50/p95 columns (no live row yet — bg-9+/engine-1).
+Gap rows standing: the 27B GBNF parse arm + the one-model-constrained
+A/B (the build landing's own comparison, CONTRACTS §4.3 arm a); the
+brief/parse component split (the battery's emit_call measures the door's
+one repo-side call — the build's own instrumentation owns the split);
+the API-side prose families (ii)–(v) (rate-limit economics at bg-8 — the
+LOCAL band measured them: E4B all-dry, Q9B 6/8, §13.1). Discharged by
+the engine-1 run: the {3–8B, GBNF} arm (both rows), the per-component
+p50/p95 columns (both rows), the per-family latency distribution (§13.1
+— no Cyrillic latency penalty at this band).
 
 ## 9. Claim → instrument selection grammar (intake-26, iter-138 — research-derived, a routing aid, never a gate)
 

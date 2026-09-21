@@ -7,6 +7,37 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-174 · 2026-09-21 · engine-1 (move a, round 4 — move (a) CLOSED) —
+the owner's v3 re-run bundle triaged + the transcripts re-distilled
+(the «продолжай работу. я тебе прислал логи и всякое такое» session)
+- triage: the full corpus LANDED at E4B/Q9B — validity 98.0% /
+  96.1%→100% after one re-ask, the three v3 fixes proven (the probe
+  refused 1/1, the D3 manifests populated, np2 explicit 2×2048); the
+  §4.3 arms measured: the seeded-local tier HOLDS both models (n=5,
+  greedy+seeded — weak-arm replies pinnable per D3), the GBNF penalty
+  ~2.0×/~1.3× tok/s, mode-A prose E4B parser-only / Q9B 6/8 (the
+  narrator floor between 4B and 9B — presentation-1's exit criterion
+  MET); five runner residuals recorded (SUMMARY embedder, duplicate
+  zip entry, onetwo manifest nulls, coverage event-label bug,
+  baseline-label honest/guess split — v4 candidates, runner-side)
+- the re-distillation (§8.2 source 3, the bg-8 form):
+  tests/fixtures/engine1_deviation_corpus.json (F1–F6 verbatim both
+  models, family_verdict re-judged — the semantic owner) +
+  tests/test_engine1_deviation.py (+16 Layer-1 tests); the build
+  replay cross-checked every door outcome vs the station's records —
+  ZERO divergence (INV-2 equality); the first local world-answer
+  leak pinned (e4b f1b 33/34) + the gate-valid protocol echo (q9b
+  f6f)
+- docs: TECH_NOTES §13.1 (the round-4 record + the per-family
+  latency distribution — the Cyrillic penalty a non-issue), TEST_PLAN
+  §8.5 (the first two local heartbeat rows, three gap rows
+  discharged), TASKS (the engine-1 row's round-4 closure +
+  presentation-1's evidence note + the ledger line), STATUS re-pin;
+  7 paths (the fixture+test pair the named move's deliverable);
+  verified BEFORE at BASE_COMMIT 1f4f20d (1900+1 green, ruff clean —
+  the iter-173 pin re-confirmed) and re-verified after: 1916+1 green
+  (the +16 the Layer-1 packet), ruff clean, goldens byte-untouched;
+  iter-164 evicted per the worklog cap
 iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the owner's v2
 smoke bundle back + the s6 `--arm all` crash triaged; the runner v3
 delivered outside the repo (the «продолжай работу… вот ошибочки»
@@ -282,29 +313,3 @@ the road's word) and CONFIRMED as THE WINTER KIN (ANCHOR_REGION §6.3)
 - verified BEFORE working at BASE_COMMIT 6d22a33 (1878+1 green, ruff
   clean — the pin re-confirmed) and re-verified after: 1878+1 green, ruff
   clean (doc-only, zero test change); iter-155 evicted per the cap
----
-iter-164 · 2026-09-20 · water1 — the world track's second meso unit (the
-owner's «продолжай работу с world track» call, the W4 candidates' next):
-the practitioner water-governance node (candidate 3) authored as the STEP
-BENCH over committed substrate only (the stair, the race's timbers, the
-bank market, the seasons, the tally staff, the quarrel collection)
-- doc-only (6 paths, over the soft limit per AGENTS §2.3 — the worldbuild
-  trio + STATUS/TASKS/worklog, the iter-155/156/160 doc-only precedent):
-  ANCHOR_REGION carries the unit (§6.2 — the ladder, the four steps, the
-  year, the enforcement's three doors, the lifecycle table, the crisis +
-  humor probes, the band split) + the mesh's F row (§5, sixth loop
-  AUTHORED, three new interlock edges C⇄F/E⇄F/B⇄F, the disable test
-  re-applied) + §7.1's Thornmill obligation ANSWERED; the candidate's
-  own falsifier PASSED (the function-loss arbiter; the anti-council
-  check by mechanism); §5's E band cell synced to the loop's own text
-  (the iter-162 arming, a one-cell consistency fix inside the edited
-  table); WORKPLAN §2/§6 the TESTED verdict; WORLD_TESTS §9 the run
-  record + the humor row's authored-band upgrade
-- honest residues: three first-exposure substrate gaps recorded, NOT
-  routed (the water level, the setting verb, the hatch gate — the
-  separate-track law); the embodiment options named, never committed
-  (the pole's iter-161 precedent class); the live-session question stands
-- verified BEFORE working at BASE_COMMIT 815476a (1878+1 green, ruff
-  clean — the pin re-confirmed) and re-verified after: 1878+1 green,
-  ruff clean (doc-only, zero test change); iter-154 evicted per the cap
-

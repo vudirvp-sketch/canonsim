@@ -1,62 +1,55 @@
-Iteration: iter-173 (`iter-173-engine1c` — the owner's round-3 report:
-the v2 smoke bundle back + the `--arm all` console crash + the two
-config questions, the «продолжай работу. я тебе прислал логи и всякое
-такое» session): the v2 smoke cut completed every arm WITH SIGNAL —
-the agreement census live (kind_mismatch/full/not_intent — the unwrap
-fix proven at the station), the determinism mini green both models
-(greedy + seeded byte-identical, n=2), the heartbeat rows populating,
-the latency A/B raw (the grammar penalty real at E4B: 43–62 tok/s vs
-~121–122 at json_schema/none; Q9B 66–82 vs ~101–104; n=2 raw, the
-full run owns the numbers). The full corpus crashed at s6 —
-`KeyError: 'say'`: the battery's cycle loop knew only
-`narrator`/`say`, the fixture's third kind `double_apply_probe`
-(s6c9, PARSER_SPEC §5's stale-second-apply refusal) walked into it —
-RUNNER-side, the repo clean (the repo's own test replays that probe
-and expects the door's ParseError); two more runner defects found in
-the bundle: the D3 manifest's build half read key names this build
-never serves (the /props payload carries `build_info`
-"b<build>-<commit>" — the v2 manifests carried nulls), and the S7
-`-np 2` restart never passed the flag (`extra` accepted, never
-appended to the argv — the np2_slots row measured the AUTO shape
-4×4096; the §13 halving law itself stands, the direct sandbox
-measurement). The v3 handoff DELIVERED (the Vantiel pattern, never
-committed): the probe replayed through the door + tallied
-(`double_apply_probes`/`double_apply_refused` in results_corpus_* —
-`refused` the designed outcome after a consumed cycle, `absorbed`
-only after off_grammar_final/engine-failure, the open call taking
-the probe's no_intent as its legal reply; never fatal), the manifest
-reads `build_info`, the S7 argv wiring; grammar + config unchanged.
-Sandbox-validated WITHOUT llama.cpp (the owner's «можешь уже не
-мучаться с 1.7b» call honored — a stub-client full-corpus walk
-through the REAL doors): all 10 sessions, 51 say-cycles, the probe
-REFUSED, door_shape_errors=2 (the fixture's two door_error pins), an
-always-off-grammar walk ends absorbed + completes, the owner's v2
-battery replayed in the same harness crashes at exactly s6 — the
-harness reproduces the reported crash class; ruff: zero new findings.
-The owner's questions answered from the specs + the measured bundle:
-the parse arms run document-only BY DESIGN (PARSER_SPEC §1/§3 — the
-call document is the prompt, D1's file-contract frame; no
-parser-side system role is specified — BRIEF_SPEC §3.1's
-directives-seed note is the NARRATOR side; a parser-side system role
-= the adapter/presentation-1 choice, owner-gated, never a
-mid-experiment change); the context IS configured (ctx 4096 → `-c
-4096` on the server, n_ctx_slot 4096 measured, parse prompts ~617 tok
-+ ≤160 completion — no truncation pressure; POST /props at the
-station refuses 501, the no-op conclusion unchanged).
+Iteration: iter-174 (`iter-174-engine1d` — the owner's round-4 report:
+the v3 re-run bundle + the clean console log, the «продолжай работу.
+я тебе прислал логи и всякое такое» session): move (a) CLOSED — the
+full corpus LANDED at E4B/Q9B with the three v3 fixes proven at the
+station (the probe refused 1/1 both models; the D3 manifests
+populated — build_info + sha256 + params + grammar id; the np2 row
+n_slots 2 / n_ctx_slot 2048, the explicit shape). The §4.3 arms
+measured: the seeded-local determinism tier HOLDS both models (greedy
++ seeded byte-identical, n=5 — weak-arm replies pinnable, D3's
+consequence recorded in practice), the GBNF latency penalty ~2.0× at
+E4B (59.91 vs 121.38 tok/s p50) / ~1.3× at Q9B (80.0 vs 105.18),
+mode-A prose at the weak arm: E4B parser-only (every beat dry — the
+narrator replies not valid JSON, the retry ladder exhausted), Q9B
+narrates 6/8 per ladder — the narrator floor between 4B and 9B,
+presentation-1's exit criterion MET. The transcripts RE-DISTILLED per
+§8.2 source 3 (the bg-8 precedent's form):
+`tests/fixtures/engine1_deviation_corpus.json` (the F1–F6 documents
+verbatim from both models, family_verdict re-judged per reply — the
+semantic owner; the runner's own honest/guess split rode the bg-8
+baseline labels) + `tests/test_engine1_deviation.py` (16 Layer-1
+tests; the build replay cross-checked every door outcome against the
+station's own records — ZERO divergence, the INV-2 equality); the new
+measured shapes pinned: the FIRST local world-answer leak (e4b f1b,
+the degenerate empty no_intent, 33/34 coverage where the API baseline
+was 34/34) and the q9b protocol-template echo landing GATE-VALID (the
+bg-8 ParseError shape evolved). The heartbeat's first local rows live
+in TEST_PLAN §8.5 (three gap rows discharged; the remaining gaps
+re-pointed to the build's own A/B). Five runner residuals recorded
+(the SUMMARY embedder's empty sections, the duplicate zip entry, the
+onetwo manifest nulls, the coverage event-label bug, the
+baseline-label honest/guess split — all runner-side, v4 candidates,
+never repo).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
-1900 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 69db4f4 BEFORE working — 1900+1 green, ruff
-clean, the iter-172 pin re-confirmed — and re-verified after with the
-diff in place: 1900+1, ruff clean, doc-only, zero test change, the
-golden fixtures byte-untouched) ·
+1916 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 1f4f20d BEFORE working — 1900+1 green, ruff
+clean, the iter-173 pin re-confirmed — and re-verified after with the
+diff in place: 1916+1, the +16 the re-distillation's Layer-1 packet,
+ruff clean, the golden fixtures byte-untouched) ·
 Date: 2026-09-21 ·
-Scope: docs/TECH_NOTES.md (§13.1 the round-3 record — measured
-substance only) + docs/TASKS.md (the engine-1 row's round-3 state +
-the ledger line) + `STATUS.md` (this re-pin) + `worklog.md` (this
-entry). The prior iteration's record: iter-172 (engine-1 move (a),
-round 2). The detail lives in the worklog + git.
+Scope: docs/TECH_NOTES.md (§13.1 the round-4 record) +
+docs/TEST_PLAN.md (§8.5 the two local rows + the gap-row updates) +
+docs/TASKS.md (the engine-1 row's round-4 closure + presentation-1's
+evidence note + the ledger line) +
+tests/fixtures/engine1_deviation_corpus.json +
+tests/test_engine1_deviation.py + `STATUS.md` (this re-pin) +
+`worklog.md` (this entry) — 7 paths, over the §2.3 soft limit (the
+re-distillation's fixture+test pair is the named move's own
+deliverable, the bg-8 precedent's form). The prior iteration's
+record: iter-173 (engine-1 move (a), round 3). The detail lives in
+the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -526,6 +519,32 @@ the logs byte-differ. The harness is a script,
   composition, not totals).
 
 ## Next step
+
+**iter-174 DONE: engine-1 (move a, round 4) — the owner's v3 re-run
+bundle triaged, move (a) CLOSED** (the «продолжай работу. я тебе
+прислал логи и всякое такое» session): the full corpus landed at
+E4B/Q9B (validity 98.0% / 96.1% → 100% after one re-ask; the three v3
+fixes proven — the probe refused, the manifests populated, the np2 row
+explicit), the §4.3 arms measured (the seeded-local tier HOLDS both
+models n=5 — weak-arm replies pinnable; the GBNF penalty ~2.0×/~1.3×;
+mode-A prose: E4B parser-only, Q9B narrates 6/8 — the narrator floor
+between 4B and 9B), the transcripts re-distilled per §8.2 source 3
+(`engine1_deviation_corpus.json` + `test_engine1_deviation.py`, 16
+Layer-1 tests, the replay cross-check zero divergence; the first local
+world-answer leak 33/34 + the gate-valid protocol echo pinned), the
+heartbeat's first local rows live (TEST_PLAN §8.5), five runner
+residuals recorded (v4 candidates, runner-side only); 1916+1 green,
+ruff clean. **The owner's move: the call between (b) the build
+landing — the GBNF mapping repo-side (the INV-3-clean pure function
+over the grammar snapshot) + the door wiring + the failure→ladder
+mapping, INV-4 lifting there with the AGENTS §4/§8 edits riding it
+(CONTRACTS §4 the boundary; §4.3's claim packet F the build's own
+evidence; the adapter contract tests fire at the build) — and
+presentation-1's write (the exit criterion MET — the spec fires from
+the measured results per D-022's just-in-time law: the mode-A bound,
+the script-tax twins, the regen ladder's behavior, the JSON-envelope
+failure mode at E4B). The runner v4 residuals are cosmetic —
+fix-or-hold, they block neither move.**
 
 **iter-173 DONE: engine-1 (move a, round 3) — the v2 smoke bundle
 triaged + the s6 `--arm all` crash fixed runner-side (the owner's
