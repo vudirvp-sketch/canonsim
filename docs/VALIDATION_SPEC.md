@@ -294,7 +294,8 @@ counter exists.
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| The runtime inference engine (llama.cpp + GBNF) + the LLM-based extraction pass + the C-parser wiring | the phase-1 gate (the runtime-engine decision; the dev-time narrator is the external agent door, D-055) | blueprint §1 |
+| ~~The runtime inference engine (llama.cpp + GBNF) + the C-parser wiring~~ — **LANDED iter-177 (engine-1/D-193)**: the adapter `cli/engine.py` (INV-4's one-module form), the narrator requests' mapping `docs/PRESENTATION_SPEC.md`'s, this spec's §7 ladder mapping the engine's failures UNCHANGED (the regen budget and the L12 floor engine-agnostic) | — | AGENTS §4 (INV-4's standing form) |
+| The LLM-based extraction pass (an inline-delta-absent/malformed auxiliary; the 2-call steady state stands) | a measured need the inline delta + the regens do not cover | blueprint §1 |
 | The C-parser emitting IntentProposal JSON | phase 2 | blueprint §2 |
 | Knowledge-negation claims, fidelity-bearing claims | a real consumer (phase-2 parser disputes) | this spec §3 |
 | Semantic invalidation (a spreading fire kills the candlelight) | narrator delta territory or a later validator pass — never mediator guessing | blueprint §1 |

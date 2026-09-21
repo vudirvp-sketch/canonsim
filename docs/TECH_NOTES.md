@@ -1125,16 +1125,20 @@ VRAM/batch shapes, the S7 `-np 2` row re-measured for real.
 
 The move-(a) record closes here: the experiment's station numbers are
 landed and re-distilled, the heartbeat's first local rows live in
-TEST_PLAN §8.5. The remainder is the build landing (b) — the GBNF
-mapping repo-side + the door wiring + the failure→ladder mapping, INV-4
-lifting there — owner-gated (TASKS `engine-1`), plus presentation-1's
-write call (the exit criterion met: the weak-arm run on owner hardware,
-the narrator floor measured between E4B and Q9B).
+TEST_PLAN §8.5. The build landing (b) and presentation-1's write both
+landed with them (iter-177/178, TASKS engine-1/presentation-1 DONE;
+D-193; the serializer contract docs/PRESENTATION_SPEC.md).
 
 ## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
 
 Two doors, one ledger (D-049); `python -m cli` opens the interactive
-session.
+session. Since engine-1's landing (iter-177/D-193): `python -m cli
+--engine [URL]` hands the operator role to the runtime engine
+(llama-server behind the adapter — the same files, the same gates; the
+human may still answer or fix any reply by hand between commands;
+`--engine-model <stem>` for router-shaped endpoints; the provenance
+manifest lands in `output/engine/`). The contract:
+`docs/PRESENTATION_SPEC.md`.
 
 **narrate** (the narrator door, phase 1): `narrate [<reply.json> | dry]`.
 `emit_call` writes `output/mediator/call_NNNN.md` (gitignored runtime);

@@ -519,9 +519,12 @@ smaller n records the raw min/median/max with the gap noted).
 | engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
 
 Gap rows standing: the 27B GBNF parse arm + the one-model-constrained
-A/B (the build landing's own comparison, CONTRACTS §4.3 arm a); the
-brief/parse component split (the battery's emit_call measures the door's
-one repo-side call — the build's own instrumentation owns the split);
+A/B (CONTRACTS §4.3 arm a — the owner's next station run, now through
+the LANDED surface: the `--engine` session + the repo-side grammar,
+iter-177/D-193); the grammar's live-backend compile check (the same
+run); the brief/parse component split (the battery's emit_call measures
+the door's one repo-side call — the landed session's engine cycle is
+the surface that owns the split, its numbers the next heartbeat's);
 the API-side prose families (ii)–(v) (rate-limit economics at bg-8 — the
 LOCAL band measured them: E4B all-dry, Q9B 6/8, §13.1). Discharged by
 the engine-1 run: the {3–8B, GBNF} arm (both rows), the per-component

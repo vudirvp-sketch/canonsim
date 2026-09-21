@@ -137,12 +137,17 @@ class FieldConstraint:
     field (`positive_int`), or a live texture-entry reference (`texture`).
     `values=None` with both flags false is an open string the door
     validates downstream (the boundary never duplicates door-owned
-    checks — one owner per law)."""
+    checks — one owner per law). `required` mirrors the door's own
+    accept-time law (`core/intent.py::action_duration`: the drawn-`N`
+    form demands the `ticks` step field) — the GBNF serialization
+    (brief/gbnf.py, engine-1) encodes it at the source; the reply gate
+    above stays optional-field-shaped, exactly like the door."""
 
     name: str
     values: tuple[str, ...] | None = None
     positive_int: bool = False
     texture: bool = False
+    required: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -257,7 +262,7 @@ def _verb(action: Mapping[str, Any], pack: Pack, position: str) -> Verb:
     constraints = []
     for name in action.get("fields", ()):
         if name == "ticks" and action.get("ticks") == "N":
-            constraints.append(FieldConstraint(name, positive_int=True))
+            constraints.append(FieldConstraint(name, positive_int=True, required=True))
         elif name == "method":
             methods = pack.rules.get("checks", {}).get("methods", {})
             constraints.append(FieldConstraint(name, values=tuple(methods)))

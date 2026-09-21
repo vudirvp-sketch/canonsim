@@ -17,7 +17,9 @@ inside Soul-of-Waifu (`docs/VISION.md` §10).
 
 Two work tracks (`docs/ROADMAP.md` §1):
 
-- **A (main):** the simulator, no LLM. Iterations `iter-N`.
+- **A (main):** the simulator — LLM-free at the core, the runtime engine
+  wired as the doors' operator through the explicit adapter
+  (`cli/engine.py`, engine-1/D-193; INV-4's form). Iterations `iter-N`.
 - **B (background):** LLM-circuit spikes on foreign canon (Dwarf Fortress
   Legends XML). Tasks `bg-N`. Never blocks track A; can be dropped independently.
 
@@ -55,7 +57,7 @@ them.
 | INV-1 | **Event sourcing.** No state change outside an event. State = fold(log). The raw JSONL log is the only truth; SQLite is a rebuildable index. The log writer (`core/log.py`) is the only canon-write path; every other module emits through the queue (privilege separation, D-031). | T2 replay test; review |
 | INV-2 | **Determinism.** Single point of randomness control — one master seed; named streams deterministically derived from it via the `RngBank` authority (stable hash of `f"{seed}:{stream}"`); no wall-clock anywhere (including the log header); iteration only via `sorted()` or construction order; queue key `(tick, sub_order, actor_id)`; `PYTHONHASHSEED=0`. Cosmetic-stream draws can never desync canon replay. (D-028; supersedes the "one `random.Random(seed)` instance" wording — the donor sources themselves are multi-stream.) | T1 byte-identical test + RngBank fingerprint |
 | INV-3 | **Content/code split.** Core code contains no domain words ("guard", "purse", "tavern"). All setting data lives in `content/tavern_pack/*.json`. | grep stoplist test (from iter-2) |
-| INV-4 | **LLM boundary.** No LLM or network calls in track A (the phase-0 gate condition is discharged — the boundary itself is the standing law; it lifts only on the owner's engine-1 call, D-055's file-contract frame). | review; import check |
+| INV-4 | **LLM boundary — the explicit adapter.** The LLM/network surface is EXACTLY ONE module: the engine adapter `cli/engine.py` (D-192/D-193, engine-1's landing — the owner's lift call). Everything else — `core/`, `sim/`, `render/`, `brief/`, `scripts/` — stays network-free and engine-agnostic; no engine client ever enters `core/` (D-031/D-037). The doors' gates run on the reply document, engine-agnostic by construction (D-055's file contract — the runtime engine is "the operator"); inference sits outside the canonical determinism envelope (TEST_PLAN §8.4). | review; the narrowed import check (test_architecture — the ban outside the adapter module) |
 | INV-5 | **Log immutability.** Committed logs are never edited; corrections are new events. Runtime logs are never committed. | review; `.gitignore` |
 
 ## 5. Bug → doc → fix (KI lifecycle)
@@ -148,8 +150,10 @@ the worklog records why.
 - Adding any runtime dependency (core is stdlib-only) or bumping
   `requires-python`.
 - Touching CI workflow files.
-- Introducing any LLM/network call into track A (the engine-1 owner gate —
-  the phase-0 condition is discharged since iter-6).
+- Introducing a new LLM/network call site ANYWHERE outside the engine
+  adapter `cli/engine.py` (a second engine module, a network import in
+  `core/`/`brief/`/`scripts/`, an engine client in the kernel — INV-4's
+  standing form, D-192/D-193).
 - Moving or renaming top-level directories.
 - Deleting or rewriting committed log or fixture files.
 

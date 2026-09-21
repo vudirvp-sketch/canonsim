@@ -61,10 +61,10 @@ padding.
 | `docs/worldbuild/` | the authored-setting surface: world kernel, Resonance, the Sarrow Vale anchor, the authoring doctrine (D-186) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
 | `content/` | the five packs — setting as data (tavern, road, province, grim, pressure), loaded + linted by `core/pack.py` (the admission gate; lint bodies in `core/packlint/`) |
-| `core/` | the engine (stdlib-only, D-012): the event-sourced kernel (log, queue, loop, fold), the RngBank, the knowledge/director/world/social stacks, economy, intent + resolvers, metrics, pack |
+| `core/` | the engine (stdlib-only, D-012; engine-agnostic — INV-4): the event-sourced kernel (log, queue, loop, fold), the RngBank, the knowledge/director/world/social stacks, economy, intent + resolvers, metrics, pack |
 | `render/` | the deterministic renderer: the tracery grammar engine (cosmetic stream) + the chronicle/entity views (pure functions of the log) |
-| `brief/` | the mediator circuit (LLM-free engine side): assembler, scene ledger, validator, mediator, the mode-C parser boundary, scan, since |
-| `cli/` | the play interface: batch `play`/`chronicle`/`state`/`replay` + the interactive session with the narrator door, `--resume`, `--pack` |
+| `brief/` | the mediator circuit (LLM-free engine side): assembler, scene ledger, validator, mediator, the mode-C parser boundary + its GBNF serialization, scan, since |
+| `cli/` | the play interface: batch `play`/`chronicle`/`state`/`replay` + the interactive session with the narrator door, `--resume`, `--pack`, `--engine` (the runtime engine as the doors' operator — the adapter the repo's one network module) |
 | `scripts/` | operator tooling (CLI-class, D-046): the harnesses (balance/profile/worldgen), the offline builders (chronicle/checkpoint), pack tools (scaffold/doctor), digest, docguard, the `df_*` track-B tools |
 | `tests/`, `tests/playscripts/` | the suite + seed/intent fixtures |
 

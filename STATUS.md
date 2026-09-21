@@ -1,32 +1,39 @@
-Iteration: iter-176 (`iter-176-doc3` — the owner's declared doc-3
-build, the cleanup the iter-175 audit routed to): the state-layer
-reassembly LANDED — STATUS's FAQ essays to one-liners + owner links
-(NAV §3's own law), the two unique operational recipes moved to
-TECH_NOTES §14/§15, TASKS's three history ledgers dead (git owns
-them; a guard-capped one-line ledger tail remains), the standing rows
-de-historized (engine-1's rounds a closure clause + pointers),
-worklog re-trimmed to the 3–5-line entry law, README's phase block
-to one-liners + the repo map to function level, the DECISIONS
-D-034/D-185 collapse 31→30 with D-119's 8.4k intake restatement a
-pointer to phases.md §6, and the mechanical cap guard LIVE
-(`scripts/docguard.py` + `tests/test_docguard.py` — the recurrence
-fix the iter-140/151 GC passes lacked).
+Iteration: iter-178 (`iter-178-presentation1` + `iter-177-engine1b`, the
+owner's batched call over the two named tasks): presentation-1's spec
+WRITTEN from the measured results — `docs/PRESENTATION_SPEC.md` (the
+model-facing serializer contract over the stable brief IR, the D-055
+pattern's fourth instance; st-4 absorbed: the call budget, the
+no-tail resolution, thinking-as-ephemeral, the Script Tax clause; the
+three consult cards integrated — intake-30 the visual fence, intake-32
+the re-expansion mapping, intake-33 the outcome-perception layers,
+no shape changed) — and engine-1 (b) LANDED before it (iter-177,
+D-193): the GBNF mapping repo-side (`brief/gbnf.py` + the golden
+fixture), the explicit adapter `cli/engine.py` (INV-4 lifted to the
+one-module form — the AGENTS §4/§8 edits riding), the `--engine` door
+wiring (the file contract preserved, ZERO gate edits), the
+failure→ladder mapping (the runtime re-ask ×1 + D7's degradation
+rungs), the provenance manifest, the contract collapsed (CONTRACTS §4
+the pointer).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-1926 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 2687465 BEFORE working — 1916+1 green, ruff
-clean, the iter-175 pin re-confirmed — and re-verified after with the
-diff in place: 1926+1 green (the +10 the docguard test packet),
-doc + tooling only, ruff clean) ·
+1960 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
+verified at BASE_COMMIT 446603d BEFORE working — 1926+1 green, ruff
+clean — and re-verified after with the diff in place: 1960+1 green
+(the +34 the two engine-1 packets: the GBNF mapping + the adapter
+contract tests), ruff clean, docguard clean) ·
 Date: 2026-09-21 ·
-Scope: docs/TASKS.md + `STATUS.md` + worklog.md + README.md +
-docs/DECISIONS.md + docs/TECH_NOTES.md + scripts/docguard.py +
-tests/test_docguard.py + scripts/digest.py (the landings parser
-adapted to the ledger one-liners) + docs/AGENT_NAVIGATION.md §1 (the
-scripts row) — 10 paths, doc + tooling. The prior iteration's record:
-iter-175 (docrev1 — doc-3 OPENED). The detail lives in the worklog +
-git.
+Scope: brief/gbnf.py + brief/parser.py + cli/engine.py + cli/main.py +
+tests/test_gbnf.py + tests/test_engine.py + tests/test_architecture.py +
+tests/fixtures/parse_gbnf_seed125.gbnf + scripts/regen_parse_gbnf.py +
+docs/PRESENTATION_SPEC.md + AGENTS.md + docs/PARSER_SPEC.md +
+docs/BRIEF_SPEC.md + docs/VALIDATION_SPEC.md + docs/CONTRACTS.md +
+docs/TEST_PLAN.md + docs/TECH_NOTES.md + docs/AGENT_NAVIGATION.md +
+README.md + docs/DECISIONS.md + docs/TASKS.md + `STATUS.md` + worklog.md
+— 24 paths, the build over the §2.3 soft limit (the landing + the spec
++ their state docs, the owner's batched call). The prior iterations'
+record: iter-176 (doc-3), iter-175 (docrev1). The detail lives in the
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -43,8 +50,10 @@ git.
   iter-10a); all setting data in `content/tavern_pack/`; the periphery
   dirs (`render/`, `cli/`, `scripts/`) carry pack paths/help text/prose
   by design (D-046).
-- INV-4 LLM boundary: no LLM/network calls in track A — executable against
-  every package dir incl. `scripts/` since iter-6a (D-046).
+- INV-4 LLM boundary — the explicit adapter: the network surface is
+  EXACTLY ONE module, `cli/engine.py` (engine-1's landing, D-193);
+  everything else stays network-free and engine-agnostic — AGENTS §4
+  the law owner, the architecture test the executable.
 - INV-5 Log immutability: committed logs are never edited; corrections are
   new events.
 
@@ -80,21 +89,18 @@ git.
 
 ## Next step
 
-**iter-176 DONE: doc3 — the state-layer reassembly landed (doc-3
-CLOSED): the FAQ essays one-liners + owner links, the recipes to
-TECH_NOTES §14/§15, the three TASKS ledgers dead, the DECISIONS
-collapse 31→30, the cap guard live. The standing queue unchanged.**
+**iter-177/178 DONE: engine-1 (b) the build landing (D-193 — the GBNF
+mapping + the adapter + the wiring + the ladders, INV-4 lifted) +
+presentation-1's spec written (PRESENTATION_SPEC, st-4 absorbed). The
+standing queue's two named rows closed by the owner's batched call.**
 
-1. **engine-1 (b)**: the build landing — the GBNF mapping repo-side +
-   the door wiring + the failure→ladder mapping, INV-4 lifting there
-   with the AGENTS §4/§8 edits riding it (CONTRACTS §4 the boundary;
-   §4.3's claim packet F the build's evidence; the adapter contract
-   tests fire at the build).
-2. **presentation-1's write**: the exit criterion MET (iter-174 — the
-   narrator floor measured between E4B and Q9B); the spec fires from
-   the measured results per D-022 (TECH_NOTES §13.1 the material; the
-   three consult cards: intake-30/32/33).
-3. The standing frames: Track B's gap rows (the bg-7 prose families,
+1. The landed surface's station verification (the owner's next engine
+   session): the first live `--engine` run — the grammar's compile
+   check at the real backend, the session manifest, the heartbeat's
+   brief/parse component split; the 27B GBNF parse arm + the
+   one-model-constrained A/B (TEST_PLAN §8.5's gap rows, CONTRACTS
+   §4.3 arm a).
+2. The standing frames: Track B's gap rows (the bg-7 prose families,
    the per-family latency distribution), the world track's frontier
    (WORLD_WORKPLAN §6 — the embodiment options, W5's live band, the
    camp's meso half), the debt-1 residues (each a future row's own

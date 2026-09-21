@@ -26,56 +26,28 @@ claim packet)
 > a second queue; a world-authoring need for engine capability lands
 > HERE as a standing row on the owner's call.
 
-- `engine-1` — the runtime inference engine, DECIDED (iter-170, D-192:
-  llama-server behind an EXPLICIT ADAPTER + GBNF; the file-contract
-  frame (D-055) the insertion point; CONTRACTS §4 the build boundary).
-  Move (a), the {3–8B, GBNF} experiment: CLOSED iter-174, four
-  owner-session rounds (iter-171..174; the full corpus landed at
-  E4B/Q9B, the §4.3 arms measured, the transcripts re-distilled as
-  the Layer-1 corpus + its 16 tests; the Rule-9 runners outside the
-  repo, never committed). Remaining: (b) the build landing — the GBNF
-  mapping repo-side + the door wiring + the failure→ladder mapping,
-  INV-4 lifting there with the AGENTS §4/§8 edits riding it,
-  owner-gated; presentation-1's write call rides the same evidence.
-  Unlocked by the phase-1 gate; the dev-time external parser carried
-  phase 2 to its gate PASS (iter-35) and carries mode C until the
-  landing. Evidence: TECH_NOTES §13/§13.1, TEST_PLAN §8.5,
-  `tests/fixtures/engine1_deviation_corpus.json`; detail: git.
-- `presentation-1` — the LLM presentation contract, engine-1's
-  decision-input child, never a sibling competitor (intake-12, D-148): the
-  model-facing serializer spec over the STABLE brief IR (BRIEF_SPEC §7
-  bytes + §7.1 protocol — the D-055 file-contract pattern's fourth
-  instance), written FROM the {3–8B, GBNF} arm's results at the engine-1
-  call (D-022 — a contract without a consumer has unknown requirements).
-  Absorbs `st-4` at write time (the call budget + the transcript-tail
-  contract + thinking-as-ephemeral-texture + the Script Tax clause — one
-  owner, never two). The spec's shape when written: a thin mapping table
-  over the existing 8 blocks + `narrator_protocol` — never a second
-  re-labeling vocabulary (D-024). Exit criterion: the weak-arm run on owner
-  hardware — MET (iter-174, engine-1 round 4: the mode-A bound measured —
-  E4B parser-only at this call shape, Q9B narrates 6/8 per ladder, the
-  narrator floor between 4B and 9B; the local transcripts' own call/reply
-  documents are the spec's material). Evidence base: TECH_NOTES
-  §10/§11/§13 (§13.1 the round-4 record — the mode-A arm, the script-tax
-  twins, the regen ladder's measured behavior, the JSON-envelope failure
-  mode at E4B); consult material at write
-  time: the intake-30 visual-system card (phases.md §6 — the visual
-  surface's parked residue: the development-order law, the fidelity
-  target, the rejection table; D-187/D-174's surface ownership) + the
-  intake-32 Vantiel card (`docs/ref/vantiel.md` — the model boundary's
-  parked residue: the re-expansion law — a bounded context bundle keeps
-  stable event/entity handles and re-expands deterministically from canon,
-  never a second truth — + the staged-interpretation sketch input →
-  interpretation → context → model proposal → validation → prose; D-190,
-  the falsifier: the real consumer vs the current brief/retrieval stack on
-  context cost, traceability, re-expansion correctness) + the intake-33
-  outcome-perception card (`docs/ref/game_design_talks.md` §"What we
-  take" — the layered legibility ladder: truth never bends / failure
-  carries cause + avoidance path / odds as expectation bands, never naked
-  percentages / transparency opt-in by flag, nothing dropped silently /
-  outcomes legible through residue / stakes irreversible; D-191, the
-  falsifier: at the write, each layer either changes the narrator
-  document's shape or dissolves as already-satisfied).
+- `engine-1` — DONE (iter-170 D-192 DECIDED + iter-171..174 the {3-8B, GBNF}
+  experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING, the
+  owner's call): llama-server behind the explicit adapter — the GBNF
+  mapping repo-side (`brief/gbnf.py`, PARSER_SPEC §2.1, the golden
+  fixture), the adapter `cli/engine.py` (INV-4's one-module form — the
+  AGENTS §4/§8 lift riding), the `--engine` door wiring (the file
+  contract preserved, zero gate edits), the failure→ladder mapping
+  (PARSER_SPEC §5's re-ask + D7's rungs), the provenance manifest; the
+  contract absorbed (CONTRACTS §4 the pointer); the serializer contract
+  PRESENTATION_SPEC's (iter-178). Station remainder: the 27B GBNF arm +
+  the live compile check — TEST_PLAN §8.5's gap rows. Evidence:
+  TECH_NOTES §13/§13.1, TEST_PLAN §8.5, the engine-1 test packets.
+- `presentation-1` — DONE (iter-178, the owner's write call on the met
+  exit criterion): `docs/PRESENTATION_SPEC.md` — the model-facing
+  serializer contract over the stable brief IR (the D-055 pattern's
+  fourth instance), written FROM the measured results (the mapping
+  table + the narrator band; st-4 ABSORBED — the call budget, the
+  no-tail resolution, thinking-as-ephemeral, the Script Tax clause);
+  the three consult cards integrated (intake-30 the visual fence,
+  intake-32 the re-expansion mapping, intake-33 the outcome-perception
+  layers — no layer changed a shape, the cross-domain confirmation).
+  Detail: the spec itself + D-193's tail + git.
 - `parse-2` — disambiguation buttons + multi-intent utterances, each half
   behind its own gate (PARSER_SPEC §7; sharpened iter-150): BUTTONS wait on
   a frontend consumer (mode C live play — a UI affordance, never a parser
@@ -137,6 +109,8 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-178 · 2026-09-21 · presentation-1 — the LLM presentation contract written from the measured results (st-4 absorbed)
+- iter-177 · 2026-09-21 · engine-1 (b) — the build landing: the GBNF mapping + the adapter + the door wiring + the ladders, INV-4 lifted (D-193)
 - iter-176 · 2026-09-21 · doc3 — the state-layer reassembly landed (doc-3 DONE) + the mechanical cap guard live
 - iter-175 · 2026-09-21 · docrev1 — the state-layer audit routed, doc-3 OPENED (the owner's doc-revision call)
 - iter-174 · 2026-09-21 · engine-1 round 4 — the full corpus landed at E4B/Q9B, move (a) CLOSED
@@ -145,8 +119,6 @@ claim packet)
 - iter-171 · 2026-09-21 · engine-1 round 1 — the {3–8B, GBNF} experiment convened; the Rule-9 runner delivered
 - iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED (D-192)
 - iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures landed
-- iter-168 · 2026-09-21 · qa1 — the type-discipline audit (mypy --strict core/ 207 → 0)
-- iter-167 · 2026-09-21 · stepread — the step bench's first embodiment landed (pure pack data)
 
 ## Track B — background (evenings, foreign canon)
 

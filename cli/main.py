@@ -17,15 +17,19 @@ Interactive session (no subcommand) — `look` and `wait` are two of the
 16 actions driven as single-step intents through the same front door as
 playscript steps; `play` loads a script into the live session; `narrate`
 drives the mediator beat cycle over an EXTERNAL narrator (the
-agent-in-the-loop door, D-055 — the repo stays LLM-free); `say` hands
-free text to the EXTERNAL parser (phase 2, mode C, D-062 — same law:
-the repo stays LLM-free):
+agent-in-the-loop door, D-055); `say` hands free text to the EXTERNAL
+parser (phase 2, mode C, D-062). The external operator is the human at
+the files by default; `--engine [URL]` wires the RUNTIME engine
+(llama-server behind the explicit adapter, engine-1/D-193) as that
+operator — the doors and their gates are byte-identical either way
+(the file contract, D-055: the runtime engine reads the same call
+files and writes the same reply files):
 
     look · wait N · play <script> · narrate [<reply.json> | dry] ·
     say <text> · say apply <reply.json> · chronicle · state <entity> ·
     replay <log> · directors on|off · seed [<n>] · help · quit
 
-The session takes the same flag at the top level
+The session takes the same flags at the top level
 (`python -m cli --pack <dir> ...`), and `--resume <log>` opens the
 session OVER an existing log instead of starting fresh (D-139: one
 continuous run, appended in place — the seed and pack come from the
@@ -51,6 +55,17 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
+from brief.gbnf import gbnf_grammar, grammar_fingerprint
+from brief.parser import grammar_snapshot
+from cli.engine import (
+    DEFAULT_ENDPOINT,
+    EngineConfig,
+    EngineError,
+    LlamaServerClient,
+    manifest_row,
+    narrator_messages,
+    write_manifest,
+)
 from cli.mediator import BeatResult, Mediator, MediatorError
 from cli.parser import ParseError, ParserDoor, ParseResult
 from core.checkpoint import CheckpointError
@@ -81,6 +96,8 @@ _SESSION_HELP = """commands:
   wait N            wait N ticks (the world moves: beats, rotations)
   play <script>     run a playscript's steps in this session
   narrate           emit the narrator call (output/mediator/call_NNNN.md)
+                    — with --engine, the engine answers it and the beat
+                    cycle runs to the beat's close (the chorus included)
   narrate <reply>   apply a narrator reply JSON {prose, texture_delta?,
                     proposal?} — the beat cycle runs; an accepted player
                     beat then hands the chorus's actor calls (mode B,
@@ -88,8 +105,10 @@ _SESSION_HELP = """commands:
   narrate dry       close the open call without a narrator: an actor
                     call is skipped (the template rung), the player's
                     call closes the whole beat
-  say <text>        hand free text to the external parser (mode C):
-                    emit the parse call (output/parser/parse_NNNN.md)
+  say <text>        hand free text to the parser (mode C): emit the
+                    parse call (output/parser/parse_NNNN.md) — with
+                    --engine, the runtime engine answers it (GBNF-
+                    constrained) and the cycle closes in one command
   say apply <file>  apply the parser's reply JSON {intent | question |
                     no_intent} — the intent feeds the front door
   chronicle         print the tale so far (re-rendered from the log)
@@ -154,6 +173,7 @@ class Session:
         logs_dir: Path,
         director_enabled: bool,
         resume_log: Path | None = None,
+        engine: EngineConfig | None = None,
     ) -> None:
         self._pack = pack
         self._schema = schema
@@ -163,6 +183,12 @@ class Session:
         self._mediator: Mediator | None = None
         self._parser: ParserDoor | None = None
         self._resume_info: tuple[int, int] | None = None
+        self._engine = engine
+        self._engine_client: LlamaServerClient | None = None
+        self._engine_props: dict = {}
+        self._engine_manifest: Path | None = None
+        self._engine_grammar_noted = False
+        self._open_call: Path | None = None  # the call awaiting a reply
         if resume_log is None:
             self._start(seed)
         else:
@@ -180,6 +206,10 @@ class Session:
         self._shown_lines = 0
         self._mediator = None  # the ledger dies with its session (D-049)
         self._parser = None  # the parser door shares that ledger
+        self._engine_manifest = None  # the manifest is per-log provenance
+        self._engine_props = {}
+        self._engine_grammar_noted = False
+        self._open_call = None  # the beat dies with its session
 
     @property
     def seed(self) -> int:
@@ -217,6 +247,10 @@ class Session:
         self._log_path = log_path
         self._mediator = None  # the ledger dies with its session (D-049)
         self._parser = None
+        self._engine_manifest = None
+        self._engine_props = {}
+        self._engine_grammar_noted = False
+        self._open_call = None
         self._resume_info = (int(cursor["event_count"]), int(cursor["tick"]))
         text = _session_log(self._pack, self._schema, self._log_path)
         self._shown_lines = len(text.splitlines())
@@ -366,19 +400,27 @@ class Session:
         mediator = self._mediator_or_start()
         try:
             if not args:
-                path = mediator.emit_call()
-                reply = path.with_name(
-                    path.stem.replace("call", "reply") + ".json"
-                )
-                print(f"[narrator call: {path}]")
-                print(
-                    f"[write a JSON reply {{prose, texture_delta?, proposal?}} "
-                    f"at {reply}, then: narrate {reply}]"
-                )
+                if self._engine is None:
+                    path = mediator.emit_call()
+                    reply = path.with_name(
+                        path.stem.replace("call", "reply") + ".json"
+                    )
+                    print(f"[narrator call: {path}]")
+                    print(
+                        f"[write a JSON reply {{prose, texture_delta?, proposal?}} "
+                        f"at {reply}, then: narrate {reply}]"
+                    )
+                    self._open_call = path
+                else:
+                    self._narrate_via_engine(mediator)
             elif args == ["dry"]:
-                self._print_beat(mediator.dry_close())
+                result = mediator.dry_close()
+                self._open_call = result.call_path
+                self._print_beat(result)
             elif len(args) == 1:
-                self._print_beat(mediator.apply_reply(Path(args[0])))
+                result = mediator.apply_reply(Path(args[0]))
+                self._open_call = result.call_path
+                self._print_beat(result)
             else:
                 print("usage: narrate [<reply.json> | dry]")
         finally:
@@ -445,15 +487,19 @@ class Session:
             result = door.apply_reply(Path(args[1]))
             self._print_parse(result)
             return
-        path = door.emit_call(" ".join(args))
-        reply = path.with_name(
-            path.stem.replace("parse", "parse_reply") + ".json"
-        )
-        print(f"[parser call: {path}]")
-        print(
-            f"[write a JSON reply {{intent | question | no_intent}} at {reply}, "
-            f"then: say apply {reply}]"
-        )
+        text = " ".join(args)
+        if self._engine is None:
+            path = door.emit_call(text)
+            reply = path.with_name(
+                path.stem.replace("parse", "parse_reply") + ".json"
+            )
+            print(f"[parser call: {path}]")
+            print(
+                f"[write a JSON reply {{intent | question | no_intent}} at {reply}, "
+                f"then: say apply {reply}]"
+            )
+            return
+        self._say_via_engine(door, text)
 
     def _print_parse(self, result: ParseResult) -> None:
         """Show the cycle's outcome: an intent feeds the world (fresh
@@ -472,6 +518,173 @@ class Session:
             print(f"[the parser asks: {result.text}]")
             return
         print(f"[no intent: {result.text}]")
+
+    # -- the runtime-engine operator cycles (engine-1, D-193) ------------------
+
+    #: The off-grammar re-ask's repair turn: the ParseError's own message
+    #: (the nearest-valid menu riding it, iter-107) is the fuel the engine
+    #: patches toward — the dev-time operator's "fix the reply" automated.
+    _RE_ASK_NOTE = (
+        "Your previous reply was rejected at the boundary:\n{error}\n"
+        "Reply again with ONE JSON object carrying exactly one alternative "
+        "(intent | question | no_intent), on-grammar per the protocol above."
+    )
+
+    def _engine_client_or_first_use(self) -> LlamaServerClient:
+        """The lazy client + the one-time provenance manifest (the D3
+        inference tier): /props read, the model file hashed, the row
+        written to `output/engine/manifest_<log-stem>.json` — a runtime
+        artifact, never canon. An unreachable backend writes a partial
+        row and the session lives on (the ladder owns the rest)."""
+        if self._engine is None:  # pragma: no cover — the callers gate on it
+            raise MediatorError("no engine configured for this session")
+        if self._engine_client is None:
+            self._engine_client = LlamaServerClient(self._engine)
+        if self._engine_manifest is None:
+            print(f"[engine: {self._engine.endpoint} — reading provenance]")
+            try:
+                self._engine_props = self._engine_client.props()
+            except EngineError as exc:
+                print(f"[engine manifest partial ({exc}) — the session continues]")
+                self._engine_props = {}
+            self._engine_manifest = write_manifest(
+                manifest_row(self._engine, self._engine_props),
+                OUTPUT_DIR / "engine",
+                self._log_path.stem,
+            )
+            print(f"[engine manifest: {self._engine_manifest}]")
+        return self._engine_client
+
+    def _engine_note_grammar(self, grammar_id: str) -> None:
+        """Pin the first parse call's grammar id into the manifest (the
+        constraint half of the request identity; per-call ids derive
+        from the log — the manifest anchors the mapping's fingerprint)."""
+        if self._engine is None or self._engine_grammar_noted:
+            return
+        self._engine_grammar_noted = True
+        self._engine_manifest = write_manifest(
+            manifest_row(
+                self._engine, self._engine_props, parse_grammar_id=grammar_id
+            ),
+            OUTPUT_DIR / "engine",
+            self._log_path.stem,
+        )
+
+    def _say_via_engine(self, door: ParserDoor, text: str) -> None:
+        """One parse cycle with the runtime engine as the operator
+        (D-055's frame): emit -> the GBNF-constrained answer -> apply.
+        The failure->ladder mapping (CONTRACTS §4.1 D7): an off-grammar
+        reply re-asks once with the refusal note (the menu's fuel);
+        exhaustion leaves the cycle OPEN — the dev-time door stands
+        (hand-write the reply); an unavailable engine maps onto the same
+        open-cycle rung; the door's own RunnerError (a consumed reply
+        the world refused — the s2c1 class) is TERMINAL: it propagates
+        to the session's error print, nothing re-asks, the world never
+        moved on a shape violation."""
+        engine = self._engine
+        assert engine is not None  # the caller gates on the engine
+        call_path = door.emit_call(text)
+        reply_path = call_path.with_name(
+            call_path.stem.replace("parse", "parse_reply") + ".json"
+        )
+        print(f"[parser call: {call_path}] [engine: {engine.endpoint}]")
+        client = self._engine_client_or_first_use()
+        ledger = self._mediator_or_start().ledger
+        _header, events = read_log(self._log_path, self._schema)
+        grammar = gbnf_grammar(
+            grammar_snapshot(events, self._pack, ledger)
+        )
+        self._engine_note_grammar(grammar_fingerprint(grammar))
+        messages: list[dict[str, str]] = [
+            {"role": "user", "content": call_path.read_text(encoding="utf-8")}
+        ]
+        for attempt in range(engine.re_asks + 1):
+            try:
+                content, finish = client.chat(
+                    messages,
+                    grammar=grammar,
+                    temperature=engine.parse_temperature,
+                    max_tokens=engine.parse_max_tokens,
+                )
+            except EngineError as exc:
+                print(
+                    f"[engine unavailable: {exc} — the cycle stays open; "
+                    f"write a reply at {reply_path}, then: "
+                    f"say apply {reply_path}]"
+                )
+                return
+            reply_path.write_text(content, encoding="utf-8")
+            self._print_engine_reply(reply_path, finish)
+            try:
+                result = door.apply_reply(reply_path)
+            except ParseError as exc:
+                if attempt < engine.re_asks:
+                    print(
+                        f"[off-grammar reply ({exc}) — "
+                        f"re-asking {attempt + 1}/{engine.re_asks}]"
+                    )
+                    messages = [
+                        messages[0],
+                        {"role": "assistant", "content": content},
+                        {
+                            "role": "user",
+                            "content": self._RE_ASK_NOTE.format(error=exc),
+                        },
+                    ]
+                    continue
+                print(
+                    f"[off-grammar after {engine.re_asks} re-ask(s): {exc} "
+                    f"— the cycle stays open; fix {reply_path}, then: "
+                    f"say apply {reply_path}]"
+                )
+                return
+            self._print_parse(result)
+            return
+
+    def _narrate_via_engine(self, mediator: Mediator) -> None:
+        """The narrator beat cycle with the runtime engine as the
+        operator: answer the open call (or emit one), apply, and follow
+        the beat's own ladder — the mediator maps every failure exactly
+        as it does for the human operator (malformed/refused replies
+        spend its <=2 regens; exhaustion falls to the template rung;
+        the chorus advances call by call until the beat closes). An
+        unavailable engine falls to the SAME floor: dry_close (the
+        template rung — never a blocked beat, never a silent drop)."""
+        engine = self._engine
+        assert engine is not None  # the caller gates on the engine
+        client = self._engine_client_or_first_use()
+        if self._open_call is None:
+            self._open_call = mediator.emit_call()
+        while self._open_call is not None:
+            call = self._open_call
+            reply = call.with_name(
+                call.stem.replace("call", "reply") + ".json"
+            )
+            try:
+                content, finish = client.chat(
+                    narrator_messages(call.read_text(encoding="utf-8")),
+                    grammar=None,
+                    temperature=engine.prose_temperature,
+                    max_tokens=engine.prose_max_tokens,
+                )
+            except EngineError as exc:
+                print(f"[engine unavailable: {exc} — the template rung]")
+                result = mediator.dry_close()
+            else:
+                reply.write_text(content, encoding="utf-8")
+                self._print_engine_reply(reply, finish)
+                result = mediator.apply_reply(reply)
+            self._open_call = result.call_path
+            self._print_beat(result)
+
+    @staticmethod
+    def _print_engine_reply(reply: Path, finish: str) -> None:
+        """The operator's trace line: the reply file (the contract —
+        inspectable exactly like a hand-written one) plus the stop
+        reason when it is not a clean stop (I6: engine metadata is
+        operator feedback, never canon)."""
+        note = "" if finish in ("stop", "") else f" [finish_reason: {finish}]"
+        print(f"[engine reply: {reply}{note}]")
 
     def _print_world_delta(self) -> None:
         """The fresh chronicle tail + scene card (the shared step-output
@@ -556,9 +769,16 @@ def cmd_replay(args: argparse.Namespace) -> int:
 def run_session(args: argparse.Namespace) -> int:
     """The interactive session loop."""
     pack, schema = _load(args.pack)
+    engine = None
+    if getattr(args, "engine", None) is not None:
+        engine = EngineConfig(
+            endpoint=args.engine,
+            model=args.engine_model,
+            seed=args.seed,
+        )
     session = Session(
         pack, schema, args.seed, Path(args.logs_dir),
-        args.directors != "off", resume_log=args.resume,
+        args.directors != "off", resume_log=args.resume, engine=engine,
     )
     if session.resumed is not None:
         events, tick = session.resumed
@@ -596,12 +816,26 @@ def run_session(args: argparse.Namespace) -> int:
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="canonsim",
-        description="TavernSim v0 — deterministic simulation, no LLM "
-        "(simulator produces facts; the chronicle reads them from the log)",
+        description="TavernSim v0 — deterministic canonical simulation "
+        "(the simulator produces facts; the chronicle reads them from "
+        "the log; the optional --engine operator sits outside the canon, "
+        "INV-4's adapter form)",
     )
     parser.add_argument(
         "--seed", type=int, default=42,
         help="seed for the interactive session (default: 42)",
+    )
+    parser.add_argument(
+        "--engine", nargs="?", const=DEFAULT_ENDPOINT, default=None,
+        metavar="URL",
+        help="wire the runtime engine (llama-server behind the explicit "
+             "adapter, engine-1) as the doors' operator — the optional "
+             "value is the endpoint (default: %(const)s)",
+    )
+    parser.add_argument(
+        "--engine-model", default=None, metavar="STEM",
+        help="the model stem for router-shaped endpoints (rides the "
+             "request's model field; single-server endpoints ignore it)",
     )
     parser.add_argument(
         "--directors", choices=("on", "off"), default="on",

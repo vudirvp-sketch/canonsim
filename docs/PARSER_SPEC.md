@@ -13,11 +13,14 @@
 ## 1. The boundary (D-062 — D-055's pattern, applied to the player's text)
 
 The parser is EXTERNAL at dev-time, exactly like the narrator: an
-operator (or, later, a grammar-constrained runtime model behind the
-owner-gated engine decision, `TECH_NOTES.md` §1) reads a parse call file
-and writes a parse reply file; the repo stays LLM-free and network-free
-(INV-4 unchanged — no network, no inference, no runtime dependency).
-Files are the contract, gitignored runtime artifacts under
+operator reads a parse call file and writes a parse reply file. Since
+engine-1's landing (iter-177, D-193) the operator may be the RUNTIME
+ENGINE — a llama-server behind the explicit adapter `cli/engine.py`,
+answering the same files under a GBNF constraint derived from the
+snapshot (§2.1): the doors and their gates are byte-identical either
+way (the file contract — the runtime engine is "the operator";
+INV-4's standing form: the network surface is exactly the adapter
+module). Files are the contract, gitignored runtime artifacts under
 `output/parser/`:
 
     parse_<NNNN>.md          the parser's input: the utterance + the grammar snapshot + the protocol
@@ -27,7 +30,9 @@ The repo-side half (this spec's subject) is pure: `brief/parser.py`
 (document assembly and inspection as functions of (log, pack, ledger) —
 same inputs → same call bytes, the D-049 quarantine family) and
 `cli/parser.py` (the session door: files, the Simulator handle, cycle
-state — periphery, D-046).
+state — periphery, D-046); `brief/gbnf.py` (the snapshot's engine-facing
+serialization, §2.1) and `cli/engine.py` (the adapter) join as the
+engine-side periphery, never touching the gate.
 
 Player input is data, not instruction (`VISION.md` §5): the parser
 produces intents; the simulator decides outcomes. The only cure for
@@ -67,6 +72,31 @@ classifies into, as data:
 Free-text player mentions never pin at the mediator (zero-LLM capture,
 blueprint §1); the parser turns mentions into intents, which then pin
 (§5).
+
+### 2.1 The GBNF serialization (engine-1's landing, iter-177/D-193)
+
+`brief/gbnf.py::gbnf_grammar(snapshot)` — the snapshot as GBNF text
+(one INV-3-clean pure function over it, CONTRACTS §4.1 D6/I3): the
+LLM-facing constraint the adapter rides on the parse requests
+(top-level `grammar` param, PRESENTATION_SPEC's mapping). The grammar
+is NARROWER than the §4 gate, never wider — grammar-valid output is
+gate-valid by construction — and it encodes the door's own shape laws
+at the source (the s2c1 lesson): the canon path and the texture path
+as SEPARATE per-verb alternatives (one path, never both — the one-path
+law), the target enum canon-nouns-only (texture ids are never targets),
+the drawn-`N` `ticks` field REQUIRED (the door's accept-time law,
+mirrored on the snapshot's `FieldConstraint.required`), empty-enum
+fields never offered, non-empty free-text strings (the f1b degenerate
+form structurally impossible). The honest guess-within-grammar class
+stays untouched (D-192's D5: the grammar fixes validity, never
+honesty). `grammar_fingerprint(grammar)` is the D3 manifest's grammar
+id (sha256, 16 hex). The dialect laws (measured at b11064, TECH_NOTES
+§13.1): rule names carry no underscores (identifiers sanitized),
+`"` escapes inside literals (json.gbnf's own forms — control
+characters refuse loud), the string/number rules adopt json.gbnf's
+proven shapes. The golden fixture `tests/fixtures/parse_gbnf_seed125.gbnf`
+(regen: `scripts/regen_parse_gbnf.py`) pins the byte contract; the
+station compile check rides the owner's first live run.
 
 ## 3. The call document
 
@@ -162,9 +192,18 @@ reply that passes the gate but violates those raises the door's loud
      path (`promotions_in` → `mark_promoted`); a take-success IS the
      promotion (D-054).
 3. **Off-grammar replies** leave the cycle open — the operator may fix
-   the reply file and re-apply (dev-time semantics; the runtime re-ask
-   ladder is §7's deferral). A second apply after a consumed call is a
-   loud error, never a crash.
+   the reply file and re-apply (dev-time semantics). The RUNTIME re-ask
+   ladder (landed with the engine, iter-177/D-193): the session's
+   engine cycle re-asks ONCE with the refusal note as the repair turn
+   (the ParseError's own message — the nearest-valid menu riding it,
+   iter-107 — is the fuel the engine patches toward; user/assistant/
+   user, still grammar-constrained); exhaustion leaves the cycle OPEN
+   exactly like dev-time (hand-write the reply — engine down ==
+   operator absent). The door's own `RunnerError` (a gate-valid reply
+   violating a door-owned law — the s2c1 class) is TERMINAL: the cycle
+   was consumed, the world answered with a loud refusal, nothing
+   re-asks. A second apply after a consumed call is a loud error, never
+   a crash.
 
 Attempts are facts: a well-formed world-impossible intent commits an
 `intent_rejected` no-op event — parse validity and world legality are
@@ -189,16 +228,18 @@ never engine work (INV-3).
 
 | Deferred | Arrives with | Owner |
 |---|---|---|
-| The runtime inference engine (llama.cpp + GBNF) + the C-parser wiring — grammar-constrained decoding makes off-grammar output structurally impossible at the source | the owner-gated engine decision (TECH_NOTES §1; the future `SOW_INTEGRATION_SPEC` sketch's trigger — bg-6-gated, SPECS_BACKLOG) | AGENTS §8 |
-| The runtime re-ask ladder (a bounded retry budget for malformed replies; dev-time is manual re-apply) | the runtime engine | blueprint §2 |
+| ~~The runtime inference engine + the C-parser wiring~~ — **LANDED iter-177 (engine-1/D-193)**: the GBNF mapping repo-side (§2.1) + the adapter `cli/engine.py` + the door wiring (`--engine`, the file contract preserved) + the failure→ladder mapping (§5's re-ask; D7's degradation rungs); the runtime re-ask ladder — **LANDED with it** (§5) | — | AGENTS §4 (INV-4's standing form); CONTRACTS §4 the collapsed contract |
 | Disambiguation **buttons** (the grammar enumerates the alternatives; today the question is free text) | a frontend consumer (mode C live play) | ROADMAP §2 |
 | Multi-intent utterances (one reply carries N intents — today one classification per document) | live-session evidence it is needed | this spec §4 |
-| More session volume (the corpus landed iter-32/parse-1 — six live sessions distilled into `tests/fixtures/parse_replies.json` — and grew iter-33/parse-1 batch 2, the owner's corpus-growth call: ten sessions total, 51 combined utterances; **the gate review landed iter-35, D-064 — verdict PASS** (35/35 boundary validity, 0 honest misfires, the §5 protocol re-run reproducing the iter-26 numbers); phase 2 CLOSED, ROADMAP §2) | the owner's next call | ROADMAP §5 |
+| More session volume (the corpus landed iter-32/parse-1 — six live sessions distilled into `tests/fixtures/parse_replies.json` — and grew iter-33/parse-1 batch 2, the owner's corpus-growth call: ten sessions total, 51 combined utterances; **the gate review landed iter-35, D-064 — verdict PASS** (35/35 boundary validity, 0 honest misfires, the §5 protocol re-run reproducing the iter-26 numbers); phase 2 CLOSED, ROADMAP §2; **the engine-1 local corpus landed iter-174** — the deviation families F1–F6 re-distilled at both local models, `tests/fixtures/engine1_deviation_corpus.json` + the Layer-1 suite) | the owner's next call | ROADMAP §5 |
 
 ## 8. Versioning
 
-This contract is code-owned (`brief/parser.py`, `cli/parser.py`; the
-snapshot derives from `actions.json`/`rules.json`/the ledger). A change
-that renames or removes a field of §3–§5 is an owner-approval event per
-`AGENTS.md` §8. Additive constraint kinds, alternative refinements, or
-new derived enums = growth, no bump.
+This contract is code-owned (`brief/parser.py`, `cli/parser.py`,
+`brief/gbnf.py` (§2.1's serialization), `cli/engine.py` (the adapter);
+the snapshot derives from `actions.json`/`rules.json`/the ledger). A
+change that renames or removes a field of §3–§5 is an owner-approval
+event per `AGENTS.md` §8. Additive constraint kinds, alternative
+refinements, or new derived enums = growth, no bump. A change to the
+golden grammar's byte contract (§2.1) regenerates the fixture in the
+same commit, never silently.

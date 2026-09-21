@@ -54,22 +54,23 @@ contract, TECH_NOTES §2/§13 the evidence (verified against the owner's raw log
 paths, doc-only; 1900+1 green both ends at 7618714; iter-160 evicted per the cap
 
 ---
+iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:
+docs/PRESENTATION_SPEC.md (the serializer mapping table + the narrator band; st-4
+absorbed — the call budget, the no-tail resolution, thinking-ephemeral, the Script
+Tax); the three consult cards integrated (no shape changed); 6 paths, doc-only;
+1960+1 green + ruff clean at the iter-177 diff; iter-168 evicted per the cap
+
+---
+iter-177 · 2026-09-21 · engine-1 (b) — the build landing (D-193): brief/gbnf.py (the
+snapshot→GBNF, the door's shape laws at the source, the golden fixture) + cli/engine.py
+(the ONE network module, INV-4 lifted — AGENTS §4/§8 riding) + the --engine wiring,
+the ladders + the manifest; the stub-server adapter tests + the regex-oracle pins; 22
+paths; 1926+1 BEFORE, 1960+1 after, ruff clean, zero gate edits; iter-167 evicted
+---
 iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures: the shared
 lint_direct_keys row wired into all four requires sites; the ACTOR_KEYS split + the
 needs_target predicate extraction; tests/test_qa2.py +15; 12 paths (over the §2.3 soft
 limit — the two-KI closure + its packet); 1900+1 green, mypy --strict core/ 0, goldens
 byte-untouched at e15a091; iter-159 evicted per the cap
 
----
-iter-168 · 2026-09-21 · qa1 — the owner-called type-discipline audit: mypy --strict on
-`core/` 207 → 0 across 36 files at zero runtime change (the root-fix shape: _require,
-the Literal funnels, the TypeGuards, the Mapping widening); two holes made loud (KI#88
-+ KI#89); the tool stays optional (D-031); 29 core files, over the §2.3 soft limit;
-1885+1 green, goldens byte-untouched at c82c7ca; iter-158 evicted per the cap
 
----
-iter-167 · 2026-09-21 · stepread — the step bench's first embodiment: the read_stair
-hinge + the the_step_law token landed in province_pack as pure pack data, zero core
-change; tests/test_stepread.py +7; the water level's half + the remaining embodiment
-options stay owner-routed; 9 paths; 1885+1 green at a317db3 (the +7 the claim packet);
-iter-157 evicted per the cap
