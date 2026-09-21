@@ -1,30 +1,33 @@
-Iteration: iter-180 (`iter-180-engine1-round6`, the owner's bundle —
-the second LIVE `--engine` session, the round-4 narrator candidate
-at the landed surface): round 6 triaged — KI#90's fix VERIFIED LIVE
-(the Q9B narrator's 3/3 prose replies each routed to the MALFORMED
-regen ladder, the notes riding the re-invocations, exhaustion 2/2
-to the dry beat, the session surviving clean — chronicle + quit, the
-log 7 events, nothing fed); the manifest's `model_sha256` populated
-at the live surface for the first time (the owner's absolute model
-path — round 5's null was the relative-path config); the parse door
-6/6 gate-valid `no_intent` (honest declines at off-vocabulary
-utterances, the injection probe refused inside the no_intent
-string); the narrator-convention datum: the 9B-live floor
-UNCONFIRMED (n=1, the failure tail — PRESENTATION_SPEC §7
-qualified, §13.1 the record).
+Iteration: iter-181 (`iter-181-intake34`, the owner's research call
+over the uploaded `canonsim_research_ultimate_v2_with_doctrine_v3_
+integrated.zip` — the ultimate research corpus routed): the corpus map
+(the six source units split by prior routing — the research block
+S1–S4 FRESH, pinned iter-159..172; the Dense hybrid already intake-30;
+the doctrine + the method already the standing discipline's live form),
+the proposed `docs/research/` + `research_archive/` drop-in tree
+REFUSED (a parallel layer over owned domains; D-024/D-187; the D-186
+exception inapplicable — research residue, not an ownerless domain;
+the owner's worldbuild-folder question answered NO), the
+capability/progression consult card + the math-mechanism index card
+PARKED behind the owner gate (Experiment 0 the falsifier), the T1–T40
++ L27–L34 vocabularies refused (second label sets), the empty-ablation
+rule landed in TEST_PLAN §9.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 1962 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 37a0bad BEFORE working — 1962+1 green, ruff
+verified at BASE_COMMIT d7a1e1f BEFORE working — 1962+1 green, ruff
 clean, docguard clean — and re-verified after with the doc-only
 diff in place: the numbers unchanged) ·
 Date: 2026-09-21 ·
-Scope: docs/TECH_NOTES.md + docs/PRESENTATION_SPEC.md + docs/TASKS.md
-+ `STATUS.md` + worklog.md — 5 paths (the round-6 record + the band
-qualification + the state docs). The prior iterations' record:
-iter-179 (round 5), iter-177/178 (engine-1 (b) + presentation-1),
-iter-176 (doc-3). The detail lives in the worklog + git.
+Scope: docs/blueprint/phases.md + docs/DECISIONS.md + docs/TEST_PLAN.md
++ docs/TASKS.md + `STATUS.md` + worklog.md + scripts/docguard.py — 7
+paths (the intake-34 record + the state docs + the TEST_PLAN allowlist
+entry its empty-ablation line required — the §6.1 law's designed path;
+over the 3–5 soft limit, the intake-31 precedent). The prior
+iterations' record: iter-180 (round 6), iter-179 (round 5),
+iter-177/178 (engine-1 (b) + presentation-1), iter-176 (doc-3). The
+detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -80,11 +83,10 @@ iter-176 (doc-3). The detail lives in the worklog + git.
 
 ## Next step
 
-**iter-180 DONE: round 6 triaged — the second live `--engine` session
-(Q9B, the narrator-convention candidate): KI#90's fix live-verified,
-the manifest's sha256 first live population, the parse door's honest
-declines; the 9B live-narrate floor unconfirmed (n=1, the failure
-tail).**
+**iter-181 DONE: intake-34 — the ultimate research corpus routed: the
+drop-in refused, the two consult cards parked behind the owner gate
+(capability/progression + the math-mechanism index), the corpus itself
+staying outside the repo as the on-demand source.**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -100,3 +102,9 @@ tail).**
    camp's meso half), the debt-1 residues (each a future row's own
    call), the SoW horizon (bg-6, owner-deferred). New rows enter on
    the owner's call only.
+3. The intake-34 residues (each behind its own trigger, never a
+   default): Experiment 0 (the capability/progression falsifier — a
+   long-scenario evidence run on the owner's call); the math catalog's
+   per-card pass + the ref-file deep record (a named mechanism
+   consumer or the owner's explicit call); the R1 paired-Δ reporting
+   change to `balance_harness` (an owner call on the methodology).

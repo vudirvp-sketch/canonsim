@@ -2818,6 +2818,146 @@ consult-material pointer + the WORLD_AUTHORING §5 turnover line. The
 build queue UNTOUCHED — nothing unpins, nothing reorders; zero
 build-grade items.
 
+**The ultimate research corpus routed (intake-34, iter-181, D-194 — the
+owner's «начать работу с загруженным ресерч-корпусом… определить что с
+ним делать… брать в референсы в отдельную папку как с worldbuild было
+или нет и почему… если нереально за 1 итерацию — планируй несколько»
+call over the uploaded `canonsim_research_ultimate_v2_with_doctrine_v3_
+integrated.zip` (2.3 MB: the four source zips + the doctrine + the
+method + the two-layer consolidation + the manifest); the consult
+posture — the corpus stays outside the repo, the convenience-copy law;
+every fresh claim verified against HEAD before routing; the full
+one-pass record: the upload + git at this row's commit).** The corpus
+map — the six source units split cleanly by prior routing: (1) the
+RESEARCH BLOCK (S1–S4: the capability/resolution/progression
+consolidation, the cross-domain ultimate v12, the 44-card math-transplant
+reference) — FRESH, its legacy sources pinned to iter-159..172 HEADs,
+never routed, this intake's actual subject; (2) the Dense v3 hybrid
+original — already routed whole (intake-30/D-187; the visual card + the
+UNIFIED-KB refusal stand, nothing re-opened); (3)+(4) the v1 + the
+alternate consolidations — the corpus's own COMPARISON.md material,
+provenance only; (5) the doctrine v3 + (6) cross_domain_principles — the
+operating/research doctrine whose LIVE form is the owner's standing
+session discipline (the five-question material-verdict test, the
+dispositions, the promotion gate, the session-completion contract —
+verified intent-identical) — ABSORBED, nothing to land.
+
+**The structural verdict — the proposed drop-in tree (`docs/research/` +
+`research_archive/` inside the repo) REFUSED**: a parallel documentation
+layer over fully-owned domains (00_INDEX/01_SNAPSHOT → STATUS/NAV;
+02_AGENT_KERNEL → AGENTS + the standing doctrine + TEST_PLAN §9;
+03_OWNERSHIP_ROUTING → NAV §3; 04–07 → this section's intake records +
+the parked cards + `docs/worldbuild/`) — the intake-30 precedent's exact
+ruling on the same material's earlier consolidation (D-024 single-owner;
+D-187; the corpus's own crosswalk concedes every owner). The D-186
+directory exception INAPPLICABLE — worldbuild earned its surface as an
+ownerless authored-domain model; this corpus is research residue, the
+content class D-185's archive law already owns (§6 compact blocks + git
++ the outside sources). The corpus's "two-speed architecture" (compact
+active + deep on demand + archive) re-derives the repo's standing shape —
+the confirmation family, zero new architecture. The owner's worldbuild
+question answered: NO separate folder; the per-source deep-record option
+(the ref-file form, the intake-31/33 precedent) remains available for
+the math catalog — deferred behind its own trigger (below), never a
+default import.
+
+**The capability/progression consult card** (the fresh domain — S1+S2's
+research, its own verdict PARTIALLY CONFIRMED, re-confirmed independently
+at HEAD: the FACT table holds — pack-level skill bases
+(`core/intent.py::skill_total` over `rules.json`), status modifiers
+live, per-actor persistent mastery absent, the parser emits structured
+intent, failure materially represented; PARKED behind the owner gate;
+the consumers: the SoW horizon (player-visible growth in a game
+frontend), the world track's W5 biography arc, any future combat-bearing
+pack; the falsifier: the research's own Experiment 0 — one long
+scenario, zero implementation: no quality deficit expressible through
+status/relations/knowledge/resources/world state → no progression
+layer; a deficit → the leading candidate first, never XP):
+
+1. **The five-layer decomposition** (permission / capability /
+   resolution / consequence / learning — never collapse into one skill
+   check): permission = reach/possession/knowledge/access (the doors'
+   existing gates); resolution specializes per action class
+   (deterministic / roll / opposed / NPC decision — the intent door's
+   own vocabulary), one shared protocol, no universal formula.
+2. **The leading candidate (H1)** — event-derived evidence-weighted
+   mastery: `effective = pack base + fold(log) mastery + status
+   modifiers`; coverage/novelty-weighted evidence (repetition ≈
+   nothing, informative failure first-class), PC/NPC symmetric, zero
+   new streams (INV-2), derived-never-stored (L3). XP/levels/classes/
+   global currency REJECTED as unsupported necessity (the corpus's own
+   verdict, upheld); pure use-count REJECTED.
+3. **The carrier taxonomy** — capability rides actors/tools/procedures/
+   groups/roles/relations/locations (INV-3-compliant: pack data +
+   folds, no engine nouns); "more effective without higher level" via
+   equipment/access/knowledge/role.
+4. **The NPC-agency hypothesis** — negotiation as agent decision from
+   canonical state (goals/alternatives/trust/reservation conditions),
+   never `social + d20`; the epistemic-bluff test (one utterance,
+   different NPC knowledge → different reactions) is the cheapest
+   discriminator.
+5. **The guard set** — the 22 stress cases + the 15 evaluation criteria
+   + the treadmill/grind/LOD pitfalls (cold NPCs never learn; the world
+   never silently scales to the player) travel with the card;
+   Experiment 0 decides before any row opens (D-175: no row without
+   the measured deficit).
+
+**The BNF/contracts verdict** (S3's semantic control layer): the
+cross-domain confirmation family's next member — PARTIALLY CONFIRMED,
+mostly re-derivation (one canon/one write door = INV-1/D-031; the four
+planes = L3/L11/L12 + TEST_PLAN §8.4 + the render ladder; safety ≠
+liveness = the ladder/drain family, PARSER_SPEC §5 + VALIDATION_SPEC
+§7; dependency ≠ cause = L7; diagnostics-explain-never-authorize =
+D-118; the promotion gate = the standing doctrine). The T1–T40
+verification grammar REFUSED as a second label set — it collides with
+the T-suite's own namespace and re-derives TEST_PLAN §9's lenses/prisms
++ the standing instruments (D-024: label-matching is not
+reconciliation). L27–L34 NOT landed as constitutional laws (the
+corpus's own inflation discipline; the runtime halves already INV/L-
+owned, the research halves standing doctrine); its "existing L1–L26
+family" claim FALSE at HEAD (the repo owns L1–L14) — the drift marker
+recorded. The identity algebra (request/intent/event/derivation/
+content) confirms the landed shapes (intent ids, event ids, the
+cursor's `prefix_sha256`, `grammar_fingerprint`, the manifest's
+model sha256); no idempotency store (the corpus's own rule). The
+U1–U12 open questions correctly self-parked — no consumer at HEAD for
+coherent-cut enforcement, fairness, FailureCore, bi-temporal validity,
+or incremental reuse.
+
+**The math-mechanism index card** (S4's 44 cards — the family
+dispositions CONFIRMED at HEAD; the per-mechanism bodies live in the
+corpus, the owner's on-demand source; a future row naming a family
+reads this card, then the corpus):
+
+| family (cards) | disposition | the trigger that re-opens |
+|---|---|---|
+| keyed/counter-addressed RNG; keyed worldgen/cursor | PARTIALLY CONFIRMED, selective | a real order-independent-local-generation or lazy-expansion consumer; the measured world-expansion instability (~0.3% noise-value preservation, 7–9% sites under extent growth) is the substrate fact, never a global-RNG-rewrite warrant; costs ~20× / ~1.7× (different baselines — do not collapse) |
+| CRN / paired seeds | CONFIRMED as research methodology | the R1 candidate — paired-Δ reporting in `balance_harness` (TEST_PLAN §6's contract unchanged until an owner call); the measured pair-variance ratios 0.011–0.039 (M3 0.338) |
+| metamorphic testing; delta debugging; Δ² interaction; POR / sequence covering | PROPOSED (the assurance plane) | a recurring failing-scenario reduction need / a measured order-space explosion with a sound commutativity relation |
+| representation transforms (PQ/OPQ+RHT — the synthetic MSE 0.824→0.068 numbers; JL; wavelets; bitsets/FWHT; delta+varint; Bloom/CMS/HLL; HAMT; SDF) | DEFERRED | a measured memory/latency hotspot the exact representation change cannot fix first — the 1.41× flat-index exact win is the standing precedent (representation before algorithm) |
+| causal read-side DAG; provenance semirings; SCC/min-cut; vector clocks | PROPOSED (read-side POC) / DEFERRED | a recurring multi-hop provenance consumer beyond `mechanics.py why`'s single-parent chains |
+| entropy/JSD drift metrics; EWMA/CUSUM; temporal monitors | PROPOSED (derived metrics) | an M-family question the existing metrics cannot answer (R7: compare against M4/M5 first) |
+| Director PID; Lyapunov runtime; global truth/risk scores; QMC blanket RNG; bisect indexing | REJECTED / offline-only / SHOULD-NOT-ADD | the measured stable hysteresis (`eventless_max_stretch=1` × 300 runs); nothing measurable to control |
+
+The binding do-not-import list (the corpus's anti-pattern catalogue,
+upheld at HEAD): a second canonical store; MVCC; a CRDT/vector-clock
+semantic layer; generic provenance/dependency/causal-graph runtimes;
+generic fairness/reactive/workflow engines; global truth/risk scores; a
+bi-temporal subsystem; a procedural-memory subsystem; a permanent
+FailureCore/CausalSlice runtime; canonical lossy quantization (exact
+replay non-negotiable). The measured lesson routed to its owner:
+TEST_PLAN §9's claim packet gains the empty-ablation rule (a zero-delta
+`--systems-minus` arm is a failed experiment, not zero causal effect —
+the arm must demonstrably exercise the target subsystem on the run
+horizon).
+
+Landed: D-194 (the D-119 family row's extension) + this block + the
+TEST_PLAN §9 line + the state docs. The build queue UNTOUCHED — nothing
+unpins, nothing reorders; zero build-grade items. The second pass (the
+per-card math verification + the ref-file deep record) DEFERRED behind
+its own trigger: a named row asking for a mechanism family, or the
+owner's explicit call.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

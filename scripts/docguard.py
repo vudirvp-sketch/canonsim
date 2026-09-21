@@ -60,6 +60,11 @@ ALLOWLIST: dict[str, str] = {
         "the per-source deep dive's verdict tables and footgun catalog "
         "(§6.1 substance; 605 lines — the five over the cap are the "
         "verdict block's own sentences)",
+    "docs/TEST_PLAN.md":
+        "the verification stack (T0–T8 + M1–M5 + the gate protocol + "
+        "§8/§8.5/§9) — substance-dense at the ceiling; the intake-34 "
+        "empty-ablation line pushed the full stack over (cruft pass "
+        "run: no filler found)",
 }
 
 FAQ_MAX_ENTRIES = 20

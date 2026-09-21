@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed (D-194): the
+map (the block FRESH; the Dense hybrid already intake-30; the doctrine the standing
+discipline's live form), the drop-in REFUSED (parallel layer), the capability +
+math-mechanism cards parked (Experiment 0), the empty-ablation rule + the allowlist
+entry; 7 paths, doc-only; 1962+1 + ruff + docguard clean both ends; iter-171 evicted
+
+---
 iter-180 · 2026-09-21 · engine-1 round 6 — the owner's second live `--engine`
 bundle (Q9B) triaged: KI#90's fix live-verified (the prose class to the dry
 beat, the session clean); the manifest's sha256 first live population; the 9B
@@ -53,12 +60,6 @@ ParseError-only catch; the census unwrap bug found in validation); the runner v2
 delivered outside the repo, validated against the REAL doors (2109 docs pass the laws
 + the gate); 4 paths, doc-only; 1900+1 green at dcba648; iter-162 evicted per the cap
 
----
-iter-171 · 2026-09-21 · engine-1 (move a, round 1) — the {3–8B, GBNF} experiment
-convened (the owner's batched-test call): the Rule-9 runner delivered outside the repo
-(the Vantiel-handoff pattern), sandbox-validated end-to-end at the owner's exact build
-b11064 CPU; TECH_NOTES §13 gains the sandbox surface block; 4 paths, doc-only; 1900+1
-green; iter-161 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

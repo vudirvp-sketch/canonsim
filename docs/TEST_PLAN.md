@@ -564,7 +564,11 @@ prose). The **falsifier** must state what would make the claim false. A
 plausible description without either is not evidence. The disposition
 vocabulary stays the repo family (CONFIRMED / PARTIALLY CONFIRMED /
 REJECTED / UNRESOLVED / DEFERRED); no numeric quality score — a scalar
-erases the diagnosis the lenses preserve.
+erases the diagnosis the lenses preserve. An **ablation arm** must
+demonstrably exercise the target subsystem on the run horizon before
+its delta is read — a zero-delta arm over an unexercised subsystem is
+a failed experiment, not zero causal effect (the empty-ablation rule,
+intake-34's measured lesson).
 
 | Claim shape | First prism | Strong follow-up | Standing instruments (the oracle owners) |
 |---|---|---|---|
