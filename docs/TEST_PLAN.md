@@ -545,20 +545,22 @@ smaller n records the raw min/median/max with the gap noted).
 | engine1-e4b | 2026-09-21 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF) | 98.0% → 98.0% | 50/0/0 | 15/51 full | tick 2.3/3.2 · fold 0.7/1.1 · brief+parse 1.1/1.6 (one measured column — the door's emit_call; the split the gap) · generate 537/706 ms | the grammar lifts raw validity above both API rows; the mix collapses to all-intent (the aggressive mapper — TECH_NOTES §13.1); the deviation re-distillation: honest 18/36, the first local world-answer leak 33/34 |
 | engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
 
-Gap rows standing: the 27B GBNF parse arm + the one-model-constrained
-A/B (CONTRACTS §4.3 arm a — the owner's next station run, now through
-the LANDED surface: the `--engine` session + the repo-side grammar,
-iter-177/D-193); the brief/parse component split (the battery's
-emit_call measures the door's one repo-side call — the landed session's
-engine cycle is the surface that owns the split, its numbers the next
-heartbeat's); the API-side prose families (ii)–(v) (rate-limit
-economics at bg-8 — the LOCAL band measured them: E4B all-dry, Q9B
-6/8, §13.1). Discharged by the engine-1 runs: the {3–8B, GBNF} arm
-(both rows), the per-component p50/p95 columns (both rows), the
-per-family latency distribution (§13.1 — no Cyrillic latency penalty at
-this band), the grammar's live-backend compile check (round 5's live
-`--engine` session at an off-plan 12B: grammar accepted + enforced
-through the landed wiring — §13.1).
+Gap rows standing: the 27B GBNF parse arm + the
+one-model-constrained A/B (CONTRACTS §4.3 arm a — the owner's next
+station run, now through the LANDED surface: the `--engine` session +
+the repo-side grammar, iter-177/D-193); the brief/parse component
+split (the battery's emit_call measures the door's one repo-side call
+— the landed session's engine cycle is the surface that owns the
+split, its numbers the next heartbeat's). Discharged by the engine-1
+runs: the {3–8B, GBNF} arm (both rows), the per-component p50/p95
+columns (both rows), the per-family latency distribution (§13.1 — no
+Cyrillic latency penalty at this band), the grammar's live-backend
+compile check (round 5's live `--engine` session at an off-plan 12B:
+grammar accepted + enforced through the landed wiring — §13.1).
+Discharged by bg-9 (2026-09-21): the API-side prose families (ii)–(v)
+— the rate-limit economics beaten by pacing at the same sandbox API
+class; the second API-side datum, the trend numbers + the instrument's
+honesty notes: TECH_NOTES §10's re-run block.
 
 ## 9. Claim → instrument selection grammar (intake-26, iter-138 — research-derived, a routing aid, never a gate)
 

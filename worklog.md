@@ -5,6 +5,15 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+bg-9 · 2026-09-21 · apiprose — bg-7's standing API-side gap row closed (the owner's
+standing-frames call): the four prose/parse families re-run at glm-4-plus (paced —
+the 429 window recovers in ~minutes); the numbers → TECH_NOTES §10's re-run block +
+TEST_PLAN §8.5 + TASKS bg-9 + the digest drift pin widened to the bg-N STATUS form
+(the test's same-iteration law); 6 paths; the runner outside the repo (Rule 9,
+git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
+evicted per the cap
+
+---
 iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (exp0_week.json +
 test_exp0.py; the verdict: no live deficit at v0.1, the card stays parked, no
 row per D-175) + R1 landed (--paired-delta + TEST_PLAN §6 + the tests; the
@@ -52,13 +61,6 @@ iter-175 · 2026-09-21 · docrev1 — the owner-called state-layer audit: doc-3 
 DONE-block protocol restored, seven stale blocks → git); verdict: the queue healthy,
 the mass duplicated history; 3 paths, doc-only; 1916+1 green + ruff clean at efedd89;
 iter-165 evicted per the cap
-
----
-iter-174 · 2026-09-21 · engine-1 (move a, round 4 — CLOSED) — the v3 bundle triaged:
-the full corpus landed at E4B/Q9B, the §4.3 arms measured (the seeded-local tier
-holds, the GBNF penalty, mode-A's floor), the transcripts re-distilled (the deviation
-corpus + 16 Layer-1 tests, zero replay divergence); 7 paths; 1916+1 green + ruff clean
-at 1f4f20d; iter-164 evicted per the cap
 
 ---
 iter-178 · 2026-09-21 · presentation-1 — the spec written from the measured results:

@@ -134,6 +134,19 @@ claim packet)
 
 - Done one-liner: the testproto live half — the deviation corpus F1–F6 through the REAL mode-C door: the world-answer law's first live numbers (coverage 34/34 = 100%, honest 17/36) + the heartbeat's first run (84.4 → 93.3% after one re-ask). Transcripts re-distilled: tests/fixtures/deviation_corpus.json + tests/test_deviation.py + TECH_NOTES §11. Gap rows standing: the {3–8B, GBNF} arm, the bg-7 prose families, the per-family latency distribution. Detail: TEST_PLAN §8.2/§8.5, TECH_NOTES §11.
 
+### bg-9 · the API-side prose families re-run — done (2026-09-21)
+
+- Done one-liner: bg-7's standing API-side gap row closed at the
+  sandbox API engine (glm-4-plus, paced — the 429 window recovers in
+  ~minutes): the four families re-run — (ii) 3/8 accepted, the claims
+  channel still the beat-killer, the event-id mint-from-ticks the new
+  refusal family, the generic-capital floor family now in the clean
+  arm; (iv) the degraded arm's state-refusals rose 8 → 23; (v) the
+  cast surface still earns nothing; (iii) validity 7/7 both scripts,
+  the script tax moved into mapping quality. The numbers + the
+  instrument's honesty notes: TECH_NOTES §10's re-run block; TEST_PLAN
+  §8.5 the closure. Runner + transcripts outside the repo (Rule 9).
+
 ### bg-2 · event taxonomy — DONE (bg-2-event-taxonomy)
 
 - Done one-liner: `docs/TAXONOMY.md` (120 entries across the 16 target

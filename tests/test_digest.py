@@ -18,6 +18,7 @@ must not fail iter-108's test.
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -184,11 +185,13 @@ def test_digest_parses_the_real_repo_cleanly() -> None:
     (no (unparsed) markers), every listed decision row carries a D-id,
     and the iteration/phase/test lines keep their anchored shapes. A
     future doc reshape that breaks the digest fails HERE — the fix
-    lands in the same iteration (the test_drift family's law)."""
+    lands in the same iteration (the test_drift family's law). The
+    iteration pin takes BOTH track forms (iter-N and Track B's bg-N —
+    the bg-8 STATUS precedent, first exercised at bg-9)."""
     out = digest.render(REPO)
     assert "(unparsed)" not in out
     assert "(no " not in out
-    assert "iteration: iter-" in out
+    assert re.search(r"^iteration: (?:iter|bg)-", out, re.M)
     assert "phase:     " in out
     assert "tests:     " in out
     assert "KIs:       " in out

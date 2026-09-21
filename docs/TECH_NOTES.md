@@ -612,6 +612,83 @@ local engine class does not share. Gap rows: the {3–8B, GBNF} arm
 bg-8's deviation-corpus F1–F6 run (the world-answer law's first live
 numbers — owner-gated, opens on these numbers).
 
+**The re-run (bg-9, 2026-09-21 — TEST_PLAN §8.5's standing API-side
+gap row closed; the owner's «делай что сможешь сделать сам»
+standing-frames call; the rate-limit economics finally beaten by
+pacing: 8 s between calls, 45 s 429-backoffs, the window recovers in
+~minutes). Engine: the same sandbox API class (glm-4-plus via the
+z-ai CLI, the default sampling — no temperature/seed control); the
+runner + transcripts outside the repo (Rule 9, verified clean through
+the run). Instrument honesty: the reply-format addendum rides the
+system role (the landed PRESENTATION_SPEC split — directives→system,
+the rest→user, `cli.engine.narrator_messages`); the 8 beats interleave
+after day1_full's 8 steps (the bg-7 one-shot shape is not recorded —
+this run pins its own design); the s1 twins + crafted F2/F5 re-crafted
+(the originals runner-side, outside the repo); fences stripped
+operator-side. Envelope: 120 attempts / 88 completions / 32 failures
+(the 429 class — 24 of them one unpaced burst, environmental,
+excluded from validity denominators); latency p50 3.1 / p95 7.1 / max
+14.1 s; prompt tokens p50 760, completion p50 190.**
+
+- **(ii) The prose floor re-run**: 8 beats, 24 exchanges (every beat
+  its full ≤2-regen budget), 3 accepted / 5 dry; 175 claims →
+  refusals 25 `unknown_event` + 8 `unknown_entity` + 4 prose
+  `invented_entity` + 1 malformed; the accepted beats 0 supported /
+  20 unverifiable — the claims channel is still the beat-killer at
+  this class, and the NEW refusal family is the event-id mint from the
+  brief's own ticks ("t_734", "t_858": §10's surface-mirroring moved
+  from entity names to the log's time vocabulary). The floor: the
+  generic-capital family (`REFUSED prose NPCs (invented_entity)`)
+  now fires on FIRST replies in the clean arm (3 of its 4 hits) —
+  §10's clean arm was 0/8 with the family appearing only degraded;
+  FP=0 still holds (the scan over accepted prose: zero invented). The
+  sentence-initial gap: 0 (The/An/Several/Doren — common openers or
+  declared names). The lowercase assertion surface (prosefloor-2's
+  instrument, its first API-side datum): 2 unmodeled tokens
+  ("low-beamed", "space"), 0 grounded — the prose barely asserts
+  relations at this class.
+- **(iv) C3.5 degraded-knows re-run**: 8 beats, 22 exchanges, 2
+  accepted / 6 dry; 146 claims → 23 `unknown_event` + 23
+  `unknown_entity` — the state-claim refusals ROSE vs the clean arm
+  (8 → 23; "scene.layout == 'low_beamed_hall'", "scene loc_tavern.
+  terrain == 'hills'": degraded knowledge pushes the engine into MORE
+  invented state — §10's surface-mirroring verdict extended); one
+  malformed reply minted a claim kind `'pair'` (the shape itself
+  confabulated).
+- **(v) The cast-surface A/B re-run**: 8 beats, 21 exchanges, 2
+  accepted / 6 dry; 132 claims, refusals 20 `unknown_event` + 8
+  `unknown_entity` + 2 `token_absent` (knowledge claims — the richer
+  surface invited the first knowledge-claim attempts); acceptance
+  3 → 2, claims 175 → 132: **at this engine class the cast surface
+  still earns nothing** — §10 (v)'s verdict re-confirmed (the
+  weaker-engine arm owns the real question).
+- **(iii) The Cyrillic Script Tax re-run** (the s1 twins + 4 crafted
+  F2/F5): gate validity **7/7 in BOTH scripts** (the tax on validity:
+  zero, again); the mapping quality drifted DOWN vs §10 — en
+  alternative agreement 5/7 (§10's s1 arm: 6/7), full intent
+  agreement 1/5 (3/5); ru 4/7 and 2/5 — the ru arm fell BELOW the en
+  arm this run: **the script tax has moved from validity (where §10
+  found none) into mapping quality**. The purse-target confusion
+  REPRODUCED on the en arm (steal `purse_01` vs the pinned
+  `npc_guard_01`) while the ru twin mapped the guard correctly — the
+  error shapes drift per-run, the families persist (the wait-ticks
+  quirk: both scripts → no_intent). The crafted 4/4 gate-valid:
+  "барменша" → talk `npc_barkeep_01` (the exact bg-7 guess
+  reproduced); "к служанке" → talk `npc_maid_01` (a different verb
+  than bg-7's move, still a direct mapping); the F2 disambiguation
+  question NEVER fired — F2's "never a guess" still wants the
+  structural constraint (GBNF) or the buttons (parse-2).
+
+**The engine-1 feed (the re-run's)**: the trend line has its second
+API-side point — the refusal families DRIFT (the event-id mint is new;
+the generic-capital family moved into the clean arm; the script tax
+moved into mapping quality) while the claims channel's dominance and
+the floor's FP=0 are the stable invariants; everything the drift
+touches is mapping-quality-side, exactly where engine-1's constraint
+surface aims. Remaining §8.5 gap rows: the 27B GBNF parse arm + the
+one-model-constrained A/B + the brief/parse component split (all
+owner-station).
+
 ## 11. bg-8: the deviation corpus + the first heartbeat (2026-09-09)
 
 Environment honesty: the same sandbox API engine (glm-4-plus via the

@@ -1,33 +1,43 @@
-Iteration: iter-183 (`iter-183-residues`, the owner's «residues
-intake-34/35» call): Experiment 0 EXECUTED — the parked capability
-card's falsifier (the apprentice-thief week,
-tests/playscripts/exp0_week.json + tests/test_exp0.py; seed 32 the
-canonical arc, the sweeps pinned): the world-side growth runs on the
-landed folds (leverage, the expectation violation, the transfers, the
-trait + the paranoid scans, the arrest race), the actor-side resolution
-stays the day-one flat coin after 159 events of practice — no LIVE
-deficit at v0.1, the card stays parked behind its named consumers, no
-row (D-175; the record: phases.md §6); R1 LANDED — the harness's
-paired-Δ arm (`--paired-delta`, TEST_PLAN §6 + the test packet; our own
-ratios confirm the M3-noisy-tail shape); the ref-file deep record still
-deferred behind a named-family row.
+Iteration: bg-9 (`bg-9-apiprose` — track B, the API-side prose
+families re-run; the owner's «делай что сможешь сделать сам»
+standing-frames call): bg-7's standing API-side gap row CLOSED at
+the sandbox API engine (glm-4-plus via the z-ai CLI, paced — the
+429 window recovers in ~minutes, the bg-8 deferral economics
+beaten): (ii) the prose floor re-run — 8 beats, 3 accepted / 5 dry,
+175 claims → 25 unknown_event + 8 unknown_entity + 4 prose
+invented_entity + 1 malformed, the claims channel still the
+beat-killer, the NEW event-id mint-from-ticks refusal family, the
+generic-capital floor family now on FIRST replies in the clean arm,
+FP=0 held, the sentence-initial gap 0, the lowercase surface's
+first API-side datum (2 unmodeled, 0 grounded); (iv) the degraded
+arm's state-refusals ROSE 8 → 23 (surface-mirroring extended); (v)
+the cast surface still earns nothing; (iii) the Cyrillic twins —
+validity 7/7 BOTH scripts, the script tax moved into mapping
+quality (en 5/7 alternative, 1/5 full; ru 4/7, 2/5), the
+purse-target confusion reproduced en-side, "барменша" → talk
+npc_barkeep_01 reproduced, the F2 disambiguation question never
+fired. The instrument's honesty notes (the reply-format addendum in
+the system role, the interleaved beats, the re-crafted twins) ride
+TECH_NOTES §10's re-run block.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 1969 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT b9224ed BEFORE working — 1962+1 green, ruff
+verified at BASE_COMMIT acd7041 BEFORE working — 1969+1 green, ruff
 clean, docguard clean — and re-verified after with the full diff in
 place) ·
 Date: 2026-09-21 ·
-Scope: scripts/balance_harness.py + tests/test_balance_harness.py +
-tests/playscripts/exp0_week.json + tests/test_exp0.py +
-docs/TEST_PLAN.md + docs/blueprint/phases.md + docs/TASKS.md +
-STATUS.md + worklog.md — 9 paths (the two residues' landings + the
-state docs; over the 3–5 soft limit, noted in worklog). The prior
-iterations' record: iter-182 (intake-35), iter-181 (intake-34),
-iter-180 (round 6), iter-179 (round 5), iter-177/178 (engine-1 (b) +
-presentation-1), iter-176 (doc-3). The detail lives in the worklog +
-git.
+Scope: docs/TECH_NOTES.md + docs/TEST_PLAN.md + docs/TASKS.md +
+STATUS.md + worklog.md + tests/test_digest.py — 6 paths (the
+numbers' distillation + the state docs + the digest drift pin's
+same-iteration widening to Track B's bg-N STATUS form, the test's own
+law; the runner + transcripts outside the repo per Rule 9 —
+`git status` verified clean through the run). Track A untouched this
+session — track B never blocks it (ROADMAP §1). The prior
+iterations' record: iter-183 (residues34), iter-182 (intake-35),
+iter-181 (intake-34), iter-180 (round 6), iter-179 (round 5),
+iter-177/178 (engine-1 (b) + presentation-1), iter-176 (doc-3). The
+detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -83,11 +93,12 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-183 DONE: residues34 — Experiment 0 executed (the falsifier's
-verdict: no live deficit at v0.1, the card stays parked behind its named
-consumers — the record rides phases.md §6) + R1 landed (the harness's
-paired-Δ arm, TEST_PLAN §6); the ref-file deep record the one remaining
-intake-34/35 residue, still deferred behind a named-family row.**
+**bg-9 DONE: the API-side prose families (ii)–(v) re-run — bg-7's
+standing API-side gap row closed (the second API-side datum; the
+refusal families drift — the event-id mint, the generic-capital
+family into the clean arm, the script tax into mapping quality —
+while the claims-channel dominance + the floor's FP=0 hold;
+TEST_PLAN §8.5 + TECH_NOTES §10's re-run block).**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -96,13 +107,13 @@ intake-34/35 residue, still deferred behind a named-family row.**
    play is two-sided now — more live beats at Q9B (size the tail) or
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
-   §13.1).
-2. The standing frames: Track B's gap rows (the bg-7 prose families,
-   the per-family latency distribution), the world track's frontier
-   (WORLD_WORKPLAN §6 — the embodiment options, W5's live band, the
-   camp's meso half), the debt-1 residues (each a future row's own
-   call), the SoW horizon (bg-6, owner-deferred). New rows enter on
-   the owner's call only.
+   §13.1; bg-9's mapping-drift datum rides the same decision).
+2. The standing frames: the world track's frontier (WORLD_WORKPLAN
+   §6 — the embodiment options, W5's live band, the camp's meso
+   half), the debt-1 residues (each a future row's own call), the
+   SoW horizon (bg-6, owner-deferred — long-parked per the owner's
+   2026-09-21 call). Track B's gap rows all closed (round 4 + bg-9).
+   New rows enter on the owner's call only.
 3. The intake-34/35 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog mechanism family (the per-card pass done at
