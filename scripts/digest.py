@@ -55,9 +55,20 @@ _ROW_RE = re.compile(r"^- `([a-z0-9-]+)` ")
 _TODO_HEADING_RE = re.compile(r"^### ((?:iter|bg)-\d+) ·.*— todo")
 _DONE_HEADING_RE = re.compile(r"^### ((?:iter|bg)-\d+) · (.*?)(?: — done| — LANDED)")
 #: The decision row: id(s), date, the decision cell up to the Why
-#: column — bold optional (the pre-collapse rows predate the ** law).
-_DECISION_RE = re.compile(r"^\| ((?:D-\d+)(?:/D-\d+)*) \| (\d{4}-\d{2}-\d{2}) \| (.*?) \|")
+#: column — bold optional (the pre-collapse rows predate the ** law);
+#: compound ids join by `/` and by `..` ranges, dates may carry a
+#: `..` range tail (D-084..D-093 family merges — the iter-176 fix:
+#: the range forms never counted before, 25 of 30 rows).
+_DECISION_RE = re.compile(
+    r"^\| ((?:D-\d+)(?:(?:/|\.\.)D-\d+)*) \| "
+    r"(\d{4}-\d{2}-\d{2}(?:\.\.[\d-]+)?) \| (.*?) \|"
+)
 _ITEM_RE = re.compile(r"^(\d+)\. (.*)")
+#: The TASKS iteration-ledger one-liner (the doc-3 shape): the ledger
+#: is the landings source now that the detailed history sections are
+#: dead (git owns them); the title cuts at the first parenthetical or
+#: colon, the heading form below stays for older/mini shapes.
+_LEDGER_RE = re.compile(r"^- ((?:iter|bg)-\d+) · \d{4}-\d{2}-\d{2} · (.*?)(?: \(|:|$)")
 
 
 def _unparsed() -> str:
@@ -192,14 +203,17 @@ def _open_rows(text: str) -> list[str]:
 
 
 def _landings(text: str, count: int) -> list[str]:
-    """The main track's recent done sections, ordered by the iteration
-    ids' own numbering (TASKS' file order interleaves gate records and
-    collapsed backlogs; `iter-N` is the repo's own clock — deriving the
-    order from the ids, not from layout). `bg-N` is a different
-    sequence, not ranked against `iter-N`; the line is the A-track's
-    cadence."""
+    """The main track's recent done work, ordered by the iteration ids'
+    own numbering: the iteration-ledger one-liners (the doc-3 shape —
+    TASKS' history sections are dead, the tail carries the record) and
+    the legacy `### iter-N — done` headings (the mini-repo fixture
+    keeps that shape). `iter-N` is the repo's own clock; `bg-N` is a
+    different sequence, not ranked against `iter-N`."""
     done: dict[int, str] = {}
     for m in map(_DONE_HEADING_RE.match, text.splitlines()):
+        if m and m.group(1).startswith("iter-"):
+            done[int(m.group(1)[5:])] = _trunc(m.group(2), 40)
+    for m in map(_LEDGER_RE.match, text.splitlines()):
         if m and m.group(1).startswith("iter-"):
             done[int(m.group(1)[5:])] = _trunc(m.group(2), 40)
     return [f"iter-{n} {done[n]}" for n in sorted(done, reverse=True)[:count]]

@@ -18,10 +18,10 @@
 | `docs/EVENT_SCHEMA.md` | event contract (2-place sync with `schemas/`, test-enforced) | active |
 | `docs/INTENT_SCHEMA.md` | intent contract (the proposal side of the door; trigger-gated, written iter-2) | active |
 | `docs/ROADMAP.md` | phases, gates, tracks, donors | active |
-| `docs/TASKS.md` | backlog: the standing rows (the live owner-gated queue) + the iteration ledgers (done → one line per the header law) | active |
+| `docs/TASKS.md` | backlog: the standing rows (the live owner-gated queue) + the iteration ledger (one line per iteration, the tail capped by the doc guard — done-detail lives in git, the header law) | active |
 | `docs/CONTRACTS.md` | pre-implementation contracts for the owner-gated build rows (a contract is the boundary, never the row's spec; sections collapse to pointers when their builds land) | active |
 | `docs/TEST_PLAN.md` | the verification stack: T0–T8 + M1–M5 + gate protocol + UAP crosswalk + the schema-bump migration + §8 the testproto LLM-integration protocol + §8.5 the heartbeat ledger + §9 the claim → instrument selection grammar (a routing aid, never a gate) | active |
-| `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike, measurements | live |
+| `docs/TECH_NOTES.md` | rotting notes: models, hardware, DF spike, measurements, the operator recipes (the live session §14, the corpus-regen protocol §15) | live |
 | `docs/DECISIONS.md` | ADR-lite, stable decisions (≤30 compound-ID family rows; collapses fire on the owner's explicit call — D-034/D-185) | append-only |
 | `docs/SPECS_BACKLOG.md` | just-in-time spec queue (fired-and-absorbed triggers re-pointed) | active |
 | `docs/BLUEPRINT.md` | reference distillation: the resolution ledger + cross-cutting laws + build index; entry to `docs/blueprint/` | active |
@@ -40,8 +40,8 @@
 | `render/` | the deterministic renderer: `tracery.py` (the CHRON-1 grammar engine, cosmetic stream only) + `chronicle.py` (chronicle / scene card / entity views — pure functions of the log) | active |
 | `brief/` | the phase-1 mediator circuit (LLM-free engine side): `assembler` (the eight-block pipeline), `ledger` (the scene ledger), `validator`, `mediator`, `parser` (mode C), `scan`, `scene`, `since` (the re-encounter delta) | active |
 | `cli/` | the play interface: `main.py` (batch `play`/`chronicle`/`state`/`replay` + the interactive session with the narrator door, `--resume`, `--pack`) + `mediator.py` + `parser.py` | active |
-| `scripts/` | operator tooling (CLI-class, D-046): `mechanics.py` (the introspection CLI), `balance_harness`/`profile_harness`/`worldgen_profile`, `chronicle`/`checkpoint` (the offline builders), `pack_scaffold`/`pack_doctor`, `digest`, the `df_*` track-B tools | active |
-| `tests/` | the suite: architecture fitness (INV-1..5), T0–T8, per-system units, the per-pack e2e suites | active |
+| `scripts/` | operator tooling (CLI-class, D-046): `mechanics.py` (the introspection CLI), `balance_harness`/`profile_harness`/`worldgen_profile`, `chronicle`/`checkpoint` (the offline builders), `pack_scaffold`/`pack_doctor`, `digest`, `docguard` (the state-layer cap lint, doc-3), the `df_*` track-B tools | active |
+| `tests/` | the suite: architecture fitness (INV-1..5), T0–T8, per-system units, the per-pack e2e suites, the state-layer cap guard (doc-3) | active |
 | `tests/fixtures/` | committed golden fixtures for T0/T1 (log lines, byte-identical run outputs, the deviation corpus) | active |
 | `tests/playscripts/` | seed + ordered-intent fixtures (the gate scripts + the per-pack smoke scripts) | active |
 | `docs/DIRECTOR_SPEC.md` | director runtime contract (the trigger/weight/option/arc/channel layers) | active |

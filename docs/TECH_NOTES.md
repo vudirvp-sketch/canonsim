@@ -362,10 +362,7 @@ gate. One track can be dropped without losing the other.
 - Vector layer, **static lore only**: sqlite-vec or LanceDB + a light CPU
   embedder (nomic-embed-text / bge-m3); optional cross-encoder reranker if
   the corpus outgrows keyword search. sqlite-vec's license verified
-  2026-08-26 (MIT OR Apache-2.0 dual — `docs/ref/sqlite_vec.md`); this
-  restated line had drifted to "not yet verified" and was flipped at
-  iter-59 together with the `REFERENCES.md` §6 catalog row (KI#71 — the
-  KI#66 restatement family).
+  2026-08-26 (MIT OR Apache-2.0 dual — `docs/ref/sqlite_vec.md`).
 - Qdrant demoted (rev v2): only where server infra already exists;
   local-first is the default.
 - Hard boundary (`VISION §5`): dynamic world state = SQL + `known_by`, never
@@ -1133,3 +1130,123 @@ mapping repo-side + the door wiring + the failure→ladder mapping, INV-4
 lifting there — owner-gated (TASKS `engine-1`), plus presentation-1's
 write call (the exit criterion met: the weak-arm run on owner hardware,
 the narrator floor measured between E4B and Q9B).
+
+## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
+
+Two doors, one ledger (D-049); `python -m cli` opens the interactive
+session.
+
+**narrate** (the narrator door, phase 1): `narrate [<reply.json> | dry]`.
+`emit_call` writes `output/mediator/call_NNNN.md` (gitignored runtime);
+the operator reads the brief + `narrator_protocol`, composes the reply
+JSON `{prose, texture_delta?, proposal?}` with `expected_event_seq` =
+the anchor advertised in the protocol (an int; `'anchor'` is
+corpus-test sugar — a placeholder left in a live reply dies at the
+boundary's shape gate), writes it to a path, applies via
+`narrate <reply>`. The beat cycle: `commit → retire_contradicted →
+sync_scene → assemble → narrator reply → apply_delta → intents →
+mark_promoted`; a refused document (delta refusals or contradicted
+claims) regens the WHOLE beat; the L12 ladder: narrator → template
+(the beat's own chronicle lines) → dry.
+
+**say** (the parse door, phase 2): `say <free text>` →
+`output/parser/parse_NNNN.md` (utterance + grammar + protocol), the
+operator composes the reply JSON — exactly ONE of
+`{"intent": {"kind", "target"?, "fields"?}}` (on-grammar: kind a listed
+verb, target a listed noun, only listed fields with listed values; the
+texture field copies a live texture entry's
+`{entry, scope, slot, value}` verbatim, no target — one path per
+intent), `{"question": "..."}` (uncertainty is asked, never guessed),
+or `{"no_intent": "..."}` — applied via `say apply <reply>`. The gate
+is loud: off-grammar output raises ParseError at the boundary
+(printed, nothing feeds, the cycle stays open — fix the reply file and
+re-apply); a door-rejected attempt still commits `intent_rejected`
+(attempts are facts — parse validity ≠ world legality); a texture
+reference pins its entry BEFORE the feed (the reference IS the pin).
+Contract owner: `docs/PARSER_SPEC.md`.
+
+- A PROMOTED texture entry is TERMINAL — a reply referencing it is
+  off-grammar at the gate ("not a live texture entry"); un-pinning does
+  not exist and neither does re-referencing. A PINNED entry dies two
+  ways — the scene close (leave + return) and the narrator's own
+  withdrawal (a retire delta) — either way RETIRED is terminal, fresh
+  establish legal (a new entry id).
+- `take_failed` joins `intent_rejected` in the world-answer family
+  (PARSER_SPEC §6 tallies them apart from parse validity).
+- A wait reply WITHOUT `ticks` passes the parse gate (the gate does not
+  duplicate door-owned checks, PARSER_SPEC §4) and dies loudly at the
+  door — the cycle is consumed, the fixed reply needs a fresh `say`.
+- The door-batch law: a door's own `run_steps` batch drains cascades
+  (the fire cascade 5 events for one drop_break cycle; the wait-720
+  decay batch 16; a late door batch can jump the clock far past the
+  crossing — the arson's follow-up cascade drains at t=533, so the NEXT
+  intent starts there, not at the arson's t=413); distilled corpus
+  cases must carry the batch structure. `run_steps` drains the queue to
+  exhaustion between batches; steps inside ONE batch interleave with
+  pending clock crossings by tick (D-038) — batch boundaries are
+  world-defining for the corpus (iter-23).
+- Sandbox specifics (pitfalls fixed once, never re-derived): (1)
+  `pip install --break-system-packages -e ".[dev]"` (the PEP-668
+  fence); (2) `python -m pytest` — the flat packages
+  (`core`/`brief`/`render`/`cli`/`sim`) are not on PATH, and the bare
+  binary can bind the wrong interpreter (the log header's python stamp
+  breaks T1); (3) `output/` and `logs/` are gitignored runtime
+  artifacts — never stage (`git status --short` before every commit);
+  (4) a runner script outside the repo (e.g.
+  `/home/z/my-project/scripts/iterNN_runner.py`, Rule 9) is the
+  reproducible way to drive multi-beat sessions — read each call body,
+  hand-compose the reply, apply, harvest the `BEAT` summary lines
+  (KI#44) to pin `notes_contains` for the distilled corpus cases.
+
+## 15. The corpus-regen protocol (the fixture re-distill laws; moved from STATUS FAQ iter-176)
+
+A content landing that shifts the event stream re-distills the affected
+cases through the REAL mediator cycle with a FIXED-POINT runner outside
+the repo (Rule 9; the iter-43/44 hand re-pin the manual precedent).
+The laws the runners taught:
+
+1. The corpus test pins only the LAST beat's status — a beat may be a
+   DESIGNED refusal (the regen-ladder probes); the reference ladder
+   comes from the HEAD-pack green replay, and convergence means the
+   ladder SHAPE is preserved, not that every beat accepts.
+2. The per-beat measurements (the state fold at each beat's reply gate,
+   the event-id alignment) are trustworthy only when the beat's
+   PREDECESSORS landed their HEAD statuses — a refused beat never feeds
+   its intents, so every later stream is starved until the refusal's
+   cause is re-pinned.
+3. The id re-pin must be IDEMPOTENT — the alignment always maps
+   pristine-old → current-new (re-aligning a re-pinned id increments it
+   forever; the fixed point never settles). New-event claims (the
+   deliberate pins of the landing's own events) ride AFTER convergence
+   — the old-id alignment must never touch them.
+4. Prove the runner first — the identity check replays the pristine
+   corpus through the re-pin machinery and asserts ZERO changes; the
+   corpus test green after the fixture write is the fixed-point
+   verdict, not a second re-pin pass.
+5. A designed-refusal claim is never re-pinned — the re-pin rule is
+   `fixture value == pristine truth AND != current truth → take the
+   current truth`; a claim that never matched the pristine truth is the
+   case's own wrongness (the refusal family), and an id re-pin follows
+   the pristine referent's role so the type mismatch reproduces.
+6. The draw-count coupling is the regen's hard edge — an ADDED urgency
+   entry shifted every later check draw and flipped designed ladders
+   (3 cases at one entry); engine-2 LANDED (iter-50, D-079): the
+   per-entry urgency streams remove this coupling entirely — a
+   landing's regen now covers only its OWN events.
+7. Re-pin writes must land in the FIXTURE, not just the applied reply —
+   `_resolve_anchors` (and any deep copy) REBUILDS the reply document,
+   so the re-pinned claims must be written back into the fixture's own
+   beats (the identity check on HEAD cannot catch a missing write-back;
+   the corpus test green after the write is the only verdict).
+8. A measured-and-refused intermediate design never lands in the
+   fixtures — when a landing candidate is reworked mid-iteration, the
+   migration re-runs from the PRISTINE fixture, never from the refused
+   candidate's output.
+9. The event's `hooks` field IS the seeding record — a pack tag added
+   to a hooks list diverges the SEEDING event's bytes on every run that
+   fires it (a birth certificate, not a behavior change: pin-green
+   survives, corpus cases byte-diverge by one field, ZERO re-distill).
+   A weight-0 successor with no draws and no corpus-stage release
+   closes the ladder: measure BOTH arms first, and when the only
+   divergence is the seeding field + appended events, the landing ships
+   with pin updates alone (the iter-52/content-6 zero-regen form).

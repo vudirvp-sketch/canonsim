@@ -2,291 +2,74 @@
 
 > Cap: 10 entries, one in / one out. 3–5 lines per entry: what changed, why,
 > files touched. No diffs, no command output, no reasoning traces. Long-term
-> rationale belongs in `docs/DECISIONS.md`.
-> Re-trimmed at iter-151 (the entries had drifted to ~40 lines each; the
-> compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
-> demands); pre-trim history lives in git.
+> rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
+
 ---
-iter-175 · 2026-09-21 · docrev1 — the owner-called state-layer audit:
-doc-3 OPENED (the reassembly row + the cap guard, the recurrence fix
-the iter-140/151 GC passes lacked), STATUS re-pinned (the DONE-block
-protocol restored, seven stale blocks → git); verdict: the queue
-healthy, the mass duplicated history (evidence: the doc-3 row); 3
-paths (TASKS+STATUS+worklog), 1916+1 green + ruff clean at efedd89
-both ends; iter-165 evicted per the cap
+iter-176 · 2026-09-21 · doc3 — the owner-declared build: the state-layer reassembly
+(FAQ one-liners, recipes → TECH_NOTES §14/§15, the three TASKS ledgers dead,
+DECISIONS 31→30, README/worklog to their functions) + the cap guard + the digest
+landings adaptation; 10 paths, doc + tooling; 1916+1 BEFORE at 2687465, 1926+1
+after (+10 the guard's packet) + ruff clean; iter-166 evicted per the cap
+
 ---
-iter-174 · 2026-09-21 · engine-1 (move a, round 4 — move (a) CLOSED) —
-the owner's v3 re-run bundle triaged + the transcripts re-distilled
-(the «продолжай работу. я тебе прислал логи и всякое такое» session)
-- triage: the full corpus LANDED at E4B/Q9B — validity 98.0% /
-  96.1%→100% after one re-ask, the three v3 fixes proven (the probe
-  refused 1/1, the D3 manifests populated, np2 explicit 2×2048); the
-  §4.3 arms measured: the seeded-local tier HOLDS both models (n=5,
-  greedy+seeded — weak-arm replies pinnable per D3), the GBNF penalty
-  ~2.0×/~1.3× tok/s, mode-A prose E4B parser-only / Q9B 6/8 (the
-  narrator floor between 4B and 9B — presentation-1's exit criterion
-  MET); five runner residuals recorded (SUMMARY embedder, duplicate
-  zip entry, onetwo manifest nulls, coverage event-label bug,
-  baseline-label honest/guess split — v4 candidates, runner-side)
-- the re-distillation (§8.2 source 3, the bg-8 form):
-  tests/fixtures/engine1_deviation_corpus.json (F1–F6 verbatim both
-  models, family_verdict re-judged — the semantic owner) +
-  tests/test_engine1_deviation.py (+16 Layer-1 tests); the build
-  replay cross-checked every door outcome vs the station's records —
-  ZERO divergence (INV-2 equality); the first local world-answer
-  leak pinned (e4b f1b 33/34) + the gate-valid protocol echo (q9b
-  f6f)
-- docs: TECH_NOTES §13.1 (the round-4 record + the per-family
-  latency distribution — the Cyrillic penalty a non-issue), TEST_PLAN
-  §8.5 (the first two local heartbeat rows, three gap rows
-  discharged), TASKS (the engine-1 row's round-4 closure +
-  presentation-1's evidence note + the ledger line), STATUS re-pin;
-  7 paths (the fixture+test pair the named move's deliverable);
-  verified BEFORE at BASE_COMMIT 1f4f20d (1900+1 green, ruff clean —
-  the iter-173 pin re-confirmed) and re-verified after: 1916+1 green
-  (the +16 the Layer-1 packet), ruff clean, goldens byte-untouched;
-  iter-164 evicted per the worklog cap
-iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the owner's v2
-smoke bundle back + the s6 `--arm all` crash triaged; the runner v3
-delivered outside the repo (the «продолжай работу… вот ошибочки»
-report + the two config questions)
-- triage: the crash is runner-side — the battery's cycle vocabulary
-  knew only narrator/say; the fixture's third kind
-  `double_apply_probe` (s6c9, PARSER_SPEC §5's stale-second-apply
-  refusal — the repo's own test replays it) crashed it; the repo
-  clean, INV-4 unchanged. Two more v2 defects found in the bundle:
-  the D3 manifest's build half null (/props serves `build_info`,
-  not the read keys) and the S7 `-np 2` never reaching the argv (the
-  np2 row measured the AUTO shape)
-- v3 handoff: the probe replayed + tallied
-  (`double_apply_probes`/`double_apply_refused`; refused after a
-  consumed cycle, absorbed only after off_grammar_final/engine
-  failure — never fatal) + the manifest's `build_info` read + the
-  start_single extra-argv wiring; grammar + config unchanged
-- sandbox validation WITHOUT llama.cpp (the owner's «не мучайся с
-  1.7b» call): a stub-client full-corpus walk through the REAL doors
-  (10 sessions, 51 say-cycles, the probe refused,
-  door_shape_errors=2 = the fixture's own door_error pins; an
-  off-grammar walk absorbed + completing; the v2 battery replayed
-  crashes at exactly s6); ruff: zero new findings; the owner's
-  questions answered from the specs (document-only parse arms per
-  PARSER_SPEC/D1; ctx configured + measured)
-- docs: TECH_NOTES §13.1 (the round-3 record — 1013 lines, the §6.1
-  standing over-cap, pure measured substance), TASKS (the engine-1
-  row's round-3 state + the ledger line), STATUS re-pin; 4 paths,
-  doc-only, zero engine code in the repo; verified BEFORE at
-  BASE_COMMIT 69db4f4 (1900+1 green, ruff clean — the iter-172 pin
-  re-confirmed) and re-verified after: 1900+1 green, ruff clean;
-  iter-163 evicted per the worklog cap
+iter-175 · 2026-09-21 · docrev1 — the owner-called state-layer audit: doc-3 OPENED
+(the reassembly row + the cap guard, the recurrence fix); STATUS re-pinned (the
+DONE-block protocol restored, seven stale blocks → git); verdict: the queue healthy,
+the mass duplicated history; 3 paths, doc-only; 1916+1 green + ruff clean at efedd89;
+iter-165 evicted per the cap
+
 ---
-iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the owner's
-bundle back + the `--arm all` crash triaged; the runner v2
-delivered outside the repo (the «ты просил бангл прислать с тестов,
-но там еще и ошибки в консоли вылезли» report)
-- triage: the crash is runner-side, BOTH fatal defects — the v1 GBNF
-  did not encode the door's shape laws (E4B at s2c1: take +
-  target tex_0000 + texture — the one-path combo; the door's
-  RunnerError per PARSER_SPEC §4, the repo clean, INV-4 unchanged)
-  and the battery's `_apply_parse_reply` caught only ParseError; a
-  third defect found in sandbox validation: the agreement census
-  compared the intent object against the pin's reply wrapper (every
-  comparison kind_mismatch — the smoke bundle's agreement rows carry
-  no signal)
-- v2 handoff: per-verb canon/texture path variants (one path never
-  both; the target enum canon-nouns-only; the drawn-N ticks field
-  required; the JSON-schema twin the same laws) + the door_error
-  tally (terminal for the cycle, door_shape_errors in the metrics,
-  never fatal) + the census unwrap; sandbox-validated against the
-  REAL doors at the s2 snapshot: v1's enumerated language contains
-  exactly the crashing form, v2's 2109-doc language (2057 bare)
-  passes the shape laws + the boundary gate on every document, the
-  exact crash reply replayed → tallied + the harness reusable + the
-  next gold cycle accepted+pinned; ruff on the runner: zero findings
-  in the changed code (20 pre-existing ≤ v1's 21, untouched)
-- docs: TECH_NOTES §13.1 (the falsified "shape errors structurally
-  impossible" corrected + the v2 record; 961 lines — the §6.1
-  standing over-cap, pure measured substance), TASKS (the engine-1
-  row's round-2 state + the ledger line), STATUS re-pin + the
-  KI#88/#89 deletion (closed iter-169, the AGENTS §5 2-iteration
-  cleanup law — the iter-167 empty-section precedent form); 4 paths,
-  doc-only, zero engine code in the repo; verified BEFORE at
-  BASE_COMMIT dcba648 (1900+1 green, ruff clean — the iter-171 pin
-  re-confirmed) and re-verified after: 1900+1 green, ruff clean;
-  iter-162 evicted per the worklog cap
+iter-174 · 2026-09-21 · engine-1 (move a, round 4 — CLOSED) — the v3 bundle triaged:
+the full corpus landed at E4B/Q9B, the §4.3 arms measured (the seeded-local tier
+holds, the GBNF penalty, mode-A's floor), the transcripts re-distilled (the deviation
+corpus + 16 Layer-1 tests, zero replay divergence); 7 paths; 1916+1 green + ruff clean
+at 1f4f20d; iter-164 evicted per the cap
+
 ---
-iter-171 · 2026-09-21 · engine-1 (move a) — the {3–8B, GBNF} experiment
-convened (the owner's «за 1 раз как можно больше тестов… разбирайся на
-своих мощностях» call): the Rule-9 runner delivered outside the repo
-- the battery: the §8.5 gap rows + all four §4.3 arms + the §13
-  surface probes, one batched owner session, checkpointed/resumable,
-  stdlib-only, the REAL doors driven headless (Simulator + Mediator +
-  ParserDoor, one ledger); the GBNF mapping per-verb precise
-  (subset-enumerated fields), preview of the build's repo-side
-  function; Vantiel-handoff delivery (runner + runbook + config
-  template attached + tmpfiles — never committed)
-- sandbox validation on the owner's EXACT build (b11064, a894dae93,
-  CPU): every arm smoke-run (raw GBNF validity 100% at smoke; the
-  prose ladder + C3.5 degraded-knows live; per-component latency
-  columns populated) + the §13.1 surface record: the router (swap =
-  autoload/eviction, no restart), POST /props silent no-op, -np
-  splits, grammar-on-chat, the GBNF dialect facts (no underscores in
-  rule names; [ ] is a char class), determinism 5/5, cancellation
-  closed, restart 1.5 s @1.7B
-- caps: TECH_NOTES 938 lines (the pre-existing 854 + §13.1's pure
-  measured substance, §6.1); TASKS 1218 (the pre-existing over-cap +
-  the law-required ledger line + the row update); iter-161 evicted
-  per the worklog cap; verified 1900+1 green + ruff clean under
-  3.12.14 (pytest must run as `python -m pytest` — the bare binary
-  binds 3.13.5 and the log header's python stamp breaks T1)
-iter-170 · 2026-09-21 · engine-1 — the runtime inference engine
-DECIDED (the owner's real-backend convening call: llama.cpp + the RTX
-3080 Ti station + the three-model set + the real `llama-server` test
-evidence; the disposition + the session research both riding the call)
-- D-192 (DECISIONS): llama-server behind an explicit adapter + GBNF,
-  the file-contract frame (D-055) the insertion point; CONTRACTS §4
-  the build contract (the D-177 pattern): D1–D8 the pinned decisions
-  (semantic policies never raw flags; the reproducibility tiers;
-  reasoning engine-side; structured output ≠ validation; the client's
-  home + the INV-4 lift pinned to the build's own iteration; the
-  non-equivalences; the non-goals), I1–I6 the invariants, §4.3 the
-  falsifier (zero gate edits + the honesty floor) + the experiment
-  design (the {3–8B, GBNF} gap rows + the FOUR new arms: one-vs-two-
-  model, seeded-local determinism, the GBNF latency penalty, mode-A
-  at the weak arm)
-- TECH_NOTES §2 refreshed to the measured station + §13 the evidence
-  record — every cited fact verified against the owner's raw logs
-  (113–126 tok/s E4B, 94.5 9B, 27B hybrid 12.95/4.51, the -ngl
-  fit-refusal, the thinking-consumed budget, the -np ctx halving,
-  streaming/truncation, cancellation, /health /props /slots,
-  warnings, deployment defaults); TASKS: the engine-1 row DECIDED +
-  presentation-1's evidence base §10/§11/§13 + the ledger line;
-  STATUS re-pin; 6 paths, doc-only — over the §2.3 soft limit (the
-  decision + contract + evidence rows, the intake-31/32 precedent)
-- caps: DECISIONS 31 rows (one over ≤30, collapses at the owner's
-  next gate call, D-034/D-185); TECH_NOTES 854 lines (over the 600
-  docs cap — the pre-existing 773 + pure measured substance, §6.1);
-  TASKS 1205 (the pre-existing over-cap 1180 + the law-required
-  ledger line + the row rewrite, §6.1's standing state); verified
-  BEFORE at BASE_COMMIT 7618714 (1900+1 green, ruff clean —
-  the iter-169 pin re-confirmed) and re-verified after: 1900+1 green,
-  ruff clean, zero test change; iter-160 evicted per the cap
+iter-173 · 2026-09-21 · engine-1 (move a, round 3) — the v2 smoke bundle triaged (the
+s6 crash runner-side, the double_apply_probe fixture kind, + two v2 defects: the
+manifest's build half, the S7 -np 2 argv); the runner v3 delivered outside the repo,
+sandbox-validated by the stub-client full-corpus walk; TECH_NOTES §13.1 the round-3
+record; 4 paths, doc-only; 1900+1 green at 69db4f4; iter-163 evicted per the cap
+
 ---
-iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures (the
-owner's «проработай открытые в прошлой итерации ki и все связанное,
-нужно доделать все с технической частью» call): both holes qa-1 opened
-closed at LOAD, zero runtime change on well-formed packs
-- KI#89: shared `lint_direct_keys` (packlint/shared.py, the
-  lint_echo_cond family) — presence + type + non-emptiness for the five
-  record-reading tests' directly-indexed keys, wired into ALL FOUR
-  `requires` lint sites (action canon, texture block, urgencies,
-  factions; the iter-45 `who` precedent generalized to its family)
-- KI#88 arm 1: ACTOR_KEYS split in core/onaction.py (world |
-  source_actor; the reaction actor is schema-required) + the dedicated
-  story.py row refusing `actor: source_target` with the rationale;
-  arm 2: the target-sourced check row in actions.py reading the door's
-  OWN `needs_target` predicate (extracted from validate_shape into
-  core/intent.py — one source, two readers); the runtime asserts stay
-  the backstops
-- tests/test_qa2.py +15 (the §9 claim packet: the five presence rows
-  parametrized, the type/dead arms, the three site arms, both KI#88
-  arms + the negative load arm); docs: DIRECTOR_SPEC §3c (the actor
-  row split), INTENT_SCHEMA §3/§5 (the presence row + the check row);
-  12 paths, over the §2.3 soft limit (the two-KI closure + its packet)
-- verified BEFORE at BASE_COMMIT e15a091 (1885+1 green, ruff clean,
-  the iter-168 pin re-confirmed) and re-verified after: 1900+1 green,
-  ruff clean, mypy --strict core/ 0, goldens byte-untouched, the five
-  committed packs loading; the `flag` test's twin hole recorded, not
-  routed (the owner's call class); iter-159 evicted per the cap
+iter-172 · 2026-09-21 · engine-1 (move a, round 2) — the `--arm all` crash triaged
+(both defects runner-side: the v1 grammar's un-encoded shape laws + the battery's
+ParseError-only catch; the census unwrap bug found in validation); the runner v2
+delivered outside the repo, validated against the REAL doors (2109 docs pass the laws
++ the gate); 4 paths, doc-only; 1900+1 green at dcba648; iter-162 evicted per the cap
+
 ---
-iter-168 · 2026-09-21 · qa1 — the owner-called type-discipline audit
-(the owner's «там еще была задача qy 1 что ли, связанная с проверкой
-кода» chat call naming the standing row over STATUS's Next step):
-mypy --strict on `core/` taken 207 → 0 across 36 files at ZERO runtime
-behavior change (the suite + the golden fixtures byte-identical both
-ends)
-- root fixes: `_require(condition: object)`; the `Importance`/`Fidelity`
-  Literal funnels (pack_importance/_importance, decay/acquisition);
-  the RetrievalIndex slot annotations; the Mapping read-only widening
-  (fold's dict `Projection` the write owner, resolvers' own alias
-  retired); `_is_int`/`_is_number` → TypeGuard; `Pack.entity/action`
-  Iterable bridges; assert-after-require narrowings across packlint
-  (the lint's loud refusals stay the contract); the shadowing kills
-  (metrics/echo/admission/worldgen); log.py's first-branch annotations;
-  29 core files (over the §2.3 soft limit — a repo-wide strict pass)
-- two real holes made loud: KI#88 (the source_target actor null + the
-  target-sourced defender — asserts landed, the lint-side closure the
-  residue); KI#89 (the door's directly-indexed cond keys `flag`/
-  `field`/`values` not load-linted — the iter-45 `who` family, fix
-  routed); the tool stays optional (D-031 unchanged — no dev-dep, no
-  CI row, enforcement the owner's call class)
-- verified BEFORE at BASE_COMMIT c82c7ca (1885+1 green, ruff clean —
-  the iter-167 pin re-confirmed) and re-verified after: 1885+1 green,
-  ruff clean, mypy --strict core/ 0 errors, goldens byte-untouched;
-  iter-158 evicted per the cap
+iter-171 · 2026-09-21 · engine-1 (move a, round 1) — the {3–8B, GBNF} experiment
+convened (the owner's batched-test call): the Rule-9 runner delivered outside the repo
+(the Vantiel-handoff pattern), sandbox-validated end-to-end at the owner's exact build
+b11064 CPU; TECH_NOTES §13 gains the sandbox surface block; 4 paths, doc-only; 1900+1
+green; iter-161 evicted per the cap
+
 ---
-iter-167 · 2026-09-21 · stepread — the step bench's first embodiment (the
-owner's «продолжай работы, что логичнее всего сейчас начать» continuation
-call over STATUS's embodiment routing, the natural doc-streak breaker after
-three doc-only iterations): the step's close read — the unit's setting verb
-(the §6.2 gap text's own "a future embodiment's own class, the read_pole
-precedent") — landed as pure pack data, zero core
-- pack: actions.json (the read_stair hinge — the read family's third
-  instance, its first location-kind target: the stair IS the carrier; the
-  perception gate 30, the field_in pin + the co-location gate),
-  templates.json (the stair_read + stair_read_failed lines — 63 templates,
-  inside the 65 budget); the literal token the_step_law minted to the
-  reader: the ORDER the road never learns from the books (§7.1's stranger
-  row — the road's misread correctable in play, the brief's recalled facts
-  the read surface); the token deliberately PLAIN knowledge — no secrets
-  entry, no cluster, the registry stays two keys (the pole's debt-lever
-  class not duplicated)
-- tests: test_stepread.py (+7, the §9 claim packet — the census + the
-  plain-knowledge boundary; the day chain exact at three probed seeds; the
-  brief's recalled-facts line; the night chain partial — the unlit weir;
-  the off-site/far rejection arms; the determinism twin); docs: the
-  worldbuild trio (ANCHOR_REGION §6.2, WORKPLAN §2/§6, WORLD_TESTS §9) +
-  TASKS + STATUS; 9 paths (the iter-161/162 pack-landing precedent); zero
-  corpus price (no committed script reads the stair — the golden T1
-  byte-untouched)
-- honest residues: the read mints the LAW, never the PRESENT (the water
-  level's gap stays owner-routed, the separate-track law); no NPC driver
-  reads the stair (the player-facing verb, the pole's dormant-family
-  class); the remaining embodiment options (the notch record's arming, the
-  hatch — and the winter kin's three) stay the owner's call class
-- ANCHOR_REGION stays over the 600-line docs cap (771 after the +9): the
-  pre-existing substance-law state, the iter-165 rationale standing (the
-  unit's rungs/tables are substance, no cruft found in the pass)
-- verified BEFORE working at BASE_COMMIT a317db3 (1878+1 green, ruff clean
-  — the pin re-confirmed) and re-verified after: 1885+1 green, ruff clean
-  (the +7 the claim packet); iter-157 evicted per the cap
-iter-166 · 2026-09-21 · intake33 — the game-design practitioner
-talks corpus routed (the owner's research call over the uploaded
-five-source knowledge base: Sawyer/Meier/Battle Mode/Johnson/Wolverson):
-PARTIALLY CONFIRMED — a perception + economy-craft donor, never a
-systems donor
-- adopted: the OUTCOME-PERCEPTION LAWS CARD (the layered legibility
-  ladder — the combined form of the five competing presentation
-  solutions) → presentation-1's consult material (the third parked
-  card, the visual/Vantiel precedent); the ANTI-ARBITRAGE SPREAD →
-  the Resource open question's donor (ANCHOR_REGION's price/flow row);
-  the TURNOVER QUESTION → WORLD_AUTHORING §5 (the ECS cure = the
-  function-loss probe aimed at holder mortality, the anti-freeze law);
-  two parked notes: the Hot-Path placement pair (the road-traffic
-  rider's material, beside the intake-27 topology proposal) + the
-  weak-coupling authoring law (pack-3's event families)
-- the largest cross-domain confirmation batch since intake-27
-  (seed-in-save = INV-2/T2; no-cheats AI = the one-id door; infinite
-  tooltips = mechanics.py; automation-red-flag = mech-2; direct-and-
-  verify = the worldgen's MST-by-construction own form); refused
-  binding: all dice-bending, the 3:1/2× constants, tech-deck/order/
-  no-counterattack mechanics, Voronoi/two-layer-noise, the K-table
-  as repo taxonomy (the do-not-import list in the ref file)
-- doc-only (10 paths, over the soft limit per AGENTS §2.3 — the
-  intake-31/32 precedent: ref/game_design_talks.md + the five §10
-  rows + DEEP + phases.md §6 + DECISIONS + TASKS + WORLD_AUTHORING +
-  NAV + STATUS + worklog; the third consecutive doc-only iteration,
-  the D-022 exception consumed by this session's fresh call)
-- verified BEFORE working at BASE_COMMIT 319e3e9 (1878+1 green; ruff
-  not runnable in the sandbox — zero Python files touched) and
-  re-verified after: 1878+1 green (doc-only, zero test change);
-  iter-156 evicted per the cap
+iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED (the owner's
+real-backend convening call): llama-server behind an explicit adapter + GBNF, the
+file-contract frame the insertion point — D-192 the decision, CONTRACTS §4 the build
+contract, TECH_NOTES §2/§13 the evidence (verified against the owner's raw logs); 6
+paths, doc-only; 1900+1 green both ends at 7618714; iter-160 evicted per the cap
+
+---
+iter-169 · 2026-09-21 · qa2 — the KI#88/#89 lint-side closures: the shared
+lint_direct_keys row wired into all four requires sites; the ACTOR_KEYS split + the
+needs_target predicate extraction; tests/test_qa2.py +15; 12 paths (over the §2.3 soft
+limit — the two-KI closure + its packet); 1900+1 green, mypy --strict core/ 0, goldens
+byte-untouched at e15a091; iter-159 evicted per the cap
+
+---
+iter-168 · 2026-09-21 · qa1 — the owner-called type-discipline audit: mypy --strict on
+`core/` 207 → 0 across 36 files at zero runtime change (the root-fix shape: _require,
+the Literal funnels, the TypeGuards, the Mapping widening); two holes made loud (KI#88
++ KI#89); the tool stays optional (D-031); 29 core files, over the §2.3 soft limit;
+1885+1 green, goldens byte-untouched at c82c7ca; iter-158 evicted per the cap
+
+---
+iter-167 · 2026-09-21 · stepread — the step bench's first embodiment: the read_stair
+hinge + the the_step_law token landed in province_pack as pure pack data, zero core
+change; tests/test_stepread.py +7; the water level's half + the remaining embodiment
+options stay owner-routed; 9 paths; 1885+1 green at a317db3 (the +7 the claim packet);
+iter-157 evicted per the cap
