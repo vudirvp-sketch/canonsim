@@ -1,49 +1,50 @@
-Iteration: iter-170 (`iter-170-engine1` — the runtime inference engine
-DECIDED, the owner's real-backend convening call: llama.cpp installed
-+ the RTX 3080 Ti station + the three-model set (E4B / 9B / 27B
-Q4_K_M) + the real `llama-server` test evidence, the disposition and
-the session research both riding the call): llama-server behind an
-EXPLICIT ADAPTER + GBNF — D-192 the decision row, CONTRACTS §4 the
-build contract (the D-177 pattern, the acceptance-boundary revision
-the disposition itself routes: semantic typed policies never raw
-llama.cpp flags — the `-ngl 99` fit-refusal and the `-np`-halved
-per-slot context the measured reasons; the three reproducibility
-tiers; reasoning an engine/request concern — the thinking-consumes-
-`max_tokens` fact; structured output ≠ validation — the doors' gates
-stay; the client's home pinned — the runner outside the repo, repo-
-side engine code periphery-only, INV-4 lifting only at the build's own
-iteration; the non-goals — framework inflation refused), TECH_NOTES
-§2 refreshed to the measured station + §13 the evidence record (every
-cited fact verified against the owner's raw logs: ~113–126 tok/s at
-the E4B band, 94.5 at 9B, the 27B hybrid 12.95/4.51 with placement
-not exposed; the schema-constrained JSON holding over a contradictory
-prompt with thinking off; streaming + terminal truncation signals;
-operational cancellation + slot release; the observation surface
-/health /props /slots; model warnings as diagnostics; the deployment
-defaults never engine semantics). The remaining measurement is the
-experiment's — the `{3–8B, GBNF}` arm + the four new arms (one-vs-
-two-model economics, seeded-local determinism, the GBNF latency
-penalty, mode-A prose at the weak arm), owner-convened; presentation-
-1's evidence base gains §13. Doc-only: zero engine code, INV-4
-UNCHANGED.
+Iteration: iter-171 (`iter-171-engine1a` — the {3–8B, GBNF} experiment
+CONVENED, the owner's «за 1 раз как можно больше тестов… лучше вообще
+выяснить все про llama.cpp и дальше уже разбирайся на своих
+мощностях» call): the Rule-9 runner DELIVERED outside the repo (the
+Vantiel-handoff pattern — engine1_runner/grammar/battery + the
+runbook, never committed) — ONE batched owner session covering the
+TEST_PLAN §8.5 gap rows (the 51-utterance corpus raw → one re-ask,
+the deviation families F1–F6 with the guess-within-grammar tally,
+the bg-7 prose families (ii)–(v), the per-component p50/p95 columns
+tick/fold/brief/parse/generate) + CONTRACTS §4.3's four arms (one-vs-
+two-model, seeded-local determinism, the GBNF latency penalty, mode-A
+prose at the weak arm) + the §13 surface probes at the owner's build.
+Sandbox-validated END-TO-END FIRST on the owner's exact llama.cpp
+build (b11064, commit a894dae93, CPU-side): every arm smoke-run
+through the REAL doors — raw GBNF gate validity 100% at the smoke cut
+(shape errors structurally impossible; the honest guess-within-
+grammar class remains), the mediator prose ladder + the C3.5
+degraded-knows probe live, the per-component latency columns
+populated. TECH_NOTES §13.1 the sandbox surface block: the router
+(model swap = autoload/eviction, never a restart), POST /props the
+measured silent no-op, the -np context split at b11064, GBNF on the
+chat route (top-level grammar param), the GBNF dialect facts
+(underscore rule names rejected; [ ] is a char class), cross-model
+thinking×schema mechanics, the determinism mini 5/5, cancellation vs
+a second client, restart timing — every software-bound §13 "not
+established" item closed; the station-bound list narrowed to the
+owner's run. The owner's move: the one run (`--arm all`), the bundle
+back — then the transcripts re-distill (§8.2 source 3), the
+heartbeat's first local row, presentation-1's local evidence, and the
+build landing (b) stays the next owner gate. Zero engine code in the
+repo; INV-4 UNCHANGED.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §6) ·
 1900 passed + 1 skipped, ruff clean (Python 3.12.14, the env pin;
-verified at BASE_COMMIT 7618714 BEFORE working — 1900+1 green, ruff
-clean, the iter-169 pin re-confirmed — and re-verified after with the
+verified at BASE_COMMIT 04c8a5f BEFORE working — 1900+1 green, ruff
+clean, the iter-170 pin re-confirmed — and re-verified after with the
 diff in place: 1900+1, ruff clean, doc-only, zero test change, the
 golden fixtures byte-untouched) ·
 Date: 2026-09-21 ·
-Scope: docs/DECISIONS.md (D-192; 31 rows — one over the ≤30 cap,
-collapses at the owner's next gate call) + docs/CONTRACTS.md (§4 the
-engine-1 build contract) + docs/TECH_NOTES.md (§2 the measured-station
-refresh + §13 the evidence record; 854 lines — over the 600 docs cap,
-the pre-existing state + pure measured substance, the §6.1 law) +
-docs/TASKS.md (the engine-1 row DECIDED + presentation-1's evidence
-base + the ledger line) + `STATUS.md` (this re-pin) + `worklog.md`
-(this entry). The prior iteration's record: iter-169 (qa2). The detail
-lives in the worklog + git.
+Scope: docs/TASKS.md (the engine-1 row's move (a) CONVENED + the
+ledger line) + docs/TECH_NOTES.md (§13.1 the sandbox surface block —
+measured substance only; 938 lines — over the 600 docs cap, the
+pre-existing 854 + pure measured evidence, the §6.1 law) +
+`STATUS.md` (this re-pin) + `worklog.md` (this entry). The prior
+iteration's record: iter-170 (engine-1). The detail lives in the
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -514,38 +515,44 @@ the logs byte-differ. The harness is a script,
 
 ## Next step
 
-**iter-170 DONE: engine-1 — the runtime inference engine DECIDED (the
-owner's real-backend convening call: llama.cpp installed + the RTX
-3080 Ti station + the three-model set E4B/9B/27B Q4_K_M + the real
-`llama-server` test evidence — the disposition
-`engine-1_real_backend_evidence_and_disposition.md` and the session
-research both riding the call, both outside the repo per the
-Vantiel-handoff precedent): llama-server behind an EXPLICIT ADAPTER +
-GBNF, the file-contract frame (D-055) the insertion point — the
-doors' gates run on the reply document, engine-agnostic by
-construction. D-192 the decision; CONTRACTS §4 the build contract
-(the D-177 pattern — the acceptance-boundary revision the disposition
-itself routes: semantic typed policies never raw flags, the three
-reproducibility tiers, reasoning an engine/request concern, structured
-output ≠ validation, the client's home + the INV-4 lift pinned to the
-build's own iteration, the non-goals — framework inflation refused);
-TECH_NOTES §2 refreshed to the measured station + §13 the evidence
-record, every cited fact verified against the owner's raw logs
-(~113–126 tok/s at the E4B band; 94.5 at 9B; the 27B hybrid
-12.95/4.51 with placement not exposed; the `-ngl 99` fit-refusal;
-the schema-constrained JSON holding over a contradictory prompt with
-thinking off; the `-np`-halved per-slot context; streaming + terminal
-truncation; operational cancellation; /health /props /slots; the
-warnings + the deployment defaults). The remaining measurement is the
-experiment's — the `{3–8B, GBNF}` arm + the four new arms (one-vs-
-two-model economics, seeded-local determinism, the GBNF latency
-penalty, mode-A prose at the weak arm), owner-convened, results
-feeding presentation-1 (its evidence base gains §13) and the
-heartbeat's first local row. Doc-only: 1900+1 green both ends, ruff
-clean, zero engine code, INV-4 UNCHANGED — the natural next moves the
-owner's: the experiment's convening call (the decision's remaining
-measurement), the build landing (the GBNF mapping + the door wiring,
-INV-4 lifting there), or another row.**
+**iter-171 DONE: engine-1 move (a) — the {3–8B, GBNF} experiment
+CONVENED and the llama.cpp surface mapped (the owner's «за 1 раз как
+можно больше тестов… лучше вообще выяснить все про llama.cpp и дальше
+уже разбирайся на своих мощностях, а на моем железе только в крайнем
+случае» call): the Rule-9 runner DELIVERED outside the repo (the
+Vantiel-handoff pattern: engine1_runner.py + engine1_grammar.py +
+engine1_battery.py + the runbook + the config template — never
+committed, never staged) — ONE batched owner session covering
+TEST_PLAN §8.5's gap rows (the 51-utterance corpus raw → one re-ask,
+the deviation F1–F6 with the guess-within-grammar tally, the bg-7
+prose families (ii)–(v), the per-component p50/p95 columns) + all
+four CONTRACTS §4.3 arms + the §13 surface probes at the owner's
+build. Validated end-to-end FIRST on the owner's exact build b11064
+(commit a894dae93) CPU-side: TECH_NOTES §13.1 the sandbox surface
+record — the ROUTER (model swap = autoload/eviction, never a
+restart; children inherit the serving args; /slots?model=), POST
+/props the measured silent no-op (write 200, effect never lands —
+per-request is the only live surface), the -np context split
+(explicit np halves per-slot; auto = 4 slots kv-unified), GBNF on
+the chat route as a top-level grammar param (response_format
+"grammar" refused), the GBNF dialect facts (underscore rule names
+rejected — parse failure; [ ] is a char class, the optional group is
+( )?; \" escapes in literals), cross-model thinking×schema mechanics
+on the Qwen side, the determinism mini 5/5 greedy AND seeded, the
+cancellation-vs-second-client row closed, restart timing — every
+software-bound §13 "not established" item closed at the owner's
+commit; the runner's GBNF mapping is the build's repo-side function
+previewed (per-verb precise, subset-enumerated fields). Zero engine
+code in the repo, INV-4 UNCHANGED, doc-only, 1900+1 green, ruff
+clean. **The owner's move: the one run — `PYTHONHASHSEED=0 python
+engine1_battery.py --config engine1_config.json --arm all`, send
+back engine1_out/engine1_bundle.zip; smoke first with `--arm smoke
+--limit 2`. The natural next moves after the bundle: the re-
+distillation + the heartbeat's first local row + presentation-1's
+local evidence (the transcripts' own iteration), or the build
+landing (b) — the GBNF mapping + the door wiring, INV-4 lifting
+there, both owner-gated.**
+
 **iter-169 DONE: qa2 — the KI#88/#89 lint-side closures (the owner's
 «проработай открытые в прошлой итерации ki и все связанное, нужно
 доделать все с технической частью» call over the two holes qa-1 opened

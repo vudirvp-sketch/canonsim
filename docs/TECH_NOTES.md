@@ -852,3 +852,86 @@ LIVE/RELOAD/RESTART semantics; per-setting effective-state observation;
 atomic model replacement mid-runtime; the 27B auto-fit placement (only
 if a consumer must expose it); cross-model structured output; the
 minimum reproducibility manifest; seeded-local determinism.
+
+### 13.1 The sandbox surface block (b11064 CPU, iter-171 — same commit
+### as the owner's build, Linux x64, 2-core CPU; mechanics, never
+### station benchmarks; the runner's own probes)
+
+The experiment convening's validation half: llama.cpp b11064 (the
+owner's exact build, commit a894dae93) built and probed CPU-side at
+the runner's Rule-9 boundary. Software-bound facts (API semantics —
+build-identified, hardware-independent); the station-bound numbers
+remain the owner's run:
+
+- **The router**: `--models-dir` turns llama-server into a ROUTER
+  (`/props` `role: router`, `models_autoload`, `max_instances`) that
+  spawns one child llama-server per model on an ephemeral port,
+  addressed by the file STEM (no extension). Children INHERIT the
+  router's serving args (`-c`, `-t`, …) — a child without an explicit
+  `-c` dies at the model's native context (measured: 32k OOM at 4 GB
+  RAM). Autoload on first request (measured 2–3.5 s at 1.7B CPU),
+  eviction at `models-max` (the evicted model pays reload on next
+  touch); two models resident run requests in PARALLEL. `/slots` at
+  the router REQUIRES the model named (`/slots?model=<id>`) — the
+  bare endpoint 400s. **Model swap ≠ server restart** at this build:
+  the swap cost is autoload/eviction, not process restart.
+- **POST /props is a silent no-op** for sampling defaults (the
+  discriminating test: write `temperature 0.123` → 200
+  `{"success":true}` → `/props` still shows 0.8 → the next request
+  WITHOUT temperature runs at 0.8). Writes of INVALID keys also
+  return success. The live settings surface at this build is
+  per-request params ONLY; everything else is restart-class. Never
+  trust the write-side 200.
+- **The `-np` context split verified at b11064**: explicit `-np 2`
+  at `-c 4096` → 2 slots × `n_ctx_slot 2048`, `kv_unified false`
+  (the §13 halving law reproduced); AUTO slots (no `-np`) → 4 slots,
+  `kv_unified true` (one shared pool — a different shape than the
+  explicit path). The adapter must pin `-np` explicitly to get the
+  predictable per-slot context.
+- **GBNF rides `/v1/chat/completions`** as a TOP-LEVEL `grammar`
+  param (per-request, with seed/temperature/chat_template_kwargs —
+  live-validated, grammar-constrained JSON returned). `response_format
+  type "grammar"` is REFUSED (400: text|json_object only), while
+  `json_schema` works on the same route. Both constraint kinds ride
+  the chat route; the native `/completion` carries `grammar` too.
+- **The GBNF dialect at b11064**: rule names must NOT contain
+  underscores (parse failure; dashes fine); `[...]` is a CHAR CLASS
+  — the optional group is `( ... )?` (a `[ ... ]`-as-optional bug
+  compiles but matches ONE character from the class, silently);
+  `\"` escapes inside literals work (json.gbnf's own form). The
+  snapshot→GBNF mapping must sanitize rule identifiers.
+- **Cross-model structured output (Qwen side)**: the
+  thinking-consumes-budget trap reproduces on Qwen3-1.7B (empty
+  content, `finish_reason length`); `enable_thinking=false` +
+  json_schema → schema-valid JSON. The Gemma §13 recipe is
+  model-family-general at the mechanics level (the 9B/27B weights
+  ride the owner's run).
+- **Determinism mini-probe** (1.7B CPU, single slot, `cache_prompt
+  false`, n=5): greedy temp-0 byte-identical 5/5; SEEDED temp-0.8
+  with a pinned seed byte-identical 5/5. The CONTRACTS D3
+  seeded-local tier HOLDS at this scale (the station re-runs it at
+  the real models — the arm's own measurement).
+- **Cancellation vs a connected second client**: one client
+  disconnecting mid-stream stops its task and releases the slot
+  (all slots `is_processing false` after; health ok) while the
+  second client's request completes CONCURRENTLY (0.84 s under a
+  running 256-token stream, 4-slot unified). The §13 "not
+  established" row is closed at this build/slot shape.
+- **Restart timing**: server stop→health at 1.7B CPU mmap ≈ 1.5 s
+  (the 27B figure is the owner's). Slot actions (`save/restore/
+  erase`) need `--slot-save-path` at startup (501 otherwise —
+  restart-class, recorded).
+- The runner battery is validated end-to-end at this scale: the
+  51-utterance corpus through the REAL ParserDoor with per-request
+  GBNF → **raw gate validity 100% at the smoke cut** (the grammar
+  makes shape errors structurally impossible — the remaining class
+  is the honest guess-within-grammar: wrong kind/target), the
+  mediator prose ladder + the C3.5 degraded-knows probe live, the
+  per-component latency columns populated (emit/generate/apply +
+  the fold probe).
+
+Station-bound remainder (the owner's one run): the corpus/deviation/
+prose numbers at E4B/9B/27B, the four §4.3 arms' economics, the
+heartbeat's first local row, the 27B restart/swap costs, the
+cross-model schema at the real models, the seeded-local probe at
+VRAM/batch shapes.

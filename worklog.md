@@ -7,6 +7,30 @@
 > compaction entry carries the §6.1 over-cap rationale, as AGENTS §6
 > demands); pre-trim history lives in git.
 ---
+iter-171 · 2026-09-21 · engine-1 (move a) — the {3–8B, GBNF} experiment
+convened (the owner's «за 1 раз как можно больше тестов… разбирайся на
+своих мощностях» call): the Rule-9 runner delivered outside the repo
+- the battery: the §8.5 gap rows + all four §4.3 arms + the §13
+  surface probes, one batched owner session, checkpointed/resumable,
+  stdlib-only, the REAL doors driven headless (Simulator + Mediator +
+  ParserDoor, one ledger); the GBNF mapping per-verb precise
+  (subset-enumerated fields), preview of the build's repo-side
+  function; Vantiel-handoff delivery (runner + runbook + config
+  template attached + tmpfiles — never committed)
+- sandbox validation on the owner's EXACT build (b11064, a894dae93,
+  CPU): every arm smoke-run (raw GBNF validity 100% at smoke; the
+  prose ladder + C3.5 degraded-knows live; per-component latency
+  columns populated) + the §13.1 surface record: the router (swap =
+  autoload/eviction, no restart), POST /props silent no-op, -np
+  splits, grammar-on-chat, the GBNF dialect facts (no underscores in
+  rule names; [ ] is a char class), determinism 5/5, cancellation
+  closed, restart 1.5 s @1.7B
+- caps: TECH_NOTES 938 lines (the pre-existing 854 + §13.1's pure
+  measured substance, §6.1); TASKS 1218 (the pre-existing over-cap +
+  the law-required ledger line + the row update); iter-161 evicted
+  per the worklog cap; verified 1900+1 green + ruff clean under
+  3.12.14 (pytest must run as `python -m pytest` — the bare binary
+  binds 3.13.5 and the log header's python stamp breaks T1)
 iter-170 · 2026-09-21 · engine-1 — the runtime inference engine
 DECIDED (the owner's real-backend convening call: llama.cpp + the RTX
 3080 Ti station + the three-model set + the real `llama-server` test
@@ -259,25 +283,3 @@ PACK DATA over res-1, zero core — the THIRD consumer arming
   honest residues: no terminus/amortization in the flow vocabulary —
   the clearance lump + the punt purchase are discrete events, no
   player-scaled door armed; iter-152 evicted per the cap
----
-iter-161 · 2026-09-20 · poleseed — the pole's embodiment seeds (the owner's
-«надо решить что начали в прошлой итерации» call, the W4 options list):
-the flood-story recognition token + the steal_target flag landed in
-province_pack, PURE PACK DATA, zero core (the KI#87 precedent class)
-- pack: entities.json (the pole's flag), actions.json (the read_pole hinge —
-  the grim read_ticket pattern's second instance; the meta/steal notes sync),
-  rules.json (the_flood_story over the toll-taker: type debt, a season's
-  window), templates.json (the two read lines + the item-neutral pickpocket
-  line); tests: test_poleseed.py (+11 — the lever chain read → mint →
-  corner, the night partial, the lift + the pole-less hop, the total-failure
-  arm, determinism)
-- the debt-1 standing row OPENED (the economy arm routed on the owner's
-  call); docs: ANCHOR_REGION §6.1/§9, WORLD_WORKPLAN §2/§6, WORLD_TESTS
-  §7/§9, TASKS, STATUS; zero corpus price (no committed script reads the
-  pole or lifts it); 11 paths (the iter-157 pack-landing precedent); honest
-  residue: the family's own read/telling mints the cluster (dormant, no
-  driver) — recorded in the secrets notes
-- verified at BASE_COMMIT 26d57f7 (1852+1 green, ruff clean — the pin
-  re-confirmed) and re-verified after: 1863+1 green, ruff clean; iter-151
-  evicted per the cap
-

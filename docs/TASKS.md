@@ -43,15 +43,21 @@ claim packet)
   file-contract frame (D-055) the insertion point, semantic typed
   policies never raw flags. The landing's boundary: CONTRACTS §4 (the
   D-177 pattern — the acceptance boundary, the non-goals, the
-  experiment design incl. the four new arms). Remaining moves, both
-  owner-gated: (a) the `{3–8B, GBNF}` experiment (TEST_PLAN §8/§8.5's
-  gap rows + CONTRACTS §4.3's arms; the Rule-9 runner outside the
-  repo) — its results feed presentation-1 and the heartbeat's first
-  local row; (b) the build landing (the GBNF mapping + the door wiring
-  + the failure→ladder mapping) — INV-4 lifts there, the AGENTS §4/§8
-  edits riding it. Unlocked by the phase-1 gate; the dev-time external
-  parser carried phase 2 to its gate PASS (iter-35) and carries mode C
-  until the landing.
+  experiment design incl. the four new arms). Move (a) CONVENED
+  (iter-171, the owner's «за 1 раз как можно больше тестов… разбирайся
+  на своих мощностях» call): the Rule-9 runner delivered OUTSIDE the
+  repo (the Vantiel-handoff pattern, never committed) — one batched
+  session covering the §8.5 gap rows + §4.3's four arms + the §13
+  surface probes, sandbox-validated end-to-end at the owner's exact
+  build b11064 (§13's sandbox block the surface record); the battery's
+  GBNF mapping is the build's repo-side function previewed. Remaining:
+  the owner's one run (the bundle back — transcripts re-distilled per
+  §8.2 source 3; the heartbeat's first local row; presentation-1's
+  local evidence), then (b) the build landing (the GBNF mapping + the
+  door wiring + the failure→ladder mapping) — INV-4 lifts there, the
+  AGENTS §4/§8 edits riding it. Unlocked by the phase-1 gate; the
+  dev-time external parser carried phase 2 to its gate PASS (iter-35)
+  and carries mode C until the landing.
 - `presentation-1` — the LLM presentation contract, engine-1's
   decision-input child, never a sibling competitor (intake-12, D-148): the
   model-facing serializer spec over the STABLE brief IR (BRIEF_SPEC §7
@@ -147,6 +153,25 @@ had clobbered it — D-185; the iter-151..156 one-liners backfilled at iter-158
 — the practice had lapsed after the compaction; per-iteration detail: the
 D-rows + phases.md §6's blocks + worklog at the time + git — never restated
 here, the header's own law)
+
+- iter-171 · 2026-09-21 · engine-1 (move a) — the experiment CONVENED (the
+  owner's «давай за 1 раз как можно больше тестов… лучше вообще выяснить
+  все про llama.cpp и дальше уже разбирайся на своих мощностях» call):
+  the Rule-9 runner built + delivered OUTSIDE the repo (the Vantiel-handoff
+  pattern — engine1_runner/grammar/battery + the runbook, never committed),
+  one batched owner session = the §8.5 gap rows (51-utterance corpus raw →
+  1 re-ask, F1–F6 deviation with the guess-within-grammar tally, the bg-7
+  prose families (ii)–(v), the per-component p50/p95 columns) + §4.3's four
+  arms + the §13 surface probes at the owner's build; sandbox-validated
+  end-to-end FIRST (llama.cpp b11064 CPU — the owner's exact commit — a
+  1.7B model, every arm smoke-run through the REAL doors: raw GBNF
+  validity 100% at n=2 smoke, the prose ladder + C3.5 degradation live);
+  TECH_NOTES §13 gains the sandbox surface block (the router, POST /props
+  the silent no-op, -np semantics, grammar-on-chat, the GBNF dialect
+  facts, determinism mini, cancellation, restart timing — every §13
+  "not established" software-bound item closed; the station-bound list
+  narrowed); zero engine code in the repo, INV-4 UNCHANGED, doc-only,
+  1900+1 green, ruff clean.
 
 - iter-170 · 2026-09-21 · engine-1 — the runtime inference engine DECIDED
   (the owner's real-backend convening call: llama.cpp + the RTX 3080 Ti
