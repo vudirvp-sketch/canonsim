@@ -450,20 +450,21 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the biography probe's arc — the first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (2026-09-22, iter-188/189/190/191; the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe RUN and FAILED at the rendering boundary (iter-192; the heartbreak station + the live human band open)
 
-`W5 — PARTIALLY CONFIRMED; evidence is author-side diagnostic, not an
-independent reader measurement.` The owner's reading of the anchor's
-reader surface (the annual tale + the committed briefs, 2026-09-22)
-found the mechanical substrate rich — W4's verdict unchanged: the
-causal composition CONFIRMED — but the reader-side reconstruction
-thin: the Garrick chain (shave → starvation → debt → withhold →
-artery flow → coupled liabilities → re-weigh → succession) exists
-world-side; the reader-side surface of the annual tale carries only
-"Garrick comes by 3 coin at the year's reckoning". The reading's
-epistemic class is AUTHOR-SIDE DIAGNOSTIC (the reader knew the
-authorial maps — no blind pass), never an independent reader
-measurement; the live band stays open.
+`W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
+an independent blind-reader measurement (the probe arc below); the
+humor station's first measurement FAILED at the rendering boundary
+(iter-192 below); the heartbreak station un-run; the live human band
+open.` The owner's reading of the anchor's reader surface (the annual
+tale + the committed briefs, 2026-09-22) found the mechanical
+substrate rich — W4's verdict unchanged: the causal composition
+CONFIRMED — but the reader-side reconstruction thin: the Garrick chain
+(shave → starvation → debt → withhold → artery flow → coupled
+liabilities → re-weigh → succession) exists world-side; the annual
+tale's reader surface carried only "Garrick comes by 3 coin at the
+year's reckoning" (the reading's own class AUTHOR-SIDE DIAGNOSTIC —
+no blind pass; the probes below are the blind band's evidence).
 
 The five findings, split by owner (the decomposition law — a reader
 gap is classified by boundary BEFORE any fix; a found gap is never
@@ -475,26 +476,12 @@ automatically a renderer feature):
 | raw machine ids in the reader surface (`npc_*`, `pay_*`, `tally_*` — the told-fact tokens) | engineering presentation bug | FIXED iter-188 (rs-1: the knows-gloss boundary, the regression + census green) |
 | the annual watch/document-check flood (722 + 88 of 916 tale lines, seed 42) | chronicler legibility experiment | recorded (TECH_NOTES §16); the invariant saved (repeated routine events must not displace causal-change events); the bounded aggregation experiment PARKED (chron-2) until after W5 |
 | the narrator's performance on the annual tale | separate brief→narrator test | the PRESENTATION_SPEC band; never W5's instrument |
-| packet contamination (the reader material pre-showing the answers) | test methodology | the isolation law below |
+| packet contamination (the reader material pre-showing the answers) | test methodology | the isolation law (WORLD_WORKPLAN §7) |
 
-The W5 form (the owner's call — the annual tale a long-horizon
-chronicler STRESS TEST, never the human-meaning experiment): THREE
-BOUNDED PROBES over the existing region state — biography, humor,
-heartbreak (the probes' definitions: WORLD_WORKPLAN §7, the plan's
-own row — the single-owner law, D-024).
-
-The blind-pass isolation law: the reader material contains ONLY
-committed reader-visible surface (the tale, the cards, the briefs) —
-never `ANCHOR_REGION`, authorial interpretations, or intended
-answers; the author audit and the independent reader reading stay
-separate artifacts, prepared separately.
-
-The gate (the owner's order): NO new worldbuilding candidates until
-one clean BIOGRAPHY PROBE runs on Garrick / the re-weigh over the
-canonical standing debt — does the reader independently reconstruct
-the persistent obligation? A repeated failure is classified by
-boundary (canonical fact / discovery path / rendering — the law's
-record: WORLD_WORKPLAN §7), never "improve the prose".
+The W5 form, the blind-pass isolation law, and the gate are
+`WORLD_WORKPLAN.md` §7's own text (the plan's row — the single owner,
+D-024). The gate's state: MET (the re-run below); the humor and
+heartbreak stations are NOT gate conditions.
 
 The biography probe's FIRST RUN (iter-190, the owner's continuation
 call): the reader did NOT reconstruct the persistent obligation —
@@ -569,12 +556,62 @@ only partially connected in both readings (the +3 reckonings read as
 periodic income — the arc's assembly's own future row); the reader
 class still an LLM and the twin's year-compression caveat unchanged —
 the live human band stays open (the owner's call).
+
+The humor probe's RUN (iter-192, the owner's «продолжай работу по
+планам» continuation call — the W5 trio's next station after the
+gate lifted, the same bounded form): RAN CLEAN and FAILED at the
+RENDERING boundary — the mandatory bar (a joke whose MECHANISM rides
+the world's committed categories) met by NEITHER reading, n=2
+CONVERGENT on the failure's shape: both readers produced the
+IDENTICAL joke — "Why did the smelter cross the road? To get to the
+weighbeam!" — an imported Earth template (the crossing-the-road
+anti-joke) with the world's nouns substituted; the world's own
+generator (PRESSURE → CONTRADICTION → LOCAL TARGET, §3) never fired
+— the withhold's contradiction extracted by neither reading. The
+taboo half: the first reading named the river (a generic criticality
+inference, the wrong class); the second named the guild's weighing /
+the paper debt (the authority-anchored orbit — closer; the authored
+taboo's lived memory, the starved winter and the shave, named by
+neither). The instrument: the same sparse twin re-established from
+the recorded protocol (the fund 18 at the fall, t=2824; the close
+paper 0 / coin 8; the tale 88 lines; the package byte-identical on
+re-run), the package widened with the crofts' close record (the
+withhold's own surface — the heap 18) beside the same three briefs;
+the author audit pre-set BEFORE the reading (the pass bar fixed:
+the mechanism-grounded joke MANDATORY, the authored taboo strongly
+expected, the position-dependence supporting); the blind reader the
+same class (glm, n=2 independent; the runner + the transcripts
+outside the repo, Rule 9). The classification (the boundary law):
+the canonical fact PRESENT (the withhold's shape — the banking +2
+×7, the heap 18; the price's fall — the master's voice exemplar;
+the beam — the fairs' lines + the lore; the shave; the starved
+winter — all in the committed surface); the discovery path
+FRAGMENTARY (the shave → starvation arc never assembles — the voice
+exemplar and the paper's gloss sit in different artifacts with no
+connecting frame; the taboo half's owner); the RENDERING boundary
+the failure's owner (the joke half): the withhold's MEANING renders
+nowhere — the banking lines read as periodic income (the covering
+residue's EXACT family), the bloom kind carries no gloss (the dry
+fallback — the account_kinds table glosses paper only), and the
+loads-kept-off-the-beam (the withholding itself, a negative)
+invisible unless framed. The convergence its own datum: the
+surface's cheapest shared categories (the smelter / the weighbeam —
+the lore line's salience) found identically by both readers — the
+categories carry, the generator does not. The disposition: NEVER
+"improve the prose" — the fix's route the owner's call, the natural
+class the bloom kind's account-kind gloss (the rs family's natural
+third member, rs-2's own precedent) plus the arc's assembly (the
+future row the covering residue already names — the shave→starvation
+arc the same row's material). The same surface PASSED the biography
+re-run — the facts carry, the humor substrate's frame does not: two
+reconstruction tasks, two outcomes, one honest datum. Honest caveats
+unchanged (the LLM reader class, the year compression).
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
 Great Fracture without adding special exceptions for each civilization?
 
-### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live band open)
+### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live LLM band's first humor measurement FAILED at the rendering boundary — iter-192; the human band open)
 
 Do Sarrow Vale's own vocabulary, institutions and history support world-specific
 humor and loss rather than generic genre scenes? The first authored answer:

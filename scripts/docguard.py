@@ -65,6 +65,12 @@ ALLOWLIST: dict[str, str] = {
         "§8/§8.5/§9) — substance-dense at the ceiling; the intake-34 "
         "empty-ablation line pushed the full stack over (cruft pass "
         "run: no filler found)",
+    "docs/worldbuild/WORLD_TESTS.md":
+        "the W5 probe-run records are measured substance (the instrument "
+        "protocols + the classified blind-reader results) — the §6.1 "
+        "pointer passes done iter-191/192 (the form/gate/isolation "
+        "restatements compressed to WORLD_WORKPLAN pointers), worklog "
+        "iter-192 the record",
 }
 
 FAQ_MAX_ENTRIES = 20

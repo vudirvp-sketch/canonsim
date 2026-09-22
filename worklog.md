@@ -14,6 +14,12 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-192 · 2026-09-22 · humorprobe — the W5 humor station (the owner's «продолжай работу по планам»
+continuation): the humor probe RAN and FAILED at the rendering boundary, glm n=2 convergent (both readers the SAME imported-template
+joke — the withhold's meaning renders nowhere, the banking lines read as income, the covering residue's family); classified by
+boundary, the fix's route the owner's call (the bloom kind's gloss the rs family's third member), the gate untouched; 6 paths
+doc-only + the docguard allowlist entry (WORLD_TESTS over the 600 cap after the §6.1 pass); the runner + transcripts + audit outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-183 evicted
+---
 iter-191 · 2026-09-22 · accountgloss — the W5 rendering-boundary fix (the owner's route (а) call): the account-kind gloss on the reader surface (rs-2, the rs-1 precedent — the pack's account_kinds words,
 the renderer's {kind}-slot + state-apposition mapping, the lint's closure) + the biography probe's re-run PASSED CLEAN (glm n=2 convergent: the debt named, the creditor named, the direction correct —
 the gate's named condition met, the embargo lifted); 15 paths (the fix + test_accountgloss.py +7 + the pins widened + the W5 record; WORLD_TESTS at the 600 cap after the §6.1 pointer pass);
@@ -67,12 +73,3 @@ call): the charcoal debt's lifecycle + the coupled liabilities (E⇄H) + the sea
 (D-191 answered — the third form); Loop H + 3 interlock edges + the re-weigh crisis + the humor
 probe; 3 gaps recorded, not routed; 7 paths, doc-only (the world track, D-186); 1969+1 + ruff +
 docguard clean both ends; iter-177 evicted per the cap
-
----
-iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (exp0_week.json +
-test_exp0.py; the verdict: no live deficit at v0.1, the card stays parked, no
-row per D-175) + R1 landed (--paired-delta + TEST_PLAN §6 + the tests; the
-TEST_PLAN cap note rides the over-state, substance per §6.1); 9 paths (over
-the soft limit); 1969+1 + ruff + docguard clean; iter-173 evicted
-
-

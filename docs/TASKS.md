@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-192 · 2026-09-22 · humorprobe — the W5 humor station: the probe RAN and FAILED at the rendering boundary (the withhold's meaning renders nowhere — the banking lines read as income; n=2 convergent on an imported-template joke; the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-191 · 2026-09-22 · accountgloss (rs-2) — the W5 rendering-boundary fix landed (the account-kind gloss on the reader surface: the pack's `account_kinds` words + the renderer's mapping + the lint's closure) and the biography probe's re-run PASSED CLEAN — the reader reconstructed the persistent obligation, n=2 convergent; the gate's named condition met (WORLD_TESTS §9's W5 entry)
 - iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run: the biography probe on Garrick/the re-weigh RAN clean and FAILED at the rendering boundary (the reader did not reconstruct the persistent obligation; the gate stays shut, the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the paper sixteen as account state riding the seat + the three lifecycle doors; the W5 record with the owner's decomposition — WORLD_TESTS §9's W5 entry)
@@ -124,8 +125,6 @@ claim packet)
 - iter-185 · 2026-09-22 · tallyread — the camp's first embodiment: the tally's read (the read_tally hinge + the tally-stick + the secrets registration over the master — the re-weigh's proof, the pole's precedent's fourth instance)
 - iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the charcoal debt, the coupled liabilities, the seat's succession — Loop H + three interlock edges)
 - iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
-- iter-182 · 2026-09-21 · intake-35 — the corpus's second pass: the 44-card families re-confirmed at HEAD, the four precisions riding the intake block, D-195
-
 ## Track B — background (evenings, foreign canon)
 
 ### bg-7 · engine + confabulation probe — done (2026-09-07)

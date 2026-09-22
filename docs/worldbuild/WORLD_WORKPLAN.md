@@ -323,11 +323,18 @@ re-run PASSED CLEAN — the reader (glm, n=2, convergent) reconstructed
 the persistent obligation: the standing named a debt, the creditor
 named, the discharge's direction correct; the gate's named condition
 (one clean biography probe) MET — the new-worldbuilding embargo
-lifts.** The standing decision points for the owner: the human
-live-band re-run (the LLM reader is the instrument so far, n=2), the
-humor / heartbreak probes (the same form, each on the owner's call),
-and the covering residue (the +3 reckonings to the fund's covering
-still not one surface — the arc's assembly's own future row).
+lifts.** The humor station has since RUN (iter-192, the owner's
+continuation call — the record in the W5 entry): FAILED at the
+rendering boundary, n=2 convergent — the withhold's meaning renders
+nowhere (the banking lines read as income); the fix's route the
+owner's call. The standing decision points for the owner: the
+heartbreak probe (the trio's last station, the same form), the human
+live-band re-run (the LLM reader the instrument so far), the humor
+fix's route (the natural class the bloom kind's account-kind gloss —
+the rs family's third member), and the covering residue (the +3
+reckonings to the fund's covering still not one surface — the arc's
+assembly's own future row, its material widened by the humor probe's
+taboo half: the shave → starvation arc).
 
 ## 8. W6 — Genre tests
 
