@@ -59,7 +59,8 @@ The claim packet (TEST_PLAN §9):
 - Expected evidence: the census pins; the year run's FOURTH account
   event at t=518400 chained after the coin flows to the year turn,
   the tale carrying the four reckoning lines under the Day 360
-  header; the twin's heap climbing exactly (4→6→8→10 over the first
+  header (the heap's line now glossed — rs-3's withhold meaning, the
+  coin reckoning lines staying dry); the twin's heap climbing exactly (4→6→8→10 over the first
   three crossings) with the coin funds' climb unchanged; the
   fingerprint EQUAL to the ablated twin, the stripped (t, type)
   lists equal; the T1 golden byte-identical.
@@ -297,8 +298,11 @@ def test_the_tale_carries_the_fourth_reckoning(tmp_path: Path) -> None:
     tale = render_chronicle(events, pack, seed=42)
     assert "Ketta comes by 2 coin at the year's reckoning." in tale
     assert "Garrick comes by 3 coin at the year's reckoning." in tale
-    assert "the smelt crofts comes by 2 bloom at the year's reckoning." in (
-        tale
+    # rs-3 (iter-194): the heap's margin line carries the withhold's
+    # gloss — the fourth reckoning reads as the withhold deepening
+    assert (
+        "the smelt crofts comes by 2 bloom kept off the weighbeam"
+        " since the shave at the year's reckoning." in tale
     )
 
 

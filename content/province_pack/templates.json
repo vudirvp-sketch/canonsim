@@ -97,7 +97,8 @@
     "account_consumed": "{actor} is rid of {amount} {kind}."
   },
   "account_kinds": {
-    "paper": "paper owed to the guild's chest at Malby since the starved winter"
+    "paper": "paper owed to the guild's chest at Malby since the starved winter",
+    "bloom": "bloom kept off the weighbeam since the shave"
   },
   "knows": {
     "scene_{location}": "the lay of {location}",

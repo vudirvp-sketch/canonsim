@@ -3,6 +3,23 @@ gate-route call firing STATUS Next step item 1, option (a) — the W5
 rendering failure's first half): the account KIND's meaning on the
 reader surface, the rs-1 precedent's own shape.
 
+rs-3 (iter-194, the owner's «продолжай работу» continuation call
+firing STATUS Next step item 1 — the W5 humor probe's rendering
+failure, the rs family's natural third member): the SECOND table
+entry, the bloom kind — the withhold's meaning on the reader surface.
+The humor probe's finding (iter-192, glm n=2 convergent): the
+withhold's MEANING rendered nowhere — the bloom kind carried no gloss
+(the dry fallback: the table glossed paper only), the banking lines
+read as periodic income, the loads-kept-off-the-beam invisible unless
+framed. The fix: ONE table row — the withhold's meaning as reader
+prose in the paper gloss's own shape (kind + meaning + origin, the
+authored origin the shave — ANCHOR_REGION §6.4's loop H) — the
+mechanism itself rs-2's, unchanged: the crofts' state line and the
+banking verb lines now carry the meaning. The LOG untouched (zero
+corpus price, the same law). The arc's ASSEMBLY stays the covering
+residue's own future row (the W5 record's route: the gloss now, the
+arc later — the re-run's residues recorded there).
+
 The failure (iter-190's W5 first run, glm n=2 convergent): the reader
 did NOT reconstruct the persistent obligation — FAILED at the RENDERING
 boundary, the canonical fact PRESENT (both readers saw
@@ -39,23 +56,27 @@ The claim packet (TEST_PLAN §9):
   glossed kinds' surfaces; the dry lines byte-identical to the pre-rs-2
   form); the golden log bytes.
 - Falsifier: a glossed kind rendering dry; an unglossed kind rendering
-  prose; the fall's line losing its frame; the coin/bloom lines
-  shifting; the smoke fixture's bytes shifting; a dead gloss row
-  passing the load.
+  prose; the fall's line losing its frame; the coin lines shifting
+  (the dry control — the bloom lines carry rs-3's gloss by design);
+  the smoke fixture's bytes shifting; a dead gloss row passing the
+  load.
 - Expected evidence: the open record's standing line
   `account.paper: 16 — paper owed to the guild's chest at Malby since
   the starved winter`; the fall line carrying the same gloss; the coin
-  lines dry.
+  lines dry; rs-3: the crofts' heap line and the banking verb lines
+  carrying the withhold's gloss (`bloom kept off the weighbeam since
+  the shave`).
 - Observed evidence: CONFIRMED at the measured band (seed 42: the
-  re-weigh twin).
+  re-weigh twin; rs-3's band: the humor probe's re-run — the mandatory
+  bar met, WORLD_TESTS §9's W5 entry).
 - Epistemic class: measured, deterministic per seed.
 - Disposition: CONFIRMED (the honest residues: the arc's ASSEMBLY —
   the fund's climb and the covering still render as routine facts,
   the route's second half, each a future row's own design per the W5
-  record; the unglossed kinds' rendering quality — coin, bloom, the
-  other packs' kinds — the dry fallback's own band, never a
-  preemptive gloss; the briefs' entity cards carry no account state —
-  the model-facing band, PRESENTATION_SPEC's, not this row's surface).
+  record; the unglossed kinds' rendering quality — coin and the other
+  packs' kinds — the dry fallback's own band, never a preemptive
+  gloss; the briefs' entity cards carry no account state — the
+  model-facing band, PRESENTATION_SPEC's, not this row's surface).
 """
 
 from __future__ import annotations
@@ -81,12 +102,16 @@ PACK_DIR = REPO / "content" / "province_pack"
 
 MASTER = "npc_smelter_01"
 CHEST = "loc_malby"
+CROFTS = "loc_crofts"
 PAPER = 16
 #: The paper kind's committed gloss (the pack's own words, pinned so a
 #: re-wording is a deliberate act, never drift).
 PAPER_GLOSS = (
     "paper owed to the guild's chest at Malby since the starved winter"
 )
+#: The bloom kind's committed gloss (rs-3, iter-194 — the withhold's
+#: meaning, pinned the same law: a re-wording is a deliberate act).
+BLOOM_GLOSS = "bloom kept off the weighbeam since the shave"
 
 
 # -- the helpers ----------------------------------------------------------------
@@ -156,8 +181,8 @@ def test_the_gloss_lookup_shapes() -> None:
     lint owns the refusal, the render never crashes mid-line)."""
     pack = load_pack(PACK_DIR)
     assert gloss_account_kind(pack.templates, "paper") == PAPER_GLOSS
+    assert gloss_account_kind(pack.templates, "bloom") == BLOOM_GLOSS
     assert gloss_account_kind(pack.templates, "coin") == "coin"
-    assert gloss_account_kind(pack.templates, "bloom") == "bloom"
     tavern = load_pack(REPO / "content" / "tavern_pack")
     assert gloss_account_kind(tavern.templates, "coin") == "coin"
     malformed = {"account_kinds": {"paper": "", "coin": 3}}
@@ -201,10 +226,12 @@ def test_the_foreign_kind_falls_back_dry() -> None:
 
 
 def test_the_standing_renders_its_meaning(tmp_path: Path) -> None:
-    """The W5 failure's own surface: the OPEN state record (the initial
-    projection — the probe's opening record) carries the standing's
-    meaning — the debt reads as OWED with its creditor and origin,
-    never as inventory; the unglossed fund line stays dry."""
+    """The W5 failure's own surfaces: the OPEN state records (the
+    initial projection — the probe's opening records) carry the
+    standings' meanings — the debt reads as OWED with its creditor and
+    origin, never as inventory; rs-3: the withhold's heap reads as
+    iron KEPT OFF the beam, never as stockpiled goods; the unglossed
+    fund line stays dry."""
     pack = load_pack(PACK_DIR)
     projection = initial_projection(pack.entities)
     view = render_entity_view([], projection, pack, MASTER, seed=42)
@@ -212,6 +239,8 @@ def test_the_standing_renders_its_meaning(tmp_path: Path) -> None:
         f"  account.paper: {PAPER} — {PAPER_GLOSS}" in view
     )
     assert "  account.coin: 3" in view  # dry — no apposition
+    crofts = render_entity_view([], projection, pack, CROFTS, seed=42)
+    assert f"  account.bloom: 4 — {BLOOM_GLOSS}" in crofts
 
 
 def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
@@ -227,12 +256,25 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
     assert f"Garrick is rid of {PAPER} {PAPER_GLOSS}." in tale
     assert "Garrick passes 16 coin to Malby, the market town." in tale
     assert "Garrick comes by 3 coin at the year's reckoning." in tale
+    # rs-3: the banking verb lines carry the withhold's meaning — the
+    # heap's climb reads as the withhold deepening, never as income
+    assert (
+        f"the smelt crofts comes by 2 {BLOOM_GLOSS}"
+        " at the year's reckoning." in tale
+    )
     view = render_entity_view(
         events, fold(events, initial_projection(pack.entities)),
         pack, MASTER, seed=42,
     )
     assert f"  account.paper: 0 — {PAPER_GLOSS}" in view
     assert f"[t 2559] Garrick is rid of {PAPER} {PAPER_GLOSS}." in view
+    crofts_view = render_entity_view(
+        events, fold(events, initial_projection(pack.entities)),
+        pack, CROFTS, seed=42,
+    )
+    # the withhold's own surface at the close: the heap's level beside
+    # its meaning (the probe package's crofts record)
+    assert f"  account.bloom: 14 — {BLOOM_GLOSS}" in crofts_view
 
 
 def test_the_log_bytes_are_untouched(tmp_path: Path) -> None:

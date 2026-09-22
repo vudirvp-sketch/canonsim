@@ -1,38 +1,46 @@
-Iteration: iter-193 (`iter-193-intake36` — the curated unit
-archive, the owner's ULTIMATE-v2 packet call): the 39-unit / 10-family
-packet routed whole — every unit body read, every carrier claim
-code-verified at HEAD; 34/39 CONFIRMED-owned (the largest single
-confirmation batch: D01 = the intent door whole, M01–M07 = the
-standing doctrine's own atoms, P02 rejected twice over, the WFC fence
-stands); the THREE fresh routings each joining a NAMED consumer, zero
-new rows (D-175): C03+F02 → the W5 heartbreak station (the
-relation-formation triple + the option-topology measurement
-vocabulary), P01+P03 → the road-traffic depth-7 rider (capacity ≠
-existence + the fracture discriminant + F04's derived residual), C05
-→ the group-stock lint gap (the honest-denominator law); the packet's
-control plane = the standing doctrine in archival form (the physical
-bundle firewall an owner-side session practice, Rule 9); the ref-file
-deep record deferred behind the math catalog's own trigger; doc-only,
-the packet stays outside the repo (the convenience-copy law). The
-record: phases.md §6's intake-36 block + D-196.
+Iteration: iter-194 (`iter-194-humorgloss` — the W5 humor fix, the
+owner's «продолжай работу» continuation call firing STATUS Next step
+item 1): rs-3 LANDED — the bloom kind's account-kind gloss (the rs
+family's third member, the rs-2 precedent's own shape: the withhold's
+meaning as reader prose, "bloom kept off the weighbeam since the
+shave" — one table row, the mechanism rs-2's unchanged, the log
+untouched, zero corpus price) and the humor probe's RE-RUN on the
+fixed surface: the MANDATORY BAR MET, glm n=2 — the first run's
+failure mode GONE (the mechanism-grounded joke from BOTH readings,
+the identical-joke convergence GONE; the taboo half 1/2 — reading 2
+nailed the authored taboo, the shave with the lived memory; reading 1
+the exodus, the generic class; the position-dependence implicit; the
+authored answer's withhold-joke extracted by neither — the
+contradiction still not one surface); the classification: the
+canonical fact PRESENT and now MEANINGFUL, the discovery path still
+FRAGMENTARY, the rendering remainder the covering residue's exact
+family (the arc's assembly's future row, its material widened by the
+joke-target half); rs-3 CONFIRMED at its own bar, the station
+PARTIALLY CONFIRMED; NEVER "improve the prose" — the remaining route
+the arc's assembly's row, the heartbreak station + the live human
+band the owner's calls. The record: WORLD_TESTS §9's W5 entry +
+TASKS' rs-3 row.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2018 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 16a4aa4 both ends — 2018+1
-green, ruff clean, docguard clean — the iter-193 diff doc-only) ·
+the env pin; verified at BASE_COMMIT c672759 both ends — 2018+1
+green, ruff clean, docguard clean) ·
 Date: 2026-09-22 ·
-Scope: docs/blueprint/phases.md + docs/DECISIONS.md + STATUS.md +
-worklog.md + docs/TASKS.md — 5 paths (the intake-36 record + the
-D-196 extension; the packet itself outside the repo per the
-convenience-copy law).
+Scope: content/province_pack/templates.json + tests/test_accountgloss.py +
+tests/test_freightvol.py + docs/worldbuild/WORLD_TESTS.md +
+docs/worldbuild/WORLD_WORKPLAN.md + docs/TASKS.md + STATUS.md +
+worklog.md — 8 paths (the fix + the widened pins + the W5 record +
+the state docs; the probe runner + the transcripts outside the repo,
+Rule 9 — the D-022 doc-streak discharged by the fresh owner request,
+the iteration functional).
 Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-192 (humorprobe), iter-191 (accountgloss), iter-190
-(bioprobe), iter-189 (charcoalpaper), iter-188 (knowsgloss),
-iter-187 (freightvol), iter-186 (campaccount), iter-185 (tallyread),
-iter-184 (charcoal1), bg-9 (apiprose), iter-183 (residues34). The
-detail lives in the worklog + git.
+record: iter-193 (intake36), iter-192 (humorprobe), iter-191
+(accountgloss), iter-190 (bioprobe), iter-189 (charcoalpaper),
+iter-188 (knowsgloss), iter-187 (freightvol), iter-186 (campaccount),
+iter-185 (tallyread), iter-184 (charcoal1). The detail lives in the
+worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -89,20 +97,21 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-193 DONE: the ULTIMATE-v2 packet routed whole (intake-36) —
-34/39 CONFIRMED-owned, the three fresh routings each joined a named
-consumer (the heartbreak station's material, the road-traffic
-rider's evaluation grammar, the group-stock lint's design law), zero
-new rows. iter-192 before it: the humor station FAILED at the
-rendering boundary — the fix's route the owner's call. iter-191:
-the biography re-run PASSED CLEAN — the embargo lifted (stands).**
+**iter-194 DONE: the W5 humor fix landed (rs-3 — the bloom kind's
+account-kind gloss) and the re-run's mandatory bar MET (the
+mechanism-grounded joke n=2, the taboo 1/2 — the station PARTIALLY
+CONFIRMED, the authored residues open: the withhold's own joke
+unextracted, the position-dependence implicit). iter-193 before it:
+the ULTIMATE-v2 packet routed whole (intake-36). iter-191: the
+biography re-run PASSED CLEAN — the embargo lifted (stands).**
 
-1. THE HUMOR FIX'S ROUTE (the owner's call, WORLD_TESTS §9's W5
-   entry): the natural class the bloom kind's account-kind gloss (the
-   rs family's third member, rs-2's own precedent) plus the arc's
-   assembly (the covering residue's own future row — its material
-   widened by the taboo half: the shave → starvation arc); never
-   "improve the prose".
+1. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
+   owner's call, WORLD_TESTS §9's W5 entry's named remainder): the
+   +3 reckonings' covering, the shave → starvation arc, and now the
+   withhold's own joke — the contradiction still not ONE surface (the
+   fund's climb, the heap's meaning, the beam's law never joined as
+   one frame; the re-run's jokes rode the shave, not the withhold);
+   never "improve the prose".
 2. The W5 trio's remaining stations (each on the owner's call,
    WORLD_WORKPLAN §7's decision points): the heartbreak probe (the
    same bounded form — its design material now carries intake-36's

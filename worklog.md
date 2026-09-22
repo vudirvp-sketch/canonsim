@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-194 · 2026-09-22 · humorgloss — the W5 humor fix (the owner's «продолжай работу» continuation call, STATUS item 1): rs-3 landed (the bloom kind's
+account-kind gloss — the withhold's meaning "bloom kept off the weighbeam since the shave", one table row, rs-2's mechanism unchanged, the log untouched) + the
+humor probe's re-run: the MANDATORY BAR MET (glm n=2 — the mechanism-grounded joke from both readings, the taboo 1/2 with the authored taboo nailed once; the
+withhold's own joke unextracted — the arc's assembly's future row's material), the station PARTIALLY CONFIRMED; 8 paths (the pack row + the pins + the W5 record
++ the state docs); the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-185 evicted per the cap
+
+---
 iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed (the owner's research call, intake-36/D-196): 39 units / 10
 families read whole + code-verified at HEAD `16a4aa4` (2018+1, ruff, docguard clean both ends); 34/39 CONFIRMED-owned (the largest
 single confirmation batch), THREE fresh routings joining named consumers (C03+F02 → the W5 heartbreak station, P01+P03 → the
@@ -66,10 +73,3 @@ call, each row its own): the charcoal debt's arithmetic as pure pack data — th
 thin stock (coin 3) + the_bloom_nets (+3/yr) + the fold (the service six minting no stock,
 the chest's one-flow law; the paper sixteen, no amortization path); test_campaccount.py
 +9 + debt1's pins widened; 10 paths; 1988+1 + ruff + docguard clean; iter-176 evicted
-
----
-iter-185 · 2026-09-22 · tallyread — the camp's first embodiment (the owner's «можешь продолжать
-мир трек» continuation call, the iter-167 doc-streak-breaker reading): the tally's read as pure
-pack data — the read_tally hinge (the family's fourth instance) + the tally-stick (the seat's
-badge, the master's) + the secrets registration (the_camps_word, type debt — the re-weigh's
-proof, the WORD never the PRESENT); 11 paths; 1979+1 + ruff + docguard clean both ends; iter-175 evicted

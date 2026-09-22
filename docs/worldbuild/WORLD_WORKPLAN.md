@@ -323,18 +323,22 @@ re-run PASSED CLEAN — the reader (glm, n=2, convergent) reconstructed
 the persistent obligation: the standing named a debt, the creditor
 named, the discharge's direction correct; the gate's named condition
 (one clean biography probe) MET — the new-worldbuilding embargo
-lifts.** The humor station has since RUN (iter-192, the owner's
-continuation call — the record in the W5 entry): FAILED at the
-rendering boundary, n=2 convergent — the withhold's meaning renders
-nowhere (the banking lines read as income); the fix's route the
-owner's call. The standing decision points for the owner: the
-heartbreak probe (the trio's last station, the same form), the human
-live-band re-run (the LLM reader the instrument so far), the humor
-fix's route (the natural class the bloom kind's account-kind gloss —
-the rs family's third member), and the covering residue (the +3
-reckonings to the fund's covering still not one surface — the arc's
-assembly's own future row, its material widened by the humor probe's
-taboo half: the shave → starvation arc).
+lifts.** The humor station has since run TWICE (the record in
+`WORLD_TESTS.md` §9's W5 entry): the first run FAILED at the rendering
+boundary (iter-192, n=2 convergent — the withhold's meaning rendered
+nowhere); the fix's route fired on the owner's continuation call
+(iter-194: rs-3, the bloom kind's account-kind gloss — the rs family's
+third member, rs-2's precedent) and the re-run's MANDATORY BAR MET
+(the mechanism-grounded joke from both readings, the authored taboo
+nailed once — the station PARTIALLY CONFIRMED, the authored residues
+open: the taboo's convergence 1/2, the withhold's own joke
+unextracted, the position-dependence implicit). The standing decision
+points for the owner: the heartbreak probe (the trio's last station,
+the same form), the human live-band re-run (the LLM reader the
+instrument so far), and the covering residue (the arc's assembly's
+own future row — the +3 reckonings' covering, the shave → starvation
+arc, and now the withhold's own joke: the contradiction still not one
+surface).
 
 ## 8. W6 — Genre tests
 

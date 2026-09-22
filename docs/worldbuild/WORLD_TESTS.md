@@ -450,21 +450,23 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe RUN and FAILED at the rendering boundary (iter-192; the heartbreak station + the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED; the heartbreak station + the live human band open)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
-humor station's first measurement FAILED at the rendering boundary
-(iter-192 below); the heartbreak station un-run; the live human band
-open.` The owner's reading of the anchor's reader surface (the annual
-tale + the committed briefs, 2026-09-22) found the mechanical
-substrate rich — W4's verdict unchanged: the causal composition
-CONFIRMED — but the reader-side reconstruction thin: the Garrick chain
-(shave → starvation → debt → withhold → artery flow → coupled
-liabilities → re-weigh → succession) exists world-side; the annual
-tale's reader surface carried only "Garrick comes by 3 coin at the
-year's reckoning" (the reading's own class AUTHOR-SIDE DIAGNOSTIC —
-no blind pass; the probes below are the blind band's evidence).
+humor station's second measurement MET its mandatory bar on the
+rs-3-fixed surface (iter-194 below — the station PARTIALLY
+CONFIRMED, the authored residues open); the heartbreak station
+un-run; the live human band open.` The owner's reading of the
+anchor's reader surface (the annual tale + the committed briefs,
+2026-09-22) found the mechanical substrate rich — W4's verdict
+unchanged: the causal composition CONFIRMED — but the reader-side
+reconstruction thin: the Garrick chain (shave → starvation → debt →
+withhold → artery flow → coupled liabilities → re-weigh →
+succession) exists world-side; the annual tale's reader surface
+carried only "Garrick comes by 3 coin at the year's reckoning" (the
+reading's own class AUTHOR-SIDE DIAGNOSTIC — no blind pass; the
+probes below are the blind band's evidence).
 
 The five findings, split by owner (the decomposition law — a reader
 gap is classified by boundary BEFORE any fix; a found gap is never
@@ -606,12 +608,72 @@ arc the same row's material). The same surface PASSED the biography
 re-run — the facts carry, the humor substrate's frame does not: two
 reconstruction tasks, two outcomes, one honest datum. Honest caveats
 unchanged (the LLM reader class, the year compression).
+
+The humor probe's RE-RUN (iter-194, the owner's «продолжай работу»
+continuation call — the route fired: rs-3, the rs family's third
+member): rs-3 LANDED FIRST (the bloom kind's account-kind gloss —
+the withhold's meaning as reader prose in the paper gloss's own
+shape, "bloom kept off the weighbeam since the shave" (the authored
+origin loop H's own — the shave → the debt → the withhold); ONE
+table row in the province pack's `account_kinds`, the mechanism
+rs-2's unchanged, the LOG untouched — zero corpus price) and the
+re-run's MANDATORY BAR MET, n=2 — the first run's failure mode GONE:
+the mechanism-grounded joke from BOTH readings (reading 1: the
+camp's word ritualized at the market — the voice exemplars VERBATIM
+as the punchline, "Weighed short twice. Never again." beside
+"weight is weight, shaved is shaved", the honest note the carrier
+still the walks-into-a-bar skeleton; reading 2: the two records'
+conflict — the tally-stick against the beam, "Then let the long
+light sort it out", the deferred reckoning, the re-weigh's own
+tension), the identical-joke convergence GONE (two different
+world-grounded jokes — the cheapest-shared-categories dominance
+broken). The taboo half MOVED to 1/2: reading 2 NAILED the authored
+taboo (the shave — "the guild manipulating the weighbeam to devalue
+the smelt crofts' entire year's production", the lived memory
+reconstructed); reading 1 named the exodus (the generic
+foundational-trauma class — the discovery path's symptom: the shave →
+starvation arc still never assembles). The position-dependence
+implicit in both (the market-stair setting, the camp's word at the
+market), explicit in neither. The authored answer's own joke (the
+withhold's position-dependent evasion — the bloom that asks the
+price before the beam) extracted by NEITHER reading: the jokes ride
+the shave (the past wound), not the withhold (the present practice)
+— the withhold's CONTRADICTION still not one surface. The
+classification (the boundary law): the canonical fact PRESENT and
+now MEANINGFUL (rs-3's target verified — the crofts' record and the
+banking lines carry the withhold's meaning, the heap never again
+bare); the discovery path STILL FRAGMENTARY (the taboo half's owner
+unchanged); the rendering boundary's REMAINDER the contradiction's
+joining — the covering residue's EXACT family (the arc's assembly's
+own future row, its material now widened by the joke-target half:
+the fund's climb, the heap's meaning, the beam's law never joined as
+one frame). The instrument: the same sparse twin re-established from
+the recorded protocol (the fall at t=2824, the fund 18 at the fifth
+crossing, the close paper 0 / coin 8, the heap 18, seven bankings,
+the factor's runner present at the crofts' read and the fall's
+witnessing; the tale renders 87 lines vs the recorded 88 — the
+reconstruction's honest note; the package byte-identical on re-run),
+the package widened with the crofts' close record (the withhold's
+own surface — the heap 18, now glossed) beside the same three
+briefs; the author audit pre-set BEFORE the reading (the same pass
+bar fixed); the blind reader the same class (glm, n=2 independent;
+the runner + the transcripts outside the repo, Rule 9). The
+disposition: rs-3 CONFIRMED at its own bar (the meaning renders, the
+failure mode eliminated — the rs-2 precedent's family, measured);
+the station PARTIALLY CONFIRMED (the mandatory bar met, the authored
+residues open — the taboo's convergence 1/2, the withhold's own joke
+unextracted, the position-dependence implicit); NEVER "improve the
+prose" — the remaining route the arc's assembly's future row (the
+covering residue's own), the heartbreak station + the live human
+band still the owner's calls. Honest caveats unchanged (the LLM
+reader class, the year compression).
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
 Great Fracture without adding special exceptions for each civilization?
 
-### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live LLM band's first humor measurement FAILED at the rendering boundary — iter-192; the human band open)
+### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live LLM band's first humor measurement FAILED at the rendering boundary — iter-192; the rs-3 re-run's mandatory bar MET — iter-194, the station PARTIALLY CONFIRMED; the human band open)
 
 Do Sarrow Vale's own vocabulary, institutions and history support world-specific
 humor and loss rather than generic genre scenes? The first authored answer:
@@ -625,7 +687,11 @@ the bloodline, the return the loss made durable — the §9 entry above).
 iter-184 adds the humor's third family (the withhold's position-dependent
 joke: the price-question at the beam, the evasion's confession at the guild's
 table, the starved winter and the shave itself never joked — the §9 entry
-above). The live-session band stays open.
+above). The live-session band: the first measurement FAILED at the rendering
+boundary (iter-192); the rs-3 re-run MET the mandatory bar (iter-194 — the
+mechanism-grounded joke n=2, the authored taboo nailed once; the withhold's
+own joke still unextracted, the arc's assembly's row). The human band stays
+open.
 
 ## 10. Test result vocabulary
 
