@@ -158,8 +158,10 @@ def _twin(
         # rs-2 (iter-191): the account-kind gloss table rides the
         # economy block — the COMPLETE ablation drops the read-side
         # half with the rest (a table without the block is all dead
-        # data, the lint's own refusal)
+        # data, the lint's own refusal); rs-4 (iter-199): the
+        # flow-gloss table rides the same law
         templates.pop("account_kinds", None)
+        templates.pop("flow_glosses", None)
         (target / "templates.json").write_text(
             json.dumps(templates, indent=2), encoding="utf-8"
         )
@@ -228,9 +230,13 @@ def test_the_armed_census() -> None:
     assert malby["accounts"] == {"coin": 40}
     guild = next(g for g in pack.entities["groups"] if g["id"] == GUILD)
     assert "accounts" not in guild  # the group-stock lint gap, recorded
-    # the verb line (the lint's closure law) + the story listing
+    # the verb line (the lint's closure law) + the story listing;
+    # rs-4 (iter-199): the verb line gains the flow-gloss tail — the
+    # banking lines carry their flows' meanings (the conditional stays
+    # dry for unglossed flows and door-minted events)
     assert pack.templates["events"][SOURCE_EVENT] == (
-        "{target} comes by {amount} {kind} at the year's reckoning."
+        "{target} comes by {amount} {kind} at the year's reckoning"
+        "{flow? — {flow}}."
     )
     assert SOURCE_EVENT in pack.rules["importance"]["story_critical_events"]
 
@@ -303,9 +309,15 @@ def test_the_reckoning_renders_in_the_tale(tmp_path: Path) -> None:
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
     tale = render_chronicle(events, pack, seed=42)
-    assert "Ketta comes by 2 coin at the year's reckoning." in tale
+    # rs-4 (iter-199): the reckoning lines carry their flows' meanings
+    # — the crossing's fund and the chest's service, never bare income
     assert (
-        "Malby, the market town comes by 4 coin at the year's reckoning."
+        "Ketta comes by 2 coin at the year's reckoning — the toll's net"
+        " surplus, the punt fund climbing toward the punt's twelve." in tale
+    )
+    assert (
+        "Malby, the market town comes by 4 coin at the year's reckoning —"
+        " the guild's standing take, the flood paper's service at the chest."
         in tale
     )
     # the ambient family stays canon without a line (the committed form)

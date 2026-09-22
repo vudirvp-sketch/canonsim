@@ -105,6 +105,19 @@ ACCOUNT_PREFIX: Final = "account."
 #: second constant (the D-024 anti-drift law).
 ACCOUNT_GLOSS_BLOCK: Final = "account_kinds"
 
+#: The flow-gloss block (rs-4, the W5 covering residue's own half): the
+#: pack-declared `templates.json::flow_glosses` table — economy flow id ->
+#: reader prose, the flow's MEANING (the W5 residues' finding: the +3
+#: reckonings read as periodic income because the flow's relation — the
+#: fund's climb toward the paper — rendered nowhere; the kind gloss
+#: cannot carry it: one kind, many flows, each its own meaning). The
+#: load-time lint owns the shape: keys inside the `economy.flows` ids,
+#: values non-empty strings, the table without the block refused as dead
+#: data. An unglossed flow renders NOTHING at the boundary (the raw id
+#: is a machine token, rs-1's own law — never the reader's surface).
+#: The constant lives HERE for the same one-spelling reason as above.
+FLOW_GLOSS_BLOCK: Final = "flow_glosses"
+
 #: The three verbs' event types — the build's naming pass (INV-3-clean
 #: mechanic words; the armed pack's templates carry the lines, the
 #: lint's closure family). Actor/target/state_changes per verb:

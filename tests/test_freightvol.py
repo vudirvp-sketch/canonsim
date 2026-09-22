@@ -161,8 +161,10 @@ def _twin(
         # rs-2 (iter-191): the account-kind gloss table rides the
         # economy block — the COMPLETE ablation drops the read-side
         # half with the rest (a table without the block is all dead
-        # data, the lint's own refusal)
+        # data, the lint's own refusal); rs-4 (iter-199): the
+        # flow-gloss table rides the same law
         templates.pop("account_kinds", None)
+        templates.pop("flow_glosses", None)
         (target / "templates.json").write_text(
             json.dumps(templates, indent=2), encoding="utf-8"
         )
@@ -233,9 +235,12 @@ def test_the_armed_census() -> None:
         a for a in pack.data["actions.json"]["actions"]
         if "account" in a and a["account"]["kind"] == "bloom"
     ]
-    # the template reused, the story listing already carries the verb
+    # the template reused, the story listing already carries the
+    # verb; rs-4 (iter-199): the same line, now carrying the flow
+    # gloss tail (the conditional — the take template's own form)
     assert pack.templates["events"][SOURCE_EVENT] == (
-        "{target} comes by {amount} {kind} at the year's reckoning."
+        "{target} comes by {amount} {kind} at the year's reckoning"
+        "{flow? — {flow}}."
     )
     assert SOURCE_EVENT in pack.rules["importance"]["story_critical_events"]
 
@@ -296,8 +301,19 @@ def test_the_tale_carries_the_fourth_reckoning(tmp_path: Path) -> None:
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
     tale = render_chronicle(events, pack, seed=42)
-    assert "Ketta comes by 2 coin at the year's reckoning." in tale
-    assert "Garrick comes by 3 coin at the year's reckoning." in tale
+    # rs-4 (iter-199): the coin reckoning lines carry their flows'
+    # meanings (the covering joined — the fund's climb, the chest's
+    # service); the withhold's bloom line keeps rs-3's kind gloss alone
+    # (the flow unglossed — the meaning already rides the kind)
+    assert (
+        "Ketta comes by 2 coin at the year's reckoning — the toll's net"
+        " surplus, the punt fund climbing toward the punt's twelve." in tale
+    )
+    assert (
+        "Garrick comes by 3 coin at the year's reckoning — the honest"
+        " year's surplus, the debt fund climbing toward the paper sixteen."
+        in tale
+    )
     # rs-3 (iter-194): the heap's margin line carries the withhold's
     # gloss — the fourth reckoning reads as the withhold deepening
     assert (

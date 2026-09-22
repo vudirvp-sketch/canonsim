@@ -164,8 +164,10 @@ def _twin(
         # rs-2 (iter-191): the account-kind gloss table rides the
         # economy block — the COMPLETE ablation drops the read-side
         # half with the rest (a table without the block is all dead
-        # data, the lint's own refusal)
+        # data, the lint's own refusal); rs-4 (iter-199): the
+        # flow-gloss table rides the same law
         templates.pop("account_kinds", None)
+        templates.pop("flow_glosses", None)
         (target / "templates.json").write_text(
             json.dumps(templates, indent=2), encoding="utf-8"
         )
@@ -231,9 +233,12 @@ def test_the_armed_census() -> None:
     assert master["accounts"] == {"coin": 3, "paper": 16}
     # the seat's own reading: the account rides the paper's named holder
     assert "camp_tally_01" in master["carries"]
-    # the template reused — no new line shape, the zero-template price
+    # the template reused — no new line shape, the zero-template
+    # price; rs-4 (iter-199): the same line, now carrying the flow
+    # gloss tail (the conditional — the take template's own form)
     assert pack.templates["events"][SOURCE_EVENT] == (
-        "{target} comes by {amount} {kind} at the year's reckoning."
+        "{target} comes by {amount} {kind} at the year's reckoning"
+        "{flow? — {flow}}."
     )
     assert SOURCE_EVENT in pack.rules["importance"]["story_critical_events"]
 
@@ -324,12 +329,24 @@ def test_the_tale_carries_the_camps_reckoning(tmp_path: Path) -> None:
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
     tale = render_chronicle(events, pack, seed=42)
-    assert "Ketta comes by 2 coin at the year's reckoning." in tale
+    # rs-4 (iter-199): the reckoning lines carry their flows' meanings —
+    # the covering joined: the camp's line reads as the fund's climb
+    # toward the paper, never as periodic income (the W5 residue's own
+    # surface, the probes' measured misreading)
     assert (
-        "Malby, the market town comes by 4 coin at the year's reckoning."
+        "Ketta comes by 2 coin at the year's reckoning — the toll's net"
+        " surplus, the punt fund climbing toward the punt's twelve." in tale
+    )
+    assert (
+        "Malby, the market town comes by 4 coin at the year's reckoning —"
+        " the guild's standing take, the flood paper's service at the chest."
         in tale
     )
-    assert "Garrick comes by 3 coin at the year's reckoning." in tale
+    assert (
+        "Garrick comes by 3 coin at the year's reckoning — the honest"
+        " year's surplus, the debt fund climbing toward the paper sixteen."
+        in tale
+    )
 
 
 def test_the_golden_corpus_stays_byte_untouched(tmp_path: Path) -> None:

@@ -255,7 +255,14 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
     tale = render_chronicle(events, pack, seed=42)
     assert f"Garrick is rid of {PAPER} {PAPER_GLOSS}." in tale
     assert "Garrick passes 16 coin to Malby, the market town." in tale
-    assert "Garrick comes by 3 coin at the year's reckoning." in tale
+    # rs-4 (iter-199): the banking line carries the flow's meaning —
+    # the fund's climb toward the paper, the covering's own join (the
+    # doors' lines stay dry: the fall and the collection carry no flow)
+    assert (
+        "Garrick comes by 3 coin at the year's reckoning — the honest"
+        " year's surplus, the debt fund climbing toward the paper sixteen."
+        in tale
+    )
     # rs-3: the banking verb lines carry the withhold's meaning — the
     # heap's climb reads as the withhold deepening, never as income
     assert (

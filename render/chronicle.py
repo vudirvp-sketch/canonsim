@@ -29,6 +29,7 @@ from core.clock import Clock
 from core.economy import (
     ACCOUNT_GLOSS_BLOCK,
     ACCOUNT_PREFIX,
+    FLOW_GLOSS_BLOCK,
     VERB_EVENT_TYPES,
     is_account_prop,
 )
@@ -45,6 +46,7 @@ __all__ = [
     "chronicle_from_log",
     "compile_glosses",
     "gloss_account_kind",
+    "gloss_flow",
     "gloss_knows",
     "render_chronicle",
     "render_entity_view",
@@ -181,10 +183,22 @@ def _event_context(
     # every consumer, rs-1's own shape). Scoped to the verb family so
     # the worldgen memory line's `kind` (the collection name) never
     # enters the table's key space; an unglossed kind renders dry.
+    # rs-4 (the flow-gloss boundary, the same family's fourth member):
+    # the flow-minted events' `flow` token maps to its reader prose at
+    # the SAME boundary — the flow's meaning (the fund's climb, the
+    # standing take) rides the banking lines' tail; the doors' events
+    # carry no flow and render dry. The empty-string fallback keeps the
+    # raw id OFF the reader surface (a machine token, rs-1's law) and
+    # lands the slot BEFORE the outcome loop so the raw id never leaks.
     if event.type in _ACCOUNT_VERB_EVENTS:
         kind = outcome.get("kind")
         if isinstance(kind, str):
             context["kind"] = gloss_account_kind(pack.templates, kind)
+        flow = outcome.get("flow")
+        context["flow"] = (
+            gloss_flow(pack.templates, flow)
+            if isinstance(flow, str) else ""
+        )
     # The promotion door (iter-11, D-054): a texture-path take carries the
     # mediator-resolved reference in its outcome and NO canon target — the
     # take templates branch on {target} and render the promoted slot noun.
@@ -330,6 +344,29 @@ def gloss_account_kind(templates: Mapping[str, Any], kind: str) -> str:
     gloss = table.get(kind)
     if not isinstance(gloss, str) or not gloss:
         return kind
+    return gloss
+
+
+def gloss_flow(templates: Mapping[str, Any], flow: str) -> str:
+    """The economy-flow boundary (rs-4, the W5 covering residue's
+    rendering half): one flow id mapped to its reader prose through
+    the pack's `flow_glosses` table — the flow's MEANING (the W5
+    residues' finding: the +3 reckonings read as periodic income
+    because the flow's relation — the camp's fund climbing toward the
+    paper — rendered nowhere; the kind gloss cannot carry it, one kind
+    serving many flows). A flow with no entry returns EMPTY — the
+    fallback differs from `gloss_account_kind`'s by family law: a
+    kind's bare word is a lawful rendering, a flow's raw id is a
+    MACHINE TOKEN (`the_bloom_nets`) and never reaches the reader
+    (rs-1's own boundary — the unglossed flow renders nothing, so a
+    conditional template slot stays dry). A malformed row is inert
+    data here — the load-time lint owns the refusal."""
+    table = templates.get(FLOW_GLOSS_BLOCK)
+    if not isinstance(table, Mapping):
+        return ""
+    gloss = table.get(flow)
+    if not isinstance(gloss, str) or not gloss:
+        return ""
     return gloss
 
 

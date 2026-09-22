@@ -332,13 +332,19 @@ third member, rs-2's precedent) and the re-run's MANDATORY BAR MET
 (the mechanism-grounded joke from both readings, the authored taboo
 nailed once — the station PARTIALLY CONFIRMED, the authored residues
 open: the taboo's convergence 1/2, the withhold's own joke
-unextracted, the position-dependence implicit). The standing decision
+unextracted, the position-dependence implicit). The covering
+residue's row has since LANDED (iter-199, the owner's continuation
+call over the carried row — the record in `WORLD_TESTS.md` §9's W5
+entry): rs-4 the flow-gloss boundary, the covering connected at its
+own mandatory bar (glm n=2 convergent); the row's measured
+successors: the shave's AGENCY surface and the withhold's
+one-surface contradiction — each a future row's own call, never
+"improve the prose". The standing decision
 points for the owner: the heartbreak probe (the trio's last station,
 the same form), the human live-band re-run (the LLM reader the
-instrument so far), and the covering residue (the arc's assembly's
-own future row — the +3 reckonings' covering, the shave → starvation
-arc, and now the withhold's own joke: the contradiction still not one
-surface).
+instrument so far), and the covering row's measured successors (the
+shave's agency + the withhold's one-surface contradiction — WORLD_TESTS
+§9's W5 entry's iter-199 record).
 
 ## 8. W6 — Genre tests
 

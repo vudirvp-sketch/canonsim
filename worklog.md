@@ -14,6 +14,11 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-199 · 2026-09-23 · flowgloss — the covering residue's row landed (the owner's «продолжай работу по логике» continuation call firing STATUS Next step item 1, the row carried per the «если в одну итерацию не уместишься» instruction): rs-4 the flow-gloss boundary — the pack's flow_glosses table + the renderer's gloss_flow + the lint closure + the verb line's conditional tail (the LOG untouched, zero corpus price)
+the probe's re-run's mandatory bar MET (the covering connected, glm n=2 convergent — the income-misreading GONE; the shave's agency + the withhold's one-surface contradiction the open residues) — WORLD_TESTS §9's W5 entry + TASKS rs-4 + tests/test_flowgloss.py the claim packet
+15 paths (the rs-landing class: the mechanism's halves + the claim packets + the state docs); 2032+1 + ruff + docguard clean both ends; iter-190 evicted per the cap
+
+---
 iter-198 · 2026-09-23 · abfalsifier — the mech-2 A/B falsifier's measurement RUN (the owner's queue-top call; the runner + transcripts outside the repo, Rule 9): 6 pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus, whole-file protocol — the gate moved NO metric (success 8/18 both arms, lint refusals 0, patches tiny); the cognitive premise REFUTED at scale (conditional-on-parse 8/8 vs 8/9 — find/scope not the binding constraint)
 the measured bottleneck: the whole-file emission wall (bracket drift in director.hooks, 10/15 + 9/15 invalid) + 73% silent notes paraphrase; the rename 0/6 (the dangling-tag lint gap confirmed) — TECH_NOTES §17 the numbers; the structured-patch PROPOSAL re-scoped to emission
 reliability, fate the owner's call; 5 paths doc-only (TECH_NOTES §17 + the intake-37 block + TASKS + STATUS + worklog); the covering series left to the next iteration; 2026+1 + ruff + docguard clean both ends; iter-189 evicted per the cap
@@ -63,10 +68,3 @@ iter-191 · 2026-09-22 · accountgloss — the W5 rendering-boundary fix (the ow
 the renderer's {kind}-slot + state-apposition mapping, the lint's closure) + the biography probe's re-run PASSED CLEAN (glm n=2 convergent: the debt named, the creditor named, the direction correct —
 the gate's named condition met, the embargo lifted); 15 paths (the fix + test_accountgloss.py +7 + the pins widened + the W5 record; WORLD_TESTS at the 600 cap after the §6.1 pointer pass);
 the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-182 evicted
-
----
-iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run (the owner's continuation call): the biography probe on Garrick/the
-re-weigh RAN clean (the isolation law held, the author audit pre-set) and FAILED at the RENDERING boundary — glm n=2 convergent:
-the facts carried (the 16 standing, the flows, the fall, the 16 coin to Malby) but NO obligation frame (the paper read as
-inventory, the fall+collection as an "exchange"); the gate stays shut, the fix's route the owner's call (the rs-1 account-gloss
-class + the arc's assembly); 5 paths, doc-only, the runner + transcripts outside the repo (Rule 9); 2011+1 + ruff + docguard clean; iter-181 evicted

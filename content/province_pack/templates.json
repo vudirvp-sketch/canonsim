@@ -92,13 +92,18 @@
     "high_water_rises": "Day {day}: the river rises — the lower fords drown, the punt men charge double.",
     "long_light_turns": "Day {day}: the long light — the crofts green to the moor's edge, the road dry and fast.",
     "first_frost_turns": "Day {day}: first frost on the weir stair — the road hardens, the trade slows.",
-    "account_sourced": "{target} comes by {amount} {kind} at the year's reckoning.",
+    "account_sourced": "{target} comes by {amount} {kind} at the year's reckoning{flow? — {flow}}.",
     "account_transferred": "{actor} passes {amount} {kind} to {target}.",
     "account_consumed": "{actor} is rid of {amount} {kind}."
   },
   "account_kinds": {
     "paper": "paper owed to the guild's chest at Malby since the starved winter",
     "bloom": "bloom kept off the weighbeam since the shave"
+  },
+  "flow_glosses": {
+    "the_toll_nets": "the toll's net surplus, the punt fund climbing toward the punt's twelve",
+    "the_guild_collects": "the guild's standing take, the flood paper's service at the chest",
+    "the_bloom_nets": "the honest year's surplus, the debt fund climbing toward the paper sixteen"
   },
   "knows": {
     "scene_{location}": "the lay of {location}",

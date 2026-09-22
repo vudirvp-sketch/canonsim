@@ -450,14 +450,17 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED; the heartbreak station + the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent; the heartbreak station + the live human band open)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
 humor station's second measurement MET its mandatory bar on the
 rs-3-fixed surface (iter-194 below — the station PARTIALLY
-CONFIRMED, the authored residues open); the heartbreak station
-un-run; the live human band open.` The owner's reading of the
+CONFIRMED, the authored residues open); the covering residue's own
+row landed and its mandatory bar MET on the rs-4-fixed surface
+(iter-199 below — the covering connected, the shave's agency and the
+withhold's one-surface contradiction the open residues); the
+heartbreak station un-run; the live human band open.` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
 unchanged: the causal composition CONFIRMED — but the reader-side
@@ -667,6 +670,54 @@ prose" — the remaining route the arc's assembly's future row (the
 covering residue's own), the heartbreak station + the live human
 band still the owner's calls. Honest caveats unchanged (the LLM
 reader class, the year compression).
+
+The covering residue's row (iter-199, the owner's «продолжай работу
+по логике» continuation call firing STATUS Next step item 1 — the row
+the A/B iteration carried per the owner's «если в одну итерацию не
+уместишься» instruction): rs-4 LANDED FIRST (the flow-gloss boundary,
+the rs family's fourth member — the economy FLOW's meaning on the
+reader surface: the pack's `templates.json::flow_glosses` table
+(flow id -> reader prose, the three coin flows glossed from the
+economy notes' own words — the toll's net surplus / the punt fund's
+climb, the guild's standing take / the flood paper's service, the
+honest year's surplus / the debt fund climbing toward the paper
+sixteen), the renderer's `gloss_flow` mapping at the account verbs'
+`{flow}` slot (landed before the outcome loop — the raw id is a
+machine token, never the reader's; an unglossed flow renders nothing,
+rs-1's own law), the verb line's conditional tail, the lint closure
+(dead keys refused, the table without the block dead data); the
+withhold's bloom line keeps rs-3's kind gloss alone (the flow
+unglossed — the meaning already rides the kind); the LOG untouched —
+zero corpus price) and the probe's re-run MANDATORY BAR MET (the
+covering connected), n=2 CONVERGENT: BOTH readings join the +3
+reckonings to the debt's discharge — "his annual surplus of 3 coin is
+noted as climbing toward the sum of his paper debt" (reading 1),
+"the debt fund climbing toward the paper sixteen ... which he used to
+pay down his debt" (reading 2, the gloss verbatim) — the prior runs'
+income-misreading GONE. The honest residues, both readings: the
+shave's AGENCY renders nowhere (reading 2 INVERTED the direction —
+"accused of dishonesty ... by the guild", the camp read as the
+accused; reading 1 floated the withhold as "perhaps for private
+sale") and the withhold's one-surface contradiction unjoined (the
+heap read as commerce / "careful accounting", never the camp's answer
+to the tilted beam) — the discovery path's own halves, each a future
+row's material, never "improve the prose". The instrument: the same
+sparse twin re-established from the recorded protocol (the fall
+t=2824, the fund 18 at the fifth crossing, the close paper 0 / coin
+8, the heap 18, seven bankings, the tale 87 lines; the package
+byte-identical on re-run), the package the same form (the tale +
+Garrick's opening/close records + the crofts' close record + three
+briefs); the author audit pre-set BEFORE the reading (the pass bar:
+the covering connected MANDATORY, the arc strongly expected, the
+contradiction supporting); the blind reader the same class (glm, n=2
+independent; the runner + transcripts outside the repo, Rule 9). The
+disposition: rs-4 CONFIRMED at its own bar (the covering's join
+renders, the failure mode eliminated — the rs family's fourth member
+measured); the remaining routes each a future row's own call (the
+shave's agency surface, the withhold's contradiction one surface),
+the heartbreak station + the live human band still the owner's calls.
+Honest caveats unchanged (the LLM reader class, the year
+compression).
 
 ### OPEN — Ancient Network back-propagation
 

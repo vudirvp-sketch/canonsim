@@ -19,7 +19,11 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any, Final
 
-from core.economy import ACCOUNT_GLOSS_BLOCK, VERB_EVENT_TYPES
+from core.economy import (
+    ACCOUNT_GLOSS_BLOCK,
+    FLOW_GLOSS_BLOCK,
+    VERB_EVENT_TYPES,
+)
 from core.packlint.helpers import _SNAKE_CASE, PackError, _is_int, _require
 
 #: The economy block's closed key vocabulary (the engine-side mirror
@@ -55,6 +59,9 @@ class EconomyLint:
             # data (every key names an undeclared kind) — refused here,
             # the early phase's clean PackError (never a silent skip)
             self._gloss_table(vocabulary=frozenset())
+            # rs-4: the flow-gloss table's own dead-data law — every key
+            # names a flow that cannot exist without the block
+            self._flow_gloss_table(flow_ids=frozenset())
             return
         where = "economy"
         _require(
@@ -71,6 +78,12 @@ class EconomyLint:
         self._accounts_vocabulary(economy)
         self._gloss_table(vocabulary=frozenset(economy["accounts"]))
         self._flows(economy)
+        self._flow_gloss_table(
+            flow_ids=frozenset(
+                flow["id"] for flow in economy.get("flows", ())
+                if isinstance(flow, Mapping)
+            )
+        )
         self._prices(economy)
 
     def _gloss_table(self, *, vocabulary: frozenset[str]) -> None:
@@ -105,6 +118,42 @@ class EconomyLint:
                 f"{where}: the {kind!r} gloss must be a non-empty string — "
                 "the reader surfaces render it verbatim (the verb lines' "
                 "{kind} slot and the state line's apposition)",
+            )
+
+    def _flow_gloss_table(self, *, flow_ids: frozenset[str]) -> None:
+        """The flow-gloss table (rs-4, the covering residue's rendering
+        half — the reader-surface boundary's pack half):
+        `templates.json::flow_glosses`, economy flow id -> reader prose —
+        the flow's MEANING, rendered by the renderer at the banking
+        lines' `{flow? — {flow}}` tail (the tale + the entity view's
+        history, one boundary). OPTIONAL (the dry fallback law — an
+        unglossed flow renders NOTHING: the raw id is a machine token,
+        never the reader's surface); when present: an object whose keys
+        sit in the declared flow ids (a gloss for an undeclared flow is
+        dead data, the vacuity law — rs-2's own shape one granularity
+        deeper) and whose values are non-empty strings (the surface
+        renders the prose VERBATIM — an authored phrase, the em-dash
+        tail's own slot)."""
+        table = self._data["templates.json"].get(FLOW_GLOSS_BLOCK)
+        if table is None:
+            return  # the dry fallback law (the unarmed twin)
+        where = f"templates.json::{FLOW_GLOSS_BLOCK}"
+        _require(
+            isinstance(table, Mapping),
+            f"{where} must be an object (economy flow id -> reader prose)",
+        )
+        for flow_id, gloss in table.items():
+            _require(
+                flow_id in flow_ids,
+                f"{where}: the flow {flow_id!r} is not a declared "
+                "economy.flows id — a gloss for an undeclared flow is "
+                "dead data (the vacuity law)",
+            )
+            _require(
+                isinstance(gloss, str) and bool(gloss.strip()),
+                f"{where}: the {flow_id!r} gloss must be a non-empty "
+                "string — the banking lines render it verbatim (the "
+                "year's-reckoning tail)",
             )
 
     def _accounts_vocabulary(self, economy: Mapping[str, Any]) -> None:

@@ -1,42 +1,49 @@
-Iteration: iter-198 (`iter-198-abfalsifier` — the mech-2 A/B falsifier's
-measurement, the owner's «верх очереди не изменился: (1) A/B
-фальсификатор mech-2 — измерение на операторской стороне (Rule 9),
-инструмент готов» call): the measurement RAN operator-side — 6
-realistic pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus
-(whole-file protocol, max_tokens 32k, thinking disabled; runner +
-transcripts outside the repo, Rule 9; ~1.09M prompt + 0.60M completion
-tokens, 0 transport failures). The verdict: the injected impact gate
-moved NONE of the three named metrics (success 8/18 both arms, lint
-refusals 0, patches tiny); the cognitive premise REFUTED at the
-current scale (conditional on a valid round-trip: 8/8 bare vs 8/9
-gated — find/scope is not the binding constraint); the measured
-bottleneck is the whole-file emission pattern itself: the bracket-
-drift wall in `director.hooks` (10/15 bare, 9/15 gated rules.json
-re-emissions invalid, two recurring drift sites) + 73% silent notes
-paraphrase in the valid emissions; the rename task 0/6 (the one valid
-gated cell dropped the cross-file seeding tag the gate itself had
-named; the lint blind to it — the pre-run probe agrees). The
-structured-patch PROPOSAL re-scoped to emission reliability (the
-API-agent class), fate the owner's call. Doc-only, zero code touch;
-the numbers: TECH_NOTES §17.
+Iteration: iter-199 (`iter-199-flowgloss` — the covering residue's
+row, the arc's assembly, the owner's «продолжай работу по логике»
+continuation call firing STATUS Next step item 1, the row the A/B
+iteration carried per the owner's «если в одну итерацию не
+уместишься» instruction): rs-4 LANDED — the flow-gloss boundary, the
+rs family's fourth member (the economy flow's MEANING on the reader
+surface: the pack's `flow_glosses` table + the renderer's
+`gloss_flow` at the account verbs' `{flow}` slot + the lint closure
++ the verb line's conditional tail; the three coin flows glossed
+from the economy notes' own words — the toll's punt fund, the
+chest's service, the camp's debt fund climbing toward the paper
+sixteen; the withhold's bloom line keeps rs-3's kind gloss alone;
+the LOG untouched, zero corpus price) and the probe's re-run
+MANDATORY BAR MET (the covering connected, glm n=2 convergent — the
++3 reckonings now read as the fund's climb toward the debt's
+discharge, the prior income-misreading GONE); the honest residues:
+the shave's AGENCY (reading 2 inverted the direction — the camp read
+as the accused) + the withhold's one-surface contradiction (both
+readings: commerce / careful accounting, never the answer to the
+tilted beam) — each a future row's material, never "improve the
+prose" (WORLD_TESTS §9's W5 entry + TASKS rs-4 + the claim packet
+`tests/test_flowgloss.py`; the runner + transcripts outside the
+repo, Rule 9).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2026 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 808ef89 — 2026+1 green, ruff
+2032 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; verified at BASE_COMMIT a7ed609 — 2026+1 green, ruff
 clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: docs/TECH_NOTES.md + docs/blueprint/phases.md + docs/TASKS.md +
-STATUS.md + worklog.md — 5 paths (the measurement's residue routing:
-the numbers' owner + the intake-37 premise line + the mech-2 row +
-the state docs).
-Track A and track B untouched this session — the world track a
-separate track (D-186, never a second queue); the covering series
-(STATUS Next step 1) left to the next iteration by the owner's
-«если в одну итерацию не уместишься» instruction — the A/B consumed
-the iteration. The prior iterations' record: iter-197 (revalid2),
-iter-196 (mech2), iter-195 (bottleneck). The detail lives in the
-worklog + git.
+Scope: core/economy.py + render/chronicle.py +
+core/packlint/economy.py + content/province_pack/templates.json +
+tests/test_flowgloss.py (new) + the five updated test packets
+(test_accountgloss / test_campaccount / test_freightvol / test_debt1
+/ test_economy) + docs/worldbuild/WORLD_TESTS.md +
+docs/worldbuild/WORLD_WORKPLAN.md + docs/TASKS.md + STATUS.md +
+worklog.md — 15 paths (the rs landing's own class: the
+mechanism's halves + the claim packets + the state docs; over the
+3–5 soft cap, the rs-1/2/3 precedents' own shape — noted in the
+worklog).
+Track A and track B: the renderer/pack/lint rows touched at the rs
+family's own boundary (zero core-runtime change — the flow gloss is
+read-side only, the goldens byte-untouched); the world track a
+separate track (D-186, never a second queue). The prior iterations'
+record: iter-198 (abfalsifier), iter-197 (revalid2), iter-196
+(mech2). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -93,28 +100,28 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-198 DONE: the mech-2 A/B falsifier's measurement (the owner's
-call, STATUS item 1) — the gate moved none of the three metrics
-(success 8/18 both arms, lint refusals 0, patches tiny); the cognitive
-premise refuted at the current scale; the whole-file emission wall +
-73% silent notes paraphrase measured instead; the structured-patch
-PROPOSAL re-scoped to emission reliability, fate the owner's call
-(TECH_NOTES §17). The covering series (the queue's item 2) NOT
-STARTED — the A/B consumed the iteration, per the owner's break-clean
-instruction.**
+**iter-199 DONE: the covering residue's row (STATUS item 1, the
+owner's continuation call + the carry-over instruction) — rs-4 the
+flow-gloss boundary landed and the probe's mandatory bar MET (the
+covering connected, glm n=2 convergent, the income-misreading GONE);
+the shave's agency + the withhold's one-surface contradiction the
+measured open residues (WORLD_TESTS §9's W5 entry).**
 
-1. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
-   owner's call, WORLD_TESTS §9's W5 entry's named remainder): the
-   +3 reckonings' covering, the shave → starvation arc, and now the
-   withhold's own joke — the contradiction still not ONE surface;
-   never "improve the prose".
-2. The structured-patch PROPOSAL's call (the A/B's fresh material,
+1. The structured-patch PROPOSAL's call (the A/B's fresh material,
    the owner's decision): the emission-reliability motivation measured
    (the wall + the silent notes paraphrase, the API-agent class) vs
    the weakened cognitive-crutch motivation — open, close, or park
    with the re-scoped rationale; the rename-safety lint gap (the
    dangling hook tag passes admission) a separable small candidate if
    the owner wants the cheapest slice.
+2. The W5 covering row's measured successors (each the owner's call,
+   each a future row's own material — WORLD_TESTS §9's W5 entry's
+   iter-199 record): the shave's AGENCY surface (the glosses carry
+   the temporal tie "since the shave", never WHO shaved whom — the
+   discovery path's own half) and the withhold's one-surface
+   contradiction (the heap's meaning + the fund's climb + the beam's
+   law never joined as the camp's ANSWER to the tilted beam — the
+   withhold's own joke's material); never "improve the prose".
 3. The W5 trio's remaining stations (each on the owner's call,
    WORLD_WORKPLAN §7's decision points): the heartbreak probe (its
    design material carries intake-36's C03+F02 consult) and the human

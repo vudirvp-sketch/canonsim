@@ -55,6 +55,7 @@ from core.economy import (
     ACCOUNT_GLOSS_BLOCK,
     CONSUME_EVENT,
     ECONOMY_BLOCK,
+    FLOW_GLOSS_BLOCK,
     SOURCE_EVENT,
     TRANSFER_EVENT,
     VERB_EVENT_TYPES,
@@ -555,11 +556,35 @@ def test_the_economy_lint_refusals(tmp_path: Path) -> None:
         data["templates.json"][ACCOUNT_GLOSS_BLOCK] = {"coin": "owed"}
         data["rules.json"].pop(ECONOMY_BLOCK)
 
+    # rs-4 (iter-199): the flow-gloss table's own refusals — a dead row
+    # (a gloss for an undeclared flow id), a non-string gloss, a
+    # non-object table, and the table without the economy block (the
+    # same vacuity law, one granularity deeper than rs-2's)
+    def bad_flow_gloss_id(data: dict) -> None:
+        data["templates.json"][FLOW_GLOSS_BLOCK] = {
+            "the_dead_flow": "owed",
+        }
+
+    def bad_flow_gloss_value(data: dict) -> None:
+        data["templates.json"][FLOW_GLOSS_BLOCK] = {
+            "barkeep_tally": 3,
+        }
+
+    def bad_flow_gloss_shape(data: dict) -> None:
+        data["templates.json"][FLOW_GLOSS_BLOCK] = ["barkeep_tally"]
+
+    def bad_flow_gloss_without_block(data: dict) -> None:
+        data["templates.json"][FLOW_GLOSS_BLOCK] = {
+            "barkeep_tally": "owed",
+        }
+        data["rules.json"].pop(ECONOMY_BLOCK)
+
     for mutate in (
         bad_block, bad_vocabulary, bad_kind, bad_amount, bad_every,
         bad_verb, bad_duplicate_id, bad_self_transfer, bad_closure,
         bad_pairing, bad_gloss_kind, bad_gloss_value, bad_gloss_shape,
-        bad_gloss_without_block,
+        bad_gloss_without_block, bad_flow_gloss_id, bad_flow_gloss_value,
+        bad_flow_gloss_shape, bad_flow_gloss_without_block,
     ):
         _refusal(tmp_path, f"eco_{mutate.__name__}", mutate)
 
