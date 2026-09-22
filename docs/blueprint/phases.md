@@ -3168,6 +3168,78 @@ row's extension) + this block + the state docs. The build queue
 UNTOUCHED — nothing unpins, nothing reorders; zero build-grade items;
 zero production behavior change.
 
+**The agent-bottleneck research routed (intake-37, iter-195, D-197 —
+the owner's «отнестись к canonsim-agent-bottleneck-research.md как к
+обязательному research-артефакту, а не заметке» call over the uploaded
+research note: the pack-scale agent cognitive-bottleneck investigation
+at `<10%` volume; the note's BASE `16a4aa4`, every measurement
+re-verified at HEAD `462e84a` — 2018+1, ruff, docguard clean at both;
+the note itself stays outside the repo, the convenience-copy law; the
+probe runners outside the repo, Rule 9).** The verdict: PARTIALLY
+CONFIRMED — the note's own verdict upheld, with one claim REFUTED by
+measurement and one gap upgraded from proposal to measured fact.
+
+*Confirmed (re-measured):* the formats sound — JSONL + the four-file
+pack re-derive standing law (D-002/PACK_SPEC); zero format change
+warranted. The tooling foundation as stated: matrix's narrow
+hook/event/token/prop vocabulary (+`--full`/`--dag`), pack_doctor,
+checkpoints, the architecture tests, docguard — present and green.
+The size tables: core 22,557 LOC (loop 1714 / director 1419 /
+worldgen 1388 / intent 1080 — the note's figures each +1, a counting
+artifact); 5 packs × 4 files, 12,728 lines; `rules.director` the
+hotspot (17–19 KB × 3 packs, ~23 blocks per rules.json, nesting depth
+10 — the «nested JSON hostile to precise edits» pressure real);
+`impact --path` ABSENT — the named gap real (matrix lists the
+unindexed rules blocks generically). **The mutation-adequacy gap
+MEASURED (the session's probe):** the admission lint refuses the
+structural breaks (orphan ref, closed enum, intent-contract, template
+vocabulary — 4/6 probes REFUSED) but ACCEPTS value mutations (a
+director `release_threshold` 10→4, an urgency `probability_per_beat`
+40→55 — 2/6), and the tavern golden is blind to BOTH on the covered
+path — a semantic pack change can pass the whole verification stack
+silently when its path is uncovered.
+
+*Refuted:* «agent default behaviour is full-file rewrite; current
+defence: None» — the git history measured (120 pack-JSON file-touches):
+97% surgical (<50% of the file), 82% tiny (≤10%); the three rewrites
+are all early-era growth; the defence is standing law (AGENTS §2
+«patch files in place; never regenerate a whole file»). Residual
+truth: conventional, not mechanical — nothing refuses a rewrite; the
+risk is future-scale with unfamiliar agents, not present behavior.
+Numeric corrections: the note's ≈614 KB pack size reproduces under no
+measure (598.3 KB byte-sum / 599.1 with the sidecar / 672 du-blocks —
+the note's own «correction» introduced the error; the first draft's
+672 was du-based); the reference-density figures (811/1004/1146) are
+extractor-dependent and not reproducible (total 9696/11725/13367,
+unique 2154/2413/2514) — the ordering claim (density grows
+tavern < grim < province) HOLDS under both measures.
+
+*Unknown (working premise, not fact):* the `<10%`-ready volume
+framing (the owner's own; the SoW horizon unbuilt); the 5–10×
+cognitive-load scaling — the A/B measurement the only falsifier;
+future-context softening (undecidable).
+
+*The documentation schema (the research→implementation routing law,
+this block the record):* durable residue → phases.md §6 intake blocks
+(D-185 unchanged); interventions (probe runners, mutated pack copies,
+spike drafts) → `scratch/` (gitignored, never staged — Rule 9's
+family; the .gitignore comment the pointer); architectural adoptions
+→ DECISIONS; tasks → TASKS. No parallel research tree (D-194's
+refusal stands — residue, not an ownerless domain).
+
+*The routing:* ONE row convened — `mech-2` (the agent impact surface:
+`mechanics impact --path`, R03's family joined by its first named
+consumer — the note's smallest useful residue, tooling-only, D-012
+untouched; its design material: bounded causal traversal, CEGAR
+refinement, the minimal-witness fallback — the note's extracted
+mechanisms, never copied solutions). TEST_PLAN §9 gains the
+mutation-adequacy claim shape (the prism this session's probe
+instantiated). The structured-patch admission machinery and the
+edit-shape guard stay PROPOSAL behind the A/B falsifier (the
+97%-surgical history weakened the urgency — measurement before
+mechanism, scav-1's precedent). Zero format changes; the build queue
+otherwise UNTOUCHED.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

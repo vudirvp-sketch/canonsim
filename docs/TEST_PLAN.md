@@ -610,6 +610,7 @@ intake-34's measured lesson).
 | "this outcome is explainable" | same-seed fork | composition crossing | `mechanics.py trace/why`, the provenance family, drift tables |
 | "this cannot escape its boundary" | stress corpus | independent re-derivation | the validator golden set, pack lint, cap/floor tests, stoplists |
 | "this parameter earns its complexity" | one-knob | remove | the ablation family, the offline one-knob ranking (intake-16's spike record) |
+| "a meaningful semantic change cannot pass silently" | the mutation probe (known mutants applied to a pack copy: lint verdict + golden byte-diff) | the coverage census (which paths the goldens actually bind) | the admission lint (structural closure only), the per-pack golden byte-diff (path-bound), `mechanics.py blast` |
 
 Two standing oracle laws the table carries:
 
@@ -624,6 +625,14 @@ Two standing oracle laws the table carries:
   semantic, the expected result is NOT invariance — derive the oracle
   from the owning contract first (the D-039 crossing law is the standing
   instance: co-occurring ticks fire coarsest-first by design).
+- **Mutation visibility is path-bound (intake-37's measured lesson — the
+  empty-ablation rule's pack-side twin).** The admission lint closes
+  structure (orphan refs, closed enums, intent-contract, template
+  vocabulary), never value semantics; a golden surfaces a semantic
+  change only when the mutated path is exercised on the covered script.
+  A green suite over an unexercised path is not semantic coverage —
+  measured iter-195: a director `release_threshold` and an urgency
+  `probability_per_beat` mutation passed lint AND the tavern golden.
 
 The lenses' own quality bar (intake-26 §12 — the research method's five
 questions applied to any future lens): principle / form / quality /

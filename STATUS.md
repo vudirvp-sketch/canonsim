@@ -1,46 +1,48 @@
-Iteration: iter-194 (`iter-194-humorgloss` — the W5 humor fix, the
-owner's «продолжай работу» continuation call firing STATUS Next step
-item 1): rs-3 LANDED — the bloom kind's account-kind gloss (the rs
-family's third member, the rs-2 precedent's own shape: the withhold's
-meaning as reader prose, "bloom kept off the weighbeam since the
-shave" — one table row, the mechanism rs-2's unchanged, the log
-untouched, zero corpus price) and the humor probe's RE-RUN on the
-fixed surface: the MANDATORY BAR MET, glm n=2 — the first run's
-failure mode GONE (the mechanism-grounded joke from BOTH readings,
-the identical-joke convergence GONE; the taboo half 1/2 — reading 2
-nailed the authored taboo, the shave with the lived memory; reading 1
-the exodus, the generic class; the position-dependence implicit; the
-authored answer's withhold-joke extracted by neither — the
-contradiction still not one surface); the classification: the
-canonical fact PRESENT and now MEANINGFUL, the discovery path still
-FRAGMENTARY, the rendering remainder the covering residue's exact
-family (the arc's assembly's future row, its material widened by the
-joke-target half); rs-3 CONFIRMED at its own bar, the station
-PARTIALLY CONFIRMED; NEVER "improve the prose" — the remaining route
-the arc's assembly's row, the heartbreak station + the live human
-band the owner's calls. The record: WORLD_TESTS §9's W5 entry +
-TASKS' rs-3 row.
+Iteration: iter-195 (`iter-195-bottleneck` — intake-37, the owner's
+mandatory-research-artifact call over the uploaded agent-bottleneck
+research note): the research ROUTED whole — every measurement
+re-verified at HEAD, the verdict PARTIALLY CONFIRMED: the formats +
+the tooling-first direction CONFIRMED (zero format change — JSONL +
+the four-file pack stand; matrix/doctor/checkpoints/arch-tests/
+docguard all present and green), the full-file-rewrite claim REFUTED
+by the measured history (97% of 120 pack-JSON touches surgical, 82%
+≤10%, the three rewrites early-era; AGENTS §2 the standing defence),
+the mutation-adequacy gap upgraded from proposal to MEASURED FACT
+(the session's probe: the admission lint refuses the structural
+breaks 4/6 but ACCEPTS value mutations 2/6 — a director
+release_threshold 10→4, an urgency probability 40→55 — and the
+tavern golden is blind to both; TEST_PLAN §9's new path-bound law +
+the mutation-prism row the grammar), the numeric corrections
+recorded (≈614 KB reproduces under no measure; the density figures
+extractor-dependent, the ordering claim holds); the
+research/intervention documentation SCHEMA landed (residue →
+phases.md §6, interventions → scratch/ gitignored, adoptions →
+DECISIONS, tasks → TASKS — the intake-37 block the record); ONE row
+convened on the owner's call (mech-2 — the agent impact surface,
+R03's first named consumer, its falsifier the A/B measurement); the
+structured-patch machinery + the edit-shape guard stay PROPOSAL
+behind the same falsifier.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2018 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT c672759 both ends — 2018+1
+the env pin; verified at BASE_COMMIT 462e84a both ends — 2018+1
 green, ruff clean, docguard clean) ·
 Date: 2026-09-22 ·
-Scope: content/province_pack/templates.json + tests/test_accountgloss.py +
-tests/test_freightvol.py + docs/worldbuild/WORLD_TESTS.md +
-docs/worldbuild/WORLD_WORKPLAN.md + docs/TASKS.md + STATUS.md +
-worklog.md — 8 paths (the fix + the widened pins + the W5 record +
-the state docs; the probe runner + the transcripts outside the repo,
-Rule 9 — the D-022 doc-streak discharged by the fresh owner request,
-the iteration functional).
+Scope: .gitignore + docs/blueprint/phases.md + docs/DECISIONS.md +
+docs/TEST_PLAN.md + docs/TASKS.md + docs/AGENT_NAVIGATION.md +
+STATUS.md + worklog.md — 8 paths (the intake-37 record + D-197 + the
+§9 prism + the mech-2 row + the scratch/ law + the state docs; the
+probe runners + the measurement scripts outside the repo, Rule 9 —
+8 files over the 3–5 soft cap, the owner's schema+routing task the
+scope justification, noted per AGENTS §2.3).
 Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-193 (intake36), iter-192 (humorprobe), iter-191
-(accountgloss), iter-190 (bioprobe), iter-189 (charcoalpaper),
-iter-188 (knowsgloss), iter-187 (freightvol), iter-186 (campaccount),
-iter-185 (tallyread), iter-184 (charcoal1). The detail lives in the
-worklog + git.
+record: iter-194 (humorgloss), iter-193 (intake36), iter-192
+(humorprobe), iter-191 (accountgloss), iter-190 (bioprobe),
+iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
+(freightvol), iter-186 (campaccount), iter-185 (tallyread). The
+detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -97,30 +99,29 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-194 DONE: the W5 humor fix landed (rs-3 — the bloom kind's
-account-kind gloss) and the re-run's mandatory bar MET (the
-mechanism-grounded joke n=2, the taboo 1/2 — the station PARTIALLY
-CONFIRMED, the authored residues open: the withhold's own joke
-unextracted, the position-dependence implicit). iter-193 before it:
-the ULTIMATE-v2 packet routed whole (intake-36). iter-191: the
-biography re-run PASSED CLEAN — the embargo lifted (stands).**
+**iter-195 DONE: the agent-bottleneck research routed whole (intake-37,
+D-197) — the verdict PARTIALLY CONFIRMED, the schema landed, mech-2
+convened. iter-194 before it: the W5 humor fix landed (rs-3) and the
+re-run's mandatory bar MET (the station PARTIALLY CONFIRMED, the
+authored residues open). iter-191: the biography re-run PASSED CLEAN —
+the embargo lifted (stands).**
 
-1. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
+1. The mech-2 decision (the owner's call — the row convened this
+   iteration): the agent impact surface (`mechanics impact --path`,
+   R03's family) — open the row for the tooling spike, or hold it
+   behind its A/B falsifier first; the structured-patch machinery +
+   the edit-shape guard stay PROPOSAL behind the same falsifier.
+2. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
    owner's call, WORLD_TESTS §9's W5 entry's named remainder): the
    +3 reckonings' covering, the shave → starvation arc, and now the
-   withhold's own joke — the contradiction still not ONE surface (the
-   fund's climb, the heap's meaning, the beam's law never joined as
-   one frame; the re-run's jokes rode the shave, not the withhold);
+   withhold's own joke — the contradiction still not ONE surface;
    never "improve the prose".
-2. The W5 trio's remaining stations (each on the owner's call,
-   WORLD_WORKPLAN §7's decision points): the heartbreak probe (the
-   same bounded form — its design material now carries intake-36's
-   C03+F02 consult: the relation-formation triple pack-authorable
-   today, the option-topology classification the «future option»
-   measurement vocabulary) and the human live-band re-run (the LLM
-   reader the instrument so far, glm n=2 — the owner's option (б), the
-   needed data packable for a human reviewer).
-3. The remaining station rows (the owner's next engine run, TEST_PLAN
+3. The W5 trio's remaining stations (each on the owner's call,
+   WORLD_WORKPLAN §7's decision points): the heartbreak probe (its
+   design material carries intake-36's C03+F02 consult) and the human
+   live-band re-run (the LLM reader the instrument so far, glm n=2 —
+   the owner's option (б)).
+4. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate
@@ -128,7 +129,7 @@ biography re-run PASSED CLEAN — the embargo lifted (stands).**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-4. The standing frames: the embodiment options (the older units' rows
+5. The standing frames: the embodiment options (the older units' rows
    — the step's notch record/hatch, the kin's own — each a future
    row's own call), the debt-1 residues (the crossing's own standing
    state the charcoalpaper precedent's sibling — the punt's purchase
@@ -137,7 +138,7 @@ biography re-run PASSED CLEAN — the embargo lifted (stands).**
    withhold's own future row), the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-5. The intake-34/35/36 residues (each behind its own trigger, never a
+6. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;

@@ -110,9 +110,32 @@ claim packet)
   ledgers dead, the DECISIONS collapse 31→30) + the mechanical cap guard
   LIVE (`scripts/docguard.py` + `tests/test_docguard.py` — the recurrence
   fix). Detail: the iter-176 record + git.
+- `mech-2` — the agent impact surface (intake-37's named consumer, the
+  owner's research-artifact call convening the row — R03's family joined
+  by its first named consumer: `mechanics.py blast`'s minimal-intervention
+  extension line): `mechanics impact --path <pack path>` → the static
+  reader/writer/producer/consumer set for an ARBITRARY pack path —
+  matrix's extension beyond the indexed hook/event/token/prop quadruple
+  (the unindexed rules blocks — brief/checks/expectations/importance/
+  knowledge/… ~19 per pack — the measured gap; `rules.director` the
+  17–19 KB hotspot), plus the reverse query ("which blocks reference
+  X") the agent-edit loop needs at pack scale. Tooling-only, stdlib-only
+  (D-012), zero runtime change, CLI-class (D-046); design material: the
+  bounded causal traversal + CEGAR refinement + minimal-witness patterns
+  (intake-37's extracted mechanisms — principles, never copied tools).
+  Verification plan rides TEST_PLAN §9's claim packet + the new
+  mutation-adequacy prism (the measured lesson: value mutations pass
+  lint + goldens when uncovered). FALSIFIER (the row's opening
+  condition, owner-gated): the A/B measurement — agent success rate,
+  patch size, and lint-fail rate on a realistic pack-edit task set,
+  impact-gated vs bare edits; the structured-patch admission machinery
+  and the edit-shape guard stay PROPOSAL behind the same falsifier
+  (the 97%-surgical measured history — no present failure to fix).
+  Opens on the owner's call only.
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-195 · 2026-09-22 · bottleneck (intake-37) — the agent-bottleneck research note routed as a mandatory artifact: PARTIALLY CONFIRMED (formats + tooling direction confirmed; the full-file-rewrite claim REFUTED by the measured 97%-surgical history; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered); the research/intervention documentation schema (scratch/ the interventions folder); one row convened (mech-2) + TEST_PLAN §9's mutation prism — phases.md §6's intake-37 block
 - iter-194 · 2026-09-22 · humorgloss (rs-3) — the W5 humor fix landed (the bloom kind's account-kind gloss — the withhold's meaning on the reader surface, one table row, rs-2's mechanism unchanged) and the humor probe's re-run's mandatory bar MET (the mechanism-grounded joke n=2, the taboo 1/2 — the station PARTIALLY CONFIRMED, the withhold's own joke unextracted; WORLD_TESTS §9's W5 entry)
 - iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed whole (intake-36, D-196): 39 units / 10 families, every body read + code-verified at HEAD; 34/39 CONFIRMED-owned (the largest single confirmation batch), the three fresh routings each joining a named consumer (C03+F02 → the W5 heartbreak station, P01+P03 → the road-traffic rider, C05 → the group-stock lint gap), zero new rows — phases.md §6's intake-36 block
 - iter-192 · 2026-09-22 · humorprobe — the W5 humor station: the probe RAN and FAILED at the rendering boundary (the withhold's meaning renders nowhere — the banking lines read as income; n=2 convergent on an imported-template joke; the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
@@ -124,7 +147,6 @@ claim packet)
   surface (the crofts' bloom heap + the_withhold_banks, the tally's PRESENT as
   account state — the heap's level the artery's thinning, E⇄H's edge)
 - iter-186 · 2026-09-22 · campaccount — the camp's account: the charcoal debt's arithmetic (the master's thin stock + the_bloom_nets + the fold — ONE SALE, TWO CLAIMS; the paper sixteen, no amortization path)
-- iter-185 · 2026-09-22 · tallyread — the camp's first embodiment: the tally's read (the read_tally hinge + the tally-stick + the secrets registration over the master — the re-weigh's proof, the pole's precedent's fourth instance)
 
 ## Track B — background (evenings, foreign canon)
 

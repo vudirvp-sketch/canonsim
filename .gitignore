@@ -2,6 +2,11 @@
 logs/
 output/
 
+# Research-intervention scratch (intake-37/D-197): probe runners, mutated
+# pack copies, spike drafts — session-transient, never staged, never
+# archived; the durable residue routes to phases.md §6 / DECISIONS / TASKS
+scratch/
+
 # DF Legends XML exports — runtime data for track B, never committed
 # (df_design.md determinism quarantine: no golden DF fixtures; iter-8e)
 dfworlds/

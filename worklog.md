@@ -14,6 +14,12 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-195 · 2026-09-22 · bottleneck — intake-37 (the owner's mandatory-research-artifact call): the agent-bottleneck note routed whole — PARTIALLY CONFIRMED (formats + tooling direction confirmed, zero format
+change; the full-file-rewrite claim REFUTED — 97% of 120 pack-JSON touches surgical; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered, TEST_PLAN §9's path-bound law); the
+research/intervention documentation schema (residue → phases §6, interventions → scratch/, adoptions → DECISIONS, tasks → TASKS); mech-2 convened (the impact surface, R03's consumer); 8 paths doc-only +
+.gitignore; the probes + measurement scripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-186 evicted per the cap
+
+---
 iter-194 · 2026-09-22 · humorgloss — the W5 humor fix (the owner's «продолжай работу» continuation call, STATUS item 1): rs-3 landed (the bloom kind's
 account-kind gloss — the withhold's meaning "bloom kept off the weighbeam since the shave", one table row, rs-2's mechanism unchanged, the log untouched) + the
 humor probe's re-run: the MANDATORY BAR MET (glm n=2 — the mechanism-grounded joke from both readings, the taboo 1/2 with the authored taboo nailed once; the
@@ -66,10 +72,3 @@ call, the second row): the withhold's volume surface as pure pack data — the c
 (4 loads, the tally's PRESENT as account state) + the_withhold_banks (+2/yr, the linger beat's
 aggregate; the heap's level the artery's thinning, E⇄H's edge); test_freightvol.py +8,
 campaccount/debt1 pins widened; 11 paths; 1996+1 + ruff + docguard clean; iter-178 evicted
-
----
-iter-186 · 2026-09-22 · campaccount — the camp's account (the owner's embodiment-options
-call, each row its own): the charcoal debt's arithmetic as pure pack data — the master's
-thin stock (coin 3) + the_bloom_nets (+3/yr) + the fold (the service six minting no stock,
-the chest's one-flow law; the paper sixteen, no amortization path); test_campaccount.py
-+9 + debt1's pins widened; 10 paths; 1988+1 + ruff + docguard clean; iter-176 evicted
