@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + the closure pass (the owner's «старые
+висящие позакрывал» call, D-184's four questions at HEAD cd64ce8): every parked premise CONFIRMED-current
+(parse-2/st-2/st-5/scav-1/pack-3/bg-6/doc-2/chron-2 — no gate moved) — zero closures-as-dead; the done rows
+engine-1 + mech-2 collapsed to the minimal form; the ROADMAP res-1/since-1 rot + the README engine-1/bg-9
+rot fixed; 5 paths doc-only; 2026+1 + ruff + docguard clean both ends; iter-188 evicted per the cap
+
+---
 iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's «открывай mech 2 и прочее связанное»
 call, STATUS item 1's tooling-spike arm): `mechanics impact --path/--ref` landed — the derived reader index (the
 AST scan over core/brief/render/cli/sim + packlint, D-118 extended to the source), the exact-name reverse query
@@ -65,10 +72,3 @@ call, finding 2): the paper sixteen as account state riding the seat + the three
 covered-fund gate, the collection's, the succession's — the player-scaled arm's first arming) + the W5 record
 with the decomposition; test_charcoalpaper.py +8, three test files' pins widened; 13 paths; 2011+1 + ruff +
 docguard clean; iter-180 evicted
-
----
-iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (the owner's W5-decomposition
-call, finding 3): the composite knowledge tokens no longer render raw in the tale — the pack-declared
-`knows` tables (all five packs) + `render/chronicle.py::gloss_knows` (the fold-aware matcher, the dry
-fallback) + the regression/census (test_knowsgloss.py +7); the routine-flood finding measured (TECH_NOTES
-§16; chron-2 parked with the invariant); 11 paths; 2003+1 + ruff + docguard clean; iter-179 evicted

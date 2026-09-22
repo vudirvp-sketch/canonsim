@@ -17,8 +17,10 @@
 
 ### Standing rows (owner-gated — the live queue; the ORDER owner decides,
 this file owns composition, never order — D-113; every row REVALIDATED
-iter-150, D-184; each build row's verification plan rides TEST_PLAN §9's
-claim packet)
+iter-150 (D-184) + iter-197 (the second pass: every parked premise
+code-verified current at HEAD, zero closures-as-dead; the done rows
+collapsed to the minimal form); each build row's verification plan rides
+TEST_PLAN §9's claim packet)
 
 > The world-authoring track is NOT this queue: the setting's own plan
 > (the anchor's A1/A2/A3 + the W-ladder) lives in
@@ -27,21 +29,15 @@ claim packet)
 > HERE as a standing row on the owner's call.
 
 - `engine-1` — DONE (iter-170 D-192 DECIDED + iter-171..174 the {3-8B, GBNF}
-  experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING, the
-  owner's call): llama-server behind the explicit adapter — the GBNF
-  mapping repo-side (`brief/gbnf.py`, PARSER_SPEC §2.1, the golden
-  fixture), the adapter `cli/engine.py` (INV-4's one-module form — the
-  AGENTS §4/§8 lift riding), the `--engine` door wiring (the file
-  contract preserved, zero gate edits), the failure→ladder mapping
-  (PARSER_SPEC §5's re-ask + D7's rungs), the provenance manifest; the
-  contract absorbed (CONTRACTS §4 the pointer); the serializer contract
-  PRESENTATION_SPEC's (iter-178). Station remainder: the 27B GBNF arm +
-  the one-model-constrained A/B + the live-narrate model call —
-  TEST_PLAN §8.5's gap rows + PRESENTATION_SPEC §7's band (round 5:
-  the live compile check discharged, KI#90 closed with it; round 6:
-  the fix live-verified at Q9B + the manifest's sha256 + the 9B
-  live-narrate datum n=1). Evidence: TECH_NOTES §13/§13.1, TEST_PLAN
-  §8.5, the engine-1 test packets.
+  experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING):
+  llama-server behind the explicit adapter (`cli/engine.py`, INV-4's
+  one-module form) — the GBNF mapping repo-side (`brief/gbnf.py`), the
+  `--engine` door (the file contract preserved), the failure→ladder
+  mapping, the provenance manifest; the contract absorbed (CONTRACTS §4);
+  the serializer contract PRESENTATION_SPEC's (iter-178). Station
+  remainder: TEST_PLAN §8.5's standing gap rows + PRESENTATION_SPEC §7's
+  band (the owner's next engine run). Detail: D-192/D-193 + TECH_NOTES
+  §13/§13.1 + git.
 - `presentation-1` — DONE (iter-178, the owner's write call on the met
   exit criterion): `docs/PRESENTATION_SPEC.md` — the model-facing
   serializer contract over the stable brief IR (the D-055 pattern's
@@ -113,23 +109,17 @@ claim packet)
 - `mech-2` — the agent impact surface — DONE (iter-196, the owner's
   «открывай mech 2» call over STATUS Next step 1, the tooling-spike arm):
   `mechanics impact --path <pack path> | --ref <name>` — the derived
-  reader index (an AST scan over core/brief/render/cli/sim + the packlint
-  family, D-118 extended to the source itself: never a hand table, a new
-  system visible the iteration it lands), the exact-name reverse query
-  (the rename-safety set), the indexed-matrix pointers (D-024); bounded
-  one-hop traversal per intake-37's principles (sound at block level,
-  literal-precise where the source is literal, honest about dynamic
-  keying); tooling-only, stdlib-only (D-012), zero runtime change.
-  Verification: the test packet's claim block (TEST_PLAN §9's form — the
-  recount oracle, the witness-line pins). Residue behind the A/B
-  falsifier (owner-gated, unchanged): the structured-patch admission
-  machinery + the edit-shape guard stay PROPOSAL; the A/B measurement
-  itself (agent success rate, patch size, lint-fail rate — impact-gated
-  vs bare edits) is operator-side (Rule 9's family), armed by this tool.
-  Detail: the iter-196 record + git.
+  reader index (the AST scan over core/brief/render/cli/sim + the
+  packlint family, D-118 extended to the source), the exact-name reverse
+  query (the rename-safety set), the indexed-matrix pointers (D-024);
+  bounded one-hop traversal; tooling-only, stdlib-only (D-012), zero
+  runtime change. Residue behind the A/B falsifier (owner-gated): the
+  structured-patch admission machinery + the edit-shape guard stay
+  PROPOSAL. Detail: the iter-196 record + D-197 + git.
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + the closure pass (the owner's call, D-184's form): all twelve standing rows audited at HEAD `cd64ce8` — every parked premise CONFIRMED-current (no gate moved), zero closures-as-dead; the done rows engine-1 + mech-2 collapsed to the minimal form (D-024); the ROADMAP §2 res-1/since-1 "open rows" rot + the README engine-1/bg-9 rot fixed; 5 paths doc-only
 - iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's row-opening call): `mechanics impact --path/--ref` landed (the derived reader index — the AST scan, D-118 extended to the source; the exact-name reverse query; the matrix pointers), the §9 claim block + 8 pins; the structured-patch machinery + the edit-shape guard stay PROPOSAL behind the A/B falsifier (now armed by the tool)
 - iter-195 · 2026-09-22 · bottleneck (intake-37) — the agent-bottleneck research note routed as a mandatory artifact: PARTIALLY CONFIRMED (formats + tooling direction confirmed; the full-file-rewrite claim REFUTED by the measured 97%-surgical history; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered); the research/intervention documentation schema (scratch/ the interventions folder); one row convened (mech-2) + TEST_PLAN §9's mutation prism — phases.md §6's intake-37 block
 - iter-194 · 2026-09-22 · humorgloss (rs-3) — the W5 humor fix landed (the bloom kind's account-kind gloss — the withhold's meaning on the reader surface, one table row, rs-2's mechanism unchanged) and the humor probe's re-run's mandatory bar MET (the mechanism-grounded joke n=2, the taboo 1/2 — the station PARTIALLY CONFIRMED, the withhold's own joke unextracted; WORLD_TESTS §9's W5 entry)
@@ -139,9 +129,6 @@ claim packet)
 - iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run: the biography probe on Garrick/the re-weigh RAN clean and FAILED at the rendering boundary (the reader did not reconstruct the persistent obligation; the gate stays shut, the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the paper sixteen as account state riding the seat + the three lifecycle doors; the W5 record with the owner's decomposition — WORLD_TESTS §9's W5 entry)
 - iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (rs-1: the `knows` tables in all five packs + the renderer's matcher; the routine-flood finding → TECH_NOTES §16, chron-2 parked)
-- iter-187 · 2026-09-22 · freightvol — the camp's freight volume: the withhold's
-  surface (the crofts' bloom heap + the_withhold_banks, the tally's PRESENT as
-  account state — the heap's level the artery's thinning, E⇄H's edge)
 
 ## Track B — background (evenings, foreign canon)
 

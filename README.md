@@ -35,9 +35,10 @@ here, the per-phase evidence in DECISIONS' gate-verdict family):
   reskin day 14m24s, zero core edits (D-149).
 
 **The standing work**: the owner-gated backlog (`docs/TASKS.md`) + the
-Soul-of-Waifu horizon (`docs/ROADMAP.md` §6). Track B: bg-2/3/4/7/8
-DONE, bg-6 owner-deferred; engine-1 move (a) (the {3–8B, GBNF}
-experiment) CLOSED iter-174 — the build landing (b) the standing row.
+world track (`docs/worldbuild/`, D-186) + the Soul-of-Waifu horizon
+(`docs/ROADMAP.md` §6). Track B: bg-2/3/4/7/8/9 DONE, bg-6
+owner-deferred; engine-1 LANDED iter-177 (D-193 — the explicit adapter,
+INV-4's one-module form).
 
 ## For AI agents (primary audience)
 

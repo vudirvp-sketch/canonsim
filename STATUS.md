@@ -1,44 +1,36 @@
-Iteration: iter-196 (`iter-196-mech2` — the mech-2 tooling spike, the
-owner's «открывай mech 2 и прочее связанное» call over STATUS Next step
-1's tooling-spike arm): the agent impact surface LANDED —
-`mechanics impact --path <pack path> | --ref <name>` — the derived
-reader index (an AST scan over core/brief/render/cli/sim + the packlint
-family for rules-rooted literal accesses — literal chains,
-`x["rules.json"]` roots, the `*_BLOCK` constants resolved cross-module;
-D-118 extended to the source itself: never a hand table, a new system
-visible the iteration it lands; scripts/ excluded, D-046), the
-exact-name reverse query over the four files (keys/list
-members/scalar values — the rename-safety set; display paths are
---path-usable), the indexed-matrix pointers (D-024 — the quadruple
-keeps its single owner); bounded one-hop traversal per intake-37's
-principles (sound at block level, literal-precise where the source is
-literal, honest about dynamic keying — a dynamic root key drops the
-site, never a guess), the attention budget's caps with named cuts
-(IMPACT_READERS_CAP/IMPACT_REFS_CAP, --full the operator's window);
-tooling-only, stdlib-only (D-012), zero runtime change. Verification:
-the test packet's claim block (TEST_PLAN §9's form — the independent
-recount oracle, the witness-line pins, the future-layer law extended
-to impact: a fresh block reports no runtime reader, never a
-rejection). The structured-patch machinery + the edit-shape guard stay
-PROPOSAL behind the A/B falsifier (unchanged, owner-gated; the
-measurement itself operator-side, Rule 9's family — now armed by the
-tool).
+Iteration: iter-197 (`iter-197-revalid2` — the second standing-queue
+revalidation + the closure pass, the owner's «продолжай… старые задачи
+"висящие" позакрывал, убедившись что они актуальны» call): all TWELVE
+standing rows audited with D-184's four questions at HEAD — every
+parked premise code-verified CURRENT (parse-2: no multi-intent datum
+in the live corpus + no frontend consumer; st-2/st-5: no
+promotion/container usage across the five packs, grep-verified; scav-1:
+no derived-store size census on record; pack-3: no authored slot
+opened; bg-6: the D-055 deferral stands; doc-2: not due until the
+December quarterly; chron-2: the W5 trio's heartbreak + live-band
+stations open, WORLD_TESTS §9) — ZERO closures-as-dead, every gate
+still stands; the done rows COLLAPSED to the minimal current-state form
+(engine-1, mech-2 — the landing detail the D-rows + git + the owning
+specs', D-024); the row-state ROT found + fixed: ROADMAP §2's phase-6
+cell still called res-1/since-1 "open build rows" (both landed
+iter-146/147) + README's status block still called engine-1 "the
+standing row" (landed iter-177) and missed bg-9/the world track.
+Doc-only, zero code touch.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2026 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT f7039e8 — 2018+1 green, ruff
+the env pin; verified at BASE_COMMIT cd64ce8 — 2026+1 green, ruff
 clean, docguard clean, before the change) ·
-Date: 2026-09-22 ·
-Scope: scripts/mechanics.py + tests/test_mechanics.py + docs/TASKS.md
-+ STATUS.md + worklog.md — 5 paths (the tool + the pins + the state
-docs).
+Date: 2026-09-23 ·
+Scope: docs/TASKS.md + docs/ROADMAP.md + README.md + STATUS.md +
+worklog.md — 5 paths (the revalidation pass: the queue rows + the
+owning docs' row-state rot + the state docs).
 Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-195 (bottleneck), iter-194 (humorgloss), iter-193
-(intake36), iter-192 (humorprobe), iter-191 (accountgloss), iter-190
-(bioprobe), iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
-(freightvol). The detail lives in the worklog + git.
+record: iter-196 (mech2), iter-195 (bottleneck), iter-194 (humorgloss),
+iter-193 (intake36), iter-192 (humorprobe), iter-191 (accountgloss).
+The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -95,12 +87,14 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-196 DONE: the mech-2 tooling spike landed (`mechanics
+**iter-197 DONE: the second queue revalidation + the closure pass (the
+owner's call, D-184's form) — every parked premise held at HEAD, ZERO
+closures-as-dead; the engine-1 + mech-2 done rows collapsed to the
+minimal form; the ROADMAP §2 + README row-state rot fixed. iter-196
+before it: the mech-2 tooling spike landed (`mechanics
 impact --path/--ref` — the derived reader index + the reverse query,
-the owner's row-opening call). iter-195 before it: the
-agent-bottleneck research routed whole (intake-37, D-197) — PARTIALLY
-CONFIRMED, the schema landed, mech-2 convened. iter-191: the
-biography re-run PASSED CLEAN — the embargo lifted (stands).**
+the owner's row-opening call). iter-191: the biography re-run PASSED
+CLEAN — the embargo lifted (stands).**
 
 1. The mech-2 A/B falsifier (the owner's call, now armed by the
    tool): the measurement — agent success rate, patch size, and
