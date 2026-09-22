@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed (the owner's research call, intake-36/D-196): 39 units / 10
+families read whole + code-verified at HEAD `16a4aa4` (2018+1, ruff, docguard clean both ends); 34/39 CONFIRMED-owned (the largest
+single confirmation batch), THREE fresh routings joining named consumers (C03+F02 → the W5 heartbreak station, P01+P03 → the
+road-traffic depth-7 rider, C05 → the group-stock lint gap), zero new rows (D-175); 5 paths doc-only (phases.md §6's intake-36
+block + D-196 + the state docs); the packet outside the repo (the convenience-copy law); iter-184 evicted per the cap
+
+---
 iter-192 · 2026-09-22 · humorprobe — the W5 humor station (the owner's «продолжай работу по планам»
 continuation): the humor probe RAN and FAILED at the rendering boundary, glm n=2 convergent (both readers the SAME imported-template
 joke — the withhold's meaning renders nowhere, the banking lines read as income, the covering residue's family); classified by
@@ -66,10 +73,3 @@ iter-185 · 2026-09-22 · tallyread — the camp's first embodiment (the owner's
 pack data — the read_tally hinge (the family's fourth instance) + the tally-stick (the seat's
 badge, the master's) + the secrets registration (the_camps_word, type debt — the re-weigh's
 proof, the WORD never the PRESENT); 11 paths; 1979+1 + ruff + docguard clean both ends; iter-175 evicted
-
----
-iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the owner's standing-frames
-call): the charcoal debt's lifecycle + the coupled liabilities (E⇄H) + the seat's succession
-(D-191 answered — the third form); Loop H + 3 interlock edges + the re-weigh crisis + the humor
-probe; 3 gaps recorded, not routed; 7 paths, doc-only (the world track, D-186); 1969+1 + ruff +
-docguard clean both ends; iter-177 evicted per the cap

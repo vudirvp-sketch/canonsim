@@ -3060,6 +3060,114 @@ growth, the world track's W5 biography arc, a combat-bearing pack): the
 first to go live flips the latent gap to a live deficit and fires the
 leading candidate (event-derived evidence-weighted mastery, never XP).**
 
+**The curated unit archive routed (intake-36, iter-193, D-196 — the
+owner's «провести работу с canonsim_research_packet_ULTIMATE_v2.zip,
+решить что можно перенимать, чем вдохновляться, что требует проверки…
+где есть упущения и с доработкой можно и даже нужно реализовать» call
+over the uploaded packet (39 curated units / 10 families / 85
+provenance atoms / 5 sources; the single-unit Packet ×
+cross-domain_units_v3 hybrid; the consult posture — the packet stays
+outside the repo, the convenience-copy law; every unit body read,
+every carrier claim code-verified at HEAD `16a4aa4`; the full one-pass
+verdict table: the upload + git at this row's commit).** The corpus
+map — the dominant source (guide29, 67/85 atoms — the cross-domain
+transplantation guide) is the METHOD the repo already absorbed as
+standing law (D-165's card; the owner's session discipline the live
+form): its mechanism atoms re-derive owned substrate family by family;
+the S-family's source is the intake-30 visual source's updated sibling
+(the visual card parked, nothing re-opened); the control plane (the
+triage protocol, the one-unit law, the completion contract, the
+quality rubric, the stdlib tools — verify_packet PASS) is the standing
+doctrine in archival form, one operational novelty: the PHYSICAL
+BUNDLE firewall (`make_iteration_bundle.py` — siblings physically
+absent from the materialized context, stronger than a prompt
+prohibition), an owner-side session practice, never repo material
+(Rule 9). The verdict: PARTIALLY CONFIRMED — the largest single
+confirmation batch: 34/39 units CONFIRMED-owned, each re-deriving
+standing law or owned substrate at its named carrier: L01 =
+`mechanics.py why` + D-118 (the local certificate already the
+one-event postmortem's own shape); L02 = INV-1's own point + the
+charcoal-paper standing state (iter-189) the live proof (the inverse
+archaeology read deferred — no consumer); C01 = the event → state →
+authorized-observation → decision loop + the withhold banks (iter-187)
+residue-mediated coordination in practice; C02 = `expectation_drafts`
+(P2d) the mismatch → evidence-acquisition mechanism, the director
+urgency family the routing half; C04 = `known_by` (D-088) + the
+per-watcher suspicion bands (scoped aggregation already the shape);
+C05 = res-1's stock/flow verbs + the known-denominator thresholds
+(D-191); D01 = THE INTENT DOOR whole (the finite option set + the GBNF
+grammar + the closed reply document + external policy — PARSER_SPEC's
+own contract, the packet's strongest confirmation member); E01 = the
+knowledge scopes + the knower boundary; E02 = the validator's verdict
+semantics (iter-9) + the W5 boundary classification the live practice;
+F01/F03 = the LOD ladder's own task-relative sufficiency law +
+maclock-1 + depth-7 condensation (closure under named consumers); F04
+= INV-1 closed-by-construction (the three verbs carry their own
+gain/loss; no canonical residual can exist — the derived-aggregate
+residual half deferred, routed below); F05 = depth-6's faction chains
+(intake-35's own mapping); G01 = PASS_ORDER (D-165 #6, the one-way
+layer law); G02 = the relax pass's airtight radius bound — the
+effect-distance declaration in derived form (no gap at current scale);
+G05 = the brief's O(relevance) budgets (structural allocation, the
+read-side form); G06 = the on_action/transitions layers ARE the
+local-rewrite form (the runtime rewrite engine L13-refused); M01–M07
+= the standing doctrine's own atoms (the five-part test; M03 the
+empty-ablation rule landed intake-34; M05 the n=2 convergent-reader
+independence discipline; M06 the W5 blind-reader probes themselves;
+M07 the flat-index precedent); S01–S04 = the canon →
+derived-projection → presentation ladder + the lattice/claim laws +
+the LOD ladder + the render/presentation split (S01's reader-surface
+half the W5 probes' own instrument); R01/R02 = the math catalog's
+deferred assurance family (intake-34's own trigger); R03 = PROPOSAL
+(`mechanics.py blast`'s minimal-intervention extension — a candidate
+instrument, no current consumer); R04 = the STATUS routing discipline;
+P02 = REJECTED twice over (the D-105 deadband superiority, intake-32's
+two-direction transplant test + the measured stable hysteresis,
+intake-34) — re-opens only on a measured oscillation the deadbands do
+not prevent; G03 = the intake-16/17/30 WFC fence stands; G04 = DEFERRED
+(authored placement + MST today, no consumer). The THREE fresh
+routings — the packet's real decision leverage, each joining a NAMED
+consumer, zero new rows (D-175):
+
+1. **C03 + F02 → the W5 heartbreak station** (the trio's last open
+   station, WORLD_WORKPLAN §7's standing decision point): the
+   relation-formation factor triple (repeated consequential
+   co-presence × reciprocity × selective disclosure → an endogenous
+   relation that expands future legal options) as the station's design
+   material — pack-authorable TODAY (on_action deltas + pair axes +
+   threshold-gated hooks + `requires` gates — zero engine change,
+   INV-3/D-142), the formation side untested in a committed pack
+   (relations today move via witnessed-token reactions, not
+   co-presence); F02's option-topology classification (ADD / REMOVE /
+   MERGE / SPLIT / SEMANTIC-CHANGE) as the probe's «future option»
+   measurement vocabulary — the station's own success criterion names
+   a lost future option. Falsifier: the probe itself (the blind-reader
+   discipline; a failure classified by boundary, never «improve the
+   prose»).
+2. **P01 + P03 → the road-traffic depth-7 rider** (the named future
+   row — travel's own deferral, `core/travel.py`'s head + D-188's
+   post-T1 residue): capacity ≠ route existence (today's price law is
+   duration-only), the edge-capacity perturbation discriminant
+   (perturb one edge → realized delay → stock divergence →
+   institutional response), and P03's fracture test (a named
+   downstream regime change — queue formation, spillover, abandonment
+   — never average utilization) as the row's evaluation grammar when
+   it opens; F04's derived-aggregate residual rides the same row (the
+   accounting half for derived tallies).
+3. **C05's denominator integrity → the group-stock lint gap** (D-182's
+   recorded, never-patched finding): the honest-denominator principle
+   (a rate = flow over the declared membership base; a base change
+   without a claim update is a semantic change) as that future lint's
+   design law.
+
+The ref-file deep record for guide29 DEFERRED behind the math
+catalog's own trigger (a named row consuming a specific mechanism
+family — intake-35's recorded condition; the three routings above
+carry their material in this block). Landed: D-196 (the D-119 family
+row's extension) + this block + the state docs. The build queue
+UNTOUCHED — nothing unpins, nothing reorders; zero build-grade items;
+zero production behavior change.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

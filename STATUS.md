@@ -1,53 +1,38 @@
-Iteration: iter-192 (`iter-192-humorprobe` — the W5 humor
-station, the owner's «продолжай работу по планам, открывай что
-логичнее всего продолжить» continuation): the humor probe RAN CLEAN
-and FAILED at the RENDERING boundary, n=2 convergent — both blind
-readers (glm, independent) produced the IDENTICAL joke ("Why did
-the smelter cross the road? To get to the weighbeam!" — an
-imported Earth template with the world's nouns substituted; the
-world's own generator, the withhold's contradiction, never fired);
-the taboo half failed too (the first reading named the river, the
-second the guild's authority — the authored taboo's lived memory,
-the starved winter and the shave, named by neither); the
-classification by boundary: the canonical fact PRESENT, the
-discovery path FRAGMENTARY (the shave → starvation arc never
-assembles — the taboo half's owner), the RENDERING boundary the
-failure's owner (the withhold's MEANING renders nowhere — the
-banking lines read as periodic income, the covering residue's exact
-family); the instrument re-established from the recorded protocol
-(the sparse twin, the fund 18 at the fall t=2824, the close 0/8,
-the tale 88 lines, the package byte-identical; the package widened
-with the crofts' close record — the withhold's own surface, the
-heap 18); the author audit pre-set BEFORE the reading (the pass
-bar fixed); the runner + the transcripts outside the repo (Rule 9);
-the gate UNTOUCHED (the humor station not a gate condition — the
-biography condition MET at iter-191 stands, the embargo stays
-lifted); the fix's route the owner's call (the natural class the
-bloom kind's account-kind gloss — the rs family's third member —
-plus the arc's assembly row). The record: WORLD_TESTS §9's W5 entry
-+ the cultural-humor entry's live-band line.
+Iteration: iter-193 (`iter-193-intake36` — the curated unit
+archive, the owner's ULTIMATE-v2 packet call): the 39-unit / 10-family
+packet routed whole — every unit body read, every carrier claim
+code-verified at HEAD; 34/39 CONFIRMED-owned (the largest single
+confirmation batch: D01 = the intent door whole, M01–M07 = the
+standing doctrine's own atoms, P02 rejected twice over, the WFC fence
+stands); the THREE fresh routings each joining a NAMED consumer, zero
+new rows (D-175): C03+F02 → the W5 heartbreak station (the
+relation-formation triple + the option-topology measurement
+vocabulary), P01+P03 → the road-traffic depth-7 rider (capacity ≠
+existence + the fracture discriminant + F04's derived residual), C05
+→ the group-stock lint gap (the honest-denominator law); the packet's
+control plane = the standing doctrine in archival form (the physical
+bundle firewall an owner-side session practice, Rule 9); the ref-file
+deep record deferred behind the math catalog's own trigger; doc-only,
+the packet stays outside the repo (the convenience-copy law). The
+record: phases.md §6's intake-36 block + D-196.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2018 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 52d6e5e — 2018+1 green, ruff
-clean, docguard clean — and re-verified after iter-192's diff: 2018+1,
-the doc-only record + the docguard allowlist entry) ·
+the env pin; verified at BASE_COMMIT 16a4aa4 both ends — 2018+1
+green, ruff clean, docguard clean — the iter-193 diff doc-only) ·
 Date: 2026-09-22 ·
-Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
-+ scripts/docguard.py + STATUS.md + worklog.md + docs/TASKS.md — 6
-paths (the probe's record + the cap's allowlist entry; the runner +
-the reader transcripts + the author audit outside the repo per Rule
-9 — the live-session class, D-046; WORLD_TESTS over the 600 cap
-after the §6.1 pointer pass — the guard's allowlist with the
-rationale, the worklog the record).
+Scope: docs/blueprint/phases.md + docs/DECISIONS.md + STATUS.md +
+worklog.md + docs/TASKS.md — 5 paths (the intake-36 record + the
+D-196 extension; the packet itself outside the repo per the
+convenience-copy law).
 Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-191 (accountgloss), iter-190 (bioprobe), iter-189
-(charcoalpaper), iter-188 (knowsgloss), iter-187 (freightvol),
-iter-186 (campaccount), iter-185 (tallyread), iter-184 (charcoal1),
-bg-9 (apiprose), iter-183 (residues34). The detail lives in the
-worklog + git.
+record: iter-192 (humorprobe), iter-191 (accountgloss), iter-190
+(bioprobe), iter-189 (charcoalpaper), iter-188 (knowsgloss),
+iter-187 (freightvol), iter-186 (campaccount), iter-185 (tallyread),
+iter-184 (charcoal1), bg-9 (apiprose), iter-183 (residues34). The
+detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -104,12 +89,13 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-192 DONE: the W5 humor station ran and FAILED at the rendering
-boundary — the withhold's meaning renders nowhere (the banking lines
-read as income), n=2 convergent; the fix's route the owner's call.
-iter-191 before it: the biography re-run PASSED CLEAN — the gate's
-named condition MET, the embargo lifted (stands — the humor station
-is not a gate condition).**
+**iter-193 DONE: the ULTIMATE-v2 packet routed whole (intake-36) —
+34/39 CONFIRMED-owned, the three fresh routings each joined a named
+consumer (the heartbreak station's material, the road-traffic
+rider's evaluation grammar, the group-stock lint's design law), zero
+new rows. iter-192 before it: the humor station FAILED at the
+rendering boundary — the fix's route the owner's call. iter-191:
+the biography re-run PASSED CLEAN — the embargo lifted (stands).**
 
 1. THE HUMOR FIX'S ROUTE (the owner's call, WORLD_TESTS §9's W5
    entry): the natural class the bloom kind's account-kind gloss (the
@@ -119,8 +105,11 @@ is not a gate condition).**
    "improve the prose".
 2. The W5 trio's remaining stations (each on the owner's call,
    WORLD_WORKPLAN §7's decision points): the heartbreak probe (the
-   same bounded form) and the human live-band re-run (the LLM reader
-   the instrument so far, glm n=2 — the owner's option (б), the
+   same bounded form — its design material now carries intake-36's
+   C03+F02 consult: the relation-formation triple pack-authorable
+   today, the option-topology classification the «future option»
+   measurement vocabulary) and the human live-band re-run (the LLM
+   reader the instrument so far, glm n=2 — the owner's option (б), the
    needed data packable for a human reviewer).
 3. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -139,9 +128,12 @@ is not a gate condition).**
    withhold's own future row), the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-5. The intake-34/35 residues (each behind its own trigger, never a
+5. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
-   specific math-catalog mechanism family (the per-card pass done at
-   intake-35, the families re-confirmed at HEAD; Experiment 0's
-   verdict + R1's landing close the other two residues — phases.md
-   §6).
+   specific math-catalog or guide29 mechanism family (the per-card
+   pass done at intake-35, the families re-confirmed at HEAD;
+   Experiment 0's verdict + R1's landing close the other two
+   residues — phases.md §6); the road-traffic depth-7 rider's
+   evaluation grammar now carries intake-36's P01+P03 consult
+   (capacity ≠ existence, the edge-perturbation discriminant, the
+   fracture regime-change test — phases.md §6's intake-36 block).

@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed whole (intake-36, D-196): 39 units / 10 families, every body read + code-verified at HEAD; 34/39 CONFIRMED-owned (the largest single confirmation batch), the three fresh routings each joining a named consumer (C03+F02 → the W5 heartbreak station, P01+P03 → the road-traffic rider, C05 → the group-stock lint gap), zero new rows — phases.md §6's intake-36 block
 - iter-192 · 2026-09-22 · humorprobe — the W5 humor station: the probe RAN and FAILED at the rendering boundary (the withhold's meaning renders nowhere — the banking lines read as income; n=2 convergent on an imported-template joke; the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-191 · 2026-09-22 · accountgloss (rs-2) — the W5 rendering-boundary fix landed (the account-kind gloss on the reader surface: the pack's `account_kinds` words + the renderer's mapping + the lint's closure) and the biography probe's re-run PASSED CLEAN — the reader reconstructed the persistent obligation, n=2 convergent; the gate's named condition met (WORLD_TESTS §9's W5 entry)
 - iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run: the biography probe on Garrick/the re-weigh RAN clean and FAILED at the rendering boundary (the reader did not reconstruct the persistent obligation; the gate stays shut, the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
@@ -124,7 +125,6 @@ claim packet)
 - iter-186 · 2026-09-22 · campaccount — the camp's account: the charcoal debt's arithmetic (the master's thin stock + the_bloom_nets + the fold — ONE SALE, TWO CLAIMS; the paper sixteen, no amortization path)
 - iter-185 · 2026-09-22 · tallyread — the camp's first embodiment: the tally's read (the read_tally hinge + the tally-stick + the secrets registration over the master — the re-weigh's proof, the pole's precedent's fourth instance)
 - iter-184 · 2026-09-21 · charcoal1 — the camp's meso half authored (the charcoal debt, the coupled liabilities, the seat's succession — Loop H + three interlock edges)
-- iter-183 · 2026-09-21 · residues34 — Experiment 0 executed (the falsifier's verdict: no live deficit, the card stays parked) + R1 landed (the harness's paired-Δ arm)
 ## Track B — background (evenings, foreign canon)
 
 ### bg-7 · engine + confabulation probe — done (2026-09-07)
