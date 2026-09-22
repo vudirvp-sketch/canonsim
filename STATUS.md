@@ -1,55 +1,53 @@
-Iteration: iter-190 (`iter-190-bioprobe` — the world track, the W5
-GATE's first run; the owner's «доделывай что осталось от 189»
-continuation call firing STATUS Next step's item 1): the BIOGRAPHY
-PROBE on Garrick / the re-weigh over the canonical standing debt —
-RAN CLEAN (the blind-pass isolation law held: the reader package =
-committed reader-visible surface only — the tale + the state records +
-the briefs of the re-weigh scene; the author audit with a pre-set pass
-bar prepared separately BEFORE the reading) and the reader did NOT
-reconstruct the persistent obligation: FAILED at the RENDERING
-boundary. The instrument: the bounded re-weigh run (the sparse twin —
-macro 480, calendar 240/360/420, the sub-year law held, the routine
-minimized so the probe never measures chron-2's flood; seed 42, the
-full chain: the tally read → the walks to Malby → the fifth crossing
-covering the paper → the FALL → the COLLECTION → the aftermath) +
-the blind reader (the sandbox API engine, glm, n=2 independent
-readings, convergent; the runner + the transcripts OUTSIDE the repo,
-Rule 9; the instrument deterministic, byte-identical on re-run). The
-result: the FACTS carried faithfully (the 16 standing, the seven +3
-reckonings, the fall, the 16 coin to Malby) but NO obligation frame —
-neither reading names the paper a debt; both misread the fall +
-collection as an "exchange of 16 paper for 16 coin with Malby" (the
-payment's direction lost, the creditor unnamed). The classification:
-the canonical fact PRESENT (iter-189's landing — both readers SAW
-`account.paper: 16`), the discovery path FRAGMENTARY (no surface
-assembles the arc), the RENDERING boundary the failure's owner (the
-account kind's meaning renders nowhere — "16 paper owed"
-indistinguishable from "16 paper held"; the doors two unconnected
-verb lines; the creditor a location name). The gate STAYS SHUT until
-a clean pass; the fix's route the owner's call (the natural class:
-an account-kind gloss on the reader surface, the rs-1 precedent —
-never "improve the prose"); the reader class an LLM, the live human
-band open. The record: WORLD_TESTS §9's W5 entry + WORLD_WORKPLAN
-§7's gate state.
+Iteration: iter-191 (`iter-191-accountgloss` — rs-2, the W5
+rendering-boundary fix; the owner's route (а) call over the first
+run's failure, the «продолжай работу, выбирай что хочешь»
+continuation): the account-kind gloss boundary LANDED — the account
+kind's MEANING now renders at the reader surface's two account
+surfaces (the verb lines' `{kind}` slot, the state line's apposition),
+the rs-1 precedent's own family (the pack owns the words —
+`templates.json::account_kinds`; the renderer the mapping —
+`render/chronicle.py::gloss_account_kind`; the lint the shape —
+`core/packlint/economy.py`; the spelling's single owner —
+`core/economy.py::ACCOUNT_GLOSS_BLOCK`) — and the biography probe's
+RE-RUN PASSED CLEAN (the instrument re-established from the recorded
+protocol, the package byte-identical on re-run; the author audit
+pre-set BEFORE the reading with the pass bar fixed; the blind reader
+glm, n=2 independent, convergent): BOTH readings reconstruct the
+persistent obligation — the standing named a debt ("he owed 16 paper
+to the guild's chest in Malby since the starved winter"), the creditor
+named, the discharge's direction correct ("to settle this debt, he
+passed 16 coin"); the first run's symptoms GONE (no inventory reading,
+no "exchange" misreading); the gate's named condition (one clean
+biography probe) MET — the new-worldbuilding embargo lifts; the honest
+residues: the covering only partially connected (the arc's assembly's
+own future row), the reader class still an LLM (the live human band
+open, the owner's call). The record: WORLD_TESTS §9's W5 entry +
+WORLD_WORKPLAN §7's gate state.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2011 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 1142c0e BEFORE working — 2011+1
-green, ruff clean, docguard clean — and re-verified after iter-190's
-diff: 2011+1) ·
+2018 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; verified at BASE_COMMIT 8782b20 — 2011+1 green, ruff
+clean, docguard clean — and re-verified after iter-191's diff: 2018+1,
+the seven new claim tests) ·
 Date: 2026-09-22 ·
-Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md +
-STATUS.md + worklog.md + docs/TASKS.md — 5 paths, doc-only (the
-measurement's record; the probe's runner + reader material +
-transcripts outside the repo per Rule 9 — the live-session class,
-D-046). Track A and track B untouched this session — the world track a
+Scope: render/chronicle.py + core/economy.py + core/packlint/economy.py
++ content/province_pack/templates.json + tests/test_accountgloss.py +
+tests/test_charcoalpaper.py + tests/test_economy.py + tests/test_debt1.py
++ tests/test_campaccount.py + tests/test_freightvol.py +
+docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md +
+STATUS.md + worklog.md + docs/TASKS.md — 15 paths (the fix + its
+claim packet + the measurement's record; the probe's runner + reader
+material + transcripts outside the repo per Rule 9 — the live-session
+class, D-046; WORLD_TESTS sits at the 600 cap after the §6.1 pass —
+the form/gate restatement compressed to WORLD_WORKPLAN pointers).
+Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
-(freightvol), iter-186 (campaccount), iter-185 (tallyread), iter-184
-(charcoal1), bg-9 (apiprose), iter-183 (residues34), iter-182
-(intake-35), iter-181 (intake-34), iter-180 (round 6). The detail
-lives in the worklog + git.
+record: iter-190 (bioprobe), iter-189 (charcoalpaper), iter-188
+(knowsgloss), iter-187 (freightvol), iter-186 (campaccount), iter-185
+(tallyread), iter-184 (charcoal1), bg-9 (apiprose), iter-183
+(residues34), iter-182 (intake-35). The detail lives in the worklog +
+git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -106,26 +104,23 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-190 DONE: the W5 biography probe's first run (the owner's
-continuation call) — RAN clean, the reader did NOT reconstruct the
-persistent obligation: FAILED at the RENDERING boundary (the canonical
-fact present, the discovery path fragmentary, the account kind's
-meaning rendering nowhere — the inventory reading the symptom, the
-fall + collection misread as an exchange); the gate STAYS SHUT.
-iter-189 DONE before it: the charcoal debt's standing state (the
-paper sixteen as account state riding the seat + the lifecycle
-doors).**
+**iter-191 DONE: the W5 rendering-boundary fix (rs-2 — the
+account-kind gloss on the reader surface, the rs-1 precedent's own
+family) landed and the biography probe's re-run PASSED CLEAN — the
+reader reconstructed the persistent obligation (glm n=2 convergent:
+the debt named, the creditor named, the direction correct); the
+gate's named condition MET, the new-worldbuilding embargo lifted.
+iter-190 before it: the first run's failure classified at the
+RENDERING boundary.**
 
-1. THE GATE'S ROUTE (the owner's call, WORLD_TESTS §9's W5 entry +
-   WORLD_WORKPLAN §7's gate state): the rendering-boundary fix's
-   design — the natural class an account-kind gloss on the reader
-   surface (the rs-1 precedent: the pack owns the words, the renderer
-   owns the mapping) plus the arc's assembly (the standing number,
-   the climbing fund, the covering, the discharge, the payment — one
-   reader-side arc); each a future row's own design, never "improve
-   the prose". On the same call: the human live-band re-run (the LLM
-   reader the instrument so far, n=2, convergent) and the humor /
-   heartbreak probes (the same form, each on the owner's call).
+1. THE GATE'S REMAINING STATIONS (each on the owner's call,
+   WORLD_WORKPLAN §7's decision points): the human live-band re-run
+   (the LLM reader the instrument so far, glm n=2 convergent — the
+   owner's option (б), the needed data packable for a human reviewer)
+   and the humor / heartbreak probes (the same bounded form, the
+   owner's option (в)); plus the covering residue (the +3 reckonings
+   to the fund's covering still not one reader-side surface — the
+   arc's assembly's own future row, never "improve the prose").
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

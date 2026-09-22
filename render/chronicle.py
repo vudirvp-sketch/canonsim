@@ -26,6 +26,12 @@ from pathlib import Path
 from typing import Any, Final
 
 from core.clock import Clock
+from core.economy import (
+    ACCOUNT_GLOSS_BLOCK,
+    ACCOUNT_PREFIX,
+    VERB_EVENT_TYPES,
+    is_account_prop,
+)
 from core.fold import Projection, fold, initial_projection
 from core.log import IMPORTANCE_ORDER as _IMPORTANCE_ORDER
 from core.log import EventRecord, read_log
@@ -38,6 +44,7 @@ __all__ = [
     "RenderError",
     "chronicle_from_log",
     "compile_glosses",
+    "gloss_account_kind",
     "gloss_knows",
     "render_chronicle",
     "render_entity_view",
@@ -48,18 +55,26 @@ __all__ = [
 _POSITION_PROP: Final = "position"
 _NAME_PROP: Final = "name"
 
-#: The templates.json block that owns the told-fact glosses (rs-1, the
-#: reader-surface boundary): a mapping from the knowledge mint's TOKEN
-#: PATTERN to its reader prose. The pattern restates the mint site's
-#: `knows` shape (`{present}_present`, `conversation_with_{target}`);
-#: the gloss re-uses the same slot names, expanded with DISPLAY NAMES
-#: at render time. A pattern with no slots is an exact-match literal.
-#: The boundary law: the pack owns the words, the renderer owns the
-#: mapping — a token with no table entry renders dry and honest (the
-#: foreign-log fallback, `display_name`'s own family).
+#: The templates.json block that owns the account-kind glosses (rs-2,
+#: the reader-surface boundary over the W5 rendering failure): a mapping
+#: from the account KIND to its reader prose — a noun phrase headed by
+#: the kind word, authored to sit in both the verb lines' `{kind}` slot
+#: ("16 paper owed to ...") and the state line's apposition
+#: (`account.paper: 16 — ...`). The boundary law is rs-1's own: the pack
+#: owns the words, the renderer owns the mapping — a kind with no table
+#: entry renders dry and honest (the foreign-log fallback). The block
+#: name's single owner: `core/economy.py` (the lint
+#: `core/packlint/economy.py` reads it there; this module imports it —
+#: never a second constant).
 GLOSS_BLOCK: Final = "knows"
 
 _GLOSS_SLOT: Final = re.compile(r"\{([a-z_]+)\}")
+
+#: The account verbs' event types — the ONE family whose outcome `kind`
+#: names an account kind (the worldgen memory line's `kind` is the
+#: collection name, never an account; the mapping scopes to the verbs
+#: so the two never collide). `core/economy.py` owns the spelling.
+_ACCOUNT_VERB_EVENTS: Final[frozenset[str]] = frozenset(VERB_EVENT_TYPES.values())
 
 
 class RenderError(RuntimeError):
@@ -159,6 +174,17 @@ def _event_context(
         ),
         "axes": ", ".join(outcome.get("axes", ())),
     }
+    # rs-2 (the account-kind gloss boundary): the account verbs' `kind`
+    # slot maps through the pack's table BEFORE the generic outcome
+    # loop can land the raw word — the kind's meaning rides every
+    # account line (the tale + the entity view's history, one boundary,
+    # every consumer, rs-1's own shape). Scoped to the verb family so
+    # the worldgen memory line's `kind` (the collection name) never
+    # enters the table's key space; an unglossed kind renders dry.
+    if event.type in _ACCOUNT_VERB_EVENTS:
+        kind = outcome.get("kind")
+        if isinstance(kind, str):
+            context["kind"] = gloss_account_kind(pack.templates, kind)
     # The promotion door (iter-11, D-054): a texture-path take carries the
     # mediator-resolved reference in its outcome and NO canon target — the
     # take templates branch on {target} and render the promoted slot noun.
@@ -287,6 +313,26 @@ def gloss_knows(
     return token
 
 
+def gloss_account_kind(templates: Mapping[str, Any], kind: str) -> str:
+    """The account-kind boundary (rs-2, the W5 rendering fix's first
+    half): one account kind mapped to its reader prose through the
+    pack's `account_kinds` table — the kind's MEANING (the W5 first
+    run's finding: "16 paper owed" was indistinguishable from "16
+    paper held" because the kind's meaning rendered nowhere). A kind
+    with no entry returns UNCHANGED — the dry honest fallback (an
+    unglossed kind's bare word IS its meaning; a foreign log's kinds
+    are not the renderer's to invent), `gloss_knows`'s own family law.
+    A malformed row (a non-string or empty value) is inert data here —
+    the load-time lint owns the refusal."""
+    table = templates.get(ACCOUNT_GLOSS_BLOCK)
+    if not isinstance(table, Mapping):
+        return kind
+    gloss = table.get(kind)
+    if not isinstance(gloss, str) or not gloss:
+        return kind
+    return gloss
+
+
 def _born_or_pack(
     projection: Projection, pack: Pack, entity_id: str
 ) -> str:
@@ -405,7 +451,11 @@ def _state_lines(
     name-1 (KI#84): the `carrier:` line is an npc-reference surface —
     the carrier's display resolves fold-first (the born name outranks
     the pack record); `at:` stays the authored location surface —
-    locations take no name births."""
+    locations take no name births. rs-2: an account prop whose kind
+    carries a pack gloss renders the level + the kind's meaning — the
+    standing debt reads as owed, never as inventory (the W5 first
+    run's own finding); an unglossed kind keeps the dry line (the
+    fallback law, `gloss_account_kind`'s own)."""
     lines: list[str] = []
     for prop, value in props.items():
         if prop == _POSITION_PROP:
@@ -416,6 +466,12 @@ def _state_lines(
                 if value is not None else ""
             )
             lines.append(f"  carrier: {carrier or '—'}")
+        elif is_account_prop(prop) and isinstance(value, int) \
+                and not isinstance(value, bool):
+            kind = prop[len(ACCOUNT_PREFIX):]
+            gloss = gloss_account_kind(pack.templates, kind)
+            meaning = f" — {gloss}" if gloss != kind else ""
+            lines.append(f"  {prop}: {value}{meaning}")
         elif isinstance(value, bool):
             lines.append(f"  {prop}: {'yes' if value else 'no'}")
         else:

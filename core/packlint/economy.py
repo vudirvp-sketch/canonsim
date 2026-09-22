@@ -19,7 +19,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any, Final
 
-from core.economy import VERB_EVENT_TYPES
+from core.economy import ACCOUNT_GLOSS_BLOCK, VERB_EVENT_TYPES
 from core.packlint.helpers import _SNAKE_CASE, PackError, _is_int, _require
 
 #: The economy block's closed key vocabulary (the engine-side mirror
@@ -51,7 +51,11 @@ class EconomyLint:
         rules = self._data["rules.json"]
         economy = rules.get("economy")
         if economy is None:
-            return  # the unarmed law
+            # rs-2: a gloss table without the economy block is ALL dead
+            # data (every key names an undeclared kind) — refused here,
+            # the early phase's clean PackError (never a silent skip)
+            self._gloss_table(vocabulary=frozenset())
+            return
         where = "economy"
         _require(
             isinstance(economy, Mapping),
@@ -65,8 +69,43 @@ class EconomyLint:
                 "accounts | flows | prices | notes)"
             )
         self._accounts_vocabulary(economy)
+        self._gloss_table(vocabulary=frozenset(economy["accounts"]))
         self._flows(economy)
         self._prices(economy)
+
+    def _gloss_table(self, *, vocabulary: frozenset[str]) -> None:
+        """The account-kind gloss table (rs-2, the reader-surface
+        boundary's pack half): `templates.json::account_kinds`, kind ->
+        reader prose — the kind's MEANING, rendered by the renderer at
+        the verb lines' `{kind}` slot and the state line's apposition.
+        OPTIONAL (the dry fallback law — an unglossed kind renders its
+        bare word, `gloss_account_kind`'s own family); when present:
+        an object whose keys sit in the economy.accounts vocabulary (a
+        gloss for an undeclared kind is dead data, the vacuity law)
+        and whose values are non-empty strings (both surfaces render
+        the prose VERBATIM — a noun phrase headed by the kind word,
+        authored to sit in "16 {kind}" slots)."""
+        table = self._data["templates.json"].get(ACCOUNT_GLOSS_BLOCK)
+        if table is None:
+            return  # the dry fallback law (the unarmed twin)
+        where = f"templates.json::{ACCOUNT_GLOSS_BLOCK}"
+        _require(
+            isinstance(table, Mapping),
+            f"{where} must be an object (account kind -> reader prose)",
+        )
+        for kind, gloss in table.items():
+            _require(
+                kind in vocabulary,
+                f"{where}: the kind {kind!r} is not in the economy.accounts "
+                "vocabulary — a gloss for an undeclared kind is dead data "
+                "(the vacuity law)",
+            )
+            _require(
+                isinstance(gloss, str) and bool(gloss.strip()),
+                f"{where}: the {kind!r} gloss must be a non-empty string — "
+                "the reader surfaces render it verbatim (the verb lines' "
+                "{kind} slot and the state line's apposition)",
+            )
 
     def _accounts_vocabulary(self, economy: Mapping[str, Any]) -> None:
         """The account-kind vocabulary (`economy.accounts`): the list

@@ -14,6 +14,12 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-191 · 2026-09-22 · accountgloss — the W5 rendering-boundary fix (the owner's route (а) call): the account-kind gloss on the reader surface (rs-2, the rs-1 precedent — the pack's account_kinds words,
+the renderer's {kind}-slot + state-apposition mapping, the lint's closure) + the biography probe's re-run PASSED CLEAN (glm n=2 convergent: the debt named, the creditor named, the direction correct —
+the gate's named condition met, the embargo lifted); 15 paths (the fix + test_accountgloss.py +7 + the pins widened + the W5 record; WORLD_TESTS at the 600 cap after the §6.1 pointer pass);
+the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-182 evicted
+
+---
 iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run (the owner's continuation call): the biography probe on Garrick/the
 re-weigh RAN clean (the isolation law held, the author audit pre-set) and FAILED at the RENDERING boundary — glm n=2 convergent:
 the facts carried (the 16 standing, the flows, the fall, the 16 coin to Malby) but NO obligation frame (the paper read as
@@ -69,10 +75,4 @@ row per D-175) + R1 landed (--paired-delta + TEST_PLAN §6 + the tests; the
 TEST_PLAN cap note rides the over-state, substance per §6.1); 9 paths (over
 the soft limit); 1969+1 + ruff + docguard clean; iter-173 evicted
 
----
-iter-182 · 2026-09-21 · intake-35 — the corpus's second pass (D-195, the owner's
-call firing the deferred trigger): the 44-card families re-confirmed at HEAD,
-zero new consumers, the ref-file record still deferred; the four precisions
-riding the intake block; 5 paths, doc-only; 1962+1 + ruff + docguard clean
-both ends; iter-172 evicted
 

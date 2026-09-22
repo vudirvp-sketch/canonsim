@@ -52,6 +52,7 @@ from typing import Any
 import pytest
 
 from core.economy import (
+    ACCOUNT_GLOSS_BLOCK,
     CONSUME_EVENT,
     ECONOMY_BLOCK,
     SOURCE_EVENT,
@@ -537,10 +538,28 @@ def test_the_economy_lint_refusals(tmp_path: Path) -> None:
         data["rules.json"]["time"].pop("macro")
         data["rules.json"].pop("weather")  # the family binds to the clock
 
+    # rs-2 (iter-191): the account-kind gloss table's own refusals —
+    # a dead row (an undeclared kind), a non-string gloss, a
+    # non-object table, and the table without the economy block (all
+    # dead data by the same vacuity law)
+    def bad_gloss_kind(data: dict) -> None:
+        data["templates.json"][ACCOUNT_GLOSS_BLOCK] = {"silver": "owed"}
+
+    def bad_gloss_value(data: dict) -> None:
+        data["templates.json"][ACCOUNT_GLOSS_BLOCK] = {"coin": 3}
+
+    def bad_gloss_shape(data: dict) -> None:
+        data["templates.json"][ACCOUNT_GLOSS_BLOCK] = ["coin"]
+
+    def bad_gloss_without_block(data: dict) -> None:
+        data["templates.json"][ACCOUNT_GLOSS_BLOCK] = {"coin": "owed"}
+        data["rules.json"].pop(ECONOMY_BLOCK)
+
     for mutate in (
         bad_block, bad_vocabulary, bad_kind, bad_amount, bad_every,
         bad_verb, bad_duplicate_id, bad_self_transfer, bad_closure,
-        bad_pairing,
+        bad_pairing, bad_gloss_kind, bad_gloss_value, bad_gloss_shape,
+        bad_gloss_without_block,
     ):
         _refusal(tmp_path, f"eco_{mutate.__name__}", mutate)
 

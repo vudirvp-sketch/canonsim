@@ -60,6 +60,7 @@ from core.log import EventDraft, StateChange
 from core.transitions import WORLD
 
 __all__ = [
+    "ACCOUNT_GLOSS_BLOCK",
     "ACCOUNT_PREFIX",
     "CONSUME_EVENT",
     "ECONOMY_BLOCK",
@@ -88,6 +89,21 @@ ECONOMY_BLOCK: Final = "economy"
 #: `core/fold.py` and the door's read `core/intent.py`, the family
 #: precedent; this constant is the writer-side owner).
 ACCOUNT_PREFIX: Final = "account."
+
+#: The templates.json block that owns the account-kind glosses (rs-2,
+#: the reader-surface boundary over the W5 rendering failure — the
+#: W5 first run's finding: the account kind's meaning rendered nowhere,
+#: "16 paper owed" indistinguishable from "16 paper held"). A mapping
+#: from account KIND to its reader prose; the renderer owns the mapping
+#: (`render/chronicle.py::gloss_account_kind` — the verb lines' `{kind}`
+#: slot + the state line's apposition), the pack owns the words, and
+#: the load-time lint (`core/packlint/economy.py`) owns the shape: keys
+#: inside the `economy.accounts` vocabulary, values non-empty strings.
+#: An unglossed kind renders dry — the fallback law, rs-1's own family.
+#: The constant lives HERE (the engine mechanic vocabulary's single
+#: owner) so core, render, and the lint share one spelling — never a
+#: second constant (the D-024 anti-drift law).
+ACCOUNT_GLOSS_BLOCK: Final = "account_kinds"
 
 #: The three verbs' event types — the build's naming pass (INV-3-clean
 #: mechanic words; the armed pack's templates carry the lines, the

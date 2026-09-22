@@ -118,9 +118,10 @@ def _twin(
     year shrunk to 480 ticks and the calendar scaled inside the sub-year
     law (market 40, fair 120, seasons 120 — every entry < the year). The
     ablated twin is the COMPLETE ablation: the economy block, the entity
-    stocks AND the account-block actions go together (entity accounts or
-    account actions without the block are dead data, the lint's own
-    refusal; the doors widened at charcoalpaper, iter-189)."""
+    stocks, the account-block actions AND the account-kind gloss table
+    go together (entity accounts, account actions or a gloss table
+    without the block are dead data, the lint's own refusal; the doors
+    widened at charcoalpaper, iter-189; the table rs-2, iter-191)."""
     target = tmp_path / name
     shutil.copytree(PACK_DIR, target)
     rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
@@ -152,6 +153,17 @@ def _twin(
         ]
         (target / "actions.json").write_text(
             json.dumps(actions, indent=2), encoding="utf-8"
+        )
+        templates = json.loads(
+            (target / "templates.json").read_text(encoding="utf-8")
+        )
+        # rs-2 (iter-191): the account-kind gloss table rides the
+        # economy block — the COMPLETE ablation drops the read-side
+        # half with the rest (a table without the block is all dead
+        # data, the lint's own refusal)
+        templates.pop("account_kinds", None)
+        (target / "templates.json").write_text(
+            json.dumps(templates, indent=2), encoding="utf-8"
         )
     return target
 

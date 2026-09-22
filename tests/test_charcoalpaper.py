@@ -340,9 +340,15 @@ def test_the_reckoning_at_the_fifth_crossing(tmp_path: Path) -> None:
     assert sim.projection[MASTER]["account.coin"] == 2
     assert sim.projection[CHEST]["account.coin"] == 76
     sim.close()
-    # the tale carries the reckoning's two lines
+    # the tale carries the reckoning's two lines — rs-2 (iter-191): the
+    # fall's line carries the account-kind gloss (the debt's frame, the
+    # W5 rendering fix's own surface); the coin line stays dry (the
+    # unglossed kind's fallback law)
     tale = render_chronicle(events, pack, seed=42)
-    assert "Garrick is rid of 16 paper." in tale
+    assert (
+        "Garrick is rid of 16 paper owed to the guild's chest at Malby "
+        "since the starved winter." in tale
+    )
     assert "Garrick passes 16 coin to Malby, the market town." in tale
 
 

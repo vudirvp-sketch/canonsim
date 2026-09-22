@@ -314,18 +314,20 @@ charcoalpaper — the outstanding as account state + the lifecycle
 doors); a repeated failure is classified by boundary (canonical fact /
 discovery path / rendering), never "improve the prose".
 
-**The gate's state after the first run (iter-190, the record in
-`WORLD_TESTS.md` §9's W5 entry): the probe RAN clean (the isolation
-law held) and the reader did NOT reconstruct the persistent obligation
-— FAILED at the RENDERING boundary (the canonical fact present, the
-discovery path fragmentary, the account kind's meaning rendering
-nowhere); the gate STAYS SHUT until a clean pass.** The standing
-decision points for the owner: the boundary fix's route (the natural
-class: an account-kind gloss on the reader surface, the rs-1
-precedent, plus the arc's assembly — each a future row's own design),
-the human live-band re-run (the LLM reader is the instrument so far,
-n=2), and the humor / heartbreak probes (the same form, each on the
-owner's call).
+**The gate's state after the re-run (iter-191, the record in
+`WORLD_TESTS.md` §9's W5 entry): the rendering-boundary fix LANDED
+(rs-2 — the account-kind gloss on the reader surface, the rs-1
+precedent's own family: the pack's `account_kinds` words, the
+renderer's mapping, the lint's closure) and the biography probe's
+re-run PASSED CLEAN — the reader (glm, n=2, convergent) reconstructed
+the persistent obligation: the standing named a debt, the creditor
+named, the discharge's direction correct; the gate's named condition
+(one clean biography probe) MET — the new-worldbuilding embargo
+lifts.** The standing decision points for the owner: the human
+live-band re-run (the LLM reader is the instrument so far, n=2), the
+humor / heartbreak probes (the same form, each on the owner's call),
+and the covering residue (the +3 reckonings to the fund's covering
+still not one surface — the arc's assembly's own future row).
 
 ## 8. W6 — Genre tests
 

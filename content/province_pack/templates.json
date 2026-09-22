@@ -96,6 +96,9 @@
     "account_transferred": "{actor} passes {amount} {kind} to {target}.",
     "account_consumed": "{actor} is rid of {amount} {kind}."
   },
+  "account_kinds": {
+    "paper": "paper owed to the guild's chest at Malby since the starved winter"
+  },
   "knows": {
     "scene_{location}": "the lay of {location}",
     "details_{target}": "the details of {target}",

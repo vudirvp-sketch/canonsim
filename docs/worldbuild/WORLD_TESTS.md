@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the biography probe's first run (2026-09-22, iter-188/189/190; the evidence band named)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the biography probe's arc — the first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (2026-09-22, iter-188/189/190/191; the live human band open)
 
 `W5 — PARTIALLY CONFIRMED; evidence is author-side diagnostic, not an
 independent reader measurement.` The owner's reading of the anchor's
@@ -477,15 +477,11 @@ automatically a renderer feature):
 | the narrator's performance on the annual tale | separate brief→narrator test | the PRESENTATION_SPEC band; never W5's instrument |
 | packet contamination (the reader material pre-showing the answers) | test methodology | the isolation law below |
 
-The W5 form (the owner's call — the annual tale is a long-horizon
+The W5 form (the owner's call — the annual tale a long-horizon
 chronicler STRESS TEST, never the human-meaning experiment): THREE
-BOUNDED PROBES over the existing region state —
-
-- **biography**: one ordinary crisis with its aftermath;
-- **humor**: the reader extracts a locally natural joke themselves,
-  no presented answer;
-- **heartbreak**: a loss that changes relation / resource / status /
-  obligation / memory / future option.
+BOUNDED PROBES over the existing region state — biography, humor,
+heartbreak (the probes' definitions: WORLD_WORKPLAN §7, the plan's
+own row — the single-owner law, D-024).
 
 The blind-pass isolation law: the reader material contains ONLY
 committed reader-visible surface (the tale, the cards, the briefs) —
@@ -497,10 +493,8 @@ The gate (the owner's order): NO new worldbuilding candidates until
 one clean BIOGRAPHY PROBE runs on Garrick / the re-weigh over the
 canonical standing debt — does the reader independently reconstruct
 the persistent obligation? A repeated failure is classified by
-boundary — the fact missing from canonical state / the lawful
-discovery path missing / the fact poorly rendered — never "improve
-the prose" (the trap the authoring doctrine already names: mechanics
-gap → add lore → add rendering text → surface richness).
+boundary (canonical fact / discovery path / rendering — the law's
+record: WORLD_WORKPLAN §7), never "improve the prose".
 
 The biography probe's FIRST RUN (iter-190, the owner's continuation
 call): the reader did NOT reconstruct the persistent obligation —
@@ -545,12 +539,36 @@ compression weakened the persistence's temporal signal (seven
 reckonings inside three days — the readers read "various intervals");
 the reader class is an LLM (glm, n=2), never a human — the live band
 stays open. The disposition: NEVER "improve the prose" — the fix's
-route is the owner's call (the natural class: an account-kind gloss on
-the reader surface, the rs-1 precedent — the pack owns the words, the
-renderer owns the mapping — plus the arc's assembly; each a future
-row's own design); the humor and heartbreak probes follow the same
-form, on the owner's call.
+route the owner's call, the natural class an account-kind gloss on the
+reader surface (the rs-1 precedent) plus the arc's assembly; the route
+was called and landed (rs-2, iter-191 — the re-run below).
 
+The biography probe's RE-RUN (iter-191, the owner's route (а) call —
+the rs-2 account-kind gloss boundary landed first, TASKS' rs-2 row the
+design's record): PASSED CLEAN — the reader reconstructed the
+persistent obligation, n=2 convergent; the gate's named condition (one
+clean biography probe) MET. The instrument re-established from the
+recorded protocol (the first run's runner + transcripts outside the
+repo died with its session; the re-run's generator deterministic — the
+package byte-identical on re-run; the tale renders 86 lines vs the
+recorded 89 — the reconstruction's honest note, every substance shape
+verified: the same chain, timing, and state numbers, the factor's
+runner present per the protocol); the author audit pre-set BEFORE the
+reading (the pass bar fixed: the standing named a debt + the
+discharge's direction MANDATORY, the creditor strongly expected, the
+covering supporting); the blind reader the same class (glm, n=2
+independent; the runner + the transcripts outside the repo, Rule 9).
+The result, convergent: BOTH readings reconstruct the frame — the
+standing named a debt ("he owed 16 paper to the guild's chest in
+Malby since the starved winter"), the creditor named, the discharge's
+direction correct ("to settle this debt, he passed 16 coin"); the
+first run's symptoms GONE (no inventory reading, no "exchange"
+misreading); the facts still carried faithfully (16/3 → 0/8, the
+reckonings, the fatigue climb). The residue, honestly: the COVERING
+only partially connected in both readings (the +3 reckonings read as
+periodic income — the arc's assembly's own future row); the reader
+class still an LLM and the twin's year-compression caveat unchanged —
+the live human band stays open (the owner's call).
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
