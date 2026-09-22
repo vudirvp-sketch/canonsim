@@ -14,6 +14,11 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-198 · 2026-09-23 · abfalsifier — the mech-2 A/B falsifier's measurement RUN (the owner's queue-top call; the runner + transcripts outside the repo, Rule 9): 6 pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus, whole-file protocol — the gate moved NO metric (success 8/18 both arms, lint refusals 0, patches tiny); the cognitive premise REFUTED at scale (conditional-on-parse 8/8 vs 8/9 — find/scope not the binding constraint)
+the measured bottleneck: the whole-file emission wall (bracket drift in director.hooks, 10/15 + 9/15 invalid) + 73% silent notes paraphrase; the rename 0/6 (the dangling-tag lint gap confirmed) — TECH_NOTES §17 the numbers; the structured-patch PROPOSAL re-scoped to emission
+reliability, fate the owner's call; 5 paths doc-only (TECH_NOTES §17 + the intake-37 block + TASKS + STATUS + worklog); the covering series left to the next iteration; 2026+1 + ruff + docguard clean both ends; iter-189 evicted per the cap
+
+---
 iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + the closure pass (the owner's «старые
 висящие позакрывал» call, D-184's four questions at HEAD cd64ce8): every parked premise CONFIRMED-current
 (parse-2/st-2/st-5/scav-1/pack-3/bg-6/doc-2/chron-2 — no gate moved) — zero closures-as-dead; the done rows
@@ -65,10 +70,3 @@ re-weigh RAN clean (the isolation law held, the author audit pre-set) and FAILED
 the facts carried (the 16 standing, the flows, the fall, the 16 coin to Malby) but NO obligation frame (the paper read as
 inventory, the fall+collection as an "exchange"); the gate stays shut, the fix's route the owner's call (the rs-1 account-gloss
 class + the arc's assembly); 5 paths, doc-only, the runner + transcripts outside the repo (Rule 9); 2011+1 + ruff + docguard clean; iter-181 evicted
-
----
-iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the owner's W5-decomposition
-call, finding 2): the paper sixteen as account state riding the seat + the three lifecycle doors (the fall's
-covered-fund gate, the collection's, the succession's — the player-scaled arm's first arming) + the W5 record
-with the decomposition; test_charcoalpaper.py +8, three test files' pins widened; 13 paths; 2011+1 + ruff +
-docguard clean; iter-180 evicted

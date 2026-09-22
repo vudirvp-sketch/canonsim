@@ -1428,3 +1428,75 @@ while keeping each causal-change event's own line. The bounded
 deterministic-aggregation experiment rides `chron-2` (TASKS), PARKED
 until after the W5 probes — the tale is a long-horizon chronicler
 stress test, never the human-meaning instrument itself.
+
+## 17. mech-2 A/B falsifier: the impact gate vs bare edits (measured 2026-09-23, iter-198)
+
+STATUS Next step 1's measurement (the owner's call): agent success
+rate, patch size, and lint-fail rate on a realistic pack-edit task
+set, impact-gated vs bare. Instrument: `mechanics impact --path/--ref`
+(iter-196). Runner + transcripts outside the repo (Rule 9); subject
+glm-4-plus via the sandbox API, thinking disabled, `max_tokens` 32000
+(the default 4096 cap truncates a 78 KB rules.json re-emission — the
+pilot's finding), whole-file output protocol (the Write-tool pattern:
+the agent returns the complete edited file; the diff then measures the
+real delta after the operator's mechanical indent-2 normalization,
+key order preserved). ~1.09 M prompt + 0.60 M completion tokens for
+the 36 calls, median latency 208 s.
+
+The task set (6 owner-voice asks on the tavern pack, each with a
+programmatic oracle + the repo's own admission lint): T1 stagnation
+entropy floor 5→8; T2 watch rotation twice-daily→once at midday; T3
+the `guard_suspicious_of_pc` rename (the cross-file rename-safety
+case); T4 a new barkeep urgency entry; T5 the drop_break template
+gains `{actor}`; T6 the watcher's escalation band 50→60 at both its
+declared sites (the doc-check triggers' own 50 must NOT move). The
+gated arm's prompt additionally carried the impact block for the most
+specific path the task's own words name (the gate's production form:
+the operator injects the reader index; the bare arm got the identical
+files and task text). n=3 per cell, 36 calls, 0 transport failures.
+
+| metric | bare | gated |
+|---|---|---|
+| success (asked edit + lint) | 8/18 (44%) | 8/18 (44%) |
+| success (strict: zero collateral) | 5/18 (28%) | 4/18 (22%) |
+| rules.json round-trip valid | 5/15 (33%) | 6/15 (40%) |
+| templates.json round-trip valid | 3/3 | 3/3 |
+| semantic success conditional on parse | 8/8 | 8/9 |
+| lint refusals on landed edits | 0 | 0 |
+| patch class (normalized diff) | tiny, 2–22 lines | tiny, 2–10 lines |
+
+Three failure classes, both arms, the gate moving none:
+
+- **The emission wall.** 10/15 bare and 9/15 gated rules.json
+  re-emissions failed structurally — bracket drift (`]` closing an
+  open `{`) at two RECURRING sites inside `director.hooks` (the
+  options-weight nesting ~char 31k; the last hook's close into `arcs`
+  ~char 42k — the deepest subtree, intake-37's hotspot). The wall is
+  serialization mechanics, not cognition; a reader index cannot touch
+  it.
+- **Silent note paraphrase.** 8/11 valid rules emissions (73%) reworded
+  at least one authored `notes` string (e.g. "the DIR-4" → "DIR-4", a
+  4-char silent prose mutation). Passes the lint, passes the goldens
+  (notes render nowhere), passes a loose oracle — the
+  mutation-blindness law's (TEST_PLAN §9) newest instance family.
+- **The rename consistency drop.** T3 never succeeded (0/6): the wall
+  broke 5 emissions; the one valid gated cell renamed the rules.json
+  key and silently dropped the actions.json seeding tag the gate's own
+  rename-safety set had named (n=1; the pre-run probe confirmed the
+  dangling tag passes the admission lint).
+
+Verdict: the injected gate moved NO metric — REJECTED as an
+edit-support intervention at the current scale for this model class.
+The premise it was filed under (find/scope as the bottleneck) is
+REFUTED at this scale: conditional on a valid round-trip both arms
+land the asked edit ~100%. The measured bottleneck is the whole-file
+emission pattern itself — the tool-less API-agent class's failure,
+not the file-tool agents' (the 97%-surgical history stands; in-place
+edit tools never re-emit). The structured-patch admission machinery's
+ORIGINAL motivation weakens (a cognitive crutch is not needed); a
+DIFFERENT measured motivation emerges (emission reliability + silent
+authored-prose drift for the API-agent class). The proposal's fate
+stays the owner's call. Honest limits: n=3/cell (the noise band is
+visible per-task); one model class; the current pack scale only — the
+5–10× scaling premise is untested above it; the whole-file protocol
+cannot credit the edit-tool agents' mechanical surgical advantage.

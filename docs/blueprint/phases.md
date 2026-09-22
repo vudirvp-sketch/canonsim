@@ -3216,7 +3216,11 @@ tavern < grim < province) HOLDS under both measures.
 
 *Unknown (working premise, not fact):* the `<10%`-ready volume
 framing (the owner's own; the SoW horizon unbuilt); the 5–10×
-cognitive-load scaling — the A/B measurement the only falsifier;
+cognitive-load scaling — **measured 2026-09-23 (iter-198's A/B
+falsifier, TECH_NOTES §17): REFUTED at the current scale for the
+tested model class** (conditional on a valid round-trip, bare agents
+land the asked edit 8/8 — find/scope is not the binding constraint;
+the emission mechanics are; untested above the current pack scale);
 future-context softening (undecidable).
 
 *The documentation schema (the research→implementation routing law,
@@ -3234,11 +3238,18 @@ untouched; its design material: bounded causal traversal, CEGAR
 refinement, the minimal-witness fallback — the note's extracted
 mechanisms, never copied solutions). TEST_PLAN §9 gains the
 mutation-adequacy claim shape (the prism this session's probe
-instantiated). The structured-patch admission machinery and the
-edit-shape guard stay PROPOSAL behind the A/B falsifier (the
-97%-surgical history weakened the urgency — measurement before
-mechanism, scav-1's precedent). Zero format changes; the build queue
-otherwise UNTOUCHED.
+instantiated). **The A/B falsifier RAN (iter-198, the owner's call;
+TECH_NOTES §17 the numbers' owner): the injected impact gate moved
+none of the three metrics (success 8/18 both arms, lint refusals 0,
+patches tiny); the measured failure mass sits in the whole-file
+emission pattern itself (the bracket-drift wall in `director.hooks`
++ 73% silent notes paraphrase) — the tool-less API-agent class's
+failure, not the file-tool agents'.** The structured-patch admission
+machinery and the edit-shape guard stay PROPOSAL — the original
+cognitive-crutch motivation weakened, an emission-reliability
+motivation measured in its place; the fate the owner's call
+(scav-1's measurement-before-mechanism precedent stands). Zero
+format changes; the build queue otherwise UNTOUCHED.
 
 ## 7. Cross-cutting (the questions that span phases)
 

@@ -1,36 +1,42 @@
-Iteration: iter-197 (`iter-197-revalid2` — the second standing-queue
-revalidation + the closure pass, the owner's «продолжай… старые задачи
-"висящие" позакрывал, убедившись что они актуальны» call): all TWELVE
-standing rows audited with D-184's four questions at HEAD — every
-parked premise code-verified CURRENT (parse-2: no multi-intent datum
-in the live corpus + no frontend consumer; st-2/st-5: no
-promotion/container usage across the five packs, grep-verified; scav-1:
-no derived-store size census on record; pack-3: no authored slot
-opened; bg-6: the D-055 deferral stands; doc-2: not due until the
-December quarterly; chron-2: the W5 trio's heartbreak + live-band
-stations open, WORLD_TESTS §9) — ZERO closures-as-dead, every gate
-still stands; the done rows COLLAPSED to the minimal current-state form
-(engine-1, mech-2 — the landing detail the D-rows + git + the owning
-specs', D-024); the row-state ROT found + fixed: ROADMAP §2's phase-6
-cell still called res-1/since-1 "open build rows" (both landed
-iter-146/147) + README's status block still called engine-1 "the
-standing row" (landed iter-177) and missed bg-9/the world track.
-Doc-only, zero code touch.
+Iteration: iter-198 (`iter-198-abfalsifier` — the mech-2 A/B falsifier's
+measurement, the owner's «верх очереди не изменился: (1) A/B
+фальсификатор mech-2 — измерение на операторской стороне (Rule 9),
+инструмент готов» call): the measurement RAN operator-side — 6
+realistic pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus
+(whole-file protocol, max_tokens 32k, thinking disabled; runner +
+transcripts outside the repo, Rule 9; ~1.09M prompt + 0.60M completion
+tokens, 0 transport failures). The verdict: the injected impact gate
+moved NONE of the three named metrics (success 8/18 both arms, lint
+refusals 0, patches tiny); the cognitive premise REFUTED at the
+current scale (conditional on a valid round-trip: 8/8 bare vs 8/9
+gated — find/scope is not the binding constraint); the measured
+bottleneck is the whole-file emission pattern itself: the bracket-
+drift wall in `director.hooks` (10/15 bare, 9/15 gated rules.json
+re-emissions invalid, two recurring drift sites) + 73% silent notes
+paraphrase in the valid emissions; the rename task 0/6 (the one valid
+gated cell dropped the cross-file seeding tag the gate itself had
+named; the lint blind to it — the pre-run probe agrees). The
+structured-patch PROPOSAL re-scoped to emission reliability (the
+API-agent class), fate the owner's call. Doc-only, zero code touch;
+the numbers: TECH_NOTES §17.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2026 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT cd64ce8 — 2026+1 green, ruff
+the env pin; verified at BASE_COMMIT 808ef89 — 2026+1 green, ruff
 clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: docs/TASKS.md + docs/ROADMAP.md + README.md + STATUS.md +
-worklog.md — 5 paths (the revalidation pass: the queue rows + the
-owning docs' row-state rot + the state docs).
+Scope: docs/TECH_NOTES.md + docs/blueprint/phases.md + docs/TASKS.md +
+STATUS.md + worklog.md — 5 paths (the measurement's residue routing:
+the numbers' owner + the intake-37 premise line + the mech-2 row +
+the state docs).
 Track A and track B untouched this session — the world track a
-separate track (D-186, never a second queue). The prior iterations'
-record: iter-196 (mech2), iter-195 (bottleneck), iter-194 (humorgloss),
-iter-193 (intake36), iter-192 (humorprobe), iter-191 (accountgloss).
-The detail lives in the worklog + git.
+separate track (D-186, never a second queue); the covering series
+(STATUS Next step 1) left to the next iteration by the owner's
+«если в одну итерацию не уместишься» instruction — the A/B consumed
+the iteration. The prior iterations' record: iter-197 (revalid2),
+iter-196 (mech2), iter-195 (bottleneck). The detail lives in the
+worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -87,27 +93,28 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-197 DONE: the second queue revalidation + the closure pass (the
-owner's call, D-184's form) — every parked premise held at HEAD, ZERO
-closures-as-dead; the engine-1 + mech-2 done rows collapsed to the
-minimal form; the ROADMAP §2 + README row-state rot fixed. iter-196
-before it: the mech-2 tooling spike landed (`mechanics
-impact --path/--ref` — the derived reader index + the reverse query,
-the owner's row-opening call). iter-191: the biography re-run PASSED
-CLEAN — the embargo lifted (stands).**
+**iter-198 DONE: the mech-2 A/B falsifier's measurement (the owner's
+call, STATUS item 1) — the gate moved none of the three metrics
+(success 8/18 both arms, lint refusals 0, patches tiny); the cognitive
+premise refuted at the current scale; the whole-file emission wall +
+73% silent notes paraphrase measured instead; the structured-patch
+PROPOSAL re-scoped to emission reliability, fate the owner's call
+(TECH_NOTES §17). The covering series (the queue's item 2) NOT
+STARTED — the A/B consumed the iteration, per the owner's break-clean
+instruction.**
 
-1. The mech-2 A/B falsifier (the owner's call, now armed by the
-   tool): the measurement — agent success rate, patch size, and
-   lint-fail rate on a realistic pack-edit task set, impact-gated vs
-   bare edits; the structured-patch admission machinery + the
-   edit-shape guard stay PROPOSAL behind the same falsifier (the
-   97%-surgical history — no present failure to fix); the runner
-   operator-side (Rule 9).
-2. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
+1. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
    owner's call, WORLD_TESTS §9's W5 entry's named remainder): the
    +3 reckonings' covering, the shave → starvation arc, and now the
    withhold's own joke — the contradiction still not ONE surface;
    never "improve the prose".
+2. The structured-patch PROPOSAL's call (the A/B's fresh material,
+   the owner's decision): the emission-reliability motivation measured
+   (the wall + the silent notes paraphrase, the API-agent class) vs
+   the weakened cognitive-crutch motivation — open, close, or park
+   with the re-scoped rationale; the rename-safety lint gap (the
+   dangling hook tag passes admission) a separable small candidate if
+   the owner wants the cheapest slice.
 3. The W5 trio's remaining stations (each on the owner's call,
    WORLD_WORKPLAN §7's decision points): the heartbreak probe (its
    design material carries intake-36's C03+F02 consult) and the human

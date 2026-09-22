@@ -113,12 +113,17 @@ TEST_PLAN §9's claim packet)
   packlint family, D-118 extended to the source), the exact-name reverse
   query (the rename-safety set), the indexed-matrix pointers (D-024);
   bounded one-hop traversal; tooling-only, stdlib-only (D-012), zero
-  runtime change. Residue behind the A/B falsifier (owner-gated): the
-  structured-patch admission machinery + the edit-shape guard stay
-  PROPOSAL. Detail: the iter-196 record + D-197 + git.
+  runtime change. The A/B falsifier RAN (iter-198, the owner's call;
+  TECH_NOTES §17): the injected gate moved none of the three metrics,
+  the cognitive premise refuted at scale, the whole-file emission wall
+  + silent notes paraphrase measured instead. The structured-patch
+  admission machinery + the edit-shape guard stay PROPOSAL — motivation
+  re-scoped to emission reliability (the API-agent class), fate the
+  owner's call. Detail: the iter-196/198 records + D-197 + git.
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-198 · 2026-09-23 · abfalsifier (mech-2) — the A/B falsifier's measurement RUN (the owner's call, STATUS item 1): 6 realistic pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus, whole-file protocol (Rule 9, runner + transcripts outside the repo) — the gate moved NO metric (success 8/18 both arms, lint refusals 0, patches tiny); the cognitive premise REFUTED at scale (conditional-on-parse 8/8 vs 8/9); the measured bottleneck: the whole-file emission wall (bracket drift in director.hooks, 60–67%) + 73% silent notes paraphrase; the structured-patch PROPOSAL re-scoped to emission reliability, fate the owner's call — TECH_NOTES §17 + the intake-37 block update; doc-only, zero code touch
 - iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + the closure pass (the owner's call, D-184's form): all twelve standing rows audited at HEAD `cd64ce8` — every parked premise CONFIRMED-current (no gate moved), zero closures-as-dead; the done rows engine-1 + mech-2 collapsed to the minimal form (D-024); the ROADMAP §2 res-1/since-1 "open rows" rot + the README engine-1/bg-9 rot fixed; 5 paths doc-only
 - iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's row-opening call): `mechanics impact --path/--ref` landed (the derived reader index — the AST scan, D-118 extended to the source; the exact-name reverse query; the matrix pointers), the §9 claim block + 8 pins; the structured-patch machinery + the edit-shape guard stay PROPOSAL behind the A/B falsifier (now armed by the tool)
 - iter-195 · 2026-09-22 · bottleneck (intake-37) — the agent-bottleneck research note routed as a mandatory artifact: PARTIALLY CONFIRMED (formats + tooling direction confirmed; the full-file-rewrite claim REFUTED by the measured 97%-surgical history; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered); the research/intervention documentation schema (scratch/ the interventions folder); one row convened (mech-2) + TEST_PLAN §9's mutation prism — phases.md §6's intake-37 block
@@ -128,7 +133,6 @@ TEST_PLAN §9's claim packet)
 - iter-191 · 2026-09-22 · accountgloss (rs-2) — the W5 rendering-boundary fix landed (the account-kind gloss on the reader surface: the pack's `account_kinds` words + the renderer's mapping + the lint's closure) and the biography probe's re-run PASSED CLEAN — the reader reconstructed the persistent obligation, n=2 convergent; the gate's named condition met (WORLD_TESTS §9's W5 entry)
 - iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run: the biography probe on Garrick/the re-weigh RAN clean and FAILED at the rendering boundary (the reader did not reconstruct the persistent obligation; the gate stays shut, the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the paper sixteen as account state riding the seat + the three lifecycle doors; the W5 record with the owner's decomposition — WORLD_TESTS §9's W5 entry)
-- iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (rs-1: the `knows` tables in all five packs + the renderer's matcher; the routine-flood finding → TECH_NOTES §16, chron-2 parked)
 
 ## Track B — background (evenings, foreign canon)
 
