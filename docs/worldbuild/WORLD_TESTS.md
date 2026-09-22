@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition (2026-09-22, iter-188/189; the evidence band named)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the biography probe's first run (2026-09-22, iter-188/189/190; the evidence band named)
 
 `W5 — PARTIALLY CONFIRMED; evidence is author-side diagnostic, not an
 independent reader measurement.` The owner's reading of the anchor's
@@ -501,6 +501,55 @@ boundary — the fact missing from canonical state / the lawful
 discovery path missing / the fact poorly rendered — never "improve
 the prose" (the trap the authoring doctrine already names: mechanics
 gap → add lore → add rendering text → surface richness).
+
+The biography probe's FIRST RUN (iter-190, the owner's continuation
+call): the reader did NOT reconstruct the persistent obligation —
+FAILED at the RENDERING boundary; the gate stays shut until a clean
+pass. The instrument: the bounded re-weigh run over committed reader
+surfaces only — the sparse twin (macro 480, calendar 240/360/420: the
+sub-year law held, the routine minimized so the probe never measures
+chron-2's flood), seed 42, the full chain (the tally read at the
+crofts → the walks to Malby → the fifth crossing covering the paper,
+fund 18 → the FALL → the COLLECTION → two aftermath crossings; the
+factor's runner present — the crisis's authored shape); the package =
+the tale (89 lines) + Garrick's state records (opening paper 16 /
+coin 3; close paper 0 / coin 8 with the full mention history) + three
+briefs (the player's crisis — the fall perceived, `the_paper_fell`;
+Garrick's crisis — fall + collection, his voice; the player's close);
+the blind reader = the sandbox API engine (glm), n=2 independent
+readings, the isolation law held (the author audit with a pre-set
+pass bar prepared separately BEFORE the reading; the runner + the
+transcripts outside the repo, Rule 9; the instrument deterministic —
+byte-identical on re-run). The result, convergent across both
+readings: the FACTS carried faithfully — the 16 standing at the start,
+the seven +3 reckonings, the fall, the 16 coin to Malby, the tally
+carried, even the fatigue climb — but NO obligation frame anywhere:
+neither reading names the paper a debt, an owing, or a liability; both
+read the fall + the collection as an "exchange of 16 paper for 16
+coin with Malby" — the payment's direction lost, the creditor
+unnamed, the fund's covering unconnected; the committed hints did not
+register (the voice "Weighed short twice. Never again.", the tally
+line "shaved is shaved", the fair's "the guild's weighing" — none
+entered either biography). The classification (the boundary law): the
+canonical fact PRESENT (iter-189's landing — both readers SAW
+`account.paper: 16`); the discovery path FRAGMENTARY (no surface
+assembles the arc — the standing number, the climbing fund, the
+covering, the discharge, the payment — the reader must connect five
+dry facts with no frame); the RENDERING boundary the failure's owner:
+the account kind's meaning renders nowhere — the reader cannot
+distinguish "16 paper owed" from "16 paper held" (the inventory
+reading the symptom), the lifecycle doors render as two unconnected
+verb lines (the cause chain in canon, never on the surface), the
+creditor renders as a location name. Honest caveats: the twin's year
+compression weakened the persistence's temporal signal (seven
+reckonings inside three days — the readers read "various intervals");
+the reader class is an LLM (glm, n=2), never a human — the live band
+stays open. The disposition: NEVER "improve the prose" — the fix's
+route is the owner's call (the natural class: an account-kind gloss on
+the reader surface, the rs-1 precedent — the pack owns the words, the
+renderer owns the mapping — plus the arc's assembly; each a future
+row's own design); the humor and heartbreak probes follow the same
+form, on the owner's call.
 
 ### OPEN — Ancient Network back-propagation
 

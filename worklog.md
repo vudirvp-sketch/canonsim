@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run (the owner's continuation call): the biography probe on Garrick/the
+re-weigh RAN clean (the isolation law held, the author audit pre-set) and FAILED at the RENDERING boundary — glm n=2 convergent:
+the facts carried (the 16 standing, the flows, the fall, the 16 coin to Malby) but NO obligation frame (the paper read as
+inventory, the fall+collection as an "exchange"); the gate stays shut, the fix's route the owner's call (the rs-1 account-gloss
+class + the arc's assembly); 5 paths, doc-only, the runner + transcripts outside the repo (Rule 9); 2011+1 + ruff + docguard clean; iter-181 evicted
+
+---
 iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the owner's W5-decomposition
 call, finding 2): the paper sixteen as account state riding the seat + the three lifecycle doors (the fall's
 covered-fund gate, the collection's, the succession's — the player-scaled arm's first arming) + the W5 record
@@ -68,11 +75,4 @@ call firing the deferred trigger): the 44-card families re-confirmed at HEAD,
 zero new consumers, the ref-file record still deferred; the four precisions
 riding the intake block; 5 paths, doc-only; 1962+1 + ruff + docguard clean
 both ends; iter-172 evicted
-
----
-iter-181 · 2026-09-21 · intake-34 — the ultimate research corpus routed (D-194): the
-map (the block FRESH; the Dense hybrid already intake-30; the doctrine the standing
-discipline's live form), the drop-in REFUSED (parallel layer), the capability +
-math-mechanism cards parked (Experiment 0), the empty-ablation rule + the allowlist
-entry; 7 paths, doc-only; 1962+1 + ruff + docguard clean both ends; iter-171 evicted
 

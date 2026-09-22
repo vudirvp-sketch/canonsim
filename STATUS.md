@@ -1,75 +1,55 @@
-Iteration: iter-189 (`iter-189-charcoalpaper` — the world track, the
-charcoal debt's STANDING STATE; the owner's W5-decomposition call,
-finding 2: the standing debt an UPSTREAM WORLD GAP, never a renderer
-issue — debt-1 gave the accounts + the flows, campaccount the
-arithmetic, freightvol the volume; this row closes the standing state
-that stayed authored, NO generic economy subsystem — one specific debt
-brought to its full lifecycle): the paper SIXTEEN as canonical residue
-state over the res-1 substrate, pure pack data, zero core (the KI#87
-precedent class) — a third account kind `paper` stocked on the master
-16 (the OUTSTANDING PRINCIPAL as live state; the stock's entity IS the
-SEAT — the debt rides whoever masters the burn, the hills'
-unlapseable reading made arithmetic: the accounts never decay, so once
-named, stays named until a canon event moves the stock). The
-holder/carrier/seat bindings one read: the guild's chest the coin's
-destination at the fall, the tally-stick the badge on the same hand,
-the secret the_camps_word the counter-record. The LIFECYCLE DOORS —
-the account resolver's player-scaled arm armed for the FIRST time in
-this pack: `reckon_paper` the FALL (consume paper 16, the
-covered-fund gate coin 16 — the paper only falls against a fund that
-covers it, the escape-by-grief path forbidden by construction),
-`render_fund` the COLLECTION (transfer coin 16 to the chest at Malby,
-the geography gate — the fund renders at the beam's town),
-`pass_the_seat` the SUCCESSION (transfer paper to the successor's
-declared receiving stock, the value-0 existence gate — the stockless
-target refused softly; the frozen-force counterfactual the door's own
-removal). The no-amortization law structural: no flow touches the
-paper (the service the weight, never the fall); the fund 3→18 crosses
-the paper at the fifth reckoning and the fall is then a LAWFUL EVENT,
-no longer an authored lump. With it, the W5 RECORD with the owner's
-decomposition (WORLD_TESTS §9's W5 entry): the verdict `PARTIALLY
-CONFIRMED; evidence is author-side diagnostic, not an independent
-reader measurement`, the five findings split by owner (standing debt →
-world/content canonicalization — BUILT here; raw ids → engineering —
-FIXED iter-188; the watch/document-check flood → chronicler legibility
-— recorded, chron-2 parked with the invariant; the narrator → the
-brief→narrator test's own band; packet contamination → the isolation
-law), the THREE BOUNDED PROBES as W5's form (the annual tale = stress
-test only), the blind-pass isolation law, and the GATE: no new
-worldbuilding candidates until one clean biography probe runs on
-Garrick/the re-weigh over this canonical standing debt — a repeated
-failure classified by boundary (canonical fact / discovery path /
-rendering), never "improve the prose". Honest residues (economy.notes
-the mirror): the renegotiation stays authored (the guild's re-pricing,
-the factor gateless); the tally's handing-over un-armed (the crews'
-recognition — the badge follows the camp's word, never the door); the
-over-payment state reachable (the reversed door order — the
-substrate's no-transaction law); the re-weigh's SALE still un-armed
-(the heap's bloom drain, the withhold's own future row).
+Iteration: iter-190 (`iter-190-bioprobe` — the world track, the W5
+GATE's first run; the owner's «доделывай что осталось от 189»
+continuation call firing STATUS Next step's item 1): the BIOGRAPHY
+PROBE on Garrick / the re-weigh over the canonical standing debt —
+RAN CLEAN (the blind-pass isolation law held: the reader package =
+committed reader-visible surface only — the tale + the state records +
+the briefs of the re-weigh scene; the author audit with a pre-set pass
+bar prepared separately BEFORE the reading) and the reader did NOT
+reconstruct the persistent obligation: FAILED at the RENDERING
+boundary. The instrument: the bounded re-weigh run (the sparse twin —
+macro 480, calendar 240/360/420, the sub-year law held, the routine
+minimized so the probe never measures chron-2's flood; seed 42, the
+full chain: the tally read → the walks to Malby → the fifth crossing
+covering the paper → the FALL → the COLLECTION → the aftermath) +
+the blind reader (the sandbox API engine, glm, n=2 independent
+readings, convergent; the runner + the transcripts OUTSIDE the repo,
+Rule 9; the instrument deterministic, byte-identical on re-run). The
+result: the FACTS carried faithfully (the 16 standing, the seven +3
+reckonings, the fall, the 16 coin to Malby) but NO obligation frame —
+neither reading names the paper a debt; both misread the fall +
+collection as an "exchange of 16 paper for 16 coin with Malby" (the
+payment's direction lost, the creditor unnamed). The classification:
+the canonical fact PRESENT (iter-189's landing — both readers SAW
+`account.paper: 16`), the discovery path FRAGMENTARY (no surface
+assembles the arc), the RENDERING boundary the failure's owner (the
+account kind's meaning renders nowhere — "16 paper owed"
+indistinguishable from "16 paper held"; the doors two unconnected
+verb lines; the creditor a location name). The gate STAYS SHUT until
+a clean pass; the fix's route the owner's call (the natural class:
+an account-kind gloss on the reader surface, the rs-1 precedent —
+never "improve the prose"); the reader class an LLM, the live human
+band open. The record: WORLD_TESTS §9's W5 entry + WORLD_WORKPLAN
+§7's gate state.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2011 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT fd53712 BEFORE working — 1996+1
-green, ruff clean, docguard clean — and re-verified after each
-iteration's diff: 2003+1 at iter-188, 2011+1 at iter-189) ·
+the env pin; verified at BASE_COMMIT 1142c0e BEFORE working — 2011+1
+green, ruff clean, docguard clean — and re-verified after iter-190's
+diff: 2011+1) ·
 Date: 2026-09-22 ·
-Scope: content/province_pack/rules.json + entities.json + actions.json +
-templates.json + tests/test_charcoalpaper.py + tests/test_debt1.py +
-tests/test_campaccount.py + tests/test_freightvol.py (the ablation
-twins widened to the three-half law — the account actions join the
-economy block and the stocks at ablation; the census pins widened to
-the paper kind; the drain-door pin narrowed to the bloom kind — the
-arming's corpus price) + docs/worldbuild/WORLD_TESTS.md +
-docs/worldbuild/WORLD_WORKPLAN.md + docs/worldbuild/ANCHOR_REGION.md +
-STATUS.md + worklog.md + docs/TASKS.md — 13 paths (the embodiment form
-— iter-185's own shape; over the 3–5 soft limit, noted per AGENTS
-§2.3). Track A and track B untouched this session — the world track a
+Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md +
+STATUS.md + worklog.md + docs/TASKS.md — 5 paths, doc-only (the
+measurement's record; the probe's runner + reader material +
+transcripts outside the repo per Rule 9 — the live-session class,
+D-046). Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-188 (knowsgloss), iter-187 (freightvol), iter-186
-(campaccount), iter-185 (tallyread), iter-184 (charcoal1), bg-9
-(apiprose), iter-183 (residues34), iter-182 (intake-35), iter-181
-(intake-34), iter-180 (round 6). The detail lives in the worklog + git.
+record: iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
+(freightvol), iter-186 (campaccount), iter-185 (tallyread), iter-184
+(charcoal1), bg-9 (apiprose), iter-183 (residues34), iter-182
+(intake-35), iter-181 (intake-34), iter-180 (round 6). The detail
+lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -126,24 +106,26 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-189 DONE: the charcoal debt's STANDING STATE canonical (the
-paper sixteen as account state riding the seat + the lifecycle doors —
-the fall's covered-fund gate, the collection's geography gate, the
-succession's receiving-stock gate; the W5 record with the owner's
-decomposition landed — WORLD_TESTS §9's W5 entry, WORLD_WORKPLAN §7's
-form + gate). iter-188 DONE before it: the told-fact gloss boundary
-(rs-1) + the routine-flood finding (TECH_NOTES §16, chron-2 parked).**
+**iter-190 DONE: the W5 biography probe's first run (the owner's
+continuation call) — RAN clean, the reader did NOT reconstruct the
+persistent obligation: FAILED at the RENDERING boundary (the canonical
+fact present, the discovery path fragmentary, the account kind's
+meaning rendering nowhere — the inventory reading the symptom, the
+fall + collection misread as an exchange); the gate STAYS SHUT.
+iter-189 DONE before it: the charcoal debt's standing state (the
+paper sixteen as account state riding the seat + the lifecycle
+doors).**
 
-1. THE GATE (the owner's order, WORLD_TESTS §9's W5 entry): no new
-   worldbuilding candidates — first ONE CLEAN BIOGRAPHY PROBE on
-   Garrick/the re-weigh over the canonical standing debt: prepare the
-   ISOLATED reader material (committed reader-visible surface only —
-   the tale/cards/briefs of the re-weigh scene; never ANCHOR_REGION,
-   authorial interpretations, or intended answers), run the blind
-   reader, and check whether the persistent obligation is
-   independently reconstructed; a failure is classified by boundary
-   (canonical fact / discovery path / rendering), never "improve the
-   prose". The humor and heartbreak probes follow the same form.
+1. THE GATE'S ROUTE (the owner's call, WORLD_TESTS §9's W5 entry +
+   WORLD_WORKPLAN §7's gate state): the rendering-boundary fix's
+   design — the natural class an account-kind gloss on the reader
+   surface (the rs-1 precedent: the pack owns the words, the renderer
+   owns the mapping) plus the arc's assembly (the standing number,
+   the climbing fund, the covering, the discharge, the payment — one
+   reader-side arc); each a future row's own design, never "improve
+   the prose". On the same call: the human live-band re-run (the LLM
+   reader the instrument so far, n=2, convergent) and the humor /
+   heartbreak probes (the same form, each on the owner's call).
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

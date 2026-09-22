@@ -113,6 +113,7 @@ claim packet)
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-190 · 2026-09-22 · bioprobe — the W5 gate's first run: the biography probe on Garrick/the re-weigh RAN clean and FAILED at the rendering boundary (the reader did not reconstruct the persistent obligation; the gate stays shut, the fix's route the owner's call — WORLD_TESTS §9's W5 entry)
 - iter-189 · 2026-09-22 · charcoalpaper — the charcoal debt's standing state (the paper sixteen as account state riding the seat + the three lifecycle doors; the W5 record with the owner's decomposition — WORLD_TESTS §9's W5 entry)
 - iter-188 · 2026-09-22 · knowsgloss — the told-fact gloss boundary (rs-1: the `knows` tables in all five packs + the renderer's matcher; the routine-flood finding → TECH_NOTES §16, chron-2 parked)
 - iter-187 · 2026-09-22 · freightvol — the camp's freight volume: the withhold's
