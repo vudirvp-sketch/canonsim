@@ -1,48 +1,44 @@
-Iteration: iter-195 (`iter-195-bottleneck` — intake-37, the owner's
-mandatory-research-artifact call over the uploaded agent-bottleneck
-research note): the research ROUTED whole — every measurement
-re-verified at HEAD, the verdict PARTIALLY CONFIRMED: the formats +
-the tooling-first direction CONFIRMED (zero format change — JSONL +
-the four-file pack stand; matrix/doctor/checkpoints/arch-tests/
-docguard all present and green), the full-file-rewrite claim REFUTED
-by the measured history (97% of 120 pack-JSON touches surgical, 82%
-≤10%, the three rewrites early-era; AGENTS §2 the standing defence),
-the mutation-adequacy gap upgraded from proposal to MEASURED FACT
-(the session's probe: the admission lint refuses the structural
-breaks 4/6 but ACCEPTS value mutations 2/6 — a director
-release_threshold 10→4, an urgency probability 40→55 — and the
-tavern golden is blind to both; TEST_PLAN §9's new path-bound law +
-the mutation-prism row the grammar), the numeric corrections
-recorded (≈614 KB reproduces under no measure; the density figures
-extractor-dependent, the ordering claim holds); the
-research/intervention documentation SCHEMA landed (residue →
-phases.md §6, interventions → scratch/ gitignored, adoptions →
-DECISIONS, tasks → TASKS — the intake-37 block the record); ONE row
-convened on the owner's call (mech-2 — the agent impact surface,
-R03's first named consumer, its falsifier the A/B measurement); the
-structured-patch machinery + the edit-shape guard stay PROPOSAL
-behind the same falsifier.
+Iteration: iter-196 (`iter-196-mech2` — the mech-2 tooling spike, the
+owner's «открывай mech 2 и прочее связанное» call over STATUS Next step
+1's tooling-spike arm): the agent impact surface LANDED —
+`mechanics impact --path <pack path> | --ref <name>` — the derived
+reader index (an AST scan over core/brief/render/cli/sim + the packlint
+family for rules-rooted literal accesses — literal chains,
+`x["rules.json"]` roots, the `*_BLOCK` constants resolved cross-module;
+D-118 extended to the source itself: never a hand table, a new system
+visible the iteration it lands; scripts/ excluded, D-046), the
+exact-name reverse query over the four files (keys/list
+members/scalar values — the rename-safety set; display paths are
+--path-usable), the indexed-matrix pointers (D-024 — the quadruple
+keeps its single owner); bounded one-hop traversal per intake-37's
+principles (sound at block level, literal-precise where the source is
+literal, honest about dynamic keying — a dynamic root key drops the
+site, never a guess), the attention budget's caps with named cuts
+(IMPACT_READERS_CAP/IMPACT_REFS_CAP, --full the operator's window);
+tooling-only, stdlib-only (D-012), zero runtime change. Verification:
+the test packet's claim block (TEST_PLAN §9's form — the independent
+recount oracle, the witness-line pins, the future-layer law extended
+to impact: a fresh block reports no runtime reader, never a
+rejection). The structured-patch machinery + the edit-shape guard stay
+PROPOSAL behind the A/B falsifier (unchanged, owner-gated; the
+measurement itself operator-side, Rule 9's family — now armed by the
+tool).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2018 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 462e84a both ends — 2018+1
-green, ruff clean, docguard clean) ·
+2026 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; verified at BASE_COMMIT f7039e8 — 2018+1 green, ruff
+clean, docguard clean, before the change) ·
 Date: 2026-09-22 ·
-Scope: .gitignore + docs/blueprint/phases.md + docs/DECISIONS.md +
-docs/TEST_PLAN.md + docs/TASKS.md + docs/AGENT_NAVIGATION.md +
-STATUS.md + worklog.md — 8 paths (the intake-37 record + D-197 + the
-§9 prism + the mech-2 row + the scratch/ law + the state docs; the
-probe runners + the measurement scripts outside the repo, Rule 9 —
-8 files over the 3–5 soft cap, the owner's schema+routing task the
-scope justification, noted per AGENTS §2.3).
+Scope: scripts/mechanics.py + tests/test_mechanics.py + docs/TASKS.md
++ STATUS.md + worklog.md — 5 paths (the tool + the pins + the state
+docs).
 Track A and track B untouched this session — the world track a
 separate track (D-186, never a second queue). The prior iterations'
-record: iter-194 (humorgloss), iter-193 (intake36), iter-192
-(humorprobe), iter-191 (accountgloss), iter-190 (bioprobe),
-iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
-(freightvol), iter-186 (campaccount), iter-185 (tallyread). The
-detail lives in the worklog + git.
+record: iter-195 (bottleneck), iter-194 (humorgloss), iter-193
+(intake36), iter-192 (humorprobe), iter-191 (accountgloss), iter-190
+(bioprobe), iter-189 (charcoalpaper), iter-188 (knowsgloss), iter-187
+(freightvol). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -99,18 +95,20 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-195 DONE: the agent-bottleneck research routed whole (intake-37,
-D-197) — the verdict PARTIALLY CONFIRMED, the schema landed, mech-2
-convened. iter-194 before it: the W5 humor fix landed (rs-3) and the
-re-run's mandatory bar MET (the station PARTIALLY CONFIRMED, the
-authored residues open). iter-191: the biography re-run PASSED CLEAN —
-the embargo lifted (stands).**
+**iter-196 DONE: the mech-2 tooling spike landed (`mechanics
+impact --path/--ref` — the derived reader index + the reverse query,
+the owner's row-opening call). iter-195 before it: the
+agent-bottleneck research routed whole (intake-37, D-197) — PARTIALLY
+CONFIRMED, the schema landed, mech-2 convened. iter-191: the
+biography re-run PASSED CLEAN — the embargo lifted (stands).**
 
-1. The mech-2 decision (the owner's call — the row convened this
-   iteration): the agent impact surface (`mechanics impact --path`,
-   R03's family) — open the row for the tooling spike, or hold it
-   behind its A/B falsifier first; the structured-patch machinery +
-   the edit-shape guard stay PROPOSAL behind the same falsifier.
+1. The mech-2 A/B falsifier (the owner's call, now armed by the
+   tool): the measurement — agent success rate, patch size, and
+   lint-fail rate on a realistic pack-edit task set, impact-gated vs
+   bare edits; the structured-patch admission machinery + the
+   edit-shape guard stay PROPOSAL behind the same falsifier (the
+   97%-surgical history — no present failure to fix); the runner
+   operator-side (Rule 9).
 2. THE COVERING RESIDUE'S FUTURE ROW (the arc's assembly — the
    owner's call, WORLD_TESTS §9's W5 entry's named remainder): the
    +3 reckonings' covering, the shave → starvation arc, and now the

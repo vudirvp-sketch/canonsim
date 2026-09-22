@@ -1,11 +1,12 @@
 """The mechanics introspection CLI (mech-1, iter-84; mech-2, iter-163;
-D-046 operator tooling).
+mech-2's impact surface, iter-196; D-046 operator tooling).
 
-Four read-only instruments over the committed pack and committed (or freshly
+Five read-only instruments over the committed pack and committed (or freshly
 run) logs, for the per-instance questions the prose specs answer only
 generally: "who consumes event type X", "why has hook Y not released by tick
-T", "why did event E happen", "what changes if step Z is inserted here".
-Everything here is DERIVED, rebuildable, never truth (the checkpoint.py
+T", "why did event E happen", "what changes if step Z is inserted here",
+"what reads pack path P / which sites reference name N". Everything here is
+DERIVED, rebuildable, never truth (the checkpoint.py
 law): the pack JSON and the engine's public functions are the only sources.
 Output is stdout; the blast arms write their logs under the gitignored
 output/mech/ dir.
@@ -48,9 +49,28 @@ whole); the event postmortem caps its chain/children detail at named
 constants. Every explicit flag is the operator's own window or question —
 answered in full, never second-guessed.
 
+The impact surface (mech-2's row, iter-196 — intake-37's named consumer,
+the agent-edit loop's tool): the static blast radius of an ARBITRARY pack
+path, beyond matrix's indexed hook/event/token/prop quadruple. The reader
+set is DERIVED from the repo source at run time — an AST scan for
+rules-rooted literal accesses (`rules.get("director")`,
+`self._data["rules.json"]`, the `*_BLOCK` constants) across core/brief/
+render/cli/sim (runtime) and core/packlint + core/pack.py (load-time lint);
+scripts/ is excluded (operator tooling, D-046). Derived, never truth
+(D-118 extended to the source itself): never a hand table, a new system is
+visible the iteration it lands. The reverse query walks the four pack files
+for exact-name sites (dict keys, list members, scalar values — the
+rename-safety set; substrings are not references). Bounded one-hop
+traversal (intake-37's principles, never copied tools): sound at block
+level, literal-precise where the source is literal, honest about dynamic
+keying; every reader is reported as a minimal witness (file:line + the
+source text), never a bare claim.
+
 Usage:
     python scripts/mechanics.py matrix [--pack DIR] [--event TYPE]
         [--hook TAG] [--token TOKEN] [--prop PATH] [--full] [--dag]
+    python scripts/mechanics.py impact (--path PACK_PATH | --ref NAME)
+        [--pack DIR] [--full]
     python scripts/mechanics.py trace (--log PATH | --script PATH) [--pack DIR]
         [--ticks A:B] [--tail N] [--entity ID] [--hook TAG] [--event TYPE]
     python scripts/mechanics.py why (--hook TAG | --event ID)
@@ -65,6 +85,7 @@ into logs/; blast arms write only gitignored output/mech/).
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import sys
 from collections import Counter
@@ -114,6 +135,13 @@ DEFAULT_TRACE_WINDOW_TICKS: Final = 720
 # shown, the rest counted on the truncation line (anti-silent-drop).
 CHAIN_DETAIL_LINKS: Final = 8
 CHILD_DETAIL_LINES: Final = 12
+# The impact surface's caps (iter-196, the same attention budget): reader
+# witnesses and reference sites listed per query; --full uncaps (the
+# operator's own window). The value summary shows at most this many keys.
+IMPACT_READERS_CAP: Final = 10
+IMPACT_REFS_CAP: Final = 16
+IMPACT_VALUE_KEYS: Final = 6
+IMPACT_EXPR_WIDTH: Final = 72
 
 
 # -- loading ------------------------------------------------------------------
@@ -1416,6 +1444,541 @@ def run_blast(
     return "\n".join(out) + "\n"
 
 
+# -- impact: the agent impact surface (mech-2, iter-196) ----------------------
+
+
+@dataclass(frozen=True)
+class AccessSite:
+    """One rules-rooted literal access in the repo source — the minimal
+    witness: file, line, the literal key chain, the source line itself."""
+
+    file: str
+    line: int
+    chain: tuple[str, ...]
+    expr: str
+
+
+@dataclass(frozen=True)
+class RefSite:
+    """One exact-name reference inside the pack's four files."""
+
+    file: str
+    path: str
+    role: str
+
+
+_RULES_ARG_NAMES: Final = frozenset({"rules", "pack_rules"})
+_IDENTITY_KEYS: Final = ("id", "intent", "npc", "name")
+_FILE_NAMESPACES: Final = ("rules", "actions", "entities", "templates")
+_SCAN_ROOTS: Final = ("core", "brief", "render", "cli", "sim")
+_ACCESS_SITES: list[AccessSite] | None = None
+
+
+def _module_string_constants(tree: ast.Module) -> dict[str, str]:
+    """Module-level NAME = "literal" bindings (the `*_BLOCK` convention)."""
+    consts: dict[str, str] = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign):
+            targets: list[ast.expr] = node.targets
+            value: ast.expr = node.value
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            targets, value = [node.target], node.value
+        else:
+            continue
+        if isinstance(value, ast.Constant) and isinstance(value.value, str):
+            for target in targets:
+                if isinstance(target, ast.Name):
+                    consts[target.id] = value.value
+    return consts
+
+
+def _is_rules_root(node: ast.AST) -> bool:
+    """The rules-dict roots: a `rules`/`pack_rules` name, any `.rules`
+    attribute (pack.rules, self._pack.rules), any `x["rules.json"]`."""
+    if isinstance(node, ast.Name):
+        return node.id in _RULES_ARG_NAMES
+    if isinstance(node, ast.Attribute):
+        return node.attr == "rules"
+    return isinstance(node, ast.Subscript) and (
+        isinstance(node.slice, ast.Constant) and node.slice.value == "rules.json"
+    )
+
+
+def _literal_key(
+    node: ast.AST | None, consts: Mapping[str, str]
+) -> str | None:
+    """A string literal, or a module constant resolving to one."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.Name):
+        return consts.get(node.id)
+    return None
+
+
+def _access_chain(
+    node: ast.AST, consts: Mapping[str, str]
+) -> tuple[str, ...] | None:
+    """The literal key chain of a rules-rooted access expression, or None.
+    `rules.get("a", {}).get("b")` -> ("a", "b"); a dynamic key mid-chain
+    stops the chain where it goes dynamic (block-level honesty); a dynamic
+    key at the ROOT drops the site entirely — an unattributable access is
+    never guessed into a block (the honest boundary)."""
+    if _is_rules_root(node):
+        return ()
+    if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+        if node.func.attr != "get":
+            return None
+        base = _access_chain(node.func.value, consts)
+        if base is None:
+            return None
+        key = _literal_key(node.args[0], consts) if node.args else None
+        if key is None:
+            return None if not base else base
+        return (*base, key)
+    if isinstance(node, ast.Subscript):
+        base = _access_chain(node.value, consts)
+        if base is None:
+            return None
+        key = _literal_key(node.slice, consts)
+        if key is None:
+            return None if not base else base
+        return (*base, key)
+    return None
+
+
+def _site_class(rel_path: str) -> str:
+    """runtime vs load-time lint (the repo's own structure law: packlint +
+    pack.py are the admission surface; scripts/ never enters the scan)."""
+    if rel_path.startswith("core/packlint/") or rel_path == "core/pack.py":
+        return "lint"
+    return "runtime"
+
+
+def block_access_sites() -> list[AccessSite]:
+    """The derived reader index: every rules-rooted literal access across
+    the runtime modules and the load-time lint (D-118 — derived from the
+    source itself, never a hand table; a new system appears here the
+    iteration it lands). `*_BLOCK` constants resolve cross-module (the
+    importing module sees the defining module's literal — a name mapping
+    to one distinct value repo-wide); a bare whole-`rules` argument pass is
+    skipped — the callee's own literal access is the precise site;
+    same-line nested accesses collapse to the longest chain."""
+    global _ACCESS_SITES
+    if _ACCESS_SITES is not None:
+        return _ACCESS_SITES
+    files = sorted(
+        {
+            path
+            for name in _SCAN_ROOTS
+            if (REPO / name).is_dir()
+            for path in (REPO / name).rglob("*.py")
+        }
+    )
+    parsed: list[tuple[str, ast.Module, list[str]]] = []
+    shared_consts: dict[str, str] = {}
+    ambiguous: set[str] = set()
+    for path in files:
+        rel = path.relative_to(REPO).as_posix()
+        try:
+            source = path.read_text(encoding="utf-8")
+            tree = ast.parse(source)
+        except (SyntaxError, UnicodeDecodeError, ValueError):
+            continue
+        parsed.append((rel, tree, source.splitlines()))
+        for name, value in _module_string_constants(tree).items():
+            if shared_consts.get(name, value) != value:
+                ambiguous.add(name)
+            shared_consts[name] = value
+    for name in ambiguous:
+        del shared_consts[name]
+    found: list[AccessSite] = []
+    for rel, tree, lines in parsed:
+        consts = {**shared_consts, **_module_string_constants(tree)}
+        by_line: dict[tuple[str, int], AccessSite] = {}
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.Call, ast.Subscript)):
+                continue
+            chain = _access_chain(node, consts)
+            if not chain:
+                continue
+            text = lines[node.lineno - 1].strip()
+            if len(text) > IMPACT_EXPR_WIDTH:
+                text = text[: IMPACT_EXPR_WIDTH - 1] + "…"
+            site = AccessSite(rel, node.lineno, chain, text)
+            key = (rel, node.lineno)
+            prior = by_line.get(key)
+            if prior is None or len(chain) > len(prior.chain):
+                by_line[key] = site
+        found.extend(by_line.values())
+    found.sort(key=lambda site: (site.file, site.line))
+    _ACCESS_SITES = found
+    return found
+
+
+def _classify_access(
+    chain: tuple[str, ...], query: tuple[str, ...]
+) -> str | None:
+    """'subtree' (the access touches the queried path's subtree, either
+    direction), 'sibling' (same block, different branch), or None."""
+    if not query:
+        return "subtree"
+    if not chain or chain[0] != query[0]:
+        return None
+    short, long = (
+        (chain, query) if len(chain) <= len(query) else (query, chain)
+    )
+    if long[: len(short)] == short:
+        return "subtree"
+    return "sibling"
+
+
+def _list_segment(item: Any, index: int) -> str:
+    """The display segment for a list entry: its identity key (id/intent/
+    npc/name) when declared, else the index (both are --path-usable)."""
+    if isinstance(item, Mapping):
+        for key in _IDENTITY_KEYS:
+            value = item.get(key)
+            if isinstance(value, str):
+                return value
+    return str(index)
+
+
+def _step_into(node: Any, segment: str) -> tuple[Any, str | None]:
+    """One path segment: dict keys, list indices, and identity-key lookup
+    inside lists. Returns (child, error)."""
+    if isinstance(node, Mapping):
+        if segment in node:
+            return node[segment], None
+        keys = ", ".join(sorted(str(key) for key in node)[:8]) or "-"
+        return None, f"no key {segment!r} (keys: {keys})"
+    if isinstance(node, list):
+        if segment.lstrip("-").isdigit():
+            index = int(segment)
+            if -len(node) <= index < len(node):
+                return node[index], None
+            return None, f"index {segment} out of range (0..{len(node) - 1})"
+        for item in node:
+            if isinstance(item, Mapping) and any(
+                item.get(key) == segment for key in _IDENTITY_KEYS
+            ):
+                return item, None
+        entries = ", ".join(
+            _list_segment(item, position) for position, item in enumerate(node[:8])
+        )
+        return None, f"no entry {segment!r} in list (entries: {entries})"
+    return None, f"leaf {node!r} carries no children"
+
+
+def _resolve_pack_path(
+    pack: Pack, dotted: str
+) -> tuple[str, tuple[str, ...], Any, str]:
+    """Resolve one dotted path against the four files. Namespace grammar:
+    a bare first segment addresses rules.json (the default); `rules.` is
+    the explicit form; `actions.` addresses the actions list by intent
+    (or `actions.meta…`); `entities.`/`templates.` address their top-level
+    keys, entity lists by id. Returns (file_name, query_chain, node,
+    display_path); a miss fails loud with the deepest resolved position."""
+    segments = [seg for seg in dotted.split(".") if seg]
+    if not segments:
+        raise SystemExit("error: --path is empty")
+    if segments[0] in _FILE_NAMESPACES:
+        namespace = segments[0]
+        rest = segments[1:]
+    else:
+        namespace = "rules"
+        rest = segments
+    file_name = f"{namespace}.json"
+    root: Any = pack.data[file_name]
+    prefix: list[str] = []
+    if namespace == "actions" and rest and rest[0] not in root:
+        # the dominant list: `actions.steal…` addresses the action record
+        # by intent (the top dict only carries meta + the list itself)
+        child, err = _step_into(root["actions"], rest[0])
+        if err is not None:
+            raise SystemExit(
+                f"error: --path {dotted!r} does not resolve at "
+                f"actions.{rest[0]}: {err}"
+            )
+        root, rest, prefix = child, rest[1:], [rest[0]]
+    node: Any = root
+    for position, seg in enumerate(rest):
+        child, err = _step_into(node, seg)
+        if err is not None:
+            where = ".".join([namespace, *prefix, *rest[:position]]) or namespace
+            raise SystemExit(
+                f"error: --path {dotted!r} does not resolve at {where}: {err}"
+            )
+        node = child
+    display = ".".join([namespace, *prefix, *rest])
+    query = tuple(rest) if namespace == "rules" else ()
+    return file_name, query, node, display
+
+
+def _value_summary(node: Any) -> str:
+    """A bounded one-line shape of the resolved value (anti-silent-drop:
+    the cut names its count)."""
+    if isinstance(node, Mapping):
+        keys = [str(key) for key in node]
+        shown = ", ".join(sorted(keys)[:IMPACT_VALUE_KEYS])
+        more = (
+            f" (+{len(keys) - IMPACT_VALUE_KEYS} more)"
+            if len(keys) > IMPACT_VALUE_KEYS
+            else ""
+        )
+        return f"dict, {len(keys)} key(s): {shown or '-'}{more}"
+    if isinstance(node, list):
+        return f"list, {len(node)} item(s)"
+    text = repr(node)
+    if len(text) > IMPACT_EXPR_WIDTH:
+        text = text[: IMPACT_EXPR_WIDTH - 1] + "…"
+    return text
+
+
+def _reference_sites(pack: Pack, name: str) -> list[RefSite]:
+    """Every exact-name site across the four files: dict keys, list
+    members, scalar values — the rename-safety set. Substring matches are
+    not references; display paths are --path-usable (the file's own
+    namespace-prefix key collapses into the namespace)."""
+    out: list[RefSite] = []
+
+    def visit(key: Any, value: Any, path: tuple[str, ...], file: str) -> None:
+        skey = str(key)
+        if skey == name:
+            out.append(RefSite(file, ".".join((*path, skey)), "key"))
+        walk(value, (*path, skey), file)
+
+    def walk(node: Any, path: tuple[str, ...], file: str) -> None:
+        if isinstance(node, Mapping):
+            for key, value in node.items():
+                visit(key, value, path, file)
+        elif isinstance(node, list):
+            for index, item in enumerate(node):
+                if isinstance(item, str):
+                    if item == name:
+                        out.append(
+                            RefSite(file, ".".join((*path, str(index))), "member")
+                        )
+                    continue
+                walk(item, (*path, _list_segment(item, index)), file)
+        elif isinstance(node, str) and node == name:
+            out.append(RefSite(file, ".".join(path), "value"))
+
+    for file_name in sorted(pack.data):
+        namespace = file_name.removesuffix(".json")
+        top = pack.data[file_name]
+        if isinstance(top, Mapping):
+            for key, value in top.items():
+                if str(key) == namespace:  # actions.json's list: the ns covers it
+                    walk(value, (namespace,), file_name)
+                else:
+                    visit(key, value, (namespace,), file_name)
+        else:
+            walk(top, (namespace,), file_name)
+    return out
+
+
+def _name_roles(pack: Pack, name: str) -> list[tuple[str, str]]:
+    """(role, matrix pointer) pairs for a name against the pack's own
+    vocabularies — the indexed quadruple keeps its single owner (D-024).
+    on_action's prose keys (str-valued, e.g. `notes`) are not event types:
+    subtracted locally, the matrix inventory itself untouched."""
+    roles: list[tuple[str, str]] = []
+    names = _matrix_name_inventory(pack)
+    prose_keys = {
+        key
+        for key, value in pack.rules.get("on_action", {}).items()
+        if not isinstance(value, list)
+    }
+    if name in names["hooks"]:
+        roles.append(("director hook tag", f"matrix --hook {name}"))
+    if (name in names["events"] and name not in prose_keys) or (
+        name in pack.event_types()
+    ):
+        roles.append(("event type", f"matrix --event {name}"))
+    if name in names["tokens"]:
+        roles.append(("knowledge token", f"matrix --token {name}"))
+    if pack.entity(name) is not None:
+        roles.append((f"entity id ({pack.kind_of(name) or '?'})", ""))
+    return roles
+
+
+def _render_impact_readers(
+    pack: Pack, query: tuple[str, ...], full: bool
+) -> list[str]:
+    """The derived reader set for a rules query chain: runtime witnesses
+    first, then the load-time lint surface (the edit's admission gate)."""
+    blocks = set(pack.rules)
+    relevant: list[tuple[AccessSite, str]] = []
+    siblings = 0
+    for site in block_access_sites():
+        if site.chain[0] not in blocks:
+            continue
+        kind = _classify_access(site.chain, query)
+        if kind == "subtree":
+            relevant.append((site, _site_class(site.file)))
+        elif kind == "sibling":
+            siblings += 1
+    runtime = [site for site, cls in relevant if cls == "runtime"]
+    lint = [site for site, cls in relevant if cls == "lint"]
+    out: list[str] = []
+    scope = (
+        "across ALL rules blocks (the whole-file query)"
+        if not query
+        else f"({len(runtime)} site(s)):"
+        if runtime
+        else ""
+    )
+    if runtime:
+        cap = len(runtime) if full else IMPACT_READERS_CAP
+        out.append(f"readers      runtime {scope}")
+        for site in runtime[:cap]:
+            out.append(
+                f"  {site.file}:{site.line} · {site.expr} "
+                f"[reads {'.'.join(site.chain)}]"
+            )
+        hidden = len(runtime) - cap
+        if hidden > 0:
+            out.append(f"  (+{hidden} more runtime site(s) — impact --full)")
+    else:
+        block = ".".join(query[:1]) or "rules"
+        out.append(
+            f"readers      runtime: none — no rules-rooted literal access "
+            f"touches {block} (notes-only, dead data, or dynamic-only; "
+            "scripts/ excluded, D-046)"
+        )
+    if lint:
+        modules = sorted({site.file for site in lint})
+        cap = len(modules) if full else 6
+        shown = ", ".join(modules[:cap])
+        hidden = len(modules) - cap
+        extra = f" (+{hidden} more)" if hidden > 0 else ""
+        out.append(f"             load-time lint: {shown}{extra}")
+    if siblings and not full:
+        out.append(
+            f"             (+{siblings} same-block access(es) outside this "
+            "subtree, not listed)"
+        )
+    return out
+
+
+def _render_impact_path(pack: Pack, dotted: str, full: bool) -> str:
+    """The forward query: one pack path in — the resolved value, the
+    derived readers, the leaf name's reference set, the indexed pointers."""
+    file_name, query, node, display = _resolve_pack_path(pack, dotted)
+    out = [f"== IMPACT {pack.name_version} — path {dotted} =="]
+    out.append(f"resolves     {display} — {_value_summary(node)}")
+    if file_name == "rules.json":
+        out.extend(_render_impact_readers(pack, query, full))
+    else:
+        out.append(
+            "readers      keyed dynamically at runtime (pack.entity()/"
+            "action()/event_types()) — the static surface is the reference "
+            "set below"
+        )
+    leaf = display.split(".")[-1]
+    refs = _reference_sites(pack, leaf)
+    if refs:
+        cap = len(refs) if full else IMPACT_REFS_CAP
+        out.append(
+            f"refs         {leaf!r} — {len(refs)} exact-name site(s) across "
+            f"{len({site.file for site in refs})} file(s):"
+        )
+        for site in refs[:cap]:
+            out.append(f"  {site.file:<14} {site.path} [{site.role}]")
+        hidden = len(refs) - cap
+        if hidden > 0:
+            out.append(f"  (+{hidden} more — impact --full)")
+    else:
+        out.append(f"refs         {leaf!r} — no exact-name site in the four files")
+    if isinstance(node, (Mapping, list)) and node:
+        out.append(
+            f"             {len(node)} name(s) sit under this subtree — "
+            "impact --ref <name> each"
+        )
+    pointers: list[str] = []
+    for seg in display.split("."):
+        for label, pointer in _name_roles(pack, seg):
+            if pointer:
+                entry = f"{label} {seg} ({pointer})"
+                if entry not in pointers:
+                    pointers.append(entry)
+    if pointers:
+        out.append("indexed      " + " · ".join(pointers[:3]))
+    out.append(
+        "writers      none at runtime — the pack is read-only after load "
+        "(INV-3/INV-1); state writes ride events (matrix --prop / trace the "
+        "dynamic half)"
+    )
+    out.append(
+        "note         derived, never truth (D-118): the reader set "
+        "re-derives from the repo source at run time; value semantics ride "
+        "goldens, path-bound (TEST_PLAN §9)"
+    )
+    return "\n".join(out) + "\n"
+
+
+def _render_impact_ref(pack: Pack, name: str, full: bool) -> str:
+    """The reverse query: one name in — every exact-name site in the four
+    files, with the name's declared role where the pack has one."""
+    sites = _reference_sites(pack, name)
+    roles = _name_roles(pack, name)
+    out = [f"== IMPACT {pack.name_version} — ref {name!r} =="]
+    if roles:
+        role_text = " · ".join(
+            f"{label} ({pointer})" if pointer else label for label, pointer in roles
+        )
+        out.append(f"role         {role_text}")
+    else:
+        out.append("role         none in this pack's vocabularies")
+    if not sites:
+        out.append("sites        none — the name appears nowhere in the four files")
+        return "\n".join(out) + "\n"
+    by_file: dict[str, list[RefSite]] = {}
+    for site in sites:
+        by_file.setdefault(site.file, []).append(site)
+    out.append(
+        f"sites        {len(sites)} exact-name reference(s) across "
+        f"{len(by_file)} file(s)"
+    )
+    cap = len(sites) if full else IMPACT_REFS_CAP
+    shown = 0
+    for file_name in sorted(by_file):
+        for site in by_file[file_name]:
+            if shown >= cap:
+                break
+            out.append(f"  {file_name:<14} {site.path} [{site.role}]")
+            shown += 1
+    hidden = len(sites) - cap
+    if hidden > 0:
+        out.append(f"  (+{hidden} more — impact --full)")
+    out.append(
+        "note         exact-name matching (keys, list members, scalar "
+        "values) — substring matches are not references (the "
+        "rename-safety set)"
+    )
+    return "\n".join(out) + "\n"
+
+
+def render_impact(
+    pack: Pack,
+    *,
+    path: str | None = None,
+    ref: str | None = None,
+    full: bool = False,
+) -> str:
+    """The agent impact surface (mech-2's row, intake-37's named consumer):
+    `--path` the static blast radius of one pack path (derived readers,
+    exact-name cross references, the indexed-matrix pointers); `--ref` the
+    reverse query — which sites reference a name. Bounded one-hop
+    traversal: sound at block level, literal-precise where the source is
+    literal, honest about dynamic keying (D-118 — derived, never truth)."""
+    if path is not None:
+        return _render_impact_path(pack, path, full)
+    if ref is not None:
+        return _render_impact_ref(pack, ref, full)
+    raise SystemExit("error: exactly one of --path / --ref is required")
+
+
 # -- CLI ----------------------------------------------------------------------
 
 
@@ -1451,6 +2014,30 @@ def _build_parser() -> argparse.ArgumentParser:
         "--dag",
         action="store_true",
         help="the systems read/write graph as Mermaid (rules.json::systems)",
+    )
+
+    i = sub.add_parser(
+        "impact",
+        help="the agent impact surface: one pack path's derived readers + "
+        "references, or the reverse query (which sites reference a name)",
+    )
+    target = i.add_mutually_exclusive_group(required=True)
+    target.add_argument(
+        "--path",
+        help="a dotted pack path: rules.<block>... (bare block name = "
+        "rules), actions.<intent>..., entities.<category>.<id>..., "
+        "templates.<key>...",
+    )
+    target.add_argument(
+        "--ref", help="the reverse query: every exact-name site in the "
+        "four files (the rename-safety set)"
+    )
+    i.add_argument("--pack", type=Path, default=PACK_DIR)
+    i.add_argument(
+        "--full",
+        action="store_true",
+        help="uncap the reader/reference listings (the default caps name "
+        "their cuts)",
     )
 
     t = sub.add_parser("trace", help="per-tick execution view of a log")
@@ -1512,6 +2099,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 prop=args.prop,
                 full_inventory=args.full,
             ),
+            end="",
+        )
+        return 0
+    if args.command == "impact":
+        print(
+            render_impact(pack, path=args.path, ref=args.ref, full=args.full),
             end="",
         )
         return 0

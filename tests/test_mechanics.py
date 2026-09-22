@@ -29,6 +29,26 @@ budget with no truncation line; any count disagreeing with its recount.
 Expected evidence: the pins below. Epistemic class: measured on the
 canonical substrate. Disposition: CONFIRMED at iter-163; pack growth
 re-tests through the same pins.
+
+mech-2 (iter-196) — the §9 claim packet for the impact surface (the
+agent-edit loop's tool, intake-37's named consumer): Claim: `impact
+--path/--ref` gives the static blast radius of an ARBITRARY pack path —
+derived readers (runtime + load-time lint, minimal witnesses),
+exact-name cross references, and the indexed-matrix pointers — with zero
+runtime change. Problem: the matrix indexed only the hook/event/token/prop
+quadruple; the other ~19 rules blocks were listed generically (intake-37's
+measured gap — value edits there pass lint + goldens when the path is
+uncovered). Lenses: boundary/boundedness (the caps + their named cuts),
+independent re-derivation (the reader names + the reference recounts).
+Prism: the canonical tavern pack + a variant pack's fresh block. Oracle:
+the reader set names the real consuming modules with witness lines that
+exist in the source (director/weather/travel/knowledge — the
+constant-declared blocks included); the reverse query's counts and sites
+equal an independent recount walk. Falsifier: any named reader whose
+source line does not access the block; any site count disagreeing with
+the recount; any silently-dropped listing. Expected evidence: the pins
+below. Epistemic class: measured on the canonical substrate. Disposition:
+CONFIRMED at iter-196; source growth re-tests through the same pins.
 """
 
 from __future__ import annotations
@@ -38,6 +58,8 @@ import shutil
 import sys
 from pathlib import Path
 from typing import Mapping
+
+import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
@@ -343,6 +365,172 @@ def test_dag_is_the_systems_projection() -> None:
     assert 'sys_fire["fire"]:::per_tick' in out
     assert "sys_relations ==>|before| sys_crime_watch" in out
     assert "never truth" in out
+
+
+# -- mech-2: the impact surface (iter-196) ------------------------------------
+
+
+def test_block_access_sites_derive_from_source() -> None:
+    """The reader index is DERIVED, never a hand table: the literal form
+    (`rules.get("director")`), the `*_BLOCK` constant form (weather,
+    travel, worldgen), and the chained literal form (`knowledge.drift`)
+    all resolve; every witness line exists in the named source file; the
+    packlint family classifies as load-time lint."""
+    sites = mechanics.block_access_sites()
+    chains = {(s.file, s.chain) for s in sites}
+    assert ("core/director.py", ("director",)) in chains
+    assert ("core/weather.py", ("weather",)) in chains
+    assert ("core/travel.py", ("travel",)) in chains
+    assert ("core/travel.py", ("worldgen", "map", "spacing")) in chains
+    assert ("core/knowledge.py", ("knowledge", "drift")) in chains
+    assert not any(s.file.startswith("scripts/") for s in sites)
+    for site in sites:
+        if site.file == "core/director.py" and site.chain == ("director",):
+            source = (REPO / "core" / "director.py").read_text(
+                encoding="utf-8"
+            ).splitlines()
+            assert "rules" in source[site.line - 1]
+            break
+    else:
+        raise AssertionError("director site not found")
+
+
+def test_impact_path_readers_and_pointers() -> None:
+    """The forward query on the indexed hotspot: the hook path resolves,
+    the runtime readers carry minimal witnesses, the load-time lint names
+    the admission surface, the cross references give the rename-safety
+    set, and the indexed pointer defers to matrix (D-024 — never
+    restating the quadruple's wiring)."""
+    out = mechanics.render_impact(
+        PACK, path="director.hooks.possible_document_check"
+    )
+    assert out.startswith("== IMPACT tavern_pack@0.1")
+    assert "resolves     rules.director.hooks.possible_document_check" in out
+    assert "core/director.py:" in out
+    assert "[reads director]" in out
+    assert "load-time lint: core/packlint/" in out
+    assert "refs         'possible_document_check' — 2 exact-name site(s)" in out
+    assert "actions.steal.hooks.failure.1 [member]" in out
+    assert "rules.director.hooks.possible_document_check [key]" in out
+    assert "matrix --hook possible_document_check" in out
+    assert "read-only after load" in out
+
+
+def test_impact_unindexed_block_value() -> None:
+    """The measured gap's own case: a value path in an UNINDEXED block
+    (knowledge.drift) still gets its reader witness at literal precision —
+    the extension beyond the hook/event/token/prop quadruple — and no
+    indexed pointer is claimed for a name the pack does not declare."""
+    out = mechanics.render_impact(PACK, path="knowledge.drift")
+    assert "core/knowledge.py:" in out
+    assert "[reads knowledge.drift]" in out
+    assert "dict, 1 key(s): figure_deeds" in out
+    assert "indexed" not in out
+    assert "derived, never truth" in out
+
+
+def test_impact_unknown_block_no_runtime_reader(tmp_path: Path) -> None:
+    """The future-layer law extended to impact: a fresh block LOADS (the
+    pack lint passes) and impact reports it honestly — no runtime reader,
+    never a rejection; the reader surface is visible the iteration a
+    consumer lands."""
+    variant_dir = tmp_path / "pack_variant"
+    variant_dir.mkdir()
+    for name in ("actions.json", "entities.json", "templates.json"):
+        shutil.copyfile(PACK_DIR / name, variant_dir / name)
+    rules = json.loads((PACK_DIR / "rules.json").read_text(encoding="utf-8"))
+    rules["guilds"] = {"houses": {"house_01": {"honor": 5}}}
+    (variant_dir / "rules.json").write_text(
+        json.dumps(rules, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    variant = load_pack(variant_dir)
+    out = mechanics.render_impact(variant, path="guilds.houses.house_01.honor")
+    assert "resolves     rules.guilds.houses.house_01.honor — 5" in out
+    assert "runtime: none" in out
+    assert "honor" in out  # the reference section still answers
+
+
+def _recount_reference_sites(data: Mapping, name: str) -> list[tuple[str, str]]:
+    """The independent oracle: recount (display path, role) by a walk the
+    renderer does not share — stringly path building over the serialized
+    JSON, one entry per exact-name key/member/value site. The actions.json
+    top-level list collapses into its namespace (the display grammar)."""
+    found: list[tuple[str, str]] = []
+
+    def visit(node: object, path: str, top: bool = False) -> None:
+        if isinstance(node, dict):
+            for key, value in node.items():
+                collapse = top and str(key) == path
+                child = path if collapse else f"{path}.{key}"
+                if not collapse and str(key) == name:
+                    found.append((child, "key"))
+                visit(value, child)
+        elif isinstance(node, list):
+            for index, item in enumerate(node):
+                if isinstance(item, str):
+                    if item == name:
+                        found.append((f"{path}.{index}", "member"))
+                else:
+                    label = next(
+                        (str(item[k]) for k in ("id", "intent", "npc", "name")
+                         if isinstance(item, dict) and k in item),
+                        str(index),
+                    )
+                    visit(item, f"{path}.{label}")
+        elif isinstance(node, str) and node == name:
+            found.append((path, "value"))
+
+    for file_name in ("actions.json", "entities.json", "rules.json",
+                      "templates.json"):
+        visit(data[file_name], file_name.removesuffix(".json"), top=True)
+    return found
+
+
+def test_impact_reverse_query_matches_recount() -> None:
+    """The reverse query's sites equal an independent recount (TEST_PLAN
+    §9's re-derivation law) on the canonical token; the role line defers
+    to matrix --token (the quadruple's single owner)."""
+    name = "figure_reaching_for_purse"
+    expected = _recount_reference_sites(PACK.data, name)
+    assert len(expected) == 8  # the hand-verified recount (2 files)
+    out = mechanics.render_impact(PACK, ref=name)
+    assert "knowledge token (matrix --token figure_reaching_for_purse)" in out
+    assert "sites        8 exact-name reference(s) across 2 file(s)" in out
+    for path, role in expected:
+        assert f"{path} [{role}]" in out
+
+
+def test_impact_reverse_query_role_and_cap() -> None:
+    """The honest classification: an entity id names its role; a prose key
+    (`notes`, str-valued inside on_action) is NOT an event type; a common
+    name's listing caps at IMPACT_REFS_CAP with the cut named and --full
+    named as the expansion flag (D-148's law)."""
+    entity = mechanics.render_impact(PACK, ref="npc_guard_01")
+    assert "entity id (npc)" in entity
+    assert "rules.director.hooks.possible_document_check.target_npc [value]" in entity
+    common = mechanics.render_impact(PACK, ref="notes")
+    assert "event type" not in common
+    assert f"(+{90 - mechanics.IMPACT_REFS_CAP} more — impact --full)" in common
+    whole = mechanics.render_impact(PACK, ref="notes", full=True)
+    assert "+" not in whole.split("sites")[1].split("note")[0].replace("(+", "")
+    assert whole.count("[key]") == 90
+
+
+def test_impact_path_miss_fails_loudly() -> None:
+    """A path that does not resolve: the honest refusal naming the deepest
+    resolved position and the available keys — never a guess."""
+    with pytest.raises(SystemExit) as raised:
+        mechanics.render_impact(PACK, path="weather.rotation")
+    assert "does not resolve at rules.weather" in str(raised.value)
+    assert "event_type" in str(raised.value)
+
+
+def test_impact_cli_dispatch(capsys: pytest.CaptureFixture[str]) -> None:
+    """The argparse wiring: the subcommand dispatches and prints (the
+    operator surface — stdout only, INV-5 never touched)."""
+    code = mechanics.main(["impact", "--ref", "figure_reaching_for_purse"])
+    assert code == 0
+    assert "8 exact-name reference(s)" in capsys.readouterr().out
 
 
 # -- blast --------------------------------------------------------------------

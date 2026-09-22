@@ -110,31 +110,27 @@ claim packet)
   ledgers dead, the DECISIONS collapse 31→30) + the mechanical cap guard
   LIVE (`scripts/docguard.py` + `tests/test_docguard.py` — the recurrence
   fix). Detail: the iter-176 record + git.
-- `mech-2` — the agent impact surface (intake-37's named consumer, the
-  owner's research-artifact call convening the row — R03's family joined
-  by its first named consumer: `mechanics.py blast`'s minimal-intervention
-  extension line): `mechanics impact --path <pack path>` → the static
-  reader/writer/producer/consumer set for an ARBITRARY pack path —
-  matrix's extension beyond the indexed hook/event/token/prop quadruple
-  (the unindexed rules blocks — brief/checks/expectations/importance/
-  knowledge/… ~19 per pack — the measured gap; `rules.director` the
-  17–19 KB hotspot), plus the reverse query ("which blocks reference
-  X") the agent-edit loop needs at pack scale. Tooling-only, stdlib-only
-  (D-012), zero runtime change, CLI-class (D-046); design material: the
-  bounded causal traversal + CEGAR refinement + minimal-witness patterns
-  (intake-37's extracted mechanisms — principles, never copied tools).
-  Verification plan rides TEST_PLAN §9's claim packet + the new
-  mutation-adequacy prism (the measured lesson: value mutations pass
-  lint + goldens when uncovered). FALSIFIER (the row's opening
-  condition, owner-gated): the A/B measurement — agent success rate,
-  patch size, and lint-fail rate on a realistic pack-edit task set,
-  impact-gated vs bare edits; the structured-patch admission machinery
-  and the edit-shape guard stay PROPOSAL behind the same falsifier
-  (the 97%-surgical measured history — no present failure to fix).
-  Opens on the owner's call only.
+- `mech-2` — the agent impact surface — DONE (iter-196, the owner's
+  «открывай mech 2» call over STATUS Next step 1, the tooling-spike arm):
+  `mechanics impact --path <pack path> | --ref <name>` — the derived
+  reader index (an AST scan over core/brief/render/cli/sim + the packlint
+  family, D-118 extended to the source itself: never a hand table, a new
+  system visible the iteration it lands), the exact-name reverse query
+  (the rename-safety set), the indexed-matrix pointers (D-024); bounded
+  one-hop traversal per intake-37's principles (sound at block level,
+  literal-precise where the source is literal, honest about dynamic
+  keying); tooling-only, stdlib-only (D-012), zero runtime change.
+  Verification: the test packet's claim block (TEST_PLAN §9's form — the
+  recount oracle, the witness-line pins). Residue behind the A/B
+  falsifier (owner-gated, unchanged): the structured-patch admission
+  machinery + the edit-shape guard stay PROPOSAL; the A/B measurement
+  itself (agent success rate, patch size, lint-fail rate — impact-gated
+  vs bare edits) is operator-side (Rule 9's family), armed by this tool.
+  Detail: the iter-196 record + git.
 
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's row-opening call): `mechanics impact --path/--ref` landed (the derived reader index — the AST scan, D-118 extended to the source; the exact-name reverse query; the matrix pointers), the §9 claim block + 8 pins; the structured-patch machinery + the edit-shape guard stay PROPOSAL behind the A/B falsifier (now armed by the tool)
 - iter-195 · 2026-09-22 · bottleneck (intake-37) — the agent-bottleneck research note routed as a mandatory artifact: PARTIALLY CONFIRMED (formats + tooling direction confirmed; the full-file-rewrite claim REFUTED by the measured 97%-surgical history; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered); the research/intervention documentation schema (scratch/ the interventions folder); one row convened (mech-2) + TEST_PLAN §9's mutation prism — phases.md §6's intake-37 block
 - iter-194 · 2026-09-22 · humorgloss (rs-3) — the W5 humor fix landed (the bloom kind's account-kind gloss — the withhold's meaning on the reader surface, one table row, rs-2's mechanism unchanged) and the humor probe's re-run's mandatory bar MET (the mechanism-grounded joke n=2, the taboo 1/2 — the station PARTIALLY CONFIRMED, the withhold's own joke unextracted; WORLD_TESTS §9's W5 entry)
 - iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed whole (intake-36, D-196): 39 units / 10 families, every body read + code-verified at HEAD; 34/39 CONFIRMED-owned (the largest single confirmation batch), the three fresh routings each joining a named consumer (C03+F02 → the W5 heartbreak station, P01+P03 → the road-traffic rider, C05 → the group-stock lint gap), zero new rows — phases.md §6's intake-36 block
@@ -146,7 +142,6 @@ claim packet)
 - iter-187 · 2026-09-22 · freightvol — the camp's freight volume: the withhold's
   surface (the crofts' bloom heap + the_withhold_banks, the tally's PRESENT as
   account state — the heap's level the artery's thinning, E⇄H's edge)
-- iter-186 · 2026-09-22 · campaccount — the camp's account: the charcoal debt's arithmetic (the master's thin stock + the_bloom_nets + the fold — ONE SALE, TWO CLAIMS; the paper sixteen, no amortization path)
 
 ## Track B — background (evenings, foreign canon)
 

@@ -14,6 +14,13 @@ git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
 evicted per the cap
 
 ---
+iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's «открывай mech 2 и прочее связанное»
+call, STATUS item 1's tooling-spike arm): `mechanics impact --path/--ref` landed — the derived reader index (the
+AST scan over core/brief/render/cli/sim + packlint, D-118 extended to the source), the exact-name reverse query
+(the rename-safety set), the matrix pointers (D-024); tests/test_mechanics.py +8 (the §9 claim block); 5 paths;
+2026+1 + ruff + docguard clean; the structured-patch machinery + edit-shape guard stay PROPOSAL (A/B falsifier)
+
+---
 iter-195 · 2026-09-22 · bottleneck — intake-37 (the owner's mandatory-research-artifact call): the agent-bottleneck note routed whole — PARTIALLY CONFIRMED (formats + tooling direction confirmed, zero format
 change; the full-file-rewrite claim REFUTED — 97% of 120 pack-JSON touches surgical; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered, TEST_PLAN §9's path-bound law); the
 research/intervention documentation schema (residue → phases §6, interventions → scratch/, adoptions → DECISIONS, tasks → TASKS); mech-2 convened (the impact surface, R03's consumer); 8 paths doc-only +
@@ -65,10 +72,3 @@ call, finding 3): the composite knowledge tokens no longer render raw in the tal
 `knows` tables (all five packs) + `render/chronicle.py::gloss_knows` (the fold-aware matcher, the dry
 fallback) + the regression/census (test_knowsgloss.py +7); the routine-flood finding measured (TECH_NOTES
 §16; chron-2 parked with the invariant); 11 paths; 2003+1 + ruff + docguard clean; iter-179 evicted
-
----
-iter-187 · 2026-09-22 · freightvol — the camp's freight volume (the owner's embodiment-options
-call, the second row): the withhold's volume surface as pure pack data — the crofts' bloom heap
-(4 loads, the tally's PRESENT as account state) + the_withhold_banks (+2/yr, the linger beat's
-aggregate; the heap's level the artery's thinning, E⇄H's edge); test_freightvol.py +8,
-campaccount/debt1 pins widened; 11 paths; 1996+1 + ruff + docguard clean; iter-178 evicted
