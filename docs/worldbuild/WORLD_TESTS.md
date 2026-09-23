@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce), the heartbreak station's DESIGN MATERIAL landed (iter-203 — the winter kin's embodiment, the C03+F02 consult's three gaps answered as pure pack data, the formation side tested in a committed pack), the heartbreak station's PROBE RUN landed (iter-204 — the trio's last station's first measurement: the future-option half FAILED at the rendering boundary, n=2 convergent on the miss; the memory + recognition + world-specificity halves carried n=2 convergent), the heartbreak station's rendering FIX landed and measured (iter-205 — the owner's minimal-fix call: the mourning line + the echo line re-authored, zero code, the LOG untouched; the re-run: the opened-option half extracted CLEANLY once, iter-204's zero-futures mode GONE n=2, the mandatory pair still NOT MET at the strict n=2 bar — the dead still not read as the futures' own holders), the heartbreak station's RE-SUBJECTIVATION landed and measured (iter-206 — the owner's further-route call: the mourning line's clause re-subjected, the dead as the loss's grammatical subject; the re-run's MANDATORY PAIR MET at the strict n=2 bar — the station PARTIALLY CONFIRMED, the human band open), the human live band's INSTRUMENT re-established and delivered (iter-207 — option (б): the two packages regenerated deterministically at seed 42, byte-identical, every recorded substance shape hit; the reading kit + the pre-set audit handed to the owner, the convergence the owner's reading away), the human live band's READING received and scored (iter-208 — the owner's chat delivery of the three blind answers, the convergence assessment against the pre-set bars: every mandatory bar MET n=1, the covering's fund-frame the single divergence, the humor's withhold-riding joke beyond the LLM band's own — the band's standing question answered YES at n=1)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce), the heartbreak station's DESIGN MATERIAL landed (iter-203 — the winter kin's embodiment, the C03+F02 consult's three gaps answered as pure pack data, the formation side tested in a committed pack), the heartbreak station's PROBE RUN landed (iter-204 — the trio's last station's first measurement: the future-option half FAILED at the rendering boundary, n=2 convergent on the miss; the memory + recognition + world-specificity halves carried n=2 convergent), the heartbreak station's rendering FIX landed and measured (iter-205 — the owner's minimal-fix call: the mourning line + the echo line re-authored, zero code, the LOG untouched; the re-run: the opened-option half extracted CLEANLY once, iter-204's zero-futures mode GONE n=2, the mandatory pair still NOT MET at the strict n=2 bar — the dead still not read as the futures' own holders), the heartbreak station's RE-SUBJECTIVATION landed and measured (iter-206 — the owner's further-route call: the mourning line's clause re-subjected, the dead as the loss's grammatical subject; the re-run's MANDATORY PAIR MET at the strict n=2 bar — the station PARTIALLY CONFIRMED, the human band open), the human live band's INSTRUMENT re-established and delivered (iter-207 — option (б): the two packages regenerated deterministically at seed 42, byte-identical, every recorded substance shape hit; the reading kit + the pre-set audit handed to the owner, the convergence the owner's reading away), the human live band's READING received and scored (iter-208 — the owner's chat delivery of the three blind answers, the convergence assessment against the pre-set bars: every mandatory bar MET n=1, the covering's fund-frame the single divergence, the humor's withhold-riding joke beyond the LLM band's own — the band's standing question answered YES at n=1), the humor's surface-unequal confound RESOLVED (iter-209 — the LLM humor re-measure on the rs-6 surface: the withhold-riding joke class extracted n=2, the position-dependence explicit n=2, the bands equalized — the divergence was the surface), the direct coverage probe kit delivered (iter-209 — the covering's fund-frame divergence: the direct question over the same package, the pre-set separation audit, the reading the owner's next beat)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
@@ -463,7 +463,7 @@ landed and its mandatory bar MET on the rs-5-fixed surface (iter-201
 below — the direction correct, n=2 convergent); the withhold's
 one-surface contradiction row landed and its mandatory bar MET on the
 rs-6-fixed surface (iter-202 below — the join carried, the heap never
-commerce); the heartbreak station's design material landed (iter-203 below — the winter kin's embodiment, the C03+F02 consult); the station's first probe run FAILED at the rendering boundary on the future-option half (iter-204 below — the memory + recognition halves carried n=2 convergent, the lost future option named by neither reading); the owner-called minimal rendering fix landed and its re-run measured (iter-205 below — the opened-option half cleanly extracted once, the zero-futures mode gone n=2, the mandatory pair still not met at the strict bar: the dead still not read as the futures' own holders); the second fix's re-subjectivation landed and its re-run's mandatory pair MET (iter-206 below — the dead read as the futures' own holders n=2 convergent, the opened half 2/2 — the station PARTIALLY CONFIRMED, the human band open); the human live band's reading received and convergent at every mandatory bar (iter-208 below — n=1, the covering's fund-frame the single divergence, the humor halves beyond the LLM band's own with the surface-unequal confound named).` The owner's reading of the
+commerce); the heartbreak station's design material landed (iter-203 below — the winter kin's embodiment, the C03+F02 consult); the station's first probe run FAILED at the rendering boundary on the future-option half (iter-204 below — the memory + recognition halves carried n=2 convergent, the lost future option named by neither reading); the owner-called minimal rendering fix landed and its re-run measured (iter-205 below — the opened-option half cleanly extracted once, the zero-futures mode gone n=2, the mandatory pair still not met at the strict bar: the dead still not read as the futures' own holders); the second fix's re-subjectivation landed and its re-run's mandatory pair MET (iter-206 below — the dead read as the futures' own holders n=2 convergent, the opened half 2/2 — the station PARTIALLY CONFIRMED, the human band open); the human live band's reading received and convergent at every mandatory bar (iter-208 below — n=1, the covering's fund-frame the single divergence, the humor halves beyond the LLM band's own with the surface-unequal confound named); the humor's surface-unequal confound since RESOLVED (iter-209 below — the LLM re-measure on the rs-6 surface extracted the withhold-riding joke class n=2, the bands equalized); the direct coverage probe kit delivered (iter-209 below — the covering's fund-frame divergence, the reading the owner's side).` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
 unchanged: the causal composition CONFIRMED — but the reader-side
@@ -1191,12 +1191,70 @@ fund-frame divergence + the discovery-path residues + the humor's
 surface-unequal confound each the owner's call, never "improve the
 prose"; the W5 gate MET at iter-191, unchanged).
 
+The humor station's RE-MEASURE on the rs-6 surface and the coverage
+probe kit (iter-209, the owner's «продолжай работу если нужно»
+continuation call firing STATUS Next step item 1's raised questions —
+the humor's surface-unequal confound + the covering's fund-frame
+divergence, each the owner's call now called): the confound RESOLVED —
+the LLM band's humor re-measure on the SAME package the human band read
+(the sparse twin re-established from the recorded protocol, the
+reconstruction hitting every substance shape exactly: the runner's
+crofts detour with the tally read on the night arm t=1112 (partial, the
+cluster minted), the walks to Malby, the fall t=2824 with the fund 18,
+the collection t=2826, the close paper 0 / coin 8 / fatigue 98, the
+heap 18, seven crossings + seven withhold banks, the tale 87 lines, the
+package byte-identical on regeneration; the runner + the transcripts
+outside the repo, Rule 9), the author audit pre-set BEFORE the reading
+(the mechanism bar MANDATORY; the withhold-riding class the measured
+question — either outcome a datum, never a failure verdict; the taboo +
+the position-dependence + the withhold-as-answer regression the
+supporting bars), the blind reader the same class (glm, n=2
+independent, the free-answer humor question — no presented answer):
+the MANDATORY BAR MET n=2 convergent (two DIFFERENT mechanism-grounded
+jokes riding the committed categories — the withhold / the beam / the
+paper / the coin — the imported-template mode and the identical-joke
+convergence both absent), and the confound's own question answered —
+the WITHHOLD-RIDING JOKE CLASS EXTRACTED n=2, the iter-194 unextracted
+class: reading 1 the camp's-word exemplar as the punchline with the
+withhold's evasion the explained mechanism ("outsmarting the system
+while appearing to comply" — the bloom kept off the weighbeam, the
+paper still paid); reading 2 the withheld bloom itself the punchline's
+comparison ("the only thing lighter than the bloom on the weighbeam is
+the factor's runner's pockets after the master paid his paper with
+coin") with the quiet rebellion named — the human band's iter-208
+extraction ("How much does the flower weigh? First ask who holds the
+scales.") MATCHED at the LLM band on the equal surface: the divergence
+was the SURFACE (rs-3's meaning-gloss carried the shave-riding jokes;
+rs-6's join gloss carries the withhold's own). The position-dependence
+EXPLICIT in both readings (beyond the iter-194 implicit — the human
+band's own explicitness matched); the taboo 1/2 explicit (reading 1:
+"the humor is in the clever workaround, not in the financial hardship"
+— the not-joked named; reading 2 implicit via the positions); the
+regression bar held n=2 (the withhold read as the camp's answer /
+defiance, never commerce — rs-6's join held under the humor frame).
+The disposition: the humor halves' convergence now SURFACE-EQUAL (the
+iter-208 confound retired); the station's state stands (PARTIALLY
+CONFIRMED — the authored residues open: the taboo's convergence 1/2,
+the arc's assembly). The DIRECT COVERAGE PROBE kit delivered for the
+covering's fund-frame divergence (the free-answer form's honest caveat
+made probeable: the direct question over the same package + the
+pre-set separation audit — the fund gloss quoted under the direct probe
+→ not-probed (the form's artifact, the surface carries the frame); the
+fund-frame absent even under the direct probe → not-extracted (a
+rendering boundary at the human band) — either branch a datum, the
+boundary law standing, never "improve the prose"; the reading the
+owner's side in chat, the iter-208 delivery's own class, never a
+sandbox claim). The discovery-path residues STAND at both bands (the
+fail-then-pass, the 40/80 asymmetry, the runner's grudge story — each
+its own surface's question, the owner's call, never a default). Honest
+caveats unchanged (the LLM reader class; the year compression).
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the
 Great Fracture without adding special exceptions for each civilization?
 
-### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live LLM band's first humor measurement FAILED at the rendering boundary — iter-192; the rs-3 re-run's mandatory bar MET — iter-194, the station PARTIALLY CONFIRMED; the human band's instrument delivered — iter-207; the reading received and convergent at the mandatory bars — iter-208)
+### PARTIALLY CONFIRMED — Cultural humor and heartbreak (the authored band, iter-164; the live LLM band's first humor measurement FAILED at the rendering boundary — iter-192; the rs-3 re-run's mandatory bar MET — iter-194, the station PARTIALLY CONFIRMED; the human band's instrument delivered — iter-207; the reading received and convergent at the mandatory bars — iter-208; the rs-6 re-measure equalized the bands — iter-209)
 
 Do Sarrow Vale's own vocabulary, institutions and history support world-specific
 humor and loss rather than generic genre scenes? The first authored answer:
@@ -1218,7 +1276,11 @@ instrument delivered (iter-207) and the reading received (iter-208 — the
 mechanism-grounded joke riding the WITHHOLD itself, the iter-194 unextracted
 class extracted at the human band, the taboo boundary and the
 position-dependence explicit; the surface-unequal confound named — the W5
-entry's iter-208 record the detail's owner).
+entry's iter-208 record the detail's owner). The confound since RESOLVED
+(iter-209 — the LLM humor re-measure on the rs-6 surface, the same package:
+the withhold-riding class extracted n=2, the position-dependence explicit
+n=2, the bands equalized; the taboo 1/2 — the W5 entry's iter-209 record
+the detail's owner).
 
 ## 10. Test result vocabulary
 

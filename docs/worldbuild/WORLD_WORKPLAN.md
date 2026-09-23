@@ -388,12 +388,20 @@ assessment against the pre-set bars CONVERGENT at every mandatory
 bar, n=1 — the single divergence the covering's fund-frame, the
 reading's humor halves beyond the LLM band's own with the
 surface-unequal confound named — the record in `WORLD_TESTS.md` §9's
-W5 entry). The standing decision points for the owner: the reading's
-raised questions (the covering's fund-frame divergence — a direct
-probe or leave standing; the humor's surface-unequal confound — an
-LLM re-measure on the rs-6 surface; the discovery-path residues
-standing at both bands; each the owner's call, never a default) and
-the arc's assembly's remaining half (the shave's
+W5 entry). The humor's surface-unequal confound since RESOLVED
+(iter-209 — the owner's continuation call: the LLM humor re-measure on
+the rs-6 surface extracted the withhold-riding joke class n=2, the
+bands equalized — WORLD_TESTS §9's W5 entry's iter-209 record) and the
+direct coverage probe kit DELIVERED (iter-209 — the covering's
+fund-frame divergence: the direct question over the same package, the
+pre-set separation audit, the reading the owner's side in chat). The
+standing decision points for the owner: the direct coverage probe's
+READING (the delivered kit's one question — the fund gloss quoted →
+not-probed; the fund-frame absent → not-extracted; either branch a
+datum, never "improve the prose"); the discovery-path residues
+standing at both bands (the fail-then-pass, the 40/80 asymmetry, the
+runner's grudge story — each its own surface's question, never a
+default); and the arc's assembly's remaining half (the shave's
 temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
