@@ -1,58 +1,54 @@
-Iteration: iter-206 (`iter-206-heartbreak-subject` — the owner's
-further-route call firing STATUS Next step item 1 — the heartbreak
-fix's second attempt over the iter-205 measured subject problem, the
-dead as the loss's grammatical subject): rs-8 landed (the rs family's
-eighth member) — the mourning line's clause RE-SUBJECTED in the
-province pack (iter-205's "their line, their duties and their
-holdings never handed on" — the transmission negation that resolved
-to the inheritance's character — replaced by "their own futures the
-flood took down with them, the line, the duties and the holdings
-that were to be theirs": the futures THEIRS, removed WITH them, the
-flood NAMED as the remover, the transmission vocabulary gone
-entirely; the echo line untouched per its 1/2 confirmation), zero
-code, zero corpus price, the LOG untouched; the pins updated as the
-deliberate act (tests/test_winterkin.py). The SAME blind probe
-re-run (the iter-204 protocol re-established — the package the same
-bounded form, the tale 24 lines, the chain byte-identical twice at
-seed 42, 43 events, the package byte-identical twice; the runner +
-the reader prompt REBUILT outside the repo — Rule 9, the
-reconstruction's honest note; the author audit pre-set BEFORE the
-reading with the same F02 pass bar; the blind reader glm n=2
-independent, the transcripts outside the repo): the MANDATORY PAIR
-MET at the strict n=2 bar — the LOST-FUTURE half MET n=2 CONVERGENT
-(both readings quoting the re-subjected clause verbatim, the loss
-predicated of the dead's own futures — "their entire potential" /
-"a complete erasure of a line and its potential"; iter-205's
-inheritance-character failure mode GONE, iter-204's zero-futures
-mode stays gone), the OPENED half MET 2/2 (up from 1/2 — the echo
-line unchanged), the supporting bars MET n=2 convergent (the
-relation never a trade; the memory change — the second-holder
-structure carried by BOTH readings; the world-specificity). The
-disposition: the station PARTIALLY CONFIRMED (the humor station's
-own form — the human band open, the discovery-path residues each its
-own surface's question); the anti-loop law NOT tripped (the second
-attempt MET the bar); the 40/80 asymmetry and the fail-then-pass
-untouched per the owner's call (each its own surface's question).
+Iteration: iter-207 (`iter-207-humanband` — the owner's option (б)
+call firing STATUS Next step item 1 — the human live-band re-run after
+the reader-side fixes, the rs family's seven measured fixes + the
+eighth's met pair the band it waits on; the question the human
+reader's convergence): the human band's INSTRUMENT re-established and
+the READING KIT delivered to the owner — the human reading itself the
+owner's side, never a sandbox claim. The two packages regenerated
+deterministically at seed 42, the runner + the kit outside the repo
+(Rule 9 — the iter-191/206 reconstruction precedent's own class, the
+honest notes below): the RE-WEIGH package (the sparse twin macro 480 /
+calendar 240/360/420, the full chain — the factor's runner's crofts
+detour, the tally read at the crofts (the night arm, t=1112, partial
+fidelity, the cluster still minted — the recorded fall geometry's own
+consequence: no morning wait fits t=2824), the walks to Malby, the
+FALL at t=2824 with the fund 18, the COLLECTION, two aftermath
+crossings; the close paper 0 / coin 8, the heap 18, seven crossings +
+seven banks, the tale 87 lines, every rs-2/3/4/5/6 surface carried;
+the package = the tale + Garrick's opening/close records + the
+crofts' close record + three briefs — the player's crisis at the fall
+(the_paper_fell exact), Garrick's crisis (fall + collection, his
+voice), the player's close) and the HEARTBREAK package (the committed
+pack, the return's chain — 43 events, the tale 24 lines, the read's
+fail-then-pass, the claim's road-hearing, the echo 40→80, the names,
+rs-7/8's lines; the package = the tale + Tork's opening/close records
++ Ketta's close record + three briefs — the runner's road window,
+Ketta's arrival + close, her voice); both byte-identical on
+regeneration; the author audit pre-set BEFORE the reading (the repo's
+own recorded pass bars — the same bars the LLM band's glm n=2 readings
+were measured against, the convergence question stated as the band's
+own). The kit (the packages + the blind reader questions + the audit)
+handed to the owner as the sandbox deliverable; the LLM band's
+measured results the comparison baseline — the convergence the
+owner's reading away.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT fd95c2b — 2041 passed + 1
+the env pin; verified at BASE_COMMIT ff65edf — 2041 passed + 1
 skipped, ruff clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: content/province_pack/templates.json + tests/test_winterkin.py
-+ docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
-+ docs/TASKS.md + STATUS.md + worklog.md — 7 paths (the rs-landing
-class: the pack line + the pin + the state docs; two over the soft
-cap — the AGENTS §9 doc-sync law, the probe-run record the state
-docs' own class; the runner + the transcripts outside the repo,
-Rule 9).
-Track A: the W5 heartbreak station's second fix attempt measured
-(the mandatory pair MET at the strict n=2 bar — the station
-PARTIALLY CONFIRMED, the human band open). The prior iterations'
-record: iter-205 (heartbreak-fix — the first attempt's measured
-movement), iter-204 (heartbreak — the first measurement), iter-203
-(winterkin). The detail lives in the worklog + git.
+Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
++ docs/TASKS.md + STATUS.md + worklog.md — 5 paths doc-only (the
+probe-instrument state-docs class, iter-204's own form; the runner +
+the kit outside the repo, Rule 9; zero code, zero pack change, the LOG
+untouched).
+Track A: the W5 human live band's instrument re-established + the
+reading kit delivered (option (б) — the convergence the owner's
+reading away). The prior iterations' record: iter-206
+(heartbreak-subject — the mandatory pair MET at the LLM band), 205
+(heartbreak-fix), 204 (heartbreak). The detail lives in the worklog +
+git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -109,19 +105,18 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-206 DONE: the heartbreak station's SECOND fix attempt (rs-8)
-landed and the re-run's MANDATORY PAIR MET at the strict n=2 bar —
-the dead read as the futures' OWN holders (the subject problem
-solved at the LLM band), the opened half 2/2, the station PARTIALLY
-CONFIRMED (the human band open, the discovery-path residues
-standing).**
+**iter-207 DONE: the human live band's instrument re-established and
+the READING KIT delivered to the owner (option (б) — the rs family's
+eight fixed surfaces + the eighth's met pair the band it waits on)
+— the human reading itself the owner's side, the convergence the
+band's standing question.**
 
-1. The human live-band re-run after the reader-side fixes (the LLM
-   reader the instrument so far, glm n=2 — the owner's option (б);
-   the rs family's seven measured fixes + the eighth's met pair the
-   band it waits on; the heartbreak's own half now measured MET —
-   the human reader's convergence the band's standing question, the
-   owner's call).
+1. The owner's HUMAN READING over the delivered kit (the two packages
+   + the three blind questions; the author audit read after) — the
+   convergence assessment against the LLM band's measured baseline
+   (glm n=2, WORLD_TESTS §9's W5 entry) the reading's own next beat;
+   where the reading diverges, the divergence's class the datum (the
+   boundary law, never "improve the prose").
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

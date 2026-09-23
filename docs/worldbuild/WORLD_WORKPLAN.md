@@ -376,11 +376,17 @@ MANDATORY PAIR MET at the strict n=2 bar — the dead read as the
 futures' own holders n=2 convergent (the subject problem solved at
 the LLM band), the opened half 2/2, the station PARTIALLY CONFIRMED
 (the human band open, the discovery-path residues standing). The
-standing decision points for the owner: the human live-band re-run
-(the LLM reader the instrument so far — the rs family's seven
-measured fixes + the eighth's met pair the band it waits on) and the
-arc's assembly's remaining half (the shave's temporal placement —
-WORLD_TESTS §9's W5 entry's iter-202 record).
+human live band's INSTRUMENT has since been re-established and
+DELIVERED (iter-207 — the owner's option (б) call firing STATUS Next
+step item 1: the two packages regenerated deterministically at seed
+42, byte-identical, every recorded substance shape hit — the record
+in `WORLD_TESTS.md` §9's W5 entry; the reading kit + the pre-set
+author audit handed to the owner as the sandbox deliverable). The
+standing decision points for the owner: the HUMAN READING itself
+over the delivered kit (the convergence against the LLM band's
+measured baseline the reading's own assessment — the band's standing
+question) and the arc's assembly's remaining half (the shave's
+temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
 

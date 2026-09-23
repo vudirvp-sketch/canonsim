@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-207 · 2026-09-23 · humanband — the W5 human live band's INSTRUMENT re-established + the reading kit DELIVERED to the owner (the owner's option (б) call, STATUS item 1 — the LLM band's glm n=2 the instrument so far, the human reader's convergence the band's standing question): the two packages regenerated deterministically at seed 42 — the re-weigh twin (the fall t=2824, the fund 18, the close 0/8, the heap 18, seven crossings + seven banks, the tale 87 lines, every rs-2..6 surface carried; the honest note: the tally read lands on the night arm, partial fidelity — the recorded fall geometry's own consequence) and the heartbreak chain (43 events, the tale 24 lines, the fail-then-pass, the echo 40→80, rs-7/8's lines); both byte-identical on regeneration, the runner + the kit outside the repo (Rule 9)
+the author audit pre-set BEFORE the reading (the repo's recorded pass bars — the LLM band's own, the convergence question stated); the reading kit handed to the owner as the sandbox deliverable — the human reading itself + the convergence assessment the owner's side, never a sandbox claim
+2041+1 + ruff + docguard clean; 5 paths doc-only (the state docs — iter-204's own class); iter-197 evicted per the cap
+---
 iter-206 · 2026-09-23 · heartbreak-subject — the heartbreak station's SECOND fix attempt landed and the re-run's MANDATORY PAIR MET at the strict n=2 bar (the owner's further-route call over the iter-205 subject problem, STATUS item 1): rs-8 — the mourning line's clause RE-SUBJECTED ("their own futures the flood took down with them, the line, the duties and the holdings that were to be theirs" — the futures theirs, removed with them, the flood the remover; the transmission vocabulary gone; the echo line untouched per its 1/2 confirmation), zero code, zero corpus price, the pins updated
 the re-run (the iter-204 protocol re-established, the runner + the reader prompt rebuilt outside the repo — Rule 9, the audit pre-set before the reading, glm n=2): the lost-future half MET n=2 convergent (both readings quoting the re-subjected clause verbatim, the loss predicated of the dead's own futures — the inheritance-character failure mode GONE), the opened half MET 2/2, the supporting bars MET n=2 — the station PARTIALLY CONFIRMED (the human band open); the anti-loop law not tripped
 2041+1 + ruff + docguard clean; 7 paths (the pack line + the pin + the state docs); iter-196 evicted per the cap
@@ -50,10 +54,3 @@ the probe's re-run's mandatory bar MET (the covering connected, glm n=2 converge
 iter-198 · 2026-09-23 · abfalsifier — the mech-2 A/B falsifier's measurement RUN (the owner's queue-top call; the runner + transcripts outside the repo, Rule 9): 6 pack-edit tasks × bare/impact-gated × n=3 at glm-4-plus, whole-file protocol — the gate moved NO metric (success 8/18 both arms, lint refusals 0, patches tiny); the cognitive premise REFUTED at scale (conditional-on-parse 8/8 vs 8/9 — find/scope not the binding constraint)
 the measured bottleneck: the whole-file emission wall (bracket drift in director.hooks, 10/15 + 9/15 invalid) + 73% silent notes paraphrase; the rename 0/6 (the dangling-tag lint gap confirmed) — TECH_NOTES §17 the numbers; the structured-patch PROPOSAL re-scoped to emission
 reliability, fate the owner's call; 5 paths doc-only (TECH_NOTES §17 + the intake-37 block + TASKS + STATUS + worklog); the covering series left to the next iteration; 2026+1 + ruff + docguard clean both ends; iter-189 evicted per the cap
-
----
-iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + the closure pass (the owner's «старые
-висящие позакрывал» call, D-184's four questions at HEAD cd64ce8): every parked premise CONFIRMED-current
-(parse-2/st-2/st-5/scav-1/pack-3/bg-6/doc-2/chron-2 — no gate moved) — zero closures-as-dead; the done rows
-engine-1 + mech-2 collapsed to the minimal form; the ROADMAP res-1/since-1 rot + the README engine-1/bg-9
-rot fixed; 5 paths doc-only; 2026+1 + ruff + docguard clean both ends; iter-188 evicted per the cap
