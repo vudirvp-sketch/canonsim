@@ -86,7 +86,11 @@ blast-radius question (D-142). The lint families, all live in
   the registry; precondition tests against the closed set; action event
   types against the template vocabulary; check kinds against
   `rules.checks`; knowledge audiences/channels/fidelity/slots against
-  their closed sets; transition layers against the template vocabulary.
+  their closed sets; transition layers against the template
+  vocabulary; action hook tags against `director.hooks` (iter-200, the
+  rename-safety closure — the last unchecked hook-reference surface;
+  the worldgen chronicle and the weather states already checked
+  theirs).
 - **The systems DAG** (`core/scheduler.py`): the systems table's
   reads/writes annotations build the per-tick pass order; a write-write
   ambiguity without before/after hints fails at load.

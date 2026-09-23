@@ -543,6 +543,41 @@ def test_pack_lint_catches_unknown_knowledge_slot(tmp_path: Path) -> None:
         load_pack(_broken_pack(tmp_path, mutate))
 
 
+# -- pack lint: the iter-200 rename-safety closure (the iter-198 T3 cell) --------
+
+
+def test_pack_lint_catches_stale_hook_tag_after_definition_rename(tmp_path: Path) -> None:
+    """iter-200 (TECH_NOTES §17, the T3 measured failure): the cross-file
+    rename — the director.hooks key renamed in rules.json, the actions.json
+    seeding tag left stale — passed the admission lint, and director.seed's
+    silent None branch turned the deferred consequence into a no-op. The
+    lint now refuses the dangling tag at load: the actions' hooks branches
+    were the last hook-reference surface without the closure (the
+    worldgen chronicle and the weather states already check theirs)."""
+    def mutate(target: Path) -> None:
+        rules = json.loads((target / "rules.json").read_text())
+        hooks = rules["director"]["hooks"]
+        hooks["guard_suspicious_of_pc_renamed"] = hooks.pop("guard_suspicious_of_pc")
+        (target / "rules.json").write_text(json.dumps(rules))
+
+    with pytest.raises(PackError, match="not\\sa declared director.hooks entry"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
+def test_pack_lint_catches_undeclared_hooks_branch_tag(tmp_path: Path) -> None:
+    """The rename's other half and the typo family: a seeding tag that
+    names no declared hook is dead data — refused at load like the other
+    closed-vocabulary memberships, never a silent runtime no-op."""
+    def mutate(target: Path) -> None:
+        actions = json.loads((target / "actions.json").read_text())
+        steal = next(a for a in actions["actions"] if a["intent"] == "steal")
+        steal["hooks"]["failure"][0] = "guard_suspicious_of_pc_typo"
+        (target / "actions.json").write_text(json.dumps(actions))
+
+    with pytest.raises(PackError, match="not\\sa declared director.hooks entry"):
+        load_pack(_broken_pack(tmp_path, mutate))
+
+
 # -- the texture-block lint (iter-11 clauses; iter-11a hardening) ----------------
 
 

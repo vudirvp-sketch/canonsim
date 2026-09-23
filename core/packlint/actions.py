@@ -113,6 +113,16 @@ class ActionsLint:
         actions = self._data["actions.json"]["actions"]
         templates = self._data["templates.json"]["events"]
         checks = self._data["rules.json"]["checks"]
+        # iter-200 (the rename-safety closure, the iter-198 T3 measured
+        # failure — TECH_NOTES §17): the declared hook tags the branches
+        # below check membership against. The read is guarded (the KI#77
+        # order law: _director validates the block LATER, so a malformed
+        # director config must read here as no declarations, never a
+        # crash — the worldgen/weather precedents read the table only
+        # after _director has run).
+        director_cfg = self._data["rules.json"].get("director")
+        hook_table = director_cfg.get("hooks", {}) if isinstance(director_cfg, Mapping) else {}
+        declared_hooks = set(hook_table) if isinstance(hook_table, Mapping) else set()
         intents = [action["intent"] for action in actions]
         _require(len(intents) == len(set(intents)), "action intents are not unique")
         for action in actions:
@@ -301,6 +311,20 @@ class ActionsLint:
                 )
                 for tag in tags:
                     _require(isinstance(tag, str), f"action {intent}: hook tags are strings")
+                    # iter-200: the seeding side of the rename-safety law —
+                    # a tag naming no declared hook is a silent no-op at
+                    # runtime (director.seed's None branch skips it), so a
+                    # rename that misses a seeding site kills the deferred
+                    # consequence invisibly. The worldgen and weather lints
+                    # already refuse their own hook references; the
+                    # actions' branches were the last unchecked surface.
+                    _require(
+                        tag in declared_hooks,
+                        f"action {intent}: hooks[{branch!r}] tag {tag!r} is not "
+                        "a declared director.hooks entry (the runtime ignores "
+                        "unknown tags — the seeded consequence never fires; "
+                        "declare the hook in director.hooks first)",
+                    )
             ignition = action.get("ignition")
             if ignition is not None:
                 _require(

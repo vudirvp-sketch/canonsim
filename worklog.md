@@ -5,13 +5,11 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
-bg-9 · 2026-09-21 · apiprose — bg-7's standing API-side gap row closed (the owner's
-standing-frames call): the four prose/parse families re-run at glm-4-plus (paced —
-the 429 window recovers in ~minutes); the numbers → TECH_NOTES §10's re-run block +
-TEST_PLAN §8.5 + TASKS bg-9 + the digest drift pin widened to the bg-N STATUS form
-(the test's same-iteration law); 6 paths; the runner outside the repo (Rule 9,
-git-clean through the run); 1969+1 + ruff + docguard clean both ends; iter-174
-evicted per the cap
+iter-200 · 2026-09-23 · renamelint — the rename-safety admission closure (the owner's session-order call, the iter-198 T3 measured gap, TECH_NOTES §17):
+the actions' hooks-branch tags now linted against `director.hooks` (the runtime's silent None-branch the measured killer; the
+KI#77-guarded read, `_director` later) + the two-test regression packet (tests/test_core.py) + PACK_SPEC §3 the contract sync;
+the structured-patch proposal PARKED with the minimal-prototype wording (no machinery — the mech-2 row); 6 paths (one over the
+soft cap: the AGENTS §9 doc-sync law); 2034+1 + ruff + docguard clean both ends; bg-9 evicted per the cap
 
 ---
 iter-199 · 2026-09-23 · flowgloss — the covering residue's row landed (the owner's «продолжай работу по логике» continuation call firing STATUS Next step item 1, the row carried per the «если в одну итерацию не уместишься» instruction): rs-4 the flow-gloss boundary — the pack's flow_glosses table + the renderer's gloss_flow + the lint closure + the verb line's conditional tail (the LOG untouched, zero corpus price)
