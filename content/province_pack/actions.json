@@ -1312,6 +1312,204 @@
         "failure": []
       },
       "notes": "the seat's SUCCESSION (charcoalpaper, iter-189 — the transfer door, D-191's turnover application made lawful): the paper walks to the successor — the camp's own reading of the debt (the seat, never the blood; the hills' unlapseable reading turned on the guild's instrument: whoever the camp holds at the burn masters the debt). The receiving-stock gate (account_at_least paper 0 on the target — the value-0 form is the stock's EXISTENCE gate) refuses a target that declares no paper stock SOFTLY (the door's own shape, the KI#15 family); no committed entity declares one — the lived succession waits on the successor's mint (the crews' recognition, no committed surface — the honest residue, a future row's own call). The tally-stick does NOT ride this door (the verb-gate boundary: carried and unflagged, untakeable — the badge's handing-over is the recognition's own mint, iter-185's law); the paper walks, the badge follows when the camp speaks. The witnesses learn the_seat_passed. The frozen-force counterfactual (the guild's book reading a man's name — the debt dying with the master) is the door's own removal: the perturbation arm, ANCHOR_REGION §6.4's record."
+    },
+    {
+      "intent": "share_board",
+      "label": "share the board",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "board_shared"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winters_board"
+          },
+          {
+            "who": "same_location",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winters_board"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the shelter law's enactment (iter-203, the winter kin's embodiment — the C03 triple's REPEATED CONSEQUENTIAL CO-PRESENCE factor made a verb): the host shares the winter's board with a co-present guest — the meal at the crossing's table, the stores eaten against the debt (the cost real and one-sided by the law's own design, §6.3's pressure rung; the authored arithmetic the paper twenty's own stores eight — no new account, the debt's price the economy notes' only mirror). The knowledge names the table (the actor AND the co-present — the on_action's witnesses): each sharing is the co-presence REGISTER, the kin climb riding the reaction table (on_action.board_shared — the guests' side +10, the numeric-home law the rarity gate's mechanical half). The ordinary meal prices nothing — the mint needs the stranded season (flood-year class, once a generation); the verb itself is season-blind (the engine content-blind, INV-3 — the rarity is the authored law these notes carry, the protocol walks it). The proof's read and the claim are separate doors (read_kinmark, claim_kinmark) — the board forms, the notch proves, the claim opens. RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law). The recognition rides the BILATERAL climb (on_action's two entries — the guests' and the host's; the crossing at the bar the state's own pin; the release-hook form parked, the seeding law's constraint recorded in director.notes)."
+    },
+    {
+      "intent": "read_kinmark",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the marks stay marks",
+      "events": {
+        "success": "kinmark_read",
+        "failure": "kinmark_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winter_kin"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_guest_marks_on_the_haft"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the proof's read (iter-203, the winter kin's embodiment — §6.3's second gap answered: 'the notch has no committed action; the return's claim would need its own hinge family'): the pole's SECOND story — the read_pole hinge reads the flood story off the payment tallies; this hinge reads the KIN NOTCH, the winter's guests cut into the host's own count (the same blade, the same staff — the notch habit's own class, a people that signs with a blade, not a pen). The read hinge family's FIFTH instance (the grim read_ticket first, the pole second, the stair third, the tally fourth — the pole's second story its own hinge, two marks' classes one staff). The close read mints the literal token the_winter_kin — the secrets registry's fourth key (a CARE debt over the toll-taker: the proof of her house's obligation, the claim's door the only consumer); the templated-token ineligibility law holds (the subject fixed, the literal vocabulary the only legal surface). The perception gate is the honest failure surface (a failed read mints only the vague unread guest marks — wear seen, meaning missed); the field_in read pins the target to the pole (studying any other stave mints nothing); the acquisition conditions ride the saw channel (the unlit stair at night steps the story down to partial — the pole's own law)."
+    },
+    {
+      "intent": "claim_kinmark",
+      "label": "claim",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "kinmark_claimed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "leverage_over",
+          "who": "target"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "the_winter_kin"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the edge's own door (iter-203, the winter kin's embodiment — the F02 criterion's mechanical form, the C03 triple's endogenous relation EXPANDING FUTURE LEGAL OPTIONS): the proof-holder claims the kin notch at the stair — the winter kin's return, the option no other mechanism expresses (§6.3's NEW OPTION rung). THE LEVERAGE GATE is the option's edge: only an actor holding the LIVE the_winter_kin cluster over the TARGET may claim (the who-noun form — the claim's target must itself be the proof's subject, the host; the read's proof the key — a proof-less claimant, or a claim against any other house, is refused SOFTLY at the door, attempts are facts; the claim packet's falsifier walks exactly this). The claim mints the token to every co-present (the road hears — the edge named aloud where the road can hear, the counter-record spent, the tally precedent's own shape) and the on_action echo completes the host's side (her inherited 40 + the acknowledgment's 40 = the bar 80 — the recognition answered, the rarity gate intact: the claim answers the generation-old notch, no new winter). The purse question rides the authored law beside the door (§6.3's exclusion rung — kin-at-the-table never read for coin; the flaw's beat targets the stranger, not kin — the committed coerce entry's own target the boundary, never a new gate). RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law)."
+    },
+    {
+      "intent": "say_the_names",
+      "label": "mourn",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "the_names_kept"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "channel": "heard",
+            "fidelity": "exact",
+            "knows": "the_drowned_generation_named"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the mourning (iter-203, the winter kin's embodiment — §6.3's third gap answered: 'no non-blood grief registration; the constructed kin's mourning would need a seeded entry'): the winter kin's own duty performed — the drowned generation's names said aloud at the crossing's table, the grief given its second holder (the flood year's dead kept by name OUTSIDE the bloodline — the RESIDUE rung's own words; the guest keeps the host line's dead, the widened mourning line). The pole is the count's staff (the field_in read pins the target — the names said over the notch's own home); the co-present hear (the road's word carrying who answered whom — the living-memory law's own carrier). The grief_wakes numeric-home law deliberately NOT ridden (the grievance axis is the feud's own — the wergeld ratio's two houses; the mourning is a NAME-keeping, never a man-price — the seeded-entry gap answered by the token + this beat, the the_flood_story precedent's family). The recognition's enactment rides this beat by PROTOCOL (the playscript drives it once the bilateral climb crosses the bar — the formation walk's own shape; a director-hook release was parked: hooks seed only from committed event tags (D-005) and no resolver mints knowledge and hooks on one success branch — the constraint recorded in director.notes). RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law)."
     }
   ]
 }

@@ -282,12 +282,13 @@
       "reputation",
       "suspicion",
       "trust",
-      "fear"
+      "fear",
+      "kin"
     ],
     "suspicion_thresholds": {
       "status_suspect_at": 25
     },
-    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; the manifest-check band (50) lives with its two owners, the director.hooks.possible_manifest_check[_relief].trigger.value pair (iter-4a cleanup removed the doc's mirror — the band is now declared per watcher, iter-43; the pack's balance, not a doc number). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3; the verdict delta (+25, waybill_unsatisfactory) lives in suspicion_sources — the three numbers compose the ladder per watcher: band 50 + verdict 25 >= arrest 75. Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations"
+    "notes": "ev_0007 pins suspicion 0→25 together with status unknown→suspect; the manifest-check band (50) lives with its two owners, the director.hooks.possible_manifest_check[_relief].trigger.value pair (iter-4a cleanup removed the doc's mirror — the band is now declared per watcher, iter-43; the pack's balance, not a doc number). The arrest threshold lives in crime_watch.arrest.requires_suspicion — single owner since iter-3; the verdict delta (+25, waybill_unsatisfactory) lives in suspicion_sources — the three numbers compose the ladder per watcher: band 50 + verdict 25 >= arrest 75. Suspicion deltas ride the crime reactions (iter-3); the sparse pair map (P2a) seeds from entities.json pair_relations. The KIN axis (iter-203, the winter kin's embodiment — the W5 heartbreak station's design material, the C03+F02 consult): the RELATION FORM §6.3's gap named — 'no committed non-blood kin edge in the pair vocabulary; a recognized standing would need its own form' — the constructed kinship's OWN measure, never a trust value (blood kin is a trust axis VALUE; the winter kin is an AXIS: the recognized standing's own scale, the milk-kinship mechanism's committed form, WORLD_AUTHORING §19's transfer law). The scale rides the block's own [0,100]: 0 no edge, the sparse map's absence the same answer (a pair with no entry holds no kin — the rarity law: the mint is flood-year class, once a generation); the RECOGNITION BAR 80 — the winter's board through one full stranded season (the on_action arithmetic's own number: four board sharings x +10 carrying the inherited 40, the claim packet's walk the pin); the INHERITED carrying 40 — the drowned generation's edge passed down both lines, the recognition PENDING (the living memory thinned by the generation, the claim to be re-made at the stair); the acknowledgment's +40 rides the claim's own on_action echo (the host's side completing at the proof — the return's path when no winter is spent). The axis moves ONLY through the on_action table (the board's two climbs +10, the claim's echo +40) — no urgency, no decay, the edge's standing event-born (INV-1); the numeric-home law is the rarity gate's mechanical half (only the seeded/wintering pairs carry homes — the crowd never climbs)"
   },
   "knowledge": {
     "channels": [
@@ -891,6 +892,23 @@
         ],
         "flaw": "the rope side answered the road, not the stair",
         "notes": "Dellan's road-leg beat (companion-1 + tune-3, iter-157 — the FIRST committed NPC movement source: the HEAD urgency census reads a move kind at last, tune-3's own gap closed): when the second hand stands with the runner and the artery is one leg away, he walks it — the rope side's own errand, the pole traveling with him (the carried-item position contract on the autonomous mover, KI#46's law). The scene-LOD law shapes the beat (depth-3): only the active scene rolls per-beat, so the beat fires CO-LOCATED and the hop leaves the scene — the warm ring waits for the reader; the companion's legs beyond the hop ride the mode B door (the paired actor steps, the no-teleport law's letter: every leg an ordinary move intent through the door, lag a legal world state). tune-3's deciding half: the second hand one leg out on the road IS the traveling knower — the stair's shout reaches him through the walls (alarm_adjacent, channel heard, fidelity vague — the province_companion twin pins the beat live, the first committed instance). APPEND-ONLY discipline (D-079): this entry rides the shared per-(npc, kind) stream's own name; a future entry for this NPC names a different kind, never a second move. The flaw key consumes the spine's flaw (AP-8, the singly-consumed shape — the cultures prohibitions stay the doubly-consumed pair's own)."
+      },
+      {
+        "npc": "npc_winterkin_01",
+        "probability_per_beat": 25,
+        "intent": {
+          "kind": "read_kinmark",
+          "target": "punt_pole_01"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "flaw": "the notch is all he carries of his father",
+        "notes": "Tork's notch beat (iter-203, the winter kin's embodiment — the AP-8 consuming rule over the son's spine): at the stair with the pole, a quarter of the beats find him studying the haft — the flaw's own shape (everything he is routes through the dead token: the marks read again, the father's winter handled in wood). The beat never fires in the committed band (his genesis the crofts, the pole the stair — the requires fail silently, the world's answer); the son's OWN urgency stream (engine-2's per-entry add-safety) draws alone — no other entry's rolls touched, the golden corpus byte-untouched. The claim and the mourning ride their own doors (the playscript and the recognition hook) — this beat is the flaw's ambient shape, never the return's driver."
       }
     ],
     "notes": "the beat gates fire at 360/720/1080 (the day's phases); every non-player NPC rides ≥1 authored surface (the intersection-matrix law) and every declared spine flaw rides ≥1 entry (AP-8, pack-ci's crosswalk — the province is the first committed consumer). No two entries share a trigger→action pair (AP-11: the clone check — the intents and requires all differ)."
@@ -1128,7 +1146,7 @@
         "notes": "the aftermath chain (content-6/D-081 — the first LIVE arc, re-voiced): the day's institutional beats march — the relief's public confrontation first, the market's reckoning second. The relief is the FIRST member on purpose: it is the one hook live on the runs the driver targets, so the order law never holds the corpus-pinned release. The chain is BOTH halves of the layer: causality (the order law — the sweep is a candidate only after the confrontation) and anti-spam (the gap)."
       }
     },
-    "notes": "the consequence planner over the province's three channels (the road's balance verbatim — the pacing stack is pack-portable mechanics, D-067/D-068's layering; threat reads physical_threats, social reads suspicion, ambient reads nothing — the quiet gate). Six hooks: the watcher pair's suspicion compounding, the manifest-check confrontation pair (the climax arms), the market sweep (the arc driver), the two ambient murmurs (the grief and the storm)."
+    "notes": "the consequence planner over the province's three channels (the road's balance verbatim — the pacing stack is pack-portable mechanics, D-067/D-068's layering; threat reads physical_threats, social reads suspicion, ambient reads nothing — the quiet gate). Six hooks: the watcher pair's suspicion compounding, the manifest-check confrontation pair (the climax arms), the market sweep (the arc driver), the two ambient murmurs (the grief and the storm). The winter kin's recognition deliberately rides NO hook (iter-203): a hook seeds only from a committed event's tag list (D-005) and no resolver mints knowledge AND hooks on one success branch — the board needs the knowledge (the on_action's witnesses), so the recognition rides the BILATERAL climb instead (on_action's second entry — the host's counter-climb, the crossing at the bar the state's own pin; the release-hook form parked, the constraint recorded here)."
   },
   "on_action": {
     "alarm_raised": [
@@ -1173,7 +1191,38 @@
         "notes": "the talked-down branch's own key — the same crowd reaction (the public challenge happened; the answer satisfying the watcher does not un-see it)"
       }
     ],
-    "notes": "the reaction table (drama-3's dispatch layer): the alarm's panic echo + the manifest family's crowd reactions. The one-hop law throughout — reactions commit at the triggering event's own tick, no cascades beyond."
+    "board_shared": [
+      {
+        "scope": "witnesses",
+        "event": "kin_stirs",
+        "state": {
+          "prop": "pair.npc_weirkeeper_01.kin",
+          "add": 10
+        },
+        "notes": "the winter kin's formation beat, the GUESTS' side (iter-203, the C03 triple's co-presence factor made pack data): every knower of the board shared gains kin TOWARD THE HOST — the winter's board binding care's recipient to its bearer (the reciprocal function, §6.3's own words). The fixed prop is the CROSSING's board (the shelter law's house — the only committed consumer; a per-host template is a future consumer's call, L13). The numeric-home law is the rarity gate's mechanical half: only a pair carrying a kin home climbs (the seeded/wintering guests — the crowd and the runner never do; the ordinary meal prices nothing, the mint flood-year class). The +10 is a NOTCH's worth of winter — four sharings carry the inherited 40 to the recognition bar 80 (the claim packet's walk pins the crossing); the host's own counter-climb rides the second entry (the edge forming BILATERAL — the care flowing one way, the duties flowing back, both sides' climbs the mint's own arithmetic)."
+      },
+      {
+        "scope": "witnesses",
+        "event": "the_house_answers",
+        "state": {
+          "prop": "pair.npc_winterkin_01.kin",
+          "add": 10
+        },
+        "notes": "the winter kin's formation beat, the HOST'S side (iter-203, the C03 triple's reciprocity factor: the edge binds both ways — the host's counter-climb, the toll-taker's house answering the winter's board): every knower of the board shared gains kin TOWARD THE GUEST'S SON — the numeric-home law leaving only the toll-taker's seeded pair (the host's own carrying, the drowned generation's notch now her holding). The bilateral climb IS the mint: both sides crossing the bar 80 together at the fourth sharing (the formation's completion — the edge standing both ways); the RETURN's path completes the host's side through the CLAIM's echo instead (kinmark_claimed — the proof acknowledged, no new winter, the rarity gate intact)."
+      }
+    ],
+    "kinmark_claimed": [
+      {
+        "scope": "witnesses",
+        "event": "the_edge_answers",
+        "state": {
+          "prop": "pair.npc_winterkin_01.kin",
+          "add": 40
+        },
+        "notes": "the acknowledgment's echo (iter-203, the reciprocity factor's completion): every knower of the claim gains kin TOWARD THE GUEST'S SON — the numeric-home law leaving only the toll-taker's seeded pair (the host's side): her inherited carrying 40 completing at the bar 80 the moment the proof is claimed. The claim is the edge's own door (the proof held, the lever spent aloud where the road can hear) — the acknowledgment is not a new mint but the INHERITED edge's recognition completing, the rarity gate intact (no board, no new winter — the claim answers the generation-old notch)."
+      }
+    ],
+    "notes": "the reaction table (drama-3's dispatch layer): the alarm's panic echo + the manifest family's crowd reactions + the winter kin's three beats (the formation's two climbs + the acknowledgment's echo — the kin axis's ONLY movers, the edge's standing event-born). The one-hop law throughout — reactions commit at the triggering event's own tick, no cascades beyond."
   },
   "secrets": {
     "event": "leverage_gained",
@@ -1192,9 +1241,14 @@
         "subject": "npc_smelter_01",
         "type": "debt",
         "expires_ticks": 129600
+      },
+      "the_winter_kin": {
+        "subject": "npc_weirkeeper_01",
+        "type": "debt",
+        "expires_ticks": 129600
       }
     },
-    "notes": "the leverage registry (social-1/P3a, phases.md §3 — the CK3 add_hook precedent): which knowledge tokens are SECRETS in this setting — the tin-theft sighting, held by a novel knower, mints one leverage_gained fact (the coercion economy's fuel: Ketta's flaw entry reads the live cluster). Expiry is a read-side window (live while t < expires_at — never an event, INV-1; live_leverage the single read owner). The second key (iter-161, the pole's embodiment seeds): the_flood_story — the flood year's chain read off the punt pole (the read_pole hinge, the grim read_ticket pattern's second instance); the subject the toll-taker herself (the debtor — knowing the debt's size and its guild holder is the lever at the stair, ANCHOR_REGION §6.1's NEW OPTION rung: the debt named aloud where the road can hear); type 'debt' (a claim over the debtor, distinguished from blackmail's witnessed transgression — v0.1 vocabulary, no consumer yet); the expiry one full season (129600 — the debt's own reckoning unit, the lever living through the season's collection; the KNOWLEDGE never expires, only the cluster's liveness window does — and a re-read after expiry mints no fresh cluster, the knower already holds the token: the novelty law's own consequence). Honest residue: the family's own read or telling of the story mints the cluster too (the lived knowledge is not event-recorded — INV-1's law, the first pack whose secret's subject has kin); dormant in the committed set (no driver reads the pole to the family), a family-reading beat a future authored design. The third key (iter-185, tallyread — the charcoal camp's first embodiment): the_camps_word — the anti-shave discipline read off the tally-stick (the read_tally hinge, the read hinge family's fourth instance, the pole's own item-kind class); the subject the master himself (the debt's named holder, the withhold's keeper — knowing the count is the re-weigh's leverage: the count public, the withhold harder to keep, ANCHOR_REGION §6.4's crisis probe's own tally leg); type 'debt' (a claim over the debtor — the counter-record's claim in the debt's reconciliation, the two records meeting; the count prices trust, never coin — the debt's arithmetic untouched); the expiry one full season (129600 — the weighing season's own window, the lever living through the re-weigh). Honest residues: the crews' own count (the lived knowledge — §6.4's knowledge map) is not event-recorded (INV-1's law) and the crews are authored roles, no committed NPC holds it — the camp's own reading mints nothing; the master's own read mints nothing either (the holder != subject guard, nobody holds leverage over themselves); the present count is authored, never runtime (the read mints the WORD, the read_stair precedent's LAW-never-PRESENT boundary; the freight's volume surface the other gap's own row)."
+    "notes": "the leverage registry (social-1/P3a, phases.md §3 — the CK3 add_hook precedent): which knowledge tokens are SECRETS in this setting — the tin-theft sighting, held by a novel knower, mints one leverage_gained fact (the coercion economy's fuel: Ketta's flaw entry reads the live cluster). Expiry is a read-side window (live while t < expires_at — never an event, INV-1; live_leverage the single read owner). The second key (iter-161, the pole's embodiment seeds): the_flood_story — the flood year's chain read off the punt pole (the read_pole hinge, the grim read_ticket pattern's second instance); the subject the toll-taker herself (the debtor — knowing the debt's size and its guild holder is the lever at the stair, ANCHOR_REGION §6.1's NEW OPTION rung: the debt named aloud where the road can hear); type 'debt' (a claim over the debtor, distinguished from blackmail's witnessed transgression — v0.1 vocabulary, no consumer yet); the expiry one full season (129600 — the debt's own reckoning unit, the lever living through the season's collection; the KNOWLEDGE never expires, only the cluster's liveness window does — and a re-read after expiry mints no fresh cluster, the knower already holds the token: the novelty law's own consequence). Honest residue: the family's own read or telling of the story mints the cluster too (the lived knowledge is not event-recorded — INV-1's law, the first pack whose secret's subject has kin); dormant in the committed set (no driver reads the pole to the family), a family-reading beat a future authored design. The third key (iter-185, tallyread — the charcoal camp's first embodiment): the_camps_word — the anti-shave discipline read off the tally-stick (the read_tally hinge, the read hinge family's fourth instance, the pole's own item-kind class); the subject the master himself (the debt's named holder, the withhold's keeper — knowing the count is the re-weigh's leverage: the count public, the withhold harder to keep, ANCHOR_REGION §6.4's crisis probe's own tally leg); type 'debt' (a claim over the debtor — the counter-record's claim in the debt's reconciliation, the two records meeting; the count prices trust, never coin — the debt's arithmetic untouched); the expiry one full season (129600 — the weighing season's own window, the lever living through the re-weigh). Honest residues: the crews' own count (the lived knowledge — §6.4's knowledge map) is not event-recorded (INV-1's law) and the crews are authored roles, no committed NPC holds it — the camp's own reading mints nothing; the master's own read mints nothing either (the holder != subject guard, nobody holds leverage over themselves); the present count is authored, never runtime (the read mints the WORD, the read_stair precedent's LAW-never-PRESENT boundary; the freight's volume surface the other gap's own row). The fourth key (iter-203, the winter kin's embodiment — the proof's read, §6.3's second gap): the_winter_kin — the kin notch's meaning read off the pole's haft (the read_kinmark hinge, the read family's fifth instance — the pole's SECOND story: the payment tallies the flood story, the guest count the winter kin; the same staff, two marks' classes); the subject the toll-taker again (the house that sheltered — the proof of HER house's obligation: the barred purse, the open door, the dead kept by name; the pole's two levers one subject, the haft's own arithmetic); type 'debt' (the CARE debt — the notch prices care, never coin, §6.3's own law: the claim over the obliged, the paper's coin-debt and the notch's care-debt the same vocabulary's two kinds — the notes the distinction's only mirror); the expiry one full season (129600 — the recognition's own window, the flood story's own unit). The claim's door reads this cluster (claim_kinmark's leverage_over gate — the F02 criterion's mechanical form: only the proof-holder may claim, the edge's expansion of legal options); the claim itself mints the token to every co-present (the road hears — the edge public, the counter-record spent aloud, the tally precedent's own shape)."
   },
   "economy": {
     "accounts": [
@@ -1372,7 +1426,14 @@
       "first_frost_turns",
       "account_sourced",
       "account_transferred",
-      "account_consumed"
+      "account_consumed",
+      "board_shared",
+      "kin_stirs",
+      "kinmark_read",
+      "kinmark_claimed",
+      "the_edge_answers",
+      "the_names_kept",
+      "the_house_answers"
     ],
     "thresholds": {
       "medium": 2,
@@ -1781,7 +1842,7 @@
   "budget": {
     "npcs": {
       "min": 7,
-      "max": 12
+      "max": 13
     },
     "items": {
       "min": 4,
@@ -1793,9 +1854,9 @@
     },
     "templates": {
       "min": 40,
-      "max": 70
+      "max": 75
     },
-    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9). The calendar slice (slice 4) RE-DECLARES the template ceiling deliberately: the market day's and the fair's lines plus the four seasons' own phase lines grow the families to 58 (the second honest re-declare, 55 to 60 — the phase lines are the slice's own readability surface, each season's turn its own tale line). debt-1 (iter-162) re-declares the ceiling again (60 to 65): the economy arming's verb line grows the families to 61 — the reckoning's tale line the arming's own readability surface (the third honest re-declare, the same law). charcoalpaper (iter-189) re-declares the ceiling again (65 to 70): the lifecycle doors' two verb lines (account_transferred, account_consumed — the fall's and the succession's own tale lines) grow the families to 67 (the fourth honest re-declare, the same law: the standing state's beats are the row's own readability surface)."
+    "notes": "AP-1 (pack-ci's crosswalk, PACK_SPEC §6): the pack's declared size bounds. The skeleton slice (iter-118) declared 6-9 npcs for its seven-strong cast; the cultures slice (iter-119) RE-DECLARES deliberately (the budget block's own law: growth inside the bounds or an honest re-declare) — the condensation travelers grow the cast to 10, the tier template lines grow the families to 48. The factions triangle (slice 3) reuses the settlement cast as predicted (10, inside 7-12); its goal verbs and reaction lines grow the template families to 52 (inside 40-55) and the feud's story-critical claims grow the hooks to 7 (inside 5-9). The calendar slice (slice 4) RE-DECLARES the template ceiling deliberately: the market day's and the fair's lines plus the four seasons' own phase lines grow the families to 58 (the second honest re-declare, 55 to 60 — the phase lines are the slice's own readability surface, each season's turn its own tale line). debt-1 (iter-162) re-declares the ceiling again (60 to 65): the economy arming's verb line grows the families to 61 — the reckoning's tale line the arming's own readability surface (the third honest re-declare, the same law). charcoalpaper (iter-189) re-declares the ceiling again (65 to 70): the lifecycle doors' two verb lines (account_transferred, account_consumed — the fall's and the succession's own tale lines) grow the families to 67 (the fourth honest re-declare, the same law: the standing state's beats are the row's own readability surface). The winter kin (iter-203, the W5 heartbreak station's design material) re-declares the ceiling again (70 to 75) and grows the cast to its own ceiling: the son the TWELFTH npc (the named-stranger class, no generated_name) and the npc CEILING re-declared 12 -> 13 (the committed cast at twelve leaves the crafted-successor twin of charcoalpaper's claim packet no headroom — the test band's own mint needs one slot above the committed cast, the same honest-re-declare law), the hooks UNCHANGED at seven (the winter kin's recognition rides the on_action table, not a hook — the seeding law's constraint recorded in director.notes), the winter kin's EIGHT tale lines (board_shared, kin_stirs, the_house_answers, kinmark_read, kinmark_read_failed, kinmark_claimed, the_edge_answers, the_names_kept — the formation's bilateral climb, the proof's read, the claim, the acknowledgment, the mourning) grow the families to 75, exactly the new ceiling (the fifth honest re-declare, the same law: the heartbreak's beats are the row's own readability surface)."
   },
   "names": {
     "profiles": {

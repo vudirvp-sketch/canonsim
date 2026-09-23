@@ -339,12 +339,22 @@ entry): rs-4 the flow-gloss boundary, the covering connected at its
 own mandatory bar (glm n=2 convergent); the row's measured
 successors: the shave's AGENCY surface and the withhold's
 one-surface contradiction — each a future row's own call, never
-"improve the prose". The standing decision
-points for the owner: the heartbreak probe (the trio's last station,
-the same form), the human live-band re-run (the LLM reader the
-instrument so far), and the covering row's measured successors (the
-shave's agency + the withhold's one-surface contradiction — WORLD_TESTS
-§9's W5 entry's iter-199 record).
+"improve the prose". The heartbreak station's
+DESIGN MATERIAL has since LANDED (iter-203, the owner's queue-order
+call — the record in `WORLD_TESTS.md` §9's W5 entry): the winter
+kin's embodiment as pure pack data, the C03+F02 consult's three gaps
+answered (the kin axis + the bilateral seed, the proof's read, the
+mourning surface), the formation side tested in a committed pack (the
+winter's board climbing the kin axis bilaterally to the recognition
+bar — the first co-presence-formed relation), the claim door the F02
+criterion's mechanical form. The standing decision
+points for the owner: the heartbreak PROBE RUN (the trio's last
+station's measurement — the same bounded form, the isolation law
+held; the return's chain now committed and deterministic at seed 42,
+the instrument ready), the human live-band re-run (the LLM reader the
+instrument so far — the rs family's five measured fixes the band it
+waits on), and the arc's assembly's remaining half (the shave's
+temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
 

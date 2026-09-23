@@ -216,7 +216,10 @@ def test_the_armed_census() -> None:
     )
     for event_type in (WALK_EVENT, FALL_EVENT):
         assert event_type in pack.rules["importance"]["story_critical_events"]
-    assert pack.rules["budget"]["templates"]["max"] == 70
+    # iter-203 (winterkin): the ceiling re-declared again (70 -> 75)
+    # — the heartbreak's eight tale lines; charcoalpaper's own claim
+    # unchanged (its two verb lines still inside every ceiling since)
+    assert pack.rules["budget"]["templates"]["max"] == 75
 
 
 def test_the_standing_state_and_its_bindings() -> None:

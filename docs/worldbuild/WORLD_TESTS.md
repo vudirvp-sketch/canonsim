@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce; the heartbreak station + the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce), the heartbreak station's DESIGN MATERIAL landed (iter-203 — the winter kin's embodiment, the C03+F02 consult's three gaps answered as pure pack data, the formation side tested in a committed pack; the station's PROBE RUN the next beat)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
@@ -463,7 +463,7 @@ landed and its mandatory bar MET on the rs-5-fixed surface (iter-201
 below — the direction correct, n=2 convergent); the withhold's
 one-surface contradiction row landed and its mandatory bar MET on the
 rs-6-fixed surface (iter-202 below — the join carried, the heap never
-commerce); the heartbreak station un-run; the live human band open.` The owner's reading of the
+commerce); the heartbreak station's design material landed (iter-203 below — the winter kin's embodiment, the C03+F02 consult); the station's probe run the next beat; the live human band open.` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
 unchanged: the causal composition CONFIRMED — but the reader-side
@@ -825,6 +825,47 @@ measured); the remaining routes each a future row's own call (the
 shave's temporal placement — the arc's assembly's remaining half; the
 heartbreak station + the live human band still the owner's calls).
 Honest caveats unchanged (the LLM reader class, the year compression).
+
+The heartbreak station's DESIGN MATERIAL (iter-203, the owner's
+queue-order call «withhold → the heartbreak probe» firing STATUS Next
+step item 1 — the station's second row, its design material carrying
+the intake-36 C03+F02 consult): the WINTER KIN'S EMBODIMENT landed as
+pure pack data, ANCHOR_REGION §6.3's three first-exposure gaps
+answered — the relation form (the `kin` pair axis, the bilateral
+inherited seed at 40), the proof's read (`read_kinmark`, the read
+hinge family's fifth instance — the pole's second story, the literal
+token `the_winter_kin` as a CARE debt over the house that sheltered),
+the mourning surface (`say_the_names` — the drowned generation's
+names said aloud, the grief given its second holder; the grievance
+axis deliberately not ridden, the wergeld ratio's two houses stay
+two). The formation side (the C03 triple's co-presence factor) tested
+IN A COMMITTED PACK for the first time: `share_board` moves the kin
+axis through the on_action table, both sides climbing (the winter's
+board + the house's answer), four sharings carrying the inherited 40
+to the recognition bar 80 — the first co-presence-formed relation in
+a committed pack (relations before iter-203 moved only via
+witnessed-token reactions). The claim (`claim_kinmark`) is the F02
+criterion's mechanical form: the leverage-gated door only the
+proof-holder passes — the proof-less claimant refused softly at the
+door (attempts are facts, the falsifier walked) — the edge's
+expansion of future legal options; the claim's echo completes the
+host's side (40 + 40 = 80, the rarity gate intact). The honest
+residues: the recognition's release-hook form PARKED (hooks seed only
+from committed event tags, D-005, and no resolver mints knowledge and
+hooks on one success branch — the constraint recorded in
+director.notes; the bilateral climb the used form); the purse
+question's exclusion rung rides the authored law (no pair-prop
+requires test exists — the probe's audit vocabulary); the corpus
+price paid deliberately (the son at the crofts hears the wergeld
+count — the murmur's knowledge line, the iter-157 precedent's own
+class, the golden regenerated). The instrument for the station's
+PROBE RUN now committed: the return's chain walked deterministically
+at seed 42 (the walk to the stair, the read's fail-then-pass, the
+claim, the echo, the names — `tests/test_winterkin.py` the claim
+packet); the probe itself (the blind reader, n=2, the author audit
+pre-set with F02's option-topology vocabulary — the pass bar naming
+the lost future option) the station's next beat, the owner's fresh
+call. Zero core change throughout.
 
 ### OPEN — Ancient Network back-propagation
 

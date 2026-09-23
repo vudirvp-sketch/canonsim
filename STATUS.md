@@ -1,38 +1,47 @@
-Iteration: iter-202 (`iter-202-withhold` — the owner's
-queue-order call «withhold → the heartbreak probe», the queue's
-next row — the iter-199/201 measured residue): the withhold's
-ONE-SURFACE CONTRADICTION row landed (rs-6) — the heap's meaning +
-the fund's climb + the beam's law joined as the camp's ANSWER to the
-tilted beam (ANCHOR_REGION §6.4's CONSEQUENCE row, the authored
-law's own words): the withhold's deliberately-unglossed flow slot
-filled — ONE `flow_glosses` row for `the_withhold_banks` ("the
-camp's answer to a tilted beam: unweighable at it, the paper still
-paid") riding the banking line beside rs-3/5's kind gloss; the
-mechanism unchanged (rs-4's table + mapping), zero code, zero
-corpus price, the pins updated as the deliberate act — and the
-probe's re-run MANDATORY BAR MET (glm n=2 convergent: the
-contradiction JOINED in both readings — the heap never commerce, the
-fund tied to the withhold, the beam named as what the practice
-answers; the regression bars held; the honest residues: the shave's
-temporal placement + the tally unconnected + the reckonings
-undiscussed — TASKS rs-6 + WORLD_TESTS §9's W5 entry).
+Iteration: iter-203 (`iter-203-winterkin` — the owner's
+queue-order call «withhold → the heartbreak probe», STATUS item 1, the
+station's second row: its design material carrying the intake-36
+C03+F02 consult): the W5 heartbreak station's DESIGN MATERIAL landed —
+the winter kin's embodiment as PURE PACK DATA (ANCHOR_REGION §6.3's
+three first-exposure gaps answered: the relation form — the `kin`
+pair axis, the recognized standing's own measure, the bilateral
+inherited seed at 40 both sides; the proof's read — `read_kinmark`,
+the read hinge family's fifth instance, the pole's SECOND story
+minting `the_winter_kin`, the secrets registry's fourth key, a CARE
+debt over the house that sheltered; the mourning surface —
+`say_the_names`, the drowned generation's names said aloud, the grief
+given its second holder) + the FORMATION SIDE TESTED IN A COMMITTED
+PACK (the C03 triple's co-presence factor: `share_board`'s on_action
+climbs, both sides to the recognition bar 80 — the first
+co-presence-formed relation) + the claim door (`claim_kinmark`'s
+leverage gate — the F02 criterion's mechanical form, the proof-less
+claimant refused softly, the falsifier walked) — zero core change
+throughout; the corpus price paid deliberately (the son at the crofts
+hears the wergeld count — the golden regenerated, the iter-157
+precedent); the station's PROBE RUN the next beat (the owner's fresh
+call — the instrument committed and deterministic at seed 42).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2034 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 89acd9e — 2034+1 green, ruff
+2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; verified at BASE_COMMIT 46e774fd — 2034+1 green, ruff
 clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: content/province_pack/templates.json + tests/test_flowgloss.py
-+ tests/test_freightvol.py + tests/test_accountgloss.py +
-docs/worldbuild/WORLD_TESTS.md + docs/TASKS.md + STATUS.md +
-worklog.md — 8 paths (the rs-landing class: the pack row + the pins
-+ the claim record + the state docs).
-Track A: the reader-surface boundary's own closure (the rs family's
-sixth member, pack data + pins only, zero runtime change, the goldens
-byte-untouched); the world track separate (D-186, never a second
-queue). The prior iterations' record: iter-201 (agency), iter-200
-(renamelint). The detail lives in the worklog + git.
+Scope: content/province_pack/{entities,rules,actions,templates}.json
++ tests/fixtures/province_smoke_seed42.jsonl + tests/test_winterkin.py
++ tests/test_charcoalpaper.py + tests/test_debt1.py +
+tests/test_t1_province.py + docs/worldbuild/ANCHOR_REGION.md +
+docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md +
+docs/TASKS.md + STATUS.md + worklog.md — 15 paths (the embodiment
+class: the pack's four + the golden regen + the census-pin updates +
+the claim packet + the state docs; over the soft cap — the arming's
+own price, the golden + the pins the rs-landing class carries).
+Track A: the W5 heartbreak station's design material (the world
+track's unit embodied as pack data, D-186's separate track feeding
+the reader-surface boundary's own station); the probe run the
+station's measurement, the surface it reads now committed. The prior
+iterations' record: iter-202 (withhold), iter-201 (agency). The
+detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -89,17 +98,22 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-202 DONE: the withhold's ONE-SURFACE CONTRADICTION row (the
-owner's queue-order call «withhold → the heartbreak probe» — rs-6,
-the answer-frame flow gloss on the withhold's own banking line, the
-mechanism unchanged, the pins updated; the probe's re-run mandatory
-bar MET, glm n=2 convergent — the contradiction JOINED, the heap
-never commerce).**
+**iter-203 DONE: the heartbreak station's DESIGN MATERIAL (the winter
+kin's embodiment — the C03+F02 consult's three gaps answered as pure
+pack data, the formation side tested in a committed pack, the claim
+door the F02 criterion's mechanical form; the corpus price paid
+deliberately, the golden regenerated).**
 
-1. The heartbreak probe (the W5 trio's remaining station — the
-   owner's queue-order call's second row: its design material
-   carrying intake-36's C03+F02 consult — WORLD_WORKPLAN §7's
-   decision points; the same bounded form, the isolation law held).
+1. The heartbreak PROBE RUN (the station's measurement — the trio's
+   last station's own run): the same bounded form over the committed
+   surface (the return's chain — the walk to the stair, the proof's
+   read, the claim, the echo, the names, deterministic at seed 42);
+   the blind reader glm n=2; the author audit pre-set BEFORE the
+   reading with F02's option-topology vocabulary (ADD / REMOVE /
+   MERGE / SPLIT / SEMANTIC-CHANGE) — the pass bar naming the LOST
+   FUTURE OPTION (the drowned generation's futures removed; the
+   return's claim the option the edge opens); the isolation law held
+   (the runner + the transcripts outside the repo, Rule 9).
 2. The human live-band re-run after the reader-side fixes (the LLM
    reader the instrument so far, glm n=2 — the owner's option (б);
    the rs family's five measured fixes (rs-2/3/4/5/6) the band it

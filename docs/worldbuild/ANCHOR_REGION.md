@@ -700,15 +700,46 @@ notch-keeping habit (the pole's haft tallies, the `read_pole` hinge's own
 vocabulary), the road's word (the rumor channel), the seasons (first_frost's
 stores-counting month), the condensation's named-stranger surface (the
 return's carrier class), the grief's numeric-home law (the boundary the
-mourning rung meets). Authored here (WORKING): the winter kin itself (the
-mint's three rungs), the kin notch's meaning (the haft's payment tallies
-re-read as the guest count — the same staff, a new mark's class), the
-obligations (the protection, the barred purse, the mourning), the return
-claim, the exclusion rung. The unit's embodiment options — the relation
-form, the notch's read hinge, the mourning registration — stay the owner's
-call class (the pole's iter-161 precedent); the live-session question stands
-(a real return, a real reader: the meaning distribution's own unfinished
-band, §7.1's form).
+mourning rung meets). Since iter-203 (the W5 heartbreak station's design
+material, the owner's queue-order call — the intake-36 C03+F02 consult):
+the winter kin ITSELF committed as pure pack data, the three
+first-exposure gaps answered — the RELATION FORM (the `kin` pair axis,
+rules.relations' fifth: the recognized standing's own measure, never a
+trust value; the bilateral seed at 40 both sides — the inherited edge,
+the recognition pending, the living memory thinned by the generation),
+the PROOF'S READ (`read_kinmark`, the read hinge family's fifth
+instance — the pole's SECOND story: the payment tallies the flood
+story, the guest count the winter kin; the literal token
+`the_winter_kin`, the secrets registry's fourth key, a CARE debt over
+the house that sheltered — the notch prices care, never coin), and the
+MOURNING SURFACE (`say_the_names` — the drowned generation's names
+said aloud at the crossing's table, the grief given its second holder;
+the grievance axis deliberately not ridden, the wergeld ratio's two
+houses stay two). The formation mechanism (the C03 triple's
+co-presence factor) armed beside them: `share_board` — the shelter
+law's enactment, the winter's board moving the kin axis through the
+on_action table (both sides climbing, four sharings carrying the
+inherited 40 to the recognition bar 80 — the formation side tested in
+a committed pack, the first co-presence-formed relation; the rarity
+gate the numeric-home law's mechanical half). The claim
+(`claim_kinmark`) is the F02 criterion's mechanical form: the
+leverage-gated door only the proof-holder passes (the edge's expansion
+of future legal options — the return's claim, the option no other
+mechanism expresses); the claim's echo completes the host's side
+(40 + 40 = 80, the rarity gate intact — the claim answers the
+generation-old notch, no new winter). The recognition's release-hook
+form PARKED (hooks seed only from committed event tags, D-005, and no
+resolver mints knowledge and hooks on one success branch — the
+constraint recorded in director.notes; the bilateral climb the used
+form); the purse question's exclusion rung rides the authored law (no
+pair-prop requires test exists — the probe's audit vocabulary). The
+return's carrier: `npc_winterkin_01` (Tork, the flood-year guest's son
+— a named hill stranger in the crofts' tongue, genesis at the crofts;
+the corpus price paid deliberately: the son hears the wergeld count,
+the murmur's knowledge line the iter-157 precedent's own class).
+`tests/test_winterkin.py` the claim packet. Authored here (WORKING):
+the lived return itself (the probe's run — the station's next beat,
+the surface it reads now committed).
 
 ### 6.4 The charcoal camp (WORKING — the camp's meso half, the fourth authored unit, iter-184)
 

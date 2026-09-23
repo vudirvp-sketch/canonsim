@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-203 · 2026-09-23 · winterkin — the W5 heartbreak station's DESIGN MATERIAL landed (the owner's queue-order call «withhold → the heartbreak probe», the intake-36 C03+F02 consult): the winter kin's embodiment as pure pack data — the three §6.3 gaps answered (the kin pair axis + the bilateral seed 40, the read_kinmark hinge minting the_winter_kin as a care-debt, the say_the_names mourning) + the formation side tested in a committed pack (share_board's two on_action climbs to the bar 80 — the first co-presence-formed relation) + the claim_kinmark door (the leverage gate, the F02 form; the proof-less claimant refused — the falsifier)
+the corpus price paid deliberately (the son at the crofts hears the wergeld count — the golden regenerated, the iter-157 precedent); 15 paths (the embodiment class: the pack's four + the golden + the three census pins + the claim packet + the state docs — over the soft cap, the arming's own price)
+2041+1 + ruff + docguard clean; iter-193 evicted per the cap; the PROBE RUN the station's next beat (the owner's fresh call — the instrument committed, deterministic at seed 42)
+---
 iter-202 · 2026-09-23 · withhold — the ONE-SURFACE CONTRADICTION row landed (the owner's queue-order call «withhold → the heartbreak
 probe», STATUS item 1 — the iter-199/201 residue): rs-6 — the withhold's deliberately-unglossed flow slot filled (ONE `flow_glosses` row for
 `the_withhold_banks`: ANCHOR_REGION §6.4's answer frame, "the camp's answer to a tilted beam: unweighable at it, the paper still paid", riding
@@ -61,10 +65,3 @@ account-kind gloss — the withhold's meaning "bloom kept off the weighbeam sinc
 humor probe's re-run: the MANDATORY BAR MET (glm n=2 — the mechanism-grounded joke from both readings, the taboo 1/2 with the authored taboo nailed once; the
 withhold's own joke unextracted — the arc's assembly's future row's material), the station PARTIALLY CONFIRMED; 8 paths (the pack row + the pins + the W5 record
 + the state docs); the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-185 evicted per the cap
-
----
-iter-193 · 2026-09-22 · intake36 — the ULTIMATE-v2 packet routed (the owner's research call, intake-36/D-196): 39 units / 10
-families read whole + code-verified at HEAD `16a4aa4` (2018+1, ruff, docguard clean both ends); 34/39 CONFIRMED-owned (the largest
-single confirmation batch), THREE fresh routings joining named consumers (C03+F02 → the W5 heartbreak station, P01+P03 → the
-road-traffic depth-7 rider, C05 → the group-stock lint gap), zero new rows (D-175); 5 paths doc-only (phases.md §6's intake-36
-block + D-196 + the state docs); the packet outside the repo (the convenience-copy law); iter-184 evicted per the cap

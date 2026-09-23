@@ -291,14 +291,17 @@ def test_spine_records_live_and_consumed() -> None:
     instance, the row the lint (iter-117) was built for. iter-157: the
     crossing household's second hand joins the five (companion-1's
     arming — the household's first meso unit embodied, ANCHOR_REGION
-    §6.1)."""
+    §6.1). iter-203: the winter kin's son joins the six (the W5
+    heartbreak station's design material — the return's carrier, his
+    flaw's consuming beat his own urgency entry, the notch studied
+    again)."""
     pack = load_pack(PACK_DIR)
     spines = {
         npc["id"]: npc["spine"]
         for npc in pack.entities["npcs"]
         if "spine" in npc
     }
-    assert len(spines) == 6, spines
+    assert len(spines) == 7, spines
     flaws = {spine["flaw"] for spine in spines.values()}
     consumed = {
         entry["flaw"]
@@ -334,9 +337,13 @@ def test_the_budget_block_declares_the_skeleton_shape() -> None:
     # the cultures slice's own re-declare: the travelers grow the cast
     # past the skeleton's max (9) — the honest re-declare, not a silent
     # outgrowth (AP-1's second arm, exercised); iter-157 grows the cast
-    # again INSIDE the bounds (the companion, 10 -> 11 <= 12)
-    assert len(pack.entities["npcs"]) == 11
-    assert budget["npcs"] == {"min": 7, "max": 12}
+    # again INSIDE the bounds (the companion, 10 -> 11 <= 12); iter-203
+    # grows the cast to twelve (the winter kin's son — the
+    # named-stranger class, the heartbreak station's carrier) and the
+    # ceiling re-declares 12 -> 13 (iter-203: the committed cast at
+    # twelve leaves charcoalpaper's crafted-successor twin no headroom)
+    assert len(pack.entities["npcs"]) == 12
+    assert budget["npcs"] == {"min": 7, "max": 13}
 
 
 # -- the cultures pins (slice 2, iter-119 — D-153's wave plan) -----------------

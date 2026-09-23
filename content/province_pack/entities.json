@@ -156,6 +156,10 @@
         {
           "with": "npc_sergeant_01",
           "trust": 40
+        },
+        {
+          "with": "npc_winterkin_01",
+          "kin": 40
         }
       ],
       "knowledge": [],
@@ -474,6 +478,40 @@
       "goal": "walk the bloom to the bank; the wergeld stays named",
       "generated_name": "hill_hard",
       "notes": "the road traffic's hill arm — the crofts' own tongue on the artery (hill_hard, the clipped hard profile); the goal carries the wergeld word (the hills' prohibition made live on the road, the hill vocabulary's own token); the estranged half of the valley walking beside the lowland pair — one artery, two tongues"
+    },
+    {
+      "id": "npc_winterkin_01",
+      "name": "Tork",
+      "role": "the flood-year guest's son, the crofts' tongue",
+      "position": "loc_crofts",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_weirkeeper_01",
+          "kin": 40
+        }
+      ],
+      "knowledge": [],
+      "mood": "resolved",
+      "goal": "the walk to the crossing his father wintered at",
+      "spine": {
+        "want": "his father's winter acknowledged at the crossing",
+        "need": "the drowned generation's names kept by name outside the bloodline",
+        "flaw": "the notch is all he carries of his father",
+        "cause": "the flood year stranded his father's party at the crossing a generation back — the winter's board eaten, the kin notch cut"
+      },
+      "carries": [],
+      "notes": "the winter kin's return carrier (iter-203, the W5 heartbreak station's design material — the C03+F02 consult, intake-36): the flood-year guest's son, a named hill stranger in the crofts' tongue (the condensation's named-stranger class, AUTHORED here — no generated_name, the fixed name the claim's own surface); genesis at the crofts (his people's country — the smoke scripts never visit, the golden corpus byte-untouched); the seeded kin pair (40 both sides, the INHERITED edge — the drowned generation's notch now the toll-taker's holding, the guests' children carrying the same duties; the recognition PENDING — the living memory thinned by the generation, the claim to be re-made at the stair — the bar 80 the mint's own (the on_action arithmetic: four sharings x +10)); the relation form itself is the pack's kin AXIS (rules.relations — the recognized standing's own measure, the §6.3 gap's answer), the formation mechanism (the winter's board) armed beside it (on_action — the C03 triple's pack-authorable form)"
     }
   ],
   "ambient_entities": [

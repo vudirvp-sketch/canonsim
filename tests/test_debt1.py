@@ -246,11 +246,12 @@ def test_the_budget_redeclares_the_template_ceiling() -> None:
     — the verb line grows the template families past the declared 60,
     and the budget carries the re-declared ceiling with its note (65 at
     debt-1; 70 at charcoalpaper, iter-189 — the lifecycle doors' two
-    verb lines)."""
+    verb lines; 75 at the winter kin, iter-203 — the heartbreak
+    station's eight tale lines)."""
     pack = load_pack(PACK_DIR)
     budget = pack.rules["budget"]["templates"]
     assert budget["min"] <= len(pack.templates["events"]) <= budget["max"]
-    assert budget["max"] == 70
+    assert budget["max"] == 75
 
 
 # -- the committed year band (the real cadence) ----------------------------------
