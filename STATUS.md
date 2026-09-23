@@ -1,44 +1,43 @@
-Iteration: iter-205 (`iter-205-heartbreak-fix` — the owner's
-minimal-fix call firing STATUS Next step item 1 — the heartbreak
-station's rendering FIX over the iter-204 measured failure): rs-7
-landed (the rs family's seventh member) — TWO template lines
-re-authored in the province pack, zero code, zero corpus price, the
-LOG untouched: the mourning line (`the_names_kept`) now carries the
-loss's future-option dimension ("their line, their duties and their
-holdings never handed on" — the owner's called vocabulary) and the
-echo line (`the_edge_answers`) the claim's forward framing ("the
-crossing's table open to the claimant's line from this day" — the
-opened possibility, never only the standing); the pins updated as
-the deliberate act (tests/test_winterkin.py). The SAME blind probe
+Iteration: iter-206 (`iter-206-heartbreak-subject` — the owner's
+further-route call firing STATUS Next step item 1 — the heartbreak
+fix's second attempt over the iter-205 measured subject problem, the
+dead as the loss's grammatical subject): rs-8 landed (the rs family's
+eighth member) — the mourning line's clause RE-SUBJECTED in the
+province pack (iter-205's "their line, their duties and their
+holdings never handed on" — the transmission negation that resolved
+to the inheritance's character — replaced by "their own futures the
+flood took down with them, the line, the duties and the holdings
+that were to be theirs": the futures THEIRS, removed WITH them, the
+flood NAMED as the remover, the transmission vocabulary gone
+entirely; the echo line untouched per its 1/2 confirmation), zero
+code, zero corpus price, the LOG untouched; the pins updated as the
+deliberate act (tests/test_winterkin.py). The SAME blind probe
 re-run (the iter-204 protocol re-established — the package the same
 bounded form, the tale 24 lines, the chain byte-identical twice at
-seed 42, the package byte-identical twice; the author audit pre-set
-BEFORE the reading with the same F02 pass bar; the blind reader glm
-n=2 independent, the runner + transcripts outside the repo, Rule 9):
-the mandatory pair NOT MET at the strict n=2 bar, with MEASURED
-MOVEMENT on both halves — the opened-option half extracted CLEANLY
-by reading 2 (the table-open clause verbatim + the forward synthesis
-"seizes the future of the weir stair"; reading 1 still the present
-right-transfer — 1/2, the echo route CONFIRMED as the working
-class), iter-204's ZERO-futures mode GONE n=2 (both readings now
-carry the inheritance/obligation topology — reading 2's "a tale of
-inheritance, but not of wealth or land" the closest lost-future
-extraction) — but the drowned generation still not read as the
-futures' OWN holders (the SUBJECT problem: the mourning line's
-clause resolves to the inheritance's character, never to the dead as
-the loss's subject); the supporting bars MET n=2 convergent (the
-relation never a trade; the memory change; the world-specificity).
-The disposition: NEVER "improve the prose" — the further fix's
-route the owner's call (the natural class the measurement names: the
-dead as the loss's grammatical subject); the anti-loop law held (the
-first fix attempt only). The 40/80 asymmetry, the fail-then-pass and
-the second-holder structure untouched per the owner's call (each its
-own surface's question).
+seed 42, 43 events, the package byte-identical twice; the runner +
+the reader prompt REBUILT outside the repo — Rule 9, the
+reconstruction's honest note; the author audit pre-set BEFORE the
+reading with the same F02 pass bar; the blind reader glm n=2
+independent, the transcripts outside the repo): the MANDATORY PAIR
+MET at the strict n=2 bar — the LOST-FUTURE half MET n=2 CONVERGENT
+(both readings quoting the re-subjected clause verbatim, the loss
+predicated of the dead's own futures — "their entire potential" /
+"a complete erasure of a line and its potential"; iter-205's
+inheritance-character failure mode GONE, iter-204's zero-futures
+mode stays gone), the OPENED half MET 2/2 (up from 1/2 — the echo
+line unchanged), the supporting bars MET n=2 convergent (the
+relation never a trade; the memory change — the second-holder
+structure carried by BOTH readings; the world-specificity). The
+disposition: the station PARTIALLY CONFIRMED (the humor station's
+own form — the human band open, the discovery-path residues each its
+own surface's question); the anti-loop law NOT tripped (the second
+attempt MET the bar); the 40/80 asymmetry and the fail-then-pass
+untouched per the owner's call (each its own surface's question).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 57ebc3f — 2041 passed + 1
+the env pin; verified at BASE_COMMIT fd95c2b — 2041 passed + 1
 skipped, ruff clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
 Scope: content/province_pack/templates.json + tests/test_winterkin.py
@@ -48,12 +47,12 @@ class: the pack line + the pin + the state docs; two over the soft
 cap — the AGENTS §9 doc-sync law, the probe-run record the state
 docs' own class; the runner + the transcripts outside the repo,
 Rule 9).
-Track A: the W5 heartbreak station's rendering fix measured (the
-mandatory pair's halves moved — the opened option cleanly extracted
-once, the zero-futures mode gone n=2 — the strict bar still not met:
-the further route the owner's call). The prior iterations' record:
-iter-204 (heartbreak — the first measurement), iter-203 (winterkin).
-The detail lives in the worklog + git.
+Track A: the W5 heartbreak station's second fix attempt measured
+(the mandatory pair MET at the strict n=2 bar — the station
+PARTIALLY CONFIRMED, the human band open). The prior iterations'
+record: iter-205 (heartbreak-fix — the first attempt's measured
+movement), iter-204 (heartbreak — the first measurement), iter-203
+(winterkin). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -110,33 +109,20 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-205 DONE: the heartbreak station's minimal RENDERING FIX landed
-and measured (rs-7 — two template lines re-authored, zero code; the
-re-run: the opened-option half cleanly extracted once, the
-zero-futures mode gone n=2, the mandatory pair still NOT MET at the
-strict n=2 bar — the dead still not read as the futures' own holders,
-the SUBJECT problem; the further route the owner's call).**
+**iter-206 DONE: the heartbreak station's SECOND fix attempt (rs-8)
+landed and the re-run's MANDATORY PAIR MET at the strict n=2 bar —
+the dead read as the futures' OWN holders (the subject problem
+solved at the LLM band), the opened half 2/2, the station PARTIALLY
+CONFIRMED (the human band open, the discovery-path residues
+standing).**
 
-1. The heartbreak FIX'S FURTHER ROUTE (the owner's call over the
-   iter-205 measured movement): the dead as the loss's grammatical
-   SUBJECT — the natural class the measurement names (the mourning
-   line's clause re-subjected: the futures THEIRS, removed with them
-   — or the flood's removal named with the dead as its holders; the
-   measured failure mode: the clause resolves to the inheritance's
-   character, what the claim brings or excludes, never to the dead
-   as future-holders); the echo half's route (the "from this day"
-   forward frame) CONFIRMED at 1/2 — no further work there unless
-   the owner calls; the discovery-path residues alongside (the
-   fail-then-pass + the 40/80 asymmetry + the second-holder
-   structure — each its own surface's question); never "improve the
-   prose"; the anti-loop law held (the first fix attempt only — a
-   second attempt on the owner's call).
-2. The human live-band re-run after the reader-side fixes (the LLM
+1. The human live-band re-run after the reader-side fixes (the LLM
    reader the instrument so far, glm n=2 — the owner's option (б);
-   the rs family's six measured fixes + the seventh's measured
-   movement the band it waits on; the heartbreak's own half still
-   open — its further fix joins the band when called).
-3. The remaining station rows (the owner's next engine run, TEST_PLAN
+   the rs family's seven measured fixes + the eighth's met pair the
+   band it waits on; the heartbreak's own half now measured MET —
+   the human reader's convergence the band's standing question, the
+   owner's call).
+2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate
@@ -144,7 +130,7 @@ the SUBJECT problem; the further route the owner's call).**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-4. The standing frames: the embodiment options (the older units' rows
+3. The standing frames: the embodiment options (the older units' rows
    — the step's notch record/hatch, the kin's own — each a future
    row's own call), the debt-1 residues (the crossing's own standing
    state the charcoalpaper precedent's sibling — the punt's purchase
@@ -155,7 +141,7 @@ the SUBJECT problem; the further route the owner's call).**
    the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-5. The intake-34/35/36 residues (each behind its own trigger, never a
+4. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;

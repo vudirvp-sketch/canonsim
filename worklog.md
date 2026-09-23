@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-206 · 2026-09-23 · heartbreak-subject — the heartbreak station's SECOND fix attempt landed and the re-run's MANDATORY PAIR MET at the strict n=2 bar (the owner's further-route call over the iter-205 subject problem, STATUS item 1): rs-8 — the mourning line's clause RE-SUBJECTED ("their own futures the flood took down with them, the line, the duties and the holdings that were to be theirs" — the futures theirs, removed with them, the flood the remover; the transmission vocabulary gone; the echo line untouched per its 1/2 confirmation), zero code, zero corpus price, the pins updated
+the re-run (the iter-204 protocol re-established, the runner + the reader prompt rebuilt outside the repo — Rule 9, the audit pre-set before the reading, glm n=2): the lost-future half MET n=2 convergent (both readings quoting the re-subjected clause verbatim, the loss predicated of the dead's own futures — the inheritance-character failure mode GONE), the opened half MET 2/2, the supporting bars MET n=2 — the station PARTIALLY CONFIRMED (the human band open); the anti-loop law not tripped
+2041+1 + ruff + docguard clean; 7 paths (the pack line + the pin + the state docs); iter-196 evicted per the cap
+---
 iter-205 · 2026-09-23 · heartbreak-fix — the heartbreak station's minimal RENDERING FIX landed and measured (the owner's minimal-fix call, STATUS item 1, the iter-204 failure): rs-7 — TWO template lines re-authored (the mourning line "their line, their duties and their holdings never handed on"; the echo line "the crossing's table open to the claimant's line from this day"), zero code, zero corpus price, the pins updated as the deliberate act
 the SAME blind probe re-run (the iter-204 protocol re-established, the audit pre-set before the reading, glm n=2): the mandatory pair NOT MET at the strict bar — the MEASURED MOVEMENT: the opened-option half cleanly extracted once (the table-open clause verbatim + "seizes the future"), the zero-futures mode GONE n=2 (both readings carrying the inheritance topology), the dead still not read as the futures' OWN holders (the SUBJECT problem); the further route the owner's call
 2041+1 + ruff + docguard clean; 7 paths (the pack line + the pin + the state docs); iter-195 evicted per the cap
@@ -53,10 +57,3 @@ iter-197 · 2026-09-23 · revalid2 — the second standing-queue revalidation + 
 (parse-2/st-2/st-5/scav-1/pack-3/bg-6/doc-2/chron-2 — no gate moved) — zero closures-as-dead; the done rows
 engine-1 + mech-2 collapsed to the minimal form; the ROADMAP res-1/since-1 rot + the README engine-1/bg-9
 rot fixed; 5 paths doc-only; 2026+1 + ruff + docguard clean both ends; iter-188 evicted per the cap
-
----
-iter-196 · 2026-09-22 · mech2 — the mech-2 tooling spike (the owner's «открывай mech 2 и прочее связанное»
-call, STATUS item 1's tooling-spike arm): `mechanics impact --path/--ref` landed — the derived reader index (the
-AST scan over core/brief/render/cli/sim + packlint, D-118 extended to the source), the exact-name reverse query
-(the rename-safety set), the matrix pointers (D-024); tests/test_mechanics.py +8 (the §9 claim block); 5 paths;
-2026+1 + ruff + docguard clean; the structured-patch machinery + edit-shape guard stay PROPOSAL (A/B falsifier)

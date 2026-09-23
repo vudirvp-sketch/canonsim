@@ -245,10 +245,11 @@ def test_the_formation_tale_carries_the_winters_rhythm(tmp_path: Path) -> None:
     """The changed-next-decision unit, rendered: the tale carries the
     formation's texture — the board's line, the kin stirring, the
     house answering (the bilateral climb made prose), and the mourning
-    line (the drowned generation's names kept by name outside the
-    bloodline, their line, their duties and their holdings never
-    handed on — the loss's future-option dimension on the reader
-    surface, iter-205's rendering fix)."""
+    line (the flood year's dead kept by name outside the bloodline,
+    their own futures the flood took down with them, the line, the
+    duties and the holdings that were to be theirs — the dead as the
+    loss's grammatical subject on the reader surface, iter-206's
+    re-subjectivation over iter-205's measured subject problem)."""
     events, pack, sim = _run(tmp_path, "tale.jsonl", _walk_to_the_stair() + [
         {"intent": "share_board", "actor": KETTA, "target": TORK},
         {"intent": "share_board", "actor": KETTA, "target": TORK},
@@ -275,8 +276,9 @@ def test_the_formation_tale_carries_the_winters_rhythm(tmp_path: Path) -> None:
     assert (
         "Tork says the drowned generation's names at the weir stair —"
         " the flood year's dead kept by name outside the bloodline,"
-        " their line, their duties and their holdings never handed on,"
-        " the grief given its second holder." in tale
+        " their own futures the flood took down with them, the line,"
+        " the duties and the holdings that were to be theirs, the"
+        " grief given its second holder." in tale
     )
 
 

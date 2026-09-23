@@ -366,14 +366,21 @@ the futures' own holders (the measured failure mode: the mourning
 line's clause resolves to the inheritance's character, never to the
 dead as the loss's subject); the further fix's route the owner's call
 (never "improve the prose"; the anti-loop law held — the first fix
-attempt only). The standing decision
-points for the owner: the heartbreak fix's further route (the
-subject problem's disposition — WORLD_TESTS §9's W5 entry's iter-205
-record), the human live-band re-run (the LLM reader the instrument so
-far — the rs family's six measured fixes + the seventh's measured
-movement the band it waits on), and the arc's assembly's remaining
-half (the shave's temporal placement — WORLD_TESTS §9's W5 entry's
-iter-202 record).
+attempt only). The owner-called RE-SUBJECTIVATION has since LANDED
+and been MEASURED (iter-206 — the record in `WORLD_TESTS.md` §9's W5
+entry): the mourning line's clause re-subjected ("their own futures
+the flood took down with them, the line, the duties and the holdings
+that were to be theirs" — the dead as the loss's grammatical subject;
+zero code, the LOG untouched) and the same probe re-run: the
+MANDATORY PAIR MET at the strict n=2 bar — the dead read as the
+futures' own holders n=2 convergent (the subject problem solved at
+the LLM band), the opened half 2/2, the station PARTIALLY CONFIRMED
+(the human band open, the discovery-path residues standing). The
+standing decision points for the owner: the human live-band re-run
+(the LLM reader the instrument so far — the rs family's seven
+measured fixes + the eighth's met pair the band it waits on) and the
+arc's assembly's remaining half (the shave's temporal placement —
+WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
 
