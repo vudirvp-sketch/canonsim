@@ -303,8 +303,10 @@ def test_the_tale_carries_the_fourth_reckoning(tmp_path: Path) -> None:
     tale = render_chronicle(events, pack, seed=42)
     # rs-4 (iter-199): the coin reckoning lines carry their flows'
     # meanings (the covering joined — the fund's climb, the chest's
-    # service); the withhold's bloom line keeps rs-3's kind gloss alone
-    # (the flow unglossed — the meaning already rides the kind)
+    # service); rs-6 (iter-202): the withhold's bloom line carries the
+    # ANSWER frame's join beside rs-3/5's kind gloss (the beam's tilt,
+    # the camp's posture, the paper still paid — the heap never reading
+    # as commerce)
     assert (
         "Ketta comes by 2 coin at the year's reckoning — the toll's net"
         " surplus, the punt fund climbing toward the punt's twelve." in tale
@@ -314,14 +316,11 @@ def test_the_tale_carries_the_fourth_reckoning(tmp_path: Path) -> None:
         " year's surplus, the debt fund climbing toward the paper sixteen."
         in tale
     )
-    # rs-3 (iter-194): the heap's margin line carries the withhold's
-    # gloss — the fourth reckoning reads as the withhold deepening;
-    # rs-5 (iter-201): the gloss carries the shave's AGENCY (the guild
-    # factor the actor, the camp the patient — the spine's own words)
     assert (
         "the smelt crofts comes by 2 bloom kept off the weighbeam"
         " since the guild factor shaved the camp's weight"
-        " at the year's reckoning." in tale
+        " at the year's reckoning — the camp's answer to a tilted beam:"
+        " unweighable at it, the paper still paid." in tale
     )
 
 

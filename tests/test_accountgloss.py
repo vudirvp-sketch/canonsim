@@ -289,10 +289,13 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
         in tale
     )
     # rs-3: the banking verb lines carry the withhold's meaning — the
-    # heap's climb reads as the withhold deepening, never as income
+    # heap's climb reads as the withhold deepening, never as income;
+    # rs-6 (iter-202): the line's flow tail carries the ANSWER frame's
+    # join (the beam's tilt + the camp's posture + the paper still paid)
     assert (
         f"the smelt crofts comes by 2 {BLOOM_GLOSS}"
-        " at the year's reckoning." in tale
+        " at the year's reckoning — the camp's answer to a tilted beam:"
+        " unweighable at it, the paper still paid." in tale
     )
     view = render_entity_view(
         events, fold(events, initial_projection(pack.entities)),

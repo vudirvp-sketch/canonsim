@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-202 · 2026-09-23 · withhold — the ONE-SURFACE CONTRADICTION row landed (the owner's queue-order call «withhold → the heartbreak
+probe», STATUS item 1 — the iter-199/201 residue): rs-6 — the withhold's deliberately-unglossed flow slot filled (ONE `flow_glosses` row for
+`the_withhold_banks`: ANCHOR_REGION §6.4's answer frame, "the camp's answer to a tilted beam: unweighable at it, the paper still paid", riding
+the banking line beside the kind gloss; zero code, zero corpus price, the pins updated as the deliberate act, 3 test files); the probe's re-run
+MANDATORY BAR MET (glm n=2 convergent — the contradiction JOINED, the heap never commerce; the instrument EXACT: the fall t=2824, the tale 88); 8 paths; 2034+1 + ruff + docguard clean; iter-192 evicted per the cap
+
+---
 iter-201 · 2026-09-23 · agency — the shave's AGENCY row landed (the owner's queue-order call «agency → withhold → the heartbreak probe», STATUS item 1 — the covering residue's
 first measured successor): rs-5 — the bloom kind's gloss re-authored to carry the direction of action ("since the guild factor shaved the camp's
 weight" — the spine's own words; the mechanism unchanged, zero code, zero corpus price; the pins updated as the deliberate act, 3 test files);
@@ -61,11 +68,3 @@ families read whole + code-verified at HEAD `16a4aa4` (2018+1, ruff, docguard cl
 single confirmation batch), THREE fresh routings joining named consumers (C03+F02 → the W5 heartbreak station, P01+P03 → the
 road-traffic depth-7 rider, C05 → the group-stock lint gap), zero new rows (D-175); 5 paths doc-only (phases.md §6's intake-36
 block + D-196 + the state docs); the packet outside the repo (the convenience-copy law); iter-184 evicted per the cap
-
----
-iter-192 · 2026-09-22 · humorprobe — the W5 humor station (the owner's «продолжай работу по планам»
-continuation): the humor probe RAN and FAILED at the rendering boundary, glm n=2 convergent (both readers the SAME imported-template
-joke — the withhold's meaning renders nowhere, the banking lines read as income, the covering residue's family); classified by
-boundary, the fix's route the owner's call (the bloom kind's gloss the rs family's third member), the gate untouched; 6 paths
-doc-only + the docguard allowlist entry (WORLD_TESTS over the 600 cap after the §6.1 pass); the runner + transcripts + audit outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-183 evicted per the cap
-

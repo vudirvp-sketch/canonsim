@@ -1,37 +1,38 @@
-Iteration: iter-201 (`iter-201-agency` — the owner's
-queue-order call «agency → withhold → the heartbreak probe», the
-agency row first — the W5 covering residue's first measured
-successor): the shave's AGENCY row landed — the bloom kind's gloss
-re-authored to carry the direction of action ("bloom kept off the
-weighbeam since the guild factor shaved the camp's weight" — the
-spine's own committed words; the iter-199 re-run's measured gap: the
-glosses carried the temporal tie "since the shave", never WHO shaved
-whom, reading 2 INVERTING the direction — the camp read as the
-accused) — the mechanism unchanged (rs-2's mapping, rs-3's row,
-zero code, zero corpus price), the pins updated as the deliberate
-act; the probe's re-run MANDATORY BAR MET (glm n=2 convergent: the
-guild the shaver, the camp the shaved, the inversion GONE, the
-withhold read as the camp's answer "as a protest" / "a symbol of
-his defiance"; the honest residues: the shave's temporal placement
-never assembled + the withhold's one-surface contradiction the
-queue's next — TASKS rs-5 + WORLD_TESTS §9's W5 entry).
+Iteration: iter-202 (`iter-202-withhold` — the owner's
+queue-order call «withhold → the heartbreak probe», the queue's
+next row — the iter-199/201 measured residue): the withhold's
+ONE-SURFACE CONTRADICTION row landed (rs-6) — the heap's meaning +
+the fund's climb + the beam's law joined as the camp's ANSWER to the
+tilted beam (ANCHOR_REGION §6.4's CONSEQUENCE row, the authored
+law's own words): the withhold's deliberately-unglossed flow slot
+filled — ONE `flow_glosses` row for `the_withhold_banks` ("the
+camp's answer to a tilted beam: unweighable at it, the paper still
+paid") riding the banking line beside rs-3/5's kind gloss; the
+mechanism unchanged (rs-4's table + mapping), zero code, zero
+corpus price, the pins updated as the deliberate act — and the
+probe's re-run MANDATORY BAR MET (glm n=2 convergent: the
+contradiction JOINED in both readings — the heap never commerce, the
+fund tied to the withhold, the beam named as what the practice
+answers; the regression bars held; the honest residues: the shave's
+temporal placement + the tally unconnected + the reckonings
+undiscussed — TASKS rs-6 + WORLD_TESTS §9's W5 entry).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2034 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 384758a — 2034+1 green, ruff
+the env pin; verified at BASE_COMMIT 89acd9e — 2034+1 green, ruff
 clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: content/province_pack/templates.json + tests/test_accountgloss.py
-+ tests/test_flowgloss.py + tests/test_freightvol.py +
+Scope: content/province_pack/templates.json + tests/test_flowgloss.py
++ tests/test_freightvol.py + tests/test_accountgloss.py +
 docs/worldbuild/WORLD_TESTS.md + docs/TASKS.md + STATUS.md +
 worklog.md — 8 paths (the rs-landing class: the pack row + the pins
 + the claim record + the state docs).
 Track A: the reader-surface boundary's own closure (the rs family's
-fifth member, pack data + pins only, zero runtime change, the goldens
+sixth member, pack data + pins only, zero runtime change, the goldens
 byte-untouched); the world track separate (D-186, never a second
-queue). The prior iterations' record: iter-200 (renamelint), iter-199
-(flowgloss). The detail lives in the worklog + git.
+queue). The prior iterations' record: iter-201 (agency), iter-200
+(renamelint). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -88,24 +89,22 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-201 DONE: the shave's AGENCY row (the owner's queue-order
-call «agency → withhold → the heartbreak probe» — rs-5, the bloom
-kind's gloss re-authored to carry the direction of action, the
+**iter-202 DONE: the withhold's ONE-SURFACE CONTRADICTION row (the
+owner's queue-order call «withhold → the heartbreak probe» — rs-6,
+the answer-frame flow gloss on the withhold's own banking line, the
 mechanism unchanged, the pins updated; the probe's re-run mandatory
-bar MET, glm n=2 convergent — the inversion GONE, the withhold read
-as the camp's answer).**
+bar MET, glm n=2 convergent — the contradiction JOINED, the heap
+never commerce).**
 
-1. The withhold's one-surface contradiction (the queue's next row,
-  the owner's order): the heap's meaning + the fund's climb + the
-  beam's law never joined as the camp's ANSWER to the tilted beam —
-  the withhold's own joke's material.
-2. The heartbreak probe (the W5 trio's remaining station, its design
-   material carrying intake-36's C03+F02 consult — WORLD_WORKPLAN
-   §7's decision points).
-3. The human live-band re-run after several reader-side fixes (the
-   LLM reader the instrument so far, glm n=2 — the owner's option
-   (б); items 1–2 above the reader-side fixes it waits on).
-4. The remaining station rows (the owner's next engine run, TEST_PLAN
+1. The heartbreak probe (the W5 trio's remaining station — the
+   owner's queue-order call's second row: its design material
+   carrying intake-36's C03+F02 consult — WORLD_WORKPLAN §7's
+   decision points; the same bounded form, the isolation law held).
+2. The human live-band re-run after the reader-side fixes (the LLM
+   reader the instrument so far, glm n=2 — the owner's option (б);
+   the rs family's five measured fixes (rs-2/3/4/5/6) the band it
+   waits on).
+3. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate
@@ -113,16 +112,18 @@ as the camp's answer).**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-5. The standing frames: the embodiment options (the older units' rows
+4. The standing frames: the embodiment options (the older units' rows
    — the step's notch record/hatch, the kin's own — each a future
    row's own call), the debt-1 residues (the crossing's own standing
    state the charcoalpaper precedent's sibling — the punt's purchase
    and the flood paper's fall still authored, each a future row's own
    call), the re-weigh's SALE (the heap's bloom drain —
-   the withhold's own future row), the SoW horizon (bg-6, owner-deferred —
+   the withhold's own future row), the shave's temporal placement
+   (the arc's assembly's remaining half — a future row's own call),
+   the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-6. The intake-34/35/36 residues (each behind its own trigger, never a
+5. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;

@@ -36,8 +36,22 @@ renders NOTHING (the raw id is a machine token, rs-1's law — the
 conditional stays dry, the line byte-identical to the pre-rs-4 form);
 the doors' events (the fall, the collection) carry no flow and never
 did. The LOG untouched (zero corpus price by construction — the gloss
-is read-side only). The withhold's bloom line keeps rs-3's kind gloss
-ALONE (the flow unglossed: the meaning already rides the kind).
+is read-side only).
+
+rs-6 (iter-202, the owner's queue-order call «withhold -> the
+heartbreak probe» firing STATUS Next step item 1 — the one-surface
+contradiction, the iter-199/201 measured residue): the withhold's
+EMPTY SLOT FILLED — `the_withhold_banks` gains its flow gloss, the row
+rs-4 deliberately left unglossed ("the meaning already rides the
+kind" — the measured ceiling of that reading: the heap read as
+commerce / "careful accounting", never as the camp's ANSWER). The
+join the table owed the reader (ANCHOR_REGION §6.4's CONSEQUENCE row,
+the authored law's own words: "the camp's answer to a tilted beam is
+to be unweighable at it"): the beam's law + the ANSWER frame + the
+fund's tie ONE surface — the banking line (the withhold's own
+enactment) now reads as the camp refusing the guild's tilted weighing
+while the paper is still paid. The mechanism UNCHANGED (rs-4's table,
+rs-4's mapping); the LOG untouched.
 
 The claim packet (TEST_PLAN §9):
 
@@ -45,12 +59,18 @@ The claim packet (TEST_PLAN §9):
   every reader surface that asserts them (the tale lines + the entity
   view's history lines — one boundary), the covering's join rendered
   (the camp's line reads as the fund's climb toward the paper sixteen,
-  never as income); no unglossed flow, no door-minted event, and no
+  never as income); rs-6: the withhold's line carries the ANSWER frame
+  (the beam's tilt, the camp's posture, the paper still paid — one
+  surface); no unglossed flow, no door-minted event, and no
   foreign pack renders a tail; the raw flow id never renders; the
   state lines' apposition stays kind-level (rs-2's law, unchanged).
 - Problem: the W5 covering residue — the probes' readers read the +3
   reckonings as periodic income because the flow's relation rendered
-  nowhere (the kind gloss's granularity ceiling).
+  nowhere (the kind gloss's granularity ceiling); rs-6's own half —
+  the one-surface contradiction (iter-199/201, glm n=2): the heap
+  read as commerce / "careful accounting", never as the camp's ANSWER
+  to the tilted beam — the heap's meaning, the fund's climb, and the
+  beam's law never joined one surface.
 - Lens(es): the boundary lens (the tale + the entity view, the probe
   package's own surfaces); the fallback lens (unglossed flows,
   door-minted events, table-less packs, foreign logs); the corpus lens
@@ -70,8 +90,10 @@ The claim packet (TEST_PLAN §9):
 - Expected evidence: the year block's three coin lines carrying their
   tails ("...at the year's reckoning — the toll's net surplus...",
   "...— the guild's standing take...", "...— the honest year's
-  surplus, the debt fund climbing toward the paper sixteen"); the
-  withhold's bloom line byte-identical to rs-3's form; the fall's and
+  surplus, the debt fund climbing toward the paper sixteen"); rs-6:
+  the withhold's bloom line carrying its tail beside the kind gloss
+  ("...— the camp's answer to a tilted beam: unweighable at it, the
+  paper still paid."); the fall's and
   the collection's lines dry.
 - Observed evidence: CONFIRMED at the deterministic band (seed 42:
   the calendar year run + the re-weigh twin); the probe's re-run rides
@@ -120,6 +142,14 @@ CHEST_GLOSS = (
 )
 NETS_GLOSS = (
     "the honest year's surplus, the debt fund climbing toward the paper sixteen"
+)
+#: The withhold's flow gloss (rs-6, iter-202 — the one-surface
+#: contradiction's join: ANCHOR_REGION §6.4's CONSEQUENCE row, the
+#: authored law's own words; pinned the same law, a re-wording is a
+#: deliberate act).
+WITHHOLD_GLOSS = (
+    "the camp's answer to a tilted beam: unweighable at it, the paper"
+    " still paid"
 )
 
 
@@ -210,7 +240,9 @@ def test_the_gloss_lookup_shapes() -> None:
     assert gloss_flow(pack.templates, "the_toll_nets") == TOLL_GLOSS
     assert gloss_flow(pack.templates, "the_guild_collects") == CHEST_GLOSS
     assert gloss_flow(pack.templates, "the_bloom_nets") == NETS_GLOSS
-    assert gloss_flow(pack.templates, "the_withhold_banks") == ""
+    assert (
+        gloss_flow(pack.templates, "the_withhold_banks") == WITHHOLD_GLOSS
+    )
     tavern = load_pack(REPO / "content" / "tavern_pack")
     assert gloss_flow(tavern.templates, "the_toll_nets") == ""
     malformed = {"flow_glosses": {"the_toll_nets": "", "coin": 3}}
@@ -261,8 +293,9 @@ def test_the_year_block_carries_the_covering_frame(tmp_path: Path) -> None:
     the tale's reckoning lines carry their flows' meanings — the
     covering JOINED (the camp's line reads as the fund's climb toward
     the paper, the chest's as the papers' service, the crossing's as
-    the punt fund), the withhold's bloom line byte-identical to rs-3's
-    form (the flow unglossed — the meaning already rides the kind)."""
+    the punt fund), rs-6: the withhold's bloom line carries the
+    ANSWER frame (the heap never reading as commerce — the beam's tilt,
+    the camp's posture, and the paper's payment one surface)."""
     events, pack = _run_script(
         tmp_path, "year.jsonl", 42,
         REPO / "tests" / "playscripts" / "province_calendar.json",
@@ -280,10 +313,13 @@ def test_the_year_block_carries_the_covering_frame(tmp_path: Path) -> None:
         "Garrick comes by 3 coin at the year's reckoning — "
         f"{NETS_GLOSS}." in tale
     )
+    # rs-6 (iter-202): the withhold's own line carries the join — the
+    # kind gloss (the heap's meaning, rs-3/5) + the flow gloss (the
+    # beam's tilt, the ANSWER frame, the paper still paid) one surface
     assert (
         "the smelt crofts comes by 2 bloom kept off the weighbeam"
         " since the guild factor shaved the camp's weight"
-        " at the year's reckoning." in tale
+        f" at the year's reckoning — {WITHHOLD_GLOSS}." in tale
     )
 
 

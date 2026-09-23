@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings; the withhold's one-surface contradiction the open successor; the heartbreak station + the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce; the heartbreak station + the live human band open)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
@@ -460,9 +460,10 @@ CONFIRMED, the authored residues open); the covering residue's own
 row landed and its mandatory bar MET on the rs-4-fixed surface
 (iter-199 below — the covering connected); the shave's agency row
 landed and its mandatory bar MET on the rs-5-fixed surface (iter-201
-below — the direction correct, n=2 convergent; the withhold's
-one-surface contradiction the open successor); the
-heartbreak station un-run; the live human band open.` The owner's reading of the
+below — the direction correct, n=2 convergent); the withhold's
+one-surface contradiction row landed and its mandatory bar MET on the
+rs-6-fixed surface (iter-202 below — the join carried, the heap never
+commerce); the heartbreak station un-run; the live human band open.` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
 unchanged: the causal composition CONFIRMED — but the reader-side
@@ -766,6 +767,64 @@ measured); the remaining routes each a future row's own call (the
 withhold's one-surface contradiction the queue's next, the heartbreak
 station + the live human band still the owner's calls). Honest
 caveats unchanged (the LLM reader class, the year compression).
+
+The withhold's ONE-SURFACE CONTRADICTION row (iter-202, the owner's
+queue-order call «withhold → the heartbreak probe» firing STATUS Next
+step item 1 — the iter-199/201 measured residue, the queue's next):
+rs-6 LANDED FIRST (the rs family's sixth member — the withhold's
+EMPTY FLOW SLOT filled: `the_withhold_banks` gains its flow gloss,
+the row rs-4 deliberately left unglossed ("the meaning already rides
+the kind" — the measured ceiling of that reading: the heap read as
+commerce, never as the camp's ANSWER); the join authored from
+ANCHOR_REGION §6.4's CONSEQUENCE row, the authored law's own words —
+"the camp's answer to a tilted beam: unweighable at it, the paper
+still paid" — the beam's law + the ANSWER frame + the fund's tie ONE
+surface, riding the banking line (the withhold's own enactment)
+beside rs-3/5's kind gloss; the mechanism UNCHANGED (rs-4's table,
+rs-4's mapping), the LOG untouched, zero corpus price) and the probe's
+re-run MANDATORY BAR MET (the contradiction JOINED), n=2 CONVERGENT:
+BOTH readings assemble the frame — reading 1 in its own words: "a form
+of economic resistance against the guild's weighing system ... a
+direct response to [the shave] ... the camp accepts it cannot avoid the
+paper debt entirely ('the paper still paid') but refuses to accept
+being underpaid" (minimal compliance — the obligations met, the
+guild's assessment refused); reading 2 carrying the gloss verbatim AS
+the answer, then tying it in its own words ("while they still pay
+their paper debt ... they simultaneously ... keep bloom off the scale
+... retain value that would otherwise be extracted through unfair
+weighing") — the prior runs' failure modes GONE (the heap read as
+commerce / "careful accounting" NOWHERE; the withhold never floated
+as private sale). The regression bars held (the obligation frame both
+readings — the paper a debt, the creditor named; the shave's direction
+correct both — the guild the shaver, the production underweighed; the
+discharge the debt settled, never an exchange). The honest residues,
+both readings: the shave's TEMPORAL placement still not assembled
+(the known-open arc half — reading 1's own uncertainty note: "the
+exact nature of the dispute ... remains uncertain"); the +3 reckonings
+not explicitly discussed (no income misreading present — the failure
+mode absent, the join not extracted; the task's focus the bloom/coin
+practice); the tally's counter-record role unconnected by either; the
+position-dependence + the withhold's own joke the future station's
+material. The instrument: the sparse twin re-established from the
+recorded protocol EXACTLY (the fall t=2824, the fund 18 at the fifth
+crossing, the close paper 0 / coin 8, the heap 18, seven crossings,
+the tale 88 lines, the factor's runner present at the crofts' read and
+the fall's witnessing; the package byte-identical on re-run), the
+package the same form (the tale + Garrick's opening/close records +
+the crofts' close record + three briefs — the player's crisis at the
+fall, Garrick's crisis at the collection in his voice, the player's
+close); the author audit pre-set BEFORE the reading (the pass bar:
+the join MANDATORY — the withhold + the fund + the beam tied as the
+camp's ANSWER, at least two halves explicitly tied; the regression
+bars strongly expected; the temporal placement / the joke / the tally
+supporting); the blind reader the same class (glm, n=2 independent;
+the runner + the transcripts outside the repo, Rule 9). The
+disposition: rs-6 CONFIRMED at its own bar (the contradiction one
+surface, the failure mode eliminated — the rs family's sixth member
+measured); the remaining routes each a future row's own call (the
+shave's temporal placement — the arc's assembly's remaining half; the
+heartbreak station + the live human band still the owner's calls).
+Honest caveats unchanged (the LLM reader class, the year compression).
 
 ### OPEN — Ancient Network back-propagation
 
