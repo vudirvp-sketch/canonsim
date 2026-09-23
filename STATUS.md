@@ -1,54 +1,44 @@
-Iteration: iter-207 (`iter-207-humanband` — the owner's option (б)
-call firing STATUS Next step item 1 — the human live-band re-run after
-the reader-side fixes, the rs family's seven measured fixes + the
-eighth's met pair the band it waits on; the question the human
-reader's convergence): the human band's INSTRUMENT re-established and
-the READING KIT delivered to the owner — the human reading itself the
-owner's side, never a sandbox claim. The two packages regenerated
-deterministically at seed 42, the runner + the kit outside the repo
-(Rule 9 — the iter-191/206 reconstruction precedent's own class, the
-honest notes below): the RE-WEIGH package (the sparse twin macro 480 /
-calendar 240/360/420, the full chain — the factor's runner's crofts
-detour, the tally read at the crofts (the night arm, t=1112, partial
-fidelity, the cluster still minted — the recorded fall geometry's own
-consequence: no morning wait fits t=2824), the walks to Malby, the
-FALL at t=2824 with the fund 18, the COLLECTION, two aftermath
-crossings; the close paper 0 / coin 8, the heap 18, seven crossings +
-seven banks, the tale 87 lines, every rs-2/3/4/5/6 surface carried;
-the package = the tale + Garrick's opening/close records + the
-crofts' close record + three briefs — the player's crisis at the fall
-(the_paper_fell exact), Garrick's crisis (fall + collection, his
-voice), the player's close) and the HEARTBREAK package (the committed
-pack, the return's chain — 43 events, the tale 24 lines, the read's
-fail-then-pass, the claim's road-hearing, the echo 40→80, the names,
-rs-7/8's lines; the package = the tale + Tork's opening/close records
-+ Ketta's close record + three briefs — the runner's road window,
-Ketta's arrival + close, her voice); both byte-identical on
-regeneration; the author audit pre-set BEFORE the reading (the repo's
-own recorded pass bars — the same bars the LLM band's glm n=2 readings
-were measured against, the convergence question stated as the band's
-own). The kit (the packages + the blind reader questions + the audit)
-handed to the owner as the sandbox deliverable; the LLM band's
-measured results the comparison baseline — the convergence the
-owner's reading away.
+Iteration: iter-208 (`iter-208-humanread` — the owner's chat delivery
+of the W5 human live band's three blind answers firing STATUS Next
+step item 1's own beat — the convergence assessment against the
+pre-set audit, the band's standing question): the human reading
+RECEIVED and SCORED — CONVERGENT with the post-fix LLM band on every
+mandatory bar at n=1 (the debt frame — the mere-holding reading
+explicitly refused; the discharge's direction; the shave's direction;
+the withhold-as-answer; the mechanism-grounded joke — riding the
+WITHHOLD itself, the authored answer's own class, beyond the LLM
+band's rs-3-surface measurements with the surface-unequal confound
+named, the taboo boundary + the position-dependence explicit; the
+heartbreak's mandatory pair both halves — the rs-8 clause's own
+semantics + the echo line's forward frame — and the supporting bars).
+The single divergence the covering's FUND-frame (the +3 reckonings
+carried and the arc joined to the Malby road, the fund vocabulary not
+restated — the free-answer form at n=1 cannot distinguish
+not-extracted from not-probed). The reading's own honest residues
+recorded: the factor's runner's standing grudge against Garrick
+noticed with its story carried nowhere; the fail-then-pass + the
+40/80 asymmetry skipped — standing at both bands; the drowned
+generation's line implicit, the iter-206 conflation not present. The
+stations' states stand — the human-band clauses now measured.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT ff65edf — 2041 passed + 1
+the env pin; verified at BASE_COMMIT 02fbc80 — 2041 passed + 1
 skipped, ruff clean, docguard clean, before the change) ·
-Date: 2026-09-23 ·
+Date: 2026-09-24 ·
 Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
 + docs/TASKS.md + STATUS.md + worklog.md — 5 paths doc-only (the
-probe-instrument state-docs class, iter-204's own form; the runner +
-the kit outside the repo, Rule 9; zero code, zero pack change, the LOG
+probe-instrument state-docs class, iter-204/207's own form; the
+reading's delivery the owner's fresh request firing it — the D-022
+exception's own record; zero code, zero pack change, the LOG
 untouched).
-Track A: the W5 human live band's instrument re-established + the
-reading kit delivered (option (б) — the convergence the owner's
-reading away). The prior iterations' record: iter-206
-(heartbreak-subject — the mandatory pair MET at the LLM band), 205
-(heartbreak-fix), 204 (heartbreak). The detail lives in the worklog +
-git.
+Track A: the W5 human live band's reading processed — the convergence
+assessment recorded (the band's standing question answered YES at
+n=1). The prior iterations' record: iter-207 (humanband — the kit
+delivered), 206 (heartbreak-subject — the mandatory pair MET at the
+LLM band), 205 (heartbreak-fix), 204 (heartbreak). The detail lives
+in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -105,18 +95,21 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-207 DONE: the human live band's instrument re-established and
-the READING KIT delivered to the owner (option (б) — the rs family's
-eight fixed surfaces + the eighth's met pair the band it waits on)
-— the human reading itself the owner's side, the convergence the
-band's standing question.**
+**iter-208 DONE: the W5 human live band's READING received and scored
+— the convergence assessment CONVERGENT at every mandatory bar (n=1;
+the covering's fund-frame the single divergence, the humor halves
+beyond the LLM band's own with the surface-unequal confound named) —
+the band's standing question answered.**
 
-1. The owner's HUMAN READING over the delivered kit (the two packages
-   + the three blind questions; the author audit read after) — the
-   convergence assessment against the LLM band's measured baseline
-   (glm n=2, WORLD_TESTS §9's W5 entry) the reading's own next beat;
-   where the reading diverges, the divergence's class the datum (the
-   boundary law, never "improve the prose").
+1. The reading's raised questions, each the owner's call, never a
+   default: the covering's fund-frame divergence (the free-answer
+   form cannot distinguish not-extracted from not-probed — a direct
+   probe would separate them, the boundary law standing, never
+   "improve the prose"); the humor's surface-unequal confound (the
+   kit's rs-2..6 vs the LLM humor bars' rs-3 — an LLM humor re-measure
+   on the rs-6 surface would equalize the bands); the discovery-path
+   residues standing at both bands (the fail-then-pass, the 40/80
+   asymmetry, the runner's grudge story).
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

@@ -382,10 +382,18 @@ step item 1: the two packages regenerated deterministically at seed
 42, byte-identical, every recorded substance shape hit — the record
 in `WORLD_TESTS.md` §9's W5 entry; the reading kit + the pre-set
 author audit handed to the owner as the sandbox deliverable). The
-standing decision points for the owner: the HUMAN READING itself
-over the delivered kit (the convergence against the LLM band's
-measured baseline the reading's own assessment — the band's standing
-question) and the arc's assembly's remaining half (the shave's
+HUMAN READING has since been RECEIVED and SCORED (iter-208 — the
+owner's chat delivery of the three blind answers: the convergence
+assessment against the pre-set bars CONVERGENT at every mandatory
+bar, n=1 — the single divergence the covering's fund-frame, the
+reading's humor halves beyond the LLM band's own with the
+surface-unequal confound named — the record in `WORLD_TESTS.md` §9's
+W5 entry). The standing decision points for the owner: the reading's
+raised questions (the covering's fund-frame divergence — a direct
+probe or leave standing; the humor's surface-unequal confound — an
+LLM re-measure on the rs-6 surface; the discovery-path residues
+standing at both bands; each the owner's call, never a default) and
+the arc's assembly's remaining half (the shave's
 temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
