@@ -1,39 +1,31 @@
-Iteration: iter-212 (`iter-212-doc5` — the research-discipline
-vocabulary into its owners, the CP-migration family's second slice,
-the owner's continuation call over STATUS Next step 1): the
-claim-side epistemic classes FACT (directly established by evidence)
-/ INFERENCE (a reasoned conclusion from evidence) / HYPOTHESIS
-(plausible, unverified) / PROPOSAL (a possible future direction) /
-UNKNOWN (not presently decidable) named in TEST_PLAN §9 beside the
-standing disposition vocabulary — class and disposition separate
-axes (the claim's kind as asserted vs the verification's verdict),
-the class gating what a disposition may license (hypothesis →
-requirement, proposal → architecture, research → implementation,
-plausibility → proof the forbidden transitions; a surviving
-HYPOTHESIS or PROPOSAL routes to an owner-gated row, never straight
-into a build); the five-part design test (Principle / Form / Quality
-/ Transfer / Combined design) landed as BLUEPRINT §2 **L15** beside
-L13/L14 — form-match alone never enough (an existing form with
-quality/transfer/combined-design unproven caps the strongest
-disposition at PARTIALLY CONFIRMED), applied at a genuine design fork
-only, never a ritual; TEST_PLAN §9's lens quality-bar re-pointed at
-L15 (the single owner, D-024); D-198's doc-5 clause closed.
+Iteration: iter-213 (`iter-213-doc6` — the CP-migration family's
+acceptance, the owner's continuation call over STATUS Next step 1):
+the family CLOSED — doc-4 (iter-211: the external CP document's
+durable layer → AGENTS §2/§10/§11/§12 + NAV §2; D-113's chat-side
+placement superseded), doc-5 (iter-212: TEST_PLAN §9's claim-side
+epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN beside
+the disposition vocabulary + BLUEPRINT §2 L15 the five-part design
+test), doc-6 (this iteration) the acceptance collapse — the D-198
+family row carries the closure marker, the ledger/state docs at the
+minimal current-state form; the minimal-invocation artifact delivered
+CHAT-SIDE (never a repo file — the convenience-copy law): the
+repository + task-words form, the big bootstrap prompts retired.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-211 state and
+the env pin; verified before the change at the iter-212 state and
 after) ·
 Date: 2026-09-24 ·
-Scope: docs/TEST_PLAN.md + docs/BLUEPRINT.md + docs/DECISIONS.md +
-docs/TASKS.md + STATUS.md + worklog.md — 6 paths doc-only (the two
-owner docs + the state docs; the D-022 exception honest: the owner's
-fresh continuation request fired the doc-only family slice; zero
-code, zero pack change, the LOG untouched).
-Track A: the research vocabulary landed (doc-5: TEST_PLAN §9's
-claim-side classes + BLUEPRINT §2 L15). The prior iterations' record:
-iter-211 (doc-4), 210 (proberead), 209 (remeasure), 208 (humanread),
-207 (humanband). The detail lives in the worklog + git.
+Scope: docs/DECISIONS.md + docs/TASKS.md + STATUS.md + worklog.md —
+4 paths doc-only (the state docs; the D-022 exception honest: the
+owner's fresh continuation request; zero code, zero pack change, the
+LOG untouched).
+Track A: the CP-migration family COMPLETE (doc-4/5/6; D-198 closed —
+the invocation target now repository + task words). The prior
+iterations' record: iter-212 (doc-5), 211 (doc-4), 210 (proberead),
+209 (remeasure), 208 (humanread). The detail lives in the worklog +
+git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -90,20 +82,12 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-212 DONE: the research-discipline vocabulary (doc-5) — the
-claim-side epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/
-UNKNOWN named in TEST_PLAN §9 beside the standing disposition
-vocabulary (the class gates what a disposition may license); the
-five-part design test landed as BLUEPRINT §2 L15 beside L13/L14 —
-a genuine design fork, never a ritual.**
+**iter-213 DONE: the CP-migration family's acceptance (doc-6) —
+doc-4/5/6 CLOSED, the D-198 family marker landed; the
+minimal-invocation artifact (repository + task words) delivered
+chat-side — the big bootstrap prompts retired.**
 
-1. The CP-migration family's LAST slice: **doc-6** — the family's
-   acceptance collapse (doc-4/5/6 closed; the D-198 row's family
-   marker; the ledger/state docs to the minimal current-state form)
-   + the minimal-invocation artifact (CHAT-SIDE, never a repo file:
-   the repository + task-words form, CP §26/D-198 — the big
-   bootstrap prompts retire).
-2. The remaining station rows (the owner's next engine run, TEST_PLAN
+1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate
@@ -111,7 +95,7 @@ a genuine design fork, never a ritual.**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-3. The standing frames: the embodiment options (the older units' rows
+2. The standing frames: the embodiment options (the older units' rows
    — the step's notch record/hatch, the kin's own — each a future
    row's own call), the debt-1 residues (the crossing's own standing
    state the charcoalpaper precedent's sibling — the punt's purchase
@@ -122,7 +106,7 @@ a genuine design fork, never a ritual.**
    the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-4. The intake-34/35/36 residues (each behind its own trigger, never a
+3. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;
