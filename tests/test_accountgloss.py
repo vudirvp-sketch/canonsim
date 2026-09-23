@@ -20,6 +20,24 @@ corpus price, the same law). The arc's ASSEMBLY stays the covering
 residue's own future row (the W5 record's route: the gloss now, the
 arc later — the re-run's residues recorded there).
 
+rs-5 (iter-201, the owner's queue-order call «agency → withhold →
+the heartbreak probe» firing STATUS Next step item 1 — the covering
+residue's first measured successor, WORLD_TESTS §9's W5 entry): the
+SAME row re-authored to carry the shave's AGENCY — the iter-199
+re-run's residue (glm n=2): the glosses carried the temporal tie
+"since the shave", never WHO shaved whom, and reading 2 INVERTED the
+direction ("accused of dishonestity ... by the guild", the camp read
+as the accused) while reading 1 floated the withhold as "perhaps for
+private sale". The fix: the gloss's origin clause re-worded from the
+spine's own committed words (entities.json: "the guild factor shaved
+the weight ... and the camp starved") — "since the guild factor
+shaved the camp's weight": the actor, the act, and the patient on
+every surface the gloss rides. The mechanism UNCHANGED (rs-2's
+mapping, rs-3's row); the direction is a FACT the table owed the
+reader, never prose polish (the W5 law: NEVER "improve the prose").
+The probe's re-run on the fixed surface rides this iteration's
+record (WORLD_TESTS §9's W5 entry).
+
 The failure (iter-190's W5 first run, glm n=2 convergent): the reader
 did NOT reconstruct the persistent obligation — FAILED at the RENDERING
 boundary, the canonical fact PRESENT (both readers saw
@@ -64,8 +82,10 @@ The claim packet (TEST_PLAN §9):
   `account.paper: 16 — paper owed to the guild's chest at Malby since
   the starved winter`; the fall line carrying the same gloss; the coin
   lines dry; rs-3: the crofts' heap line and the banking verb lines
-  carrying the withhold's gloss (`bloom kept off the weighbeam since
-  the shave`).
+  carrying the withhold's gloss; rs-5: the same glosses carrying the
+  shave's DIRECTION (`bloom kept off the weighbeam since the guild
+  factor shaved the camp's weight` — the actor and the patient on
+  every banking line and the crofts' state apposition).
 - Observed evidence: CONFIRMED at the measured band (seed 42: the
   re-weigh twin; rs-3's band: the humor probe's re-run — the mandatory
   bar met, WORLD_TESTS §9's W5 entry).
@@ -110,8 +130,13 @@ PAPER_GLOSS = (
     "paper owed to the guild's chest at Malby since the starved winter"
 )
 #: The bloom kind's committed gloss (rs-3, iter-194 — the withhold's
-#: meaning, pinned the same law: a re-wording is a deliberate act).
-BLOOM_GLOSS = "bloom kept off the weighbeam since the shave"
+#: meaning; rs-5, iter-201 — the same row re-authored to carry the
+#: shave's AGENCY, the spine's own words: pinned the same law, a
+#: re-wording is a deliberate act).
+BLOOM_GLOSS = (
+    "bloom kept off the weighbeam since the guild factor shaved"
+    " the camp's weight"
+)
 
 
 # -- the helpers ----------------------------------------------------------------

@@ -282,7 +282,8 @@ def test_the_year_block_carries_the_covering_frame(tmp_path: Path) -> None:
     )
     assert (
         "the smelt crofts comes by 2 bloom kept off the weighbeam"
-        " since the shave at the year's reckoning." in tale
+        " since the guild factor shaved the camp's weight"
+        " at the year's reckoning." in tale
     )
 
 

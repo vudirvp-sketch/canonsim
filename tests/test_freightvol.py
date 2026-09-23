@@ -315,10 +315,13 @@ def test_the_tale_carries_the_fourth_reckoning(tmp_path: Path) -> None:
         in tale
     )
     # rs-3 (iter-194): the heap's margin line carries the withhold's
-    # gloss — the fourth reckoning reads as the withhold deepening
+    # gloss — the fourth reckoning reads as the withhold deepening;
+    # rs-5 (iter-201): the gloss carries the shave's AGENCY (the guild
+    # factor the actor, the camp the patient — the spine's own words)
     assert (
         "the smelt crofts comes by 2 bloom kept off the weighbeam"
-        " since the shave at the year's reckoning." in tale
+        " since the guild factor shaved the camp's weight"
+        " at the year's reckoning." in tale
     )
 
 

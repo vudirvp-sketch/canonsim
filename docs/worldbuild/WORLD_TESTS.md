@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent; the heartbreak station + the live human band open)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings; the withhold's one-surface contradiction the open successor; the heartbreak station + the live human band open)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
@@ -458,8 +458,10 @@ humor station's second measurement MET its mandatory bar on the
 rs-3-fixed surface (iter-194 below — the station PARTIALLY
 CONFIRMED, the authored residues open); the covering residue's own
 row landed and its mandatory bar MET on the rs-4-fixed surface
-(iter-199 below — the covering connected, the shave's agency and the
-withhold's one-surface contradiction the open residues); the
+(iter-199 below — the covering connected); the shave's agency row
+landed and its mandatory bar MET on the rs-5-fixed surface (iter-201
+below — the direction correct, n=2 convergent; the withhold's
+one-surface contradiction the open successor); the
 heartbreak station un-run; the live human band open.` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
@@ -718,6 +720,52 @@ shave's agency surface, the withhold's contradiction one surface),
 the heartbreak station + the live human band still the owner's calls.
 Honest caveats unchanged (the LLM reader class, the year
 compression).
+
+The shave's AGENCY row (iter-201, the owner's queue-order call «agency
+→ withhold → the heartbreak probe» firing STATUS Next step item 1 —
+the covering residue's first measured successor): rs-5 LANDED FIRST
+(the rs family's fifth member — the bloom kind's gloss RE-AUTHORED to
+carry the direction of action: "bloom kept off the weighbeam since
+the guild factor shaved the camp's weight", the spine's own committed
+words (the entities record's cause field) — the mechanism unchanged
+(rs-2's mapping, rs-3's row), the LOG untouched, zero corpus price)
+and the probe's re-run MANDATORY BAR MET (the direction correct), n=2
+CONVERGENT: BOTH readings carry the guild (the factor) as the shaver
+and the camp as the shaved — reading 1: "the guild's factor has
+'shaved' his weight at the scales, stealing a portion of his honest
+labor"; reading 2: the guild "holds the scales ... they 'shave the
+camp's weight'" — the prior runs' failure modes GONE (the iter-199
+reading-2 inversion — the camp as the accused — nowhere; the iter-199
+reading-1 withhold-as-private-sale replaced by the withhold read as
+the camp's ANSWER: "as a protest" / "a symbol of his defiance"). The
+honest residues, both readings: the shave's TEMPORAL placement never
+assembled (the shave read as the year's present injustice or a vague
+background, never the two-seasons-back living memory with the starved
+winter between — the arc's assembly's own remaining half); minor edge
+confabulations (reading 1: "the guild has acknowledged the shaved
+weight ... it has paid what it took" — the guild paid nothing, the
+camp's own fund did; reading 2: the guild "comes to the smelt crofts"
+— the shave conflated with the present weighing). The supporting bars
+held (the covering: reading 2 verbatim "his debt fund climbing toward
+the paper sixteen"; the discharge: both readings the debt settled,
+never an exchange; the obligation frame: both the guild the
+creditor). The instrument: the same sparse twin re-established from
+the recorded protocol (the fall t=2824, the fund 18 at the fifth
+crossing, the close paper 0 / coin 8, the heap 18, seven crossings,
+the tale 87 lines — every substance shape matching the iter-199
+record exactly; the package byte-identical on re-run), the package
+the same form (the tale + Garrick's opening/close records + the
+crofts' close record + three briefs); the author audit pre-set BEFORE
+the reading (the pass bar: the direction correct MANDATORY, the
+withhold-as-answer + the arc strongly expected, the covering /
+discharge / frame supporting); the blind reader the same class (glm,
+n=2 independent; the runner + transcripts outside the repo, Rule 9).
+The disposition: rs-5 CONFIRMED at its own bar (the direction
+renders, the inversion eliminated — the rs family's fifth member
+measured); the remaining routes each a future row's own call (the
+withhold's one-surface contradiction the queue's next, the heartbreak
+station + the live human band still the owner's calls). Honest
+caveats unchanged (the LLM reader class, the year compression).
 
 ### OPEN — Ancient Network back-propagation
 

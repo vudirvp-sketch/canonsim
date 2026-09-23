@@ -5,6 +5,13 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-201 · 2026-09-23 · agency — the shave's AGENCY row landed (the owner's queue-order call «agency → withhold → the heartbreak probe», STATUS item 1 — the covering residue's
+first measured successor): rs-5 — the bloom kind's gloss re-authored to carry the direction of action ("since the guild factor shaved the camp's
+weight" — the spine's own words; the mechanism unchanged, zero code, zero corpus price; the pins updated as the deliberate act, 3 test files);
+the probe's re-run MANDATORY BAR MET (glm n=2 convergent — the guild the shaver, the camp the shaved, the inversion GONE, the withhold read as the
+camp's answer; the honest residues: the temporal placement + the one-surface contradiction — the queue's next); 8 paths; 2034+1 + ruff + docguard clean; iter-191 evicted per the cap
+
+---
 iter-200 · 2026-09-23 · renamelint — the rename-safety admission closure (the owner's session-order call, the iter-198 T3 measured gap, TECH_NOTES §17):
 the actions' hooks-branch tags now linted against `director.hooks` (the runtime's silent None-branch the measured killer; the
 KI#77-guarded read, `_director` later) + the two-test regression packet (tests/test_core.py) + PACK_SPEC §3 the contract sync;
@@ -60,9 +67,5 @@ iter-192 · 2026-09-22 · humorprobe — the W5 humor station (the owner's «п�
 continuation): the humor probe RAN and FAILED at the rendering boundary, glm n=2 convergent (both readers the SAME imported-template
 joke — the withhold's meaning renders nowhere, the banking lines read as income, the covering residue's family); classified by
 boundary, the fix's route the owner's call (the bloom kind's gloss the rs family's third member), the gate untouched; 6 paths
-doc-only + the docguard allowlist entry (WORLD_TESTS over the 600 cap after the §6.1 pass); the runner + transcripts + audit outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-183 evicted
----
-iter-191 · 2026-09-22 · accountgloss — the W5 rendering-boundary fix (the owner's route (а) call): the account-kind gloss on the reader surface (rs-2, the rs-1 precedent — the pack's account_kinds words,
-the renderer's {kind}-slot + state-apposition mapping, the lint's closure) + the biography probe's re-run PASSED CLEAN (glm n=2 convergent: the debt named, the creditor named, the direction correct —
-the gate's named condition met, the embargo lifted); 15 paths (the fix + test_accountgloss.py +7 + the pins widened + the W5 record; WORLD_TESTS at the 600 cap after the §6.1 pointer pass);
-the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-182 evicted
+doc-only + the docguard allowlist entry (WORLD_TESTS over the 600 cap after the §6.1 pass); the runner + transcripts + audit outside the repo (Rule 9); 2018+1 + ruff + docguard clean; iter-183 evicted per the cap
+
