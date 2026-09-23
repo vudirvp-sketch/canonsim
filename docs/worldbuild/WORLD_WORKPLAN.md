@@ -391,18 +391,25 @@ surface-unequal confound named — the record in `WORLD_TESTS.md` §9's
 W5 entry). The humor's surface-unequal confound since RESOLVED
 (iter-209 — the owner's continuation call: the LLM humor re-measure on
 the rs-6 surface extracted the withhold-riding joke class n=2, the
-bands equalized — WORLD_TESTS §9's W5 entry's iter-209 record) and the
+bands equalized — WORLD_TESTS §9's W5 entry's iter-209 record); the
 direct coverage probe kit DELIVERED (iter-209 — the covering's
 fund-frame divergence: the direct question over the same package, the
-pre-set separation audit, the reading the owner's side in chat). The
-standing decision points for the owner: the direct coverage probe's
-READING (the delivered kit's one question — the fund gloss quoted →
-not-probed; the fund-frame absent → not-extracted; either branch a
-datum, never "improve the prose"); the discovery-path residues
-standing at both bands (the fail-then-pass, the 40/80 asymmetry, the
-runner's grudge story — each its own surface's question, never a
-default); and the arc's assembly's remaining half (the shave's
-temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
+pre-set separation audit, the reading the owner's side in chat) and
+its READING since RECEIVED and CLOSED (iter-210 — the NOT-PROBED
+branch: the fund-frame present directly on the readable surface and
+extracted under the direct question, the +3 coin the material's own
+year's surplus climbing as the debt fund toward the paper sixteen;
+the smelt-crofts +2 bloom a different material flow — rs-6's
+withhold/bloom frame, never the same debt fund; the iter-208
+divergence the free-answer form's artifact, the human band's covering
+bar joining the LLM band's — no renderer/prose/pack change, no new
+probe on the question; WORLD_TESTS §9's W5 entry's iter-210 record).
+The standing decision points for the owner: the discovery-path
+residues standing at both bands (the fail-then-pass, the 40/80
+asymmetry, the runner's grudge story — each its own surface's
+question, never a default, the owner's standing prescription); and the
+arc's assembly's remaining half (the shave's temporal placement —
+WORLD_TESTS §9's W5 entry's iter-202 record).
 
 ## 8. W6 — Genre tests
 
