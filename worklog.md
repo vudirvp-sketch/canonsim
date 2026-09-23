@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-211 · 2026-09-24 · doc-4 — the agent control-plane extraction (the owner's CP-rework calls: D-113 supersession approved, the doc-4+doc-5 merge the quality call): the external CP document's durable layer into the standing owners — AGENTS §2 task intake (owner request = current task; STATUS Next = ORDER, TASKS = COMPOSITION) + the design-fork preference + infrastructure admission (existing → minimal extension → new; the standing refusals: no agentcheck.py, no .agents/skills/, no second memory, no nested AGENTS) + four stop conditions, the new AGENTS §11 authority & conflict resolution (8 steps, no silent reconciliation), the new AGENTS §12 handoff & reproducibility + §10 the exact check triple; NAV §2 context closure + question classes + the change-impact gate (mechanics impact/blast), `impact` named in NAV §5
+why: the law lives in the repo, the external prompt shrinks to repository + task words (D-198, compounded into the D-018 concept-absorption family row; D-113's chat-side verify-seed/archive placement superseded — the marker riding the D-113 row)
+files: AGENTS.md, docs/AGENT_NAVIGATION.md, docs/DECISIONS.md, docs/TASKS.md, STATUS.md, worklog.md — 6 paths doc-only (the merged slice, the 3–5 soft limit honestly over per AGENTS §2.3, the scope noted here); 2041+1 + ruff + docguard clean both ends; iter-201 evicted per the cap
+---
 iter-210 · 2026-09-24 · proberead — the direct coverage probe's READING received and CLOSED (the owner's chat answer over the delivered kit's one question, the iter-208 delivery's own class): the pre-set separation audit's NOT-PROBED branch — the fund-frame present directly on the readable surface and extracted under the direct question (the +3 coin's own material: "the honest year's surplus, the debt fund climbing toward the paper sixteen" — the material itself defining the coins the year's surplus and the accumulating fund toward the paper sixteen's discharge); the smelt-crofts +2 bloom separated (rs-6's "the camp's answer to a tilted beam", another material flow — the withhold/bloom, never the same debt fund)
 the iter-208 divergence classified NOT-PROBED, never NOT-EXTRACTED (the free-answer form's artifact, the surface carries the frame — the human band's covering bar joins the LLM band's): no datum for a renderer/prose/pack fix — zero code, zero pack, zero canon; the discovery-path residues stand unchanged (the owner's standing prescription), no new probe on the question
 2041+1 + ruff + docguard clean; 5 paths doc-only (the reading's recording class, iter-208's own form; the D-022 exception honest: the owner's fresh request, the reading's delivery, fired it); iter-200 evicted per the cap
@@ -42,10 +46,3 @@ probe», STATUS item 1 — the iter-199/201 residue): rs-6 — the withhold's de
 `the_withhold_banks`: ANCHOR_REGION §6.4's answer frame, "the camp's answer to a tilted beam: unweighable at it, the paper still paid", riding
 the banking line beside the kind gloss; zero code, zero corpus price, the pins updated as the deliberate act, 3 test files); the probe's re-run
 MANDATORY BAR MET (glm n=2 convergent — the contradiction JOINED, the heap never commerce; the instrument EXACT: the fall t=2824, the tale 88); 8 paths; 2034+1 + ruff + docguard clean; iter-192 evicted per the cap
-
----
-iter-201 · 2026-09-23 · agency — the shave's AGENCY row landed (the owner's queue-order call «agency → withhold → the heartbreak probe», STATUS item 1 — the covering residue's
-first measured successor): rs-5 — the bloom kind's gloss re-authored to carry the direction of action ("since the guild factor shaved the camp's
-weight" — the spine's own words; the mechanism unchanged, zero code, zero corpus price; the pins updated as the deliberate act, 3 test files);
-the probe's re-run MANDATORY BAR MET (glm n=2 convergent — the guild the shaver, the camp the shaved, the inversion GONE, the withhold read as the
-camp's answer; the honest residues: the temporal placement + the one-surface contradiction — the queue's next); 8 paths; 2034+1 + ruff + docguard clean; iter-191 evicted per the cap

@@ -66,6 +66,25 @@
 | World-setting authoring (world canon, a region's authored depth, the anchor) | `docs/worldbuild/README.md` (the index + the ownership table + the terminology fence) → the ONE named domain owner, never the whole set; `WORLD_AUTHORING.md` the method, `WORLD_TESTS.md` the tests, `WORLD_WORKPLAN.md` the frontier (A1/A2/A3); the engine side of any claim: the owning spec, never this surface |
 | LLM-track (`bg-*`) | + `docs/TECH_NOTES.md` → `docs/SPECS_BACKLOG.md` |
 
+Three standing rules bound how deep the gradient goes (D-198):
+
+- **Context closure**: read until the selected task's dependency closure —
+  task → owner → contract → relevant invariants → dependencies → affected
+  mechanism → evidence. Stop when further reading would no longer change
+  scope, owner, decision, required implementation, or required
+  verification; excess reading mixes current/intended/historical/proposal
+  state — a failure mode, not thoroughness.
+- **Question classes**, separate from depth: OWNER (who decides) /
+  CONTRACT (what is promised) / DEPENDENCY (what consumes what) /
+  MECHANISM (how it works) / EVIDENCE (what proves it) — classes that
+  route into the rows above, each at its own depth; not a second scale.
+- **Change-impact gate**: before implementing, check whether the change
+  crosses an invariant / schema / contract / subsystem / pack-core / LLM
+  boundary. No crossing → stay local. A crossing → expand context past
+  the boundary and run the impact arm first (`scripts/mechanics.py`
+  `impact` / `blast`, §5); the stronger verification rides TEST_PLAN §9's
+  claim packet.
+
 ## 3. Information ownership (anti-drift map)
 
 | Information | Single owner | Everyone else |
@@ -108,7 +127,9 @@ names the expansion flags — the attention budget), `why --hook TAG
 [--at-tick N]` (the hook postmortem) or `why --event ID` (the one-event
 postmortem: cause chain + the knowledge wiring join + the cascade), `matrix`
 (static wiring; the compact default lists the query vocabulary — `--full`
-the whole inventory, `--dag` the systems read/write graph), `blast` (the
-two-arm A/B). Derived, never truth (D-118); the tool re-derives answers
+the whole inventory, `--dag` the systems read/write graph), `impact` (the
+agent impact surface — one pack path's derived readers + references, or
+the reverse query: which sites reference a name), `blast` (the two-arm
+A/B). Derived, never truth (D-118); the tool re-derives answers
 through the engine's public API, so its output is INV-2-equal to what the
 runtime itself decided.

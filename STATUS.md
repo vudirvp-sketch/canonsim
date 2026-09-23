@@ -1,46 +1,47 @@
-Iteration: iter-210 (`iter-210-proberead` — the direct coverage probe's
-READING received and closed, the owner's chat answer over the
-delivered kit's one question): the pre-set separation audit's
-NOT-PROBED branch landed — the fund-frame present directly on the
-readable surface and extracted under the direct question (the annual
-+3 coin's own material: "the honest year's surplus, the debt fund
-climbing toward the paper sixteen" — the material itself defining
-the coins the year's surplus and an accumulating fund toward the
-paper sixteen's discharge, never mere income); the smelt-crofts
-separation HELD (their annual +2 bloom another material flow, rs-6's
-frame "the camp's answer to a tilted beam" — the withhold/bloom,
-never the same debt fund); the iter-208 divergence therefore
-classified NOT-PROBED, never NOT-EXTRACTED (the free-answer form's
-own artifact, the surface carries the frame — the human band's
-covering bar joins the LLM band's): no datum for a renderer/prose/
-pack fix — zero code, zero pack, zero canon, the boundary law never
-tripped; the discovery-path residues STAND unchanged (the
-fail-then-pass, the 40/80 asymmetry, the runner's grudge story — the
-owner's standing prescription); no new probe on the question, the
-next pinned step continuing without one.
+Iteration: iter-211 (`iter-211-doc4` — the agent control-plane
+extraction, the owner's CP-rework calls over the external
+CanonSim Agent Control Plane document): the document itself stays
+outside the repo (the convenience-copy law); its durable layer
+extracted surgically into the existing owners — task intake (an
+explicit owner request = the current task; STATUS Next = the ORDER,
+TASKS = the COMPOSITION), the design-fork preference (the
+quality that neutralizes material disadvantages over a minimal
+shift, bounded by the actual consumer), infrastructure admission
+(existing mechanism → minimal extension → new; the standing
+refusals: no agentcheck.py, no .agents/skills/, no second project
+memory, no nested AGENTS) and four stop conditions → AGENTS §2;
+authority & conflict resolution (the 8-step protocol, no silent
+reconciliation) → the new AGENTS §11; handoff & reproducibility
+(BASE_COMMIT from the actual checkout, the delta-archive protocol +
+self-check, the owner-side command form) + the exact check triple →
+the new AGENTS §12/§10 — D-113's chat-side verify-seed +
+archive-protocol placement SUPERSEDED (D-198, the marker riding the
+D-113 row); context closure + question classes + the change-impact
+gate (mechanics impact/blast) → NAV §2 (+ `impact` named in NAV §5);
+the invocation target: repository + task words —
+mode/revision/owner/scope/verification resolve from the repo, never
+a prompt template (D-198 compounding into the D-018
+concept-absorption family row).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-209 state and
-after: 2041 passed + 1 skipped, ruff clean, docguard clean, both
-ends) ·
+the env pin; verified before the change at the iter-210 state and
+after: 2041 + 1 + ruff + docguard clean, both ends) ·
 Date: 2026-09-24 ·
-Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
-+ docs/TASKS.md + STATUS.md + worklog.md — 5 paths doc-only (the
-reading's recording class, iter-208's own form; the D-022 exception
-honest — the owner's fresh request, the reading's delivery, fired
-this doc-only recording iteration; zero code, zero pack change, the
-LOG untouched).
-Track A: the direct coverage probe's reading received and CLOSED
-(NOT-PROBED — the covering divergence the free-answer form's own
-artifact, the surface carrying the frame, the bands joined at the
-covering bar; no renderer/prose/pack change, no new probe on the
-question). The prior iterations' record: iter-209 (remeasure — the
-bands equalized + the kit delivered), 208 (humanread — the reading
-scored), 207 (humanband — the kit delivered), 206
-(heartbreak-subject), 205 (heartbreak-fix), 204 (heartbreak). The
-detail lives in the worklog + git.
+Scope: AGENTS.md + docs/AGENT_NAVIGATION.md + docs/DECISIONS.md +
+docs/TASKS.md + STATUS.md + worklog.md — 6 paths doc-only (the merged
+doc-4+doc-5 slice — the merge the owner's quality call over the
+split, the soft limit honestly over, the scope noted in the worklog;
+the D-022 exception honest: the owner's fresh CP-rework request fired
+the doc-only family; zero code, zero pack change, the LOG untouched).
+Track A: the agent control-plane extraction landed (doc-4: the
+external CP document's durable layer in AGENTS §2/§10/§11/§12 +
+NAV §2; D-113's chat-side handoff placement superseded by D-198).
+The prior iterations' record: iter-210 (proberead), 209 (remeasure),
+208 (humanread), 207 (humanband), 206 (heartbreak-subject), 205
+(heartbreak-fix), 204 (heartbreak). The detail lives in the worklog +
+git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -97,18 +98,20 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-210 DONE: the direct coverage probe's READING received and
-CLOSED — NOT-PROBED (the fund-frame present directly on the readable
-surface, extracted under the direct question — the annual +3 coin the
-material's own "the honest year's surplus, the debt fund climbing
-toward the paper sixteen", the smelt-crofts +2 bloom a different
-material flow never the same debt fund; the iter-208 divergence the
-free-answer form's artifact, the human band's covering bar joining
-the LLM band's) — no renderer/prose/pack change, no new probe on the
-question, the discovery-path residues standing at both bands per the
-owner's prescription.**
+**iter-211 DONE: the agent control-plane extraction (doc-4) — the
+external CP document's durable layer landed surgically in AGENTS
+§2/§10/§11/§12 + NAV §2; D-113's chat-side verify-seed + archive
+placement superseded (D-198); the invocation target now repository +
+task words.**
 
-1. The remaining station rows (the owner's next engine run, TEST_PLAN
+1. The CP-migration family's next slice: **doc-5** — the research
+   discipline vocabulary into its owners (TEST_PLAN §9: the claim-side
+   epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN named
+   beside the standing verdict vocabulary; BLUEPRINT §2: the five-part
+   design test beside L13/L14 — applied at a genuine design-level
+   fork, never a ritual), then **doc-6** — the family's acceptance
+   collapse + the minimal-invocation artifact (chat-side).
+2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate
@@ -116,7 +119,7 @@ owner's prescription.**
    the 27B as the one-model candidate (the §1 sweet spot, both
    doors) — the owner's choice (round 5's 12B + round 6's 9B data:
    §13.1; bg-9's mapping-drift datum rides the same decision).
-2. The standing frames: the embodiment options (the older units' rows
+3. The standing frames: the embodiment options (the older units' rows
    — the step's notch record/hatch, the kin's own — each a future
    row's own call), the debt-1 residues (the crossing's own standing
    state the charcoalpaper precedent's sibling — the punt's purchase
@@ -127,7 +130,7 @@ owner's prescription.**
    the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-3. The intake-34/35/36 residues (each behind its own trigger, never a
+4. The intake-34/35/36 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;

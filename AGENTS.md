@@ -40,6 +40,31 @@ Two work tracks (`docs/ROADMAP.md` §1):
      a small bug.
    - Two consecutive iterations producing only doc edits with no functional
      progress → stop and ask the owner (documentation-loop alarm).
+   - A task that cannot establish its owner → stop the semantic change; an
+     unresolved authority contradiction → stop the affected implementation
+     (§11) — never pick a side silently.
+   - Research with no falsifiable decision path → park it (a
+     `docs/TASKS.md` row), never drift into building.
+   - Two consecutive iterations that do not reduce the declared gap → stop
+     and re-scope with the owner.
+6. Task intake (D-198): an explicit owner request in the active session IS
+   the current task — it does not yield to `STATUS.md`'s `Next step`; with
+   no explicit request, the `Next step` line is the working ORDER and
+   `docs/TASKS.md` the backlog COMPOSITION — never the reverse.
+7. At a genuine design fork (D-198): establish the underlying problem,
+   compare the existing mechanism with the alternatives, prefer the
+   higher-quality option that neutralizes material disadvantages over a
+   minimal shift — and never generalize beyond the actual consumer and
+   acceptance criteria.
+8. New agent-facing tooling (scripts, CI, harnesses, doc machinery), D-198:
+   existing mechanism → minimal extension → new mechanism, each step only
+   on proof the previous one is insufficient. Admission requires a named
+   consumer, a demonstrated problem/risk, an owner, a minimal
+   intervention, a verification, and scope safety (no second source of
+   truth). A cheap deterministic check protecting an established
+   invariant is admissible without a recorded failure; heavy machinery
+   without evidence is not. Standing refusals: no `agentcheck.py`, no
+   `.agents/skills/`, no second project memory, no nested AGENTS files.
 
 ## 3. Reading gradient
 
@@ -162,6 +187,8 @@ the worklog records why.
 An iteration is done when:
 
 - `pytest -q` is green and `ruff check .` is clean;
+- the verification claim rides `docs/TEST_PLAN.md` §9's claim packet — the
+  claimed EFFECT is checked, not merely that tests happened to pass;
 - the code-quality bar holds: conventions per `docs/MVP_SCOPE.md` §18 (type
   hints on public functions; no `print()` outside `cli/`) and the elegance
   laws L13/L14 (`docs/BLUEPRINT.md` §2 — the abstraction cost gate and the
@@ -189,5 +216,61 @@ Python >= 3.11
 dev deps: pytest, ruff — nothing else
 ```
 
+Required checks, in order (a doc-touching iteration adds the doc guard as
+the fourth):
+
+```
+python -m pip install -e ".[dev]"    # --break-system-packages on a system Python
+PYTHONHASHSEED=0 python -m pytest -q
+ruff check .
+python scripts/docguard.py            # any docs/ or state-doc touch
+```
+
 The byte-identical replay guarantee holds for the same environment only; the
 log header records the Python version (see `docs/TECH_NOTES.md` §4).
+
+## 11. Authority & conflict resolution
+
+Authority resolves by question class — `docs/AGENT_NAVIGATION.md` §3 owns
+the map — never by file hierarchy, recency, length, or convenience. When
+two sources disagree (D-198):
+
+1. Define the exact question.
+2. Identify the semantic owner for it (`docs/AGENT_NAVIGATION.md` §3).
+3. Separate intended contract / observed behavior / verification
+   evidence / historical record.
+4. Inspect the owner; implementation and tests only as needed.
+5. Classify the discrepancy: intentional divergence, stale declaration,
+   implementation bug, test bug, or unresolved contradiction.
+6. Never silently reconcile: no merging two contradicting documents, no
+   rewriting an owner "to match the code", no treating the newer or
+   longer text as automatically right.
+7. Preserve unresolved contradictions through the KI (`STATUS.md`) /
+   research / owner route — and stop the affected implementation until
+   resolved.
+
+## 12. Handoff & reproducibility (sandbox → owner)
+
+The sandbox clone is disposable; the owner's local repository is the real
+one. A sandbox commit is internal verification only — never the
+deliverable, never something the owner pushes (D-198, superseding D-113's
+chat-side placement).
+
+- `BASE_COMMIT` = the exact HEAD of the actual checkout, recorded via
+  `git rev-parse HEAD` before any modification — never copied from a stale
+  `BASE_COMMIT.txt` or a previous session's text (D-185's stale-archive
+  lesson: a delta built against a stale base silently erases landed work).
+- The deliverable is a delta archive against BASE_COMMIT: exactly the
+  changed/created files, repo structure preserved, plus `BASE_COMMIT.txt`
+  (the hash) and `DELETED_PATHS.txt` (or `None`); never `.git/`, caches,
+  logs, outputs, or unrelated files.
+- Self-check the archive against BASE_COMMIT before delivery; the owner
+  re-checks it against HEAD before applying.
+- Owner-side apply: `git status --short` → `git add <explicit paths>` /
+  `git rm <deleted paths>` → `git status --short` → commit → push — every
+  path listed explicitly (§7: never `.`/`-A`/wildcards; never stage
+  `logs/`, `output/`, or `*.jsonl` outside `tests/fixtures/`).
+- When the network allows, also upload the archive to a file host (e.g.
+  tmpfiles.org) and give the direct link.
+- The report ends with: what changed, the verification actually run,
+  changed/deleted paths, the owner-side git commands, risks, next.
