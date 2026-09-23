@@ -593,7 +593,17 @@ prose). The **falsifier** must state what would make the claim false. A
 plausible description without either is not evidence. The disposition
 vocabulary stays the repo family (CONFIRMED / PARTIALLY CONFIRMED /
 REJECTED / UNRESOLVED / DEFERRED); no numeric quality score — a scalar
-erases the diagnosis the lenses preserve. An **ablation arm** must
+erases the diagnosis the lenses preserve. The packet's **epistemic
+class** is the other axis — the claim's kind as asserted, named before
+verification runs (doc-5, D-198): FACT (directly established by
+evidence) / INFERENCE (a reasoned conclusion from evidence) /
+HYPOTHESIS (plausible but unverified) / PROPOSAL (a possible future
+direction) / UNKNOWN (not presently decidable). The class gates what a
+disposition can license — hypothesis → requirement, proposal →
+architecture, research → implementation, plausibility → proof are the
+forbidden transitions; a surviving HYPOTHESIS or PROPOSAL routes to an
+owner-gated row on the owner's call, never straight into a build. An
+**ablation arm** must
 demonstrably exercise the target subsystem on the run horizon before
 its delta is read — a zero-delta arm over an unexercised subsystem is
 a failed experiment, not zero causal effect (the empty-ablation rule,
@@ -634,9 +644,9 @@ Two standing oracle laws the table carries:
   measured iter-195: a director `release_threshold` and an urgency
   `probability_per_beat` mutation passed lint AND the tavern golden.
 
-The lenses' own quality bar (intake-26 §12 — the research method's five
-questions applied to any future lens): principle / form / quality /
-transfer / combined design. A matching name is not proof; a useful form
-with unproven quality stays PARTIAL. A new lens or prism enters this
+The lenses' own quality bar: the five-part design test (BLUEPRINT §2
+L15 the owner; intake-26 §12 the record) applied to any future lens. A
+matching name is not proof; a useful form with unproven quality stays
+PARTIAL. A new lens or prism enters this
 table only after one claim packet used it (the first-consumer law).
 

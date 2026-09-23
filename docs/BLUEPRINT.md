@@ -135,6 +135,23 @@ operationalize the invariants.
   than before · one rule instead of N exceptions · parts compose freely ·
   stdlib-only · reads as pseudo-code · the next change is local · same seed
   → same log.
+- **L15 Design-fork evaluation (the five-part test).** A genuine
+  design-level fork — competing mechanisms for one problem, not a patch
+  shape — is evaluated on five parts before the verdict (doc-5, D-198;
+  the standing research method promoted to the constitution):
+  **Principle** (what mechanism or constraint makes the idea work) ·
+  **Form** (does an existing primitive already express the same shape) ·
+  **Quality** (does the form deliver the required causal leverage,
+  decision value, or long-term cleanliness — measured, never asserted) ·
+  **Transfer** (can the principle strengthen another part of the system,
+  possibly unexpectedly) · **Combined design** (is there a combination
+  that preserves most real advantages while neutralizing the material
+  disadvantages — the design-fork preference's own question, AGENTS §2).
+  Form-match alone is never enough: an existing form with quality,
+  transfer, or combined design unproven caps the strongest disposition at
+  PARTIALLY CONFIRMED (TEST_PLAN §9's vocabulary). Applied at a genuine
+  design fork only — never a ritual for every change; the ordinary diff
+  rides L13/L14.
 
 ## 3. Build index (what to read before each iteration)
 

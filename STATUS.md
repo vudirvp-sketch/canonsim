@@ -1,47 +1,39 @@
-Iteration: iter-211 (`iter-211-doc4` — the agent control-plane
-extraction, the owner's CP-rework calls over the external
-CanonSim Agent Control Plane document): the document itself stays
-outside the repo (the convenience-copy law); its durable layer
-extracted surgically into the existing owners — task intake (an
-explicit owner request = the current task; STATUS Next = the ORDER,
-TASKS = the COMPOSITION), the design-fork preference (the
-quality that neutralizes material disadvantages over a minimal
-shift, bounded by the actual consumer), infrastructure admission
-(existing mechanism → minimal extension → new; the standing
-refusals: no agentcheck.py, no .agents/skills/, no second project
-memory, no nested AGENTS) and four stop conditions → AGENTS §2;
-authority & conflict resolution (the 8-step protocol, no silent
-reconciliation) → the new AGENTS §11; handoff & reproducibility
-(BASE_COMMIT from the actual checkout, the delta-archive protocol +
-self-check, the owner-side command form) + the exact check triple →
-the new AGENTS §12/§10 — D-113's chat-side verify-seed +
-archive-protocol placement SUPERSEDED (D-198, the marker riding the
-D-113 row); context closure + question classes + the change-impact
-gate (mechanics impact/blast) → NAV §2 (+ `impact` named in NAV §5);
-the invocation target: repository + task words —
-mode/revision/owner/scope/verification resolve from the repo, never
-a prompt template (D-198 compounding into the D-018
-concept-absorption family row).
+Iteration: iter-212 (`iter-212-doc5` — the research-discipline
+vocabulary into its owners, the CP-migration family's second slice,
+the owner's continuation call over STATUS Next step 1): the
+claim-side epistemic classes FACT (directly established by evidence)
+/ INFERENCE (a reasoned conclusion from evidence) / HYPOTHESIS
+(plausible, unverified) / PROPOSAL (a possible future direction) /
+UNKNOWN (not presently decidable) named in TEST_PLAN §9 beside the
+standing disposition vocabulary — class and disposition separate
+axes (the claim's kind as asserted vs the verification's verdict),
+the class gating what a disposition may license (hypothesis →
+requirement, proposal → architecture, research → implementation,
+plausibility → proof the forbidden transitions; a surviving
+HYPOTHESIS or PROPOSAL routes to an owner-gated row, never straight
+into a build); the five-part design test (Principle / Form / Quality
+/ Transfer / Combined design) landed as BLUEPRINT §2 **L15** beside
+L13/L14 — form-match alone never enough (an existing form with
+quality/transfer/combined-design unproven caps the strongest
+disposition at PARTIALLY CONFIRMED), applied at a genuine design fork
+only, never a ritual; TEST_PLAN §9's lens quality-bar re-pointed at
+L15 (the single owner, D-024); D-198's doc-5 clause closed.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-210 state and
-after: 2041 + 1 + ruff + docguard clean, both ends) ·
+the env pin; verified before the change at the iter-211 state and
+after) ·
 Date: 2026-09-24 ·
-Scope: AGENTS.md + docs/AGENT_NAVIGATION.md + docs/DECISIONS.md +
-docs/TASKS.md + STATUS.md + worklog.md — 6 paths doc-only (the merged
-doc-4+doc-5 slice — the merge the owner's quality call over the
-split, the soft limit honestly over, the scope noted in the worklog;
-the D-022 exception honest: the owner's fresh CP-rework request fired
-the doc-only family; zero code, zero pack change, the LOG untouched).
-Track A: the agent control-plane extraction landed (doc-4: the
-external CP document's durable layer in AGENTS §2/§10/§11/§12 +
-NAV §2; D-113's chat-side handoff placement superseded by D-198).
-The prior iterations' record: iter-210 (proberead), 209 (remeasure),
-208 (humanread), 207 (humanband), 206 (heartbreak-subject), 205
-(heartbreak-fix), 204 (heartbreak). The detail lives in the worklog +
-git.
+Scope: docs/TEST_PLAN.md + docs/BLUEPRINT.md + docs/DECISIONS.md +
+docs/TASKS.md + STATUS.md + worklog.md — 6 paths doc-only (the two
+owner docs + the state docs; the D-022 exception honest: the owner's
+fresh continuation request fired the doc-only family slice; zero
+code, zero pack change, the LOG untouched).
+Track A: the research vocabulary landed (doc-5: TEST_PLAN §9's
+claim-side classes + BLUEPRINT §2 L15). The prior iterations' record:
+iter-211 (doc-4), 210 (proberead), 209 (remeasure), 208 (humanread),
+207 (humanband). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -98,19 +90,19 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-211 DONE: the agent control-plane extraction (doc-4) — the
-external CP document's durable layer landed surgically in AGENTS
-§2/§10/§11/§12 + NAV §2; D-113's chat-side verify-seed + archive
-placement superseded (D-198); the invocation target now repository +
-task words.**
+**iter-212 DONE: the research-discipline vocabulary (doc-5) — the
+claim-side epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/
+UNKNOWN named in TEST_PLAN §9 beside the standing disposition
+vocabulary (the class gates what a disposition may license); the
+five-part design test landed as BLUEPRINT §2 L15 beside L13/L14 —
+a genuine design fork, never a ritual.**
 
-1. The CP-migration family's next slice: **doc-5** — the research
-   discipline vocabulary into its owners (TEST_PLAN §9: the claim-side
-   epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN named
-   beside the standing verdict vocabulary; BLUEPRINT §2: the five-part
-   design test beside L13/L14 — applied at a genuine design-level
-   fork, never a ritual), then **doc-6** — the family's acceptance
-   collapse + the minimal-invocation artifact (chat-side).
+1. The CP-migration family's LAST slice: **doc-6** — the family's
+   acceptance collapse (doc-4/5/6 closed; the D-198 row's family
+   marker; the ledger/state docs to the minimal current-state form)
+   + the minimal-invocation artifact (CHAT-SIDE, never a repo file:
+   the repository + task-words form, CP §26/D-198 — the big
+   bootstrap prompts retire).
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
