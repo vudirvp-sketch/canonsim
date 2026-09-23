@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-204 · 2026-09-23 · heartbreak — the W5 heartbreak station's first PROBE RUN (the owner's «давай прогон зонда» call, STATUS item 1 — the trio's last station's own run): the return's chain walked deterministically at seed 42 (the package the same bounded form — the tale 24 lines + the records + three briefs, byte-identical twice), the author audit pre-set with F02's option-topology vocabulary BEFORE the reading, the blind reader glm n=2 (the runner + transcripts outside the repo, Rule 9)
+the mandatory bar NOT MET on the future-option half — the drowned generation read as remembered dead by both, never as removed futures (the rendering boundary: the loss's option topology renders nowhere), the opened option carried as present standing, the supporting bars (relation / memory / world-specificity) MET n=2 convergent; the fix's route the owner's call (the natural class: the mourning line's family carrying what the flood removed)
+2041+1 + ruff + docguard clean; 5 paths doc-only (the state docs); iter-194 evicted per the cap
+---
 iter-203 · 2026-09-23 · winterkin — the W5 heartbreak station's DESIGN MATERIAL landed (the owner's queue-order call «withhold → the heartbreak probe», the intake-36 C03+F02 consult): the winter kin's embodiment as pure pack data — the three §6.3 gaps answered (the kin pair axis + the bilateral seed 40, the read_kinmark hinge minting the_winter_kin as a care-debt, the say_the_names mourning) + the formation side tested in a committed pack (share_board's two on_action climbs to the bar 80 — the first co-presence-formed relation) + the claim_kinmark door (the leverage gate, the F02 form; the proof-less claimant refused — the falsifier)
 the corpus price paid deliberately (the son at the crofts hears the wergeld count — the golden regenerated, the iter-157 precedent); 15 paths (the embodiment class: the pack's four + the golden + the three census pins + the claim packet + the state docs — over the soft cap, the arming's own price)
 2041+1 + ruff + docguard clean; iter-193 evicted per the cap; the PROBE RUN the station's next beat (the owner's fresh call — the instrument committed, deterministic at seed 42)
@@ -58,10 +62,3 @@ iter-195 · 2026-09-22 · bottleneck — intake-37 (the owner's mandatory-resear
 change; the full-file-rewrite claim REFUTED — 97% of 120 pack-JSON touches surgical; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered, TEST_PLAN §9's path-bound law); the
 research/intervention documentation schema (residue → phases §6, interventions → scratch/, adoptions → DECISIONS, tasks → TASKS); mech-2 convened (the impact surface, R03's consumer); 8 paths doc-only +
 .gitignore; the probes + measurement scripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-186 evicted per the cap
-
----
-iter-194 · 2026-09-22 · humorgloss — the W5 humor fix (the owner's «продолжай работу» continuation call, STATUS item 1): rs-3 landed (the bloom kind's
-account-kind gloss — the withhold's meaning "bloom kept off the weighbeam since the shave", one table row, rs-2's mechanism unchanged, the log untouched) + the
-humor probe's re-run: the MANDATORY BAR MET (glm n=2 — the mechanism-grounded joke from both readings, the taboo 1/2 with the authored taboo nailed once; the
-withhold's own joke unextracted — the arc's assembly's future row's material), the station PARTIALLY CONFIRMED; 8 paths (the pack row + the pins + the W5 record
-+ the state docs); the runner + transcripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-185 evicted per the cap

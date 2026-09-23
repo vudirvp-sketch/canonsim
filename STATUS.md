@@ -1,46 +1,52 @@
-Iteration: iter-203 (`iter-203-winterkin` — the owner's
-queue-order call «withhold → the heartbreak probe», STATUS item 1, the
-station's second row: its design material carrying the intake-36
-C03+F02 consult): the W5 heartbreak station's DESIGN MATERIAL landed —
-the winter kin's embodiment as PURE PACK DATA (ANCHOR_REGION §6.3's
-three first-exposure gaps answered: the relation form — the `kin`
-pair axis, the recognized standing's own measure, the bilateral
-inherited seed at 40 both sides; the proof's read — `read_kinmark`,
-the read hinge family's fifth instance, the pole's SECOND story
-minting `the_winter_kin`, the secrets registry's fourth key, a CARE
-debt over the house that sheltered; the mourning surface —
-`say_the_names`, the drowned generation's names said aloud, the grief
-given its second holder) + the FORMATION SIDE TESTED IN A COMMITTED
-PACK (the C03 triple's co-presence factor: `share_board`'s on_action
-climbs, both sides to the recognition bar 80 — the first
-co-presence-formed relation) + the claim door (`claim_kinmark`'s
-leverage gate — the F02 criterion's mechanical form, the proof-less
-claimant refused softly, the falsifier walked) — zero core change
-throughout; the corpus price paid deliberately (the son at the crofts
-hears the wergeld count — the golden regenerated, the iter-157
-precedent); the station's PROBE RUN the next beat (the owner's fresh
-call — the instrument committed and deterministic at seed 42).
+Iteration: iter-204 (`iter-204-heartbreak` — the owner's «давай прогон
+зонда» call firing STATUS Next step item 1 — the W5 trio's last
+station's own run, the first measurement): the heartbreak station's
+PROBE RUN — the return's chain walked deterministically at seed 42
+over the committed surface (the walk to the stair, the proof's read
+fail-then-pass, the claim, the echo, the names), the package the same
+bounded form (the tale 24 lines + Tork's opening/close records +
+Ketta's close record + three briefs — the factor's runner's road
+window + Ketta's arrival/close windows in her voice; the chain
+byte-identical twice, the package byte-identical twice on
+regeneration), the author audit pre-set BEFORE the reading with F02's
+option-topology vocabulary (ADD / REMOVE / MERGE / SPLIT /
+SEMANTIC-CHANGE — the pass bar: the lost future option + the opened
+option, both MANDATORY), the blind reader glm n=2 independent (the
+runner + the transcripts outside the repo, Rule 9). The result: the
+mandatory bar NOT MET — the future-option half FAILED at the RENDERING
+boundary, n=2 convergent on the miss (the drowned generation carried
+as remembered dead — grief and memory, never as removed futures; zero
+futures vocabulary in either reading); the opened-option half carried
+as present standing ("gives him standing with Ketta" / "recognizing
+Tork's right" — the ADD class present, the forward topology framed by
+neither); the supporting bars MET n=2 convergent (the relation never a
+trade; the memory change; the world-specific reconstruction — the
+vale's own categories, no genre transplant). The honest residues: the
+read's fail-then-pass skipped by both (present in the package,
+unassembled — the discovery path); the 40/80 asymmetry never connected
+(the recognition bar on no reader surface); the second-holder
+structure inverted/vague (the mourning line's own ambiguity). The
+disposition: NEVER "improve the prose" — the fix's route the owner's
+call (the natural class: the loss's option dimension on the reader
+surface — the mourning line's family carrying what the flood removed;
+the rs family's gloss precedent). The W5 gate itself already MET
+(iter-191) — the heartbreak station never a gate condition; the reader
+class still an LLM — the live human band open.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified at BASE_COMMIT 46e774fd — 2034+1 green, ruff
-clean, docguard clean, before the change) ·
+the env pin; verified at BASE_COMMIT 7687f99 — 2041 passed + 1
+skipped, ruff clean, docguard clean, before the change) ·
 Date: 2026-09-23 ·
-Scope: content/province_pack/{entities,rules,actions,templates}.json
-+ tests/fixtures/province_smoke_seed42.jsonl + tests/test_winterkin.py
-+ tests/test_charcoalpaper.py + tests/test_debt1.py +
-tests/test_t1_province.py + docs/worldbuild/ANCHOR_REGION.md +
-docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md +
-docs/TASKS.md + STATUS.md + worklog.md — 15 paths (the embodiment
-class: the pack's four + the golden regen + the census-pin updates +
-the claim packet + the state docs; over the soft cap — the arming's
-own price, the golden + the pins the rs-landing class carries).
-Track A: the W5 heartbreak station's design material (the world
-track's unit embodied as pack data, D-186's separate track feeding
-the reader-surface boundary's own station); the probe run the
-station's measurement, the surface it reads now committed. The prior
-iterations' record: iter-202 (withhold), iter-201 (agency). The
+Scope: docs/worldbuild/WORLD_TESTS.md + docs/worldbuild/WORLD_WORKPLAN.md
++ docs/TASKS.md + STATUS.md + worklog.md — 5 paths doc-only (the
+probe-run record class: the measurement's state docs; the runner + the
+transcripts outside the repo, Rule 9).
+Track A: the W5 heartbreak station's first measurement (the world
+track's trio complete at the LLM band — the station's future-option
+criterion the open half, the fix's route the owner's call). The prior
+iterations' record: iter-203 (winterkin), iter-202 (withhold). The
 detail lives in the worklog + git.
 
 
@@ -98,26 +104,27 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-203 DONE: the heartbreak station's DESIGN MATERIAL (the winter
-kin's embodiment — the C03+F02 consult's three gaps answered as pure
-pack data, the formation side tested in a committed pack, the claim
-door the F02 criterion's mechanical form; the corpus price paid
-deliberately, the golden regenerated).**
+**iter-204 DONE: the heartbreak station's first PROBE RUN (the trio's
+last station's measurement — the mandatory bar's future-option half
+FAILED at the rendering boundary, n=2 convergent; the memory +
+recognition + world-specificity halves carried; the fix's route the
+owner's call).**
 
-1. The heartbreak PROBE RUN (the station's measurement — the trio's
-   last station's own run): the same bounded form over the committed
-   surface (the return's chain — the walk to the stair, the proof's
-   read, the claim, the echo, the names, deterministic at seed 42);
-   the blind reader glm n=2; the author audit pre-set BEFORE the
-   reading with F02's option-topology vocabulary (ADD / REMOVE /
-   MERGE / SPLIT / SEMANTIC-CHANGE) — the pass bar naming the LOST
-   FUTURE OPTION (the drowned generation's futures removed; the
-   return's claim the option the edge opens); the isolation law held
-   (the runner + the transcripts outside the repo, Rule 9).
+1. The heartbreak FIX'S ROUTE (the owner's call over the iter-204
+   rendering-boundary failure): the loss's future-option dimension on
+   the reader surface — the natural class the mourning line's family
+   carrying what the flood removed (the dead's own futures: line,
+   duties, holdings — the rs family's gloss precedent the mechanical
+   family) plus the claim's forward framing (the opened possibility,
+   never only the present standing); the discovery-path residues
+   alongside (the fail-then-pass + the 40/80 asymmetry + the
+   second-holder structure — each its own surface's question); never
+   "improve the prose".
 2. The human live-band re-run after the reader-side fixes (the LLM
    reader the instrument so far, glm n=2 — the owner's option (б);
    the rs family's five measured fixes (rs-2/3/4/5/6) the band it
-   waits on).
+   waits on; the heartbreak's own half now measured — its fix joins
+   the band when called).
 3. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

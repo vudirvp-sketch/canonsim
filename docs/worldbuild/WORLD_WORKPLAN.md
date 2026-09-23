@@ -347,11 +347,19 @@ answered (the kin axis + the bilateral seed, the proof's read, the
 mourning surface), the formation side tested in a committed pack (the
 winter's board climbing the kin axis bilaterally to the recognition
 bar — the first co-presence-formed relation), the claim door the F02
-criterion's mechanical form. The standing decision
-points for the owner: the heartbreak PROBE RUN (the trio's last
-station's measurement — the same bounded form, the isolation law
-held; the return's chain now committed and deterministic at seed 42,
-the instrument ready), the human live-band re-run (the LLM reader the
+criterion's mechanical form. The heartbreak station's PROBE RUN has
+since RUN (iter-204, the owner's «давай прогон зонда» call — the record
+in `WORLD_TESTS.md` §9's W5 entry): the trio's last station's first
+measurement FAILED at the rendering boundary on the future-option half
+(the lost future option named by neither glm n=2 reading — the drowned
+generation carried as remembered dead; the memory + recognition +
+world-specificity halves carried n=2 convergent); the fix's route the
+owner's call (the natural class: the loss's option dimension on the
+reader surface — the mourning line's family; never "improve the
+prose"). The standing decision
+points for the owner: the heartbreak fix's route (the
+rendering-boundary failure's disposition — WORLD_TESTS §9's W5 entry's
+iter-204 record), the human live-band re-run (the LLM reader the
 instrument so far — the rs family's five measured fixes the band it
 waits on), and the arc's assembly's remaining half (the shave's
 temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
