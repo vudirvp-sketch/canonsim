@@ -246,7 +246,9 @@ def test_the_formation_tale_carries_the_winters_rhythm(tmp_path: Path) -> None:
     formation's texture — the board's line, the kin stirring, the
     house answering (the bilateral climb made prose), and the mourning
     line (the drowned generation's names kept by name outside the
-    bloodline — the heartbreak's own surface)."""
+    bloodline, their line, their duties and their holdings never
+    handed on — the loss's future-option dimension on the reader
+    surface, iter-205's rendering fix)."""
     events, pack, sim = _run(tmp_path, "tale.jsonl", _walk_to_the_stair() + [
         {"intent": "share_board", "actor": KETTA, "target": TORK},
         {"intent": "share_board", "actor": KETTA, "target": TORK},
@@ -273,6 +275,7 @@ def test_the_formation_tale_carries_the_winters_rhythm(tmp_path: Path) -> None:
     assert (
         "Tork says the drowned generation's names at the weir stair —"
         " the flood year's dead kept by name outside the bloodline,"
+        " their line, their duties and their holdings never handed on,"
         " the grief given its second holder." in tale
     )
 
@@ -289,7 +292,10 @@ def test_the_return_claims_the_edge(tmp_path: Path) -> None:
     the road can hear), then the echo (the host's side completing at
     the bar — 40 + 40 = 80, the rarity gate intact: the claim answers
     the generation-old notch, no new winter), then the mourning (the
-    duty performed). The son's own side stays 40 — the honest state:
+    duty performed). The echo line carries the opened forward
+    possibility (the crossing's table open to the claimant's line —
+    iter-205's rendering fix, never only the present standing). The
+    son's own side stays 40 — the honest state:
     his own winter not spent, the carried edge's claim answered."""
     events, _pack, sim = _run(tmp_path, "return.jsonl", _walk_to_the_stair() + [
         {"intent": "read_kinmark", "actor": TORK, "target": POLE},
@@ -335,7 +341,8 @@ def test_the_return_claims_the_edge(tmp_path: Path) -> None:
     assert (
         "The old edge answers at the weir stair — the toll-taker's"
         " house holding the drowned generation's notch, the recognition"
-        " the claim completes." in tale
+        " the claim completes, the crossing's table open to the"
+        " claimant's line from this day." in tale
     )
 
 

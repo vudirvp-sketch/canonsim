@@ -353,16 +353,27 @@ in `WORLD_TESTS.md` §9's W5 entry): the trio's last station's first
 measurement FAILED at the rendering boundary on the future-option half
 (the lost future option named by neither glm n=2 reading — the drowned
 generation carried as remembered dead; the memory + recognition +
-world-specificity halves carried n=2 convergent); the fix's route the
-owner's call (the natural class: the loss's option dimension on the
-reader surface — the mourning line's family; never "improve the
-prose"). The standing decision
-points for the owner: the heartbreak fix's route (the
-rendering-boundary failure's disposition — WORLD_TESTS §9's W5 entry's
-iter-204 record), the human live-band re-run (the LLM reader the
-instrument so far — the rs family's five measured fixes the band it
-waits on), and the arc's assembly's remaining half (the shave's
-temporal placement — WORLD_TESTS §9's W5 entry's iter-202 record).
+world-specificity halves carried n=2 convergent). The owner-called minimal
+rendering FIX has since LANDED and been MEASURED (iter-205 — the
+record in `WORLD_TESTS.md` §9's W5 entry): two template lines
+re-authored (the mourning line carrying the line/duties/holdings
+never-handed-on, the echo line the table-open forward frame — zero
+code, the LOG untouched) and the same probe re-run: the opened-option
+half extracted cleanly once, iter-204's zero-futures mode gone n=2
+(both readings now carrying the inheritance topology), the mandatory
+pair still NOT met at the strict n=2 bar — the dead still not read as
+the futures' own holders (the measured failure mode: the mourning
+line's clause resolves to the inheritance's character, never to the
+dead as the loss's subject); the further fix's route the owner's call
+(never "improve the prose"; the anti-loop law held — the first fix
+attempt only). The standing decision
+points for the owner: the heartbreak fix's further route (the
+subject problem's disposition — WORLD_TESTS §9's W5 entry's iter-205
+record), the human live-band re-run (the LLM reader the instrument so
+far — the rs family's six measured fixes + the seventh's measured
+movement the band it waits on), and the arc's assembly's remaining
+half (the shave's temporal placement — WORLD_TESTS §9's W5 entry's
+iter-202 record).
 
 ## 8. W6 — Genre tests
 

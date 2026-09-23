@@ -450,7 +450,7 @@ Partial: the
 authored band, no live session — a real re-weigh, a real reader (the meaning
 distribution's unfinished band).
 
-### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce), the heartbreak station's DESIGN MATERIAL landed (iter-203 — the winter kin's embodiment, the C03+F02 consult's three gaps answered as pure pack data, the formation side tested in a committed pack), the heartbreak station's PROBE RUN landed (iter-204 — the trio's last station's first measurement: the future-option half FAILED at the rendering boundary, n=2 convergent on the miss; the memory + recognition + world-specificity halves carried n=2 convergent)
+### PARTIALLY CONFIRMED — W5 human tests: the owner's diagnostic reading + the decomposition + the probe arc — the biography's first run FAILED at the rendering boundary (iter-190), the rs-2 fix landed, the re-run PASSED CLEAN (iter-188/189/190/191), the humor probe FAILED at the rendering boundary (iter-192), the rs-3 fix landed and the re-run's mandatory bar MET (iter-194 — the station PARTIALLY CONFIRMED), the covering residue's row landed (iter-199, rs-4 — the flow-gloss boundary) with its own mandatory bar MET (the covering connected, n=2 convergent), the shave's agency row landed (iter-201, rs-5 — the gloss's direction clause) with its own mandatory bar MET (the direction correct in both readings), the withhold's one-surface contradiction row landed (iter-202, rs-6 — the answer-frame flow gloss) with its own mandatory bar MET (the join carried, n=2 convergent — the heap never commerce), the heartbreak station's DESIGN MATERIAL landed (iter-203 — the winter kin's embodiment, the C03+F02 consult's three gaps answered as pure pack data, the formation side tested in a committed pack), the heartbreak station's PROBE RUN landed (iter-204 — the trio's last station's first measurement: the future-option half FAILED at the rendering boundary, n=2 convergent on the miss; the memory + recognition + world-specificity halves carried n=2 convergent), the heartbreak station's rendering FIX landed and measured (iter-205 — the owner's minimal-fix call: the mourning line + the echo line re-authored, zero code, the LOG untouched; the re-run: the opened-option half extracted CLEANLY once, iter-204's zero-futures mode GONE n=2, the mandatory pair still NOT MET at the strict n=2 bar — the dead still not read as the futures' own holders; the further route the owner's call)
 
 `W5 — PARTIALLY CONFIRMED; the biography station's evidence is now
 an independent blind-reader measurement (the probe arc below); the
@@ -463,7 +463,7 @@ landed and its mandatory bar MET on the rs-5-fixed surface (iter-201
 below — the direction correct, n=2 convergent); the withhold's
 one-surface contradiction row landed and its mandatory bar MET on the
 rs-6-fixed surface (iter-202 below — the join carried, the heap never
-commerce); the heartbreak station's design material landed (iter-203 below — the winter kin's embodiment, the C03+F02 consult); the station's first probe run FAILED at the rendering boundary on the future-option half (iter-204 below — the memory + recognition halves carried n=2 convergent, the lost future option named by neither reading; the fix's route the owner's call); the live human band open.` The owner's reading of the
+commerce); the heartbreak station's design material landed (iter-203 below — the winter kin's embodiment, the C03+F02 consult); the station's first probe run FAILED at the rendering boundary on the future-option half (iter-204 below — the memory + recognition halves carried n=2 convergent, the lost future option named by neither reading); the owner-called minimal rendering fix landed and its re-run measured (iter-205 below — the opened-option half cleanly extracted once, the zero-futures mode gone n=2, the mandatory pair still not met at the strict bar: the dead still not read as the futures' own holders, the further route the owner's call); the live human band open.` The owner's reading of the
 anchor's reader surface (the annual tale + the committed briefs,
 2026-09-22) found the mechanical substrate rich — W4's verdict
 unchanged: the causal composition CONFIRMED — but the reader-side
@@ -937,6 +937,72 @@ station never a gate condition. Honest caveats: the reader class
 still an LLM (glm, n=2) — the live human band open; the tale sparser
 than the re-weigh probes' band (24 lines vs 87–89 — the return's
 chain carries less ambient context).
+
+The heartbreak station's rendering FIX and its re-run (iter-205, the
+owner's minimal-fix call over the iter-204 failure — «поправить две
+существующие поверхности heartbreak», the 40/80 asymmetry + the
+fail-then-pass + the second-holder residues and any new mechanics
+explicitly excluded by the call): rs-7 LANDED FIRST (the rs family's
+seventh member — TWO template lines re-authored in the province pack,
+zero code, zero corpus price, the LOG untouched): the mourning line
+(`the_names_kept`) now carries the loss's future-option dimension —
+"their line, their duties and their holdings never handed on" (the
+owner's called vocabulary, the iter-204 disposition's natural class)
+— and the echo line (`the_edge_answers`) now carries the claim's
+forward framing — "the crossing's table open to the claimant's line
+from this day" (the opened possibility, never only the present
+standing); the pins updated as the deliberate act
+(tests/test_winterkin.py). The probe's re-run on the fixed surface
+(the iter-204 protocol re-established, the runner rebuilt outside the
+repo — Rule 9): the mandatory pair NOT MET at the strict n=2 bar,
+with MEASURED MOVEMENT on both halves — the opened-option half
+extracted CLEANLY by reading 2 (the echo line's table-open clause
+carried VERBATIM, then synthesized forward: "seizes the future of the
+weir stair", "a new power structure is forming"; reading 1 still the
+present right-transfer — "formally transfers a duty or right to
+Tork" — 1/2), and iter-204's ZERO-futures mode GONE n=2 (both
+readings now carry the inheritance/obligation topology — reading 1:
+"a debt or obligation that was never settled", "inherited not just a
+right, but the burden of their story", "the mechanics of
+inheritance"; reading 2: "a tale of inheritance, but not of wealth or
+land", "the inheritance Tork claims is one of duty, grief, and
+connection" — the holdings' exclusion the closest lost-future
+extraction) — but the drowned generation themselves still not read as
+the futures' OWN holders (the dead carried as "those who died... 
+their memory preserved" / "a past tragedy where guests... were
+lost"), the mourning line's new clause resolving in both readings to
+the INHERITANCE'S CHARACTER (what the claim brings or excludes),
+never to the dead as the loss's subject. The supporting bars MET n=2
+convergent (the relation never a trade; the memory change; the
+world-specificity — minor confabulations: the winterkin read as "a
+group", the kin-80 flattening, the guests/drowned conflation, the
+power-dynamics over-read "Ketta's status... overthrown"). The
+instrument: the same bounded form (the tale 24 lines + Tork's
+opening/close records + Ketta's close record + three briefs — the
+factor's runner's road window + Ketta's arrival/close windows in her
+voice; the chain byte-identical twice at seed 42 — 43 events, the
+walk, the read's fail-then-pass, the claim, the echo, the names; the
+package byte-identical twice on regeneration); the author audit
+pre-set BEFORE the reading (the same F02 pass bar — the lost future
+option + the opened option, both MANDATORY; the supporting bars the
+relation / the memory / the world-specificity; the three
+discovery-path residues pre-recorded as not-this-fix's-target); the
+blind reader the same class (glm, n=2 independent; the transcripts
+outside the repo, Rule 9). The boundary classification: the RENDERING
+boundary still the failure's owner — the SUBJECT problem (the loss's
+grammatical subject the transmission machinery, not the dead — the
+future-holders whose futures the flood removed). The disposition:
+NEVER "improve the prose" — the further fix's route the owner's
+call, the natural class the measurement names: the dead as the loss's
+grammatical subject (the mourning line's clause re-subjected — the
+futures THEIRS, removed with them — or the flood's removal named with
+the dead as its holders); the echo half's route (the "from this day"
+forward frame) CONFIRMED at 1/2 — no further work there unless the
+owner calls. The anti-loop law held: this was the FIRST fix attempt
+(iter-204 the measurement, iter-205 the first fix) — a second attempt
+only on the owner's call. Honest caveats unchanged (the LLM reader
+class, glm n=2 — the live human band open; the tale still 24 lines —
+the re-authored lines longer, the count unchanged).
 
 ### OPEN — Ancient Network back-propagation
 

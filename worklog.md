@@ -5,6 +5,10 @@
 > rationale belongs in `docs/DECISIONS.md`. Pre-trim history lives in git.
 
 ---
+iter-205 · 2026-09-23 · heartbreak-fix — the heartbreak station's minimal RENDERING FIX landed and measured (the owner's minimal-fix call, STATUS item 1, the iter-204 failure): rs-7 — TWO template lines re-authored (the mourning line "their line, their duties and their holdings never handed on"; the echo line "the crossing's table open to the claimant's line from this day"), zero code, zero corpus price, the pins updated as the deliberate act
+the SAME blind probe re-run (the iter-204 protocol re-established, the audit pre-set before the reading, glm n=2): the mandatory pair NOT MET at the strict bar — the MEASURED MOVEMENT: the opened-option half cleanly extracted once (the table-open clause verbatim + "seizes the future"), the zero-futures mode GONE n=2 (both readings carrying the inheritance topology), the dead still not read as the futures' OWN holders (the SUBJECT problem); the further route the owner's call
+2041+1 + ruff + docguard clean; 7 paths (the pack line + the pin + the state docs); iter-195 evicted per the cap
+---
 iter-204 · 2026-09-23 · heartbreak — the W5 heartbreak station's first PROBE RUN (the owner's «давай прогон зонда» call, STATUS item 1 — the trio's last station's own run): the return's chain walked deterministically at seed 42 (the package the same bounded form — the tale 24 lines + the records + three briefs, byte-identical twice), the author audit pre-set with F02's option-topology vocabulary BEFORE the reading, the blind reader glm n=2 (the runner + transcripts outside the repo, Rule 9)
 the mandatory bar NOT MET on the future-option half — the drowned generation read as remembered dead by both, never as removed futures (the rendering boundary: the loss's option topology renders nowhere), the opened option carried as present standing, the supporting bars (relation / memory / world-specificity) MET n=2 convergent; the fix's route the owner's call (the natural class: the mourning line's family carrying what the flood removed)
 2041+1 + ruff + docguard clean; 5 paths doc-only (the state docs); iter-194 evicted per the cap
@@ -56,9 +60,3 @@ call, STATUS item 1's tooling-spike arm): `mechanics impact --path/--ref` landed
 AST scan over core/brief/render/cli/sim + packlint, D-118 extended to the source), the exact-name reverse query
 (the rename-safety set), the matrix pointers (D-024); tests/test_mechanics.py +8 (the §9 claim block); 5 paths;
 2026+1 + ruff + docguard clean; the structured-patch machinery + edit-shape guard stay PROPOSAL (A/B falsifier)
-
----
-iter-195 · 2026-09-22 · bottleneck — intake-37 (the owner's mandatory-research-artifact call): the agent-bottleneck note routed whole — PARTIALLY CONFIRMED (formats + tooling direction confirmed, zero format
-change; the full-file-rewrite claim REFUTED — 97% of 120 pack-JSON touches surgical; the mutation-blindness MEASURED — value mutations pass lint + goldens when uncovered, TEST_PLAN §9's path-bound law); the
-research/intervention documentation schema (residue → phases §6, interventions → scratch/, adoptions → DECISIONS, tasks → TASKS); mech-2 convened (the impact surface, R03's consumer); 8 paths doc-only +
-.gitignore; the probes + measurement scripts outside the repo (Rule 9); 2018+1 + ruff + docguard clean both ends; iter-186 evicted per the cap
