@@ -1,39 +1,40 @@
-Iteration: iter-217 (`iter-217-wb2-shell` — the Redot shell + custom
-theme, the owner's «продолжай работу» call over the v5.2 brief, the
-family's second row): the wb-2 Phase-A slice CLOSED — the
-semantic-token theme `themes/workbench_theme.tres` (the §10 token
-ladder: the `Workbench/*` namespace — colour primitives by role, the
-§11 type roles, spacings, the chrome styleboxes — + the styled
-component types with their §10 state sets; the §12 layered-dark
-contrast pairs recorded in-file), the code-built application shell
-`scenes/shell.tscn` + `scripts/shell.gd` (the §17 nav axes — Chat +
-Settings live, the six later axes honestly disabled — the Chat and
-Settings placeholder surfaces, the §16 status-vocabulary strip, the
-§18 not-connected badge, the §13 focus ownership on the active axis),
-the project's main scene switched to the shell (the app-entry law;
-the seam-proof scene passed explicitly by the runner), the shell
-proof mode `scripts/visual_proof.py --shell [--surface]`, and the
-packets: `tests/test_shell_proof.py` (REDOT_EXE-gated: the double-run
-PNG byte-diff CONFIRMED — the D4 falsifier extended to the shell; the
-settings capture proves the switch) + `tests/test_shell_contract.py`
-(non-gated: the app-entry law + the theme's token namespaces + the
-proof-arg contract).
+Iteration: iter-218 (`iter-218-wb3-skeleton` — the application-
+operations skeleton, the owner's «продолжай работу» continuation
+call over the v5.2 brief, the family's third row): app §32 step 1
+CLOSED — the Workbench application's Python-side skeleton under
+`workbench/application/`: `identity.py` (the §9 identity closure —
+the five axes apart, sha256 content digests, the order-independent
+composite identity, `recheck()` = VERIFIED | MISMATCH |
+INTEGRITY_UNKNOWN, the mismatch law never silent), `artifact.py`
+(the §10 immutable execution artifact — the frozen field list, the
+closed reproducibility scopes EXACT_BITWISE | SEMANTIC |
+APPROXIMATE | EXPLANATORY_ONLY + the three kinds separated, the
+request digest, replay = a NEW execution identity, the strict
+roundtrip, zero clock imports), `directories.py` (the §16 contract
+— seven path roles, the absolute-root law, the closed
+startup/recovery vocabulary, the errno-classifying probe),
+`clock.py` (the §17 four clock domains — MONOTONIC + UTC_WALL
+provided injectably, SEMANTIC/UI_ANIMATION named-only), + the §27
+dependency envelope (empty, agreeing with pyproject).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-2 DONE) + the world track + the SoW
+(the wb family its live head, wb-3 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2057 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; the visual packets with REDOT_EXE set, the suite
-skipping clean without it per D6) ·
+2077 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
+clean per D6/D-093 — the sandbox binary absent; with REDOT_EXE set
+the suite reads 2082+1) ·
 Date: 2026-09-24 ·
-Scope: workbench/presentation/redot/ (3 new: the theme + the shell
-scene + the shell script; 1 edit: project.godot) + scripts/
-visual_proof.py (the shell mode + the explicit seam scene) + 2 new
-test files + the state docs (CONTRACTS/TASKS/NAV/README/worklog + this
-file) — 13 paths (zero core change, zero pack change, the LOG untouched;
-the proof artifacts gitignored output/, never committed).
-Track A: wb-2 DONE. The prior iterations' record: iter-216 (wb-1
-redot), 215 (wb-1 python), 214 (doc-7/intake-38). The detail lives in
+Scope: workbench/application/ (5 new: __init__ + identity + artifact
++ directories + clock) + tests/test_application_skeleton.py (25
+tests) + pyproject.toml (the packages list) + the state docs
+(CONTRACTS/TASKS/NAV/README/worklog + this file) — 12 paths (the
+3–5 soft limit honestly over: the row is a full contract slice —
+four §32-step-1 vocabularies + the envelope + the claim packet, the
+scope noted in the worklog; zero core change, zero pack change, the
+LOG untouched, zero network surface — INV-4 unchanged).
+Track A: wb-3 DONE. The prior iterations' record: iter-217 (wb-2
+redot shell), 216 (wb-1 redot), 215 (wb-1 python). The detail lives in
 the worklog + git.
 
 
@@ -88,24 +89,27 @@ iterations elapsed at this STATUS touch)
 - **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088)** — BRIEF_SPEC §2/§3.3.
 - **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
 - **Gate mechanics: seed 125, only the director flag changes — ON fires `director_0000`, OFF ≥3 emergent chains (baseline 24); M3 counts per endpoint, decay-dominated in magnitude** — TEST_PLAN §4 + the D-136 verdict row.
+- **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
 
 ## Next step
 
-**iter-217 DONE: wb-2's Redot shell + custom theme — the Phase-A
-slice CLOSED (frontend §46: custom theme + the shell + the Chat and
-Settings placeholder surfaces + the headless/screenshot route): the
-semantic-token theme + the code-built shell + the shell proof mode +
-both packets landed; the double-run PNG byte-diff CONFIRMED (the D4
-falsifier extended to the shell); the epistemic class FACT, the
-disposition CONFIRMED. wb-2 row DONE.**
+**iter-218 DONE: wb-3's application-operations skeleton — app §32
+step 1 CLOSED (identity + execution artifact + runtime/data
+directories + clock + dependency envelope, the Python-side package
+under `workbench/application/`): the four closed-vocabulary
+contract modules + the empty envelope + the 25-test claim packet
+landed; byte-identical artifact rebuild (no hidden clock), the
+identity mismatch laws executable, CWD-independent paths, injected
+clock providers; the epistemic class FACT, the disposition
+CONFIRMED. wb-3 row DONE.**
 
-1. wb-3 — the application-operations skeleton (app §32 step 1:
-   identity + execution artifact + runtime/data directories + clock +
-   dependency envelope — the Workbench application's Python-side
-   skeleton under `workbench/application/`) — the owner's call opens
-   it; then wb-4 (the inbound gateway, INV-4's owner-gated exception,
-   its own contract first) + wb-5+ per the family rows (app §32's
-   ladder / frontend §46's Phase-A remainder).
+1. wb-4 — the inbound gateway (app §32 step 4's second half: the
+   one inbound Workbench gateway over application operations, INV-4's
+   owner-gated exception — CONTRACTS §5 D3's own sentence: its own
+   contract first, the architecture-test exception with it) — the
+   owner's call opens it; then wb-5+ per the family rows (app §32's
+   ladder: minimal application operations + the typed API contract;
+   frontend §46's Phase-A remainder).
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

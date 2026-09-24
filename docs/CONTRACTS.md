@@ -103,8 +103,27 @@
 > runner), `scripts/visual_proof.py --shell` the proof mode, the gated
 > packet (double-run byte-diff CONFIRMED, the settings capture included)
 > + the non-gated committed-file contract. The landing record: TASKS
-> iter-217 + the worklog + git. The family contract below stays
-> (wb-3..N still owner-gated rows).
+> iter-217 + the worklog + git.
+> **wb-3 LANDED (iter-218):** the application-operations skeleton
+> (app §32 step 1) — `workbench/application/` the Python-side
+> package: `identity.py` (the §9 identity closure — the five axes
+> apart, sha256 content digests, the order-independent composite
+> identity, `recheck()` making the mismatch law executable:
+> VERIFIED | MISMATCH | INTEGRITY_UNKNOWN, never a quiet pass),
+> `artifact.py` (the §10 immutable execution artifact — the frozen
+> field list, the reproducibility scopes EXACT_BITWISE | SEMANTIC |
+> APPROXIMATE | EXPLANATORY_ONLY + the three kinds separated, the
+> request digest, the replay = NEW execution identity law, the
+> strict roundtrip, zero clock imports), `directories.py` (the §16
+> contract — the seven path roles, the absolute-root law, the
+> startup/recovery outcome vocabulary, the errno-classifying
+> probe), `clock.py` (the §17 four clock domains — MONOTONIC +
+> UTC_WALL provided injectably, SEMANTIC/UI_ANIMATION named-only),
+> + `__init__.py` the §27 dependency envelope (RUNTIME_DEPENDENCIES
+> = empty, agreeing with pyproject). The claim packet:
+> `tests/test_application_skeleton.py` (25 tests). The landing
+> record: TASKS iter-218 + the worklog + git. The family contract
+> below stays (wb-4..N still owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 
