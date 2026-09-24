@@ -1,0 +1,282 @@
+; CanonSim Workbench — the semantic-token theme (wb-2, frontend §10–§16).
+;
+; The single source of the Workbench visual language (frontend §10: the
+; ladder `primitives -> semantic tokens -> component tokens -> component
+; states -> composition` — values never scattered into code). Three layers
+; live here:
+;   1. `Workbench/*` — the semantic TOKEN namespace: colours, type sizes,
+;      spacings and the chrome styleboxes. The shell script reads them by
+;      name (theme.get_color / get_constant / get_stylebox) — composition
+;      code carries token NAMES only, never raw values.
+;   2. The component tokens — the styled Control types (Button, LineEdit,
+;      Label, PanelContainer) with their state sets (default/hover/pressed/
+;      focus/disabled/readonly — §10's component-state law).
+;   3. Layered dark surfaces (§12: never pure black) with WCAG-baseline
+;      contrast — the measured pairs noted below.
+;
+; Contrast pairs (WCAG 2.2 baseline, §12):
+;   text_primary  #e6e9ef on surface_l1 #1b1f26  ~13.5:1
+;   text_secondary#a9b1be on surface_l1           ~7.6:1
+;   text_muted    #8a93a2 on surface_l2 #232833   ~4.7:1
+;   on_accent     #14171c on accent    #d9a066    ~8.1:1
+;   border_field  #6a7688 vs input bg #161a21     ~3.7:1 (non-text, >=3:1)
+; Colour is never the sole state channel (§12): states pair with text or
+; position. This file is the wb-2 deliverable "the semantic-token theme
+; file" (TASKS wb-2, CONTRACTS §5); identity = its sha256 (carried by the
+; shell proof metadata).
+;
+; Theme id: canon_workbench_theme@0.1 (dark — the only admitted theme).
+
+[gd_resource type="Theme" load_steps=13 format=3]
+
+[sub_resource type="StyleBoxFlat" id="sb_button_normal"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.137255, 0.156863, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.415686, 0.462745, 0.533333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_button_hover"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.168627, 0.192157, 0.239216, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.415686, 0.462745, 0.533333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_button_pressed"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.227451, 0.184314, 0.133333, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85098, 0.627451, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_button_hover_pressed"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.227451, 0.184314, 0.133333, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85098, 0.627451, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_button_disabled"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.117647, 0.137255, 0.172549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.227451, 0.278431, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_button_focus"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.909804, 0.721569, 0.466667, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_input_normal"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.086275, 0.101961, 0.129412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.415686, 0.462745, 0.533333, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_input_focus"]
+content_margin_left = 9.0
+content_margin_top = 5.0
+content_margin_right = 9.0
+content_margin_bottom = 5.0
+bg_color = Color(0.086275, 0.101961, 0.129412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.909804, 0.721569, 0.466667, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_input_readonly"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.105882, 0.121569, 0.14902, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.227451, 0.278431, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="sb_card_l2"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.137255, 0.156863, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.227451, 0.278431, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="sb_surface_l1"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.105882, 0.121569, 0.14902, 1)
+
+[sub_resource type="StyleBoxFlat" id="sb_bar"]
+content_margin_left = 16.0
+content_margin_top = 0.0
+content_margin_right = 16.0
+content_margin_bottom = 0.0
+bg_color = Color(0.105882, 0.121569, 0.14902, 1)
+
+[resource]
+; --- semantic tokens: colour primitives by role (§12) ----------------------
+Workbench/colors/background_base = Color(0.078431, 0.090196, 0.109804, 1)
+Workbench/colors/surface_l1 = Color(0.105882, 0.121569, 0.14902, 1)
+Workbench/colors/surface_l2 = Color(0.137255, 0.156863, 0.2, 1)
+Workbench/colors/surface_l3 = Color(0.168627, 0.192157, 0.239216, 1)
+Workbench/colors/surface_selected = Color(0.227451, 0.184314, 0.133333, 1)
+Workbench/colors/hairline = Color(0.2, 0.227451, 0.278431, 1)
+Workbench/colors/border_field = Color(0.415686, 0.462745, 0.533333, 1)
+Workbench/colors/text_primary = Color(0.901961, 0.913725, 0.937255, 1)
+Workbench/colors/text_secondary = Color(0.662745, 0.694118, 0.745098, 1)
+Workbench/colors/text_muted = Color(0.541176, 0.576471, 0.635294, 1)
+Workbench/colors/accent = Color(0.85098, 0.627451, 0.4, 1)
+Workbench/colors/accent_deep = Color(0.752941, 0.541176, 0.309804, 1)
+Workbench/colors/on_accent = Color(0.078431, 0.090196, 0.109804, 1)
+Workbench/colors/focus_ring = Color(0.909804, 0.721569, 0.466667, 1)
+; --- semantic status colours (§12/§16 — paired with text, never colour-only)
+Workbench/colors/status_success = Color(0.52549, 0.741176, 0.427451, 1)
+Workbench/colors/status_warning = Color(0.886275, 0.701961, 0.305882, 1)
+Workbench/colors/status_error = Color(0.858824, 0.439216, 0.439216, 1)
+Workbench/colors/status_info = Color(0.454902, 0.658824, 0.870588, 1)
+; --- the authority vocabulary (§16: displayed, never collapsed)
+Workbench/colors/authority_canonical = Color(0.658824, 0.607843, 0.960784, 1)
+Workbench/colors/authority_observed = Color(0.454902, 0.768627, 0.847059, 1)
+Workbench/colors/authority_derived = Color(0.847059, 0.776471, 0.454902, 1)
+Workbench/colors/authority_unknown = Color(0.603922, 0.639216, 0.698039, 1)
+; --- semantic tokens: type roles (§11; Cyrillic-safe metrics via containers)
+Workbench/constants/font_size_page_title = 24
+Workbench/constants/font_size_section_title = 19
+Workbench/constants/font_size_control = 15
+Workbench/constants/font_size_body = 16
+Workbench/constants/font_size_secondary = 14
+Workbench/constants/font_size_caption = 12
+; --- semantic tokens: geometry/spacing (§15 density: authoring = medium)
+Workbench/constants/rail_width = 208
+Workbench/constants/bar_height = 44
+Workbench/constants/status_bar_height = 30
+Workbench/constants/space_xs = 4
+Workbench/constants/space_s = 8
+Workbench/constants/space_m = 12
+Workbench/constants/space_l = 16
+Workbench/constants/space_xl = 24
+; --- semantic tokens: the chrome styleboxes (composition fetches by name)
+Workbench/styles/surface = SubResource("sb_surface_l1")
+Workbench/styles/bar = SubResource("sb_bar")
+; --- component tokens: layout defaults --------------------------------------
+BoxContainer/constants/separation = 8
+; --- component tokens: Label (body role default) -----------------------------
+Label/colors/font_color = Color(0.901961, 0.913725, 0.937255, 1)
+Label/font_sizes/font_size = 16
+; --- component tokens: Button (§10 state set) --------------------------------
+Button/font_sizes/font_size = 15
+Button/colors/font_color = Color(0.901961, 0.913725, 0.937255, 1)
+Button/colors/font_hover_color = Color(0.901961, 0.913725, 0.937255, 1)
+Button/colors/font_pressed_color = Color(0.901961, 0.913725, 0.937255, 1)
+Button/colors/font_hover_pressed_color = Color(0.901961, 0.913725, 0.937255, 1)
+Button/colors/font_focus_color = Color(0.901961, 0.913725, 0.937255, 1)
+Button/colors/font_disabled_color = Color(0.541176, 0.576471, 0.635294, 1)
+Button/styles/normal = SubResource("sb_button_normal")
+Button/styles/hover = SubResource("sb_button_hover")
+Button/styles/pressed = SubResource("sb_button_pressed")
+Button/styles/hover_pressed = SubResource("sb_button_hover_pressed")
+Button/styles/disabled = SubResource("sb_button_disabled")
+Button/styles/focus = SubResource("sb_button_focus")
+; --- component tokens: LineEdit (§10 state set) ------------------------------
+LineEdit/font_sizes/font_size = 15
+LineEdit/colors/font_color = Color(0.901961, 0.913725, 0.937255, 1)
+LineEdit/colors/font_selected_color = Color(0.901961, 0.913725, 0.937255, 1)
+LineEdit/colors/font_uneditable_color = Color(0.662745, 0.694118, 0.745098, 1)
+LineEdit/colors/font_placeholder_color = Color(0.541176, 0.576471, 0.635294, 1)
+LineEdit/colors/caret_color = Color(0.85098, 0.627451, 0.4, 1)
+LineEdit/colors/selection_color = Color(0.85098, 0.627451, 0.4, 0.45)
+LineEdit/styles/normal = SubResource("sb_input_normal")
+LineEdit/styles/focus = SubResource("sb_input_focus")
+LineEdit/styles/readonly = SubResource("sb_input_readonly")
+; --- component tokens: the card container (PanelContainer = layer-2 card) ----
+PanelContainer/styles/panel = SubResource("sb_card_l2")

@@ -9,8 +9,8 @@ config_version=5
 [application]
 
 config/name="CanonSimWorkbench"
-config/description="CanonSim Workbench - the wb-1 vertical seam proof (Visual Scene IR -> placeholder composition -> screenshot artifact)"
-run/main_scene="res://scenes/main.tscn"
+config/description="CanonSim Workbench - the application shell (wb-2) over the wb-1 vertical seam proof (Visual Scene IR -> placeholder composition -> screenshot artifact)"
+run/main_scene="res://scenes/shell.tscn"
 config/features=PackedStringArray("GL Compatibility")
 
 [display]

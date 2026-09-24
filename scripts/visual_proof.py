@@ -1,12 +1,15 @@
-"""The wb seam proof's operator runner (CONTRACTS.md §5 D1/D6, wb-1).
+"""The wb seam proof's operator runner (CONTRACTS.md §5 D1/D6, wb-1) + the
+wb-2 shell proof mode (the same operator route).
 
-What this does: builds the Visual Scene IR from a committed fixture
-(workbench/scene_build), then drives the pinned external Redot 26.2
-LTS binary over the repository project (workbench/presentation/redot)
-to compose the placeholder scene and capture the screenshot + metadata
-artifacts. Everything lands under an output directory (gitignored —
-runtime artifacts, INV-5's family); the proof is re-run and byte-diffed
-by the pytest packet, never committed.
+What this does: the seam mode builds the Visual Scene IR from a committed
+fixture (workbench/scene_build), then drives the pinned external Redot 26.2
+LTS binary over the repository project (workbench/presentation/redot) to
+compose the placeholder scene and capture the screenshot + metadata
+artifacts. The shell mode (--shell) drives the application shell scene
+(wb-2: the semantic-token theme + the Chat/Settings placeholder surfaces)
+over the same route — no IR involved. Everything lands under an output
+directory (gitignored — runtime artifacts, INV-5's family); the proofs are
+re-run and byte-diffed by the pytest packets, never committed.
 
 Engine resolution law (the brief's integration §7): ONE configurable
 path — the REDOT_EXE environment variable. No hardcoded engine paths,
@@ -14,11 +17,16 @@ no second resolution site. Display law: an existing DISPLAY is reused;
 otherwise a private Xvfb display is spawned for the run (POSIX only —
 Windows renders windowed natively).
 
-Usage:
+Usage (the seam proof — the scene is passed explicitly: the project's
+main scene is the shell since wb-2):
     REDOT_EXE=/path/to/redot python scripts/visual_proof.py \\
         --log tests/fixtures/plumbing_smoke_seed42.jsonl \\
         --pack content/tavern_pack --location loc_tavern \\
         [--out output/visual_proof]
+
+Usage (the shell proof):
+    REDOT_EXE=/path/to/redot python scripts/visual_proof.py --shell \\
+        [--surface chat|settings] [--out output/shell_proof]
 """
 
 from __future__ import annotations
@@ -35,6 +43,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 PROJECT_DIR = REPO / "workbench" / "presentation" / "redot"
+SEAM_SCENE = "res://scenes/main.tscn"
+SHELL_SCENE = "res://scenes/shell.tscn"
 RUN_TIMEOUT_S = 180
 XVFB_WAIT_S = 2.0
 
@@ -116,14 +126,9 @@ class _Xvfb:
             self._proc = None
 
 
-def run_proof(
-    engine: Path,
-    ir_path: Path,
-    png_path: Path,
-    meta_path: Path,
-) -> int:
-    """Drive the Redot project over one IR document; returns the exit code."""
-    cmd = [
+def _engine_cmd(engine: Path, scene_res: str) -> list[str]:
+    """The common engine invocation prefix (renderer + explicit scene)."""
+    return [
         str(engine),
         "--path",
         str(PROJECT_DIR),
@@ -131,14 +136,12 @@ def run_proof(
         "gl_compatibility",
         "--rendering-driver",
         "opengl3",
-        "--",
-        "--ir",
-        str(ir_path),
-        "--png",
-        str(png_path),
-        "--meta",
-        str(meta_path),
+        scene_res,
     ]
+
+
+def _run_with_display(cmd: list[str]) -> int:
+    """Run one engine command under a display; returns the exit code."""
     with _Xvfb() as env:
         result = subprocess.run(
             cmd,
@@ -156,15 +159,73 @@ def run_proof(
     return int(result.returncode)
 
 
+def run_proof(
+    engine: Path,
+    ir_path: Path,
+    png_path: Path,
+    meta_path: Path,
+) -> int:
+    """Drive the seam-proof scene over one IR document; returns the exit code."""
+    cmd = _engine_cmd(engine, SEAM_SCENE) + [
+        "--",
+        "--ir",
+        str(ir_path),
+        "--png",
+        str(png_path),
+        "--meta",
+        str(meta_path),
+    ]
+    return _run_with_display(cmd)
+
+
+def run_shell_proof(
+    engine: Path,
+    png_path: Path,
+    meta_path: Path,
+    surface: str | None = None,
+) -> int:
+    """Drive the wb-2 shell scene; returns the exit code.
+
+    The shell validates --surface itself and exits 2 on an unknown key
+    (the surface vocabulary is the shell's, not the runner's).
+    """
+    user_args = ["--png", str(png_path), "--meta", str(meta_path)]
+    if surface:
+        user_args += ["--surface", surface]
+    cmd = _engine_cmd(engine, SHELL_SCENE) + ["--", *user_args]
+    return _run_with_display(cmd)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--log", required=True, type=Path, help="the committed fixture log")
-    parser.add_argument("--pack", required=True, type=Path, help="the pack directory")
+    parser.add_argument(
+        "--log", type=Path, default=None, help="the committed fixture log (seam mode)"
+    )
+    parser.add_argument("--pack", type=Path, default=None, help="the pack directory (seam mode)")
     parser.add_argument(
         "--location", default=None, help="the scene location (default: the player's)"
     )
-    parser.add_argument("--out", type=Path, default=REPO / "output" / "visual_proof")
+    parser.add_argument(
+        "--shell",
+        action="store_true",
+        help="run the wb-2 shell proof instead of the seam proof",
+    )
+    parser.add_argument(
+        "--surface",
+        default=None,
+        choices=["chat", "settings"],
+        help="the shell surface to capture (shell mode; default: chat)",
+    )
+    parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args(argv)
+
+    if args.shell:
+        if args.log or args.pack or args.location:
+            parser.error("--shell takes no --log/--pack/--location")
+        return _shell_main(args)
+    if not args.log or not args.pack:
+        parser.error("--log and --pack are required (or pass --shell for the shell proof)")
+    args.out = args.out or REPO / "output" / "visual_proof"
 
     from workbench.scene_build import build_scene  # local: keeps --help fast
 
@@ -188,6 +249,33 @@ def main(argv: list[str] | None = None) -> int:
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
     print(f"scene_identity {meta['scene_identity']}")
     print(f"artifacts: {png_path} + {meta_path} + {ir_path}")
+    return 0
+
+
+def _shell_main(args: argparse.Namespace) -> int:
+    """The wb-2 shell proof: capture + metadata under an output directory."""
+    args.out = args.out or REPO / "output" / "shell_proof"
+    engine = resolve_engine()
+    out_dir = args.out.expanduser().resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    png_path = out_dir / "shell.png"
+    meta_path = out_dir / "shell_meta.json"
+    suffix = f"_{args.surface}" if args.surface and args.surface != "chat" else ""
+    if suffix:  # per-surface captures keep their own artifact names
+        png_path = out_dir / f"shell{suffix}.png"
+        meta_path = out_dir / f"shell{suffix}_meta.json"
+    for stale in (png_path, meta_path):
+        stale.unlink(missing_ok=True)
+
+    code = run_shell_proof(engine, png_path, meta_path, args.surface)
+    if code != 0:
+        raise ProofError(f"the shell proof exited {code} (see stderr above)")
+    if not png_path.is_file() or not meta_path.is_file():
+        raise ProofError("the shell proof exited 0 but an artifact is missing")
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    print(f"shell_version {meta['shell_version']}")
+    print(f"artifacts: {png_path} + {meta_path}")
     return 0
 
 

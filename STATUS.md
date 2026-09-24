@@ -1,35 +1,40 @@
-Iteration: iter-216 (`iter-216-wb1-redot` — the seam's Redot half, the
-owner's standing step-by-step directive over the opened family): the
-wb-1 vertical proof CLOSED — the pinned Redot 26.2 LTS project landed
-at `workbench/presentation/redot/` (gl_compatibility, 1280x720, the
-code-built placeholder compositor `seam_proof.gd`: the IR JSON →
-ColorRects + provenance/status labels + the debug overlay, the
-screenshot + metadata artifacts, user args `--ir/--png/--meta`, exit
-codes) + `scripts/visual_proof.py` the operator runner (one REDOT_EXE
-resolution point, a private Xvfb display when none, absolute artifact
-paths) + `tests/test_visual_proof.py` (REDOT_EXE-gated, the D-093 skip
-pattern). The live proof: the tavern and province fixtures both
-composed and captured (scene identities sha256:a1cff5106fdb8643 /
-sha256:b82080e2d9d5de01), the double-run PNG byte-diff CONFIRMED (the
-CONTRACTS §5 D4 falsifier), the engine line verified
-26.2-stable.official.4f5b14aba.
+Iteration: iter-217 (`iter-217-wb2-shell` — the Redot shell + custom
+theme, the owner's «продолжай работу» call over the v5.2 brief, the
+family's second row): the wb-2 Phase-A slice CLOSED — the
+semantic-token theme `themes/workbench_theme.tres` (the §10 token
+ladder: the `Workbench/*` namespace — colour primitives by role, the
+§11 type roles, spacings, the chrome styleboxes — + the styled
+component types with their §10 state sets; the §12 layered-dark
+contrast pairs recorded in-file), the code-built application shell
+`scenes/shell.tscn` + `scripts/shell.gd` (the §17 nav axes — Chat +
+Settings live, the six later axes honestly disabled — the Chat and
+Settings placeholder surfaces, the §16 status-vocabulary strip, the
+§18 not-connected badge, the §13 focus ownership on the active axis),
+the project's main scene switched to the shell (the app-entry law;
+the seam-proof scene passed explicitly by the runner), the shell
+proof mode `scripts/visual_proof.py --shell [--surface]`, and the
+packets: `tests/test_shell_proof.py` (REDOT_EXE-gated: the double-run
+PNG byte-diff CONFIRMED — the D4 falsifier extended to the shell; the
+settings capture proves the switch) + `tests/test_shell_contract.py`
+(non-gated: the app-entry law + the theme's token namespaces + the
+proof-arg contract).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-1 DONE) + the world track + the SoW
+(the wb family its live head, wb-2 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2051 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-215 state and
-after — the visual packet with REDOT_EXE set, the suite without it
-skips clean per D6) ·
+2057 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; the visual packets with REDOT_EXE set, the suite
+skipping clean without it per D6) ·
 Date: 2026-09-24 ·
-Scope: workbench/presentation/redot/ (3 new files: project.godot +
-main.tscn + seam_proof.gd) + scripts/visual_proof.py +
-tests/test_visual_proof.py + the state docs (CONTRACTS/TASKS/STATUS/
-worklog) — 9 paths (zero core change, zero pack change, the LOG
-untouched; the artifacts gitignored output/, never committed).
-Track A: wb-1 DONE (both halves). The prior iterations' record:
-iter-215 (wb-1-python), 214 (doc-7/intake-38), 213 (doc-6). The
-detail lives in the worklog + git.
+Scope: workbench/presentation/redot/ (3 new: the theme + the shell
+scene + the shell script; 1 edit: project.godot) + scripts/
+visual_proof.py (the shell mode + the explicit seam scene) + 2 new
+test files + the state docs (CONTRACTS/TASKS/NAV/README/worklog + this
+file) — 13 paths (zero core change, zero pack change, the LOG untouched;
+the proof artifacts gitignored output/, never committed).
+Track A: wb-2 DONE. The prior iterations' record: iter-216 (wb-1
+redot), 215 (wb-1 python), 214 (doc-7/intake-38). The detail lives in
+the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -86,26 +91,21 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-216 DONE: wb-1's Redot half — the vertical seam proof CLOSED
-(CONTRACTS §5's falsifier run live): the pinned project + the operator
-runner + the REDOT_EXE-gated packet landed; the tavern and province
-fixtures composed and captured; the double-run PNG byte-diff
-CONFIRMED. The epistemic class FACT, the disposition CONFIRMED (the
-seam's determinism claim, both halves). wb-1 row DONE.**
+**iter-217 DONE: wb-2's Redot shell + custom theme — the Phase-A
+slice CLOSED (frontend §46: custom theme + the shell + the Chat and
+Settings placeholder surfaces + the headless/screenshot route): the
+semantic-token theme + the code-built shell + the shell proof mode +
+both packets landed; the double-run PNG byte-diff CONFIRMED (the D4
+falsifier extended to the shell); the epistemic class FACT, the
+disposition CONFIRMED. wb-2 row DONE.**
 
-1. wb-2 — the Redot shell + custom theme (frontend §46 Phase A: the
-   application shell scene, the semantic-token theme file, the
-   Chat/Settings placeholder surfaces) — the owner's call opens it;
-   then wb-3+ per the family rows (app §32's ladder).
-2. The remaining station rows1. iter-216 — wb-1's Redot half (the owner's standing «шаг за шагом»
-   directive over the opened family): the pinned project at
-   `workbench/presentation/redot/` (Compatibility renderer), the
-   code-built placeholder composition over the IR fixture,
-   `scripts/visual_proof.py` the REDOT_EXE operator runner (Xvfb +
-   screenshot + metadata artifacts, gitignored), the
-   REDOT_EXE-gated test packet — the seam's live proof
-   (CONTRACTS §5's falsifier: the double-run PNG byte-diff).
-   Then wb-2..N per the family rows, each owner-gated.
+1. wb-3 — the application-operations skeleton (app §32 step 1:
+   identity + execution artifact + runtime/data directories + clock +
+   dependency envelope — the Workbench application's Python-side
+   skeleton under `workbench/application/`) — the owner's call opens
+   it; then wb-4 (the inbound gateway, INV-4's owner-gated exception,
+   its own contract first) + wb-5+ per the family rows (app §32's
+   ladder / frontend §46's Phase-A remainder).
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

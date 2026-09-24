@@ -91,7 +91,20 @@
 > composed and captured, the double-run PNG byte-diff CONFIRMED (the D4
 > falsifier), the REDOT_EXE-gated packet skipping clean without the
 > binary; the landing record: TASKS iter-215/216 + the worklog + git.
-> The family contract below stays (wb-2..N still owner-gated rows).
+> **wb-2 LANDED (iter-217):** the Redot shell + the semantic-token theme
+> — `themes/workbench_theme.tres` (the §10 token ladder: the
+> `Workbench/*` semantic namespace + the styled component types with
+> their state sets, the §12 contrast pairs recorded in-file),
+> `scenes/shell.tscn` + `scripts/shell.gd` (the code-built shell: the
+> §17 nav axes — Chat/Settings live, the later axes honestly disabled —
+> the Chat/Settings placeholder surfaces, the §16 status vocabulary
+> strip, the §18 backend badge), the main scene switched to the shell
+> (the app-entry law; the seam-proof scene now passed explicitly by the
+> runner), `scripts/visual_proof.py --shell` the proof mode, the gated
+> packet (double-run byte-diff CONFIRMED, the settings capture included)
+> + the non-gated committed-file contract. The landing record: TASKS
+> iter-217 + the worklog + git. The family contract below stays
+> (wb-3..N still owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 

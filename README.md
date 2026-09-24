@@ -64,7 +64,7 @@ padding.
 | `content/` | the five packs — setting as data (tavern, road, province, grim, pressure), loaded + linted by `core/pack.py` (the admission gate; lint bodies in `core/packlint/`) |
 | `core/` | the engine (stdlib-only, D-012; engine-agnostic — INV-4): the event-sourced kernel (log, queue, loop, fold), the RngBank, the knowledge/director/world/social stacks, economy, intent + resolvers, metrics, pack |
 | `render/` | the deterministic renderer: the tracery grammar engine (cosmetic stream) + the chronicle/entity views (pure functions of the log) |
-| `workbench/` | the Workbench family (wb rows, CONTRACTS §5, D-200): the Python half — the renderer-neutral Visual Scene IR + the read model — and `presentation/redot/` the pinned Redot 26.2 LTS project (the engine binary external, one `REDOT_EXE` path) |
+| `workbench/` | the Workbench family (wb rows, CONTRACTS §5, D-200): the Python half — the renderer-neutral Visual Scene IR + the read model — and `presentation/redot/` the pinned Redot 26.2 LTS project (the application shell + the semantic-token theme; the engine binary external, one `REDOT_EXE` path) |
 | `brief/` | the mediator circuit (LLM-free engine side): assembler, scene ledger, validator, mediator, the mode-C parser boundary + its GBNF serialization, scan, since |
 | `cli/` | the play interface: batch `play`/`chronicle`/`state`/`replay` + the interactive session with the narrator door, `--resume`, `--pack`, `--engine` (the runtime engine as the doors' operator — the adapter the repo's one network module) |
 | `scripts/` | operator tooling (CLI-class, D-046): the harnesses (balance/profile/worldgen), the offline builders (chronicle/checkpoint), pack tools (scaffold/doctor), digest, docguard, the `df_*` track-B tools |
