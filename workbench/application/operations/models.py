@@ -1,6 +1,8 @@
 """The model discovery family (wb-5, the app spec §§9/20 — the
 family's fifth row; wb-9's fetch kind, the owner's 2026-09-25
-«подтянуть модель откуда угодно» call).
+«подтянуть модель откуда угодно» call; wb-10's import kind, the
+owner's 2026-09-25 «просто открывающийся проводник и выбор уже
+скаченных локальных моделей» call).
 
 The law: **file exists ≠ valid ≠ selected ≠ loading ≠ loaded ≠
 active** (§20) — wb-5 lands the DISCOVERY half honestly: `discover`
@@ -49,11 +51,27 @@ never a post-admission failure); the work streams with one progress
 report + one §12 checkpoint per chunk, the atomic rename landing the
 file for the NEXT discovery scan. A fetching model holds NO ladder
 state — it is not discovered until the file exists (§20's own law).
+
+The import kind (wb-10 — the local-files half, NO network anywhere:
+a plain local copy is asset I/O, not a wire): one or more GGUF files
+ALREADY ON DISK arrive through the gateway as a run — `model.import`,
+the operator picking them with the frontend's NATIVE file/folder
+dialog (the explorer call). The same admission gates as the fetch
+(exists, plain name, unoccupied destination, no .part residue —
+NOT_SENT), the same `.part` + atomic-rename landing, the same live
+progress (per-file index/count + copied/total bytes) and the same
+cooperative §12 checkpoint between chunks — so a multi-GB copy is
+cancellable and observable, never a frozen UI. The frozen-input law
+(str→str pairs, §10) serializes the path list as ONE JSON string.
+`discover()` also names the models ROOT (`models_root`) — the
+frontend's "open the folder" action reads it from the gateway's own
+answer, never a local guess.
 """
 
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -89,6 +107,11 @@ DEFAULT_CHUNK_BYTES = 1024 * 1024
 #: §12 material input, the chat row's CHAT_DEFAULT_DEADLINE_SECONDS
 #: pattern). The registry's ceiling still applies.
 FETCH_DEFAULT_DEADLINE_SECONDS = 3600.0
+
+#: The import run's own default deadline (wb-10 — a multi-GB LOCAL
+#: copy is minutes-class on a slow disk / a USB drive; the same band
+#: as the fetch kind, the same §12 rationale).
+IMPORT_DEFAULT_DEADLINE_SECONDS = 3600.0
 
 
 class ModelRegistryError(ValueError):
@@ -144,11 +167,15 @@ class ModelRegistry:
         (MISSING truthfully empty, CORRUPT loudly rejected by the
         handler), then the direct-child files sorted by logical_name —
         each carrying the cheap fingerprint and the strong identity
-        when one has been computed (by inspect or a digest run)."""
+        when one has been computed (by inspect or a digest run).
+        wb-10: the document also names `models_root` — the folder
+        ITSELF (the frontend's open-folder action reads it from the
+        gateway's answer, never a local guess)."""
         if not self._root.exists():
             return {
                 "directory_state": _DIRECTORY_MISSING,
                 "models": [],
+                "models_root": str(self._root),
             }
         if not self._root.is_dir():
             raise ModelRegistryError(
@@ -184,6 +211,7 @@ class ModelRegistry:
         return {
             "directory_state": _DIRECTORY_OK,
             "models": [self._document(entry) for entry in self._entries.values()],
+            "models_root": str(self._root),
         }
 
     def inspect(self, logical_name: str) -> dict[str, object]:
@@ -433,3 +461,167 @@ def model_fetch_kind(registry: ModelRegistry, fetcher: object) -> "WorkKind":
 
 def _fetch_rejected(reason: str) -> OperationRejected:
     return OperationRejected("DOMAIN_REJECTED", reason)
+
+
+# ------------------------------------------------------ the import kind
+
+
+def model_import_kind(
+    registry: ModelRegistry, chunk_bytes: int = DEFAULT_CHUNK_BYTES
+) -> "WorkKind":
+    """wb-10's work kind: land one or more LOCAL GGUF files into the
+    MODELS_ASSETS root, as a run (identity-then-poll + live progress)
+    — the engine half of the frontend's native file/folder picker
+    (the owner's «просто открывающийся проводник и выбор уже скаченных
+    локальных моделей» call). NO network anywhere: a plain local copy
+    is asset I/O, not a wire — INV-4 untouched (the fetch kind's
+    sibling without the injected fetcher).
+
+    The admission gates run BEFORE the run exists (NOT_SENT, the
+    fetch kind's own law): every path must be an ABSOLUTE path to an
+    existing regular file, its name must be plain, no destination
+    occupation, no `.part` residue, no duplicate names in one call.
+    The frozen-input law (str→str pairs, §10) serializes the path
+    list as ONE JSON string — `paths`.
+
+    The work itself streams each file through `.part` + the atomic
+    rename (crash-safe, the fetch kind's landing shape), one progress
+    report + one §12 checkpoint per chunk (a multi-GB copy is
+    cancellable and observable), the best-effort `.part` cleanup on
+    every failure path. An interrupted multi-file import leaves the
+    ALREADY-LANDED files in the folder — they are real files the next
+    discovery scan sees (honest partial arrival); the run's own
+    terminal tells the truth about the rest."""
+
+    def validate_arguments(
+        arguments: Mapping[str, object],
+    ) -> dict[str, str]:
+        unknown = sorted(set(arguments) - {"paths"})
+        if unknown:
+            raise _fetch_rejected(
+                f"model.import: unknown argument(s) {unknown} "
+                "(closed set: ['paths'])"
+            )
+        raw_paths = arguments.get("paths")
+        if not isinstance(raw_paths, list) or not raw_paths:
+            raise _fetch_rejected(
+                "model.import: paths must be a non-empty array of "
+                "absolute file paths (the frontend's file/folder picker "
+                "supplies them)"
+            )
+        seen_names: set[str] = set()
+        normalized: list[str] = []
+        for item in raw_paths:
+            if not isinstance(item, str) or not item.strip():
+                raise _fetch_rejected(
+                    "model.import: every path must be a non-empty str"
+                )
+            path = Path(item.strip())
+            if not path.is_absolute():
+                raise _fetch_rejected(
+                    f"model.import: path {item!r} is relative — the "
+                    ".git/CWD-independence law (app §16) requires "
+                    "absolute paths"
+                )
+            if not path.exists() or not path.is_file():
+                raise _fetch_rejected(
+                    f"model.import: path {str(path)!r} is not an "
+                    "existing regular file (picked in the dialog, gone "
+                    "at admission?)"
+                )
+            name = path.name
+            if (
+                not name
+                or os.sep in name
+                or (os.altsep and os.altsep in name)
+                or name in (".", "..")
+            ):
+                raise _fetch_rejected(
+                    f"model.import: name {name!r}: a plain file name "
+                    "(no path separators, never '.'/'..')"
+                )
+            if name in seen_names:
+                raise _fetch_rejected(
+                    f"model.import: {name!r} appears twice in one call "
+                    "— pick it once"
+                )
+            seen_names.add(name)
+            if (registry.root / name).exists():
+                raise _fetch_rejected(
+                    f"model.import: {name!r} already exists in the "
+                    "models directory — remove it there first (or import "
+                    "from a different file name)"
+                )
+            if registry.root.joinpath(name + ".part").exists():
+                raise _fetch_rejected(
+                    f"model.import: {name!r}.part exists — an in-flight "
+                    "or leftover partial transfer occupies the name "
+                    "(a fresh import restarts clean once it is gone)"
+                )
+            normalized.append(str(path))
+        return {"paths": json.dumps(normalized, separators=(",", ":"))}
+
+    def work(
+        context: WorkContext, inputs: Mapping[str, str]
+    ) -> Mapping[str, object]:
+        paths = json.loads(inputs["paths"])
+        file_count = len(paths)
+        landed: list[dict[str, object]] = []
+        for file_index, raw_path in enumerate(paths):
+            source = Path(raw_path)
+            name = source.name
+            total_bytes = source.stat().st_size
+            part_path = registry.root / (name + ".part")
+            final_path = registry.root / name
+            copied = 0
+            success = False
+            try:
+                with source.open("rb") as reader, part_path.open("wb") as writer:
+                    while True:
+                        context.check()
+                        chunk = reader.read(chunk_bytes)
+                        if not chunk:
+                            break
+                        writer.write(chunk)
+                        copied += len(chunk)
+                        context.progress(
+                            {
+                                "logical_name": name,
+                                "file_index": file_index,
+                                "file_count": file_count,
+                                "copied_bytes": copied,
+                                "total_bytes": total_bytes,
+                            }
+                        )
+                os.replace(part_path, final_path)
+                success = True
+            finally:
+                if not success:
+                    _remove_quietly(part_path)
+            landed.append(
+                {"logical_name": name, "size_bytes": copied}
+            )
+        return {"imported": landed, "count": len(landed)}
+
+    return WorkKind(
+        name="model.import",
+        description=(
+            "land one or more LOCAL model files into the models root "
+            "(the native-picker flow) — a run with live progress, "
+            "§20's arrival half over local I/O, no network"
+        ),
+        validate_arguments=validate_arguments,
+        work=work,
+        default_deadline_seconds=IMPORT_DEFAULT_DEADLINE_SECONDS,
+    )
+
+
+def _remove_quietly(path: Path) -> None:
+    """The honest cleanup's own half (model_fetch.py's sibling): a
+    failed/aborted import leaves NO `.part` behind (best-effort — an
+    unreadable directory surfaces at the next transfer's own open,
+    never here)."""
+    try:
+        path.unlink(missing_ok=True)
+    except OSError:
+        pass

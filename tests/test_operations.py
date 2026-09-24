@@ -916,7 +916,11 @@ def test_model_list_missing_directory_truthful(tmp_path: Path) -> None:
         RequestEnvelope(operation="model.list", arguments={})
     )
     _ok(response)
-    assert response.result == {"directory_state": "MISSING", "models": []}
+    assert response.result == {
+        "directory_state": "MISSING",
+        "models": [],
+        "models_root": str(tmp_path / "not-created"),
+    }
 
 
 def test_model_list_corrupt_slot_loud(tmp_path: Path) -> None:
@@ -1064,7 +1068,7 @@ def test_composition_registers_five_operations(tmp_path: Path) -> None:
         "app.status",
     }
     assert set(gateway.operation_names) == expected
-    assert ops.work_kinds == ("model.digest",)
+    assert ops.work_kinds == ("model.digest", "model.import")
 
 
 def test_composition_duplicate_loud(tmp_path: Path) -> None:

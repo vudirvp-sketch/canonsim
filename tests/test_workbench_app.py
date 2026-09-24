@@ -316,19 +316,40 @@ def test_the_launcher_bootstrap_creates_the_runtime_layout(
     assert bootstrap_runtime_layout(tmp_path) == []
 
 
-def test_the_launcher_resolves_the_redot_exe() -> None:
+def test_the_launcher_resolves_the_redot_exe(monkeypatch: pytest.MonkeyPatch) -> None:
+    """wb-10's resolution chain (the tuple contract: the executable +
+    the origin note). The auto-scan is pinned to an empty root list —
+    the environment's own Desktop must never leak into the claim."""
     import os
 
+    import workbench_launch
     from workbench_launch import resolve_redot_exe
 
+    monkeypatch.setattr(workbench_launch, "auto_discover_redot", lambda: None)
     try:
         os.environ.pop("REDOT_EXE", None)
-        assert resolve_redot_exe(None) is None
-        assert resolve_redot_exe("  ") is None
-        assert resolve_redot_exe("C:/Redot/Redot.exe") == "C:/Redot/Redot.exe"
+        assert resolve_redot_exe(None) == (None, "no resolution")
+        assert resolve_redot_exe("  ") == (None, "no resolution")
+        # the CLI form is strict: verbatim even when the path is
+        # absent — the spawn's own loud error, never second-guessed
+        resolved, origin = resolve_redot_exe("C:/Redot/Redot.exe")
+        assert resolved == "C:/Redot/Redot.exe"
+        assert origin == "the --redot-exe argument"
         os.environ["REDOT_EXE"] = "C:/env/Redot.exe"
-        assert resolve_redot_exe(None) == "C:/env/Redot.exe"
-        assert resolve_redot_exe("C:/cli/Redot.exe") == "C:/cli/Redot.exe"
+        resolved, origin = resolve_redot_exe(None)
+        assert resolved == "C:/env/Redot.exe"
+        assert origin == "the REDOT_EXE environment variable"
+        resolved, origin = resolve_redot_exe("C:/cli/Redot.exe")
+        assert resolved == "C:/cli/Redot.exe"
+        assert origin == "the --redot-exe argument"
+        # a stale non-strict value (the persisted pick) falls through
+        os.environ.pop("REDOT_EXE", None)
+        monkeypatch.setattr(
+            workbench_launch, "auto_discover_redot", lambda: "D:/found/redot.exe"
+        )
+        resolved, origin = resolve_redot_exe(None, persisted="gone/redot.exe")
+        assert resolved == "D:/found/redot.exe"
+        assert "auto-scan" in origin
     finally:
         os.environ.pop("REDOT_EXE", None)
 
@@ -341,8 +362,11 @@ def test_the_launcher_passes_the_gateway_args_through() -> None:
     assert args.no_redot is False
     quiet = parse_launch_args(["--no-redot"])
     assert quiet.no_redot is True and quiet.gateway_args == []
+    # the "--" separator is OURS: stripped before the child's own
+    # parser sees it (the latent wb-9 bug — a bare "--" was the
+    # gateway's own loud argparse refusal, wb-10's fix)
     passthrough = parse_launch_args(["--", "--port", "9001"])
-    assert passthrough.gateway_args == ["--", "--port", "9001"]
+    assert passthrough.gateway_args == ["--port", "9001"]
 
 
 # ------------------------------------------- wb-9: the settings family

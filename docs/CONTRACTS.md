@@ -356,6 +356,60 @@
 > iter-226 + the worklog + git. The family contract below stays
 > (wb-10..N still owner-gated rows).
 
+> **wb-10 LANDED (iter-227, the owner's 2026-09-25 fix list over the
+> wb-9 handback — the launcher's Popen `buffering` TypeError + «где
+> найти redot.exe и как его подключить?» + «просто открывающийся
+> проводник и выбор уже скаченных локальных моделей» +
+> «пользователь не должен вводить команды чтобы запустить или скачать
+> что-либо!» + «интерфейс вверх убожества»):** the ZERO-COMMAND owner
+> experience — `scripts/workbench_launch.py` reworked (the bufsize
+> fix; the FOLDER-AWARE Redot resolution: a release folder scans for
+> the engine executable — the known names in preference order
+> (redot.windows.editor.x86_64.exe first, the owner's exact binary),
+> then the sorted redot* glob, root + one folder deep; the chain:
+> --redot-exe (exe or folder) > the persisted
+> workbench/runtime/launcher.json pick > REDOT_EXE > the
+> Desktop-shaped common-roots auto-scan > the native tk folder picker
+> ONCE (the pick persists); the explicit CLI/env forms pass verbatim
+> (strict — the spawn's own loud error), the persisted pick recovers
+> when stale; the OBSERVED bind URL is forwarded to the Redot child as
+> --gateway-url — the shell dials the gateway the launcher actually
+> started; the bare "--" separator stripped before the child's parser
+> — the latent wb-9 gateway-arg bug) + the `model.import` WORK KIND
+> (models.py: a LOCAL copy into the models root — one or more
+> absolute paths, the same admission gates as the fetch (exists,
+> plain name, unoccupied, no .part residue, no duplicates — NOT_SENT),
+> the .part stream + the atomic rename, the per-file live progress
+> (logical_name/file_index/file_count/copied_bytes/total_bytes) + the
+> cooperative §12 checkpoint per chunk, the best-effort .part cleanup
+> on every failure path; NO network anywhere — INV-4 untouched, wired
+> into the default composition unconditionally) + `discover()`'s
+> `models_root` (the frontend's open-folder answer, never a local
+> guess) + the Redot half — shell.gd's native-picker Models manager
+> (Add local models… = the OS file dialog multiselect with the .gguf
+> filter over FileDialog.use_native_dialog + ACCESS_FILESYSTEM; Add
+> folder… = the OS folder dialog, the .gguf files enumerated
+> presentation-locally; Open models folder = OS.shell_open on the
+> gateway's own models_root; the URL fetch demoted to the collapsed
+> advanced row, fully functional) + the theme@0.2 visual pass (the
+> warmer surface ramp, the pill chip, the user-card accent edge, the
+> taller nav) + `Workbench.bat` / `Workbench Setup.bat` the repo-root
+> double-click entries (the python/py resolution + the honest pause
+> on failure) + project.godot 1440×900. The claim packet:
+> tests/test_model_import.py (8 — the admission gates, THE REAL
+> end-to-end local copy with the independent sha256 oracle, the
+> multi-file form, the models_root field, the kind's checkpoint/
+> progress/cancellation laws) + tests/test_workbench_launch.py (12 —
+> THE REAL SPAWN integration: the launcher process starts the real
+> gateway, observes the bind line, and stops both on SIGINT — the
+> buffering crash pinned dead; the folder resolution; the auto-scan;
+> the persisted pick; the bind-URL parse) + the pin updates
+> (test_shell_contract +3 — the import surface, the zero-command
+> entries, the theme tokens; test_workbench_app's resolution +
+> passthrough; test_operations' work_kinds/models_root). The landing
+> record: TASKS iter-227 + the worklog + git. The family contract
+> below stays (wb-11..N still owner-gated rows).
+
 **Pinned decisions** (each grounded in the brief or standing law):
 
 - D1 Runtime: Redot 26.2 LTS (`redot-26.2-stable`), Compatibility

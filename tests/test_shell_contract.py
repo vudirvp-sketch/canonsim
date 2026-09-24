@@ -273,6 +273,100 @@ def test_the_model_manager_surface_is_real() -> None:
     assert "workbench_launch.py" in text
 
 
+# ------------------------------------ wb-10: the local-import surface
+
+
+def test_the_local_import_surface_is_real() -> None:
+    """wb-10's frontend half (the owner's «просто открывающийся
+    проводник и выбор уже скаченных локальных моделей» call): the
+    NATIVE picker is the Models surface's PRIMARY flow — the OS file
+    dialog (multiselect + the .gguf filter) and the OS folder dialog
+    over the gateway's model.import work kind, the observed
+    models_root driving Open models folder, the import run polled
+    with its own tags and cancellable through run.cancel."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    # the native picker: the engine's FileDialog surface, by member
+    assert "FileDialog.ACCESS_FILESYSTEM" in text
+    assert "FileDialog.FILE_MODE_OPEN_FILES" in text
+    assert "FileDialog.FILE_MODE_OPEN_DIR" in text
+    assert "use_native_dialog = true" in text
+    # the import circuit rides the gateway's own work kind + run family
+    assert '"model.import"' in text
+    assert '_next_request_id("import-start")' in text
+    assert '_next_request_id("import-get")' in text
+    assert '_next_request_id("import-cancel")' in text
+    assert "_on_import_files_selected" in text
+    assert "_on_import_dir_selected" in text
+    assert "_on_import_start_answered" in text
+    assert "_on_import_get_answered" in text
+    assert "_on_import_cancel_pressed" in text
+    assert "_import_progress_note" in text
+    assert "import FAILED" in text
+    assert "import canceled (the truthful terminal)" in text
+    # the primary buttons + the folder-open action
+    assert "_on_add_local_pressed" in text
+    assert "_on_add_folder_pressed" in text
+    assert "_on_open_models_folder_pressed" in text
+    assert '"Add local models…"' in text
+    # the models root arrives from the gateway's own answer, never a guess
+    assert '"models_root"' in text
+    assert "OS.shell_open" in text
+    # the URL fetch demoted to the collapsed advanced row (still real)
+    assert "_on_fetch_advanced_toggled" in text
+    assert "_fetch_advanced_box.visible = _fetch_advanced_button.button_pressed" in text
+    # the poll loop serves both transfer arms
+    assert '_next_request_id("import-get"), "run.get"' in text
+
+
+def test_the_zero_command_entry_is_committed() -> None:
+    """wb-10's zero-command law (the owner's «пользователь не должен
+    вводить команды чтобы запустить или скачать что-либо!» call): the
+    double-click .bat entries live at the repo root, the offline hints
+    name Workbench.bat FIRST, and the launcher's own resolution chain
+    (the folder form + the persisted pick) is pinned in the committed
+    script."""
+    launch = REPO / "scripts" / "workbench_launch.py"
+    launch_text = launch.read_text(encoding="utf-8")
+    assert "bufsize=1" in launch_text, (
+        "the gateway child's pipe is line-buffered through Popen's "
+        "bufsize (the owner-reported TypeError: 'buffering' is not a "
+        "Popen keyword)"
+    )
+    assert "redot.windows.editor.x86_64.exe" in launch_text, (
+        "the owner's actual engine binary name is a known candidate"
+    )
+    assert "launcher.json" in launch_text
+    assert "askdirectory" in launch_text, "the native folder picker"
+    for name in ("Workbench.bat", "Workbench Setup.bat"):
+        entry = REPO / name
+        assert entry.is_file(), f"the double-click entry missing: {name}"
+        bat = entry.read_text(encoding="utf-8")
+        assert "workbench_launch.py" in bat
+        assert "cd /d \"%~dp0\"" in bat
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    assert "Workbench.bat" in shell_text, (
+        "the offline hints name the double-click form first"
+    )
+
+
+def test_the_theme_visual_refresh_landed() -> None:
+    """wb-10's visual pass: the theme@0.2 tokens the refreshed shell
+    reads by name (the pill chip, the user-card accent edge) exist in
+    the committed theme file — a renamed token is a runtime break the
+    suite must catch textually (§10's single-source law)."""
+    text = THEME.read_text(encoding="utf-8")
+    for marker in (
+        "Workbench/styles/chip",
+        "Workbench/styles/card_user",
+        "Workbench/colors/accent_soft",
+        "Workbench/constants/bar_height = 52",
+    ):
+        assert marker in text, f"the theme@0.2 token missing: {marker}"
+    assert "canon_workbench_theme@0.2" in SHELL_SCRIPT.read_text(
+        encoding="utf-8"
+    )
+
+
 # ----------------------------------- iter-224: the literal-concatenation ban
 
 

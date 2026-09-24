@@ -1,6 +1,6 @@
 """The workbench composition root (wb-5, the app spec §6.1 — the
 family's fifth row; the backend wiring wb-6, §32 step 7; the fetch
-+ settings wiring wb-9).
++ settings wiring wb-9; the local-import wiring wb-10).
 
 The law: **the composition root is the single wiring owner** —
 construct → validate dependencies → wire owners (register the
@@ -44,6 +44,12 @@ the caller's explicit value still wins); the preview/liveness
 callables stay the composition root's own (the store never imports
 the platform — §6's direction law).
 
+The wb-10 wiring (the owner's «просто открывающийся проводник и выбор
+уже скаченных локальных моделей» call): the `model.import` work kind
+— a LOCAL file copy into the models root, no network anywhere (INV-4
+untouched — the fetch kind's sibling without a fetcher), so it wires
+into the default map UNCONDITIONALLY.
+
 The registered handlers reject through the gateway's public
 `OperationRejected` carrier (DOMAIN_REJECTED — NOT_SENT, never a
 §12.1 outcome), emit their dispatch-time effects through the
@@ -86,6 +92,7 @@ from workbench.application.operations.models import (
     ModelRegistryError,
     digest_work,
     model_fetch_kind,
+    model_import_kind,
 )
 from workbench.application.settings import (
     SettingsStore,
@@ -220,6 +227,8 @@ def compose_workbench_operations(
         if fetch is not None:
             fetch_kind = model_fetch_kind(models, fetch)
             kinds[fetch_kind.name] = fetch_kind
+        import_kind = model_import_kind(models)
+        kinds[import_kind.name] = import_kind
     if not kinds:
         raise CompositionError(
             "the composition wires at least one work kind — an empty "

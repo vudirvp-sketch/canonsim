@@ -1,46 +1,50 @@
-Iteration: iter-226 (`wb-9-model-flow` — the owner's
-2026-09-26 model-flow call over the v5.2 brief: «определись где будет
-папка с llama.cpp и моделями» + «чтобы пользователь открыл воркбенч,
-зашел и загрузил модель» + «в идеале вообще мог вызвать "менеджер" и
-подтянуть модель откуда угодно» + «настройки запуска llama.cpp, флаги
-как минимум основные + список остальных скрытый или свёрнутый,
-сэмплеры всякие»): the model flow end to end — the D-208 third
-network surface `workbench/platform/model_fetch.py` (the outbound
-model-assets fetch: the URL vocabulary direct/HF/hf:, the .part
-stream + the atomic rename, the injected §12 checkpoint) + the
-`model.fetch` work kind with the run registry's live PROGRESS surface
-+ the launch-settings family (`workbench/application/settings.py` +
-backend.settings ops + the persisted workbench/runtime/settings.json)
-+ the runtime layout decision (workbench/runtime/{models,llama.cpp}/,
-gitignored) + workbench_app.py's MANAGED DEFAULT (--attached the
-opt-out) + the exe auto-discovery + scripts/workbench_launch.py the
-ONE-COMMAND launcher (the gateway + Redot) + shell.gd's REAL Settings
-surface + the Models manager.
+Iteration: iter-227 (`wb-10-owner-experience` — the owner's
+2026-09-25 fix list over the wb-9 handback: the launcher's Popen
+`buffering` TypeError + «редот у меня такой
+C:\...\Redot_v26.2-stable_windows_win64, где найти redot.exe и как
+его подключить?» + «просто открывающийся проводник и выбор уже
+скаченных локальных моделей» + «пользователь не должен вводить
+команды чтобы запустить или скачать что-либо!» + «интерфейс вверх
+убожества»): the zero-command owner experience — workbench_launch.py
+reworked (bufsize fix; the folder-aware Redot resolution: release
+folder → the engine exe, CLI/env strict-verbatim, the persisted
+workbench/runtime/launcher.json + the Desktop-shaped auto-scan + the
+native tk folder picker; the observed bind URL forwarded to the Redot
+child; the bare "--" separator stripped — the latent wb-9 gateway-arg
+bug) + the `model.import` work kind (a LOCAL copy into the models
+root: .part + atomic rename, live progress + cooperative cancel, the
+admission gates pre-run — NO network, INV-4 untouched) + discover()'s
+`models_root` + shell.gd's native-picker Models manager (Add local
+models…/Add folder… over the OS dialogs, Open models folder via
+OS.shell_open, the URL fetch demoted to the collapsed advanced row) +
+the theme@0.2 visual pass (the chip/card_user tokens, the warmer ramp)
++ Workbench.bat / Workbench Setup.bat the double-click entries.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-9 DONE) + the world track + the SoW
+(the wb family its live head, wb-10 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2258 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+2281 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent) ·
 Date: 2026-09-26 ·
-Scope: workbench/platform/model_fetch.py (new) +
-workbench/application/settings.py (new) + scripts/workbench_launch.py
-(new) + llama_process.py (the sampler flags) + execution.py (the
-progress surface) + models.py + composition.py + backend.py (the
-settings seams) + scripts/workbench_app.py (the managed default + the
-store + the discovery) + shell.gd (the real Settings + the manager) +
-the claim packets (test_model_fetch/test_settings + the pin updates)
-+ the law/routing docs (AGENTS INV-4/§8, DECISIONS D-208, TASKS,
-CONTRACTS §5, NAV, README) + the state docs — 25 paths (the 3–5 soft
-limit honestly over: the platform surface + the settings family + the
-launcher + the frontend + the claim packets + the law edits, AGENTS
-§2.3, the scope noted in the worklog).
-Track A: the wb family (wb-9 the model flow — DONE). The prior
-iterations' record: iter-225 (the Redot engine index, D-207), 224 (the
-wb-8 handback + D-206's delivery protocol), 223 (wb-8), 222 (wb-7),
-221 (wb-6), 220 (wb-5), 219 (wb-4), 218 (wb-3), 217 (wb-2),
-216/215 (wb-1). The detail lives in the worklog + git.
+Scope: scripts/workbench_launch.py (reworked) +
+workbench/application/operations/models.py (the import kind +
+models_root) + composition.py (the wiring) + shell.gd (the native
+picker + the visual pass) + workbench_theme.tres (theme@0.2) +
+project.godot (1440×900) + Workbench.bat + Workbench Setup.bat (new)
++ tests/test_model_import.py (8) + tests/test_workbench_launch.py
+(12 — THE REAL SPAWN integration: the buffering crash pinned dead) +
+the pin updates (test_shell_contract +3, test_workbench_app,
+test_operations) + the state docs — 18 paths (the 3–5 soft limit
+honestly over: the launcher rework + the import kind + the frontend
+surface + the theme + the entries + the claim packets, AGENTS §2.3,
+the scope noted in the worklog).
+Track A: the wb family (wb-10 the owner experience — DONE). The prior
+iterations' record: iter-226 (wb-9 model flow, D-208), 225 (the
+Redot engine index, D-207), 224 (the wb-8 handback + D-206's delivery
+protocol), 223 (wb-8), 222 (wb-7), 221 (wb-6), 220 (wb-5), 219
+(wb-4), 218 (wb-3), 217 (wb-2), 216/215 (wb-1). The detail lives in
+the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -94,15 +98,15 @@ wb-8 handback + D-206's delivery protocol), 223 (wb-8), 222 (wb-7),
 - **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
 - **Gate mechanics: seed 125, only the director flag changes — ON fires `director_0000`, OFF ≥3 emergent chains (baseline 24); M3 counts per endpoint, decay-dominated in magnitude** — TEST_PLAN §4 + the D-136 verdict row.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
-- **The Workbench runtime layout (wb-9/D-208): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud); the one-command entry is `scripts/workbench_launch.py` (the gateway + Redot; REDOT_EXE the env convention), `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-9 note
+- **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-10 note
 - **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 
 ## Next step
 
-**iter-226 DONE: the wb-9 model flow LANDED (D-208's third network
-surface + the model.fetch kind with live progress + the launch-settings
-family + the runtime layout + the MANAGED default + the one-command
-launcher + the real Settings surface + the Models manager).**
+**iter-227 DONE: the wb-10 owner experience LANDED (the launcher
+fixes + the folder-aware Redot resolution + the native-picker local
+model import + the theme@0.2 visual pass + the Workbench.bat
+zero-command entries).**
 
 1. wb-10+ per the family rows (app §32's ladder: live events +
    reconnect/resync + the idempotency/revision/lease tests at live
@@ -113,8 +117,12 @@ launcher + the real Settings surface + the Models manager).**
    layer now), history/diagnostics; the §11.1 replacement path
    (prepare-new → swap → retire-old over a live server — the settings
    update's next-spawn note names it); the live-build /models/load
-   re-verification against the owner's station; the CanonSim seam) —
-   the owner's call opens each row.
+   re-verification against the owner's station; the CanonSim seam;
+   the models-dir-as-launch-setting row — a Browse-settable models
+   root for the OneDrive-synced-repo layout, parked per AGENTS §2.4)
+   — the owner's call opens each row. The owner's own live
+   verification of THIS row: double-click Workbench.bat → pick the
+   Redot folder once → Add local models… → Load → chat.
 2. The remaining station rows (the owner's next engine run,
    TEST_PLAN §8.5's standing gaps + the wb-6 arm: the live-build
    /models/load + /models/unload re-verification against the

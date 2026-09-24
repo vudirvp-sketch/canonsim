@@ -12,6 +12,19 @@
 # collapsed). The shell owns presentation-local state only (CONTRACTS §5 D2):
 # no canon writes, no invented facts, no second semantic store.
 #
+# wb-10 — the owner's 2026-09-25 fix list («просто открывающийся проводник
+# и выбор уже скаченных локальных моделей» + «интерфейс вверх убожества»):
+# the Models surface's PRIMARY flow becomes the NATIVE picker — Add local
+# models… (the OS file dialog, multiselect, .gguf filter) and Add folder…
+# (the OS folder dialog; the .gguf files inside land through the same run)
+# over the gateway's model.import work kind (run.start -> run.get -> the
+# refreshed discovery list; Cancel = run.cancel — the honest §12.3 truth).
+# Open models folder rides OS.shell_open on the gateway's OWN models_root
+# answer (never a local guess). The URL fetch demotes to the collapsed
+# advanced row (still fully functional — the manager's download arm). The
+# visual pass: the token refresh (theme@0.2 — the warmer surface ramp, the
+# chip/card styleboxes) + the message cards' role styling + the taller nav.
+#
 # wb-9 — the model-flow row (the owner's 2026-09-25 «открыл воркбенч, зашел
 # и загрузил модель» + «настройки запуска llama.cpp... сэмплеры всякие»
 # calls): the Settings surface goes REAL — the llama.cpp launch settings
@@ -59,7 +72,7 @@
 #   canonism_workbench/gateway/url — that order).
 extends Control
 
-const SHELL_VERSION := "canon_shell@0.2"
+const SHELL_VERSION := "canon_shell@0.3"
 const THEME_PATH := "res://themes/workbench_theme.tres"
 const GATEWAY_CLIENT_SCRIPT := preload("res://scripts/gateway_client.gd")
 const GATEWAY_URL_SETTING := "canonism_workbench/gateway/url"
@@ -79,8 +92,13 @@ const MODEL_UNLOAD_TIMEOUT_S := 60.0
 const MODEL_ACTION_STATES := ["DISCOVERED", "SELECTED", "EVICTED"]
 # The model manager's own budgets (wb-9): the fetch run's dispatch is a
 # quick admit (identity-then-poll — the run.get reads carry the progress);
-# the poll cadence rides the shared POLL_INTERVAL_S tick.
+# the poll cadence rides the shared POLL_INTERVAL_S tick. The import run
+# (wb-10) rides the same shape — one transfer class, two arrival arms.
 const FETCH_NOTE_MAX_LENGTH := 240
+# The import dialog's filters (wb-10): .gguf first, everything else
+# second — the registry accepts any plain file, the filter is a
+# convenience, never a gate.
+const IMPORT_FILTERS := ["*.gguf ; GGUF model files", "* ; All files"]
 
 # The Settings surface's own state (wb-9): the launch-settings document
 # arrives from backend.settings (the gateway's own answer); the preview
@@ -131,6 +149,17 @@ var _fetch_cancel_button: Button
 var _fetch_status_label: Label
 var _fetch_execution := ""
 var _fetch_poll_failures := 0
+# wb-10 — the local-import circuit (the native picker) + its controls.
+var _import_dialog: FileDialog
+var _add_files_button: Button
+var _add_folder_button: Button
+var _open_folder_button: Button
+var _import_cancel_button: Button
+var _fetch_advanced_button: Button
+var _fetch_advanced_box: VBoxContainer
+var _import_execution := ""
+var _import_poll_failures := 0
+var _models_root := ""
 var _settings_scroll: ScrollContainer
 var _llama_exe_edit: LineEdit
 var _ctx_spin: SpinBox
@@ -222,6 +251,7 @@ func _build_top_bar() -> Control:
         row.add_child(spring)
 
         var badge := PanelContainer.new()
+        badge.add_theme_stylebox_override("panel", _s("chip"))
         var badge_row := HBoxContainer.new()
         badge_row.add_theme_constant_override("separation", _k("space_s"))
         badge.add_child(badge_row)
@@ -298,7 +328,7 @@ func _build_nav_rail() -> Control:
         col.add_child(spring)
 
         var version := Label.new()
-        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.1"]
+        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.2"]
         version.add_theme_font_size_override("font_size", _k("font_size_caption"))
         version.add_theme_color_override("font_color", _c("text_muted"))
         version.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -310,6 +340,7 @@ func _nav_button(label: String) -> Button:
         var btn := Button.new()
         btn.text = label
         btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+        btn.custom_minimum_size = Vector2(0, 40)
         return btn
 
 
@@ -387,17 +418,20 @@ func _build_chat_surface() -> Control:
         var composer := HBoxContainer.new()
         composer.add_theme_constant_override("separation", _k("space_s"))
         _composer_input = LineEdit.new()
-        _composer_input.text = "Offline — start scripts/workbench_launch.py (one command), then reopen"
+        _composer_input.text = "Offline — start Workbench.bat (one double-click), then reopen"
         _composer_input.editable = false
+        _composer_input.custom_minimum_size = Vector2(0, 40)
         _composer_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         composer.add_child(_composer_input)
         _send_button = Button.new()
         _send_button.text = "Send"
+        _send_button.custom_minimum_size = Vector2(96, 40)
         _send_button.disabled = true
         _send_button.pressed.connect(_on_send_pressed)
         composer.add_child(_send_button)
         _stop_button = Button.new()
         _stop_button.text = "Stop"
+        _stop_button.custom_minimum_size = Vector2(96, 40)
         _stop_button.disabled = true
         _stop_button.pressed.connect(_on_stop_pressed)
         composer.add_child(_stop_button)
@@ -430,12 +464,57 @@ func _build_models_surface() -> Control:
         toolbar.add_child(_models_active_label)
         surface.add_child(toolbar)
 
-        # wb-9 — the model manager: a URL (direct / huggingface.co / the
-        # hf: shorthand) fetches a GGUF into the models folder as a run
-        # with live progress; Cancel rides run.cancel (§12.3's truth).
-        var fetch_card := PanelContainer.new()
-        var fetch_col := VBoxContainer.new()
-        fetch_col.add_theme_constant_override("separation", _k("space_xs"))
+        # wb-10 — the model manager, the OWNER'S form: the native picker
+        # FIRST (Add local models… / Add folder… — the OS dialogs over
+        # model.import), Open models folder on the gateway's own root
+        # answer; the URL fetch demotes to the collapsed advanced row
+        # (wb-9's download arm, fully functional).
+        _import_dialog = _make_import_dialog()
+        var add_card := PanelContainer.new()
+        var add_col := VBoxContainer.new()
+        add_col.add_theme_constant_override("separation", _k("space_s"))
+        var add_row := HBoxContainer.new()
+        add_row.add_theme_constant_override("separation", _k("space_s"))
+        _add_files_button = Button.new()
+        _add_files_button.text = "Add local models…"
+        _add_files_button.tooltip_text = "Pick GGUF files anywhere on disk — the OS file dialog"
+        _add_files_button.disabled = true
+        _add_files_button.pressed.connect(_on_add_local_pressed)
+        add_row.add_child(_add_files_button)
+        _add_folder_button = Button.new()
+        _add_folder_button.text = "Add folder…"
+        _add_folder_button.tooltip_text = "Pick a folder — every .gguf inside lands as a model"
+        _add_folder_button.disabled = true
+        _add_folder_button.pressed.connect(_on_add_folder_pressed)
+        add_row.add_child(_add_folder_button)
+        _open_folder_button = Button.new()
+        _open_folder_button.text = "Open models folder"
+        _open_folder_button.tooltip_text = "The models directory in the OS file manager"
+        _open_folder_button.disabled = true
+        _open_folder_button.pressed.connect(_on_open_models_folder_pressed)
+        add_row.add_child(_open_folder_button)
+        _import_cancel_button = Button.new()
+        _import_cancel_button.text = "Cancel"
+        _import_cancel_button.tooltip_text = "Cancel the running import (the truthful §12.3 terminal)"
+        _import_cancel_button.disabled = true
+        _import_cancel_button.pressed.connect(_on_import_cancel_pressed)
+        add_row.add_child(_import_cancel_button)
+        add_col.add_child(add_row)
+        _fetch_status_label = Label.new()
+        _fetch_status_label.text = "the manager rides the gateway — start Workbench.bat (double-click) or scripts/workbench_launch.py"
+        _fetch_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
+        _fetch_status_label.add_theme_color_override("font_color", _c("text_muted"))
+        _fetch_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        _fetch_status_label.clip_text = true
+        add_col.add_child(_fetch_status_label)
+        _fetch_advanced_button = Button.new()
+        _fetch_advanced_button.text = "Download by URL… (advanced)"
+        _fetch_advanced_button.toggle_mode = true
+        _fetch_advanced_button.pressed.connect(_on_fetch_advanced_toggled)
+        add_col.add_child(_fetch_advanced_button)
+        _fetch_advanced_box = VBoxContainer.new()
+        _fetch_advanced_box.visible = false
+        _fetch_advanced_box.add_theme_constant_override("separation", _k("space_xs"))
         var fetch_row := HBoxContainer.new()
         fetch_row.add_theme_constant_override("separation", _k("space_s"))
         _fetch_input = LineEdit.new()
@@ -453,16 +532,10 @@ func _build_models_surface() -> Control:
         _fetch_cancel_button.disabled = true
         _fetch_cancel_button.pressed.connect(_on_fetch_cancel_pressed)
         fetch_row.add_child(_fetch_cancel_button)
-        fetch_col.add_child(fetch_row)
-        _fetch_status_label = Label.new()
-        _fetch_status_label.text = "the manager rides the gateway — start scripts/workbench_launch.py"
-        _fetch_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
-        _fetch_status_label.add_theme_color_override("font_color", _c("text_muted"))
-        _fetch_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-        _fetch_status_label.clip_text = true
-        fetch_col.add_child(_fetch_status_label)
-        fetch_card.add_child(fetch_col)
-        surface.add_child(fetch_card)
+        _fetch_advanced_box.add_child(fetch_row)
+        add_col.add_child(_fetch_advanced_box)
+        add_card.add_child(add_col)
+        surface.add_child(add_card)
 
         _models_scroll = ScrollContainer.new()
         _models_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -487,7 +560,7 @@ func _build_models_surface() -> Control:
         empty_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
         empty_col.add_child(empty_title)
         _models_empty_note = Label.new()
-        _models_empty_note.text = "Not scanned yet — the surface refreshes on the first open."
+        _models_empty_note.text = "No models yet — click Add local models… and pick GGUF files from your disk (or Add folder…)."
         _models_empty_note.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _models_empty_note.add_theme_color_override("font_color", _c("text_muted"))
         _models_empty_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -826,6 +899,8 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                                 _update_models_enablement()
                                 _fetch_input.editable = true
                                 _fetch_button.disabled = false
+                                _add_files_button.disabled = false
+                                _add_folder_button.disabled = false
                                 _settings_save_button.disabled = false
                                 _request_backend_settings()
                 else:
@@ -855,6 +930,18 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 _on_fetch_get_answered(document)
                 return
         if tag.begins_with("fetch-cancel-"):
+                if status != "OK":
+                        _fetch_status_label.text = "run.cancel refused: %s %s" % [
+                                _text(document.get("rejection")), _reason_of(document)
+                        ]
+                return
+        if tag.begins_with("import-start-"):
+                _on_import_start_answered(document)
+                return
+        if tag.begins_with("import-get-"):
+                _on_import_get_answered(document)
+                return
+        if tag.begins_with("import-cancel-"):
                 if status != "OK":
                         _fetch_status_label.text = "run.cancel refused: %s %s" % [
                                 _text(document.get("rejection")), _reason_of(document)
@@ -1019,6 +1106,12 @@ func _on_poll_tick() -> void:
                         {"execution_id": _fetch_execution}, _session_id
                 )
                 any_active = true
+        if _import_execution != "":
+                _client.call_operation(
+                        _next_request_id("import-get"), "run.get",
+                        {"execution_id": _import_execution}, _session_id
+                )
+                any_active = true
         if not any_active:
                 _poll_timer.stop()
 
@@ -1027,7 +1120,7 @@ func _on_transport_failed(tag: String, error: String) -> void:
         if tag == "app-status" or tag == "session-create":
                 _set_badge("CANONSIM · NOT CONNECTED", false)
                 _gateway_state_label.text = "gateway unreachable (%s)" % error
-                _empty_note.text = "Gateway unreachable — start scripts/workbench_launch.py (%s)." % error
+                _empty_note.text = "Gateway unreachable — start Workbench.bat (one double-click) or scripts/workbench_launch.py (%s)." % error
                 _settings_gateway_value.text = "unreachable · %s" % _gateway_url
                 return
         if tag == "model-list" or tag == "model-states":
@@ -1044,6 +1137,21 @@ func _on_transport_failed(tag: String, error: String) -> void:
         if tag.begins_with("fetch-start-"):
                 _reset_fetch_controls()
                 _fetch_status_label.text = "fetch dispatch transport failure (%s) — nothing sent, safe to retry" % error
+                return
+        if tag.begins_with("import-start-"):
+                _reset_import_controls()
+                _fetch_status_label.text = "import dispatch transport failure (%s) — nothing sent, safe to retry" % error
+                return
+        if tag.begins_with("import-get-"):
+                _import_poll_failures += 1
+                if _import_poll_failures >= MAX_POLL_FAILURES:
+                        _import_execution = ""
+                        _reset_import_controls()
+                        _fetch_status_label.text = "import poll abandoned after %d transport failures (%s)" % [MAX_POLL_FAILURES, error]
+                        _maybe_stop_poll_timer()
+                return
+        if tag.begins_with("import-cancel-"):
+                _fetch_status_label.text = "run.cancel transport failure (%s) — the poll continues" % error
                 return
         if tag.begins_with("fetch-get-"):
                 _fetch_poll_failures += 1
@@ -1113,9 +1221,12 @@ func _on_model_list_answered(document: Dictionary) -> void:
         if directory_state == "MISSING":
                 _models_empty_note.text = "The models directory is MISSING — the launcher's runtime/models folder is the default home; fetch or drop GGUF files there."
         var models: Array = result.get("models", []) if result.get("models") is Array else []
+        _models_root = _text(result.get("models_root"))
+        if _models_root != "":
+                _open_folder_button.disabled = false
         _rebuild_models_list(models)
         if models.is_empty():
-                _models_status_label.text = "no models discovered (%s) — fetch one above or drop GGUF files into workbench/runtime/models" % directory_state
+                _models_status_label.text = "no models discovered (%s) — Add local models… above, or drop GGUF files into %s" % [directory_state, _models_root]
         else:
                 _models_status_label.text = "%d model(s) discovered · %s" % [
                         models.size(), directory_state
@@ -1184,20 +1295,29 @@ func _model_row_card(logical_name: String, size_bytes: int) -> Control:
         col.add_child(size_label)
         row.add_child(col)
 
+        var state_row := HBoxContainer.new()
+        state_row.add_theme_constant_override("separation", _k("space_s"))
+        state_row.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+        var state_dot := ColorRect.new()
+        state_dot.color = _c("text_muted")
+        state_dot.custom_minimum_size = Vector2(8, 8)
+        state_dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+        state_row.add_child(state_dot)
         var state_label := Label.new()
         state_label.text = "DISCOVERED"
         state_label.add_theme_font_size_override("font_size", _k("font_size_secondary"))
         state_label.add_theme_color_override("font_color", _c("text_secondary"))
-        state_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-        row.add_child(state_label)
+        state_row.add_child(state_label)
+        row.add_child(state_row)
 
         var action := Button.new()
         action.text = "Load"
+        action.custom_minimum_size = Vector2(96, 0)
         action.disabled = true  # until the session + the states arrive
         row.add_child(action)
         _model_rows[logical_name] = {
                 "card": card, "state": state_label, "action": action,
-                "size": size_label,
+                "size": size_label, "dot": state_dot,
         }
         _rebind_action(logical_name, "_on_model_load_pressed")
         return card
@@ -1230,6 +1350,8 @@ func _set_model_row_state(logical_name: String, state: String) -> void:
                 "SELECTED":
                         colour = _c("status_warning")
         state_label.add_theme_color_override("font_color", colour)
+        var state_dot: ColorRect = row["dot"]
+        state_dot.color = colour
         row["observed_state"] = state
 
 
@@ -1570,8 +1692,202 @@ func _reset_fetch_controls() -> void:
 
 
 func _maybe_stop_poll_timer() -> void:
-        if _active_execution == "" and _fetch_execution == "":
+        if _active_execution == "" and _fetch_execution == "" and _import_execution == "":
                 _poll_timer.stop()
+
+
+# --- the local import circuit (wb-10 — the native picker, the owner's
+# --- «просто открывающийся проводник и выбор уже скаченных локальных
+# --- моделей» call) ------------------------------------------------------------
+
+
+func _make_import_dialog() -> FileDialog:
+        # The NATIVE picker (the OS file/folder dialog — the engine's
+        # use_native_dialog; the built-in FileDialog renders where the
+        # platform has no native surface, an honest graceful fallback).
+        # ACCESS_FILESYSTEM: the models live anywhere on disk (the
+        # Desktop downloads included), never inside res://.
+        var dialog := FileDialog.new()
+        dialog.access = FileDialog.ACCESS_FILESYSTEM
+        dialog.use_native_dialog = true
+        dialog.filters = PackedStringArray(IMPORT_FILTERS)
+        dialog.files_selected.connect(_on_import_files_selected)
+        dialog.dir_selected.connect(_on_import_dir_selected)
+        add_child(dialog)
+        return dialog
+
+
+func _on_add_local_pressed() -> void:
+        if not _session_live or _client == null:
+                return
+        if _import_execution != "" or _fetch_execution != "":
+                _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"
+                return
+        _import_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
+        _import_dialog.popup_centered()
+
+
+func _on_add_folder_pressed() -> void:
+        if not _session_live or _client == null:
+                return
+        if _import_execution != "" or _fetch_execution != "":
+                _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"
+                return
+        _import_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+        _import_dialog.popup_centered()
+
+
+func _on_open_models_folder_pressed() -> void:
+        # The gateway's OWN models_root answer (never a local guess);
+        # the OS file manager opens AT it — drop-by-hand stays a real
+        # alternative to the picker.
+        if _models_root == "":
+                _fetch_status_label.text = "the models folder path arrives with the first models scan — Refresh"
+                return
+        var err := OS.shell_open(_models_root)
+        if err != OK:
+                _fetch_status_label.text = "the OS file manager refused to open %s (error %d)" % [_models_root, err]
+
+
+func _on_import_files_selected(paths: PackedStringArray) -> void:
+        if paths.is_empty():
+                return
+        var path_list: Array = []
+        for picked in paths:
+                path_list.append(String(picked))
+        _dispatch_import(path_list)
+
+
+func _on_import_dir_selected(directory: String) -> void:
+        # The folder arm: enumerate the .gguf files INSIDE (one level,
+        # the dialog's own answer) and hand the absolute paths to the
+        # same run — presentation-local enumeration, the gateway owns
+        # the landing.
+        var names := DirAccess.get_files_at(directory)
+        var path_list: Array = []
+        for file_entry in names:
+                var file_name := String(file_entry)
+                if file_name.to_lower().ends_with(".gguf"):
+                        path_list.append(
+                                directory.rstrip("/") + "/" + file_name
+                        )
+        if path_list.is_empty():
+                _fetch_status_label.text = "no .gguf files in %s — pick the folder that holds them" % directory
+                return
+        _dispatch_import(path_list)
+
+
+func _dispatch_import(path_list: Array) -> void:
+        _add_files_button.disabled = true
+        _add_folder_button.disabled = true
+        _fetch_button.disabled = true
+        _import_cancel_button.disabled = false
+        _fetch_status_label.text = "importing %d file(s)…" % path_list.size()
+        var request_id := _next_request_id("import-start")
+        _client.call_operation(
+                request_id, "run.start",
+                {"work": "model.import", "arguments": {"paths": path_list}},
+                _session_id, request_id
+        )
+
+
+func _on_import_start_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                var result: Dictionary = document.get("result")
+                _import_execution = _text(result.get("execution_id"))
+                _import_poll_failures = 0
+                _fetch_status_label.text = "importing — the progress rides the run poll"
+                _poll_timer.start()
+                return
+        _reset_import_controls()
+        if status == "UNKNOWN":
+                _fetch_status_label.text = "import dispatch OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                return
+        _fetch_status_label.text = "model.import refused: %s %s" % [
+                _text(document.get("rejection")), _reason_of(document)
+        ]
+
+
+func _on_import_get_answered(document: Dictionary) -> void:
+        if _import_execution == "":
+                return
+        var status := _text(document.get("status"))
+        if status != "OK":
+                _import_execution = ""
+                _reset_import_controls()
+                _maybe_stop_poll_timer()
+                _fetch_status_label.text = "run.get refused: %s %s" % [
+                        _text(document.get("rejection")), _reason_of(document)
+                ]
+                return
+        if not (document.get("result") is Dictionary):
+                return
+        var result: Dictionary = document.get("result")
+        if not bool(result.get("terminal", false)):
+                var progress: Dictionary = (
+                        result.get("progress", {}) if result.get("progress") is Dictionary else {}
+                )
+                _fetch_status_label.text = _import_progress_note(progress)
+                return
+        _import_execution = ""
+        _reset_import_controls()
+        _maybe_stop_poll_timer()
+        var state := _text(result.get("state"))
+        var run_result: Dictionary = (
+                result.get("result", {}) if result.get("result") is Dictionary else {}
+        )
+        match state:
+                "COMPLETED":
+                        var imported: Array = (
+                                run_result.get("imported", []) if run_result.get("imported") is Array else []
+                        )
+                        _fetch_status_label.text = "imported %d model(s) — refreshing the list" % imported.size()
+                        _refresh_models()
+                "FAILED":
+                        _fetch_status_label.text = "import FAILED · %s" % _first_diagnostic(result)
+                "CANCELED":
+                        _fetch_status_label.text = "import canceled (the truthful terminal)"
+                _:
+                        _fetch_status_label.text = "import terminal state %s (unmodelled — shown, never collapsed)" % state
+
+
+func _on_import_cancel_pressed() -> void:
+        if _import_execution == "" or _client == null:
+                return
+        var request_id := _next_request_id("import-cancel")
+        _client.call_operation(
+                request_id, "run.cancel",
+                {"execution_id": _import_execution}, _session_id, request_id
+        )
+
+
+func _import_progress_note(progress: Dictionary) -> String:
+        var name_value := _text(progress.get("logical_name"))
+        var file_index := int(progress.get("file_index", 0)) + 1
+        var file_count := int(progress.get("file_count", 1))
+        var copied := int(progress.get("copied_bytes", 0))
+        var total := int(progress.get("total_bytes", 0))
+        if total > 0:
+                var percent := int(float(copied) * 100.0 / float(total))
+                return "importing %s (%d/%d) — %d%% (%s / %s)" % [
+                        name_value, file_index, file_count, percent,
+                        _format_size(copied), _format_size(total)
+                ]
+        return "importing %s (%d/%d) — %s" % [
+                name_value, file_index, file_count, _format_size(copied)
+        ]
+
+
+func _reset_import_controls() -> void:
+        _add_files_button.disabled = not _session_live
+        _add_folder_button.disabled = not _session_live
+        _import_cancel_button.disabled = true
+        _reset_fetch_controls()
+
+
+func _on_fetch_advanced_toggled() -> void:
+        _fetch_advanced_box.visible = _fetch_advanced_button.button_pressed
 
 
 # --- the chat surface's local actions ----------------------------------------
@@ -1666,7 +1982,20 @@ func _add_message_card(role: String, content: String) -> void:
 
 
 func _message_card(role: String, content: String) -> Control:
+        # The role styling (wb-10's visual pass): the user's card carries
+        # the accent edge (card_user), the assistant's the plain card, a
+        # system note is a bare muted line — no card, never noise.
+        if role == "system":
+                var note := Label.new()
+                note.text = content
+                note.add_theme_font_size_override("font_size", _k("font_size_caption"))
+                note.add_theme_color_override("font_color", _c("text_muted"))
+                note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+                note.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+                return note
         var card := PanelContainer.new()
+        if role == "user":
+                card.add_theme_stylebox_override("panel", _s("card_user"))
         var col := VBoxContainer.new()
         col.add_theme_constant_override("separation", _k("space_xs"))
         card.add_child(col)
