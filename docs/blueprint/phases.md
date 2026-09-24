@@ -3251,6 +3251,119 @@ motivation measured in its place; the fate the owner's call
 (scav-1's measurement-before-mechanism precedent stands). Zero
 format changes; the build queue otherwise UNTOUCHED.
 
+**The cross-domain principle document routed (intake-38, iter-214-doc7,
+D-199 — the owner's «тогда вперед сажай intake-38 над „Междоменной“»
+call over the uploaded research-method text: the 552-line "CanonSim —
+Cross-Domain Principle Transplantation" doctrine — the purpose + 23
+sections + the governing principle; verified against HEAD `ff9ccbb`
+before routing, the baseline triple green at both ends (2041+1, ruff,
+docguard); the document itself stays outside the repo, the
+convenience-copy law).** The verdict: CONFIRMED-owned — the doctrine
+is the standing discipline's own live form, the corpus family's
+doctrine-level sibling (its §8/§9 method atoms the very families
+intakes 34..37 landed or parked), the second full external
+restatement and the strongest convergence yet.
+
+*Confirmed (owned, re-verified at HEAD):* §1's class/disposition pair
+= TEST_PLAN §9's two axes (doc-5's landing); §3's transplantation
+pipeline = D-024's own test; §4's falsification filter = the
+do-not-import grammar's rejection shapes; §5's research-control loop
+= the §9 claim packet's own order; §6's constraint = D-142's
+admission law over the INV fence; §18's five-part material verdict
+test = BLUEPRINT §2 L15 verbatim (principle / form / quality /
+transfer / combined design); §19's runtime-promotion gate = AGENTS
+§2.8's admission ladder; §20's anti-pattern list = the binding
+do-not-import list nearly verbatim (second canonical store, generic
+provenance/causal graph, global truth/risk/confidence score, permanent
+diagnostic types — each already REJECTED on measured grounds); §21's
+persistence law = D-185's own form, the same owners named; §22's
+session completion contract = the handoff report's shape.
+
+*The §8/§9 method families — CONFIRMED-owned through intakes 34..37:*
+counterfactual ablation → the `--systems-minus` family + the
+empty-ablation rule; perturbation propagation → the one-knob prism;
+the peripheral observer probe → the blind suites + the
+knowledge/perception boundary; materialized causal residue → INV-1's
+own shape (the log the truth, the state the fold — the past causally
+present through changed state, never a second store); heterogeneous
+agency → depth-6's objective-function triangle + D-196's C05 routing;
+bounded causal traversal + CEGAR → mech-2's design material; mutation
+adequacy → §9's mutation-probe row + the path-bound law (intake-37's
+measured lesson); positive/negative/sham controls → the
+generalized-controls hypothesis (HYPOTHESIS/DEFERRED, the
+empty-ablation rule the first landed instance); the
+realized-intervention gate → the empty-ablation rule itself, iter-198's
+A/B falsifier the standing measured instance (the injected gate moved
+none of the three metrics — a failed experiment, never zero causal
+effect); minimal pairs → INV-3's pack-declaration gate + engine-1's
+arms; delta debugging → the assurance plane's PROPOSED row, its
+promotion trigger named; translation validation → the
+representation-transforms row's own pattern (DEFERRED); the
+deterministic fault curriculum → the deviation corpus's fault
+families; CRN/paired seeds → CONFIRMED as methodology (the measured
+pair-variance ratios).
+
+*The fresh residue (the genuinely unsurfaced atoms — parked per
+D-175, zero new rows, each behind its named first consumer):*
+
+1. **Held-out transfer** — the only §9 method with no current owner
+   surface (acquisition contexts → freeze relevant state → held-out
+   contexts/packs → evaluate; familiarity ≠ transferable competence);
+   the §14 form already parks in the capability/progression consult
+   card (D-194) — HYPOTHESIS, the trigger: a first capability or
+   learning claim whose acquisition and evaluation share the corpus
+   (engine-1's {3–8B} GBNF corpus the natural first instance).
+2. **The experiment contract's unfilled fields** — §11's 17-field
+   contract over the §9 claim packet: STOPPING RULE / SPILLOVER /
+   BLOCKED-NUISANCE have no packet surface yet (trace identity ≈ the
+   packet's scenario + corpus) — PROPOSAL/UNRESOLVED beside the
+   deletion criterion (intake-35's precedent: the field waits for a
+   claim packet that actually needs it, the first-consumer law).
+3. **Evidence-independence audit** — independent re-derivation's
+   multi-evidence generalization (confirmations sharing root /
+   assumption / metric / observation boundary are not independent) —
+   HYPOTHESIS, the trigger: a first claim resting on two or more
+   confirmations.
+4. **Metric anti-Goodhart test** — the two-question form (can the
+   metric move without the phenomenon; the phenomenon without the
+   metric) — the §9 metric rows carry the decoy/oracle vocabulary,
+   not this shape — PROPOSAL, the trigger: a first metric-led claim.
+5. **§12's residual relation-lens** — the verification grammar's 24
+   lens, the majority already owned (canonical authority = the canon
+   door; observation boundary = the blind suites; semantic lowering =
+   L6/EPIST-1; retry-safe admission = the idempotency law;
+   authority/truth separation = the fact/belief split; freshness =
+   the derived-state law; mutation adequacy = the probe; realized
+   intervention = the empty-ablation rule; metamorphic equivalence =
+   the order probes; counterexample preservation = the capsule law);
+   the residual set parks as consult vocabulary, never a production
+   feature (the document's own clause).
+
+*The corroborating record:* a second agent's independent full-corpus
+pass over the same 20-file archive (the owner's cross-review request,
+2026-09-24) reached the same core verdict — mechanisms, never
+architecture; TITAN/Guardian/SAE a donor catalog, never a second
+control plane — and independently reproduced the archive's own
+contradictions (the `AGENT_PROTOCOL_ULTIMATE v1.1.yaml` claiming
+machine-readable YAML while failing `yaml.safe_load` at line 3; the
+CONSENSUS_SCORE 99/100 self-assessments; «сведенные анализы» citing
+documents absent from the archive). Its ADOPT list predates the
+intake-34..37 absorption — the "new" mechanisms (mutation adequacy,
+realized-intervention, sham controls, CEGAR, delta debugging, CRN)
+already landed or parked with measured evidence; the review's value
+is the second independent confirmation of the family dispositions
+(intake-35's own precedent), recorded as this intake's corroboration,
+never a parallel plan. Its 15-question donor filter restates
+D-024 + D-175 — correctly NOT planted (no second tree, D-194's
+refusal stands).
+
+*The routing:* ZERO rows convened (D-175 — no fresh residue names a
+standing open row); zero build-grade items; the build queue
+UNTOUCHED; TEST_PLAN §9's claim-shape table untouched (the
+first-consumer law — a new lens enters only after a claim packet used
+it); the document never enters REFERENCES (a research-method text,
+not a donor source — the intake-34/36/37 class).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

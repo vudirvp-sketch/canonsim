@@ -1,31 +1,34 @@
-Iteration: iter-213 (`iter-213-doc6` — the CP-migration family's
-acceptance, the owner's continuation call over STATUS Next step 1):
-the family CLOSED — doc-4 (iter-211: the external CP document's
-durable layer → AGENTS §2/§10/§11/§12 + NAV §2; D-113's chat-side
-placement superseded), doc-5 (iter-212: TEST_PLAN §9's claim-side
-epistemic classes FACT/INFERENCE/HYPOTHESIS/PROPOSAL/UNKNOWN beside
-the disposition vocabulary + BLUEPRINT §2 L15 the five-part design
-test), doc-6 (this iteration) the acceptance collapse — the D-198
-family row carries the closure marker, the ledger/state docs at the
-minimal current-state form; the minimal-invocation artifact delivered
-CHAT-SIDE (never a repo file — the convenience-copy law): the
-repository + task-words form, the big bootstrap prompts retired.
+Iteration: iter-214 (`iter-214-doc7` — intake-38, the owner's «тогда
+вперед сажай intake-38 над „Междоменной“» call): the cross-domain
+principle document routed per the transplantation test (D-024) —
+CONFIRMED-owned: the doctrine the standing discipline's own live
+form (§18's five-part test = BLUEPRINT §2 L15; §19 = AGENTS §2.8;
+§20 = the binding do-not-import list; §21 the same owners named),
+the §8/§9 method families landed or parked through intakes 34..37;
+the fresh residue parked per D-175, zero new rows — held-out transfer
+(HYPOTHESIS, engine-1's corpus the natural first consumer), the
+experiment-contract fields stopping-rule/spillover/blocked-nuisance
+(PROPOSAL/UNRESOLVED beside the deletion criterion),
+evidence-independence + metric anti-Goodhart (each behind its first
+consumer), §12's residual lens as consult vocabulary; a second
+agent's independent corpus pass recorded as the corroboration. The
+document stays outside the repo (the convenience-copy law); D-199
+rides the intake family row.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-212 state and
+the env pin; verified before the change at the iter-213 state and
 after) ·
 Date: 2026-09-24 ·
-Scope: docs/DECISIONS.md + docs/TASKS.md + STATUS.md + worklog.md —
-4 paths doc-only (the state docs; the D-022 exception honest: the
-owner's fresh continuation request; zero code, zero pack change, the
-LOG untouched).
-Track A: the CP-migration family COMPLETE (doc-4/5/6; D-198 closed —
-the invocation target now repository + task words). The prior
-iterations' record: iter-212 (doc-5), 211 (doc-4), 210 (proberead),
-209 (remeasure), 208 (humanread). The detail lives in the worklog +
-git.
+Scope: docs/blueprint/phases.md + docs/DECISIONS.md + docs/TASKS.md +
+STATUS.md + worklog.md — 5 paths doc-only (the state docs; the D-022
+exception honest: the owner's fresh intake request; zero code, zero
+pack change, the LOG untouched).
+Track A: intake-38 DONE (D-199 — the fresh residue all parked, zero
+live residue). The prior iterations' record: iter-213 (doc-6), 212
+(doc-5), 211 (doc-4), 210 (proberead), 209 (remeasure). The detail
+lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -82,10 +85,12 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-213 DONE: the CP-migration family's acceptance (doc-6) —
-doc-4/5/6 CLOSED, the D-198 family marker landed; the
-minimal-invocation artifact (repository + task words) delivered
-chat-side — the big bootstrap prompts retired.**
+**iter-214 DONE: intake-38 — the cross-domain principle document
+routed (D-199): CONFIRMED-owned, the fresh residue parked per D-175
+(held-out transfer / stopping-rule + spillover + nuisance /
+evidence-independence / anti-Goodhart — each behind its named first
+consumer), zero new rows; the second agent's corpus pass the
+corroboration.**
 
 1. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
@@ -106,7 +111,7 @@ chat-side — the big bootstrap prompts retired.**
    the SoW horizon (bg-6, owner-deferred —
    long-parked per the owner's 2026-09-21 call). New rows enter on the
    owner's call only.
-3. The intake-34/35/36 residues (each behind its own trigger, never a
+3. The intake-34/35/36/38 residues (each behind its own trigger, never a
    default): the ref-file deep record — a named row consuming a
    specific math-catalog or guide29 mechanism family (the per-card
    pass done at intake-35, the families re-confirmed at HEAD;
@@ -114,4 +119,9 @@ chat-side — the big bootstrap prompts retired.**
    residues — phases.md §6); the road-traffic depth-7 rider's
    evaluation grammar now carries intake-36's P01+P03 consult
    (capacity ≠ existence, the edge-perturbation discriminant, the
-   fracture regime-change test — phases.md §6's intake-36 block).
+   fracture regime-change test — phases.md §6's intake-36 block);
+   the intake-38 candidates (held-out transfer behind engine-1's
+   corpus arms; the contract fields stopping-rule/spillover/nuisance
+   behind the first claim packet that needs them — phases.md §6's
+   intake-38 block, each behind its named first consumer, never a
+   default).
