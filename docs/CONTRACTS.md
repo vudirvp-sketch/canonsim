@@ -149,6 +149,37 @@
 > worklog + git. The G1..G7 pinned decisions, verbatim, in git
 > history at the iter-219 contract commit (23a3251). The family
 > contract below stays (wb-5..N still owner-gated rows).
+> **wb-5 LANDED (iter-220, the owner's «продолжай работу» continuation
+> call over the v5.2 brief):** the minimal application operations
+> (app §32 step 5) — `workbench/application/operations/` the
+> Python-side package: `lifecycles.py` (§11's four closed state
+> machines — Application/Backend/Model/Execution with the legal-
+> transition tables, the terminal semantics = the empty successor
+> set, the invalid-transition loudness; §25's FAILED_SHUTDOWN +
+> the process-loss UNKNOWN branches resolved), `execution.py` (§12's
+> absolute `OperationDeadline` — one per logical operation, frozen at
+> admission, remaining budget the only lower-layer view; the
+> cooperative `CancellationToken` + `WorkContext.check()`; the
+> in-memory `ExecutionRegistry`: admit freezes the §10 inputs BEFORE
+> any side effect, launch walks STARTING + spawns the daemon worker,
+> the truthful terminal close — the late result lands FAILED_TO_CANCEL
+> with the result recorded, the checkpoint abort CANCELED, the
+> deadline/anomalous raises FAILED, `mark_unknown` the §25 surface),
+> `models.py` (§20's discovery half over the §16 MODELS_ASSETS role:
+> the scan with the cheap fingerprint screen, `inspect`'s fresh §9
+> strong identity, `digest_work` the one real work kind — §20's
+> computed-when-needed long arm with the §12 checkpoints between
+> chunks), `composition.py` (§6.1's single wiring owner: the five
+> registered operations run.start/get/cancel + model.list/inspect,
+> the injectable work kinds; chat.send honestly NOT registered — its
+> consumer is the backend row, app §32 step 7, the admission law)
+> + the gateway's two targeted edits (`OperationRejected` the public
+> rejection carrier — the closed vocabulary enforced at raise time;
+> `OperationEffects` the session-scoped OPERATION_EFFECT surface on
+> the dispatch context). The claim packet: `tests/test_operations.py`
+> (46 tests). The landing record: TASKS iter-220 + the worklog +
+> git. The family contract below stays (wb-6..N still owner-gated
+> rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 
@@ -213,4 +244,8 @@ metadata carries the identity fields, the double-run PNG byte-diff).
 owner-gated per row): wb-1 the vertical seam (this contract's first
 consumer); wb-2 the Redot shell + theme; wb-3 the application
 operations skeleton; wb-4 the gateway (INV-4's owner-gated exception);
-wb-5+ per the brief's §32/§46 ladders.
+wb-5 the minimal application operations (app §32 step 5 — the
+operations substrate + the run/model-discovery families over the
+registered surface); wb-6+ per the brief's §32/§46 ladders (live
+events + reconnect/resync; persistence; the backend row — chat,
+models, inference; history/diagnostics; the CanonSim seam).

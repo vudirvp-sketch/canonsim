@@ -1,47 +1,52 @@
-Iteration: iter-219 (`iter-219-wb4-gateway` — the inbound
-gateway, the owner's «продолжай работу» continuation
-call over the v5.2 brief, the family's fourth row, INV-4's
-owner-gated exception): app §32 step 4's second half CLOSED — the
-one inbound Workbench gateway over application operations, the
-contract written FIRST (G1..G7 at commit 23a3251): `workbench/api/`
-— `contract.py` (the §8 envelopes + the closed vocabularies: the
-8-member rejection set, the exposure axis, the §12.1 status→outcome
-mapping, the event types; the strict closed-document roundtrip),
-`gateway.py` (the SOCKET-FREE dispatch core — auth → idempotency
-→ revision/lease → operation → outcome: the recorded-outcome replay =
-one effect, DUPLICATE_REQUEST the conflicting reuse, STALE_REVISION
-the stale writer, LEASE_EXPIRED the monotonic window, a mutating
-raise after admission = SENT_OUTCOME_UNKNOWN recorded so the blind
-retry is blocked, a read raise = RUNTIME_FAILED; the ordered
-per-session events + the RESYNC_REQUIRED law; the in-memory
-session-translation seed session.create/get/attach/detach/events +
-app.status; the typed OperationSpec registration surface — wb-5+'s
-composition point), `transport.py` (the loopback HTTP binding —
-INV-4's second sanctioned module per D-201, the architecture-test
-exception + the AGENTS §4/§8 two-surface rewording riding).
+Iteration: iter-220 (`iter-220-wb5-operations` — the
+minimal application operations, the owner's «продолжай работу»
+continuation call over the v5.2 brief, the family's fifth row):
+app §32 step 5 CLOSED — the operations substrate + the
+run/model-discovery families over the wb-4 registered surface:
+`workbench/application/operations/` — `lifecycles.py` (§11's four
+closed state machines: the legal-transition tables, the terminal
+semantics = the empty successor set, the invalid-transition
+loudness; §25's FAILED_SHUTDOWN + the process-loss UNKNOWN branches
+resolved), `execution.py` (§12's absolute OperationDeadline frozen
+at admission — the remaining budget the only lower-layer view, the
+cooperative CancellationToken + WorkContext.check(); the in-memory
+ExecutionRegistry: admit freezes the §10 inputs BEFORE any side
+effect, launch walks STARTING + spawns the daemon worker, the
+truthful terminal close — the late result FAILED_TO_CANCEL with
+the result recorded, the checkpoint abort CANCELED, the deadline/
+anomalous raises FAILED, mark_unknown the §25 surface), `models.py`
+(§20's discovery half over the §16 MODELS_ASSETS role: the scan +
+the cheap-fingerprint screen, inspect's fresh §9 strong identity,
+digest_work the one real work kind), `composition.py` (§6.1's
+single wiring owner: run.start/get/cancel + model.list/inspect
+registered; chat.send honestly NOT registered — the backend row's
+consumer, the admission law) + gateway.py's two targeted edits
+(OperationRejected the public rejection carrier, OperationEffects
+the session-scoped OPERATION_EFFECT surface).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-4 DONE) + the world track + the SoW
+(the wb family its live head, wb-5 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2113 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+2159 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent; with REDOT_EXE set
-the suite reads 2118+1) ·
+the suite reads 2164+1) ·
 Date: 2026-09-24 ·
-Scope: workbench/api/ (4 new: __init__ + contract + gateway +
-transport) + tests/test_gateway.py (36 tests) +
-tests/test_architecture.py (the NETWORK_EXCEPTIONS two-module pin) +
-pyproject.toml (workbench.api) + AGENTS.md (§4/§8 INV-4's
-two-surface rewording) + the state docs (CONTRACTS/TASKS/DECISIONS/
-NAV/README/worklog + this file) — 13 paths (the 3–5 soft limit
-honestly over: the row is a full contract slice — the exception's
-own contract + the three-module package + the claim packet + the
-INV-4 law edits, the scope noted in the worklog; zero core change,
-zero pack change, the LOG untouched, no outbound surface —
-cli/engine.py unchanged, D-193's form preserved).
-Track A: wb-4 DONE. The prior iterations' record: iter-218 (wb-3
-skeleton), 217 (wb-2 redot shell), 216 (wb-1 redot), 215 (wb-1
-python). The detail lives in the worklog + git.
+Scope: workbench/application/operations/ (5 new: __init__ +
+lifecycles + execution + models + composition) +
+workbench/api/gateway.py (the two targeted composition-point edits) +
+tests/test_operations.py (46 tests) + pyproject.toml
+(workbench.application.operations) + the state docs (CONTRACTS/
+TASKS/DECISIONS/NAV/README/worklog + this file) — 15 paths (the 3–5
+soft limit honestly over: the row is a full contract slice — the
+substrate + two families + the composition root + the claim packet,
+AGENTS §2.3, the scope noted in the worklog; zero core change, zero
+pack change, the LOG untouched, INV-4's two-surface form unchanged —
+no new network module, cli/engine.py and workbench/api/transport.py
+stay the only sanctioned surfaces).
+Track A: wb-5 DONE. The prior iterations' record: iter-219 (wb-4
+gateway), 218 (wb-3 skeleton), 217 (wb-2 redot shell), 216 (wb-1
+redot), 215 (wb-1 python). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -99,26 +104,28 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-219 DONE: wb-4's inbound gateway — app §32 step 4's second
-half CLOSED (the one inbound Workbench gateway over application
-operations, INV-4's owner-gated exception landed as the two-surface
-form, D-201): the contract written first (G1..G7, commit 23a3251),
-the Python-side package under `workbench/api/` (contract + the
-socket-free gateway core + the loopback transport), the 36-test
-claim packet landed; the §8 rejection vocabulary closed and
-enforced where the seed exercises it, the recorded-outcome replay =
-one effect, the §12.1 dispatch-outcome mapping honest (a mutating
-raise after admission is SENT_OUTCOME_UNKNOWN, the blind retry
-blocked), the ordered events + RESYNC_REQUIRED law, the
-direct-vs-HTTP byte parity; the epistemic class FACT, the
-disposition CONFIRMED. wb-4 row DONE.**
+**iter-220 DONE: wb-5's minimal application operations — app §32
+step 5 CLOSED (the operations substrate + the run/model-discovery
+families over the wb-4 registered surface, D-202): the §11
+lifecycle vocabularies closed with invalid-transition loudness, the
+§12 absolute-deadline/cancellation machinery executable, the run
+registry landing the §10 artifact-before-side-effects freeze with
+§12.3's truthful cancellation, the model family's discovery half
+with the §9 identity laws, the §6.1 composition root the single
+wiring owner — one real work kind (model.digest) making the
+execution substrate machinery in use; chat.send honestly deferred
+to the backend row (the admission law); the 46-test claim packet
+landed (the spawn-failure SENT_OUTCOME_UNKNOWN integration, the
+independent-sha256 oracle, the direct-vs-HTTP parity, the
+cross-seed pair); the epistemic class FACT, the disposition
+CONFIRMED. wb-5 row DONE.**
 
-1. wb-5+ per the family rows (app §32's ladder: minimal application
-   operations + the typed API contract over the registered surface —
-   the run/chat/model families over the wb-3 skeleton; live events +
+1. wb-6+ per the family rows (app §32's ladder: live events +
    reconnect/resync + the idempotency/revision/lease tests at live
-   scale; frontend §46's Phase-A remainder) — the owner's call opens
-   each row.
+   scale; persistence CAS + recovery roles; the backend row —
+   capability-aware inference/configuration + model identity/loading
+   (chat.send's consumer); frontend §46's Phase-A remainder) — the
+   owner's call opens each row.
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse

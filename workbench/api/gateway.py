@@ -77,6 +77,7 @@ from workbench.api.contract import (
     EXPOSURES,
     GATEWAY_SCHEMA_IDENTITY,
     OPERATION_KINDS,
+    REJECTIONS,
     EventEnvelope,
     GatewayContractError,
     RequestEnvelope,
@@ -192,8 +193,10 @@ class OperationContext:
     """What an operation handler receives: the operation name, the
     dispatch's logical operation identity, the idempotency key, the
     validated arguments, the resolved session view when
-    session-scoped, and the wired clock (§17 — handlers read the
-    domains through it, never the host clock)."""
+    session-scoped, the wired clock (§17 — handlers read the domains
+    through it, never the host clock), and — for session-scoped
+    operations — the event surface (`effects`, wb-5: the handler's
+    OPERATION_EFFECT declaration path into §13's ordered stream)."""
 
     operation: str
     operation_id: str
@@ -201,10 +204,36 @@ class OperationContext:
     arguments: Mapping[str, object]
     session: SessionView | None
     clock: AppClock
+    effects: OperationEffects | None = None
 
 
 #: The registered handler signature: context -> result document.
 OperationHandler = Callable[[OperationContext], Mapping[str, object]]
+
+
+class OperationEffects:
+    """The REGISTERED operations' event surface (wb-5): one method,
+    `effect(payload)`, appending an OPERATION_EFFECT event into the
+    dispatching session's ordered stream (§13 — the gateway owns the
+    stream and its sequence; the handler only declares the effect).
+
+    Constructed by the gateway for session-scoped operations only;
+    non-session-scoped operations get None (no session, no stream —
+    there is nothing to append to, and using it is a loud None
+    dereference, never a quiet drop)."""
+
+    __slots__ = ("_emit_effect",)
+
+    def __init__(
+        self, emit_effect: Callable[[Mapping[str, object]], None]
+    ) -> None:
+        self._emit_effect = emit_effect
+
+    def effect(self, payload: Mapping[str, object]) -> None:
+        """Declare one operation effect: the payload must be JSON-safe
+        (the EventEnvelope's own closed-document law — a violation is
+        loud at the append, never a silent drop)."""
+        self._emit_effect(dict(payload))
 
 
 @dataclass(frozen=True)
@@ -274,6 +303,24 @@ class _Rejected(Exception):
         super().__init__(reason)
         self.rejection = rejection
         self.reason = reason
+
+
+class OperationRejected(_Rejected):
+    """The REGISTERED operations' public rejection carrier (wb-5):
+    raise this from a handler to reject with a member of the closed
+    §8 vocabulary — the same pipeline path the builtins ride (the
+    `except _Rejected` arm passes it through UNMAPPED: a rejection is
+    NOT_SENT, never a §12.1 dispatch outcome), the membership
+    enforced at raise time (an invented member is a construction
+    bug, loud)."""
+
+    def __init__(self, rejection: str, reason: str) -> None:
+        if rejection not in REJECTIONS:
+            raise GatewayError(
+                f"OperationRejected: {rejection!r} is not a member of "
+                f"the closed rejection set {sorted(REJECTIONS)}"
+            )
+        super().__init__(rejection, reason)
 
 
 class Gateway:
@@ -547,6 +594,7 @@ class Gateway:
                 else None
             ),
             clock=self._clock,
+            effects=self._effects_for(session, operation_id),
         )
         try:
             result = spec.handler(context)
@@ -580,6 +628,27 @@ class Gateway:
             revision=session.revision if session else None,
             sequence=session.last_sequence if session else None,
         )
+
+    def _effects_for(
+        self, session: _Session | None, operation_id: str
+    ) -> OperationEffects | None:
+        """The session-scoped event surface for registered handlers
+        (wb-5): the gateway keeps the stream and its sequence — the
+        handler's `effect(payload)` appends an OPERATION_EFFECT into
+        the dispatching session's ordered stream. None for
+        non-session-scoped operations (no session, no stream)."""
+        if session is None:
+            return None
+
+        def _emit_effect(payload: Mapping[str, object]) -> None:
+            self._emit(
+                session,
+                "OPERATION_EFFECT",
+                operation_id=operation_id,
+                payload=payload,
+            )
+
+        return OperationEffects(_emit_effect)
 
     def _response(
         self,
