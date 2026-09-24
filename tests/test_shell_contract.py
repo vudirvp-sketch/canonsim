@@ -170,14 +170,29 @@ def test_the_models_surface_contract() -> None:
     for op in ('"model.list"', '"model.states"', '"model.load"',
                '"model.unload"'):
         assert op in text, f"the Models surface must call {op}"
-    # The honest budgets: the managed load is minutes-class.
-    assert "MODEL_LOAD_TIMEOUT_S := 420.0" in text
-    assert "MODEL_UNLOAD_TIMEOUT_S := 60.0" in text
+    # wb-11: the load/unload circuits are RUNS (identity-then-poll) —
+    # the per-call 420s/60s budgets died with the synchronous call
+    # (the freeze chain's client-side half: the one-request queue can
+    # never again wedge behind a minutes-class load).
+    assert "MODEL_LOAD_TIMEOUT_S" not in text
+    assert "MODEL_UNLOAD_TIMEOUT_S" not in text
+    assert '_next_request_id("model-load-get")' in text
+    assert '_next_request_id("model-unload-get")' in text
+    assert "_on_model_load_get_answered" in text
+    assert "_on_model_unload_get_answered" in text
     assert "MODEL_ACTION_STATES" in text
     # The truthful notes (the honest surface, never fakes).
     assert "OUTCOME UNKNOWN" in text
     assert "model.load refused" in text
     assert "model.states refused" in text
+    # The FAILED diagnostics note carries the observed cause (§21).
+    assert "load FAILED · " in text
+    # wb-11: the honest picker/load guards — never a silent return
+    # (§18: the effective state is named).
+    assert "the models manager needs a live gateway session" in text
+    assert "the load action needs a live gateway session" in text
+    # wb-11: a failed scan re-arms — the empty list never sticks.
+    assert "_models_requested = false" in text
     # The lifecycle states surface by name (D-203's gap shown, not hidden).
     assert '"FAILED"' in text
     assert "_on_model_load_pressed" in text

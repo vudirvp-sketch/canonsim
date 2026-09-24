@@ -83,13 +83,16 @@ const CHAT_ROLES := ["user", "assistant"]
 const POLL_INTERVAL_S := 0.3
 const MAX_MESSAGES := 500
 const MAX_POLL_FAILURES := 10
-# The Models surface's own budgets (§12: the caller's honest deadline):
-# a managed model.load = spawn + weight load (minutes-class — the
-# launcher's 300s readiness budget + the honest margin); an unload
-# carries the managed graceful stop (10s grace + the observed margin).
-const MODEL_LOAD_TIMEOUT_S := 420.0
-const MODEL_UNLOAD_TIMEOUT_S := 60.0
+# The Models surface's loadable resting states (the ladder's own
+# vocabulary — MODEL_ACTION_STATES feeds the row's Load enablement).
 const MODEL_ACTION_STATES := ["DISCOVERED", "SELECTED", "EVICTED"]
+# wb-11 — model.load/unload dispatch as RUNS (the owner's «молча
+# висят + транспорт результ 13» call): the dispatch is a fast admit
+# (identity-then-poll, the chat.send/import shape) — the minutes-class
+# spawn/readiness walk rides run.get on the shared tick, and NO call
+# ever wedges the one-request queue behind a long load again (the
+# per-call 420s/60s budgets died with the synchronous call).
+const MODEL_LOAD_NOTE_MAX_LENGTH := 240
 # The model manager's own budgets (wb-9): the fetch run's dispatch is a
 # quick admit (identity-then-poll — the run.get reads carry the progress);
 # the poll cadence rides the shared POLL_INTERVAL_S tick. The import run
@@ -142,6 +145,13 @@ var _models_refresh_button: Button
 var _models_active_label: Label
 var _model_rows: Dictionary = {}
 var _models_requested := false
+# wb-11 — the load/unload run circuits (identity-then-poll).
+var _load_execution := ""
+var _load_model := ""
+var _load_poll_failures := 0
+var _unload_execution := ""
+var _unload_model := ""
+var _unload_poll_failures := 0
 # wb-9 — the model manager (the fetch circuit) + the launch settings.
 var _fetch_input: LineEdit
 var _fetch_button: Button
@@ -947,6 +957,14 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                                 _text(document.get("rejection")), _reason_of(document)
                         ]
                 return
+        # wb-11: the load/unload POLL arms first (the longer prefixes own
+        # the match — "model-load-get-N" also begins with "model-load-").
+        if tag.begins_with("model-load-get-"):
+                _on_model_load_get_answered(document)
+                return
+        if tag.begins_with("model-unload-get-"):
+                _on_model_unload_get_answered(document)
+                return
         if tag.begins_with("model-load-"):
                 _on_model_load_answered(tag.substr(len("model-load-")), document)
                 return
@@ -1112,6 +1130,18 @@ func _on_poll_tick() -> void:
                         {"execution_id": _import_execution}, _session_id
                 )
                 any_active = true
+        if _load_execution != "":
+                _client.call_operation(
+                        _next_request_id("model-load-get"), "run.get",
+                        {"execution_id": _load_execution}, _session_id
+                )
+                any_active = true
+        if _unload_execution != "":
+                _client.call_operation(
+                        _next_request_id("model-unload-get"), "run.get",
+                        {"execution_id": _unload_execution}, _session_id
+                )
+                any_active = true
         if not any_active:
                 _poll_timer.stop()
 
@@ -1124,6 +1154,10 @@ func _on_transport_failed(tag: String, error: String) -> void:
                 _settings_gateway_value.text = "unreachable · %s" % _gateway_url
                 return
         if tag == "model-list" or tag == "model-states":
+                # wb-11: a failed scan re-arms (the next surface entry
+                # retries — the empty list never sticks silently, the
+                # owner's «моделей не видно» persistence call).
+                _models_requested = false
                 _models_status_label.text = (
                         "gateway unreachable on %s (%s) — Retry with Refresh" % [tag, error]
                 )
@@ -1163,6 +1197,24 @@ func _on_transport_failed(tag: String, error: String) -> void:
                 return
         if tag.begins_with("fetch-cancel-"):
                 _fetch_status_label.text = "run.cancel transport failure (%s) — the poll continues" % error
+                return
+        # wb-11: the POLL arms first — "model-load-get-N" also begins with
+        # "model-load-", the longer prefix owns the match.
+        if tag.begins_with("model-load-get-"):
+                # The load run's poll transport failures — bounded
+                # abandon, the same law as the chat/fetch/import polls.
+                _load_poll_failures += 1
+                if _load_poll_failures >= MAX_POLL_FAILURES:
+                        _load_execution = ""
+                        _models_status_label.text = "load poll abandoned after %d transport failures (%s) — the row rests at its observed truth" % [MAX_POLL_FAILURES, error]
+                        _maybe_stop_poll_timer()
+                return
+        if tag.begins_with("model-unload-get-"):
+                _unload_poll_failures += 1
+                if _unload_poll_failures >= MAX_POLL_FAILURES:
+                        _unload_execution = ""
+                        _models_status_label.text = "unload poll abandoned after %d transport failures (%s) — the row rests at its observed truth" % [MAX_POLL_FAILURES, error]
+                        _maybe_stop_poll_timer()
                 return
         if tag.begins_with("model-load-") or tag.begins_with("model-unload-"):
                 # The action never reached the gateway — the row's truth is
@@ -1357,6 +1409,9 @@ func _set_model_row_state(logical_name: String, state: String) -> void:
 
 func _on_model_load_pressed(logical_name: String) -> void:
         if not _session_live or _client == null:
+                # wb-11: never a silent return — §18's law (the effective
+                # state is named, the owner is never left guessing).
+                _models_status_label.text = "the load action needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
                 return
         var row: Dictionary = _model_rows.get(logical_name, {})
         if row.is_empty():
@@ -1365,19 +1420,20 @@ func _on_model_load_pressed(logical_name: String) -> void:
         action.disabled = true
         action.text = "LOADING…"
         _set_model_row_state(logical_name, "LOADING")
-        _models_status_label.text = "loading %s — the managed backend may be spawning llama-server (minutes-class; the timeout is honest)" % logical_name
+        _models_status_label.text = "loading %s — dispatched as a run (the spawn/readiness walk rides the poll; the app stays live)" % logical_name
         # The dispatch tag carries the logical_name verbatim (the answer's
         # routing key); the idempotency key stays unique per action (G4).
         var tag := "model-load-%s" % logical_name
         var request_id := _next_request_id(tag)
         _client.call_operation(
                 tag, "model.load", {"logical_name": logical_name},
-                _session_id, request_id, MODEL_LOAD_TIMEOUT_S
+                _session_id, request_id
         )
 
 
 func _on_model_unload_pressed(logical_name: String) -> void:
         if not _session_live or _client == null:
+                _models_status_label.text = "the unload action needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
                 return
         var row: Dictionary = _model_rows.get(logical_name, {})
         if row.is_empty():
@@ -1386,26 +1442,30 @@ func _on_model_unload_pressed(logical_name: String) -> void:
         action.disabled = true
         action.text = "UNLOADING…"
         _set_model_row_state(logical_name, "UNLOADING")
-        _models_status_label.text = "unloading %s…" % logical_name
+        _models_status_label.text = "unloading %s — dispatched as a run (the graceful stop rides the poll)" % logical_name
         var tag := "model-unload-%s" % logical_name
         var request_id := _next_request_id(tag)
         _client.call_operation(
                 tag, "model.unload", {"logical_name": logical_name},
-                _session_id, request_id, MODEL_UNLOAD_TIMEOUT_S
+                _session_id, request_id
         )
 
 
 func _on_model_load_answered(logical_name: String, document: Dictionary) -> void:
+        # wb-11: the DISPATCH answer — the fast admit (identity-then-
+        # poll; the minutes-class walk is the run's own, observed below).
         var status := _text(document.get("status"))
         if status == "OK" and document.get("result") is Dictionary:
                 var result: Dictionary = document.get("result")
-                _set_model_row_state(logical_name, _text(result.get("state")))
-                _models_active_label.text = "active: %s" % logical_name
-                _models_status_label.text = "%s ACTIVE — the chat surface is ready" % logical_name
-        elif status == "UNKNOWN":
-                # §12.1: the outcome is UNKNOWN (never blindly retried) — the
-                # honest note names it; the row rests at its observed truth.
-                _models_status_label.text = "model.load OUTCOME UNKNOWN (%s) — the state is NOT changed; Load may be re-issued deliberately" % _reason_of(document)
+                _load_execution = _text(result.get("execution_id"))
+                _load_model = logical_name
+                _load_poll_failures = 0
+                _poll_timer.start()
+                return
+        if status == "UNKNOWN":
+                # §12.1: the dispatch outcome is UNKNOWN (never blindly
+                # retried) — the row rests at its observed truth.
+                _models_status_label.text = "model.load dispatch OUTCOME UNKNOWN (%s) — the state is NOT changed; Load may be re-issued deliberately" % _reason_of(document)
         else:
                 _models_status_label.text = "model.load refused: %s %s" % [
                         _text(document.get("rejection")), _reason_of(document)
@@ -1416,12 +1476,112 @@ func _on_model_load_answered(logical_name: String, document: Dictionary) -> void
 
 func _on_model_unload_answered(logical_name: String, document: Dictionary) -> void:
         var status := _text(document.get("status"))
-        if status == "OK":
-                _models_status_label.text = "%s EVICTED — Load again to re-select" % logical_name
+        if status == "OK" and document.get("result") is Dictionary:
+                var result: Dictionary = document.get("result")
+                _unload_execution = _text(result.get("execution_id"))
+                _unload_model = logical_name
+                _unload_poll_failures = 0
+                _poll_timer.start()
+                return
+        if status == "UNKNOWN":
+                _models_status_label.text = "model.unload dispatch OUTCOME UNKNOWN (%s) — the state is NOT changed; Unload may be re-issued deliberately" % _reason_of(document)
         else:
                 _models_status_label.text = "model.unload refused: %s %s" % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
+        _client.call_operation("model-states", "model.states", {})
+        _update_models_enablement()
+
+
+func _on_model_load_get_answered(document: Dictionary) -> void:
+        # wb-11: the load run's run.get poll — the terminal answer names
+        # the row's resting truth AND the observed cause (§21: the FAILED
+        # diagnostics carry the reason — never an error_type-only note).
+        if _load_execution == "":
+                return
+        var status := _text(document.get("status"))
+        if status != "OK":
+                _load_execution = ""
+                _maybe_stop_poll_timer()
+                _models_status_label.text = "run.get refused: %s %s" % [
+                        _text(document.get("rejection")), _reason_of(document)
+                ]
+                _client.call_operation("model-states", "model.states", {})
+                _update_models_enablement()
+                return
+        if not (document.get("result") is Dictionary):
+                return
+        var result: Dictionary = document.get("result")
+        if not bool(result.get("terminal", false)):
+                _models_status_label.text = "loading %s — the run is %s (the managed spawn is minutes-class, observed live)" % [
+                        _load_model, _text(result.get("state"))
+                ]
+                return
+        _load_execution = ""
+        var logical_name := _load_model
+        _load_model = ""
+        var run_state := _text(result.get("state"))
+        match run_state:
+                "COMPLETED":
+                        _set_model_row_state(logical_name, "ACTIVE")
+                        _models_active_label.text = "active: %s" % logical_name
+                        _models_status_label.text = "%s ACTIVE — the chat surface is ready" % logical_name
+                "FAILED":
+                        var note := _text(result.get("failure_type"))
+                        var cause := _first_diagnostic(result)
+                        if cause.length() > MODEL_LOAD_NOTE_MAX_LENGTH:
+                                cause = cause.substr(0, MODEL_LOAD_NOTE_MAX_LENGTH) + "…"
+                        _models_status_label.text = "load FAILED · %s — %s" % [note, cause]
+                "CANCELED":
+                        _models_status_label.text = "load canceled (the truthful terminal)"
+                _:
+                        _models_status_label.text = "load terminal state %s (unmodelled — shown, never collapsed)" % run_state
+        _maybe_stop_poll_timer()
+        _client.call_operation("model-states", "model.states", {})
+        _update_models_enablement()
+
+
+func _on_model_unload_get_answered(document: Dictionary) -> void:
+        # wb-11: the unload run's poll — the graceful stop's terminal.
+        if _unload_execution == "":
+                return
+        var status := _text(document.get("status"))
+        if status != "OK":
+                _unload_execution = ""
+                _maybe_stop_poll_timer()
+                _models_status_label.text = "run.get refused: %s %s" % [
+                        _text(document.get("rejection")), _reason_of(document)
+                ]
+                _client.call_operation("model-states", "model.states", {})
+                _update_models_enablement()
+                return
+        if not (document.get("result") is Dictionary):
+                return
+        var result: Dictionary = document.get("result")
+        if not bool(result.get("terminal", false)):
+                _models_status_label.text = "unloading %s — the run is %s" % [
+                        _unload_model, _text(result.get("state"))
+                ]
+                return
+        _unload_execution = ""
+        var logical_name := _unload_model
+        _unload_model = ""
+        var run_state := _text(result.get("state"))
+        match run_state:
+                "COMPLETED":
+                        _models_status_label.text = "%s EVICTED — Load again to re-select" % logical_name
+                "FAILED":
+                        var cause := _first_diagnostic(result)
+                        if cause.length() > MODEL_LOAD_NOTE_MAX_LENGTH:
+                                cause = cause.substr(0, MODEL_LOAD_NOTE_MAX_LENGTH) + "…"
+                        _models_status_label.text = "unload FAILED · %s — %s (the observed truth stays ACTIVE)" % [
+                                _text(result.get("failure_type")), cause
+                        ]
+                "CANCELED":
+                        _models_status_label.text = "unload canceled (the truthful terminal)"
+                _:
+                        _models_status_label.text = "unload terminal state %s (unmodelled — shown, never collapsed)" % run_state
+        _maybe_stop_poll_timer()
         _client.call_operation("model-states", "model.states", {})
         _update_models_enablement()
 
@@ -1692,7 +1852,13 @@ func _reset_fetch_controls() -> void:
 
 
 func _maybe_stop_poll_timer() -> void:
-        if _active_execution == "" and _fetch_execution == "" and _import_execution == "":
+        if (
+                _active_execution == ""
+                and _fetch_execution == ""
+                and _import_execution == ""
+                and _load_execution == ""
+                and _unload_execution == ""
+        ):
                 _poll_timer.stop()
 
 
@@ -1719,6 +1885,10 @@ func _make_import_dialog() -> FileDialog:
 
 func _on_add_local_pressed() -> void:
         if not _session_live or _client == null:
+                # wb-11: never a silent return — the note names the state
+                # (§18: the effective state is never hidden; the owner's
+                # «проводник не открывается» silence call).
+                _fetch_status_label.text = "the models manager needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
                 return
         if _import_execution != "" or _fetch_execution != "":
                 _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"
@@ -1729,6 +1899,7 @@ func _on_add_local_pressed() -> void:
 
 func _on_add_folder_pressed() -> void:
         if not _session_live or _client == null:
+                _fetch_status_label.text = "the models manager needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
                 return
         if _import_execution != "" or _fetch_execution != "":
                 _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"

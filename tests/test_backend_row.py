@@ -90,6 +90,7 @@ class _PortDouble:
         props: dict[str, Any] | None = None,
         gate: threading.Event | None = None,
         props_gate: threading.Event | None = None,
+        load_gate: threading.Event | None = None,
         load_error: Exception | None = None,
         unload_error: Exception | None = None,
         load_reply: dict[str, Any] | None = None,
@@ -104,6 +105,7 @@ class _PortDouble:
         }
         self.gate = gate
         self.props_gate = props_gate
+        self.load_gate = load_gate
         self.load_error = load_error
         self.unload_error = unload_error
         self.load_reply = load_reply or {"success": True}
@@ -142,6 +144,8 @@ class _PortDouble:
 
     def load_model(self, model_path, alias=None):
         self.load_calls.append((model_path, alias))
+        if self.load_gate is not None:
+            self.load_gate.wait(timeout=10)
         if self.load_error is not None:
             raise self.load_error
         return dict(self.load_reply)
@@ -514,9 +518,10 @@ def test_chat_effects_in_ordered_stream(tmp_path: Path) -> None:
 
 
 def test_model_load_walk_to_active(tmp_path: Path) -> None:
-    """§20's chain over the Model ladder: discovery gate → select →
-    the observed reply → ACTIVE; the alias = the logical_name; the
-    effect lands the stream."""
+    """§20's chain over the Model ladder, the wb-11 RUN form: the
+    dispatch returns the execution identity immediately (STARTING);
+    the run's terminal carries the observed ACTIVE; the alias = the
+    logical_name; the dispatch effect lands the stream."""
     _write_model(tmp_path)
     port = _PortDouble()
     gateway, token = _compose_with_backend(tmp_path, port)
@@ -528,16 +533,54 @@ def test_model_load_walk_to_active(tmp_path: Path) -> None:
         request_id="load-1",
     )
     result = dict(response.result or {})
-    assert result["state"] == "ACTIVE"
-    assert result["logical_name"] == "stub.gguf"
+    assert result["state"] == "STARTING"
+    assert result["work"] == "model.load"
+    run = _await_terminal(gateway, token, str(result["execution_id"]))
+    assert run["state"] == "COMPLETED"
+    assert run["result"]["state"] == "ACTIVE"
+    assert run["result"]["logical_name"] == "stub.gguf"
     assert port.load_calls == [
         (str(tmp_path / "models" / "stub.gguf"), "stub.gguf")
     ]
     events = _dispatch(gateway, token, "session.events", {})
     assert any(
-        e["payload"].get("effect") == "MODEL_LOADED"
+        e["payload"].get("effect") == "MODEL_LOAD_DISPATCHED"
         for e in events.result["events"]
     )
+
+
+def test_model_load_run_never_holds_the_dispatch_lock(
+    tmp_path: Path,
+) -> None:
+    """wb-11's regression pin (the owner's «молча висят + транспорт
+    результ 13» call): a minutes-class load IN FLIGHT must never
+    starve other operations — model.list ANSWERS while the port call
+    is blocked (the old synchronous handler held the gateway's coarse
+    dispatch lock for the whole spawn+readiness walk; every concurrent
+    request starved past the client's 10s budget and the whole UI hung
+    silent)."""
+    _write_model(tmp_path)
+    gate = threading.Event()
+    port = _PortDouble(load_gate=gate)
+    gateway, token = _compose_with_backend(tmp_path, port)
+    _discover(gateway)
+    response = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-lock",
+    )
+    execution_id = str(response.result["execution_id"])
+    _await_in_flight(lambda: bool(port.load_calls))
+    # the load run is genuinely inside the port call — the read
+    # MUST answer while it stands there (no dispatch-lock starvation).
+    listing = gateway.dispatch_document({
+        "operation": "model.list", "arguments": {},
+    })
+    assert listing.status == "OK"
+    states = _dispatch(gateway, token, "model.states", {})
+    assert states.result["states"]["stub.gguf"] == "SELECTED"
+    gate.set()
+    run = _await_terminal(gateway, token, execution_id)
+    assert run["state"] == "COMPLETED"
 
 
 def test_model_load_requires_discovery(tmp_path: Path) -> None:
@@ -555,30 +598,91 @@ def test_model_load_requires_discovery(tmp_path: Path) -> None:
 
 def test_model_load_already_active_rejected(tmp_path: Path) -> None:
     """The replacement path is a later row: loading an ACTIVE model
-    rejects (unload first)."""
+    rejects (unload first) — and a second dispatch while the run is
+    IN FLIGHT rejects too (one load run per name, the honest guard)."""
     _write_model(tmp_path)
-    gateway, token = _compose_with_backend(tmp_path, _PortDouble())
+    port = _PortDouble()
+    gateway, token = _compose_with_backend(tmp_path, port)
     _discover(gateway)
-    for name in ("load-a1", "load-a2"):
-        _dispatch(
-            gateway, token, "model.load", {"logical_name": "stub.gguf"},
-            request_id=name,
-        )
+    first = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-a1",
+    )
+    assert first.status == "OK"
+    _await_terminal(gateway, token, str(first.result["execution_id"]))
     response = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
-        request_id="load-a3",
+        request_id="load-a2",
     )
     assert response.rejection == "DOMAIN_REJECTED"
     assert "already ACTIVE" in str(response.result)
+
+
+def test_model_load_second_dispatch_while_in_flight_rejected(
+    tmp_path: Path,
+) -> None:
+    """wb-11's in-flight guard: the same name's second dispatch while
+    the run stands in the port call rejects loudly (the run poll names
+    the walk) — and the re-load is LEGAL once it lands."""
+    _write_model(tmp_path)
+    gate = threading.Event()
+    port = _PortDouble(load_gate=gate)
+    gateway, token = _compose_with_backend(tmp_path, port)
+    _discover(gateway)
+    first = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-i1",
+    )
+    assert first.status == "OK"
+    _await_in_flight(lambda: bool(port.load_calls))
+    second = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-i2",
+    )
+    assert second.rejection == "DOMAIN_REJECTED"
+    assert "already loading" in str(second.result)
+    gate.set()
+    _await_terminal(gateway, token, str(first.result["execution_id"]))
+    # the run landed — the re-load is legal again (the ACTIVE gate
+    # owns it now: the same name rejects as already ACTIVE).
+    third = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-i3",
+    )
+    assert third.rejection == "DOMAIN_REJECTED"
+    assert "already ACTIVE" in str(third.result)
+
+
+def test_model_load_second_model_while_one_active_rejected(
+    tmp_path: Path,
+) -> None:
+    """The single-slot law (ModelLoadStates.active's own doc, enforced
+    wb-11): loading a SECOND model while one is ACTIVE rejects —
+    unload first (the swap path is a later row)."""
+    _write_model(tmp_path)
+    _write_model(tmp_path, name="other.gguf")
+    gateway, token = _compose_with_backend(tmp_path, _PortDouble())
+    _discover(gateway)
+    first = _dispatch(
+        gateway, token, "model.load", {"logical_name": "stub.gguf"},
+        request_id="load-s1",
+    )
+    _await_terminal(gateway, token, str(first.result["execution_id"]))
+    second = _dispatch(
+        gateway, token, "model.load", {"logical_name": "other.gguf"},
+        request_id="load-s2",
+    )
+    assert second.rejection == "DOMAIN_REJECTED"
+    assert "unload first" in str(second.result)
 
 
 def test_model_load_observed_failure_is_terminal_failed(
     tmp_path: Path,
 ) -> None:
     """The backend's observed refusal (http/malformed) walks
-    SELECTED → LOADING → FAILED; the re-load rejects loudly — the
-    ladder's FAILED is terminal (the recorded gap, D-203) — and the
-    gateway outcome is SENT_OUTCOME_UNKNOWN (the call was sent)."""
+    SELECTED → LOADING → FAILED on the RUN; the cause rides the
+    FAILED diagnostics (§21 — the reason ON the wire); the re-load
+    rejects loudly — the ladder's FAILED is terminal (D-203)."""
     _write_model(tmp_path)
     port = _PortDouble(load_error=_EngineError("http", "500"))
     gateway, token = _compose_with_backend(tmp_path, port)
@@ -587,8 +691,14 @@ def test_model_load_observed_failure_is_terminal_failed(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="load-f1",
     )
-    assert response.status == "UNKNOWN"
-    assert response.rejection == "SENT_OUTCOME_UNKNOWN"
+    assert response.status == "OK"  # the dispatch admitted the run
+    run = _await_terminal(
+        gateway, token, str(response.result["execution_id"])
+    )
+    assert run["state"] == "FAILED"
+    assert "[http] 500" in " ".join(run["diagnostics"])
+    states = _dispatch(gateway, token, "model.states", {})
+    assert states.result["states"]["stub.gguf"] == "FAILED"
     retry = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="load-f2",
@@ -600,9 +710,10 @@ def test_model_load_observed_failure_is_terminal_failed(
 def test_model_load_unknown_outcome_rests_selected(
     tmp_path: Path,
 ) -> None:
-    """§12.1's sibling at the model layer: an "unavailable" outcome is
-    UNKNOWN, not failed — the state rests SELECTED and the re-load is
-    LEGAL (the retry path the caller owns)."""
+    """§12.1's sibling at the model layer: an \"unavailable\" outcome
+    rests the ladder at SELECTED (the run closes FAILED, the ladder
+    performs NO observed-failure walk) and the re-load is LEGAL — the
+    retry path the caller owns."""
     _write_model(tmp_path)
     port = _PortDouble(load_error=_EngineError("unavailable", "down"))
     gateway, token = _compose_with_backend(tmp_path, port)
@@ -611,22 +722,31 @@ def test_model_load_unknown_outcome_rests_selected(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="load-u1",
     )
-    assert response.rejection == "SENT_OUTCOME_UNKNOWN"
+    run = _await_terminal(
+        gateway, token, str(response.result["execution_id"])
+    )
+    assert run["state"] == "FAILED"
+    states = _dispatch(gateway, token, "model.states", {})
+    assert states.result["states"]["stub.gguf"] == "SELECTED"
     # the backend returns — the re-load succeeds
     port.load_error = None
     retry = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="load-u2",
     )
-    assert retry.result["state"] == "ACTIVE"
+    run2 = _await_terminal(
+        gateway, token, str(retry.result["execution_id"])
+    )
+    assert run2["state"] == "COMPLETED"
+    assert run2["result"]["state"] == "ACTIVE"
 
 
 def test_model_load_success_false_reply_is_observed_refusal(
     tmp_path: Path,
 ) -> None:
     """The backend answered HTTP 200 with success:false — the observed
-    refusal (the stub pins the shape; build-sensitive): FAILED, never
-    a silent pass."""
+    refusal (the stub pins the shape; build-sensitive): the run closes
+    FAILED with the reply in the diagnostics, never a silent pass."""
     _write_model(tmp_path)
     port = _PortDouble(load_reply={"success": False, "error": "oom"})
     gateway, token = _compose_with_backend(tmp_path, port)
@@ -635,59 +755,83 @@ def test_model_load_success_false_reply_is_observed_refusal(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="load-sf",
     )
-    assert response.rejection == "DOMAIN_REJECTED"
-    assert "refused" in str(response.result)
+    run = _await_terminal(
+        gateway, token, str(response.result["execution_id"])
+    )
+    assert run["state"] == "FAILED"
+    assert "refused" in " ".join(run["diagnostics"])
+    states = _dispatch(gateway, token, "model.states", {})
+    assert states.result["states"]["stub.gguf"] == "FAILED"
 
 
 def test_model_unload_walk_and_reselection(tmp_path: Path) -> None:
-    """ACTIVE → EVICTED on the observed reply; the re-selection path
-    (EVICTED → SELECTED — the ladder's own return) makes the second
-    load legal; the unload rides the alias."""
+    """ACTIVE → EVICTED on the observed reply (the run's terminal);
+    the re-selection path (EVICTED → SELECTED — the ladder's own
+    return) makes the second load legal; the unload rides the alias."""
     _write_model(tmp_path)
     port = _PortDouble()
     gateway, token = _compose_with_backend(tmp_path, port)
     _discover(gateway)
-    _dispatch(
+    load = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="ul-1",
     )
+    _await_terminal(gateway, token, str(load.result["execution_id"]))
     response = _dispatch(
         gateway, token, "model.unload", {"logical_name": "stub.gguf"},
         request_id="ul-2",
     )
-    assert response.result["state"] == "EVICTED"
+    assert response.result["work"] == "model.unload"
+    run = _await_terminal(
+        gateway, token, str(response.result["execution_id"])
+    )
+    assert run["state"] == "COMPLETED"
+    assert run["result"]["state"] == "EVICTED"
     assert port.unload_calls == ["stub.gguf"]
     # the re-selection: EVICTED → SELECTED → ... → ACTIVE
     again = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="ul-3",
     )
-    assert again.result["state"] == "ACTIVE"
+    run3 = _await_terminal(
+        gateway, token, str(again.result["execution_id"])
+    )
+    assert run3["result"]["state"] == "ACTIVE"
 
 
 def test_model_unload_failure_leaves_active(tmp_path: Path) -> None:
     """The unload failure performs NO walk — the model's observed
-    truth is still ACTIVE (the next unload is legal; the reply is the
-    evidence, never a fabricated eviction)."""
+    truth is still ACTIVE (the run's FAILED diagnostics carry the
+    cause; the next unload is legal, never a fabricated eviction)."""
     _write_model(tmp_path)
     port = _PortDouble(unload_error=_EngineError("http", "500"))
     gateway, token = _compose_with_backend(tmp_path, port)
     _discover(gateway)
-    _dispatch(
+    load = _dispatch(
         gateway, token, "model.load", {"logical_name": "stub.gguf"},
         request_id="ulf-1",
     )
+    _await_terminal(gateway, token, str(load.result["execution_id"]))
     response = _dispatch(
         gateway, token, "model.unload", {"logical_name": "stub.gguf"},
         request_id="ulf-2",
     )
-    assert response.rejection == "SENT_OUTCOME_UNKNOWN"
+    run = _await_terminal(
+        gateway, token, str(response.result["execution_id"])
+    )
+    assert run["state"] == "FAILED"
+    assert "[http] 500" in " ".join(run["diagnostics"])
+    states = _dispatch(gateway, token, "model.states", {})
+    assert states.result["states"]["stub.gguf"] == "ACTIVE"
     port.unload_error = None
     retry = _dispatch(
         gateway, token, "model.unload", {"logical_name": "stub.gguf"},
         request_id="ulf-3",
     )
-    assert retry.result["state"] == "EVICTED"
+    run3 = _await_terminal(
+        gateway, token, str(retry.result["execution_id"])
+    )
+    assert run3["result"]["state"] == "EVICTED"
 
 
 def test_model_unload_requires_active(tmp_path: Path) -> None:
@@ -839,12 +983,18 @@ def test_http_parity_over_the_backend_surface(tmp_path: Path) -> None:
             {"logical_name": "stub.gguf"},
             request_id="parity-2",
         )
+        run_direct = _await_terminal(
+            gateway, token, str(load_direct.result["execution_id"])
+        )
         # the load walk is one-shot per activation — unload before the
         # HTTP arm loads the same model again (the parity is over the
         # operation semantics, not a duplicated state walk)
-        _dispatch(
+        unload = _dispatch(
             gateway, token, "model.unload", {"logical_name": "stub.gguf"},
             request_id="parity-2-unload",
+        )
+        _await_terminal(
+            gateway, token, str(unload.result["execution_id"])
         )
         load_http = over_http({
             "operation": "model.load",
@@ -852,8 +1002,14 @@ def test_http_parity_over_the_backend_surface(tmp_path: Path) -> None:
             "session_id": token,
             "client_request_id": "parity-2-http",
         })
-        assert load_direct.result["state"] == "ACTIVE"
-        assert load_http["result"]["state"] == "ACTIVE"
+        run_http = _await_terminal(
+            gateway, token, str(load_http["result"]["execution_id"])
+        )
+        assert load_direct.result["state"] == "STARTING"
+        assert load_http["result"]["state"] == "STARTING"
+        assert run_direct["state"] == run_http["state"] == "COMPLETED"
+        assert run_direct["result"]["state"] == "ACTIVE"
+        assert run_http["result"]["state"] == "ACTIVE"
         assert (
             load_direct.result["logical_name"]
             == load_http["result"]["logical_name"]

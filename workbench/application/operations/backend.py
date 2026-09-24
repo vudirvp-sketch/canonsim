@@ -68,16 +68,29 @@ model.load / model.unload (§20's loading half — "file exists ≠ valid
 (§11, lifecycles.py's MODEL machine), walked on OBSERVED outcomes —
 the application's observation surface folds the backend's replies
 (INV-1's own law, applied to the application layer; the in-flight
-LOADING/UNLOADING are transit states, never resting ones):
+LOADING/UNLOADING are transit states, never resting ones). wb-11:
+BOTH dispatch as RUNS (the chat.send pattern — the owner's
+2026-09-26 «молча висят + транспорт результ 13» call over the
+freeze chain: a minutes-class managed spawn ran INSIDE the gateway's
+coarse dispatch lock, so every concurrent request — model.list,
+session.create, app.status — starved past the client's 10s budget
+and the whole UI hung silent). The dispatch-side walk stays fast and
+honest (validate + the ladder's admission-side SELECTED/ACTIVE gate,
+milliseconds under the lock); the minutes-class port call (the
+managed spawn + readiness walk, the graceful stop) runs on the
+registry's worker thread — and the run's FAILED diagnostics carry
+the observed cause (`str(exc)` — §21's diagnostics surface, the
+reason ON the run.get wire, never an error_type-only blackout):
 
 ```text
-load:   DISCOVERED → VALIDATED → SELECTED (admission-side, pre-call)
-        then on the reply: LOADING → LOADED → ACTIVE (success) or
-        LOADING → FAILED (the backend's observed refusal); an
-        "unavailable" outcome rests at SELECTED — the unknown-outcome
-        truth, legal to re-load (§12.1's sibling)
-unload: ACTIVE → UNLOADING → EVICTED on the success reply; any
-        failure leaves ACTIVE — the observed still-loaded truth
+load:   DISCOVERED → VALIDATED → SELECTED (admission-side, dispatch)
+        then the run, on the reply: LOADING → LOADED → ACTIVE
+        (success) or LOADING → FAILED (the backend's observed
+        refusal); an "unavailable" outcome rests at SELECTED — the
+        unknown-outcome truth, legal to re-load (§12.1's sibling)
+unload: ACTIVE (the dispatch gate) then the run: UNLOADING → EVICTED
+        on the success reply; any failure leaves ACTIVE — the
+        observed still-loaded truth
 ```
 
 The ladder's honest gap, recorded (D-203): FAILED is terminal with no
@@ -125,10 +138,14 @@ __all__ = [
     "CHAT_DEFAULT_TEMPERATURE",
     "CHAT_MAX_MAX_TOKENS",
     "CHAT_ROLES",
+    "MODEL_LOAD_DEFAULT_DEADLINE_SECONDS",
+    "MODEL_UNLOAD_DEFAULT_DEADLINE_SECONDS",
     "BackendPort",
     "BackendPortError",
     "ModelLoadStates",
     "chat_completion_work",
+    "model_load_work",
+    "model_unload_work",
     "register_backend_operations",
     "require_backend_port",
 ]
@@ -147,6 +164,17 @@ CHAT_MAX_MAX_TOKENS = 4096
 #: completion at the recipe's budget can outrun the registry's generic
 #: 60s default — the row resolves its own (§12's material input).
 CHAT_DEFAULT_DEADLINE_SECONDS = 120.0
+
+#: The load run's own default deadline (wb-11): the MANAGED arm's
+#: spawn + readiness walk is minutes-class (the composition root's
+#: 300s readiness budget + the margin) — the row resolves its own
+#: (§12's material input; the caller may still name a tighter one).
+MODEL_LOAD_DEFAULT_DEADLINE_SECONDS = 330.0
+
+#: The unload run's own default deadline (wb-11): the managed stop is
+#: the bounded graceful TERM → grace(10s) → kill walk — 30s covers it
+#: with the margin; the attached arm's transport is 10s single-try.
+MODEL_UNLOAD_DEFAULT_DEADLINE_SECONDS = 30.0
 
 #: The chat roles the surface accepts (§18's prompt roles: system |
 #: user/chat; assistant = the history form the Chat UI sends).
@@ -548,16 +576,85 @@ def _cause(exc: BaseException) -> str:
     return cause if isinstance(cause, str) else "malformed"
 
 
-def _make_model_load(
-    models: ModelRegistry, loads: ModelLoadStates, port: BackendPort
+def model_load_work(
+    models: ModelRegistry,
+    loads: ModelLoadStates,
+    port: BackendPort,
+    logical_name: str,
+    in_flight: dict[str, str],
 ):
+    """The load run's work factory (wb-11 — the minutes-class arm
+    OFF the dispatch lock): re-resolve (a vanished file between
+    dispatch and the work is the honest late failure — the ladder
+    rests SELECTED, a deliberate re-load stays legal), then the port
+    call (the managed spawn + readiness walk or the attached load),
+    then the observed fold. The failure raise rides the registry's
+    FAILED diagnostics — the reason ON the run.get wire (§21), never
+    an error_type-only blackout. The `in_flight` map is the handler's
+    own (one load run per name at a time); the finally-pop is this
+    side's half of that contract."""
+
+    def work(context: WorkContext) -> Mapping[str, object]:
+        try:
+            context.check()  # the entry checkpoint (§12)
+            try:
+                path = models.resolve(logical_name)
+            except ModelRegistryError as exc:
+                loads.settle_load_failure(
+                    logical_name, observed=False
+                )  # the pre-backend truth: SELECTED, the re-load legal
+                raise RuntimeError(
+                    f"model.load run: the model vanished since dispatch — {exc}"
+                ) from exc
+            try:
+                reply = port.load_model(str(path), alias=logical_name)
+            except Exception as exc:
+                loads.settle_load_failure(
+                    logical_name, observed=_cause(exc) != "unavailable"
+                )
+                raise  # the run closes FAILED — the observed cause rides
+                # the diagnostics (§21), the ladder rests at its truth
+            if reply.get("success") is False:
+                # the backend answered success:false at HTTP 200 — the
+                # observed refusal (the stub pins the shape; build-
+                # sensitive, the module note)
+                loads.settle_load_failure(logical_name, observed=True)
+                raise RuntimeError(
+                    "model.load run: the backend refused the load "
+                    f"({json.dumps(reply, sort_keys=True)})"
+                )
+            loads.settle_load_success(logical_name)
+            return {
+                "logical_name": logical_name,
+                "location": str(path),
+                "reply": dict(reply),
+                "state": "ACTIVE",
+            }
+        finally:
+            in_flight.pop(logical_name, None)
+
+    return work
+
+
+def _make_model_load(
+    models: ModelRegistry,
+    loads: ModelLoadStates,
+    port: BackendPort,
+    executions: ExecutionRegistry,
+):
+    # One load run per name at a time (the handler's own admission
+    # guard): a name resting SELECTED after an unknown outcome stays
+    # RE-LOADABLE (§12.1's sibling) — only a genuinely in-flight run
+    # rejects; the work's finally-pop is the clear half.
+    in_flight: dict[str, str] = {}
+
     def handler(context) -> Mapping[str, object]:
         arguments = dict(context.arguments)
-        unknown = sorted(set(arguments) - {"logical_name"})
+        unknown = sorted(set(arguments) - {"logical_name", "deadline_seconds"})
         if unknown:
             raise _rejected(
                 f"model.load: unknown argument(s) {unknown} "
-                "(closed set: ['logical_name'])"
+                "(closed set: ['deadline_seconds', 'logical_name'])"
             )
         logical_name = arguments.get("logical_name")
         if not isinstance(logical_name, str) or not logical_name:
@@ -565,8 +662,11 @@ def _make_model_load(
                 "model.load: logical_name must be a non-empty str"
             )
         # §20's entry gate: discovery first (the registry's own law).
+        # The path itself is the WORK's own re-resolve (a vanished
+        # file between dispatch and the work is the honest late
+        # failure) — the dispatch needs only the gate's verdict.
         try:
-            path = models.resolve(logical_name)
+            models.resolve(logical_name)
         except ModelRegistryError as exc:
             raise _rejected(f"model.load: {exc}") from exc
         current = loads.state(logical_name)
@@ -581,50 +681,106 @@ def _make_model_load(
                 "ladder's FAILED is terminal (no re-selection path; "
                 "the recorded ladder gap, D-203)"
             )
-        loads.select(logical_name)
-        try:
-            reply = port.load_model(str(path), alias=logical_name)
-        except Exception as exc:
-            loads.settle_load_failure(
-                logical_name, observed=_cause(exc) != "unavailable"
-            )
-            raise  # SENT_OUTCOME_UNKNOWN upstream — the call was sent
-        if reply.get("success") is False:
-            # the backend answered success:false at HTTP 200 — the
-            # observed refusal (the stub pins the shape; build-
-            # sensitive, the module note)
-            loads.settle_load_failure(logical_name, observed=True)
+        active = loads.active
+        if active is not None and active != logical_name:
+            # the single-slot law (ModelLoadStates.active's own doc):
+            # at most one ACTIVE this row — a second load while the
+            # slot holds rejects (the swap path is a later row).
             raise _rejected(
-                f"model.load: the backend refused the load "
-                f"({json.dumps(reply, sort_keys=True)})"
+                f"model.load: {active!r} is ACTIVE — unload first "
+                "(the slot is single this row; the replacement path "
+                "is a later row)"
             )
-        loads.settle_load_success(logical_name)
+        flight = in_flight.get(logical_name)
+        if flight is not None:
+            raise _rejected(
+                f"model.load: {logical_name!r} is already loading "
+                f"(run {flight[:12]}) — run.get names the walk; a "
+                "re-load is legal once it lands"
+            )
+        loads.select(logical_name)  # the admission-side walk (fast)
+        # §12: the row's own default deadline — the managed readiness
+        # walk is minutes-class; the caller may name a tighter one.
+        try:
+            seconds = executions.resolve_deadline_seconds(
+                arguments.get("deadline_seconds")
+                if arguments.get("deadline_seconds") is not None
+                else MODEL_LOAD_DEFAULT_DEADLINE_SECONDS
+            )
+        except RegistryError as exc:
+            raise _rejected(f"model.load: {exc}") from exc
+        frozen = {
+            "deadline_seconds": str(seconds),
+            "logical_name": logical_name,
+        }
+        session_id = context.session.session_id if context.session else ""
+        execution_id = executions.admit(
+            operation_id=context.operation_id,
+            session_id=session_id,
+            work_kind="model.load",
+            frozen_inputs=frozen,
+            deadline_seconds=seconds,
+        )
+        work = model_load_work(models, loads, port, logical_name, in_flight)
+        in_flight[logical_name] = execution_id
+        executions.launch(execution_id, work)
         if context.effects is not None:
             context.effects.effect(
                 {
-                    "effect": "MODEL_LOADED",
+                    "effect": "MODEL_LOAD_DISPATCHED",
+                    "execution_id": execution_id,
                     "logical_name": logical_name,
-                    "state": "ACTIVE",
+                    "work": "model.load",
                 }
             )
         return {
+            "deadline_seconds": seconds,
+            "execution_id": execution_id,
             "logical_name": logical_name,
-            "location": str(path),
-            "reply": dict(reply),
-            "state": "ACTIVE",
+            "state": "STARTING",
+            "work": "model.load",
         }
 
     return handler
 
 
-def _make_model_unload(loads: ModelLoadStates, port: BackendPort):
+def model_unload_work(
+    loads: ModelLoadStates, port: BackendPort, logical_name: str
+):
+    """The unload run's work factory (wb-11): the graceful stop /
+    attached unload on the worker thread — the observed eviction fold
+    on success; a failure performs NO walk (the observed truth is
+    still ACTIVE) and the cause rides the FAILED diagnostics (§21)."""
+
+    def work(context: WorkContext) -> Mapping[str, object]:
+        context.check()  # the entry checkpoint (§12)
+        try:
+            reply = port.unload_model(logical_name)
+        except Exception:
+            raise  # no ladder walk — the run's FAILED diagnostics
+            # carry the cause; the model's truth is still ACTIVE
+        loads.settle_unload_success(logical_name)
+        return {
+            "logical_name": logical_name,
+            "reply": dict(reply),
+            "state": "EVICTED",
+        }
+
+    return work
+
+
+def _make_model_unload(
+    loads: ModelLoadStates,
+    port: BackendPort,
+    executions: ExecutionRegistry,
+):
     def handler(context) -> Mapping[str, object]:
         arguments = dict(context.arguments)
-        unknown = sorted(set(arguments) - {"logical_name"})
+        unknown = sorted(set(arguments) - {"logical_name", "deadline_seconds"})
         if unknown:
             raise _rejected(
                 f"model.unload: unknown argument(s) {unknown} "
-                "(closed set: ['logical_name'])"
+                "(closed set: ['deadline_seconds', 'logical_name'])"
             )
         logical_name = arguments.get("logical_name")
         if not isinstance(logical_name, str) or not logical_name:
@@ -638,23 +794,42 @@ def _make_model_unload(loads: ModelLoadStates, port: BackendPort):
                 "active to unload"
             )
         try:
-            reply = port.unload_model(logical_name)
-        except Exception:
-            # no tracker walk — the observed truth is still ACTIVE
-            raise  # SENT_OUTCOME_UNKNOWN upstream
-        loads.settle_unload_success(logical_name)
+            seconds = executions.resolve_deadline_seconds(
+                arguments.get("deadline_seconds")
+                if arguments.get("deadline_seconds") is not None
+                else MODEL_UNLOAD_DEFAULT_DEADLINE_SECONDS
+            )
+        except RegistryError as exc:
+            raise _rejected(f"model.unload: {exc}") from exc
+        frozen = {
+            "deadline_seconds": str(seconds),
+            "logical_name": logical_name,
+        }
+        session_id = context.session.session_id if context.session else ""
+        execution_id = executions.admit(
+            operation_id=context.operation_id,
+            session_id=session_id,
+            work_kind="model.unload",
+            frozen_inputs=frozen,
+            deadline_seconds=seconds,
+        )
+        work = model_unload_work(loads, port, logical_name)
+        executions.launch(execution_id, work)
         if context.effects is not None:
             context.effects.effect(
                 {
-                    "effect": "MODEL_UNLOADED",
+                    "effect": "MODEL_UNLOAD_DISPATCHED",
+                    "execution_id": execution_id,
                     "logical_name": logical_name,
-                    "state": "EVICTED",
+                    "work": "model.unload",
                 }
             )
         return {
+            "deadline_seconds": seconds,
+            "execution_id": execution_id,
             "logical_name": logical_name,
-            "reply": dict(reply),
-            "state": "EVICTED",
+            "state": "STARTING",
+            "work": "model.unload",
         }
 
     return handler
@@ -709,11 +884,13 @@ def register_backend_operations(
         OperationSpec(
             name="model.load",
             kind="MUTATION",
-            handler=_make_model_load(models, loads, port),
+            handler=_make_model_load(models, loads, port, executions),
             session_scoped=True,
             description=(
-                "§20's loading half: select + load + observe ACTIVE "
-                "(the Model ladder walked on the observed outcome)"
+                "§20's loading half as a RUN (wb-11): the fast "
+                "dispatch walks the ladder to SELECTED and admits a "
+                "model.load execution — the minutes-class port call "
+                "runs off the dispatch lock; run.get is the poll path"
             ),
         )
     )
@@ -721,11 +898,12 @@ def register_backend_operations(
         OperationSpec(
             name="model.unload",
             kind="MUTATION",
-            handler=_make_model_unload(loads, port),
+            handler=_make_model_unload(loads, port, executions),
             session_scoped=True,
             description=(
-                "§20's unload half: ACTIVE → EVICTED on the observed "
-                "reply"
+                "§20's unload half as a RUN (wb-11): the graceful "
+                "stop / attached unload rides the worker thread — "
+                "ACTIVE → EVICTED observed on the run's terminal"
             ),
         )
     )

@@ -1,50 +1,35 @@
-Iteration: iter-227 (`wb-10-owner-experience` — the owner's
-2026-09-25 fix list over the wb-9 handback: the launcher's Popen
-`buffering` TypeError + «редот у меня такой
-C:\...\Redot_v26.2-stable_windows_win64, где найти redot.exe и как
-его подключить?» + «просто открывающийся проводник и выбор уже
-скаченных локальных моделей» + «пользователь не должен вводить
-команды чтобы запустить или скачать что-либо!» + «интерфейс вверх
-убожества»): the zero-command owner experience — workbench_launch.py
-reworked (bufsize fix; the folder-aware Redot resolution: release
-folder → the engine exe, CLI/env strict-verbatim, the persisted
-workbench/runtime/launcher.json + the Desktop-shaped auto-scan + the
-native tk folder picker; the observed bind URL forwarded to the Redot
-child; the bare "--" separator stripped — the latent wb-9 gateway-arg
-bug) + the `model.import` work kind (a LOCAL copy into the models
-root: .part + atomic rename, live progress + cooperative cancel, the
-admission gates pre-run — NO network, INV-4 untouched) + discover()'s
-`models_root` + shell.gd's native-picker Models manager (Add local
-models…/Add folder… over the OS dialogs, Open models folder via
-OS.shell_open, the URL fetch demoted to the collapsed advanced row) +
-the theme@0.2 visual pass (the chip/card_user tokens, the warmer ramp)
-+ Workbench.bat / Workbench Setup.bat the double-click entries.
+Iteration: iter-229 (`visual-system-admission` — the owner's
+2026-09-26 «вот и отлично, зафиксируй где нужно и обращайся при
+дальнейшей работе! нынешний ui - ужасен! поэтому всеми тремя руками
+и ногами - за!» call over the external 24-section Visual System and
+UI Engineering instruction document): docs/VISUAL_SYSTEM_UI.md
+ADMITTED as the visual rows' law owner (D-211, the D-207 engine-index
+pattern) — the surface-driven grammar + the semantic token taxonomy +
+the neutral-first/ONE-accent color law + the not-color-only
+invariant + the per-surface visual state matrix + the transplantation
+protocol (mechanisms, not looks) + the reference pack under AGENTS
+§2.8 + the §8 per-row UI report + the anti-patterns + the wb-12+
+owner-gated row queue; the standing resolutions: functional rows
+first, the doc is the LAW for each row never a parallel program, the
+app spec's §18 evidence law wins over quiet chrome.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-10 DONE) + the world track + the SoW
-horizon, ROADMAP §2/§6) ·
-2281 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+(the wb family its live head, wb-11 DONE + the visual rows queued
+wb-12+) + the world track + the SoW horizon, ROADMAP §2/§6) ·
+2284 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent) ·
 Date: 2026-09-26 ·
-Scope: scripts/workbench_launch.py (reworked) +
-workbench/application/operations/models.py (the import kind +
-models_root) + composition.py (the wiring) + shell.gd (the native
-picker + the visual pass) + workbench_theme.tres (theme@0.2) +
-project.godot (1440×900) + Workbench.bat + Workbench Setup.bat (new)
-+ tests/test_model_import.py (8) + tests/test_workbench_launch.py
-(12 — THE REAL SPAWN integration: the buffering crash pinned dead) +
-the pin updates (test_shell_contract +3, test_workbench_app,
-test_operations) + the state docs — 18 paths (the 3–5 soft limit
-honestly over: the launcher rework + the import kind + the frontend
-surface + the theme + the entries + the claim packets, AGENTS §2.3,
-the scope noted in the worklog).
-Track A: the wb family (wb-10 the owner experience — DONE). The prior
-iterations' record: iter-226 (wb-9 model flow, D-208), 225 (the
-Redot engine index, D-207), 224 (the wb-8 handback + D-206's delivery
-protocol), 223 (wb-8), 222 (wb-7), 221 (wb-6), 220 (wb-5), 219
-(wb-4), 218 (wb-3), 217 (wb-2), 216/215 (wb-1). The detail lives in
-the worklog + git.
+Scope: docs/VISUAL_SYSTEM_UI.md (new — the admitted law) +
+docs/AGENT_NAVIGATION.md (§1's row) + docs/TASKS.md (the wb-9+
+visual pointer + the ledger line) + docs/DECISIONS.md (D-211) +
+STATUS.md (this header + the FAQ line) + worklog.md — 6 paths
+(doc-only, the owner's explicit call, AGENTS §2.3's scope note).
+Track A: the wb family (the visual rows queued wb-12+ per
+VISUAL_SYSTEM_UI §10; the prior record: iter-228 wb-11 transport
+chain, 227 wb-10, 226 wb-9 D-208, 225 the engine index D-207, 224
+D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
+217 wb-2, 216/215 wb-1). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -72,7 +57,15 @@ the worklog + git.
 
 ## Active KIs
 
-- (none — KI#91 deleted per the 2-iteration cleanup law, AGENTS §5)
+- (none — KI#92 opened + CLOSED iter-228 in the same row: the
+  transport-13 freeze chain — the coarse dispatch lock held
+  minutes-class by the synchronous model.load spawn/readiness walk
+  starved every concurrent request past the client's 10s budget; the
+  client's one-request queue wedged behind the long call; the
+  undrained Windows pipes could wedge the managed server mid-load;
+  the `os.set_blocking` stderr_tail raised on Windows — the failure
+  cause showed '(empty)'. The fix: the load/unload runs + the pipe
+  drains + the honest guards, wb-11.)
 
 ## FAQ / Pitfalls
 
@@ -81,8 +74,8 @@ the worklog + git.
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
 - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`) — the branch EVENT TYPE is the carrier (iter-43)** — `render/tracery.py`.
-- **Validator verdicts follow CURRENT canon, never the anchor (iter-9); invented = contradicted, unmodeled = insufficient_data** — VALIDATION_SPEC §4–§5; the call budget §7.
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the app spec's §18 evidence law wins over quiet chrome)** — VISUAL_SYSTEM_UI §0/§6 (admitted iter-229, D-211); engine/API questions still route through docs/REDOT_ENGINE_INDEX.md (D-207).
+- **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
 - **Hardcoded `from_` is a desync (KI#13/KI#46): repeat effects idempotent; the carried-item position contract single-owned by `movement_changes`; the `_commit` gate fails loud before the write (D-035)** — `core/resolvers.py`.

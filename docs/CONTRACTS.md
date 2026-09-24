@@ -410,6 +410,40 @@
 > record: TASKS iter-227 + the worklog + git. The family contract
 > below stays (wb-11..N still owner-gated rows).
 
+> **wb-11 LANDED (iter-228, the owner's 2026-09-26 report over the
+> wb-10 handback — «молча висят + транспорт результ 13» + «модель
+> выбрать не могу, там пусто, моделей не видно, кнопка выбрать модель
+> не работает (проводник не открывается)» + the evidence «llama.cpp и
+> модели запускаются штатно если отдельно запускать»):** the
+> transport-13 freeze chain pinned dead — the DIAGNOSIS: a
+> minutes-class managed model.load ran its spawn+readiness walk
+> INSIDE the gateway's coarse dispatch lock (gateway.py's one lock
+> around the whole pipeline), starving every concurrent request
+> (model.list, session.create, app.status) past the client's 10s
+> budget → HTTPRequest RESULT_TIMEOUT (13) on everything → the empty
+> Models list + the dead session-gated buttons; the client's
+> sequential one-request queue wedged behind the long call too; the
+> undrained Windows PIPEs could wedge the managed server mid-load;
+> the `os.set_blocking` stderr_tail raised on Windows — the failure
+> cause showed '(empty)'. THE FIX: `model.load`/`model.unload` become
+> RUNS (app §8's own law, the chat.send pattern — **the wire shape
+> change: both now return the execution document
+> {execution_id, state: "STARTING", work, deadline_seconds}, the
+> terminal truth rides run.get, the FAILED diagnostics carry the
+> observed cause**; the single-slot + in-flight admission guards;
+> MODEL_LOAD/UNLOAD_DEFAULT_DEADLINE_SECONDS 330/30 the rows' own §12
+> budgets) + `llama_process.py`'s `_PipeDrain` (one daemon reader per
+> captured pipe into a bounded 64KB tail ring — the pipe never fills,
+> stderr_tail cross-platform over the ring) + shell.gd's run-poll
+> Models circuits (model-load-get/model-unload-get on the shared
+> tick; the honest picker/load guards — never a silent return, §18;
+> the failed scan re-arms so the empty list never sticks). The claim
+> packet: test_backend_row's run-form rework + 3 new pins incl. THE
+> DISPATCH-LOCK regression (model.list ANSWERS while a gated load
+> stands in the port call) + test_shell_contract's wb-11 pins. The
+> landing record: TASKS iter-228 + D-210 + the worklog + git. The
+> family contract below stays (wb-12..N still owner-gated rows).
+
 **Pinned decisions** (each grounded in the brief or standing law):
 
 - D1 Runtime: Redot 26.2 LTS (`redot-26.2-stable`), Compatibility

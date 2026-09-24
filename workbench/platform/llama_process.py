@@ -72,6 +72,7 @@ promote validated knobs into typed config as they earn consumers).
 from __future__ import annotations
 
 import subprocess
+import threading
 import time
 from collections.abc import Callable, Sequence
 from pathlib import Path
@@ -117,6 +118,64 @@ DEFAULT_REPEAT_PENALTY = 1.1
 DEFAULT_HOST = "127.0.0.1"
 
 _STOP_POLL_S = 0.05
+
+#: The per-pipe drain ring (bytes kept for the honest failure note):
+#: enough for llama-server's verbose startup + the last requests' —
+#: stderr lines, bounded everywhere (§26's spirit at the process row).
+_PIPE_TAIL_BYTES = 64 * 1024
+
+
+class _PipeDrain:
+    """One captured pipe's reader thread (wb-11 — the Windows pipe
+    wedge + the honest tail): a spawned llama-server writes its logs
+    into PIPEs nobody drained — the OS pipe buffer (~4KB-class on
+    Windows) fills, the server BLOCKS mid-write, never answers /health,
+    and the readiness walk burns its whole budget (the observed
+    «транспорт результ 13» chain's trigger). One daemon thread per
+    pipe reads continuously into a bounded tail ring: the pipe never
+    fills, and the tail is readable cross-platform (the old
+    `os.set_blocking` dance raised on Windows pipes — the failure
+    note's cause showed '(empty)')."""
+
+    def __init__(self, stream, name: str) -> None:
+        self._stream = stream
+        self._name = name
+        self._lock = threading.Lock()
+        self._buffer = bytearray()
+
+    def start(self) -> None:
+        thread = threading.Thread(
+            target=self._drain,
+            name=f"canonsim-llama-{self._name}",
+            daemon=True,
+        )
+        thread.start()
+
+    def _drain(self) -> None:
+        try:
+            while True:
+                # read1: whatever arrived, never a wait-for-the-whole-n
+                # (a live process's last line lands in the ring now,
+                # not at EOF).
+                chunk = self._stream.read1(4096)
+                if not chunk:
+                    break  # EOF — the process closed its end
+                with self._lock:
+                    self._buffer.extend(chunk)
+                    excess = len(self._buffer) - _PIPE_TAIL_BYTES
+                    if excess > 0:
+                        del self._buffer[:excess]
+        except (OSError, ValueError):
+            return  # the pipe died under us — the ring keeps its tail
+
+    def tail_text(self, limit: int) -> str:
+        """The drained tail as text (the honest failure note's cause —
+        works on every platform: it reads OUR ring, never the pipe
+        fd; a live process's recent output is already in the ring)."""
+        with self._lock:
+            text = bytes(self._buffer).decode("utf-8", errors="replace")
+        text = text.strip()
+        return text[-limit:] if text else ""
 
 
 class LlamaProcessError(RuntimeError):
@@ -252,6 +311,8 @@ class LlamaServerProcess:
         self._command = [str(part) for part in command]
         self._cwd = cwd
         self._process: subprocess.Popen[bytes] | None = None
+        self._stdout_drain: _PipeDrain | None = None
+        self._stderr_drain: _PipeDrain | None = None
 
     @property
     def command(self) -> list[str]:
@@ -285,6 +346,15 @@ class LlamaServerProcess:
                 "--llama-server-exe with the actual path (the owner's "
                 "station: D:\\llama.cpp\\llama-server.exe)"
             ) from exc
+        # wb-11: the drains — one daemon reader per captured pipe (the
+        # Windows pipe-buffer wedge pinned dead; the tail ring feeds
+        # stderr_tail on every platform).
+        assert self._process.stdout is not None
+        assert self._process.stderr is not None
+        self._stdout_drain = _PipeDrain(self._process.stdout, "stdout")
+        self._stderr_drain = _PipeDrain(self._process.stderr, "stderr")
+        self._stdout_drain.start()
+        self._stderr_drain.start()
 
     def wait_ready(
         self,
@@ -336,19 +406,10 @@ class LlamaServerProcess:
     def stderr_tail(self, limit: int = 400) -> str:
         """The captured stderr tail for the honest failure note (the
         spawn/ready failure's observed cause — bounded, never the
-        whole log). Best-effort on a running process (a non-blocking
-        drain; empty when nothing new was captured)."""
-        process = self._process
-        if process is None or process.stderr is None:
+        whole log). wb-11: the answer comes from the drain ring (the
+        reader thread's bounded buffer) — cross-platform, current
+        while the process lives, complete once it dies."""
+        drain = self._stderr_drain
+        if drain is None:
             return ""
-        try:
-            import os
-
-            os.set_blocking(process.stderr.fileno(), False)
-            chunk = process.stderr.read() or b""
-        except (OSError, ValueError):
-            return ""
-        if not chunk:
-            return ""
-        text = chunk.decode("utf-8", errors="replace").strip()
-        return text[-limit:]
+        return drain.tail_text(limit)
