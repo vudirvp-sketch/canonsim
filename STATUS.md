@@ -1,64 +1,49 @@
-Iteration: iter-221 (`iter-221-wb6-backend` — the backend
-row, the owner's «подключи llama.cpp» call over the v5.2 brief,
-app §32 step 7 — the row that closes chat.send's admission-law
-deferral): the llama.cpp backend wired as ONE typed port injected
-at the composition root —
-`workbench/application/operations/backend.py` (the typed
-`BackendPort` — props/chat/load_model/unload_model, every member
-with a registered consumer, the physical owner `cli/engine.py`'s
-LlamaServerClient satisfying it structurally, NEVER imported —
-INV-4's two-surface form untouched; `ModelLoadStates` — §11's
-Model ladder walked on OBSERVED outcomes, the state = the fold of
-the backend's replies, LOADING/LOADED/UNLOADING transit states
-never resting ones; the load-failure law — the observed refusal
-(http/malformed) walks SELECTED→LOADING→FAILED, the unknown
-«unavailable» outcome rests SELECTED (§12.1's sibling at the
-model layer, the re-load legal); the unload failure NO walk —
-the still-loaded truth; `chat.send` — §19.1's
-REQUESTED→ACCEPTED→EFFECTIVE→OBSERVED walk over the wb-5 run
-registry, identity-then-poll per §8, the caller-tunable §12
-deadline, the props probe evidence-not-gate (the failed probe
-the honest «unavailable» note, the chat still completes);
-`model.load`/`model.unload` — §20's loading half: the discovery
-entry gate, select, the observed settle) + `cli/engine.py`'s
-model-management transport half (POST /models/load +
-/models/unload — BUILD-SENSITIVE research evidence per app §20:
-the b11064 station's model-management reality is the ROUTER, the
-dedicated endpoints the newer upstream line; the wire shapes
-stub-pinned, the live re-verification a station row; single-try
-no-ladder) + `composition.py`'s `backend=` wiring (the three
-operations registered ONLY when the port is injected — the
-admission law's honest form continued; the malformed port the
-§6.1 validate step's loud CompositionError).
+Iteration: iter-222 (`iter-222-wb7-live-chat` — the live chat
+circuit, the owner's «продолжай работу по wb 7» + «могу ли я
+подключить llama.cpp к реготу» call over the v5.2 brief, frontend
+§46 Phase A's Chat row + app §22's launcher): the row that makes
+llama.cpp REACHABLE from the Redot Chat surface — the frontend
+dials the GATEWAY only (frontend §47 G8), llama.cpp stays behind
+the engine adapter. `scripts/workbench_app.py` the composition
+root + loopback serve (the ONE launcher: Gateway + the wb-5
+operations + the wb-6 backend port injected — the only place
+INV-4's two sanctioned surfaces meet; `--no-backend` the honest
+admission form; the startup health probe evidence-not-gate; the
+missing-models-dir loud AppError) + the Redot half —
+`presentation/redot/scripts/gateway_client.gd` the typed POST /op
+client (the sequential queue, NO endpoint of its own) +
+`shell.gd`'s live circuit (app.status → session.create →
+chat.send → the run.get poll to the truthful terminal; Stop =
+run.cancel; the honest NOT CONNECTED/refusal/failure notes; the
+bounded §15 message list; the proof mode stays the static
+deterministic form — no network in the capture) +
+`project.godot`'s `canonism_workbench/gateway/url` committed
+default (the launcher's own port).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-6 DONE) + the world track + the SoW
+(the wb family its live head, wb-7 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2191 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+2202 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent; with REDOT_EXE set
-the suite reads 2196+1) ·
+the suite reads 2207+1) ·
 Date: 2026-09-24 ·
-Scope: workbench/application/operations/backend.py (new — the
-backend family) + cli/engine.py (the model-management transport
-half + chat's grammar default) + composition.py (the backend=
-wiring + the model_loads handle) + the __init__ envelope note +
-tests/test_backend_row.py (28 tests) + tests/test_engine.py (the
-stub's two management routes + the four adapter pins) +
-tests/test_operations.py (the envelope's allowed set + its
-docstring) + the state docs (CONTRACTS/TASKS/DECISIONS/NAV/
-README/worklog + this file) — 14 paths (the 3–5 soft limit
-honestly over: the row is a full contract slice — the port + the
-three operations + the transport half + the claim packet, AGENTS
-§2.3, the scope noted in the worklog; zero core change, zero pack
-change, the LOG untouched, INV-4's two-surface form unchanged —
-no new network module, cli/engine.py and workbench/api/
-transport.py stay the only sanctioned surfaces; the ladder gap —
-§11's Model FAILED is terminal with no re-selection path —
-recorded in D-203, never silently reconciled).
-Track A: wb-6 DONE. The prior iterations' record: iter-220 (wb-5
-operations), 219 (wb-4 gateway), 218 (wb-3 skeleton), 217 (wb-2
-redot shell), 216 (wb-1 redot), 215 (wb-1 python). The detail
+Scope: scripts/workbench_app.py (new — the launcher) +
+workbench/presentation/redot/scripts/gateway_client.gd (new — the
+typed client) + shell.gd (the live circuit over the wb-2 shell) +
+project.godot (the gateway URL setting) + tests/test_workbench_app.py
+(new — the 8-test claim packet) + tests/test_shell_contract.py (the
+three wb-7 pins) + .gitignore (workbench/runtime/) + the state docs
+(CONTRACTS/TASKS/DECISIONS/NAV/README/worklog + this file) — 14
+paths (the 3–5 soft limit honestly over: the launcher + the
+frontend half + the claim packet, AGENTS §2.3, the scope noted in
+the worklog; zero core change, zero pack change, the LOG untouched,
+INV-4's two-surface form unchanged — no new network module; the
+launcher is the composition root, the frontend an API client of the
+sanctioned inbound surface).
+Track A: wb-7 DONE. The prior iterations' record: iter-221 (wb-6
+backend), 220 (wb-5 operations), 219 (wb-4 gateway), 218 (wb-3
+skeleton), 217 (wb-2 redot shell), 216/215 (wb-1). The detail
 lives in the worklog + git.
 
 
@@ -117,29 +102,27 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-221 DONE: wb-6's backend row — app §32 step 7 CLOSED (the
-owner's «подключи llama.cpp» call, D-203): the llama.cpp backend
-as one typed port injected at the composition root — chat.send
-registered (the admission-law deferral closed: the §19.1 layer
-walk over the wb-5 run registry, identity-then-poll, the
-caller-tunable §12 deadline), model.load/model.unload landed
-(§20's loading half — the Model ladder walked on observed
-outcomes: ACTIVE on success, FAILED on the observed refusal with
-the ladder's terminal gap recorded, the unknown outcome resting
-SELECTED — the re-load legal), the engine adapter's
-model-management transport half stub-pinned (build-sensitive —
-the live re-verification a station row); the 28-test claim packet
-landed (the REAL adapter's port conformance over the live stub
-server, the cancellation trio, the deadline terminal, the
-load/unload walks, the parity, the determinism pairs); the
-epistemic class FACT, the disposition CONFIRMED. wb-6 row DONE.**
+**iter-222 DONE: wb-7's live chat circuit — the Chat surface's
+real machinery LANDED (the owner's «продолжай работу по wb 7»
+call, D-204): scripts/workbench_app.py the composition root +
+loopback serve (the ONE launcher — the gateway + the operations +
+the injected llama.cpp backend port; the honest --no-backend form;
+the startup health probe evidence-not-gate) + the Redot half
+(gateway_client.gd the typed POST /op client + shell.gd's live
+circuit: app.status → session.create → chat.send → the run.get
+poll to the truthful terminal, Stop = run.cancel, the honest
+notes everywhere) + project.godot's gateway URL default; the
+8-test claim packet incl. THE END-TO-END chat over HTTP against
+the live stub llama-server + the dead-endpoint FAILED close; the
+epistemic class FACT, the disposition CONFIRMED. wb-7 row DONE.**
 
-1. wb-7+ per the family rows (app §32's ladder: live events +
+1. wb-8+ per the family rows (app §32's ladder: live events +
    reconnect/resync + the idempotency/revision/lease tests at live
-   scale; persistence CAS + recovery roles; the frontend §46 rows —
-   the Chat/Models/Inference surfaces, the load-state READ
-   operation's consumer; the §11.1 MANAGED half + the replacement
-   path; the CanonSim seam) — the owner's call opens each row.
+   scale — session.events' frontend consumer + the RESYNC arm;
+   persistence CAS + recovery roles; the frontend §46 rows — the
+   Models/Inference surfaces, the load-state READ operation's
+   consumer; the §11.1 MANAGED half + the replacement path; the
+   CanonSim seam) — the owner's call opens each row.
 2. The remaining station rows (the owner's next engine run,
    TEST_PLAN §8.5's standing gaps + the wb-6 arm: the live-build
    /models/load + /models/unload re-verification against the
@@ -159,9 +142,9 @@ epistemic class FACT, the disposition CONFIRMED. wb-6 row DONE.**
    a future row's own call), the re-weigh's SALE (the heap's bloom
    drain — the withhold's own future row), the shave's temporal
    placement (the arc's assembly's remaining half — a future row's
-   own call), the SoW horizon (bg-6, owner-deferred —
-   long-parked per the owner's 2026-09-21 call). New rows enter on
-   the owner's call only.
+   own call), the SoW horizon (bg-6, owner-deferred — long-parked
+   per the owner's 2026-09-21 call). New rows enter on the
+   owner's call only.
 3. The intake-34/35/36/38 residues (each behind its own trigger,
    never a default): the ref-file deep record — a named row
    consuming a specific math-catalog or guide29 mechanism family

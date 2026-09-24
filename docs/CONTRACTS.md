@@ -214,8 +214,46 @@
 > `tests/test_backend_row.py` (28 tests — the REAL adapter's port
 > conformance over the live stub server among them) + test_engine's
 > four management pins. The landing record: TASKS iter-221 + the
-> worklog + git. The family contract below stays (wb-7..N still
+> worklog + git. The family contract below stays (wb-8..N still
 > owner-gated rows).
+> **wb-7 LANDED (iter-222, the owner's «продолжай работу по wb 7» +
+> «могу ли я подключить llama.cpp к реготу» call — the live chat
+> circuit, frontend §46 Phase A's Chat row + app §22's CLI/batch
+> delivery surface):** the row that makes llama.cpp REACHABLE from
+> the Redot Chat surface — `scripts/workbench_app.py` the
+> composition root + loopback serve (the ONE launcher: Gateway +
+> `compose_workbench_operations(backend=LlamaServerClient(
+> EngineConfig(endpoint=...)))` + `LoopbackHttpTransport` on
+> 127.0.0.1:8765 — the only place INV-4's two sanctioned surfaces
+> meet, the port injected never imported; `--no-backend` the honest
+> admission form — the three backend operations simply unregistered;
+> the startup health probe evidence-not-gate — the app serves with
+> the backend down, chat runs closing FAILED with the observed cause;
+> the missing-models-dir loud AppError; the defaults 127.0.0.1:8765
+> + llama-server's own 8080 + `workbench/runtime/models` gitignored)
+> + the Redot frontend half — `presentation/redot/scripts/
+> gateway_client.gd` the typed POST /op client (the sequential
+> one-in-flight queue, `operation_answered`/`transport_failed`, the
+> non-200 = transport-failure law, NO endpoint of its own — G8's
+> executable half: the frontend dials the GATEWAY only, never
+> llama.cpp) + `shell.gd`'s live circuit (the URL resolution order
+> `--gateway-url` > `CANONSIM_GATEWAY_URL` > the committed project
+> setting; app.status → session.create (the per-process idempotency
+> key) → chat.send → the run.get poll to the truthful terminal —
+> COMPLETED lands the message + the backend OBSERVED note,
+> FAILED/CANCELED/FAILED_TO_CANCEL/UNKNOWN land their honest notes,
+> never a fake; Stop = run.cancel; the bounded §15 message list with
+> the one-shot trim note; the badge/Settings/status-bar live updates;
+> the proof mode stays the STATIC deterministic form — no network in
+> the capture, the wb-2 D4 law preserved) + `project.godot`'s
+> `canonism_workbench/gateway/url` committed default (the launcher's
+> own port). The claim packet: `tests/test_workbench_app.py` (8
+> tests — the wiring law, the honest no-backend form, the loud
+> arguments, the live loopback roundtrip, THE END-TO-END chat over
+> HTTP against the live stub llama-server, the dead-endpoint FAILED
+> close) + `test_shell_contract.py`'s three wb-7 pins. The landing
+> record: TASKS iter-222 + the worklog + git. The family contract
+> below stays (wb-8..N still owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 
@@ -282,6 +320,7 @@ consumer); wb-2 the Redot shell + theme; wb-3 the application
 operations skeleton; wb-4 the gateway (INV-4's owner-gated exception);
 wb-5 the minimal application operations (app §32 step 5 — the
 operations substrate + the run/model-discovery families over the
-registered surface); wb-6+ per the brief's §32/§46 ladders (live
-events + reconnect/resync; persistence; the backend row — chat,
-models, inference; history/diagnostics; the CanonSim seam).
+registered surface); wb-7 the live chat circuit (this
+row); wb-8+ per the brief's §32/§46 ladders (live events +
+reconnect/resync; persistence; the frontend rows — models,
+inference; history/diagnostics; the CanonSim seam).

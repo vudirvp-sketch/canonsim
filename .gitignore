@@ -28,6 +28,10 @@ dist/
 # toolchain; generated cache never committed)
 workbench/presentation/redot/.godot/
 
+# The Workbench runtime data root (wb-7: the default MODELS_ASSETS dir
+# scripts/workbench_app.py scans — the operator's GGUF files, never committed)
+workbench/runtime/
+
 # Environments & secrets
 .venv/
 .env

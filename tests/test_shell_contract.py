@@ -96,3 +96,65 @@ def test_shell_script_proof_contract() -> None:
         "the shell root must be full-rect in the scene file (the app fills "
         "the window — the wb-2 layout lesson)"
     )
+
+
+# ------------------------------------------- wb-7: the live chat circuit
+
+
+def test_gateway_client_is_committed_and_contracted() -> None:
+    """wb-7's frontend half: the typed POST /op client is a committed
+    project file whose contract the shell depends on — the single
+    dispatch route, the loopback-only posture (no llama.cpp URL can
+    appear in the frontend: frontend §47 G8), and the two signals the
+    shell wires."""
+    client = REDOT / "scripts" / "gateway_client.gd"
+    text = client.read_text(encoding="utf-8")
+    assert '"/op"' in text, "the single dispatch route (wb-4's §8 law)"
+    assert "signal operation_answered" in text
+    assert "signal transport_failed" in text
+    assert "JSON.stringify" in text and "JSON.parse_string" in text
+    # G8's executable half: the client holds NO endpoint of its own —
+    # no absolute URL, no llama.cpp API path, no backend port literal.
+    # (The docstring may NAME llama.cpp as the thing never dialled.)
+    import re
+
+    assert not re.search(r"https?://", text), (
+        "the client must not hardcode an endpoint — the URL is configured"
+    )
+    assert "8080" not in text, "no backend port literal in the frontend"
+    assert "/v1/chat" not in text and "/completions" not in text, (
+        "the frontend dials the GATEWAY only, never the llama.cpp API "
+        "(frontend §47 G8)"
+    )
+
+
+def test_shell_live_circuit_contract() -> None:
+    """wb-7's shell wiring: the live-circuit entry points exist by name
+    (the URL resolution order, the session/chat/poll surface, the
+    honest NOT CONNECTED default) and the proof mode stays the static
+    deterministic form (no live circuit when --png rides)."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    # The URL resolution order (user arg > env > project setting).
+    assert '"--gateway-url"' in text
+    assert "CANONSIM_GATEWAY_URL" in text
+    assert 'canonism_workbench/gateway/url' in text
+    # The circuit's operation surface (the gateway's own names).
+    for op in ('"app.status"', '"session.create"', '"chat.send"',
+               '"run.get"', '"run.cancel"'):
+        assert op in text, f"the live circuit must call {op}"
+    # The client + the honest default badge.
+    assert "gateway_client.gd" in text
+    assert "CANONSIM · NOT CONNECTED" in text
+    # The deterministic proof mode: the live circuit starts ONLY on
+    # the interactive path (paths.is_empty() branch).
+    assert "_start_live_circuit" in text
+    assert "if paths.is_empty():" in text
+
+
+def test_project_carries_the_gateway_url_setting() -> None:
+    """The committed default the live shell falls back to — the same
+    loopback URL scripts/workbench_app.py serves on (the launcher's
+    DEFAULT_HOST/DEFAULT_PORT)."""
+    text = PROJECT.read_text(encoding="utf-8")
+    assert "[canonism_workbench]" in text
+    assert 'gateway/url="http://127.0.0.1:8765"' in text

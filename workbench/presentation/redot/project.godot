@@ -9,9 +9,16 @@ config_version=5
 [application]
 
 config/name="CanonSimWorkbench"
-config/description="CanonSim Workbench - the application shell (wb-2) over the wb-1 vertical seam proof (Visual Scene IR -> placeholder composition -> screenshot artifact)"
+config/description="CanonSim Workbench - the application shell (wb-2/wb-7: the live chat circuit over the loopback gateway) over the wb-1 vertical seam proof (Visual Scene IR -> placeholder composition -> screenshot artifact)"
 run/main_scene="res://scenes/shell.tscn"
 config/features=PackedStringArray("GL Compatibility")
+
+[canonism_workbench]
+
+; The live circuit's default gateway URL (wb-7): the shell resolves
+; --gateway-url (user arg) > CANONSIM_GATEWAY_URL (env) > THIS setting.
+; The default matches scripts/workbench_app.py's own loopback default.
+gateway/url="http://127.0.0.1:8765"
 
 [display]
 
