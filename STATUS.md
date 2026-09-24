@@ -1,35 +1,41 @@
-Iteration: iter-229 (`visual-system-admission` — the owner's
-2026-09-26 «вот и отлично, зафиксируй где нужно и обращайся при
-дальнейшей работе! нынешний ui - ужасен! поэтому всеми тремя руками
-и ногами - за!» call over the external 24-section Visual System and
-UI Engineering instruction document): docs/VISUAL_SYSTEM_UI.md
-ADMITTED as the visual rows' law owner (D-211, the D-207 engine-index
-pattern) — the surface-driven grammar + the semantic token taxonomy +
-the neutral-first/ONE-accent color law + the not-color-only
-invariant + the per-surface visual state matrix + the transplantation
-protocol (mechanisms, not looks) + the reference pack under AGENTS
-§2.8 + the §8 per-row UI report + the anti-patterns + the wb-12+
-owner-gated row queue; the standing resolutions: functional rows
-first, the doc is the LAW for each row never a parallel program, the
-app spec's §18 evidence law wins over quiet chrome.
+Iteration: iter-230 (`wb-12-token-audit` + the chat follow
+mechanism — the owner's 2026-09-25 «тема и UI все так же убоги, тема
+ужасная» + «в чате при получении сообщений от языковой модели => не
+происходит плавной прокрутки вниз» calls, over the v5.2 plans pack
+the visual direction named): theme@0.3 — the token audit per
+VISUAL_SYSTEM_UI §2/§3 (the neutral ramp re-pinned over the
+Catppuccin Mocha VALUE reference — the mechanism taken is the tuned
+layered luminance separation, per §6 mechanisms-not-looks; exactly
+ONE accent, the soft blue #89b4fa family; accent_deep RETIRED — no
+consumer; the NavButton type variation + the styles/chip_busy token)
++ the chat's FOLLOW LAW (the smooth tween over the scrollbar's float
+value — never the integer jump; the layout-settle await before the
+target is read; the near-bottom gate so a reading owner is never
+yanked; the follow fires for EVERY role incl. the user's own send)
++ the GENERATING chip (§5's Chat matrix state made visible: a pulsing
+accent dot AND a text label — §4's not-color-only law).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-11 DONE + the visual rows queued
-wb-12+) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2284 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+(the wb family its live head, wb-12 DONE + the visual rows queued
+wb-13+) + the world track + the SoW horizon, ROADMAP §2/§6) ·
+2285 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent) ·
-Date: 2026-09-26 ·
-Scope: docs/VISUAL_SYSTEM_UI.md (new — the admitted law) +
-docs/AGENT_NAVIGATION.md (§1's row) + docs/TASKS.md (the wb-9+
-visual pointer + the ledger line) + docs/DECISIONS.md (D-211) +
-STATUS.md (this header + the FAQ line) + worklog.md — 6 paths
-(doc-only, the owner's explicit call, AGENTS §2.3's scope note).
-Track A: the wb family (the visual rows queued wb-12+ per
-VISUAL_SYSTEM_UI §10; the prior record: iter-228 wb-11 transport
-chain, 227 wb-10, 226 wb-9 D-208, 225 the engine index D-207, 224
-D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
-217 wb-2, 216/215 wb-1). The detail lives in the worklog + git.
+Date: 2026-09-25 ·
+Scope: workbench/presentation/redot/themes/workbench_theme.tres (the
+re-pinned token values + the new NavButton/chip_busy tokens) +
+workbench/presentation/redot/scripts/shell.gd (the follow law + the
+busy chip + the NavButton wiring, SHELL_VERSION 0.4) +
+tests/test_shell_contract.py (+1 test, the wb-12 pins updated) + the
+state docs (STATUS/TASKS/NAV/CONTRACTS/DECISIONS/README/worklog) — 9
+paths (the 3–5 soft limit honestly over: the theme + the shell + the
+claim packet + the state docs, AGENTS §2.3).
+Track A: the wb family (wb-12 DONE — the visual rows queued wb-13+
+per VISUAL_SYSTEM_UI §10; the prior record: iter-229 the law
+admission, 228 wb-11 transport chain, 227 wb-10, 226 wb-9 D-208, 225
+the engine index D-207, 224 D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220
+wb-5, 219 wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -89,33 +95,28 @@ D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
 - **The cap laws: substance over line count — filler cut always; named systems/field lists/enum values/verdicts never cut to fit; a breach triggers a cruft pass first** — AGENTS §6/§6.1; enforced by `scripts/docguard.py`.
 - **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088)** — BRIEF_SPEC §2/§3.3.
 - **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
-- **Gate mechanics: seed 125, only the director flag changes — ON fires `director_0000`, OFF ≥3 emergent chains (baseline 24); M3 counts per endpoint, decay-dominated in magnitude** — TEST_PLAN §4 + the D-136 verdict row.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
 - **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-10 note
 - **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
+- **The chat follow law (iter-230): read the scrollbar's max AFTER a frame — the autowrapped labels size late, reading it at call_deferred time is the short-scroll bug; TWEEN the bar's float `value` (never the int `scroll_vertical` jump); gate on near-bottom (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked; the late-layout re-settle stays bounded to ONE pass** — shell.gd `_scroll_to_bottom_smooth` (the owner's «не происходит плавной прокрутки вниз» call, the LM Studio/Discord follow mechanism)
 
 ## Next step
 
-**iter-227 DONE: the wb-10 owner experience LANDED (the launcher
-fixes + the folder-aware Redot resolution + the native-picker local
-model import + the theme@0.2 visual pass + the Workbench.bat
-zero-command entries).**
+**iter-230 DONE: wb-12 the token audit (theme@0.3) + the chat follow
+law + the GENERATING chip LANDED (the owner's «тема и UI все так же
+убоги» + «не происходит плавной прокрутки вниз» calls).**
 
-1. wb-10+ per the family rows (app §32's ladder: live events +
-   reconnect/resync + the idempotency/revision/lease tests at live
-   scale — session.events' frontend consumer + the RESYNC arm;
-   persistence CAS + recovery roles; the frontend §46 rows — the
-   Inference surface (the per-request sampler family + §19.1's
-   profile/preset composition — the launch settings are the BASE
-   layer now), history/diagnostics; the §11.1 replacement path
-   (prepare-new → swap → retire-old over a live server — the settings
-   update's next-spawn note names it); the live-build /models/load
-   re-verification against the owner's station; the CanonSim seam;
-   the models-dir-as-launch-setting row — a Browse-settable models
-   root for the OneDrive-synced-repo layout, parked per AGENTS §2.4)
-   — the owner's call opens each row. The owner's own live
-   verification of THIS row: double-click Workbench.bat → pick the
-   Redot folder once → Add local models… → Load → chat.
+1. wb-13+ per the visual queue (VISUAL_SYSTEM_UI §10 — the Models
+   surface's matrix rendering over the wb-11 run circuits, then the
+   Chat surface's semantic containers + composer states, then
+   Settings) — the owner's call opens each row; the wb-14 remainder
+   (the message containers' width/alignment grammar + the
+   new-messages-below affordance + a reduced-motion setting) parked as
+   the row's own scope. The exported-Windows-build row (the owner's
+   «по человечески сделать это нельзя?» — Workbench.bat's dev form is
+   the editor binary running the project; the product form is an
+   exported .exe over export presets, a row of its own) parked per
+   AGENTS §2.4 — a named row when the owner calls it.
 2. The remaining station rows (the owner's next engine run,
    TEST_PLAN §8.5's standing gaps + the wb-6 arm: the live-build
    /models/load + /models/unload re-verification against the

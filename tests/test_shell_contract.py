@@ -365,21 +365,87 @@ def test_the_zero_command_entry_is_committed() -> None:
 
 
 def test_the_theme_visual_refresh_landed() -> None:
-    """wb-10's visual pass: the theme@0.2 tokens the refreshed shell
-    reads by name (the pill chip, the user-card accent edge) exist in
-    the committed theme file — a renamed token is a runtime break the
-    suite must catch textually (§10's single-source law)."""
+    """wb-12's token audit (iter-230, the owner's «тема и UI все так же
+    убоги» call, VISUAL_SYSTEM_UI §2/§3 the law): the theme@0.3 tokens
+    the re-skinned shell reads by name — the single-accent pin (the
+    warm-orange family retired WITH its accent_deep token), the busy
+    chip (the GENERATING carrier), and the NavButton variation's full
+    state set (the rail's quiet controls) exist in the committed theme
+    file — a renamed token is a runtime break the suite must catch
+    textually (§10's single-source law)."""
     text = THEME.read_text(encoding="utf-8")
     for marker in (
         "Workbench/styles/chip",
+        "Workbench/styles/chip_busy",
         "Workbench/styles/card_user",
         "Workbench/colors/accent_soft",
         "Workbench/constants/bar_height = 52",
+        "NavButton/styles/normal",
+        "NavButton/styles/hover",
+        "NavButton/styles/pressed",
+        "NavButton/styles/hover_pressed",
+        "NavButton/styles/disabled",
+        "NavButton/styles/focus",
+        "NavButton/colors/font_color",
     ):
-        assert marker in text, f"the theme@0.2 token missing: {marker}"
-    assert "canon_workbench_theme@0.2" in SHELL_SCRIPT.read_text(
+        assert marker in text, f"the theme@0.3 token missing: {marker}"
+    # The audit's retire: the old warm accent's deep variant has no
+    # consumer left — its return is a regression of the one-accent law.
+    assert "Workbench/colors/accent_deep" not in text, (
+        "accent_deep was retired at wb-12 (no consumer; the ONE accent "
+        "family is accent/accent_soft/focus_ring)"
+    )
+    assert "canon_workbench_theme@0.3" in SHELL_SCRIPT.read_text(
         encoding="utf-8"
     )
+
+
+# ------------------------------------ iter-230: wb-12 + the chat follow law
+
+
+def test_the_chat_surface_smooth_follow() -> None:
+    """iter-230 (the owner's «в чате при получении сообщений от языковой
+    модели => не происходит плавной прокрутки вниз» call): the message
+    list's follow law — the smooth TWEEN over the scrollbar's float
+    value (never the integer scroll_vertical jump), the layout-settle
+    await BEFORE the target is read (the autowrapped labels size late
+    — reading max_value too early is the old short-scroll bug), the
+    near-bottom gate (a reader scrolled into history is never yanked),
+    the follow requested for EVERY role (the user's own message
+    included), and the GENERATING state's visible carrier (the busy
+    chip + the pulse, §4's not-color-only law)."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    # the smooth tween, not the integer jump
+    assert "_scroll_to_bottom_smooth" in text
+    assert 'bar, "value", target, SCROLL_TWEEN_S' in text
+    assert "scroll_vertical = int(" not in text, (
+        "the integer jump is the retired recipe — the tween owns the scroll"
+    )
+    # the layout-settle await before the target is read
+    assert "await get_tree().process_frame" in text
+    # the near-bottom gate + the deferred follow
+    assert "_near_bottom" in text
+    assert "SCROLL_FOLLOW_SLOP_PX" in text
+    assert "_request_scroll_follow" in text
+    assert "_scroll_follow_deferred.call_deferred(follows)" in text
+    # the late-layout guard (one bounded re-settle, never a loop)
+    assert "_after_follow_tween" in text
+    # the follow is requested for every role — the old assistant-only
+    # gate is gone from the card-append path
+    append_block = text.split("func _add_message_card")[1].split(
+        "func _request_scroll_follow"
+    )[0]
+    assert 'if role == "assistant":' not in append_block
+    # the GENERATING carrier: the busy chip + the pulse, wired into the
+    # single busy owner
+    assert '_s("chip_busy")' in text
+    assert "GENERATING" in text
+    assert "_start_busy_pulse" in text
+    assert "_stop_busy_pulse" in text
+    assert "_busy_row.visible = busy" in text
+    # the NavButton variation (the rail's quiet set, values in the theme)
+    assert 'set_type_variation("NavButton", "Button")' in text
+    assert 'add_theme_type_variation("NavButton")' in text
 
 
 # ----------------------------------- iter-224: the literal-concatenation ban

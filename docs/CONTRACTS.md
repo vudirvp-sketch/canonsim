@@ -444,6 +444,39 @@
 > landing record: TASKS iter-228 + D-210 + the worklog + git. The
 > family contract below stays (wb-12..N still owner-gated rows).
 
+> **wb-12 LANDED (iter-230, the owner's 2026-09-25 «тема и UI все так же
+> убоги, тема ужасная» + «в чате при получении сообщений от языковой
+> модели => не происходит плавной прокрутки вниз» calls over the v5.2
+> plans pack — VISUAL_SYSTEM_UI §10's queue head, D-211's law + D-212
+> the landing):** theme@0.3 — the token audit per the law's §2/§3: the
+> neutral ramp re-pinned over the Catppuccin Mocha VALUE reference
+> (§6's transplantation protocol applied to values — the MECHANISM
+> taken is the tuned layered luminance separation, the provenance
+> noted in the theme header; no assets, no code), exactly ONE accent
+> (the soft blue #89b4fa family: accent/accent_soft/focus_ring — the
+> old warm-orange family and its brown-tinted pressed/selected
+> surfaces retired, accent_deep RETIRED as token-without-consumer),
+> the NavButton type variation (the rail's quiet navigation set —
+> every value in the theme, the code names the type only) + the
+> styles/chip_busy token; ON THE SAME ROW the owner's named chat
+> blocker: the follow law in shell.gd (`_scroll_to_bottom_smooth` —
+> the smooth tween over the scrollbar's float value, never the integer
+> `scroll_vertical` jump; `await get_tree().process_frame` before the
+> target is read — the autowrapped labels size late, the old
+> call_deferred read was the short-scroll bug; the near-bottom gate
+> (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked;
+> the follow fires for EVERY role incl. the user's own send; the
+> bounded late-layout re-settle) + the GENERATING chip (§5's Chat
+> matrix state made visible: a pulsing accent dot AND a text label —
+> §4's not-color-only law, wired into `_set_busy` the single busy
+> owner). The claim packet: test_shell_contract's theme@0.3 pins
+> (the NavButton state set, chip_busy, the accent_deep-retirement
+> regression) + THE SMOOTH-FOLLOW pins (the tween recipe, the
+> layout-settle await, the near-bottom gate, the retired integer
+> jump, the every-role follow, the busy-chip carriers). The landing
+> record: TASKS iter-230 + D-212 + the worklog + git. The family
+> contract below stays (wb-13..N still owner-gated rows).
+
 **Pinned decisions** (each grounded in the brief or standing law):
 
 - D1 Runtime: Redot 26.2 LTS (`redot-26.2-stable`), Compatibility

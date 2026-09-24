@@ -1,6 +1,19 @@
 # CanonSim Workbench — the wb-2/wb-7 application shell (frontend §46
 # Phase A: custom theme -> Chat -> Settings).
 #
+# iter-230 (wb-12 + the chat follow mechanism — the owner's «тема и UI
+# все так же убоги» + «в чате при получении сообщений от языковой модели
+# => не происходит плавной прокрутки вниз» calls): the theme@0.3 token
+# audit re-skins every surface through the tokens (this script's reads
+# unchanged); the message list gains the FOLLOW LAW — a smooth tween over
+# the scrollbar's value (never the integer jump), the target read AFTER a
+# frame so the autowrap labels settle first, and a near-bottom gate so a
+# reader scrolled up into history is never yanked; the chat's GENERATING
+# state gains its visible carrier (the busy chip — a pulsing dot AND a
+# text label, §4's not-color-only law); the nav rail moves onto the
+# NavButton theme variation (navigation reads as navigation, not as a
+# grid of action buttons — every value still lives in the theme).
+#
 # What this script is: the Workbench's application shell, built FROM CODE on
 # the committed semantic-token theme (themes/workbench_theme.tres — every
 # colour/size/style arrives by token name, never a raw value: frontend §10).
@@ -72,7 +85,7 @@
 #   canonism_workbench/gateway/url — that order).
 extends Control
 
-const SHELL_VERSION := "canon_shell@0.3"
+const SHELL_VERSION := "canon_shell@0.4"
 const THEME_PATH := "res://themes/workbench_theme.tres"
 const GATEWAY_CLIENT_SCRIPT := preload("res://scripts/gateway_client.gd")
 const GATEWAY_URL_SETTING := "canonism_workbench/gateway/url"
@@ -102,6 +115,12 @@ const FETCH_NOTE_MAX_LENGTH := 240
 # second — the registry accepts any plain file, the filter is a
 # convenience, never a gate.
 const IMPORT_FILTERS := ["*.gguf ; GGUF model files", "* ; All files"]
+# The chat follow law (iter-230 — the owner's «плавной прокрутки» call):
+# the near-bottom window inside which a new message keeps following the
+# conversation's tail, and the smooth scroll's duration. A reader farther
+# up than the window is reading history — the view never yanks them.
+const SCROLL_FOLLOW_SLOP_PX := 96.0
+const SCROLL_TWEEN_S := 0.28
 
 # The Settings surface's own state (wb-9): the launch-settings document
 # arrives from backend.settings (the gateway's own answer); the preview
@@ -127,6 +146,11 @@ var _badge_label: Label
 var _badge_dot: ColorRect
 var _messages_box: VBoxContainer
 var _messages_scroll: ScrollContainer
+var _scroll_tween: Tween
+var _busy_row: HBoxContainer
+var _busy_dot: ColorRect
+var _busy_label: Label
+var _busy_tween: Tween
 var _empty_note: Label
 var _empty_center: CenterContainer
 var _models_empty_center: CenterContainer
@@ -315,10 +339,17 @@ func _build_nav_rail() -> Control:
         col.add_theme_constant_override("separation", _k("space_s"))
         rail.add_child(col)
 
+        # wb-12: the rail's quiet control set — a Button TYPE VARIATION so the
+        # nav reads as navigation, never as a grid of action buttons. Every
+        # value (colors, styleboxes, sizes) lives in the theme file under
+        # NavButton/* — the token law holds (the code only names the type).
+        _t.set_type_variation("NavButton", "Button")
+
         col.add_child(_caption("SURFACES"))
         var group := ButtonGroup.new()
         for key in SURFACES:
                 var btn := _nav_button(key.capitalize())
+                btn.add_theme_type_variation("NavButton")
                 btn.toggle_mode = true
                 btn.button_group = group
                 btn.pressed.connect(_on_surface_selected.bind(key))
@@ -330,6 +361,7 @@ func _build_nav_rail() -> Control:
         col.add_child(_caption("PLANNED · LATER WB ROWS"))
         for axis_name in PLANNED_SURFACES:
                 var later := _nav_button(axis_name)
+                later.add_theme_type_variation("NavButton")
                 later.disabled = true
                 col.add_child(later)
 
@@ -338,7 +370,7 @@ func _build_nav_rail() -> Control:
         col.add_child(spring)
 
         var version := Label.new()
-        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.2"]
+        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.3"]
         version.add_theme_font_size_override("font_size", _k("font_size_caption"))
         version.add_theme_color_override("font_color", _c("text_muted"))
         version.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -424,6 +456,30 @@ func _build_chat_surface() -> Control:
         _messages_scroll.add_child(_messages_box)
         fill.add_child(_messages_scroll)
         surface.add_child(fill)
+
+        # iter-230: the GENERATING state's visible carrier (§5's matrix
+        # state — Chat: EMPTY | ACTIVE | GENERATING). A chip between the
+        # list and the composer: the pulsing accent dot AND the text label
+        # (§4's not-color-only law — the label is the mandatory half).
+        _busy_row = HBoxContainer.new()
+        _busy_row.visible = false
+        var busy_chip := PanelContainer.new()
+        busy_chip.add_theme_stylebox_override("panel", _s("chip_busy"))
+        var busy_inner := HBoxContainer.new()
+        busy_inner.add_theme_constant_override("separation", _k("space_s"))
+        _busy_dot = ColorRect.new()
+        _busy_dot.color = _c("accent")
+        _busy_dot.custom_minimum_size = Vector2(8, 8)
+        _busy_dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+        _busy_label = Label.new()
+        _busy_label.text = "GENERATING — the model is answering (Stop cancels)"
+        _busy_label.add_theme_font_size_override("font_size", _k("font_size_secondary"))
+        _busy_label.add_theme_color_override("font_color", _c("accent"))
+        busy_inner.add_child(_busy_dot)
+        busy_inner.add_child(_busy_label)
+        busy_chip.add_child(busy_inner)
+        _busy_row.add_child(busy_chip)
+        surface.add_child(_busy_row)
 
         var composer := HBoxContainer.new()
         composer.add_theme_constant_override("separation", _k("space_s"))
@@ -2111,6 +2167,29 @@ func _chat_history() -> Array[Dictionary]:
 func _set_busy(busy: bool) -> void:
         _send_button.disabled = busy or not _session_live
         _stop_button.disabled = not busy
+        # iter-230: the GENERATING state's carrier — the busy chip rides the
+        # same single busy owner (§5's matrix state, §4 label+color+position).
+        _busy_row.visible = busy
+        if busy:
+                _start_busy_pulse()
+        else:
+                _stop_busy_pulse()
+
+
+func _start_busy_pulse() -> void:
+        if _busy_tween != null and _busy_tween.is_valid():
+                return
+        _busy_tween = create_tween()
+        _busy_tween.set_loops()
+        _busy_tween.tween_property(_busy_dot, "modulate:a", 0.35, 0.55)
+        _busy_tween.tween_property(_busy_dot, "modulate:a", 1.0, 0.55)
+
+
+func _stop_busy_pulse() -> void:
+        if _busy_tween != null and _busy_tween.is_valid():
+                _busy_tween.kill()
+        _busy_tween = null
+        _busy_dot.modulate.a = 1.0
 
 
 func _set_badge(text: String, live: bool) -> void:
@@ -2148,8 +2227,56 @@ func _add_message_card(role: String, content: String) -> void:
         _empty_center.visible = false
         _messages_scroll.visible = true
         _messages_box.add_child(_message_card(role, content))
-        if role == "assistant":
-                _scroll_to_bottom.call_deferred()
+        _request_scroll_follow()
+
+
+func _request_scroll_follow() -> void:
+        # iter-230 — the follow law (the owner's «не происходит плавной
+        # прокрутки вниз» call): the follow decision is made BEFORE the new
+        # card's height lands (was the reader at the tail?), the scroll runs
+        # deferred so the layout pass completes first — never the integer
+        # jump, never a yank of a reader deep in history.
+        var follows := _near_bottom()
+        _scroll_follow_deferred.call_deferred(follows)
+
+
+func _near_bottom() -> bool:
+        var bar := _messages_scroll.get_v_scroll_bar()
+        return bar.value >= (bar.max_value - bar.page) - SCROLL_FOLLOW_SLOP_PX
+
+
+func _scroll_follow_deferred(follows: bool) -> void:
+        if not follows:
+                return
+        _scroll_to_bottom_smooth()
+
+
+func _scroll_to_bottom_smooth() -> void:
+        # The smooth bottom: one frame of layout settle (the autowrapped
+        # labels size late — reading the bar's max too early is the old
+        # short-scroll bug), then a cubic-out tween over the scrollbar's
+        # float value. The late-layout guard re-settles once if a long
+        # message grew the content after the target was read.
+        await get_tree().process_frame
+        if not is_inside_tree():
+                return
+        var bar := _messages_scroll.get_v_scroll_bar()
+        var target := bar.max_value
+        if target <= bar.page:
+                return  # the list fits — nothing to follow
+        if _scroll_tween != null and _scroll_tween.is_valid():
+                _scroll_tween.kill()
+        _scroll_tween = create_tween()
+        _scroll_tween.tween_property(bar, "value", target, SCROLL_TWEEN_S).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        _scroll_tween.tween_callback(_after_follow_tween.bind(target))
+
+
+func _after_follow_tween(target: float) -> void:
+        # The bounded re-settle: if the content grew past the tweened target
+        # (a card settling late), ONE more smooth pass — never a loop.
+        var bar := _messages_scroll.get_v_scroll_bar()
+        if bar.max_value > target + 1.0:
+                _scroll_to_bottom_smooth()
 
 
 func _message_card(role: String, content: String) -> Control:
@@ -2191,10 +2318,6 @@ func _message_card(role: String, content: String) -> Control:
         col.add_child(role_label)
         col.add_child(body_label)
         return card
-
-
-func _scroll_to_bottom() -> void:
-        _messages_scroll.scroll_vertical = int(_messages_scroll.get_v_scroll_bar().max_value)
 
 
 func _short(value: String) -> String:
