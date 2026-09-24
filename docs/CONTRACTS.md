@@ -365,4 +365,8 @@ chat.send's consumer, D-203); wb-7 the live chat circuit (D-204);
 wb-8 the managed models surface (app §11.1's MANAGED half + the
 Models surface — D-205); wb-9+ per the brief's §32/§46 ladders
 (live events + reconnect/resync; persistence; the frontend rows —
-inference; history/diagnostics; the CanonSim seam).
+inference; history/diagnostics; the CanonSim seam). Every wb row's
+engine/API facts route through `docs/REDOT_ENGINE_INDEX.md` (the
+Redot 26.2 version firewall + the class/networking/performance/
+debugging reference map — read before the row starts; admitted
+iter-225, D-207).

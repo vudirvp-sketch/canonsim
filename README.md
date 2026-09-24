@@ -45,6 +45,9 @@ INV-4's one-module form).
 1. `AGENTS.md` — the law: invariants, iteration protocol, caps, git safety.
 2. `docs/AGENT_NAVIGATION.md` — reading gradient + where things are.
 3. `docs/TASKS.md` — what to do next, with acceptance criteria.
+4. `docs/REDOT_ENGINE_INDEX.md` — the Redot/Godot engine reference routing:
+   any frontend/engine/networking work starts here (Redot 26.2 LTS pinned,
+   Godot secondary; route first, never read whole).
 
 Humans: `docs/VISION.md` for the why; `docs/MVP_SCOPE.md` for the phase-0 tech
 spec. Everything here is written for agents first — dense, tabular, no prose

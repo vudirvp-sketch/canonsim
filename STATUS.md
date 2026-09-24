@@ -1,21 +1,15 @@
-Iteration: iter-224 (`iter-224-gdscript-fix-delivery-protocol` — the
-owner's 2026-09-25 wb-8 handback: five shell.gd parse refusals
-(806/861/868/999/1042 — adjacent string literals across lines, the
-Python-ism GDScript refuses) + the «тебе ничего комитить и пушить
-не надо» delivery directive): the five notes fixed to ONE literal
-per line (the file's own proven paren form, line 798's shape) + the
-regression pinned in test_shell_contract.py (the adjacent-literal
-ban over every committed .gd — the suite fails everywhere a
-regression could ship, not only where the engine binary is) +
-AGENTS §9/§12 rewritten into the delivery protocol's standing form
-(D-206): the agent NEVER runs git commit/push against the owner's
-repository — no access exists; every file-touching iteration
-delivers the delta archive on BOTH channels (the chat attachment +
-the tmpfiles.org direct link with md5 and byte size) and closes
-with the owner-side Git Bash block (cd
-/c/Users/fallo/OneDrive/Desktop/repo/canonsim → git status --short
-→ git add <explicit paths> → git status --short → commit → push —
-re-listing an already-committed path stages only the real diff).
+Iteration: iter-225 (`iter-225-redot-engine-index` — the owner's
+2026-09-25 «отразить в репозитории» call over the external Redot/
+Godot agent reference index): the index ADMITTED as
+`docs/REDOT_ENGINE_INDEX.md` (the version firewall + the routing
+map — admission deltas only: §2.2/§2.3 reconciled to the landed
+wb-4..wb-8 surface, §10's skills pinned agent-side per AGENTS
+§2.8, the external changelog cut) + the routing surfaces wired
+(AGENT_NAVIGATION §1/§2/§3 + the STATUS FAQ one-liner + TASKS'
+wb-9+ pointer + CONTRACTS §5's composition block + README's agent
+list) + docguard's allowlist entry (the 600-cap's §6.1 rationale)
++ D-207 into the standing-rows family row (the compound row's own
+append form — the 30-row cap held).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the wb family its live head, wb-8 DONE) + the world track + the SoW
@@ -24,21 +18,18 @@ horizon, ROADMAP §2/§6) ·
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent) ·
 Date: 2026-09-25 ·
-Scope: workbench/presentation/redot/scripts/shell.gd (the five
-one-literal notes) + tests/test_shell_contract.py (the
-literal-concatenation ban, the 10th pin) + AGENTS.md (§9's
-cross-ref + §12's three-subsection rewrite — the delivery
-protocol's standing form) + the state docs (DECISIONS D-206 folded
-into the landings row per the cap + TASKS/worklog + this file) —
-7 paths (the 3–5 soft limit honestly over: the parse fix + the
-regression pin + the protocol law + the state docs, AGENTS §2.3,
-the scope noted in the worklog; zero core change, zero pack change,
+Scope: docs/REDOT_ENGINE_INDEX.md (new — the 1.4k-line engine
+reference index, the docguard allowlist entry carrying the §6.1
+rationale) + scripts/docguard.py (the allowlist line) + the routing
+pointers (AGENT_NAVIGATION/TASKS/CONTRACTS/DECISIONS/README) + the
+state docs (STATUS/worklog) — 9 paths (doc-only, the owner's
+explicit call; zero code change beyond the guard's own allowlist,
 the LOG untouched).
-Track A: wb-8 DONE (+ iter-224's handback fix). The prior
-iterations' record: iter-223 (wb-8 managed models), 222 (wb-7 live
-chat), 221 (wb-6 backend), 220 (wb-5 operations), 219 (wb-4
-gateway), 218 (wb-3 skeleton), 217 (wb-2 redot shell), 216/215
-(wb-1). The detail lives in the worklog + git.
+Track A: doc-only (the wb family's engine-facts layer). The prior
+iterations' record: iter-224 (the wb-8 handback + D-206's delivery
+protocol), 223 (wb-8), 222 (wb-7), 221 (wb-6), 220 (wb-5), 219
+(wb-4), 218 (wb-3), 217 (wb-2), 216/215 (wb-1). The detail lives in
+the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -92,18 +83,15 @@ gateway), 218 (wb-3 skeleton), 217 (wb-2 redot shell), 216/215
 - **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
 - **Gate mechanics: seed 125, only the director flag changes — ON fires `director_0000`, OFF ≥3 emergent chains (baseline 24); M3 counts per endpoint, decay-dominated in magnitude** — TEST_PLAN §4 + the D-136 verdict row.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
-- **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line** — test_shell_contract.py's adjacent-literal ban
+- **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 
 ## Next step
 
-**iter-224 DONE: the wb-8 handback closed — the five GDScript parse
-refusals fixed (adjacent string literals — the Python-ism — ONE
-literal per line, shell.gd 806/861/868/999/1042) + the
-literal-concatenation ban pinned in the contract test + AGENTS §12
-rewritten into the delivery protocol's standing form (D-206: the
-agent NEVER commits/pushes the owner's repository — no access
-exists; the delta archive rides both channels + the owner-side Git
-Bash block closes every file-touching report).**
+**iter-225 DONE: the Redot/Godot engine reference index admitted into
+the repo (`docs/REDOT_ENGINE_INDEX.md` — the version firewall + the
+routing map, D-207) + the routing surfaces wired (NAV §1/§2/§3, the
+FAQ one-liner, the wb-9+ pointers in TASKS/CONTRACTS §5, README's
+agent list) + docguard's allowlist entry.**
 
 1. wb-9+ per the family rows (app §32's ladder: live events +
    reconnect/resync + the idempotency/revision/lease tests at live
