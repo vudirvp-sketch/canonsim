@@ -26,7 +26,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-PACKAGE_DIRS = ("core", "sim", "render", "brief", "cli", "scripts")
+PACKAGE_DIRS = ("core", "sim", "render", "brief", "cli", "scripts", "workbench")
 NETWORK_MODULES = frozenset({"socket", "urllib", "http", "requests"})
 #: INV-4's sanctioned network surface: exactly one module, the explicit
 #: engine adapter (D-192/D-193). A network import anywhere else — a

@@ -1,0 +1,24 @@
+; CanonSim Workbench — the wb seam proof project (CONTRACTS.md §5, D-200).
+; Pinned engine line: Redot 26.2 LTS (redot-26.2-stable) — the binary is an
+; EXTERNAL toolchain (one REDOT_EXE path), never committed; this directory
+; commits the project only. Renderer baseline: gl_compatibility (the brief's
+; integration contract §2). The engine cache lands in .godot/ (gitignored).
+
+config_version=5
+
+[application]
+
+config/name="CanonSimWorkbench"
+config/description="CanonSim Workbench - the wb-1 vertical seam proof (Visual Scene IR -> placeholder composition -> screenshot artifact)"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

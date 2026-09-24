@@ -24,6 +24,10 @@ __pycache__/
 build/
 dist/
 
+# Redot project cache (CONTRACTS §5 D1: the engine binary is an external
+# toolchain; generated cache never committed)
+workbench/presentation/redot/.godot/
+
 # Environments & secrets
 .venv/
 .env

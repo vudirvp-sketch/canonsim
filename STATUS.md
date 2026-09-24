@@ -1,34 +1,35 @@
-Iteration: iter-214 (`iter-214-doc7` — intake-38, the owner's «тогда
-вперед сажай intake-38 над „Междоменной“» call): the cross-domain
-principle document routed per the transplantation test (D-024) —
-CONFIRMED-owned: the doctrine the standing discipline's own live
-form (§18's five-part test = BLUEPRINT §2 L15; §19 = AGENTS §2.8;
-§20 = the binding do-not-import list; §21 the same owners named),
-the §8/§9 method families landed or parked through intakes 34..37;
-the fresh residue parked per D-175, zero new rows — held-out transfer
-(HYPOTHESIS, engine-1's corpus the natural first consumer), the
-experiment-contract fields stopping-rule/spillover/blocked-nuisance
-(PROPOSAL/UNRESOLVED beside the deletion criterion),
-evidence-independence + metric anti-Goodhart (each behind its first
-consumer), §12's residual lens as consult vocabulary; a second
-agent's independent corpus pass recorded as the corroboration. The
-document stays outside the repo (the convenience-copy law); D-199
-rides the intake family row.
+Iteration: iter-216 (`iter-216-wb1-redot` — the seam's Redot half, the
+owner's standing step-by-step directive over the opened family): the
+wb-1 vertical proof CLOSED — the pinned Redot 26.2 LTS project landed
+at `workbench/presentation/redot/` (gl_compatibility, 1280x720, the
+code-built placeholder compositor `seam_proof.gd`: the IR JSON →
+ColorRects + provenance/status labels + the debug overlay, the
+screenshot + metadata artifacts, user args `--ir/--png/--meta`, exit
+codes) + `scripts/visual_proof.py` the operator runner (one REDOT_EXE
+resolution point, a private Xvfb display when none, absolute artifact
+paths) + `tests/test_visual_proof.py` (REDOT_EXE-gated, the D-093 skip
+pattern). The live proof: the tavern and province fixtures both
+composed and captured (scene identities sha256:a1cff5106fdb8643 /
+sha256:b82080e2d9d5de01), the double-run PNG byte-diff CONFIRMED (the
+CONTRACTS §5 D4 falsifier), the engine line verified
+26.2-stable.official.4f5b14aba.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-+ the world track + the SoW horizon, ROADMAP §2/§6) ·
-2041 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; verified before the change at the iter-213 state and
-after) ·
+(the wb family its live head, wb-1 DONE) + the world track + the SoW
+horizon, ROADMAP §2/§6) ·
+2051 passed + 1 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; verified before the change at the iter-215 state and
+after — the visual packet with REDOT_EXE set, the suite without it
+skips clean per D6) ·
 Date: 2026-09-24 ·
-Scope: docs/blueprint/phases.md + docs/DECISIONS.md + docs/TASKS.md +
-STATUS.md + worklog.md — 5 paths doc-only (the state docs; the D-022
-exception honest: the owner's fresh intake request; zero code, zero
-pack change, the LOG untouched).
-Track A: intake-38 DONE (D-199 — the fresh residue all parked, zero
-live residue). The prior iterations' record: iter-213 (doc-6), 212
-(doc-5), 211 (doc-4), 210 (proberead), 209 (remeasure). The detail
-lives in the worklog + git.
+Scope: workbench/presentation/redot/ (3 new files: project.godot +
+main.tscn + seam_proof.gd) + scripts/visual_proof.py +
+tests/test_visual_proof.py + the state docs (CONTRACTS/TASKS/STATUS/
+worklog) — 9 paths (zero core change, zero pack change, the LOG
+untouched; the artifacts gitignored output/, never committed).
+Track A: wb-1 DONE (both halves). The prior iterations' record:
+iter-215 (wb-1-python), 214 (doc-7/intake-38), 213 (doc-6). The
+detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -85,14 +86,27 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-214 DONE: intake-38 — the cross-domain principle document
-routed (D-199): CONFIRMED-owned, the fresh residue parked per D-175
-(held-out transfer / stopping-rule + spillover + nuisance /
-evidence-independence / anti-Goodhart — each behind its named first
-consumer), zero new rows; the second agent's corpus pass the
-corroboration.**
+**iter-216 DONE: wb-1's Redot half — the vertical seam proof CLOSED
+(CONTRACTS §5's falsifier run live): the pinned project + the operator
+runner + the REDOT_EXE-gated packet landed; the tavern and province
+fixtures composed and captured; the double-run PNG byte-diff
+CONFIRMED. The epistemic class FACT, the disposition CONFIRMED (the
+seam's determinism claim, both halves). wb-1 row DONE.**
 
-1. The remaining station rows (the owner's next engine run, TEST_PLAN
+1. wb-2 — the Redot shell + custom theme (frontend §46 Phase A: the
+   application shell scene, the semantic-token theme file, the
+   Chat/Settings placeholder surfaces) — the owner's call opens it;
+   then wb-3+ per the family rows (app §32's ladder).
+2. The remaining station rows1. iter-216 — wb-1's Redot half (the owner's standing «шаг за шагом»
+   directive over the opened family): the pinned project at
+   `workbench/presentation/redot/` (Compatibility renderer), the
+   code-built placeholder composition over the IR fixture,
+   `scripts/visual_proof.py` the REDOT_EXE operator runner (Xvfb +
+   screenshot + metadata artifacts, gitignored), the
+   REDOT_EXE-gated test packet — the seam's live proof
+   (CONTRACTS §5's falsifier: the double-run PNG byte-diff).
+   Then wb-2..N per the family rows, each owner-gated.
+2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
    component split; the narrator-convention call for live narrate

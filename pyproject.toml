@@ -19,7 +19,7 @@ chronicler = ["duckdb>=1.0"]
 # (content/, schemas/ are data, not packages). KI#2. core.packlint joined
 # with the D-175 split (roads-1's rider): the admission lint implementation
 # subpackage, imported by core.pack.
-packages = ["core", "core.packlint", "sim", "sim.systems", "render", "brief", "cli"]
+packages = ["core", "core.packlint", "sim", "sim.systems", "render", "brief", "cli", "workbench"]
 
 [tool.ruff]
 line-length = 100
