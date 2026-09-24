@@ -70,7 +70,10 @@ class _StubLlamaServer:
     """The measured llama-server surface, loopback-only: records every
     request body, serves a scripted queue of completions (a content
     string, or a control tuple: ("http500",), ("raw", text),
-    ("empty",), ("length", text))."""
+    ("empty",), ("length", text)). The model-management routes
+    (wb-6, build-sensitive research evidence — the module note in
+    `cli/engine.py`) record into `model_requests` and serve a fixed
+    success reply, or a queued control from `model_replies`."""
 
     def __init__(
         self, model_file: Path, replies: list[Any] | None = None
@@ -79,6 +82,8 @@ class _StubLlamaServer:
         self.replies: list[Any] = list(replies or [])
         self.requests: list[dict[str, Any]] = []
         self.raw_bodies: list[bytes] = []
+        self.model_requests: list[tuple[str, dict[str, Any]]] = []
+        self.model_replies: list[Any] = []
         outer = self
 
         class Handler(BaseHTTPRequestHandler):
@@ -102,6 +107,31 @@ class _StubLlamaServer:
                 self.wfile.write(body)
 
             def do_POST(self) -> None:  # noqa: N802 — http.server's name
+                if self.path in ("/models/load", "/models/unload"):
+                    payload = self.rfile.read(
+                        int(self.headers["Content-Length"])
+                    )
+                    outer.model_requests.append(
+                        (self.path, json.loads(payload))
+                    )
+                    item = (
+                        outer.model_replies.pop(0)
+                        if outer.model_replies
+                        else {"success": True}
+                    )
+                    if isinstance(item, tuple) and item[0] == "http500":
+                        self.send_error(500, "stub backend error")
+                        return
+                    if isinstance(item, tuple) and item[0] == "raw":
+                        body = item[1].encode()
+                    else:
+                        body = json.dumps(item).encode()
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Content-Length", str(len(body)))
+                    self.end_headers()
+                    self.wfile.write(body)
+                    return
                 if self.path != "/v1/chat/completions":
                     self.send_error(404)
                     return
@@ -536,3 +566,68 @@ def test_the_door_runner_error_class_is_terminal(
     )
     _header, events = read_log(log, schema)
     assert all(event.type != "examine" for event in events)
+
+
+# -- the model-management surface (wb-6, the backend row) ------------------------
+
+
+def test_load_model_wire_shape(stub: _StubLlamaServer) -> None:
+    """The /models/load wire pin: the model path + the alias ride the
+    body, the reply document returns whole (the typed surface's
+    contract — the workbench port passes alias=logical_name)."""
+    client = LlamaServerClient(_config(stub.url))
+    reply = client.load_model("/models/qwen3-4b.gguf", alias="qwen3-4b")
+    assert reply == {"success": True}
+    assert stub.model_requests == [
+        ("/models/load", {"model": "/models/qwen3-4b.gguf",
+                          "alias": "qwen3-4b"})
+    ]
+    # the alias is optional — omitted, never null
+    client.load_model("/models/second.gguf")
+    assert stub.model_requests[-1] == ("/models/load",
+                                       {"model": "/models/second.gguf"})
+
+
+def test_unload_model_wire_shape(stub: _StubLlamaServer) -> None:
+    """The /models/unload wire pin: the reference (the load's alias)
+    rides alone."""
+    client = LlamaServerClient(_config(stub.url))
+    reply = client.unload_model("qwen3-4b")
+    assert reply == {"success": True}
+    assert stub.model_requests == [("/models/unload", {"model": "qwen3-4b"})]
+
+
+def test_management_error_mapping(stub: _StubLlamaServer) -> None:
+    """The D1/D7 mapping on the management calls: an HTTP error status
+    is terminal ("http"); a dead endpoint is "unavailable" — and the
+    management no-ladder law: single-try, the exception carries no
+    retry count (a refused connection is one try, not five)."""
+    stub.model_replies.append(("http500",))
+    client = LlamaServerClient(_config(stub.url))
+    with pytest.raises(EngineError, match=r"\[http\]"):
+        client.load_model("/models/x.gguf")
+    stub.model_replies.append(("raw", "not json"))
+    with pytest.raises(EngineError, match=r"\[malformed\]"):
+        client.unload_model("x")
+    dead = LlamaServerClient(_config("http://127.0.0.1:9"))
+    with pytest.raises(EngineError, match=r"\[unavailable\]") as info:
+        dead.load_model("/models/x.gguf")
+    assert "after 1 tries" not in str(info.value)  # single-try, no ladder
+
+
+def test_chat_grammar_default_is_none(stub: _StubLlamaServer) -> None:
+    """The port-conformance half: chat() runs with the grammar omitted
+    (the workbench port's unconstrained form) — the request body
+    carries NO grammar key, thinking stays off, the seed rides."""
+    stub.replies.append("ok")
+    client = LlamaServerClient(_config(stub.url))
+    content, finish = client.chat(
+        [{"role": "user", "content": "hello"}],
+        temperature=0.8,
+        max_tokens=64,
+    )
+    assert (content, finish) == ("ok", "stop")
+    request = stub.requests[-1]
+    assert "grammar" not in request
+    assert request["temperature"] == 0.8
+    assert request["max_tokens"] == 64

@@ -1325,14 +1325,16 @@ def test_cross_pythonhashseed_pair(tmp_path: Path) -> None:
 def test_operations_import_closure() -> None:
     """The dependency direction (§6/§24): the operations package
     imports stdlib + workbench.application.* only — except
-    `composition`, the wiring owner, which additionally imports the
-    gateway registration surface. No core/, no cli/, no engine (the
-    app side stays CanonSim-free until the seam row; INV-4's
-    two-surface form untouched)."""
+    `composition` (the wiring owner) and `backend` (the backend row's
+    port + operations), which additionally import the gateway
+    registration surface. No core/, no cli/, no engine (the app side
+    stays CanonSim-free until the seam row; INV-4's two-surface form
+    untouched — the port is injected, never imported)."""
     allowed = {
         "workbench",
         "workbench.application",
         "workbench.application.operations",
+        "workbench.application.operations.backend",
         "workbench.application.operations.execution",
         "workbench.application.operations.models",
         "workbench.application.operations.lifecycles",

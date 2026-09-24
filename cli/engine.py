@@ -30,6 +30,22 @@ The measured surface (TECH_NOTES §13/§13.1, llama-server b11064):
   observation boundary); engine metadata (finish_reason) is operator
   feedback, never canon (I6).
 
+The model-management half (wb-6, the backend row — the owner's
+«подключи llama.cpp» call, app §32 step 7): `POST /models/load` +
+`POST /models/unload`, the upstream model-management surface. This is
+BUILD-SENSITIVE research evidence (the app spec §20: "Build-specific
+llama.cpp router/`/props`/`/slots`/model-replacement findings ... must
+be re-verified"): the pinned b11064 station's model-management reality
+is the ROUTER (autoload/eviction, model swap ≠ restart — TECH_NOTES
+§13.1), and the dedicated endpoints are the newer upstream line. The
+wire shapes are pinned by the stub contract tests (test_engine.py —
+"adapter tests are not implementation snapshots", app §29); the live
+re-verification rides the station rows (TEST_PLAN §8.5's gap family).
+The management calls are SINGLE-TRY (unlike the chat ladder): §29's
+matrix allows bounded retry for an unavailable backend — "if
+allowed" — and the row's answer is no (a load/unload the caller may
+re-issue deliberately; the adapter never loops a management call).
+
 The failure→ladder mapping (CONTRACTS §4.1 D7): transport failures
 retry on the tries ladder (5, bg-8's precedent — the local engine is
 down-or-slow, never rate-limited; no sleeps: a refused connection is
@@ -217,9 +233,9 @@ class LlamaServerClient:
         self,
         messages: Sequence[Mapping[str, str]],
         *,
-        grammar: str | None,
-        temperature: float,
-        max_tokens: int,
+        grammar: str | None = None,
+        temperature: float = 0.8,
+        max_tokens: int = 512,
     ) -> tuple[str, str]:
         """One chat completion -> (content, finish_reason). Transport
         failures retry on the tries ladder; an HTTP error status is
@@ -268,10 +284,66 @@ class LlamaServerClient:
             f"{max(1, self._config.tries)} tries: {last}",
         )
 
+    def load_model(
+        self, model_path: str, alias: str | None = None
+    ) -> dict[str, Any]:
+        """POST `/models/load` — the model-management surface (wb-6,
+        the backend row): the model's filesystem path + the optional
+        alias (the workbench passes the logical_name). Build-sensitive
+        research evidence — the wire shape pinned by the stub contract
+        tests, the live re-verification a station row (see the module
+        note). Single-try, no ladder: a management call the caller may
+        re-issue, never a hidden loop."""
+        body: dict[str, Any] = {"model": model_path}
+        if alias is not None:
+            body["alias"] = alias
+        return self._post_json(
+            self._config.endpoint.rstrip("/") + "/models/load", body
+        )
+
+    def unload_model(self, model_ref: str) -> dict[str, Any]:
+        """POST `/models/unload` — the unload half (wb-6): the model
+        reference (the alias the load named, or the path). The same
+        single-try, build-sensitive contract as `load_model`."""
+        return self._post_json(
+            self._config.endpoint.rstrip("/") + "/models/unload",
+            {"model": model_ref},
+        )
+
     def _get_json(self, url: str) -> dict[str, Any]:
         try:
             with urllib.request.urlopen(
                 url, timeout=min(self._config.timeout_s, 10.0)
+            ) as response:
+                doc = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            raise EngineError(
+                "http", f"{url} answered {exc.code}: {exc.reason}"
+            ) from exc
+        except (urllib.error.URLError, OSError) as exc:
+            raise EngineError("unavailable", f"{url} unreachable: {exc}") from exc
+        except json.JSONDecodeError as exc:
+            raise EngineError("malformed", f"{url} is not JSON: {exc}") from exc
+        if not isinstance(doc, dict):
+            raise EngineError("malformed", f"{url} is not an object")
+        return doc
+
+    def _post_json(
+        self, url: str, body: Mapping[str, Any]
+    ) -> dict[str, Any]:
+        """One management POST -> the reply document. The error mapping
+        is D1/D7's own: an HTTP error status is terminal ("http"), a
+        dead endpoint is "unavailable" — single-try, the management
+        no-ladder law (the module note)."""
+        request = urllib.request.Request(
+            url,
+            data=serialize_request(dict(body)),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(
+                request, timeout=min(self._config.timeout_s, 10.0)
             ) as response:
                 doc = json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:

@@ -1,5 +1,5 @@
 """The workbench composition root (wb-5, the app spec §6.1 — the
-family's fifth row).
+family's fifth row; the backend wiring wb-6, §32 step 7).
 
 The law: **the composition root is the single wiring owner** —
 construct → validate dependencies → wire owners (register the
@@ -19,14 +19,21 @@ model.list / model.inspect         — the model family's discovery
                                      MODELS_ASSETS role
 ```
 
-`chat.send` is honestly NOT registered: its consumer is the backend
-row (app §32 step 7 — capability-aware inference/configuration), and
-the admission law forbids machinery without one. The registered
-handlers reject through the gateway's public `OperationRejected`
-carrier (DOMAIN_REJECTED — NOT_SENT, never a §12.1 outcome), emit
-their dispatch-time effects through the context's `effects` surface
-(§13's ordered stream), and read the clock only through the context
-(§17).
+The backend row (wb-6, the owner's «подключи llama.cpp» call): when
+a `backend` port is injected, `register_backend_operations` wires the
+three backend operations — chat.send + model.load/model.unload
+(§8/§19.1/§20) — and the admission law's wb-5 deferral closes:
+chat.send's consumer IS the backend. With no port the three stay
+unregistered (the same honest form — machinery without a consumer
+is forbidden). The physical transport stays `cli/engine.py` (INV-4):
+`workbench/` never imports it — the application-entry rows own the
+physical wiring; the port is the typed seam (backend.py).
+
+The registered handlers reject through the gateway's public
+`OperationRejected` carrier (DOMAIN_REJECTED — NOT_SENT, never a
+§12.1 outcome), emit their dispatch-time effects through the
+context's `effects` surface (§13's ordered stream), and read the
+clock only through the context (§17).
 
 Tests compose smaller compositions explicitly (§6.1's own law):
 `work_kinds` is injectable — the claim packet wires probe kinds
@@ -46,6 +53,11 @@ from workbench.api.gateway import (
     OperationSpec,
 )
 from workbench.application.clock import AppClock
+from workbench.application.operations.backend import (
+    BackendPortError,
+    ModelLoadStates,
+    register_backend_operations,
+)
 from workbench.application.operations.execution import (
     ExecutionRegistry,
     ExecutionRegistryConfig,
@@ -99,12 +111,16 @@ class WorkKind:
 @dataclass(frozen=True)
 class WorkbenchOperations:
     """The composed application's handle: the two registries (the
-    state owners) and the wired work-kind names (the registration
-    closure — what run.start may launch)."""
+    state owners), the backend family's load-state owner (None when
+    no port was injected — the three backend operations then stay
+    unregistered, the admission law's honest form), and the wired
+    work-kind names (the registration closure — what run.start may
+    launch)."""
 
     models: ModelRegistry
     executions: ExecutionRegistry
     work_kinds: tuple[str, ...]
+    model_loads: ModelLoadStates | None = None
 
 
 def model_digest_kind(registry: ModelRegistry) -> WorkKind:
@@ -161,12 +177,16 @@ def compose_workbench_operations(
     *,
     registry_config: ExecutionRegistryConfig | None = None,
     work_kinds: Mapping[str, WorkKind] | None = None,
+    backend: object | None = None,
 ) -> WorkbenchOperations:
     """Construct → validate → wire: build the registries, resolve the
     work kinds (the caller's mapping or the default `model.digest`
-    composition), and register the five operations on the gateway —
-    the single wiring point (a duplicate name is the gateway's own
-    loud one-name-one-owner error)."""
+    composition), register the five operations on the gateway — the
+    single wiring point (a duplicate name is the gateway's own loud
+    one-name-one-owner error) — and, when a backend port is injected,
+    the three backend operations (wb-6: chat.send + model.load/
+    model.unload over the port). A malformed port is the §6.1
+    validate step's own loud CompositionError."""
     models = ModelRegistry(models_root)
     executions = ExecutionRegistry(clock, registry_config)
     if work_kinds is not None:
@@ -223,10 +243,21 @@ def compose_workbench_operations(
             description="the §9 strong identity computed fresh",
         )
     )
+    model_loads: ModelLoadStates | None = None
+    if backend is not None:
+        try:
+            model_loads = register_backend_operations(
+                gateway, executions, models, backend
+            )
+        except BackendPortError as exc:
+            raise CompositionError(
+                f"the injected backend does not satisfy the port: {exc}"
+            ) from exc
     return WorkbenchOperations(
         models=models,
         executions=executions,
         work_kinds=tuple(sorted(kinds)),
+        model_loads=model_loads,
     )
 
 

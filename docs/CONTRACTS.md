@@ -178,8 +178,44 @@
 > `OperationEffects` the session-scoped OPERATION_EFFECT surface on
 > the dispatch context). The claim packet: `tests/test_operations.py`
 > (46 tests). The landing record: TASKS iter-220 + the worklog +
-> git. The family contract below stays (wb-6..N still owner-gated
+> git. The family contract below stays (wb-7..N still owner-gated
 > rows).
+> **wb-6 LANDED (iter-221, the owner's «подключи llama.cpp» call —
+> the backend row, app §32 step 7, the row that closes chat.send's
+> admission-law deferral):** the backend family —
+> `workbench/application/operations/backend.py`: the typed
+> `BackendPort` (props/chat/load_model/unload_model — every member
+> carrying a registered consumer; the physical owner
+> `cli/engine.py`'s `LlamaServerClient` satisfies it structurally,
+> NEVER imported: INV-4's two-surface form untouched, the §27
+> envelope holds — the port is injected at the composition root),
+> `ModelLoadStates` (§11's Model ladder walked on OBSERVED outcomes —
+> the state = the fold of the backend's replies; LOADING/LOADED/
+> UNLOADING transit states, never resting ones), `chat.send`
+> (§19.1's REQUESTED→ACCEPTED→EFFECTIVE→OBSERVED walk over the wb-5
+> run registry — identity-then-poll per §8; the caller-tunable §12
+> deadline; the props probe is evidence, not a gate — the failed
+> probe the honest «unavailable» note, the chat still completes),
+> `model.load`/`model.unload` (§20's loading half: the discovery
+> entry gate, select, the observed settle — ACTIVE on success, FAILED
+> on the observed refusal with the ladder's terminal-FAILED gap
+> recorded as D-203's open note, the unknown «unavailable» outcome
+> resting SELECTED — §12.1's sibling, the re-load legal; the unload
+> failure NO walk — the still-loaded truth) + `cli/engine.py`'s
+> model-management transport half (POST /models/load + /models/unload
+> — BUILD-SENSITIVE research evidence per app §20: the b11064
+> station's model-management reality is the ROUTER, the dedicated
+> endpoints the newer upstream line; the wire shapes stub-pinned,
+> the live re-verification a station row; single-try, no ladder) +
+> the composition's `backend=` wiring (the three operations
+> registered ONLY when the port is injected — the admission law's
+> honest form continued; a malformed port the §6.1 validate step's
+> loud CompositionError). The claim packet:
+> `tests/test_backend_row.py` (28 tests — the REAL adapter's port
+> conformance over the live stub server among them) + test_engine's
+> four management pins. The landing record: TASKS iter-221 + the
+> worklog + git. The family contract below stays (wb-7..N still
+> owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 
