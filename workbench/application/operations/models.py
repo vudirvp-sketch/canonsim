@@ -1,5 +1,6 @@
 """The model discovery family (wb-5, the app spec §§9/20 — the
-family's fifth row).
+family's fifth row; wb-9's fetch kind, the owner's 2026-09-25
+«подтянуть модель откуда угодно» call).
 
 The law: **file exists ≠ valid ≠ selected ≠ loading ≠ loaded ≠
 active** (§20) — wb-5 lands the DISCOVERY half honestly: `discover`
@@ -35,6 +36,19 @@ byte is read, the result recorded back into the registry as the
 run's effect). This is the run family's one real work kind in wb-5 —
 the consumer that makes the execution substrate land as machinery in
 use, not machinery awaiting a demo.
+
+The fetch kind (wb-9 — the model manager's engine half): a GGUF
+ARRIVES over the gateway as a run — `model.fetch`, the injected
+fetcher (platform/model_fetch.py's HttpModelFetcher, the composition
+root's wiring — this module stays network-free, the fetcher a duck
+typed seam like the BackendPort). The admission law: the URL is
+normalized (the shorthand forms resolved) and the destination name
+checked BEFORE the run exists (DOMAIN_REJECTED — a name that already
+discovered, or a .part residue from an in-flight fetch, is NOT_SENT,
+never a post-admission failure); the work streams with one progress
+report + one §12 checkpoint per chunk, the atomic rename landing the
+file for the NEXT discovery scan. A fetching model holds NO ladder
+state — it is not discovered until the file exists (§20's own law).
 """
 
 from __future__ import annotations
@@ -45,7 +59,11 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 
-from workbench.application.operations.execution import WorkContext
+from workbench.api.gateway import OperationRejected
+from workbench.application.operations.execution import (
+    WorkContext,
+    WorkKind,
+)
 
 #: The discovery state a wb-5 record can hold (§20's vocabulary —
 #: the loading states belong to the backend row; DISCOVERED is the
@@ -64,6 +82,13 @@ _DIRECTORY_OK = "OK"
 #: cancellation latency, large enough to keep the syscall count
 #: sane on real model files).
 DEFAULT_CHUNK_BYTES = 1024 * 1024
+
+#: The fetch run's own default deadline (wb-9 — a multi-GB model file
+#: over a real network is minutes-class; the registry's generic 60s
+#: default would fail it before the first percent — the kind's own
+#: §12 material input, the chat row's CHAT_DEFAULT_DEADLINE_SECONDS
+#: pattern). The registry's ceiling still applies.
+FETCH_DEFAULT_DEADLINE_SECONDS = 3600.0
 
 
 class ModelRegistryError(ValueError):
@@ -289,3 +314,122 @@ def digest_work(
         "logical_name": logical_name,
         "size_bytes": stat.st_size,
     }
+
+
+# ------------------------------------------------------- the fetch kind
+
+
+def model_fetch_kind(registry: ModelRegistry, fetcher: object) -> "WorkKind":
+    """wb-9's work kind: pull one GGUF from anywhere into the
+    MODELS_ASSETS root, as a run (identity-then-poll + live progress).
+    The fetcher is INJECTED (the platform's HttpModelFetcher at the
+    composition root — the BackendPort pattern: duck-typed, never
+    imported here): `normalize(url) -> (fetch_url, logical_name)` and
+    `fetch(url, dest_dir, name, on_progress=…, checkpoint=…)`. The
+    admission-side gates run BEFORE the run exists (NOT_SENT, the
+    honest form): the URL must normalize, the destination name must
+    be plain, and neither the final file nor a .part residue may
+    already occupy it.
+
+    The work itself streams through the fetcher with one progress
+    report + one §12 checkpoint per chunk — the checkpoint's own
+    WorkCancelled/DeadlineExceeded carriers propagate untouched (the
+    registry's truthful closes), and the atomic rename lands the
+    file for the NEXT discovery scan."""
+
+    def validate_arguments(
+        arguments: Mapping[str, object],
+    ) -> dict[str, str]:
+        unknown = sorted(set(arguments) - {"url", "logical_name"})
+        if unknown:
+            raise _fetch_rejected(
+                f"model.fetch: unknown argument(s) {unknown} "
+                "(closed set: ['logical_name', 'url'])"
+            )
+        raw_url = arguments.get("url")
+        if not isinstance(raw_url, str) or not raw_url.strip():
+            raise _fetch_rejected(
+                "model.fetch: url must be a non-empty str (a direct "
+                "http(s) URL, a huggingface.co URL, or the hf:repo/file "
+                "shorthand)"
+            )
+        normalize = getattr(fetcher, "normalize", None)
+        if not callable(normalize):
+            raise _fetch_rejected(
+                "model.fetch: the injected fetcher carries no normalize() "
+                "(a composition bug, loud by design)"
+            )
+        try:
+            fetch_url, derived_name = normalize(raw_url.strip())
+        except Exception as exc:  # the fetcher's own vocabulary, re-carried
+            raise _fetch_rejected(f"model.fetch: {exc}") from exc
+        logical_name = arguments.get("logical_name", derived_name)
+        if not isinstance(logical_name, str) or not logical_name:
+            raise _fetch_rejected(
+                "model.fetch: logical_name must be a non-empty str"
+            )
+        if (
+            os.sep in logical_name
+            or (os.altsep and os.altsep in logical_name)
+            or logical_name in (".", "..")
+        ):
+            raise _fetch_rejected(
+                f"model.fetch: logical_name {logical_name!r}: a plain "
+                "file name (no path separators, never '.'/'..')"
+            )
+        if (registry.root / logical_name).exists():
+            raise _fetch_rejected(
+                f"model.fetch: {logical_name!r} already exists in the "
+                "models directory — pass logical_name to fetch under a "
+                "different name, or remove the file first"
+            )
+        if registry.root.joinpath(logical_name + ".part").exists():
+            raise _fetch_rejected(
+                f"model.fetch: {logical_name!r}.part exists — an in-flight "
+                "or leftover partial fetch occupies the name (a fresh "
+                "fetch restarts clean once it is gone)"
+            )
+        return {"logical_name": logical_name, "url": fetch_url}
+
+    def work(
+        context: WorkContext, inputs: Mapping[str, str]
+    ) -> Mapping[str, object]:
+        fetch = getattr(fetcher, "fetch", None)
+        if not callable(fetch):
+            raise RuntimeError(
+                "the injected fetcher carries no fetch() "
+                "(a composition bug, loud by design)"
+            )
+
+        def on_progress(downloaded: int, total: int | None) -> None:
+            context.progress(
+                {
+                    "downloaded_bytes": downloaded,
+                    "logical_name": inputs["logical_name"],
+                    "total_bytes": total,
+                }
+            )
+
+        return fetch(
+            inputs["url"],
+            registry.root,
+            inputs["logical_name"],
+            on_progress=on_progress,
+            checkpoint=context.check,
+        )
+
+    return WorkKind(
+        name="model.fetch",
+        description=(
+            "pull one GGUF from anywhere (the injected fetcher) into "
+            "the models root — a run with live progress, §20's arrival "
+            "half"
+        ),
+        validate_arguments=validate_arguments,
+        work=work,
+        default_deadline_seconds=FETCH_DEFAULT_DEADLINE_SECONDS,
+    )
+
+
+def _fetch_rejected(reason: str) -> OperationRejected:
+    return OperationRejected("DOMAIN_REJECTED", reason)

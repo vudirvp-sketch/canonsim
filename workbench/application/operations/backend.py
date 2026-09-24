@@ -97,7 +97,7 @@ its diagnostic use rides the same document, never a second owner.
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from typing import Any, Protocol, runtime_checkable
 
 from workbench.api.gateway import (
@@ -382,6 +382,7 @@ def _rejected(reason: str) -> OperationRejected:
 
 def _validate_chat_arguments(
     arguments: Mapping[str, object],
+    temperature_default: Callable[[], float] | None = None,
 ) -> tuple[list[dict[str, str]], float, int]:
     """chat.send's REQUESTED→ACCEPTED layer: the closed argument set,
     the messages shape (a non-empty list of {role, content} over the
@@ -389,7 +390,13 @@ def _validate_chat_arguments(
     range [1, CHAT_MAX_MAX_TOKENS] — rejected loud, never clamped
     (§19.1's clamping machinery is a later row; the honest minimal is
     a closed validated surface). The deadline rides separately (§12's
-    own resolution, the handler's)."""
+    own resolution, the handler's).
+
+    wb-9: an ABSENT temperature resolves through the injected BASE
+    provider (the launch-settings store's temperature — §19.1's
+    BASE PROFILE layer) when one is wired, else the row's own
+    constant; the caller's EXPLICIT value always wins (the
+    call-local override layer)."""
     unknown = sorted(
         set(arguments)
         - {"messages", "temperature", "max_tokens", "deadline_seconds"}
@@ -428,7 +435,22 @@ def _validate_chat_arguments(
         messages.append({"role": str(role), "content": content})
     raw_temperature = arguments.get("temperature")
     if raw_temperature is None:
-        temperature = CHAT_DEFAULT_TEMPERATURE
+        temperature = (
+            temperature_default()
+            if temperature_default is not None
+            else CHAT_DEFAULT_TEMPERATURE
+        )
+        if (
+            isinstance(temperature, bool)
+            or not isinstance(temperature, (int, float))
+            or not 0.0 <= float(temperature) <= 2.0
+        ):
+            raise _rejected(
+                "chat.send: the resolved default temperature is not a "
+                f"number in [0, 2] (got {temperature!r}) — a settings "
+                "store contract violation"
+            )
+        temperature = float(temperature)
     elif (
         isinstance(raw_temperature, bool)
         or not isinstance(raw_temperature, (int, float))
@@ -457,11 +479,15 @@ def _validate_chat_arguments(
     return messages, temperature, max_tokens
 
 
-def _make_chat_send(executions: ExecutionRegistry, port: BackendPort):
+def _make_chat_send(
+    executions: ExecutionRegistry,
+    port: BackendPort,
+    temperature_default: Callable[[], float] | None = None,
+):
     def handler(context) -> Mapping[str, object]:
         arguments = dict(context.arguments)
         messages, temperature, max_tokens = _validate_chat_arguments(
-            arguments
+            arguments, temperature_default
         )
         # §12: one absolute deadline per logical operation — the
         # caller's explicit value or the row's own default (the
@@ -651,13 +677,18 @@ def register_backend_operations(
     executions: ExecutionRegistry,
     models: ModelRegistry,
     backend: object,
+    *,
+    temperature_default: Callable[[], float] | None = None,
 ) -> ModelLoadStates:
     """The backend family's wiring (called by the composition root —
     §6.1's single-owner law: this function never constructs the
     registries, it only wires the three operations over them). The
     port validation happens HERE (the §6.1 validate step); the
     returned `ModelLoadStates` is the family's state owner (the
-    composition hands it to the caller's handle)."""
+    composition hands it to the caller's handle). wb-9: the optional
+    `temperature_default` provider (the launch-settings store's
+    BASE layer) resolves chat.send's absent-temperature default —
+    injected, never imported."""
     require_backend_port(backend)
     port: BackendPort = backend  # structural — validated above
     loads = ModelLoadStates()
@@ -665,7 +696,7 @@ def register_backend_operations(
         OperationSpec(
             name="chat.send",
             kind="MUTATION",
-            handler=_make_chat_send(executions, port),
+            handler=_make_chat_send(executions, port, temperature_default),
             session_scoped=True,
             description=(
                 "one chat completion over the backend port (§8/§19.1 — "

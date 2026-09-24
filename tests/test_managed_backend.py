@@ -61,6 +61,11 @@ from workbench_app import (  # noqa: E402 — the launcher under test
 from workbench.platform.llama_process import (  # noqa: E402
     DEFAULT_CONTEXT,
     DEFAULT_GPU_LAYERS,
+    DEFAULT_MIN_P,
+    DEFAULT_REPEAT_PENALTY,
+    DEFAULT_TEMPERATURE,
+    DEFAULT_TOP_K,
+    DEFAULT_TOP_P,
     LlamaProcessError,
     LlamaServerProcess,
     build_server_command,
@@ -100,6 +105,11 @@ def test_the_default_flag_set_is_typed_and_visible() -> None:
         "-ngl", str(DEFAULT_GPU_LAYERS),
         "-c", str(DEFAULT_CONTEXT),
         "-fa", "on",
+        "--temp", repr(DEFAULT_TEMPERATURE),
+        "--top-k", str(DEFAULT_TOP_K),
+        "--top-p", repr(DEFAULT_TOP_P),
+        "--min-p", repr(DEFAULT_MIN_P),
+        "--repeat-penalty", repr(DEFAULT_REPEAT_PENALTY),
         "-a", "gemma.gguf",
         "--jinja",
         "--no-webui",
@@ -111,6 +121,8 @@ def test_the_overrides_ride_honestly() -> None:
         ["python", "wrap.py"], "m.gguf",
         port=9000, alias=None, context=4096, gpu_layers=0,
         flash_attention="off", jinja=False, no_webui=False,
+        temperature=0.2, top_k=0, top_p=0.5, min_p=0.1,
+        repeat_penalty=1.05,
         extra_args=["--threads", "8", "--mlock"],
     )
     assert command[:3] == ["python", "wrap.py", "-m"]
@@ -118,6 +130,11 @@ def test_the_overrides_ride_honestly() -> None:
     assert command[command.index("-ngl") + 1] == "0"
     assert command[command.index("-c") + 1] == "4096"
     assert command[command.index("-fa") + 1] == "off"
+    assert command[command.index("--temp") + 1] == "0.2"
+    assert command[command.index("--top-k") + 1] == "0"
+    assert command[command.index("--top-p") + 1] == "0.5"
+    assert command[command.index("--min-p") + 1] == "0.1"
+    assert command[command.index("--repeat-penalty") + 1] == "1.05"
     assert "-a" not in command and "--jinja" not in command
     assert "--no-webui" not in command
     assert command[-3:] == ["--threads", "8", "--mlock"]
@@ -136,6 +153,18 @@ def test_the_argument_validation_is_loud() -> None:
         build_server_command("exe", "m.gguf", port=1, context=0)
     with pytest.raises(LlamaProcessError, match="gpu_layers"):
         build_server_command("exe", "m.gguf", port=1, gpu_layers=-1)
+    with pytest.raises(LlamaProcessError, match="flash_attention"):
+        build_server_command("exe", "m.gguf", port=1, flash_attention="maybe")
+    with pytest.raises(LlamaProcessError, match="temperature"):
+        build_server_command("exe", "m.gguf", port=1, temperature=2.5)
+    with pytest.raises(LlamaProcessError, match="top_k"):
+        build_server_command("exe", "m.gguf", port=1, top_k=-1)
+    with pytest.raises(LlamaProcessError, match="top_p"):
+        build_server_command("exe", "m.gguf", port=1, top_p=1.5)
+    with pytest.raises(LlamaProcessError, match="min_p"):
+        build_server_command("exe", "m.gguf", port=1, min_p=-0.1)
+    with pytest.raises(LlamaProcessError, match="repeat_penalty"):
+        build_server_command("exe", "m.gguf", port=1, repeat_penalty=5.0)
 
 
 # --------------------------------------------- the process mechanics
@@ -199,22 +228,49 @@ def test_one_process_per_object() -> None:
 # --------------------------------------------- the lifecycle policy
 
 
-def _managed(port: int, **overrides: object) -> _ManagedBackend:
+def _managed(
+    port: int,
+    *,
+    client: object | None = None,
+    ready_timeout_s: float = 20.0,
+    **overrides: object,
+) -> _ManagedBackend:
     from cli.engine import EngineConfig, LlamaServerClient
 
-    client = LlamaServerClient(EngineConfig(endpoint=f"http://127.0.0.1:{port}"))
-    defaults: dict[str, object] = {
-        "client": client,
+    resolved = (
+        client
+        if client is not None
+        else LlamaServerClient(
+            EngineConfig(endpoint=f"http://127.0.0.1:{port}")
+        )
+    )
+    params: dict[str, object] = {
         "exe": _LEAD,
-        "host": "127.0.0.1",
-        "port": port,
         "context": 4096,
         "gpu_layers": 0,
+        "flash_attention": "on",
+        "jinja": True,
+        "no_webui": True,
+        "temperature": 0.8,
+        "top_k": 40,
+        "top_p": 0.95,
+        "min_p": 0.05,
+        "repeat_penalty": 1.1,
         "extra_args": [],
-        "ready_timeout_s": 20.0,
     }
-    defaults.update(overrides)
-    return _ManagedBackend(**defaults)  # type: ignore[arg-type]
+
+    def provider() -> dict[str, object]:
+        merged = dict(params)
+        merged.update(overrides)
+        return merged
+
+    return _ManagedBackend(
+        client=resolved,
+        launch_params=provider,
+        host="127.0.0.1",
+        port=port,
+        ready_timeout_s=ready_timeout_s,
+    )
 
 
 def test_load_on_a_down_backend_spawns_and_reports_honestly() -> None:
@@ -317,19 +373,19 @@ def test_a_never_ready_spawn_is_the_honest_unavailable_cause() -> None:
 # --------------------------------------------- the launcher wiring
 
 
-def test_managed_flag_composes_the_wrapper(tmp_path: Path) -> None:
+def test_the_managed_default_composes_the_wrapper(tmp_path: Path) -> None:
     models = tmp_path / "models"
     models.mkdir()
     (models / "m.gguf").write_bytes(b"stub")
     gateway, _operations, transport, backend, args = build_app(
         [
             "--models-dir", str(models),
-            "--managed",
             "--llama-server-exe", "llama-server.exe",
             "--llama-ctx", "4096",
             "--llama-ngl", "24",
             "--llama-args", "--threads 8 --mlock",
             "--port", "0",
+            "--settings-path", str(tmp_path / "settings.json"),
         ]
     )
     assert isinstance(backend, _ManagedBackend)
@@ -347,34 +403,36 @@ def test_the_managed_endpoint_must_parse(tmp_path: Path) -> None:
     (models / "m.gguf").write_bytes(b"stub")
     with pytest.raises(AppError, match="host:port"):
         build_app(
-            ["--models-dir", str(models), "--managed",
-             "--backend-endpoint", "http://127.0.0.1"]
+            ["--models-dir", str(models),
+             "--backend-endpoint", "http://127.0.0.1",
+             "--settings-path", str(tmp_path / "settings.json")]
         )
     with pytest.raises(AppError, match="https"):
         build_app(
-            ["--models-dir", str(models), "--managed",
-             "--backend-endpoint", "https://127.0.0.1:8080"]
+            ["--models-dir", str(models),
+             "--backend-endpoint", "https://127.0.0.1:8080",
+             "--settings-path", str(tmp_path / "settings.json")]
         )
 
 
 def test_the_documented_managed_defaults() -> None:
-    args = parse_args(["--managed"])
-    assert args.managed and not args.no_backend
-    assert args.llama_server_exe == "llama-server"
-    assert args.llama_ctx == DEFAULT_CONTEXT
-    assert args.llama_ngl == DEFAULT_GPU_LAYERS
+    args = parse_args([])
+    assert not args.attached and not args.no_backend  # MANAGED default
+    assert args.llama_server_exe is None  # the settings/scan resolution
+    assert args.llama_ctx is None and args.llama_ngl is None
     assert args.llama_args == ""
 
 
 def test_no_backend_still_wins_over_managed(tmp_path: Path) -> None:
     """The admission law's precedence: --no-backend composes WITHOUT
-    the port even under --managed — never a wrapper without the
-    honest form."""
+    the port even under the managed default — never a wrapper without
+    the honest form."""
     models = tmp_path / "models"
     models.mkdir()
     (models / "m.gguf").write_bytes(b"stub")
     gateway, _operations, transport, backend, _args = build_app(
-        ["--models-dir", str(models), "--managed", "--no-backend", "--port", "0"]
+        ["--models-dir", str(models), "--no-backend", "--port", "0",
+         "--settings-path", str(tmp_path / "settings.json")]
     )
     assert backend is None
     assert "model.load" not in gateway.operation_names

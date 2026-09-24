@@ -170,18 +170,30 @@ class CancellationToken:
         return self._event.is_set()
 
 
+def _no_progress(_payload: Mapping[str, object]) -> None:
+    """The progress reporter's default no-op (the older work kinds —
+    digest, chat — never report; the field stays constructible)."""
+
+
 @dataclass(frozen=True)
 class WorkContext:
     """What a work callable receives (§12's OperationContext material
     for the run family): the execution identity, the frozen absolute
-    deadline, the injectable clock, and the cancellation token.
-    `check()` is THE checkpoint — the cooperative contract every
-    long-running work honours between its chunks."""
+    deadline, the injectable clock, the cancellation token, and the
+    progress reporter (wb-9 — the live-observation surface a long
+    download reports through; a no-op default keeps the older work
+    kinds' construction unchanged). `check()` is THE checkpoint — the
+    cooperative contract every long-running work honours between its
+    chunks; `progress(payload)` is the §13 operational-state half — a
+    JSON-safe mapping the run.get document serves to the caller
+    BETWEEN admission and the terminal (never identity, never
+    artifact — D4's clock-adjacency law applies to it too)."""
 
     execution_id: str
     deadline: OperationDeadline
     clock: AppClock
     cancellation: CancellationToken
+    progress: Callable[[Mapping[str, object]], None] = _no_progress
 
     def cancellation_requested(self) -> bool:
         return self.cancellation.requested()
@@ -213,6 +225,46 @@ class WorkContext:
 #: document (validated at the terminal close — the closed-document
 #: law).
 WorkCallable = Callable[[WorkContext], Mapping[str, object]]
+
+
+@dataclass(frozen=True)
+class WorkKind:
+    """One wired work kind (the composition's registration unit —
+    defined here, the run family's own module, so the kind factories
+    (models.py's digest + fetch) can construct theirs without a
+    circular import): the name, the typed argument validator (the
+    envelope's `arguments` → the frozen-input pairs — the §10 freeze
+    material, DOMAIN_REJECTED on any violation), the work callable
+    over the frozen inputs, and the kind's own default deadline
+    (wb-9 — a minutes-class kind resolves its own §12 material input
+    when the caller names none; None = the registry's generic
+    default)."""
+
+    name: str
+    description: str
+    validate_arguments: Callable[[Mapping[str, object]], dict[str, str]]
+    work: Callable[[WorkContext, Mapping[str, str]], Mapping[str, object]]
+    default_deadline_seconds: float | None = None
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.name, str) or not self.name.strip():
+            raise RegistryError(
+                f"work kind {self.name!r}: a non-empty name"
+            )
+        if not callable(self.validate_arguments) or not callable(self.work):
+            raise RegistryError(
+                f"work kind {self.name!r}: validate_arguments and work "
+                "must be callable"
+            )
+        if self.default_deadline_seconds is not None and (
+            isinstance(self.default_deadline_seconds, bool)
+            or not isinstance(self.default_deadline_seconds, (int, float))
+            or self.default_deadline_seconds <= 0
+        ):
+            raise RegistryError(
+                f"work kind {self.name!r}: default_deadline_seconds "
+                "must be a positive number or None"
+            )
 
 
 def _validate_work_result(
@@ -255,6 +307,7 @@ class _ExecutionRecord:
     diagnostics: list[str] = field(default_factory=list)
     artifact: ExecutionArtifact | None = None
     thread: threading.Thread | None = None
+    progress: dict[str, object] | None = None
 
 
 class ExecutionRegistry:
@@ -402,8 +455,10 @@ class ExecutionRegistry:
         """The run.get view: the live state, the frozen inputs (the
         §10 input freeze is observable from admission — the
         before-side-effects proof surface), the deadline readings (an
-        explicit runtime observation, never identity), and at terminal
-        the result, the failure type, and the closed artifact."""
+        explicit runtime observation, never identity), the live
+        progress (wb-9 — the work's own last report, None when it
+        never reported), and at terminal the result, the failure
+        type, and the closed artifact."""
         with self._lock:
             record = self._require_owned_locked(execution_id, session_id)
             terminal = record.state in TERMINAL_STATES["EXECUTION"]
@@ -419,6 +474,11 @@ class ExecutionRegistry:
                     "started_monotonic": record.deadline.started_monotonic,
                     "deadline_monotonic": record.deadline.deadline_monotonic,
                 },
+                "progress": (
+                    dict(record.progress)
+                    if record.progress is not None
+                    else None
+                ),
                 "result": dict(record.result) if record.result is not None else None,
                 "failure_type": record.failure_type,
                 "diagnostics": list(record.diagnostics),
@@ -428,6 +488,25 @@ class ExecutionRegistry:
                     else None
                 ),
             }
+
+    def report_progress(
+        self, execution_id: str, payload: Mapping[str, object]
+    ) -> None:
+        """The work's live-observation write (wb-9 — the reporter the
+        WorkContext closes over): one JSON-safe mapping recorded on
+        the run's record, served by `document()` until the terminal
+        close leaves it in place (the last honest observation, never
+        scrubbed). A non-JSON-safe payload is the work contract's own
+        loud violation."""
+        try:
+            json.dumps(dict(payload), sort_keys=True, separators=(",", ":"))
+        except (TypeError, ValueError) as exc:
+            raise RegistryError(
+                f"the progress payload is not JSON-safe: {exc}"
+            ) from exc
+        with self._lock:
+            record = self._require_locked(execution_id)
+            record.progress = dict(payload)
 
     def request_cancel(self, execution_id: str, session_id: str) -> str:
         """§12.3's cancellation request truth (see the module note).
@@ -492,6 +571,7 @@ class ExecutionRegistry:
             deadline=record.deadline,
             clock=self._clock,
             cancellation=record.cancellation,
+            progress=self._progress_reporter(record.execution_id),
         )
         try:
             result = work(context)
@@ -532,7 +612,10 @@ class ExecutionRegistry:
                     record,
                     "FAILED",
                     failure_type=type(exc).__name__,
-                    diagnostics=[f"the work raised {type(exc).__name__}"],
+                    diagnostics=[
+                        "the work raised "
+                        f"{type(exc).__name__}: {str(exc)[:400]}"
+                    ],
                 )
         else:
             ok, mapping, bad = _validate_work_result(result)
@@ -555,6 +638,14 @@ class ExecutionRegistry:
                     self._close_locked(record, "COMPLETED", result=mapping)
 
     # ------------------------------------------------------------- locked
+
+    def _progress_reporter(
+        self, execution_id: str
+    ) -> Callable[[Mapping[str, object]], None]:
+        def report(payload: Mapping[str, object]) -> None:
+            self.report_progress(execution_id, payload)
+
+        return report
 
     def _walk_locked(self, record: _ExecutionRecord, target: str) -> None:
         """One validated state move (§11's table, loud on illegal —

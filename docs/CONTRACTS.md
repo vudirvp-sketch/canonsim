@@ -295,6 +295,67 @@
 > + git. The family contract below stays (wb-9..N still
 > owner-gated rows).
 
+> **wb-9 LANDED (iter-226, the owner's 2026-09-26 «открыл воркбенч,
+> зашел и загрузил модель» + «подтянуть модель откуда угодно» +
+> «настройки запуска llama.cpp... сэмплеры всякие» calls — the
+> model-flow row, frontend §46 Phase A's Models/Settings real-surface
+> half + app §11.1's managed default + §20's arrival half):** the row
+> that makes the model flow a ONE-COMMAND experience —
+> `workbench/platform/model_fetch.py` (D-208, INV-4's THIRD sanctioned
+> network surface, the owner-gated outbound model-assets fetch: the
+> operator URL vocabulary direct/HF-resolve/HF-blob→resolve/
+> hf:namespace/name/file → the `.part` stream with the injected §12
+> checkpoint (the caller's WorkCancelled/DeadlineExceeded carriers
+> propagate untouched) → the atomic rename into the models root; the
+> D1-family failure vocabulary; HTTP GET ONLY) + the `model.fetch`
+> work kind (models.py over the INJECTED fetcher — the BackendPort
+> pattern: the admission gates BEFORE the run exists (the occupied
+> name, the `.part` residue, the non-plain name — NOT_SENT), the run
+> registry's live PROGRESS surface (WorkContext.progress → the
+> run.get document, JSON-safe-gated), the kind's own 3600s default
+> deadline — the WorkKind field, chat.send's own-deadline pattern) +
+> `workbench/application/settings.py` (the typed LaunchSettings
+> document — exe/context/ngl/fa/jinja/no-webui/temp/top-k/top-p/
+> min-p/repeat-penalty/extra_args over the closed validated set, loud
+> never clamped; the atomic schema-tagged persistence at
+> workbench/runtime/settings.json — §16's USER_CONFIG role; the loud
+> load; the backend.settings / backend.settings.update operations with
+> the command preview + the managed liveness INJECTED at the
+> composition root; chat.send's absent-temperature default resolves
+> from the store — §19.1's BASE layer, the explicit value still wins) +
+> `llama_process.py`'s sampler default flags (--temp/--top-k/--top-p/
+> --min-p/--repeat-penalty, each emitted EXPLICITLY — the `-fa on`
+> pinning law) + `workbench_app.py`'s MANAGED DEFAULT (the
+> owner's model-flow call as THE default ownership form; `--attached`
+> restores wb-8's observe-only form; the settings load + the
+> CLI-over-store per-field overrides read at each spawn — a UI update
+> applies at the NEXT spawn; the exe auto-discovery: CLI > the store's
+> preference > the runtime/llama.cpp scan > PATH; the DEFAULT models
+> dir auto-creates — a custom missing dir stays the loud typo guard) +
+> `scripts/workbench_launch.py` the ONE-COMMAND launcher (the runtime
+> bootstrap workbench/runtime/{models,llama.cpp}/; the gateway child's
+> stdout bind-line watch — the readiness evidence without a
+> launcher-side socket; the Redot child after the bind (REDOT_EXE the
+> convention); either exit or Ctrl+C stops both, the gateway first so
+> the managed llama-server rides its own graceful path) + the Redot
+> half — shell.gd's Settings surface goes REAL (the typed launch
+> fields + the collapsed advanced extras + the command preview + the
+> honest next-spawn/LIVE note, backend.settings over the gateway) and
+> the Models surface gains the MANAGER (the URL row — a direct link, a
+> huggingface.co page, or hf:repo/file; Fetch/Cancel over
+> run.start/run.cancel; the distinct fetch-get poll tag with the live
+> progress note; the honest terminal notes; the offline hints name
+> workbench_launch.py). The claim packet: tests/test_model_fetch.py
+> (11 — the URL vocabulary, the admission gates, THE REAL end-to-end
+> fetch against a live loopback HTTP file server, the live progress,
+> the 404/cancellation truth, the .part cleanup) + tests/
+> test_settings.py (10 — the store laws, the loud load, the
+> operations over the gateway incl. the SETTINGS_UPDATED effect) + the
+> workbench_app/managed/shell_contract/architecture/operations/
+> gateway pin updates (35 new tests total). The landing record: TASKS
+> iter-226 + the worklog + git. The family contract below stays
+> (wb-10..N still owner-gated rows).
+
 **Pinned decisions** (each grounded in the brief or standing law):
 
 - D1 Runtime: Redot 26.2 LTS (`redot-26.2-stable`), Compatibility

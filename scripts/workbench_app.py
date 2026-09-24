@@ -2,22 +2,29 @@
 chat circuit's Python half — the app spec §22's CLI/batch delivery
 surface over the application operations; wb-8, the MANAGED backend
 half — the app spec §11.1's spawn/observe/graceful-stop machinery,
-the owner's «llama.cpp тоже запускаться при загрузке модели» call).
+the owner's «llama.cpp тоже запускаться при загрузке модели» call;
+wb-9, the model-flow row — the owner's 2026-09-25 «чтобы
+пользователь открыл воркбенч, зашел и загрузил модель» call: the
+managed form is now the DEFAULT, the launch settings persist and
+ride the UI, and the models dir + llama.cpp home bootstrap
+themselves).
 
 What this script is: the ONE launcher that assembles the live
 Workbench — the inbound gateway (wb-4), the application operations
 (wb-5), and the llama.cpp backend port (wb-6, `cli/engine.py`'s
 LlamaServerClient injected, never imported by the operations — INV-4's
 two-surface form holds; this file is the composition root, the only
-place the two sanctioned surfaces meet) — and serves the loopback HTTP
+place the sanctioned surfaces meet) — and serves the loopback HTTP
 binding the frontend talks to:
 
 ```text
 Redot shell (POST /op)  ->  LoopbackHttpTransport  ->  Gateway
-     -> chat.send / run.get / run.cancel / model.*  ->  BackendPort
-     -> llama-server (ATTACHED: the operator's process, D-192's D1
+     -> chat.send / run.get / run.cancel / model.*     ->  BackendPort
+     -> model.fetch (the injected platform fetcher)       (ATTACHED: the
+                        operator's process, D-192's D1
                         MANAGED: spawned HERE on the first model.load,
-                        §11.1's prepare→validate→ready form)
+                        §11.1's prepare→validate→ready form — the
+                        DEFAULT since wb-9)
 ```
 
 The frontend NEVER talks to llama.cpp directly (frontend §47's G8 —
@@ -25,27 +32,49 @@ the frontend cannot bypass the application boundary); llama.cpp is
 reached only through the engine adapter, and the shell reaches it
 only through the gateway.
 
+The runtime layout (wb-9's decision — the owner's «определись где
+будет папка с llama.cpp и моделями» call; everything gitignored):
+
+```text
+workbench/runtime/
+├── models/        the MODELS_ASSETS root — GGUF discovery (§16/§20);
+│                  auto-created at startup; the Models surface's
+│                  fetch manager lands files here
+├── llama.cpp/     the llama.cpp home — drop a release folder here
+│                  (e.g. llama-bXXXX-bin-win-cuda-x64/); the launcher
+│                  auto-discovers llama-server(.exe) in it
+└── settings.json  the USER_CONFIG role — the persisted launch
+                   settings (the Settings surface's backend.settings
+                   operations read/write it)
+```
+
 Honest forms:
 
 - `--no-backend` composes WITHOUT the port: chat.send/model.load/
-  model.unload are simply not registered (the admission law's honest
-  form) and the frontend shows "not connected" — never a fake.
+  model.unload/backend.settings stay unregistered (the admission
+  law's honest form) and the frontend shows "not connected" — never
+  a fake.
 - A configured-but-down backend endpoint still starts: health is
   probed once at startup as EVIDENCE (never a gate), and chat runs
   close FAILED with the observed cause — the honest surface.
-- ATTACHED (the default): the operator owns llama-server's lifecycle;
-  a down backend is the honest FAILED close, never an implicit spawn.
-- MANAGED (`--managed`): the launcher owns the process (§11.1's
-  MANAGED half, platform/llama_process.py's mechanics) — the FIRST
-  model.load spawns llama-server with the honest default flag set
-  (the station's own: -ngl 999, -c 8192, -fa on, --jinja, --no-webui,
-  loopback bind, -a <logical_name>) and observes readiness through
-  the engine adapter's own health() probe; Ctrl+C stops the gateway
-  AND the server (bounded graceful: TERM → deadline → kill, the
-  observed exit code reported). The flags ride --llama-server-exe /
-  --llama-ctx / --llama-ngl / --llama-args (the operator's override
-  surface); a busy/owned port is the loud observed failure, never a
-  silent fallback (no port shopping — §16's explicit-path law).
+- MANAGED (the DEFAULT since wb-9 — the owner's model-flow call):
+  the launcher owns the process (§11.1's MANAGED half,
+  platform/llama_process.py's mechanics) — the FIRST model.load
+  spawns llama-server with the CURRENT launch settings (the store's
+  values, the CLI overrides winning per-field) and observes readiness
+  through the engine adapter's own health() probe; Ctrl+C stops the
+  gateway AND the server (bounded graceful: TERM → deadline → kill,
+  the observed exit code reported). The flags ride
+  --llama-server-exe/--llama-ctx/--llama-ngl/--llama-args (this
+  process's overrides — the persisted store keeps the rest); a
+  busy/owned port is the loud observed failure, never a silent
+  fallback (no port shopping — §16's explicit-path law). A settings
+  update through the UI applies at the NEXT spawn — a LIVE server
+  keeps its flags until unloaded (the §11.1 replacement path is a
+  later row).
+- `--attached` restores wb-8's observe-only form: the operator owns
+  llama-server's lifecycle; a down backend is the honest FAILED
+  close, never an implicit spawn.
 
 Usage (the owner's live forms):
 
@@ -53,20 +82,25 @@ Usage (the owner's live forms):
         --models-dir /path/to/gguf-dir \
         --backend-endpoint http://127.0.0.1:8080
 
-    python scripts/workbench_app.py --managed \
-        --llama-server-exe D:/llama.cpp/llama-server.exe \
-        --models-dir /path/to/gguf-dir
+    python scripts/workbench_app.py --attached   # observe-only
+    python scripts/workbench_app.py --no-backend # the honest admission
 
     # defaults: 127.0.0.1:8765 + http://127.0.0.1:8080 +
-    # <repo>/workbench/runtime/models (gitignored runtime data)
+    # <repo>/workbench/runtime/models (auto-created) +
+    # <repo>/workbench/runtime/settings.json + MANAGED spawns with
+    # the persisted/CLI launch settings — the one-command form is
+    # scripts/workbench_launch.py (the gateway + Redot together).
 """
 
 from __future__ import annotations
 
 import argparse
+import os
+import shutil
 import signal
 import sys
 import time
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -83,13 +117,16 @@ from workbench.application.operations.composition import (  # noqa: E402
     CompositionError,
     compose_workbench_operations,
 )
+from workbench.application.settings import (  # noqa: E402
+    SettingsError,
+    SettingsStore,
+)
 from workbench.platform.llama_process import (  # noqa: E402
-    DEFAULT_CONTEXT,
-    DEFAULT_GPU_LAYERS,
     LlamaProcessError,
     LlamaServerProcess,
     build_server_command,
 )
+from workbench.platform.model_fetch import HttpModelFetcher  # noqa: E402
 
 #: The loopback serve defaults (the frontend's committed project
 #: setting matches: workbench/presentation/redot/project.godot —
@@ -103,7 +140,21 @@ DEFAULT_BACKEND_ENDPOINT = "http://127.0.0.1:8080"
 
 #: The default MODELS_ASSETS root (§16's path role, gitignored —
 #: the operator drops GGUF files there; model discovery scans it).
+#: wb-9: auto-created at startup (the owner's frictionless open —
+#: a missing assets dir is recoverable by creation, §16's own
+#: startup/recovery vocabulary; a CUSTOM --models-dir that does not
+#: exist stays the loud argument error — the typo guard).
 DEFAULT_MODELS_DIR = REPO / "workbench" / "runtime" / "models"
+
+#: The default USER_CONFIG path (§16's path role, gitignored) — the
+#: persisted launch settings (wb-9's Settings surface).
+DEFAULT_SETTINGS_PATH = REPO / "workbench" / "runtime" / "settings.json"
+
+#: The llama.cpp home (§16's toolchain-adjacent role, gitignored):
+#: drop a release folder here; the launcher discovers the server
+#: executable in it (root level or one folder deep, deterministic
+#: sort — the first hit).
+DEFAULT_LLAMA_CPP_DIR = REPO / "workbench" / "runtime" / "llama.cpp"
 
 #: The MANAGED readiness budget (§11.1 PROBING → READY): a Q4_K_M
 #: body's spawn+load on the station lands well inside this; the
@@ -137,54 +188,191 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--models-dir",
         default=str(DEFAULT_MODELS_DIR),
         help="the MODELS_ASSETS root — GGUF discovery (§16/§20); "
-        "default <repo>/workbench/runtime/models",
+        "default <repo>/workbench/runtime/models (auto-created)",
+    )
+    parser.add_argument(
+        "--settings-path",
+        default=str(DEFAULT_SETTINGS_PATH),
+        help="the USER_CONFIG path — the persisted launch settings "
+        "(§7.1); default <repo>/workbench/runtime/settings.json",
     )
     parser.add_argument(
         "--backend-endpoint",
         default=DEFAULT_BACKEND_ENDPOINT,
         help="the llama-server endpoint the BackendPort dials "
-        f"(default {DEFAULT_BACKEND_ENDPOINT}); in --managed form the "
+        f"(default {DEFAULT_BACKEND_ENDPOINT}); in the managed form the "
         "spawned server is expected on THIS endpoint's port",
     )
     parser.add_argument(
         "--no-backend",
         action="store_true",
         help="compose WITHOUT the backend port: chat.send/model.load/"
-        "model.unload stay unregistered (the honest admission law)",
+        "model.unload/backend.settings stay unregistered (the honest "
+        "admission law)",
     )
     parser.add_argument(
-        "--managed",
+        "--attached",
         action="store_true",
-        help="§11.1's MANAGED form: llama-server is spawned on the first "
-        "model.load and stopped at shutdown (the lifecycle policy owned "
-        "here, the OS mechanics in workbench/platform/llama_process.py)",
+        help="§11.1's ATTACHED form: the operator owns llama-server's "
+        "lifecycle — no implicit spawn on model.load (wb-8's old "
+        "default; MANAGED is the default since wb-9)",
     )
     parser.add_argument(
         "--llama-server-exe",
-        default="llama-server",
-        help="the llama-server executable path for --managed (the owner's "
-        "station: D:/llama.cpp/llama-server.exe; default: the PATH lookup)",
+        default=None,
+        help="the llama-server executable for the managed spawn — THIS "
+        "process's override (the persisted settings' preference applies "
+        "otherwise; default: the runtime/llama.cpp discovery, then PATH)",
     )
     parser.add_argument(
         "--llama-ctx",
         type=int,
-        default=DEFAULT_CONTEXT,
-        help=f"the spawned server's context window (default {DEFAULT_CONTEXT})",
+        default=None,
+        help="the spawned server's context window — this process's "
+        "override (the persisted settings' value applies otherwise)",
     )
     parser.add_argument(
         "--llama-ngl",
         type=int,
-        default=DEFAULT_GPU_LAYERS,
-        help="the spawned server's GPU layer count (default "
-        f"{DEFAULT_GPU_LAYERS} — all layers; 0 = CPU)",
+        default=None,
+        help="the spawned server's GPU layer count — this process's "
+        "override (the persisted settings' value applies otherwise)",
     )
     parser.add_argument(
         "--llama-args",
         default="",
-        help="extra llama-server flags verbatim (space-separated, the "
-        "operator's override surface — quoted as one argument)",
+        help="extra llama-server flags verbatim (space-separated) — this "
+        "process's override, non-empty only (the persisted settings' "
+        "value applies otherwise)",
     )
     return parser.parse_args(argv)
+
+
+# ----------------------------------------------------- the exe resolution
+
+
+def _exe_candidates(root: Path) -> list[Path]:
+    """The deterministic discovery candidates inside the llama.cpp
+    home: the root level first, then each immediate subfolder (sorted
+    by name — one honest order, never a glob race)."""
+    names = ["llama-server", "llama-server.exe"]
+    candidates: list[Path] = [root / name for name in names]
+    if root.is_dir():
+        for child in sorted(root.iterdir(), key=lambda p: p.name):
+            if child.is_dir():
+                candidates.extend(child / name for name in names)
+    return candidates
+
+
+def resolve_llama_exe(
+    preference: str,
+    llama_cpp_dir: Path = DEFAULT_LLAMA_CPP_DIR,
+) -> str:
+    """The managed spawn's executable, resolved honestly:
+
+    1. the caller's explicit preference (the CLI override or the
+       persisted settings' non-empty value) — verbatim, never
+       second-guessed (a broken path is the spawn's own loud error);
+    2. the runtime/llama.cpp home's discovery scan;
+    3. the PATH lookup (`llama-server`);
+    4. the bare name — the loud PATH-failure at spawn time, never a
+       silent 'no backend'.
+    """
+    if preference.strip():
+        return preference
+    for candidate in _exe_candidates(llama_cpp_dir):
+        if candidate.is_file():
+            return str(candidate)
+    found = shutil.which("llama-server")
+    if found:
+        return found
+    return "llama-server"
+
+
+# ------------------------------------------------- the launch-params seam
+
+
+def _make_launch_params(
+    store: SettingsStore,
+    cli: argparse.Namespace,
+) -> Any:
+    """The managed backend's EFFECTIVE launch-params provider: the
+    store's CURRENT settings (read at each spawn — a UI update
+    applies at the next one) overlaid with this process's CLI
+    overrides (the operator's explicit hand wins per-field, never
+    persisted). The resolved executable rides the same merge — the
+    preference ("" = auto) resolving through the discovery order."""
+
+    def provider() -> dict[str, object]:
+        current = store.current()
+        params: dict[str, object] = {
+            "context": (
+                cli.llama_ctx
+                if cli.llama_ctx is not None
+                else current.context
+            ),
+            "extra_args": (
+                [part for part in cli.llama_args.split() if part]
+                if cli.llama_args.strip()
+                else [part for part in current.extra_args.split() if part]
+            ),
+            "flash_attention": current.flash_attention,
+            "gpu_layers": (
+                cli.llama_ngl
+                if cli.llama_ngl is not None
+                else current.gpu_layers
+            ),
+            "jinja": current.jinja,
+            "min_p": current.min_p,
+            "no_webui": current.no_webui,
+            "repeat_penalty": current.repeat_penalty,
+            "temperature": current.temperature,
+            "top_k": current.top_k,
+            "top_p": current.top_p,
+        }
+        preference = (
+            cli.llama_server_exe
+            if cli.llama_server_exe is not None
+            else current.llama_server_exe
+        )
+        params["exe"] = resolve_llama_exe(preference or "")
+        return params
+
+    return provider
+
+
+def _command_preview_factory(
+    provider: Any,
+    host: str,
+    port: int,
+) -> Any:
+    """The Settings surface's preview callable (§18's EFFECTIVE
+    display): the command the NEXT spawn would run, with the model
+    path as the honest placeholder."""
+
+    def preview(_current: Mapping[str, object]) -> str:
+        params = provider()
+        command = build_server_command(
+            params["exe"],  # type: ignore[arg-type]
+            "<model.gguf>",
+            host=host,
+            port=port,
+            alias="<logical_name>",
+            context=params["context"],  # type: ignore[arg-type]
+            gpu_layers=params["gpu_layers"],  # type: ignore[arg-type]
+            flash_attention=str(params["flash_attention"]),
+            jinja=bool(params["jinja"]),
+            no_webui=bool(params["no_webui"]),
+            temperature=params["temperature"],  # type: ignore[arg-type]
+            top_k=params["top_k"],  # type: ignore[arg-type]
+            top_p=params["top_p"],  # type: ignore[arg-type]
+            min_p=params["min_p"],  # type: ignore[arg-type]
+            repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
+            extra_args=params["extra_args"],  # type: ignore[arg-type]
+        )
+        return " ".join(command)
+
+    return preview
 
 
 class _ManagedBackend:
@@ -197,7 +385,9 @@ class _ManagedBackend:
       behaviour unchanged);
     - model.load on a DOWN server spawns llama-server with `-m` for
       the very model the caller named (prepare → validate → ready),
-      so the load's observed outcome IS the spawn's honest truth;
+      the launch params read from the injected provider AT SPAWN
+      TIME (a settings update applies at the next spawn — the
+      honest next-spawn law);
     - unload of the SPAWNED model stops the process (the server
       exists for that one model — §11.1's bounded graceful stop);
       any other model ref delegates to POST /models/unload;
@@ -213,27 +403,26 @@ class _ManagedBackend:
         self,
         *,
         client: LlamaServerClient,
-        exe: str,
+        launch_params: Any,
         host: str,
         port: int,
-        context: int,
-        gpu_layers: int,
-        extra_args: list[str],
         ready_timeout_s: float = MANAGED_READY_TIMEOUT_S,
     ) -> None:
         self._client = client
-        self._exe = exe
+        self._launch_params = launch_params
         self._host = host
         self._port = port
-        self._context = context
-        self._gpu_layers = gpu_layers
-        self._extra_args = extra_args
         self._ready_timeout_s = ready_timeout_s
         self._process: LlamaServerProcess | None = None
         self._spawned_alias: str | None = None
         self.last_spawn_command: list[str] = []
 
     # -- the port face (wb-6's shape, duck-typed by the operations) --
+
+    def health(self) -> bool:
+        """The readiness probe (D7's observation boundary) — the
+        wrapped client's own; the wrapper never fabricates one."""
+        return self._client.health()
 
     def props(self) -> dict[str, Any]:
         return self._client.props()
@@ -278,21 +467,36 @@ class _ManagedBackend:
 
     # -- the lifecycle policy (§11.1: the composition root's own) ----
 
+    def is_live(self) -> bool:
+        """The Settings surface's liveness evidence (§18: the
+        effective backend state, never hidden)."""
+        return self._process is not None and self._process.running
+
     def _spawn_for(
         self, model_path: str, alias: str | None
     ) -> dict[str, Any]:
-        """prepare (the command with the honest defaults) → validate
-        (the spawn itself, loud) → ready (the adapter's own health
-        probe, the observed truth — never a fabricated readiness)."""
+        """prepare (the command with the CURRENT launch params) →
+        validate (the spawn itself, loud) → ready (the adapter's own
+        health probe, the observed truth — never a fabricated
+        readiness)."""
+        params = dict(self._launch_params())
         command = build_server_command(
-            self._exe,
+            params["exe"],  # type: ignore[arg-type]
             model_path,
             host=self._host,
             port=self._port,
             alias=alias,
-            context=self._context,
-            gpu_layers=self._gpu_layers,
-            extra_args=self._extra_args,
+            context=params["context"],  # type: ignore[arg-type]
+            gpu_layers=params["gpu_layers"],  # type: ignore[arg-type]
+            flash_attention=str(params["flash_attention"]),
+            jinja=bool(params["jinja"]),
+            no_webui=bool(params["no_webui"]),
+            temperature=params["temperature"],  # type: ignore[arg-type]
+            top_k=params["top_k"],  # type: ignore[arg-type]
+            top_p=params["top_p"],  # type: ignore[arg-type]
+            min_p=params["min_p"],  # type: ignore[arg-type]
+            repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
+            extra_args=params["extra_args"],  # type: ignore[arg-type]
         )
         self.last_spawn_command = list(command)
         process = LlamaServerProcess(command)
@@ -351,10 +555,11 @@ class _ManagedBackend:
                 f"managed llama-server LIVE on port {self._port} — "
                 f"alias {self._spawned_alias!r}"
             )
+        params = dict(self._launch_params())
         return (
             f"managed llama-server ABSENT — it spawns on the first "
-            f"model.load (exe {self._exe!r}, -ngl {self._gpu_layers}, "
-            f"-c {self._context})"
+            f"model.load (exe {params['exe']!r}, -ngl {params['gpu_layers']}, "
+            f"-c {params['context']})"
         )
 
 
@@ -371,28 +576,26 @@ def _managed_error(cause: str, detail: str) -> _ManagedError:
     return _ManagedError(cause, detail)
 
 
-def _backend_port_from(args: argparse.Namespace) -> object | None:
-    """The composition's backend resolution: None (--no-backend),
-    the plain ATTACHED client (the default), or the MANAGED wrapper
-    (§11.1's policy half — the client inside stays the ONE outbound
-    surface; the wrapper adds process decisions only)."""
+def _backend_port_from(
+    args: argparse.Namespace, launch_params: Any
+) -> object | None:
+    """The composition's backend resolution: None (--no-backend), the
+    plain ATTACHED client (--attached), or the MANAGED wrapper (the
+    DEFAULT — the client inside stays the ONE outbound surface; the
+    wrapper adds process decisions only)."""
     if args.no_backend:
         return None
     client = LlamaServerClient(
         EngineConfig(endpoint=args.backend_endpoint)
     )
-    if not args.managed:
+    if args.attached:
         return client
     host, port = _host_port(args.backend_endpoint)
-    extra = [part for part in args.llama_args.split() if part]
     return _ManagedBackend(
         client=client,
-        exe=args.llama_server_exe,
+        launch_params=launch_params,
         host=host,
         port=port,
-        context=args.llama_ctx,
-        gpu_layers=args.llama_ngl,
-        extra_args=extra,
     )
 
 
@@ -405,44 +608,86 @@ def _host_port(endpoint: str) -> tuple[str, int]:
         raw = raw[len("http://"):]
     elif raw.startswith("https://"):
         raise AppError(
-            f"--managed: the endpoint {endpoint!r} is https — the managed "
-            "spawn speaks plain loopback http (app §4's exposure law)"
+            f"the backend endpoint {endpoint!r} is https — the managed "
+            "spawn (and its settings preview) speaks plain loopback http "
+            "(app §4's exposure law)"
         )
     host, separator, port_text = raw.rpartition(":")
     if not separator or not host or not port_text.isdigit():
         raise AppError(
-            f"--managed: the endpoint {endpoint!r} does not parse as "
+            f"the backend endpoint {endpoint!r} does not parse as "
             "host:port — the spawned server must land on the port the "
             "BackendPort dials"
         )
     return host, int(port_text)
 
 
+def _models_root_from(args: argparse.Namespace) -> Path:
+    """The MODELS_ASSETS root (§16): the DEFAULT path auto-creates
+    (the frictionless open — wb-9); a CUSTOM path that does not exist
+    stays the loud argument error (the typo guard, wb-7's own law)."""
+    models_dir = Path(args.models_dir).expanduser().resolve()
+    if models_dir.exists():
+        if not models_dir.is_dir():
+            raise AppError(
+                f"models dir {str(models_dir)!r} exists but is not a "
+                "directory (§16's shallow CORRUPT form)"
+            )
+        return models_dir
+    if Path(args.models_dir) == DEFAULT_MODELS_DIR:
+        models_dir.mkdir(parents=True, exist_ok=True)
+        print(
+            f"workbench_app: models dir created — {models_dir} "
+            "(drop GGUF files there or fetch one from the Models surface)"
+        )
+        return models_dir
+    raise AppError(
+        f"models dir {str(models_dir)!r} does not exist — create it "
+        "and drop the GGUF files there (§16's MODELS_ASSETS role), "
+        "or pass --models-dir"
+    )
+
+
 def build_app(
     argv: list[str] | None = None,
 ) -> tuple[Gateway, object, LoopbackHttpTransport, object | None, argparse.Namespace]:
     """Construct → validate → wire (§6.1's composition form): the
-    gateway, the operations over it, the backend port when configured
-    (the handle returned for the startup evidence line — the
-    operations themselves never see the physical owner), and the
-    loopback transport — NOTHING started (start/stop stay the
-    caller's: the test surface composes without serving)."""
+    gateway, the operations over it (the fetcher + the settings store
+    + the managed backend's launch-params provider wired here — the
+    ONE place the platform seams meet the application), the backend
+    port when configured (the handle returned for the startup
+    evidence line — the operations themselves never see the physical
+    owner), and the loopback transport — NOTHING started (start/stop
+    stay the caller's: the test surface composes without serving)."""
     args = parse_args(argv)
-    models_dir = Path(args.models_dir).expanduser().resolve()
-    if not models_dir.exists():
-        raise AppError(
-            f"models dir {str(models_dir)!r} does not exist — create it "
-            "and drop the GGUF files there (§16's MODELS_ASSETS role), "
-            "or pass --models-dir"
-        )
+    models_dir = _models_root_from(args)
     try:
-        backend = _backend_port_from(args)
+        store = SettingsStore(Path(args.settings_path).resolve())
+    except SettingsError as exc:
+        raise AppError(f"the settings store refused: {exc}") from exc
+    launch_params = _make_launch_params(store, args)
+    try:
+        backend = _backend_port_from(args, launch_params)
     except LlamaProcessError as exc:
         raise AppError(f"the managed backend refused: {exc}") from exc
     gateway = Gateway()
+    host, port = ("127.0.0.1", 8080)
+    if backend is not None:
+        host, port = _host_port(args.backend_endpoint)
     try:
         operations = compose_workbench_operations(
-            gateway, models_dir, AppClock(), backend=backend
+            gateway,
+            models_dir,
+            AppClock(),
+            backend=backend,
+            fetch=HttpModelFetcher(),
+            settings_store=store,
+            command_preview=_command_preview_factory(launch_params, host, port),
+            managed_live=(
+                backend.is_live
+                if isinstance(backend, _ManagedBackend)
+                else None
+            ),
         )
     except CompositionError as exc:
         raise AppError(f"the composition refused: {exc}") from exc
@@ -475,7 +720,10 @@ def main(argv: list[str] | None = None) -> int:
     def _stop(_signum: int, _frame: object) -> None:
         stopped[0] = True
 
-    for sig in (signal.SIGINT, signal.SIGTERM):
+    signals = [signal.SIGINT, signal.SIGTERM]
+    if os.name == "nt" and hasattr(signal, "SIGBREAK"):
+        signals.append(signal.SIGBREAK)  # the launcher's Ctrl+Break stop
+    for sig in signals:
         signal.signal(sig, _stop)
     transport.start()
     print(f"CanonSim Workbench — loopback gateway {transport.url}")
@@ -483,17 +731,18 @@ def main(argv: list[str] | None = None) -> int:
     if backend is None:
         print(
             "backend: NONE (--no-backend — chat.send/model.load/"
-            "model.unload unregistered, the honest admission law)"
+            "model.unload/backend.settings unregistered, the honest "
+            "admission law)"
         )
     else:
         print(_backend_line(backend, args.backend_endpoint))
-        if args.managed:
+        if not args.attached:
             print(_managed_line(backend))
     print("Ctrl+C to stop.")
     while not stopped[0]:
         time.sleep(_STOP_POLL_S)
     transport.stop()
-    if args.managed and backend is not None:
+    if not args.attached and backend is not None:
         code = backend.stop()  # type: ignore[attr-defined]
         print(f"managed llama-server stopped (exit code {code})")
     return 0

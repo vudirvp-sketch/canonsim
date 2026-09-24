@@ -657,7 +657,10 @@ def test_run_work_failure_recorded(tmp_path: Path) -> None:
     artifact = document.result["artifact"]
     assert artifact is not None
     assert artifact["status"] == "FAILED"
-    assert "the work raised ValueError" in artifact["diagnostics"]
+    # wb-9: the diagnostic carries the failure's own message too (the
+    # fetch row's honest-cause law — bounded, never the whole traceback).
+    assert artifact["diagnostics"][0].startswith("the work raised ValueError")
+    assert "the probe's deliberate failure" in artifact["diagnostics"][0]
 
 
 def test_run_deadline_exceeded_failed(tmp_path: Path) -> None:
@@ -1083,19 +1086,33 @@ def test_composition_empty_work_kinds_loud(tmp_path: Path) -> None:
 
 
 def test_work_kind_contract_loud() -> None:
-    with pytest.raises(composition.CompositionError, match="non-empty name"):
+    # wb-9: WorkKind lives in execution.py (the run family's own module
+    # — the fetch factory constructs kinds without a circular import);
+    # its loudness is the registry's own error family, re-exported
+    # through the composition's historical name.
+    from workbench.application.operations.execution import RegistryError
+
+    with pytest.raises(RegistryError, match="non-empty name"):
         WorkKind(
             name="   ",
             description="",
             validate_arguments=lambda a: {},
             work=lambda c, i: {},
         )
-    with pytest.raises(composition.CompositionError, match="callable"):
+    with pytest.raises(RegistryError, match="callable"):
         WorkKind(
             name="ok",
             description="",
             validate_arguments=None,  # type: ignore[arg-type]
             work=lambda c, i: {},
+        )
+    with pytest.raises(RegistryError, match="default_deadline_seconds"):
+        WorkKind(
+            name="ok",
+            description="",
+            validate_arguments=lambda a: {},
+            work=lambda c, i: {},
+            default_deadline_seconds=-1.0,
         )
 
 
@@ -1338,6 +1355,7 @@ def test_operations_import_closure() -> None:
         "workbench.application.operations.execution",
         "workbench.application.operations.models",
         "workbench.application.operations.lifecycles",
+        "workbench.application.settings",
         "workbench.application.artifact",
         "workbench.application.clock",
         "workbench.application.identity",

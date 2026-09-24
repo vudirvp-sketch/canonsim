@@ -1,36 +1,46 @@
-Iteration: iter-225 (`iter-225-redot-engine-index` — the owner's
-2026-09-25 «отразить в репозитории» call over the external Redot/
-Godot agent reference index): the index ADMITTED as
-`docs/REDOT_ENGINE_INDEX.md` (the version firewall + the routing
-map — admission deltas only: §2.2/§2.3 reconciled to the landed
-wb-4..wb-8 surface, §10's skills pinned agent-side per AGENTS
-§2.8, the external changelog cut) + the routing surfaces wired
-(AGENT_NAVIGATION §1/§2/§3 + the STATUS FAQ one-liner + TASKS'
-wb-9+ pointer + CONTRACTS §5's composition block + README's agent
-list) + docguard's allowlist entry (the 600-cap's §6.1 rationale)
-+ D-207 into the standing-rows family row (the compound row's own
-append form — the 30-row cap held).
+Iteration: iter-226 (`wb-9-model-flow` — the owner's
+2026-09-26 model-flow call over the v5.2 brief: «определись где будет
+папка с llama.cpp и моделями» + «чтобы пользователь открыл воркбенч,
+зашел и загрузил модель» + «в идеале вообще мог вызвать "менеджер" и
+подтянуть модель откуда угодно» + «настройки запуска llama.cpp, флаги
+как минимум основные + список остальных скрытый или свёрнутый,
+сэмплеры всякие»): the model flow end to end — the D-208 third
+network surface `workbench/platform/model_fetch.py` (the outbound
+model-assets fetch: the URL vocabulary direct/HF/hf:, the .part
+stream + the atomic rename, the injected §12 checkpoint) + the
+`model.fetch` work kind with the run registry's live PROGRESS surface
++ the launch-settings family (`workbench/application/settings.py` +
+backend.settings ops + the persisted workbench/runtime/settings.json)
++ the runtime layout decision (workbench/runtime/{models,llama.cpp}/,
+gitignored) + workbench_app.py's MANAGED DEFAULT (--attached the
+opt-out) + the exe auto-discovery + scripts/workbench_launch.py the
+ONE-COMMAND launcher (the gateway + Redot) + shell.gd's REAL Settings
+surface + the Models manager.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-8 DONE) + the world track + the SoW
+(the wb family its live head, wb-9 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2223 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+2258 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent) ·
-Date: 2026-09-25 ·
-Scope: docs/REDOT_ENGINE_INDEX.md (new — the 1.4k-line engine
-reference index, the docguard allowlist entry carrying the §6.1
-rationale) + scripts/docguard.py (the allowlist line) + the routing
-pointers (AGENT_NAVIGATION/TASKS/CONTRACTS/DECISIONS/README) + the
-state docs (STATUS/worklog) — 9 paths (doc-only, the owner's
-explicit call; zero code change beyond the guard's own allowlist,
-the LOG untouched).
-Track A: doc-only (the wb family's engine-facts layer). The prior
-iterations' record: iter-224 (the wb-8 handback + D-206's delivery
-protocol), 223 (wb-8), 222 (wb-7), 221 (wb-6), 220 (wb-5), 219
-(wb-4), 218 (wb-3), 217 (wb-2), 216/215 (wb-1). The detail lives in
-the worklog + git.
-
+Date: 2026-09-26 ·
+Scope: workbench/platform/model_fetch.py (new) +
+workbench/application/settings.py (new) + scripts/workbench_launch.py
+(new) + llama_process.py (the sampler flags) + execution.py (the
+progress surface) + models.py + composition.py + backend.py (the
+settings seams) + scripts/workbench_app.py (the managed default + the
+store + the discovery) + shell.gd (the real Settings + the manager) +
+the claim packets (test_model_fetch/test_settings + the pin updates)
++ the law/routing docs (AGENTS INV-4/§8, DECISIONS D-208, TASKS,
+CONTRACTS §5, NAV, README) + the state docs — 25 paths (the 3–5 soft
+limit honestly over: the platform surface + the settings family + the
+launcher + the frontend + the claim packets + the law edits, AGENTS
+§2.3, the scope noted in the worklog).
+Track A: the wb family (wb-9 the model flow — DONE). The prior
+iterations' record: iter-225 (the Redot engine index, D-207), 224 (the
+wb-8 handback + D-206's delivery protocol), 223 (wb-8), 222 (wb-7),
+221 (wb-6), 220 (wb-5), 219 (wb-4), 218 (wb-3), 217 (wb-2),
+216/215 (wb-1). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -47,8 +57,10 @@ the worklog + git.
   iter-10a); all setting data in `content/tavern_pack/`; the periphery
   dirs (`render/`, `cli/`, `scripts/`) carry pack paths/help text/prose
   by design (D-046).
-- INV-4 LLM boundary — the explicit adapter: the network surface is
-  EXACTLY ONE module, `cli/engine.py` (engine-1's landing, D-193);
+- INV-4 LLM boundary — the sanctioned surfaces: the network surface is
+  EXACTLY THREE modules — `cli/engine.py` (outbound engine wire, D-193),
+  `workbench/api/transport.py` (inbound loopback gateway, D-201), and
+  `workbench/platform/model_fetch.py` (outbound model-assets fetch, D-208);
   everything else stays network-free and engine-agnostic — AGENTS §4
   the law owner, the architecture test the executable.
 - INV-5 Log immutability: committed logs are never edited; corrections are
@@ -56,7 +68,7 @@ the worklog + git.
 
 ## Active KIs
 
-- KI#91 · wb-8's five shell.gd notes as adjacent literals refused the Redot parse · CLOSED iter-224 (one literal per line + the contract-test ban)
+- (none — KI#91 deleted per the 2-iteration cleanup law, AGENTS §5)
 
 ## FAQ / Pitfalls
 
@@ -75,32 +87,34 @@ the worklog + git.
 - **The golden T1 fixture is env-pinned: byte-compare only on the generating interpreter; the regen guard pins schema_version + a fresh byte-diff** — TEST_PLAN §1.1 (§3 the migration).
 - **Doc drift is evidence, not prescription — verify with `git log -S` AND the pinning test before acting (KI#42/48/51/80); bootstrap texts are convenience copies, never a second source** — D-024/D-027.
 - **The code-quality bar: AGENTS §4/§9 the law, BLUEPRINT §2 (L13/L14) the constitution, test_architecture + the stoplist test the executable; no new canonical layers (D-018)** — D-031.
-- **Git hygiene: verify `.gitignore` after any upload; a file DELETION needs an explicit `git rm` in the report block or it never lands (KI#55); `git status --short` before every commit** — AGENTS §7.
-- **Scope-creep guards: content/tone → D-030 + PACK_SPEC's sketch row; two consecutive doc-only iterations stop unless a fresh owner request fires (D-022)** — AGENTS §2.
+- **Procedural guards: git hygiene (verify `.gitignore` after any upload; a file DELETION needs an explicit `git rm` or it never lands (KI#55); `git status --short` before every commit — AGENTS §7) + scope-creep (content/tone → D-030 + PACK_SPEC's sketch row; two consecutive doc-only iterations stop unless a fresh owner request fires (D-022) — AGENTS §2)**
 - **DF exports are malformed/truncated CP437 XML: byte-sanitize, stream with iterparse + clear, tail-check truncation; off-matrix record tags render UNDOCUMENTED** — the matrix: `docs/ref/df_legends_xml.md`; the recipe: TECH_NOTES §3.1–§3.3.
 - **The cap laws: substance over line count — filler cut always; named systems/field lists/enum values/verdicts never cut to fit; a breach triggers a cruft pass first** — AGENTS §6/§6.1; enforced by `scripts/docguard.py`.
 - **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088)** — BRIEF_SPEC §2/§3.3.
 - **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
 - **Gate mechanics: seed 125, only the director flag changes — ON fires `director_0000`, OFF ≥3 emergent chains (baseline 24); M3 counts per endpoint, decay-dominated in magnitude** — TEST_PLAN §4 + the D-136 verdict row.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
+- **The Workbench runtime layout (wb-9/D-208): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud); the one-command entry is `scripts/workbench_launch.py` (the gateway + Redot; REDOT_EXE the env convention), `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-9 note
 - **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 
 ## Next step
 
-**iter-225 DONE: the Redot/Godot engine reference index admitted into
-the repo (`docs/REDOT_ENGINE_INDEX.md` — the version firewall + the
-routing map, D-207) + the routing surfaces wired (NAV §1/§2/§3, the
-FAQ one-liner, the wb-9+ pointers in TASKS/CONTRACTS §5, README's
-agent list) + docguard's allowlist entry.**
+**iter-226 DONE: the wb-9 model flow LANDED (D-208's third network
+surface + the model.fetch kind with live progress + the launch-settings
+family + the runtime layout + the MANAGED default + the one-command
+launcher + the real Settings surface + the Models manager).**
 
-1. wb-9+ per the family rows (app §32's ladder: live events +
+1. wb-10+ per the family rows (app §32's ladder: live events +
    reconnect/resync + the idempotency/revision/lease tests at live
    scale — session.events' frontend consumer + the RESYNC arm;
    persistence CAS + recovery roles; the frontend §46 rows — the
-   Inference surface, history/diagnostics; the §11.1 replacement
-   path (prepare-new → swap → retire-old over a live server); the
-   live-build /models/load re-verification against the owner's
-   station; the CanonSim seam) — the owner's call opens each row.
+   Inference surface (the per-request sampler family + §19.1's
+   profile/preset composition — the launch settings are the BASE
+   layer now), history/diagnostics; the §11.1 replacement path
+   (prepare-new → swap → retire-old over a live server — the settings
+   update's next-spawn note names it); the live-build /models/load
+   re-verification against the owner's station; the CanonSim seam) —
+   the owner's call opens each row.
 2. The remaining station rows (the owner's next engine run,
    TEST_PLAN §8.5's standing gaps + the wb-6 arm: the live-build
    /models/load + /models/unload re-verification against the

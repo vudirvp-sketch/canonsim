@@ -1045,8 +1045,10 @@ def test_api_dependency_envelope_stdlib_only() -> None:
 
 
 def test_inv4_exception_is_exactly_two_modules() -> None:
-    """The D-201 pin: the architecture test's sanctioned surface is
-    exactly the outbound adapter + the inbound gateway binding."""
+    """The D-201 + D-208 pins: the architecture test's sanctioned
+    surface is exactly the outbound adapter + the inbound gateway
+    binding + the outbound model-assets fetch (wb-9's owner-gated
+    exception — one per direction-and-asset)."""
     spec = importlib.util.spec_from_file_location(
         "test_architecture", REPO / "tests" / "test_architecture.py"
     )
@@ -1057,5 +1059,6 @@ def test_inv4_exception_is_exactly_two_modules() -> None:
         {
             architecture.REPO / "cli" / "engine.py",
             architecture.REPO / "workbench" / "api" / "transport.py",
+            architecture.REPO / "workbench" / "platform" / "model_fetch.py",
         }
     )

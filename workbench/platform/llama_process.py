@@ -49,6 +49,20 @@ server surface):
                     shell is the only intended client)
 ```
 
+The sampler default flags (wb-9, the owner's «сэмплеры всякие» call —
+the app spec §19's 2026-09-23 research surface's stable core, each
+emitted EXPLICITLY, never assumed from the build's own defaults —
+the same pinning law `-fa on` uses):
+
+```text
+--temp 0.8          the temperature (the chat surface's own default
+                    rides every request that omits one — §19.1)
+--top-k 40          top-k truncation
+--top-p 0.95        nucleus truncation
+--min-p 0.05        the min-p floor (the current builds' default)
+--repeat-penalty 1.1  the repetition penalty
+```
+
 Build-sensitive like every llama.cpp surface (app §20's law): the
 defaults are the CONSERVATIVE admitted set; `extra_args` carries the
 operator's own flags verbatim (the honest override — later rows
@@ -67,6 +81,11 @@ __all__ = [
     "DEFAULT_FLASH_ATTENTION",
     "DEFAULT_GPU_LAYERS",
     "DEFAULT_HOST",
+    "DEFAULT_MIN_P",
+    "DEFAULT_REPEAT_PENALTY",
+    "DEFAULT_TEMPERATURE",
+    "DEFAULT_TOP_K",
+    "DEFAULT_TOP_P",
     "LlamaProcessError",
     "LlamaServerProcess",
     "build_server_command",
@@ -84,6 +103,15 @@ DEFAULT_CONTEXT = 8192
 #: "on" (the CUDA default made explicit, never an assumed "auto").
 DEFAULT_FLASH_ATTENTION = "on"
 
+#: The sampler default family (wb-9 — §19's stable core, the current
+#: llama.cpp server builds' own defaults pinned explicitly; the
+#: settings store's UI surface rides these as its defaults).
+DEFAULT_TEMPERATURE = 0.8
+DEFAULT_TOP_K = 40
+DEFAULT_TOP_P = 0.95
+DEFAULT_MIN_P = 0.05
+DEFAULT_REPEAT_PENALTY = 1.1
+
 #: The managed server's bind host — loopback only (app §4's exposure
 #: law: MANAGED is still never an implicit LAN surface).
 DEFAULT_HOST = "127.0.0.1"
@@ -94,6 +122,30 @@ _STOP_POLL_S = 0.05
 class LlamaProcessError(RuntimeError):
     """A process-mechanics contract violation (LOUD — a spawn on a
     missing executable, a stop of nothing; never a silent no-op)."""
+
+
+def _positive_int(value: object, name: str, *, maximum: int) -> int:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, int)
+        or not 0 <= value <= maximum
+    ):
+        raise LlamaProcessError(
+            f"{name} {value!r} must be an int in [0, {maximum}]"
+        )
+    return value
+
+
+def _unit_float(value: object, name: str, *, maximum: float) -> float:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not 0.0 <= float(value) <= maximum
+    ):
+        raise LlamaProcessError(
+            f"{name} {value!r} must be a number in [0, {maximum}]"
+        )
+    return float(value)
 
 
 def build_server_command(
@@ -108,12 +160,19 @@ def build_server_command(
     flash_attention: str = DEFAULT_FLASH_ATTENTION,
     jinja: bool = True,
     no_webui: bool = True,
+    temperature: float = DEFAULT_TEMPERATURE,
+    top_k: int = DEFAULT_TOP_K,
+    top_p: float = DEFAULT_TOP_P,
+    min_p: float = DEFAULT_MIN_P,
+    repeat_penalty: float = DEFAULT_REPEAT_PENALTY,
     extra_args: Sequence[str] = (),
 ) -> list[str]:
     """The honest default command line (§22: the launcher selects
     runtime paths; the flags stay the platform's typed surface). The
     alias rides `-a` so the served model's API identity IS the
-    workbench logical_name (§9: one name, one identity).
+    workbench logical_name (§9: one name, one identity). The sampler
+    defaults ride their five flags EXPLICITLY (wb-9 — the §19 research
+    surface's stable core, never assumed from the build's defaults).
 
     `exe` is the command LEAD: one token (the executable path — the
     launcher's CLI form) or a short prefix (an interpreter + script —
@@ -137,6 +196,16 @@ def build_server_command(
         raise LlamaProcessError(
             f"gpu_layers {gpu_layers!r} must be a non-negative int"
         )
+    if flash_attention not in ("on", "off", "auto"):
+        raise LlamaProcessError(
+            f"flash_attention {flash_attention!r} must be one of "
+            "['auto', 'off', 'on']"
+        )
+    temperature = _unit_float(temperature, "temperature", maximum=2.0)
+    top_k = _positive_int(top_k, "top_k", maximum=10_000)
+    top_p = _unit_float(top_p, "top_p", maximum=1.0)
+    min_p = _unit_float(min_p, "min_p", maximum=1.0)
+    repeat_penalty = _unit_float(repeat_penalty, "repeat_penalty", maximum=4.0)
     command: list[str] = [
         *lead,
         "-m", str(model_path),
@@ -145,6 +214,11 @@ def build_server_command(
         "-ngl", str(gpu_layers),
         "-c", str(context),
         "-fa", str(flash_attention),
+        "--temp", repr(temperature),
+        "--top-k", str(top_k),
+        "--top-p", repr(top_p),
+        "--min-p", repr(min_p),
+        "--repeat-penalty", repr(repeat_penalty),
     ]
     if alias is not None and alias.strip():
         command += ["-a", alias.strip()]

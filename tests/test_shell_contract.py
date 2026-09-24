@@ -219,6 +219,60 @@ def test_project_carries_the_gateway_url_setting() -> None:
     assert 'gateway/url="http://127.0.0.1:8765"' in text
 
 
+# ------------------------------------------- wb-9: the model-flow surface
+
+
+def test_the_launch_settings_surface_is_real() -> None:
+    """wb-9's frontend half: the Settings surface drives the gateway's
+    own settings operations (backend.settings / backend.settings.update),
+    carries the typed llama.cpp launch fields + the collapsed advanced
+    extras + the command preview, and the honest next-spawn note —
+    never a fake knob."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    for op in ('"backend.settings"', '"backend.settings.update"'):
+        assert op in text, f"the Settings surface must call {op}"
+    for marker in (
+        "llama.cpp launch (managed)",
+        "llama-server executable",
+        "Context window (-c)",
+        "GPU layers (-ngl)",
+        "Flash attention (-fa)",
+        "Temperature (--temp)",
+        "Top-K (--top-k)",
+        "Top-P (--top-p)",
+        "Min-P (--min-p)",
+        "Repeat penalty (--repeat-penalty)",
+        "Extra flags",
+        "command_preview",
+    ):
+        assert marker in text, f"the launch-settings field missing: {marker}"
+    # the collapsed advanced surface + the honest note
+    assert "_on_advanced_toggled" in text
+    assert "a LIVE server keeps its flags until unloaded" in text
+    assert "_populate_settings_fields" in text
+    assert "backend.settings.update refused" in text
+
+
+def test_the_model_manager_surface_is_real() -> None:
+    """wb-9's Models manager: the fetch circuit rides run.start with
+    the model.fetch work kind, polls run.get (the distinct fetch-get
+    tag — no collision with the chat poll), cancels through run.cancel,
+    and shows the live progress + the honest terminal notes."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    assert '"model.fetch"' in text
+    assert '_next_request_id("fetch-start")' in text
+    assert '_next_request_id("fetch-get")' in text
+    assert '_next_request_id("fetch-cancel")' in text
+    assert "_on_fetch_pressed" in text
+    assert "_on_fetch_cancel_pressed" in text
+    assert "_fetch_progress_note" in text
+    assert "downloading" in text
+    assert "fetch FAILED" in text
+    assert "fetch canceled (the truthful terminal)" in text
+    # the manager's hint names the one-command launcher
+    assert "workbench_launch.py" in text
+
+
 # ----------------------------------- iter-224: the literal-concatenation ban
 
 

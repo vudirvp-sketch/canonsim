@@ -1,5 +1,6 @@
 """The workbench composition root (wb-5, the app spec §6.1 — the
-family's fifth row; the backend wiring wb-6, §32 step 7).
+family's fifth row; the backend wiring wb-6, §32 step 7; the fetch
++ settings wiring wb-9).
 
 The law: **the composition root is the single wiring owner** —
 construct → validate dependencies → wire owners (register the
@@ -28,6 +29,20 @@ unregistered (the same honest form — machinery without a consumer
 is forbidden). The physical transport stays `cli/engine.py` (INV-4):
 `workbench/` never imports it — the application-entry rows own the
 physical wiring; the port is the typed seam (backend.py).
+
+The wb-9 wiring (the owner's «подтянуть модель откуда угодно» +
+«настройки запуска llama.cpp» calls): a `fetch` seam (the platform's
+HttpModelFetcher, injected like the port — never imported here)
+wires the `model.fetch` work kind into the default work-kind map; the
+INJECTED `settings_store` (constructed by the composition root over
+the §16 USER_CONFIG path — one instance per process, so the launch
+provider and the operations share one current state) wires its two
+operations (backend.settings / backend.settings.update — only with a
+backend port: their consumer); the `temperature_default` provider
+hands chat.send the settings' temperature as its BASE layer (§19.1 —
+the caller's explicit value still wins); the preview/liveness
+callables stay the composition root's own (the store never imports
+the platform — §6's direction law).
 
 The registered handlers reject through the gateway's public
 `OperationRejected` carrier (DOMAIN_REJECTED — NOT_SENT, never a
@@ -64,12 +79,23 @@ from workbench.application.operations.execution import (
     RegistryError,
     WorkCallable,
     WorkContext,
+    WorkKind,
 )
 from workbench.application.operations.models import (
     ModelRegistry,
     ModelRegistryError,
     digest_work,
+    model_fetch_kind,
 )
+from workbench.application.settings import (
+    SettingsStore,
+    register_settings_operations,
+)
+
+# WorkKind is defined in execution.py (the run family's own module —
+# wb-9's fetch factory constructs kinds without a circular import) and
+# re-exported here: the composition is its historical home and the
+# package's public surface (__all__ carries it).
 
 __all__ = [
     "WorkKind",
@@ -84,28 +110,15 @@ class CompositionError(ValueError):
     the §6.1 validate-dependencies step, LOUD)."""
 
 
-@dataclass(frozen=True)
-class WorkKind:
-    """One wired work kind (the composition's registration unit):
-    the name, the typed argument validator (the envelope's `arguments`
-    → the frozen-input pairs — the §10 freeze material, DOMAIN_REJECTED
-    on any violation), and the work callable over the frozen inputs."""
+def _temperature_from(store: SettingsStore) -> Callable[[], float]:
+    """chat.send's BASE provider over the injected store (§19.1 — the
+    closure reads CURRENT at each dispatch, so a settings update
+    applies to the very next chat call)."""
 
-    name: str
-    description: str
-    validate_arguments: Callable[[Mapping[str, object]], dict[str, str]]
-    work: Callable[[WorkContext, Mapping[str, str]], Mapping[str, object]]
+    def current_temperature() -> float:
+        return store.current().temperature
 
-    def __post_init__(self) -> None:
-        if not isinstance(self.name, str) or not self.name.strip():
-            raise CompositionError(
-                f"work kind {self.name!r}: a non-empty name"
-            )
-        if not callable(self.validate_arguments) or not callable(self.work):
-            raise CompositionError(
-                f"work kind {self.name!r}: validate_arguments and work "
-                "must be callable"
-            )
+    return current_temperature
 
 
 @dataclass(frozen=True)
@@ -178,15 +191,25 @@ def compose_workbench_operations(
     registry_config: ExecutionRegistryConfig | None = None,
     work_kinds: Mapping[str, WorkKind] | None = None,
     backend: object | None = None,
+    fetch: object | None = None,
+    settings_store: SettingsStore | None = None,
+    command_preview: Callable[[Mapping[str, object]], str] | None = None,
+    managed_live: Callable[[], bool] | None = None,
 ) -> WorkbenchOperations:
     """Construct → validate → wire: build the registries, resolve the
-    work kinds (the caller's mapping or the default `model.digest`
-    composition), register the five operations on the gateway — the
-    single wiring point (a duplicate name is the gateway's own loud
+    work kinds (the caller's mapping or the default composition — the
+    digest kind always, the fetch kind when a fetcher is injected,
+    wb-9), register the five operations on the gateway — the single
+    wiring point (a duplicate name is the gateway's own loud
     one-name-one-owner error) — and, when a backend port is injected,
     the three backend operations (wb-6: chat.send + model.load/
-    model.unload over the port). A malformed port is the §6.1
-    validate step's own loud CompositionError."""
+    model.unload over the port) plus the settings family (wb-9: the
+    INJECTED store — constructed by the composition root over the
+    USER_CONFIG path, ONE instance per process so the provider and
+    the operations read the same current state; its two operations;
+    and chat.send's temperature BASE provider — only with a port:
+    their consumer). A malformed port is the §6.1 validate step's own
+    loud CompositionError."""
     models = ModelRegistry(models_root)
     executions = ExecutionRegistry(clock, registry_config)
     if work_kinds is not None:
@@ -194,6 +217,9 @@ def compose_workbench_operations(
     else:
         digest_kind = model_digest_kind(models)
         kinds = {digest_kind.name: digest_kind}
+        if fetch is not None:
+            fetch_kind = model_fetch_kind(models, fetch)
+            kinds[fetch_kind.name] = fetch_kind
     if not kinds:
         raise CompositionError(
             "the composition wires at least one work kind — an empty "
@@ -246,9 +272,25 @@ def compose_workbench_operations(
     model_loads: ModelLoadStates | None = None
     if backend is not None:
         try:
-            model_loads = register_backend_operations(
-                gateway, executions, models, backend
+            temperature_default = (
+                _temperature_from(settings_store)
+                if settings_store is not None
+                else None
             )
+            model_loads = register_backend_operations(
+                gateway,
+                executions,
+                models,
+                backend,
+                temperature_default=temperature_default,
+            )
+            if settings_store is not None:
+                register_settings_operations(
+                    gateway,
+                    settings_store,
+                    command_preview=command_preview,
+                    managed_live=managed_live,
+                )
         except BackendPortError as exc:
             raise CompositionError(
                 f"the injected backend does not satisfy the port: {exc}"
@@ -307,8 +349,13 @@ def _make_run_start(
             raise _rejected(
                 "run.start: deadline_seconds must be a positive number"
             )
+        resolved_deadline = (
+            deadline_argument
+            if deadline_argument is not None
+            else kind.default_deadline_seconds
+        )
         try:
-            seconds = executions.resolve_deadline_seconds(deadline_argument)
+            seconds = executions.resolve_deadline_seconds(resolved_deadline)
         except RegistryError as exc:
             raise _rejected(f"run.start: {exc}") from exc
         session_id = context.session.session_id if context.session else ""

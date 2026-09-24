@@ -12,6 +12,18 @@
 # collapsed). The shell owns presentation-local state only (CONTRACTS §5 D2):
 # no canon writes, no invented facts, no second semantic store.
 #
+# wb-9 — the model-flow row (the owner's 2026-09-25 «открыл воркбенч, зашел
+# и загрузил модель» + «настройки запуска llama.cpp... сэмплеры всякие»
+# calls): the Settings surface goes REAL — the llama.cpp launch settings
+# (backend.settings / backend.settings.update over the gateway: the typed
+# fields + the collapsed advanced extras + the effective command preview,
+# the honest next-spawn note when a server is LIVE) — and the Models
+# surface gains the MANAGER: a URL (direct / huggingface.co / the hf:
+# shorthand) fetches a GGUF into the models folder as a RUN with live
+# progress (run.start model.fetch -> the run.get poll -> the refreshed
+# discovery list; Stop = run.cancel). Every value shown is the gateway's
+# own answer — never a local guess, never a fake.
+#
 # wb-8 — the Models surface (frontend §46 Phase A's Models row, the
 # owner's «выбирать модель я должно из интерфейса» call): the
 # DISCOVERED list over model.list + the per-model Model-lifecycle
@@ -65,6 +77,15 @@ const MAX_POLL_FAILURES := 10
 const MODEL_LOAD_TIMEOUT_S := 420.0
 const MODEL_UNLOAD_TIMEOUT_S := 60.0
 const MODEL_ACTION_STATES := ["DISCOVERED", "SELECTED", "EVICTED"]
+# The model manager's own budgets (wb-9): the fetch run's dispatch is a
+# quick admit (identity-then-poll — the run.get reads carry the progress);
+# the poll cadence rides the shared POLL_INTERVAL_S tick.
+const FETCH_NOTE_MAX_LENGTH := 240
+
+# The Settings surface's own state (wb-9): the launch-settings document
+# arrives from backend.settings (the gateway's own answer); the preview
+# label carries the command the NEXT managed spawn would run.
+const FA_FORMS := ["on", "off", "auto"]
 
 var _t: Theme
 var _surface_nodes: Dictionary = {}
@@ -103,6 +124,31 @@ var _models_refresh_button: Button
 var _models_active_label: Label
 var _model_rows: Dictionary = {}
 var _models_requested := false
+# wb-9 — the model manager (the fetch circuit) + the launch settings.
+var _fetch_input: LineEdit
+var _fetch_button: Button
+var _fetch_cancel_button: Button
+var _fetch_status_label: Label
+var _fetch_execution := ""
+var _fetch_poll_failures := 0
+var _settings_scroll: ScrollContainer
+var _llama_exe_edit: LineEdit
+var _ctx_spin: SpinBox
+var _ngl_spin: SpinBox
+var _fa_option: OptionButton
+var _jinja_check: CheckBox
+var _no_webui_check: CheckBox
+var _temp_spin: SpinBox
+var _topk_spin: SpinBox
+var _topp_spin: SpinBox
+var _minp_spin: SpinBox
+var _repeat_spin: SpinBox
+var _extra_edit: LineEdit
+var _advanced_box: VBoxContainer
+var _advanced_button: Button
+var _preview_label: Label
+var _settings_status_label: Label
+var _settings_save_button: Button
 
 
 func _ready() -> void:
@@ -341,7 +387,7 @@ func _build_chat_surface() -> Control:
         var composer := HBoxContainer.new()
         composer.add_theme_constant_override("separation", _k("space_s"))
         _composer_input = LineEdit.new()
-        _composer_input.text = "Offline — start scripts/workbench_app.py, then launch live"
+        _composer_input.text = "Offline — start scripts/workbench_launch.py (one command), then reopen"
         _composer_input.editable = false
         _composer_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         composer.add_child(_composer_input)
@@ -364,7 +410,7 @@ func _build_models_surface() -> Control:
         surface.add_theme_constant_override("separation", _k("space_m"))
         surface.add_child(_surface_header(
                 "Models",
-                "Discover, load, switch — the lifecycle states observed, never guessed (wb-8)."
+                "Discover, fetch, load, switch — the lifecycle states observed, never guessed (wb-8/wb-9)."
         ))
 
         var toolbar := HBoxContainer.new()
@@ -383,6 +429,40 @@ func _build_models_surface() -> Control:
         _models_active_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
         toolbar.add_child(_models_active_label)
         surface.add_child(toolbar)
+
+        # wb-9 — the model manager: a URL (direct / huggingface.co / the
+        # hf: shorthand) fetches a GGUF into the models folder as a run
+        # with live progress; Cancel rides run.cancel (§12.3's truth).
+        var fetch_card := PanelContainer.new()
+        var fetch_col := VBoxContainer.new()
+        fetch_col.add_theme_constant_override("separation", _k("space_xs"))
+        var fetch_row := HBoxContainer.new()
+        fetch_row.add_theme_constant_override("separation", _k("space_s"))
+        _fetch_input = LineEdit.new()
+        _fetch_input.placeholder_text = "https://…/model.gguf · hf:repo/file — pull a GGUF from anywhere"
+        _fetch_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        _fetch_input.editable = false
+        fetch_row.add_child(_fetch_input)
+        _fetch_button = Button.new()
+        _fetch_button.text = "Fetch"
+        _fetch_button.disabled = true
+        _fetch_button.pressed.connect(_on_fetch_pressed)
+        fetch_row.add_child(_fetch_button)
+        _fetch_cancel_button = Button.new()
+        _fetch_cancel_button.text = "Cancel"
+        _fetch_cancel_button.disabled = true
+        _fetch_cancel_button.pressed.connect(_on_fetch_cancel_pressed)
+        fetch_row.add_child(_fetch_cancel_button)
+        fetch_col.add_child(fetch_row)
+        _fetch_status_label = Label.new()
+        _fetch_status_label.text = "the manager rides the gateway — start scripts/workbench_launch.py"
+        _fetch_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
+        _fetch_status_label.add_theme_color_override("font_color", _c("text_muted"))
+        _fetch_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        _fetch_status_label.clip_text = true
+        fetch_col.add_child(_fetch_status_label)
+        fetch_card.add_child(fetch_col)
+        surface.add_child(fetch_card)
 
         _models_scroll = ScrollContainer.new()
         _models_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -433,19 +513,142 @@ func _build_settings_surface() -> Control:
                 "Settings",
                 "Global behaviour and appearance — the effective values, honestly."
         ))
-        surface.add_child(_setting_row("Theme", "canon_workbench_theme@0.1 · dark — the only admitted theme"))
-        surface.add_child(_setting_row("Language", "English · localisation opens on its own wb row"))
+        _settings_scroll = ScrollContainer.new()
+        _settings_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+        _settings_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        _settings_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+        var column := VBoxContainer.new()
+        column.add_theme_constant_override("separation", _k("space_s"))
+        column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        _settings_scroll.add_child(column)
+        surface.add_child(_settings_scroll)
+
+        column.add_child(_setting_row("Theme", "canon_workbench_theme@0.1 · dark — the only admitted theme"))
+        column.add_child(_setting_row("Language", "English · localisation opens on its own wb row"))
         _settings_gateway_value = _setting_value_label(
                 "offline — the proof/static form (no gateway dialled)"
         )
-        surface.add_child(_setting_row_with_value("Gateway", _settings_gateway_value))
+        column.add_child(_setting_row_with_value("Gateway", _settings_gateway_value))
         _settings_backend_value = _setting_value_label(
                 "none observed yet — llama.cpp rides the gateway (chat.run's backend note)"
         )
-        surface.add_child(_setting_row_with_value("Backend", _settings_backend_value))
-        surface.add_child(_setting_row("Simulation", "seam proven (wb-1) · the surface opens on its wb row"))
-        surface.add_child(_setting_row("Keyboard & focus", "tab order + visible focus from the theme tokens"))
+        column.add_child(_setting_row_with_value("Backend", _settings_backend_value))
+        column.add_child(_launch_settings_section())
+        column.add_child(_setting_row("Simulation", "seam proven (wb-1) · the surface opens on its wb row"))
+        column.add_child(_setting_row("Keyboard & focus", "tab order + visible focus from the theme tokens"))
         return surface
+
+
+func _launch_settings_section() -> Control:
+        # wb-9 — the REAL llama.cpp launch settings: the typed fields the
+        # managed spawn reads (backend.settings over the gateway), the
+        # collapsed advanced extras, and the effective command preview.
+        var card := PanelContainer.new()
+        var col := VBoxContainer.new()
+        col.add_theme_constant_override("separation", _k("space_s"))
+        card.add_child(col)
+
+        var title := Label.new()
+        title.text = "llama.cpp launch (managed)"
+        title.add_theme_font_size_override("font_size", _k("font_size_section_title"))
+        title.add_theme_color_override("font_color", _c("text_primary"))
+        col.add_child(title)
+        var note := Label.new()
+        note.text = "The managed spawn's own flags — saved values apply at the NEXT model.load; a LIVE server keeps its flags until unloaded."
+        note.add_theme_font_size_override("font_size", _k("font_size_secondary"))
+        note.add_theme_color_override("font_color", _c("text_secondary"))
+        note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        col.add_child(note)
+
+        _llama_exe_edit = LineEdit.new()
+        _llama_exe_edit.placeholder_text = "auto — workbench/runtime/llama.cpp, then PATH"
+        col.add_child(_input_row("llama-server executable", _llama_exe_edit))
+
+        _ctx_spin = _spin_box(512.0, 2097152.0, 512.0, 8192.0)
+        col.add_child(_input_row("Context window (-c)", _ctx_spin))
+        _ngl_spin = _spin_box(0.0, 999.0, 1.0, 999.0)
+        col.add_child(_input_row("GPU layers (-ngl)", _ngl_spin))
+
+        _fa_option = OptionButton.new()
+        for form in FA_FORMS:
+                _fa_option.add_item(form)
+        _fa_option.selected = FA_FORMS.find("on")
+        col.add_child(_input_row("Flash attention (-fa)", _fa_option))
+
+        _jinja_check = CheckBox.new()
+        _jinja_check.button_pressed = true
+        col.add_child(_input_row("Chat template (--jinja)", _jinja_check))
+        _no_webui_check = CheckBox.new()
+        _no_webui_check.button_pressed = true
+        col.add_child(_input_row("No web UI (--no-webui)", _no_webui_check))
+
+        col.add_child(_caption("SAMPLER DEFAULTS"))
+        _temp_spin = _spin_box(0.0, 2.0, 0.05, 0.8)
+        col.add_child(_input_row("Temperature (--temp)", _temp_spin))
+        _topk_spin = _spin_box(0.0, 10000.0, 1.0, 40.0)
+        col.add_child(_input_row("Top-K (--top-k)", _topk_spin))
+        _topp_spin = _spin_box(0.0, 1.0, 0.01, 0.95)
+        col.add_child(_input_row("Top-P (--top-p)", _topp_spin))
+        _minp_spin = _spin_box(0.0, 1.0, 0.01, 0.05)
+        col.add_child(_input_row("Min-P (--min-p)", _minp_spin))
+        _repeat_spin = _spin_box(0.0, 4.0, 0.05, 1.1)
+        col.add_child(_input_row("Repeat penalty (--repeat-penalty)", _repeat_spin))
+
+        _advanced_button = Button.new()
+        _advanced_button.text = "Advanced — extra flags and the command preview"
+        _advanced_button.toggle_mode = true
+        _advanced_button.pressed.connect(_on_advanced_toggled)
+        col.add_child(_advanced_button)
+        _advanced_box = VBoxContainer.new()
+        _advanced_box.visible = false
+        _advanced_box.add_theme_constant_override("separation", _k("space_xs"))
+        _extra_edit = LineEdit.new()
+        _extra_edit.placeholder_text = "--threads 8 --mlock — extra llama-server flags, verbatim"
+        _advanced_box.add_child(_input_row("Extra flags", _extra_edit))
+        _preview_label = Label.new()
+        _preview_label.text = "the command the NEXT managed spawn would run — arrives with the gateway's settings document"
+        _preview_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
+        _preview_label.add_theme_color_override("font_color", _c("text_muted"))
+        _preview_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        _advanced_box.add_child(_preview_label)
+        col.add_child(_advanced_box)
+
+        _settings_status_label = Label.new()
+        _settings_status_label.text = "the settings ride the gateway — start scripts/workbench_launch.py"
+        _settings_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
+        _settings_status_label.add_theme_color_override("font_color", _c("text_muted"))
+        _settings_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+        col.add_child(_settings_status_label)
+
+        _settings_save_button = Button.new()
+        _settings_save_button.text = "Save launch settings"
+        _settings_save_button.disabled = true
+        _settings_save_button.pressed.connect(_on_settings_save_pressed)
+        col.add_child(_settings_save_button)
+        return card
+
+
+func _input_row(key: String, field: Control) -> Control:
+        var row := HBoxContainer.new()
+        row.add_theme_constant_override("separation", _k("space_m"))
+        var key_label := Label.new()
+        key_label.text = key
+        key_label.add_theme_font_size_override("font_size", _k("font_size_body"))
+        key_label.add_theme_color_override("font_color", _c("text_primary"))
+        row.add_child(key_label)
+        field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        row.add_child(field)
+        return row
+
+
+func _spin_box(min_value: float, max_value: float, step: float, value: float) -> SpinBox:
+        var spin := SpinBox.new()
+        spin.min_value = min_value
+        spin.max_value = max_value
+        spin.step = step
+        spin.value = value
+        spin.alignment = HORIZONTAL_ALIGNMENT_RIGHT
+        return spin
 
 
 func _setting_row(key: String, value: String) -> Control:
@@ -621,6 +824,10 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                                 _composer_input.editable = true
                                 _send_button.disabled = false
                                 _update_models_enablement()
+                                _fetch_input.editable = true
+                                _fetch_button.disabled = false
+                                _settings_save_button.disabled = false
+                                _request_backend_settings()
                 else:
                         _note_system(
                                 "session.create refused: %s %s" % [
@@ -634,6 +841,24 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 return
         if tag == "model-states":
                 _on_model_states_answered(document)
+                return
+        if tag == "backend-settings":
+                _on_backend_settings_answered(document)
+                return
+        if tag.begins_with("settings-save-"):
+                _on_settings_saved_answered(document)
+                return
+        if tag.begins_with("fetch-start-"):
+                _on_fetch_start_answered(document)
+                return
+        if tag.begins_with("fetch-get-"):
+                _on_fetch_get_answered(document)
+                return
+        if tag.begins_with("fetch-cancel-"):
+                if status != "OK":
+                        _fetch_status_label.text = "run.cancel refused: %s %s" % [
+                                _text(document.get("rejection")), _reason_of(document)
+                        ]
                 return
         if tag.begins_with("model-load-"):
                 _on_model_load_answered(tag.substr(len("model-load-")), document)
@@ -696,9 +921,9 @@ func _on_run_get_answered(document: Dictionary) -> void:
                 # A semantic rejection is terminal for THIS poll loop (a transient
                 # transport failure is the _poll_failures arm's own law) — noted
                 # once, never spammed.
-                _poll_timer.stop()
                 _active_execution = ""
                 _set_busy(false)
+                _maybe_stop_poll_timer()
                 _note_system(
                         "run.get refused: %s %s" % [
                                 _text(document.get("rejection")),
@@ -711,9 +936,9 @@ func _on_run_get_answered(document: Dictionary) -> void:
         var result: Dictionary = document.get("result")
         if not bool(result.get("terminal", false)):
                 return  # still walking (STARTING/RUNNING) — the next tick observes
-        _poll_timer.stop()
         _active_execution = ""
         _set_busy(false)
+        _maybe_stop_poll_timer()
         var state := _text(result.get("state"))
         var run_result: Dictionary = (
                 result.get("result") if result.get("result") is Dictionary else {}
@@ -778,26 +1003,58 @@ func _observe_backend(backend: Dictionary) -> void:
 
 
 func _on_poll_tick() -> void:
-        if _active_execution == "" or _session_id == "":
+        if _session_id == "":
                 _poll_timer.stop()
                 return
-        _client.call_operation(
-                _next_request_id("run-get"), "run.get",
-                {"execution_id": _active_execution}, _session_id
-        )
+        var any_active := false
+        if _active_execution != "":
+                _client.call_operation(
+                        _next_request_id("run-get"), "run.get",
+                        {"execution_id": _active_execution}, _session_id
+                )
+                any_active = true
+        if _fetch_execution != "":
+                _client.call_operation(
+                        _next_request_id("fetch-get"), "run.get",
+                        {"execution_id": _fetch_execution}, _session_id
+                )
+                any_active = true
+        if not any_active:
+                _poll_timer.stop()
 
 
 func _on_transport_failed(tag: String, error: String) -> void:
         if tag == "app-status" or tag == "session-create":
                 _set_badge("CANONSIM · NOT CONNECTED", false)
                 _gateway_state_label.text = "gateway unreachable (%s)" % error
-                _empty_note.text = "Gateway unreachable — start scripts/workbench_app.py (%s)." % error
+                _empty_note.text = "Gateway unreachable — start scripts/workbench_launch.py (%s)." % error
                 _settings_gateway_value.text = "unreachable · %s" % _gateway_url
                 return
         if tag == "model-list" or tag == "model-states":
                 _models_status_label.text = (
                         "gateway unreachable on %s (%s) — Retry with Refresh" % [tag, error]
                 )
+                return
+        if tag == "backend-settings":
+                _settings_status_label.text = "backend.settings unreachable (%s) — the values stay local until the gateway answers" % error
+                return
+        if tag.begins_with("settings-save-"):
+                _settings_status_label.text = "settings save transport failure (%s) — nothing sent, safe to retry" % error
+                return
+        if tag.begins_with("fetch-start-"):
+                _reset_fetch_controls()
+                _fetch_status_label.text = "fetch dispatch transport failure (%s) — nothing sent, safe to retry" % error
+                return
+        if tag.begins_with("fetch-get-"):
+                _fetch_poll_failures += 1
+                if _fetch_poll_failures >= MAX_POLL_FAILURES:
+                        _fetch_execution = ""
+                        _reset_fetch_controls()
+                        _fetch_status_label.text = "fetch poll abandoned after %d transport failures (%s)" % [MAX_POLL_FAILURES, error]
+                        _maybe_stop_poll_timer()
+                return
+        if tag.begins_with("fetch-cancel-"):
+                _fetch_status_label.text = "run.cancel transport failure (%s) — the poll continues" % error
                 return
         if tag.begins_with("model-load-") or tag.begins_with("model-unload-"):
                 # The action never reached the gateway — the row's truth is
@@ -808,9 +1065,9 @@ func _on_transport_failed(tag: String, error: String) -> void:
         if tag.begins_with("run-get-"):
                 _poll_failures += 1
                 if _poll_failures >= MAX_POLL_FAILURES:
-                        _poll_timer.stop()
                         _active_execution = ""
                         _set_busy(false)
+                        _maybe_stop_poll_timer()
                         _note_system(
                                 "poll abandoned after %d transport failures (%s)" % [
                                         MAX_POLL_FAILURES, error
@@ -854,11 +1111,11 @@ func _on_model_list_answered(document: Dictionary) -> void:
         var result: Dictionary = document.get("result")
         var directory_state := _text(result.get("directory_state"))
         if directory_state == "MISSING":
-                _models_empty_note.text = "The models directory is MISSING — start the launcher with --models-dir pointing at the GGUF folder."
+                _models_empty_note.text = "The models directory is MISSING — the launcher's runtime/models folder is the default home; fetch or drop GGUF files there."
         var models: Array = result.get("models", []) if result.get("models") is Array else []
         _rebuild_models_list(models)
         if models.is_empty():
-                _models_status_label.text = "no models discovered (%s) — drop GGUF files into the launcher's --models-dir folder" % directory_state
+                _models_status_label.text = "no models discovered (%s) — fetch one above or drop GGUF files into workbench/runtime/models" % directory_state
         else:
                 _models_status_label.text = "%d model(s) discovered · %s" % [
                         models.size(), directory_state
@@ -1091,6 +1348,230 @@ func _format_size(size_bytes: int) -> String:
         if size_bytes >= 1024 * 1024:
                 return "%.1f MB" % (float(size_bytes) / (1024.0 * 1024.0))
         return "%d B" % size_bytes
+
+
+# --- the launch-settings surface (wb-9 — the real llama.cpp fields) ----------
+
+
+func _request_backend_settings() -> void:
+        if _client == null:
+                return
+        _client.call_operation("backend-settings", "backend.settings", {})
+
+
+func _on_backend_settings_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status != "OK" or not (document.get("result") is Dictionary):
+                _settings_status_label.text = "backend.settings refused: %s %s" % [
+                        _text(document.get("rejection")), _reason_of(document)
+                ]
+                return
+        _populate_settings_fields(document.get("result"))
+
+
+func _populate_settings_fields(result: Dictionary) -> void:
+        var settings: Dictionary = (
+                result.get("settings", {}) if result.get("settings") is Dictionary else {}
+        )
+        if settings.is_empty():
+                return
+        _llama_exe_edit.text = _text(settings.get("llama_server_exe"))
+        _ctx_spin.value = float(settings.get("context", 8192))
+        _ngl_spin.value = float(settings.get("gpu_layers", 999))
+        var fa_index := FA_FORMS.find(_text(settings.get("flash_attention")))
+        _fa_option.selected = fa_index if fa_index >= 0 else 0
+        _jinja_check.button_pressed = bool(settings.get("jinja", true))
+        _no_webui_check.button_pressed = bool(settings.get("no_webui", true))
+        _temp_spin.value = float(settings.get("temperature", 0.8))
+        _topk_spin.value = float(settings.get("top_k", 40))
+        _topp_spin.value = float(settings.get("top_p", 0.95))
+        _minp_spin.value = float(settings.get("min_p", 0.05))
+        _repeat_spin.value = float(settings.get("repeat_penalty", 1.1))
+        _extra_edit.text = _text(settings.get("extra_args"))
+        var preview := _text(result.get("command_preview"))
+        if preview != "":
+                _preview_label.text = preview
+        var suffix := " — effective at the next model.load"
+        if bool(result.get("managed_live")):
+                suffix = " — a LIVE server keeps its flags until unloaded"
+        _settings_status_label.text = "effective values shown%s" % suffix
+
+
+func _on_settings_save_pressed() -> void:
+        if not _session_live or _client == null:
+                return
+        var document := {
+                "llama_server_exe": _llama_exe_edit.text.strip_edges(),
+                "context": int(_ctx_spin.value),
+                "gpu_layers": int(_ngl_spin.value),
+                "flash_attention": FA_FORMS[_fa_option.selected],
+                "jinja": _jinja_check.button_pressed,
+                "no_webui": _no_webui_check.button_pressed,
+                "temperature": float(_temp_spin.value),
+                "top_k": int(_topk_spin.value),
+                "top_p": float(_topp_spin.value),
+                "min_p": float(_minp_spin.value),
+                "repeat_penalty": float(_repeat_spin.value),
+                "extra_args": _extra_edit.text.strip_edges(),
+        }
+        _settings_status_label.text = "saving…"
+        var request_id := _next_request_id("settings-save")
+        _client.call_operation(
+                request_id, "backend.settings.update", document,
+                _session_id, request_id
+        )
+
+
+func _on_settings_saved_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                _populate_settings_fields(document.get("result"))
+                _settings_status_label.text = "saved — the values apply at the next model.load (a LIVE server keeps its flags until unloaded)"
+                return
+        if status == "UNKNOWN":
+                _settings_status_label.text = "settings save OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                return
+        _settings_status_label.text = "backend.settings.update refused: %s %s" % [
+                _text(document.get("rejection")), _reason_of(document)
+        ]
+
+
+func _on_advanced_toggled() -> void:
+        _advanced_box.visible = _advanced_button.button_pressed
+
+
+# --- the model manager (wb-9 — fetch a GGUF from anywhere) -------------------
+
+
+func _on_fetch_pressed() -> void:
+        if not _session_live or _client == null:
+                return
+        if _fetch_execution != "":
+                return
+        var url_value := _fetch_input.text.strip_edges()
+        if url_value == "":
+                _fetch_status_label.text = "paste a URL first — a direct link, a huggingface.co page, or hf:repo/file"
+                return
+        _fetch_button.disabled = true
+        _fetch_cancel_button.disabled = false
+        _fetch_status_label.text = "dispatching the fetch run…"
+        var request_id := _next_request_id("fetch-start")
+        _client.call_operation(
+                request_id, "run.start",
+                {"work": "model.fetch", "arguments": {"url": url_value}},
+                _session_id, request_id
+        )
+
+
+func _on_fetch_cancel_pressed() -> void:
+        if _fetch_execution == "" or _client == null:
+                return
+        var request_id := _next_request_id("fetch-cancel")
+        _client.call_operation(
+                request_id, "run.cancel",
+                {"execution_id": _fetch_execution}, _session_id, request_id
+        )
+
+
+func _on_fetch_start_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                var result: Dictionary = document.get("result")
+                _fetch_execution = _text(result.get("execution_id"))
+                _fetch_poll_failures = 0
+                _fetch_status_label.text = "fetching — the progress rides the run poll"
+                _poll_timer.start()
+                return
+        _reset_fetch_controls()
+        if status == "UNKNOWN":
+                _fetch_status_label.text = "fetch dispatch OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                return
+        _fetch_status_label.text = "model.fetch refused: %s %s" % [
+                _text(document.get("rejection")), _reason_of(document)
+        ]
+
+
+func _on_fetch_get_answered(document: Dictionary) -> void:
+        if _fetch_execution == "":
+                return
+        var status := _text(document.get("status"))
+        if status != "OK":
+                _fetch_execution = ""
+                _reset_fetch_controls()
+                _maybe_stop_poll_timer()
+                _fetch_status_label.text = "run.get refused: %s %s" % [
+                        _text(document.get("rejection")), _reason_of(document)
+                ]
+                return
+        if not (document.get("result") is Dictionary):
+                return
+        var result: Dictionary = document.get("result")
+        if not bool(result.get("terminal", false)):
+                var progress: Dictionary = (
+                        result.get("progress", {}) if result.get("progress") is Dictionary else {}
+                )
+                _fetch_status_label.text = _fetch_progress_note(progress)
+                return
+        _fetch_execution = ""
+        _reset_fetch_controls()
+        _maybe_stop_poll_timer()
+        var state := _text(result.get("state"))
+        var run_result: Dictionary = (
+                result.get("result", {}) if result.get("result") is Dictionary else {}
+        )
+        match state:
+                "COMPLETED":
+                        _fetch_status_label.text = "fetched %s (%s) — refreshing the list" % [
+                                _text(run_result.get("logical_name")),
+                                _format_size(int(run_result.get("size_bytes", 0)))
+                        ]
+                        _refresh_models()
+                "FAILED":
+                        _fetch_status_label.text = "fetch FAILED · %s" % _first_diagnostic(result)
+                "CANCELED":
+                        _fetch_status_label.text = "fetch canceled (the truthful terminal)"
+                _:
+                        _fetch_status_label.text = "fetch terminal state %s (unmodelled — shown, never collapsed)" % state
+
+
+func _fetch_progress_note(progress: Dictionary) -> String:
+        var name_value := _text(progress.get("logical_name"))
+        var downloaded := int(progress.get("downloaded_bytes", 0))
+        var total_value = progress.get("total_bytes")
+        if total_value == null:
+                return "downloading %s — %s (total unknown)" % [
+                        name_value, _format_size(downloaded)
+                ]
+        var total := int(total_value)
+        if total > 0:
+                var percent := int(float(downloaded) * 100.0 / float(total))
+                return "downloading %s — %d%% (%s / %s)" % [
+                        name_value, percent,
+                        _format_size(downloaded), _format_size(total)
+                ]
+        return "downloading %s — %s" % [name_value, _format_size(downloaded)]
+
+
+func _first_diagnostic(result: Dictionary) -> String:
+        var diagnostics: Array = (
+                result.get("diagnostics", []) if result.get("diagnostics") is Array else []
+        )
+        if diagnostics.is_empty():
+                return "no diagnostics"
+        var first := _text(diagnostics[0])
+        if first.length() > FETCH_NOTE_MAX_LENGTH:
+                first = first.substr(0, FETCH_NOTE_MAX_LENGTH) + "…"
+        return first
+
+
+func _reset_fetch_controls() -> void:
+        _fetch_button.disabled = not _session_live
+        _fetch_cancel_button.disabled = true
+
+
+func _maybe_stop_poll_timer() -> void:
+        if _active_execution == "" and _fetch_execution == "":
+                _poll_timer.stop()
 
 
 # --- the chat surface's local actions ----------------------------------------
