@@ -157,6 +157,7 @@ def test_the_documented_defaults() -> None:
     assert args.backend_endpoint == DEFAULT_BACKEND_ENDPOINT
     assert Path(args.models_dir) == DEFAULT_MODELS_DIR
     assert not args.no_backend
+    assert not args.managed  # ATTACHED is the default ownership form
     args = parse_args(["--no-backend", "--port", "9000", "--host", "::1"])
     assert args.no_backend and args.port == 9000 and args.host == "::1"
 

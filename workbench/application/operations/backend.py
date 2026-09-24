@@ -29,8 +29,11 @@ observed terminal answer.
 §11.1's ATTACHED form: the operator owns the llama-server process
 (D-192 D1 — the backend process is not application state); the
 workbench observes (props) and requests (chat/load/unload). The
-MANAGED half (spawn/stop/restart, the Backend ladder's machinery) is
-a later row — honestly deferred, no process machinery here.
+MANAGED half (spawn/stop) landed at wb-8 OUTSIDE this module — the
+process mechanics in `workbench/platform/llama_process.py`, the
+lifecycle policy at the composition root (workbench_app.py --managed):
+the operations still see ONLY this port's shape, so both ownership
+forms ride the same handlers.
 
 chat.send (§8 + §19.1 + §12, over the wb-5 run registry):
 
@@ -85,10 +88,10 @@ amendment is the recorded open note, never a silent local fix
 (§11.1's "prepare new → validate → ready → swap → retire old") is a
 later row: loading an ACTIVE model rejects (unload first).
 
-The load-state read surface (`ModelLoadStates.document`) is the
-test/diagnostic view; its registered consumer (the frontend's
-Models/Inference surface, frontend §46 Phase A) is a later row — no
-gateway READ operation this row (the admission law).
+The load-state read surface (`ModelLoadStates.document`) is wired as
+the `model.states` READ operation (wb-8 — the frontend Models
+surface's registered consumer, frontend §46 Phase A's Models row);
+its diagnostic use rides the same document, never a second owner.
 """
 
 from __future__ import annotations
@@ -631,6 +634,18 @@ def _make_model_unload(loads: ModelLoadStates, port: BackendPort):
     return handler
 
 
+def _make_model_states(loads: ModelLoadStates):
+    def handler(context) -> Mapping[str, object]:
+        if context.arguments:
+            raise _rejected(
+                f"model.states: takes no arguments "
+                f"({sorted(context.arguments)})"
+            )
+        return loads.document()
+
+    return handler
+
+
 def register_backend_operations(
     gateway: Gateway,
     executions: ExecutionRegistry,
@@ -680,6 +695,19 @@ def register_backend_operations(
             description=(
                 "§20's unload half: ACTIVE → EVICTED on the observed "
                 "reply"
+            ),
+        )
+    )
+    gateway.register(
+        OperationSpec(
+            name="model.states",
+            kind="READ",
+            handler=_make_model_states(loads),
+            description=(
+                "the Model-lifecycle read view (§11's MODEL machine): "
+                "the per-model states + the active slot — the frontend "
+                "Models surface's registered consumer (frontend §46 "
+                "Phase A's Models row, wb-8)"
             ),
         )
     )

@@ -151,6 +151,65 @@ def test_shell_live_circuit_contract() -> None:
     assert "if paths.is_empty():" in text
 
 
+# ------------------------------------------- wb-8: the Models surface
+
+
+def test_the_models_surface_contract() -> None:
+    """wb-8's frontend half: the Models surface is LIVE in the shell
+    (the §17 axis moved off the planned list), drives the gateway's
+    own operation names, and carries the honest per-call timeout for
+    the managed load (minutes-class — §11.1's STARTING→PROBING→READY
+    walk) plus the truthful UNKNOWN/refusal notes."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    # The axis went live: models sits in SURFACES, not PLANNED.
+    assert 'const SURFACES := ["chat", "models", "settings"]' in text
+    planned_line = text.split("PLANNED_SURFACES := ")[1].split("\n")[0]
+    assert '"Inference"' in planned_line and '"Simulation"' in planned_line
+    assert '"Models"' not in planned_line
+    # The circuit's operation surface (the gateway's own names).
+    for op in ('"model.list"', '"model.states"', '"model.load"',
+               '"model.unload"'):
+        assert op in text, f"the Models surface must call {op}"
+    # The honest budgets: the managed load is minutes-class.
+    assert "MODEL_LOAD_TIMEOUT_S := 420.0" in text
+    assert "MODEL_UNLOAD_TIMEOUT_S := 60.0" in text
+    assert "MODEL_ACTION_STATES" in text
+    # The truthful notes (the honest surface, never fakes).
+    assert "OUTCOME UNKNOWN" in text
+    assert "model.load refused" in text
+    assert "model.states refused" in text
+    # The lifecycle states surface by name (D-203's gap shown, not hidden).
+    assert '"FAILED"' in text
+    assert "_on_model_load_pressed" in text
+    assert "_on_model_unload_pressed" in text
+
+
+def test_the_gateway_client_timeout_surface() -> None:
+    """wb-8's client half: the per-call timeout rides the queue's own
+    envelope (the property write lands at dispatch time), and the
+    default floor stays the committed constant."""
+    client = REDOT / "scripts" / "gateway_client.gd"
+    text = client.read_text(encoding="utf-8")
+    assert "timeout_s: float = DEFAULT_TIMEOUT_S" in text
+    assert '"timeout_s": timeout_s' in text
+    assert '_http.timeout = float(next.get("timeout_s", DEFAULT_TIMEOUT_S))' in text
+
+
+def test_the_gdscript_warning_hygiene() -> None:
+    """The owner-reported launcher warnings stay fixed: no UNUSED
+    parameter (the chat-send answer's tag is _tag) and no SHADOWED
+    name (the composer submit's body no longer shadows _text())."""
+    text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    assert "func _on_chat_send_answered(_tag: String, document: Dictionary)" in text
+    assert "func _on_composer_submitted(_body: String)" in text
+    assert "func _on_composer_submitted(_text: String)" not in text
+    client = REDOT / "scripts" / "gateway_client.gd"
+    client_text = client.read_text(encoding="utf-8")
+    assert "\t" not in client_text, (
+        "the client file stays space-indented (the committed style)"
+    )
+
+
 def test_project_carries_the_gateway_url_setting() -> None:
     """The committed default the live shell falls back to — the same
     loopback URL scripts/workbench_app.py serves on (the launcher's
@@ -158,3 +217,28 @@ def test_project_carries_the_gateway_url_setting() -> None:
     text = PROJECT.read_text(encoding="utf-8")
     assert "[canonism_workbench]" in text
     assert 'gateway/url="http://127.0.0.1:8765"' in text
+
+
+# ----------------------------------- iter-224: the literal-concatenation ban
+
+
+def test_no_adjacent_string_literals_across_lines() -> None:
+    """iter-224's regression: GDScript has NO implicit string-literal
+    concatenation — wb-8 shipped five notes Python-style (two adjacent
+    literals across lines inside parentheses) and the Redot 26.2 parser
+    refused the whole file (the owner's 2026-09-25 report, shell.gd
+    806/861/868/999/1042). Every committed .gd file keeps each note
+    ONE literal per line — pinned textually so the regression fails
+    the suite everywhere, not only where the engine binary is."""
+    pattern = re.compile(r'"[ \t]*\r?\n[ \t]*"')
+    scripts = sorted((REDOT / "scripts").glob("*.gd"))
+    assert scripts, "the scripts directory must carry the committed clients"
+    for script in scripts:
+        text = script.read_text(encoding="utf-8")
+        match = pattern.search(text)
+        assert match is None, (
+            f"{script.name}:{text[: match.start()].count(chr(10)) + 1}: "
+            "adjacent string literals across lines — GDScript has no "
+            "implicit concatenation (one literal per line, the iter-224 "
+            "fix's shape)"
+        )

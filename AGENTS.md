@@ -206,8 +206,8 @@ Next: ...
 Active KIs: ...
 ```
 
-- If files changed, end the report with the exact git commands to run, listing
-  each changed file explicitly (never `.` / `-A` / wildcards).
+- If files changed, end the report with the owner-side Git Bash block (§12.3),
+  listing each changed file explicitly (never `.` / `-A` / wildcards).
 
 ## 10. Environment (determinism)
 
@@ -253,9 +253,16 @@ two sources disagree (D-198):
 ## 12. Handoff & reproducibility (sandbox → owner)
 
 The sandbox clone is disposable; the owner's local repository is the real
-one. A sandbox commit is internal verification only — never the
-deliverable, never something the owner pushes (D-198, superseding D-113's
-chat-side placement).
+one. **The agent has NO push access to the owner's repository and NEVER
+runs `git commit` / `git push` against it — not at the end, not "just to
+verify", not ever (D-206, the owner's 2026-09-25 directive). All
+owner-side git is the owner's own hands, driven by the §12.3 block.** The
+sandbox's own git is bookkeeping only — BASE_COMMIT and the changed-path
+enumeration; a sandbox commit is internal verification, never the
+deliverable, never something the owner pulls from (D-198, superseding
+D-113's chat-side placement).
+
+### 12.1 The delta archive
 
 - `BASE_COMMIT` = the exact HEAD of the actual checkout, recorded via
   `git rev-parse HEAD` before any modification — never copied from a stale
@@ -264,14 +271,41 @@ chat-side placement).
 - The deliverable is a delta archive against BASE_COMMIT: exactly the
   changed/created files, repo structure preserved, plus `BASE_COMMIT.txt`
   (the hash) and `DELETED_PATHS.txt` (or `None`); never `.git/`, caches,
-  logs, outputs, or unrelated files.
-- Self-check the archive against BASE_COMMIT before delivery; the owner
-  re-checks it against HEAD before applying.
-- Owner-side apply: `git status --short` → `git add <explicit paths>` /
-  `git rm <deleted paths>` → `git status --short` → commit → push — every
-  path listed explicitly (§7: never `.`/`-A`/wildcards; never stage
-  `logs/`, `output/`, or `*.jsonl` outside `tests/fixtures/`).
-- When the network allows, also upload the archive to a file host (e.g.
-  tmpfiles.org) and give the direct link.
-- The report ends with: what changed, the verification actually run,
-  changed/deleted paths, the owner-side git commands, risks, next.
+  logs, outputs, or unrelated files. Name: `canonsim_<iter-tag>_<yyyy-mm-dd>.zip`.
+- Self-check the archive against BASE_COMMIT before delivery (the path
+  list must equal `git status --porcelain -uall` against the base); the
+  owner re-checks it against HEAD before applying.
+
+### 12.2 Delivery channels — both, every time files changed
+
+- Save the archive into the session's download directory so it rides the
+  chat as a file attachment.
+- Upload the same archive to a file host (tmpfiles.org) and post the
+  DIRECT download link (`https://tmpfiles.org/dl/...`), the md5, and the
+  byte size, so the owner can verify the copy.
+
+### 12.3 The owner-side git block — always the report's last section
+
+Every iteration that changed/created files ends with a copy-pasteable
+Git Bash block; every path explicit (§7: never `.` / `-A` / wildcards;
+deletions ride explicit `git rm` lines, KI#55; never stage `logs/`,
+`output/`, or `*.jsonl` outside `tests/fixtures/`):
+
+```
+cd /c/Users/fallo/OneDrive/Desktop/repo/canonsim
+git status --short
+git add <path-1> <path-2> ...
+git status --short
+git commit -m "iter-N-desc: what changed"
+git push
+```
+
+(The recorded owner root is `C:\Users\fallo\OneDrive\Desktop\repo\canonsim`
+— `/c/Users/fallo/OneDrive/Desktop/repo/canonsim` in Git Bash form;
+re-confirm with the owner when the checkout moves. Re-listing a path the
+owner already committed stages only the real diff — the block stays safe
+to re-run.)
+
+- The report itself ends with: what changed, the verification actually
+  run, the archive (attachment + link + md5), changed/deleted paths, the
+  §12.3 git block, risks, next.

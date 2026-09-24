@@ -751,7 +751,8 @@ def test_no_backend_no_registration(tmp_path: Path) -> None:
 
 def test_backend_registration_closure(tmp_path: Path) -> None:
     """The full composition closure: the wb-5 five + the wb-6 three +
-    the wb-4 builtins — one name, one owner."""
+    wb-8's model.states read + the wb-4 builtins — one name, one
+    owner."""
     _write_model(tmp_path)
     gateway = Gateway()
     ops = compose_workbench_operations(
@@ -761,6 +762,7 @@ def test_backend_registration_closure(tmp_path: Path) -> None:
         "run.start", "run.get", "run.cancel",
         "model.list", "model.inspect",
         "chat.send", "model.load", "model.unload",
+        "model.states",
         "session.create", "session.get", "session.attach",
         "session.detach", "session.events", "app.status",
     }

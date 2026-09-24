@@ -214,7 +214,7 @@
 > `tests/test_backend_row.py` (28 tests — the REAL adapter's port
 > conformance over the live stub server among them) + test_engine's
 > four management pins. The landing record: TASKS iter-221 + the
-> worklog + git. The family contract below stays (wb-8..N still
+> worklog + git. The family contract below stays (wb-9..N still
 > owner-gated rows).
 > **wb-7 LANDED (iter-222, the owner's «продолжай работу по wb 7» +
 > «могу ли я подключить llama.cpp к реготу» call — the live chat
@@ -252,8 +252,48 @@
 > arguments, the live loopback roundtrip, THE END-TO-END chat over
 > HTTP against the live stub llama-server, the dead-endpoint FAILED
 > close) + `test_shell_contract.py`'s three wb-7 pins. The landing
-> record: TASKS iter-222 + the worklog + git. The family contract
-> below stays (wb-8..N still owner-gated rows).
+> **wb-8 LANDED (iter-223, the owner's «выбирать модель я должно из
+> интерфейса» + «llama.cpp тоже запускаться при загрузке модели» +
+> «настройки подтягиваться и самые нужные флаги» calls over the v5.2
+> brief — frontend §46 Phase A's Models row + app §11.1's MANAGED
+> half):** the row that makes the model flow a UI flow —
+> `workbench/platform/llama_process.py` the process mechanics
+> (§2's platform/process row: `build_server_command` the typed
+> honest default flag set — `-m`/`--host`/`--port`/`-ngl`/`-c`/
+> `-fa on`/`-a`/`--jinja`/`--no-webui` + the operator's extras
+> verbatim, re-verified 2026-09-25 against the current llama.cpp
+> server surface; `LlamaServerProcess` spawn/exit-observation/the
+> §11.1 bounded graceful stop TERM→deadline→kill with the OBSERVED
+> exit code; the readiness wait over an INJECTED probe — ZERO
+> network imports: the engine adapter stays the one outbound
+> surface) + `scripts/workbench_app.py`'s `--managed` form (§11.1's
+> lifecycle policy at the composition root: `_ManagedBackend` the
+> port-face wrapper — a HEALTHY server delegates unchanged (the
+> ATTACHED behaviour preserved), `model.load` on a DOWN server
+> spawns llama-server WITH the caller's model (prepare → validate →
+> ready through the adapter's own health probe), the spawned
+> model's unload STOPS the process, Ctrl+C stops only OUR process;
+> the spawn/ready failure surfaces the honest 'unavailable' cause —
+> §12.1's sibling, the model rests SELECTED, the deliberate re-load
+> legal; `--llama-server-exe/--llama-ctx/--llama-ngl/--llama-args`
+> the operator's override surface; the managed ABSENT/LIVE evidence
+> line) + `backend.py`'s `model.states` READ operation (the
+> load-state read surface's registered consumer) + the Redot half —
+> `shell.gd`'s Models surface (the discovered list over `model.list`
+> + the per-model lifecycle states over `model.states`, Load/Unload
+> over `model.load`/`model.unload` with the honest minutes-class
+> per-call timeout (`gateway_client.gd`'s `timeout_s` envelope),
+> the truthful UNKNOWN/refusal/transport notes, FAILED terminal
+> shown never hidden — D-203's gap; the owner-reported launcher
+> warnings fixed — `_tag`/`_body`, the hygiene pinned in the
+> contract test). The claim packet: `tests/test_managed_backend.py`
+> (17 tests — the flag set, the process mechanics, the lifecycle
+> policy incl. THE REAL SPAWN over the stand-in server
+> `tests/_managed_fake_server.py`, the honest unavailable causes,
+> the launcher wiring + precedence) + `test_shell_contract.py`'s
+> three wb-8 pins. The landing record: TASKS iter-223 + the worklog
+> + git. The family contract below stays (wb-9..N still
+> owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 
@@ -320,7 +360,9 @@ consumer); wb-2 the Redot shell + theme; wb-3 the application
 operations skeleton; wb-4 the gateway (INV-4's owner-gated exception);
 wb-5 the minimal application operations (app §32 step 5 — the
 operations substrate + the run/model-discovery families over the
-registered surface); wb-7 the live chat circuit (this
-row); wb-8+ per the brief's §32/§46 ladders (live events +
-reconnect/resync; persistence; the frontend rows — models,
+registered surface); wb-6 the backend row (the llama.cpp port —
+chat.send's consumer, D-203); wb-7 the live chat circuit (D-204);
+wb-8 the managed models surface (app §11.1's MANAGED half + the
+Models surface — D-205); wb-9+ per the brief's §32/§46 ladders
+(live events + reconnect/resync; persistence; the frontend rows —
 inference; history/diagnostics; the CanonSim seam).
