@@ -5,11 +5,13 @@ The invariants made executable with stdlib `ast` only — zero new dev deps:
     `brief/` (kernel independence);
 (b) RNG monopoly — a bare `import random` exists only in `core/rng.py` (L5);
 (c) network ban — no `socket`/`urllib`/`http`/`requests` imports in ANY
-    track-A package dir outside the ONE sanctioned adapter module
-    `cli/engine.py` (INV-4's executable form since engine-1's landing,
-    iter-177/D-193: the LLM/network surface is exactly that file,
-    AGENTS §4; before the landing the ban covered every dir — iter-6a's
-    D-046 widening);
+    track-A package dir outside the TWO sanctioned modules — the
+    OUTBOUND engine adapter `cli/engine.py` (INV-4's form since
+    engine-1's landing, iter-177/D-193) and the INBOUND Workbench
+    gateway binding `workbench/api/transport.py` (wb-4's owner-gated
+    exception, iter-219/D-201: one module per direction, the app
+    spec §4.1; before the landings the ban covered every dir —
+    iter-6a's D-046 widening);
 (d) print discipline — `print()` lives only in the operator entry points
     (`cli/` and `scripts/` — CLI-class tools, MVP_SCOPE §18 "CLI excepted",
     D-046); engine code logs instead;
@@ -28,11 +30,16 @@ REPO = Path(__file__).resolve().parents[1]
 
 PACKAGE_DIRS = ("core", "sim", "render", "brief", "cli", "scripts", "workbench")
 NETWORK_MODULES = frozenset({"socket", "urllib", "http", "requests"})
-#: INV-4's sanctioned network surface: exactly one module, the explicit
-#: engine adapter (D-192/D-193). A network import anywhere else — a
-#: second engine file, an engine client in core/brief, a stray probe in
-#: scripts — fails the ban below.
-NETWORK_EXCEPTIONS = frozenset({REPO / "cli" / "engine.py"})
+#: INV-4's sanctioned network surface: exactly two modules, one per
+#: direction (the app spec §4.1) — the OUTBOUND engine adapter
+#: (D-192/D-193) and the INBOUND Workbench gateway binding (D-201,
+#: wb-4's owner-gated exception — loopback-only). A network import
+#: anywhere else — a second engine file, an engine client in
+#: core/brief, a stray probe in scripts, a socket in the gateway's
+#: semantic core — fails the ban below.
+NETWORK_EXCEPTIONS = frozenset(
+    {REPO / "cli" / "engine.py", REPO / "workbench" / "api" / "transport.py"}
+)
 _OPERATOR_ENTRY_DIRS = frozenset({"cli", "scripts"})
 
 
@@ -73,11 +80,14 @@ def test_rng_monopoly_random_only_in_rng_bank() -> None:
         assert "random" not in roots, f"{path}: bare random import outside core/rng.py (L5)"
 
 
-def test_network_ban_outside_the_engine_adapter() -> None:
-    """INV-4 executable across every track-A package dir (D-046, and
-    engine-1's lift D-193): the network surface is EXACTLY ONE module —
-    the explicit adapter `cli/engine.py`. No network import anywhere
-    else in core/sim/render/brief/cli/scripts.
+def test_network_ban_outside_the_sanctioned_modules() -> None:
+    """INV-4 executable across every track-A package dir (D-046,
+    engine-1's lift D-193, wb-4's gateway exception D-201): the
+    network surface is EXACTLY TWO modules, one per direction (the
+    app spec §4.1) — the explicit adapter `cli/engine.py` (outbound)
+    and the loopback gateway binding `workbench/api/transport.py`
+    (inbound). No network import anywhere else in
+    core/sim/render/brief/cli/scripts/workbench.
     """
     for path in package_files():
         if path in NETWORK_EXCEPTIONS:
@@ -85,8 +95,9 @@ def test_network_ban_outside_the_engine_adapter() -> None:
         roots = import_roots(parse(path))
         hits = roots & NETWORK_MODULES
         assert not hits, (
-            f"{path}: network import(s) {sorted(hits)} outside the engine "
-            f"adapter (INV-4 — the surface is exactly cli/engine.py)"
+            f"{path}: network import(s) {sorted(hits)} outside the two "
+            f"sanctioned modules (INV-4 — the surface is cli/engine.py "
+            f"+ workbench/api/transport.py, one per direction)"
         )
 
 

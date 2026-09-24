@@ -124,6 +124,31 @@
 > `tests/test_application_skeleton.py` (25 tests). The landing
 > record: TASKS iter-218 + the worklog + git. The family contract
 > below stays (wb-4..N still owner-gated rows).
+> **wb-4 LANDED (iter-219, the owner's «продолжай работу» continuation
+> call over the v5.2 brief):** the inbound gateway — `workbench/api/`
+> the Python-side package: `contract.py` (the §8 envelopes + the
+> closed vocabularies — the rejection set, the exposure axis, the
+> §12.1 status→outcome mapping, the event types; the strict
+> closed-document roundtrip), `gateway.py` (the SOCKET-FREE dispatch
+> core: auth → idempotency → revision/lease → operation → outcome;
+> the recorded-outcome replay = one effect; the §12.1 law — a
+> mutating raise after admission is SENT_OUTCOME_UNKNOWN, a read
+> raise RUNTIME_FAILED; the ordered per-session events + the
+> RESYNC_REQUIRED law; the in-memory session-translation seed
+> session.create/get/attach/detach/events + app.status; the typed
+> `OperationSpec` registration surface — wb-5+'s composition point),
+> `transport.py` (the loopback HTTP binding — INV-4's second
+> sanctioned module, D-201: loopback hosts only, the non-loopback
+> refusal executable at construction, the bounded body/drain
+> ceilings) + the architecture-test exception edit (the two-module
+> pin). The claim packet: `tests/test_gateway.py` (36 tests: the
+> vocabulary closures, the envelope laws, the auth/idempotency/
+> revision/lease laws, the dispatch-outcome mapping, the events +
+> RESYNC law, the direct-vs-HTTP byte parity, the cross-seed pair,
+> the boundary edges). The landing record: TASKS iter-219 + the
+> worklog + git. The G1..G7 pinned decisions, verbatim, in git
+> history at the iter-219 contract commit (23a3251). The family
+> contract below stays (wb-5..N still owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
 

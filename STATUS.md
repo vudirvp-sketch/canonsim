@@ -1,41 +1,47 @@
-Iteration: iter-218 (`iter-218-wb3-skeleton` — the application-
-operations skeleton, the owner's «продолжай работу» continuation
-call over the v5.2 brief, the family's third row): app §32 step 1
-CLOSED — the Workbench application's Python-side skeleton under
-`workbench/application/`: `identity.py` (the §9 identity closure —
-the five axes apart, sha256 content digests, the order-independent
-composite identity, `recheck()` = VERIFIED | MISMATCH |
-INTEGRITY_UNKNOWN, the mismatch law never silent), `artifact.py`
-(the §10 immutable execution artifact — the frozen field list, the
-closed reproducibility scopes EXACT_BITWISE | SEMANTIC |
-APPROXIMATE | EXPLANATORY_ONLY + the three kinds separated, the
-request digest, replay = a NEW execution identity, the strict
-roundtrip, zero clock imports), `directories.py` (the §16 contract
-— seven path roles, the absolute-root law, the closed
-startup/recovery vocabulary, the errno-classifying probe),
-`clock.py` (the §17 four clock domains — MONOTONIC + UTC_WALL
-provided injectably, SEMANTIC/UI_ANIMATION named-only), + the §27
-dependency envelope (empty, agreeing with pyproject).
+Iteration: iter-219 (`iter-219-wb4-gateway` — the inbound
+gateway, the owner's «продолжай работу» continuation
+call over the v5.2 brief, the family's fourth row, INV-4's
+owner-gated exception): app §32 step 4's second half CLOSED — the
+one inbound Workbench gateway over application operations, the
+contract written FIRST (G1..G7 at commit 23a3251): `workbench/api/`
+— `contract.py` (the §8 envelopes + the closed vocabularies: the
+8-member rejection set, the exposure axis, the §12.1 status→outcome
+mapping, the event types; the strict closed-document roundtrip),
+`gateway.py` (the SOCKET-FREE dispatch core — auth → idempotency
+→ revision/lease → operation → outcome: the recorded-outcome replay =
+one effect, DUPLICATE_REQUEST the conflicting reuse, STALE_REVISION
+the stale writer, LEASE_EXPIRED the monotonic window, a mutating
+raise after admission = SENT_OUTCOME_UNKNOWN recorded so the blind
+retry is blocked, a read raise = RUNTIME_FAILED; the ordered
+per-session events + the RESYNC_REQUIRED law; the in-memory
+session-translation seed session.create/get/attach/detach/events +
+app.status; the typed OperationSpec registration surface — wb-5+'s
+composition point), `transport.py` (the loopback HTTP binding —
+INV-4's second sanctioned module per D-201, the architecture-test
+exception + the AGENTS §4/§8 two-surface rewording riding).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-3 DONE) + the world track + the SoW
+(the wb family its live head, wb-4 DONE) + the world track + the SoW
 horizon, ROADMAP §2/§6) ·
-2077 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
+2113 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
 clean per D6/D-093 — the sandbox binary absent; with REDOT_EXE set
-the suite reads 2082+1) ·
+the suite reads 2118+1) ·
 Date: 2026-09-24 ·
-Scope: workbench/application/ (5 new: __init__ + identity + artifact
-+ directories + clock) + tests/test_application_skeleton.py (25
-tests) + pyproject.toml (the packages list) + the state docs
-(CONTRACTS/TASKS/NAV/README/worklog + this file) — 12 paths (the
-3–5 soft limit honestly over: the row is a full contract slice —
-four §32-step-1 vocabularies + the envelope + the claim packet, the
-scope noted in the worklog; zero core change, zero pack change, the
-LOG untouched, zero network surface — INV-4 unchanged).
-Track A: wb-3 DONE. The prior iterations' record: iter-217 (wb-2
-redot shell), 216 (wb-1 redot), 215 (wb-1 python). The detail lives in
-the worklog + git.
+Scope: workbench/api/ (4 new: __init__ + contract + gateway +
+transport) + tests/test_gateway.py (36 tests) +
+tests/test_architecture.py (the NETWORK_EXCEPTIONS two-module pin) +
+pyproject.toml (workbench.api) + AGENTS.md (§4/§8 INV-4's
+two-surface rewording) + the state docs (CONTRACTS/TASKS/DECISIONS/
+NAV/README/worklog + this file) — 13 paths (the 3–5 soft limit
+honestly over: the row is a full contract slice — the exception's
+own contract + the three-module package + the claim packet + the
+INV-4 law edits, the scope noted in the worklog; zero core change,
+zero pack change, the LOG untouched, no outbound surface —
+cli/engine.py unchanged, D-193's form preserved).
+Track A: wb-4 DONE. The prior iterations' record: iter-218 (wb-3
+skeleton), 217 (wb-2 redot shell), 216 (wb-1 redot), 215 (wb-1
+python). The detail lives in the worklog + git.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -93,23 +99,26 @@ iterations elapsed at this STATUS touch)
 
 ## Next step
 
-**iter-218 DONE: wb-3's application-operations skeleton — app §32
-step 1 CLOSED (identity + execution artifact + runtime/data
-directories + clock + dependency envelope, the Python-side package
-under `workbench/application/`): the four closed-vocabulary
-contract modules + the empty envelope + the 25-test claim packet
-landed; byte-identical artifact rebuild (no hidden clock), the
-identity mismatch laws executable, CWD-independent paths, injected
-clock providers; the epistemic class FACT, the disposition
-CONFIRMED. wb-3 row DONE.**
+**iter-219 DONE: wb-4's inbound gateway — app §32 step 4's second
+half CLOSED (the one inbound Workbench gateway over application
+operations, INV-4's owner-gated exception landed as the two-surface
+form, D-201): the contract written first (G1..G7, commit 23a3251),
+the Python-side package under `workbench/api/` (contract + the
+socket-free gateway core + the loopback transport), the 36-test
+claim packet landed; the §8 rejection vocabulary closed and
+enforced where the seed exercises it, the recorded-outcome replay =
+one effect, the §12.1 dispatch-outcome mapping honest (a mutating
+raise after admission is SENT_OUTCOME_UNKNOWN, the blind retry
+blocked), the ordered events + RESYNC_REQUIRED law, the
+direct-vs-HTTP byte parity; the epistemic class FACT, the
+disposition CONFIRMED. wb-4 row DONE.**
 
-1. wb-4 — the inbound gateway (app §32 step 4's second half: the
-   one inbound Workbench gateway over application operations, INV-4's
-   owner-gated exception — CONTRACTS §5 D3's own sentence: its own
-   contract first, the architecture-test exception with it) — the
-   owner's call opens it; then wb-5+ per the family rows (app §32's
-   ladder: minimal application operations + the typed API contract;
-   frontend §46's Phase-A remainder).
+1. wb-5+ per the family rows (app §32's ladder: minimal application
+   operations + the typed API contract over the registered surface —
+   the run/chat/model families over the wb-3 skeleton; live events +
+   reconnect/resync + the idempotency/revision/lease tests at live
+   scale; frontend §46's Phase-A remainder) — the owner's call opens
+   each row.
 2. The remaining station rows (the owner's next engine run, TEST_PLAN
    §8.5's standing gaps): the 27B GBNF parse arm + the
    one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/parse
