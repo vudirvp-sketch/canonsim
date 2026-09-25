@@ -1,15 +1,22 @@
 """The managed-backend contract tests' stand-in server (wb-8).
 
 A standalone HTTP server that PARSES the same flag surface the
-platform's `build_server_command` emits (-m/--host/--port/-a/-ngl/
--c/-fa/--jinja/--no-webui + extras) and serves the llama-server
-surface the engine adapter dials: /health, /props, /v1/chat/
-completions, /models/load, /models/unload. It exists so the spawn
-tests prove the REAL process mechanics (spawn → probe → ready →
-graceful stop) without a llama.cpp binary — the wire shapes stay the
-stub contract's own (tests/test_engine.py's _StubLlamaServer), and
-this file is TEST tooling: never imported by the application, never
-scanned by the architecture ban (tests/ is not a package dir).
+platform emits (the inf-2 semantic command: -m/--host/--port/-a/
+-ngl/-c/-fa/--jinja/--no-webui + the full semantic flag set as
+extras) and serves the llama-server surface the engine adapter
+dials: /health, /props, /v1/chat/completions, /models/load,
+/models/unload. It exists so the spawn tests prove the REAL process
+mechanics (spawn → probe → ready → graceful stop) without a
+llama.cpp binary — the wire shapes stay the stub contract's own
+(tests/test_engine.py's _StubLlamaServer), and this file is TEST
+tooling: never imported by the application, never scanned by the
+architecture ban (tests/ is not a package dir).
+
+inf-2 note: the parse is a TOKEN SCAN, never argparse — the full
+semantic command carries short flags argparse would cluster-mangle
+(`-mg 0` parsed as `-m g`, eating the model path); the real
+llama.cpp arg parser does exact matching, the stub mirrors THAT
+law, and the receipt records the tokens the spawn actually carried.
 
 Run shape (the tests spawn it through the command lead
 `[sys.executable, __file__]`):
@@ -20,7 +27,6 @@ Run shape (the tests spawn it through the command lead
 
 from __future__ import annotations
 
-import argparse
 import json
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -28,28 +34,33 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 RECEIPT_FILE = "managed_fake_server_receipt.json"
 
 
+def _value_of(tokens: list[str], flag: str, default: str) -> str:
+    """The token following an EXACT flag match (the stub's own exact
+    matching — no abbreviations, no clusters)."""
+    if flag in tokens:
+        index = tokens.index(flag)
+        if index + 1 < len(tokens):
+            return tokens[index + 1]
+    return default
+
+
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--model", required=True)
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, required=True)
-    parser.add_argument("-a", "--alias", default="")
-    parser.add_argument("-ngl", "--gpu-layers", default="999")
-    parser.add_argument("-c", "--ctx", default="8192")
-    parser.add_argument("-fa", "--flash-attention", default="on")
-    parser.add_argument("--jinja", action="store_true")
-    parser.add_argument("--no-webui", action="store_true")
-    args, _extra = parser.parse_known_args(argv)
+    tokens = list(sys.argv[1:] if argv is None else argv)
     received = {
-        "model": args.model,
-        "host": args.host,
-        "port": args.port,
-        "alias": args.alias,
-        "ngl": args.gpu_layers,
-        "ctx": args.ctx,
-        "fa": args.flash_attention,
-        "jinja": args.jinja,
-        "no_webui": args.no_webui,
+        "model": _value_of(tokens, "-m", ""),
+        "host": _value_of(tokens, "--host", "127.0.0.1"),
+        "port": int(_value_of(tokens, "--port", "0")),
+        "alias": _value_of(tokens, "-a", ""),
+        "ngl": _value_of(tokens, "-ngl", "999"),
+        "ctx": _value_of(tokens, "-c", "8192"),
+        "fa": _value_of(tokens, "-fa", "on"),
+        "jinja": "--jinja" in tokens,
+        "no_webui": "--no-webui" in tokens,
+        # inf-2 — the semantic receipt's own pins (the spawn tests
+        # assert the compiled values reached the process boundary)
+        "samplers": _value_of(tokens, "--samplers", ""),
+        "temp": _value_of(tokens, "--temp", ""),
+        "seed": _value_of(tokens, "-s", ""),
     }
     # The flag receipt rides stdout line 1 (the test reads it from the
     # spawn's captured pipe... the process stays alive, so the receipt
@@ -97,7 +108,9 @@ def main(argv: list[str] | None = None) -> int:
         def log_message(self, format: str, *args: object) -> None:
             pass  # silence the stand-in's stderr
 
-    server = ThreadingHTTPServer((args.host, args.port), Handler)
+    server = ThreadingHTTPServer(
+        (received["host"], received["port"]), Handler
+    )
     server.serve_forever(poll_interval=0.1)
     return 0
 

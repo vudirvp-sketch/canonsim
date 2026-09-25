@@ -244,25 +244,21 @@ def _managed(
             EngineConfig(endpoint=f"http://127.0.0.1:{port}")
         )
     )
+    # inf-2 — the provider's own contract: the compile_semantic
+    # document (field-keyed values + the 9-member chain) over the
+    # DEPLOYMENT companions (exe / extra_args / no_webui)
+    from workbench.application.inference import (
+        InferenceProfile,
+        compile_semantic,
+    )
+
+    profile = InferenceProfile()
     params: dict[str, object] = {
         "exe": _LEAD,
-        "context": 4096,
+        **compile_semantic(profile),
         "gpu_layers": 0,
-        "flash_attention": "on",
-        "jinja": True,
+        "context": 4096,
         "no_webui": True,
-        "temperature": 0.8,
-        "top_k": 40,
-        "top_p": 0.95,
-        "min_p": 0.05,
-        "repeat_penalty": 1.1,
-        # inf-1 — the compiled semantic surface (the provider's own
-        # contract grew: the chain, the seed, the fit, the KV pair)
-        "samplers": ["penalties", "top_k", "top_p", "min_p", "temperature"],
-        "seed": -1,
-        "fit": "on",
-        "cache_type_k": "f16",
-        "cache_type_v": "f16",
         "extra_args": [],
     }
 

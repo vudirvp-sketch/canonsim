@@ -75,7 +75,14 @@ the semantic generation-control values live in the inference
 profile — never duplicated into the settings store, never a second
 configuration system. `[LANDED inf-1: the split + the one-way
 migrate_launch_semantics boot migration (values preserved
-verbatim, a present profile wins)]`
+verbatim, a present profile wins)]`; `[LANDED inf-2: the FULL
+reviewed surface — 85 controls over 15 categories (model, device,
+memory, loading, moe, cpu, sampling, chat, structured, server,
+observability, speculative, rope, special, lora — the §31 category
+ladder), every family its own category, never one "advanced
+parameters" bucket; the profile document is field-stable (the
+inf-1 flat fields unchanged, the new fields default; the 5-member
+chain upgrades to 9 at load — the operator's order preserved)]`
 
 Single-owner routing (the whole table):
 
@@ -120,13 +127,17 @@ raw flag mapping · value documentation · project baseline ·
 upstream default · notes (evidence-tagged) · status
 ```
 
-Kinds (the minimum set; the UI renders each as it sees fit):
+Kinds (the minimum set; the UI renders each as it sees fit —
+DATA-DRIVEN over the control's own value_type/forms/limits
+metadata, inf-2: the UI never re-encodes the vocabulary):
 
 ```text
 value   an inline scalar (Context, Temperature, Seed)
 mode    an enum selection incl. AUTO forms (GPU Layers, Flash
-        Attention, Fit, KV K/V, Chat Template)
-toggle  a boolean state (Fit in its on/off flag form)
+        Attention, Fit, KV K/V, Chat Template, Load Mode, NUMA,
+        Reasoning, Speculative Type)
+toggle  a boolean state (Fit in its on/off flag form, Warmup,
+        Continuous Batching, Prompt Caching)
 chain   an ordered semantic object (the Sampler Chain, §11)
 display a read-only semantic projection (reserved)
 ```
@@ -141,6 +152,14 @@ runtime)
 
 `[LANDED inf-1: CONTROL_LIBRARY — the first admitted set; the
 vocabulary is representable and test-pinned; REMOVED never emits]`
+`[LANDED inf-2: the library covers the WHOLE reviewed surface —
+the complete sampling family (Top-K/P, Min-P, Typical-P,
+Top-N-Sigma, the penalties family, the DRY family, the XTC family,
+the Mirostat family, Dynatemp, Adaptive-P, Ignore EOS, Logit Bias,
+Seed), the model/device/memory/loading/moe/cpu families, chat +
+reasoning, structured output, server/concurrency, observability,
+speculative, RoPE/YaRN, special modes and LoRA — every disabled
+form and AUTO form the runtime's own literal, pinned per control]`
 
 ## 4. Defaults ladder (never collapsed into one "default")
 
@@ -254,33 +273,42 @@ reason-if-not-effective
 
 The reviewed default order (runtime evidence): `penalties → dry →
 top_n_sigma → top_k → typ_p → top_p → min_p → xtc → temperature`
-(simplified `edskypmxt`); the slice's controllable subset is
-`penalties, top_k, top_p, min_p, temperature` — the later groups
-(DRY, XTC, adaptive, Mirostat) EXTEND the chain per §16, never a
-separate "advanced flags" bucket. An actual order change changes
+(simplified `edskypmxt`); the chain's controllable set is the FULL
+nine-member reviewed order (`[LANDED inf-2]` — the inf-1 slice
+carried the controllable five). An actual order change changes
 the EMITTED configuration (`--samplers`, the runtime's own ';'
 separator — pinned from the reviewed evidence).
 
 Membership and value are SEPARATE concerns: `enabled=false` removes
-the member from the emitted chain while its VALUE flag stays
-configured (INEFFECTIVE with its reason). Temperature 0 is the
-DETERMINISTIC decoding state: the distribution samplers go
-INEFFECTIVE with reasons — their values are PRESERVED, never
-deleted (the user returns by restoring the temperature; the profile
-is non-destructive). `[LANDED inf-1]`
+the member from the emitted chain while its VALUE family stays
+configured (INEFFECTIVE with its reason — the FAMILY concern: the
+"dry" step governs the whole DRY family, never just the
+multiplier). Temperature 0 is the DETERMINISTIC decoding state: the
+distribution samplers go INEFFECTIVE with reasons — their values
+are PRESERVED, never deleted (the user returns by restoring the
+temperature; the profile is non-destructive). `[LANDED inf-1]`
+`[LANDED inf-2: the chain validation accepts only the WHOLE
+nine-member document — a partial edit refuses LOUD; an inf-1
+5-member profile upgrades at load, the operator's order preserved
+and the missing members inserted at their canonical positions]`
 
 ## 12. Relations (the smallest typed mechanism)
 
 ```text
 requires              a CONDITION for meaningful use (predicates,
-                      never bare flag-name pairs) [CONTRACT — lands
-                      with its first consumer]
+                      never bare flag-name pairs) [LANDED inf-2 —
+                      the DRY/Mirostat/dynatemp/adaptive/XTC/
+                      speculative/custom-template families]
 mutually_exclusive    true enum alternatives (the mode values'
                       own exclusivity)
 effective_noop        accepted but nullified (temperature 0 → the
-                      samplers; chain membership) [LANDED]
+                      samplers; chain membership; MIROSTAT ACTIVE →
+                      top-k/top-p/typical — the --help's own ignored
+                      list, pinned verbatim) [LANDED]
 overrides             source-of-truth precedence (the explicit
-                      chat-template → model template [CONTRACT])
+                      chat-template → model template [LANDED inf-2:
+                      the CUSTOM mode emits --chat-template and the
+                      compile refuses a half-config LOUDLY])
 risk_warning          empirical, environment-specific risk — never
                       a block [CONTRACT — no slice relations; the
                       fit control carries the evidence-tagged note]
@@ -288,9 +316,10 @@ affects               affected resources/behavior (VRAM, latency,
                       reproducibility — the explain/benchmark feed)
 ```
 
-No generic rule engine: relations are typed, evidence-pinned
-conditions evaluated by the resolver. Never invent a relation the
-runtime evidence or this law does not carry.
+No generic rule engine: relations are TYPED data (Condition /
+Requires / EffectiveNoop over the profile values), evidence-pinned
+and evaluated by the resolver. Never invent a relation the runtime
+evidence or this law does not carry.
 
 ## 13. Backend translation and the raw hatch
 
@@ -307,9 +336,16 @@ The emitted command is a COMPILED ARTIFACT, never the authoring
 language. `extra_args` stays the RAW COMPATIBILITY/DEBUG ESCAPE
 HATCH (the launch settings store) — never the semantic storage: a
 semantic control plus a raw duplicate (`--top-k` in the hatch) is a
-CONFLICT refused loudly at the compile step (both flag forms
-matched), never an ambiguous precedence. `[LANDED inf-1:
-_duplicate_flag_ownership + the preview's CONFLICT surface]`
+CONFLICT refused loudly at the compile step (the platform's
+`semantic_flag_tokens` — EVERY owned flag form, off-form and alias,
+138 tokens over the full surface), never an ambiguous precedence.
+`[LANDED inf-1: _duplicate_flag_ownership + the preview's CONFLICT
+surface]` `[LANDED inf-2: build_semantic_command — the platform's
+SEMANTIC_FLAG_TABLE (field → flag syntax, emission kind, canonical
+order); the application compiles field-keyed values
+(`compile_semantic`), the platform validates its own boundary and
+refuses unknown fields LOUD; build_server_command stays
+byte-stable as the DEPLOYMENT path's own surface]`
 
 ## 14. Profile / scenario / recipe / preset / hardware / workspace
 
@@ -320,14 +356,22 @@ SCENARIO    workload/user intent (Long-form, Structured JSON, Low
             VRAM…) [CONTRACT — its own row]
 PRESET      a concrete configuration STARTING POINT — applies as a
             TRANSPARENT diff preview, chips stay editable, never an
-            opaque "mode" [CONTRACT]
+            opaque "mode" [LANDED inf-2: the four §30 presets
+            (general chat / long-form / adaptive / deterministic)
+            as TRANSPARENT partial documents — the UI previews every
+            field the apply would change, the store validates; a
+            preset apply is a plain update, never a mode switch]
 RECIPE      a PROCEDURE for finding/evaluating a configuration
             (fit-the-MoE, benchmark staged offload) [CONTRACT]
 HARDWARE    the machine description (GPU/RAM/backend) — influences
             SUGGESTIONS and context visibility, never silently
             rewrites the user's configuration [CONTRACT]
 WORKSPACE   the user's live state: pinned/active/recent + the
-            context-aware library [CONTRACT — the library row]
+            context-aware library [LANDED inf-2: the PINNED ids
+            persist in the profile document's OWN workspace section
+            (one file, two named sections — profile + workspace;
+            never a second store); the pinned chips are quick-access
+            reveals, never second editors]
 ```
 
 ## 15. Context-aware visibility (progressive disclosure)
@@ -338,9 +382,14 @@ raises MoE controls; server mode raises concurrency; vision raises
 multimodal). Ordering policy: explicit personal pin → personal
 recent/frequent → semantic default order → context relevance —
 community popularity is never the primary sort (performance is
-hardware/model/workload-dependent). The slice's default surface is
-its five admitted categories; everything else stays discoverable.
-`[CONTRACT — the library/pinning/search row]`
+hardware/model/workload-dependent). `[LANDED inf-2: the workspace
+surface — the pinned quick-access strip, the SEARCH over name/flag/
+category (§32's match families), the COLLAPSIBLE categories with
+honest counts (the six general-chat categories open by default,
+§17's own list), the ADVANCED rung (the expert controls hidden
+until asked, a search match shows them — an explicit ask); the
+MODEL-DRIVEN context awareness itself stays a CONTRACT row (it
+needs the loaded-model facts)]`
 
 ## 16. The capability-group ladder (the extension law)
 
@@ -412,9 +461,34 @@ re-point + the REQUESTED/EFFECTIVE pair, the Redot Inference
 surface + the Chat projection + the Settings slim, the claim
 packet (tests/test_inference.py, 26 tests).
 
+`[LANDED iter-240 (inf-2 — the owner's 2026-09-26 «доделывай
+по-человечески + далеко не все сэмплеры и настройки есть» call)]` —
+the FULL library + the honest workspace: the 85-control library
+over the 15 reviewed categories (the complete sampling surface —
+Top-K/P, Min-P, Typical-P, Top-N-Sigma, the penalties family, the
+DRY family, the XTC family, the Mirostat family, Dynatemp,
+Adaptive-P, Ignore EOS, Logit Bias, Seed — plus the
+model/device/memory/loading/moe/cpu/chat-reasoning/structured/
+server/observability/speculative/rope/special/lora families), the
+typed relations (the mirostat noop from the --help's own words,
+the temperature-0 deterministic noop, the family requires, the
+chain-family membership concern), the 9-member chain (+ the inf-1
+load upgrade), the four §30 presets as transparent diff-previewed
+documents, the workspace PINNING (the profile document's own
+workspace section), the DATA-DRIVEN Redot workspace (the
+preset/search/pinned/collapsible-category/advanced-rung regions —
+the editors built from the read document's own metadata; inf-1's
+compose-before-read bug — the live flow rendered EMPTY groups —
+repaired: the rows build ON the read), the platform compile seam
+(build_semantic_command over SEMANTIC_FLAG_TABLE; compile_semantic
+field-keyed), the full 138-token duplicate-ownership guard, the
+claim packet (tests/test_inference.py, 34 tests + the proof
+capture).
+
 Deferred (each a named TASKS row, owner-gated): the session
-override layer · capability discovery (§10) · the
-library/pinning/search workspace (§15) · presets/scenarios/recipes/
-hardware profiles (§14) · the additional capability groups (§16) ·
-seed's request scope (the adapter row) · the chat-template override
-relation · observability feeds (§18's benchmark shape).
+override layer · capability discovery (§10) · the MODEL-DRIVEN
+context awareness (§15's context row) · recent/frequent ordering ·
+scenarios/recipes/hardware profiles (§14) · custom preset PERSISTENCE
+(the four built-ins landed; saving the operator's own is a row) ·
+seed's request scope (the adapter row) · observability feeds (§18's
+benchmark shape) · the risk_warning relations (the first consumer).

@@ -327,6 +327,10 @@ def _inference_read_document(tmp: Path) -> Path:
                 {"id": "min_p", "enabled": True},
                 {"id": "top_k", "enabled": False},
                 {"id": "temperature", "enabled": True},
+                {"id": "dry", "enabled": True},
+                {"id": "top_n_sigma", "enabled": True},
+                {"id": "typ_p", "enabled": True},
+                {"id": "xtc", "enabled": True},
             ],
         }
     )

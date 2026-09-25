@@ -297,10 +297,11 @@ def test_the_launch_params_merge_cli_over_settings(tmp_path: Path) -> None:
     assert params["temperature"] == 0.25
     assert params["flash_attention"] == "on"
     assert params["exe"] == "llama-server"  # the bare PATH default
-    # inf-1: the compiled semantic surface rides the provider (the
-    # chain, the seed, the fit, the KV pair)
+    # inf-2 — the compiled semantic surface rides the provider (the
+    # FULL 9-member chain, the seed, the fit, the KV pair)
     assert params["samplers"] == [
-        "penalties", "top_k", "top_p", "min_p", "temperature"
+        "penalties", "dry", "top_n_sigma", "top_k", "typ_p",
+        "top_p", "min_p", "xtc", "temperature",
     ]
     assert params["seed"] == -1
     assert params["fit"] == "on"

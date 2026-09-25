@@ -117,7 +117,7 @@ from workbench.application.clock import AppClock  # noqa: E402
 from workbench.application.inference import (  # noqa: E402
     InferenceError,
     InferenceStore,
-    launch_kwargs,
+    compile_semantic,
     migrate_launch_semantics,
 )
 from workbench.application.operations.composition import (  # noqa: E402
@@ -131,7 +131,8 @@ from workbench.application.settings import (  # noqa: E402
 from workbench.platform.llama_process import (  # noqa: E402
     LlamaProcessError,
     LlamaServerProcess,
-    build_server_command,
+    build_semantic_command,
+    semantic_flag_tokens,
 )
 from workbench.platform.model_fetch import HttpModelFetcher  # noqa: E402
 
@@ -322,41 +323,17 @@ def resolve_llama_exe(
 
 # ------------------------------------------------- the launch-params seam
 
-#: The semantic layer's emitted flag forms (long + the short aliases
-#: the reviewed --help itself carries) — the extra_args hatch's
-#: duplicate-ownership guard vocabulary (the law's §13: a semantic
-#: Top-K plus a raw `--top-k` is a CONFLICT surfaced, never an
-#: ambiguous precedence; the settings.py side may keep its raw hatch,
-#: the compile side refuses the overlap).
-_SEMANTIC_FLAG_ALIASES: dict[str, tuple[str, ...]] = {
-    "context": ("-c", "--ctx-size"),
-    "gpu_layers": ("-ngl", "--gpu-layers", "--n-gpu-layers"),
-    "flash_attention": ("-fa", "--flash-attn"),
-    "fit": ("--fit",),
-    "cache_type_k": ("-ctk", "--cache-type-k"),
-    "cache_type_v": ("-ctv", "--cache-type-v"),
-    "temperature": ("--temp", "--temperature"),
-    "top_k": ("--top-k",),
-    "top_p": ("--top-p",),
-    "min_p": ("--min-p",),
-    "repeat_penalty": ("--repeat-penalty"),
-    "samplers": ("--samplers",),
-    "seed": ("-s", "--seed"),
-    "chat_template": ("--jinja",),
-}
-
 
 def _duplicate_flag_ownership(extra_args: list[str]) -> list[str]:
     """The overlap between the raw extra_args hatch and the semantic
-    layer's own flags (both forms matched) — empty when the hatch
-    stays raw-only (the legal escape-hatch contract)."""
+    layer's own flags (every owned form matched — the platform's
+    semantic_flag_tokens: the primary flag, the off-form and every
+    documented alias, 138 tokens over the full 85-control surface) —
+    empty when the hatch stays raw-only (the legal escape-hatch
+    contract; the law's §13: a semantic Top-K plus a raw `--top-k`
+    is a CONFLICT surfaced, never an ambiguous precedence)."""
     tokens = {str(part) for part in extra_args if str(part).startswith("-")}
-    conflicts: list[str] = []
-    for _field, aliases in sorted(_SEMANTIC_FLAG_ALIASES.items()):
-        hit = sorted(set(aliases) & tokens)
-        if hit:
-            conflicts.extend(hit)
-    return conflicts
+    return sorted(semantic_flag_tokens() & tokens)
 
 
 def _make_launch_params(
@@ -364,25 +341,26 @@ def _make_launch_params(
     inference: InferenceStore,
     cli: argparse.Namespace,
 ) -> Any:
-    """The managed backend's EFFECTIVE launch-params provider (inf-1:
+    """The managed backend's EFFECTIVE launch-params provider (inf-2:
     the COMPILED semantic configuration — the law's §13): the
-    inference profile's CURRENT values (read at each spawn — an
-    inference update applies at the next one), overlaid with this
-    process's CLI overrides (the operator's explicit hand wins
-    per-field, never persisted), merged with the DEPLOYMENT settings
-    (the executable preference, the web-UI surface, the raw
-    extra_args hatch). The duplicate-ownership guard fires HERE —
-    every spawn and every preview read walks the same check (the
-    raw hatch may never shadow a semantic control)."""
+    inference profile's CURRENT values compiled by
+    `compile_semantic` (read at each spawn — an inference update
+    applies at the next one), overlaid with this process's CLI
+    overrides (the operator's explicit hand wins per-field, never
+    persisted), merged with the DEPLOYMENT settings (the executable
+    preference, the web-UI surface, the raw extra_args hatch). The
+    duplicate-ownership guard fires HERE — every spawn and every
+    preview read walks the same check (the raw hatch may never
+    shadow a semantic control)."""
 
     def provider() -> dict[str, object]:
         deployment = store.current()
         # the semantic BASE (the profile) -> the compiled value set
-        kwargs = launch_kwargs(inference.current())
+        semantic = compile_semantic(inference.current())
         if cli.llama_ctx is not None:
-            kwargs["context"] = cli.llama_ctx
+            semantic["context"] = cli.llama_ctx
         if cli.llama_ngl is not None:
-            kwargs["gpu_layers"] = cli.llama_ngl
+            semantic["gpu_layers"] = cli.llama_ngl
         extra_args = (
             [part for part in cli.llama_args.split() if part]
             if cli.llama_args.strip()
@@ -397,7 +375,7 @@ def _make_launch_params(
                 "LAW §13); remove the duplicate from extra_args or edit "
                 "the control itself"
             )
-        params: dict[str, object] = dict(kwargs)
+        params: dict[str, object] = dict(semantic)
         params["extra_args"] = extra_args
         params["no_webui"] = deployment.no_webui
         preference = (
@@ -427,27 +405,18 @@ def _command_preview_factory(
             # the honest conflict surface (the law's §13): the preview
             # SHOWS the duplicate ownership, never a silent merge
             return f"CONFLICT — {exc}"
-        command = build_server_command(
+        command = build_semantic_command(
             params["exe"],  # type: ignore[arg-type]
             "<model.gguf>",
             host=host,
             port=port,
             alias="<logical_name>",
-            context=params["context"],  # type: ignore[arg-type]
-            gpu_layers=params["gpu_layers"],  # type: ignore[arg-type]
-            flash_attention=str(params["flash_attention"]),
-            jinja=bool(params["jinja"]),
             no_webui=bool(params["no_webui"]),
-            temperature=params["temperature"],  # type: ignore[arg-type]
-            top_k=params["top_k"],  # type: ignore[arg-type]
-            top_p=params["top_p"],  # type: ignore[arg-type]
-            min_p=params["min_p"],  # type: ignore[arg-type]
-            repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
-            samplers=params["samplers"],  # type: ignore[arg-type]
-            seed=params["seed"],  # type: ignore[arg-type]
-            fit=params["fit"],  # type: ignore[arg-type]
-            cache_type_k=params["cache_type_k"],  # type: ignore[arg-type]
-            cache_type_v=params["cache_type_v"],  # type: ignore[arg-type]
+            semantic={
+                key: value
+                for key, value in params.items()
+                if key not in ("exe", "extra_args", "no_webui")
+            },
             extra_args=params["extra_args"],  # type: ignore[arg-type]
         )
         return " ".join(command)
@@ -560,27 +529,18 @@ class _ManagedBackend:
         health probe, the observed truth — never a fabricated
         readiness)."""
         params = dict(self._launch_params())
-        command = build_server_command(
+        command = build_semantic_command(
             params["exe"],  # type: ignore[arg-type]
             model_path,
             host=self._host,
             port=self._port,
             alias=alias,
-            context=params["context"],  # type: ignore[arg-type]
-            gpu_layers=params["gpu_layers"],  # type: ignore[arg-type]
-            flash_attention=str(params["flash_attention"]),
-            jinja=bool(params["jinja"]),
             no_webui=bool(params["no_webui"]),
-            temperature=params["temperature"],  # type: ignore[arg-type]
-            top_k=params["top_k"],  # type: ignore[arg-type]
-            top_p=params["top_p"],  # type: ignore[arg-type]
-            min_p=params["min_p"],  # type: ignore[arg-type]
-            repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
-            samplers=params["samplers"],  # type: ignore[arg-type]
-            seed=params["seed"],  # type: ignore[arg-type]
-            fit=params["fit"],  # type: ignore[arg-type]
-            cache_type_k=params["cache_type_k"],  # type: ignore[arg-type]
-            cache_type_v=params["cache_type_v"],  # type: ignore[arg-type]
+            semantic={
+                key: value
+                for key, value in params.items()
+                if key not in ("exe", "extra_args", "no_webui")
+            },
             extra_args=params["extra_args"],  # type: ignore[arg-type]
         )
         self.last_spawn_command = list(command)

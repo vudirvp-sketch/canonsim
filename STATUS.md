@@ -1,42 +1,55 @@
-Iteration: iter-239 (`inf1-inference-control-slice` — the owner's
-2026-09-25 chip-workspace hand-off: the external
-`llama_cpp_chip_workspace_spec_2026-09-25.md` + the reviewed
-`флаги llama.cpp.txt` snapshot over the «реализовать чипы и прочее
-по документу» call): the llama.cpp semantic inference-control layer
-landed as a NATIVE workbench capability — docs/
-LLAMA_CPP_INFERENCE_CONTROL_LAW.md (D-219: Settings ≠ Inference
-Control, the three-layer split, the chip-as-semantic-runtime-control
-identity) + workbench/application/inference.py the semantic core
-(the 13-control library over 5 categories, the profile store, the
-deterministic resolver, the compiled launch surface, the one-way
-schema/1→settings/2+inference/1 migration) + the Inference surface
-(inference.gd: the control groups, the ordered sampler chain, the
-state badges, the compiled preview) + the Chat projection + the
-Settings deployment slim + the extra_args duplicate-ownership
-guard; 26 paths.
+Iteration: iter-240 (`inf2-full-chip-library` — the owner's
+2026-09-26 «результат вообще неудовлетворительный! Очень коряво,
+криво и косо + далеко не все сэмплеры и настройки есть» call over
+the inf-1 slice): the FULL chip library landed — 85 controls over
+the 15 reviewed categories (the COMPLETE sampling surface —
+Typical-P, Top-N-Sigma, the penalties family, the DRY family, the
+XTC family, the Mirostat family, Dynatemp, Adaptive-P, Ignore EOS,
+Logit Bias included — plus model/device/memory/loading/moe/cpu/
+chat-reasoning/structured/server/observability/speculative/rope/
+special/lora), the typed relations (the mirostat effective_noop
+pinned from the --help's own words, the family requires), the
+9-member chain (the inf-1 5-member profiles upgrade at load, the
+operator's order preserved), the four §30 presets as transparent
+diff-previewed documents, the workspace pinning (the profile
+document's own workspace section), the DATA-DRIVEN Redot workspace
+(inf-1's compose-before-read bug — the live flow rendering EMPTY
+category groups — repaired; the search/pins/collapsible categories/
+the advanced rung), the platform compile seam (SEMANTIC_FLAG_TABLE
++ build_semantic_command, the legacy command byte-stable, the
+138-token duplicate-ownership guard); D-220; 14 paths.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
 P2 continuation) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2335 passed + 8 skipped, ruff clean, docguard clean (Python 3.12.14,
+2344 passed + 9 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the REDOT_EXE run green against redot-26.2-stable:
-2343+1 — the eight visual packets (the seven + inf-1's inference
-capture) + the duckdb skip alone, per D6/D-093; the live binary
-check per the LAW §19: the compiled flag forms verified against the
-reviewed snapshot, the sandbox's older CPU build refusing the newer
-forms LOUDLY — the capability authority law's own demonstration) ·
-Date: 2026-09-25 ·
-Scope: scripts/workbench_launch.py (the path-stripping parse + the
-KI#98 docstring law) + tests/test_workbench_launch.py (the re-pinned
-bind-line test + the end-to-end route pin) + STATUS.md + worklog.md +
-docs/TASKS.md (the ledger line) — 5 paths (one launcher fix + its
-claim packet + the state docs; zero core change, the LOG untouched).
-Track A: the obs family the live head (iter-236 obs-2, 235 obs-1,
-234 ux-1; obs-3+ the P3 rungs per the LAW §25 ladder; the wb family
-behind: iter-238 the KI#98 URL fix, 237 the corpus re-homing, 232 the
-race/latch fixes + the OLED re-pin, 231 CI-unred + NavButton, 230
-wb-12, 229 the visual law, 227 wb-10, 226 wb-9 D-208). The detail
-lives in the worklog + git.
+2352+1 — the eight visual packets (the seven + the inf-2 inference
+capture: double-run byte-identical, VLM-verified — the pinned
+chips, the collapsible categories with counts, the 9-member chain
+with the INEFFECTIVE/INACTIVE states and reasons) + the duckdb skip
+alone, per D6/D-093) ·
+Date: 2026-09-26 ·
+Scope: workbench/application/inference.py (the full library, the
+relations, the presets, the workspace section) +
+workbench/platform/llama_process.py (the semantic flag table +
+build_semantic_command) + scripts/workbench_app.py (the semantic
+compile path) + inference.gd (the data-driven workspace) +
+strings.gd + the claim packets (test_inference/test_workbench_app/
+test_managed_backend/test_shell_proof + the fake server's
+token-scan parse) + the law/state docs (the LAW, FRONTEND_UIUX_LAW,
+DECISIONS, TASKS, STATUS, worklog) — 14 paths (the 3–5 soft limit
+honestly over, the inf-1 precedent, AGENTS §2.3; zero core change,
+the LOG untouched).
+Track A: the inf family the live head (iter-240 the full chip
+library, 239 the inf-1 slice; inf-3+ the owner-gated continuation —
+capability discovery, the model-driven context awareness, the
+session/preset persistence layers, LLAMA_CPP_INFERENCE_CONTROL_LAW
+§21); the obs family behind (iter-236 obs-2, 235 obs-1, 234 ux-1);
+the wb family behind: iter-238 the KI#98 URL fix, 237 the corpus
+re-homing, 232 the race/latch fixes + the OLED re-pin, 231
+CI-unred + NavButton, 230 wb-12, 229 the visual law, 227 wb-10,
+226 wb-9 D-208). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -95,12 +108,15 @@ lives in the worklog + git.
 
 ## Next step
 
-**iter-239 DONE: the llama.cpp semantic inference-control vertical
-slice LANDED (the LAW + the semantic core + the resolver + the
-compiled surface + the Inference surface + the migration; 2335+8 +
-ruff + docguard clean) — the inf-2+ continuation (capability
-discovery, the library/pinning workspace, presets/recipes, the
-later capability groups) each an owner-gated row. iter-236 DONE: the obs-2 live run over the READ-side seam LANDED
+**iter-240 DONE: the FULL chip library + the honest workspace LANDED
+(85 controls / 15 categories, the typed relations, the 9-member
+chain, the §30 presets, the workspace pinning, the data-driven
+Redot workspace, the platform compile seam; 2344+9 / 2352+1 REDOT +
+ruff + docguard clean) — the inf-3+ continuation (capability
+discovery, the model-driven context awareness, the session/preset
+persistence layers) each an owner-gated row. iter-239 DONE: the
+inf-1 vertical slice (superseded in surface quality by iter-240's
+data-driven rebuild, its laws intact). iter-236 DONE: the obs-2 live run over the READ-side seam LANDED
 (the bounded read model + observatory.gd v0.2's live feed, the
 selection the EVENT ID, the honest empties) — 2308+8 (CI) / 2315+1
 (REDOT_EXE) + ruff + docguard clean. iter-237 DONE: the v5.2 corpus

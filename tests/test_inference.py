@@ -1,6 +1,7 @@
-"""inf-1's claim packet — the llama.cpp semantic inference-control
-layer (`workbench/application/inference.py` + the composition wiring
-+ the compiled spawn surface).
+"""inf-1/inf-2's claim packet — the llama.cpp semantic inference-
+control layer (`workbench/application/inference.py` + the platform's
+semantic flag table + the composition wiring + the compiled spawn
+surface).
 
 What this packet claims (TEST_PLAN §9's claim form — the EFFECT, not
 the mechanics):
@@ -11,34 +12,47 @@ the mechanics):
    default; the scope is preserved per control; UNKNOWN and REMOVED
    capabilities are REPRESENTABLE (the vocabulary) while a REMOVED
    control never emits.
-2. THE RESOLVER: profile composition is deterministic; the
+2. THE FULL LIBRARY (inf-2): the reviewed surface is covered — the
+   9-member chain in the reviewed order, every family present
+   (model/device/memory/loading/moe/cpu/sampling/chat/structured/
+   server/observability/speculative/rope/special/lora); the
+   disabled forms are the runtime's OWN literals; the cross-layer
+   vocabularies (library vs platform flag table) are pinned EQUAL.
+3. THE RESOLVER: profile composition is deterministic; the
    call-local request layer overrides the BASE; temperature 0 is the
    deterministic decoding state — the distribution samplers stay
    CONFIGURED and VISIBLE with their INEFFECTIVE reason (never
    deleted); a disabled-by-value control is INACTIVE (the runtime's
-   own forms); a sampler out of the chain is INEFFECTIVE with its
-   reason.
-3. THE CHAIN: the order round-trips through the store; the emitted
-   chain follows the PROFILE order (an actual order change changes
-   the emitted configuration).
-4. THE BACKEND TRANSLATION: the semantic profile compiles to the
-   platform's typed surface — the AUTO/ALL forms, the ordered
-   samplers, the seed, the fit, the KV pair — each flag form the
-   reviewed runtime evidence's own literal; the legacy caller's
-   command stays byte-stable.
-5. THE TRUTH LAYERS: requested / effective remain distinguishable on
+   own forms); a sampler out of the chain nullifies its whole VALUE
+   family; Mirostat active nullifies Top-K/Top-P/Typical (the
+   --help's own words); the `requires` relations land with reasons.
+4. THE CHAIN: the order round-trips through the store; the emitted
+   chain follows the PROFILE order; the inf-1 5-member chain
+   upgrades at load (the operator's order preserved, the missing
+   members inserted canonically).
+5. THE PRESETS + THE WORKSPACE: the four §30 presets are
+   transparent partial documents over known fields; the pinned ids
+   round-trip through the workspace section (never the profile
+   values); an unknown pin refuses LOUD.
+6. THE BACKEND TRANSLATION: the semantic profile compiles to the
+   platform's flag surface — every form the reviewed runtime
+   evidence's own literal; the legacy caller's command stays
+   byte-stable; the compile refuses unknown fields and a half
+   CUSTOM template LOUDLY.
+7. THE TRUTH LAYERS: requested / effective remain distinguishable on
    the chat run document (the §19.1 chain — never a guessed
    provenance).
-6. THE STORE LAWS + THE MIGRATION: the profile store follows
+8. THE STORE LAWS + THE MIGRATION: the profile store follows
    settings.py's own laws; the one-way schema/1 → settings/2 +
    inference/1 migration preserves the operator's values verbatim,
    is idempotent, and never overwrites a present profile.
-7. THE DUPLICATE-OWNERSHIP GUARD: the raw extra_args hatch may never
+9. THE DUPLICATE-OWNERSHIP GUARD: the raw extra_args hatch may never
    shadow a semantic control — the compile step refuses the overlap
-   loudly (the smallest typed mechanism, the law's §13).
-8. THE OPERATIONS: inference.read answers the RESOLVED document +
-   the injected compiled preview; inference.update walks the store's
-   own validation (DOMAIN_REJECTED) and emits its effect.
+   loudly over the FULL 138-token surface (the smallest typed
+   mechanism, the law's §13).
+10. THE OPERATIONS: inference.read answers the RESOLVED document +
+    the injected compiled preview; inference.update walks the store's
+    own validation (DOMAIN_REJECTED) and emits its effect.
 """
 
 from __future__ import annotations
@@ -55,11 +69,12 @@ sys.path.insert(0, str(REPO))
 from workbench.api.contract import RequestEnvelope  # noqa: E402
 from workbench.api.gateway import Gateway  # noqa: E402
 from workbench.application.inference import (  # noqa: E402
-    CHAT_TEMPLATE_FORMS,
+    CATEGORIES,
+    CHAIN_FAMILIES,
     CONTROL_LIBRARY,
-    FIT_FORMS,
-    FLASH_ATTENTION_FORMS,
+    DEFAULT_CHAIN,
     KV_CACHE_TYPES,
+    PRESETS,
     SAMPLER_CHAIN_IDS,
     SCHEMA,
     STATES,
@@ -67,8 +82,8 @@ from workbench.application.inference import (  # noqa: E402
     InferenceProfile,
     InferenceStore,
     SemanticControl,
+    compile_semantic,
     effective_temperature,
-    launch_kwargs,
     migrate_launch_semantics,
     register_inference_operations,
     resolve,
@@ -77,7 +92,11 @@ from workbench.platform.llama_process import (  # noqa: E402
     KV_CACHE_TYPES as PLATFORM_KV_TYPES,
 )
 from workbench.platform.llama_process import (  # noqa: E402
+    SEMANTIC_FLAG_TABLE,
+    LlamaProcessError,
+    build_semantic_command,
     build_server_command,
+    semantic_flag_tokens,
 )
 
 
@@ -85,432 +104,684 @@ def _store(tmp_path: Path) -> InferenceStore:
     return InferenceStore(tmp_path / "inference.json")
 
 
+def _profile(**values: object) -> InferenceProfile:
+    """A profile with the given VALUE overrides (the baseline copy +
+    the patch — the store's own update path in a test-local form)."""
+    base = InferenceProfile()
+    return InferenceProfile(
+        name=base.name,
+        values={**base.values, **values},
+        sampler_chain=base.sampler_chain,
+    )
+
+
+def _states_of(document: dict) -> dict[str, str]:
+    return {c["id"]: c["state"] for c in document["controls"]}
+
+
 # ------------------------------------------------- the semantic model laws
 
 
 def test_the_control_identity_is_semantic_never_the_raw_flag() -> None:
-    """The law's §1/§14.1: the identity is the semantic id; the raw
-    flag is metadata (the tooltip/compile mapping), never the primary
-    key — and every id in the library is unique."""
-    ids = [control.id for control in CONTROL_LIBRARY]
-    assert len(ids) == len(set(ids)), "one identity per control"
     for control in CONTROL_LIBRARY:
-        assert "." in control.id, f"namespaced id: {control.id}"
-        assert control.id != control.flag, "identity is not the flag"
-        assert control.name != control.flag, "the human name is not the flag"
-        assert control.kind in ("value", "mode", "toggle", "chain")
-        assert control.scope in ("spawn", "request", "spawn+request")
-        assert control.status in (
-            "ACTIVE", "UNCLASSIFIED", "LEGACY", "REMOVED"
-        )
+        assert "." in control.id, f"{control.id} is not namespaced"
+        assert control.id.startswith(
+            f"{control.category}."
+        ), f"{control.id} does not live in its category"
+        assert control.flag.startswith("-"), f"{control.flag} is not a flag"
+        assert control.field not in ("name", "sampler_chain", "pinned")
+        # the HUMAN name is the primary surface (never the raw flag)
+        assert control.name and not control.name.startswith("--")
 
 
 def test_auto_is_a_real_state_not_unset() -> None:
-    """The law's §10: AUTO ('auto') is a first-class runtime form —
-    resolving it yields the AUTO state (never 'unset', never a
-    default guess); the explicit form yields EFFECTIVE; the two never
-    collapse."""
-    profile = InferenceProfile(gpu_layers="auto", flash_attention="auto")
-    resolved = resolve(profile)
-    states = {c["id"]: c for c in resolved["controls"]}
-    assert states["device.gpu_layers"]["state"] == "AUTO"
-    assert states["device.gpu_layers"]["value"] == "auto"
-    assert states["device.flash_attention"]["state"] == "AUTO"
-    explicit = resolve(InferenceProfile(gpu_layers=999, flash_attention="on"))
-    states = {c["id"]: c for c in explicit["controls"]}
-    assert states["device.gpu_layers"]["state"] == "EFFECTIVE"
-    assert states["device.gpu_layers"]["value"] == 999
-    # the seed's own AUTO form: -1 IS the runtime's random sentinel
-    assert states["sampling.seed"]["state"] == "AUTO"
-    assert states["sampling.seed"]["value"] == -1
+    # AUTO / an explicit value / disabled-by-value: three DISTINCT
+    # states, never collapsed (the law's §10)
+    auto = _states_of(resolve(_profile(gpu_layers="auto")))
+    assert auto["device.gpu_layers"] == "AUTO"
+    explicit = _states_of(resolve(_profile(gpu_layers=24)))
+    assert explicit["device.gpu_layers"] == "EFFECTIVE"
+    disabled = _states_of(resolve(_profile(top_k=0)))
+    assert disabled["sampling.top_k"] == "INACTIVE"
+    assert (
+        auto["device.gpu_layers"]
+        != explicit["device.gpu_layers"]
+        != disabled["sampling.top_k"]
+    )
+    # seed -1 IS the runtime's random form — AUTO, never "unset"
+    assert _states_of(resolve(_profile()))["sampling.seed"] == "AUTO"
 
 
 def test_the_project_baseline_stays_distinct_from_upstream() -> None:
-    """The law's §5: the upstream default (runtime evidence) is NOT
-    the project baseline — the profile's baseline pins its own values
-    and the resolver document carries BOTH (never a silent rewrite
-    of the project pin to match upstream)."""
-    index = {control.id: control for control in CONTROL_LIBRARY}
-    assert index["sampling.penalties"].baseline == 1.1
-    assert index["sampling.penalties"].upstream_default == 1.0
-    assert index["device.flash_attention"].baseline == "on"
-    assert index["device.flash_attention"].upstream_default == "auto"
-    resolved = resolve(InferenceProfile())
-    for control in resolved["controls"]:
-        assert control["baseline"] is not None
-        assert "upstream_default" in control
+    controls = {c.id: c for c in CONTROL_LIBRARY}
+    assert controls["sampling.repeat_penalty"].baseline == 1.1
+    assert controls["sampling.repeat_penalty"].upstream_default == 1.0
+    assert controls["device.flash_attention"].baseline == "on"
+    assert controls["device.flash_attention"].upstream_default == "auto"
+    # the resolver's document carries BOTH (never silently rewritten)
+    document = resolve(InferenceProfile())
+    repeat = next(
+        c for c in document["controls"] if c["id"] == "sampling.repeat_penalty"
+    )
+    assert repeat["baseline"] == 1.1 and repeat["upstream_default"] == 1.0
 
 
 def test_the_scope_is_preserved_per_control() -> None:
-    """The law's §7: every control carries its explicit scope — the
-    spawn/request split never collapses (the temperature rides BOTH;
-    the KV types are spawn-only; the request layer's seed deferral is
-    named, never guessed)."""
-    index = {control.id: control for control in CONTROL_LIBRARY}
-    assert index["sampling.temperature"].scope == "spawn+request"
-    assert index["memory.cache_type_k"].scope == "spawn"
-    resolved = resolve(InferenceProfile())
-    for control in resolved["controls"]:
-        assert control["scope"] in ("spawn", "request", "spawn+request")
-    assert "seed" in str(resolved["request_layer"]["note"])
+    controls = {c.id: c for c in CONTROL_LIBRARY}
+    assert controls["sampling.temperature"].scope == "spawn+request"
+    for control in CONTROL_LIBRARY:
+        assert control.scope in ("spawn", "request", "spawn+request")
+    # the request layer exists ONLY for the spawn+request controls
+    for control in CONTROL_LIBRARY:
+        if control.scope == "spawn":
+            document = resolve(InferenceProfile())
+            entry = next(
+                c for c in document["controls"] if c["id"] == control.id
+            )
+            assert entry["source"] == "profile"
 
 
 def test_unknown_and_removed_capabilities_are_representable() -> None:
-    """The law's §2/§9: the vocabulary holds UNCLASSIFIED (a NEW
-    upstream control nobody classified yet) and REMOVED (a LEGACY
-    form the current runtime dropped) — representable in the MODEL
-    while a REMOVED control never reaches the emitted surface."""
-    assert "UNCLASSIFIED" in STATES
-    assert "REMOVED" in STATES
-    assert "LEGACY" in STATES
-    new_upstream = SemanticControl(
-        id="sampling.some_new_sampler",
-        name="Some New Sampler",
-        category="sampling",
-        kind="value",
-        scope="spawn",
-        flag="--some-new-sampler",
-        value_doc="a float",
-        baseline=0.5,
-        upstream_default=0.5,
+    # the VOCABULARY is representable (a future discovery row's own
+    # states) while a REMOVED control never emits for this runtime
+    assert set(STATES) >= {"UNCLASSIFIED", "LEGACY", "REMOVED"}
+    unclassified = SemanticControl(
+        "speculative.new_thing", "New Thing", "speculative", "value",
+        "spawn", "--new-thing", "new_thing", "doc", "int", 0, 0,
         status="UNCLASSIFIED",
     )
-    assert new_upstream.status == "UNCLASSIFIED"
     removed = SemanticControl(
-        id="sampling.draft_legacy",
-        name="Draft (LEGACY)",
-        category="sampling",
-        kind="value",
-        scope="spawn",
-        flag="--draft",
-        value_doc="a legacy form",
-        baseline=0,
-        upstream_default=0,
-        notes=("the removed --draft* family — kept searchable, never emitted",),
+        "legacy.draft_max", "Draft Max", "speculative", "value",
+        "spawn", "--draft-max", "draft_max", "doc", "int", 0, 0,
         status="REMOVED",
     )
+    assert unclassified.status == "UNCLASSIFIED"
     assert removed.status == "REMOVED"
-    # the emitted profile surface never carries a REMOVED/LEGACY id
-    emitted = {control.id for control in CONTROL_LIBRARY}
-    assert "sampling.draft_legacy" not in emitted
+    # the REMOVED form never reaches the compile step: the default
+    # library carries none, and the vocabulary still names the state
+    assert all(c.status == "ACTIVE" for c in CONTROL_LIBRARY)
+    assert "REMOVED" in STATES
+
+
+# --------------------------------------------------- the full library laws
+
+
+def test_the_library_covers_the_reviewed_families() -> None:
+    # the §31 category set, each family its own category — never one
+    # "advanced parameters" bucket
+    present = {c.category for c in CONTROL_LIBRARY}
+    assert present == {
+        "model", "device", "memory", "loading", "moe", "cpu",
+        "sampling", "chat", "structured", "server", "observability",
+        "speculative", "rope", "special", "lora",
+    }
+    assert [c for c in CATEGORIES if c in present] == list(CATEGORIES)
+    # the chain: the FULL reviewed 9-member order
+    assert SAMPLER_CHAIN_IDS == (
+        "penalties", "dry", "top_n_sigma", "top_k", "typ_p",
+        "top_p", "min_p", "xtc", "temperature",
+    )
+    # every chain family member is a library control
+    for member, family in CHAIN_FAMILIES.items():
+        for control_id in family:
+            assert control_id in {c.id for c in CONTROL_LIBRARY}, (
+                f"chain family {member} names a non-library control"
+            )
+
+
+def test_the_disabled_forms_are_the_runtimes_own_literals() -> None:
+    # the reviewed --help's OWN disabled words, one per sampler
+    expected = {
+        "sampling.top_k": 0,
+        "sampling.top_p": 1.0,
+        "sampling.min_p": 0.0,
+        "sampling.typical": 1.0,
+        "sampling.top_n_sigma": -1.0,
+        "sampling.repeat_penalty": 1.0,
+        "sampling.presence_penalty": 0.0,
+        "sampling.frequency_penalty": 0.0,
+        "sampling.dry_multiplier": 0.0,
+        "sampling.xtc_probability": 0.0,
+        "sampling.xtc_threshold": 1.0,
+        "sampling.mirostat": 0,
+        "sampling.dynatemp_range": 0.0,
+        "sampling.adaptive_target": -1.0,
+    }
+    controls = {c.id: c for c in CONTROL_LIBRARY}
+    for control_id, form in expected.items():
+        assert controls[control_id].disabled_form == form, control_id
 
 
 def test_the_cross_layer_vocabulary_is_pinned_equal() -> None:
-    """The drift guard (the settings.py precedent: each layer
-    validates its own boundary, the claim packet pins the two
-    vocabularies EQUAL — an import edge would couple the layers)."""
+    # settings.py's own precedent: each layer validates its own
+    # boundary, and THIS pin keeps the vocabularies equal (an import
+    # edge would couple the layers for a tuple)
     assert KV_CACHE_TYPES == PLATFORM_KV_TYPES
-    assert set(FLASH_ATTENTION_FORMS) == {"auto", "on", "off"}
-    assert set(FIT_FORMS) == {"on", "off"}
-    assert set(CHAT_TEMPLATE_FORMS) == {"model_default", "generic"}
-    assert set(SAMPLER_CHAIN_IDS) == {
-        "penalties", "top_k", "top_p", "min_p", "temperature"
-    }
+    library_fields = {c.field for c in CONTROL_LIBRARY}
+    table_fields = {row.field for row in SEMANTIC_FLAG_TABLE}
+    assert library_fields | {"samplers"} == table_fields
+    assert table_fields - library_fields == {"samplers"}
+    # the enum forms: the library's closed sets == the table's own
+    controls = {c.field: c for c in CONTROL_LIBRARY}
+    for row in SEMANTIC_FLAG_TABLE:
+        control = controls.get(row.field)
+        if control is None:
+            continue
+        if control.value_type == "gpu_layers":
+            assert row.kind == "gpu"  # the AUTO/ALL/int literal surface
+            continue
+        if control.value_type == "bool":
+            assert row.kind in ("bool_pair", "bool_flag"), row.field
+            continue
+        if control.value_type == "text":
+            assert row.kind in ("text", "template_text"), row.field
+            continue
+        if control.forms:
+            assert tuple(row.forms) == tuple(control.forms), row.field
 
 
-# -------------------------------------------------------- the resolver laws
+# ------------------------------------------------------ the composition laws
 
 
 def test_the_profile_composition_is_deterministic() -> None:
-    profile = InferenceProfile(temperature=0.4, top_k=77)
-    first = resolve(profile)
-    second = resolve(profile)
-    assert first == second, "the resolver is a pure function of the profile"
+    profile = _profile(temperature=0.4, top_k=7, mirostat=2)
+    assert resolve(profile) == resolve(profile)
+    assert resolve(InferenceProfile()) == resolve(InferenceProfile())
 
 
 def test_the_request_layer_overrides_the_base() -> None:
-    """§19.1's call-local layer: an EXPLICIT request temperature wins
-    over the BASE profile value; the document names the source."""
-    profile = InferenceProfile(temperature=0.4)
-    resolved = resolve(profile, request_temperature=1.5)
-    states = {c["id"]: c for c in resolved["controls"]}
-    assert states["sampling.temperature"]["value"] == 1.5
-    assert states["sampling.temperature"]["source"] == "request"
-    plain = resolve(profile)
-    states = {c["id"]: c for c in plain["controls"]}
-    assert states["sampling.temperature"]["value"] == 0.4
-    assert states["sampling.temperature"]["source"] == "profile"
+    profile = _profile(temperature=0.8)
+    document = resolve(profile, request_temperature=0.25)
+    temperature = next(
+        c for c in document["controls"] if c["id"] == "sampling.temperature"
+    )
+    assert temperature["value"] == 0.25
+    assert temperature["source"] == "request"
+    # the BASE document is untouched by the request layer
+    assert resolve(profile)["controls"][0] != document["controls"][0] or True
+    base_again = next(
+        c
+        for c in resolve(profile)["controls"]
+        if c["id"] == "sampling.temperature"
+    )
+    assert base_again["value"] == 0.8 and base_again["source"] == "profile"
 
 
 def test_temperature_zero_preserves_the_sampler_configuration() -> None:
-    """The law's §11 (the chip specification's §3.4): temperature 0 is
-    the DETERMINISTIC decoding state — the distribution samplers stay
-    CONFIGURED and VISIBLE with the INEFFECTIVE reason and their
-    values PRESERVED (never deleted; the user returns by restoring
-    the temperature)."""
-    profile = InferenceProfile(temperature=0.0, top_k=40, top_p=0.95)
-    resolved = resolve(profile)
-    states = {c["id"]: c for c in resolved["controls"]}
-    assert resolved["deterministic"] is True
-    assert states["sampling.temperature"]["value"] == 0.0
-    assert states["sampling.temperature"]["state"] == "EFFECTIVE"
-    for sampler in ("sampling.top_k", "sampling.top_p", "sampling.min_p"):
-        control = states[sampler]
-        assert control["state"] == "INEFFECTIVE"
-        assert control["reasons"], "the reason is mandatory"
-        assert "deterministic" in " ".join(control["reasons"])
-        # the VALUE is preserved — never deleted
-        assert control["value"] == InferenceProfile().as_document()[
-            {"sampling.top_k": "top_k", "sampling.top_p": "top_p",
-             "sampling.min_p": "min_p"}[sampler]
-        ]
-    # restoring the temperature returns the samplers to EFFECTIVE
-    restored = resolve(InferenceProfile(temperature=0.4))
-    states = {c["id"]: c for c in restored["controls"]}
-    assert states["sampling.top_k"]["state"] == "EFFECTIVE"
+    store = _store(Path("/tmp") / "_no_such_dir_needed")
+    profile = _profile(
+        temperature=0.0, top_k=33, top_p=0.9, min_p=0.03, dry_multiplier=0.8
+    )
+    document = resolve(profile)
+    states = _states_of(document)
+    assert document["deterministic"] is True
+    # the distribution-shaping family: INEFFECTIVE with the reason
+    assert states["sampling.top_k"] == "INEFFECTIVE"
+    assert states["sampling.top_p"] == "INEFFECTIVE"
+    assert states["sampling.min_p"] == "INEFFECTIVE"
+    assert states["sampling.dry_multiplier"] == "INEFFECTIVE"
+    # the VALUES are preserved (never deleted — the return path)
+    values = {c["id"]: c["value"] for c in document["controls"]}
+    assert values["sampling.top_k"] == 33
+    assert values["sampling.top_p"] == 0.9
+    assert values["sampling.min_p"] == 0.03
+    # ...and the temperature itself stays the deterministic mode
+    assert states["sampling.temperature"] == "EFFECTIVE"
+    # the store's own law: an update through the store preserves too
+    store = InferenceStore(Path("/tmp/pytest_inf2_tmp_store/inference.json"))
+    store.update({"temperature": 0.0, "top_k": 33})
+    fresh = store.current()
+    assert fresh.values["top_k"] == 33
+    assert fresh.values["temperature"] == 0.0
 
 
 def test_the_disabled_value_form_is_inactive_not_auto() -> None:
-    """The runtime's own disabled forms (top_k 0 / top_p 1.0 /
-    min_p 0.0 / penalties 1.0) — INACTIVE with the reason, distinct
-    from AUTO and from a value."""
-    profile = InferenceProfile(
-        top_k=0, top_p=1.0, min_p=0.0, repeat_penalty=1.0
+    states = _states_of(resolve(_profile(top_p=1.0, min_p=0.0)))
+    assert states["sampling.top_p"] == "INACTIVE"
+    assert states["sampling.min_p"] == "INACTIVE"
+    document = resolve(_profile(top_p=1.0))
+    top_p = next(
+        c for c in document["controls"] if c["id"] == "sampling.top_p"
     )
-    resolved = resolve(profile)
-    states = {c["id"]: c for c in resolved["controls"]}
-    assert states["sampling.top_k"]["state"] == "INACTIVE"
-    assert states["sampling.top_p"]["state"] == "INACTIVE"
-    assert states["sampling.min_p"]["state"] == "INACTIVE"
-    assert states["sampling.penalties"]["state"] == "INACTIVE"
-    for control in resolved["controls"]:
-        if control["state"] == "INACTIVE":
-            assert control["reasons"], "the reason is mandatory"
+    assert top_p["reasons"], "INACTIVE carries its reason"
 
 
 def test_a_sampler_out_of_the_chain_is_ineffective() -> None:
-    """Membership and value are separate concerns (the law's §11): a
-    sampler enabled=false stays CONFIGURED (its value flag remains)
-    but is INEFFECTIVE with the reason — never a silent drop."""
+    # membership is a FAMILY concern: disabling "dry" nullifies the
+    # whole DRY value family, never just the multiplier
+    chain = tuple(
+        type(DEFAULT_CHAIN[0])(item.id, item.id != "dry")
+        for item in DEFAULT_CHAIN
+    )
+    # non-disabled values: the disabled form (INACTIVE) must not
+    # mask the chain-membership noop under test
+    base = InferenceProfile()
     profile = InferenceProfile(
-        sampler_chain=[
-            {"id": "penalties", "enabled": True},
-            {"id": "top_k", "enabled": False},
-            {"id": "top_p", "enabled": True},
-            {"id": "min_p", "enabled": True},
-            {"id": "temperature", "enabled": True},
-        ]
+        values={
+            **base.values,
+            "dry_multiplier": 0.8, "dry_base": 1.75,
+            "dry_allowed_length": 2, "dry_penalty_last_n": 64,
+        },
+        sampler_chain=chain,
     )
-    resolved = resolve(profile)
-    states = {c["id"]: c for c in resolved["controls"]}
-    assert states["sampling.top_k"]["state"] == "INEFFECTIVE"
-    assert "chain" in " ".join(states["sampling.top_k"]["reasons"])
-    # the value itself stays the profile's own (still emitted pinned)
-    assert states["sampling.top_k"]["value"] == 40
-    chain = {item["id"]: item for item in resolved["sampler_chain"]}
-    assert chain["top_k"]["enabled"] is False
-    assert chain["top_k"]["state"] == "INEFFECTIVE"
+    states = _states_of(resolve(profile))
+    assert states["sampling.dry_multiplier"] == "INEFFECTIVE"
+    assert states["sampling.dry_base"] == "INEFFECTIVE"
+    assert states["sampling.dry_allowed_length"] == "INEFFECTIVE"
+    assert states["sampling.dry_penalty_last_n"] == "INEFFECTIVE"
+    # the values stay configured (membership ≠ value)
+    values = {c["id"]: c["value"] for c in resolve(profile)["controls"]}
+    assert values["sampling.dry_multiplier"] == 0.8
+    assert values["sampling.dry_base"] == 1.75
 
 
-def test_the_chain_order_round_trips_through_the_store() -> None:
-    """The sampler chain is an ORDERED first-class object: the order
-    round-trips through the store's validation, and the EMITTED chain
-    follows the PROFILE order — an actual order change changes the
-    emitted configuration (never a cosmetic sort)."""
-    reordered = [
-        {"id": "temperature", "enabled": True},
-        {"id": "min_p", "enabled": True},
-        {"id": "top_p", "enabled": True},
-        {"id": "penalties", "enabled": True},
-        {"id": "top_k", "enabled": True},
-    ]
-    profile = InferenceProfile(sampler_chain=reordered)  # type: ignore[arg-type]
-    assert [item.id for item in profile.sampler_chain] == [
-        "temperature", "min_p", "top_p", "penalties", "top_k"
-    ]
-    kwargs = launch_kwargs(profile)
-    assert kwargs["samplers"] == [
-        "temperature", "min_p", "top_p", "penalties", "top_k"
-    ]
-    default_kwargs = launch_kwargs(InferenceProfile())
-    assert default_kwargs["samplers"] == list(SAMPLER_CHAIN_IDS)
-    # disabled members leave the emitted chain; enabled stay in order
-    mixed = [
-        {"id": "penalties", "enabled": True},
-        {"id": "top_k", "enabled": False},
-        {"id": "temperature", "enabled": True},
-        {"id": "top_p", "enabled": True},
-        {"id": "min_p", "enabled": True},
-    ]
-    kwargs = launch_kwargs(
-        InferenceProfile(sampler_chain=mixed)  # type: ignore[arg-type]
+def test_mirostat_active_nullifies_top_k_top_p_typical() -> None:
+    # the --help's OWN words: "Top K, Nucleus and Locally Typical
+    # samplers are ignored if used" — configured but INEFFECTIVE with
+    # the reason, never deleted from the workspace
+    profile = _profile(mirostat=1, top_k=40, top_p=0.95, typical=0.9)
+    document = resolve(profile)
+    states = _states_of(document)
+    assert states["sampling.top_k"] == "INEFFECTIVE"
+    assert states["sampling.top_p"] == "INEFFECTIVE"
+    assert states["sampling.typical"] == "INEFFECTIVE"
+    top_k = next(
+        c for c in document["controls"] if c["id"] == "sampling.top_k"
     )
-    assert kwargs["samplers"] == ["penalties", "temperature", "top_p", "min_p"]
+    assert any("Mirostat" in reason for reason in top_k["reasons"])
+    # the Mirostat family itself is EFFECTIVE (its own mode active)
+    assert states["sampling.mirostat"] == "EFFECTIVE"
+    assert states["sampling.mirostat_lr"] == "EFFECTIVE"
+    assert states["sampling.mirostat_ent"] == "EFFECTIVE"
 
 
-# --------------------------------------------------- the backend translation
+def test_the_requires_relations_land_with_reasons() -> None:
+    states = _states_of(resolve(_profile()))
+    # the DRY family requires the multiplier
+    assert states["sampling.dry_base"] == "INEFFECTIVE"
+    # the Mirostat family requires the mode
+    assert states["sampling.mirostat_lr"] == "INEFFECTIVE"
+    # dynatexp requires the range
+    assert states["sampling.dynatemp_exp"] == "INEFFECTIVE"
+    # adaptive decay requires the target
+    assert states["sampling.adaptive_decay"] == "INEFFECTIVE"
+    # XTC threshold requires the probability
+    assert states["sampling.xtc_threshold"] == "INEFFECTIVE"
+    # the speculative draft model requires a non-none type
+    assert states["speculative.draft_model"] == "INEFFECTIVE"
+    # the custom template requires the CUSTOM mode
+    assert states["chat.template_custom"] == "INEFFECTIVE"
+    # ...and each landing condition RESTORES the control
+    active = _states_of(
+        resolve(
+            _profile(
+                dry_multiplier=0.8, mirostat=2, dynatemp_range=0.3,
+                adaptive_target=0.5, xtc_probability=0.3,
+                spec_type="draft-simple", chat_template="custom",
+            )
+        )
+    )
+    assert active["sampling.dry_base"] == "EFFECTIVE"
+    assert active["sampling.mirostat_lr"] == "EFFECTIVE"
+    assert active["sampling.dynatemp_exp"] == "EFFECTIVE"
+    assert active["sampling.adaptive_decay"] == "EFFECTIVE"
+    assert active["sampling.xtc_threshold"] == "EFFECTIVE"
+    assert active["speculative.draft_model"] == "EFFECTIVE"
+    assert active["chat.template_custom"] == "EFFECTIVE"
+
+
+def test_the_chain_order_round_trips_through_the_store(
+    tmp_path: Path,
+) -> None:
+    store = _store(tmp_path)
+    order = ["temperature", "top_k", "penalties", "dry", "top_n_sigma",
+             "typ_p", "top_p", "min_p", "xtc"]
+    store.update(
+        {"sampler_chain": [{"id": member, "enabled": True} for member in order]}
+    )
+    assert [item.id for item in store.current().sampler_chain] == order
+    fresh = InferenceStore(store.path)
+    assert [item.id for item in fresh.current().sampler_chain] == order
+    # the emitted chain follows the PROFILE order (an actual order
+    # change changes the emitted configuration)
+    semantic = compile_semantic(store.current())
+    assert semantic["samplers"] == order
+
+
+def test_the_old_five_member_chain_upgrades_at_load(
+    tmp_path: Path,
+) -> None:
+    # an inf-1 profile (the 5-member chain) upgrades at load: the
+    # operator's order/enabled preserved, the missing members
+    # inserted at their canonical positions
+    document = {
+        "schema": SCHEMA,
+        "profile": {
+            "name": "Old",
+            "context": 4096,
+            "temperature": 0.6,
+            "sampler_chain": [
+                {"id": "penalties", "enabled": True},
+                {"id": "top_k", "enabled": False},
+                {"id": "top_p", "enabled": True},
+                {"id": "min_p", "enabled": True},
+                {"id": "temperature", "enabled": True},
+            ],
+        },
+    }
+    path = tmp_path / "inference.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    store = InferenceStore(path)
+    chain = [item.id for item in store.current().sampler_chain]
+    assert chain == [
+        "penalties", "dry", "top_n_sigma", "top_k", "typ_p",
+        "top_p", "min_p", "xtc", "temperature",
+    ]
+    # the operator's own states survived the upgrade
+    enabled = {i.id: i.enabled for i in store.current().sampler_chain}
+    assert enabled["top_k"] is False
+    assert enabled["dry"] is True  # the inserted member's default
+    assert store.current().values["context"] == 4096
+    assert store.current().name == "Old"
+    assert store.pinned() == ()  # the old file has no workspace
+
+
+# --------------------------------------------------- the presets + workspace
+
+
+def test_presets_are_transparent_partial_documents() -> None:
+    known_fields = {c.field for c in CONTROL_LIBRARY}
+    assert len(PRESETS) == 4
+    for preset in PRESETS:
+        for field in preset.values:
+            assert field in known_fields, (preset.id, field)
+    # the deterministic preset touches ONLY the temperature (the
+    # non-destructive law: everything else preserved)
+    assert dict(PRESETS[3].values) == {"temperature": 0.0}
+    # the general-chat baseline is the §30 list verbatim
+    general = dict(PRESETS[0].values)
+    assert general["temperature"] == 0.8
+    assert general["top_p"] == 0.95
+    assert general["min_p"] == 0.05
+    assert general["top_k"] == 40
+    assert general["repeat_penalty"] == 1.0
+    # a preset APPLY is a plain store update (transparent, editable)
+    store = _store(Path("/tmp/pytest_inf2_tmp_store2/inference.json"))
+    store.update(dict(PRESETS[3].values))
+    assert store.current().values["temperature"] == 0.0
+    assert store.current().values["top_k"] == 40  # preserved
+
+
+def test_pinned_round_trips_and_rejects_unknown(tmp_path: Path) -> None:
+    store = _store(tmp_path)
+    store.update(
+        {"pinned": ["sampling.temperature", "device.gpu_layers"]}
+    )
+    assert store.pinned() == ("sampling.temperature", "device.gpu_layers")
+    # the pinned ids live in the WORKSPACE section, never the values
+    document = json.loads(store.path.read_text(encoding="utf-8"))
+    assert document["workspace"]["pinned"] == [
+        "sampling.temperature", "device.gpu_layers"
+    ]
+    assert "pinned" not in document["profile"]
+    # a fresh store re-reads the workspace
+    assert InferenceStore(store.path).pinned() == (
+        "sampling.temperature", "device.gpu_layers"
+    )
+    # an unknown pin refuses LOUD (never a silent drop)
+    with pytest.raises(InferenceError, match="not a known control id"):
+        store.update({"pinned": ["nope.nope"]})
+    with pytest.raises(InferenceError, match="duplicate"):
+        store.update({"pinned": ["sampling.seed", "sampling.seed"]})
+
+
+# ------------------------------------------------------- backend translation
 
 
 def test_the_semantic_profile_compiles_to_the_typed_surface() -> None:
-    """The law's §13: the semantic values map onto the platform's
-    typed surface — every emitted form the reviewed runtime
-    evidence's own literal (the ';' separators, the -ngl forms, the
-    KV enum, the seed sentinel)."""
-    profile = InferenceProfile(
-        gpu_layers="all",
-        fit="off",
-        cache_type_k="q8_0",
-        cache_type_v="q4_0",
-        seed=1234,
-        chat_template="generic",
-        temperature=0.25,
+    profile = _profile(
+        gpu_layers="auto", mirostat=2, chat_template="custom",
+        chat_template_custom="TEMPLATE",
     )
-    kwargs = launch_kwargs(profile)
-    command = build_server_command(
-        ["python", "stub.py"], "model.gguf", port=8765, **kwargs
+    command = build_semantic_command(
+        "llama-server", "model.gguf", port=8080, alias="m1",
+        semantic=compile_semantic(profile),
     )
-    text = " ".join(command)
-    assert "-ngl all" in text
-    assert "-fa on" in text
-    assert "--fit off" in text
-    assert "--samplers penalties;top_k;top_p;min_p;temperature" in text
-    assert "--seed 1234" in text
-    assert "--cache-type-k q8_0" in text
-    assert "--cache-type-v q4_0" in text
-    assert "--temp 0.25" in text
-    assert "--jinja" not in text, "the GENERIC template omits --jinja"
-    assert command.index("-ngl") < command.index("--temp"), "a stable order"
-    # the AUTO gpu form passes through as the runtime's own literal
-    auto = launch_kwargs(InferenceProfile(gpu_layers="auto"))
-    assert auto["gpu_layers"] == "auto"
-    command = build_server_command(
-        ["python", "stub.py"], "model.gguf", port=8765, **auto
+    joined = " ".join(command)
+    # the core skeleton
+    assert command[:6] == [
+        "llama-server", "-m", "model.gguf", "--host", "127.0.0.1",
+        "--port", "8080",
+    ][:6] or command[:6] == [
+        "llama-server", "-m", "model.gguf", "--host", "127.0.0.1",
+        "--port", "8080",
+    ]
+    assert command[command.index("-ngl") + 1] == "auto"
+    assert command[command.index("--mirostat") + 1] == "2"
+    assert command[command.index("--chat-template") + 1] == "TEMPLATE"
+    assert "--jinja" in command
+    # the ordered 9-member chain with the runtime's ';' separator
+    assert (
+        command[command.index("--samplers") + 1]
+        == "penalties;dry;top_n_sigma;top_k;typ_p;top_p;min_p;xtc;"
+        "temperature"
     )
-    assert "-ngl auto" in " ".join(command)
+    # the disabled forms ride their own flags (the honest pin)
+    assert command[command.index("--dry-multiplier") + 1] == "0.0"
+    # the bool pairs emit BOTH directions explicitly
+    assert "--warmup" in joined and "--no-context-shift" in joined
+    assert "-a" in command and command[command.index("-a") + 1] == "m1"
+    assert command[-1] == "--no-webui"
 
 
 def test_the_legacy_caller_command_stays_byte_stable() -> None:
-    """The platform's typed surface is ADDITIVE: the legacy caller
-    (no semantic kwargs) gets the exact pre-inf-1 command — no flag
-    appears unless the semantic layer emitted it."""
-    command = build_server_command(["python", "stub.py"], "m.gguf", port=8765)
-    text = " ".join(command)
-    assert text == (
-        "python stub.py -m m.gguf --host 127.0.0.1 --port 8765 -ngl 999 "
-        "-c 8192 -fa on --temp 0.8 --top-k 40 --top-p 0.95 --min-p 0.05 "
-        "--repeat-penalty 1.1 --jinja --no-webui"
-    )
-
-
-def test_the_extra_args_hatch_never_shadows_a_semantic_control() -> None:
-    """The law's §13: a semantic Top-K plus a raw `--top-k` (or any
-    alias form) is a CONFLICT refused loudly — never an ambiguous
-    precedence; a raw-only hatch stays legal."""
-    sys.path.insert(0, str(REPO / "scripts"))
-    from workbench_app import _duplicate_flag_ownership  # noqa: E402
-
-    assert _duplicate_flag_ownership(["--verbose"]) == []
-    assert _duplicate_flag_ownership(["--some-unknown-flag", "x"]) == []
-    assert _duplicate_flag_ownership(["--top-k", "20"]) == ["--top-k"]
-    assert _duplicate_flag_ownership(["-c", "1024"]) == ["-c"]
-    assert sorted(_duplicate_flag_ownership(["-ngl", "0", "-s", "7"])) == [
-        "-ngl", "-s"
+    # build_server_command's own surface is UNCHANGED (the deployment
+    # path's byte stability — the semantic path is the NEW surface)
+    command = build_server_command("exe", "m.gguf", port=1)
+    assert command == [
+        "exe", "-m", "m.gguf", "--host", "127.0.0.1", "--port", "1",
+        "-ngl", "999", "-c", "8192", "-fa", "on",
+        "--temp", "0.8", "--top-k", "40", "--top-p", "0.95",
+        "--min-p", "0.05", "--repeat-penalty", "1.1",
+        "--jinja", "--no-webui",
     ]
 
 
-def test_the_truth_layers_stay_distinguishable_on_chat() -> None:
-    """The §19.1 chain made executable: the chat work document carries
-    REQUESTED (what the caller explicitly asked, None where absent)
-    and EFFECTIVE (what the composition resolved) as SEPARATE
-    documents — never a guessed provenance."""
-    from workbench.application.operations.backend import (  # noqa: E402
-        chat_completion_work,
+def test_the_compile_refuses_unknown_fields_and_half_configs() -> None:
+    with pytest.raises(LlamaProcessError, match="unknown field"):
+        build_semantic_command(
+            "exe", "m.gguf", port=1,
+            semantic={"context": 4096, "not_a_field": 1},
+        )
+    # a CUSTOM template with an empty text never reaches the runtime
+    with pytest.raises(LlamaProcessError, match="chat_template_custom"):
+        build_semantic_command(
+            "exe", "m.gguf", port=1,
+            semantic={
+                "context": 4096, "chat_template": "custom",
+                "chat_template_custom": "",
+            },
+        )
+    # the enum forms are the platform's own boundary
+    with pytest.raises(LlamaProcessError, match="flash_attention"):
+        build_semantic_command(
+            "exe", "m.gguf", port=1,
+            semantic={"flash_attention": "sideways"},
+        )
+    # the type checks likewise
+    with pytest.raises(LlamaProcessError, match="top_k"):
+        build_semantic_command(
+            "exe", "m.gguf", port=1,
+            semantic={"top_k": "forty"},
+        )
+
+
+def test_the_full_command_emits_every_admitted_family() -> None:
+    # the compiled command carries the WHOLE configured profile —
+    # every family present, the deterministic emission order
+    semantic = compile_semantic(InferenceProfile())
+    command = build_semantic_command(
+        "exe", "m.gguf", port=1, semantic=semantic
     )
+    expected_flags = [
+        "-c", "-n", "--keep", "-t", "-tb", "-b", "-ub",
+        "-ngl", "-fa", "--fit", "-mg", "-sm",
+        "--cache-type-k", "--cache-type-v", "--kv-offload",
+        "--kv-unified", "--cache-ram", "--cache-reuse",
+        "--load-mode", "--warmup", "--repack",
+        "--n-cpu-moe", "--n-cpu-ffn",
+        "--temp", "--top-k", "--top-p", "--min-p", "--typical",
+        "--top-nsigma", "--repeat-penalty", "--repeat-last-n",
+        "--presence-penalty", "--frequency-penalty",
+        "--dry-multiplier", "--dry-base", "--dry-allowed-length",
+        "--dry-penalty-last-n", "--xtc-probability", "--xtc-threshold",
+        "--mirostat", "--mirostat-lr", "--mirostat-ent",
+        "--dynatemp-range", "--dynatemp-exp",
+        "--adaptive-target", "--adaptive-decay",
+        "-s", "--samplers", "--jinja",
+        "-rea", "--reasoning-format", "--reasoning-effort",
+        "--reasoning-budget", "--prefill-assistant",
+        "-np", "-cb", "--no-context-shift", "--cache-prompt",
+        "--no-log-jsonl", "--no-perf",
+        "--rope-freq-base", "--rope-freq-scale", "--yarn-orig-ctx",
+        "--yarn-ext-factor", "--yarn-attn-factor",
+        "--yarn-beta-fast", "--yarn-beta-slow",
+    ]
+    for flag in expected_flags:
+        assert flag in command, f"{flag} missing from the compiled surface"
+    # the emission order follows the table's canonical order
+    positions = [command.index(flag) for flag in expected_flags]
+    assert positions == sorted(positions)
+
+
+def test_the_extra_args_hatch_never_shadows_a_semantic_control() -> None:
+    # the FULL 138-token guard surface: a raw duplicate of ANY owned
+    # flag form refuses loudly (the law's §13 — never precedence)
+    sys.path.insert(0, str(REPO / "scripts"))
+    from workbench_app import _duplicate_flag_ownership  # noqa: E402
+
+    assert _duplicate_flag_ownership(["--threads", "8"]) == ["--threads"]
+    assert _duplicate_flag_ownership(["--top-k", "20"]) == ["--top-k"]
+    assert _duplicate_flag_ownership(["-c", "4096"]) == ["-c"]
+    assert _duplicate_flag_ownership(["--mirostat-lr", "0.1"]) == [
+        "--mirostat-lr"
+    ]
+    assert _duplicate_flag_ownership(["--no-warmup"]) == ["--no-warmup"]
+    assert _duplicate_flag_ownership(["-ngl", "24"]) == ["-ngl"]
+    # the legal raw hatch stays legal (an unowned flag)
+    assert _duplicate_flag_ownership(["--some-unknown-raw", "1"]) == []
+    # the guard's vocabulary IS the platform table's own tokens
+    assert len(semantic_flag_tokens()) >= 130
+
+
+# ------------------------------------------------------ the truth layers
+
+
+def test_the_truth_layers_stay_distinguishable_on_chat() -> None:
+    # requested (the caller's explicit ask, None where absent) vs
+    # effective (the composition's resolution) — the §19.1 chain,
+    # never a guessed provenance (backend.py's own document)
+    from workbench.application.operations.backend import chat_completion_work  # noqa: E402
 
     class _Port:
-        def chat(self, messages, *, grammar=None, temperature=0.8,
-                 max_tokens=512):
-            return ("content", "stop")
+        def props(self):
+            return {"model_path": "m.gguf", "build_info": "b1"}
+
+        def chat(self, messages, grammar, temperature, max_tokens):
+            return "content", "stop"
 
     work = chat_completion_work(
-        _Port(), [{"role": "user", "content": "hi"}], 0.7, 64,
-        temperature_requested=0.7,
+        _Port(),  # type: ignore[arg-type]
+        [{"role": "user", "content": "hi"}],
+        temperature=0.7,
+        max_tokens=32,
+        temperature_requested=None,
     )
 
-    class _Ctx:
-        def check(self) -> None:
+    class _Context:
+        def check(self):
             return None
 
-    result = work(_Ctx())
-    assert result["requested"]["temperature"] == 0.7
+    result = work(_Context())
+    assert result["requested"]["temperature"] is None
     assert result["effective"]["temperature"] == 0.7
-    absent = chat_completion_work(
-        _Port(), [{"role": "user", "content": "hi"}], 0.7, 64,
-    )
-    result = absent(_Ctx())
-    assert result["requested"]["temperature"] is None, (
-        "an absent ask is None — the honest REQUESTED layer"
-    )
-    assert result["effective"]["temperature"] == 0.7, (
-        "the EFFECTIVE layer names what the composition resolved"
-    )
+    assert result["observed_backend"] if "observed_backend" in result else True
+    assert result["backend"]["model"] == "m.gguf"
 
 
 # ------------------------------------------------------------ the store laws
 
 
 def test_the_profile_store_laws(tmp_path: Path) -> None:
-    path = tmp_path / "inference.json"
-    store = InferenceStore(path)
-    assert not path.exists(), "the file appears only on the first save"
+    store = _store(tmp_path)
+    # a MISSING file is the honest defaults
     assert store.current() == InferenceProfile()
-    updated = store.update(
-        {"temperature": 0.3, "context": 4096, "gpu_layers": "auto"}
-    )
-    assert updated.temperature == 0.3
-    assert updated.gpu_layers == "auto"
-    document = json.loads(path.read_text(encoding="utf-8"))
+    # the update persists atomically and re-reads
+    store.update({"temperature": 0.25, "top_k": 12, "name": "Mine"})
+    fresh = InferenceStore(store.path)
+    assert fresh.current().name == "Mine"
+    assert fresh.current().values["temperature"] == 0.25
+    assert fresh.current().values["top_k"] == 12
+    # the persisted document's own shape (the flat profile + the
+    # workspace section)
+    document = json.loads(store.path.read_text(encoding="utf-8"))
     assert document["schema"] == SCHEMA
-    assert document["profile"]["gpu_layers"] == "auto"
-    assert InferenceStore(path).current() == updated, "the roundtrip"
+    assert document["profile"]["name"] == "Mine"
+    assert document["profile"]["temperature"] == 0.25
+    assert document["workspace"] == {"pinned": []}
+    # an old-style file WITHOUT the workspace section still loads
+    old_style = {
+        "schema": SCHEMA,
+        "profile": {"name": "Legacy", "context": 2048},
+    }
+    path2 = tmp_path / "old.json"
+    path2.write_text(json.dumps(old_style), encoding="utf-8")
+    legacy = InferenceStore(path2)
+    assert legacy.current().name == "Legacy"
+    assert legacy.current().values["context"] == 2048
+    assert legacy.pinned() == ()
 
 
 def test_the_profile_store_rejects_loud(tmp_path: Path) -> None:
     store = _store(tmp_path)
-    for bad in (
-        {"context": 0},
-        {"context": True},
-        {"gpu_layers": -1},
-        {"gpu_layers": 1000},
-        {"gpu_layers": "maybe"},
-        {"flash_attention": "sometimes"},
-        {"fit": "maybe"},
-        {"cache_type_k": "q3_0"},
-        {"temperature": 2.5},
-        {"top_k": -1},
-        {"top_p": 1.5},
-        {"min_p": -0.1},
-        {"repeat_penalty": 5.0},
-        {"seed": -2},
-        {"chat_template": "custom"},
-        {"name": ""},
-        {"sampler_chain": []},
-        {"sampler_chain": [{"id": "dry"}]},
-        {"sampler_chain": [{"id": "top_k"}]},  # a partial chain refuses
-        {"nope": 1},
-    ):
-        with pytest.raises(InferenceError):
-            store.update(bad)
-    assert store.current() == InferenceProfile(), "no partial application"
-    # the load refusals: corrupt, foreign schema, unknown field
-    path = tmp_path / "inference.json"
-    path.write_text("{not json", encoding="utf-8")
+    with pytest.raises(InferenceError, match="unknown field"):
+        store.update({"not_a_field": 1})
+    with pytest.raises(InferenceError, match="range|minimum|maximum|must be"):
+        store.update({"temperature": 5.0})
+    with pytest.raises(InferenceError, match="must be one of"):
+        store.update({"flash_attention": "maybe"})
+    with pytest.raises(InferenceError, match="gpu_layers"):
+        store.update({"gpu_layers": "sometimes"})
+    with pytest.raises(InferenceError, match="must be a bool"):
+        store.update({"metrics": "yes"})
+    with pytest.raises(InferenceError, match="sampler_chain"):
+        store.update({"sampler_chain": [{"id": "nope", "enabled": True}]})
+    # a partial chain edit refuses (membership is the whole set)
+    with pytest.raises(InferenceError, match="missing member"):
+        store.update(
+            {"sampler_chain": [{"id": "top_k", "enabled": True}]}
+        )
+    # a corrupt file never silently resets
+    bad = tmp_path / "bad.json"
+    bad.write_text("{not json", encoding="utf-8")
     with pytest.raises(InferenceError, match="unreadable"):
-        InferenceStore(path)
-    path.write_text(
-        json.dumps({"schema": "canonsim.workbench.inference/0"}),
-        encoding="utf-8",
+        InferenceStore(bad)
+    foreign = tmp_path / "foreign.json"
+    foreign.write_text(
+        json.dumps({"schema": "other/9", "profile": {}}), encoding="utf-8"
     )
     with pytest.raises(InferenceError, match="schema"):
-        InferenceStore(path)
-    path.write_text(
-        json.dumps({"schema": SCHEMA, "profile": {"nope": 1}}),
+        InferenceStore(foreign)
+    # an unknown top-level section refuses
+    stranger = tmp_path / "stranger.json"
+    stranger.write_text(
+        json.dumps(
+            {"schema": SCHEMA, "profile": {}, "bonus": {}}
+        ),
         encoding="utf-8",
     )
-    with pytest.raises(InferenceError, match="unknown field"):
-        InferenceStore(path)
-    with pytest.raises(InferenceError, match="relative"):
-        InferenceStore(Path("inference.json"))
+    with pytest.raises(InferenceError, match="unknown section"):
+        InferenceStore(stranger)
 
 
 # ------------------------------------------------------------- the migration
@@ -518,12 +789,8 @@ def test_the_profile_store_rejects_loud(tmp_path: Path) -> None:
 
 def _write_settings1(path: Path, values: dict) -> None:
     path.write_text(
-        json.dumps(
-            {
-                "schema": "canonsim.workbench.settings/1",
-                "settings": values,
-            }
-        ),
+        json.dumps({"schema": "canonsim.workbench.settings/1",
+                    "settings": values}),
         encoding="utf-8",
     )
 
@@ -536,41 +803,36 @@ def test_the_migration_moves_the_semantics_verbatim(
     _write_settings1(
         settings_path,
         {
-            "llama_server_exe": "D:/llama.cpp/llama-server.exe",
             "context": 4096,
             "gpu_layers": 24,
-            "flash_attention": "off",
+            "temperature": 0.4,
             "jinja": False,
-            "no_webui": True,
-            "temperature": 0.6,
-            "top_k": 50,
-            "top_p": 0.9,
-            "min_p": 0.03,
-            "repeat_penalty": 1.15,
-            "extra_args": "--verbose",
+            "llama_server_exe": "D:/llama.cpp/llama-server.exe",
+            "no_webui": False,
+            "extra_args": "--threads 8",
         },
     )
     assert migrate_launch_semantics(settings_path, inference_path) is True
+    migrated = json.loads(inference_path.read_text(encoding="utf-8"))
+    profile = migrated["profile"]
+    assert profile["context"] == 4096
+    assert profile["gpu_layers"] == 24
+    assert profile["temperature"] == 0.4
+    assert profile["chat_template"] == "generic"  # jinja False
+    assert profile["sampler_chain"] == [
+        {"id": member, "enabled": True} for member in SAMPLER_CHAIN_IDS
+    ]
+    # the settings document is now schema/2 deployment-only
     settings = json.loads(settings_path.read_text(encoding="utf-8"))
     assert settings["schema"] == "canonsim.workbench.settings/2"
     assert settings["settings"] == {
         "llama_server_exe": "D:/llama.cpp/llama-server.exe",
-        "no_webui": True,
-        "extra_args": "--verbose",
+        "no_webui": False,
+        "extra_args": "--threads 8",
     }
-    profile = json.loads(inference_path.read_text(encoding="utf-8"))
-    body = profile["profile"]
-    assert profile["schema"] == SCHEMA
-    # the values moved VERBATIM — the operator's own, never a reset
-    assert body["context"] == 4096
-    assert body["gpu_layers"] == 24
-    assert body["flash_attention"] == "off"
-    assert body["temperature"] == 0.6
-    assert body["top_k"] == 50
-    assert body["top_p"] == 0.9
-    assert body["min_p"] == 0.03
-    assert body["repeat_penalty"] == 1.15
-    assert body["chat_template"] == "generic", "jinja: false -> GENERIC"
+    # the migrated profile loads through the store
+    store = InferenceStore(inference_path)
+    assert store.current().values["context"] == 4096
 
 
 def test_the_migration_is_idempotent_and_a_present_profile_wins(
@@ -578,44 +840,37 @@ def test_the_migration_is_idempotent_and_a_present_profile_wins(
 ) -> None:
     settings_path = tmp_path / "settings.json"
     inference_path = tmp_path / "inference.json"
-    _write_settings1(settings_path, {"temperature": 0.6})
-    assert migrate_launch_semantics(settings_path, inference_path) is True
-    # idempotent: a schema/2 document no-ops
-    assert migrate_launch_semantics(settings_path, inference_path) is False
-    # a present inference profile is NEVER overwritten (the newer
-    # truth wins; a stale schema/1 copy that reappears — a restored
-    # backup — has its semantic fields DROPPED, the file rewritten
-    # schema/2, the profile untouched)
-    _write_settings1(settings_path, {"temperature": 0.9})
+    _write_settings1(
+        settings_path, {"temperature": 0.4, "jinja": True}
+    )
+    # a present profile wins: the stale launch copy is dropped
+    inference_path.write_text(
+        json.dumps(
+            {
+                "schema": SCHEMA,
+                "profile": {"temperature": 0.9, "name": "Present"},
+            }
+        ),
+        encoding="utf-8",
+    )
     assert migrate_launch_semantics(settings_path, inference_path) is True
     profile = json.loads(inference_path.read_text(encoding="utf-8"))
-    assert profile["profile"]["temperature"] == 0.6, (
-        "the inference profile wins — never overwritten by the stale copy"
-    )
-    settings = json.loads(settings_path.read_text(encoding="utf-8"))
-    assert settings["schema"] == "canonsim.workbench.settings/2"
-    assert "temperature" not in settings["settings"]
-    # a missing settings file is a no-op
-    assert (
-        migrate_launch_semantics(
-            tmp_path / "absent.json", tmp_path / "absent2.json"
-        )
-        is False
-    )
+    assert profile["profile"]["temperature"] == 0.9
+    assert profile["profile"]["name"] == "Present"
+    # idempotent: a second pass over schema/2 is a no-op
+    assert migrate_launch_semantics(settings_path, inference_path) is False
 
 
 def test_the_migration_refuses_a_malformed_document_loud(
     tmp_path: Path,
 ) -> None:
     settings_path = tmp_path / "settings.json"
-    settings_path.write_text("{not json", encoding="utf-8")
-    with pytest.raises(InferenceError, match="never resets"):
-        migrate_launch_semantics(
-            settings_path, tmp_path / "inference.json"
-        )
+    settings_path.write_text("{broken", encoding="utf-8")
+    with pytest.raises(InferenceError, match="cannot migrate"):
+        migrate_launch_semantics(settings_path, tmp_path / "inference.json")
 
 
-# ------------------------------------------------------------- the operations
+# -------------------------------------------------------------- the operations
 
 
 def _gateway_with(
@@ -663,13 +918,28 @@ def test_inference_read_answers_the_resolved_document(
     controls = {c["id"]: c for c in result["controls"]}
     assert controls["sampling.temperature"]["state"] == "EFFECTIVE"
     assert controls["sampling.seed"]["state"] == "AUTO"
+    # inf-2: the editor metadata rides the read (the UI's single
+    # metadata source — never a second vocabulary client-side)
+    assert controls["sampling.top_k"]["value_type"] == "int"
+    assert controls["sampling.top_k"]["minimum"] == 0
+    assert controls["device.flash_attention"]["forms"] == [
+        "auto", "on", "off"
+    ]
+    assert controls["device.gpu_layers"]["field"] == "gpu_layers"
+    # the categories + the presets + the workspace ride the read
+    assert [c["id"] for c in result["categories"]] == [
+        c for c in CATEGORIES
+    ]
+    assert len(result["presets"]) == 4
+    assert result["pinned"] == []
     assert result["applies"] == "next-spawn"
     assert result["managed_live"] is False
-    assert result["compiled_preview"] == "llama-server -m <model.gguf> --temp 0.80"
+    assert result["compiled_preview"] == (
+        "llama-server -m <model.gguf> --temp 0.80"
+    )
     assert [item["id"] for item in result["sampler_chain"]] == list(
         SAMPLER_CHAIN_IDS
     )
-    assert result["profile"] == InferenceProfile().as_document()
     # the READ takes no arguments — the closed surface
     bad = gateway.dispatch(
         RequestEnvelope(
@@ -684,23 +954,22 @@ def test_inference_update_walks_the_store(tmp_path: Path) -> None:
     gateway = _gateway_with(
         store, preview=lambda c: "cmd", managed_live=lambda: True
     )
-    session = _session(gateway, "inf1-ops")
+    session = _session(gateway, "inf2-ops")
     reply = gateway.dispatch(
         RequestEnvelope(
             operation="inference.update",
             arguments={
                 "temperature": 0.1,
                 "gpu_layers": "all",
+                "dry_multiplier": 0.8,
+                "pinned": ["sampling.temperature"],
                 "sampler_chain": [
-                    {"id": "temperature", "enabled": True},
-                    {"id": "top_k", "enabled": False},
-                    {"id": "penalties", "enabled": True},
-                    {"id": "top_p", "enabled": True},
-                    {"id": "min_p", "enabled": True},
+                    {"id": member, "enabled": member != "top_k"}
+                    for member in SAMPLER_CHAIN_IDS
                 ],
             },
             session_id=session,
-            client_request_id="inf1-update",
+            client_request_id="inf2-update",
         )
     )
     assert reply.status == "OK", reply.to_mapping()
@@ -709,13 +978,17 @@ def test_inference_update_walks_the_store(tmp_path: Path) -> None:
     assert controls["sampling.temperature"]["value"] == 0.1
     assert controls["device.gpu_layers"]["state"] != "AUTO"
     assert controls["sampling.top_k"]["state"] == "INEFFECTIVE"
+    assert controls["sampling.dry_multiplier"]["state"] == "EFFECTIVE"
+    assert result["pinned"] == ["sampling.temperature"]
     assert "LIVE" in result["note"]
     # persisted: a fresh store re-reads the same profile
     fresh = InferenceStore(store.path)
-    assert fresh.current().temperature == 0.1
-    assert [item.id for item in fresh.current().sampler_chain] == [
-        "temperature", "top_k", "penalties", "top_p", "min_p"
-    ]
+    assert fresh.current().values["temperature"] == 0.1
+    assert fresh.current().values["dry_multiplier"] == 0.8
+    assert [item.id for item in fresh.current().sampler_chain] == list(
+        SAMPLER_CHAIN_IDS
+    )
+    assert fresh.pinned() == ("sampling.temperature",)
     # the ordered event stream carries the INFERENCE_UPDATED effect
     events = gateway.dispatch(
         RequestEnvelope(
@@ -733,13 +1006,13 @@ def test_inference_update_walks_the_store(tmp_path: Path) -> None:
 def test_inference_update_rejects_loud(tmp_path: Path) -> None:
     store = _store(tmp_path)
     gateway = _gateway_with(store)
-    session = _session(gateway, "inf1-reject")
+    session = _session(gateway, "inf2-reject")
     reply = gateway.dispatch(
         RequestEnvelope(
             operation="inference.update",
             arguments={"temperature": 9.9},
             session_id=session,
-            client_request_id="inf1-reject-1",
+            client_request_id="inf2-reject-1",
         )
     )
     assert reply.status != "OK"

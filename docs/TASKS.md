@@ -443,11 +443,57 @@ TEST_PLAN §9's claim packet)
   hardware profiles, the later capability groups (DRY/XTC/Mirostat/
   MoE/server/speculative...), seed's request scope, the chat-template
   override relation — each its own owner-gated row.
-- `inf-2..inf-N` — the inference continuation family (each row
+- `inf-2` — DONE (iter-240, 2026-09-26). The §8-style report:
+  TARGET PROBLEM: the owner's «результат вообще неудовлетворительный!
+  Очень коряво, криво и косо + далеко не все сэмплеры и настройки
+  есть» report over the inf-1 slice: the library carried 13 of the
+  ~85 reviewed controls (the DRY/XTC/Mirostat/Typical/Top-N-Sigma/
+  penalties/MoE/loading/server/reasoning/... families all missing),
+  the Inference surface COMPOSED its rows before the first read (the
+  live flow rendered EMPTY category groups — only the proof-only
+  injection masked it), and the UI re-encoded the vocabulary
+  client-side (VALUE_SPINS + the form constants — a second source
+  of truth). TRANSFERRED MECHANISM: the same three-layer split,
+  completed — the library over the WHOLE reviewed snapshot (the
+  §31 category ladder, every disabled/AUTO form the runtime's own
+  literal), the typed relation DATA (Condition/Requires/
+  EffectiveNoop — the mirostat noop pinned from the --help's own
+  words, the temperature-0 deterministic noop, the family
+  requires), the DATA-DRIVEN Redot workspace (the editors built
+  from the read document's own value_type/forms/limits metadata;
+  the rows build ON the read; search/pins/collapsible categories/
+  the advanced rung/the transparent preset diff preview), the
+  platform's SEMANTIC_FLAG_TABLE + build_semantic_command (the
+  compile seam: field-keyed values in, flag syntax out, unknown
+  fields LOUD; build_server_command byte-stable as the deployment
+  path), and the workspace section (the pinned ids ride the
+  profile document — one file, two named sections). INVARIANT: the
+  profile document FIELD-STABLE (an inf-1 profile loads as-is; the
+  5-member chain upgrades to 9 at load, the operator's order
+  preserved); one value owner per control; the UI never re-encodes
+  the vocabulary; the unsaved edits survive a refresh (the carried
+  editor values law, the own-save exception). VERIFICATION STATE:
+  STATIC_VERIFIED (test_inference.py — 34 tests: the full-library
+  laws, the cross-layer vocabulary pins, the relation laws, the
+  chain upgrade, the presets/pins, the compile surface, the guard
+  over 138 tokens; 2344+9 / 2352+1 REDOT_EXE + ruff + docguard
+  clean) + RUNTIME_VERIFIED (the --inference-document capture
+  double-run byte-identical + the VLM eyeball: the pinned chips,
+  the preset row, the search field, the collapsible categories with
+  counts, the 9-member chain with states — the effective-state
+  presentation renders). DEFERRED: the session override layer,
+  capability discovery, the model-driven context awareness,
+  recent/frequent ordering, scenarios/recipes/hardware profiles,
+  custom preset persistence, seed's request scope, observability
+  feeds — each its own owner-gated row.
+- `inf-3..inf-N` — the inference continuation family (each row
   owner-gated, LLAMA_CPP_INFERENCE_CONTROL_LAW §21's ladder): the
-  capability groups + the workspace/preset/recipe layers above,
-  never one "advanced flags" bucket.
+  capability discovery + the context-aware/model-driven visibility +
+  the session/preset persistence layers above, never one "advanced
+  flags" bucket.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+
+- iter-240 · 2026-09-26 · inf2-full-chip-library (the owner's 2026-09-26 «Дорабатывай и доделывай по-человечески + далеко не все сэмплеры и настройки есть» call over the unsatisfactory inf-1 slice): the FULL control library (85 controls over the 15 reviewed categories — the complete sampling family + model/device/memory/loading/moe/cpu/chat-reasoning/structured/server/observability/speculative/rope/special/lora; every disabled/AUTO form the runtime's own literal) + the typed relation data (the mirostat effective_noop from the --help's own words, the temperature-0 deterministic noop, the family requires: DRY/Mirostat/dynatemp/adaptive/XTC/speculative/custom-template) + the 9-member chain (the inf-1 5-member profiles upgrade at load, the operator's order preserved) + the four §30 presets as transparent diff-previewed documents + the workspace pinning (the profile document's own workspace section, never a second store) + the DATA-DRIVEN Redot workspace (inference.gd rebuilt: the editors from the read document's own metadata, the rows building ON the read — inf-1's compose-before-read empty-groups bug repaired; the search/pinned/collapsible-category/advanced-rung regions; the carried-editor-values law) + the platform compile seam (SEMANTIC_FLAG_TABLE + build_semantic_command; compile_semantic field-keyed; build_server_command byte-stable; the 138-token duplicate-ownership guard) + the fake server's token-scan parse (argparse's short-flag clustering ate -mg as -m g) + D-220; 12 paths; 2344+9 (CI) / 2352+1 (REDOT_EXE — the inference capture green, VLM-verified composition) + ruff + docguard clean (zero core change, the LOG untouched)
 
 - iter-239 · 2026-09-25 · inf1-inference-control-slice (the owner's 2026-09-25 chip-workspace hand-off — the llama.cpp semantic inference-control layer as a NATIVE workbench capability): docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md ADMITTED (D-219 — Settings ≠ Inference Control, the three-layer split, the chip-as-semantic-runtime-control identity) + workbench/application/inference.py the semantic core (the control library 13 controls / 5 categories, the profile store, the deterministic resolver with the evidence-pinned relations, the compiled launch surface, the one-way migration) + the settings store's DEPLOYMENT slim (schema/2) + build_server_command's additive params (samplers ';', seed, fit, kv — the legacy command byte-stable) + the extra_args duplicate-ownership guard + the gateway family (inference.read/update) + chat's BASE re-point + the run document's REQUESTED/EFFECTIVE pair + inference.gd the Inference surface + the Chat projection + the Settings slim + the --inference-document proof injection; 26 paths (the 3–5 soft limit honestly over: the semantic core + the surface + the claim packet + the state docs, AGENTS §2.3); 2335+8 (CI) / 2343+1 (REDOT_EXE — the inference capture green, VLM-verified) + ruff + docguard clean (zero core change, the LOG untouched)
 
@@ -463,5 +509,3 @@ TEST_PLAN §9's claim packet)
 
 - iter-232 · 2026-09-25 · ki95-ki96-oled-repin (the owner's 2026-09-25 report — the CI-red cancellation test + «проводник опять сломался... я не могу папки открыть и модели не показывает языковые» + «цвет лучше взять темный под oled мониторы, но не синий такой убогий»): KI#95 the wb-9 cancellation test's single checkpoint() RACED the main thread's run.cancel — on a fast runner the worker passed the checkpoint before the cancel landed and the "unreachable" AssertionError closed the run FAILED (the honest registry truth for an unrequested abort; local green masked CI red — the test now polls the checkpoint until the cancel lands, bounded 20s, deterministic under any scheduling) + KI#96 the Models-surface scan latch retired (_models_requested froze the list after ONE scan — hand-dropped GGUF files never appeared; every surface entry re-scans now, §20's routine refresh) + theme@0.4 the OLED re-pin (D-213: the TRULY neutral ramp over #050505 — the Catppuccin navy tint and the blue accent retired with the owner's two named rejections — ONE teal accent #4cc9a6; values-only, every token name/pin unchanged; 21 contrast pairs measured, scripts/contrast_check.py) + the shell-contract pin updates (the latch ban + the theme@0.4/base/accent pins); 8 paths; 2285+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched)
 - iter-231 · 2026-09-25 · ci-unred-nav-variation (the owner's 2026-09-25 engine report — the nonexistent add_theme_type_variation call killing _ready at _build_nav_rail + the unused row warning — + the CI-red report «в прошлых двух итерациях как минимум у тебя тесты на репо проваливаются», runs 82–84 red since iter-227): KI#93 the launcher/gateway pipe chain's buffering owned by the chain itself (the gateway child rides -u, the supervisor line-buffers its own stdout, the test spawn strips PYTHONUNBUFFERED — the sandbox's global var had masked CI red: the bind line sat in the child's block buffer past the 90s boot probe, the launcher honestly reported failure while every local run stayed green) + KI#94 the NavButton wiring through the theme_type_variation PROPERTY (Redot 26.2 has no method form; the negative pin) + the dead row local removed; 7 paths; 2285+6 + ruff + docguard clean (verified in the standard AND the stripped-var env — the CI/owner condition; zero core change, zero pack change, the LOG untouched)
-- iter-230 · 2026-09-25 · wb-12-token-audit-chat-follow (the owner's «тема и UI все так же убоги, тема ужасная» + «в чате при получении сообщений от языковой модели => не происходит плавной прокрутки вниз» calls, the v5.2 plans pack the direction hand-off): theme@0.3 — the token audit per VISUAL_SYSTEM_UI §2/§3 (the neutral ramp re-pinned over the Catppuccin Mocha VALUE reference — the layered-luminance mechanism per §6, ONE accent #89b4fa, accent_deep retired, the NavButton type variation + styles/chip_busy) + the chat follow law (the tween over the scrollbar's float value never the int jump, the layout-settle await, the near-bottom gate so a reading owner is never yanked, the follow on every role, the bounded late-layout re-settle) + the GENERATING chip (§5's Chat matrix state made visible: pulsing dot AND label, §4's not-color-only) + test_shell_contract's theme@0.3/smooth-follow pins (+1 test); 10 paths; 2285+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched)
-

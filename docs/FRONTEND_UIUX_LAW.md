@@ -531,7 +531,15 @@ is the semantic generation-control WORKSPACE (under WORK); Chat
 carries only a COMPACT contextual projection of the same inference
 state + the link; the full control depth (chips, the sampler chain,
 the effective-state presentation) lives in Inference — Chat never
-holds its own hidden sampler settings.
+holds its own hidden sampler settings. inf-2's continuation (the
+LAW §15): the workspace's own regions — the preset row (transparent
+diff preview, never an opaque mode), the SEARCH field (name/flag/
+category), the pinned quick-access strip (reveals, never second
+editors), the collapsible context-aware categories (progressive
+disclosure — never a flat 100+ control wall) and the advanced rung;
+the control editors are DATA-DRIVEN over the read document's own
+metadata (the UI never re-encodes the vocabulary) and build ON the
+read (an offline surface stays honestly empty).
 
 AI-driven surfaces expose operational truth: `USER INPUT · SYSTEM/
 DEVELOPER POLICY · MODEL INPUT · RESOLVED CONFIGURATION · MODEL OUTPUT
