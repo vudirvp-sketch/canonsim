@@ -1,63 +1,48 @@
-Iteration: iter-241..243 (the `ssi` track, Phase 0+1 — the owner's
-2026-09-26 SSIEC-v3 control-plane call over the external
-software-semantic-integrity-engineering-control-v3.zip: integrate the
-governance package as a CONTROL PLANE over the repo + the phased
-strangler plan, never a runtime dependency): Phase 0 CLOSED (D-221,
-iter-241) — the architecture freeze, the eight public-contract
-surfaces confirmed at their standing owners and frozen for the
-initiative (the strangler phases move internal ownership only; the
-standing no-touch floor: core/log.py, core/rng.py, core/schema.py,
-the fold mechanics) + KI#99 opened (the shell's ui_state path
-DOUBLES workbench/ — the observed workbench/workbench/runtime/ tree;
-source-verified against Godot 4.4/Redot 26.2: globalize_path("res://")
-carries the trailing slash, the first of the three get_base_dir()
-calls consumes only it; KI#98's class; repro: live-mode + the
-reduced-motion toggle, any cwd — registered separately, may close
-earlier) + KI#98 deleted per the cleanup law. Phase 1 CLOSED (D-222,
-iter-242 + D-223, iter-243) — the READ-ONLY reference copy at
-docs/ssi/ (the 34-file package verbatim, md5 305952c1…; the placement
-via D-198's admission ladder, a top-level ssi/ REJECTED) +
-docs/ssi/SSI_OVERLAY.md the ONE authored file (the A–L block matrix
-onto the repo's existing mechanisms — AGENTS/STATUS-KI/DECISIONS/
-test_architecture/the stoplist test; the executable negative-rules
-subset; the PCC + deletion-card forms; the phase ladder) + the risk
-ladder R0–R5 as AGENTS.md §2.9 (a refinement of the 3–5-file soft
-limit: R0–R2 zero bureaucracy, R3+ self-declares the class tag and
-carries the compact PCC record in the DECISIONS row) + the EXECUTABLE
-checks over the two existing instruments (never a new tool):
-SSI-N001/N002 in test_architecture.py (the wall-clock/entropy import
-ban across the canonical kernel — INV-2's static surface widened from
-the bare random monopoly; the admission-closure check — every
-PACKAGE_DIR carries its NAV §1 owner row, the sim/ row landed with
-it) + SSI-N006/N007/N010/N017/N018 in docguard.py (the block matrix
-complete + the closed state vocabulary + the explicit waive/skip
-laws + the declared eight with instruments-on-disk + the phase
-ladder owner-gated with N018's evidence bar + the R3+ PCC fields +
-the AGENTS ladder pin) with 7 crafted-breach tests; N018/N020's full
-forms OPEN by design — they fire with their phases (ssi-3/Phase 2,
-ssi-8/Phase 7), never a silent skip.
+Iteration: iter-244 (the `ssi` track, Phase 2 — the owner's
+2026-09-26 go-ahead over the ssi-3 row: the ownership/topology
+audit): D-224 — the machine-readable map at docs/SSI_TOPOLOGY.md
+(owner/reads/writes/emits for all 82 core/+workbench/ Python
+modules; the mechanical columns derived by the NEW
+scripts/topology.py — admitted per D-198, its named consumers
+ssi-4/ssi-5 + the N018 trajectory audit; `--audit` regenerates the
+full JSON at any HEAD, `--check` drift-pins the inventory + owners +
+the watchlist rows' reads/emits, tests/test_topology.py the 7-test
+claim packet) + the co-change audit over the last 150 commits
+(iter-90..HEAD): the line-count hypotheses CONFIRMED exactly
+(loop 1714 / director 1419 / worldgen 1388 / intent 1080 / inference
+2511); loop.py↔pack.py IS the #1 code pair numerically (11
+co-changes, lift 9.07, Jaccard 0.69) but the coupling is HISTORICAL —
+all 11 commits in iter-90..168 (the add-a-system era), both files
+dormant since, pack.py already decomposed 3990→290 via core/packlint
+— ssi-5's core scope SHRINKS on the refuted live coupling (core/
+dormant ~75 iterations) while ssi-4's target (inference.py: born
+2511 lines in two iterations, single in-repo dep) is CONFIRMED the
+active hotspot; N018 VERIFIED (the trajectory audit is the
+executable, never a snapshot) + the overlay updates (block B
+VERIFIED, N018 VERIFIED, phase 2 CLOSED) + KI#99 untouched (its own
+row).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
 P2 continuation, the ssi phases 2..7 the new owner-gated family) +
 the world track + the SoW horizon, ROADMAP §2/§6) ·
-2353 passed + 9 skipped, ruff clean, docguard clean (Python 3.12.14,
+2360 passed + 9 skipped, ruff clean, docguard clean, topology --check
+clean (Python 3.12.14,
 the env pin; the REDOT_EXE-gated visual packets not run this session
 — no engine binary in the sandbox; the doc/lint-only delta touches
 zero .gd and zero runtime code, the D-093 skips unaffected) ·
 Date: 2026-09-26 ·
-Scope: docs/ssi/** (the 34-file reference copy + SSI_OVERLAY.md) +
-AGENTS.md (§2.9 the risk ladder) + tests/test_architecture.py (N001/
-N002) + scripts/docguard.py (the SSI shape families + 2 allowlist
-rows) + tests/test_docguard.py (the fixture + 7 breach tests) +
-docs/AGENT_NAVIGATION.md (§1/§2/§3 + the sim/ row) +
-docs/{TASKS.md,DECISIONS.md} + STATUS.md + worklog.md — 45+ paths
-(the reference copy one unit; the 3–5 soft limit honestly over, the
-iter-239 doc-admission precedent); zero functional change, zero core
-change, the LOG untouched.
-Track A: the ssi family the new head (Phase 0+1 CLOSED at
-iter-241..243, D-221/D-222/D-223 — Phases 2..7 each owner-gated,
-TASKS ssi-3..ssi-8); the inf family behind (iter-240 the full chip
+Scope: docs/SSI_TOPOLOGY.md (new, the map) + scripts/topology.py
+(new, the audit instrument) + tests/test_topology.py (new, the drift
+pin + 6 crafted breaches) + docs/ssi/SSI_OVERLAY.md (block B, N018,
+the phase ladder) + docs/{TASKS.md,DECISIONS.md} +
+docs/AGENT_NAVIGATION.md (the routing row) + STATUS.md + worklog.md
+— 8 paths; zero functional change, zero core change, the LOG
+untouched.
+Track A: the ssi family the head (Phase 2 CLOSED at iter-244, D-224
+— the map + the co-change/trajectory audit; Phase 3 (ssi-4) next on
+the owner's go-ahead, ssi-5's scope SHRUNK on the audit; TASKS
+ssi-4..ssi-8); the inf family behind (iter-240 the full chip
 library, 239 the inf-1 slice; inf-3+ the owner-gated continuation);
 the obs family behind (iter-236 obs-2, 235 obs-1, 234 ux-1); the wb
 family behind: iter-238 the KI#98 URL fix, 237 the corpus re-homing.
@@ -99,7 +84,7 @@ The detail lives in the worklog + git.
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
 - - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference.py; the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9).**
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference.py; the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
 - **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -121,29 +106,32 @@ The detail lives in the worklog + git.
 
 ## Next step
 
-**iter-243 DONE: the SSI control plane Phase 0+1 LANDED (the owner's
-2026-09-26 SSIEC-v3 call — the read-only reference copy at docs/ssi/ +
-the overlay + the risk ladder AGENTS §2.9 + the eight executable
-negative rules over the two existing instruments; 2353+9 + ruff +
-docguard clean, zero functional change). iter-241 DONE: D-221 the
-architecture freeze + KI#99. iter-242 DONE: D-222 the foundation.**
+**iter-244 DONE: Phase 2 the ownership/topology audit CLOSED (D-224
+— docs/SSI_TOPOLOGY.md the 82-module map + scripts/topology.py the
+instrument + the co-change/trajectory verdicts; 2360+9 + ruff +
+docguard + topology --check clean, zero functional change).
+iter-241..243 DONE: Phase 0+1 (D-221/D-222/D-223).**
 
-1. The ssi family (each phase its own owner-gated row, TASKS ssi-3..
-   ssi-8; the phase law: docs/ssi/SSI_OVERLAY.md §6): **ssi-3 (Phase
-   2, the ownership/topology audit) opens NEXT — on the owner's
-   explicit go-ahead**: the machine-readable map (owner/reads/writes/
-   emits/change-coupling) over core/ + workbench/, RE-VERIFYING the
-   external analysis's hypotheses (core/loop.py ~1714 lines,
-   core/director.py ~1419, core/worldgen.py ~1388, core/intent.py
-   ~1080, workbench/application/inference.py ~2511, the
-   loop.py↔pack.py co-change over the last 150 commits) — confirmed =
-   the material_gap that opens ssi-5 (the core strangler); refuted =
-   that scope shrinks; N018's law: co-change/trajectory evidence,
-   never a line-count snapshot. What Phase 2 needs from the owner:
-   the go-ahead call alone (zero code lands before it). KI#99 (the
-   ui_state path doubling) may close earlier — its own row, its own
-   fix iteration (one more get_base_dir() or a gateway-side path
-   hand-in).
+1. The ssi family (each phase its own owner-gated row, TASKS
+   ssi-4..ssi-8; the phase law: docs/ssi/SSI_OVERLAY.md §6; the
+   evidence base: docs/SSI_TOPOLOGY.md): **ssi-4 (Phase 3, the
+   workbench/application/inference.py split) opens NEXT — on the
+   owner's explicit go-ahead**: the audit CONFIRMED it the active
+   hotspot (2511 lines born in two iterations, single in-repo dep —
+   the gateway's op registration) and the split's semantic owners
+   are already named (the LAW's three-layer split,
+   LLAMA_CPP_INFERENCE_CONTROL_LAW §2 — never an external template);
+   each split step an R2/R3 iteration with its PCC record, the
+   gateway operations (inference.read/update) byte-stable. What
+   Phase 3 needs from the owner: the go-ahead call alone (zero code
+   lands before it). **ssi-5 (Phase 4, the core strangler) scope
+   SHRUNK by the audit** — the sizes stand, the live coupling is
+   refuted (core dormant ~75 iterations; the loop↔pack pair
+   historical, pack already decomposed via packlint) — it stays
+   owner-gated and opens only on a fresh material_gap, never the
+   line-count snapshot (N018). KI#99 (the ui_state path doubling)
+   may close earlier — its own row, its own fix iteration (one more
+   get_base_dir() or a gateway-side path hand-in).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
