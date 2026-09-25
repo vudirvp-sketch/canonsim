@@ -35,6 +35,16 @@
   (2026-09-10, `5f13f7f`) through HEAD. Refresh recipe:
   `python scripts/topology.py --audit` (full JSON) — paste the changed
   rows' mechanical columns back here in the same iteration.
+  **Map refresh iter-247** (ssi-4 step 1): the watchlist module
+  `workbench/application/inference.py` (2511 lines) became the
+  `workbench/application/inference/` package — the rows below
+  carry the live derivation at each split step's HEAD (refreshed at
+  iter-248 step 2 and iter-249 step 3 — the split COMPLETE: the pure
+  facade + ten owner modules, the ops deriving at operations.py);
+  the §3 trajectory
+  row stays the PRE-SPLIT record (audit-time, BASE-pinned), the
+  watchlist successor is the package facade `__init__.py` (the
+  public-surface seam).
 - **Independently re-verified** (iter-245, the owner's verification
   session, a fresh clone): every recorded figure reproduces EXACTLY at
   the recorded BASE — the inclusive last-150 window (loop↔pack co=11,
@@ -63,7 +73,7 @@
 
 ## 1. The map (the machine-readable table)
 
-watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, workbench/application/inference.py, core/pack.py
+watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, workbench/application/inference/__init__.py, core/pack.py
 
 | module | owner | lines | reads | writes | emits |
 |---|---|---|---|---|---|
@@ -134,10 +144,20 @@ watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, wor
 | workbench/application/clock.py | the AppClock (app §17) | 108 | — | — | — |
 | workbench/application/directories.py | the §16 directory roles | 189 | — | — | — |
 | workbench/application/identity.py | the install identity (app §9) | 263 | — | — | — |
-| workbench/application/inference.py | the inference-control semantic core (LLAMA_CPP_INFERENCE_CONTROL_LAW, D-219/D-220) — ssi-4's target | 2511 | workbench/api/gateway.py | — | inference.read, inference.update |
+| workbench/application/inference/__init__.py | the inference-control facade — the PURE re-export shell, the byte-stable public import surface (LLAMA_CPP_INFERENCE_CONTROL_LAW, D-219/D-220; ssi-4 COMPLETE iter-247/248/249) | 176 | workbench/application/inference/chain.py, workbench/application/inference/compiled.py, workbench/application/inference/library.py, workbench/application/inference/migration.py, workbench/application/inference/operations.py, workbench/application/inference/presets.py, workbench/application/inference/profile.py, workbench/application/inference/relations.py, workbench/application/inference/resolver.py, workbench/application/inference/store.py | — | — |
+| workbench/application/inference/chain.py | the sampler chain membership/order semantics (the LAW §11) | 57 | workbench/application/inference/library.py | — | — |
+| workbench/application/inference/compiled.py | the compiled semantic document — the platform seam's input vocabulary (the LAW §13) | 39 | workbench/application/inference/library.py, workbench/application/inference/profile.py | — | — |
+| workbench/application/inference/library.py | the semantic-control model + the 85-control library data (the LAW §3 atom, the form vocabularies, the indexes) | 1118 | — | — | — |
+| workbench/application/inference/migration.py | the one-way settings/1 → settings/2 + inference/1 migration (the composition boot) | 159 | workbench/application/inference/library.py, workbench/application/inference/profile.py, workbench/application/inference/store.py | — | — |
+| workbench/application/inference/operations.py | the inference gateway family + the chat BASE-temperature provider (the LAW §17, app §6.1 wiring) | 168 | workbench/api/gateway.py, workbench/application/inference/library.py, workbench/application/inference/resolver.py, workbench/application/inference/store.py | — | inference.read, inference.update |
+| workbench/application/inference/presets.py | the four §30 transparent presets (the LAW §14) | 116 | — | — | — |
+| workbench/application/inference/profile.py | the typed profile document + its acceptance laws (the LAW §6 input, app §19.1 BASE layer) | 252 | workbench/application/inference/chain.py, workbench/application/inference/library.py | — | — |
+| workbench/application/inference/relations.py | the typed relation data (the LAW §12) | 174 | — | — | — |
+| workbench/application/inference/resolver.py | the effective-state resolver (the LAW §6/§8: STATES + resolve + the chain-item states) | 269 | workbench/application/inference/chain.py, workbench/application/inference/library.py, workbench/application/inference/presets.py, workbench/application/inference/profile.py, workbench/application/inference/relations.py | — | — |
+| workbench/application/inference/store.py | the inference-profile store + the SCHEMA tag (the persistence owner, app §16/§19.1) | 245 | workbench/application/inference/chain.py, workbench/application/inference/library.py, workbench/application/inference/profile.py | — | — |
 | workbench/application/operations/__init__.py | the operations package root (wb-5) | 34 | — | — | — |
 | workbench/application/operations/backend.py | the backend family: chat.send + model.load/unload/states (wb-6, D-203) | 952 | workbench/api/gateway.py, workbench/application/operations/execution.py, workbench/application/operations/lifecycles.py, workbench/application/operations/models.py | — | chat.send, model.load, model.states, model.unload |
-| workbench/application/operations/composition.py | the single wiring owner (app §6.1, wb-5/D-202) | 527 | workbench/api/gateway.py, workbench/application/clock.py, workbench/application/inference.py, workbench/application/operations/backend.py, workbench/application/operations/execution.py, workbench/application/operations/models.py, workbench/application/operations/observatory.py, workbench/application/settings.py | — | model.digest, model.inspect, model.list, run.cancel, run.get, run.start |
+| workbench/application/operations/composition.py | the single wiring owner (app §6.1, wb-5/D-202) | 527 | workbench/api/gateway.py, workbench/application/clock.py, workbench/application/inference/__init__.py, workbench/application/operations/backend.py, workbench/application/operations/execution.py, workbench/application/operations/models.py, workbench/application/operations/observatory.py, workbench/application/settings.py | — | model.digest, model.inspect, model.list, run.cancel, run.get, run.start |
 | workbench/application/operations/execution.py | the deadline + cancellation + run registry (app §12) | 702 | workbench/application/artifact.py, workbench/application/clock.py, workbench/application/identity.py, workbench/application/operations/lifecycles.py | — | — |
 | workbench/application/operations/lifecycles.py | the four closed state machines (app §11) | 247 | — | — | — |
 | workbench/application/operations/models.py | the model discovery + fetch/import (wb-9/wb-10, D-208/D-209) | 627 | workbench/api/gateway.py, workbench/application/operations/execution.py | — | model.fetch, model.import |
@@ -192,7 +212,7 @@ split, and DORMANT at HEAD. The remaining loop.py partner (intent.py,
 | core/director.py | 1419 | 1272 | +147 | 1419 | 2 | 14 | iter-107 (2026-09-12) |
 | core/worldgen.py | 1388 | 1183 | +205 | 1388 | 1 | 6 | iter-145 (2026-09-19) |
 | core/intent.py | 1080 | 949 | +131 | 1080 | 6 | 17 | iter-169 (2026-09-21) |
-| workbench/application/inference.py | 2511 | 0 | +2511 | 2511 | 2 | 2 | iter-240 (2026-09-25) |
+| workbench/application/inference.py | 2511 | 0 | +2511 | 2511 | 2 | 2 | iter-240 (2026-09-25) — became the inference/ package at iter-247 (ssi-4 step 1); the row is the pre-split audit record |
 | core/pack.py | 290 | 3990 | −3700 | 290 | 13 | 59 | iter-168 (2026-09-21) |
 
 Readings: loop.py grew +67% in the window but ALL of it before
@@ -223,13 +243,20 @@ DORMANT; the live growth front is workbench, and Phase 3's target
 
 ## 5. What the map means for the phases (the consumers)
 
-- **ssi-4 (Phase 3, inference.py) — CONFIRMED as the first strangler
-  step** (on the owner's go-ahead): 2511 lines, born in two
+- **ssi-4 (Phase 3, the inference split) — COMPLETE iter-247/248/
+  249, the phase CLOSED** (the owner's go-ahead): 2511 lines, born in two
   iterations, single in-repo dependency (the gateway's op
   registration), and the LAW's own three-layer split
   (raw-capability/semantic-control/UI-projection,
   LLAMA_CPP_INFERENCE_CONTROL_LAW §2) already names the semantic
-  owners the split follows — never an external template.
+  owners the split follows — never an external template. The split
+  follows the packlint precedent (the proven decomposition method);
+  the public import surface and the gateway operations are
+  byte-stable, the watchlist successor is the package facade (the
+  DATA half out at step 1, the RESOLUTION half at step 2, the
+  PERSISTENCE/OPERATIONS half + the pure re-export facade at step 3
+  — 2511 lines became 10 owner modules + a 176-line facade, the ops
+  now deriving at their true owner operations.py).
 - **ssi-5 (Phase 4, the core strangler) — scope SHRINKS on this
   evidence** (the pre-registered rule: refuted coupling = shrink):
   the four god-objects' sizes stand, but their live coupling is

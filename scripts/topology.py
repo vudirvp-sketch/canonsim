@@ -51,15 +51,17 @@ REPO = Path(__file__).resolve().parents[1]
 MAP_DOC = REPO / "docs" / "SSI_TOPOLOGY.md"
 SCOPE_TOPS = ("core", "workbench")
 # The strangler watchlist (the ssi-3 hypotheses + the co-change
-# partner) — the ONLY rows whose reads+emits are hard-pinned by
-# --check: these files' topology must change DELIBERATELY (a map
-# update in the same iteration), never silently.
+# partner; iter-247: the ssi-4 step-1 split moved inference.py into
+# the inference/ package — the watchlist successor is the package's
+# facade, the public-surface seam) — the ONLY rows whose reads+emits
+# are hard-pinned by --check: these files' topology must change
+# DELIBERATELY (a map update in the same iteration), never silently.
 WATCHLIST = (
     "core/loop.py",
     "core/director.py",
     "core/worldgen.py",
     "core/intent.py",
-    "workbench/application/inference.py",
+    "workbench/application/inference/__init__.py",
     "core/pack.py",
 )
 IN_REPO_PREFIXES = ("core", "workbench", "sim", "brief", "render", "cli")

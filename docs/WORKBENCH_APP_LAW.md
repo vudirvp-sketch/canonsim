@@ -494,7 +494,7 @@ Backend-specific flags, server defaults and wire quirks stay in the
 adapter; generic Workbench types stay backend-neutral. §19.1 is the
 contract. **Settings ≠ Inference Control (inf-1):** the launch-
 settings store owns DEPLOYMENT only; the inference profile store
-(`workbench/application/inference.py`) owns the semantic
+(`workbench/application/inference/`, the package since ssi-4/iter-247) owns the semantic
 generation-control values — the llama.cpp chip model, its scopes,
 the sampler chain and the effective-state resolver route through
 LLAMA_CPP_INFERENCE_CONTROL_LAW FIRST, never a restatement here. Build-sensitive sampler surfaces (temperature, top-k, top-p,

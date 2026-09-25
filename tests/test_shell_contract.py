@@ -649,6 +649,60 @@ def test_the_reduced_motion_contract() -> None:
     )
 
 
+def test_the_ui_state_path_lands_in_the_runtime_root() -> None:
+    """KI#99 (CLOSED iter-246): globalize_path("res://") returns the
+    project root WITH a trailing slash (the engine's own "res://" replace
+    form), so a raw base-dir walk over the slash-terminated path counts
+    the slash as one level — the old three-call chain landed one level
+    short (<repo>/workbench) and the appended literal doubled workbench/
+    into the owner-observed workbench/workbench/runtime/ tree (KI#98's
+    class: re-appending a component the base already carries). The law
+    here: normalize the trailing slash FIRST, then walk EXACTLY the
+    project root's real depth (redot -> presentation -> workbench ->
+    repo root) — the count is DERIVED from project.godot's location, so
+    a moved project root turns this pin red, never a silent wrong path."""
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    block = shell_text.split("func _ui_state_path")[1].split("\nfunc ")[0]
+
+    # The appended literal: exactly ONE workbench component — the
+    # root-anchored runtime the launcher, the gateway and settings.json
+    # all agree on.
+    assert '"/workbench/runtime/ui_state.json"' in block
+    assert "/workbench/workbench/" not in block
+
+    # The trailing-slash normalization BEFORE the parent walk (both
+    # engine forms — with and without the slash — then land on the repo
+    # root; the raw extra get_base_dir fix would be slash-dependent).
+    code = "\n".join(
+        line
+        for line in block.splitlines()
+        if not line.strip().startswith("#")
+    )
+    assert 'ends_with("/")' in code and "substr" in code, (
+        "the base is normalized before the parent walk (KI#99's root "
+        "cause: the slash-terminated project root)"
+    )
+    assert code.index('ends_with("/")') < code.index("get_base_dir()"), (
+        "normalization must precede the walk"
+    )
+
+    # Exactly the REAL project-root depth — derived from the committed
+    # project.godot location, never a magic number.
+    depth = len(PROJECT.resolve().parent.relative_to(REPO).parts)
+    walked = code.count("get_base_dir()")
+    assert walked == depth, (
+        f"the parent walk is {walked} call(s), the Redot project root "
+        f"sits {depth} levels below the repo root — a mismatch lands "
+        "ui_state.json outside the sanctioned runtime root"
+    )
+
+    # The save path still materializes directories under the COMPUTED
+    # path (never a hardcoded foreign tree).
+    save_block = shell_text.split("func _save_ui_state")[1].split("\nfunc ")[0]
+    assert "DirAccess.make_dir_recursive_absolute" in save_block
+    assert "make_dir_recursive_absolute(path.get_base_dir())" in save_block
+
+
 def test_the_viewport_policy() -> None:
     """ux-1 (FRONTEND_UIUX_LAW §16): the fixed 1440x900 baseline gains its
     product contract — the min window floor (1152x700, the SMALL class),

@@ -64,7 +64,9 @@ SETTINGS  = persistent DEPLOYMENT/launch configuration (the
             extra_args hatch)  — workbench/application/settings.py
 INFERENCE = the semantic generation-control workspace (the chip
             library, the profile, the resolver, the compiled
-            surface) — workbench/application/inference.py
+            surface) — workbench/application/inference/ (the package
+            since ssi-4/iter-247; the facade __init__.py the public
+            import surface)
 ```
 
 The launch-settings store is the DEPLOYMENT half (schema
@@ -89,7 +91,7 @@ Single-owner routing (the whole table):
 | Concern | Owner |
 |---|---|
 | flag existence/syntax/values/defaults | the actual installed llama.cpp runtime (evidence: the reviewed snapshot; re-verify per §19) |
-| semantic control model/identity/relations/effective state | THIS LAW + `workbench/application/inference.py` |
+| semantic control model/identity/relations/effective state | THIS LAW + `workbench/application/inference/` (the package; ssi-4's split by the §2 semantic owners) |
 | deployment/launch persistence | `workbench/application/settings.py` (app §7.1) |
 | profile composition chain + REQUESTED/ACCEPTED/EFFECTIVE/OBSERVED/PRESENTED | `WORKBENCH_APP_LAW.md` §19.1 (never restated here) |
 | flag emission (the runtime translation) | `workbench/platform/llama_process.py` (the platform's typed surface — app §2's seam law) |

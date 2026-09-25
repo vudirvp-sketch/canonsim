@@ -351,8 +351,19 @@ func _resolve_locale(args: PackedStringArray, use_os_locale := true) -> String:
 func _ui_state_path() -> String:
         # UI-local state lives in the established runtime root
         # (workbench/runtime/ — settings.json/launcher.json's own home,
-        # gitignored, never a repo file).
+        # gitignored, never a repo file). KI#99: globalize_path("res://")
+        # returns the project root WITH a trailing slash (the engine's
+        # own "res://" replace form), and the base-dir walk over a
+        # slash-terminated path counts that slash as one level — the
+        # raw three-call chain landed one level short (<repo>/workbench)
+        # and the appended literal doubled workbench/ into the observed
+        # workbench/workbench/runtime/ tree (KI#98's class: the receiver
+        # re-appending a component the base already carries). Normalize
+        # the trailing slash FIRST, then walk EXACTLY three parents:
+        # redot -> presentation -> workbench -> the repo root.
         var base := ProjectSettings.globalize_path("res://")
+        while base.ends_with("/"):
+                base = base.substr(0, base.length() - 1)
         return base.get_base_dir().get_base_dir().get_base_dir() + "/workbench/runtime/ui_state.json"
 
 

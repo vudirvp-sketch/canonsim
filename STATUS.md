@@ -1,45 +1,45 @@
-Iteration: iter-245 (the `ssi` track, ssi-3's close — the owner's
-2026-09-26 verification call «вторую фазу вроде завершили»): the
-INDEPENDENT re-verification of the Phase 2 result (D-224) in a fresh
-session — every recorded figure reproduces EXACTLY at the recorded
-BASE_COMMIT 08300a0 (the inclusive last-150 window: loop↔pack co=11,
-touches 13/14, lift 9.07, J 0.69, all co-changes iter-90..168; the
-window-start sizes pack 3990 / loop 1024; the state-doc pairs 148/144;
-the line counts 1714/1419/1388/1080/2511; 82 modules; the god-objects'
-last touches iter-168/107/145/169) + two R0 doc precisions landed:
-the D-224 ID-column completion in DECISIONS.md (the compound row
-carried the record, the ID list stopped at D-223 — citations now
-resolve per the file's own law) and the dormancy wording made
-god-object-precise (core/'s post-iter-169 touches are exactly three
-gloss/lint commits — iter-191/199 economy.py, iter-200
-packlint/actions.py — the directory-level «~75 iterations» claim was
-loose; the verdict REFUTED unchanged).
+Iteration: iter-249 (the `ssi` track, ssi-4/Phase 3 step 3 — the
+owner's 2026-09-26 «ssi4 вроде открыть можно» call): PHASE 3
+CLOSED — the PERSISTENCE/OPERATIONS half out of the facade: store.py
+(SCHEMA + the InferenceStore: load-loud / current / update-atomic /
+persist), migration.py (the one-way settings/1 → settings/2 +
+inference/1 migration), operations.py (the gateway family
+inference.read/update + effective_temperature — the ops now deriving
+at their TRUE owner; the map shows them there), compiled.py
+(compile_semantic, the platform seam's field-keyed input) extracted
+verbatim; the facade = the PURE re-export shell (176 lines: the
+docstring + the re-exports + __all__). The split COMPLETE: 2511
+lines → 10 owner modules + the facade, zero behavior change across
+the three steps, the public import surface + the gateway operations
++ the test claim packet byte-stable throughout
+(tests/test_inference.py untouched since iter-240; 2361+9 at every
+step). The drift-pin test re-pinned to the emission-free facade (an
+op re-added there = RED — the pure-shell law is now executable).
+D-227 carries the (R3) PCC record; the overlay's phase row →
+CLOSED.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
-P2 continuation, the ssi phases 2..7 the new owner-gated family) +
-the world track + the SoW horizon, ROADMAP §2/§6) ·
-2360 passed + 9 skipped, ruff clean, docguard clean, topology --check
-clean (Python 3.12.14,
-the env pin; the REDOT_EXE-gated visual packets not run this session
-— no engine binary in the sandbox; the doc/lint-only delta touches
-zero .gd and zero runtime code, the D-093 skips unaffected) ·
+(Phase 3 of the ssi initiative now CLOSED; the next phase the owner's
+call — see Next step) + the world track + the SoW horizon, ROADMAP
+§2/§6) ·
+2361 passed + 9 skipped, ruff clean, docguard clean, topology --check
+clean (Python 3.12.14, the env pin; the REDOT_EXE-gated visual packets
+not run this session — no engine binary in the sandbox; the .gd layer
+untouched since iter-246, the D-093 skips unaffected) ·
 Date: 2026-09-26 ·
-Scope: docs/DECISIONS.md (the ID column + the D-224 precision) +
-docs/SSI_TOPOLOGY.md (§0 the re-verification record + §4 the verdict
-precision) + docs/TASKS.md (the ssi-3 row + the ledger line, iter-234
-evicted) + STATUS.md + worklog.md (iter-235 evicted) — 5 paths; zero
-functional change, zero core change, the LOG untouched (doc-only, the
-D-022 two-doc-iterations exception: the owner's fresh verification
-request fired it).
-Track A: the ssi family the head (Phase 2 CLOSED at iter-244 and
-CONFIRMED by the iter-245 independent re-verification — every figure
-reproduced; Phase 3 (ssi-4) next on the owner's go-ahead, ssi-5's
-scope SHRUNK on the audit; TASKS ssi-4..ssi-8); the inf family behind
-(iter-240 the full chip library, 239 the inf-1 slice; inf-3+ the
-owner-gated continuation); the obs family behind (iter-236 obs-2, 235
-obs-1, 234 ux-1); the wb family behind: iter-238 the KI#98 URL fix,
-237 the corpus re-homing. The detail lives in the worklog + git.
+Scope: workbench/application/inference/{__init__.py (the pure
+facade), store.py, migration.py, operations.py, compiled.py (new)} +
+tests/test_topology.py (the re-pinned breach) + docs/{SSI_TOPOLOGY.md
+(the final rows), ssi/SSI_OVERLAY.md (phase 3 CLOSED), DECISIONS.md
+(D-227), TASKS.md (ssi-4 DONE + the ledger)} + STATUS.md + worklog.md
+— 10 paths; zero behavior change, zero core change, the LOG
+untouched.
+Track A: the ssi family the head (Phase 3 CLOSED at iter-249; ssi-5
+shrunk and owner-gated, ssi-6/7/8 owner-gated — the ladder's tail);
+the inf family behind (iter-240 the full chip library); the obs
+family behind (iter-236 obs-2, 235 obs-1, 234 ux-1); the wb family
+behind: iter-237 the corpus re-homing. The detail lives in the
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -67,8 +67,7 @@ obs-1, 234 ux-1); the wb family behind: iter-238 the KI#98 URL fix,
 
 ## Active KIs
 
-- KI#99 · the shell's ui_state path DOUBLES workbench/ (the owner's observed `workbench/workbench/runtime/` tree): `ProjectSettings.globalize_path("res://")` returns the project root WITH the trailing slash (Godot 4.4/Redot 26.2 source: `"res://".replace("res:/", resource_path)`), so the FIRST of `_ui_state_path()`'s three `get_base_dir()` calls consumes only the slash, the chain lands one level short, and the appended literal `"/workbench/runtime/…"` doubles onto the still-present `workbench` component — KI#98's exact class (the receiver re-appends a component the base already carries); `_save_ui_state`'s `make_dir_recursive` creates the doubled tree · 2026-09-26 ·
-  Repro: Workbench.bat in LIVE mode (proof mode early-returns; any cwd — the Redot child runs cwd=repo-root, the path is res://-anchored) → Settings→Interface→toggle reduced motion → the doubled tree appears with ui_state.json inside it (the root-anchored `workbench/runtime/` gitignore does NOT cover it — empty dirs are simply invisible to git). Fix candidate: one more `get_base_dir()` or a gateway-side path hand-in; NOT fixed in ssi-1/2 (registered separately, may close earlier).
+- KI#99 · the shell's ui_state path DOUBLED workbench/ (the base-dir walk counted globalize_path's trailing slash as a level; KI#98's class) · 2026-09-26 · CLOSED iter-246 (normalize the slash + walk the real depth, the pin derives the depth from project.godot's location — worklog iter-246 the detail; the doubled tree on the owner's disk is untracked gitignored — hand-delete)
 
 ## FAQ / Pitfalls
 
@@ -77,7 +76,7 @@ obs-1, 234 ux-1); the wb family behind: iter-238 the KI#98 URL fix,
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
 - - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference.py; the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference/ (the package since ssi-4); the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
 - **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -99,36 +98,40 @@ obs-1, 234 ux-1); the wb family behind: iter-238 the KI#98 URL fix,
 
 ## Next step
 
-**iter-245 DONE: the Phase 2 verification — every D-224 figure
-independently reproduced at the recorded BASE (fresh session, own
-tooling); two R0 precisions landed (the D-224 ID column in DECISIONS,
-the god-object-precise dormancy wording); 2360+9 + ruff + docguard +
-topology --check clean, zero functional change.
-iter-244 DONE: Phase 2 the ownership/topology audit CLOSED (D-224
-— docs/SSI_TOPOLOGY.md the 82-module map + scripts/topology.py the
-instrument + the co-change/trajectory verdicts).
-iter-241..243 DONE: Phase 0+1 (D-221/D-222/D-223).**
+**iter-249 DONE: ssi-4/Phase 3 CLOSED — the inference split complete
+(2511 → 10 owner modules + the 176-line pure facade; the public
+surface / the gateway ops / the claim packet byte-stable; the pure-
+shell law executable — an op re-added to the facade goes RED);
+D-225/D-226/D-227 the PCC records. 2361+9 + ruff + docguard +
+topology --check clean.**
+iter-246 DONE: KI#99 CLOSED (the ui_state path fix).
+iter-241..245 DONE: the ssi foundation + Phase 2 (D-221..D-224).
 
-1. The ssi family (each phase its own owner-gated row, TASKS
-   ssi-4..ssi-8; the phase law: docs/ssi/SSI_OVERLAY.md §6; the
-   evidence base: docs/SSI_TOPOLOGY.md): **ssi-4 (Phase 3, the
-   workbench/application/inference.py split) opens NEXT — on the
-   owner's explicit go-ahead**: the audit CONFIRMED it the active
-   hotspot (2511 lines born in two iterations, single in-repo dep —
-   the gateway's op registration) and the split's semantic owners
-   are already named (the LAW's three-layer split,
-   LLAMA_CPP_INFERENCE_CONTROL_LAW §2 — never an external template);
-   each split step an R2/R3 iteration with its PCC record, the
-   gateway operations (inference.read/update) byte-stable. What
-   Phase 3 needs from the owner: the go-ahead call alone (zero code
-   lands before it). **ssi-5 (Phase 4, the core strangler) scope
-   SHRUNK by the audit** — the sizes stand, the live coupling is
-   refuted (the god-objects dormant 75+ iterations — core/'s last
-   touch the iter-200 lint guard; the loop↔pack pair historical, pack
-   already decomposed via packlint) — it stays owner-gated and opens
-   only on a fresh material_gap, never the line-count snapshot (N018). KI#99 (the ui_state path doubling)
-   may close earlier — its own row, its own fix iteration (one more
-   get_base_dir() or a gateway-side path hand-in).
+1. The ssi family — the next phase is the OWNER's call (the phase
+   law: docs/ssi/SSI_OVERLAY.md §6; the evidence base:
+   docs/SSI_TOPOLOGY.md), what each needs:
+   - **ssi-5 (Phase 4, the core strangler)** — scope SHRUNK by the
+     ssi-3 audit: the god-objects are dormant (the live coupling
+     REFUTED, pack already decomposed); it opens ONLY on a fresh
+     material_gap (co-change/trajectory evidence at a named pain),
+     never a line-count snapshot (N018). What it needs from the
+     owner: either the fresh evidence (a real co-change pain in
+     core/) or the explicit skip — the phase may never open.
+   - **ssi-6 (Phase 5, the canonical read seam)** — the consumer set
+     is named by the map (scene_build.py / observatory_read.py /
+     scene_ir.py — the three workbench read-side modules importing
+     core/ directly); INV-4's «exactly N sanctioned modules» pattern
+     is the design. What it needs from the owner: the go-ahead call
+     alone.
+   - **ssi-7 (Phase 6, the semantic diff layer over T1)** — an
+     ADDITIONAL verification layer (event ids/types/causes/actors/
+     targets/RNG-fingerprint, interpreter/line-ending independent),
+     never a T1 «bug fix». What it needs from the owner: the
+     go-ahead call.
+   - **ssi-8 (Phase 7, the GC pass)** — the deletion-card sweep
+     (N020; KI#99's doubled tree a named candidate — already
+     hand-deletable). What it needs from the owner: the go-ahead
+     call.
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
@@ -155,3 +158,4 @@ iter-241..243 DONE: Phase 0+1 (D-221/D-222/D-223).**
    the re-weigh's SALE, the shave's temporal placement, the SoW
    horizon (bg-6, owner-deferred — long-parked per the owner's
    2026-09-21 call). New rows enter on the owner's call only.
+

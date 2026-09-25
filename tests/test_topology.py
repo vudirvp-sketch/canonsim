@@ -124,23 +124,33 @@ def test_watchlist_reads_drift_is_loud(
 def test_watchlist_emits_drift_is_loud(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    monkeypatch.setattr(
-        topology,
-        "MAP_DOC",
-        _write_mutated(
-            tmp_path,
-            "| workbench/application/inference.py | the inference-control "
-            "semantic core (LLAMA_CPP_INFERENCE_CONTROL_LAW, D-219/D-220) "
-            "— ssi-4's target | 2511 | workbench/api/gateway.py | — | "
-            "inference.read, inference.update |",
-            "| workbench/application/inference.py | the inference-control "
-            "semantic core (LLAMA_CPP_INFERENCE_CONTROL_LAW, D-219/D-220) "
-            "— ssi-4's target | 2511 | workbench/api/gateway.py | — | "
-            "inference.read |",
-        ),
+    """iter-249 (ssi-4 step 3): the watchlist member is the package
+    facade `workbench/application/inference/__init__.py` — the PURE
+    re-export shell, emissions-free by law (the ops derive at their
+    true owner operations.py). The crafted breach re-adds an op to
+    the facade's emits cell (the exact regression the split forbids)
+    and must go RED; the row anchor is the row PREFIX (stable)."""
+    row = next(
+        ln
+        for ln in MAP_TEXT.splitlines()
+        if ln.startswith("| workbench/application/inference/__init__.py |")
     )
+    mutated = MAP_TEXT.replace(
+        row,
+        row.replace("| — | — |", "| — | inference.read |", 1),
+        1,
+    )
+    assert mutated != MAP_TEXT, (
+        "fixture anchor missing: the facade row's emits cell is no "
+        "longer the emission-free form"
+    )
+    path = tmp_path / "SSI_TOPOLOGY.md"
+    path.write_text(mutated, encoding="utf-8")
+    monkeypatch.setattr(topology, "MAP_DOC", path)
     violations = topology.run_check()
     assert any(
-        v.startswith("watchlist emits drift: workbench/application/inference.py")
+        v.startswith(
+            "watchlist emits drift: workbench/application/inference/__init__.py"
+        )
         for v in violations
     )
