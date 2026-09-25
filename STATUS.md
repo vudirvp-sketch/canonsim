@@ -1,26 +1,19 @@
-Iteration: iter-244 (the `ssi` track, Phase 2 — the owner's
-2026-09-26 go-ahead over the ssi-3 row: the ownership/topology
-audit): D-224 — the machine-readable map at docs/SSI_TOPOLOGY.md
-(owner/reads/writes/emits for all 82 core/+workbench/ Python
-modules; the mechanical columns derived by the NEW
-scripts/topology.py — admitted per D-198, its named consumers
-ssi-4/ssi-5 + the N018 trajectory audit; `--audit` regenerates the
-full JSON at any HEAD, `--check` drift-pins the inventory + owners +
-the watchlist rows' reads/emits, tests/test_topology.py the 7-test
-claim packet) + the co-change audit over the last 150 commits
-(iter-90..HEAD): the line-count hypotheses CONFIRMED exactly
-(loop 1714 / director 1419 / worldgen 1388 / intent 1080 / inference
-2511); loop.py↔pack.py IS the #1 code pair numerically (11
-co-changes, lift 9.07, Jaccard 0.69) but the coupling is HISTORICAL —
-all 11 commits in iter-90..168 (the add-a-system era), both files
-dormant since, pack.py already decomposed 3990→290 via core/packlint
-— ssi-5's core scope SHRINKS on the refuted live coupling (core/
-dormant ~75 iterations) while ssi-4's target (inference.py: born
-2511 lines in two iterations, single in-repo dep) is CONFIRMED the
-active hotspot; N018 VERIFIED (the trajectory audit is the
-executable, never a snapshot) + the overlay updates (block B
-VERIFIED, N018 VERIFIED, phase 2 CLOSED) + KI#99 untouched (its own
-row).
+Iteration: iter-245 (the `ssi` track, ssi-3's close — the owner's
+2026-09-26 verification call «вторую фазу вроде завершили»): the
+INDEPENDENT re-verification of the Phase 2 result (D-224) in a fresh
+session — every recorded figure reproduces EXACTLY at the recorded
+BASE_COMMIT 08300a0 (the inclusive last-150 window: loop↔pack co=11,
+touches 13/14, lift 9.07, J 0.69, all co-changes iter-90..168; the
+window-start sizes pack 3990 / loop 1024; the state-doc pairs 148/144;
+the line counts 1714/1419/1388/1080/2511; 82 modules; the god-objects'
+last touches iter-168/107/145/169) + two R0 doc precisions landed:
+the D-224 ID-column completion in DECISIONS.md (the compound row
+carried the record, the ID list stopped at D-223 — citations now
+resolve per the file's own law) and the dormancy wording made
+god-object-precise (core/'s post-iter-169 touches are exactly three
+gloss/lint commits — iter-191/199 economy.py, iter-200
+packlint/actions.py — the directory-level «~75 iterations» claim was
+loose; the verdict REFUTED unchanged).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
@@ -32,21 +25,21 @@ the env pin; the REDOT_EXE-gated visual packets not run this session
 — no engine binary in the sandbox; the doc/lint-only delta touches
 zero .gd and zero runtime code, the D-093 skips unaffected) ·
 Date: 2026-09-26 ·
-Scope: docs/SSI_TOPOLOGY.md (new, the map) + scripts/topology.py
-(new, the audit instrument) + tests/test_topology.py (new, the drift
-pin + 6 crafted breaches) + docs/ssi/SSI_OVERLAY.md (block B, N018,
-the phase ladder) + docs/{TASKS.md,DECISIONS.md} +
-docs/AGENT_NAVIGATION.md (the routing row) + STATUS.md + worklog.md
-— 8 paths; zero functional change, zero core change, the LOG
-untouched.
-Track A: the ssi family the head (Phase 2 CLOSED at iter-244, D-224
-— the map + the co-change/trajectory audit; Phase 3 (ssi-4) next on
-the owner's go-ahead, ssi-5's scope SHRUNK on the audit; TASKS
-ssi-4..ssi-8); the inf family behind (iter-240 the full chip
-library, 239 the inf-1 slice; inf-3+ the owner-gated continuation);
-the obs family behind (iter-236 obs-2, 235 obs-1, 234 ux-1); the wb
-family behind: iter-238 the KI#98 URL fix, 237 the corpus re-homing.
-The detail lives in the worklog + git.
+Scope: docs/DECISIONS.md (the ID column + the D-224 precision) +
+docs/SSI_TOPOLOGY.md (§0 the re-verification record + §4 the verdict
+precision) + docs/TASKS.md (the ssi-3 row + the ledger line, iter-234
+evicted) + STATUS.md + worklog.md (iter-235 evicted) — 5 paths; zero
+functional change, zero core change, the LOG untouched (doc-only, the
+D-022 two-doc-iterations exception: the owner's fresh verification
+request fired it).
+Track A: the ssi family the head (Phase 2 CLOSED at iter-244 and
+CONFIRMED by the iter-245 independent re-verification — every figure
+reproduced; Phase 3 (ssi-4) next on the owner's go-ahead, ssi-5's
+scope SHRUNK on the audit; TASKS ssi-4..ssi-8); the inf family behind
+(iter-240 the full chip library, 239 the inf-1 slice; inf-3+ the
+owner-gated continuation); the obs family behind (iter-236 obs-2, 235
+obs-1, 234 ux-1); the wb family behind: iter-238 the KI#98 URL fix,
+237 the corpus re-homing. The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -106,10 +99,14 @@ The detail lives in the worklog + git.
 
 ## Next step
 
-**iter-244 DONE: Phase 2 the ownership/topology audit CLOSED (D-224
+**iter-245 DONE: the Phase 2 verification — every D-224 figure
+independently reproduced at the recorded BASE (fresh session, own
+tooling); two R0 precisions landed (the D-224 ID column in DECISIONS,
+the god-object-precise dormancy wording); 2360+9 + ruff + docguard +
+topology --check clean, zero functional change.
+iter-244 DONE: Phase 2 the ownership/topology audit CLOSED (D-224
 — docs/SSI_TOPOLOGY.md the 82-module map + scripts/topology.py the
-instrument + the co-change/trajectory verdicts; 2360+9 + ruff +
-docguard + topology --check clean, zero functional change).
+instrument + the co-change/trajectory verdicts).
 iter-241..243 DONE: Phase 0+1 (D-221/D-222/D-223).**
 
 1. The ssi family (each phase its own owner-gated row, TASKS
@@ -126,10 +123,10 @@ iter-241..243 DONE: Phase 0+1 (D-221/D-222/D-223).**
    Phase 3 needs from the owner: the go-ahead call alone (zero code
    lands before it). **ssi-5 (Phase 4, the core strangler) scope
    SHRUNK by the audit** — the sizes stand, the live coupling is
-   refuted (core dormant ~75 iterations; the loop↔pack pair
-   historical, pack already decomposed via packlint) — it stays
-   owner-gated and opens only on a fresh material_gap, never the
-   line-count snapshot (N018). KI#99 (the ui_state path doubling)
+   refuted (the god-objects dormant 75+ iterations — core/'s last
+   touch the iter-200 lint guard; the loop↔pack pair historical, pack
+   already decomposed via packlint) — it stays owner-gated and opens
+   only on a fresh material_gap, never the line-count snapshot (N018). KI#99 (the ui_state path doubling)
    may close earlier — its own row, its own fix iteration (one more
    get_base_dir() or a gateway-side path hand-in).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on

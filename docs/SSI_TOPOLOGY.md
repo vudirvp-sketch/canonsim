@@ -35,6 +35,16 @@
   (2026-09-10, `5f13f7f`) through HEAD. Refresh recipe:
   `python scripts/topology.py --audit` (full JSON) — paste the changed
   rows' mechanical columns back here in the same iteration.
+- **Independently re-verified** (iter-245, the owner's verification
+  session, a fresh clone): every recorded figure reproduces EXACTLY at
+  the recorded BASE — the inclusive last-150 window (loop↔pack co=11,
+  touches 13/14, lift 9.07, J 0.69, all co-changes iter-90..168), the
+  window-start sizes (pack 3990, loop 1024), the state-doc pairs
+  (148/144), the line counts, the 82-module inventory, the god-objects'
+  last touches (168/107/145/169). Anchoring note for the next verifier:
+  the figures bind to BASE_COMMIT and the `git log -150` window is
+  INCLUSIVE of iter-90 — a HEAD anchor or an exclusive range shifts
+  every count by one (the trap this re-check itself hit first).
 - **Instruments' ±1**: the co-change matrix counts via
   `--name-only` (13 loop.py touches), the trajectories via
   `--numstat` (12) — merge-shaped commits list a file without numstat
@@ -203,7 +213,7 @@ family, zero functional change, the method Phase 4 would reuse.
 | core/intent.py ~1080 | 1080 exactly | CONFIRMED |
 | workbench/application/inference.py ~2511 | 2511 exactly | CONFIRMED |
 | loop.py↔pack.py co-change over the last 150 commits | the #1 code pair: 11 co-changes, lift 9.07, J 0.69 — but all in iter-90..168; dormant since; pack decomposed | CONFIRMED numerically / REFUTED as live coupling |
-| (implied) the core god-objects actively co-change now | core/ untouched for ≈ 75 iterations; the window's active pairs are workbench/tests (composition↔test_operations 6×, J 1.00) | REFUTED |
+| (implied) the core god-objects actively co-change now | the four god-objects + pack untouched since iter-107..169 (75+ iterations); core/'s post-iter-169 touches are exactly three gloss/lint commits (iter-191/199 the economy-gloss constants, iter-200 the packlint rename guard) — none a god-object (the iter-245 verification's precision: the directory-level claim was loose, the verdict unchanged); the window's active pairs are workbench/tests (composition↔test_operations 6×, J 1.00) | REFUTED |
 | (implied) inference.py is the actively-growing hotspot | born 2511 lines in 2 iterations, the newest surface, single in-repo dep (gateway) | CONFIRMED |
 
 The N018 conclusion: the line-count snapshot was accurate but its
