@@ -1,0 +1,196 @@
+version: '3.0'
+rules:
+- id: SSI-N001
+  name: no-hidden-effect
+  forbidden: IO/state/authority/timing effects hidden in local-looking code
+  enforcement:
+  - static-analysis
+  - review
+  - tests
+- id: SSI-N002
+  name: no-new-primitive-without-gap
+  required:
+  - real_consumer
+  - real_failure
+  - material_gap
+  - owner
+  - falsifier
+  enforcement:
+  - architecture-gate
+- id: SSI-N003
+  name: no-unbounded-agent-autonomy
+  required:
+  - capability_scope
+  - resource_scope
+  - approval_gate
+  - audit
+  enforcement:
+  - sandbox
+  - CI-gate
+- id: SSI-N004
+  name: no-unbounded-retry
+  required:
+  - budget
+  - idempotence_or_effect_proof
+  - observability
+  enforcement:
+  - static-analysis
+  - runtime-policy
+- id: SSI-N005
+  name: no-artifact-without-provenance
+  required:
+  - source
+  - inputs
+  - build
+  - artifact
+  enforcement:
+  - build-attestation
+- id: SSI-N006
+  name: no-silent-block-skip
+  required:
+  - state
+  - reason
+  enforcement:
+  - change-record-lint
+- id: SSI-N007
+  name: illegal-states-unrepresentable
+  forbidden: material invalid state encoded only as convention when type/state distinction
+    is practical
+  enforcement:
+  - type-system
+  - contract-test
+  - review
+- id: SSI-N008
+  name: no-unbounded-authority
+  forbidden: component receives more authority than operation requires
+  required:
+  - capability_scope
+  - owner
+  - revocation_or_expiry
+  enforcement:
+  - static-policy
+  - runtime-gate
+- id: SSI-N009
+  name: no-unproven-composition
+  forbidden: local proofs treated as system proof despite violated rely/guarantee/footprint
+    assumptions
+  required:
+  - assumptions
+  - guarantees
+  - footprint
+  - composition-check
+  enforcement:
+  - architecture-gate
+  - formal/review
+- id: SSI-N010
+  name: no-semantic-drift-without-delta
+  forbidden: behavior changes hidden behind textually small refactor
+  required:
+  - observational_surface
+  - semantic_diff
+  - tests
+  enforcement:
+  - semantic-analysis
+  - review
+- id: SSI-N011
+  name: no-unbounded-work-amplification
+  forbidden: one semantic action expands into uncontrolled retries/fanout/duplicate
+    work
+  required:
+  - work_budget
+  - fanout_budget
+  - retry_budget
+  - telemetry
+  enforcement:
+  - static-analysis
+  - runtime-policy
+- id: SSI-N012
+  name: no-unverified-tool-provider
+  forbidden: external tool server trusted from description alone
+  required:
+  - identity
+  - provenance
+  - capability_manifest
+  - version_pin
+  - audit
+  - revocation
+  enforcement:
+  - agent-gate
+- id: SSI-N013
+  name: no-material-claim-without-provenance
+  forbidden: AI rationale/report treated as evidence without source/effect trace
+  required:
+  - claim_type
+  - source
+  - transformation
+  - verifier
+  enforcement:
+  - claim-lint
+  - review
+- id: SSI-N014
+  name: no-single-oracle-for-material-claim
+  forbidden: material claim accepted from one shared implementation/oracle blind spot
+  required:
+  - independent_evidence_path
+  enforcement:
+  - review
+  - mutation
+  - runtime
+- id: SSI-N015
+  name: no-context-insufficient-agent-decision
+  forbidden: material agent action when required invariant/constraint set is outside
+    effective context
+  required:
+  - required_context
+  - available_context
+  - critical_constraints
+  enforcement:
+  - agent-gate
+- id: SSI-N016
+  name: no-irreversible-rollout-without-containment
+  forbidden: material change deployed without rollback, containment, or explicit justified
+    exception
+  required:
+  - rollback_or_containment
+  - runtime_signal
+  - stop_rule
+  enforcement:
+  - release-gate
+- id: SSI-N017
+  name: proof-carrying-change
+  forbidden: material change represented only by code diff
+  required:
+  - intent
+  - invariants
+  - semantic_delta
+  - verification
+  - provenance
+  - runtime_plan
+  enforcement:
+  - change-record-lint
+  - CI-gate
+- id: SSI-N018
+  name: no-architecture-health-from-snapshot
+  forbidden: snapshot metrics used as sole evidence of architectural health
+  required:
+  - trajectory_or_change_evidence
+  enforcement:
+  - architecture-gate
+- id: SSI-N019
+  name: no-liveness-without-progress-model
+  forbidden: eventual-success claim without fairness/resource/dependency assumptions
+  required:
+  - progress_assumptions
+  - stop_or_failure_condition
+  enforcement:
+  - formal/review
+- id: SSI-N020
+  name: no-deletion-without-constraint-recovery
+  forbidden: removal based only on apparent inactivity
+  required:
+  - consumer_absence
+  - authority_absence
+  - historical_constraint_check
+  - rollback_or_recovery
+  enforcement:
+  - gc-gate

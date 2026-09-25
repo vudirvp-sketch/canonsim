@@ -65,6 +65,21 @@ Two work tracks (`docs/ROADMAP.md` §1):
    invariant is admissible without a recorded failure; heavy machinery
    without evidence is not. Standing refusals: no `agentcheck.py`, no
    `.agents/skills/`, no second project memory, no nested AGENTS files.
+9. Risk ladder (ssi-2/D-222, the owner's 2026-09-26 SSIEC-v3 call —
+   `docs/ssi/SSI_OVERLAY.md` the overlay owner): R0 text/style only; R1
+   local pure refactor; R2 local behavior change; R3 cross-boundary or
+   dependency change; R4 state/authority/schema/public-API change; R5
+   security/distributed/irreversible/external-contract change. The
+   ladder REFINES the §2.3 soft limit, never replaces it. R0–R2: this
+   protocol as-is, zero added bureaucracy, no recorded class. R3+: the
+   closing `docs/DECISIONS.md` row self-declares its class tag
+   (`(R3)`/`(R4)`/`(R5)`) and carries the compact PCC record —
+   `(R3) [PCC: intent=…; invariants=…; delta=…; verification=…;
+   provenance=…; runtime=…]` (proof-carrying-change, SSI-N017, the
+   overlay §4; docguard lints the shape, an R3+ row missing a field
+   goes red). Escalation factors: blast radius, irreversibility,
+   privilege, uncertainty, work amplification, external contract — any
+   two present, consider one class up.
 
 ## 3. Reading gradient
 

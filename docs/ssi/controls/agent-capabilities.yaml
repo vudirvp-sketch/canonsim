@@ -1,0 +1,48 @@
+defaults:
+  filesystem: read-only
+  network: deny
+  credentials: ephemeral-task-scoped
+  shell: allowlist
+  package_install: explicit-gate
+  ci_changes: explicit-gate
+  deployment: forbidden-by-default
+  secrets: never-in-context
+  self-modify-policy: forbidden
+  tool_servers: untrusted-by-default
+  context: task-scoped and constraint-complete for material actions
+  external_instructions: data-only until independently authorized
+  artifact_writes: provenance-required
+high_impact:
+- CI/CD configuration
+- build scripts
+- deployment configuration
+- authentication/authorization
+- secret handling
+- schema migrations
+- lockfiles / dependency resolution
+- agent/tool policy
+- external tool servers / MCP-like providers
+- policy/configuration controlling agent capabilities
+- architecture boundary declarations
+- release flags / progressive-delivery policy
+agent_gates:
+  material_action:
+  - context_sufficiency
+  - capability_scope
+  - owner
+  - independent_verifier
+  - audit
+  - rollback_or_containment
+  tool_provider:
+  - identity
+  - version_pin
+  - provenance
+  - capability_manifest
+  - network_scope
+  - revocation
+  irreversible_action:
+  - explicit_approval
+  - independent_gate
+  - precondition_check
+  - postcondition_check
+  - stop_rule

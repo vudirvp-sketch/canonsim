@@ -1,0 +1,56 @@
+classes:
+  R0:
+    description: text/style only
+    evidence:
+    - lint
+  R1:
+    description: local pure refactor
+    evidence:
+    - tests
+    - semantic-diff
+    - observational-equivalence-when-applicable
+  R2:
+    description: local behavior change
+    evidence:
+    - contract
+    - property
+    - regression
+    - semantic-diff
+    - mutation-or-adversarial-test-when-material
+  R3:
+    description: cross-boundary/dependency change
+    evidence:
+    - contract
+    - architecture-check
+    - adversarial-review
+    - semantic-diff
+    - compositional-assumptions
+  R4:
+    description: state/authority/schema/public API change
+    evidence:
+    - formal-or-model-check-when-applicable
+    - migration-plan
+    - rollback
+    - independent-review
+    - provenance
+    - counterexample
+    - proof-carrying-change
+  R5:
+    description: security/distributed/irreversible/external contract
+    evidence:
+    - independent-review
+    - explicit-approval
+    - runtime-gate
+    - rollback-or-containment
+    - provenance
+    - counterexample
+    - realized-intervention-evidence
+    - proof-carrying-change
+problem_mode_rule: method-selection heuristic; never a correctness proof
+escalation_factors:
+- blast_radius
+- irreversibility
+- privilege
+- uncertainty
+- work_amplification
+- external_contract

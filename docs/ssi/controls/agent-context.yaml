@@ -1,0 +1,17 @@
+version: "3.0"
+context_contract:
+  required_for_material_action:
+    - task_intent
+    - applicable_invariants
+    - risk_class
+    - owner_and_authority
+    - relevant_boundaries
+    - constraints_and_forbidden_actions
+    - verification_plan
+  failure_mode: BLOCK
+  insufficient_context_is_not_permission_to_guess: true
+claim_provenance:
+  fields: [claim_id, epistemic_type, status, source, transformation, verifier, observation_boundary, expiry]
+external_tool_provider:
+  trust: untrusted-by-default
+  required: [identity, version, provenance, capabilities, network_scope, audit, revocation]

@@ -19,7 +19,22 @@ The invariants made executable with stdlib `ast` only — zero new dev deps:
     (`cli/` and `scripts/` — CLI-class tools, MVP_SCOPE §18 "CLI excepted",
     D-046); engine code logs instead;
 (e) coverage closure — every top-level code dir must be in PACKAGE_DIRS
-    (a new dir joins in the same iteration it lands, D-046).
+    (a new dir joins in the same iteration it lands, D-046);
+(f) no hidden effect (SSI-N001, ssi-3/D-223) — the wall-clock and
+    entropy import roots (`time`, `datetime`, `secrets`, `uuid`) are
+    banned across the canonical kernel (core/sim/render/brief/cli):
+    the effect families a local-looking module must never hide;
+    INV-2's static surface widened from the bare `random` monopoly
+    (L5) to the full hidden-effect set — the entropy authority stays
+    `core/rng.py`, the app layer (workbench/) sits outside the
+    determinism envelope (TEST_PLAN §8.4);
+(g) admission closure (SSI-N002, ssi-3/D-223) — every top-level code
+    dir in PACKAGE_DIRS carries its owner row in
+    `docs/AGENT_NAVIGATION.md` §1: a new mechanism landing without
+    its documented owner/purpose is an unadmitted primitive (AGENTS
+    §2.8: named consumer, owner, minimal intervention, verification
+    — the coverage-closure law's own sibling at the documentation
+    edge).
 
 Trivially green on a healthy tree, loud on the first violation.
 """
@@ -33,6 +48,17 @@ REPO = Path(__file__).resolve().parents[1]
 
 PACKAGE_DIRS = ("core", "sim", "render", "brief", "cli", "scripts", "workbench")
 NETWORK_MODULES = frozenset({"socket", "urllib", "http", "requests"})
+#: SSI-N001's hidden-effect roots (ssi-3/D-223): wall-clock (time,
+#: datetime) and entropy (secrets, uuid) — the families the canonical
+#: kernel admits ZERO members of (INV-2's "no wall-clock anywhere
+#: (including the log header)"; `random` stays L5's own monopoly
+#: below). Any use requires an import; the root-level ban is the
+#: complete static surface.
+HIDDEN_EFFECT_ROOTS = frozenset({"time", "datetime", "secrets", "uuid"})
+#: The canonical determinism envelope's dirs (SSI-N001's scope — the
+#: kernel graph; workbench/ is the app layer, outside the envelope
+#: per TEST_PLAN §8.4, and scripts/ is the offline operator graph).
+CANONICAL_KERNEL_DIRS = ("core", "sim", "render", "brief", "cli")
 #: INV-4's sanctioned network surface: exactly three modules, one
 #: per direction-and-asset (the app spec §4.1 + D-208) — the OUTBOUND
 #: engine adapter (D-192/D-193), the INBOUND gateway binding (D-201,
@@ -207,3 +233,49 @@ def test_package_dirs_cover_every_top_level_code_dir() -> None:
         f"{sorted(PACKAGE_DIRS)} — add the new dir to the fitness test in "
         f"the same iteration it lands (D-046)"
     )
+
+
+def test_no_hidden_effect_wall_clock_or_entropy_in_the_kernel() -> None:
+    """SSI-N001 executable (ssi-3/D-223): the wall-clock and entropy
+    import roots — time, datetime, secrets, uuid — never appear in the
+    canonical kernel (core/sim/render/brief/cli). INV-2's static
+    surface was the bare `random` monopoly (L5, the test above); the
+    SSI admission widens it to the full hidden-effect set: a module
+    that looks local must not hide a timing or entropy effect behind
+    an import. The entropy authority stays `core/rng.py` (the RngBank,
+    D-028); file IO stays INV-1's privilege separation (core/log.py
+    the one canon-write path — a JOB, never a hidden effect); the app
+    layer (workbench/) legitimately holds deadlines and process
+    timing OUTSIDE the determinism envelope (TEST_PLAN §8.4)."""
+    for name in CANONICAL_KERNEL_DIRS:
+        for path in sorted((REPO / name).rglob("*.py")):
+            roots = import_roots(parse(path))
+            hits = roots & HIDDEN_EFFECT_ROOTS
+            assert not hits, (
+                f"{path}: hidden-effect import(s) {sorted(hits)} in the "
+                f"canonical kernel — wall-clock/entropy effects a "
+                f"local-looking module must never hide (SSI-N001, INV-2; "
+                f"the entropy authority is core/rng.py's RngBank)"
+            )
+
+
+def test_admission_closure_every_package_dir_is_documented_in_nav() -> None:
+    """SSI-N002 executable (ssi-3/D-223): every top-level code dir
+    (PACKAGE_DIRS — the coverage-closure set) carries its row in
+    docs/AGENT_NAVIGATION.md §1, the documented owner map. A new
+    mechanism (dir) landing without its owner/purpose row is an
+    unadmitted primitive — AGENTS §2.8's admission law (a named
+    consumer, a demonstrated problem, an owner, a minimal
+    intervention, a verification) leaves a paper trail, and NAV §1 is
+    where it lands. The sibling of the coverage-closure test above at
+    the documentation edge: the tree knows the dir, the map must know
+    it too. (The sim/ row landed with this test — the admission-
+    completion fix, not a waiver.)"""
+    nav = (REPO / "docs" / "AGENT_NAVIGATION.md").read_text(encoding="utf-8")
+    for name in PACKAGE_DIRS:
+        assert f"| `{name}/`" in nav, (
+            f"docs/AGENT_NAVIGATION.md §1: no owner row for `{name}/` — a "
+            f"top-level code dir without its documented owner/purpose is "
+            f"an unadmitted primitive (SSI-N002, AGENTS §2.8; the row "
+            f"joins in the same iteration the dir lands)"
+        )

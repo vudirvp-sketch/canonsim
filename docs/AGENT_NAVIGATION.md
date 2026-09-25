@@ -29,9 +29,11 @@
 | `docs/REFERENCES.md` | external source catalog: donors, licenses, phase gating | active (rots — quarterly review) |
 | `docs/REFERENCES_DEEP.md` | index + format template + iteration plan for the per-ref deep dives; the content lives in `docs/ref/` (D-026) | active (rots — quarterly alongside `doc-2`) |
 | `docs/ref/` | per-reference deep dives, one file per source (48 files); mechanics, take/adapt/inspire/strengths/weaknesses/verdict | active (rots — quarterly review) |
+| `docs/ssi/` | the SSIEC-v3 control-plane reference (ssi-2/D-222, the owner's 2026-09-26 call): the external governance package READ-ONLY and verbatim (34 files; `AGENT_ENTRY.md` the entry, `00_INDEX.md` the A–L index, `controls/*.yaml` the policies, `templates/*.md` the record forms) + `SSI_OVERLAY.md` the ONE authored file (the block matrix → the repo's mechanisms, the executable negative-rules subset, the risk ladder pointer, the phase ladder); never a runtime dependency, never a second source of truth (D-024) | active; the overlay every ssi iteration, the reference by need |
 | `schemas/event.schema.json` | machine-readable event contract | synced with `docs/EVENT_SCHEMA.md` |
 | `core/` | the engine: the event-sourced core (`log`, `queue`, `loop`, `schema`, `fold`, `cursor`), `rng` (RngBank + the seven content-addressed stream families), the knowledge stack (`knowledge`, `echo`, `traits`, `reflection`, `retrieval`), the director stack (`director`, `predicates`, `urgencies`, `states`), the world stack (`worldgen`, `roads`, `travel`, `lod`, `groups`, `factions`, `names`, `weather`, `calendar`, `macro`), the social stack (`crime`, `leverage`, `transitions`, `onaction`), `economy`, `intent` + `resolvers`, `metrics`, `pack` + `packlint/` | stable; stdlib-only (D-012), engine-agnostic (INV-4) |
 | `sim/systems/` | reserved for periphery systems — anything the canon door must dispatch is kernel mechanics and lives in `core/` (the import-boundary law, D-031/D-037) | reserved (empty skeleton) |
+| `sim/` | the periphery-systems root (the reserved skeleton's home; anything the canon door must dispatch is kernel mechanics and lives in `core/`) | reserved (empty; the admission-closure row, ssi-3/D-223 — NAV-§1 coverage for every top-level code dir) |
 | `content/tavern_pack/` | the first pack: the theft/arson/rumor scenario | v0.1; armed (worldgen + the macro weather) |
 | `content/road_pack/` | the SECOND pack: the travel-loop reskin (world-2 L1; the SRD 5.1 generic stack, `CREDITS.md` the CC-BY-4.0 sidecar) | v0.1 (iter-112, D-149) |
 | `content/province_pack/` | the THIRD pack: the original province (world-2 L2 — the Sarrow Vale; authored original content) | v0.1 (iter-118/119, D-153/D-154) |
@@ -80,6 +82,7 @@
 | Observatory analytical semantics (planes, World Question, query families, run identity, experiments, promotion gate) | `docs/OBSERVATORY_LAW.md` FIRST → `docs/FRONTEND_UIUX_LAW.md` §3..§13 for the interaction grammar → `workbench/observatory_read.py` for the landed read seam |
 | World presentation / Scene IR / assets (any P4 row) | `docs/WORLD_PRESENTATION_LAW.md` FIRST → `docs/CONTRACTS.md` §5 D2/D4/D5 for the landed identity/determinism contracts → `docs/REDOT_ENGINE_INDEX.md` for engine facts |
 | LLM-track (`bg-*`) | + `docs/TECH_NOTES.md` → `docs/SPECS_BACKLOG.md` |
+| SSI / risk classification / proof-carrying-change / the ssi phases (any control-plane question) | `docs/ssi/SSI_OVERLAY.md` FIRST (the block matrix, the rule subset, the phase ladder — route to the named row, never read the whole reference) → `AGENTS.md` §2.9 for the risk ladder + the PCC record → the reference copy (`docs/ssi/`) only for the block a row names |
 
 Three standing rules bound how deep the gradient goes (D-198):
 
@@ -122,6 +125,7 @@ Three standing rules bound how deep the gradient goes (D-198):
 | Observatory analytical semantics: planes, World Question contract, query families, run identity, promotion gate, the research roadmap | `docs/OBSERVATORY_LAW.md` (D-218; research findings stay evidence snapshots, never current truth) | link, never restate |
 | World presentation: Scene IR contracts, composition, asset manifest/identity, LOD/camera/map layers, degradation, the P4 gates | `docs/WORLD_PRESENTATION_LAW.md` (D-218) | link, never restate |
 | Agent law, invariants | `AGENTS.md` | `STATUS.md` carries one-liners only |
+| SSI control plane (the A–L mapping, the executable negative-rules subset, the risk ladder's overlay form, the ssi phase ladder) | `docs/ssi/SSI_OVERLAY.md` (the ONE authored file over the read-only reference copy); the risk ladder's binding home is `AGENTS.md` §2.9 | link the overlay's row, never restate the package |
 | Where things are | this file | `README.md` carries a short map |
 
 Duplication rule: if a fact must appear twice (e.g. invariant one-liners), the

@@ -1,0 +1,17 @@
+version: "3.0"
+boundary_record:
+  required:
+    - owner
+    - hidden_decision
+    - invariants
+    - authority
+    - semantic_footprint
+    - allowed_dependents
+    - change_independence_hypothesis
+    - observation_surface
+    - deletion_trigger
+semantic_footprint:
+  dimensions: [reads, writes, owns, observes, authorizes, emits, timing]
+compositional_proof:
+  required_when: [R3, R4, R5]
+  fields: [assumptions, guarantee, footprint, interference, composition_result]

@@ -491,8 +491,66 @@ TEST_PLAN §9's claim packet)
   capability discovery + the context-aware/model-driven visibility +
   the session/preset persistence layers above, never one "advanced
   flags" bucket.
+- `ssi-1` — DONE (iter-241, D-221 — the owner's 2026-09-26 SSIEC-v3
+  control-plane call): Phase 0 the architecture freeze — the eight
+  public-contract surfaces (event schema, canonical log format, fold
+  semantics, scheduler order, RNG semantics, pack format, checkpoint
+  semantics, the Workbench-gateway public operations) confirmed at
+  their standing owners (INV-1..5 + `docs/EVENT_SCHEMA.md` +
+  `docs/PACK_SPEC.md` + WORKBENCH_APP_LAW) and FROZEN for the ssi
+  initiative's duration — never re-stated (D-024), the strangler
+  phases move INTERNAL ownership only; doc-only, zero code, the LOG
+  untouched.
+- `ssi-2` — DONE (iter-242+243, D-222/D-223): Phase 1 the SSI
+  foundation — the READ-ONLY reference copy at `docs/ssi/` (the
+  external package verbatim, the overlay the ONLY authored file) +
+  `docs/ssi/SSI_OVERLAY.md` (the A–L block matrix onto the existing
+  mechanisms, the executable negative-rules subset, the phase
+  ladder) + the risk ladder R0–R5 as AGENTS §2.9 (a refinement of
+  the 3–5-file soft limit, never a replacement — R0–R2 zero added
+  bureaucracy, R3+ carries the compact PCC record in the DECISIONS
+  row, docguard-linted) + the executable checks: SSI-N001/N002 in
+  `tests/test_architecture.py`, SSI-N006/N007/N010/N017/N018 in
+  `scripts/docguard.py` (N018/N020's full forms fire with their
+  phases — OPEN, never a silent skip).
+- `ssi-3` — the ownership/topology audit (Phase 2, owner-gated —
+  opens on the owner's explicit call after ssi-2's result is
+  confirmed): the machine-readable map (owner/reads/writes/emits/
+  change-coupling) over `core/` + `workbench/`; RE-VERIFIES the
+  external analysis's hypotheses (core/loop.py ~1714 lines,
+  core/director.py ~1419, core/worldgen.py ~1388, core/intent.py
+  ~1080, workbench/application/inference.py ~2511, the
+  loop.py↔pack.py co-change over the last 150 commits) — confirmed
+  = the material_gap that opens ssi-5's core scope; refuted = that
+  scope shrinks; a line-count snapshot is NEVER the sole evidence
+  (SSI-N018: co-change/trajectory required).
+- `ssi-4` — the workbench/application/inference.py split (Phase 3,
+  owner-gated, AFTER ssi-3): the newest and largest actively-growing
+  file first (cheaper to straighten now); split by the ssi-3
+  semantic owners, never by an external template.
+- `ssi-5` — the core strangler (Phase 4, owner-gated):
+  loop/director/worldgen/intent internal-ownership moves ONLY — the
+  public surface (director.next_beat(...) et al.) byte-frozen (the
+  ssi-1 freeze); each step its own R2/R3 iteration with a PCC
+  record.
+- `ssi-6` — the canonical read seam (Phase 5, owner-gated): the
+  narrow read API between core and the workbench read-side instead
+  of the direct core.fold/core.log/core.pack imports — INV-4's
+  «exactly N sanctioned modules» pattern.
+- `ssi-7` — the semantic diff layer over T1 (Phase 6, owner-gated):
+  event ids/types/causes/actors/targets/RNG-fingerprint comparison,
+  interpreter/line-ending independent — an ADDITIONAL verification
+  layer, never a T1 «bug fix» (env-pinning is a documented decision,
+  TEST_PLAN §1.1).
+- `ssi-8` — the GC pass (Phase 7, owner-gated): the stale-artifact
+  sweep per the deletion card (N020: consumer_absence +
+  authority_absence + the historical constraint check + recovery —
+  apparent inactivity is never evidence); KI#99's doubled
+  `workbench/workbench/runtime/` tree is a candidate artifact.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-242 · 2026-09-26 · ssi2-ssi-foundation (Phase 1, the owner's same call): D-222 — the READ-ONLY reference copy at docs/ssi/ (the 34-file external package verbatim, md5 305952c10b0997236b93d3c77c2b7681, the placement decided on D-198's admission ladder: docs/ the existing mechanism, a top-level ssi/ REJECTED, the runtime dependency REJECTED standing) + docs/ssi/SSI_OVERLAY.md the ONE authored file (the A–L block matrix onto the repo's mechanisms, the executable negative-rules subset, the risk ladder pointer, the PCC/deletion-card forms, the phase ladder; the two over-cap doctrine files docguard-allowlisted on the phases.md precedent) + the risk ladder R0–R5 as AGENTS.md §2.9 (a refinement of the 3–5 soft limit: R0–R2 zero bureaucracy, R3+ self-declares the class tag and carries the compact PCC record in the DECISIONS row) + docguard's SSI shape families (the block matrix complete + the closed state vocabulary + the explicit waive/skip laws + the declared eight with instruments-on-disk + the phase ladder owner-gated with N018's evidence bar + the R3+ PCC fields + the AGENTS ladder pin) + the test_docguard extension (7 crafted-breach tests + the fixture); NAV §1/§2/§3 + the STATUS FAQ routing; 40+ paths (the reference copy counts one unit); 2344+16 + ruff + docguard clean (zero functional change, zero core change, the LOG untouched)
+- iter-241 · 2026-09-26 · ssi1-architecture-freeze (the owner's 2026-09-26 SSIEC-v3 control-plane call — the external governance package as a CONTROL PLANE over the repo, never a runtime dependency): D-221 the architecture FREEZE — the eight public-contract surfaces (event schema, canonical log format, fold semantics, scheduler order, RNG semantics, pack format, checkpoint semantics, the Workbench-gateway public operations) confirmed at their standing owners (INV-1..5 + EVENT_SCHEMA/PACK_SPEC/WORKBENCH_APP_LAW), never re-stated; frozen for the initiative's duration, the strangler phases move internal ownership only + the ssi track registered (ssi-1..ssi-8 rows, phases 2..7 owner-gated) + KI#99 opened (the shell's ui_state path DOUBLES workbench/ — globalize_path("res://") returns the project root WITH the trailing slash, the first of the three get_base_dir() calls consumes only the slash, the appended "/workbench/runtime/…" doubles; KI#98's class; repro: live-mode + the reduced-motion toggle, any cwd) + KI#98 deleted per the 2-iteration cleanup law; 4 paths; 2344+9 + ruff + docguard clean (doc-only, zero code, the LOG untouched)
 - iter-240 · 2026-09-26 · inf2-full-chip-library (the owner's 2026-09-26 «Дорабатывай и доделывай по-человечески + далеко не все сэмплеры и настройки есть» call over the unsatisfactory inf-1 slice): the FULL control library (85 controls over the 15 reviewed categories — the complete sampling family + model/device/memory/loading/moe/cpu/chat-reasoning/structured/server/observability/speculative/rope/special/lora; every disabled/AUTO form the runtime's own literal) + the typed relation data (the mirostat effective_noop from the --help's own words, the temperature-0 deterministic noop, the family requires: DRY/Mirostat/dynatemp/adaptive/XTC/speculative/custom-template) + the 9-member chain (the inf-1 5-member profiles upgrade at load, the operator's order preserved) + the four §30 presets as transparent diff-previewed documents + the workspace pinning (the profile document's own workspace section, never a second store) + the DATA-DRIVEN Redot workspace (inference.gd rebuilt: the editors from the read document's own metadata, the rows building ON the read — inf-1's compose-before-read empty-groups bug repaired; the search/pinned/collapsible-category/advanced-rung regions; the carried-editor-values law) + the platform compile seam (SEMANTIC_FLAG_TABLE + build_semantic_command; compile_semantic field-keyed; build_server_command byte-stable; the 138-token duplicate-ownership guard) + the fake server's token-scan parse (argparse's short-flag clustering ate -mg as -m g) + D-220; 12 paths; 2344+9 (CI) / 2352+1 (REDOT_EXE — the inference capture green, VLM-verified composition) + ruff + docguard clean (zero core change, the LOG untouched)
 
 - iter-239 · 2026-09-25 · inf1-inference-control-slice (the owner's 2026-09-25 chip-workspace hand-off — the llama.cpp semantic inference-control layer as a NATIVE workbench capability): docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md ADMITTED (D-219 — Settings ≠ Inference Control, the three-layer split, the chip-as-semantic-runtime-control identity) + workbench/application/inference.py the semantic core (the control library 13 controls / 5 categories, the profile store, the deterministic resolver with the evidence-pinned relations, the compiled launch surface, the one-way migration) + the settings store's DEPLOYMENT slim (schema/2) + build_server_command's additive params (samplers ';', seed, fit, kv — the legacy command byte-stable) + the extra_args duplicate-ownership guard + the gateway family (inference.read/update) + chat's BASE re-point + the run document's REQUESTED/EFFECTIVE pair + inference.gd the Inference surface + the Chat projection + the Settings slim + the --inference-document proof injection; 26 paths (the 3–5 soft limit honestly over: the semantic core + the surface + the claim packet + the state docs, AGENTS §2.3); 2335+8 (CI) / 2343+1 (REDOT_EXE — the inference capture green, VLM-verified) + ruff + docguard clean (zero core change, the LOG untouched)
@@ -507,5 +565,3 @@ TEST_PLAN §9's claim packet)
 
 - iter-233 · 2026-09-25 · frontend-uiux-law-admission (the owner's tmpfiles hand-off of the external *CanonSim Workbench — Ultimate Frontend / UI / UX / Visual Architecture* consolidated pack + the «проанализировать... и начать работать в этом направлении» direction call): docs/FRONTEND_UIUX_LAW.md ADMITTED as the frontend interaction-architecture law owner (D-214) — the executive doctrine (the UX invariant QUESTION→...→NEXT DISCRIMINATOR + the implementation invariant + the missing-middle-layer diagnosis) + the law chain (the spec-integrity law) + the IA (WORK/RESOURCES/SYSTEM) + the analytical workspace grammar (CONTEXT/QUERY/PRIMARY VIEW/INSPECTOR/EVIDENCE) + the selection model + focus/context + semantic zoom + compare + timeline + graph policy + the evidence ladder + the epistemic grammar (the state set + AUTHORITY×CLAIM orthogonality) + the query lifecycle + empty semantics + drill-down + the Evidence Capsule + the T1–T8 task suite + the interaction-cost budget + the accessibility/reduced-motion/focus-keyboard/responsive/localization contracts + the component-architecture law + Scene IR integration + bounded rendering + surface hygiene + the verification matrix (static≠runtime≠task + the A–I gates + the evidence classification) + the anti-patterns + the agent decision rules + the P0–P4 order + the contradictions register + the 20 non-negotiable invariants; VISUAL_SYSTEM_UI §11 the companion-requirements routing (the §3.2 drift repair) + §10 re-pointed (ux-1/obs-1 before indefinite peripheral polish); TASKS the ux-1 + obs-1..N row registration; the routing surfaces (NAV §1/§2/§3 + STATUS FAQ/Next step); docguard's allowlist entry (632→627 after three cruft rounds — the enum/invariant lists the substance); 8 paths; 2285+6 + ruff + docguard clean (doc-only, zero code change, the LOG untouched)
 
-- iter-232 · 2026-09-25 · ki95-ki96-oled-repin (the owner's 2026-09-25 report — the CI-red cancellation test + «проводник опять сломался... я не могу папки открыть и модели не показывает языковые» + «цвет лучше взять темный под oled мониторы, но не синий такой убогий»): KI#95 the wb-9 cancellation test's single checkpoint() RACED the main thread's run.cancel — on a fast runner the worker passed the checkpoint before the cancel landed and the "unreachable" AssertionError closed the run FAILED (the honest registry truth for an unrequested abort; local green masked CI red — the test now polls the checkpoint until the cancel lands, bounded 20s, deterministic under any scheduling) + KI#96 the Models-surface scan latch retired (_models_requested froze the list after ONE scan — hand-dropped GGUF files never appeared; every surface entry re-scans now, §20's routine refresh) + theme@0.4 the OLED re-pin (D-213: the TRULY neutral ramp over #050505 — the Catppuccin navy tint and the blue accent retired with the owner's two named rejections — ONE teal accent #4cc9a6; values-only, every token name/pin unchanged; 21 contrast pairs measured, scripts/contrast_check.py) + the shell-contract pin updates (the latch ban + the theme@0.4/base/accent pins); 8 paths; 2285+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched)
-- iter-231 · 2026-09-25 · ci-unred-nav-variation (the owner's 2026-09-25 engine report — the nonexistent add_theme_type_variation call killing _ready at _build_nav_rail + the unused row warning — + the CI-red report «в прошлых двух итерациях как минимум у тебя тесты на репо проваливаются», runs 82–84 red since iter-227): KI#93 the launcher/gateway pipe chain's buffering owned by the chain itself (the gateway child rides -u, the supervisor line-buffers its own stdout, the test spawn strips PYTHONUNBUFFERED — the sandbox's global var had masked CI red: the bind line sat in the child's block buffer past the 90s boot probe, the launcher honestly reported failure while every local run stayed green) + KI#94 the NavButton wiring through the theme_type_variation PROPERTY (Redot 26.2 has no method form; the negative pin) + the dead row local removed; 7 paths; 2285+6 + ruff + docguard clean (verified in the standard AND the stripped-var env — the CI/owner condition; zero core change, zero pack change, the LOG untouched)

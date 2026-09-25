@@ -1,0 +1,22 @@
+# EXPERIMENT CONTRACT
+
+- Problem mode:
+- Question:
+- Competing hypotheses:
+- Intervention target:
+- Assignment:
+- Control:
+- Blocked nuisance:
+- Recorded nuisance:
+- Trace identity:
+- Realized delta:
+- Causal slice / first divergence:
+- Unit/scope:
+- Spillover:
+- Primary discriminant:
+- Secondary metrics:
+- Oracle/relation:
+- Replication:
+- Stopping rule:
+- Disposition:
+- Rollout / containment / stop rule:

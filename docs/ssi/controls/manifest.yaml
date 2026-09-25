@@ -1,0 +1,94 @@
+version: '3.0'
+canonical: software-semantic-integrity-unified-v3.md
+block_states:
+- NOT_APPLICABLE
+- OPEN
+- PARTIAL
+- VERIFIED
+- WAIVED
+mandatory_order:
+- PROBLEM_MODE
+- INTENT
+- SUBSTRATE
+- CLAIMS_EVIDENCE
+- INVARIANTS
+- RISK_REVERSIBILITY
+- AUTHORITY_CAPABILITY
+- BOUNDARY_TOPOLOGY
+- STATE_LIFETIME
+- REPRESENTATION_COMPLEXITY
+- EXISTING_PRIMITIVES
+- SEMANTIC_TYPES_CONTRACTS
+- IMPLEMENTATION_EFFECTS
+- STATIC_POLICY
+- COMPOSITIONAL_REASONING
+- VERIFICATION
+- SEMANTIC_DIFF
+- ADVERSARIAL_REVIEW
+- PROVENANCE
+- RUNTIME_OBSERVATION
+- ROLLOUT_REVERSIBILITY
+- DISPOSITION
+- PROOF_CARRYING_CHANGE
+- DURABLE_RESIDUE
+risk_classes:
+  R0: text/style only
+  R1: local pure refactor
+  R2: local behavior change
+  R3: cross-boundary or dependency change
+  R4: state/authority/schema/public API change
+  R5: security/distributed/irreversible/external-contract change
+control_principles:
+- no_hidden_effect
+- no_new_primitive_without_material_gap
+- no_unbounded_lifetime
+- no_unbounded_retry_or_concurrency
+- no_irreversible_agent_action_without_independent_gate
+- no_artifact_trust_without_provenance
+- no_liveness_claim_without_progress_assumption
+- no_silent_block_skip
+- illegal_states_unrepresentable_when_material
+- no_unbounded_authority
+- no_unproven_composition
+- no_semantic_drift_without_observable_delta
+- no_unbounded_work_amplification
+- no_unverified_tool_provider
+- no_material_claim_without_provenance
+- no_single_oracle_for_material_claim
+- no_context-insufficient_agent_decision
+- no_irreversible_rollout_without_rollback_or_containment
+- proof_carrying_change_for_material_change
+anchors:
+- name: TLA+ / TLC
+  purpose: formal specification / model checking
+  status: reference
+- name: SLSA
+  purpose: supply-chain provenance / attestations
+  status: reference
+- name: OWASP AI agent security
+  purpose: agentic coding security, least privilege, high-impact action gates
+  status: reference
+- name: Dafny / P
+  purpose: implementation-level specification / verification / protocol reasoning
+  status: reference
+- name: Deterministic Simulation Testing
+  purpose: seeded replayable distributed-system fault exploration
+  status: reference
+- name: C4
+  purpose: standardized multi-level architecture views
+  status: reference
+- name: ADR / RFC / Design Doc
+  purpose: decision provenance before and across implementation
+  status: reference
+- name: OPA / Rego
+  purpose: executable policy enforcement
+  status: reference
+- name: ArchUnit / dependency-cruiser
+  purpose: machine-enforced architecture constraints
+  status: reference
+- name: Pact
+  purpose: consumer-driven contract testing
+  status: reference
+- name: in-toto
+  purpose: supply-chain attestations
+  status: reference
