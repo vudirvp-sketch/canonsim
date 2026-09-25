@@ -1,53 +1,56 @@
-Iteration: iter-232 (`ki95-ki96-oled-repin` — the owner's
-2026-09-25 report: the CI-red cancellation test + «проводник опять
-сломался видимо, я не могу папки открыть и модели не показывает
-языковые» + «цвет лучше взять темный под oled мониторы, но не синий
-такой убогий»): TWO shipped defects + one owner-called re-pin.
-KI#95 — the wb-9 cancellation test's single checkpoint() call RACED
-the main thread's run.cancel dispatch: on a fast CI runner the worker
-thread reached the checkpoint BEFORE the cancel landed, the
-checkpoint passed, and the "unreachable" AssertionError closed the
-run FAILED — the honest registry truth for an abort never requested
-(production code truthful; a test bug — the local sandbox stayed
-green on scheduling luck while CI went red); the fetch now POLLS the
-checkpoint (the work contract's own observation surface, lock-free)
-until the cancellation lands, bounded 20s — deterministic under any
-thread scheduling. KI#96 — the Models surface's scan latch
-(_models_requested) froze the discovery list after ONE successful
-scan: GGUF files dropped into the folder by hand never appeared
-without a manual Refresh (the owner's «модели не показывает» family);
-the latch is retired — every surface entry re-scans (§20's routine
-refresh; both reads cheap). theme@0.4 — the OLED re-pin (D-213, the
-owner's explicit call over the external brief's "never pure black"
-doctrine): the TRULY neutral ramp over the near-black #050505 (the
-Catppuccin navy tint retired — «не синий») + the ONE teal accent
-#4cc9a6 (the blue AND the older warm-orange families both rejected
-by name); values-only — every token name, size and pin unchanged; 21
-contrast pairs measured (scripts/contrast_check.py).
+Iteration: iter-233 (`frontend-uiux-law-admission` — the owner's
+2026-09-25 tmpfiles hand-off of the external *CanonSim Workbench —
+Ultimate Frontend / UI / UX / Visual Architecture* consolidated pack
++ the «проанализировать... и начать работать в этом направлении»
+direction call): docs/FRONTEND_UIUX_LAW.md ADMITTED as the frontend
+interaction-architecture law owner (D-214 — the D-024/D-200
+distillation law: the original stays with the owner, never vendored):
+the executive doctrine (the UX invariant QUESTION→…→NEXT
+DISCRIMINATOR; the implementation invariant; the missing-middle-layer
+diagnosis — the analytical interaction grammar between the semantic
+contract and the visual system) + the law chain (the spec-integrity
+law) + the IA (WORK/RESOURCES/SYSTEM; SURFACE=intent, VIEW=
+representation) + the workspace grammar (CONTEXT/QUERY/PRIMARY VIEW/
+INSPECTOR/EVIDENCE) + the selection model + focus/context + semantic
+zoom + compare + timeline + graph policy + the evidence ladder + the
+epistemic grammar (the state set + AUTHORITY×CLAIM orthogonality) +
+the query lifecycle + empty semantics + drill-down + the Evidence
+Capsule + T1–T8 + the cost budgets + the accessibility/reduced-
+motion/focus-keyboard/responsive/DPI/localization contracts + the
+component law (shell split by responsibility) + Scene IR integration +
+bounded rendering + surface hygiene + the verification matrix (static
+≠runtime≠task; the A–I gates; the evidence classification) + the
+anti-patterns + the agent rules + the P0–P4 order + the
+contradictions register + the 20 invariants. VISUAL_SYSTEM_UI §11 the
+companion-requirements routing (the drift the pack diagnosed —
+accessibility/keyboard/reduced-motion/responsive/localization were
+materially missing from the short law; §10 re-pointed: ux-1 + obs-1
+BEFORE indefinite peripheral polish). TASKS: ux-1 (the P0 minimums)
++ obs-1..N (the Observatory slice family) registered. Routing: NAV
+§1/§2/§3.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-12 DONE + theme@0.4 the OLED re-pin
-landed + the visual rows queued wb-13+) + the world track + the SoW
-horizon, ROADMAP §2/§6) ·
-2285 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
-clean per D6/D-093 — the sandbox binary absent) ·
+(the wb family its live head + the ux/obs families per FRONTEND_UIUX_
+LAW §25) + the world track + the SoW horizon, ROADMAP §2/§6) ·
+2285 passed + 6 skipped, ruff clean, docguard clean (doc-only, zero
+code change — Python 3.12.14, the env pin; the 5 REDOT_EXE-gated
+visual packets + duckdb skipping clean per D6/D-093) ·
 Date: 2026-09-25 ·
-Scope: tests/test_model_fetch.py (the deterministic checkpoint poll)
-+ workbench/presentation/redot/scripts/shell.gd (the latch retired ×3
-sites + the theme version string) + workbench/presentation/redot/
-themes/workbench_theme.tres (the OLED re-pin) + tests/
-test_shell_contract.py (the latch ban + the theme@0.4/base/accent
-pins) + the state docs (STATUS/TASKS/worklog/DECISIONS) — 8 paths
-(the 3–5 soft limit honestly over: two defects + the owner-called
-re-pin + the pin updates + the state docs, AGENTS §2.3).
+Scope: docs/FRONTEND_UIUX_LAW.md (the admission) + docs/VISUAL_
+SYSTEM_UI.md (§11 + the §10 re-point) + docs/TASKS.md (the ux-1 +
+obs-1 rows + the ledger) + docs/AGENT_NAVIGATION.md (§1/§2/§3 + the
+theme@0.4 courtesy re-pin) + scripts/docguard.py (the allowlist entry
+— 627 lines after three cruft rounds, the enum/invariant lists the
+substance) + the state docs (STATUS/TASKS/worklog/DECISIONS) — 8
+paths (doc-only; an admission's routing surface, the iter-225/229
+precedent).
 Track A: the wb family (iter-232 the race/latch fixes + the OLED
-re-pin; wb-12 DONE + theme@0.4 — the visual rows queued wb-13+
-per VISUAL_SYSTEM_UI §10; the prior record: iter-231 CI-unred +
-NavButton, 230 wb-12, 229 the law admission, 228 wb-11 transport
-chain, 227 wb-10, 226 wb-9 D-208, 225 the engine index D-207, 224
-D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
-216/215 wb-1). The detail lives in the worklog + git.
+re-pin; the ux-1/obs-1 families now the queue head per FRONTEND_UIUX_
+LAW §25, wb-13+ the P2 visual continuation; the prior record:
+iter-231 CI-unred + NavButton, 230 wb-12, 229 the visual law, 228
+wb-11 transport chain, 227 wb-10, 226 wb-9 D-208, 225 the engine
+index D-207, 224 D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219
+wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -75,25 +78,8 @@ D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
 
 ## Active KIs
 
-- (none — KI#95 + KI#96 opened + CLOSED iter-232 in the same row:
-  KI#95 — the wb-9 cancellation test red in CI while the sandbox
-  stayed green: the test's single checkpoint() call RACED the main
-  thread's run.cancel dispatch — a fast CI runner's worker passed
-  the checkpoint BEFORE the cancel landed, the fetcher's own
-  "unreachable" AssertionError closed the run FAILED (the honest
-  registry truth for an abort never requested: production code
-  truthful, the TEST buggy — scheduling luck masked it locally);
-  the test now POLLS the checkpoint (the work contract's own
-  lock-free observation surface) until the cancellation lands,
-  bounded 20s — deterministic under any thread scheduling, and an
-  absent cancel fails loudly with its own honest cause.
-  KI#96 — the Models surface's scan latch (_models_requested)
-  froze the discovery list after ONE successful scan: GGUF files
-  dropped into the folder by hand never appeared without a manual
-  Refresh (the owner's «модели не показывает» family — wb-11's
-  failed-scan re-arm applied to failure only, never to success's
-  staleness); the latch is retired — every surface entry re-scans,
-  the negative pin owns the ban.)
+- (none — the iter-232 pair closed in-row at iter-232; no open KIs
+  at this writing.)
 
 ## FAQ / Pitfalls
 
@@ -102,7 +88,7 @@ D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
 - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the app spec's §18 evidence law wins over quiet chrome)** — VISUAL_SYSTEM_UI §0/§6 (admitted iter-229, D-211); engine/API questions still route through docs/REDOT_ENGINE_INDEX.md (D-207).
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the app spec's §18 evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions still route through docs/REDOT_ENGINE_INDEX.md (D-207).**
 - **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -124,26 +110,28 @@ D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
 
 ## Next step
 
-**iter-232 DONE: KI#95 (the CI-red cancellation test — the single
-checkpoint() call raced run.cancel's dispatch; the poll form)
-+ KI#96 (the Models scan latch — the owner's «модели не показывает»
-family; every surface entry re-scans) + theme@0.4 (the OLED re-pin,
-D-213 — «цвет лучше взять темный под oled мониторы, но не синий
-такой убогий»; the neutral near-black ramp + the ONE teal accent)
-LANDED (the owner's 2026-09-25 report; the wb family stays the
-live head, wb-13+ the visual queue).**
+**iter-233 DONE: docs/FRONTEND_UIUX_LAW.md ADMITTED (D-214 — the
+owner's Ultimate Frontend/UI/UX/Visual Architecture pack, the tmpfiles
+hand-off + «начать работать в этом направлении»; the interaction law:
+the doctrine, the workspace/selection/epistemic grammars, the
+accessibility/localization/responsive contracts, the verification
+matrix, the P0–P4 order) + VISUAL_SYSTEM_UI §11 the companion routing
+(the spec-integrity drift repair) + the ux-1/obs-1 rows registered —
+LANDED (doc-only; the queue re-pointed per the law's §25).**
 
-1. wb-13+ per the visual queue (VISUAL_SYSTEM_UI §10 — the Models
-   surface's matrix rendering over the wb-11 run circuits, then the
-   Chat surface's semantic containers + composer states, then
-   Settings) — the owner's call opens each row; the wb-14 remainder
-   (the message containers' width/alignment grammar + the
-   new-messages-below affordance + a reduced-motion setting) parked as
-   the row's own scope. The exported-Windows-build row (the owner's
-   «по человечески сделать это нельзя?» — Workbench.bat's dev form is
-   the editor binary running the project; the product form is an
-   exported .exe over export presets, a row of its own) parked per
-   AGENTS §2.4 — a named row when the owner calls it.
+1. ux-1 per FRONTEND_UIUX_LAW §25's P0 (the minimums row: the _tr
+   localization boundary + the reduced-motion setting + the
+   viewport/min-size policy + the focus/keyboard baseline — TASKS'
+   ux-1 row) then obs-1 the Observatory vertical slice (P1 — the
+   interaction grammar validated BEFORE full analytical backend
+   coverage; the wb-13+ visual rows the P2 continuation per
+   VISUAL_SYSTEM_UI §10) — each row opens on the owner's call
+   (the direction call already given for the family's order).
+   The exported-Windows-build row (the owner's «по человечески
+   сделать это нельзя?» — Workbench.bat's dev form is the editor
+   binary running the project; the product form is an exported
+   .exe over export presets, a row of its own) parked per AGENTS
+   §2.4 — a named row when the owner calls it.
 2. The remaining station rows (the owner's next engine run,
    TEST_PLAN §8.5's standing gaps + the wb-6 arm: the live-build
    /models/load + /models/unload re-verification against the

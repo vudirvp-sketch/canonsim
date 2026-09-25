@@ -74,6 +74,17 @@ ALLOWLIST: dict[str, str] = {
         "cruft pass done at admission (the external changelog cut, the "
         "seams reconciled to the landed wb surface) — worklog iter-225 "
         "the record",
+    "docs/FRONTEND_UIUX_LAW.md":
+        "the frontend UI/UX law (iter-233, D-214) — the distilled "
+        "binding form of the owner's Ultimate Frontend/UI/UX/Visual "
+        "Architecture pack over the WHOLE frontend domain (27 law "
+        "sections: the interaction grammar + the epistemic grammar + "
+        "the accessibility/localization/responsive contracts + the "
+        "verification matrix + the invariants); substance-dense at "
+        "the ceiling — the §6.1 cruft pass done at admission (three "
+        "compression rounds: 632→627; the enum/field/invariant lists "
+        "are the substance §6.1 names as never-cut) — worklog "
+        "iter-233 the record",
     "docs/worldbuild/WORLD_TESTS.md":
         "the W5 probe-run records are measured substance (the instrument "
         "protocols + the classified blind-reader results) — the §6.1 "

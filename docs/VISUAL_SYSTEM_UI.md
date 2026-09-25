@@ -198,4 +198,35 @@ wb-16+ the later surfaces   — Inference, Prompts, History,
 ```
 
 The order is dependency logic, not a schedule — the owner reorders
-freely; a row opens when named.
+freely; a row opens when named. The FRONTEND_UIUX_LAW §25 order
+(iter-233, D-214) re-points the queue's position in the whole-frontend
+plan: the P0 minimums row (ux-1) and the Observatory slice (obs-1)
+run BEFORE indefinite peripheral polish — the visual rows wb-13+
+are the P2 continuation, each still its own owner-gated row here.
+
+## 11. Mandatory companion requirements (the spec-integrity repair)
+
+This file is the VISUAL law owner — one layer of the frontend law,
+never the whole of it. The following requirements are BINDING on
+every visual row and live in their owning law
+(`docs/FRONTEND_UIUX_LAW.md`, admitted iter-233/D-214 over the
+owner's Ultimate Frontend/UI/UX/Visual Architecture pack; the
+D-024/D-200 no-vendoring law). This routing block is the §1 repair
+of the drift the pack diagnosed: the short law was an accidental
+lossy compression of the approved requirements (accessibility,
+keyboard/focus, reduced motion, responsive/DPI, localization were
+materially missing) — an INDEX, never permission to forget:
+
+```text
+Accessibility (WCAG 2.2 + ISO 9241-171:2025 baseline) — LAW §15
+Focus/keyboard contract (order, entry, restoration, Escape)  — LAW §15
+Reduced-motion policy (the static-equivalent law)            — LAW §15
+Responsive/DPI/multi-monitor (viewport classes + min-size)  — LAW §16
+Localization (the _tr boundary + Cyrillic-safe layout)        — LAW §17
+Observatory interaction grammar (selection/context/evidence) — LAW §3..§9
+Verification (static ≠ runtime ≠ task proof + the A–I gates)   — LAW §22
+```
+
+A visual row that satisfies THIS file while violating a companion
+requirement is NOT compliant — the §8 report checks the companion
+set too.
