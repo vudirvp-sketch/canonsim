@@ -6,10 +6,12 @@ model → UI).
 What this is: the bounded, deterministic projection of the canonical
 JSONL log (INV-1 — the append-only truth) the Observatory surface
 consumes. It sits beside ``workbench/scene_build.py`` — the same
-read-side edge wb-1 established over ``core.log.read_log`` (the
-workbench reads CanonSim's READ products; it never writes, never
-re-interprets, never becomes a second authority — the LAW's
-invariants 1/2).
+read-side edge wb-1 established, now riding the ONE canonical read
+seam ``workbench/canonical_read.py`` (ssi-6/D-228 — core.log's read
+products reach the workbench exactly there; this module holds no
+core/ import of its own). The workbench reads CanonSim's READ
+products; it never writes, never re-interprets, never becomes a
+second authority — the LAW's invariants 1/2.
 
 The application-operations package stays CanonSim-free (its own
 dependency envelope): this module is the seam's one home, and the
@@ -61,7 +63,7 @@ import re
 from pathlib import Path
 from typing import Any, Mapping
 
-from core.log import LogError, read_log, validate_header
+from workbench.canonical_read import LogError, read_log, validate_header
 
 #: The boundedness law's declared ceiling (LAW §39 — the window the
 #: UI may request; the default keeps a page at 50 rows, the cap 200

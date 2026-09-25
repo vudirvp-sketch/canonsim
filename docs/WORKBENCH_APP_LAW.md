@@ -607,7 +607,7 @@ LOD/cache/effects, screenshots/regression/usability. The frontend may
 derive presentation data but cannot mutate application semantics; there
 is no generic "presentation super-layer".
 
-## 24. CanonSim vertical seam `[LANDED read-side — wb-1 scene_build + obs-2 observatory_read]`
+## 24. CanonSim vertical seam `[LANDED read-side — wb-1 scene_build + obs-2 observatory_read; ssi-6/D-228 the canonical read seam]`
 
 The first serious simulation slice proves: `Workbench intent → the
 shared CanonSim application/semantic seam → the existing parser/action/
@@ -615,10 +615,14 @@ door/validation path where applicable → the canonical event path → the
 existing consequence/read-side projection → the typed Workbench read
 model → the frontend surface`. Never duplicate CanonSim pack parsing,
 canonical validation, folding, world truth or semantic time. The
-read-side edge is `core.log` imports ONLY (the render/chronicle
-pattern); the operations package stays CanonSim-free per its dependency
-envelope — the seam's one home per family (scene_build.py /
-observatory_read.py).
+read-side edge is the ONE canonical read seam
+`workbench/canonical_read.py` (ssi-6/D-228 — the workbench's ONLY
+core-import module, the pure re-export shell over the read surface;
+INV-4's sanctioned-module pattern at the core-read boundary, enforced
+by test_architecture + the topology watchlist pin); the operations
+package stays CanonSim-free per its dependency envelope — one
+read-model home per family (scene_build.py / observatory_read.py),
+every family reading core/ through the seam, never a second edge.
 
 ## 25. Shutdown/process-loss contract `[PARTIAL — the launcher's two-child shutdown + lifecycles' FAILED_SHUTDOWN]`
 

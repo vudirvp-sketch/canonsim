@@ -12,7 +12,9 @@ Determinism law (D4): the same inputs produce byte-identical JSON —
 `json.dumps(..., sort_keys=True, separators=(",", ":"))`, floats
 rounded to `COORD_DECIMALS`, lists in construction order. No wall
 clock, no PYTHONHASHSEED dependence (the sha256 `stable_hash`, the
-one hash implementation, imported from `core/rng.py`).
+one hash implementation — reached through the canonical read seam
+`workbench/canonical_read.py`, ssi-6/D-228; this module holds no
+core/ import of its own).
 
 Identity closure (the v5.2 brief's §23.1): a scene is reproducible
 only when the semantic input AND the composition material are pinned —
@@ -27,7 +29,7 @@ import json
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
-from core.rng import stable_hash
+from workbench.canonical_read import stable_hash
 
 #: The IR's own schema identity — bumps on any breaking shape change
 #: (the same discipline as the event schema's `schema_version`).

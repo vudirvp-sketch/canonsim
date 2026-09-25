@@ -19,6 +19,14 @@
   read-or-write), `emits` (`type=`/`kind=` string literals + `dyn`
   when the type flows from pack data at runtime; workbench rows carry
   the gateway operations registered via `name="op.name"` literals).
+- **Map refresh iter-250** (ssi-6, Phase 5): the canonical read seam
+  `workbench/canonical_read.py` LANDED (D-228) — the ONE workbench
+  core-import module; the three read-side consumers (scene_build,
+  observatory_read, scene_ir) now read through it (their rows below
+  carry the live derivation at this iteration's HEAD); the seam
+  joined the watchlist — its `reads` cell (the sanctioned core read
+  surface) is now hard-pinned: the surface grows DELIBERATELY, a map
+  update in the same iteration, never silently.
 - **Authored** (semantic, human): the `owner` column — the module's
   semantic responsibility + its owning spec/decision, sourced from
   NAV §1 and the spec docs.
@@ -73,7 +81,7 @@
 
 ## 1. The map (the machine-readable table)
 
-watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, workbench/application/inference/__init__.py, core/pack.py
+watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, workbench/application/inference/__init__.py, core/pack.py, workbench/canonical_read.py
 
 | module | owner | lines | reads | writes | emits |
 |---|---|---|---|---|---|
@@ -163,12 +171,13 @@ watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, wor
 | workbench/application/operations/models.py | the model discovery + fetch/import (wb-9/wb-10, D-208/D-209) | 627 | workbench/api/gateway.py, workbench/application/operations/execution.py | — | model.fetch, model.import |
 | workbench/application/operations/observatory.py | the Observatory ops layer (obs-2, D-217) | 119 | workbench/api/gateway.py, workbench/observatory_read.py | — | observatory.read, observatory.runs |
 | workbench/application/settings.py | the launch-settings store (wb-9, D-208) | 385 | workbench/api/gateway.py | — | backend.settings, backend.settings.update |
-| workbench/observatory_read.py | the Observatory read model — the ONE log seam home (obs-2, D-217) | 261 | core/log.py | — | — |
+| workbench/canonical_read.py | the canonical read seam — the ONE workbench core-import module, the narrow read API (Phase 5/ssi-6, D-228; INV-4's sanctioned-module pattern at the core-read boundary) | 59 | core/fold.py, core/log.py, core/pack.py, core/rng.py | — | — |
+| workbench/observatory_read.py | the Observatory read model (obs-2, D-217) — reads through the canonical seam | 263 | workbench/canonical_read.py | — | — |
 | workbench/platform/__init__.py | the platform package root | 8 | — | — | — |
 | workbench/platform/llama_process.py | the managed llama-server process (wb-8, D-205) | 921 | — | — | — |
 | workbench/platform/model_fetch.py | the outbound model-assets fetch (INV-4's third surface, D-208) | 278 | — | — | — |
-| workbench/scene_build.py | the scene read model (wb-1) — reads core/ directly (ssi-6 evidence) | 202 | core/fold.py, core/log.py, core/pack.py, core/rng.py, workbench/scene_ir.py | stores:event.schema.json | — |
-| workbench/scene_ir.py | the Visual Scene IR (CONTRACTS §5) | 254 | core/rng.py | — | — |
+| workbench/scene_build.py | the scene read model (wb-1) — reads through the canonical seam | 210 | workbench/canonical_read.py, workbench/scene_ir.py | stores:event.schema.json | — |
+| workbench/scene_ir.py | the Visual Scene IR (CONTRACTS §5) — reads through the canonical seam | 256 | workbench/canonical_read.py | — | — |
 
 ## 2. The co-change audit (the last 150 commits)
 
@@ -265,12 +274,23 @@ DORMANT; the live growth front is workbench, and Phase 3's target
   (the proven decomposition method) with loop.py's 32-module read set
   (§1) as the seam map. The public-interface freeze (D-221) and the
   R2/R3 + PCC stepping stand unchanged.
-- **ssi-6 (Phase 5, the canonical read seam) — the map names the
-  seam's concrete consumers**: workbench read-side modules importing
-  core/ directly are scene_build.py (fold/log/pack/rng),
-  observatory_read.py (log), scene_ir.py (rng) — three modules, the
-  «exactly N sanctioned modules» pattern's candidate set (INV-4's
-  form).
+- **ssi-6 (Phase 5, the canonical read seam) — CLOSED iter-250**
+  (the owner's «продолжай работу» go-ahead over the confirmed Phase 3
+  closure): the seam LANDED as `workbench/canonical_read.py` — the
+  ONE workbench core-import module, a pure re-export shell over the
+  10-name canonical read surface (log: read_log/validate_header/
+  EventRecord/LogError; fold: fold/initial_projection/
+  present_in_order; pack: load_pack/PackError; rng: stable_hash —
+  D-024's one-owner law: the edge only, never a second copy). The
+  map's candidate set migrated: scene_build.py (fold/log/pack/rng),
+  observatory_read.py (log), scene_ir.py (rng) now read through it —
+  zero behavior change, the public surfaces byte-stable. The law is
+  executable twice over: tests/test_architecture.py (a core import
+  anywhere else in workbench/ goes RED) + the seam's watchlist row
+  (its reads cell — the sanctioned surface — hard-pinned by
+  --check). scripts/ and render/ keep their direct core imports by
+  design (the periphery, D-046 — the seam bounds the workbench app
+  layer only).
 - **The map's own law**: `python scripts/topology.py --check` runs in
   the suite (test_topology.py's drift pin); any iteration that adds a
   scope module, or changes a watchlist module's imports/emits,

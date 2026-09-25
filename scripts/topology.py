@@ -53,9 +53,12 @@ SCOPE_TOPS = ("core", "workbench")
 # The strangler watchlist (the ssi-3 hypotheses + the co-change
 # partner; iter-247: the ssi-4 step-1 split moved inference.py into
 # the inference/ package — the watchlist successor is the package's
-# facade, the public-surface seam) — the ONLY rows whose reads+emits
-# are hard-pinned by --check: these files' topology must change
-# DELIBERATELY (a map update in the same iteration), never silently.
+# facade, the public-surface seam; iter-250: the ssi-6 canonical read
+# seam joined — its reads cell is the sanctioned core read surface,
+# hard-pinned so it grows deliberately, never silently) — the ONLY
+# rows whose reads+emits are hard-pinned by --check: these files'
+# topology must change DELIBERATELY (a map update in the same
+# iteration), never silently.
 WATCHLIST = (
     "core/loop.py",
     "core/director.py",
@@ -63,6 +66,7 @@ WATCHLIST = (
     "core/intent.py",
     "workbench/application/inference/__init__.py",
     "core/pack.py",
+    "workbench/canonical_read.py",
 )
 IN_REPO_PREFIXES = ("core", "workbench", "sim", "brief", "render", "cli")
 STORE_RE = re.compile(r"^[A-Za-z0-9_./-]+\.(json|jsonl)$")

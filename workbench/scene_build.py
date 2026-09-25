@@ -5,8 +5,10 @@ source.
 The law here is reuse, not invention: `read_log` + `fold` +
 `present_in_order` are the ONE presence/canon laws (the
 render/chronicle.py read-side pattern); this module only projects what
-they already answer. Zero canon writes, zero network, zero RNG — the
-deterministic placement rides `stable_hash` and construction order
+they already answer — reached through the canonical read seam
+(`workbench/canonical_read.py`, ssi-6/D-228 — this module holds no
+core/ import of its own). Zero canon writes, zero network, zero RNG —
+the deterministic placement rides `stable_hash` and construction order
 (INV-2's read-side discipline).
 
 Composition (wb-1's placeholder policy, `COMPOSITION_POLICY_VERSION`):
@@ -23,10 +25,16 @@ import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from core.fold import fold, initial_projection, present_in_order
-from core.log import EventRecord, read_log
-from core.pack import PackError, load_pack
-from core.rng import stable_hash
+from workbench.canonical_read import (
+    EventRecord,
+    PackError,
+    fold,
+    initial_projection,
+    load_pack,
+    present_in_order,
+    read_log,
+    stable_hash,
+)
 from workbench.scene_ir import (
     COORDINATE_SPACE,
     Camera,

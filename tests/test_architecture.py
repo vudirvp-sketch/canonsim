@@ -34,7 +34,14 @@ The invariants made executable with stdlib `ast` only — zero new dev deps:
     its documented owner/purpose is an unadmitted primitive (AGENTS
     §2.8: named consumer, owner, minimal intervention, verification
     — the coverage-closure law's own sibling at the documentation
-    edge).
+    edge);
+(h) the canonical read seam (Phase 5/ssi-6, D-228) — `workbench/`
+    imports core/ EXACTLY THROUGH `workbench/canonical_read.py`, the
+    narrow read API (INV-4's sanctioned-module pattern applied to the
+    core-read boundary: the ONE module whose reads the topology map
+    hard-pins); a core import anywhere else in the workbench app
+    layer — a second edge, a write arm, a fresh deep dependency —
+    goes RED here.
 
 Trivially green on a healthy tree, loud on the first violation.
 """
@@ -75,6 +82,17 @@ NETWORK_EXCEPTIONS = frozenset(
         REPO / "workbench" / "platform" / "model_fetch.py",
     }
 )
+#: The canonical read seam (Phase 5/ssi-6, D-228): the ONE workbench
+#: module that may import core/ — the narrow read API every other
+#: workbench module reaches CanonSim's read products through (the
+#: pure re-export shell over read_log/validate_header/EventRecord/
+#: LogError/fold/initial_projection/present_in_order/load_pack/
+#: PackError/stable_hash; its reads ride the topology map's watchlist
+#: — the surface grows deliberately, never silently). The periphery
+#: (scripts/ — the offline operator graph, render/ — the chronicle
+#: read-side) keeps its direct core imports by design (D-046, the
+#: map's §0 scope law); this pin bounds the WORKBENCH app layer only.
+CORE_READ_SEAM = REPO / "workbench" / "canonical_read.py"
 _OPERATOR_ENTRY_DIRS = frozenset({"cli", "scripts"})
 
 
@@ -279,3 +297,37 @@ def test_admission_closure_every_package_dir_is_documented_in_nav() -> None:
             f"an unadmitted primitive (SSI-N002, AGENTS §2.8; the row "
             f"joins in the same iteration the dir lands)"
         )
+
+
+def test_core_reads_only_through_the_canonical_seam() -> None:
+    """The canonical read seam executable (Phase 5/ssi-6, D-228):
+    `workbench/` imports core/ EXACTLY THROUGH
+    `workbench/canonical_read.py` — INV-4's sanctioned-module pattern
+    («exactly N modules», one per boundary) applied to the core-read
+    boundary. The three read-side consumers the map names
+    (scene_build.py, observatory_read.py, scene_ir.py) and every
+    future workbench module reach the canonical read products
+    (read_log, the fold, the pack load, stable_hash) through the seam
+    — a direct core import anywhere else in the workbench app layer
+    fails here: a second edge is an unaudited dependency on the
+    engine's internals, exactly what the phase exists to close. The
+    seam's OWN surface is drift-pinned by scripts/topology.py
+    --check (it rides the map's watchlist); this test bounds the
+    consumers, that pin bounds the seam."""
+    seam_on_disk = CORE_READ_SEAM.is_file()
+    for path in sorted((REPO / "workbench").rglob("*.py")):
+        if path == CORE_READ_SEAM:
+            continue
+        roots = import_roots(parse(path))
+        assert "core" not in roots, (
+            f"{path}: core import(s) outside the canonical read seam — "
+            f"workbench/ reaches core/ EXACTLY THROUGH "
+            f"workbench/canonical_read.py (Phase 5/ssi-6, D-228; INV-4's "
+            f"sanctioned-module pattern at the core-read boundary; a new "
+            f"read need joins the seam's surface, never a second edge)"
+        )
+    assert seam_on_disk, (
+        f"{CORE_READ_SEAM}: the canonical read seam itself is missing — "
+        "the one sanctioned core-import module (Phase 5/ssi-6, D-228) "
+        "must exist for the pin above to bound anything"
+    )

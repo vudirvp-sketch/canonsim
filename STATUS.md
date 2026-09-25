@@ -1,45 +1,54 @@
-Iteration: iter-249 (the `ssi` track, ssi-4/Phase 3 step 3 — the
-owner's 2026-09-26 «ssi4 вроде открыть можно» call): PHASE 3
-CLOSED — the PERSISTENCE/OPERATIONS half out of the facade: store.py
-(SCHEMA + the InferenceStore: load-loud / current / update-atomic /
-persist), migration.py (the one-way settings/1 → settings/2 +
-inference/1 migration), operations.py (the gateway family
-inference.read/update + effective_temperature — the ops now deriving
-at their TRUE owner; the map shows them there), compiled.py
-(compile_semantic, the platform seam's field-keyed input) extracted
-verbatim; the facade = the PURE re-export shell (176 lines: the
-docstring + the re-exports + __all__). The split COMPLETE: 2511
-lines → 10 owner modules + the facade, zero behavior change across
-the three steps, the public import surface + the gateway operations
-+ the test claim packet byte-stable throughout
-(tests/test_inference.py untouched since iter-240; 2361+9 at every
-step). The drift-pin test re-pinned to the emission-free facade (an
-op re-added there = RED — the pure-shell law is now executable).
-D-227 carries the (R3) PCC record; the overlay's phase row →
-CLOSED.
+Iteration: iter-250 (the `ssi` track, ssi-6/Phase 5 — the
+  owner's 2026-09-26 «ssi-4/Phase 3 полностью закрыта ==>
+  продолжай работу» call): PHASE 5 CLOSED — the canonical read
+  seam LANDED: workbench/canonical_read.py the ONE workbench
+  core-import module (a pure re-export shell over the 10-name
+  canonical read surface — log read_log/validate_header/
+  EventRecord/LogError, fold fold/initial_projection/
+  present_in_order, pack load_pack/PackError, rng stable_hash;
+  __all__ the pinned surface); the map's three read-side consumers
+  (scene_build, observatory_read, scene_ir) migrated at ZERO
+  behavior change — import re-points + docstring syncs only, every
+  public surface byte-stable, the claim packets untouched. The law
+  executable twice over: test_architecture (h) (the core-import
+  ban outside the seam across workbench/ — INV-4's sanctioned-
+  module idiom at the core-read boundary) + the seam's watchlist
+  row (its reads cell — the sanctioned surface — hard-pinned by
+  topology --check: the surface grows only with a same-iteration
+  map update); the drift pin RED on the missing inventory row →
+  GREEN in-iteration (the designed loudness). ssi-5/Phase 4
+  explicitly NOT opened on this call — the N018 evidence gate
+  unmet (the audit-refuted live coupling stands; that phase needs
+  the owner's fresh co-change evidence or the explicit skip,
+  never momentum). D-228 carries the (R3) PCC record; the overlay's
+  phase row → CLOSED.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(Phase 3 of the ssi initiative now CLOSED; the next phase the owner's
+(Phase 5 of the ssi initiative now CLOSED; the tail the owner's
 call — see Next step) + the world track + the SoW horizon, ROADMAP
 §2/§6) ·
-2361 passed + 9 skipped, ruff clean, docguard clean, topology --check
+2362 passed + 9 skipped, ruff clean, docguard clean, topology --check
 clean (Python 3.12.14, the env pin; the REDOT_EXE-gated visual packets
 not run this session — no engine binary in the sandbox; the .gd layer
 untouched since iter-246, the D-093 skips unaffected) ·
 Date: 2026-09-26 ·
-Scope: workbench/application/inference/{__init__.py (the pure
-facade), store.py, migration.py, operations.py, compiled.py (new)} +
-tests/test_topology.py (the re-pinned breach) + docs/{SSI_TOPOLOGY.md
-(the final rows), ssi/SSI_OVERLAY.md (phase 3 CLOSED), DECISIONS.md
-(D-227), TASKS.md (ssi-4 DONE + the ledger)} + STATUS.md + worklog.md
-— 10 paths; zero behavior change, zero core change, the LOG
+Scope: workbench/canonical_read.py (new — the seam) +
+workbench/{scene_build.py, observatory_read.py, scene_ir.py} (the
+import re-points onto the seam) + tests/test_architecture.py (the
+(h) seam law) + scripts/topology.py (the WATCHLIST sync) +
+docs/{SSI_TOPOLOGY.md (the map refresh + the watchlist row),
+WORKBENCH_APP_LAW.md (§24 the one-seam edge), ssi/SSI_OVERLAY.md
+(phase 5 CLOSED), DECISIONS.md (D-228), TASKS.md (ssi-6 DONE + the
+ledger, iter-239 evicted)} + STATUS.md (KI#99 deleted per the
+2-iteration law) + worklog.md (iter-240 evicted) — 13 paths; zero
+behavior change, zero core change (no core/ file edited), the LOG
 untouched.
-Track A: the ssi family the head (Phase 3 CLOSED at iter-249; ssi-5
-shrunk and owner-gated, ssi-6/7/8 owner-gated — the ladder's tail);
-the inf family behind (iter-240 the full chip library); the obs
-family behind (iter-236 obs-2, 235 obs-1, 234 ux-1); the wb family
-behind: iter-237 the corpus re-homing. The detail lives in the
-worklog + git.
+Track A: the ssi family the head (Phase 5 CLOSED at iter-250;
+ssi-5 evidence-gated — may never open, ssi-7/8 owner-gated — the
+ladder's tail); the inf family behind (iter-240 the full chip
+library); the obs family behind (iter-236 obs-2, 235 obs-1, 234
+ux-1); the wb family behind: iter-237 the corpus re-homing. The
+detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -67,7 +76,8 @@ worklog + git.
 
 ## Active KIs
 
-- KI#99 · the shell's ui_state path DOUBLED workbench/ (the base-dir walk counted globalize_path's trailing slash as a level; KI#98's class) · 2026-09-26 · CLOSED iter-246 (normalize the slash + walk the real depth, the pin derives the depth from project.godot's location — worklog iter-246 the detail; the doubled tree on the owner's disk is untracked gitignored — hand-delete)
+(none — KI#99 closed iter-246, deleted iter-250 per the 2-iteration
+cleanup law)
 
 ## FAQ / Pitfalls
 
@@ -98,40 +108,34 @@ worklog + git.
 
 ## Next step
 
-**iter-249 DONE: ssi-4/Phase 3 CLOSED — the inference split complete
-(2511 → 10 owner modules + the 176-line pure facade; the public
-surface / the gateway ops / the claim packet byte-stable; the pure-
-shell law executable — an op re-added to the facade goes RED);
-D-225/D-226/D-227 the PCC records. 2361+9 + ruff + docguard +
-topology --check clean.**
-iter-246 DONE: KI#99 CLOSED (the ui_state path fix).
-iter-241..245 DONE: the ssi foundation + Phase 2 (D-221..D-224).
+**iter-250 DONE: ssi-6/Phase 5 CLOSED — the canonical read seam
+(workbench/canonical_read.py the ONE workbench core-import module;
+the three consumers migrated at zero behavior change; the law
+executable twice: test_architecture's import ban + the seam's
+watchlist reads pin). D-228 the (R3) PCC record. 2362+9 + ruff +
+docguard + topology --check clean. ssi-5 explicitly NOT opened
+(N018: the evidence gate unmet).**
+iter-249 DONE: ssi-4/Phase 3 CLOSED (the inference split:
+2511 → 10 owner modules + the facade; D-225/D-226/D-227).
+iter-241..248 DONE: the ssi foundation + Phase 2 + KI#99
+(D-221..D-227).
 
-1. The ssi family — the next phase is the OWNER's call (the phase
-   law: docs/ssi/SSI_OVERLAY.md §6; the evidence base:
-   docs/SSI_TOPOLOGY.md), what each needs:
-   - **ssi-5 (Phase 4, the core strangler)** — scope SHRUNK by the
-     ssi-3 audit: the god-objects are dormant (the live coupling
-     REFUTED, pack already decomposed); it opens ONLY on a fresh
-     material_gap (co-change/trajectory evidence at a named pain),
-     never a line-count snapshot (N018). What it needs from the
-     owner: either the fresh evidence (a real co-change pain in
-     core/) or the explicit skip — the phase may never open.
-   - **ssi-6 (Phase 5, the canonical read seam)** — the consumer set
-     is named by the map (scene_build.py / observatory_read.py /
-     scene_ir.py — the three workbench read-side modules importing
-     core/ directly); INV-4's «exactly N sanctioned modules» pattern
-     is the design. What it needs from the owner: the go-ahead call
-     alone.
+1. The ssi family — the remaining tail (each row on the owner's
+   separate explicit call, the phase law: docs/ssi/SSI_OVERLAY.md
+   §6; the evidence base: docs/SSI_TOPOLOGY.md), what each needs:
+   - **ssi-5 (Phase 4, the core strangler)** — stays CLOSED unless
+     the owner names a real pain: it opens ONLY on fresh
+     material_gap (co-change/trajectory evidence at a named pain in
+     core/), never a line-count snapshot (N018); the explicit skip
+     is the other door — the phase may never open. What it needs
+     from the owner: the fresh evidence OR the explicit skip.
    - **ssi-7 (Phase 6, the semantic diff layer over T1)** — an
      ADDITIONAL verification layer (event ids/types/causes/actors/
-     targets/RNG-fingerprint, interpreter/line-ending independent),
-     never a T1 «bug fix». What it needs from the owner: the
-     go-ahead call.
+     targets/RNG-fingerprint comparison, interpreter/line-ending
+     independent), never a T1 «bug fix». What it needs from the
+     owner: the go-ahead call.
    - **ssi-8 (Phase 7, the GC pass)** — the deletion-card sweep
-     (N020; KI#99's doubled tree a named candidate — already
-     hand-deletable). What it needs from the owner: the go-ahead
-     call.
+     (N020). What it needs from the owner: the go-ahead call.
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
