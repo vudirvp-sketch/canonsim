@@ -443,9 +443,13 @@ def test_the_chat_surface_smooth_follow() -> None:
     assert "_start_busy_pulse" in text
     assert "_stop_busy_pulse" in text
     assert "_busy_row.visible = busy" in text
-    # the NavButton variation (the rail's quiet set, values in the theme)
+    # the NavButton variation (the rail's quiet set, values in the
+    # theme; KI#94: applied through the theme_type_variation PROPERTY —
+    # Redot 26.2 has NO add_theme_type_variation method; the engine's
+    # own 2026-09-25 report killed _ready at _build_nav_rail)
     assert 'set_type_variation("NavButton", "Button")' in text
-    assert 'add_theme_type_variation("NavButton")' in text
+    assert 'theme_type_variation = "NavButton"' in text
+    assert "add_theme_type_variation" not in text
 
 
 # ----------------------------------- iter-224: the literal-concatenation ban

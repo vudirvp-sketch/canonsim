@@ -1,36 +1,41 @@
-Iteration: iter-230 (`wb-12-token-audit` + the chat follow
-mechanism — the owner's 2026-09-25 «тема и UI все так же убоги, тема
-ужасная» + «в чате при получении сообщений от языковой модели => не
-происходит плавной прокрутки вниз» calls, over the v5.2 plans pack
-the visual direction named): theme@0.3 — the token audit per
-VISUAL_SYSTEM_UI §2/§3 (the neutral ramp re-pinned over the
-Catppuccin Mocha VALUE reference — the mechanism taken is the tuned
-layered luminance separation, per §6 mechanisms-not-looks; exactly
-ONE accent, the soft blue #89b4fa family; accent_deep RETIRED — no
-consumer; the NavButton type variation + the styles/chip_busy token)
-+ the chat's FOLLOW LAW (the smooth tween over the scrollbar's float
-value — never the integer jump; the layout-settle await before the
-target is read; the near-bottom gate so a reading owner is never
-yanked; the follow fires for EVERY role incl. the user's own send)
-+ the GENERATING chip (§5's Chat matrix state made visible: a pulsing
-accent dot AND a text label — §4's not-color-only law).
+Iteration: iter-231 (`ci-unred-nav-variation` — the owner's
+2026-09-25 engine report — «Invalid call. Nonexistent function
+'add_theme_type_variation' in base 'Button'» killing _ready at
+_build_nav_rail + the unused `row` warning — and the CI-red report
+«в прошлых двух итерациях как минимум у тебя тесты на репо
+проваливаются Run python -m pytest -q и сейчас тоже», runs 82–84
+red since iter-227): TWO shipped defects pinned dead. KI#93 — the
+launcher/gateway pipe chain owned NOTHING of its buffering: the
+gateway child's bind line sat in the pipe's block buffer unless the
+host exported PYTHONUNBUFFERED (the sandbox does; CI and the owner's
+Windows machines do not) → the 90s boot probe honestly failed → one
+red CI test since iter-227 while every local run stayed green; the
+fix owns the buffering in the chain itself (the gateway child rides
+`-u`, the supervisor line-buffers its own stdout, the test spawn
+strips the var — env-invariant). KI#94 — iter-230's NavButton wiring
+called a Control method Redot 26.2 does not have; the API is the
+`theme_type_variation` PROPERTY (the engine's own report + the Godot
+4 cross-reference); the property form + the negative pin; the dead
+`row` local removed with it.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the wb family its live head, wb-12 DONE + the visual rows queued
 wb-13+) + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2285 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
-clean per D6/D-093 — the sandbox binary absent) ·
+the env pin; VERIFIED TWICE — the standard env AND a stripped
+PYTHONUNBUFFERED env, the CI/owner condition, KI#93's lesson; the 5
+REDOT_EXE-gated visual packets + duckdb skipping clean per D6/D-093
+— the sandbox binary absent) ·
 Date: 2026-09-25 ·
-Scope: workbench/presentation/redot/themes/workbench_theme.tres (the
-re-pinned token values + the new NavButton/chip_busy tokens) +
-workbench/presentation/redot/scripts/shell.gd (the follow law + the
-busy chip + the NavButton wiring, SHELL_VERSION 0.4) +
-tests/test_shell_contract.py (+1 test, the wb-12 pins updated) + the
-state docs (STATUS/TASKS/NAV/CONTRACTS/DECISIONS/README/worklog) — 9
-paths (the 3–5 soft limit honestly over: the theme + the shell + the
-claim packet + the state docs, AGENTS §2.3).
-Track A: the wb family (wb-12 DONE — the visual rows queued wb-13+
+Scope: scripts/workbench_launch.py (the chain-owned buffering) +
+workbench/presentation/redot/scripts/shell.gd (the property form ×2
++ the dead local) + tests/test_workbench_launch.py (the env-stripping
+spawn) + tests/test_shell_contract.py (the property pin + the
+negative method pin) + the state docs (STATUS/TASKS/worklog) — 7
+paths (the 3–5 soft limit honestly over: two shipped defects + their
+regression pins + the state docs, AGENTS §2.3).
+Track A: the wb family (iter-231 the CI-unred + NavButton fix; wb-12
+DONE — the visual rows queued wb-13+
 per VISUAL_SYSTEM_UI §10; the prior record: iter-229 the law
 admission, 228 wb-11 transport chain, 227 wb-10, 226 wb-9 D-208, 225
 the engine index D-207, 224 D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220
@@ -63,15 +68,19 @@ worklog + git.
 
 ## Active KIs
 
-- (none — KI#92 opened + CLOSED iter-228 in the same row: the
-  transport-13 freeze chain — the coarse dispatch lock held
-  minutes-class by the synchronous model.load spawn/readiness walk
-  starved every concurrent request past the client's 10s budget; the
-  client's one-request queue wedged behind the long call; the
-  undrained Windows pipes could wedge the managed server mid-load;
-  the `os.set_blocking` stderr_tail raised on Windows — the failure
-  cause showed '(empty)'. The fix: the load/unload runs + the pipe
-  drains + the honest guards, wb-11.)
+- (none — KI#93 + KI#94 opened + CLOSED iter-231 in the same row:
+  KI#93 — CI red since iter-227 (runs 82–84): the launcher/gateway
+  pipe chain leaned on the host's PYTHONUNBUFFERED (the sandbox
+  exports it; CI and the owner's machines do not) — the gateway
+  child's bind line block-buffered past the 90s boot probe, the
+  launcher honestly reported «the gateway failed to serve (exit code
+  0)»; the chain now owns its buffering (`-u` child + line-buffered
+  supervisor + the env-stripping test spawn).
+  KI#94 — iter-230 shipped the NavButton wiring over a nonexistent
+  Control method (`add_theme_type_variation`); Redot 26.2's API is
+  the `theme_type_variation` PROPERTY — _ready died at
+  _build_nav_rail; the property form + the negative pin; the unused
+  `row` local in _apply_model_states removed.)
 
 ## FAQ / Pitfalls
 
@@ -87,7 +96,7 @@ worklog + git.
 - **Hardcoded `from_` is a desync (KI#13/KI#46): repeat effects idempotent; the carried-item position contract single-owned by `movement_changes`; the `_commit` gate fails loud before the write (D-035)** — `core/resolvers.py`.
 - **INV-3's stoplist: no setting nouns in the ENGINE (`core/`+`sim/`+`brief/`, segment-matched, pack-tied word list); `render/`/`cli/`/`scripts/` are periphery (D-046)** — the stoplist test owns enforcement.
 - **Malformed playscript steps raise RunnerError; well-formed but world-impossible intents emit `intent_rejected` (attempts are facts); urgency rejections stay silent** — PARSER_SPEC §4/§6.
-- **The golden T1 fixture is env-pinned: byte-compare only on the generating interpreter; the regen guard pins schema_version + a fresh byte-diff** — TEST_PLAN §1.1 (§3 the migration).
+- **Env-pinned verification cuts both ways: the golden T1 fixture byte-compares only on the generating interpreter (TEST_PLAN §1.1, §3 the migration); and PIPE-READING subprocess tests never lean on the host's PYTHONUNBUFFERED — the sandbox exports it, CI/owner machines do not (KI#93: three green-local/red-CI iterations) — the chain owns its buffering (`-u` child, line-buffered supervisor, the env-stripping spawn)** — tests/test_workbench_launch.py + TEST_PLAN §1.1
 - **Doc drift is evidence, not prescription — verify with `git log -S` AND the pinning test before acting (KI#42/48/51/80); bootstrap texts are convenience copies, never a second source** — D-024/D-027.
 - **The code-quality bar: AGENTS §4/§9 the law, BLUEPRINT §2 (L13/L14) the constitution, test_architecture + the stoplist test the executable; no new canonical layers (D-018)** — D-031.
 - **Procedural guards: git hygiene (verify `.gitignore` after any upload; a file DELETION needs an explicit `git rm` or it never lands (KI#55); `git status --short` before every commit — AGENTS §7) + scope-creep (content/tone → D-030 + PACK_SPEC's sketch row; two consecutive doc-only iterations stop unless a fresh owner request fires (D-022) — AGENTS §2)**
@@ -102,9 +111,10 @@ worklog + git.
 
 ## Next step
 
-**iter-230 DONE: wb-12 the token audit (theme@0.3) + the chat follow
-law + the GENERATING chip LANDED (the owner's «тема и UI все так же
-убоги» + «не происходит плавной прокрутки вниз» calls).**
+**iter-231 DONE: CI un-red (KI#93 — the launcher/gateway buffering
+chain) + the NavButton property fix (KI#94) LANDED (the owner's
+2026-09-25 engine-error + CI-red report: _ready died at
+_build_nav_rail; runs 82–84 red since iter-227).**
 
 1. wb-13+ per the visual queue (VISUAL_SYSTEM_UI §10 — the Models
    surface's matrix rendering over the wb-11 run circuits, then the

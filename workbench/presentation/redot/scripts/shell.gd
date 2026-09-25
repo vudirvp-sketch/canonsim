@@ -342,14 +342,17 @@ func _build_nav_rail() -> Control:
         # wb-12: the rail's quiet control set — a Button TYPE VARIATION so the
         # nav reads as navigation, never as a grid of action buttons. Every
         # value (colors, styleboxes, sizes) lives in the theme file under
-        # NavButton/* — the token law holds (the code only names the type).
+        # NavButton/* — the token law holds (the code only names the type;
+        # KI#94: the Control API is the theme_type_variation PROPERTY —
+        # Redot 26.2 exposes no method form for it; the engine's own
+        # 2026-09-25 report killed _ready at _build_nav_rail).
         _t.set_type_variation("NavButton", "Button")
 
         col.add_child(_caption("SURFACES"))
         var group := ButtonGroup.new()
         for key in SURFACES:
                 var btn := _nav_button(key.capitalize())
-                btn.add_theme_type_variation("NavButton")
+                btn.theme_type_variation = "NavButton"
                 btn.toggle_mode = true
                 btn.button_group = group
                 btn.pressed.connect(_on_surface_selected.bind(key))
@@ -361,7 +364,7 @@ func _build_nav_rail() -> Control:
         col.add_child(_caption("PLANNED · LATER WB ROWS"))
         for axis_name in PLANNED_SURFACES:
                 var later := _nav_button(axis_name)
-                later.add_theme_type_variation("NavButton")
+                later.theme_type_variation = "NavButton"
                 later.disabled = true
                 col.add_child(later)
 
@@ -1433,7 +1436,6 @@ func _model_row_card(logical_name: String, size_bytes: int) -> Control:
 
 func _apply_model_states(states: Dictionary, active: String) -> void:
         for logical_name in _model_rows:
-                var row: Dictionary = _model_rows[logical_name]
                 var observed := _text(states.get(logical_name, "DISCOVERED"))
                 _set_model_row_state(logical_name, observed)
         if active != "":

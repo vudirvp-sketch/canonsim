@@ -30,6 +30,7 @@ the mechanics):
 from __future__ import annotations
 
 import json
+import os
 import signal
 import socket
 import subprocess
@@ -79,7 +80,13 @@ def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
     """THE owner-reported crash, pinned dead: the launcher's gateway
     child (Popen with the line-buffered pipe) must CONSTRUCT and reach
     the bind line — `buffering` (not a Popen keyword) refused the
-    spawn before anything served. Then SIGINT stops the session."""
+    spawn before anything served. Then SIGINT stops the session.
+    KI#93: the whole chain must stream WITHOUT the host's
+    PYTHONUNBUFFERED (CI and the owner's machines never set it — the
+    sandbox's global PYTHONUNBUFFERED=1 masked three red CI
+    iterations), so this spawn strips it: the launcher owns the
+    buffering itself (the gateway child rides `-u`, the supervisor
+    line-buffers its own stdout)."""
     port = _free_port()
     process = subprocess.Popen(
         [
@@ -96,6 +103,11 @@ def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
         stderr=subprocess.STDOUT,
         text=True,
         bufsize=1,
+        env={
+            key: value
+            for key, value in os.environ.items()
+            if key != "PYTHONUNBUFFERED"
+        },
     )
     lines: list[str] = []
     deadline = time.monotonic() + 90.0

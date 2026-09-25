@@ -461,8 +461,12 @@ def _spawn_gateway(gateway_args: list[str]) -> subprocess.Popen:
     """The gateway child: its own process group (Windows: the console's
     Ctrl+C does NOT race our controlled stop — we send CTRL_BREAK
     ourselves; the gateway's handler runs the graceful path), stdout +
-    stderr merged into the watched pipe (line-buffered text)."""
-    command = [sys.executable, str(GATEWAY_SCRIPT), *gateway_args]
+    stderr merged into the watched pipe (line-buffered text) — and the
+    child itself runs `-u`, so its bind line STREAMS through the pipe
+    whatever the host environment (KI#93: `bufsize=1` only paces OUR
+    reads; the child's writes were block-buffered without the host's
+    PYTHONUNBUFFERED — CI and the owner's machines do not set it)."""
+    command = [sys.executable, "-u", str(GATEWAY_SCRIPT), *gateway_args]
     kwargs: dict[str, int] = {}
     if os.name == "nt":
         kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
@@ -521,6 +525,13 @@ def _stop_process(
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
+    # KI#93: the supervisor's own stream must be line-buffered when
+    # piped — the boot report and the forwarded gateway lines are the
+    # test's and the owner's contract; PYTHONUNBUFFERED is not set on
+    # CI/owner machines, so a block-buffered stdout here starves any
+    # reader until exit (never rely on the host's buffering mood).
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(line_buffering=True)
     for folder in bootstrap_runtime_layout():
         print(f"workbench_launch: created {folder}")
     settings = load_launcher_settings()
