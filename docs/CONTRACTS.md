@@ -86,6 +86,16 @@
 > (iter-215); when each wb row lands, its section here collapses to a
 > pointer per the file's own law.
 >
+> **§-reference map (D-218, iter-237 — the corpus re-homing):** every
+> `app spec §N` citation below and across the repo resolves to
+> `docs/WORKBENCH_APP_LAW.md` §N (the binding distillation, the spec's
+> §-numbering preserved 1:1); every Observatory-doc §N resolves to
+> `docs/OBSERVATORY_LAW.md` §N; the frontend spec's §46 implementation
+> ladder resolves to `docs/FRONTEND_UIUX_LAW.md` §25; the world-
+> presentation contracts (the spec's §§23–31) live in
+> `docs/WORLD_PRESENTATION_LAW.md`. The external originals stay with the
+> owner — no repo work requires them anymore.
+>
 > **wb-1 LANDED (iter-215 the Python half + iter-216 the Redot half):**
 > the seam chain proven end to end — the tavern and province fixtures
 > composed and captured, the double-run PNG byte-diff CONFIRMED (the D4

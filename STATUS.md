@@ -1,65 +1,52 @@
-Iteration: iter-236 (`obs2-live-run-read-seam` — FRONTEND_UIUX_LAW
-§25's P1 continuation: the live run feeding the Observatory over a
-READ-side seam, the selection model's first consumer §6):
-workbench/observatory_read.py the seam's one home (the bounded read
-model over the canonical JSONL log — INV-1's own truth, the wb-1
-scene_build read-side edge; the application-operations package
-stays CanonSim-free per its dependency envelope): observatory.runs
-(the discovery scan — per-run parsed header or the honest
-degradation pair, content truths only, no mtime) + observatory.read
-(the after-cursor window over EVENT IDS, default 50/cap 200 the ONE
-boundedness ceiling, authority CANONICAL rendered never guessed,
-duplicate-id/stale-cursor/corrupt logs DOMAIN_REJECTED loud) over
-the injected runs root + schema (half-wired composition refused);
-workbench_app.py passes the cli's own logs/ law (never a second
-copy). observatory.gd v0.2 (canon_observatory@0.2, canon_shell@0.7):
-the live feed — the picker + Refresh + Earlier/Later pagination,
-the selection as the EVENT ID on button metadata (set_meta/get_meta,
-never a row index; restoring by ID across re-reads, §6.1), the
-inspector scrolling (cause + state changes as DATA — a cause_id
-never confirms the BRANCH rung; only READ confirms under a
-selection, §12), the DISTINCT empties (probing ≠ NO RUNS ≠ NO
-EVENTS ≠ refused, §16), the breadcrumb Observatory → run → event ·
-kind (§17); the shell hosts through TWO request signals (the
-observatory never touches the gateway client, §18) + --obs-document
-the proof-only injection (a REAL op document through the SAME feed
-path; exit 4 its refusal; the meta's observatory_run keeps a loaded
-capture honest). The Redot 26.2 lessons pinned: JSON.parse_string
-is the static form; JSON numbers parse as FLOATS (_int_text/
-_normalize_numbers — the canonical ints never render "42.0"); a
-GridContainer value column needs SIZE_EXPAND_FILL; JSON null is a
-PRESENT key (String(null) is a runtime error). VLM-verified loaded
-composition (the headless harness dumps the full inspector: cause/
-state changes/provenance verbatim).
+Iteration: iter-237 (`corpus-rehoming` — the owner's 2026-09-25
+«переработай документацию нормально и мне не приходилось её
+загружать постоянно» call over the re-delivered 8-file v5.2 corpus:
+the loss/duplication/ownership AUDIT first, then the durable
+re-homing — D-218): three new law owners admitted (the D-207/D-211/
+D-214 pattern, §-numbering preserved 1:1 so every existing `app §N` /
+Observatory-`§N` citation resolves with zero edits) —
+docs/WORKBENCH_APP_LAW.md (the application/runtime law: ownership +
+state classes + lifecycles + deadlines/cancellation + streaming/
+persistence/admission contracts + inference policy + the failure
+matrix + the §32 order with LANDED/CONTRACT markers),
+docs/OBSERVATORY_LAW.md (the control plane: operating law + planes +
+run identity + the World Question contract + query families + result
+schemas + the promotion gate + the agent loop + the DoD; research
+findings kept as EVIDENCE SNAPSHOTS), docs/WORLD_PRESENTATION_LAW.md
+(the P4 family: Scene IR composition + the Asset Manifest +
+invalidation + LOD/camera/map + degradation + the shared-GPU model +
+G4/G5/G6/G9/G10/G12); the existing owners REPAIRED not duplicated —
+FRONTEND_UIUX_LAW +§11.1 dense-data/forms/search +§14.1 task
+modelling +§20 budget categories +§21.1 chat ergonomics +§21.2 the
+AI-interaction contract +§22.1 usability evaluation/metrics +§22.2
+the acceptance benchmark + G1–G12 + the anti-pattern completions;
+VISUAL_SYSTEM_UI +§1.1 Gestalt/density +§2.1 dimension tokens +§2.2
+typography +§12 the two-layer identity; REDOT_ENGINE_INDEX +§20.1 the
+version-admission gate; CONTRACTS §5 the §-map + the drifted
+LAW §50/§51/§39/§42 citations re-pointed (they were the
+consolidation's numbers). The external corpus stays EXTERNAL-ONLY
+source material (D-024/D-200) — no repo work requires it anymore.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
 P2 continuation) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2308 passed + 8 skipped, ruff clean, docguard clean (2315+1 with
-the sandbox REDOT_EXE — the gated packets green incl. the LOADED
-observatory capture: double-run byte-identical, distinct from the
-empty slice; Python 3.12.14, the env pin; the REDOT_EXE-gated visual
-packets + duckdb skipping clean per D6/D-093) ·
+2306 passed + 2 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; the REDOT_EXE-gated visual packets + duckdb skipping
+clean per D6/D-093) ·
 Date: 2026-09-25 ·
-Scope: workbench/observatory_read.py (NEW — the read model) +
-workbench/application/operations/observatory.py (NEW — the ops
-layer) + workbench/application/operations/composition.py (the
-injected seam wiring) + scripts/workbench_app.py (the runs root +
-schema) + workbench/presentation/redot/scripts/{observatory.gd
-(v0.2 — the live feed + selection), shell.gd (the hosting +
---obs-document + canon_shell@0.7), strings.gd (the obs.* feed keys
-×2 locales)} + scripts/visual_proof.py (the --obs-document
-pass-through) + tests/{test_observatory_read.py (NEW — the op
-contract ×17), test_shell_contract.py (the obs-2 contract),
-test_shell_proof.py (the loaded capture), test_operations.py (the
-envelope entry)} + the state docs (STATUS/TASKS/worklog/DECISIONS) —
-13 paths.
-Track A: the obs family the live head (iter-235 obs-1, 234 ux-1;
-obs-3+ the P3 rungs per the LAW §25 ladder; the wb family behind:
-iter-232 the race/latch fixes + the OLED re-pin, 231 CI-unred +
-NavButton, 230 wb-12, 229 the visual law, 228 wb-11, 227 wb-10,
-226 wb-9 D-208, 225 the engine index D-207). The detail lives in
-the worklog + git.
+Scope: docs/{WORKBENCH_APP_LAW.md (NEW), OBSERVATORY_LAW.md (NEW),
+WORLD_PRESENTATION_LAW.md (NEW), FRONTEND_UIUX_LAW.md, VISUAL_SYSTEM_UI.md,
+REDOT_ENGINE_INDEX.md, AGENT_NAVIGATION.md, CONTRACTS.md, TASKS.md,
+DECISIONS.md} + STATUS.md + worklog.md + scripts/docguard.py (the
+allowlist entry, the §6.1 protocol) — 13 paths (doc-only + the guard's
+own table, the audit's own law: zero engine code change, the LOG
+untouched).
+Track A: the obs family the live head (iter-236 obs-2, 235 obs-1,
+234 ux-1; obs-3+ the P3 rungs per the LAW §25 ladder; the wb family
+behind: iter-232 the race/latch fixes + the OLED re-pin, 231 CI-unred
++ NavButton, 230 wb-12, 229 the visual law, 228 wb-11, 227 wb-10,
+226 wb-9 D-208, 225 the engine index D-207). The detail lives in the
+worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -96,7 +83,7 @@ the worklog + git.
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
 - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the app spec's §18 evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions still route through docs/REDOT_ENGINE_INDEX.md (D-207).**
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again.**
 - **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -118,26 +105,25 @@ the worklog + git.
 
 ## Next step
 
-**iter-235 DONE: the obs-1 Observatory vertical slice LANDED (the
-IA nav grouping + observatory.gd — the breadcrumb, context strip,
-World Question contract, primary view, inspector, evidence ladder,
-all honest-empty; the runner drift fixed) — 2290+7 (CI) / 2296+1
-(REDOT_EXE) + ruff + docguard clean.**
+**iter-236 DONE: the obs-2 live run over the READ-side seam LANDED
+(the bounded read model + observatory.gd v0.2's live feed, the
+selection the EVENT ID, the honest empties) — 2308+8 (CI) / 2315+1
+(REDOT_EXE) + ruff + docguard clean. iter-237 DONE: the v5.2 corpus
+re-homed (D-218) — three new law owners + the repairs; the external
+corpus never needs re-delivery.**
 
-1. The P1/P2 continuation per FRONTEND_UIUX_LAW §25 (each row on
-   the owner's call): obs-2+ — the slice's NEXT rung (a live run
-   feeding the context strip + the event table over a READ-side
-   seam, the selection model's first consumer) · wb-13+ the visual
-   rows (P2: the shell responsibility split continuing, per
-   VISUAL_SYSTEM_UI §10) · P3's analytical depth (timeline/compare/
-   zoom) after the read-side seam exists (P1 — the
-   interaction grammar validated BEFORE full analytical backend
-   coverage; the wb-13+ visual rows the P2 continuation per
-   VISUAL_SYSTEM_UI §10) — each row opens on the owner's call
-   (the direction call already given for the family's order).
-   The exported-Windows-build row (the owner's «по человечески
-   сделать это нельзя?» — Workbench.bat's dev form is the editor
-   binary running the project; the product form is an exported
+1. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
+   the owner's call): obs-3+ — the P3 analytical rungs (timeline
+   lanes, compare arms, semantic zoom, cross-highlighting — the
+   interaction grammar per FRONTEND_UIUX_LAW §§5–7, the analytical
+   contracts per OBSERVATORY_LAW §§11/18; the question EDITING form
+   when its consumer names itself) · wb-13+ the visual rows (P2: the
+   shell responsibility split continuing, per VISUAL_SYSTEM_UI §10,
+   the chat ergonomics contract now LAW §21.1) — each row opens on
+   the owner's call (the direction call already given for the
+   family's order). The exported-Windows-build row (the owner's «по
+   человечески сделать это нельзя?» — Workbench.bat's dev form is the
+   editor binary running the project; the product form is an exported
    .exe over export presets, a row of its own) parked per AGENTS
    §2.4 — a named row when the owner calls it.
 2. The remaining station rows (the owner's next engine run,

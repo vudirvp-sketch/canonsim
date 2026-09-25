@@ -14,9 +14,18 @@
 > responsive/DPI, or verification routes HERE first. The VISUAL subset
 > (token taxonomy, color law, per-surface state matrix, transplantation)
 > stays with `docs/VISUAL_SYSTEM_UI.md` (D-211); engine facts with
-> `docs/REDOT_ENGINE_INDEX.md` (D-207). The v5.2 frontend spec stays
-> outside the repo; where this law and an external copy disagree, THIS
-> file + the app spec's §18 evidence law win.
+> `docs/REDOT_ENGINE_INDEX.md` (D-207); application/runtime contracts
+> (operations, lifecycles, identity, deadlines, streaming, persistence,
+> inference policy) with `docs/WORKBENCH_APP_LAW.md`; Observatory
+> analytical semantics (planes, query families, run identity, the
+> promotion gate) with `docs/OBSERVATORY_LAW.md`; world presentation /
+> Scene IR / assets / LOD / degradation with
+> `docs/WORLD_PRESENTATION_LAW.md` (all D-218, iter-237 — the corpus
+> re-homing). The v5.2 external specs stay outside the repo; the §-map:
+> app spec §N → WORKBENCH_APP_LAW §N 1:1, Observatory §N →
+> OBSERVATORY_LAW §N 1:1, frontend spec §46/§52 → THIS LAW §25. Where
+> this law and an external copy disagree, THIS file + the app spec's
+> evidence law (WORKBENCH_APP_LAW §19.1) win.
 
 ## 0. Executive doctrine
 
@@ -253,6 +262,28 @@ NO DATA · NO MATCH · NO EVIDENCE · UNKNOWN
 `NO EVIDENCE` must not render as `NO RELATION`; `OUT OF SCOPE` must
 not render as `NOT FOUND`.
 
+### 11.1 Dense data surfaces, forms and search
+
+Density is task-dependent: reading low/medium · authoring/chat medium ·
+data grids/diagnostics high + strong hierarchy · expert configuration
+high + progressive disclosure. Tables are for row/column comparison,
+not arbitrary layout. Dense data supports `find → compare →
+inspect/edit → act` and, where relevant:
+
+```text
+stable columns · numeric alignment · row grouping · sticky/frozen headers
+sorting/filtering near the data · visible selection · keyboard semantics
+accessible headers · stable semantic identity · virtualization
+```
+
+Forms follow user reasoning, not database schema: `identity/target →
+essential choice → dependent choices → optional detail → advanced →
+validation → commit`; preserve recoverable input; keep `invalid ≠
+incomplete ≠ unavailable` distinct. Search supports partial knowledge,
+preserved query state and an explicit result scope. (The Observatory
+event table, History and Diagnostics are the dense-data consumers;
+obs-2's table is the first landed instance.)
+
 ## 12. Drill-down; persistent workspace
 
 Predictable analytical path: world profile → regime → time window →
@@ -306,6 +337,28 @@ failure exposes WHAT FAILED / WHY (best available cause) / WHAT
 REMAINS INTACT / WHAT CAN BE DONE NOW / whether the semantic effect
 is known / RETRY-UNDO-BACK-RESET-EXPORT-RECONCILE where applicable —
 never a generic error wall.
+
+### 14.1 Task modelling; the human-centred loop
+
+A screen is a projection of a workflow, never the design starting
+point. Every major surface walks: `context of use → user/goal/
+constraints → task/workflow → information architecture → interaction
+model → visual/type system → prototype → usability evaluation →
+implementation → measurement → iteration`. For each major task define:
+
+```text
+USER · GOAL · TASK · CONTEXT · INPUT · DECISION · ACTION
+→ FEEDBACK · SUCCESS · FAILURE · RECOVERY
+→ ACCESSIBILITY · INPUT MODALITY · INTERRUPTION · RESUMPTION
+```
+
+Task graph: `goal → choose → inspect → decide → act → verify →
+recover/continue`. Prioritise high-frequency, high-cost, high-risk and
+high-load workflows before decorative refinement. HCI model caveats
+(never laws): Fitts → target acquisition guidance; Hick-Hyman →
+grouping/defaults/search guidance; "7±2" is not an interface-capacity
+law; WCAG target sizes are conformance guidance, not universal desktop
+geometry.
 
 ## 15. Accessibility; reduced motion; focus/keyboard
 
@@ -411,7 +464,12 @@ ceiling + measurement + degradation path; measure the joint workload
 (Redot UI + concurrent local LLM on the same GPU) — cold/warm
 startup, RAM/VRAM idle+active, CPU during streaming, frame-time
 p50/p95/p99, UI latency during streaming, history render cost, scene
-rebuild cost, peak memory.
+rebuild cost, peak memory. Budget categories (declare a ceiling per
+category): active/cache texture memory · asset count · active actors ·
+active effects · atlas/texture size · scene rebuild frequency ·
+materialised history · pending stream buffers · CPU frame budget ·
+GPU frame budget. Do not solve every budget breach by growing caches —
+the degradation ladder comes first (WORLD_PRESENTATION_LAW §13).
 
 ## 21. Surface hygiene
 
@@ -456,6 +514,35 @@ rebuild cost, peak memory.
   authority` · `asset metadata ≠ executable code` · `UI command ≠
   direct CanonSim mutation` · `external API/agent ≠ semantic bypass`.
 
+### 21.1 Chat ergonomics
+
+Chat must grow beyond `messages + input + send + stop`. Message-level
+affordances where applicable: `copy · regenerate/retry · inspect
+metadata · recover failure · export`. Chat output supports text
+selection, code/log selection, clear error presentation, per-message
+identity, run/model provenance. The near-bottom follow law (iter-230's
+`tween + near-bottom gate + late-layout settle`) stays the reference
+pattern. (wb-14 the Chat surface row's contract.)
+
+### 21.2 AI-specific interaction contract
+
+AI-driven surfaces expose operational truth: `USER INPUT · SYSTEM/
+DEVELOPER POLICY · MODEL INPUT · RESOLVED CONFIGURATION · MODEL OUTPUT
+· OBSERVED RUNTIME · DIAGNOSTICS`. Preserve `requested ≠ accepted ≠
+effective ≠ observed ≠ presented` (WORKBENCH_APP_LAW §19.1 owns the
+composition; the UI renders the layers, never overwrites EFFECTIVE
+from a widget value). Presets are intent-named, inspectable, editable,
+versioned when persistence matters, and never silently modify
+out-of-scope settings. Failure classes stay distinct: user input ·
+configuration incompatibility · backend/model · resource · transport ·
+cancellation · internal failure. For expensive/state-changing commands
+distinguish NEW COMMAND vs RETRY; after transport loss with unknown
+outcome, surface the uncertainty (SENT_OUTCOME_UNKNOWN) rather than
+blindly retrying a possibly duplicated operation. Where reproducibility
+matters, retain `model · backend · configuration · prompt · seed · run
+· relevant diagnostics`; never claim bitwise reproducibility without
+backend guarantees.
+
 ## 22. Verification architecture
 
 Three DISTINCT proof layers — never conflated:
@@ -495,6 +582,71 @@ SMALL/MEDIUM/LARGE/HIGH-DPI/ULTRAWIDE viewports × the task states
 disabled, compare, evidence, inspector); regression compares semantics
 where rendering is nondeterministic.
 
+### 22.1 Usability evaluation and engineering metrics
+
+The evaluation stack (cheapest sufficient evidence first):
+
+```text
+0 static/automated audit → 1 expert heuristic review
+→ 2 cognitive walkthrough → 3 task-based usability test
+→ 4 controlled comparison when a defined question exists
+→ 5 validated subjective scales when useful (SUS · UEQ/UEQ-S · NASA-TLX)
+→ 6 local instrumented behaviour when explicitly enabled/privacy-safe
+→ 7 eye tracking/physiology only when cheaper evidence is insufficient
+```
+
+Subjective scales COMPLEMENT task evidence; they never replace observed
+task completion and recovery behaviour. Track: effectiveness
+(completion, error, accuracy, first-attempt success) · efficiency
+(time-on-task, pointer travel, steps, backtracking) · recovery
+(recovery time, undo/retry, abandonment) · cognitive workload ·
+temporal latency (first feedback/actionability/completion/recovery) ·
+state integrity (stale incidence, unknown outcomes,
+requested/effective mismatch, reconciliation) · interaction integrity
+(focus loss/restoration, duplicates, misfires, accidental destructive
+actions) · system quality (input latency, frame time/drops, layout
+shift, memory/CPU/GPU/VRAM pressure). Track DISTRIBUTIONS, not only
+means. Controlled-comparison discipline: neutral variant naming,
+counterbalanced/balanced order, control learning/fatigue/order/
+carryover, predefined primary outcome, stable trace identity,
+`ASSIGNMENT ≠ REALISED DELTA`; never call a design better because it
+was shown second; never infer equivalence from non-significance
+alone.
+
+### 22.2 The acceptance benchmark and the final gates
+
+The representative acceptance covers: Redot startup/packaging · custom
+UI + keyboard/focus/accessibility · Chat streaming + large history ·
+Models/Inference controls + effective-state display · the CanonSim
+placeholder world + deterministic Visual Scene IR · procedural props/
+actors + map/inventory interaction · assurance/observation views ·
+asset load/reload + missing/stale degradation · backend loss →
+reconnect/cancellation truth · screenshot/headless regression ·
+frontend alone vs frontend + concurrent local LLM.
+
+```text
+G1  Redot startup/packaging works in the actual runtime envelope
+G2  Chat/Settings/History use shared application operations
+G3  backend reconnect/cancellation semantics remain correct
+G4  CanonSim read-side seam explicit/renderer-independent
+G5  Visual Scene IR fixture deterministic
+G6  placeholder scene renders without hand-authored per-instance lists
+G7  screenshot/headless regression works
+G8  frontend cannot bypass application/semantic boundaries
+G9  resource budgets measured with degradation paths
+G10 concurrent LLM + frontend measured
+G11 dependency/licence inventory complete for admitted runtime
+G12 asset identity/provenance exists before large ingestion
+```
+
+Current owners: G4/G5/G7 LANDED (wb-1/wb-2 + visual_proof, the gated
+packets); G1 rides the export row; G2/G3 partially landed (Chat/Models
+over the gateway; reconnect is the streaming row); G6/G9/G10/G12 are
+the P4 family's gates (WORLD_PRESENTATION_LAW §15); G8 is the
+architecture-test set; G11 rides each dependency admission. A gate
+passes only when its task, contract and evidence exist — visual polish
+never substitutes.
+
 ## 23. Anti-patterns; corrected conclusions
 
 Prohibited: second hidden frontend transport · second semantic
@@ -506,7 +658,13 @@ truncation of critical information · hard-coded UI strings · flat
 navigation feature catalogs · component proliferation without
 responsibility · manual ID copying between views · two
 unsynchronised comparison screens · fake runtime "passed" status ·
-"more panels" as the default answer to "more information".
+"more panels" as the default answer to "more information" · a player
+surface implying omniscient observability · model-capability data
+auto-generating widgets · a giant generic Visual DSL before the first
+real scene · modal chains compensating for missing IA · fixed-English
+geometry (font metrics are part of layout) · a renderer dependency
+added "just in case" · Redot resource/UID as CanonSim identity ·
+style compensating for weak IA.
 
 Corrected conclusions (do not adopt too literally): (a) accent
 overload is fixed FIRST by shape/pattern/weight/iconography/position,

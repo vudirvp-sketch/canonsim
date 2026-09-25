@@ -1411,6 +1411,23 @@ At the index date:
 - Redot 26.3+ is not production baseline until explicit project version admission.
 - The strongest external agent tooling found is still predominantly Godot-oriented; use it as workflow/pattern tooling and verify Redot compatibility before dependency admission.
 
+# 20.1 The version-admission gate (an engine upgrade requires ALL of)
+
+```text
+project open/save check          resource import check
+scene runtime check              CLI/headless check
+screenshot regression            UI/input/focus regression
+CPU/RAM/GPU/VRAM comparison      concurrent local-LLM comparison
+export/package check             licence/provenance refresh
+agent workflow check
+```
+
+(Admitted from the corpus re-homing, D-218 — the external integration
+contract's §9; THIS index owns the version firewall, so the gate lives
+here. A non-LTS build may be evaluated in isolated branches/proofs, but
+production code must not require it until this gate passes and the
+admission is recorded.)
+
 # 21. Practical reading rule
 
 Do **not** feed this entire document to an agent for every task.

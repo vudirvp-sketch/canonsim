@@ -12,9 +12,14 @@
 > **Routing law:** every visual/UI question on the Workbench surface
 > routes HERE first; every engine/API question routes through
 > `docs/REDOT_ENGINE_INDEX.md` (D-207) — the two indexes are
-> complementary, never overlapping. The v5.2 frontend spec stays
+> complementary, never overlapping. Interaction/IA/selection/epistemic
+> law: `docs/FRONTEND_UIUX_LAW.md` (D-214); application contracts:
+> `docs/WORKBENCH_APP_LAW.md`; Observatory semantics: `docs/OBSERVATORY_LAW.md`;
+> world presentation (the world-side visual layer):
+> `docs/WORLD_PRESENTATION_LAW.md` (D-218). The v5.2 frontend spec stays
 > outside the repo (D-024/D-200); where this law and an external copy
-> disagree, THIS file + the app spec's own §18 evidence law win.
+> disagree, THIS file + the effective-state evidence law
+> (WORKBENCH_APP_LAW §19.1) win.
 
 ## 0. The delivery order (the standing resolution)
 
@@ -53,6 +58,21 @@ exists ONLY where the OS/platform idiom requires it (menus,
 dialogs) — and the native picker/dialog is preferred over any
 in-engine imitation (the wb-10 law continues).
 
+### 1.1 Spatial, Gestalt and density grammar
+
+Use proximity, similarity, continuity, common region, figure/ground.
+Rules: related items sit closer than unrelated items; component
+internals sit tighter than section boundaries; meaningful ownership
+gets meaningful boundaries; whitespace is STRUCTURAL information;
+stable positions support recognition and expert motor memory. The
+spacing scale is a tunable starting point, not a law:
+`optical 2–4 · component 8–16 · section 24–32 · major 40–64+`.
+Density is task-dependent (reading low/medium · authoring medium ·
+data/diagnostics high + strong hierarchy · expert configuration high +
+progressive disclosure — LAW §11.1 owns the dense-data contract). The
+objective is correct perception, location and manipulation for the
+task — never maximum information per pixel.
+
 ## 2. The token taxonomy (one source of truth: the theme)
 
 Every visual decision routes through the semantic token set —
@@ -73,6 +93,37 @@ AUTHORITY_*       CANONICAL | OBSERVED | DERIVED | UNKNOWN — the
 
 Adding a color outside a token is forbidden — a new need names a NEW
 token with a role, lands in the theme, and is consumed by name.
+
+### 2.1 The dimension tokens (metrics are part of layout)
+
+Beyond colors/spacing/styleboxes, the theme carries the SEMANTIC
+DIMENSIONS — raw dimensions scattered through surface code are the
+same violation as raw colors:
+
+```text
+CONTROL_HEIGHT_S / _M / _L      HIT_TARGET_MIN
+ICON_SIZE_S / _M / _L            RADIUS_S / _M / _L
+MOTION_FAST / _STANDARD / _SLOW  FOCUS_RING_WIDTH
+DIVIDER_THICKNESS
+```
+
+This is what makes DPI behavior, compact mode, accessibility hit
+targets, responsive layout and visual tuning one-place changes instead
+of per-surface archaeology.
+
+### 2.2 The typography contract
+
+ONE explicit typography contract, before surface count grows:
+
+```text
+UI family · prose family · monospace family · fallback chain
+weight hierarchy · numeric treatment · tabular number treatment
+code/log treatment · Cyrillic support
+```
+
+Font metrics are part of layout, not an afterthought — never design
+fixed widths from English labels alone (the LAW §17 Cyrillic-safe law
+is the binding form; the two share one test).
 
 ## 3. Color law: neutral-first, ONE accent
 
@@ -230,3 +281,23 @@ Verification (static ≠ runtime ≠ task proof + the A–I gates)   — LAW §2
 A visual row that satisfies THIS file while violating a companion
 requirement is NOT compliant — the §8 report checks the companion
 set too.
+
+## 12. The two-layer visual identity
+
+The Workbench has TWO visual layers with different registers, sharing
+grammar but not ornaments:
+
+```text
+Workbench chrome      = quiet · precise · instrument-like · restrained
+                       · low-noise · high legibility (THIS LAW's domain)
+CanonSim world        = graphic · material · distinctive · strong
+presentation         · silhouettes · deterministic · illustrated
+                       (WORLD_PRESENTATION_LAW §11's domain)
+```
+
+They may share typography logic, spacing, selection/focus grammar and
+semantic status grammar — not necessarily ornamental treatment.
+Identity comes from semantic geometry, typography, iconography,
+timeline grammar, evidence marks, selection treatment, state notation
+and graphic rhythm — never from fantasy ornaments, glowing magic UI,
+parchment everywhere, ornamental borders or generic game-HUD effects.

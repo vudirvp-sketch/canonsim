@@ -85,6 +85,19 @@ ALLOWLIST: dict[str, str] = {
         "compression rounds: 632→627; the enum/field/invariant lists "
         "are the substance §6.1 names as never-cut) — worklog "
         "iter-233 the record",
+    "docs/WORKBENCH_APP_LAW.md":
+        "the Workbench application/runtime architecture law (iter-237, "
+        "D-218) — the binding distillation of the external app spec "
+        "with the §-numbering preserved 1:1 (the design: every "
+        "existing `app §N` citation resolves without edits); the "
+        "34-section contract set (the ownership tables + the state "
+        "vocabularies + the four lifecycle machines + the dispatch/"
+        "failure matrices + the §30/§33 checklists + the LANDED/"
+        "CONTRACT markers) is the §6.1 never-cut substance; two "
+        "compression rounds done (849→784: prose tightened, absorbed "
+        "sections §27/§28/§31 collapsed to pointers) — cutting "
+        "further would cut the §-preserving contract load itself — "
+        "worklog iter-237 the record",
     "docs/worldbuild/WORLD_TESTS.md":
         "the W5 probe-run records are measured substance (the instrument "
         "protocols + the classified blind-reader results) — the §6.1 "
