@@ -36,6 +36,7 @@ import socket
 import subprocess
 import sys
 import time
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -258,6 +259,13 @@ def test_a_corrupt_pick_is_loud_but_never_a_brick(
 
 
 def test_the_bind_line_yields_the_gateway_url() -> None:
+    # KI#98: the REAL banner carries the transport's full ENDPOINT
+    # (transport.url — the /op route included, the wb-4 shape); the
+    # forwarded value is the ROOT the Redot client appends its own
+    # "/op" to (gateway_client.gd's route law) — never the endpoint.
+    assert _gateway_url_from_bind_line(
+        "CanonSim Workbench — loopback gateway http://127.0.0.1:8765/op"
+    ) == "http://127.0.0.1:8765"
     assert _gateway_url_from_bind_line(
         "CanonSim Workbench — loopback gateway http://127.0.0.1:8765"
     ) == "http://127.0.0.1:8765"
@@ -265,6 +273,77 @@ def test_the_bind_line_yields_the_gateway_url() -> None:
         "CanonSim Workbench — loopback gateway http://127.0.0.1:9000/"
     ) == "http://127.0.0.1:9000"
     assert _gateway_url_from_bind_line("anything else") is None
+
+
+def test_the_forwarded_root_serves_the_clients_route() -> None:
+    """KI#98's end-to-end pin: the REAL gateway process's own bind
+    line (the banner workbench_app prints — transport.url, route
+    INCLUDED), parsed by the launcher's parse, plus the Redot
+    client's route law (base + "/op", gateway_client.gd), must
+    SERVE. The iter-227 forward shipped the endpoint as the base and
+    every shell request landed on /op/op — HTTP 404, app.status
+    dead, session.create never dispatched, the Models manager's
+    buttons never enabled (the owner's «проводник не открывается /
+    модели не обнаруживаются» report, three misdiagnosed rounds).
+    This pin kills the whole class: banner shape, route, or parse
+    drift all go RED here."""
+    port = _free_port()
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-u",
+            str(REPO / "scripts" / "workbench_app.py"),
+            "--no-backend",
+            "--port",
+            str(port),
+        ],
+        cwd=str(REPO),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+        env={
+            key: value
+            for key, value in os.environ.items()
+            if key != "PYTHONUNBUFFERED"
+        },
+    )
+    banner = ""
+    deadline = time.monotonic() + 60.0
+    try:
+        assert process.stdout is not None
+        while time.monotonic() < deadline:
+            line = process.stdout.readline()
+            if not line:
+                break
+            if "loopback gateway http://" in line:
+                banner = line.rstrip("\n")
+                break
+        assert banner, "the gateway never printed its bind line"
+        root = _gateway_url_from_bind_line(banner)
+        assert root is not None, f"the parse refused the real banner: {banner!r}"
+        assert not root.endswith("/op"), (
+            "the forwarded value is the ROOT — a route inside it "
+            "doubles under the client's own /op append"
+        )
+        request = urllib.request.Request(
+            root + "/op",
+            data=json.dumps(
+                {"operation": "app.status", "arguments": {}}
+            ).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=10) as handle:
+            document = json.loads(handle.read().decode("utf-8"))
+        assert document.get("status") == "OK", document
+    finally:
+        process.send_signal(signal.SIGINT)
+        try:
+            process.wait(timeout=15.0)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=10.0)
 
 
 # ------------------------------------------------- 6. the CLI forms

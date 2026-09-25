@@ -1,52 +1,43 @@
-Iteration: iter-237 (`corpus-rehoming` — the owner's 2026-09-25
-«переработай документацию нормально и мне не приходилось её
-загружать постоянно» call over the re-delivered 8-file v5.2 corpus:
-the loss/duplication/ownership AUDIT first, then the durable
-re-homing — D-218): three new law owners admitted (the D-207/D-211/
-D-214 pattern, §-numbering preserved 1:1 so every existing `app §N` /
-Observatory-`§N` citation resolves with zero edits) —
-docs/WORKBENCH_APP_LAW.md (the application/runtime law: ownership +
-state classes + lifecycles + deadlines/cancellation + streaming/
-persistence/admission contracts + inference policy + the failure
-matrix + the §32 order with LANDED/CONTRACT markers),
-docs/OBSERVATORY_LAW.md (the control plane: operating law + planes +
-run identity + the World Question contract + query families + result
-schemas + the promotion gate + the agent loop + the DoD; research
-findings kept as EVIDENCE SNAPSHOTS), docs/WORLD_PRESENTATION_LAW.md
-(the P4 family: Scene IR composition + the Asset Manifest +
-invalidation + LOD/camera/map + degradation + the shared-GPU model +
-G4/G5/G6/G9/G10/G12); the existing owners REPAIRED not duplicated —
-FRONTEND_UIUX_LAW +§11.1 dense-data/forms/search +§14.1 task
-modelling +§20 budget categories +§21.1 chat ergonomics +§21.2 the
-AI-interaction contract +§22.1 usability evaluation/metrics +§22.2
-the acceptance benchmark + G1–G12 + the anti-pattern completions;
-VISUAL_SYSTEM_UI +§1.1 Gestalt/density +§2.1 dimension tokens +§2.2
-typography +§12 the two-layer identity; REDOT_ENGINE_INDEX +§20.1 the
-version-admission gate; CONTRACTS §5 the §-map + the drifted
-LAW §50/§51/§39/§42 citations re-pointed (they were the
-consolidation's numbers). The external corpus stays EXTERNAL-ONLY
-source material (D-024/D-200) — no repo work requires it anymore.
+Iteration: iter-238 (`ki98-launcher-url-route` — the owner's
+2026-09-25 «в какой-то из итераций с Workbench.bat всё
+работало, но потом перестало. точнее менеджер папок,
+проводник => я не могу открыть и выбрать языковые модели, и
+они не обнаруживаются» report over the GGUFs sitting in
+workbench/runtime/models): KI#98 — the iter-227 bind-URL
+forward shipped the gateway's full ENDPOINT (transport.url,
+the /op route INCLUDED) as the Redot child's --gateway-url,
+while gateway_client.gd owns the route itself (base + "/op")
+— every shell request landed on /op/op → HTTP 404 → the dead
+session chain (the picker buttons never enabled, model.list
+never answered, the managed llama-server never spawned); the
+fix strips any path in `_gateway_url_from_bind_line` (the
+forwarded value is the ROOT — scheme://host:port), the false
+test pin re-pinned over the REAL banner shape, and a NEW
+end-to-end pin spawns the real gateway, parses its real
+banner, and POSTs root+"/op" expecting 200 (banner/route/
+parse drift all go RED); the full circuit verified live
+against the real gateway + the fake managed llama-server
+(session → discovery → load → chat reply → unload).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
 P2 continuation) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2306 passed + 2 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; the REDOT_EXE-gated visual packets + duckdb skipping
-clean per D6/D-093) ·
+2309 passed + 8 skipped, ruff clean, docguard clean (Python 3.12.14,
+the env pin; the REDOT_EXE run green against redot-26.2-stable:
+2316+1 — the seven visual packets + the duckdb skip alone, per
+D6/D-093) ·
 Date: 2026-09-25 ·
-Scope: docs/{WORKBENCH_APP_LAW.md (NEW), OBSERVATORY_LAW.md (NEW),
-WORLD_PRESENTATION_LAW.md (NEW), FRONTEND_UIUX_LAW.md, VISUAL_SYSTEM_UI.md,
-REDOT_ENGINE_INDEX.md, AGENT_NAVIGATION.md, CONTRACTS.md, TASKS.md,
-DECISIONS.md} + STATUS.md + worklog.md + scripts/docguard.py (the
-allowlist entry, the §6.1 protocol) — 13 paths (doc-only + the guard's
-own table, the audit's own law: zero engine code change, the LOG
-untouched).
+Scope: scripts/workbench_launch.py (the path-stripping parse + the
+KI#98 docstring law) + tests/test_workbench_launch.py (the re-pinned
+bind-line test + the end-to-end route pin) + STATUS.md + worklog.md +
+docs/TASKS.md (the ledger line) — 5 paths (one launcher fix + its
+claim packet + the state docs; zero core change, the LOG untouched).
 Track A: the obs family the live head (iter-236 obs-2, 235 obs-1,
 234 ux-1; obs-3+ the P3 rungs per the LAW §25 ladder; the wb family
-behind: iter-232 the race/latch fixes + the OLED re-pin, 231 CI-unred
-+ NavButton, 230 wb-12, 229 the visual law, 228 wb-11, 227 wb-10,
-226 wb-9 D-208, 225 the engine index D-207). The detail lives in the
-worklog + git.
+behind: iter-238 the KI#98 URL fix, 237 the corpus re-homing, 232 the
+race/latch fixes + the OLED re-pin, 231 CI-unred + NavButton, 230
+wb-12, 229 the visual law, 227 wb-10, 226 wb-9 D-208). The detail
+lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -74,7 +65,7 @@ worklog + git.
 
 ## Active KIs
 
-- KI#97 · the REDOT_EXE-gated proof pins (test_shell_proof.py + test_visual_proof.py) drifted silent through wb-8/9 (a skip is not a pass) · 2026-09-25 · CLOSED iter-234: repaired against the live shell; the seam harness pins its own window; the gated pins re-ride the sandbox Redot run every touching row.
+- KI#98 · the iter-227 bind-URL forward shipped the gateway's endpoint (route included) as the Redot base URL — every shell request landed on /op/op (404: the dead session, the disabled picker, the undetected models; three symptom-level rounds before the root cause) · 2026-09-25 · CLOSED iter-238: the forwarded value is the ROOT (path stripped); the false test pin re-pinned over the real banner + the end-to-end root+"/op" POST pin.
 
 ## FAQ / Pitfalls
 
@@ -98,7 +89,7 @@ worklog + git.
 - **The cap laws: substance over line count — filler cut always; named systems/field lists/enum values/verdicts never cut to fit; a breach triggers a cruft pass first** — AGENTS §6/§6.1; enforced by `scripts/docguard.py`.
 - **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088); and the scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §2/§3.3.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
-- **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-10 note
+- **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default; the launcher's forwarded URL is the ROOT (scheme://host:port — the banner's `/op` route STRIPPED, KI#98/iter-238: gateway_client.gd owns the route and appends `/op` itself; a route inside the forwarded value doubles to /op/op → 404, the dead-session chain)** — the modules' own docstrings + CONTRACTS §5's wb-10 note
 - **The iter-232 laws: a cooperative-cancellation TEST never calls checkpoint() once and prays — the single call races the main thread's run.cancel dispatch (a fast runner's worker passes through, the "unreachable" guard closes the run FAILED; the sandbox stays green on scheduling luck while CI goes red — KI#95, three-form verified: sandbox, forced fast worker, delayed cancel); poll the checkpoint (the work contract's own lock-free observation surface — run.cancel is never starved) bounded until the cancellation lands, an absent cancel fails LOUDLY; discovery lists never freeze behind one-shot success latches — every surface entry re-scans (KI#96: the owner's hand-dropped GGUF must appear on the next Models entry; the wb-11 re-arm lesson generalizes from FAILURE to staleness — a "requested once" flag guarding the happy path is the bug, not the guard); and a theme re-pin is VALUES-ONLY — every token name, size and pin survives the palette swap (theme@0.4/D-213: the owner's OLED call over the external brief's "never pure black" doctrine — the neutral near-black ramp + the ONE teal accent, 21 WCAG contrast pairs measured)** — tests/test_model_fetch.py `_SlowFetcher.fetch` + shell.gd `_refresh_models` + test_shell_contract.py (the latch ban + the base/accent pins), iter-232
 - **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; `static func tr(` is likewise a parse refusal (Object's native signature — the strings.gd resolver is `lookup`, iter-234); every user-facing string rides the `_tr` boundary (strings.gd en/ru, LAW §17 — a new literal in shell.gd fails the boundary scan); and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 - **The chat follow law (iter-230): read the scrollbar's max AFTER a frame — the autowrapped labels size late, reading it at call_deferred time is the short-scroll bug; TWEEN the bar's float `value` (never the int `scroll_vertical` jump); gate on near-bottom (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked; the late-layout re-settle stays bounded to ONE pass** — shell.gd `_scroll_to_bottom_smooth` (the owner's «не происходит плавной прокрутки вниз» call, the LM Studio/Discord follow mechanism)
@@ -110,7 +101,10 @@ worklog + git.
 selection the EVENT ID, the honest empties) — 2308+8 (CI) / 2315+1
 (REDOT_EXE) + ruff + docguard clean. iter-237 DONE: the v5.2 corpus
 re-homed (D-218) — three new law owners + the repairs; the external
-corpus never needs re-delivery.**
+corpus never needs re-delivery. iter-238 DONE: KI#98 — the launcher's
+forwarded bind URL is the ROOT (the /op route stripped; the dead
+/op/op chain dead; the live circuit end-to-end green: discovery →
+load → chat).**
 
 1. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline

@@ -482,10 +482,17 @@ def _spawn_gateway(gateway_args: list[str]) -> subprocess.Popen:
 
 
 def _gateway_url_from_bind_line(line: str) -> str | None:
-    """The OBSERVED bind URL out of the gateway's own bind line — the
+    """The OBSERVED bind ROOT out of the gateway's own bind line — the
     address the Redot child is told to dial (never a divergent
     committed default when -- --port moved the bind). The marker
-    already carries the scheme: the remainder IS host:port."""
+    already carries the scheme; the banner's URL is the transport's
+    full ENDPOINT (``transport.url`` — the ``/op`` route included, the
+    wb-4 shape), while the Redot client owns the route itself
+    (gateway_client.gd appends ``/op`` to its configured base) — so
+    the forwarded value strips any path: scheme://host:port, never
+    the endpoint (KI#98: the iter-227 forward shipped
+    ``http://host:port/op`` and every shell request landed on
+    ``/op/op`` — 404, the dead session, the disabled picker)."""
     marker_at = line.find(BIND_MARKER)
     if marker_at < 0:
         return None
@@ -493,7 +500,11 @@ def _gateway_url_from_bind_line(line: str) -> str | None:
     tokens = rest.split()
     if not tokens:
         return None
-    host_port = tokens[0].rstrip("/")
+    first = tokens[0]
+    route_at = first.find("/")
+    if route_at >= 0:
+        first = first[:route_at]
+    host_port = first.rstrip("/")
     if not host_port:
         return None
     return "http://" + host_port
