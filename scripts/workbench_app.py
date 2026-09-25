@@ -95,6 +95,7 @@ Usage (the owner's live forms):
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import shutil
 import signal
@@ -155,6 +156,17 @@ DEFAULT_SETTINGS_PATH = REPO / "workbench" / "runtime" / "settings.json"
 #: executable in it (root level or one folder deep, deterministic
 #: sort — the first hit).
 DEFAULT_LLAMA_CPP_DIR = REPO / "workbench" / "runtime" / "llama.cpp"
+
+#: The canonical runs root (obs-2 — the Observatory read-side seam):
+#: the cli's own logs law (``cli/main.py`` LOGS_DIR — one truth about
+#: where runs live; the Observatory reads the canonical source,
+#: INV-1, never a second copy). Not auto-created: no runs yet is the
+#: listing's own honest NO DATA answer.
+RUNS_ROOT = REPO / "logs"
+
+#: The event schema the observatory read validates every log line
+#: against (the same schema the writer enforces — T0's law).
+_EVENT_SCHEMA_PATH = REPO / "schemas" / "event.schema.json"
 
 #: The MANAGED readiness budget (§11.1 PROBING → READY): a Q4_K_M
 #: body's spawn+load on the station lands well inside this; the
@@ -687,6 +699,10 @@ def build_app(
                 backend.is_live
                 if isinstance(backend, _ManagedBackend)
                 else None
+            ),
+            observatory_runs_root=RUNS_ROOT,
+            observatory_schema=json.loads(
+                _EVENT_SCHEMA_PATH.read_text(encoding="utf-8")
             ),
         )
     except CompositionError as exc:

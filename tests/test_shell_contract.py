@@ -804,3 +804,120 @@ def test_the_observatory_slice_is_real() -> None:
         )
 
 
+
+
+def test_the_observatory_live_feed_is_real() -> None:
+    """obs-2 (FRONTEND_UIUX_LAW §25's P1 continuation): the live run
+    over the READ-side seam — observatory.runs + observatory.read
+    (the bounded read model over the canonical JSONL log, INV-1's own
+    truth) + the SELECTION MODEL's first consumer (LAW §6: select
+    event E → the inspector opens E → the evidence view scopes to E →
+    the breadcrumb carries the semantic path). The pins hold the
+    seam's law: the shell owns the transport (the observatory speaks
+    ONLY through its two request signals), the boundedness ceiling is
+    the OP's own (never a UI-side second limit), the selection is the
+    semantic identity (the event id — never a row index), and the
+    distinct empty semantics never collapse (probing ≠ NO RUNS ≠ NO
+    EVENTS ≠ refused)."""
+    obs = REDOT / "scripts" / "observatory.gd"
+    text = obs.read_text(encoding="utf-8")
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+    proof_text = (REDOT / "scripts" / "seam_proof.gd").read_text(encoding="utf-8")
+    runner_text = (REPO / "scripts" / "visual_proof.py").read_text(encoding="utf-8")
+
+    # The seam's form: the observatory never touches the gateway client —
+    # two request signals out, feed methods in (LAW §18's split: the
+    # shell owns the seam, the axis owns its regions).
+    assert "signal runs_requested()" in text
+    assert "signal read_requested(run: String, after: String)" in text
+    assert "call_operation" not in text  # the slice never dials; the shell does
+    for feed in ("feed_runs", "feed_read", "feed_rejection", "feed_transport_failure"):
+        assert f"func {feed}(" in text, f"the feed method missing: {feed}"
+    assert "runs_requested.connect(_on_observatory_runs_requested)" in shell_text
+    assert "read_requested.connect(_on_observatory_read_requested)" in shell_text
+    assert 'call_operation("observatory-runs", "observatory.runs", {})' in shell_text
+    assert '"observatory.read"' in shell_text
+
+    # The boundedness law's single ceiling: the shell's read dispatch
+    # carries NO limit — the op's own default (50, cap 200) is the one
+    # source (workbench/observatory_read.py owns the constants; the UI
+    # never re-declares a page size).
+    assert "DEFAULT_WINDOW = 50" in (
+        REPO / "workbench" / "observatory_read.py"
+    ).read_text(encoding="utf-8")
+    assert "limit" not in shell_text.split("_on_observatory_read_requested")[1].split(
+        "func "
+    )[0], "the shell must not re-declare a read limit (the op's default is the law)"
+
+    # The selection model (LAW §6.2): the semantic identity rides the
+    # button's metadata — set_meta/get_meta over the event id, never a
+    # row index; the restore is by id (§6.1's stability across re-reads).
+    assert 'button.set_meta("row", row)' in text
+    assert 'child.get_meta("row", {})' in text
+    assert "_restore_selection" in text
+    assert "get_selected_index" not in text and "get_child(" not in text.split(
+        "_restore_selection"
+    )[1].split("func ")[0], "the selection restores by ID, never by position"
+
+    # The distinct empty semantics (LAW §16 — never one generic empty):
+    # probing (the listing not yet answered) ≠ NO RUNS (the root holds
+    # none) ≠ NO EVENTS (the run holds only its header) ≠ refused
+    # (the backend's observed cause) — each with its own note.
+    for key in (
+        "obs.state.probing",
+        "obs.state.probing_note",
+        "obs.empty.no_runs",
+        "obs.empty.no_runs_note",
+        "obs.empty.no_events",
+        "obs.empty.no_events_note",
+        "obs.read.rejected",
+        "obs.read.rejected_note",
+        "obs.read.transport",
+    ):
+        assert f'"{key}"' in strings_text, f"the distinct empty key missing: {key}"
+
+    # The evidence ladder's honest scoping (LAW §12): only the READ rung
+    # confirms under a selection; the declared cause never confirms
+    # BRANCH by itself.
+    assert '"obs.evidence.confirmed"' in strings_text
+    assert '"obs.evidence.scope_note"' in strings_text
+    assert '"obs.evidence.no_verified_claim"' in strings_text
+    assert "_scope_ladder" in text and "_clear_ladder_scoping" in text
+
+    # The pagination: the cursor stack over event ids; next_after null
+    # disables Later (never a request past the run's end).
+    assert '"--obs-document"' not in proof_text  # the seam harness stays untouched
+    for pin in ("_cursor_stack", "_page_sizes", "next_after"):
+        assert pin in text, f"the pagination primitive missing: {pin}"
+    for key in ("obs.page.earlier", "obs.page.later", "obs.page.status"):
+        assert f'"{key}"' in strings_text
+
+    # The proof injection (LAW §43's runtime form): --obs-document is
+    # PROOF-MODE ONLY (the interactive path always rides the gateway);
+    # the shell parses it, applies it through the SAME feed path, and
+    # the meta carries the loaded run's stem (a loaded capture never
+    # masquerades as an empty one). The engine law rides the code:
+    # JSON.parse_string (Redot 26.2 — parse is an instance method).
+    assert '"--obs-document"' in shell_text
+    assert "JSON.parse_string(" in shell_text
+    assert "JSON.parse(" not in shell_text
+    assert '"observatory_run": _proof_obs_run' in shell_text
+    assert "apply_read_document" in shell_text and "get_tree().quit(4)" in shell_text
+    assert '"--obs-document"' in runner_text  # the runner passes it through verbatim
+
+    # The float law's read-side arm: Redot's JSON yields floats for
+    # every number — the canonical ints (seed, tick, counts, the
+    # provenance) normalize back, never "42.0".
+    assert "_int_text" in text and "_normalize_numbers" in text
+
+    # The every-static-key law (the obs-1 contract's own form, rerun over
+    # the grown surface).
+    code_only = "\n".join(
+        line.split("#", 1)[0] if "#" in line else line
+        for line in text.splitlines()
+    )
+    referenced = set(re.findall(r'_tr\("([^"]+)"\)', code_only))
+    en_block = strings_text.split("const EN := {")[1].split("\n}")[0]
+    missing = referenced - _catalog_keys(en_block)
+    assert not missing, f"observatory references unknown keys: {sorted(missing)}"

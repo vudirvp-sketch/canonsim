@@ -1364,6 +1364,12 @@ def test_operations_import_closure() -> None:
         "workbench.application.clock",
         "workbench.application.identity",
         "workbench.application.operations.composition",
+        "workbench.application.operations.observatory",
+        # obs-2's seam module (the read model over core.log — the
+        # CanonSim edge lives THERE, workbench-root beside
+        # scene_build.py; the operations package reaches the log only
+        # through it, never importing core itself).
+        "workbench.observatory_read",
         "workbench.api.gateway",
     }
     for module_path in sorted(

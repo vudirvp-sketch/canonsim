@@ -126,7 +126,7 @@
 #   canonism_workbench/gateway/url — that order).
 extends Control
 
-const SHELL_VERSION := "canon_shell@0.6"
+const SHELL_VERSION := "canon_shell@0.7"
 const THEME_PATH := "res://themes/workbench_theme.tres"
 const GATEWAY_CLIENT_SCRIPT := preload("res://scripts/gateway_client.gd")
 # obs-1: the Observatory's own surface builder (LAW §18's split seed —
@@ -227,6 +227,7 @@ var _models_scroll: ScrollContainer
 var _models_empty_note: Label
 var _models_status_label: Label
 var _models_refresh_button: Button
+var _observatory: Control  # obs-2: the hosted surface (LAW §18 — the shell owns the seam, the axis owns its regions)
 var _models_active_label: Label
 var _model_rows: Dictionary = {}
 # wb-11 — the load/unload run circuits (identity-then-poll).
@@ -281,6 +282,7 @@ var _reduced_motion_check: CheckBox
 # ux-1 — proof mode is pinned: locale "en", motion enabled, ui_state.json
 # neither read nor written (the byte-identical capture law, §22).
 var _proof_mode := false
+var _proof_obs_run := ""  # obs-2: the proof injection's run stem (the meta's own honesty)
 
 
 func _ready() -> void:
@@ -304,6 +306,13 @@ func _ready() -> void:
                         get_tree().quit(2)
                         return
                 _show_surface(paths["surface"])
+        if paths.has("obs_document"):
+                # obs-2's proof injection: the capture renders the LOADED
+                # state over a real op-produced document (exit 4 = the
+                # injection refused; 2 = a bad surface, 3 = a capture
+                # failure — the codes stay distinct).
+                if not _apply_obs_document(String(paths["obs_document"])):
+                        return
         _capture_and_quit.call_deferred(paths)
 
 
@@ -483,8 +492,14 @@ func _build_observatory_surface() -> Control:
         # shell injects the theme (the token single-source) and its own
         # _tr resolver (the ONE boundary; the observatory never opens the
         # catalog directly). The shell hosts; the axis owns its regions.
+        # obs-2: the hosting wires the TWO request signals (the seam's
+        # only form — the observatory never touches the gateway client;
+        # the answers arrive through its public feed methods).
         var surface: VBoxContainer = OBSERVATORY_SCRIPT.new()
         surface.compose(_t, Callable(self, "_tr"))
+        surface.runs_requested.connect(_on_observatory_runs_requested)
+        surface.read_requested.connect(_on_observatory_read_requested)
+        _observatory = surface
         return surface
 
 
@@ -1105,6 +1120,11 @@ func _show_surface(key: String) -> void:
         # failure note's own surface (the next entry retries by itself).
         if key == "models" and _client != null:
                 _refresh_models()
+        if key == "observatory" and _client != null:
+                # obs-2 — KI#96's law (no scan latch): every entry into
+                # the Observatory re-reads (the runs listing + the
+                # loaded window — the live feed's own refresh).
+                _observatory.refresh()
         # The active axis owns the pressed state (the button group keeps the
         # exclusivity).
         if _nav_buttons.has(key):
@@ -1129,11 +1149,14 @@ func _focus_surface_entry(key: String) -> void:
                         if _llama_exe_edit != null:
                                 _llama_exe_edit.grab_focus()
                 "observatory":
-                        # The slice is read-only (LAW §15: Observatory → the
-                        # query or the preserved selection) — no interactive
-                        # entry exists yet; focus stays where it is (the
-                        # honest no-op, never a fabricated target).
-                        pass
+                        # obs-2 (LAW §15: Observatory → the query or the
+                        # preserved selection): the slice's task-aware
+                        # entry is the Refresh action — the surface's
+                        # one verb (deferred; an offline/disabled entry
+                        # control leaves focus where it is).
+                        var obs_entry: Control = _observatory.entry_control()
+                        if obs_entry != null and not obs_entry.disabled:
+                                obs_entry.grab_focus()
                 _:
                         pass  # an unknown surface never invents a focus target
 
@@ -1178,8 +1201,11 @@ func _start_live_circuit(args: PackedStringArray) -> void:
         _client.call_operation("app-status", "app.status", {})
         _composer_input.text_submitted.connect(_on_composer_submitted)
         _models_refresh_button.disabled = false
+        _observatory.note_live()
         if _active_surface == "models":
                 _refresh_models()
+        if _active_surface == "observatory":
+                _observatory.refresh()
 
 
 func _next_request_id(prefix: String) -> String:
@@ -1241,6 +1267,12 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 return
         if tag == "model-states":
                 _on_model_states_answered(document)
+                return
+        if tag == "observatory-runs":
+                _on_observatory_runs_answered(document)
+                return
+        if tag == "observatory-read":
+                _on_observatory_read_answered(document)
                 return
         if tag == "backend-settings":
                 _on_backend_settings_answered(document)
@@ -1476,6 +1508,12 @@ func _on_transport_failed(tag: String, error: String) -> void:
                         _tr("models.status.unreachable") % [tag, error]
                 )
                 return
+        if tag == "observatory-runs" or tag == "observatory-read":
+                # obs-2 — the honest transport failure rides the
+                # surface's own state box (the position resets; the next
+                # entry/Refresh retries by itself).
+                _observatory.feed_transport_failure(error)
+                return
         if tag == "backend-settings":
                 _settings_status_label.text = _tr("settings.status.unreachable") % error
                 return
@@ -1574,6 +1612,55 @@ func _refresh_models() -> void:
         _models_status_label.text = _tr("models.status.scanning")
         _client.call_operation("model-list", "model.list", {})
         _client.call_operation("model-states", "model.states", {})
+
+
+# --- obs-2: the Observatory seam (the shell owns the transport) ----------
+
+
+func _on_observatory_runs_requested() -> void:
+        # The surface's runs_requested signal: the discovery scan over
+        # the canonical runs root (READ, no session).
+        if _client == null:
+                return
+        _client.call_operation("observatory-runs", "observatory.runs", {})
+
+
+func _on_observatory_read_requested(run: String, after: String) -> void:
+        # The surface's read_requested signal: the bounded window (the
+        # limit stays the OP's own default — the single source of the
+        # boundedness law, never a UI-side second ceiling).
+        if _client == null:
+                return
+        var arguments := {"run": run}
+        if after != "":
+                arguments["after"] = after
+        _client.call_operation("observatory-read", "observatory.read", arguments)
+
+
+func _on_observatory_runs_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                _observatory.feed_runs(document.get("result"))
+                return
+        _observatory.feed_rejection(_observatory_rejection_text(document))
+
+
+func _on_observatory_read_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                _observatory.feed_read(document.get("result"))
+                return
+        _observatory.feed_rejection(_observatory_rejection_text(document))
+
+
+func _observatory_rejection_text(document: Dictionary) -> String:
+        # The refusal's own identity + the observed reason (LAW §21.1:
+        # the backend's cause rides verbatim, never a generic error).
+        var rejection := _text(document.get("rejection"))
+        var reason := _reason_of(document)
+        if reason == "":
+                return rejection
+        return "%s · %s" % [rejection, reason]
 
 
 func _on_model_list_answered(document: Dictionary) -> void:
@@ -2630,10 +2717,46 @@ func _parse_proof_args(args: PackedStringArray) -> Dictionary:
                                 out["meta"] = args[i + 1]
                         "--surface":
                                 out["surface"] = args[i + 1]
+                        "--obs-document":
+                                # obs-2's runtime-proof injection (LAW §43):
+                                # a REAL op-produced read document — the
+                                # capture proves the loaded rendering
+                                # through the same feed path the gateway
+                                # serves (never a second data path in the
+                                # interactive form — proof args only).
+                                out["obs_document"] = args[i + 1]
                 i += 1
         if out.has("png") and out.has("meta"):
                 return out
         return {}
+
+
+func _apply_obs_document(path: String) -> bool:
+        # The proof harness's ONLY injection (LAW §43: the runtime proof
+        # renders a REAL op-produced document through the same feed path
+        # the gateway serves). The document comes from the actual
+        # observatory.read over a fixture log — the capture proves the
+        # LOADED rendering (the context strip, the rows, the selected
+        # inspector, the scoped ladder) without a network. False = the
+        # injection refused (the caller quits 4 — the codes stay
+        # distinct: 2 surface, 3 capture, 4 injection).
+        var file := FileAccess.open(path, FileAccess.READ)
+        if file == null:
+                push_error("shell: cannot read --obs-document %s" % path)
+                get_tree().quit(4)
+                return false
+        # Redot 26.2's JSON law: parse_string is the static form (parse
+        # is an instance method since 4.3's JSON rework — the engine
+        # index's version firewall, D-207).
+        var parsed_result = JSON.parse_string(file.get_as_text())
+        if parsed_result == null or not (parsed_result is Dictionary):
+                push_error("shell: --obs-document %s is not a JSON object" % path)
+                get_tree().quit(4)
+                return false
+        var document: Dictionary = parsed_result
+        _proof_obs_run = String(document.get("run", ""))
+        _observatory.apply_read_document(document, true)
+        return true
 
 
 func _capture_and_quit(paths: Dictionary) -> void:
@@ -2652,6 +2775,7 @@ func _capture_and_quit(paths: Dictionary) -> void:
                 "surfaces": SURFACES,
                 "planned_surfaces": PLANNED_SURFACES,
                 "live_circuit": false,
+                "observatory_run": _proof_obs_run,
                 "window_size": [int(get_viewport().size.x), int(get_viewport().size.y)],
                 "png": String(paths["png"]),
         }

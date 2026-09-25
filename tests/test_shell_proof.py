@@ -47,7 +47,11 @@ def _png_size(path: Path) -> tuple[int, int]:
     return int(width), int(height)
 
 
-def _run_shell_proof(out_dir: Path, surface: str | None = None) -> dict[str, Path]:
+def _run_shell_proof(
+    out_dir: Path,
+    surface: str | None = None,
+    obs_document: Path | None = None,
+) -> dict[str, Path]:
     """One shell-proof run through the operator runner (fresh out dir)."""
     if not REDOT_EXE:
         pytest.skip("REDOT_EXE not set")
@@ -56,6 +60,8 @@ def _run_shell_proof(out_dir: Path, surface: str | None = None) -> dict[str, Pat
     argv = ["--shell", "--out", str(out_dir)]
     if surface:
         argv += ["--surface", surface]
+    if obs_document is not None:
+        argv += ["--obs-document", str(obs_document)]
     assert proof_main(argv) == 0
     name = f"shell_{surface}" if surface and surface != "chat" else "shell"
     meta_name = f"{name}_meta.json" if surface and surface != "chat" else "shell_meta.json"
@@ -99,7 +105,7 @@ def test_artifacts_exist_and_are_wellformed(shell_runs: list[dict[str, Path]]) -
     # KI#97 (iter-234): the pin had drifted to canon_shell@0.1 while the
     # packet was REDOT_EXE-gated-silent through wb-8/wb-9 — pins track the
     # LIVE shell, never a remembered one. iter-235: @0.6 (the Observatory).
-    assert meta["shell_version"] == "canon_shell@0.6"
+    assert meta["shell_version"] == "canon_shell@0.7"
     # The theme identity is the committed theme file's sha256 (64 hex).
     theme_sha = meta["theme_identity"]
     assert len(theme_sha) == 64 and all(c in "0123456789abcdef" for c in theme_sha)
@@ -141,7 +147,7 @@ def test_settings_surface_capture(settings_run: dict[str, Path]) -> None:
     meta = json.loads(settings_run["meta"].read_text(encoding="utf-8"))
     assert meta["active_surface"] == "settings"
     assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
-    assert meta["shell_version"] == "canon_shell@0.6"
+    assert meta["shell_version"] == "canon_shell@0.7"
     assert _png_size(settings_run["png"]) == (1440, 900)
     # The two surfaces must not render identically (the switch is real).
     default_run_png = None  # resolved lazily: the module fixture order is not ours
@@ -174,7 +180,7 @@ def test_observatory_surface_capture(observatory_run: dict[str, Path]) -> None:
     meta = json.loads(observatory_run["meta"].read_text(encoding="utf-8"))
     assert meta["active_surface"] == "observatory"
     assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
-    assert meta["shell_version"] == "canon_shell@0.6"
+    assert meta["shell_version"] == "canon_shell@0.7"
     assert _png_size(observatory_run["png"]) == (1440, 900)
     # The slice's composition is its own — never a byte-copy of another
     # surface (the grammar changed the canvas, not just the header).
@@ -188,4 +194,96 @@ def test_observatory_surface_capture(observatory_run: dict[str, Path]) -> None:
     assert observatory_run["png"].read_bytes() != settings_png.read_bytes(), (
         "the observatory capture is byte-identical to the settings capture — "
         "the slice did not change the composition"
+    )
+
+
+def _obs_read_document(tmp: Path) -> Path:
+    """obs-2's proof injection source: the REAL observatory.read result
+    over the plumbing fixture (the actual gateway + op — the capture
+    renders a genuine op document, never a hand-crafted near-miss)."""
+    import shutil
+
+    from workbench.api.contract import RequestEnvelope
+    from workbench.api.gateway import Gateway
+    from workbench.application.clock import AppClock
+    from workbench.application.operations.composition import (
+        compose_workbench_operations,
+    )
+
+    runs_root = tmp / "logs"
+    runs_root.mkdir(parents=True, exist_ok=True)
+    shutil.copy(
+        REPO / "tests" / "fixtures" / "plumbing_smoke_seed42.jsonl",
+        runs_root / "run_42_0.jsonl",
+    )
+    schema = json.loads(
+        (REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8")
+    )
+    gateway = Gateway()
+    compose_workbench_operations(
+        gateway,
+        tmp / "models-absent",
+        AppClock(),
+        observatory_runs_root=runs_root,
+        observatory_schema=schema,
+    )
+    response = gateway.dispatch(
+        RequestEnvelope(
+            operation="observatory.read", arguments={"run": "run_42_0"}
+        )
+    )
+    assert response.status == "OK", response.to_mapping()
+    document = tmp / "obs_read_document.json"
+    document.write_text(
+        json.dumps(response.result, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    return document
+
+
+@pytest.fixture(scope="module")
+def observatory_loaded_runs(
+    tmp_path_factory: pytest.TempPathFactory,
+) -> list[dict[str, Path]]:
+    """obs-2: two independent LOADED captures (the real read document
+    injected through the proof harness — LAW §43's runtime form)."""
+    document = _obs_read_document(tmp_path_factory.mktemp("wb_obs_doc"))
+    return [
+        _run_shell_proof(
+            tmp_path_factory.mktemp(f"wb_shell_obs_loaded_{index}"),
+            surface="observatory",
+            obs_document=document,
+        )
+        for index in range(2)
+    ]
+
+
+def test_observatory_loaded_capture(
+    observatory_loaded_runs, observatory_run: dict[str, Path]
+) -> None:
+    """obs-2 (FRONTEND_UIUX_LAW §25's P1 continuation): the LOADED
+    Observatory renders over a real op document — the context strip
+    carries the run's identity, the event table holds rows, the
+    selection's inspector + the scoped evidence ladder compose —
+    deterministically (the double-run byte-diff) and distinctly from
+    the empty slice (the feed changed the canvas)."""
+    first, second = observatory_loaded_runs
+    for run in (first, second):
+        assert run["png"].is_file() and run["meta"].is_file()
+    meta = json.loads(first["meta"].read_text(encoding="utf-8"))
+    assert meta["active_surface"] == "observatory"
+    assert meta["observatory_run"] == "run_42_0", (
+        "the meta must carry the injected run's stem (the capture's own "
+        "honesty — a loaded capture never masquerades as an empty one)"
+    )
+    assert _png_size(first["png"]) == (1440, 900)
+    # The D4 falsifier, loaded form: the same document renders
+    # byte-identically across runs.
+    assert first["png"].read_bytes() == second["png"].read_bytes(), (
+        "the LOADED observatory capture differs between two runs — the "
+        "document rendering is not deterministic"
+    )
+    # The loaded capture is NOT the empty slice (the feed is visible).
+    assert first["png"].read_bytes() != observatory_run["png"].read_bytes(), (
+        "the LOADED capture is byte-identical to the EMPTY slice — the "
+        "feed did not change the composition"
     )

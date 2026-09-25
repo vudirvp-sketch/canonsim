@@ -347,13 +347,53 @@ TEST_PLAN §9's claim packet)
   live-run feed (obs-2's own row — a READ-side seam into the
   canonical backend), selection (needs rows to select), the
   question EDITING form (the DRAFT display is the slice's truth).
-- `obs-2..obs-N` — the Observatory continuation family (each row
-  owner-gated, the LAW §25 ladder): obs-2 the live run feeding the
-  context strip + the event table over a READ-side seam (the
-  selection model's first consumer) · the P3 rungs after that
+- `obs-2` — DONE (iter-236, 2026-09-25). The §8-style report:
+  TARGET PROBLEM: obs-1's regions were honestly empty — no data
+  reached the Observatory (LAW §25's P1 continuation: the live run
+  feeding the context strip + the event table over a READ-side
+  seam; the selection model's first consumer, §6). CURRENT
+  PRIMITIVE: nothing — no read op, no feed path, no selection.
+  TRANSFERRED MECHANISM: first-party (the LAW's own §5/§6/§39/§42
+  grammars) over the wb-1 read-side edge precedent
+  (workbench/scene_build.py's core.log import): the seam's one home
+  workbench/observatory_read.py + the ops layer
+  operations/observatory.py + the shell's two-signal hosting +
+  observatory.gd v0.2's feeds. INVARIANT: zero new transport (the
+  loopback gateway is the only seam; the observatory never touches
+  the client), zero fabricated values (every render from a feed
+  document), the boundedness ceiling ONE (the op's default 50/cap
+  200 — the UI re-declares nothing), the selection the event ID
+  (never a row index), the authority CANONICAL rendered never
+  guessed, the distinct empties (probing/NO RUNS/NO EVENTS/refused
+  never collapse), only the READ rung confirms under a selection
+  (a cause_id never confirms BRANCH). FILES:
+  workbench/observatory_read.py (new), workbench/application/
+  operations/observatory.py (new), composition.py, workbench_app.py,
+  observatory.gd, shell.gd, strings.gd, visual_proof.py,
+  tests/{test_observatory_read.py(new), test_shell_contract.py,
+  test_shell_proof.py, test_operations.py}. EXPECTED CONSEQUENCE:
+  opening the Observatory with a gateway live lists the runs, loads
+  the first readable one, renders its context + rows, and a click
+  opens the inspector + scopes the ladder + extends the breadcrumb;
+  pagination windows the history; a corrupt log degrades honestly.
+  REJECT CONDITIONS: any fabricated value; a second transport or
+  authority; a UI-side page-size constant; selection by position;
+  "42.0"-style float rendering; the loaded capture masquerading as
+  empty. VERIFICATION STATE: STATIC_VERIFIED (the op contract's 17
+  tests + the obs-2 shell contract) + RUNTIME_VERIFIED (the
+  REDOT_EXE loaded capture — double-run byte-identical, distinct
+  from the empty slice, VLM-verified composition incl. the
+  inspector's full dump via the headless harness) + DEFERRED: the
+  timeline lanes (P3), the question EDITING form (obs-3+), the
+  perception/observation profiles (their own rows).
+- `obs-3..obs-N` — the Observatory continuation family (each row
+  owner-gated, the LAW §25 ladder): the P3 rungs after obs-2
   (timeline lanes, compare arms, semantic zoom, cross-highlighting,
-  Evidence Capsules, persistent research contexts).
+  Evidence Capsules, persistent research contexts) + the question
+  editing form when its consumer names itself.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+
+- iter-236 · 2026-09-25 · obs2-live-run-read-seam (FRONTEND_UIUX_LAW §25's P1 continuation — the live run over the READ-side seam, the selection model's first consumer): workbench/observatory_read.py the bounded read model over the canonical JSONL log (observatory.runs the discovery scan with honest per-run degradation + observatory.read the after-cursor window, default 50/cap 200 the ONE ceiling, authority CANONICAL rendered) + operations/observatory.py the ops layer (the operations package stays CanonSim-free — the envelope's law) + observatory.gd v0.2 the live feed (picker/Refresh/Earlier-Later, the selection as the event ID restoring by ID, the inspector scrolling with cause + state changes as DATA, the ladder's honest READ-only confirmation, the distinct empties, the breadcrumb run → event) + the shell's two-signal hosting + --obs-document the proof-only injection (a REAL op document through the same feed path; the meta's observatory_run) + the Redot lessons pinned (JSON.parse_string the static form; JSON numbers parse as FLOATS — _int_text/_normalize_numbers; the GridContainer value column needs EXPAND_FILL; JSON null is a PRESENT key); 12 paths; 2308+8 (CI) / 2315+1 (REDOT_EXE, the loaded capture green — double-run byte-identical, VLM-verified composition) + ruff + docguard clean
 
 - iter-235 · 2026-09-25 · obs1-observatory-slice (FRONTEND_UIUX_LAW §25's P1 + §50/§51 — the vertical UX slice BEFORE full analytical backend coverage): the §4.1 IA nav (WORK/RESOURCES/SYSTEM — Runs added, Inference kept, nothing dropped) + scripts/observatory.gd the LAW §18 split seed (the surface composes itself over the injected theme + the shell's _tr Callable): breadcrumb + context strip (the honest no-session values) + the World Question contract (DRAFT — nothing asked, nothing claimed) + ONE primary read-only view (TICK/EVENT/KIND/AUTHORITY; the DISTINCT NO DATA semantics) + the inspector (nothing selected, honestly) + the evidence ladder (every rung's unknown as TEXT) — zero fabricated content, zero dispatch, zero new transport; canon_shell@0.6; the runner drift fixed (visual_proof.py's --surface choices=[chat,settings] lagged the shell — the vocabulary is the shell's); 10 paths; 2290+7 (CI) / 2296+1 (REDOT_EXE, the observatory capture green, VLM-verified composition) + ruff + docguard clean
 
@@ -368,4 +408,3 @@ TEST_PLAN §9's claim packet)
 - iter-229 · 2026-09-26 · visual-system-admission (the owner's 2026-09-26 «вот и отлично, зафиксируй где нужно и обращайся при дальнейшей работе! нынешний ui - ужасен! поэтому всеми тремя руками и ногами - за!» call over the external 24-section Visual System and UI Engineering instruction document): docs/VISUAL_SYSTEM_UI.md ADMITTED as the visual rows' law owner (D-211) — the surface-driven grammar (CANVAS/SURFACE/CONTAINER/CONTENT/ACTION, not card-driven) + the semantic token taxonomy (SURFACE_*/CONTENT_*/ACTION_*/BORDER_*/STATE_*/AUTHORITY_* — the theme the single source) + the neutral-first/ONE-accent color law + the not-color-only accessibility invariant + the per-surface visual state matrix (Chat EMPTY/ACTIVE/GENERATING · Models EMPTY/DISCOVERED/ACTIVE/LOADING/FAILED · Settings DEFAULT/EDITING/DISABLED/ERROR) + the transplantation protocol (SOURCE→TECHNIQUE→MECHANISM→INVARIANT→ADAPTATION→CONSEQUENCE — mechanisms, not looks) + the reference pack under AGENTS §2.8 (ThemeGen a tool never a decision source; SillyTavern license-sensitive — mechanisms only) + the §8 per-row UI report + the anti-patterns + the wb-12+ candidate queue (each row owner-gated, one row per iteration) + the standing resolutions (functional first, the doc is the law for each row never a parallel program, the app spec's §18 evidence law wins over quiet chrome) + the routing surfaces (NAV §1 + TASKS wb-9+ pointer + STATUS FAQ); 7 paths; 2284+6 + ruff + docguard clean (doc-only, zero code change, the LOG untouched)
 - iter-228 · 2026-09-26 · wb-11-load-unload-runs (the owner's 2026-09-26 report over the wb-10 handback — «молча висят + транспорт результ 13» + «модель выбрать не могу, там пусто, моделей не видно, кнопка выбрать модель не работает (проводник не открывается)» + the evidence «llama.cpp и модели запускаются штатно если отдельно запускать»): the transport-13 freeze chain pinned dead — backend.py's model.load/model.unload as RUNS (the chat.send pattern: validate + the ladder walk + admit + launch under milliseconds, the minutes-class managed spawn / graceful stop on the registry's worker thread OFF the coarse dispatch lock, the FAILED diagnostics carrying the observed cause on the run.get wire — §21's honest surface; the single-slot + in-flight admission guards; MODEL_LOAD/UNLOAD_DEFAULT_DEADLINE_SECONDS the rows' own §12 budgets) + llama_process.py's _PipeDrain (one daemon reader per captured pipe into a bounded 64KB tail ring — the Windows pipe-buffer wedge pinned dead, stderr_tail cross-platform over the ring, the os.set_blocking '(empty)' bug dead) + shell.gd's run-poll Models circuits (model-load-get/model-unload-get on the shared tick, the honest picker/load guards — never a silent return, §18; the failed scan re-arm so «моделей не видно» never sticks) + tests (test_backend_row the run-form rework + 3 new pins incl. THE DISPATCH-LOCK regression — model.list ANSWERS while a gated load stands in the port call; test_shell_contract's wb-11 pins); 10 paths; 2284+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form unchanged)
 - iter-227 · 2026-09-26 · wb-10-owner-experience (the owner's 2026-09-25 fix list over the wb-9 handback — the launcher's Popen `buffering` TypeError + «где найти redot.exe и как его подключить?» + «просто открывающийся проводник и выбор уже скаченных локальных моделей» + «пользователь не должен вводить команды чтобы запустить или скачать что-либо!» + «интерфейс вверх убожества»): scripts/workbench_launch.py reworked (the bufsize fix + the folder-aware Redot resolution — release folder → the engine exe, the known names in preference order, one folder deep; CLI/env strict-verbatim, the persisted workbench/runtime/launcher.json, the Desktop-shaped auto-scan, the native tk folder picker once; the observed bind URL forwarded to the Redot child; the bare "--" separator stripped — the latent wb-9 gateway-arg bug) + the model.import work kind (models.py: a LOCAL copy into the models root — .part + atomic rename + live progress + cooperative cancel, the admission gates pre-run, NO network — INV-4 untouched; composition.py wires it unconditionally) + discover()'s models_root (the frontend's open-folder answer) + shell.gd's native-picker Models manager (Add local models…/Add folder… over FileDialog.use_native_dialog with ACCESS_FILESYSTEM, Open models folder via OS.shell_open, the URL fetch demoted to the collapsed advanced row; the theme@0.2 visual pass — the chip/card_user tokens) + Workbench.bat/Workbench Setup.bat the repo-root double-click entries + project.godot 1440×900; tests/test_model_import.py (8) + tests/test_workbench_launch.py (12 — THE REAL SPAWN integration: the buffering crash pinned dead) + the shell_contract/workbench_app/operations pin updates; 18 paths; 2281+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form unchanged)
-- iter-226 · 2026-09-26 · wb-9-model-flow (the owner's «открыл воркбенч, зашел и загрузил модель» + «подтянуть модель откуда угодно» + «настройки запуска llama.cpp... сэмплеры всякие» calls — the model flow end to end): workbench/platform/model_fetch.py (D-208 — INV-4's third sanctioned surface: the outbound model-assets fetch, HTTP GET downloads only) + the model.fetch work kind (models.py, the injected fetcher, admission gates pre-run, the registry's live progress surface + the kind's own 3600s deadline) + workbench/application/settings.py (the typed launch-settings store + backend.settings/backend.settings.update + the atomic persistence) + llama_process.py's sampler flag family + workbench_app.py's MANAGED default (--attached restores the observe-only form) + the exe auto-discovery + the runtime layout (workbench/runtime/{models,llama.cpp,settings.json}, gitignored) + scripts/workbench_launch.py the one-command launcher (the gateway + Redot, the stdout bind-line watch) + shell.gd's REAL Settings surface (the typed fields + the collapsed advanced + the preview) + the Models manager (the URL fetch with live progress); tests/test_model_fetch.py (11) + tests/test_settings.py (10) + the workbench_app/managed/shell_contract/architecture/operations/gateway pin updates; 2258+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form pinned)

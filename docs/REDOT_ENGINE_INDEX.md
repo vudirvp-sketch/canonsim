@@ -228,6 +228,23 @@ The Redot 26.2 GDScript reference is explicitly the language reference for Redot
 
 **Agent rule:** for syntax questions, prefer the exact 26.2 language reference over memory or a generic Godot snippet.
 
+**Pinned 26.2 JSON laws (obs-2, D-217 — each found by a live runtime failure, never by memory):**
+
+- `JSON.parse(text)` is an INSTANCE method in 26.2 (the 4.3+ JSON
+  rework); the static form is `JSON.parse_string(text)` — a Variant
+  (or null on parse failure), never a `result`/`error` pair.
+- `JSON.parse_string` parses EVERY number as a **float** (typeof 3):
+  `"seed": 42` arrives as `42.0`, and `str(42.0)` renders `"42.0"` —
+  canonical integers must normalize (`_int_text`/`_normalize_numbers`
+  in observatory.gd; JSON.stringify of a float-parsed dict carries
+  the same hazard).
+- JSON `null` is a PRESENT key with a null value — `dict.get(k, "")`
+  never fires its default, and `String(null)` is a runtime error:
+  the null arm must be explicit.
+- a `GridContainer` column whose cells set only `clip_text` (min
+  width 0) collapses to zero width — the value cells need
+  `SIZE_EXPAND_FILL` (the question-contract pattern).
+
 ## 3.3 Scene / resource model
 
 Use the Redot class reference for:

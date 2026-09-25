@@ -183,15 +183,21 @@ def run_shell_proof(
     png_path: Path,
     meta_path: Path,
     surface: str | None = None,
+    obs_document: Path | None = None,
 ) -> int:
     """Drive the wb-2 shell scene; returns the exit code.
 
     The shell validates --surface itself and exits 2 on an unknown key
-    (the surface vocabulary is the shell's, not the runner's).
+    (the surface vocabulary is the shell's, not the runner's). The
+    obs-2 injection (--obs-document) rides through verbatim: a REAL
+    op-produced read document the capture renders through the shell's
+    own feed path (the runner never interprets its content).
     """
     user_args = ["--png", str(png_path), "--meta", str(meta_path)]
     if surface:
         user_args += ["--surface", surface]
+    if obs_document is not None:
+        user_args += ["--obs-document", str(obs_document)]
     cmd = _engine_cmd(engine, SHELL_SCENE) + ["--", *user_args]
     return _run_with_display(cmd)
 
@@ -219,6 +225,18 @@ def main(argv: list[str] | None = None) -> int:
             "on an unknown key); the runner never gates the surface set "
             "(the iter-235 drift lesson: choices=[chat, settings] lagged "
             "behind the shell through wb-8/9/obs-1)"
+        ),
+    )
+    parser.add_argument(
+        "--obs-document",
+        type=Path,
+        default=None,
+        help=(
+            "obs-2's runtime-proof injection (shell mode): a REAL "
+            "op-produced observatory.read result document — the capture "
+            "renders the LOADED Observatory through the shell's own feed "
+            "path (generate it via the real gateway over a fixture log; "
+            "the runner passes it through verbatim)"
         ),
     )
     parser.add_argument("--out", type=Path, default=None)
@@ -273,7 +291,9 @@ def _shell_main(args: argparse.Namespace) -> int:
     for stale in (png_path, meta_path):
         stale.unlink(missing_ok=True)
 
-    code = run_shell_proof(engine, png_path, meta_path, args.surface)
+    code = run_shell_proof(
+        engine, png_path, meta_path, args.surface, args.obs_document
+    )
     if code != 0:
         raise ProofError(f"the shell proof exited {code} (see stderr above)")
     if not png_path.is_file() or not meta_path.is_file():

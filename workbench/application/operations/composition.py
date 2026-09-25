@@ -94,6 +94,9 @@ from workbench.application.operations.models import (
     model_fetch_kind,
     model_import_kind,
 )
+from workbench.application.operations.observatory import (
+    register_observatory_operations,
+)
 from workbench.application.settings import (
     SettingsStore,
     register_settings_operations,
@@ -202,6 +205,8 @@ def compose_workbench_operations(
     settings_store: SettingsStore | None = None,
     command_preview: Callable[[Mapping[str, object]], str] | None = None,
     managed_live: Callable[[], bool] | None = None,
+    observatory_runs_root: Path | None = None,
+    observatory_schema: Mapping[str, object] | None = None,
 ) -> WorkbenchOperations:
     """Construct → validate → wire: build the registries, resolve the
     work kinds (the caller's mapping or the default composition — the
@@ -304,6 +309,25 @@ def compose_workbench_operations(
             raise CompositionError(
                 f"the injected backend does not satisfy the port: {exc}"
             ) from exc
+    # The obs-2 wiring (FRONTEND_UIUX_LAW §25's P1 continuation): the
+    # Observatory's two READ operations, over the INJECTED runs root
+    # + event schema (the consumer-gated law — neither injected means
+    # no Observatory surface served; one without the other is a
+    # half-wired surface, refused loudly).
+    if (
+        observatory_runs_root is not None
+        and observatory_schema is not None
+    ):
+        register_observatory_operations(
+            gateway, observatory_runs_root, observatory_schema
+        )
+    elif (
+        observatory_runs_root is not None or observatory_schema is not None
+    ):
+        raise CompositionError(
+            "the observatory seam needs BOTH the runs root and the event "
+            "schema — one without the other is a half-wired surface"
+        )
     return WorkbenchOperations(
         models=models,
         executions=executions,

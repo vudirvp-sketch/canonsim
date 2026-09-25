@@ -1,51 +1,65 @@
-Iteration: iter-235 (`obs1-observatory-slice` — FRONTEND_UIUX_LAW
-§25's P1 + §50/§51, the vertical UX slice BEFORE full analytical
-backend coverage): the nav rail adopts the §4.1 IA — WORK (Chat ·
-Observatory; Simulation/Inference planned) / RESOURCES (Models;
-Prompts/History) / SYSTEM (Settings; Runs/Diagnostics — the LAW's
-map, Runs added, Inference kept, nothing silently dropped) +
-scripts/observatory.gd the responsibility-split seed (LAW §18: the
-surface composes ITSELF over the injected theme + the shell's own
-_tr Callable — one boundary, one token source): the semantic
-breadcrumb, the context identity strip (pack/run/seed/tick/profile/
-revision — the honest no-session values), the World Question
-contract (QUESTION/CLASS/TARGET/SCOPE, the DRAFT lifecycle —
-nothing asked, nothing claimed), ONE primary read-only view (the
-event table's TICK/EVENT/KIND/AUTHORITY columns; the DISTINCT NO
-DATA semantics, never no-match/no-evidence), the inspector region
-(HSplit — nothing selected, honestly), the evidence ladder (READ/
-BRANCH/STATE/DIVERGENCE/PERSISTENCE, every rung's unknown as
-TEXT) — zero fabricated content, zero dispatch, zero new transport;
-canon_shell@0.6. The runner drift fixed (visual_proof.py's --surface
-choices=[chat,settings] had lagged the shell through wb-8/9/obs-1 —
-the vocabulary is the shell's, the runner never gates it). VLM-
-verified composition: all regions render, no overlap, no clipping.
+Iteration: iter-236 (`obs2-live-run-read-seam` — FRONTEND_UIUX_LAW
+§25's P1 continuation: the live run feeding the Observatory over a
+READ-side seam, the selection model's first consumer §6):
+workbench/observatory_read.py the seam's one home (the bounded read
+model over the canonical JSONL log — INV-1's own truth, the wb-1
+scene_build read-side edge; the application-operations package
+stays CanonSim-free per its dependency envelope): observatory.runs
+(the discovery scan — per-run parsed header or the honest
+degradation pair, content truths only, no mtime) + observatory.read
+(the after-cursor window over EVENT IDS, default 50/cap 200 the ONE
+boundedness ceiling, authority CANONICAL rendered never guessed,
+duplicate-id/stale-cursor/corrupt logs DOMAIN_REJECTED loud) over
+the injected runs root + schema (half-wired composition refused);
+workbench_app.py passes the cli's own logs/ law (never a second
+copy). observatory.gd v0.2 (canon_observatory@0.2, canon_shell@0.7):
+the live feed — the picker + Refresh + Earlier/Later pagination,
+the selection as the EVENT ID on button metadata (set_meta/get_meta,
+never a row index; restoring by ID across re-reads, §6.1), the
+inspector scrolling (cause + state changes as DATA — a cause_id
+never confirms the BRANCH rung; only READ confirms under a
+selection, §12), the DISTINCT empties (probing ≠ NO RUNS ≠ NO
+EVENTS ≠ refused, §16), the breadcrumb Observatory → run → event ·
+kind (§17); the shell hosts through TWO request signals (the
+observatory never touches the gateway client, §18) + --obs-document
+the proof-only injection (a REAL op document through the SAME feed
+path; exit 4 its refusal; the meta's observatory_run keeps a loaded
+capture honest). The Redot 26.2 lessons pinned: JSON.parse_string
+is the static form; JSON numbers parse as FLOATS (_int_text/
+_normalize_numbers — the canonical ints never render "42.0"); a
+GridContainer value column needs SIZE_EXPAND_FILL; JSON null is a
+PRESENT key (String(null) is a runtime error). VLM-verified loaded
+composition (the headless harness dumps the full inspector: cause/
+state changes/provenance verbatim).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head + the ux/obs families per FRONTEND_UIUX_
-LAW §25) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2290 passed + 7 skipped, ruff clean, docguard clean (2296+1 with
-the sandbox REDOT_EXE — the gated packets green incl. the
-observatory capture; zero
-code change — Python 3.12.14, the env pin; the 5 REDOT_EXE-gated
-visual packets + duckdb skipping clean per D6/D-093) ·
+(the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
+P2 continuation) + the world track + the SoW horizon, ROADMAP §2/§6) ·
+2308 passed + 8 skipped, ruff clean, docguard clean (2315+1 with
+the sandbox REDOT_EXE — the gated packets green incl. the LOADED
+observatory capture: double-run byte-identical, distinct from the
+empty slice; Python 3.12.14, the env pin; the REDOT_EXE-gated visual
+packets + duckdb skipping clean per D6/D-093) ·
 Date: 2026-09-25 ·
-Scope: workbench/presentation/redot/scripts/observatory.gd (NEW —
-the slice: breadcrumb/context/question/workspace/inspector/
-evidence ladder, the injected theme + _tr) + scripts/shell.gd (the
-IA groups + the hosting + canon_shell@0.6) + scripts/strings.gd
-(the obs.* keys ×2 locales) + scripts/visual_proof.py (the runner's
---surface gate retired) + tests/test_shell_contract.py (the obs-1
-slice contract) + tests/test_shell_proof.py (the observatory
-capture + the re-pointed pins) + the state docs (STATUS/TASKS/
-worklog/DECISIONS/NAV) — 10 paths.
-Track A: the wb family (iter-232 the race/latch fixes + the OLED
-re-pin; the ux-1/obs-1 families now the queue head per FRONTEND_UIUX_
-LAW §25, wb-13+ the P2 visual continuation; the prior record:
-iter-231 CI-unred + NavButton, 230 wb-12, 229 the visual law, 228
-wb-11 transport chain, 227 wb-10, 226 wb-9 D-208, 225 the engine
-index D-207, 224 D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219
-wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the worklog + git.
+Scope: workbench/observatory_read.py (NEW — the read model) +
+workbench/application/operations/observatory.py (NEW — the ops
+layer) + workbench/application/operations/composition.py (the
+injected seam wiring) + scripts/workbench_app.py (the runs root +
+schema) + workbench/presentation/redot/scripts/{observatory.gd
+(v0.2 — the live feed + selection), shell.gd (the hosting +
+--obs-document + canon_shell@0.7), strings.gd (the obs.* feed keys
+×2 locales)} + scripts/visual_proof.py (the --obs-document
+pass-through) + tests/{test_observatory_read.py (NEW — the op
+contract ×17), test_shell_contract.py (the obs-2 contract),
+test_shell_proof.py (the loaded capture), test_operations.py (the
+envelope entry)} + the state docs (STATUS/TASKS/worklog/DECISIONS) —
+13 paths.
+Track A: the obs family the live head (iter-235 obs-1, 234 ux-1;
+obs-3+ the P3 rungs per the LAW §25 ladder; the wb family behind:
+iter-232 the race/latch fixes + the OLED re-pin, 231 CI-unred +
+NavButton, 230 wb-12, 229 the visual law, 228 wb-11, 227 wb-10,
+226 wb-9 D-208, 225 the engine index D-207). The detail lives in
+the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
