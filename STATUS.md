@@ -1,31 +1,30 @@
-Iteration: iter-238 (`ki98-launcher-url-route` — the owner's
-2026-09-25 «в какой-то из итераций с Workbench.bat всё
-работало, но потом перестало. точнее менеджер папок,
-проводник => я не могу открыть и выбрать языковые модели, и
-они не обнаруживаются» report over the GGUFs sitting in
-workbench/runtime/models): KI#98 — the iter-227 bind-URL
-forward shipped the gateway's full ENDPOINT (transport.url,
-the /op route INCLUDED) as the Redot child's --gateway-url,
-while gateway_client.gd owns the route itself (base + "/op")
-— every shell request landed on /op/op → HTTP 404 → the dead
-session chain (the picker buttons never enabled, model.list
-never answered, the managed llama-server never spawned); the
-fix strips any path in `_gateway_url_from_bind_line` (the
-forwarded value is the ROOT — scheme://host:port), the false
-test pin re-pinned over the REAL banner shape, and a NEW
-end-to-end pin spawns the real gateway, parses its real
-banner, and POSTs root+"/op" expecting 200 (banner/route/
-parse drift all go RED); the full circuit verified live
-against the real gateway + the fake managed llama-server
-(session → discovery → load → chat reply → unload).
+Iteration: iter-239 (`inf1-inference-control-slice` — the owner's
+2026-09-25 chip-workspace hand-off: the external
+`llama_cpp_chip_workspace_spec_2026-09-25.md` + the reviewed
+`флаги llama.cpp.txt` snapshot over the «реализовать чипы и прочее
+по документу» call): the llama.cpp semantic inference-control layer
+landed as a NATIVE workbench capability — docs/
+LLAMA_CPP_INFERENCE_CONTROL_LAW.md (D-219: Settings ≠ Inference
+Control, the three-layer split, the chip-as-semantic-runtime-control
+identity) + workbench/application/inference.py the semantic core
+(the 13-control library over 5 categories, the profile store, the
+deterministic resolver, the compiled launch surface, the one-way
+schema/1→settings/2+inference/1 migration) + the Inference surface
+(inference.gd: the control groups, the ordered sampler chain, the
+state badges, the compiled preview) + the Chat projection + the
+Settings deployment slim + the extra_args duplicate-ownership
+guard; 26 paths.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the obs family its live head per FRONTEND_UIUX_LAW §25, wb-13+ the
 P2 continuation) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2309 passed + 8 skipped, ruff clean, docguard clean (Python 3.12.14,
+2335 passed + 8 skipped, ruff clean, docguard clean (Python 3.12.14,
 the env pin; the REDOT_EXE run green against redot-26.2-stable:
-2316+1 — the seven visual packets + the duckdb skip alone, per
-D6/D-093) ·
+2343+1 — the eight visual packets (the seven + inf-1's inference
+capture) + the duckdb skip alone, per D6/D-093; the live binary
+check per the LAW §19: the compiled flag forms verified against the
+reviewed snapshot, the sandbox's older CPU build refusing the newer
+forms LOUDLY — the capability authority law's own demonstration) ·
 Date: 2026-09-25 ·
 Scope: scripts/workbench_launch.py (the path-stripping parse + the
 KI#98 docstring law) + tests/test_workbench_launch.py (the re-pinned
@@ -73,8 +72,8 @@ lives in the worklog + git.
 > restated their named owners (doc-3). The operational recipes live in
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
-- **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again.**
+- - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference.py; the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control).**
 - **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -96,7 +95,12 @@ lives in the worklog + git.
 
 ## Next step
 
-**iter-236 DONE: the obs-2 live run over the READ-side seam LANDED
+**iter-239 DONE: the llama.cpp semantic inference-control vertical
+slice LANDED (the LAW + the semantic core + the resolver + the
+compiled surface + the Inference surface + the migration; 2335+8 +
+ruff + docguard clean) — the inf-2+ continuation (capability
+discovery, the library/pinning workspace, presets/recipes, the
+later capability groups) each an owner-gated row. iter-236 DONE: the obs-2 live run over the READ-side seam LANDED
 (the bounded read model + observatory.gd v0.2's live feed, the
 selection the EVENT ID, the honest empties) — 2308+8 (CI) / 2315+1
 (REDOT_EXE) + ruff + docguard clean. iter-237 DONE: the v5.2 corpus

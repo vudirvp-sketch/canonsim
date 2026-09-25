@@ -1360,6 +1360,10 @@ def test_operations_import_closure() -> None:
         "workbench.application.operations.models",
         "workbench.application.operations.lifecycles",
         "workbench.application.settings",
+        # inf-1: the semantic inference-control layer (the profile
+        # store + the resolver + the family's registration — the
+        # composition wires it exactly like the settings family).
+        "workbench.application.inference",
         "workbench.application.artifact",
         "workbench.application.clock",
         "workbench.application.identity",

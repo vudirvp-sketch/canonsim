@@ -488,11 +488,16 @@ different content must not masquerade as the same reproducibility input.
 The application may discover/validate/select a pack; CanonSim remains
 owner of pack semantics.
 
-## 19. Inference and sampler policy `[PARTIAL — the settings store + sampler flags landed wb-9]`
+## 19. Inference and sampler policy `[PARTIAL — inf-1: the semantic inference-control layer landed; docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md owns the llama.cpp chip architecture]`
 
 Backend-specific flags, server defaults and wire quirks stay in the
 adapter; generic Workbench types stay backend-neutral. §19.1 is the
-contract. Build-sensitive sampler surfaces (temperature, top-k, top-p,
+contract. **Settings ≠ Inference Control (inf-1):** the launch-
+settings store owns DEPLOYMENT only; the inference profile store
+(`workbench/application/inference.py`) owns the semantic
+generation-control values — the llama.cpp chip model, its scopes,
+the sampler chain and the effective-state resolver route through
+LLAMA_CPP_INFERENCE_CONTROL_LAW FIRST, never a restatement here. Build-sensitive sampler surfaces (temperature, top-k, top-p,
 min-p, top-n-sigma, typical-p, XTC, DRY, repetition/presence/frequency
 penalties, dynamic temperature, adaptive-p, Mirostat, sampler ordering)
 are FRESHNESS EVIDENCE, not a frozen list — re-verify the pinned build
@@ -518,8 +523,11 @@ backend/runtime showed · PRESENTED = what the UI currently shows`. A UI
 control MUST NOT overwrite `EFFECTIVE` merely because its widget value
 differs; backend defaults, clamps, unsupported parameters and sampler
 ordering stay observable when they materially change behaviour.
-`[LANDED in the wb-9 form: chat.send's absent-temperature default
-resolves from the store — the BASE layer; the explicit value wins]`
+`[LANDED wb-9: chat.send's absent-temperature default resolves from
+the BASE layer; the explicit value wins. LANDED inf-1: the BASE
+layer is the inference profile's resolver — the run document
+carries the REQUESTED/EFFECTIVE pair; the composition chain itself
+stays THIS section's own law]`
 
 ## 20. Model discovery and loading `[LANDED wb-5..wb-11 — models.py/backend.py/model_fetch.py + the shell circuits]`
 

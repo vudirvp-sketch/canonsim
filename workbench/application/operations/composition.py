@@ -74,6 +74,11 @@ from workbench.api.gateway import (
     OperationSpec,
 )
 from workbench.application.clock import AppClock
+from workbench.application.inference import (
+    InferenceStore,
+    effective_temperature,
+    register_inference_operations,
+)
 from workbench.application.operations.backend import (
     BackendPortError,
     ModelLoadStates,
@@ -120,13 +125,17 @@ class CompositionError(ValueError):
     the §6.1 validate-dependencies step, LOUD)."""
 
 
-def _temperature_from(store: SettingsStore) -> Callable[[], float]:
-    """chat.send's BASE provider over the injected store (§19.1 — the
-    closure reads CURRENT at each dispatch, so a settings update
-    applies to the very next chat call)."""
+def _temperature_from(store: InferenceStore) -> Callable[[], float]:
+    """chat.send's BASE provider over the injected inference store
+    (§19.1 + LLAMA_CPP_INFERENCE_CONTROL_LAW §6 — the BASE PROFILE
+    layer; the closure reads CURRENT at each dispatch, so an
+    inference update applies to the very next chat call; the explicit
+    call-local value always wins, backend.py's own law — inf-1
+    re-pointed the provider from the launch-settings store's flat
+    field to the resolver's effective temperature)."""
 
     def current_temperature() -> float:
-        return store.current().temperature
+        return effective_temperature(store)
 
     return current_temperature
 
@@ -203,6 +212,7 @@ def compose_workbench_operations(
     backend: object | None = None,
     fetch: object | None = None,
     settings_store: SettingsStore | None = None,
+    inference_store: InferenceStore | None = None,
     command_preview: Callable[[Mapping[str, object]], str] | None = None,
     managed_live: Callable[[], bool] | None = None,
     observatory_runs_root: Path | None = None,
@@ -287,8 +297,8 @@ def compose_workbench_operations(
     if backend is not None:
         try:
             temperature_default = (
-                _temperature_from(settings_store)
-                if settings_store is not None
+                _temperature_from(inference_store)
+                if inference_store is not None
                 else None
             )
             model_loads = register_backend_operations(
@@ -303,6 +313,13 @@ def compose_workbench_operations(
                     gateway,
                     settings_store,
                     command_preview=command_preview,
+                    managed_live=managed_live,
+                )
+            if inference_store is not None:
+                register_inference_operations(
+                    gateway,
+                    inference_store,
+                    compiled_preview=command_preview,
                     managed_live=managed_live,
                 )
         except BackendPortError as exc:

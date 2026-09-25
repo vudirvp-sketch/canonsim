@@ -149,9 +149,15 @@ The mandatory minimum set (the wb-11 rows already render these
 honestly):
 
 ```text
-Chat:     EMPTY | ACTIVE | GENERATING
-Models:   EMPTY | DISCOVERED | ACTIVE | LOADING | FAILED
-Settings: DEFAULT | EDITING | DISABLED | ERROR
+Chat:      EMPTY | ACTIVE | GENERATING
+Models:    EMPTY | DISCOVERED | ACTIVE | LOADING | FAILED
+Settings:  DEFAULT | EDITING | DISABLED | ERROR
+Inference: OFFLINE (no read yet) | RESOLVED (the states are the
+           server's answer) | REFUSED | TRANSPORT — plus the
+           PER-CONTROL state badge (LLAMA_CPP_INFERENCE_CONTROL_LAW
+           §7's own vocabulary, rendered as TEXT first — never
+           color-only: EFFECTIVE, AUTO, INACTIVE, INEFFECTIVE with
+           the reason visible)
 ```
 
 - EMPTY is a REAL state with guidance (what to do next), never a
@@ -161,6 +167,9 @@ Settings: DEFAULT | EDITING | DISABLED | ERROR
   no long call ever wedges the UI).
 - FAILED shows the observed CAUSE (§21's diagnostics on the wire),
   never a bare "error".
+- inf-1's chip law (LLAMA_CPP_INFERENCE_CONTROL_LAW §9): AUTO, an
+  explicit value and DISABLED are three VISUALLY distinct states —
+  the badge text is the primary carrier, the color secondary.
 
 ## 6. The transplantation protocol (mechanisms, not looks)
 

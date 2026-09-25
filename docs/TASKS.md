@@ -391,7 +391,65 @@ TEST_PLAN §9's claim packet)
   (timeline lanes, compare arms, semantic zoom, cross-highlighting,
   Evidence Capsules, persistent research contexts) + the question
   editing form when its consumer names itself.
+- `inf-1` — DONE (iter-239, 2026-09-25). The §8-style report:
+  TARGET PROBLEM: the llama.cpp generation-control surface was flat
+  launch fields with no meaning layer (no categories, no AUTO, no
+  ordered chain, no relations, no effective state) and Settings was
+  becoming the flag browser the chip specification forbids. The
+  owner's 2026-09-25 chip-workspace hand-off (the external
+  `llama_cpp_chip_workspace_spec_2026-09-25.md` + the reviewed
+  `флаги llama.cpp.txt` snapshot — research inputs, never vendored).
+  CURRENT PRIMITIVE: the flat launch-settings fields (context/gpu/
+  fa/jinja + the five sampler flags) + build_server_command's fixed
+  emission. TRANSFERRED MECHANISM: the chip specification's own
+  three-layer split (raw capability / semantic control / UI
+  projection) over the repo's single-owner seam (settings.py's own
+  store pattern, llama_process's typed surface, composition.py's
+  injection seams): docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md (the
+  binding owner, D-219) + workbench/application/inference.py (the
+  control library — 13 controls over 5 categories; the profile
+  store inference.json; the deterministic resolver — composition,
+  the evidence-pinned relations, the effective-state vocabulary;
+  the compiled launch surface; the migrate_launch_semantics
+  one-way schema/1→settings/2+inference/1 value-preserving
+  migration) + the settings store's DEPLOYMENT slim + the platform
+  builder's additive params (samplers/seed/fit/kv; the legacy
+  command byte-stable) + the extra_args duplicate-ownership guard +
+  the gateway family (inference.read/update) + chat's BASE
+  re-point (the resolver's effective temperature) + the run
+  document's REQUESTED/EFFECTIVE pair + inference.gd the Inference
+  surface (the control groups + the ordered chain + the state
+  badges + the compiled preview + the save circuit) + the Chat
+  projection row + the Settings slim + the proof injection
+  (--inference-document). INVARIANT: Settings ≠ Inference Control
+  (one value owner per control; the profile store the single
+  semantic authority); AUTO ≠ unset ≠ disabled (the runtime's own
+  forms: -ngl auto/all, -fa auto, --seed -1); the chain is ordered
+  (an order change changes the emitted --samplers); temperature 0
+  PRESERVES the sampler configuration (INEFFECTIVE with reasons,
+  never deleted); configured-but-ineffective stays VISIBLE with the
+  reason; the raw hatch never shadows a semantic control (the
+  compile-time conflict, both flag forms matched); the states shown
+  are the SERVER's resolution (a local edit never fabricates a
+  state). VERIFICATION STATE: STATIC_VERIFIED (test_inference.py —
+  26 tests: the semantic-model laws, the resolver laws, the chain
+  round-trips, the backend translation, the truth layers, the store
+  + migration laws, the guard, the operations; the updated
+  settings/workbench_app/shell_contract/operations packets; 2335+8
+  + ruff + docguard clean) + the runtime proof row (the
+  --inference-document capture) as the follow-up arm. DEFERRED: the
+  session override layer, capability discovery (--help registry),
+  the library/pinning/search workspace, presets/scenarios/recipes/
+  hardware profiles, the later capability groups (DRY/XTC/Mirostat/
+  MoE/server/speculative...), seed's request scope, the chat-template
+  override relation — each its own owner-gated row.
+- `inf-2..inf-N` — the inference continuation family (each row
+  owner-gated, LLAMA_CPP_INFERENCE_CONTROL_LAW §21's ladder): the
+  capability groups + the workspace/preset/recipe layers above,
+  never one "advanced flags" bucket.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+
+- iter-239 · 2026-09-25 · inf1-inference-control-slice (the owner's 2026-09-25 chip-workspace hand-off — the llama.cpp semantic inference-control layer as a NATIVE workbench capability): docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md ADMITTED (D-219 — Settings ≠ Inference Control, the three-layer split, the chip-as-semantic-runtime-control identity) + workbench/application/inference.py the semantic core (the control library 13 controls / 5 categories, the profile store, the deterministic resolver with the evidence-pinned relations, the compiled launch surface, the one-way migration) + the settings store's DEPLOYMENT slim (schema/2) + build_server_command's additive params (samplers ';', seed, fit, kv — the legacy command byte-stable) + the extra_args duplicate-ownership guard + the gateway family (inference.read/update) + chat's BASE re-point + the run document's REQUESTED/EFFECTIVE pair + inference.gd the Inference surface + the Chat projection + the Settings slim + the --inference-document proof injection; 26 paths (the 3–5 soft limit honestly over: the semantic core + the surface + the claim packet + the state docs, AGENTS §2.3); 2335+8 (CI) / 2343+1 (REDOT_EXE — the inference capture green, VLM-verified) + ruff + docguard clean (zero core change, the LOG untouched)
 
 - iter-238 · 2026-09-25 · ki98-launcher-url-route (the owner's 2026-09-25 «в какой-то из итераций с Workbench.bat всё работало, но потом перестало... проводник — не могу открыть и выбрать языковые модели, и они не обнаруживаются» report over the GGUFs sitting in workbench/runtime/models): KI#98 — the iter-227 bind-URL forward shipped the gateway's full ENDPOINT (transport.url, the /op route INCLUDED) as the Redot child's --gateway-url while gateway_client.gd owns the route itself (base + "/op") — every shell request landed on /op/op → HTTP 404 → the dead-session chain (app.status dead, session.create never dispatched, the picker buttons never enabled, model.list never answered, the managed llama-server never spawned); the fix strips any path in _gateway_url_from_bind_line (the forwarded value is the ROOT — scheme://host:port), the false test pin re-pinned over the REAL banner shape (the old pin's banner carried no route — CI green while the real banner always did), and the NEW end-to-end pin spawns the real gateway process, parses its real banner, and POSTs root+"/op" expecting 200 (banner/route/parse drift all go RED); the full circuit verified live against the real gateway + the fake managed llama-server (session → model.list discovery → model.load the managed spawn → chat.send the reply → model.unload); 5 paths; 2309+8 + ruff + docguard clean (the REDOT_EXE run green against redot-26.2-stable: 2316+1, the seven visual packets; zero core change, the LOG untouched)
 - iter-237 · 2026-09-25 · corpus-rehoming (the owner's «переработай документацию и мне не приходилось её загружать постоянно» call over the re-delivered v5.2 corpus — the D-218 re-homing audit): the loss/duplication/ownership audit (the consolidation → LAW distillation verified ~80% faithful with 10 material contract losses; the app spec ~60% implemented with its un-landed contracts dangling on §-references; the Observatory + world-presentation domains unowned) then the repair — docs/WORKBENCH_APP_LAW.md (NEW, the app spec's binding distillation, §-numbering preserved 1:1 so every `app §N` resolves) + docs/OBSERVATORY_LAW.md (NEW, the Observatory control plane, §-numbering preserved; research findings kept as evidence snapshots) + docs/WORLD_PRESENTATION_LAW.md (NEW, the P4 family's scene/asset/LOD/degradation contracts) + FRONTEND_UIUX_LAW repaired (§11.1 dense data/forms/search + §14.1 task modelling + §20 budget categories + §21.1 chat ergonomics + §21.2 AI-interaction contract + §22.1 usability evaluation/metrics + §22.2 the acceptance benchmark + G1–G12 + §23 anti-pattern completions + the routing header) + VISUAL_SYSTEM_UI repaired (§1.1 Gestalt/density + §2.1 dimension tokens + §2.2 typography + §12 the two-layer identity) + REDOT_ENGINE_INDEX §20.1 the version-admission gate + CONTRACTS §5 the §-map + NAV/TASKS the reference repairs (the drifted LAW §50/§51/§39/§42 citations re-pointed); the external corpus's material load now fully owned in-repo — the owner never re-uploads it; 13 paths (doc-only + docguard's own allowlist table, zero engine code change, the LOG untouched); 2306+2 + ruff + docguard clean
@@ -407,4 +465,3 @@ TEST_PLAN §9's claim packet)
 - iter-231 · 2026-09-25 · ci-unred-nav-variation (the owner's 2026-09-25 engine report — the nonexistent add_theme_type_variation call killing _ready at _build_nav_rail + the unused row warning — + the CI-red report «в прошлых двух итерациях как минимум у тебя тесты на репо проваливаются», runs 82–84 red since iter-227): KI#93 the launcher/gateway pipe chain's buffering owned by the chain itself (the gateway child rides -u, the supervisor line-buffers its own stdout, the test spawn strips PYTHONUNBUFFERED — the sandbox's global var had masked CI red: the bind line sat in the child's block buffer past the 90s boot probe, the launcher honestly reported failure while every local run stayed green) + KI#94 the NavButton wiring through the theme_type_variation PROPERTY (Redot 26.2 has no method form; the negative pin) + the dead row local removed; 7 paths; 2285+6 + ruff + docguard clean (verified in the standard AND the stripped-var env — the CI/owner condition; zero core change, zero pack change, the LOG untouched)
 - iter-230 · 2026-09-25 · wb-12-token-audit-chat-follow (the owner's «тема и UI все так же убоги, тема ужасная» + «в чате при получении сообщений от языковой модели => не происходит плавной прокрутки вниз» calls, the v5.2 plans pack the direction hand-off): theme@0.3 — the token audit per VISUAL_SYSTEM_UI §2/§3 (the neutral ramp re-pinned over the Catppuccin Mocha VALUE reference — the layered-luminance mechanism per §6, ONE accent #89b4fa, accent_deep retired, the NavButton type variation + styles/chip_busy) + the chat follow law (the tween over the scrollbar's float value never the int jump, the layout-settle await, the near-bottom gate so a reading owner is never yanked, the follow on every role, the bounded late-layout re-settle) + the GENERATING chip (§5's Chat matrix state made visible: pulsing dot AND label, §4's not-color-only) + test_shell_contract's theme@0.3/smooth-follow pins (+1 test); 10 paths; 2285+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched)
 
-- iter-229 · 2026-09-26 · visual-system-admission (the owner's 2026-09-26 «вот и отлично, зафиксируй где нужно и обращайся при дальнейшей работе! нынешний ui - ужасен! поэтому всеми тремя руками и ногами - за!» call over the external 24-section Visual System and UI Engineering instruction document): docs/VISUAL_SYSTEM_UI.md ADMITTED as the visual rows' law owner (D-211) — the surface-driven grammar (CANVAS/SURFACE/CONTAINER/CONTENT/ACTION, not card-driven) + the semantic token taxonomy (SURFACE_*/CONTENT_*/ACTION_*/BORDER_*/STATE_*/AUTHORITY_* — the theme the single source) + the neutral-first/ONE-accent color law + the not-color-only accessibility invariant + the per-surface visual state matrix (Chat EMPTY/ACTIVE/GENERATING · Models EMPTY/DISCOVERED/ACTIVE/LOADING/FAILED · Settings DEFAULT/EDITING/DISABLED/ERROR) + the transplantation protocol (SOURCE→TECHNIQUE→MECHANISM→INVARIANT→ADAPTATION→CONSEQUENCE — mechanisms, not looks) + the reference pack under AGENTS §2.8 (ThemeGen a tool never a decision source; SillyTavern license-sensitive — mechanisms only) + the §8 per-row UI report + the anti-patterns + the wb-12+ candidate queue (each row owner-gated, one row per iteration) + the standing resolutions (functional first, the doc is the law for each row never a parallel program, the app spec's §18 evidence law wins over quiet chrome) + the routing surfaces (NAV §1 + TASKS wb-9+ pointer + STATUS FAQ); 7 paths; 2284+6 + ruff + docguard clean (doc-only, zero code change, the LOG untouched)

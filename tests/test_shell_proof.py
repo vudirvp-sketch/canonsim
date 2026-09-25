@@ -51,6 +51,7 @@ def _run_shell_proof(
     out_dir: Path,
     surface: str | None = None,
     obs_document: Path | None = None,
+    inference_document: Path | None = None,
 ) -> dict[str, Path]:
     """One shell-proof run through the operator runner (fresh out dir)."""
     if not REDOT_EXE:
@@ -62,6 +63,8 @@ def _run_shell_proof(
         argv += ["--surface", surface]
     if obs_document is not None:
         argv += ["--obs-document", str(obs_document)]
+    if inference_document is not None:
+        argv += ["--inference-document", str(inference_document)]
     assert proof_main(argv) == 0
     name = f"shell_{surface}" if surface and surface != "chat" else "shell"
     meta_name = f"{name}_meta.json" if surface and surface != "chat" else "shell_meta.json"
@@ -105,7 +108,7 @@ def test_artifacts_exist_and_are_wellformed(shell_runs: list[dict[str, Path]]) -
     # KI#97 (iter-234): the pin had drifted to canon_shell@0.1 while the
     # packet was REDOT_EXE-gated-silent through wb-8/wb-9 — pins track the
     # LIVE shell, never a remembered one. iter-235: @0.6 (the Observatory).
-    assert meta["shell_version"] == "canon_shell@0.7"
+    assert meta["shell_version"] == "canon_shell@0.8"
     # The theme identity is the committed theme file's sha256 (64 hex).
     theme_sha = meta["theme_identity"]
     assert len(theme_sha) == 64 and all(c in "0123456789abcdef" for c in theme_sha)
@@ -118,10 +121,13 @@ def test_artifacts_exist_and_are_wellformed(shell_runs: list[dict[str, Path]]) -
 
     # The §17 surface inventory (obs-1: the IA gained the Observatory —
     # WORK/RESOURCES/SYSTEM; the planned list re-pointed per LAW §4.1,
-    # Runs added, Inference kept, nothing silently dropped).
-    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
+    # Runs added; inf-1: Inference went REAL — the planned set keeps
+    # the honest remainder).
+    assert meta["surfaces"] == [
+        "chat", "observatory", "inference", "models", "settings"
+    ]
     assert meta["planned_surfaces"] == [
-        "Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics",
+        "Simulation", "Prompts", "History", "Runs", "Diagnostics",
     ]
     assert meta["active_surface"] == "chat"
     # ux-1: the base window stays 1440x900 (the min-size/stretch policy rides
@@ -146,8 +152,10 @@ def test_settings_surface_capture(settings_run: dict[str, Path]) -> None:
     assert settings_run["png"].is_file() and settings_run["meta"].is_file()
     meta = json.loads(settings_run["meta"].read_text(encoding="utf-8"))
     assert meta["active_surface"] == "settings"
-    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
-    assert meta["shell_version"] == "canon_shell@0.7"
+    assert meta["surfaces"] == [
+        "chat", "observatory", "inference", "models", "settings"
+    ]
+    assert meta["shell_version"] == "canon_shell@0.8"
     assert _png_size(settings_run["png"]) == (1440, 900)
     # The two surfaces must not render identically (the switch is real).
     default_run_png = None  # resolved lazily: the module fixture order is not ours
@@ -179,8 +187,10 @@ def test_observatory_surface_capture(observatory_run: dict[str, Path]) -> None:
     assert observatory_run["png"].is_file() and observatory_run["meta"].is_file()
     meta = json.loads(observatory_run["meta"].read_text(encoding="utf-8"))
     assert meta["active_surface"] == "observatory"
-    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
-    assert meta["shell_version"] == "canon_shell@0.7"
+    assert meta["surfaces"] == [
+        "chat", "observatory", "inference", "models", "settings"
+    ]
+    assert meta["shell_version"] == "canon_shell@0.8"
     assert _png_size(observatory_run["png"]) == (1440, 900)
     # The slice's composition is its own — never a byte-copy of another
     # surface (the grammar changed the canvas, not just the header).
@@ -286,4 +296,110 @@ def test_observatory_loaded_capture(
     assert first["png"].read_bytes() != observatory_run["png"].read_bytes(), (
         "the LOADED capture is byte-identical to the EMPTY slice — the "
         "feed did not change the composition"
+    )
+
+
+def _inference_read_document(tmp: Path) -> Path:
+    """inf-1's proof injection source: the REAL inference.read result
+    over the actual gateway + the resolver (the capture renders a
+    genuine op document, never a hand-crafted near-miss — the obs-2
+    pattern). The document carries the RESOLVED states: the seed's
+    AUTO, an ineffective sampler (top_k disabled — the value stays
+    configured), the reordered chain, and the compiled preview."""
+    from workbench.api.contract import RequestEnvelope
+    from workbench.api.gateway import Gateway
+    from workbench.application.clock import AppClock
+    from workbench.application.inference import InferenceStore
+    from workbench.application.operations.composition import (
+        compose_workbench_operations,
+    )
+
+    inference = InferenceStore(tmp / "inference.json")
+    inference.update(
+        {
+            "name": "Long-form draft",
+            "temperature": 0.7,
+            "gpu_layers": "auto",
+            "cache_type_k": "q8_0",
+            "sampler_chain": [
+                {"id": "penalties", "enabled": True},
+                {"id": "top_p", "enabled": True},
+                {"id": "min_p", "enabled": True},
+                {"id": "top_k", "enabled": False},
+                {"id": "temperature", "enabled": True},
+            ],
+        }
+    )
+    gateway = Gateway()
+    compose_workbench_operations(
+        gateway,
+        tmp / "models-absent",
+        AppClock(),
+        backend=_NoopPort(),
+        inference_store=inference,
+    )
+    response = gateway.dispatch(
+        RequestEnvelope(operation="inference.read", arguments={})
+    )
+    assert response.status == "OK", response.to_mapping()
+    document = tmp / "inference_read_document.json"
+    document.write_text(
+        json.dumps(response.result, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    return document
+
+
+class _NoopPort:
+    """The proof document's port stand-in (the read needs a registered
+    backend family; the read itself never touches the port)."""
+
+    def props(self) -> dict:
+        return {}
+
+    def chat(self, messages, *, grammar=None, temperature=0.8, max_tokens=512):
+        return ("", "stop")
+
+    def load_model(self, model_path, alias=None):
+        return {}
+
+    def unload_model(self, model_ref):
+        return {}
+
+
+@pytest.fixture(scope="module")
+def inference_loaded_runs(
+    tmp_path_factory: pytest.TempPathFactory,
+) -> list[dict[str, Path]]:
+    """Two independent loaded Inference captures (the D4 falsifier)."""
+    document = _inference_read_document(
+        tmp_path_factory.mktemp("inf_doc")
+    )
+    return [
+        _run_shell_proof(
+            tmp_path_factory.mktemp(f"wb_inference_{index}"),
+            surface="inference",
+            inference_document=document,
+        )
+        for index in range(2)
+    ]
+
+
+def test_inference_surface_capture(inference_loaded_runs) -> None:
+    """inf-1's runtime proof (LLAMA_CPP_INFERENCE_CONTROL_LAW §21): the
+    Inference surface renders over a REAL inference.read document —
+    the control groups, the state badges (the seed's AUTO, the
+    disabled top_k's INEFFECTIVE), the reordered chain, and the
+    compiled preview compose deterministically (the double-run
+    byte-diff)."""
+    first, second = inference_loaded_runs
+    for run in (first, second):
+        assert run["png"].is_file() and run["meta"].is_file()
+    meta = json.loads(first["meta"].read_text(encoding="utf-8"))
+    assert meta["active_surface"] == "inference"
+    assert "inference" in meta["surfaces"], "the axis is REAL, not planned"
+    assert _png_size(first["png"]) == (1440, 900)
+    # the D4 falsifier: the same document renders byte-identically
+    assert first["png"].read_bytes() == second["png"].read_bytes(), (
+        "the LOADED inference capture differs between two runs — the "
+        "document rendering is not deterministic"
     )

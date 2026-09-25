@@ -280,22 +280,34 @@ def test_the_launch_params_merge_cli_over_settings(tmp_path: Path) -> None:
     sys.path.insert(0, str(REPO))
     from workbench_app import _make_launch_params
 
+    from workbench.application.inference import InferenceStore
     from workbench.application.settings import SettingsStore
 
     settings_path = _settings_path(tmp_path)
     store = SettingsStore(settings_path)
-    store.update({"context": 4096, "gpu_layers": 24, "temperature": 0.25})
+    inference = InferenceStore(tmp_path / "inference.json")
+    inference.update(
+        {"context": 4096, "gpu_layers": 24, "temperature": 0.25}
+    )
     cli = parse_args(["--llama-ctx", "2048"])
-    provider = _make_launch_params(store, cli)
+    provider = _make_launch_params(store, inference, cli)
     params = provider()
     assert params["context"] == 2048  # the CLI override
-    assert params["gpu_layers"] == 24  # the store's value
+    assert params["gpu_layers"] == 24  # the profile's value
     assert params["temperature"] == 0.25
     assert params["flash_attention"] == "on"
     assert params["exe"] == "llama-server"  # the bare PATH default
-    # the store's update applies at the NEXT provider read (the UI's
-    # own next-spawn law)
-    store.update({"gpu_layers": 40})
+    # inf-1: the compiled semantic surface rides the provider (the
+    # chain, the seed, the fit, the KV pair)
+    assert params["samplers"] == [
+        "penalties", "top_k", "top_p", "min_p", "temperature"
+    ]
+    assert params["seed"] == -1
+    assert params["fit"] == "on"
+    assert params["cache_type_k"] == "f16"
+    # the profile's update applies at the NEXT provider read (the
+    # Inference surface's own next-spawn law)
+    inference.update({"gpu_layers": 40})
     assert provider()["gpu_layers"] == 40
 
 
@@ -373,16 +385,22 @@ def test_the_launcher_passes_the_gateway_args_through() -> None:
 
 
 def test_backend_settings_read_and_update_over_http(tmp_path: Path) -> None:
-    """THE wb-9 settings claim: the READ answers the effective document
-    + the command preview; the UPDATE validates, persists, and serves
-    the new effective state — all over the served loopback HTTP (the
-    exact circuit the Redot Settings surface drives)."""
+    """THE wb-9 settings claim after inf-1's split: the READ answers
+    the DEPLOYMENT document + the compiled command preview (the
+    semantic surface's own preview); the UPDATE validates, persists,
+    and serves the new deployment state — all over the served
+    loopback HTTP (the exact circuit the Redot Settings surface
+    drives). The inference family rides the same circuit: the READ
+    answers the resolved controls + the chain, the UPDATE walks the
+    resolver's effective state."""
     models = tmp_path / "models"
     _write_model(models)
     settings_path = _settings_path(tmp_path)
+    inference_path = tmp_path / "inference.json"
     gateway, _operations, transport, _backend, _args = build_app(
         ["--models-dir", str(models), "--port", "0",
-         "--settings-path", str(settings_path)]
+         "--settings-path", str(settings_path),
+         "--inference-path", str(inference_path)]
     )
     transport.start()
     try:
@@ -397,29 +415,63 @@ def test_backend_settings_read_and_update_over_http(tmp_path: Path) -> None:
         )
         assert read["status"] == "OK", read
         result = read["result"]
-        assert result["settings"]["context"] == 8192
+        assert result["settings"]["llama_server_exe"] == ""
         assert result["managed_live"] is False
         assert result["applies"] == "next-spawn"
         assert "<model.gguf>" in result["command_preview"]
         assert "--temp" in result["command_preview"]
+        # inf-1: the inference READ over the same circuit — the
+        # resolved controls document + the compiled chain
+        inference_read = _over_http(
+            transport.url,
+            {"operation": "inference.read", "arguments": {}},
+        )
+        assert inference_read["status"] == "OK", inference_read
+        controls = {
+            c["id"]: c for c in inference_read["result"]["controls"]
+        }
+        assert controls["sampling.temperature"]["state"] == "EFFECTIVE"
+        assert controls["sampling.temperature"]["value"] == 0.8
+        assert controls["sampling.seed"]["state"] == "AUTO"
+        assert "--samplers" in inference_read["result"]["compiled_preview"]
+        # the inference UPDATE: the closed partial over the profile
+        inference_updated = _over_http(
+            transport.url,
+            {
+                "operation": "inference.update",
+                "arguments": {"temperature": 0.3, "context": 4096},
+                "session_id": session,
+                "client_request_id": "inf1-update-1",
+            },
+        )
+        assert inference_updated["status"] == "OK", inference_updated
+        controls = {
+            c["id"]: c for c in inference_updated["result"]["controls"]
+        }
+        assert controls["model.context"]["value"] == 4096
+        assert controls["sampling.temperature"]["value"] == 0.3
+        assert "-c 4096" in inference_updated["result"]["compiled_preview"]
+        # the DEPLOYMENT update still walks its own store
         updated = _over_http(
             transport.url,
             {
                 "operation": "backend.settings.update",
-                "arguments": {"context": 4096, "gpu_layers": 20,
-                              "temperature": 0.3},
+                "arguments": {"no_webui": False},
                 "session_id": session,
                 "client_request_id": "wb9-update-1",
             },
         )
         assert updated["status"] == "OK", updated
-        assert updated["result"]["settings"]["context"] == 4096
-        assert updated["result"]["settings"]["temperature"] == 0.3
-        assert "-c 4096" in updated["result"]["command_preview"]
-        # the atomic persistence: the file carries the schema + the values
+        assert updated["result"]["settings"]["no_webui"] is False
+        # the atomic persistence: both files carry their schema + values
         document = json.loads(settings_path.read_text(encoding="utf-8"))
-        assert document["schema"] == "canonsim.workbench.settings/1"
-        assert document["settings"]["context"] == 4096
+        assert document["schema"] == "canonsim.workbench.settings/2"
+        assert document["settings"]["no_webui"] is False
+        inference_document = json.loads(inference_path.read_text(encoding="utf-8"))
+        assert inference_document["schema"] == (
+            "canonsim.workbench.inference/1"
+        )
+        assert inference_document["profile"]["temperature"] == 0.3
     finally:
         transport.stop()
 
@@ -465,16 +517,18 @@ def test_chat_temperature_resolves_from_the_settings(tmp_path: Path) -> None:
     models = tmp_path / "models"
     _write_model(models)
     settings_path = _settings_path(tmp_path)
-    from workbench.application.settings import SettingsStore
+    inference_path = tmp_path / "inference.json"
+    from workbench.application.inference import InferenceStore
 
-    SettingsStore(settings_path).update({"temperature": 0.25})
+    InferenceStore(inference_path).update({"temperature": 0.25})
     stub = _StubLlamaServer(models / "stub.gguf", replies=[("t1", "stop"), ("t2", "stop")])
     stub.start()
     try:
         _gateway, _operations, transport, _backend, _args = build_app(
             ["--models-dir", str(models),
              "--backend-endpoint", stub.url,
-             "--port", "0", "--settings-path", str(settings_path)]
+             "--port", "0", "--settings-path", str(settings_path),
+             "--inference-path", str(inference_path)]
         )
         transport.start()
         try:

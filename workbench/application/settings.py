@@ -1,17 +1,18 @@
 """The launch-settings store + the backend.settings operations (wb-9,
 the app spec §§7.1/19/20 — the owner's 2026-09-25 «настройки запуска
 llama.cpp, флаги как минимум основные + список остальных скрытый или
-свёрнутый, сэмплеры всякие» call).
+свёрнутый, сэмплеры всякие» call; the DEPLOYMENT half after inf-1's
+Settings ≠ Inference Control split).
 
-The law this module closes: the managed llama-server's launch flags
-are CONFIGURATION (§7.1's user-configuration role), not code — a
-typed, validated, persisted document the Workbench UI reads and
-writes over the gateway, with the honest §18/§19.1 chain:
+The law this module closes: the managed llama-server's LAUNCH
+settings are CONFIGURATION (§7.1's user-configuration role), not
+code — a typed, validated, persisted document the Workbench UI reads
+and writes over the gateway, with the honest §18/§19.1 chain:
 
 ```text
 REQUESTED  what the UI's Save sent (the closed field set)
-ACCEPTED   what passed validation (ranges + closed vocabularies —
-           rejected loud, never clamped)
+ACCEPTED   what passed validation (closed vocabularies — rejected
+           loud, never clamped)
 EFFECTIVE  what the NEXT spawn will use (the composition root's
            provider merges the store with the CLI overrides)
 OBSERVED   the actual command the spawn ran (the managed backend's
@@ -19,6 +20,24 @@ OBSERVED   the actual command the spawn ran (the managed backend's
 PRESENTED  what the Settings surface shows (the READ document + the
            command preview)
 ```
+
+inf-1's ownership split (LLAMA_CPP_INFERENCE_CONTROL_LAW §1 — the
+chip specification's own law): THIS store owns DEPLOYMENT ONLY —
+the executable preference, the web-UI surface, the raw extra_args
+escape hatch. The SEMANTIC generation-control values (context,
+GPU placement, flash attention, fit, KV types, the sampler family,
+seed, the chat template, the sampler chain) moved to the inference
+profile store (`workbench/application/inference.py`) — the §19.1
+BASE PROFILE layer. The one-way schema/1 → schema/2 migration lives
+there (`migrate_launch_semantics`, the composition root's own
+boot step — the operator's saved values move verbatim, never a
+silent reset).
+
+`extra_args` stays the RAW COMPATIBILITY / DEBUG ESCAPE HATCH (the
+law's §13): the operator's own flags verbatim, NEVER the semantic
+storage system — the composition root's compile step rejects a
+duplicate flag ownership loudly (a semantic Top-K plus a raw
+`--top-k` is a conflict surfaced, never an ambiguous precedence).
 
 The honest limits, named in the surface itself: a settings update
 applies at the NEXT model.load spawn — a LIVE server keeps its flags
@@ -62,47 +81,30 @@ __all__ = [
     "register_settings_operations",
 ]
 
-#: The configuration owner's own defaults (§7.1 — this module IS the
-#: launch-settings semantic owner; the values twin the platform
-#: command builder's own fallbacks, `workbench/platform/
-#: llama_process.py`'s DEFAULT_* family, and the composition root
-#: passes EVERY field explicitly at each spawn — the store's values
-#: are the single EFFECTIVE source, the builder's fallbacks never
-#: shadow them).
+#: The deployment owner's own defaults (§7.1 — this module IS the
+#: launch-settings DEPLOYMENT owner after inf-1's split; the semantic
+#: generation-control baseline lives in the inference profile's own
+#: defaults, and the composition root passes EVERY field explicitly
+#: at each spawn — the builder's fallbacks never shadow them).
 DEFAULTS: dict[str, object] = {
     "llama_server_exe": "",
-    "context": 8192,
-    "gpu_layers": 999,
-    "flash_attention": "on",
-    "jinja": True,
     "no_webui": True,
-    "temperature": 0.8,
-    "top_k": 40,
-    "top_p": 0.95,
-    "min_p": 0.05,
-    "repeat_penalty": 1.1,
     "extra_args": "",
 }
 
 #: The persisted document's schema tag (§15.3's schema-evolution law:
-#: a future field change bumps this and migrates explicitly — a file
-#: with a foreign tag refuses to load, never a guessed mapping).
-SCHEMA = "canonsim.workbench.settings/1"
+#: inf-1's Settings ≠ Inference Control split moved the semantic
+#: fields to the inference profile — a schema/1 document migrates
+#: through `workbench/application/inference.py`'s
+#: `migrate_launch_semantics` at composition boot; a file with a
+#: foreign tag refuses to load, never a guessed mapping).
+SCHEMA = "canonsim.workbench.settings/2"
 
 #: The closed field set (the store's whole vocabulary — anything else
 #: in an update or a persisted file is LOUD, never ignored).
 _FIELDS = (
     "llama_server_exe",
-    "context",
-    "gpu_layers",
-    "flash_attention",
-    "jinja",
     "no_webui",
-    "temperature",
-    "top_k",
-    "top_p",
-    "min_p",
-    "repeat_penalty",
     "extra_args",
 )
 
@@ -115,26 +117,19 @@ class SettingsError(ValueError):
 @dataclass(frozen=True)
 class LaunchSettings:
     """The typed launch-settings document — the managed spawn's own
-    knobs (the sampler family rides llama-server's default-flag
-    surface; the chat circuit's per-request temperature resolves from
-    `temperature` when the caller omits one — §19.1's BASE layer).
+    DEPLOYMENT knobs (inf-1's split: the semantic generation controls
+    live in `workbench/application/inference.py`'s profile store —
+    Settings ≠ Inference Control, the law's §1).
 
     `llama_server_exe` is a PREFERENCE, not a resolved path: "" means
     auto-discovery (the runtime/llama.cpp folder, then PATH — the
     composition root owns the resolution and the preview shows the
-    effective command)."""
+    effective command). `extra_args` is the raw escape hatch (the
+    law's §13 — duplicate flag ownership against the semantic layer
+    rejects loudly at the compile step)."""
 
     llama_server_exe: str = ""
-    context: int = 8192
-    gpu_layers: int = 999
-    flash_attention: str = "on"
-    jinja: bool = True
     no_webui: bool = True
-    temperature: float = 0.8
-    top_k: int = 40
-    top_p: float = 0.95
-    min_p: float = 0.05
-    repeat_penalty: float = 1.1
     extra_args: str = ""
 
     def as_document(self) -> dict[str, object]:
@@ -142,99 +137,27 @@ class LaunchSettings:
         fixed, the values verbatim)."""
         return {
             "llama_server_exe": self.llama_server_exe,
-            "context": self.context,
-            "gpu_layers": self.gpu_layers,
-            "flash_attention": self.flash_attention,
-            "jinja": self.jinja,
             "no_webui": self.no_webui,
-            "temperature": self.temperature,
-            "top_k": self.top_k,
-            "top_p": self.top_p,
-            "min_p": self.min_p,
-            "repeat_penalty": self.repeat_penalty,
             "extra_args": self.extra_args,
         }
 
 
 def _validate_field(name: str, value: object) -> object:
-    """One field's acceptance law: the closed type + range per field,
-    rejected LOUD (§19.1's VALIDATED step — never a silent clamp)."""
+    """One field's acceptance law: the closed type per field, rejected
+    LOUD (§19.1's VALIDATED step — never a silent clamp)."""
     if name == "llama_server_exe":
         if not isinstance(value, str):
             raise SettingsError(
                 "llama_server_exe must be a str (empty = auto)"
             )
         return value
-    if name == "context":
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, int)
-            or not 1 <= value <= 2_097_152
-        ):
-            raise SettingsError(
-                f"context {value!r} must be an int in [1, 2097152]"
-            )
-        return value
-    if name == "gpu_layers":
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, int)
-            or not 0 <= value <= 999
-        ):
-            raise SettingsError(f"gpu_layers {value!r} must be an int in [0, 999]")
-        return value
-    if name == "flash_attention":
-        if value not in ("on", "off", "auto"):
-            raise SettingsError(
-                f"flash_attention {value!r} must be one of "
-                "['auto', 'off', 'on']"
-            )
-        return value
-    if name in ("jinja", "no_webui"):
+    if name == "no_webui":
         if not isinstance(value, bool):
             raise SettingsError(f"{name} {value!r} must be a bool")
         return value
-    if name == "temperature":
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or not 0.0 <= float(value) <= 2.0
-        ):
-            raise SettingsError(
-                f"temperature {value!r} must be a number in [0, 2]"
-            )
-        return float(value)
-    if name == "top_k":
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, int)
-            or not 0 <= value <= 10_000
-        ):
-            raise SettingsError(
-                f"top_k {value!r} must be an int in [0, 10000]"
-            )
-        return value
-    if name in ("top_p", "min_p"):
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or not 0.0 <= float(value) <= 1.0
-        ):
-            raise SettingsError(f"{name} {value!r} must be a number in [0, 1]")
-        return float(value)
-    if name == "repeat_penalty":
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or not 0.0 <= float(value) <= 4.0
-        ):
-            raise SettingsError(
-                f"repeat_penalty {value!r} must be a number in [0, 4]"
-            )
-        return float(value)
     if name == "extra_args":
         if not isinstance(value, str):
-            raise SettingsError(f"extra_args {value!r} must be a str")
+            raise SettingsError(f"{name} {value!r} must be a str")
         return value
     raise SettingsError(f"unknown field {name!r} (closed set: {list(_FIELDS)})")
 

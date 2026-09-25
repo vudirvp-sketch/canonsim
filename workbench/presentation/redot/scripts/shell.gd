@@ -126,12 +126,13 @@
 #   canonism_workbench/gateway/url — that order).
 extends Control
 
-const SHELL_VERSION := "canon_shell@0.7"
+const SHELL_VERSION := "canon_shell@0.8"  # inf-1: the Inference axis went REAL
 const THEME_PATH := "res://themes/workbench_theme.tres"
 const GATEWAY_CLIENT_SCRIPT := preload("res://scripts/gateway_client.gd")
 # obs-1: the Observatory's own surface builder (LAW §18's split seed —
 # the responsibility leaves the shell's composition at birth).
 const OBSERVATORY_SCRIPT := preload("res://scripts/observatory.gd")
+const INFERENCE_SCRIPT := preload("res://scripts/inference.gd")
 # ux-1: the single translation boundary (strings.gd — the en/ru catalogs;
 # every user-facing string rides a key, the honest fallback returns the
 # key itself, never a silently wrong string).
@@ -142,21 +143,21 @@ const GATEWAY_DEFAULT_URL := "http://127.0.0.1:8765"
 # the rail reads as intent GROUPS, never a flat feature catalog):
 # WORK (Chat, Observatory), RESOURCES (Models), SYSTEM (Settings).
 const SURFACE_GROUPS := [
-        {"caption": "nav.group.work", "keys": ["chat", "observatory"]},
+        {"caption": "nav.group.work", "keys": ["chat", "observatory", "inference"]},
         {"caption": "nav.group.resources", "keys": ["models"]},
         {"caption": "nav.group.system", "keys": ["settings"]},
 ]
-const SURFACES := ["chat", "observatory", "models", "settings"]
+const SURFACES := ["chat", "observatory", "inference", "models", "settings"]
 # The planned axes per group (canonical identity names; the display
 # rides _tr("nav.planned.<key>")). The LAW's map adds Runs (SYSTEM) —
 # the honest gap made visible; Inference stays WORK-planned (the
 # existing axis is never silently dropped, D-198's law).
 const PLANNED_SURFACE_GROUPS := [
-        {"caption": "nav.group.work", "keys": ["Simulation", "Inference"]},
+        {"caption": "nav.group.work", "keys": ["Simulation"]},
         {"caption": "nav.group.resources", "keys": ["Prompts", "History"]},
         {"caption": "nav.group.system", "keys": ["Runs", "Diagnostics"]},
 ]
-const PLANNED_SURFACES := ["Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics"]
+const PLANNED_SURFACES := ["Simulation", "Prompts", "History", "Runs", "Diagnostics"]
 const CHAT_ROLES := ["user", "assistant"]
 const POLL_INTERVAL_S := 0.3
 const MAX_MESSAGES := 500
@@ -186,7 +187,6 @@ const SCROLL_TWEEN_S := 0.28
 # The Settings surface's own state (wb-9): the launch-settings document
 # arrives from backend.settings (the gateway's own answer); the preview
 # label carries the command the NEXT managed spawn would run.
-const FA_FORMS := ["on", "off", "auto"]
 
 var _t: Theme
 var _surface_nodes: Dictionary = {}
@@ -228,6 +228,8 @@ var _models_empty_note: Label
 var _models_status_label: Label
 var _models_refresh_button: Button
 var _observatory: Control  # obs-2: the hosted surface (LAW §18 — the shell owns the seam, the axis owns its regions)
+var _inference: Control  # inf-1: the hosted inference surface (the same LAW §18 split — the shell owns the transport, the surface owns its regions)
+var _inference_summary: Dictionary = {}  # inf-1: the Chat projection's own cached read (profile name + the effective temperature)
 var _models_active_label: Label
 var _model_rows: Dictionary = {}
 # wb-11 — the load/unload run circuits (identity-then-poll).
@@ -257,16 +259,7 @@ var _import_poll_failures := 0
 var _models_root := ""
 var _settings_scroll: ScrollContainer
 var _llama_exe_edit: LineEdit
-var _ctx_spin: SpinBox
-var _ngl_spin: SpinBox
-var _fa_option: OptionButton
-var _jinja_check: CheckBox
 var _no_webui_check: CheckBox
-var _temp_spin: SpinBox
-var _topk_spin: SpinBox
-var _topp_spin: SpinBox
-var _minp_spin: SpinBox
-var _repeat_spin: SpinBox
 var _extra_edit: LineEdit
 var _advanced_box: VBoxContainer
 var _advanced_button: Button
@@ -312,6 +305,12 @@ func _ready() -> void:
                 # injection refused; 2 = a bad surface, 3 = a capture
                 # failure — the codes stay distinct).
                 if not _apply_obs_document(String(paths["obs_document"])):
+                        return
+        if paths.has("inference_document"):
+                # inf-1's proof injection: the capture renders the
+                # RESOLVED state over a real op-produced document (the
+                # same exit-code discipline: 4 = the injection refused).
+                if not _apply_inference_document(String(paths["inference_document"])):
                         return
         _capture_and_quit.call_deferred(paths)
 
@@ -480,11 +479,28 @@ func _build_body() -> Control:
         _surface_nodes["chat"] = _build_chat_surface()
         _surface_nodes["observatory"] = _build_observatory_surface()
         _surface_nodes["models"] = _build_models_surface()
+        _surface_nodes["inference"] = _build_inference_surface()
         _surface_nodes["settings"] = _build_settings_surface()
         for key in SURFACES:
                 _surface_nodes[key].size_flags_vertical = Control.SIZE_EXPAND_FILL
                 content.add_child(_surface_nodes[key])
         return body
+
+
+func _build_inference_surface() -> Control:
+        # inf-1 — the llama.cpp semantic inference-control workspace
+        # (LLAMA_CPP_INFERENCE_CONTROL_LAW + FRONTEND_UIUX_LAW §2's IA:
+        # Inference under WORK, the deep generation-control home —
+        # Settings keeps the deployment half only). The LAW §18 split:
+        # the surface composes ITSELF over the injected theme + the
+        # shell's _tr Callable; it speaks ONLY through its two request
+        # signals (the shell owns the ONE gateway client).
+        var surface: Control = INFERENCE_SCRIPT.new()
+        surface.compose(_t, Callable(self, "_tr"))
+        surface.read_requested.connect(_on_inference_read_requested)
+        surface.update_requested.connect(_on_inference_update_requested)
+        _inference = surface
+        return surface
 
 
 func _build_observatory_surface() -> Control:
@@ -596,6 +612,38 @@ func _surface_header(title: String, subtitle: String) -> Control:
         return header
 
 
+var _chat_projection_label: Label  # inf-1 — the §21.2 compact projection
+
+
+func _build_chat_projection_row() -> Control:
+        # FRONTEND_UIUX_LAW §21.2 (the AI-interaction contract): the
+        # Chat surface carries a COMPACT contextual projection of the
+        # inference state (the profile name + the effective
+        # temperature) with the link to the Inference workspace — the
+        # full control depth lives THERE, Chat never holds its own
+        # hidden sampler settings.
+        var row := HBoxContainer.new()
+        row.add_theme_constant_override("separation", _k("space_m"))
+        _chat_projection_label = Label.new()
+        _chat_projection_label.text = ""
+        _chat_projection_label.add_theme_font_size_override(
+                "font_size", _k("font_size_caption")
+        )
+        _chat_projection_label.add_theme_color_override(
+                "font_color", _c("text_muted")
+        )
+        _chat_projection_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+        _chat_projection_label.clip_text = true
+        row.add_child(_chat_projection_label)
+        var link := Button.new()
+        link.text = _tr("chat.inference.link")
+        link.pressed.connect(func() -> void:
+                _show_surface("inference")
+        )
+        row.add_child(link)
+        return row
+
+
 func _build_chat_surface() -> Control:
         var surface := VBoxContainer.new()
         surface.add_theme_constant_override("separation", _k("space_m"))
@@ -603,6 +651,7 @@ func _build_chat_surface() -> Control:
                 _tr("chat.title"),
                 _tr("chat.subtitle")
         ))
+        surface.add_child(_build_chat_projection_row())
 
         var fill := VBoxContainer.new()
         fill.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -923,35 +972,22 @@ func _launch_settings_section() -> Control:
         _llama_exe_edit.placeholder_text = _tr("settings.launch.exe.placeholder")
         col.add_child(_input_row(_tr("settings.launch.exe"), _llama_exe_edit))
 
-        _ctx_spin = _spin_box(512.0, 2097152.0, 512.0, 8192.0)
-        col.add_child(_input_row(_tr("settings.launch.ctx"), _ctx_spin))
-        _ngl_spin = _spin_box(0.0, 999.0, 1.0, 999.0)
-        col.add_child(_input_row(_tr("settings.launch.ngl"), _ngl_spin))
-
-        _fa_option = OptionButton.new()
-        for form in FA_FORMS:
-                _fa_option.add_item(form)
-        _fa_option.selected = FA_FORMS.find("on")
-        col.add_child(_input_row(_tr("settings.launch.fa"), _fa_option))
-
-        _jinja_check = CheckBox.new()
-        _jinja_check.button_pressed = true
-        col.add_child(_input_row(_tr("settings.launch.jinja"), _jinja_check))
         _no_webui_check = CheckBox.new()
         _no_webui_check.button_pressed = true
         col.add_child(_input_row(_tr("settings.launch.no_webui"), _no_webui_check))
 
-        col.add_child(_caption(_tr("settings.launch.sampler")))
-        _temp_spin = _spin_box(0.0, 2.0, 0.05, 0.8)
-        col.add_child(_input_row(_tr("settings.launch.temp"), _temp_spin))
-        _topk_spin = _spin_box(0.0, 10000.0, 1.0, 40.0)
-        col.add_child(_input_row(_tr("settings.launch.topk"), _topk_spin))
-        _topp_spin = _spin_box(0.0, 1.0, 0.01, 0.95)
-        col.add_child(_input_row(_tr("settings.launch.topp"), _topp_spin))
-        _minp_spin = _spin_box(0.0, 1.0, 0.01, 0.05)
-        col.add_child(_input_row(_tr("settings.launch.minp"), _minp_spin))
-        _repeat_spin = _spin_box(0.0, 4.0, 0.05, 1.1)
-        col.add_child(_input_row(_tr("settings.launch.repeat"), _repeat_spin))
+        # inf-1 — Settings ≠ Inference Control (the law's §1): the
+        # semantic generation controls moved to the INFERENCE
+        # workspace (context, GPU placement, flash attention, the
+        # sampler family, the chain); this section keeps the
+        # DEPLOYMENT half + the raw extra_args hatch. The link row
+        # carries the split visibly, never a dead editor.
+        var inference_link := Button.new()
+        inference_link.text = _tr("settings.launch.inference.link")
+        inference_link.pressed.connect(func() -> void:
+                _show_surface("inference")
+        )
+        col.add_child(inference_link)
 
         _advanced_button = Button.new()
         _advanced_button.text = _tr("settings.launch.advanced")
@@ -1157,6 +1193,15 @@ func _focus_surface_entry(key: String) -> void:
                         var obs_entry: Control = _observatory.entry_control()
                         if obs_entry != null and not obs_entry.disabled:
                                 obs_entry.grab_focus()
+                "inference":
+                        # inf-1 (LAW §15): the Inference workspace's
+                        # task-aware entry is the Save action (the
+                        # surface's primary verb — disabled until a
+                        # live read resolves, the honest no-op).
+                        if _inference != null:
+                                var inf_entry: Control = _inference.entry_control()
+                                if inf_entry != null and not inf_entry.disabled:
+                                        inf_entry.grab_focus()
                 _:
                         pass  # an unknown surface never invents a focus target
 
@@ -1206,6 +1251,8 @@ func _start_live_circuit(args: PackedStringArray) -> void:
                 _refresh_models()
         if _active_surface == "observatory":
                 _observatory.refresh()
+        if _active_surface == "inference" and _client != null:
+                _request_inference_read()
 
 
 func _next_request_id(prefix: String) -> String:
@@ -1254,6 +1301,7 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                                 _add_folder_button.disabled = false
                                 _settings_save_button.disabled = false
                                 _request_backend_settings()
+                                _request_inference_read()
                 else:
                         _note_system(
                                 _tr("chat.note.session_refused") % [
@@ -1276,6 +1324,12 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 return
         if tag == "backend-settings":
                 _on_backend_settings_answered(document)
+                return
+        if tag == "inference-read":
+                _on_inference_read_answered(document)
+                return
+        if tag.begins_with("inference-save-"):
+                _on_inference_saved_answered(document)
                 return
         if tag.begins_with("settings-save-"):
                 _on_settings_saved_answered(document)
@@ -1516,6 +1570,14 @@ func _on_transport_failed(tag: String, error: String) -> void:
                 return
         if tag == "backend-settings":
                 _settings_status_label.text = _tr("settings.status.unreachable") % error
+                return
+        if tag == "inference-read":
+                if _inference != null:
+                        _inference.feed_transport_failure(error)
+                return
+        if tag.begins_with("inference-save-"):
+                if _inference != null:
+                        _inference.feed_transport_failure(error)
                 return
         if tag.begins_with("settings-save-"):
                 _settings_status_label.text = _tr("settings.status.save_transport") % error
@@ -2042,6 +2104,88 @@ func _request_backend_settings() -> void:
         _client.call_operation("backend-settings", "backend.settings", {})
 
 
+func _request_inference_read() -> void:
+        if _client == null:
+                return
+        _client.call_operation("inference-read", "inference.read", {})
+
+
+func _on_inference_read_requested() -> void:
+        _request_inference_read()
+
+
+func _on_inference_update_requested(payload: Dictionary) -> void:
+        if not _session_live or _client == null:
+                return
+        var request_id := _next_request_id("inference-save")
+        _client.call_operation(
+                request_id, "inference.update", payload,
+                _session_id, request_id
+        )
+
+
+func _on_inference_read_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status != "OK" or not (document.get("result") is Dictionary):
+                if _inference != null:
+                        _inference.feed_rejection(_reason_of(document))
+                return
+        var result: Dictionary = document.get("result")
+        if _inference != null:
+                _inference.feed_read(result)
+        # the Chat projection's own cache (§21.2: the compact line —
+        # the profile name + the effective temperature; Chat links to
+        # Inference, never its own hidden sampler surface)
+        _inference_summary = {
+                "profile": _text(result.get("profile_name")),
+                "temperature": _effective_temperature_of(result),
+        }
+        _apply_chat_projection()
+
+
+func _effective_temperature_of(result: Dictionary) -> String:
+        if not (result.get("controls") is Array):
+                return ""
+        for entry in result["controls"]:
+                if not (entry is Dictionary):
+                        continue
+                if _text(entry.get("id")) == "sampling.temperature":
+                        var value = entry.get("value")
+                        if typeof(value) == TYPE_FLOAT:
+                                return "%.2f" % float(value)
+                        if typeof(value) == TYPE_INT:
+                                return str(int(value))
+        return ""
+
+
+func _on_inference_saved_answered(document: Dictionary) -> void:
+        var status := _text(document.get("status"))
+        if status == "OK" and document.get("result") is Dictionary:
+                var result: Dictionary = document.get("result")
+                if _inference != null:
+                        _inference.feed_read(result)
+                _inference_summary = {
+                        "profile": _text(result.get("profile_name")),
+                        "temperature": _effective_temperature_of(result),
+                }
+                _apply_chat_projection()
+                return
+        if _inference != null:
+                _inference.feed_rejection(_reason_of(document))
+
+
+func _apply_chat_projection() -> void:
+        if _chat_projection_label == null:
+                return
+        if _inference_summary.is_empty():
+                _chat_projection_label.text = ""
+                return
+        _chat_projection_label.text = _tr("chat.inference.projection") % [
+                _text(_inference_summary.get("profile", "")),
+                _text(_inference_summary.get("temperature", "")),
+        ]
+
+
 func _on_backend_settings_answered(document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if status != "OK" or not (document.get("result") is Dictionary):
@@ -2053,23 +2197,15 @@ func _on_backend_settings_answered(document: Dictionary) -> void:
 
 
 func _populate_settings_fields(result: Dictionary) -> void:
+        # inf-1: the DEPLOYMENT half only (the semantic fields moved
+        # to the inference profile — Settings ≠ Inference Control).
         var settings: Dictionary = (
                 result.get("settings", {}) if result.get("settings") is Dictionary else {}
         )
         if settings.is_empty():
                 return
         _llama_exe_edit.text = _text(settings.get("llama_server_exe"))
-        _ctx_spin.value = float(settings.get("context", 8192))
-        _ngl_spin.value = float(settings.get("gpu_layers", 999))
-        var fa_index := FA_FORMS.find(_text(settings.get("flash_attention")))
-        _fa_option.selected = fa_index if fa_index >= 0 else 0
-        _jinja_check.button_pressed = bool(settings.get("jinja", true))
         _no_webui_check.button_pressed = bool(settings.get("no_webui", true))
-        _temp_spin.value = float(settings.get("temperature", 0.8))
-        _topk_spin.value = float(settings.get("top_k", 40))
-        _topp_spin.value = float(settings.get("top_p", 0.95))
-        _minp_spin.value = float(settings.get("min_p", 0.05))
-        _repeat_spin.value = float(settings.get("repeat_penalty", 1.1))
         _extra_edit.text = _text(settings.get("extra_args"))
         var preview := _text(result.get("command_preview"))
         if preview != "":
@@ -2083,18 +2219,11 @@ func _populate_settings_fields(result: Dictionary) -> void:
 func _on_settings_save_pressed() -> void:
         if not _session_live or _client == null:
                 return
+        # inf-1: the DEPLOYMENT document (the closed settings/2 set —
+        # the semantic edits ride the Inference surface's own save)
         var document := {
                 "llama_server_exe": _llama_exe_edit.text.strip_edges(),
-                "context": int(_ctx_spin.value),
-                "gpu_layers": int(_ngl_spin.value),
-                "flash_attention": FA_FORMS[_fa_option.selected],
-                "jinja": _jinja_check.button_pressed,
                 "no_webui": _no_webui_check.button_pressed,
-                "temperature": float(_temp_spin.value),
-                "top_k": int(_topk_spin.value),
-                "top_p": float(_topp_spin.value),
-                "min_p": float(_minp_spin.value),
-                "repeat_penalty": float(_repeat_spin.value),
                 "extra_args": _extra_edit.text.strip_edges(),
         }
         _settings_status_label.text = _tr("settings.status.saving")
@@ -2717,6 +2846,14 @@ func _parse_proof_args(args: PackedStringArray) -> Dictionary:
                                 out["meta"] = args[i + 1]
                         "--surface":
                                 out["surface"] = args[i + 1]
+                        "--inference-document":
+                                # inf-1's runtime-proof injection (the
+                                # obs-2 pattern): a REAL op-produced
+                                # inference.read result document — the
+                                # capture proves the resolved rendering
+                                # through the same feed path (proof args
+                                # only, never a second data path).
+                                out["inference_document"] = args[i + 1]
                         "--obs-document":
                                 # obs-2's runtime-proof injection (LAW §43):
                                 # a REAL op-produced read document — the
@@ -2756,6 +2893,37 @@ func _apply_obs_document(path: String) -> bool:
         var document: Dictionary = parsed_result
         _proof_obs_run = String(document.get("run", ""))
         _observatory.apply_read_document(document, true)
+        return true
+
+
+func _apply_inference_document(path: String) -> bool:
+        # inf-1's proof injection (the obs-2 pattern, verbatim): the
+        # document comes from the actual inference.read over the real
+        # gateway — the capture proves the resolved rendering (the
+        # context strip, the control rows + states, the ordered chain,
+        # the compiled preview) without a network. False = refused
+        # (the caller quits 4 — the codes stay distinct).
+        var file := FileAccess.open(path, FileAccess.READ)
+        if file == null:
+                push_error("shell: cannot read --inference-document %s" % path)
+                get_tree().quit(4)
+                return false
+        var parsed_result = JSON.parse_string(file.get_as_text())
+        if parsed_result == null or not (parsed_result is Dictionary):
+                push_error(
+                        "shell: --inference-document %s is not a JSON object" % path
+                )
+                get_tree().quit(4)
+                return false
+        var document: Dictionary = parsed_result
+        if _inference != null:
+                _inference.apply_read_document(document)
+        # the Chat projection rides the same document (the §21.2 law)
+        _inference_summary = {
+                "profile": _text(document.get("profile_name")),
+                "temperature": _effective_temperature_of(document),
+        }
+        _apply_chat_projection()
         return true
 
 

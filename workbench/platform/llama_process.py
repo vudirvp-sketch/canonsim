@@ -117,6 +117,23 @@ DEFAULT_REPEAT_PENALTY = 1.1
 #: law: MANAGED is still never an implicit LAN surface).
 DEFAULT_HOST = "127.0.0.1"
 
+# inf-1 — the typed surface's own runtime-form vocabularies (the
+# reviewed --help snapshot's literal values; the application's
+# semantic overlay carries its own copy and the claim packet pins the
+# two EQUAL — the settings.py precedent: each layer validates its own
+# boundary, an import edge would couple the layers for a tuple).
+KV_CACHE_TYPES = (
+    "f32",
+    "f16",
+    "bf16",
+    "q8_0",
+    "q4_0",
+    "q4_1",
+    "iq4_nl",
+    "q5_0",
+    "q5_1",
+)
+
 _STOP_POLL_S = 0.05
 
 #: The per-pipe drain ring (bytes kept for the honest failure note):
@@ -215,7 +232,7 @@ def build_server_command(
     port: int,
     alias: str | None = None,
     context: int = DEFAULT_CONTEXT,
-    gpu_layers: int = DEFAULT_GPU_LAYERS,
+    gpu_layers: int | str = DEFAULT_GPU_LAYERS,
     flash_attention: str = DEFAULT_FLASH_ATTENTION,
     jinja: bool = True,
     no_webui: bool = True,
@@ -224,6 +241,11 @@ def build_server_command(
     top_p: float = DEFAULT_TOP_P,
     min_p: float = DEFAULT_MIN_P,
     repeat_penalty: float = DEFAULT_REPEAT_PENALTY,
+    samplers: Sequence[str] | None = None,
+    seed: int | None = None,
+    fit: str | None = None,
+    cache_type_k: str | None = None,
+    cache_type_v: str | None = None,
     extra_args: Sequence[str] = (),
 ) -> list[str]:
     """The honest default command line (§22: the launcher selects
@@ -251,9 +273,19 @@ def build_server_command(
         raise LlamaProcessError(f"port {port!r} must be an int in [1, 65535]")
     if not isinstance(context, int) or context <= 0:
         raise LlamaProcessError(f"context {context!r} must be a positive int")
-    if not isinstance(gpu_layers, int) or gpu_layers < 0:
+    if isinstance(gpu_layers, str):
+        # inf-1 — the runtime's own literal forms ('auto'/'all', the
+        # reviewed --help's own words): AUTO is a real form, never
+        # 'unset' (the law's §10).
+        if gpu_layers not in ("auto", "all"):
+            raise LlamaProcessError(
+                f"gpu_layers {gpu_layers!r} must be 'auto' | 'all' or a "
+                "non-negative int"
+            )
+    elif not isinstance(gpu_layers, int) or isinstance(gpu_layers, bool) or gpu_layers < 0:
         raise LlamaProcessError(
-            f"gpu_layers {gpu_layers!r} must be a non-negative int"
+            f"gpu_layers {gpu_layers!r} must be 'auto' | 'all' or a "
+            "non-negative int"
         )
     if flash_attention not in ("on", "off", "auto"):
         raise LlamaProcessError(
@@ -265,6 +297,37 @@ def build_server_command(
     top_p = _unit_float(top_p, "top_p", maximum=1.0)
     min_p = _unit_float(min_p, "min_p", maximum=1.0)
     repeat_penalty = _unit_float(repeat_penalty, "repeat_penalty", maximum=4.0)
+    # inf-1 — the semantic layer's compiled surface (each form the
+    # reviewed --help's own literal: ';' separators, the KV enum, the
+    # fit on/off pair, the -1 random sentinel). None = NOT EMITTED
+    # (the legacy caller's command stays byte-stable).
+    if samplers is not None:
+        if (
+            not isinstance(samplers, Sequence)
+            or isinstance(samplers, (str, bytes))
+            or not samplers
+            or any(not isinstance(item, str) or not item for item in samplers)
+        ):
+            raise LlamaProcessError(
+                "samplers must be a non-empty sequence of sampler ids "
+                "(the ordered enabled chain)"
+            )
+    if seed is not None and (
+        isinstance(seed, bool) or not isinstance(seed, int) or seed < -1
+    ):
+        raise LlamaProcessError(
+            f"seed {seed!r} must be an int >= -1 (-1 = the random form)"
+        )
+    if fit is not None and fit not in ("on", "off"):
+        raise LlamaProcessError(f"fit {fit!r} must be 'on' or 'off'")
+    for name, value in (
+        ("cache_type_k", cache_type_k),
+        ("cache_type_v", cache_type_v),
+    ):
+        if value is not None and value not in KV_CACHE_TYPES:
+            raise LlamaProcessError(
+                f"{name} {value!r} must be one of {list(KV_CACHE_TYPES)}"
+            )
     command: list[str] = [
         *lead,
         "-m", str(model_path),
@@ -279,6 +342,16 @@ def build_server_command(
         "--min-p", repr(min_p),
         "--repeat-penalty", repr(repeat_penalty),
     ]
+    if fit is not None:
+        command += ["--fit", str(fit)]
+    if samplers is not None:
+        command += ["--samplers", ";".join(samplers)]
+    if seed is not None:
+        command += ["--seed", str(seed)]
+    if cache_type_k is not None:
+        command += ["--cache-type-k", str(cache_type_k)]
+    if cache_type_v is not None:
+        command += ["--cache-type-v", str(cache_type_v)]
     if alias is not None and alias.strip():
         command += ["-a", alias.strip()]
     if jinja:

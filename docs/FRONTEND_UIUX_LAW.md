@@ -526,6 +526,13 @@ pattern. (wb-14 the Chat surface row's contract.)
 
 ### 21.2 AI-specific interaction contract
 
+inf-1's consequence (LLAMA_CPP_INFERENCE_CONTROL_LAW §17): Inference
+is the semantic generation-control WORKSPACE (under WORK); Chat
+carries only a COMPACT contextual projection of the same inference
+state + the link; the full control depth (chips, the sampler chain,
+the effective-state presentation) lives in Inference — Chat never
+holds its own hidden sampler settings.
+
 AI-driven surfaces expose operational truth: `USER INPUT · SYSTEM/
 DEVELOPER POLICY · MODEL INPUT · RESOLVED CONFIGURATION · MODEL OUTPUT
 · OBSERVED RUNTIME · DIAGNOSTICS`. Preserve `requested ≠ accepted ≠

@@ -184,6 +184,7 @@ def run_shell_proof(
     meta_path: Path,
     surface: str | None = None,
     obs_document: Path | None = None,
+    inference_document: Path | None = None,
 ) -> int:
     """Drive the wb-2 shell scene; returns the exit code.
 
@@ -198,6 +199,8 @@ def run_shell_proof(
         user_args += ["--surface", surface]
     if obs_document is not None:
         user_args += ["--obs-document", str(obs_document)]
+    if inference_document is not None:
+        user_args += ["--inference-document", str(inference_document)]
     cmd = _engine_cmd(engine, SHELL_SCENE) + ["--", *user_args]
     return _run_with_display(cmd)
 
@@ -225,6 +228,19 @@ def main(argv: list[str] | None = None) -> int:
             "on an unknown key); the runner never gates the surface set "
             "(the iter-235 drift lesson: choices=[chat, settings] lagged "
             "behind the shell through wb-8/9/obs-1)"
+        ),
+    )
+    parser.add_argument(
+        "--inference-document",
+        type=Path,
+        default=None,
+        help=(
+            "inf-1's runtime-proof injection (shell mode): a REAL "
+            "op-produced inference.read result document — the capture "
+            "renders the RESOLVED Inference surface (the control rows + "
+            "effective states, the ordered chain, the compiled preview) "
+            "through the shell's own feed path (generate it via the real "
+            "gateway; the runner passes it through verbatim)"
         ),
     )
     parser.add_argument(
@@ -292,7 +308,12 @@ def _shell_main(args: argparse.Namespace) -> int:
         stale.unlink(missing_ok=True)
 
     code = run_shell_proof(
-        engine, png_path, meta_path, args.surface, args.obs_document
+        engine,
+        png_path,
+        meta_path,
+        args.surface,
+        args.obs_document,
+        args.inference_document,
     )
     if code != 0:
         raise ProofError(f"the shell proof exited {code} (see stderr above)")

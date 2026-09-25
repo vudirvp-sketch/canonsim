@@ -167,9 +167,12 @@ def test_the_models_surface_contract() -> None:
     text = SHELL_SCRIPT.read_text(encoding="utf-8")
     # The axis went live: models sits in SURFACES, not PLANNED (obs-1:
     # the IA re-pointed the flat list — WORK gains the Observatory).
-    assert 'const SURFACES := ["chat", "observatory", "models", "settings"]' in text
+    assert 'const SURFACES := ["chat", "observatory", "inference", "models", "settings"]' in text
     planned_line = text.split("PLANNED_SURFACES := ")[1].split("\n")[0]
-    assert '"Inference"' in planned_line and '"Simulation"' in planned_line
+    # inf-1: Inference went REAL (the SURFACES list) — the planned
+    # set keeps Simulation and the honest remainder only.
+    assert '"Simulation"' in planned_line
+    assert '"Inference"' not in planned_line
     assert '"Models"' not in planned_line
     # The circuit's operation surface (the gateway's own names).
     for op in ('"model.list"', '"model.states"', '"model.load"',
@@ -566,9 +569,9 @@ def test_the_localization_boundary() -> None:
 
     # The dynamic composes resolve too: nav.<surface>, nav.planned.<axis>,
     # chat.role.<role> (the runtime key-build families).
-    for key in ("nav.chat", "nav.models", "nav.settings"):
+    for key in ("nav.chat", "nav.models", "nav.settings", "nav.inference"):
         assert key in en_keys
-    for axis in ("Inference", "Prompts", "History", "Diagnostics", "Simulation"):
+    for axis in ("Prompts", "History", "Diagnostics", "Simulation"):
         assert f"nav.planned.{axis.lower()}" in en_keys
     for role in ("user", "assistant"):
         assert f"chat.role.{role}" in en_keys
@@ -727,17 +730,21 @@ def test_the_observatory_slice_is_real() -> None:
 
     # The §4.1 IA: intent groups, not a flat feature catalog.
     assert 'const SURFACE_GROUPS := [' in shell_text
-    assert '"keys": ["chat", "observatory"]' in shell_text
+    assert '"keys": ["chat", "observatory", "inference"]' in shell_text
     assert '"keys": ["models"]' in shell_text
     assert '"keys": ["settings"]' in shell_text
     assert '"nav.group.work"' in strings_text
     assert '"nav.group.resources"' in strings_text
     assert '"nav.group.system"' in strings_text
-    # The planned axes ride their groups; Runs joined (the LAW's map),
-    # Inference kept (nothing silently dropped — D-198).
+    # The planned axes ride their groups; Runs joined (the LAW's map);
+    # inf-1: Inference went REAL (the SURFACES list above) — the
+    # planned set keeps the honest remainder, nothing silently dropped.
     planned_line = shell_text.split("PLANNED_SURFACES := ")[1].split("\n")[0]
-    for axis in ("Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics"):
+    for axis in ("Simulation", "Prompts", "History", "Runs", "Diagnostics"):
         assert f'"{axis}"' in planned_line, f"the planned axis missing: {axis}"
+    assert '"Inference"' not in planned_line, (
+        "Inference is a REAL surface now (inf-1) — never a planned axis"
+    )
 
     # The workspace regions (LAW §5.1) — each region composes.
     for region in (

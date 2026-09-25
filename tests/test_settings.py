@@ -6,9 +6,12 @@ the mechanics):
 
 1. THE STORE LAWS: the missing file is the honest defaults (the file
    appears only on the first save); the update validates the CLOSED
-   field set (types + ranges, rejected loud — never clamped), applies
-   the partial (absent fields unchanged), and persists ATOMICALLY
+   field set (types, rejected loud — never clamped), applies the
+   partial (absent fields unchanged), and persists ATOMICALLY
    (the schema-tagged document a fresh store re-reads identically).
+   inf-1: the store is the DEPLOYMENT half (schema/2 — the semantic
+   generation-control fields moved to the inference profile; the old
+   schema/1 field names now reject LOUD, never a guessed mapping).
 2. THE LOAD LAWS: a corrupt file, a foreign schema tag, an unknown
    field, a bad value — each refuses to load LOUD (the operator's
    saved values are data, never a silently-reset cache); a relative
@@ -56,16 +59,30 @@ def test_the_missing_file_is_the_honest_defaults(tmp_path: Path) -> None:
     assert not path.exists(), "the file appears only on the first save"
     current = store.current()
     assert current == LaunchSettings()
-    assert current.context == 8192
-    assert current.gpu_layers == 999
-    assert current.flash_attention == "on"
-    assert current.temperature == 0.8
-    assert current.top_k == 40
-    assert current.top_p == 0.95
-    assert current.min_p == 0.05
-    assert current.repeat_penalty == 1.1
-    assert current.jinja is True and current.no_webui is True
     assert current.llama_server_exe == ""
+    assert current.no_webui is True
+    assert current.extra_args == ""
+
+
+def test_the_schema1_semantic_fields_reject_loud(tmp_path: Path) -> None:
+    """inf-1's ownership split, executable: the SEMANTIC field names
+    are no longer this store's vocabulary — every one rejects LOUD
+    (the closed set is the whole law; the values live in the
+    inference profile store now)."""
+    store = _store(tmp_path)
+    for gone in (
+        "context",
+        "gpu_layers",
+        "flash_attention",
+        "jinja",
+        "temperature",
+        "top_k",
+        "top_p",
+        "min_p",
+        "repeat_penalty",
+    ):
+        with pytest.raises(SettingsError, match="unknown field"):
+            store.update({gone: 1})
 
 
 def test_the_update_validates_applies_and_persists(
@@ -74,17 +91,19 @@ def test_the_update_validates_applies_and_persists(
     path = tmp_path / "settings.json"
     store = SettingsStore(path)
     updated = store.update(
-        {"context": 4096, "gpu_layers": 20, "temperature": 0.3,
-         "llama_server_exe": "D:/llama.cpp/llama-server.exe"}
+        {"llama_server_exe": "D:/llama.cpp/llama-server.exe",
+         "no_webui": False,
+         "extra_args": "--verbose"}
     )
-    assert updated.context == 4096
-    assert updated.gpu_layers == 20
-    assert updated.temperature == 0.3
-    assert updated.jinja is True  # the absent fields unchanged
+    assert updated.llama_server_exe == "D:/llama.cpp/llama-server.exe"
+    assert updated.no_webui is False
+    assert updated.extra_args == "--verbose"
     # the atomic persistence: the schema-tagged document on disk
     document = json.loads(path.read_text(encoding="utf-8"))
     assert document["schema"] == SCHEMA
-    assert document["settings"]["context"] == 4096
+    assert document["settings"]["llama_server_exe"] == (
+        "D:/llama.cpp/llama-server.exe"
+    )
     # a FRESH store re-reads the same values (the roundtrip)
     assert SettingsStore(path).current() == updated
 
@@ -92,21 +111,10 @@ def test_the_update_validates_applies_and_persists(
 def test_the_update_rejections_are_loud(tmp_path: Path) -> None:
     store = _store(tmp_path)
     for bad in (
-        {"context": 0},
-        {"context": True},
-        {"context": "4096"},
-        {"gpu_layers": -1},
-        {"gpu_layers": 1000},
-        {"flash_attention": "maybe"},
-        {"jinja": "yes"},
-        {"temperature": -0.1},
-        {"temperature": 2.5},
-        {"top_k": -1},
-        {"top_p": 1.5},
-        {"min_p": -0.1},
-        {"repeat_penalty": 5.0},
-        {"extra_args": 8},
         {"llama_server_exe": None},
+        {"llama_server_exe": 8},
+        {"no_webui": "yes"},
+        {"extra_args": 8},
         {"nope": 1},
     ):
         with pytest.raises(SettingsError, match=sorted(bad)[0].replace(".", "")):
@@ -147,10 +155,21 @@ def test_the_load_refuses_loud(tmp_path: Path) -> None:
         SettingsStore(path)
     # a bad value in the file
     path.write_text(
-        json.dumps({"schema": SCHEMA, "settings": {"context": 0}}),
+        json.dumps({"schema": SCHEMA, "settings": {"no_webui": "yes"}}),
         encoding="utf-8",
     )
-    with pytest.raises(SettingsError, match="context"):
+    with pytest.raises(SettingsError, match="no_webui"):
+        SettingsStore(path)
+    # a schema/1 document (the pre-split form): the loud refusal with
+    # the migration's own name (the composition root migrates at boot;
+    # a hand-rolled load never guesses a mapping)
+    path.write_text(
+        json.dumps(
+            {"schema": "canonsim.workbench.settings/1", "settings": {}}
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(SettingsError, match="schema"):
         SettingsStore(path)
 
 
@@ -197,7 +216,7 @@ def test_backend_settings_answers_the_effective_document(
 
     def preview(current):
         preview_calls.append(dict(current))
-        return "llama-server -m <model.gguf> -c %d" % current["context"]
+        return "llama-server -m <model.gguf> --no-webui %s" % current["extra_args"]
 
     gateway = _gateway_with(
         store, preview=preview, managed_live=lambda: False
@@ -210,13 +229,15 @@ def test_backend_settings_answers_the_effective_document(
     assert result["settings"] == LaunchSettings().as_document()
     assert result["managed_live"] is False
     assert result["applies"] == "next-spawn"
-    assert result["command_preview"] == "llama-server -m <model.gguf> -c 8192"
+    assert result["command_preview"] == (
+        "llama-server -m <model.gguf> --no-webui "
+    )
     assert result.get("note") is None, "the LIVE note rides the live form"
     assert preview_calls, "the preview rode the injected callable"
     # the READ takes no arguments — the closed surface
     bad = gateway.dispatch(
         RequestEnvelope(
-            operation="backend.settings", arguments={"context": 1}
+            operation="backend.settings", arguments={"no_webui": 1}
         )
     )
     assert bad.status != "OK"
@@ -232,25 +253,25 @@ def test_backend_settings_update_walks_the_store(tmp_path: Path) -> None:
     reply = gateway.dispatch(
         RequestEnvelope(
             operation="backend.settings.update",
-            arguments={"context": 2048, "no_webui": False},
+            arguments={"no_webui": False, "extra_args": "--verbose"},
             session_id=session,
             client_request_id="wb9-update",
         )
     )
     assert reply.status == "OK", reply.to_mapping()
     result = reply.result
-    assert result["settings"]["context"] == 2048
     assert result["settings"]["no_webui"] is False
-    assert result["settings"]["jinja"] is True  # absent unchanged
+    assert result["settings"]["extra_args"] == "--verbose"
+    assert result["settings"]["llama_server_exe"] == ""  # absent unchanged
     assert result["managed_live"] is True
     assert "note" in result and "LIVE" in result["note"]
     # persisted + served to a fresh read
     document = json.loads(path.read_text(encoding="utf-8"))
-    assert document["settings"]["context"] == 2048
+    assert document["settings"]["extra_args"] == "--verbose"
     read = gateway.dispatch(
         RequestEnvelope(operation="backend.settings", arguments={})
     )
-    assert read.result["settings"]["context"] == 2048
+    assert read.result["settings"]["no_webui"] is False
     # the ordered event stream carries the SETTINGS_UPDATED effect
     events = gateway.dispatch(
         RequestEnvelope(

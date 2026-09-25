@@ -352,6 +352,8 @@ def chat_completion_work(
     messages: Sequence[Mapping[str, str]],
     temperature: float,
     max_tokens: int,
+    *,
+    temperature_requested: float | None = None,
 ) -> Mapping[str, object]:
     """The chat work factory (the run family's backend consumer): the
     §19.1 EFFECTIVE→OBSERVED half over the frozen inputs — the §10
@@ -360,7 +362,15 @@ def chat_completion_work(
     its checkpoints, and returns the observed completion. The §10
     provenance's backend half rides the result document (OBSERVED),
     never the artifact (the adapter's manifest stays the physical
-    owner's; the application records what it saw)."""
+    owner's; the application records what it saw).
+
+    inf-1: the result carries the REQUESTED/EFFECTIVE pair
+    (LLAMA_CPP_INFERENCE_CONTROL_LAW §8) — `requested` names what the
+    CALLER explicitly asked (None where absent, the honest
+    provenance), `effective` what the composition resolved (the
+    call-local value or the inference profile's BASE layer through
+    the injected provider); the OBSERVED half stays content +
+    finish_reason + the backend identity."""
 
     def work(context: WorkContext) -> Mapping[str, object]:
         context.check()  # the entry checkpoint (§12)
@@ -377,6 +387,10 @@ def chat_completion_work(
             "finish_reason": finish_reason,
             "backend": identity,
             "requested": {
+                "max_tokens": max_tokens,
+                "temperature": temperature_requested,
+            },
+            "effective": {
                 "max_tokens": max_tokens,
                 "temperature": temperature,
             },
@@ -411,7 +425,7 @@ def _rejected(reason: str) -> OperationRejected:
 def _validate_chat_arguments(
     arguments: Mapping[str, object],
     temperature_default: Callable[[], float] | None = None,
-) -> tuple[list[dict[str, str]], float, int]:
+) -> tuple[list[dict[str, str]], float, int, bool]:
     """chat.send's REQUESTED→ACCEPTED layer: the closed argument set,
     the messages shape (a non-empty list of {role, content} over the
     closed role set), the temperature range [0, 2], the max_tokens
@@ -421,10 +435,13 @@ def _validate_chat_arguments(
     own resolution, the handler's).
 
     wb-9: an ABSENT temperature resolves through the injected BASE
-    provider (the launch-settings store's temperature — §19.1's
-    BASE PROFILE layer) when one is wired, else the row's own
-    constant; the caller's EXPLICIT value always wins (the
-    call-local override layer)."""
+    provider when one is wired, else the row's own constant; the
+    caller's EXPLICIT value always wins (the call-local override
+    layer). inf-1: the provider now rides the inference resolver's
+    EFFECTIVE temperature (the BASE PROFILE layer), and the returned
+    `temperature_explicit` flag carries the REQUESTED-vs-EFFECTIVE
+    distinction onto the run document (§19.1's chain — never a
+    guessed provenance)."""
     unknown = sorted(
         set(arguments)
         - {"messages", "temperature", "max_tokens", "deadline_seconds"}
@@ -462,6 +479,7 @@ def _validate_chat_arguments(
             )
         messages.append({"role": str(role), "content": content})
     raw_temperature = arguments.get("temperature")
+    temperature_explicit = raw_temperature is not None
     if raw_temperature is None:
         temperature = (
             temperature_default()
@@ -504,7 +522,7 @@ def _validate_chat_arguments(
         )
     else:
         max_tokens = raw_max_tokens
-    return messages, temperature, max_tokens
+    return messages, temperature, max_tokens, temperature_explicit
 
 
 def _make_chat_send(
@@ -514,9 +532,12 @@ def _make_chat_send(
 ):
     def handler(context) -> Mapping[str, object]:
         arguments = dict(context.arguments)
-        messages, temperature, max_tokens = _validate_chat_arguments(
-            arguments, temperature_default
-        )
+        (
+            messages,
+            temperature,
+            max_tokens,
+            temperature_explicit,
+        ) = _validate_chat_arguments(arguments, temperature_default)
         # §12: one absolute deadline per logical operation — the
         # caller's explicit value or the row's own default (the
         # registry's ceiling law applies, never a silent clamp)
@@ -547,7 +568,15 @@ def _make_chat_send(
             frozen_inputs=frozen,
             deadline_seconds=seconds,
         )
-        work = chat_completion_work(port, messages, temperature, max_tokens)
+        work = chat_completion_work(
+            port,
+            messages,
+            temperature,
+            max_tokens,
+            temperature_requested=(
+                temperature if temperature_explicit else None
+            ),
+        )
         executions.launch(execution_id, work)
         if context.effects is not None:
             context.effects.effect(

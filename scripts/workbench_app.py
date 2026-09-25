@@ -114,6 +114,12 @@ from cli.engine import EngineConfig, LlamaServerClient  # noqa: E402
 from workbench.api.gateway import Gateway  # noqa: E402
 from workbench.api.transport import LoopbackHttpTransport  # noqa: E402
 from workbench.application.clock import AppClock  # noqa: E402
+from workbench.application.inference import (  # noqa: E402
+    InferenceError,
+    InferenceStore,
+    launch_kwargs,
+    migrate_launch_semantics,
+)
 from workbench.application.operations.composition import (  # noqa: E402
     CompositionError,
     compose_workbench_operations,
@@ -150,6 +156,11 @@ DEFAULT_MODELS_DIR = REPO / "workbench" / "runtime" / "models"
 #: The default USER_CONFIG path (§16's path role, gitignored) — the
 #: persisted launch settings (wb-9's Settings surface).
 DEFAULT_SETTINGS_PATH = REPO / "workbench" / "runtime" / "settings.json"
+
+#: inf-1 — the inference profile's own persisted home (the §19.1 BASE
+#: PROFILE layer; Settings ≠ Inference Control — the two documents
+#: never share a file).
+DEFAULT_INFERENCE_PATH = REPO / "workbench" / "runtime" / "inference.json"
 
 #: The llama.cpp home (§16's toolchain-adjacent role, gitignored):
 #: drop a release folder here; the launcher discovers the server
@@ -205,8 +216,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--settings-path",
         default=str(DEFAULT_SETTINGS_PATH),
-        help="the USER_CONFIG path — the persisted launch settings "
-        "(§7.1); default <repo>/workbench/runtime/settings.json",
+        help="the USER_CONFIG path — the persisted DEPLOYMENT settings "
+        "(§7.1; inf-1's split: the semantic controls live in the "
+        "inference profile); default <repo>/workbench/runtime/settings.json",
+    )
+    parser.add_argument(
+        "--inference-path",
+        default=str(DEFAULT_INFERENCE_PATH),
+        help="the inference profile's persisted home (the §19.1 BASE "
+        "PROFILE layer — inf-1); default "
+        "<repo>/workbench/runtime/inference.json",
     )
     parser.add_argument(
         "--backend-endpoint",
@@ -303,49 +322,88 @@ def resolve_llama_exe(
 
 # ------------------------------------------------- the launch-params seam
 
+#: The semantic layer's emitted flag forms (long + the short aliases
+#: the reviewed --help itself carries) — the extra_args hatch's
+#: duplicate-ownership guard vocabulary (the law's §13: a semantic
+#: Top-K plus a raw `--top-k` is a CONFLICT surfaced, never an
+#: ambiguous precedence; the settings.py side may keep its raw hatch,
+#: the compile side refuses the overlap).
+_SEMANTIC_FLAG_ALIASES: dict[str, tuple[str, ...]] = {
+    "context": ("-c", "--ctx-size"),
+    "gpu_layers": ("-ngl", "--gpu-layers", "--n-gpu-layers"),
+    "flash_attention": ("-fa", "--flash-attn"),
+    "fit": ("--fit",),
+    "cache_type_k": ("-ctk", "--cache-type-k"),
+    "cache_type_v": ("-ctv", "--cache-type-v"),
+    "temperature": ("--temp", "--temperature"),
+    "top_k": ("--top-k",),
+    "top_p": ("--top-p",),
+    "min_p": ("--min-p",),
+    "repeat_penalty": ("--repeat-penalty"),
+    "samplers": ("--samplers",),
+    "seed": ("-s", "--seed"),
+    "chat_template": ("--jinja",),
+}
+
+
+def _duplicate_flag_ownership(extra_args: list[str]) -> list[str]:
+    """The overlap between the raw extra_args hatch and the semantic
+    layer's own flags (both forms matched) — empty when the hatch
+    stays raw-only (the legal escape-hatch contract)."""
+    tokens = {str(part) for part in extra_args if str(part).startswith("-")}
+    conflicts: list[str] = []
+    for _field, aliases in sorted(_SEMANTIC_FLAG_ALIASES.items()):
+        hit = sorted(set(aliases) & tokens)
+        if hit:
+            conflicts.extend(hit)
+    return conflicts
+
 
 def _make_launch_params(
     store: SettingsStore,
+    inference: InferenceStore,
     cli: argparse.Namespace,
 ) -> Any:
-    """The managed backend's EFFECTIVE launch-params provider: the
-    store's CURRENT settings (read at each spawn — a UI update
-    applies at the next one) overlaid with this process's CLI
-    overrides (the operator's explicit hand wins per-field, never
-    persisted). The resolved executable rides the same merge — the
-    preference ("" = auto) resolving through the discovery order."""
+    """The managed backend's EFFECTIVE launch-params provider (inf-1:
+    the COMPILED semantic configuration — the law's §13): the
+    inference profile's CURRENT values (read at each spawn — an
+    inference update applies at the next one), overlaid with this
+    process's CLI overrides (the operator's explicit hand wins
+    per-field, never persisted), merged with the DEPLOYMENT settings
+    (the executable preference, the web-UI surface, the raw
+    extra_args hatch). The duplicate-ownership guard fires HERE —
+    every spawn and every preview read walks the same check (the
+    raw hatch may never shadow a semantic control)."""
 
     def provider() -> dict[str, object]:
-        current = store.current()
-        params: dict[str, object] = {
-            "context": (
-                cli.llama_ctx
-                if cli.llama_ctx is not None
-                else current.context
-            ),
-            "extra_args": (
-                [part for part in cli.llama_args.split() if part]
-                if cli.llama_args.strip()
-                else [part for part in current.extra_args.split() if part]
-            ),
-            "flash_attention": current.flash_attention,
-            "gpu_layers": (
-                cli.llama_ngl
-                if cli.llama_ngl is not None
-                else current.gpu_layers
-            ),
-            "jinja": current.jinja,
-            "min_p": current.min_p,
-            "no_webui": current.no_webui,
-            "repeat_penalty": current.repeat_penalty,
-            "temperature": current.temperature,
-            "top_k": current.top_k,
-            "top_p": current.top_p,
-        }
+        deployment = store.current()
+        # the semantic BASE (the profile) -> the compiled value set
+        kwargs = launch_kwargs(inference.current())
+        if cli.llama_ctx is not None:
+            kwargs["context"] = cli.llama_ctx
+        if cli.llama_ngl is not None:
+            kwargs["gpu_layers"] = cli.llama_ngl
+        extra_args = (
+            [part for part in cli.llama_args.split() if part]
+            if cli.llama_args.strip()
+            else [part for part in deployment.extra_args.split() if part]
+        )
+        conflicts = _duplicate_flag_ownership(extra_args)
+        if conflicts:
+            raise LlamaProcessError(
+                "the raw extra_args hatch duplicates the semantic "
+                f"layer's flag ownership: {conflicts} — the inference "
+                "profile owns those controls (LLAMA_CPP_INFERENCE_CONTROL_"
+                "LAW §13); remove the duplicate from extra_args or edit "
+                "the control itself"
+            )
+        params: dict[str, object] = dict(kwargs)
+        params["extra_args"] = extra_args
+        params["no_webui"] = deployment.no_webui
         preference = (
             cli.llama_server_exe
             if cli.llama_server_exe is not None
-            else current.llama_server_exe
+            else deployment.llama_server_exe
         )
         params["exe"] = resolve_llama_exe(preference or "")
         return params
@@ -363,7 +421,12 @@ def _command_preview_factory(
     path as the honest placeholder."""
 
     def preview(_current: Mapping[str, object]) -> str:
-        params = provider()
+        try:
+            params = provider()
+        except LlamaProcessError as exc:
+            # the honest conflict surface (the law's §13): the preview
+            # SHOWS the duplicate ownership, never a silent merge
+            return f"CONFLICT — {exc}"
         command = build_server_command(
             params["exe"],  # type: ignore[arg-type]
             "<model.gguf>",
@@ -380,6 +443,11 @@ def _command_preview_factory(
             top_p=params["top_p"],  # type: ignore[arg-type]
             min_p=params["min_p"],  # type: ignore[arg-type]
             repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
+            samplers=params["samplers"],  # type: ignore[arg-type]
+            seed=params["seed"],  # type: ignore[arg-type]
+            fit=params["fit"],  # type: ignore[arg-type]
+            cache_type_k=params["cache_type_k"],  # type: ignore[arg-type]
+            cache_type_v=params["cache_type_v"],  # type: ignore[arg-type]
             extra_args=params["extra_args"],  # type: ignore[arg-type]
         )
         return " ".join(command)
@@ -508,6 +576,11 @@ class _ManagedBackend:
             top_p=params["top_p"],  # type: ignore[arg-type]
             min_p=params["min_p"],  # type: ignore[arg-type]
             repeat_penalty=params["repeat_penalty"],  # type: ignore[arg-type]
+            samplers=params["samplers"],  # type: ignore[arg-type]
+            seed=params["seed"],  # type: ignore[arg-type]
+            fit=params["fit"],  # type: ignore[arg-type]
+            cache_type_k=params["cache_type_k"],  # type: ignore[arg-type]
+            cache_type_v=params["cache_type_v"],  # type: ignore[arg-type]
             extra_args=params["extra_args"],  # type: ignore[arg-type]
         )
         self.last_spawn_command = list(command)
@@ -673,11 +746,24 @@ def build_app(
     stay the caller's: the test surface composes without serving)."""
     args = parse_args(argv)
     models_dir = _models_root_from(args)
+    settings_path = Path(args.settings_path).resolve()
+    inference_path = Path(args.inference_path).resolve()
+    # inf-1's one-way boot migration: a schema/1 settings document's
+    # semantic fields move into the inference profile (values
+    # preserved verbatim); a schema/2 or missing file is a no-op.
     try:
-        store = SettingsStore(Path(args.settings_path).resolve())
+        migrate_launch_semantics(settings_path, inference_path)
+    except InferenceError as exc:
+        raise AppError(f"the launch-semantics migration refused: {exc}") from exc
+    try:
+        store = SettingsStore(settings_path)
     except SettingsError as exc:
         raise AppError(f"the settings store refused: {exc}") from exc
-    launch_params = _make_launch_params(store, args)
+    try:
+        inference = InferenceStore(inference_path)
+    except InferenceError as exc:
+        raise AppError(f"the inference store refused: {exc}") from exc
+    launch_params = _make_launch_params(store, inference, args)
     try:
         backend = _backend_port_from(args, launch_params)
     except LlamaProcessError as exc:
@@ -694,6 +780,7 @@ def build_app(
             backend=backend,
             fetch=HttpModelFetcher(),
             settings_store=store,
+            inference_store=inference,
             command_preview=_command_preview_factory(launch_params, host, port),
             managed_live=(
                 backend.is_live
