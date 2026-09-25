@@ -96,7 +96,10 @@ def test_artifacts_exist_and_are_wellformed(shell_runs: list[dict[str, Path]]) -
     # The pinned engine line (a different binary refuses loudly, never
     # masquerades as the pinned one — the same law as the seam packet).
     assert meta["engine_version"].startswith("26.2"), meta["engine_version"]
-    assert meta["shell_version"] == "canon_shell@0.1"
+    # KI#97 (iter-234): the pin had drifted to canon_shell@0.1 while the
+    # packet was REDOT_EXE-gated-silent through wb-8/wb-9 — pins track the
+    # LIVE shell, never a remembered one. iter-235: @0.6 (the Observatory).
+    assert meta["shell_version"] == "canon_shell@0.6"
     # The theme identity is the committed theme file's sha256 (64 hex).
     theme_sha = meta["theme_identity"]
     assert len(theme_sha) == 64 and all(c in "0123456789abcdef" for c in theme_sha)
@@ -107,15 +110,18 @@ def test_artifacts_exist_and_are_wellformed(shell_runs: list[dict[str, Path]]) -
         "theme_identity does not match the committed theme file"
     )
 
-    # The §17 surface inventory (wb-2's two live surfaces; the later
-    # axes honestly listed as planned, never faked).
-    assert meta["surfaces"] == ["chat", "settings"]
+    # The §17 surface inventory (obs-1: the IA gained the Observatory —
+    # WORK/RESOURCES/SYSTEM; the planned list re-pointed per LAW §4.1,
+    # Runs added, Inference kept, nothing silently dropped).
+    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
     assert meta["planned_surfaces"] == [
-        "Models", "Inference", "Prompts", "History", "Diagnostics", "Simulation",
+        "Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics",
     ]
     assert meta["active_surface"] == "chat"
-    assert meta["window_size"] == [1280, 720]
-    assert _png_size(first["png"]) == (1280, 720), "PNG is not the window space"
+    # ux-1: the base window stays 1440x900 (the min-size/stretch policy rides
+    # project.godot — canvas_items/expand; the proof capture is the base run).
+    assert meta["window_size"] == [1440, 900]
+    assert _png_size(first["png"]) == (1440, 900), "PNG is not the window space"
 
 
 def test_double_run_is_byte_identical(shell_runs: list[dict[str, Path]]) -> None:
@@ -134,9 +140,9 @@ def test_settings_surface_capture(settings_run: dict[str, Path]) -> None:
     assert settings_run["png"].is_file() and settings_run["meta"].is_file()
     meta = json.loads(settings_run["meta"].read_text(encoding="utf-8"))
     assert meta["active_surface"] == "settings"
-    assert meta["surfaces"] == ["chat", "settings"]
-    assert meta["shell_version"] == "canon_shell@0.1"
-    assert _png_size(settings_run["png"]) == (1280, 720)
+    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
+    assert meta["shell_version"] == "canon_shell@0.6"
+    assert _png_size(settings_run["png"]) == (1440, 900)
     # The two surfaces must not render identically (the switch is real).
     default_run_png = None  # resolved lazily: the module fixture order is not ours
     for candidate in settings_run["png"].parent.parent.glob("wb_shell_*/shell.png"):
@@ -146,4 +152,40 @@ def test_settings_surface_capture(settings_run: dict[str, Path]) -> None:
     assert default_run_png.read_bytes() != settings_run["png"].read_bytes(), (
         "the settings capture is byte-identical to the chat capture — "
         "the surface switch did not change the composition"
+    )
+
+
+@pytest.fixture(scope="module")
+def observatory_run(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
+    """obs-1: the Observatory slice's deterministic capture."""
+    return _run_shell_proof(
+        tmp_path_factory.mktemp("wb_shell_observatory"), surface="observatory"
+    )
+
+
+def test_observatory_surface_capture(observatory_run: dict[str, Path]) -> None:
+    """obs-1 (FRONTEND_UIUX_LAW §50/§51): the vertical UX slice composes
+    under the pinned engine — the workspace grammar's regions rendered
+    (breadcrumb, context strip, the World Question contract, the
+    primary view's honest NO DATA, the inspector, the evidence ladder),
+    deterministically (the surface's own capture, never identical to
+    another surface — the regions are the composition)."""
+    assert observatory_run["png"].is_file() and observatory_run["meta"].is_file()
+    meta = json.loads(observatory_run["meta"].read_text(encoding="utf-8"))
+    assert meta["active_surface"] == "observatory"
+    assert meta["surfaces"] == ["chat", "observatory", "models", "settings"]
+    assert meta["shell_version"] == "canon_shell@0.6"
+    assert _png_size(observatory_run["png"]) == (1440, 900)
+    # The slice's composition is its own — never a byte-copy of another
+    # surface (the grammar changed the canvas, not just the header).
+    settings_png = None
+    for candidate in observatory_run["png"].parent.parent.glob(
+        "wb_shell_settings*/shell_settings.png"
+    ):
+        settings_png = candidate
+        break
+    assert settings_png is not None, "the settings capture not found for the diff"
+    assert observatory_run["png"].read_bytes() != settings_png.read_bytes(), (
+        "the observatory capture is byte-identical to the settings capture — "
+        "the slice did not change the composition"
     )

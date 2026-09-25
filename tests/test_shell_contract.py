@@ -26,6 +26,7 @@ REDOT = REPO / "workbench" / "presentation" / "redot"
 PROJECT = REDOT / "project.godot"
 THEME = REDOT / "themes" / "workbench_theme.tres"
 SHELL_SCRIPT = REDOT / "scripts" / "shell.gd"
+STRINGS_SCRIPT = REDOT / "scripts" / "strings.gd"
 SHELL_SCENE = REDOT / "scenes" / "shell.tscn"
 
 
@@ -142,9 +143,12 @@ def test_shell_live_circuit_contract() -> None:
     for op in ('"app.status"', '"session.create"', '"chat.send"',
                '"run.get"', '"run.cancel"'):
         assert op in text, f"the live circuit must call {op}"
-    # The client + the honest default badge.
+    # The client + the honest default badge (ux-1: the literal lives in the
+    # catalog — the boundary's single source; the shell wires it by key).
     assert "gateway_client.gd" in text
-    assert "CANONSIM · NOT CONNECTED" in text
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+    assert '"app.badge.not_connected": "CANONSIM · NOT CONNECTED"' in strings_text
+    assert '_tr("app.badge.not_connected")' in text
     # The deterministic proof mode: the live circuit starts ONLY on
     # the interactive path (paths.is_empty() branch).
     assert "_start_live_circuit" in text
@@ -161,8 +165,9 @@ def test_the_models_surface_contract() -> None:
     the managed load (minutes-class — §11.1's STARTING→PROBING→READY
     walk) plus the truthful UNKNOWN/refusal notes."""
     text = SHELL_SCRIPT.read_text(encoding="utf-8")
-    # The axis went live: models sits in SURFACES, not PLANNED.
-    assert 'const SURFACES := ["chat", "models", "settings"]' in text
+    # The axis went live: models sits in SURFACES, not PLANNED (obs-1:
+    # the IA re-pointed the flat list — WORK gains the Observatory).
+    assert 'const SURFACES := ["chat", "observatory", "models", "settings"]' in text
     planned_line = text.split("PLANNED_SURFACES := ")[1].split("\n")[0]
     assert '"Inference"' in planned_line and '"Simulation"' in planned_line
     assert '"Models"' not in planned_line
@@ -181,16 +186,18 @@ def test_the_models_surface_contract() -> None:
     assert "_on_model_load_get_answered" in text
     assert "_on_model_unload_get_answered" in text
     assert "MODEL_ACTION_STATES" in text
-    # The truthful notes (the honest surface, never fakes).
-    assert "OUTCOME UNKNOWN" in text
-    assert "model.load refused" in text
-    assert "model.states refused" in text
+    # The truthful notes (the honest surface, never fakes — ux-1: the
+    # literals live in the strings.gd catalog, the wiring by key).
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+    assert "OUTCOME UNKNOWN" in strings_text
+    assert "model.load refused" in strings_text
+    assert "model.states refused" in strings_text
     # The FAILED diagnostics note carries the observed cause (§21).
-    assert "load FAILED · " in text
+    assert "load FAILED · " in strings_text
     # wb-11: the honest picker/load guards — never a silent return
     # (§18: the effective state is named).
-    assert "the models manager needs a live gateway session" in text
-    assert "the load action needs a live gateway session" in text
+    assert "the models manager needs a live gateway session" in strings_text
+    assert "the load action needs a live gateway session" in strings_text
     # KI#96 (iter-232): the scan latch is RETIRED — every entry into the
     # Models surface re-scans (§20's routine refresh; the owner's
     # «проводник опять сломался... модели не показывает» call — the
@@ -254,6 +261,10 @@ def test_the_launch_settings_surface_is_real() -> None:
     text = SHELL_SCRIPT.read_text(encoding="utf-8")
     for op in ('"backend.settings"', '"backend.settings.update"'):
         assert op in text, f"the Settings surface must call {op}"
+    # ux-1: the field labels live in the strings.gd catalog (the boundary's
+    # single source); the wiring rides the _tr keys, "command_preview"
+    # stays a shell-side document field.
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
     for marker in (
         "llama.cpp launch (managed)",
         "llama-server executable",
@@ -268,12 +279,13 @@ def test_the_launch_settings_surface_is_real() -> None:
         "Extra flags",
         "command_preview",
     ):
-        assert marker in text, f"the launch-settings field missing: {marker}"
+        target = text if marker == "command_preview" else strings_text
+        assert marker in target, f"the launch-settings field missing: {marker}"
     # the collapsed advanced surface + the honest note
     assert "_on_advanced_toggled" in text
-    assert "a LIVE server keeps its flags until unloaded" in text
+    assert "a LIVE server keeps its flags until unloaded" in strings_text
     assert "_populate_settings_fields" in text
-    assert "backend.settings.update refused" in text
+    assert "backend.settings.update refused" in strings_text
 
 
 def test_the_model_manager_surface_is_real() -> None:
@@ -282,6 +294,7 @@ def test_the_model_manager_surface_is_real() -> None:
     tag — no collision with the chat poll), cancels through run.cancel,
     and shows the live progress + the honest terminal notes."""
     text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
     assert '"model.fetch"' in text
     assert '_next_request_id("fetch-start")' in text
     assert '_next_request_id("fetch-get")' in text
@@ -289,11 +302,11 @@ def test_the_model_manager_surface_is_real() -> None:
     assert "_on_fetch_pressed" in text
     assert "_on_fetch_cancel_pressed" in text
     assert "_fetch_progress_note" in text
-    assert "downloading" in text
-    assert "fetch FAILED" in text
-    assert "fetch canceled (the truthful terminal)" in text
-    # the manager's hint names the one-command launcher
-    assert "workbench_launch.py" in text
+    assert "downloading" in strings_text
+    assert "fetch FAILED" in strings_text
+    assert "fetch canceled (the truthful terminal)" in strings_text
+    # the manager's hint names the one-command launcher (ux-1: catalog)
+    assert "workbench_launch.py" in strings_text
 
 
 # ------------------------------------ wb-10: the local-import surface
@@ -308,6 +321,7 @@ def test_the_local_import_surface_is_real() -> None:
     models_root driving Open models folder, the import run polled
     with its own tags and cancellable through run.cancel."""
     text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
     # the native picker: the engine's FileDialog surface, by member
     assert "FileDialog.ACCESS_FILESYSTEM" in text
     assert "FileDialog.FILE_MODE_OPEN_FILES" in text
@@ -324,13 +338,13 @@ def test_the_local_import_surface_is_real() -> None:
     assert "_on_import_get_answered" in text
     assert "_on_import_cancel_pressed" in text
     assert "_import_progress_note" in text
-    assert "import FAILED" in text
-    assert "import canceled (the truthful terminal)" in text
+    assert "import FAILED" in strings_text
+    assert "import canceled (the truthful terminal)" in strings_text
     # the primary buttons + the folder-open action
     assert "_on_add_local_pressed" in text
     assert "_on_add_folder_pressed" in text
     assert "_on_open_models_folder_pressed" in text
-    assert '"Add local models…"' in text
+    assert '"Add local models…"' in strings_text
     # the models root arrives from the gateway's own answer, never a guess
     assert '"models_root"' in text
     assert "OS.shell_open" in text
@@ -367,9 +381,13 @@ def test_the_zero_command_entry_is_committed() -> None:
         assert "workbench_launch.py" in bat
         assert "cd /d \"%~dp0\"" in bat
     shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
-    assert "Workbench.bat" in shell_text, (
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+    # ux-1: the hint literals live in the catalog; the shell wires them
+    # by key (the boundary's own contract).
+    assert "Workbench.bat" in strings_text, (
         "the offline hints name the double-click form first"
     )
+    assert '_tr("chat.composer.offline")' in shell_text
 
 
 def test_the_theme_visual_refresh_landed() -> None:
@@ -490,3 +508,299 @@ def test_no_adjacent_string_literals_across_lines() -> None:
             "implicit concatenation (one literal per line, the iter-224 "
             "fix's shape)"
         )
+
+
+# ------------------------------------- ux-1: the P0 minimums (FRONTEND_UIUX_LAW §25)
+
+
+def _catalog_keys(locale_block: str) -> set[str]:
+    """Parse a catalog block's keys (`"key": "value",` lines)."""
+    keys: set[str] = set()
+    for line in locale_block.splitlines():
+        match = re.match(r'^\s*"([^"]+)":\s*".*",\s*$', line)
+        if match:
+            keys.add(match.group(1))
+    return keys
+
+
+def test_the_localization_boundary() -> None:
+    """ux-1 (FRONTEND_UIUX_LAW §17): ONE translation boundary — strings.gd
+    carries the en/ru catalogs; every user-facing GDScript string rides a
+    `_tr()` key; the shell holds no raw display literals; the two catalogs
+    stay key-identical (a missing ru key renders the key itself — visible,
+    but a contract breach the suite must catch); and the catalog never
+    defines `static func tr(` (the Object.tr signature conflict that
+    refused the whole shell at parse — this row's own parse lesson)."""
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+
+    # The catalog's shape: two locale blocks, key-identical, substantive.
+    en_block = strings_text.split("const EN := {")[1].split("\n}")[0]
+    ru_block = strings_text.split("const RU := {")[1].split("\n}")[0]
+    en_keys = _catalog_keys(en_block)
+    ru_keys = _catalog_keys(ru_block)
+    assert len(en_keys) >= 150, "the catalog is substantive (the full shell)"
+    assert en_keys == ru_keys, (
+        "the en/ru catalogs drifted — every key must exist in BOTH locales "
+        f"(en-only: {sorted(en_keys - ru_keys)}, ru-only: {sorted(ru_keys - en_keys)})"
+    )
+
+    # The boundary wiring: the shell preloads the catalog and resolves the
+    # locale (arg > env > OS, pinned "en" in proof mode).
+    assert 'preload("res://scripts/strings.gd")' in shell_text
+    assert "func _tr(key: String) -> String:" in shell_text
+    assert "_resolve_locale" in shell_text
+    assert '"--lang"' in shell_text and "CANONSIM_LANG" in shell_text
+    assert "get_locale_language" in shell_text
+
+    # Every STATIC _tr key the shell references exists in the catalog
+    # (comment text is stripped — the code is what the runtime resolves).
+    code_only = "\n".join(
+        line.split("#", 1)[0] if "#" in line else line
+        for line in shell_text.splitlines()
+    )
+    referenced = set(re.findall(r'_tr\("([^"]+)"\)', code_only))
+    assert referenced, "the shell must reference catalog keys"
+    missing = referenced - en_keys
+    assert not missing, f"shell references unknown catalog keys: {sorted(missing)}"
+
+    # The dynamic composes resolve too: nav.<surface>, nav.planned.<axis>,
+    # chat.role.<role> (the runtime key-build families).
+    for key in ("nav.chat", "nav.models", "nav.settings"):
+        assert key in en_keys
+    for axis in ("Inference", "Prompts", "History", "Diagnostics", "Simulation"):
+        assert f"nav.planned.{axis.lower()}" in en_keys
+    for role in ("user", "assistant"):
+        assert f"chat.role.{role}" in en_keys
+
+    # The boundary law: NO raw user-facing literals left in the shell —
+    # direct string assignments to display surfaces are catalog keys now.
+    # Allowed to stay literal BY LAW: the canonical protocol vocabulary
+    # (model lifecycle states — the authority words render verbatim, like
+    # CANONICAL · OBSERVED · DERIVED in the status bar legend, never
+    # re-worded) and format-joins of OBSERVED values ("%s · %s").
+    vocabulary_literals = {"DISCOVERED"}
+    banned_patterns = [
+        (re.compile(r'\.text = "([^"]+)"'), "raw .text literal"),
+        (re.compile(r'\.placeholder_text = "[^"]+"'), "raw placeholder literal"),
+        (re.compile(r'tooltip_text = "[^"]+"'), "raw tooltip literal"),
+        (re.compile(r'_caption\("[^"]+"\)'), "raw _caption literal"),
+    ]
+    for pattern, label in banned_patterns:
+        for match in pattern.finditer(code_only):
+            captured = match.group(1) if match.groups() else ""
+            assert captured in vocabulary_literals, (
+                f"{label} '{match.group(0)}' at offset {match.start()}: the "
+                "user-facing string must ride the _tr boundary (LAW §17); "
+                "only the canonical protocol vocabulary renders verbatim"
+            )
+
+    # The parse lesson pinned: Object.tr's native signature makes
+    # `static func tr(` a PARSE ERROR — the catalog's resolver is `lookup`.
+    assert "static func lookup(key: String, locale: String) -> String:" in strings_text
+    assert "static func tr(" not in strings_text
+
+    # Cyrillic-safe layout: the fixed-width action controls carry the
+    # tolerance (112px — «Отправить»/«Загрузить»), never the 96px accident.
+    assert "Vector2(112, 40)" in shell_text
+    assert "Vector2(112, 0)" in shell_text
+
+
+def test_the_reduced_motion_contract() -> None:
+    """ux-1 (FRONTEND_UIUX_LAW §15): every motion effect keeps a static
+    equivalent — the chat follow tween (a direct bar.value jump) and the
+    busy pulse (the steady dot + label) — the toggle is visible in the
+    Settings Interface section, persisted UI-locally (workbench/runtime/
+    ui_state.json), and proof mode never reads or writes it (the
+    byte-identical capture law)."""
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+
+    # The two motion carriers gain their static branches.
+    assert "if _motion_reduced:" in shell_text
+    follow_block = shell_text.split("func _scroll_to_bottom_smooth")[1].split(
+        "func _after_follow_tween"
+    )[0]
+    assert "bar.value = target" in follow_block, (
+        "the reduced follow jumps directly — never an animated scroll"
+    )
+    pulse_block = shell_text.split("func _start_busy_pulse")[1].split(
+        "func _stop_busy_pulse"
+    )[0]
+    assert "if _motion_reduced:" in pulse_block, (
+        "the busy pulse parks behind the flag — the steady chip carries it"
+    )
+
+    # The visible, reversible toggle (Settings → Interface).
+    assert "_build_interface_section" in shell_text
+    assert "_on_reduced_motion_toggled" in shell_text
+    assert '"settings.reduced_motion"' in strings_text
+
+    # UI-local persistence: the runtime root's ui_state.json, honest
+    # corrupt-refuse, and NEVER touched in proof mode.
+    assert "ui_state.json" in shell_text
+    assert "_load_ui_state" in shell_text and "_save_ui_state" in shell_text
+    save_block = shell_text.split("func _save_ui_state")[1].split("\nfunc ")[0]
+    assert "if _proof_mode:" in save_block, (
+        "proof never persists UI state (the byte-identical capture law)"
+    )
+
+
+def test_the_viewport_policy() -> None:
+    """ux-1 (FRONTEND_UIUX_LAW §16): the fixed 1440x900 baseline gains its
+    product contract — the min window floor (1152x700, the SMALL class),
+    stretch canvas_items + expand (content scales with the window, extra
+    space fills the content region, no critical clipping)."""
+    text = PROJECT.read_text(encoding="utf-8")
+    for marker in (
+        "window/size/viewport_width=1440",
+        "window/size/viewport_height=900",
+        "window/size/min_width=1152",
+        "window/size/min_height=700",
+        'window/size/stretch/mode="canvas_items"',
+        'window/size/stretch/aspect="expand"',
+    ):
+        assert marker in text, f"the viewport policy setting missing: {marker}"
+
+
+def test_the_focus_keyboard_baseline() -> None:
+    """ux-1 (FRONTEND_UIUX_LAW §15): the keyboard baseline — Escape cancels
+    the live transient (an active generation), Ctrl+. stops it from
+    anywhere, both honest no-ops when idle; the surface switch restores
+    MEANINGFUL focus (Chat → composer, Models → refresh, Settings → the
+    first launch field), deferred one frame so visibility settles."""
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+
+    # The shortcut contract.
+    assert "func _unhandled_input(event: InputEvent) -> void:" in shell_text
+    input_block = shell_text.split("func _unhandled_input")[1].split("\nfunc ")[0]
+    assert "KEY_ESCAPE" in input_block
+    assert "KEY_PERIOD" in input_block and "ctrl_pressed" in input_block
+    assert "_on_stop_pressed()" in input_block, (
+        "the shortcuts drive the SAME stop action as the button — never a "
+        "second cancel path"
+    )
+    assert "set_input_as_handled" in input_block
+
+    # The task-aware focus entry (deferred so visibility settles).
+    assert "_focus_surface_entry.call_deferred(key)" in shell_text
+    focus_block = shell_text.split("func _focus_surface_entry")[1].split("\nfunc ")[0]
+    assert "_composer_input.grab_focus()" in focus_block
+    assert "_models_refresh_button.grab_focus()" in focus_block
+    assert "_llama_exe_edit.grab_focus()" in focus_block
+    # Offline honesty: a disabled entry control leaves focus untouched.
+    assert "_composer_input.editable" in focus_block
+
+    # Discoverability: the Stop button carries the shortcut in its tooltip.
+    assert "chat.stop.tooltip" in shell_text
+    assert '"chat.stop.tooltip"' in strings_text
+
+
+# ------------------------------------- obs-1: the Observatory vertical slice
+
+
+def test_the_observatory_slice_is_real() -> None:
+    """obs-1 (FRONTEND_UIUX_LAW §25's P1 + §50/§51): the vertical UX
+    slice — the interaction grammar BEFORE full analytical backend
+    coverage. The pins hold the slice's own law: the responsibility
+    split (observatory.gd composes itself, the shell only hosts), the
+    §4.1 IA grouping (WORK/RESOURCES/SYSTEM — never a flat catalog),
+    the workspace regions (breadcrumb/context/question/primary view/
+    inspector/evidence ladder), the honest empty semantics (NO DATA,
+    never a fake), the read-only DRAFT lifecycle (no dispatch), and
+    the _tr boundary from birth (INVARIANT: zero user-facing literals
+    in observatory.gd)."""
+    obs = REDOT / "scripts" / "observatory.gd"
+    assert obs.is_file(), "the Observatory's own script (LAW §18's split seed)"
+    text = obs.read_text(encoding="utf-8")
+    shell_text = SHELL_SCRIPT.read_text(encoding="utf-8")
+    strings_text = STRINGS_SCRIPT.read_text(encoding="utf-8")
+
+    # The responsibility split: the surface composes ITSELF through the
+    # injected theme + the shell's own _tr Callable (one boundary, the
+    # observatory never opens the catalog directly).
+    assert 'preload("res://scripts/observatory.gd")' in shell_text
+    assert "func compose(theme: Theme, translator: Callable) -> void:" in text
+    assert 'Callable(self, "_tr")' in shell_text
+    assert "_build_observatory_surface" in shell_text
+
+    # The §4.1 IA: intent groups, not a flat feature catalog.
+    assert 'const SURFACE_GROUPS := [' in shell_text
+    assert '"keys": ["chat", "observatory"]' in shell_text
+    assert '"keys": ["models"]' in shell_text
+    assert '"keys": ["settings"]' in shell_text
+    assert '"nav.group.work"' in strings_text
+    assert '"nav.group.resources"' in strings_text
+    assert '"nav.group.system"' in strings_text
+    # The planned axes ride their groups; Runs joined (the LAW's map),
+    # Inference kept (nothing silently dropped — D-198).
+    planned_line = shell_text.split("PLANNED_SURFACES := ")[1].split("\n")[0]
+    for axis in ("Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics"):
+        assert f'"{axis}"' in planned_line, f"the planned axis missing: {axis}"
+
+    # The workspace regions (LAW §5.1) — each region composes.
+    for region in (
+        "_build_breadcrumb",
+        "_build_context_strip",
+        "_build_question_contract",
+        "_build_workspace",
+        "_build_primary_view",
+        "_build_inspector",
+        "_build_evidence_ladder",
+    ):
+        assert region in text, f"the workspace region missing: {region}"
+    # ONE primary representation + the split workspace (the inspector
+    # region rides an HSplitContainer — collapsible, per LAW §5.1).
+    assert "HSplitContainer" in text
+
+    # The honest empty semantics (LAW §16): NO DATA is distinct — the
+    # note names why, and never collapses to "no match"/"no evidence".
+    assert '"obs.empty.no_data"' in strings_text
+    assert "no match" in strings_text and "no evidence" in strings_text
+
+    # The context identity strip (LAW §42): the six axes, honest values.
+    for axis in ("pack", "run", "seed", "tick", "profile", "revision"):
+        assert f'"obs.context.{axis}"' in strings_text
+    assert '"obs.context.no_session"' in strings_text
+
+    # The World Question contract (LAW §51.1) + the DRAFT lifecycle.
+    for field_name in ("question", "class", "target", "scope"):
+        assert f'"obs.question.{field_name}"' in strings_text
+    assert '"obs.lifecycle.draft"' in strings_text
+
+    # The evidence ladder (LAW §12): the five rungs, the status as TEXT
+    # (never color-only — §13).
+    for rung in ("read", "branch", "state", "divergence", "persistence"):
+        assert f'"obs.evidence.{rung}"' in strings_text
+    assert '"obs.evidence.unknown"' in strings_text
+
+    # The boundary from birth: observatory.gd holds ZERO user-facing
+    # literals (the same banned-pattern law as the shell).
+    code_only = "\n".join(
+        line.split("#", 1)[0] if "#" in line else line
+        for line in text.splitlines()
+    )
+    for pattern in (
+        re.compile(r'\.text = "[^"]+"'),
+        re.compile(r'_caption\("[^"]+"\)'),
+    ):
+        assert pattern.search(code_only) is None, (
+            "the observatory rides the _tr boundary from birth (LAW §17) — "
+            f"raw literal: {pattern.pattern}"
+        )
+    # Every static _tr key the observatory references exists in the catalog.
+    referenced = set(re.findall(r'_tr\("([^"]+)"\)', code_only))
+    en_block = strings_text.split("const EN := {")[1].split("\n}")[0]
+    en_keys = _catalog_keys(en_block)
+    missing = referenced - en_keys
+    assert not missing, f"observatory references unknown keys: {sorted(missing)}"
+
+    # No dispatch, no transport, no fabricated state (INVARIANT 1/2 + the
+    # read-only slice law): the file never dials anything.
+    for banned in ("call_operation", "HTTPRequest", "session.create", "run.start"):
+        assert banned not in text, (
+            f"the slice is read-only — {banned} is a dispatch surface"
+        )
+
+

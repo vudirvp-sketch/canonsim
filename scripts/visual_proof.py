@@ -213,8 +213,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--surface",
         default=None,
-        choices=["chat", "settings"],
-        help="the shell surface to capture (shell mode; default: chat)",
+        help=(
+            "the shell surface to capture (shell mode; default: chat) — "
+            "the VOCABULARY is the shell's own (it validates and exits 2 "
+            "on an unknown key); the runner never gates the surface set "
+            "(the iter-235 drift lesson: choices=[chat, settings] lagged "
+            "behind the shell through wb-8/9/obs-1)"
+        ),
     )
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args(argv)

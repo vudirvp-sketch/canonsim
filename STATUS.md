@@ -1,49 +1,44 @@
-Iteration: iter-233 (`frontend-uiux-law-admission` — the owner's
-2026-09-25 tmpfiles hand-off of the external *CanonSim Workbench —
-Ultimate Frontend / UI / UX / Visual Architecture* consolidated pack
-+ the «проанализировать... и начать работать в этом направлении»
-direction call): docs/FRONTEND_UIUX_LAW.md ADMITTED as the frontend
-interaction-architecture law owner (D-214 — the D-024/D-200
-distillation law: the original stays with the owner, never vendored):
-the executive doctrine (the UX invariant QUESTION→…→NEXT
-DISCRIMINATOR; the implementation invariant; the missing-middle-layer
-diagnosis — the analytical interaction grammar between the semantic
-contract and the visual system) + the law chain (the spec-integrity
-law) + the IA (WORK/RESOURCES/SYSTEM; SURFACE=intent, VIEW=
-representation) + the workspace grammar (CONTEXT/QUERY/PRIMARY VIEW/
-INSPECTOR/EVIDENCE) + the selection model + focus/context + semantic
-zoom + compare + timeline + graph policy + the evidence ladder + the
-epistemic grammar (the state set + AUTHORITY×CLAIM orthogonality) +
-the query lifecycle + empty semantics + drill-down + the Evidence
-Capsule + T1–T8 + the cost budgets + the accessibility/reduced-
-motion/focus-keyboard/responsive/DPI/localization contracts + the
-component law (shell split by responsibility) + Scene IR integration +
-bounded rendering + surface hygiene + the verification matrix (static
-≠runtime≠task; the A–I gates; the evidence classification) + the
-anti-patterns + the agent rules + the P0–P4 order + the
-contradictions register + the 20 invariants. VISUAL_SYSTEM_UI §11 the
-companion-requirements routing (the drift the pack diagnosed —
-accessibility/keyboard/reduced-motion/responsive/localization were
-materially missing from the short law; §10 re-pointed: ux-1 + obs-1
-BEFORE indefinite peripheral polish). TASKS: ux-1 (the P0 minimums)
-+ obs-1..N (the Observatory slice family) registered. Routing: NAV
-§1/§2/§3.
+Iteration: iter-235 (`obs1-observatory-slice` — FRONTEND_UIUX_LAW
+§25's P1 + §50/§51, the vertical UX slice BEFORE full analytical
+backend coverage): the nav rail adopts the §4.1 IA — WORK (Chat ·
+Observatory; Simulation/Inference planned) / RESOURCES (Models;
+Prompts/History) / SYSTEM (Settings; Runs/Diagnostics — the LAW's
+map, Runs added, Inference kept, nothing silently dropped) +
+scripts/observatory.gd the responsibility-split seed (LAW §18: the
+surface composes ITSELF over the injected theme + the shell's own
+_tr Callable — one boundary, one token source): the semantic
+breadcrumb, the context identity strip (pack/run/seed/tick/profile/
+revision — the honest no-session values), the World Question
+contract (QUESTION/CLASS/TARGET/SCOPE, the DRAFT lifecycle —
+nothing asked, nothing claimed), ONE primary read-only view (the
+event table's TICK/EVENT/KIND/AUTHORITY columns; the DISTINCT NO
+DATA semantics, never no-match/no-evidence), the inspector region
+(HSplit — nothing selected, honestly), the evidence ladder (READ/
+BRANCH/STATE/DIVERGENCE/PERSISTENCE, every rung's unknown as
+TEXT) — zero fabricated content, zero dispatch, zero new transport;
+canon_shell@0.6. The runner drift fixed (visual_proof.py's --surface
+choices=[chat,settings] had lagged the shell through wb-8/9/obs-1 —
+the vocabulary is the shell's, the runner never gates it). VLM-
+verified composition: all regions render, no overlap, no clipping.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
 (the wb family its live head + the ux/obs families per FRONTEND_UIUX_
 LAW §25) + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2285 passed + 6 skipped, ruff clean, docguard clean (doc-only, zero
+2290 passed + 7 skipped, ruff clean, docguard clean (2296+1 with
+the sandbox REDOT_EXE — the gated packets green incl. the
+observatory capture; zero
 code change — Python 3.12.14, the env pin; the 5 REDOT_EXE-gated
 visual packets + duckdb skipping clean per D6/D-093) ·
 Date: 2026-09-25 ·
-Scope: docs/FRONTEND_UIUX_LAW.md (the admission) + docs/VISUAL_
-SYSTEM_UI.md (§11 + the §10 re-point) + docs/TASKS.md (the ux-1 +
-obs-1 rows + the ledger) + docs/AGENT_NAVIGATION.md (§1/§2/§3 + the
-theme@0.4 courtesy re-pin) + scripts/docguard.py (the allowlist entry
-— 627 lines after three cruft rounds, the enum/invariant lists the
-substance) + the state docs (STATUS/TASKS/worklog/DECISIONS) — 8
-paths (doc-only; an admission's routing surface, the iter-225/229
-precedent).
+Scope: workbench/presentation/redot/scripts/observatory.gd (NEW —
+the slice: breadcrumb/context/question/workspace/inspector/
+evidence ladder, the injected theme + _tr) + scripts/shell.gd (the
+IA groups + the hosting + canon_shell@0.6) + scripts/strings.gd
+(the obs.* keys ×2 locales) + scripts/visual_proof.py (the runner's
+--surface gate retired) + tests/test_shell_contract.py (the obs-1
+slice contract) + tests/test_shell_proof.py (the observatory
+capture + the re-pointed pins) + the state docs (STATUS/TASKS/
+worklog/DECISIONS/NAV) — 10 paths.
 Track A: the wb family (iter-232 the race/latch fixes + the OLED
 re-pin; the ux-1/obs-1 families now the queue head per FRONTEND_UIUX_
 LAW §25, wb-13+ the P2 visual continuation; the prior record:
@@ -78,8 +73,7 @@ wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the worklog + git.
 
 ## Active KIs
 
-- (none — the iter-232 pair closed in-row at iter-232; no open KIs
-  at this writing.)
+- KI#97 · the REDOT_EXE-gated proof pins (test_shell_proof.py + test_visual_proof.py) drifted silent through wb-8/9 (a skip is not a pass) · 2026-09-25 · CLOSED iter-234: repaired against the live shell; the seam harness pins its own window; the gated pins re-ride the sandbox Redot run every touching row.
 
 ## FAQ / Pitfalls
 
@@ -105,24 +99,24 @@ wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the worklog + git.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
 - **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-10 note
 - **The iter-232 laws: a cooperative-cancellation TEST never calls checkpoint() once and prays — the single call races the main thread's run.cancel dispatch (a fast runner's worker passes through, the "unreachable" guard closes the run FAILED; the sandbox stays green on scheduling luck while CI goes red — KI#95, three-form verified: sandbox, forced fast worker, delayed cancel); poll the checkpoint (the work contract's own lock-free observation surface — run.cancel is never starved) bounded until the cancellation lands, an absent cancel fails LOUDLY; discovery lists never freeze behind one-shot success latches — every surface entry re-scans (KI#96: the owner's hand-dropped GGUF must appear on the next Models entry; the wb-11 re-arm lesson generalizes from FAILURE to staleness — a "requested once" flag guarding the happy path is the bug, not the guard); and a theme re-pin is VALUES-ONLY — every token name, size and pin survives the palette swap (theme@0.4/D-213: the owner's OLED call over the external brief's "never pure black" doctrine — the neutral near-black ramp + the ONE teal accent, 21 WCAG contrast pairs measured)** — tests/test_model_fetch.py `_SlowFetcher.fetch` + shell.gd `_refresh_models` + test_shell_contract.py (the latch ban + the base/accent pins), iter-232
-- **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
+- **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; `static func tr(` is likewise a parse refusal (Object's native signature — the strings.gd resolver is `lookup`, iter-234); every user-facing string rides the `_tr` boundary (strings.gd en/ru, LAW §17 — a new literal in shell.gd fails the boundary scan); and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 - **The chat follow law (iter-230): read the scrollbar's max AFTER a frame — the autowrapped labels size late, reading it at call_deferred time is the short-scroll bug; TWEEN the bar's float `value` (never the int `scroll_vertical` jump); gate on near-bottom (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked; the late-layout re-settle stays bounded to ONE pass** — shell.gd `_scroll_to_bottom_smooth` (the owner's «не происходит плавной прокрутки вниз» call, the LM Studio/Discord follow mechanism)
 
 ## Next step
 
-**iter-233 DONE: docs/FRONTEND_UIUX_LAW.md ADMITTED (D-214 — the
-owner's Ultimate Frontend/UI/UX/Visual Architecture pack, the tmpfiles
-hand-off + «начать работать в этом направлении»; the interaction law:
-the doctrine, the workspace/selection/epistemic grammars, the
-accessibility/localization/responsive contracts, the verification
-matrix, the P0–P4 order) + VISUAL_SYSTEM_UI §11 the companion routing
-(the spec-integrity drift repair) + the ux-1/obs-1 rows registered —
-LANDED (doc-only; the queue re-pointed per the law's §25).**
+**iter-235 DONE: the obs-1 Observatory vertical slice LANDED (the
+IA nav grouping + observatory.gd — the breadcrumb, context strip,
+World Question contract, primary view, inspector, evidence ladder,
+all honest-empty; the runner drift fixed) — 2290+7 (CI) / 2296+1
+(REDOT_EXE) + ruff + docguard clean.**
 
-1. ux-1 per FRONTEND_UIUX_LAW §25's P0 (the minimums row: the _tr
-   localization boundary + the reduced-motion setting + the
-   viewport/min-size policy + the focus/keyboard baseline — TASKS'
-   ux-1 row) then obs-1 the Observatory vertical slice (P1 — the
+1. The P1/P2 continuation per FRONTEND_UIUX_LAW §25 (each row on
+   the owner's call): obs-2+ — the slice's NEXT rung (a live run
+   feeding the context strip + the event table over a READ-side
+   seam, the selection model's first consumer) · wb-13+ the visual
+   rows (P2: the shell responsibility split continuing, per
+   VISUAL_SYSTEM_UI §10) · P3's analytical depth (timeline/compare/
+   zoom) after the read-side seam exists (P1 — the
    interaction grammar validated BEFORE full analytical backend
    coverage; the wb-13+ visual rows the P2 continuation per
    VISUAL_SYSTEM_UI §10) — each row opens on the owner's call

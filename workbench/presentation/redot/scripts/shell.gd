@@ -1,6 +1,35 @@
 # CanonSim Workbench — the wb-2/wb-7 application shell (frontend §46
 # Phase A: custom theme -> Chat -> Settings).
-#
+
+# iter-234 (ux-1 — the P0 minimums row, FRONTEND_UIUX_LAW §25/§17/§15/§16:
+# the owner's «начать работать в этом направлении» call over the Ultimate
+# Frontend pack): the _tr() LOCALIZATION BOUNDARY lands (strings.gd —
+# every user-facing literal rides a key, en+ru catalogs, OS-locale
+# resolution with --lang/CANONSIM_LANG overrides, Cyrillic-safe widths)
+# + the REDUCED-MOTION setting (the chat follow and the busy pulse gain
+# static equivalents — LAW §15's motion contract; UI-local persistence in
+# workbench/runtime/ui_state.json, never read or written in proof mode)
+# + the VIEWPORT/MIN-SIZE policy (project.godot: min window, stretch
+# canvas_items/expand — LAW §16's SMALL..ULTRAWIDE class contract) + the
+# FOCUS/KEYBOARD baseline (Esc stops a live generation, Ctrl+. stops from
+# anywhere, task-aware focus entry per surface — composer / refresh /
+# first field; LAW §15). The KI#97 proof-pin repair rides the same row.
+
+# iter-235 (obs-1 — FRONTEND_UIUX_LAW §25's P1 + §50/§51: the
+# Observatory's vertical UX slice, the grammar validated BEFORE full
+# analytical backend coverage): the nav rail adopts the §4.1 IA —
+# WORK (Chat · Observatory; Simulation/Inference planned) /
+# RESOURCES (Models; Prompts/History planned) / SYSTEM (Settings;
+# Runs/Diagnostics planned — the LAW's own map, Inference kept,
+# nothing silently dropped) + scripts/observatory.gd the
+# responsibility-split seed (LAW §18: the axis composes its own
+# surface at birth; the shell only hosts it): the breadcrumb, the
+# context identity strip (the honest no-session values), the World
+# Question contract (the DRAFT lifecycle — nothing asked, nothing
+# claimed), ONE primary read-only view (the event table shape, the
+# distinct NO DATA semantics), the inspector region, the evidence
+# ladder (every rung's unknown status as text) — empty honestly,
+# zero fabricated content, zero dispatch, zero new transport.
 # iter-232 (KI#95/KI#96 + the OLED re-pin — the owner's 2026-09-25
 # «цвет лучше взять темный под oled мониторы, но не синий такой
 # убогий» + «проводник опять сломался видимо, я не могу папки
@@ -97,13 +126,37 @@
 #   canonism_workbench/gateway/url — that order).
 extends Control
 
-const SHELL_VERSION := "canon_shell@0.4"
+const SHELL_VERSION := "canon_shell@0.6"
 const THEME_PATH := "res://themes/workbench_theme.tres"
 const GATEWAY_CLIENT_SCRIPT := preload("res://scripts/gateway_client.gd")
+# obs-1: the Observatory's own surface builder (LAW §18's split seed —
+# the responsibility leaves the shell's composition at birth).
+const OBSERVATORY_SCRIPT := preload("res://scripts/observatory.gd")
+# ux-1: the single translation boundary (strings.gd — the en/ru catalogs;
+# every user-facing string rides a key, the honest fallback returns the
+# key itself, never a silently wrong string).
+const STRINGS := preload("res://scripts/strings.gd")
 const GATEWAY_URL_SETTING := "canonism_workbench/gateway/url"
 const GATEWAY_DEFAULT_URL := "http://127.0.0.1:8765"
-const SURFACES := ["chat", "models", "settings"]
-const PLANNED_SURFACES := ["Inference", "Prompts", "History", "Diagnostics", "Simulation"]
+# obs-1 — the §4.1 IA (LAW: SURFACE = intent, VIEW = representation;
+# the rail reads as intent GROUPS, never a flat feature catalog):
+# WORK (Chat, Observatory), RESOURCES (Models), SYSTEM (Settings).
+const SURFACE_GROUPS := [
+        {"caption": "nav.group.work", "keys": ["chat", "observatory"]},
+        {"caption": "nav.group.resources", "keys": ["models"]},
+        {"caption": "nav.group.system", "keys": ["settings"]},
+]
+const SURFACES := ["chat", "observatory", "models", "settings"]
+# The planned axes per group (canonical identity names; the display
+# rides _tr("nav.planned.<key>")). The LAW's map adds Runs (SYSTEM) —
+# the honest gap made visible; Inference stays WORK-planned (the
+# existing axis is never silently dropped, D-198's law).
+const PLANNED_SURFACE_GROUPS := [
+        {"caption": "nav.group.work", "keys": ["Simulation", "Inference"]},
+        {"caption": "nav.group.resources", "keys": ["Prompts", "History"]},
+        {"caption": "nav.group.system", "keys": ["Runs", "Diagnostics"]},
+]
+const PLANNED_SURFACES := ["Simulation", "Inference", "Prompts", "History", "Runs", "Diagnostics"]
 const CHAT_ROLES := ["user", "assistant"]
 const POLL_INTERVAL_S := 0.3
 const MAX_MESSAGES := 500
@@ -123,10 +176,6 @@ const MODEL_LOAD_NOTE_MAX_LENGTH := 240
 # the poll cadence rides the shared POLL_INTERVAL_S tick. The import run
 # (wb-10) rides the same shape — one transfer class, two arrival arms.
 const FETCH_NOTE_MAX_LENGTH := 240
-# The import dialog's filters (wb-10): .gguf first, everything else
-# second — the registry accepts any plain file, the filter is a
-# convenience, never a gate.
-const IMPORT_FILTERS := ["*.gguf ; GGUF model files", "* ; All files"]
 # The chat follow law (iter-230 — the owner's «плавной прокрутки» call):
 # the near-bottom window inside which a new message keeps following the
 # conversation's tail, and the smooth scroll's duration. A reader farther
@@ -223,10 +272,27 @@ var _advanced_button: Button
 var _preview_label: Label
 var _settings_status_label: Label
 var _settings_save_button: Button
+# ux-1 — the localization/motion state: the resolved display locale (en/ru)
+# and the reduced-motion flag (LAW §15 — every tween/pulse keeps a static
+# equivalent; UI-local persistence, never a backend concern).
+var _ui_locale := "en"
+var _motion_reduced := false
+var _reduced_motion_check: CheckBox
+# ux-1 — proof mode is pinned: locale "en", motion enabled, ui_state.json
+# neither read nor written (the byte-identical capture law, §22).
+var _proof_mode := false
 
 
 func _ready() -> void:
         _t = theme
+        _proof_mode = not _parse_proof_args(OS.get_cmdline_user_args()).is_empty()
+        # Proof runs are deterministic (§22): the locale resolves from the
+        # EXPLICIT sources only (--lang arg > CANONSIM_LANG env > "en") —
+        # the OS locale never leaks into a capture; a --lang ru capture is
+        # byte-stable the same way the default en one is.
+        _ui_locale = _resolve_locale(OS.get_cmdline_user_args(), not _proof_mode)
+        if not _proof_mode:
+                _load_ui_state()
         _build()
         var paths := _parse_proof_args(OS.get_cmdline_user_args())
         if paths.is_empty():
@@ -242,6 +308,76 @@ func _ready() -> void:
 
 
 # --- token access (the theme file is the single source — §10) ---------------
+
+
+func _tr(key: String) -> String:
+        # ux-1 — the single translation boundary (LAW §17): every user-facing
+        # string rides a key; a missing key returns the key itself (visible in
+        # review, never a silently wrong string).
+        return STRINGS.lookup(key, _ui_locale)
+
+
+func _resolve_locale(args: PackedStringArray, use_os_locale := true) -> String:
+        # The resolution order: the --lang user arg, then the CANONSIM_LANG
+        # env var, then the OS language (the owner's machine answers "ru"
+        # natively); anything unrecognized falls back to "en" — honest,
+        # never a crash. Proof mode passes use_os_locale=false: captures
+        # resolve from explicit sources only, never the host's locale.
+        var i := 0
+        while i < args.size() - 1:
+                if args[i] == "--lang":
+                        var chosen := args[i + 1].to_lower()
+                        if chosen in STRINGS.locales():
+                                return chosen
+                i += 1
+        var from_env := OS.get_environment("CANONSIM_LANG").to_lower()
+        if from_env in STRINGS.locales():
+                return from_env
+        if use_os_locale:
+                var os_locale := OS.get_locale_language().to_lower()
+                if os_locale in STRINGS.locales():
+                        return os_locale
+        return "en"
+
+
+func _ui_state_path() -> String:
+        # UI-local state lives in the established runtime root
+        # (workbench/runtime/ — settings.json/launcher.json's own home,
+        # gitignored, never a repo file).
+        var base := ProjectSettings.globalize_path("res://")
+        return base.get_base_dir().get_base_dir().get_base_dir() + "/workbench/runtime/ui_state.json"
+
+
+func _load_ui_state() -> void:
+        # The honest read: a missing file is the default state (motion on);
+        # a corrupt file refuses loud and keeps the default — never a crash,
+        # never a silent foreign shape.
+        var path := _ui_state_path()
+        if not FileAccess.file_exists(path):
+                return
+        var file := FileAccess.open(path, FileAccess.READ)
+        if file == null:
+                push_error("shell: ui_state.json unreadable — motion stays enabled")
+                return
+        var parsed = JSON.parse_string(file.get_as_text())
+        file.close()
+        if not (parsed is Dictionary):
+                push_error("shell: ui_state.json is not an object — motion stays enabled")
+                return
+        _motion_reduced = bool(parsed.get("motion_reduced", false))
+
+
+func _save_ui_state() -> void:
+        if _proof_mode:
+                return  # the capture law: proof never persists UI state
+        var path := _ui_state_path()
+        DirAccess.make_dir_recursive_absolute(path.get_base_dir())
+        var file := FileAccess.open(path, FileAccess.WRITE)
+        if file == null:
+                push_error("shell: cannot write ui_state.json — the toggle stays session-local")
+                return
+        file.store_string(JSON.stringify({"motion_reduced": _motion_reduced}, "  ", false))
+        file.close()
 
 
 func _c(token: String) -> Color:
@@ -285,7 +421,7 @@ func _build_top_bar() -> Control:
         bar.add_child(row)
 
         var title := Label.new()
-        title.text = "CanonSim Workbench"
+        title.text = _tr("app.title")
         title.add_theme_font_size_override("font_size", _k("font_size_page_title"))
         title.add_theme_color_override("font_color", _c("text_primary"))
         title.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -306,7 +442,7 @@ func _build_top_bar() -> Control:
         _badge_dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
         badge_row.add_child(_badge_dot)
         _badge_label = Label.new()
-        _badge_label.text = "CANONSIM · NOT CONNECTED"
+        _badge_label.text = _tr("app.badge.not_connected")
         _badge_label.add_theme_font_size_override("font_size", _k("font_size_secondary"))
         _badge_label.add_theme_color_override("font_color", _c("status_warning"))
         badge_row.add_child(_badge_label)
@@ -333,12 +469,23 @@ func _build_body() -> Control:
         body.add_child(gutter)
 
         _surface_nodes["chat"] = _build_chat_surface()
+        _surface_nodes["observatory"] = _build_observatory_surface()
         _surface_nodes["models"] = _build_models_surface()
         _surface_nodes["settings"] = _build_settings_surface()
         for key in SURFACES:
                 _surface_nodes[key].size_flags_vertical = Control.SIZE_EXPAND_FILL
                 content.add_child(_surface_nodes[key])
         return body
+
+
+func _build_observatory_surface() -> Control:
+        # obs-1 (LAW §18's split seed): the surface composes ITSELF — the
+        # shell injects the theme (the token single-source) and its own
+        # _tr resolver (the ONE boundary; the observatory never opens the
+        # catalog directly). The shell hosts; the axis owns its regions.
+        var surface: VBoxContainer = OBSERVATORY_SCRIPT.new()
+        surface.compose(_t, Callable(self, "_tr"))
+        return surface
 
 
 func _build_nav_rail() -> Control:
@@ -359,32 +506,41 @@ func _build_nav_rail() -> Control:
         # 2026-09-25 report killed _ready at _build_nav_rail).
         _t.set_type_variation("NavButton", "Button")
 
-        col.add_child(_caption("SURFACES"))
+        col.add_child(_caption(_tr("nav.group.work")))
         var group := ButtonGroup.new()
-        for key in SURFACES:
-                var btn := _nav_button(key.capitalize())
-                btn.theme_type_variation = "NavButton"
-                btn.toggle_mode = true
-                btn.button_group = group
-                btn.pressed.connect(_on_surface_selected.bind(key))
-                col.add_child(btn)
-                _nav_buttons[key] = btn
-                if key == "chat":
-                        btn.button_pressed = true
-
-        col.add_child(_caption("PLANNED · LATER WB ROWS"))
-        for axis_name in PLANNED_SURFACES:
-                var later := _nav_button(axis_name)
-                later.theme_type_variation = "NavButton"
-                later.disabled = true
-                col.add_child(later)
+        var planned_by_group := {}
+        for entry in PLANNED_SURFACE_GROUPS:
+                planned_by_group[entry["caption"]] = entry["keys"]
+        for entry in SURFACE_GROUPS:
+                var group_caption: String = entry["caption"]
+                if group_caption != "nav.group.work":
+                        col.add_child(_caption(_tr(group_caption)))
+                for key in entry["keys"]:
+                        # ux-1: the display label rides the boundary (nav.chat /
+                        # nav.observatory / nav.models / nav.settings — the
+                        # Cyrillic-safe rail); the KEY stays the protocol
+                        # identity for switching/meta.
+                        var btn := _nav_button(_tr("nav." + key))
+                        btn.theme_type_variation = "NavButton"
+                        btn.toggle_mode = true
+                        btn.button_group = group
+                        btn.pressed.connect(_on_surface_selected.bind(key))
+                        col.add_child(btn)
+                        _nav_buttons[key] = btn
+                        if key == "chat":
+                                btn.button_pressed = true
+                for axis_name in planned_by_group.get(group_caption, []):
+                        var later := _nav_button(_tr("nav.planned." + axis_name.to_lower()))
+                        later.theme_type_variation = "NavButton"
+                        later.disabled = true
+                        col.add_child(later)
 
         var spring := Control.new()
         spring.size_flags_vertical = Control.SIZE_EXPAND_FILL
         col.add_child(spring)
 
         var version := Label.new()
-        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.4"]
+        version.text = _tr("nav.version") % [SHELL_VERSION, "canon_workbench_theme@0.4"]
         version.add_theme_font_size_override("font_size", _k("font_size_caption"))
         version.add_theme_color_override("font_color", _c("text_muted"))
         version.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -429,8 +585,8 @@ func _build_chat_surface() -> Control:
         var surface := VBoxContainer.new()
         surface.add_theme_constant_override("separation", _k("space_m"))
         surface.add_child(_surface_header(
-                "Chat",
-                "The live circuit: the gateway's chat.send observed to its truthful terminal (wb-7)."
+                _tr("chat.title"),
+                _tr("chat.subtitle")
         ))
 
         var fill := VBoxContainer.new()
@@ -444,13 +600,13 @@ func _build_chat_surface() -> Control:
         var empty_col := VBoxContainer.new()
         empty_col.add_theme_constant_override("separation", _k("space_xs"))
         var empty_title := Label.new()
-        empty_title.text = "No messages"
+        empty_title.text = _tr("chat.empty.title")
         empty_title.add_theme_font_size_override("font_size", _k("font_size_body"))
         empty_title.add_theme_color_override("font_color", _c("text_secondary"))
         empty_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
         empty_col.add_child(empty_title)
         _empty_note = Label.new()
-        _empty_note.text = "Nothing is fabricated: the backend is not connected."
+        _empty_note.text = _tr("chat.empty.note")
         _empty_note.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _empty_note.add_theme_color_override("font_color", _c("text_muted"))
         _empty_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -486,7 +642,7 @@ func _build_chat_surface() -> Control:
         _busy_dot.custom_minimum_size = Vector2(8, 8)
         _busy_dot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
         _busy_label = Label.new()
-        _busy_label.text = "GENERATING — the model is answering (Stop cancels)"
+        _busy_label.text = _tr("chat.busy.label")
         _busy_label.add_theme_font_size_override("font_size", _k("font_size_secondary"))
         _busy_label.add_theme_color_override("font_color", _c("accent"))
         busy_inner.add_child(_busy_dot)
@@ -498,20 +654,23 @@ func _build_chat_surface() -> Control:
         var composer := HBoxContainer.new()
         composer.add_theme_constant_override("separation", _k("space_s"))
         _composer_input = LineEdit.new()
-        _composer_input.text = "Offline — start Workbench.bat (one double-click), then reopen"
+        _composer_input.text = _tr("chat.composer.offline")
         _composer_input.editable = false
         _composer_input.custom_minimum_size = Vector2(0, 40)
         _composer_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         composer.add_child(_composer_input)
         _send_button = Button.new()
-        _send_button.text = "Send"
-        _send_button.custom_minimum_size = Vector2(96, 40)
+        _send_button.text = _tr("chat.send")
+        # Cyrillic-safe (LAW §17): «Отправить» rides 112px — fixed widths
+        # are layout contracts, never English-label accidents.
+        _send_button.custom_minimum_size = Vector2(112, 40)
         _send_button.disabled = true
         _send_button.pressed.connect(_on_send_pressed)
         composer.add_child(_send_button)
         _stop_button = Button.new()
-        _stop_button.text = "Stop"
-        _stop_button.custom_minimum_size = Vector2(96, 40)
+        _stop_button.text = _tr("chat.stop")
+        _stop_button.tooltip_text = _tr("chat.stop.tooltip")
+        _stop_button.custom_minimum_size = Vector2(112, 40)
         _stop_button.disabled = true
         _stop_button.pressed.connect(_on_stop_pressed)
         composer.add_child(_stop_button)
@@ -523,19 +682,19 @@ func _build_models_surface() -> Control:
         var surface := VBoxContainer.new()
         surface.add_theme_constant_override("separation", _k("space_m"))
         surface.add_child(_surface_header(
-                "Models",
-                "Discover, fetch, load, switch — the lifecycle states observed, never guessed (wb-8/wb-9)."
+                _tr("models.title"),
+                _tr("models.subtitle")
         ))
 
         var toolbar := HBoxContainer.new()
         toolbar.add_theme_constant_override("separation", _k("space_s"))
         _models_refresh_button = Button.new()
-        _models_refresh_button.text = "Refresh"
+        _models_refresh_button.text = _tr("models.refresh")
         _models_refresh_button.disabled = true
         _models_refresh_button.pressed.connect(_on_models_refresh_pressed)
         toolbar.add_child(_models_refresh_button)
         _models_active_label = Label.new()
-        _models_active_label.text = "active: none observed"
+        _models_active_label.text = _tr("models.active.none")
         _models_active_label.add_theme_font_size_override("font_size", _k("font_size_secondary"))
         _models_active_label.add_theme_color_override("font_color", _c("text_secondary"))
         _models_active_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -556,39 +715,39 @@ func _build_models_surface() -> Control:
         var add_row := HBoxContainer.new()
         add_row.add_theme_constant_override("separation", _k("space_s"))
         _add_files_button = Button.new()
-        _add_files_button.text = "Add local models…"
-        _add_files_button.tooltip_text = "Pick GGUF files anywhere on disk — the OS file dialog"
+        _add_files_button.text = _tr("models.add_files")
+        _add_files_button.tooltip_text = _tr("models.add_files.tooltip")
         _add_files_button.disabled = true
         _add_files_button.pressed.connect(_on_add_local_pressed)
         add_row.add_child(_add_files_button)
         _add_folder_button = Button.new()
-        _add_folder_button.text = "Add folder…"
-        _add_folder_button.tooltip_text = "Pick a folder — every .gguf inside lands as a model"
+        _add_folder_button.text = _tr("models.add_folder")
+        _add_folder_button.tooltip_text = _tr("models.add_folder.tooltip")
         _add_folder_button.disabled = true
         _add_folder_button.pressed.connect(_on_add_folder_pressed)
         add_row.add_child(_add_folder_button)
         _open_folder_button = Button.new()
-        _open_folder_button.text = "Open models folder"
-        _open_folder_button.tooltip_text = "The models directory in the OS file manager"
+        _open_folder_button.text = _tr("models.open_folder")
+        _open_folder_button.tooltip_text = _tr("models.open_folder.tooltip")
         _open_folder_button.disabled = true
         _open_folder_button.pressed.connect(_on_open_models_folder_pressed)
         add_row.add_child(_open_folder_button)
         _import_cancel_button = Button.new()
-        _import_cancel_button.text = "Cancel"
-        _import_cancel_button.tooltip_text = "Cancel the running import (the truthful §12.3 terminal)"
+        _import_cancel_button.text = _tr("common.cancel")
+        _import_cancel_button.tooltip_text = _tr("models.import_cancel.tooltip")
         _import_cancel_button.disabled = true
         _import_cancel_button.pressed.connect(_on_import_cancel_pressed)
         add_row.add_child(_import_cancel_button)
         add_col.add_child(add_row)
         _fetch_status_label = Label.new()
-        _fetch_status_label.text = "the manager rides the gateway — start Workbench.bat (double-click) or scripts/workbench_launch.py"
+        _fetch_status_label.text = _tr("models.manager.offline")
         _fetch_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _fetch_status_label.add_theme_color_override("font_color", _c("text_muted"))
         _fetch_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
         _fetch_status_label.clip_text = true
         add_col.add_child(_fetch_status_label)
         _fetch_advanced_button = Button.new()
-        _fetch_advanced_button.text = "Download by URL… (advanced)"
+        _fetch_advanced_button.text = _tr("models.advanced")
         _fetch_advanced_button.toggle_mode = true
         _fetch_advanced_button.pressed.connect(_on_fetch_advanced_toggled)
         add_col.add_child(_fetch_advanced_button)
@@ -598,17 +757,17 @@ func _build_models_surface() -> Control:
         var fetch_row := HBoxContainer.new()
         fetch_row.add_theme_constant_override("separation", _k("space_s"))
         _fetch_input = LineEdit.new()
-        _fetch_input.placeholder_text = "https://…/model.gguf · hf:repo/file — pull a GGUF from anywhere"
+        _fetch_input.placeholder_text = _tr("models.fetch.placeholder")
         _fetch_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         _fetch_input.editable = false
         fetch_row.add_child(_fetch_input)
         _fetch_button = Button.new()
-        _fetch_button.text = "Fetch"
+        _fetch_button.text = _tr("models.fetch")
         _fetch_button.disabled = true
         _fetch_button.pressed.connect(_on_fetch_pressed)
         fetch_row.add_child(_fetch_button)
         _fetch_cancel_button = Button.new()
-        _fetch_cancel_button.text = "Cancel"
+        _fetch_cancel_button.text = _tr("common.cancel")
         _fetch_cancel_button.disabled = true
         _fetch_cancel_button.pressed.connect(_on_fetch_cancel_pressed)
         fetch_row.add_child(_fetch_cancel_button)
@@ -634,13 +793,13 @@ func _build_models_surface() -> Control:
         var empty_col := VBoxContainer.new()
         empty_col.add_theme_constant_override("separation", _k("space_xs"))
         var empty_title := Label.new()
-        empty_title.text = "No models discovered"
+        empty_title.text = _tr("models.empty.title")
         empty_title.add_theme_font_size_override("font_size", _k("font_size_body"))
         empty_title.add_theme_color_override("font_color", _c("text_secondary"))
         empty_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
         empty_col.add_child(empty_title)
         _models_empty_note = Label.new()
-        _models_empty_note.text = "No models yet — click Add local models… and pick GGUF files from your disk (or Add folder…)."
+        _models_empty_note.text = _tr("models.empty.note")
         _models_empty_note.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _models_empty_note.add_theme_color_override("font_color", _c("text_muted"))
         _models_empty_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -651,7 +810,7 @@ func _build_models_surface() -> Control:
         _models_empty_center = empty
 
         _models_status_label = Label.new()
-        _models_status_label.text = "model actions: none yet"
+        _models_status_label.text = _tr("models.status.idle")
         _models_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _models_status_label.add_theme_color_override("font_color", _c("text_muted"))
         _models_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -663,8 +822,8 @@ func _build_settings_surface() -> Control:
         var surface := VBoxContainer.new()
         surface.add_theme_constant_override("separation", _k("space_m"))
         surface.add_child(_surface_header(
-                "Settings",
-                "Global behaviour and appearance — the effective values, honestly."
+                _tr("settings.title"),
+                _tr("settings.subtitle")
         ))
         _settings_scroll = ScrollContainer.new()
         _settings_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -676,20 +835,52 @@ func _build_settings_surface() -> Control:
         _settings_scroll.add_child(column)
         surface.add_child(_settings_scroll)
 
-        column.add_child(_setting_row("Theme", "canon_workbench_theme@0.1 · dark — the only admitted theme"))
-        column.add_child(_setting_row("Language", "English · localisation opens on its own wb row"))
+        column.add_child(_setting_row(_tr("settings.theme"), _tr("settings.theme.value")))
+        column.add_child(_setting_row(_tr("settings.language"), _tr("settings.language.value")))
+        column.add_child(_build_interface_section())
         _settings_gateway_value = _setting_value_label(
-                "offline — the proof/static form (no gateway dialled)"
+                _tr("settings.gateway.offline")
         )
-        column.add_child(_setting_row_with_value("Gateway", _settings_gateway_value))
+        column.add_child(_setting_row_with_value(_tr("settings.gateway"), _settings_gateway_value))
         _settings_backend_value = _setting_value_label(
-                "none observed yet — llama.cpp rides the gateway (chat.run's backend note)"
+                _tr("settings.backend.none")
         )
-        column.add_child(_setting_row_with_value("Backend", _settings_backend_value))
+        column.add_child(_setting_row_with_value(_tr("settings.backend"), _settings_backend_value))
         column.add_child(_launch_settings_section())
-        column.add_child(_setting_row("Simulation", "seam proven (wb-1) · the surface opens on its wb row"))
-        column.add_child(_setting_row("Keyboard & focus", "tab order + visible focus from the theme tokens"))
+        column.add_child(_setting_row(_tr("settings.simulation"), _tr("settings.simulation.value")))
+        column.add_child(_setting_row(_tr("settings.keyboard"), _tr("settings.keyboard.value")))
         return surface
+
+
+func _build_interface_section() -> Control:
+        # ux-1 — the Interface row: the reduced-motion setting (LAW §15's
+        # motion contract made visible and REVERSIBLE; applied immediately,
+        # persisted UI-local in workbench/runtime/ui_state.json — never a
+        # backend concern, never a gateway call).
+        var card := PanelContainer.new()
+        var col := VBoxContainer.new()
+        col.add_theme_constant_override("separation", _k("space_s"))
+        card.add_child(col)
+        var title := Label.new()
+        title.text = _tr("settings.interface")
+        title.add_theme_font_size_override("font_size", _k("font_size_section_title"))
+        title.add_theme_color_override("font_color", _c("text_primary"))
+        col.add_child(title)
+        _reduced_motion_check = CheckBox.new()
+        _reduced_motion_check.text = _tr("settings.reduced_motion")
+        _reduced_motion_check.button_pressed = _motion_reduced
+        _reduced_motion_check.toggled.connect(_on_reduced_motion_toggled)
+        col.add_child(_reduced_motion_check)
+        return card
+
+
+func _on_reduced_motion_toggled(pressed: bool) -> void:
+        _motion_reduced = pressed
+        _save_ui_state()
+        if _motion_reduced:
+                _stop_busy_pulse()  # the static equivalent: steady dot + label
+        elif _busy_row != null and _busy_row.visible:
+                _start_busy_pulse()  # re-arm the pulse the reduced mode parked
 
 
 func _launch_settings_section() -> Control:
@@ -702,53 +893,53 @@ func _launch_settings_section() -> Control:
         card.add_child(col)
 
         var title := Label.new()
-        title.text = "llama.cpp launch (managed)"
+        title.text = _tr("settings.launch.title")
         title.add_theme_font_size_override("font_size", _k("font_size_section_title"))
         title.add_theme_color_override("font_color", _c("text_primary"))
         col.add_child(title)
         var note := Label.new()
-        note.text = "The managed spawn's own flags — saved values apply at the NEXT model.load; a LIVE server keeps its flags until unloaded."
+        note.text = _tr("settings.launch.note")
         note.add_theme_font_size_override("font_size", _k("font_size_secondary"))
         note.add_theme_color_override("font_color", _c("text_secondary"))
         note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
         col.add_child(note)
 
         _llama_exe_edit = LineEdit.new()
-        _llama_exe_edit.placeholder_text = "auto — workbench/runtime/llama.cpp, then PATH"
-        col.add_child(_input_row("llama-server executable", _llama_exe_edit))
+        _llama_exe_edit.placeholder_text = _tr("settings.launch.exe.placeholder")
+        col.add_child(_input_row(_tr("settings.launch.exe"), _llama_exe_edit))
 
         _ctx_spin = _spin_box(512.0, 2097152.0, 512.0, 8192.0)
-        col.add_child(_input_row("Context window (-c)", _ctx_spin))
+        col.add_child(_input_row(_tr("settings.launch.ctx"), _ctx_spin))
         _ngl_spin = _spin_box(0.0, 999.0, 1.0, 999.0)
-        col.add_child(_input_row("GPU layers (-ngl)", _ngl_spin))
+        col.add_child(_input_row(_tr("settings.launch.ngl"), _ngl_spin))
 
         _fa_option = OptionButton.new()
         for form in FA_FORMS:
                 _fa_option.add_item(form)
         _fa_option.selected = FA_FORMS.find("on")
-        col.add_child(_input_row("Flash attention (-fa)", _fa_option))
+        col.add_child(_input_row(_tr("settings.launch.fa"), _fa_option))
 
         _jinja_check = CheckBox.new()
         _jinja_check.button_pressed = true
-        col.add_child(_input_row("Chat template (--jinja)", _jinja_check))
+        col.add_child(_input_row(_tr("settings.launch.jinja"), _jinja_check))
         _no_webui_check = CheckBox.new()
         _no_webui_check.button_pressed = true
-        col.add_child(_input_row("No web UI (--no-webui)", _no_webui_check))
+        col.add_child(_input_row(_tr("settings.launch.no_webui"), _no_webui_check))
 
-        col.add_child(_caption("SAMPLER DEFAULTS"))
+        col.add_child(_caption(_tr("settings.launch.sampler")))
         _temp_spin = _spin_box(0.0, 2.0, 0.05, 0.8)
-        col.add_child(_input_row("Temperature (--temp)", _temp_spin))
+        col.add_child(_input_row(_tr("settings.launch.temp"), _temp_spin))
         _topk_spin = _spin_box(0.0, 10000.0, 1.0, 40.0)
-        col.add_child(_input_row("Top-K (--top-k)", _topk_spin))
+        col.add_child(_input_row(_tr("settings.launch.topk"), _topk_spin))
         _topp_spin = _spin_box(0.0, 1.0, 0.01, 0.95)
-        col.add_child(_input_row("Top-P (--top-p)", _topp_spin))
+        col.add_child(_input_row(_tr("settings.launch.topp"), _topp_spin))
         _minp_spin = _spin_box(0.0, 1.0, 0.01, 0.05)
-        col.add_child(_input_row("Min-P (--min-p)", _minp_spin))
+        col.add_child(_input_row(_tr("settings.launch.minp"), _minp_spin))
         _repeat_spin = _spin_box(0.0, 4.0, 0.05, 1.1)
-        col.add_child(_input_row("Repeat penalty (--repeat-penalty)", _repeat_spin))
+        col.add_child(_input_row(_tr("settings.launch.repeat"), _repeat_spin))
 
         _advanced_button = Button.new()
-        _advanced_button.text = "Advanced — extra flags and the command preview"
+        _advanced_button.text = _tr("settings.launch.advanced")
         _advanced_button.toggle_mode = true
         _advanced_button.pressed.connect(_on_advanced_toggled)
         col.add_child(_advanced_button)
@@ -756,10 +947,10 @@ func _launch_settings_section() -> Control:
         _advanced_box.visible = false
         _advanced_box.add_theme_constant_override("separation", _k("space_xs"))
         _extra_edit = LineEdit.new()
-        _extra_edit.placeholder_text = "--threads 8 --mlock — extra llama-server flags, verbatim"
-        _advanced_box.add_child(_input_row("Extra flags", _extra_edit))
+        _extra_edit.placeholder_text = _tr("settings.launch.extra.placeholder")
+        _advanced_box.add_child(_input_row(_tr("settings.launch.extra"), _extra_edit))
         _preview_label = Label.new()
-        _preview_label.text = "the command the NEXT managed spawn would run — arrives with the gateway's settings document"
+        _preview_label.text = _tr("settings.launch.preview")
         _preview_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _preview_label.add_theme_color_override("font_color", _c("text_muted"))
         _preview_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -767,14 +958,14 @@ func _launch_settings_section() -> Control:
         col.add_child(_advanced_box)
 
         _settings_status_label = Label.new()
-        _settings_status_label.text = "the settings ride the gateway — start scripts/workbench_launch.py"
+        _settings_status_label.text = _tr("settings.status.offline")
         _settings_status_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _settings_status_label.add_theme_color_override("font_color", _c("text_muted"))
         _settings_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
         col.add_child(_settings_status_label)
 
         _settings_save_button = Button.new()
-        _settings_save_button.text = "Save launch settings"
+        _settings_save_button.text = _tr("settings.save")
         _settings_save_button.disabled = true
         _settings_save_button.pressed.connect(_on_settings_save_pressed)
         col.add_child(_settings_save_button)
@@ -842,7 +1033,7 @@ func _build_status_bar() -> Control:
         bar.add_child(row)
 
         var legend := Label.new()
-        legend.text = "Statuses CANONICAL · OBSERVED · DERIVED · UNKNOWN · HIDDEN · VISUAL are displayed, never collapsed"
+        legend.text = _tr("status.legend")
         legend.add_theme_font_size_override("font_size", _k("font_size_caption"))
         legend.add_theme_color_override("font_color", _c("text_secondary"))
         legend.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -851,21 +1042,21 @@ func _build_status_bar() -> Control:
         row.add_child(legend)
 
         _gateway_state_label = Label.new()
-        _gateway_state_label.text = "gateway OFFLINE"
+        _gateway_state_label.text = _tr("status.gateway.offline")
         _gateway_state_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         _gateway_state_label.add_theme_color_override("font_color", _c("text_muted"))
         _gateway_state_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
         row.add_child(_gateway_state_label)
 
         var seam := Label.new()
-        seam.text = "seam wb-1 · PROVEN"
+        seam.text = _tr("status.seam")
         seam.add_theme_font_size_override("font_size", _k("font_size_caption"))
         seam.add_theme_color_override("font_color", _c("status_success"))
         seam.size_flags_vertical = Control.SIZE_SHRINK_CENTER
         row.add_child(seam)
 
         var engine := Label.new()
-        engine.text = "Redot 26.2 LTS"
+        engine.text = _tr("status.engine")
         engine.add_theme_font_size_override("font_size", _k("font_size_caption"))
         engine.add_theme_color_override("font_color", _c("text_muted"))
         engine.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -880,6 +1071,29 @@ func _on_surface_selected(key: String) -> void:
         _show_surface(key)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+        # ux-1 — the keyboard baseline (LAW §15): Escape cancels the current
+        # transient action (a LIVE generation — the only transient this
+        # shell owns so far), Ctrl+. stops it from anywhere. Both are
+        # honest no-ops when nothing is generating — never a fake action.
+        # Native surfaces (the OS file dialogs) consume their own Esc first.
+        if event is InputEventKey and event.pressed and not event.echo:
+                var key_event: InputEventKey = event
+                var is_escape := key_event.keycode == KEY_ESCAPE
+                var is_ctrl_period := (
+                        key_event.keycode == KEY_PERIOD
+                        and key_event.ctrl_pressed
+                )
+                if (is_escape or is_ctrl_period) and _active_execution != "":
+                        _on_stop_pressed()
+                        get_viewport().set_input_as_handled()
+                        return
+                if is_ctrl_period and _active_execution == "":
+                        # Discoverable, never silent: the shortcut is wired
+                        # even idle — nothing to stop is a no-op, not an error.
+                        get_viewport().set_input_as_handled()
+
+
 func _show_surface(key: String) -> void:
         _active_surface = key
         for surface_key in SURFACES:
@@ -892,10 +1106,36 @@ func _show_surface(key: String) -> void:
         if key == "models" and _client != null:
                 _refresh_models()
         # The active axis owns the pressed state (the button group keeps the
-        # exclusivity) and the keyboard focus (§13: visible focus, logical order).
+        # exclusivity).
         if _nav_buttons.has(key):
                 _nav_buttons[key].button_pressed = true
-                _nav_buttons[key].grab_focus()
+        # ux-1 — the task-aware focus entry (LAW §15): the surface switch
+        # restores MEANINGFUL focus — the composer on Chat, the refresh
+        # action on Models, the first launch field on Settings — deferred
+        # one frame so the visibility settles; an offline (disabled) entry
+        # control leaves focus where it is (the honest no-op).
+        _focus_surface_entry.call_deferred(key)
+
+
+func _focus_surface_entry(key: String) -> void:
+        match key:
+                "chat":
+                        if _composer_input != null and _composer_input.editable:
+                                _composer_input.grab_focus()
+                "models":
+                        if _models_refresh_button != null and not _models_refresh_button.disabled:
+                                _models_refresh_button.grab_focus()
+                "settings":
+                        if _llama_exe_edit != null:
+                                _llama_exe_edit.grab_focus()
+                "observatory":
+                        # The slice is read-only (LAW §15: Observatory → the
+                        # query or the preserved selection) — no interactive
+                        # entry exists yet; focus stays where it is (the
+                        # honest no-op, never a fabricated target).
+                        pass
+                _:
+                        pass  # an unknown surface never invents a focus target
 
 
 # --- the live circuit (wb-7 — no network in the proof/static form) -----------
@@ -920,7 +1160,7 @@ func _resolve_gateway_url(args: PackedStringArray) -> String:
 
 func _start_live_circuit(args: PackedStringArray) -> void:
         _gateway_url = _resolve_gateway_url(args)
-        _settings_gateway_value.text = "offline — probing %s" % _gateway_url
+        _settings_gateway_value.text = _tr("settings.gateway.probing") % _gateway_url
         _client = GATEWAY_CLIENT_SCRIPT.new()
         _client.configure(_gateway_url)
         _client.operation_answered.connect(_on_operation_answered)
@@ -951,19 +1191,19 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if tag == "app-status":
                 if status == "OK":
-                        _set_badge("CANONSIM · GATEWAY LIVE", true)
-                        _gateway_state_label.text = "gateway LIVE · %s" % _gateway_url
+                        _set_badge(_tr("app.badge.gateway_live"), true)
+                        _gateway_state_label.text = _tr("status.gateway.live") % _gateway_url
                         _gateway_state_label.add_theme_color_override(
                                 "font_color", _c("status_success")
                         )
-                        _settings_gateway_value.text = "LIVE · %s" % _gateway_url
+                        _settings_gateway_value.text = _tr("settings.gateway.live") % _gateway_url
                         _client.call_operation(
                                 "session-create", "session.create", {},
                                 "", "wb-shell-session-%d" % OS.get_process_id()
                         )
                 else:
                         _note_system(
-                                "app.status refused: %s %s" % [
+                                _tr("chat.note.app_refused") % [
                                         _text(document.get("rejection")),
                                         _reason_of(document),
                                 ]
@@ -975,10 +1215,10 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                         _session_id = _text(result.get("session_id"))
                         _session_live = _session_id != ""
                         if _session_live:
-                                _set_badge("CANONSIM · SESSION LIVE", true)
-                                _empty_note.text = "Session live over the gateway — nothing fabricated, ever."
+                                _set_badge(_tr("app.badge.session_live"), true)
+                                _empty_note.text = _tr("chat.empty.note_live")
                                 _composer_input.text = ""
-                                _composer_input.placeholder_text = "Message… (Enter to send)"
+                                _composer_input.placeholder_text = _tr("chat.composer.placeholder")
                                 _composer_input.editable = true
                                 _send_button.disabled = false
                                 _update_models_enablement()
@@ -990,7 +1230,7 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                                 _request_backend_settings()
                 else:
                         _note_system(
-                                "session.create refused: %s %s" % [
+                                _tr("chat.note.session_refused") % [
                                         _text(document.get("rejection")),
                                         _reason_of(document),
                                 ]
@@ -1016,7 +1256,7 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 return
         if tag.begins_with("fetch-cancel-"):
                 if status != "OK":
-                        _fetch_status_label.text = "run.cancel refused: %s %s" % [
+                        _fetch_status_label.text = _tr("chat.note.run_cancel_refused") % [
                                 _text(document.get("rejection")), _reason_of(document)
                         ]
                 return
@@ -1028,7 +1268,7 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 return
         if tag.begins_with("import-cancel-"):
                 if status != "OK":
-                        _fetch_status_label.text = "run.cancel refused: %s %s" % [
+                        _fetch_status_label.text = _tr("chat.note.run_cancel_refused") % [
                                 _text(document.get("rejection")), _reason_of(document)
                         ]
                 return
@@ -1057,13 +1297,13 @@ func _on_operation_answered(tag: String, document: Dictionary) -> void:
                 # observation; the run's terminal state lands via the poll.
                 if status != "OK":
                         _note_system(
-                                "run.cancel refused: %s %s" % [
+                                _tr("chat.note.run_cancel_refused") % [
                                         _text(document.get("rejection")),
                                         _reason_of(document),
                                 ]
                         )
                 return
-        _note_system("unexpected answer for %s (status %s)" % [tag, status])
+        _note_system(_tr("chat.note.unexpected") % [tag, status])
 
 
 func _on_chat_send_answered(_tag: String, document: Dictionary) -> void:
@@ -1075,12 +1315,12 @@ func _on_chat_send_answered(_tag: String, document: Dictionary) -> void:
                 _poll_timer.start()
                 _set_busy(true)
                 _note_system(
-                        "chat dispatched (run %s · polling run.get)" % _short(_active_execution)
+                        _tr("chat.note.dispatched") % _short(_active_execution)
                 )
                 return
         if status == "UNKNOWN":
                 _note_system(
-                        "chat dispatch OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                        _tr("chat.note.outcome_unknown") % _reason_of(document)
                 )
                 _set_busy(false)
                 return
@@ -1105,7 +1345,7 @@ func _on_run_get_answered(document: Dictionary) -> void:
                 _set_busy(false)
                 _maybe_stop_poll_timer()
                 _note_system(
-                        "run.get refused: %s %s" % [
+                        _tr("chat.note.get_refused") % [
                                 _text(document.get("rejection")),
                                 _reason_of(document),
                         ]
@@ -1130,7 +1370,7 @@ func _on_run_get_answered(document: Dictionary) -> void:
                                 run_result.get("backend", {}) if run_result.get("backend") is Dictionary else {}
                         )
                         _note_system(
-                                "finish %s · backend %s" % [
+                                _tr("chat.note.finish") % [
                                         _text(run_result.get("finish_reason")),
                                         _backend_note(backend),
                                 ]
@@ -1138,48 +1378,48 @@ func _on_run_get_answered(document: Dictionary) -> void:
                         _observe_backend(backend)
                 "FAILED":
                         _note_system(
-                                "run FAILED · %s" % _text(result.get("failure_type"))
+                                _tr("chat.note.run_failed") % _text(result.get("failure_type"))
                         )
                 "CANCELED":
-                        _note_system("run canceled (the truthful terminal)")
+                        _note_system(_tr("chat.note.run_canceled"))
                 "FAILED_TO_CANCEL":
                         # §12.3: the late result was recorded; the truth is the
                         # failed cancel. Both are shown, never merged.
                         _note_system(
-                                "cancel failed — the late result was recorded and shown"
+                                _tr("chat.note.cancel_failed")
                         )
                         _append_message("assistant", _text(run_result.get("content")))
                 "UNKNOWN":
-                        _note_system("run OUTCOME UNKNOWN — the observation stands, no blind retry")
+                        _note_system(_tr("chat.note.run_unknown"))
                 _:
-                        _note_system("run terminal state %s (unmodelled — shown, never collapsed)" % state)
+                        _note_system(_tr("chat.note.run_unmodelled") % state)
 
 
 func _backend_note(backend: Dictionary) -> String:
         if backend.is_empty():
-                return "unavailable (no backend identity in the run result)"
+                return _tr("chat.backend.unavailable")
         if _text(backend.get("probe")) == "unavailable":
-                return "probe unavailable — the identity not observed (honest note)"
+                return _tr("chat.backend.probe_unavailable")
         var model := _text(backend.get("model"))
         var build := _text(backend.get("build"))
         if model == "":
-                model = "unknown model"
+                model = _tr("chat.backend.unknown_model")
         if build == "":
-                build = "unknown build"
+                build = _tr("chat.backend.unknown_build")
         return "%s · %s" % [model, build]
 
 
 func _observe_backend(backend: Dictionary) -> void:
         if backend.is_empty():
                 _settings_backend_value.text = (
-                        "no backend identity in the run result (shown, never guessed)"
+                        _tr("chat.backend.no_identity")
                 )
         elif _text(backend.get("probe")) == "unavailable":
                 _settings_backend_value.text = (
-                        "llama.cpp chat OBSERVED · identity probe unavailable (honest)"
+                        _tr("chat.backend.observed_probe")
                 )
         else:
-                _settings_backend_value.text = "OBSERVED · %s" % _backend_note(backend)
+                _settings_backend_value.text = _tr("chat.backend.observed") % _backend_note(backend)
 
 
 func _on_poll_tick() -> void:
@@ -1223,54 +1463,54 @@ func _on_poll_tick() -> void:
 
 func _on_transport_failed(tag: String, error: String) -> void:
         if tag == "app-status" or tag == "session-create":
-                _set_badge("CANONSIM · NOT CONNECTED", false)
-                _gateway_state_label.text = "gateway unreachable (%s)" % error
-                _empty_note.text = "Gateway unreachable — start Workbench.bat (one double-click) or scripts/workbench_launch.py (%s)." % error
-                _settings_gateway_value.text = "unreachable · %s" % _gateway_url
+                _set_badge(_tr("app.badge.not_connected"), false)
+                _gateway_state_label.text = _tr("status.gateway.unreachable") % error
+                _empty_note.text = _tr("chat.empty.unreachable") % error
+                _settings_gateway_value.text = _tr("settings.gateway.unreachable") % _gateway_url
                 return
         if tag == "model-list" or tag == "model-states":
                 # wb-11's honest failure note (KI#96's every-entry rescan
                 # owns the retry — the next surface entry re-arms by
                 # itself, the empty list never sticks silently).
                 _models_status_label.text = (
-                        "gateway unreachable on %s (%s) — Retry with Refresh" % [tag, error]
+                        _tr("models.status.unreachable") % [tag, error]
                 )
                 return
         if tag == "backend-settings":
-                _settings_status_label.text = "backend.settings unreachable (%s) — the values stay local until the gateway answers" % error
+                _settings_status_label.text = _tr("settings.status.unreachable") % error
                 return
         if tag.begins_with("settings-save-"):
-                _settings_status_label.text = "settings save transport failure (%s) — nothing sent, safe to retry" % error
+                _settings_status_label.text = _tr("settings.status.save_transport") % error
                 return
         if tag.begins_with("fetch-start-"):
                 _reset_fetch_controls()
-                _fetch_status_label.text = "fetch dispatch transport failure (%s) — nothing sent, safe to retry" % error
+                _fetch_status_label.text = _tr("fetch.status.dispatch_transport") % error
                 return
         if tag.begins_with("import-start-"):
                 _reset_import_controls()
-                _fetch_status_label.text = "import dispatch transport failure (%s) — nothing sent, safe to retry" % error
+                _fetch_status_label.text = _tr("fetch.status.import_dispatch_transport") % error
                 return
         if tag.begins_with("import-get-"):
                 _import_poll_failures += 1
                 if _import_poll_failures >= MAX_POLL_FAILURES:
                         _import_execution = ""
                         _reset_import_controls()
-                        _fetch_status_label.text = "import poll abandoned after %d transport failures (%s)" % [MAX_POLL_FAILURES, error]
+                        _fetch_status_label.text = _tr("fetch.status.import_abandoned") % [MAX_POLL_FAILURES, error]
                         _maybe_stop_poll_timer()
                 return
         if tag.begins_with("import-cancel-"):
-                _fetch_status_label.text = "run.cancel transport failure (%s) — the poll continues" % error
+                _fetch_status_label.text = _tr("chat.note.cancel_transport") % error
                 return
         if tag.begins_with("fetch-get-"):
                 _fetch_poll_failures += 1
                 if _fetch_poll_failures >= MAX_POLL_FAILURES:
                         _fetch_execution = ""
                         _reset_fetch_controls()
-                        _fetch_status_label.text = "fetch poll abandoned after %d transport failures (%s)" % [MAX_POLL_FAILURES, error]
+                        _fetch_status_label.text = _tr("fetch.status.fetch_abandoned") % [MAX_POLL_FAILURES, error]
                         _maybe_stop_poll_timer()
                 return
         if tag.begins_with("fetch-cancel-"):
-                _fetch_status_label.text = "run.cancel transport failure (%s) — the poll continues" % error
+                _fetch_status_label.text = _tr("chat.note.cancel_transport") % error
                 return
         # wb-11: the POLL arms first — "model-load-get-N" also begins with
         # "model-load-", the longer prefix owns the match.
@@ -1280,20 +1520,20 @@ func _on_transport_failed(tag: String, error: String) -> void:
                 _load_poll_failures += 1
                 if _load_poll_failures >= MAX_POLL_FAILURES:
                         _load_execution = ""
-                        _models_status_label.text = "load poll abandoned after %d transport failures (%s) — the row rests at its observed truth" % [MAX_POLL_FAILURES, error]
+                        _models_status_label.text = _tr("models.status.load_abandoned") % [MAX_POLL_FAILURES, error]
                         _maybe_stop_poll_timer()
                 return
         if tag.begins_with("model-unload-get-"):
                 _unload_poll_failures += 1
                 if _unload_poll_failures >= MAX_POLL_FAILURES:
                         _unload_execution = ""
-                        _models_status_label.text = "unload poll abandoned after %d transport failures (%s) — the row rests at its observed truth" % [MAX_POLL_FAILURES, error]
+                        _models_status_label.text = _tr("models.status.unload_abandoned") % [MAX_POLL_FAILURES, error]
                         _maybe_stop_poll_timer()
                 return
         if tag.begins_with("model-load-") or tag.begins_with("model-unload-"):
                 # The action never reached the gateway — the row's truth is
                 # unchanged (SELECTED/ACTIVE), the button returns honestly.
-                _models_status_label.text = "%s transport failure (%s) — the state is NOT changed, the action may be re-issued" % [tag, error]
+                _models_status_label.text = _tr("models.status.action_transport") % [tag, error]
                 _client.call_operation("model-states", "model.states", {})
                 return
         if tag.begins_with("run-get-"):
@@ -1303,7 +1543,7 @@ func _on_transport_failed(tag: String, error: String) -> void:
                         _set_busy(false)
                         _maybe_stop_poll_timer()
                         _note_system(
-                                "poll abandoned after %d transport failures (%s)" % [
+                                _tr("chat.note.poll_abandoned") % [
                                         MAX_POLL_FAILURES, error
                                 ]
                         )
@@ -1311,9 +1551,9 @@ func _on_transport_failed(tag: String, error: String) -> void:
         if tag.begins_with("run-cancel-"):
                 # The cancel request itself failed to send — the run is still
                 # in flight, the poll continues, Stop stays the honest action.
-                _note_system("run.cancel transport failure (%s) — the poll continues" % error)
+                _note_system(_tr("chat.note.cancel_transport") % error)
                 return
-        _note_system("transport failure on %s (%s)" % [tag, error])
+        _note_system(_tr("chat.note.transport") % [tag, error])
         _set_busy(false)
 
 
@@ -1331,7 +1571,7 @@ func _refresh_models() -> void:
         # the Refresh action — the routine-refresh form.
         if _client == null:
                 return
-        _models_status_label.text = "scanning the models directory…"
+        _models_status_label.text = _tr("models.status.scanning")
         _client.call_operation("model-list", "model.list", {})
         _client.call_operation("model-states", "model.states", {})
 
@@ -1339,23 +1579,23 @@ func _refresh_models() -> void:
 func _on_model_list_answered(document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if status != "OK" or not (document.get("result") is Dictionary):
-                _models_status_label.text = "model.list refused: %s %s" % [
+                _models_status_label.text = _tr("models.status.list_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 return
         var result: Dictionary = document.get("result")
         var directory_state := _text(result.get("directory_state"))
         if directory_state == "MISSING":
-                _models_empty_note.text = "The models directory is MISSING — the launcher's runtime/models folder is the default home; fetch or drop GGUF files there."
+                _models_empty_note.text = _tr("models.status.missing_dir")
         var models: Array = result.get("models", []) if result.get("models") is Array else []
         _models_root = _text(result.get("models_root"))
         if _models_root != "":
                 _open_folder_button.disabled = false
         _rebuild_models_list(models)
         if models.is_empty():
-                _models_status_label.text = "no models discovered (%s) — Add local models… above, or drop GGUF files into %s" % [directory_state, _models_root]
+                _models_status_label.text = _tr("models.status.none_found") % [directory_state, _models_root]
         else:
-                _models_status_label.text = "%d model(s) discovered · %s" % [
+                _models_status_label.text = _tr("models.status.discovered") % [
                         models.size(), directory_state
                 ]
         # (the states read is already in flight from _refresh_models —
@@ -1365,7 +1605,7 @@ func _on_model_list_answered(document: Dictionary) -> void:
 func _on_model_states_answered(document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if status != "OK" or not (document.get("result") is Dictionary):
-                _models_status_label.text = "model.states refused: %s %s" % [
+                _models_status_label.text = _tr("models.status.states_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 return
@@ -1438,8 +1678,8 @@ func _model_row_card(logical_name: String, size_bytes: int) -> Control:
         row.add_child(state_row)
 
         var action := Button.new()
-        action.text = "Load"
-        action.custom_minimum_size = Vector2(96, 0)
+        action.text = _tr("models.action.load")
+        action.custom_minimum_size = Vector2(112, 0)  # «Загрузить» — Cyrillic-safe
         action.disabled = true  # until the session + the states arrive
         row.add_child(action)
         _model_rows[logical_name] = {
@@ -1455,9 +1695,9 @@ func _apply_model_states(states: Dictionary, active: String) -> void:
                 var observed := _text(states.get(logical_name, "DISCOVERED"))
                 _set_model_row_state(logical_name, observed)
         if active != "":
-                _models_active_label.text = "active: %s" % active
+                _models_active_label.text = _tr("models.active.observed") % active
         else:
-                _models_active_label.text = "active: none observed"
+                _models_active_label.text = _tr("models.active.none")
         _update_models_enablement()
 
 
@@ -1485,16 +1725,16 @@ func _on_model_load_pressed(logical_name: String) -> void:
         if not _session_live or _client == null:
                 # wb-11: never a silent return — §18's law (the effective
                 # state is named, the owner is never left guessing).
-                _models_status_label.text = "the load action needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
+                _models_status_label.text = _tr("models.status.load_needs_live")
                 return
         var row: Dictionary = _model_rows.get(logical_name, {})
         if row.is_empty():
                 return
         var action: Button = row["action"]
         action.disabled = true
-        action.text = "LOADING…"
+        action.text = _tr("models.action.loading")
         _set_model_row_state(logical_name, "LOADING")
-        _models_status_label.text = "loading %s — dispatched as a run (the spawn/readiness walk rides the poll; the app stays live)" % logical_name
+        _models_status_label.text = _tr("models.status.loading") % logical_name
         # The dispatch tag carries the logical_name verbatim (the answer's
         # routing key); the idempotency key stays unique per action (G4).
         var tag := "model-load-%s" % logical_name
@@ -1507,16 +1747,16 @@ func _on_model_load_pressed(logical_name: String) -> void:
 
 func _on_model_unload_pressed(logical_name: String) -> void:
         if not _session_live or _client == null:
-                _models_status_label.text = "the unload action needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
+                _models_status_label.text = _tr("models.status.unload_needs_live")
                 return
         var row: Dictionary = _model_rows.get(logical_name, {})
         if row.is_empty():
                 return
         var action: Button = row["action"]
         action.disabled = true
-        action.text = "UNLOADING…"
+        action.text = _tr("models.action.unloading")
         _set_model_row_state(logical_name, "UNLOADING")
-        _models_status_label.text = "unloading %s — dispatched as a run (the graceful stop rides the poll)" % logical_name
+        _models_status_label.text = _tr("models.status.unloading") % logical_name
         var tag := "model-unload-%s" % logical_name
         var request_id := _next_request_id(tag)
         _client.call_operation(
@@ -1539,9 +1779,9 @@ func _on_model_load_answered(logical_name: String, document: Dictionary) -> void
         if status == "UNKNOWN":
                 # §12.1: the dispatch outcome is UNKNOWN (never blindly
                 # retried) — the row rests at its observed truth.
-                _models_status_label.text = "model.load dispatch OUTCOME UNKNOWN (%s) — the state is NOT changed; Load may be re-issued deliberately" % _reason_of(document)
+                _models_status_label.text = _tr("models.status.load_unknown") % _reason_of(document)
         else:
-                _models_status_label.text = "model.load refused: %s %s" % [
+                _models_status_label.text = _tr("models.status.load_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
         _client.call_operation("model-states", "model.states", {})
@@ -1558,9 +1798,9 @@ func _on_model_unload_answered(logical_name: String, document: Dictionary) -> vo
                 _poll_timer.start()
                 return
         if status == "UNKNOWN":
-                _models_status_label.text = "model.unload dispatch OUTCOME UNKNOWN (%s) — the state is NOT changed; Unload may be re-issued deliberately" % _reason_of(document)
+                _models_status_label.text = _tr("models.status.unload_unknown") % _reason_of(document)
         else:
-                _models_status_label.text = "model.unload refused: %s %s" % [
+                _models_status_label.text = _tr("models.status.unload_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
         _client.call_operation("model-states", "model.states", {})
@@ -1577,7 +1817,7 @@ func _on_model_load_get_answered(document: Dictionary) -> void:
         if status != "OK":
                 _load_execution = ""
                 _maybe_stop_poll_timer()
-                _models_status_label.text = "run.get refused: %s %s" % [
+                _models_status_label.text = _tr("chat.note.get_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 _client.call_operation("model-states", "model.states", {})
@@ -1587,7 +1827,7 @@ func _on_model_load_get_answered(document: Dictionary) -> void:
                 return
         var result: Dictionary = document.get("result")
         if not bool(result.get("terminal", false)):
-                _models_status_label.text = "loading %s — the run is %s (the managed spawn is minutes-class, observed live)" % [
+                _models_status_label.text = _tr("models.status.loading_walk") % [
                         _load_model, _text(result.get("state"))
                 ]
                 return
@@ -1598,18 +1838,18 @@ func _on_model_load_get_answered(document: Dictionary) -> void:
         match run_state:
                 "COMPLETED":
                         _set_model_row_state(logical_name, "ACTIVE")
-                        _models_active_label.text = "active: %s" % logical_name
-                        _models_status_label.text = "%s ACTIVE — the chat surface is ready" % logical_name
+                        _models_active_label.text = _tr("models.active.observed") % logical_name
+                        _models_status_label.text = _tr("models.status.active_ready") % logical_name
                 "FAILED":
                         var note := _text(result.get("failure_type"))
                         var cause := _first_diagnostic(result)
                         if cause.length() > MODEL_LOAD_NOTE_MAX_LENGTH:
                                 cause = cause.substr(0, MODEL_LOAD_NOTE_MAX_LENGTH) + "…"
-                        _models_status_label.text = "load FAILED · %s — %s" % [note, cause]
+                        _models_status_label.text = _tr("models.status.load_failed") % [note, cause]
                 "CANCELED":
-                        _models_status_label.text = "load canceled (the truthful terminal)"
+                        _models_status_label.text = _tr("models.status.load_canceled")
                 _:
-                        _models_status_label.text = "load terminal state %s (unmodelled — shown, never collapsed)" % run_state
+                        _models_status_label.text = _tr("models.status.load_unmodelled") % run_state
         _maybe_stop_poll_timer()
         _client.call_operation("model-states", "model.states", {})
         _update_models_enablement()
@@ -1623,7 +1863,7 @@ func _on_model_unload_get_answered(document: Dictionary) -> void:
         if status != "OK":
                 _unload_execution = ""
                 _maybe_stop_poll_timer()
-                _models_status_label.text = "run.get refused: %s %s" % [
+                _models_status_label.text = _tr("chat.note.get_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 _client.call_operation("model-states", "model.states", {})
@@ -1633,7 +1873,7 @@ func _on_model_unload_get_answered(document: Dictionary) -> void:
                 return
         var result: Dictionary = document.get("result")
         if not bool(result.get("terminal", false)):
-                _models_status_label.text = "unloading %s — the run is %s" % [
+                _models_status_label.text = _tr("models.status.unloading_walk") % [
                         _unload_model, _text(result.get("state"))
                 ]
                 return
@@ -1643,18 +1883,18 @@ func _on_model_unload_get_answered(document: Dictionary) -> void:
         var run_state := _text(result.get("state"))
         match run_state:
                 "COMPLETED":
-                        _models_status_label.text = "%s EVICTED — Load again to re-select" % logical_name
+                        _models_status_label.text = _tr("models.status.evicted") % logical_name
                 "FAILED":
                         var cause := _first_diagnostic(result)
                         if cause.length() > MODEL_LOAD_NOTE_MAX_LENGTH:
                                 cause = cause.substr(0, MODEL_LOAD_NOTE_MAX_LENGTH) + "…"
-                        _models_status_label.text = "unload FAILED · %s — %s (the observed truth stays ACTIVE)" % [
+                        _models_status_label.text = _tr("models.status.unload_failed") % [
                                 _text(result.get("failure_type")), cause
                         ]
                 "CANCELED":
-                        _models_status_label.text = "unload canceled (the truthful terminal)"
+                        _models_status_label.text = _tr("models.status.unload_canceled")
                 _:
-                        _models_status_label.text = "unload terminal state %s (unmodelled — shown, never collapsed)" % run_state
+                        _models_status_label.text = _tr("models.status.unload_unmodelled") % run_state
         _maybe_stop_poll_timer()
         _client.call_operation("model-states", "model.states", {})
         _update_models_enablement()
@@ -1671,11 +1911,11 @@ func _update_models_enablement() -> void:
                 if state == "LOADING" or state == "UNLOADING":
                         continue  # the in-flight action owns the button
                 if state == "ACTIVE":
-                        action.text = "Unload"
+                        action.text = _tr("models.action.unload")
                         action.disabled = not _session_live
                         _rebind_action(logical_name, "_on_model_unload_pressed")
                 else:
-                        action.text = "Load"
+                        action.text = _tr("models.action.load")
                         var loadable := state in MODEL_ACTION_STATES
                         action.disabled = not _session_live or not loadable
                         _rebind_action(logical_name, "_on_model_load_pressed")
@@ -1718,7 +1958,7 @@ func _request_backend_settings() -> void:
 func _on_backend_settings_answered(document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if status != "OK" or not (document.get("result") is Dictionary):
-                _settings_status_label.text = "backend.settings refused: %s %s" % [
+                _settings_status_label.text = _tr("settings.status.settings_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 return
@@ -1747,10 +1987,10 @@ func _populate_settings_fields(result: Dictionary) -> void:
         var preview := _text(result.get("command_preview"))
         if preview != "":
                 _preview_label.text = preview
-        var suffix := " — effective at the next model.load"
+        var suffix := _tr("settings.status.effective_next")
         if bool(result.get("managed_live")):
-                suffix = " — a LIVE server keeps its flags until unloaded"
-        _settings_status_label.text = "effective values shown%s" % suffix
+                suffix = _tr("settings.status.effective_live")
+        _settings_status_label.text = _tr("settings.status.effective") % suffix
 
 
 func _on_settings_save_pressed() -> void:
@@ -1770,7 +2010,7 @@ func _on_settings_save_pressed() -> void:
                 "repeat_penalty": float(_repeat_spin.value),
                 "extra_args": _extra_edit.text.strip_edges(),
         }
-        _settings_status_label.text = "saving…"
+        _settings_status_label.text = _tr("settings.status.saving")
         var request_id := _next_request_id("settings-save")
         _client.call_operation(
                 request_id, "backend.settings.update", document,
@@ -1782,12 +2022,12 @@ func _on_settings_saved_answered(document: Dictionary) -> void:
         var status := _text(document.get("status"))
         if status == "OK" and document.get("result") is Dictionary:
                 _populate_settings_fields(document.get("result"))
-                _settings_status_label.text = "saved — the values apply at the next model.load (a LIVE server keeps its flags until unloaded)"
+                _settings_status_label.text = _tr("settings.status.saved")
                 return
         if status == "UNKNOWN":
-                _settings_status_label.text = "settings save OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                _settings_status_label.text = _tr("settings.status.save_unknown") % _reason_of(document)
                 return
-        _settings_status_label.text = "backend.settings.update refused: %s %s" % [
+        _settings_status_label.text = _tr("settings.status.save_refused") % [
                 _text(document.get("rejection")), _reason_of(document)
         ]
 
@@ -1806,11 +2046,11 @@ func _on_fetch_pressed() -> void:
                 return
         var url_value := _fetch_input.text.strip_edges()
         if url_value == "":
-                _fetch_status_label.text = "paste a URL first — a direct link, a huggingface.co page, or hf:repo/file"
+                _fetch_status_label.text = _tr("fetch.status.url_first")
                 return
         _fetch_button.disabled = true
         _fetch_cancel_button.disabled = false
-        _fetch_status_label.text = "dispatching the fetch run…"
+        _fetch_status_label.text = _tr("fetch.status.dispatching")
         var request_id := _next_request_id("fetch-start")
         _client.call_operation(
                 request_id, "run.start",
@@ -1835,14 +2075,14 @@ func _on_fetch_start_answered(document: Dictionary) -> void:
                 var result: Dictionary = document.get("result")
                 _fetch_execution = _text(result.get("execution_id"))
                 _fetch_poll_failures = 0
-                _fetch_status_label.text = "fetching — the progress rides the run poll"
+                _fetch_status_label.text = _tr("fetch.status.fetching")
                 _poll_timer.start()
                 return
         _reset_fetch_controls()
         if status == "UNKNOWN":
-                _fetch_status_label.text = "fetch dispatch OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                _fetch_status_label.text = _tr("fetch.status.outcome_unknown") % _reason_of(document)
                 return
-        _fetch_status_label.text = "model.fetch refused: %s %s" % [
+        _fetch_status_label.text = _tr("fetch.status.refused") % [
                 _text(document.get("rejection")), _reason_of(document)
         ]
 
@@ -1855,7 +2095,7 @@ func _on_fetch_get_answered(document: Dictionary) -> void:
                 _fetch_execution = ""
                 _reset_fetch_controls()
                 _maybe_stop_poll_timer()
-                _fetch_status_label.text = "run.get refused: %s %s" % [
+                _fetch_status_label.text = _tr("chat.note.get_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 return
@@ -1877,17 +2117,17 @@ func _on_fetch_get_answered(document: Dictionary) -> void:
         )
         match state:
                 "COMPLETED":
-                        _fetch_status_label.text = "fetched %s (%s) — refreshing the list" % [
+                        _fetch_status_label.text = _tr("fetch.status.fetched") % [
                                 _text(run_result.get("logical_name")),
                                 _format_size(int(run_result.get("size_bytes", 0)))
                         ]
                         _refresh_models()
                 "FAILED":
-                        _fetch_status_label.text = "fetch FAILED · %s" % _first_diagnostic(result)
+                        _fetch_status_label.text = _tr("fetch.status.failed") % _first_diagnostic(result)
                 "CANCELED":
-                        _fetch_status_label.text = "fetch canceled (the truthful terminal)"
+                        _fetch_status_label.text = _tr("fetch.status.canceled")
                 _:
-                        _fetch_status_label.text = "fetch terminal state %s (unmodelled — shown, never collapsed)" % state
+                        _fetch_status_label.text = _tr("fetch.status.unmodelled") % state
 
 
 func _fetch_progress_note(progress: Dictionary) -> String:
@@ -1895,17 +2135,17 @@ func _fetch_progress_note(progress: Dictionary) -> String:
         var downloaded := int(progress.get("downloaded_bytes", 0))
         var total_value = progress.get("total_bytes")
         if total_value == null:
-                return "downloading %s — %s (total unknown)" % [
+                return _tr("fetch.progress.unknown_total") % [
                         name_value, _format_size(downloaded)
                 ]
         var total := int(total_value)
         if total > 0:
                 var percent := int(float(downloaded) * 100.0 / float(total))
-                return "downloading %s — %d%% (%s / %s)" % [
+                return _tr("fetch.progress.percent") % [
                         name_value, percent,
                         _format_size(downloaded), _format_size(total)
                 ]
-        return "downloading %s — %s" % [name_value, _format_size(downloaded)]
+        return _tr("fetch.progress.plain") % [name_value, _format_size(downloaded)]
 
 
 func _first_diagnostic(result: Dictionary) -> String:
@@ -1913,7 +2153,7 @@ func _first_diagnostic(result: Dictionary) -> String:
                 result.get("diagnostics", []) if result.get("diagnostics") is Array else []
         )
         if diagnostics.is_empty():
-                return "no diagnostics"
+                return _tr("fetch.progress.no_diagnostics")
         var first := _text(diagnostics[0])
         if first.length() > FETCH_NOTE_MAX_LENGTH:
                 first = first.substr(0, FETCH_NOTE_MAX_LENGTH) + "…"
@@ -1950,7 +2190,12 @@ func _make_import_dialog() -> FileDialog:
         var dialog := FileDialog.new()
         dialog.access = FileDialog.ACCESS_FILESYSTEM
         dialog.use_native_dialog = true
-        dialog.filters = PackedStringArray(IMPORT_FILTERS)
+        # ux-1: the filters ride the boundary too — the OS dialog's own
+        # display strings (the registry accepts any plain file; the filter
+        # is a convenience, never a gate — wb-10's law unchanged).
+        dialog.filters = PackedStringArray([
+                _tr("models.dialog.gguf"), _tr("models.dialog.all"),
+        ])
         dialog.files_selected.connect(_on_import_files_selected)
         dialog.dir_selected.connect(_on_import_dir_selected)
         add_child(dialog)
@@ -1962,10 +2207,10 @@ func _on_add_local_pressed() -> void:
                 # wb-11: never a silent return — the note names the state
                 # (§18: the effective state is never hidden; the owner's
                 # «проводник не открывается» silence call).
-                _fetch_status_label.text = "the models manager needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
+                _fetch_status_label.text = _tr("models.needs_live")
                 return
         if _import_execution != "" or _fetch_execution != "":
-                _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"
+                _fetch_status_label.text = _tr("models.one_transfer")
                 return
         _import_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
         _import_dialog.popup_centered()
@@ -1973,10 +2218,10 @@ func _on_add_local_pressed() -> void:
 
 func _on_add_folder_pressed() -> void:
         if not _session_live or _client == null:
-                _fetch_status_label.text = "the models manager needs a live gateway session — the badge (top right) names the state; start Workbench.bat"
+                _fetch_status_label.text = _tr("models.needs_live")
                 return
         if _import_execution != "" or _fetch_execution != "":
-                _fetch_status_label.text = "one transfer at a time — wait for the current one to land (or cancel it)"
+                _fetch_status_label.text = _tr("models.one_transfer")
                 return
         _import_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
         _import_dialog.popup_centered()
@@ -1987,11 +2232,11 @@ func _on_open_models_folder_pressed() -> void:
         # the OS file manager opens AT it — drop-by-hand stays a real
         # alternative to the picker.
         if _models_root == "":
-                _fetch_status_label.text = "the models folder path arrives with the first models scan — Refresh"
+                _fetch_status_label.text = _tr("fetch.status.folder_pending")
                 return
         var err := OS.shell_open(_models_root)
         if err != OK:
-                _fetch_status_label.text = "the OS file manager refused to open %s (error %d)" % [_models_root, err]
+                _fetch_status_label.text = _tr("fetch.status.open_failed") % [_models_root, err]
 
 
 func _on_import_files_selected(paths: PackedStringArray) -> void:
@@ -2017,7 +2262,7 @@ func _on_import_dir_selected(directory: String) -> void:
                                 directory.rstrip("/") + "/" + file_name
                         )
         if path_list.is_empty():
-                _fetch_status_label.text = "no .gguf files in %s — pick the folder that holds them" % directory
+                _fetch_status_label.text = _tr("fetch.status.no_gguf") % directory
                 return
         _dispatch_import(path_list)
 
@@ -2027,7 +2272,7 @@ func _dispatch_import(path_list: Array) -> void:
         _add_folder_button.disabled = true
         _fetch_button.disabled = true
         _import_cancel_button.disabled = false
-        _fetch_status_label.text = "importing %d file(s)…" % path_list.size()
+        _fetch_status_label.text = _tr("fetch.status.importing_count") % path_list.size()
         var request_id := _next_request_id("import-start")
         _client.call_operation(
                 request_id, "run.start",
@@ -2042,14 +2287,14 @@ func _on_import_start_answered(document: Dictionary) -> void:
                 var result: Dictionary = document.get("result")
                 _import_execution = _text(result.get("execution_id"))
                 _import_poll_failures = 0
-                _fetch_status_label.text = "importing — the progress rides the run poll"
+                _fetch_status_label.text = _tr("fetch.status.importing")
                 _poll_timer.start()
                 return
         _reset_import_controls()
         if status == "UNKNOWN":
-                _fetch_status_label.text = "import dispatch OUTCOME UNKNOWN (%s) — not blindly retried" % _reason_of(document)
+                _fetch_status_label.text = _tr("fetch.status.import_unknown") % _reason_of(document)
                 return
-        _fetch_status_label.text = "model.import refused: %s %s" % [
+        _fetch_status_label.text = _tr("fetch.status.import_refused") % [
                 _text(document.get("rejection")), _reason_of(document)
         ]
 
@@ -2062,7 +2307,7 @@ func _on_import_get_answered(document: Dictionary) -> void:
                 _import_execution = ""
                 _reset_import_controls()
                 _maybe_stop_poll_timer()
-                _fetch_status_label.text = "run.get refused: %s %s" % [
+                _fetch_status_label.text = _tr("chat.note.get_refused") % [
                         _text(document.get("rejection")), _reason_of(document)
                 ]
                 return
@@ -2087,14 +2332,14 @@ func _on_import_get_answered(document: Dictionary) -> void:
                         var imported: Array = (
                                 run_result.get("imported", []) if run_result.get("imported") is Array else []
                         )
-                        _fetch_status_label.text = "imported %d model(s) — refreshing the list" % imported.size()
+                        _fetch_status_label.text = _tr("fetch.status.imported") % imported.size()
                         _refresh_models()
                 "FAILED":
-                        _fetch_status_label.text = "import FAILED · %s" % _first_diagnostic(result)
+                        _fetch_status_label.text = _tr("fetch.status.import_failed") % _first_diagnostic(result)
                 "CANCELED":
-                        _fetch_status_label.text = "import canceled (the truthful terminal)"
+                        _fetch_status_label.text = _tr("fetch.status.import_canceled")
                 _:
-                        _fetch_status_label.text = "import terminal state %s (unmodelled — shown, never collapsed)" % state
+                        _fetch_status_label.text = _tr("fetch.status.import_unmodelled") % state
 
 
 func _on_import_cancel_pressed() -> void:
@@ -2115,11 +2360,11 @@ func _import_progress_note(progress: Dictionary) -> String:
         var total := int(progress.get("total_bytes", 0))
         if total > 0:
                 var percent := int(float(copied) * 100.0 / float(total))
-                return "importing %s (%d/%d) — %d%% (%s / %s)" % [
+                return _tr("import.progress.percent") % [
                         name_value, file_index, file_count, percent,
                         _format_size(copied), _format_size(total)
                 ]
-        return "importing %s (%d/%d) — %s" % [
+        return _tr("import.progress.plain") % [
                 name_value, file_index, file_count, _format_size(copied)
         ]
 
@@ -2195,6 +2440,12 @@ func _set_busy(busy: bool) -> void:
 
 
 func _start_busy_pulse() -> void:
+        # ux-1 — the reduced-motion static equivalent (LAW §15): no loop
+        # tween; the busy chip's steady dot AND text label carry the state
+        # (§4's not-color-only law already made the label mandatory).
+        if _motion_reduced:
+                _busy_dot.modulate.a = 1.0
+                return
         if _busy_tween != null and _busy_tween.is_valid():
                 return
         _busy_tween = create_tween()
@@ -2232,7 +2483,7 @@ func _append_message(role: String, content: String) -> void:
                         # the one-shot boundedness note (display-only, never chat payload)
                         _messages_box.add_child(_message_card(
                                 "system",
-                                "display trimmed to the last %d messages (bounded, §15)" % MAX_MESSAGES
+                                _tr("chat.note.trimmed") % MAX_MESSAGES
                         ))
         _add_message_card(role, content)
 
@@ -2275,6 +2526,9 @@ func _scroll_to_bottom_smooth() -> void:
         # short-scroll bug), then a cubic-out tween over the scrollbar's
         # float value. The late-layout guard re-settles once if a long
         # message grew the content after the target was read.
+        # ux-1 — the reduced-motion static equivalent (LAW §15): the settle
+        # frame stays (layout correctness, not motion); the jump is direct,
+        # never animated.
         await get_tree().process_frame
         if not is_inside_tree():
                 return
@@ -2284,6 +2538,9 @@ func _scroll_to_bottom_smooth() -> void:
                 return  # the list fits — nothing to follow
         if _scroll_tween != null and _scroll_tween.is_valid():
                 _scroll_tween.kill()
+        if _motion_reduced:
+                bar.value = target
+                return
         _scroll_tween = create_tween()
         _scroll_tween.tween_property(bar, "value", target, SCROLL_TWEEN_S).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
         _scroll_tween.tween_callback(_after_follow_tween.bind(target))
@@ -2316,7 +2573,10 @@ func _message_card(role: String, content: String) -> Control:
         col.add_theme_constant_override("separation", _k("space_xs"))
         card.add_child(col)
         var role_label := Label.new()
-        role_label.text = role.to_upper()
+        # ux-1: the role caption rides the boundary (chat.role.user /
+        # chat.role.assistant); the role TOKEN stays the protocol identity
+        # for styling — never displayed raw.
+        role_label.text = _tr("chat.role." + role)
         role_label.add_theme_font_size_override("font_size", _k("font_size_caption"))
         var body_label := Label.new()
         body_label.text = content

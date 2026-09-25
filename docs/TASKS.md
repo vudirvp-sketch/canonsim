@@ -296,33 +296,68 @@ TEST_PLAN §9's claim packet)
   `docs/VISUAL_SYSTEM_UI.md` (the surface-driven grammar + the token
   taxonomy + the state matrix + the transplantation protocol —
   admitted iter-229, D-211).
-- `ux-1` — the P0 minimums row (FRONTEND_UIUX_LAW §25's queue head,
-  the owner's 2026-09-25 «начать работать в этом направлении»
-  direction call over the Ultimate Frontend pack, admitted
-  iter-233/D-214): the localization boundary (`_tr()` keys over
-  every user-facing GDScript string, localization-READY layout —
-  Cyrillic-safe metrics/wrapping/long-label tolerance) + the
-  reduced-motion setting (every tween/pulse a static equivalent —
-  the chat follow + the busy dot first) + the viewport/min-size
-  policy (project.godot: min window size, stretch behavior, the
-  SMALL..ULTRAWIDE class contract) + the focus/keyboard baseline
-  (Escape/stop shortcuts, surface-switch focus restoration, task-
-  aware focus entry per LAW §15). One row, one §8-style report, the
-  static proof pins in test_shell_contract.py.
-- `obs-1..obs-N` — the Observatory skeleton family (FRONTEND_UIUX_LAW
-  §25's P1: the vertical UX slice BEFORE full analytical backend
-  coverage — validate the interaction grammar, not the feature
-  count): obs-1 the slice itself — nav entry → empty/read-only
-  surface → World Question contract → context strip → query
-  lifecycle → one primary view → selection → inspector → evidence
-  ladder → semantic breadcrumb; the later rows (timeline lanes,
-  compare arms, semantic zoom, cross-highlighting, Evidence
-  Capsules, persistent research contexts) open per LAW §25's P3
-  ladder on the owner's call. No full causal graph/map/history/
-  ensembles in the slice; bounded, honest, epistemically explicit
-  (LAW §10/§11).
-
+- `ux-1` — DONE (iter-234, 2026-09-25). The §8-style report:
+  TARGET PROBLEM: the P0 minimums absent — hard-coded strings,
+  no motion policy, fixed-viewport bootstrap, no keyboard path
+  (FRONTEND_UIUX_LAW §17/§15/§16). CURRENT PRIMITIVE: shell.gd's
+  ~197 inline literals, the always-on chat tween + busy pulse, the
+  bare 1440x900, focus grabbed by the nav button.
+  TRANSFERRED MECHANISM: first-party (the LAW's own contracts);
+  the catalog pattern preload+static lookup (Object.tr's native
+  signature forbids `static func tr(` — pinned). INVARIANT: the
+  wire, the theme values, the follow law's settle frame, KI#96's
+  re-scan, the honest-note vocabulary all unchanged; the canonical
+  protocol vocabulary (lifecycle states) renders verbatim, never
+  re-worded; proof captures stay byte-identical (locale explicit-
+  only, ui_state never read/written, the seam harness pins its own
+  window). FILES: scripts/strings.gd (new), shell.gd, seam_proof.gd,
+  project.godot, tests/{test_shell_contract.py,test_shell_proof.py}.
+  EXPECTED CONSEQUENCE: ru renders natively on the owner's machine
+  (OS locale), motion-doling users get static equivalents, the
+  window scales below base without clipping, Esc/Ctrl+. stop a
+  generation, each surface opens focused on its task entry.
+  REJECT CONDITIONS: any catalog key missing in a locale; Cyrillic
+  tofu/clipping; a proof-capture diff between same-arg runs; the
+  gated pins drifting again. VERIFICATION STATE: STATIC_VERIFIED
+  (the boundary scan + the four ux-1 contract tests, 2289+6 CI)
+  + RUNTIME_VERIFIED (the five REDOT_EXE packets green 2294+1; the
+  ru screenshot VLM-checked: no tofu, no clipping) + DEFERRED: the
+  language picker row (the override chain suffices), the
+  per-surface font-size scaling (rides the stretch scale).
+- `obs-1` — DONE (iter-235, 2026-09-25). The §8-style report:
+  TARGET PROBLEM: the Observatory absent even as a stub — the
+  project's defining analytical surface had no frontend entry
+  (LAW §50: "more important than polishing secondary shell surfaces
+  indefinitely"). CURRENT PRIMITIVE: nothing — no nav entry, no
+  regions, no grammar. TRANSFERRED MECHANISM: first-party (the LAW's
+  own §5.1/§51 grammar); the hosting form — observatory.gd composes
+  itself over the injected theme + the shell's _tr Callable (LAW
+  §18's split seed). INVARIANT: zero dispatch, zero new transport,
+  zero fabricated data (INVARIANTS 1/2); the read-only DRAFT
+  lifecycle; the distinct NO DATA semantics; the evidence rungs'
+  unknown as text. FILES: observatory.gd (new), shell.gd, strings.gd,
+  visual_proof.py, tests ×2. EXPECTED CONSEQUENCE: the interaction
+  grammar is visible and navigable — the IA reads as intent groups;
+  every region exists honestly-empty, ready for the read-side seam.
+  REJECT CONDITIONS: any fabricated value; a second transport or
+  authority; a flat nav catalog; color-only state. VERIFICATION
+  STATE: STATIC_VERIFIED (the obs-1 slice contract, the boundary-
+  from-birth scan) + RUNTIME_VERIFIED (the observatory capture
+  under the pinned engine, VLM-checked composition) + DEFERRED: the
+  live-run feed (obs-2's own row — a READ-side seam into the
+  canonical backend), selection (needs rows to select), the
+  question EDITING form (the DRAFT display is the slice's truth).
+- `obs-2..obs-N` — the Observatory continuation family (each row
+  owner-gated, the LAW §25 ladder): obs-2 the live run feeding the
+  context strip + the event table over a READ-side seam (the
+  selection model's first consumer) · the P3 rungs after that
+  (timeline lanes, compare arms, semantic zoom, cross-highlighting,
+  Evidence Capsules, persistent research contexts).
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+
+- iter-235 · 2026-09-25 · obs1-observatory-slice (FRONTEND_UIUX_LAW §25's P1 + §50/§51 — the vertical UX slice BEFORE full analytical backend coverage): the §4.1 IA nav (WORK/RESOURCES/SYSTEM — Runs added, Inference kept, nothing dropped) + scripts/observatory.gd the LAW §18 split seed (the surface composes itself over the injected theme + the shell's _tr Callable): breadcrumb + context strip (the honest no-session values) + the World Question contract (DRAFT — nothing asked, nothing claimed) + ONE primary read-only view (TICK/EVENT/KIND/AUTHORITY; the DISTINCT NO DATA semantics) + the inspector (nothing selected, honestly) + the evidence ladder (every rung's unknown as TEXT) — zero fabricated content, zero dispatch, zero new transport; canon_shell@0.6; the runner drift fixed (visual_proof.py's --surface choices=[chat,settings] lagged the shell — the vocabulary is the shell's); 10 paths; 2290+7 (CI) / 2296+1 (REDOT_EXE, the observatory capture green, VLM-verified composition) + ruff + docguard clean
+
+- iter-234 · 2026-09-25 · ux1-frontend-minimums (FRONTEND_UIUX_LAW §25's P0 queue head, the owner's direction call): the _tr() localization boundary (strings.gd the en/ru catalogs ~190×2; 181 keys moved over 197 shell sites; --lang > CANONSIM_LANG > OS, proof explicit-only; Cyrillic RUNTIME_VERIFIED — the ru screenshot clean) + the reduced-motion setting (the follow's direct jump + the parked pulse; the Interface toggle, ui_state.json UI-local, proof never touches it) + the viewport/min-size policy (min 1152x700, stretch canvas_items/expand) + the focus/keyboard baseline (Esc/Ctrl+. stop, task-aware focus entry) + KI#97 the gated proof pins repaired against the live shell (canon_shell@0.1→@0.5, surfaces +models, 1440x900; the seam harness pins its own window — a harness never inherits a product resize contract) + the Object.tr parse lesson pinned (`static func tr(` is a PARSE ERROR; the resolver is `lookup`); 9 paths; 2289+6 (CI) / 2294+1 (REDOT_EXE) + ruff + docguard clean
 
 - iter-233 · 2026-09-25 · frontend-uiux-law-admission (the owner's tmpfiles hand-off of the external *CanonSim Workbench — Ultimate Frontend / UI / UX / Visual Architecture* consolidated pack + the «проанализировать... и начать работать в этом направлении» direction call): docs/FRONTEND_UIUX_LAW.md ADMITTED as the frontend interaction-architecture law owner (D-214) — the executive doctrine (the UX invariant QUESTION→...→NEXT DISCRIMINATOR + the implementation invariant + the missing-middle-layer diagnosis) + the law chain (the spec-integrity law) + the IA (WORK/RESOURCES/SYSTEM) + the analytical workspace grammar (CONTEXT/QUERY/PRIMARY VIEW/INSPECTOR/EVIDENCE) + the selection model + focus/context + semantic zoom + compare + timeline + graph policy + the evidence ladder + the epistemic grammar (the state set + AUTHORITY×CLAIM orthogonality) + the query lifecycle + empty semantics + drill-down + the Evidence Capsule + the T1–T8 task suite + the interaction-cost budget + the accessibility/reduced-motion/focus-keyboard/responsive/localization contracts + the component-architecture law + Scene IR integration + bounded rendering + surface hygiene + the verification matrix (static≠runtime≠task + the A–I gates + the evidence classification) + the anti-patterns + the agent decision rules + the P0–P4 order + the contradictions register + the 20 non-negotiable invariants; VISUAL_SYSTEM_UI §11 the companion-requirements routing (the §3.2 drift repair) + §10 re-pointed (ux-1/obs-1 before indefinite peripheral polish); TASKS the ux-1 + obs-1..N row registration; the routing surfaces (NAV §1/§2/§3 + STATUS FAQ/Next step); docguard's allowlist entry (632→627 after three cruft rounds — the enum/invariant lists the substance); 8 paths; 2285+6 + ruff + docguard clean (doc-only, zero code change, the LOG untouched)
 
@@ -334,5 +369,3 @@ TEST_PLAN §9's claim packet)
 - iter-228 · 2026-09-26 · wb-11-load-unload-runs (the owner's 2026-09-26 report over the wb-10 handback — «молча висят + транспорт результ 13» + «модель выбрать не могу, там пусто, моделей не видно, кнопка выбрать модель не работает (проводник не открывается)» + the evidence «llama.cpp и модели запускаются штатно если отдельно запускать»): the transport-13 freeze chain pinned dead — backend.py's model.load/model.unload as RUNS (the chat.send pattern: validate + the ladder walk + admit + launch under milliseconds, the minutes-class managed spawn / graceful stop on the registry's worker thread OFF the coarse dispatch lock, the FAILED diagnostics carrying the observed cause on the run.get wire — §21's honest surface; the single-slot + in-flight admission guards; MODEL_LOAD/UNLOAD_DEFAULT_DEADLINE_SECONDS the rows' own §12 budgets) + llama_process.py's _PipeDrain (one daemon reader per captured pipe into a bounded 64KB tail ring — the Windows pipe-buffer wedge pinned dead, stderr_tail cross-platform over the ring, the os.set_blocking '(empty)' bug dead) + shell.gd's run-poll Models circuits (model-load-get/model-unload-get on the shared tick, the honest picker/load guards — never a silent return, §18; the failed scan re-arm so «моделей не видно» never sticks) + tests (test_backend_row the run-form rework + 3 new pins incl. THE DISPATCH-LOCK regression — model.list ANSWERS while a gated load stands in the port call; test_shell_contract's wb-11 pins); 10 paths; 2284+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form unchanged)
 - iter-227 · 2026-09-26 · wb-10-owner-experience (the owner's 2026-09-25 fix list over the wb-9 handback — the launcher's Popen `buffering` TypeError + «где найти redot.exe и как его подключить?» + «просто открывающийся проводник и выбор уже скаченных локальных моделей» + «пользователь не должен вводить команды чтобы запустить или скачать что-либо!» + «интерфейс вверх убожества»): scripts/workbench_launch.py reworked (the bufsize fix + the folder-aware Redot resolution — release folder → the engine exe, the known names in preference order, one folder deep; CLI/env strict-verbatim, the persisted workbench/runtime/launcher.json, the Desktop-shaped auto-scan, the native tk folder picker once; the observed bind URL forwarded to the Redot child; the bare "--" separator stripped — the latent wb-9 gateway-arg bug) + the model.import work kind (models.py: a LOCAL copy into the models root — .part + atomic rename + live progress + cooperative cancel, the admission gates pre-run, NO network — INV-4 untouched; composition.py wires it unconditionally) + discover()'s models_root (the frontend's open-folder answer) + shell.gd's native-picker Models manager (Add local models…/Add folder… over FileDialog.use_native_dialog with ACCESS_FILESYSTEM, Open models folder via OS.shell_open, the URL fetch demoted to the collapsed advanced row; the theme@0.2 visual pass — the chip/card_user tokens) + Workbench.bat/Workbench Setup.bat the repo-root double-click entries + project.godot 1440×900; tests/test_model_import.py (8) + tests/test_workbench_launch.py (12 — THE REAL SPAWN integration: the buffering crash pinned dead) + the shell_contract/workbench_app/operations pin updates; 18 paths; 2281+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form unchanged)
 - iter-226 · 2026-09-26 · wb-9-model-flow (the owner's «открыл воркбенч, зашел и загрузил модель» + «подтянуть модель откуда угодно» + «настройки запуска llama.cpp... сэмплеры всякие» calls — the model flow end to end): workbench/platform/model_fetch.py (D-208 — INV-4's third sanctioned surface: the outbound model-assets fetch, HTTP GET downloads only) + the model.fetch work kind (models.py, the injected fetcher, admission gates pre-run, the registry's live progress surface + the kind's own 3600s deadline) + workbench/application/settings.py (the typed launch-settings store + backend.settings/backend.settings.update + the atomic persistence) + llama_process.py's sampler flag family + workbench_app.py's MANAGED default (--attached restores the observe-only form) + the exe auto-discovery + the runtime layout (workbench/runtime/{models,llama.cpp,settings.json}, gitignored) + scripts/workbench_launch.py the one-command launcher (the gateway + Redot, the stdout bind-line watch) + shell.gd's REAL Settings surface (the typed fields + the collapsed advanced + the preview) + the Models manager (the URL fetch with live progress); tests/test_model_fetch.py (11) + tests/test_settings.py (10) + the workbench_app/managed/shell_contract/architecture/operations/gateway pin updates; 2258+6 + ruff + docguard clean (zero core change, zero pack change, the LOG untouched, INV-4's three-surface form pinned)
-- iter-225 · 2026-09-25 · redot-engine-index (the owner's «отразить в репозитории» call over the external Redot/Godot agent reference index — the tmpfiles hand-off ephemeral, the engine routing homeless): docs/REDOT_ENGINE_INDEX.md ADMITTED (the version firewall + the routing map; admission deltas only — §2.2/§2.3 reconciled to the landed wb-4..wb-8 surface + the v5.2 docs' external-by-law status, §10's skills pinned agent-side per AGENTS §2.8, the external changelog cut) + the routing surfaces (NAV §1/§2/§3 + STATUS FAQ + the wb-9+ pointers in TASKS/CONTRACTS §5 + README's agent list) + docguard's allowlist entry (§6.1's substance record) + D-207 into the standing-rows family row; 9 paths; 2223+6 + ruff + docguard clean (doc-only, zero code change, the LOG untouched)
-- iter-224 · 2026-09-25 · gdscript-fix-delivery-protocol (the owner's 2026-09-25 wb-8 handback — five shell.gd parse refusals (806/861/868/999/1042: adjacent string literals, the Python-ism GDScript refuses) + the «тебе ничего комитить и пушить не надо» directive): the five notes ONE literal per line + test_shell_contract.py's adjacent-literal ban over every committed .gd + AGENTS §9/§12 the delivery protocol's standing form (D-206: the agent NEVER git commit/push against the owner's repository — no access; the delta archive rides both channels + the owner-side Git Bash block closes every file-touching report, re-runnable); 7 paths; 2223+6 + ruff + docguard clean (zero core change, the LOG untouched)

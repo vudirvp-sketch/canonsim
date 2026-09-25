@@ -22,8 +22,17 @@ gateway/url="http://127.0.0.1:8765"
 
 [display]
 
+; ux-1 — the viewport/min-size policy (FRONTEND_UIUX_LAW §16): the base
+; stays 1440x900 (MEDIUM/LARGE); the floor 1152x700 keeps the three-region
+; layout usable at SMALL; stretch canvas_items + expand scales content with
+; the window (no critical clipping at any viewport class, extra space fills
+; the content region — the anchored containers own the layout).
 window/size/viewport_width=1440
 window/size/viewport_height=900
+window/size/min_width=1152
+window/size/min_height=700
+window/size/stretch/mode="canvas_items"
+window/size/stretch/aspect="expand"
 
 [rendering]
 
