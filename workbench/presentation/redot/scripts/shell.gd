@@ -1,6 +1,18 @@
 # CanonSim Workbench — the wb-2/wb-7 application shell (frontend §46
 # Phase A: custom theme -> Chat -> Settings).
 #
+# iter-232 (KI#95/KI#96 + the OLED re-pin — the owner's 2026-09-25
+# «цвет лучше взять темный под oled мониторы, но не синий такой
+# убогий» + «проводник опять сломался видимо, я не могу папки
+# открыть и модели не показывает языковые» calls): theme@0.4 re-pins
+# the VALUES ONLY (the truly neutral near-black ramp over #050505 +
+# the ONE teal accent — this script's token reads unchanged); KI#96
+# kills the models-scan latch — entering the Models surface re-scans
+# EVERY time (§20's routine refresh: the cheap discovery READ,
+# model.list + model.states — files dropped into the folder by hand
+# appear on the next surface entry, the latched "requested once" flag
+# never freezes the list again).
+#
 # iter-230 (wb-12 + the chat follow mechanism — the owner's «тема и UI
 # все так же убоги» + «в чате при получении сообщений от языковой модели
 # => не происходит плавной прокрутки вниз» calls): the theme@0.3 token
@@ -168,7 +180,6 @@ var _models_status_label: Label
 var _models_refresh_button: Button
 var _models_active_label: Label
 var _model_rows: Dictionary = {}
-var _models_requested := false
 # wb-11 — the load/unload run circuits (identity-then-poll).
 var _load_execution := ""
 var _load_model := ""
@@ -373,7 +384,7 @@ func _build_nav_rail() -> Control:
         col.add_child(spring)
 
         var version := Label.new()
-        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.3"]
+        version.text = "%s · theme %s" % [SHELL_VERSION, "canon_workbench_theme@0.4"]
         version.add_theme_font_size_override("font_size", _k("font_size_caption"))
         version.add_theme_color_override("font_color", _c("text_muted"))
         version.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -873,7 +884,12 @@ func _show_surface(key: String) -> void:
         _active_surface = key
         for surface_key in SURFACES:
                 _surface_nodes[surface_key].visible = surface_key == key
-        if key == "models" and _client != null and not _models_requested:
+        # KI#96 (iter-232): the scan latch is dead — every entry into the
+        # Models surface re-scans (§20's routine refresh; both reads are
+        # cheap, and the owner's hand-dropped GGUF files appear without a
+        # manual Refresh). The wb-11 re-arm survives as the transport-
+        # failure note's own surface (the next entry retries by itself).
+        if key == "models" and _client != null:
                 _refresh_models()
         # The active axis owns the pressed state (the button group keeps the
         # exclusivity) and the keyboard focus (§13: visible focus, logical order).
@@ -1213,10 +1229,9 @@ func _on_transport_failed(tag: String, error: String) -> void:
                 _settings_gateway_value.text = "unreachable · %s" % _gateway_url
                 return
         if tag == "model-list" or tag == "model-states":
-                # wb-11: a failed scan re-arms (the next surface entry
-                # retries — the empty list never sticks silently, the
-                # owner's «моделей не видно» persistence call).
-                _models_requested = false
+                # wb-11's honest failure note (KI#96's every-entry rescan
+                # owns the retry — the next surface entry re-arms by
+                # itself, the empty list never sticks silently).
                 _models_status_label.text = (
                         "gateway unreachable on %s (%s) — Retry with Refresh" % [tag, error]
                 )
@@ -1312,9 +1327,10 @@ func _on_models_refresh_pressed() -> void:
 func _refresh_models() -> void:
         # The honest discovery re-scan (§20): model.list + the lifecycle
         # read (model.states) — both READs, no session needed, no fake.
+        # KI#96: called on EVERY surface entry (the latch retired) and on
+        # the Refresh action — the routine-refresh form.
         if _client == null:
                 return
-        _models_requested = true
         _models_status_label.text = "scanning the models directory…"
         _client.call_operation("model-list", "model.list", {})
         _client.call_operation("model-states", "model.states", {})

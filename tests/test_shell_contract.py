@@ -191,8 +191,16 @@ def test_the_models_surface_contract() -> None:
     # (§18: the effective state is named).
     assert "the models manager needs a live gateway session" in text
     assert "the load action needs a live gateway session" in text
-    # wb-11: a failed scan re-arms — the empty list never sticks.
-    assert "_models_requested = false" in text
+    # KI#96 (iter-232): the scan latch is RETIRED — every entry into the
+    # Models surface re-scans (§20's routine refresh; the owner's
+    # «проводник опять сломался... модели не показывает» call — the
+    # latched "requested once" flag froze the list after one scan and
+    # hand-dropped GGUF files never appeared without a manual Refresh).
+    assert 'if key == "models" and _client != null:' in text
+    assert "_models_requested" not in text, (
+        "the models-scan latch was retired at iter-232 — every surface "
+        "entry re-scans; a resurrected latch re-freezes the list"
+    )
     # The lifecycle states surface by name (D-203's gap shown, not hidden).
     assert '"FAILED"' in text
     assert "_on_model_load_pressed" in text
@@ -365,10 +373,12 @@ def test_the_zero_command_entry_is_committed() -> None:
 
 
 def test_the_theme_visual_refresh_landed() -> None:
-    """wb-12's token audit (iter-230, the owner's «тема и UI все так же
-    убоги» call, VISUAL_SYSTEM_UI §2/§3 the law): the theme@0.3 tokens
-    the re-skinned shell reads by name — the single-accent pin (the
-    warm-orange family retired WITH its accent_deep token), the busy
+    """wb-12's token audit (iter-230) + iter-232's OLED re-pin (the
+    owner's «цвет лучше взять темный под oled мониторы, но не синий
+    такой убогий» call, VISUAL_SYSTEM_UI §2/§3 the law): the theme@0.4
+    tokens the re-skinned shell reads by name — the single-accent pin
+    (the warm-orange family retired WITH its accent_deep token; the
+    Catppuccin blue retired with theme@0.4's neutral ramp), the busy
     chip (the GENERATING carrier), and the NavButton variation's full
     state set (the rail's quiet controls) exist in the committed theme
     file — a renamed token is a runtime break the suite must catch
@@ -388,14 +398,19 @@ def test_the_theme_visual_refresh_landed() -> None:
         "NavButton/styles/focus",
         "NavButton/colors/font_color",
     ):
-        assert marker in text, f"the theme@0.3 token missing: {marker}"
+        assert marker in text, f"the theme@0.4 token missing: {marker}"
     # The audit's retire: the old warm accent's deep variant has no
     # consumer left — its return is a regression of the one-accent law.
     assert "Workbench/colors/accent_deep" not in text, (
         "accent_deep was retired at wb-12 (no consumer; the ONE accent "
         "family is accent/accent_soft/focus_ring)"
     )
-    assert "canon_workbench_theme@0.3" in SHELL_SCRIPT.read_text(
+    # iter-232's OLED form: the base sits at the near-black #050505
+    # (Color(0.02, 0.02, 0.02, 1) — truly neutral, R=G=B: no blue tint)
+    # and the ONE accent is the teal family (not the retired blue).
+    assert "Workbench/colors/background_base = Color(0.02, 0.02, 0.02, 1)" in text
+    assert "Workbench/colors/accent = Color(0.298, 0.788, 0.651, 1)" in text
+    assert "canon_workbench_theme@0.4" in SHELL_SCRIPT.read_text(
         encoding="utf-8"
     )
 

@@ -1,46 +1,53 @@
-Iteration: iter-231 (`ci-unred-nav-variation` — the owner's
-2026-09-25 engine report — «Invalid call. Nonexistent function
-'add_theme_type_variation' in base 'Button'» killing _ready at
-_build_nav_rail + the unused `row` warning — and the CI-red report
-«в прошлых двух итерациях как минимум у тебя тесты на репо
-проваливаются Run python -m pytest -q и сейчас тоже», runs 82–84
-red since iter-227): TWO shipped defects pinned dead. KI#93 — the
-launcher/gateway pipe chain owned NOTHING of its buffering: the
-gateway child's bind line sat in the pipe's block buffer unless the
-host exported PYTHONUNBUFFERED (the sandbox does; CI and the owner's
-Windows machines do not) → the 90s boot probe honestly failed → one
-red CI test since iter-227 while every local run stayed green; the
-fix owns the buffering in the chain itself (the gateway child rides
-`-u`, the supervisor line-buffers its own stdout, the test spawn
-strips the var — env-invariant). KI#94 — iter-230's NavButton wiring
-called a Control method Redot 26.2 does not have; the API is the
-`theme_type_variation` PROPERTY (the engine's own report + the Godot
-4 cross-reference); the property form + the negative pin; the dead
-`row` local removed with it.
+Iteration: iter-232 (`ki95-ki96-oled-repin` — the owner's
+2026-09-25 report: the CI-red cancellation test + «проводник опять
+сломался видимо, я не могу папки открыть и модели не показывает
+языковые» + «цвет лучше взять темный под oled мониторы, но не синий
+такой убогий»): TWO shipped defects + one owner-called re-pin.
+KI#95 — the wb-9 cancellation test's single checkpoint() call RACED
+the main thread's run.cancel dispatch: on a fast CI runner the worker
+thread reached the checkpoint BEFORE the cancel landed, the
+checkpoint passed, and the "unreachable" AssertionError closed the
+run FAILED — the honest registry truth for an abort never requested
+(production code truthful; a test bug — the local sandbox stayed
+green on scheduling luck while CI went red); the fetch now POLLS the
+checkpoint (the work contract's own observation surface, lock-free)
+until the cancellation lands, bounded 20s — deterministic under any
+thread scheduling. KI#96 — the Models surface's scan latch
+(_models_requested) froze the discovery list after ONE successful
+scan: GGUF files dropped into the folder by hand never appeared
+without a manual Refresh (the owner's «модели не показывает» family);
+the latch is retired — every surface entry re-scans (§20's routine
+refresh; both reads cheap). theme@0.4 — the OLED re-pin (D-213, the
+owner's explicit call over the external brief's "never pure black"
+doctrine): the TRULY neutral ramp over the near-black #050505 (the
+Catppuccin navy tint retired — «не синий») + the ONE teal accent
+#4cc9a6 (the blue AND the older warm-orange families both rejected
+by name); values-only — every token name, size and pin unchanged; 21
+contrast pairs measured (scripts/contrast_check.py).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the wb family its live head, wb-12 DONE + the visual rows queued
-wb-13+) + the world track + the SoW horizon, ROADMAP §2/§6) ·
+(the wb family its live head, wb-12 DONE + theme@0.4 the OLED re-pin
+landed + the visual rows queued wb-13+) + the world track + the SoW
+horizon, ROADMAP §2/§6) ·
 2285 passed + 6 skipped, ruff clean, docguard clean (Python 3.12.14,
-the env pin; VERIFIED TWICE — the standard env AND a stripped
-PYTHONUNBUFFERED env, the CI/owner condition, KI#93's lesson; the 5
-REDOT_EXE-gated visual packets + duckdb skipping clean per D6/D-093
-— the sandbox binary absent) ·
+the env pin; the 5 REDOT_EXE-gated visual packets + duckdb skipping
+clean per D6/D-093 — the sandbox binary absent) ·
 Date: 2026-09-25 ·
-Scope: scripts/workbench_launch.py (the chain-owned buffering) +
-workbench/presentation/redot/scripts/shell.gd (the property form ×2
-+ the dead local) + tests/test_workbench_launch.py (the env-stripping
-spawn) + tests/test_shell_contract.py (the property pin + the
-negative method pin) + the state docs (STATUS/TASKS/worklog) — 7
-paths (the 3–5 soft limit honestly over: two shipped defects + their
-regression pins + the state docs, AGENTS §2.3).
-Track A: the wb family (iter-231 the CI-unred + NavButton fix; wb-12
-DONE — the visual rows queued wb-13+
-per VISUAL_SYSTEM_UI §10; the prior record: iter-229 the law
-admission, 228 wb-11 transport chain, 227 wb-10, 226 wb-9 D-208, 225
-the engine index D-207, 224 D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220
-wb-5, 219 wb-4, 218 wb-3, 216/215 wb-1). The detail lives in the
-worklog + git.
+Scope: tests/test_model_fetch.py (the deterministic checkpoint poll)
++ workbench/presentation/redot/scripts/shell.gd (the latch retired ×3
+sites + the theme version string) + workbench/presentation/redot/
+themes/workbench_theme.tres (the OLED re-pin) + tests/
+test_shell_contract.py (the latch ban + the theme@0.4/base/accent
+pins) + the state docs (STATUS/TASKS/worklog/DECISIONS) — 8 paths
+(the 3–5 soft limit honestly over: two defects + the owner-called
+re-pin + the pin updates + the state docs, AGENTS §2.3).
+Track A: the wb family (iter-232 the race/latch fixes + the OLED
+re-pin; wb-12 DONE + theme@0.4 — the visual rows queued wb-13+
+per VISUAL_SYSTEM_UI §10; the prior record: iter-231 CI-unred +
+NavButton, 230 wb-12, 229 the law admission, 228 wb-11 transport
+chain, 227 wb-10, 226 wb-9 D-208, 225 the engine index D-207, 224
+D-206, 223 wb-8, 222 wb-7, 221 wb-6, 220 wb-5, 219 wb-4, 218 wb-3,
+216/215 wb-1). The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -68,19 +75,25 @@ worklog + git.
 
 ## Active KIs
 
-- (none — KI#93 + KI#94 opened + CLOSED iter-231 in the same row:
-  KI#93 — CI red since iter-227 (runs 82–84): the launcher/gateway
-  pipe chain leaned on the host's PYTHONUNBUFFERED (the sandbox
-  exports it; CI and the owner's machines do not) — the gateway
-  child's bind line block-buffered past the 90s boot probe, the
-  launcher honestly reported «the gateway failed to serve (exit code
-  0)»; the chain now owns its buffering (`-u` child + line-buffered
-  supervisor + the env-stripping test spawn).
-  KI#94 — iter-230 shipped the NavButton wiring over a nonexistent
-  Control method (`add_theme_type_variation`); Redot 26.2's API is
-  the `theme_type_variation` PROPERTY — _ready died at
-  _build_nav_rail; the property form + the negative pin; the unused
-  `row` local in _apply_model_states removed.)
+- (none — KI#95 + KI#96 opened + CLOSED iter-232 in the same row:
+  KI#95 — the wb-9 cancellation test red in CI while the sandbox
+  stayed green: the test's single checkpoint() call RACED the main
+  thread's run.cancel dispatch — a fast CI runner's worker passed
+  the checkpoint BEFORE the cancel landed, the fetcher's own
+  "unreachable" AssertionError closed the run FAILED (the honest
+  registry truth for an abort never requested: production code
+  truthful, the TEST buggy — scheduling luck masked it locally);
+  the test now POLLS the checkpoint (the work contract's own
+  lock-free observation surface) until the cancellation lands,
+  bounded 20s — deterministic under any thread scheduling, and an
+  absent cancel fails loudly with its own honest cause.
+  KI#96 — the Models surface's scan latch (_models_requested)
+  froze the discovery list after ONE successful scan: GGUF files
+  dropped into the folder by hand never appeared without a manual
+  Refresh (the owner's «модели не показывает» family — wb-11's
+  failed-scan re-arm applied to failure only, never to success's
+  staleness); the latch is retired — every surface entry re-scans,
+  the negative pin owns the ban.)
 
 ## FAQ / Pitfalls
 
@@ -102,19 +115,23 @@ worklog + git.
 - **Procedural guards: git hygiene (verify `.gitignore` after any upload; a file DELETION needs an explicit `git rm` or it never lands (KI#55); `git status --short` before every commit — AGENTS §7) + scope-creep (content/tone → D-030 + PACK_SPEC's sketch row; two consecutive doc-only iterations stop unless a fresh owner request fires (D-022) — AGENTS §2)**
 - **DF exports are malformed/truncated CP437 XML: byte-sanitize, stream with iterparse + clear, tail-check truncation; off-matrix record tags render UNDOCUMENTED** — the matrix: `docs/ref/df_legends_xml.md`; the recipe: TECH_NOTES §3.1–§3.3.
 - **The cap laws: substance over line count — filler cut always; named systems/field lists/enum values/verdicts never cut to fit; a breach triggers a cruft pass first** — AGENTS §6/§6.1; enforced by `scripts/docguard.py`.
-- **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088)** — BRIEF_SPEC §2/§3.3.
-- **The scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §3.3.
+- **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088); and the scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §2/§3.3.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
 - **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default** — the modules' own docstrings + CONTRACTS §5's wb-10 note
+- **The iter-232 laws: a cooperative-cancellation TEST never calls checkpoint() once and prays — the single call races the main thread's run.cancel dispatch (a fast runner's worker passes through, the "unreachable" guard closes the run FAILED; the sandbox stays green on scheduling luck while CI goes red — KI#95, three-form verified: sandbox, forced fast worker, delayed cancel); poll the checkpoint (the work contract's own lock-free observation surface — run.cancel is never starved) bounded until the cancellation lands, an absent cancel fails LOUDLY; discovery lists never freeze behind one-shot success latches — every surface entry re-scans (KI#96: the owner's hand-dropped GGUF must appear on the next Models entry; the wb-11 re-arm lesson generalizes from FAILURE to staleness — a "requested once" flag guarding the happy path is the bug, not the guard); and a theme re-pin is VALUES-ONLY — every token name, size and pin survives the palette swap (theme@0.4/D-213: the owner's OLED call over the external brief's "never pure black" doctrine — the neutral near-black ramp + the ONE teal accent, 21 WCAG contrast pairs measured)** — tests/test_model_fetch.py `_SlowFetcher.fetch` + shell.gd `_refresh_models` + test_shell_contract.py (the latch ban + the base/accent pins), iter-232
 - **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
 - **The chat follow law (iter-230): read the scrollbar's max AFTER a frame — the autowrapped labels size late, reading it at call_deferred time is the short-scroll bug; TWEEN the bar's float `value` (never the int `scroll_vertical` jump); gate on near-bottom (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked; the late-layout re-settle stays bounded to ONE pass** — shell.gd `_scroll_to_bottom_smooth` (the owner's «не происходит плавной прокрутки вниз» call, the LM Studio/Discord follow mechanism)
 
 ## Next step
 
-**iter-231 DONE: CI un-red (KI#93 — the launcher/gateway buffering
-chain) + the NavButton property fix (KI#94) LANDED (the owner's
-2026-09-25 engine-error + CI-red report: _ready died at
-_build_nav_rail; runs 82–84 red since iter-227).**
+**iter-232 DONE: KI#95 (the CI-red cancellation test — the single
+checkpoint() call raced run.cancel's dispatch; the poll form)
++ KI#96 (the Models scan latch — the owner's «модели не показывает»
+family; every surface entry re-scans) + theme@0.4 (the OLED re-pin,
+D-213 — «цвет лучше взять темный под oled мониторы, но не синий
+такой убогий»; the neutral near-black ramp + the ONE teal accent)
+LANDED (the owner's 2026-09-25 report; the wb family stays the
+live head, wb-13+ the visual queue).**
 
 1. wb-13+ per the visual queue (VISUAL_SYSTEM_UI §10 — the Models
    surface's matrix rendering over the wb-11 run circuits, then the

@@ -1,7 +1,8 @@
 ; CanonSim Workbench — the semantic-token theme (wb-2, frontend §10–§16;
-; wb-10 the first visual pass; wb-12 the token-audit re-pin — the owner's
-; 2026-09-26 «нынешний ui - ужасен» + this session's «тема и UI все так же
-; убоги» calls, per docs/VISUAL_SYSTEM_UI.md the law owner).
+; wb-10 the first visual pass; wb-12 the token-audit re-pin; iter-232 the
+; OLED re-pin — the owner's 2026-09-25 «цвет лучше взять темный под oled
+; мониторы, но не синий такой убогий» call, per docs/VISUAL_SYSTEM_UI.md
+; the law owner).
 ;
 ; The single source of the Workbench visual language (frontend §10: the
 ; ladder `primitives -> semantic tokens -> component tokens -> component
@@ -15,38 +16,41 @@
 ;      NavButton variation, LineEdit, Label, PanelContainer) with their
 ;      state sets (default/hover/pressed/hover_pressed/focus/disabled/
 ;      readonly — §10's component-state law).
-;   3. Layered dark surfaces (§12: never pure black) with WCAG-baseline
-;      contrast — the measured pairs noted below.
+;   3. Layered dark surfaces over a TRULY neutral near-black ramp (the
+;      iter-232 OLED form below) with WCAG-baseline contrast — the
+;      measured pairs noted below.
 ;
-; The wb-12 audit (VISUAL_SYSTEM_UI §2's taxonomy + §3's color law):
-;   - ONE accent (the soft blue #89b4fa family) — interactive affordances
-;     and the live/GENERATING state; the old warm-orange accent family and
-;     its brown-tinted pressed/selected surfaces RETIRED (accent_deep has
-;     no consumer left — the audit's retire).
-;   - The neutral ramp re-pinned over a value reference: the Catppuccin
-;     Mocha ramp (catppuccin.com — MIT-licensed palette; VALUES adapted
-;     onto the Workbench role tokens, no assets, no code — §6's
-;     transplantation protocol: the mechanism taken is the tuned layered
-;     luminance separation, not a look).
-;   - Role names audited: background_base (CANVAS) / surface_l* (SURFACE)
-;     / text_* (CONTENT) / hairline+border_field (BORDER) / status_*
-;     (STATE) / authority_* (AUTHORITY) — all role-named, none renamed.
-;   - NEW tokens: the NavButton type variation (the rail's quiet
-;     navigation set) + styles/chip_busy (the chat GENERATING carrier).
+; The iter-232 OLED re-pin (VISUAL_SYSTEM_UI §3's color law, the owner's
+; explicit call over the external brief's "never pure black" doctrine —
+; AGENTS §2.6: the owner's request in the active session IS the task):
+;   - The neutral ramp is TRULY neutral now (R=G=B — the Catppuccin
+;     navy-blue tint RETIRED: the owner's «не синий такой убогий»), and
+;     the base sits at #050505 — near-pure-black, OLED-friendly (each
+;     sub-pixel ~2% duty; the layering survives as pure luminance steps,
+;     iter-230's transplanted mechanism unchanged).
+;   - ONE accent, TEAL #4cc9a6 (the owner's two named rejections: the
+;     iter-230 blue #89b4fa AND the older warm-orange family — teal is
+;     the family that is neither); the accent marks interactive
+;     affordances and the live/GENERATING state, never decoration.
+;   - Role names, token names, sizes, spacings, margins, radii and the
+;     NavButton/chip_busy set: UNCHANGED from theme@0.3 (the shell reads
+;     by name — this re-pin is values-only, zero shell.gd reads touched
+;     beyond the version string).
 ;
-; Contrast pairs (WCAG 2.2 baseline, §12 — measured over the sRGB math):
-;   text_primary   #cdd6f4 on surface_l2 #1e1e2e  ~11.3:1
-;   text_secondary #a6adc8 on surface_l2           ~7.4:1
-;   text_muted     #8b90a8 on surface_l1 #181825   ~5.6:1
-;   accent         #89b4fa on surface_l2           ~7.8:1
-;   on_accent      #11111b on accent    #89b4fa   ~8.7:1
-;   border_field   #6c6f85 vs input bg #11111b     ~3.7:1 (non-text, >=3:1)
+; Contrast pairs (WCAG 2.2 baseline, §12 — measured over the sRGB math,
+; scripts/contrast_check.py iter-232):
+;   text_primary   #ededed on surface_l2 #131313  15.9:1
+;   text_secondary #b9b9b9 on surface_l2            9.5:1
+;   text_muted     #8b8b8b on surface_l1 #0b0b0b   5.8:1
+;   accent         #4cc9a6 on surface_l2            9.0:1
+;   on_accent      #04110c on accent    #4cc9a6    9.4:1
+;   border_field   #616161 vs input bg #080808     3.2:1 (non-text, >=3:1)
 ; Colour is never the sole state channel (§12): states pair with text or
 ; position. This file is the wb-2 deliverable "the semantic-token theme
 ; file" (TASKS wb-2, CONTRACTS §5); identity = its sha256 (carried by the
 ; shell proof metadata).
 ;
-; Theme id: canon_workbench_theme@0.3 (dark — the only admitted theme).
+; Theme id: canon_workbench_theme@0.4 (dark OLED — the only admitted theme).
 
 [gd_resource type="Theme" load_steps=22 format=3]
 
@@ -55,12 +59,12 @@ content_margin_left = 16.0
 content_margin_top = 9.0
 content_margin_right = 16.0
 content_margin_bottom = 9.0
-bg_color = Color(0.118, 0.118, 0.18, 1)
+bg_color = Color(0.149, 0.149, 0.149, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.192, 0.196, 0.267, 1)
+border_color = Color(0.227, 0.227, 0.227, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -71,12 +75,12 @@ content_margin_left = 16.0
 content_margin_top = 9.0
 content_margin_right = 16.0
 content_margin_bottom = 9.0
-bg_color = Color(0.192, 0.196, 0.267, 1)
+bg_color = Color(0.192, 0.192, 0.192, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.345, 0.357, 0.439, 1)
+border_color = Color(0.302, 0.302, 0.302, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -87,12 +91,12 @@ content_margin_left = 16.0
 content_margin_top = 9.0
 content_margin_right = 16.0
 content_margin_bottom = 9.0
-bg_color = Color(0.212, 0.263, 0.392, 1)
+bg_color = Color(0.117, 0.196, 0.173, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.537, 0.706, 0.98, 1)
+border_color = Color(0.298, 0.788, 0.651, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -103,12 +107,12 @@ content_margin_left = 16.0
 content_margin_top = 9.0
 content_margin_right = 16.0
 content_margin_bottom = 9.0
-bg_color = Color(0.243, 0.298, 0.439, 1)
+bg_color = Color(0.145, 0.239, 0.208, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.639, 0.757, 0.984, 1)
+border_color = Color(0.51, 0.878, 0.776, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -119,12 +123,12 @@ content_margin_left = 16.0
 content_margin_top = 9.0
 content_margin_right = 16.0
 content_margin_bottom = 9.0
-bg_color = Color(0.094, 0.094, 0.145, 1)
+bg_color = Color(0.106, 0.106, 0.106, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.192, 0.196, 0.267, 1)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -140,7 +144,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.639, 0.757, 0.984, 1)
+border_color = Color(0.51, 0.878, 0.776, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -151,12 +155,12 @@ content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
-bg_color = Color(0.067, 0.067, 0.106, 1)
+bg_color = Color(0.031, 0.031, 0.031, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.271, 0.278, 0.353, 1)
+border_color = Color(0.38, 0.38, 0.38, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -167,12 +171,12 @@ content_margin_left = 13.0
 content_margin_top = 7.0
 content_margin_right = 13.0
 content_margin_bottom = 7.0
-bg_color = Color(0.067, 0.067, 0.106, 1)
+bg_color = Color(0.031, 0.031, 0.031, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.537, 0.706, 0.98, 1)
+border_color = Color(0.298, 0.788, 0.651, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -183,12 +187,12 @@ content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
-bg_color = Color(0.094, 0.094, 0.145, 1)
+bg_color = Color(0.106, 0.106, 0.106, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.192, 0.196, 0.267, 1)
+border_color = Color(0.227, 0.227, 0.227, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -199,12 +203,12 @@ content_margin_left = 16.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 12.0
-bg_color = Color(0.118, 0.118, 0.18, 1)
+bg_color = Color(0.075, 0.075, 0.075, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.192, 0.196, 0.267, 1)
+border_color = Color(0.137, 0.137, 0.137, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -215,12 +219,12 @@ content_margin_left = 16.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 12.0
-bg_color = Color(0.537, 0.706, 0.98, 0.1)
+bg_color = Color(0.298, 0.788, 0.651, 0.08)
 border_width_left = 3
 border_width_top = 0
 border_width_right = 0
 border_width_bottom = 0
-border_color = Color(0.537, 0.706, 0.98, 0.9)
+border_color = Color(0.298, 0.788, 0.651, 0.9)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -231,12 +235,12 @@ content_margin_left = 12.0
 content_margin_top = 4.0
 content_margin_right = 12.0
 content_margin_bottom = 4.0
-bg_color = Color(0.192, 0.196, 0.267, 1)
+bg_color = Color(0.106, 0.106, 0.106, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.271, 0.278, 0.353, 1)
+border_color = Color(0.176, 0.176, 0.176, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -247,12 +251,12 @@ content_margin_left = 12.0
 content_margin_top = 4.0
 content_margin_right = 12.0
 content_margin_bottom = 4.0
-bg_color = Color(0.537, 0.706, 0.98, 0.12)
+bg_color = Color(0.298, 0.788, 0.651, 0.1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.537, 0.706, 0.98, 0.5)
+border_color = Color(0.298, 0.788, 0.651, 0.5)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -263,14 +267,14 @@ content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 12.0
 content_margin_bottom = 12.0
-bg_color = Color(0.094, 0.094, 0.145, 1)
+bg_color = Color(0.043, 0.043, 0.043, 1)
 
 [sub_resource type="StyleBoxFlat" id="sb_bar"]
 content_margin_left = 20.0
 content_margin_top = 0.0
 content_margin_right = 20.0
 content_margin_bottom = 0.0
-bg_color = Color(0.094, 0.094, 0.145, 1)
+bg_color = Color(0.043, 0.043, 0.043, 1)
 
 [sub_resource type="StyleBoxFlat" id="sb_nav_normal"]
 content_margin_left = 14.0
@@ -284,7 +288,7 @@ content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
-bg_color = Color(0.537, 0.706, 0.98, 0.08)
+bg_color = Color(0.298, 0.788, 0.651, 0.07)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -295,12 +299,12 @@ content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
-bg_color = Color(0.537, 0.706, 0.98, 0.14)
+bg_color = Color(0.298, 0.788, 0.651, 0.12)
 border_width_left = 3
 border_width_top = 0
 border_width_right = 0
 border_width_bottom = 0
-border_color = Color(0.537, 0.706, 0.98, 1)
+border_color = Color(0.298, 0.788, 0.651, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -311,12 +315,12 @@ content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
-bg_color = Color(0.537, 0.706, 0.98, 0.18)
+bg_color = Color(0.298, 0.788, 0.651, 0.16)
 border_width_left = 3
 border_width_top = 0
 border_width_right = 0
 border_width_bottom = 0
-border_color = Color(0.537, 0.706, 0.98, 1)
+border_color = Color(0.298, 0.788, 0.651, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -332,7 +336,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.537, 0.706, 0.98, 0.6)
+border_color = Color(0.298, 0.788, 0.651, 0.55)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -347,30 +351,30 @@ draw_center = false
 
 [resource]
 ; --- semantic tokens: colour primitives by role (§12) ----------------------
-Workbench/colors/background_base = Color(0.067, 0.067, 0.106, 1)
-Workbench/colors/surface_l1 = Color(0.094, 0.094, 0.145, 1)
-Workbench/colors/surface_l2 = Color(0.118, 0.118, 0.18, 1)
-Workbench/colors/surface_l3 = Color(0.192, 0.196, 0.267, 1)
-Workbench/colors/surface_selected = Color(0.271, 0.278, 0.353, 1)
-Workbench/colors/hairline = Color(0.192, 0.196, 0.267, 1)
-Workbench/colors/border_field = Color(0.424, 0.435, 0.522, 1)
-Workbench/colors/text_primary = Color(0.804, 0.839, 0.957, 1)
-Workbench/colors/text_secondary = Color(0.651, 0.678, 0.784, 1)
-Workbench/colors/text_muted = Color(0.545, 0.565, 0.659, 1)
-Workbench/colors/accent = Color(0.537, 0.706, 0.98, 1)
-Workbench/colors/accent_soft = Color(0.537, 0.706, 0.98, 0.1)
-Workbench/colors/on_accent = Color(0.067, 0.067, 0.106, 1)
-Workbench/colors/focus_ring = Color(0.639, 0.757, 0.984, 1)
+Workbench/colors/background_base = Color(0.02, 0.02, 0.02, 1)
+Workbench/colors/surface_l1 = Color(0.043, 0.043, 0.043, 1)
+Workbench/colors/surface_l2 = Color(0.075, 0.075, 0.075, 1)
+Workbench/colors/surface_l3 = Color(0.106, 0.106, 0.106, 1)
+Workbench/colors/surface_selected = Color(0.165, 0.165, 0.165, 1)
+Workbench/colors/hairline = Color(0.137, 0.137, 0.137, 1)
+Workbench/colors/border_field = Color(0.38, 0.38, 0.38, 1)
+Workbench/colors/text_primary = Color(0.929, 0.929, 0.929, 1)
+Workbench/colors/text_secondary = Color(0.725, 0.725, 0.725, 1)
+Workbench/colors/text_muted = Color(0.545, 0.545, 0.545, 1)
+Workbench/colors/accent = Color(0.298, 0.788, 0.651, 1)
+Workbench/colors/accent_soft = Color(0.298, 0.788, 0.651, 0.1)
+Workbench/colors/on_accent = Color(0.016, 0.067, 0.047, 1)
+Workbench/colors/focus_ring = Color(0.51, 0.878, 0.776, 1)
 ; --- semantic status colours (§12/§16 — paired with text, never colour-only)
-Workbench/colors/status_success = Color(0.651, 0.89, 0.631, 1)
-Workbench/colors/status_warning = Color(0.976, 0.886, 0.686, 1)
-Workbench/colors/status_error = Color(0.953, 0.545, 0.659, 1)
-Workbench/colors/status_info = Color(0.537, 0.863, 0.922, 1)
+Workbench/colors/status_success = Color(0.455, 0.761, 0.486, 1)
+Workbench/colors/status_warning = Color(0.902, 0.765, 0.373, 1)
+Workbench/colors/status_error = Color(0.898, 0.459, 0.494, 1)
+Workbench/colors/status_info = Color(0.435, 0.714, 0.851, 1)
 ; --- the authority vocabulary (§16: displayed, never collapsed)
-Workbench/colors/authority_canonical = Color(0.706, 0.745, 0.996, 1)
-Workbench/colors/authority_observed = Color(0.58, 0.886, 0.835, 1)
-Workbench/colors/authority_derived = Color(0.98, 0.702, 0.529, 1)
-Workbench/colors/authority_unknown = Color(0.576, 0.6, 0.69, 1)
+Workbench/colors/authority_canonical = Color(0.702, 0.651, 0.91, 1)
+Workbench/colors/authority_observed = Color(0.435, 0.78, 0.839, 1)
+Workbench/colors/authority_derived = Color(0.863, 0.604, 0.31, 1)
+Workbench/colors/authority_unknown = Color(0.565, 0.565, 0.565, 1)
 ; --- semantic tokens: type roles (§11; Cyrillic-safe metrics via containers)
 Workbench/constants/font_size_page_title = 26
 Workbench/constants/font_size_section_title = 20
@@ -396,16 +400,16 @@ Workbench/styles/card_user = SubResource("sb_card_user")
 ; --- component tokens: layout defaults --------------------------------------
 BoxContainer/constants/separation = 8
 ; --- component tokens: Label (body role default) -----------------------------
-Label/colors/font_color = Color(0.804, 0.839, 0.957, 1)
+Label/colors/font_color = Color(0.929, 0.929, 0.929, 1)
 Label/font_sizes/font_size = 16
 ; --- component tokens: Button (§10 state set) --------------------------------
 Button/font_sizes/font_size = 15
-Button/colors/font_color = Color(0.804, 0.839, 0.957, 1)
-Button/colors/font_hover_color = Color(0.804, 0.839, 0.957, 1)
-Button/colors/font_pressed_color = Color(0.804, 0.839, 0.957, 1)
-Button/colors/font_hover_pressed_color = Color(0.804, 0.839, 0.957, 1)
-Button/colors/font_focus_color = Color(0.804, 0.839, 0.957, 1)
-Button/colors/font_disabled_color = Color(0.498, 0.518, 0.612, 1)
+Button/colors/font_color = Color(0.929, 0.929, 0.929, 1)
+Button/colors/font_hover_color = Color(0.929, 0.929, 0.929, 1)
+Button/colors/font_pressed_color = Color(0.929, 0.929, 0.929, 1)
+Button/colors/font_hover_pressed_color = Color(0.929, 0.929, 0.929, 1)
+Button/colors/font_focus_color = Color(0.929, 0.929, 0.929, 1)
+Button/colors/font_disabled_color = Color(0.38, 0.38, 0.38, 1)
 Button/styles/normal = SubResource("sb_button_normal")
 Button/styles/hover = SubResource("sb_button_hover")
 Button/styles/pressed = SubResource("sb_button_pressed")
@@ -414,12 +418,12 @@ Button/styles/disabled = SubResource("sb_button_disabled")
 Button/styles/focus = SubResource("sb_button_focus")
 ; --- component tokens: NavButton (the rail's quiet variation, wb-12) ---------
 NavButton/font_sizes/font_size = 15
-NavButton/colors/font_color = Color(0.651, 0.678, 0.784, 1)
-NavButton/colors/font_hover_color = Color(0.804, 0.839, 0.957, 1)
-NavButton/colors/font_pressed_color = Color(0.804, 0.839, 0.957, 1)
-NavButton/colors/font_hover_pressed_color = Color(0.804, 0.839, 0.957, 1)
-NavButton/colors/font_focus_color = Color(0.804, 0.839, 0.957, 1)
-NavButton/colors/font_disabled_color = Color(0.498, 0.518, 0.612, 1)
+NavButton/colors/font_color = Color(0.725, 0.725, 0.725, 1)
+NavButton/colors/font_hover_color = Color(0.929, 0.929, 0.929, 1)
+NavButton/colors/font_pressed_color = Color(0.929, 0.929, 0.929, 1)
+NavButton/colors/font_hover_pressed_color = Color(0.929, 0.929, 0.929, 1)
+NavButton/colors/font_focus_color = Color(0.929, 0.929, 0.929, 1)
+NavButton/colors/font_disabled_color = Color(0.38, 0.38, 0.38, 1)
 NavButton/styles/normal = SubResource("sb_nav_normal")
 NavButton/styles/hover = SubResource("sb_nav_hover")
 NavButton/styles/pressed = SubResource("sb_nav_pressed")
@@ -428,12 +432,12 @@ NavButton/styles/disabled = SubResource("sb_nav_disabled")
 NavButton/styles/focus = SubResource("sb_nav_focus")
 ; --- component tokens: LineEdit (§10 state set) ------------------------------
 LineEdit/font_sizes/font_size = 15
-LineEdit/colors/font_color = Color(0.804, 0.839, 0.957, 1)
-LineEdit/colors/font_selected_color = Color(0.067, 0.067, 0.106, 1)
-LineEdit/colors/font_uneditable_color = Color(0.651, 0.678, 0.784, 1)
-LineEdit/colors/font_placeholder_color = Color(0.545, 0.565, 0.659, 1)
-LineEdit/colors/caret_color = Color(0.537, 0.706, 0.98, 1)
-LineEdit/colors/selection_color = Color(0.537, 0.706, 0.98, 0.45)
+LineEdit/colors/font_color = Color(0.929, 0.929, 0.929, 1)
+LineEdit/colors/font_selected_color = Color(0.929, 0.929, 0.929, 1)
+LineEdit/colors/font_uneditable_color = Color(0.725, 0.725, 0.725, 1)
+LineEdit/colors/font_placeholder_color = Color(0.545, 0.545, 0.545, 1)
+LineEdit/colors/caret_color = Color(0.298, 0.788, 0.651, 1)
+LineEdit/colors/selection_color = Color(0.298, 0.788, 0.651, 0.4)
 LineEdit/styles/normal = SubResource("sb_input_normal")
 LineEdit/styles/focus = SubResource("sb_input_focus")
 LineEdit/styles/readonly = SubResource("sb_input_readonly")

@@ -444,7 +444,17 @@ def test_the_cancellation_closes_canceled_and_cleans_the_part(
 ) -> None:
     """The checkpoint's own carrier: a fetch whose checkpoint observes
     the cancellation raises WorkCancelled mid-download — the registry
-    closes CANCELED and the .part never survives."""
+    closes CANCELED and the .part never survives.
+
+    KI#95 (iter-232): the fetch's single checkpoint() call RACED the
+    main thread's run.cancel dispatch — on a fast runner the worker
+    reached the checkpoint BEFORE the cancel landed, the checkpoint
+    passed, and the "unreachable" AssertionError closed the run FAILED
+    (the honest registry truth for an unrequested abort — the CI-red
+    form). The fetch now POLLS the checkpoint (the work contract's own
+    observation surface) until the cancellation arrives, bounded — the
+    test is deterministic under any thread scheduling, and a cancel
+    that never lands fails loudly with its own honest cause."""
     models = tmp_path / "models"
     models.mkdir()
 
@@ -457,8 +467,19 @@ def test_the_cancellation_closes_canceled_and_cleans_the_part(
             part.write_bytes(b"partial-download")
             try:
                 on_progress(16, 1024)
-                checkpoint()  # the cancellation observed at a boundary
-                raise AssertionError("unreachable — the checkpoint raises")
+                # the mid-download boundary, made deterministic: poll
+                # the cooperative checkpoint until the cancellation
+                # lands (the checkpoint reads the token without the
+                # registry lock, so run.cancel is never starved); a
+                # bounded wait — an absent cancel fails LOUDLY below.
+                deadline = time.monotonic() + 20.0
+                while time.monotonic() < deadline:
+                    checkpoint()
+                    time.sleep(0.005)
+                raise AssertionError(
+                    "the cancellation never arrived at the checkpoint "
+                    "(run.cancel was not dispatched within 20s)"
+                )
             finally:
                 part.unlink(missing_ok=True)  # the real fetcher's own law
 
