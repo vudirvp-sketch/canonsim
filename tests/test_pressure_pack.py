@@ -340,6 +340,51 @@ def test_the_spiral_closes_the_burst_tips_the_watch_and_the_widow_feeds() -> Non
     assert prop(events, WIDOW, "status.cold") == 48  # 50 - 2 (her own feed)
 
 
+def test_the_plea_is_audible_the_authored_knowledge_mints() -> None:
+    """The wait resolver's knowledge minting (iter-262, KI#103 — the
+    KI#15 dead-data family's second member, the iter-53 hooks
+    precedent's twin): the institutional goal verbs are PUBLIC acts,
+    and their authored knowledge blocks — dead data the resolver
+    silently dropped while the admission lint passed them (the
+    committed golden's `the_watch_pleads` events carried knowledge:
+    []) — mint with the event. The plea is heard: the firehole's
+    occupants partial, the boiler house through the shared wall vague
+    (the authored adjacency fidelity, the pack's own intent going
+    live byte-for-byte). Regression shape: the fresh-run guard above
+    is the MUTATION CATCHER (a resolver that stops minting diverges
+    from this golden's bytes and fails there); this witness is the
+    SEMANTIC pin — a regeneration that silently drops or reshapes the
+    authored records fails here with a readable diagnosis."""
+    events = load_golden()
+    pleas = by_type(events, "the_watch_pleads")
+    assert len(pleas) == 2
+    for plea in pleas:
+        partial = {
+            (k.who, k.channel, k.fidelity, k.knows)
+            for k in plea.knowledge if k.fidelity == "partial"
+        }
+        vague = {
+            (k.who, k.channel, k.knows)
+            for k in plea.knowledge if k.fidelity == "vague"
+        }
+        # same_location (except the group actor) heard partial — the
+        # tenements' own voice reaching the firehole crowd
+        assert partial == {
+            ("pc_01", "heard", "partial", "the_watch_pleaded"),
+            ("npc_tenant_01", "heard", "partial", "the_watch_pleaded"),
+            ("npc_tenant_02", "heard", "partial", "the_watch_pleaded"),
+            ("npc_tenant_03", "heard", "partial", "the_watch_pleaded"),
+        }
+        # adjacent_locations heard vague — the boiler house hears it
+        # through the shared wall (the authored wall adjacency)
+        assert vague == {
+            ("npc_stoker_01", "heard", "the_watch_pleaded"),
+            ("npc_stoker_02", "heard", "the_watch_pleaded"),
+        }
+        # the group actor itself takes no record (the authored except)
+        assert all(k.who != "grp_tenants" for k in plea.knowledge)
+
+
 # -- (4) the objective-function triangle ----------------------------------------
 
 

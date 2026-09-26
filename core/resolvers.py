@@ -255,15 +255,24 @@ def _wait(
     pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
-    """wait: time passes, nothing else (the world moves via passes).
-    The action's hooks lists mint with the event (iter-53, content-3:
-    idle time is the ambient tag's seed — the hooks minting was
-    resolver-sparse (the steal family only), a silent dead-data gap of
-    the KI#15 family; the first-consumer law applies: each resolver
-    mints the day its first pack consumer arrives)."""
+    """wait: time passes, the world moves via passes — and the action's
+    OWN declared surfaces mint with the event. Hooks since iter-53
+    (content-3: idle time is the ambient tag's seed — the hooks minting
+    was resolver-sparse, a silent dead-data gap of the KI#15 family);
+    KNOWLEDGE since iter-262 (KI#103 — the same family's second member,
+    the pressure pack's two committed institutional goal verbs
+    `convene_the_bench` / `plead_for_coal` carrying fully authored
+    knowledge blocks the resolver silently dropped, the dead data
+    passing the admission lint; the first-consumer law applied: the
+    committed pack WAS the first consumer, its authored adjacency
+    fidelity — the boiler house hearing the plea through the shared
+    wall — going live unchanged). An action declaring no knowledge
+    mints none — every committed pack without wait-family knowledge is
+    byte-identical under this minting (the empty-block law)."""
     return Resolution(
         event_type=action["events"]["success"],
         outcome={},
+        knowledge=_knowledge(action, "success", pack, projection, intent, tick),
         hooks=_hooks(action, "success"),
     )
 

@@ -3814,6 +3814,78 @@ composition» call, P1-10 = temp-1's half (b) test arm):**
   measured band; the losses substrate/integration, never the queue
   law) — the reopening conditions unchanged.
 
+**The iter-262 diagnosis record (D-238 — the owner's iter-262 brief:
+reproduce the iter-261 J-evidence, discriminate the competing
+explanations, land only the warranted change):**
+
+- **The reproduction held, then discriminated.** Every J observation
+  reproduced at HEAD (the census classes A1·B3·C5·D1·E2·F0·G0·H10,
+  the 86 checks / 287 talks, 36/36 market days — extended: the 12/12
+  fairs open on the ashes too). The CAUSAL-INERTNESS ablation (the new
+  §9 prism, TEST_PLAN): folding the realized composition log with (a)
+  all 52 calendar turns and (b) all 5 institutional events removed
+  leaves the final projection BYTE-IDENTICAL; every cross-reference to
+  those ids is a chronological cause-chain neighbor, never a consumer.
+  The J-gaps are not missing consumers on live functions — the
+  functions were never causally armed.
+- **J-1 re-framed — the market-as-meso-carrier, never a calendar
+  gate.** market_opens/fair_opens carry ZERO runtime consumers (tale
+  lines + the story-critical listing; the weather seasonal ride reads
+  the seasons' phases, not the trade turns); `destroyed` is read by
+  the fire layer alone; the one materialized loss the market fire DID
+  cause is the ignition affordance (`spot_available` door-rejects
+  re-arson). The previous proposal (gate the calendar entry on
+  `prop(loc_malby.destroyed)`) is provably cosmetic — zero behavioral
+  delta — and contradicts the clock's own no-gate law (calendar.py:
+  no knowledge, no state_changes, no hooks; the consumers' rows own
+  gating, and NO consumer mechanism can read a clock event — on_action
+  needs knowledge holders, hooks need event tags, both empty by
+  construction). The honest frame: the market is authored at the tale
+  level only; making the burnout economically consequential is a
+  world-track authoring unit (the §6.1 crossing-household class) — a
+  carrier whose state the fire destroys, the council writes, and the
+  calendar line reads. Owner-gated; the tale contradiction («the
+  stalls from the weir stair to the bank» after the burnout) is the
+  row's honest entry evidence.
+- **J-2's classification refuted both ways; the live bug found and
+  FIXED (KI#103).** The previous «MISSING CONTENT, pack-data-only»
+  claim fails twice: no pack surface writes location flags from
+  actions (status_effects = actor-numeric; on_action = witness-numeric
+  on knowledge-holding events only; no action-level state block), and
+  the natural minimal residue — KNOWLEDGE, the public act witnessed —
+  was resolver-blocked: `wait` hardcoded no-knowledge. The block was
+  not hypothetical: pressure_pack's `convene_the_bench` /
+  `plead_for_coal` carry fully authored knowledge blocks (same_location
+  heard partial + adjacent heard vague — the boiler house through the
+  shared wall) the resolver silently dropped while the admission lint
+  passed them — the KI#15 dead-data family, the iter-53 hooks
+  precedent's twin (that fix's own docstring: «each resolver mints the
+  day its first pack consumer arrives» — the first consumer was
+  already committed). FIX: `_wait` mints `_knowledge(action, success)`
+  (core/resolvers.py); empty blocks stay empty — the other four
+  committed fixtures byte-identical; the pressure golden regenerated
+  on its intended delta (exactly the two the_watch_pleads lines gain
+  their authored 6 records each); regression = the fresh-run guard
+  (the mutation catcher, verified by removing the minting and watching
+  it fail) + the plea-is-audible witness (the semantic pin). The
+  province remainder (knowledge on council/hold_vigil/patrol) is now
+  PURE PACK DATA — owner-gated, with the scratch falsifier's measured
+  cascade on record (witnesses hold the tokens; the PC's talks spread
+  them; rumor_told 22→25; the composition oracles would need an
+  honest re-fixation).
+- **J-3 closed as a non-gap.** The road actors' fear pulse (0→10 once,
+  the keep alarm's wall ripple) is structurally unreadable: max fear
+  outside a burning location is 10 (the +40 spike is occupants-only),
+  below any behavioral bar; their zone never ticks while they hold it
+  (active-zone beats, warm-ring crossings — riverroad warmed only
+  while the PC stood at the keep, before the fire); and at any warm
+  crossing the DECAY CATCH-UP runs before the urgency rolls
+  (`_run_macro`'s order: drift, then goals) — a warm reader always
+  sees post-decay 0. The proposed peddler urgency is dead content at
+  every threshold. The cold-zone freeze itself is honest LOD
+  (suspended animation, caught up at the first read). The B-class
+  census row stays as the density fact it always was.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
