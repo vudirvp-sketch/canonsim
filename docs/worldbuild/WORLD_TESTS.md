@@ -1303,6 +1303,37 @@ the withhold-riding class extracted n=2, the position-dependence explicit
 n=2, the bands equalized; the taboo 1/2 — the W5 entry's iter-209 record
 the detail's owner).
 
+### CONFIRMED — P1-1 the Province integrated composition witness (2026-09-26, iter-261, D-237)
+
+One run (`tests/playscripts/province_composition.json`, province_pack@0.1
+seed 2, existing verbs only — zero new content) walking SIX interacting
+causal chains end-to-end over the committed substrate, pinned by 16
+RELATIONAL oracles (`tests/test_p1_composition.py` — no golden snapshot):
+the crime family (the failed steal → the knowledge mint → three leverage
+clusters → the suspicion stack → the watch rotation's BRIEFING carrying
+the whole stack to the relief who never co-located with any act → the
+`document_check` crossing the arrest bar co-located → the arrest →
+`caught` irreversible) · Loop A's guild arm (arson → alarm → fear →
+`guild_councils` through the door) · Loop B (both elders' grief → the
+deadband → the vigil ×4, including the YEAR-LATER re-fire off the
+decay-0 residue — the persistence→future-option relation proven at the
+world level) · Loop C (the full calendar year + the seasonal ride) ·
+the macro economy (the year turn's four account flows) · Loop D (the
+first-beat condensation) + the ambient band. The honest gaps classified
+(the §14 law): the garrison arm and the storm murmur stay at their own
+committed witnesses (witness-window limits, never missing mechanics);
+the scene LOD scopes five urgency families out of the route (structural,
+depth-3); the burned market's `destroyed` residue gates neither the
+market days (36/36 opened) nor the mistress's talks (285/287) — a
+residue→consumer gap recorded for the owner's content call. The
+timing surface (P1-10, `mechanics.py timing`): 383 autonomous
+resolutions all carrying `assignment_tick`, latency 7..518861, one OCC
+miss (director_0001, 2520→3449 — the duty rotation moved inside the
+deferral window); the H1/H2 season-scale sliced pair measured: the
+material outcomes IDENTICAL span-vs-sliced, the crossing families
+invariant, the deltas door-only. The owner's RU report A–J:
+`docs/iterations/iter-261-composition-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

@@ -668,3 +668,125 @@ def test_census_cli_dispatch(capsys: pytest.CaptureFixture[str]) -> None:
     assert "== CENSUS tavern_pack · 16 actions" in out
     assert mechanics.main(["census", "--action", "wait"]) == 0
     assert "action wait" in capsys.readouterr().out
+
+
+# -- cov-1's runtime arm + P1-10's timing table (iter-261) --------------------
+
+
+def test_timing_reports_the_two_times_record(tmp_path: Path) -> None:
+    """P1-10 over the canonical day1_full run (seed 125): five autonomous
+    resolutions, ALL carrying `assignment_tick` with origin <= realization
+    (the B3 discipline block), and the ONE OCC miss is the temp-1 card's
+    own seed-125 datum re-derived independently — the beat-720 coerce
+    attempt whose door landed at t=732 (latency 12, the expired leverage
+    card, phases.md §6's decision record)."""
+    events = _run_day1(tmp_path)
+    out = mechanics.render_timing(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    assert "autonomous resolutions: 5 (4 accepted + 1 rejected)" in out
+    assert "B3 discipline: 5/5 carry assignment_tick" in out
+    assert "non-autonomous carriers: 0" in out
+    assert "latency: min 12 · max 376" in out
+    assert "OCC misses (the deferral window broke a precondition): 1" in out
+    assert "urgency_0000 at 720 -> t 732 (latency 12)" in out
+    assert "compression: assignments span [360, 1080] (720 ticks)" in out
+
+
+def test_timing_is_regenerable(tmp_path: Path) -> None:
+    """Derived, rebuildable: two renders over the same events are
+    byte-identical (the periphery discipline, INV-2's read-side form)."""
+    events = _run_day1(tmp_path)
+    first = mechanics.render_timing(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    second = mechanics.render_timing(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    assert first == second
+
+
+def test_census_run_localizes_the_losses(tmp_path: Path) -> None:
+    """The runtime A..H census over day1_theft_and_arson (the short arm,
+    15 events, zero autonomous resolutions): the never-minted families
+    localize HONESTLY — the drunkard's coerce is A (no leverage cluster
+    ever existed — the driving pressure itself), the maid's wait is C
+    (rolled, never hit), the guards' gates C (the flag / the echo never
+    passed) — and the player's authored verbs all walk the full path.
+    The census names the FIRST missing leg, never a scheduler verdict."""
+    script = load_playscript(
+        REPO / "tests" / "playscripts" / "day1_theft_and_arson.json"
+    )
+    log = tmp_path / "short.jsonl"
+    sim = Simulator(PACK, script["seed"], log, SCHEMA, commit="0000000")
+    sim.run_playscript(script)
+    _, events = read_log(log, SCHEMA)
+    out = mechanics.render_census_run(
+        PACK, list(events), {"seed": script["seed"]}, source="short"
+    )
+    assert "urgency_0000   urgency  npc_drunk_01" in out
+    assert "A: no leverage ever minted" in out
+    assert "C: rolled, never hit" in out
+    assert "gate flagged_accessible never passed" in out
+    assert "gate echo_at_least never passed" in out
+    assert "classes: A 2 · B 0 · C 3 · D 0 · E 0 · F 0 · G 0 · H 5" in out
+    for action in ("steal", "take", "move", "wait", "drop_break"):
+        assert f"  {action:<14}" in out  # the authored verbs, all H
+
+
+def test_census_run_names_the_full_path_and_the_occ_class(
+    tmp_path: Path,
+) -> None:
+    """Over day1_full (seed 125) the realized families reach H through
+    their declared consumers, and the all-rejected family is the D class
+    — the OCC window's own loss (the same seed-125 datum the timing
+    table reports, the two instruments agreeing)."""
+    events = _run_day1(tmp_path)
+    out = mechanics.render_census_run(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    assert "urgency_0000" in out and "D: every minted intent died at the door" in out
+    assert "urgency_0004" in out and "— H:" in out
+    assert "director releases" in out
+    assert "possible_document_check" in out  # the payload attribution
+
+
+def test_census_run_is_regenerable(tmp_path: Path) -> None:
+    """Two derivations over the same run are byte-identical."""
+    events = _run_day1(tmp_path)
+    first = mechanics.render_census_run(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    second = mechanics.render_census_run(
+        PACK, events, {"seed": 125}, source="day1_full"
+    )
+    assert first == second
+
+
+def test_census_runtime_arm_refuses_the_static_flags(
+    tmp_path: Path,
+) -> None:
+    """The runtime arm is its own view: combining --log with the static
+    walk's --action/--full is a loud exit, never a silent mix."""
+    log = tmp_path / "day1.jsonl"
+    sim = Simulator(PACK, 125, log, SCHEMA, commit="0000000")
+    sim.run_playscript(load_playscript(DAY1))
+    sim.close()
+    with pytest.raises(SystemExit):
+        mechanics.main(["census", "--log", str(log), "--action", "wait"])
+
+
+def test_timing_and_census_run_cli_dispatch(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The CLI arms land the same reports the render APIs return."""
+    log = tmp_path / "day1.jsonl"
+    sim = Simulator(PACK, 125, log, SCHEMA, commit="0000000")
+    sim.run_playscript(load_playscript(DAY1))
+    sim.close()
+    assert mechanics.main(["timing", "--log", str(log)]) == 0
+    out = capsys.readouterr().out
+    assert out.startswith("== TIMING ") and "OCC misses" in out
+    assert mechanics.main(["census", "--log", str(log)]) == 0
+    out = capsys.readouterr().out
+    assert out.startswith("== CENSUS-RUN ") and "classes: " in out

@@ -2284,6 +2284,558 @@ def _parse_ticks(text: str) -> tuple[int | None, int | None]:
     return lo, hi
 
 
+# -- timing + the runtime census (P1-10 + cov-1's --log arm, iter-261) --------
+
+#: The autonomous cause_intent prefixes (B3's exact scope, D-236).
+AUTONOMOUS_CAUSE_PREFIXES: Final = ("urgency_", "faction_", "director_")
+#: The latency buckets the timing table reports (ticks).
+TIMING_BUCKETS: Final = (
+    (0, "0"), (100, "1-99"), (1000, "100-999"), (10000, "1k-10k"),
+    (None, ">10k"),
+)
+
+
+def _autonomous_cause(cause_intent: Any) -> bool:
+    """Whether a cause_intent id resolves an AUTONOMOUS intent."""
+    return (
+        isinstance(cause_intent, str)
+        and cause_intent.startswith(AUTONOMOUS_CAUSE_PREFIXES)
+    )
+
+
+def _timing_rows(
+    events: Sequence[EventRecord],
+) -> list[dict[str, Any]]:
+    """One row per autonomous-resolved event: the two-times record."""
+    rows: list[dict[str, Any]] = []
+    for event in events:
+        cause = event.provenance.get("cause_intent")
+        if not _autonomous_cause(cause):
+            continue
+        rows.append({
+            "cause": str(cause), "type": event.type, "t": event.t,
+            "at": event.provenance.get("assignment_tick"),
+            "deltas": len(event.state_changes),
+            "knowledge": len(event.knowledge), "hooks": len(event.hooks),
+        })
+    return rows
+
+
+def _hook_of(pack: Pack, kind: str, actor: str) -> str:
+    """The director row's hook attribution: the payload-tags heuristic
+    (`_payload_tags` — the release's (kind, actor) against the pack's own
+    declarations; the shadow replay's own attribution source)."""
+    tags = _payload_tags(pack).get((kind, actor), ())
+    return "+".join(tags) if tags else "?"
+
+
+def _intent_kind_of(pack: Pack, event_type: str) -> str:
+    """The intent kind an event type resolves (the actions table's own
+    reverse index — success/failure/failure_total -> intent): a failure
+    event's type is never the verb (document_check_failed resolves the
+    document_check intent), and the payload map keys on the verb."""
+    for action in _action_rows(pack):
+        events = action.get("events") or {}
+        for outcome in ("success", "failure", "failure_total"):
+            if events.get(outcome) == event_type:
+                return str(action.get("intent"))
+    return event_type
+
+
+def render_timing(
+    pack: Pack,
+    events: Sequence[EventRecord],
+    header: Mapping[str, Any],
+    *,
+    source: str,
+) -> str:
+    """P1-10 — the autonomous timing witness over ONE run (iter-261, the
+    owner's composition brief §6): for every autonomous resolution the
+    TWO-TIMES record (assignment_tick vs event.t, B3's field), the
+    deferral latency distribution, the per-family table, the OCC misses
+    (rejections whose precondition window broke between assignment and
+    realization), and the compression view (assignments spread vs
+    realizations piled — the B2 clustering, measured not assumed).
+
+    Derived, read-side, regenerable — never a second truth: the log is
+    the only input; the pack names the families. The event's own actor
+    names the family's carrier (a rejection's actor is the intent's
+    actor); the director rows attribute their hook via the payload map.
+    """
+    rows = _timing_rows(events)
+    causes = sorted({row["cause"] for row in rows})
+    lines = [
+        f"== TIMING {source} · pack {pack.name_version} · "
+        f"{len(events)} events · seed {header.get('seed', '-')} =="
+    ]
+    # 1) the B3 discipline block
+    with_field = [r for r in rows if r["at"] is not None]
+    violations = [
+        r for r in rows if r["at"] is None or r["at"] > r["t"]
+    ]
+    foreign = [
+        e for e in events
+        if not _autonomous_cause(e.provenance.get("cause_intent"))
+        and "assignment_tick" in e.provenance
+    ]
+    lines.append(
+        f"autonomous resolutions: {len(rows)} "
+        f"({sum(1 for r in rows if r['type'] != 'intent_rejected')} "
+        f"accepted + "
+        f"{sum(1 for r in rows if r['type'] == 'intent_rejected')} rejected)"
+    )
+    lines.append(
+        "B3 discipline: "
+        + (
+            f"{len(with_field)}/{len(rows)} carry assignment_tick, all "
+            "origin<=realization"
+            if not violations
+            else f"VIOLATIONS: {len(violations)} rows missing/illegal"
+        )
+        + f" · non-autonomous carriers: {len(foreign)}"
+    )
+    # 2) the latency distribution
+    lat = sorted(r["t"] - r["at"] for r in with_field if r["at"] is not None)
+    if lat:
+        buckets: list[tuple[str, int]] = []
+        for bound, label in TIMING_BUCKETS:
+            if bound is None:
+                buckets.append((label, len(lat) - sum(n for _, n in buckets)))
+                break
+            buckets.append((
+                label, sum(1 for x in lat if x < bound) - sum(
+                    n for _, n in buckets
+                ),
+            ))
+        lines.append(
+            f"latency: min {lat[0]} · max {lat[-1]} · mean "
+            f"{sum(lat) / len(lat):.1f} · zero-latency "
+            f"{lat.count(0)} · deferred {len(lat) - lat.count(0)}"
+        )
+        lines.append(
+            "buckets: " + " · ".join(f"{label} {n}" for label, n in buckets)
+        )
+    # 3) the per-family table
+    lines.append("")
+    lines.append("families:")
+    for cause in causes:
+        family = [r for r in rows if r["cause"] == cause]
+        accepted = [r for r in family if r["type"] != "intent_rejected"]
+        flat = sum(r["deltas"] + r["knowledge"] + r["hooks"] for r in family)
+        span = (
+            f"[{min(r['at'] for r in family)},"
+            f"{max(r['at'] for r in family)}]"
+            if family[0]["at"] is not None else "n/a"
+        )
+        lines.append(
+            f"  {cause:<14} {len(family):>4} resolutions "
+            f"({len(accepted):>4} accepted) · origins {span} · "
+            f"deltas+knowledge+hooks {flat} · types "
+            + ",".join(sorted({r["type"] for r in family}))
+        )
+    # 4) the OCC misses
+    misses = [r for r in rows if r["type"] == "intent_rejected"]
+    lines.append("")
+    lines.append(
+        f"OCC misses (the deferral window broke a precondition): "
+        f"{len(misses)}"
+    )
+    for miss in misses:
+        lines.append(
+            f"  {miss['cause']} at {miss['at']} -> t {miss['t']} "
+            f"(latency {miss['t'] - miss['at']}): the minted-and-doomed "
+            "fact — the world moved between assignment and realization"
+        )
+    # 5) the compression view (the B2 clustering, measured)
+    if with_field:
+        origins = [r["at"] for r in with_field if r["at"] is not None]
+        realized = [r["t"] for r in with_field]
+        lines.append("")
+        lines.append(
+            f"compression: assignments span "
+            f"[{min(origins)}, {max(origins)}] "
+            f"({max(origins) - min(origins)} ticks) · realizations span "
+            f"[{min(realized)}, {max(realized)}] "
+            f"({max(realized) - min(realized)} ticks)"
+        )
+    return "\n".join(lines) + "\n"
+
+
+# -- the runtime census (cov-1's --log arm) ------------------------------------
+
+
+def _declared_families(pack: Pack) -> list[dict[str, Any]]:
+    """The declared autonomous families with their carriers and gates:
+    `urgency_NNNN` / `faction_NNNN` rows (index-addressed like the
+    runtime's own sequence ids); the director hooks ride the payload
+    attribution instead (their ids are release-order, never per-hook)."""
+    rows: list[dict[str, Any]] = []
+    for seq, entry in enumerate(
+        pack.rules.get("urgencies", {}).get("entries", ())
+    ):
+        if not isinstance(entry, Mapping):
+            continue
+        intent = entry.get("intent") or {}
+        rows.append({
+            "cause": f"urgency_{seq:04d}", "kind": "urgency",
+            "carrier": str(entry.get("npc", "?")),
+            "intent": str(intent.get("kind", "?")),
+            "requires": list(entry.get("requires", ())),
+        })
+    for seq, entry in enumerate(
+        pack.rules.get("factions", {}).get("entries", ())
+    ):
+        if not isinstance(entry, Mapping):
+            continue
+        rows.append({
+            "cause": f"faction_{seq:04d}", "kind": "faction",
+            "carrier": str(entry.get("group", "?")),
+            "intent": str((entry.get("intent") or {}).get("kind", "?")),
+            "requires": [],
+        })
+    return rows
+
+
+def _position_timeline(
+    pack: Pack, events: Sequence[EventRecord]
+) -> dict[str, list[tuple[int, str]]]:
+    """Per entity: the (tick, location) timeline from the initial
+    projection plus every committed position write (the fold's own
+    history, rebuilt from the log — never a second truth)."""
+    timeline: dict[str, list[tuple[int, str]]] = {}
+    for entity, props in initial_projection(pack.entities).items():
+        position = props.get("position")
+        if isinstance(position, str):
+            timeline[entity] = [(0, position)]
+    for event in events:
+        for change in event.state_changes:
+            if change.prop == "position" and isinstance(change.to_, str):
+                timeline.setdefault(change.entity, []).append(
+                    (event.t, change.to_)
+                )
+    return timeline
+
+
+def _location_at(
+    timeline: Mapping[str, list[tuple[int, str]]], entity: str, tick: int
+) -> str | None:
+    """The entity's location at `tick` (the last write at or before it)."""
+    best: str | None = None
+    for at, location in timeline.get(entity, ()):
+        if at <= tick:
+            best = location
+        else:
+            break
+    return best
+
+
+def _scope_ticks(pack: Pack, events: Sequence[EventRecord]) -> dict[str, set[str]]:
+    """The LOD ticking scope per location: which locations ever hosted a
+    beat (the ACTIVE zone) or a macro crossing (the WARM ring — the
+    `_run_macro` law). Families whose carrier never stands in a ticking
+    location never roll — the structural C-class, the depth-3 law."""
+    if not events:
+        return {}
+    player = pack.player_id()
+    timeline = _position_timeline(pack, events)
+    last = events[-1].t
+    scope: dict[str, set[str]] = {}
+    beats = beat_grid(pack.rules, last)
+    macro_cadence = (pack.rules.get("time", {}).get("macro") or {}).get(
+        "cadence_ticks"
+    )
+    crossings = (
+        [t for t in range(int(macro_cadence), last + 1, int(macro_cadence))]
+        if isinstance(macro_cadence, int) and macro_cadence > 0 else []
+    )
+    for tick in beats:
+        active = _location_at(timeline, player, tick)
+        if active:
+            scope.setdefault(active, set()).add("beat")
+    for tick in crossings:
+        active = _location_at(timeline, player, tick)
+        if not active:
+            continue
+        record = pack.entity(active)
+        exits = record.get("exits") if isinstance(record, Mapping) else None
+        for warm in exits or ():
+            scope.setdefault(str(warm), set()).add("macro")
+    return scope
+
+
+def _pressure_verdict(
+    events: Sequence[EventRecord],
+    family: Mapping[str, Any],
+    timeline: Mapping[str, list[tuple[int, str]]],
+    scope: Mapping[str, set[str]],
+) -> tuple[str, str]:
+    """(class, reason) for a family that never minted: the loss
+    localization between A (the driving pressure never existed) and C
+    (the entry exists, the gate/roll never opened) — the LOD scope
+    first (structural), then the gate inputs measured from the log."""
+    carrier = family["carrier"]
+    # the LOD scope: was the carrier's location ever a ticking zone?
+    locations = {loc for _tick, loc in timeline.get(carrier, ())}
+    if scope and not (locations & set(scope)):
+        return "C", "LOD: the carrier never enters a ticking zone"
+    # the gate inputs, measured: leverage / traits / pair axes / location
+    reasons: list[str] = []
+    for gate in family["requires"]:
+        test = gate.get("test")
+        if test == "leverage_over":
+            held = any(
+                e.type == "leverage_gained" and e.actor == carrier
+                for e in events
+            )
+            reasons.append(
+                "leverage cluster" if held else "A: no leverage ever minted"
+            )
+        elif test == "trait_held":
+            reasons.append("A: the trait never crystallized")
+        elif test == "relation_at_least":
+            reasons.append(
+                "A: the pair axis never crossed the bar" if not any(
+                    e.type in ("talk", "coerce", "gift") for e in events
+                ) else "the pair axis stayed below the bar"
+            )
+        elif test == "same_location":
+            reasons.append("never co-located with the target")
+        else:
+            reasons.append(f"gate {test} never passed")
+    if any(r.startswith("A:") for r in reasons):
+        return "A", "; ".join(r for r in reasons if r.startswith("A:"))
+    return "C", "; ".join(reasons) if reasons else "rolled, never hit"
+
+
+def _runtime_consumer_types(pack: Pack, event_type: str) -> set[str]:
+    """The event types that can CONSUME `event_type` at runtime: the
+    declared on_action reactions, plus the crime system's observable
+    events when the type mints crime tokens (the census matrix's own
+    crime leg), plus the faction verbs when a faction axis rides the
+    type's state writes (the axis→group→verb chain, all pack data)."""
+    out: set[str] = set()
+    reactions = pack.rules.get("on_action", {}).get(event_type)
+    if isinstance(reactions, list):
+        out.update(
+            str(row.get("event")) for row in reactions
+            if isinstance(row, Mapping) and row.get("event")
+        )
+    _on_action, _systems, crime, _mints, _seeds = _census_consumers(
+        pack, event_type
+    )
+    if crime:
+        out.update({"suspicion_changed", "arrest_attempt", "arrest_resolved"})
+    return out
+
+
+def render_census_run(
+    pack: Pack,
+    events: Sequence[EventRecord],
+    header: Mapping[str, Any],
+    *,
+    source: str,
+) -> str:
+    """cov-1's runtime arm — the action-to-consequence census over ONE
+    RUN (iter-261, the owner's composition brief §5): where the causal
+    pipeline breaks, per family, in the A..H vocabulary:
+
+    A no pressure (the driving state never existed) · B pressure with
+    no urgency entry (a pack gap) · C urgency, no intent (the gate or
+    the LOD never opened) · D intent, no realization (the OCC window
+    broke) · E realization, no canonical consequence · F consequence,
+    no persistent residue · G residue, no downstream consumer · H the
+    full path.
+
+    Read-side, derived, regenerable — the log + the pack are the only
+    inputs; the classes name the FIRST missing leg, never a judgement
+    about the scheduler (B2's deferral is REPORTED in the latency
+    column, never classified as a loss by itself)."""
+    del header  # the pack/seed ride the source line; reserved
+    timeline = _position_timeline(pack, events)
+    scope = _scope_ticks(pack, events)
+    initial = initial_projection(pack.entities)
+    final = fold(events, initial)
+    rows = _timing_rows(events)
+    lines = [
+        f"== CENSUS-RUN {source} · pack {pack.name_version} · "
+        f"{len(events)} events · "
+        f"t=[{events[0].t if events else 0},{events[-1].t if events else 0}]"
+        " =="
+    ]
+    by_cause: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        by_cause.setdefault(row["cause"], []).append(row)
+    # 1) the declared autonomous families
+    lines.append("autonomous families:")
+    counts: Counter[str] = Counter()
+    for family in _declared_families(pack):
+        cause = family["cause"]
+        family_rows = by_cause.get(cause, [])
+        accepted = [r for r in family_rows if r["type"] != "intent_rejected"]
+        carrier_loc = _location_at(timeline, family["carrier"], 0) or "?"
+        if not family_rows:
+            klass, reason = _pressure_verdict(events, family, timeline, scope)
+            counts[klass] += 1
+            lines.append(
+                f"  {cause:<14} {family['kind']:<8} {family['carrier']:<22}"
+                f" at {carrier_loc:<14} 0 resolutions — {klass}: {reason}"
+            )
+            continue
+        if not accepted:
+            klass, reason = "D", "every minted intent died at the door"
+        else:
+            consequence = any(
+                r["deltas"] or r["knowledge"] or r["hooks"] for r in accepted
+            )
+            wrote: set[tuple[str, str]] = set()
+            minted_knowledge = False
+            for event in events:
+                if (
+                    _autonomous_cause(event.provenance.get("cause_intent"))
+                    and event.provenance.get("cause_intent") == cause
+                ):
+                    wrote.update(
+                        (c.entity, c.prop) for c in event.state_changes
+                    )
+                    minted_knowledge = minted_knowledge or bool(event.knowledge)
+            persistent = minted_knowledge or any(
+                final.get(entity, {}).get(prop)
+                != initial.get(entity, {}).get(prop)
+                for entity, prop in wrote
+            )
+            types = {r["type"] for r in accepted}
+            declared = {
+                t for t in types
+                if _census_consumers(pack, t) != (0, [], 0, 0, 0)
+            }
+            consumer_types: set[str] = set()
+            for t in types:
+                consumer_types |= _runtime_consumer_types(pack, t)
+            first_t = min(r["t"] for r in accepted)
+            consumed = any(
+                e.type in consumer_types and e.t >= first_t for e in events
+            )
+            if not consequence:
+                story = any(
+                    event_type in (pack.rules.get("importance") or {}).get(
+                        "story_critical_events", ()
+                    )
+                    for event_type in types
+                )
+                klass = "E"
+                reason = (
+                    "quiet resolutions alone (the tale render the read-side "
+                    "consumer)" if story else "quiet resolutions alone"
+                )
+            elif not persistent:
+                klass, reason = "F", "the deltas decayed back (net-zero)"
+            elif not (declared or consumed):
+                klass, reason = "G", "no declared consumer, none fired"
+            else:
+                klass = "H"
+                reason = (
+                    "consumers declared"
+                    + ("" if consumed else " (the type never fired here)")
+                )
+        lat = [r["t"] - r["at"] for r in family_rows if r["at"] is not None]
+        lat_note = (
+            f"latency {min(lat)}..{max(lat)}" if lat else "latency n/a"
+        )
+        counts[klass] += 1
+        lines.append(
+            f"  {cause:<14} {family['kind']:<8} {family['carrier']:<22}"
+            f" {len(family_rows):>4} resolutions "
+            f"({len(accepted):>4} accepted) · {lat_note:<18} — "
+            f"{klass}: {reason}"
+        )
+    # the director releases (payload-attributed, release-order ids)
+    director_rows = [r for r in rows if r["cause"].startswith("director_")]
+    if director_rows:
+        lines.append("director releases (payload-attributed):")
+        for cause in sorted({r["cause"] for r in director_rows}):
+            family_rows = by_cause[cause]
+            accepted = [r for r in family_rows if r["type"] != "intent_rejected"]
+            sample = family_rows[0]
+            event = next(
+                e for e in events
+                if e.provenance.get("cause_intent") == cause
+            )
+            kind = str(
+                event.outcome.get("action")
+                or _intent_kind_of(pack, sample["type"])
+            )
+            hook = _hook_of(pack, kind, event.actor)
+            counts["H" if accepted else "D"] += 1
+            lines.append(
+                f"  {cause:<14} hook     {event.actor:<22} "
+                f"[{hook}] "
+                f"{len(family_rows):>4} resolutions "
+                f"({len(accepted):>4} accepted) — "
+                f"{'H' if accepted else 'D'}: "
+                + (
+                    "released through the door"
+                    if accepted else "the door rejected the release"
+                )
+                + f" ({sample['type']})"
+            )
+    # 2) the player-action pipeline (the authored verbs of THIS run)
+    lines.append("")
+    lines.append("player actions (the authored verbs of this run):")
+    action_events: dict[str, list[EventRecord]] = {}
+    for event in events:
+        cause = event.provenance.get("cause_intent")
+        if isinstance(cause, str) and cause.startswith("intent_"):
+            key = str(event.outcome.get("action") or event.type)
+            action_events.setdefault(key, []).append(event)
+    for action, resolved in sorted(action_events.items()):
+        quiet = all(
+            not (e.state_changes or e.knowledge or e.hooks)
+            for e in resolved
+            if e.type != "intent_rejected"
+        )
+        klass = "E" if quiet else "H"
+        counts[klass] += 1
+        lines.append(
+            f"  {action:<14} {len(resolved):>3} resolutions — {klass}"
+        )
+    # 3) the B-rows: pressure without a consumer entry
+    entries = {
+        str(entry.get("npc")) for entry in pack.rules.get("urgencies", {})
+        .get("entries", ()) if isinstance(entry, Mapping)
+    }
+    pressured: set[str] = set()
+    for event in events:
+        for change in event.state_changes:
+            if change.prop.startswith("status.") or change.prop.startswith(
+                "pair."
+            ):
+                pressured.add(change.entity)
+    b_rows = sorted(
+        entity for entity in pressured - entries - {pack.player_id()}
+        if entity in initial and not str(entity).startswith("loc_")
+        and not str(entity).startswith("grp_")
+    )
+    if b_rows:
+        lines.append("")
+        lines.append(
+            "B rows (pressure moved, no urgency entry consumes it — a "
+            "pack-shape fact, never a scheduler fact):"
+        )
+        for entity in b_rows:
+            counts["B"] += 1
+            lines.append(f"  {entity}")
+    # 4) the summary
+    lines.append("")
+    lines.append(
+        "classes: "
+        + " · ".join(
+            f"{key} {counts.get(key, 0)}"
+            for key in ("A", "B", "C", "D", "E", "F", "G", "H")
+        )
+    )
+    return "\n".join(lines) + "\n"
+
+
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mechanics",
@@ -2389,6 +2941,29 @@ def _build_parser() -> argparse.ArgumentParser:
         help="every action's block (the default view is the coverage "
         "summary + the flagged rows)",
     )
+    run = c.add_mutually_exclusive_group()
+    run.add_argument(
+        "--log", type=Path,
+        help="the RUNTIME arm (iter-261): classify ONE run's families in "
+        "the A..H loss vocabulary instead of the static walk",
+    )
+    run.add_argument(
+        "--script", type=Path,
+        help="the runtime arm over a fresh run of this playscript",
+    )
+
+    g = sub.add_parser(
+        "timing",
+        help="P1-10 — the autonomous timing witness over one run: the "
+        "two-times table (assignment_tick vs event.t), the latency "
+        "distribution, the per-family rows, the OCC misses",
+    )
+    g.add_argument("--pack", type=Path, default=PACK_DIR)
+    run = g.add_mutually_exclusive_group(required=True)
+    run.add_argument("--log", type=Path, help="a committed log to read")
+    run.add_argument(
+        "--script", type=Path, help="a playscript to run fresh"
+    )
     return parser
 
 
@@ -2424,6 +2999,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return 0
     if args.command == "census":
+        if args.log is not None or args.script is not None:
+            if args.action is not None or args.full:
+                raise SystemExit(
+                    "error: --log/--script is the runtime arm — not "
+                    "combined with --action/--full"
+                )
+            source, events, header = _events_from_source(
+                pack, schema, args.log, args.script
+            )
+            print(
+                render_census_run(pack, events, header, source=source),
+                end="",
+            )
+            return 0
         print(
             render_census(
                 pack,
@@ -2432,6 +3021,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 action=args.action,
                 full_inventory=args.full,
             ),
+            end="",
+        )
+        return 0
+    if args.command == "timing":
+        source, events, header = _events_from_source(
+            pack, schema, args.log, args.script
+        )
+        print(
+            render_timing(pack, events, header, source=source),
             end="",
         )
         return 0

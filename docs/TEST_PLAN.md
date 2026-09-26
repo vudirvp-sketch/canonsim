@@ -663,6 +663,7 @@ intake-34's measured lesson).
 | "this cannot escape its boundary" | stress corpus | independent re-derivation | the validator golden set, pack lint, cap/floor tests, stoplists |
 | "this parameter earns its complexity" | one-knob | remove | the ablation family, the offline one-knob ranking (intake-16's spike record) |
 | "a meaningful semantic change cannot pass silently" | the mutation probe (known mutants applied to a pack copy: lint verdict + golden byte-diff) | the coverage census — `mechanics.py census` (cov-1, D-234: the action-to-consequence forward walk; the realized column is the mutation-escape surface — which paths the committed corpus actually binds) | the admission lint (structural closure only), the per-pack golden byte-diff (path-bound), `mechanics.py blast` |
+| "the composition is real / the chains interact end-to-end" | the integrated witness (ONE run, existing verbs only) | same-seed fork | `tests/test_p1_composition.py` (P1-1, D-237: 16 RELATIONAL oracles over the 2371-event province run — cause→consequence per chain, residue→future-option, assignment→the origin observable, the byte-identical twin), `mechanics.py census --log` (cov-1's runtime arm: the A..H loss localization per family), `mechanics.py timing` (P1-10: the two-times table, the latency distribution, the OCC misses) |
 
 Two standing oracle laws the table carries:
 
@@ -685,6 +686,18 @@ Two standing oracle laws the table carries:
   (`tests/test_temp1_contract.py`); full slice equivalence is
   explicitly NOT the claim, and a divergence that silently disappears
   is the failure, never the healing).
+- **World-level witnesses pin RELATIONS, never golden snapshots (iter-261's
+  §12 law, D-237 — the third standing instance).** An integrated-world
+  witness asserts the causal RELATIONS — cause exists → consequence
+  exists; residue persists → a future option changes; assignment → the
+  semantic origin stays observable; realization → the canonical event
+  stays deterministic (the byte-identical twin) — over the measured
+  surface as pinned numbers; a whole-world golden JSONL is the forbidden
+  form (a second truth the first content change silently erases). The
+  standing instance: `tests/test_p1_composition.py` over
+  `tests/playscripts/province_composition.json`; the loss localization
+  and the timing surface ride the instruments (`census --log`, `timing`),
+  never a committed log.
 - **Mutation visibility is path-bound (intake-37's measured lesson — the
   empty-ablation rule's pack-side twin).** The admission lint closes
   structure (orphan refs, closed enums, intent-contract, template

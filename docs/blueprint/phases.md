@@ -3557,11 +3557,13 @@ first consumer, SC-MUTANT-SENSITIVITY = cov-1's falsifier half + §9's
 prism); §47's P2 observability optimization (behind the document's own
 gate — "only after routing value is demonstrated" — plus AGENTS §2.4's
 research-park law); §47's P1 set (parked behind first consumers: P1-1
-the Province integrated witness on the owner's explicit
-"prove composition" call or the next pack/world gate, P1-2/P1-3 the
-relation/object lifecycle matrices on the world track's first
-engine-capability call, P1-10 the autonomous timing witness = temp-1's
-half (b) test arm); §34.2's periodic portfolio recertification cadence
+the Province integrated witness — EXECUTED iter-261 on the owner's
+explicit «prove composition» call (D-237, the record below);
+P1-2/P1-3 the relation/object lifecycle matrices on the world track's
+first engine-capability call, still parked; P1-10 the autonomous
+timing witness — EXECUTED iter-261 as `mechanics.py timing` + the
+composition witness's timing oracles, D-237); §34.2's periodic
+portfolio recertification cadence
 (no release candidate exists — pre-product; the change-triggered half
 is already automatic in T1's guard; parked behind the first release).
 
@@ -3741,6 +3743,76 @@ halves are now CLOSED contracts, the standing law per half):**
   native limitation; an owner/phase gate on the temporal-law change.
   Until then B1 is a PROPOSAL, never an implementation requirement
   (the §9 epistemic law).
+
+**The iter-261 composition record (D-237 — the owner's iter-261 brief
+over the parked intake-40 P1 set; P1-1 opened by the explicit «prove
+composition» call, P1-10 = temp-1's half (b) test arm):**
+
+- **P1-1 EXECUTED — the Province integrated witness**
+  (`tests/playscripts/province_composition.json`, province_pack@0.1
+  seed 2, EXISTING verbs only, zero new content; the executable
+  `tests/test_p1_composition.py`, 16 RELATIONAL oracles, no golden
+  snapshot). One run, 2371 events, six interacting chains end-to-end:
+  the crime family (the failed pay-tin steal → the witnessed knowledge
+  mint → three leverage clusters → the suspicion stack → the WATCH
+  ROTATION's briefing carrying the whole stack to the relief → the
+  sergeant's `document_check` (urgency_0001) crossing the arrest bar
+  co-located → the arrest → `caught` irreversible) + Loop A's guild
+  arm (arson → alarm → fear → `guild_councils`, faction_0000 through
+  the door) + Loop B (both elders' grief → the deadband → the vigil
+  ×4, INCLUDING the year-later re-fire at t=525335 off the decay-0
+  residue — the persistence→future-option oracle) + Loop C (the full
+  calendar year 36/12/4/1 + the seasonal ride, the thaw's storm) +
+  the macro economy (the year turn's four account flows) + Loop D
+  (the first-beat condensation) + the ambient band (287 talks, 730
+  rotations, 22 rumors). The honest gaps classified per the §14 law:
+  the garrison arm and the storm murmur stay at their own committed
+  witnesses (test_triangle seed 139 / test_weather) — witness-window
+  limits, never missing mechanics; the scene LOD scopes five urgency
+  families out of this route entirely (structural, depth-3).
+- **P1-10 EXECUTED — the timing witness** (`scripts/mechanics.py
+  timing`, the first NAMED `assignment_tick` consumer outside the
+  contract test): the composition corpus's two-times surface — 383
+  autonomous resolutions, ALL carrying the origin (B3's discipline),
+  latency 7..518861 (mean 247898), the early window's chains closing
+  at ≤1656, ONE OCC miss (director_0001 at 2520 → t 3449, latency
+  929: the duty rotation moved the sergeant inside the deferral
+  window — the province's own seed-125-class instance).
+- **cov-1's runtime arm** (`census --log/--script`, the A..H loss
+  vocabulary over one run): the measured verdict over the composition
+  run — A 1 · B 3 · C 5 (three structural LOD + the gates/rolls) ·
+  D 1 · E 2 (the faction answers quiet: their consumer the tale
+  render, never the projection) · F 0 · G 0 · H 10. **The losses sit
+  in assignment and consequence, never in the scheduler.**
+- **The H1/H2 season-scale sliced pair measured** (span vs
+  129600×wait-1, the temp-1 transform, semantic_diff + the family
+  deltas + the final projections): the MATERIAL chain outcomes
+  IDENTICAL (arrest/caught/council/vigil/burnouts/leverage), the
+  crossing families invariant (A2's law at province scale — decay
+  300/300, watch 189/189, transfers 5/5, markets/fairs/seasons 1:1),
+  the deltas door-only (intent_rejected 20→0, checks 1(+0)→11(+10),
+  exactly two final-projection props — the pair suspicions). The
+  deferral does real work at the door (the OCC losses scale with the
+  span; the year-scale witness accepts 86 checks at ONE landing tick
+  by the rotation's phase there), but no material trajectory change
+  at this substrate — H2 holds at the measured band with the named
+  boundary: the deferral becomes material exactly where an EXPIRING
+  gate or a mid-window consumer exists (the tavern's seed-125
+  leverage-expiry class).
+- **The provenance fix (the brief's §3):** `province_calendar.json`
+  is a THREE-step temporal stress shape (two moves + one 519000
+  wait; all 265 talks one urgency entry) — the 265/265 clustering is
+  NOT integrated-world evidence; the composition witness above now
+  carries that claim with explicit provenance.
+- **B3's consumer status (the brief's §9):** UNRESOLVED for
+  production — the standing named consumers are the contract test +
+  the timing instrument (diagnostic); no chronicle/observatory/
+  runtime reader exists. The demotion question (permanent schema vs
+  research-only) is an owner call on the report's F proposal — no
+  schema churn now, no rollback.
+- **B1: NO promotion evidence acquired** (the H2 verdict at the
+  measured band; the losses substrate/integration, never the queue
+  law) — the reopening conditions unchanged.
 
 ## 7. Cross-cutting (the questions that span phases)
 

@@ -1,53 +1,65 @@
-Iteration: iter-260 (`temp-1` LANDING — the owner's 2026-09-26
-  contract pick over the iter-257 fork card: **A2 + B2/B3, B1
-  deferred**): A2 the crossing-family slicing contract PINNED as
-  `tests/test_temp1_contract.py` (the declared tavern families
-  count-invariant across [wait 720] vs [720 x wait 1] at the four
-  measured seeds; the minimal pair projection + fingerprint
-  invariance; the door families FREE with the seed-125 coerce flip
-  and the seed-1001 cascade PINNED as the no-silent-scheduler-change
-  guard); B3 the semantic-origin provenance LANDED through the
-  existing primitive (`provenance.assignment_tick`, schema 0.2 -> 0.3
-  additive over the cause_hook precedent — accepted AND rejected
-  autonomous resolutions carry it, player intents never do), B2's
-  runtime UNTOUCHED (the province_calendar witness still clusters
-  all 265 talks in the last five ticks; the origins [1800, 516600]
-  and the deferral latency <= 518269 now observable; `event.t` stays
-  THE canonical timestamp); B1 generate-at-T DEFERRED behind the
-  card's reopening conditions (phases.md §6's decision record — a
-  PROPOSAL, never an implementation requirement); all five fixtures
-  regenerated (TEST_PLAN §3 discipline: header bump + province 4 /
-  road 1 / pressure 6 assignment_tick lines, every canonical field
-  byte-identical to BASE — the pre/post comparison recorded in
-  D-236's PCC); three hand-crafted version pins synced (test_smoke
-  $id, test_semantic_diff's stale-version arm, test_observatory_read's
-  derived expectation)
+Iteration: iter-261 (`p1-composition-timing` — the owner's iter-261
+  brief over the parked intake-40 P1 set: **composition witness +
+  cov-1's runtime arm + P1-10 + the consumer/invariant audits**):
+  P1-1 the Province INTEGRATED witness LANDED on the existing
+  ANCHOR_REGION substrate (tests/playscripts/province_composition.json,
+  province_pack@0.1 seed 2, existing verbs only + 16 relational-oracle
+  tests in tests/test_p1_composition.py — one run, 2371 events, six
+  interacting chains end-to-end: the theft→knowledge→leverage→
+  suspicion→the rotation BRIEFING spreading the whole stack to the
+  relief→document_check→arrest→caught irreversible; fire→alarm→fear→
+  guild_councils; both griefs→the vigil ×4 incl. a YEAR-LATER re-fire
+  off the decay-0 residue; the full calendar year + the macro's 4
+  account flows; the condensation + the 287-talk ambient band; the
+  twin byte-identical); P1-10 the timing witness LANDED as
+  `mechanics.py timing` (the two-times table: 383/383 autonomous
+  resolutions carry assignment_tick, latency 7..518861, ONE OCC miss
+  director_0001 2520→3449 — THE FIRST NAMED assignment_tick CONSUMER
+  outside the contract test); cov-1's runtime arm LANDED as
+  `mechanics.py census --log/--script` (the A..H loss vocabulary:
+  A 1 · B 3 · C 5 (3 structural LOD + gates/rolls) · D 1 · E 2 (the
+  faction answers quiet — the render their consumer) · F 0 · G 0 ·
+  H 10 — the losses sit in assignment and consequence, never in the
+  scheduler); the H1/H2 season-scale sliced pair MEASURED (the
+  material chain outcomes IDENTICAL span vs sliced; the crossing
+  families invariant at province scale; the deltas door-only —
+  intent_rejected 20→0, checks 1→11, exactly two final-projection
+  props); the province_calendar witness provenance FIXED (a 3-step
+  temporal STRESS shape, never integrated-world evidence); B3
+  consumer status: diagnostic-only (UNRESOLVED for production);
+  B1: NO promotion evidence — stays DEFERRED; the J-gaps all
+  pack-level (the burned market still opens 36/36, the faction
+  answers carry no state writes, the road pressure unconsumed); the
+  owner's RU report A–J at docs/iterations/iter-261-composition-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
   owner-gated — may never open) + the world track + the SoW horizon,
   ROADMAP §2/§6) ·
-2421 passed + 9 skipped, ruff clean, docguard clean, topology
+2444 passed + 9 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
   visual packets not run this session — no engine binary in the
   sandbox; the .gd layer untouched since iter-246, the D-093 skips
   unaffected) ·
 Date: 2026-09-26 ·
-Scope: core/{intent.py (IntentData.assignment_tick), loop.py (the
-  enqueue-door stamp + `_provenance` + the two docstrings)} +
-  schemas/event.schema.json (the 0.3 $id + the documented property) +
-  docs/EVENT_SCHEMA.md (§1/§7/§8) + tests/{test_temp1_contract.py
-  (new, 20 tests), test_smoke.py, test_semantic_diff.py,
-  test_observatory_read.py (the three version-pin syncs),
-  fixtures/*.jsonl (x5 regenerated)} + the state docs
-  (STATUS/TASKS/worklog/DECISIONS/phases.md/TEST_PLAN) — 12 paths;
-  R4 (D-236, the PCC record): one additive provenance field over the
-  existing primitive, zero runtime-semantics change, the canonical
-  outputs verified byte-identical to BASE.
-Track A: the intake-40 instrument family COMPLETE — log-1 (iter-256),
-  cov-1 (iter-258), div-1 (iter-259), temp-1 (iter-260: the research
-  card + the owner's pick + the landing). The ssi family COMPLETE
-  except ssi-5, owner-gated. The detail lives in the worklog + git.
+Scope: tests/{test_p1_composition.py (new, 16 tests),
+  test_mechanics.py (+8: the timing + census-run modes),
+  playscripts/province_composition.json (new)} + scripts/mechanics.py
+  (census --log/--script + the timing subcommand — the runtime census
+  arms, zero core imports beyond the existing surface) +
+  docs/{iterations/iter-261-composition-report.md (new, the owner's
+  RU deliverable — the language exception owner-directed),
+  blueprint/phases.md (§6 the iter-261 record), TASKS.md (the ledger,
+  iter-251 evicted), DECISIONS.md (D-237 into the compound row),
+  TEST_PLAN.md (§9's third standing instance), AGENT_NAVIGATION.md
+  (§1 the iterations row + the scripts row, §3 the routing row),
+  worldbuild/WORLD_TESTS.md (§9 the composition witness entry)},
+  STATUS.md, worklog.md (iter-251 evicted) — 13 paths; R2 (D-237):
+  two periphery instrument arms + a witness script + tests + docs —
+  zero core change, the LOG untouched, B2/B3/A2 semantics untouched.
+Track A: the intake-40 instrument family COMPLETE + P1-1/P1-10
+  EXECUTED (iter-261). The ssi family COMPLETE except ssi-5,
+  owner-gated. The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -75,13 +87,8 @@ Track A: the intake-40 instrument family COMPLETE — log-1 (iter-256),
 
 ## Active KIs
 
-- KI#101 · semantic_diff crashed on unequal-length field lists · CLOSED
-  iter-259 (fixed + pinned)
-- KI#102 · the dir-closure test's glob vs its committed-files law (red
-  wherever scratch/ exists — KI#93's inverse) · CLOSED iter-259
-
-(KI#100 deleted at this STATUS touch per the 2-iteration law — closed
-iter-256)
+(none — KI#101/102 deleted at this STATUS touch per the 2-iteration
+law: closed iter-259, two iterations passed)
 
 ## FAQ / Pitfalls
 
@@ -112,14 +119,23 @@ iter-256)
 
 ## Next step
 
-**iter-260 DONE: the temp-1 LANDING over the owner's contract pick
+**iter-261 DONE: the composition question over the parked intake-40
+P1 set — P1-1 the Province integrated witness (16 relational-oracle
+tests over one 2371-event run), P1-10 the timing witness (mechanics.py
+timing — the two-times table, the first named assignment_tick
+consumer), cov-1's runtime arm (census --log, the A..H loss
+vocabulary), the H1/H2 sliced pair measured (material outcomes
+invariant, deltas door-only), the province_calendar provenance fixed,
+B3 consumer status diagnostic-only, B1 no promotion evidence, the
+J-gaps all pack-level. 2444+9 + ruff + docguard + topology --check
+clean. The owner's RU report A–J: docs/iterations/.**
+iter-260 DONE: the temp-1 LANDING over the owner's contract pick
 (A2 + B2/B3, B1 deferred) — the crossing-family slicing contract
 pinned (test_temp1_contract.py), the semantic-origin provenance landed
 (provenance.assignment_tick, schema 0.3), B2's runtime untouched (the
 clustering witness byte-verified), B1 deferred behind the card's
 reopening conditions; the five fixtures regenerated with every
-canonical field byte-identical to BASE. 2421+9 + ruff + docguard +
-topology --check clean.**
+canonical field byte-identical to BASE.
 iter-257/258/259 DONE: the intake-40 instrument session — the fork
 card + cov-1 (D-234) + div-1 (D-235) + KI#101/102 closed.
 iter-255+256 DONE: the intake-40 routing (D-233) + KI#100 closed.
@@ -127,15 +143,25 @@ iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
 iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
 (D-221..D-228).
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
-   OWNER-GATED — reopened only on the card's five conditions
+   OWNER-GATED — iter-261 found NO promotion evidence (the H2 verdict
+   at the measured composition band: the material outcomes invariant
+   under slicing; the losses are substrate/integration, never the
+   queue law) — reopened only on the card's five conditions
    (phases.md §6's decision record: a named runtime consumer, a
    repeatable material failure, a measured product-level gap beyond
    B2+B3, the scheduler shown a native limitation, an owner/phase
-   gate on the temporal-law change). ssi-5 stays owner-gated (the
-   N018 evidence law). The owner-side cleanup standing from D-230's
-   third card: delete the doubled `workbench/workbench/runtime/` tree
-   locally (safe — the iter-246 root fix landed; the tree regenerates
-   on demand).
+   gate). The B3 production-consumer watch: the field's standing
+   consumer set = the contract test + the timing instrument
+   (diagnostic); a production consumer (chronicle/observatory reading
+   the deferral) or two iterations without new consumers → the
+   demotion question (the report's F, an owner call, no churn now).
+   The J-gap proposals (the report's §J: the burned market's
+   residue→consumer, the faction answers' state writes, the road
+   pressure) are pack-level rows on the owner's call. ssi-5 stays
+   owner-gated (the N018 evidence law). The owner-side cleanup
+   standing from D-230's third card: delete the doubled
+   `workbench/workbench/runtime/` tree locally (safe — the iter-246
+   root fix landed; the tree regenerates on demand).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
