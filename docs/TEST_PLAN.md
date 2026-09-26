@@ -676,7 +676,15 @@ Two standing oracle laws the table carries:
   owning spec declares the operations commutative; where order is
   semantic, the expected result is NOT invariance — derive the oracle
   from the owning contract first (the D-039 crossing law is the standing
-  instance: co-occurring ticks fire coarsest-first by design).
+  instance: co-occurring ticks fire coarsest-first by design; temp-1/A2,
+  D-236, is the second: the wait-slicing oracle is the declared
+  crossing-family scope — count-invariance over status_decayed /
+  watch_change / knowledge_transfer / expectation_violation + the
+  minimal pair's projection/fingerprint invariance — while the door
+  families are contract-FREE with their known divergences PINNED
+  (`tests/test_temp1_contract.py`); full slice equivalence is
+  explicitly NOT the claim, and a divergence that silently disappears
+  is the failure, never the healing).
 - **Mutation visibility is path-bound (intake-37's measured lesson — the
   empty-ablation rule's pack-side twin).** The admission lint closes
   structure (orphan refs, closed enums, intent-contract, template

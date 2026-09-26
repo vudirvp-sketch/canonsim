@@ -3686,6 +3686,62 @@ province_calendar witness re-run (the talk spread across beats vs the
 last-5-tick pile); the probe for any pick = div-1's first-divergence
 records over the same minimal pairs.
 
+**The temp-1 decision record (iter-260, D-236 — the owner's 2026-09-26
+pick over the card above: A2 + B2/B3, B1 deferred; the card's two
+halves are now CLOSED contracts, the standing law per half):**
+
+- **A2 — crossing-family equivalence IS the slicing contract.** The
+  declared scope (tavern): the crossing-committed families
+  `status_decayed` / `watch_change` / `knowledge_transfer` /
+  `expectation_violation` are count-invariant across `[wait N]` vs
+  `[N × wait 1]` at the four measured seeds (125/42/7/1001); the
+  minimal pair additionally pins projection + RNG-fingerprint
+  invariance (the only type delta: the wait events' own count).
+  **Full slice equivalence is NOT claimed** — the door families
+  (player steps + autonomous urgency/faction/director intents, the
+  whole OCC/opposed-check/completion chain) are FREE to diverge (the
+  entry_tick enqueue law + the per-event ambient minting), and the
+  known divergences (seed 125 the coerce flip, seed 1001 the
+  document-check cascade + the one fingerprint divergence) are PINNED
+  as regression guards — a future change that silently "fixes" them
+  has changed runtime semantics, not healing. One measured boundary:
+  a crossing event whose PAYLOAD reads the knowledge fold (a rotation
+  briefing's `count`) can reflect door divergence (seed 1001: count 2
+  vs 3) — family counts are the contract, payloads are inside the free
+  surface. The contract executable: `tests/test_temp1_contract.py`.
+- **B2 — deferred-realize REMAINS the runtime semantics** (observed,
+  declared — never "a bug"): the beat-minted autonomous intent's door
+  lands at the world's resumption tick; under a long span the world
+  resumes only at the landing (the province_calendar witness: all 265
+  talks still realize in the last five ticks [520069, 520073],
+  unchanged by this landing). No scheduler, queue, tick, or ordering
+  change is made or implied.
+- **B3 — provenance records the semantic origin separately from the
+  canonical realization** (`provenance.assignment_tick`, schema
+  0.2 → 0.3 additive over the cause_hook precedent, EVENT_SCHEMA §7):
+  the beat/crossing tick an autonomous intent was minted at, stamped
+  at the ONE enqueue door (`_enqueue_autonomous`, the
+  `based_on_event_seq` precedent) and carried to accepted AND rejected
+  resolutions alike; player intents never carry it (a playscript
+  step's assignment IS its enqueue tick). `event.t` stays THE
+  canonical timestamp — B3 records the deferral (`event.t -
+  assignment_tick`, up to 518269 ticks on the witness), never
+  re-times, never back-fills, never de-clusters. The measured
+  before/after evidence: every canonical field of every affected
+  scenario byte-identical to BASE (the five fixtures regenerated:
+  header bump + 4/1/6 assignment_tick lines on province/road/pressure,
+  plumbing/grim header-only), fingerprints unchanged on all eight A/B
+  arms.
+- **B1 — generate-at-T stays DEFERRED**, an owner-gated future
+  scheduler decision, never this row's work. The reopening conditions
+  (the card's standing list, unchanged): a named runtime consumer that
+  needs generate-at-T; deferred realization shown as a repeatable
+  MATERIAL failure (not a stress-case artifact); a measured
+  product-level quality gap not closed by B2+B3; the scheduler shown a
+  native limitation; an owner/phase gate on the temporal-law change.
+  Until then B1 is a PROPOSAL, never an implementation requirement
+  (the §9 epistemic law).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

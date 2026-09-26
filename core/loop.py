@@ -1187,7 +1187,12 @@ class Simulator:
         popped, and the queue discipline forbids enqueuing at a tick
         the clock has already passed (regression). The intents thus
         fire at the entry's tick — conceptually "after the beat, at
-        the moment the world resumes moving"."""
+        the moment the world resumes moving". Under B2's
+        deferred-realize semantics (temp-1, D-236) the beat tick —
+        the intent's SEMANTIC ORIGIN — may sit far behind the landing
+        tick; the origin is stamped into the resolved event's
+        ``provenance.assignment_tick`` (B3), never into the queue
+        discipline or ``event.t``."""
         # depth-3 (the scene LOD): the beat's zone scoping — under an
         # armed macro clock the ACTIVE scene alone ticks per-beat (the
         # PC's location); the unarmed law keeps the whole world
@@ -1233,7 +1238,7 @@ class Simulator:
             traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
             locations=locations, world=self._world,
         ):
-            self._enqueue_autonomous(intent, entry_tick)
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
         # 2b) faction goals (depth-6) — the small-formula dynamics at
         # the urgencies' own cadence: the KeeperRL ratio+threshold bar
         # computed from the LIVE fold (per-member status axes, D-006),
@@ -1249,12 +1254,14 @@ class Simulator:
             traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
             locations=locations, world=self._world,
         ):
-            self._enqueue_autonomous(intent, entry_tick)
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1
         for intent in self._director.releases(self._projection, beat_tick):
-            self._enqueue_autonomous(intent, entry_tick)
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
 
-    def _enqueue_autonomous(self, intent: IntentData, tick: int) -> None:
+    def _enqueue_autonomous(
+        self, intent: IntentData, tick: int, *, assignment_tick: int
+    ) -> None:
         """Enqueue a director or urgency Intent through the same door as a
         playscript step — band NPC_REACTION (after the player's intents
         in the same tick) and stamped with the current event_count so
@@ -1265,12 +1272,22 @@ class Simulator:
         passed; the `_run_beat` docstring owns the rationale). The
         queue's (tick, sub_order) ordering puts it AFTER same-tick
         system passes (0..99) and player intents (100..199), BEFORE
-        scheduled completions (300+)."""
+        scheduled completions (300+).
+
+        `assignment_tick` (temp-1/B3, D-236): the beat/crossing tick
+        the intent was MINTED at — stamped onto the intent here (the
+        enqueue door, the `based_on_event_seq` precedent) and carried
+        into the resolved event's `provenance.assignment_tick`. The
+        stamp is provenance only: `tick` (the door tick), the queue
+        discipline, and the completion tick are untouched — under a
+        long wait the two times separate by the whole span, exactly
+        the separation B3 makes observable."""
         stamped = IntentData(
             id=intent.id, kind=intent.kind, actor=intent.actor,
             target=intent.target, fields=dict(intent.fields),
             based_on_event_seq=self._writer.event_count,
             origin_hook=intent.origin_hook,
+            assignment_tick=assignment_tick,
         )
         self._queue.push(
             tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
@@ -1400,7 +1417,7 @@ class Simulator:
             traits=crystallized_traits(self._pack, self._knowledge, tick),
             locations=zones.warm, world=self._world,
         ):
-            self._enqueue_autonomous(intent, entry_tick)
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
         # the warm ring's FACTION goals (depth-6) — the same clock's
         # crossings, the same door: a faction anchored in the warm ring
         # rolls its small formula here (the beat machinery minus the
@@ -1414,7 +1431,7 @@ class Simulator:
             traits=crystallized_traits(self._pack, self._knowledge, tick),
             locations=zones.warm, world=self._world,
         ):
-            self._enqueue_autonomous(intent, entry_tick)
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
 
     def _run_calendar(self, tick: int, entry_tick: int) -> None:
         """The sub-year calendar crossings due at `tick` (maclock-1's
@@ -1654,13 +1671,25 @@ class Simulator:
         (`cause_hook`, D-140): the release's causal provenance, pairing
         the event with the seeding event for payoff latency and the
         trace family. Rejections carry it too: a released attempt is a
-        fact (the hook discharged, the budget was spent)."""
+        fact (the hook discharged, the budget was spent).
+        `assignment_tick` (temp-1/B3, D-236): for an autonomous intent,
+        the beat/crossing tick it was minted at — the SEMANTIC ORIGIN
+        time, recorded separately from the canonical realization time
+        `event.t` (B2's deferred-realize may land the door far after the
+        beat; the gap `event.t - assignment_tick` is the observable
+        deferral latency, a derived diagnostic never a new scheduler
+        law). Accepted and rejected resolutions both carry it: a
+        rejected attempt is still a minted-and-doomed fact. Player
+        intents carry no key — a playscript step's assignment IS its
+        enqueue tick."""
         provenance: dict[str, Any] = {
             "seed": self._seed,
             "cause_intent": intent.id,
         }
         if intent.origin_hook is not None:
             provenance["cause_hook"] = intent.origin_hook
+        if intent.assignment_tick is not None:
+            provenance["assignment_tick"] = intent.assignment_tick
         return provenance
 
     def _commit(self, draft: EventDraft) -> EventRecord:

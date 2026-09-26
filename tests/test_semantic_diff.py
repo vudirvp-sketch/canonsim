@@ -174,7 +174,9 @@ def test_seed_delta_is_semantic(tmp_path: Path) -> None:
 
 
 def test_schema_version_delta_is_semantic(tmp_path: Path) -> None:
-    other = _mutate_header(tmp_path, "schema03.jsonl", schema_version="0.3")
+    # "0.2" = the prior version (v0.3 landed iter-260) — the stale-log
+    # case the reader's own gate (KI#100) refuses; re-point on the next bump
+    other = _mutate_header(tmp_path, "schema02.jsonl", schema_version="0.2")
     diff = semantic_diff.compare(GOLDEN, other)
     assert not diff.equal
     assert diff.header_semantic[0][0] == "schema_version"

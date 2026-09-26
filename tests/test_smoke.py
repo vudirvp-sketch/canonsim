@@ -167,7 +167,9 @@ def test_templates_have_fallback_and_snake_case_types() -> None:
 
 def test_event_schema_shape_matches_event_schema_doc() -> None:
     schema = load(SCHEMA)
-    assert schema["$id"] == "canonsim/event/0.2"
+    # v0.3 (iter-260): the additive assignment_tick provenance key over the
+    # cause_hook precedent (EVENT_SCHEMA §7/§8 — the temp-1/B3 landing)
+    assert schema["$id"] == "canonsim/event/0.3"
     assert set(schema["required"]) == {
         "id",
         "t",

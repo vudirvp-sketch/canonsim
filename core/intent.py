@@ -177,6 +177,19 @@ class IntentData:
     `provenance.cause_hook` (EVENT_SCHEMA §7), pairing each release with
     its seeding event for the payoff-latency metric (`core/metrics.py`)
     and the causal-provenance family (`scripts/mechanics.py trace/why`).
+
+    `assignment_tick` (temp-1/B3, D-236): the tick the intent was MINTED
+    in the semantic pipeline — the beat/crossing tick an autonomous
+    (urgency / faction / director) intent was rolled at. None for every
+    player-authored intent (a playscript step's assignment IS its enqueue
+    tick). The loop stamps it into the resolved event's
+    `provenance.assignment_tick` (EVENT_SCHEMA §7), which records the
+    semantic origin SEPARATELY from the canonical realization time
+    `event.t` — under B2's deferred-realize semantics the door may land
+    the intent far after the beat that minted it, and both times are now
+    observable. Provenance only: the queue discipline, the door tick,
+    the completion tick, and `event.t` are untouched (the temp-1 card's
+    no-runtime-change law).
     """
 
     id: str
@@ -186,6 +199,7 @@ class IntentData:
     fields: Mapping[str, Any]
     based_on_event_seq: int = 0
     origin_hook: str | None = None
+    assignment_tick: int | None = None
 
 
 @dataclass(frozen=True, slots=True)

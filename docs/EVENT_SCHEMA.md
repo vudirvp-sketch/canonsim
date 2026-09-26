@@ -11,7 +11,7 @@
 - The header carries **no wall-clock timestamp** (determinism, INV-2):
 
 ```json
-{"header": true, "schema_version": "0.2", "seed": 42,
+{"header": true, "schema_version": "0.3", "seed": 42,
  "python": "3.11.9", "commit": "a1b2c3d", "pack": "tavern_pack@0.1"}
 ```
 
@@ -185,13 +185,23 @@ feel" — the rule is data, and changing it is a pack change, not a code change.
 `seed` (int, required) + `cause_intent` (intent id, when the event resolves a
 player intent) + `cause_hook` (the deferred-consequence tag a DIRECTOR release
 discharges — iter-107, D-140; accepted and rejected releases both carry it:
-a released attempt is a fact). Enough to re-derive *why* the event happened:
-`cause_hook` pairs the release with the event that seeded the hook (payoff
-latency, `core/metrics.py`; the trace family, `scripts/mechanics.py`).
-Model/prompt provenance joins the same field family when the LLM circuit
-arrives (phase 1+). v0.2 (iter-107) added `cause_hook` — additive, no
-migration (old readers ignore the key; the header version moved 0.1 → 0.2
-per §8's additive law).
+a released attempt is a fact) + `assignment_tick` (int, when the event
+resolves an AUTONOMOUS intent — urgency / faction / director — the
+beat/crossing tick the intent was MINTED at, its semantic origin; temp-1/B3,
+D-236; accepted and rejected resolutions both carry it; player intents never
+do — a playscript step's assignment IS its enqueue tick). Enough to re-derive
+*why* the event happened: `cause_hook` pairs the release with the event that
+seeded the hook (payoff latency, `core/metrics.py`; the trace family,
+`scripts/mechanics.py`), and `assignment_tick` separates the semantic origin
+from the canonical realization time `event.t` — under B2's deferred-realize
+semantics (the beat-minted intent's door may land far after the beat) the gap
+`event.t - assignment_tick` is the observable deferral latency, a derived
+diagnostic never a new scheduler law: `event.t` stays the one canonical
+timestamp every downstream consumer reads. Model/prompt provenance joins the
+same field family when the LLM circuit arrives (phase 1+). v0.2 (iter-107)
+added `cause_hook` — additive, no migration (old readers ignore the key; the
+header version moved 0.1 → 0.2 per §8's additive law). v0.3 (iter-260)
+added `assignment_tick` — the same additive form over the same precedent.
 
 ## 8. Versioning
 

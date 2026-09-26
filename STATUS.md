@@ -1,45 +1,53 @@
-Iteration: iter-259 (the intake-40 instrument family — `div-1` the
-  future-divergence probe, plus the same session's iter-257 `temp-1`
-  research + iter-258 `cov-1` census; the owner's 2026-09-26
-  «работай над temp-1, цензус cov-1 и прочими» call opening the
-  parked trio): temp-1's RESEARCH landed (the fork card in
-  phases.md §6 — both temporal signals verified at HEAD, the shared
-  root mechanism named (`_run_beat`'s entry_tick enqueue law + the
-  per-event ambient hook minting), the A1/A2/A3 + B1/B2/B3 contract
-  forks presented to the owner, NO pick recorded — zero engine code
-  per the row's own law); cov-1 LANDED (`mechanics.py census` — the
-  action-to-consequence forward walk, D-234); div-1 LANDED
-  (`scripts/divergence_probe.py` — the future-divergence minimal-pair
-  probe over the balance-harness arms, the semantic_diff oracle + the
-  first-divergence / causal-path / persistence records, D-235); the
-  session's instrument work exposed and closed KI#101 (the oracle's
-  own unequal-length-list crash) and KI#102 (the architecture test's
-  filesystem glob vs its committed-files law, red wherever scratch/
-  exists)
+Iteration: iter-260 (`temp-1` LANDING — the owner's 2026-09-26
+  contract pick over the iter-257 fork card: **A2 + B2/B3, B1
+  deferred**): A2 the crossing-family slicing contract PINNED as
+  `tests/test_temp1_contract.py` (the declared tavern families
+  count-invariant across [wait 720] vs [720 x wait 1] at the four
+  measured seeds; the minimal pair projection + fingerprint
+  invariance; the door families FREE with the seed-125 coerce flip
+  and the seed-1001 cascade PINNED as the no-silent-scheduler-change
+  guard); B3 the semantic-origin provenance LANDED through the
+  existing primitive (`provenance.assignment_tick`, schema 0.2 -> 0.3
+  additive over the cause_hook precedent — accepted AND rejected
+  autonomous resolutions carry it, player intents never do), B2's
+  runtime UNTOUCHED (the province_calendar witness still clusters
+  all 265 talks in the last five ticks; the origins [1800, 516600]
+  and the deferral latency <= 518269 now observable; `event.t` stays
+  THE canonical timestamp); B1 generate-at-T DEFERRED behind the
+  card's reopening conditions (phases.md §6's decision record — a
+  PROPOSAL, never an implementation requirement); all five fixtures
+  regenerated (TEST_PLAN §3 discipline: header bump + province 4 /
+  road 1 / pressure 6 assignment_tick lines, every canonical field
+  byte-identical to BASE — the pre/post comparison recorded in
+  D-236's PCC); three hand-crafted version pins synced (test_smoke
+  $id, test_semantic_diff's stale-version arm, test_observatory_read's
+  derived expectation)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated
-backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
-owner-gated — may never open) + the world track + the SoW horizon,
-ROADMAP §2/§6) ·
-2401 passed + 9 skipped, ruff clean, docguard clean, topology
---check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
-visual packets not run this session — no engine binary in the
-sandbox; the .gd layer untouched since iter-246, the D-093 skips
-unaffected) ·
+  the ladder complete 0..6 — the standing work: the owner-gated
+  backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
+  owner-gated — may never open) + the world track + the SoW horizon,
+  ROADMAP §2/§6) ·
+2421 passed + 9 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
+  visual packets not run this session — no engine binary in the
+  sandbox; the .gd layer untouched since iter-246, the D-093 skips
+  unaffected) ·
 Date: 2026-09-26 ·
-Scope: scripts/{mechanics.py (the census subcommand),
-  divergence_probe.py (new), semantic_diff.py (the KI#101 fix)} +
-  tests/{test_mechanics.py, test_divergence_probe.py (new),
-  test_semantic_diff.py, test_architecture.py (the KI#102 closure)}
-  + the state docs (STATUS/TASKS/worklog/DECISIONS/NAV/TEST_PLAN/
-  phases.md) — 13 paths; two new periphery instruments (R2/R2), one
-  oracle bug fix, one test-closure fix; the LOG untouched, zero
-  core/ change.
-Track A: the intake family at 40 fully routed — the fix row closed
-  (log-1/iter-256), the two buildable rows landed (cov-1, div-1),
-  the research row presented (temp-1's fork card); the ssi family
-  COMPLETE except ssi-5, owner-gated. The detail lives in the
-  worklog + git.
+Scope: core/{intent.py (IntentData.assignment_tick), loop.py (the
+  enqueue-door stamp + `_provenance` + the two docstrings)} +
+  schemas/event.schema.json (the 0.3 $id + the documented property) +
+  docs/EVENT_SCHEMA.md (§1/§7/§8) + tests/{test_temp1_contract.py
+  (new, 20 tests), test_smoke.py, test_semantic_diff.py,
+  test_observatory_read.py (the three version-pin syncs),
+  fixtures/*.jsonl (x5 regenerated)} + the state docs
+  (STATUS/TASKS/worklog/DECISIONS/phases.md/TEST_PLAN) — 12 paths;
+  R4 (D-236, the PCC record): one additive provenance field over the
+  existing primitive, zero runtime-semantics change, the canonical
+  outputs verified byte-identical to BASE.
+Track A: the intake-40 instrument family COMPLETE — log-1 (iter-256),
+  cov-1 (iter-258), div-1 (iter-259), temp-1 (iter-260: the research
+  card + the owner's pick + the landing). The ssi family COMPLETE
+  except ssi-5, owner-gated. The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -104,28 +112,27 @@ iter-256)
 
 ## Next step
 
-**iter-257/258/259 DONE: the intake-40 instrument session over the
-owner's «работай над temp-1, цензус cov-1 и прочими» call — temp-1's
-fork card landed (phases.md §6: both signals verified, the mechanism
-named, the A/B and B1/B2/B3 forks presented, NO pick — the owner's
-contract decision is the row's gate); cov-1 landed (mechanics.py
-census, D-234); div-1 landed (divergence_probe.py, D-235); KI#101 +
-KI#102 closed. 2401+9 + ruff + docguard + topology --check clean.**
+**iter-260 DONE: the temp-1 LANDING over the owner's contract pick
+(A2 + B2/B3, B1 deferred) — the crossing-family slicing contract
+pinned (test_temp1_contract.py), the semantic-origin provenance landed
+(provenance.assignment_tick, schema 0.3), B2's runtime untouched (the
+clustering witness byte-verified), B1 deferred behind the card's
+reopening conditions; the five fixtures regenerated with every
+canonical field byte-identical to BASE. 2421+9 + ruff + docguard +
+topology --check clean.**
+iter-257/258/259 DONE: the intake-40 instrument session — the fork
+card + cov-1 (D-234) + div-1 (D-235) + KI#101/102 closed.
 iter-255+256 DONE: the intake-40 routing (D-233) + KI#100 closed.
 iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
 iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
 (D-221..D-228).
-1. THE TEMP-1 CONTRACT DECISION (the owner's pick, on the fork card
-   in phases.md §6): (a) the wait-slicing relation — A1 full
-   equivalence / A2 crossing-family equivalence (the recommended
-   pick: the measured 8/8 invariant pinned as a contract test, zero
-   engine change) / A3 documented non-equivalence; (b) the
-   autonomous-intent temporal semantics — B1 generate-at-T (the
-   scheduler-law price) / B2 deferred-realize (current, declared) /
-   B3 record-late-preserve-semantic-time (the schema-field price).
-   Zero code until the pick lands. ssi-5 stays owner-gated (the N018
-   evidence law — the fresh co-change evidence or the explicit skip,
-   never momentum). The owner-side cleanup standing from D-230's
+1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
+   OWNER-GATED — reopened only on the card's five conditions
+   (phases.md §6's decision record: a named runtime consumer, a
+   repeatable material failure, a measured product-level gap beyond
+   B2+B3, the scheduler shown a native limitation, an owner/phase
+   gate on the temporal-law change). ssi-5 stays owner-gated (the
+   N018 evidence law). The owner-side cleanup standing from D-230's
    third card: delete the doubled `workbench/workbench/runtime/` tree
    locally (safe — the iter-246 root fix landed; the tree regenerates
    on demand).

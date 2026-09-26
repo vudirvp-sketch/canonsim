@@ -135,7 +135,10 @@ def test_runs_listing_sorted_with_parsed_headers(runs_root: Path) -> None:
     assert entry["header"] == {
         "seed": 42,
         "pack": "tavern_pack@0.1",
-        "schema_version": "0.2",
+        # derived from the schema $id (D-010) — the hand-crafted 0.2 went
+        # stale at the v0.3 bump (iter-260); test_render's precedent: the
+        # expectation derives, never hard-codes the version
+        "schema_version": SCHEMA["$id"].rsplit("/", 1)[-1],
     }
     assert entry["error"] is None
     assert entry["size_bytes"] > 0
