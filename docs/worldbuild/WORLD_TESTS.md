@@ -1438,6 +1438,43 @@ owner-gated. The witness: `tests/test_marketlegs.py` (all four legs,
 one route + the no-leak arm + the byte-identical twin); the owner's
 RU report: `docs/iterations/iter-264-market-legs-report.md`.
 
+### CONFIRMED — The render conditional: the tale contradiction on the ashes closed read-side (2026-09-27, iter-265, the owner's «можешь закрыть "рендер-условную строку (последняя нога §6.5)"» call)
+
+The iter-263 §D.1 boundary held by construction: the calendar line's
+consumer routes stay closed (C1/C2, measured twice), the honest
+medicine is the RENDERER's own fold. LANDED (zero core, zero runtime
+bytes): the renderer's running fold (`render/chronicle.py::_Positions`)
+now carries every LOCATION's prop state — seeded from the pack's
+declared `flags` + `accounts` (initial_projection's own location
+seeding, the honest mirror), advanced by each event's location writes,
+tolerant last-write-wins (a READER, never a truth test — T2's replay
+owns the from-checks; a foreign log renders dry) — and the event
+context exposes the tracked props as DOTTED conditional keys
+`<location_id>.<prop>`, raw values (the ink truthiness law). The
+authored line: the market day's own arm
+`{loc_malby.destroyed?the market day passes at Malby — the stall row
+burned from the weir stair to the bank, the ashes where the trade
+stood.|the river market opens at Malby — …}` — the day still counted
+(the calendar's legibility, the surface BY LAW), the tale never
+contradicting the projection. Measured on the composition witness
+(scratch instrument, outside the repo): 2376 events byte-identical to
+the committed expectation (the LOG untouched — a template changes no
+runtime byte), 36 market days all after the burnout (t=3573), 36
+ashes lines, 0 standing lines — the falsifier (the standing prose on
+the ashes) DEAD. The mechanism census through the real load_pack (the
+lint part of the instrument — a probe event type is dead vocabulary
+the lint refuses, so the scratch probe re-voices the `wait` line):
+the seeded flag and account level surface raw (the coin's truthiness
+at zero pinned), the advance is at-tick inclusive (the writing event's
+own line reads its own change — the projection fold's own shape), the
+desynced `from` lands its `to`, the unknown entity never enters the
+fold. The witness: `tests/test_render_conditional.py` (the census +
+the two integration arms — one day, two worlds, the SAME first market
+day t=14400 — + the purity pin); the owner's RU report:
+`docs/iterations/iter-265-render-conditional-report.md`. The §6.5
+embodiment rows are now COMPLETE (the move release the owner's future
+row, its price on the iter-263 record).
+
 ## 10. Test result vocabulary
 
 Use:

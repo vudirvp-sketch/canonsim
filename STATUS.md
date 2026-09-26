@@ -1,62 +1,57 @@
-Iteration: iter-264 (`market-legs` — the owner's call: «продолжай
-  работы по embodiment-ногам §6.5 — хук mourns (какой интент
-  релизит), trade-глагол, knowledge-блоки и так далее» — the
-  iter-263 owner-gated rows OPENED and LANDED as pure pack data, zero
-  core): the mourns hook `market_mourns` (the prop trigger reading
-  loc_malby.destroyed, seeded by the wait action's hooks — the murmur
-  family's own site; the INTENT PICK answered by authorship: the
-  RAMBLE release, the family's fourth murmur — the keeper of the
-  weighbeam does not leave the ashes, her spine's rhyme with the
-  feud's fire; the move release stays the owner's future row with its
-  iter-263 price); the TRIGGER-ONLY LAW (the landing's own measured
-  find: a triggered hook stays quiet-path eligible by construction —
-  the weight-0 ambient mourns LEAKED a spurious ramble on a standing
-  market in the smoke witness before the fix; the drama-2 option
-  layer, same prop read as its availability gate, closes every pacing
-  door — the only world where the hook releases on any path is the
-  world where the trigger already fires); the trade verb
-  `trade_at_market` (the spot_available/account gate stack over the
-  same fire layer the arson door reads — the commerce closes with
-  the stalls by construction, the burnout irreversible; unarmed by
-  doctrine — no urgency, no faction door; the runner's purse pc_01
-  coin six the walking stock); the council/vigil knowledge blocks
-  (the_guild_bars_the_stalls / the_blood_price_spoken — heard partial
-  co-located, vague adjacent; the world answering through the
-  acquisition gate: the still-smoking market degrades the council's
-  partials to vague); the re-measured composition deltas — exactly
-  the iter-263 I2/I3b predictions on the committed forms (+1 mourns
-  ramble with the dropped-tally materialization, +3 rumors 22→25, +1
-  briefing transfer); the witness tests/test_marketlegs.py (10
-  tests: all four legs one route + the no-leak arm + the twin); the
-  province golden regenerated on its exact 3-line wait delta; the
-  owner's RU report at docs/iterations/iter-264-market-legs-report.md
+Iteration: iter-265 (`render-conditional` — the owner's call: «можешь
+  закрыть "рендер-условную строку (последняя нога §6.5)" и можно
+  переходить на world track» — the iter-263 verdict's last owner-gated
+  embodiment row CLOSED): the tale contradiction on the ashes closed
+  READ-SIDE — the renderer's LOCATION FOLD (render/chronicle.py::
+  _Positions carrying every location's prop state: seeded from the
+  declared flags + accounts — initial_projection's honest mirror —
+  advanced by each event's location writes, tolerant last-write-wins,
+  a READER never a truth test) exposing the tracked props as DOTTED
+  conditional keys <location_id>.<prop> (raw values, the ink truthiness
+  law; a plain {slot} rejects the dotted name at the snake_case law —
+  a CONDITION surface, never prose); the authored line market_opens'
+  own arm {loc_malby.destroyed?…|…} (the market day passes over the
+  burned stall row, the ashes where the trade stood; the day still
+  counted — the calendar's legibility the surface BY LAW, the grammar
+  closed per C1/C2); the measured evidence: the composition witness
+  2376 events byte-identical to the committed expectation (a template
+  changes NO runtime byte — the golden fixtures untouched, no regen
+  owed), 36 market days all after the burnout t=3573, 36 ashes lines,
+  0 standing lines — the falsifier DEAD; the witness
+  tests/test_render_conditional.py (6 tests: the mechanism census
+  through the real load_pack — the scratch probe re-voicing the wait
+  line, a new event type being dead vocabulary the lint refuses; the
+  two integration arms, one day two worlds, the same first market day
+  t=14400; the purity pin); the §6.5 embodiment rows COMPLETE (the
+  move release the owner's future row at its iter-263 price); the
+  owner's RU report at docs/iterations/iter-265-render-conditional-report.md
+  (carrying the world-track orientation the same call asked for)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2455 passed + 9 skipped, ruff clean, docguard clean, topology
+2461 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: content/province_pack/{rules.json (the market_mourns hook +
-  the option gate + director.notes), actions.json (the trade verb +
-  the council/vigil knowledge blocks + the wait seeding),
-  entities.json (the runner's purse), templates.json (the three
-  knows-gloss rows)}, tests/{test_marketlegs.py (new, the witness),
-  test_p1_composition.py (the re-pinned measured surface),
-  fixtures/province_smoke_seed42.jsonl (regenerated — exactly the 3
-  wait lines: the tag + the importance band)}, docs/{iterations/
-  iter-264-market-legs-report.md (new, the owner's RU deliverable, the
-  language exception owner-directed), worldbuild/ANCHOR_REGION.md
-  (§6.5 the legs LANDED + the trigger-only law), worldbuild/
-  WORLD_TESTS.md (§9 the run record), blueprint/phases.md (§6 the
-  iter-264 record), TASKS.md (the ledger, iter-254 evicted),
-  DECISIONS.md (D-240 into the compound row)}, STATUS.md, worklog.md
-  (iter-254 evicted) — 15 paths; R2 (D-240): pure pack data + the
-  witness + the mandated doc syncs (the soft-limit breach the scope's
-  own note — the campaccount/charcoalpaper family's shape)
-Track A: the §6.5 embodiment legs LANDED (the owner's call over the
-  iter-263 verdict: the mourns hook + the trade door + the knowledge
-  legs, pure pack data; the render conditional the ONE remaining
-  owner-gated row). The ssi family COMPLETE except ssi-5, owner-gated.
+Scope: render/chronicle.py (the location fold + the dotted read
+  surface), content/province_pack/templates.json (the market line's
+  own arm + the meta clause), tests/test_render_conditional.py (new,
+  the witness), docs/{iterations/iter-265-render-conditional-report.md
+  (new, the owner's RU deliverable + the world-track orientation),
+  worldbuild/ANCHOR_REGION.md (§6.5 the row LANDED — the unit's
+  embodiment rows COMPLETE), worldbuild/WORLD_TESTS.md (§9 the
+  CONFIRMED record), blueprint/phases.md (§6 the iter-265 record),
+  TASKS.md (the ledger, iter-255 evicted), DECISIONS.md (D-241)},
+  STATUS.md, worklog.md (iter-255 evicted) — 11 paths; R2 (D-241): the
+  renderer's read surface + one pack template + the witness + the
+  mandated doc syncs (the soft-limit breach the scope's own note, the
+  iter-264 family's shape)
+Track A: the §6.5 embodiment rows COMPLETE (iter-264 the legs, iter-265
+  the render conditional — the move release the owner's future row);
+  the owner's named next focus: the WORLD TRACK (the orientation in
+  the iter-265 report §D — the W5 owner decisions, the embodiment fill
+  list, W6 genre, the region move, the fenced set). The ssi family
+  COMPLETE except ssi-5, owner-gated.
+
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -94,7 +89,7 @@ Track A: the §6.5 embodiment legs LANDED (the owner's call over the
 
 - - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
 - **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference/ (the package since ssi-4); the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
-- **Chronicle conditionals read FLAT context keys; a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
+- **Chronicle conditionals read FLAT context keys and, since iter-265, the location fold's DOTTED state keys (`loc_malby.destroyed` — the §6.5 render conditional's surface: seeded flags/accounts + event writes, tolerant, a reader never a truth test); a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py` + `render/chronicle.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
 - **Hardcoded `from_` is a desync (KI#13/KI#46): repeat effects idempotent; the carried-item position contract single-owned by `movement_changes`; the `_commit` gate fails loud before the write (D-035)** — `core/resolvers.py`.
@@ -115,7 +110,33 @@ Track A: the §6.5 embodiment legs LANDED (the owner's call over the
 
 ## Next step
 
-**iter-264 DONE: the §6.5 embodiment legs (the owner's «продолжай
+**iter-265 DONE: the render conditional (the owner's «можешь закрыть
+"рендер-условную строку (последняя нога §6.5)" и можно переходить на
+world track» call closing the iter-263 verdict's last owner-gated
+embodiment row) LANDED read-side, zero core, zero runtime bytes — the
+renderer's LOCATION FOLD (render/chronicle.py::_Positions: every
+location's prop state, seeded from the declared flags + accounts —
+initial_projection's honest mirror — advanced by each event's
+location writes, tolerant last-write-wins, a READER never a truth
+test) exposing the tracked props as DOTTED conditional keys
+`<location_id>.<prop>` (raw values; a plain {slot} rejects the dotted
+name — a CONDITION surface, never prose); the authored line
+market_opens' own arm `{loc_malby.destroyed?…|…}` (the market day
+passes over the burned stall row; the day still counted — the
+calendar's legibility the surface BY LAW, the grammar closed per
+C1/C2); the measured evidence: the composition witness 2376 events
+byte-identical to the committed expectation (a template changes NO
+runtime byte — the golden fixtures untouched), 36 market days all
+after the burnout t=3573, 36 ashes lines, 0 standing lines — the
+falsifier DEAD; the witness tests/test_render_conditional.py (the
+census through the real load_pack — the scratch probe re-voicing the
+wait line, a new event type being dead vocabulary the lint refuses;
+the two integration arms, one day two worlds, the same first market
+day t=14400; the purity pin). The §6.5 embodiment rows COMPLETE (the
+move release the owner's future row at its iter-263 price). 2461+9 +
+ruff + docguard + topology --check clean. The owner's RU report (with
+the world-track orientation): docs/iterations/iter-265-render-conditional-report.md.**
+iter-264 DONE: the §6.5 embodiment legs (the owner's «продолжай
 работы по embodiment-ногам §6.5» call opening the iter-263 owner-gated
 rows) LANDED as pure pack data, zero core — the mourns hook
 `market_mourns` (the prop trigger loc_malby.destroyed, the wait
@@ -197,26 +218,24 @@ iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
    timing instrument (diagnostic); a production consumer
    (chronicle/observatory reading the deferral) or two iterations
    without new consumers → the demotion question (the report's F, an
-   owner call, no churn now). THE J-ROWS AFTER iter-264 (the
-   embodiment legs LANDED, the render conditional the one remaining
-   row): (J-1) the market DECOMPOSED — its material/economic/social
-   legs already live carriers; the READER legs LANDED iter-264 as
-   pack data — the mourns director hook (the ramble release
-   authored, the trigger-only law holding the quiet path shut), the
-   trade door (`trade_at_market` — expressible AND committed,
-   unarmed by doctrine), the council/vigil knowledge blocks (the
-   tokens minting, the consumers live); the authored unit at
-   ANCHOR_REGION §6.5 (the fifth meso unit); the calendar line stays
-   a surface BY LAW (measured twice — the lint's closed grammar, the
-   empty on_action scope) and the tale contradiction is a render-side
-   row (the read-side conditional, never a calendar gate — the ONE
-   remaining owner-gated embodiment row, with the move release the
-   owner's second future row); (J-2 remainder) the knowledge blocks
-   LANDED (the council/vigil tokens minting co-located partial /
-   adjacent vague, the smoke gate degrading the council's partials —
-   the world's own fidelity; the watch-briefing and rumor-cascade
-   consumers live, the cascade measured 22→25 on the committed
-   forms); (J-3) CLOSED — no row. ssi-5
+   owner call, no churn now). THE J-ROWS AFTER iter-265 — ALL CLOSED:
+   (J-1) the market DECOMPOSED — its material/economic/social legs
+   live carriers (iter-263); the READER legs LANDED iter-264 as pack
+   data (the mourns director hook with the ramble release and the
+   trigger-only law, the trade door, the council/vigil knowledge
+   blocks); the RENDER conditional LANDED iter-265 read-side (the
+   renderer's location fold + the market line's own arm — the tale
+   never contradicting the projection); the authored unit at
+   ANCHOR_REGION §6.5 (the fifth meso unit) with every embodiment row
+   closed except the move release (the owner's future row at its
+   iter-263 price); the calendar line stays a surface BY LAW
+   (measured twice — the lint's closed grammar, the empty on_action
+   scope); (J-2 remainder) the knowledge blocks LANDED (the tokens
+   minting, the watch-briefing and rumor-cascade consumers live, the
+   cascade measured 22→25); (J-3) CLOSED — no row. THE WORLD TRACK
+   after iter-265 — the owner's named next focus: the orientation in
+   the iter-265 report §D (the W5 owner decisions, the embodiment
+   fill list, W6 genre, the region move, the fenced set). ssi-5
    stays owner-gated (the N018 evidence law). The owner-side cleanup
    standing from D-230's third card: delete the doubled
    `workbench/workbench/runtime/` tree locally (safe — the iter-246

@@ -962,7 +962,7 @@ the meaning distribution's own unfinished band, §7.1's form — the
 W5 gate: one clean biography probe over the canonical standing debt
 before any new candidate, `WORLD_TESTS.md` §9's W5 entry).
 
-### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263; the embodiment legs LANDED iter-264)
+### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263; the embodiment legs LANDED iter-264; the render conditional LANDED iter-265 — every §6.5 row closed except the move release, the owner's future row)
 
 The J-1 row's honest shape after the carrier-or-surface discrimination
 (D-239): the Malby market was never "a tale-level institution needing a
@@ -1017,21 +1017,33 @@ owner's embodiment call over §6.5, zero core change):
   fidelity, never the authored one). The boolean "barred stalls" flag is
   inexpressible (no action-level state block) and unneeded — the knowledge
   IS the state.
-- **The calendar line stays a surface** (the legibility of time, by
-  construction — the lint's closed grammar and the empty on_action scope,
-  both measured): the tale contradiction after the burnout is a
-  RENDER-side row (the read-side conditional, never a calendar gate) — the
-  ONE embodiment row still owner-gated.
+- **The calendar line stays a surface; its contradiction closed
+  READ-SIDE** (the legibility of time, by construction — the lint's
+  closed grammar and the empty on_action scope, both measured; the
+  render conditional LANDED iter-265 over the owner's «можешь закрыть
+  рендер-условную строку» call): the renderer's running fold now
+  carries every location's prop state (seeded from the declared
+  flags + accounts, advanced by each event's location writes,
+  tolerant — a reader, never a truth test), exposed to templates as
+  DOTTED conditional keys `<location_id>.<prop>`; the market line's
+  own arm `{loc_malby.destroyed?…|…}` reads the burnout it rides past
+  — measured on the composition witness: 36 market days, all after
+  the burnout (t=3573), 36 ashes lines, 0 standing lines, the day
+  still counted. The calendar grammar stays closed (never a gate);
+  the tale never contradicts the projection.
 
 The unit's causal shape (the J-1 frame, corrected by measurement): a carrier
 whose state the FIRE writes (the burnout, irreversible), the DIRECTOR reads
 (the prop trigger at the beats, through the option gate), the DOOR gates (the
 trade verb's own requires) and the INSTITUTIONS' knowledge legs carry (the
-council's and the vigil's public acts) — never the calendar line. The
-remaining embodiment row (the render conditional) stays the owner's call
-class, with its measured price on record (the iter-263 report); the pole's
-iter-161 precedent is the family's own gate. No new loop: the market is the
-interlock surface loops A/C/E/H already touch — the unit's work is the
+council's and the vigil's public acts) — never the calendar line,
+whose contradiction the RENDER fold now answers (iter-265, read-side
+only). The unit's embodiment rows are COMPLETE (the mourns hook, the
+trade door, the knowledge legs, the render conditional — the last
+LANDED iter-265); the move release stays the owner's future row with
+its measured price on the iter-263 record (the pole's iter-161
+precedent the family's own gate). No new loop: the market is the
+interlock surface loops A/C/E/H already touch — the unit's work was the
 READER legs, not a ninth circuit.
 
 ## 7. Meaning frontier

@@ -4000,6 +4000,48 @@ owner-gated rows):**
   owner-gated row. The owner's RU report:
   `docs/iterations/iter-264-market-legs-report.md`.
 
+**The iter-265 render-conditional record (D-241, R2 — the owner's
+«можешь закрыть "рендер-условную строку (последняя нога §6.5)" и можно
+переходить на world track» call closing the iter-263 verdict's last
+owner-gated embodiment row):**
+
+- **The read-side location fold (zero core, zero runtime bytes).** The
+  renderer's running fold (`render/chronicle.py::_Positions`) now
+  carries every LOCATION's prop state: seeded from the pack's declared
+  `flags` + `accounts` (initial_projection's own location seeding, the
+  honest mirror), advanced by each event's state_changes targeting a
+  location, tolerant last-write-wins — a READER, never a truth test
+  (T2's replay owns the from-checks; a foreign log renders dry and
+  honest, never a crash). The event context exposes the tracked props
+  as DOTTED conditional keys `<location_id>.<prop>`, raw values (the
+  ink truthiness law); a plain `{slot}` reference rejects the dotted
+  name at the snake_case law — the state is a CONDITION surface by
+  construction, never prose.
+- **The authored line.** `market_opens` carries its own arm:
+  `{loc_malby.destroyed?the market day passes at Malby — the stall row
+  burned from the weir stair to the bank, the ashes where the trade
+  stood.|the river market opens at Malby — the stalls from the weir
+  stair to the bank, the road traffic thick on the artery.}` — the same
+  span named, its fate told; the day still counted (the calendar's
+  legibility, the surface BY LAW — the calendar grammar stays closed,
+  C1/C2 measured twice); the tale never contradicting the projection.
+- **The measured evidence.** The composition witness (scratch
+  instrument, outside the repo): 2376 events byte-identical to the
+  committed expectation — a template changes NO runtime byte (the
+  golden fixtures untouched, no regen owed); 36 market days, all after
+  the burnout (t=3573), 36 ashes lines, 0 standing lines — the
+  falsifier (the standing prose on the ashes) DEAD. The witness
+  `tests/test_render_conditional.py` (6 tests: the mechanism census
+  through the real load_pack — the lint part of the instrument, the
+  scratch probe RE-VOICING the `wait` line (a new event type is dead
+  vocabulary the lint refuses); the two integration arms — one day,
+  two worlds, the same first market day t=14400, standing/ashes; the
+  purity pin). The §6.5 embodiment rows COMPLETE (the move release the
+  owner's future row, its price on the iter-263 record). The owner's
+  RU report: `docs/iterations/iter-265-render-conditional-report.md`
+  (with the world-track orientation the owner's «можно переходить на
+  world track» call asked for).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

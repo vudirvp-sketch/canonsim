@@ -178,3 +178,49 @@ records; Observed the smoke-witness leak (found and fixed
 in-iteration — the option gate's own birth record); Class
 FACT(experiment-backed); Disposition CONFIRMED (the render conditional
 the ONE remaining §6.5 owner-gated row).
+
+### D-241 — iter-265 · render-conditional (R2)
+
+The owner's «можешь закрыть "рендер-условную строку (последняя нога
+§6.5)"» call closed the iter-263 verdict's last owner-gated embodiment
+row. The tale contradiction on the ashes (the calendar's market day
+still reading "the stalls from the weir stair to the bank" after the
+burnout took them) is closed READ-SIDE, per the iter-263 §D.1 boundary:
+the calendar line's consumer routes stay closed by law (C1/C2, measured
+twice) — the honest medicine is the renderer's own fold, never a
+runtime primitive. The mechanism (zero core, zero runtime bytes): the
+renderer's running fold (`render/chronicle.py::_Positions`) now carries
+every LOCATION's prop state — seeded from the pack's declared
+flags + accounts (initial_projection's own location seeding, the honest
+mirror), advanced by each event's location writes, tolerant
+last-write-wins (a READER never a truth test; T2's replay owns the
+from-checks; a foreign log renders dry) — and the event context exposes
+the tracked props as DOTTED conditional keys `<location_id>.<prop>`,
+raw values (the ink truthiness law; a plain `{slot}` rejects the dotted
+name at the snake_case law — a CONDITION surface by construction,
+never prose). The authored line: market_opens' own arm
+`{loc_malby.destroyed?the market day passes at Malby — the stall row
+burned from the weir stair to the bank, the ashes where the trade
+stood.|the river market opens at Malby — …}` — the day still counted
+(the calendar's legibility, the surface BY LAW). Measured: the
+composition witness carries 2376 events byte-identical to the committed
+expectation (a template changes NO runtime byte — the golden fixtures
+untouched), 36 market days all after the burnout (t=3573), 36 ashes
+lines, 0 standing lines. The claim packet: Claim the read-side
+conditional kills the contradiction while the render stays a pure
+function of (log, pack, seed); Lens the changed-next-decision unit (a
+tale reader now reads the world's own state on the calendar line) + the
+boundary lens (read-side only, the calendar grammar closed); Prism the
+mechanism census through the real load_pack (the scratch probe
+re-voicing the wait line — a new event type is dead vocabulary the
+lint refuses) + the two integration arms (one day, two worlds, the
+same first market day t=14400); Oracle the rendered branch words + the
+projection reads + the byte-identical re-render; Falsifier the standing
+prose on the ashes / the ashes prose on a standing market / the fold
+crashing over a foreign or desynced write; Observed the census arms
+(all green first run; the probe's own lint refusal — dead vocabulary —
+the instrument's honest find); Class FACT(experiment-backed);
+Disposition CONFIRMED (the §6.5 embodiment rows COMPLETE; the move
+release the owner's future row at its iter-263 price; the owner's RU
+report docs/iterations/iter-265-render-conditional-report.md carries
+the world-track orientation the same call asked for).

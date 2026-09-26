@@ -100,11 +100,30 @@ class _Positions:
     renderer's own lightweight fold — enough to resolve `{location}` at
     each event's tick and the name-1 born names (`name` state changes,
     the condensation's births) without re-folding the whole projection
-    per line)."""
+    per line), plus the LOCATION fold (iter-265, the §6.5 render
+    conditional's own leg): every location's prop state, seeded from
+    the pack's declared `flags` + `accounts` (`initial_projection`'s
+    own location seeding — the read-side fold's honest mirror) and
+    advanced by every event's state_changes targeting a location,
+    tolerant last-write-wins (the renderer is a READER, never the
+    truth test — a foreign log renders dry and honest; T2's replay
+    owns the `from` checks). The read surface is `location_slots()`:
+    every tracked prop as a DOTTED conditional key
+    `<location_id>.<prop>`, values raw — an authored `{cond?...|...}`
+    binds the world's own state (the calendar line reading the site's
+    burnout flag), the same raw-truthiness law as every conditional.
+    Locations alone by the row's own scope: actor/item state
+    conditionals are a future owner row, never this fold's default."""
 
     def __init__(self, pack: Pack) -> None:
         self._where: dict[str, str] = {}
         self._names: dict[str, str] = {}
+        self._sites: dict[str, dict[str, Any]] = {}
+        for loc in pack.entities["locations"]:
+            site: dict[str, Any] = dict(loc.get("flags", {}))
+            for kind, level in (loc.get("accounts") or {}).items():
+                site[f"account.{kind}"] = level
+            self._sites[loc["id"]] = site
         for category in ("npcs", "ambient_entities", "items"):
             for record in pack.entities[category]:
                 self._where[record["id"]] = record["position"]
@@ -120,6 +139,25 @@ class _Positions:
                 self._where[change.entity] = change.to_
             elif change.prop == _NAME_PROP:
                 self._names[change.entity] = str(change.to_)
+            elif change.entity in self._sites:
+                # the location fold: tolerant last-write-wins — never
+                # a `from` check (the reader/T2 boundary above)
+                self._sites[change.entity][change.prop] = change.to_
+
+    def location_slots(self) -> dict[str, Any]:
+        """The location fold's read surface (iter-265): every tracked
+        location prop as a DOTTED context key `<location_id>.<prop>`,
+        raw values (booleans stay booleans — the conditional's
+        raw-truthiness law; a seeded account level reads its own
+        truthiness). Pack declaration order (INV-2). The keys are a
+        CONDITION surface by construction: a plain `{slot}` reference
+        rejects the dotted name at the snake_case law, so the state
+        never leaks into a line's prose."""
+        return {
+            f"{site_id}.{prop}": value
+            for site_id, props in self._sites.items()
+            for prop, value in props.items()
+        }
 
     def location_of(self, entity_id: str) -> str:
         return self._where.get(entity_id, "")
@@ -176,6 +214,13 @@ def _event_context(
         ),
         "axes": ", ".join(outcome.get("axes", ())),
     }
+    # iter-265 (the §6.5 render conditional): the location fold's
+    # dotted keys — the event context now carries the world's own site
+    # state, so a calendar line's `{cond?...|...}` can read the state
+    # it rides past (the tale never contradicting the projection).
+    # Dotted keys can never collide with the outcome's snake_case
+    # vocabulary — the update's placement names the precedence.
+    context.update(positions.location_slots())
     # rs-2 (the account-kind gloss boundary): the account verbs' `kind`
     # slot maps through the pack's table BEFORE the generic outcome
     # loop can land the raw word — the kind's meaning rides every
