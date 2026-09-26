@@ -1,51 +1,42 @@
-Iteration: iter-254 (the `intake` track, doc9-agents-fork-synthesis — the optional half
-  of the owner's 2026-09-26 «согласен с твоими вердиктами =>
-  приступай» call over the intake-39 verdict set; the same session
-  closed iter-253-doc8-intake39-routing first): the design-fork
-  law's missing half LANDED — AGENTS §2.7 extended with the
-  synthesis step (intake-39's one fresh atom, the doctrine
-  re-edition's §19 Synthesis Over Selection: enumerate the
-  candidates' advantage/disadvantage axes as independent axes →
-  decompose every disadvantage intrinsic-to-mechanism vs
-  artifact-of-formulation → construct the candidate satisfying the
-  union of advantage constraints and none of the
-  disadvantage-avoidance constraints → name/verify emergence → the
-  honest comparison — kept only if it matches-or-beats the best
-  parent on every material axis while eliminating ≥1 material
-  disadvantage, else discarded for selection; a re-labeled parent
-  or averaged parameters is not a synthesis; L15's combined-design
-  question made a procedure; D-232) · preceded in the same session
-  by iter-253-doc8 — intake-39 ROUTED (D-231): the 413-line
-  agent-instruction re-edition of intake-38's corpus
-  CONFIRMED-owned (552→413; +Role/§0/§24; the contract 17→18;
-  D-199's per-atom verdicts carrying over, the parked five
-  untouched behind their first consumers); the instruction form
-  REFUSED (AGENTS §2.8); zero rows (D-175); no REFERENCES, no
-  worldbuild (WORLD_AUTHORING §19/D-189 the world track's own law).
+Iteration: iter-256 (the `log` family, log-1 the reader's stale-header gate
+  — the second half of the owner's 2026-09-26 «продолжи работы с
+  документами, я согласен с вердиктами» call over the intake-40 verdict
+  set; the same session landed iter-255-doc10 — the intake-40 ROUTING
+  (D-233) — first): KI#100 CLOSED — `core/log.py::read_log` now derives
+  the expected `schema_version` from the passed schema's `$id` (the
+  module-level `_extract_schema_version`, the writer's own path
+  promoted so both doors derive through ONE function) and refuses a
+  mismatched/foreign header loudly ("a stale log is a migration,
+  never a silent read") — the writer/reader asymmetry closed: the
+  append-mode writer always checked, the reader never did; the
+  canonical read seam + the whole read surface (chronicle/
+  observatory/mechanics/checkpoint/the harnesses) inherit the gate
+  for free; the writer's own append check kept as the canon-write
+  door's defense-in-depth; the stale-header pin test + the
+  test_render hand-crafted-header sync (0.1 → the current version)
+  ride it
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated
 backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
 owner-gated — may never open) + the world track + the SoW horizon,
 ROADMAP §2/§6) ·
-2384 passed + 9 skipped, ruff clean, docguard clean, topology
+2385 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
 visual packets not run this session — no engine binary in the
 sandbox; the .gd layer untouched since iter-246, the D-093 skips
 unaffected) ·
 Date: 2026-09-26 ·
-Scope: AGENTS.md (§2.7 the synthesis step — the fork law's missing
-half) + docs/blueprint/phases.md (§6 the intake-39 block) +
-docs/{DECISIONS.md (D-231/D-232 into the intake compound row),
-TASKS.md (the two ledger lines, iter-244/iter-242 evicted per the
-cap)} + STATUS.md + worklog.md (two entries, iter-243/iter-244
-evicted, the two orphaned body fragments cleaned) — 6 paths across
-the two doc-only iterations; zero behavior change, zero core
-change, the LOG untouched.
-Track A: the intake family at 39 (the doctrine corpus routed twice
-— intake-38 the original, intake-39 the re-edition; the one live
-adoption: AGENTS §2.7's synthesis step); the ssi family COMPLETE
-except ssi-5 (Phases 0,1,2,3,5,6,7 CLOSED at iter-241..252); the
-inf/obs/wb families behind. The detail lives in the worklog + git.
+Scope: core/log.py (the module-level _extract_schema_version + the
+  read_log version gate; the writer delegating to the shared
+  derivation, its append check kept) + tests/{test_core.py (the
+  stale-header pin: the refusal + the clean-read arm), test_render.py
+  (the hand-crafted header synced to the current version)} + the
+  state docs (STATUS/TASKS/worklog) — 6 paths; one core read-
+  boundary behavior change (R2), the LOG untouched.
+Track A: the intake family at 40, the routing's one live adoption
+  LANDED (KI#100 closed the same session it opened); the ssi family
+  COMPLETE except ssi-5; the fresh parked rows temp-1/cov-1/div-1
+  behind their named gates. The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -73,8 +64,8 @@ inf/obs/wb families behind. The detail lives in the worklog + git.
 
 ## Active KIs
 
-(none — KI#99 closed iter-246, deleted iter-250 per the 2-iteration
-cleanup law)
+(none — KI#100 closed iter-256, deleted at the next STATUS touch per
+the 2-iteration cleanup law)
 
 ## FAQ / Pitfalls
 
@@ -105,31 +96,28 @@ cleanup law)
 
 ## Next step
 
-**iter-254 DONE: the design-fork synthesis law landed — AGENTS §2.7
-extended with the doctrine's §19 (D-232), the fork law now carrying
-both halves (the selection half D-198's own + the synthesis step,
-L15's combined-design question made a procedure). Preceded in the
-same session by iter-253-doc8: intake-39 routed (D-231) — the
-413-line agent-instruction re-edition of intake-38's corpus
-CONFIRMED-owned, the one fresh atom (Synthesis Over Selection)
-landed, the instruction form refused (AGENTS §2.8), zero rows
-(D-175), the parked five untouched behind their first consumers.
-2384+9 + ruff + docguard + topology --check clean.**
+**iter-255+256 DONE: the intake-40 corpus routed (D-233) + KI#100
+CLOSED the same session — the CONFIRMED-owned core (zero rows, the
+D-024 law), the M4 §2 sync landed, the reader's stale-header gate
+landed (log-1: one derivation shared by both doors, the whole read
+surface inheriting it), the three parked rows temp-1/cov-1/div-1
+behind their named gates; the form refused (a second TEST_PLAN by
+content, self-forbidden by its own §4). 2385+9 + ruff + docguard +
+topology --check clean.**
 iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
 iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
 (D-221..D-228).
-1. The ssi family — the ladder is COMPLETE except one row (the
-   phase law: docs/ssi/SSI_OVERLAY.md §6):
-   - **ssi-5 (Phase 4, the core strangler)** — stays CLOSED unless
-     the owner names a real pain: it opens ONLY on fresh
-     material_gap (co-change/trajectory evidence at a named pain in
-     core/), never a line-count snapshot (N018); the explicit skip
-     is the other door — the phase may never open. What it needs
-     from the owner: the fresh evidence OR the explicit skip.
-   - The owner-side cleanup standing from D-230's third card: delete
-     the doubled `workbench/workbench/runtime/` tree locally (safe —
-     the iter-246 root fix landed; the tree regenerates on demand;
-     the repo itself carries zero change for it).
+1. The parked intake-40 rows (each on the owner's call only):
+   temp-1 the temporal contracts (the contract decision first —
+   wait-slicing equivalence + the autonomous-intent temporal
+   semantics; never a silent reconciliation) · cov-1 the census
+   (first consumer: the next pack gate) · div-1 the future-divergence
+   probe (first consumer: a depth claim packet). ssi-5 stays
+   owner-gated (the N018 evidence law — the fresh co-change
+   evidence or the explicit skip, never momentum). The owner-side
+   cleanup standing from D-230's third card: delete the doubled
+   `workbench/workbench/runtime/` tree locally (safe — the
+   iter-246 root fix landed; the tree regenerates on demand).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the

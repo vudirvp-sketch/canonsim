@@ -3431,6 +3431,148 @@ intake-34/36/37/38 class — never a donor source); no worldbuild
 routing — the world track's own transfer law (WORLD_AUTHORING §19,
 D-189) governs there, and a doctrine rework adds nothing to it.
 
+**The testing-and-verification ultimate corpus routed (intake-40,
+iter-255-doc10, D-233 — the owner's «продолжи работы с документами, я
+согласен с вердиктами» call over the tmpfiles.org upload: the
+2818-line "CanonSim — TESTING & VERIFICATION — ULTIMATE" (md5
+a7c80d52b727d08c1c8eb8477dce9773), a second TEST_PLAN by content; the
+document's own audit snapshot HEAD `41be836`/iter-216 (2051+1) — every
+claim re-verified against HEAD `254411b`/iter-254 (2384+9) before
+routing, a 38-iteration drift (iter-217..254: the wb family, the ssi
+family incl. ssi-7's semantic_diff, ux/obs/inf, intake-38/39); the
+document itself stays outside the repo, the convenience-copy law).**
+The verdict: CONFIRMED-owned core + four fresh atoms + one fresh
+defect; the document FORM refused — its own §4 forbids exactly that
+("Never maintain: second TEST_PLAN"), AGENTS §6's substance-filtered
+cap and §2.8's standing refusals (no second source of truth) concur,
+and 2818 lines over a closed phase ladder is cruft-pass territory.
+
+*Confirmed-owned (zero rows, zero doc edits — the D-024 duplication
+law):* §2.1's epistemic classes + dispositions = TEST_PLAN §9's two
+axes (D-171 + D-198); §6's T0–T8 engineering gates = TEST_PLAN §1
+(richer: §1.3 the blind suite, §1.4 the semantic-diff companion, T8's
+seed-125 pin matching); §8's M1–M5 meanings/limits = TEST_PLAN §2 —
+except the M4 contract drift (the one genuine catch, below); §25's LLM
+boundary 3 layers + live measures = TEST_PLAN §8 (testproto Layer
+1/2/3) + §8.5's heartbeat ledger (the 4 station rows standing); §26's
+world verification (reader + perturbation oracle) = WORLD_TESTS + the
+world track's own law (D-186, WORLD_AUTHORING §19/D-189 — zero
+worldbuild routing, the iter-253 precedent); §28's minimal-pair /
+ablation / inactive-ablation-invalid = §9's empty-ablation rule +
+the balance-harness arms (`--pacing`/`--systems-minus`/`--directors`);
+§29's metamorphic/order probes = §9's order-probe contract (D-039 the
+standing instance); §30/§36's mutation adequacy + blind spots =
+§9's mutation prism + intake-37's MEASURED lesson (mutation visibility
+is path-bound — release_threshold + probability mutations passed lint
+AND the golden, iter-195); §31's evidence independence = §9's
+independent re-derivation law (ssi-7 made it executable: semantic_diff
+shares zero code with the checked path); §32's CRN/paired seeds/no
+keyed RNG = LANDED `--paired-delta` (iter-183, D-195, the corpus CRN
+verdict CONFIRMED as research methodology) + INV-2's RNG add-safety
+(D-079); §34's change-triggered recertification = T1's
+fixture-regeneration guard (every run: golden ↔ current schema_version
+byte-check + §3 the migration procedure); §49's runtime-promotion
+gate = AGENTS §2.8's admission law + intake-38's promotion gate
+(D-199) — the same shape, already routed; §37's witness portfolio =
+`tests/playscripts/` — all 11 witnesses exist and are the committed
+gate/smoke scripts.
+
+*The fresh material — one code defect, one contract pick, three parked
+rows (each verified at HEAD, never trusted from the document):*
+
+1. **P0-1 — the log reader accepts a stale schema_version header (the
+   one CODE defect).** CONFIRMED at HEAD: `core/log.py::validate_header`
+   checks the header SHAPE only; the append-mode writer checks version
+   + interpreter ("a schema bump between runs is a migration, not an
+   append"); `read_log` accepted a structurally valid header with ANY
+   `schema_version` while validating the events against the
+   caller-passed current schema — the writer/reader asymmetry, a
+   reader-boundary defect per the repo's own migration law (§3). Routed:
+   **KI#100** + the fix row **`log-1`** — read_log derives the expected
+   version from the passed schema's `$id` (the writer's own
+   `_extract_schema_version` path) and raises `LogError` on
+   mismatch/foreign version; the canonical read seam (ssi-6's
+   `workbench/canonical_read.py`) inherits it for free; a stale-header
+   test case pins it. R2 (local behavior change), one iteration.
+2. **P0-2 — the M4 semantics drift (doc ↔ code).** CONFIRMED: TEST_PLAN
+   §2 M4(a) read `repeated_bigrams / total_bigrams` (the occurrence
+   reading); `core/metrics.py::m4_novelty_repetition` computes repeated
+   TYPES / distinct TYPES (pinned by test_metrics's `1/2 = 0.5` case);
+   a skewed stream separates the readings. No longitudinal M4 threshold
+   is load-bearing today (the phase gates closed; M4 rides the harness
+   as a measured surface). Routed: **D-233** picks ONE semantics — the
+   implemented, test-pinned type-based form stays, §2 worded exactly,
+   the ambiguity + the historical note recorded in the D-row; a future
+   "experienced repetition" consumer (if any) gets a NEW named metric
+   (M4b), never a silent redefinition. Doc-only (R0), riding the
+   routing iteration.
+3. **P0-3/P0-4 — the temporal contracts (UNRESOLVED, research-first).**
+   The §16.3 measured signal (wait(N) vs sliced waits diverging across
+   state/relations/crime-status/event families) and §16.5/§22 (the
+   late-tick autonomous talk clustering on province_calendar; 2288
+   events ≈ 1098 decay + 722 watch + 265 talk) are contract questions,
+   not proven bugs — the document says exactly this, and §11's
+   authority law (define the intended contract first, never silently
+   reconcile) agrees. Routed: the parked row **`temp-1`** with TWO
+   gated halves (the parse-2 shape precedent): (a) the wait-slicing
+   equivalence contract — declare the intended relation, then test it;
+   (b) the autonomous-intent temporal semantics — assignment /
+   scheduled / realized / canonical tick / recording separated, the
+   contract selecting generate-at-T vs deferred-realize vs
+   record-late-preserve-semantic-time. Zero code until the contract
+   decision lands (AGENTS §2.4/§2.5).
+4. **P0-5 — the action-to-consequence census.** Genuinely new as an
+   INSTRUMENT; TEST_PLAN §9 already NAMES it (the mutation prism's
+   strong follow-up — which paths the goldens actually bind), and
+   intake-37 measured why it matters (the path-bound mutation escape).
+   Admission via the existing-mechanism ladder (AGENTS §2.8): a minimal
+   extension of mech-2's `scripts/mechanics.py` derived index (the
+   forward direction: pack action → parser reachability → realized →
+   canonical events → downstream consumers), output a REGENERABLE
+   derived report (never a second truth — the document's own §4 law).
+   Routed: the parked row **`cov-1`**, owner-gated; first consumers:
+   the next pack gate + the mutation-escape falsifier.
+5. **P0-6 — the future-divergence minimal-pair probe.** T8 is the one
+   landed instance (director on/off); the harness owns the A/B arms;
+   the genuinely-new half is the bounded BASE/PERTURBED semantic future
+   comparison with first-divergence / causal-path / persistence
+   records; the oracle already exists (ssi-7's
+   `scripts/semantic_diff.py`, deterministic, zero shared code). Routed:
+   the parked row **`div-1`**, owner-gated; first consumer: any "this
+   creates new depth / changes reachable futures" claim packet
+   (TEST_PLAN §9's first-prism row), pack-3's genre-portability arm if
+   picked.
+
+*Refused:* the document as a repo document (a second TEST_PLAN by
+content, self-forbidden by its own §4, 2818 lines over the substance
+cap, AGENTS §2.8's standing refusals — the convenience-copy law, the
+iter-253 precedent); §5's INV-4 restatement ("exactly one surface:
+cli/engine.py" — STALE by 38 iterations; AGENTS §4 owns the current
+three-module form, D-193/D-201/D-208; never adopted from a snapshot);
+§38's SC-* witness queue as a standing queue (speculative verification
+build, D-175's zero-rows law — every SC reduces to an owned instrument
+or one of the routed rows: SC-PLAYER-SURFACE = §8.5's station rows,
+SC-HELDOUT has no standing generalization claim — pack-3 would be its
+first consumer, SC-MUTANT-SENSITIVITY = cov-1's falsifier half + §9's
+prism); §47's P2 observability optimization (behind the document's own
+gate — "only after routing value is demonstrated" — plus AGENTS §2.4's
+research-park law); §47's P1 set (parked behind first consumers: P1-1
+the Province integrated witness on the owner's explicit
+"prove composition" call or the next pack/world gate, P1-2/P1-3 the
+relation/object lifecycle matrices on the world track's first
+engine-capability call, P1-10 the autonomous timing witness = temp-1's
+half (b) test arm); §34.2's periodic portfolio recertification cadence
+(no release candidate exists — pre-product; the change-triggered half
+is already automatic in T1's guard; parked behind the first release).
+
+*The routing:* KI#100 opened in STATUS.md (the one code defect) + FOUR
+TASKS rows — `log-1` doing (the fix), `temp-1`/`cov-1`/`div-1` parked
+behind their named gates — + the TEST_PLAN §2 M4 wording sync (D-233's
+pick, doc-only, this iteration) + the intake-40 ledger line; zero
+worldbuild routing (WORLD_TESTS owns it, the iter-253 precedent); no
+REFERENCES entry (the research-method class); the build queue otherwise
+UNTOUCHED.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

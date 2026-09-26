@@ -357,8 +357,12 @@ def test_t1_chronicle_golden_fixture_equals_fresh_run(tmp_path: Path) -> None:
 def test_chronicle_from_log_reads_seed_from_header(tmp_path: Path) -> None:
     events = run_day1(tmp_path)
     log = tmp_path / "seed_check.jsonl"
-    lines = [json.dumps({"header": True, "schema_version": "0.1", "seed": 8,
-                         "python": "3.11", "commit": "0000000",
+    # the header carries the CURRENT schema version (log-1/KI#100: the
+    # reader refuses a stale header — this test's subject is the SEED,
+    # never stale-version tolerance)
+    lines = [json.dumps({"header": True,
+                         "schema_version": SCHEMA["$id"].rsplit("/", 1)[-1],
+                         "seed": 8, "python": "3.11", "commit": "0000000",
                          "pack": "tavern_pack@0.1"})]
     from core.log import event_to_mapping
 

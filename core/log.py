@@ -1,9 +1,12 @@
 """Append-only JSONL event log: the only canon-write path (INV-1, P1a).
 
 Line 1 is the run header — no wall-clock anywhere (INV-2, D-004); its shape
-is `docs/EVENT_SCHEMA.md` §1, enforced by `validate_header`. Every event
-line is validated against `schemas/event.schema.json` via the stdlib
-mini-validator *before* it is written (T0 by construction, KI#10/D-032).
+is `docs/EVENT_SCHEMA.md` §1, enforced by `validate_header`; `read_log`
+additionally requires the header's `schema_version` to equal the passed
+schema's `$id` version (log-1/KI#100 — a stale log is a migration, never
+a silent read). Every event line is validated against
+`schemas/event.schema.json` via the stdlib mini-validator *before* it is
+written (T0 by construction, KI#10/D-032).
 Cause-chain integrity at write time: the first event of a run is the
 run-start event and carries `cause: null`; every later event must chain to
 an already-written event id. Ids are `ev_0000…` — monotonic, gap-free,
@@ -233,6 +236,16 @@ def python_version() -> str:
     return f"{info.major}.{info.minor}.{info.micro}"
 
 
+def _extract_schema_version(schema: Mapping[str, Any]) -> str:
+    """The version segment of the schema's `$id` (D-010 — the schema file
+    is the single version owner; both the writer and the reader derive
+    through this one path, log-1/KI#100)."""
+    schema_id = schema.get("$id")
+    if not isinstance(schema_id, str) or "/" not in schema_id:
+        raise LogError(f"schema $id must look like 'canonsim/event/<ver>', got {schema_id!r}")
+    return schema_id.rsplit("/", 1)[-1]
+
+
 def next_log_path(logs_dir: Path, seed: int) -> Path:
     """First free `run_<seed>_<n>.jsonl` path inside `logs_dir` (§1 pattern).
 
@@ -280,7 +293,7 @@ class EventLogWriter:
         self, path: Path, schema: Mapping[str, Any], *, append: bool = False
     ) -> None:
         self._schema = schema
-        self._schema_version = self._extract_schema_version(schema)
+        self._schema_version = _extract_schema_version(schema)
         self._path = path
         if append:
             header, events = read_log(path, schema)
@@ -313,13 +326,6 @@ class EventLogWriter:
             self._last_tick = None
             self._written_ids = set()
             self._last_id = None
-
-    @staticmethod
-    def _extract_schema_version(schema: Mapping[str, Any]) -> str:
-        schema_id = schema.get("$id")
-        if not isinstance(schema_id, str) or "/" not in schema_id:
-            raise LogError(f"schema $id must look like 'canonsim/event/<ver>', got {schema_id!r}")
-        return schema_id.rsplit("/", 1)[-1]
 
     @property
     def path(self) -> Path:
@@ -430,10 +436,17 @@ def read_log(
 ) -> tuple[dict[str, Any], list[EventRecord]]:
     """Read a log: validate the header shape and every event line (T0/T2).
 
+    The header's `schema_version` must equal the passed schema's `$id`
+    version — derived through the writer's own `_extract_schema_version`
+    path — so a stale or foreign log is refused at the reader boundary,
+    exactly as the append-mode writer always refused it (log-1/KI#100: a
+    schema bump between runs is a migration, never a silent read).
+
     The writer is the enforcement point for derived fields (ids, knowledge
     sources); the reader validates each line against the schema and hands
     back typed records.
     """
+    expected_version = _extract_schema_version(schema)
     header: dict[str, Any] | None = None
     events: list[EventRecord] = []
     with path.open(encoding="utf-8") as fh:
@@ -443,6 +456,14 @@ def read_log(
             data = json.loads(line)
             if lineno == 1:
                 validate_header(data)
+                if data["schema_version"] != expected_version:
+                    raise LogError(
+                        f"{path}:1: header schema_version "
+                        f"{data['schema_version']!r} != the schema's "
+                        f"{expected_version!r} — a stale log is a "
+                        "migration, never a silent read (the reader's own "
+                        "version gate, KI#100)"
+                    )
                 header = dict(data)
                 continue
             try:

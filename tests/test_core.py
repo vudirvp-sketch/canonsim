@@ -317,6 +317,34 @@ def test_header_contract_rejects_wall_clock_shapes() -> None:
                          "python": "3", "commit": "c", "pack": "p"})
 
 
+def test_reader_refuses_stale_schema_version_header(tmp_path: Path) -> None:
+    """KI#100 (intake-40/log-1, D-233): the reader's version gate — a
+    stale or foreign `schema_version` in an otherwise shape-valid header
+    is refused at the reader boundary, exactly as the append-mode writer
+    always refused it (the writer/reader asymmetry closed)."""
+    log = tmp_path / "stale.jsonl"
+    writer = EventLogWriter(log, SCHEMA)
+    writer.write_header(seed=42, commit="c", pack="p@0.1")
+    writer.append(draft(1, cause=None))
+    writer.close()
+    lines = log.read_text(encoding="utf-8").splitlines()
+    stale = json.loads(lines[0])
+    stale["schema_version"] = "0.1"
+    lines[0] = json.dumps(stale)
+    log.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    with pytest.raises(LogError, match="migration, never a silent read"):
+        read_log(log, SCHEMA)
+    # the seam law's shape: the same log reads clean once the header
+    # carries the current version again (the events were never the problem)
+    fixed = json.loads(lines[0])
+    fixed["schema_version"] = SCHEMA["$id"].rsplit("/", 1)[-1]
+    lines[0] = json.dumps(fixed)
+    log.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    header, events = read_log(log, SCHEMA)
+    assert header["schema_version"] == SCHEMA["$id"].rsplit("/", 1)[-1]
+    assert [e.id for e in events] == ["ev_0000"]
+
+
 # -- fold / projection (STATE-1) -----------------------------------------------
 
 

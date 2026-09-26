@@ -493,97 +493,98 @@ TEST_PLAN §9's claim packet)
   flags" bucket.
 - `ssi-1` — DONE (iter-241, D-221 — the owner's 2026-09-26 SSIEC-v3
   control-plane call): Phase 0 the architecture freeze — the eight
-  public-contract surfaces (event schema, canonical log format, fold
-  semantics, scheduler order, RNG semantics, pack format, checkpoint
-  semantics, the Workbench-gateway public operations) confirmed at
-  their standing owners (INV-1..5 + `docs/EVENT_SCHEMA.md` +
-  `docs/PACK_SPEC.md` + WORKBENCH_APP_LAW) and FROZEN for the ssi
-  initiative's duration — never re-stated (D-024), the strangler
-  phases move INTERNAL ownership only; doc-only, zero code, the LOG
-  untouched.
+  public-contract surfaces confirmed at their standing owners
+  (INV-1..5 + EVENT_SCHEMA + PACK_SPEC + WORKBENCH_APP_LAW) and FROZEN
+  for the initiative's duration; the strangler phases move INTERNAL
+  ownership only. Detail: D-221 + the overlay.
 - `ssi-2` — DONE (iter-242+243, D-222/D-223): Phase 1 the SSI
-  foundation — the READ-ONLY reference copy at `docs/ssi/` (the
-  external package verbatim, the overlay the ONLY authored file) +
-  `docs/ssi/SSI_OVERLAY.md` (the A–L block matrix onto the existing
-  mechanisms, the executable negative-rules subset, the phase
-  ladder) + the risk ladder R0–R5 as AGENTS §2.9 (a refinement of
-  the 3–5-file soft limit, never a replacement — R0–R2 zero added
-  bureaucracy, R3+ carries the compact PCC record in the DECISIONS
-  row, docguard-linted) + the executable checks: SSI-N001/N002 in
-  `tests/test_architecture.py`, SSI-N006/N007/N010/N017/N018 in
-  `scripts/docguard.py` (N018/N020's full forms fire with their
-  phases — OPEN, never a silent skip).
-- `ssi-3` — DONE (iter-244, D-224 — the owner's 2026-09-26 go-ahead):
-  Phase 2 CLOSED — the machine-readable map at
-  `docs/SSI_TOPOLOGY.md` (owner/reads/writes/emits for all 82
-  core/+workbench/ Python modules; the mechanical columns derived by
-  `scripts/topology.py --audit`, drift-pinned by `--check` +
-  `tests/test_topology.py`) + the co-change/trajectory audit over
-  the last 150 commits (iter-90..HEAD): line counts CONFIRMED
-  exactly (1714/1419/1388/1080/2511); loop.py↔pack.py the #1 code
-  pair numerically (11 co-changes, lift 9.07, J 0.69) but HISTORICAL
-  — all in iter-90..168, dormant since, pack already decomposed
-  3990→290 via packlint; ssi-5's core scope SHRINKS on the refuted
-  live coupling (the god-objects dormant 75+ iterations — core/'s
-  last touch the iter-200 lint guard), ssi-4's target
-  (inference.py: 2511 lines born in 2 iterations, single dep)
-  CONFIRMED as the active hotspot; N018 VERIFIED (the trajectory
-  audit is the executable). VERIFIED independently at iter-245 (the
-  owner's verification call: every figure reproduced at the recorded
-  BASE; two R0 precisions landed — the D-224 ID column, the
-  dormancy wording).
+  foundation — `docs/ssi/` the read-only reference copy +
+  SSI_OVERLAY.md (the A–L block matrix, the executable rule subset,
+  the phase ladder) + the R0–R5 risk ladder as AGENTS §2.9 + the
+  executable checks (test_architecture + docguard). Detail: D-222/
+  D-223 + the overlay.
+- `ssi-3` — DONE (iter-244, D-224; independently re-verified iter-245):
+  Phase 2 CLOSED — the 82-module map at SSI_TOPOLOGY.md (drift-pinned
+  by topology --check + test_topology) + the co-change/trajectory
+  audit: loop↔pack HISTORICAL (dormant since iter-168, pack already
+  decomposed via packlint), inference.py CONFIRMED the active hotspot
+  — ssi-5's scope shrunk on the refuted coupling, ssi-4's target
+  named. Detail: D-224 + the map.
 - `ssi-4` — DONE (iter-247+248+249, D-225/D-226/D-227 the PCC
-  records; the owner's 2026-09-26 «ssi4 вроде открыть можно»
-  go-ahead): Phase 3 CLOSED — the workbench/application/inference.py
-  split COMPLETE: 2511 lines → the 10 owner modules (library/chain/
-  presets/relations — the semantic-control DATA half; profile/
-  resolver — the RESOLUTION half; store/migration/operations/
-  compiled — the PERSISTENCE/OPERATIONS half) + the 176-line pure
-  re-export facade; split by the ssi-3 semantic owners (the LAW's
-  three-layer split, LLAMA_CPP_INFERENCE_CONTROL_LAW §2), never an
-  external template; zero behavior change across the steps — the
-  public import surface, the gateway operations and the test claim
-  packet byte-stable throughout (tests/test_inference.py untouched
-  since iter-240); the topology map rows updated in the same
-  iteration as every watchlist change (the --check drift pin); the
-  packlint decomposition (D-175: pack.py 3990→290, zero functional
-  change) the method precedent, now proven twice.
+  records): Phase 3 CLOSED — workbench/application/inference.py 2511
+  lines → the 10 owner modules + the 176-line pure re-export facade,
+  split by the LAW's §2 semantic owners (never an external template);
+  zero behavior change — the public surface/ops/claim packet
+  byte-stable throughout. Detail: the D-rows + the map.
 - `ssi-5` — the core strangler (Phase 4, owner-gated):
   loop/director/worldgen/intent internal-ownership moves ONLY — the
   public surface (director.next_beat(...) et al.) byte-frozen (the
   ssi-1 freeze); each step its own R2/R3 iteration with a PCC
   record.
-- `ssi-6` — DONE (iter-250, D-228 — the owner's «продолжай работу»
-  go-ahead over the confirmed Phase 3 closure): Phase 5 CLOSED — the
-  canonical read seam LANDED: `workbench/canonical_read.py` the ONE
-  workbench core-import module (a pure re-export shell over the
-  10-name read surface: log read_log/validate_header/EventRecord/
-  LogError, fold fold/initial_projection/present_in_order, pack
-  load_pack/PackError, rng stable_hash); the map's three consumers
-  (scene_build, observatory_read, scene_ir) migrated at zero behavior
-  change; the law executable twice over (test_architecture's
-  core-import ban outside the seam + the seam's watchlist reads pin
-  in topology --check); WORKBENCH_APP_LAW §24 synced; ssi-5 explicitly
-  NOT opened on the same call — the N018 evidence gate unmet (the
-  audit-refuted live coupling stands; that phase needs the owner's
-  fresh co-change evidence or the explicit skip, never momentum).
-- `ssi-7` — DONE (iter-251, D-229 (R3) the PCC record; the owner's
-  «ssi7 и/или ssi8 ==> можешь начать» go-ahead): Phase 6 CLOSED — the
-  semantic diff layer over T1: `scripts/semantic_diff.py` (pure
+- `ssi-6` — DONE (iter-250, D-228 (R3) — the owner's «продолжай
+  работу» go-ahead): Phase 5 CLOSED — workbench/canonical_read.py the
+  ONE workbench core-import module (the 10-name read surface); the
+  three consumers (scene_build, observatory_read, scene_ir) migrated
+  at zero behavior change; the law executable twice over (the
+  import ban + the watchlist pin); ssi-5 explicitly NOT opened on the
+  same call (the N018 gate unmet). Detail: D-228 + WORKBENCH_APP_LAW
+  §24.
+- `ssi-7` — DONE (iter-251, D-229 (R3); the owner's «ssi7 и/или ssi8
+  ==> можешь начать» go-ahead): Phase 6 CLOSED —
+  scripts/semantic_diff.py the semantic diff layer over T1 (pure
   stdlib, zero core imports) + the 22-test claim packet + TEST_PLAN
-  §1.4 the law owner; env-pinning stays §1.1's documented decision —
-  the layer ADDS, never replaces T1 (the ledger line + D-229 the
-  detail).
-- `ssi-8` — DONE (iter-252, D-230; the same go-ahead): Phase 7 CLOSED —
-  the GC pass FIRED: the N020 sweep (every artifact class clean — the
-  honest negative) + the three deletion cards — the .gitkeep family in
-  NON-empty dirs DELETED (7 × 0 bytes; sim/systems/.gitkeep retained),
-  sim/ RETAINED (NAV §1's reserved row + D-037 stand — consumer
-  absence alone is never deletion evidence), the KI#99 doubled tree
-  the owner-side cleanup card (iter-246's fix landed); N020 + block I
-  VERIFIED — the ladder complete except ssi-5 (D-230 the detail).
+  §1.4 the law owner; the layer ADDS, never replaces T1. Detail:
+  D-229 + §1.4.
+- `ssi-8` — DONE (iter-252, D-230; the same go-ahead): Phase 7 CLOSED
+  — the GC pass FIRED: the N020 sweep (every artifact class clean —
+  the honest negative) + the three deletion cards (the .gitkeep
+  family DELETED, sim/ RETAINED on authority — consumer absence
+  alone is never deletion evidence, the KI#99 doubled tree the
+  owner-side cleanup card). Detail: D-230 + the overlay.
+- `log-1` — DONE (iter-256, KI#100 closed — intake-40's one code
+  defect, D-233; the owner's 2026-09-26 verdict-agreement call): the
+  reader's stale-header gate — read_log derives the expected
+  `schema_version` from the passed schema's `$id` (the writer's own
+  `_extract_schema_version` path, promoted module-level so both doors
+  derive through ONE function) and refuses a mismatch loudly; the
+  canonical read seam + the whole read surface inherit it for free;
+  the writer's append check kept as defense-in-depth; the stale-header
+  pin test + the test_render header sync ride it. Detail: the intake-40
+  block + KI#100 + git.
+- `temp-1` — the temporal contracts (intake-40, D-233 — PARKED,
+  research-first, two gated halves, the parse-2 shape precedent):
+  (a) the wait-slicing equivalence contract — wait(N) vs N×wait(1):
+  declare the intended relation first, then test it (the corpus's
+  §16.3 measured signal: state/relations/crime-status/event families
+  diverge); (b) the autonomous-intent temporal semantics —
+  assignment/scheduled/realized/canonical tick/recording separated,
+  the contract selecting generate-at-T vs deferred-realize vs
+  record-late-preserve-semantic-time (the province_calendar late-tick
+  talk clustering: 2288 ≈ 1098 decay + 722 watch + 265 talk). Zero
+  code until the owner's contract decision (AGENTS §2.4/§2.5 — never
+  a silent reconciliation).
+- `cov-1` — the action-to-consequence census (intake-40, D-233 —
+  PARKED, owner-gated): a minimal extension of mech-2's
+  `scripts/mechanics.py` derived index, the forward direction (pack
+  action → parser reachability → realized → canonical events →
+  downstream consumers), output a REGENERABLE derived report (never a
+  second truth — the corpus's own §4 law); TEST_PLAN §9 already names
+  the census the mutation prism's strong follow-up, and intake-37
+  measured why it matters (the path-bound mutation escape). First
+  consumers: the next pack gate + the mutation-escape falsifier.
+- `div-1` — the future-divergence minimal-pair probe (intake-40,
+  D-233 — PARKED, owner-gated): the bounded BASE/PERTURBED semantic
+  future comparison with first-divergence / causal-path / persistence
+  records over the existing balance-harness arms (T8 director on/off
+  the landed instance; `--pacing`/`--systems-minus`/`--directors` the
+  family); the oracle ssi-7's `scripts/semantic_diff.py`
+  (deterministic, zero shared code). First consumer: any "this creates
+  new depth / changes reachable futures" claim packet (TEST_PLAN §9's
+  first-prism row), pack-3's genre-portability arm if picked.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
 
+- iter-256 · 2026-09-26 · log1-reader-version-gate (KI#100 CLOSED, D-233's fix row — the second half of the owner's «продолжи работы с документами, я согласен с вердиктами» call): read_log now derives the expected schema_version from the passed schema's $id — the module-level _extract_schema_version, the writer's own path promoted so both doors derive through ONE function — and refuses a mismatched/foreign header loudly (a stale log is a migration, never a silent read; the writer/reader asymmetry closed); the canonical read seam + the whole read surface (chronicle/observatory/mechanics/checkpoint/the harnesses) inherit the gate for free; the writer's append check kept as the canon-write door's defense-in-depth; the stale-header pin test (the refusal + the clean-read arm) + the test_render hand-crafted 0.1-header synced to the current version ride it; 6 paths; 2385+9 + ruff + docguard + topology --check clean (one core read-boundary behavior change, R2; the LOG untouched)
+- iter-255 · 2026-09-26 · doc10-intake40-routing (D-233, the owner's «продолжи работы с документами, я согласен с вердиктами» call over the tmpfiles.org upload): the 2818-line testing-and-verification ultimate corpus ROUTED — the CONFIRMED-owned core (the A-table: §2.1/§6/§8/§25/§26/§28/§29/§30/§36/§31/§32/§34/§49/§37 all owned by TEST_PLAN §§1/2/8/9 + WORLD_TESTS + the playscripts — zero rows, zero doc edits, the D-024 law) + the ONE code defect (P0-1 the reader's stale-header acceptance → KI#100 + the fix row log-1) + the M4 semantics pick (P0-2 → D-233: the implemented test-pinned type-based form stays, TEST_PLAN §2 worded exactly, a future experienced-repetition consumer gets M4b never a silent redefinition) + THREE parked rows (temp-1 the temporal contracts, cov-1 the census, div-1 the future-divergence probe — each behind its named gate); the document FORM refused (a second TEST_PLAN by content, self-forbidden by its own §4, AGENTS §2.8); the SC-* queue + the P1/P2 sets + the periodic recert refused or parked (D-175); the record: the intake-40 block; 6 paths; 2384+9 + ruff + docguard + topology --check clean (doc-only, the D-022 exception — the owner's fresh call)
 - iter-254 · 2026-09-26 · doc9-agents-fork-synthesis (D-232, the optional half of the owner's «согласен с твоими вердиктами => приступай» call): the design-fork law's missing half LANDED — AGENTS §2.7 extended with the synthesis step (intake-39's one fresh atom, the doctrine's §19: enumerate the candidates' advantage/disadvantage axes as independent axes → decompose every disadvantage intrinsic-to-mechanism vs artifact-of-formulation → construct the candidate satisfying the union of advantage constraints and none of the disadvantage-avoidance constraints → name/verify emergence → the honest comparison — kept only if it matches-or-beats the best parent on every material axis while eliminating ≥1 material disadvantage, else discarded for selection; a re-labeled parent or averaged parameters is not a synthesis; L15's combined-design question made a procedure); the selection half (D-198's compare/prefer/never-generalize) untouched — the fork law now carries both halves; 5 paths; 2384+9 + ruff + docguard + topology --check clean (doc-only, the D-022 exception — the owner's fresh call)
 - iter-253 · 2026-09-26 · doc8-intake39-routing (D-231, the owner's «согласен с твоими вердиктами => приступай» call over the tmpfiles.org upload): the 413-line agent-instruction edition of intake-38's corpus routed — CONFIRMED-owned (the rework: 552→413 lines, +Role/§0 Governing Loop/§24 Checklist, the contract 17→18, the old §19 gate renumbered to §20; D-199's per-atom verdicts carry over unchanged, the parked five still behind their first consumers — a restating rework is not new evidence, intake-35's second-pass precedent); the ONE fresh atom (§19 Synthesis Over Selection) routed to AGENTS §2.7 — landed iter-254 the same session; the instruction FORM refused (AGENTS §2.8's standing refusals — no second project memory, no nested agent-instruction files); ZERO rows convened (D-175), no REFERENCES entry (the convenience-copy law, the research-method class), no worldbuild routing (WORLD_AUTHORING §19/D-189 the world track's own transfer law); the record: the intake-39 block + D-231; 5 paths; 2384+9 + ruff + docguard + topology --check clean (doc-only, the D-022 exception — the owner's fresh call)
 - iter-252 · 2026-09-26 · ssi8-gc-pass (Phase 7, the owner's «ssi7 и/или ssi8 ==> можешь начать» go-ahead): the GC pass FIRED — the N020 sweep over every artifact class (19 scripts + fixtures + playscripts + packs + docs incl. every subdir: every file consumer-referenced; zero tracked-ignored; zero orphans — the honest negative: the cap/collapse/KI-cleanup discipline left no dead committed artifact beyond the marker family) + the three deletion cards (D-230): the redundant .gitkeep family in NON-empty dirs DELETED via git rm (core/brief/cli/render/tests/tests.playscripts/content.tavern_pack — 7 × 0 bytes; sim/systems/.gitkeep retained, the reserved skeleton's only content), sim/ RETAINED (zero imports since birth BUT authority holds: NAV §1's reserved row + D-037's reservation + INV-3's stoplist scope — consumer absence alone is never deletion evidence; dissolving the reservation is the owner's explicit call), the KI#99 doubled workbench/workbench/runtime/ tree the OWNER-SIDE cleanup card (the iter-246 root fix landed, the tree regenerates, the repo carries zero change); the overlay: N020 VERIFIED + block I VERIFIED + phase 7 CLOSED — the ssi ladder complete except ssi-5; 10 paths (7 deletions + 3 docs); 2384+9 + ruff + docguard + topology --check clean (zero code change, the LOG untouched)
@@ -592,6 +593,5 @@ TEST_PLAN §9's claim packet)
 - iter-249 · 2026-09-26 · ssi4-step3-phase-close (Phase 3 step 3, the FINAL): the PERSISTENCE/OPERATIONS half out of the facade — store.py (SCHEMA + InferenceStore), migration.py (the one-way settings migration), operations.py (the gateway family + the chat BASE provider — the ops deriving at their true owner), compiled.py (the platform seam's input) extracted verbatim; the facade = the PURE re-export shell (176 lines); PHASE 3 CLOSED — 2511 → 10 owner modules + the facade, zero behavior change across the three steps, the public surface/ops/claim packet byte-stable throughout (tests/test_inference.py untouched since iter-240); the drift-pin test re-pinned to the emission-free facade; D-227 (R3) the PCC record; 8 paths; 2361+9 + ruff + docguard + topology --check clean (zero core change, the LOG untouched)
 - iter-248 · 2026-09-26 · ssi4-step2-resolution-half (Phase 3 step 2): the RESOLUTION half out of the facade — profile.py (the InferenceProfile document + the validation family, §19.1's ACCEPTED laws) + resolver.py (STATES/resolve/_chain_item_state, the §6/§8 effective-state resolver, pure) extracted verbatim; the facade 1157→700; the drift pin RED→GREEN in-iteration (the facade reads + the two inventory rows — the map refresh the same iteration's own law); __all__ completed with the de-facto public names; D-226 (R3) the PCC record; 7 paths; 2361+9 + ruff + docguard + topology --check clean (zero behavior change, the LOG untouched)
 - iter-247 · 2026-09-26 · ssi4-step1-inference-package (Phase 3 step 1, the owner's «ssi4 вроде открыть можно» go-ahead): workbench/application/inference.py (2511) became the inference/ PACKAGE — the semantic-control DATA half verbatim (library.py the control model + the 85-control data + the indexes; chain.py; presets.py; relations.py) + the facade __init__.py (the behavior halves pending their steps, the re-exports, __all__ completed) — the public import surface UNCHANGED (tests/test_inference.py untouched and green), the gateway ops byte-stable, zero behavior change; pyproject packages; the WATCHLIST successor = the facade (topology.py + the map refresh + the re-anchored drift-pin breach); the LAW/APP_LAW/NAV/overlay path syncs; D-225 (R3) the PCC record; 15 paths; 2361+9 + ruff + docguard + topology --check clean (zero core change, the LOG untouched)
-- iter-246 · 2026-09-26 · ki99-ui-state-path (the owner's «ki99 закрыть» half of the ssi-4/ki99 call): KI#99 CLOSED — the shell's ui_state path doubling (workbench/workbench/runtime/) fixed at its root: globalize_path("res://") returns the project root WITH the trailing slash, the raw three-call base-dir walk counted the slash as a level, landed one short, and the appended literal doubled workbench/ (KI#98's class); the fix normalizes the trailing slash FIRST then walks EXACTLY the real project-root depth (both engine forms correct, never slash-dependent) + the contract pin (test_shell_contract.py) derives the walk depth from project.godot's committed location — a moved root goes RED, never a silent wrong path; 5 paths; 2361+9 + ruff + docguard + topology --check clean (one .gd behavior fix, zero core change, the LOG untouched)
 
-- iter-245 · 2026-09-26 · ssi3-close-verify (the owner's Phase 2 verification call «вторую фазу вроде завершили»): the INDEPENDENT re-verification of D-224 in a fresh session — every recorded figure reproduced EXACTLY at the recorded BASE_COMMIT 08300a0 (the inclusive last-150 window: loop↔pack co=11, touches 13/14, lift 9.07, J 0.69, all co-changes iter-90..168; the window-start sizes pack 3990 / loop 1024; the state-doc pairs 148/144; the line counts; 82 modules; the god-objects' last touches 168/107/145/169; the executable battery 2360+9 + ruff + docguard + topology --check green) + two R0 doc precisions: DECISIONS.md the compound row's ID column completed with D-224 (the body carried the record, the ID list stopped at D-223 — citations now resolve) + the dormancy wording made god-object-precise everywhere it was directory-loose (core/'s post-iter-169 touches = exactly the three gloss/lint commits iter-191/199/200 — economy.py constants + the packlint rename guard; the REFUTED verdict unchanged); 5 paths; doc-only, zero functional change, the D-022 exception (the owner's fresh verification request)
+
