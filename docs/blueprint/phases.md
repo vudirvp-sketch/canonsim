@@ -3364,6 +3364,73 @@ first-consumer law — a new lens enters only after a claim packet used
 it); the document never enters REFERENCES (a research-method text,
 not a donor source — the intake-34/36/37 class).
 
+**The doctrine's agent-instruction re-edition routed (intake-39,
+iter-253-doc8, D-231 — the owner's «согласен с твоими вердиктами =>
+приступай» call over the tmpfiles.org upload: the 413-line
+"Cross-Domain Mechanism Transplantation — Agent Instruction" (md5
+80fdb9d9b39f8c13351ebe23cee528c4), the REWORKED edition of
+intake-38's own corpus — the 552-line doctrine compressed to 413,
+restructured into the agent-instruction form (+Role, +§0 Governing
+Loop, +§24 Agent Checklist, the renumbering that moves the old
+runtime-promotion gate from §19 to §20), the experiment contract
+re-counted 17→18 fields; verified against HEAD `f209d68` before
+routing, the baseline triple green (2384+9, ruff, docguard); the
+document itself stays outside the repo, the convenience-copy law).**
+The verdict: CONFIRMED-owned — the re-edition's CONTENT is
+intake-38's own corpus, D-199's per-atom verdicts carrying over
+unchanged: the confirmed-owned map (the transplantation pipeline,
+the falsification filter, the five-part test, the promotion gate,
+the anti-patterns, the persistence owners), the §8/§9 method
+families landed or parked through intakes 34..37, and the five
+parked atoms each still behind its named first consumer — the
+contract's re-count opens no parked surface (stopping-rule /
+spillover / blocked-nuisance remain the unfilled three; a rework
+that restates them is not new evidence, intake-35's second-pass
+precedent).
+
+*The genuinely new material — one fresh atom, one adoption, one
+refusal:*
+
+1. **§19 Synthesis Over Selection** — the ONE fresh principle (no
+   counterpart in the 552-line original): at a fork whose candidates
+   carry real trade-offs, enumerate each candidate's concrete
+   advantages/disadvantages as independent axes; decompose every
+   disadvantage into intrinsic-to-mechanism vs
+   artifact-of-formulation; construct a novel candidate satisfying
+   the union of the advantage constraints while violating none of
+   the disadvantage-avoidance constraints (a redesign that dissolves
+   the trade-off, never a weighted compromise); name and verify any
+   emergent property; then the honest comparison — the synthesis is
+   kept only if it matches or beats the best parent on every
+   material axis while eliminating at least one material
+   disadvantage, otherwise discarded for selection from the original
+   set (a re-labeled parent or averaged parameters is not a
+   synthesis). CONFIRMED as the design-fork law's missing half:
+   BLUEPRINT §2 L15's Combined-design part already asks the question
+   (is there a combination preserving the advantages while
+   neutralizing the disadvantages — doc-5, D-198), and AGENTS §2.7
+   owns the selection half (compare, prefer the quality option,
+   never generalize) — the synthesis step is the PROCEDURE the
+   question always lacked; it landed as §2.7's extension the same
+   session (iter-254-doc9, D-232), this intake's one live adoption.
+   §24's checklist line ("synthesis attempted where trade-offs
+   exist") rides it, no separate surface.
+2. **The instruction FORM** — the Role / §0 loop / §24 checklist
+   agent-instruction shape itself — REFUSED: AGENTS §2.8's standing
+   refusals (no second project memory, no nested agent-instruction
+   files; the named law docs are the repo's operative form, D-024's
+   single-owner law). The form is the author's delivery choice over
+   the same content, never a repo need — the doc-4..doc-6 family's
+   refusals stand unchanged.
+
+*The routing:* ZERO rows convened (D-175 — the one fresh atom names
+AGENTS §2.7, a standing law, never a queue row; the parked five keep
+their first-consumer gates); zero build-grade items; the build queue
+UNTOUCHED; no REFERENCES entry (a research-method re-edition, the
+intake-34/36/37/38 class — never a donor source); no worldbuild
+routing — the world track's own transfer law (WORLD_AUTHORING §19,
+D-189) governs there, and a doctrine rework adds nothing to it.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

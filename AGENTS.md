@@ -55,7 +55,21 @@ Two work tracks (`docs/ROADMAP.md` §1):
    compare the existing mechanism with the alternatives, prefer the
    higher-quality option that neutralizes material disadvantages over a
    minimal shift — and never generalize beyond the actual consumer and
-   acceptance criteria.
+   acceptance criteria. Where the candidates carry real trade-offs,
+   attempt the synthesis before selecting (intake-39, D-231/D-232 —
+   the doctrine's §19, L15's combined-design question made a
+   procedure): enumerate each candidate's concrete advantages and
+   disadvantages as independent axes; decompose every disadvantage
+   into intrinsic-to-mechanism vs artifact-of-formulation; construct
+   a candidate that satisfies the union of the advantage constraints
+   while violating none of the disadvantage-avoidance constraints —
+   a redesign that dissolves the trade-off, never a weighted
+   compromise; name and verify any emergent property (real, not
+   decorative). Keep the synthesis only if it matches or beats the
+   best parent on every material axis while eliminating at least one
+   material disadvantage — otherwise discard it and select from the
+   original set; a re-labeled parent or averaged parameters is not a
+   synthesis.
 8. New agent-facing tooling (scripts, CI, harnesses, doc machinery), D-198:
    existing mechanism → minimal extension → new mechanism, each step only
    on proof the previous one is insufficient. Admission requires a named

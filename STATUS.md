@@ -1,57 +1,51 @@
-Iteration: iter-252 (the `ssi` track, ssi-8/Phase 7 — the
-  owner's 2026-09-26 «ssi7 и/или ssi8 ==> можешь начать» call, both
-  tail phases on the one go-ahead; the same session closed
-  iter-251/ssi-7/Phase 6 first): PHASE 6 CLOSED at iter-251 — the
-  semantic diff layer over T1 (scripts/semantic_diff.py the
-  pure-stdlib ZERO-core-import instrument — the independent-re-derivation
-  oracle; tests/test_semantic_diff.py the 22-test claim packet;
-  TEST_PLAN §1.4 the law owner; env-pinning stays §1.1's documented
-  decision — the layer ADDS the cross-environment oracle, never
-  replaces T1; D-229 (R3) the PCC record) · PHASE 7 CLOSED at
-  iter-252 — the GC pass FIRED: the N020 sweep over every artifact
-  class (the 19 scripts, the fixtures, the playscripts, the packs,
-  the docs incl. every subdir — every file consumer-referenced; zero
-  tracked-ignored; zero orphans — the honest negative: no dead
-  committed artifact beyond the marker family) + the three deletion
-  cards (D-230): the redundant .gitkeep family in NON-empty dirs
-  DELETED (7 × 0 bytes; sim/systems/.gitkeep retained — the reserved
-  skeleton's only content), sim/ RETAINED (zero imports since birth
-  BUT NAV §1's reserved row + D-037's reservation + INV-3's stoplist
-  scope stand — consumer absence alone is never deletion evidence;
-  dissolving the reservation is the owner's explicit call), the
-  KI#99 doubled workbench/workbench/runtime/ tree the OWNER-SIDE
-  cleanup card (the iter-246 root fix landed; the tree regenerates;
-  the repo carries zero change); the overlay: block L VERIFIED, N020
-  VERIFIED, block I VERIFIED — the ssi ladder COMPLETE except ssi-5
-  (owner-gated, may never open).
+Iteration: iter-254 (the `intake` track, doc9-agents-fork-synthesis — the optional half
+  of the owner's 2026-09-26 «согласен с твоими вердиктами =>
+  приступай» call over the intake-39 verdict set; the same session
+  closed iter-253-doc8-intake39-routing first): the design-fork
+  law's missing half LANDED — AGENTS §2.7 extended with the
+  synthesis step (intake-39's one fresh atom, the doctrine
+  re-edition's §19 Synthesis Over Selection: enumerate the
+  candidates' advantage/disadvantage axes as independent axes →
+  decompose every disadvantage intrinsic-to-mechanism vs
+  artifact-of-formulation → construct the candidate satisfying the
+  union of advantage constraints and none of the
+  disadvantage-avoidance constraints → name/verify emergence → the
+  honest comparison — kept only if it matches-or-beats the best
+  parent on every material axis while eliminating ≥1 material
+  disadvantage, else discarded for selection; a re-labeled parent
+  or averaged parameters is not a synthesis; L15's combined-design
+  question made a procedure; D-232) · preceded in the same session
+  by iter-253-doc8 — intake-39 ROUTED (D-231): the 413-line
+  agent-instruction re-edition of intake-38's corpus
+  CONFIRMED-owned (552→413; +Role/§0/§24; the contract 17→18;
+  D-199's per-atom verdicts carrying over, the parked five
+  untouched behind their first consumers); the instruction form
+  REFUSED (AGENTS §2.8); zero rows (D-175); no REFERENCES, no
+  worldbuild (WORLD_AUTHORING §19/D-189 the world track's own law).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-the ladder complete 0..6 — the standing work: the owner-gated backlog
-(the ssi initiative's Phases 6+7 now CLOSED at iter-251/252; ssi-5
-the only remaining row, owner-gated — may never open) + the world
-track + the SoW horizon, ROADMAP §2/§6) ·
-2384 passed + 9 skipped, ruff clean, docguard clean, topology --check
-clean (Python 3.12.14, the env pin; the REDOT_EXE-gated visual packets
-not run this session — no engine binary in the sandbox; the .gd layer
-untouched since iter-246, the D-093 skips unaffected) ·
+the ladder complete 0..6 — the standing work: the owner-gated
+backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
+owner-gated — may never open) + the world track + the SoW horizon,
+ROADMAP §2/§6) ·
+2384 passed + 9 skipped, ruff clean, docguard clean, topology
+--check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
+visual packets not run this session — no engine binary in the
+sandbox; the .gd layer untouched since iter-246, the D-093 skips
+unaffected) ·
 Date: 2026-09-26 ·
-Scope: scripts/semantic_diff.py (new — the Phase 6 instrument, pure
-stdlib, zero core imports) + tests/test_semantic_diff.py (new — the
-22-test claim packet) + the 7 redundant .gitkeep markers DELETED
-(core/, brief/, cli/, render/, tests/, tests/playscripts/,
-content/tavern_pack/ — git rm; sim/systems/.gitkeep retained) +
-docs/{TEST_PLAN.md (§1.4 + the T1 row pointer), ssi/SSI_OVERLAY.md
-(blocks L/I VERIFIED, N020 VERIFIED, phases 6+7 CLOSED), DECISIONS.md
-(D-229/D-230 into the compound row), AGENT_NAVIGATION.md (the scripts
-row + the §3 routing row), TASKS.md (ssi-7/ssi-8 DONE + the ledger)}
-+ STATUS.md + worklog.md — 13 paths (the two-phase session); zero
-behavior change, zero core change (no core/ file imported or edited),
-the LOG untouched.
-Track A: the ssi family COMPLETE except ssi-5 (Phases 0,1,2,3,5,6,7
-CLOSED at iter-241..252; ssi-5 owner-gated — may never open, its
-evidence gate unmet); the inf family behind (iter-240 the full chip
-library); the obs family behind (iter-236 obs-2, 235 obs-1, 234
-ux-1); the wb family behind: iter-237 the corpus re-homing. The
-detail lives in the worklog + git.
+Scope: AGENTS.md (§2.7 the synthesis step — the fork law's missing
+half) + docs/blueprint/phases.md (§6 the intake-39 block) +
+docs/{DECISIONS.md (D-231/D-232 into the intake compound row),
+TASKS.md (the two ledger lines, iter-244/iter-242 evicted per the
+cap)} + STATUS.md + worklog.md (two entries, iter-243/iter-244
+evicted, the two orphaned body fragments cleaned) — 6 paths across
+the two doc-only iterations; zero behavior change, zero core
+change, the LOG untouched.
+Track A: the intake family at 39 (the doctrine corpus routed twice
+— intake-38 the original, intake-39 the re-edition; the one live
+adoption: AGENTS §2.7's synthesis step); the ssi family COMPLETE
+except ssi-5 (Phases 0,1,2,3,5,6,7 CLOSED at iter-241..252); the
+inf/obs/wb families behind. The detail lives in the worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -111,27 +105,19 @@ cleanup law)
 
 ## Next step
 
-**iter-252 DONE: ssi-8/Phase 7 CLOSED — the GC pass (the N020 sweep
-over every artifact class clean — the honest negative; the three
-deletion cards: the redundant .gitkeep family DELETED, sim/ RETAINED
-on standing authority — consumer absence alone is never deletion
-evidence, the KI#99 doubled workbench/workbench/runtime/ tree the
-owner-side cleanup card; N020 + block I VERIFIED; D-230). Preceded
-in the same session by iter-251/ssi-7/Phase 6 CLOSED — the semantic
-diff layer over T1 (scripts/semantic_diff.py the pure-stdlib
-zero-core-import instrument + tests/test_semantic_diff.py the 22-test
-claim packet; TEST_PLAN §1.4 the law; env-pinning stays §1.1's
-documented decision — the layer adds, never replaces; D-229 (R3)
-PCC). 2384+9 + ruff + docguard + topology --check clean. The ssi
-ladder COMPLETE except ssi-5 (owner-gated, may never open).**
-iter-250 DONE: ssi-6/Phase 5 CLOSED — the canonical read seam
-(workbench/canonical_read.py the ONE workbench core-import module;
-the three consumers migrated at zero behavior change; D-228).
-iter-249 DONE: ssi-4/Phase 3 CLOSED (the inference split:
-2511 → 10 owner modules + the facade; D-225/D-226/D-227).
-iter-241..248 DONE: the ssi foundation + Phase 2 + KI#99
-(D-221..D-227).
-
+**iter-254 DONE: the design-fork synthesis law landed — AGENTS §2.7
+extended with the doctrine's §19 (D-232), the fork law now carrying
+both halves (the selection half D-198's own + the synthesis step,
+L15's combined-design question made a procedure). Preceded in the
+same session by iter-253-doc8: intake-39 routed (D-231) — the
+413-line agent-instruction re-edition of intake-38's corpus
+CONFIRMED-owned, the one fresh atom (Synthesis Over Selection)
+landed, the instruction form refused (AGENTS §2.8), zero rows
+(D-175), the parked five untouched behind their first consumers.
+2384+9 + ruff + docguard + topology --check clean.**
+iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
+iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
+(D-221..D-228).
 1. The ssi family — the ladder is COMPLETE except one row (the
    phase law: docs/ssi/SSI_OVERLAY.md §6):
    - **ssi-5 (Phase 4, the core strangler)** — stays CLOSED unless
