@@ -653,7 +653,7 @@ intake-34's measured lesson).
 
 | Claim shape | First prism | Strong follow-up | Standing instruments (the oracle owners) |
 |---|---|---|---|
-| "this creates new depth" | one-knob perturb | composition crossing | balance A/B (§6), M1/M3, the depth battery (the F3 form + the three arms, `phases.md` §6) |
+| "this creates new depth" | one-knob perturb | composition crossing | balance A/B (§6), M1/M3, the depth battery (the F3 form + the three arms, `phases.md` §6), `divergence_probe.py` (div-1, D-235: the same-seed minimal pair's first-divergence / causal-path / persistence records over the §6 arm family — WHERE the futures diverge and whether it persists, the question the distribution tables cannot answer) |
 | "this is a meaningful player decision" | remove | knowledge restriction / same-seed fork | `--systems-minus`, the door-surface battery, the blind suite (§1.3) |
 | "actors only know permitted facts" | knowledge restriction | stress corpus | blind-NPC suite (§1.3), the deviation corpus (§8.2), `knower` boundaries |
 | "this does not perturb unrelated runs" | same-seed fork | one-knob | T1/T2, `mechanics.py blast`, the RNG fingerprint |
@@ -662,7 +662,7 @@ intake-34's measured lesson).
 | "this outcome is explainable" | same-seed fork | composition crossing | `mechanics.py trace/why`, the provenance family, drift tables |
 | "this cannot escape its boundary" | stress corpus | independent re-derivation | the validator golden set, pack lint, cap/floor tests, stoplists |
 | "this parameter earns its complexity" | one-knob | remove | the ablation family, the offline one-knob ranking (intake-16's spike record) |
-| "a meaningful semantic change cannot pass silently" | the mutation probe (known mutants applied to a pack copy: lint verdict + golden byte-diff) | the coverage census (which paths the goldens actually bind) | the admission lint (structural closure only), the per-pack golden byte-diff (path-bound), `mechanics.py blast` |
+| "a meaningful semantic change cannot pass silently" | the mutation probe (known mutants applied to a pack copy: lint verdict + golden byte-diff) | the coverage census — `mechanics.py census` (cov-1, D-234: the action-to-consequence forward walk; the realized column is the mutation-escape surface — which paths the committed corpus actually binds) | the admission lint (structural closure only), the per-pack golden byte-diff (path-bound), `mechanics.py blast` |
 
 Two standing oracle laws the table carries:
 

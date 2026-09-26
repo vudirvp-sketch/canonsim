@@ -1,42 +1,45 @@
-Iteration: iter-256 (the `log` family, log-1 the reader's stale-header gate
-  — the second half of the owner's 2026-09-26 «продолжи работы с
-  документами, я согласен с вердиктами» call over the intake-40 verdict
-  set; the same session landed iter-255-doc10 — the intake-40 ROUTING
-  (D-233) — first): KI#100 CLOSED — `core/log.py::read_log` now derives
-  the expected `schema_version` from the passed schema's `$id` (the
-  module-level `_extract_schema_version`, the writer's own path
-  promoted so both doors derive through ONE function) and refuses a
-  mismatched/foreign header loudly ("a stale log is a migration,
-  never a silent read") — the writer/reader asymmetry closed: the
-  append-mode writer always checked, the reader never did; the
-  canonical read seam + the whole read surface (chronicle/
-  observatory/mechanics/checkpoint/the harnesses) inherit the gate
-  for free; the writer's own append check kept as the canon-write
-  door's defense-in-depth; the stale-header pin test + the
-  test_render hand-crafted-header sync (0.1 → the current version)
-  ride it
+Iteration: iter-259 (the intake-40 instrument family — `div-1` the
+  future-divergence probe, plus the same session's iter-257 `temp-1`
+  research + iter-258 `cov-1` census; the owner's 2026-09-26
+  «работай над temp-1, цензус cov-1 и прочими» call opening the
+  parked trio): temp-1's RESEARCH landed (the fork card in
+  phases.md §6 — both temporal signals verified at HEAD, the shared
+  root mechanism named (`_run_beat`'s entry_tick enqueue law + the
+  per-event ambient hook minting), the A1/A2/A3 + B1/B2/B3 contract
+  forks presented to the owner, NO pick recorded — zero engine code
+  per the row's own law); cov-1 LANDED (`mechanics.py census` — the
+  action-to-consequence forward walk, D-234); div-1 LANDED
+  (`scripts/divergence_probe.py` — the future-divergence minimal-pair
+  probe over the balance-harness arms, the semantic_diff oracle + the
+  first-divergence / causal-path / persistence records, D-235); the
+  session's instrument work exposed and closed KI#101 (the oracle's
+  own unequal-length-list crash) and KI#102 (the architecture test's
+  filesystem glob vs its committed-files law, red wherever scratch/
+  exists)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated
 backlog (the ssi initiative COMPLETE at iter-241..252 except ssi-5,
 owner-gated — may never open) + the world track + the SoW horizon,
 ROADMAP §2/§6) ·
-2385 passed + 9 skipped, ruff clean, docguard clean, topology
+2401 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin; the REDOT_EXE-gated
 visual packets not run this session — no engine binary in the
 sandbox; the .gd layer untouched since iter-246, the D-093 skips
 unaffected) ·
 Date: 2026-09-26 ·
-Scope: core/log.py (the module-level _extract_schema_version + the
-  read_log version gate; the writer delegating to the shared
-  derivation, its append check kept) + tests/{test_core.py (the
-  stale-header pin: the refusal + the clean-read arm), test_render.py
-  (the hand-crafted header synced to the current version)} + the
-  state docs (STATUS/TASKS/worklog) — 6 paths; one core read-
-  boundary behavior change (R2), the LOG untouched.
-Track A: the intake family at 40, the routing's one live adoption
-  LANDED (KI#100 closed the same session it opened); the ssi family
-  COMPLETE except ssi-5; the fresh parked rows temp-1/cov-1/div-1
-  behind their named gates. The detail lives in the worklog + git.
+Scope: scripts/{mechanics.py (the census subcommand),
+  divergence_probe.py (new), semantic_diff.py (the KI#101 fix)} +
+  tests/{test_mechanics.py, test_divergence_probe.py (new),
+  test_semantic_diff.py, test_architecture.py (the KI#102 closure)}
+  + the state docs (STATUS/TASKS/worklog/DECISIONS/NAV/TEST_PLAN/
+  phases.md) — 13 paths; two new periphery instruments (R2/R2), one
+  oracle bug fix, one test-closure fix; the LOG untouched, zero
+  core/ change.
+Track A: the intake family at 40 fully routed — the fix row closed
+  (log-1/iter-256), the two buildable rows landed (cov-1, div-1),
+  the research row presented (temp-1's fork card); the ssi family
+  COMPLETE except ssi-5, owner-gated. The detail lives in the
+  worklog + git.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -64,8 +67,13 @@ Track A: the intake family at 40, the routing's one live adoption
 
 ## Active KIs
 
-(none — KI#100 closed iter-256, deleted at the next STATUS touch per
-the 2-iteration cleanup law)
+- KI#101 · semantic_diff crashed on unequal-length field lists · CLOSED
+  iter-259 (fixed + pinned)
+- KI#102 · the dir-closure test's glob vs its committed-files law (red
+  wherever scratch/ exists — KI#93's inverse) · CLOSED iter-259
+
+(KI#100 deleted at this STATUS touch per the 2-iteration law — closed
+iter-256)
 
 ## FAQ / Pitfalls
 
@@ -96,28 +104,31 @@ the 2-iteration cleanup law)
 
 ## Next step
 
-**iter-255+256 DONE: the intake-40 corpus routed (D-233) + KI#100
-CLOSED the same session — the CONFIRMED-owned core (zero rows, the
-D-024 law), the M4 §2 sync landed, the reader's stale-header gate
-landed (log-1: one derivation shared by both doors, the whole read
-surface inheriting it), the three parked rows temp-1/cov-1/div-1
-behind their named gates; the form refused (a second TEST_PLAN by
-content, self-forbidden by its own §4). 2385+9 + ruff + docguard +
-topology --check clean.**
+**iter-257/258/259 DONE: the intake-40 instrument session over the
+owner's «работай над temp-1, цензус cov-1 и прочими» call — temp-1's
+fork card landed (phases.md §6: both signals verified, the mechanism
+named, the A/B and B1/B2/B3 forks presented, NO pick — the owner's
+contract decision is the row's gate); cov-1 landed (mechanics.py
+census, D-234); div-1 landed (divergence_probe.py, D-235); KI#101 +
+KI#102 closed. 2401+9 + ruff + docguard + topology --check clean.**
+iter-255+256 DONE: the intake-40 routing (D-233) + KI#100 closed.
 iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
 iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
 (D-221..D-228).
-1. The parked intake-40 rows (each on the owner's call only):
-   temp-1 the temporal contracts (the contract decision first —
-   wait-slicing equivalence + the autonomous-intent temporal
-   semantics; never a silent reconciliation) · cov-1 the census
-   (first consumer: the next pack gate) · div-1 the future-divergence
-   probe (first consumer: a depth claim packet). ssi-5 stays
-   owner-gated (the N018 evidence law — the fresh co-change
-   evidence or the explicit skip, never momentum). The owner-side
-   cleanup standing from D-230's third card: delete the doubled
-   `workbench/workbench/runtime/` tree locally (safe — the
-   iter-246 root fix landed; the tree regenerates on demand).
+1. THE TEMP-1 CONTRACT DECISION (the owner's pick, on the fork card
+   in phases.md §6): (a) the wait-slicing relation — A1 full
+   equivalence / A2 crossing-family equivalence (the recommended
+   pick: the measured 8/8 invariant pinned as a contract test, zero
+   engine change) / A3 documented non-equivalence; (b) the
+   autonomous-intent temporal semantics — B1 generate-at-T (the
+   scheduler-law price) / B2 deferred-realize (current, declared) /
+   B3 record-late-preserve-semantic-time (the schema-field price).
+   Zero code until the pick lands. ssi-5 stays owner-gated (the N018
+   evidence law — the fresh co-change evidence or the explicit skip,
+   never momentum). The owner-side cleanup standing from D-230's
+   third card: delete the doubled `workbench/workbench/runtime/` tree
+   locally (safe — the iter-246 root fix landed; the tree regenerates
+   on demand).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the

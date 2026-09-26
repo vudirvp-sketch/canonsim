@@ -206,7 +206,12 @@ def _deep_diff(left: Any, right: Any, prefix: str, out: list[str]) -> None:
                 _deep_diff(left[key], right[key], f"{prefix}.{key}", out)
         return
     if isinstance(left, list) and isinstance(right, list):
-        for i, (a, b) in enumerate(zip(left, right, strict=True)):
+        # KI#101: zip(strict=True) RAISED on unequal lengths before the
+        # length line below could fire — the both-present events of the
+        # div-1 probe's first live pair (differing knowledge-record
+        # lists) crashed the walk instead of reporting. The common
+        # prefix diffs pair-wise; the length line owns the tail.
+        for i, (a, b) in enumerate(zip(left, right, strict=False)):
             _deep_diff(a, b, f"{prefix}[{i}]", out)
         if len(left) != len(right):
             out.append(f"{prefix}: list lengths {len(left)} != {len(right)}")

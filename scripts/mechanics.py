@@ -1,11 +1,15 @@
 """The mechanics introspection CLI (mech-1, iter-84; mech-2, iter-163;
-mech-2's impact surface, iter-196; D-046 operator tooling).
+mech-2's impact surface, iter-196; cov-1's census, iter-258; D-046
+operator tooling).
 
-Five read-only instruments over the committed pack and committed (or freshly
+Six read-only instruments over the committed pack and committed (or freshly
 run) logs, for the per-instance questions the prose specs answer only
 generally: "who consumes event type X", "why has hook Y not released by tick
 T", "why did event E happen", "what changes if step Z is inserted here",
-"what reads pack path P / which sites reference name N". Everything here is
+"what reads pack path P / which sites reference name N", and "which paths
+does the committed corpus actually exercise" (the action-to-consequence
+census — the forward walk pack action → parser verb → realized → canonical
+events → downstream consumers). Everything here is
 DERIVED, rebuildable, never truth (the checkpoint.py
 law): the pack JSON and the engine's public functions are the only sources.
 Output is stdout; the blast arms write their logs under the gitignored
@@ -113,6 +117,7 @@ from core.log import EventRecord, read_log  # noqa: E402
 from core.loop import Simulator, load_playscript  # noqa: E402
 from core.pack import Pack, load_pack  # noqa: E402
 from core.predicates import evaluate  # noqa: E402
+from core.resolvers import STATE_MUTATING  # noqa: E402
 from core.scheduler import decls_from_rules  # noqa: E402
 from core.states import DECAY_EVENT  # noqa: E402
 
@@ -1979,7 +1984,297 @@ def render_impact(
     raise SystemExit("error: exactly one of --path / --ref is required")
 
 
-# -- CLI ----------------------------------------------------------------------
+# -- census: the action-to-consequence forward walk (cov-1, iter-258) ---------
+
+
+#: The default corpus the realized leg reads: the committed playscript
+#: witnesses (TEST_PLAN §9's witness portfolio — the same scripts the gates
+#: and smoke fixtures bind).
+DEFAULT_CORPUS: Final[Path] = REPO / "tests" / "playscripts"
+
+
+def _corpus_scripts(
+    corpus_dir: Path, pack_name: str
+) -> list[tuple[str, dict[str, Any]]]:
+    """The corpus scripts declaring THIS pack (name@version prefix match),
+    name-sorted — the authored-realization leg's denominator. A script for
+    another pack never counts (a province witness says nothing about the
+    tavern's coverage)."""
+    out: list[tuple[str, dict[str, Any]]] = []
+    for path in sorted(corpus_dir.glob("*.json")):
+        try:
+            script = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue  # a corpus dir may hold drafts; only valid scripts count
+        declared = str(script.get("pack", "")).partition("@")[0]
+        if declared == pack_name and isinstance(script.get("steps"), list):
+            out.append((path.stem, script))
+    return out
+
+
+def _authored_intents(
+    scripts: Sequence[tuple[str, dict[str, Any]]]
+) -> dict[str, list[str]]:
+    """Intent -> the script names whose steps carry it (nested actor blocks
+    walked recursively — the province family's shape)."""
+    table: dict[str, list[str]] = {}
+
+    def walk(steps: Sequence[Any], name: str) -> None:
+        for step in steps:
+            if not isinstance(step, Mapping):
+                continue
+            if isinstance(step.get("intent"), str):
+                table.setdefault(step["intent"], []).append(name)
+            elif isinstance(step.get("steps"), list):
+                walk(step["steps"], name)
+
+    for name, script in scripts:
+        walk(script["steps"], name)
+    return table
+
+
+def _autonomous_refs(pack: Pack) -> dict[str, list[str]]:
+    """Intent -> the urgency entries and director-hook payloads referencing
+    it (the autonomous realization leg — what the world fires on its own).
+    Source labels stay compact: `urgency:<npc>` / `hook:<tag>`."""
+    table: dict[str, list[str]] = {}
+    for entry in pack.rules.get("urgencies", {}).get("entries", ()):
+        if not isinstance(entry, Mapping):
+            continue
+        kind = (entry.get("intent") or {}).get("kind")
+        if isinstance(kind, str):
+            table.setdefault(kind, []).append(f"urgency:{entry.get('npc')}")
+    for tag, spec in pack.rules.get("director", {}).get("hooks", {}).items():
+        if not isinstance(spec, Mapping):
+            continue
+        kind = (spec.get("intent") or {}).get("kind")
+        if isinstance(kind, str):
+            table.setdefault(kind, []).append(f"hook:{tag}")
+    return table
+
+
+def _census_consumers(
+    pack: Pack, event_type: str
+) -> tuple[int, list[str], int, int, int]:
+    """One event type's downstream consumer counts: on_action reactions,
+    the system_of_type rows, the crime-watch tokens riding its minted
+    knowledge, the knowledge mints themselves, and the director hooks any
+    producing action seeds on it (the matrix's own reverse derivation —
+    same source, same numbers)."""
+    reactions = pack.rules.get("on_action", {}).get(event_type)
+    on_action = len(reactions) if isinstance(reactions, list) else 0
+    systems = list(
+        (pack.rules.get("metrics") or {}).get("system_of_type", {}).get(
+            event_type, ()
+        )
+    )
+    tokens = _event_knowledge_tokens(pack).get(event_type, ())
+    crime_map = _crime_map(pack)
+    crime = sum(1 for token in tokens if token in crime_map)
+    seeds = sum(
+        1
+        for action in _action_rows(pack)
+        for outcome in ("success", "failure")
+        if (action.get("events") or {}).get(outcome) == event_type
+        for _tag in (action.get("hooks", {}).get(outcome) or ())
+    )
+    return on_action, systems, crime, len(tokens), seeds
+
+
+def _verb_row(pack: Pack, intent: str) -> list[str]:
+    """The parser leg: the intent's verb row in the t=0 grammar snapshot
+    (empty event list, empty ledger — the projection is the pack's initial
+    world). The verb enumeration is the pack's actions by construction
+    (PARSER_SPEC's closed grammar); the row reports the derivable shape —
+    the target flag, the field constraints, the near enum's state."""
+    from brief.ledger import SceneLedger
+    from brief.parser import grammar_snapshot
+
+    snapshot = grammar_snapshot((), pack, SceneLedger())
+    verb = next((v for v in snapshot.verbs if v.intent == intent), None)
+    if verb is None:
+        return ["verb          MISSING (not in the t=0 grammar)"]
+    fields = []
+    for constraint in verb.fields:
+        if constraint.values is not None:
+            state = "closed" if constraint.values else "EMPTY (position-bound)"
+            fields.append(f"{constraint.name}({state})")
+        elif constraint.positive_int:
+            fields.append(f"{constraint.name}(positive_int)")
+        elif constraint.texture:
+            fields.append(f"{constraint.name}(texture)")
+        else:
+            fields.append(constraint.name)
+    return [
+        "verb          "
+        + ("target-required" if verb.target_required else "no-target")
+        + (f" · fields: {', '.join(fields)}" if fields else " · no fields")
+    ]
+
+
+def _census_action_block(
+    pack: Pack,
+    intent: str,
+    action: Mapping[str, Any],
+    authored: Mapping[str, Sequence[str]],
+    autonomous: Mapping[str, Sequence[str]],
+) -> list[str]:
+    """One action's forward-walk block: declaration → verb → realized →
+    canonical events → per-event consumers → flags."""
+    lines = [f"action {intent}"]
+    lines.append(
+        f"  resolver     {action.get('resolver')} · ticks "
+        + json.dumps(action.get("ticks"))
+    )
+    lines.extend(f"  parser       {line}" for line in _verb_row(pack, intent))
+    scripts = authored.get(intent, ())
+    lines.append(
+        "  authored     "
+        + (", ".join(sorted(set(scripts))) if scripts else "-")
+    )
+    refs = autonomous.get(intent, ())
+    lines.append(
+        "  autonomous   " + (", ".join(refs) if refs else "-")
+    )
+    events = action.get("events") or {}
+    event_types = [
+        event_type
+        for outcome in ("success", "failure")
+        if isinstance((event_type := events.get(outcome)), str)
+    ]
+    lines.append(
+        "  events       "
+        + (" / ".join(event_types) if event_types else "(none declared)")
+        + " (+ intent_rejected at the door)"
+    )
+    for event_type in event_types:
+        on_action, systems, crime, mints, seeds = _census_consumers(
+            pack, event_type
+        )
+        parts = []
+        if on_action:
+            parts.append(f"on_action {on_action}")
+        if systems:
+            parts.append("systems " + ", ".join(sorted(systems)))
+        if crime:
+            parts.append(f"crime tokens {crime}")
+        if mints:
+            parts.append(f"knowledge mints {mints}")
+        if seeds:
+            parts.append(f"hook seeds {seeds}")
+        lines.append(
+            f"    {event_type:<24} "
+            + (" · ".join(parts) if parts else "NO DECLARED CONSUMERS")
+        )
+    flags: list[str] = []
+    if not scripts and not refs:
+        flags.append("UNREALIZED")
+    consumed = action.get("resolver") in STATE_MUTATING or any(
+        _census_consumers(pack, event_type) != (0, [], 0, 0, 0)
+        for event_type in event_types
+    )
+    if not consumed:
+        flags.append("CONSUMERLESS")
+    lines.append("  flags        " + (" · ".join(flags) if flags else "-"))
+    return lines
+
+
+def render_census(
+    pack: Pack,
+    corpus_dir: Path,
+    pack_name: str,
+    *,
+    action: str | None = None,
+    full_inventory: bool = False,
+) -> str:
+    """The action-to-consequence census (cov-1): the FORWARD walk the
+    matrix's per-entity queries never aggregate — for every pack action,
+    the parser verb, the realized coverage (the committed corpus's authored
+    steps + the autonomous references), the canonical event types, and the
+    per-event downstream consumers. Derived, regenerable, never truth: the
+    pack JSON + the playscript corpus are the only inputs. The compact
+    default renders the coverage summary + the FLAGGED rows (the
+    mutation-escape surface); --full renders every action's block."""
+    actions = _action_rows(pack)
+    if action is not None:
+        rows = [a for a in actions if a.get("intent") == action]
+        if not rows:
+            raise SystemExit(f"error: unknown action {action!r} for this pack")
+        scripts = _corpus_scripts(corpus_dir, pack_name)
+        block = _census_action_block(
+            pack, action, rows[0],
+            _authored_intents(scripts), _autonomous_refs(pack),
+        )
+        return f"== CENSUS {pack_name} · action {action} ==\n" + "\n".join(
+            block
+        ) + "\n"
+    scripts = _corpus_scripts(corpus_dir, pack_name)
+    authored = _authored_intents(scripts)
+    autonomous = _autonomous_refs(pack)
+    lines = [
+        f"== CENSUS {pack_name} · {len(actions)} actions · corpus "
+        f"{corpus_dir} ({len(scripts)} script(s)) =="
+    ]
+    unrealized: list[str] = []
+    consumerless: list[str] = []
+    authored_set: set[str] = set()
+    auto_only: set[str] = set()
+    event_types: set[str] = set()
+    for act in actions:
+        intent = str(act.get("intent"))
+        has_script = intent in authored
+        has_auto = intent in autonomous
+        if has_script:
+            authored_set.add(intent)
+        elif has_auto:
+            auto_only.add(intent)
+        else:
+            unrealized.append(intent)
+        for outcome in ("success", "failure"):
+            event_type = (act.get("events") or {}).get(outcome)
+            if isinstance(event_type, str):
+                event_types.add(event_type)
+        consumed = act.get("resolver") in STATE_MUTATING or any(
+            _census_consumers(pack, event_type) != (0, [], 0, 0, 0)
+            for outcome in ("success", "failure")
+            if isinstance(
+                (event_type := (act.get("events") or {}).get(outcome)), str
+            )
+        )
+        if not consumed:
+            consumerless.append(intent)
+    realized = len(authored_set) + len(auto_only)
+    lines.append(
+        f"coverage: {realized} realized ({len(authored_set)} authored · "
+        f"{len(auto_only)} autonomous-only) · {len(unrealized)} UNREALIZED · "
+        f"{len(event_types)} event types · {len(consumerless)} consumerless"
+    )
+    flagged: list[str] = []
+    for act in actions:
+        intent = str(act.get("intent"))
+        if intent in unrealized or intent in consumerless or full_inventory:
+            block = _census_action_block(pack, intent, act, authored, autonomous)
+            flagged.extend(block)
+            flagged.append("")
+    if unrealized and not full_inventory:
+        lines.append("")
+        lines.append(
+            "UNREALIZED (the mutation-escape surface — no committed script "
+            "exercises, no urgency/hook references; intake-37's measured "
+            "lesson: a green suite over an unexercised path is not coverage):"
+        )
+        lines.extend(f"  {intent}" for intent in unrealized)
+    if consumerless and not full_inventory:
+        lines.append("")
+        lines.append(
+            "CONSUMERLESS (no event type carries a declared consumer — the "
+            "admission lint's own dead-action law, re-derived here):"
+        )
+        lines.extend(f"  {intent}" for intent in consumerless)
+    if full_inventory:
+        body = "\n".join(flagged).rstrip("\n")
+        return "\n".join(lines[:2]) + "\n\n" + (body + "\n" if body else "")
+    return "\n".join(lines) + "\n"
 
 
 def _parse_ticks(text: str) -> tuple[int | None, int | None]:
@@ -2074,6 +2369,26 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     b.add_argument("--pack", type=Path, default=PACK_DIR)
     b.add_argument("--out", type=Path, default=MECH_OUT)
+
+    c = sub.add_parser(
+        "census",
+        help="the action-to-consequence forward walk: pack action -> "
+        "parser verb -> realized (corpus + autonomous) -> canonical events "
+        "-> downstream consumers (cov-1)",
+    )
+    c.add_argument("--pack", type=Path, default=PACK_DIR)
+    c.add_argument(
+        "--corpus", type=Path, default=DEFAULT_CORPUS,
+        help="the playscript corpus the realized leg reads (the pack's "
+        "own scripts only, by the pack field's name prefix)",
+    )
+    c.add_argument("--action", help="narrow to one action's full block")
+    c.add_argument(
+        "--full",
+        action="store_true",
+        help="every action's block (the default view is the coverage "
+        "summary + the flagged rows)",
+    )
     return parser
 
 
@@ -2105,6 +2420,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "impact":
         print(
             render_impact(pack, path=args.path, ref=args.ref, full=args.full),
+            end="",
+        )
+        return 0
+    if args.command == "census":
+        print(
+            render_census(
+                pack,
+                args.corpus,
+                args.pack.name,
+                action=args.action,
+                full_inventory=args.full,
+            ),
             end="",
         )
         return 0

@@ -563,3 +563,108 @@ def test_blast_without_step_runs_identical_arms(tmp_path: Path) -> None:
     out = mechanics.run_blast(PACK, SCHEMA, script, None, None, tmp_path / "blast0")
     assert "EQUAL (no RNG divergence)" in out
     assert "event delta      none" in out
+
+
+# -- census (cov-1, iter-258) --------------------------------------------------
+
+CORPUS = REPO / "tests" / "playscripts"
+
+
+def test_census_pins_the_committed_corpus_coverage() -> None:
+    """The census's coverage line over the committed corpus: the tavern
+    pack's 16 actions pin to 10 realized (6 authored by the four tavern
+    scripts + 4 autonomous-only) with the 6-action mutation-escape
+    surface named (intake-37's measured lesson — the paths no golden
+    binds); 0 consumerless (the admission lint's dead-action law agrees
+    with the forward walk)."""
+    out = mechanics.render_census(PACK, CORPUS, "tavern_pack")
+    assert "== CENSUS tavern_pack · 16 actions" in out
+    assert "(4 script(s))" in out
+    assert (
+        "coverage: 10 realized (6 authored · 4 autonomous-only) · "
+        "6 UNREALIZED · 24 event types · 0 consumerless"
+    ) in out
+    unrealized = out.split("not coverage):", 1)[1]
+    for intent in ("examine", "talk", "use", "distract", "arson", "flee"):
+        assert intent in unrealized, f"{intent} missing from the escape surface"
+    assert "move" not in unrealized
+
+
+def test_census_action_block_is_the_forward_walk() -> None:
+    """One action's full block: declaration → the parser verb (the t=0
+    grammar derivation: steal is target-required with the closed method
+    enum; drop_break's near enum is position-bound at t=0) → the realized
+    legs (steal authored on the three theft scripts, never autonomous;
+    wait both) → the canonical events → the per-event consumers."""
+    out = mechanics.render_census(
+        PACK, CORPUS, "tavern_pack", action="steal"
+    )
+    assert "resolver     stealth_take · ticks 3" in out
+    assert "target-required · fields: method(closed)" in out
+    assert "authored     day1_full, day1_theft_and_arson, exp0_week" in out
+    assert "autonomous   -" in out
+    assert "events       steal / pickpocket_failed" in out
+    assert "pickpocket_failed        systems crime_watch, knowledge, relations" in out
+    wait = mechanics.render_census(PACK, CORPUS, "tavern_pack", action="wait")
+    assert "ticks(positive_int)" in wait
+    assert "urgency:npc_maid_01, urgency:npc_guard_02" in wait
+    assert "hook:guard_suspicious_of_pc" in wait
+    drop = mechanics.render_census(
+        PACK, CORPUS, "tavern_pack", action="drop_break"
+    )
+    assert "near(EMPTY (position-bound))" in drop
+
+
+def test_census_consumers_agree_with_the_matrix() -> None:
+    """The consumers leg is the matrix's own reverse derivation (same
+    source, same numbers): the census block's per-event lines match the
+    matrix --event view's counts for the same event type."""
+    census = mechanics.render_census(
+        PACK, CORPUS, "tavern_pack", action="steal"
+    )
+    matrix = mechanics.render_matrix(PACK, event="pickpocket_failed")
+    assert "crime tokens 2" in census
+    assert "hook seeds 4" in census
+    assert "crime" in matrix and "seeds" in matrix
+    # the matrix's crime line lists the two tokens the census counts
+    crime_line = next(
+        line for line in matrix.splitlines() if line.startswith("  crime")
+    )
+    assert crime_line.count("->") == 2
+
+
+def test_census_corpus_is_pack_scoped() -> None:
+    """The realized leg counts only THIS pack's scripts: talk is authored
+    on the province corpus (province_companion) while unrealized on the
+    tavern corpus — a province witness never covers a tavern path."""
+    province = load_pack(REPO / "content" / "province_pack")
+    out = mechanics.render_census(province, CORPUS, "province_pack")
+    assert "talk" not in out.split("not coverage):", 1)[1]
+    tavern = mechanics.render_census(PACK, CORPUS, "tavern_pack")
+    assert "talk" in tavern.split("not coverage):", 1)[1]
+
+
+def test_census_is_regenerable() -> None:
+    """Derived, rebuildable, never truth: two derivations over the same
+    pack + corpus are byte-identical (INV-2's periphery discipline)."""
+    first = mechanics.render_census(PACK, CORPUS, "tavern_pack")
+    second = mechanics.render_census(PACK, CORPUS, "tavern_pack")
+    assert first == second
+    full = mechanics.render_census(PACK, CORPUS, "tavern_pack", full_inventory=True)
+    assert full.count("\naction ") == 16  # every action blocks in --full
+
+
+def test_census_unknown_action_fails_loud() -> None:
+    """A named action absent from the pack is a loud exit, never a silent
+    empty report (SSI-N006's family)."""
+    with pytest.raises(SystemExit):
+        mechanics.render_census(PACK, CORPUS, "tavern_pack", action="nope")
+
+
+def test_census_cli_dispatch(capsys: pytest.CaptureFixture[str]) -> None:
+    """The CLI subcommand lands the same report the render API returns."""
+    assert mechanics.main(["census"]) == 0
+    out = capsys.readouterr().out
+    assert "== CENSUS tavern_pack · 16 actions" in out
+    assert mechanics.main(["census", "--action", "wait"]) == 0
+    assert "action wait" in capsys.readouterr().out

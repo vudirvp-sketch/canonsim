@@ -242,10 +242,15 @@ def test_package_dirs_cover_every_top_level_code_dir() -> None:
     """Coverage closure (D-046): every top-level directory holding
     committed .py files must appear in PACKAGE_DIRS — a new code dir that
     skips the fitness test silently escapes the executable invariants
-    (the iter-6 `scripts/` gap this test closes)."""
+    (the iter-6 `scripts/` gap this test closes). KI#102 (iter-259): the
+    glob walks the FILESYSTEM while the law names COMMITTED files — a
+    session's gitignored `scratch/` interventions (D-197) turned the test
+    red in any sandbox that used them (green in CI, red at the desk —
+    KI#93's inverse). The exclusion set now names the ignored dir family
+    explicitly, keeping the closure law environment-independent."""
     code_dirs = {
         path.parent.name for path in REPO.glob("*/*.py")
-    } - {"tests"}
+    } - {"tests", "scratch"}  # never-committed dirs: the intervention root
     assert code_dirs == set(PACKAGE_DIRS), (
         f"top-level code dirs {sorted(code_dirs)} != PACKAGE_DIRS "
         f"{sorted(PACKAGE_DIRS)} — add the new dir to the fitness test in "

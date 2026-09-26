@@ -318,3 +318,36 @@ def test_non_header_first_line_is_loud(tmp_path: Path) -> None:
     bad = _write(tmp_path / "noheader.jsonl", _lines(GOLDEN)[1:])
     with pytest.raises(semantic_diff.DiffInputError):
         semantic_diff.compare(GOLDEN, bad)
+
+
+# -- KI#101 (iter-259): the unequal-length deep-list walk -------------------
+
+
+def test_ki101_unequal_length_lists_report_not_raise(tmp_path: Path) -> None:
+    """KI#101, found by div-1's first live pair: a both-present event
+    whose field LIST lengths differ (the knowledge records) crashed
+    `_deep_diff` — `zip(strict=True)` raised before the length line
+    could fire. The pin: the common prefix diffs pair-wise, the length
+    line owns the tail, and the comparison REPORTS (exit 1), never
+    raises."""
+    lines = _lines(GOLDEN)
+    events = [json.loads(line) for line in lines[1:]]
+    # world_history carries list fields (claims/participants/places):
+    # shorten one — the common prefix stays equal, the tail is the
+    # length line's to report
+    participants = events[1]["outcome"]["participants"]
+    assert len(participants) >= 2
+    events[1]["outcome"]["participants"] = participants[:-1]
+    mutated = _write(
+        tmp_path / "ki101.jsonl",
+        [lines[0]] + [json.dumps(e) for e in events],
+    )
+    diff = semantic_diff.compare(GOLDEN, mutated)
+    assert not diff.equal
+    report = semantic_diff.format_report(diff)
+    assert "VERDICT: SEMANTIC DELTA" in report
+    assert any(
+        "list lengths" in path
+        for delta in diff.event_deltas
+        for path in delta.fields
+    )

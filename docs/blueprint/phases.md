@@ -3573,6 +3573,119 @@ worldbuild routing (WORLD_TESTS owns it, the iter-253 precedent); no
 REFERENCES entry (the research-method class); the build queue otherwise
 UNTOUCHED.
 
+**The temp-1 contract card (iter-257, the owner's «работай над temp-1,
+цензус cov-1 и прочими» call opening the parked row — research-first,
+zero engine code per the row's own law; the card is the fork record the
+owner's contract decision reads; the interventions live in `scratch/`,
+D-197, never staged).**
+
+*Mechanism, measured at HEAD `a6b4547` (both halves share ONE root):*
+`core/loop.py::_run_beat`'s enqueue law — "urgency and director intents
+are enqueued at ``entry_tick`` (the tick of the entry the loop is
+currently processing): the entry was already popped, and the queue
+discipline forbids enqueuing at a tick the clock has already passed" —
+so a beat-minted autonomous intent's DOOR tick is the LANDING tick of
+whatever entry carried the crossing, never the beat tick. Under a long
+wait the landing is the wait's completion tick; under slicing every
+tick has traffic, so the landing ≈ the beat. The two families of canon
+events disagree about when the world moved: the crossing-committed
+families (decay / watch / calendar — committed inline at the crossing
+tick) record at TRUE time; the door-committed families (urgency /
+director intents — the whole door: preconditions, OCC, opposed checks,
+completion) record at landing + duration.
+
+*Half (a) — the wait-slicing A/B, 8 pairs over 4 seeds (125/42/7/1001,
+tavern, the scratch runners):* the minimal pair ([wait 720] vs
+[720 × wait 1]) — projection EQUAL at every seed, the only type delta
+`wait +719`, fingerprints EQUAL; the crossing families never appear in
+any delta (8/8 pairs). The day1_full pairs — seed-dependent door-family
+divergence: seed 125 the coerce flip (span: the beat-720 intent lands
+at the door t=732, the leverage card expired t=729 → `intent_rejected`;
+sliced: the door at t=720, the card live → `coerce` at 723, the pair
+relation trust 25 / fear 75 minted — a STATE divergence); seed 1001 the
+cascade (`document_check`→`document_check_failed` flip, ±2
+`suspicion_changed`, `arrest_attempt`/`arrest_resolved` appear, the
+guards' suspicion props diverge, the FINGERPRINT diverges — the only
+RNG divergence in 8 pairs); seeds 42/7 only `wait +1438` (the door
+families happen to agree). Secondary mechanism: the wait resolver mints
+hooks per EVENT (iter-53/KI#15 — idle time is the ambient tag's seed),
+so 720 waits seed the ambient hook 720× vs 1× — the entropy budget
+crosses the release threshold at a different beat (the minimal pair's
+`ramble`: t=723 span vs t=363 sliced, fingerprints EQUAL — the timing
+shift is seed-count-driven, never draw-driven).
+
+*Half (b) — the province_calendar clustering, re-measured at HEAD
+(seed 42, wait 519000):* 2288 events = decay 1098 + watch 722 + talk
+265 + 203 others (the corpus's own numbers, byte-stable) — and the
+clustering is TOTAL, stronger than the corpus worded: ALL 265 talks in
+t ∈ [520069, 520073] (the last 5 ticks; the wait completes at 520065),
+every single one from ONE urgency entry (`urgency_0004`, minted at each
+of the 1083 fired beats, 265 accepted at the door, 0 rejections); the
+decay/watch families spread evenly across the whole 519000-tick span
+(bucketed: ~69-70 watch / ~104 decay per 50k ticks). The assignment ↔
+canonical separation is the full span: intents assigned at beats
+360..519480, all realized in the last 8 ticks. The five time notions in
+the current implementation: assignment = the beat tick (the urgency
+gate's fold read); scheduled = the beat + duration (never committed as
+data); door = the landing tick (`entry_tick`); realized/recording =
+door + duration (the completion event's t); canonical = the recording
+tick (the log's truth — every downstream consumer reads it: decay
+windows, echo folds, the chronicle).
+
+*The fork (the owner picks ONE per half; AGENTS §2.7 — axes named,
+disadvantages decomposed, a synthesis attempted):*
+
+- (a) The wait-slicing relation: **A1 full equivalence** (wait(N) ≡
+  N × wait(1) at every semantic family — requires span-aware hook
+  minting + beat-anchored door ticks; both are (b)'s machinery, so A1
+  is (b)'s contract wearing the slicing test) · **A2
+  crossing-family equivalence** (declare: the crossing-committed
+  families + the projection's non-door props are slicing-invariant —
+  the measured 8/8 invariant; the door families FREE to diverge, the
+  divergence causes named (the entry_tick law + the ambient seed
+  count); testable TODAY at zero engine change, the honest
+  measured-contract form) · **A3 documented non-equivalence** (the span
+  is one idle unit, never N moments — the minting law's own reading;
+  A2 minus the test). Recommendation: **A2** — it pins what the
+  measurement already holds, names what is free, and leaves the deeper
+  semantics to (b)'s decision.
+- (b) The autonomous-intent temporal semantics: **B1 generate-at-T**
+  (the intents' doors evaluate at the beat tick — the clock IS at the
+  beat during `_run_beat`; but the completion still records at
+  max(clock, beat+duration) = the landing unless the scheduler becomes
+  a continuous clock-walk popping queue entries as the clock passes
+  their ticks — a queue-key/tick-semantics change, AGENTS §8's
+  stop-and-confirm territory, and the door-inline form re-derives the
+  OCC/precondition world at beat time: the honest fix and the deepest
+  one) · **B2 deferred-realize (current, declared)** (the intents fire
+  "after the beat, at the moment the world resumes moving" —
+  `_run_beat`'s own docstring; under a long span the world resumes only
+  at the landing: the states decay across the year while nobody acts
+  until its last 5 ticks — coherent only as "the door is the world's
+  resumption", which the clustering makes visible as a world-model
+  incoherence) · **B3 record-late-preserve-semantic-time** (the event
+  records at the landing (B2's scheduler untouched) but carries the
+  assignment tick in provenance — a schema addition (R4,
+  owner-gated), the consumers can read both times; the synthesis
+  attempt per §2.7: B3-with-beat-anchored-doors (the door evaluates at
+  the beat, the completion records at the landing, both times named in
+  provenance) satisfies B1's fold-coherence and B2's scheduler
+  stability but keeps the recording/canonical gap — an honest
+  improvement, not a dissolved trade-off, and it buys a schema change;
+  discarded as a synthesis, offered as B3's own form). Recommendation:
+  the fork is REAL and owner-owned: B2 costs nothing but documents a
+  visible incoherence; B3 names both times for every future consumer
+  at one schema-field price; B1 is the world-coherent form at a
+  scheduler-law price. The card records no pick — AGENTS §11 (never a
+  silent reconciliation).
+
+*The falsifiers (whatever the pick):* A2's test arm = the 8-pair A/B
+pinned as a contract test (the crossing-family invariance + the
+projection equality on the minimal pair); B1/B3's test arm = the
+province_calendar witness re-run (the talk spread across beats vs the
+last-5-tick pile); the probe for any pick = div-1's first-divergence
+records over the same minimal pairs.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
