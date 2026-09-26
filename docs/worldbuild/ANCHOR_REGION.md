@@ -962,6 +962,57 @@ the meaning distribution's own unfinished band, §7.1's form — the
 W5 gate: one clean biography probe over the canonical standing debt
 before any new candidate, `WORLD_TESTS.md` §9's W5 entry).
 
+### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263, the J-1 row landed at the authored band)
+
+The J-1 row's honest shape after the carrier-or-surface discrimination
+(D-239): the Malby market was never "a tale-level institution needing a
+carrier" — its material, economic and social legs are ALREADY live carriers
+(the discrimination's ablation arms: removing the fire spots diverges the
+whole year — no council, no vigil, the PC never caught; removing the chest's
+flow moves exactly one account prop). What the fire's burnout lacked was
+READER legs — the named couplings, each on existing primitives, each measured
+in the iter-263 injection arms:
+
+- **The mourns hook** (the state→behavior door): a director hook with the
+  prop trigger `loc_malby.destroyed == true`, seeded by an ordinary action's
+  hooks (the murmur family's own site — the ignite resolver mints no action
+  hooks, the committed packs' honest boundary), releasing the carrier's own
+  response. Measured both ways: the move release (the mistress leaves the
+  ashes — the social function dies with its carrier: talks 287→2, the
+  cold-frozen fear feeding the faction door's year-crossing pile-up) and the
+  ramble release (the minimal epistemic form: +5 heard-vague records, the
+  PC-spoken rumor cascade 22→25, one materialized scene prop — the observe
+  resolver's canon birth). The authored band's own beat: WHICH intent the
+  hook releases is the owner's authoring call — the experiment proves the
+  door, never the prose.
+- **The trade door** (the state→economy door): an authored trade verb whose
+  requires carry `spot_available` (or the account gates) over the market —
+  the commerce closes with the stalls. Expressible, unarmed (the census's
+  UNREALIZED band); the flow itself stays ungated BY LAW (the closed flow
+  grammar — and honestly so: the guild's rent outlives the stalls, the
+  paper collects on the ashes).
+- **The knowledge legs** (the institutions' epistemic half): the
+  council/vigil acts' authored knowledge blocks — the public act's honest
+  residue (heard partial/vague, the witnesses' records), pure pack data
+  since KI#103; the consumers measured (the watch-briefing transfer, the
+  brief/recall surface). The boolean "barred stalls" flag is inexpressible
+  (no action-level state block) and unneeded — the knowledge IS the state.
+- **The calendar line stays a surface** (the legibility of time, by
+  construction — the lint's closed grammar and the empty on_action scope,
+  both measured): the tale contradiction after the burnout is a
+  RENDER-side row (the read-side conditional, never a calendar gate).
+
+The unit's causal shape (the J-1 frame, corrected by measurement): a carrier
+whose state the FIRE writes (the burnout, irreversible), the DIRECTOR reads
+(the prop trigger at the beats), the DOOR gates (the trade verb's own
+requires) and the INSTITUTIONS' knowledge legs carry (the council's and the
+vigil's public acts) — never the calendar line. The embodiment legs (the
+hook's intent pick, the trade verb, the knowledge blocks, the render
+conditional) stay the owner's call class, each with its measured price on
+record (the iter-263 report); the pole's iter-161 precedent is the family's
+own gate. No new loop: the market is the interlock surface loops A/C/E/H
+already touch — the unit's work is the READER legs, not a ninth circuit.
+
 ## 7. Meaning frontier
 
 The current region is already strong at mechanical composition. The next depth

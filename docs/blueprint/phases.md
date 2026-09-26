@@ -3886,6 +3886,65 @@ explanations, land only the warranted change):**
   (suspended animation, caught up at the first read). The B-class
   census row stays as the density fact it always was.
 
+**The iter-263 carrier-or-surface record (D-239 — the owner's question:
+which authored institutions in Sarrow Vale should be canonical carriers of
+world change, which intentionally remain narrative surfaces, and can a
+minimal world-track experiment distinguish the cases without a new runtime
+primitive):**
+
+- **The discriminator LANDED as world-track law** — the three-move probe
+  (WORLD_TESTS §7's third member; the doctrine row in WORLD_AUTHORING §7):
+  the READER AUDIT (enumerate the leg's runtime consumer routes — the
+  intent door's closed test set, the director's prop triggers, the
+  on_action scopes, the read-side folds, the render) → the ABLATION ARM
+  (remove the writer in a scratch copy, run the composition witness, read
+  the projection delta) → the INJECTION ARM (author the minimal coupling
+  as pure pack data, run, read the delta family). Every arm loads through
+  the real `load_pack` — the lint is part of the instrument; determinism
+  twin-verified. Zero new primitives, zero core/pack changes: the
+  instruments lived in scratch (the iter-262 precedent's own law).
+- **The measured matrix** (the full RU report:
+  `docs/iterations/iter-263-carrier-surface-report.md`): A1 the market's
+  material leg ablated → the whole year diverges (no council, no vigil,
+  the PC never caught — a LIVE carrier); A2 the economic leg ablated →
+  exactly one account prop (the render-read state carrier — the chest is
+  a sink, no behavioral reader); I1/I2 the council/vigil knowledge legs
+  injected → +6/+23 records, the watch-briefing transfer consumer
+  MEASURED (epistemic carriers, pure pack data; the co-located hearers
+  saturate the novelty gradient — the rumor count holds 22→22 in this
+  witness shape, the iter-262 estimate 22→25 was block-shape-dependent);
+  I3a/I3b the market-mourns director hook (the prop trigger reading
+  `loc_malby.destroyed`) → the move release MASSIVE (the mistress leaves:
+  talks 287→2, the council pile-up 1→208 off the cold-frozen fear at the
+  year crossing — the B2 semantics through the faction door), the ramble
+  release MINIMAL-but-material (+5 records, rumors 22→25, one
+  materialized scene prop); C1/C2 the calendar line's consumer routes
+  ALL CLOSED, measured twice (the lint refuses a `hooks` key; the
+  on_action scope over 36 turns is empty — no knowledge holders by
+  construction).
+- **The verdict is PER-LEG, never per-institution** — the Malby market
+  carries all four bands at once; the intentional surface (the calendar
+  line — the legibility of time) is a VERDICT, never a failure, and its
+  tale contradiction is a render-side row (the read-side conditional),
+  never a calendar gate (iter-262's verdict upheld and now measured
+  twice). The honest residue for a public institutional act = knowledge
+  (never a boolean flag); the honest reader for a burned institution's
+  state = the director's prop trigger or the door's own gates (never the
+  calendar). Four expressibility boundaries named: the closed calendar
+  grammar, the closed flow grammar (the guild's rent honestly outlives
+  the stalls), the ignite resolver's no-hooks surface (the fire family
+  seeds the director through other actions), the absent action-level
+  state block.
+- **The J-rows re-framed by measurement**: J-1 decomposed — the market's
+  material/economic/social legs are already live carriers; the honest
+  rows are the READER legs (the mourns hook, the trade door, the
+  knowledge legs) — the authored unit LANDED at ANCHOR_REGION §6.5 (the
+  fifth meso unit, the §6.1 class; the embodiment legs owner-gated each
+  with its measured price); J-2's remainder confirmed with the refined
+  cascade price; J-3 stays closed. Zero embodiment landed this
+  iteration — the owner's call class throughout (the pole's iter-161
+  precedent).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

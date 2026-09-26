@@ -125,6 +125,21 @@ role, different incentives, partial coordination, different local consequences.
 The unit passes when it cannot be honestly represented as one homogeneous actor
 without losing causal behavior.
 
+The **carrier-or-surface split** (D-239, iter-263): an authored institution is
+not a monolith — it decomposes into legs (material tissue, economic stock,
+social channel, calendar line, event surface), and the carrier/surface verdict
+is PER-LEG, never per-institution. A leg is a canonical carrier of world change
+iff it has (or warrants) BOTH a runtime writer and a runtime reader — the
+census G-law's own form; a leg whose function is legibility (the tale's rhythm
+of time) is an intentional narrative surface, and gating it is a cosmetic fix
+(the measured refutation, iter-262/263). The honest residue for a public
+institutional act is KNOWLEDGE (the witnesses' records, with live consumers),
+never a boolean flag; the honest reader for a burned institution's state is the
+director's prop trigger or the door's own gates — never the calendar. The
+discrimination procedure is the carrier-or-surface probe
+(`WORLD_TESTS.md` §7, run-derived: the reader audit → the ablation arm → the
+injection arm, all on existing primitives).
+
 ## 8. Residue-first authoring
 
 For important historical events, author the modern residue before expanding the

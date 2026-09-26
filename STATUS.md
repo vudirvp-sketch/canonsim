@@ -1,62 +1,63 @@
-Iteration: iter-262 (`composition-diagnosis` — the owner's
-  iter-262 brief: reproduce the iter-261 J-gap evidence, run the
-  competing-explanation diagnosis over J-1/J-2/J-3, land the minimal
-  warranted change only if it follows from evidence): ALL previous
-  observations REPRODUCED (the census A1·B3·C5·D1·E2·F0·G0·H10, the 86
-  checks / 287 talks, the 36/36 market days — EXTENDED: 12/12 fairs
-  also open on the ashes, the quiet institutional answers); the
-  twin-fold CAUSAL-INERTNESS TEST (removing all 52 calendar turns AND
-  all 5 institutional events from the realized log leaves the final
-  projection BYTE-IDENTICAL; every reference is a cause-chain
-  neighbor) — the J-gaps are not missing consumers on live functions:
-  J-1's market/fair turns have ZERO runtime consumers (tale lines
-  only), so the proposed `destroyed` gate is provably cosmetic (the
-  claimed «the market empties» consequence is unreachable by it); the
-  honest J-1 frame is the market-as-meso-carrier (a world-track row,
-  owner-gated) — the one materialized loss the fire DID cause is the
-  ignition affordance (spot_available=False door-rejects re-arson);
-  J-3 REJECTED as a gap (max road fear 10 < any threshold; the cold
-  freeze + the decay-catchup-before-rolls law makes any warm-ring
-  reader see post-decay 0 — the proposed urgency is structurally dead
-  content); J-2's report classification REFUTED in both directions
-  (no pack surface writes location flags from actions AND the
-  knowledge leg was blocked too) — the block being a LIVE committed
-  bug: pressure_pack's `convene_the_bench`/`plead_for_coal` carry
-  fully authored knowledge blocks the `wait` resolver silently
-  dropped (KI#103, the KI#15 dead-data family, the iter-53 hooks
-  precedent's twin) — FIXED: `_wait` now mints the action's knowledge
-  (empty blocks stay empty: the other four fixtures byte-identical);
-  the pressure golden regenerated (2 lines: the two the_watch_pleads
-  events gain their authored 6 records each — the boiler house hears
-  the plea through the shared wall, the pack's own intent live); the
-  province J-2 remainder (knowledge on council/hold_vigil/patrol)
-  DOWN-GRADED from needs-core to pure pack data (owner-gated row —
-  the scratch falsifier measured its live cascade: rumor_told 22→25);
-  the owner's RU report at docs/iterations/iter-262-diagnosis-report.md
+Iteration: iter-263 (`carrier-surface` — the owner's question:
+  which authored institutions in Sarrow Vale should be canonical
+  carriers of world change, which intentionally remain narrative
+  surfaces, and can a minimal world-track experiment distinguish the
+  cases WITHOUT a new runtime primitive): ANSWERED with the
+  three-move probe (the reader audit → the ablation arm → the
+  injection arm — WORLD_TESTS §7's third member, WORLD_AUTHORING §7's
+  doctrine row; every arm a scratch pack copy through the real
+  load_pack, the lint part of the instrument, determinism
+  twin-verified, zero core/pack changes): the verdict is PER-LEG,
+  never per-institution — the Malby market carries ALL FOUR BANDS
+  (A1 the material leg ablated diverges the whole year: no council,
+  no vigil, the PC never caught — a LIVE carrier; A2 the economic
+  leg moves exactly one account prop — the render-read state carrier,
+  the chest a sink with no behavioral reader; the social leg — its
+  collapse measured in I3a; C1/C2 the calendar line's consumer routes
+  ALL CLOSED, measured twice: the lint refuses a hooks key, the
+  on_action scope is empty over 36 turns — the intentional surface,
+  the legibility of time, a VERDICT never a failure); the epistemic
+  band named and measured (I1/I2 the council/vigil knowledge legs:
+  +6/+23 records, the watch-briefing transfer consumer LIVE; the
+  novelty-gradient honest boundary — rumors hold 22→22 in the
+  co-located witness shape, the iter-262 estimate 22→25 was
+  block-shape-dependent); the market-mourns prop trigger measured
+  both ways (I3a the move release MASSIVE: the mistress leaves the
+  ashes, talks 287→2, the council pile-up 1→208 off the cold-frozen
+  fear at the year crossing; I3b the ramble release minimal-but-
+  material: +5 records, rumors 22→25, one materialized scene prop);
+  four expressibility boundaries named (the calendar grammar, the
+  flow grammar — the guild's rent honestly outlives the stalls, the
+  ignite resolver's no-hooks surface, the absent action state block);
+  the J-rows re-framed by measurement (J-1 decomposed to the READER
+  legs — the authored unit ANCHOR_REGION §6.5, the embodiment
+  owner-gated each with its measured price; J-2's remainder confirmed
+  with the refined cascade price; J-3 closed); the owner's RU report
+  at docs/iterations/iter-263-carrier-surface-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2445 passed + 9 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin) ·
-Date: 2026-09-26 ·
-Scope: core/resolvers.py (the `_wait` knowledge minting + the
-  docstring — KI#103's fix, one resolver line),
-  tests/{test_pressure_pack.py (+1: the plea-is-audible semantic
-  witness), fixtures/pressure_smoke_seed42.jsonl (regenerated — the
-  intended 2-line delta only)}, docs/{iterations/
-  iter-262-diagnosis-report.md (new, the owner's RU deliverable,
-  the language exception owner-directed), blueprint/phases.md (§6 the
-  iter-262 record), TASKS.md (the ledger, iter-252 evicted),
-  DECISIONS.md (D-238 into the compound row), TEST_PLAN.md (§9 the
-  causal-inertness prism row), AGENT_NAVIGATION.md (§1 the iterations
-  row)}, STATUS.md, worklog.md (iter-252 evicted) — 11 paths; R2
-  (D-238): one resolver's minting surface + a fixture regen + a
-  witness + docs — no new primitive, no gate, no scheduler/LOD/
-  B2/B3/A2 change, the calendar untouched.
-Track A: the iter-261 J-gap set DIAGNOSED (the owner's iter-262
-  brief): J-1 re-framed to the world track, J-2's substrate bug FIXED
-  (KI#103), J-3 closed as a non-gap; the J-row dispositions below.
-  The ssi family COMPLETE except ssi-5, owner-gated.
+Date: 2026-09-27 ·
+Scope: docs/{iterations/iter-263-carrier-surface-report.md (new,
+  the owner's RU deliverable, the language exception owner-directed),
+  worldbuild/WORLD_TESTS.md (§7 the carrier-or-surface probe, §9 the
+  run record), worldbuild/WORLD_AUTHORING.md (§7 the doctrine row),
+  worldbuild/ANCHOR_REGION.md (§6.5 the market as a carrier
+  assembly), blueprint/phases.md (§6 the iter-263 record), TASKS.md
+  (the ledger, iter-252 evicted), DECISIONS.md (D-239 into the
+  compound row)}, STATUS.md, worklog.md (iter-253 evicted) — 8
+  paths; R0 (D-239): doc-only, the D-022 exception (the owner's
+  fresh question) — zero core, zero pack, the LOG untouched, the
+  scratch instruments outside the repo (the iter-262 precedent's
+  own law).
+Track A: the J-rows RE-FRAMED BY MEASUREMENT (the owner's
+  carrier-or-surface question): J-1 decomposed to the READER legs
+  (the authored unit ANCHOR_REGION §6.5 landed at the authored band,
+  the embodiment owner-gated), J-2's remainder confirmed with the
+  refined cascade price, J-3 closed. The ssi family COMPLETE except
+  ssi-5, owner-gated.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -115,21 +116,34 @@ Track A: the iter-261 J-gap set DIAGNOSED (the owner's iter-262
 
 ## Next step
 
-**iter-262 DONE: the composition-bottleneck diagnosis over the owner's
-iter-262 brief — every iter-261 J observation reproduced and then
-discriminated: the twin-fold causal-inertness test (52 calendar turns
-+ 5 institutional events removed → the projection byte-identical), J-1
-re-framed (the market/fair turns carry zero runtime consumers — the
-proposed `destroyed` gate is provably cosmetic; the honest frame is
-the market-as-meso-carrier, a world-track row), J-2's report
-classification refuted both ways with the LIVE committed bug found and
-FIXED (KI#103: the `wait` resolver now mints authored action
-knowledge; the pressure golden regenerated on its intended 2-line
-delta; the province remainder down-graded to pure pack data), J-3
-rejected as a gap (the road fear is structurally unreadable by
-warm-ring consumers — the decay-catchup-before-rolls law).
-2445+9 + ruff + docguard + topology --check clean. The owner's RU
-report: docs/iterations/iter-262-diagnosis-report.md.**
+**iter-263 DONE: the carrier-or-surface discrimination over the
+owner's question (which authored institutions in Sarrow Vale should
+be canonical carriers of world change, which intentionally remain
+narrative surfaces — and can a minimal world-track experiment
+distinguish the cases without a new runtime primitive) — YES, the
+three-move probe (the reader audit → the ablation arm → the injection
+arm, WORLD_TESTS §7's third member; the lint part of the instrument,
+determinism twin-verified, zero core/pack changes): the verdict
+PER-LEG never per-institution — the market carries all four bands
+(the material leg a live carrier: its ablation diverges the whole
+year; the economic leg a render-read state carrier; the social leg
+live; the calendar line a surface BY CONSTRUCTION — the consumer
+routes closed, measured twice), the epistemic band named and measured
+(the council/vigil knowledge legs: the watch-briefing transfer
+consumer live; the novelty-gradient honest boundary), the
+market-mourns prop trigger measured both ways (the move release
+massive — talks 287→2, the council pile-up 1→208 off the cold-frozen
+fear; the ramble release minimal-but-material), four expressibility
+boundaries named (none needing a new primitive), the J-rows re-framed
+by measurement (J-1 decomposed to the READER legs, the unit ANCHOR
+§6.5; J-2's remainder confirmed; J-3 closed). 2445+9 + ruff +
+docguard + topology --check clean. The owner's RU report:
+docs/iterations/iter-263-carrier-surface-report.md.**
+iter-262 DONE: the composition-bottleneck diagnosis — the twin-fold
+causal-inertness test, J-1 re-framed (the market-as-meso-carrier
+world-track row), KI#103 fixed (the `wait` resolver's knowledge
+minting), J-3 closed (the decay-catchup-before-rolls law). 2445+9.
+The owner's RU report: docs/iterations/iter-262-diagnosis-report.md.
 iter-261 DONE: the composition question over the parked intake-40
 P1 set — P1-1 the Province integrated witness (16 relational-oracle
 tests over one 2371-event run), P1-10 the timing witness (mechanics.py
@@ -162,20 +176,24 @@ iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
    timing instrument (diagnostic); a production consumer
    (chronicle/observatory reading the deferral) or two iterations
    without new consumers → the demotion question (the report's F, an
-   owner call, no churn now). THE REVISED J-ROWS (iter-262's
-   dispositions, all owner-gated): (J-1) the market-as-meso-carrier —
-   an authored institution whose state the fire can destroy, the
-   council can write and the calendar line can read; a world-track
-   authoring unit (the §6.1 crossing-household class), NEVER a
-   calendar gate (the clock's no-gate law held; the tale
-   contradiction — «the stalls from the weir stair to the bank» after
-   the burnout — is the carrier's absence made visible, the row's
-   honest entry evidence); (J-2 remainder) the province's
-   council/hold_vigil/patrol knowledge blocks — PURE PACK DATA now
-   that KI#103's fix landed (the scratch falsifier measured the live
-   cascade: witnesses hold the tokens, the PC's talks spread them,
-   rumor_told 22→25; an owner content call with a composition-oracle
-   re-fixation price); (J-3) CLOSED as a non-gap — no row. ssi-5
+   owner call, no churn now). THE J-ROWS AFTER iter-263 (the
+   carrier-or-surface re-frame, all embodiment owner-gated): (J-1)
+   the market DECOMPOSED — its material/economic/social legs are
+   already live carriers; the honest rows are the READER legs, each
+   on existing primitives with its measured price: the mourns
+   director hook (the prop trigger reading `loc_malby.destroyed` —
+   both releases measured), the trade door (an authored verb's
+   `spot_available`/account gates — expressible, unarmed), the
+   council/vigil knowledge blocks; the authored unit LANDED at
+   ANCHOR_REGION §6.5 (the fifth meso unit); the calendar line stays
+   a surface BY LAW (measured twice — the lint's closed grammar, the
+   empty on_action scope) and the tale contradiction is a render-side
+   row (the read-side conditional, never a calendar gate); (J-2
+   remainder) the knowledge blocks — pure pack data, the consumers
+   measured (the watch-briefing transfer; the rumor cascade's honest
+   boundary: the co-located witness shape holds 22→22, the
+   block-shape-dependent estimate was 22→25); (J-3) CLOSED — no
+   row. ssi-5
    stays owner-gated (the N018 evidence law). The owner-side cleanup
    standing from D-230's third card: delete the doubled
    `workbench/workbench/runtime/` tree locally (safe — the iter-246

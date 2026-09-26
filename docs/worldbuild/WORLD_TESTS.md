@@ -151,6 +151,45 @@ fire spot): the player-facing ablation is one steal away, the lift flipping
 the carrier binding and the road-leg beat walking the second hand pole-less
 (test-pinned, `tests/test_poleseed.py`).
 
+### The carrier-or-surface probe (run-derived, iter-263 — D-239)
+
+Which of an authored institution's legs is a canonical carrier of world
+change, and which is an intentional narrative surface? The question is
+PER-LEG, never per-institution — one entity can carry both bands (the Malby
+market: a live material carrier, a render-read state carrier, a live social
+carrier, and a calendar line that is a surface by construction). Three moves
+over ONE witness run, all on existing primitives (scratch pack copies through
+the real `load_pack` — the lint itself is part of the instrument: an injection
+the lint refuses is an inexpressible coupling, never a run):
+
+1. **The reader audit** — enumerate the leg's runtime consumer routes: the
+   intent door's closed test set (`core/intent.py::PRECONDITION_TESTS` —
+   `relation_at_least`, `account_at_least`, `spot_available`, `carried_by`,
+   ...), the director's prop triggers (any entity, any projection path,
+   `core/predicates.py`), the on_action scopes (knowledge holders only), the
+   read-side folds (leverage/echo/trait), the render surface. Zero routes =
+   the leg can never be read: surface by construction.
+2. **The ablation arm** — for legs that already write: remove the writer in a
+   scratch copy, run the witness, read the final-projection delta. Massive
+   divergence = a live behavioral carrier; a state-only delta = a
+   render-consumed state carrier; byte-identical = inert (a surface or an
+   epistemic carrier).
+3. **The injection arm** — for inert legs: author the minimal coupling as
+   pure pack data on existing primitives (an action knowledge block, a
+   director hook with a prop trigger, a door gate), run, read the delta
+   family. A projection delta = the behavioral band; a log-only delta with
+   named consumers = the epistemic band (the watch-briefing transfer, the
+   rumor door); no expressible coupling = the named boundary, routed to the
+   owner per the separate-track law — never a new runtime primitive from
+   this track.
+
+Pass: the three moves agree — the classification names the leg's band with a
+measured number, not a prose assertion. The intentional surface is itself a
+VERDICT, never a failure: the calendar line's function is the legibility of
+time; a gate on it is provably cosmetic (iter-262's twin-fold; the lint's
+closed grammar and the empty on_action scope — both measured, iter-263).
+
+
 ## 8. Current repository evidence
 
 The repository's world-2 work provides concrete measurements for the anchor
@@ -1333,6 +1372,36 @@ deferral window); the H1/H2 season-scale sliced pair measured: the
 material outcomes IDENTICAL span-vs-sliced, the crossing families
 invariant, the deltas door-only. The owner's RU report A–J:
 `docs/iterations/iter-261-composition-report.md`.
+
+### CONFIRMED — The carrier-or-surface discrimination over the Sarrow Vale institutions (2026-09-27, iter-263, D-239)
+
+The owner's question (which authored institutions should be canonical
+carriers of world change, which intentionally remain narrative surfaces — and
+can a minimal world-track experiment distinguish the cases without a new
+runtime primitive) answered with the three-move probe (§7's third member)
+over the composition witness: the cases ARE distinguishable, zero new
+primitives, and the verdict is PER-LEG. The measured matrix (the full report:
+`docs/iterations/iter-263-carrier-surface-report.md`): the market's material
+leg ABLATED (fire spots removed) diverges the whole year (no council, no
+vigil, the PC never caught — a live carrier); the economic leg ABLATED moves
+exactly one account prop (the render-read state carrier — the chest is a
+sink with no behavioral reader); the council/vigil knowledge legs INJECTED
+mint +6/+23 records with the watch-briefing transfer consumer measured
+(epistemic carriers, pure pack data — the co-located hearers saturate the
+novelty gradient, so the rumor count holds 22→22 in this witness shape; the
+iter-262 estimate 22→25 was block-shape-dependent); the market-mourns
+director hook (the prop trigger reading `loc_malby.destroyed`) INJECTED is
+massively material through the move release (the mistress leaves the ashes:
+talks 287→2, the council pile-up 1→208 off the cold-frozen fear at the
+year crossing) and minimally material through the ramble release (+5 records,
+rumors 22→25, one materialized scene prop — the observe resolver's canon
+birth); the calendar line's consumer routes are ALL CLOSED, measured twice
+(C1 the lint refuses a `hooks` key on the entry; C2 the on_action scope over
+36 turns is empty — no knowledge holders by construction). The intentional
+surface is the verdict, never a failure: the line's function is the
+legibility of time. The authored unit landed at ANCHOR_REGION §6.5 (the
+market as a carrier assembly, the J-1 row at the authored band); the
+embodiment legs stay owner-gated, each with its measured price.
 
 ## 10. Test result vocabulary
 
