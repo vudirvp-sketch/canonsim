@@ -401,11 +401,12 @@
       },
       "hooks": {
         "success": [
-          "wilmot_grief_ramble"
+          "wilmot_grief_ramble",
+          "market_mourns"
         ],
         "failure": []
       },
-      "notes": "advance N ticks; the world moves while the player stands still. content-3 (iter-53, D-082): every committed wait seeds the ambient tag — idle time is the noise floor's domain (D-005: the murmur is seeded at event time, never improvised; the tag is weight 0, so the seeding shifts no entropy anywhere)"
+      "notes": "advance N ticks; the world moves while the player stands still. content-3 (iter-53, D-082): every committed wait seeds the ambient tag — idle time is the noise floor's domain (D-005: the murmur is seeded at event time, never improvised; the tag is weight 0, so the seeding shifts no entropy anywhere). iter-264 (the §6.5 embodiment legs): the wait ALSO seeds the market's mourns tag — the murmur family's own site (the ignite resolver mints no action hooks, the committed packs' honest boundary recorded in iter-263's §D; the trigger, not the seed, reads the market's state — an unburned Malby arms nothing, the seeded tag stays a dormant fact until the prop trigger finds the ashes)"
     },
     {
       "intent": "take",
@@ -1104,14 +1105,30 @@
       "requires": [],
       "fields": [],
       "knowledge": {
-        "success": [],
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "partial",
+            "knows": "the_guild_bars_the_stalls"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "the_guild_bars_the_stalls"
+          }
+        ],
         "failure": []
       },
       "hooks": {
         "success": [],
         "failure": []
       },
-      "notes": "the guild's goal verb (the triangle, slice 3): the trade's flinch made public — the stalls bar, the heads come together. A bare story-beat expression (no declared effect of its own; the attribution row is the witness that keeps it alive, PACK_SPEC §5)."
+      "notes": "the guild's goal verb (the triangle, slice 3): the trade's flinch made public — the stalls bar, the heads come together. A bare story-beat expression (no declared effect of its own; the attribution row is the witness that keeps it alive, PACK_SPEC §5). iter-264 (the §6.5 embodiment legs, the J-2 knowledge leg landed): the public act's honest RESIDUE is knowledge — the co-located hear the barring through the market's own walls (partial), the adjacent towns hear it dimly (vague) — the council's epistemic half armed as pure pack data over the KI#103 wait-resolver minting; the boolean 'barred stalls' flag stays inexpressible and unneeded (the knowledge IS the state, iter-263's measured law — the watch-briefing and rumor-door consumers live)."
     },
     {
       "intent": "hold_vigil",
@@ -1126,14 +1143,30 @@
       "requires": [],
       "fields": [],
       "knowledge": {
-        "success": [],
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "partial",
+            "knows": "the_blood_price_spoken"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "the_blood_price_spoken"
+          }
+        ],
         "failure": []
       },
       "hooks": {
         "success": [],
         "failure": []
       },
-      "notes": "the families' goal verb (the triangle, slice 3): the old blood's public act — the wergeld vigil, the blood price spoken aloud again. Bare story beat, the D-160 muster pattern at province scale."
+      "notes": "the families' goal verb (the triangle, slice 3): the old blood's public act — the wergeld vigil, the blood price spoken aloud again. Bare story beat, the D-160 muster pattern at province scale. iter-264 (the §6.5 embodiment legs, the J-2 knowledge leg landed): the vigil's honest RESIDUE armed as knowledge — Thornmill hears the blood price spoken (partial), Malby through the market walls (vague) — the institutional memory measured live in iter-263's I2 arm (the watch-briefing transfer carrying the tokens to the relief, the deadband's decay-0 law now with its epistemic half); pure pack data, the same KI#103 minting surface as the council's barring."
     },
     {
       "intent": "patrol",
@@ -1312,6 +1345,79 @@
         "failure": []
       },
       "notes": "the seat's SUCCESSION (charcoalpaper, iter-189 — the transfer door, D-191's turnover application made lawful): the paper walks to the successor — the camp's own reading of the debt (the seat, never the blood; the hills' unlapseable reading turned on the guild's instrument: whoever the camp holds at the burn masters the debt). The receiving-stock gate (account_at_least paper 0 on the target — the value-0 form is the stock's EXISTENCE gate) refuses a target that declares no paper stock SOFTLY (the door's own shape, the KI#15 family); no committed entity declares one — the lived succession waits on the successor's mint (the crews' recognition, no committed surface — the honest residue, a future row's own call). The tally-stick does NOT ride this door (the verb-gate boundary: carried and unflagged, untakeable — the badge's handing-over is the recognition's own mint, iter-185's law); the paper walks, the badge follows when the camp speaks. The witnesses learn the_seat_passed. The frozen-force counterfactual (the guild's book reading a man's name — the debt dying with the master) is the door's own removal: the perturbation arm, ANCHOR_REGION §6.4's record."
+    },
+    {
+      "intent": "trade_at_market",
+      "label": "trade at the stalls",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "spot_available",
+          "layer": "fire"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 2
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 2
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "coin_changed_hands_at_{location}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the market's own COMMERCE (iter-264, the §6.5 embodiment legs — the J-1 trade door landed, the state-to-economy reader): a purchase at the stalls, the buyer's coin walking to the chest at the weighbeam (render_fund's own shape — the transfer's receiving stock the guild's chest, debt-1's location form). THE STALL GATE is the door's own law: spot_available over the fire layer reads the same layer grammar the arson door reads — the commerce closes with the stalls BY CONSTRUCTION (a burned-out Malby refuses the trade softly at the door, attempts are facts; the spots stay in the burning state through the burnout, so the closure never reopens — the irreversibility the fire layer already owns). The honest scale: two coin — the toll's own number, half the guild's yearly take at the chest. UNARMED by doctrine (the census's UNREALIZED band until a witness exercises it): no urgency entry, no faction door — the player's parse verb, the factor's runner buying at the stalls with the house purse (pc_01's coin six). The witnesses see the coin change hands (partial — the market's own people, never the guild's books: the tale's line and the chest's stock the surface, render_fund's own law)."
     },
     {
       "intent": "share_board",

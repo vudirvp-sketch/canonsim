@@ -3945,6 +3945,61 @@ primitive):**
   iteration — the owner's call class throughout (the pole's iter-161
   precedent).
 
+**The iter-264 market-legs record (D-240, R2 — the owner's «продолжай
+работы по embodiment-ногам §6.5 — хук mourns (какой интент релизит),
+trade-глагол, knowledge-блоки и так далее» call opening the iter-263
+owner-gated rows):**
+
+- **The legs LANDED as pure pack data, zero core** (the campaccount
+  precedent class): the mourns hook `market_mourns` (the prop trigger
+  `loc_malby.destroyed`, seeded by the wait action's hooks — the murmur
+  family's own site), the trade verb `trade_at_market` (the
+  spot_available/account gate stack over the same fire layer the arson
+  door reads; unarmed by doctrine — no urgency, no faction door; the
+  runner's purse pc_01 coin six the walking stock), the council/vigil
+  knowledge blocks (`the_guild_bars_the_stalls` /
+  `the_blood_price_spoken` — heard partial co-located, vague
+  adjacent), the three knows-gloss rows.
+- **The INTENT PICK (the owner's own question) answered by
+  authorship**: the RAMBLE release — the keeper of the weighbeam does
+  not leave the ashes (her spine: the feud burned her mother's stall;
+  her need: the son's bond covered by the market's paper); her honest
+  response is grief made audible, the family rhyme with
+  `wilmot_grief_ramble`. The move release stays the owner's future row
+  — its measured price (talks 287→2, the 1→208 pile-up off the
+  cold-frozen fear — the B2 catch-up semantics, a log pile, not a
+  story beat) is on the iter-263 record.
+- **The TRIGGER-ONLY LAW (the landing's own measured find)**: a
+  triggered hook stays quiet-path eligible by construction — the
+  weight-0 ambient mourns LEAKED a spurious ramble on a standing
+  market in the smoke witness before the fix; the drama-2 OPTION
+  layer (the same prop read as its availability gate) is the honest
+  trigger-only form: the only world where the hook releases on ANY
+  path (causal, climax or quiet) is the world where the trigger
+  already fires. The hook-level trigger keeps the release causal
+  (D-005); the option gate closes the pacing doors behind it.
+- **The re-measured deltas — exactly the iter-263 I2/I3b predictions
+  on the committed forms**: the composition witness 2371→2376 (+1
+  mourns ramble with the dropped-tally materialization, +3 rumors
+  22→25 — the arsonist runner carrying the grief token, +1 briefing
+  transfer — the vigil tokens reaching the relief); autonomous
+  383→384; talks/vigils/councils/rotations/latencies unchanged. The
+  world answering twice: the still-smoking market degrades the
+  council's co-located partials to VAGUE (the acquisition gate's own
+  fidelity); the scene's lazy materialization is nobody's (the
+  sergeant's scan draws it in the minimal witness, the mourns ramble
+  itself in the composition — first-commit-wins on the same stream).
+- **The witness + the corpus price**: `tests/test_marketlegs.py` (10
+  tests: the census, the unarmed-doctrine check, the no-leak arm, the
+  trade door both ways, the mourns release, the two knowledge legs,
+  the briefing consumer, the byte-identical twin); the composition
+  pins re-pinned with the explaining change; the province golden
+  regenerated on its exact 3-line wait delta (the tag + the
+  importance band — the scorer counts hooks). The render conditional
+  (the tale contradiction on the ashes) is the ONE remaining §6.5
+  owner-gated row. The owner's RU report:
+  `docs/iterations/iter-264-market-legs-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

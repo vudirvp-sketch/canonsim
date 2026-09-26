@@ -962,7 +962,7 @@ the meaning distribution's own unfinished band, §7.1's form — the
 W5 gate: one clean biography probe over the canonical standing debt
 before any new candidate, `WORLD_TESTS.md` §9's W5 entry).
 
-### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263, the J-1 row landed at the authored band)
+### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263; the embodiment legs LANDED iter-264)
 
 The J-1 row's honest shape after the carrier-or-surface discrimination
 (D-239): the Malby market was never "a tale-level institution needing a
@@ -971,47 +971,68 @@ carrier" — its material, economic and social legs are ALREADY live carriers
 whole year — no council, no vigil, the PC never caught; removing the chest's
 flow moves exactly one account prop). What the fire's burnout lacked was
 READER legs — the named couplings, each on existing primitives, each measured
-in the iter-263 injection arms:
+in the iter-263 injection arms — LANDED iter-264 as pure pack data (the
+owner's embodiment call over §6.5, zero core change):
 
-- **The mourns hook** (the state→behavior door): a director hook with the
-  prop trigger `loc_malby.destroyed == true`, seeded by an ordinary action's
-  hooks (the murmur family's own site — the ignite resolver mints no action
-  hooks, the committed packs' honest boundary), releasing the carrier's own
-  response. Measured both ways: the move release (the mistress leaves the
-  ashes — the social function dies with its carrier: talks 287→2, the
-  cold-frozen fear feeding the faction door's year-crossing pile-up) and the
-  ramble release (the minimal epistemic form: +5 heard-vague records, the
-  PC-spoken rumor cascade 22→25, one materialized scene prop — the observe
-  resolver's canon birth). The authored band's own beat: WHICH intent the
-  hook releases is the owner's authoring call — the experiment proves the
-  door, never the prose.
-- **The trade door** (the state→economy door): an authored trade verb whose
-  requires carry `spot_available` (or the account gates) over the market —
-  the commerce closes with the stalls. Expressible, unarmed (the census's
-  UNREALIZED band); the flow itself stays ungated BY LAW (the closed flow
+- **The mourns hook, LANDED** (the state→behavior door): the director hook
+  `market_mourns` with the prop trigger `loc_malby.destroyed == true`, seeded
+  by the wait action's hooks (the murmur family's own site — the ignite
+  resolver mints no action hooks, the committed packs' honest boundary). The
+  INTENT PICK (the owner's own question, answered by authorship): the RAMBLE
+  release — the keeper of the weighbeam does not leave the ashes (her spine:
+  the feud burned her mother's stall; her need: the son's bond covered by the
+  market's paper); her honest response is grief made audible, the family
+  rhyme with `wilmot_grief_ramble`. The move release stays the owner's future
+  row — its measured price (talks 287→2, the 1→208 council pile-up off the
+  cold-frozen fear — the B2 catch-up semantics, a log pile, not a story beat)
+  is on the iter-263 record. The TRIGGER-ONLY LAW (the landing's own find): a
+  triggered hook stays quiet-path eligible by construction, and a weight-0
+  ambient hook would mourn a STANDING market (measured: the smoke witness
+  leaked a spurious ramble before the option gate) — the drama-2 OPTION
+  layer carries the same prop read as its availability gate, so the only
+  world where the hook releases on ANY path (causal, climax or quiet) is the
+  world where the trigger already fires; the hook-level trigger keeps the
+  release causal (D-005), the option gate closes the pacing doors behind it.
+- **The trade door, LANDED** (the state→economy door): the authored verb
+  `trade_at_market` whose requires carry `spot_available` over the fire
+  layer — the SAME layer grammar the arson door reads — plus the account
+  gates (the buyer's solvency, the chest's existence): the commerce closes
+  with the stalls BY CONSTRUCTION (a burned-out Malby refuses the trade
+  softly at the door — attempts are facts; the spots stay in the burning
+  state through the burnout, so the closure never reopens). Unarmed by
+  doctrine (no urgency entry, no faction door — the census's UNREALIZED band
+  until a witness exercises it; the runner's purse pc_01 coin six is the
+  walking stock). The flow itself stays ungated BY LAW (the closed flow
   grammar — and honestly so: the guild's rent outlives the stalls, the
   paper collects on the ashes).
-- **The knowledge legs** (the institutions' epistemic half): the
+- **The knowledge legs, LANDED** (the institutions' epistemic half): the
   council/vigil acts' authored knowledge blocks — the public act's honest
-  residue (heard partial/vague, the witnesses' records), pure pack data
-  since KI#103; the consumers measured (the watch-briefing transfer, the
-  brief/recall surface). The boolean "barred stalls" flag is inexpressible
-  (no action-level state block) and unneeded — the knowledge IS the state.
+  residue is KNOWLEDGE (`the_guild_bars_the_stalls`, `the_blood_price_spoken`;
+  heard partial co-located, vague adjacent), pure pack data since KI#103;
+  the consumers re-measured on the committed forms (the watch-briefing
+  transfer carrying the vigil tokens; the briefing now carries the trade's
+  token too — the chest's commerce is the watch's institutional knowledge).
+  The world answers through the acquisition gate: the still-smoking market
+  degrades the council's co-located partials to vague (the world's own
+  fidelity, never the authored one). The boolean "barred stalls" flag is
+  inexpressible (no action-level state block) and unneeded — the knowledge
+  IS the state.
 - **The calendar line stays a surface** (the legibility of time, by
   construction — the lint's closed grammar and the empty on_action scope,
   both measured): the tale contradiction after the burnout is a
-  RENDER-side row (the read-side conditional, never a calendar gate).
+  RENDER-side row (the read-side conditional, never a calendar gate) — the
+  ONE embodiment row still owner-gated.
 
 The unit's causal shape (the J-1 frame, corrected by measurement): a carrier
 whose state the FIRE writes (the burnout, irreversible), the DIRECTOR reads
-(the prop trigger at the beats), the DOOR gates (the trade verb's own
-requires) and the INSTITUTIONS' knowledge legs carry (the council's and the
-vigil's public acts) — never the calendar line. The embodiment legs (the
-hook's intent pick, the trade verb, the knowledge blocks, the render
-conditional) stay the owner's call class, each with its measured price on
-record (the iter-263 report); the pole's iter-161 precedent is the family's
-own gate. No new loop: the market is the interlock surface loops A/C/E/H
-already touch — the unit's work is the READER legs, not a ninth circuit.
+(the prop trigger at the beats, through the option gate), the DOOR gates (the
+trade verb's own requires) and the INSTITUTIONS' knowledge legs carry (the
+council's and the vigil's public acts) — never the calendar line. The
+remaining embodiment row (the render conditional) stays the owner's call
+class, with its measured price on record (the iter-263 report); the pole's
+iter-161 precedent is the family's own gate. No new loop: the market is the
+interlock surface loops A/C/E/H already touch — the unit's work is the
+READER legs, not a ninth circuit.
 
 ## 7. Meaning frontier
 

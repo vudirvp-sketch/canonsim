@@ -130,7 +130,10 @@
       "mood": "wary",
       "goal": "audit the convoy debts, be home before the rains",
       "is_player": true,
-      "notes": "starts on the artery and walks the province (the smoke script's own walk); crime_status is the crime_watch convention (rules.json crime_watch.status_values); carries the house waybill book (the manifest-check family's target — the document_check demand reads it)"
+      "accounts": {
+        "coin": 6
+      },
+      "notes": "starts on the artery and walks the province (the smoke script's own walk); crime_status is the crime_watch convention (rules.json crime_watch.status_values); carries the house waybill book (the manifest-check family's target — the document_check demand reads it); the coin purse (iter-264, the §6.5 embodiment legs): six coin of house money — the trade door's walking stock (trade_at_market's solvency gate, the market's own commerce now expressible — the buyer's purse, the guild's chest the receiving end; the honest scale: three stalls-days of buying at the toll's own number)"
     },
     {
       "id": "npc_weirkeeper_01",

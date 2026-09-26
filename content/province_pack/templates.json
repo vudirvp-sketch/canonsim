@@ -137,6 +137,9 @@
     "rambling_by_{actor}": "rambling from {actor}",
     "waybill_demanded_of_{target}": "a waybill demanded of {target}",
     "the_paper_fell": "the paper fell at the reckoning",
-    "the_seat_passed": "the seat passed to a new hand"
+    "the_seat_passed": "the seat passed to a new hand",
+    "coin_changed_hands_at_{location}": "coin changed hands at {location}",
+    "the_guild_bars_the_stalls": "the guild barred the stalls",
+    "the_blood_price_spoken": "the blood price spoken aloud again"
   }
 }

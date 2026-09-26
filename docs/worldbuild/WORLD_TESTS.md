@@ -1403,6 +1403,41 @@ legibility of time. The authored unit landed at ANCHOR_REGION §6.5 (the
 market as a carrier assembly, the J-1 row at the authored band); the
 embodiment legs stay owner-gated, each with its measured price.
 
+### CONFIRMED — The §6.5 embodiment legs landing: the market's reader legs as pure pack data (2026-09-27, iter-264, the owner's «продолжай работы по embodiment-ногам §6.5» call)
+
+The iter-263 verdict's owner-gated rows opened by the owner's call and
+LANDED as pack data only (zero core change): the mourns hook
+(`market_mourns`, the prop trigger reading `loc_malby.destroyed`,
+seeded by the wait action's hooks — the murmur family's own site), the
+trade verb (`trade_at_market`, the `spot_available`/account gate stack
+over the fire layer — the commerce closes with the stalls by
+construction, unarmed by doctrine), and the council/vigil knowledge
+blocks (`the_guild_bars_the_stalls`, `the_blood_price_spoken` — heard
+partial co-located, vague adjacent). The INTENT PICK (the owner's own
+question — which intent the mourns hook releases): the RAMBLE, not the
+move — the keeper of the weighbeam does not leave the ashes (her
+spine's rhyme with the feud's fire), the family's fourth murmur; the
+move release stays the owner's future row with its iter-263 price.
+The landing's OWN find (measured, then fixed in the same iteration):
+a triggered hook stays quiet-path eligible by construction — the
+weight-0 ambient mourns LEAKED a spurious ramble on a standing market
+in the smoke witness before the option gate; the drama-2 option layer
+(same prop read as the availability gate) makes the hook
+trigger-ONLY: the only world where it releases on any path is the
+world where the trigger already fires. The re-measured deltas on the
+composition witness — exactly the iter-263 I2/I3b predictions on the
+committed forms: +1 mourns ramble (t=4176, director-born, the scene's
+dropped-tally materialized), +3 rumors (22→25 — the arsonist runner
+carrying the mistress's grief token), +1 briefing transfer (the vigil
+tokens reaching the relief, the institutional memory consumer). The
+knowledge legs' world answer: the still-smoking market degrades the
+council's co-located partials to VAGUE (the acquisition gate's own
+fidelity — measured, deterministic). The remaining embodiment row
+(the render-side conditional for the tale contradiction) stays
+owner-gated. The witness: `tests/test_marketlegs.py` (all four legs,
+one route + the no-leak arm + the byte-identical twin); the owner's
+RU report: `docs/iterations/iter-264-market-legs-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

@@ -1134,6 +1134,37 @@
         "channel": "ambient",
         "first_time_only": true,
         "notes": "the feud's hill half (slice 3 — the story-critical claims grow to three, one per arm of the triangle): Garrick counts the unpaid blood price aloud at the charcoal stacks — the wergeld claim, the crofts' own living memory (the prohibition's carrier speaking it). Trigger-less like the murmur — the ambient channel's quiet gate is the whole release path (weight 0, the D-082 pattern). Seeded by the worldgen chronicle (world_history hooks — the deep feud's afterlife)."
+      },
+      "market_mourns": {
+        "weight": 0,
+        "release_threshold": 10,
+        "target_npc": "npc_marketmistress_01",
+        "intent": {
+          "kind": "ramble"
+        },
+        "trigger": {
+          "kind": "prop",
+          "of": "loc_malby",
+          "path": "destroyed",
+          "comparator": "equals",
+          "value": true
+        },
+        "options": [
+          {
+            "trigger": {
+              "kind": "prop",
+              "of": "loc_malby",
+              "path": "destroyed",
+              "comparator": "equals",
+              "value": true
+            },
+            "weight": 1,
+            "notes": "the ashes gate — the deferred-release law (drama-2): without the option layer a triggered hook stays quiet-path eligible (the ambient family's own floor), and a weight-0 ambient hook would mourn a STANDING market; the option's availability gate is the SAME prop read as the hook trigger, so the only world where this hook releases on ANY path — causal, climax or quiet — is the world where the trigger already fires. The hook-level trigger keeps the release CAUSAL (D-005: causality is not pacing — the burnout is read at the beat, ungated by the drama clock); the option gate closes the pacing doors behind it."
+          }
+        ],
+        "channel": "ambient",
+        "first_time_only": true,
+        "notes": "the market's own grief (iter-264, the §6.5 embodiment legs over iter-263's measured door — the J-1 reader leg landed): the mistress mourning the burned stalls, the fourth murmur of the D-082 family and the FIRST state-gated one — the prop trigger reads loc_malby.destroyed, the reader the fire's burnout lacked (the ignite resolver mints no action hooks, the committed packs' honest boundary, so the seed rides the wait action's hooks — the murmur family's own site). The INTENT PICK is the authored call this hook exists to make: the RAMBLE release, not the move — the keeper of the weighbeam does not leave the ashes (her need is the market's paper: her son's bond covered by the stalls, the same fire family that burned her mother's stall and never recovered the credit); her honest response is grief made audible, the family rhyme with wilmot_grief_ramble (the grief talking to the burned mill — this is the grief talking to the burned stalls). The measured prices (iter-263, both on record): the ramble release minimal-but-material (+5 heard-vague records, the rumor cascade off the arsonist's own carrying, one materialized scene prop — the observe resolver's canon birth); the move release massive but degenerate (talks 287 to 2, the council pile-up 1 to 208 off the cold-frozen fear — the B2 catch-up semantics, a log pile, not a story beat) — the departure arc stays the owner's future row, its price on the iter-263 record. Weight 0, first_time_only: the ambient family's own law (one mourns per run, the ambient entropy stays 0); the release rides the explicit trigger through the option gate — the state's reader, never the noise floor's."
       }
     },
     "arcs": {
@@ -1146,7 +1177,7 @@
         "notes": "the aftermath chain (content-6/D-081 — the first LIVE arc, re-voiced): the day's institutional beats march — the relief's public confrontation first, the market's reckoning second. The relief is the FIRST member on purpose: it is the one hook live on the runs the driver targets, so the order law never holds the corpus-pinned release. The chain is BOTH halves of the layer: causality (the order law — the sweep is a candidate only after the confrontation) and anti-spam (the gap)."
       }
     },
-    "notes": "the consequence planner over the province's three channels (the road's balance verbatim — the pacing stack is pack-portable mechanics, D-067/D-068's layering; threat reads physical_threats, social reads suspicion, ambient reads nothing — the quiet gate). Six hooks: the watcher pair's suspicion compounding, the manifest-check confrontation pair (the climax arms), the market sweep (the arc driver), the two ambient murmurs (the grief and the storm). The winter kin's recognition deliberately rides NO hook (iter-203): a hook seeds only from a committed event's tag list (D-005) and no resolver mints knowledge AND hooks on one success branch — the board needs the knowledge (the on_action's witnesses), so the recognition rides the BILATERAL climb instead (on_action's second entry — the host's counter-climb, the crossing at the bar the state's own pin; the release-hook form parked, the constraint recorded here)."
+    "notes": "the consequence planner over the province's three channels (the road's balance verbatim — the pacing stack is pack-portable mechanics, D-067/D-068's layering; threat reads physical_threats, social reads suspicion, ambient reads nothing — the quiet gate). Seven hooks: the watcher pair's suspicion compounding, the manifest-check confrontation pair (the climax arms), the market sweep (the arc driver), the three ambient murmurs (the grief, the storm, the wergeld count) and the market's mourns (iter-264, the §6.5 embodiment leg — the first STATE-GATED murmur: the prop trigger reading loc_malby.destroyed rides the causal path through its option gate, never the quiet gate, so an unburned market never mourns; seeded by the wait action's hooks, the murmur family's own site). The winter kin's recognition deliberately rides NO hook (iter-203): a hook seeds only from a committed event's tag list (D-005) and no resolver mints knowledge AND hooks on one success branch — the board needs the knowledge (the on_action's witnesses), so the recognition rides the BILATERAL climb instead (on_action's second entry — the host's counter-climb, the crossing at the bar the state's own pin; the release-hook form parked, the constraint recorded here)."
   },
   "on_action": {
     "alarm_raised": [

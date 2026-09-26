@@ -79,11 +79,16 @@ SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding=
 PROVINCE = load_pack(REPO / "content" / "province_pack")
 SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_composition.json")
 
-#: The measured surface at HEAD (iter-261): the run's own numbers.
-#: Re-pin only together with a legitimate pack or engine change that
-#: explains the move.
-EVENT_COUNT: int = 2371
-AUTONOMOUS_RESOLUTIONS: int = 383  # 382 accepted + 1 rejected
+#: The measured surface at HEAD (iter-264 — the §6.5 embodiment
+#: legs: the market_mourns director hook (+1 ramble, +1 autonomous
+#: resolution), the council/vigil knowledge blocks (+1 briefing
+#: transfer — the t=6120 rotation carrying the vigil tokens), and the
+#: mourns rumor cascade (+3: the arsonist runner carrying the
+#: mistress's grief to the road, the I3b arm's measured shape
+#: reproduced on the committed forms). Re-pin only together with a
+#: legitimate pack or engine change that explains the move.
+EVENT_COUNT: int = 2376
+AUTONOMOUS_RESOLUTIONS: int = 384  # 383 accepted + 1 rejected
 TALK_COUNT: int = 287
 VIGIL_COUNT: int = 4
 
@@ -354,10 +359,15 @@ def test_the_world_stays_causally_loud_through_the_year(
     """The declared-pressure oracle (§13's first candidate): through
     the 519000-tick idle the world is NEVER causally silent — the
     mistress's trust-gated talk urgency alone realizes 287 times, the
-    watch rotates 730 times with 5 briefings, 22 rumors walk, and the
-    run's total shape is the measured 2371 events. The urgency families
-    that stay silent on this route are the LOD's structural scoping
-    (the weirstair/crofts NPCs never enter the ticking zones), never
+    watch rotates 730 times with 6 briefings (iter-264: the vigil
+    tokens' transfer joins the stack), 25 rumors walk (iter-264: the
+    mourns cascade — the arsonist runner carrying the mistress's grief
+    token to the road, 22 → 25, the I3b arm's shape reproduced on the
+    committed forms), and the run's total shape is the measured 2376
+    events (the embodiment legs' +5: the mourns ramble, the three
+    rumor tellings, the briefing). The urgency families that stay
+    silent on this route are the LOD's structural scoping (the
+    weirstair/crofts NPCs never enter the ticking zones), never
     spurious silence."""
     events, result = witness
     assert result.event_count == EVENT_COUNT
@@ -368,8 +378,8 @@ def test_the_world_stays_causally_loud_through_the_year(
         t.provenance["cause_intent"] == "urgency_0004" for t in talks
     )
     assert len(_of(events, "watch_change")) == 730
-    assert len(_of(events, "knowledge_transfer")) == 5
-    assert len(_of(events, "rumor_told")) == 22
+    assert len(_of(events, "knowledge_transfer")) == 6
+    assert len(_of(events, "rumor_told")) == 25
 
 
 # -- the persistence oracles (§12's relations) ---------------------------------

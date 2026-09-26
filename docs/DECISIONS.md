@@ -139,3 +139,42 @@ measured band; Observed none — the three moves agreed on every leg;
 Class FACT(experiment-backed); Disposition CONFIRMED (doc-only, the
 D-022 exception — the owner's fresh question; the scratch instruments
 outside the repo, the iter-262 precedent's own law).
+
+### D-240 — iter-264 · market-legs (R2)
+
+The owner's «продолжай работы по embodiment-ногам §6.5» call opened the
+iter-263 owner-gated rows; the legs landed as pure pack data (zero core,
+the campaccount precedent class). The mourns hook: the prop trigger
+loc_malby.destroyed, the wait seeding (the murmur family's site), the
+INTENT PICK = the ramble release (the keeper of the weighbeam does not
+leave the ashes — the spine's rhyme with the feud's fire; the move
+release the owner's future row at its measured iter-263 price). The
+landing's own law, measured then fixed in-iteration: a triggered hook
+stays quiet-path eligible by construction — the weight-0 ambient
+mourns leaked a spurious ramble on a standing market (the smoke
+witness) before the fix; the drama-2 OPTION layer with the same prop
+read as its availability gate is the honest trigger-only form (the
+only world where the hook releases on any path is the world where
+the trigger already fires; the hook-level trigger keeps the release
+causal, D-005). The trade verb trade_at_market: the
+spot_available/account gate stack over the same fire layer the arson
+door reads — the commerce closes with the stalls by construction;
+unarmed by doctrine (the census's UNREALIZED band until a witness
+exercises it); the runner's purse the walking stock. The council/vigil
+knowledge blocks: the public act's honest residue is knowledge (heard
+partial co-located, vague adjacent; the acquisition gate degrading the
+smoking council's partials — the world's own fidelity). The re-measured
+composition deltas exactly the iter-263 I2/I3b predictions on the
+committed forms (+1 ramble with the materialized dropped tally, +3
+rumors 22→25, +1 briefing transfer). The claim packet: Claim the §6.5
+reader legs are pure pack data with live consumers; Lens the
+changed-next-decision unit + the trigger-only boundary; Prism the
+committed census + the minimal integrated witness + the no-leak arm;
+Oracle the log scans (the transfers, the rejection's failed gate, the
+ramble's materialization, the records' holders/fidelity) + the
+projection + the byte-identical twin; Falsifier a Maren ramble before
+the burnout / a trade accepted after it / the acts carrying no
+records; Observed the smoke-witness leak (found and fixed
+in-iteration — the option gate's own birth record); Class
+FACT(experiment-backed); Disposition CONFIRMED (the render conditional
+the ONE remaining §6.5 owner-gated row).
