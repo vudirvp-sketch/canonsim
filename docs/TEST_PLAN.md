@@ -15,7 +15,7 @@
 | ID | Name | Owner test(s) | Donor technique folded in |
 |---|---|---|---|
 | T0 | schema | `tests/test_t0_schema.py` | every log line validates; the doc example is the fixture (D-010) |
-| T1 | determinism | `tests/test_t1_determinism.py` | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ fixture-regeneration guard** (iter-6): a fresh regeneration into a tmp dir diffed against the committed fixtures; a divergence with unchanged `schema_version` = fail. The committed fixture's header `schema_version` must equal the version derived from the current `schemas/event.schema.json` `$id` — a schema bump without a fixture regen fails here. |
+| T1 | determinism | `tests/test_t1_determinism.py` | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ fixture-regeneration guard** (iter-6): a fresh regeneration into a tmp dir diffed against the committed fixtures; a divergence with unchanged `schema_version` = fail. The committed fixture's header `schema_version` must equal the version derived from the current `schemas/event.schema.json` `$id` — a schema bump without a fixture regen fails here. **+ the semantic diff companion layer** (ssi-7/D-229, §1.4): the ids/types/causes/actors/targets + RNG-fingerprint comparison, interpreter/line-ending independent — the cross-environment oracle the env pin excludes; env-pinning stays the law, the layer adds, never replaces |
 | T2 | replay | `tests/test_loop.py::test_t2_fold_equals_runtime_projection` | `fold(log) == state`; the simulator's incremental projection and a fresh fold of the committed log produce equal state (EventStore projection equivalence) |
 | T3 | blind-NPC | `tests/test_knowledge.py` (+ `tests/test_blind.py` — the phase-4 extension, §1.3) | zero knowledge leaks on the suite; UAP motivation-hole crosswalk designs the cases (an NPC with no record for a fact cannot act on it; suspicion-from-absence is illegal without an `inferred`-channel record cause-chained to the trigger event); blind-1 (iter-63) extends the law to the phase-4 surfaces — mode B + retrieval outputs under the zero-leak law |
 | T4 | irreversibility | `tests/test_crime.py`, `tests/test_states.py` | `irreversible` state changes never revert without an explicit counter-event (fire has none — `location_burned_out` clamps the spot to `burned_out` and no later event reverts it; the arrest `caught` value is terminal) |
@@ -98,6 +98,48 @@ carries its own log address): composition byte-exact (the knowledge
 blocks are the document's own knower's assembly, the query line IS
 `recall_query`, the retrieval rows ARE the ladder's top-3) plus the
 leak law independently. Zero leaks measured; the suite runs ~3 s.
+
+### 1.4 T1-sem — the semantic diff layer over T1 (ssi-7/Phase 6, D-229)
+
+The ADDITIONAL verification layer over T1's env-pinned byte-identity —
+never a T1 «bug fix»: env-pinning is a documented decision (§1.1, the
+FAQ's standing pitfall), and this layer answers the question the pin
+excludes — «are these two logs the same run produced under a different
+interpreter, line ending, or commit?» The instrument:
+`scripts/semantic_diff.py LOG_A LOG_B [--fingerprint-left N
+--fingerprint-right N]` (exit 0 = semantically equal, 1 = semantic
+delta, 2 = input error — loud, never a silent skip). The pin:
+`tests/test_semantic_diff.py` (the 22-test claim packet: the
+independence arms, the mutation teeth, the fresh-run↔golden companion).
+
+What the layer compares: the header's SEMANTIC fields
+(`schema_version`/`seed`/`pack`) — a difference is a delta; the event
+stream's parsed content — the anchors id/t/type/actor/target/cause
+headline every delta, deeper fields are named by path
+(`outcome.duration: 4 != 9`), a shorter stream that matches everywhere
+it exists is reported as the append-only prefix relation; and the
+OPTIONAL run-side RngBank fingerprints (both-or-neither — the
+substantive draw count, RNG-1: two streams can carry equal events yet
+already sit at different entropy positions, the latent-divergence axis
+neither byte equality nor event equality can see). What it ignores BY
+DESIGN: the header's `python` and `commit` (environment/provenance
+meta — reported, never failing) and every parse-level difference (line
+endings CRLF/LF/CR, key order, whitespace, BOM).
+
+Independence law (§9's oracle rule): the tool imports NOTHING from
+`core/` — the log reading is re-derived with the stdlib json module
+alone, so the checker never shares the checked implementation's parser
+(§1.3's instrument law). The deep equality is kind-strict across the
+bool/number boundary (`false` != `0`) and numerically tolerant across
+int/float (`4` == `4.0`).
+
+The standing use: verify any freshly generated log against the
+committed golden from ANY interpreter — `python scripts/
+semantic_diff.py tests/fixtures/plumbing_smoke_seed42.jsonl
+<the-new-log.jsonl>` — where T1's byte-compare is meaningful only on
+the generating interpreter (§1.1). T1 itself never changes: the golden
+stays byte-compared on the env pin, the schema_version pin and the
+fixture-regeneration guard untouched.
 
 ## 2. Metrics M1–M5 (`MVP_SCOPE.md` §15 owns the definitions)
 

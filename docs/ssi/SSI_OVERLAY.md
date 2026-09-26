@@ -44,10 +44,10 @@
 | F | Testing — can the claim be falsified? | docs/TEST_PLAN.md (T0–T8 + M1–M5 + §9 the claim packets) | VERIFIED | the standing stack + the mutation-probe family (a golden byte-diff over a mutated pack copy) |
 | G | Runtime control — how is degradation bounded? | docs/WORKBENCH_APP_LAW.md (the four lifecycle machines, §12's deadlines, §25's bounded stop) | VERIFIED | the dispatch/failure matrices + the KI#95 cooperative-cancellation poll law |
 | H | Agent governance — what may the agent do and know? | AGENTS.md itself (§2 the iteration protocol, §5 the KI lifecycle, §8 stop-and-confirm, §11 authority, §12 the handoff law) | VERIFIED | the repo's own capability contract; controls/agent-capabilities.yaml stays REFERENCE — its defaults already hold here (read-only fs, no push, explicit gates on CI) |
-| I | Evolution — how do we change/remove safely? | docs/DECISIONS.md (append-only, supersede-don't-delete) + AGENTS.md §7 (git safety) + STATUS.md (the KI lifecycle) | PARTIAL | the PCC/deletion forms below arm the ssi phases; the full gc-gate fires with ssi-8 (Phase 7) |
+| I | Evolution — how do we change/remove safely? | docs/DECISIONS.md (append-only, supersede-don't-delete) + AGENTS.md §7 (git safety) + STATUS.md (the KI lifecycle) | VERIFIED | the full gc-gate FIRED with ssi-8 (D-230: the N020 sweep + the three deletion cards — the .gitkeep family deleted, sim/ RETAINED on standing authority, the KI#99 doubled tree the owner-side card); the PCC record armed for R3+ (N017) and exercised through the phase ladder |
 | J | Provenance — can the artifact be traced/reproduced? | the log header (seed/python/scheduler) + the RngBank fingerprint + AGENTS.md §12 (BASE_COMMIT delta archives, md5 + byte size on both channels) | VERIFIED | TEST_PLAN §1.1's env-pinned replay + §12.1's self-check protocol |
 | K | Operations — was every block applied or explicitly skipped? | worklog.md + docs/TASKS.md (the ledger) + STATUS.md (the stop-point report) + scripts/docguard.py | VERIFIED | the capped state layer + the guard; this overlay's own lint is the family's newest member |
-| L | Frontier — which expert mechanisms strengthen construction and proof? | the PCC record (§4) + T1's deterministic replay + the risk ladder (AGENTS §2.9) | PARTIAL | PCC armed for R3+ (N017); the semantic-diff layer rides ssi-7 (Phase 6); deterministic simulation testing = the T1/T2 replay discipline already standing |
+| L | Frontier — which expert mechanisms strengthen construction and proof? | the PCC record (§4) + T1's deterministic replay + the semantic diff layer (scripts/semantic_diff.py, TEST_PLAN §1.4) + the risk ladder (AGENTS §2.9) | VERIFIED | PCC armed for R3+ (N017); the semantic-diff layer LANDED (ssi-7/D-229: the cross-environment oracle over T1 — ids/types/causes/actors/targets + RNG fingerprints, interpreter/line-ending independent, zero core imports); deterministic simulation testing = the T1/T2 replay discipline standing |
 
 ## 2. The executable negative-rules subset (D-223 — the owner's chosen eight)
 
@@ -60,7 +60,7 @@
 | SSI-N010 | no-semantic-drift-without-delta | scripts/docguard.py | VERIFIED | none — every instrument claimed below exists on disk at HEAD |
 | SSI-N017 | proof-carrying-change | scripts/docguard.py | VERIFIED | the D-221/D-222/D-223 rows carry their PCC records — the live shape, not a vacuous gate |
 | SSI-N018 | no-architecture-health-from-snapshot | scripts/docguard.py + scripts/topology.py | VERIFIED | the FULL trajectory audit fired with ssi-3 (D-224): the map doc carries the dated co-change/trajectory evidence pinned to BASE_COMMIT, scripts/topology.py --audit regenerates it at any HEAD, --check drift-pins the mechanical columns, and the verdict table records the external numbers as CONFIRMED-numeric/REFUTED-as-live-coupling — exactly the snapshot-vs-trajectory distinction this rule exists for |
-| SSI-N020 | no-deletion-without-constraint-recovery | docs/ssi/SSI_OVERLAY.md | OPEN | the deletion card (§5) is the form; the gc-gate fires with ssi-8 (Phase 7) — apparent inactivity is never evidence |
+| SSI-N020 | no-deletion-without-constraint-recovery | docs/ssi/SSI_OVERLAY.md + docs/DECISIONS.md | VERIFIED | the gc-gate FIRED with ssi-8 (D-230): the full artifact sweep (every script/fixture/playscript/pack/doc consumer-referenced, zero tracked-ignored, zero orphans) + the three cards — the redundant .gitkeep family DELETED (git rm, recovery=git), sim/ RETAINED (consumer absence TRUE, authority absence FALSE — NAV §1's reserved row + D-037 + INV-3's scope: dissolving the reservation is the owner's call, never momentum), the KI#99 doubled tree the OWNER-SIDE card (the iter-246 fix landed, the tree regenerates); apparent inactivity was never the evidence |
 
 > The other twelve rules (N003–N005, N008, N009, N011–N016, N019) stay
 > REFERENCE-ONLY: each opens on the owner's explicit call (the same
@@ -113,7 +113,10 @@ recovery=<the rollback or reconstruction path>]
 ```
 
 Apparent inactivity is NEVER deletion evidence; INV-5's log
-immutability and DECISIONS' supersede-don't-delete stay the law.
+immutability and DECISIONS' supersede-don't-delete stay the law. The
+gate FIRED with ssi-8/D-230 — the three filled cards (the .gitkeep
+family, sim/, the KI#99 doubled tree) live in that DECISIONS row; §5
+stays the form for every future deletion.
 
 ## 6. The phase ladder (owner-gated beyond Phase 1)
 
@@ -125,8 +128,8 @@ immutability and DECISIONS' supersede-don't-delete stay the law.
 | 3 | ssi-4 | the workbench/application/inference.py → inference/ package split | CLOSED iter-247+248+249 | the ssi-3 ownership map + the LAW's §2 semantic owners (the split by owners, never an external template; the public import surface + the gateway ops + the claim packet byte-stable; 2511 → 10 owner modules + the 176-line pure re-export facade, D-225/D-226/D-227 the PCC records) |
 | 4 | ssi-5 | the core strangler (loop/director/worldgen/intent) | owner-gated | co-change evidence from ssi-3 + the public-interface freeze (director.next_beat(...) et al. byte-stable; each step an R2/R3 iteration with its PCC record) |
 | 5 | ssi-6 | the canonical read seam (core ↔ workbench read-side) | CLOSED iter-250 | INV-4's sanctioned-module pattern LANDED (D-228, the owner's «продолжай работу» go-ahead over the confirmed Phase 3 closure): `workbench/canonical_read.py` the ONE workbench core-import module — a pure re-export shell over the 10-name read surface; the map's three consumers (scene_build/observatory_read/scene_ir) migrated at zero behavior change; the law executable twice over (test_architecture's import ban + the seam's watchlist reads pin) |
-| 6 | ssi-7 | the semantic diff layer over T1 | owner-gated | event ids/types/causes/actors/targets/RNG-fingerprint comparison — interpreter/line-ending independent; an ADDITIONAL layer, never a T1 «bug fix» (env-pinning is a documented decision, TEST_PLAN §1.1) |
-| 7 | ssi-8 | the GC pass over stale artifacts | owner-gated | the deletion card (§5) per artifact; KI#99's doubled workbench/workbench/runtime/ tree is a candidate |
+| 6 | ssi-7 | the semantic diff layer over T1 | CLOSED iter-251 | the layer LANDED (D-229, the owner's 2026-09-26 «ssi7 и/или ssi8 ==> можешь начать» go-ahead): scripts/semantic_diff.py the instrument (pure stdlib, ZERO core imports — the independent-re-derivation oracle, TEST_PLAN §1.4 the law owner) + tests/test_semantic_diff.py the 22-test claim packet (the independence arms GREEN — CRLF/interpreter/commit ignored BY DESIGN and named in the report; the mutation teeth RED — every anchor id/t/type/actor/target/cause, deep field paths, the bool/number kind boundary, the append-only prefix relation, the RNG-fingerprint latent-divergence axis both-or-neither); the fresh-run↔golden companion arm proves run↔golden equality at the semantic level in ANY environment; env-pinning stays the law (§1.1 untouched — the layer adds, never replaces) |
+| 7 | ssi-8 | the GC pass over stale artifacts | CLOSED iter-252 | the gc-gate FIRED (D-230, the same owner's go-ahead): the N020 sweep over every artifact class (the honest negative — no dead committed artifact beyond the marker family) + the three deletion cards: the redundant .gitkeep family in NON-empty dirs DELETED (7 × 0 bytes, git rm; sim/systems/.gitkeep retained — the reserved skeleton's only content), sim/ RETAINED (zero imports since birth BUT the NAV §1 reserved row + D-037's reservation + INV-3's stoplist scope stand — consumer absence alone is never deletion evidence), the KI#99 doubled workbench/workbench/runtime/ tree the owner-side cleanup card (the iter-246 root fix landed; the tree regenerates; the repo carries zero change) |
 
 > Phases 2–7 each open on the owner's separate explicit call, after
 > the previous phase closed and the owner confirmed the result. The

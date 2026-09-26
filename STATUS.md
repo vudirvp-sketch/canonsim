@@ -1,51 +1,54 @@
-Iteration: iter-250 (the `ssi` track, ssi-6/Phase 5 — the
-  owner's 2026-09-26 «ssi-4/Phase 3 полностью закрыта ==>
-  продолжай работу» call): PHASE 5 CLOSED — the canonical read
-  seam LANDED: workbench/canonical_read.py the ONE workbench
-  core-import module (a pure re-export shell over the 10-name
-  canonical read surface — log read_log/validate_header/
-  EventRecord/LogError, fold fold/initial_projection/
-  present_in_order, pack load_pack/PackError, rng stable_hash;
-  __all__ the pinned surface); the map's three read-side consumers
-  (scene_build, observatory_read, scene_ir) migrated at ZERO
-  behavior change — import re-points + docstring syncs only, every
-  public surface byte-stable, the claim packets untouched. The law
-  executable twice over: test_architecture (h) (the core-import
-  ban outside the seam across workbench/ — INV-4's sanctioned-
-  module idiom at the core-read boundary) + the seam's watchlist
-  row (its reads cell — the sanctioned surface — hard-pinned by
-  topology --check: the surface grows only with a same-iteration
-  map update); the drift pin RED on the missing inventory row →
-  GREEN in-iteration (the designed loudness). ssi-5/Phase 4
-  explicitly NOT opened on this call — the N018 evidence gate
-  unmet (the audit-refuted live coupling stands; that phase needs
-  the owner's fresh co-change evidence or the explicit skip,
-  never momentum). D-228 carries the (R3) PCC record; the overlay's
-  phase row → CLOSED.
+Iteration: iter-252 (the `ssi` track, ssi-8/Phase 7 — the
+  owner's 2026-09-26 «ssi7 и/или ssi8 ==> можешь начать» call, both
+  tail phases on the one go-ahead; the same session closed
+  iter-251/ssi-7/Phase 6 first): PHASE 6 CLOSED at iter-251 — the
+  semantic diff layer over T1 (scripts/semantic_diff.py the
+  pure-stdlib ZERO-core-import instrument — the independent-re-derivation
+  oracle; tests/test_semantic_diff.py the 22-test claim packet;
+  TEST_PLAN §1.4 the law owner; env-pinning stays §1.1's documented
+  decision — the layer ADDS the cross-environment oracle, never
+  replaces T1; D-229 (R3) the PCC record) · PHASE 7 CLOSED at
+  iter-252 — the GC pass FIRED: the N020 sweep over every artifact
+  class (the 19 scripts, the fixtures, the playscripts, the packs,
+  the docs incl. every subdir — every file consumer-referenced; zero
+  tracked-ignored; zero orphans — the honest negative: no dead
+  committed artifact beyond the marker family) + the three deletion
+  cards (D-230): the redundant .gitkeep family in NON-empty dirs
+  DELETED (7 × 0 bytes; sim/systems/.gitkeep retained — the reserved
+  skeleton's only content), sim/ RETAINED (zero imports since birth
+  BUT NAV §1's reserved row + D-037's reservation + INV-3's stoplist
+  scope stand — consumer absence alone is never deletion evidence;
+  dissolving the reservation is the owner's explicit call), the
+  KI#99 doubled workbench/workbench/runtime/ tree the OWNER-SIDE
+  cleanup card (the iter-246 root fix landed; the tree regenerates;
+  the repo carries zero change); the overlay: block L VERIFIED, N020
+  VERIFIED, block I VERIFIED — the ssi ladder COMPLETE except ssi-5
+  (owner-gated, may never open).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 the ladder complete 0..6 — the standing work: the owner-gated backlog
-(Phase 5 of the ssi initiative now CLOSED; the tail the owner's
-call — see Next step) + the world track + the SoW horizon, ROADMAP
-§2/§6) ·
-2362 passed + 9 skipped, ruff clean, docguard clean, topology --check
+(the ssi initiative's Phases 6+7 now CLOSED at iter-251/252; ssi-5
+the only remaining row, owner-gated — may never open) + the world
+track + the SoW horizon, ROADMAP §2/§6) ·
+2384 passed + 9 skipped, ruff clean, docguard clean, topology --check
 clean (Python 3.12.14, the env pin; the REDOT_EXE-gated visual packets
 not run this session — no engine binary in the sandbox; the .gd layer
 untouched since iter-246, the D-093 skips unaffected) ·
 Date: 2026-09-26 ·
-Scope: workbench/canonical_read.py (new — the seam) +
-workbench/{scene_build.py, observatory_read.py, scene_ir.py} (the
-import re-points onto the seam) + tests/test_architecture.py (the
-(h) seam law) + scripts/topology.py (the WATCHLIST sync) +
-docs/{SSI_TOPOLOGY.md (the map refresh + the watchlist row),
-WORKBENCH_APP_LAW.md (§24 the one-seam edge), ssi/SSI_OVERLAY.md
-(phase 5 CLOSED), DECISIONS.md (D-228), TASKS.md (ssi-6 DONE + the
-ledger, iter-239 evicted)} + STATUS.md (KI#99 deleted per the
-2-iteration law) + worklog.md (iter-240 evicted) — 13 paths; zero
-behavior change, zero core change (no core/ file edited), the LOG
-untouched.
-Track A: the ssi family the head (Phase 5 CLOSED at iter-250;
-ssi-5 evidence-gated — may never open, ssi-7/8 owner-gated — the
-ladder's tail); the inf family behind (iter-240 the full chip
+Scope: scripts/semantic_diff.py (new — the Phase 6 instrument, pure
+stdlib, zero core imports) + tests/test_semantic_diff.py (new — the
+22-test claim packet) + the 7 redundant .gitkeep markers DELETED
+(core/, brief/, cli/, render/, tests/, tests/playscripts/,
+content/tavern_pack/ — git rm; sim/systems/.gitkeep retained) +
+docs/{TEST_PLAN.md (§1.4 + the T1 row pointer), ssi/SSI_OVERLAY.md
+(blocks L/I VERIFIED, N020 VERIFIED, phases 6+7 CLOSED), DECISIONS.md
+(D-229/D-230 into the compound row), AGENT_NAVIGATION.md (the scripts
+row + the §3 routing row), TASKS.md (ssi-7/ssi-8 DONE + the ledger)}
++ STATUS.md + worklog.md — 13 paths (the two-phase session); zero
+behavior change, zero core change (no core/ file imported or edited),
+the LOG untouched.
+Track A: the ssi family COMPLETE except ssi-5 (Phases 0,1,2,3,5,6,7
+CLOSED at iter-241..252; ssi-5 owner-gated — may never open, its
+evidence gate unmet); the inf family behind (iter-240 the full chip
 library); the obs family behind (iter-236 obs-2, 235 obs-1, 234
 ux-1); the wb family behind: iter-237 the corpus re-homing. The
 detail lives in the worklog + git.
@@ -93,7 +96,7 @@ cleanup law)
 - **Hardcoded `from_` is a desync (KI#13/KI#46): repeat effects idempotent; the carried-item position contract single-owned by `movement_changes`; the `_commit` gate fails loud before the write (D-035)** — `core/resolvers.py`.
 - **INV-3's stoplist: no setting nouns in the ENGINE (`core/`+`sim/`+`brief/`, segment-matched, pack-tied word list); `render/`/`cli/`/`scripts/` are periphery (D-046)** — the stoplist test owns enforcement.
 - **Malformed playscript steps raise RunnerError; well-formed but world-impossible intents emit `intent_rejected` (attempts are facts); urgency rejections stay silent** — PARSER_SPEC §4/§6.
-- **Env-pinned verification cuts both ways: the golden T1 fixture byte-compares only on the generating interpreter (TEST_PLAN §1.1, §3 the migration); and PIPE-READING subprocess tests never lean on the host's PYTHONUNBUFFERED — the sandbox exports it, CI/owner machines do not (KI#93: three green-local/red-CI iterations) — the chain owns its buffering (`-u` child, line-buffered supervisor, the env-stripping spawn)** — tests/test_workbench_launch.py + TEST_PLAN §1.1
+- **Env-pinned verification cuts both ways: the golden T1 fixture byte-compares only on the generating interpreter (TEST_PLAN §1.1, §3 the migration — the cross-interpreter half now answered by the semantic companion layer: ssi-7/D-229 `scripts/semantic_diff.py`, any log vs the golden semantically, TEST_PLAN §1.4); and PIPE-READING subprocess tests never lean on the host's PYTHONUNBUFFERED — the sandbox exports it, CI/owner machines do not (KI#93: three green-local/red-CI iterations) — the chain owns its buffering (`-u` child, line-buffered supervisor, the env-stripping spawn)** — tests/test_workbench_launch.py + TEST_PLAN §1.1/§1.4
 - **Doc drift is evidence, not prescription — verify with `git log -S` AND the pinning test before acting (KI#42/48/51/80); bootstrap texts are convenience copies, never a second source** — D-024/D-027.
 - **The code-quality bar: AGENTS §4/§9 the law, BLUEPRINT §2 (L13/L14) the constitution, test_architecture + the stoplist test the executable; no new canonical layers (D-018)** — D-031.
 - **Procedural guards: git hygiene (verify `.gitignore` after any upload; a file DELETION needs an explicit `git rm` or it never lands (KI#55); `git status --short` before every commit — AGENTS §7) + scope-creep (content/tone → D-030 + PACK_SPEC's sketch row; two consecutive doc-only iterations stop unless a fresh owner request fires (D-022) — AGENTS §2)**
@@ -108,34 +111,39 @@ cleanup law)
 
 ## Next step
 
-**iter-250 DONE: ssi-6/Phase 5 CLOSED — the canonical read seam
+**iter-252 DONE: ssi-8/Phase 7 CLOSED — the GC pass (the N020 sweep
+over every artifact class clean — the honest negative; the three
+deletion cards: the redundant .gitkeep family DELETED, sim/ RETAINED
+on standing authority — consumer absence alone is never deletion
+evidence, the KI#99 doubled workbench/workbench/runtime/ tree the
+owner-side cleanup card; N020 + block I VERIFIED; D-230). Preceded
+in the same session by iter-251/ssi-7/Phase 6 CLOSED — the semantic
+diff layer over T1 (scripts/semantic_diff.py the pure-stdlib
+zero-core-import instrument + tests/test_semantic_diff.py the 22-test
+claim packet; TEST_PLAN §1.4 the law; env-pinning stays §1.1's
+documented decision — the layer adds, never replaces; D-229 (R3)
+PCC). 2384+9 + ruff + docguard + topology --check clean. The ssi
+ladder COMPLETE except ssi-5 (owner-gated, may never open).**
+iter-250 DONE: ssi-6/Phase 5 CLOSED — the canonical read seam
 (workbench/canonical_read.py the ONE workbench core-import module;
-the three consumers migrated at zero behavior change; the law
-executable twice: test_architecture's import ban + the seam's
-watchlist reads pin). D-228 the (R3) PCC record. 2362+9 + ruff +
-docguard + topology --check clean. ssi-5 explicitly NOT opened
-(N018: the evidence gate unmet).**
+the three consumers migrated at zero behavior change; D-228).
 iter-249 DONE: ssi-4/Phase 3 CLOSED (the inference split:
 2511 → 10 owner modules + the facade; D-225/D-226/D-227).
 iter-241..248 DONE: the ssi foundation + Phase 2 + KI#99
 (D-221..D-227).
 
-1. The ssi family — the remaining tail (each row on the owner's
-   separate explicit call, the phase law: docs/ssi/SSI_OVERLAY.md
-   §6; the evidence base: docs/SSI_TOPOLOGY.md), what each needs:
+1. The ssi family — the ladder is COMPLETE except one row (the
+   phase law: docs/ssi/SSI_OVERLAY.md §6):
    - **ssi-5 (Phase 4, the core strangler)** — stays CLOSED unless
      the owner names a real pain: it opens ONLY on fresh
      material_gap (co-change/trajectory evidence at a named pain in
      core/), never a line-count snapshot (N018); the explicit skip
      is the other door — the phase may never open. What it needs
      from the owner: the fresh evidence OR the explicit skip.
-   - **ssi-7 (Phase 6, the semantic diff layer over T1)** — an
-     ADDITIONAL verification layer (event ids/types/causes/actors/
-     targets/RNG-fingerprint comparison, interpreter/line-ending
-     independent), never a T1 «bug fix». What it needs from the
-     owner: the go-ahead call.
-   - **ssi-8 (Phase 7, the GC pass)** — the deletion-card sweep
-     (N020). What it needs from the owner: the go-ahead call.
+   - The owner-side cleanup standing from D-230's third card: delete
+     the doubled `workbench/workbench/runtime/` tree locally (safe —
+     the iter-246 root fix landed; the tree regenerates on demand;
+     the repo itself carries zero change for it).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
