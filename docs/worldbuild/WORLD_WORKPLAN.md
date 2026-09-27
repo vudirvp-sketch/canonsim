@@ -521,6 +521,31 @@ Use the same region and pressure network to test:
 A failed genre test should identify the missing world substrate rather than
 trigger immediate plot writing.
 
+The station's FIRST ROW landed (iter-278, the owner's «открывай задачу
+по W6» call): the matrix's SUBSTRATE-SIDE measured at the deterministic
+band on the SAME committed package (zero core, zero pack change, zero
+corpus price) — adventure (the tally journey's four legs: the departure,
+the night risk, the objective, the changed return — plus the hard-risk
+arm, the closed artery refusing the journey outright, the fork's two
+returns diverging), mystery (the registered secret never volunteered:
+the silent world measured; the revelation IS the door — the fork's
+coerce landing only through the discovery), politics (the same fire
+pressure tipping the guild, the garrison and — only when both elders
+wake — the families, at the arms' pinned seeds; plus the squeeze: the
+terms 16→18→20, public, persisting). The four carried genres cite
+their W5 evidence (biography iter-191; comedy/tragedy iter-194/206/
+208/209/270; relationship drama the winter-kin line) — the census pins
+their committed surfaces. The honest boundaries named, never routed:
+the hard-risk arm rides the authored edge closure (the I0 inventory's
+route-writer candidate — SUBSTRATE_GAP, awaiting repetition); the
+mystery's band is one fact / one path / one revelation; the player's
+own re-pricing power stays iter-271's recorded residue; the READING
+band (the W5 human/LLM form) owner-routed. The full record:
+`WORLD_TESTS.md` §9's W6 entry; the witness `tests/test_genre.py`; the
+owner's RU report `docs/iterations/iter-278-genre-report.md`. The
+station's next rows, owner-routed: the reading band (the W5 human/LLM
+form) and/or W7 (negative / compression tests).
+
 ## 9. W7 — Negative / compression tests
 
 For any new major capability, regime or institution:

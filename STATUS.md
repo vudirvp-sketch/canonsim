@@ -1,40 +1,44 @@
-Iteration: iter-277 (`worldcontext` — the owner's world-track
-  archive-ingestion call: the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip
-  fully ingested and reconciled into the repo's persistent agent-facing
-  documentation, never merely summarized): every pack claim classified
-  against HEAD (the pack pins iter-272 — four iterations behind), the
-  durable compact surface created
-  (docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md), the pack preserved
-  verbatim as historical/bootstrap evidence
-  (docs/worldbuild/archive/), the W-boundary recorded (W1–W4 closed
-  historical foundation, W5 gate met / evidence retained, W6 the
-  current execution stage, W7 after W6, W8 after W7); KI#106 found
-  and closed (the TASKS ledger's duplicated iter-276/275 rows); the
-  owner's RU report at docs/iterations/iter-277-worldcontext-report.md
+Iteration: iter-278 (`genre` — the owner's «открывай задачу по W6»
+  call: the W6 genre matrix's FIRST ROW, the station's law held — a
+  failed genre test identifies the missing world substrate, never
+  triggers plot writing; no test failed at its named band): the
+  matrix run on the SAME canonical package at the deterministic
+  band — the committed province_pack untouched, zero core, zero pack
+  change, the LOG untouched, zero corpus price; ADVENTURE measured
+  (the tally journey's four legs + the hard-risk arm: the closed
+  artery refusing the journey, the fork's two returns diverging),
+  MYSTERY measured (the registered secret never volunteered — the
+  silent world; the revelation IS the door — the fork's corner
+  landing only through the discovery), POLITICS measured (the same
+  fire pressure tipping the guild / the garrison / the families at
+  the pinned seeds + the squeeze moving the standing terms public,
+  persisting); the four carried genres cite their W5 evidence, the
+  census pins all seven genres' committed surfaces; the honest
+  boundaries classified (the authored edge closure — SUBSTRATE_GAP,
+  the I0 inventory's candidate; the mystery's band; the player's
+  re-pricing power — iter-271's residue; the reading band
+  owner-routed); the witness tests/test_genre.py (10 tests); the
+  owner's RU report at docs/iterations/iter-278-genre-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2520 passed + 9 skipped, ruff clean, docguard clean, topology
+2530 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-28 ·
-Scope: docs/{worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (new, the
-  durable compact surface), worldbuild/archive/README.md (new, the
-  provenance fence) + archive/WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip
-  (new, the preserved pack, md5-pinned), worldbuild/README.md (the
-  read order + the ownership row + the archive fence),
-  AGENT_NAVIGATION.md (§1 the 11-file worldbuild row),
-  blueprint/phases.md (§6 the iter-277 record), TASKS.md (the ledger,
-  the duplicates collapsed per KI#106), DECISIONS.md (D-242),
-  iterations/iter-277-worldcontext-report.md (new, the owner's RU
-  deliverable)}, STATUS.md, worklog.md — 11 paths (R0, doc-only —
-  the ingestion task inherently spans the new surface + its syncs;
-  zero code, zero pack, zero canon change, the LOG untouched, zero
-  corpus price)
-Track A: the world-track bootstrap pack INGESTED and RECONCILED —
-  the durable agent context stands on its own (a future agent never
-  needs the zip re-uploaded); the order continues: W6 genre under the
-  resulting evidence (the owner's call — a new station). The ssi family
-  COMPLETE except ssi-5, owner-gated.
+Scope: tests/test_genre.py (new, the W6 witness — 10 tests, the
+  claim packet), docs/{worldbuild/WORLD_TESTS.md (§9 the W6 record),
+  worldbuild/WORLD_WORKPLAN.md (§8 the first row + the next rows
+  owner-routed), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the
+  stage's standing state), blueprint/phases.md (§6 the iter-278
+  record), TASKS.md (the ledger), iterations/iter-278-genre-report.md
+  (new, the owner's RU deliverable)}, STATUS.md, worklog.md — 9 paths
+  (R2 — the crafted runs + the docs; zero core, zero pack, zero canon
+  change, the LOG untouched, zero corpus price)
+Track A: W6 OPENED — the genre matrix's substrate-side measured
+  (adventure / mystery / politics confirmed at the deterministic
+  band; the four carried genres cited); the station's next rows
+  owner-routed (the reading band — the W5 human/LLM form — and/or
+  W7). The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -96,20 +100,36 @@ Track A: the world-track bootstrap pack INGESTED and RECONCILED —
 
 ## Next step
 
-**iter-277 DONE: the world-track archive ingestion (the owner's call:
+**iter-278 DONE: the W6 genre matrix's first row (the owner's
+  «открывай задачу по W6» call — the station's law held: a failed
+  genre test identifies the missing world substrate, never triggers
+  plot writing; no test failed at its named band): the matrix's
+  substrate-side measured at the deterministic band on the SAME
+  committed package — adventure / mystery / politics CONFIRMED at
+  their named bands, the four carried genres cited (biography,
+  comedy, tragedy, relationship drama — the W5 evidence), the census
+  pinning all seven genres' surfaces; the honest boundaries
+  classified (the authored edge closure — the I0 inventory's
+  route-writer candidate, SUBSTRATE_GAP awaiting repetition; the
+  mystery's one-fact/one-path/one-revelation band; the player's
+  re-pricing power — iter-271's residue; the READING band
+  owner-routed).**
+  2530+9. The owner's RU report:
+  docs/iterations/iter-278-genre-report.md.
+Next: the W6 station's next rows, owner-routed — the reading band
+(the genres as lived readings over delivered packages, the W5
+human/LLM form) and/or W7 (negative / compression tests).
+Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
+iter-277 DONE: the world-track archive ingestion (the owner's call:
   the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip fully ingested
   and reconciled, the durable agent context created, the pack
   preserved as historical/bootstrap evidence — a future agent never
   needs the zip re-uploaded; KI#106 found and closed; the W-boundary
   recorded: W1–W4 closed historical foundation, W5 gate met /
   evidence retained, W6 the current execution stage, W7 after W6,
-  W8 after W7).**
+  W8 after W7).
   2520+9. The owner's RU report:
   docs/iterations/iter-277-worldcontext-report.md.
-Next: W6 genre under the resulting evidence (the owner's call — a
-  new station; a failed genre test identifies the missing world
-  substrate, never triggers plot writing).
-Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
 iter-276 DONE: the I0 World Ignition Witness (the five-leg chain
   measured on existing primitives over the perturbed keep-Malby
   edge; the four timelines diverging never synchronized; the verdict

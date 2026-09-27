@@ -4570,6 +4570,55 @@ reconciled, never merely summarized):**
   The owner's RU report:
   `docs/iterations/iter-277-worldcontext-report.md`.
 
+**The iter-278 genre record (R2 — the W6 genre matrix's first row,
+the owner's «открывай задачу по W6» call: the station's law — a
+failed genre test identifies the missing world substrate, never
+triggers plot writing):**
+
+- **The form.** The genre matrix run on the SAME canonical package
+  at the deterministic band: the committed province_pack untouched,
+  zero core, zero pack change, the LOG untouched, zero corpus price.
+  The witness `tests/test_genre.py` (10 tests) — the claim packet in
+  its docstring; the mechanics owned by test_tallyread (iter-185),
+  test_triangle (iter-135) and test_repricing (iter-271), cited and
+  read under the genre's lens, never re-derived.
+- **The measurement.** ADVENTURE (departure → realizable risk →
+  objective → changed return): the tally journey's four legs
+  measured (seed 42) — the word exact, the lever at the read's own
+  commit, the corner's pair (trust 25 / fear 75), home with three
+  residues; the HARD risk — the riverroad-keep edge closed (the
+  divergence-probe form, the I0 twin's shape): the world refuses the
+  journey outright (three rejections as facts, nothing minted), the
+  fork's two returns diverging materially. MYSTERY (hidden fact →
+  bounded path → revelation changing future options): the silent
+  world measured (a full morning at the stacks, zero the_camps_word
+  records, the corner refused at the lever gate — the door IS the
+  leverage test); the revelation's causal weight as the fork (the
+  corner lands only through the discovery). POLITICS (competing
+  interests → differential response → the balance-moving move): the
+  triangle's committed arms at their pinned seeds (53/139/2) — the
+  same fire pressure tipping the guild, the garrison and (both elders
+  woken, the deadband) the families; the squeeze on the committed
+  package — the terms 16→18→20, public exact, persisting, the coin
+  untouched. The four carried genres cite their W5 evidence; the
+  census pins all seven genres' committed surfaces (the heartbreak
+  rows rs-7/rs-8, the answer-frame rs-6 on the dated chain rs-10,
+  the winter-kin doors, the account-chain doors).
+- **The honest boundaries.** (a) the hard-risk arm rides the
+  AUTHORED edge closure — no runtime route writer (the I0
+  inventory's standing candidate, SUBSTRATE_GAP named, awaiting
+  repetition); (b) the mystery's band: one fact / one path / one
+  revelation (the full genre shape beyond the band, named, not
+  owed); (c) the player's re-pricing power — iter-271's own recorded
+  residue; (d) the READING band (the W5 human/LLM form)
+  owner-routed. No plot written, no machinery promoted.
+- **The sync.** WORLD_TESTS §9 (the W6 entry), WORLD_WORKPLAN §8
+  (the first row + the station's next rows owner-routed),
+  WORLD_TRACK_AGENT_CONTEXT §9 (the stage's standing state), TASKS
+  (the ledger), STATUS, worklog. 2530+9 + ruff + docguard +
+  topology --check clean. The owner's RU report:
+  `docs/iterations/iter-278-genre-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

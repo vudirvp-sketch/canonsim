@@ -2009,6 +2009,83 @@ until a consumer names itself). The witness:
 `tests/test_ignition.py` (7 tests); the owner's RU report:
 `docs/iterations/iter-276-ignition-report.md`.
 
+### CONFIRMED — The W6 genre matrix's substrate-side: adventure, mystery and politics measured on the same canonical package (2026-09-28, iter-278, the owner's «открывай задачу по W6» call — the station's first row)
+
+The W6 hypothesis (the same canonical package supports materially
+different valid readings) measured at its DETERMINISTIC band — the
+committed province_pack untouched, zero core, zero pack change, zero
+corpus price. THREE genres were untested and are measured
+(`tests/test_genre.py`, 10 tests); FOUR carry their W5 evidence
+(biography clean iter-191; comedy and tragedy carried at the live
+band iter-194/206/208/209/270; relationship drama the winter-kin
+line iter-165/203–206/270 — the census pins their committed
+surfaces: the heartbreak pair's rows rs-7/rs-8, the withhold's
+answer-frame rs-6 on the dated chain rs-10, the winter-kin doors and
+secret, the account-chain doors).
+
+**ADVENTURE** — `departure → risk that can realize → objective →
+changed return`: the tally journey (the iter-185 chain's own
+material under the genre's lens; seed 42): the runner departs the
+riverroad, lands at night at the unlit crofts (the risk's soft form
+— the iter-185 night-step law cited, never re-measured), waits out
+the dark, reads the word EXACT (the objective — the lever minted at
+the read's own commit), corners the master (the pair moved
+break-fast: trust 25, fear 75), returns home with the word, the
+lever and the changed relation. The HARD risk: the riverroad-keep
+edge closed (the divergence-probe form, the I0 twin's own shape):
+the world refuses the journey outright — the move refused at the
+adjacency gate, the read and the corner at the geography gate, three
+attempts as facts, nothing minted, the pair untouched — and the
+fork's two returns diverge materially (the changed return EARNED
+against the world's shape, never granted).
+
+**MYSTERY** — `hidden fact → bounded discovery path → revelation
+that changes future options`: the shave is a registered secret
+(the_camps_word over the master, debt-type, the weighing season's
+window); THE SILENT WORLD measured (the full morning at the stacks,
+the deliberate read withheld: zero the_camps_word records anywhere,
+zero levers, the corner refused at the lever gate itself — the door
+IS the leverage test, the world never volunteers the secret); THE
+REVELATION'S CAUSAL WEIGHT measured as the fork (the same morning,
+the same stacks, the discovery the only difference: with the read
+the corner lands and the relation moves; without it the door refuses
+— the knowledge is not prose, it is the difference between a moved
+relation and a dead door). The discovery path's gates owned by
+iter-185's witness (the field_in pin, the co-location gate — cited).
+
+**POLITICS** — `competing interests over one pressure →
+differential institutional response → a move that changes the
+standing balance with public residue`: the triangle's committed arms
+at their pinned seeds (the feud script 53, the keep road 139, the
+both-fires road 2 — never shopped): the SAME pressure family (the
+fire's fear) tips the GUILD on the market road (one council, the
+public row the_guild_bars_the_stalls), the GARRISON on the keep road
+(one patrol, no council — the crown's slower answer), and only BOTH
+fires wake the FAMILIES (each single fire wakes exactly one elder —
+the deadband: the old blood moves together or not at all; two
+vigils, the blood price spoken aloud). The BALANCE-MOVING MOVE: the
+guild's squeeze (iter-271's door) re-priced twice on the COMMITTED
+package — the paper 16→18→20, the beam's own people learning
+the_paper_repriced exact, the coin untouched by the squeeze itself,
+the terms persisting at the run's end. The mechanics owned by
+test_triangle (iter-135) and test_repricing (iter-271) — cited, read
+here under the genre's lens.
+
+The honest boundaries, classified per the station's vocabulary: (a)
+the adventure's hard-risk arm rides an AUTHORED edge closure — no
+runtime route writer (the I0 inventory's standing candidate,
+SUBSTRATE_GAP named, awaiting repetition, never routed here); (b)
+the mystery's measured band is ONE hidden fact, ONE bounded path,
+ONE state-changing revelation — the full genre shape (many clues,
+red herrings, the inference chain) beyond the band, named, not owed;
+(c) the politics' player-side agency over the terms is iter-271's
+own recorded residue (the runner's re-pricing power a future row's
+own call); (d) the READING band (the W5 human/LLM form — the
+genres as lived readings, not causal preconditions) owner-routed,
+never claimed here. No plot written, no machinery promoted, no pack
+change. The witness: `tests/test_genre.py` (10 tests); the owner's
+RU report: `docs/iterations/iter-278-genre-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

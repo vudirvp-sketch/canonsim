@@ -300,6 +300,13 @@ failure by the §6 vocabulary before any response. Do not restart a
 closed stage unless fresh evidence demonstrates a regression. W6 is a
 new station — entered on the owner's explicit call.
 
+W6's first row landed (iter-278): the matrix's SUBSTRATE-SIDE
+measured at the deterministic band — adventure, mystery and politics
+measured over the same committed package (the four carried genres
+cite their W5 evidence; the census pins all seven genres' surfaces);
+the reading band (the W5 human/LLM form) and W7 remain owner-routed
+rows. The record: `WORLD_TESTS.md` §9's W6 entry.
+
 ## 10. Navigation (the authoritative owners)
 
 | Question | Read first |
