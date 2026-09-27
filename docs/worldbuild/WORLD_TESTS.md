@@ -1448,6 +1448,61 @@ row reads both surfaces together). The station's standing order after
 the landing: the live band's return + the heartbreak recheck → the
 embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2) → W6.
 
+The live band's RETURN and the heartbreak RECHECK LANDED (iter-269,
+the standing order's third row — «живая полоса не отделяется от
+только что внесённых изменений», the W5 disposition's own parenthetical:
+the human band reading both just-landed surfaces together, never
+separated from them): the reading kit re-established and DELIVERED —
+the two packages regenerated deterministically at seed 42 over the
+CURRENT committed pack (the runner + the kit + the transcripts outside
+the repo, Rule 9 — the iter-207/268 reconstruction precedent's own
+class), the re-weigh package now carrying BOTH just-landed surfaces
+(rs-9's hold line and rs-10's dated withhold line riding the tale, the
+entity views, and the state appositions) with EVERY recorded substance
+shape hit exactly (the night-arm read t=1112 partial, the fall t=2824,
+the collection t=2826, seven crossings, the close paper 0 / coin 8 /
+fatigue 98, the heap 18, the runner among the fall's witnesses, the
+tale 90 lines — the iter-268 reconstruction's own honest count vs the
+recorded 87/88; byte-identical on regeneration, the instrument's law)
+and the heartbreak package byte-stable against the recorded form (43
+events, the tale 24 lines, the fail-then-pass reads, rs-7/8's lines,
+the dry holds — the_winter_kin unglossed, the leverage lines unchanged
+through rs-9's boundary extension: the unglossed path renders the dry
+line, the foreign log's included); the briefs' cut points (the crisis /
+the actor's crisis / the close) reconstructed to the natural mirror of
+the recorded form — the honest note, the original wording died with its
+session (Rule 9). The pre-set author audit written BEFORE any reading
+(the isolation law, a separate kit artifact): the station bars + the
+TWO NEW ROWS' bars — rs-9's causal row (the hold's line read as
+standing → the remembered incident → the why — the iter-208 human
+datum it answers) and rs-10's dated chain (the shave placed before the
+tale's events, the winter between, the withhold the present
+consequence). The HEARTBREAK RECHECK — the glm blind reading n=2
+independent over the heartbreak package (the free-answer question, no
+bars shown): the opened half 2/2 (the crossing's table open to the
+claimant's line, quoted by both readings), the lost-future half 1/2
+(reading 1 carrying the rs-8 clause's own semantics — "their lost
+futures and the duties that were to have been theirs"; reading 2 in
+the iter-204 remembered-dead mode — the drowned as "guests who had
+wintered there and were lost in the flood") — the strict n=2 pair NOT
+met; the divergence's class UNRESOLVED between the reader-class
+variance (glm's free-answer sampling flipping a half across sessions)
+and the reconstructed question form (the original outside the repo,
+Rule 9 — the iter-208 honest note's own family: the free-answer form
+cannot distinguish not-extracted from not-probed); a surface
+regression EXCLUDED (the package byte-stable, every recorded shape
+hit); the iter-206 n=2 convergent MET and the iter-208 n=1 human MET
+records STAND — this recheck does not erase them; no fix attempted
+(NEVER "improve the prose"; the same measurement re-run until it
+passes is probe-shopping — the anti-loop law). The kit's owner reading
+the next beat: the live band's fresh n=1 over the same packages (the
+blind answers in the chat, the convergence assessment against the
+pre-set bars — where the owner's reading carries the pair, the
+divergence was the LLM band's own variance; where it misses, the
+owner's call). The station's standing order after the landing: the
+owner's live reading of the delivered kit → the embodiment fill-list
+(§6.4 → §6.1 → §6.5 → §6.2) → W6.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

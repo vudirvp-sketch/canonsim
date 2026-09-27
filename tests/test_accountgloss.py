@@ -131,11 +131,15 @@ PAPER_GLOSS = (
 )
 #: The bloom kind's committed gloss (rs-3, iter-194 — the withhold's
 #: meaning; rs-5, iter-201 — the same row re-authored to carry the
-#: shave's AGENCY, the spine's own words: pinned the same law, a
-#: re-wording is a deliberate act).
+#: shave's AGENCY, the spine's own words; rs-10, iter-268 — the same
+#: row re-authored again to carry the DATED MEMORY: the shave "two
+#: seasons back", the starved winter between, the withhold's own
+#: ledger the tail the reckoning phrase attaches to: pinned the same
+#: law, a re-wording is a deliberate act).
 BLOOM_GLOSS = (
     "bloom kept off the weighbeam since the guild factor shaved"
-    " the camp's weight"
+    " the camp's weight two seasons back and the camp starved that"
+    " winter — the withhold's own ledger"
 )
 
 

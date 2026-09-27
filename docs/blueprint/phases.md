@@ -4189,6 +4189,56 @@ surface LANDED, the W5 disposition's ADD TEMPORAL SURFACE row):**
   RU report:
   `docs/iterations/iter-268-shave-temporal-surface-report.md`.
 
+**The iter-269 livereturn record (R0 — the standing order's third row
+LANDED, the W5 disposition's LIVE RETURN / HEARTBREAK RECHECK):**
+
+- **The instrument (the kit re-established and delivered).** The two
+  packages regenerated deterministically at seed 42 over the CURRENT
+  committed pack (the runner + the kit + the transcripts outside the
+  repo, Rule 9): the re-weigh package (the sparse twin, the runner's
+  chain — the night tally read t=1112 partial, the walks to Malby,
+  the fall t=2824, the collection t=2826, two aftermath crossings)
+  now carrying BOTH just-landed surfaces (rs-9's hold line + rs-10's
+  dated withhold line) with every recorded substance shape hit
+  exactly (seven crossings, the close paper 0 / coin 8 / fatigue 98,
+  the heap 18, the runner among the fall's witnesses, the tale 90
+  lines — the iter-268 reconstruction's own honest count;
+  byte-identical on regeneration) and the heartbreak package
+  byte-stable against the recorded form (43 events, the tale 24
+  lines, the dry holds — the_winter_kin unglossed, the leverage
+  lines unchanged through rs-9's boundary extension); the briefs'
+  cut points reconstructed to the natural mirror of the recorded
+  form (the honest note — the original wording died with its
+  session).
+- **The pre-set audit (the isolation law).** Written BEFORE any
+  reading, a separate kit artifact: the station bars + the TWO NEW
+  ROWS' bars — rs-9's causal row (standing → the remembered incident
+  → the why, the iter-208 human datum it answers) and rs-10's dated
+  chain (the shave before the tale's events, the winter between, the
+  withhold the present consequence).
+- **The heartbreak recheck (the evidence).** The glm blind reading
+  n=2 independent over the heartbreak package: the opened half 2/2
+  (the crossing's table open to the claimant's line, both readings);
+  the lost-future half 1/2 (reading 1 carrying the rs-8 clause's own
+  semantics — "their lost futures and the duties that were to have
+  been theirs"; reading 2 in the iter-204 remembered-dead mode) —
+  the strict n=2 pair NOT met, the divergence's class UNRESOLVED
+  (the reader-class variance vs the reconstructed question form; a
+  surface regression EXCLUDED — the package byte-stable), the
+  iter-206 n=2 and iter-208 n=1 records STAND, no fix attempted
+  (the anti-probe-shopping law). The kit's owner reading the next
+  beat — the live band's fresh n=1, the convergence assessment, the
+  divergence's class resolving on the reading.
+- **The drift fixes.** KI#104: the TASKS ledger's iter-268 row never
+  landed (the report claimed it) — restored, the tail re-capped.
+  KI#105: iter-268's claimed re-pin of `tests/test_accountgloss.py`
+  never landed in commit 8ec6442 — the committed HEAD was RED (2
+  failing tests, the old bloom gloss pinned against the pack's rs-10
+  dated row); the pin re-landed to iter-268's own recorded intent
+  (the re-pins' third witness). Zero pack, zero canon. 2478+9 +
+  ruff + docguard + topology --check clean. The owner's RU report:
+  `docs/iterations/iter-269-livereturn-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

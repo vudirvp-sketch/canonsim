@@ -1,50 +1,58 @@
-Iteration: iter-268 (`shavememory` — the standing order's second
-  surface, the W5 owner disposition's ADD TEMPORAL SURFACE row: the
-  shave's dated-memory surface, the chain earlier season → hunger
-  winter → the event → present consequence — the iter-201/202
-  measured open row it closes: the shave read as the year's present
-  injustice or a vague background, never the two-seasons-back living
-  memory with the starved winter between): the withhold's own line
-  carries the dated chain — ONE kind row re-authored
-  (templates.json::account_kinds, bloom — the same row rs-3 authored
-  and rs-5 re-authored, the mechanism rs-10, the rs-5 precedent's own
-  form, zero code) + the re-pins (the three committed witnesses' gloss
-  constants) + the witness tests/test_shavememory.py (8 tests, the
-  claim packet); the measured evidence: the sparse twin's withhold
-  line carrying the chain at every crossing (seed 42), the crofts'
-  state apposition the same row, the province smoke byte-identical
-  (zero corpus price), the read-side twin, and the probe's re-run —
-  the glm blind reading n=2 convergent (the shave placed BEFORE the
-  tale's events, the withhold the dated past's consequence, the
-  iter-201/202 failure modes gone; the author audit pre-set before
-  the reading); the owner's RU report at
-  docs/iterations/iter-268-shave-temporal-surface-report.md
+Iteration: iter-269 (`livereturn` — the standing order's third row, the
+  W5 owner disposition iter-266's LIVE RETURN / HEARTBREAK RECHECK row:
+  «живая полоса не отделяется от только что внесённых изменений» — the
+  human band reading both just-landed surfaces together): the reading
+  kit re-established and DELIVERED — the two packages regenerated
+  deterministically at seed 42 over the CURRENT committed pack (the
+  runner + the kit outside the repo, Rule 9), the re-weigh package now
+  carrying BOTH just-landed surfaces (rs-9's hold line + rs-10's dated
+  withhold line; every recorded substance shape hit exactly: the
+  night-arm read t=1112 partial, the fall t=2824, the collection
+  t=2826, seven crossings, the close paper 0 / coin 8 / fatigue 98,
+  the heap 18, the runner among the fall's witnesses, the tale 90
+  lines — the iter-268 reconstruction's own honest count;
+  byte-identical on regeneration) and the heartbreak package
+  byte-stable against the recorded form (43 events, the tale 24 lines,
+  the fail-then-pass reads, rs-7/8's lines, the dry holds); the
+  pre-set author audit written BEFORE any reading (the isolation law
+  — the station bars + the two new rows' bars); the HEARTBREAK RECHECK
+  — the glm blind reading n=2 over the heartbreak package: the opened
+  half 2/2, the lost-future half 1/2 (reading 1 carrying the rs-8
+  clause's own semantics; reading 2 in the iter-204 remembered-dead
+  mode), the strict n=2 pair NOT met — the divergence's class
+  UNRESOLVED (the reader-class variance vs the reconstructed question
+  form; a surface regression EXCLUDED — the package byte-stable), the
+  iter-206 n=2 and iter-208 n=1 records STAND, no fix attempted (the
+  anti-probe-shopping law); KI#104 + KI#105 found and closed (the
+  iter-268 landing's two missed files: the TASKS ledger row + the
+  test_accountgloss re-pin — the committed HEAD was red); the owner's
+  RU report at
+  docs/iterations/iter-269-livereturn-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2478 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: content/province_pack/templates.json (the dated-memory row),
-  tests/{test_shavememory.py (new, the witness — 8 tests, the claim
-  packet), test_accountgloss.py, test_flowgloss.py, test_freightvol.py
-  (the re-pins, the deliberate act the pinning law names)},
-  docs/{worldbuild/WORLD_TESTS.md (§9 the W5 entry's iter-268
+Scope: tests/test_accountgloss.py (the rs-10 re-pin re-landed
+  per KI#105 — iter-268's own recorded intent, its commit missed the
+  file), docs/{worldbuild/WORLD_TESTS.md (§9 the W5 entry's iter-269
   record), worldbuild/WORLD_WORKPLAN.md (§7 the standing order
-  updated), worldbuild/ANCHOR_REGION.md (§6.4 the shave's temporal
-  surface row), blueprint/phases.md (§6 the iter-268 record),
-  TASKS.md (the ledger, iter-258 evicted),
-  iterations/iter-268-shave-temporal-surface-report.md (new, the
-  owner's RU deliverable)}, STATUS.md, worklog.md (iter-258 evicted)
-  — 13 paths (R2 — one pack row re-authored + the witness + the
-  re-pins; zero code, zero canon change, the LOG untouched, zero
-  corpus price)
-Track A: the shave temporal surface LANDED (the standing order's
-  second row closed — both W5 surfaces now live); the order
-  continues: the live band's return + the heartbreak recheck (the
-  human band reading both just-landed surfaces together) → the
-  embodiment fill-list rows (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed)
-  → W6 genre. The ssi family COMPLETE except ssi-5, owner-gated.
+  advanced), worldbuild/ANCHOR_REGION.md (§6.3 the live-band's-return
+  line synced), blueprint/phases.md (§6 the iter-269 record),
+  TASKS.md (the ledger: iter-268's row restored per KI#104 + the
+  iter-269 row, the tail re-capped),
+  iterations/iter-269-livereturn-report.md (new, the owner's RU
+  deliverable)}, STATUS.md, worklog.md (iter-259 evicted) — 9 paths
+  (R2 — the re-pin's completion (one test constant, the iter-268
+  intent) + the instrument + the docs; zero pack, zero canon; the
+  kit + the runner + the transcripts outside the repo, Rule 9)
+Track A: the live band's return DELIVERED (the standing order's third
+  row — the kit in the owner's hands, the convergence assessment the
+  owner's reading away); the order continues: the owner's live reading
+  of the delivered kit → the embodiment fill-list rows (§6.4 → §6.1 →
+  §6.5 → §6.2; §6.3 removed) → W6 genre. The ssi family COMPLETE
+  except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -73,7 +81,8 @@ Track A: the shave temporal surface LANDED (the standing order's
 
 ## Active KIs
 
-(none — KI#103 closed iter-262, deleted iter-264 per the AGENTS §5 cleanup law)
+- KI#104 · docs/TASKS.md's iteration ledger jumped iter-267 → iter-258 (the iter-268 row never landed; the iter-268 report + worklog claimed "the ledger, iter-258 evicted") · CLOSED iter-269 (the row restored from the iter-268 records + iter-269's row added, the tail re-capped at 10)
+- KI#105 · the committed HEAD red: iter-268's claimed re-pin of tests/test_accountgloss.py never landed in commit 8ec6442 — the suite failed 2 tests (the old bloom gloss pinned against the pack's rs-10 dated row) · CLOSED iter-269 (the pin re-landed to the dated gloss — iter-268's own recorded intent, the re-pins' third witness)
 
 ## FAQ / Pitfalls
 
@@ -104,7 +113,56 @@ Track A: the shave temporal surface LANDED (the standing order's
 
 ## Next step
 
-**iter-268 DONE: the shave's temporal surface (the standing order's
+**iter-269 DONE: the live band's return + the heartbreak recheck (the
+  standing order's third row) DELIVERED — the reading kit re-established
+  over the CURRENT committed pack and handed to the owner: both
+  packages regenerated deterministically at seed 42, byte-identical on
+  regeneration, the re-weigh package now carrying BOTH just-landed
+  surfaces (rs-9's hold line — "the factor's runner now holds something
+  over Garrick — the camp's word: the honest count cut in the tally;
+  the guild factor shaved the camp's weight two seasons back and the
+  camp starved that winter, and the bloom has sat off the weighbeam
+  since" — and rs-10's dated withhold line, the dated chain riding
+  every crossing) with EVERY recorded substance shape hit exactly (the
+  night read t=1112 partial, the fall t=2824, the collection t=2826,
+  seven crossings, the close paper 0 / coin 8 / fatigue 98, the heap
+  18, the runner among the fall's witnesses, the tale 90 lines — the
+  iter-268 reconstruction's own honest count); the heartbreak package
+  byte-stable against the recorded form (43 events, the tale 24 lines,
+  rs-7/8's lines, the dry holds — the_winter_kin unglossed, the
+  leverage lines unchanged through rs-9's boundary extension); the
+  briefs' cut points reconstructed to the natural mirror of the
+  recorded form (the honest note — the original wording died with its
+  session, Rule 9); the pre-set author audit written BEFORE any
+  reading (the isolation law) — the station bars + the TWO NEW ROWS'
+  bars (rs-9's causal row: the hold's line read as standing → the
+  remembered incident → the why; rs-10's dated chain: the shave placed
+  before the tale's events, the winter between, the withhold the
+  present consequence); the HEARTBREAK RECHECK — the glm blind reading
+  n=2 over the heartbreak package: the opened half 2/2 (the crossing's
+  table open to the claimant's line, both readings), the lost-future
+  half 1/2 (reading 1: "their lost futures and the duties that were to
+  have been theirs" — the rs-8 clause's own semantics; reading 2: the
+  drowned as "guests who had wintered there and were lost in the
+  flood" — the iter-204 remembered-dead mode), the strict n=2 pair NOT
+  met — the divergence's class UNRESOLVED between the reader-class
+  variance (glm's free-answer sampling flipping a half across
+  sessions) and the reconstructed question form (the original outside
+  the repo, Rule 9); a surface regression EXCLUDED (the package
+  byte-stable, every recorded shape hit); the iter-206 n=2 MET and
+  iter-208 n=1 human MET records STAND; no fix attempted (NEVER
+  "improve the prose"; the same measurement re-run until it passes is
+  probe-shopping — the anti-loop law); the kit + the runner + the
+  transcripts outside the repo (Rule 9). 2478+9 + ruff + docguard +
+  topology --check clean. The owner's RU report:
+  docs/iterations/iter-269-livereturn-report.md.**
+Next: the owner's live reading of the delivered kit (the blind answers
+  in the chat — the convergence assessment against the pre-set bars,
+  the live band's fresh n=1, the heartbreak divergence's class
+  resolving on the reading) → the embodiment fill-list rows (§6.4 →
+  §6.1 → §6.5 → §6.2; §6.3 removed) → W6 genre.
+Active KIs: KI#104, KI#105 (both CLOSED iter-269).
+iter-268 DONE: the shave's temporal surface (the standing order's
   second row, the W5 owner disposition's ADD TEMPORAL SURFACE call)
   LANDED read-side — the withhold's own line carrying the dated chain:
   "the smelt crofts comes by 2 bloom kept off the weighbeam since the

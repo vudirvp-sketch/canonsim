@@ -443,11 +443,19 @@ the glm blind re-reading n=2 convergent — the shave placed BEFORE the
 tale's events, the arc's chain restored, the iter-201/202 failure
 modes gone; `WORLD_TESTS.md` §9's W5 entry's iter-268 record the
 landing's owner, `tests/test_shavememory.py` the witness). The
-station's standing order after the landing: the live band's return +
-the heartbreak recheck (the human band reading both just-landed
-surfaces together, never separated from them) → the embodiment
-fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe
-completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.
+live band's return + the heartbreak recheck since LANDED (iter-269 —
+the standing order's third row: the reading kit re-established and
+delivered, both packages regenerated deterministically at seed 42, the
+re-weigh package carrying both just-landed surfaces, the heartbreak
+package byte-stable; the glm n=2 heartbreak recheck — the opened half
+2/2, the lost-future half 1/2 at the strict bar, the divergence's
+class the owner's reading's own datum (the iter-206/208 records
+standing); the runner + the kit + the transcripts outside the repo,
+Rule 9). The station's standing order after the landing: the owner's
+live reading of the delivered kit (the convergence assessment, the
+live band's fresh n=1 — the blind answers in the chat) → the
+embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its
+probe completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.
 
 ## 8. W6 — Genre tests
 

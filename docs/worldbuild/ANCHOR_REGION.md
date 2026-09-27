@@ -744,7 +744,9 @@ band, the confound resolved; the records in WORLD_TESTS §9's W5 entry)
 — the §6.3 fill row COMPLETE and REMOVED from the fill-list (the
 owner's 2026-09-27 dispositions call: the remaining §6.3 material =
 the W5 residue dispositions, landed iter-266, + the live band's
-return — never new pack data).
+return — the kit delivered iter-269: both packages regenerated at
+seed 42 over the current committed pack, the owner's reading the
+standing next beat; never new pack data).
 
 ### 6.4 The charcoal camp (WORKING — the camp's meso half, the fourth authored unit, iter-184)
 
