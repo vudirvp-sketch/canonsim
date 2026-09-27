@@ -1,42 +1,44 @@
-Iteration: iter-266 (`w5-owner-decisions` — the owner's 2026-09-27
-  dispositions call over the standing W5 decision points: the residue
-  list SPLIT by disposition — the fail-then-pass reading + the 40/80
-  asymmetry CLOSE AS RESIDUE (deliberate unresolved discovery
-  residues, never technical debt; DO NOT DELETE, DO NOT EXPLAIN BY
-  DEFAULT; the 40/80 canonically present, available to downstream
-  consumers, never forced into the reader path), the runner's grudge
-  → ADD DISCOVERY SURFACE (the minimal causal row: standing → the
-  remembered incident → why the grudge exists), the shave's temporal
-  placement → ADD TEMPORAL SURFACE (the dated-memory row,
-  WORLD_AUTHORING §8's own ladder requirement); the fill-list
-  re-ordered with §6.3 REMOVED (its probe completed iter-204..210,
-  the ANCHOR_REGION row synced — the doc drift closed); the one
-  undifferentiated "finish owner decisions" orientation row retired):
-  zero code, zero pack, zero canon — the decision record landed in
-  the owning docs, the owner's RU report at
-  docs/iterations/iter-266-w5-owner-decisions-report.md
+Iteration: iter-267 (`grudgesurface` — the standing order's first
+  surface, the W5 owner disposition's ADD DISCOVERY SURFACE row: the
+  runner's grudge, the minimal causal surface standing → the
+  remembered incident → why the grudge exists, never the biography —
+  the iter-208 human-band residue it answers: the standing hold
+  noticed, its reasons and consequences carried nowhere): the hold's
+  own line carries the pack-authored causal row — ONE table row
+  (templates.json::knows, the_camps_word → the reader prose) + the
+  leverage line's conditional tail ({secret? — {secret}}, the banking
+  lines' own tail shape) + the boundary extension (render/chronicle.py:
+  the outcome's secret key rides the KNOWS boundary — rs-1's law, one
+  table, every consumer; an unglossed secret pre-seeds EMPTY, the flow
+  family's machine-token law); the measured evidence: the lever
+  chain's tale carrying the row at seed 42 (the day arm AND the
+  partial-fidelity night arm), the grim fixture's leverage line DRY
+  (the unglossed law over a committed corpus), the province smoke
+  byte-identical (zero corpus price), the read-side twin; the owner's
+  RU report at docs/iterations/iter-267-runner-grudge-surface-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2461 passed + 9 skipped, ruff clean, docguard clean, topology
+2470 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: docs/{worldbuild/WORLD_WORKPLAN.md (§7 the dispositions
-  record), worldbuild/WORLD_TESTS.md (§9 the W5 entry's decision
-  record), worldbuild/ANCHOR_REGION.md (§6.3 the fill row synced —
-  the drift fix), iterations/iter-266-w5-owner-decisions-report.md
-  (new, the owner's RU deliverable — the corrected world-track P0
-  split), iterations/iter-265-render-conditional-report.md (§D item 1
-  the superseding note), blueprint/phases.md (§6 the iter-266 record),
-  TASKS.md (the ledger, iter-256 evicted)}, STATUS.md, worklog.md
-  (iter-256 evicted) — 9 paths (R0 — doc-only, the owner's fresh
-  call, zero code/pack/canon; the doc-sync family's shape)
-Track A: the W5 owner decisions LANDED (the station's standing points
-  closed by disposition); the owner's standing order: the runner
-  discovery surface → the shave temporal surface → the live band's
-  return + the heartbreak recheck → the embodiment fill-list rows
-  (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed) → W6 genre. The ssi
-  family COMPLETE except ssi-5, owner-gated.
+Scope: render/chronicle.py (the secret rides the knows boundary),
+  content/province_pack/templates.json (the knows row + the line's
+  tail), tests/test_grudgesurface.py (new, the witness — 9 tests,
+  the claim packet), docs/{worldbuild/WORLD_TESTS.md (§9 the W5
+  entry's iter-267 record), worldbuild/WORLD_WORKPLAN.md (§7 the
+  standing order updated), worldbuild/ANCHOR_REGION.md (§6.4 the
+  grudge's reader surface row), blueprint/phases.md (§6 the
+  iter-267 record), TASKS.md (the ledger, iter-257 evicted),
+  iterations/iter-267-runner-grudge-surface-report.md (new, the
+  owner's RU deliverable)}, STATUS.md, worklog.md (iter-257 evicted)
+  — 11 paths (R2 — a read-side boundary extension + pack data + the
+  witness; zero canon change, the LOG untouched, zero corpus price)
+Track A: the runner's grudge discovery surface LANDED (the standing
+  order's first row closed); the order continues: the shave temporal
+  surface → the live band's return + the heartbreak recheck → the
+  embodiment fill-list rows (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed)
+  → W6 genre. The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -96,7 +98,35 @@ Track A: the W5 owner decisions LANDED (the station's standing points
 
 ## Next step
 
-**iter-266 DONE: the W5 owner decisions (the owner's 2026-09-27
+**iter-267 DONE: the runner's grudge discovery surface (the standing
+  order's first row, the W5 owner disposition's ADD DISCOVERY SURFACE
+  call) LANDED read-side — the hold's own line carrying the
+  pack-authored causal row: "the factor's runner now holds something
+  over Garrick — the camp's word: the honest count cut in the tally;
+  the guild factor shaved the camp's weight two seasons back and the
+  camp starved that winter, and the bloom has sat off the weighbeam
+  since" (the standing → the remembered incident → the why, never the
+  biography); the mechanism rs-9 (the account/flow gloss boundary's
+  own shape): ONE table row (templates.json::knows, the_camps_word →
+  the prose) + the leverage line's conditional tail ({secret? —
+  {secret}}) + the boundary extension (render/chronicle.py: the
+  outcome's secret key rides the KNOWS boundary — rs-1's law, one
+  table, every consumer; an unglossed secret pre-seeds EMPTY, every
+  other hold rendering the dry standing unchanged, a foreign log's
+  included); the measured evidence: the lever chain's tale carrying
+  the row at seed 42 (the day arm AND the partial-fidelity night arm),
+  the grim fixture's leverage line DRY (the unglossed law over a
+  committed corpus), the province smoke byte-identical (zero corpus
+  price), the read-side twin; the witness tests/test_grudgesurface.py
+  (9 tests, the claim packet); the honest boundaries: the row is the
+  CAUSAL surface only (the temporal placement the NEXT row's own
+  material — the shave's dated-memory surface), the other three
+  read-hinge secrets stay unglossed (each its own row's call on the
+  owner's voice), the brief's recalled-facts token stays dry (the
+  brief's own law). 2470+9 + ruff + docguard + topology --check
+  clean. The owner's RU report:
+  docs/iterations/iter-267-runner-grudge-surface-report.md.**
+iter-266 DONE: the W5 owner decisions (the owner's 2026-09-27
   dispositions call over the standing W5 decision points) LANDED as
   the owning docs' decision records — zero code, zero pack, zero
   canon; the residue list SPLIT by disposition: the fail-then-pass

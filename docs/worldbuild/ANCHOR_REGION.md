@@ -888,7 +888,16 @@ minted as `the_camps_word` and registered over the master — the pole's
 iter-161 precedent's fourth instance, `tests/test_tallyread.py`; the read
 mints the WORD, never the PRESENT count — the PRESENT carried by the
 heap's own ledger since iter-187, the read_stair precedent's
-LAW-never-PRESENT boundary held: the two surfaces never conflated).
+LAW-never-PRESENT boundary held: the two surfaces never conflated), and
+the grudge's reader surface (LANDED iter-267, grudgesurface — the W5
+owner disposition's ADD DISCOVERY SURFACE row, the standing order's
+first surface: the hold's own line carrying the pack-authored causal
+row — the camp's word, the honest count; the guild factor's shave two
+seasons back, the starved winter; the bloom off the weighbeam since —
+through the knows boundary, the mechanism rs-9, zero canon change, the
+unglossed holds rendering the dry standing by law;
+`tests/test_grudgesurface.py` the witness, `WORLD_TESTS.md` §9's W5
+entry the record owner).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
 joke, market day at the beam: "Ask the crofts what the bloom weighs —

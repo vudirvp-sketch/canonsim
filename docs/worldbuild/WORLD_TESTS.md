@@ -1349,6 +1349,44 @@ recheck → the embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3
 removed from the fill-list — its probe completed iter-204..210, the
 ANCHOR_REGION row synced) → W6.
 
+The runner's grudge discovery surface LANDED (iter-267, the standing
+order's first row — the owner's ADD DISCOVERY SURFACE disposition; the
+mechanism rs-9, the hold's gloss, the account/flow gloss boundary's own
+shape): the re-weigh tale's hold line now carries the pack-authored
+causal row — "the factor's runner now holds something over Garrick —
+the camp's word: the honest count cut in the tally; the guild factor
+shaved the camp's weight two seasons back and the camp starved that
+winter, and the bloom has sat off the weighbeam since" — the standing
+(the hold's content: the count, the re-weigh's proof), the remembered
+incident (the shave, the starved winter), and the why (the withhold —
+the camp's answer, the bloom off the beam) in ONE line, never the
+biography. The landing's parts: ONE table row (templates.json::knows,
+the_camps_word → the prose) + the line's conditional tail
+(`{secret? — {secret}}`, the banking lines' own tail shape) + the
+boundary extension (render/chronicle.py: the outcome's `secret` key
+rides the KNOWS boundary — rs-1's law, one table, every consumer; an
+unglossed secret pre-seeds EMPTY, the flow family's machine-token law,
+so every other hold renders the dry standing unchanged, a foreign
+log's included). The measured evidence: the lever chain's tale
+carrying the row's cells at seed 42 (the day arm AND the
+partial-fidelity night arm — the word learned darker the same word);
+the grim fixture's leverage line rendering the DRY standing (the
+unglossed law over a committed corpus, its spend line untouched); the
+province smoke regenerating byte-identical (zero corpus price — the
+template/table family's own law); the read-side twin byte-identical;
+`tests/test_grudgesurface.py` the witness (9 tests, the claim packet).
+The honest boundaries: the row is the CAUSAL surface only — the
+temporal placement (earlier season → hunger winter → the event →
+present consequence) is the NEXT row's own material, the shave's
+dated-memory surface, the standing order's second row; the other three
+read-hinge secrets stay unglossed, each its own row's call on the
+owner's voice (the iter-266 decision standard's own law — a surface
+never owed merely because a link went unassembled); the brief's
+recalled-facts token stays dry (the brief's own law, the tale the
+reader's surface). The station's standing order after the landing: the
+shave temporal surface → the live band's return + the heartbreak
+recheck → the embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2) → W6.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

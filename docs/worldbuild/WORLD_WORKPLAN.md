@@ -429,8 +429,12 @@ event → present consequence, currently read as present unfairness with
 the temporal anchor lost — the arc's assembly's remaining half, the
 iter-201/202 measured open row; the residue ladder's own EVENT →
 RESIDUE → CARRIER → HOLDER rungs, `WORLD_AUTHORING.md` §8, requiring
-the transition between historical states). The station's standing
-order after the decisions: the runner surface → the shave temporal
+the transition between historical states). The runner surface since
+LANDED (iter-267 — the ADD DISCOVERY SURFACE row: the hold's line
+carrying the pack-authored causal row through the knows boundary, the
+mechanism rs-9; `WORLD_TESTS.md` §9's W5 entry's iter-267 record the
+landing's owner, `tests/test_grudgesurface.py` the witness). The
+station's standing order after the landing: the shave temporal
 surface → the live band's return + the heartbreak recheck → the
 embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its
 probe completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.

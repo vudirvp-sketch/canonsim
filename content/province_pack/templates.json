@@ -67,7 +67,7 @@
     "arrest_attempt": "{actor} moves to arrest {target}.",
     "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
     "suspicion_changed": "{actor} grows warier of {target}.",
-    "leverage_gained": "{actor} now holds something over {target}.",
+    "leverage_gained": "{actor} now holds something over {target}{secret? — {secret}}.",
     "expectation_violation": "{actor} checks on {target} — it is not where it should be.",
     "status_decayed": [
       "{target} drifts: {axes} changed.",
@@ -140,6 +140,7 @@
     "the_seat_passed": "the seat passed to a new hand",
     "coin_changed_hands_at_{location}": "coin changed hands at {location}",
     "the_guild_bars_the_stalls": "the guild barred the stalls",
-    "the_blood_price_spoken": "the blood price spoken aloud again"
+    "the_blood_price_spoken": "the blood price spoken aloud again",
+    "the_camps_word": "the camp's word: the honest count cut in the tally; the guild factor shaved the camp's weight two seasons back and the camp starved that winter, and the bloom has sat off the weighbeam since"
   }
 }

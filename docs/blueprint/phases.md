@@ -4079,6 +4079,51 @@ retired):**
   `docs/iterations/iter-266-w5-owner-decisions-report.md` (carrying
   the corrected world-track orientation's P0 split).
 
+**The iter-267 grudgesurface record (R2 — the standing order's first
+surface LANDED, the W5 disposition's ADD DISCOVERY SURFACE row):**
+
+- **The mechanism (rs-9, the hold's gloss — the account/flow gloss
+  boundary's own shape).** The hold's line carries the pack-authored
+  causal row: ONE table row (`templates.json::knows`, the_camps_word
+  → the reader prose: the standing — the camp's word, the honest
+  count cut in the tally; the remembered incident — the guild factor
+  shaved the camp's weight two seasons back, the camp starved that
+  winter; the why — the bloom off the weighbeam since, the withhold
+  the camp's answer) + ONE line arm (the leverage line's conditional
+  tail `{secret? — {secret}}`, the banking lines' `{flow? — {flow}}`
+  tail's own shape) + the boundary extension (`render/chronicle.py`:
+  the outcome's `secret` key rides the KNOWS boundary — rs-1's law,
+  one table, every consumer: the telling path, the witness path, now
+  the hold path; an unglossed secret pre-seeds EMPTY, the flow
+  family's machine-token law, so every other hold renders the dry
+  standing unchanged — the foreign log's included).
+- **The measured gap it closes.** The iter-208 human-band residue:
+  the runner's standing hold noticed ("the factor's runner now holds
+  something over Garrick"), its reasons and consequences carried
+  nowhere — the hold's content a machine token rendering on no
+  reader surface, the canon's causal arc (the shave → the starved
+  winter → the withhold → the audit's read → the hold) never
+  transferring. The rs-1 disposition had named the boundary ("the
+  read-hinge secrets render dry as-is by design — their rendering
+  quality is the probe's boundary to name, never a preemptive
+  renderer feature"); the owner's disposition opened the row.
+- **The evidence.** The lever chain's tale carries the row's three
+  cells in one line (seed 42, the day and the partial-fidelity night
+  arms — the word learned darker the same word); the grim fixture's
+  leverage line renders the DRY standing (the unglossed law over a
+  committed corpus, the spend line untouched); the province smoke
+  regenerates byte-identical (zero corpus price); the read-side twin
+  byte-identical. 2470+9 + ruff + docguard + topology --check clean.
+- **The honest boundaries.** The row is the CAUSAL surface only —
+  the temporal placement is the NEXT row's own material (the shave's
+  dated-memory surface, the standing order's second row); the other
+  three read-hinge secrets stay unglossed (each its own row's call,
+  never a silent scope creep); the surface is the TALE's line — the
+  brief's recalled-facts token stays dry, the brief's own law; the
+  witnesses `tests/test_grudgesurface.py` (9 tests, the claim
+  packet); the owner's RU report at
+  `docs/iterations/iter-267-runner-grudge-surface-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

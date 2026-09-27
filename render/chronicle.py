@@ -244,6 +244,20 @@ def _event_context(
             gloss_flow(pack.templates, flow)
             if isinstance(flow, str) else ""
         )
+    # rs-9 (iter-267, the runner-grudge discovery surface's rendering
+    # half): the hold's CONTENT rides the KNOWS boundary — the secret
+    # IS a knowledge token (the read-hinge mint), and rs-1's law is one
+    # table, every consumer (the telling path, the witness path, now
+    # the hold path: the mint's outcome and the spend's both carry the
+    # key, the leverage family's own vocabulary). Unglossed pre-seeds
+    # "" (the flow-gloss family's fallback law: a raw machine token
+    # never reaches the reader), so a hold's line renders its story
+    # only when the pack authored one — the dry standing unchanged for
+    # every other secret, a foreign log's included.
+    secret = outcome.get("secret")
+    if isinstance(secret, str) and secret:
+        glossed = gloss_knows(glosses, pack, positions, secret)
+        context["secret"] = glossed if glossed != secret else ""
     # The promotion door (iter-11, D-054): a texture-path take carries the
     # mediator-resolved reference in its outcome and NO canon target — the
     # take templates branch on {target} and render the promoted slot noun.
