@@ -433,11 +433,21 @@ the transition between historical states). The runner surface since
 LANDED (iter-267 — the ADD DISCOVERY SURFACE row: the hold's line
 carrying the pack-authored causal row through the knows boundary, the
 mechanism rs-9; `WORLD_TESTS.md` §9's W5 entry's iter-267 record the
-landing's owner, `tests/test_grudgesurface.py` the witness). The
-station's standing order after the landing: the shave temporal
-surface → the live band's return + the heartbreak recheck → the
-embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its
-probe completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.
+landing's owner, `tests/test_grudgesurface.py` the witness). The shave
+temporal surface since LANDED (iter-268 — the ADD TEMPORAL SURFACE
+row: the withhold's own line carrying the dated chain — the shave
+"two seasons back", the starved winter between, the withhold's own
+ledger the present tail — through the same kind row rs-3 authored and
+rs-5 re-authored, the mechanism rs-10 the rs-5 precedent's own form;
+the glm blind re-reading n=2 convergent — the shave placed BEFORE the
+tale's events, the arc's chain restored, the iter-201/202 failure
+modes gone; `WORLD_TESTS.md` §9's W5 entry's iter-268 record the
+landing's owner, `tests/test_shavememory.py` the witness). The
+station's standing order after the landing: the live band's return +
+the heartbreak recheck (the human band reading both just-landed
+surfaces together, never separated from them) → the embodiment
+fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe
+completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.
 
 ## 8. W6 — Genre tests
 

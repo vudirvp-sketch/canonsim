@@ -897,7 +897,20 @@ seasons back, the starved winter; the bloom off the weighbeam since —
 through the knows boundary, the mechanism rs-9, zero canon change, the
 unglossed holds rendering the dry standing by law;
 `tests/test_grudgesurface.py` the witness, `WORLD_TESTS.md` §9's W5
-entry the record owner).
+entry the record owner), and the shave's temporal surface (LANDED
+iter-268, shavememory — the W5 owner disposition's ADD TEMPORAL SURFACE
+row, the standing order's second surface, the iter-201/202 measured
+open row closed: the withhold's own line carrying the DATED chain —
+the shave "two seasons back", the camp starved that winter, the
+withhold's own ledger the present tail — through the same bloom kind
+row rs-3 authored and rs-5 re-authored, the mechanism rs-10, zero
+code, zero canon change; the arc assembling ACROSS the tale's lines
+through the winter's shared name — the paper's gloss anchoring the
+debt "since the starved winter" to the same winter the withhold's row
+now dates; the glm blind re-reading n=2 convergent — the shave placed
+BEFORE the tale's events, the withhold read as the dated past's
+consequence; `tests/test_shavememory.py` the witness, `WORLD_TESTS.md`
+§9's W5 entry the record owner).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
 joke, market day at the beam: "Ask the crofts what the bloom weighs —

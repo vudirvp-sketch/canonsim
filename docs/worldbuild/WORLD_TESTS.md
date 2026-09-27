@@ -1387,6 +1387,67 @@ reader's surface). The station's standing order after the landing: the
 shave temporal surface → the live band's return + the heartbreak
 recheck → the embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2) → W6.
 
+The shave's temporal surface LANDED (iter-268, the standing order's
+second row — the owner's ADD TEMPORAL SURFACE disposition, the
+iter-201/202 measured open row closed: "the shave's TEMPORAL placement
+never assembled — the shave read as the year's present injustice or a
+vague background, never the two-seasons-back living memory with the
+starved winter between"; the mechanism rs-10, the dated-memory row, the
+rs-5 precedent's own form — the SAME kind row re-authored, the
+mechanism unchanged): the withhold's own line now carries the dated
+chain — "the smelt crofts comes by 2 bloom kept off the weighbeam since
+the guild factor shaved the camp's weight two seasons back and the camp
+starved that winter — the withhold's own ledger at the year's
+reckoning — the camp's answer to a tilted beam: unweighable at it, the
+paper still paid" — the earlier season (the shave, dated — the spine's
+own sentence plus its date), the hunger winter (the camp starved that
+winter), the present consequence (the withhold's own ledger, the
+freightvol concept — and the NOUN the banking template's fixed "at the
+year's reckoning" attaches to, keeping the starvation clause clear of
+the reckoning phrase). The landing's parts: ONE table row re-authored
+(templates.json::account_kinds, bloom — the same row rs-3 authored and
+rs-5 re-authored) + the re-pins (the committed witnesses' gloss
+constants: test_accountgloss / test_flowgloss / test_freightvol, the
+deliberate act the pinning law names) + the witness
+`tests/test_shavememory.py` (8 tests, the claim packet — the dated
+chain's cells, the arc assembling ACROSS the tale's lines through the
+winter's shared name between the two kind glosses, the misparse
+falsifier — "that winter at the year's reckoning" absent, the
+regression bars, the corpus price, the twin). The measured evidence:
+the sparse twin's withhold line carrying the chain at every crossing
+(seed 42); the crofts' state apposition the same row (one boundary,
+every consumer); the province smoke byte-identical (zero corpus
+price); the read-side twin byte-identical; the PROBE'S RE-RUN — the
+glm blind reading n=2 independent over the reconstructed recorded
+package (every substance shape reproduced exactly: the night-arm read
+t=1112, the fall t=2824, the collection t=2826, seven crossings, the
+close paper 0 / coin 8 / fatigue 98, the heap 18; the tale 90 lines vs
+the recorded 87/88 — the reconstruction's honest note) — the MANDATORY
+BAR MET n=2 CONVERGENT: BOTH readings place the shave BEFORE the
+tale's events ("two seasons before the tale's events, a guild factor
+'shaved the camp's weight' ... 'the camp starved that winter'. In
+response, the camp has withheld their bloom since that incident" —
+reading 2's own anchor note: "The phrase 'two seasons back' clearly
+indicates this happened before the tale's events"), the withhold read
+as the dated past's consequence, the present heap carried ("18 bloom
+units ... by the end of the tale"); the regression bars held (the
+guild the shaver, the paper a debt discharged never exchanged, the
+withhold the answer never commerce); the iter-201/202 failure modes
+GONE (no present-weighing conflation, no "dispute remains uncertain");
+the author audit pre-set BEFORE the reading, the runner + the
+transcripts outside the repo (Rule 9). The honest boundaries: the row
+dates the MEMORY as the camp tells it (the authored constant, never a
+runtime clock read — the gloss tables are pack data, the date is the
+memory's own date, the rs-9 row's own law); the debt's BIRTH (the
+winter's borrowing) stays on the paper's own line — the two surfaces
+chain through the winter's shared name, never one bloated row (neither
+probe reading spells the borrowing, the arc's assembly at its measured
+ceiling — the honest residue, the residue ladder's CARRIER rung
+vocabulary); the live human band stays open (the standing order's next
+row reads both surfaces together). The station's standing order after
+the landing: the live band's return + the heartbreak recheck → the
+embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2) → W6.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

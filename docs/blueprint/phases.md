@@ -4124,6 +4124,71 @@ surface LANDED, the W5 disposition's ADD DISCOVERY SURFACE row):**
   packet); the owner's RU report at
   `docs/iterations/iter-267-runner-grudge-surface-report.md`.
 
+**The iter-268 shavememory record (R2 — the standing order's second
+surface LANDED, the W5 disposition's ADD TEMPORAL SURFACE row):**
+
+- **The mechanism (rs-10, the dated-memory row — the rs-5
+  precedent's own form: the SAME kind row re-authored, the mechanism
+  unchanged).** The withhold's own line carries the dated chain: ONE
+  table row re-authored (`templates.json::account_kinds`, bloom —
+  the same row rs-3 authored and rs-5 re-authored) now reading
+  "bloom kept off the weighbeam since the guild factor shaved the
+  camp's weight two seasons back and the camp starved that winter —
+  the withhold's own ledger" — the spine's own full sentence plus
+  its date (entities.json's cause field: "the guild factor shaved
+  the weight two seasons back and the camp starved"), the ledger
+  tail freightvol's own concept (the heap as the withhold's record,
+  and the NOUN the banking template's fixed "at the year's
+  reckoning" attaches to — the crafted tail that keeps the
+  starvation clause clear of the reckoning phrase, the misparse
+  killed by construction) + the re-pins (the three committed
+  witnesses' gloss constants — the deliberate act the pinning law
+  names) + the witness `tests/test_shavememory.py` (8 tests, the
+  claim packet: the dated chain's cells, the arc assembling ACROSS
+  the tale's lines through the winter's shared name between the two
+  kind glosses, the misparse falsifier, the regression bars, the
+  corpus price, the twin).
+- **The measured gap it closes.** The iter-201/202 open row: the
+  shave's TEMPORAL placement never assembled — the shave read as the
+  year's present injustice or a vague background (reading 2: "the
+  guild 'comes to the smelt crofts'" — conflated with the present
+  weighing; reading 1: "the exact nature of the dispute ...
+  remains uncertain"), never the two-seasons-back living memory with
+  the starved winter between. The canonical facts present since
+  rs-3/5; the DATE rendered nowhere.
+- **The evidence.** The sparse twin's withhold line carries the
+  chain at every crossing (seed 42); the crofts' state apposition
+  the same row (one boundary, every consumer); the paper's fall
+  line unchanged beside it (the winter's name the shared anchor —
+  the arc assembling across the tale's lines); the province smoke
+  regenerates byte-identical (zero corpus price, the iter-265
+  template law); the read-side twin byte-identical; the PROBE'S
+  RE-RUN — the glm blind reading n=2 independent over the
+  reconstructed recorded package (every substance shape
+  reproduced: the night read t=1112, the fall t=2824, the
+  collection t=2826, seven crossings, close 0/8/98, heap 18; the
+  tale 90 lines vs the recorded 87/88 — the honest note) — the
+  MANDATORY BAR MET n=2 convergent: both readings place the shave
+  BEFORE the tale's events ("The phrase 'two seasons back' clearly
+  indicates this happened before the tale's events" — reading 2),
+  the withhold read as the dated past's consequence, the present
+  heap carried; the regression bars held; the recorded failure
+  modes gone; the author audit pre-set BEFORE the reading (the
+  isolation law), the runner + transcripts outside the repo
+  (Rule 9). 2478+9 + ruff + docguard + topology --check clean.
+- **The honest boundaries.** The row dates the MEMORY as the camp
+  tells it (the authored constant, never a runtime clock read — the
+  gloss tables are pack data); the debt's BIRTH stays on the
+  paper's own line (the two surfaces chain through the winter's
+  shared name, never one bloated row — neither probe reading
+  spells the borrowing, the arc's assembly at its measured
+  ceiling); the brief's recalled-facts token stays dry (the
+  brief's own law); the live human band stays open — the standing
+  order's next row (the live band's return + the heartbreak
+  recheck) reads both just-landed surfaces together. The owner's
+  RU report:
+  `docs/iterations/iter-268-shave-temporal-surface-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -315,11 +315,15 @@ def test_the_year_block_carries_the_covering_frame(tmp_path: Path) -> None:
     )
     # rs-6 (iter-202): the withhold's own line carries the join — the
     # kind gloss (the heap's meaning, rs-3/5) + the flow gloss (the
-    # beam's tilt, the ANSWER frame, the paper still paid) one surface
+    # beam's tilt, the ANSWER frame, the paper still paid) one surface;
+    # rs-10 (iter-268): the kind gloss now carries the DATED MEMORY
+    # (the shave "two seasons back", the starved winter between, the
+    # withhold's own ledger the tail the reckoning phrase attaches to)
     assert (
         "the smelt crofts comes by 2 bloom kept off the weighbeam"
-        " since the guild factor shaved the camp's weight"
-        f" at the year's reckoning — {WITHHOLD_GLOSS}." in tale
+        " since the guild factor shaved the camp's weight two seasons"
+        " back and the camp starved that winter — the withhold's own"
+        f" ledger at the year's reckoning — {WITHHOLD_GLOSS}." in tale
     )
 
 

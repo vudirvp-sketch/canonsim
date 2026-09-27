@@ -1,42 +1,48 @@
-Iteration: iter-267 (`grudgesurface` — the standing order's first
-  surface, the W5 owner disposition's ADD DISCOVERY SURFACE row: the
-  runner's grudge, the minimal causal surface standing → the
-  remembered incident → why the grudge exists, never the biography —
-  the iter-208 human-band residue it answers: the standing hold
-  noticed, its reasons and consequences carried nowhere): the hold's
-  own line carries the pack-authored causal row — ONE table row
-  (templates.json::knows, the_camps_word → the reader prose) + the
-  leverage line's conditional tail ({secret? — {secret}}, the banking
-  lines' own tail shape) + the boundary extension (render/chronicle.py:
-  the outcome's secret key rides the KNOWS boundary — rs-1's law, one
-  table, every consumer; an unglossed secret pre-seeds EMPTY, the flow
-  family's machine-token law); the measured evidence: the lever
-  chain's tale carrying the row at seed 42 (the day arm AND the
-  partial-fidelity night arm), the grim fixture's leverage line DRY
-  (the unglossed law over a committed corpus), the province smoke
-  byte-identical (zero corpus price), the read-side twin; the owner's
-  RU report at docs/iterations/iter-267-runner-grudge-surface-report.md
+Iteration: iter-268 (`shavememory` — the standing order's second
+  surface, the W5 owner disposition's ADD TEMPORAL SURFACE row: the
+  shave's dated-memory surface, the chain earlier season → hunger
+  winter → the event → present consequence — the iter-201/202
+  measured open row it closes: the shave read as the year's present
+  injustice or a vague background, never the two-seasons-back living
+  memory with the starved winter between): the withhold's own line
+  carries the dated chain — ONE kind row re-authored
+  (templates.json::account_kinds, bloom — the same row rs-3 authored
+  and rs-5 re-authored, the mechanism rs-10, the rs-5 precedent's own
+  form, zero code) + the re-pins (the three committed witnesses' gloss
+  constants) + the witness tests/test_shavememory.py (8 tests, the
+  claim packet); the measured evidence: the sparse twin's withhold
+  line carrying the chain at every crossing (seed 42), the crofts'
+  state apposition the same row, the province smoke byte-identical
+  (zero corpus price), the read-side twin, and the probe's re-run —
+  the glm blind reading n=2 convergent (the shave placed BEFORE the
+  tale's events, the withhold the dated past's consequence, the
+  iter-201/202 failure modes gone; the author audit pre-set before
+  the reading); the owner's RU report at
+  docs/iterations/iter-268-shave-temporal-surface-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2470 passed + 9 skipped, ruff clean, docguard clean, topology
+2478 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: render/chronicle.py (the secret rides the knows boundary),
-  content/province_pack/templates.json (the knows row + the line's
-  tail), tests/test_grudgesurface.py (new, the witness — 9 tests,
-  the claim packet), docs/{worldbuild/WORLD_TESTS.md (§9 the W5
-  entry's iter-267 record), worldbuild/WORLD_WORKPLAN.md (§7 the
-  standing order updated), worldbuild/ANCHOR_REGION.md (§6.4 the
-  grudge's reader surface row), blueprint/phases.md (§6 the
-  iter-267 record), TASKS.md (the ledger, iter-257 evicted),
-  iterations/iter-267-runner-grudge-surface-report.md (new, the
-  owner's RU deliverable)}, STATUS.md, worklog.md (iter-257 evicted)
-  — 11 paths (R2 — a read-side boundary extension + pack data + the
-  witness; zero canon change, the LOG untouched, zero corpus price)
-Track A: the runner's grudge discovery surface LANDED (the standing
-  order's first row closed); the order continues: the shave temporal
-  surface → the live band's return + the heartbreak recheck → the
+Scope: content/province_pack/templates.json (the dated-memory row),
+  tests/{test_shavememory.py (new, the witness — 8 tests, the claim
+  packet), test_accountgloss.py, test_flowgloss.py, test_freightvol.py
+  (the re-pins, the deliberate act the pinning law names)},
+  docs/{worldbuild/WORLD_TESTS.md (§9 the W5 entry's iter-268
+  record), worldbuild/WORLD_WORKPLAN.md (§7 the standing order
+  updated), worldbuild/ANCHOR_REGION.md (§6.4 the shave's temporal
+  surface row), blueprint/phases.md (§6 the iter-268 record),
+  TASKS.md (the ledger, iter-258 evicted),
+  iterations/iter-268-shave-temporal-surface-report.md (new, the
+  owner's RU deliverable)}, STATUS.md, worklog.md (iter-258 evicted)
+  — 13 paths (R2 — one pack row re-authored + the witness + the
+  re-pins; zero code, zero canon change, the LOG untouched, zero
+  corpus price)
+Track A: the shave temporal surface LANDED (the standing order's
+  second row closed — both W5 surfaces now live); the order
+  continues: the live band's return + the heartbreak recheck (the
+  human band reading both just-landed surfaces together) → the
   embodiment fill-list rows (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed)
   → W6 genre. The ssi family COMPLETE except ssi-5, owner-gated.
 
@@ -98,7 +104,51 @@ Track A: the runner's grudge discovery surface LANDED (the standing
 
 ## Next step
 
-**iter-267 DONE: the runner's grudge discovery surface (the standing
+**iter-268 DONE: the shave's temporal surface (the standing order's
+  second row, the W5 owner disposition's ADD TEMPORAL SURFACE call)
+  LANDED read-side — the withhold's own line carrying the dated chain:
+  "the smelt crofts comes by 2 bloom kept off the weighbeam since the
+  guild factor shaved the camp's weight two seasons back and the camp
+  starved that winter — the withhold's own ledger at the year's
+  reckoning — the camp's answer to a tilted beam: unweighable at it,
+  the paper still paid" (the earlier season → the hunger winter → the
+  present consequence — the temporal anchor the iter-201/202 readers
+  lost, restored on the line they actually read); the mechanism rs-10
+  (the rs-5 precedent's own form — the SAME kind row re-authored,
+  zero code): ONE table row re-authored (templates.json::
+  account_kinds, bloom) + the re-pins (the three committed witnesses'
+  gloss constants — the deliberate act the pinning law names) + the
+  witness tests/test_shavememory.py (8 tests, the claim packet: the
+  dated chain's cells, the arc assembling ACROSS the tale's lines
+  through the winter's shared name between the two kind glosses, the
+  misparse falsifier — "that winter at the year's reckoning" absent
+  by the ledger tail's construction, the regression bars, the corpus
+  price, the twin); the measured evidence: the sparse twin's withhold
+  line carrying the chain at every crossing (seed 42), the crofts'
+  state apposition the same row (one boundary, every consumer), the
+  province smoke byte-identical (zero corpus price), the read-side
+  twin, and the probe's re-run — the glm blind reading n=2
+  convergent over the reconstructed recorded package (every substance
+  shape reproduced exactly: the night read t=1112, the fall t=2824,
+  the collection t=2826, seven crossings, close 0/8/98, heap 18):
+  the shave placed BEFORE the tale's events ("The phrase 'two
+  seasons back' clearly indicates this happened before the tale's
+  events" — reading 2), the withhold read as the dated past's
+  consequence, the regression bars held, the iter-201/202 failure
+  modes GONE (no present-weighing conflation, no "dispute remains
+  uncertain"); the author audit pre-set BEFORE the reading (the
+  isolation law), the runner + transcripts outside the repo (Rule 9);
+  the honest boundaries: the row dates the MEMORY as the camp tells
+  it (the authored constant, never a runtime clock read), the debt's
+  BIRTH stays on the paper's own line (the surfaces chain through
+  the winter's shared name — neither probe reading spells the
+  borrowing, the arc's assembly at its measured ceiling), the brief's
+  recalled-facts token stays dry (the brief's own law), the live
+  human band stays open (the standing order's next row reads both
+  just-landed surfaces together). 2478+9 + ruff + docguard +
+  topology --check clean. The owner's RU report:
+  docs/iterations/iter-268-shave-temporal-surface-report.md.**
+iter-267 DONE: the runner's grudge discovery surface (the standing
   order's first row, the W5 owner disposition's ADD DISCOVERY SURFACE
   call) LANDED read-side — the hold's own line carrying the
   pack-authored causal row: "the factor's runner now holds something
